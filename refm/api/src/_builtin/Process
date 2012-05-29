@@ -1,65 +1,65 @@
 = module Process
 
-UNIX �Υץ��������������⥸�塼��Ǥ���
+UNIX のプロセスを管理するモジュールです。
 
-Process ���ץ�������ɽ�����륯�饹�ǤϤʤ����ץ��������Ф������
-��ޤȤ᤿�⥸�塼��Ǥ��뤳�Ȥ����դ��Ƥ���������
+Process がプロセスを表現するクラスではなく、プロセスに対する操作
+をまとめたモジュールであることに注意してください。
 
-�桼�� ID�����롼�� ID �����륷���ƥॳ�����ľ�ܸƤ֤���� [[c:Process::Sys]] ���󶡤���Ƥ��ޤ���
-�ݡ����֥�˥桼�� ID�����롼�� ID �����뤿��Υ⥸�塼�� [[c:Process::UID]], [[c:Process::GID]] 
-���󶡤���Ƥ��ޤ���
+ユーザ ID・グループ ID を操作するシステムコールを直接呼ぶために [[c:Process::Sys]] が提供されています。
+ポータブルにユーザ ID・グループ ID を操作するためのモジュール [[c:Process::UID]], [[c:Process::GID]] 
+も提供されています。
 
 == Singleton Methods
 
 #@since 1.8.0
 --- abort(message = "")   -> ()
 
-�ؿ� [[m:Kernel.#abort]] ��Ʊ���Ǥ���
+関数 [[m:Kernel.#abort]] と同じです。
 
-@param message ��λ���Υ�å�������ʸ����ǻ��ꤷ�ޤ���
+@param message 終了時のメッセージを文字列で指定します。
 
 #@end
 
 #@since 1.9.1
 --- daemon(nochdir = nil, noclose = nil)    -> 0
 
-�ץ�������������ü�����ڤ�Υ����
-�Хå����饦��ɤˤޤ�äƥǡ����Ȥ���ư����ޤ���
+プロセスから制御端末を切り離し、
+バックグラウンドにまわってデーモンとして動作させます。
 
-�����ȥǥ��쥯�ȥ�� / �˰�ư���ޤ���
-������ nochdir �˿�����ꤷ���Ȥ��ˤϤ���ư����������졢
-�����ȥǥ��쥯�ȥ�ϰ�ư���ޤ���
+カレントディレクトリを / に移動します。
+ただし nochdir に真を指定したときにはこの動作は抑制され、
+カレントディレクトリは移動しません。
 
-ɸ�����ϡ�ɸ����ϡ�ɸ�२�顼���Ϥ� /dev/null �˥�����쥯�Ȥ��ޤ���
-������ noclose �˿�����ꤷ���Ȥ��ˤϤ���ư����������졢
-������쥯�ȤϹԤʤ��ޤ���
+標準入力・標準出力・標準エラー出力を /dev/null にリダイレクトします。
+ただし noclose に真を指定したときにはこの動作は抑制され、
+リダイレクトは行なわれません。
 
 #@if (version == "1.9.1")
-[[man:daemon(2)]] ���ʤ��� [[man:fork(2)]] ������Ķ��Ǥϼ��Ԥ�������
-Errno::EXXX ��ȯ������ -1 ���֤äƤ��ޤ���
+[[man:daemon(2)]] がなくて [[man:fork(2)]] がある環境では失敗した場合に
+Errno::EXXX が発生せず -1 が返ってきます。
 #@end
 
-@param nochdir true ����ꤷ����硢�����ȥǥ��쥯�ȥ���ư���ޤ���
+@param nochdir true を指定した場合、カレントディレクトリを移動しません。
 
-@param noclose true ����ꤷ����硢ɸ�����ϡ�ɸ����ϡ�ɸ�२�顼���Ϥ��ѹ����ޤ���
+@param noclose true を指定した場合、標準入力・標準出力・標準エラー出力を変更しません。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+@raise Errno::EXXX 失敗した場合に発生します。
 #@end
 #@since 1.8.0
 --- detach(pid)    -> Thread
 
-�ҥץ����� pid �ν�λ��ƻ뤹�륹��åɤ����������֤��ޤ���
+子プロセス pid の終了を監視するスレッドを生成して返します。
 #@since "1.8.5"
-������������åɤϻҥץ���������λ������˽�λ���ơ����� ([[c:Process::Status]]) ���֤��ޤ���
+生成したスレッドは子プロセスが終了した後に終了ステータス ([[c:Process::Status]]) を返します。
 #@else
-������������åɤϻҥץ���������λ������� nil �ǽ�λ���ޤ���
+生成したスレッドは子プロセスが終了した後に nil で終了します。
 #@end
-���ꤷ���ҥץ�������¸�ߤ��ʤ����¨�¤� nil �ǽ�λ���ޤ���
+指定した子プロセスが存在しなければ即座に nil で終了します。
 
-@param pid �ҥ���åɤΥץ����� ID �������ǻ��ꤷ�ޤ���
+@param pid 子スレッドのプロセス ID を整数で指定します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
     pid = fork {
       # child
@@ -82,31 +82,31 @@ Errno::EXXX ��ȯ������ -1 ���֤äƤ��ޤ���
 #@since 1.8.7
 --- exec(command, *args) -> ()
 
-�����ȥץ�������Ϳ����줿�������ޥ�ɤ��֤������ޤ���
+カレントプロセスを与えられた外部コマンドで置き換えます。
 
 
-==== �����β��
+==== 引数の解釈
 
-��������Ĥ���Ϳ����줿��硢command �� shell �Υ᥿ʸ��
+引数が一つだけ与えられた場合、command が shell のメタ文字
 //emlist{
   * ? {} [] <> () ~ & | \ $ ; ' ` " \n
 //}
-��ޤ��硢shell ��ͳ�Ǽ¹Ԥ���ޤ���
-�����Ǥʤ���Х��󥿥ץ꥿����ľ�ܼ¹Ԥ���ޤ���
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
 
-������ʣ��Ϳ����줿��硢�� 2 �����ʹߤ� command ��ľ���Ϥ��졢
-���󥿥ץ꥿����ľ�ܼ¹Ԥ���ޤ���
+引数が複数与えられた場合、第 2 引数以降は command に直接渡され、
+インタプリタから直接実行されます。
 
-�� 1 ������ 2 ���Ǥ�����ξ�硢�� 1 ���Ǥ�ʸ���󤬼ºݤ˵�ư����
-�ץ������Υѥ��ǡ��� 2 ���Ǥ��֤ߤ������פΥץ������̾�ˤʤ�ޤ���
+第 1 引数が 2 要素の配列の場合、第 1 要素の文字列が実際に起動する
+プログラムのパスで、第 2 要素が「みせかけ」のプログラム名になります。
 
-MSDOS �Ķ��ξ�硢command �ϥ��֥������ͳ�Ǽ¹Ԥ���ޤ���
-�����Ǥʤ���硢command �� [[man:exec(2)]] ����Ѥ��Ƽ¹Ԥ����ΤǸ���
-�ץ�����फ�餤���Ĥ��δĶ�������Ѥ��ޤ���
+MSDOS 環境の場合、command はサブシェル経由で実行されます。
+そうでない場合、command は [[man:exec(2)]] を使用して実行されるので元の
+プログラムからいくつかの環境を引き継ぎます。
 
-@param command �¹Ԥ��볰�����ޥ�ɡ�
+@param command 実行する外部コマンド。
 
-@param args command ���Ϥ�������
+@param args command に渡す引数。
 
    exec "echo *"       # echoes list of files in current directory
    # never get here
@@ -121,9 +121,9 @@ MSDOS �Ķ��ξ�硢command �ϥ��֥������ͳ�Ǽ¹Ԥ���ޤ���
 #@since 1.8.0
 --- exit(status = true)    -> ()
 
-�ץ�������λ���ޤ����ؿ� [[m:Kernel.#exit]] ��Ʊ���Ǥ���
+プロセスを終了します。関数 [[m:Kernel.#exit]] と同じです。
 
-@param status ��λ���ơ������� boolean �������ǻ��ꤷ�ޤ���true �ξ���������false �ϼ��Ԥ��̣���ޤ���
+@param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
 @see [[man:exit(3)]]
 
@@ -131,31 +131,31 @@ MSDOS �Ķ��ξ�硢command �ϥ��֥������ͳ�Ǽ¹Ԥ���ޤ���
 
 --- exit!(status = false)    -> ()
 
-�ؿ� [[m:Kernel.#exit!]] ��Ʊ���Ǥ���
+関数 [[m:Kernel.#exit!]] と同じです。
 
-@param status ��λ���ơ������� boolean �������ǻ��ꤷ�ޤ���true �ξ���������false �ϼ��Ԥ��̣���ޤ���
+@param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
 @see [[man:_exit(2)]]
 
 --- fork            -> Integer | nil
 --- fork { ... }    -> Integer | nil
 
-�ҥץ��������������ޤ����ؿ� [[m:Kernel.#fork]] ��Ʊ���Ǥ���
+子プロセスを生成します。関数 [[m:Kernel.#fork]] と同じです。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:fork(2)]]
 
 #@since 1.9.1
 --- spawn(cmd, *arg)    -> Integer
 
-�ؿ� [[m:Kernel.#spawn]] ��Ʊ���Ǥ���
+関数 [[m:Kernel.#spawn]] と同じです。
 
-@param cmd [[m:Kernel.#spawn]] ��Ʊ���Ǥ���
+@param cmd [[m:Kernel.#spawn]] と同じです。
 
-@param arg [[m:Kernel.#spawn]] ��Ʊ���Ǥ���
+@param arg [[m:Kernel.#spawn]] と同じです。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 #@end
 
@@ -164,44 +164,44 @@ MSDOS �Ķ��ξ�硢command �ϥ��֥������ͳ�Ǽ¹Ԥ���ޤ���
 #@since 1.8.5
 --- getrlimit(resource)    -> [Integer]
 
-�����ȥץ������ǤΥ꥽�����������ͤ�����������Ȥ����֤��ޤ���
-�֤��ͤϡ����ߤ������� cur_limit �ȡ������ͤȤ��������ǽ�ʺ����� max_limit ��
-���� [cur_limit, max_limit] �Ǥ���
+カレントプロセスでのリソースの制限値を、整数の配列として返します。
+返り値は、現在の制限値 cur_limit と、制限値として設定可能な最大値 max_limit の
+配列 [cur_limit, max_limit] です。
 
-���줾��� limit �� [[m:Process::RLIM_INFINITY]] ����������硢�꥽���������¤��ʤ����Ȥ��̣���ޤ���
+それぞれの limit が [[m:Process::RLIM_INFINITY]] と等しい場合、リソースに制限がないことを意味します。
 
-@param resource �꥽�����μ���򼨤��������ꤷ�ޤ�������Ǥ�������ϥ����ƥ�˰�¸���ޤ���
+@param resource リソースの種類を示す定数を指定します。指定できる定数はシステムに依存します。
 
-@raise Errno::EXXX �꥽�����������ͤμ��������Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX リソースの制限値の取得が失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-���� resource ��ͭ��������ϰʲ��ΤȤ���Ǥ���
+引数 resource で有効な定数は以下のとおりです。
 
 : [[m:Process::RLIMIT_CORE]]
- core �ե�����Υ����� (�Х���) (SUSv3)
+ core ファイルのサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_CPU]]
- �ץ������� CPU ���� (��) (SUSv3)
+ プロセスの CPU 時間 (秒) (SUSv3)
 : [[m:Process::RLIMIT_DATA]]
- �ץ������Υǡ����ΰ�Υ����� (�Х���) (SUSv3)
+ プロセスのデータ領域のサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_FSIZE]]
- �ץ���������������ե�����Υ����� (�Х���) (SUSv3)
+ プロセスが生成するファイルのサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_NOFILE]]
- �ץ������������ץ�Ǥ���ե�����ο� (SUSv3)
+ プロセスがオープンできるファイルの数 (SUSv3)
 : [[m:Process::RLIMIT_STACK]]
- �ץ������Υ����å��ΰ�Υ����� (�Х���) (SUSv3)
+ プロセスのスタック領域のサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_AS]]
- �ץ������β��ۥ��ꥵ���� (�Х���) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
+ プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
 : [[m:Process::RLIMIT_MEMLOCK]]
- [[man:mlock(2)]] �ǥ��å��Ǥ���ȡ�����Υ����� (�Х���) (4.4BSD, GNU/Linux)
+ [[man:mlock(2)]] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
 : [[m:Process::RLIMIT_NPROC]] 
- ���Υ桼���Υץ������κ���� (4.4BSD, GNU/Linux)
+ そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
 : [[m:Process::RLIMIT_RSS]]
- ���ѤǤ���¥���κ��祵���� (�Х���) (4.2BSD, GNU/Linux)
+ 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
 : [[m:Process::RLIMIT_SBSIZE]]
- �����åȥХåե��Υ����� (�Х���) (NetBSD, FreeBSD)
+ ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
-��:
+例:
 
  include Process
  p lim = getrlimit(RLIMIT_STACK)                                        #=> [8388608, 18446744073709551615]
@@ -212,53 +212,53 @@ MSDOS �Ķ��ξ�硢command �ϥ��֥������ͳ�Ǽ¹Ԥ���ޤ���
 --- setrlimit(resource, cur_limit, max_limit)    -> nil
 --- setrlimit(resource, limit)                   -> nil
 
-�����ȥץ������ǤΥ꥽�����������ͤ����ꤷ�ޤ���
+カレントプロセスでのリソースの制限値を設定します。
 
-@param resource �꥽�����μ���򼨤��������ꤷ�ޤ�������Ǥ�������ϥ����ƥ�˰�¸���ޤ���
+@param resource リソースの種類を示す定数を指定します。指定できる定数はシステムに依存します。
 
-@param limit resource �ˤ�äư�̣����ޤ������ͤ�ɽ�������⤷�����������ꤷ�ޤ���
-             soft limit �� hard limit ξ���ˤ����ͤ��Ȥ��ޤ���
+@param limit resource によって意味が決まる制限値を表す整数もしくは定数を指定します。
+             soft limit と hard limit 両方にこの値が使われます。
 
-@param cur_limit ���ߤ�������(soft limit)��ɽ�������⤷�����������ꤷ�ޤ���
+@param cur_limit 現在の制限値(soft limit)を表す整数もしくは定数を指定します。
 
-@param max_limit soft limit �Ȥ��������ǽ�ʺ�����(hard limit)��ɽ�������⤷�����������ꤷ�ޤ���
+@param max_limit soft limit として設定可能な最大値(hard limit)を表す整数もしくは定数を指定します。
 
-@raise Errno::EXXX �꥽�����������ͤ�����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX リソースの制限値の設定に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-���� resource ��ͭ��������ϰʲ��ΤȤ���Ǥ���
+引数 resource で有効な定数は以下のとおりです。
 
 : [[m:Process::RLIMIT_CORE]]
- core �ե�����Υ����� (�Х���) (SUSv3)
+ core ファイルのサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_CPU]]
- �ץ������� CPU ���� (��) (SUSv3)
+ プロセスの CPU 時間 (秒) (SUSv3)
 : [[m:Process::RLIMIT_DATA]]
- �ץ������Υǡ����ΰ�Υ����� (�Х���) (SUSv3)
+ プロセスのデータ領域のサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_FSIZE]]
- �ץ���������������ե�����Υ����� (�Х���) (SUSv3)
+ プロセスが生成するファイルのサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_NOFILE]]
- �ץ������������ץ�Ǥ���ե�����ο� (SUSv3)
+ プロセスがオープンできるファイルの数 (SUSv3)
 : [[m:Process::RLIMIT_STACK]]
- �ץ������Υ����å��ΰ�Υ����� (�Х���) (SUSv3)
+ プロセスのスタック領域のサイズ (バイト) (SUSv3)
 : [[m:Process::RLIMIT_AS]]
- �ץ������β��ۥ��ꥵ���� (�Х���) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
+ プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
 : [[m:Process::RLIMIT_MEMLOCK]]
- [[man:mlock(2)]] �ǥ��å��Ǥ���ȡ�����Υ����� (�Х���) (4.4BSD, GNU/Linux)
+ [[man:mlock(2)]] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
 : [[m:Process::RLIMIT_NPROC]]
- ���Υ桼���Υץ������κ���� (4.4BSD, GNU/Linux)
+ そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
 : [[m:Process::RLIMIT_RSS]]
- ���ѤǤ���¥���κ��祵���� (�Х���) (4.2BSD, GNU/Linux)
+ 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
 : [[m:Process::RLIMIT_SBSIZE]]
- �����åȥХåե��Υ����� (�Х���) (NetBSD, FreeBSD)
+ ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
-���� limit, cur_limit, max_limit ��ͭ��������ϰʲ��ΤȤ���Ǥ���
+引数 limit, cur_limit, max_limit で有効な定数は以下のとおりです。
 
- * [[m:Process::RLIM_INFINITY]] �꥽���������¤��ߤ��ʤ����Ȥ��̣���ޤ���
+ * [[m:Process::RLIM_INFINITY]] リソースに制限を設けないことを意味します。
  * [[m:Process::RLIM_SAVED_CUR]]
  * [[m:Process::RLIM_SAVED_MAX]]
 
-�ʲ������ RLIMIT_CORE �����¤� hard limit (max limit) �ޤǰ����夲����ǽ�ʤ� core ��Ĥ��褦�ˤ��ޤ���
+以下の例は RLIMIT_CORE の制限を hard limit (max limit) まで引き上げ、可能なら core を残すようにします。
 
   Process.setrlimit(Process::RLIMIT_CORE, 
                     Process.getrlimit(Process::RLIMIT_CORE)[1])
@@ -269,220 +269,220 @@ MSDOS �Ķ��ξ�硢command �ϥ��֥������ͳ�Ǽ¹Ԥ���ޤ���
 
 --- egid    -> Integer
 
-�����ȥץ������μ¸����롼�� ID ���������֤��ޤ���
+カレントプロセスの実効グループ ID を整数で返します。
 
 @see [[man:getegid(2)]]
 
 --- egid=(gid)
 
-�����ȥץ������μ¸����롼�� ID �� gid �����ꤷ�ޤ���
+カレントプロセスの実効グループ ID を gid に設定します。
 
-ư��ξܺ٤ϥץ�åȥե�����˰�¸���ޤ���
-�¸����롼�� ID �ʳ��Υ��롼�� ID ���ѹ�����뤫���Τ�ޤ���
+動作の詳細はプラットフォームに依存します。
+実効グループ ID 以外のグループ ID も変更されるかも知れません。
 
-@param gid �¸����롼�� ID �������ǻ��ꤷ�ޤ���
+@param gid 実効グループ ID を整数で指定します。
 
-@raise Errno::EXXX ���¤��ʤ�����ȯ�����ޤ���
+@raise Errno::EXXX 権限がない場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[m:Process::GID.#eid=]]
 
 --- euid        -> Integer
 
-�����ȥץ������μ¸��桼�� ID ���������֤��ޤ���
+カレントプロセスの実効ユーザ ID を整数で返します。
 
 @see [[man:geteuid(2)]]
 
 --- euid=(uid)
 
-�����ȥץ������μ¸��桼�� ID �� uid �����ꤷ�ޤ���
+カレントプロセスの実効ユーザ ID を uid に設定します。
 
-ư��ξܺ٤ϥץ�åȥե�����˰�¸���ޤ���
-�¸��桼�� ID �ʳ��Υ桼�� ID ���ѹ�����뤫���Τ�ޤ���
+動作の詳細はプラットフォームに依存します。
+実効ユーザ ID 以外のユーザ ID も変更されるかも知れません。
 
-@param uid �¸��桼�� ID �������ǻ��ꤷ�ޤ���
+@param uid 実効ユーザ ID を整数で指定します。
 
-@raise Errno::EXXX ���¤��ʤ�����ȯ�����ޤ���
+@raise Errno::EXXX 権限がない場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[m:Process::UID.#eid=]]
 
 --- gid        -> Integer
 
-�����ȥץ������μ¥��롼�� ID ���֤��ޤ���
+カレントプロセスの実グループ ID を返します。
 
 @see [[man:getgid(2)]]
 
 --- gid=(gid)
 
-�����ȥץ������μ¥��롼�� ID �� gid �����ꤷ�ޤ���
+カレントプロセスの実グループ ID を gid に設定します。
 
-ư��ξܺ٤ϥץ�åȥե�����˰�¸���ޤ���
-�¥��롼�� ID �ʳ��Υ��롼�� ID ���ѹ�����뤫���Τ�ޤ���
+動作の詳細はプラットフォームに依存します。
+実グループ ID 以外のグループ ID も変更されるかも知れません。
 
-@param gid �¥��롼�� ID �������ǻ��ꤷ�ޤ���
+@param gid 実グループ ID を整数で指定します。
 
-@raise Errno::EXXX ���¤��ʤ�����ȯ�����ޤ���
+@raise Errno::EXXX 権限がない場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[c:Process::GID]]
 
 --- groups     -> [Integer]
 
-������롼�� ID ��������֤��ޤ�(�¸����롼�� ID ��ޤफ���Τ�ޤ���)��
+補助グループ ID の配列を返します(実効グループ ID を含むかも知れません)。
 
-�֤��������κ������ǿ��� [[m:Process.#maxgroups]] �Ǥ���
+返される配列の最大要素数は [[m:Process.#maxgroups]] です。
 
-@raise Errno::EXXX [[m:Process.#maxgroups]] ���ºݤ��֤����������롼�� ID ��
-                   �����⾯�ʤ��ͤ����ꤷ�Ƥ����ȯ�����ޤ���
+@raise Errno::EXXX [[m:Process.#maxgroups]] が実際に返される補助グループ ID の
+                   数よりも少ない値を設定していると発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getgroups(2)]]
 
 --- groups=(gids)
 
-������롼�פ����ꤷ�ޤ���
+補助グループを設定します。
 
-root ���������Υ᥽�åɤ�Ƥ֤��Ȥ��Ǥ��ޤ���
+root だけがこのメソッドを呼ぶことができます。
 
-@param gids ������롼�� ID ���������ꤷ�ޤ���������롼�� ID �����������롼��̾��ɽ��ʸ����Ǥ���
+@param gids 補助グループ ID の配列を指定します。補助グループ ID は整数かグループ名を表す文字列です。
 
-@raise ArgumentError ���ꤹ��������롼�� ID �ο��� [[m:Process.#maxgroups]] ��
-                     ����ۤ��Ƥ������ȯ�����ޤ���
+@raise ArgumentError 設定する補助グループ ID の数が [[m:Process.#maxgroups]] の
+                     数を越えている場合に発生します。
 
-@raise Errno::EXXX ���¤��ʤ�����ȯ�����ޤ���
+@raise Errno::EXXX 権限がない場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:setgroups(2)]]
 
 --- maxgroups        -> Integer
 --- maxgroups=(num)
 
-����Ǥ���������롼�� ID �ο�����ꤷ�ޤ���
+設定できる補助グループ ID の数を指定します。
 
-�ºݤ��֤����������롼�� ID �ο����⾯�ʤ��ͤ����ꤷ�Ƥ���ȡ�
-[[m:Process.#groups]] ���㳰��ȯ�����ޤ���
+実際に返される補助グループ ID の数よりも少ない値を設定していると、
+[[m:Process.#groups]] で例外が発生します。
 
-@param num ��������ꤷ�ޤ���
+@param num 整数を指定します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 --- pid    -> Integer
 
-�����ȥץ������Υץ����� ID ���֤��ޤ����ѿ� [[m:$$]]
-���ͤ�Ʊ���Ǥ���
+カレントプロセスのプロセス ID を返します。変数 [[m:$$]]
+の値と同じです。
 
 @see [[man:getpid(2)]]
 
 --- ppid    -> Integer
 
-�ƥץ������Υץ����� ID ���֤��ޤ���UNIX �Ǥϼºݤοƥץ���������
-λ������� ppid �� 1 (init�� pid)�ˤʤ�ޤ���
+親プロセスのプロセス ID を返します。UNIX では実際の親プロセスが終
+了した後は ppid は 1 (initの pid)になります。
 
 @see [[man:getppid(2)]]
 
 --- uid        -> Integer
 
-�ץ������μ¥桼�� ID ���֤��ޤ���
+プロセスの実ユーザ ID を返します。
 
 @see [[man:getuid(2)]]
 
 --- uid=(id)
 
-�ץ������μ¥桼�� ID �� id �����ꤷ�ޤ���
+プロセスの実ユーザ ID を id に設定します。
 
-ư��ξܺ٤ϥץ�åȥե�����˰�¸���ޤ���
-�¥桼�� ID �ʳ��Υ桼�� ID ���ѹ�����뤫���Τ�ޤ���
+動作の詳細はプラットフォームに依存します。
+実ユーザ ID 以外のユーザ ID も変更されるかも知れません。
 
-@param id �¥桼�� ID �������ǻ��ꤷ�ޤ���
+@param id 実ユーザ ID を整数で指定します。
 
-@raise Errno::EXXX ���¤��ʤ�����ȯ�����ޤ���
+@raise Errno::EXXX 権限がない場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[c:Process::UID]]
 
 --- getpgid(pid = 0)   -> Integer
 
-�ץ����� ID �� pid �Ǥ���ץ������Υץ��������롼�� ID ���������֤��ޤ���
+プロセス ID が pid であるプロセスのプロセスグループ ID を整数で返します。
 
-@param pid �ץ����� ID �������ǻ��ꤷ�ޤ���0 �λ��ϥ����ȥץ����� ID ����ꤷ���Τ�Ʊ���Ǥ���
+@param pid プロセス ID を整数で指定します。0 の時はカレントプロセス ID を指定したのと同じです。
 
-@raise Errno::EXXX �ץ��������롼�פμ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getpgid(2)]]
 
 --- getpgrp            -> Integer
 
-���ߤΥץ������Υץ��������롼�� ID ���������֤��ޤ���
+現在のプロセスのプロセスグループ ID を整数で返します。
 
-@raise Errno::EXXX �ץ��������롼�פμ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getpgrp(2)]]
 
 --- getpriority(which, who)    -> Integer
 
-which �˽����ץ��������ץ��������롼�ס��桼���Τ����줫�θ��ߤΥץ饤����ƥ����������֤��ޤ���
+which に従いプロセス、プロセスグループ、ユーザのいずれかの現在のプライオリティを整数で返します。
 
-@param which �ץ饤����ƥ��μ���򼡤�����ǻ��ꤷ�ޤ��� [[m:Process::PRIO_PROCESS]],
-             [[m:Process::PRIO_PGRP]], [[m:Process::PRIO_USER]]��
+@param which プライオリティの種類を次の定数で指定します。 [[m:Process::PRIO_PROCESS]],
+             [[m:Process::PRIO_PGRP]], [[m:Process::PRIO_USER]]。
 
-@param who which ���ͤˤ������äƥץ����� ID���ץ��������롼�� ID���桼�� ID �Τ����줫�������ǻ��ꤷ�ޤ���
+@param who which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
 
-@raise Errno::EXXX �ץ饤����ƥ��μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX プライオリティの取得に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getpriority(2)]]
 
 #@since 1.8.0
 --- initgroups(user, group)    -> [Integer]
 
-user ��°���륰�롼�פΥꥹ�Ȥ򹹿�����group �򤽤Υꥹ�Ȥ˲ä��ޤ���
+user が属するグループのリストを更新し、group をそのリストに加えます。
 
-���Υ᥽�åɤ�Ƥ֤ˤ� root ���¤�ɬ�פǤ���
+このメソッドを呼ぶには root 権限が必要です。
 
-@param user �桼��̾��ɽ��ʸ����ǻ��ꤷ�ޤ���
+@param user ユーザ名を表す文字列で指定します。
 
-@param group �桼�����롼�� ID �������ǻ��ꤷ�ޤ���
+@param group ユーザグループ ID を整数で指定します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 #@end
 
 --- kill(signal, pid, *rest)    -> Integer
 
-pid �ǻ��ꤵ�줿�ץ������˥����ʥ������ޤ���signal
-�ϥ����ʥ��ֹ椫̾��(ʸ����ޤ���[[c:Symbol]])�ǻ��ꤷ�ޤ���
-���ƤΥ����ʥ�����������������硢���ꤷ�� pid ���������֤��ޤ���
+pid で指定されたプロセスにシグナルを送ります。signal
+はシグナル番号か名前(文字列または[[c:Symbol]])で指定します。
+全てのシグナル送信に成功した場合、指定した pid の総数を返します。
 
-@param signal �����ʥ������������̾����ʸ����ǻ��ꤷ�ޤ�������ͤ���ĥ����ʥ�(���뤤�ϥ����ʥ�̾������-)����ꤹ��ȡ��ץ������ǤϤʤ��ץ��������롼�פ˥����ʥ������ޤ���
+@param signal シグナルを整数かその名前の文字列で指定します。負の値を持つシグナル(あるいはシグナル名の前に-)を指定すると、プロセスではなくプロセスグループにシグナルを送ります。
 
-@param pid �����ʥ�����ꤿ���ץ������Υץ����� ID �������ǻ��ꤷ�ޤ�����������0 �ʲ��ξ��ϰʲ��Τ褦�ʰ�̣�ˤʤ�ޤ���
+@param pid シグナルを送りたいプロセスのプロセス ID を整数で指定します。ただし、0 以下の場合は以下のような意味になります。
 
- * 0 �ξ��ϥ����ȥץ������Υץ��������롼�פ˥����ʥ������ޤ���
- * -1 �ξ��ϥ����ƥ������ƤΥץ������˥����ʥ������ޤ���
- * ����ʳ������������Ϳ����ȥץ������ǤϤʤ��ץ��������롼�פ˥����ʥ������ޤ���
-   ��������ϥץ��������롼�� ID �˥ޥ��ʥ����դ�����Τȸ��ʤ���ޤ���
+ * 0 の場合はカレントプロセスのプロセスグループにシグナルを送ります。
+ * -1 の場合はシステム上の全てのプロセスにシグナルを送ります。
+ * それ以外の負の整数を与えるとプロセスではなくプロセスグループにシグナルを送ります。
+   負の整数はプロセスグループ ID にマイナスを付けたものと見なされます。
 
-@param rest �ץ����� ID �������ǻ��ꤷ�ޤ���
+@param rest プロセス ID を整数で指定します。
 
-@raise ArgumentError ¸�ߤ��ʤ������ʥ����ꤷ������ȯ�����ޤ���
+@raise ArgumentError 存在しないシグナルを指定した場合に発生します。
 
-@raise Errno::EXXX �����ʥ������˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX シグナル送信に失敗した場合に発生します。
 
-#@#�ʤ���Windows ([[unknown:mswin32]], [[unknown:mingw32]])�Ǥϡ�INT
-#@#ILL FPE SEGV TERM BREAK ABRT ��������Ǥ��ޤ���((<ruby 1.7 feature>))
-#@#KILL �����Ǥ��ޤ�
+#@#なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
+#@#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
+#@#KILL も指定できます
 
 @see [[m:Kernel.#trap]], [[man:kill(2)]]
 
@@ -491,28 +491,28 @@ pid �ǻ��ꤵ�줿�ץ������˥����ʥ������ޤ���signal
 #@end
 --- setpgid(pid, pgrp)    -> 0
 
-�ץ����� ID �� pid �Ǥ���ץ������Υץ��������롼�פ� pgrp �����ꤷ�ޤ���
+プロセス ID が pid であるプロセスのプロセスグループを pgrp に設定します。
 
-@param pid �ץ����� ID �������ǻ��ꤷ�ޤ���pid �� 0 �λ��ϥ����ȥץ������� ID ����ꤷ���Τ�Ʊ���Ǥ���
-           �ץ��������롼�פ������������������ 0 ���֤��ޤ���
+@param pid プロセス ID を整数で指定します。pid が 0 の時はカレントプロセスの ID を指定したのと同じです。
+           プロセスグループの設定に成功した場合は 0 を返します。
 
-@param pgrp �ץ��������롼�� ID �������ǻ��ꤷ�ޤ���pgrp �� 0 �λ��� pid ����ꤷ���Τ�Ʊ���Ǥ���
+@param pgrp プロセスグループ ID を整数で指定します。pgrp が 0 の時は pid を指定したのと同じです。
 
-@raise Errno::EXXX �ץ��������롼�פ�����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX プロセスグループの設定に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:setpgid(2)]]
 
 #@since 1.8.0
 --- setpgrp    -> 0
 
-�����ȥץ������� ID ��Ʊ�� ID ���ĥץ��������롼�פ�������������ȥץ������򤽤Υ꡼�����ˤ��ޤ���
-[[m:Process.#setpgid]](0, 0) ��Ʊ���Ǥ���
+カレントプロセスの ID と同じ ID をもつプロセスグループを作成し、カレントプロセスをそのリーダーにします。
+[[m:Process.#setpgid]](0, 0) と同じです。
 
-@raise Errno::EXXX �ץ��������롼�פ�����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX プロセスグループの設定に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
  fork do
    p [Process.pid, Process.getpgrp]
@@ -530,27 +530,27 @@ pid �ǻ��ꤵ�줿�ץ������˥����ʥ������ޤ���signal
 
 --- setpriority(which, who, prio)    -> 0
 
-�ץ��������ץ��������롼�ס�
-�桼���Τ����줫�θ��ߤΥץ饤����ƥ������ꤷ�ޤ�
-���ץ饤����ƥ�������������������� 0 ���֤��ޤ���
+プロセス、プロセスグループ、
+ユーザのいずれかの現在のプライオリティを設定します
+。プライオリティの設定に成功した場合は 0 を返します。
 
-@param which �ץ饤����ƥ������ꤹ���оݤμ����ʲ�������Τ����줫�ǻ��ꤷ�ޤ���
+@param which プライオリティを設定する対象の種類を以下の定数のいずれかで指定します。
 
  * [[m:Process::PRIO_PROCESS]]
  * [[m:Process::PRIO_PGRP]]
  * [[m:Process::PRIO_USER]] 
 
-@param who which ���ͤˤ������äƥץ����� ID���ץ��������롼�� ID���桼�� ID �Τ����줫�������ǻ��ꤷ�ޤ���
+@param who which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
 
-@param prio �ץ饤����ƥ��� -20 ���� 20 �ޤǤ����������ꤷ�ޤ����������ͤϥץ饤����ƥ����⤤���Ȥ��̣�����礭���ͤϥץ饤����ƥ����㤤���Ȥ��̣���ޤ���
+@param prio プライオリティを -20 から 20 までの整数で設定します。小さな値はプライオリティが高いことを意味し、大きな値はプライオリティが低いことを意味します。
 
-@raise Errno::EXXX �ץ饤����ƥ�������˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX プライオリティの設定に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-�ʲ�����ϸƤӽФ����ץ��������ȤΥץ饤����ƥ��� 10 �˲����ޤ���
-���Ǥ� 10 ����ץ饤����ƥ����㤯��
-Errno::EACCES �Ȥʤä����ˤ�̵�뤷�Ƽ¹Ԥ�³���ޤ���
+以下の例は呼び出したプロセス自身のプライオリティを 10 に下げます。
+すでに 10 よりもプライオリティが低く、
+Errno::EACCES となった場合には無視して実行を続けます。
 
   begin
     Process.setpriority(Process::PRIO_PROCESS, 0, 10)
@@ -561,23 +561,23 @@ Errno::EACCES �Ȥʤä����ˤ�̵�뤷�Ƽ¹Ԥ�³���ޤ���
 
 --- setsid    -> Integer
 
-���������å�����������ơ�tty ���ڤ�Υ���ޤ����ǡ������ñ�˺�
-�뤳�Ȥ��Ǥ��ޤ������å���� ID ���֤��ޤ���
+新しいセッションを作成して、tty を切り離します。デーモンを簡単に作
+ることができます。セッション ID を返します。
 
-@raise Errno::EXXX ���å����κ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX セッションの作成に失敗した場合に発生します。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:setsid(2)]]
 
 #@since 1.8.0
 --- times    -> Struct::Tms
 
-���ȤΥץ������Ȥ��λҥץ����������񤷤��桼��/�����ƥ� CPU ���֤��ѻ���
-[[c:Struct::Tms]] ���֥������Ȥ��֤��ޤ���
-���֤�ñ�̤��äǡ���ư����������Ϳ�����ޤ���
+自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の積算を
+[[c:Struct::Tms]] オブジェクトで返します。
+時間の単位は秒で、浮動小数点数で与えられます。
 
-@raise NotImplementedError �᥽�åɤ����ߤΥץ�åȥե�����Ǽ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[c:Struct::Tms]] 
 #@end
@@ -585,24 +585,24 @@ Errno::EACCES �Ȥʤä����ˤ�̵�뤷�Ƽ¹Ԥ�³���ޤ���
 --- wait    -> Integer
 --- wait2   -> Array
 
-�ҥץ������Τ����ΤҤȤĤ���λ����ޤ��Ԥ�����λ�����ҥץ������� pid ���֤��ޤ���
+子プロセスのうちのひとつが終了するまで待ち、終了した子プロセスの pid を返します。
 #@since 1.8.0
-wait2 �ϻҥץ������� pid �Ƚ�λ���ơ�������ɽ�� [[c:Process::Status]] ���֥������Ȥ�������֤��ޤ���
+wait2 は子プロセスの pid と終了ステータスを表す [[c:Process::Status]] オブジェクトの配列を返します。
 #@else
-wait2 �ϻҥץ������� pid �Ƚ�λ���ơ�������ɽ�� [[m:$?]] ��������֤��ޤ���
+wait2 は子プロセスの pid と終了ステータスを表す [[m:$?]] の配列を返します。
 #@end
 
 #@since 1.8.0
-[[m:$?]] �˽�λ�����ҥץ������� [[c:Process::Status]] ���֥������Ȥ����åȤ���ޤ���
+[[m:$?]] に終了した子プロセスの [[c:Process::Status]] オブジェクトがセットされます。
 #@end
 
 #@since 1.8.0
-#@#$? �� [[c:Process::Status]] ���֥������ȤǤ���
-#@#Process.wait �� Process.waitpid �μ��Τ�Ʊ����Τˤʤ�ޤ�����
-#@#Process.wait2 �� Process.waitpid2 �μ��Τ�Ʊ����Τˤʤ�ޤ�����
+#@#$? は [[c:Process::Status]] オブジェクトです。
+#@#Process.wait と Process.waitpid の実体は同じものになりました。
+#@#Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 #@end
 
-@raise Errno::ECHILD �ҥץ���������Ĥ�ʤ����ȯ�����ޤ���
+@raise Errno::ECHILD 子プロセスが一つもなければ発生します。
 
 #@since 1.8.0
  pid = fork{ sleep 1 }
@@ -614,15 +614,15 @@ wait2 �ϻҥץ������� pid �Ƚ�λ���ơ�������ɽ�� [[m:$?]] ��������֤��ޤ���
 #@since 1.8.0
 --- waitall    -> Array
 
-���Ƥλҥץ���������λ����Τ��Ԥ��ޤ���
-��λ�����ҥץ������� pid �Ƚ�λ���ơ�����
-([[c:Process::Status]]) �������������֤��ޤ���
-�ҥץ����������ʤ����֤Ǥ��Υ᥽�åɤ�ƤӽФ��ȶ���������֤��ޤ���
+全ての子プロセスが終了するのを待ちます。
+終了した子プロセスの pid と終了ステータス
+([[c:Process::Status]]) の配列の配列を返します。
+子プロセスがいない状態でこのメソッドを呼び出すと空の配列を返します。
 
 #@since 1.8.0
-[[m:$?]] �ˤϺǸ�˽�λ�����ҥץ������� [[c:Process::Status]] ���֥������Ȥ����ꤵ��ޤ���
+[[m:$?]] には最後に終了した子プロセスの [[c:Process::Status]] オブジェクトが設定されます。
 #@else
-[[m:$?]] �ˤϺǸ�˽�λ�����ҥץ������ν�λ���ơ����������ꤵ��ޤ���
+[[m:$?]] には最後に終了した子プロセスの終了ステータスが設定されます。
 #@end
 
     2.times {|n|
@@ -635,35 +635,35 @@ wait2 �ϻҥץ������� pid �Ƚ�λ���ơ�������ɽ�� [[m:$?]] ��������֤��ޤ���
 --- waitpid(pid, flags = 0)    -> Integer | nil
 --- waitpid2(pid, flags = 0)   -> Array | nil
 
-pid �ǻ��ꤵ�������λҥץ������ν�λ���Ԥ������Υץ�������
-��λ�������� pid ���֤��ޤ���
+pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
+終了した時に pid を返します。
 #@since 1.8.0
-waitpid2 �� pid �� [[c:Process::Status]] ���֥������Ȥ�������֤��ޤ���
+waitpid2 は pid と [[c:Process::Status]] オブジェクトの配列を返します。
 #@else
-waitpid2 �� pid �� [[m:$?]] ��������֤��ޤ���
+waitpid2 は pid と [[m:$?]] の配列を返します。
 #@end
-�Υ�֥��å��󥰥⡼�ɤǻҥץ��������ޤ���λ���Ƥ��ʤ����ˤ�
-nil ���֤��ޤ���
+ノンブロッキングモードで子プロセスがまだ終了していない時には
+nil を返します。
 
 #@since 1.8.0
-[[m:$?]] �˽�λ�����ҥץ������� [[c:Process::Status]] ���֥������Ȥ����åȤ���ޤ���
+[[m:$?]] に終了した子プロセスの [[c:Process::Status]] オブジェクトがセットされます。
 #@end
 
 #@since 1.8.0
-#@#Ruby 1.8.0 ����� $? �� [[c:Process::Status]] ���֥������ȤǤ���
-#@#Process.wait �� Process.waitpid �μ��Τ�Ʊ����Τˤʤ�ޤ�����
-#@#Process.wait2 �� Process.waitpid2 �μ��Τ�Ʊ����Τˤʤ�ޤ�����
+#@#Ruby 1.8.0 からは $? は [[c:Process::Status]] オブジェクトです。
+#@#Process.wait と Process.waitpid の実体は同じものになりました。
+#@#Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 #@end
 
-@param pid �ҥץ������Υץ����� ID �������ǻ��ꤷ�ޤ���
+@param pid 子プロセスのプロセス ID を整数で指定します。
 
-@param flags Process �⥸�塼������ [[m:Process::WNOHANG]](�Υ�֥��å��󥰥⡼��)��
-             [[m:Process::WUNTRACED]] �������¤���ꤷ�ޤ�����ά�����Ȥ����ͤ� 0 �Ǥ���
-             �Υ�֥��å��󥰥⡼�ɤǻҥץ��������ޤ���λ���Ƥ��ʤ����ˤ�
-             nil ���֤��ޤ���[[man:waitpid(2)]] �� [[man:wait4(2)]] �μ�������Ƥ��ʤ��ޥ���Ǥ�
-             flags �Ϥ��Ĥ� nil �ޤ��� 0 ����ꤹ��ɬ�פ�����ޤ���
+@param flags Process モジュールの定数 [[m:Process::WNOHANG]](ノンブロッキングモード)と
+             [[m:Process::WUNTRACED]] の論理和を指定します。省略したときの値は 0 です。
+             ノンブロッキングモードで子プロセスがまだ終了していない時には
+             nil を返します。[[man:waitpid(2)]] か [[man:wait4(2)]] の実装されていないマシンでは
+             flags はいつも nil または 0 を指定する必要があります。
 
-@raise Errno::ECHILD �ҥץ�������¸�ߤ��ʤ�����ȯ�����ޤ���
+@raise Errno::ECHILD 子プロセスが存在しない場合に発生します。
 
 @see [[man:waitpid(2)]]
 
@@ -671,125 +671,125 @@ nil ���֤��ޤ���
 
 --- PRIO_PROCESS
 
-�оݤȤ���ץ饤����ƥ����ץ������ץ饤����ƥ��Ǥ��뤳�Ȥ�ɽ������Ǥ���
+対象とするプライオリティがプロセスプライオリティであることを表す定数です。
 
-[[m:Process.#getpriority]] �ޤ��� [[m:Process.#setpriority]] �ǻȤ��ޤ���
+[[m:Process.#getpriority]] または [[m:Process.#setpriority]] で使われます。
 
 --- PRIO_PGRP
 
-�оݤȤ���ץ饤����ƥ����ץ��������롼�ץץ饤����ƥ��Ǥ��뤳�Ȥ�ɽ������Ǥ���
+対象とするプライオリティがプロセスグループプライオリティであることを表す定数です。
 
-[[m:Process.#getpriority]] �ޤ��� [[m:Process.#setpriority]] �ǻȤ��ޤ���
+[[m:Process.#getpriority]] または [[m:Process.#setpriority]] で使われます。
 
 --- PRIO_USER
 
-�оݤȤ���ץ饤����ƥ����桼���ץ饤����ƥ��Ǥ��뤳�Ȥ�ɽ������Ǥ���
+対象とするプライオリティがユーザプライオリティであることを表す定数です。
 
-[[m:Process.#getpriority]] �ޤ��� [[m:Process.#setpriority]] �ǻȤ��ޤ���
+[[m:Process.#getpriority]] または [[m:Process.#setpriority]] で使われます。
 
 --- RLIMIT_AS
 
-�꥽�����μ��ब�ץ������β��ۥ��ꥵ�����Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がプロセスの仮想メモリサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_CORE
 
-�꥽�����μ��ब core �ե�����Υ������Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類が core ファイルのサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_CPU
 
-�꥽�����μ��ब�ץ������� CPU ���֤Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がプロセスの CPU 時間であることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_DATA
 
-�꥽�����μ��ब�ץ������Υǡ����ΰ�Υ������Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がプロセスのデータ領域のサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_FSIZE
 
-�꥽�����μ��ब�ץ���������������ե�����Υ������Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がプロセスが生成するファイルのサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_MEMLOCK
 
-�꥽�����μ��ब [[man:mlock(2)]] �ǥ��å��Ǥ���ȡ�����Υ������Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類が [[man:mlock(2)]] でロックできるトータルのサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_NOFILE
 
-�꥽�����μ��ब�ץ������������ץ�Ǥ���ե�����ο��Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がプロセスがオープンできるファイルの数であることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_NPROC
 
-�꥽�����μ��ब�桼���Υץ������κ�����Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がユーザのプロセスの最大数であることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_RSS
 
-�꥽�����μ��ब���ѤǤ���¥���κ��祵�����Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類が使用できる実メモリの最大サイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_SBSIZE
 
-�꥽�����μ��ब�����åȥХåե��Υ������Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がソケットバッファのサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIMIT_STACK
 
-�꥽�����μ��ब�ץ������Υ����å��ΰ�Υ������Ǥ��뤳�Ȥ򼨤�����Ǥ���
+リソースの種類がプロセスのスタック領域のサイズであることを示す定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
-�����ƥ�ˤ�äƤ��������Ƥ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
+システムによっては定義されていません。
 
 --- RLIM_INFINITY
 
-�꥽���������¤��ʤ����Ȥ��̣��������Ǥ���
+リソースに制限がないことを意味する定数です。
 
-[[m:Process.#getrlimit]]��[[m:Process.#setrlimit]] �ǻȤ��ޤ���
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 
 
 --- RLIM_SAVED_CUR
 
-[[m:Process.#getrlimit]], [[m:Process.#setrlimit]] �ǻȤ��ޤ����ܤ����� [[man:setrlimit(2)]] �򻲾Ȥ��Ʋ�������
+[[m:Process.#getrlimit]], [[m:Process.#setrlimit]] で使われます。詳しくは [[man:setrlimit(2)]] を参照して下さい。
 
 --- RLIM_SAVED_MAX
 
-[[m:Process.#getrlimit]], [[m:Process.#setrlimit]] �ǻȤ��ޤ����ܤ����� [[man:setrlimit(2)]] �򻲾Ȥ��Ʋ�������
+[[m:Process.#getrlimit]], [[m:Process.#setrlimit]] で使われます。詳しくは [[man:setrlimit(2)]] を参照して下さい。
 
 --- WNOHANG
 
-[[m:Process.#waitpid]] ����������˻��ꤹ��ե饰�Ǥ���
-��λ�����ҥץ��������ʤ����Ǥ� waitpid ���֥��å����ޤ���
+[[m:Process.#waitpid]] の第二引数に指定するフラグです。
+終了した子プロセスがない時でも waitpid がブロックしません。
 
 --- WUNTRACED
 
-[[m:Process.#waitpid]] ����������˻��ꤹ��ե饰�Ǥ���
-���Υե饰�����ꤵ�줿��硢waitpid ����ߤ��Ƥ��������
-��λ���Ƥ��ʤ��ҥץ������Υץ����� ID ���֤��褦�ˤʤ�ޤ���
-trace ����Ƥ���ҥץ������� ID ���֤��ޤ���
+[[m:Process.#waitpid]] の第二引数に指定するフラグです。
+このフラグが指定された場合、waitpid は停止しているだけで
+終了していない子プロセスのプロセス ID も返すようになります。
+trace されている子プロセスの ID は返しません。
 
  include Process
  pid = fork{ Process.kill('SIGSTOP', Process.pid) }

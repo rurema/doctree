@@ -1,20 +1,20 @@
-Singleton �ѥ�����򰷤�����Υ饤�֥��Ǥ���
+Singleton パターンを扱うためのライブラリです。
 
 = module Singleton
 
-Singleton �ѥ�������󶡤���⥸�塼��Ǥ���
+Singleton パターンを提供するモジュールです。
 
-Mix-in �ˤ�� singleton �ѥ�������󶡤��ޤ���
+Mix-in により singleton パターンを提供します。
 
-Singleton �⥸�塼��� include ���뤳�Ȥˤ�ꡢ���饹��
-�⡹�ҤȤĤΥ��󥹥��󥹤��������ʤ����Ȥ��ݾڤ���ޤ���
+Singleton モジュールを include することにより、クラスは
+高々ひとつのインスタンスしか持たないことが保証されます。
 
-Singleton �� Mix-in �������饹��
-���饹�᥽�å� instance �Ϥ���ͣ��Υ��󥹥��󥹤��֤��ޤ���
+Singleton を Mix-in したクラスの
+クラスメソッド instance はその唯一のインスタンスを返します。
 
-new �� private �᥽�åɤ˰ܤ��졢��������ƤӽФ����Ȥ���ȥ��顼�ˤʤ�ޤ���
+new は private メソッドに移され、外部から呼び出そうとするとエラーになります。
 
-=== ����ץ륳����
+=== サンプルコード
 
   require 'singleton'
   class SomeSingletonClass
@@ -30,8 +30,8 @@ new �� private �᥽�åɤ˰ܤ��졢��������ƤӽФ����Ȥ���ȥ��顼�ˤʤ�ޤ���
 
 --- instance -> object
 
-���Υ��饹��ͣ��Υ��󥹥��󥹤��֤��ޤ���
-�ǽ�˸ƤФ줿�Ȥ��Ϥ��Υ��󥹥��󥹤��������ޤ���
+そのクラスの唯一のインスタンスを返します。
+最初に呼ばれたときはそのインスタンスを生成します。
 
-Singleton �� include �������饹���������ޤ��Τǡ�
-���Τˤ� Singleton �⥸�塼��Υ᥽�åɤǤϤ���ޤ���
+Singleton を include したクラスで定義されますので、
+正確には Singleton モジュールのメソッドではありません。

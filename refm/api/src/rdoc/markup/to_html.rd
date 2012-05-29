@@ -1,20 +1,20 @@
 require rdoc/markup/formatter
 
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò HTML ¤ËÀ°·Á¤¹¤ë¤¿¤á¤Î¥µ¥Ö¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ HTML ã«æ•´å½¢ã™ã‚‹ãŸã‚ã®ã‚µãƒ–ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   require 'rdoc/markup/to_html'
 
   h = RDoc::Markup::ToHtml.new
   puts h.convert(input_string)
 
-ÊÑ´¹¤·¤¿·ë²Ì¤ÏÊ¸»úÎó¤Ç¼èÆÀ¤Ç¤­¤Ş¤¹¡£
+å¤‰æ›ã—ãŸçµæœã¯æ–‡å­—åˆ—ã§å–å¾—ã§ãã¾ã™ã€‚
 
 = class RDoc::Markup::ToHtml < RDoc::Markup::Formatter
 
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò HTML ¤ËÀ°·Á¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ HTML ã«æ•´å½¢ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 
 --- new -> RDoc::Markup::ToHtml
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚

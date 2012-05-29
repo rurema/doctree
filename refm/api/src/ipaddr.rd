@@ -1,11 +1,11 @@
 #@since 1.8.0
-IP���ɥ쥹�򰷤��饤�֥��Ǥ���
+IPアドレスを扱うライブラリです。
 
 = class IPAddr < Object
 
-IP ���ɥ쥹�򰷤��Τ���Υ��饹�Ǥ���
+IP アドレスを扱うのためのクラスです。
 
-��:
+例:
 
   require 'ipaddr'
   
@@ -15,7 +15,7 @@ IP ���ɥ쥹�򰷤��Τ���Υ��饹�Ǥ���
   ipaddr3 = IPAddr.new("192.168.2.0/24")
   p ipaddr3   # => #<IPAddr: IPv4:192.168.2.0/255.255.255.0>
 
-=== ����
+=== 参照
 
   * [[RFC:3513]]
 
@@ -23,122 +23,122 @@ IP ���ɥ쥹�򰷤��Τ���Υ��饹�Ǥ���
 
 --- new(addr = '::', family = Socket::AF_UNSPEC) -> IPAddr
 
-������ IPAddr ���֥������Ȥ��������ޤ���
+新しい IPAddr オブジェクトを生成します。
 
-@param addr 0 ���� [[m:IPAddr::IN6MASK]] �ޤǤο��ͤ�������ޤ��� 
-            �ޤ���'address', 'address/prefixlen', 'address/mask' �η���������դ��ޤ���
-            �ץ�ե��å���Ĺ��ޥ��������ꤵ���ȡ�
-            �ޥ������줿 IPAddr ���֥������Ȥ��֤��ޤ���
-            IPv6 ���ɥ쥹�ξ��ϡ�[ ] �ǰϤޤ�Ƥ��Ƥ⤫�ޤ��ޤ���
+@param addr 0 から [[m:IPAddr::IN6MASK]] までの数値を受け取ります。 
+            また、'address', 'address/prefixlen', 'address/mask' の形式も受け付けます。
+            プリフィックス長やマスクが指定されると、
+            マスクされた IPAddr オブジェクトを返します。
+            IPv6 アドレスの場合は、[ ] で囲まれていてもかまいません。
 
-@param family family �ϼ�ưŪ��Ƚ�ꤵ��ޤ���������Ū�˻��ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param family family は自動的に判定されますが、明示的に指定することもできます。
 
-@raise ArgumentError family �� Socket::AF_UNSPEC �ξ���ȯ�����ޤ���
+@raise ArgumentError family が Socket::AF_UNSPEC の場合に発生します。
 
-@raise ArgumentError family �˥��ݡ��Ȥ���Ƥ��ʤ� address family ����ꤷ������ȯ�����ޤ���
+@raise ArgumentError family にサポートされていない address family を指定した場合に発生します。
 
 
 --- new_ntoh(addr) -> IPAddr
 
-�ͥåȥ���Х��ȥ��������ΥХ����󤫤� IPAddr ���֥������Ȥ��������ޤ���
+ネットワークバイトオーダーのバイト列から IPAddr オブジェクトを生成します。
 
-@param addr �ͥåȥ���Х��ȥ��������ΥХ�����
+@param addr ネットワークバイトオーダーのバイト列。
 
-��:
+例:
 
   require 'ipaddr'
   p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.255.255>
 
 --- ntop(addr)
 
-�ͥåȥ���Х��ȥ��������ΥХ������ɽ�����줿 IP ���ɥ쥹��ʹ֤��ɤ��������Ѵ����ޤ���
+ネットワークバイトオーダーのバイト列で表現された IP アドレスを人間の読める形式に変換します。
 
-@param addr �ͥåȥ���Х��ȥ��������ΥХ�����
+@param addr ネットワークバイトオーダーのバイト列。
 
 
 == Instance Methods
 
 --- &(ipaddr) -> IPAddr
 
-¾�� IPAddr ���֥������ȤȤΥӥåȤ��Ȥ������Ѥˤ�ꡢ
-������ IPAddr ���֥������Ȥ��������ޤ���
+他の IPAddr オブジェクトとのビットごとの論理積により、
+新しい IPAddr オブジェクトを生成します。
 
-@param ipaddr ¾�� IPAddr ���֥������ȡ�
+@param ipaddr 他の IPAddr オブジェクト。
 #@since 1.8.7
-              �ޤ������ͤ�ʸ���������դ��ޤ���
+              また、数値や文字列も受け付けます。
 #@end
 
 --- |(ipaddr) -> IPAddr
 
-¾�� IPAddr ���֥������ȤȤΥӥåȤ��Ȥ������¤ˤ�ꡢ
-������ IPAddr ���֥������Ȥ��������ޤ���
+他の IPAddr オブジェクトとのビットごとの論理和により、
+新しい IPAddr オブジェクトを生成します。
 
-@param ipaddr ¾�� IPAddr ���֥������ȡ�
+@param ipaddr 他の IPAddr オブジェクト。
 #@since 1.8.7
-              �ޤ������ͤ�ʸ���������դ��ޤ���
+              また、数値や文字列も受け付けます。
 #@end
 
 --- ~ -> IPAddr
 
-�ӥåȤ��Ȥ���������ˤ�ꡢ������ IPAddr ���֥������Ȥ��������ޤ���
+ビットごとの論理否定により、新しい IPAddr オブジェクトを生成します。
 
 --- >>(num) -> IPAddr
 
-�ӥåȤ��Ȥα����եȱ黻�ˤ�ꡢ������ IPAddr ���֥������Ȥ��������ޤ���
+ビットごとの右シフト演算により、新しい IPAddr オブジェクトを生成します。
 
-@param num �����եȤ�������
+@param num 右シフトする桁数。
 
 --- <<(num) -> IPAddr
 
-�ӥåȤ��Ȥκ����եȱ黻�ˤ�ꡢ������ IPAddr ���֥������Ȥ��������ޤ���
+ビットごとの左シフト演算により、新しい IPAddr オブジェクトを生成します。
 
-@param num �����եȤ�������
+@param num 左シフトする桁数。
 
 
 --- ==(ipaddr) -> bool
 
-IPAddr ���֥�������Ʊ�Τ�������������Ӥ��ޤ���
+IPAddr オブジェクト同士が等しいかを比較します。
 
-@param ipaddr ����оݤ� IPAddr ���֥������ȡ�
+@param ipaddr 比較対象の IPAddr オブジェクト。
 #@since 1.8.7
-              �ޤ������ͤ�ʸ���������դ��ޤ���
+              また、数値や文字列も受け付けます。
 #@end
 
-��:
+例:
 
   require "ipaddr"
   p IPAddr.new("192.168.0.1") == IPAddr.new("192.168.0.1/24")   # => false
 
 --- mask(prefixlen)  -> IPAddr
 
-�ޥ������줿������ IPAddr ���֥������Ȥ��֤��ޤ���
-�����ˤϥץ�ե��å���Ĺ�ȥޥ�����ξ��������դ��ޤ�
-(e.g. 8, 64, "255.255.255.0")��
+マスクされた新しい IPAddr オブジェクトを返します。
+引数にはプリフィックス長とマスクの両方を受け付けます
+(e.g. 8, 64, "255.255.255.0")。
 
-@param prefixlen �ץ�ե��å���Ĺ�ޤ��ϥޥ�����ɽ�����ͤ�ʸ����
+@param prefixlen プリフィックス長またはマスクを表す数値か文字列。
 
 --- include?(ipaddr) -> bool
 --- ===(ipaddr)      -> bool
 
-Ϳ����줿 IPAddr ���֥������Ȥ����Ȥ��ϰϤ����äƤ��뤫��Ƚ�ꤷ�ޤ���
+与えられた IPAddr オブジェクトが自身の範囲に入っているかを判定します。
 
-@param ipaddr �ϰϤ����äƤ��뤫�ɤ���Ĵ�٤��оݤȤʤ� IPAddr ���֥������ȡ�
+@param ipaddr 範囲に入っているかどうか調べる対象となる IPAddr オブジェクト。
 #@since 1.8.7
-              �ޤ������ͤ�ʸ���������դ��ޤ���
+              また、数値や文字列も受け付けます。
 #@end
 
 --- to_i -> Integer
 
-�������Ѵ����ޤ���
+整数に変換します。
 
-��:
+例:
 
   require "ipaddr"
   p IPAddr.new("0.0.1.0").to_i   # => 256
 
 --- to_s -> String
 
-ʸ������Ѵ����ޤ���
+文字列に変換します。
 
   addr6 = IPAddr.new('::1')
   addr6.to_s       #=> "::1"
@@ -148,7 +148,7 @@ IPAddr ���֥�������Ʊ�Τ�������������Ӥ��ޤ���
 
 --- to_string -> String
 
-ɸ��Ū��ʸ����ɽ�����Ѵ����ޤ���
+標準的な文字列表現に変換します。
 
   addr6 = IPAddr.new('::1')
   addr6.to_s       #=> "::1"
@@ -158,41 +158,41 @@ IPAddr ���֥�������Ʊ�Τ�������������Ӥ��ޤ���
 
 --- hton -> String
 
-�ͥåȥ�����������ΥХ�������Ѵ����ޤ���
+ネットワークオーダーのバイト列に変換します。
 
 --- ipv4? -> bool
 
-IPv4 �ʤ鿿���֤��ޤ���
+IPv4 なら真を返します。
 
 --- ipv6? -> bool
 
-IPv6 �ʤ鿿���֤��ޤ���
+IPv6 なら真を返します。
 
 --- ipv4_mapped? -> bool
 
-IPv4 �ͱ� IPv6 ���ɥ쥹�ʤ� �����֤��ޤ���
+IPv4 射影 IPv6 アドレスなら 真を返します。
 
 --- ipv4_compat? -> bool
 
-IPv4 �ߴ� IPv6 ���ɥ쥹�ʤ� �����֤��ޤ���
+IPv4 互換 IPv6 アドレスなら 真を返します。
 
 --- ipv4_mapped -> IPAddr
 
-IPv4 ���ɥ쥹���� IPv4 �ͱ� IPv6 ���ɥ쥹��
-������ IPAddr ���֥������Ȥ��֤��ޤ���
+IPv4 アドレスから IPv4 射影 IPv6 アドレスの
+新しい IPAddr オブジェクトを返します。
 
 --- ipv4_compat -> IPAddr
 
-IPv4 ���ɥ쥹���� IPv4 �ߴ� IPv6 ���ɥ쥹��
-������ IPAddr ���֥������Ȥ��֤��ޤ���
+IPv4 アドレスから IPv4 互換 IPv6 アドレスの
+新しい IPAddr オブジェクトを返します。
 
 --- native -> self | IPAddr
 
-IPv4 �ͱ� IPv6 ���ɥ쥹�� IPv4 �ߴ� IPv6 ���ɥ쥹���顢
-IPv4 ���ɥ쥹�ο����� IPAddr ���֥������Ȥ��֤��ޤ���
-IPv4 �ߴ��Ǥ� IPv4 �Ȥ߹��ߤǤ�ʤ��ʤ� self ���֤��ޤ���
+IPv4 射影 IPv6 アドレスや IPv4 互換 IPv6 アドレスから、
+IPv4 アドレスの新しい IPAddr オブジェクトを返します。
+IPv4 互換でも IPv4 組み込みでもないなら self を返します。
 
-��:
+例:
 
   require "ipaddr"
   p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
@@ -200,60 +200,60 @@ IPv4 �ߴ��Ǥ� IPv4 �Ȥ߹��ߤǤ�ʤ��ʤ� self ���֤��ޤ���
 
 --- reverse -> String
 
-DNS �հ����Τ����ʸ������֤��ޤ���
-IPv6 �ʤ� [[RFC:3172]] ��������줿�������֤��ޤ���
+DNS 逆引きのための文字列を返します。
+IPv6 なら [[RFC:3172]] で定義された形式で返します。
 
-��:
+例:
 
   require "ipaddr"
   p IPAddr.new("192.168.0.1").reverse   # => "1.0.168.192.in-addr.arpa"
 
 --- ip6_arpa -> String
 
-IPv6 �ʤ� [[RFC:3172]] ��������줿������ DNS �հ����Τ����ʸ������֤��ޤ���
-IPv4 �ξ����㳰��ȯ�����ޤ���
+IPv6 なら [[RFC:3172]] で定義された形式で DNS 逆引きのための文字列を返します。
+IPv4 の場合は例外を発生します。
 
 --- ip6_int -> String
 
-IPv6 �ʤ� [[RFC:1886]] �ߴ������� DNS �հ����Τ����ʸ������֤��ޤ���
-IPv4 �ξ����㳰��ȯ�����ޤ���
+IPv6 なら [[RFC:1886]] 互換形式で DNS 逆引きのための文字列を返します。
+IPv4 の場合は例外を発生します。
 
 --- inspect -> String
 
-���֥������Ȥ�ʹ֤��ɤ��������Ѵ�����ʸ������֤��ޤ���
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
 --- family -> Integer
 
-���Υ��֥������ȤΥ��ɥ쥹�ե��ߥ���֤��ޤ���
+このオブジェクトのアドレスファミリを返します。
 
 @see [[c:Socket]]
 
 #@since 1.8.7
 --- <=>(other) -> nil | Integer
 
-self �� other ����Ӥ��ޤ���
+self と other を比較します。
 
-@param other ����оݤ� IPAddr ���֥������ȡ�
+@param other 比較対象の IPAddr オブジェクト。
 
-@return self �� other �Υ��ɥ쥹�ե��ߥ꤬���פ��ʤ����� nil ���֤��ޤ���
-        ���ɥ쥹�ե��ߥ꤬���פ�����ϡ�ξ���ο���ɽ���� [[m:Integer#<=>]]
-        ����Ӥ�����̤��֤��ޤ���
+@return self と other のアドレスファミリが一致しない場合は nil を返します。
+        アドレスファミリが一致する場合は、両方の数値表現を [[m:Integer#<=>]]
+        で比較した結果を返します。
 
 @see [[m:Integer#<=>]]
 
 --- succ -> IPAddr
 
-���� IPAddr ���֥������Ȥ��֤��ޤ���
+次の IPAddr オブジェクトを返します。
 
   ipaddr = IPAddr.new('192.168.1.1')
   p ipaddr.succ.to_s #=> "192.168.1.2"
 
 --- to_range -> Range
 
-self �� IP ���ɥ쥹�ȥ��֥ͥåȥޥ����Ǽ����Ǥ��� IP ���ɥ쥹���ϰϤ�
-[[c:Range]] ���֥������ȤȤ����֤��ޤ���
+self の IP アドレスとサブネットマスクで取得できる IP アドレスの範囲を
+[[c:Range]] オブジェクトとして返します。
 
-��:
+例:
 
   IPAddr.new('192.168.1.1').to_range
   #=> #<IPAddr: IPv4:192.168.1.1/255.255.255.255>..#<IPAddr: IPv4:192.168.1.1/255.255.255.255>
@@ -266,14 +266,14 @@ self �� IP ���ɥ쥹�ȥ��֥ͥåȥޥ����Ǽ����Ǥ��� IP ���ɥ쥹���ϰϤ�
 #@since 1.9.2
 --- eql?(other) -> bool
 
-���Ȥ� other �����������Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身が other と等しい場合は真を返します。
+そうでない場合は偽を返します。
 
 @see [[m:Object#eql?]]
 
 --- hash -> Integer
 
-�ϥå����ͤ��֤��ޤ���
+ハッシュ値を返します。
 
 @see [[m:Object#hash]]
 
@@ -283,35 +283,35 @@ self �� IP ���ɥ쥹�ȥ��֥ͥåȥޥ����Ǽ����Ǥ��� IP ���ɥ쥹���ϰϤ�
 
 --- set(addr, *family) -> self
 
-���Υ��֥������Ȥ� IP ���ɥ쥹�ȥ��ɥ쥹�ե��ߥ�򥻥åȤ��Ƽ��Ȥ��֤��ޤ���
+このオブジェクトの IP アドレスとアドレスファミリをセットして自身を返します。
 
-@param addr ���åȤ��� IP ���ɥ쥹�ο���ɽ����
+@param addr セットする IP アドレスの数値表現。
 
-@param family ���åȤ��륢�ɥ쥹�ե��ߥꡣ
+@param family セットするアドレスファミリ。
 
 --- mask!(mask) -> self
 
-Ϳ����줿 mask ����Ѥ��Ƥ��Υ��֥������Ȥ� IP ���ɥ쥹���˲�Ū���ѹ����ޤ���
+与えられた mask を使用してこのオブジェクトの IP アドレスを破壊的に変更します。
 
-@param mask �ץ�ե��å���Ĺ��ɽ��ʸ���󤫡����֥ͥåȥޥ�����ɽ��ʸ����
+@param mask プレフィックス長を表す文字列か、サブネットマスクを表す文字列。
 
 == Constants
 
 --- IN4MASK
 
-IPv4 ���ɥ쥹�ξ��˻��Ѥ���ޥ����͡�
+IPv4 アドレスの場合に使用するマスク値。
 
   0xffffffff
 
 --- IN6MASK
 
-IPv6 ���ɥ쥹�ξ��˻��Ѥ���ޥ����͡�
+IPv6 アドレスの場合に使用するマスク値。
 
   0xffffffffffffffffffffffffffffffff
 
 --- IN6FORMAT
 
-IPv6 ���ɥ쥹��狼��䤹��ɽ�����뤿��Υե����ޥå�ʸ����
+IPv6 アドレスをわかりやすく表示するためのフォーマット文字列。
 
   "%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x"
 

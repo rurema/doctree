@@ -1,14 +1,14 @@
-= ���ޥ��
+= コマンド
 
-Ruby �Ǥϰʲ��Υ��ޥ�ɤ��󶡤���ޤ���
+Ruby では以下のコマンドが提供されます。
 
- * erb                   ������Ruby�����ġ���
- * [[unknown:irb]]             Ruby �����å��󥿥ե�����
+ * erb                   埋め込みRuby処理ツール
+ * [[unknown:irb]]             Ruby の対話インタフェース
  * [[unknown:rdoc]]            RDoc
- * [[unknown:ri]]              RDoc �ǽ񤫤줿 Ruby �Υɥ�����Ȥ򥳥ޥ�ɥ饤�󤫤黲��
- * [[unknown:ruby|Ruby�ε�ư]] Ruby ����
- * testrb                ��˥åȥƥ��ȼ¹ԥġ���
+ * [[unknown:ri]]              RDoc で書かれた Ruby のドキュメントをコマンドラインから参照
+ * [[unknown:ruby|Rubyの起動]] Ruby 本体
+ * testrb                ユニットテスト実行ツール
 
-�����Υ��ޥ�ɤϰʲ������������Ķ��ѿ��򻲾Ȥ��ޤ���
+これらのコマンドは以下で説明される環境変数を参照します。
 
  * [[d:spec/envvars]]

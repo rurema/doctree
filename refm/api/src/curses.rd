@@ -1,29 +1,29 @@
 #@since 1.8.0
 
-Ruby �� curses �饤�֥��(�ʲ���Ruby curses)�ϡ�C �Υץ�����फ��ü��
-�β��̤����椹�뤿��� curses �饤�֥��(�ʲ���C curses)�����Ѥ��ơ�ü
-���˰�¸���ʤ������ǥƥ����ȥ桼�����󥿥ե��������ۤ��뤿��Υ饤��
-���Ǥ���
+Ruby の curses ライブラリ(以下、Ruby curses)は、C のプログラムから端末
+の画面を制御するための curses ライブラリ(以下、C curses)を利用して、端
+末に依存しない形式でテキストユーザインタフェースを構築するためのライブ
+ラリです。
 
-C curses �ˤϡ����Τ褦�ʼ���������ޤ���
-#@# ���Ѳ�ǽ�� curses �μ����򸫤Ĥ����顢����ɲä��Ƥ���������
+C curses には、次のような実装があります。
+#@# 利用可能な curses の実装を見つけたら、随時追加してください。
 
   * [[url:http://www.gnu.org/software/ncurses/ncurses.html]]
   * [[url:http://pdcurses.sourceforge.net/]]
 
-Ruby curses ��Ȥäƥƥ����ȥ桼�����󥿥ե�����(�ʲ���TUI)��
-���ۤ���ή��ϼ��Τ褦�ˤʤ�ޤ���
+Ruby curses を使ってテキストユーザインタフェース(以下、TUI)を
+構築する流れは次のようになります。
 
-  (1) [[m:Curses.#init_screen]] �ǽ������Ԥ��ޤ���
-  (2) [[c:Curses]] �Υ⥸�塼��ؿ���Ȥ���
-      ���ϤΥ�������̵���ˤ���ʤɤ� Ruby curses �������Ԥ��ޤ���
-  (3) [[m:Curses.#stdscr]] �䤽�Υ��֥�����ɥ�������TUI ���ۤ��ޤ���
-  (4) [[m:Curses.#getch]] �� [[m:Curses.#getstr]] �ˤ�ꡢ
-      �桼����������Ϥ�������ޤ������Ϥ�������˽��äƽ�����Ԥ���
-      �����ơ����Ϥ��ԤĤȤ������Ȥ򷫤��֤��ޤ���
-  (5) �Ǹ�� [[m:Curses.#close_screen]] �ǽ�λ������Ԥ��ޤ���
+  (1) [[m:Curses.#init_screen]] で初期化を行います。
+  (2) [[c:Curses]] のモジュール関数を使い、
+      入力のエコーを無効にするなどの Ruby curses の設定を行います。
+  (3) [[m:Curses.#stdscr]] やそのサブウインドウを操作し、TUI を構築します。
+  (4) [[m:Curses.#getch]] や [[m:Curses.#getstr]] により、
+      ユーザからの入力を取得します。入力した情報に従って処理を行い、
+      そして、入力を待つということを繰り返します。
+  (5) 最後に [[m:Curses.#close_screen]] で終了処理を行います。
 
-��: ��������ˡ�Hello World!�פ�ɽ�������������Ϥ�����Ƚ�λ���롣
+例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
 
   require "curses"
   
@@ -38,7 +38,7 @@ Ruby curses ��Ȥäƥƥ����ȥ桼�����󥿥ե�����(�ʲ���TUI)��
     Curses.close_screen
   end
 
-��: �嵭�����Ʊ�ͤ�����Curses �⥸�塼��� include ������
+例: 上記の例と同様だが、Curses モジュールを include する場合
 
   require "curses"
 
@@ -55,44 +55,44 @@ Ruby curses ��Ȥäƥƥ����ȥ桼�����󥿥ե�����(�ʲ���TUI)��
     close_screen
   end
 
-�ʤ���C curses �����ѤǤ��ʤ��Ķ��� Ruby �򥳥�ѥ��뤷�Ƥ����硢
-Ruby curses �����ѤǤ��ޤ���
-���ѤǤ��ʤ���硢require �λ������㳰 LoadError ��ȯ�����ޤ���
+なお、C curses を利用できない環境で Ruby をコンパイルしている場合、
+Ruby curses は利用できません。
+利用できない場合、require の時点で例外 LoadError が発生します。
 
   foo:1:in `require': no such file to load -- curses (LoadError)
           from foo:1:in `<main>'
 
-Ruby curses �����ˤ�äƤϡ�
-���Ѥ��� C curses ���󶡤��Ƥ��ʤ���ǽ��Ȥ���Τ�����ޤ���
-���Τ褦������Ԥä���硢�㳰 NotImplementedError ��ȯ�����ޤ���
+Ruby curses の操作によっては、
+利用する C curses が提供していない機能を使うものがあります。
+そのような操作を行った場合、例外 NotImplementedError が発生します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�����Ĥ��������㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、いくつかの操作で例外 SecurityError を発生します。
 
 = module Curses
 
-Curses �⥸�塼��� [[c:Curses::Window]] ���饹�ϡ�curses �饤�֥������Ѥ��ơ�
-ü���˰�¸���ʤ������ǥƥ����ȥ桼�����󥿥ե�����������Ǥ��ޤ���
-curses �饤�֥��Ȥϡ�
-C �Υץ�����फ��ü���Υǥ����ץ쥤���̤����椹�뤿��Υ饤�֥��Τ��Ȥǡ�
-���Τ褦�ʼ���������ޤ���
-#@# ���Ѳ�ǽ�� curses �μ����򸫤Ĥ����顢����ɲä��Ƥ���������
+Curses モジュールや [[c:Curses::Window]] クラスは、curses ライブラリを利用して、
+端末に依存しない形式でテキストユーザインタフェースを作成できます。
+curses ライブラリとは、
+C のプログラムから端末のディスプレイ画面を制御するためのライブラリのことで、
+次のような実装があります。
+#@# 利用可能な curses の実装を見つけたら、随時追加してください。
 
   * [[url:http://pdcurses.sourceforge.net/]]
   * [[url:http://www.gnu.org/software/ncurses/ncurses.html]]
 
-�ܥ⥸�塼���Ȥäƥƥ����ȥ桼�����󥿥ե��������������ή��ϼ��Τ褦�ˤʤ�ޤ���
+本モジュールを使ってテキストユーザインタフェースを作成する流れは次のようになります。
 
-  (1) [[m:Curses.#init_screen]] �ǽ������Ԥ��ޤ���
-  (2) [[c:Curses]] �Υ⥸�塼��ؿ���Ȥäơ�
-  ���ϤΥ�������̵���ˤ���ʤɤ� curses �������Ԥ��ޤ���
-  (3) [[m:Curses.#stdscr]] �� [[c:Curses::Window]] ���֥������Ȥ��������
-  �����Ȥäƥ��󥿥ե��������ۤ��롣
-  (4) [[m:Curses.#getch]] �� [[m:Curses.#getstr]] �ˤ�ꡢ
-  �桼����������Ϥ�������ޤ������Ϥ�������˽��äƽ�����Ԥ���
-  �����ơ����Ϥ��ԤĤȤ������Ȥ򷫤��֤��ޤ���
-  (5) �Ǹ�� [[m:Curses.#close_screen]] �ǽ�λ������Ԥ��ޤ���
+  (1) [[m:Curses.#init_screen]] で初期化を行います。
+  (2) [[c:Curses]] のモジュール関数を使って、
+  入力のエコーを無効にするなどの curses の設定を行います。
+  (3) [[m:Curses.#stdscr]] で [[c:Curses::Window]] オブジェクトを取得し、
+  それを使ってインタフェースを構築する。
+  (4) [[m:Curses.#getch]] や [[m:Curses.#getstr]] により、
+  ユーザからの入力を取得します。入力した情報に従って処理を行い、
+  そして、入力を待つということを繰り返します。
+  (5) 最後に [[m:Curses.#close_screen]] で終了処理を行います。
 
-��: ��������ˡ�Hello World!�פ�ɽ�������������Ϥ�����Ƚ�λ���롣
+例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
 
   require "curses"
   
@@ -107,128 +107,128 @@ C �Υץ�����फ��ü���Υǥ����ץ쥤���̤����椹�뤿��Υ饤�֥��Τ��Ȥǡ�
     Curses.close_screen
   end
 
-�ʤ���curses �� ncurses �򥤥󥹥ȡ��뤷�Ƥ��ʤ��Ķ��Ǥϡ�
-�ܥ⥸�塼������ѤǤ��ޤ���
-���ѤǤ��ʤ���硢require �λ����ǰʲ��Τ褦���㳰��ȯ�����ޤ���
+なお、curses や ncurses をインストールしていない環境では、
+本モジュールは利用できません。
+利用できない場合、require の時点で以下のような例外が発生します。
 
   foo:1:in `require': no such file to load -- bar (LoadError)
           from foo:1:in `<main>'
 
-�����Ĥ������ˤ����ơ����ݡ��Ȥ��Ƥ��ʤ��Ķ��Ǥϡ�
-�㳰 NotImplementedError ��ȯ�����ޤ���
+いくつかの操作において、サポートしていない環境では、
+例外 NotImplementedError が発生します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�ۤȤ�ɤ������㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、ほとんどの操作で例外 SecurityError を発生します。
 
 == Constants
 
 --- REPORT_MOUSE_POSITION -> Integer
 
-�ޥ����ΰ��֤�������뤿��˻��Ѥ���ޥ����Ѥ�����Ǥ���
+マウスの位置を取得するために使用するマスク用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- ALL_MOUSE_EVENTS -> Integer
 
-���ƤΥܥ���ξ��֤��Ѳ���������뤿��˻��Ѥ���ޥ����Ѥ�����Ǥ���
+全てのボタンの状態の変化を取得するために使用するマスク用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- A_ALTCHARSET -> Integer
 
-����ʸ�����åȤ�ɽ��°���Υޥ���������Ǥ���
+代替文字セットを表す属性のマスク用定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_ATTRIBUTES -> Integer
 
-°����Ÿ�����뤿��˻��Ѥ���ʸ�����°���ޥ���������Ǥ���
+属性を展開するために使用する文字列の属性マスク用定数です。
 
 @see [[m:Curses.inch]], [[m:Curses::Window.inch]]
 
 --- A_BLINK -> Integer
 
-ʸ��������Ǥ�ɽ��°���Υޥ����Ѥ�����Ǥ���
+文字列の点滅を表す属性のマスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_BOLD -> Integer
 
-ʸ��������뤯���뤫�����ˤ��뤿���°���ޥ����Ѥ�����Ǥ���
+文字列を明るくするか太字にするための属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_CHARTEXT -> Integer
 
-ʸ������Ф��뤿���°���ޥ���������Ǥ���
+文字を抽出するための属性マスク用定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_COLOR -> Integer
 
-���ڥ��Υե�����ɾ������Ф��뤿���ʸ�����°���ޥ����Ѥ�����Ǥ���
+色ペアのフィールド情報を抽出するための文字列の属性マスク用の定数です。
 
 @see [[m:Curses.inch]], [[m:Curses::Window.inch]]
 
 --- A_DIM -> Integer
 
-ʸ�����Ⱦʬ���뤯���뤿���°���ޥ����Ѥ�����Ǥ���
+文字列を半分明るくするための属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_HORIZONTAL -> Integer
 
-��ʿ�����Υϥ��饤�Ȥ�ɽ��°���ޥ����Ѥ�����Ǥ���
+水平方向のハイライトを表す属性マスク用の定数です。
 
 @see [[man:curs_attr(3x)]]
 
 --- A_INVIS -> Integer
 
-����ӥ��֥뤫�֥�󥯤�ɽ��°���ޥ����Ѥ�����Ǥ���
+インビジブルかブランクを表す属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_LEFT -> Integer
 
 
-???��ɽ��°���ޥ����Ѥ�����Ǥ���
+???を表す属性マスク用の定数です。
 
 @see [[man:curs_attr(3x)]]
 
 --- A_LOW -> Integer
 #@todo ???
 
-???��ɽ��°���ޥ����Ѥ�����Ǥ���
+???を表す属性マスク用の定数です。
 
 @see [[man:curs_attr(3x)]]
 
 --- A_NORMAL -> Integer
 #@todo
 
-???��ɽ��°���ޥ����Ѥ�����Ǥ���
+???を表す属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_PROTECT -> Integer
 #@todo
-�ץ��ƥ��ȥ⡼�ɤ�ɽ��°���ޥ����Ѥ�����Ǥ���
+プロテクトモードを表す属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_REVERSE -> Integer
 
-ʸ�����ȿž��ɽ��°���ޥ����Ѥ�����Ǥ���
+文字列を反転を表す属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_RIGHT -> Integer
 #@todo
-???��ɽ��°���ޥ����Ѥ�����Ǥ���
+???を表す属性マスク用の定数です。
 
 @see [[man:curs_attr(3x)]]
 
 --- A_STANDOUT -> Integer
 #@todo
-�����ߥʥ�ǻ��ѤǤ���Ǥ⶯Ĵ����⡼�ɤ�ɽ��°���ޥ����Ѥ�����Ǥ���
+ターミナルで使用できる最も強調するモードを表す属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
@@ -239,7 +239,7 @@ top highlight
 
 --- A_UNDERLINE -> Integer
 
-ʸ����˲�����������Ȥ�ɽ��°���ޥ����Ѥ�����Ǥ���
+文字列に下線を引くことを表す属性マスク用の定数です。
 
 @see [[m:Curses.attrset]]
 
@@ -250,213 +250,213 @@ vertical highlight
 
 --- BUTTON1_CLICKED -> Integer
 
-�ޥ����ܥ��� 1 �򥯥�å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 1 をクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON1_DOUBLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 1 ����֥륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 1 をダブルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON1_PRESSED -> Integer
 
-�ޥ����ܥ��� 1 �򲡤������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 1 を押したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON1_RELEASED -> Integer
 
-�ޥ����ܥ��� 1 ��Υ�������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 1 を離したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON1_TRIPLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 1 ��ȥ�ץ륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 1 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON2_CLICKED -> Integer
 
-�ޥ����ܥ��� 2 �򥯥�å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 2 をクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON2_DOUBLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 2 ����֥륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 2 をダブルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON2_PRESSED -> Integer
 
-�ޥ����ܥ��� 2 �򲡤������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 2 を押したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON2_RELEASED -> Integer
 
-�ޥ����ܥ��� 2 ��Υ�������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 2 を離したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON2_TRIPLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 2 ��ȥ�ץ륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 2 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON3_CLICKED -> Integer
 
-�ޥ����ܥ��� 3 �򥯥�å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 3 をクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON3_DOUBLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 3 ����֥륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 3 をダブルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON3_PRESSED -> Integer
 
-�ޥ����ܥ��� 3 �򲡤������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 3 を押したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON3_RELEASED -> Integer
 
-�ޥ����ܥ��� 3 ��Υ�������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 3 を離したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON3_TRIPLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 3 ��ȥ�ץ륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 3 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON4_CLICKED -> Integer
 
-�ޥ����ܥ��� 4 �򥯥�å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 4 をクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON4_DOUBLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 4 ����֥륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 4 をダブルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON4_PRESSED -> Integer
 
-�ޥ����ܥ��� 4 �򲡤������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 4 を押したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON4_RELEASED -> Integer
 
-�ޥ����ܥ��� 4 ��Υ�������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 4 を離したことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON4_TRIPLE_CLICKED -> Integer
 
-�ޥ����ܥ��� 3 ��ȥ�ץ륯��å��������Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウスボタン 3 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON_ALT -> Integer
 
-�ޥ��������� ALT �����򲡲����Ƥ��뤳�Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウス操作中に ALT キーを押下していることを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON_CTRL -> Integer
 
-�ޥ��������� CTRL �����򲡲����Ƥ��뤳�Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウス操作中に CTRL キーを押下していることを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- BUTTON_SHIFT -> Integer
 
-�ޥ��������� SHIFT �����򲡲����Ƥ��뤳�Ȥ�ɽ���ޥ������٥���Ѥ�����Ǥ���
+マウス操作中に SHIFT キーを押下していることを表すマウスイベント用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- COLOR_BLACK -> Integer
 
-����ɽ������Ǥ���
+黒を表す定数です。
 
 --- COLOR_BLUE -> Integer
 
-�Ĥ�ɽ������Ǥ���
+青を表す定数です。
 
 --- COLOR_CYAN -> Integer
 
-�������ɽ������Ǥ���
+シアンを表す定数です。
 
 --- COLOR_GREEN -> Integer
 
-�Ф�ɽ������Ǥ���
+緑を表す定数です。
 
 --- COLOR_MAGENTA -> Integer
 
-�ޥ��󥿤�ɽ������Ǥ���
+マゼンタを表す定数です。
 
 --- COLOR_RED -> Integer
 
-�֤�ɽ������Ǥ���
+赤を表す定数です。
 
 --- COLOR_WHITE -> Integer
 
-���ɽ������Ǥ���
+白を表す定数です。
 
 --- COLOR_YELLOW -> Integer
 
-������ɽ������Ǥ���
+黄色を表す定数です。
 
 --- KEY_A1 -> Integer
 
-�����ѥåɤκ����ɽ������Ǥ���
+キーパッドの左上を表す定数です。
 
 --- KEY_A3 -> Integer
 
-�����ѥåɤα����ɽ������Ǥ���
+キーパッドの右上を表す定数です。
 
 --- KEY_B2 -> Integer
 
-�����ѥåɤ��濴��ɽ������Ǥ���
+キーパッドの中心を表す定数です。
 
 --- KEY_BACKSPACE -> Integer
 
-�Хå����ڡ���������ɽ������Ǥ���
+バックスペースキーを表す定数です。
 
 --- KEY_BEG -> Integer
 #@todo ???
-BEG ������ɽ������Ǥ���
+BEG キーを表す定数です。
 
 --- KEY_BREAK -> Integer
 
-BREAK ������ɽ������Ǥ���
+BREAK キーを表す定数です。
 
 --- KEY_BTAB -> Integer
 
-Back TAB ������ɽ������Ǥ���
+Back TAB キーを表す定数です。
 
 --- KEY_C1 -> Integer
 
-�����ѥåɤκ�����ɽ������Ǥ���
+キーパッドの左下を表す定数です。
 
 --- KEY_C3 -> Integer
 
-�����ѥåɤα�����ɽ������Ǥ���
+キーパッドの右下を表す定数です。
 
 --- KEY_CANCEL -> Integer
 
-Cancel ������ɽ������Ǥ���
+Cancel キーを表す定数です。
 
 --- KEY_CATAB -> Integer
 #@todo
@@ -464,23 +464,23 @@ Clear all tabs
 
 --- KEY_CLEAR -> Integer
 
-�����꡼��Υ��ꥢ��ɽ������Ǥ���
+スクリーンのクリアを表す定数です。
 
 --- KEY_CLOSE -> Integer
 
-Close ������ɽ������Ǥ���
+Close キーを表す定数です。
 
 --- KEY_COMMAND -> Integer
 
-Command ������ɽ������Ǥ���
+Command キーを表す定数です。
 
 --- KEY_COPY -> Integer
 
-Copy ������ɽ������Ǥ���
+Copy キーを表す定数です。
 
 --- KEY_CREATE -> Integer
 
-Create ������ɽ������Ǥ���
+Create キーを表す定数です。
 
 --- KEY_CTAB -> Integer
 #@todo
@@ -488,423 +488,423 @@ Clear tab
 
 --- KEY_CTRL_A -> Integer
 
-Ctrl + A ��ɽ������Ǥ���
+Ctrl + A を表す定数です。
 
 --- KEY_CTRL_B -> Integer
 
-Ctrl + B ��ɽ������Ǥ���
+Ctrl + B を表す定数です。
 
 --- KEY_CTRL_C -> Integer
 
-Ctrl + C ��ɽ������Ǥ���
+Ctrl + C を表す定数です。
 
 --- KEY_CTRL_D -> Integer
 
-Ctrl + D ��ɽ������Ǥ���
+Ctrl + D を表す定数です。
 
 --- KEY_CTRL_E -> Integer
 
-Ctrl + E ��ɽ������Ǥ���
+Ctrl + E を表す定数です。
 
 --- KEY_CTRL_F -> Integer
 
-Ctrl + F ��ɽ������Ǥ���
+Ctrl + F を表す定数です。
 
 --- KEY_CTRL_G -> Integer
 
-Ctrl + G ��ɽ������Ǥ���
+Ctrl + G を表す定数です。
 
 --- KEY_CTRL_H -> Integer
 
-Ctrl + H ��ɽ������Ǥ���
+Ctrl + H を表す定数です。
 
 --- KEY_CTRL_I -> Integer
 
-Ctrl + I ��ɽ������Ǥ���
+Ctrl + I を表す定数です。
 
 --- KEY_CTRL_J -> Integer
 
-Ctrl + J ��ɽ������Ǥ���
+Ctrl + J を表す定数です。
 
 --- KEY_CTRL_K -> Integer
 
-Ctrl + K ��ɽ������Ǥ���
+Ctrl + K を表す定数です。
 
 --- KEY_CTRL_L -> Integer
 
-Ctrl + L ��ɽ������Ǥ���
+Ctrl + L を表す定数です。
 
 --- KEY_CTRL_M -> Integer
 
-Ctrl + M ��ɽ������Ǥ���
+Ctrl + M を表す定数です。
 
 --- KEY_CTRL_N -> Integer
 
-Ctrl + N ��ɽ������Ǥ���
+Ctrl + N を表す定数です。
 
 --- KEY_CTRL_O -> Integer
 
-Ctrl + O ��ɽ������Ǥ���
+Ctrl + O を表す定数です。
 
 --- KEY_CTRL_P -> Integer
 
-Ctrl + P ��ɽ������Ǥ���
+Ctrl + P を表す定数です。
 
 --- KEY_CTRL_Q -> Integer
 
-Ctrl + Q ��ɽ������Ǥ���
+Ctrl + Q を表す定数です。
 
 --- KEY_CTRL_R -> Integer
 
-Ctrl + R ��ɽ������Ǥ���
+Ctrl + R を表す定数です。
 
 --- KEY_CTRL_S -> Integer
 
-Ctrl + S ��ɽ������Ǥ���
+Ctrl + S を表す定数です。
 
 --- KEY_CTRL_T -> Integer
 
-Ctrl + T ��ɽ������Ǥ���
+Ctrl + T を表す定数です。
 
 --- KEY_CTRL_U -> Integer
 
-Ctrl + U ��ɽ������Ǥ���
+Ctrl + U を表す定数です。
 
 --- KEY_CTRL_V -> Integer
 
-Ctrl + V ��ɽ������Ǥ���
+Ctrl + V を表す定数です。
 
 --- KEY_CTRL_W -> Integer
 
-Ctrl + W ��ɽ������Ǥ���
+Ctrl + W を表す定数です。
 
 --- KEY_CTRL_X -> Integer
 
-Ctrl + X ��ɽ������Ǥ���
+Ctrl + X を表す定数です。
 
 --- KEY_CTRL_Y -> Integer
 
-Ctrl + Y ��ɽ������Ǥ���
+Ctrl + Y を表す定数です。
 
 --- KEY_CTRL_Z -> Integer
 
-Ctrl + Z ��ɽ������Ǥ���
+Ctrl + Z を表す定数です。
 
 --- KEY_DC -> Integer
 #@todo ???
-Delete ������ɽ������Ǥ���
+Delete キーを表す定数です。
 
 --- KEY_DL -> Integer
 
-�Ԥ������륭����ɽ������Ǥ���
+行を削除するキーを表す定数です。
 
 --- KEY_DOWN -> Integer
 
-�����������ɽ������Ǥ���
+下矢印キーを表す定数です。
 
 --- KEY_EIC -> Integer
 
-�����⡼�ɤ����륭����ɽ������Ǥ���
+挿入モードに入るキーを表す定数です。
 
 --- KEY_END -> Integer
 
-End ������ɽ������Ǥ���
+End キーを表す定数です。
 
 --- KEY_ENTER -> Integer
 
-Enter ������ɽ������Ǥ���
+Enter キーを表す定数です。
 
 --- KEY_EOL -> Integer
 
-�����ޤǥ��ꥢ���륭����ɽ������Ǥ���
+行末までクリアするキーを表す定数です。
 
 --- KEY_EOS -> Integer
 
-�����꡼��������ޤǥ��ꥢ���륭����ɽ������Ǥ���
+スクリーンの末尾までクリアするキーを表す定数です。
 
 --- KEY_EXIT -> Integer
 
-Exit ������ɽ������Ǥ���
+Exit キーを表す定数です。
 
 --- KEY_F0 -> Integer
 
-F0 ������ɽ������Ǥ���
+F0 キーを表す定数です。
 
 --- KEY_F1 -> Integer
 
-F1 ������ɽ������Ǥ���
+F1 キーを表す定数です。
 
 --- KEY_F10 -> Integer
 
-F10 ������ɽ������Ǥ���
+F10 キーを表す定数です。
 
 --- KEY_F11 -> Integer
 
-F11 ������ɽ������Ǥ���
+F11 キーを表す定数です。
 
 --- KEY_F12 -> Integer
 
-F12 ������ɽ������Ǥ���
+F12 キーを表す定数です。
 
 --- KEY_F13 -> Integer
 
-F13 ������ɽ������Ǥ���
+F13 キーを表す定数です。
 
 --- KEY_F14 -> Integer
 
-F14 ������ɽ������Ǥ���
+F14 キーを表す定数です。
 
 --- KEY_F15 -> Integer
 
-F15 ������ɽ������Ǥ���
+F15 キーを表す定数です。
 
 --- KEY_F16 -> Integer
 
-F16 ������ɽ������Ǥ���
+F16 キーを表す定数です。
 
 --- KEY_F17 -> Integer
 
-F17 ������ɽ������Ǥ���
+F17 キーを表す定数です。
 
 --- KEY_F18 -> Integer
 
-F18 ������ɽ������Ǥ���
+F18 キーを表す定数です。
 
 --- KEY_F19 -> Integer
 
-F19 ������ɽ������Ǥ���
+F19 キーを表す定数です。
 
 --- KEY_F2 -> Integer
 
-F2 ������ɽ������Ǥ���
+F2 キーを表す定数です。
 
 --- KEY_F20 -> Integer
 
-F20 ������ɽ������Ǥ���
+F20 キーを表す定数です。
 
 --- KEY_F21 -> Integer
 
-F21 ������ɽ������Ǥ���
+F21 キーを表す定数です。
 
 --- KEY_F22 -> Integer
 
-F22 ������ɽ������Ǥ���
+F22 キーを表す定数です。
 
 --- KEY_F23 -> Integer
 
-F23 ������ɽ������Ǥ���
+F23 キーを表す定数です。
 
 --- KEY_F24 -> Integer
 
-F24 ������ɽ������Ǥ���
+F24 キーを表す定数です。
 
 --- KEY_F25 -> Integer
 
-F25 ������ɽ������Ǥ���
+F25 キーを表す定数です。
 
 --- KEY_F26 -> Integer
 
-F26 ������ɽ������Ǥ���
+F26 キーを表す定数です。
 
 --- KEY_F27 -> Integer
 
-F27 ������ɽ������Ǥ���
+F27 キーを表す定数です。
 
 --- KEY_F28 -> Integer
 
-F28 ������ɽ������Ǥ���
+F28 キーを表す定数です。
 
 --- KEY_F29 -> Integer
 
-F29 ������ɽ������Ǥ���
+F29 キーを表す定数です。
 
 --- KEY_F3 -> Integer
 
-F3 ������ɽ������Ǥ���
+F3 キーを表す定数です。
 
 --- KEY_F30 -> Integer
 
-F30 ������ɽ������Ǥ���
+F30 キーを表す定数です。
 
 --- KEY_F31 -> Integer
 
-F31 ������ɽ������Ǥ���
+F31 キーを表す定数です。
 
 --- KEY_F32 -> Integer
 
-F32 ������ɽ������Ǥ���
+F32 キーを表す定数です。
 
 --- KEY_F33 -> Integer
 
-F33 ������ɽ������Ǥ���
+F33 キーを表す定数です。
 
 --- KEY_F34 -> Integer
 
-F34 ������ɽ������Ǥ���
+F34 キーを表す定数です。
 
 --- KEY_F35 -> Integer
 
-F35 ������ɽ������Ǥ���
+F35 キーを表す定数です。
 
 --- KEY_F36 -> Integer
 
-F36 ������ɽ������Ǥ���
+F36 キーを表す定数です。
 
 --- KEY_F37 -> Integer
 
-F37 ������ɽ������Ǥ���
+F37 キーを表す定数です。
 
 --- KEY_F38 -> Integer
 
-F38 ������ɽ������Ǥ���
+F38 キーを表す定数です。
 
 --- KEY_F39 -> Integer
 
-F39 ������ɽ������Ǥ���
+F39 キーを表す定数です。
 
 --- KEY_F4 -> Integer
 
-F4 ������ɽ������Ǥ���
+F4 キーを表す定数です。
 
 --- KEY_F40 -> Integer
 
-F40 ������ɽ������Ǥ���
+F40 キーを表す定数です。
 
 --- KEY_F41 -> Integer
 
-F41 ������ɽ������Ǥ���
+F41 キーを表す定数です。
 
 --- KEY_F42 -> Integer
 
-F42 ������ɽ������Ǥ���
+F42 キーを表す定数です。
 
 --- KEY_F43 -> Integer
 
-F43 ������ɽ������Ǥ���
+F43 キーを表す定数です。
 
 --- KEY_F44 -> Integer
 
-F44 ������ɽ������Ǥ���
+F44 キーを表す定数です。
 
 --- KEY_F45 -> Integer
 
-F45 ������ɽ������Ǥ���
+F45 キーを表す定数です。
 
 --- KEY_F46 -> Integer
 
-F46 ������ɽ������Ǥ���
+F46 キーを表す定数です。
 
 --- KEY_F47 -> Integer
 
-F47 ������ɽ������Ǥ���
+F47 キーを表す定数です。
 
 --- KEY_F48 -> Integer
 
-F48 ������ɽ������Ǥ���
+F48 キーを表す定数です。
 
 --- KEY_F49 -> Integer
 
-F49 ������ɽ������Ǥ���
+F49 キーを表す定数です。
 
 --- KEY_F5 -> Integer
 
-F5 ������ɽ������Ǥ���
+F5 キーを表す定数です。
 
 --- KEY_F50 -> Integer
 
-F50 ������ɽ������Ǥ���
+F50 キーを表す定数です。
 
 --- KEY_F51 -> Integer
 
-F51 ������ɽ������Ǥ���
+F51 キーを表す定数です。
 
 --- KEY_F52 -> Integer
 
-F52 ������ɽ������Ǥ���
+F52 キーを表す定数です。
 
 --- KEY_F53 -> Integer
 
-F53 ������ɽ������Ǥ���
+F53 キーを表す定数です。
 
 --- KEY_F54 -> Integer
 
-F54 ������ɽ������Ǥ���
+F54 キーを表す定数です。
 
 --- KEY_F55 -> Integer
 
-F55 ������ɽ������Ǥ���
+F55 キーを表す定数です。
 
 --- KEY_F56 -> Integer
 
-F56 ������ɽ������Ǥ���
+F56 キーを表す定数です。
 
 --- KEY_F57 -> Integer
 
-F57 ������ɽ������Ǥ���
+F57 キーを表す定数です。
 
 --- KEY_F58 -> Integer
 
-F58 ������ɽ������Ǥ���
+F58 キーを表す定数です。
 
 --- KEY_F59 -> Integer
 
-F59 ������ɽ������Ǥ���
+F59 キーを表す定数です。
 
 --- KEY_F6 -> Integer
 
-F6 ������ɽ������Ǥ���
+F6 キーを表す定数です。
 
 --- KEY_F60 -> Integer
 
-F60 ������ɽ������Ǥ���
+F60 キーを表す定数です。
 
 --- KEY_F61 -> Integer
 
-F61 ������ɽ������Ǥ���
+F61 キーを表す定数です。
 
 --- KEY_F62 -> Integer
 
-F62 ������ɽ������Ǥ���
+F62 キーを表す定数です。
 
 --- KEY_F63 -> Integer
 
-F63 ������ɽ������Ǥ���
+F63 キーを表す定数です。
 
 --- KEY_F7 -> Integer
 
-F7 ������ɽ������Ǥ���
+F7 キーを表す定数です。
 
 --- KEY_F8 -> Integer
 
-F8 ������ɽ������Ǥ���
+F8 キーを表す定数です。
 
 --- KEY_F9 -> Integer
 
-F9 ������ɽ������Ǥ���
+F9 キーを表す定数です。
 
 --- KEY_FIND -> Integer
 
-Find ������ɽ������Ǥ���
+Find キーを表す定数です。
 
 --- KEY_HELP -> Integer
 
-Help ������ɽ������Ǥ���
+Help キーを表す定数です。
 
 --- KEY_HOME -> Integer
 
-Home ������ɽ������Ǥ���
+Home キーを表す定数です。
 
 --- KEY_IC -> Integer
 
-ʸ�����������뤫�����⡼�ɤ����륭����ɽ������Ǥ���
+文字を挿入するか挿入モードに入るキーを表す定数です。
 
 --- KEY_IL -> Integer
 
-�Ԥ��������륭����ɽ������Ǥ���
+行を挿入するキーを表す定数です。
 
 --- KEY_LEFT -> Integer
 
-�����������ɽ������Ǥ���
+左矢印キーを表す定数です。
 
 --- KEY_LL -> Integer
 #@todo
@@ -912,19 +912,19 @@ Home down or bottom (lower left)
 
 --- KEY_MARK -> Integer
 
-Mark ������ɽ������Ǥ���
+Mark キーを表す定数です。
 
 --- KEY_MAX -> Integer
 
-curses �����Ѳ�ǽ�ʥ�����ɽ������κ����ͤǤ���
+curses で利用可能なキーを表す定数の最大値です。
 
 --- KEY_MESSAGE -> Integer
 
-Message ������ɽ������Ǥ���
+Message キーを表す定数です。
 
 --- KEY_MIN -> Integer
 
-curses �����Ѳ�ǽ�ʥ�����ɽ������κǾ��ͤǤ���
+curses で利用可能なキーを表す定数の最小値です。
 
 --- KEY_MOUSE -> Integer
 #@todo
@@ -932,75 +932,75 @@ Mouse event read
 
 --- KEY_MOVE -> Integer
 #@todo
-Move ������ɽ������Ǥ���
+Move キーを表す定数です。
 
 --- KEY_NEXT -> Integer
 
-Next object ������ɽ������Ǥ���
+Next object キーを表す定数です。
 
 --- KEY_NPAGE -> Integer
 
-Next Page ������ɽ������Ǥ���
+Next Page キーを表す定数です。
 
 --- KEY_OPEN -> Integer
 
-Open ������ɽ������Ǥ���
+Open キーを表す定数です。
 
 --- KEY_OPTIONS -> Integer
 
-Opetions ������ɽ������Ǥ���
+Opetions キーを表す定数です。
 
 --- KEY_PPAGE -> Integer
 
-Previous Page ������ɽ������Ǥ���
+Previous Page キーを表す定数です。
 
 --- KEY_PREVIOUS -> Integer
 
-Previous object ������ɽ������Ǥ���
+Previous object キーを表す定数です。
 
 --- KEY_PRINT -> Integer
 
-Print ������ɽ������Ǥ���
+Print キーを表す定数です。
 
 --- KEY_REDO -> Integer
 
-Redo ������ɽ������Ǥ���
+Redo キーを表す定数です。
 
 --- KEY_REFERENCE -> Integer
 
-Reference ������ɽ������Ǥ���
+Reference キーを表す定数です。
 
 --- KEY_REFRESH -> Integer
 
-Refresh ������ɽ������Ǥ���
+Refresh キーを表す定数です。
 
 --- KEY_REPLACE -> Integer
 
-Replace ������ɽ������Ǥ���
+Replace キーを表す定数です。
 
 --- KEY_RESET -> Integer
 
-Reset ������ɽ������Ǥ���
+Reset キーを表す定数です。
 
 --- KEY_RESIZE -> Integer
 
-�����꡼�󤬥ꥵ�������줿���Ȥ�ɽ������Ǥ���
+スクリーンがリサイズされたことを表す定数です。
 
 --- KEY_RESTART -> Integer
 
-Restart ������ɽ������Ǥ���
+Restart キーを表す定数です。
 
 --- KEY_RESUME -> Integer
 
-Resume ������ɽ������Ǥ���
+Resume キーを表す定数です。
 
 --- KEY_RIGHT -> Integer
 
-�����������ɽ������Ǥ���
+右矢印キーを表す定数です。
 
 --- KEY_SAVE -> Integer
 
-Save ������ɽ������Ǥ���
+Save キーを表す定数です。
 
 --- KEY_SBEG -> Integer
 #@todo
@@ -1008,292 +1008,292 @@ Shifted beginning key
 
 --- KEY_SCANCEL -> Integer
 
-Shift + Cancel ������ɽ������Ǥ���
+Shift + Cancel キーを表す定数です。
 
 --- KEY_SCOMMAND -> Integer
 
-Shift + Command ������ɽ������Ǥ���
+Shift + Command キーを表す定数です。
 
 --- KEY_SCOPY -> Integer
 
-Shift + Copy ������ɽ������Ǥ���
+Shift + Copy キーを表す定数です。
 
 --- KEY_SCREATE -> Integer
 
-Shift + Create ������ɽ������Ǥ���
+Shift + Create キーを表す定数です。
 
 --- KEY_SDC -> Integer
 #@todo ???
-Shift + Delete ������ɽ������Ǥ���
+Shift + Delete キーを表す定数です。
 
 --- KEY_SDL -> Integer
 
-Shift + �Ԥ������륭����ɽ������Ǥ���
+Shift + 行を削除するキーを表す定数です。
 
 --- KEY_SELECT -> Integer
 
-Select ������ɽ������Ǥ���
+Select キーを表す定数です。
 
 --- KEY_SEND -> Integer
 
-Shift + End ������ɽ������Ǥ���
+Shift + End キーを表す定数です。
 
 --- KEY_SEOL -> Integer
 
-Shift + �����ޤǥ��ꥢ���륭����ɽ������Ǥ���
+Shift + 行末までクリアするキーを表す定数です。
 
 --- KEY_SEXIT -> Integer
 
-Shift + Exit ������ɽ������Ǥ���
+Shift + Exit キーを表す定数です。
 
 --- KEY_SF -> Integer
 
-���˰�ԥ��������뤹�뤳�Ȥ�ɽ������Ǥ���
+前に一行スクロールすることを表す定数です。
 
 --- KEY_SFIND -> Integer
 
-Shift + Find ������ɽ������Ǥ���
+Shift + Find キーを表す定数です。
 
 --- KEY_SHELP -> Integer
 
-Shift + Help ������ɽ������Ǥ���
+Shift + Help キーを表す定数です。
 
 --- KEY_SHOME -> Integer
 
-Shift + Home ������ɽ������Ǥ���
+Shift + Home キーを表す定数です。
 
 --- KEY_SIC -> Integer
 #@todo ???
-Shift + ... ������ɽ������Ǥ���
+Shift + ... キーを表す定数です。
 
 --- KEY_SLEFT -> Integer
 
-Shift + �����������ɽ������Ǥ���
+Shift + 左矢印キーを表す定数です。
 
 --- KEY_SMESSAGE -> Integer
 
-Shift + Message ������ɽ������Ǥ���
+Shift + Message キーを表す定数です。
 
 --- KEY_SMOVE -> Integer
 
-Shift + Move ������ɽ������Ǥ���
+Shift + Move キーを表す定数です。
 
 --- KEY_SNEXT -> Integer
 
-Shift + Next ������ɽ������Ǥ���
+Shift + Next キーを表す定数です。
 
 --- KEY_SOPTIONS -> Integer
 
-Shift + Options ������ɽ������Ǥ���
+Shift + Options キーを表す定数です。
 
 --- KEY_SPREVIOUS -> Integer
 
-Shift + Previous ������ɽ������Ǥ���
+Shift + Previous キーを表す定数です。
 
 --- KEY_SPRINT -> Integer
 
-Shift + Print ������ɽ������Ǥ���
+Shift + Print キーを表す定数です。
 
 --- KEY_SR -> Integer
 
-��˰�ԥ��������뤹�뤳�Ȥ�ɽ������Ǥ���
+後に一行スクロールすることを表す定数です。
 
 --- KEY_SREDO -> Integer
 
-Shift + Redo ������ɽ������Ǥ���
+Shift + Redo キーを表す定数です。
 
 --- KEY_SREPLACE -> Integer
 
-Shift + Replace ������ɽ������Ǥ���
+Shift + Replace キーを表す定数です。
 
 --- KEY_SRESET -> Integer
 
-Shift + Reset ������ɽ������Ǥ���
+Shift + Reset キーを表す定数です。
 
 --- KEY_SRIGHT -> Integer
 
-Shift + �����������ɽ������Ǥ���
+Shift + 右矢印キーを表す定数です。
 
 --- KEY_SRSUME -> Integer
 
-Shift + Resume ������ɽ������Ǥ���
+Shift + Resume キーを表す定数です。
 
 --- KEY_SSAVE -> Integer
 
-Shift + Save ������ɽ������Ǥ���
+Shift + Save キーを表す定数です。
 
 --- KEY_SSUSPEND -> Integer
 
-Shift + Suspend ������ɽ������Ǥ���
+Shift + Suspend キーを表す定数です。
 
 --- KEY_STAB -> Integer
 
-Shift + TAB ������ɽ������Ǥ���
+Shift + TAB キーを表す定数です。
 
 --- KEY_SUNDO -> Integer
 
-Shift + Undo ������ɽ������Ǥ���
+Shift + Undo キーを表す定数です。
 
 --- KEY_SUSPEND -> Integer
 
-Suspend ������ɽ������Ǥ���
+Suspend キーを表す定数です。
 
 --- KEY_UNDO -> Integer
 
-Undo ������ɽ������Ǥ���
+Undo キーを表す定数です。
 
 --- KEY_UP -> Integer
 
-�����������ɽ������Ǥ���
+上矢印キーを表す定数です。
 
 == Module Functions
 
 --- init_screen -> Curses::Window
 --- stdscr -> Curses::Window
 
-ü���μ���� curses �˴ؤ���ǡ����������������̤򥯥ꥢ���ޤ���
-stdscr �ȸƤФ��������Τ�ɽ��������ɥ����֤��ޤ���
+端末の種類や curses に関するデータを初期化し、画面をクリアします。
+stdscr と呼ばれる画面全体を表すウィンドウを返します。
 
-ncurses �����Ѥ��Ƥ����硢
-���Υ᥽�åɤ˼��Ԥ����ɸ�२�顼���Ϥ˥��顼��å���������Ϥ�����λ���ޤ���
-�����Ǥʤ���硢���Υ᥽�åɤ˼��Ԥ�����㳰 RuntimeError ��ȯ�����ޤ���
+ncurses を利用している場合、
+このメソッドに失敗すると標準エラー出力にエラーメッセージを出力し、終了します。
+そうでない場合、このメソッドに失敗すると例外 RuntimeError を発生します。
 
-�ܤ����ϡ� man �ڡ����� curs_initscr(3X) �� initscr �ؿ��ȡ�
-curs_clear(3X) �� clear �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_initscr(3X) の initscr 関数と、
+curs_clear(3X) の clear 関数を参照ください。
 
-[[c:Curses]] �Τ����Ĥ��Υ᥽�åɤϡ������Ǥ��Υ᥽�åɤ�ƤӽФ��ޤ���
-����ˤ�ꡢ���Υ᥽�åɤ�ƤӽФ��Ƥ��ʤ����Ǥ⡢
-�����Ĥ��ν�����Ǥ���褦�ˤʤäƤ��ޤ���
+[[c:Curses]] のいくつかのメソッドは、内部でこのメソッドを呼び出します。
+これにより、このメソッドを呼び出していない場合でも、
+いくつかの処理をできるようになっています。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 @see [[m:Curses.#close_screen]]
 
 --- close_screen -> nil
 
-curses �ν�λ������Ԥ��ޤ���
-ü���ξ��֤��������������������ü�˰�ư�����ޤ���
+curses の終了処理を行います。
+端末の状態を復帰させ、カーソルを左端に移動させます。
 
-�ܤ����ϡ� man �ڡ����� curs_initscr(3X) �� endwin �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_initscr(3X) の endwin 関数を参照ください。
 
-@see [[m:Curses.#init_screen]]��[[m:Curses.#stdscr]], [[man:curs_initscr(3X)]]
+@see [[m:Curses.#init_screen]]、[[m:Curses.#stdscr]], [[man:curs_initscr(3X)]]
 
 --- closed? -> bool
 
-curses ����λ���Ƥ��뤫�ɤ������֤��ޤ���
+curses が終了しているかどうかを返します。
 
-�ܤ����ϡ� man �ڡ����� curs_initscr(3X) �� isendwin �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_initscr(3X) の isendwin 関数を参照ください。
 
-���ݡ��Ȥ��Ƥ��ʤ��Ķ��Ǥϡ��㳰 NotImplementedError ��ȯ�����ޤ���
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 @see [[m:Curses.#close_screen]]
 
 --- clear -> nil
 
-�������Τ�ɽ��������ɥ� stdscr ��ʸ����õ�����̤򥯥ꥢ���ޤ���
-���̤Υ��ꥢ��ȿ�Ǥ����뤿��ˡ�
-�ܥ᥽�åɤΤ��Ȥ� [[m:Curses.#refresh]] ��ƤӽФ�ɬ�פϤ���ޤ���
+画面全体を表すウィンドウ stdscr の文字を消去し、画面をクリアします。
+画面のクリアを反映させるために、
+本メソッドのあとに [[m:Curses.#refresh]] を呼び出す必要はありません。
 
-�ܤ����ϡ� man �ڡ����� curs_clear(3X) �� clear �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_clear(3X) の clear 関数を参照ください。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- refresh -> nil
 
-�������Τ�ɽ��������ɥ� stdscr ��ɽ���򹹿����ޤ���
+画面全体を表すウィンドウ stdscr の表示を更新します。
 
-�ܤ����ϡ� man �ڡ����� curs_refresh(3X) �� refresh �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_refresh(3X) の refresh 関数を参照ください。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- doupdate -> nil
 
-�������Τ�ɽ��������ɥ� stdscr ��ɽ���򹹿����ޤ���
-[[m:Curses.#refresh]] �ʾ��ǽΨ�ɤ�����������Ԥ��ޤ���
+画面全体を表すウィンドウ stdscr の表示を更新します。
+[[m:Curses.#refresh]] 以上に能率良く更新処理を行います。
 
-�ܤ����ϡ� man �ڡ����� curs_refresh(3X) �� doupdate �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_refresh(3X) の doupdate 関数を参照ください。
 
-���Ѥ��Ƥ��� curses �Υ饤�֥�꤬ doupdate �ؿ����󶡤��Ƥ��ʤ���硢
-doupdate �ؿ�������ˡ�refresh �ؿ���ƤӽФ��ޤ���
+利用している curses のライブラリが doupdate 関数を提供していない場合、
+doupdate 関数の代わりに、refresh 関数を呼び出します。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- echo -> nil
 
-�桼�����������Ƥ���̤�ɽ������褦�ˤ��ޤ���
-�Ĥޤꡢ���ϤΥ�������ͭ���ˤ��ޤ���
+ユーザの入力内容を画面に表示するようにします。
+つまり、入力のエコーを有効にします。
 
-�ܤ����ϡ� man �ڡ����� curs_inopts(3X) �� echo �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_inopts(3X) の echo 関数を参照ください。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- noecho
 
-�桼�����������Ƥ���̤�ɽ�����ʤ��褦�ˤ��ޤ���
-�Ĥޤꡢ���ϤΥ�������ߤ�ޤ���
+ユーザの入力内容を画面に表示しないようにします。
+つまり、入力のエコーを止めます。
 
-�ܤ����ϡ� man �ڡ����� curs_inopts(3X) �� noecho �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_inopts(3X) の noecho 関数を参照ください。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- cbreak -> nil
 --- crmode -> nil
 
-�����ܡ������ϤΥХåե���󥰤��ᡢ�桼�������Ϥ�¨�¤˽����Ǥ���褦�ˤ��ޤ���
+キーボード入力のバッファリングをやめ、ユーザの入力を即座に処理できるようにします。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-@see [[m:Curses.#nocbreak]]��[[m:Curses.#nocrmode]]
+@see [[m:Curses.#nocbreak]]、[[m:Curses.#nocrmode]]
 
 --- nocbreak -> nil
 --- nocrmode -> nil
 
-�̾��ü���Τ褦�ˡ������ܡ������ϤΥХåե���󥰤�ͭ���ˤ��ޤ���
-�桼�������Ϥϥ��󥿡������ʤɤ򲡤��ޤǽ����Ǥ��ޤ���
-���ξ��֤Τ��Ȥ��cooked�ץ⡼�ɤȤ����ޤ���
+通常の端末のように、キーボード入力のバッファリングを有効にします。
+ユーザの入力はエンターキーなどを押すまで処理できません。
+この状態のことを「cooked」モードといいます。
 
-���Υ᥽�åɤ���� [[m:Curses.#init_screen]] ��ƤӽФ��ޤ���
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-�����ե�٥� ($SAFE) �� 4 �ξ�硢�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-@see [[m:Curses.#cbreak]]��[[m:Curses.#crmode]]
+@see [[m:Curses.#cbreak]]、[[m:Curses.#crmode]]
 
 --- raw -> nil
 
-[[m:Curses.#cbreak]] ��Ʊ�ͤˡ������ܡ������ϤΥХåե���󥰤��ᡢ
-�桼�������Ϥ�¨�¤˽����Ǥ���褦�ˤ��ޤ����ʤ����ġ�
-������(Ctrl-C)�������ڥ��(Ctrl-Z) �ʤɤ��ü쥭���ν�������ޤ���
-���ξ��֤Τ��Ȥ��raw�ץ⡼�ɤȤ����ޤ���
+[[m:Curses.#cbreak]] と同様に、キーボード入力のバッファリングをやめ、
+ユーザの入力を即座に処理できるようにします。なおかつ、
+割り込み(Ctrl-C)、サスペンド(Ctrl-Z) などの特殊キーの処理をやめます。
+この状態のことを「raw」モードといいます。
 
-@see [[m:Curses.#cbreak]]��[[m:Curses.#noraw]]
+@see [[m:Curses.#cbreak]]、[[m:Curses.#noraw]]
 
 --- noraw -> nil
 
-raw �⡼�ɤ�ȴ�����̾�ξ��֤ˤ��ޤ���
-�Ĥޤꡢ�����ܡ������ϤΥХåե���󥰤�Ԥ���
-������(Ctrl-C)�������ڥ��(Ctrl-Z) �ʤɤ��ü쥭���ν�����Ԥ��褦�ˤ��ޤ���
+raw モードを抜け、通常の状態にします。
+つまり、キーボード入力のバッファリングを行い、
+割り込み(Ctrl-C)、サスペンド(Ctrl-Z) などの特殊キーの処理を行うようにします。
 
 @see [[m:Curses.#raw]]
 
 --- nl -> nil
 #@todo
 
-cooked �⡼�ɤΤȤ���return ���������Ϥ��Ф���
-LF (Ctrl-j) ���֤��褦�ˤ��ޤ���
+cooked モードのとき、return キーの入力に対して
+LF (Ctrl-j) を返すようにします。
 
-�ܤ����ϡ� man �ڡ����� curs_outopts(3X) �� nl �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_outopts(3X) の nl 関数を参照ください。
 
  Enable the underlying display device to translate
  the return key into newline on input, and whether it
@@ -1309,10 +1309,10 @@ LF (Ctrl-j) ���֤��褦�ˤ��ޤ���
 --- nonl -> nil
 #@todo
 
-cooked �⡼�ɤΤȤ���return ���������Ϥ��Ф���
-CR (Ctrl-m) ���֤��褦�ˤ��ޤ���
+cooked モードのとき、return キーの入力に対して
+CR (Ctrl-m) を返すようにします。
 
-�ܤ����ϡ� man �ڡ����� curs_outopts(3X) �� nonl �ؿ��򻲾Ȥ���������
+詳しくは、 man ページの curs_outopts(3X) の nonl 関数を参照ください。
 
  Disable the underlying display device to translate
  the return key into newline on input
@@ -1321,60 +1321,60 @@ CR (Ctrl-m) ���֤��褦�ˤ��ޤ���
 
 --- beep -> nil
 
-����Ф��ޤ���
-���ε�ǽ���ʤ��Ȥ����Ǥ�ñ��̵�뤵��ޤ���
+音を出します。
+この機能がないところでは単に無視されます。
 
 --- flash -> nil
 
-���̤������Ǥ����ޤ���
-���ε�ǽ���ʤ��Ȥ����Ǥ�ñ��̵�뤵��ޤ���
+画面を一瞬点滅させます。
+この機能がないところでは単に無視されます。
 
 --- getch -> Integer
 
-ɸ�����Ϥ��� 1 �Х����ɤ߹��ߤޤ���
-����ͤ� ASCII �����ɤ�ɽ�������Ǥ���
+標準入力から 1 バイト読み込みます。
+戻り値は ASCII コードを表す整数です。
 
 @see [[c:Curses::Key]]
 
 --- getstr -> String
 
-ɸ�����Ϥ������ɤ߹��ߤޤ���
-����ͤ�ʸ����Ǥ���
+標準入力から一行読み込みます。
+戻り値は文字列です。
 
-���Υ᥽�åɤ� getnstr() ����������Ƥ��ʤ�
-�ץ�åȥۡ���ǤϥХåե������С��ե����򤪤������줬
-����ޤ���
+このメソッドは getnstr() が実装されていない
+プラットホームではバッファオーバーフローをおこす恐れが
+あります。
 
 @see [[m:Curses::Window#getstr]]
 
 --- ungetch(ch) -> nil
 
-ʸ�� ch (ASCII �����ɤ򼨤�����) �򥹥ȥ꡼����ᤷ�ޤ���
+文字 ch (ASCII コードを示す整数) をストリームに戻します。
 
-���ƤΥ�����ɥ��ǰ�Ĥ������塼������ޤ���
+全てのウインドウで一つだけキューがあります。
 
-@param ch ʸ������ ASCII �����ɤǻ��ꤷ�ޤ���
+@param ch 文字を一つ ASCII コードで指定します。
 
 
 --- setpos(y, x) -> nil
 
-stdscr �Υ���������ɸ (x,y) �˰�ư���ޤ���
-��ɸ�ϤȤ�� 0 �������Ǥ���
+stdscr のカーソルを座標 (x,y) に移動します。
+座標はともに 0 が始点です。
 
-ʸ�����ʤ����� setpos �������ε�ư�� OS �˰�¸���ޤ���
+文字がない場所に setpos した場合の挙動は OS に依存します。
 
-@param y Y ��ɸ���ͤ���ꤷ�ޤ���
+@param y Y 座標の値を指定します。
 
-@param x X ��ɸ���ͤ���ꤷ�ޤ���
+@param x X 座標の値を指定します。
 
 --- standout ->nil
 
-�ʹ߽񤭹���ʸ����Ĵ���ޤ���
+以降書き込む文字を強調します。
 
-�ֶ�Ĵ�פ�ȿž�Ǥ��뤳�Ȥ�¿���褦�Ǥ�����
-���������Ƥ���櫓�ǤϤ���ޤ���
+「強調」は反転であることが多いようですが、
+そう決められているわけではありません。
 
-�ʲ��Υ����ɤ�Ʊ���Ǥ���
+以下のコードと同じです。
 
   Curses:Window.attron(A_STANDOUT)
 
@@ -1382,9 +1382,9 @@ stdscr �Υ���������ɸ (x,y) �˰�ư���ޤ���
 
 --- standend -> nil
 
-��Ĵ����ʸ���ν񤭹��ߤ򽪤��ޤ���
+強調する文字の書き込みを終えます。
 
-�ʲ��Υ����ɤ�Ʊ���Ǥ���
+以下のコードと同じです。
 
   Curses.attron(A_NORMAL)
 
@@ -1392,56 +1392,56 @@ stdscr �Υ���������ɸ (x,y) �˰�ư���ޤ���
 
 --- addch(ch) -> nil
 
-stdscr �Υ�������ΰ��֤� ch (1 �Х���) ���񤭤��ޤ���
+stdscr のカーソルの位置に ch (1 バイト) を上書きします。
 
-@param ch ʸ������ꤷ�ޤ���
+@param ch 文字を指定します。
 
 @see [[man:curs_addch(3)]]
 
 --- insch(ch) -> nil
 
-stdscr �Υ�������ΰ��֤� ch (1 �Х���) ���������ޤ���
+stdscr のカーソルの位置に ch (1 バイト) を挿入します。
 
-@param ch ʸ������ꤷ�ޤ���
+@param ch 文字を指定します。
 
 --- addstr(str) -> nil
 
-stdscr �Υ�������ΰ��֤�ʸ���� str ���������ޤ���
+stdscr のカーソルの位置に文字列 str を挿入します。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- delch -> nil
 
-stdscr �Υ�������ΰ��֤��� 1 �Х��Ⱥ�����ޤ���
+stdscr のカーソルの位置から 1 バイト削除します。
 
 --- deleteln -> nil
 
-stdscr �Υ������뤬����Ԥ���������ιԤ��˵ͤ�ޤ���
+stdscr のカーソルがある行を削除し、後の行を上に詰めます。
 
 --- lines -> Integer
 
-���̤�ɽ����ǽ�ʹԿ����֤��ޤ���
+画面に表示可能な行数を返します。
 
 --- cols -> Integer
 
-���̤�ɽ����ǽ�ʷ��(�Х���)���֤��ޤ���
+画面に表示可能な桁数(バイト)を返します。
 
-�������ºݤˤϤ⤦ 1 �Х��Ⱦ��ʤ�����ɽ���Ǥ��ʤ��饤�֥�꤬
-����褦�Ǥ���
+ただし実際にはもう 1 バイト少なくしか表示できないライブラリが
+あるようです。
 
 --- inch -> Integer
 
-stdscr �Υ���������֤��� 1 �Х����ɤߤȤä��֤��ޤ���
+stdscr のカーソル位置から 1 バイト読みとって返します。
 
 #@since 1.8.3
 
 --- clrtoeol -> nil
 
-���ߤΥ���������֤��饦����ɥ��κǸ�ޤǤ򥯥ꥢ���ޤ���
+現在のカーソル位置からウィンドウの最後までをクリアします。
 
 --- insertln -> nil
 
-���ߤΥ���������֤˰���������ޤ���
+現在のカーソル位置に一行挿入します。
 
 #@end
 
@@ -1513,30 +1513,30 @@ and insert/delete line/character operations.
 
 --- can_change_color? -> bool
 
-ü���������ѹ��Ǥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+端末が色を変更できる場合は真を返します。
+そうでない場合は偽を返します。
 
 #@since 1.9.2
 --- colors -> Integer
 #@todo ???
 
-���ο����֤��ޤ���
+色の数を返します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
 #@end
 --- color_content(color) -> Array
 
-Ϳ����줿���� RGB �ͤ����Ǥ�����Ȥ����֤��ޤ���
+与えられた色の RGB 値を三要素の配列として返します。
 
-@param color ���� Curses::COLOR_RED �ʤɤǻ��ꤷ�ޤ���
+@param color 色を Curses::COLOR_RED などで指定します。
 
 --- color_pair(attrs) -> Integer
 #@todo
 
 Sets the color pair attributes to +attrs+.
 
-�ʲ��Υ����ɤ�Ʊ���Ǥ���
+以下のコードと同じです。
 
   Curses.attrset(COLOR_PAIR(+attrs+))
 
@@ -1548,7 +1548,7 @@ Sets the color pair attributes to +attrs+.
 
 Returns the COLOR_PAIRS available, if the curses library supports it.
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
 #@end
 --- curs_set(visibility) -> Integer | nil
@@ -1560,11 +1560,11 @@ Sets Cursor Visibility.
  * 1: visible
  * 2: very visible
 
-@param visibility ��������βĻ�������ꤷ�ޤ���
+@param visibility カーソルの可視性を指定します。
 
 --- delch -> nil
 
-��������β���ʸ���������ޤ���
+カーソルの下の文字を削除します。
 
 --- getmouse -> Integer | nil
 #@todo
@@ -1577,8 +1577,8 @@ This will read and pop the mouse event data off the queue
 
 --- has_colors? -> bool
 
-ü�������顼ɽ�����б����Ƥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+端末がカラー表示に対応している場合は真を返します。
+そうでない場合は偽を返します。
 
 --- init_color(color, r, g, b) -> bool
 #@todo
@@ -1597,9 +1597,9 @@ on the screen immediately change to the new definition.
 
 @param color ???
 
-@param r ��åɤ��̤���ꤷ�ޤ���
-@param g ���꡼����̤���ꤷ�ޤ���
-@param b �֥롼���̤���ꤷ�ޤ���
+@param r レッドの量を指定します。
+@param g グリーンの量を指定します。
+@param b ブルーの量を指定します。
 
 --- init_pair(pair, f, b) -> bool
 #@todo
@@ -1617,9 +1617,9 @@ to the new definition.
 --- keyname(c) -> String | nil
 #@todo
 
-���� c ���б�����ʸ������֤��ޤ���
+キー c に対応する文字列を返します。
 
-@param c ������̾������ꤷ�ޤ���
+@param c キーの名前を指定します。
 
 --- mouseinterval(interval) -> bool
 #@todo
@@ -1639,13 +1639,13 @@ The default is one sixth of a second.
 
 --- mousemask(mask) -> Integer
 
-Ϳ����줿 mask ��������ǽ�ʥ��٥�Ȥ���Ф����֤��ޤ���
+与えられた mask から報告可能なイベントを取り出して返します。
 
-@param mask �ޥ����ͤ���ꤷ�ޤ���
+@param mask マスク値を指定します。
 
 --- pair_content(pair) -> Array
 #@todo
-Ϳ����줿 pair �˴ޤޤ��ʸ�������طʿ������ǤȤ��������Ǥ�������֤��ޤ���
+与えられた pair に含まれる文字色と背景色を要素とする二要素の配列を返します。
 
 @param pair 
 
@@ -1657,14 +1657,14 @@ Returns the Fixnum color pair number of attributes +attrs+.
 --- resizeterm(lines, cols) -> bool | nil
 --- resize(lines, cols) -> bool | nil
 
-���ߤ�ü�����������ѹ����ޤ���
+現在の端末サイズを変更します。
 
-@param lines �ѹ���ιԿ�����ꤷ�ޤ���
+@param lines 変更後の行数を指定します。
 
-@param cols �ѹ���Υ���������ꤷ�ޤ���
+@param cols 変更後のカラム数を指定します。
 
-@return ���������ѹ��������������ϡ������֤��ޤ������Ԥ������ϵ����֤��ޤ���
-        ��ǽ�򥵥ݡ��Ȥ��Ƥ��ʤ����� nil ���֤��ޤ���
+@return サイズの変更に成功した場合は、真を返します。失敗した場合は偽を返します。
+        機能をサポートしていない場合は nil を返します。
 
 --- scrl(num) -> bool
 #@todo
@@ -1675,7 +1675,7 @@ For positive +num+, it scrolls up.
 
 For negative +num+, it scrolls down.
 
-@param num ���������뤹��Կ�����ꤷ�ޤ���
+@param num スクロールする行数を指定します。
 
 --- setscrreg(top, bottom) -> bool
 #@todo
@@ -1687,9 +1687,9 @@ the bottom margin line causes all lines in the scrolling region
 to scroll one line in the direction of the first line.
 Only the text of the window is scrolled.
 
-@param top �������Υޡ�����Կ�����ꤷ�ޤ���
+@param top 上方向のマージン行数を指定します。
 
-@param bottom �������Υޡ�����Կ�����ꤷ�ޤ���
+@param bottom 下方向のマージン行数を指定します。
 
 --- start_color -> bool
 #@todo
@@ -1705,43 +1705,43 @@ event the given state data and screen-relative character-cell coordinates.
 
 The Curses.ungetmouse function behaves analogously to Curses.ungetch.
 
-@param mevent ���ϥ��塼���᤹�ޥ������٥�Ȥ���ꤷ�ޤ���
+@param mevent 入力キューに戻すマウスイベントを指定します。
 
 #@since 1.9.2
 --- ESCDELAY -> Integer
 
-ESC �����Ϥ��˴��������(�ߥ���ñ��)��������ޤ���
+ESC の入力を破棄する時間(ミリ秒単位)を取得します。
 
-@raise  NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- ESCDELAY=(val)
 
-ESC �����Ϥ��˴��������(�ߥ���ñ��)�� val �����ꤷ�ޤ���
-���ꤷ���ͤ��֤��ޤ���
+ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
+設定した値を返します。
 
-@param val ESC �����Ϥ��˴��������(�ߥ���ñ��)����ꤷ�ޤ���
+@param val ESC の入力を破棄する時間(ミリ秒単位)を指定します。
 
-@raise  NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- TABSIZE -> Integer
 
-��������������ޤ���
+タブ幅を取得します。
 
-@raise  NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- TABSIZE=(val)
 
-�������� val �����ꤷ�ޤ������ꤷ���ͤ��֤��ޤ���
+タブ幅を val に設定します。設定した値を返します。
 
-@param val ����������ꤷ�ޤ���
+@param val タブ幅を指定します。
 
-@raise  NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- use_default_colors -> nil
 
-���ʿ����طʿ���ü���Υǥե������ (-1) �����ꤷ�ޤ���
+前景色と背景色を端末のデフォルト値 (-1) に設定します。
 
-@raise  NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 @see [[man:default_colors(3X)]]
 

@@ -14,17 +14,17 @@ require wsdl/importer
 --- content
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- location
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- namespace
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo

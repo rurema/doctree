@@ -1,6 +1,6 @@
 require xmlrpc/datetime
 
-XML-RPC е╡б╝е╨д╬д┐дсд╬ещеде╓ещеъд╟д╣бг
+XML-RPC уВ╡уГ╝уГРуБоуБЯуВБуБоуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 ==== CGI-based Server
 

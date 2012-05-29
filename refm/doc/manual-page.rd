@@ -1,38 +1,38 @@
 = manual page
 
-foo(1)�Ȥ������Ҥϥޥ˥奢��ڡ����λ��Ȥ򼨤��ޤ�(Unix�Ǥ���)��
+foo(1)という記述はマニュアルページの参照を示します(Unixでの話)。
 
   $ man 1 foo
 
-�ʤɤȤ��ƻ��Ȥ��ޤ���
+などとして参照します。
 
-�����ϥ���������ֹ�򼨤��ޤ����㤨��
- * 1 ���ޥ��
- * 2 �����ƥॳ����
- * 3 �饤�֥��ؿ�
-�ʤɤ�ʬ��櫓����Ƥ��ޤ����ƥ��������ΰ�̣�� intro(1) �ʤɤ�
-����������ޤ��ΤǤ�����⻲�Ȥ��Ƥ���������
+数字はセクション番号を示します。例えば
+ * 1 コマンド
+ * 2 システムコール
+ * 3 ライブラリ関数
+などと分類わけされています。各セクションの意味は intro(1) などに
+説明がありますのでそちらも参照してください。
 
-�Ķ��ˤ�äƤϥ����ƥॳ���뤬�饤�֥��ؿ��Ȥ��Ƽ�������Ƥ���
-���⤢��Τ� socket(2) ��
+環境によってはシステムコールがライブラリ関数として実装されている
+場合もあるので socket(2) が
 
   $ man 2 socket
 
-�Ǥʤ�
+でなく
 
   $ man 3 socket
 
-�ξ��⤢��ޤ������񥻥������Ͼ�ά����
+の場合もあります。大抵セクションは省略して
   $ man socket
-�Ȥ��ƻ��Ȥ�����ɤ��Ǥ��礦��
+として参照すれば良いでしょう。
 
-�ܺ٤� [[man:man(1)]] �򻲾Ȥ��Ƥ���������
+詳細は [[man:man(1)]] を参照してください。
 
-UNIX �Ķ��򿨤�ʤ��ͤ�
+UNIX 環境を触れない人は
  * The Single UNIX(R) Specification V2: [[url:http://www.unix-systems.org/single_unix_specification_v2/]]
  * JM Project: [[url:http://www.linux.or.jp/JM/]]
- * jpman �ץ���������: [[url:http://www.jp.freebsd.org/man-jp/]]
+ * jpman プロジェクト: [[url:http://www.jp.freebsd.org/man-jp/]]
  * X Japanese Documentation Project: [[url:http://xjman.dsl.gr.jp/]]
  * FreeBSD Hypertext Man Pages: [[url:http://www.freebsd.org/cgi/man.cgi]]
  * The Open Group Base Specifications Issue 6 IEEE Std 1003.1-2001: [[url:http://www.opengroup.org/onlinepubs/007904975/idx/index.html]]
-�ʤɤ򻲾Ȥ��Ƥ�������(����¾�ˤ���󤬤���ж����Ƥ�������)��
+などを参照してください(この他にも情報があれば教えてください)。

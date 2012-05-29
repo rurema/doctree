@@ -4,7 +4,7 @@ require syck/ypath
 require yaml/ypath
 #@end
 
-YAML �ΥΡ��ɤ򸡺����뤿��Υ��֥饤�֥��Ǥ���
+YAML のノードを検索するためのサブライブラリです。
 
 #@since 1.9.2
 = module Syck::BaseNode
@@ -12,51 +12,51 @@ YAML �ΥΡ��ɤ򸡺����뤿��Υ��֥饤�֥��Ǥ���
 = module YAML::BaseNode
 #@end
 
-YAML �ΥΡ��ɤ򸡺�����Τ���Υ⥸�塼��Ǥ���
+YAML のノードを検索するのためのモジュールです。
 
 == instance methods
 
 --- [](*key) -> object | [object] | nil
 
-�����ǻ��ꤷ���������б�������(�⤷���ϰ����ǻ��ꤷ������ǥå������б�
-�����ͤ�����)���֤��ޤ����б������ͤ��ʤ����� nil ���֤��ޤ���
+引数で指定したキーに対応する値(もしくは引数で指定したインデックスに対応
+する値の配列)を返します。対応する値がない場合は nil を返します。
 
-@param key [[c:Hash]] �Υ����� [[c:Array]] �Υ���ǥå�����ʸ����ǻ���
-           ���ޤ�����Ԥξ���ʣ���Ļ��ꤹ������Ǥ��ޤ���
+@param key [[c:Hash]] のキーか [[c:Array]] のインデックスを文字列で指定
+           します。後者の場合は複数個指定する事ができます。
 
 --- at(segment) -> object | nil
 
-���ꤷ������(�⤷���ϥ���ǥå���)���б������ͤ��֤��ޤ����б������ͤ�
-�ʤ����� nil ���֤��ޤ���
+指定したキー(もしくはインデックス)に対応する値を返します。対応する値が
+ない場合は nil を返します。
 
-@param segment [[c:Hash]] �Υ����� [[c:Array]] �Υ���ǥå�����ʸ�����
-               ���ꤷ�ޤ���
+@param segment [[c:Hash]] のキーか [[c:Array]] のインデックスを文字列で
+               指定します。
 
 --- children -> [object]
 
-���Ȥ������ͤ�������֤��ޤ���
+自身が持つ値の配列を返します。
 
 --- children_with_index -> [[object, Integer]]
 
-���Ȥ������ͤȥ���ǥå���(�⤷���ϥ���)�������������֤��ޤ���
+自身が持つ値とインデックス(もしくはキー)の配列の配列を返します。
 
 --- emit -> String
 
-���Ȥ� YAML ������ʸ����ˤ����֤��ޤ���
+自身を YAML 形式の文字列にして返します。
 
 --- match_path(ypath_str) -> Array
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 --- match_segment(ypath, depth) -> Array
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 --- search(ypath_str) -> [String]
 
-�����ǻ��ꤷ���ѥ��ΥΡ��ɤ򸡺����ޤ������Ĥ��ä��ѥ���������֤��ޤ���
+引数で指定したパスのノードを検索します。見つかったパスの配列を返します。
 
-@param ypath_str ��������ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param ypath_str 検索するパスを文字列で指定します。
 
 #@since 1.9.3
   require 'syck'
@@ -78,9 +78,9 @@ YAML �ΥΡ��ɤ򸡺�����Τ���Υ⥸�塼��Ǥ���
 
 --- select(ypath_str) -> [YAML::Syck::Node]
 
-�����ǻ��ꤷ���ѥ��ΥΡ��ɤ򸡺����ޤ������Ĥ��ä��Ρ��ɤ�������֤��ޤ���
+引数で指定したパスのノードを検索します。見つかったノードの配列を返します。
 
-@param ypath_str ��������ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param ypath_str 検索するパスを文字列で指定します。
 
 #@since 1.9.3
   require 'syck'
@@ -88,11 +88,11 @@ YAML �ΥΡ��ɤ򸡺�����Τ���Υ⥸�塼��Ǥ���
   require 'yaml'
   
   node = YAML.parse(DATA)
-  # "taro" �� "jiro" �ΥΡ��ɤ�������֤���
+  # "taro" と "jiro" のノードの配列を返す。
   p node.select("//name")
   # => [#<YAML::Syck::Scalar:0xf738b77c>, #<YAML::Syck::Scalar:0xf738b9ac>]
 
-  # [{"name"=>"taro", "age"=>7}] �ΥΡ��ɤ�������֤���
+  # [{"name"=>"taro", "age"=>7}] のノードの配列を返す。
   p node.select("/cat")
   # => [#<YAML::Syck::Seq:0xf7391910>]
   
@@ -107,15 +107,15 @@ YAML �ΥΡ��ɤ򸡺�����Τ���Υ⥸�塼��Ǥ���
 
 --- select!(ypath_str) -> [object]
 
-�����ǻ��ꤷ���ѥ��ΥΡ��ɤ򸡺����ޤ������Ĥ��ä��Ρ��ɤ򤽤줾��
+引数で指定したパスのノードを検索します。見つかったノードをそれぞれ
 #@since 1.9.2
-[[m:Syck::Node#transform]] �� Ruby �Υ��֥������Ȥˤ���������֤�
+[[m:Syck::Node#transform]] で Ruby のオブジェクトにした配列を返し
 #@else
-[[m:YAML::Syck::Node#transform]] �� Ruby �Υ��֥������Ȥˤ���������֤�
+[[m:YAML::Syck::Node#transform]] で Ruby のオブジェクトにした配列を返し
 #@end
-�ޤ���
+ます。
 
-@param ypath_str ��������ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param ypath_str 検索するパスを文字列で指定します。
 
 #@since 1.9.3
   require 'syck'

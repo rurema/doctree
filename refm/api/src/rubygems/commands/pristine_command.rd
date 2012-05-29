@@ -3,14 +3,14 @@ require rubygems/format
 require rubygems/installer
 require rubygems/version_option
 
-¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò½é´ü¾õÂÖ¤Ë¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’åˆæœŸçŠ¶æ…‹ã«ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem pristine [args] [options]
     Options:
-          --all                        ¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ëÁ´¤Æ¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò
-                                       ½é´ü¾õÂÖ¤ËÌá¤·¤Ş¤¹
-      -v, --version VERSION            »ØÄê¤·¤¿¥Ğ¡¼¥¸¥ç¥ó¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò
-                                       ½é´ü¾õÂÖ¤ËÌá¤·¤Ş¤¹
+          --all                        ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹å…¨ã¦ã® Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’
+                                       åˆæœŸçŠ¶æ…‹ã«æˆ»ã—ã¾ã™
+      -v, --version VERSION            æŒ‡å®šã—ãŸãƒãƒ¼ã‚¸ãƒ§ãƒ³ã® Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’
+                                       åˆæœŸçŠ¶æ…‹ã«æˆ»ã—ã¾ã™
 #@include(common_options)
     Arguments:
       GEMNAME       gem to restore to pristine condition (unless --all)
@@ -34,5 +34,5 @@ require rubygems/version_option
 = class Gem::Commands::PristineCommand < Gem::Command
 include Gem::VersionOption
 
-¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò½é´ü¾õÂÖ¤Ë¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’åˆæœŸçŠ¶æ…‹ã«ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 

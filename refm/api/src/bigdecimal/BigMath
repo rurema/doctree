@@ -1,6 +1,6 @@
 = module BigMath
 
-BigDecimal¤ò»È¤Ã¤¿¿ô³ØÅª¤Êµ¡Ç½¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+BigDecimalã‚’ä½¿ã£ãŸæ•°å­¦çš„ãªæ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
 
 #@since 1.9.2
 == Module Functions
@@ -10,20 +10,20 @@ BigDecimal¤ò»È¤Ã¤¿¿ô³ØÅª¤Êµ¡Ç½¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 
 --- exp(x, prec) -> BigDecimal
 
-x ¤Î»Ø¿ô´Ø¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£
+x ã®æŒ‡æ•°é–¢æ•°ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚
 #@since 1.9.2
-x ¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï NaN ¤òÊÖ¤·¤Þ¤¹¡£
+x ã«ç„¡é™å¤§ã‚„ NaN ã‚’æŒ‡å®šã—ãŸå ´åˆã«ã¯ NaN ã‚’è¿”ã—ã¾ã™ã€‚
 #@else
-x ¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï x ¤òÊÖ¤·¤Þ¤¹¡£
+x ã«ç„¡é™å¤§ã‚„ NaN ã‚’æŒ‡å®šã—ãŸå ´åˆã«ã¯ x ã‚’è¿”ã—ã¾ã™ã€‚
 #@end
 
-@param x ·×»»ÂÐ¾Ý¤Î BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¡£
+@param x è¨ˆç®—å¯¾è±¡ã® BigDecimal ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 
@@ -43,16 +43,16 @@ x ¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï x ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- log(x, prec) -> BigDecimal
 
-x ¤Î¼«Á³ÂÐ¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£x ¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê
-¤·¤¿¾ì¹ç¤Ë¤Ï x ¤òÊÖ¤·¤Þ¤¹¡£
+x ã®è‡ªç„¶å¯¾æ•°ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚x ã«ç„¡é™å¤§ã‚„ NaN ã‚’æŒ‡å®š
+ã—ãŸå ´åˆã«ã¯ x ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param x ·×»»ÂÐ¾Ý¤Î BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¡£
+@param x è¨ˆç®—å¯¾è±¡ã® BigDecimal ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 

@@ -3,16 +3,16 @@
 =begin
 = TkTextImage
 
-== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
+== ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹:
 
 ((<TkObject>))
 
-== ¥¯¥é¥¹¥á¥½¥Ã¥É:
+== ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkTextImage.new(parent, index, keys)
 #@todo
 
-== ¥á¥½¥Ã¥É:
+== ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkTextImage#[](slot)
 #@todo

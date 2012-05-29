@@ -1,23 +1,23 @@
-Ruby �γ�ĥ�饤�֥��Τ���� Makefile ���������饤�֥��Ǥ���
+Ruby の拡張ライブラリのための Makefile を作成するライブラリです。
 
-���Υ饤�֥����̾extconf.rb �Ȥ���̾���� ruby ������ץȤ��� require ����ޤ���
-���� extconf.rb ��¹Ԥ��� Makefile ���������Τ������Ǥ���
+このライブラリは通常、extconf.rb という名前の ruby スクリプトから require されます。
+この extconf.rb を実行して Makefile を作成するのが慣習です。
 
-extconf.rb �ν񤭤����ˤĤ��Ƥϡ�
-Ruby �Υ��������֤˴ޤޤ�� README.EXT (���ܸ��Ǥ� README.EXT.ja)
-�⻲�Ȥ��Ƥ���������
+extconf.rb の書きかたについては、
+Ruby のアーカイブに含まれる README.EXT (日本語版は README.EXT.ja)
+も参照してください。
 
-���Υ饤�֥��Ǥ� extconf.rb �򵭽Ҥ���Τ�ͭ�Ѥʥ᥽�åɤ�������Ƥ��ޤ���
-�إå��ե������¸�ߥ����å����饤�֥���¸�ߥ����å��ʤɡ�
-�����ƥ�֤κ��ۤ�Ĵ�٥����ƥ��Ŭ���� Makefile ���������뤿���
-�����Υ᥽�åɤ�ɬ�פȤʤ�ޤ���
+このライブラリでは extconf.rb を記述するのに有用なメソッドを定義しています。
+ヘッダファイルの存在チェック、ライブラリの存在チェックなど、
+システム間の差異を調べシステムに適した Makefile を生成するために
+これらのメソッドが必要となります。
 
-=== �Ȥ���
+=== 使い方
 
-�Ͷ��γ�ĥ�饤�֥�� foo.so ��������뤳�Ȥ�ͤ��ޤ���
-���γ�ĥ�饤�֥���������뤿��ˤϡ�
-�إå��ե����� bar.h �ȥ饤�֥�� libbar.a �δؿ� baz() ��ɬ�פ��Ȥ��ޤ���
-���Τ���� extconf.rb �ϰʲ��Τ褦�˽񤭤ޤ���
+架空の拡張ライブラリ foo.so を作成することを考えます。
+この拡張ライブラリを作成するためには、
+ヘッダファイル bar.h とライブラリ libbar.a の関数 baz() が必要だとします。
+このための extconf.rb は以下のように書きます。
 
   require 'mkmf'
 
@@ -26,129 +26,129 @@ Ruby �Υ��������֤˴ޤޤ�� README.EXT (���ܸ��Ǥ� README.EXT.ja)
     create_makefile('foo')
   end
 
-��ĥ�饤�֥�� foo.so ����������󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
+拡張ライブラリ foo.so を作成、インストールするには以下のようにします。
 
   $ ruby extconf.rb
   $ make
   $ make site-install
 
-foo.so �� extconf.rb �Ǥ� dir_config('bar') ��¹Ԥ��Ƥ���Τǡ�
-�桼���ϰʲ��Τ褦�˥��ޥ�ɥ饤�󥪥ץ���� --with-bar-dir
-�ʤɤ�Ȥäơ��إå��ե�����Υѥ���饤�֥��Υѥ������Ǥ��ޤ���
+foo.so の extconf.rb では dir_config('bar') を実行しているので、
+ユーザは以下のようにコマンドラインオプション --with-bar-dir
+などを使って、ヘッダファイルのパスやライブラリのパスを指定できます。
 
   $ ruby extconf.rb --with-bar-include=/usr/local/include \
                     --with-bar-lib=/usr/local/lib
 
-  �ޤ���
+  または
 
   $ ruby extconf.rb --with-bar-dir=/usr/local
 
-dir_config �ؿ��ξܺ٤ˤĤ��Ƥ�
-[[m:Kernel#dir_config]] �򻲾Ȥ��Ƥ���������
+dir_config 関数の詳細については
+[[m:Kernel#dir_config]] を参照してください。
 
-=== configure ���ץ����
+=== configure オプション
 
-configure ���ץ����Ȥ� Ruby ���󥿥ץ꥿�Υ���ѥ�����˻��ꤵ�줿
-configure ������ץȤΥ��ץ����
-�ޤ��� extconf.rb �¹Ի��Υ��ץ����Τ��ȤǤ���
+configure オプションとは Ruby インタプリタのコンパイル時に指定された
+configure スクリプトのオプション、
+または extconf.rb 実行時のオプションのことです。
 
-extconf.rb �κ����Ԥ�Ǥ�դΥ��ץ���������Ǥ��ޤ���
-[[m:Kernel#arg_config]] �⻲�Ȥ��Ƥ���������
+extconf.rb の作成者は任意のオプションを定義できます。
+[[m:Kernel#arg_config]] も参照してください。
 
-�ޤ����ʲ��Υ��ץ���󤬥ǥե���Ȥ����Ѳ�ǽ�Ǥ���
+また、以下のオプションがデフォルトで利用可能です。
 
 : --with-opt-include=DIR
-    �إå��ե������õ������ǥ��쥯�ȥ� DIR ���ɲä��ޤ���
+    ヘッダファイルを探索するディレクトリ DIR を追加します。
 
 : --with-opt-lib=DIR
-    �饤�֥��ե������õ������ǥ��쥯�ȥ� DIR ���ɲä��ޤ���
+    ライブラリファイルを探索するディレクトリ DIR を追加します。
 
 : --with-opt-dir=DIR
 
-    �إå��ե����롢�饤�֥��ե������õ������ǥ��쥯�ȥ�
-    DIR/include��DIR/lib �򤽤줾���ɲä��ޤ���
+    ヘッダファイル、ライブラリファイルを探索するディレクトリ
+    DIR/include、DIR/lib をそれぞれ追加します。
 
 : --with-TARGET-include=DIR
 
-    �إå��ե������õ������ǥ��쥯�ȥ� DIR ���ɲä��ޤ���
+    ヘッダファイルを探索するディレクトリ DIR を追加します。
 
-    extconf.rb ����� dir_config(TARGET)
-    ��¹Ԥ��Ƥ���Ф��Υ��ץ��������Ǥ��ޤ���
+    extconf.rb の中で dir_config(TARGET)
+    を実行していればこのオプションを指定できます。
 
 : --with-TARGET-lib=DIR
 
-    �饤�֥���õ������ǥ��쥯�ȥ� DIR ���ɲä��ޤ���
+    ライブラリを探索するディレクトリ DIR を追加します。
 
-    extconf.rb ����� dir_config(TARGET)
-    ��¹Ԥ��Ƥ���Ф��Υ��ץ��������Ǥ��ޤ���
+    extconf.rb の中で dir_config(TARGET)
+    を実行していればこのオプションを指定できます。
 
 : --with-TARGET-dir=DIR
 
-    �إå��ե����롢�饤�֥��ե������õ������ǥ��쥯�ȥ�
-    DIR/include��DIR/lib �򤽤줾���ɲä��ޤ���
+    ヘッダファイル、ライブラリファイルを探索するディレクトリ
+    DIR/include、DIR/lib をそれぞれ追加します。
 
-    extconf.rb ����� dir_config(TARGET)
-    ��¹Ԥ��Ƥ���Ф��Υ��ץ��������Ǥ��ޤ���
+    extconf.rb の中で dir_config(TARGET)
+    を実行していればこのオプションを指定できます。
 
-=== depend �ե�����
+=== depend ファイル
 
-�����ȥǥ��쥯�ȥ�� depend �Ȥ���̾���Υե����뤬�����硢
-��������� Makefile �κǸ�� depend �ե���������Ƥ��ɲä���ޤ���
+カレントディレクトリに depend という名前のファイルがある場合、
+生成される Makefile の最後に depend ファイルの内容が追加されます。
 
-depend �ե�����ϥ������ե�����ΰ�¸�ط��򵭽Ҥ��뤿��˻Ȥ��ޤ���
-�㤨�г�ĥ�饤�֥��Υ����������� foo.c �� foo.h �򥤥󥯥롼�ɤ��Ƥ����硢
-foo.h ���������줿�Ȥ��ˤ� foo.c ��ƥ���ѥ��뤷�����Ǥ��礦��
-���Τ褦�ʰ�¸�ط��򵭽Ҥ���ˤ� depend �ե�����˰ʲ��� 1 �Ԥ�񤭤ޤ���
+depend ファイルはソースファイルの依存関係を記述するために使います。
+例えば拡張ライブラリのソースコード foo.c が foo.h をインクルードしている場合、
+foo.h が更新されたときにも foo.c を再コンパイルしたいでしょう。
+このような依存関係を記述するには depend ファイルに以下の 1 行を書きます。
 
   foo.o: foo.c foo.h
 
-���Τ褦�˽񤯤ȡ�foo.o �� foo.c �� foo.h �˰�¸���Ƥ��뤳�Ȥ򼨤��ޤ���
-�Ĥޤꡢfoo.c �� foo.h �Τɤ��餫���������줿����
-foo.o ���ꥳ��ѥ��뤵���褦�ˤʤ�ޤ���
+このように書くと、foo.o が foo.c と foo.h に依存していることを示します。
+つまり、foo.c か foo.h のどちらかが更新された場合に
+foo.o がリコンパイルされるようになります。
 
-C ����ѥ���ˤ�äƤϡ����Τ褦�ʵ��Ҥ�ư�����Ǥ��ޤ���
-���̤ˡ����Τ���Υ��ץ����ϡ�-M�פǤ���
-��-M�ץ��ץ�������� C ����ѥ����ȤäƤ�����ϡ�
-�ʲ��Υ��ޥ�ɤ�¹Ԥ��������Ŭ�ڤ� depend �������Ǥ��ޤ���
+C コンパイラによっては、このような記述を自動生成できます。
+一般に、このためのオプションは「-M」です。
+「-M」オプションを持つ C コンパイラを使っている場合は、
+以下のコマンドを実行するだけで適切な depend が生成できます。
 
   $ cc -M *.c > depend
 
-gcc �ˤϡ�-M ���ץ������������ -MM �Ȥ������ץ����⤢��ޤ���
-���Υ��ץ����ϡ��̾ﹹ�����뤳�ȤΤʤ� stdio.h �ʤɡ�
-�����ƥ�Υإå��ե�������¸�ط��˴ޤ�ޤ���
-���� -MM ���ץ����Ǥϡ���#include <...>�פη����ǻ��Ȥ����
-�إå��ե�����򥷥��ƥ�Υإå��ե�����Ȥߤʤ��Ƥ���褦�Ǥ���
+gcc には、-M オプションを改善した -MM というオプションもあります。
+このオプションは、通常更新することのない stdio.h など、
+システムのヘッダファイルを依存関係に含めません。
+この -MM オプションでは、「#include <...>」の形式で参照される
+ヘッダファイルをシステムのヘッダファイルとみなしているようです。
 
-gcc �� -MM ���ץ�����Ȥ����ϡ�
-�ʲ��Υ��ޥ�ɤ�¹Ԥ����Ŭ�ڤ� depend �������Ǥ��ޤ���
+gcc の -MM オプションを使う場合は、
+以下のコマンドを実行すれば適切な depend が生成できます。
 
   $ gcc -MM *.c > depend
 
-�ʤ���depend �ե�������¸�ط��ε��Ұʳ��˻Ȥ��٤��ǤϤ���ޤ���
-mkmf.rb �� depend �ե������ Makefile ��Ϣ�뤹��Ȥ��ˡ�
-�������Ƥ�ù������礬���뤫��Ǥ���
+なお、depend ファイルを依存関係の記述以外に使うべきではありません。
+mkmf.rb が depend ファイルを Makefile に連結するときに、
+その内容を加工する場合があるからです。
 
-=== extconf.rb ���������� make �������å�
+=== extconf.rb が生成する make ターゲット
 
-extconf.rb ���������� Makefile �ˤϰʲ��Υ������åȤ��������Ƥ��ޤ���
+extconf.rb が生成する Makefile には以下のターゲットが定義されています。
 
 : all
-    ��ĥ�饤�֥���������ޤ���
+    拡張ライブラリを作成します。
 
 : clean
-    ����������ĥ�饤�֥�ꡢ���֥������ȥե�����ʤɤ������ޤ���
+    作成した拡張ライブラリ、オブジェクトファイルなどを削除します。
 
 : distclean
 : realclean
-    clean �������åȤ��������ե�����˲ä��ơ�
-    Makefile, extconf.h, core, ruby �ʤɤ������ޤ���
+    clean ターゲットが削除するファイルに加えて、
+    Makefile, extconf.h, core, ruby なども削除します。
 
 : install
 : site-install
-    ����������ĥ�饤�֥��� $sitearchdir �˥��󥹥ȡ��뤷�ޤ���
-    �����ȥǥ��쥯�ȥ�˥ǥ��쥯�ȥ� lib �������
-    �����۲��� ruby ������ץ� (*.rb �ե�����) ��
-    �ǥ��쥯�ȥ곬�ؤ��ݤä��ޤ� $sitelibdir �˥��󥹥ȡ��뤷�ޤ���
+    作成した拡張ライブラリを $sitearchdir にインストールします。
+    カレントディレクトリにディレクトリ lib があれば
+    その配下の ruby スクリプト (*.rb ファイル) を、
+    ディレクトリ階層を保ったまま $sitelibdir にインストールします。
 
 = reopen Kernel
 
@@ -160,13 +160,13 @@ extconf.rb ���������� Makefile �ˤϰʲ��Υ������åȤ��������Ƥ��ޤ���
 --- xsystem(command) -> ()
 #@end
 
-[[m:Kernel.#system]] ��Ʊ���Ǥ��������ޥ�ɤν��Ϥ�(ɸ����ϡ�ɸ�२�顼
-���ϤȤ��)�����ե�����˽��Ϥ��ޤ��������ե�����̾�� mkmf.log �Ǥ���
+[[m:Kernel.#system]] と同じですが、コマンドの出力は(標準出力、標準エラー
+出力ともに)ログファイルに出力します。ログファイル名は mkmf.log です。
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 #@since 1.9.3
-@param opts ���ץ����� [[c:Hash]] �ǻ��ꤷ�ޤ���
-            :werror �Ȥ��������˿�����ꤹ���
+@param opts オプションを [[c:Hash]] で指定します。
+            :werror というキーに真を指定すると
 #@end
 
 @see [[m:Kernel.#system]]
@@ -174,87 +174,87 @@ extconf.rb ���������� Makefile �ˤϰʲ��Υ������åȤ��������Ƥ��ޤ���
 --- xpopen(command, *mode) -> IO
 --- xpopen(command, *mode){ ... } -> opbject
 
-command ��ɽ�����Ƥ��� [[m:IO.popen]] �μ¹Ԥ��ޤ���
+command を表示してから [[m:IO.popen]] の実行します。
 
-@param command ���ޥ��̾����ꤷ�ޤ���
+@param command コマンド名を指定します。
 
-@param mode �����ץ󤹤� IO �ݡ��ȤΥ⡼�ɤ���ꤷ�ޤ���mode �ξܺ٤� [[m:Kernel.#open]] ���Ȥ��Ʋ�������
+@param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 
 @see [[m:IO.popen]]
 
 --- log_src(src) -> ()
 
-Ϳ����줿 C �ץ������Υ����������ɤ�������Ϥ��ޤ���
+与えられた C プログラムのソースコードをログ出力します。
 
-@param src C �ץ������Υ����������ɤ���ꤷ�ޤ���
+@param src C プログラムのソースコードを指定します。
 
 --- create_tmpsrc(src) -> String
 
-Ϳ����줿 C �ץ������Υ����������ɤ����ե�����˽��Ϥ���Ϳ����줿�����������ɤ��֤��ޤ���
+与えられた C プログラムのソースコードを一時ファイルに出力して与えられたソースコードを返します。
 
-@param src C �ץ������Υ����������ɤ���ꤷ�ޤ���
+@param src C プログラムのソースコードを指定します。
 
 #@# --- try_link0(src[, opt])
 #@# nodoc
 
 --- have_devel? -> bool
 
-��ȯ�Ķ������󥹥ȡ��뤵��Ƥ��뤫�ɤ����������뤿��˲��⤷�ʤ��¹ԥե�
-�����������褦�Ȼ�ߤޤ��������������ϡ������֤��ޤ������Ԥ������
-�ϡ������֤��ޤ���
+開発環境がインストールされているかどうか検査するために何もしない実行ファ
+イルを作成しようと試みます。成功した場合は、真を返します。失敗した場合
+は、偽を返します。
 
 --- try_do(src, command, *opts) -> ()
 --- try_do(src, command, *opts){ ... } -> ()
 
-@param src C �ץ������Υ����������ɤ���ꤷ�ޤ���
+@param src C プログラムのソースコードを指定します。
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 
-@param opts ���ץ����� [[c:Hash]] �ǻ��ꤷ�ޤ���
+@param opts オプションを [[c:Hash]] で指定します。
 
-@raise RuntimeError ��ȯ�Ķ������󥹥ȡ��뤵��Ƥ��ʤ�����ȯ�����ޤ���
+@raise RuntimeError 開発環境がインストールされていない場合に発生します。
 
 @see [[m:Kernel#xsystem]]
 
 --- link_command(ldflags, opt = "", libpath = $DEFLIBPATH|$LIBPATH) -> String
 
-�ºݤ˥�󥯤���ݤ˻��Ѥ��륳�ޥ�ɤ��֤��ޤ���
+実際にリンクする際に使用するコマンドを返します。
 
-@param ldflags LDFLAGS ���ɲä����ͤ���ꤷ�ޤ���
+@param ldflags LDFLAGS に追加する値を指定します。
 
-@param opt LIBS ���ɲä����ͤ���ꤷ�ޤ���
+@param opt LIBS に追加する値を指定します。
 
-@param libpath LIBPATH �˻��ꤹ���ͤ���ꤷ�ޤ���
+@param libpath LIBPATH に指定する値を指定します。
 
 @see [[m:RbConfig.expand]]
 
 --- cc_command(opt = "") -> String
 
-�ºݤ˥���ѥ��뤹��ݤ˻��Ѥ��륳�ޥ�ɤ��֤��ޤ���
+実際にコンパイルする際に使用するコマンドを返します。
 
-@param opt ����ѥ����Ϳ�����ɲäΥ��ޥ�ɥ饤���������ꤷ�ޤ���
+@param opt コンパイラに与える追加のコマンドライン引数を指定します。
 
 @see [[m:RbConfig.expand]]
 
 --- cpp_command(outfile, opt = "") -> String
 
-�ºݤ˥ץ�ץ����å���¹Ԥ���ݤ˻��Ѥ��륳�ޥ�ɤ��֤��ޤ���
+実際にプリプロセッサを実行する際に使用するコマンドを返します。
 
-@param outfile ���ϥե������̾������ꤷ�ޤ���
+@param outfile 出力ファイルの名前を指定します。
 
-@param opt �ץ�ץ����å���Ϳ�����ɲäΥ��ޥ�ɥ饤���������ꤷ�ޤ���
+@param opt プリプロセッサに与える追加のコマンドライン引数を指定します。
 
 @see [[m:RbConfig.expand]]
 
 --- libpathflag(libpath = $DEFLIBPATH|$LIBPATH) -> String
 
-Ϳ����줿 libpath �� -L �դ���ʸ������Ѵ������֤��ޤ���
+与えられた libpath を -L 付きの文字列に変換して返します。
 
-@param libpath LIBPATH �˻��ꤹ���ͤ���ꤷ�ޤ���
+@param libpath LIBPATH に指定する値を指定します。
 
 --- with_werror(opt, opts = nil){|opt| ... } -> object
 --- with_werror(opt, opts = nil){|opt, opts| ... } -> object
-#@todo �����ѡ�
+#@todo 内部用？
 
 ???
 
@@ -262,56 +262,56 @@ command ��ɽ�����Ƥ��� [[m:IO.popen]] �μ¹Ԥ��ޤ���
 
 @param opts ????
 
-@return �֥��å���ɾ��������̤��֤��ޤ���
+@return ブロックを評価した結果を返します。
 
 --- rm_f(*files) -> ()
 
-[[m:FileUtils.#rm_f]] �Υ�åѡ��᥽�åɤǤ���
+[[m:FileUtils.#rm_f]] のラッパーメソッドです。
 
-@param files �ե�����Υꥹ�Ȥ���[[m:Dir.glob]]�����ѤǤ��� glob �ѥ��������ꤷ�ޤ���
-             �Ǹ�����Ǥ� [[c:Hash]] �ξ��� [[m:FileUtils.#rm_f]] ����������ˤʤ�ޤ���
+@param files ファイルのリストか、[[m:Dir.glob]]で利用できる glob パターンを指定します。
+             最後の要素が [[c:Hash]] の場合は [[m:FileUtils.#rm_f]] の第二引数になります。
 
 @see [[m:FileUtils.#rm_f]], [[m:Dir.glob]]
 
 --- rm_rf(*files) -> ()
 
-[[m:FileUtils.#rm_rf]] �Υ�åѡ��᥽�åɤǤ���
+[[m:FileUtils.#rm_rf]] のラッパーメソッドです。
 
-@param files �ե�����Υꥹ�Ȥ���[[m:Dir.glob]]�����ѤǤ��� glob �ѥ��������ꤷ�ޤ���
-             �Ǹ�����Ǥ� [[c:Hash]] �ξ��� [[m:FileUtils.#rm_f]] ����������ˤʤ�ޤ���
+@param files ファイルのリストか、[[m:Dir.glob]]で利用できる glob パターンを指定します。
+             最後の要素が [[c:Hash]] の場合は [[m:FileUtils.#rm_f]] の第二引数になります。
 
 @see [[m:FileUtils.#rm_rf]], [[m:Dir.glob]]
 
 --- modified?(target, times) -> Time | nil
 
-target �� times �����Ƥ����Ǥ��⿷�������� target �ι���������֤��ޤ���
-�����Ǥʤ����� nil ���֤��ޤ���target ��¸�ߤ��ʤ����� nil ���֤��ޤ���
+target が times の全ての要素よりも新しい場合は target の更新時刻を返します。
+そうでない場合は nil を返します。target が存在しない場合も nil を返します。
 
-@param target �оݤΥե�����̾����ꤷ�ޤ���
+@param target 対象のファイル名を指定します。
 
-@param times [[c:Time]] ������ [[c:Time]] ���Ļ��ꤷ�ޤ���
+@param times [[c:Time]] の配列か [[c:Time]] を一つ指定します。
 
 --- merge_libs(*libs) -> [String]
-#@todo �Ȥ��Ƥʤ�
+#@todo 使われてない
 
 @param libs ???
 
 --- try_link(src, opt = "", *options) -> bool
 --- try_link(src, opt = "", *options){ ... } -> bool
 
-C �ץ������Υ����������� src �򥳥�ѥ��롢��󥯤��ޤ���
+C プログラムのソースコード src をコンパイル、リンクします。
 
-���Υ᥽�åɤ� [[m:$CFLAGS]] �� [[m:$LDFLAGS]] ���ͤ⥳��ѥ���ޤ��ϥ�
-�󥫤��Ϥ��ޤ���
+このメソッドは [[m:$CFLAGS]] と [[m:$LDFLAGS]] の値もコンパイラまたはリ
+ンカに渡します。
 
-����ʤ���󥯤Ǥ����� true ���֤��ޤ���
-����ѥ���ȥ�󥯤˼��Ԥ����� false ���֤��ޤ���
+問題なくリンクできたら true を返します。
+コンパイルとリンクに失敗したら false を返します。
 
-@param src C �ץ������Υ����������ɤ���ꤷ�ޤ���
+@param src C プログラムのソースコードを指定します。
 
-@param opt ��󥫤˥��ޥ�ɰ����Ȥ����Ϥ��ͤ���ꤷ�ޤ���
+@param opt リンカにコマンド引数として渡す値を指定します。
 
-�㡧
+例：
 
   if try_link("int main() { sin(0.0); }", '-lm')
     $stderr.puts "sin() exists"
@@ -320,21 +320,21 @@ C �ץ������Υ����������� src �򥳥�ѥ��롢��󥯤��ޤ���
 --- try_cpp(src, opt = "", *opts) -> bool
 --- try_cpp(src, opt = "", *opts){ ... } -> bool
 
-C �ץ������Υ����������� src ��ץ�ץ��������ޤ���
+C プログラムのソースコード src をプリプロセスします。
 
-[[m:$CPPFLAGS]], [[m:$CFLAGS]] ���ͤ�ץ�ץ����å��˥��ޥ�ɥ饤�����
-�Ȥ����Ϥ��ޤ���
+[[m:$CPPFLAGS]], [[m:$CFLAGS]] の値もプリプロセッサにコマンドライン引数
+として渡します。
 
-���Υ᥽�åɤϥإå��ե������¸�ߥ����å��ʤɤ˻��Ѥ��ޤ���
+このメソッドはヘッダファイルの存在チェックなどに使用します。
 
-@param src C �ץ������Υ����������ɤ���ꤷ�ޤ���
+@param src C プログラムのソースコードを指定します。
 
-@param opt �ץ�ץ����å��˥��ޥ�ɥ饤������Ȥ����Ϥ��ͤ���ꤷ�ޤ���
+@param opt プリプロセッサにコマンドライン引数として渡す値を指定します。
 
-@return ����ʤ��ץ�ץ������Ǥ����� true ���֤��ޤ���
-        �ץ�ץ������˼��Ԥ����� false ���֤��ޤ���
+@return 問題なくプリプロセスできたら true を返します。
+        プリプロセスに失敗したら false を返します。
 
-�㡧
+例：
 
   if try_cpp("#include <stdio.h>")
     $stderr.puts "stdio.h exists"
@@ -343,147 +343,147 @@ C �ץ������Υ����������� src ��ץ�ץ��������ޤ���
 --- egrep_cpp(pattern, src, opt = "") -> bool
 --- egrep_cpp(pattern, src, opt = ""){ ... } -> bool
 
-C �ץ������Υ����������� src ��ץ�ץ���������
-���η�̤�����ɽ�� pattern �˥ޥå����뤫�ɤ�����Ƚ�ꤷ�ޤ���
+C プログラムのソースコード src をプリプロセスし、
+その結果が正規表現 pattern にマッチするかどうかを判定します。
 
   CPP $CFLAGS opt | egrep pat
 
-��¹Ԥ������η�̤����狼�ɤ����� true �ޤ��� false ���֤��ޤ���
+を実行し、その結果が正常かどうかを true または false で返します。
 
-���Υ᥽�åɤϥإå��ե�����˴ؿ��ʤɤ���������뤫�ɤ���
-�������뤿��˻��Ѥ��ޤ���
+このメソッドはヘッダファイルに関数などの宣言があるかどうか
+検査するために使用します。
 
-@param pattern ��egrep �Ρ�����ɽ����ʸ����ǻ��ꤷ�ޤ���
-                Ruby ������ɽ���ǤϤ���ޤ���
+@param pattern 「egrep の」正規表現を文字列で指定します。
+                Ruby の正規表現ではありません。
 
-@param src C ����Υ����������ɤ�ʸ����ǵ��Ҥ��ޤ���
+@param src C 言語のソースコードを文字列で記述します。
 
 @see [[man:egrep(1)]]
 
 --- try_run(src, opt = "") -> bool
 --- try_run(src, opt = ""){ ... } -> bool
 
-C �ץ������Υ����������� src �򥳥�ѥ��뤷��
-���������¹ԥե������¹Ԥ��ޤ���
+C プログラムのソースコード src をコンパイルし、
+生成した実行ファイルを実行します。
 
-���������¹ԥե����뤬����˼¹ԤǤ���� true ���֤��ޤ���
-�¹Ԥ����Ԥ������� false ���֤��ޤ���
+生成した実行ファイルが正常に実行できれば true を返します。
+実行が失敗した場合は false を返します。
 
-@param src C ����Υ����������ɤ�ʸ����ǵ��Ҥ��ޤ���
+@param src C 言語のソースコードを文字列で記述します。
 
-@param opt C ����ѥ���Υ��ץ�������ꤷ�ޤ���
+@param opt C コンパイラのオプションを指定します。
 
 --- install_rb(mfile, dest, srcdir = nil) -> Array
 
-���Υ᥽�åɤ� create_makefile �����Ѥ��ޤ���
-�����ѤΥ᥽�åɤǤ���
+このメソッドは create_makefile が使用します。
+内部用のメソッドです。
 
-�ǥ��쥯�ȥ� srcdir/lib �۲��� Ruby ������ץ� (*.rb �ե�����)
-�� dest �˥��󥹥ȡ��뤹�뤿��� Makefile ��§�� mfile �˽��Ϥ��ޤ���
+ディレクトリ srcdir/lib 配下の Ruby スクリプト (*.rb ファイル)
+を dest にインストールするための Makefile 規則を mfile に出力します。
 
-srcdir/lib �Υǥ��쥯�ȥ깽¤�Ϥ��Τޤ� dest �۲���ȿ�Ǥ���ޤ���
+srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 
-@param mfile Makefile ��ɽ�� [[c:File]] �Υ��󥹥��󥹤Ǥ���
+@param mfile Makefile を表す [[c:File]] のインスタンスです。
 
-@param dest ���󥹥ȡ��뤹����Υǥ��쥯�ȥ����ꤷ�ޤ���
+@param dest インストールする先のディレクトリを指定します。
 
-@param srcdir �������ǥ��쥯�ȥ����ꤷ�ޤ���
+@param srcdir ソースディレクトリを指定します。
 
 #@# --- append_library(libs, lib)
 #@#  nodoc
 #@# 
-#@# �饤�֥��Υꥹ�� libs ����Ƭ�˥饤�֥�� lib ���ɲä���
-#@# ���η�̤��֤��ޤ���
+#@# ライブラリのリスト libs の先頭にライブラリ lib を追加し、
+#@# その結果を返します。
 #@# 
-#@# ���� libs �Ȥ��Υ᥽�åɤ�����ͤ�
-#@# ��󥫤��Ϥ�����������ʸ����Ǥ���
-#@# ���ʤ����UNIX �� OS �Ǥ�
+#@# 引数 libs とこのメソッドの戻り値は
+#@# リンカに渡す引数形式の文字列です。
+#@# すなわち、UNIX 系 OS では
 #@# 
 #@#   "-lfoo -lbar"
 #@# 
-#@# �Ǥ��ꡢMS Windows �ʤɤǤ�
+#@# であり、MS Windows などでは
 #@# 
 #@#   "foo.lib bar.lib"
 #@# 
-#@# �Ǥ���
-#@# �� 2 ���� lib �ϡ�������Ǥ� "foo" �� "bar" �ˤ�����ޤ���
+#@# です。
+#@# 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
 --- have_macro(macro, headers = nil, opt = "") -> bool
 --- have_macro(macro, headers = nil, opt = ""){ ... } -> bool
 
-Ϳ����줿 macro �����̤Υإå��ե����뤫 headers ���������Ƥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+与えられた macro が共通のヘッダファイルか headers に定義されている場合は真を返します。
+そうでない場合は偽を返します。
 
-@param macro �ޥ�����̾������ꤷ�ޤ���
+@param macro マクロの名前を指定します。
 
-@param headers �ɲäΥإå��ե��������ꤷ�ޤ���
+@param headers 追加のヘッダファイルを指定します。
 
-@param opt C ����ѥ�����Ϥ����ޥ�ɥ饤���������ꤷ�ޤ���
+@param opt C コンパイラに渡すコマンドライン引数を指定します。
 
 --- have_library(lib, func = nil, headers = nil) -> bool
 --- have_library(lib, func = nil, headers = nil){ ... } -> bool
 
-�饤�֥�� lib �������ƥ��¸�ߤ����ؿ� func ���������Ƥ��뤫�ɤ���������å����ޤ���
-�����å������������ [[m:$libs]] �� lib ���ɲä� true ���֤��ޤ���
-�����å������Ԥ����� false ���֤��ޤ���
+ライブラリ lib がシステムに存在し、関数 func が定義されているかどうかをチェックします。
+チェックが成功すれば [[m:$libs]] に lib を追加し true を返します。
+チェックが失敗したら false を返します。
 
-@param lib �饤�֥���̾������ꤷ�ޤ���
+@param lib ライブラリの名前を指定します。
 
-@param func ��������ؿ�̾����ꤷ�ޤ���
-            nil �ޤ��϶�ʸ����ΤȤ��ϡ�"main" �ˤʤ�ޤ���
+@param func 検査する関数名を指定します。
+            nil または空文字列のときは、"main" になります。
 
-@param headers �ɲäΥإå��ե��������ꤷ�ޤ���
+@param headers 追加のヘッダファイルを指定します。
 
 --- find_library(lib, func, *paths) -> bool
 --- find_library(lib, func, *paths){ ... } -> bool
 
-�ؿ� func ��������줿�饤�֥�� lib ��õ���ޤ���
+関数 func が定義されたライブラリ lib を探します。
 
-�ǽ�ϥѥ�����ꤻ����õ����
-����˼��Ԥ����� paths[0] ����ꤷ��õ����
-����ˤ⼺�Ԥ����� paths[1] ����ꤷ��õ���ġ�
-�Ȥ����褦�ˡ���󥯲�ǽ�ʥ饤�֥���õ�����ޤ���
+最初はパスを指定せずに探し、
+それに失敗したら paths[0] を指定して探し、
+それにも失敗したら paths[1] を指定して探し……
+というように、リンク可能なライブラリを探索します。
 
-�嵭��õ���ǥ饤�֥�� lib ��ȯ���Ǥ������� lib �� [[m:$libs]] ���ɲä���
-���Ĥ��ä��ѥ��� [[m:$LDFLAGS]] ���ɲä��� true ���֤��ޤ���
-���ꤵ�줿���٤ƤΥѥ��򸡺����Ƥ�饤�֥�� lib �����Ĥ���ʤ��Ȥ��ϡ�
-�ѿ����ѹ����� false ���֤��ޤ���
+上記の探索でライブラリ lib を発見できた場合は lib を [[m:$libs]] に追加し、
+見つかったパスを [[m:$LDFLAGS]] に追加して true を返します。
+指定されたすべてのパスを検査してもライブラリ lib が見つからないときは、
+変数を変更せず false を返します。
 
-paths ����ꤷ�ʤ��Ȥ��� [[m:Kernel#have_library]] ��Ʊ��ư��Ǥ���
+paths を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
 
-@param lib �饤�֥��̾����ꤷ�ޤ���
+@param lib ライブラリ名を指定します。
 
-@param func �ؿ�̾����ꤷ�ޤ���
-            nil �ޤ��϶�ʸ�������ꤷ������ "main" �ˤʤ�ޤ���
+@param func 関数名を指定します。
+            nil または空文字列を指定した場合は "main" になります。
 
-@param paths �饤�֥��򸡺�����ѥ���ʸ���������ǻ��ꤷ�ޤ���
+@param paths ライブラリを検索するパスを文字列の配列で指定します。
 
 --- find_header(header, *paths) -> bool
 
-Ϳ����줿 paths ���� header �򸡺��������Ĥ��ä����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+与えられた paths から header を検索し、見つかった場合は真を返します。
+そうでない場合は偽を返します。
 
-�إå������Ĥ��ä��ǥ��쥯�ȥ�򥳥�ѥ�����Ϥ����ޥ�ɥ饤�󥪥ץ���
-����ɲä��ޤ�(-I ���ץ������ͳ���ޤ�)��
+ヘッダが見つかったディレクトリをコンパイラに渡すコマンドラインオプショ
+ンに追加します(-I オプションを経由します)。
 
-@param header �إå�����ꤷ�ޤ���
+@param header ヘッダを指定します。
 
-@param paths �إå��򸡺�����ѥ�����ꤷ�ޤ���
+@param paths ヘッダを検索するパスを指定します。
 
 --- have_func(func, headers = nil) -> bool
 --- have_func(func, headers = nil){ ... } -> bool
 
-�ؿ� func �������ƥ��¸�ߤ��뤫�ɤ����򸡺����ޤ���
+関数 func がシステムに存在するかどうかを検査します。
 
-�ؿ� func ��¸�ߤ���� [[m:$defs]] �� "-DHAVE_func" (func ����ʸ������
-������ޤ�) ���ɲä��� true ���֤��ޤ����ؿ� func �����Ĥ���ʤ��Ȥ���
-�������Х��ѿ����ѹ����� false ���֤��ޤ���
+関数 func が存在すれば [[m:$defs]] に "-DHAVE_func" (func は大文字に変
+換されます) を追加して true を返します。関数 func が見つからないときは
+グローバル変数を変更せず false を返します。
 
-@param func �ؿ�̾����ꤷ�ޤ���
+@param func 関数名を指定します。
 
-@param headers �ؿ� func ����Ѥ���Τ�ɬ�פʥإå��ե�����̾����ꤷ��
-               ��������ϴؿ��η�������å����뤿��ǤϤʤ����ؿ����º�
-               �ˤϥޥ������������Ƥ�����ʤɤΤ���˻��Ѥ��ޤ���
+@param headers 関数 func を使用するのに必要なヘッダファイル名を指定しま
+               す。これは関数の型をチェックするためではなく、関数が実際
+               にはマクロで定義されている場合などのために使用します。
 
 #@since 1.9.2
 --- have_header(header, preheaders = nil) -> bool
@@ -493,137 +493,137 @@ paths ����ꤷ�ʤ��Ȥ��� [[m:Kernel#have_library]] ��Ʊ��ư��Ǥ���
 --- have_header(header, preheaders = nil){ ... } -> bool
 #@end
 
-�إå��ե����� header �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
+ヘッダファイル header がシステムに存在するかどうか検査します。
 
-�إå��ե����� header ��¸�ߤ�����ϡ��������Х��ѿ� [[m:$defs]] ��
-"-DHAVE_header" ���ɲä��� true ���֤��ޤ����إå��ե����� header ��¸
-�ߤ��ʤ����� $defs ���ѹ����� false ���֤��ޤ���
+ヘッダファイル header が存在する場合は、グローバル変数 [[m:$defs]] に
+"-DHAVE_header" を追加して true を返します。ヘッダファイル header が存
+在しない場合は $defs は変更せず false を返します。
 
-@param header �����������إå��ե��������ꤷ�ޤ���
+@param header 検査したいヘッダファイルを指定します。
 
 #@since 1.9.2
-@param preheaders �إå��ե�����򸡺����������ɤ߹���Ǥ����إå��ե��������ꤷ�ޤ���
+@param preheaders ヘッダファイルを検査する前に読み込んでおくヘッダファイルを指定します。
 #@end
 
 --- have_struct_member(type, member, headers = nil) -> bool
 --- have_struct_member(type, member, headers = nil){ ... } -> bool
 
-member �Ȥ������Ф���Ĺ�¤�� type �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
+member というメンバを持つ構造体 type がシステムに存在するかどうか検査します。
 
-member �Ȥ������Ф���Ĺ�¤�� type �������ƥ��¸�ߤ�����ϡ�
-�������Х��ѿ� [[m:$defs]] �� "-DHAVE_type_member" ���ɲä��������֤��ޤ���
-member �Ȥ������Ф���Ĺ�¤�� type ��¸�ߤ��ʤ����ϡ������֤��ޤ���
+member というメンバを持つ構造体 type がシステムに存在する場合は、
+グローバル変数 [[m:$defs]] に "-DHAVE_type_member" を追加し、真を返します。
+member というメンバを持つ構造体 type が存在しない場合は、偽を返します。
 
-�㤨��
+例えば
 
   have_struct_member('struct foo', 'bar') # => true
 
 #@since 1.9.1
-�Ǥ����硢HAVE_STRUCT_FOO_BAR �Ȥ����ץ�ץ����å��ޥ����򥳥�ѥ�����Ϥ��ޤ���
-�ޤ��������ߴ����Τ���� HAVE_ST_BAR �Ȥ����ץ�ץ����å��ޥ�����������ޤ���
+である場合、HAVE_STRUCT_FOO_BAR というプリプロセッサマクロをコンパイラに渡します。
+また、後方互換性のために HAVE_ST_BAR というプリプロセッサマクロも定義します。
 #@else
-�Ǥ����硢HAVE_ST_BAR �Ȥ����ץ�ץ����å��ޥ����򥳥�ѥ�����Ϥ��ޤ���
+である場合、HAVE_ST_BAR というプリプロセッサマクロをコンパイラに渡します。
 #@end
 
-@param type ������������¤�Τ�̾������ꤷ�ޤ���
+@param type 検査したい構造体の名前を指定します。
 
-@param member ������������¤�ΤΥ��Ф�̾������ꤷ�ޤ���
+@param member 検査したい構造体のメンバの名前を指定します。
 
-@param headers �ɲäΥإå��ե��������ꤷ�ޤ���
+@param headers 追加のヘッダファイルを指定します。
 
 --- have_type(type, headers = nil, opt = "") -> bool
 --- have_type(type, headers = nil, opt = ""){ ... } -> bool
 
-��Ū�ʷ� type �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
+静的な型 type がシステムに存在するかどうか検査します。
 
-�� type �������ƥ��¸�ߤ�����ϡ��������Х��ѿ� [[m:$defs]] ��
-"-DHAVE_type" ���ɲä��������֤��ޤ����� type �������ƥ��¸�ߤ��ʤ���
-��ϡ������֤��ޤ���
+型 type がシステムに存在する場合は、グローバル変数 [[m:$defs]] に
+"-DHAVE_type" を追加し、真を返します。型 type がシステムに存在しない場
+合は、偽を返します。
 
-�㤨�С�
+例えば、
 
   have_type('foo') # => true
 
-�Ǥ����硢HAVE_TYPE_FOO ��Ȥ����ץ�ץ����å��ޥ����򥳥�ѥ�����Ϥ��ޤ���
+である場合、HAVE_TYPE_FOO をというプリプロセッサマクロをコンパイラに渡します。
 
-@param type ��������������̾������ꤷ�ޤ���
+@param type 検査したい型の名前を指定します。
 
-@param headers �ɲäΥإå�����ꤷ�ޤ���
+@param headers 追加のヘッダを指定します。
 
-@param opt ����ѥ�����Ϥ��ɲäΥ��ץ�������ꤷ�ޤ���
+@param opt コンパイラに渡す追加のオプションを指定します。
 
 --- find_type(type, opt, *headers) -> Array
 --- find_type(type, opt, *headers){ ... } -> Array
 
-��Ū�ʷ� type �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
+静的な型 type がシステムに存在するかどうか検査します。
 
-@param type ��������������̾������ꤷ�ޤ���
+@param type 検査したい型の名前を指定します。
 
-@param opt ����ѥ�����Ϥ��ɲäΥ��ץ�������ꤷ�ޤ���
+@param opt コンパイラに渡す追加のオプションを指定します。
 
-@param headers �ɲäΥإå�����ꤷ�ޤ���
+@param headers 追加のヘッダを指定します。
 
 @see [[m:Kernel#have_type]] 
 
 --- have_var(var, headers = nil) -> bool
 --- have_var(var, headers = nil){ ... } -> bool
 
-�ѿ� var �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
+変数 var がシステムに存在するかどうか検査します。
 
-�ѿ� var �������ƥ��¸�ߤ�����ϡ��������Х��ѿ� [[m:$defs]] ��
-"-DHAVE_var" ���ɲä��������֤��ޤ����ѿ� var �������ƥ��¸�ߤ��ʤ���
-��ϡ������֤��ޤ���
+変数 var がシステムに存在する場合は、グローバル変数 [[m:$defs]] に
+"-DHAVE_var" を追加し、真を返します。変数 var がシステムに存在しない場
+合は、偽を返します。
 
-�㤨�С�
+例えば、
 
   have_var('foo') # => true
 
-�Ǥ����硢HAVE_FOO �Ȥ����ץ�ץ����å��ޥ����򥳥�ѥ�����Ϥ��ޤ���
+である場合、HAVE_FOO というプリプロセッサマクロをコンパイラに渡します。
 
-@param var �����������ѿ�̾����ꤷ�ޤ���
+@param var 検査したい変数名を指定します。
 
-@param headers �ɲäΥإå�����ꤷ�ޤ���
+@param headers 追加のヘッダを指定します。
 
 #@since 1.9.3
 --- have_framework(framework) -> bool
 --- have_framework(framework){ ... } -> bool
 
-�ե졼���� framework �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
+フレームワーク framework がシステムに存在するかどうか検査します。
 
-�ե졼���� framework �������ƥ��¸�ߤ�����ϡ��������Х��ѿ�
-[[m:$defs]] �� "-DHAVE_FRAMEWORK_framework" ���ɲä��������֤��ޤ�����
-�����������Х��ѿ� [[m:$LDFLAGS]] �� "-framework #{framework}" ���ɲä�
-�ޤ��� �ե졼���� framework �������ƥ��¸�ߤ��ʤ����ϡ������֤�
-�ޤ���
+フレームワーク framework がシステムに存在する場合は、グローバル変数
+[[m:$defs]] に "-DHAVE_FRAMEWORK_framework" を追加し、真を返します。ま
+た、グローバル変数 [[m:$LDFLAGS]] に "-framework #{framework}" を追加し
+ます。 フレームワーク framework がシステムに存在しない場合は、偽を返し
+ます。
 
-�㤨�С�
+例えば、
 
   have_framework('Ruby') # => true
 
-�Ǥ����硢HAVE_FRAMEWORK_RUBY �Ȥ����ץ�ץ����å��ޥ����򥳥�ѥ�����Ϥ��ޤ���
+である場合、HAVE_FRAMEWORK_RUBY というプリプロセッサマクロをコンパイラに渡します。
 
-@param framework �ե졼������̾������ꤷ�ޤ���
+@param framework フレームワークの名前を指定します。
 
 #@end
 
 --- check_sizeof(type, headers = nil) -> Integer | nil
 --- check_sizeof(type, headers = nil){ ... } -> Integer | nil
 
-Ϳ����줿���Υ��������֤��ޤ���
+与えられた型のサイズを返します。
 
-�� type �������ƥ��¸�ߤ�����ϡ��������Х��ѿ� [[m:$defs]] ��
-"-DSIZEOF_type=X" ���ɲä������Υ��������֤��ޤ����� type �������ƥ��
-¸�ߤ��ʤ����ϡ�nil ���֤��ޤ���
+型 type がシステムに存在する場合は、グローバル変数 [[m:$defs]] に
+"-DSIZEOF_type=X" を追加し、型のサイズを返します。型 type がシステムに
+存在しない場合は、nil を返します。
 
-�㤨�С�
+例えば、
 
   check_sizeof('mystruct') # => 12
 
-�Ǥ����硢SIZEOF_MYSTRUCT=12 �Ȥ����ץ�ץ����å��ޥ����򥳥�ѥ�����Ϥ��ޤ���
+である場合、SIZEOF_MYSTRUCT=12 というプリプロセッサマクロをコンパイラに渡します。
 
-@param type ����������������ꤷ�ޤ���
+@param type 検査したい型を指定します。
 
-@param headers �ɲäΥإå��ե��������ꤷ�ޤ���
+@param headers 追加のヘッダファイルを指定します。
 
 #@since 1.9.3
 --- check_signedness(type, headers = nil, opts = nil) -> "signed" | "unsigned" | nil
@@ -676,32 +676,32 @@ member �Ȥ������Ф���Ĺ�¤�� type ��¸�ߤ��ʤ����ϡ������֤��ޤ���
 #@# --- arg_config(config, default){ ... }
 #@# nodoc
 #@# 
-#@# configure ���ץ���� --config ���ͤ��֤��ޤ���
-#@# ���ץ���󤬻��ꤵ��Ƥ��ʤ��Ȥ����� 2 ���� default ���֤��ޤ���
+#@# configure オプション --config の値を返します。
+#@# オプションが指定されていないときは第 2 引数 default を返します。
 #@# 
-#@# �㤨�� extconf.rb �� arg_config �᥽�åɤ�Ȥ���硢
+#@# 例えば extconf.rb で arg_config メソッドを使う場合、
 #@# 
 #@#   $ ruby extconf.rb --foo --bar=baz
 #@# 
-#@# �ȼ¹Ԥ����Ȥ���arg_config("--foo") ���ͤ� true��
-#@# arg_config("--bar") ���ͤ� "baz" �Ǥ���
+#@# と実行したとき、arg_config("--foo") の値は true、
+#@# arg_config("--bar") の値は "baz" です。
 
 --- with_config(config, default = nil) -> bool | String
 --- with_config(config, default = nil){|config, default| ... } -> bool | String
 
-configure �Υ��ץ����򸡺����ޤ���
+configure のオプションを検査します。
 
-configure �Υ��ץ����� --with-<config> �����ꤵ�줿���Ͽ����֤���
-����--without-<config> �����ꤵ�줿���ϵ����֤��ޤ����ɤ���Ǥ�ʤ���
-��� default ���֤��ޤ���
+configure のオプションに --with-<config> が指定された場合は真を返しま
+す。--without-<config> が指定された場合は偽を返します。どちらでもない場
+合は default を返します。
 
-����ϥǥХå�����ʤɤΥ�������������ɲä���Τ���Ω���ޤ���
+これはデバッグ情報などのカスタム定義を、追加するのに役立ちます。
 
-@param config configure �Υ��ץ�����̾������ꤷ�ޤ���
+@param config configure のオプションの名前を指定します。
 
-@param default �ǥե�����ͤ��֤��ޤ���
+@param default デフォルト値を返します。
 
-��
+例
   if with_config("debug")
      $defs.push("-DOSSL_DEBUG") unless $defs.include? "-DOSSL_DEBUG"
   end
@@ -709,35 +709,35 @@ configure �Υ��ץ����� --with-<config> �����ꤵ�줿���Ͽ����֤���
 --- enable_config(config, default) -> bool | String
 --- enable_config(config, default){|config, default| ... } -> bool | String
 
-configure �Υ��ץ����򸡺����ޤ���
+configure のオプションを検査します。
 
-configure �Υ��ץ����� --enable-<config> �����ꤵ�줿���ϡ������֤�
-�ޤ���--disable-<config> �����ꤵ�줿���ϡ������֤��ޤ����ɤ���Ǥ��
-������ default ���֤��ޤ���
+configure のオプションに --enable-<config> が指定された場合は、真を返し
+ます。--disable-<config> が指定された場合は。偽を返します。どちらでもな
+い場合は default を返します。
 
-����ϥǥХå�����ʤɤΥ�������������ɲä���Τ���Ω���ޤ���
+これはデバッグ情報などのカスタム定義を、追加するのに役立ちます。
 
-@param config configure �Υ��ץ�����̾������ꤷ�ޤ���
+@param config configure のオプションの名前を指定します。
 
-@param default �ǥե�����ͤ��֤��ޤ���
+@param default デフォルト値を返します。
 
-��
+例
   if enable_config("debug")
      $defs.push("-DOSSL_DEBUG") unless $defs.include? "-DOSSL_DEBUG"
   end
 
 --- create_header(header = "extconf.h") -> String
 
-[[m:Kernel#have_func]], [[m:Kernel#have_header]] �ʤɤθ�����̤򸵤ˡ�
-�إå��ե�������������ޤ���
+[[m:Kernel#have_func]], [[m:Kernel#have_header]] などの検査結果を元に、
+ヘッダファイルを生成します。
 
-���Υ᥽�åɤ� extconf.rb �κǸ�ǸƤӽФ��褦�ˤ��Ƥ���������
+このメソッドは extconf.rb の最後で呼び出すようにしてください。
 
-@param header �إå��ե������̾������ꤷ�ޤ���
+@param header ヘッダファイルの名前を指定します。
 
-@return �إå��ե������̾�����֤��ޤ���
+@return ヘッダファイルの名前を返します。
 
-��
+例
 
   # extconf.rb
   require 'mkmf'
@@ -746,7 +746,7 @@ configure �Υ��ץ����� --enable-<config> �����ꤵ�줿���ϡ������֤�
   create_header
   create_makefile('foo')
 
-��� extconf.rb �ϰʲ��� extconf.h ���������ޤ���
+上の extconf.rb は以下の extconf.h を生成します。
 
   #ifndef EXTCONF_H
   #define EXTCONF_H
@@ -756,108 +756,108 @@ configure �Υ��ץ����� --enable-<config> �����ꤵ�줿���ϡ������֤�
 
 --- dir_config(target, idefault = nil, ldefault = nil) -> [String, String]
 
-configure ���ץ����
+configure オプション
 --with-TARGET-dir,
 --with-TARGET-include,
 --with-TARGET-lib
-��桼���� extconf.rb �˻���Ǥ���褦�ˤ��ޤ���
+をユーザが extconf.rb に指定できるようにします。
 
---with-TARGET-dir ���ץ�����
-�����ƥ�ɸ��ǤϤʤ���
-�إå��ե������饤�֥�꤬����ǥ��쥯�ȥ��ޤȤ�ƻ��ꤹ�뤿��˻Ȥ��ޤ���
-�桼���� extconf.rb �� --with-TARGET-dir=PATH ����ꤷ���Ȥ���
-[[m:$CFLAGS]] �� "-IPATH/include" ��
-[[m:$LDFLAGS]] �� "-LPATH/lib" ��
-���줾���ɲä��ޤ���
+--with-TARGET-dir オプションは
+システム標準ではない、
+ヘッダファイルやライブラリがあるディレクトリをまとめて指定するために使います。
+ユーザが extconf.rb に --with-TARGET-dir=PATH を指定したときは
+[[m:$CFLAGS]] に "-IPATH/include" を、
+[[m:$LDFLAGS]] に "-LPATH/lib" を、
+それぞれ追加します。
 
---with-TARGET-include ���ץ�����
-�����ƥ�ɸ��ǤϤʤ��إå��ե�����Υǥ��쥯�ȥ����ꤹ�뤿��˻Ȥ��ޤ���
-�桼���� extconf.rb �� --with-TARGET-include=PATH ����ꤷ���Ȥ���
-[[m:$CFLAGS]] �� PATH ���ɲä��ޤ���
+--with-TARGET-include オプションは
+システム標準ではないヘッダファイルのディレクトリを指定するために使います。
+ユーザが extconf.rb に --with-TARGET-include=PATH を指定したときは
+[[m:$CFLAGS]] に PATH を追加します。
 
---with-TARGET-lib ���ץ�����
-�����ƥ�ɸ��ǤϤʤ��饤�֥��Υǥ��쥯�ȥ����ꤹ�뤿��˻Ȥ��ޤ���
-�桼���� extconf.rb �� --with-TARGET-lib=PATH ����ꤷ���Ȥ���
-[[m:$CFLAGS]] �� PATH ���ɲä��ޤ���
+--with-TARGET-lib オプションは
+システム標準ではないライブラリのディレクトリを指定するために使います。
+ユーザが extconf.rb に --with-TARGET-lib=PATH を指定したときは
+[[m:$CFLAGS]] に PATH を追加します。
 
-@param target �������åȤ�̾������ꤷ�ޤ���
+@param target ターゲットの名前を指定します。
 
-@param idefault �����ƥ�ɸ��ǤϤʤ��إå��ե�����Υǥ��쥯�ȥ�Υǥե�����ͤ���ꤷ�ޤ���
+@param idefault システム標準ではないヘッダファイルのディレクトリのデフォルト値を指定します。
 
-@param ldefault �����ƥ�ɸ��ǤϤʤ��饤�֥��Υǥ��쥯�ȥ�Υǥե�����ͤ���ꤷ�ޤ���
+@param ldefault システム標準ではないライブラリのディレクトリのデフォルト値を指定します。
 
-��
-  # xml2 �� configure ���ץ��������Ǥ���褦�ˤ��ޤ���
+例
+  # xml2 の configure オプションを指定できるようにします。
   xml2_dirs = dir_config('xml2', '/opt/local/include/libxml2', '/opt/local/lib')
 
 --- create_makefile(target, srcprefix = nil) -> true
 #@todo
 
-[[m:Kernel#have_library]] �ʤɤγƼ︡���η�̤򸵤ˡ���ĥ�饤�֥���
-�ӥ�ɤ��뤿��� Makefile ���������ޤ���
+[[m:Kernel#have_library]] などの各種検査の結果を元に、拡張ライブラリを
+ビルドするための Makefile を生成します。
 
-extconf.rb �����̤��Υ᥽�åɤθƤӽФ��ǽ���ޤ���
+extconf.rb は普通このメソッドの呼び出しで終ります。
 
-@param target �������åȤȤʤ��ĥ�饤�֥���̾������ꤷ�ޤ���
-              �㤨�С���ĥ�饤�֥��� "Init_foo" �Ȥ����ؿ����������
-              ������ϡ�"foo" ����ꤷ�ޤ���
-              '/' ��ޤ���ϡ��Ǹ�Υ���å���ʹߤΤߤ򥿡����å�̾
-              �Ȥ��ƻ��Ѥ��ޤ����Ĥ�ϥȥåץ�٥�Υǥ��쥯�ȥ�̾�ȸ�
-              �ʤ��졢�������줿 Makefile �Ϥ��Υǥ��쥯�ȥ깽¤�˽���
-              �ޤ���
-              �㤨�С�'test/foo' ����ꤷ����硢��ĥ�饤�֥���
-              'test' �ǥ��쥯�ȥ�˥��󥹥ȡ��뤵��ޤ������γ�ĥ�饤��
-              ���� Ruby ������ץȤ�����Ѥ���Ȥ���
-              "require 'test/foo'" �Ȥ���ɬ�פ�����ޤ���
+@param target ターゲットとなる拡張ライブラリの名前を指定します。
+              例えば、拡張ライブラリで "Init_foo" という関数を定義して
+              いる場合は、"foo" を指定します。
+              '/' を含む場合は、最後のスラッシュ以降のみをターゲット名
+              として使用します。残りはトップレベルのディレクトリ名と見
+              なされ、生成された Makefile はそのディレクトリ構造に従い
+              ます。
+              例えば、'test/foo' を指定した場合、拡張ライブラリは
+              'test' ディレクトリにインストールされます。この拡張ライブ
+              ラリを Ruby スクリプトから使用するときは
+              "require 'test/foo'" とする必要があります。
 
-@param srcprefix �����������ɤ�����ǥ��쥯�ȥ�̾����ꤷ�ޤ���
-                 ��ά�������� extconf.rb ������ǥ��쥯�ȥ����Ѥ��ޤ���
+@param srcprefix ソースコードがあるディレクトリ名を指定します。
+                 省略した場合は extconf.rb があるディレクトリを使用します。
                  
-�ʲ��Τ褦�ʥǥ��쥯�ȥ깽���ξ��:
+以下のようなディレクトリ構成の場合:
 
    ext/
       extconf.rb
       test/
          foo.c
 
-���Τ褦�ˤ��ޤ���
+このようにします。
 
    create_makefile('test/foo', 'test')
 
-���Τ褦�ˤ��ƺ�ä� Makefile �� 'make install' ����ȳ�ĥ�饤�֥��ϡ�
-�ʲ��Υѥ��˥��󥹥ȡ��뤵��ޤ���
+このようにして作った Makefile で 'make install' すると拡張ライブラリは、
+以下のパスにインストールされます。
 
   /path/to/ruby/sitearchdir/test/foo.so
 
 --- find_executable(bin, path = nil) -> String | nil
 
-�ѥ� path ����¹ԥե����� bin ��õ���ޤ���
+パス path から実行ファイル bin を探します。
 
-�¹ԥե����뤬���Ĥ��ä����ϡ����Υե�ѥ����֤��ޤ���
-�¹ԥե����뤬���Ĥ���ʤ��ä����ϡ�nil���֤��ޤ���
+実行ファイルが見つかった場合は、そのフルパスを返します。
+実行ファイルが見つからなかった場合は、nilを返します。
 
-���Υ᥽�åɤ� Makefile ���ѹ����ޤ���
+このメソッドは Makefile を変更しません。
 
-@param bin �¹ԥե������̾������ꤷ�ޤ���
+@param bin 実行ファイルの名前を指定します。
 
-@param path �ѥ�����ꤷ�ޤ����ǥե���ȤϴĶ��ѿ� PATH �Ǥ���
-            �Ķ��ѿ� PATH ���������Ƥ��ʤ����� /usr/local/bin,
-            /usr/ucb, /usr/bin, /bin ��Ȥ��ޤ���
+@param path パスを指定します。デフォルトは環境変数 PATH です。
+            環境変数 PATH が定義されていない場合は /usr/local/bin,
+            /usr/ucb, /usr/bin, /bin を使います。
 
 --- dummy_makefile(srcdir) -> String
 
-���ߡ��� Makefile ��������ޤ���
+ダミーの Makefile を作成します。
 
-@param srcdir �������ǥ��쥯�ȥ����ꤷ�ޤ���
+@param srcdir ソースディレクトリを指定します。
 
 #@since 1.9.1
 --- depend_rules(depend) -> Array
 
-�ե�����ΰ�¸�ط��ν񤫤줿 depend �ե���������Ƥ�������ޤ���
+ファイルの依存関係の書かれた depend ファイルの内容を処理します。
 
-@param depend depend �ե���������Ƥ���ꤷ�ޤ���
+@param depend depend ファイルの内容を指定します。
 
-@return ���Ĥ��ä���¸�ط��� Makefile �������֤��ޤ���
+@return 見つかった依存関係を Makefile 形式で返します。
 #@end
 
 #@# --- init_mkmf(config = CONFIG, rbconfig = RbConfig::CONFIG)
@@ -889,55 +889,55 @@ extconf.rb �����̤��Υ᥽�åɤθƤӽФ��ǽ���ޤ���
 #@# nodoc
 
 #@# --- checking_for(message, format = nil){ ... } -> object
-#@# ������
-#@# have_*, find_* �ϥ᥽�åɤμ¹Է�̤�ɸ����Ϥ˽��Ϥ��뤿��Υ᥽�åɤǤ���
+#@# 内部用
+#@# have_*, find_* 系メソッドの実行結果を標準出力に出力するためのメソッドです。
 #@# 
-#@# @param message ��å���������ꤷ�ޤ���
+#@# @param message メッセージを指定します。
 #@# 
-#@# @param format �ե����ޥå�ʸ�������ꤷ�ޤ���
+#@# @param format フォーマット文字列を指定します。
 
 #@# #@since 1.8.6
 #@# --- checking_message(target, place = nil, opt = nil) -> String
-#@# ������
+#@# 内部用
 #@# #@end
 
 --- try_run(src, opt = "") -> bool | nil
 --- try_run(src, opt = ""){ ... } -> bool | nil
 
-Ϳ����줿�����������ɤ�������ѥ�����󥯤Ǥ��뤫�ɤ����������ޤ���
+与えられたソースコードが、コンパイルやリンクできるかどうか検査します。
 
-�ʲ������Ƥθ����������������ϡ������֤��ޤ��������Ǥʤ����ϵ����֤��ޤ���
+以下の全ての検査に成功した場合は、真を返します。そうでない場合は偽を返します。
 
-  * src �� C �Υ������Ȥ��ƥ���ѥ���Ǥ��뤫
-  * �������줿���֥������Ȥ���¸���Ƥ���饤�֥��ȥ�󥯤Ǥ��뤫
-  * ��󥯤����ե����뤬�¹Բ�ǽ���ɤ���
-  * �¹ԥե����뤬�������¸�ߤ��Ƥ��뤫�ɤ���
+  * src が C のソースとしてコンパイルできるか
+  * 生成されたオブジェクトが依存しているライブラリとリンクできるか
+  * リンクしたファイルが実行可能かどうか
+  * 実行ファイルがきちんと存在しているかどうか
 
-�֥��å���Ϳ������硢���Υ֥��å��ϥ���ѥ�������ɾ������ޤ���
-�֥��å���ǥ����������ɤ��ѹ����뤳�Ȥ��Ǥ��ޤ���
+ブロックを与えた場合、そのブロックはコンパイル前に評価されます。
+ブロック内でソースコードを変更することができます。
 
-@param src C �Υ����������ɤ���ꤷ�ޤ���
+@param src C のソースコードを指定します。
 
-@param opt ��󥫤��Ϥ����ץ�������ꤷ�ޤ���
-           $CFLAGS, $LDFLAGS ���󥫤ˤ��Ϥ���ޤ���
+@param opt リンカに渡すオプションを指定します。
+           $CFLAGS, $LDFLAGS もリンカには渡されます。
 
-@return �¹ԥե����뤬¸�ߤ������ true ���֤��ޤ��������Ǥʤ�����
-        false ���֤��ޤ����ץ�ץ�����������ѥ��롢��󥯤Τ����줫��
-        �ʳ��Ǽ��Ԥ������� nil ���֤��ޤ���
+@return 実行ファイルが存在する場合は true を返します。そうでない場合は
+        false を返します。プリプロセス、コンパイル、リンクのいずれかの
+        段階で失敗した場合は nil を返します。
 
 --- try_compile(src, opt = "", *opts) -> bool
 --- try_compile(src, opt = "", *opts){ ... } -> bool
 
-Ϳ����줿 C �Υ����������ɤ�����ѥ���Ǥ������Ͽ����֤��ޤ���
-����ѥ���Ǥ��ʤ��ä����ϵ����֤��ޤ���
+与えられた C のソースコードがコンパイルできた場合は真を返します。
+コンパイルできなかった場合は偽を返します。
 
-�֥��å���Ϳ������硢���Υ֥��å��ϥ���ѥ�������ɾ������ޤ���
-�֥��å���ǥ����������ɤ��ѹ����뤳�Ȥ��Ǥ��ޤ���
+ブロックを与えた場合、そのブロックはコンパイル前に評価されます。
+ブロック内でソースコードを変更することができます。
 
-@param src C �Υ����������ɤ���ꤷ�ޤ���
+@param src C のソースコードを指定します。
 
-@param opt ����ѥ�����Ϥ����ץ�������ꤷ�ޤ���
-           $CFLAGS �⥳��ѥ���ˤ��Ϥ���ޤ���
+@param opt コンパイラに渡すオプションを指定します。
+           $CFLAGS もコンパイラには渡されます。
 
 --- try_static_assert(expr, headers = nil, opt = "") -> bool
 --- try_static_assert(expr, headers = nil, opt = ""){ ... } -> bool
@@ -945,86 +945,86 @@ extconf.rb �����̤��Υ᥽�åɤθƤӽФ��ǽ���ޤ���
 
 ...
 
-@param expr C ����μ�����ꤷ�ޤ���
+@param expr C 言語の式を指定します。
 
-@param headers �ɲäΥإå��ե��������ꤷ�ޤ���
+@param headers 追加のヘッダファイルを指定します。
 
-@param opt ����ѥ�����Ϥ����ץ�������ꤷ�ޤ���
-           $CFLAGS �⥳��ѥ���ˤ��Ϥ���ޤ���
+@param opt コンパイラに渡すオプションを指定します。
+           $CFLAGS もコンパイラには渡されます。
 
 --- try_constant(const, headers = nil, opt = "") -> Integer | nil
 --- try_constant(const, headers = nil, opt = ""){ ... } -> Integer | nil
 
-��� const �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
-[[m:Kernel#have_const]] ��ȤäƤ���������
+定数 const がシステムに存在するかどうか検査します。
+[[m:Kernel#have_const]] を使ってください。
 
-@param const C ��������̾����ꤷ�ޤ���
+@param const C 言語の定数名を指定します。
 
-@param headers �ɲäΥإå��ե��������ꤷ�ޤ���
+@param headers 追加のヘッダファイルを指定します。
 
-@param opt ����ѥ�����Ϥ����ץ�������ꤷ�ޤ���
-           $CFLAGS �⥳��ѥ���ˤ��Ϥ���ޤ���
+@param opt コンパイラに渡すオプションを指定します。
+           $CFLAGS もコンパイラには渡されます。
 
-@return ��� const �������ƥ��¸�ߤ�����Ϥ����ͤ��֤��ޤ���
-        ��� const �������ƥ��¸�ߤ��ʤ����� nil ���֤��ޤ���
+@return 定数 const がシステムに存在する場合はその値を返します。
+        定数 const がシステムに存在しない場合は nil を返します。
 
 --- try_func(func, libs, headers = nil) -> bool
 --- try_func(func, libs, headers = nil){ ... } -> bool
 
-�ؿ� func �������ƥ��¸�ߤ��뤫�ɤ����������ޤ���
-[[m:Kernel#have_func]] ��ȤäƤ���������
+関数 func がシステムに存在するかどうか検査します。
+[[m:Kernel#have_func]] を使ってください。
 
-@param func �ؿ�̾����ꤷ�ޤ���
+@param func 関数名を指定します。
 
-@param libs �饤�֥���̾������ꤷ�ޤ���
+@param libs ライブラリの名前を指定します。
 
-@param headers �ؿ� func ����Ѥ���Τ�ɬ�פʥإå��ե�����̾����ꤷ��
-               ��������ϴؿ��η�������å����뤿��ǤϤʤ����ؿ����º�
-               �ˤϥޥ������������Ƥ�����ʤɤΤ���˻��Ѥ��ޤ���
+@param headers 関数 func を使用するのに必要なヘッダファイル名を指定しま
+               す。これは関数の型をチェックするためではなく、関数が実際
+               にはマクロで定義されている場合などのために使用します。
 
 --- try_var(var, headers = nil) -> bool
 --- try_var(var, headers = nil){ ... } -> bool
 
-[[m:Kernel#have_var]] ��ȤäƤ���������
+[[m:Kernel#have_var]] を使ってください。
 
-@param var �����������ѿ�̾����ꤷ�ޤ���
+@param var 検査したい変数名を指定します。
 
-@param headers �ɲäΥإå�����ꤷ�ޤ���
+@param headers 追加のヘッダを指定します。
 
 --- try_type(type, headers = nil, opt = "") -> bool
 --- try_type(type, headers = nil, opt = ""){ ... } -> bool
 
-[[m:Kernel#have_type]] ��ȤäƤ���������
+[[m:Kernel#have_type]] を使ってください。
 
-@param type ��������������̾������ꤷ�ޤ���
+@param type 検査したい型の名前を指定します。
 
-@param headers �ɲäΥإå�����ꤷ�ޤ���
+@param headers 追加のヘッダを指定します。
 
-@param opt ����ѥ�����Ϥ��ɲäΥ��ץ�������ꤷ�ޤ���
+@param opt コンパイラに渡す追加のオプションを指定します。
 
 --- install_files(mfile, ifiles, map = nil, srcprefix = nil) -> []
 
-���Υ᥽�åɤ� create_makefile, install_rb �����Ѥ��ޤ���
-�����ѤΥ᥽�åɤǤ���
+このメソッドは create_makefile, install_rb が使用します。
+内部用のメソッドです。
 
-@param mfile Makefile ��ɽ�� [[c:File]] �Υ��󥹥��󥹤Ǥ���
+@param mfile Makefile を表す [[c:File]] のインスタンスです。
 
-@param ifiles ���󥹥ȡ��뤹��ե�����Υꥹ�Ȥ���ꤷ�ޤ���
+@param ifiles インストールするファイルのリストを指定します。
 
 @param map ???
 
-@param srcprefix �������ǥ��쥯�ȥ����ꤷ�ޤ���
+@param srcprefix ソースディレクトリを指定します。
 
 --- message(format, *arg) -> nil
 
-[[m:Kernel.#printf]] ��Ʊ���褦��ɸ����Ϥ˥�å���������Ϥ��ޤ���
-��å��������ϸ夹���� [[m:IO#flush]] ���ޤ���
+[[m:Kernel.#printf]] と同じように標準出力にメッセージを出力します。
+メッセージ出力後すぐに [[m:IO#flush]] します。
 
-$VERBOSE �����ΤȤ��ϲ��⤷�ޤ���
+$VERBOSE が真のときは何もしません。
 
-@param format �ե����ޥå�ʸ����Ǥ���
+@param format フォーマット文字列です。
 
-@param arg �ե����ޥåȤ��������Ǥ���
+@param arg フォーマットされる引数です。
 
 @see [[m:Kernel.#printf]]
 
@@ -1052,9 +1052,9 @@ $VERBOSE �����ΤȤ��ϲ��⤷�ޤ���
 
 --- CONFIG -> Hash
 #@since 1.8.5
-[[m:RbConfig::MAKEFILE_CONFIG]] ��Ʊ���Ǥ���
+[[m:RbConfig::MAKEFILE_CONFIG]] と同じです。
 #@else
-[[m:Config::MAKEFILE_CONFIG]] ��Ʊ���Ǥ���
+[[m:Config::MAKEFILE_CONFIG]] と同じです。
 #@end
 
 #@# --- INSTALL_DIRS
@@ -1074,113 +1074,113 @@ $VERBOSE �����ΤȤ��ϲ��⤷�ޤ���
 
 --- $srcdir -> String
 
-Ruby ���󥿥ץ꥿�� make �����Ȥ��Υ������ǥ��쥯�ȥ�Ǥ���
+Ruby インタプリタを make したときのソースディレクトリです。
 
 --- $libdir -> String
 
-Ruby �Υ饤�֥����֤��ǥ��쥯�ȥ�Ǥ���
-�̾�� "/usr/local/lib/ruby/�С������" �Ǥ���
+Ruby のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/バージョン" です。
 
 --- $archdir -> String
 
-�ޥ����ͭ�Υ饤�֥����֤��ǥ��쥯�ȥ�Ǥ���
-�̾�� "/usr/local/lib/ruby/�С������/arch" �Ǥ���
+マシン固有のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $sitelibdir -> String
 
-�����ȸ�ͭ�Υ饤�֥����֤��ǥ��쥯�ȥ�Ǥ���
-�̾�� "/usr/local/lib/ruby/site_ruby/�С������" �Ǥ���
+サイト固有のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/site_ruby/バージョン" です。
 
 --- $sitearchdir -> String
 
-�����ȸ�ͭ�Ǥ��ĥޥ����ͭ�Υ饤�֥����֤��ǥ��쥯�ȥ�Ǥ���
-�̾�� "/usr/local/lib/ruby/site_ruby/�С������/arch" �Ǥ���
+サイト固有でかつマシン固有のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/site_ruby/バージョン/arch" です。
 
 --- $hdrdir -> String
 
-Ruby �Υإå��ե����� ruby.h ��¸�ߤ���ǥ��쥯�ȥ�Ǥ���
-�̾�� [[m:$archdir]] ��Ʊ���ǡ�"/usr/local/lib/ruby/�С������/arch" �Ǥ���
+Ruby のヘッダファイル ruby.h が存在するディレクトリです。
+通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $topdir -> String
 
-��ĥ�饤�֥��� make ���뤿��Υإå��ե����롢
-�饤�֥������¸�ߤ���ǥ��쥯�ȥ�Ǥ���
-�̾�� [[m:$archdir]] ��Ʊ���ǡ�"/usr/local/lib/ruby/�С������/arch" �Ǥ���
+拡張ライブラリを make するためのヘッダファイル、
+ライブラリ等が存在するディレクトリです。
+通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $defs -> [String]
 
-��ĥ�饤�֥��򥳥�ѥ��뤹��Ȥ��Υޥ����������ꤹ������Ǥ���
+拡張ライブラリをコンパイルするときのマクロ定義を指定する配列です。
 
-�����ѿ����ͤϡ��㤨��
+この変数の値は、例えば
 
   ["-DHAVE_FUNC", "-DHAVE_HEADER_H"]
 
-�Τ褦�ʷ���������Ǥ���
+のような形式の配列です。
 
-[[m:Kernel#have_func]] �ޤ��� [[m:Kernel#have_header]]
-��ƤӽФ��ȡ����θ�����̤� $defs ���ɲä���ޤ���
+[[m:Kernel#have_func]] または [[m:Kernel#have_header]]
+を呼び出すと、その検査結果が $defs に追加されます。
 
 [[m:Kernel#create_header]]
-�Ϥ����ѿ����ͤ򻲾Ȥ��ƥإå��ե�������������ޤ���
+はこの変数の値を参照してヘッダファイルを生成します。
 
 --- $libs -> String
 
-��ĥ�饤�֥����󥯤���Ȥ���
-���˥�󥯤����饤�֥�����ꤹ��ʸ����Ǥ���
+拡張ライブラリをリンクするときに
+一緒にリンクされるライブラリを指定する文字列です。
 
-�����ѿ����ͤϡ��㤨��
+この変数の値は、例えば
 
   "-lfoo -lbar"
 
-�Τ褦�ʷ�����ʸ����Ǥ���
+のような形式の文字列です。
 
-[[m:Kernel#have_library]] �ޤ��� [[m:Kernel#find_library]]
-��ƤӽФ��ȡ����θ�����̤�
-�֤˶����Ϥ��ߤĤ� $libs ��Ϣ�뤵��ޤ���
+[[m:Kernel#have_library]] または [[m:Kernel#find_library]]
+を呼び出すと、その検査結果が
+間に空白をはさみつつ $libs に連結されます。
 
 --- $CFLAGS -> String
 
-��ĥ�饤�֥��򥳥�ѥ��뤹��Ȥ��� C ����ѥ���Υ��ץ����䡢
-�إå��ե�����Υǥ��쥯�ȥ����ꤹ��ʸ����Ǥ���
+拡張ライブラリをコンパイルするときの C コンパイラのオプションや、
+ヘッダファイルのディレクトリを指定する文字列です。
 
-[[m:Kernel#dir_config]] �θ�������������ȡ�
-�����ѿ����ͤ� " -Idir" ���ɲä���ޤ���
+[[m:Kernel#dir_config]] の検査が成功すると、
+この変数の値に " -Idir" が追加されます。
 
 --- $LDFLAGS -> String
 
-��ĥ�饤�֥����󥯤���Ȥ��Υ�󥫤Υ��ץ����
-�饤�֥��ե�����Υǥ��쥯�ȥ����ꤹ��ʸ����Ǥ���
+拡張ライブラリをリンクするときのリンカのオプション、
+ライブラリファイルのディレクトリを指定する文字列です。
 
-[[m:Kernel#find_library]] �ޤ��� [[m:Kernel#dir_config]]
-�θ�������������ȡ�$LDFLAGS ���ͤ� "-Ldir" ���ɲä��ޤ���
+[[m:Kernel#find_library]] または [[m:Kernel#dir_config]]
+の検査が成功すると、$LDFLAGS の値に "-Ldir" を追加します。
 
-#@# �����餯�桼���˲�������Ƥ��ʤ��ѿ�
+#@# おそらくユーザに解放されていない変数
 #@# --- $LOCAL_LIBS
-#@#     �饤�֥�����ꤹ��ʸ����Ǥ���
+#@#     ライブラリを指定する文字列です。
 #@# 
 #@# --- $local_flags
-#@#     ��󥫥��ץ�������ꤹ��ʸ����Ǥ���
+#@#     リンカオプションを指定する文字列です。
 
 #@# = reopen String
-#@# ������
+#@# 内部用
 #@# == Instance Methods
 #@# 
 #@# --- quote -> String
 #@# 
-#@# ���ڡ�����ޤ�ʸ����򥯥����Ȥ����֤��ޤ���
+#@# スペースを含む文字列をクオートして返します。
 #@# 
 #@# --- tr_cpp -> String
 #@# 
-#@# C �ץ�ץ����å��˻��ѤǤ���̾�������������֤��ޤ���
+#@# C プリプロセッサに使用できる名前を生成して返します。
 #@# 
 #@# = reopen Array
-#@# ������
+#@# 内部用
 #@# == Instance Methods
 #@# 
 #@# --- quote -> Array
 #@# 
-#@# ���Ƥ����Ǥ� [[m:String#quote]] �����֤��ޤ���
+#@# 全ての要素を [[m:String#quote]] して返します。
 #@# 
 #@# = module Logging
-#@# �������ѤΤ�
+#@# 内部利用のみ
 

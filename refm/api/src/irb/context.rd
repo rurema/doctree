@@ -1,330 +1,330 @@
 require irb/workspace
 
-irb ������򰷤�����Υ��֥饤�֥��Ǥ���
+irb の設定を扱うためのサブライブラリです。
 
 = class IRB::Context
 
-irb ������򰷤�����Υ��饹�Ǥ���
+irb の設定を扱うためのクラスです。
 
-irb ��� conf ���ޥ�ɤ�����ͤ� .irbrc �� IRB.conf �������������
-���ѹ����ޤ���irb �ε�ư��� IRB.conf �����Ƥ򹹿����Ƥ��ѹ������Ƥ�ȿ
-�Ǥ���ʤ��������դ��Ƥ���������
+irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
+を変更します。irb の起動後は IRB.conf の内容を更新しても変更の内容は反
+映されない事に注意してください。
 
-�ʤ���.irbrc ��˵��ҤǤ���ʲ��������ͤˤĤ��Ƥϡ�[[c:IRB::Context]]
-���֥������ȤΥ᥽�åɤȤ������Ǥ��ޤ���
+なお、.irbrc 中に記述できる以下の設定値については、[[c:IRB::Context]]
+オブジェクトのメソッドとして操作できません。
 
 : IRB.conf[:AT_EXIT]
 
-  irb �ν�λ��(���� irb ��ޤߤޤ���)���ܹ��ܤ����ꤵ�줿 [[c:Proc]] ��
-  �֥������Ȥ�¹Ԥ��ޤ����֥��å������ˤϲ����Ϥ���ޤ���
+  irb の終了時(サブ irb を含みません)に本項目に設定された [[c:Proc]] オ
+  ブジェクトを実行します。ブロック引数には何も渡されません。
 
-  �ǥե�����ͤ� [] �Ǥ���
+  デフォルト値は [] です。
 
 : IRB.conf[:CONTEXT_MODE]
 
-  ������������ڡ��������������(���� irb �ε�ư�� pushws ������)�ˡ�
-  ������ڡ����˴�Ϣ���� [[c:Binding]] ���֥������Ȥκ�����ˡ��
-  [[c:Integer]] �����ꤷ�ޤ���
+  新しいワークスペースを作成した時(サブ irb の起動や pushws した時)に、
+  ワークスペースに関連する [[c:Binding]] オブジェクトの作成方法を
+  [[c:Integer]] で設定します。
 
-  0 ����ꤷ����硢[[m:Kernel::TOPLEVEL_BINDING]] �� [[c:Proc]] ���
-  [[c:Binding]] ����Ѥ��ޤ���1 ����ꤷ����硢[[c:Tempfile]] ���
-  [[c:Binding]] ����Ѥ��ޤ���2 ����ꤷ����硢[[c:Thread]] ����ɤ߹�
-  ����ե�������� [[c:Binding]] ����Ѥ��ޤ���3 ����ꤷ����硢
-  [[m:Kernel::TOPLEVEL_BINDING]] �δؿ���� [[c:Binding]] ����Ѥ��ޤ���
+  0 を指定した場合、[[m:Kernel::TOPLEVEL_BINDING]] の [[c:Proc]] 内の
+  [[c:Binding]] を使用します。1 を指定した場合、[[c:Tempfile]] 中の
+  [[c:Binding]] を使用します。2 を指定した場合、[[c:Thread]] 内で読み込
+  んだファイル中の [[c:Binding]] を使用します。3 を指定した場合、
+  [[m:Kernel::TOPLEVEL_BINDING]] の関数中の [[c:Binding]] を使用します。
 
-  ��������IRB.conf[:SINGLE_IRB] �� true �����ꤷ�Ƥ������ϡ����ߤΥ
-  �����ڡ����򤽤Τޤ޻��Ѥ��ޤ���
+  ただし、IRB.conf[:SINGLE_IRB] に true を設定していた場合は、現在のワー
+  クスペースをそのまま使用します。
 
-  �ǥե�����ͤ� 3 �Ǥ���
+  デフォルト値は 3 です。
 
 : IRB.conf[:IRB_LIB_PATH]
 
-  �饤�֥�������ǻ��Ѥ��ޤ���
+  ライブラリ内部で使用します。
 
 : IRB.conf[:IRB_RC]
 
-  irb �ε�ư��(���� irb ��ޤߤޤ�)���ܹ��ܤ����ꤵ�줿 [[c:Proc]] ����
-  �������Ȥ�¹Ԥ��ޤ����֥��å������ˤ� [[c:IRB::Context]] ���Ϥ���ޤ���
-  ���Τ��ᡢ���� irb �������ޤȤ�Ƽ¹Ԥ���Τ˻��Ѥ��ޤ���
+  irb の起動時(サブ irb を含みます)に本項目に設定された [[c:Proc]] オブ
+  ジェクトを実行します。ブロック引数には [[c:IRB::Context]] が渡されます。
+  そのため、サブ irb の設定をまとめて実行するのに使用します。
 
-  �ǥե�����ͤ� nil �Ǥ���
+  デフォルト値は nil です。
 
-  [[ref:lib:irb#configure_sub_irb]] ��ʻ���ƻ��Ȥ��Ƥ���������
+  [[ref:lib:irb#configure_sub_irb]] も併せて参照してください。
 
 : IRB.conf[:LC_MESSAGES]
 
-  �饤�֥�������ǻ��Ѥ��ޤ���
+  ライブラリ内部で使用します。
 
 : IRB.conf[:MAIN_CONTEXT]
 
-  �饤�֥�������ǻ��Ѥ��ޤ���
+  ライブラリ内部で使用します。
 
 : IRB.conf[:SCRIPT]
 
-  �ե�����̾����ꤷ�� irb ��¹Ԥ������Υѥ���ʸ������֤��ޤ���
+  ファイル名を指定して irb を実行した場合のパスを文字列で返します。
 
-  �ǥե�����ͤ� nil �Ǥ���
+  デフォルト値は nil です。
 
 : IRB.conf[:SINGLE_IRB]
 
-  irb ��� self ��¹Ԥ��������륪�֥������Ȥ򥵥� irb �ȶ�ͭ���뤫��
-  ���������ꤷ�ޤ���true �����ꤷ�����˶�ͭ����ޤ���
+  irb 中で self を実行して得られるオブジェクトをサブ irb と共有するかど
+  うかを設定します。true を設定した場合に共有されます。
 
-  �ǥե�����ͤ� false �Ǥ���
+  デフォルト値は false です。
 
 : IRB.conf[:VERSION]
 
-  [[m:IRB.version]] ��¹Ԥ��������֤��С������� [[c:String]] �ǻ���
-  ���ޤ���
+  [[m:IRB.version]] を実行した時に返すバージョンを [[c:String]] で指定
+  します。
 
-  �ǥե�����ͤ� nil �Ǥ���
+  デフォルト値は nil です。
 
-#@# �ѹ����Ƥ�ƶ����ʤ������ά���ޤ������������٤ϵ��Ҥ������ᡢɬ��
-#@# �ˤʤä��ݤ˥����ȥ��󤷤ޤ���
+#@# 変更しても影響がないため省略しました。ある程度は記述したため、必要
+#@# になった際にコメントインします。
 #@#: IRB.conf[:RC_NAME_GENERATOR]
-#@#  ����ե��������ꤹ�뤿��� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
+#@#  設定ファイルを指定するための [[c:Proc]] オブジェクトを指定します。
 #@#
 #@##@since 1.9.1
 #@#: IRB.conf[:ENCODINGS]
-#@#  �ǥե���Ȥγ���/�������󥳡��ǥ��󥰤ξ�����֤��ޤ�����ư���� -U
-#@#  �� ��-E(--encoding) ���ץ����η�̤�ȿ�Ǥ��Ƥ��ޤ����ѹ����Ƥ��
-#@#  ���Ϥ���ޤ���
+#@#  デフォルトの外部/内部エンコーディングの情報を返します。起動時の -U
+#@#  や 、-E(--encoding) オプションの結果を反映しています。変更しても影
+#@#  響はありません。
 #@##@end
 
 : IRB.conf[:__MAIN__]
 
-  �饤�֥�������ǻ��Ѥ��ޤ���
+  ライブラリ内部で使用します。
 
 == Class Methods
 
 --- new(irb, workspace = nil, input_method = nil, output_method = nil) -> IRB::Context
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param irb [[c:IRB::Irb]] ���֥������Ȥ���ꤷ�ޤ���
+@param irb [[c:IRB::Irb]] オブジェクトを指定します。
 
-@param workspace [[c:IRB::WorkSpace]] ���֥������Ȥ���ꤷ�ޤ�����ά��
-                 �����Ͽ�������������ޤ���
+@param workspace [[c:IRB::WorkSpace]] オブジェクトを指定します。省略し
+                 た場合は新しく作成されます。
 
-@param input_method [[c:String]]��[[c:IRB::InputMethod]] �Υ��֥��饹��
-                    ���֥������ȡ�nil �Τ����줫����ꤷ�ޤ���
+@param input_method [[c:String]]、[[c:IRB::InputMethod]] のサブクラスの
+                    オブジェクト、nil のいずれかを指定します。
 
-@param output_method [[c:IRB::OutputMethod]] �Υ��֥��饹�Υ��֥�������
-                     ����ꤷ�ޤ�����ά��������
-                     [[c:IRB::StdioOutputMethod]] ���֥������Ȥ�������
-                     ��������ޤ���
+@param output_method [[c:IRB::OutputMethod]] のサブクラスのオブジェクト
+                     を指定します。省略した場合は
+                     [[c:IRB::StdioOutputMethod]] オブジェクトが新しく
+                     作成されます。
 
 == Instance Methods
 
 --- __inspect__ -> String
 
-���Ȥ�ʸ����ɽ���ˤ������֥������Ȥ��֤��ޤ���
+自身を文字列表現にしたオブジェクトを返します。
 
 --- __to_s__ -> String
 
-���Ȥ�ʸ����ɽ���ˤ������֥������Ȥ��֤��ޤ���
+自身を文字列表現にしたオブジェクトを返します。
 
 --- ap_name -> String
 
-���ȤΥ��ץꥱ�������̾���֤��ޤ���
+自身のアプリケーション名を返します。
 
-�ǥե�����ͤ� "irb" �Ǥ���
+デフォルト値は "irb" です。
 
 @see [[m:IRB::Context#ap_name=]]
 
 --- ap_name=(val)
 
-���ȤΥ��ץꥱ�������̾�� val �����ꤷ�ޤ���
+自身のアプリケーション名を val に設定します。
 
-.irbrc �ե�������� IRB.conf[:AP_NAME] �����ꤹ����Ǥ�Ʊ�ͤ����Ԥ�
-�ޤ���
+.irbrc ファイル中で IRB.conf[:AP_NAME] を設定する事でも同様の操作が行え
+ます。
 
-@param val ���ץꥱ�������̾�� [[c:String]] �ǻ��ꤷ�ޤ���
+@param val アプリケーション名を [[c:String]] で指定します。
 
 @see [[m:IRB::Context#ap_name]]
 
 --- auto_indent_mode -> bool
 
-���Ϥ����ιԤ˷�³�������˼�ư�ǻ�������Ԥ����ɤ������֤��ޤ���
+入力が次の行に継続した時に自動で字下げを行うかどうかを返します。
 
-�ǥե�����ͤ� false �Ǥ���
+デフォルト値は false です。
 
-@return ��ư�ǻ�������Ԥ����� true ���֤��ޤ����Ԥ�ʤ����� false
-        ���֤��ޤ���
+@return 自動で字下げを行う場合は true を返します。行わない場合は false
+        を返します。
 
 @see [[m:IRB::Context#auto_indent_mode=]]
 
 --- auto_indent_mode=(val)
 
-���Ϥ����ιԤ˷�³�������˼�ư�ǻ�������Ԥ����ɤ����� val �����ꤷ�ޤ���
+入力が次の行に継続した時に自動で字下げを行うかどうかを val に設定します。
 
-@param val true ����ꤷ����硢��ư�ǻ�������Ԥ��ޤ���false ����ꤷ
-           �����ϼ�ư�ǻ�������Ԥ��ޤ���
+@param val true を指定した場合、自動で字下げを行います。false を指定し
+           た場合は自動で字下げを行いません。
 
-[[m:IRB::Context#prompt_mode]] ���ѹ��˱ƶ��������������դ��Ƥ���������
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 @see [[m:IRB::Context#auto_indent_mode]]
 
 --- back_trace_limit -> Integer
 
-���顼ȯ�����ΥХå��ȥ졼��ɽ������Ƭ�������ξ�¤ιԿ����֤��ޤ���
+エラー発生時のバックトレース表示の先頭、末尾の上限の行数を返します。
 
-�ǥե�����ͤ� 16 �Ǥ���
+デフォルト値は 16 です。
 
 @see [[m:IRB::Context#back_trace_limit=]]
 
 --- back_trace_limit=(val)
 
-���顼ȯ�����ΥХå��ȥ졼��ɽ������Ƭ�������ξ�¤ιԿ��򤽤줾�� val
-�Ԥ����ꤷ�ޤ���
+エラー発生時のバックトレース表示の先頭、末尾の上限の行数をそれぞれ val
+行に設定します。
 
-.irbrc �ե�������� IRB.conf[:BACK_TRACE_LIMIT] �����ꤹ����Ǥ�Ʊ�ͤ�
-���Ԥ��ޤ���
+.irbrc ファイル中で IRB.conf[:BACK_TRACE_LIMIT] を設定する事でも同様の
+操作が行えます。
 
-@param val �Хå��ȥ졼��ɽ������Ƭ�������ξ�¤� [[c:Integer]] �ǻ���
-           ���ޤ���
+@param val バックトレース表示の先頭、末尾の上限を [[c:Integer]] で指定
+           します。
 
 @see [[m:IRB::Context#back_trace_limit]]
 
 --- debug? -> bool
 
-irb ���ǥХå��⡼��([[m:IRB::Context#debug_level]] �� 1 �ʾ�)��ư�
-�Ƥ��뤫�ɤ������֤��ޤ���
+irb がデバッグモード([[m:IRB::Context#debug_level]] が 1 以上)で動作し
+ているかどうかを返します。
 
-�ǥե�����ͤ� true �Ǥ���
+デフォルト値は true です。
 
 @see [[m:IRB::Context#debug_level]], [[m:IRB::Context#debug_level=]]
 
-#@# TODO: 2.0 �ʹߤΥǥե�����ͤ� false �ˤʤ�Ȼפ��뤿�ᡢ�б����
-#@# ʬ�����롣
+#@# TODO: 2.0 以降のデフォルト値は false になると思われるため、対応後に
+#@# 分岐する。
 
 --- debug_level -> Integer
 
-irb �ΥǥХå���٥���֤��ޤ���
+irb のデバッグレベルを返します。
 
-�ǥե�����ͤ� 1 �Ǥ���
+デフォルト値は 1 です。
 
 @see [[m:IRB::Context#debug_level=]], [[m:IRB::Context#debug?]]
 
 --- debug_level=(val)
 
-irb �ΥǥХå���٥�� val �����ꤷ�ޤ���
+irb のデバッグレベルを val に設定します。
 
-#@# TODO: #6301 ���б��塢�ᤱ��� 2.0 ����ʬ����Ԥ���
-#@# (IRB::Context#debug_level �Υǥե�����ͤ�Ʊ��)
-#@# .irbrc �ե�������� IRB.conf[:DEBUG_LEVEL] �����ꤹ����Ǥ�Ʊ�ͤ����
-#@# ���Ԥ��ޤ���
+#@# TODO: #6301 の対応後、早ければ 2.0 から分岐を行う。
+#@# (IRB::Context#debug_level のデフォルト値も同様)
+#@# .irbrc ファイル中で IRB.conf[:DEBUG_LEVEL] を設定する事でも同様の操作
+#@# が行えます。
 
 @see [[m:IRB::Context#debug_level]], [[m:IRB::Context#debug?]]
 
 --- echo  -> bool
 --- echo? -> bool
 
-irb �Υץ���ץȤǤ�ɾ����̤�ɽ�����뤫�ɤ������֤��ޤ���
+irb のプロンプトでの評価結果を表示するかどうかを返します。
 
-�ǥե�����ͤ� false �Ǥ���
+デフォルト値は false です。
 
 @see [[m:IRB::Context#echo=]]
 
 --- echo=(val)
 
-irb �Υץ���ץȤǤ�ɾ����̤�ɽ�����뤫�ɤ��������ꤷ�ޤ���
+irb のプロンプトでの評価結果を表示するかどうかを設定します。
 
-.irbrc �ե�������� IRB.conf[:ECHO] �����ꤹ����Ǥ�Ʊ�ͤ����Ԥ���
-����
+.irbrc ファイル中で IRB.conf[:ECHO] を設定する事でも同様の操作が行えま
+す。
 
-@param val true ����ꤷ����硢irb �Υץ���ץȤǤ�ɾ����̤�ɽ������
-           ����false ����ꤷ������ɽ�����ޤ���
+@param val true を指定した場合、irb のプロンプトでの評価結果を表示しま
+           す。false を指定した場合は表示しません。
 
 @see [[m:IRB::Context#echo]]
 
 --- evaluate(line, line_no) -> object
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- exit(ret = 0) -> object
 
-irb ��λ���ޤ���ret �ǻ��ꤷ�����֥������Ȥ��֤��ޤ���
+irb を終了します。ret で指定したオブジェクトを返します。
 
-@param ret ����ͤ���ꤷ�ޤ���
+@param ret 戻り値を指定します。
 
 @see [[m:IRB.irb_exit]]
 
 --- file_input? -> bool
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- ignore_eof  -> bool
 --- ignore_eof? -> bool
 
-Ctrl-D(EOF) �����Ϥ��줿���� irb ��λ���뤫�ɤ������֤��ޤ���
+Ctrl-D(EOF) が入力された時に irb を終了するかどうかを返します。
 
-true �λ��� Ctrl-D ��̵�뤷�ޤ���false �λ��� irb ��λ���ޤ���
+true の時は Ctrl-D を無視します。false の時は irb を終了します。
 
-�ǥե�����ͤ� false �Ǥ���
+デフォルト値は false です。
 
 @see [[m:IRB::Context#ignore_eof=]]
 
 --- ignore_eof=(val)
 
-Ctrl-D(EOF) �����Ϥ��줿���� irb ��λ���뤫�ɤ����� val �����ꤷ�ޤ���
+Ctrl-D(EOF) が入力された時に irb を終了するかどうかを val に設定します。
 
-.irbrc �ե�������� IRB.conf[:IGNORE_EOF] �����ꤹ����Ǥ�Ʊ�ͤ���
-�Ԥ��ޤ���
+.irbrc ファイル中で IRB.conf[:IGNORE_EOF] を設定する事でも同様の操作が
+行えます。
 
-@param val true ����ꤷ����硢 Ctrl-D ��̵�뤷�ޤ���false ����ꤷ��
-           ���� Ctrl-D �����ϻ��� irb ��λ���ޤ���
+@param val true を指定した場合、 Ctrl-D を無視します。false を指定した
+           場合は Ctrl-D の入力時に irb を終了します。
 
 @see [[m:IRB::Context#ignore_eof]]
 
 --- ignore_sigint  -> bool
 --- ignore_sigint? -> bool
 
-Ctrl-C �����Ϥ��줿���� irb ��λ���뤫�ɤ������֤��ޤ���
+Ctrl-C が入力された時に irb を終了するかどうかを返します。
 
-false �λ��� irb ��λ���ޤ���true �λ��ϰʲ��Τ褦��ư��ޤ���
+false の時は irb を終了します。true の時は以下のように動作します。
 
-: ������
-    ����ޤ����Ϥ�����Τ򥭥�󥻥뤷�ȥåץ�٥�����.
-: �¹���
-    �¹Ԥ���ߤ���.
+: 入力中
+    これまで入力したものをキャンセルしトップレベルに戻る.
+: 実行中
+    実行を中止する.
 
-�ǥե�����ͤ� true �Ǥ���
+デフォルト値は true です。
 
 @see [[m:IRB::Context#ignore_sigint=]]
 
 --- ignore_sigint=(val)
 
-Ctrl-C �����Ϥ��줿���� irb ��λ���뤫�ɤ����� val �����ꤷ�ޤ���
+Ctrl-C が入力された時に irb を終了するかどうかを val に設定します。
 
-.irbrc �ե�������� IRB.conf[:IGNORE_SIGINT] �����ꤹ����Ǥ�Ʊ�ͤ����
-���Ԥ��ޤ���
+.irbrc ファイル中で IRB.conf[:IGNORE_SIGINT] を設定する事でも同様の操作
+が行えます。
 
-@param val false ����ꤷ����硢Ctrl-C �����ϻ��� irb ��λ���ޤ���
-           true ����ꤷ����硢Ctrl-C �����ϻ��˰ʲ��Τ褦��ư��ޤ���
+@param val false を指定した場合、Ctrl-C の入力時に irb を終了します。
+           true を指定した場合、Ctrl-C の入力時に以下のように動作します。
 
-: ������
-    ����ޤ����Ϥ�����Τ򥭥�󥻥뤷�ȥåץ�٥�����.
-: �¹���
-    �¹Ԥ���ߤ���.
+: 入力中
+    これまで入力したものをキャンセルしトップレベルに戻る.
+: 実行中
+    実行を中止する.
 
 @see [[m:IRB::Context#ignore_sigint]]
 
 --- inspect -> String
 --- to_s -> String
 
-���Ȥ�ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+自身を人間に読みやすい文字列にして返します。
 
 --- inspect? -> bool
 
-[[c:IRB::Context#inspect_mode]] ��ͭ�����ɤ������֤��ޤ���
+[[c:IRB::Context#inspect_mode]] が有効かどうかを返します。
 
 #@since 1.9.2
-@return ���Ϸ�̤� to_s ������Τ�ɽ��������� false ���֤��ޤ�������
-        �ʳ��ξ��� true ���֤��ޤ���
+@return 出力結果に to_s したものを表示する場合は false を返します。それ
+        以外の場合は true を返します。
 #@else
-@return ���Ϸ�̤� inspect ������Τ�ɽ��������� true ���֤��ޤ���
-        to_s ������Τ�ɽ��������� false ���֤��ޤ���
+@return 出力結果に inspect したものを表示する場合は true を返します。
+        to_s したものを表示する場合は false を返します。
 #@end
 
 @see [[c:IRB::Context#inspect_mode]], [[c:IRB::Context#inspect_mode=]]
@@ -335,317 +335,317 @@ Ctrl-C �����Ϥ��줿���� irb ��λ���뤫�ɤ����� val �����ꤷ�ޤ���
 --- inspect_mode -> bool | nil
 #@end
 
-�¹Է�̤ν����������֤��ޤ���
+実行結果の出力方式を返します。
 
 @see [[m:IRB::Context#inspect_mode=]]
 
 --- inspect_mode=(opt)
 
-�¹Է�̤ν��������� opt �����ꤷ�ޤ���
+実行結果の出力方式を opt に設定します。
 
-@param opt �ʲ��Τ����줫����ꤷ�ޤ���
+@param opt 以下のいずれかを指定します。
 #@since 1.9.2
 : false, :to_s, :raw
-  ���Ϸ�̤� to_s ������Τ�ɽ�����ޤ���
+  出力結果を to_s したものを表示します。
 : true, :p, :inspect
-  ���Ϸ�̤� inspect ������Τ�ɽ�����ޤ���
+  出力結果を inspect したものを表示します。
 : :pp, :pretty_inspect
-  ���Ϸ�̤� pretty_inspect ������Τ�ɽ�����ޤ���
+  出力結果を pretty_inspect したものを表示します。
 : :yaml, :YAML
-  ���Ϸ�̤� YAML �����ˤ�����Τ�ɽ�����ޤ���
+  出力結果を YAML 形式にしたものを表示します。
 : :marshal, :Marshal, :MARSHAL, [[c:Marshal]]
-  ���Ϸ�̤� [[m:Marshal.#dump]] ������Τ�ɽ�����ޤ���
+  出力結果を [[m:Marshal.#dump]] したものを表示します。
 
 @see [[ref:lib:irb#inspect_mode]]
 #@else
 : true, nil
-  ���Ϸ�̤� inspect ������Τ�ɽ�����ޤ���
+  出力結果を inspect したものを表示します。
 : false
-  ���Ϸ�̤� to_s ������Τ�ɽ�����ޤ���
+  出力結果を to_s したものを表示します。
 #@end
 
 --- io -> IRB::InputMethod
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- io=(val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- irb -> IRB::Irb
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- irb=(val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- irb_name -> String
 
-��ư���Ƥ��륳�ޥ��̾��ʸ������֤��ޤ���
+起動しているコマンド名を文字列で返します。
 
-#@# TODO: ���� irb �λ���ư��򵭽�
+#@# TODO: サブ irb の時の動作を記述
 
 @see [[m:IRB::Context#irb_name=]]
 
 --- irb_name=(val)
 
-��ư���Ƥ��륳�ޥ��̾�� val �����ꤷ�ޤ���
+起動しているコマンド名を val に設定します。
 
-@param val ���ޥ��̾�� [[c:String]] �ǻ��ꤷ�ޤ���
+@param val コマンド名を [[c:String]] で指定します。
 
 @see [[m:IRB::Context#irb_name]]
 
 --- irb_path -> String
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- irb_path=(val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- last_value -> object
 
-irb ��ǤκǸ�μ¹Է�̤��֤��ޤ���
+irb 中での最後の実行結果を返します。
 
 --- load_modules -> [String]
 
-irb �ε�ư���� -r ���ץ���������ɤ߹��ޤ줿�饤�֥�ꡢ~/.irbrc �ʤ�
-������ե�������� IRB.conf[:LOAD_MODULES] ������ɤ߹��ޤ줿�饤�֥��
-��̾����������֤��ޤ���
+irb の起動時に -r オプション指定で読み込まれたライブラリ、~/.irbrc など
+の設定ファイル内で IRB.conf[:LOAD_MODULES] 指定で読み込まれたライブラリ
+の名前の配列を返します。
 
-#@# �ѹ����Ƥ�ƶ����ʤ������ά���ޤ�����
+#@# 変更しても影響がないため省略しました。
 #@#--- load_modules=
 
 --- main -> object
 
-self �����ꤵ�줿���֥������Ȥ��֤��ޤ���
+self に設定されたオブジェクトを返します。
 
-@see cwws ���ޥ��
+@see cwws コマンド
 
 --- prompt_c -> String
 
-������³���Ƥ�����Υץ���ץȤ�ɽ������ե����ޥå�ʸ������֤��ޤ���
+式が継続している時のプロンプトを表現するフォーマット文字列を返します。
 
 @see [[m:IRB::Context#prompt_c=]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_c=(val)
 
-������³���Ƥ�����Υץ���ץȤ�ɽ������ե����ޥå�ʸ����� val ������
-���ޤ���
+式が継続している時のプロンプトを表現するフォーマット文字列を val に設定
+します。
 
-@param val �ե����ޥåȤ�ʸ����ǻ��ꤷ�ޤ�������Ǥ������ƤˤĤ��Ƥϡ�
-           [[ref:lib:irb#customize_prompt]] �򻲾Ȥ��Ƥ���������
+@param val フォーマットを文字列で指定します。指定できる内容については、
+           [[ref:lib:irb#customize_prompt]] を参照してください。
 
-[[m:IRB::Context#prompt_mode]] ���ѹ��˱ƶ��������������դ��Ƥ���������
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 @see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
      [[m:IRB::Context#prompt_c]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_i -> String
 
-�̾�Υץ���ץȤ�ɽ������ե����ޥå�ʸ������֤��ޤ���
+通常のプロンプトを表現するフォーマット文字列を返します。
 
 @see [[m:IRB::Context#prompt_i=]],[[ref:lib:irb#customize_prompt]]
 
 --- prompt_i=(val)
 
-�̾�Υץ���ץȤ�ɽ������ե����ޥå�ʸ����� val �����ꤷ�ޤ���
+通常のプロンプトを表現するフォーマット文字列を val に設定します。
 
-@param val �ե����ޥåȤ�ʸ����ǻ��ꤷ�ޤ�������Ǥ������ƤˤĤ��Ƥϡ�
-           [[ref:lib:irb#customize_prompt]] �򻲾Ȥ��Ƥ���������
+@param val フォーマットを文字列で指定します。指定できる内容については、
+           [[ref:lib:irb#customize_prompt]] を参照してください。
 
-[[m:IRB::Context#prompt_mode]] ���ѹ��˱ƶ��������������դ��Ƥ���������
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 @see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
      [[m:IRB::Context#prompt_i]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_mode -> Symbol
 
-���ߤΥץ���ץȥ⡼�ɤ� [[c:Symbol]] ���֤��ޤ���
+現在のプロンプトモードを [[c:Symbol]] で返します。
 
-���ꥸ�ʥ�Υץ���ץȥ⡼�ɤ�������Ƥ������Ϥ��Υ⡼�ɤ��֤��ޤ���
-�����Ǥʤ����ϡ�:DEFAULT��:CLASSIC��:SIMPLE��:INF_RUBY��:XMP��:NULL
-�Τ����줫���֤��ޤ���
+オリジナルのプロンプトモードを定義していた場合はそのモードを返します。
+そうでない場合は、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、:XMP、:NULL
+のいずれかを返します。
 
-����ѤߤΥץ���ץȥ⡼�ɤ����ƤˤĤ��Ƥϡ�IRB.conf[:PROMPT][mode] ��
-���Ȥ��Ƥ���������
+定義済みのプロンプトモードの内容については、IRB.conf[:PROMPT][mode] を
+参照してください。
 
 @see [[m:IRB::Context#prompt_mode=]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_mode=(mode)
 
-�ץ���ץȥ⡼�ɤ� mode �����ꤷ�ޤ���
+プロンプトモードを mode に設定します。
 
-@param mode �ץ���ץȥ⡼�ɤ� [[c:Symbol]] �ǻ��ꤷ�ޤ������ꥸ�ʥ��
-            �ץ���ץȥ⡼�ɤ���:DEFAULT��:CLASSIC��:SIMPLE��:INF_RUBY��
-            :XMP��:NULL �Τ��������ꤷ�Ƥ���������
+@param mode プロンプトモードを [[c:Symbol]] で指定します。オリジナルの
+            プロンプトモードか、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、
+            :XMP、:NULL のいずれを指定してください。
 
 @see [[m:IRB::Context#prompt_mode]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_n -> String
 
-��³�ԤΥץ���ץȤ�ɽ������ե����ޥå�ʸ������֤��ޤ���
+継続行のプロンプトを表現するフォーマット文字列を返します。
 
 @see [[m:IRB::Context#prompt_n=]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_n=(val)
 
-��³�ԤΥץ���ץȤ�ɽ������ե����ޥå�ʸ����� val �����ꤷ�ޤ���
+継続行のプロンプトを表現するフォーマット文字列を val に設定します。
 
-[[m:IRB::Context#prompt_mode]] ���ѹ��˱ƶ��������������դ��Ƥ���������
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 @see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
      [[m:IRB::Context#prompt_n]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_s -> String
 
-ʸ������Υץ���ץȤ�ɽ������ե����ޥå�ʸ������֤��ޤ���
+文字列中のプロンプトを表現するフォーマット文字列を返します。
 
 @see [[m:IRB::Context#prompt_s=]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_s=(val)
 
-ʸ������Υץ���ץȤ�ɽ������ե����ޥå�ʸ����� val �����ꤷ�ޤ���
+文字列中のプロンプトを表現するフォーマット文字列を val に設定します。
 
-@param val �ե����ޥåȤ�ʸ����ǻ��ꤷ�ޤ�������Ǥ������ƤˤĤ��Ƥϡ�
-           [[ref:lib:irb#customize_prompt]] �򻲾Ȥ��Ƥ���������
+@param val フォーマットを文字列で指定します。指定できる内容については、
+           [[ref:lib:irb#customize_prompt]] を参照してください。
 
-[[m:IRB::Context#prompt_mode]] ���ѹ��˱ƶ��������������դ��Ƥ���������
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 @see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
      [[m:IRB::Context#prompt_s]], [[ref:lib:irb#customize_prompt]]
 
 --- prompting? -> bool
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- rc  -> bool
 --- rc? -> bool
 
-~/.irbrc �ʤɤ�����ե����뤬������ɤ߹��ߤ�Ԥ����ɤ������֤��ޤ���
+~/.irbrc などの設定ファイルがあれば読み込みを行うかどうかを返します。
 
-@return ����ե�������ɤ߹��ߤ�Ԥ����� true ���֤��ޤ����Ԥ�ʤ���
-        ��(irb �ε�ư���� -f ���ץ�������ꤷ�����)�� false ���֤���
-        ����
+@return 設定ファイルの読み込みを行う場合は true を返します。行わない場
+        合(irb の起動時に -f オプションを指定した場合)は false を返しま
+        す。
 
-#@# �嵭�� .irbrc ��¸�ߤ��ʤ����� true ���֤������顢��.irbrc ���ɤ�
-#@# ����Ǥ����� true ���֤��פȤ������Ҥ�ߤ�ޤ�����
+#@# 上記は .irbrc が存在しない場合も true を返す事から、「.irbrc を読み
+#@# 込んでいたら true を返す」という記述を止めました。
 #@#
-#@# �ѹ����Ƥ�ƶ����ʤ������ά���ޤ�����
+#@# 変更しても影響がないため省略しました。
 #@# --- rc=(val)
 
 --- return_format -> String
 
-irb �Υץ���ץȤǤ�ɾ����̤�ɽ������ݤΥե����ޥåȤ�ʸ������֤��ޤ���
+irb のプロンプトでの評価結果を表示する際のフォーマットを文字列で返します。
 
 @see [[m:IRB::Context#return_format=]], [[d:print_format]]
 
 --- return_format=(val)
 
-irb �Υץ���ץȤǤ�ɾ����̤�ɽ������ݤΥե����ޥåȤ� val �����ꤷ�ޤ���
+irb のプロンプトでの評価結果を表示する際のフォーマットに val を設定します。
 
 @see [[m:IRB::Context#return_format]], [[d:print_format]]
 
-[[m:IRB::Context#prompt_mode]] ���ѹ��˱ƶ��������������դ��Ƥ���������
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 --- set_last_value(value) -> object
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- thread -> Thread
 
-���ߤΥ���åɤ��֤��ޤ���
+現在のスレッドを返します。
 
 @see [[m:Thread.current]]
 
 --- use_readline  -> bool | nil
 --- use_readline? -> bool | nil
 
-[[lib:readline]] ��Ȥ����ɤ������֤��ޤ���
+[[lib:readline]] を使うかどうかを返します。
 
-@return ����ͤ�äưʲ��Τ褦��ư��ޤ���
+@return 戻り値よって以下のように動作します。
 
 : true
-    readline �饤�֥���Ȥ�
+    readline ライブラリを使う
 : false
-    readline �饤�֥���Ȥ�ʤ�
+    readline ライブラリを使わない
 : nil
-    inf-ruby-mode �ʳ��� readline �饤�֥������Ѥ��褦�Ȥ��� (�ǥե����)
+    inf-ruby-mode 以外で readline ライブラリを利用しようとする (デフォルト)
 
-ư����ѹ����뤿��ˤ� .irbrc �ե�������� IRB.conf[:USE_READLINE] ����
-��� irb ��ư���� --readline ���ץ����--noreadline ���ץ����λ���
-��Ԥ��ޤ���
+動作を変更するためには .irbrc ファイル中で IRB.conf[:USE_READLINE] の設
+定や irb 起動時に --readline オプション、--noreadline オプションの指定
+を行います。
 
-#@# �ѹ����Ƥ�ƶ����ʤ������ά���ޤ�����
+#@# 変更しても影響がないため省略しました。
 #@#--- use_readline=(opt)
 
 --- verbose -> bool | nil
 
-ɸ����Ϥ˾ܺ٤ʥ�å���������Ϥ���褦�����ꤵ��Ƥ��뤫�ɤ������֤�
-�ޤ���
+標準出力に詳細なメッセージを出力するように設定されているかどうかを返し
+ます。
 
-[[m:IRB::Context#verbose?]] �Ȥ��̤Υ᥽�åɤǤ���������դ��Ƥ���������
+[[m:IRB::Context#verbose?]] とは別のメソッドである事に注意してください。
 
-@return �ܺ٤ʥ�å���������Ϥ���褦�����ꤵ��Ƥ������ true ����
-        ���ޤ��������Ǥʤ����� false �� nil ���֤��ޤ���
+@return 詳細なメッセージを出力するように設定されている場合は true を返
+        します。そうでない場合は false か nil を返します。
 
 @see [[m:IRB::Context#verbose?]], [[m:IRB::Context#verbose=]]
 
 --- verbose? -> bool | nil
 
-ɸ����Ϥ˾ܺ٤ʥ�å���������Ϥ��뤫�ɤ������֤��ޤ���
+標準出力に詳細なメッセージを出力するかどうかを返します。
 
-@return �ܺ٤ʥ�å���������Ϥ������ true ���֤��ޤ��������Ǥʤ���
-        ��� false �� nil ���֤��ޤ���
+@return 詳細なメッセージを出力する場合は true を返します。そうでない場
+        合は false か nil を返します。
 
-�����ԤäƤ������([[m:IRB::Context#verbose]] �� true �� false ���֤�
-���)�����ꤷ���̤��ư��ޤ��������ԤäƤ��ʤ����ϡ��ե�������
-�ꤷ�� irb ��¹Ԥ������ʤɤ� true ���֤��ޤ���
+設定を行っていた場合([[m:IRB::Context#verbose]] が true か false を返す
+場合)は設定した通りに動作します。設定を行っていない場合は、ファイルを指
+定して irb を実行した場合などに true を返します。
 
 #@until 1.9.2
-[����] 1.9.2 �ʲ��Ǥ� nil �ʳ��� [[m:IRB::Context#verbose=]] �˻��ꤹ��
-�Ⱦ�� nil ���֤��Զ�礬����������դ��Ƥ���������
+[注意] 1.9.2 以下では nil 以外を [[m:IRB::Context#verbose=]] に指定する
+と常に nil を返す不具合がある事に注意してください。
 #@end
 
 @see [[m:IRB::Context#verbose]], [[m:IRB::Context#verbose=]]
 
 --- verbose=(val)
 
-ɸ����Ϥ˾ܺ٤ʥ�å���������Ϥ��뤫�ɤ����� val �����ꤷ�ޤ���
+標準出力に詳細なメッセージを出力するかどうかを val に設定します。
 
-.irbrc �ե�������� IRB.conf[:VERBOSE] �����ꤹ����Ǥ�Ʊ�ͤ����Ԥ�
-�ޤ���
+.irbrc ファイル中で IRB.conf[:VERBOSE] を設定する事でも同様の操作が行え
+ます。
 
-false �� nil ����ꤷ�����Ǥ⡢[[m:IRB::Context#verbose?]] �� true ��
-�֤����Ͼܺ٤ʥ�å���������Ϥ���������դ��Ƥ���������
+false や nil を指定した場合でも、[[m:IRB::Context#verbose?]] が true を
+返す場合は詳細なメッセージを出力する事に注意してください。
 
-@param val true ����ꤷ����硢�ܺ٤ʥ�å���������Ϥ��ޤ���false ��
-           nil ����ꤷ����硢�ܺ٤ʥ�å���������Ϥ��ޤ���
+@param val true を指定した場合、詳細なメッセージを出力します。false や
+           nil を指定した場合、詳細なメッセージを出力しません。
 
 @see [[m:IRB::Context#verbose]], [[m:IRB::Context#verbose?]]
 
 --- workspace -> IRB::WorkSpace
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- workspace=(val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
-#@# ���Ѥ���Ƥ��ʤ������ά���ޤ�����
+#@# 使用されていないため省略しました。
 #@# --- workspace_home -> nil
 
 == Constants
 
 --- NOPRINTING_IVARS -> [String]
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- NO_INSPECTING_IVARS -> [String]
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- IDNAME_IVARS -> [String]
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。

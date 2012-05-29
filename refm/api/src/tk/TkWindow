@@ -250,7 +250,7 @@
 #@since 1.8.2
 --- set_focus(force = false)
 #@todo
-set_focus¤¬ËÜÂÎ
+set_focusãŒæœ¬ä½“
 #@end
 
 #@since 1.8.1

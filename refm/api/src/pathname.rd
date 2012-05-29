@@ -1,4 +1,4 @@
-�ѥ�̾�򥪥֥������Ȼظ��餷����������Υ饤�֥��Ǥ���
+パス名をオブジェクト指向らしく扱うためのライブラリです。
 
 #@since 1.8.5
 = reopen Kernel
@@ -6,31 +6,31 @@
 == Private Instance Methods
 
 --- Pathname(path) -> Pathname
-ʸ���� path �򸵤� [[c:Pathname]] ���֥������Ȥ��������ޤ���
+文字列 path を元に [[c:Pathname]] オブジェクトを生成します。
 
-Pathname.new(path) ��Ʊ���Ǥ���
+Pathname.new(path) と同じです。
 
-@param path ʸ���󡢤ޤ�������Υ��֥������Ȥ�Ϳ���ޤ���
-            �ºݤˤ� to_str ��ȿ�����륪�֥������Ȥʤ鲿�Ǥ⹽���ޤ���
+@param path 文字列、または類似のオブジェクトを与えます。
+            実際には to_str に反応するオブジェクトなら何でも構いません。
 
 #@end
 
 = class Pathname < Object
 
-�ѥ�̾�򥪥֥������Ȼظ��餷���������饹�Ǥ���
+パス名をオブジェクト指向らしく扱うクラスです。
 
-Pathname ���֥������Ȥϥѥ�̾��ɽ���Ƥ��ꡢ�ե������ǥ��쥯�ȥꤽ�Τ�Τ�ɽ���ƤϤ��ޤ���
-������¸�ߤ��ʤ��ե�����Υѥ�̾�ⰷ���ޤ���
+Pathname オブジェクトはパス名を表しており、ファイルやディレクトリそのものを表してはいません。
+当然、存在しないファイルのパス名も扱えます。
 
-���Хѥ������Хѥ��ⰷ���ޤ���
+絶対パスも相対パスも扱えます。
 
-Pathname ���֥������Ȥ� immutable �Ǥ��ꡢ���Ȥ��˲�Ū������᥽�åɤϤ���ޤ���
+Pathname オブジェクトは immutable であり、自身を破壊的に操作するメソッドはありません。
 
-Pathname �Υ��󥹥��󥹥᥽�åɤˤϡ��ǥ��쥯�ȥ�Υѥ����֤� [[m:Pathname#dirname]] �Τ褦�ˡ�
-ʸ�����������Ƿ�̤��֤���Τ⤢��С��ե��������Ȥ��ɤ߽Ф� [[m:Pathname#read]] �Τ褦��
-�ե����륷���ƥ�˥������������Τ⤢��ޤ���
+Pathname のインスタンスメソッドには、ディレクトリのパスを返す [[m:Pathname#dirname]] のように、
+文字列操作だけで結果を返すものもあれば、ファイルの中身を読み出す [[m:Pathname#read]] のように
+ファイルシステムにアクセスするものもあります。
 
-Pathname ���֥������Ȥ������ˤϡ�[[m:Pathname.new]] �Τۤ��� [[m:Kernel#Pathname]] ��Ȥ��ޤ���
+Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m:Kernel#Pathname]] も使えます。
 
   Pathname.new("foo/bar") # => #<Pathname:foo/bar>
   Pathname("foo/bar")     # => #<Pathname:foo/bar>
@@ -40,45 +40,45 @@ Pathname ���֥������Ȥ������ˤϡ�[[m:Pathname.new]] �Τۤ��� [[m:Kernel#Pathname
 
 #@since 1.8.5
 --- SEPARATOR_PAT
-�ѥ�̾�Τʤ��Υǥ��쥯�ȥ����ڤ���ʬ�˥ޥå���������ɽ���Ǥ���
+パス名のなかのディレクトリを区切る部分にマッチする正規表現です。
 
-�����ͤϴĶ���¸�Ǥ���
+この値は環境依存です。
 
 --- TO_PATH
-����Ū�˻ȤäƤ�������Ǥ������ѼԤ��Ȥ����ȤϤ���ޤ���
+内部的に使っている定数です。利用者が使うことはありません。
 
 #@end
 
 == Class Methods
 
 --- new(path) -> Pathname
-ʸ���� path �򸵤� Pathname ���֥������Ȥ��������ޤ���
+文字列 path を元に Pathname オブジェクトを生成します。
 
-@param path ʸ���󡢤ޤ�������Υ��֥������Ȥ�Ϳ���ޤ���
-            �ºݤˤ� to_str ��ȿ�����륪�֥������Ȥʤ鲿�Ǥ⹽���ޤ���
+@param path 文字列、または類似のオブジェクトを与えます。
+            実際には to_str に反応するオブジェクトなら何でも構いません。
 
-@raise ArgumentError path �� \0 ��ޤ�Ǥ����ȯ�����ޤ���
+@raise ArgumentError path が \0 を含んでいると発生します。
 
 --- getwd -> Pathname
 --- pwd   -> Pathname
-�����ȥǥ��쥯�ȥ�򸵤� Pathname ���֥������Ȥ��������ޤ���
-Pathname.new(Dir.getwd) ��Ʊ���Ǥ���
+カレントディレクトリを元に Pathname オブジェクトを生成します。
+Pathname.new(Dir.getwd) と同じです。
 
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
 
-�磻��ɥ����ɤ�Ÿ����Ԥʤä���̤�
-Pathname ���֥������Ȥ�����Ȥ����֤��ޤ���
+ワイルドカードの展開を行なった結果を、
+Pathname オブジェクトの配列として返します。
 
-�����ΰ�̣�ϡ�[[m:Dir.glob]] ��Ʊ���Ǥ��� flag �ν���ͤǤ��� 0 �ϡֲ�
-����ꤷ�ʤ��פ��Ȥ��̣���ޤ���
+引数の意味は、[[m:Dir.glob]] と同じです。 flag の初期値である 0 は「何
+も指定しない」ことを意味します。
 
-�֥��å���Ϳ����줿�Ȥ��ϡ��磻��ɥ����ɤ˥ޥå����� Pathname ���֥���
-���Ȥ�1�Ĥ��İ����Ȥ��Ƥ��Υ֥��å���Ϳ���Ƽ¹Ԥ����ޤ������ξ�硢�ͤ�
-���Ƥ� nil ���֤��ޤ���
+ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェ
+クトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値と
+しては nil を返します。
 
-@param pattern �磻��ɥ����ɥѥ�����Ǥ�
-@param flags   �ѥ�����ޥå����Τդ�ޤ����Ѳ�������ե饰����ꤷ�ޤ�
+@param pattern ワイルドカードパターンです
+@param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
 
 == Instance Methods
 
@@ -86,13 +86,13 @@ Pathname ���֥������Ȥ�����Ȥ����֤��ޤ���
 --- ===(other)  -> bool
 --- eql?(other) -> bool
 
-�ѥ�̾����Ӥ��� other ��Ʊ���ʤ鿿���֤��ޤ�����ʸ����ʸ���϶��̤���ޤ���
-other �� Pathname ���֥������ȤǤʤ���Фʤ�ޤ���
+パス名を比較し、 other と同じなら真を返します。大文字小文字は区別されます。
+other は Pathname オブジェクトでなければなりません。
 
-�ѥ�̾����Ӥ�ñ��˥ѥ�ʸ�������Ӥˤ�äƹԤ���Τǡ�����Ū��
-Ʊ���ѥ��Ǥ�ѥ�ʸ���󤬰㤨�аۤʤ��Ƚ�Ǥ���ޤ���
+パス名の比較は単純にパス文字列の比較によって行われるので、論理的に
+同じパスでもパス文字列が違えば異なると判断されます。
 
-@param other ����оݤ� Pathname ���֥������Ȥ���ꤷ�ޤ���
+@param other 比較対象の Pathname オブジェクトを指定します。
 
     require 'pathname'
 
@@ -106,14 +106,14 @@ other �� Pathname ���֥������ȤǤʤ���Фʤ�ޤ���
 
 --- <=>(other) -> bool
 
-�ѥ�̾����Ӥ��ޤ���other ��Ʊ���ʤ� 0 ��ASCII��� self ���礭�����
-������other ���礭����������֤��ޤ�����ʸ����ʸ���϶��̤���ޤ���
-other �� Pathname ���֥������ȤǤʤ���Фʤ�ޤ���
+パス名を比較します。other と同じなら 0 を、ASCII順で self が大きい場合
+は正、other が大きい場合は負を返します。大文字小文字は区別されます。
+other は Pathname オブジェクトでなければなりません。
 
-�ѥ�̾����Ӥ�ñ��˥ѥ�ʸ�������Ӥˤ�äƹԤ���Τǡ�����Ū��
-Ʊ���ѥ��Ǥ�ѥ�ʸ���󤬰㤨�аۤʤ��Ƚ�Ǥ���ޤ���
+パス名の比較は単純にパス文字列の比較によって行われるので、論理的に
+同じパスでもパス文字列が違えば異なると判断されます。
 
-@param other ����оݤ� Pathname ���֥������Ȥ���ꤷ�ޤ���
+@param other 比較対象の Pathname オブジェクトを指定します。
 
     require 'pathname'
 
@@ -125,17 +125,17 @@ other �� Pathname ���֥������ȤǤʤ���Фʤ�ޤ���
        -1
 
 --- hash -> Fixnum
-�ϥå����ͤ��֤��ޤ���
+ハッシュ値を返します。
 
 --- to_s   -> String
 #@until 1.9.1
 --- to_str -> String
 #@end
-�ѥ�̾��ʸ������֤��ޤ���
+パス名を文字列で返します。
 
 #@until 1.9.1
-to_str �ϡ�[[m:File.open]] �ʤɤΰ����ˤ��Τޤ� Pathname ���֥������Ȥ�
-�Ϥ���褦�ˤ��뤿����Ѱդ���Ƥ��ޤ���
+to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジェクトを
+渡せるようにするために用意されています。
 #@end
 
     require 'pathname'
@@ -144,13 +144,13 @@ to_str �ϡ�[[m:File.open]] �ʤɤΰ����ˤ��Τޤ� Pathname ���֥������Ȥ�
     File.open(path)
 
 --- cleanpath(consider_symlink = false) -> Pathname
-;�פ� "."��".." �� "/" ��������������� Pathname ���֥������Ȥ��֤��ޤ���
+余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
-cleanpath �ϡ��ºݤ˥ե����륷���ƥ�򻲾Ȥ��뤳�Ȥʤ���ʸ�������
-�����ǽ�����Ԥ��ޤ���
+cleanpath は、実際にファイルシステムを参照することなく、文字列操作
+だけで処理を行います。
 
-@param consider_symlink ���ʤ�ѥ����Ǥ˥���ܥ�å���󥯤����ä����
-                        �ˤ�����ʤ��褦�� .. ��Ĥ��ޤ���
+@param consider_symlink 真ならパス要素にシンボリックリンクがあった場合
+                        にも問題ないように .. を残します。
 
     require "pathname"
     path = Pathname.new("//.././../")
@@ -179,19 +179,19 @@ cleanpath �ϡ��ºݤ˥ե����륷���ƥ�򻲾Ȥ��뤳�Ȥʤ���ʸ�������
 #@else
 --- realpath -> Pathname
 #@end
-;�פ� "."��".." �� "/" ��������������� Pathname ���֥������Ȥ��֤��ޤ���
+余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
-�ޤ����ե����륷���ƥ�򥢥����������ºݤ�¸�ߤ���ѥ����֤��ޤ���
-����ܥ�å���󥯤��褵��ޤ���
+また、ファイルシステムをアクセスし、実際に存在するパスを返します。
+シンボリックリンクも解決されます。
 
-self ���ؤ��ѥ���¸�ߤ��ʤ������㳰 [[c:Errno::ENOENT]] ��ȯ�����ޤ���
+self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
 
 #@since 1.9.2
-@param basedir �١����ǥ��쥯�ȥ����ꤷ�ޤ�����ά����ȥ����ȥǥ��쥯�ȥ�ˤʤ�ޤ���
+@param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 #@end
 #@until 1.8.5
-@param force_absolute ���ξ�硢���Хѥ����֤��ޤ��� self �����Хѥ��Ǥ���С������ȥǥ��쥯�ȥ꤫������Хѥ��Ȥ��Ʋ�ᤵ��ޤ���
-                      �Ť���ư�� obsolete �Ǥ��������Ͼ�ά���٤��Ǥ���
+@param force_absolute 真の場合、絶対パスを返します。 self が相対パスであれば、カレントディレクトリからの相対パスとして解釈されます。
+                      古い挙動は obsolete です。引数は省略すべきです。
 #@end
 
     require 'pathname'
@@ -223,31 +223,31 @@ self ���ؤ��ѥ���¸�ߤ��ʤ������㳰 [[c:Errno::ENOENT]] ��ȯ�����ޤ���
 
 --- realdirpath(basedir = nil) -> Pathname
 
-[[m:Pathname#realpath]] �Ȥۤ�Ʊ���ǡ��Ǹ�Υ���ݡ��ͥ�Ȥϼºݤ�
-¸�ߤ��ʤ��Ƥ⥨�顼�ˤʤ�ޤ���
+[[m:Pathname#realpath]] とほぼ同じで、最後のコンポーネントは実際に
+存在しなくてもエラーになりません。
 
-@param basedir �١����ǥ��쥯�ȥ����ꤷ�ޤ�����ά����ȥ����ȥǥ��쥯�ȥ�ˤʤ�ޤ���
+@param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 
 @see [[m:Pathname#realpath]]
 #@end
 --- parent -> Pathname
-self �οƥǥ��쥯�ȥ��ؤ������� Pathname ���֥������Ȥ��֤��ޤ���
+self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
 
 --- mountpoint? -> bool
-self ���ޥ���ȥݥ���ȤǤ���п����֤��ޤ���
+self がマウントポイントであれば真を返します。
 
 --- root? -> bool
-self ���롼�ȥǥ��쥯�ȥ�Ǥ���п����֤��ޤ���Ƚ�Ǥ�ʸ�������ˤ��
-�ƹԤ�졢�ե����륷���ƥ�ϥ�����������ޤ���
+self がルートディレクトリであれば真を返します。判断は文字列操作によっ
+て行われ、ファイルシステムはアクセスされません。
 
 --- absolute? -> bool
-self �����Хѥ�����Ǥ���п����֤��ޤ���
+self が絶対パス指定であれば真を返します。
 
 --- relative? -> bool
-self �����Хѥ�����Ǥ���п����֤��ޤ���
+self が相対パス指定であれば真を返します。
 
 --- each_filename {|v| ... } -> nil
-self �Υѥ�̾������˥֥��å���¹Ԥ��ޤ���
+self のパス名要素毎にブロックを実行します。
 
     require 'pathname'
 
@@ -258,29 +258,29 @@ self �Υѥ�̾������˥֥��å���¹Ԥ��ޤ���
          "bar"
 
 --- +(other) -> Pathname
-�ѥ�̾��Ϣ�뤷�ޤ����Ĥޤꡢother �� self ��������Хѥ��Ȥ���������
-Pathname ���֥������Ȥ����������֤��ޤ���
+パス名を連結します。つまり、other を self からの相対パスとした新しい
+Pathname オブジェクトを生成して返します。
 
-other �����Хѥ��ʤ�ñ�� other ��Ʊ�����Ƥ� Pathname ���֥������Ȥ��֤�
-��ޤ���
+other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
+れます。
 
  Pathname("foo/bar")+"baz" # => #<Pathname:foo/bar/baz>
  Pathname("foo/bar/")+"baz" # => #<Pathname:foo/bar/baz>
  Pathname("foo/bar")+"/baz" # => #<Pathname:/baz>
  Pathname("foo/bar")+"../baz" # => #<Pathname:foo/baz>
 
-@param other ʸ���� Pathname ���֥������Ȥ���ꤷ�ޤ���
+@param other 文字列か Pathname オブジェクトを指定します。
 
 #@since 1.8.1
 
 --- children(with_directory = true) -> [Pathname]
-self �۲��ˤ���ѥ�̾(Pathname���֥�������)��������֤��ޤ���
+self 配下にあるパス名(Pathnameオブジェクト)の配列を返します。
 
-�������� ".", ".." �����Ǥ˴ޤޤ�ޤ���
+ただし、 ".", ".." は要素に含まれません。
 
-@param with_directory ������ꤹ��ȥե�����̾�Τ��֤��ޤ����ǥե���ȤϿ��Ǥ���
+@param with_directory 偽を指定するとファイル名のみ返します。デフォルトは真です。
 
-@raise Errno::EXXX self ��¸�ߤ��ʤ��ѥ��Ǥ��ä���ǥ��쥯�ȥ�Ǥʤ�����㳰��ȯ�����ޤ���
+@raise Errno::EXXX self が存在しないパスであったりディレクトリでなければ例外が発生します。
 
     require 'pathname'
     Pathname.new("/tmp").children # => [#<Pathname:.X11-unix>, #<Pathname:.iroha_unix>, ... ]
@@ -292,9 +292,9 @@ self �۲��ˤ���ѥ�̾(Pathname���֥�������)��������֤��ޤ���
 --- each_child(with_directory = true)                  -> Enumerator
 --- each_child(with_directory = true) {|pathname| ...} -> [Pathname]
 
-self.children(with_directory).each ��Ʊ���Ǥ���
+self.children(with_directory).each と同じです。
 
-@param with_directory ������ꤹ��ȥե�����̾�Τ��֤��ޤ����ǥե���ȤϿ��Ǥ���
+@param with_directory 偽を指定するとファイル名のみ返します。デフォルトは真です。
 
 @see [[m:Pathname#children]]
 #@end
@@ -302,16 +302,16 @@ self.children(with_directory).each ��Ʊ���Ǥ���
 #@since 1.8.1
 
 --- relative_path_from(base_directory) -> Pathname
-base_directory ���� self �ؤ����Хѥ����ᡢ�������Ƥο����� Pathname
-���֥������Ȥ����������֤��ޤ���
+base_directory から self への相対パスを求め、その内容の新しい Pathname
+オブジェクトを生成して返します。
 
-�ѥ�̾�β���ʸ�������ˤ�äƹԤ�졢�ե����륷���ƥ�򥢥�����
-���ޤ���
+パス名の解決は文字列操作によって行われ、ファイルシステムをアクセス
+しません。
 
-self �����Хѥ��ʤ� base_directory �����Хѥ���self �����Хѥ��ʤ�
-base_directory �����Хѥ��Ǥʤ���Фʤ�ޤ���
+self が相対パスなら base_directory も相対パス、self が絶対パスなら
+base_directory も絶対パスでなければなりません。
 
-@param base_directory �١����ǥ��쥯�ȥ��ɽ�� Pathname ���֥������Ȥ���ꤷ�ޤ���
+@param base_directory ベースディレクトリを表す Pathname オブジェクトを指定します。
 
     require 'pathname'
 
@@ -330,136 +330,136 @@ base_directory �����Хѥ��Ǥʤ���Фʤ�ޤ���
 #@else
 --- each_line(*args) -> Enumerable::Enumerator
 #@end
-IO.foreach(self.to_s, *args, &block) ��Ʊ���Ǥ���
+IO.foreach(self.to_s, *args, &block) と同じです。
 
 @see [[m:IO.foreach]]
 #@end
 
 #@until 1.9.2
 --- foreachline(*args){|line| ... } -> nil
-IO.foreach(self.to_s, *args, &block) ��Ʊ���Ǥ���
+IO.foreach(self.to_s, *args, &block) と同じです。
 
 #@since 1.8.1
-���Υ᥽�åɤ� obsolete �Ǥ���
-����� [[m:Pathname#each_line]] ��ȤäƤ���������
+このメソッドは obsolete です。
+代わりに [[m:Pathname#each_line]] を使ってください。
 #@end
 
 @see [[m:IO.foreach]]
 #@end
 --- read(*args) -> String | nil
-IO.read(self.to_s, *args)��Ʊ���Ǥ���
+IO.read(self.to_s, *args)と同じです。
 
 @see [[m:IO.read]]
 
 #@since 1.9.2
 --- binread(*args) -> String | nil
-IO.binread(self.to_s, *args)��Ʊ���Ǥ���
+IO.binread(self.to_s, *args)と同じです。
 
 @see [[m:IO.binread]]
 
 #@end
 --- readlines(*args) -> [String]
-IO.readlines(self.to_s, *args)��Ʊ���Ǥ���
+IO.readlines(self.to_s, *args)と同じです。
 
 @see [[m:IO.readlines]]
 
 --- sysopen(*args) -> Integer
-IO.sysopen(self.to_s, *args)��Ʊ���Ǥ���
+IO.sysopen(self.to_s, *args)と同じです。
 
 @see [[m:IO.sysopen]]
 
 #@since 1.8.1
 --- make_link(old) -> 0
-File.link(old, self.to_s) ��Ʊ���Ǥ���
+File.link(old, self.to_s) と同じです。
 
 @see [[m:File.link]]
 
 --- make_symlink(old) -> 0
-File.symlink(old, self.to_s) ��Ʊ���Ǥ���
+File.symlink(old, self.to_s) と同じです。
 
 @see [[m:File.symlink]]
 #@end
 
 --- atime -> Time
-File.atime(self.to_s) ���Ϥ�����Τ�Ʊ���Ǥ���
+File.atime(self.to_s) を渡したものと同じです。
 
 @see [[m:File.atime]]
 
 --- ctime -> Time
-File.ctime(self.to_s) ���Ϥ�����Τ�Ʊ���Ǥ���
+File.ctime(self.to_s) を渡したものと同じです。
 
 @see [[m:File.ctime]]
 --- mtime -> Time
-File.mtime(self.to_s) ���Ϥ�����Τ�Ʊ���Ǥ���
+File.mtime(self.to_s) を渡したものと同じです。
 
 @see [[m:File.mtime]]
 
 --- chmod(mode) -> Integer
-File.chmod(mode, self.to_s) ��Ʊ���Ǥ���
+File.chmod(mode, self.to_s) と同じです。
 
-@param mode �ե�����Υ����������¤������ǻ��ꤷ�ޤ���
+@param mode ファイルのアクセス権限を整数で指定します。
 
 @see [[m:File.chmod]]
 
 --- lchmod(mode) -> Integer
-File.lchmod(mode, self.to_s) ��Ʊ���Ǥ���
+File.lchmod(mode, self.to_s) と同じです。
 
-@param mode �ե�����Υ����������¤������ǻ��ꤷ�ޤ���
+@param mode ファイルのアクセス権限を整数で指定します。
 
 @see [[m:File.lchmod]]
 
 --- chown(owner, group) -> Integer
-File.chown(owner, group, self.to_s) ��Ʊ���Ǥ���
+File.chown(owner, group, self.to_s) と同じです。
 
-@param owner �����ʡ�����ꤷ�ޤ���
+@param owner オーナーを指定します。
 
-@param group ���롼�פ���ꤷ�ޤ���
+@param group グループを指定します。
 
 @see [[m:File.chown]]
 
 --- lchown(owner, group) -> Integer
-File.lchown(owner, group, self.to_s) ��Ʊ���Ǥ���
+File.lchown(owner, group, self.to_s) と同じです。
 
-@param owner �����ʡ�����ꤷ�ޤ���
+@param owner オーナーを指定します。
 
-@param group ���롼�פ���ꤷ�ޤ���
+@param group グループを指定します。
 
 @see [[m:File.lchown]]
 
 --- fnmatch(pattern, *args) -> bool
-File.fnmatch(pattern, self.to_s, *args) ��Ʊ���Ǥ���
+File.fnmatch(pattern, self.to_s, *args) と同じです。
 
-@param pattern �ѥ������ʸ����ǻ��ꤷ�ޤ����磻��ɥ����ɤȤ��� `*', `?', `[]' �����ѤǤ���
-               ����[[m:Dir.glob]] �Ȥϰ�ä� `{}' �� `**/' �ϻ��ѤǤ��ޤ���
+@param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
+               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
 
-@param args [[m:File.fnmatch]] �򻲾Ȥ��Ƥ���������
+@param args [[m:File.fnmatch]] を参照してください。
 
 @see [[m:File.fnmatch]]
 
 --- fnmatch?(pattern, *args) -> bool
-File.fnmatch?(pattern, self.to_s, *args) ��Ʊ���Ǥ���
+File.fnmatch?(pattern, self.to_s, *args) と同じです。
 
-@param pattern �ѥ������ʸ����ǻ��ꤷ�ޤ����磻��ɥ����ɤȤ��� `*', `?', `[]' �����ѤǤ���
-               ����[[m:Dir.glob]] �Ȥϰ�ä� `{}' �� `**/' �ϻ��ѤǤ��ޤ���
+@param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
+               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
 
-@param args [[m:File.fnmatch]] �򻲾Ȥ��Ƥ���������
+@param args [[m:File.fnmatch]] を参照してください。
 
 @see [[m:File.fnmatch?]]
 
 --- ftype -> String
-File.ftype(self.to_s) ��Ʊ���Ǥ���
+File.ftype(self.to_s) と同じです。
 
 @see [[m:File.ftype]]
 
 #@until 1.9.2
 --- link(old) -> 0
-�쥷���ФȰ����������ƥॳ����ΰ����ȵս���б����Ƥ���ʶ��路�����ᡢ
-���Υ᥽�åɤ� obsolete �Ǥ���
-����� [[m:Pathname#make_link]] ��ȤäƤ���������
+レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
+このメソッドは obsolete です。
+代わりに [[m:Pathname#make_link]] を使ってください。
 
-File.link(old, self.to_s) ��Ʊ���Ǥ���
+File.link(old, self.to_s) と同じです。
 
-@param old �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param old ファイル名を表す文字列を指定します。
 
 @see [[m:File.link]]
 
@@ -467,260 +467,260 @@ File.link(old, self.to_s) ��Ʊ���Ǥ���
 
 --- open(mode = 'r', perm = 0666) -> File
 --- open(mode = 'r', perm = 0666){|file| ... } -> object
-File.open(self.to_s, *args, &block) ��Ʊ���Ǥ���
+File.open(self.to_s, *args, &block) と同じです。
 
 @see [[m:File.open]]
 
 --- readlink -> Pathname
-Pathname.new(File.readlink(self.to_s)) ��Ʊ���Ǥ���
+Pathname.new(File.readlink(self.to_s)) と同じです。
 
 @see [[m:File.readlink]]
 
 --- rename(to) -> 0
-File.rename(self.to_s, to) ��Ʊ���Ǥ���
+File.rename(self.to_s, to) と同じです。
 
-@param to �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param to ファイル名を表す文字列を指定します。
 
 @see [[m:File.rename]]
 
 --- stat -> File::Stat
-File.stat(self.to_s) ��Ʊ���Ǥ���
+File.stat(self.to_s) と同じです。
 
 @see [[m:File.stat]]
 
 --- lstat -> File::Stat
-File.lstat(self.to_s) ��Ʊ���Ǥ���
+File.lstat(self.to_s) と同じです。
 
 @see [[m:File.lstat]]
 
 #@until 1.9.2
 --- symlink(old) -> 0
-�쥷���ФȰ����������ƥॳ����ΰ����ȵս���б����Ƥ���ʶ��路�����ᡢ
-���Υ᥽�åɤ� obsolete �Ǥ���
-����� [[m:Pathname#make_symlink]] ��ȤäƤ���������
+レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
+このメソッドは obsolete です。
+代わりに [[m:Pathname#make_symlink]] を使ってください。
 
-File.symlink(old, self.to_s) ��Ʊ���Ǥ���
+File.symlink(old, self.to_s) と同じです。
 
-@param old �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param old ファイル名を表す文字列を指定します。
 
 @see [[m:File.symlink]]
 
 #@end
 
 --- truncate(length) -> 0
-File.truncate(self.to_s, length) ��Ʊ���Ǥ���
+File.truncate(self.to_s, length) と同じです。
 
-@param length �ѹ���������������������Ϳ���ޤ���
+@param length 変更したいサイズを整数で与えます。
 
 @see [[m:File.truncate]]
 
 --- utime(atime, mtime) -> Integer
-File.utime(atime, mtime, self.to_s) ��Ʊ���Ǥ���
+File.utime(atime, mtime, self.to_s) と同じです。
 
-@param atime �ǽ�������������� [[c:Time]] ��������������ηв��ÿ�����ͤǻ��ꤷ�ޤ���
+@param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime ��������� [[c:Time]] ��������������ηв��ÿ�����ͤǻ��ꤷ�ޤ���
+@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @see [[m:File.utime]]
 
 --- basename(suffix = "") -> Pathname
-Pathname.new(File.basename(self.to_s, suffix)) ��Ʊ���Ǥ���
+Pathname.new(File.basename(self.to_s, suffix)) と同じです。
 
-@param suffix ���ե��å�����ʸ�����Ϳ���ޤ���'.*' �Ȥ���ʸ�����Ϳ������硢'*' �ϥ磻��ɥ����ɤȤ���Ư��
-              '.' ��ޤޤʤ�Ǥ�դ�ʸ����˥ޥå����ޤ���
+@param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
+              '.' を含まない任意の文字列にマッチします。
 
 @see [[m:File.basename]]
 
 --- dirname -> Pathname
-Pathname.new(File.dirname(self.to_s)) ��Ʊ���Ǥ���
+Pathname.new(File.dirname(self.to_s)) と同じです。
 
 @see [[m:File.dirname]]
 
 --- extname -> String
-File.extname(self.to_s) ��Ʊ���Ǥ���
+File.extname(self.to_s) と同じです。
 
 @see [[m:File.extname]]
 
 --- expand_path(default_dir = '.') -> Pathname
-Pathname.new(File.expand_path(self.to_s, *args)) ��Ʊ���Ǥ���
+Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
 
-@param default_dir self �����Хѥ��Ǥ���� default_dir �����Ÿ������ޤ���
+@param default_dir self が相対パスであれば default_dir を基準に展開されます。
 
 @see [[m:File.expand_path]]
 
 --- join(*args) -> Pathname
 
-Ϳ����줿�ѥ�̾��Ϣ�뤷�ޤ���
+与えられたパス名を連結します。
 
-@param args Ϣ�뤷�����ǥ��쥯�ȥ�̾��ե�����̾��ʸ�����Ϳ���ޤ���
+@param args 連結したいディレクトリ名やファイル名を文字列で与えます。
 
 --- split -> Array
-File.split(self.to_s) ��Ʊ���Ǥ���
+File.split(self.to_s) と同じです。
 
 @see [[m:File.split]]
 
 --- blockdev? -> bool
-FileTest.blockdev?(self.to_s) ��Ʊ���Ǥ���
+FileTest.blockdev?(self.to_s) と同じです。
 
 @see [[m:FileTest.#blockdev?]]
 
 --- chardev? -> bool
-FileTest.chardev?(self.to_s) ��Ʊ���Ǥ���
+FileTest.chardev?(self.to_s) と同じです。
 
 @see [[m:FileTest.#chardev?]]
 
 --- executable? -> bool
-FileTest.executable?(self.to_s) ��Ʊ���Ǥ���
+FileTest.executable?(self.to_s) と同じです。
 
 @see [[m:FileTest.#executable?]]
 
 --- executable_real? -> bool
-FileTest.executable_real?(self.to_s) ��Ʊ���Ǥ���
+FileTest.executable_real?(self.to_s) と同じです。
 
 @see [[m:FileTest.#executable_real?]]
 
 --- exist? -> bool
-FileTest.exist?(self.to_s) ��Ʊ���Ǥ���
+FileTest.exist?(self.to_s) と同じです。
 
 @see [[m:FileTest.#exist?]]
 
 --- grpowned? -> bool
-FileTest.grpowned?(self.to_s) ��Ʊ���Ǥ���
+FileTest.grpowned?(self.to_s) と同じです。
 
 @see [[m:FileTest.#grpowned?]]
 
 --- directory? -> bool
-FileTest.directory?(self.to_s) ��Ʊ���Ǥ���
+FileTest.directory?(self.to_s) と同じです。
 
 @see [[m:FileTest.#directory?]]
 
 --- file? -> bool
-FileTest.file?(self.to_s) ��Ʊ���Ǥ���
+FileTest.file?(self.to_s) と同じです。
 
 @see [[m:FileTest.#file?]]
 
 --- pipe? -> bool
-FileTest.pipe?(self.to_s) ��Ʊ���Ǥ���
+FileTest.pipe?(self.to_s) と同じです。
 
 @see [[m:FileTest.#pipe?]]
 
 --- socket? -> bool
-FileTest.socket?(self.to_s) ��Ʊ���Ǥ���
+FileTest.socket?(self.to_s) と同じです。
 
 @see [[m:FileTest.#socket?]]
 
 --- owned? -> bool
-FileTest.owned?(self.to_s) ��Ʊ���Ǥ���
+FileTest.owned?(self.to_s) と同じです。
 
 @see [[m:FileTest.#owned?]]
 
 --- readable? -> bool
-FileTest.readable?(self.to_s) ��Ʊ���Ǥ���
+FileTest.readable?(self.to_s) と同じです。
 
 @see [[m:FileTest.#readable?]]
 
 --- readable_real? -> bool
-FileTest.readable_real?(self.to_s) ��Ʊ���Ǥ���
+FileTest.readable_real?(self.to_s) と同じです。
 
 @see [[m:FileTest.#readable_real?]]
 
 --- setuid? -> bool
-FileTest.setuid?(self.to_s) ��Ʊ���Ǥ���
+FileTest.setuid?(self.to_s) と同じです。
 
 @see [[m:FileTest.#setuid?]]
 
 --- setgid? -> bool
-FileTest.setgid?(self.to_s) ��Ʊ���Ǥ���
+FileTest.setgid?(self.to_s) と同じです。
 
 @see [[m:FileTest.#setgid?]]
 
 --- size -> Integer
-FileTest.size(self.to_s) ��Ʊ���Ǥ���
+FileTest.size(self.to_s) と同じです。
 
 @see [[m:FileTest.#size]]
 
 --- size? -> bool
-FileTest.size?(self.to_s) ��Ʊ���Ǥ���
+FileTest.size?(self.to_s) と同じです。
 
 @see [[m:FileTest.#size?]]
 
 --- sticky? -> bool
-FileTest.sticky?(self.to_s) ��Ʊ���Ǥ���
+FileTest.sticky?(self.to_s) と同じです。
 
 @see [[m:FileTest.#sticky?]]
 
 --- symlink? -> bool
-FileTest.symlink?(self.to_s) ��Ʊ���Ǥ���
+FileTest.symlink?(self.to_s) と同じです。
 
 @see [[m:FileTest.#symlink?]]
 
 #@since 1.8.5
 
 --- world_readable? -> bool
-FileTest.world_readable?(self.to_s) ��Ʊ���Ǥ���
+FileTest.world_readable?(self.to_s) と同じです。
 
 @see [[m:FileTest.#world_readable?]]
 
 --- world_writable? -> bool
-FileTest.world_writable?(self.to_s) ��Ʊ���Ǥ���
+FileTest.world_writable?(self.to_s) と同じです。
 
 @see [[m:FileTest.#world_writable?]]
 
 #@end
 
 --- writable? -> bool
-FileTest.writable?(self.to_s) ��Ʊ���Ǥ���
+FileTest.writable?(self.to_s) と同じです。
 
 @see [[m:FileTest.#writable?]]
 
 --- writable_real? -> bool
-FileTest.writable_real?(self.to_s) ��Ʊ���Ǥ���
+FileTest.writable_real?(self.to_s) と同じです。
 
 @see [[m:FileTest.#writable_real?]]
 
 --- zero? -> bool
-FileTest.zero?(self.to_s) ��Ʊ���Ǥ���
+FileTest.zero?(self.to_s) と同じです。
 
 @see [[m:FileTest.#zero?]]
 
 #@until 1.9.2
 --- chdir{|path| ... } -> object
 #@since 1.8.1
-���Υ᥽�åɤ� obsolete �Ǥ���
-����� [[m:Dir.chdir]] ��ȤäƤ���������
+このメソッドは obsolete です。
+代わりに [[m:Dir.chdir]] を使ってください。
 #@end
 
-Dir.chdir(self.to_s, &block) ��Ʊ���Ǥ���
+Dir.chdir(self.to_s, &block) と同じです。
 
 @see [[m:Dir.chdir]]
 
 --- chroot -> 0
 #@since 1.8.1
-���Υ᥽�åɤ� obsolete �Ǥ���
-����� [[m:Dir.chroot]] ��ȤäƤ���������
+このメソッドは obsolete です。
+代わりに [[m:Dir.chroot]] を使ってください。
 #@end
 
-Dir.chroot(self.to_s) ��Ʊ���Ǥ���
+Dir.chroot(self.to_s) と同じです。
 
 @see [[m:Dir.chroot]]
 
 #@end
 --- rmdir -> 0
-Dir.rmdir(self.to_s) ��Ʊ���Ǥ���
+Dir.rmdir(self.to_s) と同じです。
 
 @see [[m:Dir.rmdir]]
 
 --- entries -> [Pathname]
-self �˴ޤޤ��ե����륨��ȥ�̾�򸵤ˤ��� [[c:Pathname]] ���֥������Ȥ�������֤��ޤ���
+self に含まれるファイルエントリ名を元にした [[c:Pathname]] オブジェクトの配列を返します。
 
-@raise Errno::EXXX self ��¸�ߤ��ʤ��ѥ��Ǥ��ä���ǥ��쥯�ȥ�Ǥʤ�����㳰��ȯ�����ޤ���
+@raise Errno::EXXX self が存在しないパスであったりディレクトリでなければ例外が発生します。
 
 @see [[m:Dir.entries]]
 
 #@since 1.8.1
 
 --- each_entry {|pathname| ... } -> nil
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } ��Ʊ���Ǥ���
+Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 
 @see [[m:Dir.foreach]]
 
@@ -729,56 +729,56 @@ Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } ��Ʊ���Ǥ���
 #@until 1.9.2
 --- dir_foreach {|pathname| ... } -> nil
 #@since 1.8.1
-���Υ᥽�åɤ� obsolete �Ǥ���
-����� [[m:Pathname#each_entry]] �᥽�åɤ�ȤäƤ���������
+このメソッドは obsolete です。
+代わりに [[m:Pathname#each_entry]] メソッドを使ってください。
 #@end
 
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } ��Ʊ���Ǥ���
+Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 
 @see [[m:Dir.foreach]]
 
 #@end
 --- mkdir(*args) -> 0
-Dir.mkdir(self.to_s, *args) ��Ʊ���Ǥ���
+Dir.mkdir(self.to_s, *args) と同じです。
 
 @see [[m:Dir.mkdir]]
 
 --- opendir -> Dir
 --- opendir{|dir| ... } -> nil
-Dir.open(self.to_s, &block) ��Ʊ���Ǥ���
+Dir.open(self.to_s, &block) と同じです。
 
 @see [[m:Dir.open]]
 
 --- find {|pathname| ...} -> nil
-self �۲��Τ��٤ƤΥե������ǥ��쥯�ȥ��
-��Ĥ��İ��� pathname ���Ϥ��ƥ֥��å���¹Ԥ��ޤ���
+self 配下のすべてのファイルやディレクトリを
+一つずつ引数 pathname に渡してブロックを実行します。
 
   require 'find'
   Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
-��Ʊ���Ǥ���
+と同じです。
 
 @see [[m:Find.#find]]
 
 --- mkpath -> nil
-FileUtils.mkpath(self.to_s) ��Ʊ���Ǥ���
+FileUtils.mkpath(self.to_s) と同じです。
 
 @see [[m:FileUtils.#mkpath]]
 
 --- rmtree -> nil
-FileUtils.rm_r(self.to_s) ��Ʊ���Ǥ���
+FileUtils.rm_r(self.to_s) と同じです。
 
 @see [[m:FileUtils.#rm_r]]
 
 --- unlink -> 0
 --- delete -> 0
-self ���ؤ��ǥ��쥯�ȥꤢ�뤤�ϥե�����������ޤ���
+self が指すディレクトリあるいはファイルを削除します。
 
 #@since 1.8.5
 
 --- ascend {|pathname| ... } -> nil
-self �Υѥ�̾�����������é�äƤ��ä��Ȥ��γƥѥ�̾�򿷤��� Pathname ��
-�֥������ȤȤ������������֥��å��ؤΰ����Ȥ����Ϥ��Ƽ¹Ԥ��ޤ���
+self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
+ブジェクトとして生成し、ブロックへの引数として渡して実行します。
 
   Pathname.new('/path/to/some/file.rb').ascend {|v| p v}
      #<Pathname:/path/to/some/file.rb>
@@ -793,15 +793,15 @@ self �Υѥ�̾�����������é�äƤ��ä��Ȥ��γƥѥ�̾�򿷤��� Pathname ��
      #<Pathname:path/to>
      #<Pathname:path>
 
-�ե����륷���ƥ�ˤϥ����������ޤ���
+ファイルシステムにはアクセスしません。
 
 #@end
 
 #@since 1.8.5
 --- descend {|pathname| ... } -> nil
-self �Υѥ�̾�οƤ���Ҷ��ؤ�é�äƤ��ä��Ȥ��γƥѥ�̾�򿷤���
-Pathname ���֥������ȤȤ������������֥��å��ؤΰ����Ȥ����Ϥ��Ƽ¹Ԥ���
-����
+self のパス名の親から子供へと辿っていったときの各パス名を新しい
+Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
+す。
 
   Pathname.new('/path/to/some/file.rb').descend {|v| p v}
      #<Pathname:/>
@@ -816,7 +816,7 @@ Pathname ���֥������ȤȤ������������֥��å��ؤΰ����Ȥ����Ϥ��Ƽ¹Ԥ���
      #<Pathname:path/to/some>
      #<Pathname:path/to/some/file.rb>
 
-�ե����륷���ƥ�ˤϥ����������ޤ���
+ファイルシステムにはアクセスしません。
 
 #@end
 
@@ -824,29 +824,29 @@ Pathname ���֥������ȤȤ������������֥��å��ؤΰ����Ȥ����Ϥ��Ƽ¹Ԥ���
 
 --- cleanpath_aggressive -> Pathname
 
-[[m:Pathname#cleanpath]](false) ��Ʊ���Ǥ��� 1.8.2 �ʹߤ�� private �᥽�åɤȤʤꡢ��
-�ѤǤ��ʤ��ʤ�ޤ����� [[m:Pathname#cleanpath]] �����Ѥ��Ƥ���������
+[[m:Pathname#cleanpath]](false) と同じです。 1.8.2 以降より private メソッドとなり、利
+用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
 
 --- cleanpath_conservative -> Pathname
 
-[[m:Pathname#cleanpath]](true) ��Ʊ���Ǥ��� 1.8.2 �ʹߤ�� private �᥽�åɤȤʤꡢ��
-�ѤǤ��ʤ��ʤ�ޤ����� [[m:Pathname#cleanpath]] �����Ѥ��Ƥ���������
+[[m:Pathname#cleanpath]](true) と同じです。 1.8.2 以降より private メソッドとなり、利
+用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
 
 #@end
 
 --- foreach(*args){|path| ... } -> nil
 #@since 1.8.1
-���Υ᥽�åɤ� obsolete �Ǥ��� each_line �� each_entry ��ȤäƤ���������
+このメソッドは obsolete です。 each_line か each_entry を使ってください。
 #@end
 
-self �λؤ������ѥ����ǥ��쥯�ȥ�ʤ�
-Dir.foreach(self.to_s, *args, &block) �ȡ�����ʤ����
-IO.foreach(self.to_s, *args, &block) ��Ʊ���Ǥ���
+self の指し示すパスがディレクトリなら
+Dir.foreach(self.to_s, *args, &block) と、さもなければ
+IO.foreach(self.to_s, *args, &block) と同じです。
 
 #@if(version <= "1.8.0")
 --- realpath_rec
-[[m:Pathname#realpath]] �᥽�åɤμ¼�Ū�ʽ�����ԤäƤ���᥽�åɤǤ���
-���Ѥ���٤��ǤϤ���ޤ���
+[[m:Pathname#realpath]] メソッドの実質的な処理を行っているメソッドです。
+利用するべきではありません。
 
 #@end
 
@@ -854,12 +854,12 @@ IO.foreach(self.to_s, *args, &block) ��Ʊ���Ǥ���
 --- sub(pattern, replace)  -> Pathname
 --- sub(pattern) {|matched| ... } -> Pathname
 
-self ��ɽ������ѥ�ʸ������Ф��� sub �᥽�åɤ�ƤӽФ������η�̤���
-�ƤȤ��뿷���� Pathname ���֥������Ȥ����������֤��ޤ���
+self を表現するパス文字列に対して sub メソッドを呼び出し、その結果を内
+容とする新しい Pathname オブジェクトを生成し、返します。
 
-@param pattern �֤�������ʸ����Υѥ��������ꤷ�ޤ���
+@param pattern 置き換える文字列のパターンを指定します。
 
-@param replace pattern �ǻ��ꤷ��ʸ������֤�������ʸ�������ꤷ�ޤ���
+@param replace pattern で指定した文字列と置き換える文字列を指定します。
 
 @see [[m:String#sub]]
 
@@ -867,16 +867,16 @@ self ��ɽ������ѥ�ʸ������Ф��� sub �᥽�åɤ�ƤӽФ������η�̤���
 
 #@since 1.9.1
 --- to_path -> String
-File.open �ʤɤΰ������Ϥ��ݤ˸ƤФ��᥽�åɤǤ��� Pathname ���֥���
-���Ȥˤ����Ƥϡ� to_s ��Ʊ���Ǥ���
+File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェ
+クトにおいては、 to_s と同じです。
 
 --- sub_ext(replace) -> Pathname
 
-��ĥ�Ҥ�Ϳ����줿ʸ������֤������� [[c:Pathname]] ���֥��������֤��ޤ���
+拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクト返します。
 
-���Ȥ���ĥ�Ҥ�����ʤ����ϡ�Ϳ����줿ʸ������ĥ�ҤȤ����ղä��ޤ���
+自身が拡張子を持たない場合は、与えられた文字列を拡張子として付加します。
 
-@param replace ��ĥ�Ҥ�ʸ����ǻ��ꤷ�ޤ���
+@param replace 拡張子を文字列で指定します。
 
 
 #@end

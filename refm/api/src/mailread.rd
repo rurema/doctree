@@ -1,10 +1,10 @@
-Unix mbox �����Υ᡼��ե��������Ϥ���饤�֥��Ǥ���
+Unix mbox 形式のメールファイルを解析するライブラリです。
 
 = class Mail < Object 
 
-Unix mbox �����Υ᡼��ե��������Ϥ���饤�֥��Ǥ���
+Unix mbox 形式のメールファイルを解析するライブラリです。
 
-=== mailread �λȤ���
+=== mailread の使い方
 
   require 'mailread'
   
@@ -18,18 +18,18 @@ Unix mbox �����Υ᡼��ե��������Ϥ���饤�֥��Ǥ���
 
 --- new(file)
 
-�᡼�����Ϥ��ޤ���
-file �ˤϥե�����̾�� [[c:IO]] ���֥������Ȥ��Ϥ��ޤ���
-���Υ᥽�åɤ�¹Ԥ��������ǥإå�����ʸ���ڤ�ʬ����졢
-�إå��Υϥå���(�إå��ե������ñ��)����ʸ������(��ñ��)������ޤ���
+メールを解析します。
+file にはファイル名か [[c:IO]] オブジェクトを渡します。
+このメソッドを実行した時点でヘッダと本文が切り分けられ、
+ヘッダのハッシュ(ヘッダフィールド単位)と本文の配列(行単位)が作られます。
 
-@param file �ե�����̾�� [[c:IO]] ���֥������Ȥ���ꤷ�ޤ���
+@param file ファイル名か [[c:IO]] オブジェクトを指定します。
 
-1�ե�����ʣ���᡼��η���(Unix mbox ����)���б����Ƥ��ޤ�
-(���ξ�� open �Ѥߤ� IO ���Ϥ�ɬ�פ����뤳�Ȥ�����)��
-�㤨�аʲ��Τ褦�ˤ��Ƴƥ᡼��� Subject ��ɽ���Ǥ��ޤ���
+1ファイル複数メールの形式(Unix mbox 形式)に対応しています
+(この場合 open 済みの IO を渡す必要があることに注意)。
+例えば以下のようにして各メールの Subject を表示できます。
 
-��:
+例:
 
   require 'mailread'
   require 'nkf'
@@ -43,23 +43,23 @@ file �ˤϥե�����̾�� [[c:IO]] ���֥������Ȥ��Ϥ��ޤ���
 
 --- header -> Hash
 
-�إå��� [[c:Hash]] ���֤��ޤ���
+ヘッダを [[c:Hash]] で返します。
 
-������ 'From'��'Subject' �ʤɤΥե������̾�ǡ����٤ƤΥ�����
-[[m:String#capitalize]] ����Ƥ��ޤ���
+キーは 'From'、'Subject' などのフィールド名で、すべてのキーは
+[[m:String#capitalize]] されています。
 
-�ͤ������β��ԤϺ������ޤ���
-ʣ���Ԥ�ʬ����Ƥ����硢�֤˲��Ԥ�Ϥ��ߤޤ�(��³�Ԥ�ɽ������Ϻ������ޤ�)��
-MIME encoded-word �Υǥ����ɤʤɤ�Ԥ��������� [[lib:nkf]] �ʤɤ���Ѥ��Ƥ���������
+値の末尾の改行は削除されます。
+複数行に分かれている場合、間に改行をはさみます(継続行を表す空白は削除されます)。
+MIME encoded-word のデコードなどを行いたい場合は [[lib:nkf]] などを使用してください。
 
 --- body -> [ String ]
 
-��ʸ�γƹԤ����ǤȤ��� [[c:Array]] ���֤��ޤ���
+本文の各行を要素とする [[c:Array]] を返します。
 
 --- [](field) -> String | nil
 
-�إå��� field ���ͤ��֤��ޤ���
-m.header[field.capitalize] ��Ʊ���Ǥ��Τ��ͼ����κݤϡ�
-�ե������̾�Υ���ե��٥åȤ��羮�򵤤ˤ���ɬ�פϤ���ޤ���
+ヘッダの field の値を返します。
+m.header[field.capitalize] と同じですので値取得の際は、
+フィールド名のアルファベットの大小を気にする必要はありません。
 
-@param field �����������᡼��Υإå��ե������̾
+@param field 取得したいメールのヘッダフィールド名

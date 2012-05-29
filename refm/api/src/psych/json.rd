@@ -1,7 +1,7 @@
-#@# °Ê²¼¤Ï autoload ¤Ç¤¢¤ë»ö¤ËÃí°Õ¡£
+#@# ä»¥ä¸‹ã¯ autoload ã§ã‚ã‚‹äº‹ã«æ³¨æ„ã€‚
 require psych/json/tree_builder
 require psych/json/stream
 
-#@# json/ruby_events¡¢json/yaml_events ¤Ë¤Ä¤¤¤Æ¤Ï¡¢nodoc ¤Ë¤Ä¤­¾ÊÎ¬¡£
+#@# json/ruby_eventsã€json/yaml_events ã«ã¤ã„ã¦ã¯ã€nodoc ã«ã¤ãçœç•¥ã€‚
 
 = module Psych::JSON

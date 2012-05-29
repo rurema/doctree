@@ -4,9 +4,9 @@
 include RDoc::Text
 #@end
 
-section �˴ؤ��������ݻ����륯�饹�Ǥ���
+section に関する情報を保持するクラスです。
 
-�ɥ��������ǰʲ��Τ褦�˵��Ҥ���������ݻ����Ƥ��ޤ���
+ドキュメント中で以下のように記述した情報を保持しています。
 
   # :section: The title
   # The body
@@ -19,65 +19,65 @@ section �˴ؤ��������ݻ����륯�饹�Ǥ���
 --- new(title, comment) -> RDoc::Context::Section
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 #@since 1.9.2
-@param parent [[c:RDoc::Context]] ���֥������Ȥ���ꤷ�ޤ���
+@param parent [[c:RDoc::Context]] オブジェクトを指定します。
 #@end
 
-@param title section �Υ����ȥ��ʸ����ǻ��ꤷ�ޤ���
+@param title section のタイトルを文字列で指定します。
 
-@param comment section �Υ����Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param comment section のコメントを文字列で指定します。
 
-�ޤ���section �Υ��������ֹ�򿷤����������ޤ���
+また、section のシーケンス番号を新しく作成します。
 
 == Instance Methods
 
 --- title -> String | nil
 
-section �Υ����ȥ���֤��ޤ���
+section のタイトルを返します。
 
 --- comment -> String | nil
 
-section �Υ����Ȥ��֤��ޤ���
+section のコメントを返します。
 
 --- sequence -> String
 
-section �Υ��������ֹ��ʸ������֤��ޤ���
+section のシーケンス番号を文字列で返します。
 
-��󥯤����������˻Ȥ��ޤ���
+リンクを作成する時に使われます。
 
 --- ==(other) -> bool
 
-���Ȥ� other �Υ��������ֹ����Ӥ�����̤��֤��ޤ���
+自身と other のシーケンス番号を比較した結果を返します。
 
-@param other [[c:RDoc::Context::Section]] ���֥������Ȥ���ꤷ�ޤ���
+@param other [[c:RDoc::Context::Section]] オブジェクトを指定します。
 
 --- inspect -> String
 
-���Ȥξ����ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+自身の情報を人間に読みやすい文字列にして返します。
 
 #@since 1.9.1
 --- set_comment(comment) -> ()
 
-���Ȥ˥����Ȥ����ꤷ�ޤ���
+自身にコメントを設定します。
 
-@param comment ʸ�������ꤷ�ޤ���
+@param comment 文字列を指定します。
 
-comment �κǽ�ιԤ� :section: ��ޤ�Ǥ�����硢���ι԰ʹߤ�ʸ�����
-���ȤȤ������ꤷ�ޤ��������Ǥʤ����� comment ���٤Ƥ򥳥��ȤȤ���
-���ꤷ�ޤ���
+comment の最初の行に :section: を含んでいた場合、その行以降の文字列をコ
+メントとして設定します。そうでない場合は comment すべてをコメントとして
+設定します。
 
   # ---------------------
   # :section: The title
   # The body
   # ---------------------
 
-#@# 1.8 �ϤǤϡ�Ʊ̾�� private �᥽�åɤ��������Ƥ��롣
+#@# 1.8 系では、同名の private メソッドが定義されている。
 #@end
 
 #@since 1.9.2
 --- parent -> RDoc::Context
 
-���Ȥ���°���� [[c:RDoc::Context]] ���֥������Ȥ��֤��ޤ���
+自身が所属する [[c:RDoc::Context]] オブジェクトを返します。
 #@end

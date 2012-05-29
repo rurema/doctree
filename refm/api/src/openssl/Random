@@ -1,152 +1,152 @@
 = module OpenSSL::Random
-OpenSSL �����Ѥ��뵿������������Ϣ�Υ⥸�塼��Ǥ���
+OpenSSL が利用する疑似乱数生成器関連のモジュールです。
 
   * [[RFC:4086]]
 
-=== �Ź�����
-OpenSSL �Ǥϡ������������뤿��ʤɤ�������Ѥ��Ƥ��ޤ����㤨�� RSA �Ǥ�
-����(512bit��1024bit�ʤ�)���ǿ����Ȥ�������������������������������̩����
-�ڥ���׻����ޤ�������¾�ͤ��Τ��ƤϤʤ�ʤ����ᡢ
-��������ϳ�������ο������Բ�ǽ���ɤ���������äƤ���ɬ�פ�����ޤ���
-���Τ褦�ʥ᥽�åɤˤϰʲ��Τ�Τ�����ޤ���
+=== 暗号と乱数
+OpenSSL では、鍵を生成するためなどに乱数を用いています。例えば RSA では
+巨大(512bitや1024bitなど)な素数の組を乱数で生成し、そこから公開鍵、秘密鍵の
+ペアを計算します。鍵は他人に知られてはならないため、
+その乱数は外部からの推論が不可能な良い性質を持っている必要があります。
+このようなメソッドには以下のものがあります。
   * [[m:OpenSSL::PKey::RSA.generate]]
   * [[m:OpenSSL::PKey::DSA.generate]]
   * [[m:OpenSSL::PKey::DH.generate]]
   * [[m:OpenSSL::Cipher#random_key]]
 #@# * [[m:OpenSSL::PKey::EC.generate]]
-���Τ褦�������Ŭ�ڤʼ�������ĵ�������������Ŭ�ڤʥ����ɤ��Ϥ�
-���Ȥˤ�äƼ¸��Ǥ��ޤ���
+そのような乱数は適切な実装を持つ疑似乱数生成器に適切なシードを渡す
+ことによって実現できます。
 
-OpenSSL �ˤϤ��Τ褦�ʵ�����������郎��������Ƥ��ޤ���
-�����ơ����ε������������� OpenSSL ���͡��ʥ⥸�塼�뤫�����Ѥ���Ƥ��ޤ���
-��˵󤲤��������᥽�åɤ�¾�ˡ�
+OpenSSL にはそのような疑似乱数生成器が実装されています。
+そして、この疑似乱数生成器は OpenSSL の様々なモジュールから利用されています。
+上に挙げた鍵生成メソッドの他に、
   * [[m:OpenSSL::BN.rand]]
   * [[m:OpenSSL::BN.rand_range]]
   * [[m:OpenSSL::BN.generate_prime]]
   * [[m:OpenSSL::Cipher#random_iv]]
-�ʤɤǤ����Ѥ���ޤ���
+などでも利用されます。
 
-��������������Ŭ�ڤʥ����ɤ�Ϳ�����ʤ����������ư��ޤ���
-OpenSSL �ˤϤ��Τ���� API 
+疑似乱数生成器は適切なシードを与えられなければ正しく動作しません。
+OpenSSL にはそのための API 
   * [[m:OpenSSL::Random.#random_add]]
   * [[m:OpenSSL::Random.#seed]]
   * [[m:OpenSSL::Random.#load_random_file]]
-��¸�ߤ��ޤ��������� API ���ϼ�Ū����������ȡ��ʲ��Τ褦�ˤʤ�ޤ���
-  * �����ɤγƥӥåȤ�����Ū���𻨤���ͽ¬�Բ�ǽ����������ӥå����
-    �𻨤��ϥ���ȥ��ԡ��Ȥ�����(ñ�̤� bit, 8bit = 1byte)
-    ���̤뤳�Ȥ��Ǥ��롣
-  * �ä˥����ɤΤ��٤ƤΥӥåȤ������˥�����Ǥ�����ˤϡ�
-    ����ȥ��ԡ����礭���ȥ����ɤΥӥåȿ��ϰ��פ��롣�դ�
-    �����ɤΤ��٤ƤΥӥåȤ������̣�Ǵ��Τʤ�С�
-    ����ȥ��ԡ��� 0 �Ǥ��롣
-  * �������������˥���ȥ��ԡ����ɲä��뤳�Ȥˤ�ä�
-    ��������狼����������������ͽ¬�Բ�ǽ�ˤʤ롣
+が存在します。これらの API を模式的に説明すると、以下のようになります。
+  * シードの各ビットは統計的な乱雑さ、予測不可能性を持ち、ビット列の
+    乱雑さはエントロピーという量(単位は bit, 8bit = 1byte)
+    で量ることができる。
+  * 特にシードのすべてのビットが完全にランダムである場合には、
+    エントロピーの大きさとシードのビット数は一致する。逆に
+    シードのすべてのビットがある意味で既知ならば、
+    エントロピーは 0 である。
+  * 疑似乱数生成器にエントロピーを追加することによって
+    乱数生成器から得られる乱数がより予測不可能になる。
 
-����ȥ��ԡ����ˤ��ɤ���ΤȰ�����Τ�����ޤ����㤨�и��߻���(Unix time)��
-����ȥ��ԡ����Ȥ��Ƥϰ����Ǥ����ʤ��ʤ�ͽ¬�Բ�ǽ�ʤΤ�
-���������ä���ʬ�ΤߤǤ��ꡢ��̤ΥӥåȤ�ͽ¬��ǽ������Ǥ���
-�����˴ޤޤ�륨��ȥ��ԡ��̤�Ŭ�ڤ�ɾ���Ǥ���ʤ�Х����ɤȤ������ѤǤ��ޤ�����
-�̾�Ϥ�ä��ɤ�����ȥ��ԡ���������Ϥ��Ǥ���
-Linux �Ǥ���� /dev/random ��Ŭ���ʥ���ȥ��ԡ����Ȥʤ�Ǥ��礦��
+エントロピー源には良いものと悪いものがあります。例えば現在時刻(Unix time)は
+エントロピー源としては悪いです。なぜなら予測不可能なのは
+せいぜい秒の部分のみであり、上位のビットは予測可能だからです。
+そこに含まれるエントロピー量を適切に評価できるならばシードとして利用できますが、
+通常はもっと良いエントロピー源があるはずです。
+Linux であれば /dev/random が適当なエントロピー源となるでしょう。
 
-OpenSSL �Ǥ� EGD(Entropy Gathering Daemon)���饨��ȥ��ԡ���������뤳��
-��Ǥ��ޤ���Ŭ�ڤʥ���ȥ��ԡ������󶡤��Ƥ��ʤ� OS �ǤϤ��Τ褦��
-��ˡ�ǥ���ȥ��ԡ������Ѱդ���ɬ�פ����뤫�⤷��ޤ���
+OpenSSL では EGD(Entropy Gathering Daemon)からエントロピーを取得すること
+もできます。適切なエントロピー源を提供していない OS ではこのような
+方法でエントロピー源を用意する必要があるかもしれません。
 
-�ºݤΤȤ�����OpenSSL �С������ˤ�äƤ� OS ���󶡤��륨��ȥ��ԡ�������
-ɬ�פ��̤Υ���ȥ��ԡ�������褦�������Ƥ��뤿�ᡢ������ API ��Ȥä�
-����ȥ��ԡ����ɲä���ɬ�פϤʤ���礬¿���Ǥ��礦���������� OS �ˤ�äƤ�
-OpenSSL �����Ѳ�ǽ�ʥ���ȥ��ԡ����򸫤Ĥ����ʤ���礬���ꡢ
-���ξ��Ϥ����Υ᥽�åɤ�����Ū�˥���ȥ��ԡ����ɲä���ɬ�פ�����Ǥ��礦��
+実際のところ、OpenSSL バージョンによっては OS が提供するエントロピー源から
+必要な量のエントロピーを得るよう実装してあるため、これらの API を使って
+エントロピーを追加する必要はない場合が多いでしょう。ただし、 OS によっては
+OpenSSL が利用可能なエントロピー源を見つけられない場合があり、
+その場合はこれらのメソッドで明示的にエントロピーを追加する必要があるでしょう。
 
 
 == Module Functions
 
 --- egd(filename) -> true
-EGD(Entropy Gathering Daemon) ���饨��ȥ��ԡ�������
-�����������ɲä��ޤ���
+EGD(Entropy Gathering Daemon) からエントロピーを得、
+乱数生成器に追加します。
 
-filename �ǻ��ꤷ�� Unix domain socket ���� EGD ���䤤��碌��
-255 �Х���ʬ�Υ���ȥ��ԡ���������ޤ���
-[[m:OpenSSL::Random.egd_bytes]](filename, 255) ��Ʊ���Ǥ���
+filename で指定した Unix domain socket から EGD に問い合わせ、
+255 バイト分のエントロピーを取得します。
+[[m:OpenSSL::Random.egd_bytes]](filename, 255) と同じです。
 
-@param filename EGD �Υ����åȤΥե�����̾
+@param filename EGD のソケットのファイル名
 @raise OpenSSL::Random::RandomError 
 
 --- egd_bytes(filename, length) -> true
-EGD(Entropy Gathering Daemon) ���� length �Х���ʬ�Υ���ȥ��ԡ������ޤ���
+EGD(Entropy Gathering Daemon) から length バイト分のエントロピーを得ます。
 
-filename �ǻ��ꤷ�� Unix domain socket ���� EGD ���䤤��碌��
-���ꤷ���礭���Υ���ȥ��ԡ��������������ɲä��ޤ���
+filename で指定した Unix domain socket から EGD に問い合わせ、
+指定した大きさのエントロピーを乱数生成器に追加します。
 
-@param filename EGD �Υ����åȤΥե�����̾
-@param length �ɤ߹���Х��ȿ�
+@param filename EGD のソケットのファイル名
+@param length 読み込むバイト数
 @raise OpenSSL::Random::RandomError 
 
 
 @raise OpenSSL::Random::RandomError 
 
 --- load_random_file(filename) -> true
-�ե�������ɤ߹��ߡ��������Ƥ򥨥�ȥ��ԡ����Ȥ���
-�����������Ϥ��ޤ���
+ファイルを読み込み、その内容をエントロピー源として
+乱数生成器に渡します。
 
-����ȥ��ԡ��ο����̤ϥե�����ΥХ��ȿ���Ʊ���Ǥ���ȸ��ʤ��ޤ���
+エントロピーの推定量はファイルのバイト数と同じであると見なします。
 
-OpenSSL::Random.seed(File.read(filename)) ��Ʊ���Ǥ���
+OpenSSL::Random.seed(File.read(filename)) と同じです。
 
-@param filename �ɤ߹���ե�����̾
-@raise OpenSSL::Random::RandomError �ե�������ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ�
+@param filename 読み込むファイル名
+@raise OpenSSL::Random::RandomError ファイルの読み込みに失敗した場合に発生します
 @raise OpenSSL::Random::RandomError 
 
 --- pseudo_bytes(len) -> String
-�Ź���Ū��ͽ¬�Բ�ǽ��������ʤ�(����®��)
-���������ˤ�äơ� len �Х��Ȥ�
-������ʥХ�������֤��ޤ���
+暗号論的な予測不可能性を持たない(が高速な)
+乱数生成器によって、 len バイトの
+ランダムなバイト列を返します。
 
-@param len ɬ�פʥ�����Х������Ĺ��
+@param len 必要なランダムバイト列の長さ
 
 --- random_bytes(len) -> String
-�Ź���Ū��ͽ¬�Բ�ǽ����������������ˤ�äơ� len �Х��Ȥ�
-������ʥХ�������֤��ޤ���
+暗号論的な予測不可能性を持つ乱数生成器によって、 len バイトの
+ランダムなバイト列を返します。
 
-#@# OpenSSL�ϥХåե������Ƥ򥨥�ȥ��ԡ��������Ȥ��ƻȤ��餷��
-@param len ɬ�פʥ�����Х������Ĺ��
+#@# OpenSSLはバッファの内容をエントロピーソースとして使うらしい
+@param len 必要なランダムバイト列の長さ
 
 --- random_add(str, entropy) -> self
-���������˥���ȥ��ԡ����ɲä��ޤ���
+乱数生成器にエントロピーを追加します。
 
-entropy �ˤ� str �����äƤ��륨��ȥ��ԡ���ͽ¬��(�β���)��
-�Х���ñ�̤��Ϥ��ޤ���
+entropy には str が持っているエントロピーの予測値(の下限)を
+バイト単位で渡します。
 
-@param str ͽ¬�Բ�ǽ�����Ƥ�ʸ����
-@param entropy str �����äƤ��륨��ȥ��ԡ���ͽ¬��(�Х���ñ��)����ư��������
+@param str 予測不可能な内容の文字列
+@param entropy str が持っているエントロピーの予測値(バイト単位)の浮動小数点数
 
 --- status? -> bool
-�����������Υ���ȥ��ԡ�����ʬ�Ǥ������ true ���֤��ޤ���
+乱数生成器内のエントロピーが十分である場合に true を返します。
 
 --- seed(str) -> str
-���������˥���ȥ��ԡ���
-�֥���ȥ��ԡ�ͽ¬�� = str �ΥХ��ȿ��פȤ���
-�ɲä��ޤ���
+乱数生成器にエントロピーを
+「エントロピー予測値 = str のバイト数」として
+追加します。
 
-OpenSSL::Random.random_add(str, str.size) ��Ʊ���Ǥ���
+OpenSSL::Random.random_add(str, str.size) と同じです。
 
-@param str ͽ¬�Բ�ǽ�����Ƥ�ʸ����
+@param str 予測不可能な内容の文字列
 @see [[m:OpenSSL::Random.#random_add]]
 
 --- write_random_file(filename) -> true
-�����������������줿 1024 �Х��ȤΥ�����ʥХ������
-�ե�����˽񤭹��ߤޤ���
+乱数生成器で生成された 1024 バイトのランダムなバイト列を
+ファイルに書き込みます。
 
-����ǽ��Ϥ���������ʥХ�����Ϥ��Ȥ��������������������
-�˻Ȥ��ޤ�����֡���ľ��ʤɥ����ƥफ��Υ���ȥ��ԡ������ʤ�����
-���ѤǤ��ޤ���
+これで出力したランダムなバイト列はあとで乱数生成器を初期化するの
+に使えます。リブート直後などシステムからのエントロピーが少ない場合に
+利用できます。
 
-���Υե���������Ѽ԰ʳ��ˤ��ɤ�ʤ��褦����¸���ʤ���Фʤ�ޤ���
-�����Ԥ����Υե�������ɤ�뤳�Ȥϥ������ƥ�����������������ޤ���
+このファイルは利用者以外には読めないように保存しなければなりません。
+部外者がこのファイルを読めることはセキュリティ上の問題を引き起します。
 
-@param filename �񤭹���ե������̾��
-@raise OpenSSL::Random::RandomError �ե�����ν񤭽Ф��˼��Ԥ�������ȯ�����ޤ�
+@param filename 書き込むファイルの名前
+@raise OpenSSL::Random::RandomError ファイルの書き出しに失敗した場合に発生します
  
 = class OpenSSL::Random::RandomError < OpenSSL::OpenSSLError
-OpenSSL �������Ϣ�Υ��顼������������ȯ�������㳰
+OpenSSL の乱数関連のエラーが起きた場合に発生する例外

@@ -1,22 +1,22 @@
 require rubygems/command
 
-��⡼�ȥ�ݥ��ȥ����������ݥ��ȥ�˥ߥ顼���뤿��Υ饤�֥��Ǥ���
+リモートリポジトリをローカルリポジトリにミラーするためのライブラリです。
 
   Usage: gem mirror [options]
 #@include(common_options)
     Summary:
-      Gem ��ݥ��ȥ��ߥ顼���ޤ�
+      Gem リポジトリをミラーします
     Description:
-      ���Υ��ޥ�ɤ� ~/.gemmirrorrc �ե��������Ѥ��ƥ�⡼�� Gem ��ݥ��ȥ��
-      ��������˥ߥ顼���ޤ�������ե������ YAML �ǰʲ��Τ褦�˽񤭤ޤ���
+      このコマンドは ~/.gemmirrorrc ファイルを使用してリモート Gem リポジトリを
+      ローカルにミラーします。設定ファイルは YAML で以下のように書きます。
       
         ---
         - from: http://gems.example.com # source repository URI
           to: /path/to/mirror           # destination directory
       
-      ʣ���μ����������������ꤹ�뤳�Ȥ��Ǥ��ޤ���
+      複数の取得元と配置先を指定することができます。
 
 
 = class Gem::Commands::MirrorCommand < Gem::Command
 
-��⡼�ȥ�ݥ��ȥ����������ݥ��ȥ�˥ߥ顼���뤿��Υ��饹�Ǥ���
+リモートリポジトリをローカルリポジトリにミラーするためのクラスです。

@@ -1,20 +1,20 @@
-Ruby �ץ������� S ���Ȥ��ư�������Υ饤�֥��Ǥ���
+Ruby プログラムを S 式として扱うためのライブラリです。
 
 = reopen Ripper
 
 --- Ripper.sexp(src, filename = '-', lineno = 1) -> object
 
-Ruby �ץ������ str ����Ϥ��� S ���Υĥ꡼�ˤ����֤��ޤ���
+Ruby プログラム str を解析して S 式のツリーにして返します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "-" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "-" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-�¹Է�̤ϡ���̤��������������ǤȤ��� S ���Υĥ꡼��ɽ�����Ƥ��ޤ���
+実行結果は、括弧の代わりに配列の要素として S 式のツリーを表現しています。
 
-��:
+例:
 
   require 'ripper'
   require 'pp'
@@ -26,42 +26,42 @@ Ruby �ץ������ str ����Ϥ��� S ���Υĥ꡼�ˤ����֤��ޤ���
             [:paren, [:params, [[:@ident, "a", [1, 6]]], nil, nil, nil, nil]],
             [:bodystmt, [[:var_ref, [:@kw, "nil", [1, 9]]]], nil, nil, nil]]]]
 
-�ѡ������٥�Ȥϰʲ��Τ褦�ʷ����ˤʤ�ޤ���
+パーサイベントは以下のような形式になります。
 
-  [:���٥��̾, ...]
+  [:イベント名, ...]
 
-��:
+例:
 
   [:program, ...]
 
-������ʥ��٥�Ȥϰʲ��Τ褦�ʷ����ˤʤ�ޤ���
+スキャナイベントは以下のような形式になります。
 
-  [:@���٥��̾, �ȡ�����, ���־���(�ԡ��������)]
+  [:@イベント名, トークン, 位置情報(行、桁の配列)]
 
-��:
+例:
 
   [:@ident, "m", [1, 4]]
 
-�ޤ���Ripper.sexp �� [[m:Ripper.sexp_raw]] �Ȥϰۤʤꡢ�ɤߤ䤹���Τ���
-�� stmts_add �� stmts_new �Τ褦�� _add��_new �ǽ����ѡ������٥�Ȥ�
-��ά���ޤ���_add �ǽ����ѡ������٥�Ȥϥϥ�ɥ�ΰ����� 0 �ĤΤ�Τ�
-��ά����ޤ����ܤ����� [[m:Ripper::PARSER_EVENTS]] ���ǧ���Ƥ���������
+また、Ripper.sexp は [[m:Ripper.sexp_raw]] とは異なり、読みやすさのため
+に stmts_add や stmts_new のような _add、_new で終わるパーサイベントを
+省略します。_add で終わるパーサイベントはハンドラの引数が 0 個のものが
+省略されます。詳しくは [[m:Ripper::PARSER_EVENTS]] を確認してください。
 
 @see [[m:Ripper.sexp_raw]]
 
 --- Ripper.sexp_raw(src, filename = '-', lineno = 1)
 
-Ruby �ץ������ str ����Ϥ��� S ���Υĥ꡼�ˤ����֤��ޤ���
+Ruby プログラム str を解析して S 式のツリーにして返します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "-" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "-" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-�¹Է�̤ϡ���̤��������������ǤȤ��� S ���Υĥ꡼��ɽ�����Ƥ��ޤ���
+実行結果は、括弧の代わりに配列の要素として S 式のツリーを表現しています。
 
-��:
+例:
 
   require 'ripper'
   require 'pp'
@@ -79,6 +79,6 @@ Ruby �ץ������ str ����Ϥ��� S ���Υĥ꡼�ˤ����֤��ޤ���
              nil,
              nil]]]]
 
-Ripper.sexp_raw �� [[m:Ripper.sexp]] �Ȥϰۤʤ���Ϸ�̤�ù����ޤ���
+Ripper.sexp_raw は [[m:Ripper.sexp]] とは異なり解析結果を加工しません。
 
 @see [[m:Ripper.sexp]]

@@ -1,9 +1,9 @@
 = class URI::LDAPS < URI::LDAP
 
-LDAPS URI ค๒ษฝคนฅฏฅ้ฅนควคนกฃ
+LDAPS URI ใ’่กจใใฏใฉในใงใใ€
 
 == Constants
 
 --- DEFAULT_PORT -> Integer
 
-ฅวฅีฅฉฅ๋ฅศคฮฅÝกผฅศ (636) ควคนกฃ
+ใใ•ใฉใซใใฎใใผใ (636) ใงใใ€

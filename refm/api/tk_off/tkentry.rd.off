@@ -3,66 +3,66 @@
 =begin
 = TkEntry
 
-����ȥꥦ�������åȤΥ��饹�Ǥ���
-����ȥꥦ�������åȤ�1�Ԥ�ʸ�������Ϥ�����դ��륦�������åȤǤ���
+エントリウィジェットのクラスです。
+エントリウィジェットは1行の文字列入力を受け付けるウィジェットです。
 
-�᥽�åɤ����������((*����*))�ϡ��ʲ��Τ����줫��ؤ��ޤ���
+メソッドの説明の中で((*位置*))は、以下のいずれかを指します。
 
-*����
+*数字
 
- �����ǻ��ꤷ��ʸ������(������κ�ü��0����Ϥޤ�)
-*"@����"
+ 数字で指定した文字位置(入力欄の左端は0から始まる)
+*"@数字"
 
- �����ǻ��ꤷ���ԥ��������(������κ�ü��0����Ϥޤ�)
+ 数字で指定したピクセル位置(入力欄の左端は0から始まる)
 *"end"
 
- ���Ϥ���Ƥ���ʸ���κǸ�ΰ���
+ 入力されている文字の最後の位置
 *"insert"
 
- �����������
+ カーソル位置
 *"anchor"
 
  ???
 *"sel.first"
 
- selection�ǻ��ꤵ�줿ʸ����κǽ��ʸ���ΰ���
+ selectionで指定された文字列の最初の文字の位置
 *"sel.last"
 
- selection�ǻ��ꤵ�줿ʸ����κǸ��ʸ���ΰ���
+ selectionで指定された文字列の最後の文字の位置
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkLabel>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<Tk::Scrollable>))
 
-== �᥽�å�:
+== メソッド:
 
 --- TkEntry#bbox(index)
 #@todo
 
 --- TkEntry#delete(s, e=None)
 #@todo
-    ((*����*))((|s|))����((*����*))((|e|))�ޤǤ�ʸ���������ޤ���((|e|))
-    ����ά���줿��硢((*����*))((|s|))��1ʸ���������ޤ���
+    ((*位置*))((|s|))から((*位置*))((|e|))までの文字を削除します。((|e|))
+    が省略された場合、((*位置*))((|s|))の1文字を削除します。
 
 --- TkEntry#configure(slot, value=None)
 #@todo
 
 --- TkEntry#cursor
 #@todo
-    ���ϥ�������ΰ��֤��֤��ޤ���
+    入力カーソルの位置を返します。
 
 --- TkEntry#cursor=(index)
 #@todo
-    ���ϥ�������ΰ��֤�((|index|))�ˤ��ޤ���
+    入力カーソルの位置を((|index|))にします。
 
 --- TkEntry#index(index)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�ΰ��֤��֤��ޤ���((|index|))��ʸ������
-    ��Ǥ���С��Ǹ��ʸ�����֤��֤��ޤ���
+    ((|index|))で指定した((*位置*))の位置を返します。((|index|))が文字数以
+    上であれば、最後の文字位置を返します。
 
       require "tk"
       e = TkEntry.new.pack
@@ -72,37 +72,37 @@
       p e.index("end")  # => 3
       p e.index(5)      # => 3
 
-    ((-¿�Х���ʸ�������Ϥ����Ȥ��ο���ϡ�-))
+    ((-多バイト文字を入力したときの振舞は？-))
 
 --- TkEntry#insert(pos,text)
 #@todo
-    ((*����*))((|pos|))��ʸ����((|text|))���������ޤ���
+    ((*位置*))((|pos|))に文字列((|text|))を挿入します。
 
 --- TkEntry#mark(pos)
 #@todo
-    ((<TkTextWin#scan_mark>))����
+    ((<TkTextWin#scan_mark>))参照
 
 --- TkEntry#dragto(pos)
 #@todo
-    ((<TkTextWin#scan_dragto>))����
+    ((<TkTextWin#scan_dragto>))参照
 
 --- TkEntry#selection_adjust(index)
 #@todo
 
 --- TkEntry#selection_clear
 #@todo
-    �����ΰ��������ˤ��ޤ���
+    選択領域を非選択にします。
 
 --- TkEntry#selection_from(index)
 #@todo
 
 --- TkEntry#selection_present
 #@todo
-    �����ΰ�Τ���ʤ��ˤ�ä� (({true})) �ޤ��ϡ�(({false})) ���֤��ޤ���
+    選択領域のあるなしによって (({true})) または、(({false})) を返します。
 
 --- TkEntry#selection_range(s, e)
 #@todo
-    ((|s|))����((|e|))�ޤǤ������ΰ�ˤ��ޤ���
+    ((|s|))から((|e|))までを選択領域にします。
 
 --- TkEntry#selection_to(index)
 #@todo
@@ -120,13 +120,13 @@
 
 --- TkEntry#value
 #@todo
-    ���Ϥ��줿ʸ������֤��ޤ���
+    入力された文字列を返します。
 
 --- TkEntry#value=(val)
 #@todo
-    ����ʸ�����((|val|))�ˤ��ޤ���
+    入力文字列を((|val|))にします。
 
-== ɸ�४�ץ����:
+== 標準オプション:
 
 ((<TkObject#background>))
 
@@ -172,7 +172,7 @@
 
 ### ((<TkObject#xscrollcommand>))
 
-== ���ץ����:
+== オプション:
 
 --- TkEntry#show
 #@todo
@@ -189,11 +189,11 @@
 =begin
 = TkSpinbox
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkEntry>))
 
-== �᥽�å�:
+== メソッド:
 
 --- TkSpinbox#identify(x, y)
 #@todo

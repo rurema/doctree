@@ -1,29 +1,29 @@
 
-[[c:Shell::Filter]] ��������Ƥ���饤�֥��Ǥ���
+[[c:Shell::Filter]] を定義しているライブラリです。
 
 = class Shell::Filter < Object
 
 include Enumerable
 
-���ޥ�ɤμ¹Է�̤Ϥ��٤� [[c:Shell::Filter]] �������Υ��֥��饹�Υ��󥹥��󥹤Ȥ����֤�ޤ��� 
+コマンドの実行結果はすべて [[c:Shell::Filter]] か、そのサブクラスのインスタンスとして返ります。 
 
 == Class Methods
 
 --- new(sh) -> Shell::Filter
 
-[[c:Shell::Filter]] ���饹�Υ��󥹥��󥹤��֤��ޤ���
-�̾盧�Υ᥽�åɤ�ľ�ܻȤ�����Ͼ��ʤ��Ǥ��礦��
+[[c:Shell::Filter]] クラスのインスタンスを返します。
+通常このメソッドを直接使う機会は少ないでしょう。
 
 == Instance Methods
 
 --- each(rs = nil) -> ()
 
-�ե��륿�ΰ�Ԥ��Ĥ�block���Ϥ��ޤ���
+フィルタの一行ずつをblockに渡します。
 
-@param rs �쥳���ɥ��ѥ졼������ɽ��ʸ�������ꤷ�ޤ���
-          nil �ʤ�С�[[m:Shell.record_separator]]���ͤ����Ѥ���ޤ���
+@param rs レコードセパレーターを表す文字列を指定します。
+          nil ならば、[[m:Shell.record_separator]]の値が使用されます。
 
-������
+使用例
   sh = Shell.new
   sh.cat("/etc/passwd").each { |line|
     puts line
@@ -31,12 +31,12 @@ include Enumerable
 
 --- <(src) -> self
 
-src��ե��륿�����ϤȤ��롣 src��, ʸ����ʤ�Хե������, IO���֥������ȤǤ���
-�Ф���򤽤Τޤ����ϤȤ��롣
+srcをフィルタの入力とする。 srcが, 文字列ならばファイルを, IOオブジェクトであれ
+ばそれをそのまま入力とする。
 
-@param src �ե��륿�����Ϥ�, ʸ����⤷����,IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src フィルタの入力を, 文字列もしくは,IO オブジェクトで指定します。
 
-������
+使用例
   Shell.def_system_command("head")
   sh = Shell.new
   sh.transact {
@@ -45,43 +45,43 @@ src��ե��륿�����ϤȤ��롣 src��, ʸ����ʤ�Хե������, IO���֥������ȤǤ���
 
 --- >(to) -> self
 
-to��ե��륿�ν��ϤȤ��롣 to��, ʸ����ʤ�Хե������, IO���֥������ȤǤ���
-�Ф���򤽤Τޤ޽��ϤȤ��롣
+toをフィルタの出力とする。 toが, 文字列ならばファイルに, IOオブジェクトであれ
+ばそれをそのまま出力とする。
 
-@param to ���������ꤷ�ޤ���ʸ����ʤ�Хե������,IO���֥������Ȥʤ�Ф���˽��Ϥ��ޤ���
+@param to 出力先を指定します。文字列ならばファイルに,IOオブジェクトならばそれに出力します。
 
-������
+使用例
   Shell.def_system_command("tail")
   sh = Shell.new
   sh.transact {
     (sh.tail("-n 3") < "/etc/passwd") > File.open("tail.out", "w")
-    #(sh.tail("-n 3") < "/etc/passwd") > "tail.out" # ��Ʊ��.
+    #(sh.tail("-n 3") < "/etc/passwd") > "tail.out" # と同じ.
   }
 
 --- >>(to) -> self
 
-to��ե��륿���ɲä��롣 to��, ʸ����ʤ�Хե������, IO���֥������ȤǤ����
-����򤽤Τޤ޽��ϤȤ��롣
+toをフィルタに追加する。 toが, 文字列ならばファイルに, IOオブジェクトであれば
+それをそのまま出力とする。
 
-@param to ���������ꤷ�ޤ���ʸ����ʤ�Хե�����ˡ�IO���֥������Ȥʤ�Ф���˽��Ϥ��ޤ���
+@param to 出力先を指定します。文字列ならばファイルに、IOオブジェクトならばそれに出力します。
 
-������
+使用例
   Shell.def_system_command("tail")
   sh = Shell.new
   sh.transact {
     (sh.tail("-n 3") < "/etc/passwd") >> "tail.out" 
-    #(sh.tail("-n 3") < "/etc/passwd") >> File.open("tail.out", "w") # �Ǥ�Ʊ����
+    #(sh.tail("-n 3") < "/etc/passwd") >> File.open("tail.out", "w") # でも同じ。
   }
 
 --- |(filter) -> object
 
-�ѥ��׷��� filter ���Ф��ƹԤ��ޤ���
+パイプ結合を filter に対して行います。
 
-@param filter Shell::Filter ���֥������Ȥ���ꤷ�ޤ���
+@param filter Shell::Filter オブジェクトを指定します。
 
-@return filter ���֤��ޤ���
+@return filter を返します。
 
-������
+使用例
   Shell.def_system_command("tail")
   Shell.def_system_command("head")
   Shell.def_system_command("wc")
@@ -95,19 +95,19 @@ to��ե��륿���ɲä��롣 to��, ʸ����ʤ�Хե������, IO���֥������ȤǤ����
   }
 
 --- +(filter)
-��ɮ���罸
+執筆者募集
 
-filter1 + filter2 �� filter1�ν��Ϥθ�, filter2�ν��Ϥ�Ԥ���
+filter1 + filter2 は filter1の出力の後, filter2の出力を行う。
 
 --- to_a -> [String]
-�¹Է�̤�ʸ�����������֤��ޤ���
+実行結果を文字列の配列で返します。
 
   Shell.def_system_command("wc")
   sh = Shell.new
   puts sh.cat("/etc/passwd").to_a
 
 --- to_s -> String
-�¹Է�̤�ʸ������֤��ޤ���
+実行結果を文字列で返します。
 
   Shell.def_system_command("wc")
   sh = Shell.new
@@ -118,18 +118,18 @@ filter1 + filter2 �� filter1�ν��Ϥθ�, filter2�ν��Ϥ�Ԥ���
 
 --- inspect -> String
 
-���֥������Ȥ�ʹ֤��ɤ��������Ѵ�����ʸ������֤��ޤ���
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
 @see [[m:Object#inspect]]
 
 --- input -> Shell::Filter | nil
-���ߤΥե��륿�����֤��ޤ���
+現在のフィルターを返します。
 
 --- input=(filter)
 
-�ե��륿�������ꤷ�ޤ���
+フィルターを設定します。
 
-@param filter �ե��륿������ꤷ�ޤ���
+@param filter フィルターを指定します。
 
 
 #@include(builtincommands)

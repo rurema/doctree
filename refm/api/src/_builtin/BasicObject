@@ -1,31 +1,31 @@
 #@since 1.9.1
 = class BasicObject
-�ü�����ӤΤ���˰տ�Ū�ˤۤȤ�ɲ����������Ƥ��ʤ����饹�Ǥ���
-[[c:Object]]���饹�οƤˤ�����ޤ���Ruby 1.9 �ʹߤ�Ƴ������ޤ�����
+特殊な用途のために意図的にほとんど何も定義されていないクラスです。
+[[c:Object]]クラスの親にあたります。Ruby 1.9 以降で導入されました。
 
-==== ����
-BasicObject ���饹�� Object ���饹����ۤȤ�ɤΥ᥽�åɤ�����������饹�Ǥ���
+==== 性質
+BasicObject クラスは Object クラスからほとんどのメソッドを取り除いたクラスです。
 
-Object ���饹���͡��������ʥ᥽�åɤ� [[c:Kernel]] ��������Ѥ����ؿ�Ū�᥽�å�
-��¿��ͭ���Ƥ��ޤ���
-������Ф��ơ� BasicObject ���饹�ϥ��֥������Ȥ�Ʊ�������̤�����᥽�åɤ�Ƥ���ꤹ��
-����¤ε�ǽ��¾�ϰ��ڤε�ǽ����äƤ��ޤ���
+Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け継いだ関数的メソッド
+を多数有しています。
+これに対して、 BasicObject クラスはオブジェクトの同一性を識別したりメソッドを呼んだりする
+最低限の機能の他は一切の機能を持っていません。
 
-==== ����
-����Ū�ˤϤۤܤ��٤ƤΥ��饹�οƤ� [[c:Object]] �ȹͤ��ƺ����٤�����ޤ���
-�������������Υ��饹���������ݤˤ� Object ���饹�ϻ��äƤ���᥽�åɤ�¿������
-��礬����ޤ���
+==== 用途
+基本的にはほぼすべてのクラスの親は [[c:Object]] と考えて差し支えありません。
+しかし、ある種のクラスを定義する際には Object クラスは持っているメソッドが多すぎる
+場合があります。
 
-�㤨�С� [[m:Object#method_missing]]�����Ѥ��� Proxy �ѥ���������������ˤ�
-Object ���饹������ѤߤΥ᥽�åɤϥץ������Ǥ��ʤ��Ȥ������꤬ȯ�����ޤ���
-���Τ褦�ʾ��� Object �ǤϤʤ� BasicObject �������������������Ǥ��ޤ���
+例えば、 [[m:Object#method_missing]]を利用して Proxy パターンを実装する場合には
+Object クラスに定義済みのメソッドはプロクシできないという問題が発生します。
+このような場合に Object ではなく BasicObject から派生して問題を解決できます。
 
-==== ����
-�̾�Υ��饹�� Object �ޤ��Ϥ���¾��Ŭ�ڤʥ��饹�����������٤��Ǥ���
-����ɬ�פʾ��ˤ��� BasicObject �����������Ƥ���������
+==== 注意
+通常のクラスは Object またはその他の適切なクラスから派生すべきです。
+真に必要な場合にだけ BasicObject から派生してください。
 
-==== ��
-��
+==== 例
+例
  class Proxy < BasicObject
    def initialize(target)
      @target = target
@@ -41,48 +41,48 @@ Object ���饹������ѤߤΥ᥽�åɤϥץ������Ǥ��ʤ��Ȥ������꤬ȯ�����ޤ���
 
 == Instance Methods
 --- ==(other) -> bool
-���֥������Ȥ� other ����������п��򡢤���ʤ��е����֤��ޤ���
+オブジェクトが other と等しければ真を、さもなくば偽を返します。
 
-���Υ᥽�åɤϳƥ��饹�������˹�碌�ơ����֥��饹�Ǻ��������٤��Ǥ���
-¿���ξ�硢���֥������Ȥ����Ƥ���������п����֤��褦�� (Ʊ������Ƚ�ꤹ��褦��) �����
-���뤳�Ȥ����Ԥ���Ƥ��ޤ���
+このメソッドは各クラスの性質に合わせて、サブクラスで再定義するべきです。
+多くの場合、オブジェクトの内容が等しければ真を返すように (同値性を判定するように) 再定義
+することが期待されています。
 
-�ǥե���ȤǤ� [[m:Object#equal?]] ��Ʊ�����֥������Ȥ�Ʊ�����ˤʤäƤ��ޤ���
+デフォルトでは [[m:Object#equal?]] と同じオブジェクトの同一性になっています。
 
-@param other ����оݤȤʤ륪�֥�������
-@return other �� self ��Ʊ�ͤǤ���п�������ʤ��е�
+@param other 比較対象となるオブジェクト
+@return other が self と同値であれば真、さもなくば偽
 @see [[m:BasicObject#equal?]]
 @see [[m:Object#==]]
 @see [[m:Object#equal?]]
 @see [[m:Object#eql?]]
 
 --- equal?(other) -> bool
-���֥������Ȥ� other ��Ʊ��Ǥ���п��򡢤���ʤ��е����֤��ޤ���
+オブジェクトが other と同一であれば真を、さもなくば偽を返します。
 
-���Υ᥽�åɤ�2�ĤΥ��֥������Ȥ�Ʊ��Τ�ΤǤ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
-���̤ˤϤ��Υ᥽�åɤ�褷�ƺ�������٤��Ǥ���ޤ���
-�������� [[c:BasicObject]] �ΰ��֤Ť��塢�ɤ����Ƥ�������ɬ�פ����Ӥ⤢��Ǥ��礦��
-���������ݤˤϼ�ʬ�����򤷤Ƥ���Τ��褯���򤷤Ƥ���¹Ԥ��Ƥ���������
+このメソッドは2つのオブジェクトが同一のものであるかどうかを判定します。
+一般にはこのメソッドを決して再定義すべきでありません。
+ただし、 [[c:BasicObject]] の位置づけ上、どうしても再定義が必要な用途もあるでしょう。
+再定義する際には自分が何をしているのかよく理解してから実行してください。
 
-@param other ����оݤȤʤ륪�֥�������
-@return other �� self ���ȤǤ���п�������ʤ��е�
+@param other 比較対象となるオブジェクト
+@return other が self 自身であれば真、さもなくば偽
 @see [[m:Object#equal?]]
 @see [[m:Object#==]]
 @see [[m:Object#eql?]]
 
 --- ! -> bool
-���֥������Ȥ򿿵��ͤȤ���ɾ��������������������֤��ޤ���
+オブジェクトを真偽値として評価し、その論理否定を返します。
 
-���Υ᥽�åɤ� self �� nil �ޤ��� false �Ǥ���п��򡢤���ʤ��е����֤��ޤ���
-�����������ɾ����ȼ�ä������Ѥ�������������Ȥ���Ū��
-����������Τ����ꤵ��Ƥ��ޤ���
+このメソッドは self が nil または false であれば真を、さもなくば偽を返します。
+主に論理式の評価に伴って副作用を引き起こすことを目的に
+再定義するものと想定されています。
 
-���Υ᥽�åɤ��������Ƥ� Ruby �����漰�ˤ����� nil �� false �ʳ������Ȥ���
-�����뤳�ȤϤ���ޤ���
+このメソッドを再定義しても Ruby の制御式において nil や false 以外が偽として
+扱われることはありません。
 
-@return ���֥������Ȥ����Ǥ���п�������ʤ��е�
+@return オブジェクトが偽であれば真、さもなくば偽
 
-��
+例
  class NegationRecorder < BasicObject
    def initialize
      @count = 0
@@ -102,7 +102,7 @@ Object ���饹������ѤߤΥ᥽�åɤϥץ������Ǥ��ʤ��Ȥ������꤬ȯ�����ޤ���
 
  puts recorder.count #=> 3
 
-��
+例
  class AnotherFalse < BasicObject
    def !
      true
@@ -110,28 +110,28 @@ Object ���饹������ѤߤΥ᥽�åɤϥץ������Ǥ��ʤ��Ȥ������꤬ȯ�����ޤ���
  end
  another_false = AnotherFalse.new
 
- # another_false��*��*
+ # another_falseは*真*
  puts "another false is a truth" if another_false
    #=> "another false is a truth"
 
 --- !=(other) -> bool
-���֥������Ȥ� other ���������ʤ����Ȥ�Ƚ�ꤷ�ޤ���
+オブジェクトが other と等しくないことを判定します。
 
-�ǥե���ȤǤ� self == other ��ɾ��������˷�̤��������ꤷ���֤��ޤ���
-���Τ��ᡢ���֥��饹�� [[m:BasicObject#==]] ���������Ƥ� != �Ȥϼ�ưŪ����������
-�Ȥ��褦�ˤʤäƤ��ޤ���
+デフォルトでは self == other を評価した後に結果を論理否定して返します。
+このため、サブクラスで [[m:BasicObject#==]] を再定義しても != とは自動的に整合性が
+とれるようになっています。
 
-�������� [[m:BasicObject#!=]] ���Ȥ� [[m:BasicObject#!]] �����������ݤˤϡ��桼��������Ǥ��
-���������ݤ��ʤ��ƤϤʤ�ޤ���
+ただし、 [[m:BasicObject#!=]] 自身や [[m:BasicObject#!]] を再定義した際には、ユーザーの責任で
+整合性を保たなくてはなりません。
 
-���Υ᥽�åɤϼ����������ɾ����ȼ�ä������Ѥ�������������Ȥ���Ū��
-����������Τ����ꤵ��Ƥ��ޤ���
+このメソッドは主に論理式の評価に伴って副作用を引き起こすことを目的に
+再定義するものと想定されています。
 
-@param other ����оݤȤʤ륪�֥�������
+@param other 比較対象となるオブジェクト
 @see [[m:BasicObject#==]]
 @see [[m:BasicObject#!]]
 
-��
+例
  class NonequalityRecorder < BasicObject
    def initialize
      @count = 0
@@ -154,22 +154,22 @@ Object ���饹������ѤߤΥ᥽�åɤϥץ������Ǥ��ʤ��Ȥ������꤬ȯ�����ޤ���
 
 --- __send__(name, *args) -> object
 --- __send__(name, *args) { .... } -> object
-���֥������ȤΥ᥽�å� name �� args ������ˤ��ƸƤӽФ����᥽�åɤη�̤��֤��ޤ���
+オブジェクトのメソッド name を args を引数にして呼び出し、メソッドの結果を返します。
 
-�֥��å��դ��ǸƤФ줿�Ȥ��ϥ֥��å��⤽�Τޤް����Ϥ��ޤ���
+ブロック付きで呼ばれたときはブロックもそのまま引き渡します。
 
-@param name �ƤӽФ��᥽�åɤ�̾���� [[c:Symbol]] �ޤ���ʸ����ǻ��ꤷ�ޤ���
-@param args �᥽�åɤ��Ϥ�Ǥ�ոĤΰ���
+@param name 呼び出すメソッドの名前。 [[c:Symbol]] または文字列で指定します。
+@param args メソッドに渡す任意個の引数
 @see [[m:Object#__send__]]
 
 #@since 1.9.3
 --- __id__ -> Integer
 
-�ƥ��֥������Ȥ��Ф��ư�դ��������֤��ޤ������륪�֥������Ȥ��Ф�
-�ƤɤΤ褦��������������Ƥ��뤫������Ǥ���
+各オブジェクトに対して一意な整数を返します。あるオブジェクトに対し
+てどのような整数が割り当てられるかは不定です。
 
-[[m:Object#object_id]] ��Ʊ���Ǥ�����#object_id �� [[c:BasicObject]] ��
-�Ϥʤ��������դ��Ƥ���������
+[[m:Object#object_id]] と同じですが、#object_id は [[c:BasicObject]] に
+はない事に注意してください。
 
 @see [[m:Object#object_id]], [[ruby-dev:42840]]
 #@end

@@ -1,5 +1,5 @@
-[[c:RDoc::Context]] ¤È [[c:RDoc::Context::Section]] ¤òÄêµÁ¤¹¤ë¥µ¥Ö¥é¥¤
-¥Ö¥é¥ê¤Ç¤¹¡£
+[[c:RDoc::Context]] ã¨ [[c:RDoc::Context::Section]] ã‚’å®šç¾©ã™ã‚‹ã‚µãƒ–ãƒ©ã‚¤
+ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(RDoc__Context)
 #@include(RDoc__Context__Section)

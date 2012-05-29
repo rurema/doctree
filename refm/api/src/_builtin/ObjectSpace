@@ -1,16 +1,16 @@
 = module ObjectSpace 
 
-���ƤΥ��֥������Ȥ����뤿��Υ⥸�塼��Ǥ���
+全てのオブジェクトを操作するためのモジュールです。
 
 == Module Functions
 
 --- _id2ref(id)    -> object
 
-���֥������� ID([[m:Object#__id__]])���饪�֥������Ȥ����ޤ���
+オブジェクト ID([[m:Object#__id__]])からオブジェクトを得ます。
 
-@param id �������������֥������Ȥ� ID �������ǻ��ꤷ�ޤ���
+@param id 取得したいオブジェクトの ID を整数で指定します。
 
-@raise RangeError �б����륪�֥������Ȥ�¸�ߤ��ʤ����ȯ�����ޤ���
+@raise RangeError 対応するオブジェクトが存在しなければ発生します。
 
  a = "hoge"
  p ObjectSpace._id2ref(a.__id__) #=> "hoge"
@@ -18,21 +18,21 @@
 --- define_finalizer(obj, proc)         -> Array
 --- define_finalizer(obj) {|id| ...}    -> Array
 
-obj �����������Ȥ��˼¹Ԥ����ե����ʥ饤�� proc ��
-��Ͽ���ޤ���Ʊ�����֥������ȤˤĤ���ʣ����ƤФ줿�Ȥ����֤�������
-�Ϥʤ��ɲ���Ͽ����ޤ������ߤΥ����ե�٥�� proc ������ˤ����֤��ޤ���
+obj が解放されるときに実行されるファイナライザ proc を
+登録します。同じオブジェクトについて複数回呼ばれたときは置き換えで
+はなく追加登録されます。現在のセーフレベルと proc を配列にして返します。
 
-�֥��å�����ꤷ�����ϡ����Υ֥��å����ե����ʥ饤���ˤʤ�ޤ���
-obj �β�����˥֥��å��� obj �� ID ([[m:Object#__id__]])������Ȥ��Ƽ¹Ԥ���ޤ���
-����������Ҥ����꤬����Τǥ֥��å��ǥե����ʥ饤������Ͽ����Τ��񤷤��Ǥ��礦��
+ブロックを指定した場合は、そのブロックがファイナライザになります。
+obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数として実行されます。
+しかし、後述の問題があるのでブロックでファイナライザを登録するのは難しいでしょう。
 
-@param obj �ե����ʥ饤������Ͽ���������֥������Ȥ���ꤷ�ޤ���
+@param obj ファイナライザを登録したいオブジェクトを指定します。
 
-@param proc �ե����ʥ饤���Ȥ��� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���proc �� obj �β������ obj �� ID ������Ȥ��Ƽ¹Ԥ���ޤ���
+@param proc ファイナライザとして [[c:Proc]] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
 
-==== �Ȥ���������
+==== 使い方の注意
 
-�ʲ��ϡ�define_finalizer �λȤ����ΰ�����Ǥ���
+以下は、define_finalizer の使い方の悪い例です。
 
   class Foo
     def initialize
@@ -44,12 +44,12 @@ obj �β�����˥֥��å��� obj �� ID ([[m:Object#__id__]])������Ȥ��Ƽ¹Ԥ���ޤ�
   Foo.new
   GC.start
 
-����ϡ��Ϥ��줿 proc �� self �� obj �򻲾Ȥ���
-�Ť��뤿�ᡣ���Υ��֥������Ȥ� GC ���оݤˤʤ�ޤ���
+これは、渡された proc の self が obj を参照しつ
+づけるため。そのオブジェクトが GC の対象になりません。
 
-[[lib:tempfile]] �ϡ��ե����ʥ饤���λȤ�����
-�ɤ���ˤʤäƤ��ޤ�������ϡ����饹�Υ���ƥ����Ȥ� [[c:Proc]] ��
-�������뤳�ȤǾ嵭���������򤷤Ƥ��ޤ���
+[[lib:tempfile]] は、ファイナライザの使い方の
+良い例になっています。これは、クラスのコンテキストで [[c:Proc]] を
+生成することで上記の問題を回避しています。
 
   class Bar
     def Bar.callback
@@ -64,10 +64,10 @@ obj �β�����˥֥��å��� obj �� ID ([[m:Object#__id__]])������Ȥ��Ƽ¹Ԥ���ޤ�
   Bar.new
   GC.start
 
-proc �θƤӽФ���ȯ���������æ��(exit���㳰)��̵�뤵��ޤ���
-����ϡ�������ץȤΥᥤ������� GC ��ȯ���ˤ�ä���Ʊ�������Ǥ���
-��Τ��ɤ�����Ǥ����԰¤ʤ����� -d ���ץ�����
-�������㳰��ȯ����̵ͭ���ǧ���Ƥ����������ɤ��Ǥ��礦��
+proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
+これは、スクリプトのメイン処理が GC の発生によって非同期に中断され
+るのを防ぐためです。不安なうちは -d オプションで
+事前に例外の発生の有無を確認しておいた方が良いでしょう。
 
   class Baz
     def initialize
@@ -99,21 +99,21 @@ proc �θƤӽФ���ȯ���������æ��(exit���㳰)��̵�뤵��ޤ���
 #@end
 #@end
 
-���ꤵ�줿 klass �� [[m:Object#kind_of?]] �δط��ˤ������Ƥ�
-���֥������Ȥ��Ф��Ʒ����֤��ޤ�����������ά���줿���ˤ����ƤΥ���
-�������Ȥ��Ф��Ʒ����֤��ޤ���
-�����֤��������֤��ޤ���
+指定された klass と [[m:Object#kind_of?]] の関係にある全ての
+オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
+ジェクトに対して繰り返します。
+繰り返した数を返します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ�
+ブロックが与えられなかった場合は、
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
-���Υ��饹�Υ��֥������ȤˤĤ��ƤϷ����֤��ޤ���
+次のクラスのオブジェクトについては繰り返しません
 
  * [[c:Fixnum]]
  * [[c:Symbol]]
@@ -121,35 +121,35 @@ proc �θƤӽФ���ȯ���������æ��(exit���㳰)��̵�뤵��ޤ���
  * [[c:FalseClass]]
  * [[c:NilClass]]
 
-�Ȥ��ˡ�klass �� [[c:Fixnum]] �� [[c:Symbol]] �ʤɤΥ��饹����ꤷ�����ϡ�
-���ⷫ���֤��ʤ����Ȥˤʤ�ޤ���
-�ʤ���[[c:Symbol]] �ˤĤ��Ƥϡ������� [[m:Symbol.all_symbols]] �����ѤǤ��ޤ���
+とくに、klass に [[c:Fixnum]] や [[c:Symbol]] などのクラスを指定した場合は、
+何も繰り返さないことになります。
+なお、[[c:Symbol]] については、かわりに [[m:Symbol.all_symbols]] が使用できます。
 
-@param klass ���饹���⥸�塼�����ꤷ�ޤ���
+@param klass クラスかモジュールを指定します。
 
 --- garbage_collect    -> nil
 
-�ɤ�����⻲�Ȥ���ʤ��ʤä����֥������Ȥ������ޤ���
-[[m:GC.start]] ��Ʊ���Ǥ���
+どこからも参照されなくなったオブジェクトを回収します。
+[[m:GC.start]] と同じです。
 
 --- undefine_finalizer(obj)    -> object
 
-obj ���Ф���ե����ʥ饤���򤹤٤Ʋ�����ޤ���
-obj ���֤��ޤ���
+obj に対するファイナライザをすべて解除します。
+obj を返します。
 
-@param obj �ե����ʥ饤���������������֥������Ȥ���ꤷ�ޤ���
+@param obj ファイナライザを解除したいオブジェクトを指定します。
 
 #@since 1.9.1
 --- count_objects(result_hash = {}) -> Hash
 
-���֥������Ȥ���ऴ�Ȥ˥�����Ȥ�����̤� [[c:Hash]] �Ȥ����֤��ޤ���
+オブジェクトを種類ごとにカウントした結果を [[c:Hash]] として返します。
 
-���Υ᥽�åɤ� C Ruby �ʳ��� Ruby �Ǥ�ư���ʤ��Ǥ��礦��
+このメソッドは C Ruby 以外の Ruby では動かないでしょう。
 
-@param result_hash �ϥå������ꤷ�ޤ���Ϳ����줿�ϥå���Ͼ�񤭤����֤���ޤ���
-                   ��������Ѥ����¬��ˤ��ƶ����򤱤뤳�Ȥ��Ǥ��ޤ���
+@param result_hash ハッシュを指定します。与えられたハッシュは上書きして返されます。
+                   これを利用すると測定による影響を避けることができます。
 
-@raise TypeError ������ [[c:Hash]] �ʳ���Ϳ������硢ȯ�����ޤ���
+@raise TypeError 引数に [[c:Hash]] 以外を与えた場合、発生します。
 
   ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
 
@@ -157,42 +157,42 @@ obj ���֤��ޤ���
 #@until 1.9.1
 --- add_finalizer(proc)    -> Proc
 
-���Υ᥽�åɤ� obsolete �Ǥ��������
-[[m:ObjectSpace.#define_finalizer]] ����Ѥ��Ƥ���������
+このメソッドは obsolete です。代わりに
+[[m:ObjectSpace.#define_finalizer]] を使用してください。
 
-proc ��ե����ʥ饤���Ȥ������ꤷ�ޤ���
-proc ���֤��ޤ���
+proc をファイナライザとして設定します。
+proc を返します。
 
-[[m:ObjectSpace.#call_finalizer]] �ǻ��ꤷ�����֥������Ȥ���������
-��������Υ��֥������Ȥ� ID(c.f [[m:Object#__id__]])�������
-�ե����ʥ饤����ɾ������ޤ���
+[[m:ObjectSpace.#call_finalizer]] で指定したオブジェクトが解放され
+る時、そのオブジェクトの ID(c.f [[m:Object#__id__]])を引数に
+ファイナライザが評価されます。
 
-@param proc �ե����ʥ饤���Ȥ����� Proc ���֥������Ȥ���ꤷ�ޤ���
+@param proc ファイナライザとしたい Proc オブジェクトを指定します。
 
 --- call_finalizer(obj)    -> object
 
-���Υ᥽�åɤ� obsolete �Ǥ���
+このメソッドは obsolete です。
 
-obj ��ե����ʥ饤�����оݥ��֥������ȤȤ������ꤷ�ޤ���
-obj ���֤��ޤ���
+obj をファイナライザの対象オブジェクトとして設定します。
+obj を返します。
 
-@param obj �ե����ʥ饤�����оݤȤ��륪�֥������Ȥ���ꤷ�ޤ���
+@param obj ファイナライザの対象とするオブジェクトを指定します。
 
 --- finalizers     -> [Proc]
 
-���Υ᥽�åɤ� obsolete �Ǥ���
+このメソッドは obsolete です。
 
-������Ͽ����Ƥ���ե����ʥ饤����������֤��ޤ���
+現在登録されているファイナライザの配列を返します。
 
 --- remove_finalizer(proc)    -> Proc
 
-���Υ᥽�åɤ� obsolete �Ǥ��������
-[[m:ObjectSpace.#undefine_finalizer]] ����Ѥ��Ƥ�����
-����
+このメソッドは obsolete です。代わりに
+[[m:ObjectSpace.#undefine_finalizer]] を使用してくださ
+い。
 
-���ꤷ�� proc ��ե����ʥ饤������������ޤ���
-proc ���֤��ޤ���
+指定した proc をファイナライザから取り除きます。
+proc を返します。
 
-@param proc �����������ե����ʥ饤���Ǥ��� Proc ���֥������Ȥ���ꤷ�ޤ���
+@param proc 取り除きたいファイナライザである Proc オブジェクトを指定します。
 
 #@end

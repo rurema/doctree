@@ -2,48 +2,48 @@
 
 = class Rinda::Tuple
 
-Tuple �Τ���Υ��饹�Ǥ���
+Tuple のためのクラスです。
 
 == Class Methods
 
 --- new(ah)
 #@todo
 
-Tuple ���֥������Ȥ��������ޤ���
-ah �ˤ� [[c:Array]] ���֥������Ȥ� [[c:Hash]] ���֥������Ȥ�Ϳ���ޤ���
-[[c:Hash]] ���֥������Ȥ�Ϳ�����硢
-�����Ϥ��٤�ʸ����Ǥʤ���Ф����ޤ���
+Tuple オブジェクトを生成します。
+ah には [[c:Array]] オブジェクトか [[c:Hash]] オブジェクトを与えます。
+[[c:Hash]] オブジェクトを与える場合、
+キーはすべて文字列でなければいけません。
 
 == Instance Methods
 
 --- [](key)
 #@todo
 
-�ϥå��奭�� key ���б��������Ǥ��֤��ޤ���
-self �� [[c:Array]] ���֥������Ȥ����������줿���ϡ�
-���� key ��Ϳ����Ȥ��Υ���ǥå������б��������Ǥ��֤��ޤ���
+ハッシュキー key に対応する要素を返します。
+self が [[c:Array]] オブジェクトから生成された場合は、
+整数 key を与えるとそのインデックスに対応する要素を返します。
 
 --- each{|key, value| ... }
 #@todo
 
-�ƥϥå��奭�� key ���� value �Υڥ�������Ȥ��ƥ֥��å���ɾ�����ޤ���
-self �� [[c:Array]] ���֥������Ȥ����������줿���ϡ�
-����ǥå������ͤΥڥ�������Ȥ��ƥ֥��å���ɾ�����ޤ���
+各ハッシュキー key と値 value のペアを引数としてブロックを評価します。
+self が [[c:Array]] オブジェクトから生成された場合は、
+インデックスと値のペアを引数としてブロックを評価します。
 
 --- fetch(key)
 #@todo
 
-�ϥå��奭�� key ���б��������Ǥ��֤��ޤ���
+ハッシュキー key に対応する要素を返します。
 
 --- size
 #@todo
 
-���������������֤��ޤ���
+サイズを整数で返します。
 
 --- value
 #@todo
 
-���Ȥ��ݻ����Ƥ���ϥå��夫������֤��ޤ���
+自身が保持しているハッシュか配列を返します。
 
 
 #@end

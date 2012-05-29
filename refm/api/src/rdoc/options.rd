@@ -7,7 +7,7 @@ require singleton
 require getoptlong
 #@end
 
-rdoc ���ޥ�ɤΥ��ץ�������Ϥ��뤿��Υ��֥饤�֥��Ǥ���
+rdoc コマンドのオプションを解析するためのサブライブラリです。
 
 #@since 1.9.1
 = class RDoc::Options
@@ -17,202 +17,202 @@ rdoc ���ޥ�ɤΥ��ץ�������Ϥ��뤿��Υ��֥饤�֥��Ǥ���
 include Singleton
 #@end
 
-rdoc ���ޥ�ɤΥ��ץ�������Ϥ��뤿��Υ��饹�Ǥ���
+rdoc コマンドのオプションを解析するためのクラスです。
 
-���줾��Υ��ץ����ξܺ٤˴ؤ��Ƥϡ�[[ref:lib:rdoc#usage]] �򻲾Ȥ��Ƥ���
-������
+それぞれのオプションの詳細に関しては、[[ref:lib:rdoc#usage]] を参照してくだ
+さい。
 
 #@until 1.9.1
-[����] ���饹̾�� RDoc::Option �ǤϤʤ��������դ��Ƥ���������(1.9 �Ϥ�
-�� RDoc::Option ���饹�Ȥ��ƻ��ѤǤ��ޤ���)
+[注意] クラス名は RDoc::Option ではない事に注意してください。(1.9 系で
+は RDoc::Option クラスとして使用できます。)
 #@end
 
 == Instance Methods
 
 --- exclude -> Regexp
 
-���ޥ�ɥ饤������� --exclude ���ץ����ǻ��ꤷ������ɽ�����֤��ޤ���
-ʣ�����ꤷ�Ƥ������ϡ�1 �Ĥ� [[c:Regexp]] ���֥������ȤˤޤȤ��줿
-��Τ��֤��ޤ���
+コマンドライン引数の --exclude オプションで指定した正規表現を返します。
+複数指定していた場合は、1 つの [[c:Regexp]] オブジェクトにまとめられた
+ものを返します。
 
 --- exclude=(val)
 
-���ޥ�ɥ饤������� --exclude ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --exclude オプションと同様の指定を行います。
 
-@param val ���ꤹ��ѥ������ [[c:Regexp]] ���֥������Ȥǻ��ꤷ�ޤ���
+@param val 設定するパターンを [[c:Regexp]] オブジェクトで指定します。
 
 --- op_dir -> String
 
-���ޥ�ɥ饤������� --op ���ץ����ǻ��ꤷ���ǥ��쥯�ȥ���֤��ޤ���
+コマンドライン引数の --op オプションで指定したディレクトリを返します。
 
---ri��--ri-site��--ri-system ���ץ����ˤ�ƶ������������դ��Ƥ���������
+--ri、--ri-site、--ri-system オプションにも影響される事に注意してください。
 
-@return ���ꤵ�줿�ǥ��쥯�ȥ��ʸ������֤��ޤ���
+@return 設定されたディレクトリを文字列で返します。
 
 --- op_dir=(val)
 
-���ޥ�ɥ饤������� --op ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --op オプションと同様の指定を行います。
 
-@param val ���ꤹ��ǥ��쥯�ȥ��ʸ����ǻ��ꤷ�ޤ���
+@param val 設定するディレクトリを文字列で指定します。
 
 --- op_name -> String
 
-���ޥ�ɥ饤������� --opname ���ץ����ǻ��ꤷ��̾����ʸ������֤���
-����
+コマンドライン引数の --opname オプションで指定した名前を文字列で返しま
+す。
 
 --- show_all -> bool
 
-���ޥ�ɥ饤������� --all ���ץ�������ꤷ�Ƥ�����硢true ���֤���
-���������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --all オプションを指定していた場合、true を返しま
+す。そうでない場合は false を返します。
 
 --- show_all=(val)
 
-val �� true ����ꤷ����硢���ޥ�ɥ饤������� --all ���ץ�����Ʊ��
-�λ����Ԥ��ޤ���
+val に true を指定した場合、コマンドライン引数の --all オプションと同様
+の指定を行います。
 
-@param val --all ���ץ�����Ʊ�������Ԥ����� true�������Ǥʤ����
-           �� false ����ꤷ�ޤ���
+@param val --all オプションと同じ指定を行う場合は true、そうでない場合
+           は false を指定します。
 
 --- main_page -> String | nil
 
-���ޥ�ɥ饤������� --main ���ץ����ǻ��ꤷ���ե�����̾�����饹/��
-���塼��̾���֤��ޤ���
+コマンドライン引数の --main オプションで指定したファイル名、クラス/モ
+ジュール名を返します。
 
-���ꤷ�ʤ��ä����� nil ���֤��ޤ���
+指定しなかった場合は nil を返します。
 
 --- main_page=(val)
 
-���ޥ�ɥ饤������� --main ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --main オプションと同様の指定を行います。
 
-@param val ���ꤹ��ե�����̾�����饹/�⥸�塼��̾��ʸ����ǻ��ꤷ�ޤ���
+@param val 設定するファイル名、クラス/モジュール名を文字列で指定します。
 
 --- merge -> true | nil
 
-���ޥ�ɥ饤������� --merge ���ץ�������ꤷ�Ƥ�����硢true ���֤�
-�ޤ��������Ǥʤ����� nil ���֤��ޤ���
+コマンドライン引数の --merge オプションを指定していた場合、true を返し
+ます。そうでない場合は nil を返します。
 
 --- quiet -> bool
 
-���ޥ�ɥ饤������� --quiet ���ץ�������ꤷ�Ƥ�����硢true ���֤�
-�ޤ��������Ǥʤ����� nil ���֤��ޤ���
+コマンドライン引数の --quiet オプションを指定していた場合、true を返し
+ます。そうでない場合は nil を返します。
 
 --- generator -> Generator
 
-���ޥ�ɥ饤������� --fmt ���ץ����ǻ��ꤷ��ʸ����˱�����
-Generator ���֤��ޤ���
+コマンドライン引数の --fmt オプションで指定した文字列に応じた
+Generator を返します。
 
-���ꤷ�ʤ��ä����ϡ�HTML ���б����� Generator ���֤��ޤ���
+指定しなかった場合は、HTML に対応する Generator を返します。
 
 --- generator=(val)
 
-���ޥ�ɥ饤������� --fmt ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --fmt オプションと同様の指定を行います。
 
-@param val ���ꤹ�� Generator ����ꤷ�ޤ���
+@param val 設定する Generator を指定します。
 
 --- files -> [String]
 
-���Ϥ���ե�����ΰ�����ʸ�����������֤��ޤ���
+解析するファイルの一覧を文字列の配列で返します。
 
 --- rdoc_include -> [String]
 
-���ޥ�ɥ饤������� --include ���ץ����ǻ��ꤷ���ǥ��쥯�ȥ��ʸ����
-��������֤��ޤ���
+コマンドライン引数の --include オプションで指定したディレクトリを文字列
+の配列で返します。
 
-���ꤷ�ʤ��ä����� ['.'] ���֤��ޤ���
+指定しなかった場合は ['.'] を返します。
 
 --- template -> String
 
-���ޥ�ɥ饤������� --template ���ץ����ǻ��ꤷ��̾����ʸ���������
-���֤��ޤ���
+コマンドライン引数の --template オプションで指定した名前を文字列の配列
+で返します。
 
-���ꤷ�ʤ��ä����� 'html' ���֤��ޤ���
+指定しなかった場合は 'html' を返します。
 
 --- diagram -> bool
 
-���ޥ�ɥ饤������� --diagram ���ץ�������ꤷ�Ƥ�����硢true ����
-���ޤ��������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --diagram オプションを指定していた場合、true を返
+します。そうでない場合は false を返します。
 
 --- fileboxes -> bool
 
-���ޥ�ɥ饤������� --diagram ���ץ����--fileboxes ���ץ��������
-���Ƥ�����硢true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --diagram オプション、--fileboxes オプションを指定
+していた場合、true を返します。そうでない場合は false を返します。
 
 --- show_hash -> bool
 
-���ޥ�ɥ饤������� --show-hash ���ץ�������ꤷ�Ƥ�����硢true ��
-�֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --show-hash オプションを指定していた場合、true を
+返します。そうでない場合は false を返します。
 
 --- image_format -> String
 
-���ޥ�ɥ饤������� --image-format ���ץ����ǻ��ꤷ��̾����ʸ�����
-������֤��ޤ���
+コマンドライン引数の --image-format オプションで指定した名前を文字列の
+配列で返します。
 
-���ꤷ�ʤ��ä����� 'png' ���֤��ޤ���
+指定しなかった場合は 'png' を返します。
 
 --- charset -> String
 
-���ޥ�ɥ饤������� --charset ���ץ����ǻ��ꤷ��ʸ�������ɤ�ʸ�����
-�֤��ޤ���
+コマンドライン引数の --charset オプションで指定した文字コードを文字列で
+返します。
 
-���ꤷ�ʤ��ä����ϡ�[[m:$KCODE]] �˱������ͤˤʤ�ޤ���
+指定しなかった場合は、[[m:$KCODE]] に応じた値になります。
 
 --- inline_source -> bool
 
-���ޥ�ɥ饤������� --inline-source ���ץ���� --one-file ����ꤷ��
-������硢�⤷���� --fmt ���ץ����� xml ���ꤷ������ true ���֤���
-���������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --inline-source オプションか --one-file を指定して
+いた場合、もしくは --fmt オプションに xml 指定した場合に true を返しま
+す。そうでない場合は false を返します。
 
 --- all_one_file -> bool
 
-���ޥ�ɥ饤������� --one-file ����ꤷ�Ƥ�����硢�⤷���� --fmt ����
-������ xml ���ꤷ������ true ���֤��ޤ��������Ǥʤ����� false ��
-�֤��ޤ���
+コマンドライン引数の --one-file を指定していた場合、もしくは --fmt オプ
+ションに xml 指定した場合に true を返します。そうでない場合は false を
+返します。
 
 --- tab_width -> Integer
 
-���ޥ�ɥ饤������� --tab-width ���ץ����ǻ��ꤷ�����ͤ��֤��ޤ���
+コマンドライン引数の --tab-width オプションで指定した数値を返します。
 
 --- include_line_numbers -> bool
 
-���ޥ�ɥ饤������� --include-line-numbers ����ꤷ�Ƥ������� true
-���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --include-line-numbers を指定していた場合に true
+を返します。そうでない場合は false を返します。
 
 --- extra_accessors -> Regexp | nil
 
-���ޥ�ɥ饤������� --accessor ���ץ����ǻ��ꤷ������������̾������
-�Ƥ˥ޥå���������ɽ�����֥������Ȥ��֤��ޤ���
+コマンドライン引数の --accessor オプションで指定したアクセサの名前すべ
+てにマッチする正規表現オブジェクトを返します。
 
-���ꤷ�ʤ��ä����� nil ���֤��ޤ���
+指定しなかった場合は nil を返します。
 
 --- extra_accessor_flags -> {String => String}
 
-���ޥ�ɥ饤������� --accessor ���ץ����ǻ��ꤷ��������������������
-�������μ��ब�ͤΥϥå�����֤��ޤ���
+コマンドライン引数の --accessor オプションで指定したアクセサがキー、ア
+クセサの種類が値のハッシュを返します。
 
-�ͤ� r��w��rw �Τ����줫�Ǥ������줾�� attr_reader��attr_writer��
-attr_accessor ���б����ޤ���
+値は r、w、rw のいずれかです。それぞれ attr_reader、attr_writer、
+attr_accessor に対応します。
 
 --- css -> String
 
-���ޥ�ɥ饤������� --style ���ץ����ǻ��ꤷ�� URL ��ʸ������֤���
-����
+コマンドライン引数の --style オプションで指定した URL を文字列で返しま
+す。
 
 --- webcvs -> String | nil
 
-���ޥ�ɥ饤������� --webcvs ���ץ����ǻ��ꤷ�� URL ��ʸ������֤���
-����
+コマンドライン引数の --webcvs オプションで指定した URL を文字列で返しま
+す。
 
-���ꤷ�ʤ��ä����� nil ���֤��ޤ���
+指定しなかった場合は nil を返します。
 
 --- promiscuous
 
-���ޥ�ɥ饤������� --promiscuous ����ꤷ�Ƥ������� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --promiscuous を指定していた場合に true を返します。
+そうでない場合は false を返します。
 
 --- force_update -> bool
 
-���ޥ�ɥ饤������� --force_update ����ꤷ�Ƥ������� true ���֤���
-���������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --force_update を指定していた場合に true を返しま
+す。そうでない場合は false を返します。
 
 #@since 1.9.1
 --- parse(argv) -> ()
@@ -220,86 +220,86 @@ attr_accessor ���б����ޤ���
 --- parse(argv, generators) -> ()
 #@end
 
-���ޥ�ɥ饤���������Ϥ��ޤ���
+コマンドライン引数を解析します。
 
-@param argv ���ޥ�ɥ饤�������ʸ���������ǻ��ꤷ�ޤ���
+@param argv コマンドライン引数を文字列の配列で指定します。
 
 #@until 1.9.1
-@param generators Generator ���������ꤷ�ޤ���
+@param generators Generator の配列を指定します。
 #@end
 
-�ޤ����ʲ��Τ褦�ʻ���򤷤�����ɸ�२�顼�˽��Ϥ�Ԥ�����λ������ 1
-�ǥץ�������λ���ޤ���
+また、以下のような指定をした場合は標準エラーに出力を行い、終了コード 1
+でプログラムを終了します。
 
- * --extension ���ץ����˳�ĥ�Ҥ� 2 �Ļ��ꤷ�ʤ��ä����
- * --extension ���ץ����� new=old ����ꤷ������ old �򰷤���ե����ޥ�
-   �����ʤ����
- * --fmt ���ץ����˰����ʤ����Ϥ���ꤷ�����
+ * --extension オプションに拡張子を 2 つ指定しなかった場合
+ * --extension オプションに new=old を指定した時に old を扱えるフォーマッ
+   タがない場合
+ * --fmt オプションに扱えない出力を指定した場合
 #@until 1.9.1
- * --image-format ���ץ�������ꤷ�����ˡ����ꤷ���ե����ޥåȤ� png��
-   gif��jpeg��jpg �Τ�����Ǥ�ʤ��ä����
- * --tab-width ���ץ����˿��Ͱʳ�����ꤷ�����
+ * --image-format オプションを指定した時に、指定したフォーマットが png、
+   gif、jpeg、jpg のいずれでもなかった場合
+ * --tab-width オプションに数値以外を指定した場合
 #@end
 
 #@since 1.9.1
 --- title -> String | nil
 
-�ɥ�����ȤΥ����ȥ���֤��ޤ������ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+ドキュメントのタイトルを返します。指定されていない場合は nil を返します。
 
 #@else
 --- title -> String | "RDoc Documentation"
 
-�ɥ�����ȤΥ����ȥ���֤��ޤ������ꤵ��Ƥ��ʤ����� "RDoc
-Documentation" ���֤��ޤ���
+ドキュメントのタイトルを返します。指定されていない場合は "RDoc
+Documentation" を返します。
 #@end
 
 --- title=(string)
 
-�ɥ�����ȤΥ����ȥ뤬�ޤ����ꤵ��Ƥ��ʤ����� string �ǻ��ꤷ��ʸ
-��������ꤷ�ޤ���
+ドキュメントのタイトルがまだ設定されていない場合に string で指定した文
+字列に設定します。
 
-���ޥ�ɥ饤������Ǵ��� --title ���ץ���󤬻��ꤵ��Ƥ������ˤϡ���
-�����ͥ�褷�ޤ���
+コマンドライン引数で既に --title オプションが指定されていた場合には、そ
+ちらを優先します。
 
-@param string ���ꤹ�륿���ȥ��ʸ����ǻ��ꤷ�ޤ���
+@param string 設定するタイトルを文字列で指定します。
 
 #@since 1.9.1
 
 --- formatter -> nil
 
-���Ѥ���Ƥ��ޤ��󡣾�� nil ���֤��ޤ���
+使用されていません。常に nil を返します。
 
-#@# ���ʤ��Ȥ� --fmt ���ץ����� @generator_name ���ͤ��������롣����
-#@# ��ʤ���
+#@# 少なくとも --fmt オプションは @generator_name に値を代入する。参照
+#@# もない。
 
 --- formatter=(val)
 
-���Ѥ���Ƥ��ޤ���
+使用されていません。
 
 --- verbosity -> 0 | 1 | 2
 
-�ץ������β��ϻ���ɽ���������ξܺ٤�����ͤ��֤��ޤ���
+プログラムの解析時に表示する情報の詳細さを数値で返します。
 
-�ʲ����ͤ���ꤹ������Ǥ��ޤ���
+以下の値を指定する事ができます。
 
-: 0(--quiet ���ץ�������ꤷ�����)
+: 0(--quiet オプションを指定した場合)
 
-  �����ɽ�����ޤ���
+  情報を表示しません。
 
 : 1
 
-  �̾��ɽ����Ԥ��ޤ���
+  通常の表示を行います。
 
-: 2(--verbose ���ץ�������ꤷ�����)
+: 2(--verbose オプションを指定した場合)
 
-  �ܺ٤ʾ����ɽ�����ޤ���
+  詳細な情報を表示します。
 
 --- verbosity=(val)
 
-�ץ������β��ϻ���ɽ���������ξܺ٤�����ͤǻ��ꤷ�ޤ���
+プログラムの解析時に表示する情報の詳細さを数値で指定します。
 
-@param val ����ɽ�����ʤ����� 0���̾��ɽ����Ԥ����� 1���ܺ٤�ɽ��
-           ��Ԥ����� 2 ����ꤷ�ޤ���
+@param val 何も表示しない場合は 0、通常の表示を行う場合は 1、詳細な表示
+           を行う場合は 2 を指定します。
 
 @see [[m:RDoc::Options#verbosity]]
 
@@ -308,65 +308,65 @@ Documentation" ���֤��ޤ���
 #@since 1.9.2
 --- pipe -> bool
 
-���ޥ�ɥ饤������� --pipe ���ץ�������ꤷ�Ƥ�����硢true ���֤���
-���������Ǥʤ����� false ���֤��ޤ���
+コマンドライン引数の --pipe オプションを指定していた場合、true を返しま
+す。そうでない場合は false を返します。
 
 --- pipe=(val)
 
-val �� true ����ꤷ����硢���ޥ�ɥ饤������� --pipe ���ץ�����Ʊ
-�ͤλ����Ԥ��ޤ���
+val に true を指定した場合、コマンドライン引数の --pipe オプションと同
+様の指定を行います。
 
-@param val --pipe ���ץ�����Ʊ�������Ԥ����� true�������Ǥʤ����
-           �� false ����ꤷ�ޤ���
+@param val --pipe オプションと同じ指定を行う場合は true、そうでない場合
+           は false を指定します。
 
 #@end
 
 #@since 1.9.3
 --- dry_run -> bool
 
-���ޥ�ɥ饤������� --dry-run ���ץ�������ꤷ�Ƥ�����硢true ����
-���ޤ���--no-dry-run ���ץ�������ꤷ�Ƥ�����硢false ���֤��ޤ���
+コマンドライン引数の --dry-run オプションを指定していた場合、true を返
+します。--no-dry-run オプションを指定していた場合、false を返します。
 
-�ɤ������ꤷ�ʤ��ä����� false ���֤��ޤ���
+どちらも指定しなかった場合は false を返します。
 
 --- dry_run=(val)
 
-val �� true ����ꤷ����硢���ޥ�ɥ饤������� --dry-run ���ץ�����
-Ʊ�ͤλ����Ԥ��ޤ���
+val に true を指定した場合、コマンドライン引数の --dry-run オプションと
+同様の指定を行います。
 
-@param val --dry-run ���ץ�����Ʊ�������Ԥ����� true�������Ǥʤ�
-           ���� false ����ꤷ�ޤ���
+@param val --dry-run オプションと同じ指定を行う場合は true、そうでない
+           場合は false を指定します。
 
 --- encoding -> Encoding
 
-���ޥ�ɥ饤������� --encoding ���ץ�������ꤷ�Ƥ�����硢���ꤷ��
-���󥳡��ǥ��󥰤��б����� [[c:Encoding]] ���֥������Ȥ��֤��ޤ���
+コマンドライン引数の --encoding オプションを指定していた場合、指定した
+エンコーディングに対応する [[c:Encoding]] オブジェクトを返します。
 
-���ꤷ�ʤ��ä����� [[m:Encoding.default_external]] ���ͤ��֤��ޤ���
+指定しなかった場合は [[m:Encoding.default_external]] の値を返します。
 
 --- encoding=(val)
 
-���ޥ�ɥ饤������� --encoding ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --encoding オプションと同様の指定を行います。
 
-@param val ���ꤹ�� [[c:Encoding]] ���֥������Ȥ���ꤷ�ޤ���
+@param val 設定する [[c:Encoding]] オブジェクトを指定します。
 
 --- force_output -> bool
 
-���ޥ�ɥ饤������� --force_output ���ץ�������ꤷ�Ƥ�����硢true
-���֤��ޤ���--no-force_output ���ץ�������ꤷ�Ƥ�����硢false ����
-���ޤ���
+コマンドライン引数の --force_output オプションを指定していた場合、true
+を返します。--no-force_output オプションを指定していた場合、false を返
+します。
 
-�ɤ������ꤷ�ʤ��ä����� true ���֤��ޤ���
+どちらも指定しなかった場合は true を返します。
 
 --- force_output=(val)
 
-val �� true ����ꤷ����硢���ޥ�ɥ饤������� --force_output ���ץ���
-���Ʊ�ͤλ����Ԥ��ޤ���
+val に true を指定した場合、コマンドライン引数の --force_output オプショ
+ンと同様の指定を行います。
 
-@param val --force_output ���ץ�����Ʊ�������Ԥ����� true��������
-           �ʤ����� false ����ꤷ�ޤ���
+@param val --force_output オプションと同じ指定を行う場合は true、そうで
+           ない場合は false を指定します。
 
-#@# �ä˻��Ѥ��Ƥ��ʤ��褦�ʤΤǡ����Ҥ��ʤ���
+#@# 特に使用していないようなので、記述しない。
 #@#
 #@#--- generator_options
 #@#
@@ -375,49 +375,49 @@ val �� true ����ꤷ����硢���ޥ�ɥ饤������� --force_output ���ץ���
 
 --- hyperlink_all -> bool
 
-���ޥ�ɥ饤������� --hyperlink-all ���ץ�������ꤷ�Ƥ�����硢
-true ���֤��ޤ���
+コマンドライン引数の --hyperlink-all オプションを指定していた場合、
+true を返します。
 
-���ꤷ�ʤ��ä����� false ���֤��ޤ���
+指定しなかった場合は false を返します。
 
 --- hyperlink_all=(val)
 
-val �� true ����ꤷ����硢���ޥ�ɥ饤������� --hyperlink-all ���ץ���
-���Ʊ�ͤλ����Ԥ��ޤ���
+val に true を指定した場合、コマンドライン引数の --hyperlink-all オプショ
+ンと同様の指定を行います。
 
-@param val --hyperlink-all ���ץ�����Ʊ�������Ԥ����� true������
-           �Ǥʤ����� false ����ꤷ�ޤ���
+@param val --hyperlink-all オプションと同じ指定を行う場合は true、そう
+           でない場合は false を指定します。
 
 --- line_numbers -> bool
 
-���ޥ�ɥ饤������� --line-numbers ���ץ�������ꤷ�Ƥ�����硢true
-���֤��ޤ���--no-line-numbers ���ץ�������ꤷ�Ƥ�����硢false ����
-���ޤ���
+コマンドライン引数の --line-numbers オプションを指定していた場合、true
+を返します。--no-line-numbers オプションを指定していた場合、false を返
+します。
 
-�ɤ������ꤷ�ʤ��ä����� false ���֤��ޤ���
+どちらも指定しなかった場合は false を返します。
 
 --- line_numbers=(val)
 
-val �� true ����ꤷ����硢���ޥ�ɥ饤������� --line-numbers ���ץ���
-���Ʊ�ͤλ����Ԥ��ޤ���
+val に true を指定した場合、コマンドライン引数の --line-numbers オプショ
+ンと同様の指定を行います。
 
-@param val --line-numbers ���ץ�����Ʊ�������Ԥ����� true��������
-           �ʤ����� false ����ꤷ�ޤ���
+@param val --line-numbers オプションと同じ指定を行う場合は true、そうで
+           ない場合は false を指定します。
 
 --- coverage_report -> Integer | false
 
-���ޥ�ɥ饤������� --coverage-report ���ץ�������ꤷ�Ƥ�����硢��
-�ꤷ�����ͤ��֤��ޤ���
+コマンドライン引数の --coverage-report オプションを指定していた場合、指
+定した数値を返します。
 
-���ꤷ�ʤ��ä����� false ���֤��ޤ���
+指定しなかった場合は false を返します。
 
 --- coverage_report=(val)
 
-���ޥ�ɥ饤������� --coverage-report ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --coverage-report オプションと同様の指定を行います。
 
-@param val ���ͥ��֥������Ȥ� false ����ꤷ�ޤ���
+@param val 数値オブジェクトか false を指定します。
 
-#@# �ä˻��Ѥ��Ƥ��ʤ��褦�ʤΤǡ����Ҥ��ʤ���
+#@# 特に使用していないようなので、記述しない。
 #@#
 #@#--- option_parser
 #@#
@@ -426,20 +426,20 @@ val �� true ����ꤷ����硢���ޥ�ɥ饤������� --line-numbers ���ץ���
 
 --- template_dir -> String | nil
 
-���ޥ�ɥ饤������� --template ���ץ����ǻ��ꤷ���ƥ�ץ졼�Ȥ��б�
-����ǥ��쥯�ȥ���֤��ޤ���
+コマンドライン引数の --template オプションで指定したテンプレートに対応
+するディレクトリを返します。
 
-���ץ����β������� nil ���֤��ޤ���
+オプションの解析前は nil を返します。
 
 --- template_dir=(val)
 
-���ޥ�ɥ饤������� --template ���ץ����ǻ��ꤷ���ƥ�ץ졼�Ȥ��б�
-����ǥ��쥯�ȥ�����ꤷ�ޤ���
+コマンドライン引数の --template オプションで指定したテンプレートに対応
+するディレクトリを設定します。
 
-@param val �ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param val パスを文字列で指定します。
 
-#@# initialize ���� true �����ꤷ�Ƥ���Τߤǡ�¾�˱ƶ����ʤ����ᡢ����
-#@# ���ʤ���
+#@# initialize 時に true が指定してあるのみで、他に影響しないため、記述
+#@# しない。
 #@#
 #@#--- update_output_dir -> bool
 #@#
@@ -448,15 +448,15 @@ val �� true ����ꤷ����硢���ޥ�ɥ饤������� --line-numbers ���ץ���
 
 --- visibility -> :public | :protected | :private
 
-���ޥ�ɥ饤������� --visibility �ǻ��ꤷ�����ץ����� [[c:Symbol]]
-���֤��ޤ���
+コマンドライン引数の --visibility で指定したオプションを [[c:Symbol]]
+で返します。
 
 --- visibility=(val)
 
-���ޥ�ɥ饤������� --visibility ���ץ�����Ʊ�ͤλ����Ԥ��ޤ���
+コマンドライン引数の --visibility オプションと同様の指定を行います。
 
-@param val :public��:protected��:private �Τ����줫����ꤷ�ޤ���
+@param val :public、:protected、:private のいずれかを指定します。
 #@end
 
-#@# 1.8 �Ϥ� Options::OptionList �ˤĤ��Ƥϡ����������ǻ��Ѥ��Ƥ��뤿�ᡢ
-#@# ���Ҥ��ʤ���
+#@# 1.8 系の Options::OptionList については、内部だけで使用しているため、
+#@# 記述しない。

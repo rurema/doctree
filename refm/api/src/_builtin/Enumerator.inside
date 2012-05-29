@@ -1,33 +1,33 @@
-each �ʳ��Υ᥽�åɤˤ� [[c:Enumerable]] �ε�ǽ���󶡤��뤿��Υ�åѡ����饹�Ǥ���
+each 以外のメソッドにも [[c:Enumerable]] の機能を提供するためのラッパークラスです。
 #@since 1.8.7
-�ޤ����������ƥ졼���Ȥ��Ƥ�Ȥ��ޤ���
+また、外部イテレータとしても使えます。
 #@end
 #@until 1.8.8
-Ruby 1.8.8 �ʹߤǤ� Enumerable::Enumerator �� Enumerator �ˤʤäƤ��ޤ���
+Ruby 1.8.8 以降では Enumerable::Enumerator は Enumerator になっています。
 #@end
 
-[[c:Enumerable]] �⥸�塼��ϡ� [[m:Module#include]] ��Υ��饹������
-each �᥽�åɤ򸵤��͡��ʥ᥽�åɤ��󶡤��ޤ���
-�㤨�� Array#map �� [[m:Array#each]] �η����֤��򸵤ˤ����������ޤ���
-Enumerator ��𤹤뤳�Ȥˤ�� [[m:String#each_byte]] �Τ褦��
-�ۤʤ�̾���Υ��ƥ졼���ˤĤ��Ƥ� each ��Ʊ�ͤ� Enumerable �ε�ǽ�����ѤǤ��ޤ���
+[[c:Enumerable]] モジュールは、 [[m:Module#include]] 先のクラスが持つ
+each メソッドを元に様々なメソッドを提供します。
+例えば Array#map は [[m:Array#each]] の繰り返しを元にして定義されます。
+Enumerator を介することにより [[m:String#each_byte]] のような
+異なる名前のイテレータについても each と同様に Enumerable の機能を利用できます。
 
-Enumerator ����������ˤ�
+Enumerator を生成するには
 #@since 1.8.8
 [[m:Enumerator.new]]
 #@else
 [[m:Enumerable::Enumerator.new]]
 #@end
-���뤤�� [[m:Object#to_enum]], [[m:Object#enum_for]] �����Ѥ��ޤ���
+あるいは [[m:Object#to_enum]], [[m:Object#enum_for]] を利用します。
 #@since 1.9.1
-�ޤ��������Υ��ƥ졼���ϥ֥��å����Ϥ����˸ƤӽФ��ȷ����֤���¹Ԥ��������
-enumerator �����������֤��ޤ���
+また、一部のイテレータはブロックを渡さずに呼び出すと繰り返しを実行する代わりに
+enumerator を生成して返します。
 #@end
 
 #@since 1.9.1
-=== ����
-�������ƥ졼���Ȥ��Ƥε�ǽ�� [[c:Fiber]] ���Ѥ��Ƽ�������Ƥ��뤿�� Fiber ��Ʊ�����¤�����ޤ���
-�㤨�аʲ��Τ褦�ʥ���åɤ�ޤ������ƤӽФ��ϥ��顼�ˤʤ�ޤ���
+=== 注意
+外部イテレータとしての機能は [[c:Fiber]] を用いて実装されているため Fiber と同じ制限があります。
+例えば以下のようなスレッドをまたいだ呼び出しはエラーになります。
 
  a = nil
  Thread.new do
@@ -48,15 +48,15 @@ enumerator �����������֤��ޤ���
 --- new(obj, method = :each, *args) -> Enumerable::Enumerator
 #@end
 
-���֥������� obj �ˤĤ��ơ� each ������� method �Ȥ���
-̾���Υ᥽�åɤ�ȤäƷ����֤����֥������Ȥ����������֤��ޤ���
-args ����ꤹ��ȡ� method �θƤӽФ������Ϥ���ޤ���
+オブジェクト obj について、 each の代わりに method という
+名前のメソッドを使って繰り返すオブジェクトを生成して返します。
+args を指定すると、 method の呼び出し時に渡されます。
 
-@param obj ���ƥ졼���᥽�åɤΥ쥷���ФȤʤ륪�֥�������
-@param method ���ƥ졼���᥽�åɤ�̾����ɽ������ܥ�ޤ���ʸ����
-@param args ���ƥ졼���᥽�åɤθƤӽФ����Ϥ�Ǥ�ոĤΰ���
+@param obj イテレータメソッドのレシーバとなるオブジェクト
+@param method イテレータメソッドの名前を表すシンボルまたは文字列
+@param args イテレータメソッドの呼び出しに渡す任意個の引数
 
-��:
+例:
 
   str = "xyz"
   
@@ -71,17 +71,17 @@ args ����ꤹ��ȡ� method �θƤӽФ������Ϥ���ޤ���
 #@since 1.8.8
 --- new{|y| ... }                   -> Enumerator
 
-Enumerator ���֥������Ȥ����������֤��ޤ���Ϳ����줿�֥��å��� Enumerator::Yielder ���֥������Ȥ�
-�����Ȥ��Ƽ¹Ԥ���ޤ���
+Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
+引数として実行されます。
 
-�������줿 Enumerator ���֥������Ȥ��Ф��� each ��Ƥ֤ȡ������������˻��ꤵ�줿�֥��å���
-�¹Ԥ���Yielder ���֥������Ȥ��Ф��� << �᥽�åɤ��ƤФ�뤿�Ӥˡ�
-each ���Ϥ��줿�֥��å��������֤���ޤ���
+生成された Enumerator オブジェクトに対して each を呼ぶと、この生成時に指定されたブロックを
+実行し、Yielder オブジェクトに対して << メソッドが呼ばれるたびに、
+each に渡されたブロックが繰り返されます。
 
-new ���Ϥ��줿�֥��å�����λ���������� each �η����֤��������ޤ���
-���ΤȤ��Υ֥��å����֤��ͤ� each ���֤��ͤȤʤ�ޤ���
+new に渡されたブロックが終了した時点で each の繰り返しが終わります。
+このときのブロックの返り値が each の返り値となります。
 
-��:
+例:
 
   enum = Enumerator.new{|y|
     (1..10).each{|i|   
@@ -111,10 +111,10 @@ new ���Ϥ��줿�֥��å�����λ���������� each �η����֤��������ޤ���
 
 --- each {...} -> object
 
-�������Υѥ�᡼���˽��äƥ֥��å��򷫤��֤��ޤ���
-�������˻��ꤷ�����ƥ졼��������ͤ򤽤Τޤ��֤��ޤ���
+生成時のパラメータに従ってブロックを繰り返します。
+生成時に指定したイテレータの戻り値をそのまま返します。
 
-��:
+例:
   str = "Yet Another Ruby Hacker"
   
 #@since 1.8.8
@@ -134,32 +134,32 @@ new ���Ϥ��줿�֥��å�����λ���������� each �η����֤��������ޤ���
 
 #@since 1.8.7
 --- next -> object
-�ּ��פΥ��֥������Ȥ��֤��ޤ���
+「次」のオブジェクトを返します。
 
-���ߤޤǤ������֤˱����ơּ��פΥ��֥������Ȥ��֤��������֤�1��ʬ�ʤ�ޤ���
+現在までの列挙状態に応じて「次」のオブジェクトを返し、列挙状態を1つ分進めます。
 #@until 1.9.1
-��󤬴��˺Ǹ����ã���Ƥ�����ϡ�
-�����֤�ǽ�ޤǴ����᤹�ȤȤ��
-[[c:StopIteration]] �㳰��ȯ�����ޤ���
+列挙が既に最後へ到達している場合は、
+列挙状態を最初まで巻き戻すとともに
+[[c:StopIteration]] 例外を発生します。
 #@else
-��󤬴��˺Ǹ����ã���Ƥ�����ϡ�
-[[c:StopIteration]] �㳰��ȯ�����ޤ������ΤȤ������֤��Ѳ����ޤ���
-�Ĥޤ�⤦���� next ��Ƥ֤ȺƤ��㳰��ȯ�����ޤ���
+列挙が既に最後へ到達している場合は、
+[[c:StopIteration]] 例外を発生します。このとき列挙状態は変化しません。
+つまりもう一度 next を呼ぶと再び例外が発生します。
 #@end
 
-next �᥽�åɤˤ�볰�����ξ��֤�¾�Υ��ƥ졼���᥽�åɤˤ��
-�������ˤϱƶ���Ϳ���ޤ���
-�������� [[m:IO#each_line]] �Τ褦�ˤ�����Ȥ����ᥫ�˥��ब�����Ѥ�
-ȼ�äƤ�����ˤϱƶ����������ޤ���
+next メソッドによる外部列挙の状態は他のイテレータメソッドによる
+内部列挙には影響を与えません。
+ただし、 [[m:IO#each_line]] のようにおおもとの列挙メカニズムが副作用を
+伴っている場合には影響があり得ます。
 
-@raise StopIteration �����֤����˺Ǹ����ã���Ƥ���Ȥ�
+@raise StopIteration 列挙状態が既に最後へ到達しているとき
 #@since 1.8.8
 @see [[m:Enumerator#rewind]]
 #@else
 @see [[m:Enumerable::Enumerator#rewind]]
 #@end
 
-��1:
+例1:
     str = "xyz"
     enum = str.each_byte
     
@@ -170,7 +170,7 @@ next �᥽�åɤˤ�볰�����ξ��֤�¾�Υ��ƥ졼���᥽�åɤˤ��
         #    121
         #    122
 
-��2:
+例2:
     str = "xyz"
     enum = str.each_byte
     
@@ -186,7 +186,7 @@ next �᥽�åɤˤ�볰�����ξ��֤�¾�Υ��ƥ졼���᥽�åɤˤ��
         #    iteration reached at end
         #    120
 
-��3: [[m:Kernel.#loop]] �� StopIteration ����ª���ޤ���
+例3: [[m:Kernel.#loop]] は StopIteration を捕捉します。
     str = "xyz"
     enum = str.each_byte
     loop do
@@ -199,14 +199,14 @@ next �᥽�åɤˤ�볰�����ξ��֤�¾�Υ��ƥ졼���᥽�åɤˤ��
 #@since 1.9.2
 --- feed(obj) -> nil
 
-Enumerator ������ yield ���֤��ͤ����ꤷ�ޤ���
+Enumerator 内部の yield が返す値を設定します。
 
-������ͤ����ꤷ�ʤ��ä����� yield �� nil ���֤��ޤ���
+これで値を設定しなかった場合は yield は nil を返します。
 
-�����ͤ������� yield ���줿�����ǥ��ꥢ����ޤ���
+この値は内部で yield された時点でクリアされます。
 
-  # ��
-  # (1), (2), ... (10) �ν�˼¹Ԥ����
+  # 例
+  # (1), (2), ... (10) の順に実行される
   o = Object.new
   def o.each
     x = yield         # (2) blocks
@@ -223,29 +223,29 @@ Enumerator ������ yield ���֤��ͤ����ꤷ�ޤ���
   e.next              # (4)
   e.next              # (7)
                       # (10)
-@param obj Enumerator ������ yield ���֤���
-@raise TypeError ���Ǥ��ͤ򤳤Υ᥽�åɤǥ��åȤ��Ƥ������ȯ�����ޤ�
+@param obj Enumerator 内部の yield が返す値
+@raise TypeError すでに値をこのメソッドでセットしている場合に発生します
 
 
 --- next_values -> Array
 
-�ּ��פΥ��֥������Ȥ�������֤��ޤ���
+「次」のオブジェクトを配列で返します。
 
-[[m:Enumerator#next]] �Ȥۤ�Ʊ�ͤε�ư�򤷤ޤ�����ü�ޤ���ã��������
-[[c:StopIteration]] �㳰��ȯ�������ޤ���
+[[m:Enumerator#next]] とほぼ同様の挙動をします。終端まで到達した場合は
+[[c:StopIteration]] 例外を発生させます。
 
-���Υ᥽�åɤϡ�
+このメソッドは、
   yield
-��
+と
   yield nil
-����̤��뤿��˻Ȥ��ޤ���
+を区別するために使えます。
 
-next �᥽�åɤˤ�볰�����ξ��֤�¾�Υ��ƥ졼���᥽�åɤˤ��
-�������ˤϱƶ���Ϳ���ޤ���
-�������� [[m:IO#each_line]] �Τ褦�ˤ�����Ȥ����ᥫ�˥��ब�����Ѥ�
-ȼ�äƤ�����ˤϱƶ����������ޤ���
+next メソッドによる外部列挙の状態は他のイテレータメソッドによる
+内部列挙には影響を与えません。
+ただし、 [[m:IO#each_line]] のようにおおもとの列挙メカニズムが副作用を
+伴っている場合には影響があり得ます。
 
-  # �㡢 next �� next_values �ΰ㤤��
+  # 例、 next と next_values の違いを
   o = Object.new
   def o.each
     yield
@@ -274,19 +274,19 @@ next �᥽�åɤˤ�볰�����ξ��֤�¾�Υ��ƥ졼���᥽�åɤˤ��
   #  yield nil        [nil]            nil
   #  yield [1, 2]     [[1, 2]]         [1, 2]
 
-@raise StopIteration �����֤����˺Ǹ����ã���Ƥ���Ȥ�
+@raise StopIteration 列挙状態が既に最後へ到達しているとき
 @see [[m:Enumerator#next]], [[m:Enumerator#peek]], [[m:Enumerator#peek_values]]
 
 --- peek -> object
-�ּ��פΥ��֥������Ȥ��֤��ޤ����������֤��Ѳ������ޤ���
+「次」のオブジェクトを返しますが、列挙状態を変化させません。
 
-[[m:Enumerator#next]] �Τ褦��
-���ߤޤǤ������֤˱����ơּ��פΥ��֥������Ȥ��֤��ޤ�����
-next �Ȱۤʤ������֤��ѹ����ޤ���
+[[m:Enumerator#next]] のように
+現在までの列挙状態に応じて「次」のオブジェクトを返しますが、
+next と異なり列挙状態を変更しません。
 
-��󤬴��˺Ǹ����ã���Ƥ�����ϡ�[[c:StopIteration]] �㳰��ȯ�����ޤ���
+列挙が既に最後へ到達している場合は、[[c:StopIteration]] 例外を発生します。
 
-  # ��
+  # 例
   a = [1,2,3]
   e = a.to_enum
   p e.next   #=> 1
@@ -297,26 +297,26 @@ next �Ȱۤʤ������֤��ѹ����ޤ���
   p e.next   #=> 3
   p e.next   #raises StopIteration
 
-@raise StopIteration �����֤����˺Ǹ����ã���Ƥ���Ȥ�
+@raise StopIteration 列挙状態が既に最後へ到達しているとき
 @see [[m:Enumerator#next]], [[m:Enumerator#next_values]], [[m:Enumerator#peek_values]]
 --- peek_values -> Array
 
-[[m:Enumerator#next_values]] �Τ褦�ˡּ��פΥ��֥������Ȥ�
-������֤��ޤ����������֤��Ѳ������ޤ���
+[[m:Enumerator#next_values]] のように「次」のオブジェクトを
+配列で返しますが、列挙状態を変化させません。
 
-[[m:Enumerator#next]], [[m:Enumerator#next_values]] �Τ褦��
-���ߤޤǤ������֤˱����ơּ��פΥ��֥������Ȥ��֤��ޤ�����
-next �Ȱۤʤ������֤��ѹ����ޤ���
+[[m:Enumerator#next]], [[m:Enumerator#next_values]] のように
+現在までの列挙状態に応じて「次」のオブジェクトを返しますが、
+next と異なり列挙状態を変更しません。
 
-��󤬴��˺Ǹ����ã���Ƥ�����ϡ�[[c:StopIteration]] �㳰��ȯ�����ޤ���
+列挙が既に最後へ到達している場合は、[[c:StopIteration]] 例外を発生します。
 
-���Υ᥽�åɤ� [[m:Enumerator#next_values]] ��Ʊ��
+このメソッドは [[m:Enumerator#next_values]] と同様
   yield
-��
+と
   yield nil
-����̤��뤿��˻Ȥ��ޤ���
+を区別するために使えます。
   
-  # ��
+  # 例
   o = Object.new
   def o.each
     yield
@@ -333,19 +333,19 @@ next �Ȱۤʤ������֤��ѹ����ޤ���
   e.next
   p e.peek_values    # raises StopIteration
 
-@raise StopIteration �����֤����˺Ǹ����ã���Ƥ���Ȥ�
+@raise StopIteration 列挙状態が既に最後へ到達しているとき
 @see [[m:Enumerator#next]], [[m:Enumerator#next_values]], [[m:Enumerator#peek_values]]
 
 
 #@end
 --- rewind -> self
-�����֤򴬤��ᤷ�ޤ���
+列挙状態を巻き戻します。
 
-next �᥽�åɤˤ�볰�����ξ��֤�ǽ�ޤǴ����ᤷ�ޤ��� self ���֤��ޤ���
+next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
 
 #@since 1.9.2
-���񤹤륪�֥������Ȥ� rewind �᥽�åɤ���ĤȤ�(respond_to?(:rewind) ��
-�����֤��Ȥ�) �ϡ����� rewind �᥽�åɤ�ƤӽФ��ޤ���
+内包するオブジェクトが rewind メソッドを持つとき(respond_to?(:rewind) に
+真を返すとき) は、その rewind メソッドを呼び出します。
 #@end
 
 #@since 1.8.8
@@ -354,7 +354,7 @@ next �᥽�åɤˤ�볰�����ξ��֤�ǽ�ޤǴ����ᤷ�ޤ��� self ���֤��ޤ���
 @see [[m:Enumerable::Enumerator#next]]
 #@end
 
-��:
+例:
     str = "xyz"
     enum = str.each_byte
     
@@ -371,16 +371,16 @@ next �᥽�åɤˤ�볰�����ξ��֤�ǽ�ޤǴ����ᤷ�ޤ��� self ���֤��ޤ���
 --- with_index -> Enumerator
 #@end
 
-�������Υѥ�᡼���˽��äơ����Ǥ˥���ǥå�����ź���Ʒ����֤��ޤ���
+生成時のパラメータに従って、要素にインデックスを添えて繰り返します。
 #@since 1.9.2
-����ǥå����� offset ����Ϥޤ�ޤ���
+インデックスは offset から始まります。
 #@else
-����ǥå����� 0 ����Ϥޤ�ޤ���
+インデックスは 0 から始まります。
 #@end
 
-�֥��å�����ꤷ����������ͤ��������˻��ꤷ���쥷���м��ȤǤ���
+ブロックを指定した場合の戻り値は生成時に指定したレシーバ自身です。
 
-��:
+例:
     str = "xyz"
     
 #@since 1.8.8
@@ -402,26 +402,26 @@ next �᥽�åɤˤ�볰�����ξ��֤�ǽ�ޤǴ����ᤷ�ޤ��� self ���֤��ޤ���
 #@end
 
 
-�������Υѥ�᡼���˽��äơ����Ǥ˥���ǥå�����ź���ƥ֥��å��򷫤��֤��ޤ���
-����ǥå����� 0 ����Ϥޤ�ޤ���
+生成時のパラメータに従って、要素にインデックスを添えてブロックを繰り返します。
+インデックスは 0 から始まります。
 #@since 1.9.2
-[[m:Enumerator#with_index]] �� offset ������������ޤ�����
-each_with_index �ϼ������ޤ��� (�����ϥ��ƥ졼���᥽�åɤˤ��Τޤ��Ϥ���ޤ�)��
+[[m:Enumerator#with_index]] は offset 引数を受け取りますが、
+each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
 #@end
 
 #@since 1.8.8
 --- with_object(obj) -> Enumerator
 --- with_object(obj) {|(*args), memo_obj| ... } -> object
 
-�����֤��γ����Ǥ� obj ��ź���ƥ֥��å��򷫤��֤���obj ���֤��ͤȤ����֤��ޤ���
+繰り返しの各要素に obj を添えてブロックを繰り返し、obj を返り値として返します。
 
-obj �ˤ�Ǥ�դΥ��֥������Ȥ��Ϥ����Ȥ��Ǥ��ޤ���
+obj には任意のオブジェクトを渡すことができます。
 
-�֥��å����Ϥ���ʤ��ä����ϡ�����������������֤���¹Ԥ���
-�Ǹ�� obj ���֤� [[c:Enumerator]] ���֤��ޤ���
+ブロックが渡されなかった場合は、上で説明した繰り返しを実行し、
+最後に obj を返す [[c:Enumerator]] を返します。
 
-==== ��
-  # 0,1,2 �ȸƤӤ��� enumerator����
+==== 例
+  # 0,1,2 と呼びだす enumeratorを作る
   to_three = Enumerator.new do |y|
     3.times do |x|
       y << x
@@ -436,13 +436,13 @@ obj �ˤ�Ǥ�դΥ��֥������Ȥ��Ϥ����Ȥ��Ǥ��ޤ���
   # => foo:1
   # => foo:2
 
-@param obj �����֤��γ����Ǥ�ź�����Ϥ���륪�֥�������
+@param obj 繰り返しの各要素に添えて渡されるオブジェクト
 @see [[m:Enumerable#each_with_object]]
 
 #@end
 #@end
 
-#@# �ʲ��Υ��饹�ϥ桼����ľ�ܿ����٤��ǤϤʤ��Τǥɥ�����Ȥ�
-#@# �񤫤ʤ�
+#@# 以下のクラスはユーザが直接触れるべきではないのでドキュメントは
+#@# 書かない
 #@# = class Enumerator::Generator
 #@# = class Enumerator::Yielder

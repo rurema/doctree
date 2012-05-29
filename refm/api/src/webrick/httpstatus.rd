@@ -1,11 +1,11 @@
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¤òÉ½¤¹Îã³°¥¯¥é¥¹¤òÄó¶¡¤·¤Þ¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¡¨ã™ä¾‹å¤–ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã—ã¾ã™ã€‚
 
 = module WEBrick::HTTPStatus
 
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¤òÉ½¤¹Îã³°¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
-¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 200 ¤Ê¤É¤ÎÀ®¸ù¤Î¾ì¹ç¤â´Þ¤Þ¤ì¤Þ¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¡¨ã™ä¾‹å¤–ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã™ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
+ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 200 ãªã©ã®æˆåŠŸã®å ´åˆã‚‚å«ã¾ã‚Œã¾ã™ã€‚
 
-°Ê²¼¤Î¤è¤¦¤Ê·Ñ¾µ¤Ë¤è¤ë³¬ÁØ¤ò¹½À®¤·¤Æ¤¤¤Þ¤¹¡£
+ä»¥ä¸‹ã®ã‚ˆã†ãªç¶™æ‰¿ã«ã‚ˆã‚‹éšŽå±¤ã‚’æ§‹æˆã—ã¦ã„ã¾ã™ã€‚
 
  StandardError
   * WEBrick::HTTPStatus::Status
@@ -20,10 +20,10 @@ HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¤òÉ½¤¹Îã³°¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 
 --- [](code)    -> Class
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤ËÂÐ±þ¤¹¤ë WEBrick::HTTPStatus::Status
-¤Î¥µ¥Ö¥¯¥é¥¹¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã«å¯¾å¿œã™ã‚‹ WEBrick::HTTPStatus::Status
+ã®ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
   require 'webrick'
   p WEBrick::HTTPStatus[200]   #=> WEBrick::HTTPStatus::OK
@@ -32,55 +32,55 @@ HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¤òÉ½¤¹Îã³°¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 
 --- reason_phrase(code)     -> String
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤ËÂÐ±þ¤¹¤ë reason phrase
-¤òÉ½¤¹Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã«å¯¾å¿œã™ã‚‹ reason phrase
+ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤«Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
   require 'webrick'
   p WEBrick::HTTPStatus.reason_phrase(304)   #=> "Not Modified"
 
 --- info?(code)    -> bool
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬ 1XX ¤Ç¤¢¤ë¾ì¹ç¤Ë
-true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ 1XX ã§ã‚ã‚‹å ´åˆã«
+true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 --- success?(code)    -> bool
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬ 2XX ¤Ç¤¢¤ë¾ì¹ç¤Ë
-true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ 2XX ã§ã‚ã‚‹å ´åˆã«
+true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤«Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 --- redirect?(code)    -> bool
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬ 3XX ¤Ç¤¢¤ë¾ì¹ç¤Ë
-true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ 3XX ã§ã‚ã‚‹å ´åˆã«
+true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤«Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 --- error?(code)    -> bool
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬ 4XX, 5xx ¤Ç¤¢¤ë¾ì¹ç¤Ë
-true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ 4XX, 5xx ã§ã‚ã‚‹å ´åˆã«
+true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤«Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 --- client_error?(code)    -> bool
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬ 4XX ¤Ç¤¢¤ë¾ì¹ç¤Ë
-true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ 4XX ã§ã‚ã‚‹å ´åˆã«
+true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤«Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 --- server_error?(code)    -> bool
 
-»ØÄê¤µ¤ì¤¿À°¿ô¤¬É½¤¹¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤¬ 5XX ¤Ç¤¢¤ë¾ì¹ç¤Ë
-true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ•´æ•°ãŒè¡¨ã™ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ãŒ 5XX ã§ã‚ã‚‹å ´åˆã«
+true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param code HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤«Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param code HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 == Constants
 
@@ -131,109 +131,109 @@ true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
 --- RC_GATEWAY_TIMEOUT
 --- RC_HTTP_VERSION_NOT_SUPPORTED
 
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤òÉ½¤¹À°¿ô¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’è¡¨ã™æ•´æ•°ã§ã™ã€‚
 
   require 'webrick'
   p WEBrick::HTTPStatus::RC_INTERNAL_SERVER_ERROR   #=> 500
 
 
 = class WEBrick::HTTPStatus::Status < StandardError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Info < WEBrick::HTTPStatus::Status
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¾ðÊóÄó¶¡ 1XX ¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰æƒ…å ±æä¾› 1XX ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Success < WEBrick::HTTPStatus::Status
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥ÉÀ®¸ù 2XX ¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰æˆåŠŸ 2XX ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Redirect < WEBrick::HTTPStatus::Status
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥ÉÅ¾Á÷ 3XX ¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰è»¢é€ 3XX ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Error < WEBrick::HTTPStatus::Status
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¥¨¥é¡¼¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚¨ãƒ©ãƒ¼ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::ClientError < WEBrick::HTTPStatus::Error
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¥¯¥é¥¤¥¢¥ó¥È¥¨¥é¡¼ 4XX ¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚¨ãƒ©ãƒ¼ 4XX ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::ServerError < WEBrick::HTTPStatus::Error
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¥µ¡¼¥Ð¥¨¥é¡¼ 5XX ¤Î¿Æ¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚µãƒ¼ãƒã‚¨ãƒ©ãƒ¼ 5XX ã®è¦ªã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 = class WEBrick::HTTPStatus::EOFError < StandardError
 
 = class WEBrick::HTTPStatus::Continue < WEBrick::HTTPStatus::Info
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 100 Continue ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 100 Continue ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::SwitchingProtocols < WEBrick::HTTPStatus::Info
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 101 Switching Protocols ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 101 Switching Protocols ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 = class WEBrick::HTTPStatus::OK < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 200 OK ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 200 OK ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Created < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 201 Created ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 201 Created ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Accepted < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 202 Accepted ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 202 Accepted ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::NonAuthoritativeInformation < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 203 Non-Authoritative Information ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 203 Non-Authoritative Information ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::NoContent < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 204 No Content ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 204 No Content ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::ResetContent < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 205 Reset Content ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 205 Reset Content ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::PartialContent < WEBrick::HTTPStatus::Success
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 206 Partial Content ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 206 Partial Content ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::MultipleChoices < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 300 Multiple Choices ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 300 Multiple Choices ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::MovedPermanently < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 301 Moved Permanently ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 301 Moved Permanently ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Found < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 302 Found ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 302 Found ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::SeeOther < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 303 See Other ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 303 See Other ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::NotModified < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 304 Not Modified ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 304 Not Modified ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::UseProxy < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 305 Use Proxy ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 305 Use Proxy ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::TemporaryRedirect < WEBrick::HTTPStatus::Redirect
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 307 Temporary Redirect ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 307 Temporary Redirect ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 = class WEBrick::HTTPStatus::BadRequest < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 400 Bad Request ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 400 Bad Request ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Unauthorized < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 401 Unauthorized ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 401 Unauthorized ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::PaymentRequired < WEBrick::HTTPStatus::ClientError
 
 = class WEBrick::HTTPStatus::Forbidden < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 403 Forbidden ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 403 Forbidden ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::NotFound < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 404 Not Found ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 404 Not Found ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::MethodNotAllowed < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 405 Method Not Allowed ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 405 Method Not Allowed ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::NotAcceptable < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 406 Not Acceptable ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 406 Not Acceptable ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::ProxyAuthenticationRequired < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 407 Proxy Authentication Required ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 407 Proxy Authentication Required ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::RequestTimeout < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 408 Request Timeout ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 408 Request Timeout ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Conflict < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 409 Conflict ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 409 Conflict ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::Gone < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 410 Gone ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 410 Gone ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::LengthRequired < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 411 Length Required ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 411 Length Required ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::PreconditionFailed < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 412 Precondition Failed ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 412 Precondition Failed ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::RequestEntityTooLarge < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 413 Request Entity Too Large ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 413 Request Entity Too Large ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::RequestURITooLarge < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 414 Request-URI Too Long ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 414 Request-URI Too Long ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::UnsupportedMediaType < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 415 Unsupported Media Type ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 415 Unsupported Media Type ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::RequestRangeNotSatisfiable < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 416 Requested Range Not Satisfiable ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 416 Requested Range Not Satisfiable ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::ExpectationFailed < WEBrick::HTTPStatus::ClientError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 417 Expectation Failed ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 417 Expectation Failed ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 = class WEBrick::HTTPStatus::InternalServerError < WEBrick::HTTPStatus::ServerError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 500 Internal Server Error ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 500 Internal Server Error ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::NotImplemented < WEBrick::HTTPStatus::ServerError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 501 Not Implemented ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 501 Not Implemented ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::BadGateway < WEBrick::HTTPStatus::ServerError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 502 Bad Gateway ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 502 Bad Gateway ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::ServiceUnavailable < WEBrick::HTTPStatus::ServerError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 503 Service Unavailable ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 503 Service Unavailable ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::GatewayTimeout < WEBrick::HTTPStatus::ServerError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 504 Gateway Timeout ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 504 Gateway Timeout ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 = class WEBrick::HTTPStatus::HTTPVersionNotSupported < WEBrick::HTTPStatus::ServerError
-HTTP ¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É 505 HTTP Version Not Supported ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ 505 HTTP Version Not Supported ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚

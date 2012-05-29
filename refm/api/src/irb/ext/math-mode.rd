@@ -1,14 +1,14 @@
 require mathn
 
-irb ¥³¥Ş¥ó¥É¤Ç¼Â¹Ô·ë²Ì¤ò [[m:Object#inspect]] ¤ÎÂå¤ï¤ê¤Ë
-[[c:Object#to_s]] ¤·¤¿·ë²Ì¤ÇÉ½¼¨¤¹¤ë¤¿¤á¤Î¥µ¥Ö¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+irb ã‚³ãƒãƒ³ãƒ‰ã§å®Ÿè¡Œçµæœã‚’ [[m:Object#inspect]] ã®ä»£ã‚ã‚Šã«
+[[c:Object#to_s]] ã—ãŸçµæœã§è¡¨ç¤ºã™ã‚‹ãŸã‚ã®ã‚µãƒ–ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-conf.math_mode ¤« IRB.conf[:MATH_MODE] ¤Ë true ¤òÀßÄê¤¹¤ë»ö¤Ç»ÈÍÑ¤Ç¤­¤Ş
-¤¹¡£¤¿¤À¤·¡¢inspect_mode ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤¿¾ì¹ç¤Ï inspect_mode ¤¬Í¥Àè¤µ¤ì
-¤Ş¤¹¡£
+conf.math_mode ã‹ IRB.conf[:MATH_MODE] ã« true ã‚’è¨­å®šã™ã‚‹äº‹ã§ä½¿ç”¨ã§ãã¾
+ã™ã€‚ãŸã ã—ã€inspect_mode ãŒè¨­å®šã•ã‚Œã¦ã„ãŸå ´åˆã¯ inspect_mode ãŒå„ªå…ˆã•ã‚Œ
+ã¾ã™ã€‚
 
-¤³¤Î¥é¥¤¥Ö¥é¥ê¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤ë¥á¥½¥Ã¥É¤Ï¥æ¡¼¥¶¤¬Ä¾ÀÜ»ÈÍÑ¤¹¤ë¤â¤Î¤Ç¤Ï¤¢
-¤ê¤Ş¤»¤ó¡£
+ã“ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã¯ãƒ¦ãƒ¼ã‚¶ãŒç›´æ¥ä½¿ç”¨ã™ã‚‹ã‚‚ã®ã§ã¯ã‚
+ã‚Šã¾ã›ã‚“ã€‚
 
 = reopen IRB::Context
 
@@ -17,29 +17,29 @@ conf.math_mode ¤« IRB.conf[:MATH_MODE] ¤Ë true ¤òÀßÄê¤¹¤ë»ö¤Ç»ÈÍÑ¤Ç¤­¤Ş
 --- math_mode -> bool
 --- math?     -> bool
 
-math_mode ¤¬Í­¸ú¤«¤É¤¦¤«¤òÊÖ¤·¤Ş¤¹¡£
+math_mode ãŒæœ‰åŠ¹ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:IRB::Context#inspect?]]
 
 --- math_mode=(opt)
 
-math_mode ¤òÍ­¸ú¤Ë¤¹¤ë¤«¤É¤¦¤«¤ò»ØÄê¤·¤Ş¤¹¡£
+math_mode ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã‹ã©ã†ã‹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-.irbrc ¥Õ¥¡¥¤¥ëÃæ¤Ç IRB.conf[:MATH_MODE] ¤òÀßÄê¤¹¤ë»ö¤Ç¤âÆ±ÍÍ¤Î»ö¤¬¹Ô¤¨
-¤Ş¤¹¡£
+.irbrc ãƒ•ã‚¡ã‚¤ãƒ«ä¸­ã§ IRB.conf[:MATH_MODE] ã‚’è¨­å®šã™ã‚‹äº‹ã§ã‚‚åŒæ§˜ã®äº‹ãŒè¡Œãˆ
+ã¾ã™ã€‚
 
-@param opt math_mode ¤òÍ­¸ú¤Ë¤¹¤ë¾ì¹ç¤Ë true ¤ò»ØÄê¤·¤Ş¤¹¡£
+@param opt math_mode ã‚’æœ‰åŠ¹ã«ã™ã‚‹å ´åˆã« true ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise IRB::CantReturnToNormalMode ´û¤Ë math_mode ¤Î¾õÂÖ¤Ç opt ¤Ë
-                                   false ¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise IRB::CantReturnToNormalMode æ—¢ã« math_mode ã®çŠ¶æ…‹ã§ opt ã«
+                                   false ã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-#@# TODO: nil ¤Ï»ØÄê¤Ç¤­¤ë¤Î¤ÏÌäÂê¤Ê¤¤¤Î¤«³ÎÇ§¤¹¤ë¡£
+#@# TODO: nil ã¯æŒ‡å®šã§ãã‚‹ã®ã¯å•é¡Œãªã„ã®ã‹ç¢ºèªã™ã‚‹ã€‚
 
 --- inspect? -> bool
 
-[[c:IRB::Context#inspect_mode]] ¤¬Í­¸ú¤«¤É¤¦¤«¤òÊÖ¤·¤Ş¤¹¡£
+[[c:IRB::Context#inspect_mode]] ãŒæœ‰åŠ¹ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚
 
-¤¿¤À¤·¡¢[[c:IRB::Context#inspect_mode]] ¤¬Ì¤ÀßÄê¤Ç math_mode ¤¬Í­¸ú¤Ê¾ì
-¹ç¤Ë¤Ï false ¤òÊÖ¤·¤Ş¤¹¡£
+ãŸã ã—ã€[[c:IRB::Context#inspect_mode]] ãŒæœªè¨­å®šã§ math_mode ãŒæœ‰åŠ¹ãªå ´
+åˆã«ã¯ false ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:IRB::Context#math?]]

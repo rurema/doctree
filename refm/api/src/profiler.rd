@@ -1,19 +1,19 @@
-�ץ��ե�����μ����Ǥ���
-���ߡ�[[lib:profile]] �饤�֥��� profiler �饤�֥���
-���Ѥ��Ƽ�������Ƥ��ޤ���
+プロファイラの実装です。
+現在、[[lib:profile]] ライブラリは profiler ライブラリを
+利用して実装されています。
 
 = module Profiler__
 
-�ץ��ե�����μ����Ǥ���
-Profiler__.start_profile �¹Ԥ��顢Profiler__.stop_profile �ޤǤ�
-��֤μ¹ԥ����ɤΥץ��ե������������ޤ���
+プロファイラの実装です。
+Profiler__.start_profile 実行から、Profiler__.stop_profile までの
+区間の実行コードのプロファイルを取得します。
 
-�ʲ��λ�����򻲾Ȥ��Ƥ���������
+以下の使用例を参照してください。
 
     require 'profiler'
 
     Profiler__.start_profile
-    require 'tk'    # ���Υ����ɤΥץ��ե����뤬¬�ꤵ���
+    require 'tk'    # このコードのプロファイルが測定される
     Profiler__.print_profile(STDOUT)
 
     # =>
@@ -39,21 +39,21 @@ Profiler__.start_profile �¹Ԥ��顢Profiler__.stop_profile �ޤǤ�
 
 --- start_profile -> object
 
-�ץ��ե�����μ����򳫻Ϥ��ޤ���
+プロファイルの取得を開始します。
 
 --- stop_profile -> nil
 
-�ץ��ե�����μ�������ߤ��ޤ���
+プロファイルの取得を停止します。
 
 --- print_profile(file) -> ()
 
-stop_profile ��¹Ԥ����ץ��ե�����η�̤� file �˽��Ϥ��ޤ���
-file �ˤ� printf �᥽�åɤ��������Ƥ��ʤ���Ф����ޤ���
+stop_profile を実行し、プロファイルの結果を file に出力します。
+file には printf メソッドが定義されていなければいけません。
 
-@param file [[c:File]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param file [[c:File]] のインスタンスを指定します。
 
 == Constants
 
 --- PROFILE_PROC -> Proc
 
-�����ǻ��Ѥ��ޤ���
+内部で使用します。

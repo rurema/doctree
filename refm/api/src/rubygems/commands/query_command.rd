@@ -3,26 +3,26 @@ require rubygems/local_remote_options
 require rubygems/spec_fetcher
 require rubygems/version_option
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ğÊó¤ò¸¡º÷¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®æƒ…å ±ã‚’æ¤œç´¢ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 Usage: gem query [options]
   Options:
     -i, --[no-]installed             Check for installed gem
     -v, --version VERSION            Specify version of gem to query
-    -n, --name-matches REGEXP        Í¿¤¨¤é¤ì¤¿Àµµ¬É½¸½¤Ë¥Ş¥Ã¥Á¤¹¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò
-                                     ¸¡º÷¤·¤Ş¤¹
-    -d, --[no-]details               Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ÜºÙ¤òÉ½¼¨¤·¤Ş¤¹
-        --[no-]versions              Gem ¥Ñ¥Ã¥±¡¼¥¸Ì¾¤Î¤ßÉ½¼¨¤·¤Ş¤¹
-    -a, --all                        ¸«¤Ä¤«¤Ã¤¿ Gem ¥Ñ¥Ã¥±¡¼¥¸¤ÎÁ´¤Æ¤Î¥Ğ¡¼¥¸¥ç¥ó¤òÉ½¼¨¤·¤Ş¤¹
+    -n, --name-matches REGEXP        ä¸ãˆã‚‰ã‚ŒãŸæ­£è¦è¡¨ç¾ã«ãƒãƒƒãƒã™ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’
+                                     æ¤œç´¢ã—ã¾ã™
+    -d, --[no-]details               Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®è©³ç´°ã‚’è¡¨ç¤ºã—ã¾ã™
+        --[no-]versions              Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸åã®ã¿è¡¨ç¤ºã—ã¾ã™
+    -a, --all                        è¦‹ã¤ã‹ã£ãŸ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®å…¨ã¦ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¡¨ç¤ºã—ã¾ã™
 #@include(local_remote_options)
 #@include(common_options)
   Summary:
-    Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ğÊó¤ò¸¡º÷¤·¤Ş¤¹
+    Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®æƒ…å ±ã‚’æ¤œç´¢ã—ã¾ã™
   Defaults:
     --local --name-matches // --no-details --versions --no-installed
 
 
 = class Gem::Commands::QueryCommand < Gem::Command
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ğÊó¤ò¸¡º÷¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®æƒ…å ±ã‚’æ¤œç´¢ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 

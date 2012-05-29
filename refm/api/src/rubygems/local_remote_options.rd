@@ -1,50 +1,50 @@
 require rubygems
 
-[[c:Gem::Command]] �ǻ��Ѥ��� --local, --remote ���ץ����Τ���Υ⥸�塼���
-��������饤�֥��Ǥ���
+[[c:Gem::Command]] で使用する --local, --remote オプションのためのモジュールを
+定義したライブラリです。
 
 = module Gem::LocalRemoteOptions
 
-[[c:Gem::Command]] �ǻ��Ѥ��� --local, --remote ���ץ����Τ���Υ⥸�塼��Ǥ���
+[[c:Gem::Command]] で使用する --local, --remote オプションのためのモジュールです。
 
 == Public Instance Methods
 
 --- accept_uri_http
 #@# -> discard
-HTTP �� URI �򰷤���褦�ˤ��뤿��Υ᥽�åɤǤ���
+HTTP の URI を扱えるようにするためのメソッドです。
 
 --- add_bulk_threshold_option
 #@# -> discard
-���ץ���� --bulk-threshold ���ɲä��ޤ���
+オプション --bulk-threshold を追加します。
 
 --- add_local_remote_options
 #@# -> discard
-���ץ���� --local, --remote, --both ���ɲä��ޤ���
+オプション --local, --remote, --both を追加します。
 
 --- add_proxy_option
 #@# -> discard
-���ץ���� --http-proxy ���ɲä��ޤ���
+オプション --http-proxy を追加します。
 
 --- add_source_option
 #@# -> discard
-���ץ���� --source ���ɲä��ޤ���
+オプション --source を追加します。
 
 --- add_update_sources_option
 #@# -> discard
-���ץ���� --update-source ���ɲä��ޤ���
+オプション --update-source を追加します。
 
 --- both? -> bool
 
-��������ȥ�⡼�Ȥξ����ξ���Ȥ����������Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+ローカルとリモートの情報を両方とも取得する場合は真を返します。
+そうでない場合は偽を返します。
 
 --- local? -> bool
 
-��������ξ�������������Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+ローカルの情報を取得する場合は真を返します。
+そうでない場合は偽を返します。
 
 --- remote? -> bool
 
-��⡼�Ȥξ�������������Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+リモートの情報を取得する場合は真を返します。
+そうでない場合は偽を返します。
 

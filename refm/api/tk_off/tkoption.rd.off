@@ -3,7 +3,7 @@
 =begin
 = TkOption
 
-((<���ץ����ǡ����١���>))�򥢥��������뤿��Υ⥸�塼��Ǥ���
+((<オプションデータベース>))をアクセスするためのモジュールです。
 
   require "tk"
   TkLabel.new(nil, "text"=>"label1").pack
@@ -13,33 +13,33 @@
   TkLabel.new(nil, "text"=>"label3").pack
   Tk.mainloop
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<Tk>))
 
-== extend���Ƥ���⥸�塼��:
+== extendしているモジュール:
 
 ((<Tk>))
 
-== �⥸�塼��ؿ�:
+== モジュール関数:
 
 --- TkOption.add(pat, value, pri=None)
 #@todo
-    ���������ץ�����ǡ����١������ɲä��ޤ���
-    �ǡ����١������ѹ���̤ϡ��������˺����������֥������Ȥˤϱƶ����ޤ���
-    ((|pri|))����ꤹ�뤳�Ȥǡ����ץ�����ͥ���٤�0����100�ޤǤο��ͤ���
-    �����뤳�Ȥ��Ǥ��ޤ���
+    新しいオプションをデータベースに追加します。
+    データベースの変更結果は、その前に作成したオブジェクトには影響しません。
+    ((|pri|))を指定することで、オプションの優先度を0から100までの数値に変
+    更することができます。
 
 --- TkOption.clear
 #@todo
-    ���ץ����ǡ����١������Ф��ƹԤä��ѹ���ǥե���Ȥ��ᤷ�ޤ���
+    オプションデータベースに対して行った変更をデフォルトに戻します。
 
 --- TkOption.get(win, name, klass)
 #@todo
-    ���ץ����ǡ����١��������ͤ�������ޤ���
+    オプションデータベースから値を取得します。
 
 --- TkOption.readfile(file, pri=None)
 #@todo
-    (({.Xdefaults})) �ʤɤΥ꥽�����ե�������ɤ߹��ߤޤ���
+    (({.Xdefaults})) などのリソースファイルを読み込みます。
 
 =end

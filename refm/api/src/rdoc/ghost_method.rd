@@ -1,3 +1,3 @@
-[[c:RDoc::GhostMethod]] дЄ─ъ╡┴д╣дые╡е╓ещеде╓ещеъд╟д╣бг
+[[c:RDoc::GhostMethod]] уВТхоЪч╛йуБЩуВЛуВ╡уГЦуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 #@include(RDoc__GhostMethod)

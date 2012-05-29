@@ -14,24 +14,24 @@ Creates a new TupleSpaceProxy to wrap +ts+.
 --- notify(ev, tuple, sec = nil)
 #@todo
 
-¾ÜºÙ¤Ï [[m:Rinda::TupleSpace#notify]] »²¾È
+è©³ç´°ã¯ [[m:Rinda::TupleSpace#notify]] å‚ç…§
 
 --- read(tuple, sec = nil){|template| ... }
 #@todo
 
-¾ÜºÙ¤Ï [[m:Rinda::TupleSpace#read]] »²¾È
+è©³ç´°ã¯ [[m:Rinda::TupleSpace#read]] å‚ç…§
 
 --- read_all(tuple)
 #@todo
 
-¾ÜºÙ¤Ï [[m:Rinda::TupleSpace#read_all]] »²¾È
+è©³ç´°ã¯ [[m:Rinda::TupleSpace#read_all]] å‚ç…§
 
 --- take(tuple, sec = nil){|template| ... }
 #@todo
 
-¾ÜºÙ¤Ï [[m:Rinda::TupleSpace#take]] »²¾È
+è©³ç´°ã¯ [[m:Rinda::TupleSpace#take]] å‚ç…§
 
 --- write(tuple, sec = nil)
 #@todo
 
-¾ÜºÙ¤Ï [[m:Rinda::TupleSpace#write]] »²¾È
+è©³ç´°ã¯ [[m:Rinda::TupleSpace#write]] å‚ç…§

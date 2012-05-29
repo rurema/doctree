@@ -1,21 +1,21 @@
 require rubygems/command
 
-RubyGems �δĶ��˴ؤ�������ɽ�����뤿��Υ饤�֥��Ǥ���
+RubyGems の環境に関する情報を表示するためのライブラリです。
 
   Usage: gem environment [arg] [options]
 #@include(common_options)
     Arguments:
-      packageversion  gem �ΥС�������ɽ�����ޤ�
-      gemdir          Gem �ѥå������Υ��󥹥ȡ������ɽ�����ޤ�
-      gempath         Gem �ѥå�������õ������ǥ��쥯�ȥ��ɽ�����ޤ�
-      version         Gem �ѥå������Υե����ޥåȤΥС�������ɽ�����ޤ�
-      remotesources   Gem �ѥå������򸡺����륵���Ф�ɽ�����ޤ�
-      <omitted>       ��ά���������ɽ�����ޤ�
+      packageversion  gem のバージョンを表示します
+      gemdir          Gem パッケージのインストール先を表示します
+      gempath         Gem パッケージを探索するディレクトリを表示します
+      version         Gem パッケージのフォーマットのバージョンを表示します
+      remotesources   Gem パッケージを検索するサーバを表示します
+      <omitted>       省略すると全て表示します
     Summary:
-      RubyGems �δĶ��������ɽ�����ޤ�
+      RubyGems の環境や設定を表示します
 
 = class Gem::Commands::EnvironmentCommand < Gem::Command
 
-RubyGems �δĶ��˴ؤ�������ɽ�����뤿��Υ��饹�Ǥ���
+RubyGems の環境に関する情報を表示するためのクラスです。
 
 

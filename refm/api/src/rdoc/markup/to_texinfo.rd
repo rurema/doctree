@@ -1,25 +1,25 @@
 require rdoc/markup
 require rdoc/markup/formatter
 
-RDoc �����Υɥ�����Ȥ� TexInfo ���������뤿��Υ��֥饤�֥��Ǥ���
+RDoc 形式のドキュメントを TexInfo に整形するためのサブライブラリです。
 
   require 'rdoc/markup/to_texinfo'
 
   h = RDoc::Markup::ToTexInfo.new
   puts h.convert(input_string)
 
-�Ѵ�������̤�ʸ����Ǽ����Ǥ��ޤ���
+変換した結果は文字列で取得できます。
 
-[����] rdoc 2.5 ���ѻߤ��줿���ᡢ1.9.2 ����
-[[lib:rdoc/markup/to_texinfo]] ��ɸ��ź�ե饤�֥��˴ޤޤ�ʤ��ʤ�ޤ�
-����
+[注意] rdoc 2.5 で廃止されたため、1.9.2 から
+[[lib:rdoc/markup/to_texinfo]] は標準添付ライブラリに含まれなくなりまし
+た。
 
 = class RDoc::Markup::ToTexInfo < RDoc::Markup::Formatter
 
-RDoc �����Υɥ�����Ȥ� TexInfo ���������뤿��Υ��饹�Ǥ���
+RDoc 形式のドキュメントを TexInfo に整形するためのクラスです。
 
 == Class Methods
 
 --- new -> RDoc::Markup::ToTexInfo
 
-���Ȥ��������ޤ���
+自身を初期化します。

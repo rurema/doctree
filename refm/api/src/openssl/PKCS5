@@ -1,49 +1,49 @@
 
 #@since 1.8.7
 = module OpenSSL::PKCS5
-OpenSSL PKCS#5 ��Ϣ�ε�ǽ�򽸤᤿�⥸�塼��
+OpenSSL PKCS#5 関連の機能を集めたモジュール
 
 
 == Module Functions
 --- pbkdf2_hmac(pass, salt, iter, keylen, digest) -> String
-pass �� salt ���鶦�̸��Ź�θ������ IV(Initialization Vector)
-���������ޤ���
+pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
+を生成します。
 
-[[m:OpenSSL::PKCS5.#pbkdf2_hmac_sha1]] �Ȱۤʤ�Ǥ�դ�
-�ϥå���ؿ������ѤǤ��ޤ���
+[[m:OpenSSL::PKCS5.#pbkdf2_hmac_sha1]] と異なり任意の
+ハッシュ関数を利用できます。
 
-�֤��ͤ�ʸ���󤫤鸰�� IV ��ɬ�פʥХ��ȿ����ڤ�Ф������Ѥ��ޤ���
+返り値の文字列から鍵と IV に必要なバイト数を切り出して利用します。
 
-���δؿ��� OpenSSL 1.0.0 �ʹߤǤʤ�������ѤǤ��ޤ���
+この関数は OpenSSL 1.0.0 以降でなければ利用できません。
 
-@param pass �ѥ����ʸ����
-@param salt salt ʸ����
-@param iter ������� IV �������Υϥå���ؿ��η����֤����
-@param keylen ��̤�ʸ����ΥХ��ȿ�
-@param digest �ϥå���ؿ���ɽ��ʸ����⤷���� [[c:OpenSSL::Digest]] �Υ��֥�������
-@raise OpenSSL::PKCS5::PKCS5Error ����IV �������˼��Ԥ�������ȯ�����ޤ�
+@param pass パスワード文字列
+@param salt salt 文字列
+@param iter 鍵および IV 生成時のハッシュ関数の繰り返し回数
+@param keylen 結果の文字列のバイト数
+@param digest ハッシュ関数を表す文字列もしくは [[c:OpenSSL::Digest]] のオブジェクト
+@raise OpenSSL::PKCS5::PKCS5Error 鍵、IV の生成に失敗した場合に発生します
 @see [[m:OpenSSL::PKCS5.#pbkdf2_hmac_sha1]]
 
 --- pbkdf2_hmac_sha1(pass, salt, iter, keylen) -> String
-pass �� salt ���鶦�̸��Ź�θ������ IV(Initialization Vector)
-���������ޤ���
+pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
+を生成します。
 
-iter �ϸ��������Υϥå���ؿ��η����֤�����ǡ��礭���ͤ���ꤹ��ۤ�
-�����Ǥ��뤳�Ȥ����Ԥ���ޤ���RFC�ǤϾ��ʤ��Ȥ�1000��
-���ꤹ�뤳�Ȥ�侩���Ƥ��ޤ���
+iter は鍵生成時のハッシュ関数の繰り返し回数で、大きな値を指定するほど
+安全であることが期待されます。RFCでは少なくとも1000を
+指定することを推奨しています。
 
-�֤��ͤ�ʸ���󤫤鸰�� IV ��ɬ�פʥХ��ȿ����ڤ�Ф������Ѥ��ޤ���
+返り値の文字列から鍵と IV に必要なバイト数を切り出して利用します。
 
-�ϥå���ؿ��ˤ� SHA1 ���Ѥ��ޤ���
+ハッシュ関数には SHA1 を用います。
 
-����� [[RFC:2898]](PKCS#5 v2.0)�ߴ��Ǥ���
+これは [[RFC:2898]](PKCS#5 v2.0)互換です。
 
-@param pass �ѥ����ʸ����
-@param salt salt ʸ����
-@param iter ������� IV �������Υϥå���ؿ��η����֤����
-@param keylen ��̤�ʸ����ΥХ��ȿ�
-@raise OpenSSL::PKCS5::PKCS5Error ����IV �������˼��Ԥ�������ȯ�����ޤ�
+@param pass パスワード文字列
+@param salt salt 文字列
+@param iter 鍵および IV 生成時のハッシュ関数の繰り返し回数
+@param keylen 結果の文字列のバイト数
+@raise OpenSSL::PKCS5::PKCS5Error 鍵、IV の生成に失敗した場合に発生します
 
 = class OpenSSL::PKCS5::PKCS5Error < OpenSSL::OpenSSLError
-OpenSSL PKCS#5 ��Ϣ�Υ��顼������������ȯ�������㳰
+OpenSSL PKCS#5 関連のエラーが起きた場合に発生する例外
 #@end

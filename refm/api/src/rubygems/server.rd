@@ -1,92 +1,92 @@
 require rubygems
 require rubygems/doc_manager
 
-Gem �ѥå����������ۤ����� Gem �ѥå�������Ʊ������Ƥ���ɥ�����Ȥ򻲾Ȥ��뤿���
-�ʰץ����֥����Ф�ư��������Υ饤�֥��Ǥ���
+Gem パッケージを配布したり Gem パッケージに同梱されているドキュメントを参照するための
+簡易ウェブサーバを動かすためのライブラリです。
 
-[[lib:rubygems/commands/server_command]] ����Ѥ��Ƶ�ư���륦���֥����Ф����ΤǤ���
+[[lib:rubygems/commands/server_command]] を使用して起動するウェブサーバの本体です。
 
-���Υ饤�֥�����Ѥ��������֥����Фϰʲ��������ư��ޤ���
+このライブラリを使用したウェブサーバは以下の設定で動作します。
 
 : "/"
-  ���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������ΰ�����ɽ�����ޤ���
+  インストールされている Gem パッケージの一覧を表示します。
 : "/specs.#{Gem.marshal_version}.gz"
-  ���󥹥ȡ��뤵��Ƥ������С������ξ��� (�ѥå�����̾���С�����󡢥ץ�åȥե�����) ���֤��ޤ���
+  インストールされている全バージョンの情報 (パッケージ名、バージョン、プラットフォーム) を返します。
 : "/latest_specs.#{Gem.marshal_version}.gz"
-  ���󥹥ȡ��뤵��Ƥ���ǿ��С������ξ��� (�ѥå�����̾���С�����󡢥ץ�åȥե�����) ���֤��ޤ���
+  インストールされている最新バージョンの情報 (パッケージ名、バージョン、プラットフォーム) を返します。
 : "/quick/index", "/quick/index.rz", "/quick/latest_index", "/quick/latest_index.rz"
-  ���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������ΰ������֤��ޤ���
+  インストールされている Gem パッケージの一覧を返します。
 : "/gems/"
-  ����������ɲ�ǽ�� Gem �ѥå������ΰ�����ɽ�����ޤ���
+  ダウンロード可能な Gem パッケージの一覧を表示します。
 
-�ʲ��Υ���ǥå����ϥ쥬�����ʤ�ΤǤ���
+以下のインデックスはレガシーなものです。
 
 : "/Marshal.#{Gem.marshal_version}"
-  ���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������� [[c:Gem::SourceIndex]] �� [[c:Marshal]] ��
-  �����ǥ���פ�����Τ��֤��ޤ���
+  インストールされている Gem パッケージの [[c:Gem::SourceIndex]] を [[c:Marshal]] の
+  形式でダンプしたものを返します。
 : "/yaml"
-  ���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������� [[c:Gem::SourceIndex]] �� YAML ������
-  ����פ����᥿�ǡ������֤��ޤ������ε�ǽ����侩�Ǥ���
+  インストールされている Gem パッケージの [[c:Gem::SourceIndex]] を YAML 形式で
+  ダンプしたメタデータを返します。この機能は非推奨です。
 
 = class Gem::Server
 include Gem::UserInteraction
 
-Gem �ѥå����������ۤ����� Gem �ѥå�������Ʊ������Ƥ���ɥ�����Ȥ򻲾Ȥ��뤿���
-�ʰץ����֥����Ф�ư��������Υ��饹�Ǥ���
+Gem パッケージを配布したり Gem パッケージに同梱されているドキュメントを参照するための
+簡易ウェブサーバを動かすためのクラスです。
 
 == Instance Methods
 
 --- Marshal(request, response) -> ()
 
-�᥽�å�̾���б����� URI ���Ф���ꥯ�����Ȥ��������᥽�åɤǤ���
+メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-@param request  [[c:WEBrick::HTTPRequest]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param request  [[c:WEBrick::HTTPRequest]] オブジェクトが自動的に指定されます。
 
-@param response [[c:WEBrick::HTTPResponse]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param response [[c:WEBrick::HTTPResponse]] オブジェクトが自動的に指定されます。
 
 --- latest_specs(request, response) -> ()
 
-�᥽�å�̾���б����� URI ���Ф���ꥯ�����Ȥ��������᥽�åɤǤ���
+メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-@param request  [[c:WEBrick::HTTPRequest]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param request  [[c:WEBrick::HTTPRequest]] オブジェクトが自動的に指定されます。
 
-@param response [[c:WEBrick::HTTPResponse]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param response [[c:WEBrick::HTTPResponse]] オブジェクトが自動的に指定されます。
 
 --- quick(request, response) -> ()
 
-�᥽�å�̾���б����� URI ���Ф���ꥯ�����Ȥ��������᥽�åɤǤ���
+メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-@param request  [[c:WEBrick::HTTPRequest]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param request  [[c:WEBrick::HTTPRequest]] オブジェクトが自動的に指定されます。
 
-@param response [[c:WEBrick::HTTPResponse]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param response [[c:WEBrick::HTTPResponse]] オブジェクトが自動的に指定されます。
 
 --- root(request, response) -> ()
 
-�᥽�å�̾���б����� URI ���Ф���ꥯ�����Ȥ��������᥽�åɤǤ���
+メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-@param request  [[c:WEBrick::HTTPRequest]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param request  [[c:WEBrick::HTTPRequest]] オブジェクトが自動的に指定されます。
 
-@param response [[c:WEBrick::HTTPResponse]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param response [[c:WEBrick::HTTPResponse]] オブジェクトが自動的に指定されます。
 
 --- run -> ()
 
-�����Ф�¹Ԥ��ޤ���
+サーバを実行します。
 
 --- specs(request, response) -> ()
 
-�᥽�å�̾���б����� URI ���Ф���ꥯ�����Ȥ��������᥽�åɤǤ���
+メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-@param request  [[c:WEBrick::HTTPRequest]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param request  [[c:WEBrick::HTTPRequest]] オブジェクトが自動的に指定されます。
 
-@param response [[c:WEBrick::HTTPResponse]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param response [[c:WEBrick::HTTPResponse]] オブジェクトが自動的に指定されます。
 
 --- yaml(request, response) -> ()
 
-�᥽�å�̾���б����� URI ���Ф���ꥯ�����Ȥ��������᥽�åɤǤ���
+メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-@param request  [[c:WEBrick::HTTPRequest]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param request  [[c:WEBrick::HTTPRequest]] オブジェクトが自動的に指定されます。
 
-@param response [[c:WEBrick::HTTPResponse]] ���֥������Ȥ���ưŪ�˻��ꤵ��ޤ���
+@param response [[c:WEBrick::HTTPResponse]] オブジェクトが自動的に指定されます。
 
 == Singleton Methods
 
@@ -96,16 +96,16 @@ Gem �ѥå����������ۤ����� Gem �ѥå�������Ʊ������Ƥ���ɥ�����Ȥ򻲾Ȥ���
 --- new(gem_dir, port, daemon) -> Gem::Server
 #@end
 
-�����С����������ޤ���
+サーバーを初期化します。
 
 #@since 1.9.2
-@param gem_dirs Gem ���Ǽ���Ƥ���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param gem_dirs Gem を格納しているディレクトリを指定します。
 #@end
-@param gem_dir Gem ���Ǽ���Ƥ���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param gem_dir Gem を格納しているディレクトリを指定します。
 
-@param port ��å��󤹤�ݡ��Ȥ���ꤷ�ޤ���
+@param port リッスンするポートを指定します。
 
-@param daemon ������ꤹ��ȥǡ����Ȥ��Ƶ�ư���ޤ���
+@param daemon 真を指定するとデーモンとして起動します。
 
 #@since 1.9.2
 @param addresses 
@@ -113,9 +113,9 @@ Gem �ѥå����������ۤ����� Gem �ѥå�������Ʊ������Ƥ���ɥ�����Ȥ򻲾Ȥ���
 
 --- run(options) -> Gem::Server
 
-Ϳ����줿���ץ�������Ѥ��ƥ����Ф�ư���ޤ���
+与えられたオプションを使用してサーバを起動します。
 
-@param options ���ץ�����ɽ���ϥå������ꤷ�ޤ����ޤޤ�륭���� :gemdir, :port, :daemon �Ǥ���
+@param options オプションを表すハッシュを指定します。含まれるキーは :gemdir, :port, :daemon です。
 
 @see [[m:Gem::Server.new]]
 
@@ -124,8 +124,8 @@ Gem �ѥå����������ۤ����� Gem �ѥå�������Ʊ������Ƥ���ɥ�����Ȥ򻲾Ȥ���
 
 --- DOC_TEMPLATE -> String
 
-�ɥ�����ȤΥƥ�ץ졼�Ȥ�ɽ��ʸ����Ǥ���
+ドキュメントのテンプレートを表す文字列です。
 
 --- RDOC_CSS -> String
 
-RDoc �Τ���� CSS ��ɽ��ʸ����Ǥ���
+RDoc のための CSS を表す文字列です。

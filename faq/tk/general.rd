@@ -1,7 +1,7 @@
-= ư��Ķ�
+= 動作環境
 
-== Windows �Ǥ�ư��ޤ�����
+== Windows では動作しますか？
 
-cywgin �ǤǤ�ɸ���ư���ޤ���
+cywgin 版では標準で動きます。
 
-== Mac OS �Ǥ�ư��ޤ�����
+== Mac OS では動作しますか？

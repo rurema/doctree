@@ -3,17 +3,17 @@
 =begin
 = TclTkLib
 
-Tcl/Tk��ľ�ܰ�������Υ⥸�塼��Ǥ���
+Tcl/Tkを直接扱うためのモジュールです。
 
-Ruby/Tk�ץ�����ߥ󥰤ˤ����Ƥ��Υ��饹��¸�ߤ�ռ�����ɬ�פϤ���ޤ�
-��((*�ܺ٤ϡ�ext/tcltklib/MANUAL.euc �򻲾�*))
+Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
+ん。((*詳細は、ext/tcltklib/MANUAL.euc を参照*))
 
-== �⥸�塼��ؿ�:
+== モジュール関数:
 
 --- TclTkLib.mainloop
 #@todo
-    Tcl/Tk �Υᥤ��롼�פ�¹Ԥ��ޤ���Ruby/Tk�Ǥ����̡�(({Tk.mainloop}))
-    (�ºݤˤϡ�((<TkCore#mainloop>)))��¹Ԥ��뤳�Ȥǡ�����Ū�ˤ��Υ᥽��
-    �ɤ�¹Ԥ��ޤ���
+    Tcl/Tk のメインループを実行します。Ruby/Tkでは普通、(({Tk.mainloop}))
+    (実際には、((<TkCore#mainloop>)))を実行することで、間接的にこのメソッ
+    ドを実行します。
 
 =end

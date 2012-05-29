@@ -1,41 +1,41 @@
 = class Struct::Tms < Struct
 
-[[m:Process.#times]] ���֤��ͤ�ɽ�����빽¤�ΤǤ���
+[[m:Process.#times]] の返り値を表現する構造体です。
 
-���ε�ǽ�����ݡ��Ȥ���Ƥ���ץ�åȥե������ǥץ�������
-�������֤˴ؤ��������ݻ����ޤ����ץ�åȥե�����ˤ�äƤ�
-�Ȥ��ʤ��ͤ�����ޤ���
+この機能がサポートされているプラットフォーム上でプロセスの
+処理時間に関する情報を保持します。プラットフォームによっては
+使えない値があります。
 
 @see [[m:Process.#times]]
 
 == Instance Methods
 
 --- cstime -> Float
-��λ�����ҥץ������Υ����ƥ� CPU ���֤ι��(��)���֤��ޤ���
+終了した子プロセスのシステム CPU 時間の合計(秒)を返します。
 
-Windows ��ǤϾ�� 0 ���֤��ޤ���
+Windows 上では常に 0 を返します。
 
 --- cstime=(n)
-��λ�����ҥץ������Υ����ƥ� CPU ���֤ι��(��)�򥻥åȤ��ޤ���
+終了した子プロセスのシステム CPU 時間の合計(秒)をセットします。
 
 --- cutime -> Float
-��λ�����ҥץ������Υ桼���� CPU ���֤ι��(��)���֤��ޤ���
+終了した子プロセスのユーザー CPU 時間の合計(秒)を返します。
 
-Windows ��ǤϾ�� 0 ���֤��ޤ���
+Windows 上では常に 0 を返します。
 
 --- cutime=(n)
-��λ�����ҥץ������Υ桼���� CPU ���֤ι��(��)�򥻥åȤ��ޤ���
+終了した子プロセスのユーザー CPU 時間の合計(秒)をセットします。
 
 --- stime -> Float
-�����ƥ� CPU ���֤��֤��ޤ���
+システム CPU 時間を返します。
 
 --- stime=(n)
-�����ƥ� CPU ���֤򥻥åȤ��ޤ���
+システム CPU 時間をセットします。
 
 --- utime -> Float
-�桼���� CPU ���֤��֤��ޤ���
+ユーザー CPU 時間を返します。
 
 --- utime=(n)
-�桼���� CPU ���֤򥻥åȤ��ޤ���
+ユーザー CPU 時間をセットします。
 
 

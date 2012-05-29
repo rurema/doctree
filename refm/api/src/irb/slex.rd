@@ -1,7 +1,7 @@
 require e2mmap
 require irb/notifier
 
-Ruby �Υ����������ɤ������Ϥ��뤿��Υ��֥饤�֥��Ǥ���
-[[lib:irb/ruby-lex]] ������Ѥ���ޤ���
+Ruby のソースコードを字句解析するためのサブライブラリです。
+[[lib:irb/ruby-lex]] から使用されます。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。

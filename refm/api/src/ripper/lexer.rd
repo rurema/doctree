@@ -1,19 +1,19 @@
-Ruby �ץ�������ȡ�����Υꥹ�ȤȤ��ƽ������뤿��Υ饤�֥��Ǥ���
+Ruby プログラムをトークンのリストとして処理するためのライブラリです。
 
 = reopen Ripper
 
 --- Ripper.lex(src, filename = '-', lineno = 1) -> [[Integer, Integer], Symbol, String]
 
-Ruby �ץ������ str ��ȡ������ʬ�䤷�����Υꥹ�Ȥ��֤��ޤ���
-������ [[m:Ripper.tokenize]] �Ȱ㤤���ȡ�����μ���Ȱ��־������°���ޤ���
+Ruby プログラム str をトークンに分割し、そのリストを返します。
+ただし [[m:Ripper.tokenize]] と違い、トークンの種類と位置情報も付属します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "-" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "-" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-������
+使用例
 
   require 'ripper'
   require 'pp'
@@ -30,94 +30,94 @@ Ruby �ץ������ str ��ȡ������ʬ�䤷�����Υꥹ�Ȥ��֤��ޤ���
            [[1, 12], :on_sp, " "],
            [[1, 13], :on_kw, "end"]]
 
-Ripper.lex ��ʬ�䤷���ȡ������ܤ�������ȤȤ���֤��ޤ���
-�֤��ͤ���������Ǥ� 3 ���Ǥ����� (��ǰŪ�ˤϥ��ץ�) �Ǥ���
-����������ʲ��˼����ޤ���
+Ripper.lex は分割したトークンを詳しい情報とともに返します。
+返り値の配列の要素は 3 要素の配列 (概念的にはタプル) です。
+その内訳を以下に示します。
 
-: ���־��� (Integer,Integer)
-    �ȡ������֤���Ƥ���� (1-origin) �ȷ� (0-origin) �� 2 ���Ǥ�����Ǥ���
-: ���� (Symbol)
-    �ȡ�����μ��ब��:on_XXX�פη����Υ���ܥ���Ϥ���ޤ���
-: �ȡ����� (String)
-    �ȡ�����ʸ����Ǥ���
+: 位置情報 (Integer,Integer)
+    トークンが置かれている行 (1-origin) と桁 (0-origin) の 2 要素の配列です。
+: 種類 (Symbol)
+    トークンの種類が「:on_XXX」の形式のシンボルで渡されます。
+: トークン (String)
+    トークン文字列です。
 
 --- Ripper.tokenize(src, filename = '-', lineno = 1) -> [String]
 
-Ruby �ץ������ str ��ȡ������ʬ�䤷�����Υꥹ�Ȥ��֤��ޤ���
+Ruby プログラム str をトークンに分割し、そのリストを返します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "-" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "-" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-������
+使用例
 
   require 'ripper'
   p Ripper.tokenize("def m(a) nil end")
       #=> ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
 
-Ripper.tokenize �϶���䥳���Ȥ�ޤᡢ
-����ʸ����ˤ���ʸ���� 1 �Х��Ȥ�Ĥ�����ʬ�䤷�ޤ���
-�������������Ϥ����㳰�Ȥ��ơ�__END__ �ʹߤ�ʸ������ۤäƼΤƤ��ޤ���
-����ϸ��ߤΤȤ������ͤȹͤ��Ƥ���������
+Ripper.tokenize は空白やコメントも含め、
+元の文字列にある文字は 1 バイトも残さずに分割します。
+ただし、ごく僅かな例外として、__END__ 以降の文字列は黙って捨てられます。
+これは現在のところ仕様と考えてください。
 
 --- Ripper.slice(src, pattern, n = 0) -> String | nil
 
-Ruby �ץ������ src �Τ�����
-�ѥ����� pattern �� n ���ܤγ�̤˥ޥå�����ʸ�������Ф��ޤ���
+Ruby プログラム src のうち、
+パターン pattern の n 番目の括弧にマッチする文字列を取り出します。
 
-�ޥå����ʤ����� nil ���֤��ޤ���
+マッチしない場合は nil を返します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param pattern ���Ф��ץ������Υѥ������ʸ����ǻ��ꤷ�ޤ���
+@param pattern 取り出すプログラムのパターンを文字列で指定します。
 
-@param n pattern �ǻ��ꤷ��ʸ������⡢n ���ܤγ�̤����ʸ���������ɬ
-         �פʻ��˻��ꤷ�ޤ�����ά����� 0 (pattern ����)�ˤʤ�ޤ���
+@param n pattern で指定した文字列の内、n 番目の括弧の中の文字列だけが必
+         要な時に指定します。省略すると 0 (pattern 全体)になります。
 
-pattern �� Ripper �Υ��٥�� ID �Υꥹ�Ȥ�ʸ����ǵ��Ҥ��ޤ���
-�ޤ� pattern �ˤ� Ruby ������ɽ����Ʊ���᥿ʸ����Ȥ��ޤ���
-��������.�פ�Ǥ�դΥȡ����� 1 �Ĥ˥ޥå�����
-����¾�Υ᥿ʸ���⤹�٤�ʸ��ñ�̤ǤϤʤ��ȡ�����ñ�̤�ư��ޤ���
+pattern は Ripper のイベント ID のリストを文字列で記述します。
+また pattern には Ruby の正規表現と同じメタ文字も使えます。
+ただし「.」は任意のトークン 1 つにマッチし、
+その他のメタ文字もすべて文字単位ではなくトークン単位で動作します。
 
-������
+使用例
 
   require 'ripper'
   p Ripper.slice(%(<<HERE\nstring\#{nil}\nHERE),
                  "heredoc_beg .*? nl $(.*?) heredoc_end", 1)
       # => "string\#{nil}\n"
 
-���٥�� ID �� [[m:Ripper::SCANNER_EVENTS]] �ǳ�ǧ�Ǥ��ޤ���
+イベント ID は [[m:Ripper::SCANNER_EVENTS]] で確認できます。
 
 --- Ripper.token_match(src, pattern) -> Ripper::TokenPattern::MatchData | nil
 
-Ruby �ץ������ src ���Ф��ƥѥ����� pattern ��ޥå�����
-�ޥå��ǡ������֤��ޤ���
+Ruby プログラム src に対してパターン pattern をマッチし、
+マッチデータを返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 = class Ripper::Lexer < Ripper
 
-Ruby �ץ������λ�����ϴ�Ǥ���
+Ruby プログラムの字句解析器です。
 
 == Instance Methods
 
 --- tokenize -> [String]
 
-���Ȥλ��� Ruby �ץ�������ȡ������ʬ�䤷�����Υꥹ�Ȥ��֤��ޤ���
+自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ��� [[m:Ripper.tokenize]] ����Ѥ��Ƥ���������
+ライブラリ内部で使用します。 [[m:Ripper.tokenize]] を使用してください。
 
 --- lex -> [[Integer, Integer], Symbol, String]
 
-���Ȥλ��� Ruby �ץ�������ȡ������ʬ�䤷�����Υꥹ�Ȥ��֤��ޤ���
+自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ��� [[m:Ripper.lex]] ����Ѥ��Ƥ���������
+ライブラリ内部で使用します。 [[m:Ripper.lex]] を使用してください。
 
 --- parse -> [[Integer, Integer], Symbol, String]
 
-���Ȥλ��� Ruby �ץ�������ȡ������ʬ�䤷�����Υꥹ�Ȥ��֤��ޤ�����
-���� [[m:Ripper::Lexer#lex]] �Ȱ㤤����̤򥽡��Ȥ��ޤ���
+自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。た
+だし [[m:Ripper::Lexer#lex]] と違い、結果をソートしません。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。

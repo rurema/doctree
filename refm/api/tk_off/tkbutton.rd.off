@@ -3,7 +3,7 @@
 =begin
 = TkButton
 
-�ܥ��󥦥������åȤΥ��饹�Ǥ���
+ボタンウィジェットのクラスです。
 
   require "tk"
   TkButton.new {
@@ -13,25 +13,25 @@
   }
   Tk.mainloop
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkLabel>))
 
-== �᥽�å�:
+== メソッド:
 
 --- TkButton#invoke
 #@todo
-    (({command}))���ץ����(((<TkWindow#command>))�ǻ��ꤷ��((<Proc>))����
-    ��������)��¹Ԥ��ޤ���
+    (({command}))オプション(((<TkWindow#command>))で指定した((<Proc>))オブ
+    ジェクト)を実行します。
 
-    �ץ�����फ�������ˤ��ܥ���򲡤����Ȥ���Ʊ��������¹Ԥ���Τ˻�
-    �Ѥ��ޤ���
+    プログラムからの制御によりボタンを押したときと同じ処理を実行するのに使
+    用します。
 
 --- TkButton#flash
 #@todo
-    �ܥ������餻�ޤ���
+    ボタンを光らせます。
 
-== ɸ�४�ץ����:
+== 標準オプション:
 
 ((<TkObject#activebackground>))
 
@@ -79,15 +79,15 @@
 
 ((<TkObject#wraplength>))
 
-== ���ץ����:
+== オプション:
 
 ### --- TkButton#command
 
 --- TkButton#default
 #@todo
-    ((*���Υ᥽�åɤϡ�Tk�С������8.0�Ǽ�������ޤ���*))
+    ((*このメソッドは、Tkバージョン8.0で実装されました*))
 
-    �ʲ���3�ĤΤ��������줫����ꤷ�ޤ���
+    以下の3つのうちいずれかを指定します。
 
     *"normal"
     *"active"
@@ -95,46 +95,46 @@
 
 =end
 
-###�ǥե���ȡ���󥰤Τ����3�Ĥξ��� "normal", "active", "disabled"�Τ���
-###1�Ĥ���ꤷ�ޤ���"active"�Ǥϥܥ���ϥץ�åȥե�����˼��������褬��
-###����ޤ���"normal"�Ǥϡ��ܥ���ϥץ�åȥե�����˼����Ǥʤ����ǥե���
-###�ȤΥܥ����ɽ������Τ˽�ʬ�ʥ��ڡ�����Ĥ��ޤ���"active"��"normal"��
-###Ʊ���������Υܥ���ˤʤ�ޤ���"disabled"�Ǥϥܥ���ϥץ�åȥե������
-###�����Ǥʤ��ܥ����ʬ�ʥ��ڡ�����Ĥ�����ɽ�����ޤ���"disabled"�ʥܥ�
-###��ϡ�"active"���֤Ǥ���ܥ�����⾮�����ʤ�ޤ���
+###デフォルト・リングのための3つの状態 "normal", "active", "disabled"のうち
+###1つを指定します。"active"ではボタンはプラットフォームに自然な描画がな
+###されます。"normal"では、ボタンはプラットフォームに自然でなく、デフォル
+###トのボタンを表示するのに十分なスペースを残します。"active"と"normal"は
+###同じサイズのボタンになります。"disabled"ではボタンはプラットフォームに
+###自然でないボタンを十分なスペースを残さずに表示します。"disabled"なボタ
+###ンは、"active"状態であるボタンよりも小さくなります。
 
 =begin
 --- TkButton#height
 #@todo
-    �ܥ���ι⤵�����ꤷ�ޤ���((<TkObject#text>))�ˤ�äƥܥ����ʸ�����
-    ɽ��������ϹԿ���((<TkObject#image>))�ˤ�äƲ�����Ž����
-    ���Ƥ�����ϥԥ�������ʤɤ�((<��Υ>)))����ꤷ�ޤ���
+    ボタンの高さを設定します。((<TkObject#text>))によってボタンに文字列を
+    表示する場合は行数を、((<TkObject#image>))によって画像を貼り付
+    けている場合はピクセル数などの((<距離>)))を指定します。
 
 --- TkButton#state
 #@todo
-    �ܥ���ξ��֤�ʲ���3�ĤΤ��������줫�ǻ��ꤷ�ޤ���
+    ボタンの状態を以下の3つのうちいずれかで指定します。
 
     *"normal"
 
-     �̾�ξ��֤Ǥ���((<TkObject#foreground>))��((<TkObject#background>))
-     �ǻ��ꤷ������ɽ������ޤ���
+     通常の状態です。((<TkObject#foreground>))、((<TkObject#background>))
+     で指定した色で表示されます。
 
     *"active"
 
-     �����ƥ��֤ʾ��֤Ǥ����̾�ޥ����������뤬�ܥ���ξ�ˤ���Ȥ��ˤ���
-     ���֤ˤʤ�ޤ���((<TkObject#activeforeground>))��
-     ((<TkObject#activebackground>)) �ǻ��ꤷ������ɽ������ޤ���
+     アクティブな状態です。通常マウスカーソルがボタンの上にあるときにこの
+     状態になります。((<TkObject#activeforeground>))、
+     ((<TkObject#activebackground>)) で指定した色で表示されます。
 
     *"disabled"
 
-     ((<�ǥ��������֥�>))�ʾ��֤Ǥ������ξ��֤Υܥ���򲡤����ϤǤ��ޤ���
-     ((<TkObject#disabledforeground>))��((<TkObject#background>)) �ǻ��ꤷ
-     ������ɽ������ޤ���
+     ((<ディスエーブル>))な状態です。この状態のボタンを押す事はできません。
+     ((<TkObject#disabledforeground>))、((<TkObject#background>)) で指定し
+     た色で表示されます。
 
 --- TkButton#width
 #@todo
-    �ܥ�����������ꤷ�ޤ���((<TkObject#text>))�ˤ�äƥܥ����ʸ�����
-    ɽ���������ʸ������((<TkObject#image>))�ˤ�äƲ�����Ž����
-    ���Ƥ�����ϥԥ�������ʤ�((<��Υ>))����ꤷ�ޤ���
+    ボタンの幅を設定します。((<TkObject#text>))によってボタンに文字列を
+    表示する場合は文字数を、((<TkObject#image>))によって画像を貼り付
+    けている場合はピクセル数など((<距離>))を指定します。
 
 =end

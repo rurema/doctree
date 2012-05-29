@@ -1,31 +1,31 @@
 
-Gem ¤Î°ÍÂ¸´Ø·¸¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ã®ä¾å­˜é–¢ä¿‚ã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Gem::Dependency
 
-Gem ¤Î°ÍÂ¸´Ø·¸¤ò´ÉÍý¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+Gem ã®ä¾å­˜é–¢ä¿‚ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Public Instance Methods
 
 --- <=>(other) -> Integer
 
-self ¤È other ¤ò [[m:Gem::Dependency#name]] ¤Î ASCII ¥³¡¼¥É¤ÇÈæ³Ó¤·¤Æ
-self ¤¬Âç¤­¤¤»þ¤Ë¤ÏÀµ¤ÎÀ°¿ô¡¢Åù¤·¤¤»þ¤Ë¤Ï 0¡¢¾®¤µ¤¤»þ¤Ë¤ÏÉé¤ÎÀ°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+self ã¨ other ã‚’ [[m:Gem::Dependency#name]] ã® ASCII ã‚³ãƒ¼ãƒ‰ã§æ¯”è¼ƒã—ã¦
+self ãŒå¤§ãã„æ™‚ã«ã¯æ­£ã®æ•´æ•°ã€ç­‰ã—ã„æ™‚ã«ã¯ 0ã€å°ã•ã„æ™‚ã«ã¯è² ã®æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- =~(other) -> bool
 
-self ¤È other ¤òÈæ³Ó¤·¤Æ¿¿µ¶ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+self ã¨ other ã‚’æ¯”è¼ƒã—ã¦çœŸå½å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-self ¤Î [[m:Gem::Dependency#name]] ¤¬Àµµ¬É½¸½¤È¤·¤Æ other ¤È¥Þ¥Ã¥Á¤·¤Ê¤¤¾ì¹ç¤Ïµ¶¤òÊÖ¤·¤Þ¤¹¡£
-self ¤¬ other ¤È¤Î°ÍÂ¸´Ø·¸¤òËþ¤¿¤·¤Æ¤¤¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£Ëþ¤¿¤·¤Æ¤¤¤Ê¤±¤ì¤Ðµ¶¤òÊÖ¤·¤Þ¤¹¡£
+self ã® [[m:Gem::Dependency#name]] ãŒæ­£è¦è¡¨ç¾ã¨ã—ã¦ other ã¨ãƒžãƒƒãƒã—ãªã„å ´åˆã¯å½ã‚’è¿”ã—ã¾ã™ã€‚
+self ãŒ other ã¨ã®ä¾å­˜é–¢ä¿‚ã‚’æº€ãŸã—ã¦ã„ã‚Œã°çœŸã‚’è¿”ã—ã¾ã™ã€‚æº€ãŸã—ã¦ã„ãªã‘ã‚Œã°å½ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- name -> String
 
-°ÍÂ¸´Ø·¸¤ÎÌ¾Á°¤òÊ¸»úÎó¤«Àµµ¬É½¸½¤ÇÊÖ¤·¤Þ¤¹¡£
+ä¾å­˜é–¢ä¿‚ã®åå‰ã‚’æ–‡å­—åˆ—ã‹æ­£è¦è¡¨ç¾ã§è¿”ã—ã¾ã™ã€‚
 
 --- name=(name)
 
-°ÍÂ¸´Ø·¸¤ÎÌ¾Á°¤òÊ¸»úÎó¤«Àµµ¬É½¸½¤Ç¥»¥Ã¥È¤·¤Þ¤¹¡£
+ä¾å­˜é–¢ä¿‚ã®åå‰ã‚’æ–‡å­—åˆ—ã‹æ­£è¦è¡¨ç¾ã§ã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
 
 #@until 1.9.2
 --- normalize -> nil
@@ -36,26 +36,26 @@ self ¤¬ other ¤È¤Î°ÍÂ¸´Ø·¸¤òËþ¤¿¤·¤Æ¤¤¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£Ëþ¤¿¤·¤Æ¤¤¤Ê¤±¤ì¤Ðµ¶¤òÊÖ
 --- requirement_list  -> [String]
 --- requirements_list -> [String]
 
-¥Ð¡¼¥¸¥ç¥ó¤ÎÉ¬Í×¾ò·ï¤òÊ¸»úÎó¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®å¿…è¦æ¡ä»¶ã‚’æ–‡å­—åˆ—ã®é…åˆ—ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
 --- type -> Symbol
 
-°ÍÂ¸´Ø·¸¤Î·¿¤òÊÖ¤·¤Þ¤¹¡£
+ä¾å­˜é–¢ä¿‚ã®åž‹ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- version_requirements -> Gem::Requirement
 
-°ÍÂ¸¤·¤Æ¤¤¤ë¥Ð¡¼¥¸¥ç¥ó¤òÊÖ¤·¤Þ¤¹¡£
+ä¾å­˜ã—ã¦ã„ã‚‹ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- version_requirements=(version_requirements)
 
-°ÍÂ¸¤·¤Æ¤¤¤ë¥Ð¡¼¥¸¥ç¥ó¤òÀßÄê¤·¤Þ¤¹¡£
+ä¾å­˜ã—ã¦ã„ã‚‹ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param version_requirements [[c:Gem::Requirement]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+@param version_requirements [[c:Gem::Requirement]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 == Constants
 
 --- TYPES -> Array
 
-Í­¸ú¤Ê°ÍÂ¸´Ø·¸¤Î·¿¤òÉ½¤¹ÇÛÎó¤Ç¤¹¡£
+æœ‰åŠ¹ãªä¾å­˜é–¢ä¿‚ã®åž‹ã‚’è¡¨ã™é…åˆ—ã§ã™ã€‚
 
 @see [[m:Gem::Specification::CURRENT_SPECIFICATION_VERSION]]

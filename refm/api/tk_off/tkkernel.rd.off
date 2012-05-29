@@ -3,28 +3,28 @@
 =begin
 = TkKernel
 
-((<TkObject>))�Υ����ѡ����饹�Ǥ���((<TkLabel>)) �ʤɤ� (({new})) ��
-�֥��å�����Ƥ�Τϡ����Υ��饹�� (({new})) ���������Ƥ��뤫��Ǥ���
-((-���Υ��饹�� ext/tk/tkutil.c ���������Ƥ��ޤ���C �Ǽ�������Ƥ�����ͳ��...-))
+((<TkObject>))のスーパークラスです。((<TkLabel>)) などの (({new})) が
+ブロックを持てるのは、このクラスが (({new})) を再定義しているからです。
+((-このクラスは ext/tk/tkutil.c で定義されています．C で実装されている理由は...-))
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<Object>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkKernel.new {|obj| ...}
 #@todo
-    TkKernel���֥������Ȥ��������ޤ���
+    TkKernelオブジェクトを生成します。
 
-    �֥��å�����ꤹ��������������֥������Ȥ�����˥֥��å���¹Ԥ��ޤ���
-    �ޤ������Υ֥��å���Υ���ƥ����ȤǤ�(({self}))�������������֥�������
-    �ˤʤ�ޤ���
+    ブロックを指定すると生成したオブジェクトを引数にブロックを実行します。
+    また、そのブロック内のコンテキストでは(({self}))は生成したオブジェクト
+    になります。
 
-    �Ĥޤꡢ
+    つまり、
       TkKernel.new {|obj| ... }
-    �ϡ�
+    は、
       object = TkKernel.new
       object.instance_eval {|obj| ... }
-    �������Ǥ���
+    と等価です。
 =end

@@ -1,70 +1,70 @@
 = class OpenSSL::PKey::RSA < OpenSSL::PKey::PKey
 
-RSA �Ź渰�Υ��饹�Ǥ���
+RSA 暗号鍵のクラスです。
 
-�̾盧�Υ��饹�����Ѥ���Τϡ�
+通常このクラスで利用するのは、
 [[m:OpenSSL::PKey::RSA.generate]], [[m:OpenSSL::PKey::RSA.new]],
 [[m:OpenSSL::PKey::RSA#public?]], [[m:OpenSSL::PKey::RSA#private?]],
 [[m:OpenSSL::PKey::RSA#public_key]], [[m:OpenSSL::PKey::RSA#to_text]],
 [[m:OpenSSL::PKey::RSA#to_pem]], [[m:OpenSSL::PKey::RSA#to_der]]
-�Τ����줫�Ǥ��礦������ʳ��Υ᥽�åɤ����Ѥ���Ȥ���
-RSA �ˤĤ��Ƥ褯���򤷡�ɬ�פʾ��Τߤˤ��٤��Ǥ���
+のいずれかでしょう。これ以外のメソッドを利用するときは
+RSA についてよく理解し、必要な場合のみにすべきです。
 
 
-��:
+例:
   # initialize random seed
   OpenSSL::Random.seed(File.read("/dev/random", 16))
-  # ���Ф�����
+  # 鍵対を生成
   rsa = OpenSSL::PKey::RSA.generate(2048)
-  # ��̩����AES256�ǰŹ沽���� private_key.pem �� PEM ��������¸
+  # 秘密鍵をAES256で暗号化して private_key.pem に PEM 形式で保存
   passphrase = "!secret passphrase!"
   File.open("private_key.pem", "w") do |f|
     f.write(rsa.export(OpenSSL::Cipher::Cipher.new("aes256"), passphrase))
   end
-  # ��������public_key.pem����¸
+  # 公開鍵をpublic_key.pemに保存
   public_key = rsa.public_key
   File.open("public_key.pem", "w") do |f|
     f.write(public_key.export)
   end
   
-  # ��̩���ǽ�̾
+  # 秘密鍵で署名
   data = "foobar"
   sign = rsa.sign("sha256", data)
-  # �������Ǹ���
+  # 公開鍵で検証
   p public_key.verify("sha256", sign, data)
-  # �����ʥǡ����򸡾�
+  # 不正なデータを検証
   p public_key.verify("sha256", sign, "foobarbaz")
 
 == Class Methods
 
 --- generate(size, exponent = 65537) -> OpenSSL::PKey::RSA
 --- generate(size, exponent = 65537){|u,n| ... } -> OpenSSL::PKey::RSA
-����ˤ�� RSA ����������̩���Υڥ����������ơ�RSA ���֥������Ȥ��֤��ޤ���
+乱数により RSA 公開鍵と秘密鍵のペアを生成して、RSA オブジェクトを返します。
 
-���Υ᥽�åɤ�Ƥ����� [[c:OpenSSL::Random]] �γƥ⥸�塼��ؿ���
-��ä������Ŭ�ڤ˽��������Ƥ���ɬ�פ�����ޤ���
+このメソッドを呼ぶ前に [[c:OpenSSL::Random]] の各モジュール関数に
+よって乱数が適切に初期化されている必要があります。
 
-size �Ǹ��� modulus �Υӥåȿ��Ĥޤ�ϸ��Υ���������ꤷ�ޤ���
-����Ǥ�1024����ꤷ�Ƥ���������
-exponent �� public exponent ����ꤷ�ޤ���exponent �ˤϴ������ꤷ��
-����ξ�硢3��17 ���뤤�� 65537 ����ꤷ�ޤ���
+size で鍵の modulus のビット数つまりは鍵のサイズを指定します。
+最低でも1024を指定してください。
+exponent で public exponent を指定します。exponent には奇数を指定し、
+大抵の場合、3、17 あるいは 65537 を指定します。
 
-���Υ᥽�åɤ˥֥��å����Ϥ��줿���ˤϡ�������������в��
-���������Ȥ��ƥ֥��å����ƤӽФ���ޤ���
-  * n���ܤ��ǿ����������������硢u=0 �ǥ֥��å����ƤӤ������
-  * ���������ǿ����䤬n���ܤ��ǿ��ƥ���(Miller-Robin)����������
-    ��硢u=1 �ǥ֥��å����ƤӽФ����
-  * n���ܤ����������ǿ������Ȥ�����Ŭ�ڤʾ��ˤϡ�u=2 �ǥ֥��å���
-    �ƤӤ������
-  * p-1 �� e �ȸߤ����ǤǤ���褦���ǿ� p �����դ��ä����ˤϡ�
-    u=3, n=0 �ǥ֥��å����ƤӽФ����
-  * �ʾ���ǿ�������⤦���ٷ����֤���Ŭ�ڤ��ǿ� q �����դ��ä����ˤϡ�
-    u=3, n=1 �ǥ֥��å����ƤӽФ����
-RSA ���ڥ��������ˤϻ��֤������뤿�ᡢ������������в��
-�桼����ɽ�����������ˤ��ε�ǽ��Ȥ��ޤ���
+このメソッドにブロックが渡された場合には、鍵生成の途中経過の
+情報を引数としてブロックが呼び出されます。
+  * n個目の素数候補を生成した場合、u=0 でブロックが呼びだされる
+  * 生成した素数候補がn回目の素数テスト(Miller-Robin)に成功した
+    場合、u=1 でブロックが呼び出される
+  * n個目に生成した素数が鍵として不適切な場合には、u=2 でブロックが
+    呼びだされる
+  * p-1 が e と互いに素であるような素数 p が見付かった場合には、
+    u=3, n=0 でブロックが呼び出される
+  * 以上の素数生成をもう一度繰り返し、適切な素数 q が見付かった場合には、
+    u=3, n=1 でブロックが呼び出される
+RSA 鍵ペアの生成には時間がかかるため、鍵生成の途中経過を
+ユーザに表示したい場合にこの機能を使います。
 
 
-@param size ���Υ�����
+@param size 鍵のサイズ
 @param exponent public exponent
 
 --- new -> OpenSSL::PKey::RSA
@@ -72,45 +72,45 @@ RSA ���ڥ��������ˤϻ��֤������뤿�ᡢ������������в��
 --- new(size, exponent = 65537){|u,n| ... }  -> OpenSSL::PKey::RSA
 --- new(obj, pass = nil) -> OpenSSL::PKey::RSA
 --- new(obj, pass = nil){|flag| ... } -> OpenSSL::PKey::RSA
-RSA �Ź渰���֥������Ȥ��������ޤ���
+RSA 暗号鍵オブジェクトを生成します。
 
-�����ʤ��ξ��϶��� RSA ���֥������Ȥ��֤��ޤ���
+引数なしの場合は空の RSA オブジェクトを返します。
 
-����������������ꤷ�����ˤϡ�[[m:OpenSSL::PKey::RSA.generate]] �ˤ��
-����������̩���Υڥ�����������������֤��ޤ���
+第一引数に整数を指定した場合には、[[m:OpenSSL::PKey::RSA.generate]] により
+公開鍵と秘密鍵のペアを生成し、それを返します。
 
-����ʳ��ξ��ˤϡ��ʲ��Τ褦�ˤ��Ƹ��ǡ������ɤߤ��ߡ�RSA ���֥�������
-���������ޤ���
-  * ��������ʸ����ξ��ϡ�PEM �����⤷���� DER �����Ȳ��ꤷ��
-    ���ǡ������ɤ߹��ߤޤ�
-  * �������� [[c:IO]] ���֥������Ȥξ��ϡ��������Ƥ�
-    �ɤ߹���� RSA ���֥������Ȥ��������ޤ���
-  * �������� to_der �᥽�åɤ���ľ��ϡ�����ˤ�� DER ������
-    ʸ������Ѵ����Ƥ����ɤ߹��ߤޤ�
-pass �����ꤵ�줿���ϡ���̩���� pass ��Ȥä����沽���ޤ���
+それ以外の場合には、以下のようにして鍵データを読みこみ、RSA オブジェクト
+を生成します。
+  * 第一引数が文字列の場合は、PEM 形式もしくは DER 形式と仮定して
+    鍵データを読み込みます
+  * 第一引数が [[c:IO]] オブジェクトの場合は、その内容を
+    読み込んで RSA オブジェクトを生成します。
+  * 第一引数が to_der メソッドを持つ場合は、それにより DER 形式の
+    文字列に変換してから読み込みます
+pass が指定された場合は、秘密鍵を pass を使って復号化します。
 
-���ǡ����˥ѥ��ե졼�������ꤵ��Ƥ���ˤ⤫����餺��pass����ά���줿���ϡ�
-�Ϥ��줿�֥��å���ƤӤ����ƥѥ��ե졼�����׵ᤷ�ޤ����֥��å����֤��ͤ�
-�ѥ��ե졼���Ȥߤʤ������椷�ޤ����֥��å��ΰ������̾�� false ���Ϥ���ޤ�����
-����Ϥ��Υѥ��ե졼������̩��������˻Ȥ��뤳�Ȥ��̣���ޤ���
-�֥��å����Ϥ���ʤ��ä����ˤϥ����ߥʥ���䤤��碌�򤷤ޤ���
+鍵データにパスフレーズが設定されているにもかかわらず、passが省略された場合は、
+渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値を
+パスフレーズとみなして復号します。ブロックの引数は通常は false が渡されますが、
+これはそのパスフレーズが秘密鍵の復号に使われることを意味します。
+ブロックが渡されなかった場合にはターミナルに問い合わせをします。
 
-@param size �������򤹤���θ��Υ�����
+@param size 鍵生成をする場合の鍵のサイズ
 @param exponent public exponent
-@param obj ���ǡ���
-@param pass ���ǡ��������ꤷ���ѥ��ե졼��
-@raise OpenSSL::PKey::RSAError �����ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@param obj 鍵データ
+@param pass 鍵データに設定したパスフレーズ
+@raise OpenSSL::PKey::RSAError 鍵の読み込みに失敗した場合に発生します。
 
 == Instance Methods
 
 --- public? -> bool
-���Ȥ�����������äƤ��뤫�ɤ���Ƚ�ꤷ�ޤ���
+自身が公開鍵を持っているかどうか判定します。
 
 --- private? -> bool
-���Ȥ���̩������äƤ��뤫�ɤ���Ƚ�ꤷ�ޤ���
+自身が秘密鍵を持っているかどうか判定します。
 
 --- to_text -> String
-����ʹ֤��ɤ��������Ѵ����ޤ���
+鍵を人間が読める形式に変換します。
 
 --- export(cipher=nil, pass=nil) -> String
 --- export(cipher=nil, pass=nil){|flag| ... } -> String
@@ -118,254 +118,254 @@ pass �����ꤵ�줿���ϡ���̩���� pass ��Ȥä����沽���ޤ���
 --- to_pem(cipher=nil, pass=nil){|flag| ... } -> String
 --- to_s(cipher=nil, pass=nil) -> String
 --- to_s(cipher=nil, pass=nil){|flag| ... } -> String
-���� PEM �����ǽ��Ϥ��ޤ���
+鍵を PEM 形式で出力します。
 
-cipher �� pass �����ꤵ�줿��硢
-��̩����Ź� cipher [[c:OpenSSL::Cipher::Cipher]] 
-�ȥѥ���� pass ��ȤäưŹ沽���ޤ���
+cipher と pass が指定された場合、
+秘密鍵を暗号 cipher [[c:OpenSSL::Cipher::Cipher]] 
+とパスワード pass を使って暗号化します。
 
-cipher ����ꤷ�� pass ���ά��������
-�Ϥ��줿�֥��å���ƤӤ����ƥѥ��ե졼�����׵ᤷ�ޤ����֥��å����֤��ͤ�
-�ѥ��ե졼���Ȥߤʤ��ưŹ沽���ޤ���
-�֥��å��ΰ������̾�� true ���Ϥ���ޤ�����
-����Ϥ��Υѥ��ե졼������̩���ΰŹ沽�˻Ȥ��뤳�Ȥ��̣���ޤ���
-�֥��å����Ϥ���ʤ��ä����ˤϥ����ߥʥ���䤤��碌�򤷤ޤ���
+cipher を指定して pass を省略した場合は
+渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値を
+パスフレーズとみなして暗号化します。
+ブロックの引数は通常は true が渡されますが、
+これはそのパスフレーズが秘密鍵の暗号化に使われることを意味します。
+ブロックが渡されなかった場合にはターミナルに問い合わせをします。
 
-����������Ϥ������ cipher �� pass ��̵�뤵��ޤ���
+公開鍵を出力する場合は cipher と pass は無視されます。
 
 #@since 1.8.2
 --- to_der -> String
-���Ȥ� DER �������Ѵ����ޤ���
+自身を DER 形式に変換します。
 
 #@end
 
 --- public_key -> OpenSSL::PKey::RSA
-��������ʣ������ RSA ���֥������ȤȤ����֤��ޤ���
+公開鍵を複製して RSA オブジェクトとして返します。
 
 --- public_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
-ʸ���� str ��������ǰŹ沽���ޤ���
+文字列 str を公開鍵で暗号化します。
 
-�Ź沽���줿�ǡ�����ʸ������֤��ޤ���
+暗号化されたデータを文字列で返します。
 
-mode �ǥѥǥ��󥰥⡼�ɤ���ꤷ�ޤ����ʲ���4�ĤΤ��������줫��
-���Ѳ�ǽ�Ǥ���
+mode でパディングモードを指定します。以下の4つのうちいずれかが
+利用可能です。
  * [[m:OpenSSL::PKey::RSA::PKCS1_PADDING]]
  * [[m:OpenSSL::PKey::RSA::SSLV23_PADDING]]
  * [[m:OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING]]
  * [[m:OpenSSL::PKey::RSA::NO_PADDING]]
 
-@param str �Ź沽����ʸ����
-@param mode �ѥǥ��󥰥⡼��
-@raise OpenSSL::PKey::RSAError �Ź沽�˼��Ԥ�������ȯ�����ޤ���
+@param str 暗号化する文字列
+@param mode パディングモード
+@raise OpenSSL::PKey::RSAError 暗号化に失敗した場合に発生します。
 
 --- public_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
-ʸ���� str ������������沽���ޤ���
+文字列 str を公開鍵で復号化します。
 
-���沽���줿�ǡ�����ʸ������֤��ޤ���
+復号化されたデータを文字列で返します。
 
-mode �ǥѥǥ��󥰥⡼�ɤ���ꤷ�ޤ����ʲ��Τ����줫��
-���Ѳ�ǽ�Ǥ����Ź沽�����Ѥ����ѥǥ��󥰥⡼�ɤ�Ʊ����Τ�
-���ꤹ��ɬ�פ�����ޤ���
+mode でパディングモードを指定します。以下のいずれかが
+利用可能です。暗号化に利用したパディングモードと同じものを
+指定する必要があります。
  * [[m:OpenSSL::PKey::RSA::PKCS1_PADDING]]
  * [[m:OpenSSL::PKey::RSA::NO_PADDING]]
 
-@param str ���沽����ʸ����
-@param mode �ѥǥ��󥰥⡼��
-@raise OpenSSL::PKey::RSAError ���沽�˼��Ԥ�������ȯ�����ޤ���
+@param str 復号化する文字列
+@param mode パディングモード
+@raise OpenSSL::PKey::RSAError 復号化に失敗した場合に発生します。
        
 
 --- private_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
-ʸ���� str ����̩���ǰŹ沽���ޤ���
+文字列 str を秘密鍵で暗号化します。
 
-�Ź沽���줿�ǡ�����ʸ������֤��ޤ���
+暗号化されたデータを文字列で返します。
 
-mode �ǥѥǥ��󥰥⡼�ɤ���ꤷ�ޤ����ʲ��Τ����줫�����Ѳ�ǽ�Ǥ���
+mode でパディングモードを指定します。以下のいずれかが利用可能です。
  * [[m:OpenSSL::PKey::RSA::PKCS1_PADDING]]
  * [[m:OpenSSL::PKey::RSA::NO_PADDING]]
 
-@param str �Ź沽����ʸ����
-@param mode �ѥǥ��󥰥⡼��
-@raise OpenSSL::PKey::RSAError �Ź沽�˼��Ԥ�������ȯ�����ޤ���
-       ���Ȥ���̩���Ǥʤ����ʤɤ�ȯ�����ޤ���
+@param str 暗号化する文字列
+@param mode パディングモード
+@raise OpenSSL::PKey::RSAError 暗号化に失敗した場合に発生します。
+       自身が秘密鍵でない場合などに発生します。
 
 --- private_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
-ʸ���� str ����̩�������沽���ޤ���
+文字列 str を秘密鍵で復号化します。
 
-���沽���줿�ǡ�����ʸ������֤��ޤ���
+復号化されたデータを文字列で返します。
 
-mode �ǥѥǥ��󥰥⡼�ɤ���ꤷ�ޤ����Ź沽�����Ѥ���
-�ѥǥ��󥰥⡼�ɤ�Ʊ����Τ���ꤹ��ɬ�פ�����ޤ���
-�ʲ���4�ĤΤ��������줫�����Ѳ�ǽ�Ǥ���
+mode でパディングモードを指定します。暗号化に利用した
+パディングモードと同じものを指定する必要があります。
+以下の4つのうちいずれかが利用可能です。
  * [[m:OpenSSL::PKey::RSA::PKCS1_PADDING]]
  * [[m:OpenSSL::PKey::RSA::SSLV23_PADDING]]
  * [[m:OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING]]
  * [[m:OpenSSL::PKey::RSA::NO_PADDING]]
 
-@param str �Ź沽����ʸ����
-@param mode �ѥǥ��󥰥⡼��
-@raise OpenSSL::PKey::RSAError ���沽�˼��Ԥ�������ȯ�����ޤ���
-       �����������椷�褦�Ȥ�����硢�����ְ�äƤ�����硢
-       �Ź沽�˻Ȥä��ѥǥ��󥰥⡼�ɤȰۤʤ�⡼�ɤ�Ȥä�
-       ���ʤɤ�ȯ�����ޤ���
+@param str 暗号化する文字列
+@param mode パディングモード
+@raise OpenSSL::PKey::RSAError 復号化に失敗した場合に発生します。
+       公開鍵で復号しようとした場合、鍵が間違っていた場合、
+       暗号化に使ったパディングモードと異なるモードを使った
+       場合などに発生します。
 
 --- e -> OpenSSL::BN
-���� public exponent ���֤��ޤ���
+鍵の public exponent を返します。
 
-����ϸ������ΰ����Ǥ���
+これは公開鍵の一部です。
 
 --- e=(new_e)
-���� public exponent ���ѹ����ޤ���
+鍵の public exponent を変更します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_e ���ꤹ�� public exponent ��������
+@param new_e 設定する public exponent の整数値
 
 --- iqmp -> OpenSSL::BN
-���� coefficient (inverse of q mod p) �Ǥ���
+鍵の coefficient (inverse of q mod p) です。
 
-��̩���ξ���Ǥ���
+秘密鍵の情報です。
 
 --- iqmp=(new_iqmp)
-���� coefficient �����ꤷ�ޤ���
+鍵の coefficient を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_iqmp ���ꤹ��������
+@param new_iqmp 設定する整数値
 
 --- d -> OpenSSL::BN
-���� private exponent �Ǥ���
+鍵の private exponent です。
 
-�������̩���ΰ����Ǥ���
+これは秘密鍵の一部です。
 
 --- d=(new_d)
-private exponent �����ꤷ�ޤ���
+private exponent を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_d ���ꤹ��������
+@param new_d 設定する整数値
 
 --- n -> OpenSSL::BN
-���� modulus �Ǥ���
+鍵の modulus です。
 
-����������̩��ξ���ΰ����Ǥ���
+公開鍵、秘密鍵両方の一部です。
 
 --- n=(new_n)
-���� modules �����ꤷ�ޤ���
+鍵の modules を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_n ���ꤹ��������
+@param new_n 設定する整数値
 
 --- p -> OpenSSL::BN
-����1�Ĥ���ǿ��Ǥ���
+鍵の1つめの素数です。
 
-��̩���ξ���Ǥ���
+秘密鍵の情報です。
 
 --- p=(new_p)
-����1�Ĥ���ǿ������ꤷ�ޤ���
+鍵の1つめの素数を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_p ���ꤹ���ǿ�
+@param new_p 設定する素数
 
 --- q -> OpenSSL::BN
-����2�Ĥ���ǿ��Ǥ���
+鍵の2つめの素数です。
 
-��̩���ξ���Ǥ���
+秘密鍵の情報です。
 
 --- q=(new_q)
-����2�Ĥ���ǿ������ꤷ�ޤ���
+鍵の2つめの素数を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_q ���ꤹ���ǿ�
+@param new_q 設定する素数
 
 --- dmp1 -> OpenSSL::BN
-���� exponent1 (d mod (p-1)) �Ǥ���
+鍵の exponent1 (d mod (p-1)) です。
 
-��̩���ξ���Ǥ���
+秘密鍵の情報です。
 
 --- dmp1=(new_dmp1)
-���� exponent1 �����ꤷ�ޤ���
+鍵の exponent1 を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_dmp1 ���ꤹ������
+@param new_dmp1 設定する整数
 
 --- dmq1 -> OpenSSL::BN
-���� exponent2 (d mod (q-1)) �Ǥ���
+鍵の exponent2 (d mod (q-1)) です。
 
-��̩���ξ���Ǥ���
+秘密鍵の情報です。
 
 --- dmq1=(new_dmq1)
-���� exponent2 �����ꤷ�ޤ���
+鍵の exponent2 を設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param new_dmq1 ���ꤹ������
+@param new_dmq1 設定する整数
 
 --- params -> {String => OpenSSL::BN}
-���Υѥ�᡼��([[m:OpenSSL::PKey::RSA#e]],[[m:OpenSSL::PKey::RSA#n]],
-[[m:OpenSSL::PKey::RSA#d]]�ʤ�)��{�ѥ�᡼��̾ʸ���� => �ѥ�᡼����}
-�Ȥ����ϥå�����֤��ޤ���
+鍵のパラメータ([[m:OpenSSL::PKey::RSA#e]],[[m:OpenSSL::PKey::RSA#n]],
+[[m:OpenSSL::PKey::RSA#d]]など)を{パラメータ名文字列 => パラメータ値}
+というハッシュで返します。
 
-�����������ξ�硢[[m:OpenSSL::PKey::RSA#d]] 
-�Τ褦�˸����������äƤ��ʤ��ͤ� 0 �ˤʤ�ޤ���
+鍵が公開鍵の場合、[[m:OpenSSL::PKey::RSA#d]] 
+のように公開鍵が持っていない値は 0 になります。
 
 #@since 1.8.2
 == Constants
 
 --- PKCS1_PADDING -> Integer
 
-PKCS #1 v1.5 ���������Ƥ���ѥǥ��󥰥⡼�ɤǤ���
+PKCS #1 v1.5 で定義されているパディングモードです。
 
-�ߴ�����Ū�ʳ��Ǥ����ѤϿ侩���ޤ���
+互換性目的以外での利用は推奨しません。
 
-[[m:OpenSSL::PKey::RSA#public_encrypt]]��
-[[m:OpenSSL::PKey::RSA#public_decrypt]]��
-[[m:OpenSSL::PKey::RSA#private_encrypt]]��
-[[m:OpenSSL::PKey::RSA#private_decrypt]] ��
-��������˻���Ǥ��ޤ���
+[[m:OpenSSL::PKey::RSA#public_encrypt]]、
+[[m:OpenSSL::PKey::RSA#public_decrypt]]、
+[[m:OpenSSL::PKey::RSA#private_encrypt]]、
+[[m:OpenSSL::PKey::RSA#private_decrypt]] の
+第二引数に指定できます。
 
 --- SSLV23_PADDING -> Integer
 
-PKCS #1 v1.5 ���������Ƥ����Τ�
-SSL��ͭ���ѹ���ä����ѥǥ��󥰥⡼�ɤǤ���
+PKCS #1 v1.5 で定義されているものに
+SSL特有の変更を加えたパディングモードです。
 
-�ߴ�����Ū�ʳ��Ǥ����ѤϿ侩���ޤ���
+互換性目的以外での利用は推奨しません。
 
-[[m:OpenSSL::PKey::RSA#public_encrypt]]��
-[[m:OpenSSL::PKey::RSA#private_decrypt]] ��
-��������˻���Ǥ��ޤ���
+[[m:OpenSSL::PKey::RSA#public_encrypt]]、
+[[m:OpenSSL::PKey::RSA#private_decrypt]] の
+第二引数に指定できます。
 
 --- NO_PADDING -> Integer
-�ѥǥ��󥰤򤷤ʤ��ѥǥ��󥰥⡼�ɤǤ���
+パディングをしないパディングモードです。
 
-�������ƥ�������������������ᡢ����Ū�˻Ȥ�ʤ��Ǥ���������
+セキュリティ上の問題を引き起すため、基本的に使わないでください。
 
-[[m:OpenSSL::PKey::RSA#public_encrypt]]��
-[[m:OpenSSL::PKey::RSA#public_decrypt]]��
-[[m:OpenSSL::PKey::RSA#private_encrypt]]��
-[[m:OpenSSL::PKey::RSA#private_decrypt]] ��
-��������˻���Ǥ��ޤ���
+[[m:OpenSSL::PKey::RSA#public_encrypt]]、
+[[m:OpenSSL::PKey::RSA#public_decrypt]]、
+[[m:OpenSSL::PKey::RSA#private_encrypt]]、
+[[m:OpenSSL::PKey::RSA#private_decrypt]] の
+第二引数に指定できます。
 
 --- PKCS1_OAEP_PADDING -> Integer
-PKCS #1 v2.0 ���������Ƥ���ѥǥ��󥰥⡼�ɤǤ���
+PKCS #1 v2.0 で定義されているパディングモードです。
 
-�ߴ���������ʤ����Ϥ��Υ⡼�ɤ����Ѥ��٤��Ǥ���
+互換性に問題ない場合はこのモードを利用すべきです。
 
-[[m:OpenSSL::PKey::RSA#public_encrypt]]��
-[[m:OpenSSL::PKey::RSA#private_decrypt]] ��
-��������˻���Ǥ���ѥǥ��󥰥⡼�ɡ�
+[[m:OpenSSL::PKey::RSA#public_encrypt]]、
+[[m:OpenSSL::PKey::RSA#private_decrypt]] の
+第二引数に指定できるパディングモード。
 #@end
 
 = class OpenSSL::PKey::RSAError < OpenSSL::PKey::PKeyError
-RSA ��Ϣ�Υ��顼������������ȯ�������㳰�Υ��饹�Ǥ���
+RSA 関連のエラーが起きた場合に発生する例外のクラスです。

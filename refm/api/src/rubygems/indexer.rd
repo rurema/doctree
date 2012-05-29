@@ -1,98 +1,98 @@
 require rubygems
 require rubygems/format
 
-Gem ��ݥ��ȥ�Υ���ǥå�����������뤿��Υ��饹�򰷤�����Υ饤�֥��Ǥ���
+Gem リポジトリのインデックスを作成するためのクラスを扱うためのライブラリです。
 
 = class Gem::Indexer
 include Gem::UserInteraction
 
-Gem ��ݥ��ȥ�Υ���ǥå�����������뤿��Υ��饹�Ǥ���
+Gem リポジトリのインデックスを作成するためのクラスです。
 
 == Public Instance Methods
 
 --- abbreviate(spec) -> Gem::Specification
 
-����������ɤ�®�����뤿���Ϳ����줿 [[c:Gem::Specification]] �λ��ĥǡ�����
-���������ޤ���
+ダウンロードを速くするために与えられた [[c:Gem::Specification]] の持つデータを
+小さくします。
 
-@param spec [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param spec [[c:Gem::Specification]] を指定します。
 
 --- build_indicies
 #@# -> discard
 
-����ǥå������ۤ��ޤ���
+インデックスを構築します。
 
 --- collect_specs -> Gem::SourceIndex
 
-Gem �Υ���å���ǥ��쥯�ȥ���� *.gem �ե����뤫�� [[c:Gem::Specification]] �򽸤�ޤ���
+Gem のキャッシュディレクトリ内の *.gem ファイルから [[c:Gem::Specification]] を集めます。
 
 --- compact_specs(specs) -> Array
 
-Ϳ����줿���ڥå��򸵤˥��ڥå����դ�����Ǥ�������ξ������ä�������������
-�֤��ޤ���
+与えられたスペックを元にスペックを一意に特定できるだけの情報を持った配列を作成して
+返します。
 
-@param specs [[c:Gem::Specification]] ���������ꤷ�ޤ���
+@param specs [[c:Gem::Specification]] の配列を指定します。
 
 --- compress(filename, extension)
 #@# -> discard
 
-Ϳ����줿�ե�����򰵽̤�����¸���ޤ���
+与えられたファイルを圧縮して保存します。
 
-@param filename �����оݤΥե�����̾����ꤷ�ޤ���
+@param filename 圧縮対象のファイル名を指定します。
 
-@param extension ��¸����ե�����̾�γ�ĥ�Ҥ���ꤷ�ޤ���
+@param extension 保存するファイル名の拡張子を指定します。
 
 --- dest_directory -> String
 
-����ǥå�������¸����ǥ��쥯�ȥ���֤��ޤ���
+インデックスを保存するディレクトリを返します。
 
 --- directory -> String
 
-����ǥå�����ӥ�ɤ��뤿��ΰ��Ū�ʥǥ��쥯�ȥ���֤��ޤ���
+インデックスをビルドするための一時的なディレクトリを返します。
 
 --- gem_file_list -> Array
 
-����ǥå�����������뤿��˻��Ѥ��� Gem �ե�����Υꥹ�Ȥ��֤��ޤ���
+インデックスを作成するために使用する Gem ファイルのリストを返します。
 
 --- generate_index
 #@# -> discard
-����ǥå������ۤ�����¸���ޤ���
+インデックスを構築して保存します。
 
 --- gzip(filename)
 #@# -> discard
-[[m:Zlib::GzipWriter.open]] �ؤΥ�åѡ��Ǥ���
-Ϳ����줿�ե�����̾�򰵽̤�����¸���ޤ���
+[[m:Zlib::GzipWriter.open]] へのラッパーです。
+与えられたファイル名を圧縮して保存します。
 
 --- install_indicies
 #@# -> discard
-�����ѤߤΥ���ǥå��������Υǥ��쥯�ȥ����¸���ޤ���
+作成済みのインデックスを所定のディレクトリに保存します。
 
 --- make_temp_directories
 #@# -> discard
-���Ū�˻��Ѥ���ǥ��쥯�ȥ��������ޤ���
+一時的に使用するディレクトリを作成します。
 
 --- paranoid(path, extension)
 #@# -> discard
-���̤��줿�ǡ����Ȱ��̤���Ƥ��ʤ��ǡ�������Ӥ��ư��פ��ʤ�����㳰��ȯ�������ޤ���
+圧縮されたデータと圧縮されていないデータを比較して一致しなければ例外を発生させます。
 
-@param path ���̤���Ƥ��ʤ��ե�����Υѥ�����ꤷ�ޤ���
+@param path 圧縮されていないファイルのパスを指定します。
 
-@param extension ���̤��줿�ե�����γ�ĥ�Ҥ���ꤷ�ޤ���
+@param extension 圧縮されたファイルの拡張子を指定します。
 
-@raise RuntimeError ���̤��줿�ǡ����Ȱ��̤���Ƥ��ʤ��ǡ��������פ��ʤ�����ȯ�����ޤ���
+@raise RuntimeError 圧縮されたデータと圧縮されていないデータが一致しない場合に発生します。
 
 --- sanitize(spec) -> Gem::Specification
 
-Ϳ����줿���ڥå��ξܺ٤�ɽ��°���򥵥˥��������ޤ���
+与えられたスペックの詳細を表す属性をサニタイズします。
 
-non-ASCII ��ʸ����ϡ������ȥ���ǥå�����ʸ�����������뤳�Ȥ�����ޤ���
-non-ASCII ��ʸ����� XML ����ƥ��ƥ����ִ����ޤ���
+non-ASCII の文字列は、サイトインデックスを文字化けさせることがあります。
+non-ASCII の文字列を XML エンティティに置換します。
 
 --- sanitize_string(string) -> String
 
-Ϳ����줿ʸ����򥵥˥��������ޤ���
+与えられた文字列をサニタイズします。
 
-@param string ���˥������оݤ�ʸ�������ꤷ�ޤ���
+@param string サニタイズ対象の文字列を指定します。
 
 @see [[m:Gem::Indexer#sanitize]]
 
@@ -100,5 +100,5 @@ non-ASCII ��ʸ����� XML ����ƥ��ƥ����ִ����ޤ���
 
 --- new(directory) -> Gem::Indexer
 
-Ϳ����줿�ǥ��쥯�ȥ�� Gem ��ݥ��ȥ�Υ���ǥå�����������뤿���
-���Ȥ��������ޤ���
+与えられたディレクトリに Gem リポジトリのインデックスを作成するために
+自身を初期化します。

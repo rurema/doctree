@@ -1,41 +1,41 @@
 = ruby 1.8.4 feature
 
-ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
+ruby 1.8.4 での ruby 1.8.3 からの変更点です。
 
-�Ǻ�����
+掲載方針
 
-*�Х������αƶ���ޤ��ư��Ѥ���Τ��Ͽ���롣
-*ñ�˥Х���ľ���������Τ�Τϼ�Ͽ���ʤ���
-*�饤�֥��ؤ�ñ�ʤ�������ɲäϼ�Ͽ���ʤ���
+*バグ修正の影響も含めて動作が変わるものを収録する。
+*単にバグを直しただけのものは収録しない。
+*ライブラリへの単なる定数の追加は収録しない。
 
-�ʲ��ϳ��ѹ������դ���٤������Ǥ���
+以下は各変更点に付けるべきタグです。
 
-����ˤĤ���(�ä˽��פʤ�Τ���ʸ��(���))
+記号について(特に重要なものは大文字(主観))
 
-# * ���ƥ���
-#   * [ruby]: ruby ���󥿥ץ꥿���ѹ�
-#   * [api]: ��ĥ�饤�֥�� API
-#   * [lib]: �饤�֥��
-* ��٥�
-  * [bug]: �Х�����
-  * [new]: �ɲä��줿���饹���᥽�åɤʤ�
-  * [compat]: �ѹ����줿���饹���᥽�åɤʤ�
-    * �ߴ����Τ����ѹ�
+# * カテゴリ
+#   * [ruby]: ruby インタプリタの変更
+#   * [api]: 拡張ライブラリ API
+#   * [lib]: ライブラリ
+* レベル
+  * [bug]: バグ修正
+  * [new]: 追加されたクラス／メソッドなど
+  * [compat]: 変更されたクラス／メソッドなど
+    * 互換性のある変更
     * only backward-compatibility
-    * �ƶ����ϰϤ��������Ȼפ����ѹ��⤳����
-  * [change]: �ѹ����줿���饹���᥽�åɤʤ�(�ߴ����Τʤ��ѹ�)
-  * [obsolete]: �ѻߤ��줿(�����ͽ���)��ǽ
-  * [platform]: �б��ץ�åȥե�������ɲ�
+    * 影響の範囲が小さいと思われる変更もこちら
+  * [change]: 変更されたクラス／メソッドなど(互換性のない変更)
+  * [obsolete]: 廃止された(される予定の)機能
+  * [platform]: 対応プラットフォームの追加
 
-== �ܼ�
+== 目次
 
-* ((<ruby 1.8.4 feature/Ruby����>))
+* ((<ruby 1.8.4 feature/Ruby本体>))
   * ((<ruby 1.8.4 feature/Symbol [bug]>))
   * ((<ruby 1.8.4 feature/Symbol [bug]>))
   * ((<ruby 1.8.4 feature/super [bug]>))
-  * ((<ruby 1.8.4 feature/����ɽ�� [bug]>))
-  * ((<ruby 1.8.4 feature/�����ʥ� [bug]>))
-* ((<ruby 1.8.4 feature/�Ȥ߹��ߥ饤�֥��>))
+  * ((<ruby 1.8.4 feature/正規表現 [bug]>))
+  * ((<ruby 1.8.4 feature/シグナル [bug]>))
+* ((<ruby 1.8.4 feature/組み込みライブラリ>))
   * ((<ruby 1.8.4 feature/UnboundMethod#bind [bug]>))
   * ((<ruby 1.8.4 feature/set_trace_func [bug]>))
   * ((<ruby 1.8.4 feature/set_trace_func [change]>))
@@ -47,9 +47,9 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
   * ((<ruby 1.8.4 feature/File.split [change]>))
   * ((<ruby 1.8.4 feature/File.basename [change]>))
   * ((<ruby 1.8.4 feature/File.dirname [change]>))
-  * ((<ruby 1.8.4 feature/Dir.glob (Win����) [bug]>))
-  * ((<ruby 1.8.4 feature/File.basename (Win����) [change]>))
-  * ((<ruby 1.8.4 feature/File.dirname (Win����) [bug]>))
+  * ((<ruby 1.8.4 feature/Dir.glob (Win全般) [bug]>))
+  * ((<ruby 1.8.4 feature/File.basename (Win全般) [change]>))
+  * ((<ruby 1.8.4 feature/File.dirname (Win全般) [bug]>))
   * ((<ruby 1.8.4 feature/File::Stat#pipe? [bug]>))
   * ((<ruby 1.8.4 feature/Array#fill [bug]>))
   * ((<ruby 1.8.4 feature/String#scan [bug]>))
@@ -57,7 +57,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
   * ((<ruby 1.8.4 feature/Thread#pass [bug]>))
   * ((<ruby 1.8.4 feature/Module#const_missing [bug]>))
   * ((<ruby 1.8.4 feature/IO [bug]>))
-* ((<ruby 1.8.4 feature/ź�ե饤�֥��>))
+* ((<ruby 1.8.4 feature/添付ライブラリ>))
   * ((<ruby 1.8.4 feature/"Ruby/Tk">))
   * ((<ruby 1.8.4 feature/REXML [compat]>))
   * ((<ruby 1.8.4 feature/TCPSocket#initialize [bug]>))
@@ -80,25 +80,25 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
   * ((<ruby 1.8.4 feature/fileutils [bug]>))
   * ((<ruby 1.8.4 feature/extmk, mkmf [compat]>))
   * ((<ruby 1.8.4 feature/mkmf: find_executable() [compat]>))
-* ((<ruby 1.8.4 feature/��ĥ�饤�֥��API>))
+* ((<ruby 1.8.4 feature/拡張ライブラリAPI>))
   * ((<ruby 1.8.4 feature/rb_funcall2() [bug]>))
   * ((<ruby 1.8.4 feature/rb_respond_to() [change]>))
   * ((<ruby 1.8.4 feature/rb_obj_respond_to() [new]>))
-* ((<ruby 1.8.4 feature/�ץ�åȥե������ͭ>))
+* ((<ruby 1.8.4 feature/プラットフォーム固有>))
   * ((<ruby 1.8.4 feature/bccwin32 [bug]>))
   * ((<ruby 1.8.4 feature/cygwin [bug]>))
   * ((<ruby 1.8.4 feature/BeOS [bug]>))
   * ((<ruby 1.8.4 feature/Sun [bug]>))
   * ((<ruby 1.8.4 feature/IA64 [bug]>))
 
-== Ruby����
+== Ruby本体
 
 : Symbol [bug]
 
 #       * parse.y (dsym): prohibit empty symbol literal by interpolation.
 #         fixed: [ruby-talk:166529]
 
-    ��Ÿ���Ƕ���Symbol���뤳�Ȥ��Ǥ����Х��ν����� ((<ruby-talk:166529>))
+    式展開で空のSymbolを作ることができたバグの修正。 ((<ruby-talk:166529>))
 
         p :""
 
@@ -123,7 +123,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * test/ruby/test_symbol.rb: tests for [ruby-core:03573].
 
-    Symbol��Ŭ�礹��ʸ�����̩�ˤ�����((<ruby-core:03573>)),((<ruby-dev:27478>))
+    Symbolに適合する文字列を厳密にした。((<ruby-core:03573>)),((<ruby-dev:27478>))
 
         1) alias :"foo" :"bar"
 
@@ -207,8 +207,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 
 : super [bug]
 
-    Kernel�Υ᥽�å����super��Ƥ�����ˡ�¸�ߤ��ʤ�superclass
-    �˥����������褦�Ȥ���Х��ν�����
+    Kernelのメソッド内でsuperを呼んだ時に、存在しないsuperclass
+    にアクセスしようとするバグの修正。
 
         module Kernel
           def foo
@@ -226,15 +226,15 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
              : super: no superclass method `foo' (NoMethodError)
                 from -:7
 
-: ����ɽ�� [bug]
+: 正規表現 [bug]
 
 #Wed Oct 19 01:27:07 2005  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 #
 #       * regex.c (re_compile_pattern): numeric literal inside character class
 #         disabled succeeding backtrack.  fixed: [ruby-list:41328]
 
-    ʸ�������ɤη�������ɽ����ʸ�����饹����ꤹ��ȡ�����ʹߤ�
-    �Хå��ȥ�å��������ʤ��ʤ�Х��ν�����((<ruby-list:41328>))
+    文字コードの形で正規表現の文字クラスを指定すると、それ以降の
+    バックトラックが効かなくなるバグの修正。((<ruby-list:41328>))
 
         p(/^[a-z]+x[0-9]+$/ =~ "hogex111")
         p(/^[\x61-\x7a]+x[0-9]+$/ =~ "hogex111")
@@ -246,17 +246,17 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
              0
              0
 
-: �����ʥ� [bug]
+: シグナル [bug]
 
 #Sun Oct 16 03:38:07 2005  Yukihiro Matsumoto  <matz@ruby-lang.org>
 #
 #       * rubysig.h (CHECK_INTS): prevent signal handler to run during
 #         critical section.  [ruby-core:04039]
 
-    �����ʥ�ϥ�ɥ�μ¹Ԥϥ���ƥ����륻������󤬽�λ����ޤ�
-    �ٱ䤵���褦�ˤʤ�ޤ�����((<ruby-core:04039>))
+    シグナルハンドラの実行はクリティカルセクションが終了するまで
+    遅延されるようになりました。((<ruby-core:04039>))
 
-== �Ȥ߹��ߥ饤�֥��
+== 組み込みライブラリ
 
 #Thu Dec  8 02:07:19 2005  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 #
@@ -265,8 +265,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 
 : UnboundMethod#bind [bug]
 
-    UnboundMethod#bind���줿�⥸�塼��Υ��󥹥��󥹥᥽�å����
-    super��Ȥ��ʤ��ä��Х��������ޤ�����((<ruby-dev:27964>))
+    UnboundMethod#bindされたモジュールのインスタンスメソッド中で
+    superを使えなかったバグを修正しました。((<ruby-dev:27964>))
 
         module Foo
           def initialize
@@ -297,8 +297,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         class/module that defines calling method.  [ruby-talk:169307]
 #
 
-    ���饹�᥽�åɤμ¹Ի��ˡ�������줿���饹�ǤϤʤ��᥿���饹��
-    trace���Ϥ���Ƥ����Х��ν�����((<ruby-talk:169307>))
+    クラスメソッドの実行時に、定義されたクラスではなくメタクラスが
+    traceに渡されていたバグの修正。((<ruby-talk:169307>))
 
 : set_trace_func [change]
 
@@ -307,7 +307,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * eval.c (set_trace_func): add rb_secure(4) to prevent adding
 #         tracing function.
 
-    $SAFE=4��trace_func���ɲä�ػߡ�
+    $SAFE=4でtrace_funcの追加を禁止。
 
 : printf [bug]
 
@@ -317,8 +317,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * sprintf.c (GETASTER): ditto.
 
-    printf�Υե����ޥåȻ���Ҥ�integer overflow�ΥХ�������ޤ�����
-    perl �Τ���Ȥϰ㤤���������ƥ��Х��Ϥʤ������Ǥ���
+    printfのフォーマット指定子にinteger overflowのバグがありました。
+    perl のそれとは違い、セキュリティバグはないそうです。
     ((<URL:http://www.rubyist.net/~matz/20051207.html#p01>))
 
         # ruby 1.8.4 (2005-12-01) [i686-linux]
@@ -332,8 +332,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
         printf("%4294967297$d\n", 1)    # 1
         printf("%4294967298$d\n", 1, 2) # 2
 
-        # 1.8.4 �Ǥϡ��嵭��Ϥ��٤ưʲ��Υ��顼�ˤʤ�ޤ���
-        # %xx$ �˻���Ǥ�������ͤ� 2147483647 �Ǥ���
+        # 1.8.4 では、上記例はすべて以下のエラーになります。
+        # %xx$ に指定できる最大値は 2147483647 です。
         # -e:1:in `printf': width too big (ArgumentError)
 
 : Hash [bug]
@@ -343,8 +343,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * re.c (KR_REHASH): should cast to unsigned for 64bit CPU.
 #         [ruby-core:06721]
 
-    sizeof(long) > sizeof(int) �ʴĶ��ǡ��ϥå���ؿ��Υ����С�
-    �ե����Τ����String�򥭡��Ȥ���Hash�θ��������Ԥ��Ƥ����Х��ν�����
+    sizeof(long) > sizeof(int) な環境で、ハッシュ関数のオーバー
+    フローのためにStringをキーとしたHashの検索が失敗していたバグの修正。
     ((<ruby-core:06721>))
 
 : test [bug]
@@ -358,13 +358,13 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * win32.h, win32.c (rb_w32_osid): check the running platform.
 
-    i-node������ʤ������ƥ�(Windows��)��test(?-, ...)�����true���֤�
-    �Ƥ����Х�������((<ruby-core:06672>))
+    i-nodeを持たないシステム(Windows等)でtest(?-, ...)が常にtrueを返し
+    ていたバグを修正。((<ruby-core:06672>))
 
 : File.identical? [new]
 : FileTest.identical? [new]
 
-    test(?-, ...) �����إ᥽�åɤȤ����ɲá�
+    test(?-, ...) の代替メソッドとして追加。
 
 : File.split [change]
 : File.basename [change]
@@ -377,8 +377,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * test/ruby/test_path.rb (test_dirname, test_basename): follow new
 #         spec. and add new tests.
 
-    UNC�ѥ����Ф���File.dirname��File.basename��File.split�λ���
-    ���ѹ�����(UNC�򥵥ݡ��Ȥ���ץ�åȥե�����Τ�)��
+    UNCパスに対するFile.dirname・File.basename・File.splitの仕様
+    を変更した(UNCをサポートするプラットフォームのみ)。
 
       File.split("//aaa")      #=> old: ["//", "aaa"]  new:["//aaa", "/"]
       File.split("//aaa/")     #=> old: ["//", "aaa"]  new:["//aaa", "/"]
@@ -386,7 +386,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
       File.split("//aaa/bbb/") #=> old:["//aaa", "bbb"]  new:["//aaa/bbb", "/"]
       File.split("///aaa")     #=> old:["//", "aaa"]  new:["//aaa", "/"]
 
-: Dir.glob (Win����) [bug]
+: Dir.glob (Win全般) [bug]
 
 #Tue Nov 22 13:18:32 2005  Hirokazu Yamamoto  <ocean@m2.ccsnet.ne.jp>
 #
@@ -395,20 +395,20 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         stat(2) on WinNT) [ruby-list:41552] [ruby-dev:27711]
 #
 
-    ��ͭ�ե�����ζ�ͭ̾���Ф��� Dir.glob �����Ԥ��Ƥ����Τ������ʤ�
-    ���WinNT �ˤ����롢��󥿥���饤�֥��� stat �ΥХ����Ȼפ��˼�
-    ���� stat ��������뤳�Ȥǲ��򤷤���((<ruby-list:41552>)),((<ruby-dev:27711>))
+    共有フォルダの共有名に対する Dir.glob が失敗していたのを修正。（こ
+    れはWinNT における、ランタイムライブラリの stat のバグだと思う）自
+    前で stat を実装することで回避した。((<ruby-list:41552>)),((<ruby-dev:27711>))
 
-: File.basename (Win����) [change]
+: File.basename (Win全般) [change]
 
 #Tue Nov 22 01:45:21 2005  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 #
 #       * file.c (rb_file_s_basename): DOSISH_UNC is defined on cygwin but
 #         DOSISH is not.  fixed: [ruby-dev:27797]
 
-    �Դ�����UNC��ʬ�䤷�ʤ��褦�ˤ�����((<ruby-dev:27797>))
+    不完全なUNCを分割しないようにした。((<ruby-dev:27797>))
 
-: File.dirname (Win����) [bug]
+: File.dirname (Win全般) [bug]
 
 #Fri Nov 18 17:26:06 2005  NAKAMURA Usaku  <usa@ruby-lang.org>
 #
@@ -418,8 +418,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * test/ruby/test_path.rb (test_dirname): added tests for above
 #         patterns.
 
-    �ɥ饤�֥쥿����ޤ�ѥ����Ф���File.dirname�������������
-    (�ɥ饤�֥쥿���򥵥ݡ��Ȥ���ץ�åȥե�����Τ�)��((<ruby-dev:27738>))
+    ドライブレターを含むパスに対するFile.dirnameの問題を修正した
+    (ドライブレターをサポートするプラットフォームのみ)。((<ruby-dev:27738>))
 
       File.dirname("C:a/b")  #=> old: "C:a."  new: "C:a"
       File.dirname("C:a///") #=> old: "C:a///"  new: "C:a"
@@ -431,8 +431,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * win32/win32.h (S_IFIFO): r,w = IO.pipe; r.stat.pipe? now
 #         returns true on VisualC++6.
 
-    VisualC++ 6 �Ǥ� S_IFIFO ���ʤ� _S_IFIFO �����������Ƥ��ʤ����ᡢ
-    �ѥ��פ��Ф��� stat.pipe? �� false ���֤��Ƥ����Τ�����
+    VisualC++ 6 では S_IFIFO がなく _S_IFIFO しか定義されていないため、
+    パイプに対する stat.pipe? が false を返していたのを修正。
 
 : Array#fill [bug]
 
@@ -441,7 +441,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * array.c (rb_ary_fill): should adjust array length correctly when
 #         an array is expanded in the fill process.  [ruby-core:06625]
 
-    Array���Ф���fill��pop�򷫤��֤���SEGV����Х��������ޤ�����((<ruby-core:06625>))
+    Arrayに対してfillとpopを繰り返すとSEGVするバグを修正しました。((<ruby-core:06625>))
 
 : String#scan [bug]
 
@@ -450,10 +450,10 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * string.c (scan_once): wrong condition to use mbclen2().
 #         [ruby-dev:27535]
 
-    String#scan�ǡ�����ʸ���ˡ�*��(0��ʾ�η����֤�)���դ���ȡ���
-    ʸ����˥ޥå������Ȥ��μ���ʸ����¿�Х���ʸ���ΤȤ��˥ޥå���
-    ���ϰ��֤�����뤳�Ȥ�����Х��ν�����((<ruby-dev:27535>))
-# �Ǥ��äƤ�Τ���?
+    String#scanで、全角文字に「*」(0回以上の繰り返し)を付けると、空
+    文字列にマッチしたときの次の文字が多バイト文字のときにマッチの
+    開始位置がずれることがあるバグの修正。((<ruby-dev:27535>))
+# であってるのかな?
 
 : File.join [bug]
 
@@ -462,8 +462,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * file.c (rb_file_join): elements may contain null pointer strings.
 #         report and fixed by Lloyd Zusman (hippoman): [ruby-core:06326]
 
-    NULL�ݥ��󥿤����String���Ϥ���File.join��SEGV���뤳�Ȥ����ä�
-    �Х��ν�����((<ruby-core:06326>))
+    NULLポインタを持つStringを渡すとFile.joinがSEGVすることがあった
+    バグの修正。((<ruby-core:06326>))
 
 : Thread#pass [bug]
 
@@ -475,7 +475,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * eval.c (rb_thread_schedule): clear rb_thread_critical.
 #         [ruby-core:04039]
 
-    Thread#pass��Ƥ֤�Thread.critical�����ꥢ�����褦�ˤʤ�ޤ�����
+    Thread#passを呼ぶとThread.criticalがクリアされるようになりました。
     ((<ruby-core:04039>))
 
 : Module#const_missing [bug]
@@ -488,8 +488,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * variable.c (rb_autoload_load): now return true if autoload
 #         succeeded.  fixed: [ruby-dev:27331]
 
-    const_missing�����������Ƥ��Ƽ¹Ԥ��³��������SEGV�����ǽ��
-    �����ä��Х��ν�����((<ruby-dev:27331>))
+    const_missingが再定義されていて実行を継続した場合にSEGVする可能性
+    があったバグの修正。((<ruby-dev:27331>))
 
 : IO [bug]
 
@@ -497,69 +497,69 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * io.c (read_buffered_data): check if reached EOF.  fixed: [ruby-dev:27334]
 
-    Solaris(64bit?)�ʤɤ�EOF��˥��ߤ��ɤ߽Ф����Ȥ����ä��Х�������
+    Solaris(64bit?)などでEOF後にゴミを読み出すことがあったバグを修正。
     ((<ruby-dev:27334>))
 
-== ź�ե饤�֥��
+== 添付ライブラリ
 
 : Ruby/Tk
 
-    * �б��С������
+    * 対応バージョン
 
-       Tcl7.6/Tk4.2, Tcl/Tk8.0 �� 8.4.12, Tcl/Tk8.5a1 �� a3
+       Tcl7.6/Tk4.2, Tcl/Tk8.0 〜 8.4.12, Tcl/Tk8.5a1 〜 a3
 
-       Tcl/Tk ��ĥ�饤�֥��ˤĤ��Ƥ�
+       Tcl/Tk 拡張ライブラリについては
 
-          ActiveTcl8.4.12.0 �ޤ��Ϥ������
-          ( beta �� �� ActiveTcl8.5.0.0b4 �ޤ��Ϥ������ )
+          ActiveTcl8.4.12.0 またはそれ以前
+          ( beta 版 は ActiveTcl8.5.0.0b4 またはそれ以前 )
 
-       �˴ޤޤ���Τ��б����Ƥ��ޤ���
+       に含まれるものに対応しています．
 
-       �б����Ƥ��� Tcl/Tk ��ĥ�μ���ȥС������Ȥ�
+       対応している Tcl/Tk 拡張の種類とバージョンとは
           ext/tk/lib/tkextlib/SUPPPORT_STATUS
-            �ޤ���
+            または
           <installed lib dir>/tkextlib/SUPPORT_STATUS
-       �򻲾Ȥ��Ƥ���������
+       を参照してください．
 
-       ��������Tcl/Tk ��ĥ�ΥС������ε��Ҥϡ��б���Ԥä��ǿ���
-       ��Τ򼨤��Ƥ��ޤ��Τǡ����Ҥ��줿�����ΥС������Ǥ��äƤ⡤
-       ��ü�˸Ť��ʤ��¤���б��Ǥ��Ƥ���Ϥ��Ǥ���
+       ただし，Tcl/Tk 拡張のバージョンの記述は，対応を行った最新の
+       ものを示していますので，記述された以前のバージョンであっても，
+       極端に古くない限りは対応できているはずです．
 
-       �ƥ饤�֥��ؤ��б��Τ�����ѹ������
+       各ライブラリへの対応のための変更履歴は
           ext/tk/ChangeLog.tkextlib
-       �򻲾Ȥ��Ƥ���������
+       を参照してください．
 
-    * ����ץ륹����ץ�
+    * サンプルスクリプト
 
        : ext/tk/sample/scrollframe.rb [new]
 
-          ���֤������������åȤ�ɽ���ϰϤ򥹥������뤹�뤳�Ȥ�
-          �Ǥ���褦�ʥ���������С��դ��ե졼�०�������åȥ�
-          �饹�Υ���ץ��饤�֥��
+          配置したウィジェットの表示範囲をスクロールすることが
+          できるようなスクロールバー付きフレームウィジェットク
+          ラスのサンプル兼ライブラリ
 
 #Wed Dec  7 01:02:04 2005  Hidetoshi NAGAI  <nagai@ai.kyutech.ac.jp>
 #
 #       * ext/tk/README.macosx-aqua: [new document] tips to avoid the known
 #         bug on platform specific dialogs of Tcl/Tk Aqua on MacOS X.
 
-    MacOS X ��� Aqua �Ǥ� Tcl/Tk ���Ѥ����ݡ�Aqua ��ͭ�Υ���������ɽ����
-    �ե꡼�����Ƥ��ޤ��Ȥ��� known bug �β�����򵭺ܤ����ɥ������
-    (ext/tk/README.macosx-aqua) ���ɲä���ޤ�����
+    MacOS X 上で Aqua 版の Tcl/Tk を用いた際，Aqua 特有のダイアログ表示で
+    フリーズしてしまうという known bug の回避策を記載したドキュメント
+    (ext/tk/README.macosx-aqua) が追加されました．
 
 #Wed Dec  7 01:02:04 2005  Hidetoshi NAGAI  <nagai@ai.kyutech.ac.jp>
 #
 #       * ext/tk/tcltklib.c: fix bug on switching threads and waiting on the
 #         deleted interpreter on vwait and tkwait command.
 
-    ������줿 Tk ���󥿡��ץ꥿���Ф��� vwait �� tkwait �Ǥν����Ԥ���
-    ��λ�������Ԥ�³���Ƥ��ޤ���ǽ��������Ȥ����Х��������ޤ�����
+    削除された Tk インタープリタに対して vwait や tkwait での処理待ちを
+    終了せずに待ち続けてしまう可能性があるというバグを修正しました．
 
 #
 #       * ext/tk/lib/multi-tk.rb: kill the meaningless loop for the deleted Tk
 #         interpreter.
 
-    MultiTkIp ���������� Tk ���󥿡��ץ꥿����������⡤
-    ���פȤʤä��Ϥ��Υ���åɤ�ư��³����Х��������ޤ�����
+    MultiTkIp で生成した Tk インタープリタを削除した後も，
+    不要となったはずのスレッドが動き続けるバグを修正しました．
 
 #Wed Nov 23 20:59:01 2005  Hidetoshi NAGAI  <nagai@ai.kyutech.ac.jp>
 #
@@ -570,24 +570,24 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         widget [Tk8.5 feature].
 #
 
-    Tcl/Tk8.5a3 �ؤ��б��Τ��ᡤTk.pkgconfig_list ����� Tk.pkgconfig_get
-    ���ɲä���ޤ�����
-    Ʊ�ͤ� Tcl/Tk8.5a3 �ؤ��б��Τ��ᡤ�ƥ����ȥ��������åȾ�Υ���ǥå�
-    ������ˤ����뿷���� modifier �Ǥ��� indices ���б����ޤ�����
+    Tcl/Tk8.5a3 への対応のため，Tk.pkgconfig_list および Tk.pkgconfig_get
+    が追加されました．
+    同様に Tcl/Tk8.5a3 への対応のため，テキストウィジェット上のインデック
+    ス指定における新しい modifier である indices に対応しました．
 
 #       * ext/tk/lib/tk/virtevent.rb: add TkNamedVirtualEvent.
 #
 
-    Tcl/Tk ���̾�������ꤵ��Ƥ��벾�ۥ��٥�Ȥλ��ꤷ�����ۥ��٥�ȥ���
-    �������Ȥ������򾯤��ưפˤ��뤿�ᡤTkNamedVirtualEvent ����̾�Ȥ���
-    �������ޤ�����
+    Tcl/Tk 上で名前が規定されている仮想イベントの指定した仮想イベントオブ
+    ジェクトの生成を少し容易にするため，TkNamedVirtualEvent が別名として
+    定義されました．
 
 #       * ext/tk/lib/tk/event.rb: add :data key for virtual events [Tk8.5
 #         feature].
 #
 
-    Tcl/Tk8.5 �ؤ��б��Τ��ᡤ���ۥ��٥�ȤΥ��٥�Ⱦ���ΰ�ĤǤ��� data
-    �����ξ���� :data �ǻ���Ǥ���褦�ˤʤ�ޤ�����
+    Tcl/Tk8.5 への対応のため，仮想イベントのイベント情報の一つである data
+    キーの情報を :data で指定できるようになりました．
 
 #Fri Nov 18 17:35:09 2005  Hidetoshi NAGAI  <nagai@ai.kyutech.ac.jp>
 #
@@ -602,35 +602,35 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         to check manipulability.
 #
 
-    �������ƥ�����������򤹤뤿�ᡤMultiTkIp �ˤ����� IP ���֥�������
-    ��Ǥ������Ĥ����Τϡ���������ƤӽФ����Ķ� (����å�) �� IP 
-    ���֥������Ȥ��ǥե���Ȥ� IP ���֥������� (�ǥե���ȤΥ���åɥ��롼
-    �פ�°�����Ρ�require 'multi-tk' �κݤ����������) �Ǥ��뤫����
-    �褦�Ȥ��Ƥ��� IP ���֥������Ȥ������ľ�ܤ� slave IP �Ǥ��뤫�ξ���
-    �¤���褦�ˤʤ�ޤ�����
+    セキュリティ上の問題を回避するため，MultiTkIp において IP オブジェクト
+    上での操作が許可されるのは，その操作を呼び出した環境 (スレッド) の IP 
+    オブジェクトがデフォルトの IP オブジェクト (デフォルトのスレッドグルー
+    プに属するもの．require 'multi-tk' の際に生成される) であるか，操作し
+    ようとしている IP オブジェクトが自らの直接の slave IP であるかの場合に
+    限られるようになりました．
 
-    ���ν����ˤ�ꡤIP ���֥������Ȥ�������������뤳�Ȥǡ����� IP ������
-    ������ʤ��Ϥ���¾�� IP �����Ǥ��Ƥ��ޤ������򸺾������ޤ�����������
-    ObjectSpace �˥�����������ľ�ܤ� TclTkIp ���֥������Ȥ���Ф������
-    ����뤳�Ȥϲ���Ǥ��ޤ���Τǡ������դ���������
+    この修正により，IP オブジェクトの入手に成功することで，ある IP が権限
+    を持たないはずの他の IP を操作できてしまう危険を減少させます．ただし，
+    ObjectSpace にアクセスし，直接に TclTkIp オブジェクトを取り出して操作
+    されることは回避できませんので，ご注意ください。
 
 #       * ext/tk/lib/tk.rb: bug fix on handling of Tcl's namespaces.
 #
 #       * ext/tk/lib/tk/namespace.rb: ditto.
 #
 
-    Tcl/Tk ��� namespace �ΰ���������˹Ԥ��ʤ��Ȥ����Х��������ޤ�����
+    Tcl/Tk 上の namespace の扱いが正常に行えないというバグを修正しました．
 
 #Wed Nov  2 20:14:53 2005  Hidetoshi NAGAI  <nagai@ai.kyutech.ac.jp>
 #
 #       * ext/tcltklib: merge into ext/tk and remove.
 #
 
-    Ruby �Υ�������� tcltklib �� tk �Ȥ� Ruby 1.9 �Ϥ�Ʊ�ͤ˰��β����ޤ����� 
-    ����ˤ�ꡤtcltklib �������˼��Ԥ����Ķ��ǡ�ư���Ϥ��Τʤ� tk �Υ饤
-    �֥��ե����뷲�����󥹥ȡ��뤵��Ƥ��ޤ����Ȥ��򤱤��ޤ���
-    ����ϥ������˴ޤޤ�� tcltklib ��Ϣ�Υɥ�����Ȥ򻲾Ȥ�����ˤ�
-    ext/tk �ǥ��쥯�ȥ�β��򸫤Ƥ���������
+    Ruby のソース上で tcltklib と tk とを Ruby 1.9 系と同様に一体化しました． 
+    これにより，tcltklib の生成に失敗した環境で，動くはずのない tk のライ
+    ブラリファイル群がインストールされてしまうことが避けられます．
+    今後はソースに含まれる tcltklib 関連のドキュメントを参照する場合には
+    ext/tk ディレクトリの下を見てください．
 
 #Wed Nov  2 19:03:06 2005  Hidetoshi NAGAI  <nagai@ai.kyutech.ac.jp>
 #
@@ -640,9 +640,9 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * ext/tk/tkutil.c: use rb_obj_respond_to() instead of rb_respond_to().
 #
 
-    update ��������Ŭ�ڤǤ��뤿��ˡ������δĶ��� menubar �Υ�˥塼���ܤ�
-    ��Ͽ�����������¹Ԥ���ʤ���礬����Ȥ����Х� (ruby-1.8.3 �� enbug ��
-    �Ƥ������) �������ޤ�����
+    update 処理が不適切であるために，一部の環境で menubar のメニュー項目に
+    登録した処理が実行されない場合があるというバグ (ruby-1.8.3 で enbug し
+    ていたもの) を修正しました．
 
 #       * ext/tk/lib/tk.rb, ext/tk/lib/tk/canvas.rb, ext/tk/lib/tk/entry.rb,
 #         ext/tk/lib/tk/frame.rb, ext/tk/lib/tk/image.rb,
@@ -655,24 +655,24 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * ext/tk/lib/tkextlib/*: ditto.
 #
 
-    ���������åȥ��֥������Ȥ�°�����Ȥ򤷤�����°���ͤȤ����֤����֥���
-    ���Ȥ���Ŭ�ڤʤ�Τˤ���褦�˲������ޤ���������������������Ǥ�����
-    �Ȼפ��ޤ�����������°���ˤ����ơ��֤����Τ�ʸ����Ǥ��뤳�Ȥ���Ԥ�
-    �ƥ�����ץȤ�񤤤Ƥ�����ˤϽ�����ɬ�פˤʤ��礬����ޤ���
+    ウィジェットオブジェクトの属性参照をした場合に属性値として返すオブジェ
+    クトをより適切なものにするように改善しました．その方がより便利であろう
+    と思いますが，一部の属性において，返されるのが文字列であることを期待し
+    てスクリプトを書いている場合には修正が必要になる場合があります．
 
-    �㤨�� bool �ͤ��֤�°���ˤĤ��Ƥ� true �ޤ��� false ���֤��褦�ˤʤ�
-    �ޤ�����äơ�����ͤ� "1", "0" ��ʸ���󡤤��뤤�� 1, 0 �ο��ͤǤ��뤳
-    �Ȥ���Ԥ��Ƥ�����ˤϽ�����ɬ�פȤʤ�ޤ������衤Tcl/Tk �ο����ͤ�
-    ¾�ˤ� "true", "false", "yes", "no" �ʤɤ⤢��ޤ��Τǡ��ͤο���Ƚ���
-    TkComm.bool (TkUtil.bool) �᥽�åɤ�Ȥä�Ƚ�ꤹ�뤳�Ȥ�侩���ޤ���
+    例えば bool 値を返す属性については true または false を返すようになり
+    ます．よって，戻り値が "1", "0" の文字列，あるいは 1, 0 の数値であるこ
+    とを期待している場合には修正が必要となります．本来，Tcl/Tk の真偽値は
+    他にも "true", "false", "yes", "no" などもありますので，値の真偽判定は
+    TkComm.bool (TkUtil.bool) メソッドを使って判定することを推奨します．
 
-    �ޤ���Tcl/Tk ����ѿ���������Ƥ��Ƥ���°���ˤ����ơ�°���ͤȤ���
-    Tcl/Tk ����ѿ�̾��ʸ����ǤϤʤ� TkVariable ���֥������Ȥ��֤�����
-    ���ˤʤ�ޤ����֤��줿�ͤ��̤Υ��������åȤ�°���ͤȤ���ʤɤǤ��Τޤ�
-    Tk ���󥿡��ץ꥿���Ϥ��Ƥ������ TkVarAccess.new(val) �� TkVariable
-    ���֥������Ȳ����Ƥ����� (val �Ǥ��� TkVariable ���֥������Ȥ����Τ�
-    ���֤���ޤ�) �ˤϸߴ������ݤ���ޤ������֤��줿�ͤ򤽤Τޤ�ʸ�������
-    �Ӥ��Ƥ���褦�ʾ��ˤ���ߴ��Ȥʤ�ޤ���
+    また，Tcl/Tk 上の変数が割り当てられている属性において，属性値として
+    Tcl/Tk 上の変数名の文字列ではなく TkVariable オブジェクトが返されるよ
+    うになります．返された値を別のウィジェットの属性値とするなどでそのまま
+    Tk インタープリタに渡している場合や TkVarAccess.new(val) で TkVariable
+    オブジェクト化している場合 (val である TkVariable オブジェクトがそのま
+    ま返されます) には互換性が保たれますが，返された値をそのまま文字列と比
+    較しているような場合には非互換となります．
 
 : REXML [compat]
 
@@ -681,8 +681,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/rexml/encoding.rb (encoding=): give priority to particular
 #         conversion to iconv.  [ruby-core:06520]
 
-    ���ܸ�Υ��󥳡��ǥ����Ѵ���iconv����nkf��ͥ�褷�ƻ��Ѥ���褦�ˤ�
-    �ޤ�����((<ruby-list:41325>)), ((<ruby-core:06520>))
+    日本語のエンコーディング変換にiconvよりもnkfを優先して使用するようにし
+    ました。((<ruby-list:41325>)), ((<ruby-core:06520>))
 
 : TCPSocket#initialize [bug]
 : TCPServer#initialize [bug]
@@ -694,8 +694,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         fixed: [ruby-core:6765] ([ ruby-Bugs-2872 ])
 #
 
-    Cygwin�ξ��Τߡ�������socket���Ф����accept��Errno::EADDRINUSE 
-    �㳰�ˤʤäƤ��ʤ��ä���((<ruby-core:6765>)),((<ruby-bugs:2872>)),((<ruby-dev:27818>))
+    Cygwinの場合のみ、使用中socketに対する再acceptがErrno::EADDRINUSE 
+    例外になっていなかった。((<ruby-core:6765>)),((<ruby-bugs:2872>)),((<ruby-dev:27818>))
 
 : optparse
 
@@ -704,8 +704,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/optparse.rb: match incomplete (in current enconding) multibyte
 #         string.  http://inamode6.tokuhirom.dnsalias.org/show/1551
 
-    $KCODE��̵���ʥޥ���Х���ʸ����䡢���Ԥ�ޤ�ʸ������������
-    �����ڤ�ΤƤ��Ƥ����Х��ν�����
+    $KCODEで無効なマルチバイト文字列や、改行を含む文字列を引数に渡
+    すと切り捨てられていたバグの修正。
 
         require "optparse"
 
@@ -715,15 +715,15 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
           opt.parse!
         end
 
-        >ruby -v -Ku a.rb -n ����
+        >ruby -v -Ku a.rb -n 時間
         ruby 1.8.2 (2004-12-25) [i386-mswin32]
-        [-n, ����]
-        ��
+        [-n, 時間]
+        時
 
-        >ruby -v -Ku a.rb -n ����
+        >ruby -v -Ku a.rb -n 時間
         ruby 1.8.4 (2005-12-16) [i686-linux]
-        [-n, ����]
-        ����
+        [-n, 時間]
+        時間
 
 : find
 
@@ -732,8 +732,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/find.rb (Find::find): should not ignore symbolic links to
 #         non-existing files.  [ruby-talk:165866]
 
-    broken symbolic link(¸�ߤ��ʤ��ե�������Ф��륷��ܥ�å����
-    ��)���֤��褦�ˤʤ�ޤ�����((<ruby-talk:165866>))
+    broken symbolic link(存在しないファイルに対するシンボリックリン
+    ク)も返すようになりました。((<ruby-talk:165866>))
 
 : Iconv
 
@@ -742,12 +742,12 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * ext/iconv/iconv.c (Iconv::BrokenLibrary): exception when detected a
 #         bug of underlying library.
 
-    errno�����������åȤ���ʤ��ä��Ȥ����㳰���ɲ�(Windows��
-    iconv.dll�λ��Ѥ���MSVC runtime DLL�ΥС�����󤬡�ruby���Τ���
-    �Ѥ����ΤȰ��פ��Ƥ��ʤ�����ޤ�)
+    errnoが正しくセットされなかったときの例外を追加(Windowsで
+    iconv.dllの使用するMSVC runtime DLLのバージョンが、ruby本体が使
+    用するものと一致していない場合も含む)
 
-    �����ruby��ext/iconv���ȤΥХ��ǤϤʤ��ơ��¹Ի��δĶ������꤬
-    ������β�����Ǥ���
+    これはrubyやext/iconv自身のバグではなくて、実行時の環境に問題が
+    ある場合の回避策です。
 
 #: OpenSSL
 #Wed Nov 23 07:26:44 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
@@ -763,7 +763,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * test/openssl/test_x509ext.rb: new file.
 #
-# ��
+# ？
 
 #Tue Nov 01 10:50:17 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
 #
@@ -772,7 +772,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * ext/openssl/ossl.c (ossl_raise): ditto.
 #
-# ��
+# ？
 
 #Mon Oct 31 05:49:23 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
 #
@@ -781,14 +781,14 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * test/openssl/test_cipher.rb: add test for Cipher#update("").
 #
-# ��
+# ？
 
 #Wed Oct 12 12:52:57 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
 #
 #       * ext/openssl/ossl.c (Init_openssl): should call
 #         OpenSSL_add_ssl_algorithms().
 #
-# ��
+# ？
 
 #: WEBrick
 #Mon Oct 31 05:37:20 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
@@ -803,7 +803,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * test/webrick/test_cookie.rb, test/webrick/test_cgi.rb,
 #         test/webrick/webrick.cgi: add some test for cookie.
 #
-# ��
+# ？
 
 : WEBrick::Config::FileHandler [compat]
 
@@ -813,9 +813,9 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         It is harmful to permit the access to ~/public_html by default.
 #         suggested by Hiroyuki Iwatsuki.
 
-    WEBrick::Config::FileHandler[:UserDir]�Υǥե�����ͤ� 
-    "public_html"����nil�ˤʤꡢ�տޤ����˥桼���ǥ��쥯�ȥ�
-    (/~user/public_html)�ʲ�����������뤳�Ȥ��ʤ��ʤ�ޤ�����
+    WEBrick::Config::FileHandler[:UserDir]のデフォルト値が 
+    "public_html"からnilになり、意図せずにユーザディレクトリ
+    (/~user/public_html)以下が公開されることがなくなりました。
     [webrickja:148]
 
 : WEBrick
@@ -825,8 +825,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/webrick/cgi.rb (WEBrick::CGI#start): req.query_string should
 #         refer the value of QUERY_STRING. [ruby-list:41186]
 
-    WEBrick::CGI#start��req.query_string�����ꥸ�ʥ��
-    QUERY_STRING��ؤ��褦�ˡ�
+    WEBrick::CGI#startでreq.query_stringがオリジナルの
+    QUERY_STRINGを指すように。
 
 : WEBrick::HTTPRequest#query_string= [new]
 
@@ -835,7 +835,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/webrick/httprequest.rb (WEBrick::HTTPRequest#query_string=):
 #         add new method.
 
-    �᥽�å��ɲá�
+    メソッド追加。
 
 : Readline [bug]
 
@@ -844,7 +844,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * ext/readline/readline.c (readline_readline): type check.
 #         [ruby-core:6089]
 
-    IO�ʳ���$stdout�˥��åȤ����readline��SEGV���Ƥ����Х��ν�����((<ruby-core:6089>))
+    IO以外を$stdoutにセットするとreadlineでSEGVしていたバグの修正。((<ruby-core:6089>))
 
 : Syck [bug]
 
@@ -868,7 +868,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         newly allocated memory. otherwise, type_id will be freed
 #         twice. [ruby-dev:27384] [ruby-core:6385]
 
-    syck �Υ���Х�������((<ruby-dev:27384>)), ((<ruby-core:6385>)) ((<ruby-dev:27839>))
+    syck のメモリバグを修正。((<ruby-dev:27384>)), ((<ruby-core:6385>)) ((<ruby-dev:27839>))
 
 : irb [bug]
 
@@ -877,8 +877,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/irb.rb (IRB::Irb::eval_input): handle prompts with newlines
 #         in irb auto-indentation mode.  [ruby-core:06358]
 
-    irb�Υץ���ץȤ˲���ʸ�����ޤޤ�Ƥ���Ȥ��˥����ȥ���ǥ�Ȥ�
-    �����Х��ν�����((<ruby-core:06358>))
+    irbのプロンプトに改行文字が含まれているときにオートインデントが
+    ずれるバグの修正。((<ruby-core:06358>))
 
 : RDoc [bug]
 
@@ -887,7 +887,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/rdoc/markup/simple_markup.rb (SM::SimpleMarkup::LABEL_LIST_RE):
 #         reduce redundant backtrack.  [ruby-talk:161771]
 
-    ����ɽ���ΥХå��ȥ�å��������ʤꤹ���Ƽ��Ԥ��뤳�Ȥ����ä��Х�������
+    正規表現のバックトラックが深くなりすぎて失敗することがあったバグを修正。
     ((<ruby-talk:161771>))
 
 : Win32API [bug]
@@ -898,7 +898,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         fixed: [ruby-list:40058], [ruby-dev:27479]
 #
 
-    DNS���ư��ʣ�����ꤷ������������ư��Ƥ��ʤ��ä��Х�������
+    DNSを手動で複数設定した場合に正しく動作していなかったバグを修正。
     ((<ruby-list:40058>)), ((<ruby-dev:27496>))
 
 : Rinda [bug]
@@ -910,7 +910,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * test/rinda/test_rinda.rb: test it.
 
-    Hash���Τ�dump�Ǥ��ʤ����֥������ȤȤ��ư����Ƥ��ޤ�����
+    Hash全体がdumpできないオブジェクトとして扱われていました。
     ((<ruby-list:41227>))
 
 : Iconv [compat]
@@ -919,11 +919,11 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * ext/iconv/charset_alias.rb: parse config.charset_alias file directly.
 
-    iconv/charset_alias �ˤ����ơ�Windows��Ǥ�encoding̾����̾�ơ�
-    �֥����������褦�ˤ�����
+    iconv/charset_alias において、Windows上でもencoding名の別名テー
+    ブルを生成するようにした。
 
-    iconv/charset_alias �ϡ����󥳡��ǥ���̾�Υץ�åȥե������
-    ���㤤��ۼ����뤿��Υ桼�ƥ���ƥ��Ǥ����ܺ٤ϡ�((<iconv>)) ���ȡ�
+    iconv/charset_alias は、エンコーディング名のプラットフォームに
+    よる違いを吸収するためのユーティリティです。詳細は、((<iconv>)) 参照。
 
 : cgi [bug]
 
@@ -933,7 +933,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         not be parsed correctly.  A patch from August Z. Flatby
 #         (augustzf) in [ruby-Patches-2595].  [ruby-core:06183]
 
-    NOKIA�η���(?)�����Cookie���������ѡ����Ǥ��ʤ��ä�����ν�����
+    NOKIAの携帯(?)からのCookieを正しくパースできなかった問題の修正。
     ((<ruby-Patches:2595>)), ((<ruby-core:06183>))
 
 # : xmlrpc
@@ -943,14 +943,14 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/xmlrpc/server.rb (XMLRPC::Server#initialize): should mount the
 #         servlet on "/".
 #
-# ��
+# ？
 
 #Wed Oct 05 03:59:09 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
 #
 #       * lib/xmlrpc/server.rb (XMLRPC::Server#serve): delete wrong call
 #         of "join".
 #
-# ��
+# ？
 
 : DL [bug]
 
@@ -959,7 +959,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * ext/dl/dl.c (rb_io_to_ptr): abolish sizeof(FILE).
 #         [ruby-dev:27317]
 
-    FILE���Դ������Ȥ��Ƥ����������ʤ��Ķ����б���((<ruby-dev:27317>))
+    FILEが不完全型としてしか定義されない環境に対応。((<ruby-dev:27317>))
 
 : fileutils [bug]
 
@@ -974,8 +974,8 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * test/fileutils/test_verbose.rb: new file.
 
-    FileUtils::NoWrite, Verbose, DryRun �Υ᥽�åɤ��Ƥ٤ʤ��ʤäƤ���
-    �Τ������ޤ�����((<ruby-core:05954>))
+    FileUtils::NoWrite, Verbose, DryRun のメソッドが呼べなくなっていた
+    のを修正しました。((<ruby-core:05954>))
 
 : extmk, mkmf [compat]
 
@@ -985,7 +985,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         options.  [ruby-dev:27449]
 #
 
-    --with-extention ���ץ�����ɲá�((<ruby-dev:27449>))
+    --with-extention オプション追加。((<ruby-dev:27449>))
 
 : mkmf: find_executable() [compat]
 
@@ -994,14 +994,14 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * lib/mkmf.rb (find_executable0): default path if environment is not
 #         set.  [ruby-dev:27281]
 
-  �¹ԥե������õ������Ȥ��˴Ķ��ѿ� PATH �����åȤ���Ƥ�
-  �ʤ������θ���ޤ�����((<ruby-dev:27281>))
+  実行ファイルを探索するときに環境変数 PATH がセットされてい
+  ない場合を考慮しました。((<ruby-dev:27281>))
 
-  PATH �����åȤ���Ƥ��ʤ����ϡ�
+  PATH がセットされていない場合は、
     /usr/local/bin:/usr/ucb:/usr/bin:/bin
-  ��PATH����������Ѥ��Ƥ������饳�ޥ�ɤ�õ�����ޤ���
+  をPATHの代わりに利用してここからコマンドを探索します。
 
-== ��ĥ�饤�֥��API
+== 拡張ライブラリAPI
 
 : rb_funcall2() [bug]
 
@@ -1010,9 +1010,9 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * eval.c (rb_funcall2): allow to call protected methods.
 #         fixed: [ruby-dev:27890]
 
-    ��ĥ�饤�֥��(C����)����Ruby�᥽�åɤ�Ƥִؿ�
-    rb_funcall2() �� (private �᥽�åɤ�Ƥ٤�Τ�) protected �᥽�å�
-    ��Ƥ٤ʤ��Զ��������ޤ�����((<ruby-dev:27890>))
+    拡張ライブラリ(C言語)からRubyメソッドを呼ぶ関数
+    rb_funcall2() が (private メソッドを呼べるのに) protected メソッド
+    を呼べない不具合を修正しました。((<ruby-dev:27890>))
 
 : rb_respond_to() [change]
 
@@ -1023,14 +1023,14 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * eval.c (rb_respond_to): conform to Object#respond_to?.  [ruby-dev:27411]
 
-    rb_respond_to()��Object#respond_to?�Υǥե���Ȥ�ư���Ʊ��(public 
-    �᥽�åɤˤ���ȿ�����ʤ�)�ˤ�����((<ruby-dev:27411>))
+    rb_respond_to()をObject#respond_to?のデフォルトの動作と同じ(public 
+    メソッドにしか反応しない)にした。((<ruby-dev:27411>))
 
 : rb_obj_respond_to() [new]
 
-    �ɲá�rb_respond_to() �Ȱۤʤ�Ļ��������Ǥ��롣((<ruby-dev:27408>))
+    追加。rb_respond_to() と異なり可視性を指定できる。((<ruby-dev:27408>))
 
-== �ץ�åȥե������ͭ
+== プラットフォーム固有
 
 : bccwin32 [bug]
 
@@ -1039,9 +1039,9 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #       * win32/win32.c (rb_w32_strerror): remove all CR and LF. (avoid broken
 #         error message on bccwin32 + winsock)
 
-    bccwin32 �� winsock �Υ��顼��ɽ������Ȥ���strerror ���֤����顼
-    ��å�����������˲��Ԥ����뤿��ˡ�ruby �ν��Ϥ��륨�顼��å���
-    ��������Ƥ����Τ�����
+    bccwin32 で winsock のエラーを表示するとき、strerror の返すエラー
+    メッセージの途中に改行が入るために、ruby の出力するエラーメッセー
+    ジが壊れていたのを修正。
 
 : cygwin [bug]
 
@@ -1049,7 +1049,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * dln.c (conv_to_posix_path): should initialize posix.
 
-    cygwin�Ķ��ǡ�RUBYLIB�Ķ��ѿ��������ȡ�$LOAD_PATH�˥��ߤ����롣
+    cygwin環境で、RUBYLIB環境変数が空だと、$LOAD_PATHにゴミが入る。
     ((<ruby-dev:27830>))
 
 : BeOS [bug]
@@ -1066,11 +1066,11 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #
 #       * file.c (rb_file_s_link): checks HAVE_LINK.
 
-    BeOS �ǤΤ����Ĥ��Υƥ��ȼ��Ԥ��н衣link(2) ���������Ƥ��ʤ���
-    ��˼��Ԥ���Τ� test/fileutils ����ư��Ƥ����Τ��н衣BeOS ��
-    �� link(2) ��¸�ߤ��ʤ��ȸ��ʤ��褦�ˤ�����chown��fchown �� id ��
-    ���� -1 ���Ϥ������ϡ�POSIX Ū�ˤ� id ���ѹ����٤��Ǥʤ�����BeOS 
-    �Ǥ� (unsigned) -1 ���ѹ����Ƥ��ޤäƤ�����������н衣((<ruby-dev:27672>))
+    BeOS でのいくつかのテスト失敗に対処。link(2) が定義されていながら
+    常に失敗するので test/fileutils が誤動作していたのに対処。BeOS に
+    は link(2) は存在しないと見なすようにした。chown、fchown に id と
+    して -1 を渡した場合は、POSIX 的には id を変更すべきでないが、BeOS 
+    では (unsigned) -1 に変更してしまっていた。これに対処。((<ruby-dev:27672>))
 
 : Sun [bug]
 
@@ -1080,7 +1080,7 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         Shinya Kuwamura <kuwa@labs.fujitsu.com>.  [ruby-dev:27603]
 #
 
-    Sun�Υ���ѥ���ǳ�ĥ�饤�֥����󥯤Ǥ��ʤ��ä�����ν�����((<ruby-dev:27603>))
+    Sunのコンパイラで拡張ライブラリをリンクできなかった問題の修正。((<ruby-dev:27603>))
 
 : IA64 [bug]
 
@@ -1092,11 +1092,11 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         and received by 64bit integer (VALUE), upper bits may have garbage value.
 #         [ruby-dev:27513]
 
-    IA64 �ǡ�Qtrue Qfalse Qnil �� 64bit �����Ǥʤ� 32bit �����Ȥ�����
-    ������Ƥ������ᡢANYARGS ���̤��� Qtrue ���Ϥ���VALUE �Ǽ�����ȡ�
-    �������ΰ㤤�����ͤ�����뤳�ȤΤ��ä����������((<ruby-dev:27513>))
+    IA64 で、Qtrue Qfalse Qnil が 64bit 整数でなく 32bit 整数として定
+    義されていたため、ANYARGS を通して Qtrue を渡し、VALUE で受けると、
+    サイズの違いから値が壊れることのあった問題を修正。((<ruby-dev:27513>))
 
-# == ����
+# == 不要
 #
 #Mon Nov 28 09:21:49 2005  Hirokazu Yamamoto  <ocean@m2.ccsnet.ne.jp>
 #
@@ -1104,35 +1104,35 @@ ruby 1.8.4 �Ǥ� ruby 1.8.3 ������ѹ����Ǥ���
 #         dir.gsub!. (bccwin32 failed to install third party exntesions)
 #         [ruby-dev:27834]
 #
-#�ʤ�Ȥʤ����פ��ʡ�
+#なんとなく不要かな？
 #
-#    EXTOUT ��Ȥ鷺��extconf.rb �ǳ�����ĥ�饤�֥��򥤥󥹥ȡ��뤹��
-#    ���ˡ�make �������å�̾���տޤ������Ѥ���Ƥ������ᡢbccwin32 �ǳ�
-#    ĥ�饤�֥�꤬���󥹥ȡ���Ǥ��ʤ��ʤäƤ����Τ�����
+#    EXTOUT を使わず、extconf.rb で外部拡張ライブラリをインストールする
+#    時に、make ターゲット名が意図せず改変されていたため、bccwin32 で拡
+#    張ライブラリがインストールできなくなっていたのを修正。
 
 #Sun Nov 27 00:56:13 2005  NAKAMURA, Hiroshi  <nahi@ruby-lang.org>
 #
 #       * lib/wsdl/xmlSchema/complexContent.rb: missing
 #         ComplexContent#elementformdefault method.
 #
-# ��
+# ？
 
 #Tue Nov  8 15:32:27 2005  GOTOU Yuuzou  <gotoyuzo@notwork.org>
 #
 #       * lib/drb/ssl.rb (DRb::SSLConfig#accept): fixed typo.
 #         [ruby-dev:27560] [ruby-core:4627]
 #
-# ��
+# ？
 
 #Sat Oct  8 20:04:40 2005  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 #
 #       * eval.c (Init_Binding): add Binding#dup method.  [yarv-dev:666]
 #
-# �᥽�åɤ��ɲá����ס�
+# メソッドの追加。不要。
 
 #Sat Oct  8 20:04:40 2005  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 #
 #       * parse.y (rb_parser_malloc, rb_parser_free): manage parser stack on
 #         heap.  [ruby-list:41199]
 #
-# Bison 2.0�б�
+# Bison 2.0対応

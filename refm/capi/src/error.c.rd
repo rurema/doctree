@@ -1,9 +1,9 @@
 --- void rb_raise(VALUE err, const char *fmt, ...)
 
-���饹 err ���㳰��ȯ�����ޤ���fmt �Ȥ��θ�ΰ����ϡ�
-printf ��Ʊ�������ǥ��顼��å�������ɽ���ޤ���
+クラス err の例外を発生します。fmt とその後の引数は、
+printf と同じ形式でエラーメッセージを表します。
 
 --- void rb_fatal(const char *fmt, ...)
 
-�������㳰�����򥹥��åפ���¨�¤˥��󥿥ץ꥿����λ���ޤ���
-fmt �Ȥ��θ�ΰ����� printf ��Ʊ�������ǥ��顼��å�������ɽ�����ޤ���
+あらゆる例外処理をスキップして即座にインタプリタが終了します。
+fmt とその後の引数は printf と同じ形式でエラーメッセージを表現します。

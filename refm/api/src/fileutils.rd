@@ -1,37 +1,37 @@
-�Ƶ�Ū�ʺ���ʤɤδ���Ū�ʥե���������Ԥ�����Υ饤�֥��Ǥ���
+再帰的な削除などの基本的なファイル操作を行うためのライブラリです。
 
 = module FileUtils
 
-����Ū�ʥե��������򽸤᤿�⥸�塼��Ǥ���
+基本的なファイル操作を集めたモジュールです。
 
 
-====[a:options] ���ץ���������
+====[a:options] オプションの説明
 
-���� options �ǻ��ѤǤ��륪�ץ����������Ǥ���
-�᥽�åɤ��Ȥ˻��ѤǤ��륪�ץ����Ϸ�ޤäƤ��ޤ���
-�����ʥ��ץ�����Ϳ����� [[c:ArgumentError]] ��ȯ�����ޤ���
+引数 options で使用できるオプションの説明です。
+メソッドごとに使用できるオプションは決まっています。
+不正なオプションを与えると [[c:ArgumentError]] が発生します。
 
 : :noop
-  ������ꤹ��ȼºݤν����ϹԤ��ޤ���
+  真を指定すると実際の処理は行いません。
 : :preserve
-  ������ꤹ��ȹ�������ȡ���ǽ�ʤ��ͭ�桼������ͭ���롼�פ⥳�ԡ����ޤ���
+  真を指定すると更新時刻と、可能なら所有ユーザ・所有グループもコピーします。
 : :verbose
-  ������ꤹ��Ⱦܺ٤���Ϥ��ޤ���
+  真を指定すると詳細を出力します。
 : :mode
-  �ѡ��ߥå�����8�ʿ��ǻ��ꤷ�ޤ���
+  パーミッションを8進数で指定します。
 : :force
-  ������ꤹ��Ⱥ���椹�٤Ƥ� [[c:StandardError]] ��̵�뤷�ޤ���
+  真を指定すると作業中すべての [[c:StandardError]] を無視します。
 : :nocreate
-  ������ꤹ��ȥե������������ޤ���
+  真を指定するとファイルを作成しません。
 : :dereference_root
-  ������ꤹ��� src �ˤĤ��Ƥ�������ܥ�å���󥯤λؤ�
-  ���Ƥ򥳥ԡ����ޤ������ξ��ϥ���ܥ�å���󥯼��Τ򥳥ԡ����ޤ���
+  真を指定すると src についてだけシンボリックリンクの指す
+  内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 : :remove_destination
-  ������ꤹ��ȥ��ԡ���¹Ԥ������˥��ԡ���������ޤ���
+  真を指定するとコピーを実行する前にコピー先を削除します。
 : :secure
-  ������ꤹ��ȥե�����κ���� [[m:FileUtils.#remove_entry_secure]] ����Ѥ��ޤ���
+  真を指定するとファイルの削除に [[m:FileUtils.#remove_entry_secure]] を使用します。
 : :mtime
-  ����� [[c:Time]] ��������������ηв��ÿ�����ͤǻ��ꤷ�ޤ���
+  時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 == Module Functions
 
@@ -40,39 +40,39 @@
 --- chdir(dir, options = {})                -> nil
 --- chdir(dir, options = {}) {|dir| .... }  -> nil
 
-�ץ������Υ����ȥǥ��쥯�ȥ�� dir ���ѹ����ޤ���
+プロセスのカレントディレクトリを dir に変更します。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿���ϥ֥��å���λ���
-���Υǥ��쥯�ȥ�����ޤ���
+ブロックとともに呼び出された時はブロック終了後に
+元のディレクトリに戻ります。
 
-@param dir �ǥ��쥯�ȥ����ꤷ�ޤ���
+@param dir ディレクトリを指定します。
 
 #@since 1.8.3
-@param options :verbose ������Ǥ��ޤ���
+@param options :verbose が指定できます。
 #@else
-@param options :noop, :verbose ������Ǥ��ޤ���
+@param options :noop, :verbose が指定できます。
 #@end
                [[ref:c:FileUtils#options]]
 
-��:
+例:
 
   FileUtils.cd('/', {:verbose => true})   # chdir and report it
 
 --- chmod(mode, list, options = {}) -> Array
 
-�ե����� list �Υѡ��ߥå����� mode ���ѹ����ޤ���
+ファイル list のパーミッションを mode に変更します。
 
-@param mode �ѡ��ߥå�����8�ʿ��ǻ��ꤷ�ޤ���
+@param mode パーミッションを8進数で指定します。
 
-@param list �ե�����Υꥹ�Ȥ���ꤷ�ޤ��� �оݤΥե����뤬��Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list ファイルのリストを指定します。 対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param options :noop �� :verbose �������ǽ�Ǥ���
+@param options :noop と :verbose が指定可能です。
                [[ref:c:FileUtils#options]]
 
-@return list ������Ȥ����֤��ޤ���
+@return list を配列として返します。
 
-��:
+例:
 
   FileUtils.chmod(0644, ['my.rb', 'your.rb'])
   FileUtils.chmod(0755, 'somecommand')
@@ -81,19 +81,19 @@
 #@since 1.8.3
 --- chmod_R(mode, list, options = {}) -> Array
 
-�ե����� list �Υѡ��ߥå�����Ƶ�Ū�� mode ���ѹ����ޤ���
+ファイル list のパーミッションを再帰的に mode へ変更します。
 
-@param mode �ѡ��ߥå�����8�ʿ��ǻ��ꤷ�ޤ���
+@param mode パーミッションを8進数で指定します。
 
-@param list �ե�����Υꥹ�Ȥ���ꤷ�ޤ����оݤΥե����뤬��Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param options :noop �� :verbose �������ǽ�Ǥ���
+@param options :noop と :verbose が指定可能です。
                [[ref:c:FileUtils#options]]
 
-@return list ������Ȥ����֤��ޤ���
+@return list を配列として返します。
 
-��:
+例:
 
   FileUtils.chmod_R(0700, '/tmp/removing')
 
@@ -102,24 +102,24 @@
 #@since 1.8.3
 --- chown(user, group, list, options = {}) -> Array
 
-�ե����� list �ν�ͭ�桼���Ƚ�ͭ���롼�פ� user �� group ���ѹ����ޤ���
+ファイル list の所有ユーザと所有グループを user と group に変更します。
 
-user, group �� nil �ޤ��� -1 ���Ϥ��Ȥ��ι��ܤ��ѹ����ޤ���
+user, group に nil または -1 を渡すとその項目は変更しません。
 
-@param user �桼����̾�� uid ����ꤷ�ޤ���nil/-1 ����ꤹ����ѹ����ޤ���
+@param user ユーザー名か uid を指定します。nil/-1 を指定すると変更しません。
 
-@param group ���롼��̾�� gid ����ꤷ�ޤ���nil/-1 ����ꤹ����ѹ����ޤ���
+@param group グループ名か gid を指定します。nil/-1 を指定すると変更しません。
 
-@param list �ե�����Υꥹ�Ȥ���ꤷ�ޤ����оݤΥե����뤬��Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param options :noop �� :verbose �������ǽ�Ǥ���
+@param options :noop と :verbose が指定可能です。
                [[ref:c:FileUtils#options]]
 
-@return list ������Ȥ����֤��ޤ���
+@return list を配列として返します。
 
 
-��:
+例:
 
   FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
@@ -128,24 +128,24 @@ user, group �� nil �ޤ��� -1 ���Ϥ��Ȥ��ι��ܤ��ѹ����ޤ���
 #@since 1.8.3
 --- chown_R(user, group, list, options = {}) -> Array
 
-list �ʲ��Υե�����ν�ͭ�桼���Ƚ�ͭ���롼�פ�
-user �� group �غƵ�Ū���ѹ����ޤ���
+list 以下のファイルの所有ユーザと所有グループを
+user と group へ再帰的に変更します。
 
-user, group �� nil �ޤ��� -1 ���Ϥ��Ȥ��ι��ܤ��ѹ����ޤ���
+user, group に nil または -1 を渡すとその項目は変更しません。
 
-@param user �桼����̾�� uid ����ꤷ�ޤ���nil/-1 ����ꤹ����ѹ����ޤ���
+@param user ユーザー名か uid を指定します。nil/-1 を指定すると変更しません。
 
-@param group ���롼��̾�� gid ����ꤷ�ޤ���nil/-1 ����ꤹ����ѹ����ޤ���
+@param group グループ名か gid を指定します。nil/-1 を指定すると変更しません。
 
-@param list �ե�����Υꥹ�Ȥ���ꤷ�ޤ����оݤΥե����뤬��Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param options :noop �� :verbose �������ǽ�Ǥ���
+@param options :noop と :verbose が指定可能です。
                [[ref:c:FileUtils#options]]
 
-@return list ������Ȥ����֤��ޤ���
+@return list を配列として返します。
 
-��:
+例:
 
   FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
@@ -158,100 +158,100 @@ user, group �� nil �ޤ��� -1 ���Ϥ��Ȥ��ι��ܤ��ѹ����ޤ���
 --- compare_file(file_a, file_b) -> bool
 --- identical?(file_a, file_b)   -> bool
 
-�ե����� a �� b �����Ƥ�Ʊ���ʤ鿿���֤��ޤ���
+ファイル a と b の内容が同じなら真を返します。
 
-@param file_a �ե�����̾��
+@param file_a ファイル名。
 
-@param file_b �ե�����̾��
+@param file_b ファイル名。
 
-��:
+例:
 
   FileUtils.cmp('somefile', 'somefile')  #=> true
   FileUtils.cmp('/bin/cp', '/bin/mv')    #=> maybe false.
 
 --- compare_stream(io_a, io_b) -> bool
 
-[[c:IO]] ���֥������� io_a �� io_b �����Ƥ�Ʊ���ʤ鿿���֤��ޤ���
+[[c:IO]] オブジェクト io_a と io_b の内容が同じなら真を返します。
 
-@param io_a [[c:IO]] ���֥������ȡ�
+@param io_a [[c:IO]] オブジェクト。
 
-@param io_b [[c:IO]] ���֥������ȡ�
+@param io_b [[c:IO]] オブジェクト。
 
 #@since 1.8.3
 --- copy_entry(src, dest, preserve = false, dereference_root = false) -> ()
 
-�ե����� src �� dest �˥��ԡ����ޤ���
+ファイル src を dest にコピーします。
 
-src �����̤Υե�����Ǥʤ����Ϥ��μ��̤ޤǴޤ�ƴ����˥��ԡ����ޤ���
-src ���ǥ��쥯�ȥ�ξ��Ϥ�����Ȥ�Ƶ�Ū�˥��ԡ����ޤ���
+src が普通のファイルでない場合はその種別まで含めて完全にコピーします。
+src がディレクトリの場合はその中身を再帰的にコピーします。
 
-@param src ���ԡ�����
+@param src コピー元。
 
-@param dest ���ԡ��衣
+@param dest コピー先。
 
-@param preserve preserve �����ΤȤ��Ϲ�������ȡ�
-                ��ǽ�ʤ��ͭ�桼������ͭ���롼�פ⥳�ԡ����ޤ���
+@param preserve preserve が真のときは更新時刻と、
+                可能なら所有ユーザ・所有グループもコピーします。
 
-@param dereference_root dereference_root �����ΤȤ��� src �ˤĤ��Ƥ�������ܥ�å���󥯤λؤ�
-                        ���Ƥ򥳥ԡ����ޤ������ξ��ϥ���ܥ�å���󥯼��Τ򥳥ԡ����ޤ���
+@param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
+                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
 #@end
 
 #@since 1.8.3
 --- copy_file(src, dest, preserve = false, dereference_root = true) -> ()
 
-�ե����� src �����Ƥ� dest �˥��ԡ����ޤ���
+ファイル src の内容を dest にコピーします。
 
-@param src ���ԡ�����
+@param src コピー元。
 
-@param dest ���ԡ��衣
+@param dest コピー先。
 
-@param preserve preserve �����ΤȤ��Ϲ�������ȡ�
-                ��ǽ�ʤ��ͭ�桼������ͭ���롼�פ⥳�ԡ����ޤ���
+@param preserve preserve が真のときは更新時刻と、
+                可能なら所有ユーザ・所有グループもコピーします。
 
-@param dereference_root dereference_root �����ΤȤ��� src �ˤĤ��Ƥ�������ܥ�å���󥯤λؤ�
-                        ���Ƥ򥳥ԡ����ޤ������ξ��ϥ���ܥ�å���󥯼��Τ򥳥ԡ����ޤ���
+@param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
+                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
 #@end
 
 #@since 1.8.3
 --- copy_stream(src, dest) -> ()
 
-src �� dest �˥��ԡ����ޤ���
-src �ˤ� read �᥽�åɡ�dest �ˤ� write �᥽�åɤ�ɬ�פǤ���
+src を dest にコピーします。
+src には read メソッド、dest には write メソッドが必要です。
 
-@param src read �᥽�åɤ���ĥ��֥������ȡ�
+@param src read メソッドを持つオブジェクト。
 
-@param dest write �᥽�åɤ���ĥ��֥������ȡ�
+@param dest write メソッドを持つオブジェクト。
 
 #@end
 
 --- cp(src, dest, options = {})   -> ()
 --- copy(src, dest, options = {}) -> ()
 
-�ե����� src �� dest �˥��ԡ����ޤ���
+ファイル src を dest にコピーします。
 
-src �˥ե����뤬��Ĥ���Ϳ����줿��硢
-dest ���ǥ��쥯�ȥ�ʤ�dest/src �˥��ԡ����ޤ���
-dest ������¸�ߤ�������ǥ��쥯�ȥ�Ǥʤ��Ȥ��Ͼ�񤭤��ޤ���
+src にファイルが一つだけ与えられた場合、
+dest がディレクトリならdest/src にコピーします。
+dest が既に存在ししかもディレクトリでないときは上書きします。
 
-src �˥ե����뤬ʣ��Ϳ����줿��硢
-file1 �� dest/file1 �˥��ԡ���file2 �� dest/file2 �˥��ԡ���
-�Ȥ����褦�ˡ��ǥ��쥯�ȥ� dest ����˥ե����� file1��file2 �Ĥ�
-Ʊ��̾���ǥ��ԡ����ޤ���dest ���ǥ��쥯�ȥ�Ǥʤ������㳰
-[[c:Errno::ENOTDIR]] ��ȯ�����ޤ���
+src にファイルが複数与えられた場合、
+file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
+というように、ディレクトリ dest の中にファイル file1、file2 …を
+同じ名前でコピーします。dest がディレクトリでない場合は例外
+[[c:Errno::ENOTDIR]] が発生します。
 
-@param src ���ԡ�������Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src コピー元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ���ԡ���Υե����뤫�ǥ��쥯�ȥ�Ǥ���
+@param dest コピー先のファイルかディレクトリです。
 
-@param options :preserve, :noop, :verbose ������Ǥ��ޤ���
+@param options :preserve, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@raise Errno::ENOTDIR src ��ʣ���Υե����뤫�ġ�dest ���ǥ��쥯�ȥ�Ǥʤ�����ȯ�����ޤ���
+@raise Errno::ENOTDIR src が複数のファイルかつ、dest がディレクトリでない場合に発生します。
 
-��:
+例:
 
   FileUtils.cp 'eval.c', 'eval.c.org'
   FileUtils.cp(['cgi.rb', 'complex.rb', 'date.rb'], '/usr/lib/ruby/1.8')
@@ -259,18 +259,18 @@ file1 �� dest/file1 �˥��ԡ���file2 �� dest/file2 �˥��ԡ���
 
 --- cp_r(src, dest, options = {}) -> ()
 
-src �� dest �˥��ԡ����ޤ���src ���ǥ��쥯�ȥ�Ǥ��ä���Ƶ�Ū��
-���ԡ����ޤ������κ� dest ���ǥ��쥯�ȥ�ʤ� dest/src �˥��ԡ����ޤ���
+src を dest にコピーします。src がディレクトリであったら再帰的に
+コピーします。その際 dest がディレクトリなら dest/src にコピーします。
 
-@param src ���ԡ�������Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src コピー元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ���ԡ���Υե����뤫�ǥ��쥯�ȥ�Ǥ���
+@param dest コピー先のファイルかディレクトリです。
 
-@param options :preserve, :noop, :verbose, :dereference_root, :remove_destination ������Ǥ��ޤ���
+@param options :preserve, :noop, :verbose, :dereference_root, :remove_destination が指定できます。
                [[ref:c:FileUtils#options]]
 
-��:
+例:
 
   # installing ruby library "mylib" under the site_ruby
   FileUtils.rm_r(site_ruby + '/mylib', {:force => true})
@@ -282,17 +282,17 @@ src �� dest �˥��ԡ����ޤ���src ���ǥ��쥯�ȥ�Ǥ��ä���Ƶ�Ū��
 
 --- install(src, dest, options = {}) -> ()
 
-src �� dest �����Ƥ��㤦�Ȥ����� src �� dest �˥��ԡ����ޤ���
+src と dest の内容が違うときだけ src を dest にコピーします。
 
-@param src ���ԡ�������Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src コピー元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ���ԡ���Υե����뤫�ǥ��쥯�ȥ�Ǥ���
+@param dest コピー先のファイルかディレクトリです。
 
-@param options :preserve, :noop, :verbose, :mode ������Ǥ��ޤ���
+@param options :preserve, :noop, :verbose, :mode が指定できます。
                [[ref:c:FileUtils#options]]
 
-��:
+例:
 
   FileUtils.install('ruby', '/usr/local/bin/ruby', {:mode => 0755, :verbose => true})
   FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', {:verbose => true})
@@ -300,30 +300,30 @@ src �� dest �����Ƥ��㤦�Ȥ����� src �� dest �˥��ԡ����ޤ���
 --- ln(src, dest, options = {})   -> ()
 --- link(src, dest, options = {}) -> ()
 
-src �ؤΥϡ��ɥ�� dest ��������ޤ���
+src へのハードリンク dest を作成します。
 
-src ����Ĥξ�硢
-dest �����Ǥ�¸�ߤ��ǥ��쥯�ȥ�Ǥ���Ȥ��� dest/src ��������ޤ���
-dest �����Ǥ�¸�ߤ��ǥ��쥯�ȥ�Ǥʤ��ʤ���㳰 Errno::ENOTDIR ��ȯ�����ޤ���
-������ :force ���ץ�������ꤷ���Ȥ��� dest ���񤭤��ޤ���
+src が一つの場合、
+dest がすでに存在しディレクトリであるときは dest/src を作成します。
+dest がすでに存在しディレクトリでないならば例外 Errno::ENOTDIR が発生します。
+ただし :force オプションを指定したときは dest を上書きします。
 
-src ��ʣ���ξ�硢
-src[0] �ؤΥϡ��ɥ�� dest/src[0]��src[1] �ؤ�
-�ϡ��ɥ�� dest/src[1] �Ĥ�������ޤ���
-dest ���ǥ��쥯�ȥ�Ǥʤ������㳰 Errno::ENOTDIR ��ȯ�����ޤ���
+src が複数の場合、
+src[0] へのハードリンク dest/src[0]、src[1] への
+ハードリンク dest/src[1] …を作成します。
+dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
-@param src ��󥯸�����Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ��󥯺�����Υե����뤫�ǥ��쥯�ȥ�Ǥ���
+@param dest リンク作成先のファイルかディレクトリです。
 
-@param options :force, :noop, :verbose ������Ǥ��ޤ���
+@param options :force, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@raise Errno::ENOTDIR dest ���ǥ��쥯�ȥ�Ǥʤ�����ȯ�����ޤ���
+@raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
 
 
-��:
+例:
 
   FileUtils.ln('gcc', 'cc', {:verbose => true})
   FileUtils.ln('/usr/bin/emacs21', '/usr/bin/emacs')
@@ -333,30 +333,30 @@ dest ���ǥ��쥯�ȥ�Ǥʤ������㳰 Errno::ENOTDIR ��ȯ�����ޤ���
 --- ln_s(src, dest, options = {})    -> ()
 --- symlink(src, dest, options = {}) -> ()
 
-src �ؤΥ���ܥ�å���� dest ��������ޤ���
+src へのシンボリックリンク dest を作成します。
 
-src ����Ĥξ�硢
-dest �����Ǥ�¸�ߤ��ǥ��쥯�ȥ�Ǥ���Ȥ��� dest/src ��������ޤ���
-dest �����Ǥ�¸�ߤ��ǥ��쥯�ȥ�Ǥʤ��ʤ���㳰 Errno::ENOTDIR ��ȯ�����ޤ���
-������ :force ���ץ�������ꤷ���Ȥ��� dest ���񤭤��ޤ���
+src が一つの場合、
+dest がすでに存在しディレクトリであるときは dest/src を作成します。
+dest がすでに存在しディレクトリでないならば例外 Errno::ENOTDIR が発生します。
+ただし :force オプションを指定したときは dest を上書きします。
 
-src ��ʣ���ξ�硢
-src[0] �ؤΥ���ܥ�å���� dest/src[0]��src[1] �ؤ�
-����ܥ�å���� dest/src[1] �Ĥ�������ޤ���
-dest ���ǥ��쥯�ȥ�Ǥʤ������㳰 Errno::ENOTDIR ��ȯ�����ޤ���
+src が複数の場合、
+src[0] へのシンボリックリンク dest/src[0]、src[1] への
+シンボリックリンク dest/src[1] …を作成します。
+dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
-@param src ��󥯸�����Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ��󥯺�����Υե����뤫�ǥ��쥯�ȥ�Ǥ���
+@param dest リンク作成先のファイルかディレクトリです。
 
-@param options :force, :noop, :verbose ������Ǥ��ޤ���
+@param options :force, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@raise Errno::ENOTDIR dest ���ǥ��쥯�ȥ�Ǥʤ�����ȯ�����ޤ���
+@raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
 
 
-��:
+例:
 
   FileUtils.ln_s('/usr/bin/ruby', '/usr/local/bin/ruby')
   FileUtils.ln_s('verylongsourcefilename.c', 'c', {:force => true})
@@ -364,33 +364,33 @@ dest ���ǥ��쥯�ȥ�Ǥʤ������㳰 Errno::ENOTDIR ��ȯ�����ޤ���
 
 --- ln_sf(src, dest, options = {}) -> ()
 
-src �ؤΥ���ܥ�å���� dest ��������ޤ���
+src へのシンボリックリンク dest を作成します。
 
-ln_s(src, dest, :force => true) ��Ʊ���Ǥ���
+ln_s(src, dest, :force => true) と同じです。
 
-@param src ��󥯸�����Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ��󥯺�����Υե����뤫�ǥ��쥯�ȥ�Ǥ���
+@param dest リンク作成先のファイルかディレクトリです。
 
-@param options :force, :noop, :verbose ������Ǥ��ޤ���
+@param options :force, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@raise Errno::ENOTDIR dest ���ǥ��쥯�ȥ�Ǥʤ�����ȯ�����ޤ���
+@raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
 
 @see [[m:FileUtils.#ln_s]]
 
 --- mkdir(dir, options = {}) -> ()
 
-�ǥ��쥯�ȥ� dir ��������ޤ���
+ディレクトリ dir を作成します。
 
-@param dir ��������ǥ��쥯�ȥꡣ
+@param dir 作成するディレクトリ。
 
-@param options :mode, :noop, :verbose ������Ǥ��ޤ���
+@param options :mode, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
 
-��:
+例:
 
   FileUtils.mkdir('test')
   FileUtils.mkdir(%w( tmp data ))
@@ -400,49 +400,49 @@ ln_s(src, dest, :force => true) ��Ʊ���Ǥ���
 --- mkpath(list, options = {})   -> String | Array
 --- makedirs(list, options = {}) -> String | Array
 
-�ǥ��쥯�ȥ� dir �Ȥ��οƥǥ��쥯�ȥ�����ƺ������ޤ���
+ディレクトリ dir とその親ディレクトリを全て作成します。
 
-�㤨�С�
+例えば、
 
   FileUtils.mkdir_p('/usr/local/lib/ruby')
 
-�ϰʲ������ǥ��쥯�ȥ�� (�ʤ����) �������ޤ���
+は以下の全ディレクトリを (なければ) 作成します。
 
   * /usr
   * /usr/local
   * /usr/local/bin
   * /usr/local/bin/ruby
 
-@param list ��������ǥ��쥯�ȥꡣ��Ĥξ���ʸ����Ǥ����Ǥ��ޤ���
-            ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list 作成するディレクトリ。一つの場合は文字列でも指定できます。
+            二つ以上指定する場合は配列で指定します。
 
-@param options :mode, :noop, :verbose ������Ǥ��ޤ���
+@param options :mode, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@return list ���֤��ޤ���
+@return list を返します。
 
 --- mv(src, dest, options = {})   -> ()
 --- move(src, dest, options = {}) -> ()
 
-�ե����� src �� dest �˰�ư���ޤ���
+ファイル src を dest に移動します。
 
-src ����Ĥξ�硢
-dest �����Ǥ�¸�ߤ��ǥ��쥯�ȥ�Ǥ���Ȥ��� src �� dest/src �ذ�ư���ޤ���
-dest �����Ǥ�¸�ߤ��ǥ��쥯�ȥ�Ǥʤ��Ȥ��� src �� dest ���񤭤��ޤ���
+src が一つの場合、
+dest がすでに存在しディレクトリであるときは src を dest/src へ移動します。
+dest がすでに存在しディレクトリでないときは src は dest を上書きします。
 
-src ��ʣ���ξ�硢
-src[0] �� dest/src[0]��src[1] �� dest/src[1] �ذ�ư���ޤ���
-dest ���ǥ��쥯�ȥ�Ǥʤ������㳰 Errno::ENOTDIR ��ȯ�����ޤ���
+src が複数の場合、
+src[0] を dest/src[0]、src[1] を dest/src[1] へ移動します。
+dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
-@param src ���Υե����롣��Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param src 元のファイル。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param dest ��ư��Υե����롢�ޤ��ϥǥ��쥯�ȥꡣ
+@param dest 移動先のファイル、またはディレクトリ。
 
-@param options :force, :noop, :verbose, :secure ������Ǥ��ޤ���
+@param options :force, :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-��:
+例:
 
   FileUtils.mv('badname.rb', 'goodname.rb')
   FileUtils.mv('stuff.rb', 'lib/ruby', {:force => true})
@@ -452,20 +452,20 @@ dest ���ǥ��쥯�ȥ�Ǥʤ������㳰 Errno::ENOTDIR ��ȯ�����ޤ���
 --- pwd   -> String
 --- getwd -> String
 
-�ץ������Υ����ȥǥ��쥯�ȥ��ʸ������֤��ޤ���
+プロセスのカレントディレクトリを文字列で返します。
 
 --- rm(list, options = {})     -> ()
 --- remove(list, options = {}) -> ()
 
-list �ǻ��ꤵ�줿�оݤ�õ�ޤ���
+list で指定された対象を消去します。
 
-@param list ��������оݡ���Ĥξ���ʸ���������ǽ�Ǥ���
-            ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
 
-@param options :force, :noop, :verbose ������Ǥ��ޤ���
+@param options :force, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-��:
+例:
 
   FileUtils.rm('junk.txt')
   FileUtils.rm(Dir.glob('*~'))
@@ -474,34 +474,34 @@ list �ǻ��ꤵ�줿�оݤ�õ�ޤ���
 --- rm_f(list, options = {})        -> ()
 --- safe_unlink(list, options = {}) -> ()
 
-FileUtils.rm(list, :force => true) ��Ʊ���Ǥ���
+FileUtils.rm(list, :force => true) と同じです。
 
 [[ref:c:FileUtils#options]]
 
-@param list ��������оݡ���Ĥξ���ʸ���������ǽ�Ǥ���
-            ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
 
-@param options :noop, :verbose ������Ǥ��ޤ���
-               :force �����åȤ��줿���Ϻ���椹�٤Ƥ� [[c:StandardError]] ��̵�뤷�ޤ���
+@param options :noop, :verbose が指定できます。
+               :force がセットされた場合は作業中すべての [[c:StandardError]] を無視します。
 
 @see [[m:FileUtils.#rm]]
 
 --- rm_r(list, options = {}) -> ()
 
-�ե�����ޤ��ϥǥ��쥯�ȥ� list ��Ƶ�Ū�˾õ�ޤ���
+ファイルまたはディレクトリ list を再帰的に消去します。
 
-@param list ��������оݡ���Ĥξ���ʸ���������ǽ�Ǥ���
-            ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
 
-@param options :force, :noop, :verbose, :secure ������Ǥ��ޤ���
+@param options :force, :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-==== ����
+==== 注意
 
-���Υ᥽�åɤˤϥ��������ȼ�����¸�ߤ��ޤ���
-�ܤ����� [[m:FileUtils.#remove_entry_secure]] �ι�򻲾Ȥ��Ƥ���������
+このメソッドにはローカル脆弱性が存在します。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 
-��:
+例:
 
   FileUtils.rm_r(Dir.glob('/tmp/*'))
 
@@ -510,37 +510,37 @@ FileUtils.rm(list, :force => true) ��Ʊ���Ǥ���
 --- rm_rf(list, options = {})  -> ()
 --- rmtree(list, options = {}) -> ()
 
-�ե�����ޤ��ϥǥ��쥯�ȥ� list ��Ƶ�Ū�˾õ�ޤ���
+ファイルまたはディレクトリ list を再帰的に消去します。
 
-rm_r(list, {:force => true}) ��Ʊ���Ǥ���
+rm_r(list, {:force => true}) と同じです。
 
-@param list ��������оݡ���Ĥξ���ʸ���������ǽ�Ǥ���
-            ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
 
-@param options :noop, :verbose, :secure ������Ǥ��ޤ���
+@param options :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-==== ����
+==== 注意
 
-���Υ᥽�åɤˤϥ��������ȼ�����¸�ߤ��ޤ���
-�ܤ����� [[m:FileUtils.#remove_entry_secure]] �ι�򻲾Ȥ��Ƥ���������
+このメソッドにはローカル脆弱性が存在します。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 
 
 @see [[m:FileUtils.#rm]], [[m:FileUtils.#rm_r]], [[m:FileUtils.#remove_entry_secure]]
 
 --- rmdir(dir, options = {}) -> ()
 
-�ǥ��쥯�ȥ� dir �������ޤ���
+ディレクトリ dir を削除します。
 
-@param dir �������ǥ��쥯�ȥ����ꤷ�ޤ�����Ĥξ���ʸ����Ǥ�����ǽ�Ǥ���
-           ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param dir 削除するディレクトリを指定します。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
 
-@param options :noop, :verbose ������Ǥ��ޤ���
+@param options :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@raise Errno::ENOTEMPTY �������ǥ��쥯�ȥ꤬���Ǥʤ�����ȯ�����ޤ���
+@raise Errno::ENOTEMPTY 削除するディレクトリが空でない場合に発生します。
 
-��:
+例:
 
   FileUtils.rmdir('somedir')
   FileUtils.rmdir(%w(somedir anydir otherdir))
@@ -550,16 +550,16 @@ rm_r(list, {:force => true}) ��Ʊ���Ǥ���
 #@since 1.8.3
 --- remove_entry(path, force = false)
 
-�ե����� path �������ޤ���path ���ǥ��쥯�ȥ�ʤ�Ƶ�Ū�˺�����ޤ���
+ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
-���Υ᥽�åɤˤϥ��������ȼ�����¸�ߤ��ޤ���
-�ܤ����� [[m:FileUtils.#remove_entry_secure]] �ι�򻲾Ȥ��Ƥ���������
+このメソッドにはローカル脆弱性が存在します。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 
-@param path �������ѥ���
+@param path 削除するパス。
 
-@param force ���ΤȤ��Ϻ�����ȯ������ [[c:StandardError]] ��̵�뤷�ޤ���
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
-��:
+例:
 
   FileUtils.remove_entry '/tmp/ruby.tmp.08883'
 
@@ -570,66 +570,66 @@ rm_r(list, {:force => true}) ��Ʊ���Ǥ���
 #@since 1.8.3
 --- remove_entry_secure(path, force = false) -> ()
 
-�ե����� path �������ޤ���path ���ǥ��쥯�ȥ�ʤ�Ƶ�Ū�˺�����ޤ���
+ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
-[[m:FileUtils.#rm_r]] ����� [[m:FileUtils.#remove_entry]] �ˤ�
-TOCTTOU (time-of-check to time-of-use)�ȼ�����¸�ߤ��ޤ���
-���Υ᥽�åɤϤ�����ɤ�����˿��ߤ���ޤ�����
-[[m:FileUtils.#rm_r]] ����� [[m:FileUtils.#remove_entry]] �ϰʲ��ξ�郎
-���������Ȥ��ˤϥ������ƥ��ۡ���ˤʤꤨ�ޤ���
+[[m:FileUtils.#rm_r]] および [[m:FileUtils.#remove_entry]] には
+TOCTTOU (time-of-check to time-of-use)脆弱性が存在します。
+このメソッドはそれを防ぐために新設されました。
+[[m:FileUtils.#rm_r]] および [[m:FileUtils.#remove_entry]] は以下の条件が
+満たされるときにはセキュリティホールになりえます。
 
-  * �ƥǥ��쥯�ȥ꤬���桼������񤭹��߲�ǽ (/tmp ��ޤ�)
-  * path �ʲ��Τ����줫�Υǥ��쥯�ȥ꤬���桼������񤭹��߲�ǽ
-  * �����ƥब����ܥ�å���󥯤����
+  * 親ディレクトリが全ユーザから書き込み可能 (/tmp を含む)
+  * path 以下のいずれかのディレクトリが全ユーザから書き込み可能
+  * システムがシンボリックリンクを持つ
 
-�����ȼ������ɤ����ᡢremove_entry_secure �Ϻ������ path �ʲ���
-�ǥ��쥯�ȥ�Υ����ʡ��ȥѡ��ߥå������ѹ������嵭�ξ�����򤷤ޤ���
-������ remove_entry_secure �Ͽƥǥ��쥯�ȥ꤬�ʲ��ξ������������Ȥ�
-���ꤷ�Ƥ��ޤ���
+この脆弱性を防ぐため、remove_entry_secure は削除前に path 以下の
+ディレクトリのオーナーとパーミッションを変更し、上記の条件を回避します。
+ただし remove_entry_secure は親ディレクトリが以下の条件を満たすことを
+仮定しています。
 
-  * UNIX �����ƥप��Ӥ�����ह��Ķ��Ǥϡ�sticky �ӥåȤ�Ω�äƤ��뤳�ȡ�
-  * ���桼�����񤭹��߲�ǽ�Ǥ���Τϡ�ľ�ܤοƥǥ��쥯�ȥ�ΤߤǤ��뤳�ȡ�
-    �㤨�С�/var/tmp �Υѡ��ߥå���� 1777 �Ǥ���Τ����ꤢ��ޤ��󤬡�
-    ���ξ�� / �� /var �����桼������񤭹��߲�ǽ�Ǥ��äƤϤʤ�ޤ���
+  * UNIX システムおよびそれに類する環境では、sticky ビットが立っていること。
+  * 全ユーザが書き込み可能であるのは、直接の親ディレクトリのみであること。
+    例えば、/var/tmp のパーミッションが 1777 であるのは問題ありませんが、
+    その場合 / や /var が全ユーザから書き込み可能であってはなりません。
 
-���ξ�郎��������ʤ���� remove_entry_secure �ϰ����ǤϤ���ޤ���
+この条件が満たされない場合 remove_entry_secure は安全ではありません。
 
-@param path �������ѥ���
+@param path 削除するパス。
 
-@param force ���ΤȤ��Ϻ�����ȯ������ [[c:StandardError]] ��̵�뤷�ޤ���
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
 #@end
 
 --- remove_file(path, force = false) -> ()
 
-�ե����� path �������ޤ���
+ファイル path を削除します。
 
-@param path �������ե����롣
+@param path 削除するファイル。
 
-@param force ���ΤȤ��Ϻ�����ȯ������ [[c:StandardError]] ��̵�뤷�ޤ���
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
 --- remove_dir(path, force = false) -> ()
 
-�ǥ��쥯�ȥ� path �������ޤ���
+ディレクトリ path を削除します。
 
-@param path �������ǥ��쥯�ȥꡣ
+@param path 削除するディレクトリ。
 
-@param force ���ΤȤ��Ϻ�����ȯ������ [[c:StandardError]] ��̵�뤷�ޤ���
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
 --- touch(list, options = {}) -> ()
 
-list �ǻ��ꤵ�줿�ե�����κǽ��ѹ����� (mtime) ��
-������������ (atime) ���ѹ����ޤ���
+list で指定されたファイルの最終変更時刻 (mtime) と
+アクセス時刻 (atime) を変更します。
 
-list �ǻ��ꤵ�줿�ե����뤬¸�ߤ��ʤ����϶��Υե������������ޤ���
+list で指定されたファイルが存在しない場合は空のファイルを作成します。
 
-@param list �оݤΥե����롣��Ĥξ���ʸ���������ǽ�Ǥ���
-            ��İʾ���ꤹ���������ǻ��ꤷ�ޤ���
+@param list 対象のファイル。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
 
-@param options :mtime, :nocreate, :noop, :verbose ������Ǥ��ޤ���
+@param options :mtime, :nocreate, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-��:
+例:
 
   FileUtils.touch('timestamp')
   FileUtils.touch('timestamp', :mtime => Time.now)
@@ -637,18 +637,18 @@ list �ǻ��ꤵ�줿�ե����뤬¸�ߤ��ʤ����϶��Υե������������ޤ���
 
 --- uptodate?(newer, older_list, options = nil) -> bool
 
-newer ����older_list �˴ޤޤ�뤹�٤ƤΥե������꿷�����Ȥ�����
-¸�ߤ��ʤ��ե������̵�¤˸Ť��Ȥߤʤ���ޤ���
+newer が、older_list に含まれるすべてのファイルより新しいとき真。
+存在しないファイルは無限に古いとみなされます。
 
-@param newer �ե�������Ļ��ꤷ�ޤ���
+@param newer ファイルを一つ指定します。
 
-@param older_list �ե�����̾���������ꤷ�ޤ���
+@param older_list ファイル名の配列を指定します。
 
-@param options �ɤΤ褦�ʥ��ץ�������ꤹ�뤳�ȤϤǤ��ޤ���
+@param options どのようなオプションも指定することはできません。
 
-@raise ArgumentError options �˥��ץ�������ꤷ������ȯ�����ޤ���
+@raise ArgumentError options にオプションを指定した場合に発生します。
 
-��:
+例:
 
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
@@ -656,45 +656,45 @@ newer ����older_list �˴ޤޤ�뤹�٤ƤΥե������꿷�����Ȥ�����
 == Singleton Methods
 --- collect_method(opt) -> Array
 
-Ϳ����줿���ץ�������ĥ᥽�å�̾��������֤��ޤ���
+与えられたオプションを持つメソッド名の配列を返します。
 
-@param opt ���ץ����̾�򥷥�ܥ�ǻ��ꤷ�ޤ���
+@param opt オプション名をシンボルで指定します。
 
   FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
 
 --- commands -> Array
 
-���餫�Υ��ץ�������ĥ᥽�å�̾��������֤��ޤ���
+何らかのオプションを持つメソッド名の配列を返します。
 
   FileUtils.commands  # => ["chmod", "cp", "cp_r", "install", ...]
 
 --- have_option?(mid, opt) -> bool
 
-mid �Ȥ����᥽�åɤ� opt �Ȥ������ץ�������ľ�硢�����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+mid というメソッドが opt というオプションを持つ場合、真を返します。
+そうでない場合は、偽を返します。
 
-@param mid �᥽�å�̾����ꤷ�ޤ���
+@param mid メソッド名を指定します。
 
-@param opt ���ץ����̾����ꤷ�ޤ���
+@param opt オプション名を指定します。
 
 --- options -> Array
 
-���ץ����̾��������֤��ޤ���
+オプション名の配列を返します。
 
   FileUtils.options  #=> ["noop", "force", "verbose", "preserve", "mode"]
 
 --- options_of(mid) -> Array
 
-Ϳ����줿�᥽�å�̾�ǻ��Ѳ�ǽ�ʥ��ץ����̾��������֤��ޤ���
+与えられたメソッド名で使用可能なオプション名の配列を返します。
 
-@param mid �᥽�å�̾����ꤷ�ޤ���
+@param mid メソッド名を指定します。
 
   FileUtils.options(:rm)  # => ["noop", "verbose", "force"]
 
 #@# --- private_module_function(name) -> self
 #@# nodoc
-#@# name �ǻ��ꤵ�줿�᥽�åɤ�⥸�塼��ؿ��ˤ��ޤ���
-#@# �ޤ����Ļ����� private �ˤ��ޤ���
+#@# name で指定されたメソッドをモジュール関数にします。
+#@# また、可視性を private にします。
 #@# 
 #@# @see [[m:Module#module_function]], [[m:Module#private_class_method]]
 
@@ -703,27 +703,27 @@ mid �Ȥ����᥽�åɤ� opt �Ȥ������ץ�������ľ�硢�����֤��ޤ���
 
 --- METHODS -> Array
 
-���Υ⥸�塼����������Ƥ�������᥽�åɤ�������֤��ޤ���
+このモジュールで定義されている公開メソッドの配列を返します。
 
 --- OPT_TABLE -> Hash
 
-�����ǻ��Ѥ��ޤ���
+内部で使用します。
 
 = module FileUtils::Verbose
 include FileUtils
 
-FileUtils ��Ʊ���᥽�åɤ��������Ƥ�������Ʊ��ư��򤷤ޤ�����
-���褦�Ȥ��Ƥ��뤳�Ȥ�¹�����ɽ�����ޤ���
+FileUtils と同じメソッドが定義されており全く同じ動作をしますが、
+しようとしていることを実行前に表示します。
 
 = module FileUtils::NoWrite
 include FileUtils
 
-FileUtils ��Ʊ���᥽�åɤ��������Ƥ��ޤ�����
-�ºݤ˥ե�������ѹ��������ϼ¹Ԥ��ޤ���
+FileUtils と同じメソッドが定義されていますが、
+実際にファイルを変更する操作は実行しません。
 
 
 = module FileUtils::DryRun
 include FileUtils
 
-FileUtils ��Ʊ���᥽�åɤ��������Ƥ��ޤ�����
-�ºݤ˥ե�������ѹ��������ϼ¹Ԥ���������ɽ�����ޤ���
+FileUtils と同じメソッドが定義されていますが、
+実際にファイルを変更する操作は実行せず、操作を表示します。

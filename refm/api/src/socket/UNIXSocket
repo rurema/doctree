@@ -1,8 +1,8 @@
 = class UNIXSocket < BasicSocket
 
-UNIX �ɥᥤ��Υ��ȥ꡼�෿�����åȤΥ��饹��
+UNIX ドメインのストリーム型ソケットのクラス。
 
-�̾�� [[c:IO]] ���饹�Υ��֥��饹��Ʊ�ͤ������Ϥ��Ǥ��ޤ���
+通常の [[c:IO]] クラスのサブクラスと同様の入出力ができます。
 
 == Class Methods
 
@@ -11,51 +11,51 @@ UNIX �ɥᥤ��Υ��ȥ꡼�෿�����åȤΥ��饹��
 --- open(path){|sock| ...} -> object
 --- new(path){|sock| ...} -> object
 
-path �ǻ��ꤷ���ѥ�̾���Ѥ��ƥ����åȤ���³���ޤ���
+path で指定したパス名を用いてソケットを接続します。
 
-�֥��å����ά�������³���������åȤ��֤��ޤ���
+ブロックを省略すると接続したソケットを返します。
 
-�֥��å����Ϥ������ϡ���³���������åȤ�����Ȥ��Ƥ��Υ֥��å���ƤӤ�����
-�֥��å���λ���˥����åȤ��Ĥ��ޤ������ξ��ˤ�
-�֥��å���ɾ���ͤ��֤��ͤȤ����֤��ޤ���
+ブロックを渡した場合は、接続したソケットを引数としてそのブロックを呼びだし、
+ブロック終了時にソケットを閉じます。この場合には
+ブロックの評価値を返り値として返します。
 
-@param path ��³��Υѥ�̾ʸ����
+@param path 接続先のパス名文字列
 
 --- pair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
 --- socketpair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
 
-��ߤ˷�礵�줿 UNIX �����åȤΥڥ���ޤ�2���Ǥ�������֤��ޤ���
+相互に結合された UNIX ソケットのペアを含む2要素の配列を返します。
 
-type �ˤϥ����åȥ����פ���ꤷ�ޤ���
+type にはソケットタイプを指定します。
 #@until 1.9.1
-Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW �ʤɤ�
-����Ǥ��ޤ���
+Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW などが
+指定できます。
 #@else
-Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW �ʤɤ�
-������:STREAM, :DGRAM, :RAW �ʤɤΥ���ܥ롢
-"STREAM" �ʤɤ�ʸ�����Ϥ��ޤ���
+Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW などの
+整数、:STREAM, :DGRAM, :RAW などのシンボル、
+"STREAM" などの文字列が渡せます。
 #@end
 
-protocol �ˤ� �ץ��ȥ������ꤷ�ޤ���0 �� Unix domain �ǤΥǥե�����ͤ�
-�Ȥ��ޤ���
+protocol には プロトコルを指定します。0 は Unix domain でのデフォルト値が
+使われます。
 
   s1, s2 = UNIXSocket.pair
   s1.send "a", 0
   s1.send "b", 0
   p s2.recv(10) #=> "ab"
 
-@param type �����åȥ�����
-@param protocol �ץȥ�����
+@param type ソケットタイプ
+@param protocol プトロコル
 
 == Instance Methods
 
 --- addr -> [String, String]
 
-�����åȤ���³�����ɽ��������֤��ޤ�������γ����Ǥ���1��
-�Ǥ�ʸ���� "AF_UNIX"����2���Ǥ��ѥ���ɽ��ʸ����Ǥ���
+ソケットの接続情報を表す配列を返します。配列の各要素は第1要
+素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
 
-���饤�����¦�ϥѥ�������ʤ������ʸ����Ȥʤ�ޤ���
-��:
+クライアント側はパスを持たないため空文字列となります。
+例:
 
   UNIXServer.open("/tmp/s") {|serv|
     p serv.addr     #=> ["AF_UNIX", "/tmp/s"]
@@ -69,11 +69,11 @@ protocol �ˤ� �ץ��ȥ������ꤷ�ޤ���0 �� Unix domain �ǤΥǥե�����ͤ�
 
 @see [[m:UNIXSocket#peeraddr]]
 --- path -> String
-UNIX �����åȤΥѥ����֤��ޤ���
+UNIX ソケットのパスを返します。
 
-���饤�����¦�ϥѥ�������ʤ������ʸ����Ȥʤ�ޤ���
+クライアント側はパスを持たないため空文字列となります。
 
-��:
+例:
 
   UNIXServer.open("/tmp/s") {|serv|
     p serv.path     #=> "/tmp/s"
@@ -81,10 +81,10 @@ UNIX �����åȤΥѥ����֤��ޤ���
 
 --- peeraddr -> [String, String]
 
-��³����襽���åȤξ����ɽ��������֤��ޤ�������γ����Ǥ���1��
-�Ǥ�ʸ���� "AF_UNIX"����2���Ǥ��ѥ���ɽ��ʸ����Ǥ���
+接続相手先ソケットの情報を表す配列を返します。配列の各要素は第1要
+素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
 
-��:
+例:
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")
@@ -95,15 +95,15 @@ UNIX �����åȤΥѥ����֤��ޤ���
 @see [[m:UNIXSocket#addr]]
 
 --- recvfrom(maxlen, flags = 0) -> [String [String, String]]
-[[man:recvfrom(2)]] ���Ѥ��ƥ����åȤ����å�������������ޤ���
+[[man:recvfrom(2)]] を用いてソケットからメッセージを受け取ります。
 
-maxlen �Ǽ�������å������κ���Ĺ��Х��ȿ��ǻ��ꤷ�ޤ���
+maxlen で受け取るメッセージの最大長をバイト数で指定します。
 
-flags �ˤ� Socket::MSG_* �Ȥ���̾��������� bitwise OR ���Ϥ��ޤ���
+flags には Socket::MSG_* という名前の定数の bitwise OR を渡します。
 
-����ͤ�ʸ�������꥽���åȤΥѥ��Υڥ��Ǥ���
+戻り値は文字列と相手ソケットのパスのペアです。
 
-��:
+例:
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")
@@ -112,30 +112,30 @@ flags �ˤ� Socket::MSG_* �Ȥ���̾��������� bitwise OR ���Ϥ��ޤ���
     p c.recvfrom(10)[0]     #=> "a"
   }
 
-@param maxlen ��������å������κ���Ĺ
-@param flags �ե饰
+@param maxlen 受け取るメッセージの最大長
+@param flags フラグ
 
 --- recv_io(klass=IO, mode=nil) -> Fixnum|IO|object
 
-�����åȤ���³�褫��ե�����ǥ�������ץ���������ޤ���
+ソケットの接続先からファイルディスクリプタを受け取ります。
 
-klass �� nil �ξ�硢�ե�����ǥ�������ץ��� Fixnum �Ȥ���
-�֤���ޤ���
+klass が nil の場合、ファイルディスクリプタが Fixnum として
+返されます。
 
-klass �� nil �Ǥʤ���硢
-klass.for_fd(fd[, mode]) ���ƤФ졢�����ͤ��֤���ޤ���
+klass が nil でない場合、
+klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
 
-��:
+例:
 
   s1, s2 = UNIXSocket.pair
   s1.send_io STDOUT
   io = s2.recv_io
   p File.identical?(io, STDOUT)     #=> true
 
-@param klass ������ä��ե�����ǥ�������ץ����Ѵ����뤿��Υ��饹
-@param mode for_fd ���Ϥ��ե�����⡼��
+@param klass 受け取ったファイルディスクリプタを変換するためのクラス
+@param mode for_fd に渡すファイルモード
 --- send_io(io) -> nil
-IO �� Fixnum ���б�����ե�����ǥ�������ץ��򥽥��åȤ���³�������ޤ���
+IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
 
   s1, s2 = UNIXSocket.pair
   
@@ -147,4 +147,4 @@ IO �� Fixnum ���б�����ե�����ǥ�������ץ��򥽥��åȤ���³�������ޤ���
   
   stdout.puts "hello" # outputs "hello\n" to standard output.
 
-@param io ����ե�����ǥ�������ץ�(���� or [[c:IO]]���֥�������)
+@param io 送るファイルディスクリプタ(整数 or [[c:IO]]オブジェクト)

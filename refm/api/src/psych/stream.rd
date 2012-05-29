@@ -21,7 +21,7 @@ is called, so you can do this form:
     em.push(:foo => 'bar')
   end
 
-#@# �ʲ��Υ᥽�åɤˤĤ��Ƥϡ�nodoc �����ꤵ��Ƥ��뤿�ᡢ��ά��
+#@# 以下のメソッドについては、nodoc が指定されているため、省略。
 #@# = class Psych::Stream::Emitter < Psych::Emitter
 #@# include Psych::Streaming
 #@# == Instance Methods

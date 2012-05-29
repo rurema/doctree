@@ -1,67 +1,67 @@
 = class OpenSSL::ASN1::Constructive < OpenSSL::ASN1::ASN1Data
 include Enumerable
 
-ASN.1 ¤Î¹½Â¤·¿¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã®æ§‹é€ åž‹ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-ÄÌ¾ï¤Ï¤³¤Î¥¯¥é¥¹¼«¿È¤ÏÍÑ¤¤¤º¡¢³Æ¥µ¥Ö¥¯¥é¥¹¤òÍøÍÑ¤·¤Þ¤¹¡£
+é€šå¸¸ã¯ã“ã®ã‚¯ãƒ©ã‚¹è‡ªèº«ã¯ç”¨ã„ãšã€å„ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’åˆ©ç”¨ã—ã¾ã™ã€‚
 == Instance Methods
 
 --- tagging -> Symbol | nil
-¥¿¥°ÉÕ¤±¤ÎÊý¼°¤òÊÖ¤·¤Þ¤¹¡£
+ã‚¿ã‚°ä»˜ã‘ã®æ–¹å¼ã‚’è¿”ã—ã¾ã™ã€‚
 
-:IMPLICIT¡¢:EXPLICIT¡¢nil ¤Î¤¤¤º¤ì¤«¤òÊÖ¤·¤Þ¤¹¡£
+:IMPLICITã€:EXPLICITã€nil ã®ã„ãšã‚Œã‹ã‚’è¿”ã—ã¾ã™ã€‚
 
-¥¿¥°([[m:OpenSSL::ASN1::ASN1Data#tag]])¤¬ :UNIVERSAL ¤Ê¤é¤Ð
-¤³¤ÎÃÍ¤ÏÌµ»ë¤µ¤ì¤Þ¤¹¡£
+ã‚¿ã‚°([[m:OpenSSL::ASN1::ASN1Data#tag]])ãŒ :UNIVERSAL ãªã‚‰ã°
+ã“ã®å€¤ã¯ç„¡è¦–ã•ã‚Œã¾ã™ã€‚
 
-nil ¤Ï :IMPLICIT ¤ÈÆ±µÁ¤Ç¤¹¡£
+nil ã¯ :IMPLICIT ã¨åŒç¾©ã§ã™ã€‚
 
 @see [[m:OpenSSL::ASN1::Constructive#tagging=]]
 
 --- tagging=(tag)
-¥¿¥°ÉÕ¤±¤ÎÊý¼°¤òÀßÄê¤·¤Þ¤¹¡£
+ã‚¿ã‚°ä»˜ã‘ã®æ–¹å¼ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊý¼°(:IMPLICIT ¤Þ¤¿¤Ï :EXPLICIT)
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹å¼(:IMPLICIT ã¾ãŸã¯ :EXPLICIT)
 @see [[m:OpenSSL::ASN1::Constructive#tagging=]]
 
 --- each {|item| ... } -> self
-¹½Â¤·¿¤Î¥Ç¡¼¥¿¤Ë´Þ¤Þ¤ì¤ë³ÆÍ×ÁÇ¤ËÂÐ¤·¤Æ¥Ö¥í¥Ã¥¯¤ò
-É¾²Á¤·¤Þ¤¹¡£
+æ§‹é€ åž‹ã®ãƒ‡ãƒ¼ã‚¿ã«å«ã¾ã‚Œã‚‹å„è¦ç´ ã«å¯¾ã—ã¦ãƒ–ãƒ­ãƒƒã‚¯ã‚’
+è©•ä¾¡ã—ã¾ã™ã€‚
 
 = class OpenSSL::ASN1::Set < OpenSSL::ASN1::Constructive
-ASN.1 ¤Î Set ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ17)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Set åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·17)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class method
 --- new(value) ->  OpenSSL::ASN1::Set
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Set
-ASN.1 ¤Î Set ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::Set ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Set åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::Set ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::SET]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::SET]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1ÃÍ¤òÉ½¤¹Ruby¤Î¥ª¥Ö¥¸¥§¥¯¥È([[c:OpenSSL::ASN1::ASN1Data]]¤ÎÇÛÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1å€¤ã‚’è¡¨ã™Rubyã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ([[c:OpenSSL::ASN1::ASN1Data]]ã®é…åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 
 = class OpenSSL::ASN1::Sequence < OpenSSL::ASN1::Constructive
 
-ASN.1 ¤Î Sequence ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ16)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Sequence åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·16)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class method
 --- new(value) ->  OpenSSL::ASN1::Sequence
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Sequence
-ASN.1 ¤Î Sequence ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::Sequence ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Sequence åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::Sequence ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::SEQUENCE]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::SEQUENCE]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1ÃÍ¤òÉ½¤¹Ruby¤Î¥ª¥Ö¥¸¥§¥¯¥È([[c:OpenSSL::ASN1::ASN1Data]]¤ÎÇÛÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1å€¤ã‚’è¡¨ã™Rubyã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ([[c:OpenSSL::ASN1::ASN1Data]]ã®é…åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 

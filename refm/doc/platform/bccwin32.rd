@@ -1,7 +1,7 @@
 = bccwin32
 
-Borland C++ ����ѥ���Ǻ��줿 Ruby �Τ��Ȥ� bccwin32 �ǤȤ�����
-ruby version 1.7 ���饵�ݡ��Ȥ��줿��
+Borland C++ コンパイラで作られた Ruby のことを bccwin32 版という。
+ruby version 1.7 からサポートされた。
 
-msvcrt.dll ��Ȥ��Τ����Ȥ���((<mswin32>))�ǤȤθߴ����Ϥɤ����٤ʤΤ���
-���ä����Ȥϡ��Ƽ���ʹ���ƤߤƤ褦��
+msvcrt.dll を使うのか？とか、((<mswin32>))版との互換性はどの程度なのかと
+いったことは、各自で聞いてみてよう。

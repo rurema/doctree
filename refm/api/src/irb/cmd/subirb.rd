@@ -1,66 +1,66 @@
 require irb/cmd/nop
 require irb/ext/multi-irb
 
-irb ��� irb��irb_jobs��irb_fg��irb_kill ���ޥ�ɤΤ���γ�ĥ���������
-���֥饤�֥��Ǥ���
+irb 中の irb、irb_jobs、irb_fg、irb_kill コマンドのための拡張を定義した
+サブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ�
-��ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
 
 = class IRB::ExtendCommand::IrbCommand < IRB::ExtendCommand::Nop
 
-irb ��� irb ���ޥ�ɤΤ���γ�ĥ������������饹�Ǥ���
+irb 中の irb コマンドのための拡張を定義したクラスです。
 
 == Instance Methods
 
 --- execute(*obj) -> IRB::Irb
 
-���������� irb ���󥿥ץ꥿��ư���ޤ���
+新しいサブ irb インタプリタを起動します。
 
-@param obj ���������� irb ���󥿥ץ꥿�� self �ˤ��륪�֥������Ȥ����
-           ���ޤ�����ά�������� irb ��ư�����Ȥ��� main ���֥�����
-           �Ȥ� self �ˤ��ޤ���
+@param obj 新しいサブ irb インタプリタで self にするオブジェクトを指定
+           します。省略した場合は irb を起動したときの main オブジェク
+           トを self にします。
 
 = class IRB::ExtendCommand::Jobs < IRB::ExtendCommand::Nop
 
-irb ��� irb_jobs ���ޥ�ɤΤ���γ�ĥ������������饹�Ǥ���
+irb 中の irb_jobs コマンドのための拡張を定義したクラスです。
 
 == Instance Methods
 
 --- execute -> IRB::JobManager
 
-���� irb �Υꥹ�Ȥ��֤��ޤ���
+サブ irb のリストを返します。
 
 = class IRB::ExtendCommand::Foreground < IRB::ExtendCommand::Nop
 
-irb ��� irb_fg ���ޥ�ɤΤ���γ�ĥ������������饹�Ǥ���
+irb 中の irb_fg コマンドのための拡張を定義したクラスです。
 
 == Instance Methods
 
 --- execute(*obj) -> IRB::Irb
 
-���ꤷ������ irb �˰�ư���ޤ���
+指定したサブ irb に移動します。
 
-@param obj ��ư���륵�� irb ���̤���ʲ��Τ����줫�Υ��֥������Ȥ���ꤷ�ޤ���
+@param obj 移動するサブ irb を識別する以下のいずれかのオブジェクトを指定します。
 
- * irb ���󥿥ץ꥿�ֹ�
- * irb ���֥�������
- * ����å� ID
- * �ƥ��󥿥ץ꥿�� self (��irb(obj)�פǵ�ư�������� obj)
+ * irb インタプリタ番号
+ * irb オブジェクト
+ * スレッド ID
+ * 各インタプリタの self (「irb(obj)」で起動した時の obj)
 
 = class IRB::ExtendCommand::Kill < IRB::ExtendCommand::Nop
 
-irb ��� irb_kill ���ޥ�ɤΤ���γ�ĥ������������饹�Ǥ���
+irb 中の irb_kill コマンドのための拡張を定義したクラスです。
 
 == Instance Methods
 
 --- execute(*obj) -> object
 
-���ꤷ������ irb ����ߤ��ޤ���
+指定したサブ irb を停止します。
 
-@param obj ��ߤ��륵�� irb ���̤���ʲ��Τ����줫�Υ��֥������Ȥ���ꤷ�ޤ���
+@param obj 停止するサブ irb を識別する以下のいずれかのオブジェクトを指定します。
 
- * irb ���󥿥ץ꥿�ֹ�
- * irb ���֥�������
- * ����å� ID
- * �ƥ��󥿥ץ꥿�� self (��irb(obj)�פǵ�ư�������� obj)
+ * irb インタプリタ番号
+ * irb オブジェクト
+ * スレッド ID
+ * 各インタプリタの self (「irb(obj)」で起動した時の obj)

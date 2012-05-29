@@ -1,3 +1,3 @@
-[[c:RDoc::ClassModule]] дЄ─ъ╡┴д╣дые╡е╓ещеде╓ещеъд╟д╣бг
+[[c:RDoc::ClassModule]] уВТхоЪч╛йуБЩуВЛуВ╡уГЦуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 #@include(RDoc__ClassModule)

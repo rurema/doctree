@@ -1,43 +1,43 @@
 require rubygems/command
 require rubygems/builder
 
-Gem �ѥå�������ӥ�ɤ��뤿��Υ饤�֥��Ǥ���
+Gem パッケージをビルドするためのライブラリです。
 
 
   Usage: gem build GEMSPEC_FILE [options]
 #@include(common_options)
     Arguments:
-      GEMSPEC_FILE  Gem �ѥå�������ӥ�ɤ���Τ�ɬ�פ� gemspec �ե�����̾����ꤷ�ޤ�
+      GEMSPEC_FILE  Gem パッケージをビルドするのに必要な gemspec ファイル名を指定します
     Summary:
-      gemspec �ե����뤫�� Gem �ѥå�������ӥ�ɤ��ޤ�
+      gemspec ファイルから Gem パッケージをビルドします
 
 
 = class Gem::Commands::BuildCommand < Gem::Command
 
-Gem �ѥå�������ӥ�ɤ��뤿��Υ��饹�Ǥ���
+Gem パッケージをビルドするためのクラスです。
 
 == Public Instance Methods
 
 --- execute -> ()
 
-���ޥ�ɤ�¹Ԥ��ޤ���
+コマンドを実行します。
 
 --- load_gemspecs(filename) -> Array
 
-gemspec �ե����������ɤ��ޤ���
+gemspec ファイルをロードします。
 
-@param filename �ե�����̾����ꤷ�ޤ���
+@param filename ファイル名を指定します。
 
 --- usage -> String
 
-������ˡ��ɽ��ʸ������֤��ޤ���
+使用方法を表す文字列を返します。
 
 --- arguments -> String
 
-������������ɽ��ʸ������֤��ޤ���
+引数の説明を表す文字列を返します。
 
 --- yaml?(filename) -> bool
 
-Ϳ����줿�ե�����̾����ĥե����뤬 yaml �ե�����Ǥ�����˿����֤��ޤ���
+与えられたファイル名を持つファイルが yaml ファイルである場合に真を返します。
 
-@param filename �ե�����̾����ꤷ�ޤ���
+@param filename ファイル名を指定します。

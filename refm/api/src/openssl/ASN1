@@ -1,65 +1,65 @@
 = module OpenSSL::ASN1
 
 ASN.1(Abstract Syntax Notation One)
- �Υǡ������갷������Υ⥸�塼��Ǥ���
+ のデータを取り扱うためのモジュールです。
 
-OpenSSL�Ǿ�����ʤɤ��갷���Τ�ɬ�פˤʤ�ޤ���
+OpenSSLで証明書などを取り扱うのに必要になります。
 
-���Υ⥸�塼��ˤϡ�ASN.1��Ϣ�Υ⥸�塼��ؿ��������
-ASN.1 �Υǡ��������б����륯�饹���������Ƥ��ޤ���
+このモジュールには、ASN.1関連のモジュール関数や定数、
+ASN.1 のデータ型に対応するクラスが定義されています。
 
-���Υ⥸�塼��� ASN.1 ��ʬ�˼�갷���Τ�ɬ�פʵ�ǽ��
-���äƤ��ޤ���SSL/TLS��ɬ�פʵ�ǽ������������Ƥ��ޤ���
+このモジュールは ASN.1 を十分に取り扱うのに必要な機能は
+持っていません。SSL/TLSで必要な機能しか実装されていません。
 
-ASN.1 �� ITU-T �� ISO �ˤ�ä�������줿���ǡ����ι�¤��������뤿���
-������濴�Ȥ������ʤǤ���
-���θ����������줿���Ū�ʹ�¤��ºݤΥХ������ɽ������
-��ˡ�� ASN.1 �ε��ʤΰ����Ȥ��ƿ������������Ƥ��ޤ���
-���Υ�ե���󥹤Ǹ��ڤ���Ƥ��� DER ������
-���Υ��󥳡��ɷ����ΰ��Ǥ���
+ASN.1 は ITU-T と ISO によって定義された、データの構造を定義するための
+言語を中心とした規格です。
+この言語で定義された抽象的な構造を実際のバイト列で表現する
+方法は ASN.1 の規格の一部として数種類定義されています。
+このリファレンスで言及されている DER 形式も
+このエンコード形式の一種です。
 
-=== ����
+=== 概要
 
-���Υ⥸�塼��ˤ����ơ�
-ASN.1 �Υǡ������� [[c:OpenSSL::ASN1::ASN1Data]] �����
-���Υ��֥��饹�˥ޥåפ���Ƥ��ޤ���
+このモジュールにおいて、
+ASN.1 のデータ型は [[c:OpenSSL::ASN1::ASN1Data]] および
+そのサブクラスにマップされています。
 
-ASN.1 ��ñ�㷿(simple type)�� [[c:OpenSSL::ASN1::Primitive]] ��
-�ƥ��֥��饹�ˡ���¤��(structured type)�� [[c:OpenSSL::ASN1::Constructive]]
-�γƥ��֥��饹���б����Ƥ��ޤ����̾盧���Υ������饹�� UNIVERSAL �Ǥ���
-�����ͤ� [[m:OpenSSL::ASN1::ASN1Data#value]] �Ǽ��Ф��ޤ���
-ñ�㷿���̾�� Ruby �Υ��֥������ȡ���¤��������
-UNIVERSAL�ʳ��Υ������饹���դ���줿���ϡ�
-[[c:OpenSSL::ASN1::ASN1Data]] ���б����ޤ���UNIVERSAL�ʳ��Υ������饹
-�ǥ����դ���줿���Υǡ����ϡ�[[c:OpenSSL::ASN1::ASN1Data]]�Υ��֥������Ȥ�
-ɽ�����졢�����ͤȤ���ʸ����(IMPLICIT�ʥ����դ��ξ��)�⤷����
-����(EXPLICIT�ʥ����դ��ξ��)�Ȥ���ɽ������ޤ���
-#@# ���������ɽ���Ϲ�¤����Ʊ����갷���򤷤Ƥ���
-[[c:OpenSSL::ASN1::Primitive]] �Υ����դ��ξ����Ȥ����Ȥǡ�
-IMPLICIT or EXPLICIT �ʥ����դ���¸����뤳�Ȥ�Ǥ��ޤ���
+ASN.1 の単純型(simple type)は [[c:OpenSSL::ASN1::Primitive]] の
+各サブクラスに、構造型(structured type)は [[c:OpenSSL::ASN1::Constructive]]
+の各サブクラスに対応しています。通常これらのタグクラスは UNIVERSAL です。
+その値は [[m:OpenSSL::ASN1::ASN1Data#value]] で取り出せます。
+単純型は通常の Ruby のオブジェクト、構造型は配列
+UNIVERSAL以外のタグクラスを付けられた型は、
+[[c:OpenSSL::ASN1::ASN1Data]] に対応します。UNIVERSAL以外のタグクラス
+でタグ付けられた型のデータは、[[c:OpenSSL::ASN1::ASN1Data]]のオブジェクトで
+表現され、その値として文字列(IMPLICITなタグ付けの場合)もしくは
+配列(EXPLICITなタグ付けの場合)として表現されます。
+#@# この配列な表現は構造型と同じ取り扱いをしている
+[[c:OpenSSL::ASN1::Primitive]] のタグ付けの情報を使うことで、
+IMPLICIT or EXPLICIT なタグ付けを実現することもできます。
 
-��:
-  # ñ�㷿�Υǡ���
+例:
+  # 単純型のデータ
   x = OpenSSL::ASN1::UTF8String.new("foobar")
-  # ��¤���Υǡ���
+  # 構造型のデータ
   y = OpenSSL::ASN1::Sequence.new([OpenSSL::ASN1::Boolean.new(true),
                                   OpenSSL::ASN1::Integer.new(-12)])
-  # APPLICATION �������饹�Υ���2�֤ǥ����դ���줿�ǡ���
+  # APPLICATION タグクラスのタグ2番でタグ付けられたデータ
   z = OpenSSL::ASN1::ASN1Data.new([OpenSSL::ASN1::Boolean.new(false)], 
                                   2, :APPLICATION)
-  # ���Ʊ�ͤΥǡ����� OpenSSL::ASN1::Booelan.new ��2���ܰʹߤ�
-  # ������ɽ������
+  # 上と同様のデータを OpenSSL::ASN1::Booelan.new の2番目以降の
+  # 引数で表現する
   z2 = OpenSSL::ASN1::Boolean.new(false, 2, :EXPLICIT, :APPLICATION)
-  # IMPLICIT �ʥ����դ��򤹤�
+  # IMPLICIT なタグ付けをする
   u = OpenSSL::ASN1::Boolean.new(false, 3, :IMPLICIT, :APPLICATION)
 
-  # to_der �ǥ��󥳡���
+  # to_der でエンコード
   x.to_der  # => "\f\x06foobar"
   y.to_der  # => "0\x06\x01\x01\xFF\x02\x01\xF4"
   z.to_der  # => "b\x03\x01\x01\x00"
-  z2.to_der # => "b\x03\x01\x01\x00"  ����� z.to_der ��Ʊ��
+  z2.to_der # => "b\x03\x01\x01\x00"  これは z.to_der と同じ
   u.to_der # => "C\x01\x00"
-  # ���󥳡��ɤ���ʸ�����ǥ�����
+  # エンコードした文字列をデコード
   OpenSSL::ASN1.decode(x.to_der)
   # => #<OpenSSL::ASN1::UTF8String:0x000000027cc700 @tag=12, @value="foobar", @tagging=nil, @tag_class=:UNIVERSAL>
   OpenSSL::ASN1.decode(y.to_der)
@@ -68,17 +68,17 @@ IMPLICIT or EXPLICIT �ʥ����դ���¸����뤳�Ȥ�Ǥ��ޤ���
   # => #<OpenSSL::ASN1::ASN1Data:0x000000027bc918 @tag=2, @value=[#<OpenSSL::ASN1::Boolean:0x000000027bc968 @tag=1, @value=false, @tagging=nil, @tag_class=:UNIVERSAL>], @tag_class=:APPLICATION>
   OpenSSL::ASN1.decode(u.to_der)
   # => #<OpenSSL::ASN1::ASN1Data:0x000000025bef30 @tag=3, @value="\x00", @tag_class=:APPLICATION>
-  # @value�� "\x00" �Ȥ���ʸ����ˤʤäƤ���
+  # @valueが "\x00" という文字列になっている
 
-���Υ⥸�塼��� ASN.1 ��ˡ�ˤ�뵭�Ҥ��ᤷ�����Ѥ��뵡ǽ�Ϥʤ����ᡢ
-IMPLICIT�ʥ����դ��򤵤줿�ǡ�����Ŭ�ڤ˼�갷�����Ȥ����ݤǤ��礦��
+このモジュールは ASN.1 記法による記述を解釈し、利用する機能はないため、
+IMPLICITなタグ付けをされたデータを適切に取り扱うことは面倒でしょう。
 
-DER������ʸ�����ǥ����ɤ���Ruby�Υ��֥������Ȥ��Ѵ�����ˤ�
-[[m:OpenSSL::ASN1.#decode]] �⤷���� [[m:OpenSSL::ASN1.#decode_all]] ���Ѥ��ޤ���
-�դˡ�[[c:OpenSSL::ASN1::ASN1Data]] �Υ��֥������Ȥ� DER ������ʸ�����
-�Ѵ�����ˤϡ�[[m:OpenSSL::ASN1::ASN1Data#to_der]]���Ѥ��ޤ���
+DER形式の文字列をデコードしてRubyのオブジェクトに変換するには
+[[m:OpenSSL::ASN1.#decode]] もしくは [[m:OpenSSL::ASN1.#decode_all]] を用います。
+逆に、[[c:OpenSSL::ASN1::ASN1Data]] のオブジェクトを DER 形式の文字列に
+変換するには、[[m:OpenSSL::ASN1::ASN1Data#to_der]]を用います。
 
-���饹����
+クラス階層
      OpenSSL::ASN1::ASN1Data
        +-> OpenSSL::ASN1::Primitive
        |     +-> OpenSSL::ASN1::Boolean
@@ -106,11 +106,11 @@ DER������ʸ�����ǥ����ɤ���Ruby�Υ��֥������Ȥ��Ѵ�����ˤ�
              `-> OpenSSL::ASN1::Sequence
 
 
-#@# ���Υɥ�����Ȥǡ�ASN.1 ���͡ס��⤷���ϡ�ASN.1 �͡פȸ��ä���硢
-#@# ASN.1 ��������줿���ˤ�ä�ɽ��������ͤ��̣���Ƥ��Ƥ��뤳�Ȥ�����
-#@# �Ĥޤ���͡פȤ���ñ��Ϥ����Ǥ� ASN.1 ��ͭ�γ�ǰ��ؤ��Ƥ��롣
+#@# このドキュメントで「ASN.1 の値」、もしくは「ASN.1 値」と言った場合、
+#@# ASN.1 で定義された型によって表現される値を意味していていることに注意
+#@# つまり「値」という単語はここでは ASN.1 特有の概念を指している。
 
-=== ����
+=== 参照
 
 * ITU-T Rec. X.680-699 [[url:http://www.itu.int/itu-t/recommendations/index.aspx?ser=X]]
 
@@ -121,15 +121,15 @@ DER������ʸ�����ǥ����ɤ���Ruby�Υ��֥������Ȥ��Ѵ�����ˤ�
 == Module Functions
 
 --- decode(der) -> OpenSSL::ASN1::ASN1Data
-DER ɽ����ʸ�������Ϥ��������˥��󥳡��ɤ���Ƥ��� ASN.1 ���ͤ�
-[[c:OpenSSL::ASN1::ASN1Data]] �Υ��֥��饹�Υ��󥹥��󥹤Ȥ����֤��ޤ���
+DER 表現の文字列を解析し、そこにエンコードされている ASN.1 の値を
+[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタンスとして返します。
 
-ʣ���� ASN.1 ���ͤ��ޤޤ�Ƥ����硢��Ƭ���ͤ������֤��ޤ���
+複数の ASN.1 の値が含まれている場合、先頭の値だけを返します。
 
-ASN.1 ���֥������Ȥ� Constructive �Ǥ�����ϡ�
-��������������Ǥ�Ƶ�Ū�˲��Ϥ��ޤ���
+ASN.1 オブジェクトが Constructive である場合は、
+それを構成する要素も再帰的に解析します。
 
-��:
+例:
 
   ruby -e '
   require "openssl"
@@ -159,466 +159,466 @@ ASN.1 ���֥������Ȥ� Constructive �Ǥ�����ϡ�
             @value=2>]>,
             ...
 
-@param der DER������ʸ����
-@raise OpenSSL::ASN1Error ���Ϥ˼��Ԥ�������ȯ�����ޤ�
+@param der DER形式の文字列
+@raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
 
 --- decode_all(der) -> [OpenSSL::ASN1::ASN1Data]
-DER ɽ����ʸ�������Ϥ��������˥��󥳡��ɤ���Ƥ��� ASN.1 ���ͤ�����
-[[c:OpenSSL::ASN1::ASN1Data]] �Υ��֥��饹�Υ��󥹥��󥹤�����Ȥ���
-�֤��ޤ���
+DER 表現の文字列を解析し、そこにエンコードされている ASN.1 の値を全て
+[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタンスの配列として
+返します。
 
-@param der DER������ʸ����
-@raise OpenSSL::ASN1Error ���Ϥ˼��Ԥ�������ȯ�����ޤ�
+@param der DER形式の文字列
+@raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
 @see [[m:OpenSSl::ASN1.#decode]]
 
 --- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> Qnil
-DER������ʸ�������Ϥ��������˴ޤޤ�� ASN.1 ����
-�Υץ��ѥƥ�������Ȥ���Ϳ����줿�֥��å���ƤӤ����ޤ���
+DER形式の文字列を解析し、そこに含まれる ASN.1 の値
+のプロパティを引数として与えられたブロックを呼びだします。
 
-[[m:OpenSSL::ASN1.#decode_all]] �Τ褦�ˡ�ʸ����˴ޤޤ��
-���Ƥ� ASN.1 ���֥������ȤΥ��󥹥��󥹤���Ϥ��ޤ���
+[[m:OpenSSL::ASN1.#decode_all]] のように、文字列に含まれる
+全ての ASN.1 オブジェクトのインスタンスを解析します。
 
-�֥��å����Ϥ��������ϰʲ����̤�Ǥ���
-  * depth: �Ƶ��ο���
-  * off: �оݤ��ͤ򥨥󥳡��ɤ���ʸ����� der ����Ƭ����Υ��ե��å�
-  * hlen: ���󥳡��ɤ��줿�ǡ����Υإå��ΥХ��ȿ�
-  * len: ���󥳡��ɤ��줿�ǡ������ͥե�����ɤΥХ��ȿ�
-  * constructed:�оݤ� ASN.1 �ͤ� Constructive �ʤ鿿
-  * tag_class: �������饹��ɽ�� [[c:Symbol]] ���֥�������
-    (:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
-  * tag: �����ֹ�
+ブロックに渡される引数は以下の通りです。
+  * depth: 再帰の深さ
+  * off: 対象の値をエンコードした文字列の der の先頭からのオフセット
+  * hlen: エンコードされたデータのヘッダのバイト数
+  * len: エンコードされたデータの値フィールドのバイト数
+  * constructed:対象の ASN.1 値が Constructive なら真
+  * tag_class: タグクラスを表す [[c:Symbol]] オブジェクト
+    (:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
+  * tag: タグ番号
 
-@param der DER������ʸ����
-@raise OpenSSL::ASN1Error ���Ϥ˼��Ԥ�������ȯ�����ޤ�
+@param der DER形式の文字列
+@raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
 @see [[m:OpenSSl::ASN1.#decode]]
 
 --- Boolean(value) -> OpenSSL::ASN1::Boolean
 --- Boolean(value , tag , tagging , tag_class) -> OpenSSL::ASN1::Boolean
-ASN.1 �� Boolean �����ͤ�ɽ������ OpenSSL::ASN1::Boolean ���֥������Ȥ�
-�������ޤ���
+ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN::Boolean.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN::Boolean.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(true �⤷���� false)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(true もしくは false)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- Integer(value) -> OpenSSL::ASN1::Integer
 --- Integer(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Integer
-ASN.1 �� Integer �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の Integer 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::Integer.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::Integer.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������([[c:OpenSSL::BN]]�Υ��󥹥���)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト([[c:OpenSSL::BN]]のインスタンス)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- Enumerated(value) -> OpenSSL::ASN1::Enumerated
 --- Enumerated(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Enumerated
-ASN.1 �� Enumerated �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の Enumerated 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::Enumerated.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::Enumerated.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(0�ʾ������)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(0以上の整数)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- BitString(value) -> OpenSSL::ASN1::BitString -> OpenSSL::ASN1::BitString
 --- BitString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BitString
-ASN.1 �� BitString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の BitString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::BitString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::BitString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- OctetString(value) -> OpenSSL::ASN1::OctetString -> OpenSSL::ASN1::OctetString
 --- OctetString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::OctetString
-ASN.1 �� OctetString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の OctetString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::OctetString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::OctetString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- UTF8String(value) -> OpenSSL::ASN1::UTF8String -> OpenSSL::ASN1::UTF8String
 --- UTF8String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTF8String
-ASN.1 �� UTF8String �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の UTF8String 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::UTF8String.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::UTF8String.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- NumericString(value) -> OpenSSL::ASN1::NumericString -> OpenSSL::ASN1::NumericString
 --- NumericString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::NumericString
-ASN.1 �� NumericString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の NumericString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::NumericString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::NumericString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- PrintableString(value) -> OpenSSL::ASN1::PrintableString -> OpenSSL::ASN1::PrintableString
 --- PrintableString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::PrintableString
-ASN.1 �� PrintableString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の PrintableString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::PrintableString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::PrintableString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- T61String(value) -> OpenSSL::ASN1::T61String -> OpenSSL::ASN1::T61String
 --- T61String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::T61String
-ASN.1 �� T61String �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の T61String 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::T61String.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::T61String.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- VideotexString(value) -> OpenSSL::ASN1::VideotexString -> OpenSSL::ASN1::VideotexString
 --- VideotexString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::VideotexString
-ASN.1 �� VideotexString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の VideotexString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::VideotexString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::VideotexString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- IA5String(value) -> OpenSSL::ASN1::IA5String -> OpenSSL::ASN1::IA5String
 --- IA5String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::IA5String
-ASN.1 �� IA5String �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の IA5String 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::IA5String.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::IA5String.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- GraphicString(value) -> OpenSSL::ASN1::GraphicString -> OpenSSL::ASN1::GraphicString
 --- GraphicString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GraphicString
-ASN.1 �� GraphicString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の GraphicString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::GraphicString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::GraphicString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- ISO64String(value) -> OpenSSL::ASN1::ISO64String -> OpenSSL::ASN1::ISO64String
 --- ISO64String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ISO64String
-ASN.1 �� ISO64String �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の ISO64String 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::ISO64String.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::ISO64String.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- GeneralString(value) -> OpenSSL::ASN1::GeneralString -> OpenSSL::ASN1::GeneralString
 --- GeneralString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralString
-ASN.1 �� GeneralString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の GeneralString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::GeneralString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::GeneralString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- UniversalString(value) -> OpenSSL::ASN1::UniversalString -> OpenSSL::ASN1::UniversalString
 --- UniversalString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UniversalString
-ASN.1 �� UniversalString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の UniversalString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::UniversalString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::UniversalString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- BMPString(value) -> OpenSSL::ASN1::BMPString -> OpenSSL::ASN1::BMPString
 --- BMPString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BMPString
-ASN.1 �� BMPString �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の BMPString 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::BMPString.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::BMPString.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(ʸ����)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(文字列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- Null(value) -> OpenSSL::ASN1::Null -> OpenSSL::ASN1::Null
 --- Null(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Null
-ASN.1 �� Null �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の Null 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::Null.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::Null.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(nil�Τ�)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(nilのみ)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- ObjectId(value) -> OpenSSL::ASN1::ObjectId -> OpenSSL::ASN1::ObjectId
 --- ObjectId(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
-ASN.1 �� ObjectId �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の ObjectId 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::ObjectId.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::ObjectId.new]] と同じです。
 
-@param value ASN.1 ���֥������ȼ��̻Ҥ�ɽ��ʸ����
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 オブジェクト識別子を表す文字列
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- UTCTime(value) -> OpenSSL::ASN1::UTCTime -> OpenSSL::ASN1::UTCTime
 --- UTCTime(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTCTime
-ASN.1 �� UTCTime �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の UTCTime 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::UTCTime.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::UTCTime.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(Time�Υ��֥�������)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(Timeのオブジェクト)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- GeneralizedTime(value) -> OpenSSL::ASN1::GeneralizedTime -> OpenSSL::ASN1::GeneralizedTime
 --- GeneralizedTime(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralizedTime
-ASN.1 �� GeneralizedTime �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の GeneralizedTime 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::GeneralizedTime.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::GeneralizedTime.new]] と同じです。
 
-@param value ASN.1 �ͤ�ɽ�� Ruby �Υ��֥�������(Time�Υ��֥�������)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1 値を表す Ruby のオブジェクト(Timeのオブジェクト)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- Sequence(value) -> OpenSSL::ASN1::Sequence -> OpenSSL::ASN1::Sequence
 --- Sequence(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Sequence
-ASN.1 �� Sequence �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の Sequence 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::Sequence.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::Sequence.new]] と同じです。
 
-@param value ASN.1�ͤ�ɽ��Ruby�Υ��֥�������([[c:OpenSSL::ASN1::ASN1Data]]������)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1値を表すRubyのオブジェクト([[c:OpenSSL::ASN1::ASN1Data]]の配列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 --- Set(value) -> OpenSSL::ASN1::Set -> OpenSSL::ASN1::Set
 --- Set(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Set
-ASN.1 �� Set �����ͤ�ɽ������ Ruby �Υ��֥������Ȥ�
-�������ޤ���
+ASN.1 の Set 型の値を表現する Ruby のオブジェクトを
+生成します。
 
-[[m:OpenSSL::ASN1::Set.new]] ��Ʊ���Ǥ���
+[[m:OpenSSL::ASN1::Set.new]] と同じです。
 
-@param value ASN.1�ͤ�ɽ��Ruby�Υ��֥�������([[c:OpenSSL::ASN1::ASN1Data]]������)
-@param tag �����ֹ�
-@param tagging �����դ�����ˡ(:IMPLICIT �⤷���� :EXPLICIT)
-@param tag_class �������饹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE �Τ����줫)
+@param value ASN.1値を表すRubyのオブジェクト([[c:OpenSSL::ASN1::ASN1Data]]の配列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 == Constants
 
 --- UNIVERSAL_TAG_NAME -> [String]
-�����ֹ椬ɽ�� ASN.1 ���֥�������̾���Ͽ��������Ǥ���
+タグ番号が表す ASN.1 オブジェクト名を収録した配列です。
 
-��:
+例:
 
   require 'openssl'
   p OpenSSL::ASN1::UNIVERSAL_TAG_NAME[0]  # => "EOC"
   p OpenSSL::ASN1::UNIVERSAL_TAG_NAME[12] # => "UTF8STRING"
 
-ASN.1 ���֥������ȤΥ����ֹ��ɽ��������ʲ��Τ褦���������Ƥ��ޤ���
+ASN.1 オブジェクトのタグ番号を表す定数が以下のように定義されています。
 
   require 'openssl'
   p OpenSSL::ASN1::UTF8STRING # => 12
 
 --- EOC -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-EOC �Υ����ֹ� 0 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+EOC のタグ番号 0 を表す定数です。
 
 --- BOOLEAN -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-BOOLEAN �Υ����ֹ� 1 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+BOOLEAN のタグ番号 1 を表す定数です。
 
 --- INTEGER -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-INTEGER �Υ����ֹ� 2 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+INTEGER のタグ番号 2 を表す定数です。
 
 --- BIT_STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-BIT_STRING �Υ����ֹ� 3 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+BIT_STRING のタグ番号 3 を表す定数です。
 
 --- OCTET_STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-OCTET_STRING �Υ����ֹ� 4 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+OCTET_STRING のタグ番号 4 を表す定数です。
 
 --- NULL -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-NULL �Υ����ֹ� 5 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+NULL のタグ番号 5 を表す定数です。
 
 --- OBJECT -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-OBJECT �Υ����ֹ� 6 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+OBJECT のタグ番号 6 を表す定数です。
 
 --- OBJECT_DESCRIPTOR -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-OBJECT_DESCRIPTOR �Υ����ֹ� 7 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+OBJECT_DESCRIPTOR のタグ番号 7 を表す定数です。
 
 --- EXTERNAL -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-EXTERNAL �Υ����ֹ� 8 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+EXTERNAL のタグ番号 8 を表す定数です。
 
 --- REAL -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-REAL �Υ����ֹ� 9 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+REAL のタグ番号 9 を表す定数です。
 
 --- ENUMERATED -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-ENUMERATED �Υ����ֹ� 10 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+ENUMERATED のタグ番号 10 を表す定数です。
 
 --- EMBEDDED_PDV -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-EMBEDDED_PDV �Υ����ֹ� 11 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+EMBEDDED_PDV のタグ番号 11 を表す定数です。
 
 --- UTF8STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-UTF8STRING �Υ����ֹ� 12 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+UTF8STRING のタグ番号 12 を表す定数です。
 
 --- RELATIVE_OID -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-RELATIVE_OID �Υ����ֹ� 13 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+RELATIVE_OID のタグ番号 13 を表す定数です。
 
 --- SEQUENCE -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-SEQUENCE �Υ����ֹ� 16 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+SEQUENCE のタグ番号 16 を表す定数です。
 
 --- SET -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-SET �Υ����ֹ� 17 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+SET のタグ番号 17 を表す定数です。
 
 --- NUMERICSTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-NUMERICSTRING �Υ����ֹ� 18 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+NUMERICSTRING のタグ番号 18 を表す定数です。
 
 --- PRINTABLESTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-PRINTABLESTRING �Υ����ֹ� 19 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+PRINTABLESTRING のタグ番号 19 を表す定数です。
 
 --- T61STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-T61STRING �Υ����ֹ� 20 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+T61STRING のタグ番号 20 を表す定数です。
 
 --- VIDEOTEXSTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-VIDEOTEXSTRING �Υ����ֹ� 21 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+VIDEOTEXSTRING のタグ番号 21 を表す定数です。
 
 --- IA5STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-IA5STRING �Υ����ֹ� 22 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+IA5STRING のタグ番号 22 を表す定数です。
 
 --- UTCTIME -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-UTCTIME �Υ����ֹ� 23 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+UTCTIME のタグ番号 23 を表す定数です。
 
 --- GENERALIZEDTIME -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-GENERALIZEDTIME �Υ����ֹ� 24 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+GENERALIZEDTIME のタグ番号 24 を表す定数です。
 
 --- GRAPHICSTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-GRAPHICSTRING �Υ����ֹ� 25 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+GRAPHICSTRING のタグ番号 25 を表す定数です。
 
 --- ISO64STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-ISO64STRING �Υ����ֹ� 26 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+ISO64STRING のタグ番号 26 を表す定数です。
 
 --- GENERALSTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-GENERALSTRING �Υ����ֹ� 27 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+GENERALSTRING のタグ番号 27 を表す定数です。
 
 --- UNIVERSALSTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-UNIVERSALSTRING �Υ����ֹ� 28 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+UNIVERSALSTRING のタグ番号 28 を表す定数です。
 
 --- CHARACTER_STRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-CHARACTER_STRING �Υ����ֹ� 29 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+CHARACTER_STRING のタグ番号 29 を表す定数です。
 
 --- BMPSTRING -> Integer
 
-ASN.1 UNIVERSAL �����Ρ�
-BMPSTRING �Υ����ֹ� 30 ��ɽ������Ǥ���
+ASN.1 UNIVERSAL タグの、
+BMPSTRING のタグ番号 30 を表す定数です。
 
 = class OpenSSL::ASN1::ASN1Error < OpenSSL::OpenSSLError
 
-OpenSSL�� ASN.1 ��Ϣ�Υ��顼���������Ȥ���ȯ�������㳰�Ǥ���
+OpenSSLの ASN.1 関連のエラーが起きたときに発生する例外です。
 
 

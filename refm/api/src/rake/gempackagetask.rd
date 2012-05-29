@@ -1,16 +1,16 @@
 require rake
 require rake/packagetask
 
-Gem Spec �ե�����򸵤ˤ��� Gem �ѥå�������������륿������������뤿��Υ饤�֥��Ǥ���
+Gem Spec ファイルを元にして Gem パッケージを作成するタスクを定義するためのライブラリです。
 
-Gem �ѥå����������Ǥʤ� zip, tgz, tar.gz, tar.bz2 �γƥե����������������Ǥ��ޤ���
+Gem パッケージだけでなく zip, tgz, tar.gz, tar.bz2 の各ファイルを作成する事もできます。
 
-�ʲ��Υ�������������ޤ���
+以下のタスクを定義します。
 
 : PACKAGE_DIR/NAME-VERSION.gem
-  Gem �ѥå�������������ޤ���
+  Gem パッケージを作成します。
 
-��:
+例:
    require 'rubygems'
    
    spec = Gem::Specification.new do |s|
@@ -35,7 +35,7 @@ Gem �ѥå����������Ǥʤ� zip, tgz, tar.gz, tar.bz2 �γƥե����������������Ǥ
 
 = class Rake::GemPackageTask < Rake::PackageTask
 
-Gem Spec �ե�����򸵤ˤ��� Gem �ѥå�������������륿������������뤿��Υ��饹�Ǥ���
+Gem Spec ファイルを元にして Gem パッケージを作成するタスクを定義するためのクラスです。
 
 
 == Public Instance Methods
@@ -43,39 +43,39 @@ Gem Spec �ե�����򸵤ˤ��� Gem �ѥå�������������륿������������뤿��Υ��饹
 --- define
 #@# discard
 
-��������������ޤ���
+タスクを定義します。
 
-[[m:GemPackageTask.new]] �˥֥��å���Ϳ�����Ƥ�����ˡ���ưŪ�˸ƤӽФ���ޤ���
+[[m:GemPackageTask.new]] にブロックが与えられている場合に、自動的に呼び出されます。
 
 --- gem_file -> String
 
-Gem �ѥå�������̾�����֤��ޤ���
+Gem パッケージの名前を返します。
 
 --- gem_spec -> Gem::Specification
 
-package �������åȤǻ��Ѥ��� gemspec ���֤��ޤ���
+package ターゲットで使用する gemspec を返します。
 
-gemspec �ˤϥѥå�����̾���С�����󡢥ѥå������˴ޤޤ��ե�����ʤɤ����
-����Ƥ���Τǡ�����������Ū�˻��ꤹ��ɬ�פϤ���ޤ���
+gemspec にはパッケージ名、バージョン、パッケージに含まれるファイルなどが定義
+されているので、それらを明示的に指定する必要はありません。
 
 --- gem_spec=(gem_spec)
 
-gemspec �򥻥åȤ��ޤ���
+gemspec をセットします。
 
-@param gem_spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- init(gem_spec)
 #@# discard
 
-���Ȥγ�°���˽���ͤ򥻥åȤ��ޤ���
+自身の各属性に初期値をセットします。
 
 == Singleton Methods
 
 --- new(gem_spec){|t| ... } -> Rake::GemPackageTask
 
-���Ȥ��������ƥ�������������ޤ���
+自身を初期化してタスクを定義します。
 
-�֥��å���Ϳ����줿���ϡ����Ȥ�֥��å��ѥ�᡼���Ȥ���
-�֥��å���ɾ�����ޤ���
+ブロックが与えられた場合は、自身をブロックパラメータとして
+ブロックを評価します。
 
-@param gem_spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。

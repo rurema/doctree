@@ -1,11 +1,11 @@
 = class WIN32OLE_PARAM < Object
 
-OLE�����ȥ᡼����󥵡��Ф����ĥ᥽�åɤΥѥ�᡼��������󶡤��ޤ���
+OLEオートメーションサーバが持つメソッドのパラメータ情報を提供します。
 
-WIN32OLE_PARAM�ϡ�[[c:WIN32OLE_METHOD]]�Υѥ�᡼���Υ᥿�ǡ������ݻ���
-�ޤ���
+WIN32OLE_PARAMは、[[c:WIN32OLE_METHOD]]のパラメータのメタデータを保持し
+ます。
 
-=== ����ץ륳����
+=== サンプルコード
 
      tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
      method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -18,17 +18,17 @@ WIN32OLE_PARAM�ϡ�[[c:WIN32OLE_METHOD]]�Υѥ�᡼���Υ᥿�ǡ������ݻ���
 
 --- new(ole_method,  index) -> WIN32OLE_PARAM
 
-�᥽�åɤȥѥ�᡼�����֤���ꤷ��WIN32OLE_PARAM�Υ��󥹥��󥹤�������ޤ���
+メソッドとパラメータ位置を指定してWIN32OLE_PARAMのインスタンスを作成します。
 
-���ץꥱ�������ץ������Ǥϡ�WIN32OLE_PARAM���֥������Ȥ�new�᥽�å�
-������������⡢[[m:WIN32OLE_METHOD#params]]�򻲾Ȥ���ۤ�����ñ�Ǥ���
+アプリケーションプログラムでは、WIN32OLE_PARAMオブジェクトをnewメソッド
+で生成するよりも、[[m:WIN32OLE_METHOD#params]]を参照するほうが簡単です。
 
-@param ole_method �ѥ�᡼�����������[[c:WIN32OLE_METHOD]]�Υ��󥹥��󥹡�
-@param index �ѥ�᡼���ΰ��֡��Ǻ�ü��1�Ȥ��ޤ���
-@return �᥽�åɤλ�����֤Υѥ�᡼���ξ������ĥ��֥������Ȥ��֤��ޤ���
-@raise TypeError ole_method�ѥ�᡼����[[c:WIN32OLE_METHOD]]�Υ��󥹥��󥹤ǤϤ���ޤ���
-@raise IndexError index�ѥ�᡼����1����ѥ�᡼���ο����ϰϤˤ���ޤ���
-@raise RuntimeError �����᥽�åɤΥ᥿�ǡ����������Ǥ��ޤ���
+@param ole_method パラメータを取得する[[c:WIN32OLE_METHOD]]のインスタンス。
+@param index パラメータの位置。最左端を1とします。
+@return メソッドの指定位置のパラメータの情報を持つオブジェクトを返します。
+@raise TypeError ole_methodパラメータが[[c:WIN32OLE_METHOD]]のインスタンスではありません。
+@raise IndexError indexパラメータが1からパラメータの数の範囲にありません。
+@raise RuntimeError 該当メソッドのメタデータが取得できません。
 
 
    excel = WIN32OLE.new('Excel.Application')
@@ -39,11 +39,11 @@ WIN32OLE_PARAM�ϡ�[[c:WIN32OLE_METHOD]]�Υѥ�᡼���Υ᥿�ǡ������ݻ���
 == Instance Methods
 
 --- default -> object | nil
-�ѥ�᡼������ꤷ�ʤ��ä����δ����ͤ�������ޤ���
+パラメータを指定しなかった場合の既定値を取得します。
 
-���ѥ�᡼����ɬ�ܥѥ�᡼���ξ���nil���֤��ޤ���
+当パラメータが必須パラメータの場合はnilを返します。
 
-@return �ѥ�᡼������ꤷ�ʤ��ä����δ����͡�ɬ�ܥѥ�᡼���ʤ��nil���֤��ޤ���
+@return パラメータを指定しなかった場合の既定値。必須パラメータならばnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -57,17 +57,17 @@ WIN32OLE_PARAM�ϡ�[[c:WIN32OLE_METHOD]]�Υѥ�᡼���Υ᥿�ǡ������ݻ���
 
 
 --- input? -> bool
-�ѥ�᡼�������饤����Ȥ��饵���Ф�Ϳ�����Τ���Ƚ�ꤷ�ޤ���
+パラメータがクライアントからサーバへ与えるものかを判定します。
 
-OLE�����ȥ᡼�����Υѥ�᡼���ϡ�in(���饤����Ȥ��饵���Ф�Ϳ���롣
-[[m:WIN32OLE_PARAM#input?]]����)��out�ʥ����Ф����饤����Ȥ�Ϳ���롣
-[[m:WIN32OLE_PARAM#output?]]����)����ӡ�inout�ʥ��饤����Ȥ��饵����
-��Ϳ���������Ф����饤����Ȥ�Ϳ����ˤ�3���������°���Τ����줫�����
-�ޤ���
+OLEオートメーションのパラメータは、in(クライアントからサーバへ与える。
+[[m:WIN32OLE_PARAM#input?]]が真)、out（サーバがクライアントへ与える。
+[[m:WIN32OLE_PARAM#output?]]が真)および、inout（クライアントからサーバ
+へ与え、サーバがクライアントへ与える）の3種類の方向属性のいずれかを持ち
+ます。
 
-input?�᥽�åɤ�in°���ޤ���inout°���ʤ鿿���֤��ޤ���
+input?メソッドはin属性またはinout属性なら真を返します。
 
-@return �᥽�åɤ�����°����in�ޤ���inout�ʤ�п����֤��ޤ���
+@return メソッドの方向属性がinまたはinoutならば真を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -78,9 +78,9 @@ input?�᥽�åɤ�in°���ޤ���inout°���ʤ鿿���֤��ޤ���
 
 --- name -> String
 --- to_s -> String
-�ѥ�᡼��̾��������ޤ���
+パラメータ名を取得します。
 
-@return �ѥ�᡼��̾���֤��ޤ���̾���դ����������ǥ᥽�åɤ�ƤӽФ��Ȥ��˻��ꤷ�ޤ���
+@return パラメータ名を返します。名前付き引数形式でメソッドを呼び出すときに指定します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -88,41 +88,41 @@ input?�᥽�åɤ�in°���ޤ���inout°���ʤ鿿���֤��ޤ���
    puts param1.name # => Filename
 
 --- ole_type -> String
-�ѥ�᡼���η�̾��������ޤ���
+パラメータの型名を取得します。
 
-@return �ѥ�᡼���η�̾�򼨤�ʸ������֤��ޤ���
-        �ѥ�᡼���η����󤬸��Ĥ���ʤ����ϡ�"unknown type"���֤��ޤ���
+@return パラメータの型名を示す文字列を返します。
+        パラメータの型情報が見つからない場合は、"unknown type"を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    param1 = method.params[0]
    puts param1.ole_type # => VARIANT
 
-OLE�����ȥ᡼�����η�̾�ϡ��б�����[[c:WIN32OLE::VARIANT]]���������
-Ƭ�Ρ�VT_�פ�������̾�Τ�����ޤ���
+OLEオートメーションの型名は、対応する[[c:WIN32OLE::VARIANT]]の定数の先
+頭の「VT_」を削除した名称を持ちます。
 
-���Ȥ��С�32�ӥå�����դ������Ǥ���С�I4�פȤʤ�ޤ���
+たとえば、32ビット符号付き整数であれば「I4」となります。
 
 @see [[c:WIN32OLE::VARIANT]]
 
 --- ole_type_detail -> [String]
-�ѥ�᡼����°����������ޤ���
+パラメータの属性を取得します。
 
-@return ����°����ʸ����������֤��ޤ���
+@return 型の属性を文字列配列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'IWorksheetFunction')
    method = WIN32OLE_METHOD.new(tobj, 'SumIf')
    param1 = method.params[0]
    p param1.ole_type_detail # => ["PTR", "USERDEFINED", "Range"]
 
-�ѥ�᡼���μ������°���ͤ�COM��IDL�ʥ��󥿡��ե������������ˤˤ�äƵ��ꤵ��Ƥ��ޤ���
+パラメータの取り得る属性値はCOMのIDL（インターフェイス定義言語）によって規定されています。
 
 @see [[url:http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx]]
 
 --- optional? -> bool
-�ѥ�᡼�������ץ���󤫤ɤ�����������ޤ���
+パラメータがオプションかどうかを取得します。
 
-@return �ѥ�᡼�������ץ����ʾ�ά��ǽ�ˤǤ���п����֤��ޤ���
+@return パラメータがオプション（省略可能）であれば真を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -130,17 +130,17 @@ OLE�����ȥ᡼�����η�̾�ϡ��б�����[[c:WIN32OLE::VARIANT]]���������
    puts "#{param1.name} #{param1.optional?}" # => Filename true
 
 --- output? -> bool
-�ѥ�᡼�������饤����Ȥ���η�̤������뤿��Τ�Τ���Ƚ�ꤷ�ޤ���
+パラメータがクライアントからの結果を受け取るためのものかを判定します。
 
-OLE�����ȥ᡼�����Υѥ�᡼���ϡ�in(���饤����Ȥ��饵���Ф�Ϳ���롣
-[[m:WIN32OLE_PARAM#input?]]����)��out�ʥ����Ф����饤����Ȥ�Ϳ���롣
-[[m:WIN32OLE_PARAM#output?]]����)����ӡ�inout�ʥ��饤����Ȥ��饵����
-��Ϳ���������Ф����饤����Ȥ�Ϳ����ˤ�3���������°���Τ����줫�����
-�ޤ���
+OLEオートメーションのパラメータは、in(クライアントからサーバへ与える。
+[[m:WIN32OLE_PARAM#input?]]が真)、out（サーバがクライアントへ与える。
+[[m:WIN32OLE_PARAM#output?]]が真)および、inout（クライアントからサーバ
+へ与え、サーバがクライアントへ与える）の3種類の方向属性のいずれかを持ち
+ます。
 
-output?�᥽�åɤ�out°���ޤ���inout°���ʤ鿿���֤��ޤ���
+output?メソッドはout属性またはinout属性なら真を返します。
 
-@return �᥽�åɤ�����°����out�ޤ���inout�ʤ�п����֤��ޤ���
+@return メソッドの方向属性がoutまたはinoutならば真を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'DWebBrowserEvents')
    method = WIN32OLE_METHOD.new(tobj, 'NewWindow')
@@ -159,17 +159,17 @@ output?�᥽�åɤ�out°���ޤ���inout°���ʤ鿿���֤��ޤ���
 @see [[url:http://msdn.microsoft.com/en-us/library/aa367136(v=VS.85).aspx]]
 
 --- retval? -> bool
-�ѥ�᡼��������ͤ��ɤ�����Ƚ�ꤷ�ޤ���
+パラメータが戻り値かどうかを判定します。
 
-OLE�����ȥ᡼�����ε���Ǥϡ��᥽�åɤ�����ͤϰ����ꥹ�ȤκǱ�ü�Υ�
-��᡼����out°����[[m:WIN32OLE_PARAM#output?]]�����ˤȤ��뤳�ȤǼ¸���
-�ޤ��������������Υѥ�᡼����OLE�����ȥ᡼�����ƤӽФ��򵭽Ҥ������
-������ͤΤ褦�˰�����������Ȥ�����ꥹ�Ȥ��¤٤뤫��retval°���ˤ��
-�Ʒ��ꤵ��ޤ���
+OLEオートメーションの規定では、メソッドの戻り値は引数リストの最右端のパ
+ラメータをout属性（[[m:WIN32OLE_PARAM#output?]]が真）とすることで実現し
+ます。ただし、そのパラメータをOLEオートメーション呼び出しを記述する言語
+が戻り値のように扱うか、それとも引数リストに並べるかはretval属性によっ
+て決定されます。
 
-retval?�᥽�åɤϡ�����ͤȤ��Ƶ��Ҥ�����˿��Ȥʤ�ޤ���
+retval?メソッドは、戻り値として記述する場合に真となります。
 
-@return �ѥ�᡼��������ͤȤ��ư�������˿����֤��ޤ���
+@return パラメータが戻り値として扱われる場合に真を返します。
 
    tobj = WIN32OLE_TYPE.new('DirectX 7 for Visual Basic Type Library',
                             'DirectPlayLobbyConnection')

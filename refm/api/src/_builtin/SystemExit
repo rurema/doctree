@@ -1,20 +1,20 @@
 = class SystemExit < Exception
 
-Ruby ¥¤¥ó¥¿¥×¥ê¥¿¤ò½ªÎ»¤µ¤»¤ë¤È¤­¤ËÈ¯À¸¤·¤Þ¤¹¡£
-#@# exit ¤È raise SystemExit ¤Î°ã¤¤¡§ [[ruby-dev:12785]]
+Ruby ã‚¤ãƒ³ã‚¿ãƒ—ãƒªã‚¿ã‚’çµ‚äº†ã•ã›ã‚‹ã¨ãã«ç™ºç”Ÿã—ã¾ã™ã€‚
+#@# exit ã¨ raise SystemExit ã®é•ã„ï¼š [[ruby-dev:12785]]
 
 == Class Methods
 
 #@since 1.8.0
 --- new(status = 0, error_message = "") -> SystemExit
 
-SystemExit ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+SystemExit ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param status ½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤òÀ°¿ô¤Ç»ØÄê¤·¤Þ¤¹¡£
+@param status çµ‚äº†ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æ•´æ•°ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param error_message ¥¨¥é¡¼¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·¤Þ¤¹¡£
+@param error_message ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   ex = SystemExit.new(1)
   p ex.status   # => 1
@@ -25,11 +25,11 @@ SystemExit ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 #@since 1.8.0
 --- status -> Fixnum
 
-Îã³°¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÝÂ¸¤µ¤ì¤¿½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤òÊÖ¤·¤Þ¤¹¡£
+ä¾‹å¤–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ä¿å­˜ã•ã‚ŒãŸçµ‚äº†ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
-½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Ï [[m:Kernel.#exit]] ¤ä [[m:SystemExit.new]] ¤Ê¤É¤ÇÀßÄê¤µ¤ì¤Þ¤¹¡£
+çµ‚äº†ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã¯ [[m:Kernel.#exit]] ã‚„ [[m:SystemExit.new]] ãªã©ã§è¨­å®šã•ã‚Œã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   begin
     exit 1
@@ -47,11 +47,11 @@ SystemExit ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 #@since 1.8.2
 --- success? -> bool
 
-½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤¬Àµ¾ï½ªÎ»¤ò¼¨¤¹ÃÍ¤Ê¤é¤Ð true ¤òÊÖ¤·¤Þ¤¹¡£
+çµ‚äº†ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãŒæ­£å¸¸çµ‚äº†ã‚’ç¤ºã™å€¤ãªã‚‰ã° true ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÂçÈ¾¤Î¥·¥¹¥Æ¥à¤Ç¤Ï¡¢¥¹¥Æ¡¼¥¿¥¹ 0 ¤¬Àµ¾ï½ªÎ»¤òÉ½¤·¤Þ¤¹¡£
+å¤§åŠã®ã‚·ã‚¹ãƒ†ãƒ ã§ã¯ã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ 0 ãŒæ­£å¸¸çµ‚äº†ã‚’è¡¨ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   begin
     exit true

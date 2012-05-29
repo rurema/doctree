@@ -10,7 +10,7 @@ A Psych::Nodes::Alias is a terminal node and may have no children.
 --- new(anchor) -> Psych::Nodes::Alias
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 

@@ -1,64 +1,64 @@
-tar �ե������񤭹��ि��Υ��饹���󶡤���饤�֥��Ǥ���
+tar ファイルを書き込むためのクラスを提供するライブラリです。
 
 = class Gem::Package::TarWriter
 
-tar �ե������񤭹��ि��Υ��饹�Ǥ���
+tar ファイルを書き込むためのクラスです。
 
 == Public Instance Methods
 
 --- add_file(name, mode) -> self
 --- add_file(name, mode){|io| ... } -> self
 
-���Ȥ˴�Ϣ�դ���줿 IO �˥ե�������ɲä��ޤ���
+自身に関連付けられた IO にファイルを追加します。
 
-�֥��å���Ϳ����ȡ����Ȥ˴�Ϣ�դ���줿 IO ��֥��å����Ϥ��ƥ֥��å�
-��ɾ�����ޤ���
+ブロックを与えると、自身に関連付けられた IO をブロックに渡してブロック
+を評価します。
 
-@param name �ɲä���ե������̾������ꤷ�ޤ���
+@param name 追加するファイルの名前を指定します。
 
-@param mode �ɲä���ե�����Υѡ��ߥå�������ꤷ�ޤ���
+@param mode 追加するファイルのパーミッションを指定します。
 
 --- add_file_simple(name, mode, size) -> self
 --- add_file_simple(name, mode, size){|io| ... } -> self
 
-���Ȥ˴�Ϣ�դ���줿 IO �˥ե�������ɲä��ޤ���
+自身に関連付けられた IO にファイルを追加します。
 
-�֥��å���Ϳ����ȡ����Ȥ˴�Ϣ�դ���줿 IO ��֥��å����Ϥ��ƥ֥��å�
-��ɾ�����ޤ���
+ブロックを与えると、自身に関連付けられた IO をブロックに渡してブロック
+を評価します。
 
-@param name �ɲä���ե������̾������ꤷ�ޤ���
+@param name 追加するファイルの名前を指定します。
 
-@param mode �ɲä���ե�����Υѡ��ߥå�������ꤷ�ޤ���
+@param mode 追加するファイルのパーミッションを指定します。
 
-@param size �ɲä���ե�����Υ���������ꤷ�ޤ���
+@param size 追加するファイルのサイズを指定します。
 
 --- check_closed
 #@# -> discard
-���Ȥ˴�Ϣ�դ���줿 IO ������ close ����Ƥ��뤫�ɤ��������å����ޤ���
+自身に関連付けられた IO が既に close されているかどうかチェックします。
 
-@raise IOError ���Ȥ˴�Ϣ�դ���줿 IO ������ close ����Ƥ������ȯ
-               �����ޤ���
+@raise IOError 自身に関連付けられた IO が既に close されている場合に発
+               生します。
 
 --- close -> true
 
-���Ȥ� close ���ޤ���
+自身を close します。
 
 --- closed? -> bool
 
-���Ȥ����� close ����Ƥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身が既に close されている場合は、真を返します。
+そうでない場合は、偽を返します。
 
 --- flush
 #@# -> discard
-���Ȥ˴�Ϣ�դ���줿 IO ��ե�å��夷�ޤ���
+自身に関連付けられた IO をフラッシュします。
 
 --- mkdir(name, mode) -> self
 
-���Ȥ˴�Ϣ�դ���줿 IO �˥ǥ��쥯�ȥ���ɲä��ޤ���
+自身に関連付けられた IO にディレクトリを追加します。
 
-@param name �ɲä���ǥ��쥯�ȥ��̾������ꤷ�ޤ���
+@param name 追加するディレクトリの名前を指定します。
 
-@param mode �ɲä���ǥ��쥯�ȥ�Υѡ��ߥå�������ꤷ�ޤ���
+@param mode 追加するディレクトリのパーミッションを指定します。
 
 #@#--- split_name
 #@# nodoc
@@ -67,67 +67,67 @@ tar �ե������񤭹��ि��Υ��饹�Ǥ���
 
 --- new(io) -> Gem::Package::TarWriter
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param io ���Ȥ˴�Ϣ�դ��� IO ����ꤷ�ޤ���
+@param io 自身に関連付ける IO を指定します。
 
 = class Gem::Package::TarWriter::BoundedStream
 
-�ǡ����������ξ�¤����� [[c:IO]] �Υ�åѡ����饹�Ǥ���
+データサイズの上限がある [[c:IO]] のラッパークラスです。
 
 == Singleton Methods
 
 --- new(io, limit) -> Gem::Package::TarWriter::BoundedStream
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param io ��åפ��� IO ����ꤷ�ޤ���
+@param io ラップする IO を指定します。
 
-@param limit �񤭹��߲�ǽ�ʺ���Υ���������ꤷ�ޤ���
+@param limit 書き込み可能な最大のサイズを指定します。
 
 == Public Instance Methods
 
 --- limit -> Integer
 
-�񤭹��߲�ǽ�ʺ���Υ��������֤��ޤ���
+書き込み可能な最大のサイズを返します。
 
 --- written -> Integer
 
-���˽񤭹�����ǡ����Υ��������֤��ޤ���
+既に書き込んだデータのサイズを返します。
 
 --- write(data) -> Integer
 
-Ϳ����줿�ǡ����򼫿Ȥ˴�Ϣ�դ���줿 IO �˽񤭹��ߤޤ���
+与えられたデータを自身に関連付けられた IO に書き込みます。
 
-@param data �񤭹���ǡ�������ꤷ�ޤ���
+@param data 書き込むデータを指定します。
 
-@return �񤭹�����ǡ����Υ��������֤��ޤ���
+@return 書き込んだデータのサイズを返します。
 
-@raise Gem::Package::TarWriter::FileOverflow [[m:Gem::Package::TarWriter::BoundedStream#limit]] ��ۤ���
-       �񤭹��⤦�Ȥ�������ȯ�����ޤ���
+@raise Gem::Package::TarWriter::FileOverflow [[m:Gem::Package::TarWriter::BoundedStream#limit]] を越えて
+       書き込もうとした場合に発生します。
 
 = class Gem::Package::TarWriter::RestrictedStream
 
-write �᥽�åɤΤߤ��󶡤��� [[c:IO]] �Υ�åѡ����饹�Ǥ���
+write メソッドのみを提供する [[c:IO]] のラッパークラスです。
 
 == Singleton Methods
 
 --- new(io) -> Gem::Package::TarWriter::RestrictedStream
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param io ��åפ��� IO ����ꤷ�ޤ���
+@param io ラップする IO を指定します。
 
 == Public Instance Methods
 
 --- write(data) -> Integer
 
-Ϳ����줿�ǡ����򼫿Ȥ˴�Ϣ�դ���줿 IO �˽񤭹��ߤޤ���
+与えられたデータを自身に関連付けられた IO に書き込みます。
 
-@param data �񤭹���ǡ�������ꤷ�ޤ���
+@param data 書き込むデータを指定します。
 
-@return �񤭹�����ǡ����Υ��������֤��ޤ���
+@return 書き込んだデータのサイズを返します。
 
 = class Gem::Package::TarWriter::FileOverflow < StandardError
 
-��¥�������ۤ��ƽ񤭹��⤦�Ȥ�������ȯ�������㳰�Ǥ���
+上限サイズを越えて書き込もうとした場合に発生する例外です。

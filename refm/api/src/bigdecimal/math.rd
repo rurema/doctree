@@ -1,8 +1,8 @@
 #@since 1.8.1
 
-BigDecimal¤ò»È¤Ã¤¿¿ô³ØÅª¤Êµ¡Ç½¤òÄó¶¡¤·¤Þ¤¹¡£
+BigDecimalã‚’ä½¿ã£ãŸæ•°å­¦çš„ãªæ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 
-°Ê²¼¤Î·×»»¤¬¹Ô¤¨¤Þ¤¹¡£
+ä»¥ä¸‹ã®è¨ˆç®—ãŒè¡Œãˆã¾ã™ã€‚
 
  * sqrt(x, prec)
  * sin (x, prec)
@@ -15,17 +15,17 @@ BigDecimal¤ò»È¤Ã¤¿¿ô³ØÅª¤Êµ¡Ç½¤òÄó¶¡¤·¤Þ¤¹¡£
  * PI  (prec)
  * E   (prec)
 
-°ú¿ô:
+å¼•æ•°:
 
 : x
 
-  ·×»»ÂÐ¾Ý¤Î BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¡£
+  è¨ˆç®—å¯¾è±¡ã® BigDecimal ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚
 
 : prec
 
-  ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+  è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-Îã:
+ä¾‹:
 
   require "bigdecimal"
   require "bigdecimal/math"
@@ -49,17 +49,17 @@ BigDecimal¤ò»È¤Ã¤¿¿ô³ØÅª¤Êµ¡Ç½¤òÄó¶¡¤·¤Þ¤¹¡£
 
 --- sqrt(x, prec) -> BigDecimal
 
-x ¤ÎÊ¿Êýº¬¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£
+x ã®å¹³æ–¹æ ¹ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param x Ê¿Êýº¬¤òµá¤á¤ë¿ô¡£
+@param x å¹³æ–¹æ ¹ã‚’æ±‚ã‚ã‚‹æ•°ã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise FloatDomainError x ¤Ë 0 °Ê²¼¡¢¤â¤·¤¯¤Ï NaN ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise FloatDomainError x ã« 0 ä»¥ä¸‹ã€ã‚‚ã—ãã¯ NaN ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise ArgumentError prec ¤Ë 0 Ì¤Ëþ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 æœªæº€ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 
@@ -79,16 +79,16 @@ x ¤ÎÊ¿Êýº¬¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£
 
 --- sin(x, prec) -> BigDecimal
 
-x ¤ÎÀµ¸¹´Ø¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¤Ç¤¹¡£x
-¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï NaN ¤òÊÖ¤·¤Þ¤¹¡£
+x ã®æ­£å¼¦é–¢æ•°ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã§ã™ã€‚x
+ã«ç„¡é™å¤§ã‚„ NaN ã‚’æŒ‡å®šã—ãŸå ´åˆã«ã¯ NaN ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param x ·×»»ÂÐ¾Ý¤Î BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¡£
+@param x è¨ˆç®—å¯¾è±¡ã® BigDecimal ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 
@@ -108,16 +108,16 @@ x ¤ÎÀµ¸¹´Ø¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¤Ç¤¹¡£x
 
 --- cos(x, prec) -> BigDecimal
 
-x ¤ÎÍ¾¸¹´Ø¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¤Ç¤¹¡£x
-¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï NaN ¤òÊÖ¤·¤Þ¤¹¡£
+x ã®ä½™å¼¦é–¢æ•°ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã§ã™ã€‚x
+ã«ç„¡é™å¤§ã‚„ NaN ã‚’æŒ‡å®šã—ãŸå ´åˆã«ã¯ NaN ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param x ·×»»ÂÐ¾Ý¤Î BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¡£
+@param x è¨ˆç®—å¯¾è±¡ã® BigDecimal ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 
@@ -137,18 +137,18 @@ x ¤ÎÍ¾¸¹´Ø¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¤Ç¤¹¡£x
 
 --- atan(x, prec) -> BigDecimal
 
-x ¤ÎµÕÀµÀÜ´Ø¿ô¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¤Ç¤¹¡£
-x ¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï NaN ¤òÊÖ¤·¤Þ¤¹¡£
+x ã®é€†æ­£æŽ¥é–¢æ•°ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã§ã™ã€‚
+x ã«ç„¡é™å¤§ã‚„ NaN ã‚’æŒ‡å®šã—ãŸå ´åˆã«ã¯ NaN ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param x ·×»»ÂÐ¾Ý¤Î BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¡£
+@param x è¨ˆç®—å¯¾è±¡ã® BigDecimal ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError x ¤ÎÀäÂÐÃÍ¤¬1°Ê¾å¤Î¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError x ã®çµ¶å¯¾å€¤ãŒ1ä»¥ä¸Šã®å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 
@@ -166,20 +166,20 @@ x ¤ËÌµ¸ÂÂç¤ä NaN ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤Ï NaN ¤òÊÖ¤·¤Þ¤¹¡£
 
 #@end
 
-===== Ãí°Õ
+===== æ³¨æ„
 
-x ¤ÎÀäÂÐÃÍ¤ò 0.9999 ¤Î¤è¤¦¤Ê 1 ¤Ë¶á¤¹¤®¤ëÃÍ¤Ë¤¹¤ë¤È·×»»·ë²Ì¤¬¼ýÂ«¤·¤Ê¤¤
-²ÄÇ½À­¤¬¤¢¤ê¤Þ¤¹¡£
+x ã®çµ¶å¯¾å€¤ã‚’ 0.9999 ã®ã‚ˆã†ãª 1 ã«è¿‘ã™ãŽã‚‹å€¤ã«ã™ã‚‹ã¨è¨ˆç®—çµæžœãŒåŽæŸã—ãªã„
+å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚
 
 --- PI(prec) -> BigDecimal
 
-±ß¼þÎ¨¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£
+å††å‘¨çŽ‡ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 
@@ -199,13 +199,13 @@ x ¤ÎÀäÂÐÃÍ¤ò 0.9999 ¤Î¤è¤¦¤Ê 1 ¤Ë¶á¤¹¤®¤ëÃÍ¤Ë¤¹¤ë¤È·×»»·ë²Ì¤¬¼ýÂ«¤·¤Ê¤¤
 
 --- E(prec) -> BigDecimal
 
-¼«Á³ÂÐ¿ô¤ÎÄì e ¤ò prec ¤Ç»ØÄê¤·¤¿ÀºÅÙ¤Ç·×»»¤·¤Þ¤¹¡£
+è‡ªç„¶å¯¾æ•°ã®åº• e ã‚’ prec ã§æŒ‡å®šã—ãŸç²¾åº¦ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£
+@param prec è¨ˆç®—çµæžœã®ç²¾åº¦ã€‚
 
-@raise ArgumentError prec ¤Ë 0 °Ê²¼¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError prec ã« 0 ä»¥ä¸‹ãŒæŒ‡å®šã•ã‚ŒãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.9.2
 

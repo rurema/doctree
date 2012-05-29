@@ -1,18 +1,18 @@
 require rubygems/command
 require rubygems/security
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ÚÌÀ½ñ¤ä½ðÌ¾¤ÎÀßÄê¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®è¨¼æ˜Žæ›¸ã‚„ç½²åã®è¨­å®šã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem cert [options]
     Options:
-      -a, --add CERT                   ¿®Íê¤µ¤ì¤¿¾ÚÌÀ½ñ¤òÄÉ²Ã¤·¤Þ¤¹
-      -l, --list                       ¿®Íê¤µ¤ì¤Æ¤¤¤ë¾ÚÌÀ½ñ¤Î°ìÍ÷¤òÉ½¼¨¤·¤Þ¤¹
-      -r, --remove STRING              STRING ¤ò´Þ¤à¾ÚÌÀ½ñ¤òºï½ü¤·¤Þ¤¹
-      -b, --build EMAIL_ADDR           EMAIL_ADDR ¤ËÂÐ¤¹¤ë¼«¸Ê½ðÌ¾¾ÚÌÀ½ñ¤ÈÈëÌ©¸°
-                                       ¤òºîÀ®¤·¤Þ¤¹
-      -C, --certificate CERT           --sign ¤Ç»ÈÍÑ¤¹¤ë¾ÚÌÀ½ñ¤ò»ØÄê¤·¤Þ¤¹
-      -K, --private-key KEY            --sign ¤Ç»ÈÍÑ¤¹¤ëÈëÌ©¸°¤ò»ØÄê¤·¤Þ¤¹
-      -s, --sign NEWCERT               ¾ÚÌÀ½ñ¤ËÈëÌ©¸°¤Ç½ðÌ¾¤·¤Þ¤¹
+      -a, --add CERT                   ä¿¡é ¼ã•ã‚ŒãŸè¨¼æ˜Žæ›¸ã‚’è¿½åŠ ã—ã¾ã™
+      -l, --list                       ä¿¡é ¼ã•ã‚Œã¦ã„ã‚‹è¨¼æ˜Žæ›¸ã®ä¸€è¦§ã‚’è¡¨ç¤ºã—ã¾ã™
+      -r, --remove STRING              STRING ã‚’å«ã‚€è¨¼æ˜Žæ›¸ã‚’å‰Šé™¤ã—ã¾ã™
+      -b, --build EMAIL_ADDR           EMAIL_ADDR ã«å¯¾ã™ã‚‹è‡ªå·±ç½²åè¨¼æ˜Žæ›¸ã¨ç§˜å¯†éµ
+                                       ã‚’ä½œæˆã—ã¾ã™
+      -C, --certificate CERT           --sign ã§ä½¿ç”¨ã™ã‚‹è¨¼æ˜Žæ›¸ã‚’æŒ‡å®šã—ã¾ã™
+      -K, --private-key KEY            --sign ã§ä½¿ç”¨ã™ã‚‹ç§˜å¯†éµã‚’æŒ‡å®šã—ã¾ã™
+      -s, --sign NEWCERT               è¨¼æ˜Žæ›¸ã«ç§˜å¯†éµã§ç½²åã—ã¾ã™
 #@include(common_options)
     Summary:
       Manage RubyGems certificates and signing settings
@@ -20,7 +20,7 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ÚÌÀ½ñ¤ä½ðÌ¾¤ÎÀßÄê¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = class Gem::Commands::CertCommand < Gem::Command
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ÚÌÀ½ñ¤ä½ñÌ¾¤ÎÀßÄê¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®è¨¼æ˜Žæ›¸ã‚„æ›¸åã®è¨­å®šã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 
 

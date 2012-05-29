@@ -3,108 +3,108 @@
 =begin
 = TkComm
 
-Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
+RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
 
-���Υ⥸�塼��Υ��󥹥��󥹥᥽�åɤϡ����̡��⥸�塼��((<Tk>))�Υ�
-���塼��᥽�åɤȤ��ƻ��Ѥ���ޤ���
+このモジュールのインスタンスメソッドは、普通、モジュール((<Tk>))のモ
+ジュールメソッドとして使用されます。
 
-== private�᥽�å�:
+== privateメソッド:
 
 --- TkComm#error_at
 #@todo
 
 --- TkComm#tk_tcl2ruby(val)
 #@todo
-    ((|val|))��Ruby�Υ��֥������Ȥ��Ѵ����ޤ���
+    ((|val|))をRubyのオブジェクトに変換します。
 
 --- TkComm#tk_split_list(str)
 #@todo
-    ((<Tcl�Υꥹ��>))��������Ѵ������֤��ޤ����������Ǥϡ�
-    ((<TkComm#tk_tcl2ruby>))�ˤ�ä��Ѵ��������֥������ȤǤ���
+    ((<Tclのリスト>))を配列に変換して返します。配列要素は、
+    ((<TkComm#tk_tcl2ruby>))によって変換したオブジェクトです。
 
 --- TkComm#tk_split_simplelist(str)
 #@todo
-    ((<Tcl�Υꥹ��>))��ʸ�����������Ѵ������֤��ޤ���
+    ((<Tclのリスト>))を文字列の配列に変換して返します。
 
 --- TkComm#hash_kv(keys)
 #@todo
-    �������Ϥ��줿�ϥå���{"key"=>"val", ...} ��["-key", "val", ...]�Ǥ���
-    ����ˤ����֤��ޤ���
+    引数で渡されたハッシュ{"key"=>"val", ...} を["-key", "val", ...]である
+    配列にして返します。
 
-    Tcl/Tk��((<���������åȥ��ޥ��>))(({configure}))�˰������Ϥ��������
-    ���ǻ��Ѥ��ޤ���
+    Tcl/Tkの((<ウィジェットコマンド>))(({configure}))に引数を渡すために内
+    部で使用します。
 
 --- TkComm#array2tk_list(ary)
 #@todo
-    Ruby������((|ary|))��Tcl�Υꥹ�Ȥ��Ѵ����ޤ���
+    Rubyの配列((|ary|))をTclのリストに変換します。
 
 --- TkComm#bool(val)
 #@todo
-    Tcl�ο�����((|val|))��Ruby�ο�����(({truby}))/(({false}))�ˤ����֤���
-    ����
+    Tclの真偽値((|val|))をRubyの真偽値(({truby}))/(({false}))にして返しま
+    す。
 
-    Tcl�ο��� "1", 1, "yes", "true" �� ��(({true}))�Ȥ����֤��ޤ��������
-    ���ϡ���((({false}))���֤��ޤ���
+    Tclの真値 "1", 1, "yes", "true" を 真(({true}))として返します。それ以
+    外は、偽((({false}))を返します。
 
 --- TkComm#number(val)
 #@todo
-    Tcl�ο���(��ɽ��ʸ����)(((|val|)))��Ruby�ο��ͤˤ����֤��ޤ������ͤ�Ƚ
-    �ǤǤ��ʤ���硢((|val|))���Τ�Τ��֤��ޤ���((-�����Ρ�-))
+    Tclの数値(を表す文字列)(((|val|)))をRubyの数値にして返します。数値と判
+    断できない場合、((|val|))そのものを返します。((-いいの？-))
 
 --- TkComm#string(val)
 #@todo
-    Tcl��ʸ�����Ruby��ʸ����ˤ����֤��ޤ����ä�((|val|))��ξü��"{"�� 
-    "}" ������Ф�����������ޤ���
+    Tclの文字列をRubyの文字列にして返します。特に((|val|))の両端に"{"、 
+    "}" があればそれらを取り除きます。
 
 --- TkComm#list(val)
 #@todo
-    �ʲ���Ʊ���Ǥ���
+    以下と同じです。
 
       tk_split_list(((|val|))).to_a
 
-    �Ĥޤꡢ((|val|))�������Ǥ�((<Tcl�Υꥹ��>))�Ǥ�������Ȥ����֤��ޤ���
+    つまり、((|val|))が一要素の((<Tclのリスト>))でも常に配列として返します。
 
 --- TkComm#window(val)
 #@todo
-    Tk��((<���������åȥѥ�>))((|val|))���б����륦�������åȤ��֤��ޤ���
+    Tkの((<ウィジェットパス>))((|val|))に対応するウィジェットを返します。
 
 --- TkComm#procedure(val)
 #@todo
-    ((<TkComm#install_cmd>))�����ꤷ����Tcl��((<�ץ���������>))((|val|))��
-    �б�����((<Proc>))���֥������Ȥ��֤��ޤ���
+    ((<TkComm#install_cmd>))で設定した、Tclの((<プロシージャ>))((|val|))に
+    対応する((<Proc>))オブジェクトを返します。
 
 --- TkComm#_get_eval_string(obj)
 #@todo
-    ���֥�������((|obj|))��Tcl/Tk���󥿥ץ꥿�Ǥ�ɽ�����֤��ޤ���
+    オブジェクト((|obj|))のTcl/Tkインタプリタでの表現を返します。
 
-    ((<TkCore#tk_call>))�ϡ����٤Ƥΰ����򤳤Υ᥽�åɤ��Ѵ�����Tcl���Ϥ�
-    �ޤ���
+    ((<TkCore#tk_call>))は、すべての引数をこのメソッドで変換してTclに渡し
+    ます。
 
 --- TkComm#ruby2tcl(obj)
 #@todo
-    ���֥�������((|obj|))��Tcl/Tk���󥿥ץ꥿�Ǥ�ɽ�����֤��ޤ���
+    オブジェクト((|obj|))のTcl/Tkインタプリタでの表現を返します。
 
-    ((<TkCore#tk_call>))�ϡ����٤Ƥΰ����򤳤Υ᥽�åɤ��Ѵ�����Tcl���Ϥ�
-    �ޤ���
+    ((<TkCore#tk_call>))は、すべての引数をこのメソッドで変換してTclに渡し
+    ます。
 
 --- TkComm#install_cmd(cmd)
 #@todo
-    Proc���֥�������((|cmd|))��((<�ץ���������>))�Ȥ�����Ͽ���ޤ���
-    ((<�ץ���������>))��¹Ԥ���Tcl������ץȤ��֤��ޤ���
-    ((-proc rb_out �ˤĤ��ƽ�-))
+    Procオブジェクト((|cmd|))を((<プロシージャ>))として登録します。
+    ((<プロシージャ>))を実行するTclスクリプトを返します。
+    ((-proc rb_out について書く-))
 
 --- TkComm#uninstall_cmd(id)
 #@todo
-    ((|id|))����Ͽ���줿((<�ץ���������>))�������ޤ���
+    ((|id|))で登録された((<プロシージャ>))を削除します。
 
 --- TkComm#install_bind(cmd, args=nil)
 #@todo
-    Proc���֥�������((|cmd|))��((<���٥�ȥ�����Хå��ؿ�>))�Ȥ�����Ͽ���ޤ���
-    ((<�ץ���������>))��¹Ԥ���Tcl������ץȤ��֤��ޤ���
+    Procオブジェクト((|cmd|))を((<イベントコールバック関数>))として登録します。
+    ((<プロシージャ>))を実行するTclスクリプトを返します。
 
 --- TkComm#tk_event_sequence(context)
 #@todo
-    ���٥�ȼ��̻�((|context|))��Tcl�����Ǥ���ʸ������Ѵ������֤��ޤ���
+    イベント識別子((|context|))をTclが解釈できる文字列に変換して返します。
 
       require "tk"
       p Tk.module_eval { tk_event_sequence ["Escape", "a"] }
@@ -113,97 +113,97 @@ Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
 
 --- TkComm#_bind_core(mode, path, context, cmd, args=nil)
 #@todo
-    ((<TkComm#_bind>))��((<TkComm#_bindappend>))�μ��ΤǤ���
+    ((<TkComm#_bind>))、((<TkComm#_bindappend>))の実体です。
 
 --- TkComm#_bind(what, context, cmd, args=nil)
 #@todo
-    ((<TkComm#bind>))�μ��ΤǤ���
+    ((<TkComm#bind>))の実体です。
 
 --- TkComm#_bind_append(path, context, cmd, args=nil)
 #@todo
-    ((<TkComm#bindappend>))�μ��ΤǤ���
+    ((<TkComm#bindappend>))の実体です。
 
 --- TkComm#_bind_remove(what, context)
 #@todo
-    ((<TkComm#bind_remove>))�μ��ΤǤ���
+    ((<TkComm#bind_remove>))の実体です。
 
 --- TkComm#_bindinfo(what, context=nil)
 #@todo
-    ((<TkComm#bindinfo>))�μ��ΤǤ���
+    ((<TkComm#bindinfo>))の実体です。
 
-== �᥽�å�:
+== メソッド:
 
 --- TkComm#_genobj_for_tkwidget(path)
 #@todo
-    ((<���������åȥѥ�>))((|path|))���饦�������åȥ��֥������Ȥ��������ޤ���
-    ((|path|))�ˤ�Tcl/Tk�Υ饤�֥��ʤɤ��������줿�ѥ�����ꤷ�ޤ���
+    ((<ウィジェットパス>))((|path|))からウィジェットオブジェクトを生成します。
+    ((|path|))にはTcl/Tkのライブラリなどで生成されたパスを指定します。
 
-    ���Υ᥽�åɤ������������֥������ȤΥ��饹�Ȥ���
-    Klass(({GeneratedOnTk}))�򿷤���������ޤ���("Klass"����ʬ�ϼºݤ�
-    ��((<���������åȥ��饹̾>))�Ǥ�)
+    このメソッドは生成したオブジェクトのクラスとして
+    Klass(({GeneratedOnTk}))を新たに定義します。("Klass"の部分は実際に
+    は((<ウィジェットクラス名>))です)
 
-    Ruby/Tk�����������ѥ��򥪥֥������Ȥ��Ѵ�����ˤϡ����Υ᥽�åɤ�
-    �Ϥʤ�((<TkComm#window>))����Ѥ��ޤ���
+    Ruby/Tkで生成したパスをオブジェクトに変換するには、このメソッドで
+    はなく((<TkComm#window>))を使用します。
 
-    ((-����ä�private�᥽�åɤ���ʤ���-))
+    ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#_curr_cmd_id
 #@todo
-    ����((<�ץ���������>))��ID���֤��ޤ���
+    次の((<プロシージャ>))のIDを返します。
 
-    ((-����ä�private�᥽�åɤ���ʤ���-))
+    ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#_next_cmd_id
 #@todo
-    ����((<�ץ���������>))��ID���֤��ޤ���ID�ϥץ��������㤬������Ƥ���
-    �٤����ä��ޤ���
+    次の((<プロシージャ>))のIDを返します。IDはプロシージャが割り当てられる
+    度に増加します。
 
-    ((-����ä�private�᥽�åɤ���ʤ���-))
+    ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#install_win(ppath)
 #@todo
-    �ƥ�����ɥ��Υ��������åȥѥ�((|ppath|))�˿������ҥ��������åȤȤ���
-    (({self}))����Ͽ���ޤ���
+    親ウィンドウのウィジェットパス((|ppath|))に新しく子ウィジェットとして
+    (({self}))を登録します。
 
-    ((-����ä�private�᥽�åɤ���ʤ���-))
+    ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#uninstall_win
 #@todo
-    ��Ͽ���줿((|self|))�������ޤ���
+    登録された((|self|))を削除します。
 
-    ((-����ä�private�᥽�åɤ���ʤ���-))
+    ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#bind(tagOrClass, context, cmd=Proc.new, args=nil)
 #@todo
-    ((|tagOrClass|))�˥�����Хå��ؿ�����Ͽ���ޤ�(�ܺ٤�
-    ((<TkBindCore#bind>))�򻲾Ȥ��Ƥ�������)��
+    ((|tagOrClass|))にコールバック関数を登録します(詳細は
+    ((<TkBindCore#bind>))を参照してください)。
 
-    ((|tagOrClass|))�ϡ�����(((<TkBindTag>)))�����������åȡ����������åȥ��饹
-    �β��줫�Ǥ���
+    ((|tagOrClass|))は、タグ(((<TkBindTag>)))、ウィジェット、ウィジェットクラス
+    の何れかです。
 
 --- TkComm#bind_append(tagOrClass, context, cmd=Proc.new, args=nil)
 #@todo
-    ((|tagOrClass|))�˥�����Хå��ؿ����ɲä��ޤ�(�ܺ٤�
-    ((<TkBindCore#bind>))�򻲾Ȥ��Ƥ�������)��
+    ((|tagOrClass|))にコールバック関数を追加します(詳細は
+    ((<TkBindCore#bind>))を参照してください)。
 
-    ((|tagOrClass|))�ϡ�����(((<TkBindTag>)))�����������åȡ����������åȥ��饹
-    �β��줫�Ǥ���
+    ((|tagOrClass|))は、タグ(((<TkBindTag>)))、ウィジェット、ウィジェットクラス
+    の何れかです。
 
 --- TkComm#bind_remove(tagOrClass, context)
 #@todo
-    ((|tagOrClass|))����Ͽ���줿������Хå��ؿ���������ޤ�(�ܺ٤�
-    ((<TkBindCore#bind_remove>))�򻲾Ȥ��Ƥ�������)��
+    ((|tagOrClass|))に登録されたコールバック関数を取り除きます(詳細は
+    ((<TkBindCore#bind_remove>))を参照してください)。
 
-    ((|tagOrClass|))�ϡ�����(((<TkBindTag>)))�����������åȡ����������åȥ��饹
-    �β��줫�Ǥ���
+    ((|tagOrClass|))は、タグ(((<TkBindTag>)))、ウィジェット、ウィジェットクラス
+    の何れかです。
 
 --- TkComm#bindinfo(tagOrClass, context=nil)
 #@todo
-    ((|tagOrClass|))����Ͽ����Ƥ��륤�٥�ȥ�����Хå��ξ��������ˤ���
-    �֤��ޤ���
+    ((|tagOrClass|))に登録されているイベントコールバックの情報を配列にして
+    返します。
 
-    ((|tagOrClass|))�ϡ�����(((<TkBindTag>)))�����������åȡ����������åȥ��饹
-    �β��줫�Ǥ���
+    ((|tagOrClass|))は、タグ(((<TkBindTag>)))、ウィジェット、ウィジェットクラス
+    の何れかです。
 
       require "tk"
       Tk.bind_all('Button-1', proc {|x,y| printf("X=%d Y=%d\n", x, y)}, "%X %Y")
@@ -215,12 +215,12 @@ Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
 
 --- TkComm#bind_all(context, cmd=Proc.new, args=nil)
 #@todo
-    ((|context|))�ǻ��ꤷ�����٥�Ȥ�ȯ�������Ȥ��˼¹Ԥ��륳����Хå���
-    ��((|cmd|))�򤹤٤ƤΥ��������åȤ��Ф�����Ͽ���ޤ���((|context|))��
-    ((|args|))�ξܺ٤ϡ�((<TkBindCore#bind>)),((<TkComm::Event>))�򻲾Ȥ��Ƥ�����
-    ����
+    ((|context|))で指定したイベントが発生したときに実行するコールバック関
+    数((|cmd|))をすべてのウィジェットに対して登録します。((|context|))、
+    ((|args|))の詳細は、((<TkBindCore#bind>)),((<TkComm::Event>))を参照してくださ
+    い。
 
-    �ʲ�����ϥޥ����򺸥���å������Ȥ��Υޥ�����������ΰ��֤�ɽ�����ޤ���
+    以下の例はマウスを左クリックしたときのマウスカーソルの位置を表示します。
 
       require "tk"
       Tk.bind_all('Button-1', proc {|x,y| printf("X=%d Y=%d\n", x, y)}, "%X %Y")
@@ -228,15 +228,15 @@ Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
 
 --- TkComm#bind_append_all(context, cmd=Proc.new, args=nil)
 #@todo
-    ((<TkComm#bind_all>))��Ʊ���Ǥ��������Ǥ�Ʊ��((<context>))�˥�����Х�
-    ���ؿ�����Ͽ����Ƥ���С�((|cmd|))���ɲä���Ͽ���ޤ���
+    ((<TkComm#bind_all>))と同じですが、すでに同じ((<context>))にコールバッ
+    ク関数が登録されていれば、((|cmd|))を追加で登録します。
 
-    ������Хå��ؿ��μ¹Խ������Ͽ��Ǥ�(������Хå��ؿ��μ¹Խ���˴�
-    ���Ƥϡ�((<TkWindow#bindtags>))�⻲�Ȥ��Ƥ�������)��
+    コールバック関数の実行順序は登録順です(コールバック関数の実行順序に関
+    しては、((<TkWindow#bindtags>))も参照してください)。
 
-    �ʲ�����ϥޥ����򺸥���å������Ȥ��Υޥ�����������ΰ��֤�ɽ�����ޤ���
-    �ǽ��ɽ�������Τϥ롼�ȥ�����ɥ���Ǥΰ��֡�����ɽ�������Τϥ���
-    �����åȾ�Ǥΰ��֤ˤʤ�ޤ�
+    以下の例はマウスを左クリックしたときのマウスカーソルの位置を表示します。
+    最初に表示されるのはルートウィンドウ上での位置、次に表示されるのはウィ
+    ジェット上での位置になります
 
       require "tk"
       Tk.bind_all('Button-1', proc {|x,y| printf("X=%d Y=%d\n", x, y)}, "%X %Y")
@@ -246,8 +246,8 @@ Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
 
 --- TkComm#bindinfo_all(context=nil)
 #@todo
-    ���٥��((|context|))����Ͽ���줿���٥�ȥ�����Хå��ξ��������ˤ�
-    ���֤��ޤ����֤������������Ǥ�((<TkComm#bind_all>)) ����2,3����������Ǥ���
+    イベント((|context|))に登録されたイベントコールバックの情報を配列にし
+    て返します。返される配列の要素は((<TkComm#bind_all>)) の第2,3引数の配列です。
 
       require "tk"
       cursor_pos1 = proc {|x,y| printf("X=%d Y=%d\n", x, y)}
@@ -258,8 +258,8 @@ Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
 
       => [[#<Proc:0x40133bd4>, "%X %Y"], [#<Proc:0x40131618>, "%x %y"]]
 
-    ((|context|))���ά������硢������Хå��ؿ�����Ͽ����Ƥ���
-    ���٥�Ȥμ��������ˤ����֤��ޤ���
+    ((|context|))を省略した場合、コールバック関数が登録されている
+    イベントの種類を配列にして返します。
 
       require "tk"
       cursor_pos = proc {|x,y| printf("X=%d Y=%d\n", x, y)}
@@ -271,48 +271,48 @@ Ruby��Tcl/Tk�δ֤ǥǡ����μ��Ϥ���Ԥ�����Υ⥸�塼��Ǥ���
 
 --- TkComm#pack(*args)
 #@todo
-    ((<TkPack.configure>))��Ʊ���Ǥ���
+    ((<TkPack.configure>))と同じです。
 
 --- TkComm#grid(*args)
 #@todo
-    ((<TkGrid.configure>))��Ʊ���Ǥ���
+    ((<TkGrid.configure>))と同じです。
 
 --- TkComm#update(idle=nil)
 #@todo
-    ((|idle|))�����Ǥ���С����������åȤ�����ʤɡ��̾�Tk���Ԥ����֤ˤʤ�
-    �ޤǼ¹Ԥ���ʤ�������¨�¤˼¹Ԥ��ޤ���((|idle|))��false,nil�ʤ��ί��
-    �����٥�Ȥʤɤ⤹�٤Ƽ¹Ԥ��ޤ���
+    ((|idle|))が真であれば、ウィジェットの描画など、通常Tkが待ち状態になる
+    まで実行されない処理を即座に実行します。((|idle|))がfalse,nilならば溜っ
+    たイベントなどもすべて実行します。
 
-== ���:
+== 定数:
 
 --- TkComm::WidgetClassNames
 #@todo
-    Tcl/Tk�Υ��������åȥ��饹̾�򥭡��˥��������åȥ��饹���Τ��Ǽ�����ϥ�
-    ����Ǥ���
+    Tcl/Tkのウィジェットクラス名をキーにウィジェットクラス自体を格納したハッ
+    シュです。
 
 --- TkComm::None
 #@todo
-    ��̣������ʤ��ͤ�ɽ�����֥������ȤǤ������Υ��֥������Ȥ�Tcl���󥿥�
-    �꥿���Ϥ���뤳�ȤϤ���ޤ���((({nil}))�ϡ���ʸ����Ȥ���Tcl����
-    �ץ꥿���Ϥ���뤳�Ȥ�����ޤ�)
+    意味を持たない値を表すオブジェクトです。このオブジェクトがTclインタプ
+    リタに渡されることはありません。((({nil}))は、空文字列としてTclインタ
+    プリタに渡されることがあります)
 
-    �᥽�å�����κݤ�
+    メソッド定義の際に
 
       method(arg1, arg2=None)
 
-    �Ȥ��뤳�Ȥǡ�(('method(arg1)'))�����θƤӽФ���(('method(arg1,
-    arg2)'))�����θƤӽФ���2��������Ӥ�1�ĤΥ᥽�åɤǼ¸����Ƥ��ޤ���
+    とすることで、(('method(arg1)'))形式の呼び出しと(('method(arg1,
+    arg2)'))形式の呼び出しの2種類の用途を1つのメソッドで実現しています。
 
 --- TkComm::Tk_CMDTBL
 #@todo
-    {�ץ���������ID => Proc���֥�������}�Ǥ���ϥå��塣
+    {プロシージャID => Procオブジェクト}であるハッシュ。
 
 --- TkComm::Tk_WINDOWS
 #@todo
-    {���������åȥѥ� => ������ɥ����֥�������}�Ǥ���ϥå��塣
+    {ウィジェットパス => ウィンドウオブジェクト}であるハッシュ。
 
 --- TkComm::Tk_IDs
 #@todo
-    [�ץ���������ID�Υ����󥿡�������ɥ�ID�Υ�����]�Ǥ�������Ǥ���
+    [プロシージャIDのカウンタ、ウィンドウIDのカウンタ]である配列です。
 
 =end

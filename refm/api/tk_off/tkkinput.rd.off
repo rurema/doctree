@@ -3,15 +3,15 @@
 =begin
 = TkKinput
 
-== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
+== ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã—ã¦ã„ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«:
 
 ((<Tk>))
 
-== extend¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
+== extendã—ã¦ã„ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«:
 
 ((<Tk>))
 
-== ¥¯¥é¥¹¥á¥½¥Ã¥É:
+== ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkKinput.start(window, style=None)
 #@todo
@@ -30,7 +30,7 @@
 
 --- TkKinput.input_end(window)
 #@todo
-== ¥á¥½¥Ã¥É:
+== ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkKinput#kinput_start(style=None)
 #@todo

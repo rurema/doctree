@@ -1,56 +1,56 @@
 = module Net::HTTPExceptions
-HTTP �㳰���饹�Ǥ���
+HTTP 例外クラスです。
 
-�ºݤˤϤ���� include �����ʲ��Υ��֥��饹��
-�㳰��ȯ�����ޤ���
+実際にはこれを include した以下のサブクラスの
+例外が発生します。
 
   * [[c:Net::HTTPError]]
   * [[c:Net::HTTPRetriableError]]
   * [[c:Net::HTTPServerError]]
   * [[c:Net::HTTPFatalError]]
 
-�ޤ����㳰��ȯ�������뤿��ˤ� [[m:Net::HTTPResponse#value]] ��
-�Ƥ�ɬ�פ�����ޤ���
+また、例外を発生させるためには [[m:Net::HTTPResponse#value]] を
+呼ぶ必要があります。
 
 == Instance Methods
 --- response -> Net::HTTPResponse
 --- data -> Net::HTTPResponse
 
-�㳰�θ����Ȥʤä��쥹�ݥ󥹥��֥������Ȥ��֤��ޤ���
+例外の原因となったレスポンスオブジェクトを返します。
 
 = class Net::HTTPError < Net::ProtocolError
 include Net::HTTPExceptions
 
-HTTP ���ơ����������� 1xx �������ä��Ȥ����㳰�Ǥ���
-�ޤ��ϡ����ơ����������ɤ�̤�ΤΤ�ΤǤ������
-������б����ޤ���
+HTTP ステータスコード 1xx を受け取ったという例外です。
+または、ステータスコードが未知のものである場合も
+これに対応します。
 
 = class Net::HTTPRetriableError < Net::ProtoRetriableError
 include Net::HTTPExceptions
 
-HTTP ���ơ����������� 3xx �������ä��Ȥ����㳰�Ǥ���
+HTTP ステータスコード 3xx を受け取ったという例外です。
 
-�꥽��������ư�����ʤɤ���ͳ�ˤ�ꡢ�ꥯ�����Ȥ�λ������ˤϹ���
-�륢�������ɬ�פˤʤ�ޤ���
+リソースが移動したなどの理由により、リクエストを完了させるには更な
+るアクションが必要になります。
 
 = class Net::HTTPServerException < Net::ProtoServerError
 include Net::HTTPExceptions
 
-HTTP ���ơ����������� 5xx �������ä��Ȥ����㳰�Ǥ���
+HTTP ステータスコード 5xx を受け取ったという例外です。
 
-���饤����ȤΥꥯ�����Ȥ˸��꤬���뤫�������Ф˥ꥯ�����Ȥ���ݤ�
-�줿(ǧ�ڤ�ɬ�ס��꥽������¸�ߤ��ʤ��ʤɤ�)���Ȥ򼨤��ޤ���
+クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+れた(認証が必要、リソースが存在しないなどで)ことを示します。
 
 = class Net::HTTPFatalError < Net::ProtoFatalError
 include Net::HTTPExceptions
 
-HTTP ���ơ����������� 4xx �������ä��Ȥ����㳰�Ǥ���
+HTTP ステータスコード 4xx を受け取ったという例外です。
 
-���饤����ȤΥꥯ�����Ȥ˸��꤬���뤫�������Ф˥ꥯ�����Ȥ���ݤ�
-�줿(ǧ�ڤ�ɬ�ס��꥽������¸�ߤ��ʤ��ʤɤ�)���Ȥ򼨤��ޤ���
+クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+れた(認証が必要、リソースが存在しないなどで)ことを示します。
 
 = class Net::HTTPBadResponse < StandardError
-HTTP �Υ쥹�ݥ󥹤������Ǥ��ä�����ȯ�������㳰�Ǥ���
+HTTP のレスポンスが不正であった場合に発生する例外です。
 
 = class Net::HTTPHeaderSyntaxError < StandardError
-HTTP �إå������Ƥ������Ǥ������ȯ�������㳰�Ǥ���
+HTTP ヘッダの内容が不正である場合に発生する例外です。

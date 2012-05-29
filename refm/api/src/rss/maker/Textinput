@@ -1,11 +1,11 @@
 = class RSS::Maker::TextinputBase
 
-RSS 1.0¤Î¾ì¹ç¤Ïtitle¡¤description¡¤name¡¤
-link¡¤maker.channel¤òÅ¬ÀÚ¤ËÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Ş
-¤¹¡¥
+RSS 1.0ã®å ´åˆã¯titleï¼Œdescriptionï¼Œnameï¼Œ
+linkï¼Œmaker.channelã‚’é©åˆ‡ã«è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾
+ã™ï¼
 
-RSS 0.91/2.0¤Î¾ì¹ç¤Ïtitle¡¤description¡¤
-name¡¤link¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Ş¤¹¡¥
+RSS 0.91/2.0ã®å ´åˆã¯titleï¼Œdescriptionï¼Œ
+nameï¼Œlinkã‚’è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼
 
 == Instance Methods
 

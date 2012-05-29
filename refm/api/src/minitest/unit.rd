@@ -1,12 +1,12 @@
 sublibrary minitest/autorun
 
-��˥åȥƥ��Ȥ�Ԥ�����Υ饤�֥��Ǥ���
+ユニットテストを行うためのライブラリです。
 
-=== �Ȥ���
+=== 使い方
 
-[[lib:minitest/unit]] �ϰʲ��Τ褦�˻Ȥ��ޤ���
+[[lib:minitest/unit]] は以下のように使います。
 
-�ƥ����оݤΥ����� (foo.rb) ���Ѱդ��ޤ���
+テスト対象のソース (foo.rb) を用意します。
 
   class Foo
     def foo
@@ -17,12 +17,12 @@ sublibrary minitest/autorun
     end
   end
 
-���˥�˥åȥƥ��� (test_foo.rb) ��񤭤ޤ���
-�ƥ��Ȥ�¹Ԥ���᥽�å� (�ƥ��ȥ᥽�å�) ��̾���Ϥ��٤� "test" �ǻϤޤ�ɬ�פ�����ޤ���
-�ƥ��ȥ᥽�åɤ��¹Ԥ�������ˤ� setup �᥽�åɤ�ɬ���¹Ԥ���ޤ���
-�ƥ��ȥ᥽�åɤ��¹Ԥ��줿��ˤ� teardown �᥽�åɤ�ɬ���¹Ԥ���ޤ���
+次にユニットテスト (test_foo.rb) を書きます。
+テストを実行するメソッド (テストメソッド) の名前はすべて "test" で始まる必要があります。
+テストメソッドが実行される前には setup メソッドが必ず実行されます。
+テストメソッドが実行された後には teardown メソッドが必ず実行されます。
 
-[[lib:minitest/unit]] �� [[m:Kernel.#require]] ���������Ǥϥƥ��Ȥ���ư�¹Ԥ���ޤ���
+[[lib:minitest/unit]] を [[m:Kernel.#require]] しただけではテストが自動実行されません。
 
   require 'minitest/unit'
   require 'foo'
@@ -33,7 +33,7 @@ sublibrary minitest/autorun
     def setup
       @foo = Foo.new
     end
-    # teardown �Ϥ��ޤ�Ȥ�ʤ�
+    # teardown はあまり使わない
     def teardown
       @foo = nil
     end
@@ -47,15 +47,15 @@ sublibrary minitest/autorun
     end
   end
 
-�ޤ��� MiniTest::Unit.autorun ���ά���ưʲ��Τ褦�˽񤯤��Ȥ�Ǥ��ޤ���
+または MiniTest::Unit.autorun を省略して以下のように書くこともできます。
 
   require 'minitest/unit'
   require 'minitest/autorun'
   require 'foo'
-  # �ʲ�ά
+  # 以下略
 
-�ƥ��Ȥ�¹Ԥ���ˤϾ���Ѱդ��� test_foo.rb ��¹Ԥ��ޤ���
-�ǥե���ȤǤϤ��٤ƤΥƥ��Ȥ��¹Ԥ���ޤ���
+テストを実行するには上で用意した test_foo.rb を実行します。
+デフォルトではすべてのテストが実行されます。
 
   $ ruby test_foo.rb
   Loaded suite test_foo
@@ -69,7 +69,7 @@ sublibrary minitest/autorun
   
   2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
 
-test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
+test_bar だけテストしたい場合は以下のようなオプションを与えます。
 
   $ ruby test_foo.rb -n test_bar
   Loaded suite test_foo
@@ -83,64 +83,64 @@ test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
   
   1 tests, 1 assertions, 1 failures, 0 errors, 0 skips
 
-���󥽡����Ȥä� testrunner �Τ��󶡤���Ƥ��ޤ���
-�ޤ��إ�פ�ɽ�����뤳�Ȥ�Ǥ��ޤ���
+コンソールを使った testrunner のみ提供されています。
+またヘルプを表示することもできません。
 
-=== ���Ѳ�ǽ�ʥ��ץ����
+=== 使用可能なオプション
 
 : -v
-  �ܺ٤�ɽ�����ޤ���
+  詳細を表示します。
 : -n, --name
-  ���ꤵ�줿�ƥ��ȥ᥽�åɤ�¹Ԥ��ޤ����ƥ��ȥ᥽�åɤλ��������ɽ����Ȥ��ޤ���
+  指定されたテストメソッドを実行します。テストメソッドの指定に正規表現も使えます。
 
-=== ���ĥƥ��Ȥϼ¹Ԥ���뤫
+=== いつテストは実行されるか
 
-��ҤΤȤ��ꡢMiniTest::Unit.autorun �� require 'minitest/autorun' ��ƥ��ȥ����ɤ�
-����Ū�˽񤫤ʤ��ä����ϡ�ñ�ˤ��Υƥ��ȥե������¹Ԥ��Ƥⲿ�ⵯ����ޤ���
+上述のとおり、MiniTest::Unit.autorun や require 'minitest/autorun' をテストコードに
+明示的に書かなかった場合は、単にそのテストファイルを実行しても何も起こりません。
 
-=== Error �� Failure �� Skip �ΰ㤤
+=== Error と Failure と Skip の違い
 
 : Error
-  �ƥ��ȥ᥽�åɼ¹�����㳰��ȯ��������
+  テストメソッド実行中に例外が発生した。
 : Failure
-  �����������˼��Ԥ�����
+  アサーションに失敗した。
 : Skip
-  �ƥ��ȥ᥽�å���� [[m:MiniTest::Assertions#skip]] ��ƤӽФ�����
+  テストメソッド内で [[m:MiniTest::Assertions#skip]] を呼び出した。
 
-=== test/unit ����ΰܹ�
+=== test/unit からの移行
 
-�٤����㤤�Ϥ����Ĥ�����ޤ������ܹԤΤ���ˤ��ʤ���Фʤ�ʤ����Ȥ��äˤ���ޤ���
-require 'test/unit' ���Ƥ�����ϸߴ��쥤�䡼���ɤ߹��ޤ������ [[lib:test/unit]]
-�Ȥθߴ��������ݤ���ޤ���
+細かい違いはいくつかありますが、移行のためにしなければならないことは特にありません。
+require 'test/unit' している場合は互換レイヤーが読み込まれ以前の [[lib:test/unit]]
+との互換性が確保されます。
 
-�����ǤϤʤ��� require 'minitest/unit' ������ϡ��ƥ��ȥ��饹��������˿ƥ��饹��
-[[c:MiniTest::Unit::TestCase]] �ˤ��ʤ���Фʤ�ޤ���
+そうではなくて require 'minitest/unit' する場合は、テストクラスの定義時に親クラスを
+[[c:MiniTest::Unit::TestCase]] にしなければなりません。
 
 = module MiniTest
 
-[[lib:minitest/unit]] �ǻ��Ѥ��륯�饹��⥸�塼���������Ƥ���⥸�塼��Ǥ���
+[[lib:minitest/unit]] で使用するクラスやモジュールを定義しているモジュールです。
 
 == Singleton Methods
 
 --- filter_backtrace(backtrace) -> Array
 
-�Хå��ȥ졼�����餳�Υ饤�֥��˴ؤ�����ʬ�����������̤��֤��ޤ���
+バックトレースからこのライブラリに関する部分を取り除いた結果を返します。
 
-@param backtrace �Хå��ȥ졼������ꤷ�ޤ���
+@param backtrace バックトレースを指定します。
 
 == Constants
 
 --- MINI_DIR -> String
 
-���Υ饤�֥�꤬���󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ�οƥǥ��쥯�ȥ��̾�����֤��ޤ���
+このライブラリがインストールされているディレクトリの親ディレクトリの名前を返します。
 
 = class MiniTest::Assertion < Exception
 
-�����������˼��Ԥ�������ȯ�������㳰�Ǥ���
+アサーションに失敗した時に発生する例外です。
 
 = class MiniTest::Skip < MiniTest::Assertion
 
-[[m:MiniTest::Assertions#skip]] ��ƤӽФ�������ȯ�������㳰�Ǥ���
+[[m:MiniTest::Assertions#skip]] を呼び出した時に発生する例外です。
 
 
 #@include(MiniTest__Unit)

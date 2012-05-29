@@ -1,21 +1,21 @@
 #@since 1.8.0
 
 = class CSV::Writer < Object
-CSV�ν񤭹��߻��Υ١����Ȥʤ륯�饹
+CSVの書き込み時のベースとなるクラス
 
 == Class Methods
 
 --- generate(str_or_writable, fs = ',', rs = nil) -> CSV::BasicWriter
 --- generate(str_or_writable, fs = ',', rs = nil) { |row| ... } -> nil
-str_or_writable ��񤭹�����Ȥ��� [[c:CSV::BasicWriter]] ���饹�Υ��󥹥��󥹤����������񤭹�����(str_or_writable)��֥��å����Ϥ��ޤ���
+str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスのインスタンスを生成し、書き込み先(str_or_writable)をブロックに渡します。
 
-@param str_or_writable CSV�ǡ����ν񤭹����衣���Υѥ�᡼���Ȥ����Ϥ����󥹥��󥹤ˤ�<<�᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
-@param fs �񤭹��ߥǡ����Υե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<メソッドが定義されている必要があります。
+@param fs 書き込みデータのフィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-��:
+例:
   s = "1,2,3,4\n"
   CSV::Writer.generate(s){|data|
     data << ['a', 'b', 'c']
@@ -23,29 +23,29 @@ str_or_writable ��񤭹�����Ȥ��� [[c:CSV::BasicWriter]] ���饹�Υ��󥹥��󥹤�
   p s #=> "1,2,3,4\na,b,c\n"
 
 --- create(str_or_writable, fs = ',', rs = nil) -> CSV::BasicWriter
-str_or_writable ��񤭹�����Ȥ��� [[c:CSV::BasicWriter]] ���饹�Υ��󥹥��󥹤��������ޤ���
+str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスのインスタンスを生成します。
 
-@param str_or_writable CSV�ǡ����ν񤭹����衣���Υѥ�᡼���Ȥ����Ϥ����󥹥��󥹤ˤ�<<�᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
-@param fs �񤭹��ߥǡ����Υե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<メソッドが定義されている必要があります。
+@param fs 書き込みデータのフィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 == Instance Methods
 
 --- <<(row) -> CSV::BasicWriter
 --- add_row(row) -> CSV::BasicWriter
-�������Ϥ��줿�ǡ�����1��ʬ�Ȥ���CSV�ǡ������ɲä��ޤ���
+引数で渡されたデータを1行分としてCSVデータに追加します。
 
-@param row 1��ʸ�Ȥ��ƽ񤭹�������ɲä���ǡ�����
-           [[c:String]] ���뤤�� [[c:Array]] ���֥������ȤǤ���ɬ�פ�����ޤ���
+@param row 1行文として書き込み先に追加するデータ。
+           [[c:String]] あるいは [[c:Array]] オブジェクトである必要があります。
 
-===== ����
+===== 注意
 
-�ǡ����ɲû���""(��ʸ��)���ͤʤ�(nil)����̤��ޤ���
-�㤨�С�["a", "", nil, "b"] ��������Ϥ������� a, "", , b �Ȥ����Ԥ��ɲä���ޤ���
+データ追加時に""(空文字)と値なし(nil)を区別します。
+例えば、["a", "", nil, "b"] の配列を渡した場合に a, "", , b という行が追加されます。
 
-��:
+例:
   csv_w = CSV::Writer.generate("")
   row = [1, 2, 3]
   csv_w.add_row(row)         #=> "1,2,3\n"
@@ -53,11 +53,11 @@ str_or_writable ��񤭹�����Ȥ��� [[c:CSV::BasicWriter]] ���饹�Υ��󥹥��󥹤�
   csv_w.add_row(row)         #=> "1,2,3\na,\"\",,b\n"
 
 --- close -> nil
-private��terminate�᥽�åɤ�ƤӽФ��ޤ���
+privateのterminateメソッドを呼び出します。
 
 == Private Instance Methods
 
 --- terminate -> nil
-���󥹥����˴���������ɬ�פʾ��˺�������Ƥ���������
+インスタンス破棄時処理が必要な場合に再定義してください。
 
 #@end

@@ -1,20 +1,20 @@
-eRuby ������ץȤ򰷤�����Υ饤�֥��Ǥ���
+eRuby スクリプトを扱うためのライブラリです。
 
 = class ERB < Object
 
-eRuby ������ץȤ�������륯�饹��
+eRuby スクリプトを処理するクラス。
 
-���� ERbLight �ȸƤФ�Ƥ�����Τǡ�
-ɸ����Ϥؤΰ�����ʸ����������Ȥʤ�ʤ����� eruby �Ȱۤʤ�ޤ���
+従来 ERbLight と呼ばれていたもので、
+標準出力への印字が文字列の挿入とならない点が eruby と異なります。
 
  * [[url:http://jp.rubyist.net/magazine/?0017-BundledLibraries]]
 
 
-=== �Ȥ���
+=== 使い方
 
-ERB ���饹��Ȥ�����ˤ� require 'erb' ����ɬ�פ�����ޤ���
+ERB クラスを使うためには require 'erb' する必要があります。
 
-��:
+例:
 
   require 'erb'
 
@@ -22,31 +22,31 @@ ERB ���饹��Ȥ�����ˤ� require 'erb' ����ɬ�פ�����ޤ���
 
 === trim_mode
 
-trim_mode �������ε�ư���ѹ����륪�ץ����Ǥ������ο��񤤤����Ǥ��ޤ���
-  * ���Ԥΰ���
-  * %�ǤϤ��ޤ�Ԥΰ��� (ERB 2.0 �����ɲä���ޤ���)
+trim_mode は整形の挙動を変更するオプションです。次の振舞いを指定できます。
+  * 改行の扱い
+  * %ではじまる行の扱い (ERB 2.0 から追加されました)
 
 
-trim_mode �˻���Ǥ����ͤϼ����̤�Ǥ���
+trim_mode に指定できる値は次の通りです。
 
-  * ERb-1.4.x �ߴ��λ�����ˡ
-    * nil, 0: ���Τޤ��Ѵ�
-    * 1: ������%>�ΤȤ����Ԥ���Ϥ��ʤ�
-    * 2: ��Ƭ��<%�ǹ�����%>�ΤȤ����Ԥ���Ϥ��ʤ�
+  * ERb-1.4.x 互換の指定方法
+    * nil, 0: そのまま変換
+    * 1: 行末が%>のとき改行を出力しない
+    * 2: 行頭が<%で行末が%>のとき改行を出力しない
 
-  * 2.0 ����λ�����ˡ
-    * nil, "": ���Τޤ��Ѵ�
-    * ">": 1��Ʊ��
-    *  "<>": 2��Ʊ��
-    * "-": ������-%>�ΤȤ����Ԥ���Ϥ��ʤ����ޤ�����Ƭ��<%-�ΤȤ���Ƭ�ζ���ʸ����������
-    * "%": %�ǤϤ��ޤ�Ԥ�<%..%>�Ȥߤʤ����Ѵ����롣���ιԤβ��ԤϽ��Ϥ��ʤ�
-    * "%>", ">%": 1��"%"��ξ����Ԥʤ�
-    * "%<>", "<>%": 2��"%"��ξ����Ԥʤ�
-    * "%-": "-"��"%"��ξ����Ԥʤ�
+  * 2.0 からの指定方法
+    * nil, "": そのまま変換
+    * ">": 1と同じ
+    *  "<>": 2と同じ
+    * "-": 行末が-%>のとき改行を出力しない。また、行頭が<%-のとき行頭の空白文字を削除する
+    * "%": %ではじまる行を<%..%>とみなして変換する。この行の改行は出力しない
+    * "%>", ">%": 1と"%"の両方を行なう
+    * "%<>", "<>%": 2と"%"の両方を行なう
+    * "%-": "-"と"%"の両方を行なう
 
-�¹���:
+実行例:
 
-  # ������ץ�
+  # スクリプト
   <% 3.times do |n| %>
   % n = 0
   * <%= n%>
@@ -93,7 +93,7 @@ trim_mode �˻���Ǥ����ͤϼ����̤�Ǥ���
   * 0
   * 0
   
-  # ������ץ�
+  # スクリプト
   <% 3.times do |n| -%>
   % n = 0
     <%- m = 0 %>*
@@ -108,7 +108,7 @@ trim_mode �˻���Ǥ����ͤϼ����̤�Ǥ���
   *
   * 0
   
-  # ������ץ�
+  # スクリプト
   <% 3.times do |n| %>
   % n = 0
     <%- m = 0 %>*
@@ -130,141 +130,141 @@ trim_mode �˻���Ǥ����ͤϼ����̤�Ǥ���
 
 --- new(eruby_script, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
 
-eRuby������ץ� ���� ERB ���֥������Ȥ����������֤��ޤ���
+eRubyスクリプト から ERB オブジェクトを生成して返します。
 
-@param eruby_script eRuby������ץ�
+@param eruby_script eRubyスクリプト
 
-@param safe_level eRuby������ץȤ��¹Ԥ����Ȥ��Υ����ե�٥�
+@param safe_level eRubyスクリプトが実行されるときのセーフレベル
 
-@param trim_mode �����ε�ư���ѹ����륪�ץ����
+@param trim_mode 整形の挙動を変更するオプション
 
-@param eoutvar eRuby������ץȤ���ǽ��Ϥ򤿤�Ƥ����ѿ���eRuby ������ץȤ���Ǥ���� ERB ��Ȥ��Ȥ����ѹ����ޤ����̾�ϻ��ꤹ��ɬ�פϤ���ޤ���
+@param eoutvar eRubyスクリプトの中で出力をためていく変数。eRuby スクリプトの中でさらに ERB を使うときに変更します。通常は指定する必要はありません。
 
 --- version -> String
 
-erb.rb�Υ�ӥ���������֤��ޤ���
+erb.rbのリビジョン情報を返します。
 
 == Instance Methods
 
 --- run(b=TOPLEVEL_BINDING) -> nil
 
-ERB �� b �� binding �Ǽ¹Ԥ�����̤�ɸ����Ϥذ������ޤ���
+ERB を b の binding で実行し、結果を標準出力へ印字します。
 
-@param b eRuby������ץȤ��¹Ԥ����Ȥ���binding
+@param b eRubyスクリプトが実行されるときのbinding
 
 --- result(b=TOPLEVEL_BINDING) -> String
 
-ERB �� b �� binding �Ǽ¹Ԥ�����̤�ʸ������֤��ޤ���
+ERB を b の binding で実行し、結果の文字列を返します。
 
-@param b eRuby������ץȤ��¹Ԥ����Ȥ���binding
+@param b eRubyスクリプトが実行されるときのbinding
 
 --- src -> String
 
-�Ѵ����� Ruby ������ץȤ�������ޤ���
+変換した Ruby スクリプトを取得します。
 
 --- def_method(mod, methodname, fname='(ERB)') -> nil
 
-�Ѵ����� Ruby ������ץȤ�᥽�åɤȤ���������ޤ���
+変換した Ruby スクリプトをメソッドとして定義します。
 
-�����Υ⥸�塼��� mod �ǻ��ꤷ���᥽�å�̾�� methodname �ǻ��ꤷ�ޤ���
-fname �ϥ�����ץȤ��������ݤΥե�����̾�Ǥ�����˥��顼���˳������ޤ���
+定義先のモジュールは mod で指定し、メソッド名は methodname で指定します。
+fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
-@param mod �᥽�åɤ��������⥸�塼��ʤޤ��ϥ��饹��
+@param mod メソッドを定義するモジュール（またはクラス）
 
-@param methodname �᥽�å�̾
+@param methodname メソッド名
 
-@param fname ������ץȤ��������ݤΥե�����̾
+@param fname スクリプトを定義する際のファイル名
 
-��:
+例:
 
   erb = ERB.new(script)
   erb.def_method(MyClass, 'foo(bar)', 'foo.erb')
 
 --- def_module(methodname='erb') -> Module
 
-�Ѵ����� Ruby ������ץȤ�᥽�åɤȤ����������̵̾�Υ⥸�塼����֤��ޤ���
+変換した Ruby スクリプトをメソッドとして定義した無名のモジュールを返します。
 
-@param methodname �᥽�å�̾
+@param methodname メソッド名
 
 --- def_class(superklass=Object, methodname='erb') -> Class
 
-�Ѵ����� Ruby ������ץȤ�᥽�åɤȤ����������̵̾�Υ��饹���֤��ޤ���
+変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 
-#@# �Ȥ��Ӥ��ʤ��������ġ�
+#@# 使い途がなさそうだ…。
  
-@param superklass ̵̾���饹�Υ����ѡ����饹
+@param superklass 無名クラスのスーパークラス
 
-@param methodname �᥽�å�̾
+@param methodname メソッド名
 
 --- set_eoutvar(compiler, eoutvar = '_erbout') -> Array
 
-ERB�����eRuby������ץȤν��Ϥ򤿤�Ƥ����ѿ������ꤷ�ޤ���
+ERBの中でeRubyスクリプトの出力をためていく変数を設定します。
 
-ERB��eRuby������ץȤν��Ϥ򤿤�Ƥ����ѿ������ꤹ�뤿��˻��Ѥ��ޤ���
-��������� ERB#new �Ǥ�Ԥ��뤿�ᡢ�̾�Ϥ��������Ѥ�����������ưפǤ���
-�ܥ᥽�åɤ���Ѥ��뤿��ˤϡ������ˤƻ��ꤹ�� eRuby ����ѥ����������������Ƥ���ɬ�פ�����ޤ���
+ERBでeRubyスクリプトの出力をためていく変数を設定するために使用します。
+この設定は ERB#new でも行えるため、通常はそちらを使用した方がより容易です。
+本メソッドを使用するためには、引数にて指定する eRuby コンパイラを事前に生成しておく必要があります。
 
-@param compiler eRuby����ѥ���
+@param compiler eRubyコンパイラ
 
-@param eoutvar eRuby������ץȤ���ǽ��Ϥ򤿤�Ƥ����ѿ�
+@param eoutvar eRubyスクリプトの中で出力をためていく変数
 
 #@since 1.8.1
 
 --- filename -> String
 
-���顼��å�������ɽ������ݤΥե�����̾��������ޤ���
+エラーメッセージを表示する際のファイル名を取得します。
 
 --- filename= -> String
 
-���顼��å�������ɽ������ݤΥե�����̾�����ꤷ�ޤ���
+エラーメッセージを表示する際のファイル名を設定します。
 
-filename �����ꤷ�Ƥ������Ȥˤ�ꡢ���顼��ȯ������ eRuby ������ץȤ����꤬�ưפˤʤ�ޤ���filename �����ꤷ�Ƥ��ʤ����ϡ����顼ȯ���ս�ϡ� (ERB) �פȤ������ϤȤʤ�ޤ���
+filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易になります。filename を設定していない場合は、エラー発生箇所は「 (ERB) 」という出力となります。
 
 #@end
 
 = module ERB::Util
 
-eRuby������ץȤΤ���Υ桼�ƥ���ƥ����󶡤���⥸�塼��Ǥ���
+eRubyスクリプトのためのユーティリティを提供するモジュールです。
 
 == Module Functions
 
 --- html_escape(s) -> String
 --- h(s) -> String
 
-ʸ���� s �� HTML�Ѥ˥��������פ���ʸ������֤��ޤ���
+文字列 s を HTML用にエスケープした文字列を返します。
 
-ʸ���� s ��˴ޤޤ��  &"<> �򡢼��λ��� &amp; &quot; &lt; &gt; �ˤ��줾���ѹ�����ʸ������֤��ޤ�
-([[m:CGI.escapeHTML]]�Ȥۤ�Ʊ���Ǥ�)��
+文字列 s 中に含まれる  &"<> を、実体参照 &amp; &quot; &lt; &gt; にそれぞれ変更した文字列を返します
+([[m:CGI.escapeHTML]]とほぼ同じです)。
 
-@param s HTML���������פ�Ԥ�ʸ����
+@param s HTMLエスケープを行う文字列
 
 --- url_encode(s)  -> String
 --- u(s) -> String
 
-ʸ���� s �� URL���󥳡��ɤ���ʸ������֤��ޤ���
+文字列 s を URLエンコードした文字列を返します。
 
-ʸ���� s ��˴ޤޤ�� 2�Х���ʸ����Ⱦ�ѥ��ڡ����ˤĤ��� URL ���󥳡��ɤ�Ԥä�ʸ������֤��ޤ�([[m:CGI.escape]]�Ȥۤ�Ʊ���Ǥ�)��
+文字列 s 中に含まれる 2バイト文字や半角スペースについて URL エンコードを行った文字列を返します([[m:CGI.escape]]とほぼ同じです)。
 
-@param s URL���󥳡��ɤ�Ԥ�ʸ����
+@param s URLエンコードを行う文字列
 
 = module ERB::DefMethod
 
-def_erb_method���󶡤���⥸�塼��Ǥ���
+def_erb_methodを提供するモジュールです。
 
 == Module Functions
 
 --- def_erb_method(methodname, erb) -> nil
 
-self �� erb �Υ�����ץȤ�᥽�åɤȤ���������ޤ���
+self に erb のスクリプトをメソッドとして定義します。
 
-�᥽�å�̾�� methodname �ǻ��ꤷ�ޤ���
-erb ��ʸ����λ������Υե�������ɤ߹��� ERB ���Ѵ������Τ����᥽�åɤȤ���������ޤ���
+メソッド名は methodname で指定します。
+erb が文字列の時、そのファイルを読み込み ERB で変換したのち、メソッドとして定義します。
 
-@param methodname �᥽�å�̾
+@param methodname メソッド名
 
-@param erb ERB���󥹥��󥹤⤷����ERB�������ե�����̾
+@param erb ERBインスタンスもしくはERBソースファイル名
 
-��:
+例:
 
   class Writer
     extend ERB::DefMethod

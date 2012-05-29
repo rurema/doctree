@@ -4,7 +4,7 @@ require rubygems/version_option
 require rubygems/source_info_cache
 require rubygems/format
 
-���ꤵ�줿 Gem �ѥå������� gemspec �ξ���� YAML ������ɽ�����뤿��Υ饤�֥��Ǥ���
+指定された Gem パッケージの gemspec の情報を YAML 形式で表示するためのライブラリです。
 
   Usage: gem specification [GEMFILE] [options]
     Options:
@@ -15,9 +15,9 @@ require rubygems/format
 #@include(local_remote_options)
 #@include(common_options)
     Arguments:
-      GEMFILE       gemspec ��ɽ������ Gem �ѥå�����̾����ꤷ�ޤ�
+      GEMFILE       gemspec を表示する Gem パッケージ名を指定します
     Summary:
-      Gem �ѥå������λ��ͤ� YAML ������ɽ�����ޤ�
+      Gem パッケージの仕様を YAML 形式で表示します
     Defaults:
       --local --version '>= 0'
 
@@ -26,4 +26,4 @@ require rubygems/format
 include Gem::LocalRemoteOptions
 include Gem::VersionOption
 
-���ꤵ�줿 Gem �ѥå������� gemspec �ξ���� YAML ������ɽ�����뤿��Υ��饹�Ǥ���
+指定された Gem パッケージの gemspec の情報を YAML 形式で表示するためのクラスです。

@@ -1,20 +1,20 @@
 require rdoc/markup/formatter
 require cgi
 
-RDoc �����Υɥ�����Ȥ� LaTeX ���������뤿��Υ��֥饤�֥��Ǥ���
+RDoc 形式のドキュメントを LaTeX に整形するためのサブライブラリです。
 
-[����] rdoc 2.5 ���ѻߤ��줿���ᡢ1.9.2 ����
-[[lib:rdoc/markup/to_latex]] ��ɸ��ź�ե饤�֥��˴ޤޤ�ʤ��ʤ�ޤ�����
+[注意] rdoc 2.5 で廃止されたため、1.9.2 から
+[[lib:rdoc/markup/to_latex]] は標準添付ライブラリに含まれなくなりました。
 
 = class RDoc::Markup::ToLaTeX < RDoc::Markup::Formatter
 
-RDoc �����Υɥ�����Ȥ� LaTeX �������������륯�饹�Ǥ���
+RDoc 形式のドキュメントを LaTeX 形式に整形するクラスです。
 
 == Class Methods
 
 --- new -> RDoc::Markup::ToLaTeX
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-[����] 1.9.1 �Ǥ� [[m:RDoc::Markup::ToLaTeX.new]] ���Զ�礬���뤿�ᡢ
-�������Ѵ����Ԥ��ޤ���
+[注意] 1.9.1 では [[m:RDoc::Markup::ToLaTeX.new]] に不具合があるため、
+正しく変換が行えません。

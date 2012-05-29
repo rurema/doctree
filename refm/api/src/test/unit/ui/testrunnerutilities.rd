@@ -1,47 +1,47 @@
-�Ƽ� TestRunner ��������뤿��˻Ȥ��ޤ���
+各種 TestRunner を実装するために使われます。
 
-Unit �ƥ��Ȥ�Ԥ����������Υ桼���������Υ饤�֥��� require ����
-ɬ�פϤ���ޤ���
+Unit テストを行いたいだけのユーザが、このライブラリを require する
+必要はありません。
 
 = module Test::Unit::UI
-�Ƽ� TestRunner ��������뤿��Υ⥸�塼��Ǥ���
+各種 TestRunner を実装するためのモジュールです。
 
 == Constants
 
 #@since 1.8.1
 --- SILENT        -> Integer
 
-�ƥ��ȷ�̤ν��ϥ�٥��ɽ������Ǥ���������Ϥ��ޤ���
+テスト結果の出力レベルを表す定数です。何も出力しません。
 
 --- PROGRESS_ONLY -> Integer
 
-�ƥ��ȷ�̤ν��ϥ�٥��ɽ������Ǥ����ƥ��Ȥο�Ľ��ɽ����.�פ��������Ϥ���ޤ���
+テスト結果の出力レベルを表す定数です。テストの進捗を表す「.」だけが出力されます。
 
 --- NORMAL        -> Integer
 
-�ƥ��ȷ�̤ν��ϥ�٥��ɽ������Ǥ�������Ū�ʽ��Ϥ�Ԥ��ޤ���
+テスト結果の出力レベルを表す定数です。一般的な出力を行います。
 
 --- VERBOSE       -> Integer
 
-�ƥ��ȷ�̤ν��ϥ�٥��ɽ������Ǥ����ܺ٤ʽ��Ϥ�Ԥ��ޤ���
+テスト結果の出力レベルを表す定数です。詳細な出力を行います。
 #@end
 
 = module Test::Unit::UI::TestRunnerUtilities
 
-�Ƽ� TestRunner ��������뤿��Υ⥸�塼��Ǥ���
+各種 TestRunner を実装するためのモジュールです。
 
 == Instance Methods
 --- run(suite, output_level = NORMAL)    -> Test::Unit::TestResult
 
-������ TestRunner ���������ơ�Ϳ����줿 TestSuite �Υƥ��Ȥ�¹Ԥ��ޤ���
+新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
 
-@param suite �¹Ԥ������ƥ��Ȥ��ݻ����Ƥ��� TestSuite ���֥������Ȥ�
-             TestCase ���֥������Ȥ�Ϳ���ޤ���
+@param suite 実行したいテストを保持している TestSuite オブジェクトか
+             TestCase オブジェクトを与えます。
 
-@param output_level ���ϥ�٥����ꤷ�ޤ���
+@param output_level 出力レベルを指定します。
 
-���� output_level �ˤϰʲ��� 4 �ĤΤ����줫����ꤷ�ޤ����ܤ�����
-[[c:Test::Unit::UI]] ��������������
+引数 output_level には以下の 4 つのいずれかを指定します。詳しくは
+[[c:Test::Unit::UI]] をご覧ください。
 
  * Test::Unit::UI::SILENT
  * Test::Unit::UI::PROGRESS_ONLY
@@ -50,7 +50,7 @@ Unit �ƥ��Ȥ�Ԥ����������Υ桼���������Υ饤�֥��� require ����
 
 --- start_command_line_test    -> Test::Unit::TestResult
 
-[[m:Kernel::ARGV]] ����Ϥ��ơ�ARGV[0] ��Ϳ����줿TestRunner �򿷤���
-�������ơ��ƥ��Ȥ�¹Ԥ��ޤ���
+[[m:Kernel::ARGV]] を解析して、ARGV[0] で与えられたTestRunner を新しく
+生成して、テストを実行します。
 
-ARGV �������ä���硢��å���������Ϥ��ƥץ�������λ���ޤ���
+ARGV が空だった場合、メッセージを出力してプログラムを終了します。

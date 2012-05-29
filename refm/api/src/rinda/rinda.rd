@@ -1,4 +1,4 @@
-Ruby¤Ç¼ÂÁõ¤µ¤ì¤¿¥¿¥×¥ë¶õ´Ö(Tuple Space)¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Rubyã§å®Ÿè£…ã•ã‚ŒãŸã‚¿ãƒ—ãƒ«ç©ºé–“(Tuple Space)ã‚’æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   * [[url:http://www.druby.org/ilikeruby/rinda.html]]
   * [[url:http://www2a.biglobe.ne.jp/~seki/ruby/d208.html]]

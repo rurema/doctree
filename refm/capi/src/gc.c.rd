@@ -2,7 +2,7 @@
 
 --- static void add_heap(void)
 
-Ruby���֥������ȤΥҡ��ץ����åȤ����ߤ��롣
+Rubyオブジェクトのヒープスロットを増設する。
 
 --- static VALUE call_final(VALUE os, VALUE obj)
 
@@ -16,13 +16,13 @@ Ruby���֥������ȤΥҡ��ץ����åȤ����ߤ��롣
 
 --- static void gc_sweep(void)
 
-GC �Υ������ץե�������¹Ԥ��ޤ���
+GC のスイープフェイズを実行します。
 
 --- static VALUE id2ref(VALUE obj, VALUE id)
 
-ObjectSpace#_id2ref �μ��Ρ�
-Ruby ��������ɽ���줿���֥������� ID id ����
-���֥������Ȥ��֤��ޤ���
+ObjectSpace#_id2ref の実体。
+Ruby の整数で表されたオブジェクト ID id から
+オブジェクトを返します。
 
 --- void Init_heap(void)
 
@@ -50,66 +50,66 @@ Ruby ��������ɽ���줿���֥������� ID id ����
 
 --- VALUE rb_data_object_alloc(VALUE klass, void *datap, RUBY_DATA_FUNC dmark, RUBY_DATA_FUNC dfree)
 
-datap ���åפ��륪�֥������Ȥ����������֤��ޤ���
-���Υ��饹�� klass �Ȥʤꡢdatap ��ޡ�������Ȥ���
-dmark����������Ȥ��� dfree ��Ȥ��褦�ˤʤ�ޤ���
+datap をラップするオブジェクトを生成し、返します。
+そのクラスは klass となり、datap をマークするときは
+dmark、解放するときは dfree を使うようになります。
 
 --- VALUE rb_gc(void)
 
-����Ū�� GC �򳫻Ϥ��ޤ���rb_gc_disable() �Ƕػ���ΤȤ������
-���Ǥ� GC ���¹���ΤȤ��ϼºݤˤϹԤ��ޤ���
+明示的に GC を開始します。rb_gc_disable() で禁止中のときおよび
+すでに GC が実行中のときは実際には行われません。
 
 --- void rb_gc_call_finalizer_at_exit(void)
 
 --- VALUE rb_gc_disable(void)
 
-GC ��ػߤ��ޤ���
+GC を禁止します。
 
 --- VALUE rb_gc_enable(void)
 
-GC ����Ĥ��ޤ���
+GC を許可します。
 
 --- void rb_gc_force_recycle(VALUE p)
 
-p ����Ū�� GC ���ޤ���
+p を強制的に GC します。
 
 --- void rb_gc_mark(VALUE v)
 
-v ��ޡ������ޤ���
+v をマークします。
 
 --- void rb_gc_mark_children(VALUE ptr)
 
-v ����ؤ���Ƥ��륪�֥������Ȥ����ƥޡ������ޤ���
+v から指されているオブジェクトを全てマークします。
 
 --- void rb_gc_mark_frame(struct FRAME *frame)
 
-frame ��ޡ������ޤ���
+frame をマークします。
 
 --- void rb_gc_mark_locations(VALUE *start, VALUE *end)
 
 --- void rb_gc_mark_maybe(VALUE v)
 
-v �� Ruby �Υ��֥������ȤǤ���Хޡ������ޤ���
+v が Ruby のオブジェクトであればマークします。
 
 --- void rb_gc_register_address(VALUE *addr)
 
-#@# ���: [ruby-list:20488] 1.5 feature
+#@# 初出: [ruby-list:20488] 1.5 feature
 
-�ݥ��� addr ���ؤ��ѿ��� GC ���оݤˤ��ޤ���
+ポインタ addr が指す変数を GC の対象にします。
 
 --- VALUE rb_gc_start(void)
 
-GC ��ư���ޤ���
+GC を起動します。
 
 --- void rb_gc_unregister_address(VALUE *addr)
 
-#@# ���: [ruby-list:20488] [1.5 feature]
+#@# 初出: [ruby-list:20488] [1.5 feature]
 
-�ݥ��� addr ���ؤ��ѿ��� GC ���оݤ��鳰���ޤ���
+ポインタ addr が指す変数を GC の対象から外します。
 
 --- void rb_global_variable(VALUE *var)
 
-[[f:rb_gc_register_address]] ��Ʊ���Ǥ���
+[[f:rb_gc_register_address]] と同じです。
 
 --- void rb_mark_hash(st_table *tbl)
 
@@ -117,16 +117,16 @@ GC ��ư���ޤ���
 
 --- void rb_memerror(void)
 
-NoMemoryError��raise���롣
-������raise���Τˤ�������̤�Ȥ����ᡢ���꤬­��ʤ�����
-�ǤϤ�������Ǥޤ�������­�ˤʤ��ǽ�������롣���Τ���
-���δؿ��ǤϺƵ��򸡽Ф�������raise�ǤϤʤ�exit����褦��
-�ʤäƤ��롣
+NoMemoryErrorをraiseする。
+しかしraise自体にもメモリ容量を使うため、メモリが足りない状況
+ではその途中でまたメモリ不足になる可能性がある。そのため
+この関数では再帰を検出した場合はraiseではなくexitするように
+なっている。
 
 --- VALUE rb_newobj(void)
 
-̤���ѤΥ��֥��������ΰ��ĤؤΥݥ��󥿤��֤���
-�֤��ͤ��֤äƤ����Ȥ��ϼ��ԤϤʤ���
+未使用のオブジェクト領域一つへのポインタを返す。
+返り値が返ってきたときは失敗はない。
 
 --- char *rb_source_filename(const char *f)
 
@@ -138,33 +138,33 @@ NoMemoryError��raise���롣
 
 --- void *ruby_xcalloc(long n, long size)
 
-�������֤��ͤ� calloc() ��Ʊ���Ǥ���
-���������������Ƥ˼��Ԥ����Ȥ���
-GC ��Ԥ�����Ǥ����ʤȤ����㳰 NoMemoryError ��ȯ�����ޤ���
-�Ĥޤꤳ�δؿ����֤��ͤ��֤����Ȥ��Ͼ�˳�����Ƥ������Ǥ���
+引数と返り値は calloc() と同じです。
+ただしメモリ割り当てに失敗したときは
+GC を行いそれでもだめなときは例外 NoMemoryError を発生します。
+つまりこの関数が返り値を返したときは常に割り当ては成功です。
 
 --- void ruby_xfree(void *x)
 
-���� malloc/calloc/realloc ���� free ���Ƥ��ʤ��ݥ��� x ��
-�������ޤ���ruby �Υ����ʥ뵡���ȥ���եꥯ�Ȥ��ޤ���
+以前 malloc/calloc/realloc して free していないポインタ x を
+開放します。ruby のシグナル機構とコンフリクトしません。
 
 --- void *ruby_xmalloc(long size)
 
-�������֤��ͤ� malloc() ��Ʊ����
-���������������Ƥ˼��Ԥ����Ȥ���
-GC ��Ԥ�����Ǥ����ʤȤ��� NoMemoryError �� raise ���롣
-�Ĥޤꤳ�δؿ����֤��ͤ��֤����Ȥ��Ͼ�˳�����Ƥ��������Ƥ��롣
+引数と返り値は malloc() と同じ。
+ただしメモリ割り当てに失敗したときは
+GC を行いそれでもだめなときは NoMemoryError を raise する。
+つまりこの関数が返り値を返したときは常に割り当ては成功している。
 
 --- void *ruby_xrealloc(void *ptr, long size)
 
-�������֤��ͤΰ�̣�� realloc() ��Ʊ����
-���������������Ƥ˼��Ԥ����Ȥ���
-GC ��Ԥ�����Ǥ����ʤȤ��� NoMemoryError �� raise ���롣
-�Ĥޤꤳ�δؿ����֤��ͤ��֤����Ȥ��Ͼ�˳�����Ƥ��������Ƥ��롣
+引数と返り値の意味は realloc() と同じ。
+ただしメモリ割り当てに失敗したときは
+GC を行いそれでもだめなときは NoMemoryError を raise する。
+つまりこの関数が返り値を返したときは常に割り当ては成功している。
 
 --- static void run_final(VALUE obj)
 
-obj �Υե����ʥ饤����Ԥ��ޤ���
+obj のファイナライズを行います。
 
 --- static VALUE run_single_final(VALUE *args)
 

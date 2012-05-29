@@ -1,107 +1,107 @@
 require runit/error
 
-���Υ饤�֥��ϡ�
-RubyUnit �Ȥθߴ������󶡤��뤿��������󶡤���Ƥ��ޤ���
-���줫�鿷������˥åȥƥ��Ȥ�񤯤Ȥ���
-[[lib:test/unit]] �饤�֥���ȤäƤ���������
+このライブラリは、
+RubyUnit との互換性を提供するためだけに提供されています。
+これから新しくユニットテストを書くときは
+[[lib:test/unit]] ライブラリを使ってください。
 
 
 = module RUNIT::Assert
 include Test::Unit::Assertions
 
-RubyUnit �Υ����������򽸤᤿�⥸�塼��Ǥ���
+RubyUnit のアサーションを集めたモジュールです。
 
-���Υ⥸�塼��� RubyUnit �Ȥθߴ����Τ���ˤΤ��󶡤���Ƥ��ޤ���
-���줫���˥åȥƥ��Ȥ�񤯤Ȥ��� [[lib:test/unit]] ��ȤäƤ���������
+このモジュールは RubyUnit との互換性のためにのみ提供されています。
+これからユニットテストを書くときは [[lib:test/unit]] を使ってください。
 
 == Instance Methods
 
 --- assert_equal_float(expected, actual, delta, message = "") -> ()
 
-�����ͤȼºݤ��ͤκ��������ͤ�Ϳ����줿���и����ʲ��Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+期待値と実際の値の差の絶対値が与えられた絶対誤差以下である場合、検査にパスしたことになります。
 
-@param expected �����ͤ���ꤷ�ޤ���
+@param expected 期待値を指定します。
 
-@param actual �ºݤ��ͤ���ꤷ�ޤ���
+@param actual 実際の値を指定します。
 
-@param delta ���Ƥ������и�������ꤷ�ޤ���
+@param delta 許容する絶対誤差を指定します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 
 --- assert_send(object, method, *args) -> ()
 
-object.__send__(method, *args) �����Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+object.__send__(method, *args) が真である場合、検査にパスしたことになります。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param method �ƤӽФ��᥽�å�̾����ꤷ�ޤ���
+@param method 呼び出すメソッド名を指定します。
 
-@param args �᥽�åɤ��Ϥ���������ꤷ�ޤ���
+@param args メソッドに渡す引数を指定します。
 
 #@since 1.8.1
 --- assert_not_nil(actual, message = "") -> ()
-Ϳ����줿���֥������Ȥ� nil �Ǥʤ���硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが nil でない場合、検査にパスしたことになります。
 
-@param actual �������������֥������Ȥ���ꤷ�ޤ���
+@param actual 検査したいオブジェクトを指定します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 #@end
 
 --- assert_respond_to(method, object, message = "") -> ()
 
-Ϳ����줿���֥������Ȥ�Ϳ����줿�᥽�åɤ���ľ�硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが与えられたメソッドを持つ場合、検査にパスしたことになります。
 
-@param method �᥽�å�̾����ꤷ�ޤ���
+@param method メソッド名を指定します。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 
 --- assert_match(str, re, message = "") -> ()
 --- assert_matches(str, re, message = "") -> ()
 
-Ϳ����줿ʸ����Ϳ����줿����ɽ���˥ޥå������硢�����˥ѥ����ޤ���
+与えられた文字列が与えられた正規表現にマッチする場合、検査にパスします。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
-@param re ����ɽ������ꤷ�ޤ���
+@param re 正規表現を指定します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 
 --- assert_not_match(str, re, message = "") -> ()
-Ϳ����줿ʸ����Ϳ����줿����ɽ���˥ޥå����ʤ���硢�����˥ѥ����ޤ���
+与えられた文字列が与えられた正規表現にマッチしない場合、検査にパスします。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
-@param re ����ɽ������ꤷ�ޤ���
+@param re 正規表現を指定します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 
 --- assert_exception(exception, message = "") { ... } -> ()
 
-Ϳ����줿�֥��å���ɾ�����Ϳ����줿�㳰��ȯ�������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたブロックを評価中に与えられた例外が発生する場合、検査にパスしたことになります。
 
-@param exception �㳰���饹����ꤷ�ޤ���
+@param exception 例外クラスを指定します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 
 --- assert_no_exception(*args) { ... }
-Ϳ����줿�֥��å���ɾ�����Ϳ����줿�㳰��ȯ�����ʤ���硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたブロックを評価中に与えられた例外が発生しない場合、検査にパスしたことになります。
 
-@param args �㳰���饹���İʾ���ꤷ�ޤ����Ǹ�ΰ�����ʸ�������ꤷ����硢����ϸ�����
-            ���Ԥ����Ȥ��Υ�å������ˤʤ�ޤ���
+@param args 例外クラスを一つ以上指定します。最後の引数に文字列を指定した場合、それは検査に
+            失敗したときのメッセージになります。
 
 --- assert_fail(message) -> ()
 
-��˼��Ԥ��ޤ���
+常に失敗します。
 
-@param message �����˼��Ԥ����Ȥ��Υ�å���������ꤷ�ޤ���
+@param message 検査に失敗したときのメッセージを指定します。
 
 --- setup_assert
 
-���⤷�ޤ���
+何もしません。
 
 --- called_internally? -> bool
 
-�����ǻ��Ѥ��ޤ���
+内部で使用します。
 

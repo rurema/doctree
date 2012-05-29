@@ -3,21 +3,21 @@
 =begin
 = TkBindCore
 
-== �᥽�å�:
+== メソッド:
 
 --- TkBindCore#bind(context, cmd=Proc.new, args=nil)
 #@todo
-    ((|context|))�ǻ��ꤷ�����٥�Ȥ��Ф���((|cmd|))����Ͽ���ޤ���
-    ((|args|)) ���ά�����((|cmd|))�μ¹Ի��˥��٥�ȥ��饹
-    ((<TkComm::Event>))�Υ��󥹥��󥹤�((|cmd|))�ΰ������Ϥ���ޤ���((|args|)) �����
-    ����Ȱ��������Ϥ�����򲡲��������������ɤʤɤ˸��ꤹ�뤳�Ȥ��Ǥ��ޤ���
+    ((|context|))で指定したイベントに対して((|cmd|))を登録します。
+    ((|args|)) を省略すると((|cmd|))の実行時にイベントクラス
+    ((<TkComm::Event>))のインスタンスが((|cmd|))の引数に渡されます。((|args|)) を指定
+    すると引き数に渡す情報を押下したキーコードなどに限定することができます。
 
-    ((|context|))�ϡ��ʲ��Τ����Τ����줫�Ǥ���
+    ((|context|))は、以下のうちのいずれかです。
 
-    *TkVirtualEvent�Υ��󥹥���
-    *Ǥ�դ�1ʸ��(�б����륭���ޤ��ϥޥ����ܥ���)
-    *((<��������ܥ�>))("Return", "Up" �ʤ�)
-    *"ButtonPress" �ޤ��ϡ� "Button"
+    *TkVirtualEventのインスタンス
+    *任意の1文字(対応するキーまたはマウスボタン)
+    *((<キーシンボル>))("Return", "Up" など)
+    *"ButtonPress" または、 "Button"
     *"ButtonRelease"
     *"Circulate"
     *"Colormap"
@@ -29,7 +29,7 @@
     *"FocusIn"
     *"FocusOut"
     *"Gravity"
-    *"KeyPress" �ޤ��ϡ�"Key"
+    *"KeyPress" または、"Key"
     *"KeyRelease"
     *"Leave"
     *"Map"
@@ -40,57 +40,57 @@
     *"Visibility"
     *"Activate"
 
-    �������ȹ礻������ޤ��ϡ�(TkVirtualEvent����ꤷ�ʤ����)����ޤǶ�
-    �ڤä�ʸ����ǻ��ꤹ��Ȼ��ꤷ�����٥�Ȥΰ�Ϣ��ή����Ф��ƥ�����Х�
-    ���ؿ�����Ͽ���뤳�Ȥ��Ǥ��ޤ���(���Τ褦�ʥ��٥�ȤΤ��Ȥ�
-    ((<���٥�ȥ�������>))�ȸƤӤޤ�)��
+    これらの組合せを配列または、(TkVirtualEventを指定しなければ)コンマで区
+    切った文字列で指定すると指定したイベントの一連の流れに対してコールバッ
+    ク関数を登録することができます。(このようなイベントのことを
+    ((<イベントシーケンス>))と呼びます)。
 
-    �㤨�С�(('["Escape", "a"]'))��(('"Escape,a"'))�ϡ�((%ESC%))������
-    �������((%a%))�����򲡤����Ȥ��̣���ޤ���
+    例えば、(('["Escape", "a"]'))や(('"Escape,a"'))は、((%ESC%))キーを押
+    した後に((%a%))キーを押すことを意味します。
 
       require "tk"
       Tk.root.bind(['Escape','Key'], proc {|e| p e.keysym})
       p Tk.root.bindinfo
       Tk.mainloop
 
-      => ["Key-Escape,Key"] # <- ���٥�ȥ������󥹤�bindinfo�Ǥ�ɽ��
-         "a"            # <- ESC a �򲡤����Ȥ���ɽ�������
+      => ["Key-Escape,Key"] # <- イベントシーケンスのbindinfoでの表記
+         "a"            # <- ESC a を押したときに表示される
 
-    "KeyPress"���٥�Ȥ䡢"ButtonPress"���٥�Ȥˤϡ����٤���"-��������
-    ��((-��������ܥ�?-))"��"-�ޥ����ܥ����ֹ�"���ղäǤ��ޤ���
+    "KeyPress"イベントや、"ButtonPress"イベントには、より細かく"-キーコー
+    ド((-キーシンボル?-))"や"-マウスボタン番号"を付加できます。
 
       bind "Key-comma", proc {|e| p e}
       bind "ButtonPress-1", proc {|e| p e}
 
-    �ޤ����ʲ��ν���ʸ����򥤥٥��ʸ����������ղäǤ��ޤ���
+    また、以下の修飾文字列をイベント文字列の前に付加できます。
 
     *"Control-"
     *"Shift-"
     *"Lock-"
-    *"Button1-" �ޤ��ϡ�"B1-"
-    *"Button2-" �ޤ��ϡ�"B2-"
-    *"Button3-" �ޤ��ϡ�"B3-"
-    *"Button4-" �ޤ��ϡ�"B4-"
-    *"Button5-" �ޤ��ϡ�"B5-"
-    *"Mod1-" �ޤ��ϡ�"M1-"
-    *"Mod2-" �ޤ��ϡ�"M2-"
-    *"Mod3-" �ޤ��ϡ�"M3-"
-    *"Mod4-" �ޤ��ϡ�"M4-"
-    *"Mod5-" �ޤ��ϡ�"M5-"
-    *"Meta-" �ޤ��ϡ�"M-"
+    *"Button1-" または、"B1-"
+    *"Button2-" または、"B2-"
+    *"Button3-" または、"B3-"
+    *"Button4-" または、"B4-"
+    *"Button5-" または、"B5-"
+    *"Mod1-" または、"M1-"
+    *"Mod2-" または、"M2-"
+    *"Mod3-" または、"M3-"
+    *"Mod4-" または、"M4-"
+    *"Mod5-" または、"M5-"
+    *"Meta-" または、"M-"
     *"Alt-"
     *"Double-"
     *"Triple-"
 
-    �㤨�С�((%SHIFT%))+((%META%))+"((%,%))"�ϰʲ��Ǥ���
+    例えば、((%SHIFT%))+((%META%))+"((%,%))"は以下です。
 
       bind "Shift-Meta-Key-comma", proc {|e| p e}
 
-    �ޥ����ܥ���1�򲡤������֤ǤΥɥ�å��ϰʲ��Ǥ���
+    マウスボタン1を押した状態でのドラッグは以下です。
 
       bind "B1-Motion", proc {|e| p e}
 
-    ((|args|))�ϡ��ʲ��β��줫�����Ƕ��ڤä�ʸ����Ǥ���
+    ((|args|))は、以下の何れかを空白で区切った文字列です。
 
     *"%#"
      - ((<TkComm::Event#serial>))
@@ -138,14 +138,14 @@
     *"%Y'
      - ((<TkComm::Event#y_root>))
 
-    �ޥ����ܥ���1�򥯥�å������Ȥ��˥ޥ�����������ΰ��֤�ɽ����
-    ����Ǥ���
+    マウスボタン1をクリックしたときにマウスカーソルの位置を表示す
+    る例です。
 
       require "tk"
       Tk.root.bind("1", proc {|x, y| p [x, y]}, "%X %Y")
       Tk.mainloop
 
-    �������((|args|))����ꤷ�ʤ��Ƥ�ʲ���Ʊ�����Ȥ��Ǥ��ޤ���
+    もちろん、((|args|))を指定しなくても以下で同じことができます。
     ((<TkComm::Event>))
 
       require "tk"
@@ -154,20 +154,20 @@
 
 --- TkBindCore#bind_append(context, cmd=Proc.new, args=nil)
 #@todo
-    ((<TkBindCore#bind>))��Ʊ���Ǥ��������Ǥ�Ʊ��((|context|))�˥�����Х�
-    ���ؿ�����Ͽ����Ƥ���С�((|cmd|))���ɲä���Ͽ���ޤ���
+    ((<TkBindCore#bind>))と同じですが、すでに同じ((|context|))にコールバッ
+    ク関数が登録されていれば、((|cmd|))を追加で登録します。
 
-    ������Хå��ؿ��μ¹Խ������Ͽ��Ǥ�(������Хå��ؿ��μ¹Խ���˴�
-    ���Ƥϡ�((<TkWindow#bindtags>))�⻲�Ȥ��Ƥ�������)��
+    コールバック関数の実行順序は登録順です(コールバック関数の実行順序に関
+    しては、((<TkWindow#bindtags>))も参照してください)。
 
 --- TkBindCore#bind_remove(context)
 #@todo
-    ((|context|))����Ͽ���줿������Хå��ؿ���������ޤ���
+    ((|context|))に登録されたコールバック関数を取り除きます。
 
 --- TkBindCore#bindinfo(context=nil)
 #@todo
-    ���٥��((|context|))����Ͽ���줿���٥�ȥ�����Хå��ξ��������ˤ�
-    ���֤��ޤ����֤������������Ǥ�((<TkBindCore#bind>)) ����2,3����������Ǥ���
+    イベント((|context|))に登録されたイベントコールバックの情報を配列にし
+    て返します。返される配列の要素は((<TkBindCore#bind>)) の第2,3引数の配列です。
 
       require "tk"
       cursor_pos1 = proc {|x,y| printf("X=%d Y=%d\n", x, y)}
@@ -178,8 +178,8 @@
 
       => [[#<Proc:0x401354e8>, "%X %Y"], [#<Proc:0x40132ef0>, "%x %y"]]
 
-    ((|context|))���ά������硢������Хå��ؿ�����Ͽ����Ƥ���
-    ���٥�Ȥμ��������ˤ����֤��ޤ���
+    ((|context|))を省略した場合、コールバック関数が登録されている
+    イベントの種類を配列にして返します。
 
       require "tk"
       cursor_pos = proc {|x,y| printf("X=%d Y=%d\n", x, y)}

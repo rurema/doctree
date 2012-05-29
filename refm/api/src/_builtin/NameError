@@ -1,19 +1,19 @@
 = class NameError < StandardError
 
-̤����Υ��������ѿ����������Ѥ����Ȥ���ȯ�����ޤ���
+未定義のローカル変数や定数を使用したときに発生します。
 
 == Class Methods
 
 #@since 1.8.0
 --- new(error_message = "", name = nil) -> NameError
 
-�㳰���֥������Ȥ����������֤��ޤ���
+例外オブジェクトを生成して返します。
 
-@param error_message ���顼��å�������ɽ��ʸ����Ǥ�
+@param error_message エラーメッセージを表す文字列です
 
-@param name ̤������ä�����ܥ�Ǥ�
+@param name 未定義だったシンボルです
 
-��:
+例:
 
   err = NameError.new("message", "foo")
   p err       # => #<NameError: message>
@@ -24,10 +24,10 @@
 
 --- name -> Symbol
 
-�����㳰���֥������Ȥ�ȯ�������븶���Ȥʤä�
-�ѿ���������᥽�åɤ�̾���򥷥�ܥ���֤��ޤ���
+この例外オブジェクトを発生させる原因となった
+変数や定数、メソッドの名前をシンボルで返します。
 
-��:
+例:
 
   begin
     foobar
@@ -39,6 +39,6 @@
 #@since 1.8.1
 --- to_s -> String
 
-�㳰���֥������Ȥ�ʸ������Ѵ������֤��ޤ���
+例外オブジェクトを文字列に変換して返します。
 
 #@end

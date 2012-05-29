@@ -6,34 +6,34 @@ require rubygems/local_remote_options
 require rubygems/validator
 require rubygems/version_option
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥í¡¼¥«¥ë¥ê¥İ¥¸¥È¥ê¤Ë¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ãƒ­ãƒ¼ã‚«ãƒ«ãƒªãƒã‚¸ãƒˆãƒªã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem install GEMNAME [GEMNAME ...] [options] -- --build-flags [options]
     Options:
-          --platform PLATFORM          »ØÄê¤µ¤ì¤¿¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·¤Ş¤¹
-      -v, --version VERSION            »ØÄê¤µ¤ì¤¿¥Ğ¡¼¥¸¥ç¥ó¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·¤Ş¤¹
+          --platform PLATFORM          æŒ‡å®šã•ã‚ŒãŸãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã® Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
+      -v, --version VERSION            æŒ‡å®šã•ã‚ŒãŸãƒãƒ¼ã‚¸ãƒ§ãƒ³ã® Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
     Install/Update Options:
-      -i, --install-dir DIR            Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥¤¥ó¥¹¥È¡¼Àè¤ò»ØÄê¤·¤Ş¤¹
-      -n, --bindir DIR                 Gem ¥Ñ¥Ã¥±¡¼¥¸¤Ë´Ş¤Ş¤ì¤ë¥Ğ¥¤¥Ê¥ê¥Õ¥¡¥¤¥ë¤ÎÇÛÃÖÀè¤ò»ØÄê¤·¤Ş¤¹
-      -d, --[no-]rdoc                  ¥¤¥ó¥¹¥È¡¼¥ë»ş¤Ë RDoc ¤òÀ¸À®¤·¤Ş¤¹
-          --[no-]ri                    ¥¤¥ó¥¹¥È¡¼¥ë»ş¤Ë RI ¥É¥­¥å¥á¥ó¥È¤òÀ¸À®¤·¤Ş¤¹
-      -E, --[no-]env-shebang           ¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¥¹¥¯¥ê¥×¥È¤Î shebang line ¤ò½ñ¤­´¹¤¨¤Ş¤¹(/usr/bin/env)
-      -f, --[no-]force                 °ÍÂ¸´Ø·¸¤Î¥Á¥§¥Ã¥¯¤ò¥Ğ¥¤¥Ñ¥¹¤·¤Æ¶¯À©Åª¤Ë¥¤¥ó¥¹¥È¡¼¥ë¤·¤Ş¤¹
-      -t, --[no-]test                  ¥¤¥ó¥¹¥È¡¼¥ë»ş¤Ë¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Ş¤¹
+      -i, --install-dir DIR            Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼å…ˆã‚’æŒ‡å®šã—ã¾ã™
+      -n, --bindir DIR                 Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã«å«ã¾ã‚Œã‚‹ãƒã‚¤ãƒŠãƒªãƒ•ã‚¡ã‚¤ãƒ«ã®é…ç½®å…ˆã‚’æŒ‡å®šã—ã¾ã™
+      -d, --[no-]rdoc                  ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ™‚ã« RDoc ã‚’ç”Ÿæˆã—ã¾ã™
+          --[no-]ri                    ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ™‚ã« RI ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ç”Ÿæˆã—ã¾ã™
+      -E, --[no-]env-shebang           ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆã® shebang line ã‚’æ›¸ãæ›ãˆã¾ã™(/usr/bin/env)
+      -f, --[no-]force                 ä¾å­˜é–¢ä¿‚ã®ãƒã‚§ãƒƒã‚¯ã‚’ãƒã‚¤ãƒ‘ã‚¹ã—ã¦å¼·åˆ¶çš„ã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
+      -t, --[no-]test                  ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ™‚ã«ãƒ¦ãƒ‹ãƒƒãƒˆãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã—ã¾ã™
       -w, --[no-]wrappers              Use bin wrappers for executables
-                                       DOSHISH ¤Ê¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¾å¤Ç¤ÏÌµ¸ú¤Ç¤¹
+                                       DOSHISH ãªãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ä¸Šã§ã¯ç„¡åŠ¹ã§ã™
       -P, --trust-policy POLICY        Specify gem trust policy
-          --ignore-dependencies        °ÍÂ¸¤·¤Æ¤¤¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·¤Ş¤»¤ó
-      -y, --include-dependencies       °ÍÂ¸¤·¤Æ¤¤¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·¤Ş¤¹
+          --ignore-dependencies        ä¾å­˜ã—ã¦ã„ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã›ã‚“
+      -y, --include-dependencies       ä¾å­˜ã—ã¦ã„ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
           --[no-]format-executable     Make installed executable names match ruby.
                                        If ruby is ruby18, foo_exec will be
                                        foo_exec18
 #@include(local_remote_options)
 #@include(common_options)
     Arguments:
-      GEMNAME       ¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸Ì¾¤ò»ØÄê¤·¤Ş¤¹
+      GEMNAME       ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸åã‚’æŒ‡å®šã—ã¾ã™
     Summary:
-      Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥í¡¼¥«¥ë¤Ë¥¤¥ó¥¹¥È¡¼¥ë¤·¤Ş¤¹
+      Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ãƒ­ãƒ¼ã‚«ãƒ«ã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
     Defaults:
       --both --version '>= 0' --rdoc --ri --no-force
       --no-test --install-dir /usr/lib/ruby/gems/1.8
@@ -44,4 +44,4 @@ include Gem::VersionOption
 include Gem::LocalRemoteOptions
 include Gem::InstallUpdateOptions
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥í¡¼¥«¥ë¥ê¥İ¥¸¥È¥ê¤Ë¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ãƒ­ãƒ¼ã‚«ãƒ«ãƒªãƒã‚¸ãƒˆãƒªã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚

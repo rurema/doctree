@@ -1,27 +1,27 @@
 --- VALUE rb_ary_new()
 
-¶õ¤Î Ruby ¤ÎÇÛÎó¤òºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+ç©ºã® Ruby ã®é…åˆ—ã‚’ä½œæˆã—è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
-  ary = Array.new ¤Þ¤¿¤Ï
+  ary = Array.new ã¾ãŸã¯
   ary = []
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE ary;
   ary = rb_ary_new();
 
 --- VALUE rb_ary_new2(long len)
 
-Ä¹¤µ len Ê¬¤À¤±¥á¥â¥ê¤ò³ÎÊÝ¤·¤¿¡¢
-Ä¹¤µ¥¼¥í¤Î Ruby ¤ÎÇÛÎó¤òºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+é•·ã• len åˆ†ã ã‘ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã—ãŸã€
+é•·ã•ã‚¼ãƒ­ã® Ruby ã®é…åˆ—ã‚’ä½œæˆã—è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
   ary = Array.new(len)
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE ary;
   long len;
@@ -30,15 +30,15 @@
 
 --- VALUE rb_ary_new3(long n, VALUE i0, i1, i2, ...)
 
-Ä¹¤µ n ¤ÇÍ×ÁÇ¤Ë i0 i1 i2 ¡Ä¤ò³ÊÇ¼¤·¤¿
-Ruby ¤ÎÇÛÎó¤òºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+é•·ã• n ã§è¦ç´ ã« i0 i1 i2 â€¦ã‚’æ ¼ç´ã—ãŸ
+Ruby ã®é…åˆ—ã‚’ä½œæˆã—è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
-  ary = Array[i0, i1, i2...] ¤Þ¤¿¤Ï
+  ary = Array[i0, i1, i2...] ã¾ãŸã¯
   ary = [i0, i1, i2...]
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE ary;
   int i[3] = { 1, 2, 3 };
@@ -46,13 +46,13 @@ Ruby ¤ÎÇÛÎó¤òºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
 
 --- VALUE rb_assoc_new(VALUE a, VALUE b)
 
-[a,b] ¤òÊÖ¤·¤Þ¤¹¡£
+[a,b] ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
   [a, b]
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE assoc_string(VALUE str_a, VALUE str_b)
   {
@@ -63,42 +63,42 @@ Ruby ¤ÎÇÛÎó¤òºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
 
 --- VALUE rb_ary_entry(VALUE ary, long offset)
 
-ary ¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹ offset ¤ÎÍ×ÁÇ¤òÊÖ¤·¤Þ¤¹¡£
+ary ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ offset ã®è¦ç´ ã‚’è¿”ã—ã¾ã™ã€‚
 
-¥¤¥ó¥Ç¥Ã¥¯¥¹¤¬ÈÏ°Ï¤ò±Û¤¨¤ë¤È¤­¤Ï Qnil ¤òÊÖ¤·¤Þ¤¹¡£
-Éé¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¤â»È¤¨¤Þ¤¹¡£
+ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒç¯„å›²ã‚’è¶Šãˆã‚‹ã¨ãã¯ Qnil ã‚’è¿”ã—ã¾ã™ã€‚
+è² ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚‚ä½¿ãˆã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
-  ary[offset] ¤Þ¤¿¤Ï
+  ary[offset] ã¾ãŸã¯
   ary.at(offset)
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE num;
   num = rb_ary_entry(ary, offset); 
   printf("%d\n", FIX2INT(num));
 
-  ¥­¥ã¥¹¥È¤ò»È¤Ã¤¿Í×ÁÇ¤Î»²¾ÈÊýË¡
+  ã‚­ãƒ£ã‚¹ãƒˆã‚’ä½¿ã£ãŸè¦ç´ ã®å‚ç…§æ–¹æ³•
   
   VALUE num = RARRAY(ary)->ptr[offset];
 
 --- VALUE rb_ary_aref(int argc, VALUE *argv, VALUE ary)
 
-argc ¤¬ 1 ¤Î¤È¤­¤Ï ary[*argv]¡¢
-2 ¤Î¤È¤­¤Ï ary[argv[0], argv[1]] ¤òÊÖ¤·¤Þ¤¹¡£
+argc ãŒ 1 ã®ã¨ãã¯ ary[*argv]ã€
+2 ã®ã¨ãã¯ ary[argv[0], argv[1]] ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- void rb_ary_store(VALUE ary, long idx, VALUE val)
 
-ÇÛÎó ary ¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹ idx ¤Ë
-val ¤ò³ÊÇ¼¤·¤Þ¤¹¡£idx ¤¬ÈÏ°Ï¤ò±Û¤¨¤ë¤È¤­¤Ï
-Ruby ¥ì¥Ù¥ë¤ÈÆ±¤¸¤¯¼«Æ°Åª¤Ë¥µ¥¤¥º¤¬³ÈÄ¥¤µ¤ì¤Þ¤¹¡£
+é…åˆ— ary ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ idx ã«
+val ã‚’æ ¼ç´ã—ã¾ã™ã€‚idx ãŒç¯„å›²ã‚’è¶Šãˆã‚‹ã¨ãã¯
+Ruby ãƒ¬ãƒ™ãƒ«ã¨åŒã˜ãè‡ªå‹•çš„ã«ã‚µã‚¤ã‚ºãŒæ‹¡å¼µã•ã‚Œã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
   ary[idx] = val
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE ary;
   int idx;
@@ -108,14 +108,14 @@ Ruby ¥ì¥Ù¥ë¤ÈÆ±¤¸¤¯¼«Æ°Åª¤Ë¥µ¥¤¥º¤¬³ÈÄ¥¤µ¤ì¤Þ¤¹¡£
 
 --- VALUE rb_ary_push(VALUE ary, VALUE item)
 
-ÇÛÎó ary ¤ÎËöÈø¤Ë item ¤òÄÉ²Ã¤·¤Þ¤¹¡£
+é…åˆ— ary ã®æœ«å°¾ã« item ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
-  ary.push(item) ¤Þ¤¿¤Ï
+  ary.push(item) ã¾ãŸã¯
   ary << item
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   VALUE ary = rb_ary_new();
   char line[4096];
@@ -126,36 +126,36 @@ Ruby ¥ì¥Ù¥ë¤ÈÆ±¤¸¤¯¼«Æ°Åª¤Ë¥µ¥¤¥º¤¬³ÈÄ¥¤µ¤ì¤Þ¤¹¡£
 
 --- VALUE rb_ary_pop(VALUE ary)
 
-ÇÛÎó ary ¤ÎËöÈø¤ÎÍ×ÁÇ¤ò¤È¤ê¤Î¤¾¤­ÊÖ¤·¤Þ¤¹¡£
-¶õÇÛÎó¤Î¤È¤­¤Ï Qnil ¤òÊÖ¤·¤Þ¤¹¡£
+é…åˆ— ary ã®æœ«å°¾ã®è¦ç´ ã‚’ã¨ã‚Šã®ãžãè¿”ã—ã¾ã™ã€‚
+ç©ºé…åˆ—ã®ã¨ãã¯ Qnil ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
   val = ary.pop
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   last_error = rb_ary_pop(err_ary);
   VALUE str = rb_funcall(last_error, rb_intern("to_s"), 0);
 
 --- VALUE rb_ary_shift(VALUE ary)
 
-ÇÛÎó ary ¤ÎÀèÆ¬¤ÎÍ×ÁÇ¤ò¼è¤ê½ü¤­ÊÖ¤·¤Þ¤¹¡£
-¶õÇÛÎó¤Î¤È¤­¤Ï Qnil ¤òÊÖ¤·¤Þ¤¹¡£
+é…åˆ— ary ã®å…ˆé ­ã®è¦ç´ ã‚’å–ã‚Šé™¤ãè¿”ã—ã¾ã™ã€‚
+ç©ºé…åˆ—ã®ã¨ãã¯ Qnil ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëRuby¥³¡¼¥É
+å¯¾å¿œã™ã‚‹Rubyã‚³ãƒ¼ãƒ‰
 
   val = ary.shift
 
 --- VALUE rb_ary_unshift(VALUE ary, VALUE item)
 
-ÇÛÎó ary ¤ÎÀèÆ¬¤Ë item ¤òÁÞÆþ¤·¤Þ¤¹¡£
+é…åˆ— ary ã®å…ˆé ­ã« item ã‚’æŒ¿å…¥ã—ã¾ã™ã€‚
 
 --- VALUE rb_ary_to_s(VALUE ary)
 
 ary.to_s
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
   void debug_print(VALUE ary)
   {

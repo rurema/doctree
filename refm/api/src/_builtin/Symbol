@@ -2,70 +2,70 @@
 #@since 1.9.1
 include Comparable
 #@end
-#@#���󥿡��󤵤줿ʸ����
-����ܥ��ɽ�����饹������ܥ��Ǥ�դ�ʸ����Ȱ��а���б����륪�֥������ȤǤ���
+#@#インターンされた文字列
+シンボルを表すクラス。シンボルは任意の文字列と一対一に対応するオブジェクトです。
 
-ʸ�����������Ѥ��뤳�Ȥ�Ǥ��ޤ�����ɬ������ʸ�����Ʊ�������񤤤򤹤�櫓�ǤϤ���ޤ���
-Ʊ�����ƤΥ���ܥ�Ϥ��ʤ餺Ʊ��Υ��֥������ȤǤ���
+文字列の代わりに用いることもできますが、必ずしも文字列と同じ振る舞いをするわけではありません。
+同じ内容のシンボルはかならず同一のオブジェクトです。
 
-����ܥ륪�֥������Ȥϰʲ��Τ褦�ʥ�ƥ��������ޤ���
-#@#��ƥ��-����ܥ��ƥ��ؤΥ��Ž��
+シンボルオブジェクトは以下のようなリテラルで得られます。
+#@#リテラル-シンボルリテラルへのリンク貼る
 
   :symbol
   :'symbol'
-  %s!symbol! # %��ˡ
+  %s!symbol! # %記法
 
-�������줿����ܥ�ΰ����� [[m:Symbol.all_symbols]] �������ޤ���
-�����ܤΥ�ƥ��ǥ���ܥ��ɽ����硢`:' �θ��
-�ϼ��̻ҡ��᥽�å�̾(`!',`?',`=' �ʤɤ���������ޤ�)���ѿ�̾
-(`$'�ʤɤ���Ƭ����ޤ�)��������Ǥ���黻�ҤΤ����줫��Ŭ�礹��
-��Τ����񤯤��ȤϤǤ��ޤ���(�����Ǥʤ����ʸˡ���顼�ˤʤ�ޤ�)��
-�����Ǥʤ�ʸ����򥷥�ܥ�ˤ��������ϻĤ��ɽ���� [[m:String#intern]] ����Ѥ��Ƥ���������
+生成されたシンボルの一覧は [[m:Symbol.all_symbols]] で得られます。
+一番目のリテラルでシンボルを表す場合、`:' の後に
+は識別子、メソッド名(`!',`?',`=' などの接尾辞を含む)、変数名
+(`$'などの接頭辞を含む)、再定義できる演算子のいずれかに適合する
+ものしか書くことはできません(そうでなければ文法エラーになります)。
+そうでない文字列をシンボルにしたい場合は残りの表記か [[m:String#intern]] を使用してください。
 
-#@#�ɤη����Ǥ⥷��ܥ�ϥ̥�ʸ��('\0')��ޤळ�ȤϤǤ��ޤ���
-#@#��1.9�Ǥϲ�ǽ��Ĵ�٤�
+#@#どの形式でもシンボルはヌル文字('\0')を含むことはできません。
+#@#↑1.9では可能。調べる
 
-#@# 1.9�Ǥ϶�ʸ����⥷��ܥ�ˤǤ���
+#@# 1.9では空文字列もシンボルにできる
 
-=== ����ܥ�μ���������
-==== ����
-Ruby�����������Ǥϡ��᥽�å�̾���ѿ�̾�����̾�����饹̾�ʤ�
-��`̾��'�������Ǵ������Ƥ��ޤ��������̾����ľ��ʸ����Ȥ��ƽ����������
-®���̤�ͭ��������Ǥ��������Ƥ���������Ruby�Υ����ɾ��ɽ��������Τ�����ܥ�Ǥ���
+=== シンボルの実装と用途
+==== 実装
+Rubyの内部実装では、メソッド名や変数名、定数名、クラス名など
+の`名前'を整数で管理しています。これは名前を直接文字列として処理するよりも
+速度面で有利だからです。そしてその整数をRubyのコード上で表現したものがシンボルです。
 
-����ܥ�ϡ���������Ǥ�ʸ����Τ褦�˸����������Ǥ������Ȥ��ư����롢ξ�Ԥ���Ω������褦��¸�ߤǤ���
-#@#ɽ�����Ѥ��롩
+シンボルは、ソース上では文字列のように見え、内部では整数として扱われる、両者を仲立ちするような存在です。
+#@#表現を変える？
 
-̾�����������Ȥ������塢����ܥ��ʸ����ϰ��а���б����ޤ���
-�ޤ���ʸ����Ȱ㤤��immutable (�ѹ��Բ�)�Ǥ��ꡢƱ�ͤʤ��ɬ��Ʊ��Ǥ���
+名前を管理するという役割上、シンボルと文字列は一対一に対応します。
+また、文字列と違い、immutable (変更不可)であり、同値ならば必ず同一です。
 
   p "abc" == "abc" #=> true
   p "abc".equal?("abc") #=> false
   p :abc == :abc #=> true
-  p :abc.equal?(:abc) #=> true ��Ʊ�ͤʤ��Ʊ��
+  p :abc.equal?(:abc) #=> true ←同値ならば同一
 
-==== ����
-�����̤Ǥϡ�����ܥ��ʸ���ΰ�̣�����Τˤ��ޤ���`̾��'��ؤ��������ʤɡ�
-ʸ���󤽤Τ�Τ�ɬ�פʤ櫓�ǤϤʤ������Ѥ��ޤ���
+==== 用途
+実用面では、シンボルは文字の意味を明確にします。`名前'を指し示す時など、
+文字列そのものが必要なわけではない時に用います。
 
-#@#�ץ�����������Ǥ����Ȥ�ʤ�ʸ����
+#@#プログラム内部でしか使わない文字列
 
-  * �ϥå���Υ��� { :key => "value" }
-  * ���������ΰ������Ϥ����󥹥����ѿ�̾ attr_reader :name
-  * �᥽�åɰ������Ϥ��᥽�å�̾ __send__ :to_s
-  * C �� enum Ū�ʻ��� (�ͤ��Τ�Τ�̵�뤷�Ƥ褤���)
+  * ハッシュのキー { :key => "value" }
+  * アクセサの引数で渡すインスタンス変数名 attr_reader :name
+  * メソッド引数で渡すメソッド名 __send__ :to_s
+  * C の enum 的な使用 (値そのものは無視してよい場合)
 
-����ܥ��Ȥ����åȤ�
+シンボルを使うメリットは
 
-  * ������ʸ������������ʤ�ʬ����Ψ���褯����Ӥ��®��
-  * ʸ���ΰ�̣���Ϥä��ꤹ��Τǥ����ɤ��ɤߤ䤹���ʤ�
-  * immutable �ʤΤ����Ƥ�񤭴������뿴�ۤ��ʤ�
-#@#�������̤����ʤ�
+  * 新しく文字列を生成しない分やや効率がよく、比較も高速。
+  * 文字の意味がはっきりするのでコードが読みやすくなる
+  * immutable なので内容を書き換えられる心配がない
+#@#タイプ量が少ない
 
-����Υ᥽�åɤϥ���ܥ�������ʸ���������Ȥ����Ϥ����Ȥ�Ǥ���褦�ˤʤäƤ��ޤ���
+大抵のメソッドはシンボルの代わりに文字列を引数として渡すこともできるようになっています。
 
 #@since 1.9.1
-[[c:Symbol]] ���饹�Υ᥽�åɤˤϡ�[[c:String]] ���饹�Υ᥽�åɤ�Ʊ̾�ǻ���Ư���򤹤��Τ⤢��ޤ���
+[[c:Symbol]] クラスのメソッドには、[[c:String]] クラスのメソッドと同名で似た働きをするものもあります。
 #@end
 
 == Class Methods
@@ -73,13 +73,13 @@ Ruby�����������Ǥϡ��᥽�å�̾���ѿ�̾�����̾�����饹̾�ʤ�
 #@since 1.8.0
 --- all_symbols -> [Symbol]
 
-����Ѥߤ����ƤΥ���ܥ륪�֥������Ȥ�������֤��ޤ���
+定義済みの全てのシンボルオブジェクトの配列を返します。
 
     p Symbol.all_symbols #=> [:RUBY_PLATFORM, :RUBY_VERSION, ...]
 
-��ƥ���ɽ����������ܥ�Τ���������ѥ�������ͤ���ޤ��ΤϤ��λ�����������ޤ���
-����ʳ��μ�Ÿ����ޤ��ƥ��䡢�᥽�åɤ�ɽ�����줿��Τϼ���ɾ��������������ޤ���
-(���ˤ�Ȥ��ʤ�����ܥ�Ϻ�Ŭ���ˤ����������ʤ����Ȥ�����ޤ�)
+リテラルで表記したシンボルのうち、コンパイル時に値が決まるものはその時に生成されます。
+それ以外の式展開を含むリテラルや、メソッドで表記されたものは式の評価時に生成されます。
+(何にも使われないシンボルは最適化により生成されないことがあります)
 
   def number
     'make_3'
@@ -88,7 +88,7 @@ Ruby�����������Ǥϡ��᥽�å�̾���ѿ�̾�����̾�����饹̾�ʤ�
   p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
   #=> [:make_1, :make_2]
   
-  re  = #�μ¤����������褦����������Ԥ�
+  re  = #確実に生成されるように代入操作を行う
   :make_1,
   :'make_2',
   :"#{number}",
@@ -106,7 +106,7 @@ Ruby�����������Ǥϡ��᥽�å�̾���ѿ�̾�����̾�����饹̾�ʤ�
 #@end
 #@since 1.8.0
 --- to_sym -> self
-self ���֤��ޤ���
+self を返します。
 
 @see [[m:String#intern]]
 #@end
@@ -115,10 +115,10 @@ self ���֤��ޤ���
 --- id2name -> String
 --- to_s -> String
 
-����ܥ���б�����ʸ������֤��ޤ���
+シンボルに対応する文字列を返します。
 
-�դˡ�ʸ������б����륷��ܥ������ˤ�
-[[m:String#intern]] ��Ȥ��ޤ���
+逆に、文字列に対応するシンボルを得るには
+[[m:String#intern]] を使います。
 
   p :foo.id2name  # => "foo"
   p :foo.id2name.intern == :foo  # => true
@@ -129,19 +129,19 @@ self ���֤��ޤ���
 --- to_i -> Integer
 --- to_int -> Integer
 
-����ܥ���б������������֤��ޤ���
+シンボルに対応する整数を返します。
 
-���Υ᥽�åɤ������������ϡ�����������̾���δ����˻Ȥ��Ƥ��ޤ���
-���֥������Ȥ��б���������( [[m:Object#object_id]] ������
-��ޤ�)�� Symbol ���б������������̤Τ�ΤǤ���
+このメソッドで得られる整数は、内部実装で名前の管理に使われています。
+オブジェクトに対応する整数( [[m:Object#object_id]] で得ら
+れます)と Symbol に対応する整数は別のものです。
 
 #@if ("1.8.0" > version)
-�դˤ������������б����륷��ܥ������ˤ�
-[[m:Fixnum#id2name]] ��Ȥäư�öʸ���������ɬ�פ�
-����ޤ���
+逆にこの整数から対応するシンボルを得るには
+[[m:Fixnum#id2name]] を使って一旦文字列を得る必要が
+あります。
 #@else
-�դˤ������������б����륷��ܥ������ˤ�
-[[m:Fixnum#to_sym]] ���Ȥ��ޤ�
+逆にこの整数から対応するシンボルを得るには
+[[m:Fixnum#to_sym]] が使えます
 #@end
 
    id = :foo.to_i
@@ -161,11 +161,11 @@ self ���֤��ޤ���
 
 #@since 1.8.7
 --- to_proc -> Proc
-self ���б����� Proc ���֥������Ȥ��֤��ޤ���
+self に対応する Proc オブジェクトを返します。
 
-��������� Proc ���֥������Ȥ�ƤӤ���([[m:Proc#call]])�ȡ�
-������������ self �Ȥ���̾���Υ᥽�åɤ�
-�Ĥ�ΰ������Ϥ��ƸƤӤ�����ޤ���
+生成される Proc オブジェクトを呼びだす([[m:Proc#call]])と、
+その第一引数の self という名前のメソッドを
+残りの引数を渡して呼びだされます。
 
   :to_i.to_proc["ff", 16]  # => 255
   (1..3).collect(&:to_s)  #=> ["1", "2", "3"]
@@ -176,17 +176,17 @@ self ���б����� Proc ���֥������Ȥ��֤��ޤ���
 #@since 1.9.1
 --- ==(other)        -> true | false
 
-other ��Ʊ������ܥ�λ��˿����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+other が同じシンボルの時に真を返します。
+そうでない場合は偽を返します。
 
-@param other ����оݤΥ���ܥ����ꤷ�ޤ���
+@param other 比較対象のシンボルを指定します。
 
 --- succ -> Symbol
 --- next -> Symbol
 
-����ܥ���б�����ʸ����Ρּ��Ρ�ʸ������б����륷��ܥ���֤��ޤ���
+シンボルに対応する文字列の「次の」文字列に対応するシンボルを返します。
 
-(self.to_s.next.intern ��Ʊ���Ǥ���)
+(self.to_s.next.intern と同じです。)
 
   :a.next   # => :b
   :foo.next # => :fop
@@ -195,11 +195,11 @@ other ��Ʊ������ܥ�λ��˿����֤��ޤ���
 
 --- <=>(other) -> -1 | 0 | 1
 
-self �� other �Υ���ܥ���б�����ʸ����� ASCII �����ɽ����Ӥ��ơ�
-self ���礭�����ˤ��������������������ˤ� 0�����������ˤ�����������֤�
-�ޤ���
+self と other のシンボルに対応する文字列を ASCII コード順で比較して、
+self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
+ます。
 
-@param other ����оݤΥ���ܥ����ꤷ�ޤ���
+@param other 比較対象のシンボルを指定します。
 
   p :aaa <=> :xxx  # => -1
   p :aaa <=> :aaa  # => 0
@@ -209,10 +209,10 @@ self ���礭�����ˤ��������������������ˤ� 0�����������ˤ�����������֤�
 
 --- casecmp(other) -> -1 | 0 | 1
 
-[[m:Symbol#<=>]] ��Ʊ�ͤ˥���ܥ���б�����ʸ����ν������Ӥ��ޤ�����
-����ե��٥åȤ���ʸ����ʸ���ΰ㤤��̵�뤷�ޤ���
+[[m:Symbol#<=>]] と同様にシンボルに対応する文字列の順序を比較しますが、
+アルファベットの大文字小文字の違いを無視します。
 
-@param other ����оݤΥ���ܥ����ꤷ�ޤ���
+@param other 比較対象のシンボルを指定します。
 
   p :a <=> :A      # => 1
   p :a.casecmp(:A) # => 0
@@ -222,13 +222,13 @@ self ���礭�����ˤ��������������������ˤ� 0�����������ˤ�����������֤�
 --- =~(other) -> Integer | nil
 --- match(other) -> Integer | nil
 
-����ɽ�� other �ȤΥޥå���Ԥ��ޤ���
+正規表現 other とのマッチを行います。
 
-(self.to_s =~ other ��Ʊ���Ǥ���)
+(self.to_s =~ other と同じです。)
 
-@param other ����оݤΥ���ܥ����ꤷ�ޤ���
+@param other 比較対象のシンボルを指定します。
 
-@return �ޥå�����������Хޥå��������֤Υ���ǥå����򡢤����Ǥʤ���� nil ���֤��ޤ���
+@return マッチが成功すればマッチした位置のインデックスを、そうでなければ nil を返します。
 
   p :foo =~ /foo/    # => 0
   p :foobar =~ /bar/ # => 3
@@ -239,11 +239,11 @@ self ���礭�����ˤ��������������������ˤ� 0�����������ˤ�����������֤�
 --- [](nth) -> String | nil
 --- slice(nth) -> String | nil
 
-nth ���ܤ�ʸ�����֤��ޤ���
+nth 番目の文字を返します。
 
-(self.to_s[nth] ��Ʊ���Ǥ���)
+(self.to_s[nth] と同じです。)
 
-@param nth ʸ���ΰ��֤�ɽ����������ꤷ�ޤ���
+@param nth 文字の位置を表す整数を指定します。
 
   :foo[0] # => "f"
   :foo[1] # => "o"
@@ -252,32 +252,32 @@ nth ���ܤ�ʸ�����֤��ޤ���
 --- [](nth, len) -> String | nil
 --- slice(nth, len) -> String | nil
 
-nth ���ܤ���Ĺ�� len ����ʬʸ����򿷤�����ä��֤��ޤ���
+nth 番目から長さ len の部分文字列を新しく作って返します。
 
-(self.to_s[nth, len] ��Ʊ���Ǥ���)
+(self.to_s[nth, len] と同じです。)
 
-@param nth ʸ���ΰ��֤�ɽ����������ꤷ�ޤ���
-@param len ʸ�����Ĺ������ꤷ�ޤ���
+@param nth 文字の位置を表す整数を指定します。
+@param len 文字列の長さを指定します。
 
   :foo[1, 2] # => "oo"
 
 --- [](substr) -> String | nil
 --- slice(substr) -> String | nil
 
-self �� substr ��ޤ��硢���פ���ʸ����򿷤�����ä��֤��ޤ���
+self が substr を含む場合、一致した文字列を新しく作って返します。
 
-(self.to_s[substr] ��Ʊ���Ǥ���)
+(self.to_s[substr] と同じです。)
 
 --- [](regexp, nth = 0) -> String | nil
 --- slice(regexp, nth = 0) -> String | nil
 
-����ɽ�� regexp �� nth ���ܤγ�̤˥ޥå�����ǽ����ʬʸ������֤��ޤ���
+正規表現 regexp の nth 番目の括弧にマッチする最初の部分文字列を返します。
 
-(self.to_s[regexp, nth] ��Ʊ���Ǥ���)
+(self.to_s[regexp, nth] と同じです。)
 
-@param regexp ����ɽ������ꤷ�ޤ���
+@param regexp 正規表現を指定します。
 
-@param nth ��������������ɽ���쥸�����Υ���ǥå�������ꤷ�ޤ���
+@param nth 取得したい正規表現レジスタのインデックスを指定します。
 
   :foobar[/bar/] # => "bar"
   :foobarbaz[/(ba.)(ba.)/, 0] # => "barbaz"
@@ -287,11 +287,11 @@ self �� substr ��ޤ��硢���פ���ʸ����򿷤�����ä��֤��ޤ���
 --- [](range) -> String | nil
 --- slice(range) -> String | nil
 
-range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
+rangeで指定したインデックスの範囲に含まれる部分文字列を返します。
 
-(self.to_s[range] ��Ʊ���Ǥ���)
+(self.to_s[range] と同じです。)
 
-@param range ����������ʸ������ϰϤ򼨤� [[c:Range]] ���֥������Ȥ���ꤷ�ޤ���
+@param range 取得したい文字列の範囲を示す [[c:Range]] オブジェクトを指定します。
 
   :foo[0..1] # => "fo"
 
@@ -300,9 +300,9 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 --- length -> Integer
 --- size -> Integer
 
-����ܥ���б�����ʸ�����Ĺ�����֤��ޤ���
+シンボルに対応する文字列の長さを返します。
 
-(self.to_s.length ��Ʊ���Ǥ���)
+(self.to_s.length と同じです。)
 
   :foo.length #=> 3
 
@@ -310,7 +310,7 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- empty? -> bool
 
-���Ȥ� :"" (length �� 0 �Υ���ܥ�)���ɤ������֤��ޤ���
+自身が :"" (length が 0 のシンボル)かどうかを返します。
 
   :"".empty?  #=> true
   :foo.empty? #=> false
@@ -319,9 +319,9 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- upcase -> Symbol
 
-��ʸ������ʸ�����Ѵ���������ܥ���֤��ޤ���
+小文字を大文字に変換したシンボルを返します。
 
-(self.to_s.upcase.intern ��Ʊ���Ǥ���)
+(self.to_s.upcase.intern と同じです。)
 
   :foo.upcase #=> :FOO
 
@@ -329,9 +329,9 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- downcase -> Symbol
 
-��ʸ����ʸ�����Ѵ���������ܥ���֤��ޤ���
+大文字を小文字に変換したシンボルを返します。
 
-(self.to_s.downcase.intern ��Ʊ���Ǥ���)
+(self.to_s.downcase.intern と同じです。)
 
   :FOO.downcase #=> :foo
 
@@ -339,10 +339,10 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- capitalize -> Symbol
 
-����ܥ���б�����ʸ�������Ƭ��ʸ������ʸ���ˡ��Ĥ��ʸ�����ѹ�����
-����ܥ���֤��ޤ���
+シンボルに対応する文字列の先頭の文字を大文字に、残りを小文字に変更した
+シンボルを返します。
 
-(self.to_s.capitalize.intern ��Ʊ���Ǥ���)
+(self.to_s.capitalize.intern と同じです。)
 
   :foobar.capitalize     #=> :Foobar
   :fooBar.capitalize     #=> :Foobar
@@ -353,10 +353,10 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- swapcase -> Symbol
 
-'A' ���� 'Z' �ޤǤΥ���ե��٥å���ʸ����ʸ���ˡ�'a' ���� 'z' �ޤǤ�
-����ե��٥åȾ�ʸ������ʸ�����ѹ���������ܥ���֤��ޤ���
+'A' から 'Z' までのアルファベット大文字を小文字に、'a' から 'z' までの
+アルファベット小文字を大文字に変更したシンボルを返します。
 
-(self.to_s.swapcase.intern ��Ʊ���Ǥ���)
+(self.to_s.swapcase.intern と同じです。)
 
   p :ABCxyz.swapcase   # => :abcXYZ
   p :Access.swapcase   # => :aCCESS
@@ -365,8 +365,8 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- encoding   -> Encoding
 
-����ܥ���б�����ʸ����Υ��󥳡��ǥ��󥰾����ɽ������ [[c:Encoding]] ����
-�������Ȥ��֤��ޤ���
+シンボルに対応する文字列のエンコーディング情報を表現した [[c:Encoding]] オブ
+ジェクトを返します。
 
 @see [[m:String#encoding]]
 
@@ -374,6 +374,6 @@ range�ǻ��ꤷ������ǥå������ϰϤ˴ޤޤ����ʬʸ������֤��ޤ���
 
 --- inspect    -> String
 
-���Ȥ�ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+自身を人間に読みやすい文字列にして返します。
 
   :fred.inspect   #=> ":fred"

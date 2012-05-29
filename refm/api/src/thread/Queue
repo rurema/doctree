@@ -1,12 +1,12 @@
 = class Queue < Object
 
-Queue �ϥ���åɴ֤� FIFO(first in first out) ���̿�ϩ�Ǥ�����
-��åɤ����Υ��塼���ɤ߽Ф����Ȥ������ߤ��ޤ������塼�ˤʤ��
-���ξ��󤬽񤭹��ޤ��ȼ¹ԤϺƳ�����ޤ���
+Queue はスレッド間の FIFO(first in first out) の通信路です。ス
+レッドが空のキューを読み出そうとすると停止します。キューになんら
+かの情報が書き込まれると実行は再開されます。
 
-���祵����������Ǥ��� Queue �Υ��֥��饹 [[c:SizedQueue]] ���󶡤���Ƥ��ޤ���
+最大サイズが指定できる Queue のサブクラス [[c:SizedQueue]] も提供されています。
 
-=== ��
+=== 例
 
   require 'thread'
 
@@ -24,7 +24,7 @@ Queue �ϥ���åɴ֤� FIFO(first in first out) ���̿�ϩ�Ǥ�����
 
   th1.join
 
-�¹Ԥ���Ȱʲ��Τ褦�˽��Ϥ��ޤ���
+実行すると以下のように出力します。
 
   $ ruby que.rb
   resource1
@@ -35,38 +35,38 @@ Queue �ϥ���åɴ֤� FIFO(first in first out) ���̿�ϩ�Ǥ�����
 
 --- new -> Queue
 
-���������塼���֥������Ȥ��������ޤ���
+新しいキューオブジェクトを生成します。
 
 == Instance methods
 
 --- clear -> ()
 
-���塼����ˤ��ޤ����֤��ͤ�����Ǥ���
+キューを空にします。返り値は不定です。
 
 --- empty? -> bool
 
-���塼�����λ��������֤��ޤ���
+キューが空の時、真を返します。
 
 --- length -> Fixnum
 --- size -> Fixnum
 
-���塼��Ĺ�����֤��ޤ���
+キューの長さを返します。
 
 --- num_waiting -> Fixnum
 
-���塼���ԤäƤ��륹��åɤο����֤��ޤ���
+キューを待っているスレッドの数を返します。
 
 --- pop(non_block = false) -> object
 --- shift(non_block = false) -> object
 --- deq(non_block = false) -> object
 
-���塼����ҤȤ��ͤ���Ф��ޤ������塼�����λ����ƽи��Υ���åɤ���ߤ��ޤ���
+キューからひとつ値を取り出します。キューが空の時、呼出元のスレッドは停止します。
 
-@param non_block true ��Ϳ����ȡ����塼�����λ����㳰 [[c:ThreadError]] ��ȯ�����ޤ���
+@param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
 
 --- push(value) -> ()
 --- <<(value)   -> ()
 --- enq(value)  -> ()
 
-���塼���ͤ��ɲä��ޤ����ԤäƤ��륹��åɤ�����м¹Ԥ�Ƴ�
-�����ޤ����֤��ͤ�����Ǥ���
+キューの値を追加します。待っているスレッドがいれば実行を再開
+させます。返り値は不定です。

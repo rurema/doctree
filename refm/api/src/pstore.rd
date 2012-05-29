@@ -1,15 +1,15 @@
-Ruby�Υ��֥������Ȥ����ե�����˳�Ǽ���뤿��Υ饤�֥��Ǥ���
+Rubyのオブジェクトを外部ファイルに格納するためのライブラリです。
 
 = class PStore < Object
 
-Ruby�Υ��֥������Ȥ����ե�����˳�Ǽ���뤿��Υ��饹�Ǥ���
-������ [[c:Marshal]] ��ȤäƤ��ޤ���
+Rubyのオブジェクトを外部ファイルに格納するためのクラスです。
+内部で [[c:Marshal]] を使っています。
 
-=== �Ȥ���
+=== 使い方
 
-�ǡ����١����˥����������뤿��ˤϡ�
-transaction �Υ֥��å���Ǥ���ɬ�פ�����ޤ���
-���󥿡��ե������� [[c:Hash]] �˻��Ƥ��ޤ���
+データベースにアクセスするためには、
+transaction のブロック内である必要があります。
+インターフェースは [[c:Hash]] に似ています。
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
@@ -32,39 +32,39 @@ transaction �Υ֥��å���Ǥ���ɬ�פ�����ޤ���
 --- new(file) -> PStore
 #@end
 
-�ե�����̾ file ���Ф��ƥǡ����١������ɤ߽񤭤��ޤ���
+ファイル名 file に対してデータベースを読み書きします。
 
-�ǡ����١����򹹿�����Ȥ��˥Хå����åץե����뤬��������뤿�ᡢ
-file �Τ���ǥ��쥯�ȥ�Ͻ񤭹��߲�ǽ�Ǥ���ɬ�פ�����ޤ���
+データベースを更新するときにバックアップファイルが作成されるため、
+file のあるディレクトリは書き込み可能である必要があります。
 #@since 1.8.2
-�ǡ����١����ι�������������ȡ��Хå����åץե�����Ϻ������ޤ����Хå����åץե�����̾��
-�ե�����̾�� ".tmp" ����� ".new" ���դ�����ΤǤ���
+データベースの更新が成功すると、バックアップファイルは削除されます。バックアップファイル名は
+ファイル名に ".tmp" および ".new" を付けたものです。
 #@else
-�Хå����åץե�����Ϻ�����줺�˻Ĥ�ޤ����Хå����åץե�����̾�ϥե�����̾�θ�� "~" ���դ�����ΤǤ���
+バックアップファイルは削除されずに残ります。バックアップファイル名はファイル名の後に "~" を付けたものです。
 #@end
 
-@param file �ǡ����١����ե�����̾��
+@param file データベースファイル名。
 
 #@since 1.9.1
-@param thread_safe ������ꤹ��� [[c:Mutex]] ���Ѥ��ƥ���åɥ����դˤʤ�ޤ����ǥե���Ȥϵ��Ǥ���
+@param thread_safe 真を指定すると [[c:Mutex]] を用いてスレッドセーフになります。デフォルトは偽です。
 #@end
 == Instance Methods
 
 #@since 1.8.0
 --- transaction(read_only = false) {|pstore| ... } -> object
 
-�ȥ�󥶥�����������ޤ���
-���Υ֥��å�����ǤΤߥǡ����١������ɤ߽񤭤��Ǥ��ޤ���
+トランザクションに入ります。
+このブロックの中でのみデータベースの読み書きができます。
 
-�ɤ߹������ѤΥȥ�󥶥�����󤬻��Ѳ�ǽ�Ǥ���
+読み込み専用のトランザクションが使用可能です。
 
-@param read_only ������ꤹ��ȡ��ɤ߹������ѤΥȥ�󥶥������ˤʤ�ޤ���
+@param read_only 真を指定すると、読み込み専用のトランザクションになります。
 
-@return �֥��å��ǺǸ��ɾ�������ͤ��֤��ޤ���
+@return ブロックで最後に評価した値を返します。
 
-@raise PStore::Error read_only �򿿤ˤ����Ȥ��ˡ��ǡ����١������ѹ����褦��������ȯ�����ޤ���
+@raise PStore::Error read_only を真にしたときに、データベースを変更しようした場合に発生します。
 
-��:
+例:
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
@@ -75,7 +75,7 @@ file �Τ���ǥ��쥯�ȥ�Ͻ񤭹��߲�ǽ�Ǥ���ɬ�פ�����ޤ���
   end
   
   db.transaction(true) do |pstore|
-    pstore["root"] = 'aaa' # => �������㳰ȯ��
+    pstore["root"] = 'aaa' # => ここで例外発生
   end
 
 
@@ -83,44 +83,44 @@ file �Τ���ǥ��쥯�ȥ�Ͻ񤭹��߲�ǽ�Ǥ���ɬ�פ�����ޤ���
 
 --- [](name) -> object
 
-�롼��name���б������ͤ����ޤ���
+ルートnameに対応する値を得ます。
 
-@param name õ������롼�ȡ�
+@param name 探索するルート。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
 @see [[m:Hash#[] ]]
 
 --- []=(name, value)
 
-�롼�� name ���б������� value �򥻥åȤ��ޤ���
+ルート name に対応する値 value をセットします。
 
-@param name �롼�ȡ�
+@param name ルート。
 
-@param value ��Ǽ�����͡�
+@param value 格納する値。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
 @see [[m:Hash#[]=]]
 
 #@since 1.8.0
 --- fetch(name, default = PStore::Error) -> object
 
-�롼��name���б������ͤ����ޤ���
+ルートnameに対応する値を得ます。
 
-��������롼�Ȥ���Ͽ����Ƥ��ʤ����ˤϡ�
-���� default ��Ϳ�����Ƥ���Ф����ͤ��֤���
-Ϳ�����Ƥ��ʤ�����㳰 [[c:PStore::Error]] ��ȯ�����ޤ���
+該当するルートが登録されていない時には、
+引数 default が与えられていればその値を返し、
+与えられていなければ例外 [[c:PStore::Error]] が発生します。
 
-@param name õ������롼�ȡ�
+@param name 探索するルート。
 
-@param default name ���б�����롼�Ȥ���Ͽ����Ƥ��ʤ������֤��ͤ���ꤹ�롣
+@param default name に対応するルートが登録されていない場合に返す値を指定する。
 
-@raise PStore::Error name ���б�����롼�Ȥ���Ͽ����Ƥ��ʤ����ġ�
-                     default ��Ϳ�����Ƥ��ʤ�����ȯ�����ޤ���
-                     �ޤ����ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error name に対応するルートが登録されていないかつ、
+                     default が与えられていない場合に発生します。
+                     また、トランザクション外でこのメソッドが呼び出された場合に発生します。
 
-��:
+例:
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
@@ -133,7 +133,7 @@ file �Τ���ǥ��쥯�ȥ�Ͻ񤭹��߲�ǽ�Ǥ���ɬ�פ�����ޤ���
   db.transaction(true) do |pstore|
     pstore.fetch("root")        # => [[1, 1.5], 2, 3, 4]
     pstore.fetch("root", 'aaa') # => [[1, 1.5], 2, 3, 4]
-    pstore.fetch("not_root")    # => �㳰ȯ��
+    pstore.fetch("not_root")    # => 例外発生
   end
 
 @see [[m:Hash#fetch]], [[m:PStore#[] ]]
@@ -141,15 +141,15 @@ file �Τ���ǥ��쥯�ȥ�Ͻ񤭹��߲�ǽ�Ǥ���ɬ�פ�����ޤ���
 
 --- delete(name) -> object
 
-�롼��name���б������ͤ������ޤ���
+ルートnameに対応する値を削除します。
 
-@param name õ������롼�ȡ�
+@param name 探索するルート。
 
-@return ��������ͤ��֤��ޤ���
+@return 削除した値を返します。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
-��:
+例:
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
@@ -168,35 +168,35 @@ file �Τ���ǥ��쥯�ȥ�Ͻ񤭹��߲�ǽ�Ǥ���ɬ�פ�����ޤ���
 
 --- roots -> Array
 
-�롼�Ȥν����������֤��ޤ���
+ルートの集合を配列で返します。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
 @see [[m:Hash#keys]]
 
 --- root?(name) -> bool
 
-�롼�� name ���ǡ����١����˳�Ǽ����Ƥ�����˿����֤��ޤ���
+ルート name がデータベースに格納されている場合に真を返します。
 
-@param name õ������롼�ȡ�
+@param name 探索するルート。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
 @see [[m:Hash#key?]]
 
 --- path -> String
 
-�ǡ����١����Υե�����̾�����ޤ���
+データベースのファイル名を得ます。
 
 --- commit -> ()
 
-�ǡ����١������ɤ߽񤭤�λ���ޤ���
+データベースの読み書きを終了します。
 
-transaction �֥��å�����ȴ�����ǡ����١������ѹ���ȿ�Ǥ���ޤ���
+transaction ブロックから抜け、データベースの変更が反映されます。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
-��:
+例:
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
@@ -204,7 +204,7 @@ transaction �֥��å�����ȴ�����ǡ����١������ѹ���ȿ�Ǥ���ޤ���
     p db.roots       # => []
     ary = db["root"] = [1,2,3,4]
     db.commit
-    ary[0] = [1,1.5] # => �����ϼ¹Ԥ���ʤ���
+    ary[0] = [1,1.5] # => ここは実行されない。
   end
   
   db.transaction do |pstore|
@@ -213,13 +213,13 @@ transaction �֥��å�����ȴ�����ǡ����١������ѹ���ȿ�Ǥ���ޤ���
 
 --- abort -> ()
 
-�ǡ����١������ɤ߽񤭤�λ���ޤ���
+データベースの読み書きを終了します。
 
-transaction �֥��å�����ȴ���ޤ������ǡ����١������ѹ���ȿ�Ǥ���ޤ���
+transaction ブロックから抜けますが、データベースの変更は反映されません。
 
-@raise PStore::Error �ȥ�󥶥�����󳰤Ǥ��Υ᥽�åɤ��ƤӽФ��줿����ȯ�����ޤ���
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
-��:
+例:
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
@@ -227,7 +227,7 @@ transaction �֥��å�����ȴ���ޤ������ǡ����١������ѹ���ȿ�Ǥ���ޤ���
     p db.roots       # => []
     ary = db["root"] = [1,2,3,4]
     db.abort
-    ary[0] = [1,1.5] # => �����ϼ¹Ԥ���ʤ���
+    ary[0] = [1,1.5] # => ここは実行されない。
   end
   
   db.transaction do |pstore|
@@ -238,26 +238,26 @@ transaction �֥��å�����ȴ���ޤ������ǡ����١������ѹ���ȿ�Ǥ���ޤ���
 #@until 1.9.1
 --- dump(table) -> String
 #@# nodoc
-ñ�ʤ� [[m:Marshal.#dump]] �Υ�åѡ��᥽�åɤǤ���
+単なる [[m:Marshal.#dump]] のラッパーメソッドです。
 
-@param table �ϥå������ꤷ�ޤ���
+@param table ハッシュを指定します。
 
 @see [[m:Marshal.#load]]
 
 --- load(content) -> object
-#@# nodoc ư���ʤ��äݤ���
-ñ�ʤ� [[m:Marshal.#load]] �Υ�åѡ��᥽�åɤǤ���
+#@# nodoc 動かないっぽい。
+単なる [[m:Marshal.#load]] のラッパーメソッドです。
 
-@param content �ǡ�������ꤷ�ޤ���
+@param content データを指定します。
 
 @see [[m:Marshal.#load]]
 
 --- load_file(file) -> object
 #@# nodoc
 
-ñ�ʤ� [[m:Marshal.#load]] �Υ�åѡ��᥽�åɤǤ���
+単なる [[m:Marshal.#load]] のラッパーメソッドです。
 
-@param file �ե�����̾�� [[c:IO]] ���֥������Ȥ���ꤷ�ޤ���
+@param file ファイル名か [[c:IO]] オブジェクトを指定します。
 
 @see [[m:Marshal.#load]]
 #@end
@@ -265,19 +265,19 @@ transaction �֥��å�����ȴ���ޤ������ǡ����١������ѹ���ȿ�Ǥ���ޤ���
 
 #@since 1.9.1
 --- ultra_safe -> bool
-���Ǥ���С��ѥե����ޥ󥹤Ȱ��������˥ե����빹���ξ��ͤ��򤱤뤳�Ȥ��Ǥ��ޤ���
-�ǥե���Ȥϵ��Ǥ���
+真であれば、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
+デフォルトは偽です。
 
-���Υե饰�θ��̤�����Τϰ����Υץ�åȥե���������Ǥ���
+このフラグの効果があるのは一部のプラットフォームだけです。
 (e.g. all POSIX platforms: Linux, Mac OS X, FreeBSD, etc)
 
 --- ultra_safe=(flag)
-���򥻥åȤ���ȡ��ѥե����ޥ󥹤Ȱ��������˥ե����빹���ξ��ͤ��򤱤뤳�Ȥ��Ǥ��ޤ���
+真をセットすると、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
 
-���Υե饰�θ��̤�����Τϰ����Υץ�åȥե���������Ǥ���
+このフラグの効果があるのは一部のプラットフォームだけです。
 (e.g. all POSIX platforms: Linux, Mac OS X, FreeBSD, etc)
 
-@param flag �����ͤ���ꤷ�ޤ���
+@param flag 真偽値を指定します。
 
 
 #@end
@@ -286,43 +286,43 @@ transaction �֥��å�����ȴ���ޤ������ǡ����١������ѹ���ȿ�Ǥ���ޤ���
 
 --- in_transaction -> ()
 
-�ȥ�󥶥���������Ǥʤ�����㳰��ȯ�������ޤ���
+トランザクションの中でなければ例外を発生させます。
 
 == Constants
 #@since 1.8.6
 --- RDWR_ACCESS -> Fixnum
-���������Ѥ�������Ǥ���
+内部で利用する定数です。
 
 --- RD_ACCESS -> Fixnum
-���������Ѥ�������Ǥ���
+内部で利用する定数です。
 
 --- WR_ACCESS -> Fixnum
-���������Ѥ�������Ǥ���
+内部で利用する定数です。
 #@end
 #@since 1.9.1
 --- EMPTY_MARSHAL_CHECKSUM -> String
-���������Ѥ�������Ǥ���
+内部で利用する定数です。
 
 --- EMPTY_MARSHAL_DATA -> String
-���������Ѥ�������Ǥ���
+内部で利用する定数です。
 
 --- EMPTY_STRING -> String
-���������Ѥ�������Ǥ���
+内部で利用する定数です。
 
 #@end
 = class PStore::Error < StandardError
 
-[[c:PStore]] �����ȯ�������㳰�Ǥ���
+[[c:PStore]] の中で発生する例外です。
 
 #@since 1.9.1
 = class PStore::DummyMutex < Object
 
-���ߡ��Υߥ塼�ƥå��������Υ��饹��ȤäƤ⥹��åɥ����դˤϤʤ�ޤ���
+ダミーのミューテックス。このクラスを使ってもスレッドセーフにはなりません。
 
 == Instance Methods
 
 --- synchronize{ ... } -> object
 
-Ϳ����줿�֥��å���ɾ����������ǲ��⤷�ޤ���
+与えられたブロックを評価するだけで何もしません。
 
 #@end

@@ -6,15 +6,15 @@
 
 include Kernel
 
-���ƤΥ��饹�Υ����ѡ����饹��
-���֥������Ȥΰ���Ū�ʿ��񤤤�������ޤ���
+全てのクラスのスーパークラス。
+オブジェクトの一般的な振舞いを定義します。
 
-���Υ��饹�Υ᥽�åɤϾ�񤭤�����̤����ˤ��ʤ��¤ꡢ���٤ƤΥ��֥������Ȥǻ��Ѥ��뤳�Ȥ��Ǥ��ޤ���
+このクラスのメソッドは上書きしたり未定義にしない限り、すべてのオブジェクトで使用することができます。
 
 == Class Methods
 --- new -> Object
 
-Object���饹�Υ��󥹥��󥹤����������֤��ޤ���
+Objectクラスのインスタンスを生成して返します。
 
   some = Object.new
   p some #=> #<Object:0x2b696d8>
@@ -23,16 +23,16 @@ Object���饹�Υ��󥹥��󥹤����������֤��ޤ���
 
 --- ==(other) -> bool
 
-���֥������Ȥ� other ����������п����֤��ޤ���
+オブジェクトと other が等しければ真を返します。
 
-���Υ᥽�åɤϳƥ��饹�������˹�碌�ƺ�������٤��Ǥ���
-¿���ξ�硢���֥������Ȥ����Ƥ���������п����֤��褦��
-��Ʊ������Ƚ�ꤹ��褦�ˡ˺��������뤳�Ȥ����Ԥ���Ƥ��ޤ���
+このメソッドは各クラスの性質に合わせて再定義すべきです。
+多くの場合、オブジェクトの内容が等しければ真を返すように
+（同値性を判定するように）再定義されることが期待されています。
 
-�ǥե���ȤǤ� equal? ��Ʊ�����֥�������
-��Ʊ����Ƚ��ˤʤäƤ��ޤ���
+デフォルトでは equal? と同じオブジェクト
+の同一性判定になっています。
 
-@param other ��Ӥ��륪�֥������ȤǤ���
+@param other 比較するオブジェクトです。
 
   p("foo" == "bar") #=> false
   p("foo" == "foo") #=> true
@@ -44,20 +44,20 @@ Object���饹�Υ��󥹥��󥹤����������֤��ޤ���
 
 --- eql?(other) -> bool
 
-���֥������Ȥ� other ����������п����֤��ޤ���[[c:Hash]] ����ĤΥ���
-�����������ɤ�����Ƚ�ꤹ��Τ˻Ȥ��ޤ���
+オブジェクトと other が等しければ真を返します。[[c:Hash]] で二つのキー
+が等しいかどうかを判定するのに使われます。
 
-���Υ᥽�åɤϳƥ��饹�������˹�碌�ƺ�������٤��Ǥ���
-¿���ξ�硢 == ��Ʊ�ͤ�Ʊ������Ƚ��򤹤�褦�˺��������Ƥ��ޤ�����
-Ŭ�ڤ˥���Ƚ�꤬�Ǥ���褦�ˤ�긷�����ʤäƤ�����⤢��ޤ���
+このメソッドは各クラスの性質に合わせて再定義すべきです。
+多くの場合、 == と同様に同値性の判定をするように再定義されていますが、
+適切にキー判定ができるようにより厳しくなっている場合もあります。
 
-�ǥե���ȤǤ� equal? ��Ʊ�����֥�������
-��Ʊ����Ƚ��ˤʤäƤ��ޤ���
+デフォルトでは equal? と同じオブジェクト
+の同一性判定になっています。
 
-���Υ᥽�åɤ������������ˤ� [[m:Object#hash]] �᥽��
-�ɤ��������ʤ���Фʤ�ޤ���
+このメソッドを再定義した時には [[m:Object#hash]] メソッ
+ドも再定義しなければなりません。
 
-@param other ��Ӥ��륪�֥������ȤǤ���
+@param other 比較するオブジェクトです。
 
   p("foo".eql?("bar")) #=> false
   p("foo".eql?("foo")) #=> true
@@ -69,15 +69,15 @@ Object���饹�Υ��󥹥��󥹤����������֤��ޤ���
 
 --- equal?(other) -> bool
 
-other �� self ���Ȥλ��������֤��ޤ���
+other が self 自身の時、真を返します。
 
-��ĤΥ��֥������Ȥ�Ʊ��Τ�Τ��ɤ���Ĵ�٤���˻��Ѥ��ޤ���
-���Υ᥽�åɤ��������ƤϤ����ޤ���
+二つのオブジェクトが同一のものかどうか調べる時に使用します。
+このメソッドを再定義してはいけません。
 
-���ߤ���[[m:Object#object_id]]�����פ���
-���ɤ�����Ĵ�٤ޤ���
+お互いの[[m:Object#object_id]]が一致する
+かどうかを調べます。
 
-@param other ��Ӥ��륪�֥������ȤǤ���
+@param other 比較するオブジェクトです。
 
   p("foo".equal?("bar")) #=> false
   p("foo".equal?("foo")) #=> false
@@ -97,23 +97,23 @@ other �� self ���Ȥλ��������֤��ޤ���
 #@else
 --- methods -> [String]
 
-[[m:Module#instance_methods]] ��Ʊ���Ǥ���
+[[m:Module#instance_methods]] と同じです。
 #@end
 #@end
 #@since 1.8.0
-���Υ��֥������Ȥ��Ф��ƸƤӽФ���᥽�å�̾�ΰ������֤��ޤ���
-���Υ᥽�åɤ� public �᥽�åɤ���� protected �᥽�åɤ�̾�����֤��ޤ���
+そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
+このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
-���������̤ˡ����������λ��� [[m:Object#singleton_methods]](false) ��Ʊ���ˤʤäƤ��ޤ���
+ただし特別に、引数が偽の時は [[m:Object#singleton_methods]](false) と同じになっています。
 #@end
 
 #@if (version > "1.8.0")
 
 #@since 1.8.0
-@param include_inherited ���������λ��� [[m:Object#singleton_methods]](false) ��Ʊ���ˤʤ�ޤ���
+@param include_inherited 引数が偽の時は [[m:Object#singleton_methods]](false) と同じになります。
 #@end
 
-  #��1:
+  #例1:
   
   class Parent
     private;   def private_parent()   end
@@ -134,13 +134,13 @@ other �� self ���Ȥλ��������֤��ޤ���
       public;    def public_singleton()    end
   end
   
-  # ���륪�֥������Ȥα����Ǥ���᥽�åɤΰ��������롣
+  # あるオブジェクトの応答できるメソッドの一覧を得る。
   p obj.methods(false)
   p obj.public_methods(false)
   p obj.private_methods(false)
   p obj.protected_methods(false)
   
-  #�¹Է��
+  #実行結果
   
 #@since 1.9.1
   [:protected_singleton, :public_singleton]
@@ -154,17 +154,17 @@ other �� self ���Ȥλ��������֤��ޤ���
   ["protected_foo", "protected_singleton"]
 #@end
   
-  #��2:
+  #例2:
     
-  # ���륪�֥������Ȥα����Ǥ���᥽�åɤΰ��������롣
-  # ���ȤΥ��饹�οƥ��饹�Υ��󥹥��󥹥᥽�åɤ�ޤ�뤿��� true ����ꤷ��
-  # ���뤬��Object �Υ��󥹥��󥹥᥽�åɤϰ��������ӽ����Ƥ��롣
+  # あるオブジェクトの応答できるメソッドの一覧を得る。
+  # 自身のクラスの親クラスのインスタンスメソッドも含めるために true を指定して
+  # いるが、Object のインスタンスメソッドは一覧から排除している。
   p obj.methods(true)           - Object.instance_methods(true)
   p obj.public_methods(true)    - Object.public_instance_methods(true)
   p obj.private_methods(true)   - Object.private_instance_methods(true)
   p obj.protected_methods(true) - Object.protected_instance_methods(true)
   
-  #�¹Է��
+  #実行結果
   
 #@since 1.9.1
   [:protected_singleton, :public_singleton, :protected_foo, :public_foo, :protected_parent, :public_parent]
@@ -192,10 +192,10 @@ other �� self ���Ȥλ��������֤��ޤ���
 #@end
 #@end
 
-���Υ��֥������Ȥ�����Ǥ��� public �᥽�å�̾�ΰ������֤��ޤ���
+そのオブジェクトが理解できる public メソッド名の一覧を返します。
 
 #@since 1.8.0
-@param include_inherited ���Ȥʤ��ͤ���ꤹ��ȼ��ȤΥ��饹�Υ����ѡ����饹��������줿�᥽�åɤ�����ޤ���
+@param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
 @see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
@@ -209,10 +209,10 @@ other �� self ���Ȥλ��������֤��ޤ���
 #@end
 #@end
 
-���Υ��֥������Ȥ�����Ǥ��� private �᥽�å�̾�ΰ������֤��ޤ���
+そのオブジェクトが理解できる private メソッド名の一覧を返します。
 
 #@since 1.8.0
-@param include_inherited ���Ȥʤ��ͤ���ꤹ��ȼ��ȤΥ��饹�Υ����ѡ����饹��������줿�᥽�åɤ�����ޤ���
+@param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
 @see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
@@ -226,10 +226,10 @@ other �� self ���Ȥλ��������֤��ޤ���
 #@end
 #@end
 
-���Υ��֥������Ȥ�����Ǥ��� protected �᥽�å�̾�ΰ������֤��ޤ���
+そのオブジェクトが理解できる protected メソッド名の一覧を返します。
 
 #@since 1.8.0
-@param include_inherited ���Ȥʤ��ͤ���ꤹ��ȼ��ȤΥ��饹�Υ����ѡ����饹��������줿�᥽�åɤ�����ޤ���
+@param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
 @see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
@@ -245,26 +245,26 @@ other �� self ���Ȥλ��������֤��ޤ���
 #@if (version < "1.8.0")
 --- singleton_methods -> [String]
 
-���Υ��֥������Ȥ��Ф����������Ƥ����ðۥ᥽�å�̾
-(public�᥽�åɤΤ�) �ΰ������֤��ޤ���
+そのオブジェクトに対して定義されている特異メソッド名
+(publicメソッドのみ) の一覧を返します。
 #@end
 #@end
 #@since 1.8.0
-���Υ��֥������Ȥ��Ф����������Ƥ����ðۥ᥽�å�̾
-(public ���뤤�� protected �᥽�å�) �ΰ������֤��ޤ���
+そのオブジェクトに対して定義されている特異メソッド名
+(public あるいは protected メソッド) の一覧を返します。
 
-���饹�᥽�å�([[c:Class]]�Υ��󥹥��󥹤��ðۥ᥽�å�)�˴ؤ��Ƥ�
-���������ΤȤ��������ѡ����饹�Υ��饹�᥽�åɤ��оݤˤʤ�ޤ���
+クラスメソッド([[c:Class]]のインスタンスの特異メソッド)に関しては
+引数が真のとき、スーパークラスのクラスメソッドも対象になります。
 
-singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
+singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@end
 
 #@if (version > "1.8.0")
-#@#@param inherited_too ����ɽ���ͤ���ꤹ��ȼ��ȤΥ��饹�Υ����ѡ����饹��������줿�᥽�åɤ�����ޤ���
-@param inherited_too ���������ΤȤ��������ѡ����饹�Υ��饹�᥽�åɤ��оݤˤʤ�ޤ������줬��̣����ĤΤ�
-  self �����饹���֥������ȤǤ���Ȥ������Ǥ���
+#@#@param inherited_too 偽を表す値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
+@param inherited_too 引数が真のとき、スーパークラスのクラスメソッドも対象になります。これが意味を持つのは
+  self がクラスオブジェクトであるときだけです。
 
-  #��1:
+  #例1:
   
   Parent = Class.new
   
@@ -296,12 +296,12 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
     public;    def public_self()    end
   end
   
-  # ���륪�֥������Ȥ��ðۥ᥽�åɤΰ��������롣
+  # あるオブジェクトの特異メソッドの一覧を得る。
   p obj.singleton_methods(false)
   p obj.methods(false)
   p Foo.singleton_methods(false)
   
-  #�¹Է��
+  #実行結果
   
 #@since 1.9.1
   [:protected_self, :public_self]
@@ -314,16 +314,16 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 #@end
 
   
-  #��2:
+  #例2:
   
-  # ���륪�֥������Ȥ��ðۥ᥽�åɤΰ��������롣
-  # �ƥ��饹�Υ��饹�᥽�åɤ�ޤޤ��褦 true ����ꤷ������
-  # Object �Υ��饹�᥽�åɤϰ��������ӽ����Ƥ��롣
+  # あるオブジェクトの特異メソッドの一覧を得る。
+  # 親クラスのクラスメソッドも含まれるよう true を指定したが、
+  # Object のクラスメソッドは一覧から排除している。
   
   p obj.singleton_methods(true)
   p Foo.singleton_methods(true) - Object.singleton_methods(true)
   
-  #�¹Է��
+  #実行結果
   
 #@since 1.9.1
   [:protected_self, :public_self, :protected_bar, :public_bar]
@@ -339,24 +339,24 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_a -> Array
 #@#nomethod
 
-���֥������Ȥ�������Ѵ�������̤��֤��ޤ���
+オブジェクトを配列に変換した結果を返します。
 #@since 1.9.1
-�ǥե���ȤǤ��������Ƥ��ޤ���
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 #@else
 
-������Ѵ��Ǥ��ʤ�(to_ary ������ʤ�)���֥������Ȥϡ����ȤΤߤ�ޤ�Ĺ�� 1 ����
-����Ѵ�����ޤ���
-���Υ᥽�åɤϡ����� Object �Υ᥽�åɤ���ϼ�������ޤ���
-�ʤΤ� to_a ����Ѥ����硢
+配列に変換できない(to_ary を持たない)オブジェクトは、自身のみを含む長さ 1 の配
+列に変換されます。
+このメソッドは、将来 Object のメソッドからは取り除かれます。
+なので to_a を使用する場合、
 
- * ���٤ƤΥ��֥������Ȥ� to_a ���������Ƥ���Ȥ������ԤϤ��ʤ���
- * �桼��������Υ��饹�ˤ�ɬ�פ˱����Ƽ�ʬ���������
+ * すべてのオブジェクトに to_a が定義されているという期待はしない。
+ * ユーザー定義のクラスには必要に応じて自分で定義する
 
-�ʤɤȤ������Ȥ�ɬ�פǤ���
+などということが必要です。
 #@end
 #@since 1.9.1
     p( {'a'=>1}.to_a )  # [["a", 1]]
@@ -375,11 +375,11 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 
 --- to_s -> String
 
-���֥������Ȥ�ʸ����ɽ�����֤��ޤ���
+オブジェクトの文字列表現を返します。
 
-[[m:Kernel.#print]] �� [[m:Kernel.#sprintf]] ��ʸ����ʳ���
-���֥������Ȥ��������Ϥ��줿��礳�Υ᥽�åɤ�Ȥä�ʸ������Ѵ���
-�ޤ���
+[[m:Kernel.#print]] や [[m:Kernel.#sprintf]] は文字列以外の
+オブジェクトが引数に渡された場合このメソッドを使って文字列に変換し
+ます。
 
   class Foo
     def initialize num
@@ -402,17 +402,17 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_str -> String
 #@#nomethod
 
-���֥������Ȥ� [[c:String]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:String]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
-���Υ᥽�åɤ����������ϡ�
- * ʸ���󤬻Ȥ��뤹�٤Ƥξ��̤����ֲ�ǽ�Ǥ���褦�ʡ�
- * ʸ���󤽤Τ�ΤȤߤʤ���褦�ʤ��
-�Ȥ�����������ΤˤʤäƤ��ޤ���
+このメソッドを定義する条件は、
+ * 文字列が使われるすべての場面で代置可能であるような、
+ * 文字列そのものとみなせるようなもの
+という厳しいものになっています。
 
   class Foo
    def to_str
@@ -427,17 +427,17 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_ary -> Array
 #@#nomethod
 
-���֥������Ȥ� [[c:Array]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:Array]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
-���Υ᥽�åɤ����������ϡ�
- * ���󤬻Ȥ��뤹�٤Ƥξ��̤����ֲ�ǽ�Ǥ���褦�ʡ�
- * ���󤽤Τ�ΤȤߤʤ���褦�ʤ��
-�Ȥ�����������ΤˤʤäƤ��ޤ���
+このメソッドを定義する条件は、
+ * 配列が使われるすべての場面で代置可能であるような、
+ * 配列そのものとみなせるようなもの
+という厳しいものになっています。
 
   class Foo
    def to_ary
@@ -453,17 +453,17 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_hash -> Hash
 #@#nomethod
 
-���֥������Ȥ� [[c:Hash]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:Hash]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
-���Υ᥽�åɤ����������ϡ�
- * �ϥå��夬�Ȥ��뤹�٤Ƥξ��̤����ֲ�ǽ�Ǥ���褦�ʡ�
- * �ϥå��夽�Τ�ΤȤߤʤ���褦�ʤ��
-�Ȥ�����������ΤˤʤäƤ��ޤ���
+このメソッドを定義する条件は、
+ * ハッシュが使われるすべての場面で代置可能であるような、
+ * ハッシュそのものとみなせるようなもの
+という厳しいものになっています。
 
   class Foo
    def to_hash
@@ -477,17 +477,17 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_int -> Integer
 #@#nomethod
 
-���֥������Ȥ� [[c:Integer]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:Integer]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
-���Υ᥽�åɤ����������ϡ�
- * �������Ȥ��뤹�٤Ƥξ��̤����ֲ�ǽ�Ǥ���褦�ʡ�
- * �������Τ�ΤȤߤʤ���褦�ʤ��
-�Ȥ�����������ΤˤʤäƤ��ޤ���
+このメソッドを定義する条件は、
+ * 整数が使われるすべての場面で代置可能であるような、
+ * 整数そのものとみなせるようなもの
+という厳しいものになっています。
 
   class Foo
    def to_int
@@ -502,12 +502,12 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_proc -> Proc
 #@#nomethod
 
-���֥������Ȥ� [[c:Proc]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:Proc]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
   def doing
     yield
@@ -525,35 +525,35 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_io -> IO
 #@#nomethod
 
-���֥������Ȥ� [[c:IO]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:IO]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
-���Υ᥽�åɤ����������ϡ�
- * IO���֥������Ȥ��Ȥ��뤹�٤Ƥξ��̤����ֲ�ǽ�Ǥ���褦�ʡ�
- * IO���֥������Ȥ��Τ�ΤȤߤʤ���褦�ʤ��
-�Ȥ�����������ΤˤʤäƤ��ޤ���
+このメソッドを定義する条件は、
+ * IOオブジェクトが使われるすべての場面で代置可能であるような、
+ * IOオブジェクトそのものとみなせるようなもの
+という厳しいものになっています。
 
 
-#@#��
+#@#例
 
 --- to_regexp -> Regexp
 #@#nomethod
 
-���֥������Ȥ� [[c:Regexp]] �ؤΰ��ۤ��Ѵ���ɬ�פʤȤ��������ǸƤФ�ޤ���
-�ǥե���ȤǤ��������Ƥ��ޤ���
+オブジェクトの [[c:Regexp]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
-�����Τ��ᤳ���˵��ܤ��Ƥ���ޤ�����
-���Υ᥽�åɤϼºݤˤ� Object ���饹�ˤ��������Ƥ��ޤ���
-ɬ�פ˱����ƥ��֥��饹��������٤���ΤǤ���
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
-���Υ᥽�åɤ����������ϡ�
- * ����ɽ�����Ȥ��뤹�٤Ƥξ��̤����ֲ�ǽ�Ǥ���褦�ʡ�
- * ����ɽ�����Τ�ΤȤߤʤ���褦�ʤ��
-�Ȥ�����������ΤˤʤäƤ��ޤ���
+このメソッドを定義する条件は、
+ * 正規表現が使われるすべての場面で代置可能であるような、
+ * 正規表現そのものとみなせるようなもの
+という厳しいものになっています。
 
   class Foo
    def to_regexp
@@ -569,17 +569,17 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 --- to_enum(method = :each, *args) -> Enumerator
 --- enum_for(method = :each, *args) -> Enumerator
 
-[[m:Enumerator.new]](self, method, *args) ���֤��ޤ���
+[[m:Enumerator.new]](self, method, *args) を返します。
 #@else
 --- to_enum(method = :each, *args) -> Enumerable::Enumerator
 --- enum_for(method = :each, *args) -> Enumerable::Enumerator
 
-[[m:Enumerable::Enumerator.new]](self, method, *args) ���֤��ޤ���
+[[m:Enumerable::Enumerator.new]](self, method, *args) を返します。
 #@end
 
-@param method �᥽�å�̾��ʸ���󤫥���ܥ�Ǥ���
-@param args �ƤӽФ��᥽�åɤ��Ϥ��������Ǥ���
-@raise NameError ¸�ߤ��ʤ��᥽�å�̾����ꤹ���ȯ�����ޤ���
+@param method メソッド名の文字列かシンボルです。
+@param args 呼び出すメソッドに渡される引数です。
+@raise NameError 存在しないメソッド名を指定すると発生します。
 
   str = "xyz"
 
@@ -602,10 +602,10 @@ singleton_methods(false) �ϡ�[[m:Object#methods]](false) ��Ʊ���Ǥ���
 
 --- tap{|x| ... } -> self
 
-self ������Ȥ��ƥ֥��å���ɾ������self ���֤��ޤ���
+self を引数としてブロックを評価し、self を返します。
 
-�᥽�åɥ�������������ľ��������̤�ɽ�����뤿���
-�᥽�åɥ�������� "�������" ���Ȥ������Υ᥽�åɤμ���Ū�Ǥ���
+メソッドチェインの途中で直ちに操作結果を表示するために
+メソッドチェインに "入り込む" ことが、このメソッドの主目的です。
 
     (1..10)                    .tap {|x| puts "original: #{x.inspect}"}.
        to_a                    .tap {|x| puts "array: #{x.inspect}"}.
@@ -622,27 +622,27 @@ self ������Ȥ��ƥ֥��å���ɾ������self ���֤��ޤ���
 --- id -> Integer
 #@end
 
-�ƥ��֥������Ȥ��Ф��ư�դ��������֤��ޤ������륪�֥������Ȥ��Ф�
-�ƤɤΤ褦��������������Ƥ��뤫������Ǥ���
+各オブジェクトに対して一意な整数を返します。あるオブジェクトに対し
+てどのような整数が割り当てられるかは不定です。
 
-Ruby�Ǥϡ�(Garbage Collect����Ƥ��ʤ�)�����ƥ��֤ʥ��֥������ȴ֤�
-��ʣ���ʤ�����(object_id)���ƥ��֥������ȤˤҤȤĤ��ĳ�����Ƥ��Ƥ��ޤ�������
-�᥽�åɤϤ����ͤ��֤��ޤ���
+Rubyでは、(Garbage Collectされていない)アクティブなオブジェクト間で
+重複しない整数(object_id)が各オブジェクトにひとつずつ割り当てられています。この
+メソッドはその値を返します。
 
-[[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], [[c:Fixnum]] ���饹
-�Υ��󥹥��󥹤ʤ� Immutable���ѹ��Բġˤʥ��֥������Ȥΰ�����Ʊ�����Ƥʤ��ɬ��Ʊ�� object_id �ˤʤ�ޤ���
+[[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], [[c:Fixnum]] クラス
+のインスタンスなど Immutable（変更不可）なオブジェクトの一部は同じ内容ならば必ず同じ object_id になります。
 
-����ϡ�Immutable �ʤ��ʣ���ξ�꤫�黲�Ȥ���Ƥ�`�˲�Ū���'�ˤ�����꤬ȯ�����ʤ��Τǡ�
-Ʊ�����ƤΥ��󥹥��󥹤�ʣ���������ʤ��Ȥ���������������ͳ�Ǥ���
+これは、Immutable ならば複数の場所から参照されても`破壊的操作'による問題が発生しないので、
+同じ内容のインスタンスを複数生成しないという内部実装が理由です。
 
 #@if (version < "1.9.1")
-[[m:Symbol#to_i]]�������������� object_id ����ʪ�Ǥ���
+[[m:Symbol#to_i]]で得られる整数と object_id は別物です。
 
-id �᥽�åɤκ��������������̾ __id__ ���Ѱդ����
-���ꡢ�饤�֥��Ǥϸ�Ԥ����Ѥ��侩����ޤ����ޤ� __id__ ��
-��������٤��ǤϤ���ޤ���
+id メソッドの再定義に備えて別名 __id__ が用意されて
+おり、ライブラリでは後者の利用が推奨されます。また __id__ を
+再定義すべきではありません。
 
-id �� obsolete �ʤΤǡ�object_id �� __id__ ����Ѥ��Ƥ���������
+id は obsolete なので、object_id か __id__ を使用してください。
 #@end
 
   p "ruby".object_id #=> 22759500
@@ -664,23 +664,23 @@ id �� obsolete �ʤΤǡ�object_id �� __id__ ����Ѥ��Ƥ���������
 
 --- hash -> Fixnum
 
-���֥������ȤΥϥå����ͤ��֤��ޤ���[[c:Hash]] ���饹�ǥ��֥�����
-�Ȥ��Ǽ����Τ��Ѥ����Ƥ��ޤ���
+オブジェクトのハッシュ値を返します。[[c:Hash]] クラスでオブジェク
+トを格納するのに用いられています。
 
-�᥽�å� hash �� [[m:Object#eql?]] ���Ȥ߹�碌�� Hash ���饹�����Ѥ���ޤ������κ�
+メソッド hash は [[m:Object#eql?]] と組み合わせて Hash クラスで利用されます。その際
 
-  A.eql?(B) �ʤ�� A.hash == B.hash
+  A.eql?(B) ならば A.hash == B.hash
 
-�δط���ɬ���������Ƥ��ʤ���Ф����ޤ���eql? �������������ˤ�ɬ����������碌
-�ƺ�������Ƥ���������
+の関係を必ず満たしていなければいけません。eql? を再定義した時には必ずこちらも合わせ
+て再定義してください。
 
-�ǥե���ȤǤϡ�[[m:Object#object_id]] ��Ʊ���ͤ��֤��ޤ���
-��������[[c:Fixnum]], [[c:Symbol]], [[c:String]] �������ȹ��ߤΥϥ�
-����ؿ������Ѥ���ޤ�(������Ѥ��뤳�ȤϤǤ��ޤ���)��
+デフォルトでは、[[m:Object#object_id]] と同じ値を返します。
+ただし、[[c:Fixnum]], [[c:Symbol]], [[c:String]] だけは組込みのハッ
+シュ関数が使用されます(これを変えることはできません)。
 
-hash ������������ϡ����ͤ�ʬ�ۤ���Ǥ�դ��������֤��褦�ˤ��ޤ���
+hash を再定義する場合は、一様に分布する任意の整数を返すようにします。
 
-@return �ϥå����ͤ��֤��ޤ���Fixnum�˼��ޤ�ʤ������ڤ�ΤƤ��ޤ���
+@return ハッシュ値を返します。Fixnumに収まらない場合は切り捨てられます。
 
   p self.hash #=> 21658870
   p 0.hash #=> 1
@@ -696,17 +696,17 @@ hash ������������ϡ����ͤ�ʬ�ۤ���Ǥ�դ��������֤��褦�ˤ��ޤ���
 
 --- ===(other) -> bool
 
-�᥽�å� [[m:Object#==]] ����̾�Ǥ���
-case ���ǻ��Ѥ���ޤ������Υ᥽�åɤ� case ���Ǥο����񤤤��θ���ơ�
-�ƥ��饹�������˹�碌�ƺ�������٤��Ǥ���
+メソッド [[m:Object#==]] の別名です。
+case 式で使用されます。このメソッドは case 式での振る舞いを考慮して、
+各クラスの性質に合わせて再定義すべきです。
 
-����Ū�˽�°���Υ����å���¸����뤿��Ŭ�����������ޤ���
+一般的に所属性のチェックを実現するため適宜再定義されます。
 
-when ��μ���쥷���С��Ȥ��� === ��ƤӽФ����Ȥ����դ��Ƥ���������
+when 節の式をレシーバーとして === を呼び出すことに注意してください。
 
-�ޤ� [[m:Enumerable#grep]] �Ǥ���Ѥ���ޤ���
+また [[m:Enumerable#grep]] でも使用されます。
 
-@param other ��Ӥ��륪�֥������ȤǤ���
+@param other 比較するオブジェクトです。
 
   age = 12
   result = 
@@ -748,24 +748,24 @@ when ��μ���쥷���С��Ȥ��� === ��ƤӽФ����Ȥ����դ��Ƥ���������
 --- =~(other) -> false
 #@end
 
-���դ�����ɽ�����֥������Ȥ��֤�������ɽ���ޥå� obj =~ /RE/
-�򥵥ݡ��Ȥ��뤿��Υ᥽�åɤǤ���
+右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
+をサポートするためのメソッドです。
 #@since 1.9.1
-��� nil ���֤��ޤ���
+常に nil を返します。
 #@else
-��� false ���֤��ޤ���
+常に false を返します。
 #@end
 
-��������ˤ�ꡢ=~ ����������줿���֥������ȤǤ�����˥ޥå���Ԥ���
+この定義により、=~ が再定義されたオブジェクトでは正常にマッチを行い、
 #@since 1.9.1
-����ʳ��Τ�Τ� nil ���֤��褦�ˤʤ�ޤ���
+それ以外のものは nil を返すようになります。
 #@else
-����ʳ��Τ�Τ� false ���֤��褦�ˤʤ�ޤ���
+それ以外のものは false を返すようになります。
 #@end
 
-#@#obj ��ʸ����ʤΤ���Ԥ��Ƥ����� nil ���ä����ʤɤ˥��顼��ȯ��������������� false ���֤����Ȥ��Ǥ��ޤ���
+#@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
 
-@param other Ǥ�դΥ��֥������ȤǤ�����̤˱ƶ����ޤ���
+@param other 任意のオブジェクトです。結果に影響しません。
 
   obj = 'regexp'
   p(obj =~ /re/) #=> 0
@@ -781,7 +781,7 @@ when ��μ���쥷���С��Ȥ��� === ��ƤӽФ����Ȥ����դ��Ƥ���������
 
 --- display(out = $stdout) -> nil
 
-���֥������Ȥ� out �˽��Ϥ��ޤ����ʲ��Τ褦���������Ƥ��ޤ���
+オブジェクトを out に出力します。以下のように定義されています。
 
   class Object
     def display(out = $stdout)
@@ -790,8 +790,8 @@ when ��μ���쥷���С��Ȥ��� === ��ƤӽФ����Ȥ����դ��Ƥ���������
     end
   end
 
-@param out �������IO���֥������ȤǤ������ꤷ�ʤ�����ɸ����Ϥ˽��Ϥ���ޤ���
-@return nil ���֤��ޤ���
+@param out 出力先のIOオブジェクトです。指定しない場合は標準出力に出力されます。
+@return nil を返します。
 
   Object.new.display #=> #<Object:0xbb0210>
 
@@ -799,20 +799,20 @@ when ��μ���쥷���С��Ȥ��� === ��ƤӽФ����Ȥ����դ��Ƥ���������
 
 --- extend(*modules) -> self
 
-�����ǻ��ꤷ���⥸�塼��Υ��󥹥��󥹥᥽�åɤ� self ���ð�
-�᥽�åɤȤ����ɲä��ޤ���
+引数で指定したモジュールのインスタンスメソッドを self の特異
+メソッドとして追加します。
 
-[[m:Module#include]] �ϡ����饹(�Υ��󥹥���)�˵�ǽ���ɲä��ޤ�
-����extend �ϡ���������Υ��֥������Ȥ����˥⥸�塼��ε�ǽ���ɲ�
-�������Ȥ��˻��Ѥ��ޤ���
+[[m:Module#include]] は、クラス(のインスタンス)に機能を追加します
+が、extend は、ある特定のオブジェクトだけにモジュールの機能を追加
+したいときに使用します。
 
 #@if (version >= "1.8.0")
-������ʣ���Υ⥸�塼�����ꤷ����硢�Ǹ�
-�ΰ�������ս�� extend ��Ԥ��ޤ���
+引数に複数のモジュールを指定した場合、最後
+の引数から逆順に extend を行います。
 #@end
 
-@param modules �⥸�塼���Ǥ�ոĻ��ꤷ�ޤ��ʥ��饹���Բġˡ�
-@return self ���֤��ޤ���
+@param modules モジュールを任意個指定します（クラスは不可）。
+@return self を返します。
 
   module Foo
     def a
@@ -839,14 +839,14 @@ when ��μ���쥷���С��Ȥ��� === ��ƤӽФ����Ȥ����դ��Ƥ���������
   p Klass.new.a #=> "ok Foo"
   p Klass.b     #=> "ok Bar"
   
-extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
-�ȸ����ؤ��뤳�Ȥ�Ǥ��ޤ���
+extend の機能は、「特異クラスに対する [[m:Module#include]]」
+と言い替えることもできます。
 #@since 1.8.0
-���������ξ�硢�եå��ѤΥ᥽�å�
-�� [[m:Module#extended]] �ǤϤʤ� [[m:Module#included]] �ˤʤ�Ȥ����㤤������ޤ���
+ただしその場合、フック用のメソッド
+が [[m:Module#extended]] ではなく [[m:Module#included]] になるという違いがあります。
 #@end
 
-  # obj.extend Foo, Bar �Ȥۤ�Ʊ��
+  # obj.extend Foo, Bar とほぼ同じ
   class << obj
     include Foo, Bar
   end
@@ -859,10 +859,10 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
 
 --- inspect -> String
 
-���֥������Ȥ�ʹ֤��ɤ��������Ѵ�����ʸ������֤��ޤ���
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
-�Ȥ߹��ߴؿ� [[m:Kernel.#p]] �ϡ����Υ᥽�åɤη�̤���Ѥ���
-���֥������Ȥ�ɽ�����ޤ���
+組み込み関数 [[m:Kernel.#p]] は、このメソッドの結果を使用して
+オブジェクトを表示します。
 
   puts Class.new.inspect #=> #<Class:0xbafd88>
   puts Time.now.inspect #=> 2007-10-15 21:01:37 +0900
@@ -872,11 +872,11 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
 #@if (version >= "1.8.0")
 --- instance_variable_get(var) -> object|nil
 
-���֥������ȤΥ��󥹥����ѿ����ͤ���������֤��ޤ���
+オブジェクトのインスタンス変数の値を取得して返します。
 
-���󥹥����ѿ����������Ƥ��ʤ���� nil ���֤��ޤ���
+インスタンス変数が定義されていなければ nil を返します。
 
-@param var ���󥹥����ѿ�̾��ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param var インスタンス変数名を文字列か [[c:Symbol]] で指定します。
 
     class Foo
       def initialize
@@ -899,13 +899,13 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
 #@if (version >= "1.8.0")
 --- instance_variable_set(var, value) -> object
 
-���֥������ȤΥ��󥹥����ѿ� var ���� value �����ꤷ�ޤ���
+オブジェクトのインスタンス変数 var に値 value を設定します。
 
-���󥹥����ѿ����������Ƥ��ʤ���п������������ޤ���
+インスタンス変数が定義されていなければ新たに定義されます。
 
-@param var ���󥹥����ѿ�̾��ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
-@param value ���ꤹ���ͤǤ���
-@return value ���֤��ޤ���
+@param var インスタンス変数名を文字列か [[c:Symbol]] で指定します。
+@param value 設定する値です。
+@return value を返します。
 
     obj = Object.new
     p obj.instance_variable_set("@foo", 1)  #=> 1
@@ -921,7 +921,7 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
 
 #@since 1.9.1
 --- instance_variables -> [Symbol]
-���֥������ȤΥ��󥹥����ѿ�̾�򥷥�ܥ������Ȥ����֤��ޤ���
+オブジェクトのインスタンス変数名をシンボルの配列として返します。
 
     obj = Object.new
     obj.instance_eval { @foo, @bar = nil }
@@ -930,7 +930,7 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
     #=> [:@foo, :@bar]
 #@else
 --- instance_variables -> [String]
-���֥������ȤΥ��󥹥����ѿ�̾��ʸ���������Ȥ����֤��ޤ���
+オブジェクトのインスタンス変数名を文字列の配列として返します。
 
     obj = Object.new
     obj.instance_eval { @foo, @bar = nil }
@@ -944,9 +944,9 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
 #@since 1.8.6
 --- instance_variable_defined?(var) -> bool
 
-���󥹥����ѿ� var ���������Ƥ����鿿���֤��ޤ���
+インスタンス変数 var が定義されていたら真を返します。
 
-@param var ���󥹥����ѿ�̾��ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param var インスタンス変数名を文字列か [[c:Symbol]] で指定します。
 
    class Fred
      def initialize(p1, p2)
@@ -966,21 +966,21 @@ extend �ε�ǽ�ϡ����ðۥ��饹���Ф��� [[m:Module#include]]��
 --- __send__(name, *args) -> object
 --- __send__(name, *args) { .... } -> object
 
-���֥������ȤΥ᥽�å� name �� args �������
-���ƸƤӽФ����᥽�åɤμ¹Է�̤��֤��ޤ���
+オブジェクトのメソッド name を args を引数に
+して呼び出し、メソッドの実行結果を返します。
 
-�֥��å��դ��ǸƤФ줿�Ȥ��ϥ֥��å��⤽�Τޤް����Ϥ��ޤ���
+ブロック付きで呼ばれたときはブロックもそのまま引き渡します。
 
-send ����������줿������������̾ __send__ ��
-�Ѱդ���Ƥ��ꡢ�饤�֥��ǤϤ������Ȥ��٤��Ǥ����ޤ�
-__send__ �Ϻ�������٤��ǤϤ���ޤ���
+send が再定義された場合に備えて別名 __send__ も
+用意されており、ライブラリではこちらを使うべきです。また
+__send__ は再定義すべきではありません。
 
-send, __send__ �ϡ��᥽�åɤθƤӽФ�����
-�ˤ�����餺Ǥ�դΥ᥽�åɤ�ƤӽФ��ޤ���
-[[ref:d:spec/def#limit]] �⻲�Ȥ��Ƥ���������
+send, __send__ は、メソッドの呼び出し制限
+にかかわらず任意のメソッドを呼び出せます。
+[[ref:d:spec/def#limit]] も参照してください。
 
-@param name ʸ����[[c:Symbol]] �ǻ��ꤹ��᥽�å�̾�Ǥ���
-@param args �ƤӽФ��᥽�åɤ��Ϥ������Ǥ���
+@param name 文字列か[[c:Symbol]] で指定するメソッド名です。
+@param args 呼び出すメソッドに渡す引数です。
 
   p -365.send(:abs) #=> 365
   p "ruby".send(:sub,/./,"R") #=> "Ruby"
@@ -992,14 +992,14 @@ send, __send__ �ϡ��᥽�åɤθƤӽФ�����
     def baz() "baz" end
   end
   
-  # Ǥ�դΥ����ȥ᥽�å�(��̾��)�δط���ϥå�����ݻ����Ƥ���
-  # �쥷���Фξ��󤬤����ˤϤʤ����Ȥ�����
+  # 任意のキーとメソッド(の名前)の関係をハッシュに保持しておく
+  # レシーバの情報がここにはないことに注意
   methods = {1 => :foo,
     2 => :bar,
     3 => :baz}
   
-  # ������Ȥäƴ�Ϣ����᥽�åɤ�ƤӽФ�
-  # �쥷���Ф�Ǥ��(Foo ���饹�Υ��󥹥��󥹤Ǥ���ɬ�פ�ʤ�)
+  # キーを使って関連するメソッドを呼び出す
+  # レシーバは任意(Foo クラスのインスタンスである必要もない)
   p Foo.new.send(methods[1])      # => "foo"
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
@@ -1009,19 +1009,19 @@ send, __send__ �ϡ��᥽�åɤθƤӽФ�����
 #@since 1.9.1
 --- public_send(name, *args) -> object
 
-���֥������Ȥ� public �᥽�å� name �� args ������ˤ��ƸƤӽФ����᥽��
-�ɤμ¹Է�̤��֤��ޤ���
+オブジェクトの public メソッド name を args を引数にして呼び出し、メソッ
+ドの実行結果を返します。
 
   1.public_send(:+, 2)  # => 3
 
-@param name ʸ����[[c:Symbol]] �ǻ��ꤹ��᥽�å�̾�Ǥ���
+@param name 文字列か[[c:Symbol]] で指定するメソッド名です。
 
-@param args �ƤӽФ��᥽�åɤ��Ϥ������Ǥ���
+@param args 呼び出すメソッドに渡す引数です。
 
-@raise ArgumentError name ����ꤷ�ʤ��ä�����ȯ�����ޤ���
+@raise ArgumentError name を指定しなかった場合に発生します。
 
-@raise NoMethodError protected �᥽�åɤ� private �᥽�åɤ��Ф��Ƽ¹�
-                     ��������ȯ�����ޤ���
+@raise NoMethodError protected メソッドや private メソッドに対して実行
+                     した場合に発生します。
 
   1.public_send(:puts, "hello")  # => NoMethodError
 
@@ -1030,25 +1030,25 @@ send, __send__ �ϡ��᥽�åɤθƤӽФ�����
 
 --- _dump(limit) -> String
 
-[[m:Marshal.#dump]] �ˤ����ƽ��Ϥ��륪�֥������Ȥ��᥽�å� _dump 
-��������Ƥ�����ˤϡ����Υ᥽�åɤη�̤��񤭽Ф���ޤ���
+[[m:Marshal.#dump]] において出力するオブジェクトがメソッド _dump 
+を定義している場合には、そのメソッドの結果が書き出されます。
 
 #@since 1.8.0
-�С������1.8.0�ʹߤǤ�[[m:Object#marshal_dump]], [[m:Object#marshal_load]]�λ���
-���侩����ޤ��� Marshal.dump ���륪�֥������Ȥ� _dump �� marshal_dump ��ξ����
-�᥽�åɤ���ľ��� marshal_dump ��ͥ�褵��ޤ���
+バージョン1.8.0以降では[[m:Object#marshal_dump]], [[m:Object#marshal_load]]の使用
+が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方の
+メソッドを持つ場合は marshal_dump が優先されます。
 #@end
 
-�᥽�å� _dump �ϰ����Ȥ��ƺƵ������¤����٥� limit ���
-����ꡢ���֥������Ȥ�ʸ���󲽤�����Τ��֤��ޤ���
+メソッド _dump は引数として再帰を制限するレベル limit を受
+け取り、オブジェクトを文字列化したものを返します。
 
-���󥹥��󥹤��᥽�å� _dump ����ĥ��饹��ɬ��Ʊ���ե���
-�ޥåȤ��ɤ��᤹���饹�᥽�å� _load ���������ɬ�פ�����
-�ޤ���_load �ϥ��֥������Ȥ�ɽ������ʸ����������ꡢ����
-�򥪥֥������Ȥ��ᤷ����Τ��֤�ɬ�פ�����ޤ���
+インスタンスがメソッド _dump を持つクラスは必ず同じフォー
+マットを読み戻すクラスメソッド _load を定義する必要があり
+ます。_load はオブジェクトを表現した文字列を受け取り、それ
+をオブジェクトに戻したものを返す必要があります。
 
-@param limit �Ƶ������¥�٥��ɽ�������Ǥ���
-@return ���֥������Ȥ�ʸ���󲽤�����Τ��֤��褦��������٤��Ǥ���
+@param limit 再帰の制限レベルを表す整数です。
+@return オブジェクトを文字列化したものを返すように定義すべきです。
 
   class Foo
     def initialize(arg)
@@ -1066,16 +1066,16 @@ send, __send__ �ϡ��᥽�åɤθƤӽФ�����
   p foo                      #=> #<Foo:0xbaf234 @foo=["foo", "bar"]>
   dms = Marshal.dump(foo)
   p dms                      #=> "\004\bu:\bFoo\023\004\b[\a\"\bfoo\"\bbar"
-  result = Marshal.load(dms) #=> "\004\b[\a\"\bfoo\"\bbar" # self._load �ΰ���
+  result = Marshal.load(dms) #=> "\004\b[\a\"\bfoo\"\bbar" # self._load の引数
   p result                   #=> #<Foo:0xbaf07c @foo=["foo", "bar"]>
 
-���󥹥����ѿ��ξ�������̥ޡ������ǡ����˴ޤޤ��Τǡ�����
-�Τ褦�� _dump ���������ɬ�פϤ���ޤ���(������ _dump ����������
-���󥹥����ѿ��ξ���� dump ����ʤ��ʤ�ޤ�)��
-_dump/_load �Ϥ����٤������Ԥ����������ĥ�饤�֥��������
-�����饹�Υ��󥹥��󥹤����󥹥����ѿ��ʳ��˾�����ݻ��������
-���Ѥ��ޤ���(�㤨�С����饹 [[c:Time]] �ϡ�_dump/_load ���������
-���ޤ�)
+インスタンス変数の情報は普通マーシャルデータに含まれるので、上例
+のように _dump を定義する必要はありません(ただし _dump を定義すると
+インスタンス変数の情報は dump されなくなります)。
+_dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
+たクラスのインスタンスがインスタンス変数以外に情報を保持する場合に
+利用します。(例えば、クラス [[c:Time]] は、_dump/_load を定義して
+います)
 
 #@since 1.8.0
 @see [[m:Object#marshal_dump]],[[m:Object#marshal_load]]
@@ -1084,16 +1084,16 @@ _dump/_load �Ϥ����٤������Ԥ����������ĥ�饤�֥��������
 #@since 1.8.0
 --- marshal_dump -> object
 
-[[m:Marshal.#dump]] �����椹��᥽�åɤǤ���
+[[m:Marshal.#dump]] を制御するメソッドです。
 
-Marshal.dump(some) �ˤ����ơ����Ϥ��륪�֥������� some ���᥽�å� marshal_dump ��
-���ľ��ˤϡ������֤��ͤ�����פ��줿��Τ� Marshal.dump(some) ���֤��ͤȤʤ�ޤ��� 
+Marshal.dump(some) において、出力するオブジェクト some がメソッド marshal_dump を
+持つ場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。 
 
-marshal_dump/marshal_load �λ��Ȥߤ� Ruby 1.8.0 ����Ƴ������ޤ�����
-���줫��񤯥ץ������Ǥ� _dump/_load �ǤϤʤ�
-marshal_dump/marshal_load ��Ȥ��٤��Ǥ���
+marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
+これから書くプログラムでは _dump/_load ではなく
+marshal_dump/marshal_load を使うべきです。
 
-@return Ǥ�դΥ��֥������Ȥ� marshal_load �ΰ��������ѤǤ��ޤ���
+@return 任意のオブジェクトで marshal_load の引数に利用できます。
 
   class Foo
     def initialize(arg)
@@ -1111,40 +1111,40 @@ marshal_dump/marshal_load ��Ȥ��٤��Ǥ���
   p foo                      #=> #<Foo:0xbaf3b0 @foo=["foo", "bar"]>
   dms = Marshal.dump(foo)
   p dms                      #=> "\004\bU:\bFoo[\a\"\bfoo\"\bbar"
-  result = Marshal.load(dms) #=> ["foo", "bar"] # marshal_load �ΰ���
+  result = Marshal.load(dms) #=> ["foo", "bar"] # marshal_load の引数
   p result                   #=> #<Foo:0xbaf2ac @foo=["foo", "bar"]>
 
-���󥹥����ѿ��ξ�������̥ޡ������ǡ����˴ޤޤ��Τǡ�
-����Τ褦�� marshal_dump ���������ɬ�פϤ���ޤ���
-(������ marshal_dump ���������ȥ��󥹥����ѿ��ξ����
-����פ���ʤ��ʤ�Τǡ�marshal_dump/marshal_load �ǰ���ɬ�פ�����ޤ�)��
-marshal_dump/marshal_load �Ϥ����٤������Ԥ���������
-��ĥ�饤�֥�������������饹�Υ��󥹥��󥹤����󥹥����ѿ��ʳ�
-�˾�����ݻ�����������Ѥ��ޤ���
+インスタンス変数の情報は普通マーシャルデータに含まれるので、
+上例のように marshal_dump を定義する必要はありません
+(ただし marshal_dump を定義するとインスタンス変数の情報は
+ダンプされなくなるので、marshal_dump/marshal_load で扱う必要があります)。
+marshal_dump/marshal_load はより高度な制御を行いたい場合や
+拡張ライブラリで定義したクラスのインスタンスがインスタンス変数以外
+に情報を保持する場合に利用します。
 
-�äˡ�marshal_dump/marshal_load ������������֥������Ȥ�
-�ðۥ᥽�åɤ��������Ƥ��Ƥ�ޡ������Ǥ���褦�ˤʤ�ޤ�
-(�ðۥ᥽�åɤξ��󤬼�ưŪ�� dump �����褦�ˤʤ�櫓�ǤϤʤ���
-marshal_dump/marshal_load �ˤ�ꤽ���¸�����;�Ϥ�����Ȥ������ȤǤ�)��
+特に、marshal_dump/marshal_load を定義したオブジェクトは
+特異メソッドが定義されていてもマーシャルできるようになります
+(特異メソッドの情報が自動的に dump されるようになるわけではなく、
+marshal_dump/marshal_load によりそれを実現する余地があるということです)。
 
 @see [[m:Object#marshal_load]], [[c:Marshal]]
 
 --- marshal_load(obj) -> object
 
-[[m:Marshal.#load]] �����椹��᥽�åɤǤ���
+[[m:Marshal.#load]] を制御するメソッドです。
 
-some �Υ���׷�̡�Marshal.dump(some)�� ������ɤ����Marshal.load(Marshal.dump(some))�ˤ�
-�� some ���᥽�å� marshal_load ����äƤ��ʤ���Фʤ�ޤ���
-���ΤȤ���marshal_dump ���֤��ͤ� marshal_load �ΰ��������Ѥ���ޤ���
-marshal_load ���� self �ϡ��������줿�Ф����[[m:Class#allocate]] ���줿�Ф���� �ξ��֤Ǥ���
+some のダンプ結果（Marshal.dump(some)） をロードする（Marshal.load(Marshal.dump(some))）に
+は some がメソッド marshal_load を持っていなければなりません。
+このとき、marshal_dump の返り値が marshal_load の引数に利用されます。
+marshal_load 時の self は、生成されたばかり（[[m:Class#allocate]] されたばかり） の状態です。
 
-marshal_dump/marshal_load �λ��Ȥߤ� Ruby 1.8.0 ����Ƴ������ޤ�����
-���줫��񤯥ץ������Ǥ� _dump/_load �ǤϤʤ�
-marshal_dump/marshal_load ��Ȥ��٤��Ǥ���
+marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
+これから書くプログラムでは _dump/_load ではなく
+marshal_dump/marshal_load を使うべきです。
 
-@param obj marshal_dump ���֤��ͤΥ��ԡ��Ǥ���
+@param obj marshal_dump の返り値のコピーです。
 
-@return   �֤��ͤ�̵�뤵��ޤ���
+@return   返り値は無視されます。
 
 @see [[m:Object#marshal_dump]], [[c:Marshal]]
 
@@ -1153,20 +1153,20 @@ marshal_dump/marshal_load ��Ȥ��٤��Ǥ���
 --- clone -> object
 --- dup -> object
 
-���֥������Ȥ�ʣ������������֤��ޤ���
+オブジェクトの複製を作成して返します。
 
-dup �ϥ��֥������Ȥ�����, taint ����򥳥ԡ�����
-clone �Ϥ���˲ä��� freeze, �ðۥ᥽�åɤʤɤξ����ޤ᤿������ʣ����������ޤ���
+dup はオブジェクトの内容, taint 情報をコピーし、
+clone はそれに加えて freeze, 特異メソッドなどの情報も含めた完全な複製を作成します。
 
-clone �� dup ������(shallow)���ԡ��Ǥ��뤳�Ȥ����դ��Ƥ�����������ҡ�
+clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 
 @raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], 
 #@if (version >= "1.8.0")
-#@#Ruby 1.8 �Ǥϡ�
-  [[c:Symbol]], ������ [[c:Numeric]] ���饹�Υ��󥹥��󥹤ʤɰ�����
-  ���֥������Ȥ�ʣ�����褦�Ȥ����ȯ�����ޤ���
+#@#Ruby 1.8 では、
+  [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部の
+  オブジェクトを複製しようとすると発生します。
 #@else
-  [[c:Symbol]] ���饹�Υ��󥹥��󥹤�ʣ�����褦�Ȥ����ȯ�����ޤ���
+  [[c:Symbol]] クラスのインスタンスを複製しようとすると発生します。
 #@end
 
 
@@ -1200,16 +1200,16 @@ clone �� dup ������(shallow)���ԡ��Ǥ��뤳�Ȥ����դ��Ƥ�����������ҡ�
 
 @see [[m:Object#initialize_copy]]
 
-==== �������ԡ����������ԡ�
+==== 深いコピーと浅いコピー
 
-clone �� dup �ϥ��֥������ȼ��Ȥ�ʣ����������ǡ����֥������Ȥλؤ�
-�Ƥ�����(���Ȥ�����������Ǥʤ�)�ޤǤ�ʣ�����ޤ��󡣤�����������ԡ�(shallow copy)�Ȥ����ޤ���
+clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
+ている先(たとえば配列の要素など)までは複製しません。これを浅いコピー(shallow copy)といいます。
 
-����(deep)���ԡ���ɬ�פʾ��ˤϡ�
-[[c:Marshal]]�⥸�塼������Ѥ���
+深い(deep)コピーが必要な場合には、
+[[c:Marshal]]モジュールを利用して
   Marshal.load(Marshal.dump(obj))
-���Τ褦��ʣ�������������ˡ������ޤ���������Marshal����ʤ����֥������Ȥ�
-�ޤޤ�Ƥ�����ˤϻȤ��ޤ���
+このように複製を作成する方法があります。ただしMarshal出来ないオブジェクトが
+含まれている場合には使えません。
 
   obj = ["a","b","c"]
   
@@ -1227,22 +1227,22 @@ clone �� dup �ϥ��֥������ȼ��Ȥ�ʣ����������ǡ����֥������Ȥλؤ�
 
 --- freeze -> self
 
-���֥������Ȥ��������Ƥ��ѹ���ػߡˤ��ޤ���
+オブジェクトを凍結（内容の変更を禁止）します。
 
-��뤵�줿���֥������Ȥ��ѹ���
+凍結されたオブジェクトの変更は
 #@since 1.9.1
-�㳰 [[c:RuntimeError]] ��ȯ�������ޤ���
+例外 [[c:RuntimeError]] を発生させます。
 #@else
-�㳰 [[c:TypeError]] ��ȯ�������ޤ���
+例外 [[c:TypeError]] を発生させます。
 #@end
-���ä�����뤵�줿���֥������Ȥ򸵤��᤹��ˡ�Ϥ���ޤ���
+いったん凍結されたオブジェクトを元に戻す方法はありません。
 
-��뤵���Τϥ��֥������ȤǤ��ꡢ�ѿ��ǤϤ���ޤ��������ʤɤ��ѿ��λؤ�
-���֥������Ȥ��Ѳ����Ƥ��ޤ����Ȥ� freeze �Ǥ��ɤ��ޤ��� freeze ���ɤ��Τϡ�
-`�˲�Ū�����' �ȸƤФ���ΰ��̤Ǥ����ѿ��ؤλ��ȼ��Τ���뤷����
-���ϡ��������Х��ѿ��ʤ� [[m:Kernel.#trace_var]] ���Ȥ��ޤ���
+凍結されるのはオブジェクトであり、変数ではありません。代入などで変数の指す
+オブジェクトが変化してしまうことは freeze では防げません。 freeze が防ぐのは、
+`破壊的な操作' と呼ばれるもの一般です。変数への参照自体を凍結したい
+場合は、グローバル変数なら [[m:Kernel.#trace_var]] が使えます。
 
-@return self ���֤��ޤ���
+@return self を返します。
 
   a1 = "foo".freeze
   a1 = "bar"
@@ -1255,8 +1255,8 @@ clone �� dup �ϥ��֥������ȼ��Ȥ�ʣ����������ǡ����֥������Ȥλؤ�
   a2.replace("bar")# can't modify frozen string (TypeError)
 #@end
 
-���������뤳�ȤϤǤ��ޤ��󤬡�[[m:Object#dup]] ��Ȥ��Фۤ�Ʊ�����Ƥ���뤵��Ƥ��ʤ�
-���֥������Ȥ����뤳�ȤϤǤ��ޤ���
+凍結を解除することはできませんが、[[m:Object#dup]] を使えばほぼ同じ内容の凍結されていない
+オブジェクトを得ることはできます。
 
   a = [1].freeze
   p a.frozen?     #=> true
@@ -1279,7 +1279,7 @@ clone �� dup �ϥ��֥������ȼ��Ȥ�ʣ����������ǡ����֥������Ȥλؤ�
 
 --- frozen? -> bool
 
-���֥������Ȥ��������Ƥ��ѹ���ػߡˤ���Ƥ���Ȥ��˿����֤��ޤ���
+オブジェクトが凍結（内容の変更を禁止）されているときに真を返します。
 
   obj = "someone"
   p obj.frozen? #=> false
@@ -1290,11 +1290,11 @@ clone �� dup �ϥ��֥������ȼ��Ȥ�ʣ����������ǡ����֥������Ȥλؤ�
 
 --- method(name) -> Method
 
-���֥������ȤΥ᥽�å� name �򥪥֥������Ȳ�����
-[[c:Method]] ���֥������Ȥ��֤��ޤ���
+オブジェクトのメソッド name をオブジェクト化した
+[[c:Method]] オブジェクトを返します。
 
-@param name �᥽�å�̾��[[c:Symbol]] �ޤ���[[c:String]]�ǻ��ꤷ�ޤ���
-@raise NameError �������Ƥ��ʤ��᥽�å�̾������Ȥ���Ϳ�����ȯ�����ޤ���
+@param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
+@raise NameError 定義されていないメソッド名を引数として与えると発生します。
 
   me = -365.method(:abs)
   p me #=> #<Method: Fixnum#abs>
@@ -1304,13 +1304,13 @@ clone �� dup �ϥ��֥������ȼ��Ȥ�ʣ����������ǡ����֥������Ȥλؤ�
 
 --- respond_to?(name, include_private = false) -> bool
 
-���֥������Ȥ� public �᥽�å� name ����ĤȤ������֤��ޤ���
-include_private �����ΤȤ��� private �᥽�åɤ��Ф��Ƥ⿿���֤��ޤ���
+オブジェクトが public メソッド name を持つとき真を返します。
+include_private が真のときは private メソッドに対しても真を返します。
 
-���֥������Ȥ� �᥽�å� name ����ĤȤ����Τϡ�
-���֥������Ȥ� �᥽�å� name �˱������뤳�Ȥ��Ǥ��뤳�Ȥ򤤤��ޤ���
+オブジェクトが メソッド name を持つというのは、
+オブジェクトが メソッド name に応答することができることをいいます。
 
-@param name [[c:Symbol]] �ޤ���ʸ����ǻ��ꤹ��᥽�å�̾�Ǥ���
+@param name [[c:Symbol]] または文字列で指定するメソッド名です。
 
   class F
     def hello
@@ -1337,39 +1337,39 @@ include_private �����ΤȤ��� private �᥽�åɤ��Ф��Ƥ⿿���֤��ޤ���
 #@since 1.9.2
 --- respond_to_missing?(symbol, include_private) -> bool
 
-���Ȥ� symbol ��ɽ�����᥽�åɤ��Ф� [[m:Object#method_missing]] ��
-ȿ������Ĥ��ʤ�п����֤��ޤ���
+自身が symbol で表されるメソッドに対し [[m:Object#method_missing]] で
+反応するつもりならば真を返します。
 
-[[m:Object#respond_to?]] �ϥ᥽�åɤ��������Ƥ��ʤ���硢
-�ǥե���ȤǤ��Υ᥽�åɤ�ƤӤ�����礻�ޤ���
+[[m:Object#respond_to?]] はメソッドが定義されていない場合、
+デフォルトでこのメソッドを呼びだし問合せます。
 
-[[m:Object#method_missing]] �� override ��������
-���Υ᥽�åɤ� override �����٤��Ǥ���
+[[m:Object#method_missing]] を override した場合に
+このメソッドも override されるべきです。
 
-false ���֤��ޤ���
+false を返します。
 
-@param symbol �᥽�å�̾����ܥ�
-@param include_private private method ��ޤ᤿������ true ���Ϥ���ޤ�
+@param symbol メソッド名シンボル
+@param include_private private method も含めたい場合に true が渡されます
 
 @see [[m:Object#respond_to?]]
 #@end
 --- method_missing(name, *args) -> object
 
-�ƤӤ����줿�᥽�åɤ��������Ƥ��ʤ��ä�����Ruby���󥿥ץ꥿�����Υ᥽�å�
-��ƤӽФ��ޤ���
+呼びだされたメソッドが定義されていなかった時、Rubyインタプリタがこのメソッド
+を呼び出します。
 
-�ƤӽФ��˼��Ԥ����᥽�åɤ�̾�� ([[c:Symbol]]) �� name ��
-���λ��ΰ�������������ʹߤ��Ϥ���ޤ���
+呼び出しに失敗したメソッドの名前 ([[c:Symbol]]) が name に
+その時の引数が第二引数以降に渡されます。
 
-�ǥե���ȤǤϤ��Υ᥽�åɤ��㳰 [[c:NameError]] ��ȯ�������ޤ���
+デフォルトではこのメソッドは例外 [[c:NameError]] を発生させます。
 
-#@#���Υ᥽�åɤ϶��ϤǤ�����ȿ�̰������񤷤��Τ����Ѥ��򤱤�٤��Ǥ���
+#@#このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
 
-@param name ̤����᥽�åɤ�̾���ʥ���ܥ�ˤǤ���
-@param args ̤����᥽�åɤ��Ϥ��줿�����Ǥ���
-#@#@param block ̤����᥽�åɤ��Ϥ��줿�֥��å��Ǥ���
-@return �桼��������� method_missing �᥽�åɤ��֤��ͤ�̤����᥽�åɤ��֤��ͤ�
-  ���뤫�Τ褦�˸����ޤ���
+@param name 未定義メソッドの名前（シンボル）です。
+@param args 未定義メソッドに渡された引数です。
+#@#@param block 未定義メソッドに渡されたブロックです。
+@return ユーザー定義の method_missing メソッドの返り値が未定義メソッドの返り値で
+  あるかのように見えます。
 
   class Foo
     def initialize(data)
@@ -1394,11 +1394,11 @@ false ���֤��ޤ���
 
 --- instance_of?(klass) -> bool
 
-���֥������Ȥ����饹 klass ��ľ�ܤΥ��󥹥��󥹤Ǥ���������֤��ޤ���
+オブジェクトがクラス klass の直接のインスタンスである時真を返します。
 
-obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
+obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立します。
 
-@param klass [[c:Class]]�����Υ��֥��饹�Υ��󥹥��󥹤Ǥ���
+@param klass [[c:Class]]かそのサブクラスのインスタンスです。
 
     class C < Object
     end
@@ -1414,13 +1414,13 @@ obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
 --- is_a?(mod) -> bool
 --- kind_of?(mod) -> bool
 
-���֥������Ȥ����ꤵ�줿���饹 mod �����Υ��֥��饹�Υ��󥹥��󥹤Ǥ���Ȥ������֤��ޤ���
+オブジェクトが指定されたクラス mod かそのサブクラスのインスタンスであるとき真を返します。
 
-�ޤ������֥������Ȥ��⥸�塼�� mod �򥤥󥯥롼�ɤ������饹�����Υ��֥��饹
-�Υ��󥹥��󥹤Ǥ�����ˤ⿿���֤��ޤ���
-�嵭�Τ�����Ǥ�ʤ����� false ���֤��ޤ���
+また、オブジェクトがモジュール mod をインクルードしたクラスかそのサブクラス
+のインスタンスである場合にも真を返します。
+上記のいずれでもない場合に false を返します。
 
-@param mod ���饹��⥸�塼��ʤɡ�[[c:Module]]�����Υ��֥��饹�Υ��󥹥��󥹤Ǥ���
+@param mod クラスやモジュールなど、[[c:Module]]かそのサブクラスのインスタンスです。
 
     module M
     end
@@ -1442,30 +1442,30 @@ obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
 --- instance_eval(expr, filename = "(eval)", lineno = 1) -> object
 --- instance_eval {|obj| ... }                           -> object
 
-���֥������ȤΥ���ƥ����Ȥ�ʸ���� expr �ޤ��ϥ��֥������ȼ��Ȥ�֥��å��ѥ�᡼���Ȥ���֥��å���
-ɾ�����Ƥ��η�̤��֤��ޤ���
+オブジェクトのコンテキストで文字列 expr またはオブジェクト自身をブロックパラメータとするブロックを
+評価してその結果を返します。
 
-���֥������ȤΥ���ƥ����Ȥ�ɾ������Ȥ�ɾ����� self �򤽤Υ��֥������Ȥˤ��Ƽ¹Ԥ���Ȥ������ȤǤ���
-�ޤ���ʸ���� expr ��֥��å���ǥ᥽�åɤ��������Ф��Υ��֥������Ȥ��ðۥ᥽�åɤ��������ޤ���
+オブジェクトのコンテキストで評価するとは評価中の self をそのオブジェクトにして実行するということです。
+また、文字列 expr やブロック中でメソッドを定義すればそのオブジェクトの特異メソッドが定義されます。
 
-�����������������ѿ������ϡ�ʸ���� expr ��ɾ���Ǥ� instance_eval �γ�¦�Υ������פȡ��֥��å���ɾ���ǤϤ��Υ֥��å��γ�¦�Υ������פȡ���ͭ���ޤ���
+ただし、ローカル変数だけは、文字列 expr の評価では instance_eval の外側のスコープと、ブロックの評価ではそのブロックの外側のスコープと、共有します。
 
 #@since 1.8.0
-�᥽�å��������� instance_eval �ǥ᥽�åɤ�����������ϡ��Ϥ�᥽�åɤ��¹Ԥ��줿�Ȥ���
-���� instance_eval ��Υ᥽�åɤ��������ޤ�������ϥ᥽�å�����Υͥ��Ȥ�Ʊ���Ǥ���
-[[ref:d:spec/def#nest_method]] �򻲾Ȥ��Ƥ���������
+メソッド定義の中で instance_eval でメソッドを定義した場合は、囲むメソッドが実行されたときに
+初めて instance_eval 内のメソッドが定義されます。これはメソッド定義のネストと同じです。
+[[ref:d:spec/def#nest_method]] を参照してください。
 #@end
 
-@param expr  ɾ������ʸ����Ǥ���
+@param expr  評価する文字列です。
 
-@param filename ʸ�������ꤷ�ޤ����ե����� filename ��ʸ���� expr ��
-                �񤫤�Ƥ��뤫�Τ褦�˼¹Ԥ���ޤ��������å��ȥ졼����
-                ɽ���ʤɤ򺹤��ؤ��뤳�Ȥ��Ǥ��ޤ���
+@param filename 文字列を指定します。ファイル filename に文字列 expr が
+                書かれているかのように実行されます。スタックトレースの
+                表示などを差し替えることができます。
 
-@param lineno ʸ�������ꤷ�ޤ������ֹ� lineno ����ʸ���� expr ���񤫤�Ƥ��뤫�Τ褦�˼¹Ԥ���ޤ���
-              �����å��ȥ졼����ɽ���ʤɤ򺹤��ؤ��뤳�Ȥ��Ǥ��ޤ���
+@param lineno 文字列を指定します。行番号 lineno から文字列 expr が書かれているかのように実行されます。
+              スタックトレースの表示などを差し替えることができます。
 
-��:
+例:
 
   class Foo
     def initialize data
@@ -1479,7 +1479,7 @@ obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
   
   some = Foo.new 'XXX'
   some.instance_eval{p @key} #=> "XXX"
-  some.instance_eval{do_fuga } #=> "secret" # private �᥽�åɤ�ƤӽФ���
+  some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
   
   some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
   messg = 'unknown'
@@ -1488,14 +1488,14 @@ obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
 @see [[m:Module#module_eval]], [[m:Kernel.#eval]]
 
 #@until 1.8.0
-==== �᥽�å�����Υͥ��Ȥ˴ؤ�������
-�᥽�å��������� instance_eval �Υ֥��å�����Ѥ��ƥ�
-���å������Ԥ��ȡ�"nested method definition" �ȥ���ѥ��륨�顼
-�ˤʤ�ޤ�������ϡ����ߤ� ruby �ѡ��������¤Ǥ���
+==== メソッド定義のネストに関する注意
+メソッド定義の中で instance_eval のブロックを使用してメ
+ソッド定義を行うと、"nested method definition" とコンパイルエラー
+になります。これは、現在の ruby パーサの制限です。
 
     def foo
        instance_eval {
-         def bar            # <- �ͥ��Ȥ����᥽�å������Ƚ�Ǥ����
+         def bar            # <- ネストしたメソッド定義と判断される
            "bar"
          end
        }
@@ -1503,7 +1503,7 @@ obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
 
     #=> -:4: nested method definition
 
-ʸ������Ϥ�������Ȥ��С��������¤ϲ���Ǥ��ޤ���
+文字列で渡す形式を使えば、この制限は回避できます。
 
     def foo
        instance_eval %Q{
@@ -1513,16 +1513,16 @@ obj.instance_of?(c) ����Ω������ˤϡ���� obj.kind_of?(c) ����Ω���ޤ���
        }
     end
 
-    # foo ��¹Ԥ���ȴؿ�(��̩�ˤ� foo �Υ쥷���ФΥ᥽�å�) bar
-    # ���������
+    # foo を実行すると関数(厳密には foo のレシーバのメソッド) bar
+    # を定義する
     foo
     p bar
     #=> "bar"
 
-Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
-����ˡ� instance_eval ��Ȥ�ʤ�
-�Ƥ�ʲ���Ʊ�����Ȥ��Ǥ��ޤ��� ��̩�ˤϰۤʤ�ޤ���
-[[ref:d:spec/def#nest_method]] �򻲾Ȥ��Ƥ���������
+Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなくなっています。
+さらに、 instance_eval を使わなく
+ても以下で同じことができます。 厳密には異なります。
+[[ref:d:spec/def#nest_method]] を参照してください。
 
     def foo
        def bar
@@ -1537,7 +1537,7 @@ Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
 
 --- nil? -> bool
 
-�쥷���Ф� nil �Ǥ���п����֤��ޤ���
+レシーバが nil であれば真を返します。
 
   p false.nil? #=> false
   p nil.nil? #=> true
@@ -1549,7 +1549,7 @@ Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
 --- type -> Class
 #@end
 
-�쥷���ФΥ��饹���֤��ޤ���
+レシーバのクラスを返します。
 
   p "ruby".class #=> String
   p 999999999999999.class #=> Bignum
@@ -1562,10 +1562,10 @@ Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
 
 --- taint -> self
 
-���֥������ȤΡֱ����ޡ����פ򥻥åȤ��ޤ���
+オブジェクトの「汚染マーク」をセットします。
 
-�Ķ��ѿ���[[c:ENV]]��������ʸ����ˤʤɰ����Υ��֥������ȤϺǽ餫���������Ƥ��ޤ���
-���֥������Ȥα����˴ؤ��Ƥ�[[d:spec/safelevel]]�򻲾Ȥ��Ƥ���������
+環境変数（[[c:ENV]]で得られる文字列）など一部のオブジェクトは最初から汚染されています。
+オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
   $SAFE = 1
   
@@ -1587,9 +1587,9 @@ Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
 
 --- tainted? -> bool
 
-���֥������ȤΡֱ����ޡ����פ����åȤ���Ƥ���������֤��ޤ���
+オブジェクトの「汚染マーク」がセットされている時真を返します。
 
-���֥������Ȥα����˴ؤ��Ƥ�[[d:spec/safelevel]]�򻲾Ȥ��Ƥ���������
+オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
   p String.new.tainted? #=> false
   p ENV['OS'].tainted? #=> true
@@ -1598,35 +1598,35 @@ Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
 
 --- untaint -> self
 
-���֥������ȤΡֱ����ޡ����פ�������ޤ���
+オブジェクトの「汚染マーク」を取り除きます。
 
-�����ޡ�������������Ȥˤ��������ϥץ�����ޤ���Ǥ���餦ɬ�פ�
-����ޤ���
+汚染マークを取り除くことによる危険性はプログラマが責任を負う必要が
+あります。
 
-���֥������Ȥα����˴ؤ��Ƥ�[[d:spec/safelevel]]�򻲾Ȥ��Ƥ���������
+オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
-@raise SecurityError �������ƥ���٥뤬3�ʾ�λ��ˤ��Υ᥽�åɤ���Ѥ����ȯ�����ޤ���
+@raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
 #@since 1.9.1
 --- trust -> self
 #@todo
 
-���֥������ȤΡ�untrust�ޡ����פ�������ޤ���
+オブジェクトの「untrustマーク」を取り除きます。
 
 @see [[m:Object#untrusted?]],[[m:Object#untrust]]
 
 --- untrusted? -> bool
 #@todo
 
-���֥������ȤΡ�untrust�ޡ����פ����åȤ���Ƥ���������֤��ޤ���
+オブジェクトの「untrustマーク」がセットされている時真を返します。
 
 @see [[m:Object#trust]],[[m:Object#untrust]]
 
 --- untrust -> self
 #@todo
 
-���֥������ȤΡ�untrust�ޡ����פ򥻥åȤ��ޤ���
+オブジェクトの「untrustマーク」をセットします。
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
 #@end
@@ -1635,23 +1635,23 @@ Ruby 1.7 �ʹ�, �᥽�å�����Υͥ��Ȥ˴ؤ��Ƥ������¤Ϥʤ��ʤäƤ��ޤ���
 
 --- initialize(*args, &block) -> object
 
-�桼��������饹�Υ��֥������Ƚ�����᥽�åɡ�
+ユーザ定義クラスのオブジェクト初期化メソッド。
 
-���Υ᥽�åɤ� [[m:Class#new]] ���鿷�����������줿����
-�������Ȥν�����Τ���˸ƤӽФ���ޤ���¾�θ���Υ��󥹥ȥ饯�����������ޤ���
-�ǥե���Ȥ�ư��ǤϤʤˤ⤷�ޤ���
+このメソッドは [[m:Class#new]] から新しく生成されたオブ
+ジェクトの初期化のために呼び出されます。他の言語のコンストラクタに相当します。
+デフォルトの動作ではなにもしません。
 
-initialize �ˤ�
-[[m:Class#new]] ��Ϳ����줿���������Τޤ��Ϥ���ޤ���
+initialize には
+[[m:Class#new]] に与えられた引数がそのまま渡されます。
 
-���֥��饹�ǤϤ��Υ᥽�åɤ�ɬ�פ˱����ƺ��������뤳��
-�����Ԥ���Ƥ��ޤ���
+サブクラスではこのメソッドを必要に応じて再定義されること
+が期待されています。
 
-initialize �Ȥ���̾���Υ᥽�åɤϼ�ưŪ�� private �����ꤵ��
-�ޤ���
+initialize という名前のメソッドは自動的に private に設定され
+ます。
 
-@param args ��������ΰ����Ǥ���
-@param block ��������Υ֥��å������Ǥ���ɬ�ܤǤϤ���ޤ���
+@param args 初期化時の引数です。
+@param block 初期化時のブロック引数です。必須ではありません。
 
   class Foo
     def initialize name
@@ -1679,39 +1679,39 @@ initialize �Ȥ���̾���Υ᥽�åɤϼ�ưŪ�� private �����ꤵ��
 #@since 1.8.0
 --- initialize_copy(obj) -> object
 
-(��ĥ�饤�֥��ˤ��) �桼��������饹�Υ��֥������ȥ��ԡ��ν�����᥽�åɡ�
+(拡張ライブラリによる) ユーザ定義クラスのオブジェクトコピーの初期化メソッド。
 
-���Υ᥽�åɤ� self �� obj �����Ƥ��֤������ޤ�������
-����self �Υ��󥹥����ѿ����ðۥ᥽�åɤ��Ѳ����ޤ���
-[[m:Object#clone]], [[m:Object#dup]]�������ǻȤ��Ƥ��ޤ���
+このメソッドは self を obj の内容で置き換えます。ただ
+し、self のインスタンス変数や特異メソッドは変化しません。
+[[m:Object#clone]], [[m:Object#dup]]の内部で使われています。
 
-initialize_copy �ϡ�Ruby ���󥿥ץ꥿���Τ����ʤ�����򥳥ԡ����뤿
-��˻���(���)����ޤ����㤨�� C ����ǥ��饹����������硢����
-�򥤥󥹥����ѿ����ݻ������ʤ���礬����ޤ������������ä�������
-��� initialize_copy �ǥ��ԡ�����褦������Ƥ������Ȥǡ�dup �� clone
-����������ɬ�פ��ʤ��ʤ�ޤ���
+initialize_copy は、Ruby インタプリタが知り得ない情報をコピーするた
+めに使用(定義)されます。例えば C 言語でクラスを実装する場合、情報
+をインスタンス変数に保持させない場合がありますが、そういった内部情
+報を initialize_copy でコピーするよう定義しておくことで、dup や clone
+を再定義する必要がなくなります。
 
-�ǥե���Ȥ� Object#initialize_copy �ϡ� freeze �����å�����ӷ��Υ����å���Ԥ� self 
-���֤������Υ᥽�åɤǤ���
+デフォルトの Object#initialize_copy は、 freeze チェックおよび型のチェックを行い self 
+を返すだけのメソッドです。
 
-initialize_copy �Ȥ���̾���Υ᥽�åɤ�
-��ưŪ�� private �����ꤵ��ޤ���
+initialize_copy という名前のメソッドは
+自動的に private に設定されます。
 
-@raise TypeError �쥷���Ф� freeze ����Ƥ��뤫��obj �Υ��饹���쥷����
-  �Υ��饹�Ȱۤʤ����ȯ�����ޤ���
+@raise TypeError レシーバが freeze されているか、obj のクラスがレシーバ
+  のクラスと異なる場合に発生します。
 @see [[m:Object#clone]],[[m:Object#dup]]
 
-�ʲ�����Ȥ��ơ�dup �� clone �����Υ᥽�åɤ�ɤΤ褦�����Ѥ��Ƥ��뤫�򼨤��ޤ���
+以下に例として、dup や clone がこのメソッドをどのように利用しているかを示します。
 
-obj.dup �ϡ������������������֥������Ȥ��Ф���
-initialize_copy ��Ƥ�
+obj.dup は、新たに生成したオブジェクトに対して
+initialize_copy を呼び
 
     obj2 = obj.class.allocate
     obj2.initialize_copy(obj)
 
-obj2 ���Ф��Ƥ���� obj �α������֡����󥹥����ѿ����ե����ʥ饤
-���򥳥ԡ����뤳�Ȥ�ʣ������ޤ��� obj.clone �ϡ������
-�ðۥ᥽�åɤΥ��ԡ���Ԥ��ޤ���
+obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
+ザをコピーすることで複製を作ります。 obj.clone は、さらに
+特異メソッドのコピーも行います。
 
     obj = Object.new
     class <<obj
@@ -1751,11 +1751,11 @@ obj2 ���Ф��Ƥ���� obj �α������֡����󥹥����ѿ����ե����ʥ饤
 
 --- remove_instance_variable(name) -> object
 
-���֥������Ȥ��饤�󥹥����ѿ� name ������������Υ���
-�����ѿ������ꤵ��Ƥ����ͤ��֤��ޤ���
+オブジェクトからインスタンス変数 name を取り除き、そのインス
+タンス変数に設定されていた値を返します。
 
-@param name ������륤�󥹥����ѿ���̾���򥷥�ܥ뤫ʸ����ǻ��ꤷ�ޤ���
-@raise NameError ���֥������Ȥ����󥹥����ѿ� name ������ʤ�����ȯ�����ޤ���
+@param name 削除するインスタンス変数の名前をシンボルか文字列で指定します。
+@raise NameError オブジェクトがインスタンス変数 name を持たない場合に発生します。
 
     class Foo
       def foo
@@ -1770,12 +1770,12 @@ obj2 ���Ф��Ƥ���� obj �α������֡����󥹥����ѿ����ե����ʥ饤
 
 --- singleton_method_added(name) -> object
 
-�ðۥ᥽�åɤ��ɲä��줿���˥��󥿥ץ꥿����ƤӽФ���ޤ���
+特異メソッドが追加された時にインタプリタから呼び出されます。
 
-�̾�Υ᥽�åɤ��ɲä��Ф���եå��ˤ�
-[[m:Module#method_added]]��Ȥ��ޤ���
+通常のメソッドの追加に対するフックには
+[[m:Module#method_added]]を使います。
 
-@param name �ɲä��줿�᥽�å�̾�� [[c:Symbol]] ���Ϥ���ޤ���
+@param name 追加されたメソッド名が [[c:Symbol]] で渡されます。
 
     class Foo
       def singleton_method_added(name)
@@ -1794,13 +1794,13 @@ obj2 ���Ф��Ƥ���� obj �α������֡����󥹥����ѿ����ե����ʥ饤
 #@since 1.8.0
 --- singleton_method_removed(name) -> object
 
-�ðۥ᥽�åɤ� [[m:Module#remove_method]] ��
-��������줿���˥��󥿥ץ꥿����ƤӽФ���ޤ���
+特異メソッドが [[m:Module#remove_method]] に
+より削除された時にインタプリタから呼び出されます。
 
-�̾�Υ᥽�åɤκ�����Ф���եå��ˤ�
-[[m:Module#method_removed]]��Ȥ��ޤ���
+通常のメソッドの削除に対するフックには
+[[m:Module#method_removed]]を使います。
 
-@param name ������줿�᥽�å�̾�� [[c:Symbol]] ���Ϥ���ޤ���
+@param name 削除されたメソッド名が [[c:Symbol]] で渡されます。
 
     class Foo
       def singleton_method_removed(name)
@@ -1824,13 +1824,13 @@ obj2 ���Ф��Ƥ���� obj �α������֡����󥹥����ѿ����ե����ʥ饤
 #@since 1.8.0
 --- singleton_method_undefined(name) -> object
 
-�ðۥ᥽�åɤ� [[m:Module#undef_method]] �ޤ���
-undef �ˤ��̤����ˤ��줿���˥��󥿥ץ꥿����ƤӽФ���ޤ���
+特異メソッドが [[m:Module#undef_method]] または
+undef により未定義にされた時にインタプリタから呼び出されます。
 
-�̾�Υ᥽�åɤ�̤������Ф���եå��ˤ�
-[[m:Module#method_undefined]] ��Ȥ��ޤ���
+通常のメソッドの未定義に対するフックには
+[[m:Module#method_undefined]] を使います。
 
-@param name ̤����ˤ��줿�᥽�å�̾�� [[c:Symbol]] ���Ϥ���ޤ���
+@param name 未定義にされたメソッド名が [[c:Symbol]] で渡されます。
 
     class Foo
       def singleton_method_undefined(name)
@@ -1858,12 +1858,12 @@ undef �ˤ��̤����ˤ��줿���˥��󥿥ץ꥿����ƤӽФ���ޤ���
 #@since 1.8.7
 --- instance_exec(*args) {|*vars| ... } -> object
 
-Ϳ����줿�֥��å���쥷���ФΥ���ƥ����ȤǼ¹Ԥ��ޤ���
+与えられたブロックをレシーバのコンテキストで実行します。
 
-�֥��å��¹���ϡ� self ���쥷���ФΥ���ƥ����Ȥˤʤ�Τ�
-�쥷���Фλ��ĥ��󥹥����ѿ��˥����������뤳�Ȥ��Ǥ��ޤ���
+ブロック実行中は、 self がレシーバのコンテキストになるので
+レシーバの持つインスタンス変数にアクセスすることができます。
 
-@param args �֥��å��ѥ�᡼�����Ϥ��ͤǤ���
+@param args ブロックパラメータに渡す値です。
 
    class KlassWithSecret
      def initialize
@@ -1871,7 +1871,7 @@ undef �ˤ��̤����ˤ��줿���˥��󥿥ץ꥿����ƤӽФ���ޤ���
      end
    end
    k = KlassWithSecret.new
-   # �ʲ��� x �ˤ� 5 ���Ϥ����
+   # 以下で x には 5 が渡される
    k.instance_exec(5) {|x| @secret + x }   #=> 104
 
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:Object#instance_eval]]
@@ -1880,13 +1880,13 @@ undef �ˤ��̤����ˤ��줿���˥��󥿥ץ꥿����ƤӽФ���ޤ���
 #@since 1.9.2
 --- singleton_class -> Class
 
-�쥷���Ф��ðۥ��饹���֤��ޤ���
-�ޤ��ðۥ��饹���ʤ���С��������������ޤ���
+レシーバの特異クラスを返します。
+まだ特異クラスがなければ、新しく作成します。
 
-�쥷���Ф� nil �� true �� false �ʤ顢���줾�� NilClass, TrueClass,
-FalseClass ���֤��ޤ���
+レシーバが nil か true か false なら、それぞれ NilClass, TrueClass,
+FalseClass を返します。
 
-@raise TypeError �쥷���Ф� Fixnum �� Symbol �ξ���ȯ�����ޤ���
+@raise TypeError レシーバが Fixnum か Symbol の場合に発生します。
 
    Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
    String.singleton_class      #=> #<Class:String>

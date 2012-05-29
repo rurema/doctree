@@ -4,43 +4,43 @@
 
 --- A1 -> Integer
 
-¥­¡¼¥Ñ¥Ã¥É¤Îº¸¾å¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚­ãƒ¼ãƒ‘ãƒƒãƒ‰ã®å·¦ä¸Šã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- A3 -> Integer
 
-¥­¡¼¥Ñ¥Ã¥É¤Î±¦¾å¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚­ãƒ¼ãƒ‘ãƒƒãƒ‰ã®å³ä¸Šã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- B2 -> Integer
 
-¥­¡¼¥Ñ¥Ã¥É¤ÎÃæ¿´¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚­ãƒ¼ãƒ‘ãƒƒãƒ‰ã®ä¸­å¿ƒã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- BACKSPACE -> Integer
 
-¥Ð¥Ã¥¯¥¹¥Ú¡¼¥¹¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- BEG -> Integer
 #@todo ???
-BEG ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+BEG ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- BREAK -> Integer
 
-BREAK ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+BREAK ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- BTAB -> Integer
 
-Back TAB ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Back TAB ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- C1 -> Integer
 
-¥­¡¼¥Ñ¥Ã¥É¤Îº¸²¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚­ãƒ¼ãƒ‘ãƒƒãƒ‰ã®å·¦ä¸‹ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- C3 -> Integer
 
-¥­¡¼¥Ñ¥Ã¥É¤Î±¦²¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚­ãƒ¼ãƒ‘ãƒƒãƒ‰ã®å³ä¸‹ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- CANCEL -> Integer
 
-Cancel ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Cancel ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- CATAB -> Integer
 
@@ -48,23 +48,23 @@ Clear all tabs
 
 --- CLEAR -> Integer
 
-¥¹¥¯¥ê¡¼¥ó¤Î¥¯¥ê¥¢¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ã‚¯ãƒªã‚¢ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- CLOSE -> Integer
 
-Close ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Close ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- COMMAND -> Integer
 
-Command ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Command ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- COPY -> Integer
 
-Copy ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Copy ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- CREATE -> Integer
 
-Create ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Create ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- CTAB -> Integer
 
@@ -72,319 +72,319 @@ Clear tab
 
 --- DC -> Integer
 #@todo ???
-Delete ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Delete ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- DL -> Integer
 
-¹Ô¤òºï½ü¤¹¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+è¡Œã‚’å‰Šé™¤ã™ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- DOWN -> Integer
 
-²¼Ìð°õ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ä¸‹çŸ¢å°ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- EIC -> Integer
 
-ÁÞÆþ¥â¡¼¥É¤ËÆþ¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+æŒ¿å…¥ãƒ¢ãƒ¼ãƒ‰ã«å…¥ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- END -> Integer
 
-End ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+End ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- ENTER -> Integer
 
-Enter ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Enter ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- EOL -> Integer
 
-¹ÔËö¤Þ¤Ç¥¯¥ê¥¢¤¹¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+è¡Œæœ«ã¾ã§ã‚¯ãƒªã‚¢ã™ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- EOS -> Integer
 
-¥¹¥¯¥ê¡¼¥ó¤ÎËöÈø¤Þ¤Ç¥¯¥ê¥¢¤¹¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æœ«å°¾ã¾ã§ã‚¯ãƒªã‚¢ã™ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- EXIT -> Integer
 
-Exit ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Exit ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F0 -> Integer
 
-F0 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F0 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F1 -> Integer
 
-F1 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F1 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F10 -> Integer
 
-F10 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F10 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F11 -> Integer
 
-F11 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F11 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F12 -> Integer
 
-F12 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F12 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F13 -> Integer
 
-F13 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F13 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F14 -> Integer
 
-F14 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F14 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F15 -> Integer
 
-F15 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F15 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F16 -> Integer
 
-F16 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F16 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F17 -> Integer
 
-F17 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F17 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F18 -> Integer
 
-F18 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F18 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F19 -> Integer
 
-F19 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F19 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F2 -> Integer
 
-F2 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F2 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F20 -> Integer
 
-F20 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F20 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F21 -> Integer
 
-F21 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F21 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F22 -> Integer
 
-F22 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F22 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F23 -> Integer
 
-F23 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F23 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F24 -> Integer
 
-F24 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F24 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F25 -> Integer
 
-F25 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F25 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F26 -> Integer
 
-F26 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F26 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F27 -> Integer
 
-F27 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F27 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F28 -> Integer
 
-F28 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F28 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F29 -> Integer
 
-F29 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F29 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F3 -> Integer
 
-F3 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F3 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F30 -> Integer
 
-F30 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F30 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F31 -> Integer
 
-F31 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F31 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F32 -> Integer
 
-F32 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F32 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F33 -> Integer
 
-F33 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F33 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F34 -> Integer
 
-F34 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F34 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F35 -> Integer
 
-F35 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F35 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F36 -> Integer
 
-F36 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F36 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F37 -> Integer
 
-F37 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F37 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F38 -> Integer
 
-F38 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F38 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F39 -> Integer
 
-F39 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F39 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F4 -> Integer
 
-F4 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F4 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F40 -> Integer
 
-F40 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F40 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F41 -> Integer
 
-F41 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F41 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F42 -> Integer
 
-F42 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F42 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F43 -> Integer
 
-F43 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F43 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F44 -> Integer
 
-F44 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F44 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F45 -> Integer
 
-F45 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F45 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F46 -> Integer
 
-F46 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F46 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F47 -> Integer
 
-F47 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F47 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F48 -> Integer
 
-F48 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F48 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F49 -> Integer
 
-F49 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F49 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F5 -> Integer
 
-F5 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F5 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F50 -> Integer
 
-F50 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F50 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F51 -> Integer
 
-F51 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F51 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F52 -> Integer
 
-F52 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F52 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F53 -> Integer
 
-F53 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F53 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F54 -> Integer
 
-F54 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F54 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F55 -> Integer
 
-F55 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F55 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F56 -> Integer
 
-F56 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F56 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F57 -> Integer
 
-F57 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F57 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F58 -> Integer
 
-F58 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F58 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F59 -> Integer
 
-F59 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F59 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F6 -> Integer
 
-F6 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F6 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F60 -> Integer
 
-F60 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F60 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F61 -> Integer
 
-F61 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F61 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F62 -> Integer
 
-F62 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F62 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F63 -> Integer
 
-F63 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F63 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F7 -> Integer
 
-F7 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F7 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F8 -> Integer
 
-F8 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F8 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- F9 -> Integer
 
-F9 ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+F9 ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- FIND -> Integer
 
-Find ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Find ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- HELP -> Integer
 
-Help ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Help ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- HOME -> Integer
 
-Home ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Home ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- IC -> Integer
 
-Ê¸»ú¤òÁÞÆþ¤¹¤ë¤«ÁÞÆþ¥â¡¼¥É¤ËÆþ¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+æ–‡å­—ã‚’æŒ¿å…¥ã™ã‚‹ã‹æŒ¿å…¥ãƒ¢ãƒ¼ãƒ‰ã«å…¥ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- IL -> Integer
 
-¹Ô¤òÁÞÆþ¤¹¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+è¡Œã‚’æŒ¿å…¥ã™ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- LEFT -> Integer
 
-º¸Ìð°õ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+å·¦çŸ¢å°ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- LL -> Integer
 #@todo
@@ -392,19 +392,19 @@ Home down or bottom (lower left)
 
 --- MARK -> Integer
 
-Mark ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Mark ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- MAX -> Integer
 
-curses ¤ÇÍøÍÑ²ÄÇ½¤Ê¥­¡¼¤òÉ½¤¹Äê¿ô¤ÎºÇÂçÃÍ¤Ç¤¹¡£
+curses ã§åˆ©ç”¨å¯èƒ½ãªã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã®æœ€å¤§å€¤ã§ã™ã€‚
 
 --- MESSAGE -> Integer
 
-Message ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Message ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- MIN -> Integer
 
-curses ¤ÇÍøÍÑ²ÄÇ½¤Ê¥­¡¼¤òÉ½¤¹Äê¿ô¤ÎºÇ¾®ÃÍ¤Ç¤¹¡£
+curses ã§åˆ©ç”¨å¯èƒ½ãªã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã®æœ€å°å€¤ã§ã™ã€‚
 
 --- MOUSE -> Integer
 #@todo
@@ -412,75 +412,75 @@ Mouse event read
 
 --- MOVE -> Integer
 
-Move ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Move ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- NEXT -> Integer
 
-Next object ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Next object ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- NPAGE -> Integer
 
-Next Page ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Next Page ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- OPEN -> Integer
 
-Open ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Open ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- OPTIONS -> Integer
 
-Opetions ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Opetions ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- PPAGE -> Integer
 
-Previous Page ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Previous Page ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- PREVIOUS -> Integer
 
-Previous object ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Previous object ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- PRINT -> Integer
 
-Print ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Print ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- REDO -> Integer
 
-Redo ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Redo ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- REFERENCE -> Integer
 
-Reference ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Reference ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- REFRESH -> Integer
 
-Refresh ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Refresh ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- REPLACE -> Integer
 
-Replace ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Replace ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- RESET -> Integer
 
-Reset ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Reset ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- RESIZE -> Integer
 
-¥¹¥¯¥ê¡¼¥ó¤¬¥ê¥µ¥¤¥º¤µ¤ì¤¿¤³¤È¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãŒãƒªã‚µã‚¤ã‚ºã•ã‚ŒãŸã“ã¨ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- RESTART -> Integer
 
-Restart ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Restart ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- RESUME -> Integer
 
-Resume ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Resume ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- RIGHT -> Integer
 
-±¦Ìð°õ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+å³çŸ¢å°ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SAVE -> Integer
 
-Save ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Save ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SBEG -> Integer
 
@@ -488,141 +488,141 @@ Shifted beginning key
 
 --- SCANCEL -> Integer
 
-Shift + Cancel ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Cancel ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SCOMMAND -> Integer
 
-Shift + Command ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Command ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SCOPY -> Integer
 
-Shift + Copy ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Copy ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SCREATE -> Integer
 
-Shift + Create ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Create ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SDC -> Integer
 #@todo ???
-Shift + Delete ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Delete ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SDL -> Integer
 
-Shift + ¹Ô¤òºï½ü¤¹¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + è¡Œã‚’å‰Šé™¤ã™ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SELECT -> Integer
 
-Select ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Select ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SEND -> Integer
 
-Shift + End ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + End ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SEOL -> Integer
 
-Shift + ¹ÔËö¤Þ¤Ç¥¯¥ê¥¢¤¹¤ë¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + è¡Œæœ«ã¾ã§ã‚¯ãƒªã‚¢ã™ã‚‹ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SEXIT -> Integer
 
-Shift + Exit ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Exit ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SF -> Integer
 
-Á°¤Ë°ì¹Ô¥¹¥¯¥í¡¼¥ë¤¹¤ë¤³¤È¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+å‰ã«ä¸€è¡Œã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ã“ã¨ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SFIND -> Integer
 
-Shift + Find ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Find ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SHELP -> Integer
 
-Shift + Help ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Help ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SHOME -> Integer
 
-Shift + Home ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Home ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SIC -> Integer
 #@todo ???
-Shift + ... ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + ... ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SLEFT -> Integer
 
-Shift + º¸Ìð°õ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + å·¦çŸ¢å°ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SMESSAGE -> Integer
 
-Shift + Message ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Message ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SMOVE -> Integer
 
-Shift + Move ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Move ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SNEXT -> Integer
 
-Shift + Next ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Next ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SOPTIONS -> Integer
 
-Shift + Options ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Options ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SPREVIOUS -> Integer
 
-Shift + Previous ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Previous ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SPRINT -> Integer
 
-Shift + Print ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Print ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SR -> Integer
 
-¸å¤Ë°ì¹Ô¥¹¥¯¥í¡¼¥ë¤¹¤ë¤³¤È¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+å¾Œã«ä¸€è¡Œã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ã“ã¨ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SREDO -> Integer
 
-Shift + Redo ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Redo ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SREPLACE -> Integer
 
-Shift + Replace ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Replace ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SRESET -> Integer
 
-Shift + Reset ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Reset ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SRIGHT -> Integer
 
-Shift + ±¦Ìð°õ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + å³çŸ¢å°ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SRSUME -> Integer
 
-Shift + Resume ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Resume ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SSAVE -> Integer
 
-Shift + Save ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Save ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SSUSPEND -> Integer
 
-Shift + Suspend ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Suspend ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- STAB -> Integer
 
-Shift + TAB ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + TAB ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SUNDO -> Integer
 
-Shift + Undo ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Shift + Undo ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- SUSPEND -> Integer
 
-Suspend ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Suspend ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- UNDO -> Integer
 
-Undo ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+Undo ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 
 --- UP -> Integer
 
-¾åÌð°õ¥­¡¼¤òÉ½¤¹Äê¿ô¤Ç¤¹¡£
+ä¸ŠçŸ¢å°ã‚­ãƒ¼ã‚’è¡¨ã™å®šæ•°ã§ã™ã€‚
 

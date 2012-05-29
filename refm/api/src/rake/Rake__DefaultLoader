@@ -1,11 +1,11 @@
 = class Rake::DefaultLoader
 
-[[m:Kernel#import]] �ǻ��Ѥ���ǥե���ȤΥ��������Ǥ���
+[[m:Kernel#import]] で使用するデフォルトのローダーです。
 
 == Public Instance Methods
 
 --- load(filename)
 
-Ϳ����줿�ե����������ɤ��ޤ���
+与えられたファイルをロードします。
 
-@param filename �����ɤ���ե�����̾����ꤷ�ޤ���
+@param filename ロードするファイル名を指定します。

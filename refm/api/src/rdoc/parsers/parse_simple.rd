@@ -5,10 +5,10 @@ require rdoc/parser
 #@# require rdoc/markup/simple_markup/preprocess
 #@end
 
-�����������ɰʳ��Υե��������Ϥ��뤿��Υ��֥饤�֥��Ǥ���
+ソースコード以外のファイルを解析するためのサブライブラリです。
 
-�ե���������Ƥ��٤Ƥ� 1 �Ĥ��礭�ʥ����ȤȤ��ƽ������ޤ������������ե�
-�������Ƭ�� # �ǻϤޤäƤ�����硢��Ƭ�ԤϺ������ޤ���
+ファイルの内容すべてを 1 つの大きなコメントとして処理します。ただし、ファ
+イルの先頭が # で始まっていた場合、先頭行は削除されます。
 
 #@since 1.9.1
 = class RDoc::Parser::Simple < RDoc::Parser
@@ -16,7 +16,7 @@ require rdoc/parser
 = class RDoc::SimpleParser
 #@end
 
-�����������ɰʳ��Υե��������Ϥ��뤿��Υ��饹�Ǥ���
+ソースコード以外のファイルを解析するためのクラスです。
 
 == Class Methods
 
@@ -26,36 +26,36 @@ require rdoc/parser
 --- new(top_level, file_name, body, options, stats) -> RDoc::SimpleParser
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
-@param body ���Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param body 内容を文字列で指定します。
 
 #@since 1.9.1
-@param options [[c:RDoc::Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:RDoc::Options]] オブジェクトを指定します。
 #@else
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 #@end
 
-@param stats [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 
 == Instance Methods
 
 --- scan -> RDoc::TopLevel
 
-���Ȥλ��� [[c:RDoc::TopLevel]] �Υ����ȤȤ��ƥե���������Ƥ���Ϥ�
-�ޤ���
+自身の持つ [[c:RDoc::TopLevel]] のコメントとしてファイルの内容を解析し
+ます。
 
-@return [[c:RDoc::TopLevel]] ���֥������Ȥ��֤��ޤ���
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。
 
 --- remove_private_comments(comment) -> String
 
-��Ƭ�� "--" ���� "++" �ǰϤޤ줿�����Ȥ� comment ������������̤���
-���ޤ���
+行頭の "--" から "++" で囲まれたコメントを comment から削除した結果を返
+します。
 
-@param comment �оݤ�ʸ�������ꤷ�ޤ���
+@param comment 対象の文字列を指定します。
 
-@return �����Ȥ�������줿ʸ������֤��ޤ���
+@return コメントが削除された文字列を返します。

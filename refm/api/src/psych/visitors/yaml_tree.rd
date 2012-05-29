@@ -97,5 +97,5 @@ YAMLTree builds a YAML ast given a ruby object.  For example:
 --- visit_Symbol(o)
 #@todo
 
-#@# psych.so ¤Ë¤¢¤ë private_iv_get ¥á¥½¥Ã¥É¤Ï private ¥á¥½¥Ã¥É¤Î¤¿¤á¾Ê
-#@# Î¬¡£
+#@# psych.so ã«ã‚ã‚‹ private_iv_get ãƒ¡ã‚½ãƒƒãƒ‰ã¯ private ãƒ¡ã‚½ãƒƒãƒ‰ã®ãŸã‚çœ
+#@# ç•¥ã€‚

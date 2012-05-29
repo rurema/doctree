@@ -15,7 +15,7 @@ require xsd/qname
 --- Version
 #@todo
 
-д│д╬ещеде╓ещеъд╬е╨б╝е╕ечеєдЄ╔╜д╣─ъ┐Їбг
+уБУуБоуГйуВдуГЦуГйуГкуБоуГРуГ╝уВ╕уГзуГ│уВТшбиуБЩхоЪцХ░уАВ
 
 
 = class WSDL::Error < StandardError

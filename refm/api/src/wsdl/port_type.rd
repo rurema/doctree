@@ -19,12 +19,12 @@ require xsd/namedelements
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- operations
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo

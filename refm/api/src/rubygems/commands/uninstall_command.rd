@@ -2,7 +2,7 @@ require rubygems/command
 require rubygems/version_option
 require rubygems/uninstaller
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¢¥ó¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 Usage: gem uninstall GEMNAME [GEMNAME ...] [options]
   Options:
@@ -17,9 +17,9 @@ Usage: gem uninstall GEMNAME [GEMNAME ...] [options]
         --platform PLATFORM          Specify the platform of gem to uninstall
 #@include(common_options)
   Arguments:
-    GEMNAME       ¥¢¥ó¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸Ì¾¤ò»ØÄê¤·¤Þ¤¹¡£
+    GEMNAME       ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸åã‚’æŒ‡å®šã—ã¾ã™ã€‚
   Summary:
-    Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¢¥ó¥¤¥ó¥¹¥È¡¼¥ë¤·¤Þ¤¹
+    Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
   Defaults:
     --version '>= 0' --no-force --install-dir /usr/lib/ruby/gems/1.8
 
@@ -27,5 +27,5 @@ Usage: gem uninstall GEMNAME [GEMNAME ...] [options]
 = class Gem::Commands::UninstallCommand < Gem::Command
 include Gem::VersionOption
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¥¢¥ó¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 

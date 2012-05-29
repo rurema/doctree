@@ -1,406 +1,406 @@
 = class OpenSSL::BN < Object
 include Comparable
 
-OpenSSL������Ѥ����¿��Ĺ�������饹�Ǥ���
+OpenSSL内で利用される多倍長整数クラスです。
 
-�̾�¿��Ĺ���������Ѥ���ˤ� [[c:Bignum]] ���Ѥ��Ƥ���������
+通常多倍長整数を利用するには [[c:Bignum]] を用いてください。
 
 == Class Methods
 
 --- new(str, base=10) -> OpenSSL::BN
 
-ʸ�����¿��Ĺ�������֥�������([[c:OpenSSL::BN]])���������ޤ���
+文字列を多倍長整数オブジェクト([[c:OpenSSL::BN]])を生成します。
 
-base �ˤ�ä��Ѵ��δ������뤳�Ȥ��Ǥ��ޤ���
-10, 16 �����Ѳ�ǽ�Ǥ���
+base によって変換の基数を決めることができます。
+10, 16 が利用可能です。
 
-2����ꤹ���ʸ����� big-endian �����̵�������ΥХ��ʥ���Ȥߤʤ���
-�Ѵ����ޤ���
+2を指定すると文字列を big-endian の符号無し整数のバイナリ列とみなして
+変換します。
 
-�ޤ���base �� 0 ����ꤹ��ȡ�MPI�Υե����ޥåȤ����Ѵ����ޤ���
-(�ǽ��4byte��big-endian�ǥǡ���Ĺ��ɽ�路�����θ�ˤ��Υǡ���Ĺ�ΥХ���
-��(big-endian)�ǿ��ͤ�ɽ�����Ǿ�̥ӥåȤ�Ω�äƤ�������)��
+また、base に 0 を指定すると、MPIのフォーマットから変換します。
+(最初の4byteはbig-endianでデータ長を表わし、その後にそのデータ長のバイト
+列(big-endian)で数値を表す。最上位ビットが立っていると負数)。
 
-��:
+例:
   OpenSSL::BN.new("-241") # => -241
   OpenSSL::BN.new("ff00",16) # => 65280
   OpenSSL::BN.new("\x81",2) # => 129
   OpenSSL::BN.new("\xff\x81",2) # => 65409
   OpenSSL::BN.new("\x00\x00\x00\x02\x00\x81", 0) # => 129
   OpenSSL::BN.new("\x00\x00\x00\x02\x80\x81", 0) # => -129
-@param str ������ɽ��ʸ����
-@param base ʸ���󤫤��������Ѵ�����Ȥ��δ��
-@raise OpenSSL::BNError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@param str 整数を表す文字列
+@param base 文字列から整数に変換するときの基数
+@raise OpenSSL::BNError 変換に失敗した場合に発生します
 
 --- generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
-������(�������Ū)�� bits �ӥåȤ��ǿ����֤��ޤ���
+ランダム(疑似乱数的)な bits ビットの素数を返します。
 
-�Ź�Ū�˰�̣�Τ����ǿ��Ͻ�ʬ�礭���ʤ��Ȥ����ʤ��Τǡ�
-bits ��������������ϴ��Ԥ����̤��֤��ޤ���
+暗号的に意味のある素数は十分大きくないといけないので、
+bits が小さすぎる場合は期待する結果を返しません。
 
-safe �����Ǥ���С��ְ����ʡ��ǿ�((p-1)/2���ǿ��Ǥ����ǿ�p)��
-�֤��ޤ���
+safe が真であれば、「安全な」素数((p-1)/2が素数である素数p)を
+返します。
 
-add ���������Ϥ��ȡ� p % add == rem �Ǥ���褦��
-�ǿ�p�Τߤ��֤��ޤ���rem �� nil �ξ��� rem=1�ȸ��ʤ��ޤ���
+add に整数を渡すと、 p % add == rem であるような
+素数pのみを返します。rem が nil の場合は rem=1と見なします。
 
-@param bits ��������������ǿ��Υӥåȿ�
-@param safe true �ǰ������ǿ��Τߤ���������
-@param add ���������ǿ��ξ�;�ξ��
-@param rem ���������ǿ��ξ�;�ξ��
-@raise OpenSSL::BNError �ǿ��������˼��Ԥ�������ȯ�����ޤ�
+@param bits 生成するランダム素数のビット数
+@param safe true で安全な素数のみを生成する
+@param add 生成する素数の剰余の条件
+@param rem 生成する素数の剰余の条件
+@raise OpenSSL::BNError 素数の生成に失敗した場合に発生します
 
 --- pseudo_rand(bits, fill=0, odd=false) -> OpenSSL::BN
-��������������֤��ޤ���
+乱数を生成し、返します。
 
-�������˰Ź���Ū�ʶ����Ϥʤ����ᡢ�Ź��Ϣ�Ǥʤ����䡢
-������ɬ�פǤʤ������Ѥ��뤳�Ȥ��Ǥ��ޤ���
-�������Τ褦�ʾ��ˤϻȤ��ޤ���
+乱数系列に暗号論的な強さはないため、暗号関連でない場合や、
+強さが必要でない場合に用いることができます。
+鍵生成のような場合には使えません。
 
-bits �ӥåȤ�Ĺ���������������������ޤ���
+bits ビットの長さの正の整数を生成します。
 
-fill �� -1 �ʤ顢������������κǾ�̥ӥåȤ�
-0�Ǥ��������Ƥ��ޤ���fill �� 0 �ʤ顢
-������������κǾ�̥ӥåȤ�1�˥��åȤ���ޤ���
-�Ĥޤ�ɬ�� bits �ӥåȤ������Ȥʤ�ޤ���
-fill ��1�ξ��ϡ����2�ӥåȤ�1�˥��åȤ���ޤ���
+fill が -1 なら、生成させる数の最上位ビットが
+0である場合を許容します。fill が 0 なら、
+生成させる数の最上位ビットは1にセットされます、
+つまり必ず bits ビットの整数となります。
+fill が1の場合は、上位2ビットが1にセットされます。
 
-odd �����ʤ顢��������������ϴ���ΤߤȤʤ�ޤ���
+odd が真なら、生成される整数は奇数のみとなります。
 
-@param bits ȯ����������Υӥåȿ�
-@param fill ��̥ӥåȤ��������������
-@param odd ���ʤ�ȯ����������ϴ���ΤߤȤʤ�
-@raise OpenSSL::BNError ����������˼��Ԥ�������ȯ�����ޤ�
+@param bits 発生させる数のビット数
+@param fill 上位ビットの性質を決める整数
+@param odd 真なら発生させる数は奇数のみとなる
+@raise OpenSSL::BNError 乱数の生成に失敗した場合に発生します
 @see [[m:OpenSSL::BN.rand]], [[m:OpenSSL::BN.pseudo_rand_range]]
 
 --- pseudo_rand_range(range) -> OpenSSL::BN
-����� 0 ���� range-1 �ޤǤδ֤����������֤��ޤ���
+乱数を 0 から range-1 までの間で生成し、返します。
 
-�������˰Ź���Ū�ʶ����Ϥ���ޤ���
+乱数系列に暗号論的な強さはありません。
 
-@param range ��������������ϰ�
-@raise OpenSSL::BNError ����������˼��Ԥ�������ȯ�����ޤ�
+@param range 生成する乱数の範囲
+@raise OpenSSL::BNError 乱数の生成に失敗した場合に発生します
 @see [[m:OpenSSL::BN.pseudo_rand]], [[m:OpenSSL::BN.rand_range]]
 
 
 --- rand(bits, fill=0, odd=false) -> OpenSSL::BN
-�Ź���Ū�˶���������������������֤��ޤ���
+暗号論的に強い疑似乱数を生成し、返します。
 
-bits �ӥåȤ�Ĺ���������������������ޤ���
+bits ビットの長さの正の整数を生成します。
 
-fill �� -1 �ʤ顢������������κǾ�̥ӥåȤ�
-0�Ǥ��������Ƥ��ޤ���fill �� 0 �ʤ顢
-������������κǾ�̥ӥåȤ�1�˥��åȤ���ޤ���
-�Ĥޤ�ɬ�� bits �ӥåȤ������Ȥʤ�ޤ���
-fill ��1�ξ��ϡ����2�ӥåȤ�1�˥��åȤ���ޤ���
+fill が -1 なら、生成させる数の最上位ビットが
+0である場合を許容します。fill が 0 なら、
+生成させる数の最上位ビットは1にセットされます、
+つまり必ず bits ビットの整数となります。
+fill が1の場合は、上位2ビットが1にセットされます。
 
-odd �����ʤ顢��������������ϴ���ΤߤȤʤ�ޤ���
+odd が真なら、生成される整数は奇数のみとなります。
 
-@param bits ȯ����������Υӥåȿ�
-@param fill ��̥ӥåȤ��������������
-@param odd ���ʤ�ȯ����������ϴ���ΤߤȤʤ�
-@raise OpenSSL::BNError ����������˼��Ԥ�������ȯ�����ޤ�
+@param bits 発生させる数のビット数
+@param fill 上位ビットの性質を決める整数
+@param odd 真なら発生させる数は奇数のみとなる
+@raise OpenSSL::BNError 乱数の生成に失敗した場合に発生します
 @see [[m:OpenSSL::BN.pseudo_rand]], [[m:OpenSSL::BN.rand_range]]
 
 --- rand_range(range) -> OpenSSL::BN
-�Ź���Ū�˶������������ 0 ���� range-1 �ޤǤδ֤����������֤��ޤ���
+暗号論的に強い疑似乱数を 0 から range-1 までの間で生成し、返します。
 
-@param range ��������������ϰ�
-@raise OpenSSL::BNError ����������˼��Ԥ�������ȯ�����ޤ�
+@param range 生成する乱数の範囲
+@raise OpenSSL::BNError 乱数の生成に失敗した場合に発生します
 @see [[m:OpenSSL::BN.rand]], [[m:OpenSSL::BN.pseudo_rand_range]]
 
 == Instance Methods
 
 --- %(other) -> OpenSSL::BN
-���Ȥ� other �ǳ�껻����;����֤��ޤ���
+自身を other で割り算した余りを返します。
 
-@param other ����
-@raise OpenSSL::BNError �׻������顼
+@param other 除数
+@raise OpenSSL::BNError 計算時エラー
 
 --- *(other) -> OpenSSL::BN
-���Ȥ� other ���Ѥ��֤��ޤ���
+自身と other の積を返します。
 
-@param other �������
-@raise OpenSSL::BNError �׻������顼
+@param other かける数
+@raise OpenSSL::BNError 計算時エラー
 --- **(other) -> OpenSSL::BN
-���Ȥ� other ����֤��ޤ���
+自身の other 乗を返します。
 
-@param other �ؿ�
-@raise OpenSSL::BNError �׻������顼
+@param other 指数
+@raise OpenSSL::BNError 計算時エラー
 
 --- +(other) -> OpenSSL::BN
-���Ȥ� other ���¤��֤��ޤ���
+自身と other の和を返します。
 
-@param other ­������
-@raise OpenSSL::BNError �׻������顼
+@param other 足す整数
+@raise OpenSSL::BNError 計算時エラー
 
 --- -(other) -> OpenSSL::BN
-���Ȥ��� other ��������ͤ��֤��ޤ���
+自身から other を引いた値を返します。
 
-@param other ��������
-@raise OpenSSL::BNError �׻������顼
+@param other 引く整数
+@raise OpenSSL::BNError 計算時エラー
 
 --- /(other) -> [OpenSSL::BN, OpenSSL::BN]
-���Ȥ� other �ǳ�ä�����;���������֤��ޤ���
+自身を other で割った商と余りを配列で返します。
 
-@param other ����
-@raise OpenSSL::BNError �׻������顼
+@param other 除数
+@raise OpenSSL::BNError 計算時エラー
 
 --- <<(other) -> OpenSSL::BN
-���Ȥ� other �ӥåȺ����եȤ����ͤ��֤��ޤ���
+自身を other ビット左シフトした値を返します。
 
-@param other ���եȤ���ӥåȿ�
-@raise OpenSSL::BNError �׻������顼
+@param other シフトするビット数
+@raise OpenSSL::BNError 計算時エラー
 
 --- <=>(other) -> -1 | 0 | 1
 --- cmp(other) -> -1 | 0 | 1
-���Ȥ� other ����Ӥ���other�Τۤ������������-1��
-�礭�����+1����������� 0 ���֤��ޤ���
+自身と other を比較し、otherのほうが小さければ-1、
+大きければ+1、等しければ 0 を返します。
 
-@param other ��Ӥ����
+@param other 比較する数
 
 --- ==(other) -> bool
 --- ===(other) -> bool
 --- eql?(other) -> bool
-���Ȥ� other �����������˿����֤��ޤ���
+自身と other が等しい場合に真を返します。
 
-@param other ��Ӥ����
+@param other 比較する数
 
 --- >>(other) -> OpenSSL::BN
-���Ȥ� other �ӥåȱ����եȤ����ͤ��֤��ޤ���
+自身を other ビット右シフトした値を返します。
 
-@param other ���եȤ���ӥåȿ�
-@raise OpenSSL::BNError �׻������顼
+@param other シフトするビット数
+@raise OpenSSL::BNError 計算時エラー
 
 --- lshift!(n) -> self
-���Ȥ� n �ӥåȺ����եȤ��ޤ���
+自身を n ビット左シフトします。
 
-@param n ���եȤ���ӥåȿ�
-@raise OpenSSL::BNError �׻������顼
+@param n シフトするビット数
+@raise OpenSSL::BNError 計算時エラー
 
 --- rshift!(n) -> self
-���Ȥ� n �ӥåȱ����եȤ��ޤ���
+自身を n ビット右シフトします。
 
-@param n ���եȤ���ӥåȿ�
-@raise OpenSSL::BNError �׻������顼
+@param n シフトするビット数
+@raise OpenSSL::BNError 計算時エラー
 
 --- bit_set?(n) -> bool
-���Ȥ� n �ӥå��ܤ�Ω�äƤ���ʤ鿿���֤��ޤ���
+自身の n ビット目が立っているなら真を返します。
 
-��:
+例:
   BN.new("129").bit_set?(0) # => true
   BN.new("129").bit_set?(1) # => false
 
-@param n Ĵ�٤�ӥåȤΰ���
+@param n 調べるビットの位置
 
 --- clear_bit!(n) -> self
-���Ȥ� n �ӥå��ܤ�0�ˤ��ޤ���
+自身の n ビット目を0にします。
 
-��:
+例:
   a = BN.new("129")
   a.clear_bit!(0)
   a # => 128
 
-@param n 0�ˤ���ӥåȤΰ���
-@raise OpenSSL::BNError �׻������顼
+@param n 0にするビットの位置
+@raise OpenSSL::BNError 計算時エラー
 
 --- coerce(other) -> Array
-���Ȥ� other ��Ʊ�����饹�ˤʤ�褦�����Ȥ� other ���Ѵ��� 
-[other, self] �Ȥ�������ˤ����֤��ޤ���
+自身と other が同じクラスになるよう、自身か other を変換し 
+[other, self] という配列にして返します。
 
-����Ū�� other �������ΤȤ��ˡ����Ȥ� Integer �Υ��֥������Ȥ�
-�Ѵ����� [other, �Ѵ��奪�֥�������] �ˤ����֤��ޤ���
-����ʳ��ξ����㳰 TypeError ��ȯ�������ޤ���
+基本的に other が整数のときに、自身を Integer のオブジェクトに
+変換して [other, 変換後オブジェクト] にして返します。
+それ以外の場合は例外 TypeError を発生させます。
 
-@param other �Ѵ��δ��Ȥʤ륪�֥�������
-@raise TypeError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@param other 変換の基準となるオブジェクト
+@raise TypeError 変換に失敗した場合に発生します
 
 --- copy(other) -> self
-other �����Ƥ򼫿Ȥ˥��ԡ����ޤ���
+other の内容を自身にコピーします。
 
-@param other ���ԡ����� [[c:OpenSSL::BN]] �Υ��֥�������
-@raise OpenSSL::BNError ���ԡ��˼���
+@param other コピーする [[c:OpenSSL::BN]] のオブジェクト
+@raise OpenSSL::BNError コピーに失敗
 
 --- gcd(other) -> OpenSSL::BN
-GCD(��������)���֤��ޤ���
+GCD(最大公約数)を返します。
 
-@param other ���ȤȤ� GCD ��׻������
-@raise OpenSSL::BNError �׻������顼
+@param other 自身との GCD を計算する数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mask_bits!(n) -> self
-���Ȥ򲼰� n �ӥåȤǥޥ������ޤ���
+自身を下位 n ビットでマスクします。
 
-n �����ȤΥӥåȿ�����礭�������㳰 [[c:OpenSSL::BNError]]
-��ȯ�����ޤ���
+n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
+が発生します。
 
-@param n �ޥ�������ӥåȿ�
-@raise OpenSSL::BNError �׻������顼
+@param n マスクするビット数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mod_add(other, m) -> OpenSSL::BN
-(self + other) % m ���֤��ޤ���
+(self + other) % m を返します。
 
-��:
+例:
   BN.new("7").mod_add(BN.new("3"), BN.new("6")) # => 4
 
-@param other �¤����
-@param m ��;�����
-@raise OpenSSL::BNError �׻������顼
+@param other 和を取る数
+@param m 剰余を取る数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mod_exp(other, m) -> OpenSSL::BN
-(self ** other) % m ���֤��ޤ���
+(self ** other) % m を返します。
 
-��:
+例:
   BN.new("7").mod_exp(BN.new("3"), BN.new("6")) # => 1
 
-@param other �ؿ�
-@param m ��;�����
-@raise OpenSSL::BNError �׻������顼
+@param other 指数
+@param m 剰余を取る数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mod_inverse(m) -> OpenSSL::BN
-���Ȥ� mod m �ˤ�����ո����֤��ޤ���
+自身の mod m における逆元を返します。
 
-(self * r) % m == 1 �Ȥʤ� r ���֤��ޤ���
-¸�ߤ��ʤ������㳰 [[c:OpenSSL::BNError]] ��ȯ�����ޤ���
+(self * r) % m == 1 となる r を返します。
+存在しない場合は例外 [[c:OpenSSL::BNError]] が発生します。
 
-@param m mod �����
-@raise OpenSSL::BNError �׻������顼
+@param m mod を取る数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mod_mul(other, m) -> OpenSSL::BN
-(self * other) % m ���֤��ޤ���
+(self * other) % m を返します。
 
-��:
+例:
   BN.new("7").mod_mul(BN.new("3"), BN.new("6")) # => 3
 
-@param other �Ѥ����
-@param m ��;�����
-@raise OpenSSL::BNError �׻������顼
+@param other 積を取る数
+@param m 剰余を取る数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mod_sqr(m) -> OpenSSL::BN
-(self ** 2) % m ���֤��ޤ���
+(self ** 2) % m を返します。
 
-@param m mod �����
-@raise OpenSSL::BNError �׻������顼
+@param m mod を取る数
+@raise OpenSSL::BNError 計算時エラー
 
 --- mod_sub(other, m) -> OpenSSL::BN
-(self - other) % m ���֤��ޤ���
+(self - other) % m を返します。
 
-��:
+例:
   BN.new("27").mod_mul(BN.new("3"), BN.new("5")) # => 4
 
-@param other ������
-@param m ��;�����
-@raise OpenSSL::BNError �׻������顼
+@param other 引く数
+@param m 剰余を取る数
+@raise OpenSSL::BNError 計算時エラー
 
 
 --- num_bits -> Integer
-���Ȥ�ɽ������Τ˻ȤäƤ���ӥåȿ����֤��ޤ���
+自身を表現するのに使っているビット数を返します。
 
-����̵�뤵��ޤ���
+符号は無視されます。
 
-��:
+例:
   OpenSSL::BN.new("127").num_bits # => 7
   OpenSSL::BN.new("-127").num_bits # => 7
   OpenSSL::BN.new("128").num_bits # => 8
   
 --- num_bytes -> Integer
-���Ȥ�ɽ������Τ˻ȤäƤ���Х��ȿ����֤��ޤ���
+自身を表現するのに使っているバイト数を返します。
 
 --- odd? -> bool
-���Ȥ�����Ǥ�����˿����֤��ޤ���
+自身が奇数である場合に真を返します。
 
 --- one? -> bool
-���Ȥ�1�Ǥ�����˿����֤��ޤ���
+自身が1である場合に真を返します。
 
 --- prime? -> bool
 --- prime?(checks) -> bool
-���Ȥ��ǿ��Ǥ���ʤ鿿���֤��ޤ���
+自身が素数であるなら真を返します。
 
-Miller-Rabin ˡ�ˤ���ΨŪ��Ƚ�ꤷ�ޤ���
-check�ǻ��ꤷ��������������֤��ޤ���
-�������ά�������� OpenSSL ��Ŭ�ڤ�
-�����Ƚ�Ǥ��ޤ���
+Miller-Rabin 法により確率的に判定します。
+checkで指定した回数だけ繰り返します。
+引数を省略した場合は OpenSSL が適切な
+回数を判断します。
 
-@param check Miller-Robin ˡ�η����֤��β��
-@raise OpenSSL::BNError Ƚ����˥��顼��ȯ��
+@param check Miller-Robin 法の繰り返しの回数
+@raise OpenSSL::BNError 判定時にエラーが発生
 @see [[m:OpenSSL::BN#prime_fasttest?]]
 
 --- prime_fasttest?(checks=nil, vtrivdiv=true) -> bool
-���Ȥ��ǿ��Ǥ���ʤ鿿���֤��ޤ���
+自身が素数であるなら真を返します。
 
-vtrivdiv �����Ǥ�����ˤϡ� Miller-Rabin ˡ�Ǥ�
-Ƚ������˾������ǿ��ǳ�뤳�Ȥ��ǿ����ݤ���
-Ĵ�٤ޤ������Ȥ��������ǿ��Ǥ�����ˤϤ��μ��
-�ˤ���ǿ��ǤϤʤ��ȸ��ä��֤��ͤ��֤��ޤ���
-#@# ������ vtrivdiv �� false �Ǥʤ�
+vtrivdiv が真である場合には、 Miller-Rabin 法での
+判定の前に小さな素数で割ることで素数か否かを
+調べます。自身が小さな素数である場合にはこの手順
+により素数ではないと誤った返り値を返します。
+#@# 本当は vtrivdiv が false でない
 
-Miller-Rabin ˡ�ˤ���ΨŪ��Ƚ�ꤷ�ޤ���
-checks�ǻ��ꤷ��������������֤��ޤ���
-checks��nil�Ǥ������ OpenSSL ��Ŭ�ڤ�
-�����Ƚ�Ǥ��ޤ���
+Miller-Rabin 法により確率的に判定します。
+checksで指定した回数だけ繰り返します。
+checksがnilである場合は OpenSSL が適切な
+回数を判断します。
 
-��:
-  # 181 �� �־������ǿ��פǤ���
+例:
+  # 181 は 「小さな素数」である
   OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
   OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
   
-@param checks Miller-Robinˡ�η����֤��β��
-@param vtrivdiv ���ʤ龮�����ǿ��ǳ�뤳�ȤǤ��ǿ�Ƚ����ߤޤ�
-@raise OpenSSL::BNError Ƚ����˥��顼��ȯ��
+@param checks Miller-Robin法の繰り返しの回数
+@param vtrivdiv 真なら小さな素数で割ることでの素数判定を試みます
+@raise OpenSSL::BNError 判定時にエラーが発生
 @see [[m:OpenSSL::BN#prime?]]
 
 --- set_bit!(n) -> self
-���Ȥ� n �ӥå��ܤ�1�ˤ��ޤ���
+自身の n ビット目を1にします。
 
-��:
+例:
   a = BN.new("128")
   a.set_bit!(0)
   a # => 129
 
-@param n 1�ˤ���ӥåȤΰ���
-@raise OpenSSL::BNError �׻������顼
+@param n 1にするビットの位置
+@raise OpenSSL::BNError 計算時エラー
 
 --- sqr -> OpenSSL::BN
-���Ȥ�2���׻����ޤ���
+自身の2乗を計算します。
 
-@raise OpenSSL::BNError �׻������顼
+@raise OpenSSL::BNError 計算時エラー
 
 --- to_bn -> self
-��ʬ���Ȥ��֤��ޤ���
+自分自身を返します。
 
 --- to_i -> Integer
 --- to_int -> Integer
-���Ȥ� Integer �Υ��󥹥��󥹤��Ѵ����ޤ���
+自身を Integer のインスタンスに変換します。
 
-@raise OpenSSL::BNError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::BNError 変換に失敗した場合に発生します
 
 --- to_s(base=10) -> String
-���Ȥ�ɽ��ʸ������֤��ޤ���
+自身を表す文字列を返します。
 
-base �Ǵ������ꤷ�ޤ���10,16�����Ǥ��ޤ���
-2����ꤹ��ȼ��Ȥ������ͤ� big-endian �����̵�������ΥХ��ʥ����
-�Ѵ����ޤ���
-0����ꤷ�����ˤ� MPI ������ʸ����(�Х�����)���Ѵ����ޤ���
+base で基数を指定します。10,16を指定できます。
+2を指定すると自身の絶対値を big-endian の符号無し整数のバイナリ列に
+変換します。
+0を指定した場合には MPI 形式の文字列(バイト列)に変換します。
 
-@param base ʸ�����Ѵ��δ��
-@raise OpenSSL::BNError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@param base 文字列変換の基数
+@raise OpenSSL::BNError 変換に失敗した場合に発生します
 @see [[m:OpenSSL::BN.new]]
 
 --- ucmp(other) -> -1 | 0 | 1
-���Ȥ� other �������ͤ���Ӥ���other �������ͤΤۤ���
-���Ȥ������ͤ�꾮�������-1��
-�礭�����+1��2�Ĥ������ͤ���������� 0 ���֤��ޤ���
+自身と other の絶対値を比較し、other の絶対値のほうが
+自身の絶対値より小さければ-1、
+大きければ+1、2つの絶対値が等しければ 0 を返します。
 
-@param other ��Ӥ����
+@param other 比較する数
 --- zero? -> bool
-���Ȥ�0�Ǥ�����˿����֤��ޤ���
+自身が0である場合に真を返します。
 
 = class OpenSSL::BNError < OpenSSL::OpenSSLError
-[[c:OpenSSL::BN]] ��Ϣ�Υ��顼��ɽ���㳰�Ǥ���
+[[c:OpenSSL::BN]] 関連のエラーを表す例外です。
 
 = reopen Integer
 == Instance Methods
 --- to_bn -> OpenSSL::BN
-Integer ��Ʊ������ɽ�� [[c:OpenSSL::BN]] �Υ��֥������Ȥ�
-�Ѵ����ޤ���
+Integer を同じ数を表す [[c:OpenSSL::BN]] のオブジェクトに
+変換します。
 
-���ߤΥС������Ǥ���������������Ƥ��ޤ���
+現在のバージョンでは正しく実装されていません。

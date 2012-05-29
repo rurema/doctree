@@ -55,6 +55,6 @@ include TkUtil
 --- update_without_notify(hash)
 #@todo
 
-[[m:Hash#update]] ¤ÈÆ±¤¸¡£
+[[m:Hash#update]] ã¨åŒã˜ã€‚
 
 #@end

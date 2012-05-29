@@ -1,3 +1,3 @@
-= pack ¥Æ¥ó¥×¥ì¡¼¥ÈÊ¸»úÎó
+= pack ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆæ–‡å­—åˆ—
 
 #@include(../api/src/_builtin/pack-template)

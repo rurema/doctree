@@ -1,9 +1,9 @@
 = trap::NKF
-* -m0��Ĥ��ʤ���B���󥳡��ɤʤɤ�MIME encode���ǥ����ɤ���Ƥ��ޤ��ޤ���
-    NKF.nkf("-e", "=?ISO-2022-JP?B?Zm9v?=") #=> foo
-    NKF.nkf("-e -m0", "=?ISO-2022-JP?B?Zm9v?=") #=> "=?ISO-2022-JP?B?Zm9v?="
+* -m0をつけないとBエンコードなどのMIME encodeがデコードされてしまいます。
+    NKF.nkf("-e", "foo") #=> foo
+    NKF.nkf("-e -m0", "foo") #=> "foo"
 
-* 1.8.2�������NKF�ΥС������1.7��������2.0�����ˤ����ä����ᡢ
-  ((<nkf/NKF.guess>))�ʤɤε�ư���Ѥ�äƤ��ޤ���
-  * ɬ�פʤ�(({defined?(NKF::UTF8)}))�Ǿ��ʬ�������б����Ƥ���������
-  * �Ť���ư��ɬ�פʤ�((<nkf/NKF.guess1>))��ȤäƤ���������
+* 1.8.2から中のNKFのバージョンが1.7相当から2.0相当にあがったため、
+  ((<nkf/NKF.guess>))などの挙動が変わっています。
+  * 必要なら(({defined?(NKF::UTF8)}))で場合分けして対応してください。
+  * 古い挙動が必要なら((<nkf/NKF.guess1>))を使ってください。

@@ -1,5 +1,5 @@
 
-RubyGems �饤�֥��ǻ��Ѥ���ǥե�����ͤ��֤��᥽�åɤ���������饤�֥��Ǥ���
+RubyGems ライブラリで使用するデフォルト値を返すメソッドを定義したライブラリです。
 
 = reopen Gem
 
@@ -7,36 +7,36 @@ RubyGems �饤�֥��ǻ��Ѥ���ǥե�����ͤ��֤��᥽�åɤ���������饤�֥��Ǥ��
 
 --- default_sources -> [String]
 
-�ǥե���ȤΥѥå��������������Υꥹ�Ȥ��֤��ޤ���
+デフォルトのパッケージ情報取得先のリストを返します。
 
 --- default_dir -> String
 
-�ǥե���Ȥ� Gem �ѥå������򥤥󥹥ȡ��뤹��ǥ��쥯�ȥ���֤��ޤ���
+デフォルトの Gem パッケージをインストールするディレクトリを返します。
 
 --- user_dir -> String
 
-�桼���Υۡ���ǥ��쥯�ȥ����� Gem �Υѥ����֤��ޤ���
+ユーザのホームディレクトリの中の Gem のパスを返します。
 
 --- default_path -> [String]
 
-�ǥե���Ȥ� Gem �ѥå�����������ɤ���ǥ��쥯�ȥ�Υꥹ�Ȥ��֤��ޤ���
+デフォルトの Gem パッケージをロードするディレクトリのリストを返します。
 
 --- default_exec_format -> String
 
-�ǥե���ȤΥ��󥹥ȡ��뤹�륳�ޥ��̾����뤿��Υե����ޥå�ʸ������֤��ޤ���
+デフォルトのインストールするコマンド名を決めるためのフォーマット文字列を返します。
 
 --- default_bindir -> String
 
-�¹ԥե�����Υǥե���ȤΥѥ����֤��ޤ���
+実行ファイルのデフォルトのパスを返します。
 
 --- default_system_source_cache_dir -> String
 
-�ǥե���ȤΥ����ƥ����ΤΥ���������å���ե�����Υѥ����֤��ޤ���
+デフォルトのシステム全体のソースキャッシュファイルのパスを返します。
 
 --- default_user_source_cache_dir -> String
 
-�ǥե���ȤΥ桼�����ѤΥ���������å���ե�����Υѥ����֤��ޤ���
+デフォルトのユーザ専用のソースキャッシュファイルのパスを返します。
 
 --- ruby_engine -> String
 
-Ruby�����ϼ����μ����ɽ��ʸ������֤��ޤ���
+Ruby処理系実装の種類を表す文字列を返します。

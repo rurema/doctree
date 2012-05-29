@@ -1,359 +1,359 @@
 = class OpenSSL::ASN1::Primitive < OpenSSL::ASN1::ASN1Data
-ASN.1 ¤ÎÃ±½ã·¿¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã®å˜ç´”åž‹ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-ÄÌ¾ï¤Ï¤³¤Î¥¯¥é¥¹¼«¿È¤ÏÍÑ¤¤¤º¡¢³Æ¥µ¥Ö¥¯¥é¥¹¤òÍøÍÑ¤·¤Þ¤¹¡£
+é€šå¸¸ã¯ã“ã®ã‚¯ãƒ©ã‚¹è‡ªèº«ã¯ç”¨ã„ãšã€å„ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’åˆ©ç”¨ã—ã¾ã™ã€‚
 == Instance Methods
 
 --- tagging -> Symbol | nil
-¥¿¥°ÉÕ¤±¤ÎÊý¼°¤òÊÖ¤·¤Þ¤¹¡£
+ã‚¿ã‚°ä»˜ã‘ã®æ–¹å¼ã‚’è¿”ã—ã¾ã™ã€‚
 
-:IMPLICIT¡¢:EXPLICIT¡¢nil ¤Î¤¤¤º¤ì¤«¤òÊÖ¤·¤Þ¤¹¡£
+:IMPLICITã€:EXPLICITã€nil ã®ã„ãšã‚Œã‹ã‚’è¿”ã—ã¾ã™ã€‚
 
-¥¿¥°([[m:OpenSSL::ASN1::ASN1Data#tag]])¤¬ :UNIVERSAL ¤Ê¤é¤Ð
-¤³¤ÎÃÍ¤ÏÌµ»ë¤µ¤ì¤Þ¤¹¡£
+ã‚¿ã‚°([[m:OpenSSL::ASN1::ASN1Data#tag]])ãŒ :UNIVERSAL ãªã‚‰ã°
+ã“ã®å€¤ã¯ç„¡è¦–ã•ã‚Œã¾ã™ã€‚
 
-nil ¤Ï :IMPLICIT ¤ÈÆ±µÁ¤Ç¤¹¡£
+nil ã¯ :IMPLICIT ã¨åŒç¾©ã§ã™ã€‚
 
 @see [[m:OpenSSL::ASN1::Primitive#tagging=]]
 --- tagging=(tagging)
-¥¿¥°ÉÕ¤±¤ÎÊý¼°¤òÀßÄê¤·¤Þ¤¹¡£
+ã‚¿ã‚°ä»˜ã‘ã®æ–¹å¼ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊý¼°(:IMPLICIT ¤Þ¤¿¤Ï :EXPLICIT)
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹å¼(:IMPLICIT ã¾ãŸã¯ :EXPLICIT)
 @see [[m:OpenSSL::ASN1::Primitive#tagging=]]
 
 = class OpenSSL::ASN1::Boolean < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î Boolean ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ1)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Boolean åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·1)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::Boolean
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Boolean
-ASN.1 ¤Î Boolean ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::Boolean ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Boolean åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::Boolean ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::BOOLEAN]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::BOOLEAN]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(true ¤â¤·¤¯¤Ï false)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(true ã‚‚ã—ãã¯ false)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::Integer < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î Integer ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ2)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Integer åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·2)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::Integer
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Integer
-ASN.1 ¤Î Integer ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::Integer ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Integer åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::Integer ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::INTEGER]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::INTEGER]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È([[c:OpenSSL::BN]]¤Î¥¤¥ó¥¹¥¿¥ó¥¹)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ([[c:OpenSSL::BN]]ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 
 = class OpenSSL::ASN1::Enumerated < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î Enumerated ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ10)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Enumerated åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·10)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::Boolean
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Boolean
-ASN.1 ¤Î Enumerated ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::Enumerated ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Enumerated åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::Enumerated ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::ENUMERATED]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::ENUMERATED]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(0°Ê¾å¤ÎÀ°¿ô)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(0ä»¥ä¸Šã®æ•´æ•°)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::BitString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î Bit String ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ3)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Bit String åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·3)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::BitString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BitString
-ASN.1 ¤Î Bit String ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::BitString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Bit String åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::BitString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::BIT_STRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::BIT_STRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 --- unused_bits -> Integer | nil
-Bit String¤ËÀßÄê¤µ¤ì¤¿¥Õ¥é¥°¤òÊÖ¤·¤Þ¤¹¡£
+Bit Stringã«è¨­å®šã•ã‚ŒãŸãƒ•ãƒ©ã‚°ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:OpenSSL::ASN1::BitString#unused_bits=]]
-#@# ¥Õ¥é¥°¤Î°ÕÌ£¤òÄÉ²Ã¤¹¤ë
+#@# ãƒ•ãƒ©ã‚°ã®æ„å‘³ã‚’è¿½åŠ ã™ã‚‹
 --- unused_bits=(b)
-Bit String¤Ë¥Õ¥é¥°¤òÀßÄê¤·¤Þ¤¹¡£
+Bit Stringã«ãƒ•ãƒ©ã‚°ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param b ¥Õ¥é¥°(À°¿ô)
+@param b ãƒ•ãƒ©ã‚°(æ•´æ•°)
 @see [[m:OpenSSL::ASN1::BitString#unused_bits]]
 
 = class OpenSSL::ASN1::OctetString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î Octet String ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ4)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Octet String åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·4)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::OctetString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::OctetString
-ASN.1 ¤Î Octet String ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::OctetString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Octet String åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::OctetString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::OCTET_STRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::OCTET_STRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::UTF8String < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î UTF8String ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ12)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® UTF8String åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·12)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::UTF8String
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTF8String
-ASN.1 ¤Î UTF8String ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::UTF8String ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® UTF8String åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::UTF8String ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::UTF8STRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::UTF8STRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::NumericString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î NumericString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ18)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® NumericString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·18)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::NumericString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::NumericString
-ASN.1 ¤Î NumericString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::NumericString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® NumericString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::NumericString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::NUMERICSTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::NUMERICSTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::PrintableString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î PrintableString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ19)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® PrintableString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·19)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::PrintableString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::PrintableString
-ASN.1 ¤Î PrintableString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::PrintableString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® PrintableString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::PrintableString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::PRINTABLESTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::PRINTABLESTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::T61String < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î T61String ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ20)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® T61String åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·20)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::T61String
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::T61String
-ASN.1 ¤Î T61String ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::T61String ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® T61String åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::T61String ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::T61STRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::T61STRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 
 = class OpenSSL::ASN1::VideotexString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î VideotexString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ21)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® VideotexString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·21)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::VideotexString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::VideotexString
-ASN.1 ¤Î VideotexString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::VideotexString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® VideotexString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::VideotexString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::VIDEOTEXSTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::VIDEOTEXSTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::IA5String < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î IA5String ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ22)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® IA5String åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·22)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::IA5String
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::IA5String
-ASN.1 ¤Î IA5String ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::IA5String ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® IA5String åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::IA5String ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::IA5STRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::IA5STRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::GraphicString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î GraphicString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ25)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® GraphicString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·25)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::GraphicString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GraphicString
-ASN.1 ¤Î GraphicString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::GraphicString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® GraphicString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::GraphicString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::GRAPHICSTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::GRAPHICSTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::ISO64String < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î ISO64String ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ26)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® ISO64String åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·26)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::ISO64String
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ISO64String
-ASN.1 ¤Î ISO64String ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::ISO64String ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® ISO64String åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::ISO64String ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::ISO64STRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::ISO64STRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::GeneralString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î GeneralString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ27)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® GeneralString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·27)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::GeneralString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralString
-ASN.1 ¤Î GeneralString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::GeneralString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® GeneralString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::GeneralString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::GENERALSTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::GENERALSTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::UniversalString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î UniversalString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ28)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® UniversalString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·28)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::UniversalString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UniversalString
-ASN.1 ¤Î UniversalString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::UniversalString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® UniversalString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::UniversalString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::UNIVERSALSTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::UNIVERSALSTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::BMPString < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î BMPString ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ30)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® BMPString åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·30)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::BMPString
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BMPString
-ASN.1 ¤Î BMPString ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::BMPString ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® BMPString åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::BMPString ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::BMPSTRING]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::BMPSTRING]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Ê¸»úÎó)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(æ–‡å­—åˆ—)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::Null < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î Null ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ5)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® Null åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·5)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::Null
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Null
-ASN.1 ¤Î Null ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::Null ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® Null åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::Null ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::NULL]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::NULL]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(nil)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(nil)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::UTCTime < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î UTCTime ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ23)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® UTCTime åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·23)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::UTCTime
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTCTime
-ASN.1 ¤Î UTCTime ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::UTCTime ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® UTCTime åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::UTCTime ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::UTCTIME]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::UTCTIME]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Time¥ª¥Ö¥¸¥§¥¯¥È)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(Timeã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 = class OpenSSL::ASN1::GeneralizedTime < OpenSSL::ASN1::Primitive
-ASN.1 ¤Î GeneralizedTime ·¿(Universal ¥¿¥°¤Î¥¿¥°ÈÖ¹æ23)¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+ASN.1 ã® GeneralizedTime åž‹(Universal ã‚¿ã‚°ã®ã‚¿ã‚°ç•ªå·23)ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new(value) ->  OpenSSL::ASN1::GeneralizedTime
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralizedTime
-ASN.1 ¤Î GeneralizedTime ·¿¤ÎÃÍ¤òÉ½¸½¤¹¤ë OpenSSL::ASN1::GeneralizedTime ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-À¸À®¤·¤Þ¤¹¡£
+ASN.1 ã® GeneralizedTime åž‹ã®å€¤ã‚’è¡¨ç¾ã™ã‚‹ OpenSSL::ASN1::GeneralizedTime ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’
+ç”Ÿæˆã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::GENERALIZEDTIME]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::GENERALIZEDTIME]] ã¨ãªã‚Šã¾ã™ã€‚
 
-@param value ASN.1 ÃÍ¤òÉ½¤¹ Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È(Time¥ª¥Ö¥¸¥§¥¯¥È)
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 å€¤ã‚’è¡¨ã™ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(Timeã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 

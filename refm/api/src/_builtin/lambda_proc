@@ -1,10 +1,10 @@
 #@since 1.8.0
-===[a:should_use_next] ��³�������Ǥ����ͤ��֤�
+===[a:should_use_next] 手続きを中断して値を返す
 
-��³�����֥������Ȥ����Ǥ��ơ��ƽФ���(�ƤӽФ��֥��å��Ǥ� yield������ʳ��Ǥ� [[m:Proc#call]])
-�إ����פ��ͤ��֤��ˤ� next ��Ȥ��ޤ���break �� return �ǤϤ���ޤ���
+手続きオブジェクトを中断して、呼出し元(呼び出しブロックでは yield、それ以外では [[m:Proc#call]])
+へジャンプし値を返すには next を使います。break や return ではありません。
 
-��:
+例:
 
   def foo
     f = Proc.new{
@@ -15,26 +15,26 @@
   
  p foo().call       #=> 1
 
-===[a:block] Proc ���֥������Ȥ�֥��å��դ��᥽�åɸƤӽФ��˻Ȥ�
+===[a:block] Proc オブジェクトをブロック付きメソッド呼び出しに使う
 
-�֥��å��դ��᥽�åɤ��Ф��� Proc ���֥������Ȥ� `&' ����ꤷ���Ϥ���
-�ƤӽФ��֥��å��Τ褦��ư��ޤ���
-����������̩�ˤϰʲ��ΰ㤤������ޤ�
-�����ϡ�Proc ���֥������Ȥ��ƤӽФ��֥��å��Ȥ��ƿ��񤦺ݤ����¤Ǥ���
+ブロック付きメソッドに対して Proc オブジェクトを `&' を指定して渡すと
+呼び出しブロックのように動作します。
+しかし、厳密には以下の違いがあります
+これらは、Proc オブジェクトが呼び出しブロックとして振舞う際の制限です。
 
-  # ����ʤ�
+  # 問題なし
   (1..5).each { break }
 
-#@#  # ruby 1.6.7, 1.8 ������ʤ���1.6.8 �Ǥ��㳰 
-  # LocalJumpError ��ȯ�����ޤ���
+#@#  # ruby 1.6.7, 1.8 で問題なし。1.6.8 では例外 
+  # LocalJumpError が発生します。
   pr = Proc.new { break }
   (1..5).each(&pr)         
 
 #@until 1.9.1
 #@since 1.8.0
-  # each �Ƽ¹�
+  # each 再実行
 #@else
-  # ruby 1.6 �Ǥϡ�LocalJumpError
+  # ruby 1.6 では、LocalJumpError
 #@end
   pr = Proc.new { retry }
   (1..5).each(&pr)
@@ -43,26 +43,26 @@
 #@end
 #@end
 
-===[a:lambda_proc] lambda �� proc �� Proc.new �ȥ��ƥ졼���ΰ㤤
+===[a:lambda_proc] lambda と proc と Proc.new とイテレータの違い
 
-[[m:Kernel.#lambda]] �� [[m:Proc.new]] �Ϥɤ���� [[c:Proc]] ���饹�Υ��󥹥���(��³�����֥�������)���������ޤ�����
-�������줿��³�����֥������ȤϤ����Ĥ��ξ��̤ǵ�ư���ۤʤ�ޤ��� lambda �����������³�����֥������ȤΤۤ���
-���᥽�åɤ˶ᤤƯ���򤹤�褦���߷פ���Ƥ��ޤ���
+[[m:Kernel.#lambda]] と [[m:Proc.new]] はどちらも [[c:Proc]] クラスのインスタンス(手続きオブジェクト)を生成しますが、
+生成された手続きオブジェクトはいくつかの場面で挙動が異なります。 lambda の生成する手続きオブジェクトのほうが
+よりメソッドに近い働きをするように設計されています。
 
 #@since 1.9.1
-[[m:Kernel.#proc]] �� Proc.new ��Ʊ���ˤʤ�ޤ���
+[[m:Kernel.#proc]] は Proc.new と同じになります。
 #@else
-[[m:Kernel.#proc]] �� lambda ��Ʊ���ˤʤ�ޤ���
+[[m:Kernel.#proc]] は lambda と同じになります。
 #@end
-������ & ���դ��뤳�ȤǼ�³�����֥������Ȳ������֥��å��ϡ�Proc.new ���������줿�����
-Ʊ���ˤ褦�˿����񤤤ޤ���
+引数に & を付けることで手続きオブジェクト化したブロックは、Proc.new で生成されたそれと
+同じにように振る舞います。
 
-==== �����ΰ���
+==== 引数の扱い
 
-lambda �Τۤ�����긷̩�Ǥ��������ο�����äƤ���ȡʥ᥽�åɤΤ褦�ˡ˥��顼�ˤʤ�ޤ���
-Proc.new �ϰ�����¿�������˶ᤤ�������򤷤ޤ���
+lambda のほうがより厳密です。引数の数が違っていると（メソッドのように）エラーになります。
+Proc.new は引数を多重代入に近い扱い方をします。
 
-��:
+例:
 
   b1 = Proc.new{|a,b,c| 
     p a,b,c 
@@ -78,15 +78,15 @@ Proc.new �ϰ�����¿�������˶ᤤ�������򤷤ޤ���
   b2.call(2, 4)  
   #=> wrong number of arguments (2 for 3) (ArgumentError) 
 
-[[ref:d:spec/call#block_arg]] �⻲�Ȥ��Ƥ���������
+[[ref:d:spec/call#block_arg]] も参照してください。
 
-==== �����׹�ʸ�ε�ư�ΰ㤤
+==== ジャンプ構文の挙動の違い
 
-return �� break �ϡ�lambda �� Proc.new �Ǥϵ�ư���ۤʤ�ޤ���
-�㤨�� return ��Ԥä���硢lambda �Ǥϼ�³�����֥������ȼ��Ȥ�ȴ���ޤ����� 
-Proc.new �Ǥϼ�³�����֥������Ȥ�Ϥ�᥽�åɤ�ȴ���ޤ���
+return と break は、lambda と Proc.new では挙動が異なります。
+例えば return を行った場合、lambda では手続きオブジェクト自身を抜けますが、 
+Proc.new では手続きオブジェクトを囲むメソッドを抜けます。
 
-��:
+例:
 
  def foo
    f = Proc.new { return :foo }
@@ -113,35 +113,35 @@ Proc.new �Ǥϼ�³�����֥������Ȥ�Ϥ�᥽�åɤ�ȴ���ޤ���
  p bar()  #=> nil
  p hoge() #=> :hoge
 
-�ʲ���ɽ�ϡ���³�����֥������Ȥμ¹Ԥ������Ʊ���褦�ˡ���³�����֥������Ȥ�������줿�Τ�
-Ʊ���᥽�å���ǹԤä����η�̤Ǥ���
+以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたのと
+同じメソッド内で行った場合の結果です。
 
                  return                          next                        break
-  Proc.new   �᥽�åɤ�ȴ����            ��³�����֥������Ȥ�ȴ����   �㳰��ȯ������
+  Proc.new   メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
 #@since 1.9.1
-  proc       �᥽�åɤ�ȴ����            ��³�����֥������Ȥ�ȴ����   �㳰��ȯ������
+  proc       メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
 #@else
-  proc       ��³�����֥������Ȥ�ȴ����  ��³�����֥������Ȥ�ȴ����   ��³�����֥������Ȥ�ȴ����
+  proc       手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
 #@end
-  lambda     ��³�����֥������Ȥ�ȴ����  ��³�����֥������Ȥ�ȴ����   ��³�����֥������Ȥ�ȴ����
-  ���ƥ졼�� �᥽�åɤ�ȴ����            ��³�����֥������Ȥ�ȴ����   �᥽�åɤ�ȴ����
+  lambda     手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
+  イテレータ メソッドを抜ける            手続きオブジェクトを抜ける   メソッドを抜ける
 
 #@end
 
 
-===[a:orphan] orphan �ʼ�³�����֥������Ȥε�ư
+===[a:orphan] orphan な手続きオブジェクトの挙動
 
-Proc �����������᥽�åɤ���æ�Ф����塢��³�����֥������Ȥ����
+Proc を生成したメソッドから脱出した後、手続きオブジェクトからの
 #@since 1.9.1
 return, break
 #@else
 return, retry, break 
 #@end
-���㳰 [[c:LocalJumpError]] ��ȯ�������ޤ���
-����������Ǥ����������̤� lambda ������������³�����֥������Ȥϥ᥽�åɤ�Ʊ���褦�˿�����
-���Ȥ�տޤ���Ƥ��뤿�ᡢ�㳰 [[c:LocalJumpError]] ��ȯ�����ޤ���
+は例外 [[c:LocalJumpError]] を発生させます。
+ただし、上でも説明した通り lambda で生成した手続きオブジェクトはメソッドと同じように振る舞う
+ことを意図されているため、例外 [[c:LocalJumpError]] は発生しません。
 
-��:
+例:
 
   def foo
     Proc.new { return }
@@ -159,14 +159,14 @@ return, retry, break
   # => in `call': retry from proc-closure (LocalJumpError)
 #@end
 
-�ʲ���ɽ�ϡ���³�����֥������Ȥμ¹Ԥ������Ʊ���褦�ˡ���³�����֥������Ȥ�������줿�᥽�åɤ�
-æ�Ф��Ƥ���Ԥä����η�̤Ǥ���
+以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたメソッドを
+脱出してから行った場合の結果です。
 
                  return                          next                        break
-  Proc.new   �㳰��ȯ������              ��³�����֥������Ȥ�ȴ����   �㳰��ȯ������
+  Proc.new   例外が発生する              手続きオブジェクトを抜ける   例外が発生する
 #@since 1.9.1
-  proc       �㳰��ȯ������              ��³�����֥������Ȥ�ȴ����   �㳰��ȯ������
+  proc       例外が発生する              手続きオブジェクトを抜ける   例外が発生する
 #@else
-  proc       ��³�����֥������Ȥ�ȴ����  ��³�����֥������Ȥ�ȴ����   ��³�����֥������Ȥ�ȴ����
+  proc       手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
 #@end
-  lambda     ��³�����֥������Ȥ�ȴ����  ��³�����֥������Ȥ�ȴ����   ��³�����֥������Ȥ�ȴ����
+  lambda     手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける

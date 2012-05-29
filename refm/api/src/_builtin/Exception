@@ -1,48 +1,48 @@
 = class Exception < Object
 
-���Ƥ��㳰������Υ��饹�Ǥ���
+全ての例外の祖先のクラスです。
 
 == Class Methods
 
 --- new(error_message = nil)
 --- exception(error_message = nil)
 
-�㳰���֥������Ȥ����������֤��ޤ���
+例外オブジェクトを生成して返します。
 
-@param error_message ���顼��å�������ɽ��ʸ�������ꤷ�ޤ������Υ�å�������
-                     °�� [[m:Exception#message]] ���ͤˤʤꡢ�ǥե���Ȥ��㳰�ϥ�ɥ��ɽ������ޤ���
+@param error_message エラーメッセージを表す文字列を指定します。このメッセージは
+                     属性 [[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示されます。
 
 == Instance Methods
 
 --- exception                   -> self
 --- exception(error_message)    -> Exception
 
-��������ꤷ�ʤ����� self ���֤��ޤ�����������ꤷ����� ���ȤΥ��ԡ�
-�������� [[m:Exception#message]] °���� error_message �ˤ����֤��ޤ���
+引数を指定しない場合は self を返します。引数を指定した場合 自身のコピー
+を生成し [[m:Exception#message]] 属性を error_message にして返します。
 
-[[m:Kernel.#raise]] �ϡ��¼�Ū�ˡ��㳰���֥������Ȥ� exception
-�᥽�åɤθƤӽФ��Ǥ���
+[[m:Kernel.#raise]] は、実質的に、例外オブジェクトの exception
+メソッドの呼び出しです。
 
-@param error_message ���顼��å�������ɽ��ʸ�������ꤷ�ޤ���
+@param error_message エラーメッセージを表す文字列を指定します。
 
   begin
-   ...        # ��������
+   ...        # 何か処理
   rescue => e
-   raise e.exception("an error occurs during hogehoge process")  # �ܤ������顼��å�����
+   raise e.exception("an error occurs during hogehoge process")  # 詳しいエラーメッセージ
   end
 
 --- backtrace    -> [String]
 
-�Хå��ȥ졼��������֤��ޤ���
+バックトレース情報を返します。
 
-�ǥե���ȤǤ�
+デフォルトでは
 
   * "#{sourcefile}:#{sourceline}:in `#{method}'"
-    (�᥽�å���ξ��)
+    (メソッド内の場合)
   * "#{sourcefile}:#{sourceline}"
-    (�ȥåץ�٥�ξ��)
+    (トップレベルの場合)
 
-�Ȥ��������� [[c:String]] ������Ǥ���
+という形式の [[c:String]] の配列です。
 
  def methd
    raise
@@ -62,7 +62,7 @@
 --- to_str    -> String
 #@end
 
-���顼��å������򤢤�魯ʸ������֤��ޤ���
+エラーメッセージをあらわす文字列を返します。
 
   begin 
     1 + nil 
@@ -72,17 +72,17 @@
 
 --- set_backtrace(errinfo)    -> nil | String | [String]
 
-�Хå��ȥ졼������� errinfo �����ꤷ�����ꤵ�줿�Хå��ȥ졼��
-������֤��ޤ���
+バックトレース情報に errinfo を設定し、設定されたバックトレース
+情報を返します。
 
-@param errinfo nil��[[c:String]] ���뤤�� [[c:String]] ������Τ����줫����ꤷ�ޤ���
+@param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
 #@since 1.9.1
 --- ==(other)    -> bool
 
-���ȤȻ��ꤵ�줿 other �Υ��饹��Ʊ���Ǥ��ꡢmessage �� backtrace �� == �᥽�åɤ���Ӥ���
-���������� true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身と指定された other のクラスが同じであり、message と backtrace が == メソッドで比較して
+等しい場合に true を返します。そうでない場合に false を返します。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
 #@end

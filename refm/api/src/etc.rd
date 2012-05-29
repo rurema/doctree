@@ -1,68 +1,68 @@
-/etc ��¸�ߤ���ǡ����١��������������뤿��Υ⥸�塼��Ǥ���
-���饹�˥��󥯥롼�ɤ��ƻȤ����Ȥ�Ǥ��ޤ���
+/etc に存在するデータベースから情報を得るためのモジュールです。
+クラスにインクルードして使うこともできます。
 
-=== �Ȥ���
+=== 使い方
 
   require 'etc'
   p Etc.getlogin
 
 = module Etc
 
-/etc ��¸�ߤ���ǡ����١��������������뤿��Υ⥸�塼��Ǥ���
-���饹�˥��󥯥롼�ɤ��ƻȤ����Ȥ�Ǥ��ޤ���
+/etc に存在するデータベースから情報を得るためのモジュールです。
+クラスにインクルードして使うこともできます。
 
 == Module Functions
 
 #@since 1.8.1
 --- getgrent -> Struct::Group | nil
 
-/etc/group �ե����뤫���ɤ߹��������ȥ�����֤��ޤ���
+/etc/group ファイルから読み込んだエントリを一つ返します。
 
-�ǽ�θƤӽФ��Ǥϡ���Ƭ�Υ���ȥ���֤��ޤ�������ʹߤθƤӽФ��Ǥϡ�
-�ƤӽФ��٤˼��Υ���ȥ�����֤��ޤ����ե�����ν�ü��ã����� nil ���֤��ޤ���
+最初の呼び出しでは、先頭のエントリを返します。それ以降の呼び出しでは、
+呼び出す度に次のエントリを順に返します。ファイルの終端に達すると nil を返します。
 
-��������λ�����Ȥ��� [[m:Etc.#endgrent]] ��ƤӽФ��褦�ˤ��Ƥ���������
+処理が終了したときは [[m:Etc.#endgrent]] を呼び出すようにしてください。
 
 @see [[man:getgrent(3)]], [[c:Struct::Group]]
 
 --- endgrent -> nil
 
-[[m:Etc.#getgrent]] �ˤ�äƳ��Ϥ��줿 /etc/group �ե�������ɤ�
-�ץ�������λ�����ե�������Ĥ��ޤ���
+[[m:Etc.#getgrent]] によって開始された /etc/group ファイルを読む
+プロセスを終了させファイルを閉じます。
 
 @see [[man:getgrent(3)]]
 
 --- setgrent -> nil
 
-/etc/group ����Ƭ�����ޤ���
+/etc/group の先頭に戻ります。
 
-���Υ᥽�åɤ�ƤӽФ����� [[m:Etc.#getgrent]] ��ƤӽФ�����Ƭ�Υ���ȥ���֤��ޤ���
+このメソッドを呼び出した後 [[m:Etc.#getgrent]] を呼び出すと先頭のエントリを返します。
 
 @see [[man:getgrent(3)]]
 
 --- getpwent -> Struct::Passwd | nil
 
-/etc/passwd �����ɤ߹��������ȥ�����֤��ޤ���
+/etc/passwd から読み込んだエントリを一つ返します。
 
-�ǽ�θƤӽФ��Ǥϡ���Ƭ�Υ���ȥ���֤��ޤ�������ʹߤθƤӽФ��Ǥϡ�
-�ƤӽФ��٤˼��Υ���ȥ�����֤��ޤ����ե�����ν�ü��ã����� nil ���֤��ޤ���
+最初の呼び出しでは、先頭のエントリを返します。それ以降の呼び出しでは、
+呼び出す度に次のエントリを順に返します。ファイルの終端に達すると nil を返します。
 
-��������λ�����Ȥ��� [[m:Etc.#endpwent]] ��ƤӽФ��褦�ˤ��Ƥ���������
+処理が終了したときは [[m:Etc.#endpwent]] を呼び出すようにしてください。
 
 @see [[man:getpwent(3)]]
 
 --- endpwent -> nil
 
-[[m:Etc.#getpwent]] �ˤ�äƳ��Ϥ��줿 /etc/passwd�ե�������ɤ�
-�ץ�������λ�����ե�������Ĥ��ޤ���
+[[m:Etc.#getpwent]] によって開始された /etc/passwdファイルを読む
+プロセスを終了させファイルを閉じます。
 
 @see [[man:getpwent(3)]]
 
 --- setpwent -> nil
 
-/etc/passwd ����Ƭ�����ޤ���
+/etc/passwd の先頭に戻ります。
 
-���Υ᥽�åɤ�ƤӽФ����� [[m:Etc.#getpwent]] ��ƤӽФ�����Ƭ�Υ���ȥ���֤��ޤ���
+このメソッドを呼び出した後 [[m:Etc.#getpwent]] を呼び出すと先頭のエントリを返します。
 
 @see [[man:getpwent(3)]]
 
@@ -70,70 +70,70 @@
 
 --- getlogin -> String | nil
 
-��ʬ�� login ̾���֤��ޤ��������ʤ��ä����� nil ���֤��ޤ���
+自分の login 名を返します。得られなかった場合は nil を返します。
 
-getlogin �� [[man:su(1)]] �ʤɤǥ���������Υ桼���Ȥϰۤʤ�桼���ˤʤäƤ����硢
-���ߤǤϤʤ�����������Υ桼�����֤��ޤ���
+getlogin は [[man:su(1)]] などでログイン時のユーザとは異なるユーザになっている場合、
+現在ではなくログイン時のユーザを返します。
 
-���Υ᥽�åɤ����Ԥ������� [[m:Etc.#getpwuid]] ��
-�ե�����Хå�����Ȥ褤�Ǥ��礦��
+このメソッドが失敗した場合は [[m:Etc.#getpwuid]] に
+フォールバックするとよいでしょう。
 
-���Ȥ��С��Ķ��ѿ� USER �ʤɤ⤢�碌�ơ��ʲ��Τ褦�˥ե�����Хå��Ǥ��ޤ���
+たとえば、環境変数 USER などもあわせて、以下のようにフォールバックできます。
 
   login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
 
 
 --- getpwnam(name) -> Struct::Passwd
 
-passwd �ǡ����١����򸡺�����
-̾���� name �Ǥ��� passwd ����ȥ���֤��ޤ���
+passwd データベースを検索し、
+名前が name である passwd エントリを返します。
 
-@param name ��������桼��̾��
+@param name 検索するユーザ名。
 
-@raise ArgumentError ����ȥ꤬���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise ArgumentError エントリが見つからなかった場合に発生します。
 
 @see [[man:getpwnam(3)]], [[c:Struct::Passwd]]
 
 --- getpwuid(uid = getuid) -> Struct::Passwd
 
-passwd �ǡ����١����򸡺�����
-�桼�� ID �� uid �Ǥ��� passwd ����ȥ���֤��ޤ���
+passwd データベースを検索し、
+ユーザ ID が uid である passwd エントリを返します。
 
-@param uid �������� uid ���������ά�������ˤ� [[man:getuid(2)]] ���ͤ��Ѥ��ޤ���
+@param uid 検索する uid 。引数を省略した場合には [[man:getuid(2)]] の値を用います。
 
-@raise ArgumentError ����ȥ꤬���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise ArgumentError エントリが見つからなかった場合に発生します。
 
 @see [[man:getpwuid(3)]], [[c:Struct::Passwd]]
 
 --- getgrgid(gid) -> Struct::Group
 
-group �ǡ����١����򸡺��������롼�� ID �� gid
-�Ǥ��륰�롼�ץ���ȥ���֤��ޤ���
+group データベースを検索し、グループ ID が gid
+であるグループエントリを返します。
 
-@param gid �������� gid
+@param gid 検索する gid
 
-@raise ArgumentError ����ȥ꤬���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise ArgumentError エントリが見つからなかった場合に発生します。
 
 @see [[man:getgrgid(3)]], [[c:Struct::Group]]
 
 --- getgrnam(name) -> Struct::Group
 
-name �Ȥ���̾���Υ��롼�ץ���ȥ���֤��ޤ���
+name という名前のグループエントリを返します。
 
-@param name �������륰�롼��̾��
+@param name 検索するグループ名。
 
-@raise ArgumentError ����ȥ꤬���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise ArgumentError エントリが見つからなかった場合に発生します。
 
 @see [[man:getgrnam(3)]], [[c:Struct::Group]]
 
 --- group -> Struct::Group | nil
 
-/etc/group �ե����뤫���ɤ߹��������ȥ�����֤��ޤ���
+/etc/group ファイルから読み込んだエントリを一つ返します。
 
-�ǽ�θƤӽФ��Ǥϡ���Ƭ�Υ���ȥ���֤��ޤ�������ʹߤθƤӽФ��Ǥϡ�
-�ƤӽФ��٤˼��Υ���ȥ�����֤��ޤ����ե�����ν�ü��ã����� nil ���֤��ޤ���
+最初の呼び出しでは、先頭のエントリを返します。それ以降の呼び出しでは、
+呼び出す度に次のエントリを順に返します。ファイルの終端に達すると nil を返します。
 
-@raise RuntimeError /etc/group �ե����뤬���å�����Ƥ������ȯ�����ޤ���
+@raise RuntimeError /etc/group ファイルがロックされている場合に発生します。
 
 #@since 1.8.1
 @see [[m:Etc.#getgrent]], [[man:getgrent(3)]]
@@ -143,16 +143,16 @@ name �Ȥ���̾���Υ��롼�ץ���ȥ���֤��ޤ���
 
 --- group {|gr| ... } -> ()
 
-���ƤΥ��롼�ץ���ȥ���˥����������뤿��Υ��ƥ졼���Ǥ���
+全てのグループエントリを順にアクセスするためのイテレータです。
 
 --- passwd -> Struct::Passwd | nil
 
-/etc/passwd �����ɤ߹��������ȥ�����֤��ޤ���
+/etc/passwd から読み込んだエントリを一つ返します。
 
-�ǽ�θƤӽФ��Ǥϡ���Ƭ�Υ���ȥ���֤��ޤ�������ʹߤθƤӽФ��Ǥϡ�
-�ƤӽФ��٤˼��Υ���ȥ�����֤��ޤ����ե�����ν�ü��ã����� nil ���֤��ޤ���
+最初の呼び出しでは、先頭のエントリを返します。それ以降の呼び出しでは、
+呼び出す度に次のエントリを順に返します。ファイルの終端に達すると nil を返します。
 
-@raise RuntimeError /etc/passwd �ե����뤬���å�����Ƥ������ȯ�����ޤ���
+@raise RuntimeError /etc/passwd ファイルがロックされている場合に発生します。
 
 #@since 1.8.1
 @see [[m:Etc.#getpwent]], [[man:getpwent(3)]]
@@ -162,65 +162,65 @@ name �Ȥ���̾���Υ��롼�ץ���ȥ���֤��ޤ���
 
 --- passwd {|pw| ... } -> ()
 
-���Ƥ� passwd ����ȥ���˥����������뤿��Υ��ƥ졼���Ǥ���
+全ての passwd エントリを順にアクセスするためのイテレータです。
 
 
 = class Struct::Group < Struct
 #@since 1.9.1
 alias Etc::Group
 #@end
-[[m:Etc.#getgrent]] �������빽¤�Ρ�
+[[m:Etc.#getgrent]] で得られる構造体。
 
-���ι�¤�Τ��ͤ��ѹ����Ƥ⥷���ƥ�ˤ�ȿ�Ǥ���ޤ���
+この構造体の値を変更してもシステムには反映されません。
 
 == Instance Methods
 
 --- gid -> Integer
 
-���롼�� ID ���֤��ޤ���
+グループ ID を返します。
 
 --- gid=(gid)
 
-���롼�� ID �����ꤷ�ޤ���
+グループ ID を設定します。
 
 --- mem -> [String]
 
-���Υ��롼�פ˽�°������С��Υ�������̾��������֤��ޤ���
+このグループに所属するメンバーのログイン名を配列で返します。
 
 --- mem=(mem)
 
-���Υ��롼�פ˽�°������С��Υ�������̾�����ꤷ�ޤ���
+このグループに所属するメンバーのログイン名を設定します。
 
 --- name -> String
 
-���롼��̾�����ꤷ�ޤ���
+グループ名を設定します。
 
 
 --- name=(name)
 
-���롼��̾���֤��ޤ���
+グループ名を返します。
 
 --- passwd -> String
 
-�Ź沽���줿�ѥ���ɤ��֤��ޤ���
+暗号化されたパスワードを返します。
 
-���Υ��롼�פΥѥ���ɤؤΥ���������̵���Ǥ������ 'x' ���֤��ޤ���
-���Υ��롼�פΰ���ˤʤ�Τ˥ѥ���ɤ����פǤ�����ϡ���ʸ������֤��ޤ���
+このグループのパスワードへのアクセスが無効である場合は 'x' を返します。
+このグループの一員になるのにパスワードが不要である場合は、空文字列を返します。
 
 
 --- passwd=(passwd)
 
-���Υ��롼�פΥѥ���ɤ����ꤷ�ޤ���
+このグループのパスワードを設定します。
 
 = class Struct::Passwd < Struct
 #@since 1.9.1
 alias Etc::Passwd
 #@end
-[[m:Etc.#getpwent]] �������빽¤�Ρ�
+[[m:Etc.#getpwent]] で得られる構造体。
 
-���ι�¤�Τ��ͤ��ѹ����Ƥ⥷���ƥ�ˤ�ȿ�Ǥ���ޤ���
+この構造体の値を変更してもシステムには反映されません。
 
-���ƤΥ����ƥ���󶡤���Ƥ�����С�
+全てのシステムで提供されているメンバ。
   * name
   * passwd
   * uid
@@ -229,7 +229,7 @@ alias Etc::Passwd
   * dir
   * shell
 
-�ʹߤΥ��Фϥ����ƥ�ˤ�äƤ��󶡤���ޤ���
+以降のメンバはシステムによっては提供されません。
   * change
   * quota
   * age
@@ -241,109 +241,109 @@ alias Etc::Passwd
 
 --- dir -> String
 
-���Υ桼���Υۡ���ǥ��쥯�ȥ��ɽ���ѥ����֤��ޤ���
+このユーザのホームディレクトリを表すパスを返します。
 
 --- dir=(dir)
 
-���Υ桼���Υۡ���ǥ��쥯�ȥ��ɽ���ѥ������ꤷ�ޤ���
+このユーザのホームディレクトリを表すパスを設定します。
 
 --- gecos
 
-���Υ桼���Υե�͡������ξܺپ�����֤��ޤ���
+このユーザのフルネーム等の詳細情報を返します。
 
-�͡��ʹ�¤�����줿������֤� Unix �����ƥ��¸�ߤ��ޤ���������ϥ����ƥ��¸�Ǥ���
+様々な構造化された情報を返す Unix システムも存在しますが、それはシステム依存です。
 
 --- gecos=()
 
-���Υ桼���Υե�͡������ξܺپ�������ꤷ�ޤ���
+このユーザのフルネーム等の詳細情報を設定します。
 
 --- gid -> Integer
 
-���Υ桼���� gid ���֤��ޤ���
+このユーザの gid を返します。
 
 --- gid=(gid)
 
-���Υ桼���� gid �����ꤷ�ޤ���
+このユーザの gid を設定します。
 
 --- name -> String
 
-���Υ桼���Υ�������̾���֤��ޤ���
+このユーザのログイン名を返します。
 
 --- name=(name)
 
-���Υ桼���Υ�������̾�����ꤷ�ޤ���
+このユーザのログイン名を設定します。
 
 --- passwd -> String
 
-���Υ桼���ΰŹ沽���줿�ѥ���ɤ��֤��ޤ���
+このユーザの暗号化されたパスワードを返します。
 
-����ɥ��ѥ���ɤ����Ѥ���Ƥ�����ϡ� 'x' ���֤��ޤ���
-���Υ桼������������Ǥ��ʤ����� '*' ���֤��ޤ���
+シャドウパスワードが使用されている場合は、 'x' を返します。
+このユーザがログインできない場合は '*' を返します。
 
 --- passwd=(passwd)
 
-���Υ桼���ΰŹ沽���줿�ѥ���ɤ����ꤷ�ޤ���
+このユーザの暗号化されたパスワードを設定します。
 
 --- shell -> String
 
-���Υ桼���Υ������󥷥�����֤��ޤ���
+このユーザのログインシェルを返します。
 
 --- shell=(shell)
 
-���Υ桼���Υ������󥷥�������ꤷ�ޤ���
+このユーザのログインシェルを設定します。
 
 --- uid -> Integer
 
-���Υ桼���� uid ���֤��ޤ���
+このユーザの uid を返します。
 
 --- uid=(uid)
 
-���Υ桼���� uid �����ꤷ�ޤ���
+このユーザの uid を設定します。
 
 --- change -> Integer
 
-�ѥ�����ѹ�����(����)���֤��ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+パスワード変更時間(整数)を返します。このメンバはシステム依存です。
 
 --- change=(change)
 
-�ѥ�����ѹ�����(����)�����ꤷ�ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+パスワード変更時間(整数)を設定します。このメンバはシステム依存です。
 
 --- quota -> Integer
 
-��������(����)���֤��ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+クォータ(整数)を返します。このメンバはシステム依存です。
 
 --- quota=(quota)
 
-��������(����)�����ꤷ�ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+クォータ(整数)を設定します。このメンバはシステム依存です。
 
 --- age -> Integer
 
-������(����)���֤��ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+エージ(整数)を返します。このメンバはシステム依存です。
 
 --- age=(age)
 
-������(����)�����ꤷ�ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+エージ(整数)を設定します。このメンバはシステム依存です。
 
 --- uclass -> String
 
-�桼�������������饹(ʸ����)���֤��ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+ユーザアクセスクラス(文字列)を返します。このメンバはシステム依存です。
 
 --- uclass=(class)
 
-�桼�������������饹(ʸ����)�����ꤷ�ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+ユーザアクセスクラス(文字列)を設定します。このメンバはシステム依存です。
 
 --- comment -> String
 
-������(ʸ����)���֤��ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+コメント(文字列)を返します。このメンバはシステム依存です。
 
 --- comment=(comment)
 
-������(ʸ����)�����ꤷ�ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+コメント(文字列)を設定します。このメンバはシステム依存です。
 
 --- expire -> Integer
 
-���������ͭ������(����)���֤��ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+アカウント有効期限(整数)を返します。このメンバはシステム依存です。
 
 --- expire=(expire)
 
-���������ͭ������(����)�����ꤷ�ޤ������Υ��Фϥ����ƥ��¸�Ǥ���
+アカウント有効期限(整数)を設定します。このメンバはシステム依存です。

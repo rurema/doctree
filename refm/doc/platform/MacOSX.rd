@@ -2,10 +2,10 @@
 
 = Mac OS X
 
-X �� 10 �ΰա��ޥå����������ƥ���ɤ�Τ��������Τ����ޥå�������������
-�������ɤ�Τ��������Τ��Ϥ狼��ʤ����褷�� Mac �� X Window System ��
-�Ȥ���褦�ˤ��뤿��Τ�ΤǤϤʤ�(�����餯)��
+X は 10 の意。マックオーエステンと読むのが正しいのか、マックオーエスエッ
+クスと読むのが正しいのかはわからない。決して Mac で X Window System を
+使えるようにするためのものではない(おそらく)。
 
-�ޥå����������ƥ������������Ǥ���X Window System��((<�����δĶ�|URL:http://www.apple.co.jp/macosx/features/x11/index.html>))������ޤ��������ޤ�ܤ����ʤ��ͤˤϻȤ�����Ϥ褯����ޤ��󡣤������äƥǥ٥��åѤ�X�����˲������äƤ⤿�֤�¿���οͤˤϸ���������ޤ���Ruby��Ϥ�Ȥ���BSD�Ǥ�ư����Τ����Ū��ڡʥǥե���ȥ��󥹥ȡ����Terminal�����äƤ��ޤ��ˤ˻Ȥ����Ȥ��Ǥ��ޤ���
+マックオーエステンが正しいそうです。X Window Systemは((<純正の環境|URL:http://www.apple.co.jp/macosx/features/x11/index.html>))がありますが、あまり詳しくない人には使い勝手はよくありません。したがってデベロッパがX向けに何かを作ってもたぶん多くの人には見向きされません。Rubyを始めとしてBSDでも動くものは比較的手軽（デフォルトインストールでTerminalが入っています）に使うことができます。
 
-Ruby�Υ���ѥ����Mac OS X�Ǥ�Developer Tool�򥤥󥹥ȡ��뤷�Ƥ������̤�Ϥ��Ǥ��ʥ���ѥ���ե饰��CFLAGS = -g -O2 -pipe -fno-common -no-cpp-precomp�ȡ�-no-cpp-precomp��ɬ�פˤʤ뤫���Τ�ޤ���ˡ��ޤ���Mac OS X 10.3�Ǥ�ruby��ɸ���ź�դ���Ƥ��ޤ���
+RubyのコンパイルはMac OS XではDeveloper Toolをインストールしておけば通るはずです（コンパイラフラグにCFLAGS = -g -O2 -pipe -fno-common -no-cpp-precompと、-no-cpp-precompが必要になるかも知れません）。また、Mac OS X 10.3ではrubyが標準で添付されています。

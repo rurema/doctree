@@ -1,24 +1,24 @@
 = class Socket::Option
 
-[[m:BasicSocket#getsockopt]]��[[m:BasicSocket#setsockopt]] ��
-�Ȥ������åȥ��ץ������ͤ�ɽ�����饹��
+[[m:BasicSocket#getsockopt]]、[[m:BasicSocket#setsockopt]] で
+使うソケットオプションの値を表すクラス。
 
-�����åȥ��ץ����ζ���Ū�ʰ�̣��
-���ȤλȤäƤ��륷���ƥ�Υɥ�����Ȥ򸫤Ƥ���������
+ソケットオプションの具体的な意味は
+自身の使っているシステムのドキュメントを見てください。
 
 == Class Methods
 --- new(family, level, optname, data) -> Socket::Option
 
-Socket::Option ���֥������ȿ������������֤��ޤ���
+Socket::Option オブジェクト新たに生成し返します。
 
-family, level, optname �ˤ� Socket::SOL_SOCKET �Τ褦��������¾��
-ʸ����("SOL_SOCKET", "SOCKET")������ܥ�(:SOL_SOCKET, :SOCKET)��
-���ꤹ�뤳�Ȥ��Ǥ��ޤ���
+family, level, optname には Socket::SOL_SOCKET のような整数の他、
+文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を
+指定することができます。
 
-@param family �����åȥե��ߥ꡼
-@param level �����åȥ��ץ�����٥�
-@param optname ���ץ�����̾��
-@param data �ǡ���(ʸ����)
+@param family ソケットファミリー
+@param level ソケットオプションレベル
+@param optname オプションの名前
+@param data データ(文字列)
 
 @see [[m:Socket::Option.int]], [[m:Socket::Option.bool]], [[m:Socket::Option.linger]]
 
@@ -27,79 +27,79 @@ family, level, optname �ˤ� Socket::SOL_SOCKET �Τ褦��������¾��
 
 --- int(family, level, optname, integer) -> Socket::Option
 
-������ǡ����Ȥ��ƻ��� Socket::Option ���֥������ȿ������������֤��ޤ���
+整数をデータとして持つ Socket::Option オブジェクト新たに生成し返します。
 
-family, level, optname �ˤ� Socket::SOL_SOCKET �Τ褦��������¾��
-ʸ����("SOL_SOCKET", "SOCKET")������ܥ�(:SOL_SOCKET, :SOCKET)��
-���ꤹ�뤳�Ȥ��Ǥ��ޤ���
+family, level, optname には Socket::SOL_SOCKET のような整数の他、
+文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を
+指定することができます。
 
-@param family �����åȥե��ߥ꡼
-@param level �����åȥ��ץ�����٥�
-@param optname ���ץ�����̾��
-@param integer �ǡ���(����)
+@param family ソケットファミリー
+@param level ソケットオプションレベル
+@param optname オプションの名前
+@param integer データ(整数)
 
 --- bool(family, level, optname, boolean) -> Socket::Option
 
-������ǡ����Ȥ��ƻ��� Socket::Option ���֥������ȿ������������֤��ޤ���
+整数をデータとして持つ Socket::Option オブジェクト新たに生成し返します。
 
-family, level, optname �ˤ� Socket::SOL_SOCKET �Τ褦��������¾��
-ʸ����("SOL_SOCKET", "SOCKET")������ܥ�(:SOL_SOCKET, :SOCKET)��
-���ꤹ�뤳�Ȥ��Ǥ��ޤ���
+family, level, optname には Socket::SOL_SOCKET のような整数の他、
+文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を
+指定することができます。
 
-@param family �����åȥե��ߥ꡼
-@param level �����åȥ��ץ�����٥�
-@param optname ���ץ�����̾��
-@param boolean �ǡ���(������)
+@param family ソケットファミリー
+@param level ソケットオプションレベル
+@param optname オプションの名前
+@param boolean データ(真偽値)
 
 --- linger(onoff, secs) -> Socket::Option
-SOL_SOCKET/SO_LINGER �Ѥ� Socket::Option ���֥�������
-�򿷤����������֤��ޤ���
+SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
+を新たに生成し返します。
 
-@param onoff 0/1�⤷���Ͽ�����
-@param secs ������
+@param onoff 0/1もしくは真偽値
+@param secs 整数値
 
 == Instance Methods
 --- family -> Integer
-�����åȥե��ߥ��ɽ���������֤��ޤ���
+ソケットファミリを表す整数を返します。
 
 --- level -> Integer
-�����åȥ��ץ�����٥��ɽ���������֤��ޤ���
+ソケットオプションレベルを表す整数を返します。
 
 --- optname -> Integer
-�����åȤΥ��ץ����̾��ɽ���������֤��ޤ���
+ソケットのオプション名を表す整数を返します。
 
 --- data -> String
 --- to_s -> String
 
-���ץ����Υǡ���(����)��ʸ������֤��ޤ���
+オプションのデータ(内容)を文字列で返します。
 
-���Ƥ������俿���͡��⤷���� struct linger �Ǥ��뤳�Ȥ��狼�äƤ�����ˤϡ�
+内容が整数や真偽値、もしくは struct linger であることがわかっている場合には、
 [[m:Socket::Option#int]], [[m:Socket::Option#bool]], [[m:Socket::Option#linger]]
-���Ѥ���
+を用いて
 
-to_s �ϲ��Ȥθߴ����Τ����¸�ߤ��ޤ���
+to_s は過去との互換性のために存在します。
 
 --- int -> Integer
-���ץ����Υǡ���(����)���������Ѵ������֤��ޤ���
+オプションのデータ(内容)を整数に変換して返します。
 
-@raise TypeError data�ΥХ��ȿ�����Ŭ�ڤǤ���(sizeof(int)�Ȱۤʤ�)����ȯ�����ޤ�
+@raise TypeError dataのバイト数が不適切である(sizeof(int)と異なる)場合に発生します
 @see [[m:Socket::Option#data]]
 
 --- bool -> bool
-���ץ����Υǡ���(����)�򿿵��ͤ��Ѵ������֤��ޤ���
+オプションのデータ(内容)を真偽値に変換して返します。
 
-@raise TypeError data�ΥХ��ȿ�����Ŭ�ڤǤ���(sizeof(int)�Ȱۤʤ�)����ȯ�����ޤ�
+@raise TypeError dataのバイト数が不適切である(sizeof(int)と異なる)場合に発生します
 @see [[m:Socket::Option#data]]
 
 --- linger -> [bool, Integer]
-���ץ���� SOL_SOCKET/SO_LINGER �Ǥ�����ˡ�
-���ץ����Υǡ���(����)�򿿵��ͤ������Υڥ��Ȥ����֤��ޤ���
+オプションが SOL_SOCKET/SO_LINGER である場合に、
+オプションのデータ(内容)を真偽値と整数のペアとして返します。
 
-@raise TypeError data�ΥХ��ȿ�����Ŭ�ڤǤ���(sizeof(struct linger)�Ȱۤʤ�)���䡢
-                 level/optname �� SOL_SOCKET/SO_LINGER �Ǥʤ���ȯ�����ޤ�
+@raise TypeError dataのバイト数が不適切である(sizeof(struct linger)と異なる)場合や、
+                 level/optname が SOL_SOCKET/SO_LINGER でないに発生します
 @see [[m:Socket::Option#data]]
 
 --- unpack(template) -> Array
-data ���Ф� [[m:String#unpack]] ��ƤӽФ������η�̤��֤��ޤ���
+data に対し [[m:String#unpack]] を呼び出し、その結果を返します。
 
-���Υ᥽�åɤϲ��Ȥθߴ����Τ����¸�ߤ��ޤ���
+このメソッドは過去との互換性のために存在します。

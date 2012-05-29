@@ -2,7 +2,7 @@ require webrick/htmlutils
 require webrick/httputils
 require webrick/httpstatus
 
-ÄÌ¾ï¤Î¥Õ¥¡¥¤¥ë¥µ¡¼¥Ğ¤È¤·¤Æ¤Îµ¡Ç½¤òÄó¶¡¤¹¤ë¤¿¤á¤Î¥µ¡¼¥Ö¥ì¥Ã¥È¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+é€šå¸¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚µãƒ¼ãƒã¨ã—ã¦ã®æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ãŸã‚ã®ã‚µãƒ¼ãƒ–ãƒ¬ãƒƒãƒˆã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(filehandler/HTTPServlet__DefaultFileHandler)
 #@include(filehandler/HTTPServlet__FileHandler)

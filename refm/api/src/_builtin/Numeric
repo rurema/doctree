@@ -1,28 +1,28 @@
 = class Numeric < Object
 include Comparable
 
-���ͤ�ɽ����ݥ��饹�Ǥ���[[c:Fixnum]] �� [[c:Float]] �ʤɤο��ͥ��饹�� Numeric �Υ��֥��饹�Ȥ���
-��������Ƥ��ޤ���
+数値を表す抽象クラスです。[[c:Fixnum]] や [[c:Float]] などの数値クラスは Numeric のサブクラスとして
+実装されています。
 
-�黻����Ӥ�Ԥ��᥽�å�(+, -, *, /, <=>)�� Numeric �Υ��֥��饹����������
-����Numeric ���������Ƥ���᥽�åɤϡ����֥��饹���󶡤���Ƥ���᥽�å�
-(+, -, *, /, %) �����Ѥ������������Τ��ۤȤ�ɤǤ���
-�Ĥޤ� Numeric ���������Ƥ���᥽�åɤϡ�Numeric �Υ��֥��饹�Ȥ��ƿ����˿��ͥ��饹������������ˡ�
-�黻�᥽�å�(+, -, *, /, %, <=>, coerce)�������������С����ͥ��饹�Τ��Τۤ��Υ᥽�åɤ�
-Ŭ�ڤ��������뤳�Ȥ�տޤ����󶡤���Ƥ��ޤ���
+演算や比較を行うメソッド(+, -, *, /, <=>)は Numeric のサブクラスで定義されま
+す。Numeric で定義されているメソッドは、サブクラスで提供されているメソッド
+(+, -, *, /, %) を利用して定義されるものがほとんどです。
+つまり Numeric で定義されているメソッドは、Numeric のサブクラスとして新たに数値クラスを定義した時に、
+演算メソッド(+, -, *, /, %, <=>, coerce)だけを定義すれば、数値クラスのそのほかのメソッドが
+適切に定義されることを意図して提供されています。
 
-+@, -@ ��ñ��黻�� +, - ��ɽ���᥽�å�����ʤɤǤϤ��ε�ˡ�����Ѥ��ޤ���
++@, -@ は単項演算子 +, - を表しメソッド定義などではこの記法を利用します。
 
-��Ψ�Τ��� Numeric �Υ᥽�åɤ�Ʊ���᥽�åɤ����֥��饹�Ǻ��������Ƥ����礬����ޤ���
+効率のため Numeric のメソッドと同じメソッドがサブクラスで再定義されている場合があります。
 
-[[m:Numeric#coerce]] �᥽�åɤ�Ȥ����Ȥˤ�äưۤʤ���ͥ��饹�֤Ǳ黻��Ԥ����Ȥ�Ǥ��ޤ���
+[[m:Numeric#coerce]] メソッドを使うことによって異なる数値クラス間で演算を行うこともできます。
 
-=== ���ʹ�Ϣ�Υ᥽�åɤ�ºݤ�������Ƥ��륯�饹����
+=== 数値関連のメソッドを実際に定義しているクラス一覧
 
-�ۤȤ�ɤο��ʹ�Ϣ�Υ᥽�åɤϥ��֥��饹�Ǻ��������Ƥ��ޤ�������ϡ�
-��Ψ�Τ���Ǥ��ä�������ݥ��饹�Ǽ�����������뤳�Ȥ��Ǥ��ʤ��ä���
-���뤿��Ǥ����ºݤˤɤΥ᥽�åɤ��ɤΥ��饹���������Ƥ��뤫�ϰʲ���
-ɽ�򻲾Ȥ��Ƥ���������
+ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、
+効率のためであったり上位抽象クラスで実装を定義することができなかったり
+するためです。実際にどのメソッドがどのクラスに定義されているかは以下の
+表を参照してください。
 
 #@#  cary = [Numeric, Integer, Fixnum, Bignum, Float]
 #@#  mary = cary.collect {|c| c.instance_methods(false)}
@@ -179,9 +179,9 @@ include Comparable
                       | |     -          -          o          o          -
                       ~ |     -          -          o          o          -       
 #@end
-#@# 1.9 �ʹߤ���̯�˰㤦��ʬ�����롣Fixnum#succ �ʤɡ�
+#@# 1.9 以降は微妙に違う部分がある。Fixnum#succ など。
 
-=== �ݤ�᥽�åɤ�ư�����
+=== 丸めメソッドの動作一覧
 
 #@#         numbers=[1.9, 1.1, -1.1, -1.9]
 #@#         methods=%w(ceil floor round truncate)
@@ -198,8 +198,8 @@ include Comparable
 #@#         }
 
 [[m:Numeric#ceil]], [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
-�Τդ�ޤ��ΰ㤤��ɽ�Ǥ������μ¿����Ф��Ƴƥ᥽�åɤ�Ƥ֤�ɽ�Τ褦�ʿ���
-�֤��ޤ���
+のふるまいの違いの表です。左の実数に対して各メソッドを呼ぶと表のような数を
+返します。
 
               |       ceil      floor      round   truncate
         ----------------------------------------------------
@@ -208,9 +208,9 @@ include Comparable
          -1.1 |         -1         -2         -1         -1
          -1.9 |         -1         -2         -2         -1
 
-=== �ݤ�᥽�åɤγ�ĥ��
+=== 丸めメソッドの拡張例
 
-�ھ夲��ceil, floor ����Ѥ��ưʲ��Τ褦������Ǥ��ޤ���
+切上げはceil, floor を使用して以下のように定義できます。
 
   if n > 0 then
     n.ceil
@@ -218,8 +218,8 @@ include Comparable
     n.floor
   end
 
-�ޤ���Ǥ�շ���ھ夲���ڼΤơ��ͼθ�����Ԥ��᥽�åɤϰʲ��Τ褦��
-����Ǥ��ޤ���
+また、任意桁の切上げ、切捨て、四捨五入を行うメソッドは以下のように
+定義できます。
 
   class Numeric
     def roundup(d=0)
@@ -277,35 +277,35 @@ include Comparable
 
 --- +@    -> self
 
-ñ��黻�Ҥ� + �Ǥ���
-self ���֤��ޤ���
+単項演算子の + です。
+self を返します。
 
 
 --- -@    -> Numeric
 
-ñ��黻�Ҥ� - �Ǥ���
-self ������ȿž��������Τ��֤��ޤ���
+単項演算子の - です。
+self の符号を反転させたものを返します。
 
-���Υ᥽�åɤϡ����黻�� - �� 0 - self �ˤ�ä��������Ƥ��ޤ���
+このメソッドは、二項演算子 - で 0 - self によって定義されています。
 
 #@if (version < "1.8.0")
 --- ==(other)    -> bool
 
-self �� other ���ͤ��������Ȥ��� true���������ʤ��Ȥ��� false ���֤��ޤ���
-other �� Numeric ����ӤǤ��ʤ����֥������Ȥξ�硢
-���ˡ§������Ω�Ĥ��Ȥ��ꤷ�� other == self �η�̤��֤��ޤ���
+self と other の値が等しいときに true、等しくないときに false を返します。
+other が Numeric で比較できないオブジェクトの場合、
+結合法則が成り立つことを仮定して other == self の結果を返します。
 
-@param other ���Ȥ���Ӥ��������ͤ���ꤷ�ޤ���
+@param other 自身と比較したい数値を指定します。
 
 #@end
 
 --- abs    -> Numeric
 
-���Ȥ� 0 �ʾ�ʤ�� self �򡢤����Ǥʤ����� -self ���֤��ޤ���
+自身が 0 以上ならば self を、そうでない場合は -self を返します。
 
 --- ceil   -> Integer
 
-���Ȥ�������������礭�������Τ����Ǿ��Τ�Τ��֤��ޤ���
+自身と等しいかより大きな整数のうち最小のものを返します。
 
      1.ceil        #=> 1
      1.2.ceil      #=> 2
@@ -316,7 +316,7 @@ other �� Numeric ����ӤǤ��ʤ����֥������Ȥξ�硢
 
 --- floor   -> Integer
 
-���Ȥ�����������꾮���������Τ�������Τ�Τ��֤��ޤ���
+自身と等しいかより小さな整数のうち最大のものを返します。
 
      1.floor        #=> 1
      1.2.floor      #=> 1
@@ -327,9 +327,9 @@ other �� Numeric ����ӤǤ��ʤ����֥������Ȥξ�硢
 
 --- round   -> Integer
 
-���ȤȤ�äȤ�ᤤ�������֤��ޤ���
+自身ともっとも近い整数を返します。
 
-����� 0.5, -0.5 �Ϥ��줾�� 1,-1 ���ڤ�夲����ޤ���������ͼθ����Ǥ����������ݤ�ǤϤ���ޤ���
+中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
 
      1.round        #=> 1
      1.2.round      #=> 1
@@ -340,7 +340,7 @@ other �� Numeric ����ӤǤ��ʤ����֥������Ȥξ�硢
 
 --- truncate   -> Integer
 
-���Ȥ� 0 �Ȥδ֤ˤ��������ǡ����Ȥˤ�äȤ�ᤤ�������֤��ޤ���
+自身と 0 との間にある整数で、自身にもっとも近い整数を返します。
 
      1.truncate        #=> 1
      1.2.truncate      #=> 1
@@ -353,27 +353,27 @@ other �� Numeric ����ӤǤ��ʤ����֥������Ȥξ�硢
 --- dup
 
 #@since 1.8.0
-���Υ᥽�åɤ�ƤӽФ����ȤϤǤ��ޤ��󡣸ƤӽФ����㳰��ȯ�����ޤ���
+このメソッドを呼び出すことはできません。呼び出すと例外が発生します。
 
-���ͤʤɤ� immutable �ʥ��֥������Ȥ� clone �� dup ���ػߤ���Ƥ��ޤ���
+数値などの immutable なオブジェクトは clone や dup が禁止されています。
   1.dup   # => in `clone': can't clone Fixnum (TypeError)
 
-@raise TypeError ���Υ᥽�åɤ�ƤӽФ�������ȯ�����ޤ�
+@raise TypeError このメソッドを呼び出した場合に発生します
 
 #@else
-self ���֤��ޤ���
+self を返します。
 #@end
 
 --- coerce(other)    -> [Numeric]
 
-���Ȥ� other ��Ʊ�����饹�ˤʤ�褦�����Ȥ� other ���Ѵ��� [other, self] �Ȥ�������ˤ����֤��ޤ���
+自身と other が同じクラスになるよう、自身か other を変換し [other, self] という配列にして返します。
 
-�ǥե���ȤǤ� self �� other �� [[c:Float]] ���Ѵ����� [other, self] �Ȥ�������ˤ����֤��ޤ���
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
-�ʲ��� [[c:Rational]] �� coerce �Υ������Ǥ���other �����Ȥ��Τ�ʤ����ͥ��饹�Ǥ��ä���硢
-super ��Ƥ�Ǥ��뤳�Ȥ����դ��Ʋ�������
+デフォルトでは self と other を [[c:Float]] に変換して [other, self] という配列にして返します。
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+以下は [[c:Rational]] の coerce のソースです。other が自身の知らない数値クラスであった場合、
+super を呼んでいることに注意して下さい。
 
-  # lib/rational.rb ���
+  # lib/rational.rb より
  
   def coerce(other)
     if other.kind_of?(Float)
@@ -385,19 +385,19 @@ super ��Ƥ�Ǥ��뤳�Ȥ����դ��Ʋ�������
     end
   end
 
-���ͥ��饹�λ��ѱ黻�Ҥ��̾Ｋʬ�ȱ黻�Ǥ��ʤ����饹�򥪥ڥ��ɤȤ��Ƽ���
-���� coerce ��ȤäƼ�ʬ�ȥ��ڥ��ɤ��Ѵ�������Ǳ黻��Ԥ��ޤ���
-�ʲ��� [[c:Rational]] �� + �᥽�åɤ������ά������ΤǤ���
-���������Ȥ��Τ�ʤ����ͥ��饹�Ǥ����硢������ coerce �ˤ�꼫�Ȥ��Ѵ����Ƥ���
-+ �黻�Ҥ�Ƥ�Ǥ��ޤ���
+数値クラスの算術演算子は通常自分と演算できないクラスをオペランドとして受け
+取ると coerce を使って自分とオペランドを変換した上で演算を行います。
+以下は [[c:Rational]] の + メソッドを一部省略したものです。
+引数が自身の知らない数値クラスである場合、引数の coerce により自身を変換してから
++ 演算子を呼んでいます。
 
-  # lib/rational.rb ���
+  # lib/rational.rb より
   
   def + (a)
     if a.kind_of?(Rational)
-      # Ĺ���ΤǾ�ά
+      # 長いので省略
     elsif a.kind_of?(Integer)
-      # Ĺ���ΤǾ�ά
+      # 長いので省略
     elsif a.kind_of?(Float)
       Float(self) + a
     else
@@ -406,24 +406,24 @@ super ��Ƥ�Ǥ��뤳�Ȥ����դ��Ʋ�������
     end
   end
 
-@param other ���ڥ��ɤ���ͤǻ��ꤷ�ޤ���
+@param other オペランドを数値で指定します。
 
 --- div(other)    -> Integer
 
-self �� other �ǳ�ä������ξ� q ���֤��ޤ���
+self を other で割った整数の商 q を返します。
 
-�����ǡ��� q ��;�� r �ϡ����줾��
+ここで、商 q と余り r は、それぞれ
 
   * self == other * q + r  
-��
-  * other > 0 �ΤȤ�:  0     <= r < other
-  * other < 0 �ΤȤ�:  other <  r <= 0
-  * q ������
-��ߤ������Ǥ���
-�����б�����;��� [[m:Numeric#modulo]] �ǵ����ޤ���
-div �ϥ᥽�å� / �θƤӽФ��Ȥ����������Ƥ��ޤ���
+と
+  * other > 0 のとき:  0     <= r < other
+  * other < 0 のとき:  other <  r <= 0
+  * q は整数
+をみたす数です。
+商に対応する余りは [[m:Numeric#modulo]] で求められます。
+div はメソッド / の呼び出しとして定義されています。
 
-@param other ���Ȥ��������ꤷ�ޤ���
+@param other 自身を割る数を指定します。
 
   p 3.div(2) # => 1
   p (-3).div(2) # => -2
@@ -435,11 +435,11 @@ div �ϥ᥽�å� / �θƤӽФ��Ȥ����������Ƥ��ޤ���
 --- fdiv(other)   -> Float
 #@end
 
-self �� other �ǳ�ä��¿��ξ����֤��ޤ���
+self を other で割った実数の商を返します。
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-@param other ���Ȥ��������ꤷ�ޤ���
+@param other 自身を割る数を指定します。
 
   p 1.quo(3)      # => 0.3333333333333333
   
@@ -448,23 +448,23 @@ Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
 
 --- divmod(other)    -> [Numeric]
 
-self �� other �ǳ�ä��� q ��;�� r ��
-[q, r] �Ȥ��� 2 ���Ǥ�����ˤ����֤��ޤ���
-�� q �Ͼ�������Ǥ�����;�� r �������Ǥ���Ȥϸ¤�ޤ���
+self を other で割った商 q と余り r を、
+[q, r] という 2 要素の配列にして返します。
+商 q は常に整数ですが、余り r は整数であるとは限りません。
 
-�����ǡ��� q ��;�� r �ϡ�
+ここで、商 q と余り r は、
 
   * self == other * q + r  
-��
-  * other > 0 �ΤȤ�:  0     <= r < other
-  * other < 0 �ΤȤ�:  other <  r <= 0
-  * q ������
-��ߤ������Ǥ���
-divmod ���֤����� [[m:Numeric#div]] ��Ʊ���Ǥ���
-�ޤ�;��ϡ�[[m:Numeric#modulo]] ��Ʊ���Ǥ���
-���Υ᥽�åɤϡ��᥽�å� / �� % �ˤ�ä��������Ƥ��ޤ���
+と
+  * other > 0 のとき:  0     <= r < other
+  * other < 0 のとき:  other <  r <= 0
+  * q は整数
+をみたす数です。
+divmod が返す商は [[m:Numeric#div]] と同じです。
+また余りは、[[m:Numeric#modulo]] と同じです。
+このメソッドは、メソッド / と % によって定義されています。
 
-@param other ���Ȥ��������ꤷ�ޤ���
+@param other 自身を割る数を指定します。
 
    11.divmod(3)         #=> [3, 2]
    (11.5).divmod(3.5)   #=> [3, 1.0]
@@ -476,28 +476,28 @@ divmod ���֤����� [[m:Numeric#div]] ��Ʊ���Ǥ���
 
 --- integer?    -> bool
 
-self �������λ��������֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+self が整数の時、真を返します。そうでない場合に false を返します。
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 --- modulo(other)    -> Numeric
 
-self �� other �ǳ�ä�;�� r ���֤��ޤ���
+self を other で割った余り r を返します。
 
-�����ǡ��� q ��;�� r �ϡ�
+ここで、商 q と余り r は、
 
   * self == other * q + r  
-��
-  * other > 0 �ΤȤ�  0 <= r < other
-  * other < 0 �ΤȤ� other < r <= 0
-  * q ������
+と
+  * other > 0 のとき  0 <= r < other
+  * other < 0 のとき other < r <= 0
+  * q は整数
 
-��ߤ������Ǥ���
-;�� r �ϡ�other ��Ʊ�����ˤʤ�ޤ���
-��  q �ϡ�[[m:Numeric#div]] (���뤤�� ��/��)�ǵ����ޤ���
-modulo �ϥ᥽�å� % �θƤӽФ��Ȥ����������Ƥ��ޤ���
+をみたす数です。
+余り r は、other と同じ符号になります。
+商  q は、[[m:Numeric#div]] (あるいは 「/」)で求められます。
+modulo はメソッド % の呼び出しとして定義されています。
 
-@param other ���Ȥ��������ꤷ�ޤ���
+@param other 自身を割る数を指定します。
 
   p 13.modulo(4)       #=>  1
   p (11.5).modulo(3.5) #=> 1.0
@@ -510,21 +510,21 @@ modulo �ϥ᥽�å� % �θƤӽФ��Ȥ����������Ƥ��ޤ���
 
 --- remainder(other)    -> Numeric
 
-self �� other �ǳ�ä�;�� r ���֤��ޤ���
+self を other で割った余り r を返します。
 
-�����ǡ��� q ��;�� r �ϡ�
+ここで、商 q と余り r は、
 
   * self == other * q + r  
-��
+と
 
-  * self > 0 �ΤȤ�  0 <= r < |other|
-  * self < 0 �ΤȤ� -|other| < r <= 0
-  * q ������
+  * self > 0 のとき  0 <= r < |other|
+  * self < 0 のとき -|other| < r <= 0
+  * q は整数
 
-��ߤ������Ǥ���r ������ self ��Ʊ���ˤʤ�ޤ���
-�� q ��ľ���֤��᥽�åɤϤ���ޤ���self.quo(other).truncate ��������������ޤ���
+をみたす数です。r の符号は self と同じになります。
+商 q を直接返すメソッドはありません。self.quo(other).truncate がそれに相当します。
 
-@param other ���Ȥ��������ꤷ�ޤ���
+@param other 自身を割る数を指定します。
 
   p 13.remainder(4)       #=>  1
   p (11.5).remainder(3.5) #=> 1.0
@@ -537,7 +537,7 @@ self �� other �ǳ�ä�;�� r ���֤��ޤ���
 
 --- nonzero?    -> self | nil
 
-���Ȥ������λ� nil ���֤����󥼥��λ� self ���֤��ޤ���
+自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
   p 10.nonzero?              #=> 10
   p 0.nonzero?               #=> nil
@@ -548,11 +548,11 @@ self �� other �ǳ�ä�;�� r ���֤��ޤ���
 
 --- to_int    -> Integer
 
-self.to_i ��Ʊ���Ǥ���
+self.to_i と同じです。
 
 --- zero?    -> bool
 
-���Ȥ������λ��������֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身がゼロの時、真を返します。そうでない場合は false を返します。
 
   p 10.zero?              #=> false
   p 0.zero?               #=> true
@@ -568,19 +568,19 @@ self.to_i ��Ʊ���Ǥ���
 #@end
 #@end
 
-self ����Ϥ��� step ��­���ʤ��� limit ��ۤ���
-���ޤǥ֥��å��򷫤��֤��ޤ���step ����ο������Ǥ��ޤ����ޤ���limit �� step �ˤ� [[c:Float]] �ʤɤ�
-����Ǥ��ޤ���
+self からはじめ step を足しながら limit を越える
+前までブロックを繰り返します。step は負の数も指定できます。また、limit や step には [[c:Float]] なども
+指定できます。
 
-@param limit �롼�פξ�¤��뤤�ϲ��¤���ͤǻ��ꤷ�ޤ���step ����ο������ꤵ�줿���ϡ�
-       ���¤Ȥ��Ʋ�ᤵ��ޤ���
+@param limit ループの上限あるいは下限を数値で指定します。step に負の数が指定された場合は、
+       下限として解釈されます。
 
-@param step �ƥ��ƥåפ��礭������ͤǻ��ꤷ�ޤ�����ο�����ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param step 各ステップの大きさを数値で指定します。負の数を指定することもできます。
 
-@raise ArgumentError step �� 0 ����ꤷ������ȯ�����ޤ���
+@raise ArgumentError step に 0 を指定した場合に発生します。
 
-#@#���Υ᥽�åɤϡ�[[c:Fixnum]], [[c:Integer]] �����ư���ޤ�
-#@#��������ˤ�� [[c:Float]] �� step �Ǥ���褦�ˤʤ�ޤ�����
+#@#このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
+#@#た。これにより [[c:Float]] も step できるようになりました。
 
   2.step(5){|n| p n}
   2
@@ -603,10 +603,10 @@ self ����Ϥ��� step ��­���ʤ��� limit ��ۤ���
   6
 
 
-������ư���������� 0.1 �� 2�ʿ��Ǥ����Τ�ɽ�����Ǥ��ʤ�(2�ʿ���
-0.1�� 0.00011001100....�Ȥʤ�)�Τǡ��ʲ��Τ褦�ʥ롼�פǤϸ�����
-�����ưտޤ�������롼�פ��ʤ����Ȥ����롣step �Ϥ��θ������θ��
-�Ƽ�������Ƥ��롣
+注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
+0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
+生じて意図した回数ループしないことがある。step はこの誤差を考慮し
+て実装されている。
 
     i = 1.1
     while i <= 1.5
@@ -616,7 +616,7 @@ self ����Ϥ��� step ��­���ʤ��� limit ��ۤ���
     => 1.1
        1.2
        1.3
-       1.4   <- 1.5 ��ɽ������ʤ�
+       1.4   <- 1.5 が表示されない
 
 @see [[m:Integer#downto]]
 
@@ -626,12 +626,12 @@ self ����Ϥ��� step ��­���ʤ��� limit ��ۤ���
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
-���Ȥ� other ����礭������ 1 ������������ 0 �򡢾��������ˤ� -1 �򤽤줾���֤��ޤ���
-���Ȥ� other ����ӤǤ��ʤ����ˤ� nil ���֤��ޤ���
+自身が other より大きい場合に 1 を、等しい場合に 0 を、小さい場合には -1 をそれぞれ返します。
+自身と other が比較できない場合には nil を返します。
 
-Numeric �Υ��֥��饹�ϡ����ư����������褦 ���Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、上の動作を満たすよう このメソッドを適切に再定義しなければなりません。
 
-@param other ���Ȥ���Ӥ��������ͤ���ꤷ�ޤ���
+@param other 自身と比較したい数値を指定します。
 
  1 <=> 0   #=> 1
  1 <=> 1   #=> 0
@@ -640,13 +640,13 @@ Numeric �Υ��֥��饹�ϡ����ư����������褦 ���Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���
 
 --- eql?(other) -> bool
 
-���Ȥ� other �Υ��饹������������ == �᥽�åɤ���Ӥ������������� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。
+そうでない場合に false を返します。
 
-Numeric �Υ��֥��饹�ϡ�eql? ����Ӥ�������������Ʊ�Τ�Ʊ���ϥå����ͤ��֤��褦��
-hash �᥽�åɤ�Ŭ�ڤ��������ɬ�פ�����ޤ���
+Numeric のサブクラスは、eql? で比較して等しい数値同士が同じハッシュ値を返すように
+hash メソッドを適切に定義する必要があります。
 
-@param other ���Ȥ���Ӥ��������ͤ���ꤷ�ޤ���
+@param other 自身と比較したい数値を指定します。
 
   p 1.eql?(1)    #=> true
   p 1.eql?(1.0)  #=> false
@@ -659,129 +659,129 @@ hash �᥽�åɤ�Ŭ�ڤ��������ɬ�פ�����ޤ���
 #@since 1.9.1
 --- abs2 -> Numeric
 
-���Ȥ������ͤ� 2 ����֤��ޤ���
+自身の絶対値の 2 乗を返します。
 
-��:
+例:
 
   2.abs2    # => 4
   -2.abs2   # => 4
   2.0.abs2  # => 4
   -2.0.abs2 # => 4
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 --- arg   -> 0 | Math::PI
 --- angle -> 0 | Math::PI
 --- phase -> 0 | Math::PI
 
-���Ȥ��г�(���ο��ʤ� 0����ο��ʤ� [[m:Math::PI]])���֤��ޤ���
+自身の偏角(正の数なら 0、負の数なら [[m:Math::PI]])を返します。
 
-��:
+例:
 
   1.arg  # => 0
   -1.arg # => 3.141592653589793
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 --- conj      -> Numeric
 --- conjugate -> Numeric
 
-���Ȥζ���ʣ�ǿ�(�¿��ξ��Ͼ�˼���)���֤��ޤ���
+自身の共役複素数(実数の場合は常に自身)を返します。
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 @see [[m:Complex#conj]]
 
 --- denominator -> Integer
 
-���Ȥ� [[c:Rational]] ���Ѵ���������ʬ����֤��ޤ���
+自身を [[c:Rational]] に変換した時の分母を返します。
 
-@return ʬ����֤��ޤ���
+@return 分母を返します。
 
 @see [[m:Numeric#numerator]]
 
 --- imag      -> 0
 --- imaginary -> 0
 
-��� 0 ���֤��ޤ���
+常に 0 を返します。
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-@see [[m:Numeric#real]]��[[m:Complex#imag]]
+@see [[m:Numeric#real]]、[[m:Complex#imag]]
 
 --- numerator -> Integer
 
-���Ȥ� [[c:Rational]] ���Ѵ���������ʬ�Ҥ��֤��ޤ���
+自身を [[c:Rational]] に変換した時の分子を返します。
 
-@return ʬ�Ҥ��֤��ޤ���
+@return 分子を返します。
 
 @see [[m:Numeric#denominator]]
 
 --- polar -> [Numeric, Numeric]
 
-���Ȥ������ͤ��гѤ�����ˤ����֤��ޤ������ο��ʤ� [self, 0]����ο���
-�� [-self, [[m:Math::PI]]] ���֤��ޤ���
+自身の絶対値と偏角を配列にして返します。正の数なら [self, 0]、負の数な
+ら [-self, [[m:Math::PI]]] を返します。
 
-��:
+例:
 
   1.0.polar  # => [1.0, 0]
   2.0.polar  # => [2.0, 0]
   -1.0.polar # => [1.0, 3.141592653589793]
   -2.0.polar # => [2.0, 3.141592653589793]
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 --- real     -> Numeric
 
-���Ȥ��֤��ޤ���
+自身を返します。
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-@see [[m:Numeric#imag]]��[[m:Complex#real]]
+@see [[m:Numeric#imag]]、[[m:Complex#real]]
 
 --- real?    -> bool
 
-���Ȥ� [[c:Complex]] �����Υ��֥��饹�Υ��󥹥��󥹤Ǥʤ�����
-true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身が [[c:Complex]] かそのサブクラスのインスタンスでない場合に
+true を返します。そうでない場合に false を返します。
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 --- rect        -> [Numeric, Numeric]
 --- rectangular -> [Numeric, Numeric]
 
-[self, 0] ���֤��ޤ���
+[self, 0] を返します。
 
-��:
+例:
 
   1.rect    # => [1, 0]
   -1.rect   # => [-1, 0]
   1.0.rect  # => [1.0, 0]
   -1.0.rect # => [-1.0, 0]
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 --- to_c -> Complex
 
-���Ȥ�ʣ�ǿ� ([[c:Complex]]) ���Ѵ����ޤ���Complex(self, 0) ���֤��ޤ���
+自身を複素数 ([[c:Complex]]) に変換します。Complex(self, 0) を返します。
 
-��:
+例:
 
   1.to_c              # => (1+0i)
   -1.to_c             # => (-1+0i)
   1.0.to_c            # => (1.0+0i)
   Rational(1, 2).to_c # => ((1/2)+0i)
 
-Numeric �Υ��֥��饹�ϡ����Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Фʤ�ޤ���
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 #@end
 #@since 1.9.2
 --- i    -> Complex
 
-Complex(0, self) ���֤��ޤ���
+Complex(0, self) を返します。
 
-��������[[c:Complex]] ���֥������ȤǤ����ѤǤ��ޤ���
+ただし、[[c:Complex]] オブジェクトでは利用できません。
 
-��:
+例:
 
   10.i             # => (0+10i)
   -10.i            # => (0-10i)

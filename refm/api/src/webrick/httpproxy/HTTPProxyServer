@@ -1,10 +1,10 @@
 = class WEBrick::HTTPProxyServer < WEBrick::HTTPServer
 
-¥×¥í¥¯¥·¤Îµ¡Ç½¤òÄó¶¡¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£CONNECT ¥á¥½¥Ã¥É¤Ë¤âÂĞ±ş¤·¤Æ¤¤¤Ş¤¹¡£
+ãƒ—ãƒ­ã‚¯ã‚·ã®æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚CONNECT ãƒ¡ã‚½ãƒƒãƒ‰ã«ã‚‚å¯¾å¿œã—ã¦ã„ã¾ã™ã€‚
 
  * [[url:http://jp.rubyist.net/magazine/?0002-WEBrickProxy]]
 
-°Ê²¼¤Ï´°Á´¤ËÆ°ºî¤¹¤ë¥×¥í¥¯¥·¥µ¡¼¥Ğ¤ÎÎã¤Ç¤¹¡£
+ä»¥ä¸‹ã¯å®Œå…¨ã«å‹•ä½œã™ã‚‹ãƒ—ãƒ­ã‚¯ã‚·ã‚µãƒ¼ãƒã®ä¾‹ã§ã™ã€‚
  
  require 'webrick'
  require 'webrick/httpproxy'
@@ -20,55 +20,55 @@
 
 --- new(config, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPProxyServer
 
-¥×¥í¥¯¥·¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+ãƒ—ãƒ­ã‚¯ã‚·ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param config ÀßÄê¤òÊİÂ¸¤·¤¿¥Ï¥Ã¥·¥å¤ò»ØÄê¤·¤Ş¤¹¡£               
-              ÀßÄê¤È¤·¤ÆÍ­¸ú¤Ê¥Ï¥Ã¥·¥å¤Î¥­¡¼¤È¤½¤ÎÃÍ¤Ï [[m:WEBrick::HTTPServer.new]] ¤ÈÆ±¤¸¤Ç¤¹¡£
-              ¤½¤ì¤Ë²Ã¤¨¤Æ°Ê²¼¤Î¥­¡¼¤¬Í­¸ú¤Ç¤¹¡£
+@param config è¨­å®šã‚’ä¿å­˜ã—ãŸãƒãƒƒã‚·ãƒ¥ã‚’æŒ‡å®šã—ã¾ã™ã€‚               
+              è¨­å®šã¨ã—ã¦æœ‰åŠ¹ãªãƒãƒƒã‚·ãƒ¥ã®ã‚­ãƒ¼ã¨ãã®å€¤ã¯ [[m:WEBrick::HTTPServer.new]] ã¨åŒã˜ã§ã™ã€‚
+              ãã‚Œã«åŠ ãˆã¦ä»¥ä¸‹ã®ã‚­ãƒ¼ãŒæœ‰åŠ¹ã§ã™ã€‚
 
 : :ProxyAuthProc
-  ¥×¥í¥¯¥·Ç§¾Ú¤ò¹Ô¤¦ [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£¤³¤Î proc ¤Ï 
-  [[c:WEBrick::HTTPResponse]] ¥ª¥Ö¥¸¥§¥¯¥È¤È [[c:WEBrick::HTTPRequest]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤È¤·¤Æ
-  proc.call(req, res) ¤Î¤è¤¦¤Ë¸Æ¤Ğ¤ì¤Ş¤¹¡£
-  Ç§¾Ú¤Ë¼ºÇÔ¤·¤¿¾ì¹ç proc ¤ÏÅ¬ÀÚ¤ÊÎã³°¤òÈ¯À¸¤µ¤»¤Ê¤±¤ì¤Ğ¤¤¤±¤Ş¤»¤ó¡£nil ¤ò»ØÄê¤·¤¿¾ì¹ç¤¹¤Ù¤Æ¤ÎÀÜÂ³¤ò
-  ¼õ¤±ÉÕ¤±¤Ş¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¤¹¡£ÄÌ¾ï¤Ï [[c:WEBrick::HTTPAuth::ProxyBasicAuth]] ¤« 
-  [[c:WEBrick::HTTPAuth::ProxyDigestAuth]] ¤ò»ÈÍÑ¤·¤Ş¤¹¡£
+  ãƒ—ãƒ­ã‚¯ã‚·èªè¨¼ã‚’è¡Œã† [[c:Proc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚ã“ã® proc ã¯ 
+  [[c:WEBrick::HTTPResponse]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ [[c:WEBrick::HTTPRequest]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å¼•æ•°ã¨ã—ã¦
+  proc.call(req, res) ã®ã‚ˆã†ã«å‘¼ã°ã‚Œã¾ã™ã€‚
+  èªè¨¼ã«å¤±æ•—ã—ãŸå ´åˆ proc ã¯é©åˆ‡ãªä¾‹å¤–ã‚’ç™ºç”Ÿã•ã›ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ã€‚nil ã‚’æŒ‡å®šã—ãŸå ´åˆã™ã¹ã¦ã®æ¥ç¶šã‚’
+  å—ã‘ä»˜ã‘ã¾ã™ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ nil ã§ã™ã€‚é€šå¸¸ã¯ [[c:WEBrick::HTTPAuth::ProxyBasicAuth]] ã‹ 
+  [[c:WEBrick::HTTPAuth::ProxyDigestAuth]] ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚
 //emlist{
  auth_proc = proc{|req, res|
    unless c = req['proxy-authorization']
      res['Proxy-Authenticate'] = 'Basic realm="WEBrick Proxy"'
      raise WEBrick::HTTPStatus::ProxyAuthenticationRequired
    else
-     # Î¬
+     # ç•¥
    end
  }
  s = WEBrick::HTTPProxyServer.new( {:ProxyAuthProc => auth_proc} ) 
 //}
 : :ProxyContentHandler
-  ÀÜÂ³Àè¤Î HTTP ¥µ¡¼¥Ğ¤«¤é¤ÎÆâÍÆ¤ò½èÍı¤¹¤ë [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
-  ¥ì¥¹¥İ¥ó¥¹¤ÎÆâÍÆ¤ò½ñ¤­´¹¤¨¤¿¤ê¤¹¤ë»ö¤¬½ĞÍè¤Ş¤¹¡£[[c:WEBrick::HTTPResponse]] ¥ª¥Ö¥¸¥§¥¯¥È¤È 
-  [[c:WEBrick::HTTPRequest]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤È¤·¤Æ proc.call(req, res) ¤Î¤è¤¦¤Ë¸Æ¤Ğ¤ì¤Ş¤¹¡£
-  nil ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ê¤Ë¤â¤·¤Ş¤»¤ó¡£¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¤¹¡£
+  æ¥ç¶šå…ˆã® HTTP ã‚µãƒ¼ãƒã‹ã‚‰ã®å†…å®¹ã‚’å‡¦ç†ã™ã‚‹ [[c:Proc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
+  ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®å†…å®¹ã‚’æ›¸ãæ›ãˆãŸã‚Šã™ã‚‹äº‹ãŒå‡ºæ¥ã¾ã™ã€‚[[c:WEBrick::HTTPResponse]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ 
+  [[c:WEBrick::HTTPRequest]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å¼•æ•°ã¨ã—ã¦ proc.call(req, res) ã®ã‚ˆã†ã«å‘¼ã°ã‚Œã¾ã™ã€‚
+  nil ã‚’æŒ‡å®šã—ãŸå ´åˆãªã«ã‚‚ã—ã¾ã›ã‚“ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ nil ã§ã™ã€‚
 //emlist{
  handler = proc{|req, res|
-   res.body.gsub!(/¤Ç¤¹¡£/e, '¤Ç¤ó¤¬¤Ê¡£')
-   res.body.gsub!(/¤Ş¤¹¡£/e, '¤Ş¤ó¤¬¤Ê¡£')
+   res.body.gsub!(/ã§ã™ã€‚/e, 'ã§ã‚“ãŒãªã€‚')
+   res.body.gsub!(/ã¾ã™ã€‚/e, 'ã¾ã‚“ãŒãªã€‚')
  }
  s = WEBrick::HTTPProxyServer.new( { :ProxyContentHandler => handler } )
 //}
 : :ProxyVia
-  true ¤ò»ØÄê¤·¤¿¾ì¹ç ÀÜÂ³Àè¤Î HTTP ¥µ¡¼¥Ğ¤Ø¤Î¥ê¥¯¥¨¥¹¥È¤Ë Via ¥Ø¥Ã¥À¤òÉÕ¤±¤Ş¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ï 
-  true ¤Ç¤¹¡£
+  true ã‚’æŒ‡å®šã—ãŸå ´åˆ æ¥ç¶šå…ˆã® HTTP ã‚µãƒ¼ãƒã¸ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã« Via ãƒ˜ãƒƒãƒ€ã‚’ä»˜ã‘ã¾ã™ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ 
+  true ã§ã™ã€‚
 : :ProxyTimeout
-  true ¤ò»ØÄê¤·¤¿¾ì¹ç ÀÜÂ³Àè¤Î HTTP ¥µ¡¼¥Ğ¤Ø¤Î¥ê¥¯¥¨¥¹¥È¤Ë¥¿¥¤¥à¥¢¥¦¥È¤òÀßÄê¤·¤Ş¤¹¡£
-  ¥¿¥¤¥à¥¢¥¦¥È¤Ş¤Ç¤Î»ş´Ö¤ÏÀßÄê¤Ç¤­¤Ş¤»¤ó¡£
+  true ã‚’æŒ‡å®šã—ãŸå ´åˆ æ¥ç¶šå…ˆã® HTTP ã‚µãƒ¼ãƒã¸ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã‚’è¨­å®šã—ã¾ã™ã€‚
+  ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã¾ã§ã®æ™‚é–“ã¯è¨­å®šã§ãã¾ã›ã‚“ã€‚
 : :ProxyURI
-  HTTP ¥µ¡¼¥Ğ¤Ø¤ÎÀÜÂ³¤Ë¤µ¤é¤ËÊÌ¤Î Proxy ¥µ¡¼¥Ğ¤ò»È¤¦¾ì¹ç¤Ë¤½¤Î Proxy ¤Î URI 
-  ¤ò [[c:URI]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç»ØÄê¤·¤Ş¤¹¡£
+  HTTP ã‚µãƒ¼ãƒã¸ã®æ¥ç¶šã«ã•ã‚‰ã«åˆ¥ã® Proxy ã‚µãƒ¼ãƒã‚’ä½¿ã†å ´åˆã«ãã® Proxy ã® URI 
+  ã‚’ [[c:URI]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§æŒ‡å®šã—ã¾ã™ã€‚
 //emlist{
   require 'uri'
   u = URI.parse('http://localhost:18080/')
   s = WEBrick::HTTPProxyServer.new( { :ProxyURI => u } )
 //}
 
-@param default ¥Ç¥Õ¥©¥ë¥È¤Ï [[m:WEBrick::Config::HTTP]] ¤Ç¤¹¡£
+@param default ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ [[m:WEBrick::Config::HTTP]] ã§ã™ã€‚

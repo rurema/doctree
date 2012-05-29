@@ -1,47 +1,47 @@
-���Υ饤�֥��� RubyUnit �Ȥθߴ������󶡤��뤿��������󶡤���Ƥ��ޤ���
-���줫���˥åȥƥ��Ȥ�񤯤Ȥ���
-[[lib:test/unit]] �饤�֥���ȤäƤ���������
+このライブラリは RubyUnit との互換性を提供するためだけに提供されています。
+これからユニットテストを書くときは
+[[lib:test/unit]] ライブラリを使ってください。
 
 = class RUNIT::CUI::TestRunner < Test::Unit::UI::Console::TestRunner
 
-CUI �ǥƥ��Ȥ�¹Ԥ��뤿��Υ��饹�Ǥ���
+CUI でテストを実行するためのクラスです。
 
 == Class Methods
 
 --- new -> RUNIT::CUI::TestRunner
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 --- run(suite) -> ()
 
-Ϳ����줿�ƥ��ȥ������Ȥ�¹Ԥ��ޤ���
+与えられたテストスイートを実行します。
 
-@param suite �ƥ��ȥ������Ȥ�Ϳ���ޤ���
+@param suite テストスイートを与えます。
 
 --- quiet_mode=(bool)
 
-���򥻥åȤ���Ƚ��Ϥ��Ť��ˤʤ�ޤ���
+真をセットすると出力が静かになります。
 
-@param bool ������ꤹ��ȡ����Ϥ��Ť��ˤʤ�ޤ���
+@param bool 真を指定すると、出力が静かになります。
 
 == Instance Methods
 
 --- run(suite, quiet_mode = @@quiet_mode) -> ()
 
-Ϳ����줿�ƥ��ȥ������Ȥ�¹Ԥ��ޤ���
+与えられたテストスイートを実行します。
 
-@param suite �ƥ��ȥ������Ȥ���ꤷ�ޤ���
+@param suite テストスイートを指定します。
 
-@param quiet_mode ������ꤹ��ȡ����Ϥ��Ť��ˤʤ�ޤ���
+@param quiet_mode 真を指定すると、出力が静かになります。
 
 --- create_mediator(suite)
 
-Ϳ����줿�ƥ��ȥ������Ȥ�Ȥäƥƥ��Ȥ����Ԥ�������ޤ���
+与えられたテストスイートを使ってテストの仲介者を作成します。
 
-@param suite �ƥ��ȥ������Ȥ���ꤷ�ޤ���
+@param suite テストスイートを指定します。
 
 --- create_result -> RUNIT::TestResult
 
-�ƥ��Ȥμ¹Է�̤�������ޤ���
+テストの実行結果を作成します。
 
 

@@ -1,17 +1,17 @@
 = class OpenSSL::X509::Extension < Object
 
-X.509 v3 ������γ�ĥ�ΰ�Τ���Υ��饹�Ǥ���
+X.509 v3 証明書の拡張領域のためのクラスです。
 
-[[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�
-���γ�ĥ�ΰ�� Extension ���֥������Ȥ�����Ȥ����ݻ�����
-[[c:OpenSSL::X509::Certificate#extensions]] �Ǥ������������ޤ���
+[[c:OpenSSL::X509::Certificate]] オブジェクトは
+その拡張領域を Extension オブジェクトの配列として保持し、
+[[c:OpenSSL::X509::Certificate#extensions]] でその配列が得られます。
 
-���Υ��饹�Υ��󥹥��������� [[c:OpenSSL::ASN1::ASN1Data]] ��
-��갷��ɬ�פ��������ݤǤ���
-[[c:OpenSSL::X509::ExtensionFactory]] ���Ѥ��뤳�Ȥ�
-���󥹥��󥹤���������ؤ˹Ԥ����Ȥ��Ǥ��ޤ���
+このクラスのインスタンス生成は [[c:OpenSSL::ASN1::ASN1Data]] を
+取り扱う必要があり面倒です。
+[[c:OpenSSL::X509::ExtensionFactory]] を用いることで
+インスタンスの生成を簡便に行うことができます。
 
-=== ����
+=== 参照
   * [[RFC:5280]]
 #@# *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
 
@@ -19,16 +19,16 @@ X.509 v3 ������γ�ĥ�ΰ�Τ���Υ��饹�Ǥ���
 
 --- new(der) -> OpenSSL::X509::Extension
 --- new(oid, value, critical=false) -> OpenSSL::X509::Extension
-[[c:OpenSSL::X509::Extension]] ���֥������Ȥ��������ޤ���
+[[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
 
-������1�Ĥξ��� DER ������ʸ������Ϥ��ޤ���
+引数が1つの場合は DER 形式の文字列を渡します。
 
-������2�İʾ�ξ��ϡ�oid �ˤϳ�ĥ�ΰ�� OID �� �ɥåȶ��ڤ�ɽ����
-short name��long name �Τ����줫�Ǥ���ʸ�����Ϳ���ޤ���
-value �ˤϤ����ͤ�ɽ�� DER ������ʸ���󡢤⤷���� 
-[[c:OpenSSL::ASN1::ASN1Data]] �Υ��֥��饹��Ϳ���ޤ���
+引数が2つ以上の場合は、oid には拡張領域の OID の ドット区切り表記、
+short name、long name のいずれかである文字列を与えます。
+value にはその値を表す DER 形式の文字列、もしくは 
+[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスを与えます。
 
-��;
+例;
 
   require 'openssl'
   include OpenSSL
@@ -41,67 +41,67 @@ value �ˤϤ����ͤ�ɽ�� DER ������ʸ���󡢤⤷����
   ex3 = X509::Extension.new("basicConstraints", ASN1.Sequence([ASN1::Boolean(false)]))
   p ex3 # => basicConstraints = CA:FALSE
 
-@param der DER������ʸ����
-@param oid OID��ɽ��ʸ����(�ɥåȶ��ڤꡢshort name, long name�Τ����줫)
-@param value ��ĥ�ΰ���ͤ�ɽ�� DER ����ʸ����
-@param critical ��ĥ�ΰ�ν����� 
+@param der DER形式の文字列
+@param oid OIDを表す文字列(ドット区切り、short name, long nameのいずれか)
+@param value 拡張領域の値を表す DER 形式文字列
+@param critical 拡張領域の重要度 
 
 == Instance Methods
 
 ---critical? -> bool
-���γ�ĥ�ΰ�ν�����(critical)���֤��ޤ���
+その拡張領域の重要度(critical)を返します。
 
 @see [[c:OpenSSL::X509::Extension#critical=]]
 ---critical=(bool)
-���γ�ĥ�ΰ�ν�����(critical)�򿿵��ͤ����ꤷ�ޤ���
+その拡張領域の重要度(critical)を真偽値で設定します。
 
-@param bool ���ꤹ������٤ο�����
+@param bool 設定する重要度の真偽値
 @see [[c:OpenSSL::X509::Extension#critical?]]
 
 ---oid -> String
-��ĥ�ΰ�μ��̻�(extnID)��OID��ʸ������֤��ޤ���
+拡張領域の識別子(extnID)をOIDの文字列で返します。
 
 @see [[c:OpenSSL::X509::Extension#oid=]]
 
 ---oid=(oid)
 
-��ĥ�ΰ�μ��̻�(extnID)��OID��ʸ��������ꤷ�ޤ���
+拡張領域の識別子(extnID)をOIDの文字列で設定します。
 
-@param oid OID��ʸ����
-@raise OpenSSL::X509::Extension ���̻Ҥ�����˼��Ԥ�������ȯ�����ޤ�
+@param oid OIDの文字列
+@raise OpenSSL::X509::Extension 識別子の設定に失敗した場合に発生します
 @see [[c:OpenSSL::X509::Extension#oid]]
 
 ---to_der -> String
 
-DER �����ΥХ�������Ѵ������֤��ޤ���
+DER 形式のバイト列に変換して返します。
 
-@raise OpenSSL::X509::Extension �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::Extension 変換に失敗した場合に発生します
 
 ---value -> String
 
-��ĥ�ΰ����(extnValue)���֤��ޤ���
+拡張領域の値(extnValue)を返します。
 
 @see [[c:OpenSSL::X509::Extension#value=]]
 
 ---value=(value)
 
-��ĥ�ΰ����(extnValue)�����ꤷ�ޤ���
+拡張領域の値(extnValue)を設定します。
 
-@param value ���ꤹ���ͤ�ʸ����
-@raise OpenSSL::X509::Extension �ͤ�����˼��Ԥ�������ȯ�����ޤ�
+@param value 設定する値の文字列
+@raise OpenSSL::X509::Extension 値の設定に失敗した場合に発生します
 @see [[c:OpenSSL::X509::Extension#value]]
 --- to_a -> [String, String, bool]
 
-��ĥ�ΰ�����Ƥ�[���̻�(extnID), ��(extnValue), ������(critical)] �Ȥ���
-�����֤��ޤ���
+拡張領域の内容を、[識別子(extnID), 値(extnValue), 重要度(critical)] という
+形で返します。
 
 --- to_h -> Hash
-��ĥ�ΰ�����Ƥ�
-  { "oid" => ���̻�(extnID), "value" => ��(extnValue), "critical" => ������(critical) }
-�Ȥ����ϥå�����֤��ޤ���
+拡張領域の内容を、
+  { "oid" => 識別子(extnID), "value" => 値(extnValue), "critical" => 重要度(critical) }
+というハッシュで返します。
 
 --- to_s -> String
-��ĥ�ΰ�����Ƥ�ʸ����ɽ�����֤��ޤ���
+拡張領域の内容を、文字列表現で返します。
 
 = class OpenSSL::X509::ExtensionError < OpenSSL::OpenSSLError
-[[c:OpenSSL::X509::Extension]] ��Ϣ�Υ��顼���������Ȥ���ȯ�����ޤ���
+[[c:OpenSSL::X509::Extension]] 関連のエラーが起きたときに発生します。

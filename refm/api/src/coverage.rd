@@ -1,18 +1,18 @@
 #@since 1.9.1
-���Х�å���¬�ꤹ�뤿��Υ饤�֥��Ǥ���
+カバレッジを測定するためのライブラリです。
 
-=== �Ȥ���
+=== 使い方
 
-�ʲ��Τ褦�ˤ���¬���Ԥ��ޤ���
+以下のようにして測定を行います。
 
-  (1) require "coverage" ����
-  (2) Coverage.start ��¹Ԥ���
-  (3) require �� load ��¹Ԥ���
-  (4) Coverage.result �η�̤��ǧ����
+  (1) require "coverage" する
+  (2) Coverage.start を実行する
+  (3) require か load を実行する
+  (4) Coverage.result の結果を確認する
 
-=== ��
+=== 例
 
-�ޤ�¬���оݤΥ��������Ѱդ��ޤ���
+まず測定対象のソースを用意します。
 
   # foo.rb
   s = 0
@@ -26,36 +26,36 @@
     p :ng
   end
 
-�ʲ��Τ褦�ˤ���¬���Ԥ��ޤ���
+以下のようにして測定を行います。
 
   require "coverage"
   Coverage.start
   require "foo"
   p Coverage.result # => {"foo.rb"=>[1, 1, 10, nil, nil, 1, 1, nil, 0, nil]}
 
-Coverage.result["foo.rb"]��������������ϳƹԤμ¹Բ���ˤʤäƤ��ޤ���
+Coverage.result["foo.rb"]から得られる配列は各行の実行回数になっています。
 
 = class Coverage
 
-���Х�å���¬�ꤹ�뵡ǽ���󶡤��륯�饹�Ǥ���
+カバレッジを測定する機能を提供するクラスです。
 
-�¸�Ū�ʵ�ǽ�Τ��ᡢAPI�Ͼ����ѹ��ˤʤ��ǽ��������ޤ���
+実験的な機能のため、APIは将来変更になる可能性があります。
 
 == Class Methods
 
 --- start  -> nil
 
-���Х�å���¬��򳫻Ϥ��ޤ������˼¹Ԥ���Ƥ������ˤϲ��ⵯ����ޤ���
+カバレッジの測定を開始します。既に実行されていた場合には何も起こりません。
 
 --- result  -> Hash
 
-¬���̤�ե�����̾�򥭡����ƹԤμ¹Բ��������ˤ����ͤΥϥå������
-���ޤ������Ԥ䥳���ȤΤߤιԤʤɤ�¬���̤� nil �ˤʤ�ޤ���result
-�᥽�åɤ��¹Ԥ��줿��ϥ��Х�å���¬���Ԥ��ޤ���
+測定結果をファイル名をキー、各行の実行回数を配列にした値のハッシュを返
+します。空行やコメントのみの行などの測定結果は nil になります。result
+メソッドが実行された後はカバレッジの測定を行いません。
 
-@return ¬���̤�ɽ���ϥå���
+@return 測定結果を表すハッシュ
 
-@raise RuntimeError [[m:Coverage.start]] ��¹Ԥ������˼¹Ԥ��줿����
-                    ȯ�����ޤ���
+@raise RuntimeError [[m:Coverage.start]] を実行する前に実行された場合に
+                    発生します。
 
 #@end

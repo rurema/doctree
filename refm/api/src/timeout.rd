@@ -1,4 +1,4 @@
-�����ॢ���Ȥ�Ԥ��饤�֥��Ǥ���
+タイムアウトを行うライブラリです。
 
 = reopen Kernel
 
@@ -8,57 +8,57 @@
 --- timeout(sec) {|i| .... }
 --- timeout(sec, exception_class = nil) {|i| .... }
 
-�֥��å��� sec �äδ����դ��Ǽ¹Ԥ��ޤ���
-�֥��å��μ¹Ի��֤����¤�᤮���Ȥ����㳰
-[[c:Timeout::Error]] ��ȯ�����ޤ���
+ブロックを sec 秒の期限付きで実行します。
+ブロックの実行時間が制限を過ぎたときは例外
+[[c:Timeout::Error]] が発生します。
 
-exception_class ����ꤷ�����ˤ� [[c:Timeout::Error]] �������
-�����㳰��ȯ�����ޤ���
-�֥��å��ѥ�᡼�� i �� sec ���Ϥ���ޤ���
+exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
+その例外が発生します。
+ブロックパラメータ i は sec がはいります。
 
-�ޤ� sec �� nil �ΤȤ������»��֤ʤ���
-�֥��å���¹Ԥ��ޤ���
+また sec が nil のときは制限時間なしで
+ブロックを実行します。
 
-@param sec �����ॢ���Ȥ�����֤��ÿ��ǻ��ꤷ�ޤ�.
-@param exception_class �����ॢ���Ȥ�������ȯ���������㳰����ꤷ�ޤ�.
+@param sec タイムアウトする時間を秒数で指定します.
+@param exception_class タイムアウトした時、発生させる例外を指定します.
 
-=== ����
+=== 注意
 
-timeout �ˤ������ߤ� Thread �ˤ�äƼ¸�����Ƥ��ޤ���C ����
-��٥�Ǽ������졢Ruby �Υ���åɤ�������ʤ��������Ф���
-timeout ��̵�ϤǤ���
-���Τ褦��
-��Τϼ��ѥ�٥�ǤϾ��ʤ��ΤǤ�������򤢤���� Socket �ʤɤ�
-DNS��̾�����˻��֤������ä���������ޤ���
-([[lib:resolv-replace]] ����Ѥ���ɬ�פ�����ޤ�)��
-���ν����� Ruby �Ǽ������ʤ����� C ¦�� Ruby
-�Υ���åɤ�ռ����Ƥ�����ɬ�פ�����ޤ���
-#@# [[unknown:timeout�����|trap::timeout]]�⻲��
+timeout による割り込みは Thread によって実現されています。C 言語
+レベルで実装され、Ruby のスレッドが割り込めない処理に対して
+timeout は無力です。
+そのような
+ものは実用レベルでは少ないのですが、例をあげると Socket などは
+DNSの名前解決に時間がかかった場合割り込めません
+([[lib:resolv-replace]] を使用する必要があります)。
+その処理を Ruby で実装しなおすか C 側で Ruby
+のスレッドを意識してあげる必要があります。
+#@# [[unknown:timeoutの落し穴|trap::timeout]]も参照
 #@end
 
 = module Timeout
 
-�����ॢ���Ȥ�Ԥ�����Υ⥸�塼��Ǥ���
+タイムアウトを行うためのモジュールです。
 
 == Module Functions
 
 --- timeout(sec, exception_class = nil) {|i| ... }
 
-�֥��å��� sec �äδ����դ��Ǽ¹Ԥ��ޤ���
-�֥��å��μ¹Ի��֤����¤�᤮���Ȥ����㳰
-[[c:Timeout::Error]] ��ȯ�����ޤ���
+ブロックを sec 秒の期限付きで実行します。
+ブロックの実行時間が制限を過ぎたときは例外
+[[c:Timeout::Error]] が発生します。
 
-exception_class ����ꤷ�����ˤ� [[c:Timeout::Error]] �������
-�����㳰��ȯ�����ޤ���
-�֥��å��ѥ�᡼�� i �� sec ���Ϥ���ޤ���
+exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
+その例外が発生します。
+ブロックパラメータ i は sec がはいります。
 
-�ޤ� sec �� nil �ΤȤ������»��֤ʤ���
-�֥��å���¹Ԥ��ޤ���
+また sec が nil のときは制限時間なしで
+ブロックを実行します。
 
-@param sec �����ॢ���Ȥ�����֤��ÿ��ǻ��ꤷ�ޤ�.
-@param exception_class �����ॢ���Ȥ�������ȯ���������㳰����ꤷ�ޤ�.
+@param sec タイムアウトする時間を秒数で指定します.
+@param exception_class タイムアウトした時、発生させる例外を指定します.
 
-�� Ĺ���׻��Υ����ॢ����
+例 長い計算のタイムアウト
   require 'timeout'
 
   def calc_pi(min)
@@ -80,10 +80,10 @@ exception_class ����ꤷ�����ˤ� [[c:Timeout::Error]] �������
   end
 
   printf "%d: pi = %f\n", min[0] + min[1], min[0]*4.0/(min[0]+min[1])
-  #��
+  #例
   #=> 417519: pi = 3.141443
 
-�� �ȼ����㳰��ȯ�������륿���ॢ����
+例 独自の例外を発生させるタイムアウト
   #!/usr/bin/env ruby
 
   require 'timeout'
@@ -98,20 +98,20 @@ exception_class ����ꤷ�����ˤ� [[c:Timeout::Error]] �������
     puts err
   end
 
-=== ����
+=== 注意
 
-timeout �ˤ������ߤ� Thread �ˤ�äƼ¸�����Ƥ��ޤ���
-C �����٥�Ǽ������졢
-Ruby �Υ���åɤ�������ʤ��������Ф��� timeout ��̵�ϤǤ���
-���Τ褦�ʤ�Τϼ��ѥ�٥�ǤϾ��ʤ��ΤǤ�����
-Socket �ʤɤ� DNS��̾�����˻��֤������ä���������ޤ���
-([[lib:resolv-replace]] ����Ѥ���ɬ�פ�����ޤ�)��
-���ν����� Ruby �Ǽ������ʤ����� C ¦�� Ruby
-�Υ���åɤ�ռ����Ƥ�����ɬ�פ�����ޤ���
+timeout による割り込みは Thread によって実現されています。
+C 言語レベルで実装され、
+Ruby のスレッドが割り込めない処理に対して timeout は無力です。
+そのようなものは実用レベルでは少ないのですが、
+Socket などは DNSの名前解決に時間がかかった場合割り込めません
+([[lib:resolv-replace]] を使用する必要があります)。
+その処理を Ruby で実装しなおすか C 側で Ruby
+のスレッドを意識してあげる必要があります。
 
-�ʲ�����Ǥϡ�gethostbyname(���褽0.6�ý����˻��֤������äƤ���) ����λ����ľ��((A)�βս�)�� TimeoutError �㳰�������äƤ��ޤ���
+以下の例では、gethostbyname(およそ0.6秒処理に時間がかかっている) が終了した直後((A)の箇所)で TimeoutError 例外があがっています。
 
-�� timeout ��������ʤ�
+例 timeout が割り込めない
   require 'timeout'
   require 'socket'
 
@@ -125,25 +125,25 @@ Socket �ʤɤ� DNS��̾�����˻��֤������ä���������ޤ���
   ensure
     p Time.now - start
   end
-  # �¹���
+  # 実行例
   => ["helium.ruby-lang.org", [], 2, "210.251.121.214"]
      0.689331
      /usr/local/lib/ruby/1.6/timeout.rb:37: execution expired (TimeoutError)
            from -:6:in `timeout'
            from -:6
-  # gethostbyname ��0.1�ä�����ʤ������㳰��ȯ�����ʤ��Τ�
-  # ���ξ��ϡ�t �˾���������(0.000001�Τ褦��)���Ѥ��롣
+  # gethostbyname が0.1秒かからない場合は例外が発生しないので
+  # その場合は、t に小さい数値(0.000001のような)に変える。
 
-#@#[[unknown:timeout�����|trap::timeout]]�⻲��
-#@# unknown �ʤΤǡ������˾����Ѥ��ƥ��ԥڤ�����
+#@#[[unknown:timeoutの落し穴|trap::timeout]]も参照
+#@# unknown なので、ここに少し変えてコピペした。
 
-timeout �ˤ������ߤ� [[m:Kernel.#system]] �ˤ�äƸƤӽФ��줿�����ץ�������
-�����ॢ���Ȥ�������ϤǤ��ʤ��Τǡ�[[m:IO.popen]]��[[m:Kernel.#open]]����Ѥ���ʤɤι��פ�ɬ�פǤ���
+timeout による割り込みは [[m:Kernel.#system]] によって呼び出された外部プログラムを
+タイムアウトさせる事はできないので、[[m:IO.popen]]、[[m:Kernel.#open]]を使用するなどの工夫が必要です。
 
-�� �������ޥ�ɤΥ����ॢ����
+例 外部コマンドのタイムアウト
   require 'timeout'
 
-  # �ƥ����ѤΥ������Ĥ��롣
+  # テスト用のシェルをつくる。
   File.open("loop.sh", "w"){|fp|
     fp.print <<SHELL_EOT
   #!/bin/bash
@@ -172,12 +172,12 @@ timeout �ˤ������ߤ� [[m:Kernel.#system]] �ˤ�äƸƤӽФ��줿�����ץ������
   }
 
   File.chmod(0755, "loop.sh")
-  t = 10 # 10 �äǥ����ॢ����
+  t = 10 # 10 秒でタイムアウト
   begin
     pid = nil
     com = nil
     timeout(t) {
-      # system ���ȤȤޤ�ʤ�
+      # system だととまらない
       # system("./loop.sh")
       com = IO.popen("./loop.sh")
       pid = com.pid
@@ -191,12 +191,12 @@ timeout �ˤ������ߤ� [[m:Kernel.#system]] �ˤ�äƸƤӽФ��줿�����ץ������
     printf "[result]\t%s", com.read
     com.close unless com.nil?
   end
-#@# ��äȤ����ߤ��������뤫�⤷��ʤ���
+#@# もっといい止め方があるかもしれない。
 
-  #�ߤޤäƤ��뤫��ǧ���롣
+  #止まっているか確認する。
   #system("ps au")
 
-#@# �����ѤʤΤǥ����ȥ�����
+#@# 内部用なのでコメントアウト
 #@# == Constants
 #@# --- THIS_FILE
 #@# --- CALLER_OFFSET
@@ -208,14 +208,14 @@ timeout �ˤ������ߤ� [[m:Kernel.#system]] �ˤ�äƸƤӽФ��줿�����ץ������
 #@end
 alias TimeoutError
 
-[[lib:timeout]] �����������㳰���饹�Ǥ���
-�ؿ� timeout �������ॢ���Ȥ����ȯ�����ޤ���
+[[lib:timeout]] で定義される例外クラスです。
+関数 timeout がタイムアウトすると発生します。
 
-[[lib:timeout]] ��Ȥ��饤�֥������������ϡ��桼�������ꤷ��
-timeout ����ª���ʤ��褦�˥饤�֥����� [[c:TimeoutError]] �Υ��֥��饹��
-������ƻ��Ѥ�������̵��Ǥ���
-#@#((-��: version 1.6 �Ǥϡ�[[unknown:ruby-list:33352]] �Υѥå���ɬ�פǤ���
-#@#���Υѥå��� 1.7 �˼����ޤ�ޤ���[[unknown:ruby-list:33391]]-))
+[[lib:timeout]] を使うライブラリを作成する場合は、ユーザが指定した
+timeout を捕捉しないようにライブラリ内で [[c:TimeoutError]] のサブクラスを
+定義して使用した方が無難です。
+#@#((-注: version 1.6 では、[[unknown:ruby-list:33352]] のパッチが必要です。
+#@#このパッチは 1.7 に取り込まれました[[unknown:ruby-list:33391]]-))
 
         ==> foo.rb <==
         require 'timeout.rb'

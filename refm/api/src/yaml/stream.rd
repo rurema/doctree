@@ -1,4 +1,4 @@
-ʣ���� YAML �ɥ�����Ȥ���٤˰�������Υ��֥饤�֥��Ǥ���
+複数の YAML ドキュメントを一度に扱うためのサブライブラリです。
 
 #@since 1.9.2
 = class Syck::Stream < Object
@@ -6,13 +6,13 @@
 = class YAML::Stream < Object
 #@end
 
-YAML �ɥ�����Ȥ�ʣ���ݻ����뤳�Ȥ��Ǥ��륹�ȥ꡼�९�饹�Ǥ���
+YAML ドキュメントを複数保持することができるストリームクラスです。
 
-=== ����
+=== 参考
 
 Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
- * �ץ�����ޡ��Τ���� YAML ���� (�����): [[url:http://jp.rubyist.net/magazine/?0010-YAML]]
+ * プログラマーのための YAML 入門 (中級編): [[url:http://jp.rubyist.net/magazine/?0010-YAML]]
 
 == class methods
 
@@ -22,13 +22,13 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 --- new(opts = {}) -> YAML::Stream
 #@end
 
-���ȥ꡼����֤��ޤ������ȥ꡼���YAML�ɥ�����Ȥ�ʣ���ݻ����뤳�Ȥ��Ǥ��ޤ���
+ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
 
-@param opts ���ץ�������ꤷ�ޤ��������ǽ�ʥ��ץ�����
+@param opts オプションを指定します。設定可能なオプションは
 #@since 1.9.2
-            [[m:Syck::DEFAULTS]] �򻲾Ȥ��Ƥ���������
+            [[m:Syck::DEFAULTS]] を参照してください。
 #@else
-            [[m:YAML::DEFAULTS]] �򻲾Ȥ��Ƥ���������
+            [[m:YAML::DEFAULTS]] を参照してください。
 #@end
 
 #@since 1.9.2
@@ -41,9 +41,9 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
 --- [](i) -> object
 
-i���ܤΥɥ�����Ȥ򻲾Ȥ��ޤ���
+i番目のドキュメントを参照します。
 
-@param i ���Ȥ������ɥ�����Ȥ��ֹ����ꤷ�ޤ���
+@param i 参照したいドキュメントの番号を指定します。
 
   require 'yaml'
   
@@ -68,9 +68,9 @@ i���ܤΥɥ�����Ȥ򻲾Ȥ��ޤ���
 
 --- add(doc) -> ()
 
-���֥������Ȥ�ɥ�����Ȥ��ɲä��ޤ���
+オブジェクトをドキュメントに追加します。
 
-@param doc Ŭ�ڤʥ��֥������Ȥ���ꤷ�ޤ���
+@param doc 適切なオブジェクトを指定します。
 
   require 'yaml'
   
@@ -95,11 +95,11 @@ i���ܤΥɥ�����Ȥ򻲾Ȥ��ޤ���
 
 --- edit(doc_num, doc) -> ()
 
-doc_num���ܤΥɥ�����Ȥ�doc���ѹ����ޤ���
-�⤷��doc_num�����ߤΥɥ�����ȿ�����礭�����ϴ֤ˤ�nil����������ޤ���
+doc_num番目のドキュメントをdocに変更します。
+もし、doc_numが現在のドキュメント数より大きい場合は間にはnilが挿入されます。
 
-@param doc_num �ѹ������ɥ�����Ȥ��ֹ�
-@param doc Ŭ�ڤʥ��֥�������
+@param doc_num 変更されるドキュメントの番号
+@param doc 適切なオブジェクト
 
   require 'yaml'
   
@@ -119,10 +119,10 @@ doc_num���ܤΥɥ�����Ȥ�doc���ѹ����ޤ���
 
 --- emit(io = nil) -> IO | String
 
-���ȥ꡼��˴ޤޤ��ƥɥ�����Ȥ���� io �� YAML �����ǽ񤭹��ߤޤ���
-io �� nil �ξ���ʸ������֤��ޤ���
+ストリームに含まれる各ドキュメントを引数 io に YAML 形式で書き込みます。
+io が nil の場合は文字列を返します。
 
-@param io �񤭹������ IO ���֥�������
+@param io 書き込み先の IO オブジェクト
 
   require 'yaml'
   
@@ -141,7 +141,7 @@ io �� nil �ξ���ʸ������֤��ޤ���
     puts l
   }
   
-  #���
+  #結果
   --- !ruby/object:Dog
   name: pochi
   ---
@@ -153,7 +153,7 @@ io �� nil �ξ���ʸ������֤��ޤ���
 
 --- documents -> Array
 
-���ȤΥɥ�����Ȥ�������֤��ޤ���
+自身のドキュメントを配列で返します。
 
   require 'yaml'
   
@@ -175,21 +175,21 @@ io �� nil �ξ���ʸ������֤��ޤ���
 
 --- documents=(val)
 
-���ߤΥɥ�����Ȥ���������ꤷ�ޤ���
+現在のドキュメントを配列で設定します。
 
-@param val YAML ���Ѵ��Ǥ���Ǥ�դΥ��֥������Ȥ�����ǻ��ꤷ�ޤ���
+@param val YAML に変換できる任意のオブジェクトを配列で指定します。
 
 --- options -> {Symbol => object}
 
-���ץ����ΰ������֤��ޤ���
+オプションの一覧を返します。
 
 --- options=(val)
 
-���ץ����ΰ��������ꤷ�ޤ���
+オプションの一覧を設定します。
 
-@param val ����� [[c:Hash]] ���֥������Ȥǻ��ꤷ�ޤ��������ǽ�ʥ��ץ���
+@param val 設定を [[c:Hash]] オブジェクトで指定します。設定可能なオプショ
 #@since 1.9.2
-           ��� [[m:Syck::DEFAULTS]] �򻲾Ȥ��Ƥ���������
+           ンは [[m:Syck::DEFAULTS]] を参照してください。
 #@else
-           ��� [[m:YAML::DEFAULTS]] �򻲾Ȥ��Ƥ���������
+           ンは [[m:YAML::DEFAULTS]] を参照してください。
 #@end

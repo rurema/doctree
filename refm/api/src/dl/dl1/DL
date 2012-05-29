@@ -1,69 +1,69 @@
 = module DL
 
-UNIX �� [[man:dlopen(3)]] �� Windows �� LoadLibrary() �ʤɤΥ����ʥߥå���󥫤ؤ����٥��
-���󥿡��ե��������󶡤���⥸�塼��Ǥ���
+UNIX の [[man:dlopen(3)]] や Windows の LoadLibrary() などのダイナミックリンカへの低レベルな
+インターフェースを提供するモジュールです。
 
-�⥸�塼�� DL �� 3 �ĤΥ��饹�������äƤ��ޤ���
+モジュール DL は 3 つのクラスから成っています。
 
 : [[c:DL::Symbol]] 
-  �����ʥߥå��饤�֥��δؿ��Υ�åѡ����饹�Ǥ���
+  ダイナミックライブラリの関数のラッパークラスです。
 : [[c:DL::PtrData]] 
-  C �Υݥ��󥿤Τ褦�ʥ���֥��å���ɽ�����饹�Ǥ���
+  C のポインタのようなメモリブロックを表すクラスです。
 : [[c:DL::Handle]] 
-  �����ץ󤵤줿�����ʥߥå��饤�֥���ɽ�����饹�Ǥ���
+  オープンされたダイナミックライブラリを表すクラスです。
 
-#@#�ޤ������� dl2 �� Ruby 1.8 �ǤⳫȯ����Ƥ��ޤ���
-#@#Ruby 1.9 �ˤϤ��Ǥ� dl2 �� dl �Ȥ���ź�դ���Ƥ��ޤ���
-#@#dl2 �Υɥ�����Ȥϡ�
+#@#また、現在 dl2 の Ruby 1.8 版も開発されています。
+#@#Ruby 1.9 にはすでに dl2 が dl として添付されています。
+#@#dl2 のドキュメントは、
 #@#[[url:http://rubyforge.org/cgi-bin/viewcvs.cgi/ruby-dl2/doc/?root=ruby-dl2]]
-#@#�򻲾ȡ�
+#@#を参照。
 
 === Type specifiers
 
-�ץ��ȥ����פϰʲ��η������Ҥ�������ޤ����ץ��ȥ����פκǽ�����Ǥ������
-�η����̣���ޤ����Ĥ�����Ǥϳư����η����̣���ޤ���
+プロトタイプは以下の型修飾子から成ります。プロトタイプの最初の要素は戻り値
+の型を意味します。残りの要素は各引数の型を意味します。
 
 : C
-    ʸ�� (char)
+    文字 (char)
 : c
-    ʸ����ؤ��ݥ��� (char *)
+    文字を指すポインタ (char *)
 : H
-    short ����  (short)
+    short 整数  (short)
 : h
-    short ������ؤ��ݥ��� (short *)
+    short 整数を指すポインタ (short *)
 : I
-    ���� (char, short, int)
+    整数 (char, short, int)
 : i
-    ������ؤ��ݥ��� (char *, short *, int *)
+    整数を指すポインタ (char *, short *, int *)
 : L
     long int
 : l
-    long int �ؤΥݥ��� (long *)
+    long int へのポインタ (long *)
 : F
-    �¿� (float)
+    実数 (float)
 : f
-    �¿��ؤΥݥ��� (float *)
+    実数へのポインタ (float *)
 : D
-    �¿� (double)
+    実数 (double)
 : d
-    �¿��ؤΥݥ���(double *)
+    実数へのポインタ(double *)
 : S
-    ���� (immutable) ��ʸ���� (const char *)
+    不変 (immutable) の文字列 (const char *)
 : s
-    �ѹ���ǽ(mutable)��ʸ���� (char *)
+    変更可能(mutable)な文字列 (char *)
 : A
-    ���� (const type[])
+    配列 (const type[])
 : a
-    �ѹ���ǽ (mutable) ������ (type[])
+    変更可能 (mutable) な配列 (type[])
 : P
-    �ݥ��� (void *)
+    ポインタ (void *)
 : p
-    �ѹ���ǽ (mutable) �ʥݥ��� (void *)
+    変更可能 (mutable) なポインタ (void *)
 : 0
-    void �ؿ� (����ϥץ��ȥ����פκǽ��ʸ���Ǥʤ���Фʤ�ʤ�)
+    void 関数 (これはプロトタイプの最初の文字でなければならない)
 
-cbtype �Ϸ������� 0, C, I, H, L, F, D, S ������ P ��������ޤ���
-�㤨��,
+cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
+例えば,
 
   DL.callback('IPP'){|ptr1,ptr2|
     str1 = ptr1.ptr.to_s
@@ -71,10 +71,10 @@ cbtype �Ϸ������� 0, C, I, H, L, F, D, S ������ P ��������ޤ���
     str1 <=> str2
   }
 
-=== Ruby �Υ��֥������Ȥ��� C �η��ؤ��Ѵ�
+=== Ruby のオブジェクトから C の型への変換
 
-[[m:DL.#callback]] �� [[m:DL::Handle#sym]] �ǻ��ꤷ��
-������Ҥ˽��ä� Ruby �Υ��֥������Ȥ� C �η�����ߤ��Ѵ�����ޤ���
+[[m:DL.#callback]] や [[m:DL::Handle#sym]] で指定した
+型指定子に従って Ruby のオブジェクトと C の型は相互に変換されます。
 
 
 == Singleton Methods
@@ -128,37 +128,37 @@ cbtype �Ϸ������� 0, C, I, H, L, F, D, S ������ P ��������ޤ���
 --- FREE
 #@todo
 
-[[man:free(3)]] ��ɽ�� [[c:DL::Symbol]] �Ǥ���
-��������˿����� DL::Symbol ���������Ƥ⡢DL::PtrData �˥ǥե���Ȥǥ��åȤ����
-free �ؿ����Ѥ�뤳�ȤϤ���ޤ���
+[[man:free(3)]] を表す [[c:DL::Symbol]] です。
+この定数に新たに DL::Symbol を代入しても、DL::PtrData にデフォルトでセットされる
+free 関数が変わることはありません。
 
 == Module Functions
 
 --- dlopen(lib)                    -> DL::Handle
 --- dlopen(lib) {|handle| ... }    -> DL::Handle
 
-�����ʥߥå��饤�֥�� lib ������ɤ���
-[[c:DL::Handle]] �Ȥ����֤��ޤ���
+ダイナミックライブラリ lib をロードし、
+[[c:DL::Handle]] として返します。
 
-�֥��å���Ϳ�����Ƥ�����ϡ�[[c:DL::Handle]] �����Ȥ���
-Ϳ����줿�֥��å���¹Ԥ��ޤ���[[c:DL::Handle]] ���֤��ޤ���
+ブロックが与えられている場合は、[[c:DL::Handle]] 引数として
+与えられたブロックを実行します。[[c:DL::Handle]] を返します。
 
-[[m:DL::Handle.new]](lib) �������Ǥ���
+[[m:DL::Handle.new]](lib) と等価です。
 
-@param lib �����ɤ������饤�֥���ʸ�����Ϳ���ޤ���
+@param lib ロードしたいライブラリを文字列で与えます。
 
-@raise RuntimeError [[man:dlopen(3)]] �˼��Ԥ�������ȯ�����ޤ���
+@raise RuntimeError [[man:dlopen(3)]] に失敗した時に発生します。
 
 --- callback(type)         -> DL::Symbol
 --- define_callback(type)  -> DL::Symbol
 #@todo
 
-C��٥�Υ�����Хå��ؿ�������������δؿ�(�ؤΥݥ���)���ݻ�����
-[[c:DL::Symbol]] ���֤��ޤ���
+Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
+[[c:DL::Symbol]] を返します。
 
-@param type ������Хå��ؿ��η�����Ҥ�Ϳ���ޤ���
+@param type コールバック関数の型指定子を与えます。
 
-@raise DL::DLError ����Ǥ��륳����Хå��ؿ��ο��ˤ����¤�����ޤ��������ۤ���ȡ�DL::DLError ��ȯ�����ޤ���
+@raise DL::DLError 定義できるコールバック関数の数には制限があります。それを越えると、DL::DLError が発生します。
 
  require 'dl/import'
  strlast = DL.callback('IS'){|s|
@@ -182,53 +182,53 @@ C��٥�Υ�����Хå��ؿ�������������δؿ�(�ؤΥݥ���)���ݻ�����
 
 --- remove_callback(sym)    -> nil
 
-������Хå��ؿ� sym �� [[m:DL::FuncTable]] ���������ޤ���
-#@#sym �ϰʸ� GC ���оݤˤʤ����ޤ���
-�ʸ� sym.call ��Ƥ֤��Ȥ��Ǥ��ʤ��ʤ�ޤ���
+コールバック関数 sym を [[m:DL::FuncTable]] から削除します。
+#@#sym は以後 GC の対象になり得ます。
+以後 sym.call を呼ぶことができなくなります。
 
-@param sym �ơ��֥뤫���������� [[c:DL::Symbol]] ���֥������Ȥ�Ϳ���ޤ���
+@param sym テーブルから削除したい [[c:DL::Symbol]] オブジェクトを与えます。
 
 --- malloc(size)    -> DL::PtrData
 
-size �Х��ȤΥ����ΰ����ݤ���
-�����ΰ��ؤ� [[c:DL::PtrData]] ���֥������Ȥ��֤��ޤ���
+size バイトのメモリ領域を確保し、
+その領域を指す [[c:DL::PtrData]] オブジェクトを返します。
 
-�����֤��ͤˤϡ�[[m:DL::FREE]] �� free �ؿ��Ȥ��ƥ��åȤ���Ƥ��ޤ���
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
 
-@param size ɬ�פʥ����ΰ�Υ���������ꤷ�ޤ���
+@param size 必要なメモリ領域のサイズを指定します。
 
 --- sizeof(type)    -> Integer
 
-���Υ��������֤��ޤ���
+型のサイズを返します。
 
-sizeof("C") + sizeof("L") �ϡ�sizeof("CL") �������ǤϤ���ޤ���
-��ԤϹ�¤�� struct foo { char c; long l; } ��
-��ʬ�ʥ��������֤��ȿ��ꤵ��ޤ�����
-���Υ������� C �� sizeof(foo) ��Ʊ���ǤϤʤ����⤷��ޤ���
-�Ĥޤꡢsizeof �᥽�åɤ��ȼ��˥��饤����Ȥ��θ���ƥ����������
-���ޤ����� C ����Τ���Ȥϰۤʤ뤫�⤷��ޤ���
+sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
+後者は構造体 struct foo { char c; long l; } の
+十分なサイズを返すと推定されますが、
+そのサイズは C の sizeof(foo) と同じではないかもしれません。
+つまり、sizeof メソッドは独自にアラインメントを考慮してサイズを決定
+しますが、 C 言語のそれとは異なるかもしれません。
 
-sizeof("L3") �Τ褦�˷��θ�˿������դ��뤳�Ȥ�Ǥ��ޤ���
-����Ǥ��뷿�ˤĤ��Ƥ� [[c:DL]] �򻲾Ȥ��Ƥ���������
+sizeof("L3") のように型の後に数字を付けることもできます。
+指定できる型については [[c:DL]] を参照してください。
 
-@param type ������Ҥ�ʸ�����Ϳ���ޤ���
+@param type 型指定子を文字列で与えます。
 
-@raise DL::DLTypeError ����줿ʸ���ʳ��򷿻���ҤȤ���Ϳ�����ȯ�����ޤ���
+@raise DL::DLTypeError 定められた文字以外を型指定子として与えると発生します。
 
 --- strdup(str)    -> DL::PtrData
 
-ʸ���� str ��ʣ���������ο�����ʸ����ؤΥݥ���
-[[c:DL::PtrData]] ���֥������Ȥ��֤��ޤ���
+文字列 str を複製し、その新しい文字列へのポインタ
+[[c:DL::PtrData]] オブジェクトを返します。
 
-�����֤��ͤˤϡ�[[m:DL::FREE]] �� free �ؿ��Ȥ��ƥ��åȤ���Ƥ��ޤ���
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
 
-@param str ʸ�����Ϳ���ޤ���
+@param str 文字列を与えます。
 
 = class DL::DLError < StandardError
-DL �˴ؤ������Ū�ʥ��顼��ȯ�������Ȥ����ꤲ���ޤ���
+DL に関する一般的なエラーが発生したときに投げられます。
 
 = class DL::DLTypeError < DL::DLError
-���˴ؤ��륨�顼��ȯ�������Ȥ����ꤲ���ޤ���
+型に関するエラーが発生したときに投げられます。
 
 = reopen String
 
@@ -236,8 +236,8 @@ DL �˴ؤ������Ū�ʥ��顼��ȯ�������Ȥ����ꤲ���ޤ���
 
 --- to_ptr    -> DL::PtrData
 
-���Ȥ�ʣ������ʣ������ʸ�����ؤ� [[c:DL::PtrData]] ���֤��ޤ���
-�����֤��ͤˤϡ�[[m:DL::FREE]] �� free �ؿ��Ȥ��ƥ��åȤ���Ƥ��ޤ���
+自身を複製し、複製した文字列を指す [[c:DL::PtrData]] を返します。
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
 
  s = 'abc'
  sp = s.to_ptr
@@ -254,14 +254,14 @@ DL �˴ؤ������Ū�ʥ��顼��ȯ�������Ȥ����ꤲ���ޤ���
 --- to_ptr          -> nil | DL::PtrData 
 --- to_ptr(type)    -> nil | DL::PtrData
 
-���Ȥγ����Ǥ�ؤ��ݥ��󥿤������������������ؤΥݥ��� [[c:DL::PtrData]] ���֤��ޤ���
-�����֤��ͤˤϡ�[[m:DL::FREE]] �� free �ؿ��Ȥ��ƥ��åȤ���Ƥ��ޤ���
-���Ȥ�Ĺ���� 0 �ʤ� nil ���֤��ޤ���
+自身の各要素を指すポインタの配列を生成し、それへのポインタ [[c:DL::PtrData]] を返します。
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
+自身の長さが 0 なら nil を返します。
 
-self �Τ��٤Ƥ����Ǥ�Ʊ�����饹�Ǥʤ���Фʤ餺��
-Integer��Float��String��Data��Nil �Τ����줫�Ǥʤ���Ф����ޤ���
+self のすべての要素は同じクラスでなければならず、
+Integer、Float、String、Data、Nil のいずれかでなければいけません。
 
-���ǤΥ��饹�� String �Ǥ����硢�����Ǥ�ʣ������ޤ���
+要素のクラスが String である場合、各要素は複製されます。
 
  require 'dl/import'
  
@@ -269,9 +269,9 @@ Integer��Float��String��Data��Nil �Τ����줫�Ǥʤ���Ф����ޤ���
  p ptr.size #=> 12
  p ptr.to_a('P').map{|s| s.to_s } #=> ["a", "b", "c"]
 
-@param type self �����Ǥη���ʸ���ǻ��ꤷ�ޤ���[[c:DL]] �η�����Ҥι�򻲾Ȥ��Ʋ�������
+@param type self の要素の型を文字で指定します。[[c:DL]] の型指定子の項を参照して下さい。
 
-@raise DL::DLTypeError ����줿ʸ���ʳ��򷿻���ҤȤ���Ϳ�����ȯ�����ޤ����ޤ���Ϳ����줿���ȼ��Ȥ����Ǥ����פ��ʤ���ȯ�����ޤ���
+@raise DL::DLTypeError 定められた文字以外を型指定子として与えると発生します。また、与えられた型と自身の要素が一致しないと発生します。
 
 = reopen IO
 
@@ -279,6 +279,6 @@ Integer��Float��String��Data��Nil �Τ����줫�Ǥʤ���Ф����ޤ���
 
 --- to_ptr    -> DL::PtrData
 
-���Ȥ�ؤ� [[c:DL::PtrData]] ���֤��ޤ�������� C ��٥�Ǥϡ�FILE *�פǤ���
+自身を指す [[c:DL::PtrData]] を返します。これは C レベルでは「FILE *」です。
 
-@raise IOError ���Ȥ� close ����Ƥ�����ȯ�����ޤ���
+@raise IOError 自身が close されていたら発生します。

@@ -1,18 +1,18 @@
 = module RDoc
 
-rdoc �ɥ�����Ȥ򰷤�����Υ⥸�塼��Ǥ���
+rdoc ドキュメントを扱うためのモジュールです。
 
 == Constants
 
 --- DOT_DOC_FILENAME -> ".document"
 
-rdoc ���ޥ�ɤ���������ե�����̾�ΰ������񤫤줿�ե������̾�����֤��ޤ���
+rdoc コマンドが処理するファイル名の一覧が書かれたファイルの名前を返します。
 
 #@since 1.9.1
 
 --- VERSION -> String
 
-RDoc �ΥС�������ɽ��ʸ������֤��ޤ���
+RDoc のバージョンを表す文字列を返します。
 
 #@include(RDoc__constants)
 #@end

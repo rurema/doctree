@@ -1,22 +1,22 @@
-[[lib:shell]] �ǻ��Ѥ����㳰����������饤�֥��Ǥ���
+[[lib:shell]] で使用する例外を定義したライブラリです。
 
 = module Shell::Error
 extend Exception2MessageMapper
 
-[[lib:shell]] �ǻ��Ѥ����㳰�Τ����̾�����֤Ǥ���
+[[lib:shell]] で使用する例外のための名前空間です。
 
 = class Shell::Error::CantApplyMethod < StandardError
 
-�᥽�åɤ�Ŭ�ѤǤ��ʤ��Ȥ���ȯ�������㳰�Ǥ���
+メソッドを適用できないときに発生する例外です。
 
 = class Shell::Error::CantDefine < StandardError
 
-���ޥ�ɤ��������ʤ��Ȥ���ȯ�������㳰�Ǥ���
+コマンドを定義出来ないときに発生する例外です。
 
 = class Shell::Error::CommandNotFound < StandardError
 
-���ޥ�ɤ����Ĥ���ʤ��Ȥ���ȯ�������㳰�Ǥ���
+コマンドが見つからないときに発生する例外です。
 
 = class Shell::Error::DirStackEmpty < StandardError
 
-���Υǥ��쥯�ȥꥹ���å��������Ǥ���Ф����Ȥ����Ȥ���ȯ�������㳰�Ǥ���
+空のディレクトリスタックから要素を取り出そうとしたときに発生する例外です。

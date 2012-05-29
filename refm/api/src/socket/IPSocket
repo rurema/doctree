@@ -1,19 +1,19 @@
 = class IPSocket < BasicSocket
 
-���󥿡��ͥåȥɥᥤ�󥽥��åȤ���ݥ��饹��
+インターネットドメインソケットの抽象クラス。
 
-�̾�� [[c:IO]] ���饹�Υ��֥��饹��Ʊ�ͤ������Ϥ��Ǥ��ޤ���
+通常の [[c:IO]] クラスのサブクラスと同様の入出力ができます。
 
 == Class Methods
 
 --- getaddress(host) -> String
 
-�ۥ���̾����ۥ��ȤΥ��ɥ쥹���֤��ޤ����ۥ��ȤΥ��ɥ쥹��ʸ
-����� octet decimal ��ʸ���� (��: 127.0.0.1) �Ǥ���
+ホスト名からホストのアドレスを返します。ホストのアドレスは文
+字列は octet decimal の文字列 (例: 127.0.0.1) です。
 
-@param host �ۥ���̾��ʸ����ǻ��ꤷ�ޤ���
+@param host ホスト名を文字列で指定します。
 
-��:
+例:
 
   p IPSocket.getaddress("www.ruby-lang.org")        #=> "210.163.138.100"
 
@@ -21,15 +21,15 @@
 
 --- addr -> Array
 
-�����åȤ���³�����ɽ��������֤��ޤ�������γ����Ǥ���1��
-�Ǥ�ʸ���� "AF_INET", "AF_INET6" �ʤɡ���2���Ǥ� port �ֹ桢��3���Ǥ��ۥ��Ȥ�ɽ
-��ʸ������4���Ǥ��ۥ��Ȥ� IP ���ɥ쥹��ɽ��ʸ���� (octet
-decimal �� hexadecimal) �Ǥ���
-#@# ��³��ξ����addr�ǤϤʤ�peeraddr�Ǥ������ա�[[trap:Socket]]
+ソケットの接続情報を表す配列を返します。配列の各要素は第1要
+素が文字列 "AF_INET", "AF_INET6" など、第2要素が port 番号、第3要素がホストを表
+す文字列、第4要素がホストの IP アドレスを表す文字列 (octet
+decimal や hexadecimal) です。
+#@# 接続先の情報はaddrではなくpeeraddrです。注意。[[trap:Socket]]
 
-@raise Errno::EXXX [[man:getsockname(2)]] �� 0 ̤�����ͤ��֤�������ȯ�����ޤ���
+@raise Errno::EXXX [[man:getsockname(2)]] が 0 未満の値を返した場合に発生します。
 
-��:
+例:
 
   serv = TCPServer.new("localhost", 0)
   p serv.addr         #=> ["AF_INET", 46102, "localhost.localdomain", "127.0.0.1"]
@@ -38,13 +38,13 @@ decimal �� hexadecimal) �Ǥ���
 
 --- peeraddr -> Array
 
-��³����襽���åȤξ����ɽ��������֤��ޤ�������γ����Ǥ�
-[[m:IPSocket#addr]] �᥽�åɤ��֤�����
-��Ʊ���Ǥ���
+接続相手先ソケットの情報を表す配列を返します。配列の各要素は
+[[m:IPSocket#addr]] メソッドが返す配列
+と同じです。
 
-@raise Errno::EXXX [[man:getpeername(2)]] �� 0 ̤�����ͤ��֤�������ȯ�����ޤ���
+@raise Errno::EXXX [[man:getpeername(2)]] が 0 未満の値を返した場合に発生します。
 
-��:
+例:
 
   TCPSocket.open("localhost", "http") {|s|
     p s.peeraddr    #=> ["AF_INET", 80, "localhost.localdomain", "127.0.0.1"]
@@ -53,23 +53,23 @@ decimal �� hexadecimal) �Ǥ���
 
 --- recvfrom(maxlen, flags = 0) -> Array
 
-recv ��Ʊ�ͤ˥����åȤ���ǡ�����������ޤ�����
-����ͤ�ʸ�������꥽���åȤΥ��ɥ쥹 (������
-[[m:IPSocket#addr]] ����) �Υڥ��Ǥ��������ˤ�
-���Ƥ� [[m:BasicSocket#recv]] ��Ʊ�ͤǤ���
+recv と同様にソケットからデータを受け取りますが、
+戻り値は文字列と相手ソケットのアドレス (形式は
+[[m:IPSocket#addr]] 参照) のペアです。引数につ
+いては [[m:BasicSocket#recv]] と同様です。
 
-@param maxlen �������ʸ����κ����Ĺ������ꤷ�ޤ���
+@param maxlen 受け取る文字列の最大の長さを指定します。
 
-@param flags [[man:recv(2)]] �򻲾Ȥ��Ƥ���������
+@param flags [[man:recv(2)]] を参照してください。
 
 @raise IOError
 
-@raise Errno::EXXX [[man:recvfrom(2)]] �����顼�ˤʤä����ʤɤ�ȯ�����ޤ���
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーになった場合などに発生します。
 
-��:
+例:
 
   s1 = UDPSocket.new
-  s1.bind("0.0.0.0", 0) # Ŭ���˶����Ƥ��� port �������Ƥ�
+  s1.bind("0.0.0.0", 0) # 適当に空いている port を割り当てる
   s2 = UDPSocket.new
   s2.send("foo", 0, s1.getsockname)
   mesg, inet_addr = s1.recvfrom(100)

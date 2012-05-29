@@ -1,19 +1,19 @@
 
-=== �Ȥ���
+=== 使い方
 
-�̾�� [[lib:dl/import]] �饤�֥��� require ���� [[c:DL::Importer]] �⥸�塼�����Ѥ��ޤ���
-[[c:DL]] �⥸�塼�뼫�Τϥץ�ߥƥ��֤ʵ�ǽ�����󶡤��Ƥ��ޤ���
-[[c:DL::Importer]] �⥸�塼��ϰʲ��Τ褦�˥桼������������⥸�塼����ĥ������ǻȤ��ޤ���
+通常は [[lib:dl/import]] ライブラリを require して [[c:DL::Importer]] モジュールを使用します。
+[[c:DL]] モジュール自体はプリミティブな機能しか提供していません。
+[[c:DL::Importer]] モジュールは以下のようにユーザが定義したモジュールを拡張する形で使います。
 
   require "dl/import"
   module M
     extend DL::Importer
   end
 
-�ʸ塢���Υ⥸�塼��� dlload �� extern �ʤɤΥ᥽�åɤ����ѤǤ���褦�ˤʤ�ޤ���
-�ʲ��Τ褦�� dlload ��Ȥäƥ饤�֥�������ɤ���
-���Ѥ������饤�֥��ؿ����Ф��� extern �᥽�åɤ�Ƥ��
-��åѡ��᥽�åɤ�������ޤ���
+以後、このモジュールで dlload や extern などのメソッドが使用できるようになります。
+以下のように dlload を使ってライブラリをロードし、
+使用したいライブラリ関数に対して extern メソッドを呼んで
+ラッパーメソッドを定義します。
 
   require "dl/import"
   module M
@@ -25,14 +25,14 @@
   
   p M.strlen('abc') #=> 3
 
-M.strlen ����Ѥ��뤳�Ȥǡ��饤�֥��ؿ� strlen() ����ѤǤ��ޤ���
-Ϳ����줿�ؿ�̾�κǽ��ʸ������ʸ���ʤ顢
-��������᥽�å�̾�κǽ��ʸ���Ͼ�ʸ���ˤʤ�ޤ���
+M.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
+与えられた関数名の最初の文字が大文字なら、
+定義されるメソッド名の最初の文字は小文字になります。
 
-==== ��¤�Τ򰷤�
+==== 構造体を扱う
 
-��¤�Τⰷ�����Ȥ��Ǥ��ޤ������Ȥ��� [[man:gettimeofday(2)]]
-��ȤäƸ��߻�������������ϰʲ��ΤȤ���Ǥ���
+構造体も扱うことができます。たとえば [[man:gettimeofday(2)]]
+を使って現在時刻を得たい場合は以下のとおりです。
 
  require 'dl/import'
  module M
@@ -50,12 +50,12 @@ M.strlen ����Ѥ��뤳�Ȥǡ��饤�֥��ؿ� strlen() ����ѤǤ��ޤ���
   p timeval.tv_sec #=> 1173519547
  end
 
-�����ǡ�����γ�����Ƥ� M::Timeval.new �ǤϤʤ�
-M::Timeval.malloc ����Ѥ��Ƥ��뤳�Ȥ����դ��Ƥ���������
+上の例で、メモリの割り当てに M::Timeval.new ではなく
+M::Timeval.malloc を使用していることに注意してください。
 
-==== ������Хå�
+==== コールバック
 
-�ʲ��Τ褦�˥⥸�塼��ؿ� bind ����Ѥ���������Хå�������Ǥ��ޤ���
+以下のようにモジュール関数 bind を使用したコールバックを定義できます。
 
   require 'dl/import'
   module M 
@@ -73,13 +73,13 @@ M::Timeval.malloc ����Ѥ��Ƥ��뤳�Ȥ����դ��Ƥ���������
   M.qsort(buff, buff.size, 1, M::QsortCallbackWithoutBlock){|ptr1,ptr2| ptr2[0] <=> ptr1[0]}
   p buff #=>   "7654321"
 
-������ M::QsortCallback �ϥ֥��å���Ƥ� [[c:DL::Function]] ���֥������ȤǤ���
+ここで M::QsortCallback はブロックを呼ぶ [[c:DL::Function]] オブジェクトです。
 
 
-==== �ݥ��󥿤򰷤�
+==== ポインタを扱う
 
-�����Ȥ��ƥݥ��󥿤�������ؿ����Ф��Ƥϡ��ݥ��󥿤��Ѥ���
-ʸ������Ϥ��ޤ���ʸ����ϥݥ��󥿤��ؤ������ΰ�Ȥ��ư����ޤ���
+引数としてポインタを受け取る関数に対しては、ポインタの変わりに
+文字列を渡します。文字列はポインタが指すメモリ領域として扱われます。
 
  require 'dl/import' 
  
@@ -93,7 +93,7 @@ M::Timeval.malloc ����Ѥ��Ƥ��뤳�Ȥ����դ��Ƥ���������
  M.memmove(s, 'abc', 3)
  p s                    #=> "abcyyyzzz"
 
-char * �ʳ��η��Υݥ��󥿤�������ؿ����Ф��Ƥ�ʸ������Ϥ��ޤ���
+char * 以外の型のポインタを受け取る関数に対しても文字列を渡します。
 
  module M
    extend DL::Importer

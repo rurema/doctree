@@ -3,8 +3,8 @@
 #@until 1.9.1
 include Enumerable
 
-¤³¤Î¥¯¥é¥¹¤Ï [[c:Enumerator]] ¤ËÃÖ¤­´¹¤¨¤é¤ì¤Ş¤·¤¿¡£
-Enumerable::Enumerator ¤Ï¸ß´¹À­¤Î¤¿¤á¤Ë»Ä¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
+ã“ã®ã‚¯ãƒ©ã‚¹ã¯ [[c:Enumerator]] ã«ç½®ãæ›ãˆã‚‰ã‚Œã¾ã—ãŸã€‚
+Enumerable::Enumerator ã¯äº’æ›æ€§ã®ãŸã‚ã«æ®‹ã•ã‚Œã¦ã„ã¾ã™ã€‚
 #@end
 
 #@include(Enumerator.inside)

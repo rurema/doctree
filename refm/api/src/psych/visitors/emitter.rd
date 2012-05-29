@@ -5,7 +5,7 @@
 --- initialize(io, options = {}) -> Psych::Visitors::Emitter
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 

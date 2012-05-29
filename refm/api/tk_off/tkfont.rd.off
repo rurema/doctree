@@ -4,15 +4,15 @@
 = TkFont
 
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<Tk>))
 
-== extend���Ƥ���⥸�塼��:
+== extendしているモジュール:
 
 ((<TkCore>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkFont.new(ltn=DEFAULT_LATIN_FONT_NAME, knj=nil, keys=nil)
 #@todo
@@ -28,8 +28,8 @@
 
 --- TkFont.families(window=nil)
 #@todo
-    �ե���ȥե��ߥ�ΰ���������ˤ����֤��ޤ���
-    ((-((|window|))�ΰ�̣���褯�狼���-))
+    フォントファミリの一覧を配列にして返します。
+    ((-((|window|))の意味がよくわからん-))
 
         require 'tk'
         puts *TkFont.families
@@ -41,7 +41,7 @@
 
 --- TkFont.names
 #@todo
-    �����������Ƥ���ե����̾�ΰ���������ˤ����֤��ޤ���
+    現在定義されているフォント名の一覧を配列にして返します。
 
         require 'tk'
         TkFont.new
@@ -67,7 +67,7 @@
 #@todo
 
 =end
-== private�᥽�å�:
+== privateメソッド:
 
 --- TkFont#_get_font_info_from_hash(font)
 #@todo
@@ -132,18 +132,18 @@
 --- TkFont#actual_core(font, window=nil, option=nil)
 #@todo
 
-    ���ꤷ�� ((|font|)) �μºݤ˻��Ѥ���륪�ץ����(((<�ե���ȥ��ץ����>))
-    ����) ��������֤��ޤ���((|option|)) �����ꤵ��Ƥ����
-    ���Υ��ץ������ͤ������֤��ޤ���((|window|)) �����ꤵ
-    ��Ƥ���С����Υ�����ɥ���ɽ�������ǥ����ץ쥤�ǻȤ�
-    ���ե���Ȥ�°�����֤��ޤ���
+    指定した ((|font|)) の実際に使用されるオプション(((<フォントオプション>))
+    参照) を配列で返します。((|option|)) が指定されていれば
+    そのオプションの値だけを返します。((|window|)) が指定さ
+    れていれば、そのウィンドウが表示されるディスプレイで使わ
+    れるフォントの属性を返します。
 
-    tk4.x �Ǥϡ��������
+    tk4.x では、常に配列
 
         [['family',[]], ['size',[]], ['weight',[]], ['slant',[]], 
          ['underline',[]], ['overstrike',[]], ['charset',[]], ['pointadjust',[]]]
 
-    ���֤��ޤ���
+    を返します。
 
 --- TkFont#configinfo_core(font, option=nil)
 #@todo
@@ -165,7 +165,7 @@
 
 --- TkFont#metrics_core(font, window, option=nil)
 #@todo
-== �᥽�å�:
+== メソッド:
 
 --- TkFont#call_font_configure(path, *args)
 #@todo
@@ -189,15 +189,15 @@
 --- TkFont#actual(option=nil)
 #@todo
 
-    �ե���Ȥ�°��(((<�ե���ȥ��ץ����>))����)��������֤��ޤ���
-    ((|option|)) �����ꤵ��Ƥ���Ф��Υ��ץ������ͤ������֤��ޤ���
+    フォントの属性(((<フォントオプション>))参照)を配列で返します。
+    ((|option|)) が指定されていればそのオプションの値だけを返します。
 
 --- TkFont#actual_displayof(window, option=nil)
 #@todo
 
-    (({actual()})) ��Ʊ���Ǥ��������ꤷ�� ((|window|)) ����
-    ��ɥ���ɽ�������ǥ����ץ쥤�ǻȤ���ե���ȥ��ץ���
-    ����ͤ������֤��ޤ���
+    (({actual()})) と同じですが、指定した ((|window|)) ウィ
+    ンドウが表示されるディスプレイで使われるフォントオプショ
+    ンの値だけを返します。
 
 --- TkFont#ascii_actual(option=nil)
 --- TkFont#latin_actual(option=nil)
@@ -255,10 +255,10 @@
 --- TkFont#measure(text)
 #@todo
 
-    �ե���� (({self})) �� ((|text|)) ��ɽ�������Ȥ���ɽ����
-    ��ԥ���������֤��ޤ���((|text|)) ��Υ��֤���Ԥ����̤ˤ�
-    ��ᤵ��ޤ���((-���֤���Ԥϥ��ڡ�����Ʊ���Ȥ��ư����櫓�Ǥ�
-    �ʤ��餷�����ȼ���������äƤ���Ȼפ����ɤ���-))
+    フォント (({self})) で ((|text|)) を表示したときの表示幅
+    をピクセル数で返します。((|text|)) 中のタブや改行は特別には
+    解釈されません((-タブや改行はスペースと同じとして扱うわけでは
+    ないらしい。独自の幅を持っていると思えば良い？-))
 
         require 'tk'
         fn = TkFont.new
@@ -278,29 +278,29 @@
 --- TkFont#metrics(option=nil)
 #@todo
 
-    �ե���ȥ�ȥ�å������������֤��ޤ���
+    フォントメトリック情報を配列で返します。
 
         require 'tk'
         p TkFont.new.metrics
         => [["ascent", 11], ["descent", 3], ["linespace", 14], ["fixed", 0]]
 
-    ((|option|)) ����ꤹ��Ȥ������Ǥ��ͤ������֤��ޤ���
+    ((|option|)) を指定するとその要素の値だけを返します。
 
         require 'tk'
         p TkFont.new.metrics("ascent")
         => 11
 
     : ascent
-      �ե���Ȥδ����֤���ξ�¦�ι⤵��ԥ������ͤ��֤��ޤ���
+      フォントの基準位置からの上側の高さをピクセル値で返します。
     : descent
-      �ե���Ȥδ����֤���β�¦�ι⤵��ԥ������ͤ��֤��ޤ���
+      フォントの基準位置からの下側の高さをピクセル値で返します。
     : linespace
-      �Դ�(�����֤�������֤ޤ�)������ԥ������ͤ��֤���
-      �������� ascent + descent ��Ʊ��������礭���ͤˤʤ�ޤ���
+      行間(基準位置から基準位置まで)の幅をピクセル値で返しま
+      す。普通 ascent + descent と同じかより大きな値になります。
     : fixed
-      �������ե����(���٤Ƥ�ʸ���������ʥե����)�ʤ� 1��
-      �ץ��ݡ�����ʥ�ե����(ʸ���ˤ�ä������ۤʤ�)�ʤ� 0 ��
-      �ˤʤ�ޤ���
+      固定幅フォント(すべての文字が等幅なフォント)なら 1、
+      プロポーショナルフォント(文字によって幅が異なる)なら 0 を
+      になります。
 
 --- TkFont#metrics_displayof(window, option=nil)
 #@todo
@@ -320,7 +320,7 @@
 
 --- TkFont#reset_pointadjust
 #@todo
-== ���
+== 定数
 
 --- TkFont::Tk_FontID
 #@todo
@@ -337,47 +337,47 @@
 --- TkFont::DEFAULT_KANJI_FONT_NAME
 #@todo
 
-== �ե���ȵ���
+== フォント記述
 
-ɸ�४�ץ���� ((<TkObject#font>)) �ʤɤǥե���Ȥ򵭽Ҥ���Ȥ�
-�ʲ��ˤ���������Τ����줫�ǻ���Ǥ��ޤ���
+標準オプション ((<TkObject#font>)) などでフォントを記述するとき
+以下にあげる形式のいずれかで指定できます。
 
-: TkFont ���֥�������
+: TkFont オブジェクト
 
-  TkFont ���饹�Υ��󥹥���
+  TkFont クラスのインスタンス
 
-  ��:
+  例:
 
         require 'tk'
         obj = TkFont.new("family"=>"courier", "size"=>16)
         TkLabel.new(nil, "text" => "foo", "font" => obj).pack
         Tk.mainloop
 
-: �ե����̾
+: フォント名
 
-  Tcl/Tk ��������줿�ե����̾��
-  ((-TkFont ���֥������Ȥϥե����̾�Ȥ��� /^@font\d+[clk]$/ 
-  �η�����ʸ�������Ѥ��Ƥ���-))
+  Tcl/Tk で定義されたフォント名。
+  ((-TkFont オブジェクトはフォント名として /^@font\d+[clk]$/ 
+  の形式の文字列を使用している-))
 
-: �����ƥ�ե����
+: システムフォント
 
-  �ץ�åȥե������ͭ�Υե����̾��((<X Window System>)) �Ǥ�
-  ((<XLFD>)) ����ꤷ�ޤ���
+  プラットフォーム固有のフォント名。((<X Window System>)) では
+  ((<XLFD>)) を指定します。
 
-: ����
+: 配列
 
-  �ʲ��η���������
+  以下の形式の配列
     [family, size, style1, ... styleN]
-  ���뤤��ʸ����
+  あるいは文字列
     "family size style1 ... styleN"
-  size �� style �Ͼ�ά�ġ�
+  size や style は省略可。
 
-  style �ˤϰʲ��Τ����줫��ʸ���󤬻���Ǥ��ޤ�(���줾���
-  ��̣��((<�ե���ȥ��ץ����>))�򻲾ȡ�
+  style には以下のいずれかの文字列が指定できます(それぞれの
+  意味は((<フォントオプション>))を参照。
 
     normal bold roman italic underline overstrike
 
-  ��:
+  例:
       require 'tk'
       TkLabel.new(nil, "text" => "foo",
                   "font" => ["courier", 16, "italic"]).pack
@@ -387,34 +387,34 @@
 
 : XLFD
 
-  �ʲ��η���(((<X Window System>)) �Υե���ȵ��ҷ���)��ʸ����
+  以下の形式(((<X Window System>)) のフォント記述形式)の文字列
 
     -foundry-family-weight-slant-set_width-style-pixels-
        points-x_res-y_res-spacing-width-registry-encoding
 
 
-  ��:
+  例:
       require 'tk'
       TkLabel.new(nil, "text" => "foo",
                   "font" => "-*-fixed-*-24-*").pack
       Tk.mainloop
 
-: �ե���ȥ��ץ�������������
+: フォントオプション形式の配列
 
-  �ե���ȥ��ץ����Υ���(������ "-" �ǻϤ��ɬ�פ�����ޤ�)
-  ���ͤ��Ȥ��¤٤�����
+  フォントオプションのキー(キーは "-" で始める必要があります)
+  と値の組を並べた配列
 
         ["-family", family, "-size", size, "-weight", weight, 
          "-slant", slant,   "-underline", bool, "-overstrike", bool]
 
-  ���뤤��ʸ����
+  あるいは文字列
 
         "-family family, -size size -weight weight
         -slant slant -underline bool -overstrike bool"
 
-  �ƥ����˻���Ǥ����ͤˤĤ��Ƥ�((<�ե���ȥ��ץ����>))���ȡ�
+  各キーに指定できる値については((<フォントオプション>))参照。
 
-  ��:
+  例:
       require 'tk'
       TkLabel.new(nil, "text" => "foo",
                   "font" => ["-weight", "bold"]).pack
@@ -422,13 +422,13 @@
                   "font" => "-underline 1").pack
       Tk.mainloop
 
-== �ե���ȥ��ץ����
+== フォントオプション
 
 : -family name
 
-  �ե���ȥե��ߥ꡼��̾������ꤷ�ޤ���Tk�Ǥ�ɬ���ʲ��Υե��ߥ꡼��
-  ����Ǥ��뤳�Ȥ��ݾڤ���Ƥ��ޤ�((-Windows��Mac�Ǥ⡩-))
-  �ե���ȥե��ߥ�λ���ϥ���ե��٥åȤ��羮����̤��ޤ���
+  フォントファミリーの名前を指定します。Tkでは必ず以下のファミリーを
+  指定できることが保証されています((-WindowsやMacでも？-))
+  フォントファミリの指定はアルファベットの大小を区別しません。
 
     : Courier
       monospaced typewriter font
@@ -439,60 +439,60 @@
 
 : -size size
 
-  ���ꤷ�� ((|size|)) ���ͤ����ο��ʤ�ݥ���ȿ��ǡ���ο���
-  ��ԥ�������ǥ��������ꤷ�����Ȥˤʤ�ޤ���
-  0 (�ǥե����)�ʤ�ǥե���ȤΥ�����(�ץ�åȥե������¸)�ˤʤ�ޤ���
-  �������������Ǥʤ���Фʤ�ޤ���
+  指定した ((|size|)) の値が正の数ならポイント数で、負の数な
+  らピクセル数でサイズ指定したことになります。
+  0 (デフォルト)ならデフォルトのサイズ(プラットフォーム依存)になります。
+  サイズは整数でなければなりません。
 
         require 'tk'
 
-        TkLabel.new(nil, "text" => "foobar �ۤ��ۤ�",
+        TkLabel.new(nil, "text" => "foobar ほげほげ",
                     "font" => TkFont.new("size"=>24)).pack
         Tk.mainloop
 
 : -weight
 
-  �ե���Ȥ�ǻ������ꤷ�ޤ���"normal" (�ǥե����)�ʤ顢�̾�Υե����
-  "bold" �ʤ�ܡ�����ΤΥե���Ȥˤʤ�ޤ���
+  フォントの濃さを指定します。"normal" (デフォルト)なら、通常のフォント
+  "bold" ならボールド体のフォントになります。
 
         require 'tk'
 
-        TkLabel.new(nil, "text" => "foobar �ۤ��ۤ�",
+        TkLabel.new(nil, "text" => "foobar ほげほげ",
                     "font" => TkFont.new("weight"=>"bold")).pack
         Tk.mainloop
 
 : -slant slant
 
-  �ե���Ȥ򷹤��뤫�ɤ����λ���Ǥ���"roman" (�ǥե����)�ʤ�
-  �����ʤ���"italic" ����ꤹ��ȷ����Τ���ե���Ȥˤʤ�ޤ���
+  フォントを傾けるかどうかの指定です。"roman" (デフォルト)なら
+  傾きなし、"italic" を指定すると傾きのあるフォントになります。
 
         require 'tk'
 
-        TkLabel.new(nil, "text" => "foobar �ۤ��ۤ�",
+        TkLabel.new(nil, "text" => "foobar ほげほげ",
                     "font" => TkFont.new("slant"=>"italic")).pack
         Tk.mainloop
 
 : -underline bool
 
-  �ե���Ȥ˲�����Ĥ��뤫�ɤ����λ���Ǥ���bool �ˤϿ�����
-  (true/false ���뤤�Ͽ��ͤ� ��:1 �� ��:0)����ꤷ�ޤ����ǥե�
-  ��Ȥ� false �Ǥ���
+  フォントに下線をつけるかどうかの指定です。bool には真偽値
+  (true/false あるいは数値で 真:1 か 偽:0)を指定します。デフォ
+  ルトは false です。
 
         require 'tk'
 
-        TkLabel.new(nil, "text" => "foobar �ۤ��ۤ�",
+        TkLabel.new(nil, "text" => "foobar ほげほげ",
                     "font" => TkFont.new("underline"=>true)).pack
         Tk.mainloop
 
 : -overstrike bool
 
-  �ե���Ȥ˼��ä���(ʸ��������˰�������Ĥ���)���ɤ�����
-  ����Ǥ���bool �ˤϿ�����(true/false ���뤤�Ͽ��ͤ� ��:1 
-  �� ��: 0)����ꤷ�ޤ����ǥե���Ȥ� false �Ǥ���
+  フォントに取り消し線(文字の中央に一本線をつける)かどうかの
+  指定です。bool には真偽値(true/false あるいは数値で 真:1 
+  か 偽: 0)を指定します。デフォルトは false です。
 
         require 'tk'
 
-        TkLabel.new(nil, "text" => "foobar �ۤ��ۤ�",
+        TkLabel.new(nil, "text" => "foobar ほげほげ",
                     "font" => TkFont.new("overstrike"=>true)).pack
         Tk.mainloop
 

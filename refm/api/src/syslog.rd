@@ -1,19 +1,19 @@
 #@if (version >= "1.6.6")
-Unix��OS �� syslog �򰷤��饤�֥��Ǥ���
+Unix系OS の syslog を扱うライブラリです。
 
 = module Syslog
 include Syslog::Constants
 
-UNIX��syslog�Υ�åѡ��⥸�塼�롣
-syslog �ξܺ٤ˤĤ��Ƥ� [[man:syslog(3)]] �򻲾Ȥ��Ƥ���������
+UNIXのsyslogのラッパーモジュール。
+syslog の詳細については [[man:syslog(3)]] を参照してください。
 
   require 'syslog'
 
   Syslog.open("syslogtest")
   Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
   Syslog.close
-  # �񤭹��ޤ�Ƥ��뤫�Τ���롣
-  # â�����¹ԴĶ��ˤ�äƥ����ξ�꤬�㤦�����路����syslog.conf�򻲾ȡ�
+  # 書き込まれているか確かめる。
+  # 但し、実行環境によってログの場所が違う。くわしくはsyslog.confを参照。
   File.foreach('/var/log/system.log'){|line|
     line.chomp!
     if /syslogtest/ =~ line
@@ -26,32 +26,32 @@ syslog �ξܺ٤ˤĤ��Ƥ� [[man:syslog(3)]] �򻲾Ȥ��Ƥ���������
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) -> self
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
-Ϳ����줿������syslog�򳫤��ޤ����ʹߡ�¾�� Syslog �⥸�塼��ؿ�����
-�Ѳ�ǽ�Ȥʤ�ޤ���
+与えられた引数でsyslogを開きます。以降、他の Syslog モジュール関数が使
+用可能となります。
 
-�֥��å��դ��ǸƤФ줿���ϡ�self ������Ȥ��ƥ֥��å���¹Ԥ���
-�Ǹ�� [[m:Syslog.#close]] ��Ԥ��ޤ���
+ブロック付きで呼ばれた場合は、self を引数としてブロックを実行し、
+最後に [[m:Syslog.#close]] を行います。
 
-syslog �ξܺ٤ˤĤ��Ƥ� [[man:syslog(3)]] �򻲾Ȥ��Ƥ���������
+syslog の詳細については [[man:syslog(3)]] を参照してください。
 
-@param ident ���٤ƤΥ����ˤĤ����̻Ҥǡ��ɤΥץ�����फ�������
-             �������ʤΤ����̤��뤿��˻Ȥ���ʸ�������ꤷ�ޤ���
-             ���ꤷ�ʤ����ϥץ������̾���Ȥ��ޤ���
+@param ident すべてのログにつく識別子で、どのプログラムから送られ
+             たログなのかを識別するために使われる文字列を指定します。
+             指定しない場合はプログラム名が使われます。
 
-@param options Syslog.open �� Syslog.log ��ư������椹��ե饰����ꤷ�ޤ���
-               ���ꤷ�ʤ����ϡ�Syslog::LOG_PID|Syslog::LOG_CONS���ͤ��Ȥ��
-               �ޤ������ѤǤ����ͤ�[[c:Syslog::Constants]] �򻲾Ȥ��Ƥ���������
+@param options Syslog.open や Syslog.log の動作を制御するフラグを指定します。
+               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
+               ます。使用できる値は[[c:Syslog::Constants]] を参照してください。
                
-@param facility �������Ϥ�Ԥ��ץ������μ��̤���ꤷ�ޤ���syslog �Ϥ�����
-                �ˤ������äƽ�����Ȥʤ�����ե��������ꤷ�ޤ��� �ܤ����ϡ�
+@param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
+                にしたがって出力先となるログファイルを決定します。 詳しくは、
                 [[man:syslog.conf(5)]], 
-                [[c:Syslog::Constants]] �򻲾Ȥ��Ƥ���������
+                [[c:Syslog::Constants]] を参照してください。
 
-@raise RuntimeError syslog����˳����Ƥ�������[[c:RuntimeError]]��ȯ�����ޤ���
+@raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生します。
 
-@return self ���֤��ޤ���
+@return self を返します。
 
-syslog����˳����Ƥ�������[[c:RuntimeError]]��ȯ�����ޤ���
+syslogを既に開いていた場合は[[c:RuntimeError]]が発生します。
 
   require 'syslog'
 
@@ -63,32 +63,32 @@ syslog����˳����Ƥ�������[[c:RuntimeError]]��ȯ�����ޤ���
     puts err #=> "syslog already open"
   end
 
-options �� facility �˻���Ǥ����ͤˤĤ��Ƥ�
-[[c:Syslog::Constants]] �򻲾Ȥ��Ƥ���������
+options と facility に指定できる値については
+[[c:Syslog::Constants]] を参照してください。
 
-������:
+指定例:
         Syslog.open('ftpd', Syslog::LOG_PID | Syslog::LOG_NDELAY,
                     Syslog::LOG_FTP)
 
 --- open!(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 --- reopen(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
-�����Ƥ��� syslog ��ǽ�˥��������������������[[m:Syslog.#open]] ��Ʊ���Ǥ���
+開いていた syslog を最初にクローズする点を除いて[[m:Syslog.#open]] と同じです。
 
-@param ident ���٤ƤΥ����ˤĤ����̻Ҥǡ��ɤΥץ�����फ�������
-             �������ʤΤ����̤��뤿��˻Ȥ���ʸ�������ꤷ�ޤ���
-             ���ꤷ�ʤ����ϥץ������̾���Ȥ��ޤ���
+@param ident すべてのログにつく識別子で、どのプログラムから送られ
+             たログなのかを識別するために使われる文字列を指定します。
+             指定しない場合はプログラム名が使われます。
 
-@param options Syslog.open �� Syslog.log ��ư������椹��ե饰����ꤷ�ޤ���
-               ���ꤷ�ʤ����ϡ�Syslog::LOG_PID|Syslog::LOG_CONS���ͤ��Ȥ��
-               �ޤ������ѤǤ����ͤ�[[c:Syslog::Constants]] �򻲾Ȥ��Ƥ���������
+@param options Syslog.open や Syslog.log の動作を制御するフラグを指定します。
+               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
+               ます。使用できる値は[[c:Syslog::Constants]] を参照してください。
                
-@param facility �������Ϥ�Ԥ��ץ������μ��̤���ꤷ�ޤ���syslog �Ϥ�����
-                �ˤ������äƽ�����Ȥʤ�����ե��������ꤷ�ޤ��� �ܤ����ϡ�
-                [[man:syslog.conf(5)]], [[c:Syslog::Constants]] �򻲾Ȥ��Ƥ�
-                ��������
+@param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
+                にしたがって出力先となるログファイルを決定します。 詳しくは、
+                [[man:syslog.conf(5)]], [[c:Syslog::Constants]] を参照してく
+                ださい。
 
-������
+使用例
   require 'syslog'
 
   Syslog.open("syslogtest")
@@ -97,7 +97,7 @@ options �� facility �˻���Ǥ����ͤˤĤ��Ƥ�
     Syslog.open!("syslogtest2")
     Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 200)
   rescue RuntimeError => err
-    # RuntimeError ��ȯ�����ʤ���
+    # RuntimeError は発生しない。
     puts err 
   end
   File.foreach('/var/log/system.log'){|line|
@@ -108,9 +108,9 @@ options �� facility �˻���Ǥ����ͤˤĤ��Ƥ�
 
 --- opened? -> bool
 
-syslog �򥪡��ץ󤷤Ƥ���п����֤��ޤ���
+syslog をオープンしていれば真を返します。
 
-������
+使用例
   require 'syslog'
 
   p Syslog.opened? #=> false
@@ -123,9 +123,9 @@ syslog �򥪡��ץ󤷤Ƥ���п����֤��ޤ���
 --- options -> Fixnum | nil
 --- facility -> Fixnum | nil
 
-�Ǹ��open��Ϳ����줿�б�����������֤��ޤ���
+最後のopenで与えられた対応する引数を返します。
 
-������
+使用例
   require 'syslog'
 
   Syslog.open("syslogtest")
@@ -135,28 +135,28 @@ syslog �򥪡��ץ󤷤Ƥ���п����֤��ޤ���
 
 --- log(priority, format, *arg) -> self
 
-syslog�˥�å�������񤭹��ߤޤ���
+syslogにメッセージを書き込みます。
 
-priority ��ͥ���٤򼨤����([[c:Syslog::Constants]]����)�Ǥ���
-�ޤ���facility([[c:Syslog::Constants]]����)�������¤ǻ��ꤹ
-�뤳�Ȥ� open �ǻ��ꤷ�� facility �����ؤ��뤳�Ȥ�Ǥ��ޤ���
+priority は優先度を示す定数([[c:Syslog::Constants]]参照)です。
+また、facility([[c:Syslog::Constants]]参照)を論理和で指定す
+ることで open で指定した facility を切替えることもできます。
 
-format �ʹߤ� [[m:Kernel.#sprintf]] ��Ʊ�������ΰ�������ꤷ�ޤ���
+format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定します。
 
-â����[[man:syslog(3)]] �Τ褦�� format �� %m �ϻ��ѤǤ��ޤ���
+但し、[[man:syslog(3)]] のように format に %m は使用できません。
 
-��å������˲��Ԥ�ޤ��ɬ�פϤ���ޤ���
+メッセージに改行を含める必要はありません。
 
-@param priority priority ��ͥ���٤򼨤��������ꤷ�ޤ���
-                �ܤ����ϡ�[[c:Syslog::Constants]]�򻲾Ȥ��Ƥ���������
+@param priority priority は優先度を示す定数を指定します。
+                詳しくは、[[c:Syslog::Constants]]を参照してください。
 
-@param format �ե����ޥå�ʸ����Ǥ���
+@param format フォーマット文字列です。
 
-@param arg �ե����ޥåȤ��������Ǥ���
+@param arg フォーマットされる引数です。
 
-@raise ArgumentError ���������İʾ�Ǥʤ�����ȯ�����ޤ���
+@raise ArgumentError 引数が２つ以上でない場合に発生します。
 
-��:
+例:
   Syslog.open("syslogtest") {|syslog|
     syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
   }
@@ -171,21 +171,21 @@ format �ʹߤ� [[m:Kernel.#sprintf]] ��Ʊ�������ΰ�������ꤷ�ޤ���
 --- info(message, *arg) -> self
 --- debug(message, *arg) -> self
 
-Syslog#log()�Υ��硼�ȥ��åȥ᥽�åɡ�
-�����ƥ�ˤ�äƤ��������Ƥ��ʤ���Τ⤢��ޤ���
+Syslog#log()のショートカットメソッド。
+システムによっては定義されていないものもあります。
 
-�㤨�С�Syslog.emerg(message, *arg) �ϡ�Syslog.log(Syslog::LOG_EMERG, message, *arg)
-��Ʊ���Ǥ���
+例えば、Syslog.emerg(message, *arg) は、Syslog.log(Syslog::LOG_EMERG, message, *arg)
+と同じです。
 
-@param message �ե����ޥå�ʸ����Ǥ���[[m:Kernel.#sprintf]] ��Ʊ�������ΰ�������ꤷ�ޤ���
+@param message フォーマット文字列です。[[m:Kernel.#sprintf]] と同じ形式の引数を指定します。
 
-@param arg �ե����ޥåȤ��������Ǥ���
+@param arg フォーマットされる引数です。
 
-@raise ArgumentError ������1�İʾ�Ǥʤ�����ȯ�����ޤ���
+@raise ArgumentError 引数が1つ以上でない場合に発生します。
 
-@raise RuntimeError syslog ��open ����Ƥ��ʤ����ȯ�����ޤ���
+@raise RuntimeError syslog がopen されていない場合発生します。
 
-��:
+例:
   Syslog.open("syslogtest") {|syslog|
     syslog.crit("the sky is falling in %d seconds!",5)
   }
@@ -193,20 +193,20 @@ Syslog#log()�Υ��硼�ȥ��åȥ᥽�åɡ�
 --- mask -> Fixnum | nil
 --- mask=(mask)
 
-������ͥ���٤Υޥ���������ޤ������ꤷ�ޤ���
-�ޥ����ϱ�³Ū�Ǥ��ꡢ
-Syslog.open��Syslog.close
-�Ǥϥꥻ�åȤ���ޤ���
+ログの優先度のマスクを取得または設定します。
+マスクは永続的であり、
+Syslog.openやSyslog.close
+ではリセットされません。
 
-@param mask ������ͥ���٤Υޥ��������ꤷ�ޤ���
+@param mask ログの優先度のマスクを設定します。
 
-@raise RuntimeError syslog �������ץ󤵤�Ƥ��ʤ���硢ȯ�����ޤ���
+@raise RuntimeError syslog がオープンされていない場合、発生します。
 
-������
+使用例
 
   require 'syslog'
   include Syslog::Constants
-  # �����ξ��ϼ¹ԴĶ��ˤ�äưۤʤ롣�ܤ�����syslog.conf �򻲾�
+  # ログの場所は実行環境によって異なる。詳しくはsyslog.conf を参照
   log = '/var/log/ftp.log'
 
   Syslog.open('ftpd', LOG_PID | LOG_NDELAY, LOG_FTP)
@@ -223,11 +223,11 @@ Syslog.open��Syslog.close
 
 --- close -> nil
 
-syslog���Ĥ��ޤ���
+syslogを閉じます。
 
-@raise RuntimeError syslog ��open ����Ƥ��ʤ����ȯ�����ޤ���
+@raise RuntimeError syslog がopen されていない場合発生します。
 
-������
+使用例
   require 'syslog'
 
   Syslog.open("syslogtest")
@@ -236,34 +236,34 @@ syslog���Ĥ��ޤ���
 
 --- instance -> self
 
-self���֤��ޤ���(���ǤȤθߴ����Τ���)
+selfを返します。(旧版との互換性のため)
 
 --- LOG_MASK(priority) -> Fixnum
 
-1�Ĥ�ͥ���٤��Ф���ޥ�����������ޤ���
+1つの優先度に対するマスクを作成します。
 
-@param priority priority ��ͥ���٤򼨤��������ꤷ�ޤ���
-                �ܤ����ϡ�[[c:Syslog::Constants]]�򻲾Ȥ��Ƥ���������
+@param priority priority は優先度を示す定数を指定します。
+                詳しくは、[[c:Syslog::Constants]]を参照してください。
 
-��:
+例:
          Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
 
 --- LOG_UPTO(priority) -> Fixnum
 
-priority�ޤǤΤ��٤Ƥ�ͥ���٤Υޥ�����������ޤ���
+priorityまでのすべての優先度のマスクを作成します。
 
-@param priority priority ��ͥ���٤򼨤��������ꤷ�ޤ���
-                �ܤ����ϡ�[[c:Syslog::Constants]]�򻲾Ȥ��Ƥ���������
+@param priority priority は優先度を示す定数を指定します。
+                詳しくは、[[c:Syslog::Constants]]を参照してください。
 
-��:
+例:
          Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 = module Syslog::Constants
 
 
-���Υ⥸�塼��ˤϥ����ƥ�ǻ��Ѳ�ǽ��LOG_*������������Ƥ��ޤ���
+このモジュールにはシステムで使用可能なLOG_*定数が定義されています。
 
-  ��:
+  例:
     require 'syslog'
     include Syslog::Constants
 
@@ -276,8 +276,8 @@ priority�ޤǤΤ��٤Ƥ�ͥ���٤Υޥ�����������ޤ���
 --- LOG_NOWAIT
 --- LOG_PERROR
 
-���ץ����(options)�򼨤������
-����ξܺ٤ˤĤ��Ƥ� [[man:syslog(3)]] �򻲾Ȥ��Ƥ���������
+オプション(options)を示す定数。
+定数の詳細については [[man:syslog(3)]] を参照してください。
 
 --- LOG_AUTH
 --- LOG_AUTHPRIV
@@ -303,9 +303,9 @@ priority�ޤǤΤ��٤Ƥ�ͥ���٤Υޥ�����������ޤ���
 --- LOG_LOCAL6
 --- LOG_LOCAL7
 
-��ǽ(facilities)�򼨤������
+機能(facilities)を示す定数。
 
-��� �ξܺ٤ˤĤ��Ƥ� [[man:syslog(3)]] �򻲾Ȥ��Ƥ���������
+定数 の詳細については [[man:syslog(3)]] を参照してください。
 
 --- LOG_EMERG
 --- LOG_ALERT
@@ -316,7 +316,7 @@ priority�ޤǤΤ��٤Ƥ�ͥ���٤Υޥ�����������ޤ���
 --- LOG_INFO
 --- LOG_DEBUG
 
-ͥ����(priorities)�򼨤������
-��� �ξܺ٤ˤĤ��Ƥ� [[man:syslog(3)]] �򻲾Ȥ��Ƥ���������
+優先度(priorities)を示す定数。
+定数 の詳細については [[man:syslog(3)]] を参照してください。
 
 #@end

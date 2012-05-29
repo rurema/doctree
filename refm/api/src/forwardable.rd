@@ -1,25 +1,25 @@
-���饹�䥪�֥������Ȥˡ��᥽�åɤΰѾ���ǽ���ɲä��뤿��Υ饤�֥��Ǥ���
+クラスやオブジェクトに、メソッドの委譲機能を追加するためのライブラリです。
 
-#@#�ʲ��Υ⥸�塼�뤬�������ޤ���
+#@#以下のモジュールが定義されます。
 
 #@#  * [[c:Forwardable]]
 #@#  * [[c:SingleForwardable]]
 
-#@#�ܺ٤� [[unknown:"ruby-src:doc/forwardable.rd.ja"]] �򻲾Ȥ��Ƥ���������
+#@#詳細は [[unknown:"ruby-src:doc/forwardable.rd.ja"]] を参照してください。
 
-=== ����
+=== 参考
 
-  * Rubyist Magazine 0012 �� ɸ��ź�ե饤�֥��Ҳ���� 6 ��۰Ѿ� ([[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]])
+  * Rubyist Magazine 0012 号 標準添付ライブラリ紹介【第 6 回】委譲 ([[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]])
 
 = module Forwardable
 
-���饹���Ф����᥽�åɤΰѾ���ǽ���������⥸�塼��Ǥ���
+クラスに対し、メソッドの委譲機能を定義するモジュールです。
 
-=== �Ȥ���
+=== 使い方
 
-���饹���Ф��� [[m:Object#extend]] ���ƻȤ��ޤ���[[m:Module#include]] �Ǥʤ��Ȥ��������դ��Ʋ�������
+クラスに対して [[m:Object#extend]] して使います。[[m:Module#include]] でないところに注意して下さい。
 
-��:
+例:
 
   class Foo
     extend Forwardable
@@ -37,15 +37,15 @@
 
 --- debug -> bool
 
-�Ѿ���ʬ��Хå��ȥ졼���˴ޤ�뤫�ɤ����ξ��֤��֤��ޤ���
+委譲部分をバックトレースに含めるかどうかの状態を返します。
 
-�Хå��ȥ졼����ޤ������ȤʤäƤ�����������֤��ޤ���
-�ǥե���Ȥϴޤ�ʤ�����ȤʤäƤ��ޤ���
+バックトレースを含める設定となっている時、真を返します。
+デフォルトは含めない設定となっています。
 
 
 --- debug= -> bool
 
-�Ѿ���ʬ��Хå��ȥ졼���˴ޤ�뤫�ɤ����ξ��֤����ꤷ�ޤ���
+委譲部分をバックトレースに含めるかどうかの状態を設定します。
 
 
 == Instance Methods
@@ -53,46 +53,46 @@
 --- def_instance_delegators(accessor, *methods) -> nil
 --- def_delegators(accessor, *methods) -> nil
 
-�᥽�åɤΰѾ����ޤȤ�����ꤷ�ޤ���
+メソッドの委譲先をまとめて設定します。
 
-@param accessor �Ѿ���Υ��֥�������
+@param accessor 委譲先のオブジェクト
 
-@param methods �Ѿ�����᥽�åɤΥꥹ��
+@param methods 委譲するメソッドのリスト
 
-�Ѿ����Υ��֥������Ȥ� methods �Τ��줾��Υ᥽�åɤ��ƤӽФ��줿���ˡ�
-�Ѿ���Υ��֥������Ȥ�Ʊ̾�Υ᥽�åɤؽ������Ѿ������褦�ˤʤ�ޤ���
+委譲元のオブジェクトで methods のそれぞれのメソッドが呼び出された場合に、
+委譲先のオブジェクトの同名のメソッドへ処理が委譲されるようになります。
 
-def_delegators �� def_instance_delegators ����̾�ˤʤ�ޤ���
+def_delegators は def_instance_delegators の別名になります。
 
 
 --- def_instance_delegator(accessor, method, ali = method) -> nil
 --- def_delegator(accessor, method, ali = method) -> nil
 
-�᥽�åɤΰѾ�������ꤷ�ޤ���
+メソッドの委譲先を設定します。
 
-@param accessor �Ѿ���Υ��֥�������
+@param accessor 委譲先のオブジェクト
 
-@param method �Ѿ���Υ᥽�å�
+@param method 委譲先のメソッド
 
-@param ali �Ѿ����Υ᥽�å�
+@param ali 委譲元のメソッド
 
-�Ѿ����Υ��֥������Ȥ� ali ���ƤӽФ��줿���ˡ�
-�Ѿ���Υ��֥������Ȥ� method �ؽ������Ѿ������褦�ˤʤ�ޤ���
+委譲元のオブジェクトで ali が呼び出された場合に、
+委譲先のオブジェクトの method へ処理が委譲されるようになります。
 
-�Ѿ����ȰѾ���Υ᥽�å�̾��Ʊ������, ali ���ά���뤳�Ȥ���ǽ�Ǥ���
+委譲元と委譲先のメソッド名が同じ場合は, ali を省略することが可能です。
 
-def_delegator �� def_instance_delegator ����̾�ˤʤ�ޤ���
+def_delegator は def_instance_delegator の別名になります。
 
 
 = module SingleForwardable
 
-���֥������Ȥ��Ф����᥽�åɤΰѾ���ǽ���������⥸�塼��Ǥ���
+オブジェクトに対し、メソッドの委譲機能を定義するモジュールです。
 
-=== �Ȥ���
+=== 使い方
 
-���֥������Ȥ��Ф��� extend ���ƻȤ��ޤ���
+オブジェクトに対して extend して使います。
 
-��:
+例:
 
   g = Goo.new
   g.extend SingleForwardable
@@ -105,33 +105,33 @@ def_delegator �� def_instance_delegator ����̾�ˤʤ�ޤ���
 --- def_singleton_delegators(accessor, *methods) -> nil
 --- def_delegators(accessor, *methods) -> nil
 
-�᥽�åɤΰѾ����ޤȤ�����ꤷ�ޤ���
+メソッドの委譲先をまとめて設定します。
 
-@param accessor �Ѿ���Υ��֥�������
+@param accessor 委譲先のオブジェクト
 
-@param methods �Ѿ�����᥽�åɤΥꥹ��
+@param methods 委譲するメソッドのリスト
 
-�Ѿ����Υ��֥������Ȥ� methods �Τ��줾��Υ᥽�åɤ��ƤӽФ��줿���ˡ�
-�Ѿ���Υ��֥������Ȥ�Ʊ̾�Υ᥽�åɤؽ������Ѿ������褦�ˤʤ�ޤ���
+委譲元のオブジェクトで methods のそれぞれのメソッドが呼び出された場合に、
+委譲先のオブジェクトの同名のメソッドへ処理が委譲されるようになります。
 
-def_delegators �� def_singleton_delegators ����̾�ˤʤ�ޤ���
+def_delegators は def_singleton_delegators の別名になります。
 
 
 --- def_singleton_delegator(accessor, method, ali = method) -> nil
 --- def_delegator(accessor, method, ali = method) -> nil
 
-�᥽�åɤΰѾ�������ꤷ�ޤ���
+メソッドの委譲先を設定します。
 
-@param accessor �Ѿ���Υ��֥�������
+@param accessor 委譲先のオブジェクト
 
-@param method �Ѿ���Υ᥽�å�
+@param method 委譲先のメソッド
 
-@param ali �Ѿ����Υ᥽�å�
+@param ali 委譲元のメソッド
 
-�Ѿ����Υ��֥������Ȥ� ali ���ƤӽФ��줿���ˡ�
-�Ѿ���Υ��֥������Ȥ� method �ؽ������Ѿ������褦�ˤʤ�ޤ���
+委譲元のオブジェクトで ali が呼び出された場合に、
+委譲先のオブジェクトの method へ処理が委譲されるようになります。
 
-�Ѿ����ȰѾ���Υ᥽�å�̾��Ʊ������, ali ���ά���뤳�Ȥ���ǽ�Ǥ���
+委譲元と委譲先のメソッド名が同じ場合は, ali を省略することが可能です。
 
-def_delegator �� def_singleton_delegator ����̾�ˤʤ�ޤ���
+def_delegator は def_singleton_delegator の別名になります。
 

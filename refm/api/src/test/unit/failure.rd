@@ -1,50 +1,50 @@
 
 = class Test::Unit::Failure < Object
 
-�ƥ��Ȥμ��Ԥ�ɽ�����륯�饹�Ǥ����ƥ�����˥���������󤬼��Ԥ�������
-[[c:Test::Unit::TestCase]]�������ޤ���
+テストの失敗を表現するクラスです。テスト中にアサーションが失敗した時に
+[[c:Test::Unit::TestCase]]から作られます。
 
 == Class Methods
 
 --- new(test_name, location, message) -> Test::Unit::Failure
 
-Test::Unit::Failure ���֥������ȤΥ��󥹥��󥹤��������ޤ���
+Test::Unit::Failure オブジェクトのインスタンスを生成します。
 
-@param test_name �б�����ƥ��ȥ᥽�åɤ�̾������ꤷ�ޤ���
+@param test_name 対応するテストメソッドの名前を指定します。
 
-@param location �ƤӽФ����ξ���� [[m:$@]] �η����ǻ��ꤷ�ޤ���
+@param location 呼び出し元の情報を [[m:$@]] の形式で指定します。
 
-@param message �б����� assert �᥽�åɤ��Ϥ��� message ����ꤷ�ޤ���
+@param message 対応する assert メソッドに渡した message を指定します。
 
 == Instance Methods
 
 --- long_display -> String
 --- to_s -> String
 
-�����������˼��Ԥ������ξܺ٤�������ʸ������֤��ޤ���
+アサーションに失敗した時の詳細な説明を文字列で返します。
 
 --- message -> String
 
-���Ȥ��б����� assert �᥽�åɤ��Ϥ��� message ����ꤷ�ޤ���
+自身に対応する assert メソッドに渡した message を指定します。
 
-[[m:Test::Unit::Failure#short_display]] ��
-[[m:Test::Unit::Failure#long_display]] �ǻȤ��ޤ���
+[[m:Test::Unit::Failure#short_display]] や
+[[m:Test::Unit::Failure#long_display]] で使われます。
 
 @see [[m:Test::Unit::Failure#short_display]],
      [[m:Test::Unit::Failure#long_display]]
 
 --- short_display -> String
 
-�����������˼��Ԥ������δ�ñ��������ʸ������֤��ޤ���
+アサーションに失敗した時の簡単な説明を文字列で返します。
 
 --- single_character_display -> String
 
-�����������˼��Ԥ�������ɽ������ 'F' ���֤��ޤ���
+アサーションに失敗した時に表示する 'F' を返します。
 
 --- test_name -> String
 
-���Ȥ��б�����ƥ��ȥ᥽�åɤ�̾�����֤��ޤ���
+自身に対応するテストメソッドの名前を返します。
 
 --- location -> [String]
 
-���Ȥ��б�����ƤӽФ����ξ���� [[m:$@]] �η����ΥХå��ȥ졼���Ȥ����֤��ޤ���
+自身に対応する呼び出し元の情報を [[m:$@]] の形式のバックトレースとして返します。

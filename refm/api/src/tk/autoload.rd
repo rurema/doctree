@@ -70,17 +70,17 @@ require tk/xim
 --- Tk.EncodedString(str, enc = nil)
 #@todo
 
-[[m:Tk::EncodedString.new]] ¤ÈÆ±¤¸
+[[m:Tk::EncodedString.new]] ã¨åŒã˜
 
 --- Tk.BinaryString(str)
 #@todo
 
-[[m:Tk::BinaryString.new]] ¤ÈÆ±¤¸
+[[m:Tk::BinaryString.new]] ã¨åŒã˜
 
 --- Tk.UTF8_String(str)
 #@todo
 
-[[m:Tk::UTF8_String.new]] ¤ÈÆ±¤¸
+[[m:Tk::UTF8_String.new]] ã¨åŒã˜
 
 
 = reopen Kernel
@@ -90,16 +90,16 @@ require tk/xim
 --- TkGrid(*args)
 #@todo
 
-[[m:TkGrid.#configure]] ¤ÈÆ±¤¸
+[[m:TkGrid.#configure]] ã¨åŒã˜
 
 --- TkPack(*args)
 #@todo
 
-[[m:TkPack.#configure]] ¤ÈÆ±¤¸
+[[m:TkPack.#configure]] ã¨åŒã˜
 
 --- TkPlace(*args)
 #@todo
 
-[[m:TkPlace.#configure]] ¤ÈÆ±¤¸
+[[m:TkPlace.#configure]] ã¨åŒã˜
 
 #@end

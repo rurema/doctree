@@ -1,7 +1,7 @@
-GDBM(GNU �ǡ����١������ޥ͡�����) �� Ruby ������ץȤ��鰷������Υ饤�֥��Ǥ���
+GDBM(GNU データベース・マネージャ) を Ruby スクリプトから扱うためのライブラリです。
 
-GDBM �� dbm ����� ndbm �ߴ���ǽ��ޤ�Ǥ��ޤ���
-�����륭�����ͤΥ����������¤Ϥ���ޤ���
+GDBM は dbm および ndbm 互換機能を含んでいます。
+扱えるキーや値のサイズに制限はありません。
 
 @see [[lib:dbm]], [[lib:sdbm]], [[man:gdbm(3)]]
 
@@ -9,53 +9,53 @@ GDBM �� dbm ����� ndbm �ߴ���ǽ��ޤ�Ǥ��ޤ���
 
 include Enumerable
 
-GDBM �ե�����򥢥��������륯�饹��
+GDBM ファイルをアクセスするクラス。
 
-�������ǡ����Ȥ��ʸ����Ǥʤ���Фʤ�ʤ��Ȥ������¤ȡ�
-�ǡ������ե��������¸�����Ȥ�����������Ƥ� [[c:Hash]] ���饹��
-����Ʊ�ͤ˰������Ȥ��Ǥ��ޤ���
+キー、データともに文字列でなければならないという制限と、
+データがファイルに保存されるという点を除いては [[c:Hash]] クラスと
+全く同様に扱うことができます。
 
 == Class Methods
 
 --- new(dbname, mode = 0666, flags = 0) -> GDBM
 
-dbname �ǻ��ꤷ���ǡ����١�����⡼�ɤ� mode �����ꤷ�ƥ����ץ󤷤ޤ���
+dbname で指定したデータベースをモードを mode に設定してオープンします。
 
-@param dbname �ǡ����١�����̾������ꤷ�ޤ���
+@param dbname データベースの名前を指定します。
 
-@param mode ��ά�ͤ� 0666 �Ǥ���mode �Ȥ��� nil ����ꤹ��ȥǡ����١�����
-            ¸�ߤ��ʤ����ˤϿ����ʥǡ����١������餺 nil ���֤��ޤ���
+@param mode 省略値は 0666 です。mode として nil を指定するとデータベースが
+            存在しない時には新たなデータベースを作らず nil を返します。
 
-@param flags flags �ˤϡ�[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
-             �������¤���ꤷ�ޤ����ǥե�����ͤϻ���ʤ�(�Ĥޤ�0)�Ǥ���
+@param flags flags には、[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
+             の論理和を指定します。デフォルト値は指定なし(つまり0)です。
 #@if (version >= "1.8.2")
-             flags �� [[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
-             �Τ����줫��Ϳ�����ɤ߽񤭤Υ⡼�ɤ����Ǥ��ޤ���
-             ������ɤ����ꤷ�ʤ��ä����ˤϡ�
-             [[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] �ν�ǻ�ޤ���
+             flags に [[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
+             のいずれかを与えて読み書きのモードを指定できます。
+             これらをどれも指定しなかった場合には、
+             [[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] の順で試します。
 #@end
 
 --- open(dbname, mode = 0666, flags = 0) -> GDBM
 --- open(dbname, mode = 0666, flags = 0) {|db| ... } -> object
 
-dbname �ǻ��ꤷ���ǡ����١�����⡼�ɤ� mode �����ꤷ�ƥ����ץ󤷤ޤ���
+dbname で指定したデータベースをモードを mode に設定してオープンします。
 
-�֥��å�����ꤷ����硢�����ץ󤷤� GDBM ���֥������Ȥ�
-�����˥֥��å���¹Ԥ��ޤ����¹Ը� GDBM ���֥������Ȥ򥯥�����
-����open �᥽�åɤϥ֥��å��η�̤��֤��ޤ���
+ブロックを指定した場合、オープンした GDBM オブジェクトを
+引数にブロックを実行します。実行後 GDBM オブジェクトをクローズ
+し、open メソッドはブロックの結果を返します。
 
-@param dbname �ǡ����١�����̾������ꤷ�ޤ���
+@param dbname データベースの名前を指定します。
 
-@param mode ��ά�ͤ� 0666 �Ǥ���mode �Ȥ��� nil ����ꤹ��ȥǡ����١�����
-            ¸�ߤ��ʤ����ˤϿ����ʥǡ����١������餺 nil ���֤��ޤ���
+@param mode 省略値は 0666 です。mode として nil を指定するとデータベースが
+            存在しない時には新たなデータベースを作らず nil を返します。
 
-@param flags flags �ˤϡ�[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
-             �������¤���ꤷ�ޤ����ǥե�����ͤϻ���ʤ�(�Ĥޤ�0)�Ǥ���
+@param flags flags には、[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
+             の論理和を指定します。デフォルト値は指定なし(つまり0)です。
 #@if (version >= "1.8.2")
-             flags �� [[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
-             �Τ����줫��Ϳ�����ɤ߽񤭤Υ⡼�ɤ����Ǥ��ޤ���
-             ������ɤ����ꤷ�ʤ��ä����ˤϡ�
-             [[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] �ν�ǻ�ޤ���
+             flags に [[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
+             のいずれかを与えて読み書きのモードを指定できます。
+             これらをどれも指定しなかった場合には、
+             [[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] の順で試します。
 #@end
 
    require 'gdbm'
@@ -70,55 +70,55 @@ dbname �ǻ��ꤷ���ǡ����١�����⡼�ɤ� mode �����ꤷ�ƥ����ץ󤷤ޤ���
 
 --- [](key) -> String
 
-key �򥭡��Ȥ����ͤ��֤��ޤ���
+key をキーとする値を返します。
 
-@param key ������
+@param key キー。
 
 --- []=(key, value)
 
-key �򥭡��Ȥ��ơ�value ���Ǽ���ޤ���
+key をキーとして、value を格納します。
 
-@param key ������
-@param value ��Ǽ�����͡�
+@param key キー。
+@param value 格納する値。
 
 --- cachesize=(size)
 
-�����Υ���å���Υ���������ꤷ�ޤ���
+内部のキャッシュのサイズを指定します。
 
-�ܤ����� [[man:gdbm(3)]] �� GDBM_CACHESIZE �ι�򻲾Ȥ���������
+詳しくは [[man:gdbm(3)]] の GDBM_CACHESIZE の項を参照ください。
 
-@param size �����������Υ���å��奵������
+@param size 新しい内部のキャッシュサイズ。
 
 @see [[man:gdbm(3)]]
 
 --- clear -> self
 
-DBM �ե��������ˤ��ޤ���
+DBM ファイルを空にします。
 
 --- close -> nil
 
-DBM �ե�����򥯥��������ޤ���
+DBM ファイルをクローズします。
 
-�ʸ�������㳰 [[c:RuntimeError]] ��ȯ�������ޤ���
+以後の操作は例外 [[c:RuntimeError]] を発生させます。
 
 #@since 1.8.3
 --- closed? -> bool
 
-DBM �ե����뤬�����Ĥ����Ƥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+DBM ファイルが既に閉じられている場合は、真を返します。
+そうでない場合は、偽を返します。
 
 #@end
 
 --- delete(key) -> object | nil
 --- delete(key) {|key| ... } -> object
 
-Ϳ����줿 key ���б�������ܤ������ޤ���
+与えられた key に対応する項目を削除します。
 
-@param key ��������ꤷ�ޤ���
+@param key キーを指定します。
 
-@return ���ꤷ��������¸�ߤ�����ϡ��������б������ͤ��֤��ޤ���
-        ���ꤷ��������¸�ߤ��ʤ����ϡ� nil ���֤��ޤ���
-        �ޤ���������¸�ߤ��ʤ����˥֥��å���Ϳ���Ƥ�����ϡ��֥��å���ɾ��������̤��֤��ޤ���
+@return 指定したキーが存在する場合は、キーに対応する値を返します。
+        指定したキーが存在しない場合は、 nil を返します。
+        また、キーが存在しない場合にブロックを与えている場合は、ブロックを評価した結果を返します。
 
   require 'gdbm'
   GDBM.open("a.db") do |db|
@@ -133,63 +133,63 @@ DBM �ե����뤬�����Ĥ����Ƥ�����ϡ������֤��ޤ���
 --- delete_if { |key, value|  ...  } -> self
 --- reject! { |key, value|  ...  } -> self
 
-�֥��å���ɾ�������ͤ����Ǥ���г���������ܤ������ޤ���
+ブロックを評価した値が真であれば該当する項目を削除します。
 
-���Υ᥽�åɤ� self ���˲�Ū���ѹ����ޤ���
+このメソッドは self を破壊的に変更します。
 
 --- each {|key, value|  ...  } -> self
 --- each_pair {|key, value|  ...  } -> self
 
-�����Ǥ��Ф��륤�ƥ졼���Ǥ���
+各要素に対するイテレータです。
 
 --- each_key {|key|  ...  } -> self
 
-���Ƥ� key ���Ф��Ʒ����֤����ƥ졼���Ǥ���
+全ての key に対して繰り返すイテレータです。
 
 --- each_value {|value|  ...  } -> self
 
-���Ƥ� value ���Ф��Ʒ����֤����ƥ졼���Ǥ���
+全ての value に対して繰り返すイテレータです。
 
 --- empty? -> bool
 
-�ǡ����١��������λ��������֤��ޤ���
+データベースが空の時、真を返します。
 
 --- fastmode=(bool)
 
-�����ץ󤷤Ƥ��� GDBM ���֥������ȤΥ⡼�ɤ��ѹ����ޤ���
+オープンしている GDBM オブジェクトのモードを変更します。
 
-���Υ��ץ����ϥǥե���Ȥ� on �Ǥ���
-���Υ��ץ����� obsolete �Ǥ���
+このオプションはデフォルトで on です。
+このオプションは obsolete です。
 
-���Υ��ץ���� on �ΤȤ��ϡ�GDBM �ϥǥ������ؤν񤭹��ߤ��Ԥ�����
-��������³���ޤ���
+このオプションが on のときは、GDBM はディスクへの書き込みを待たずに
+次の操作を続けます。
 
-@param bool �����˥��åȤ���⡼�ɡ�
+@param bool 新たにセットするモード。
 
 @see [[m:GDBM::FAST]], [[m:GDBM#syncmode=]]
 
 --- syncmode=(bool)
 
-�����ץ󤷤Ƥ��� GDBM ���֥������ȤΥ⡼�ɤ��ѹ����ޤ���
+オープンしている GDBM オブジェクトのモードを変更します。
 
-���Υ��ץ����ϥǥե���Ȥ� off �Ǥ���
+このオプションはデフォルトで off です。
 
-���Υ��ץ���� on �ΤȤ��ϡ�GDBM �ϥǡ����١������ѹ����Ȥ�
-�ǡ����١����ξ��֤�Ʊ�����ޤ���
+このオプションが on のときは、GDBM はデータベースの変更操作ごとに
+データベースの状態を同期します。
 
-@param bool �����˥��åȤ���⡼�ɡ�
+@param bool 新たにセットするモード。
 
 @see  [[m:GDBM::SYNC]], [[m:GDBM#fastmode=]]
 
 --- fetch(key, ifnone = nil){|key| ... } -> object
 
-�ǡ����١��������б����륭����õ���Ƥ������Ǥ��ͤ��֤��ޤ���
+データベースから対応するキーを探してその要素の値を返します。
 
-@param key     õ�����륭����
-@param ifnone  �б����륭�������Ĥ���ʤ��ä������֤��͡�
+@param key     探索するキー。
+@param ifnone  対応するキーが見つからなかった場合に返す値。
 
-@raise IndexError ifnone �����ꤵ��Ƥ��ʤ��Ȥ��ˡ��б����륭����
-                  ���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise IndexError ifnone が設定されていないときに、対応するキーが
+                  見つからなかった場合に発生します。
 
   require 'gdbm'
   
@@ -201,7 +201,7 @@ DBM �ե����뤬�����Ĥ����Ƥ�����ϡ������֤��ޤ���
   p db1.fetch('z', 'zzz')                     #=> 'zzz'
   p db1.fetch('z'){|key| [:key, key] }        #=> [:key, 'z']
   p db1.fetch('z', 'zzz'){|key| [:key, key] } #=> 'zzz'
-  p db1.fetch('z')                            #=> IndexError ȯ��
+  p db1.fetch('z')                            #=> IndexError 発生
 
 @see [[m:Hash#fetch]]
 
@@ -210,21 +210,21 @@ DBM �ե����뤬�����Ĥ����Ƥ�����ϡ������֤��ޤ���
 --- include?(key) -> bool
 --- member?(key) -> bool
 
-key ���ǡ����١������¸�ߤ�����������֤��ޤ���
+key がデータベース中に存在する時、真を返します。
 
 --- has_value?(value) -> bool
 --- value?(value) -> bool
 
-value ���ͤȤ������Ǥ��ǡ����١������¸�ߤ�����������֤��ޤ���
+value を値とする要素がデータベース中に存在する時、真を返します。
 
-@param value �����������͡�
+@param value 検索したい値。
 
 --- index(val) -> String
 
-�� val ���б����륭�����֤��ޤ���
+値 val に対応するキーを返します。
 
-�б��������Ǥ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
-�������륭����ʣ��¸�ߤ����硢�ɤΥ������֤���������Ǥ���
+対応する要素が存在しない時には nil を返します。
+該当するキーが複数存在する場合、どのキーを返すかは不定です。
 
 @see [[m:Hash#index]]
 
@@ -232,11 +232,11 @@ value ���ͤȤ������Ǥ��ǡ����١������¸�ߤ�����������֤��ޤ���
 --- indexes(*keys) -> [String]
 --- indices(*keys) -> [String]
 
-�ư������ͤ򥭡��Ȥ������Ǥ��ͤ�ޤ�������֤��ޤ���
+各引数の値をキーとする要素の値を含む配列を返します。
 
-���Υ᥽�åɤ�obsolete�Ǥ���
+このメソッドはobsoleteです。
 
-@param keys ���������������Ǥ���
+@param keys 検索したいキーです。
 
   require 'gdbm'
   
@@ -250,7 +250,7 @@ value ���ͤȤ������Ǥ��ǡ����١������¸�ߤ�����������֤��ޤ���
 
 --- invert -> Hash
 
-�ͤ��饭���ؤΥϥå�����֤��ޤ���
+値からキーへのハッシュを返します。
 
   require 'gdbm'
   
@@ -263,17 +263,17 @@ value ���ͤȤ������Ǥ��ǡ����١������¸�ߤ�����������֤��ޤ���
 #@since 1.9.1
 --- key(value) -> String
 
-Ϳ����줿�ͤ��б����륭�����֤��ޤ���
+与えられた値に対応するキーを返します。
 
-�ͤ��б����륭����ʣ��������Ϻǽ�˸��Ĥ��ä��������֤��ޤ���
+値に対応するキーが複数ある場合は最初に見つかったキーを返します。
 
-@param value ������õ�������ͤ���ꤷ�ޤ���
+@param value キーを探したい値を指定します。
 
 #@end
 
 --- keys -> [String]
 
-�ǡ����١������¸�ߤ��륭�����Ƥ�ޤ�������֤��ޤ���
+データベース中に存在するキー全てを含む配列を返します。
 
   require 'gdbm'
   
@@ -286,36 +286,36 @@ value ���ͤȤ������Ǥ��ǡ����١������¸�ߤ�����������֤��ޤ���
 --- length -> Integer
 --- size   -> Integer
 
-�ǡ����١���������Ǥο����֤��ޤ���
+データベース中の要素の数を返します。
 
-���ߤμ¸��Ǥ����ǿ�������뤿��˥ǡ����١����������������ޤ���
+現在の実現では要素数を数えるためにデータベースを全部検索します。
 
 --- reject {|key, value| ... } -> Hash
 
-�֥��å���ɾ�������ͤ����Ǥ���г����������Ǥ������ޤ���
+ブロックを評価した値が真であれば該当する要素を削除します。
 
   self.to_hash.reject{|key, value| ... }
 
-��Ʊ���Ǥ���
+と同じです。
 
 @see [[m:Hash#reject]]
 
 --- reorganize -> self
 
-DB �ե�����κ�������Ԥ��ޤ���
+DB ファイルの再編成を行います。
 
-GDBM �Ǥϡ����Ǥκ����ԤäƤ� DB �ե�����Υ������ϸ������ޤ���(��
-���ˤ�äƶ������ΰ�ϼ��γ�Ǽ�Τ���˼�äƤ�����ޤ�)��
-���Υ᥽�åɤ�ƤӽФ����Ȥ� DBM �ե�����򿷵��˺��ľ��̵�̤��ΰ��ʤ�
-�����Ȥ��Ǥ��ޤ���
+GDBM では、要素の削除を行っても DB ファイルのサイズは減少しません(削
+除によって空いた領域は次の格納のために取っておかれます)。
+このメソッドを呼び出すことで DBM ファイルを新規に作り直し無駄な領域をなく
+すことができます。
 
-���̤κ����Ԥä��Ȥ��ˡ��ǥ��������ڡ���������Τ���˻��Ѥ��ޤ���
+大量の削除を行ったときに、ディスクスペースの節約のために使用します。
 
 --- replace(other) -> self
 
-self �����Ƥ� other �����Ƥ��֤������ޤ���
+self の内容を other の内容で置き換えます。
 
-@param other each_pair �᥽�åɤ���ĥ��֥������ȤǤʤ���Фʤ�ޤ���
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
   require 'gdbm'
   
@@ -334,7 +334,7 @@ self �����Ƥ� other �����Ƥ��֤������ޤ���
 
 --- select{|key, value| ... } -> [[String]]
 
-�֥��å���ɾ�����ƿ��ˤʤä����ǤΤߤ�����˳�Ǽ�����֤��ޤ���
+ブロックを評価して真になった要素のみを配列に格納して返します。
 
   require 'gdbm'
   
@@ -350,7 +350,7 @@ self �����Ƥ� other �����Ƥ��֤������ޤ���
 
 --- shift -> [String]
 
-�ǡ����١���������Ǥ��ļ��Ф����ǡ����١������������ޤ���
+データベース中の要素を一つ取り出し、データベースから削除します。
 
   require 'gdbm'
   
@@ -362,47 +362,47 @@ self �����Ƥ� other �����Ƥ��֤������ޤ���
 
 --- store(key, val) -> [String]
 
-key ���Ф��� val ���Ǽ���ޤ���
+key に対して val を格納します。
 
 @see [[m:GDBM#[]=]]
 
 --- sync -> self
 
-���Ǥ��ѹ���ե������ȿ�Ǥ��ޤ���
+要素の変更をファイルに反映します。
 
-FAST �⡼��([[m:GDBM.open]] ����3������ [[m:GDBM::FAST]] �����)�ΤȤ�������̣������ޤ���
+FAST モード([[m:GDBM.open]] の第3引数に [[m:GDBM::FAST]] を指定)のときだけ意味があります。
 
-==== ����
-GNU gdbm version 1.8 �ʹߤ�� FAST �⡼�ɤ��ǥե���Ȥˤʤ�ޤ�����
+==== 注意
+GNU gdbm version 1.8 以降より FAST モードがデフォルトになりました。
 
 --- to_a -> [[String]]
 
-self �γ����Ǥ��Ǽ����������֤��ޤ���
+self の各要素を格納した配列を返します。
 
-�֤���������1�Ĥ����Ǥ� [key, value] �Ǥ���
-�Ĥޤ������������֤��ޤ���
+返される配列の1つの要素は [key, value] です。
+つまり配列の配列を返します。
 
 --- to_hash -> Hash
 
-self �γ����Ǥ��Ǽ�����ϥå�����֤��ޤ���
+self の各要素を格納したハッシュを返します。
 
 --- update(other) -> self
 
-self �� other �����Ƥ�ޡ������ޤ���
+self と other の内容をマージします。
 
-��ʣ���륭�����б������ͤ�other �����ƤǾ�񤭤���ޤ���
+重複するキーに対応する値はother の内容で上書きされます。
 
-@param other each_pair �᥽�åɤ���ĥ��֥������ȤǤʤ���Фʤ�ޤ���
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
 --- values -> [String]
 
-�ǡ����١������¸�ߤ��������Ƥ�ޤ�������֤��ޤ���
+データベース中に存在する値全てを含む配列を返します。
 
 --- values_at(*keys) -> [String]
 
-keys ���б������ͤ�����˳�Ǽ�����֤��ޤ���
+keys に対応する値を配列に格納して返します。
 
-@param keys ������ʣ�������ǽ�Ǥ���
+@param keys キー。複数指定可能です。
 
   require 'gdbm'
   
@@ -419,70 +419,70 @@ keys ���б������ͤ�����˳�Ǽ�����֤��ޤ���
 
 --- VERSION -> String
 
-libgdbm �ΥС����������ʸ����Ǥ���
+libgdbm のバージョン情報の文字列です。
 
 
 --- FAST -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�񤭹��ߤη�̤����ǥ�������Υե�����ˤ�����ȿ�Ǥ��ʤ��ʤ�ޤ���
-���Υ⡼�ɤΤȤ��˷�̤�����Ū�˥ե������ȿ�Ǥ�����ˤ� [[m:GDBM#sync]]
-�᥽�åɤ�ƤӤޤ���libgdbm version 1.8.0 �ʹߤǤϤ��Υ⡼�ɤ��ǥե����
-�Ǥ���
+書き込みの結果が、ディスク上のファイルにすぐに反映しなくなります。
+このモードのときに結果を明示的にファイルに反映させるには [[m:GDBM#sync]]
+メソッドを呼びます。libgdbm version 1.8.0 以降ではこのモードがデフォルト
+です。
 
 --- SYNC -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�񤭹��ߤη�̤����ǥ�������Υե�����ˤ�����ȿ�Ǥ���ޤ���
-libgdbm version 1.8.0 �����Υǥե���ȥ⡼�ɤǤ���
+書き込みの結果が、ディスク上のファイルにすぐに反映されます。
+libgdbm version 1.8.0 以前のデフォルトモードです。
 
-��������� libgdbm version 1.8.0 �ʹߤ��ͭ���Ǥ���
+この定数は libgdbm version 1.8.0 以降より有効です。
 
 --- NOLOCK -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�̾¾�Υץ������� DB �򥪡��ץ󤷤Ƥ������˥����ץ��Ԥ���
-[[c:Errno::EWOULDBLOCK]](�ޤ��� [[c:Errno::EAGAIN]]) �㳰��ȯ�����ޤ���
-���Υե饰����ꤷ�Ƥ���С�¾�Υץ������������ץ󤷤Ƥ������Ǥ�Ʊ��
-�����ץ󤹤뤳�Ȥ��Ǥ��ޤ���
+通常、他のプロセスが DB をオープンしている最中にオープンを行うと
+[[c:Errno::EWOULDBLOCK]](または [[c:Errno::EAGAIN]]) 例外が発生します。
+このフラグを指定していれば、他のプロセスがオープンしている最中でも同時
+オープンすることができます。
 
-��������� libgdbm version 1.8.0 �ʹߤ��ͭ���Ǥ���
+この定数は libgdbm version 1.8.0 以降より有効です。
 
 #@since 1.8.2
 --- READER -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�ɤ߹��ߥ⡼�ɤǥ����ץ󤷤ޤ���
+読み込みモードでオープンします。
 
 --- WRITER -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�񤭹��ߥ⡼�ɤǥ����ץ󤷤ޤ���
+書き込みモードでオープンします。
 
 --- WRCREAT -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�񤭹��ߥ⡼�ɤǡ����Ǥ˥ե����뤬¸�ߤ��ʤ��ä�����ޤ���
+書き込みモードで、すでにファイルが存在しなかったら作ります。
 
 
 --- NEWDB -> Fixnum
 
-[[m:GDBM.open]] ����3�����˻��ꤷ�ޤ���
+[[m:GDBM.open]] の第3引数に指定します。
 
-�񤭹��ߥ⡼�ɤǡ����Ǥ˥ե����뤬¸�ߤ����������Ƥ�����ľ���ޤ���
+書き込みモードで、すでにファイルが存在したら削除してから作り直します。
 #@end
 
 
 = class GDBMError < StandardError
 
-GDBM �����ǻ��Ѥ����㳰���饹�Ǥ���
+GDBM 内部で使用する例外クラスです。
 
 = class GDBMFatalError < StandardError
 
-GDBM �����ǻ��Ѥ����㳰���饹�Ǥ���
+GDBM 内部で使用する例外クラスです。

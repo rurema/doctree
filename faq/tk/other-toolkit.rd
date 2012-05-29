@@ -1,44 +1,44 @@
 ###nonref
 
-= Ruby����Ȥ��뤽��¾�Υġ��륭�å�
+= Rubyから使えるその他のツールキット
 
-* EZWGL �⥸�塼��
+* EZWGL モジュール
 
-((<EZWGL|URL:http://www.ma.utexas.edu/~mzou/EZWGL/>)) �򰷤��⥸�塼�뤬 ���Ĥ���ˤ�äƺ���Ƥ��ޤ���
-���ߥͥåȥ����Ǥϼ������ʤ����⡩
-
-
-* FLTK �⥸�塼��
-
-((<FLTK|URL:http://www.fltk.org/>)) �򰷤��⥸�塼�뤬Ω�Ф���ˤ�äƺ���Ƥ��ޤ���
-((<Ω�Ф���Web|URL:http://kt-www.jaist.ac.jp:8000/~ttate/ftp/>))�����ˤ���뤳�Ȥ��Ǥ��ޤ���
+((<EZWGL|URL:http://www.ma.utexas.edu/~mzou/EZWGL/>)) を扱うモジュールが 前田さんによって作られています。
+現在ネットワーク上では手に入らないかも？
 
 
-* gtk �⥸�塼��
+* FLTK モジュール
 
-((<gtk|URL:http://www.gtk.org/>)) �򰷤��⥸�塼�뤬 �ޤĤ�� ����ˤ�äƺ���Ƥ��ޤ���
-���ߤϡ��޽��򤵤󤬥��Ƥ��Ƥ��ޤ���((<Ruby(('/'))Gtk|URL:http://www.ruby-lang.org/gtk/ja/index.html>))�ˤ���ޤ���
-
-
-* XForms �⥸�塼��
-
-((<XForms|URL:http://world.std.com/%7Exforms/>)) �򰷤��⥸�塼�뤬Ω�Ф���ˤ�äƺ���Ƥ��ޤ���
-((<Ω�Ф���Web|URL:http://kt-www.jaist.ac.jp:8000/~ttate/ftp/>))�����ˤ���뤳�Ȥ��Ǥ��ޤ���
+((<FLTK|URL:http://www.fltk.org/>)) を扱うモジュールが立石さんによって作られています。
+((<立石さんWeb|URL:http://kt-www.jaist.ac.jp:8000/~ttate/ftp/>))から手にいれることができます。
 
 
-* Xtoolkit �⥸�塼��
+* gtk モジュール
 
-Athena widget �� Motif �򰷤��⥸�塼�뤬 ���Ĥ���ˤ�äƺ���Ƥ��ޤ���
-contrib/ �ˤ���ޤ���
-
-
-* XView �⥸�塼��
-
-XView �򰷤��⥸�塼�뤬 Ω�Ф���ˤ�äƺ���Ƥ��ޤ���
-((<Ω�Ф���Web|URL:http://kt-www.jaist.ac.jp:8000/~ttate/ftp/>))�����ˤ���뤳�Ȥ��Ǥ��ޤ���
+((<gtk|URL:http://www.gtk.org/>)) を扱うモジュールが まつもと さんによって作られています。
+現在は、五十嵐さんがメンテしています。((<Ruby(('/'))Gtk|URL:http://www.ruby-lang.org/gtk/ja/index.html>))にあります。
 
 
-* Xlib�⥸�塼��
+* XForms モジュール
 
-Xlib �򰷤��⥸�塼�뤬 ��꤭�夦����ˤ�äƺ���Ƥ��ޤ���
-((<Moriq Ruby|URL:http://www.users.yun.co.jp/~moriq/ruby/>))�����ˤ���뤳�Ȥ��Ǥ��ޤ���
+((<XForms|URL:http://world.std.com/%7Exforms/>)) を扱うモジュールが立石さんによって作られています。
+((<立石さんWeb|URL:http://kt-www.jaist.ac.jp:8000/~ttate/ftp/>))から手にいれることができます。
+
+
+* Xtoolkit モジュール
+
+Athena widget や Motif を扱うモジュールが 前田さんによって作られています。
+contrib/ にあります。
+
+
+* XView モジュール
+
+XView を扱うモジュールが 立石さんによって作られています。
+((<立石さんWeb|URL:http://kt-www.jaist.ac.jp:8000/~ttate/ftp/>))から手にいれることができます。
+
+
+* Xlibモジュール
+
+Xlib を扱うモジュールが もりきゅうさんによって作られています。
+((<Moriq Ruby|URL:http://www.users.yun.co.jp/~moriq/ruby/>))から手にいれることができます。

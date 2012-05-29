@@ -1,45 +1,45 @@
-Iconv �� UNIX 95 �� iconv() �ؿ��Υ�åѡ��ǡ�
-���ޤ��ޤ�ʸ���������ηϴ֤�ʸ������Ѵ���Ԥʤ��ޤ���
+Iconv は UNIX 95 の iconv() 関数のラッパーで、
+さまざまな文字コード体系間で文字列の変換を行ないます。
 
-�ܺ٤� [[url:http://www.opengroup.org/]] �Υ���饤��ɥ�����Ȥ�
-���Ȥ��Ʋ�������
+詳細は [[url:http://www.opengroup.org/]] のオンラインドキュメントを
+参照して下さい。
 
   * [[man:iconv(3)]]
   * [[man:iconv_open(3)]]
   * [[man:iconv_close(3)]]
   * [[url:http://www.opengroup.org/onlinepubs/009695399/basedefs/iconv.h.html]]
 
-=== ����
+=== 注意
 
-�ɤ�ʸ���������ηϤ����ѤǤ��뤫�ϥץ�åȥե������¸�Ǥ��������ʸ���������ηϤ򤢤�魯ʸ�����ץ�åȥե������¸�Ǥ������ܸ� EUC �򤢤�魯ʸ���� EUC-JP, euc-jp, eucJP �ʤɰۤʤ��礬����ޤ������Υץ�åȥե�����ˤ��㤤��ۼ����뤿��ˡ�
-��ext/iconv/charset_alias.rb�� ���Ѱդ���Ƥ��ޤ���
-GNU ���եȥ����� texinfo ([[url:http://www.gnu.org/software/texinfo/]]) �˴ޤޤ��ե����� config.charset ��ʲ��Υߥ顼�����Ȥ����������
+どの文字コード体系が利用できるかはプラットフォーム依存です。さらに文字コード体系をあらわす文字列もプラットフォーム依存です。日本語 EUC をあらわす文字列が EUC-JP, euc-jp, eucJP など異なる場合があります。このプラットフォームによる違いを吸収するために、
+「ext/iconv/charset_alias.rb」 が用意されています。
+GNU ソフトウェア texinfo ([[url:http://www.gnu.org/software/texinfo/]]) に含まれるファイル config.charset を以下のミラーサイトから手に入れて
 
 #@# * [[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
 #@# * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
  * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/gnulib/lib/config.charset]]
 
-ext/iconv/ ���֤���ext/iconv/ �Ǽ��Τ褦�˼¹Ԥ����
+ext/iconv/ に置き、ext/iconv/ で次のように実行すると
 
   ruby extconf.rb
   make
 
-iconv.rb ����������ޤ������� iconv.rb ���ץ�åȥե�����ˤ��ʸ���������ηϤ򤢤�魯ʸ����ΰ㤤��ۼ����ޤ���
+iconv.rb が生成されます。この iconv.rb がプラットフォームによる文字コード体系をあらわす文字列の違いを吸収します。
 
-config.charset �Υ饤���󥹤� LGPL �ʤΤǡ��������줿 iconv.rb �ˤ� LGPL ��Ŭ�Ѥ���ޤ���
-#@# ��Ĵ��
+config.charset のライセンスは LGPL なので、生成された iconv.rb にも LGPL が適用されます。
+#@# 要調査
 
-=== ��
+=== 例
 
   require 'iconv'
-  euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # ����������
+  euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # あいうえお
   sjis = ["82a082a282a482a682a8"].pack("H*")
-  iconv = Iconv.new('SHIFT_JIS', 'EUC-JP')  # EUC-JP ���� SHIFT_JIS ���Ѵ�
+  iconv = Iconv.new('SHIFT_JIS', 'EUC-JP')  # EUC-JP から SHIFT_JIS へ変換
   str = iconv.iconv(euc)
   str << iconv.iconv(nil)
   p( str == sjis )
 
-(1) ������ [[c:Iconv]] �Υ��󥹥��󥹤���, [[m:Iconv#iconv]] �᥽�åɤ�Ȥ�
+(1) 新しく [[c:Iconv]] のインスタンスを作り, [[m:Iconv#iconv]] メソッドを使う
       cd = Iconv.new(to, from)
       begin
         input.each {|s| output << cd.iconv(s)}
@@ -47,49 +47,49 @@ config.charset �Υ饤���󥹤� LGPL �ʤΤǡ��������줿 iconv.rb �ˤ� LGPL ��Ŭ�Ѥ
       ensure
         cd.close
       end
-(2) [[m:Iconv.open]] ��֥��å��Ĥ��ǸƤӽФ�
+(2) [[m:Iconv.open]] をブロックつきで呼び出す
       Iconv.open(to, from) do |cd|
         input.each {|s| output << cd.iconv(s)}
         output << cd.iconv(nil)
       end
-(3) (2) ��û�̷�
+(3) (2) の短縮系
       Iconv.iconv(to, from, *input.to_a)
 
-===[a:gnu_options] �Ķ���¸�ε�ǽ
+===[a:gnu_options] 環境依存の機能
 
-GNU libiconv �� iconv �饤�֥�꤬�ӥ�ɤ��Ƥ����硢
-[[m:Iconv#iconv]]��[[m:Iconv.open]]��[[m:Iconv.iconv]] �������� to ��
-�ϡ�ʸ��������//�ե饰�פȤ����񼰤� GNU ���ȼ���ĥ�����Ѥ������Ǥ���
-�����ե饰�ˤϰʲ��Τ����줫�����Ǥ��ޤ���
+GNU libiconv で iconv ライブラリがビルドしてある場合、
+[[m:Iconv#iconv]]、[[m:Iconv.open]]、[[m:Iconv.iconv]] の第一引数 to に
+は「文字コード//フラグ」という書式で GNU の独自拡張を利用する事もできま
+す。フラグには以下のいずれかを指定できます。
 
 : //TRANSLIT
 
-  ʸ������Ѵ����ˡ�ɽ���Ǥ��ʤ�ʸ����Ʊ�������ܤ�ʸ����"����"���ޤ���
+  文字列の変換時に、表現できない文字を同じ見た目の文字に"翻訳"します。
 #@since 1.9.1
-  [[m:Iconv#transliterate=]] �˿����Ϥ��ƻ��ꤹ�����Ǥ��ޤ���
+  [[m:Iconv#transliterate=]] に真を渡して指定する事もできます。
 #@end
 
 : //IGNORE
 
-  ʸ������Ѵ����ˡ� [[c:Iconv::IllegalSequence]] ��ȯ������褦��ʸ����
-  ������ˤ��ä����Ǥ�̵�뤷���Ѵ����³���ޤ���
+  文字列の変換時に、 [[c:Iconv::IllegalSequence]] が発生するような文字列
+  が途中にあった場合でも無視して変換を継続します。
 #@since 1.9.1
-  [[m:Iconv#discard_ilseq=]] �˿����Ϥ��ƻ��ꤹ�����Ǥ��ޤ���
+  [[m:Iconv#discard_ilseq=]] に真を渡して指定する事もできます。
 #@end
 
-���������嵭�γ�ĥ�ϰܿ�����»�ʤ��ޤ���
+ただし、上記の拡張は移植性を損ないます。
 #@since 1.9.1
-���Τ褦�ʵ�ǽ��ɬ�פʾ��� [[m:String#encode]] ����Ѥ��Ƥ���������
+そのような機能が必要な場合は [[m:String#encode]] を使用してください。
 #@else
-���Τ��ᡢ���Ѥ��򤱤Ƥ���������
+そのため、使用は避けてください。
 #@end
 
-=== ����
+=== 参考
 
-  * ɸ��ź�ե饤�֥��Ҳ���� 3 ��� Kconv/NKF/Iconv ([[url:http://jp.rubyist.net/magazine/?0009-BundledLibraries#l30]])
+  * 標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv ([[url:http://jp.rubyist.net/magazine/?0009-BundledLibraries#l30]])
 
 = class Iconv < Data
-iconv �ؿ��Υ�åѡ����饹�Ǥ���
+iconv 関数のラッパークラスです。
 
 == Class Methods
 
@@ -99,34 +99,34 @@ iconv �ؿ��Υ�åѡ����饹�Ǥ���
 --- new(to, from)    -> Iconv
 #@end
 
-ʸ�������� from ���� to ���Ѵ�����Iconv���֥������Ȥ��������ޤ���
+文字コード from から to へ変換するIconvオブジェクトを生成します。
 
-@param to �Ѵ����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from �Ѵ�����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
-
-#@since 1.9.1
-@param options �ϥå�������� transliterate��discard_ilseq �˿���������
-               Ϳ����[[ref:lib:iconv#gnu_options]] ��Ʊ������Ԥ��ޤ���
-#@end
-
-@raise TypeError to �� from �� String ���֥������ȤǤʤ��Ȥ�ȯ�����ޤ���
-
-@raise Iconv::InvalidEncoding to �� from �ǻ��ꤵ�줿ʸ���������ηϤ����Ĥ���ʤ��Ȥ�ȯ�����ޤ���
-
-@raise SystemCallError [[man:iconv_open(3)]] �����Ԥ����Ȥ�ȯ�����ޤ���
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
 #@since 1.9.1
-@raise ArgumentError options �� transliterate��discard_ilseq �ʳ������
-                     ��������ȯ�����ޤ���
-
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           �ץ�������ꤷ������ȯ�����ޤ���
+@param options ハッシュ形式で transliterate、discard_ilseq に真か偽かを
+               与えて[[ref:lib:iconv#gnu_options]] と同じ操作を行います。
 #@end
 
-��:
+@raise TypeError to や from が String オブジェクトでないとき発生します。
+
+@raise Iconv::InvalidEncoding to や from で指定された文字コード体系が見つからないとき発生します。
+
+@raise SystemCallError [[man:iconv_open(3)]] が失敗したとき発生します。
+
+#@since 1.9.1
+@raise ArgumentError options に transliterate、discard_ilseq 以外を指定
+                     した場合に発生します。
+
+@raise NotImplementedError 実行プラットフォームでサポートされていないオ
+                           プションを指定した場合に発生します。
+#@end
+
+例:
   require 'iconv'
-  # EUC-JP ���� SHIFT_JIS ���Ѵ�����Iconv���֥������Ȥ�������
+  # EUC-JP から SHIFT_JIS へ変換するIconvオブジェクトを生成。
   icv = Iconv.new('SHIFT_JIS', 'EUC-JP')
 
 @see [[m:Iconv.open]]
@@ -139,96 +139,96 @@ iconv �ؿ��Υ�åѡ����饹�Ǥ���
 --- open(to, from) {|cd| ...}    -> object
 #@end
 
-�֥��å���Ϳ�����ʤ����� [[m:Iconv.new]] �������Ǥ���
-�֥��å���Ϳ������ȡ�Iconv ���֥������Ȥ������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-�֥��å��ν���� Iconv ���֥������Ȥ� close ����ޤ���
-�֥��å����ͤ��֤��ޤ���
+ブロックが与えられない場合は [[m:Iconv.new]] と等価です。
+ブロックが与えられると、Iconv オブジェクトを生成し、それを引数としてブロックを実行します。
+ブロックの終りに Iconv オブジェクトは close されます。
+ブロックの値を返します。
 
-@param to �Ѵ����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from �Ѵ�����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
-
-#@since 1.9.1
-@param options �ϥå�������� transliterate��discard_ilseq �˿���������
-               Ϳ����[[ref:lib:iconv#gnu_options]] ��Ʊ������Ԥ��ޤ���
-#@end
-
-@raise TypeError to �� from �� String ���֥������ȤǤʤ��Ȥ�ȯ�����ޤ���
-
-@raise Iconv::InvalidEncoding to �� from �ǻ��ꤵ�줿ʸ���������ηϤ����Ĥ���ʤ��Ȥ�ȯ�����ޤ���
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
 #@since 1.9.1
-@raise ArgumentError options �� transliterate��discard_ilseq �ʳ������
-                     ��������ȯ�����ޤ���
-
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           �ץ�������ꤷ������ȯ�����ޤ���
+@param options ハッシュ形式で transliterate、discard_ilseq に真か偽かを
+               与えて[[ref:lib:iconv#gnu_options]] と同じ操作を行います。
 #@end
 
-��:
-  euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # ������������EUC-JP������
+@raise TypeError to や from が String オブジェクトでないとき発生します。
+
+@raise Iconv::InvalidEncoding to や from で指定された文字コード体系が見つからないとき発生します。
+
+#@since 1.9.1
+@raise ArgumentError options に transliterate、discard_ilseq 以外を指定
+                     した場合に発生します。
+
+@raise NotImplementedError 実行プラットフォームでサポートされていないオ
+                           プションを指定した場合に発生します。
+#@end
+
+例:
+  euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # あいうえおのEUC-JPコード
 
   Iconv.open("UTF-8", "EUC-JP") do |i|
     str = i.iconv(euc)
     str << i.iconv(nil)
   end
-  puts str #=> ����������
+  puts str #=> あいうえお
 
 @see [[m:Iconv.new]]
 
 --- iconv(to, from, *strs)    -> [String]
 
-Ϳ����줿ʸ�������ɤˤ������ä� strs ���Ѵ�������̤�ʸ���������Ȥ����֤��ޤ���
+与えられた文字コードにしたがって strs を変換し、結果を文字列の配列として返します。
 
-���ξ�ά���Ǥ���
+次の省略形です。
   Iconv.open(to, from) {|cd| (strs + [nil]).collect {|s| cd.iconv(s)}}
 
-@param to �Ѵ����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from �Ѵ�����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
-@param strs �Ѵ�������ʸ�������ꤷ�ޤ���
+@param strs 変換したい文字列を指定します。
 
-���Υ᥽�åɤ�
-[[m:Iconv.new]], [[m:Iconv.open]] ����� [[m:Iconv#iconv]] ���㳰
-�򵯤����ޤ���
+このメソッドは
+[[m:Iconv.new]], [[m:Iconv.open]] および [[m:Iconv#iconv]] の例外
+を起こします。
 
 --- conv(to, from, str)     -> String
 
-Ϳ����줿ʸ�������ɤˤ������ä� str ���Ѵ�������̤�ʸ����Ȥ����֤��ޤ���
+与えられた文字コードにしたがって str を変換し、結果を文字列として返します。
 
-���ξ�ά���Ǥ���
+次の省略形です。
   Iconv.iconv(to, from, str).join
 
-@param to �Ѵ����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from �Ѵ�����ʸ���������ηϤ�ɽ��ʸ�������ꤷ�ޤ���
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
-@param str �Ѵ�������ʸ�������ꤷ�ޤ���
+@param str 変換したい文字列を指定します。
 
-���Υ᥽�åɤ�
-[[m:Iconv.new]], [[m:Iconv.open]] ����� [[m:Iconv#iconv]] ���㳰
-�򵯤����ޤ���
+このメソッドは
+[[m:Iconv.new]], [[m:Iconv.open]] および [[m:Iconv#iconv]] の例外
+を起こします。
 
 #@since 1.9.1
 --- list                       -> [String]
 --- list {|*aliases| ... }     -> nil
 
-�ƥ����ꥢ�����åȤ��Ȥ˷����֤����ƥ졼���Ǥ���
-�֥��å������ꤵ��Ƥ��ʤ���С��������Ѳ�ǽ��ʸ���������ηϤ�̾����ʸ���������Ȥ����֤��ޤ���
-Iconv ɸ��ε�ǽ�ǤϤʤ��Τǥ��ݡ��Ȥ���뤫�ϥץ�åȥե�����˰�¸���ޤ���
+各エイリアスセットごとに繰り返すイテレータです。
+ブロックが指定されていなければ、その利用可能な文字コード体系の名前を文字列の配列として返します。
+Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError 実行プラットフォームでサポートされていない場合に発生します。
 #@end
 
 --- charset_map -> {String => String}
 
-ʸ�������ɥ��å�̾���饷���ƥ��¸��ʸ�������ɥ��å�̾�ؤ� [[c:Hash]] ���֤��ޤ���
+文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
 
 #@since 1.9.1
 --- ctlmethods -> [Symbol]
 
-�����ƥ���libiconv��iconvctl()�ؿ��ǻ��Ѳ�ǽ�ʥե饰�Υꥹ�Ȥ� [[c:Symbol]] ������Ȥ����֤��ޤ���
+システム上のlibiconvのiconvctl()関数で使用可能なフラグのリストを [[c:Symbol]] の配列として返します。
 
 #@end
 
@@ -236,13 +236,13 @@ Iconv ɸ��ε�ǽ�ǤϤʤ��Τǥ��ݡ��Ȥ���뤫�ϥץ�åȥե�����˰�¸���ޤ���
 
 --- close    -> String
 
-�Ѵ���λ���ޤ������ϥХåե��������եȾ��֤��᤹�����ʸ������֤��ޤ���
-���Ϥ�ʸ����沽�������������֤������ʤ���硢��ʸ������֤��ޤ���
+変換を終了します。出力バッファを初期シフト状態に戻すための文字列を返します。
+出力の文字符号化方式が内部状態をも持たない場合、空文字列を返します。
 
-���Υ᥽�åɤ��ƤФ줿���Ȥ� [[m:Iconv#iconv]] ���ƤФ����㳰��
-�����ޤ�����close ���ΤϷ��֤��ƤФ�Ƥ��������ޤ���
+このメソッドが呼ばれたあとで [[m:Iconv#iconv]] が呼ばれると例外が
+起きますが、close 自体は繰返し呼ばれても成功します。
 
-��:
+例:
 
   i = Iconv.open("ISO-2022-JP", "EUC-JP")
   i.iconv("\264\301")     #=> "\e$B4A"
@@ -251,145 +251,145 @@ Iconv ɸ��ε�ǽ�ǤϤʤ��Τǥ��ݡ��Ȥ���뤫�ϥץ�åȥե�����˰�¸���ޤ���
 
 --- iconv(str, start = 0, length = -1)    -> String
 
-ʸ������Ѵ��򳫻Ϥ����Ѵ����ʸ������֤��ޤ���
-str ��ʸ����ξ�硢str[start, length] ���Ѵ�����
-�Ѵ����ʸ������֤��ޤ���
+文字列の変換を開始し、変換後の文字列を返します。
+str が文字列の場合、str[start, length] を変換し、
+変換後の文字列を返します。
 
-str �� nil �ξ�硢�Ѵ���򤽤ν�����եȾ��֤ˤ���
-���ϥХåե��������եȾ��֤��᤹����ΥХ����󤫤�ʤ�ʸ������֤��ޤ���
-���Ϥ�ʸ����沽�������������֤������ʤ���硢��ʸ������֤��ޤ���
+str が nil の場合、変換器をその初期シフト状態にし、
+出力バッファを初期シフト状態に戻すためのバイト列からなる文字列を返します。
+出力の文字符号化方式が内部状態をも持たない場合、空文字列を返します。
 
-@param str �Ѵ������ʸ����ޤ��� nil ����ꤷ�ޤ���
+@param str 変換される文字列または nil を指定します。
 
-@param start str �Τ����Ѵ��򳫻Ϥ��륪�ե��åȤ���ꤷ�ޤ���
+@param start str のうち変換を開始するオフセットを指定します。
 
-@param length str �Τ����Ѵ�����Ĺ������ꤷ�ޤ���nil �� -1 �ΤȤ��ϡ�start �ʹ��������̣���ޤ���
+@param length str のうち変換する長さを指定します。nil か -1 のときは、start 以降全部を意味します。
 
-@raise Iconv::IllegalSequence str�˻��ꤵ�줿ʸ��������Ϥ˻ؼ����줿ʸ�������ɤ˴ޤޤ�ʤ�������Ѵ�����ߤ�������ȯ�����ޤ���
+@raise Iconv::IllegalSequence strに指定された文字列に入力に指示された文字コードに含まれないために変換が停止した場合に発生します。
 
-@raise Iconv::InvalidCharacter ���ϤκǸ夬�Դ�����ʸ�������եȤǽ��äƤ��뤿����Ѵ�����ߤ�������ȯ�����ޤ���
+@raise Iconv::InvalidCharacter 入力の最後が不完全な文字かシフトで終っているために変換が停止した場合に発生します。
 
-@raise Iconv::OutOfRange �饤�֥����������顼��ȯ����������ȯ�����ޤ���
+@raise Iconv::OutOfRange ライブラリの内部エラーが発生した場合に発生します。
 
 #@since 1.9.1
 
 --- conv(str) -> String
 
-ʸ������Ѵ������Ѵ����ʸ������֤��ޤ���
-str �� nil �ξ�硢��ʸ����""���֤��ޤ���
+文字列を変換し、変換後の文字列を返します。
+str が nil の場合、空文字列""を返します。
 
-@param str �Ѵ������ʸ�������ꤷ�ޤ���
+@param str 変換される文字列を指定します。
 
-��:
-  utf8 = ["E38182E38184E38186E38188E3818A"].pack("H*") # ����������
+例:
+  utf8 = ["E38182E38184E38186E38188E3818A"].pack("H*") # あいうえお
 
-  iconv = Iconv.new('EUC-JP', 'UTF-8') # UTF-8 ���� EUC ���Ѵ�
+  iconv = Iconv.new('EUC-JP', 'UTF-8') # UTF-8 から EUC へ変換
   str = iconv.conv(utf8)
-  puts str #=> "����������"
+  puts str #=> "あいうえお"
 
 --- discard_ilseq=(bool)
 
-ʸ������Ѵ����� [[c:Iconv::IllegalSequence]] ��ȯ������褦��ʸ����
-����ˤ��ä����Ǥ�̵�뤷���Ѵ����³���뤫�ɤ�������ꤷ�ޤ���
+文字列の変換時に [[c:Iconv::IllegalSequence]] が発生するような文字列が
+途中にあった場合でも無視して変換を継続するかどうかを指定します。
 
-@param bool ������ꤷ������ [[c:Iconv::IllegalSequence]] ��̵�뤷�ޤ���
+@param bool 真を指定した場合は [[c:Iconv::IllegalSequence]] を無視します。
 
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           ���ȯ�����ޤ���
+@raise NotImplementedError 実行プラットフォームでサポートされていない場
+                           合に発生します。
 
 --- discard_ilseq? -> bool
 
-ʸ������Ѵ����� [[c:Iconv::IllegalSequence]] ��ȯ������褦��ʸ����
-����ˤ��ä����Ǥ�̵�뤷���Ѵ����³���뤫�ɤ������֤��ޤ���
+文字列の変換時に [[c:Iconv::IllegalSequence]] が発生するような文字列が
+途中にあった場合でも無視して変換を継続するかどうかを返します。
 
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           ���ȯ�����ޤ���
+@raise NotImplementedError 実行プラットフォームでサポートされていない場
+                           合に発生します。
 
 --- transliterate=(bool)
 
-ʸ������Ѵ����ˡ�ɽ���Ǥ��ʤ�ʸ����Ʊ�������ܤ�ʸ����"����"���뤫�ɤ�
-������ꤷ�ޤ���
+文字列の変換時に、表現できない文字を同じ見た目の文字に"翻訳"するかどう
+かを指定します。
 
-@param bool ������ꤷ������ɽ���Ǥ��ʤ�ʸ����Ʊ�������ܤ�ʸ����"����"���ޤ���
+@param bool 真を指定した場合は表現できない文字を同じ見た目の文字に"翻訳"します。
 
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           ���ȯ�����ޤ���
+@raise NotImplementedError 実行プラットフォームでサポートされていない場
+                           合に発生します。
 
 --- transliterate? -> bool
 
-ʸ������Ѵ����ˡ�ɽ���Ǥ��ʤ�ʸ����Ʊ�������ܤ�ʸ����"����"���뤫�ɤ�
-�����֤��ޤ���
+文字列の変換時に、表現できない文字を同じ見た目の文字に"翻訳"するかどう
+かを返します。
 
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           ���ȯ�����ޤ���
+@raise NotImplementedError 実行プラットフォームでサポートされていない場
+                           合に発生します。
 
 --- trivial? -> bool
 
-�Ѵ�����ʸ�������ɤȡ��Ѵ����ʸ�������ɤ����줾���ʸ���� 1 �� 1 ����
-����ǽ�ʥ��󥳡��ǥ��󥰤��Ȥ߹�碌�Ǥ��ä����� true ���֤��ޤ���
+変換前の文字コードと、変換先の文字コードがそれぞれの文字を 1 対 1 に変
+換可能なエンコーディングの組み合わせであった場合に true を返します。
 
-@raise NotImplementedError �¹ԥץ�åȥե�����ǥ��ݡ��Ȥ���Ƥ��ʤ���
-                           ���ȯ�����ޤ���
+@raise NotImplementedError 実行プラットフォームでサポートされていない場
+                           合に発生します。
 
 #@end
 
 = module Iconv::Failure
 
-[[c:Iconv]] ���������㳰�Τ���Υ⥸�塼��Ǥ���
+[[c:Iconv]] が起こす例外のためのモジュールです。
 
 == Instance Methods
 
 --- success    -> String | Array
 
-[[c:Iconv]] ���������㳰��ȯ������ޤ��Ѵ�����������ʸ������֤��ޤ���
+[[c:Iconv]] が起こす例外が発生するまで変換が成功した文字列を返します。
 
-[[m:Iconv.iconv]] �Ǥ����㳰�������ä��Ȥ����֤�����ͤϡ�
-�������㳰��������ޤǤ��Ѵ�����������ʸ��������ǤȤ�������Ǥ���
-�Ǹ�����Ǥ��Ѵ����ʸ����Ǥ���
+[[m:Iconv.iconv]] でこの例外が起こったときに返される値は、
+以前の例外が起こるまでに変換に成功した文字列を要素とする配列です。
+最後の要素は変換中の文字列です。
 
 --- failed    -> String | Array
 
-[[c:Iconv]] ���������㳰��ȯ���������֤���Ǹ�ޤǤ�ʸ������֤��ޤ���
+[[c:Iconv]] が起こす例外が発生した位置から最後までの文字列を返します。
 
-[[m:Iconv.iconv]] �Ǥ����㳰�������ä��Ȥ����֤�����ͤϡ�
-�Ѵ��оݤ�ʸ���������Τ������Ѵ������Ԥ���ʸ������Ѵ������Ԥ������֤���Ǹ�ޤǤ�ʸ����Ȱʹߤ�ʸ�����������֤��ޤ���
+[[m:Iconv.iconv]] でこの例外が起こったときに返される値は、
+変換対象の文字列の配列のうち、変換が失敗した文字列の変換が失敗した位置から最後までの文字列と以降の文字列の配列を返します。
 
 --- inspect    -> String
-[[c:Iconv]] ���������㳰�����������ξ����
+[[c:Iconv]] が起こす例外が起きた場合の情報を
 
-#<"�㳰�μ���": "�㳰��ȯ������ޤǤ��Ѵ�����ʸ����", "�㳰�������ä����֤���Ǹ�ޤǤ�ʸ����">
+#<"例外の種類": "例外が発生するまでに変換した文字列", "例外が起こった位置から最後までの文字列">
 
-�Τ褦�ʷ�����ʸ����Ȥ����֤��ޤ���
+のような形式の文字列として返します。
 
 #@since 1.8.4
 = class Iconv::BrokenLibrary < RuntimeError
 include Iconv::Failure
 
-iconv �饤�֥��ΥХ��ʤɤˤ�ꡢ[[man:errno(3)]] �����ꤵ��ʤ��ä�����ȯ�����ޤ���
-(Windows �� iconv.dll �λ��Ѥ��� MSVC runtime DLL �ΥС�����󤬡�ruby ���Τ����Ѥ����ΤȰ��פ��Ƥ��ʤ�����ޤߤޤ���)
+iconv ライブラリのバグなどにより、[[man:errno(3)]] が設定されなかった場合に発生します。
+(Windows で iconv.dll の使用する MSVC runtime DLL のバージョンが、ruby 本体が使用するものと一致していない場合も含みます。)
 #@end
 
 = class Iconv::IllegalSequence < ArgumentError
 include Iconv::Failure
 
-���Ϥ����Ϥ�ʸ�����ؼ����줿ʸ������˴ޤޤ�ʤ�������Ѵ�����ߤ�������
-��ɽ���ޤ���
+入力か出力の文字が指示された文字集合に含まれないために変換が停止したこと
+を表します。
 
 = class Iconv::InvalidCharacter < ArgumentError
 include Iconv::Failure
 
-���ϤκǸ夬�Դ�����ʸ�������եȤǽ��äƤ��뤿����Ѵ�����ߤ�������
-��ɽ���ޤ���
+入力の最後が不完全な文字かシフトで終っているために変換が停止したこと
+を表します。
 
 #@since 1.8.3
 = class Iconv::InvalidEncoding < ArgumentError
 include Iconv::Failure
 
-�᥽�åɤΰ������ǻ��ꤵ�줿ʸ���������ηϤ����Ĥ���ʤ� (�����ƥ���ͭ���Ǥʤ�) ����ȯ�����ޤ���
+メソッドの引数等で指定された文字コード体系が見つからない (システム上で有効でない) 場合に発生します。
 #@end
 
 = class Iconv::OutOfRange < RuntimeError
 include Iconv::Failure
 
-Iconv �饤�֥����������顼�Ǥ��������㳰�ϵ�����ʤ��Ϥ��Ǥ���
+Iconv ライブラリの内部エラーです。この例外は起こらないはずです。
 

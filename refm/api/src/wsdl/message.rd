@@ -13,7 +13,7 @@ require wsdl/info
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo
@@ -24,7 +24,7 @@ require wsdl/info
 --- parts
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- targetnamespace
 #@todo

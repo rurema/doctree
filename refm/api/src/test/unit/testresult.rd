@@ -1,45 +1,45 @@
 require test/unit/util/observable
 
-�ƥ��Ȥη�̤��������Ȥ��˻Ȥ��ޤ���
+テストの結果を処理するときに使われます。
 
 = class Test::Unit::TestResult < Object
 include Test::Unit::Util::Observable
 
-�ƥ��Ȥη�̤��ݻ����뤿��Υ��饹�Ǥ���
+テストの結果を保持するためのクラスです。
 
-[[c:Test::Unit::Failure]] ���֥������Ȥ� [[c:Test::Unit::Error]] ���֥������Ȥ�
-����ơ��桼����ɽ�����뤿��˻Ȥ��ޤ���
+[[c:Test::Unit::Failure]] オブジェクトと [[c:Test::Unit::Error]] オブジェクトを
+集めて、ユーザに表示するために使われます。
 
 == Class Methods
 
 --- new    -> Test::Unit::TestResult
 
-���Υ᥽�åɤ�桼����ľ�ܸƤ֤��ȤϤ���ޤ���
+このメソッドをユーザが直接呼ぶことはありません。
 
-���� TestResult ���֥������Ȥ��֤��ޤ���
+空の TestResult オブジェクトを返します。
 
 == Instance Methods
 
 --- run_count    -> Integer
-���ޤǤ˼¹Ԥ�Ͽ�����ƥ��ȥ᥽�åɤο����֤��ޤ���
+今までに実行を記録したテストメソッドの数を返します。
 
 --- assertion_count    -> Integer
-���ޤǤ˼¹Ԥ�Ͽ���� assert �ο����֤��ޤ���
+今までに実行を記録した assert の数を返します。
 
 --- error_count    -> Integer
 
-���ޤǤ˵�Ͽ�����ƥ��ȤΥ��顼�ο����֤��ޤ���
+今までに記録したテストのエラーの数を返します。
 
 --- failure_count    -> Integer
 
-���ޤǤ˵�Ͽ�������Ԥ����ƥ��Ȥο����֤��ޤ���
+今までに記録した失敗したテストの数を返します。
 
 --- passed?    -> bool
 
-���٤ƤΥƥ��Ȥ����������ʤ� true ���֤��ޤ���
-�����Ǥʤ��ʤ� false ���֤��ޤ���
+すべてのテストが成功したなら true を返します。
+そうでないなら false を返します。
 
 --- to_s    -> String
 
-�¹Ԥ����ƥ��ȥ᥽�åɤο��� assert �ο����ƥ��Ȥμ��ԡ����顼���줾��β����
-�ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+実行したテストメソッドの数と assert の数、テストの失敗・エラーそれぞれの回数を
+人間が読みやすい文字列にして返します。

@@ -25,8 +25,8 @@ require wsdl/soap/data
 
 = class WSDL::Parser::ParseFrame < Object
 
-[[c:WSDL::Parser]] ÆâÉô¤Ç¤Î¤ß»ÈÍÑ¤¹¤ë¥¯¥é¥¹
-#@# ¤Î¤Ï¤º
+[[c:WSDL::Parser]] å†…éƒ¨ã§ã®ã¿ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹
+#@# ã®ã¯ãš
 
 == Class Methods
 
@@ -38,18 +38,18 @@ require wsdl/soap/data
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- node
 --- node=(node)
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- ns
 #@todo
 
-Â°À­
+å±žæ€§
 
 = class WSDL::Parser < Object
 

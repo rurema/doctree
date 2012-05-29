@@ -1,25 +1,25 @@
 = class ConditionVariable < Object
 
-����åɤ�Ʊ�������ΰ�ĤǤ�������ѿ���¸����륯�饹�Ǥ���
+スレッドの同期機構の一つである状態変数を実現するクラスです。
 
-�ʲ��� ConditionVariable �����򤹤�Τ˻��ͤˤʤ�ޤ���
+以下も ConditionVariable を理解するのに参考になります。
 
 [[url:http://www.ruby-doc.org/docs/ProgrammingRuby/html/tut_threads.html#UF]]
 
-=== Condition Variable �Ȥ�
+=== Condition Variable とは
 
-���륹��å� A ����¾�ΰ��ư���Ƥ����Ȥ��ޤ�������å� A �ϸ��߶����Ƥ��ʤ�
-�꥽������ɬ�פˤʤä��ΤǶ����ޤ��ԤĤ��Ȥˤ����Ȥ��ޤ�������Ϥ��ޤ������ޤ���
-�ʤ��ʤ顢����å� A ����¾�ΰ��ư���Ƥ���櫓�Ǥ����顢¾�Υ���åɤ�ư�����Ȥ�
-�Ǥ��ޤ��󡣥꥽����������뤳�Ȥ�Ǥ��ޤ��󡣥���å� A ���꥽�����ζ�����
-�ԤäƤ��Ƥ⡢���ĤޤǤ�������ȤϤ���ޤ���
+あるスレッド A が排他領域で動いていたとします。スレッド A は現在空いていない
+リソースが必要になったので空くまで待つことにしたとします。これはうまくいきません。
+なぜなら、スレッド A は排他領域で動いているわけですから、他のスレッドは動くことが
+できません。リソースを空けることもできません。スレッド A がリソースの空きを
+待っていても、いつまでも空くことはありません。
 
-�ʾ�Τ褦�ʾ������褹��Τ� Condition Variable �Ǥ���
+以上のような状況を解決するのが Condition Variable です。
 
-����å� a �Ǿ��(�꥽�����������Ƥ��뤫�ʤ�)�����������ޤ� wait �᥽�åɤ�
-����åɤ�ߤ�ޤ���¾�Υ���å� b �ˤ����ƾ�郎�������줿�ʤ� signal
-�᥽�åɤǥ���å� a ���Ф��ƾ�郎��Ω�������Ȥ����Τ��ޤ������줬ŵ��^��
-������Ǥ���
+スレッド a で条件(リソースが空いているかなど)が満たされるまで wait メソッドで
+スレッドを止めます。他のスレッド b において条件が満たされたなら signal
+メソッドでスレッド a に対して条件が成立したことを通知します。これが典型^な
+使用例です。
 
     mutex = Mutex.new
     cv = ConditionVariable.new
@@ -27,7 +27,7 @@
     a = Thread.start {
         mutex.synchronize {
           ...
-          while (��郎��������ʤ�)
+          while (条件が満たされない)
             cv.wait(mutex)
           end
           ...
@@ -36,13 +36,13 @@
 
     b = Thread.start {
         mutex.synchronize {
-          # ��ξ�����������������
+          # 上の条件を満たすための操作
           cv.signal
         }
     }
 
-�ʲ��� [[ruby-list:14445]] �ǾҲ𤵤�Ƥ�����Ǥ���@q �����ˤʤä���硢
-���뤤��������ˤʤä����� Condition Variable ��Ȥä� wait ���Ƥ��ޤ���
+以下は [[ruby-list:14445]] で紹介されている例です。@q が空になった場合、
+あるいは満たんになった場合に Condition Variable を使って wait しています。
 
   require 'thread'
 
@@ -107,7 +107,7 @@
     end
   end
 
-�¹Ԥ���Ȱʲ��Τ褦�˽��Ϥ��ޤ���
+実行すると以下のように出力します。
 
   $ ruby condvar.rb
   sent Apple
@@ -126,31 +126,31 @@
 == Class Methods
 
 --- new -> ConditionVariable
-�����ѿ������������֤��ޤ���
+状態変数を生成して返します。
 
 == Instance Methods
 
 --- broadcast -> [Thread]
 
-�����ѿ����ԤäƤ��륹��åɤ򤹤٤ƺƳ����ޤ����Ƴ����줿
-����åɤ� [[m:ConditionVariable#wait]]
-�ǻ��ꤷ�� mutex �Υ��å����ߤޤ���
+状態変数を待っているスレッドをすべて再開します。再開された
+スレッドは [[m:ConditionVariable#wait]]
+で指定した mutex のロックを試みます。
 
-@return �¹��Ԥ����Ƥ�������åɤ�������֤��ޤ���
+@return 実行待ちしていたスレッドの配列を返します。
 
 --- signal -> Thread | nil
 
-�����ѿ����ԤäƤ��륹��åɤ�1�ĺƳ����ޤ����Ƴ����줿
-����åɤ� [[m:ConditionVariable#wait]]
-�ǻ��ꤷ�� mutex �Υ��å����ߤޤ���
+状態変数を待っているスレッドを1つ再開します。再開された
+スレッドは [[m:ConditionVariable#wait]]
+で指定した mutex のロックを試みます。
 
-@return ���֤��ԤäƤ��륹��åɤ����ä����ϡ����Υ���åɤ��֤��ޤ���
-        �����Ǥʤ���� nil ���֤��ޤ���
+@return 状態を待っているスレッドがあった場合は、そのスレッドを返します。
+        そうでなければ nil を返します。
 
 --- wait(mutex) -> self
 
-mutex �Υ��å���������������ȥ���åɤ���ߤ��ޤ���
-[[m:ConditionVariable#signal]]�ޤ��ϡ�
-[[m:ConditionVariable#broadcast]]������줿�����ʥ��
-�������ȡ�mutex�Υ��å�����������¹Ծ��֤Ȥʤ�ޤ���
+mutex のロックを解放し、カレントスレッドを停止します。
+[[m:ConditionVariable#signal]]または、
+[[m:ConditionVariable#broadcast]]で送られたシグナルを
+受け取ると、mutexのロックを取得し、実行状態となります。
 

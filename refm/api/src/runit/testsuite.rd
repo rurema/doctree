@@ -1,24 +1,24 @@
-���Υ饤�֥��� RubyUnit �Ȥθߴ������󶡤��뤿��������󶡤���Ƥ��ޤ���
-���줫���˥åȥƥ��Ȥ�񤯤Ȥ���
-[[lib:test/unit]] �饤�֥���ȤäƤ���������
+このライブラリは RubyUnit との互換性を提供するためだけに提供されています。
+これからユニットテストを書くときは
+[[lib:test/unit]] ライブラリを使ってください。
 
 
 = class RUNIT::TestSuite < Test::Unit::TestSuite
 
-�ƥ��ȥ������Ȥ������륯�饹�Ǥ���
+テストスイートを構成するクラスです。
 
 == Instance Methods
 
 --- add_test(*args) -> self
 --- add(*args) -> self
 
-[[m:Test::Unit::TestSuite#<<]] ��Ʊ���Ǥ���
+[[m:Test::Unit::TestSuite#<<]] と同じです。
 
 --- count_test_cases -> Integer
 
-�ƥ��Ȥη�����֤��ޤ���
+テストの件数を返します。
 
 --- run(result) { .... }
 
-�ƥ��ȥ������Ȥ�¹Ԥ��ޤ���
+テストスイートを実行します。
 

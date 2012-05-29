@@ -1,8 +1,8 @@
-tar ���������֤γƥ���ȥ�Υإå���ɽ�����饹���󶡤���饤�֥��Ǥ���
+tar アーカイブの各エントリのヘッダを表すクラスを提供するライブラリです。
 
 = class Gem::Package::TarHeader
 
-tar ���������֤γƥ���ȥ�Υإå���ɽ�����饹�Ǥ���
+tar アーカイブの各エントリのヘッダを表すクラスです。
 
   * [[man:tar(5)]]
 
@@ -10,108 +10,108 @@ tar ���������֤γƥ���ȥ�Υإå���ɽ�����饹�Ǥ���
 
 --- ==(other) -> bool
 
-���Ȥ� other ����������п����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身と other が等しければ真を返します。
+そうでない場合は偽を返します。
 
-@param other ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param other 比較対象のオブジェクトを指定します。
 
 --- checksum -> Integer
 
-tar �Υإå��˴ޤޤ������å�������֤��ޤ���
+tar のヘッダに含まれるチェックサムを返します。
 
 --- devmajor -> Integer
 
-tar �Υإå��˴ޤޤ�� devmajor ���֤��ޤ���
+tar のヘッダに含まれる devmajor を返します。
 
 --- devminor -> Integer
 
-tar �Υإå��˴ޤޤ�� devminor ���֤��ޤ���
+tar のヘッダに含まれる devminor を返します。
 
 --- empty? -> bool
 
-�إå��� "\0" �������Ƥ����硢�����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+ヘッダが "\0" で埋められている場合、真を返します。
+そうでない場合は、偽を返します。
 
 --- gid -> Integer
 
-tar �Υإå��˴ޤޤ�� gid ���֤��ޤ���
+tar のヘッダに含まれる gid を返します。
 
 --- gname -> String
 
-tar �Υإå��˴ޤޤ�륰�롼��̾���֤��ޤ���
+tar のヘッダに含まれるグループ名を返します。
 
 --- linkname -> String
 
-tar �Υإå��˴ޤޤ�� linkname ���֤��ޤ���
+tar のヘッダに含まれる linkname を返します。
 
 --- magic -> String
 
-tar �Υإå��˴ޤޤ�� magic ���֤��ޤ���
+tar のヘッダに含まれる magic を返します。
 
 --- mode -> Integer
 
-tar �Υإå��˴ޤޤ�� mode ���֤��ޤ���
+tar のヘッダに含まれる mode を返します。
 
 --- mtime -> Integer
 
-tar �Υإå��˴ޤޤ�� mtime ���֤��ޤ���
+tar のヘッダに含まれる mtime を返します。
 
 --- name -> String
 
-tar �Υإå��˴ޤޤ�� name ���֤��ޤ���
+tar のヘッダに含まれる name を返します。
 
 --- prefix -> String
 
-tar �Υإå��˴ޤޤ�� prefix ���֤��ޤ���
+tar のヘッダに含まれる prefix を返します。
 
 --- size -> Integer
 
-tar �Υإå��˴ޤޤ�� size ���֤��ޤ���
+tar のヘッダに含まれる size を返します。
 
 --- to_s -> String
 
-�إå��ξ����ʸ����Ȥ����֤��ޤ���
+ヘッダの情報を文字列として返します。
 
 --- typeflag -> String
 
-tar �Υإå��˴ޤޤ�� typeflag ���֤��ޤ���
+tar のヘッダに含まれる typeflag を返します。
 
 --- uid -> Integer
 
-tar �Υإå��˴ޤޤ�� uid ���֤��ޤ���
+tar のヘッダに含まれる uid を返します。
 
 --- uname -> String
 
-tar �Υإå��˴ޤޤ��桼��̾���֤��ޤ���
+tar のヘッダに含まれるユーザ名を返します。
 
 --- update_checksum
 #@# -> discard
-�����å�����򹹿����ޤ���
+チェックサムを更新します。
 
 --- version -> Integer
 
-tar �Υإå��˴ޤޤ�� version ���֤��ޤ���
+tar のヘッダに含まれる version を返します。
 
 == Singleton Methods
 
 --- from(stream) -> Gem::Package::TarHeader
 
-stream ������Ƭ 512 �Х��Ȥ��ɤ߹���� [[c:Gem::Package::TarHeader]] ��
-���󥹥��󥹤���������֤��ޤ���
+stream から先頭 512 バイトを読み込んで [[c:Gem::Package::TarHeader]] の
+インスタンスを作成して返します。
 
-@param stream IO �Τ褦�� read �᥽�åɤ���ĥ��֥������Ȥ���ꤷ�ޤ���
+@param stream IO のように read メソッドを持つオブジェクトを指定します。
 
 == Constants
 
 --- FIELDS -> Array
 
-�����ǻ��Ѥ��ޤ���
+内部で使用します。
 
 --- PACK_FORMAT -> String
 
-�����ǻ��Ѥ��ޤ���
+内部で使用します。
 
 --- UNPACK_FORMAT -> String
 
-�����ǻ��Ѥ��ޤ���
+内部で使用します。
 

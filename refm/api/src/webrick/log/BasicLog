@@ -1,21 +1,21 @@
 = class WEBrick::BasicLog < Object
 
-�������뵡ǽ���󶡤��륯�饹�Ǥ���
+ログを取る機能を提供するクラスです。
 
 == Class Methods
 
 --- new(log_file = nil, level = WEBrick::BasicLog::INFO)    -> WEBrick::BasicLog
 
-WEBrick::BasicLog ���֥������Ȥ����������֤��ޤ���
+WEBrick::BasicLog オブジェクトを生成して返します。
 
-@param log_file ������Ͽ������Υ��֥������Ȥ���ꤷ�ޤ����᥽�å� << ���������Ƥ���ɬ�פ�����ޤ���
-                �̾�� [[c:String]] ���֥������Ȥ� [[c:IO]] ���֥������ȤǤ���nil
-                ����ꤷ����硢ɸ�२�顼���Ϥ˥�������Ϥ��ޤ���
+@param log_file ログを記録する先のオブジェクトを指定します。メソッド << が定義されている必要があります。
+                通常は [[c:String]] オブジェクトか [[c:IO]] オブジェクトです。nil
+                を指定した場合、標準エラー出力にログを出力します。
 
-@param level ������٥������ǻ��ꤷ�ޤ���
-             ���Υ�����٥��Ʊ���������פʥ�٥�Υǡ����Τߤ�Ͽ���ޤ���
-             ������٥�Ͻ����٤ν�� FATAL, ERROR, WARN, INFO, DEBUG ��5�ʳ�������ޤ���
-             FATAL �ν����٤����ֹ⤯ DEBUG �������㤤�Ǥ���
+@param level ログレベルを定数で指定します。
+             このログレベルと同じかより重要なレベルのデータのみを記録します。
+             ログレベルは重要度の順に FATAL, ERROR, WARN, INFO, DEBUG の5段階があります。
+             FATAL の重要度が一番高く DEBUG が一番低いです。
 
   require 'webrick'
   logger = WEBrick::BasicLog.new('testfile', WEBrick::BasicLog::FATAL)
@@ -24,28 +24,28 @@ WEBrick::BasicLog ���֥������Ȥ����������֤��ޤ���
 
 --- level        -> Integer
 --- level=(lv)
-���ȤΥ�����٥��ɽ�����������Ǥ���
+自身のログレベルを表すアクセサです。
 
-@param lv ������٥������ǻ��ꤷ�ޤ���
+@param lv ログレベルを定数で指定します。
 
 --- close    -> ()
 
-���Ȥ��Ĥ��ޤ����������뤳�Ȥ��Ǥ��ʤ��ʤ�ޤ���
+自身を閉じます。ログを取ることができなくなります。
 
 --- log(level, msg)    -> ()
 
-���ꤵ�줿 msg ����ꤵ�줿������٥� level �ǥ����˵�Ͽ���ޤ���
+指定された msg を指定されたログレベル level でログに記録します。
 
-@param level ��Ͽ������ msg �Υ�٥�� FATAL, ERROR, WARN, INFO, DEBUG �Τ����줫������ǻ��ꤷ�ޤ���
+@param level 記録したい msg のレベルを FATAL, ERROR, WARN, INFO, DEBUG のいずれかの定数で指定します。
 
-@param msg ��Ͽ������ʸ�������ꤷ�ޤ���
+@param msg 記録したい文字列を指定します。
 
 --- <<(obj)    -> ()
 
-���ꤵ�줿 obj �� to_s �᥽�åɤ�ʸ������Ѵ����Ƥ��顢
-������٥� INFO �ǥ����˵�Ͽ���ޤ���
+指定された obj を to_s メソッドで文字列に変換してから、
+ログレベル INFO でログに記録します。
 
-@param obj ��Ͽ���������֥������Ȥ���ꤷ�ޤ���ʸ����Ǥʤ����� to_s �᥽�åɤ�ʸ������Ѵ����ޤ���
+@param obj 記録したいオブジェクトを指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
   require 'webrick'
   logger = WEBrick::BasicLog.new() 
@@ -53,100 +53,100 @@ WEBrick::BasicLog ���֥������Ȥ����������֤��ޤ���
 
 --- fatal(msg)    -> ()
 
-������٥� FATAL ��ʸ���� msg ������˵�Ͽ���ޤ���
+ログレベル FATAL で文字列 msg をログに記録します。
 
-��Ƭ�� level ��ɽ��ʸ�����ɲä���ޤ���
-msg �ν�ü�� "\n" �Ǥʤ����ˤ� "\n" ���ɲä��ޤ���
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
 
-@param msg ��Ͽ������ʸ�������ꤷ�ޤ���ʸ����Ǥʤ����� to_s �᥽�åɤ�ʸ������Ѵ����ޤ���
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
   require 'webrick'
   logger = WEBrick::BasicLog.new()
-  logger.fatal('out of money')       #=> FATAL out of money   (ɸ�२�顼���Ϥ˽���)
+  logger.fatal('out of money')       #=> FATAL out of money   (標準エラー出力に出力)
 
 --- error(msg)    -> ()
 
-������٥� ERROR ��ʸ���� msg ������˵�Ͽ���ޤ���
-���Ȥ� level �� ERROR �������٤��⤤���ˤϵ�Ͽ���ޤ���
+ログレベル ERROR で文字列 msg をログに記録します。
+自身の level が ERROR より重要度が高い場合には記録しません。
 
-��Ƭ�� level ��ɽ��ʸ�����ɲä���ޤ���
-msg �ν�ü�� "\n" �Ǥʤ����ˤ� "\n" ���ɲä��ޤ���
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
 
-@param msg ��Ͽ������ʸ�������ꤷ�ޤ���ʸ����Ǥʤ����� to_s �᥽�åɤ�ʸ������Ѵ����ޤ���
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- warn(msg)    -> ()
 
-������٥� WARN ��ʸ���� msg ������˵�Ͽ���ޤ���
-���Ȥ� level �� WARN �������٤��⤤���ˤϵ�Ͽ���ޤ���
+ログレベル WARN で文字列 msg をログに記録します。
+自身の level が WARN より重要度が高い場合には記録しません。
 
-��Ƭ�� level ��ɽ��ʸ�����ɲä���ޤ���
-msg �ν�ü�� "\n" �Ǥʤ����ˤ� "\n" ���ɲä��ޤ���
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
 
-@param msg ��Ͽ������ʸ�������ꤷ�ޤ���ʸ����Ǥʤ����� to_s �᥽�åɤ�ʸ������Ѵ����ޤ���
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- info(msg)    -> ()
 
-������٥� INFO ��ʸ���� msg ������˵�Ͽ���ޤ���
-���Ȥ� level �� INFO �������٤��⤤���ˤϵ�Ͽ���ޤ���
+ログレベル INFO で文字列 msg をログに記録します。
+自身の level が INFO より重要度が高い場合には記録しません。
 
-��Ƭ�� level ��ɽ��ʸ�����ɲä���ޤ���
-msg �ν�ü�� "\n" �Ǥʤ����ˤ� "\n" ���ɲä��ޤ���
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
 
-@param msg ��Ͽ������ʸ�������ꤷ�ޤ���ʸ����Ǥʤ����� to_s �᥽�åɤ�ʸ������Ѵ����ޤ���
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- debug(msg)    -> ()
 
-������٥� DEBUG ��ʸ���� msg ������˵�Ͽ���ޤ���
-���Ȥ� level �� DEBUG �������٤��⤤���ˤϵ�Ͽ���ޤ���
+ログレベル DEBUG で文字列 msg をログに記録します。
+自身の level が DEBUG より重要度が高い場合には記録しません。
 
-��Ƭ�� level ��ɽ��ʸ�����ɲä���ޤ���
-msg �ν�ü�� "\n" �Ǥʤ����ˤ� "\n" ���ɲä��ޤ���
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
 
-@param msg ��Ͽ������ʸ�������ꤷ�ޤ���ʸ����Ǥʤ����� to_s �᥽�åɤ�ʸ������Ѵ����ޤ���
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- fatal?    -> bool
 
-���ȤΥ�����٥뤬 FATAL �ʾ�λ��� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身のログレベルが FATAL 以上の時に true を返します。
+そうでない場合に false を返します。
 
 --- error?    -> bool
 
-���ȤΥ�����٥뤬 ERROR �ʾ�λ��� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身のログレベルが ERROR 以上の時に true を返します。
+そうでない場合に false を返します。
 
 --- warn?    -> bool
 
-���ȤΥ�����٥뤬 WARN �ʾ�λ��� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身のログレベルが WARN 以上の時に true を返します。
+そうでない場合に false を返します。
 
 --- info?    -> bool
 
-���ȤΥ�����٥뤬 INFO �ʾ�λ��� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身のログレベルが INFO 以上の時に true を返します。
+そうでない場合に false を返します。
 
 --- debug?    -> bool
 
-���ȤΥ�����٥뤬 DEBUG �ʾ�λ��� true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身のログレベルが DEBUG 以上の時に true を返します。
+そうでない場合に false を返します。
 
 == Constants
 
 --- FATAL
 
-������٥��ɽ������Ǥ��������٤�1�֤Ǥ���
+ログレベルを表す定数です。重要度は1番です。
 
 --- ERROR
 
-������٥��ɽ������Ǥ��������٤�2�֤Ǥ���
+ログレベルを表す定数です。重要度は2番です。
 
 --- WARN
 
-������٥��ɽ������Ǥ��������٤�3�֤Ǥ���
+ログレベルを表す定数です。重要度は3番です。
 
 --- INFO
 
-������٥��ɽ������Ǥ��������٤�4�֤Ǥ���
+ログレベルを表す定数です。重要度は4番です。
 
 --- DEBUG
 
-������٥��ɽ������Ǥ��������٤�5�֤Ǥ���
+ログレベルを表す定数です。重要度は5番です。

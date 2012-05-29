@@ -1,16 +1,16 @@
 = class OpenSSL::PKey::EC < OpenSSL::PKey::PKey
 
-EC(Ellicptic Curve,�ʱ߶���)�Ź渰�Υ��饹�Ǥ���
+EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 
-���Υ��饹�Υ᥽�åɤˤĤ��Ƥ��ܤ����Τꤿ������ openssl �Υɥ������
-���б�����ؿ��ι�򸫤Ƥ���������
+このクラスのメソッドについてより詳しく知りたい場合は openssl のドキュメント
+の対応する関数の項を見てください。
 
 == Class methods
 --- builtin_curves -> [[String, String]]
 
-�Ȥ߹��ߤζ�����̾���ȡ�������Ф���������ʸ���������ڥ���������֤��ޤ���
+組み込みの曲線の名前と、それに対する説明を文字列の配列ペアの配列で返します。
 
-��:
+例:
   OpenSSL::PKey::EC.builtin_curves
   # => [["secp112r1", "SECG/WTLS curve over a 112 bit prime field"],
   #     ["secp112r2", "SECG curve over a 112 bit prime field"], 
@@ -23,388 +23,388 @@ EC(Ellicptic Curve,�ʱ߶���)�Ź渰�Υ��饹�Ǥ���
 --- new -> OpenSSL::PKey::EC
 --- new(obj) -> OpenSSL::PKey::EC
 
-OpenSSL::PKey::EC ���֥������Ȥ��������ޤ���
+OpenSSL::PKey::EC オブジェクトを生成します。
 
-�����μ�������Ƥˤ�äưۤʤ��ư�򤷤ޤ���
+引数の種類や内容によって異なる挙動をします。
 
-�����ʤ��ξ��ϡ����� EC ���֥������Ȥ��������ޤ���
-����ˤϥѥ�᡼��(���������������뷲)�⸰�Ф�ޤޤ�Ƥ��ޤ���
+引数なしの場合は、空の EC オブジェクトを生成します。
+これにはパラメータ(曲線から定義される群)も鍵対も含まれていません。
 
-������ OpenSSL::PKey::EC ���֥������ȤǤ�����ˤϡ�
-���Υ��֥������ȤΥ��ԡ����֤��ޤ���
+引数が OpenSSL::PKey::EC オブジェクトである場合には、
+そのオブジェクトのコピーを返します。
 
-������ [[c:OpenSSL::PKey::EC::Group]] �Υ��֥������ȤǤ�����ˤϡ�
-����򷲤Ȥ������ꤵ��ޤ������Фϴޤޤ�ޤ���
+引数が [[c:OpenSSL::PKey::EC::Group]] のオブジェクトである場合には、
+それを群として設定されます。鍵対は含まれません。
 
-������ DER �����⤷���� PEM ������ʸ����Ǥ�����ϡ��������Ƥ�
-�ɤ߹���� EC ���֥������Ȥ���Ϥ��ޤ����������Ƥˤ�ä�
-���Ф�ξ�����⤷���ϸ������Τߴޤޤ�Ƥ��ޤ���
+引数が DER 形式もしくは PEM 形式の文字列である場合は、その内容を
+読み込んで EC オブジェクトを出力します。その内容によって
+鍵対の両方、もしくは公開鍵のみ含まれています。
 
-������������̾����ʸ����Ǥ�����ˤϡ����ζ�������������
-�����ѥ�᡼���Ȥ������ꤵ��ޤ������Фϴޤޤ�ޤ���
+引数が曲線の名前の文字列である場合には、その曲線で定義される
+群がパラメータとして設定されます。鍵対は含まれません。
 
-@param obj EC���֥������Ȥ�������(EC ���֥������� or EC::Group ���֥�������
-           or ʸ����)
-@raise OpenSSL::PKey::EC::ECError ���֥������Ȥ������˼��Ԥ�������ȯ�����ޤ�
+@param obj ECオブジェクトの生成元(EC オブジェクト or EC::Group オブジェクト
+           or 文字列)
+@raise OpenSSL::PKey::EC::ECError オブジェクトの生成に失敗した場合に発生します
 
 == Instance methods
 --- group -> OpenSSL::PKey::EC::Group
-���ѥ�᡼���Ȥʤ뷲��ɽ�����֥������Ȥ��֤��ޤ���
+鍵パラメータとなる群を表すオブジェクトを返します。
 
 @see [[m:OpenSSL::PKey::EC#group=]]
 
 --- group=(gr)
-���ѥ�᡼���Ȥʤ뷲��ɽ�����֥������Ȥ����ꤷ�ޤ���
+鍵パラメータとなる群を表すオブジェクトを設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param gr ���ꤹ�� [[c:OpenSSL::PKey::EC::Group]] ���֥�������
-@raise OpenSSL::PKey::ECError Group ���֥������Ȥ�����˼��Ԥ�������ȯ�����ޤ�
+@param gr 設定する [[c:OpenSSL::PKey::EC::Group]] オブジェクト
+@raise OpenSSL::PKey::ECError Group オブジェクトの設定に失敗した場合に発生します
 @see [[m:OpenSSL::PKey::EC#group]]
 
 --- private_key -> OpenSSL::BN|nil
-��̩���Ȥʤ��������֤��ޤ���
+秘密鍵となる整数を返します。
 
-�������ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+鍵が設定されていない場合は nil を返します。
 
 @see [[m:OpenSSL::PKey::EC#private_key=]]
 
 --- private_key=(privkey)
-��̩���Ȥʤ����������ꤷ�ޤ���
+秘密鍵となる整数を設定します。
 
-nil ���Ϥ����Ȥ� EC ���֥������Ȥ��������Τߤ���ľ��֤��ѹ��Ǥ��ޤ���
+nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に変更できます。
 
-@param privkey ���ꤹ����̩��([[c:OpenSSL::BN]] ���֥�������)
-@raise OpenSSL::PKey::ECError ��̩��������˼��Ԥ�������ȯ�����ޤ�
+@param privkey 設定する秘密鍵([[c:OpenSSL::BN]] オブジェクト)
+@raise OpenSSL::PKey::ECError 秘密鍵の設定に失敗した場合に発生します
 @see [[m:OpenSSL::PKey::EC#private_key]]
 
 --- public_key -> OpenSSL::PKey::EC::Point|nil
-�������Ȥʤ��ʱ߶����������ɽ�����֥������Ȥ��֤��ޤ���
+公開鍵となる楕円曲線上の点を表すオブジェクトを返します。
 
-�������ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+鍵が設定されていない場合は nil を返します。
 
-@raise OpenSSL::PKey::ECError �������μ������˥��顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::ECError 公開鍵の取得時にエラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC#public_key=]]
 
 --- public_key=(pubkey)
-�������Ȥʤ��ʱ߶����������ɽ�����֥������Ȥ����ꤷ�ޤ���
+公開鍵となる楕円曲線上の点を表すオブジェクトを設定します。
 
-�̾盧�Υ᥽�åɤ��ͤ��ѹ����뤳�ȤϤ���ޤ���
-�褯�ͤ���ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
 
-@param pubkey �������Ȥʤ� [[c:OpenSSL::PKey::EC::Point]] ���֥�������
-@raise OpenSSL::PKey::ECError ��������������˥��顼������������ȯ�����ޤ�
+@param pubkey 公開鍵となる [[c:OpenSSL::PKey::EC::Point]] オブジェクト
+@raise OpenSSL::PKey::ECError 公開鍵の設定時にエラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC#public_key]]
 
 --- private_key? -> bool
-EC ���֥������Ȥ���̩�����ݻ����Ƥ���п����֤��ޤ���
+EC オブジェクトが秘密鍵を保持していれば真を返します。
 
 --- public_key? -> bool
-EC ���֥������Ȥ����������ݻ����Ƥ���п����֤��ޤ���
+EC オブジェクトが公開鍵を保持していれば真を返します。
 
-[[c:OpenSSL::PKey::RSA]] �� [[c:OpenSSL::PKey::DSA]] ��
-�ۤʤꡢEC ���֥������Ȥ���������ޤޤʤ���礬¸�ߤ��ޤ���
-�㤨�С�[[m:OpenSSL::PKey::EC.new]] �ǥѥ�᡼���Ȥʤ뷲�Τߤ�
-���ꤷ�� EC ���֥������Ȥ��ä����ϡ�����������̩����
-�ݻ����Ƥ��ޤ��󡣤��ξ�� [[m:OpenSSL::PKey::EC#generate_key]] ��
-������������ޤǡ����ξ��֤ΤޤޤǤ���
+[[c:OpenSSL::PKey::RSA]] や [[c:OpenSSL::PKey::DSA]] と
+異なり、EC オブジェクトが公開鍵を含まない場合が存在します。
+例えば、[[m:OpenSSL::PKey::EC.new]] でパラメータとなる群のみを
+指定して EC オブジェクトを作った場合は、公開鍵も秘密鍵も
+保持していません。この場合 [[m:OpenSSL::PKey::EC#generate_key]] で
+鍵を生成するまで、その状態のままです。
 
-���Υ᥽�åɤ�Ƥ����� [[c:OpenSSL::Random]] �γƥ⥸�塼��ؿ���
-��ä������Ŭ�ڤ˽��������Ƥ���ɬ�פ�����ޤ���
+このメソッドを呼ぶ前に [[c:OpenSSL::Random]] の各モジュール関数に
+よって乱数が適切に初期化されている必要があります。
 
 --- generate_key -> self
-���ڥ���������������ޤ���
+鍵ペアを乱数で生成します。
 
-@raise OpenSSL::PKey::ECError ���ڥ��������˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::PKey::ECError 鍵ペアの生成に失敗した場合に発生します
 
 --- check_key -> true
 
-�ѥ�᡼���ȸ��Ф�����å����ޤ���
+パラメータと鍵対をチェックします。
 
-�ʤ�餫�ΰ�̣�Ǹ��Ф����꤬������ˤ��㳰 ECError ��ȯ�����ޤ���
+なんらかの意味で鍵対に問題がある場合には例外 ECError を発生します。
 
-@raise OpenSSL::PKey::ECError �������꤬�������ȯ�����ޤ�
+@raise OpenSSL::PKey::ECError 鍵に問題がある場合に発生します
 
 --- dh_compute_key(pubkey) -> String
-��ʬ����̩�������θ��������� ECDH �ˤ�äƸ�ʸ�����׻������֤��ޤ���
+自分の秘密鍵と相手の公開鍵から ECDH によって鍵文字列を計算し、返します。
 
-���θ������� [[c:OpenSSL::PKey::EC::Point]] ���֥������ȤǤ���ɬ�פ�����ޤ���
+相手の公開鍵は [[c:OpenSSL::PKey::EC::Point]] オブジェクトである必要があります。
 
-@param pubkey ���θ�����
-@raise OpenSSL::PKey::ECError ���򴹤˼��Ԥ�������ȯ�����ޤ�
+@param pubkey 相手の公開鍵
+@raise OpenSSL::PKey::ECError 鍵交換に失敗した場合に発生します
 
 --- dsa_sign_asn1(data) -> String
-��̩�����Ѥ���data �� ECDSA �ǽ�̾���ޤ���
+秘密鍵を用い、data に ECDSA で署名します。
 
-��̤�ʸ����Ȥ����֤��ޤ���
+結果は文字列として返します。
 
-data �Υ����������Ȥ�������Ϥ��Υ᥽�åɤ˴ޤޤ�Ƥ��ޤ���
-���Ȥ�Ŭ���ʥ����������Ȥ���ɬ�פ�����ޤ���
+data のダイジェストを取る処理はこのメソッドに含まれていません。
+自身で適当なダイジェストを取る必要があります。
 
-@param data ��̾�оݤΥǡ���(ʸ����)
-@raise OpenSSL::PKey::ECError EC ���֥������Ȥ���̩�����ݻ����Ƥ��ʤ���硢
-                              �⤷���Ͻ�̾�˼��Ԥ�������ȯ�����ޤ�
+@param data 署名対象のデータ(文字列)
+@raise OpenSSL::PKey::ECError EC オブジェクトが秘密鍵を保持していない場合、
+                              もしくは署名に失敗した場合に発生します
 @see [[m:OpenSSL::PKey::EC#dsa_verify_asn1]]
 
 --- dsa_verify_asn1(data, sig) -> bool
-���������Ѥ�����̾�� ECDSA �Ǹ��ڤ��ޤ���
+公開鍵を用い、署名を ECDSA で検証します。
 
-data �Υ����������Ȥ�������Ϥ��Υ᥽�åɤ˴ޤޤ�Ƥ��ޤ���
-���Ȥ�Ŭ���ʥ����������Ȥ���ɬ�פ�����ޤ���
+data のダイジェストを取る処理はこのメソッドに含まれていません。
+自身で適当なダイジェストを取る必要があります。
 
-���ڤ������������� true ���֤��ޤ���
+検証に成功した場合は true を返します。
 
-@param data ��̾�оݤΥǡ���(ʸ����)
-@param sig ��̾�ǡ���(ʸ����)
-@raise OpenSSL::PKey::ECError ��̾�θ��ڻ��˥��顼������������ȯ�����ޤ�
+@param data 署名対象のデータ(文字列)
+@param sig 署名データ(文字列)
+@raise OpenSSL::PKey::ECError 署名の検証時にエラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC#dsa_sign_asn1]]
 
 --- to_pem -> String
-���� PEM ������ʸ������Ѵ����ޤ���
+鍵を PEM 形式の文字列に変換します。
 
-���ߤλ��ͤǤ� [[m:OpenSSL::PKey::RSA#to_pem]] �Τ褦��
-���Ϥ�ѥ��ե졼���ǰŹ沽���뤳�ȤϤǤ��ޤ���
+現在の仕様では [[m:OpenSSL::PKey::RSA#to_pem]] のように
+出力をパスフレーズで暗号化することはできません。
 
-@param OpenSSL::PKey::ECError ʸ����ؤ��Ѵ��˼��Ԥ�������ȯ�����ޤ���
-       ���������ޤޤ�Ƥ��ʤ����䡢���������Ǥʤ����ʤɤ˼��Ԥ��ޤ���
+@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+       公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 --- to_der -> String
-���� DER ������ʸ������Ѵ����ޤ���
+鍵を DER 形式の文字列に変換します。
 
-@param OpenSSL::PKey::ECError ʸ����ؤ��Ѵ��˼��Ԥ�������ȯ�����ޤ���
-       ���������ޤޤ�Ƥ��ʤ����䡢���������Ǥʤ����ʤɤ˼��Ԥ��ޤ���
+@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+       公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 --- to_text -> String
-����ʹ֤��ɤ��������Ѵ����ޤ���
+鍵を人間が読める形式に変換します。
 
-@param OpenSSL::PKey::ECError ʸ����ؤ��Ѵ��˼��Ԥ�������ȯ�����ޤ���
-       ���������ޤޤ�Ƥ��ʤ����䡢���������Ǥʤ����ʤɤ˼��Ԥ��ޤ���
+@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+       公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 == Constants
 --- NAMED_CURVE -> Integer
-���η���̾������Ķ��������������Ƥ��뤳�Ȥ��̣����ե饰�Ǥ���
+その群が名前を持つ曲線から定義されていることを意味するフラグです。
 
-[[m:OpenSSL::PKey::EC::Group#asn1_flag=]] �����Ѥ���ޤ���
+[[m:OpenSSL::PKey::EC::Group#asn1_flag=]] で利用されます。
 
 = class OpenSSL::PKey::ECError < OpenSSL::PKey::PKeyError
-�ʱ߶����Ź��Ϣ�Υ��顼������������ȯ�������㳰�Ǥ���
+楕円曲線暗号関連のエラーが生じた場合に発生する例外です。
 
 = class OpenSSL::PKey::EC::Group
-�ʱ߶��������������뷲��ɽ�����饹�Ǥ���
+楕円曲線から定義される群を表すクラスです。
 
-�ʱ߶����Ź�Υѥ�᡼���Ȥ��Ƥ�����Ϥ����ޤ���
+楕円曲線暗号のパラメータとしての役割をはたします。
 
 == Class methods
 --- new(obj) -> OpenSSL::PKey::EC::Group
 --- new(sym, p, a, b) -> OpenSSL::PKey::EC::Group
 
-�ʱ߶��������������뷲��ɽ�����֥������Ȥ��������ޤ���
+楕円曲線から定義される群を表すオブジェクトを生成します。
 
-�����μ���ȸĿ��ˤ�äƵ�ư���ۤʤ�ޤ���
+引数の種類と個数によって挙動が異なります。
 
-������1�Ĥξ��ϡ�����ܥ롢[[c:OpenSSL::PKey::EC::Group]] ���֥������ȡ�
-ʸ����Τ����줫���Ϥ����Ȥ��Ǥ��ޤ���
+引数が1つの場合は、シンボル、[[c:OpenSSL::PKey::EC::Group]] オブジェクト、
+文字列のいずれかを渡すことができます。
 
-�����˥���ܥ���Ϥ��������б����뷲���֤��ޤ����ʲ���4�Ĥ�
-����Ǥ��ޤ���
+引数にシンボルを渡した場合は対応する群を返します。以下の4つを
+指定できます。
   * :GFp_simple
   * :GFp_mont
   * :GFp_nist
   * :GF2m_simple
-������ˡ���������줿 Group ���֥������Ȥ��Դ����Ǥ���
+この方法で生成された Group オブジェクトは不完全です。
 
-[[c:OpenSSL::PKey::EC::Group]] ���֥�������
-���Ϥ������Ϥ����ʣ���������֥������Ȥ��֤��ޤ���
+[[c:OpenSSL::PKey::EC::Group]] オブジェクト
+を渡した場合はそれを複製したオブジェクトを返します。
 
-ʸ������Ϥ������ϡ�PEM �⤷���� DER �����Υǡ����Ȥߤʤ���
-�ǡ������ɤ߹��ߡ����֥������Ȥ��������ޤ���
+文字列を渡した場合は、PEM もしくは DER 形式のデータとみなして
+データを読み込み、オブジェクトを生成します。
 
-����̾ʸ������Ϥ������ϡ����ζ�������������
-����ɽ�����֥������Ȥ��֤��ޤ���
+曲線名文字列を渡した場合は、その曲線で定義される
+群を表すオブジェクトを返します。
 
-������4�Ĥξ��� sym �� :GFp_simple �⤷���� :GF2m_simple ����ꤷ��
-����� p, a, b �Ȥ��� 3 �Ĥ���������������
-�ʱ߶��������������뷲���֤��ޤ���
+引数が4つの場合は sym で :GFp_simple もしくは :GF2m_simple を指定し、
+それと p, a, b という 3 つの整数で定義される
+楕円曲線から定義される群を返します。
 
-@param obj Group���֥������������Τ���Υǡ���(����ܥ롢Group, ʸ����Τ����줫)
-@param sym Group ��������뤿��Υ���ܥ�
-@param p ����([[c:OpenSSL::BN]])
-@param a ����([[c:OpenSSL::BN]])
-@param b ����([[c:OpenSSL::BN]])
-@raise OpenSSL::PKey::EC::Group::Error ���֥������Ȥ������˼��Ԥ�������ȯ�����ޤ���
-       ����̾�������Ǥ�����ʤɤ�ȯ�����ޤ���
+@param obj Groupオブジェクト生成のためのデータ(シンボル、Group, 文字列のいずれか)
+@param sym Group を定義するためのシンボル
+@param p 整数([[c:OpenSSL::BN]])
+@param a 整数([[c:OpenSSL::BN]])
+@param b 整数([[c:OpenSSL::BN]])
+@raise OpenSSL::PKey::EC::Group::Error オブジェクトの生成に失敗した場合に発生します。
+       曲線名が不正である場合などに発生します。
 
 == Instance methods
 --- generator -> OpenSSL::PKey::EC::Point
-�������������֤��ޤ���
+群の生成元を返します。
 
 --- set_generator(generator, order, cofactor) -> self
-���Υѥ�᡼�������ꤷ�ޤ���
+群のパラメータを設定します。
 
-@param generator ������([[c:OpenSSL::PKey::EC::Point]] ���֥�������)
-@param order �������ΰ̿�([[c:OpenSSL::BN]] ���֥�������)
-@param cofactor ;����[[c:OpenSSL::BN]] ���֥�������
-@raise OpenSSL::PKey::EC::Group::Error ����˼��Ԥ�������ȯ�����ޤ�
+@param generator 生成元([[c:OpenSSL::PKey::EC::Point]] オブジェクト)
+@param order 生成元の位数([[c:OpenSSL::BN]] オブジェクト)
+@param cofactor 余因子[[c:OpenSSL::BN]] オブジェクト
+@raise OpenSSL::PKey::EC::Group::Error 設定に失敗した場合に発生します
 
 --- order -> OpenSSL::BN
-�������ΰ̿����֤��ޤ���
+生成元の位数を返します。
 
-@raise OpenSSL::PKey::EC::Group::Error �̿��μ����˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Group::Error 位数の取得に失敗した場合に発生します
 
 --- cofactor -> OpenSSL::BN
-;���Ҥ��֤��ޤ���
+余因子を返します。
 
-@raise OpenSSL::PKey::EC::Group::Error ;���Ҥμ����˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Group::Error 余因子の取得に失敗した場合に発生します
 
 --- curve_name -> String | nil
-������̾����ʸ������֤��ޤ���
+曲線の名前を文字列で返します。
 
-̾�����ʤ����� nil ���֤��ޤ���
+名前がない場合は nil を返します。
 
 --- asn1_flag -> Integer
-���Ȥ����ꤵ�줿 ASN1 �ե饰���֤��ޤ���
+自身に設定された ASN1 フラグを返します。
 
 @see [[m:OpenSSL::PKey::EC::Group#asn1_flag=]]
 
 --- asn1_flag=(flags)
-���Ȥ� ASN1 �ե饰�����ꤷ�ޤ���
+自身に ASN1 フラグを設定します。
 
-�������Ѳ�ǽ�ʥե饰�ϰʲ����̤�Ǥ���
+現在利用可能なフラグは以下の通りです。
   * [[m:OpenSSL::PKey::EC::NAMED_CURVE]]
 
 @see [[m:OpenSSL::PKey::EC::Group#asn1_flag]]
 --- point_conversion_form -> Symbol
-���Υ��󥳡��ǥ����������֤��ޤ���
+点のエンコーディング方式を返します。
 
-�ʲ��Τ����줫���֤��ޤ���
+以下のいずれかを返します。
   * :compressed
   * :uncompressed
   * :hybrid
-�ܤ�����  X9.62 (ECDSA) �ʤɤ򻲾Ȥ��Ƥ���������
+詳しくは  X9.62 (ECDSA) などを参照してください。
 
-@raise OpenSSL::PKey::EC::Group::Error ����줿���󥳡��ǥ��󥰤�̤�Τ��ͤǤ��ä�
-       ����ȯ�����ޤ���
+@raise OpenSSL::PKey::EC::Group::Error 得られたエンコーディングが未知の値であった
+       場合に発生します。
 @see [[m:OpenSSL::PKey::EC::Group#point_conversion_form=]]
 
 --- point_conversion_form=(sym)
-���Υ��󥳡��ǥ������������ꤷ�ޤ���
+点のエンコーディング方式を設定します。
 
-�ʲ��Τ����줫�����ꤷ�ޤ���
+以下のいずれかを設定します。
   * :compressed
   * :uncompressed
   * :hybrid
-�ܤ�����  X9.62 (ECDSA) �ʤɤ򻲾Ȥ��Ƥ���������
+詳しくは  X9.62 (ECDSA) などを参照してください。
 
-@param sym ���ꤹ������([[c:Symbol]])
+@param sym 設定する方式([[c:Symbol]])
 @see [[m:OpenSSL::PKey::EC::Group#point_conversion_form]]
 
 --- seed -> String | nil
-seed ���֤��ޤ���
+seed を返します。
 
-seed �����ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+seed が設定されていない場合は nil を返します。
 
 @see [[m:OpenSSL::PKey::EC::Group#seed]]
 --- seed=(s)
-seed �����ꤷ�ޤ���
+seed を設定します。
 
-@param s seed(ʸ����)
-@raise OpenSSL::PKey::EC::Group::Error seed������˼��Ԥ�������ȯ�����ޤ���
+@param s seed(文字列)
+@raise OpenSSL::PKey::EC::Group::Error seedの設定に失敗した場合に発生します。
 @see [[m:OpenSSL::PKey::EC::Group#seed]]
 
 --- degree -> Integer
-��������θ��ȤʤäƤ����Τ����Ǥ�
-ɽ������Τ�ɬ�פʥӥåȿ����֤��ޤ���
+群の定義の元となっている体の要素を
+表現するのに必要なビット数を返します。
 
 --- to_pem -> String
-���Ȥ� PEM ������ʸ������Ѵ����ޤ���
+自身を PEM 形式の文字列に変換します。
 
-@raise OpenSSL::PKey::EC::Group::Error �Ѵ��˼��Ԥ�������ȯ�����ޤ���
+@raise OpenSSL::PKey::EC::Group::Error 変換に失敗した場合に発生します。
 --- to_der -> String
-���Ȥ� DER ������ʸ������Ѵ����ޤ���
+自身を DER 形式の文字列に変換します。
 
-@raise OpenSSL::PKey::EC::Group::Error �Ѵ��˼��Ԥ�������ȯ�����ޤ���
+@raise OpenSSL::PKey::EC::Group::Error 変換に失敗した場合に発生します。
 --- to_text -> String
-���Ȥ�ʹ֤˲��ɤʷ�����ʸ������Ѵ����ޤ���
+自身を人間に可読な形式の文字列に変換します。
 
-@raise OpenSSL::PKey::EC::Group::Error �Ѵ��˼��Ԥ�������ȯ�����ޤ���
+@raise OpenSSL::PKey::EC::Group::Error 変換に失敗した場合に発生します。
 --- ==(other) -> bool
 --- eql?(other) -> bool
-���Ȥ� other ���������Ȥ��� true ���֤��ޤ���
+自身が other と等しいときは true を返します。
 
-@param other ����оݤ� [[c:OpenSSL::PKey::EC::Group]] ���֥�������
+@param other 比較対象の [[c:OpenSSL::PKey::EC::Group]] オブジェクト
 
 = class OpenSSL::PKey::EC::Point
-�ʱ߶����Ź�θ������Ȥʤ�����������ɽ���ޤ���
+楕円曲線暗号の公開鍵となる曲線上の点を表します。
 
 == Class methods
 --- new(point) -> OpenSSL::PKey::EC::Point
 --- new(group) -> OpenSSL::PKey::EC::Point
 --- new(group, bn) -> OpenSSL::PKey::EC::Point
 
-Point ���֥������Ȥ��������ޤ���
+Point オブジェクトを生成します。
 
-������ OpenSSL::PKey::EC::Point ���֥������Ȥ��Ϥ�������
-�����ʣ�����ޤ���
+引数に OpenSSL::PKey::EC::Point オブジェクトを渡した場合は
+それを複製します。
 
-������ OpenSSL::PKey::EC::Group ���֥������Ȥ��Ϥ�������
-����˴�Ϣ�դ���줿���֥������Ȥ��֤��ޤ���
+引数に OpenSSL::PKey::EC::Group オブジェクトを渡した場合は
+それに関連付けられたオブジェクトを返します。
 
-������ OpenSSL::PKey::EC::Group ���֥������Ȥ�
-�������Ϥ������ϡ��������������������֤��ޤ���
+引数に OpenSSL::PKey::EC::Group オブジェクトと
+整数を渡した場合は、整数で定義される点を返します。
 
-@param point ʣ������ [[c:OpenSSL::PKey::EC::Point]] ���֥�������
-@param group ��Ϣ�դ��뷲([[c:OpenSSL::PKey::EC::Group]] ���֥�������)
-@param bn ����ɽ������([[c:OpenSSL::BN]] ���֥�������)
-@raise OpenSSL::PKey::EC::Point::Error ���֥������Ȥ������˼��Ԥ������
-       ��ȯ�����ޤ���
+@param point 複製する [[c:OpenSSL::PKey::EC::Point]] オブジェクト
+@param group 関連付ける群([[c:OpenSSL::PKey::EC::Group]] オブジェクト)
+@param bn 点を表す整数([[c:OpenSSL::BN]] オブジェクト)
+@raise OpenSSL::PKey::EC::Point::Error オブジェクトの生成に失敗した場合
+       に発生します。
 
 == Instance methods
 --- group -> OpenSSL::PKey::EC::Group
 
-���Ȥȴ�Ϣ�դ���줿�����֤��ޤ���
+自身と関連付けられた群を返します。
 
 --- eql?(other) -> bool
 --- ==(other) -> bool
-���Ȥ� other ���������ʤ�� true ���֤��ޤ���
+自身が other と等しいならば true を返します。
 
-@raise OpenSSL::PKey::EC::Point::Error ���顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 --- infinity? -> bool
-���Ȥ�̵�±����Ǥ���ʤ�� true ���֤��ޤ���
+自身が無限遠点であるならば true を返します。
 
-@raise OpenSSL::PKey::EC::Point::Error ���顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC::Point#set_to_infinity!]]
 
 --- on_curve? -> bool
-����������ˤ���ʤ�п����֤��ޤ���
+点が曲線上にあるならば真を返します。
 
-[[m:OpenSSL::PKey::EC::Group]] �������뷲�ȴ�Ϣ�դ���줿
-������ͤ��ޤ���
+[[m:OpenSSL::PKey::EC::Group]] で得られる群と関連付けられた
+曲線を考えます。
 
-@raise OpenSSL::PKey::EC::Point::Error ���顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 
 --- make_affine! -> self
 #@todo
-@raise OpenSSL::PKey::EC::Point::Error ���顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 
 --- invert! -> self
-���Ȥ򤽤εո������ꤷ�ޤ���
+自身をその逆元に設定します。
 
-@raise OpenSSL::PKey::EC::Point::Error ���顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 
 --- set_to_infinity! -> self
-���Ȥ�̵�±��������ꤷ�ޤ���
+自身を無限遠点に設定します。
 
-@raise OpenSSL::PKey::EC::Point::Error ���顼������������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC::Point#infinity!]]
 
 --- to_bn -> OpenSSL::BN
-�����������Ѵ����ޤ���
+点を整数に変換します。
 
-@raise OpenSSL::PKey::EC::Point::Error �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::PKey::EC::Point::Error 変換に失敗した場合に発生します
 
 = class OpenSSL::PKey::EC::Group::Error < OpenSSL::OpenSSLError
-[[c:OpenSSL::PKey::EC::Group]] ��Ϣ�Υ��顼��ɽ���㳰���饹�Ǥ���
+[[c:OpenSSL::PKey::EC::Group]] 関連のエラーを表す例外クラスです。
 
 = class OpenSSL::PKey::EC::Point::Error < OpenSSL::OpenSSLError
-[[c:OpenSSL::PKey::EC::Point]] ��Ϣ�Υ��顼��ɽ���㳰���饹�Ǥ���
+[[c:OpenSSL::PKey::EC::Point]] 関連のエラーを表す例外クラスです。

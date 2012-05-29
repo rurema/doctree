@@ -1,11 +1,11 @@
 = class RSS::Maker::ImageBase
 
-RSS 1.0¤Î¾ì¹ç¤Ïurl¡¤title¡¤
-maker.channel.link¡¤maker.channel¤¬Å¬ÀÚ¤ËÀßÄê¤µ
-¤ì¤Æ¤¤¤ëÉ¬Í×¤¬¤¢¤ê¤Ş¤¹¡¥
+RSS 1.0ã®å ´åˆã¯urlï¼Œtitleï¼Œ
+maker.channel.linkï¼Œmaker.channelãŒé©åˆ‡ã«è¨­å®šã•
+ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼
 
-RSS 0.91/2.0¤Î¾ì¹ç¤Ïurl¡¤title¡¤
-maker.channel.link¤¬Å¬ÀÚ¤ËÀßÄê¤µ¤ì¤Æ¤¤¤ëÉ¬Í×¤¬¤¢¤ê¤Ş¤¹¡¥
+RSS 0.91/2.0ã®å ´åˆã¯urlï¼Œtitleï¼Œ
+maker.channel.linkãŒé©åˆ‡ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼
 
 == Instance Methods
 

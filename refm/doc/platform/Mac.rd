@@ -2,9 +2,9 @@
 
 = Mac
 
-Mac �Ǥ� ruby �γ�ȯ�ϻߤޤäƤ�餷����((<Mac OS X>)) �ǤϤ��Τޤ� 
-ruby �򥳥�ѥ���Ǥ���餷����
-Mac �Υǥ��쥯�ȥꥻ�ѥ졼���ϡ�":" �餷����OSX�Ǥϡ�"/"�ǻ��ꤷ�Ƥ��̤�褦�����ƥ����ȥե�����ι�������
-�ɤ� CR �餷�����̾�CR�ΤߤǤ��ˡ��ǥХ����ե������¸�ߤ��ʤ��餷��������
+Mac 版の ruby の開発は止まってるらしい。((<Mac OS X>)) ではそのまま 
+ruby をコンパイルできるらしい。
+Mac のディレクトリセパレータは、":" らしい。OSXでは、"/"で指定しても通るようだ。テキストファイルの行末コー
+ドは CR らしい（通常CRのみです）。デバイスファイルは存在しないらしい・・・
 
-HFS/HFS+�Ǥ�((<�ѥ����ڤ�ϥ������Ȥ��ޤ�|URL:http://www.senko-corp.co.jp/alsoft/Askal2001/AskalBody_04.27.01.htm>))�����ԥ����ɤ��̾��CR�ΤߤǤ���Mac OS X�Ǥ�UNIX���������������Ǥ���Τǡ��Ť��饤�֥��ǲ��ԥ����ɤ�CR�˷���Ǥ����Ƥ����Τ������ư���ʤ����Ȥ⤢��ޤ���Mac OS X������Υƥ����ȥ��ǥ�����CR�Ǥ�CR+LF�Ǥ�LF�ΤߤǤ����������Ԥ����褦�Ǥ����ǥХ����ե�����ϵ�Mac OS�ˤ�¸�ߤ��ޤ���Ruby�Υ���ѥ����Mac OS X�Ǥ�Developer Tool�򥤥󥹥ȡ��뤷�Ƥ������̤�Ϥ��Ǥ��ʥ���ѥ���ե饰��CFLAGS = -g -O2 -pipe -fno-common -no-cpp-precomp�ȡ�-no-cpp-precomp��ɬ�פˤʤ뤫���Τ�ޤ���ˡ�
+HFS/HFS+では((<パス区切りはコロンを使います|URL:http://www.senko-corp.co.jp/alsoft/Askal2001/AskalBody_04.27.01.htm>))。改行コードは通常はCRのみです。Mac OS XではUNIXの世界も入り込んでいるので、古いライブラリで改行コードをCRに決め打ちしているものは正常に動かないこともあります。Mac OS Xの大抵のテキストエディタはCRでもCR+LFでもLFのみでも正しく改行されるようです。デバイスファイルは旧Mac OSには存在しません。RubyのコンパイルはMac OS XではDeveloper Toolをインストールしておけば通るはずです（コンパイラフラグにCFLAGS = -g -O2 -pipe -fno-common -no-cpp-precompと、-no-cpp-precompが必要になるかも知れません）。

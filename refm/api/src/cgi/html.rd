@@ -1,7 +1,7 @@
 #@since 1.9.1
-HTML ���������뤿��Υ᥽�åɤ��󶡤���⥸�塼�����������饤�֥��Ǥ���
+HTML を生成するためのメソッドを提供するモジュールを定義したライブラリです。
 
-�͡��� DTD ���б����Ƥ��ޤ���
+様々な DTD に対応しています。
 #@end
 = module CGI::TagMaker
 #@#nodoc
@@ -19,9 +19,9 @@ HTML ���������뤿��Υ᥽�åɤ��󶡤���⥸�塼�����������饤�֥��Ǥ���
 
 = module CGI::HtmlExtension
 
-HTML ���������뤿��Υ᥽�åɤ��󶡤���⥸�塼��Ǥ���
+HTML を生成するためのメソッドを提供するモジュールです。
 
-��:
+例:
    cgi.a("http://www.example.com") { "Example" }
      # => "<A HREF=\"http://www.example.com\">Example</A>"
 
@@ -30,13 +30,13 @@ HTML ���������뤿��Υ᥽�åɤ��󶡤���⥸�塼��Ǥ���
 --- a(href = "") -> String
 --- a(href = ""){ ... } -> String
 
-a ���Ǥ��������ޤ���
+a 要素を生成します。
 
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param href ʸ�������ꤷ�ޤ���°����ϥå���ǻ��ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param href 文字列を指定します。属性をハッシュで指定することもできます。
        
-��:
+例:
   a("http://www.example.com") { "Example" }
     # => "<A HREF=\"http://www.example.com\">Example</A>"
 
@@ -45,80 +45,80 @@ a ���Ǥ��������ޤ���
 
 --- base(href = "") -> String
 
-base ���Ǥ��������ޤ���
+base 要素を生成します。
 
-@param href ʸ�������ꤷ�ޤ���°����ϥå���ǻ��ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param href 文字列を指定します。属性をハッシュで指定することもできます。
 
-��:
+例:
   base("http://www.example.com/cgi")
     # => "<BASE HREF=\"http://www.example.com/cgi\">"
 
 --- blockquote(cite = nil) -> String
 --- blockquote(cite = nil){ ... } -> String
 
-blockquote ���Ǥ��������ޤ���
+blockquote 要素を生成します。
 
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param cite ���Ѹ�����ꤷ�ޤ���°����ϥå���ǻ��ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param cite 引用元を指定します。属性をハッシュで指定することもできます。
        
-��:
+例:
   blockquote("http://www.example.com/quotes/foo.html") { "Foo!" }
     #=> "<BLOCKQUOTE CITE=\"http://www.example.com/quotes/foo.html\">Foo!</BLOCKQUOTE>
 
 --- caption(align = nil) -> String
 --- caption(align = nil){ ... } -> String
 
-caption ���Ǥ��������ޤ���
+caption 要素を生成します。
 
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param align ���֤�ʸ����ǻ��ꤷ�ޤ���(top, bottom, left right �������ǽ�Ǥ�)
-             °����ϥå���ǻ��ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param align 配置を文字列で指定します。(top, bottom, left right が指定可能です)
+             属性をハッシュで指定することもできます。
        
-��:
+例:
   caption("left") { "Capital Cities" }
     # => <CAPTION ALIGN=\"left\">Capital Cities</CAPTION>
 
 --- checkbox(name = "", value = nil, checked = nil) -> String
 
-�����פ� checkbox �Ǥ��� input ���Ǥ��������ޤ���
+タイプが checkbox である input 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param value value °�����ͤ���ꤷ�ޤ���
+@param value value 属性の値を指定します。
 
-@param checked checked °�����ͤ���ꤷ�ޤ���
+@param checked checked 属性の値を指定します。
 
-��:
+例:
   checkbox("name", "value", true)
   # => "<INPUT CHECKED NAME=\"name\" TYPE=\"checkbox\" VALUE=\"value\">"
 
 --- checkbox(attributes) -> String
 
-�����פ� checkbox �Ǥ��� input ���Ǥ��������ޤ���
+タイプが checkbox である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   checkbox("name" => "name", "value" => "value", "checked" => true)
   # => "<INPUT checked name=\"name\" TYPE=\"checkbox\" value=\"value\">"
 
 --- checkbox_group(name = "", *values) -> String
 
-�����פ� checkbox �Ǥ��� input ���ǤΥ��롼�פ��������ޤ���
+タイプが checkbox である input 要素のグループを生成します。
 
-��������� input ���Ǥ� name °���Ϥ��٤�Ʊ���ˤʤꡢ
-���줾��� input ���Ǥθ���ˤϥ�٥뤬³���ޤ���
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param values value °���Υꥹ�Ȥ���ꤷ�ޤ���
-              ���줾��ΰ�������ñ���ʸ����ξ�硢value °�����ͤȥ�٥��Ʊ����Τ����Ѥ���ޤ���
-              ���줾��ΰ������������Ǥޤ��ϻ����Ǥ�����ξ�硢�ǽ����Ǥ� true �Ǥ���С�
-              checked °���򥻥åȤ��ޤ�����Ƭ�����Ǥ� value °�����ͤˤʤ�ޤ���
+@param values value 属性のリストを指定します。
+              それぞれの引数が、単純な文字列の場合、value 属性の値とラベルに同じものが使用されます。
+              それぞれの引数が、二要素または三要素の配列の場合、最終要素が true であれば、
+              checked 属性をセットします。先頭の要素は value 属性の値になります。
 
-��:
+例:
   checkbox_group("name", "foo", "bar", "baz")
     # <INPUT TYPE="checkbox" NAME="name" VALUE="foo">foo
     # <INPUT TYPE="checkbox" NAME="name" VALUE="bar">bar
@@ -136,14 +136,14 @@ caption ���Ǥ��������ޤ���
 
 --- checkbox_group(attributes) -> String
 
-�����פ� checkbox �Ǥ��� input ���ǤΥ��롼�פ��������ޤ���
+タイプが checkbox である input 要素のグループを生成します。
 
-��������� input ���Ǥ� name °���Ϥ��٤�Ʊ���ˤʤꡢ
-���줾��� input ���Ǥθ���ˤϥ�٥뤬³���ޤ���
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   checkbox_group({ "NAME" => "name",
                    "VALUES" => ["foo", "bar", "baz"] })
 
@@ -155,15 +155,15 @@ caption ���Ǥ��������ޤ���
 
 --- file_field(name = "", size = 20, maxlength = nil) -> String
 
-�����פ� file �Ǥ��� input ���Ǥ��������ޤ���
+タイプが file である input 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param size size °�����ͤ���ꤷ�ޤ���
+@param size size 属性の値を指定します。
 
-@param maxlength maxlength °�����ͤ���ꤷ�ޤ���
+@param maxlength maxlength 属性の値を指定します。
 
-��:
+例:
    file_field("name")
      # <INPUT TYPE="file" NAME="name" SIZE="20">
 
@@ -175,11 +175,11 @@ caption ���Ǥ��������ޤ���
 
 --- file_field(attributes) -> String
 
-�����פ� file �Ǥ��� input ���Ǥ��������ޤ���
+タイプが file である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
    file_field({ "NAME" => "name", "SIZE" => 40 })
      # <INPUT TYPE="file" NAME="name" SIZE="40">
 
@@ -187,16 +187,16 @@ caption ���Ǥ��������ޤ���
 --- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded") -> String
 --- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded"){ ... } -> String
 
-form ���Ǥ��������ޤ���
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param method method °�����ͤȤ��� "get" �� "post" ����ꤷ�ޤ���
+@param method method 属性の値として "get" か "post" を指定します。
 
-@param action action °�����ͤ���ꤷ�ޤ����ǥե���Ȥϸ��ߤ� CGI ������ץ�̾�Ǥ���
+@param action action 属性の値を指定します。デフォルトは現在の CGI スクリプト名です。
 
-@param enctype enctype °�����ͤ���ꤷ�ޤ����ǥե���Ȥ� "application/x-www-form-urlencoded" �Ǥ���
+@param enctype enctype 属性の値を指定します。デフォルトは "application/x-www-form-urlencoded" です。
 
-��:
+例:
   form{ "string" }
     # <FORM METHOD="post" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
 
@@ -210,25 +210,25 @@ form ���Ǥ��������ޤ���
 --- form(attributes) -> String
 --- form(attributes){ ... } -> String
 
-form ���Ǥ��������ޤ���
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   form({"METHOD" => "post", ENCTYPE => "enctype"}){ "string" }
     # <FORM METHOD="post" ENCTYPE="enctype">string</FORM>
 
 @see [[m:CGI::HtmlExtension#multipart_form]]
 
 --- hidden(name = "", value = nil) -> String
-�����פ� hidden �Ǥ��� input ���Ǥ��������ޤ���
+タイプが hidden である input 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param value value °�����ͤ���ꤷ�ޤ���
+@param value value 属性の値を指定します。
 
-��:
+例:
   hidden("name")
     # <INPUT TYPE="hidden" NAME="name">
 
@@ -236,24 +236,24 @@ form ���Ǥ��������ޤ���
     # <INPUT TYPE="hidden" NAME="name" VALUE="value">
 
 --- hidden(attributes) -> String
-�����פ� hidden �Ǥ��� input ���Ǥ��������ޤ���
+タイプが hidden である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   hidden({ "NAME" => "name", "VALUE" => "reset", "ID" => "foo" })
     # <INPUT TYPE="hidden" NAME="name" VALUE="value" ID="foo">
 
 --- html(attributes = {}) -> String
 --- html(attributes = {}){ ... } -> String
-�ȥåץ�٥�� html ���Ǥ��������ޤ���
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+トップレベルの html 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
-                  ����°���� "PRETTY" ��ʸ�����Ϳ����Ȥ���ʸ����ǥ���ǥ�Ȥ��� HTML ���������ޤ���
-                  ����°���� "DOCTYPE" �ˤ� DOCTYPE ����Ȥ��ƻ��Ѥ���ʸ�����Ϳ���뤳�Ȥ��Ǥ��ޤ���
+@param attributes 属性をハッシュで指定します。
+                  擬似属性の "PRETTY" に文字列を与えるとその文字列でインデントした HTML を生成します。
+                  擬似属性の "DOCTYPE" には DOCTYPE 宣言として使用する文字列を与えることができます。
 
-��:
+例:
 
   html{ "string" }
     # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML>string</HTML>
@@ -287,15 +287,15 @@ form ���Ǥ��������ޤ���
   html(if $VERBOSE then "PRETTY" end){ "HTML string" }
 
 --- image_button(src = "", name = nil, alt = nil) -> String
-�����פ� image �� input ���Ǥ��������ޤ���
+タイプが image の input 要素を生成します。
 
-@param src src °�����ͤ���ꤷ�ޤ���
+@param src src 属性の値を指定します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param alt alt °�����ͤ���ꤷ�ޤ���
+@param alt alt 属性の値を指定します。
 
-��:
+例:
   image_button("url")
     # <INPUT TYPE="image" SRC="url">
 
@@ -303,76 +303,76 @@ form ���Ǥ��������ޤ���
     # <INPUT TYPE="image" SRC="url" NAME="name" ALT="string">
 
 --- image_button(attributes) -> String
-�����פ� image �� input ���Ǥ��������ޤ���
+タイプが image の input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   image_button({ "SRC" => "url", "ALT" => "string" })
     # <INPUT TYPE="image" SRC="url" ALT="string">
 
 --- img(src = "", alt = "", width = nil, height = nil) -> String
-img ���Ǥ��������ޤ���
+img 要素を生成します。
 
-@param src src °�����ͤ���ꤷ�ޤ���
+@param src src 属性の値を指定します。
 
-@param alt alt °�����ͤ���ꤷ�ޤ���
+@param alt alt 属性の値を指定します。
 
-@param width width °�����ͤ���ꤷ�ޤ���
+@param width width 属性の値を指定します。
 
-@param height height °�����ͤ���ꤷ�ޤ���
+@param height height 属性の値を指定します。
 
-��:
+例:
   img("src", "alt", 100, 50)
     # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
 
 --- img(attributes) -> String
-img ���Ǥ��������ޤ���
+img 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   img({ "SRC" => "src", "ALT" => "alt", "WIDTH" => 100, "HEIGHT" => 50 })
     # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
 
 --- multipart_form(action = nil, enctype = "multipart/form-data") -> String
 --- multipart_form(action = nil, enctype = "multipart/form-data"){ ... } -> String
 
-enctype °���� "multipart/form-data" �򥻥åȤ��� form ���Ǥ��������ޤ���
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+enctype 属性に "multipart/form-data" をセットした form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param action action °�����ͤ���ꤷ�ޤ���
+@param action action 属性の値を指定します。
 
-@param enctype enctype °�����ͤ���ꤷ�ޤ���
+@param enctype enctype 属性の値を指定します。
 
-��:
+例:
   multipart_form{ "string" }
     # <FORM METHOD="post" ENCTYPE="multipart/form-data">string</FORM>
 
 --- multipart_form(attributes) -> String
 --- multipart_form(attributes){ ... } -> String
 
-enctype °���� "multipart/form-data" �򥻥åȤ��� form ���Ǥ��������ޤ���
-�֥��å���Ϳ����ȡ��֥��å���ɾ��������̤����Ƥˤʤ�ޤ���
+enctype 属性に "multipart/form-data" をセットした form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   multipart_form("url"){ "string" }
     # <FORM METHOD="post" ACTION="url" ENCTYPE="multipart/form-data">string</FORM>
 
 --- password_field(name = "", value = nil, size = 40, maxlength = nil) -> String
-�����פ� password �Ǥ��� input ���Ǥ��������ޤ���
+タイプが password である input 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param value °�����ͤ���ꤷ�ޤ���
+@param value 属性の値を指定します。
 
-@param size size °�����ͤ���ꤷ�ޤ���
+@param size size 属性の値を指定します。
 
-@param maxlength maxlength °�����ͤ���ꤷ�ޤ���
+@param maxlength maxlength 属性の値を指定します。
 
-��:
+例:
   password_field("name")
     # <INPUT TYPE="password" NAME="name" SIZE="40">
 
@@ -383,28 +383,28 @@ enctype °���� "multipart/form-data" �򥻥åȤ��� form ���Ǥ��������ޤ���
     # <INPUT TYPE="password" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
 
 --- password_field(attributes) -> String
-�����פ� password �Ǥ��� input ���Ǥ��������ޤ���
+タイプが password である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   password_field({ "NAME" => "name", "VALUE" => "value" })
     # <INPUT TYPE="password" NAME="name" VALUE="value">
 
 --- popup_menu(name = "", *values) -> String
 --- scrolling_list(name = "", *values) -> String
 
-select ���Ǥ��������ޤ���
+select 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param values option ���Ǥ��������뤿��ξ�����İʾ���ꤷ�ޤ���
-              ���줾�졢ʸ���󡢰����ǡ������ǡ������Ǥ��������ꤹ�뤳�Ȥ��Ǥ��ޤ���
-              ʸ���󤫰����Ǥ�����Ǥ�����ϡ�value °�����ͤ� option ���Ǥ����Ƥˤʤ�ޤ���
-              �����Ǥ�����Ǥ�����ϡ���� value °�����͡�option ���Ǥ����ơ����� option ���Ǥ�
-              ������֤��ɤ�����ɽ�������ͤȤʤ�ޤ���
+@param values option 要素を生成するための情報を一つ以上指定します。
+              それぞれ、文字列、一要素、二要素、三要素の配列を指定することができます。
+              文字列か一要素の配列である場合は、value 属性の値と option 要素の内容になります。
+              三要素の配列である場合は、順に value 属性の値、option 要素の内容、その option 要素が
+              選択状態かどうかを表す真偽値となります。
        
-        �㡧
+        例：
         popup_menu("name", "foo", "bar", "baz")
           # <SELECT NAME="name">
           #   <OPTION VALUE="foo">foo</OPTION>
@@ -429,11 +429,11 @@ select ���Ǥ��������ޤ���
 --- popup_menu(attributes) -> String
 --- scrolling_list(attributes) -> String
 
-select ���Ǥ��������ޤ���
+select 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
         popup_menu({"NAME" => "name", "SIZE" => 2, "MULTIPLE" => true,
                     "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
           # <SELECT NAME="name" MULTIPLE SIZE="2">
@@ -444,15 +444,15 @@ select ���Ǥ��������ޤ���
 
 --- radio_button(name = "", value = nil, checked = nil) -> String
 
-�����פ� radio �Ǥ��� input ���Ǥ��������ޤ���
+タイプが radio である input 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param value value °�����ͤ���ꤷ�ޤ���
+@param value value 属性の値を指定します。
 
-@param checked ���ʤ�� checked °�������ꤷ�ޤ���
+@param checked 真ならば checked 属性を設定します。
 
-��:
+例:
   radio_button("name", "value")
     # <INPUT TYPE="radio" NAME="name" VALUE="value">
  
@@ -461,28 +461,28 @@ select ���Ǥ��������ޤ���
 
 --- radio_button(attributes) -> String
 
-�����פ� radio �Ǥ��� input ���Ǥ��������ޤ���
+タイプが radio である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   radio_button({ "NAME" => "name", "VALUE" => "value", "ID" => "foo" })
     # <INPUT TYPE="radio" NAME="name" VALUE="value" ID="foo">
 
 --- radio_group(name = "", *values) -> String
-�����פ� radio �Ǥ��� input ���ǤΥꥹ�Ȥ��������ޤ���
+タイプが radio である input 要素のリストを生成します。
 
-��������� input ���Ǥ� name °���Ϥ��٤�Ʊ���ˤʤꡢ
-���줾��� input ���Ǥθ���ˤϥ�٥뤬³���ޤ���
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param values value °���Υꥹ�Ȥ���ꤷ�ޤ���
-              ���줾��ΰ�������ñ���ʸ����ξ�硢value °�����ͤȥ�٥��Ʊ����Τ����Ѥ���ޤ���
-              ���줾��ΰ������������Ǥޤ��ϻ����Ǥ�����ξ�硢�ǽ����Ǥ� true �Ǥ���С�
-              checked °���򥻥åȤ��ޤ�����Ƭ�����Ǥ� value °�����ͤˤʤ�ޤ���
+@param values value 属性のリストを指定します。
+              それぞれの引数が、単純な文字列の場合、value 属性の値とラベルに同じものが使用されます。
+              それぞれの引数が、二要素または三要素の配列の場合、最終要素が true であれば、
+              checked 属性をセットします。先頭の要素は value 属性の値になります。
 
-��:
+例:
   radio_group("name", "foo", "bar", "baz")
     # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
     # <INPUT TYPE="radio" NAME="name" VALUE="bar">bar
@@ -499,14 +499,14 @@ select ���Ǥ��������ޤ���
     # <INPUT TYPE="radio" NAME="name" VALUE="Baz">Baz
   
 --- radio_group(attributes) -> String
-�����פ� radio �Ǥ��� input ���ǤΥꥹ�Ȥ��������ޤ���
+タイプが radio である input 要素のリストを生成します。
 
-��������� input ���Ǥ� name °���Ϥ��٤�Ʊ���ˤʤꡢ
-���줾��� input ���Ǥθ���ˤϥ�٥뤬³���ޤ���
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   radio_group({ "NAME" => "name",
                 "VALUES" => ["foo", "bar", "baz"] })
   
@@ -517,13 +517,13 @@ select ���Ǥ��������ޤ���
                 "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
 --- reset(value = nil, name = nil) -> String
-�����פ� reset �Ǥ��� input ���Ǥ��������ޤ���
+タイプが reset である input 要素を生成します。
 
-@param value value °�����ͤ���ꤷ�ޤ���
+@param value value 属性の値を指定します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-��:
+例:
   reset
     # <INPUT TYPE="reset">
   
@@ -531,21 +531,21 @@ select ���Ǥ��������ޤ���
     # <INPUT TYPE="reset" VALUE="reset">
   
 --- reset(attributes) -> String
-�����פ� reset �Ǥ��� input ���Ǥ��������ޤ���
+タイプが reset である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
   reset({ "VALUE" => "reset", "ID" => "foo" })
     # <INPUT TYPE="reset" VALUE="reset" ID="foo">
 
 --- submit(value = nil, name = nil) -> String
-�����פ� submit �Ǥ��� input ���Ǥ��������ޤ���
+タイプが submit である input 要素を生成します。
 
-@param value value °�����ͤ���ꤷ�ޤ���
+@param value value 属性の値を指定します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-��:
+例:
   submit
     # <INPUT TYPE="submit">
   
@@ -556,26 +556,26 @@ select ���Ǥ��������ޤ���
     # <INPUT TYPE="submit" VALUE="ok" NAME="button1">
   
 --- submit(attributes) -> String
-�����פ� submit �Ǥ��� input ���Ǥ��������ޤ���
+タイプが submit である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
   submit({ "VALUE" => "ok", "NAME" => "button1", "ID" => "foo" })
     # <INPUT TYPE="submit" VALUE="ok" NAME="button1" ID="foo">
 
 --- text_field(name = "", value = nil, size = 40, maxlength = nil) -> String
-�����פ� text �Ǥ��� input ���Ǥ��������ޤ���
+タイプが text である input 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param value °�����ͤ���ꤷ�ޤ���
+@param value 属性の値を指定します。
 
-@param size size °�����ͤ���ꤷ�ޤ���
+@param size size 属性の値を指定します。
 
-@param maxlength maxlength °�����ͤ���ꤷ�ޤ���
+@param maxlength maxlength 属性の値を指定します。
 
-��:
+例:
   text_field("name")
     # <INPUT TYPE="text" NAME="name" SIZE="40">
   
@@ -589,32 +589,32 @@ select ���Ǥ��������ޤ���
     # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
   
 --- text_field(attributes) -> String
-�����פ� text �Ǥ��� input ���Ǥ��������ޤ���
+タイプが text である input 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
   text_field({ "NAME" => "name", "VALUE" => "value" })
     # <INPUT TYPE="text" NAME="name" VALUE="value">
 
 --- textarea(name = "", cols = 70, rows = 10) -> String
-textarea ���Ǥ��������ޤ���
+textarea 要素を生成します。
 
-@param name name °�����ͤ���ꤷ�ޤ���
+@param name name 属性の値を指定します。
 
-@param cols cols °�����ͤ���ꤷ�ޤ���
+@param cols cols 属性の値を指定します。
 
-@param rows rows °�����ͤ���ꤷ�ޤ���
+@param rows rows 属性の値を指定します。
 
-��:
+例:
    textarea("name")
      # = textarea({ "NAME" => "name", "COLS" => 70, "ROWS" => 10 })
 
 --- textarea(attributes) -> String
-textarea ���Ǥ��������ޤ���
+textarea 要素を生成します。
 
-@param attributes °����ϥå���ǻ��ꤷ�ޤ���
+@param attributes 属性をハッシュで指定します。
 
-��:
+例:
    textarea("name", 40, 5)
      # = textarea({ "NAME" => "name", "COLS" => 40, "ROWS" => 5 })
 

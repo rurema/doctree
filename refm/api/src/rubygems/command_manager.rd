@@ -30,7 +30,7 @@ require rubygems/commands/update_command
 require rubygems/commands/which_command
 
 
-gem ���ޥ�ɤˤ�äƥ��ݡ��Ȥ���Ƥ��륵�֥��ޥ�ɤ��������饤�֥��Ǥ���
+gem コマンドによってサポートされているサブコマンドを管理するライブラリです。
 
 Extra commands can be provided by writing a rubygems_plugin.rb
 file in an installed gem.  You should register your command against the
@@ -50,59 +50,59 @@ See Gem::Command for instructions on writing gem commands.
 = class Gem::CommandManager
 include Gem::UserInteraction
 
-gem ���ޥ�ɤˤ�äƥ��ݡ��Ȥ���Ƥ��륵�֥��ޥ�ɤ�������륯�饹�Ǥ���
+gem コマンドによってサポートされているサブコマンドを管理するクラスです。
 
 == Singleton Methods
 
 --- instance -> Gem::CommandManager
 
-���Ȥ򥤥󥹥��󥹲����ޤ���
+自身をインスタンス化します。
 
 
 == Public Instance Methods
 
 --- [](command_name) -> Gem::Command | nil
 
-�����ǻ��ꤵ�줿���ޥ��̾���б����륯�饹�Υ��󥹥��󥹤��֤��ޤ���
+引数で指定されたコマンド名に対応するクラスのインスタンスを返します。
 
-@param command_name ���ޥ��̾��ʸ����ǻ��ꤷ�ޤ���
+@param command_name コマンド名を文字列で指定します。
 
 --- command_names -> Array
 
-��Ͽ����Ƥ��륳�ޥ��̾��������֤��ޤ���
+登録されているコマンド名の配列を返します。
 
 --- find_command(command_name) -> Gem::Command | nil
 
-��Ͽ����Ƥ��륳�ޥ�ɤ���ޥå�������Τ��֤��ޤ���
+登録されているコマンドからマッチしたものを返します。
 
-@param command_name ���ޥ��̾��ʸ����ǻ��ꤷ�ޤ���
+@param command_name コマンド名を文字列で指定します。
 
-@return [[c:Gem::Command]] �Υ��֥��饹�Υ��󥹥��󥹤��֤��ޤ���
+@return [[c:Gem::Command]] のサブクラスのインスタンスを返します。
 
-@raise RuntimeError �ޥå������ǽ���Τ��륳�ޥ�ɤ�ʣ���������ȯ�����ޤ���
-                    �ޤ����ޥå����륳�ޥ�ɤ�̵���ä����ˤ�ȯ�����ޤ���
+@raise RuntimeError マッチする可能性のあるコマンドが複数ある場合に発生します。
+                    また、マッチするコマンドが無かった場合にも発生します。
 
 --- find_command_possibilities(command_name) -> Array
 
-��Ͽ����Ƥ��륳�ޥ�ɤǥޥå������ǽ���Τ����Τ��֤��ޤ���
+登録されているコマンドでマッチする可能性のあるものを返します。
 
-@param command_name ���ޥ��̾��ʸ����ǻ��ꤷ�ޤ���
+@param command_name コマンド名を文字列で指定します。
 
 --- process_args(args) -> ()
 
-���� args ��������� gem ���ޥ�ɤ�¹Ԥ��뤿���ɬ�פʽ�����Ԥ��ޤ���
+引数 args を処理して gem コマンドを実行するために必要な処理を行います。
 
-@param args ���ޥ�ɥ饤�󤫤������ä���������ꤷ�ޤ���
+@param args コマンドラインから受け取った引数を指定します。
 
 --- register_command(command_name) -> false
 
-���ޥ�ɤ򼫿Ȥ���Ͽ���ޤ���
+コマンドを自身に登録します。
 
-@param command_name ���ޥ��̾�򥷥�ܥ�ǻ��ꤷ�ޤ���
+@param command_name コマンド名をシンボルで指定します。
 
 --- run(args) -> ()
 
-���� args ��������� gem ���ޥ�ɤ�¹���Υ��顼����ª���ޤ���
+引数 args を処理して gem コマンドを実行中のエラーを捕捉します。
 
-@param args ���ޥ�ɥ饤�󤫤������ä���������ꤷ�ޤ���
+@param args コマンドラインから受け取った引数を指定します。
 

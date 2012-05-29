@@ -1,8 +1,8 @@
-³Æ¼ï¤Î assert ¥á¥½¥Ã¥É¤òÄó¶¡¤·¤Ş¤¹¡£
+å„ç¨®ã® assert ãƒ¡ã‚½ãƒƒãƒ‰ã‚’æä¾›ã—ã¾ã™ã€‚
 
 #@until 1.9.1
 = class Test::Unit::AssertionFailedError < StandardError
-¥¢¥µ¡¼¥·¥ç¥ó¤Ë¼ºÇÔ¤·¤¿»ş¤Ë [[c:Test::Unit::Assertions]] ¤«¤é raise ¤µ¤ì¤Ş¤¹¡£
+ã‚¢ã‚µãƒ¼ã‚·ãƒ§ãƒ³ã«å¤±æ•—ã—ãŸæ™‚ã« [[c:Test::Unit::Assertions]] ã‹ã‚‰ raise ã•ã‚Œã¾ã™ã€‚
 #@end
 
 = module Test::Unit::Assertions
@@ -11,19 +11,19 @@
 include MiniTest::Assertions
 #@end
 
-³Æ¼ï¤Î assert ¥á¥½¥Ã¥É¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+å„ç¨®ã® assert ãƒ¡ã‚½ãƒƒãƒ‰ã‚’æä¾›ã™ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
 
-Test::Unit::TestCase ¤Ë include ¤µ¤ì¤Æ»È¤ï¤ì¤Ş¤¹¡£
-[[lib:test/unit]] ¤ÎÂ¾¤Î¥¯¥é¥¹¤È¤ÏÆÈÎ©¤·¤Æ¡¢Äó¶¡¤µ¤ì¤Æ¤¤¤ë assert ¥á¥½¥Ã¥É¤À¤±¤ò»È¤¦¤³¤È¤â¤Ç¤­¤Ş¤¹¡£
-assert_block ¥á¥½¥Ã¥É¤ò»È¤¦¤³¤È¤Ë¤è¤ê¡¢¿·¤·¤¤ assert ¥á¥½¥Ã¥É¤ò²Ã¤¨¤ë¤³¤È¤â¤Ç¤­¤Ş¤¹¡£
+Test::Unit::TestCase ã« include ã•ã‚Œã¦ä½¿ã‚ã‚Œã¾ã™ã€‚
+[[lib:test/unit]] ã®ä»–ã®ã‚¯ãƒ©ã‚¹ã¨ã¯ç‹¬ç«‹ã—ã¦ã€æä¾›ã•ã‚Œã¦ã„ã‚‹ assert ãƒ¡ã‚½ãƒƒãƒ‰ã ã‘ã‚’ä½¿ã†ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
+assert_block ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã†ã“ã¨ã«ã‚ˆã‚Šã€æ–°ã—ã„ assert ãƒ¡ã‚½ãƒƒãƒ‰ã‚’åŠ ãˆã‚‹ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
 
 #@since 1.9.1
-assert ¤¬¼ºÇÔ¤·¤¿»ş¤Ï¡¢Îã³° [[c:MiniTest::Assertion]] ¤òÅê¤²¤Ş¤¹¡£
+assert ãŒå¤±æ•—ã—ãŸæ™‚ã¯ã€ä¾‹å¤– [[c:MiniTest::Assertion]] ã‚’æŠ•ã’ã¾ã™ã€‚
 #@else
-assert ¤¬¼ºÇÔ¤·¤¿»ş¤Ï¡¢Îã³° [[c:Test::Unit::AssertionFailedError]] ¤òÅê¤²¤Ş¤¹¡£
+assert ãŒå¤±æ•—ã—ãŸæ™‚ã¯ã€ä¾‹å¤– [[c:Test::Unit::AssertionFailedError]] ã‚’æŠ•ã’ã¾ã™ã€‚
 #@end
-³Æ assert ¥á¥½¥Ã¥É¤ÎºÇ¸å¤Î°ú¿ô message ¤Ï¥Æ¥¹¥È¤¬¼ºÇÔ¤·¤¿¤È¤­¤ËÉ½¼¨¤µ¤ì¤ë
-¥á¥Ã¥»¡¼¥¸¤Ç¤¹¡£
+å„ assert ãƒ¡ã‚½ãƒƒãƒ‰ã®æœ€å¾Œã®å¼•æ•° message ã¯ãƒ†ã‚¹ãƒˆãŒå¤±æ•—ã—ãŸã¨ãã«è¡¨ç¤ºã•ã‚Œã‚‹
+ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ã™ã€‚
 
 
 #@until 1.9.1
@@ -31,10 +31,10 @@ assert ¤¬¼ºÇÔ¤·¤¿»ş¤Ï¡¢Îã³° [[c:Test::Unit::AssertionFailedError]] ¤òÅê¤²¤Ş¤¹¡£
 
 --- use_pp=(value)
 
-½ĞÎÏ¤Ë [[lib:pp]] ¤ò»ÈÍÑ¤¹¤ë¤«¤É¤¦¤«¤ò»ØÄê¤·¤Ş¤¹¡£µ¶¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï
-[[lib:pp]] ¤Ï require ¤µ¤ì¤Ş¤»¤ó¡£
+å‡ºåŠ›ã« [[lib:pp]] ã‚’ä½¿ç”¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’æŒ‡å®šã—ã¾ã™ã€‚å½ã‚’æŒ‡å®šã—ãŸå ´åˆã¯
+[[lib:pp]] ã¯ require ã•ã‚Œã¾ã›ã‚“ã€‚
 
-@param value [[lib:pp]] ¤ò»ÈÍÑ¤¹¤ë¤«¤É¤¦¤«¡£
+@param value [[lib:pp]] ã‚’ä½¿ç”¨ã™ã‚‹ã‹ã©ã†ã‹ã€‚
 #@end
 
 == Instance Methods
@@ -42,195 +42,195 @@ assert ¤¬¼ºÇÔ¤·¤¿»ş¤Ï¡¢Îã³° [[c:Test::Unit::AssertionFailedError]] ¤òÅê¤²¤Ş¤¹¡£
 #@until 1.9.1
 --- assert(boolean, message = nil)    -> ()
 
-boolean ¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+boolean ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param boolean ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param boolean æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_instance_of(klass, object, message = "")    -> ()
 
-object ¤¬ klass ¤ÎÄ¾ÀÜ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¢¤ë¤Ê¤é¡¢¥Ñ¥¹¤·¤Ş¤¹¡£
-[[m:Object#instance_of?]]¤â»²¾È¤·¤Æ²¼¤µ¤¤¡£
+object ãŒ klass ã®ç›´æ¥ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã§ã‚ã‚‹ãªã‚‰ã€ãƒ‘ã‚¹ã—ã¾ã™ã€‚
+[[m:Object#instance_of?]]ã‚‚å‚ç…§ã—ã¦ä¸‹ã•ã„ã€‚
 
-@param klass ´üÂÔ¤¹¤ë¥¯¥é¥¹¤ò»ØÄê¤·¤Ş¤¹¡£
+@param klass æœŸå¾…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param object ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-[[m:Test::Unit::Assertions#assert_kind_of]] ¤È¤Î°ã¤¤¤ËÃí°Õ¤·¤Æ²¼¤µ¤¤¡£
+[[m:Test::Unit::Assertions#assert_kind_of]] ã¨ã®é•ã„ã«æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_nil(object, message = "")    -> ()
 
-object ¤¬ nil ¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+object ãŒ nil ãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param object ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Test::Unit::Assertions#assert_not_nil]]
 
 --- assert_kind_of(klass, object, message = "")    -> ()
 
-object.kind_of?(klass) ¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+object.kind_of?(klass) ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-Àµ³Î¤Ë¤Ï¡¢object ¤¬ klass ¤«¤½¤Î¥µ¥Ö¥¯¥é¥¹¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¢¤ë¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
-¤Ş¤¿¡¢klass ¤¬¥â¥¸¥å¡¼¥ë¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢object ¤¬ klass ¤ò¥¤¥ó¥¯¥ë¡¼¥É¤·¤¿¥¯¥é¥¹¤«¤½¤Î¥µ¥Ö¥¯¥é¥¹¤Î
-¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¢¤ë¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+æ­£ç¢ºã«ã¯ã€object ãŒ klass ã‹ãã®ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã§ã‚ã‚‹ãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
+ã¾ãŸã€klass ãŒãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã‚ã‚‹å ´åˆã¯ã€object ãŒ klass ã‚’ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã—ãŸã‚¯ãƒ©ã‚¹ã‹ãã®ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã®
+ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã§ã‚ã‚‹ãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-[[m:Test::Unit::Assertions#assert_instance_of]] ¤È¤Î°ã¤¤¤ËÃí°Õ¤·¤Æ²¼¤µ¤¤¡£
+[[m:Test::Unit::Assertions#assert_instance_of]] ã¨ã®é•ã„ã«æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
 
-@param klass ´üÂÔ¤¹¤ë¥¯¥é¥¹¤«¥â¥¸¥å¡¼¥ë¤òÍ¿¤¨¤Ş¤¹¡£
+@param klass æœŸå¾…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param object ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Object#kind_of?]]
 
 --- assert_respond_to(object, method, message = "")    -> ()
 
-object.respond_to?(method) ¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+object.respond_to?(method) ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param object ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param method ¸¡¾Ú¤¹¤ë¥á¥½¥Ã¥É¤ò [[c:Symbol]] ¤«Ê¸»úÎó¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param method æ¤œè¨¼ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ [[c:Symbol]] ã‹æ–‡å­—åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Object#respond_to?]]
 
 --- assert_match(pattern, string, message = "")    -> ()
 
-string =~ pattern ¤¬¿¿¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+string =~ pattern ãŒçœŸãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param pattern ´üÂÔ¤¹¤ë¥Ñ¥¿¡¼¥ó¤òÊ¸»úÎó¤«Àµµ¬É½¸½¤Ç»ØÄê¤·¤Ş¤¹¡£Ê¸»úÎó¤ò
-               »ØÄê¤·¤¿¾ì¹ç¤ÏÆâÉô¤ÇÀµµ¬É½¸½¤ËÊÑ´¹¤µ¤ì¤Ş¤¹¡£
+@param pattern æœŸå¾…ã™ã‚‹ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’æ–‡å­—åˆ—ã‹æ­£è¦è¡¨ç¾ã§æŒ‡å®šã—ã¾ã™ã€‚æ–‡å­—åˆ—ã‚’
+               æŒ‡å®šã—ãŸå ´åˆã¯å†…éƒ¨ã§æ­£è¦è¡¨ç¾ã«å¤‰æ›ã•ã‚Œã¾ã™ã€‚
 
-@param string ¸¡¾Ú¤¹¤ëÊ¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param string æ¤œè¨¼ã™ã‚‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Test::Unit::Assertions#assert_no_match]]
 
 --- assert_same(expected, actual, message = "")    -> ()
 
-actual.equal?(expected) ¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+actual.equal?(expected) ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-[[m:Test::Unit::Assertions#assert_equal]] ¤È¤Î°ã¤¤¤ËÃí°Õ¤·¤Æ²¼¤µ¤¤¡£
+[[m:Test::Unit::Assertions#assert_equal]] ã¨ã®é•ã„ã«æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
 
-@param expected ´üÂÔ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param expected æœŸå¾…ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param actual ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param actual æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Object#equal?]], [[m:Test::Unit::Assertions#assert_not_same]]
 
 --- assert_operator(object1, operator, object2, message = "")    -> ()
 
-object1.send(operator, object2) ¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+object1.send(operator, object2) ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param object1 ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object1 æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param operator ¸¡¾Ú¤Î¤¿¤á¤Î±é»»»Ò(¥á¥½¥Ã¥É)¤ò [[c:Symbol]] ¤«
-                to_str ¥á¥½¥Ã¥É¤¬»ÈÍÑ¤Ç¤­¤ë¥ª¥Ö¥¸¥§¥¯¥È¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param operator æ¤œè¨¼ã®ãŸã‚ã®æ¼”ç®—å­(ãƒ¡ã‚½ãƒƒãƒ‰)ã‚’ [[c:Symbol]] ã‹
+                to_str ãƒ¡ã‚½ãƒƒãƒ‰ãŒä½¿ç”¨ã§ãã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param object2 ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object2 æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_raises(*args, &block)    -> object
 
-[[m:Test::Unit::Assertions#assert_raise]] ¤Î¥¨¥¤¥ê¥¢¥¹¤Ç¤¹¡£
+[[m:Test::Unit::Assertions#assert_raise]] ã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã§ã™ã€‚
 
-@param args [[m:Test::Unit::Assertions#assert_raise]] ¤Ë¤½¤Î¤Ş¤ŞÅÏ¤·¤Ş¤¹¡£
+@param args [[m:Test::Unit::Assertions#assert_raise]] ã«ãã®ã¾ã¾æ¸¡ã—ã¾ã™ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Test::Unit::Assertions#assert_raise]]
 
 --- flunk(message = "Flunked")    -> ()
 
-¾ï¤Ë¼ºÇÔ¤·¤Ş¤¹¡£
+å¸¸ã«å¤±æ•—ã—ã¾ã™ã€‚
 
-¤Á¤ã¤ó¤È¤·¤¿¥Æ¥¹¥È¤ò½ñ¤¯¤Ş¤Ç¤Î´Ö¡¢¥Æ¥¹¥È¤ò¼ºÇÔ¤µ¤»¤Æ¤ª¤­¤¿¤¤¾ì¹ç¤Ê¤É¤Ë»È¤¤¤Ş¤¹¡£
+ã¡ã‚ƒã‚“ã¨ã—ãŸãƒ†ã‚¹ãƒˆã‚’æ›¸ãã¾ã§ã®é–“ã€ãƒ†ã‚¹ãƒˆã‚’å¤±æ•—ã•ã›ã¦ãŠããŸã„å ´åˆãªã©ã«ä½¿ã„ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError ¾ï¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError å¸¸ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_throws(expected_symbol, message = "") { ... }    -> ()
 
-¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ :expected_symbol ¤¬ throw ¤µ¤ì¤¿¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã¦ :expected_symbol ãŒ throw ã•ã‚ŒãŸã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param expected_symbol throw ¤µ¤ì¤ë¤È´üÂÔ¤¹¤ë¥·¥ó¥Ü¥ë¤ò»ØÄê¤·¤Ş¤¹¡£
+@param expected_symbol throw ã•ã‚Œã‚‹ã¨æœŸå¾…ã™ã‚‹ã‚·ãƒ³ãƒœãƒ«ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_in_delta(expected_float, actual_float, delta, message = "")    -> ()
 
 (expected_float.to_f - actual_float.to_f).abs <= delta.to_f
-¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param expected_float ´üÂÔ¤¹¤ë¼Â¿ôÃÍ¤ò»ØÄê¤·¤Ş¤¹¡£
+@param expected_float æœŸå¾…ã™ã‚‹å®Ÿæ•°å€¤ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param actual_float ¸¡¾Ú¤¹¤ë¼Â¿ôÃÍ¤ò»ØÄê¤·¤Ş¤¹¡£
+@param actual_float æ¤œè¨¼ã™ã‚‹å®Ÿæ•°å€¤ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param delta µöÍÆ¤Ç¤­¤ë¸íº¹¤òÀµ¤Î¿ô¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param delta è¨±å®¹ã§ãã‚‹èª¤å·®ã‚’æ­£ã®æ•°ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_send(send_array, message = "")    -> ()
 
 send_array[0].__send__(send_array[1], *send_array[2..-1])
-¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param send_array ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò [¥ì¥·¡¼¥Ğ¡¢¥á¥½¥Ã¥É¡¢¥á¥½¥Ã¥É¤Î°ú¿ô]
-                  ¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param send_array æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ [ãƒ¬ã‚·ãƒ¼ãƒã€ãƒ¡ã‚½ãƒƒãƒ‰ã€ãƒ¡ã‚½ãƒƒãƒ‰ã®å¼•æ•°]
+                  ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- assert_block(message = "assert_block failed.") { ... }    -> ()
 
-¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¡¢¤½¤Î·ë²Ì¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã€ãã®çµæœãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-¿·¤·¤¤ assert ¥á¥½¥Ã¥É¤òÄêµÁ¤¹¤ë»ş¤Ë¤â»È¤¤¤Ş¤¹¡£
+æ–°ã—ã„ assert ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®šç¾©ã™ã‚‹æ™‚ã«ã‚‚ä½¿ã„ã¾ã™ã€‚
 
   def deny(boolean, message = nil)
     message = build_message message, '<?> is not false or nil.', boolean
@@ -239,115 +239,115 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
     end
   end
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@end
 
 --- assert_equal(expected, actual, message = nil)    -> ()
 
-expected == actual ¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+expected == actual ãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
 #@since 1.9.1
-[[m:MiniTest::Assertions#assert_same]]¤È¤Î°ã¤¤¤ËÃí°Õ¤·¤Æ²¼¤µ¤¤¡£
+[[m:MiniTest::Assertions#assert_same]]ã¨ã®é•ã„ã«æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
 #@else
-[[m:Test::Unit::Assertions#assert_same]]¤È¤Î°ã¤¤¤ËÃí°Õ¤·¤Æ²¼¤µ¤¤¡£
+[[m:Test::Unit::Assertions#assert_same]]ã¨ã®é•ã„ã«æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
 #@end
 
-@param expected ´üÂÔ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param expected æœŸå¾…ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param actual ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param actual æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@end
 
 @see [[m:Test::Unit::Assertions#assert_not_equal]], [[m:Object#==]]
 
 --- assert_not_equal(expected, actual, message = "")    -> ()
 
-expected != actual ¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+expected != actual ãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param expected Æ±¤¸¤â¤Î¤Ç¤Ï¤Ê¤¤¤È´üÂÔ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param expected åŒã˜ã‚‚ã®ã§ã¯ãªã„ã¨æœŸå¾…ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param actual ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param actual æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@end
 
 @see [[m:Test::Unit::Assertions#assert_equal]]
 
 --- assert_not_nil(object, message = "")    -> ()
 
-object ¤¬ nil ¤Ç¤Ê¤¤¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+object ãŒ nil ã§ãªã„ãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param object ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param object æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:MiniTest::Assertions#assert_nil]]
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Test::Unit::Assertions#assert_nil]]
 #@end
 
 --- assert_no_match(regexp, string, message = "")    -> ()
 
-regexp !~ string ¤¬¿¿¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+regexp !~ string ãŒçœŸãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param regexp ¥Ş¥Ã¥Á¤·¤Ê¤¤¤È´üÂÔ¤¹¤ë¥Ñ¥¿¡¼¥ó¤òÀµµ¬É½¸½¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param regexp ãƒãƒƒãƒã—ãªã„ã¨æœŸå¾…ã™ã‚‹ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’æ­£è¦è¡¨ç¾ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param string ¸¡¾Ú¤¹¤ëÊ¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param string æ¤œè¨¼ã™ã‚‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-[[m:MiniTest::Assertions#assert_match]] ¤È¤Ï°Û¤Ê¤ê regexp ¤Ë¤ÏÀµµ¬É½¸½
-°Ê³°¤Ï»ØÄê¤Ç¤­¤Ş¤»¤ó¡£
+[[m:MiniTest::Assertions#assert_match]] ã¨ã¯ç•°ãªã‚Š regexp ã«ã¯æ­£è¦è¡¨ç¾
+ä»¥å¤–ã¯æŒ‡å®šã§ãã¾ã›ã‚“ã€‚
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-[[m:Test::Unit::Assertions#assert_match]] ¤È¤Ï°Û¤Ê¤ê regexp ¤Ë¤ÏÀµµ¬É½
-¸½°Ê³°¤Ï»ØÄê¤Ç¤­¤Ş¤»¤ó¡£
+[[m:Test::Unit::Assertions#assert_match]] ã¨ã¯ç•°ãªã‚Š regexp ã«ã¯æ­£è¦è¡¨
+ç¾ä»¥å¤–ã¯æŒ‡å®šã§ãã¾ã›ã‚“ã€‚
 #@end
 
 --- assert_not_same(expected, actual, message = "")    -> ()
 
-!actual.equal?(expected) ¤¬¿¿¤Ê¤é¥Ñ¥¹¤·¤Ş¤¹¡£
+!actual.equal?(expected) ãŒçœŸãªã‚‰ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param expected ´üÂÔ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param expected æœŸå¾…ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param actual ¸¡¾Ú¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+@param actual æ¤œè¨¼ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Object#equal?]], [[m:MiniTest::Assertions#assert_same]]
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Object#equal?]], [[m:Test::Unit::Assertions#assert_same]]
 #@end
@@ -357,80 +357,80 @@ regexp !~ string ¤¬¿¿¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
 --- assert_raise(message = "") { ... }    -> object
 --- assert_raise(klass1, klass2, ..., message = "") { ... }    -> object
 
-¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬È¯À¸¤·¡¢¤½¤ÎÎã³°¤¬
-klass1, klass2,... ¤Î¤¤¤º¤ì¤«¤Î¥¯¥é¥¹¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ê¤é¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã¦ä¾‹å¤–ãŒç™ºç”Ÿã—ã€ãã®ä¾‹å¤–ãŒ
+klass1, klass2,... ã®ã„ãšã‚Œã‹ã®ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãªã‚‰ã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-assert ¤Ë¥Ñ¥¹¤·¤¿»ş¤Ï¡¢¼Âºİ¤ËÅê¤²¤é¤ì¤¿Îã³°¤òÊÖ¤·¤Ş¤¹¡£
+assert ã«ãƒ‘ã‚¹ã—ãŸæ™‚ã¯ã€å®Ÿéš›ã«æŠ•ã’ã‚‰ã‚ŒãŸä¾‹å¤–ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param klassX Îã³°¥¯¥é¥¹¤ò»ØÄê¤·¤Ş¤¹¡£
+@param klassX ä¾‹å¤–ã‚¯ãƒ©ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@end
 
 #@end
 
 --- build_message(head, template = nil, *arguments)
 
-¥Æ¥¹¥È¤¬¼ºÇÔ¤·¤¿¤È¤­¤ËÉ½¼¨¤µ¤ì¤ë¥á¥Ã¥»¡¼¥¸¤òºîÀ®¤·¤Ş¤¹¡£
+ãƒ†ã‚¹ãƒˆãŒå¤±æ•—ã—ãŸã¨ãã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ä½œæˆã—ã¾ã™ã€‚
 
-@param head template¤«¤éºîÀ®¤¹¤ë¥á¥Ã¥»¡¼¥¸¤ÎÁ°¤ËÉ½¼¨¤¹¤ëÊ¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param head templateã‹ã‚‰ä½œæˆã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å‰ã«è¡¨ç¤ºã™ã‚‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param template ºîÀ®¤¹¤ë¥á¥Ã¥»¡¼¥¸¤Î¥Æ¥ó¥×¥ì¡¼¥È¤òÊ¸»úÎó¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param template ä½œæˆã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param arguments template Æâ¤Î '?' ¤òÃÖ¤­´¹¤¨¤ë¥ª¥Ö¥¸¥§¥¯¥È¤òÇÛÎó¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param arguments template å†…ã® '?' ã‚’ç½®ãæ›ãˆã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é…åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@return ºîÀ®¤·¤¿¥á¥Ã¥»¡¼¥¸¤òTest::Unit::Assertions::AssertionMessage¤Î
-        ¥¤¥ó¥¹¥¿¥ó¥¹¤ÇÊÖ¤·¤Ş¤¹¡£
+@return ä½œæˆã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’Test::Unit::Assertions::AssertionMessageã®
+        ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã§è¿”ã—ã¾ã™ã€‚
 
-head ¤Ï template ¤ÎÁ°¤ËÄÉ²Ã¤µ¤ì¤Ş¤¹¡£template ¤Ë»ØÄê¤·¤¿Ê¸»úÎó¤Ë '?' ¤¬
-´Ş¤Ş¤ì¤Æ¤¤¤¿¾ì¹ç¤Ï¡¢arguments ¤Ë»ØÄê¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤½¤ì¤¾¤ìÃÖ¤­´¹¤¨
-¤é¤ì¤Ş¤¹¡£
+head ã¯ template ã®å‰ã«è¿½åŠ ã•ã‚Œã¾ã™ã€‚template ã«æŒ‡å®šã—ãŸæ–‡å­—åˆ—ã« '?' ãŒ
+å«ã¾ã‚Œã¦ã„ãŸå ´åˆã¯ã€arguments ã«æŒ‡å®šã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãã‚Œãã‚Œç½®ãæ›ãˆ
+ã‚‰ã‚Œã¾ã™ã€‚
 
 --- assert_nothing_raised(message = "") { ... }
 --- assert_nothing_raised(klass1, klass2, ..., message = "") { ... }
 
-¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬µ¯¤­¤Ê¤±¤ì¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã¦ä¾‹å¤–ãŒèµ·ããªã‘ã‚Œã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÈ¯À¸¤·¤¿Îã³°¤¬ klass1, klass2, ..., ¤Î¤¤¤º¤ì¤«¤Î¥¯¥é¥¹¤Î
-¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢assert ¤Ï¼ºÇÔ°·¤¤¤È¤Ê¤ê¡¢Test::Unit::AssertionFailedError
-¤òÅê¤²¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï¡¢¥¨¥é¡¼°·¤¤¤È¤Ê¤êÈ¯À¸¤·¤¿Îã³°¤òºÆ¤ÓÅê¤²¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã¦ç™ºç”Ÿã—ãŸä¾‹å¤–ãŒ klass1, klass2, ..., ã®ã„ãšã‚Œã‹ã®ã‚¯ãƒ©ã‚¹ã®
+ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã§ã‚ã‚‹å ´åˆã¯ã€assert ã¯å¤±æ•—æ‰±ã„ã¨ãªã‚Šã€Test::Unit::AssertionFailedError
+ã‚’æŠ•ã’ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã¯ã€ã‚¨ãƒ©ãƒ¼æ‰±ã„ã¨ãªã‚Šç™ºç”Ÿã—ãŸä¾‹å¤–ã‚’å†ã³æŠ•ã’ã¾ã™ã€‚
 
-@param klassX Îã³°¥¯¥é¥¹¤ò»ØÄê¤·¤Ş¤¹¡£
+@param klassX ä¾‹å¤–ã‚¯ãƒ©ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@end
 
 --- assert_nothing_thrown(message = "") { ... }    -> ()
 
-¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ throw ¤¬µ¯¤³¤é¤Ê¤±¤ì¤Ğ¥Ñ¥¹¤·¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã¦ throw ãŒèµ·ã“ã‚‰ãªã‘ã‚Œã°ãƒ‘ã‚¹ã—ã¾ã™ã€‚
 
-@param message assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÉ½¼¨¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÊ¸»úÎó¤Ç»ØÄê¤·
-               ¤Ş¤¹¡£»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÉ½¼¨¤·¤Ş¤»¤ó¡£
+@param message assert ãŒå¤±æ•—ã—ãŸæ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—
+               ã¾ã™ã€‚æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯è¡¨ç¤ºã—ã¾ã›ã‚“ã€‚
 
 #@since 1.9.1
-@raise MiniTest::Assertion assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise MiniTest::Assertion assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@else
-@raise Test::Unit::AssertionFailedError assert ¤¬¼ºÇÔ¤·¤¿»ş¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Test::Unit::AssertionFailedError assert ãŒå¤±æ•—ã—ãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 #@end
 
 #@since 1.9.1
 --- mu_pp(obj)     -> String
 
-obj ¤ò¿Í´Ö¤¬ÆÉ¤ß¤ä¤¹¤¤·Á¤ÎÊ¸»úÎóÉ½¸½¤Ë¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+obj ã‚’äººé–“ãŒèª­ã¿ã‚„ã™ã„å½¢ã®æ–‡å­—åˆ—è¡¨ç¾ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param obj Ç¤°Õ¤Î¥ª¥Ö¥¸¥§¥¯¥È
+@param obj ä»»æ„ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-@return obj ¤ò¿Í´Ö¤¬ÆÉ¤ß¤ä¤¹¤¤·Á¼°¤Ë¤·¤¿Ê¸»úÎó
+@return obj ã‚’äººé–“ãŒèª­ã¿ã‚„ã™ã„å½¢å¼ã«ã—ãŸæ–‡å­—åˆ—
 #@end

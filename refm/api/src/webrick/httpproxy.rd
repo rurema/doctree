@@ -1,6 +1,6 @@
 require webrick/httpserver
 
-�ץ������ε�ǽ���󶡤���饤�֥��Ǥ���CONNECT �᥽�åɤˤ��б����Ƥ��ޤ���
+プロクシの機能を提供するライブラリです。CONNECT メソッドにも対応しています。
 
 #@include(httpproxy/HTTPProxyServer)
 #@include(httpproxy/NullReader)

@@ -3,101 +3,101 @@ require rubygems/dependency_list
 require rubygems/doc_manager
 require rubygems/user_interaction
 
-Gem �Υ��󥤥󥹥ȡ����Ԥ�����Υ饤�֥��Ǥ���
+Gem のアンインストールを行うためのライブラリです。
 
 = class Gem::Uninstaller
 include Gem::UserInteraction
 
-Gem �Υ��󥤥󥹥ȡ����Ԥ�����Υ��饹�Ǥ���
+Gem のアンインストールを行うためのクラスです。
 
 == Public Instance Methods
 
 --- ask_if_ok(spec) -> bool
 
-���󥤥󥹥ȡ�����ꤵ�줿 Gem ��������Ȱ�¸�ط����������ʤ��ʤ���˸ƤӽФ���ޤ���
+アンインストール指定された Gem を削除すると依存関係を満たせなくなる場合に呼び出されます。
 
-@param spec ���󥤥󥹥ȡ�����ꤵ��Ƥ��� Gem �� [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param spec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
 --- bin_dir -> String
 
-Gem �ǥ��󥹥ȡ��뤵�줿���ޥ�ɤΤ���ǥ��쥯�ȥ���֤��ޤ���
+Gem でインストールされたコマンドのあるディレクトリを返します。
 
 --- dependencies_ok?(spec) -> bool
 
-���󥤥󥹥ȡ�����ꤵ�줿 Gem �������Ƥ��¸�ط������������Ȥ��Ǥ��뤫
-�ɤ��������å����ޤ���
+アンインストール指定された Gem を削除しても依存関係を満たすことができるか
+どうかチェックします。
 
-@param spec ���󥤥󥹥ȡ�����ꤵ��Ƥ��� Gem �� [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param spec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
 --- gem_home -> String
 
-Gem �����󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ���֤��ޤ���
+Gem がインストールされているディレクトリを返します。
 
 --- path_ok?(spec) -> bool
 
-���󥤥󥹥ȡ�����ꤵ��Ƥ��� Gem �����󥹥ȡ��뤵��Ƥ���ѥ�������å����ޤ���
+アンインストール指定されている Gem がインストールされているパスをチェックします。
 
-@param spec [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param spec [[c:Gem::Specification]] を指定します。
 
 
 --- remove(spec, list)
 #@# -> discard
 
-���ꤵ�줿 Gem �������ޤ���
+指定された Gem を削除します。
 
-@param spec ���󥤥󥹥ȡ�����ꤵ��Ƥ��� Gem �� [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param spec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
-@param list ���󥤥󥹥ȡ��뤹�� Gem �Υꥹ�Ȥ���ꤷ�ޤ���
-            ���Υѥ�᡼�����˲�Ū���ѹ�����ޤ���
+@param list アンインストールする Gem のリストを指定します。
+            このパラメータは破壊的に変更されます。
 
-@raise Gem::DependencyRemovalException ���󥤥󥹥ȡ�����ꤵ�줿 Gem ���������
-                                       ��¸�ط�����������ȯ�����ޤ���
+@raise Gem::DependencyRemovalException アンインストール指定された Gem を削除すると
+                                       依存関係が壊れる場合に発生します。
 
-@raise Gem::GemNotInHomeException ���󥤥󥹥ȡ�����ꤵ�줿 Gem �������
-                                  �ǥ��쥯�ȥ�ˤ���ʤ����ʤ�����ȯ�����ޤ���
+@raise Gem::GemNotInHomeException アンインストール指定された Gem が所定の
+                                  ディレクトリにそんないしない場合に発生します。
 
 --- remove_all(list)
 #@# -> discard
 
-list ��Ϳ����줿 Gem �����ƥ��󥤥󥹥ȡ��뤷�ޤ���
+list で与えられた Gem を全てアンインストールします。
 
-@param list ���󥤥󥹥ȡ��뤹�� Gem �Υꥹ�Ȥ���ꤷ�ޤ���
+@param list アンインストールする Gem のリストを指定します。
 
 --- remove_executables(gemspec)
 #@# -> discard
 
-Ϳ����줿 [[c:Gem::Specification]] ���б�����¹ԥե�����������ޤ���
+与えられた [[c:Gem::Specification]] に対応する実行ファイルを削除します。
 
-@param gemspec ���󥤥󥹥ȡ�����ꤵ��Ƥ��� Gem �� [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param gemspec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
 --- spec -> Gem::Specification
 
-[[m:Gem::Uninstaller#uninstall_gem]] �μ¹���Τߥ��åȤ���ޤ���
+[[m:Gem::Uninstaller#uninstall_gem]] の実行中のみセットされます。
 
 --- uninstall
 #@# -> discard
 
-Gem �򥢥󥤥󥹥ȡ��뤷�ޤ���
+Gem をアンインストールします。
 
-���ڥå��ե�����䥭��å���������ޤ���
+スペックファイルやキャッシュも削除します。
 
 --- uninstall_gem(spec, specs)
 #@# -> discard
 
-Ϳ����줿 spec ���б����� Gem �򥢥󥤥󥹥ȡ��뤷�ޤ���
+与えられた spec に対応する Gem をアンインストールします。
 
-@param spec ���󥤥󥹥ȡ�����ꤵ��Ƥ��� Gem �� [[c:Gem::Specification]] ����ꤷ�ޤ���
+@param spec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
-@param specs ���󥤥󥹥ȡ��뤹�� Gem �Υꥹ�Ȥ���ꤷ�ޤ���
-             ���Υѥ�᡼�����˲�Ū���ѹ�����ޤ���
+@param specs アンインストールする Gem のリストを指定します。
+             このパラメータは破壊的に変更されます。
 
 
 == Singleton Methods
 
 --- new(gem, options = {})
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param gem ���󥤥󥹥ȡ��뤹�� Gem ����ꤷ�ޤ���
+@param gem アンインストールする Gem を指定します。
 
-@param options ���ץ�������ꤷ�ޤ���
+@param options オプションを指定します。

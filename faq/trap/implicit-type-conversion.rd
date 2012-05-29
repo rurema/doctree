@@ -1,44 +1,44 @@
-= ���Ѵ�
+= 型変換
 
-* nil.to_a��(({[nil]}))�ǤϤʤ�(({[]}))�Ȥʤ롣
+* nil.to_aは(({[nil]}))ではなく(({[]}))となる。
 
-* nil.to_s �� (({""})) �ʤΤˡ�(({puts nil})) �� (({print nil})) �� (({nil})) ��ɽ�����롣
+* nil.to_s は (({""})) なのに、(({puts nil})) や (({print nil})) が (({nil})) を表示する。
 
-* 16 �ʿ�ʸ����� 10 �ʿ�ʸ������Ѵ�����
+* 16 進数文字列を 10 進数文字列に変換する
 
     i = "f".hex
     print i, "->" ,format("%x",i)
 
-* oct �ε�ư
+* oct の挙動
 
-  String#oct ��ʸ����η����ˤ��8�ʰʳ��ؤ��Ѵ���Ԥ�
+  String#oct は文字列の形式により8進以外への変換を行う
 
     p '0b10'.oct #=> 2
     p   '10'.oct #=> 8
     p  '010'.oct #=> 8
     p '0x10'.oct #=> 16
 
-  String#hex �Ͼ��16���Ѵ���Ԥ�
+  String#hex は常に16進変換を行う
 
     p '0b10'.hex #=> 2832
     p   '10'.hex #=> 16
     p  '010'.hex #=> 16
     p '0x10'.hex #=> 16
 
-* ����ؤ� nil ������
+* 配列への nil の挿入
 
     a = [1,2,3]
-    a[1,1] = nil  # a[1.1] = nil.to_a ��ԤäƤ���
+    a[1,1] = nil  # a[1.1] = nil.to_a を行っている
     p a # [1,3]
 
     a = [1,2,3]
     a[1,1] = [nil]
     p a # [1,nil,3]
 
-  ����ϡ�nil.to_a �� [] (��������)���֤�����˵�����ޤ���
-  ���ʤߤ� nil.to_s �� "" (����ʸ����)���֤��ޤ���
+  これは、nil.to_a が [] (空の配列)を返すために起こります。
+  ちなみに nil.to_s は "" (空の文字列)を返します。
 
-* ���ͱ黻�θ���((<ruby-list:25173>))(Ruby�˸¤�ʤ�)
+* 数値演算の誤差((<ruby-list:25173>))(Rubyに限らない)
     (500.5 * 1).round   #=> 501
     (500 * 1.001).round #=> 500
 

@@ -1,8 +1,8 @@
 = module Enumerable
 
-�����֤���Ԥʤ����饹�Τ���� Mix-in�����Υ⥸�塼���
-�᥽�åɤ����� each ���Ѥ����������Ƥ���Τǡ����󥯥롼��
-���륯�饹�ˤ� each ���������Ƥ��ʤ���Фʤ�ޤ���
+繰り返しを行なうクラスのための Mix-in。このモジュールの
+メソッドは全て each を用いて定義されているので、インクルード
+するクラスには each が定義されていなければなりません。
 
 == Instance Methods
 
@@ -10,15 +10,15 @@
 --- all?               -> bool
 --- all? {|item| ... } -> bool
 
-���٤Ƥ����Ǥ����Ǥ������ true ���֤��ޤ���
-���Ǥ������Ǥ�����С��������� false ���֤��ޤ���
+すべての要素が真である場合に true を返します。
+偽である要素があれば、ただちに false を返します。
 
-�֥��å���ȼ�����ϡ������Ǥ��Ф��ƥ֥��å���ɾ���������٤Ƥη��
-�����Ǥ������ true ���֤��ޤ����֥��å��������֤��������ǡ�
-�������� false ���֤��ޤ���
+ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
+が真である場合に true を返します。ブロックが偽を返した時点で、
+ただちに false を返します。
 
-��:
-    # ���٤����ο�����
+例:
+    # すべて正の数か？
     p [5,  6, 7].all? {|v| v > 0 }   # => true
     p [5, -1, 7].all? {|v| v > 0 }   # => false
 #@end
@@ -27,14 +27,14 @@
 --- any?               -> bool
 --- any? {|item| ... } -> bool
 
-���٤Ƥ����Ǥ����Ǥ������ false ���֤��ޤ���
-���Ǥ������Ǥ�����С��������� true ���֤��ޤ���
+すべての要素が偽である場合に false を返します。
+真である要素があれば、ただちに true を返します。
 
-�֥��å���ȼ�����ϡ������Ǥ��Ф��ƥ֥��å���ɾ���������٤Ƥη��
-�����Ǥ������ false ���֤��ޤ����֥��å��������֤�������
-�ǡ��������� true ���֤��ޤ���
+ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
+が偽である場合に false を返します。ブロックが真を返した時点
+で、ただちに true を返します。
 
-��:
+例:
     p [1, 2, 3].any? {|v| v > 3 }   # => false
     p [1, 2, 3].any? {|v| v > 1 }   # => true
 #@end
@@ -46,19 +46,19 @@
 --- collect {|item| ... } -> [object]
 --- map {|item| ... }     -> [object]
 
-�����Ǥ��Ф��ƥ֥��å���ɾ��������̤����ƴޤ�������֤��ޤ���
+各要素に対してブロックを評価した結果を全て含む配列を返します。
 
 #@until 1.9.1
-�֥��å����ά������硢
-obj.collect {|item| item } ��¹Ԥ��ޤ���
-����� [[m:Enumerable#to_a]] ��Ʊ���Ǥ���
+ブロックを省略した場合、
+obj.collect {|item| item } を実行します。
+これは [[m:Enumerable#to_a]] と同じです。
 #@else
-�֥��å����ά������硢����������������֤���¹Ԥ������η�̤Ȥ���
-������������֤��褦�� [[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+ブロックを省略した場合、上で説明した繰り返しを実行し、その結果として
+得られる配列を返すような [[c:Enumerator]] オブジェクトを返します。
 #@end
 
-��:
-    # ���٤� 3 �ܤˤ���
+例:
+    # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
 #@since 1.8.7
@@ -74,17 +74,17 @@ obj.collect {|item| item } ��¹Ԥ��ޤ���
 #@end
 --- each_with_index {|item, index| ... } -> self
 
-���ǤȤ��Υ���ǥå�����֥��å����Ϥ��Ʒ����֤��ޤ���
+要素とそのインデックスをブロックに渡して繰り返します。
 
-self ���֤��ޤ���
+self を返します。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ�
-���ǤȤ��Υ���ǥå����򷫤��֤��褦��
-[[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、
+要素とそのインデックスを繰り返すような
+[[c:Enumerator]] を返します。
 #@end
 
-��:
+例:
     [5, 10, 15].each_with_index do |n, idx|
       p [n, idx]
     end
@@ -110,30 +110,30 @@ self ���֤��ޤ���
 --- find(ifnone = nil) {|item| ... }   -> object
 --- detect(ifnone = nil) {|item| ... } -> object
 
-���Ǥ��Ф��ƥ֥��å���ɾ�������ͤ����ˤʤä��ǽ�����Ǥ��֤��ޤ���
+要素に対してブロックを評価した値が真になった最初の要素を返します。
 
-���ˤʤ����Ǥ����Ĥ��餺��ifnone ����ꤵ��Ƥ��ʤ��Ȥ��� nil ���֤��ޤ���
-���ˤʤ����Ǥ����Ĥ��餺��ifnone �����ꤵ��Ƥ���Ȥ��� ifnone �� call ������̤��֤��ޤ���
+真になる要素が見つからず、ifnone も指定されていないときは nil を返します。
+真になる要素が見つからず、ifnone が指定されているときは ifnone を call した結果を返します。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ��Ф��֥��å��򿿤ˤʤ�ޤ�ɾ�������ǽ��
-���ˤʤä��ͤ��֤��褦�� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、各要素に対しブロックを真になるまで評価し、最初に
+真になった値を返すような [[c:Enumerator]] を返します。
 #@end
 
 #@since 1.8.0
-@arg ifnone  call �᥽�åɤ���ĥ��֥������� (�㤨�� [[c:Proc]]) ����ꤷ�ޤ���
+@arg ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
-��:
-    # �ǽ�� 3 ���ܿ���õ��
+例:
+    # 最初の 3 の倍数を探す
     p [1, 2, 3, 4, 5].find {|i| i % 3 == 0 }   # => 3
     p [2, 2, 2, 2, 2].find {|i| i % 3 == 0 }   # => nil
 
-    # ifnone �λ�����
+    # ifnone の使用例
     ifnone = proc { raise ArgumentError, "item not found" }
     p [1, 2, 3, 4, 5].find(ifnone) {|i| i % 7 == 0 }
         # ArgumentError: item not found
 #@else
-@arg ifnone  ʸ����ޤ��� call �᥽�åɤ���ĥ��֥������� (�㤨�� [[c:Proc]]) ����ꤷ�ޤ���
+@arg ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
     [1, 2, 3].find("raise") {|v| v > 4 }
         # => -:1: unhandled exception
@@ -151,26 +151,26 @@ self ���֤��ޤ���
 --- find_all {|item| ... } -> [object]
 --- select {|item| ... }   -> [object]
 
-�����Ǥ��Ф��ƥ֥��å���ɾ�������ͤ����Ǥ��ä����Ǥ����ƴޤ������
-�֤��ޤ������ˤʤ����Ǥ��ҤȤĤ�ʤ��ä����϶���������֤��ޤ���
+各要素に対してブロックを評価した値が真であった要素を全て含む配列を
+返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ��Ф��֥��å���ɾ����
-���ˤʤä��ͤ�������֤��褦�� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、各要素に対しブロックを評価し
+真になった値の配列を返すような [[c:Enumerator]] を返します。
 #@end
 
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
 
-pattern === item ����Ω�������Ǥ����ƴޤ��������֤��ޤ���
+pattern === item が成立する要素を全て含んだ配列を返します。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿���ˤϾ�����Ω�������Ǥ��Ф���
-���줾��֥��å���ɾ���������η�̤�������֤��ޤ���
-�ޥå��������Ǥ��ҤȤĤ�ʤ��ä����϶���������֤��ޤ���
+ブロックとともに呼び出された時には条件の成立した要素に対して
+それぞれブロックを評価し、その結果の配列を返します。
+マッチする要素がひとつもなかった場合は空の配列を返します。
 
-@param pattern ��===�ץ᥽�åɤ���ĥ��֥������Ȥ���ꤷ�ޤ���
+@param pattern 「===」メソッドを持つオブジェクトを指定します。
 
-��:
+例:
     ['aa', 'bb', 'cc', 'dd', 'ee'].grep(/[bc]/)  # => ["bb", "cc"]
 
 #@since 1.9.1
@@ -189,34 +189,34 @@ pattern === item ����Ω�������Ǥ����ƴޤ��������֤��ޤ���
 --- reduce(init, sym)                               -> object
 #@end
 
-�ꥹ�ȤΤ����ߤ��߱黻��Ԥ��ޤ���
+リストのたたみこみ演算を行います。
 
-�ǽ�˽���� init �� self �κǽ�����Ǥ�����˥֥��å���¹Ԥ��ޤ���
-2 ���ܰʹߤΥ롼�פǤϡ����Υ֥��å��μ¹Է�̤�
-self �μ������Ǥ�����˽缡�֥��å���¹Ԥ��ޤ���
-�������ƺǸ�����ǤޤǷ����֤����Ǹ�Υ֥��å��μ¹Է�̤��֤��ޤ���
+最初に初期値 init と self の最初の要素を引数にブロックを実行します。
+2 回目以降のループでは、前のブロックの実行結果と
+self の次の要素を引数に順次ブロックを実行します。
+そうして最後の要素まで繰り返し、最後のブロックの実行結果を返します。
 
-���Ǥ�¸�ߤ��ʤ����� init ���֤��ޤ���
+要素が存在しない場合は init を返します。
 
-����� init ���ά�������ϡ�
-�ǽ����Ƭ�����Ǥ� 2 ���ܤ����Ǥ�֥��å����Ϥ��ޤ���
-�ޤ����Ǥ� 1 �Ĥ����ʤ���Х֥��å���¹Ԥ����˺ǽ�����Ǥ��֤��ޤ���
-���Ǥ��ʤ���Х֥��å���¹Ԥ����� nil ���֤��ޤ���
+初期値 init を省略した場合は、
+最初に先頭の要素と 2 番目の要素をブロックに渡します。
+また要素が 1 つしかなければブロックを実行せずに最初の要素を返します。
+要素がなければブロックを実行せずに nil を返します。
 
-@param init  �ǽ�� result ���ͤǤ���Ǥ�դΥ��֥������Ȥ��Ϥ��ޤ���
+@param init  最初の result の値です。任意のオブジェクトが渡せます。
 #@since 1.8.7
-@param sym   �֥��å�������˻Ȥ���᥽�å�̾��ɽ�� [[c:Symbol]] ���֥������Ȥ���ꤷ�ޤ���
-             �¹Է�̤��Ф��� sym �Ȥ���̾���Υ᥽�åɤ��ƤФ�ޤ���             
+@param sym   ブロックの代わりに使われるメソッド名を表す [[c:Symbol]] オブジェクトを指定します。
+             実行結果に対して sym という名前のメソッドが呼ばれます。             
 #@end
-��:
+例:
 
-  # ��פ�׻����롣
+  # 合計を計算する。
   p [2, 3, 4, 5].inject {|result, item| result + item }        #=> 14
  
-  # �����¤�׻����롣����ͤ򥻥åȤ���ɬ�פ����롣
+  # 自乗和を計算する。初期値をセットする必要がある。
   p [2, 3, 4, 5].inject(0) {|result, item| result + item**2 }  #=> 54
 
-���μ��ϰʲ��Τ褦�˽񤤤Ƥ�Ʊ����̤������ޤ���
+この式は以下のように書いても同じ結果が得られます。
 
   result = 0
   [1, 2, 3, 4, 5].each {|v| result += v }
@@ -232,29 +232,29 @@ self �μ������Ǥ�����˽缡�֥��å���¹Ԥ��ޤ���
 --- member?(val)  -> bool
 --- include?(val) -> bool
 
-val �� == �δط��ˤ������Ǥ�ޤ�Ȥ������֤��ޤ���
+val と == の関係にある要素を含むとき真を返します。
 
-@arg val   Ǥ�դΥ��֥�������
+@arg val   任意のオブジェクト
 
 --- max -> object
 
-��������Ǥ��֤��ޤ���
-�����Ǥ��ߤ��� <=> �᥽�åɤ���ӤǤ��뤳�Ȥ��ꤷ�Ƥ��ޤ���
+最大の要素を返します。
+全要素が互いに <=> メソッドで比較できることを仮定しています。
 
-���Ǥ�¸�ߤ��ʤ���� nil ���֤��ޤ���
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+要素が存在しなければ nil を返します。
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
 --- max {|a, b| ... } -> object
 
-�֥��å���ɾ����̤ǳ����Ǥ��羮Ƚ���Ԥ�����������Ǥ��֤��ޤ���
-���Ǥ�¸�ߤ��ʤ���� nil ���֤��ޤ���
+ブロックの評価結果で各要素の大小判定を行い、最大の要素を返します。
+要素が存在しなければ nil を返します。
 
-�֥��å����ͤϡ�a > b �ΤȤ�����
-a == b �ΤȤ� 0��a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
+ブロックの値は、a > b のとき正、
+a == b のとき 0、a < b のとき負の整数を、期待しています。
 
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
-@raise TypeError    �֥��å��������ʳ����֤����Ȥ���ȯ�����ޤ���
+@raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -264,20 +264,20 @@ a == b �ΤȤ� 0��a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
 #@end
 --- max_by{|item| ... } -> object
 
-�����Ǥ���֤˥֥��å����Ϥ��Ƽ¹Ԥ���
-����ɾ����̤� <=> ����Ӥ��ơ�
-����Ǥ��ä��ͤ��б����븵�����Ǥ��֤��ޤ���
+各要素を順番にブロックに渡して実行し、
+その評価結果を <=> で比較して、
+最大であった値に対応する元の要素を返します。
 
-���Ǥ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+要素が存在しないときは nil を返します。
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
-[[m:Enumerable#max]] �� [[m:Enumerable#max_by]] ��
-�㤤�� [[m:Enumerable#sort]] �� [[m:Enumerable#sort_by]] �ΰ㤤��Ʊ���Ǥ���
+[[m:Enumerable#max]] と [[m:Enumerable#max_by]] の
+違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ���֤˥֥��å����Ϥ���ɾ������
-���η�̤��Ǿ��Ȥʤ��ͤ��б��������Ǥ��֤� [[c:Enumerator]] ��
-�֤��ޤ���
+ブロックを省略した場合は、各要素を順番にブロックに渡して評価し、
+その結果が最小となる値に対応する要素を返す [[c:Enumerator]] を
+返します。
 #@end
 
 @see [[m:Enumerable#sort_by]]
@@ -286,23 +286,23 @@ a == b �ΤȤ� 0��a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
 
 --- min -> object
 
-�Ǿ������Ǥ��֤��ޤ���
-�����Ǥ��ߤ��� <=> �᥽�åɤ���ӤǤ��뤳�Ȥ��ꤷ�Ƥ��ޤ���
+最小の要素を返します。
+全要素が互いに <=> メソッドで比較できることを仮定しています。
 
-���Ǥ�¸�ߤ��ʤ���� nil ���֤��ޤ���
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+要素が存在しなければ nil を返します。
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
 --- min {|a, b| ... } -> object
 
-�֥��å���ɾ����̤ǳ����Ǥ��羮Ƚ���Ԥ����Ǿ������Ǥ��֤��ޤ���
-���Ǥ�¸�ߤ��ʤ���� nil ���֤��ޤ���
+ブロックの評価結果で各要素の大小判定を行い、最小の要素を返します。
+要素が存在しなければ nil を返します。
 
-�֥��å����ͤϡ�a > b �ΤȤ�����a == b �ΤȤ� 0��
-a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
+ブロックの値は、a > b のとき正、a == b のとき 0、
+a < b のとき負の整数を、期待しています。
 
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
-@raise TypeError    �֥��å��������ʳ����֤����Ȥ���ȯ�����ޤ���
+@raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -312,22 +312,22 @@ a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
 #@end
 --- min_by {|item| ... } -> object
 
-�����Ǥ���֤˥֥��å����Ϥ���ɾ������
-����ɾ����̤� <=> ����Ӥ��ơ�
-�Ǿ��Ǥ��ä��ͤ��б����븵�����Ǥ��֤��ޤ���
+各要素を順番にブロックに渡して評価し、
+その評価結果を <=> で比較して、
+最小であった値に対応する元の要素を返します。
 
-���Ǥ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+要素が存在しないときは nil を返します。
 
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ���֤˥֥��å����Ϥ���ɾ������
-���η�̤��Ǿ��Ȥʤ��ͤ��б��������Ǥ��֤� [[c:Enumerator]] ��
-�֤��ޤ���
+ブロックを省略した場合は、各要素を順番にブロックに渡して評価し、
+その結果が最小となる値に対応する要素を返す [[c:Enumerator]] を
+返します。
 #@end
 
-[[m:Enumerable#min]] �� [[m:Enumerable#min_by]] ��
-�㤤�� [[m:Enumerable#sort]] �� [[m:Enumerable#sort_by]] �ΰ㤤��Ʊ���Ǥ���
+[[m:Enumerable#min]] と [[m:Enumerable#min_by]] の
+違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
 
 @see [[m:Enumerable#sort_by]]
 
@@ -342,18 +342,18 @@ a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
 #@end
 --- partition {|item| ... } -> [[object], [object]]
 
-�����Ǥ򡢥֥��å��ξ������������Ǥ��������ʤ����Ǥ�ʬ�䤷�ޤ���
-�����Ǥ��Ф��ƥ֥��å���ɾ�����ơ������ͤ����Ǥ��ä����Ǥ�����ȡ�
-���Ǥ��ä����Ǥ������ 2 �Ĥ������������֤��ޤ���
+各要素を、ブロックの条件を満たす要素と満たさない要素に分割します。
+各要素に対してブロックを評価して、その値が真であった要素の配列と、
+偽であった要素の配列の 2 つを配列に入れて返します。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ��Ф��֥��å���ɾ������
-��Τ褦�ˤ����ͤ����Ǥ��ä����Ǥ�����ȡ�
-���Ǥ��ä����Ǥ�����Υڥ����֤��褦�� [[c:Enumerator]] ��
-�֤��ޤ���
+ブロックを省略した場合は、各要素に対しブロックを評価し、
+上のようにその値が真であった要素の配列と、
+偽であった要素の配列のペアを返すような [[c:Enumerator]] を
+返します。
 #@end
 
-��:
+例:
 
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
@@ -367,18 +367,18 @@ a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
 #@end
 --- reject {|item| ... } -> [object]
 
-�����Ǥ��Ф��ƥ֥��å���ɾ������
-�����ͤ����Ǥ��ä����Ǥ򽸤᤿������������֤��ޤ���
-����ȿž������ select �Ǥ���
+各要素に対してブロックを評価し、
+その値が偽であった要素を集めた新しい配列を返します。
+条件を反転させた select です。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ��Ф��֥��å���ɾ����
-���ˤʤä��ͤ�������֤��褦�� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、各要素に対しブロックを評価し
+偽になった値の配列を返すような [[c:Enumerator]] を返します。
 #@end
 
-��:
+例:
 
-  # ������������� (����򽸤��)
+  # 偶数を除外する (奇数を集める)
   [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
 
 @see [[m:Enumerable#select]]
@@ -386,23 +386,23 @@ a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
 --- sort               -> [object]
 --- sort {|a, b| ... } -> [object]
 
-���Ƥ����Ǥ򾺽�˥����Ȥ�����������������֤��ޤ���
+全ての要素を昇順にソートした配列を生成して返します。
 
-�֥��å��ʤ��ΤȤ��� <=> �᥽�åɤ����Ǥ��Ф��ƸƤӡ�
-���η�̤��Ȥ˥����Ȥ��ޤ���
+ブロックなしのときは <=> メソッドを要素に対して呼び、
+その結果をもとにソートします。
 
-<=> �ʳ��ǥ����Ȥ��������ϡ��֥��å�����ꤷ�ޤ���
-���ξ�硢�֥��å���ɾ����̤򸵤˥����Ȥ��ޤ���
-�֥��å����ͤϡ�a > b �ΤȤ�����a == b �ΤȤ� 0��
-a < b �ΤȤ���������򡢴��Ԥ��Ƥ��ޤ���
-�֥��å��������ʳ����֤����Ȥ����㳰 [[c:TypeError]] ��ȯ�����ޤ���
+<=> 以外でソートしたい場合は、ブロックを指定します。
+この場合、ブロックの評価結果を元にソートします。
+ブロックの値は、a > b のとき正、a == b のとき 0、
+a < b のとき負の整数を、期待しています。
+ブロックが整数以外を返したときは例外 [[c:TypeError]] が発生します。
 
-Enumerable#sort �ϰ���ǤϤ���ޤ��� (unstable sort)��
-����ʥ����Ȥ�ɬ�פʾ��� [[m:Enumerable#sort_by]] ��Ȥäƹ��פ���ɬ�פ�����ޤ���
-�ܤ����� [[m:Enumerable#sort_by]] �ι��ܤ򻲾Ȥ��Ƥ���������
+Enumerable#sort は安定ではありません (unstable sort)。
+安定なソートが必要な場合は [[m:Enumerable#sort_by]] を使って工夫する必要があります。
+詳しくは [[m:Enumerable#sort_by]] の項目を参照してください。
 
-�� ��ӷ�̤�Ʊ�����Ǥϸ��ν���̤���¤֥����Ȥ�
-�ְ���ʥ����� (stable sort)�פȸ����ޤ���
+※ 比較結果が同じ要素は元の順序通りに並ぶソートを
+「安定なソート (stable sort)」と言います。
 
 @see [[m:Enumerable#sort_by]]
 
@@ -416,9 +416,9 @@ Enumerable#sort �ϰ���ǤϤ���ޤ��� (unstable sort)��
 #@end
 --- sort_by {|item| ... } -> [object]
 
-�֥��å���ɾ����̤� <=> �᥽�åɤ���Ӥ��뤳�Ȥǡ�self ��
-��˥����Ȥ��ޤ��������Ȥ��줿����򿷤������������֤��ޤ���
-�Ĥޤꡢ�ʲ��Ȥۤ�Ʊ��ư��򤷤ޤ���
+ブロックの評価結果を <=> メソッドで比較することで、self を昇
+順にソートします。ソートされた配列を新たに生成して返します。
+つまり、以下とほぼ同じ動作をします。
 
   class Array
     def sort_by
@@ -428,19 +428,19 @@ Enumerable#sort �ϰ���ǤϤ���ޤ��� (unstable sort)��
     end
   end
 
-[[m:Enumerable#sort]] ����Ӥ��� sort_by ��ͥ��Ƥ������Ȥ��ơ�
-��Ӿ�郎ʣ���ʾ���®�٤��󤲤��ޤ���
-sort_by ��Ȥ�ʤ��ʲ�����Ǥ���Ӥ�Ԥ��٤� downcase ���¹Ԥ���ޤ���
-���ä� downcase �μ¹�®�٤��٤���� sort ��®�٤���̿Ū���㲼���ޤ���
+[[m:Enumerable#sort]] と比較して sort_by が優れている点として、
+比較条件が複雑な場合の速度が挙げられます。
+sort_by を使わない以下の例では比較を行う度に downcase が実行されます。
+従って downcase の実行速度が遅ければ sort の速度が致命的に低下します。
 
   p ["BAR", "FOO", "bar", "foo"].sort {|a, b| a.downcase <=> b.downcase }
 
-���������Τ褦�� sort_by ��Ȥ��� downcase �μ¹Բ�������ǿ���Ʊ���Ǥ���
-�Ĥޤꡢ������ʬ�μ¹Ի��֤� O(n) �Υ��������Ǥ���
+一方、次のように sort_by を使うと downcase の実行回数は要素数と同じです。
+つまり、その部分の実行時間は O(n) のオーダーです。
 
   p ["BAR", "FOO", "bar", "foo"].sort_by {|v| v.downcase }
 
-�ʲ��Ρ��¹Բ���θ��ڷ�̤򻲾Ȥ��ƤߤƤ���������
+以下の、実行回数の検証結果を参照してみてください。
 
   class Integer
     def count
@@ -460,18 +460,18 @@ sort_by ��Ȥ�ʤ��ʲ�����Ǥ���Ӥ�Ԥ��٤� downcase ���¹Ԥ���ޤ���
   ary.sort_by {|v| v.count }
   p $n          # => 1000
 
-Enumerable#sort_by �ϰ���ǤϤ���ޤ��� (unstable sort)��
-��������sort_by ��ʲ��Τ褦�˻Ȥ��Ȱ���ʥ����Ȥ�����Ǥ��ޤ���
+Enumerable#sort_by は安定ではありません (unstable sort)。
+ただし、sort_by を以下のように使うと安定なソートを実装できます。
 
   i = 0
   ary.sort_by {|v| [v, i += 1] }
 
-�� ��ӷ�̤�Ʊ�����Ǥϸ��ν���̤���¤֥����Ȥ�
-�ְ���ʥ����� (stable sort)�פȸ����ޤ���
+※ 比較結果が同じ要素は元の順序通りに並ぶソートを
+「安定なソート (stable sort)」と言います。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ�֥��å���ɾ�������ͤǥ����Ȥ���
-������֤��褦�� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、各要素をブロックで評価した値でソートした
+配列を返すような [[c:Enumerator]] を返します。
 
 #@end
 
@@ -481,30 +481,30 @@ Enumerable#sort_by �ϰ���ǤϤ���ޤ��� (unstable sort)��
 --- to_a    -> [object]
 --- entries -> [object]
 
-���Ƥ����Ǥ�ޤ�������֤��ޤ���
+全ての要素を含む配列を返します。
 
 #@since 1.8.0
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
 
-self �Ȱ������Ϥ�������γ����Ǥ���ʤ��������������������֤��ޤ���
-�����������������ǿ��� self �����ǿ���Ʊ���Ǥ���
+self と引数に渡した配列の各要素からなる配列の配列を生成して返します。
+生成される配列の要素数は self の要素数と同じです。
 
-�֥��å��դ��ǸƤӽФ������ϡ�
-self �Ȱ������Ϥ�������γ����Ǥ���֤˥֥��å����Ϥ��ޤ���
+ブロック付きで呼び出した場合は、
+self と引数に渡した配列の各要素を順番にブロックに渡します。
 
 #@since 1.9.1
-@param lists �������ꤷ�ޤ�������Ǥʤ����� to_ary �᥽�åɤˤ��������Ѵ����ޤ���
-             to_ary �᥽�åɤ�̵������ each ���ޤ���
+@param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
+             to_ary メソッドが無い場合は each を試します。
 #@else
 #@since 1.8.2
-@param lists �������ꤷ�ޤ�������Ǥʤ����� to_a �᥽�åɤˤ��������Ѵ����ޤ���
+@param lists 配列を指定します。配列でない場合は to_a メソッドにより配列に変換します。
 #@else
-@param lists �������ꤷ�ޤ�������Ǥʤ����� to_ary �᥽�åɤˤ��������Ѵ����ޤ���
+@param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
 #@end
 #@end
 
-��:
+例:
     p (1..3).zip([4,5,6], [7,8,9])
         # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
@@ -515,7 +515,7 @@ self �Ȱ������Ϥ�������γ����Ǥ���֤˥֥��å����Ϥ��ޤ���
         # => [[1, :a, :A], [2, :b, :B],
         #     [3, :c, :C], [4, nil, :D], [5, nil, nil]]
 
-��:
+例:
     p [1,2,3].zip([4,5,6], [7,8,9]) {|ary|
       p ary
     }
@@ -540,23 +540,23 @@ self �Ȱ������Ϥ�������γ����Ǥ���֤˥֥��å����Ϥ��ޤ���
 --- enum_slice(n) {|list| ... } -> nil
 #@end
 
-n ���Ǥ��ĥ֥��å����Ϥ��Ʒ����֤��ޤ���
+n 要素ずつブロックに渡して繰り返します。
 
-���ǿ��� n �ǳ���ڤ�ʤ��Ȥ��ϡ��Ǹ�β�������ǿ�������ޤ���
+要素数が n で割り切れないときは、最後の回だけ要素数が減ります。
 
 #@until 1.9.1
-enum_slice �� 1.9.1 �ʹߤǤϤʤ��ʤäƤ��ޤ���
-����� each_slice ��ȤäƤ���������
+enum_slice は 1.9.1 以降ではなくなっています。
+代わりに each_slice を使ってください。
 #@end
 
 #@since 1.9.1
-�֥��å����ά��������
-n ���Ǥ��ķ����֤� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は
+n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 #@end
 
-@arg n   ���ڤ����ǿ��򼨤������Ǥ���
+@arg n   区切る要素数を示す整数です。
 
-��:
+例:
 
   (1..10).each_slice(3) {|a| p a}
       # => [1, 2, 3]
@@ -580,23 +580,23 @@ n ���Ǥ��ķ����֤� [[c:Enumerator]] ���֤��ޤ���
 --- enum_cons(n) {|list| ... } -> nil
 #@end
 
-���Ǥ��ʣ����� n ���Ǥ��Ĥ˶��ڤꡢ
-�֥��å����Ϥ��Ʒ����֤��ޤ���
+要素を重複ありで n 要素ずつに区切り、
+ブロックに渡して繰り返します。
 
 #@until 1.9.1
-enum_cons �� 1.9.1 �ʹߤǤϤʤ��ʤäƤ��ޤ���
-����� each_cons ��ȤäƤ���������
+enum_cons は 1.9.1 以降ではなくなっています。
+代わりに each_cons を使ってください。
 #@end
 
 #@since 1.9.1
-�֥��å����ά�������Ͻ�ʣ�����
-n ���Ǥ��ķ����֤� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は重複ありで
+n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 #@end
 
-@param n �֥��å����Ϥ����Ǥο��Ǥ�������������Ϳ���ޤ���
-         ���ǿ�����礭�ʿ���Ϳ����ȡ��֥��å��ϰ��٤�¹Ԥ���ޤ���
+@param n ブロックに渡す要素の数です。正の整数を与えます。
+         要素数より大きな数を与えると、ブロックは一度も実行されません。
 
-��:
+例:
 
   (1..10).each_cons(3){|v| p v }
   # => [1, 2, 3]
@@ -618,21 +618,21 @@ n ���Ǥ��ķ����֤� [[c:Enumerator]] ���֤��ޤ���
 --- count(item)             -> Integer
 --- count {|obj| ... }  -> Integer
 
-�쥷���Ф����ǿ����֤��ޤ���
+レシーバの要素数を返します。
 
-��������ꤷ�ʤ����ϡ��쥷���Ф����ǿ����֤��ޤ���
-���ΤȤ����쥷���Ф� size �᥽�åɤ���äƤ���Ф��������Ѥ��ޤ���
-�쥷���Ф� size �᥽�åɤ���äƤ��ʤ����ϡ����ǿ����Ĥ��ĥ�����Ȥ��ޤ���
+引数を指定しない場合は、レシーバの要素数を返します。
+このとき、レシーバが size メソッドを持っていればそちらを使用します。
+レシーバが size メソッドを持っていない場合は、要素数を一つずつカウントします。
 
-�������Ļ��ꤷ�����ϡ��쥷���Ф����ǤΤ��������˰��פ����Τ�
-�Ŀ��򥫥���Ȥ����֤��ޤ���
+引数を一つ指定した場合は、レシーバの要素のうち引数に一致するものの
+個数をカウントして返します。
 
-�֥��å�����ꤷ�����ϡ��֥��å���ɾ�����ƿ��ˤʤä����ǤθĿ���
-������Ȥ����֤��ޤ���
+ブロックを指定した場合は、ブロックを評価して真になった要素の個数を
+カウントして返します。
 
-@param item ��������оݤȤʤ��͡�
+@param item カウント対象となる値。
 
-��:
+例:
 
    ary = [1, 2, 4, 2]
    ary.count             # => 4
@@ -646,39 +646,39 @@ n ���Ǥ��ķ����֤� [[c:Enumerator]] ���֤��ޤ���
 --- cycle(n=nil)       -> Enumerable::Enumerator
 #@end
 --- cycle(n=nil) {|obj| ... } -> object | nil
-Enumerable ���֥������Ȥγ����Ǥ� n �� or ̵�²�(n=nil)�����֤�
-�֥��å���ƤӤ����ޤ���
+Enumerable オブジェクトの各要素を n 回 or 無限回(n=nil)繰り返し
+ブロックを呼びだします。
 
-n �� 0 �⤷��������ͤ��Ϥ������ϲ��⤷�ޤ���
-�����֤����Ǹ�ޤǽ�λ�������(�Ĥޤ�break�ʤɤ����Ǥ��ʤ��ä����)
-�� nil ���֤��ޤ���
-���Υ᥽�åɤ�����������˳����Ǥ���¸���Ƥ������ᡢ
-���� Enumerable �ν�ü����ã������˼�ʬ���Ȥ��ѹ����Ƥ�
-���Υ᥽�åɤ�ư��˱ƶ���Ϳ���ޤ���
+n に 0 もしくは負の値を渡した場合は何もしません。
+繰り返しが最後まで終了した場合(つまりbreakなどで中断しなかった場合)
+は nil を返します。
+このメソッドは内部の配列に各要素を保存しておくため、
+一度 Enumerable の終端に到達した後に自分自身を変更しても
+このメソッドの動作に影響を与えません。
 
   a = ["a", "b", "c"]
   a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
   a.cycle(2) {|x| puts x }  # print, a, b, c, a, b, c.
 
 #@since 1.9.1
-�֥��å����ά�������ϡ�n �� or ̵�²� enum �γ����Ǥ�
-�����֤� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、n 回 or 無限回 enum の各要素を
+繰り返す [[c:Enumerator]] を返します。
 #@end
 
 #@since 1.8.8
-@return �֥��å�����ꤷ�ʤ��ä����ϡ�[[c:Enumerator]] ���֤��ޤ���
-        �쥷���Ф����ξ��� nil ���֤��ޤ���
+@return ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
+        レシーバが空の場合は nil を返します。
 #@else
-@return �֥��å�����ꤷ�ʤ��ä����ϡ�[[c:Enumerable::Enumerator]] ���֤��ޤ���
-        �쥷���Ф����ξ��� nil ���֤��ޤ���
+@return ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
+        レシーバが空の場合は nil を返します。
 #@end
 
 --- drop(n)               -> Array
 
-Enumerable ���֥������Ȥ���Ƭ�� n ���Ǥ�ΤƤơ�
-�Ĥ�����Ǥ�����Ȥ����֤��ޤ���
+Enumerable オブジェクトの先頭の n 要素を捨てて、
+残りの要素を配列として返します。
 
-@param n �ΤƤ����ǿ���
+@param n 捨てる要素数。
 
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
@@ -690,13 +690,13 @@ Enumerable ���֥������Ȥ���Ƭ�� n ���Ǥ�ΤƤơ�
 #@end
 --- drop_while {|element| ... }   -> Array
 
-�֥��å���ɾ�����ƺǽ�˵��Ȥʤä����Ǥμ��������ǤޤǼΤơ�
-�Ĥ�����Ǥ�����Ȥ����֤��ޤ���
+ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
+残りの要素を配列として返します。
 
 #@since 1.8.8
-�֥��å�����ꤷ�ʤ��ä����ϡ�[[c:Enumerator]] ���֤��ޤ���
+ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
 #@else
-�֥��å�����ꤷ�ʤ��ä����ϡ�[[c:Enumerable::Enumerator]] ���֤��ޤ���
+ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
 #@end
 
    a = [1, 2, 3, 4, 5, 0]
@@ -710,27 +710,27 @@ Enumerable ���֥������Ȥ���Ƭ�� n ���Ǥ�ΤƤơ�
 #@end
 --- find_index{|obj| ... }  -> Integer | nil
 
-���Ǥ���Ƭ�����˥֥��å����Ϥ���ɾ�������ǽ�˿��ˤʤä����ǤΥ���ǥå������֤��ޤ���
-��Ĥ⿿�ˤʤ�ʤ���� nil ���֤��ޤ���
+要素を先頭から順にブロックに渡して評価し、最初に真になった要素のインデックスを返します。
+一つも真にならなければ nil を返します。
 
    (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 }   #=> nil
    (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 }   #=> 34
 
 #@since 1.8.8
-�֥��å�����ꤷ�ʤ��ä����ϡ�[[c:Enumerator]] ���֤��ޤ���
+ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
 #@else
-�֥��å�����ꤷ�ʤ��ä����ϡ�[[c:Enumerable::Enumerator]] ���֤��ޤ���
+ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
 #@end
 
 --- first      -> object | nil
 --- first(n)   -> Array
 
-Enumerable ���֥������Ȥκǽ�����ǡ��⤷���Ϻǽ�� n ���Ǥ��֤��ޤ���
+Enumerable オブジェクトの最初の要素、もしくは最初の n 要素を返します。
 
-Enumerable ���֥������Ȥ����ξ�硢��������ꤷ�ʤ������Ǥ� nil ���֤��ޤ���
-��������ꤹ������Ǥϡ�����������֤��ޤ���
+Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
+引数を指定する形式では、空の配列を返します。
 
-@param n �����������ǿ���
+@param n 取得する要素数。
 
   e = "abcd".each_byte 
   e.first #=> 97 
@@ -746,27 +746,27 @@ Enumerable ���֥������Ȥ����ξ�硢��������ꤷ�ʤ������Ǥ� nil ���֤��ޤ���
 #@end
 --- group_by {|obj| ... }  -> Hash
 
-�֥��å���ɾ��������̤򥭡����б��������Ǥ�������ͤȤ���ϥå�����֤��ޤ���
+ブロックを評価した結果をキー、対応する要素の配列を値とするハッシュを返します。
 
 
    (1..6).group_by {|i| i%3}   #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
 
 #@since 1.9.1
-�֥��å����ά�������ϡ��Ǹ�� Hash ���֤�
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+ブロックを省略した場合は、最後に Hash を返す
+[[c:Enumerator]] オブジェクトを返します。
 #@end
 
 --- minmax                 -> [object, object]
 --- minmax{|a, b| ... }    -> [object, object]
 
-Enumerable ���֥������Ȥγ����ǤΤ����Ǿ������ǤȺ�������Ǥ�
-���ǤȤ��륵���� 2 ��������֤��ޤ���
+Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
+要素とするサイズ 2 の配列を返します。
 
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
-����ܤη����ϡ�Enumerable ���֥������ȤΤ��٤Ƥ����Ǥ� Comparable ��
-�������Ƥ��뤳�Ȥ��ꤷ�Ƥ��ޤ�������ܤη����Ǥϡ�����Ʊ�Τ���Ӥ�
-�֥��å����Ѥ��ƹԤ��ޤ���
+一つ目の形式は、Enumerable オブジェクトのすべての要素が Comparable を
+実装していることを仮定しています。二つ目の形式では、要素同士の比較を
+ブロックを用いて行います。
 
    a = %w(albatross dog horse)
    a.minmax                                 #=> ["albatross", "horse"]
@@ -782,14 +782,14 @@ Enumerable ���֥������Ȥγ����ǤΤ����Ǿ������ǤȺ�������Ǥ�
 #@end
 --- minmax_by {|obj| ... }   -> [object, object]
 
-Enumerable ���֥������Ȥγ����Ǥ�֥��å����Ϥ���ɾ���������η�̤� <=> ����Ӥ���
-�Ǿ������ǤȺ�������Ǥ����ǤȤ��륵���� 2 ��������֤��ޤ���
+Enumerable オブジェクトの各要素をブロックに渡して評価し、その結果を <=> で比較して
+最小の要素と最大の要素を要素とするサイズ 2 の配列を返します。
 
-�����������Ǥ�ʣ��¸�ߤ����硢�ɤ����Ǥ��֤���������Ǥ���
+該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
-[[m:Enumerable#minmax]] �� [[m:Enumerable#minmax_by]] ��
-�㤤�� sort �� sort_by �ΰ㤤��Ʊ���Ǥ���
-�ܺ٤� [[m:Enumerable#sort_by]] �򻲾Ȥ��Ƥ���������
+[[m:Enumerable#minmax]] と [[m:Enumerable#minmax_by]] の
+違いは sort と sort_by の違いと同じです。
+詳細は [[m:Enumerable#sort_by]] を参照してください。
 
    a = %w(albatross dog horse)
    a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
@@ -797,8 +797,8 @@ Enumerable ���֥������Ȥγ����Ǥ�֥��å����Ϥ���ɾ���������η�̤� <=> ����Ӥ�
    [].minmax_by{} # => [nil, nil]
 
 #@since 1.9.1
-�֥��å����ά�������ϡ�[[c:Enumerator]] ���֥������Ȥ�
-�֤��ޤ���
+ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
+返します。
 #@end
 
 @see [[m:Enumerable#sort_by]]
@@ -806,12 +806,12 @@ Enumerable ���֥������Ȥγ����Ǥ�֥��å����Ϥ���ɾ���������η�̤� <=> ����Ӥ�
 --- none?               -> bool
 --- none?{|obj| ... }   -> bool
 
-�֥��å�����ꤷ�ʤ����ϡ� Enumerable ���֥������ȤΤ��٤Ƥ�
-���Ǥ����Ǥ���п����֤��ޤ��������Ǥʤ���е����֤��ޤ���
+ブロックを指定しない場合は、 Enumerable オブジェクトのすべての
+要素が偽であれば真を返します。そうでなければ偽を返します。
 
-�֥��å�����ꤷ�����ϡ�Enumerable ���֥������ȤΤ��٤Ƥ����Ǥ�
-�֥��å���ɾ��������̤������٤Ƶ��Ǥ���п����֤��ޤ���
-�����Ǥʤ���е����֤��ޤ���
+ブロックを指定した場合は、Enumerable オブジェクトのすべての要素を
+ブロックで評価した結果が、すべて偽であれば真を返します。
+そうでなければ偽を返します。
 
    %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
    %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
@@ -822,13 +822,13 @@ Enumerable ���֥������Ȥγ����Ǥ�֥��å����Ϥ���ɾ���������η�̤� <=> ����Ӥ�
 --- one?                -> bool
 --- one?{|obj| ... }    -> bool
 
-�֥��å�����ꤷ�ʤ����ϡ� Enumerable ���֥������Ȥ����ǤΤ���
-���礦�ɰ�Ĥ��������Ǥ���С������֤��ޤ���
-�����Ǥʤ���е����֤��ޤ���
+ブロックを指定しない場合は、 Enumerable オブジェクトの要素のうち
+ちょうど一つだけが真であれば、真を返します。
+そうでなければ偽を返します。
 
-�֥��å�����ꤷ�����ϡ�Enumerable ���֥������Ȥ����Ǥ�
-�֥��å���ɾ��������̡���Ĥ����Ǥ��������Ǥ���п����֤��ޤ���
-�����Ǥʤ���е����֤��ޤ���
+ブロックを指定した場合は、Enumerable オブジェクトの要素を
+ブロックで評価した結果、一つの要素だけが真であれば真を返します。
+そうでなければ偽を返します。
 
    %w{ant bear cat}.one? {|word| word.length == 4}   #=> true
    %w{ant bear cat}.one? {|word| word.length >= 4}   #=> false
@@ -837,9 +837,9 @@ Enumerable ���֥������Ȥγ����Ǥ�֥��å����Ϥ���ɾ���������η�̤� <=> ����Ӥ�
 
 --- take(n)               -> Array
 
-Enumerable ���֥������Ȥ���Ƭ���� n ���Ǥ�����Ȥ����֤��ޤ���
+Enumerable オブジェクトの先頭から n 要素を配列として返します。
 
-@param n ���ǿ�����ꤷ�ޤ���
+@param n 要素数を指定します。
 
    a = [1, 2, 3, 4, 5, 0]
    a.take(3)             # => [1, 2, 3]
@@ -851,15 +851,15 @@ Enumerable ���֥������Ȥ���Ƭ���� n ���Ǥ�����Ȥ����֤��ޤ���
 #@end
 --- take_while {|element| ... }   -> Array
 
-Enumerable ���֥������Ȥ����Ǥ��˵��ˤʤ�ޤǥ֥��å���ɾ�����ޤ���
-�ǽ�˵��ˤʤä����Ǥμ��������ǤޤǤ�����Ȥ����֤��ޤ���
+Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
+最初に偽になった要素の手前の要素までを配列として返します。
 
    a = [1, 2, 3, 4, 5, 0]
    a.take_while {|i| i < 3 }   # => [1, 2]
 
 #@since 1.9.1
-�֥��å����ά�������ϡ�[[c:Enumerator]] ���֥������Ȥ�
-�֤��ޤ���
+ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
+返します。
 #@end
 
 #@since 1.8.8
@@ -869,13 +869,13 @@ Enumerable ���֥������Ȥ����Ǥ��˵��ˤʤ�ޤǥ֥��å���ɾ�����ޤ���
 #@end
 --- reverse_each {|element| ... } -> self
 
-�ս�˳����Ǥ��Ф��ƥ֥��å���ɾ�����ޤ���
+逆順に各要素に対してブロックを評価します。
 
-�����ǳ����Ǥ��ݻ������������ޤ���
+内部で各要素を保持した配列を作ります。
 
 #@since 1.9.1
-�֥��å����ά�������ϡ������Ǥ�ս��é��
-[[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、各要素を逆順に辿る
+[[c:Enumerator]] を返します。
 #@end
 
 #@end
@@ -883,12 +883,12 @@ Enumerable ���֥������Ȥ����Ǥ��˵��ˤʤ�ޤǥ֥��å���ɾ�����ޤ���
 --- each_with_object(obj) -> Enumerator
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object
 
-Ϳ����줿Ǥ�դΥ��֥������Ȥ����Ǥ�֥��å����Ϥ������֤����ǽ��Ϳ����줿���֥������Ȥ��֤��ޤ���
+与えられた任意のオブジェクトと要素をブロックに渡し繰り返し、最初に与えられたオブジェクトを返します。
 
-�֥��å����ά�������ϡ���η����֤��򤷤ơ��ǽ��Ϳ�������֥������Ȥ�
-�Ǹ���֤� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は、上の繰り返しをして、最初に与えたオブジェクトを
+最後に返す [[c:Enumerator]] を返します。
 
-@param obj Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param obj 任意のオブジェクトを指定します。
 
   evens = (1..10).each_with_object([]) {|i, a| a << i*2 }
   # => [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
@@ -901,36 +901,36 @@ Enumerable ���֥������Ȥ����Ǥ��˵��ˤʤ�ޤǥ֥��å���ɾ�����ޤ���
 --- collect_concat -> Enumerator
 --- flat_map       {| obj | block }  -> Array
 --- collect_concat {| obj | block }  -> Array
-�����Ǥ�֥��å����Ϥ��������֤��ͤ�Ϣ�뤷��������֤��ޤ���
+各要素をブロックに渡し、その返り値を連結した配列を返します。
 
-�֥��å����֤��ͤϴ���Ū��������֤��٤��Ǥ���
+ブロックの返り値は基本的に配列を返すべきです。
 
-�֥��å����ά�������ϡ��֥��å�������Ȥ�
-�����������ɾ���򤷡����η�̤�������֤�
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+ブロックを省略した場合は、ブロックを受けとり
+上で説明した評価をし、その結果の配列を返す
+[[c:Enumerator]] オブジェクトを返します。
 
   [[1,2], [3,4]].flat_map{|i| i.map{|j| j*2}} # => [2,4,6,8]
 
 --- chunk {|elt| ... } -> Enumerator
 --- chunk(initial_state) {|elt, state| ... } -> Enumerator
 
-���Ǥ��������˥֥��å���ɾ���������η�̤ˤ�ä�
-���Ǥ����󥯤�ʬ����(���롼�ײ�����)���Ǥ����
-[[c:Enumerator]] ���֤��ޤ���
+要素を前から順にブロックで評価し、その結果によって
+要素をチャンクに分けた(グループ化した)要素を持つ
+[[c:Enumerator]] を返します。
 
-�֥��å���ɾ���ͤ�Ʊ���ͤ�³����Τ��ĤΥ���󥯤Ȥ���
-��갷���ޤ������ʤ�����֥��å���ɾ���ͤ��������
-�ۤʤ��ǥ���󥯤����ڤ��ޤ���
+ブロックの評価値が同じ値が続くものを一つのチャンクとして
+取り扱います。すなわち、ブロックの評価値が一つ前と
+異なる所でチャンクが区切られます。
 
-�֤��ͤ� [[c:Enumerator]] �ϳƥ���󥯤Υ֥��å�ɾ���ͤ�
-�ƥ���󥯤����Ǥ��������Υڥ�������ǤȤ��ޤ���
-���Τ��ᡢeach���Ȱʲ��Τ褦�ˤʤ�ޤ���
+返り値の [[c:Enumerator]] は各チャンクのブロック評価値と
+各チャンクの要素を持つ配列のペアを各要素とします。
+そのため、eachだと以下のようになります。
 
   enum.chunk {|elt| key }.each {|key, ary| ... }
   enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
 
-��Ȥ��ơ��������Ϣ³������/������ʬ������򸫤Ƥߤޤ���
-��n.even?�פ��Ѵ�����Ȥ����Ƕ��ڤ��Ƥ���Τ��狼��Ǥ��礦��
+例として、整数列を連続する奇数/偶数に分ける例を見てみます。
+「n.even?」が変換するところで区切られているのがわかるでしょう。
   [3,1,4,1,5,9,2,6,5,3,5].chunk {|n|
     n.even?
   }.each {|even, ary|
@@ -942,10 +942,10 @@ Enumerable ���֥������Ȥ����Ǥ��˵��ˤʤ�ޤǥ֥��å���ɾ�����ޤ���
   #   [true, [2, 6]]
   #   [false, [5, 3, 5]]
 
-���Υ᥽�åɤϳ����Ǥ����˥����Ȥ���Ƥ�����������Ǥ���
-�ʲ�����Ǥϡ��ƥ����ȼ���ե�����(��Ȥ������Ȥ���Ƥ���)
-�˴ޤޤ��ñ�����Ƭ��ʸ�����Ȥ˿����Ƥ��ޤ���
-  # line.ord ����Ƭ��ʸ���Υ����ɥݥ���Ȥ��֤�
+このメソッドは各要素が既にソートされている場合に便利です。
+以下の例では、テキスト辞書ファイル(中身がソートされている)
+に含まれる単語を先頭の文字ごとに数えています。
+  # line.ord は先頭の文字のコードポイントを返す
   open("/usr/share/dict/words", "r:iso-8859-1") {|f|
     f.chunk {|line| line.ord }.each {|ch, lines| p [ch.chr, lines.length] }
   }
@@ -956,17 +956,17 @@ Enumerable ���֥������Ȥ����Ǥ��˵��ˤʤ�ޤǥ֥��å���ɾ�����ޤ���
   #   ["D", 791]
   #   ...
 
-����ˤ��Υ᥽�åɤϰʲ����ͤ����̰������ޤ���
-  * �֥��å���ɾ���ͤ� nil �⤷���� :_separator �Ǥ��ä���硢
-    �������Ǥ�ΤƤޤ�������󥯤Ϥ�������Ƕ��ڤ��ޤ���
-  * �֥��å���ɾ���� :_alone �Ǥ��ä����Ϥ������Ǥ�
-    ñ�ȤΥ���󥯤�ʤ���ΤȲ�ᤵ��ޤ���
-��������������ǻϤޤ륷��ܥ�Ϥ��Υ᥽�åɤǤ�ͽ�󤵤�Ƥ��ޤ���
-�֥��å����֤��ͤȤ��Ƥ��Ѥ��ʤ��Ǥ���������
+さらにこのメソッドは以下の値を特別扱いします。
+  * ブロックの評価値が nil もしくは :_separator であった場合、
+    その要素を捨てます。チャンクはこの前後で区切られます。
+  * ブロックの評価値 :_alone であった場合はその要素は
+    単独のチャンクをなすものと解釈されます。
+アンダースコアで始まるシンボルはこのメソッドでは予約されています。
+ブロックの返り値としては用いないでください。
 
-nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
-��Ȥ��� svn log �ν��ϤΥϥ��ե�ν�Ƕ��ڤꤿ������ͤ��ޤ���
-  sep = "-"*72 + "\n" # �ϥ��ե�72�Ĥι�
+nil、 :_separator はある要素を無視したい場合に用います。
+例として svn log の出力のハイフンの所で区切りたい場合を考えます。
+  sep = "-"*72 + "\n" # ハイフンが72個の行
   IO.popen("svn log README") {|f|
     f.chunk {|line|
       line != sep || nil
@@ -984,16 +984,16 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
   #    "\n"]
   #   ...
 
-�ƥ����Ȥ���ԤǶ��ڤ�줿�����ʬ���������ˤ� nil ���Ȥ��ޤ���
+テキストを空行で区切られた段落に分けたい場合にも nil が使えます。
   File.foreach("README").chunk {|line|
     /\A\s*\z/ !~ line || nil
   }.each {|_, lines|
     pp lines
   }
 
-��:_alone�פ����Ǥ����̤������������Ѥ��ޤ���
-�ʲ�����Ǥϡ�Foo#bar�פȤ��������ιԤ�Ϣ³���Ƥ�����Τ�
-����󥯲���������ʳ������̤����ޤ���
+「:_alone」は要素を素通ししたい場合に用います。
+以下の例では「Foo#bar」という形式の行が連続している場合のみ
+チャンク化し、それ以外は素通しします。
 
   pat = /\A[A-Z][A-Za-z0-9_]+\#/
   open(filename) {|f|
@@ -1006,21 +1006,21 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
     }
   }
 
-����󥯲��˾������ܤ�ɬ�פʾ��ϡ�
-���ץ������� initial_state �˾��֤��ݻ����륪�֥������Ȥ��Ϥ��ޤ���
-���ξ�硢�֥��å�����2�����ˤϤ��Υ��֥������Ȥ� dup ��ʣ��
-������Ϥ���ޤ���
-#@# ����ɲä�����
+チャンク化に状態遷移が必要な場合は、
+オプション引数 initial_state に状態を保持するオブジェクトを渡します。
+この場合、ブロックの第2引数にはこのオブジェクトが dup で複製
+されて渡されます。
+#@# 例を追加したい
 
-@param initial_state ���֤��ݻ����륪�֥�������
-@raise RuntimeError ͽ�󤵤�Ƥ����ͤ��Ѥ�������ȯ�����ޤ�
+@param initial_state 状態を保持するオブジェクト
+@raise RuntimeError 予約されている値を用いた場合に発生します
 
 --- each_entry -> Enumerator
 --- each_entry {|obj| block} -> self
 
-�֥��å�������Ǥ˰��٤���Ŭ�Ѥ��ޤ���
+ブロックを各要素に一度ずつ適用します。
 
-�����ǤȤ���ʣ�����ͤ��Ϥ��줿���ϥ֥��å��ˤ�����Ȥ����Ϥ���ޤ���
+一要素として複数の値が渡された場合はブロックには配列として渡されます。
 
    class Foo
      include Enumerable
@@ -1032,7 +1032,7 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
    Foo.new.each_entry{|o| print o, " -- "}
    # => 1 -- [1, 2] --
 
-�֥��å����ά�������� [[c:Enumerator]] ���֤���ޤ���
+ブロックを省略した場合は [[c:Enumerator]] が返されます。
 
 @see [[m:Enumerable#slice_before]]
 
@@ -1040,43 +1040,43 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
 --- slice_before {|elt| bool } -> Enumerator
 --- slice_before(initial_state) {|elt, state| bool } -> Enumerator
 
-�ѥ����󤬥ޥå��������ǡ��⤷���ϥ֥��å��������֤������Ǥ���
-���˥ޥå���������ޤǤ�
-����󥯲�(���롼�ײ�)������Τ򷫤��֤� [[c:Enumerator]] ��
-�֤��ޤ���
+パターンがマッチした要素、もしくはブロックが真を返した要素から
+次にマッチする手前までを
+チャンク化(グループ化)したものを繰り返す [[c:Enumerator]] を
+返します。
 
-�ѥ�������Ϥ������ϳ����Ǥ��Ф� === ���ƤӽФ��졢
-���줬���ˤʤä��Ȥ��������󥯤���Ƭ�ȸ��ʤ��ޤ���
-�֥��å����Ϥ������ϡ������Ǥ��Ф��֥��å���Ŭ�Ѥ�
-�֤��ͤ����Ǥ��ä����Ǥ����󥯤���Ƭ�ȸ��ʤ��ޤ���
+パターンを渡した場合は各要素に対し === が呼び出され、
+それが真になったところをチャンクの先頭と見なします。
+ブロックを渡した場合は、各要素に対しブロックを適用し
+返り値が真であった要素をチャンクの先頭と見なします。
 
-��긷̩�ˤ����ȡ�����Ƭ���ǡפμ�����ʬ�䤷�Ƥ����ޤ���
-�ǽ�����Ǥ�ɾ����̵�뤵��ޤ���
+より厳密にいうと、「先頭要素」の手前で分割していきます。
+最初の要素の評価は無視されます。
 
-�ƥ���󥯤�����Ȥ���ɽ������ޤ���
+各チャンクは配列として表現されます。
 
-[[m:Enumerable#map]] �Τ褦�ʥ᥽�åɤ�Ȥ����Ȥ�Ǥ��ޤ���
+[[m:Enumerable#map]] のようなメソッドを使うこともできます。
   
-  # �������Ǥ����󥯤���Ƭ�ȸ��ʤ� 
+  # 偶数要素をチャンクの先頭と見なす 
   [0,2,4,1,2,4,5,3,1,4,2].slice_before(&:even?).to_a
   # => [[0], [2], [4, 1], [2], [4, 5, 3, 1], [4], [2]]
   
-  # ������Ǥ����󥯤���Ƭ�ȸ��ʤ� 
+  # 奇数要素をチャンクの先頭と見なす 
   [0,2,4,1,2,4,5,3,1,4,2].slice_before(&:odd?).to_a
   # => [[0, 2, 4], [1, 2, 4], [5], [3], [1, 4, 2]]
 
-  # ChangeLog �Υ���ȥ꡼���˼��
+  # ChangeLog のエントリーを順に取る
   open("ChangeLog") {|f|
     f.slice_before(/\A\S/).each {|e| pp e}
   }
 
-  # ���Ʊ���������ѥ�����Ǥʤ��֥��å���Ȥ�
+  # 上と同じだが、パターンでなくブロックを使う
   open("ChangeLog") {|f|
     f.slice_before {|line| /\A\S/ === line }.each {|e| pp e}
   }
   
-  # "svn proplist -R" �η�̤�ʬ�䤹��
-  # ����ϰ����Ǥ�ʣ���Ԥˤޤ����äƤ���
+  # "svn proplist -R" の結果を分割する
+  # これは一要素が複数行にまたがっている
 
   IO.popen([{"LC_ALL"=>"C"}, "svn", "proplist", "-R"]) {|f|
     f.lines.slice_before(/\AProp/).each {|lines| p lines }
@@ -1087,9 +1087,9 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
   #   ["Properties on 'regparse.c':\n", "  svn:eol-style\n"]
   #   ...
 
-ʣ�����Ǥˤ錄��������ܤ�ɬ�פʾ��ϡ����������ѿ��Ǥ����¸�����
-���Ȥ��Ǥ��ޤ����㤨�С�Ϣ³����������ͤ�3�İʾ夢���硢�����
-�ޤȤ������򤹤뤿��ˤϰʲ��Τ褦�ˤ��ޤ���
+複数要素にわたる状態遷移が必要な場合は、ローカル変数でこれを実現する
+ことができます。例えば、連続に増える数値が3つ以上ある場合、これを
+まとめる処理をするためには以下のようにします。
   a = [0,2,3,4,6,7,9]
   prev = a[0]
   p a.slice_before {|e|
@@ -1100,10 +1100,10 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
   }.join(",")
   #=> "0,2-4,6,7,9"
 
-�����������������ѿ���Ȥ��Τ���Ŭ�ڤʾ��⤢��ޤ���
-���ξ�硢���� initial_state �˾��֤��ݻ����륪�֥������Ȥ�
-�Ϥ��ȡ����Υ��֥������Ȥ� [[m:Object#dup]] �������֥������Ȥ�
-�����Ǥ��ȤΥ֥��å��ƤӽФ�����2�����Ȥ����Ϥ��ޤ���
+しかし、ローカル変数を使うのが不適切な場合もあります。
+その場合、引数 initial_state に状態を保持するオブジェクトを
+渡すと、そのオブジェクトを [[m:Object#dup]] したオブジェクトを
+各要素ごとのブロック呼び出しの第2引数として渡します。
   # word wrapping.
   # this assumes all characters have same width.
   def wordwrap(words, maxwidth)
@@ -1133,8 +1133,8 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
   #   20
   #   ----------
 
-�ʲ��� mbox ��ʬ�䤹����Ǥ���mbox ��γƥ᡼��� Unix From line 
-�ǻϤޤäƤ��ޤ��������� slice_before ���Ѥ��ޤ���
+以下は mbox を分割する例です。mbox 内の各メールは Unix From line 
+で始まっています。そこで slice_before を用います。
 
   # parse mbox
   open("mbox") {|f|
@@ -1165,7 +1165,7 @@ nil�� :_separator �Ϥ������Ǥ�̵�뤷���������Ѥ��ޤ���
     }
   }
 
-@param initial_state ���֤��ݻ����륪�֥�������
+@param initial_state 状態を保持するオブジェクト
 @see [[m:Enumerable#chunk]]
 
 #@end

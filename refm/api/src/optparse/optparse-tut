@@ -1,12 +1,12 @@
-=== ���塼�ȥꥢ��
+=== チュートリアル
 
-optparse ��Ȥ���硢����Ū�ˤ�
+optparse を使う場合、基本的には
 
- (1) OptionParser ���֥������� opt ���������롣
- (2) ���ץ������갷���֥��å��� opt ����Ͽ���롣
- (3) opt.parse(ARGV) �ǥ��ޥ�ɥ饤���ºݤ� parse ���롣
+ (1) OptionParser オブジェクト opt を生成する。
+ (2) オプションを取り扱うブロックを opt に登録する。
+ (3) opt.parse(ARGV) でコマンドラインを実際に parse する。
 
-�Ȥ����褦��ή��ˤʤ�ޤ���
+というような流れになります。
 
  * [[ref:optiondef]]
  * [[ref:optionarg]]
@@ -16,9 +16,9 @@ optparse ��Ȥ���硢����Ū�ˤ�
  * [[ref:argv]]
  * [[ref:hyphen_start_file]]
 
-====[a:optiondef] ���ץ��������
+====[a:optiondef] オプションの定義
 
-�ʲ��ϥ��ץ���� -a, -b ������դ��륳�ޥ�ɤ����������Ǥ���
+以下はオプション -a, -b を受け付けるコマンドを作成する例です。
 
         require 'optparse'
         opt = OptionParser.new
@@ -34,30 +34,30 @@ optparse ��Ȥ���硢����Ū�ˤ�
              true
              ["foo", "bar", "baz"]
 
-[[m:OptionParser#on]] �᥽�åɤΰ����ǥ��ץ���������������������ꤵ
-�줿���ν�����֥��å��ǵ��Ҥ��ޤ����֥��å��ΰ����ˤϥ��ץ���󤬻���
-���줿���Ȥ򼨤� true ���Ϥ���ޤ�([[ref:optionarg]]�ι�⻲��)��
+[[m:OptionParser#on]] メソッドの引数でオプションを定義し、引数が指定さ
+れた時の処理をブロックで記述します。ブロックの引数にはオプションが指定
+されたことを示す true が渡されます([[ref:optionarg]]の項も参照)。
 
 #@since 1.8.8
-[[m:Enumerator#each]] �ʤɤȰ㤤��[[m:OptionParser#on]]
+[[m:Enumerator#each]] などと違い、[[m:OptionParser#on]]
 #@else
-[[m:Enumerable::Enumerator#each]] �ʤɤȰ㤤��[[m:OptionParser#on]]
+[[m:Enumerable::Enumerator#each]] などと違い、[[m:OptionParser#on]]
 #@end
-�᥽�åɤ��ƤФ줿�����Ǥϥ֥��å��ϼ¹Ԥ���ޤ��󡣤����ޤ���Ͽ�����
-�����Ǥ���[[m:OptionParser#parse]] ���ƤФ줿���ˡ����ޥ�ɥ饤��˥���
-����󤬻��ꤵ��Ƥ���м¹Ԥ���ޤ���
+メソッドが呼ばれた時点ではブロックは実行されません。あくまで登録される
+だけです。[[m:OptionParser#parse]] が呼ばれた時に、コマンドラインにオプ
+ションが指定されていれば実行されます。
 
-���ץ����λ���ϥ��ޥ�ɤ�ľ��Ǥ���ɬ�פϤ���ޤ���(�����ǡ�-b �ϥ��ץ�����
-����ǧ������Ƥ���)�����������Ķ��ѿ� POSIXLY_CORRECT ��������Ƥ����
-���ε�ư���ѹ�����ޤ���
+オプションの指定はコマンドの直後である必要はありません(上の例で、-b はオプションと
+して認識されている)。ただし、環境変数 POSIXLY_CORRECT が定義してあると
+この挙動は変更されます。
 
         env POSIXLY_CORRECT=1 ruby ./sample.rb -a foo bar -b baz
-        # => true                               # -a �ϥ��ץ����Ȳ��
-             ["foo", "bar", "-b", "baz"]        # -b ���󥪥ץ����Ȳ��
+        # => true                               # -a はオプションと解釈
+             ["foo", "bar", "-b", "baz"]        # -b は非オプションと解釈
 
-[[m:OptionParser#parse!]] �ˤ�ꡢ���ޥ�ɥ饤��(ARGV)�β��Ϥ�Ԥ��ޤ���
-[[m:OptionParser#parse!]] �Ǥϡ�ARGV ���饪�ץ���󤬼�������ޤ���
-������򤱤�ˤ� [[m:OptionParser#parse]] ��Ȥ��ޤ���
+[[m:OptionParser#parse!]] により、コマンドライン(ARGV)の解析を行います。
+[[m:OptionParser#parse!]] では、ARGV からオプションが取り除かれます。
+これを避けるには [[m:OptionParser#parse]] を使います。
 
         require 'optparse'
         opt = OptionParser.new
@@ -65,14 +65,14 @@ optparse ��Ȥ���硢����Ū�ˤ�
         opt.on('-a') {|v| p v }
         opt.on('-b') {|v| p v }
 
-        # parse() �ξ�硢ARGV���ѹ�����ʤ���
-        # ���ץ��������������̤� argv �����ꤵ��롣
+        # parse() の場合、ARGVは変更されない。
+        # オプションを取り除いた結果は argv に設定される。
         argv = opt.parse(ARGV)
 
         p argv
 
-������Ƥ��ʤ����ץ�������ꤹ����㳰
-[[c:OptionParser::InvalidOption]] ��ȯ�����ޤ���
+定義していないオプションを指定すると例外
+[[c:OptionParser::InvalidOption]] が発生します。
 
         ruby ./sample.rb -c
         /usr/local/lib/ruby/1.9/optparse.rb:1428:in `complete': invalid option: -c (OptionParser::InvalidOption)
@@ -86,9 +86,9 @@ optparse ��Ȥ���硢����Ū�ˤ�
                 from /usr/local/lib/ruby/1.9/optparse.rb:1356:in `parse'
                 from ./sample.rb:9
 
-[[c:OptionParser]] ���Τϡ��ɤΥ��ץ���󤬻��ꤵ�줿���򵭲����ޤ���
-��ν��������ǡ����ץ����ˤ����Ƚ�Ǥ�ä���ˤϡ�
-¾�Υ���ƥʤ˳�Ǽ���ޤ���
+[[c:OptionParser]] 自体は、どのオプションが指定されたかを記憶しません。
+後の処理の方で、オプションによる条件判断を加えるには、
+他のコンテナに格納します。
 
         require 'optparse'
         opt = OptionParser.new
@@ -106,15 +106,15 @@ optparse ��Ȥ���硢����Ū�ˤ�
         # => ["foo", "bar", "baz"]
              {:a=>true, :b=>true}
 
-====[a:optionarg] ���ץ����ΰ���
+====[a:optionarg] オプションの引数
 
-[[m:OptionParser#on]] �᥽�åɤΥ��ץ��������������˲�����񤯤ȡ���
-�Υ��ץ����ϰ���������դ��뤳�Ȥλ���Ȥʤ�ޤ���
+[[m:OptionParser#on]] メソッドのオプション定義で末尾に何かを書くと、そ
+のオプションは引数を受け付けることの指定となります。
 
         require 'optparse'
         opt = OptionParser.new
 
-        opt.on('-a VAL') {|v| p v }         # <- " VAL" ���ɲ�
+        opt.on('-a VAL') {|v| p v }         # <- " VAL" を追加
         opt.on('-b') {|v| p v }
 
         opt.parse!(ARGV)
@@ -126,8 +126,8 @@ optparse ��Ȥ���硢����Ū�ˤ�
              true
              ["bar", "baz"]
 
-���ץ����������ν����δ��ϡ��֥إ�פθ��ɤ����ɤ��ʤ�褦�˽񤯡פǤ���
-���ץ����ΰ������ά������㳰 [[c:OptionParser::MissingArgument]] ��ȯ�����ޤ���
+オプションの末尾の書き方の基準は、「ヘルプの見栄えが良くなるように書く」です。
+オプションの引数を省略すると例外 [[c:OptionParser::MissingArgument]] が発生します。
 
         ruby ./sample.rb -a
         /usr/local/lib/ruby/1.9/optparse.rb:455:in `parse': missing argument: -a (OptionParser::MissingArgument)
@@ -138,12 +138,12 @@ optparse ��Ȥ���硢����Ū�ˤ�
                 from /usr/local/lib/ruby/1.9/optparse.rb:1363:in `parse!'
                 from ./sample.rb:7
 
-���ץ����ΰ�����ɬ�ܤǤʤ����Ȥ򼨤��ˤϡ�" [" ���դ��ޤ���
+オプションの引数が必須でないことを示すには、" [" を付けます。
 
         require 'optparse'
         opt = OptionParser.new
 
-        opt.on('-a [VAL]') {|v| p v }          # <- [VAL] ���ɲ�
+        opt.on('-a [VAL]') {|v| p v }          # <- [VAL] を追加
         opt.on('-b') {|v| p v }
 
         opt.parse!(ARGV)
@@ -154,16 +154,16 @@ optparse ��Ȥ���硢����Ū�ˤ�
         # => nil
              []
 
-Ʊ�ͤˡ��إ�פθ��ɤ����ɤ��褦�� "VAL]" ���ղä��Ƥ��ޤ���
+同様に、ヘルプの見栄えが良いように "VAL]" を付加しています。
 
-���硼�ȥ��ץ����ΰ�������ϻȤ��ˤ����Τǡ����Τ褦�ʾ��ϥ���
-���ץ����������Ȥ�����狼��䤹���Ǥ����㤨�С��嵭�ξ�硢-ab ��
-���ꤹ��� -a b �Ȳ�ᤵ��ޤ���-a ������������ʤ��ǽ����ʤ� -a -b ��
-��ᤵ��ޤ���
+ショートオプションの引数指定は使いにくいので、このような場合はロング
+オプションの方が使う方もわかりやすいです。例えば、上記の場合、-ab を
+指定すると -a b と解釈されます。-a が引数を持たない最初の例なら -a -b と
+解釈されます。
 
-====[a:longoption] ���󥰥��ץ����
+====[a:longoption] ロングオプション
 
-���󥰥��ץ����� [[m:OptionParser#on]] �ΰ����� '--'�ǻϤޤ륪�ץ�������ꤷ�ޤ���
+ロングオプションは [[m:OptionParser#on]] の引数に '--'で始まるオプションを指定します。
 
         require 'optparse'
         opt = OptionParser.new
@@ -179,7 +179,7 @@ optparse ��Ȥ���硢����Ū�ˤ�
              true
              ["foo", "bar", "baz"]
 
---[no-]...�ʤɤȤ��뤳�Ȥǡ����귿�Υ��ץ�������ꤹ�뤳�Ȥ��Ǥ��ޤ���
+--[no-]...などとすることで、否定型のオプションを指定することができます。
 
         require 'optparse'
         opt = OptionParser.new
@@ -193,19 +193,19 @@ optparse ��Ȥ���硢����Ū�ˤ�
         ruby sample.rb -a foo bar --bar baz --no-bar
         # => true
              true
-             false                              # <- --no-bar �λ���ˤ�롣
+             false                              # <- --no-bar の指定による。
              ["foo", "bar", "baz"]
 
-���ץ������Ф�����������Ǥ��ޤ������硼�ȥ��ץ�����Ʊ��������
-GNU�δ����ˤ��碌��
+オプションに対する引数も指定できます。ショートオプションと同じだが、
+GNUの慣習にあわせて
 
         opt.on('-a', '--foo=VAL') {|v| p v }
         opt.on('--[no-]bar[=VAL]') {|v| p v }
 
-�� "=" ��Ȥ��Τ��ɤ��Ȼפ��ޤ���
+と "=" を使うのが良いと思われます。
 
-���ץ�������ꤹ����ϡ��ɤΥ��ץ���󤫰�դ˷�ޤ�Ĺ���ޤǻ��ꤹ
-����ɤ��Ǥ���
+オプションを指定する時は、どのオプションか一意に決まる長さまで指定す
+れば良いです。
 
         require 'optparse'
         opt = OptionParser.new
@@ -218,22 +218,22 @@ GNU�δ����ˤ��碌��
 
         ruby sample.rb --fo
 
-������Ǥϡ�--fo �ϡ�--foo ����ꤷ���Τ�Ʊ���ˤʤ�ޤ���������ʤ� --f
-�ޤǾ�ά�Ǥ��ޤ���
+この例では、--fo は、--foo を指定したのと同じになります。この例なら --f
+まで省略できます。
 
-====[a:help] �إ��
+====[a:help] ヘルプ
 
-�ǥե���Ȥ� --help �� --version ���ץ�����ǧ�����ޤ���
+デフォルトで --help と --version オプションを認識します。
 
         ruby ./sample.rb --help
         # => Usage: sample [options]
 
         ruby ./sample.rb --version
-        # => *���Ϥʤ�*
+        # => *出力なし*
 
---version �ϡ��ȥåץ�٥�� Version ������������Ƥ���Ƚ��Ϥ���ޤ���
-(ͥ���٤��㤤�� VERSION ����⻲�Ȥ��ޤ���Ruby �ΥС������򼨤� VERSION
-����� ruby 1.8 �ޤǤ��������Ƥ���Τ�����)
+--version は、トップレベルに Version 定数が定義されていると出力されます。
+(優先度は低いが VERSION 定数も参照します。Ruby のバージョンを示す VERSION
+定数が ruby 1.8 までは定義されているので注意)
 
         require 'optparse'
         opt = OptionParser.new
@@ -243,8 +243,8 @@ GNU�δ����ˤ��碌��
         ruby ./sample.rb --version
         # => sample 1.2.3
 
-[[m:OptionParser#on]] �ΰ����ˤ��Υ��ץ�����������ä���� --help ��
-���Ϥ�ȿ�Ǥ���ޤ���
+[[m:OptionParser#on]] の引数にそのオプションの説明を加えると --help の
+出力に反映されます。
 
         require 'optparse'
         opt = OptionParser.new
@@ -261,12 +261,12 @@ GNU�δ����ˤ��碌��
                 -b                               description of -b
 
 #@until 1.8.2
-1.8.2�����ΥС������Ǥϰʲ��Τ褦��ȿ�Ǥ���ޤ���
+1.8.2以前のバージョンでは以下のように反映されません。
         ruby ./sample.rb --help
         # => Usage: sample [options]
---help�򥪥ץ����������ɲä��뤫��
+--helpをオプション定義に追加するか、
         opt.on('--help', 'show this message') { puts opt; exit }
-[[ref:argv]]�ι�ˤ���褦�ˡ��ʲ��Τ褦��ARGV��Ȥä������ˤ��Ƥ���������
+[[ref:argv]]の項にあるように、以下のようなARGVを使った書き方にしてください。
 
         require 'optparse'
         ARGV.options {|opt|
@@ -284,8 +284,8 @@ GNU�δ����ˤ��碌��
                -b                               description of -b
 #@end
 
-====[a:subcmd] ���֥��ޥ��
-�ʲ��� cvs �� svn �Τ褦�˥��֥��ޥ�ɤ��᤹����Ǥ���
+====[a:subcmd] サブコマンド
+以下は cvs や svn のようにサブコマンドを解釈する例です。
 
     #! /usr/bin/ruby
     # contributed by Minero Aoki.
@@ -307,7 +307,7 @@ GNU�δ����ˤ��碌��
     parser.order!(ARGV)
     subparsers[ARGV.shift].parse!(ARGV) unless ARGV.empty?
 
-�¹Ԥ���Ȱʲ��Τ褦�ˤʤ�ޤ���
+実行すると以下のようになります。
 
     $ ruby subcom.rb -i add -i
     -i
@@ -316,22 +316,22 @@ GNU�δ����ˤ��碌��
     $ ruby subcom.rb list -i
     list -i
 
-[[m:OptionParser#order!]] �����ץ����ǤϤʤ�
-���ޥ�ɤΰ����˽в񤦤Ȥ����ǥѡ��������Ǥ��뤳�Ȥ����Ѥ��Ƥ��ޤ���
+[[m:OptionParser#order!]] がオプションではない
+コマンドの引数に出会うとそこでパースを中断することを利用しています。
 
-====[a:argv] ARGV �ε�ǽ
-optparse �� require ����� ARGV �� [[c:OptionParser::Arguable]] �ε�ǽ
-���ä��ޤ����ʲ��ν������Ǥ���褦�ˤʤ�ޤ���
+====[a:argv] ARGV の機能
+optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
+が加わります。以下の書き方ができるようになります。
 #@since 1.8.5
-[[m:OptionParser::Arguable#getopts]] �ϥ��ץ������ݻ����� Hash ���֤��ޤ���
-  # sample.rb ������
+[[m:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
+  # sample.rb の内容
   require 'optparse'
   params = ARGV.getopts("a:b:", "foo", "bar:")
   p params
-���� sample.rb ��¹Ԥ����
+この sample.rb を実行すると
   $ ruby sample.rb -a 1 --foo --bar xxx
   {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
-�Τ褦�ˤʤ�ޤ���
+のようになります。
 #@else
         require 'optparse'
         ARGV.options {|opt|
@@ -348,21 +348,21 @@ optparse �� require ����� ARGV �� [[c:OptionParser::Arguable]] �ε�ǽ
              true
              ["foo", "bar", "baz"]
 
-OptionParser.new �˥֥��å����Ϥ���������٤ơ�
- * ARGV.options �᥽�åɤΥ֥��å��ǥ��ץ��������򵭽Ҥ��롣
- * opt.parse! �ΰ����� ARGV ����ˤʤ롣
-�Ȥ��ä��㤤������ޤ���
+OptionParser.new にブロックを渡した場合に比べて、
+ * ARGV.options メソッドのブロックでオプション定義を記述する。
+ * opt.parse! の引数が ARGV 固定になる。
+といった違いがあります。
 
-�ä�����������櫓�ǤϤ���ޤ��󤬡�optparse ź�դΥ���ץ�Ϥ��ν�
-�����ˤʤäƤ��ޤ���
+特に利点があるわけではありませんが、optparse 添付のサンプルはこの書
+き方になっています。
 #@end
 
-====[a:hyphen_start_file] '-'�ǻϤޤ�ե�����̾
+====[a:hyphen_start_file] '-'で始まるファイル名
 
-'-'�ǻϤޤ�ե�����̾�򥳥ޥ�ɤ��Ϥ��������ϰʲ��Τ褦�˴֤�"--"�򶴤ߤޤ���
+'-'で始まるファイル名をコマンドに渡したい場合は以下のように間に"--"を挟みます。
 
       $ ruby sample.rb -- -file
 
-"-file" �����ץ����ǤϤʤ������Ȥ��Ʋ�ᤵ��ޤ���
-����� POSIX.2 �� [[man:getopt(3)]] ��ͳ�褷�ޤ���"--" �ʹߤϤ��٤ƥ���
-�����ǤϤʤ������Ȥ��Ʋ�ᤵ��ޤ���
+"-file" がオプションではない引数として解釈されます。
+これは POSIX.2 の [[man:getopt(3)]] に由来します。"--" 以降はすべてオプ
+ションではない引数として解釈されます。

@@ -1,78 +1,78 @@
-CGI �Υ��å���������Ԥ��饤�֥�ꡣ
+CGI のセッション管理を行うライブラリ。
 
-���å����Ȥϡ�HTTP �ΰ�Ϣ�Υꥯ�����Ȥȥ쥹�ݥ󥹤�°����٤�
-����ƥ����� (����) �Τ��Ȥ򤤤��ޤ���
-���å��������ˤϽ����̤� [[lib:cgi]] �饤�֥�꤬�󶡤���
-���å�������Ѥ��Ƥ⤤���Ǥ�����
-���� cgi/session ����Ѥ����������狼��䤹���Ǥ��礦��
-���å�������� [[c:Hash]] �饤���ʥ��󥿡��ե������Ǥ���
+セッションとは、HTTP の一連のリクエストとレスポンスが属するべき
+コンテクスト (状況) のことをいいます。
+セッション管理には従来通り [[lib:cgi]] ライブラリが提供する
+クッキーを使用してもいいですが、
+この cgi/session を使用した方がよりわかりやすいでしょう。
+セッション情報は [[c:Hash]] ライクなインターフェースです。
 
-���å����ϥ��å���� ID �ȥץ�����ब��Ͽ����
-���å������󤫤鹽������ޤ���
-�ǥե���ȤǤ� [[c:CGI::Session::FileStore]] �����Ѥ��졢
-��Ͽ�Ǥ���Τ�ʸ����ΤߤǤ���
+セッションはセッション ID とプログラムが記録した
+セッション情報から構成されます。
+デフォルトでは [[c:CGI::Session::FileStore]] が使用され、
+記録できるのは文字列のみです。
 
-���å�������� [[c:CGI::Session::FileStore]] ��
-[[c:CGI::Session::PStore]] ����Ѥ�������
-�����ФΥ�������ե�����˵�Ͽ���졢
-����Υꥯ�����Ȼ������Ѥ���ޤ���
-�ǥե���ȤǤ�����Ū������Ԥʤ�ʤ��Ƥ�
-�ץ�����ཪλ���˥��å�������ϥե��������¸����ޤ���
-���å������˿������ե����뤬��������ޤ���
+セッション情報は [[c:CGI::Session::FileStore]] か
+[[c:CGI::Session::PStore]] を使用した場合は
+サーバのローカルファイルに記録され、
+次回のリクエスト時に利用されます。
+デフォルトでは明示的に操作を行なわなくても
+プログラム終了時にセッション情報はファイルに保存されます。
+セッション毎に新しいファイルが作成されます。
 
-���饤����Ȥˤϥ��å���������б����륻�å���� ID ��
-���å������뤤�� form �� hidden input �Ȥ����Ϥ����Ȥˤʤ�ޤ���
-���å����ϥǥե���ȤǤ� expires �����ꤵ��Ƥ��ʤ�����ˡ�
-�֥饦����λ���������Ǿ��Ǥ��ޤ���
+クライアントにはセッション情報に対応するセッション ID を
+クッキーあるいは form の hidden input として渡すことになります。
+クッキーはデフォルトでは expires が指定されていないために、
+ブラウザを終了した時点で消滅します。
 
-=== �Ȥ��� (����)
+=== 使い方 (生成)
 
   require 'cgi/session'
   cgi = CGI.new
   session = CGI::Session.new(cgi)
 
-[[m:CGI::Session.new]] �� [[c:CGI]] ���֥������Ȥ��Ϥ��ޤ������饤����Ȥ����Ϥ��줿
-���å���� ID �ϥ��å����������꡼�Ȥ��� cgi �˳�Ǽ����Ƥ��뤿�ᡢ�ռ�����ɬ�פϤ���ޤ���
+[[m:CGI::Session.new]] に [[c:CGI]] オブジェクトを渡します。クライアントから渡された
+セッション ID はクッキーかクエリーとして cgi に格納されているため、意識する必要はありません。
 
-=== �Ȥ��� (���å��������Ͽ����)
+=== 使い方 (セッション情報を記録する)
 
   session['name'] = "value"
 
-[[c:CGI::Session]] ���֥������Ȥ� [[c:Hash]] �Τ褦�ʤ�Τǡ��������б������ͤ�Ͽ���ޤ���
-�ǥե���ȤǤϥץ�����ཪλ���˥��å�������ϥե�����˵�Ͽ����ޤ���
+[[c:CGI::Session]] オブジェクトは [[c:Hash]] のようなもので、キーに対応する値を記録します。
+デフォルトではプログラム終了時にセッション情報はファイルに記録されます。
 
-=== �Ȥ��� (���å������������)
+=== 使い方 (セッション情報を得る)
 
   name = session['name']
 
-�̤� CGI �Ǥ��Υ��å����������Ф��Ȥ��ϡ����Τ褦�ˤ��ޤ���
+別な CGI でこのセッション情報を取り出すときは、このようにします。
 
-=== �Ȥ��� (�إå�����)
+=== 使い方 (ヘッダ出力)
 
-�إå����Ϥ� [[m:CGI#out]]��[[m:CGI#header]] ��ȤäƤ���¤�
-�̾��̤�ǹ����ޤ���
-cgi/session ������Ū�˥��å�������Ѥ��Ƥ��ޤ�����
-�����Υ᥽�åɤ����ݤ򸫤Ƥ����Τǡ��ռ��򤹤�ɬ�פϤ���ޤ���
+ヘッダ出力は [[m:CGI#out]]、[[m:CGI#header]] を使っている限り
+通常通りで構いません。
+cgi/session は内部的にクッキーを使用していますが、
+これらのメソッドが面倒を見てくれるので、意識をする必要はありません。
 
-=== umask ��
+=== umask 値
 
-umask �ͤ� 0022 �ʤ��
-���å�������ե�����Υѡ��ߥå���� 644 �ˤʤ�Τǡ�
-Ǥ�դΥ桼�������Υ��å�������ե�����򸫤뤳�Ȥ��Ǥ��ޤ���
-���줬���ʾ��� CGI::Session ���֥��������������� umask �ͤ����ꤷ�Ƥ���������
+umask 値が 0022 ならば
+セッション情報ファイルのパーミッションが 644 になるので、
+任意のユーザがそのセッション情報ファイルを見ることができます。
+それが嫌な場合は CGI::Session オブジェクト生成前に umask 値を設定してください。
 
 #@since 1.8.2
-���å�������ե������ 0600 �Ǻ��������褦�ˤʤ�ޤ�����
+セッション情報ファイルは 0600 で作成されるようになりました。
 #@end
 
-=== CGI::HtmlExtension#form �ν���
+=== CGI::HtmlExtension#form の出力
 
-[[m:CGI::Session.new]] ��� [[m:CGI::HtmlExtension#form]] �ϡ����å���� ID ��
-������������ե�����ɤ�ư���Ϥ���褦�ˤʤ�ޤ���
-[[m:CGI::Session.new]] �ϡ�����ˤ�ä��������줿�ե�����ե�������ͤ򡢥��å���� ID �Ȥ��Ƽ�ưǧ�����ޤ���
+[[m:CGI::Session.new]] 後の [[m:CGI::HtmlExtension#form]] は、セッション ID を
+埋め込んだ隠しフィールドを自動出力するようになります。
+[[m:CGI::Session.new]] は、これによって生成されたフォームフィールド値を、セッション ID として自動認識します。
 
-[[m:CGI::HtmlExtension#form]] ��Ȥ���<INPUT TYPE="submit"> �ǥڡ������ܤ򤹤�褦�ˤ���С�
-���å������Ȥ��ʤ��Ķ��ǤΥ��å����ݻ������ѤǤ��ޤ���
+[[m:CGI::HtmlExtension#form]] を使い、<INPUT TYPE="submit"> でページ遷移をするようにすれば、
+クッキーが使えない環境でのセッション維持に利用できます。
 
   #!/usr/bin/ruby
   require 'cgi'
@@ -87,10 +87,10 @@ umask �ͤ� 0022 �ʤ��
       cgi.body {
         cgi.form('action'=>"#{CGI.escapeHTML(cgi.script_name)}") {
           cgi.p {
-            '���ʤ���̾���ϡ�' +
+            'あなたの名前は？' +
             cgi.text_field('name') +
             cgi.hidden('cmd', 'hello') +
-            cgi.submit('�Ǥ���')
+            cgi.submit('です。')
           }
         }
       }
@@ -103,21 +103,21 @@ umask �ͤ� 0022 �ʤ��
     <BODY>
       <FORM METHOD="post" ENCTYPE="application/x-www-form-urlencoded" action="/sample.rb">
         <P>
-          ���ʤ���̾���ϡ�
+          あなたの名前は？
           <INPUT NAME="name" SIZE="40" TYPE="text">
           <INPUT NAME="cmd" TYPE="hidden" VALUE="hello">
-          <INPUT TYPE="submit" VALUE="�Ǥ���">
+          <INPUT TYPE="submit" VALUE="です。">
         </P>
-        <INPUT TYPE="HIDDEN" NAME="_session_id" VALUE="bc315cc069266e21">    # ����
+        <INPUT TYPE="HIDDEN" NAME="_session_id" VALUE="bc315cc069266e21">    # これ
       </FORM>
     </BODY>
   </HTML>
 
-=== ������
+=== 使用例
 
-����̾�������Ϥ���Ȥ������Ĥ򤹤�����ΤĤޤ�ʤ� CGI ������ץȡ�
+ただ名前を入力するとあいさつをするだけのつまらない CGI スクリプト。
 
-������������
+ソースコード
 
   #!/usr/bin/ruby
   require 'kconv'
@@ -127,9 +127,9 @@ umask �ͤ� 0022 �ʤ��
   class SessionDemo
     def initialize
       @cgi = CGI.new
-      File.umask(0077)                                # ���å����ե������ï�ˤ��ɤޤ줿���ʤ���
-      @session = CGI::Session.new(@cgi)               # ���å����Ϥ��������������롣
-      @cmd = "#{@cgi['cmd'].first}"                   # ruby 1.8 �Ǥ�ư���褦��(warning �ϽФޤ�)
+      File.umask(0077)                                # セッションファイルは誰にも読まれたくないよ
+      @session = CGI::Session.new(@cgi)               # セッションはこうして生成する。
+      @cmd = "#{@cgi['cmd'].first}"                   # ruby 1.8 でも動くように(warning は出ます)
       @cmd = 'start' if @cmd.empty?
       @header = { "type" => "text/html", "charset" => "euc-jp" }
       
@@ -143,10 +143,10 @@ umask �ͤ� 0022 �ʤ��
         <body>
          <form action="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}" method="get">
          <p>
-         ���ʤ���̾���ϡ�
+         あなたの名前は？
          <input type="text" name="name">
          <input type="hidden" name="cmd" value="hello">
-         <input type="submit" value="�Ǥ���">
+         <input type="submit" value="です。">
          </p>
          </form>
         </body></html>
@@ -156,26 +156,26 @@ umask �ͤ� 0022 �ʤ��
     
     def cmd_hello
       name = Kconv.toeuc(@cgi['name'].first)
-      @session['name'] = name                         # ���å����˵���
-      @cgi.out(@header) {                             # ���å�������ϱ��쥯�å������ݻ�����뤿�ᡢCGI#out�ǽ���
+      @session['name'] = name                         # セッションに記憶
+      @cgi.out(@header) {                             # セッション情報は隠れクッキーで保持されるため、CGI#outで出力
         <<-END
         <html><head><title>CGI::Session Demo</title></head>
         <body>
-         <p>����ˤ��ϡ�#{CGI.escapeHTML(name)}����</p>
-         <p><a href="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}?cmd=bye">[����]</a></p>
+         <p>こんにちは、#{CGI.escapeHTML(name)}さん</p>
+         <p><a href="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}?cmd=bye">[次へ]</a></p>
         </body></html>
         END
       }
     end
     
     def cmd_bye
-      name = @session['name']                         # ���å����ǡ���������Ф�
+      name = @session['name']                         # セッションデータから取り出し
       @cgi.out(@header) {
         <<-END
         <html><head><title>CGI::Session Demo</title></head>
         <body>
-         <p>#{CGI.escapeHTML(name)}���󡢤��褦�ʤ�</p>
-         <p><a href="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}">[���]</a></p>
+         <p>#{CGI.escapeHTML(name)}さん、さようなら</p>
+         <p><a href="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}">[戻る]</a></p>
         </body></html>
         END
       }
@@ -184,7 +184,7 @@ umask �ͤ� 0022 �ʤ��
   
   SessionDemo.new
 
-=== ����URL
+=== 参考URL
 
   * [[url:http://www.shugo.net/article/webdb2/#label:13]]
   * [[url:http://www.modruby.net/doc/faq.ja.jis.html#label-13]]
@@ -196,78 +196,78 @@ umask �ͤ� 0022 �ʤ��
 
 --- new(request, option = {}) -> CGI::Session
 
-���å���󥪥֥������Ȥ򿷤����������֤��ޤ���
+セッションオブジェクトを新しく作成し返します。
 
-@param request [[c:CGI]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param request [[c:CGI]] のインスタンスを指定します。
 
-@param option �ϥå������ꤹ�뤳�Ȥ��Ǥ��ޤ���
+@param option ハッシュを指定することができます。
 
-�ʲ���ʸ���� option �Υ����Ȥ���ǧ������ޤ���
+以下の文字列が option のキーとして認識されます。
 
 : session_key
-  ���å����� <FORM type=hidden> �� name �Ȥ��ƻȤ��ޤ���
+  クッキーと <FORM type=hidden> の name として使われます。
   (default: "_session_id")
 
 : session_id
-  ���å���� ID �Ȥ��ƻȤ��ޤ���
-  �ǥե���ȤΥǡ����١����Ǥ��� FileStore ���Ѥ�����,
-  �ͤϱѿ�����������ʤ�ʸ�����̵����Фʤ�ޤ���
-  ���Υ��ץ�������ꤹ��ȥꥯ�����Ȥ˥��å���� ID ���ޤޤ�Ƥ�̵�뤷�ޤ���
-  (default: ���������������ޤ�)
+  セッション ID として使われます。
+  デフォルトのデータベースである FileStore を用いる場合,
+  値は英数字だけからなる文字列で無ければなりません。
+  このオプションを指定するとリクエストにセッション ID が含まれても無視します。
+  (default: ランダムに生成されます)
 
 : new_session
-    �ͤ� true �ΤȤ��϶���Ū�˿��������å�����Ϥ�ޤ���
+    値が true のときは強制的に新しいセッションを始めます。
 #@since 1.8.2
-    �ͤ� false �ΤȤ��ϡ��ꥯ�����Ȥ˥��å���� ID ���ޤޤ�Ƥ��ʤ�����
-    �㳰 [[c:ArgumentError]] ��ȯ�����ޤ���
-    �ͤ��ʤ��Ȥ��ϡ��ꥯ�����Ȥ˥��å���� ID ��
-    �ޤޤ�Ƥ�����Ϥ������Ѥ����ޤޤ�Ƥ��ʤ����Ͽ��������å�����Ϥ�ޤ���
+    値が false のときは、リクエストにセッション ID が含まれていない場合に
+    例外 [[c:ArgumentError]] が発生します。
+    値がないときは、リクエストにセッション ID が
+    含まれている場合はそれを使用し、含まれていない場合は新しいセッションを始めます。
 #@end
-    (default: ��)
+    (default: 偽)
 
 : database_manager
-  �ǡ����١������饹����ꤷ�ޤ���
-  �Ȥ߹��ߤ� [[c:CGI::Session::FileStore]], [[c:CGI::Session::MemoryStore]],
-  [[c:CGI::Session::PStore]] ���󶡤��Ƥ��ޤ����ǥե���Ȥ� [[c:CGI::Session::FileStore]] �Ǥ���
+  データベースクラスを指定します。
+  組み込みで [[c:CGI::Session::FileStore]], [[c:CGI::Session::MemoryStore]],
+  [[c:CGI::Session::PStore]] を提供しています。デフォルトは [[c:CGI::Session::FileStore]] です。
 
 : session_expires
-    ���å�����ͭ�����֡�
-    [[c:Time]] ���֥������Ȥ�Ϳ����ȡ����å����Ϥ��������ޤ��˴����줺�˻Ĥ�ޤ���
-    �ǥե���ȤǤϡ����å����ϥ֥饦���ν�λ��Ʊ�����˴�����ޤ���
+    セッションの有効期間。
+    [[c:Time]] オブジェクトを与えると、セッションはその日時まで破棄されずに残ります。
+    デフォルトでは、セッションはブラウザの終了と同時に破棄されます。
 
 : session_domain
-  ���å����ͭ���Ȥʤ�ɥᥤ�����ꤷ�ޤ���
-  �ǥե���ȤǤϡ�CGI ��¹Ԥ��Ƥ��륵���ФΥۥ���̾�ˤʤ�ޤ���
+  セッションが有効となるドメインを指定します。
+  デフォルトでは、CGI を実行しているサーバのホスト名になります。
 
 : session_secure
-  ������ꤹ��� HTTPS �ξ��Τ�ͭ���ˤʤ�ޤ���
+  真を指定すると HTTPS の場合のみ有効になります。
 
 : session_path
-  ���å����� path �Ȥ��ƻȤ��ޤ���
-  �ǥե���Ȥ� File.dirname(ENV["SCRIPT_NAME"]) �Ǥ���
-  �Ĥޤꡢ������ץȤ� URI �� path ���κǸ�Υ���å���ޤǤǤ���
+  クッキーの path として使われます。
+  デフォルトは File.dirname(ENV["SCRIPT_NAME"]) です。
+  つまり、スクリプトの URI の path 部の最後のスラッシュまでです。
 
 : tmpdir
-    [[c:CGI::Session::FileStore]] �����å����ǡ������������ǥ��쥯�ȥ��̾������ꤷ�ޤ���
-    �ǥե���Ȥ� [[m:Dir.tmpdir]] �Ǥ���
+    [[c:CGI::Session::FileStore]] がセッションデータを作成するディレクトリの名前を指定します。
+    デフォルトは [[m:Dir.tmpdir]] です。
 
 : prefix
-    [[c:CGI::Session::FileStore]] �����å����ǡ����Υե�����̾��Ϳ����ץ�ե��å�����
+    [[c:CGI::Session::FileStore]] がセッションデータのファイル名に与えるプレフィックス。
     (default: "")
 
 #@since 1.8.2
 : suffix
-    [[c:CGI::Session::FileStore]] �����å����ǡ����Υե�����̾��Ϳ���륵�ե��å�����
+    [[c:CGI::Session::FileStore]] がセッションデータのファイル名に与えるサフィックス。
     (default: "")
 #@end
 
 : no_hidden
-  ������ꤹ��� @output_hidden �� nil �ˤʤ�ޤ���
+  真を指定すると @output_hidden が nil になります。
 
 : no_cookies
-  ������ꤹ��� @output_cookies �� nil �ˤʤ�ޤ���
+  真を指定すると @output_cookies が nil になります。
 
-��:
+例:
 
   CGI::Session.new(cgi, {"new_session" => true})
 
@@ -277,7 +277,7 @@ umask �ͤ� 0022 �ʤ��
 #@until 1.8.2
 --- create_new_id -> String
 
-���������å���� ID ���������ޤ���
+新しいセッション ID を生成します。
 
 #@end
 
@@ -285,98 +285,98 @@ umask �ͤ� 0022 �ʤ��
 
 --- [](key) -> object
 
-���ꤵ�줿�������ͤ��֤��ޤ���
-�ͤ����ꤵ��Ƥ��ʤ���� nil ���֤��ޤ���
+指定されたキーの値を返します。
+値が設定されていなければ nil を返します。
 
-@param key ��������ꤷ�ޤ���
+@param key キーを指定します。
 
 --- []=(key, val)
 
-���ꤵ�줿�������ͤ����ꤷ�ޤ���
+指定されたキーの値を設定します。
 
-@param key ��������ꤷ�ޤ���
+@param key キーを指定します。
 
-@param val �ͤ���ꤷ�ޤ���
+@param val 値を指定します。
 
 --- update -> ()
 #@# discard
-�ǡ����١������饹�� update �᥽�åɤ�ƤӽФ��ơ�
-���å�������򥵡��Ф���¸���ޤ���
+データベースクラスの update メソッドを呼び出して、
+セッション情報をサーバに保存します。
 
-MemoryStore �ξ��ϲ��⤷�ޤ���
+MemoryStore の場合は何もしません。
 
 --- close -> ()
 #@# discard
-�ǡ����١������饹�� close �᥽�åɤ�ƤӽФ��ơ�
-���å�������򥵡��Ф���¸�������å���󥹥ȥ졼���򥯥��������ޤ���
-#@# mod_ruby �ʤɤ� CGI::Session �����Ѥ����硢����Ū�� close ����ɬ�פ����롣
-#@# ���� http://www.modruby.net/doc/faq.ja.jis.html#label-13
+データベースクラスの close メソッドを呼び出して、
+セッション情報をサーバに保存し、セッションストレージをクローズします。
+#@# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。
+#@# 参照 http://www.modruby.net/doc/faq.ja.jis.html#label-13
 
 --- delete -> ()
 #@# discard
 
-�ǡ����١������饹�� delete �᥽�åɤ�ƤӽФ��ơ�
-���å����򥹥ȥ졼�����������ޤ���
+データベースクラスの delete メソッドを呼び出して、
+セッションをストレージから削除します。
 
-FileStore �ξ��ϥ��å����ե�����������ޤ���
-���å����ե����������Ū�˺�����ʤ���лĤäƤ��ޤ���
+FileStore の場合はセッションファイルを削除します。
+セッションファイルは明示的に削除しなければ残っています。
 
 --- session_id -> String
 
-���å���� ID ���֤��ޤ���
+セッション ID を返します。
 
 #@since 1.8.2
 --- new_session -> bool
 
-���Ǥ���п��������å���� ID ���������ޤ���
+真であれば新しいセッション ID を生成します。
 
 #@end
 
 #@since 1.8.2
 = class CGI::Session::NoSession < RuntimeError
 
-���å���󤬽��������Ƥ��ʤ�����ȯ�������㳰�Ǥ���
+セッションが初期化されていない場合に発生する例外です。
 
 #@end
 
 
 = class CGI::Session::FileStore < Object
 
-[[c:File]] ���Ѥ������å������¸���ɽ�����饹�Ǥ���
+[[c:File]] を用いたセッション保存先を表すクラスです。
 
-�ͤȤ���ʸ����Τ���¸���뤳�Ȥ��Ǥ��ޤ���
-¾�η����ͤ򰷤��Ȥ��ϡ��桼������Ǥ����äƷ��Ѵ���Ԥ�ɬ�פ�����ޤ���
+値として文字列のみ保存することができます。
+他の型の値を扱うときは、ユーザが責任を持って型変換を行う必要があります。
 
 == Class Methods
 
 --- new(session, option = {}) -> CGI::Session::FileStore
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-[[c:CGI::Session]] ���饹�����ǻ��Ѥ��ޤ���
-�桼��������Ū�˸ƤӽФ�ɬ�פϤ���ޤ���
+[[c:CGI::Session]] クラス内部で使用します。
+ユーザが明示的に呼び出す必要はありません。
 
-@param session [[c:CGI::Session]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param session [[c:CGI::Session]] のインスタンスを指定します。
 
-@param option �ϥå������ꤷ�ޤ���
+@param option ハッシュを指定します。
 
-�ʲ���ʸ����򥭡��Ȥ��ƻ��ꤹ�뤳�Ȥ��Ǥ��ޤ���
+以下の文字列をキーとして指定することができます。
 
 : tmpdir
-    ���å����ǡ������������ǥ��쥯�ȥ��̾������ꤷ�ޤ���
-    �ǥե���Ȥ� [[m:Dir.tmpdir]] �Ǥ���
+    セッションデータを作成するディレクトリの名前を指定します。
+    デフォルトは [[m:Dir.tmpdir]] です。
 
 : prefix
-    ���å����ǡ����Υե�����̾��Ϳ����ץ�ե��å�������ꤷ�ޤ���
-    �ǥե���Ȥ϶�ʸ����Ǥ���
+    セッションデータのファイル名に与えるプレフィックスを指定します。
+    デフォルトは空文字列です。
 
 #@since 1.8.2
 : suffix
-    ���å����ǡ����Υե�����̾��Ϳ���륵�ե��å�������ꤷ�ޤ���
-    �ǥե���Ȥ϶�ʸ����Ǥ���
+    セッションデータのファイル名に与えるサフィックスを指定します。
+    デフォルトは空文字列です。
 #@end
 
-@raise CGI::Session::NoSession ���å���󤬽��������Ƥ��ʤ�����ȯ�����ޤ���
+@raise CGI::Session::NoSession セッションが初期化されていない場合に発生します。
 
 == Instance Methods
 
@@ -387,106 +387,106 @@ FileStore �ξ��ϥ��å����ե�����������ޤ���
 
 --- close -> ()
 #@# discard
-���å����ξ��֤�ե��������¸���ƥե�������Ĥ��ޤ���
+セッションの状態をファイルに保存してファイルを閉じます。
 
 --- delete -> ()
 #@# discard
 
-���å����������ƥե�����������ޤ���
+セッションを削除してファイルも削除します。
 
 --- restore -> Hash
 
-���å����ξ��֤�ե����뤫�����������ϥå�����֤��ޤ���
+セッションの状態をファイルから復元したハッシュを返します。
 
 --- update -> ()
 #@# discard
 
-���å����ξ��֤�ե��������¸���ޤ���
+セッションの状態をファイルに保存します。
 
 = class CGI::Session::MemoryStore < Object
 
-���å�������¸��Ȥ��ƥ������Ѥ��륯�饹�Ǥ���
+セッションの保存先としてメモリを使用するクラスです。
 
-���å����Υǡ����� Ruby ���󥿥ץ꥿����ư���Ƥ���֤�����³������Ƥ��ޤ���
+セッションのデータは Ruby インタプリタが起動している間だけ永続化されています。
 
 == Class Methods
 
 --- new(session, option = nil) -> CGI::Session::MemoryStore
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-[[c:CGI::Session]] ���饹�����ǻ��Ѥ��ޤ���
-�桼��������Ū�˸ƤӽФ�ɬ�פϤ���ޤ���
+[[c:CGI::Session]] クラス内部で使用します。
+ユーザが明示的に呼び出す必要はありません。
 
-@param session [[c:CGI::Session]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param session [[c:CGI::Session]] のインスタンスを指定します。
 
-@param option �ϥå������ꤷ�ޤ���
+@param option ハッシュを指定します。
 
-@raise CGI::Session::NoSession ���å���󤬽��������Ƥ��ʤ�����ȯ�����ޤ���
+@raise CGI::Session::NoSession セッションが初期化されていない場合に発生します。
 
 == Instance Methods
 
 --- close -> ()
 #@# discard
-���å����ξ��֤�ե��������¸���ƥե�������Ĥ��ޤ���
-���Υ��饹�Ǥϲ��⤷�ޤ���
+セッションの状態をファイルに保存してファイルを閉じます。
+このクラスでは何もしません。
 
 --- delete -> ()
 #@# discard
 
-���å����������ޤ���
+セッションを削除します。
 
 --- restore -> Hash
 
-���å����ξ��֤����������ϥå�����֤��ޤ���
+セッションの状態を復元したハッシュを返します。
 
 --- update -> ()
 #@# discard
 
-���å����ξ��֤���¸���ޤ���
-���Υ��饹�Ǥϲ��⤷�ޤ���
+セッションの状態を保存します。
+このクラスでは何もしません。
 
 #@since 1.9.1
 = class CGI::Session::NullStore < Object
 
-���å����ξ��֤�ɤ��ˤ���¸���ʤ����饹�Ǥ���
+セッションの状態をどこにも保存しないクラスです。
 
-���줾��Υ᥽�åɤ�
+それぞれのメソッドは
 
 == Class Methods
 
 --- new(session, option = nil) -> CGI::Session::NullStore
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-[[c:CGI::Session]] ���饹�����ǻ��Ѥ��ޤ���
-�桼��������Ū�˸ƤӽФ�ɬ�פϤ���ޤ���
+[[c:CGI::Session]] クラス内部で使用します。
+ユーザが明示的に呼び出す必要はありません。
 
-@param session [[c:CGI::Session]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param session [[c:CGI::Session]] のインスタンスを指定します。
 
-@param option �ϥå������ꤷ�ޤ���
+@param option ハッシュを指定します。
 
 == Instance Methods
 --- close -> ()
 #@# discard
-���å����ξ��֤�ե��������¸���ƥե�������Ĥ��ޤ���
-���Υ��饹�Ǥϲ��⤷�ޤ���
+セッションの状態をファイルに保存してファイルを閉じます。
+このクラスでは何もしません。
 
 --- delete -> ()
 #@# discard
 
-���å����������ޤ���
-���Υ��饹�Ǥϲ��⤷�ޤ���
+セッションを削除します。
+このクラスでは何もしません。
 
 --- restore -> Hash
 
-���å����ξ��֤����������ϥå�����֤��ޤ���
-���Υ��饹�Ǥϲ��⤷�ޤ���
+セッションの状態を復元したハッシュを返します。
+このクラスでは何もしません。
 
 --- update -> ()
 #@# discard
 
-���å����ξ��֤���¸���ޤ���
-���Υ��饹�Ǥϲ��⤷�ޤ���
+セッションの状態を保存します。
+このクラスでは何もしません。
 
 #@end

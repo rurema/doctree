@@ -1,27 +1,27 @@
 #@if("1.8.0" <= version and version < "1.9.1")
 
-Ruby/DL �ϡ�UNIX �� [[man:dlopen(3)]] ��
-Windows �� LoadLibrary() �ʤɤ�
-�����ʥߥå���󥫤ؤΥ��󥿥ե��������󶡤��ޤ���
+Ruby/DL は、UNIX の [[man:dlopen(3)]] や
+Windows の LoadLibrary() などの
+ダイナミックリンカへのインタフェースを提供します。
 
-#@# ���� dl2 �� Ruby 1.8 �ǤⳫȯ����Ƥ��ޤ���
+#@# 現在 dl2 の Ruby 1.8 版も開発されています。
 
 === Using Ruby/DL
 
-�̾�ϡ�[[c:DL::Importable]] �⥸�塼�����Ѥ��ޤ���
-����� [[c:DL]] �⥸�塼��������ʥ�åѡ��Ǥ���
-#@#�Υ饤�֥��ؿ��˥����������뤿��ι���δؿ�����äƤ��ޤ���
-���� Ruby �Υ⥸�塼����ĥ����ˤϰʲ��Τ褦�˻��Ѥ��ޤ���
+通常は、[[c:DL::Importable]] モジュールを使用します。
+これは [[c:DL]] モジュールの便利なラッパーです。
+#@#のライブラリ関数にアクセスするための高水準の関数を持っています。
+ある Ruby のモジュールを拡張するには以下のように使用します。
 
   require "dl/import"
   module LIBC
     extend DL::Importable
   end
 
-�ʸ塢���Υ⥸�塼��� dlload �� extern �᥽�åɤ���ѤǤ��ޤ���
-�ʲ��Τ褦�� dlload �Ȥäƥ饤�֥�������ɤ���
-���줾��Υ饤�֥��ؿ����Ф��� extern ����Ѥ��뤳�Ȥ�
-��åѡ��᥽�åɤ�������ޤ���
+以後、このモジュールの dlload と extern メソッドを使用できます。
+以下のように dlload 使ってライブラリをロードし、
+それぞれのライブラリ関数に対して extern を使用することで
+ラッパーメソッドを定義します。
 
   module LIBC
     extend DL::Importable
@@ -32,14 +32,14 @@ Windows �� LoadLibrary() �ʤɤ�
   
   p LIBC.strlen('abc') #=> 3
 
-LIBC.strlen ����Ѥ��뤳�Ȥǡ��饤�֥��ؿ� strlen() ����ѤǤ��ޤ���
-Ϳ����줿�ؿ�̾�κǽ��ʸ������ʸ���ʤ顢
-��������᥽�å�̾�κǽ��ʸ���Ͼ�ʸ���ˤʤ�ޤ���
+LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
+与えられた関数名の最初の文字が大文字なら、
+定義されるメソッド名の最初の文字は小文字になります。
 
-==== ��¤�Τ򰷤�
+==== 構造体を扱う
 
-��¤�Τⰷ�����Ȥ��Ǥ��ޤ������Ȥ��� [[man:gettimeofday(2)]]
-��ȤäƸ��߻�������������ϰʲ��ΤȤ���Ǥ���
+構造体も扱うことができます。たとえば [[man:gettimeofday(2)]]
+を使って現在時刻を得たい場合は以下のとおりです。
 
  require 'dl/import'
  module LIBC
@@ -56,9 +56,9 @@ LIBC.strlen ����Ѥ��뤳�Ȥǡ��饤�֥��ؿ� strlen() ����ѤǤ��ޤ���
   p timeval[:tv_sec] #=> 1173519547
  end
 
-��¤�Τ䶦���Τκ����ˤϡ��ʲ��Τ褦�� [[lib:dl/struct]] ���������Ƥ���
-[[m:DL::Importable::Internal#struct]] �᥽�åɤ�
-[[m:DL::Importable::Internal#union]] �᥽�åɤ���Ѥ��뤳�Ȥ�Ǥ��ޤ���
+構造体や共用体の作成には、以下のように [[lib:dl/struct]] で定義されている
+[[m:DL::Importable::Internal#struct]] メソッドや
+[[m:DL::Importable::Internal#union]] メソッドを使用することもできます。
 
  require 'dl/import'
  require "dl/struct"
@@ -77,13 +77,13 @@ LIBC.strlen ����Ѥ��뤳�Ȥǡ��饤�֥��ؿ� strlen() ����ѤǤ��ޤ���
   p timeval.tv_sec #=> 1173519547
  end
 
-�����ǡ�����γ�����Ƥ� LIBC::Timeval.new �ǤϤʤ���
-LIBC::Timeval.malloc ����Ѥ��Ƥ��뤳�Ȥ����դ��Ƥ���������
-LIBC::Timeval.new �Ϻ����Ѥߤ� PtrData ���֥������Ȥ��åפ��뤿��Τ�ΤǤ���
+上の例で、メモリの割り当てに LIBC::Timeval.new ではなく、
+LIBC::Timeval.malloc を使用していることに注意してください。
+LIBC::Timeval.new は作成済みの PtrData オブジェクトをラップするためのものです。
 
-==== ������Хå�
+==== コールバック
 
-�ʲ��Τ褦�� �⥸�塼��ؿ� callback ����Ѥ���������Хå�������Ǥ��ޤ���
+以下のように モジュール関数 callback を使用したコールバックを定義できます。
 
   require 'dl/import'
   module M 
@@ -103,12 +103,12 @@ LIBC::Timeval.new �Ϻ����Ѥߤ� PtrData ���֥������Ȥ��åפ��뤿��Τ�ΤǤ���
   M.qsort(ap, a.size, DL.sizeof('P'), M::COMPARE)
   p ap.to_a('P').map{|s| s.to_s } #=> ["2a", "1b", "3c"]
   
-������ M::COMPARE �ϡ��֥��å���Ƥ� [[c:DL::Symbol]] ���֥������ȤǤ���
+ここで M::COMPARE は、ブロックを呼ぶ [[c:DL::Symbol]] オブジェクトです。
 
-DL::Importable �⥸�塼��ϤȤƤ������Ǥ���
-���������Ȥ��ˤ�dlsym() �Τ褦�����٥�ؿ���
-ľ�ܻȤ�ʤ���Фʤ�ʤ����̤��������ޤ���
-���Τ褦�ʾ��ˤ� DL �⥸�塼��δؿ�����Ѥ��뤳�Ȥˤʤ�Ǥ��礦��
-����ˤĤ��Ƥ� [[c:DL]] ���������ޤ���
+DL::Importable モジュールはとても便利です。
+しかし、ときにはdlsym() のような低レベル関数を
+直接使わなければならない場面に遭遇します。
+このような場合には DL モジュールの関数を使用することになるでしょう。
+これについては [[c:DL]] で説明します。
 
 #@end

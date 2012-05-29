@@ -18,4 +18,4 @@ require wsdl/info
 --- schemas
 #@todo
 
-Â°À­
+å±žæ€§

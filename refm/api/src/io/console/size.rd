@@ -1,4 +1,4 @@
-Ã¼Ëö¤Î¥µ¥¤¥º¤ò¼èÆÀ¤¹¤ë¤¿¤á¤Î [[lib:io/console]] ¤Î¥µ¥Ö¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+ç«¯æœ«ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹ãŸã‚ã® [[lib:io/console]] ã®ã‚µãƒ–ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = reopen IO
 
@@ -6,13 +6,13 @@
 
 --- default_console_size -> [Integer, Integer]
 
-¥Ç¥Õ¥©¥ë¥È¤ÎÃ¼Ëö¤Î¥µ¥¤¥º¤ò [rows, columns] ¤ÇÊÖ¤·¤Ş¤¹¡£
+ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ç«¯æœ«ã®ã‚µã‚¤ã‚ºã‚’ [rows, columns] ã§è¿”ã—ã¾ã™ã€‚
 
 --- console_size -> [Integer, Integer]
 
-Ã¼Ëö¤Î¥µ¥¤¥º¤ò [rows, columns] ¤ÇÊÖ¤·¤Ş¤¹¡£
+ç«¯æœ«ã®ã‚µã‚¤ã‚ºã‚’ [rows, columns] ã§è¿”ã—ã¾ã™ã€‚
 
-[[lib:io/console]] ¤¬ÍøÍÑ¤Ç¤­¤Ê¤¤¾ì¹ç¤Ï¡¢[[m:IO.default_console_size]]
-¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
+[[lib:io/console]] ãŒåˆ©ç”¨ã§ããªã„å ´åˆã¯ã€[[m:IO.default_console_size]]
+ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:IO.default_console_size]]

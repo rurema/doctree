@@ -1,81 +1,81 @@
 #@if (version <= '1.8.7')
 
 = class CSV::Cell < String
-CSV�����ǡ����Υ�����Cell�ˤ����뤿��Υ��饹��
-���Υ��饹�ϥС������1.8.7���ѻߤ���ޤ�����
+CSV形式データのカラム（Cell）を操作するためのクラス。
+このクラスはバージョン1.8.7で廃止されました。
 
 == Class Methods
 
 --- new(data = '', is_null = false) -> CSV::Cell
-����data���ͤȤ��ƻ���[[c:CSV::Cell]]���饹�Υ��֥������Ȥ��������ޤ���
+引数dataを値として持つ[[c:CSV::Cell]]クラスのオブジェクトを生成します。
 
-@param data Cell�ǡ����ν����
-@param is_null true�λ������ǡ����ǥ��֥������Ȥ��������ޤ���
+@param data Cellデータの初期値
+@param is_null trueの時、空データでオブジェクトを生成します。
 
 == Instance Methods
 
 #@if (version <= '1.8.1')
 
 --- ==(rhs) -> bool
-CSV::Cell���֥������ȴ֤���Ӥ�Ԥ��������ͤ��֤��ޤ���
+CSV::Cellオブジェクト間の比較を行い、真偽値を返します。
 
-��ʬ���ȤȰ������Ϥ��줿[[c:CSV::Cell]]���饹�Υ��֥������Ȥ���Ӥ�Ԥ��ޤ���
+自分自身と引数で渡された[[c:CSV::Cell]]クラスのオブジェクトと比較を行います。
 
-@param rhs ��Ӥ����[[c:CSV::Cell]]���饹�Υ��֥�������
+@param rhs 比較される[[c:CSV::Cell]]クラスのオブジェクト
 
-===== ����
+===== 注意
 
- * ��ʬ���Ȥޤ��ϰ�����[[c:CSV::Cell]]���֥������Ȥ���������is_null�ե饰�򥻥åȤ��Ƥ������Ͼ��false���֤��ޤ���
- * ���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+ * 自分自身または引数の[[c:CSV::Cell]]オブジェクトの生成時にis_nullフラグをセットしていた場合は常にfalseを返します。
+ * このメソッドはバージョン1.8.2で廃止されました。
 
 #@end
 
 #@if (version <= '1.8.7')
 
 --- data -> String
-��ʬ���Ȥ�Cell�ǡ�����[[c:String]]���饹���֥������ȤȤ����֤��ޤ���
+自分自身のCellデータを[[c:String]]クラスオブジェクトとして返します。
 
 #@end
 
 #@if (version <= '1.8.1')
 
 --- data=(new_data)
-��ʬ���Ȥ�Cell�ǡ�����񤭴����ޤ���
+自分自身のCellデータを書き換えます。
 
-@param new_data �񤭴�����ǡ���
+@param new_data 書き換えるデータ
 
-===== ����
+===== 注意
 
-���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+このメソッドはバージョン1.8.2で廃止されました。
 
 --- is_null -> bool
-��ʬ���Ȥ�is_null�ե饰���ѹ����ޤ���
+自分自身のis_nullフラグを変更します。
 
-===== ����
+===== 注意
 
-���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+このメソッドはバージョン1.8.2で廃止されました。
 
 --- is_null=(new_data)
-��ʬ���Ȥ�is_null�ե饰��񤭴����ޤ���
+自分自身のis_nullフラグを書き換えます。
 
-@param new_data �񤭴�����ǡ���
+@param new_data 書き換えるデータ
 
-===== ����
+===== 注意
 
-���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+このメソッドはバージョン1.8.2で廃止されました。
 
 --- match(rhs) -> bool
 
-CSV::Cell���֥������ȴ֤���Ӥ�Ԥ��������ͤ��֤��ޤ���
+CSV::Cellオブジェクト間の比較を行い、真偽値を返します。
 
-��ʬ���ȤȰ������Ϥ��줿[[c:CSV::Cell]]���饹�Υ��֥������Ȥ���Ӥ�Ԥ��ޤ���
+自分自身と引数で渡された[[c:CSV::Cell]]クラスのオブジェクトと比較を行います。
 
-@param rhs ��Ӥ����[[c:CSV::Cell]]���饹�Υ��֥�������
+@param rhs 比較される[[c:CSV::Cell]]クラスのオブジェクト
 
-===== ����
+===== 注意
 
- * ==�᥽�åɤȤΰ㤤�Ȥ��Ƥϼ�ʬ���ȤȰ�����[[c:CSV::Cell]]���֥������Ȥ���������is_null�ե饰�������Ȥ⥻�åȤ��Ƥ�������true���֤��ޤ���
- * ���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+ * ==メソッドとの違いとしては自分自身と引数の[[c:CSV::Cell]]オブジェクトの生成時にis_nullフラグを双方ともセットしていた場合はtrueを返します。
+ * このメソッドはバージョン1.8.2で廃止されました。
 
 #@end
 
@@ -83,13 +83,13 @@ CSV::Cell���֥������ȴ֤���Ӥ�Ԥ��������ͤ��֤��ޤ���
 
 --- to_s -> String
 --- to_str -> String
-��ʬ���Ȥ�[[c:String]]���֥������Ȥ��֤��ޤ���
+自分自身を[[c:String]]オブジェクトで返します。
 
-is_null�ե饰��true�˥��åȤ���Ƥ�����϶�ʸ����("")���֤��ޤ���
+is_nullフラグがtrueにセットされている場合は空文字列("")を返します。
 
-===== ����
+===== 注意
 
-���Υ᥽�åɤϥС������1.8.1�ǤΤ�ͭ���Ǥ���
+このメソッドはバージョン1.8.1でのみ有効です。
 
 #@end
 

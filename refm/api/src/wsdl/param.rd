@@ -16,12 +16,12 @@ require wsdl/info
 --- message
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo
@@ -32,7 +32,7 @@ require wsdl/info
 --- soapbody
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- soapbody_use
 #@todo
@@ -40,12 +40,12 @@ require wsdl/info
 --- soapfault
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- soapheader
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- targetnamespace
 #@todo

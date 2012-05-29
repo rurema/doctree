@@ -1,6 +1,6 @@
 = class OpenSSL::X509::Certificate < Object
 
-X509 �����񥯥饹
+X509 証明書クラス
 
   * [[RFC:5280]]
 
@@ -8,157 +8,157 @@ X509 �����񥯥饹
 
 --- new -> OpenSSL::X509::Certificate
 --- new(obj) -> OpenSSL::X509::Certificate
-�����񥪥֥������Ȥ��������ޤ���
+証明書オブジェクトを生成します。
 
-������Ϳ���ʤ��ä����ˤϡ����ξ�������֤��ޤ���
+引数を与えなかった場合には、空の証明書を返します。
 
-obj �� [[c:String]] �Ǥ�����ˤϡ������
-PEM �����⤷���� DER �����ξ�����ǡ�����ʸ����Ǥ���ȸ��ʤ���
-�������Ƥ�������񥪥֥������Ȥ��������ޤ���
+obj が [[c:String]] である場合には、それを
+PEM 形式もしくは DER 形式の証明書データの文字列であると見なして
+その内容から証明書オブジェクトを生成します。
 
-obj �� [[c:IO]] �Ǥ�����ˤϡ����Υե��������Ȥ���
-�����񥪥֥������Ȥ��������ޤ���
+obj が [[c:IO]] である場合には、そのファイルの中身から
+証明書オブジェクトを生成します。
 
-obj �� [[c:OpenSSL::X509::Certificate]] ���֥������ȤǤ�����ˤϡ�
-���Υ��֥������Ȥ����Ƥ�ʣ�����ޤ���
+obj が [[c:OpenSSL::X509::Certificate]] オブジェクトである場合には、
+そのオブジェクトの内容を複製します。
 
-obj �� to_der �᥽�åɤ���ľ��ˤϡ����Υ᥽�åɤˤ�ä�
-DER �����ΥХ�������Ѵ����������񥪥֥������Ȥ��������ޤ���
+obj が to_der メソッドを持つ場合には、そのメソッドによって
+DER 形式のバイト列に変換し、証明書オブジェクトを生成します。
 
-@param obj ������Υǡ���
-@raise OpenSSL::X509::CertificateError ������Υե����ޥåȤ������Ǥ���ʤɡ��ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ�
+@param obj 証明書のデータ
+@raise OpenSSL::X509::CertificateError 証明書のフォーマットが不正であるなど、読み込みに失敗した場合に発生します
 
 == Instance Methods
 
 --- to_der -> String
 
-DER �����ΥХ�������֤��ޤ���
+DER 形式のバイト列を返します。
 
 --- to_pem -> String
 --- to_s -> String
 
-PEM ������ʸ������֤��ޤ���
+PEM 形式の文字列を返します。
 
 --- to_text -> String
 
-�ʹ֤��ɤ�������ʸ������֤��ޤ���
+人間が読める形式の文字列を返します。
 
 --- version -> Integer
-X509 ������� version �Ǥ��� v1�ξ��� 0 ��v3 �ξ��� 2 �Ȥʤ�ޤ���
+X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
 
 --- version=(version)
-������ΥС����������ꤷ�ޤ���
+証明書のバージョンを設定します。
 
-@param version �С������(0�ʾ������)
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@param version バージョン(0以上の整数)
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- signature_algorithm -> String
-ȯ�Լ� (CA) ��������˽�̾����Τ˻Ȥä����르�ꥺ��Ǥ���
+発行者 (CA) が証明書に署名するのに使ったアルゴリズムです。
 
 --- serial -> Integer
-ȯ�Լ� (CA) ����������դ��뼱���ֹ���֤��ޤ���
+発行者 (CA) が証明書に付ける識別番号を返します。
 
 @see [[m:OpenSSL::X509::Certificate#serial=]]
 --- serial=(serial)
-������μ����ֹ�����ꤷ�ޤ���
+証明書の識別番号を設定します。
 
-@param serial �����ֹ�
+@param serial 識別番号
 @see [[m:OpenSSL::X509::Certificate#serial]]
 
 --- subject -> OpenSSL::X509::Name
-������ν�ͭ�Ԥ�̾�����֤��ޤ���
+証明書の所有者の名前を返します。
 
 
 --- subject=(name)
-������ν�ͭ�Ԥ�̾�������ꤷ�ޤ���
+証明書の所有者の名前を設定します。
 
-@param name ��ͭ�Ԥ�̾���� [[c:OpenSSL::X509::Name]] ���֥�������
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@param name 所有者の名前の [[c:OpenSSL::X509::Name]] オブジェクト
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- issuer -> OpenSSL::X509::Name
-�������ȯ�ԼԤ�̾�����֤��ޤ���
+証明書の発行者の名前を返します。
 
 --- issuer=(name)
-�������ȯ�ԼԤ�̾�������ꤷ�ޤ���
+証明書の発行者の名前を設定します。
 
-@param name ȯ�ԼԤ�̾���� [[c:OpenSSL::X509::Name]] ���֥�������
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@param name 発行者の名前の [[c:OpenSSL::X509::Name]] オブジェクト
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- not_before -> Time
-������ͭ���ˤʤ������֤��ޤ���
+証明書が有効になる時刻を返します。
 
 --- not_before=(time)
-������ͭ���ˤʤ��������ꤷ�ޤ���
+証明書が有効になる時刻を設定します。
 
-@param time ������γ��ϻ���
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@param time 証明書の開始時刻
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- not_after -> Time
-������̵���ˤʤ������֤��ޤ���
+証明書が無効になる時刻を返します。
 
 --- not_after=(time)
-������̵���ˤʤ��������ꤷ�ޤ���
+証明書が無効になる時刻を設定します。
 
-@param time ������ν�λ����
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@param time 証明書の終了時刻
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- extensions -> [OpenSSL::X509::Extension]
-������γ�ĥ�ΰ�����Ƥ��֤��ޤ���
+証明書の拡張領域の内容を返します。
 
 --- extensions=(extensions)
-������γ�ĥ�ΰ�����Ƥ����ꤷ�ޤ���
+証明書の拡張領域の内容を設定します。
 
-@param extensions ���ꤹ���ĥ([[c:OpenSSL::X509::Extension]] ���֥�������)������
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@param extensions 設定する拡張([[c:OpenSSL::X509::Extension]] オブジェクト)の配列
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- add_extension(ext) -> OpenSSL::X509::Extension
-��ĥ�ΰ�˳�ĥ���ɲä��ޤ���
+拡張領域に拡張を追加します。
 
-@return �ɲä�����ĥ���֤��ޤ�
-@param ext �ɲä����ĥ([[c:OpenSSL::X509::Extension]] ���֥�������)
-@raise OpenSSL::X509::CertificateError ����˼��Ԥ�������ȯ�����ޤ�
+@return 追加した拡張を返します
+@param ext 追加する拡張([[c:OpenSSL::X509::Extension]] オブジェクト)
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
 --- public_key -> OpenSSL::PKey::PKey
-������˵��ܤ��줿���������֤��ޤ���
+証明書に記載された公開鍵を返します。
 
-���μ���ˤ�äưʲ��Τ����줫�Υ��饹�Υ��󥹥��󥹤��֤��ޤ���
+鍵の種類によって以下のいずれかのクラスのインスタンスを返します。
   * [[c:OpenSSL::PKey::RSA]]
   * [[c:OpenSSL::PKey::DSA]]
   * [[c:OpenSSL::PKey::DH]]
   * [[c:OpenSSL::PKey::EC]]
 
-@raise OpenSSL::X509::CertificateError ���μ����˼��Ԥ�������ȯ�����ޤ�
-@raise OpenSSL::PKey::PKeyError ���ݡ��Ȥ��Ƥ��ʤ�����θ��Ǥ������ȯ�����ޤ�
+@raise OpenSSL::X509::CertificateError 鍵の取得に失敗した場合に発生します
+@raise OpenSSL::PKey::PKeyError サポートしていない種類の鍵である場合に発生します
 
 --- public_key=(pkey)
-������˸����������ꤷ�ޤ���
+証明書に公開鍵を設定します。
 
-@param pkey ������([[c:OpenSSL::PKey::PKey]]�Υ��֥��饹�Υ��󥹥���)
-@raise OpenSSL::X509::CertificateError ��������˼��Ԥ�������ȯ�����ޤ�
+@param pkey 公開鍵([[c:OpenSSL::PKey::PKey]]のサブクラスのインスタンス)
+@raise OpenSSL::X509::CertificateError 鍵の設定に失敗した場合に発生します
 
 --- sign(pkey, digest) -> self
-������˽�̾���ޤ���
+証明書に署名します。
 
-DSA �ǽ�̾������� digest �� "dss1" �Ǥʤ���Фʤ�ޤ���
+DSA で署名する場合は digest は "dss1" でなければなりません。
 
-@param pkey ȯ�Լ�(issuer)����̩��
-@param digest �ϥå���ؿ���ɽ��ʸ����
+@param pkey 発行者(issuer)の秘密鍵
+@param digest ハッシュ関数を表す文字列
 
 --- verify(key) -> bool
-�������ȯ�ԼԤθ������ǽ�̾�򸡾ڤ��ޤ���
+証明書の発行者の公開鍵で署名を検証します。
 
-���ڤ��������������ʤ�� self �� key �ǽ�̾���줿���Ȥ�
-��ǧ���줿���˿����֤��ޤ���
+検証に成功した、すなわち self が key で署名されたことが
+確認された場合に真を返します。
 
-@param key ���ڤ����Ѥ���ȯ�ԼԤθ�����
+@param key 検証に利用する発行者の公開鍵
 
 --- check_private_key(private_key) -> bool
-Ϳ����줿��̩����������˵��ܤ���Ƥ��� subject �θ��������б������Τ���Τ���ޤ���
+与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめます。
 
-��ǧ�������������˿����֤��ޤ���
-@param private_key ��ǧ�Ѥ���̩��
+確認に成功した場合に真を返します。
+@param private_key 確認用の秘密鍵
 
 = class OpenSSL::X509::CertificateError < OpenSSL::OpenSSLError
 
-X509 �������Ϣ�Υ��顼��ɽ���㳰�����饹�Ǥ���
+X509 証明書関連のエラーを表す例外くクラスです。
 

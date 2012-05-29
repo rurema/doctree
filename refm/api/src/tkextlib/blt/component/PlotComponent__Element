@@ -5,7 +5,7 @@ extend TkItemFontOptkeys
 extend TkItemConfigOptkeys
 extend Tk::BLT::PlotComponent::OptKeys
 
-¥×¥í¥Ã¥ÈÍ×ÁÇ
+ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ 
 
 == Class Methods
 
@@ -16,13 +16,13 @@ extend Tk::BLT::PlotComponent::OptKeys
 
 --- new(chart, element = nil, keys = {})
 
-¥×¥í¥Ã¥ÈÍ×ÁÇ¤òºîÀ®¤·¤Þ¤¹¡£
+ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ ã‚’ä½œæˆã—ã¾ã™ã€‚
 
-element ¤È¤·¤Æ id ¤ò»ØÄê¤·¤¿¾ì¹ç¡¢»ØÄê¤·¤¿ id ¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ¤¬ OBJ_TBL ¾å¤ËÂ¸ºß¤¹¤ë¤È¤­¤Ï¤½¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ¤òÊÖ¤·¤Þ¤¹¡£
+element ã¨ã—ã¦ id ã‚’æŒ‡å®šã—ãŸå ´åˆã€æŒ‡å®šã—ãŸ id ã®ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ ãŒ OBJ_TBL ä¸Šã«å­˜åœ¨ã™ã‚‹ã¨ãã¯ãã®ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param chart ¥°¥é¥Õ
+@param chart ã‚°ãƒ©ãƒ•
 @param element id
-@param keys ¥ª¥×¥·¥ç¥ó
+@param keys ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 
 --- type2class(type)
 #@todo
@@ -53,11 +53,11 @@ element ¤È¤·¤Æ id ¤ò»ØÄê¤·¤¿¾ì¹ç¡¢»ØÄê¤·¤¿ id ¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ¤¬ OBJ_TBL ¾å¤ËÂ¸ºß¤
 
 --- configure(key, value = None)
 
-¥ª¥×¥·¥ç¥ó¤òÀßÄê¤·¤Þ¤¹¡£
+ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-¤³¤ì¤Ï¼¡¤Î¸Æ¤Ó½Ð¤·¤ÈÆ±¤¸¤Ç¤¹¡£
+ã“ã‚Œã¯æ¬¡ã®å‘¼ã³å‡ºã—ã¨åŒã˜ã§ã™ã€‚
   @chart.element_configure(@id, key, value)
-@param key ¥ª¥×¥·¥ç¥ó
+@param key ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 
 --- current_configinfo(key = nil)
 #@todo
@@ -65,14 +65,14 @@ element ¤È¤·¤Æ id ¤ò»ØÄê¤·¤¿¾ì¹ç¡¢»ØÄê¤·¤¿ id ¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ¤¬ OBJ_TBL ¾å¤ËÂ¸ºß¤
 
 --- data(*args)
 
-¥×¥í¥Ã¥È¤¹¤ëºÂÉ¸ÃÍ¤òÀßÄê¤·¤Þ¤¹¡£
+ãƒ—ãƒ­ãƒƒãƒˆã™ã‚‹åº§æ¨™å€¤ã‚’è¨­å®šã—ã¾ã™ã€‚
 
   plot.data([[1.0, 3.4], [1.1, 2.8], [1.2, 3.1], [1.4, 2.9]].flatten)
 
-x ºÂÉ¸ÃÍ¤È y ºÂÉ¸ÃÍ¤ò¸ò¸ß¤Ë»ØÄê¤·¤Þ¤¹ (x0, y0, x1, y1, ...)¡£
-ºÂÉ¸ÃÍ¤ÏÀ°¿ô¤Þ¤¿¤Ï Float ¤Ç»ØÄê¤·¤Þ¤¹¡£
+x åº§æ¨™å€¤ã¨ y åº§æ¨™å€¤ã‚’äº¤äº’ã«æŒ‡å®šã—ã¾ã™ (x0, y0, x1, y1, ...)ã€‚
+åº§æ¨™å€¤ã¯æ•´æ•°ã¾ãŸã¯ Float ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param args ¥×¥í¥Ã¥ÈºÂÉ¸¤ÎÇÛÎó
+@param args ãƒ—ãƒ­ãƒƒãƒˆåº§æ¨™ã®é…åˆ—
 
 --- deactivate
 #@todo
@@ -91,7 +91,7 @@ x ºÂÉ¸ÃÍ¤È y ºÂÉ¸ÃÍ¤ò¸ò¸ß¤Ë»ØÄê¤·¤Þ¤¹ (x0, y0, x1, y1, ...)¡£
 
 --- id
 
-id ¤òÊÖ¤·¤Þ¤¹¡£
+id ã‚’è¿”ã—ã¾ã™ã€‚
 
 
 --- name
@@ -101,7 +101,7 @@ id ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- to_eval
 
-id ¤òÊÖ¤·¤Þ¤¹¡£
+id ã‚’è¿”ã—ã¾ã™ã€‚
 
 
 --- type

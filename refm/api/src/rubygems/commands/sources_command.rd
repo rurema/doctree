@@ -3,18 +3,18 @@ require rubygems/remote_fetcher
 require rubygems/source_info_cache
 require rubygems/spec_fetcher
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¼èÆÀ¸µ¤Î¾ðÊó¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®å–å¾—å…ƒã®æƒ…å ±ã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem sources [options]
     Options:
-      -a, --add SOURCE_URI             ¼èÆÀ¸µ¤òÄÉ²Ã¤·¤Þ¤¹
-      -l, --list                       ¼èÆÀ¸µ°ìÍ÷¤òÉ½¼¨¤·¤Þ¤¹
-      -r, --remove SOURCE_URI          ¼èÆÀ¸µ¤òºï½ü¤·¤Þ¤¹
-      -u, --update                     ¼èÆÀ¸µ¤Î¥­¥ã¥Ã¥·¥å¤ò¹¹¿·¤·¤Þ¤¹
-      -c, --clear-all                  Á´¤Æ¤Î¼èÆÀ¸µ¤òºï½ü¤·¡¢¥­¥ã¥Ã¥·¥å¤â¥¯¥ê¥¢¤·¤Þ¤¹
+      -a, --add SOURCE_URI             å–å¾—å…ƒã‚’è¿½åŠ ã—ã¾ã™
+      -l, --list                       å–å¾—å…ƒä¸€è¦§ã‚’è¡¨ç¤ºã—ã¾ã™
+      -r, --remove SOURCE_URI          å–å¾—å…ƒã‚’å‰Šé™¤ã—ã¾ã™
+      -u, --update                     å–å¾—å…ƒã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’æ›´æ–°ã—ã¾ã™
+      -c, --clear-all                  å…¨ã¦ã®å–å¾—å…ƒã‚’å‰Šé™¤ã—ã€ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚‚ã‚¯ãƒªã‚¢ã—ã¾ã™
 #@include(common_options)
     Summary:
-      Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¼èÆÀ¸µ¤Î¾ðÊó¤ò´ÉÍý¤·¤Þ¤¹
+      Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®å–å¾—å…ƒã®æƒ…å ±ã‚’ç®¡ç†ã—ã¾ã™
     Defaults:
       --list
 
@@ -22,6 +22,6 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¼èÆÀ¸µ¤Î¾ðÊó¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = class Gem::Commands::SourcesCommand < Gem::Command
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¼èÆÀ¸µ¤Î¾ðÊó¤ò´ÉÍý¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®å–å¾—å…ƒã®æƒ…å ±ã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 

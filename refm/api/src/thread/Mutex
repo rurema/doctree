@@ -1,64 +1,64 @@
 = class Mutex < Object
 
-Mutex(Mutal Exclusion = �����¾���å�)�϶�ͭ�ǡ������¹ԥ������������ݸ��
-����ˤ���ޤ���Mutex ��ŵ��Ū�ʻȤ�����(m �� Mutex ���֥������ȤȤ��ޤ�):
+Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アクセスから保護する
+ためにあります。Mutex の典型的な使い方は(m を Mutex オブジェクトとします):
 
   m.lock
   begin
-    # m �ˤ�ä��ݸ�줿����ƥ����륻�������
+    # m によって保護されたクリティカルセクション
   ensure
     m.unlock
   end
 
-�ޤ��ϡ�����ñ��
+または、より簡単に
 
   m.synchronize {
-    # m �ˤ�ä��ݸ�줿����ƥ����륻�������
+    # m によって保護されたクリティカルセクション
   }
 
 == Class Methods
 
 --- new -> Mutex
-������ mutex �����������֤��ޤ���
+新しい mutex を生成して返します。
 
 == Instance Methods
 
 #@until 1.9.1
 --- exclusive_unlock { ... } -> self | nil
-���å�������������å��Ԥ��ˤʤäƤ��륹��åɤ�¹Բ�ǽ���֤�
-�����塢�֥��å���¹Ԥ��ޤ���
+ロックを解放し、ロック待ちになっているスレッドを実行可能状態に
+した後、ブロックを実行します。
 
-�֥��å��μ¹Ԥ���λ����ޤǡ�����åɤ��ڤ��ؤ��ޤ���
+ブロックの実行が終了するまで、スレッドは切り替わりません。
 
-@return self �����å�����Ƥ��ʤ���� nil ���֤��ޤ��������Ǥʤ����self ���֤��ޤ���
+@return self がロックされていなければ nil を返します。そうでなければself を返します。
 #@end
 
 --- lock -> self
-mutex ���֥������Ȥ���å����ޤ������٤˰�ĤΥ�
-��åɤ����� mutex ����å��Ǥ��ޤ������˥��å�����Ƥ��� mutex
-���Ф��ƥ��å���Ԥ����Ȥ�������åɤ� mutex �Υ��å���������
-���ޤǡ��¹Ԥ���ߤ���ޤ���
+mutex オブジェクトをロックします。一度に一つのス
+レッドだけが mutex をロックできます。既にロックされている mutex
+に対してロックを行おうとしたスレッドは mutex のロックが解放さ
+れるまで、実行が停止されます。
 
 
 --- locked? -> bool
-mutex �����å�����Ƥ�����������֤��ޤ���
+mutex がロックされている時、真を返します。
 
 --- synchronize { ... } -> object
 
-mutex ����å������֥��å���¹Ԥ��ޤ����¹Ը��ɬ�� mutex �Υ��å���������ޤ���
+mutex をロックし、ブロックを実行します。実行後に必ず mutex のロックを解放します。
 
-�֥��å����Ǹ��ɾ�������ͤ��֤��ޤ���
+ブロックが最後に評価した値を返します。
 
 --- try_lock -> bool
-mutex ����å����褦�Ȥ��ơ����å�������������硢�����֤��ޤ���
-���å��Ǥ��ʤ��ä����ˤϥ֥��å����������֤��ޤ���
+mutex をロックしようとして、ロックが成功した場合、真を返します。
+ロックできなかった場合にはブロックせず偽を返します。
 
 --- unlock     -> self | nil
-mutex �Υ��å���������ޤ���mutex �Υ��å��Ԥ��ˤʤäƤ�������åɤμ¹ԤϺƳ�����ޤ���
+mutex のロックを解放します。mutex のロック待ちになっていたスレッドの実行は再開されます。
 
-@return self �����å�����Ƥ��ʤ���� nil ���֤��ޤ��������Ǥʤ����self ���֤��ޤ���
+@return self がロックされていなければ nil を返します。そうでなければself を返します。
 
-��:
+例:
 
  m = Mutex.new
  begin 
@@ -69,8 +69,8 @@ mutex �Υ��å���������ޤ���mutex �Υ��å��Ԥ��ˤʤäƤ�������åɤμ¹ԤϺƳ���
  end
 
 #@since 1.9.1
-Mutex �ϥ��å���������åɰʳ�������å��������뤳�ȤϽ���ޤ���
-���å���������åɰʳ����� unlock ���ƤФ��� ThreadError ��ȯ�����ޤ���
+Mutex はロックしたスレッド以外からロックを開放することは出来ません。
+ロックしたスレッド以外から unlock が呼ばれると ThreadError が発生します。
 
  m = Mutex.new
  m.lock
@@ -78,15 +78,15 @@ Mutex �ϥ��å���������åɰʳ�������å��������뤳�ȤϽ���ޤ���
    m.unlock # => ThreadError
  end.join
 
-@raise ThreadError ���Ȥ���å���������åɰʳ�����ƤФ줿����ȯ�����ޤ���
+@raise ThreadError 自身をロックしたスレッド以外から呼ばれた場合に発生します。
 #@end
 
 #@since 1.9.1
 --- sleep(timeout = nil)    -> self
 
-Ϳ����줿�ÿ��δ֥��꡼�פ��Ƥ�����å���������ޤ���
+与えられた秒数の間スリープしてからロックを解放します。
 
-@param timeout ���꡼�פ����ÿ�����ꤷ�ޤ�����ά����ȥ��꡼�פ�³���ޤ���
+@param timeout スリープする秒数を指定します。省略するとスリープし続けます。
 
-@raise ThreadError ���Ȥ������ȥ���åɤˤ�äƥ��å�����Ƥ��ʤ�����ȯ�����ޤ���
+@raise ThreadError 自身がカレントスレッドによってロックされていない場合に発生します。
 #@end

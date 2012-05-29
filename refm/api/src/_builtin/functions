@@ -6,20 +6,20 @@
 --- exit(status = 0) -> ()
 #@end
 
-Ruby�ץ������μ¹Ԥ�λ���ޤ���status �Ȥ�����
-����Ϳ����줿��硢�����ͤ� Ruby ���ޥ�ɤν�λ���ơ������Ȥ��ޤ���
-�ǥե���Ȥν�λ���ơ������� 0(���ｪλ)�Ǥ���
+Rubyプログラムの実行を終了します。status として整
+数が与えられた場合、その値を Ruby コマンドの終了ステータスとします。
+デフォルトの終了ステータスは 0(正常終了)です。
 
 #@since 1.8.0
-status �� true �ξ�� 0�� false �ξ�� 1 ������˻��ꤷ���Ȥߤʤ���ޤ��������ͤ�C��٥�����
-EXIT_SUCCESS��EXIT_FAILURE ���ͤʤΤǡ����ΤˤϴĶ���¸�Ǥ���
+status が true の場合 0、 false の場合 1 を引数に指定したとみなされます。この値はCレベルの定数
+EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
 #@end
 
-exit ���㳰 [[c:SystemExit]] ��ȯ������
-�뤳�Ȥˤ�äƥץ������μ¹Ԥ�λ�����ޤ��Τǡ�
-ɬ�פ˱����� begin �����ª���뤳�Ȥ��Ǥ��ޤ���
+exit は例外 [[c:SystemExit]] を発生させ
+ることによってプログラムの実行を終了させますので、
+必要に応じて begin 節で捕捉することができます。
 
-@param status ��λ���ơ������������� true �ޤ��� false ��Ϳ���ޤ���
+@param status 終了ステータスを整数か true または false で与えます。
 
   puts 'start'
   begin
@@ -35,14 +35,14 @@ exit ���㳰 [[c:SystemExit]] ��ȯ������
   ensure
     puts 'end2...'
   end
-  puts 'end' #�¹Ԥ���ʤ�
+  puts 'end' #実行されない
   
   #=> start
   #   start1...
   #   end1 with #<SystemExit: exit>
   #   start2...
   #   end2...
-  #��λ���ơ�����:0
+  #終了ステータス:0
 
 @see [[m:Kernel.#exit!]],[[m:Kernel.#abort]], [[ref:d:spec/control#begin]]
 
@@ -52,41 +52,41 @@ exit ���㳰 [[c:SystemExit]] ��ȯ������
 --- exit!(status = -1) -> ()
 #@end
 
-Ruby�ץ������μ¹Ԥ�¨�¤˽�λ���ޤ���
-status �Ȥ���������Ϳ����줿��硢�����ͤ� Ruby ���ޥ�ɤν�λ���ơ������Ȥ��ޤ���
+Rubyプログラムの実行を即座に終了します。
+status として整数が与えられた場合、その値を Ruby コマンドの終了ステータスとします。
 #@since 1.8.0
-�ǥե���Ȥν�λ���ơ������� 1 �Ǥ���
+デフォルトの終了ステータスは 1 です。
 #@else
-�ǥե���Ȥν�λ���ơ������� -1 �Ǥ���
+デフォルトの終了ステータスは -1 です。
 #@end
 
 #@since 1.8.0
-status �� true �ξ�� 0�� false �ξ�� 1 ������˻��ꤷ���Ȥߤʤ���ޤ��������ͤ�C��٥�����
-EXIT_SUCCESS��EXIT_FAILURE ���ͤʤΤǡ����ΤˤϴĶ���¸�Ǥ���
+status が true の場合 0、 false の場合 1 を引数に指定したとみなされます。この値はCレベルの定数
+EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
 #@end
 
-exit! �� exit �Ȥϰ�äơ��㳰�����ʤɤϰ��ڹԤʤ��ޤ�
-�� [[m:Kernel.#fork]] �θ塢�ҥץ�������λ��������ʤɤ���
-�����ޤ���
+exit! は exit とは違って、例外処理などは一切行ないませ
+ん。 [[m:Kernel.#fork]] の後、子プロセスを終了させる時などに用
+いられます。
 
-@param status ��λ���ơ������������� true �ޤ��� false ��Ϳ���ޤ���
+@param status 終了ステータスを整数か true または false で与えます。
 
-  STDOUT.sync = true #ɽ�����˽�λ���ʤ��褦�ˤ���
+  STDOUT.sync = true #表示前に終了しないようにする
   puts 'start'
   begin
     puts 'start1...'
     exit!
   ensure
-    puts 'end1...' #�¹Ԥ���ʤ�
+    puts 'end1...' #実行されない
   end
-  puts 'end' #�¹Ԥ���ʤ�
+  puts 'end' #実行されない
   
   #=> start
   #   start1...
 #@since 1.8.0
-  #��λ���ơ�����:1
+  #終了ステータス:1
 #@else
-  #��λ���ơ�����:-1
+  #終了ステータス:-1
 #@end
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#abort]]
@@ -97,23 +97,23 @@ exit! �� exit �Ȥϰ�äơ��㳰�����ʤɤϰ��ڹԤʤ��ޤ�
 --- abort -> ()
 #@end
 
-Ruby �ץ������򥨥顼��å������դ��ǽ�λ���ޤ�����λ���ơ������� 1 ����Ǥ���
+Ruby プログラムをエラーメッセージ付きで終了します。終了ステータスは 1 固定です。
 
-���Υ᥽�åɤ� [[m:Kernel.#exit]] �Ȥΰ㤤�ϡ��ץ������ν�λ���ơ�
-������ 1 (���Τˤ�C��٥����� EXIT_FAILURE ����)����Ǥ��뤳�Ȥȡ�
+このメソッドと [[m:Kernel.#exit]] との違いは、プログラムの終了ステー
+タスが 1 (正確にはCレベルの定数 EXIT_FAILURE の値)固定であることと、
 #@since 1.8.0
-�������ά�����ƤӽФ����� 
+引数を省略した呼び出し時に 
 #@end
-[[m:$!]] �� nil �Ǥʤ���Ф����㳰��
-��å�������ɸ�२�顼���� [[m:$stderr]] �˽��Ϥ��뤳�ȤǤ���
+[[m:$!]] が nil でなければその例外の
+メッセージを標準エラー出力 [[m:$stderr]] に出力することです。
 
 #@since 1.8.0
-���� message ����ꤹ��� SystemExit ���饹��
-[[m:Exception#message]] �� message �����ꤷ
-��ɸ�२�顼���Ϥ˽��Ϥ��ޤ���
+引数 message を指定すると SystemExit クラスの
+[[m:Exception#message]] に message を設定し
+て標準エラー出力に出力します。
 #@end
 
-@param message ���顼��å�����ʸ����Ǥ���
+@param message エラーメッセージ文字列です。
 
   puts 'start'
   begin
@@ -130,15 +130,15 @@ Ruby �ץ������򥨥顼��å������դ��ǽ�λ���ޤ�����λ���ơ������� 1 ����Ǥ���
   ensure
     puts 'end2...'
   end
-  puts 'end' #�¹Ԥ���ʤ�
+  puts 'end' #実行されない
   
   #=> start
   #   start1...
   #   end1 with #<SystemExit: error1>
   #   start2...
   #   end2...
-  #��λ���ơ�����:1
-  #(ɸ�२�顼����)
+  #終了ステータス:1
+  #(標準エラー出力)
   #=> error1
   #   ..:12: RuntimeError (RuntimeError)
 
@@ -146,24 +146,24 @@ Ruby �ץ������򥨥顼��å������դ��ǽ�λ���ޤ�����λ���ơ������� 1 ����Ǥ���
 
 --- `(command) -> String
 
-command �������ޥ�ɤȤ��Ƽ¹Ԥ�������ɸ����Ϥ�ʸ����Ȥ���
-�֤��ޤ������Υ᥽�åɤ� `command` �η����ǸƤФ�ޤ���
+command を外部コマンドとして実行し、その標準出力を文字列として
+返します。このメソッドは `command` の形式で呼ばれます。
 
-���� command ���Ф����֥륯�����ȤǰϤޤ줿ʸ�����Ʊ�ͤβ��ȼ�Ÿ����Ԥä��塢
-���ޥ�ɤȤ��Ƽ¹Ԥ��ޤ���
-���ޥ�ɤ�ɾ������뤿�Ӥ˼¹Ԥ���ޤ������ޥ�ɤν�λ���ơ�����������ˤϡ�[[m:$?]] �򻲾Ȥ��ޤ���
+引数 command に対しダブルクォートで囲まれた文字列と同様の解釈と式展開を行った後、
+コマンドとして実行します。
+コマンドは評価されるたびに実行されます。コマンドの終了ステータスを得るには、[[m:$?]] を参照します。
 
-���ޥ�ɤν��Ϥ�����ɬ�פ��ʤ���ñ�˥��ޥ�ɤ�¹Ԥ����������ʤ�
-[[m:Kernel.#system]] ��Ȥ��ޤ����ä�ü�������椹�륳�ޥ�ɤǤ�
-`command` �ϼ��Ԥ��뤫�⤷��ޤ���
+コマンドの出力を得る必要がなく、単にコマンドを実行したいだけなら
+[[m:Kernel.#system]] を使います。特に端末を制御するコマンドでは
+`command` は失敗するかもしれません。
 
-[[ref:d:spec/literal#command]] �⻲�ȡ�
+[[ref:d:spec/literal#command]] も参照。
 
-@param command ���ޥ�ɤȤ��Ƽ¹Ԥ�������Ǥ������Τޤ�ɾ�������ΤǤϤʤ���
-       ���֥륯������ʸ�����Ʊ�ͤΥХå�����å��嵭ˡ�β��ȼ�Ÿ�����Ԥ��ޤ���
-@return ���ޥ�ɤν��Ϥ�ʸ������֤��ޤ���
+@param command コマンドとして実行する引数です。そのまま評価されるのではなく、
+       ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
+@return コマンドの出力を文字列で返します。
 #@since 1.9.1
-@raise Errno::EXXX ���ޥ�ɤ�¹ԤǤ��ʤ��Ȥ��伺�Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
 #@end
 
   puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
@@ -182,40 +182,40 @@ command �������ޥ�ɤȤ��Ƽ¹Ԥ�������ɸ����Ϥ�ʸ����Ȥ���
 --- system(env, command, options={}) -> bool | nil
 #@end
 
-�����������ޥ�ɤȤ��Ƽ¹Ԥ��ơ������������˿����֤��ޤ���
+引数を外部コマンドとして実行して、成功した時に真を返します。
 
-�ҥץ���������λ���ơ����� 0 �ǽ�λ����������Ȥߤʤ� true ���֤��ޤ���
+子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
 #@since 1.9.1
-����ʳ��ν�λ���ơ������ξ��� false ���֤��ޤ���
-���ޥ�ɤ�¹ԤǤ��ʤ��ä����� nil ���֤��ޤ���
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
 #@else
-����ʳ��ν�λ���ơ������ξ��
-(���ޥ�ɤ�¹ԤǤ��ʤ��ä�����ޤ�)�� false ���֤��ޤ���
+それ以外の終了ステータスの場合
+(コマンドを実行できなかった場合も含む)は false を返します。
 #@end
 
-��λ���ơ��������ѿ� [[m:$?]] �ǻ��ȤǤ��ޤ���
+終了ステータスは変数 [[m:$?]] で参照できます。
 
 #@since 1.9.1
-���ޥ�ɤ�¹Ԥ��뤳�Ȥ��Ǥ��ʤ��ä���硢¿���Υ�����ϥ��ơ�����
-127 ���֤��ޤ���(�������ä� [[m:$?]] �ο��ͤϡ�0x7f00)����������
-���ʤ����� Ruby �λҥץ����������ơ����� 127 �ǽ�λ���ޤ���
-���ޥ�ɤ��¹ԤǤ��ʤ��ä��Τ������ޥ�ɤ����Ԥ����Τ��ϡ�����
-[[m:$?]] �򻲾Ȥ��뤳�Ȥ�Ƚ�̲�ǽ�Ǥ���
+コマンドを実行することができなかった場合、多くのシェルはステータス
+127 を返します。(したがって [[m:$?]] の数値は、0x7f00)、シェルを介
+さない場合は Ruby の子プロセスがステータス 127 で終了します。
+コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
+[[m:$?]] を参照することで判別可能です。
 #@end
 
-==== �����β��
+==== 引数の解釈
 
-���η����Ǥ� command �� shell �Υ᥿ʸ��
+この形式では command が shell のメタ文字
 //emlist{
   * ? {} [] <> () ~ & | \ $ ; ' ` " \n
 //}
-��ޤ��硢shell ��ͳ�Ǽ¹Ԥ���ޤ���
-�����Ǥʤ���Х��󥿥ץ꥿����ľ�ܼ¹Ԥ���ޤ���
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
 
-@param command command ���ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param command command コマンドを文字列で指定します。
 #@since 1.9.1
-@param env ��������Ķ��ѿ���ɽ�� Hash
-@param options ���ץ����ѥ�᡼�� Hash
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
 #@end
 #@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
@@ -230,57 +230,57 @@ command �������ޥ�ɤȤ��Ƽ¹Ԥ�������ɸ����Ϥ�ʸ����Ȥ���
 --- system(env, program, *args, options={}) -> bool | nil
 #@end
 
-�����������ޥ�ɤȤ��Ƽ¹Ԥ��ơ������������˿����֤��ޤ���
+引数を外部コマンドとして実行して、成功した時に真を返します。
 
-�ҥץ���������λ���ơ����� 0 �ǽ�λ����������Ȥߤʤ� true ���֤��ޤ���
+子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
 #@since 1.9.1
-����ʳ��ν�λ���ơ������ξ��
-(���ޥ�ɤ�¹ԤǤ��ʤ��ä�����ޤ�)�� false ���֤��ޤ���
+それ以外の終了ステータスの場合
+(コマンドを実行できなかった場合も含む)は false を返します。
 #@else
-����ʳ��ν�λ���ơ������ξ��� false ���֤��ޤ���
-���ޥ�ɤ�¹ԤǤ��ʤ��ä����� nil ���֤��ޤ���
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
 #@end
 
-��λ���ơ��������ѿ� [[m:$?]] �ǻ��ȤǤ��ޤ���
+終了ステータスは変数 [[m:$?]] で参照できます。
 
 #@since 1.9.1
-���ޥ�ɤ�¹Ԥ��뤳�Ȥ��Ǥ��ʤ��ä���硢¿���Υ�����ϥ��ơ�����
-127 ���֤��ޤ���(�������ä� $? �ο��ͤϡ�0x7f00)����������
-���ʤ����� Ruby �λҥץ����������ơ����� 127 �ǽ�λ���ޤ���
-���ޥ�ɤ��¹ԤǤ��ʤ��ä��Τ������ޥ�ɤ����Ԥ����Τ��ϡ�����
-$? �򻲾Ȥ��뤳�Ȥ�Ƚ�̲�ǽ�Ǥ���
+コマンドを実行することができなかった場合、多くのシェルはステータス
+127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
+さない場合は Ruby の子プロセスがステータス 127 で終了します。
+コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
+$? を参照することで判別可能です。
 #@end
 
 #@since 1.9.1
-Hash �� options �Ȥ����Ϥ����Ȥǡ���ư�����ҥץ�������
-  * �ץ��������롼��
+Hash を options として渡すことで、起動される子プロセスの
+  * プロセスグループ
   * resource limit
-  * �����ȥǥ��쥯�ȥ�
+  * カレントディレクトリ
   * umask
-  * �ҥץ������ǤΥ�����쥯��
-�ʤɤ��ѹ��Ǥ��ޤ����Ķ��ѿ��Υ��ꥢ�ʤɤ����Ǥ��ޤ���
-�ܤ����� [[m:Kernel.#spawn]] �򻲾Ȥ��Ƥ���������
+  * 子プロセスでのリダイレクト
+などを変更できます。環境変数のクリアなども指定できます。
+詳しくは [[m:Kernel.#spawn]] を参照してください。
 #@end
 
-==== �����β��
+==== 引数の解釈
 
-���η����ǸƤӽФ�����硢����� shell �Υ᥿����饯����
-���Τޤ� program �ΰ������Ϥ���ޤ���
-��Ƭ�ΰ�����2���Ǥ�����Ǥ��ä���硢��1���Ǥ�ʸ���󤬼ºݤ�
-��ư����ץ������Υѥ��Ǥ��ꡢ��2���Ǥ��֤ߤ������פΥץ�
-�����̾�ˤʤ�ޤ���
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
 #@since 1.8.0
-�ޤ�����1���Ǥϥե�ѥ��ǻ��ꤷ�ʤ��Ƥ�Ķ��ѿ� PATH ����õ���ޤ���
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 #@end
 
-@param program ʸ����2���Ǥ�����Ǥ���
-@param args program ���Ϥ������� 0 �İʾ���ꤹ��
+@param program 文字列か2要素の配列です。
+@param args program に渡す引数を 0 個以上指定する
 #@since 1.9.1
-@param env ��������Ķ��ѿ���ɽ�� Hash
-@param options ���ץ����ѥ�᡼�� Hash
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
 #@end
-@raise ArgumentError �����������󤫤����ǿ��� 2 �Ǥʤ�����ȯ�����ޤ���
-#@#��...
+@raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
+#@#例...
 #@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@else
@@ -291,26 +291,26 @@ Hash �� options �Ȥ����Ϥ����Ȥǡ���ư�����ҥץ�������
 --- spawn(command, options={}) -> Integer
 --- spawn(env, command, options={}) -> Integer
 
-�����������ޥ�ɤȤ��Ƽ¹Ԥ��ޤ�������������
-�ҥץ������ν�λ���Ԥ���碌�ޤ������������ҥץ������Υץ�����ID���֤��ޤ���
+引数を外部コマンドとして実行しますが、生成した
+子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
 
 
-==== �����β��
+==== 引数の解釈
 
-���η����Ǥ� command �� shell �Υ᥿ʸ��
+この形式では command が shell のメタ文字
 //emlist{
   * ? {} [] <> () ~ & | \ $ ; ' ` " \n
 //}
-��ޤ��硢shell ��ͳ�Ǽ¹Ԥ���ޤ���
-�����Ǥʤ���Х��󥿥ץ꥿����ľ�ܼ¹Ԥ���ޤ���
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
 
 
-@param command ���ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
-@param env ��������Ķ��ѿ���ɽ�� Hash
-@param options ���ץ����ѥ�᡼�� Hash
-@raise Errno::EXXX ��ư�˼��Ԥ���ruby ���󥿥ץ꥿�����椬��ä�����ȯ�����ޤ���
+@param command コマンドを文字列で指定します。
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
+@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
-@raise Errno::EXXX ���ޥ�ɤ��¹ԤǤ��ʤ��ä�����ȯ�����ޤ���
+@raise Errno::EXXX コマンドが実行できなかった場合に発生します。
 
 
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
@@ -318,229 +318,229 @@ Hash �� options �Ȥ����Ϥ����Ȥǡ���ư�����ҥץ�������
 --- spawn(program, *args) -> Integer
 --- spawn(env, program, *args, options={}) -> Integer
 
-�����������ޥ�ɤȤ��Ƽ¹Ԥ��ޤ�������������
-�ҥץ������ν�λ���Ԥ���碌�ޤ������������ҥץ������Υץ�����ID���֤��ޤ���
+引数を外部コマンドとして実行しますが、生成した
+子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
 
-env �� Hash ���Ϥ����Ȥǡ�[[man:exec(2)]] �ǻҥץ��������
-�ե������¹Ԥ������˴Ķ��ѿ����ѹ����뤳�Ȥ��Ǥ��ޤ���
-Hash �Υ����ϴĶ��ѿ�̾ʸ����Hash ���ͤ����ꤹ���ͤȤ��ޤ���
-nil �Ȥ��뤳�ȤǴĶ��ѿ������([[man:unsetenv(3)]])����ޤ���
-  # FOO �� BAR �ˤ��� BAZ ��������
+env に Hash を渡すことで、[[man:exec(2)]] で子プロセス内で
+ファイルを実行する前に環境変数を変更することができます。
+Hash のキーは環境変数名文字列、Hash の値に設定する値とします。
+nil とすることで環境変数が削除([[man:unsetenv(3)]])されます。
+  # FOO を BAR にして BAZ を削除する
   pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
 
-�ƥץ������� [[m:Process.#waitpid]] �ǻҥץ������ν�λ���Ԥ���碌�뤫
-�⤷���� [[m:Process.#detach]] �ǻҥץ��������ڤ�Υ�������Ƥ���������
-�����Ǥʤ��ȥ���ӥץ��������Ĥ��礬����ޤ���
+親プロセスは [[m:Process.#waitpid]] で子プロセスの終了を待ち合わせるか
+もしくは [[m:Process.#detach]] で子プロセスを切り離すかしてください。
+そうでないとゾンビプロセスが残る場合があります。
 
-==== �����β��
+==== 引数の解釈
 
-���η����ǸƤӽФ�����硢����� shell �Υ᥿����饯����
-���Τޤ� program �ΰ������Ϥ���ޤ���
-��Ƭ�ΰ�����2���Ǥ�����Ǥ��ä���硢��1���Ǥ�ʸ���󤬼ºݤ�
-��ư����ץ������Υѥ��Ǥ��ꡢ��2���Ǥ��֤ߤ������פΥץ�
-�����̾�ˤʤ�ޤ���
-�ޤ�����1���Ǥϥե�ѥ��ǻ��ꤷ�ʤ��Ƥ�Ķ��ѿ� PATH ����õ���ޤ���
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 
-==== option�����γ���
-Hash �� options �Ȥ����Ϥ����Ȥǡ���ư�����ҥץ�������
-  * �ץ��������롼��
+==== option引数の概要
+Hash を options として渡すことで、起動される子プロセスの
+  * プロセスグループ
   * resource limit
-  * �����ȥǥ��쥯�ȥ�
+  * カレントディレクトリ
   * umask
-  * �ҥץ������ǤΥ�����쥯��
-�ʤɤ��ѹ��Ǥ��ޤ����Ķ��ѿ��Υ��ꥢ�ʤɤ����Ǥ��ޤ���
+  * 子プロセスでのリダイレクト
+などを変更できます。環境変数のクリアなども指定できます。
 
-�ʲ��Υ��ץ���󤬻���Ǥ��ޤ���
+以下のオプションが指定できます。
 
 : :unsetenv_others 
-  ����� true �ˤ���ȡ�env�ǻ��ꤷ���Ķ��ѿ��ʳ��򤹤٤ƥ��ꥢ���ޤ���
-  false ���ȥ��ꥢ���ޤ���false ���ǥե���ȤǤ���
+  これを true にすると、envで指定した環境変数以外をすべてクリアします。
+  false だとクリアしません。false がデフォルトです。
 
 : :pgroup
-  ������ true or 0 ���Ϥ��ȿ������ץ��������롼�פ��������������ư���ޤ���
-  �������Ϥ��ȡ����ꤷ���ץ��������롼�פ�°���ޤ�
-  nil ���Ϥ��ȥץ��������롼�פ��ѹ����ޤ��󡣥ǥե���Ȥ� nil �Ǥ���
+  引数に true or 0 を渡すと新しいプロセスグループを作成し、そこで動きます。
+  整数を渡すと、指定したプロセスグループに属します
+  nil を渡すとプロセスグループを変更しません。デフォルトは nil です。
 
 : :rlimit_core, :rlimit_cpu, etc
-  resource limit �����ꤷ�ޤ����ܤ����� [[m:Process.#setrlimit]] �򸫤�
-  ���������������ˤ��������⤷��������2�Ĥ�������Ϥ��ޤ���
+  resource limit を設定します。詳しくは [[m:Process.#setrlimit]] を見て
+  ください。引数には整数、もしくは整数2つの配列を渡します。
 
 : :chdir
-  ���ꤷ��ʸ����򥫥��ȥǥ��쥯�ȥ�ˤ��ޤ���
+  指定した文字列をカレントディレクトリにします。
 
 : :umask
-  ���ꤷ�������� umask �����ꤷ�ޤ���
+  指定した整数を umask に設定します。
 
-: ������쥯�ȴ�Ϣ
+: リダイレクト関連
 
-  Hash �Υ����˻ҥץ�����¦�Υե�����ǥ�����ץ���
-  �б������ͤ˿ƥץ�����¦�Υե�����ǥ�����ץ���
-  �ե�����̾����ꤹ�뤳�Ȥǥ�����쥯�Ȥ�¸��Ǥ��ޤ���
+  Hash のキーに子プロセス側のファイルデスクリプタを、
+  対応する値に親プロセス側のファイルデスクリプタや
+  ファイル名を指定することでリダイレクトを実現できます。
 
 : :close_others
-  ����� true �����ꤹ���
-  ������쥯�Ȥ���Ƥ��ʤ���0(stdin), 1(stdout), 2(stderr) �ʳ���
-  �ե�����ǥ�����ץ��򤹤٤��Ĥ��ޤ���
-  true ���ǥե���ȤǤ���
+  これを true に設定すると
+  リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
+  ファイルデスクリプタをすべて閉じます。
+  true がデフォルトです。
 
-==== option�����ˤ�������쥯�Ȥγ���
-Hash �Υ���(�ҥץ�����¦)�ˤϰʲ��Τ����줫������Ǥ��ޤ���
-  * ñ��Υե�����ǥ�����ץ�
-  * �ե�����ǥ�����ץ�������
-������Ϥ����Ȥ�ʣ���Υե�����ǥ�����ץ���Ʊ���˥�����쥯�ȤǤ��ޤ���
+==== option引数によるリダイレクトの概要
+Hash のキー(子プロセス側)には以下のいずれかが指定できます。
+  * 単一のファイルデスクリプタ
+  * ファイルデスクリプタの配列
+配列を渡すことで複数のファイルデスクリプタを同時にリダイレクトできます。
 
-Hash ����(�ƥץ�����¦)�ˤϰʲ��Τ����줫������Ǥ��ޤ���
-  * ñ��Υե�����ǥ�����ץ�
-  * ������쥯����Υե�����̾ʸ����
-  * [������쥯����Υե�����̾ʸ����]����������Ǥˤ��뤳�Ȥ�
-    [[m:File::RDONLY]] �ǥե�����򳫤��ƥ�����쥯�Ȥ��ޤ���
-  * [������쥯����Υե�����̾ʸ����, �⡼��ʸ����]
-    open(�ե�����̾, �⡼��, 0644) �ǥե�����򳫤��ƥ�����쥯��
-    ���ޤ���
-  * [������쥯����Υե�����̾ʸ����, �⡼��ʸ����, �ѡ��ߥ����(����)]
-    open(�ե�����̾, �⡼��, �ѡ��ߥå����) �ǥե������
-    �����ƥ�����쥯�Ȥ��ޤ���
-  * [:child, �ե�����ǥ�����ץ�]
-    �ҥץ�����¦�Υե�����ǥ�����ץ������Ǥ��ޤ���
-  * :close �����ǻ��ꤷ���ե�����ǥ�����ץ���ҥץ�����¦���Ĥ��ޤ�
+Hash の値(親プロセス側)には以下のいずれかが指定できます。
+  * 単一のファイルデスクリプタ
+  * リダイレクト先のファイル名文字列
+  * [リダイレクト先のファイル名文字列]、配列の要素にすることで
+    [[m:File::RDONLY]] でファイルを開いてリダイレクトします。
+  * [リダイレクト先のファイル名文字列, モード文字列]
+    open(ファイル名, モード, 0644) でファイルを開いてリダイレクト
+    します。
+  * [リダイレクト先のファイル名文字列, モード文字列, パーミション(整数)]
+    open(ファイル名, モード, パーミッション) でファイルを
+    開いてリダイレクトします。
+  * [:child, ファイルデスクリプタ]
+    子プロセス側のファイルデスクリプタを指定できます。
+  * :close キーで指定したファイルデスクリプタを子プロセス側で閉じます
 
-�ե�����ǥ�����ץ���ɽ������ˤϡ��ʲ������ѤǤ��ޤ���
-  * :in  ɸ������, �ե�����ǥ�����ץ�0
-  * :out ɸ�����, �ե�����ǥ�����ץ�1
-  * :err ɸ�२�顼����, �ե�����ǥ�����ץ�2
-  * ���� ���ꤷ��������ɽ���ե�����ǥ�����ץ�
-  * [[c:IO]] [[m:IO#fileno]] ��ɽ�����ե�����ǥ�����ץ�
+ファイルデスクリプタを表すためには、以下が利用できます。
+  * :in  標準入力, ファイルデスクリプタ0
+  * :out 標準出力, ファイルデスクリプタ1
+  * :err 標準エラー出力, ファイルデスクリプタ2
+  * 整数 指定した整数が表すファイルデスクリプタ
+  * [[c:IO]] [[m:IO#fileno]] で表されるファイルデスクリプタ
 
-==== option�����ξܺ٤������
+==== option引数の詳細および例
 
-��:unsetenv_others�פ�Ȥ��ȡ�env�ǻ��ꤷ����ΰʳ��δĶ��ѿ���
-���ꥢ���ޤ���
-  # ���٤ƤδĶ��ѿ��򥯥ꥢ
+「:unsetenv_others」を使うと、envで指定したもの以外の環境変数を
+クリアします。
+  # すべての環境変数をクリア
   pid = spawn(command, :unsetenv_others=>true)
-  # FOO ����
+  # FOO だけ
   pid = spawn({"FOO"=>"BAR"}, command, :unsetenv_others=>true)
 
-��:pgroup�פǥץ��������롼�פ����Ǥ��ޤ���
-  # true, 0 �ǿ������ץ��������롼�פ��ꤽ�Υ꡼�����ˤʤ�ޤ���
+「:pgroup」でプロセスグループを指定できます。
+  # true, 0 で新しいプロセスグループを作りそのリーダーになります。
   pid = spawn(command, :pgroup => true)
-  # �������Ϥ��Ȥ��Υ��롼�פ˽�°���ޤ���
+  # 整数を渡すとそのグループに所属します。
   pid = spawn(command, :pgroup => 10)
 
-��:rlimit_core�ס�:rlimit_cpu�פʤɤǡ�resource limit ����ꤷ�ޤ���
-�ܤ����� [[m:Process.#setrlimit]] �򸫤Ƥ���������
-���Υ��ץ����ˤ� ���� or ����2�Ĥ����󡢤��Ϥ����Ȥ��Ǥ��ޤ���
-���줾�� [[m:Process.#setrlimit]] �ΰ�����2�ġ�3�Ĥξ����б����ޤ���
-  # ���ץ������� core �� resource limit �����
+「:rlimit_core」「:rlimit_cpu」などで、resource limit を指定します。
+詳しくは [[m:Process.#setrlimit]] を見てください。
+このオプションには 整数 or 整数2つの配列、を渡すことができます。
+それぞれ [[m:Process.#setrlimit]] の引数が2個、3個の場合に対応します。
+  # 現プロセスの core の resource limit を取得
   cur, max = Process.getrlimit(:CORE)
-  # ���Ū�˻ҥץ������� core dump ��ߤ��
+  # 一時的に子プロセスの core dump を止める
   pid = spawn(command, :rlimit_core=>[0,max]) # disable core temporary.
-  # �ҥץ������� core dump ��Ф���褦�ˤ���
+  # 子プロセスで core dump を出せるようにする
   pid = spawn(command, :rlimit_core=>max) # enable core dump
-  # �ҥץ������� core dump ��Ф��ʤ�����
+  # 子プロセスで core dump を出せなくする
   pid = spawn(command, :rlimit_core=>0) # never dump core.
 
-��:chdir�פǻҥץ������Υ����ȥǥ��쥯�ȥ���ѹ��Ǥ��ޤ���
+「:chdir」で子プロセスのカレントディレクトリを変更できます。
   pid = spawn(command, :chdir=>"/var/tmp")
 
-��:umask�פǻҥץ������� umask �����Ǥ��ޤ���
+「:umask」で子プロセスの umask を指定できます。
    pid = spawn(command, :umask=>077)
 
-������쥯�Ȥ��͡��ʤ�꤫�����Ȥ��ޤ���
-Hash �Υ������ҥץ�����¦���ͤ��ƥץ�����¦�Ǥ���
-  # �ʲ�����Ϥ��٤� stderr �� stdout �˥�����쥯�Ȥ��ޤ�
+リダイレクトは様々なやりかたが使えます。
+Hash のキーが子プロセス側、値が親プロセス側です。
+  # 以下の例はすべて stderr を stdout にリダイレクトします
   pid = spawn(command, :err=>:out)
   pid = spawn(command, 2=>1)
   pid = spawn(command, STDERR=>:out)
   pid = spawn(command, STDERR=>STDOUT)
-������Ǥϻҥץ�����¦�� stdout �ˤϿ���Ƥ��ʤ��Τǡ�
-�ƥץ�������������Ѥ���ޤ���
+この例では子プロセス側の stdout には触れていないので、
+親プロセスから引き継がれます。
 
-Hash ���ͤˤϥե�����̾�����Ǥ��ޤ���
+Hash の値にはファイル名も指定できます。
   pid = spawn(command, :in=>"/dev/null") # read mode
   pid = spawn(command, :out=>"/dev/null") # write mode
   pid = spawn(command, :err=>"log") # write mode
   pid = spawn(command, 3=>"/dev/null") # read mode
-stdout �� stderr �������쥯�Ȥ������ϡ�
-�ե������ write mode �� open ����ޤ�������ʳ��ξ���
-read mode �� open ����ޤ���
+stdout と stderr をリダイレクトした場合は、
+ファイルは write mode で open されます。それ以外の場合は
+read mode で open されます。
 
-�ե�����Υե饰(write/read mode)��ѡ��ߥå���������������
-���ϡ�������Ѥ��ޤ���
-  # �ʤˤ���꤬�ʤ���Хǥե���Ȥ� read mode ���Ȥ��롣
+ファイルのフラグ(write/read mode)やパーミッションを明示したい
+場合は、配列を用います。
+  # なにも指定がなければデフォルトで read mode が使われる。
   pid = spawn(command, :in=>["file"]) 
-  # read mode �� file �� open ����������쥯�Ȥ��롣
+  # read mode で file を open し、リダイレクトする。
   pid = spawn(command, :in=>["file", "r"])
-  # write mode �� file �� open ����������쥯�Ȥ��롣
-  # �ѡ��ߥå����ϥǥե���Ȥ� 644��
+  # write mode で file を open し、リダイレクトする。
+  # パーミッションはデフォルトで 644。
   pid = spawn(command, :out=>["log", "w"]) # 0644 assumed
-  # write mode���ѡ��ߥå���� 0600 �ǥե�����򥪡��ץ󤷡�������쥯�Ȥ��롣
+  # write mode、パーミッション 0600 でファイルをオープンし、リダイレクトする。
   pid = spawn(command, :out=>["log", "w", 0600])
-  # flag��ʸ����Ǥʤ��ӥåȤǻ��ꤹ��
+  # flagを文字列でなくビットで指定する
   pid = spawn(command, :out=>["log", File::WRONLY|File::EXCL|File::CREAT, 0600])
 
-�����ʣ���Υե�����ǥ�����ץ���Ʊ���˥�����쥯�ȤǤ��ޤ���
-  # stdout �� stderr �� "log" �ե�����˥�����쥯��
+配列で複数のファイルデスクリプタを同時にリダイレクトできます。
+  # stdout と stderr を "log" ファイルにリダイレクト
   pid = spawn(command, [:out, :err]=>["log", "w"])
 
-ʣ���Υե�����ǥ�����ץ����碌�ƥ�����쥯�Ȥ���ˤϡ�
-[ :child, FileDescriptor ] ��Ȥ����Ȥ�Ǥ��ޤ���
-����ϻҥץ�����¦�� FileDescriptor �˥�����쥯�Ȥ��뤳�Ȥ��̣���ޤ���
-����ϥե�����ǥ�����ץ���ľ�ܻ��ꤹ��ΤȰۤʤ�Ȥ������Ȥ�
-���դ��Ƥ���������
-�㤨�С�
+複数のファイルデスクリプタを合わせてリダイレクトするには、
+[ :child, FileDescriptor ] を使うこともできます。
+これは子プロセス側で FileDescriptor にリダイレクトすることを意味します。
+これはファイルデスクリプタを直接指定するのと異なるということに
+注意してください。
+例えば、
   :err => :out 
-�Ȥ���ȡ��ҥץ������� stderr ��ƥץ������� stdout �˥�����쥯�Ȥ��ޤ���
+とすると、子プロセスの stderr を親プロセスの stdout にリダイレクトします。
   :err => [:child, :out]
-�Ȥ���ȡ��ҥץ������� stderr ��ҥץ������� stdout �˥�����쥯�Ȥ��ޤ���
-������Ѥ��ơ�[[m:IO.popen]] �ǡ��ҥץ�������
-stderr �� stdout �򺮤������ʲ��˼����ޤ���
+とすると、子プロセスの stderr を子プロセスの stdout にリダイレクトします。
+これを用いて、[[m:IO.popen]] で、子プロセスの
+stderr と stdout を混ぜる例を以下に示します。
   io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
   p io.read #=> "out\nerr\n
 
-spawn �� IO.popen �Ǥ�
-�ǥե���ȤǤ���ɸ��Ū�ʥե�����ǥ�����ץ�(3�ʹ�)�򤹤٤��Ĥ��ޤ���
-��:close_others�ץ��ץ����Ǥ��ε�ư������Ǥ��ޤ���
-ɸ��Ū�ե�����ǥ�����ץ�(0,1,2)�� :close ������Ū���Ĥ��ʤ�
-�¤ꡢ���Υ��ץ����αƶ�������ޤ���
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+「:close_others」オプションでこの挙動を制御できます。
+標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
+限り、このオプションの影響を受けません。
   pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
   pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
 
-��������Ѥ��� spawn �� [[m:IO.popen]] �Τ褦�˻Ȥ����Ȥ��Ǥ��ޤ���
+これを利用して spawn を [[m:IO.popen]] のように使うことができます。
   # similar to r = IO.popen(command)
   r, w = IO.pipe
-  pid = spawn(command, :out=>w)   # r �ϻҥץ��������Ĥ�����
+  pid = spawn(command, :out=>w)   # r は子プロセスで閉じられる
   w.close
 
-��:close�פ�Ȥäƥե�����ǥ�����ץ�������Ū���Ĥ��뤳�Ȥ�Ǥ��ޤ���
+「:close」を使ってファイルデスクリプタを明示的に閉じることもできます。
   f = open(foo)
-  # f �ϷѾ�����ʤ�
-  # system �� :close_others=>false ���ǥե���ȤʤΤǤ���ʳ��ϷѾ������
+  # f は継承されない
+  # system は :close_others=>false がデフォルトなのでそれ以外は継承される
   system(command, f=>:close)        # don't inherit f.
 
-spawn ������Υե�����ǥ�����ץ�������Ѿ����������ϡ�
-io => io �Ȥ������Υ��ץ�������ꤷ�ޤ���
-  # valgrind �� --log-fd �Ȥ������ץ����ǥ����ν���������Ǥ��ޤ���
-  # ����ǻ��ꤷ���ե�����ǥ�����ץ��Ͽƥץ���������
-  # �ҥץ������˷Ѿ�����ʤ���Фʤ�ʤ����ᡢ log_w=>log_w �Ȥ��ޤ���
+spawn で特定のファイルデスクリプタだけを継承したい場合は、
+io => io という形のオプションを指定します。
+  # valgrind は --log-fd というオプションでログの出力先を指定できます。
+  # これで指定したファイルデスクリプタは親プロセスから
+  # 子プロセスに継承されなければならないため、 log_w=>log_w とします。
   log_r, log_w = IO.pipe
   pid = spawn("valgrind", "--log-fd=#{log_w.fileno}", "echo", "a", log_w=>log_w)
   log_w.close
   p log_r.read
 
-�ե�����ǥ�����ץ��������ؤ��뤳�Ȥ�Ǥ��ޤ���
-  # stdout �� stderr �������ؤ�������쥯��
+ファイルデスクリプタを入れ替えることもできます。
+  # stdout と stderr を入れ替えリダイレクト
   pid = spawn(command, :out=>:err, :err=>:out)
-���Τ褦����߻��Ȥ��褹�뤿�ᡢspawn�������ǿ�����
-�ե�����ǥ�����ץ����ꡢ���Ѥ��ޤ���
+このような相互参照を解決するため、spawnの内部で新しい
+ファイルデスクリプタを作り、利用します。
 
-@param env ��������Ķ��ѿ���ɽ�� Hash
-@param program ʸ����2���Ǥ��������ꤷ�ޤ���
-@param args �Ϥ��������Ǥ���0 �İʾ��ʸ�������ꤷ�ޤ���
-@param options ���ץ����ѥ�᡼�� Hash
+@param env 更新する環境変数を表す Hash
+@param program 文字列か2要素の配列を指定します。
+@param args 渡される引数です。0 個以上の文字列を指定します。
+@param options オプションパラメータ Hash
 
-@raise ArgumentError �����������󤫤����ǿ��� 2 �Ǥʤ�����ȯ�����ޤ���
+@raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 
-@raise Errno::EXXX ���ޥ�ɤ��¹ԤǤ��ʤ��ä�����ȯ�����ޤ���
+@raise Errno::EXXX コマンドが実行できなかった場合に発生します。
 
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 #@end
@@ -552,38 +552,38 @@ io => io �Ȥ������Υ��ץ�������ꤷ�ޤ���
 --- exec(env, command, options={}) -> ()
 #@end
 
-�����ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ��ޤ���
+引数で指定されたコマンドを実行します。
 
-�ץ������μ¹ԥ����ɤϤ��Υ��ޥ��(���뤤�� shell)�ˤʤ�Τǡ�
-��ư������������硢���Υ᥽�åɤ�������ޤ���
+プロセスの実行コードはそのコマンド(あるいは shell)になるので、
+起動に成功した場合、このメソッドからは戻りません。
 
-==== �����β��
+==== 引数の解釈
 
-���η����Ǥ� command �� shell �Υ᥿ʸ��
+この形式では command が shell のメタ文字
 //emlist{
   * ? {} [] <> () ~ & | \ $ ; ' ` " \n
 //}
-��ޤ��硢shell ��ͳ�Ǽ¹Ԥ���ޤ���
-�����Ǥʤ���Х��󥿥ץ꥿����ľ�ܼ¹Ԥ���ޤ���
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
 
-@param command ���ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param command コマンドを文字列で指定します。
 #@since 1.9.1
-@param env ��������Ķ��ѿ���ɽ�� Hash
-@param options ���ץ����ѥ�᡼�� Hash
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
 #@end
-@raise Errno::EXXX ��ư�˼��Ԥ���ruby ���󥿥ץ꥿�����椬��ä�����ȯ�����ޤ���
+@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
   # a.rb
-  puts '�¹���'
-  exec 'echo "�¹���"'
-  puts '�¹Ը�'
+  puts '実行前'
+  exec 'echo "実行中"'
+  puts '実行後'
 
-�嵭�Υ�����ץȤ�¹Ԥ���Ȱʲ��Τ褦�ˤʤ�ޤ���
+上記のスクリプトを実行すると以下のようになります。
 
   $ ruby a.rb
-  �¹���
-  �¹���
-  # '�¹Ը�' ��ɽ������ʤ�
+  実行前
+  実行中
+  # '実行後' は表示されない
 
 #@until 1.9.1
 --- exec(program, *args) -> ()
@@ -592,56 +592,56 @@ io => io �Ȥ������Υ��ץ�������ꤷ�ޤ���
 --- exec(evn, program, *args, options={}) -> ()
 #@end
 
-�����ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ��ޤ���
+引数で指定されたコマンドを実行します。
 
-�ץ������μ¹ԥ����ɤϤ��Υ��ޥ��(���뤤�� shell)�ˤʤ�Τǡ�
-��ư������������硢���Υ᥽�åɤ�������ޤ���
+プロセスの実行コードはそのコマンド(あるいは shell)になるので、
+起動に成功した場合、このメソッドからは戻りません。
 
-���η����Ǥϡ���� shell ���ͳ�����˼¹Ԥ���ޤ���
+この形式では、常に shell を経由せずに実行されます。
 
 #@since 1.9.1
-[[man:exec(3)]] �ǥ��ޥ�ɤ�¹Ԥ���ȡ�
-�����Υץ������δĶ��򤢤�����(�ե�����ǥ�����ץ��ʤ�)�����Ѥ��ޤ���
-Hash �� options �Ȥ����Ϥ����Ȥǡ����ε�ư���ѹ��Ǥ��ޤ���
-�ܤ����� [[m:Kernel.#spawn]] �򻲾Ȥ��Ƥ���������
+[[man:exec(3)]] でコマンドを実行すると、
+元々のプログラムの環境をある程度(ファイルデスクリプタなど)引き継ぎます。
+Hash を options として渡すことで、この挙動を変更できます。
+詳しくは [[m:Kernel.#spawn]] を参照してください。
 #@end
 
-==== �����β��
+==== 引数の解釈
 
-���η����ǸƤӽФ�����硢����� shell �Υ᥿����饯����
-���Τޤ� program �ΰ������Ϥ���ޤ���
-��Ƭ�ΰ�����2���Ǥ�����Ǥ��ä���硢��1���Ǥ�ʸ���󤬼ºݤ�
-��ư����ץ������Υѥ��Ǥ��ꡢ��2���Ǥ��֤ߤ������פΥץ�
-�����̾�ˤʤ�ޤ���
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
 #@since 1.8.0
-�ޤ�����1���Ǥϥե�ѥ��ǻ��ꤷ�ʤ��Ƥ�Ķ��ѿ� PATH ����õ���ޤ���
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 #@end
 
-@param program ʸ����2���Ǥ��������ꤷ�ޤ���
-@param args �Ϥ��������Ǥ���0 �İʾ��ʸ�������ꤷ�ޤ���
+@param program 文字列か2要素の配列を指定します。
+@param args 渡される引数です。0 個以上の文字列を指定します。
 #@since 1.9.1
-@param env ��������Ķ��ѿ���ɽ�� Hash
-@param options ���ץ����ѥ�᡼�� Hash
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
 #@end
-@raise ArgumentError �����������󤫤����ǿ��� 2 �Ǥʤ�����ȯ�����ޤ���
-@raise Errno::EXXX ��ư�˼��Ԥ���ruby ���󥿥ץ꥿�����椬��ä�����ȯ�����ޤ���
+@raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
+@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
-#@#��...
+#@#例...
 
-#@# ���ޥ�ɤΰ������ʤ�����ޤ�� shell ���ͳ�����˥ץ�������¹Ԥ���������硢
-#@# �ʲ��Τ褦�� exec ��ƤӽФ��ޤ���
+#@# コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
+#@# 以下のように exec を呼び出します。
 #@# 
 #@#   exec [program, program], *args
 
-��
+例
 
   # a.rb
   exec ['sleep', 'mysleep'], '600'
 
-�嵭������ץȤ�¹Ԥ���Ȱʲ��Τ褦�ˤʤ�ޤ���
+上記スクリプトを実行すると以下のようになります。
 
   $ ruby a.rb
-  ## sleep ���Ƥ�Τ����椬��äƤ��ʤ����̤β���ü�������ؤ��ưʲ���¹�
+  ## sleep してるので制御が戻ってこない。別の仮想端末に切替えて以下を実行
   $ ps aux|grep sleep
   xxxx    32754  0.0  0.0   2580   468 pts/3    S+   22:01   0:00 mysleep 600
   xxxx    32761  0.0  0.0   2824   792 pts/6    S+   22:01   0:00 grep sleep
@@ -655,39 +655,39 @@ Hash �� options �Ȥ����Ϥ����Ȥǡ����ε�ư���ѹ��Ǥ��ޤ���
 --- fork -> Integer | nil
 --- fork { ... } -> Integer | nil
 
-[[man:fork(2)]] �����ƥॳ�����Ȥäƥץ�������ʣ�����
-��ޤ����ƥץ������Ǥϻҥץ������Υץ�����ID�򡢻ҥץ������Ǥ�
-nil ���֤��ޤ����֥��å�����ꤷ�ƸƤӽФ������ˤϡ�������
-���ҥץ������ǥ֥��å���ɾ�����ޤ���
+[[man:fork(2)]] システムコールを使ってプロセスの複製を作
+ります。親プロセスでは子プロセスのプロセスIDを、子プロセスでは
+nil を返します。ブロックを指定して呼び出した場合には、生成し
+た子プロセスでブロックを評価します。
 
 #@since 1.8.2
-fork ���� STDOUT �� STDERR �� [[m:IO#flush]] ���ޤ���
+fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 #@end
 
-@raise NotImplementedError �¹ԴĶ������Υ᥽�åɤ��б����Ƥ��ʤ��Ȥ�ȯ�����ޤ���
-#@#��...
+@raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
+#@#例...
 @see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
 
-num�ǻ��ꤵ�줿�ֹ�Υ����ƥॳ�����¹Ԥ��ޤ���
-��2�����ʹߤ򥷥��ƥॳ����ΰ����Ȥ����Ϥ��ޤ���
+numで指定された番号のシステムコールを実行します。
+第2引数以降をシステムコールの引数として渡します。
 
-�ɤο��ͤ��ɤΥ����ƥॳ������б����뤫�ϡ�
-[[man:syscall(2)]] ��
-/usr/include/sys/syscall.h �򻲾Ȥ��Ƥ���������
+どの数値がどのシステムコールに対応するかは、
+[[man:syscall(2)]] や
+/usr/include/sys/syscall.h を参照してください。
 
-�����ƥॳ����δ����˽�����[[man:syscall(2)]]
-�� -1 ���֤����ˤ��㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
-����ʳ��Ǥϡ��֤����ͤ򤽤Τޤ޿��ͤ��֤��ޤ���
+システムコールの慣習に従い、[[man:syscall(2)]]
+が -1 を返す場合には例外 [[c:Errno::EXXX]] が発生します。
+それ以外では、返した値をそのまま数値で返します。
 
-�饤�֥�� [[lib:dl]] ��Ȥ��Ф����٥�����Ǥ��ޤ���
+ライブラリ [[lib:dl]] を使えばより高レベルな操作ができます。
 
-@param num �����ƥॳ�����ֹ�Ǥ���
-@param arg ʸ���󤫡������Ǥ������� 9 �Ĥޤ��Ϥ����Ȥ��Ǥ��ޤ���
-@raise Errno::EXXX syscall(2) �� -1 ���֤�������ȯ�����ޤ���
-@raise NotImplementedError �¹ԴĶ������Υ᥽�åɤ��б����Ƥ��ʤ��Ȥ�ȯ�����ޤ���
-#@#��...
+@param num システムコール番号です。
+@param arg 文字列か、整数です。最大 9 個まで渡すことができます。
+@raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
+@raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
+#@#例...
 @see [[lib:dl]]
 
 #@since 1.9.1
@@ -698,266 +698,266 @@ num�ǻ��ꤵ�줿�ֹ�Υ����ƥॳ�����¹Ԥ��ޤ���
 --- open(file, mode = "r", perm = 0666) {|io| ... } -> object
 #@end
 
-file �򥪡��ץ󤷤ơ�[[c:IO]]��[[c:File]]��ޤ�˥��饹�Υ��󥹥��󥹤��֤��ޤ���
+file をオープンして、[[c:IO]]（[[c:File]]を含む）クラスのインスタンスを返します。
 
-�֥��å���Ϳ����줿��硢���ꤵ�줿�ե�����򥪡��ץ󤷡�
-�������� [[c:IO]] ���֥������Ȥ�����Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-�֥��å��ν�λ�����㳰�ˤ��֥��å���æ�Ф���Ȥ���
-�ե�����򥯥��������ޤ����֥��å���ɾ��������̤��֤��ޤ���
+ブロックが与えられた場合、指定されたファイルをオープンし、
+生成した [[c:IO]] オブジェクトを引数としてブロックを実行します。
+ブロックの終了時や例外によりブロックを脱出するとき、
+ファイルをクローズします。ブロックを評価した結果を返します。
 
-�ե�����̾ file �� `|' �ǻϤޤ���ˤ�³��ʸ����򥳥ޥ�ɤȤ��Ƶ�ư����
-���ޥ�ɤ�ɸ�������Ϥ��Ф��ƥѥ��ץ饤����������ޤ�
+ファイル名 file が `|' で始まる時には続く文字列をコマンドとして起動し、
+コマンドの標準入出力に対してパイプラインを生成します
 
-�ե�����̾�� "|-" �Ǥ������open �� Ruby �λҥץ�����
-�������������λҥץ������Ȥδ֤Υѥ���([[c:IO]]���֥�������)���֤�
-�ޤ���(���ΤȤ���ư��ϡ�[[m:IO.popen]] ��Ʊ���Ǥ���
-[[m:File.open]] �ˤϥѥ��ץ饤����������뵡ǽ�Ϥ���ޤ���)��
+ファイル名が "|-" である時、open は Ruby の子プロセス
+を生成し、その子プロセスとの間のパイプ([[c:IO]]オブジェクト)を返し
+ます。(このときの動作は、[[m:IO.popen]] と同じです。
+[[m:File.open]] にはパイプラインを生成する機能はありません)。
 
-Perl�Ȱۤʤꥳ�ޥ�ɤϾ�� `|' �ǻϤޤ�ޤ���
+Perlと異なりコマンドは常に `|' で始まります。
 
-@param file �ե������ʸ����ǻ��ꤷ�ޤ�����������ꤷ�����ϥե�����ǥ�������ץ��Ȥ��ư����ޤ���
+@param file ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
 #@since 1.9.1
-@param mode_enc �⡼�ɡ����󥳡��ǥ��󥰤�ʸ��������������¤ǻ��ꤷ�ޤ�����ҡ�
+@param mode_enc モード・エンコーディングを文字列か定数の論理和で指定します。後述。
 #@else
-@param mode �⡼�ɤ�ʸ��������������¤ǻ��ꤷ�ޤ�����ҡ�
+@param mode モードを文字列か定数の論理和で指定します。後述。
 #@end
-@param perm [[man:open(2)]] ���� 3 �����Τ褦�ˡ��ե�����������������
-  �ե�����Υѡ��ߥå����������ǻ��ꤷ�ޤ���
+@param perm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合の
+  ファイルのパーミッションを整数で指定します。
 #@if (version < "1.8.0")
-  ���ΰ����ϡ��� 2 ���������ͷ����Ǥʤ����̵�뤵��ޤ�
+  この引数は、第 2 引数が数値形式でなければ無視されます
 #@end
-@raise Errno::EXXX �ե�����Υ����ץ�˼��Ԥ�������ȯ�����ޤ��� 
+@raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。 
 
-#@#��...
+#@#例...
 
 @see [[m:File.open]],[[m:IO.popen]],[[m:IO.open]]
 
-==== ��������Υ����ץ�⡼�ɡ����󥳡��ǥ���
-ʸ����("mode" �� "mode:ext_enc" �� "mode:ext_enc:int_enc" �Ȥ�������)��
-����([[c:File::Constants]] �⥸�塼��������������)���Ȥ߹�碌�ƻ��ꤷ�ޤ���
+==== 第二引数のオープンモード・エンコーディング
+文字列("mode" か "mode:ext_enc" か "mode:ext_enc:int_enc" という形式)か
+整数([[c:File::Constants]] モジュールの定数の論理和)を組み合わせて指定します。
 
-mode �ϰʲ��λ��ĤΤ����Τ����줫�Ǥ���
+mode は以下の三つのうちのいずれかです。
 
 : "r", RDONLY
-    �ե�������ɤ߹��ߥ⡼�ɤǥ����ץ󤷤ޤ����ʥǥե���ȤΥ⡼�ɡ�
+    ファイルを読み込みモードでオープンします。（デフォルトのモード）
 
 : "w", WRONLY|CREAT|TRUNC
-    �ե������񤭹��ߥ⡼�ɤǥ����ץ󤷤ޤ���
-    �����ץ���˥ե����뤬���Ǥ�¸�ߤ��Ƥ����
-    �������Ƥ���ˤ��ޤ���
+    ファイルを書き込みモードでオープンします。
+    オープン時にファイルがすでに存在していれば
+    その内容を空にします。
 
 : "a", WRONLY|CREAT|APPEND
-    �ե������񤭹��ߥ⡼�ɤǥ����ץ󤷤ޤ���
-    ���Ϥ� ��� �ե�������������ɲä���ޤ���
-    �㤨�С��ե����륪���ץ���˥ե�����Υ�����������
-    ���ʤäƤ⤽�������˽��Ϥ���ޤ���
-#@#    ���Τ��Ȥϥ������Ϥ�
-#@#    �ɤǥץ�������¹Ԥ����ޤޤ��Υ����򾮤������������
-#@#    �����Ѥ���ޤ���
+    ファイルを書き込みモードでオープンします。
+    出力は 常に ファイルの末尾に追加されます。
+    例えば、ファイルオープン中にファイルのサイズが小さ
+    くなってもその末尾に出力されます。
+#@#    このことはログ出力な
+#@#    どでプログラムを実行したままそのログを小さくしたい場合
+#@#    に利用されます。
 
-�ʾ��3�Ĥθ�� "+" ������С��ե�������ɤ߽�ξ�ѥ⡼�� (RDWR)
-�ǥ����ץ󤵤�ޤ���
+以上の3つの後に "+" があれば、ファイルは読み書き両用モード (RDWR)
+でオープンされます。
 
 : "r+"
-    �ե�������ɤ߽񤭰��֤���Ƭ�˥��åȤ���ޤ���
+    ファイルの読み書き位置は先頭にセットされます。
 
 : "w+"
-    "r+" ��Ʊ���Ǥ����������ץ���˥ե����뤬���Ǥ�
-    ¸�ߤ��Ƥ���Ф������Ƥ���ˤ��ޤ���
+    "r+" と同じですが、オープン時にファイルがすでに
+    存在していればその内容を空にします。
 
 : "a+"
-    "r+"��Ʊ�͡��ե�������ɤ߹��߰��֤���Ƭ�˥��åȤ���ޤ�����
-    �񤭹��ߤϾ�˥ե����������˹Ԥ��ޤ����񤭹��ߤ�
-    [[m:IO#seek]] �ʤɤαƶ�������ޤ���
+    "r+"と同様、ファイルの読み込み位置は先頭にセットされますが、
+    書き込みは常にファイル末尾に行われます。書き込みは
+    [[m:IO#seek]] などの影響を受けません。
 
-�����Τ�������Ф��Ƥ� "b" �ե饰�� ("r+b"�Τ褦��) �Ĥ��뤳�Ȥ���
-���ޤ� (�����ʤ� File::BINARY )�����ξ�硢�Х��ʥ�⡼�ɤǥ����ץ�
-���ޤ� (��������DOS/Windows�Τ褦�˥����ƥब�ƥ����ȡ��Х��ʥ�ǥե��������̤����
-��˸¤�ޤ�)
+これらのいずれに対しても "b" フラグを ("r+b"のように) つけることがで
+きます (整数なら File::BINARY )。この場合、バイナリモードでオープン
+します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
+合に限ります)
 
 #@since 1.9.1
 ==== Universal Newline
-���Ԥ�LF��·���ޤ�������Ǹ�����PEP:278 [[url:http://www.python.org/dev/peps/pep-0278/]]�Τ��ȤǤ���
+改行をLFに揃えます。一言で言えばPEP:278 [[url:http://www.python.org/dev/peps/pep-0278/]]のことです。
 
 : "rt"
-    CR��LF��CRLF�Τ�������LF�Ȥ����ɤ߹��ࡣ
+    CR、LF、CRLFのいずれをもLFとして読み込む。
 : "rb"
-    CR��LF��CRLF�Ϥ�����⤽�Τޤ��ɤ߹��ޤ�롣
+    CR、LF、CRLFはいずれもそのまま読み込まれる。
 : "r"
-    "rt"��"rb"�Τɤ���ΰ����ˤʤ뤫�ϥץ�åȥե������¸��
-    (Unix�Ϥʤ�Фʤ�"rb"��mswin��mingw�ʤ�"rt"�����Ȥʤ�)
+    "rt"と"rb"のどちらの扱いになるかはプラットフォーム依存。
+    (Unix系ならばなら"rb"、mswinやmingwなら"rt"扱いとなる)
 : "wb"
-    LF�Ϥ��Τޤ�LF�Ȥ��ƽ񤭹��ޤ�롣
-: "wt" �ޤ��� "w"
-    LF��LF�Τޤޤ���CR+LF�����ɤ��餫�ˤʤ롣�ɤ���ˤʤ뤫�ϥץ�åȥե������¸��
-    (Unix�Ϥʤ��LF�Τޤޡ�mswin��mingw�ʤ��CRLF�Ȥʤ�)
+    LFはそのままLFとして書き込まれる。
+: "wt" または "w"
+    LFはLFのままか、CR+LFか、どちらかになる。どちらになるかはプラットフォーム依存。
+    (Unix系ならばLFのまま、mswinやmingwならばCRLFとなる)
 
-�ʤ����ʾ��CR��LF��CRLF�����ϤΥ��󥳡��ǥ��󥰤��ᤷ����˽�������ޤ����㤨�С�UTF-16LE�Ǥϡ�LF�ϥХ�����"\x0a\x00"�Τ��Ȥˤʤ�ޤ���
+なお、以上のCR、LF、CRLFは入力のエンコーディングを解釈した後に処理されます。例えば、UTF-16LEでは、LFはバイト列"\x0a\x00"のことになります。
 
-==== ���󥳡��ǥ��󥰤λ���
-ext_enc(�������󥳡��ǥ���)�����ꤵ��Ƥ����硢
-�ɤ߹��ޤ줿ʸ����ˤϤ��Υ��󥳡��ǥ��󥰤����ꤵ�졢
-���Ϥ���ʸ����Ϥ��Υ��󥳡��ǥ��󥰤��Ѵ�����ޤ���
+==== エンコーディングの指定
+ext_enc(外部エンコーディング)が指定されている場合、
+読み込まれた文字列にはこのエンコーディングが指定され、
+出力する文字列はそのエンコーディングに変換されます。
 
 #@since 1.9.2
-ext_enc��'-bom'�ǽ�����硢�������Ϥ˴ޤޤ��BOM�Ϥ��餫�������ޤ���
-�ޤ���BOM�����ä���硢���Ϥ��줿ʸ����ˤϤ���BOM���б����륨�󥳡��ǥ��󥰤����ꤵ��ޤ���
+ext_encが'-bom'で終わる場合、その入力に含まれるBOMはあらかじめ削られます。
+また、BOMがあった場合、入力された文字列にはそのBOMに対応するエンコーディングが設定されます。
 #@end
 
-int_enc����ꤵ��Ƥ�����硢���Ϥ��줿ʸ�����ext_enc�ǥ��󥳡��ǥ��󥰤��줿ʸ����Ȥߤʤ���int_enc�ؤ��Ѵ��������η�̤�int_enc�����ꤷ���֤��ޤ���
+int_encも指定されていた場合、入力された文字列をext_encでエンコーディングされた文字列とみなしてint_encへと変換し、その結果にint_encを設定して返します。
 #@end
 
 --- select(reads, writes = [], excepts = [], timeout = nil) -> [[IO]] | nil
 
-[[m:IO.select]] ��Ʊ���Ǥ���
+[[m:IO.select]] と同じです。
 
-@param reads [[m:IO.select]] ����
-@param writes [[m:IO.select]] ����
-@param excepts [[m:IO.select]] ����
-@param timeout [[m:IO.select]] ����
+@param reads [[m:IO.select]] 参照
+@param writes [[m:IO.select]] 参照
+@param excepts [[m:IO.select]] 参照
+@param timeout [[m:IO.select]] 参照
 @see [[m:IO.select]]
 
 --- test(cmd, file) -> bool | Time | Integer | nil
 
-ñ�ΤΥե�����ǥե�����ƥ��Ȥ�Ԥ��ޤ���
+単体のファイルでファイルテストを行います。
 
-@param cmd �ʲ��˼������ͥ�ƥ�뤫ʸ����Ǥ�(ʸ����ξ��Ϥ�����Ƭ��ʸ�������򥳥ޥ�ɤȤߤʤ��ޤ�)��
-@param file �ƥ��Ȥ���ե����륪�֥������ȤǤ���
-@return ��ɽ���ä��������Ƥ��ʤ���Τϡ������ͤ��֤��ޤ���
+@param cmd 以下に示す数値リテラルか文字列です(文字列の場合はその先頭の文字だけをコマンドとみなします)。
+@param file テストするファイルオブジェクトです。
+@return 下表に特に明記していないものは、真偽値を返します。
 
-�ʲ��� cmd �Ȥ��ƻ���Ǥ�����ͥ�ƥ��Ȥ��ΰ�̣�Ǥ���
+以下は cmd として指定できる数値リテラルとその意味です。
 
 : ?r
-    �ե������¸� uid ���ɤळ�Ȥ��Ǥ���
+    ファイルを実効 uid で読むことができる
 : ?w
-    �ե�����˼¸� uid �ǽ񤯤��Ȥ��Ǥ���
+    ファイルに実効 uid で書くことができる
 : ?x
-    �ե������¸� uid �Ǽ¹Ԥ��뤳�Ȥ��Ǥ���
+    ファイルを実効 uid で実行することができる
 : ?o
-    �ե�����ν�ͭ�Ԥ��¸� uid �Ǥ���
+    ファイルの所有者が実効 uid である
 : ?G
-    �ե�����Υ��롼�׽�ͭ�Ԥ��¸� gid �Ǥ���
+    ファイルのグループ所有者が実効 gid である
 : ?R
-    �ե������� uid ���ɤळ�Ȥ��Ǥ���
+    ファイルを実 uid で読むことができる
 : ?W
-    �ե�����˼� uid �ǽ񤯤��Ȥ��Ǥ���
+    ファイルに実 uid で書くことができる
 : ?X
-    �ե������� uid �Ǽ¹Ԥ��뤳�Ȥ��Ǥ���
+    ファイルを実 uid で実行することができる
 : ?O
-    �ե�����ν�ͭ�Ԥ��� uid �Ǥ���
+    ファイルの所有者が実 uid である
 : ?e
-    �ե����뤬¸�ߤ���
+    ファイルが存在する
 : ?z
-    �ե����륵������ 0 �Ǥ���
+    ファイルサイズが 0 である
 : ?s
-    �ե����륵������ 0 �Ǥʤ� (�ե����륵�������֤���0 �ʤ�� nil) -> Integer|nil
+    ファイルサイズが 0 でない (ファイルサイズを返す、0 ならば nil) -> Integer|nil
 : ?f
-    �ե�����ϥץ졼��ե�����Ǥ���
+    ファイルはプレーンファイルである
 : ?d
-    �ե�����ϥǥ��쥯�ȥ�Ǥ���
+    ファイルはディレクトリである
 : ?l
-    �ե�����ϥ���ܥ�å���󥯤Ǥ���
+    ファイルはシンボリックリンクである
 : ?p
-    �ե������̾���Ĥ��ѥ���(FIFO)�Ǥ���
+    ファイルは名前つきパイプ(FIFO)である
 : ?S
-    �ե�����ϥ����åȤǤ���
+    ファイルはソケットである
 : ?b
-    �ե�����ϥ֥��å��ü�ե�����Ǥ���
+    ファイルはブロック特殊ファイルである
 : ?c
-    �ե�����ϥ���饯�����ü�ե�����Ǥ���
+    ファイルはキャラクター特殊ファイルである
 : ?u
-    �ե������ setuid �ӥåȤ����åȤ���Ƥ���
+    ファイルに setuid ビットがセットされている
 : ?g
-    �ե������ setgid �ӥåȤ����åȤ���Ƥ���
+    ファイルに setgid ビットがセットされている
 : ?k
-    �ե������ sticky �ӥåȤ����åȤ���Ƥ���
+    ファイルに sticky ビットがセットされている
 : ?M
-    �ե�����κǽ�����������֤� -> Time
+    ファイルの最終更新時刻を返す -> Time
 : ?A
-    �ե�����κǽ���������������֤� -> Time
+    ファイルの最終アクセス時刻を返す -> Time
 : ?C
-    �ե������ inode �ѹ�������֤� -> Time
+    ファイルの inode 変更時刻を返す -> Time
 
 --- test(cmd, file1, file2) -> bool
 
-���ե�����֤Υե�����ƥ��Ȥ�Ԥ��ޤ���
+２ファイル間のファイルテストを行います。
 
-@param cmd �ʲ��˼������ͥ�ƥ�뤫ʸ����Ǥ�(ʸ����ξ��Ϥ�����Ƭ��ʸ�������򥳥ޥ�ɤȤߤʤ��ޤ�)��
-@param file1 �ƥ��Ȥ���ե����륪�֥������ȤǤ���
-@param file2 �ƥ��Ȥ���ե����륪�֥������ȤǤ���
-@return �����ͤ��֤��ޤ���
+@param cmd 以下に示す数値リテラルか文字列です(文字列の場合はその先頭の文字だけをコマンドとみなします)。
+@param file1 テストするファイルオブジェクトです。
+@param file2 テストするファイルオブジェクトです。
+@return 真偽値を返します。
 
-�ʲ��� cmd �Ȥ��ƻ���Ǥ�����ͥ�ƥ��Ȥ��ΰ�̣�Ǥ���
+以下は cmd として指定できる数値リテラルとその意味です。
 
 : ?=
-    �ե�����1�ȥե�����2�κǽ��������郎������
+    ファイル1とファイル2の最終更新時刻が等しい
 : ?>
-    �ե�����1�������ե�����2���ǽ��������郎������
+    ファイル1の方がファイル2より最終更新時刻が新しい
 : ?<
-    �ե�����1�������ե�����2���ǽ��������郎�Ť�
+    ファイル1の方がファイル2より最終更新時刻が古い
 : ?-
-    �ե�����1�ȥե�����2��Ʊ��Υե�����Ǥ���
+    ファイル1とファイル2が同一のファイルである
 
 --- load(file, priv = false) -> true
 
-Ruby �ץ������ file ������ɤ��Ƽ¹Ԥ��ޤ����ƥ����ɲ�ǽ�Ǥ���
+Ruby プログラム file をロードして実行します。再ロード可能です。
 
-file �����Хѥ��ΤȤ��� file ��������ɤ��ޤ���
-file �����Хѥ��ΤȤ����Ȥ߹����ѿ� [[m:$:]]
-�˼������ѥ�����֤�õ�����ǽ�˸��դ��ä��ե������
-�����ɤ��ޤ������ΤȤ���[[m:$:]] ������ʸ�������Ƭʸ����
-`~' (�����) ���ȡ��Ķ��ѿ� HOME ���ͤ�Ÿ������ޤ���
+file が絶対パスのときは file からロードします。
+file が相対パスのときは組み込み変数 [[m:$:]]
+に示されるパスを順番に探し、最初に見付かったファイルを
+ロードします。このとき、[[m:$:]] の要素文字列の先頭文字が
+`~' (チルダ) だと、環境変数 HOME の値に展開されます。
 
-�����ɤ������������� true ���֤��ޤ���
+ロードに成功した場合は true を返します。
 
-@param file �ե�����̾��ʸ����Ǥ���
-@param priv ���ΤȤ��������ɡ��¹Ԥ�����Ū�����������
-            ̵̾�⥸�塼���ȥåץ�٥�Ȥ��ƹԤ�졢
-            �������Х��̾�����֤�������ޤ���
-@raise LoadError �����ɤ˼��Ԥ�������ȯ�����ޤ���
+@param file ファイル名の文字列です。
+@param priv 真のとき、ロード・実行は内部的に生成される
+            無名モジュールをトップレベルとして行われ、
+            グローバルな名前空間を汚染しません。
+@raise LoadError ロードに失敗した場合に発生します。
 @see [[m:Kernel.#require]]
 
-==== require �� load �ΰ㤤
+==== require と load の違い
 
-[[m:Kernel.#require]] ��Ʊ���ե�����ϰ��٤������������ɤ��ޤ��󤬡�
-[[m:Kernel.#load]] ��̵���˥����ɤ��ޤ���
-�ޤ���require �ϳ�ĥ��.rb �� .so ��ưŪ���䴰���ޤ�����
-load �ϹԤ��ޤ���
-require �ϥ饤�֥��Υ����ɡ�load ��
-����ե�������ɤ߹��ߤʤɤ˻Ȥ��Τ�ŵ��Ū�����ӤǤ���
+[[m:Kernel.#require]] は同じファイルは一度だけしかロードしませんが、
+[[m:Kernel.#load]] は無条件にロードします。
+また、require は拡張子.rb や .so を自動的に補完しますが、
+load は行いません。
+require はライブラリのロード、load は
+設定ファイルの読み込みなどに使うのが典型的な用途です。
 
-  # ������
+  # 使用例
   load "#{ENV['HOME']}/.myapprc"
   load "/etc/myapprc"
 
-�ʤ�������Υǥ��쥯�ȥ꤫��ե����������ɤ�������硢
-load 'filename' �Ȥ���Τ���Ŭ�ڤǤ���ɬ�����Хѥ���
-�ȤäƤ���������
+なお、特定のディレクトリからファイルをロードしたい場合、
+load 'filename' とするのは不適切です。必ず絶対パスを
+使ってください。
 
 --- require(feature) -> bool
 
-Ruby �饤�֥�� feature ������ɤ��ޤ�����ĥ���䴰��Ԥ���
-Ʊ���ե������ʣ��������ɤϤ��ޤ���
+Ruby ライブラリ feature をロードします。拡張子補完を行い、
+同じファイルの複数回ロードはしません。
 
-feature �����Хѥ��ΤȤ��� feature ��������ɤ��ޤ���
-feature �����Хѥ��ΤȤ����Ȥ߹����ѿ� [[m:$:]]
-�˼������ѥ�����֤�õ�����ǽ�˸��դ��ä��ե������
-�����ɤ��ޤ������ΤȤ���$: ������ʸ�������Ƭʸ����
-`~' (�����) ���ȡ��Ķ��ѿ� HOME ���ͤ�Ÿ������ޤ���
+feature が絶対パスのときは feature からロードします。
+feature が相対パスのときは組み込み変数 [[m:$:]]
+に示されるパスを順番に探し、最初に見付かったファイルを
+ロードします。このとき、$: の要素文字列の先頭文字が
+`~' (チルダ) だと、環境変数 HOME の値に展開されます。
 
-Ruby �饤�֥��Ȥ� Ruby ������ץ� (*.rb) ����ĥ�饤�֥��
-(*.so,*.o,*.dll �ʤ�) �Ǥ��ꡢfeature �γ�ĥ�Ҥ���ά���줿���Ϥ���
-ξ������õ���ޤ�( *.rb ��ͥ�褵��ޤ�)��
-��ά����ʤ��ä����ϻ��ꤵ�줿���̤Τߤ�õ���ޤ���
-�ޤ���feature �γ�ĥ�Ҥˤϥ������ƥ�����Ǽºݤ˻Ȥ����ĥ�Ҥ�
-�ؤ餺��ĥ�饤�֥��γ�ĥ�ҤȤ��ƾ�� .so ���Ѥ��뤳�Ȥ��Ǥ��ޤ���������Ŭ�ڤ��Ѵ�����ޤ��ˡ�
+Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
+(*.so,*.o,*.dll など) であり、feature の拡張子が省略された場合はその
+両方から探します( *.rb が優先されます)。
+省略されなかった場合は指定された種別のみを探します。
+また、feature の拡張子にはアーキテクチャで実際に使われる拡張子に
+関らず拡張ライブラリの拡張子として常に .so を用いることができます（内部で適切に変換されます）。
 
-�饤�֥��Υ����ɤ������������ˤ� true ���֤��������ɤ��� feature ��̾����(��
-ĥ�Ҥ�ޤ��) �ѿ� [[m:$"]] ���ɲä��ޤ�����������feature ��̾�������� $"
-�˴ޤޤ�Ƥ������ϥ����ɤ����� false ���֤��ޤ���
+ライブラリのロードに成功した時には true を返し、ロードした feature の名前を(拡
+張子も含めて) 変数 [[m:$"]] に追加します。ただし、feature の名前が既に $"
+に含まれていた場合はロードせずに false を返します。
 
-@param feature �ե�����̾��ʸ����Ǥ���
-@raise LoadError �����ɤ˼��Ԥ�������ȯ�����ޤ���
+@param feature ファイル名の文字列です。
+@raise LoadError ロードに失敗した場合に発生します。
 #@since 1.9.1
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]],[[m:Kernel.#require_relative]]
 #@else
@@ -966,22 +966,22 @@ Ruby �饤�֥��Ȥ� Ruby ������ץ� (*.rb) ����ĥ�饤�֥��
 
 #@since 1.9.1
 --- require_relative(relative_feature) -> bool
-���ߤΥե����뤫������Хѥ��� require ���ޤ���
+現在のファイルからの相対パスで require します。
 
   require File.expand_path(relative_feature, File.dirname(__FILE__))
-�Ȥۤ�Ʊ���Ǥ���
+とほぼ同じです。
 
-@param relative_feature �ե�����̾��ʸ����Ǥ���
-@raise LoadError �����ɤ˼��Ԥ�������ȯ�����ޤ���
+@param relative_feature ファイル名の文字列です。
+@raise LoadError ロードに失敗した場合に発生します。
 @see [[m:Kernel.#require]]
 #@end
 
-==== require �� load �Υ�������
+==== require と load のスコープ
 
-���������ѿ��ϥե�����֤Ǥ϶�ͭ����ޤ��󡣤Ǥ��Τǡ�
-�����ɤ����饤�֥��Υ��������ѿ���
-�����ɸ��Υ�����ץȤ���ľ�ܼ������뤳�ȤϤǤ��ޤ���
-���Υ������פΰ�������[[m:Kernel.#load]]�Ǥ�Ʊ�ͤǤ���
+ローカル変数はファイル間では共有されません。ですので、
+ロードしたライブラリのローカル変数を
+ロード元のスクリプトから直接取得することはできません。
+このスコープの扱い方は[[m:Kernel.#load]]でも同様です。
 
   ---------- some.rb -----------
   $a = 1
@@ -998,19 +998,19 @@ Ruby �饤�֥��Ȥ� Ruby ������ץ� (*.rb) ����ĥ�饤�֥��
 
 --- autoload(const_name, feature) -> nil
 
-��� const_name ��ǽ�˻��Ȥ������� feature ��
-[[m:Kernel.#require]] ����褦�����ꤷ�ޤ���
+定数 const_name を最初に参照した時に feature を
+[[m:Kernel.#require]] するように設定します。
 
-const_name �ˤϡ� "::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ޤ���
+const_name には、 "::" 演算子を含めることはできません
 #@since 1.8.0
-�ʥͥ��Ȥ����������ꤹ����ˡ�ϸ�ҡˡ�
+（ネストした定数を指定する方法は後述）。
 #@else
-���Ĥޤꡢ�ȥåץ�٥�������������Ǥ��ޤ���
+。つまり、トップレベルの定数しか指定できません。
 #@end
 
-@param const_name �����String �ޤ��� Symbol �ǻ��ꤷ�ޤ���
-@param feature require ��Ʊ�ͤ���ˡ�� autoload �����оݤ���ꤷ�ޤ���
-@raise LoadError feature�Υ����ɤ˼��Ԥ����ȯ�����ޤ���
+@param const_name 定数をString または Symbol で指定します。
+@param feature require と同様な方法で autoload する対象を指定します。
+@raise LoadError featureのロードに失敗すると発生します。
 
     ------- /tmp/foo.rb ---------
     class Bar
@@ -1021,14 +1021,14 @@ const_name �ˤϡ� "::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ޤ���
     p Bar #=> Bar
 
 #@since 1.8.0
-==== �ͥ��Ȥ������������
+==== ネストした定義内の定数
 
-const_name �ˤϡ� "::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ʤ��Τǡ� Kernel.#autoload 
-�Ǥϥȥåץ�٥�������������Ǥ��ޤ���
+const_name には、 "::" 演算子を含めることはできないので、 Kernel.#autoload 
+ではトップレベルの定数しか指定できません。
 
-[[m:Module#autoload]] ���Ȥ߹�碌�뤳�Ȥǡ�Ǥ�դΥ��饹���⥸�塼�������� autoload �Ǥ��ޤ���
-��Ϥ�const_name �� "::" �黻�Ҥ�ޤ�뤳�ȤϤ�
-���ޤ��󤬡��ʲ��Τ褦�������������Ǥ��ޤ���
+[[m:Module#autoload]] と組み合わせることで、任意のクラス／モジュールの定数を autoload できます。
+やはりconst_name に "::" 演算子を含めることはで
+きませんが、以下のように定義する事ができます。
 
     ------- /tmp/foo.rb ---------
     class Foo
@@ -1042,16 +1042,16 @@ const_name �ˤϡ� "::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ʤ��Τǡ� Kernel.#autoload
     end
     p Foo::Bar #=> Foo::Bar
 
-���뤤�ϡ��ʲ��Τ褦�ˤ�Ǥ��ޤ���
+あるいは、以下のようにもできます。
 
     class Foo
     end
     Foo.autoload :Bar, '/tmp/foo'
     p Foo::Bar #=> Foo::Bar
 
-�ʲ��Τ褦�ˡ�autoload �����饤�֥�꤬�ͥ��Ȥ��������������ʤ���
-�硢�츫�������ư��Ƥ���褦�˸�����Τ����դ�ɬ�פǤ�(�ٹ���
-���������ФƤ��ޤ�)��
+以下のように、autoload したライブラリがネストした定数を定義しない場
+合、一見、正常に動作しているように見えるので注意が必要です(警告メッ
+セージが出ています)。
 
       ------- /tmp/bar.rb ---------
       class Bar
@@ -1067,7 +1067,7 @@ const_name �ˤϡ� "::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ʤ��Τǡ� Kernel.#autoload
       #   Bar
       #   nil
 
-����ϰʲ��Τ褦�˥ͥ��Ȥ�������������Τ�Ʊ�����ȤǤ���
+これは以下のようにネストせずに定義したのと同じことです。
 
       class Foo
       end
@@ -1083,14 +1083,14 @@ const_name �ˤϡ� "::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ʤ��Τǡ� Kernel.#autoload
 #@since 1.8.0
 --- autoload?(const_name) -> String | nil
 
-const_name �� [[m:Kernel.#autoload]] ���ꤵ��Ƥ��뤫Ĵ�٤ޤ���
+const_name が [[m:Kernel.#autoload]] 設定されているか調べます。
 
-autoload ���ꤵ��Ƥ��ơ�autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�)
-�Ȥ��ˤ��Υѥ�̾���֤��ޤ���
+autoload 設定されていて、autoload 定数がまだ定義されてない(ロードされていない)
+ときにそのパス名を返します。
 
-autoload ���ꤵ��Ƥ��ʤ����������ɺѤߤʤ� nil ���֤��ޤ���
+autoload 設定されていないか、ロード済みなら nil を返します。
 
-@param const_name �����String �ޤ��� Symbol �ǻ��ꤷ�ޤ���
+@param const_name 定数をString または Symbol で指定します。
 
     ------- /tmp/foo.rb ---------
     class Foo
@@ -1113,78 +1113,78 @@ autoload ���ꤵ��Ƥ��ʤ����������ɺѤߤʤ� nil ���֤��ޤ���
 --- set_trace_func(proc)                                         -> object
 --- set_trace_func{|event, file, line, id, binding, klass| ... } -> Proc
 
-Ruby ���󥿥ץ꥿�Υ��٥�Ȥ�ȥ졼������ [[c:Proc]] ���֥������ȤȤ���
-���ꤵ�줿 proc ����Ͽ���ޤ��� proc �� nil ����ꤷ�����ǥȥ졼���򥪥դˤ��ޤ���
-�֥��å�����ꤵ�줿���Ϥ��Υ֥��å���ȥ졼������ Proc ���֥������ȤȤ�����Ͽ���ޤ���
+Ruby インタプリタのイベントをトレースする [[c:Proc]] オブジェクトとして
+指定された proc を登録します。 proc に nil を指定した場合でトレースをオフにします。
+ブロックを指定された場合はそのブロックをトレースする Proc オブジェクトとして登録します。
 
-���� proc ���֥��å��� Proc ���֥������Ȥ��Ѵ�������Τ��֤��ޤ���
+引数 proc かブロックを Proc オブジェクトに変換したものを返します。
 
-Ruby ���󥿥ץ꥿���ץ�������¹Ԥ�������ǡ��᥽�åɤθƤӽФ���
-����ɾ���ʤɤΥ��٥�Ȥ�ȯ�������٤ˡ��ʲ�����������6�Ĥΰ����ȤȤ��
-��Ͽ���줿 [[c:Proc]] ���֥������Ȥ�¹Ԥ��ޤ���
+Ruby インタプリタがプログラムを実行する過程で、メソッドの呼び出しや
+式の評価などのイベントが発生する度に、以下で説明する6個の引数とともに
+登録された [[c:Proc]] オブジェクトを実行します。
 
-ɸ��ź�դ� [[lib:debug]]��[[lib:tracer]]��
-[[lib:profile]] �Ϥ����Ȥ߹��ߴؿ������Ѥ��Ƽ¸�����Ƥ��ޤ���
+標準添付の [[lib:debug]]、[[lib:tracer]]、
+[[lib:profile]] はこの組み込み関数を利用して実現されています。
 
-==== �֥��å��ѥ�᡼���ΰ�̣
+==== ブロックパラメータの意味
 
 : event
- �¹ԤΥ����פ�ɽ�����ʲ��Τ����줫��ʸ����
+ 実行のタイプを表す、以下のいずれかの文字列。
 //emlist{
-  "line":      ����ɾ����
-  "call":      �᥽�åɤθƤӽФ���
-  "return":    �᥽�åɸƤӽФ�����Υ꥿����
-  "c-call":    C�ǵ��Ҥ��줿�᥽�åɤθƤӽФ���
-  "c-return":  C�ǵ��Ҥ��줿�᥽�åɸƤӽФ�����Υ꥿����
-  "class":     ���饹������ðۥ��饹������⥸�塼������ؤ�������
-  "end":       ���饹������ðۥ��饹������⥸�塼������ν�λ��
-  "raise":     �㳰��ȯ����
+  "line":      式の評価。
+  "call":      メソッドの呼び出し。
+  "return":    メソッド呼び出しからのリターン。
+  "c-call":    Cで記述されたメソッドの呼び出し。
+  "c-return":  Cで記述されたメソッド呼び出しからのリターン。
+  "class":     クラス定義、特異クラス定義、モジュール定義への突入。
+  "end":       クラス定義、特異クラス定義、モジュール定義の終了。
+  "raise":     例外の発生。
 //}
 : file
- �¹���Υץ������Υ������ե�����̾ (ʸ����)��
+ 実行中のプログラムのソースファイル名 (文字列)。
 
 : line
- �¹���Υץ������Υ������ե������ι��ֹ� (����)��
+ 実行中のプログラムのソースファイル上の行番号 (整数)。
 
 : id
- event �˱������ʲ��Τ�Τ��Ϥ���ޤ���
- ��ϻ�֥��å������� klass ���б����Ƥ��ޤ���
+ event に応じ、以下のものが渡されます。
+ 第六ブロック引数の klass と対応しています。
 //emlist{
     line
-        �Ǹ�˸ƤӽФ��줿�᥽�åɤ�ɽ�� Symbol ���֥������ȡ�
-        �ȥåץ�٥�Ǥ� nil��
+        最後に呼び出されたメソッドを表す Symbol オブジェクト。
+        トップレベルでは nil。
     call/return/c-call/c-return
-        �ƤӽФ��줿/�꥿���󤹤�᥽�åɤ�ɽ�� Symbol ���֥������ȡ�
+        呼び出された/リターンするメソッドを表す Symbol オブジェクト。
     class/end
-        nil��
+        nil。
     raise
-        �Ǹ�˸ƤӽФ��줿�᥽�åɤ�ɽ�� Symbol ���֥������ȡ�
-        �ȥåץ�٥�Ǥ� nil��
+        最後に呼び出されたメソッドを表す Symbol オブジェクト。
+        トップレベルでは nil。
 //}
 : binding
- �¹���Υץ������Υ���ƥ����Ȥ�ɽ�� [[c:Binding]] ���֥������ȡ�
+ 実行中のプログラムのコンテキストを表す [[c:Binding]] オブジェクト。
 
 : klass
- event �˱������ʲ��Τ�Τ��Ϥ���ޤ���
- ��֥ͥ��å������� id ���б����Ƥ��ޤ���
+ event に応じ、以下のものが渡されます。
+ 第四ブロック引数の id と対応しています。
 //emlist{
     line
-        �Ǹ�˸ƤӽФ��줿�᥽�åɤ�°���륯�饹��ɽ��
-        Class ���֥������ȡ��ȥåץ�٥�Ǥ� false��
+        最後に呼び出されたメソッドが属するクラスを表す
+        Class オブジェクト。トップレベルでは false。
     call/return/c-call/c-return
-        �ƤӽФ��줿/�꥿���󤹤�᥽�åɤ�°���륯�饹
-        ��ɽ�� Class ���֥������ȡ�
+        呼び出された/リターンするメソッドが属するクラス
+        を表す Class オブジェクト。
     class/end
-        false��
+        false。
     raise
-        �Ǹ�˸ƤӽФ��줿�᥽�åɤ�°���륯�饹��ɽ��
-        Class ���֥������ȡ��ȥåץ�٥�Ǥ� false��
+        最後に呼び出されたメソッドが属するクラスを表す
+        Class オブジェクト。トップレベルでは false。
 //}
-@param proc �ȥ졼���� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���nil ����ꤷ����硢�ȥ졼���򥪥դˤ��ޤ���
+@param proc トレース用 [[c:Proc]] オブジェクトを指定します。nil を指定した場合、トレースをオフにします。
 
-@return ���� proc �����ꤵ�줿���� proc �򡢥֥��å��ξ��� Proc ���֥������Ȥ��Ѵ�������Τ��֤��ޤ���
+@return 引数 proc が指定された場合は proc を、ブロックの場合は Proc オブジェクトに変換したものを返します。
 
-��:
+例:
 
   set_trace_func lambda {|*arg|
     p arg
@@ -1193,7 +1193,7 @@ Ruby ���󥿥ץ꥿���ץ�������¹Ԥ�������ǡ��᥽�åɤθƤӽФ���
   end
   43.to_s
   
-  #----���----
+  #----結果----
   #["line", "..", 4, nil, #<Binding:0x2b69584>, false]
   #  ["c-call", "..", 4, :inherited, #<Binding:0x2b693b8>, Class]
   #    ["c-return", "..", 4, :inherited, #<Binding:0x2b6937c>, Class]
@@ -1207,15 +1207,15 @@ Ruby ���󥿥ץ꥿���ץ�������¹Ԥ�������ǡ��᥽�åɤθƤӽФ���
 
 --- caller(level_num = 1) -> [String] | nil
 
-level_num �ʾ�θƤӽФ����ξ���� [[m:$@]]
-�η����ΥХå��ȥ졼��(ʸ���������)�Ȥ����֤��ޤ���
+level_num 段上の呼び出し元の情報を [[m:$@]]
+の形式のバックトレース(文字列の配列)として返します。
 
-�ȥåץ�٥�Ǥ϶���������֤��ޤ���caller ������ͤ� [[m:$@]] ���������뤳�Ȥ�
-�㳰��ȯ�����֤�����Ǥ��ޤ���
+トップレベルでは空の配列を返します。caller の戻り値を [[m:$@]] に代入することで
+例外の発生位置を設定できます。
 
-���ꤷ�� level_num �ʾ夬¸�ߤ��ʤ����� nil ���֤��ޤ���
+指定した level_num 段上が存在しない場合は nil を返します。
 
-@param level_num long ���ϰϤ�Ķ���ʤ����������ǥ����å���٥����ꤷ�ޤ���
+@param level_num long の範囲を超えない正の整数でスタックレベルを指定します。
 @see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]]
 
     def foo
@@ -1254,8 +1254,8 @@ level_num �ʾ�θƤӽФ����ξ���� [[m:$@]]
     #   nil
 #@end
 
-�ʲ��δؿ��ϡ�caller �����Ǥ��� [�ե�����̾, ���ֹ�, �᥽�å�̾]
-����Ф����֤��ޤ���
+以下の関数は、caller の要素から [ファイル名, 行番号, メソッド名]
+を取り出して返します。
 
     def parse_caller(at)
       if /^(.+?):(\d+)(?::in `(.*)')?/ =~ at
@@ -1288,8 +1288,8 @@ level_num �ʾ�θƤӽФ����ξ���� [[m:$@]]
     #   nil
 #@end
 
-�ʲ��ϡ�[[m:$DEBUG]] �����ξ������Ω�� debug �ؿ�
-�Υ���ץ�Ǥ���
+以下は、[[m:$DEBUG]] が真の場合に役に立つ debug 関数
+のサンプルです。
 
     $DEBUG = true
     
@@ -1307,27 +1307,27 @@ level_num �ʾ�θƤӽФ����ξ���� [[m:$@]]
 
 --- gets(rs = $/) -> String | nil
 
-[[c:ARGF]]�������ɤ߹���ǡ�������֤��ޤ���
-�Ԥζ��ڤ�ϰ��� rs �ǻ��ꤷ��ʸ����ˤʤ�ޤ���
+[[c:ARGF]]から一行読み込んで、それを返します。
+行の区切りは引数 rs で指定した文字列になります。
 
-rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ƥե���������Ƥ�
-���٤��ɤ߹��ߤޤ���ARGV��ʣ���Υե�����̾��¸�ߤ������1�٤�1�ե����뤺���ɤ߹��ߤޤ���
-��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�
-(�ѥ饰��ե⡼��)��
+rs に nil を指定すると行区切りなしとみなしてファイルの内容を
+すべて読み込みます。ARGVに複数のファイル名が存在する場合は1度に1ファイルずつ読み込みます。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
 
-�ɤ߹����ʸ������Ȥ߹����ѿ� [[m:$_]] �ˤ⥻�åȤ���ޤ���
+読み込んだ文字列は組み込み変数 [[m:$_]] にもセットされます。
 
-@param rs �Ԥζ��ڤ�Ȥʤ�ʸ����Ǥ���
-@return �ե�����ν���(EOF)����ã�������� nil ���֤��ޤ���
-@raise Errno::EXXX �ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@param rs 行の区切りとなる文字列です。
+@return ファイルの終り(EOF)に到達した時、 nil を返します。
+@raise Errno::EXXX 読み込みに失敗した場合に発生します。
 
   ---main.rb---
   ARGV << 'b.txt' << 'c.txt'
   p gets #=> "hello\n"
   p gets(nil) #=> "it\ncommon\n"
   p gets("") #=> "ARGF\n\n"
-  p gets('��') #=> "������ץȤ˻��ꤷ������ (Kernel::ARGV �򻲾�) ��ե�����̾��\n�ߤʤ��ơ�"
-  p gets #=> "�����Υե������Ϣ�뤷�� 1 �Ĥβ��ۥե������ɽ�����֥������ȤǤ��� \n"
+  p gets('、') #=> "スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と\nみなして、"
+  p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
   p gets #=> nil
   p readline # end of file reached (EOFError)
   --- b.txt ---
@@ -1337,34 +1337,34 @@ rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ƥե���������Ƥ�
   --- c.txt ---
   ARGF
   
-  ������ץȤ˻��ꤷ������ (Kernel::ARGV �򻲾�) ��ե�����̾��
-  �ߤʤ��ơ������Υե������Ϣ�뤷�� 1 �Ĥβ��ۥե������ɽ�����֥������ȤǤ��� 
+  スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と
+  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#readline]]
 
 --- readline(rs = $/) -> String
 
-[[c:ARGF]]�������ɤ߹���ǡ�������֤��ޤ���
-�Ԥζ��ڤ�ϰ��� rs �ǻ��ꤷ��ʸ����ˤʤ�ޤ���
+[[c:ARGF]]から一行読み込んで、それを返します。
+行の区切りは引数 rs で指定した文字列になります。
 
-rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ƥե���������Ƥ�
-���٤��ɤ߹��ߤޤ���ARGV��ʣ���Υե�����̾��¸�ߤ������1�٤�1�ե����뤺���ɤ߹��ߤޤ���
-��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�
-(�ѥ饰��ե⡼��)��
+rs に nil を指定すると行区切りなしとみなしてファイルの内容を
+すべて読み込みます。ARGVに複数のファイル名が存在する場合は1度に1ファイルずつ読み込みます。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
 
-�ɤ߹����ʸ������Ȥ߹����ѿ� [[m:$_]] �ˤ⥻�åȤ���ޤ���
+読み込んだ文字列は組み込み変数 [[m:$_]] にもセットされます。
 
-@param rs �Ԥζ��ڤ�Ȥʤ�ʸ����Ǥ���
-@raise Errno::EXXX �ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
-@raise EOFError readline �ǥե�������ü(EOF)�򸡽Ф����ȯ�����ޤ���
+@param rs 行の区切りとなる文字列です。
+@raise Errno::EXXX 読み込みに失敗した場合に発生します。
+@raise EOFError readline でファイル末端(EOF)を検出すると発生します。
 
   ---main.rb---
   ARGV << 'b.txt' << 'c.txt'
   p readline #=> "hello\n"
   p readline(nil) #=> "it\ncommon\n"
   p readline("") #=> "ARGF\n\n"
-  p readline('��') #=> "������ץȤ˻��ꤷ������ (Kernel::ARGV �򻲾�) ��ե�����̾��\n�ߤʤ��ơ�"
-  p readline #=> "�����Υե������Ϣ�뤷�� 1 �Ĥβ��ۥե������ɽ�����֥������ȤǤ��� \n"
+  p readline('、') #=> "スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と\nみなして、"
+  p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
   p readline # end of file reached (EOFError)
   --- b.txt ---
   hello
@@ -1373,22 +1373,22 @@ rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ƥե���������Ƥ�
   --- c.txt ---
   ARGF
   
-  ������ץȤ˻��ꤷ������ (Kernel::ARGV �򻲾�) ��ե�����̾��
-  �ߤʤ��ơ������Υե������Ϣ�뤷�� 1 �Ĥβ��ۥե������ɽ�����֥������ȤǤ��� 
+  スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と
+  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#gets]]
 
 --- readlines(rs = $/) -> [String] | nil
 
-[[c:ARGF]]�� [[m:Kernel.#gets]](rs) ��EOF�ޤ��ɤ߹���ǡ����γƹԤ����ǤȤ��Ƥ��������֤��ޤ���
-�Ԥζ��ڤ�ϰ��� rs �ǻ��ꤷ��ʸ����ˤʤ�ޤ���
+[[c:ARGF]]を [[m:Kernel.#gets]](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
+行の区切りは引数 rs で指定した文字列になります。
 
-rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
-��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�
-(�ѥ饰��ե⡼��)��
+rs に nil を指定すると行区切りなしとみなします。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
 
-@param rs �Ԥζ��ڤ�Ȥʤ�ʸ����Ǥ���
-@raise Errno::EXXX �ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@param rs 行の区切りとなる文字列です。
+@raise Errno::EXXX 読み込みに失敗した場合に発生します。
 
   ---main.rb---
   ARGV << 'b.txt' << 'b.txt'
@@ -1414,28 +1414,28 @@ rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
 #@if ("1.8.0" <= version and version < "1.9.1")
 --- getc -> Fixnum | nil
 
-���Υ᥽�åɤ��ѻ�ͽ��Ǥ�������� STDIN.getc ��ȤäƤ���������
+このメソッドは廃止予定です。代わりに STDIN.getc を使ってください。
 
 @see [[m:IO#getc]]
 #@end
 
 --- putc(ch) -> object
 
-ʸ�� ch �� ɸ����� [[m:$stdout]] �˽��Ϥ��ޤ���
+文字 ch を 標準出力 [[m:$stdout]] に出力します。
 
-ch �����ͤʤ� 0 �� 255 ���ϰϤ��б�����ʸ������Ϥ��ޤ���
-ch ��ʸ����ʤ顢������Ƭ 1byte ����Ϥ��ޤ���
-�ɤ���Ǥ�ʤ����ϡ�ch.to_int ���������Ѵ����ߤޤ���
+ch が数値なら 0 〜 255 の範囲の対応する文字を出力します。
+ch が文字列なら、その先頭 1byte を出力します。
+どちらでもない場合は、ch.to_int で整数に変換を試みます。
 
-@param ch ���Ϥ���ʸ���Ǥ������ޤ���ʸ����ǻ��ꤷ�ޤ���
-@return ch ���֤��ޤ�
-@raise RangeError [[c:Bignum]] ������ˤ�������ȯ�����ޤ���
-@raise IOError ɸ����Ϥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
-@raise TypeError [[c:Integer]] ���Ѵ��Ǥ��ʤ����֥������Ȥ������
-                 ���ꤷ������ȯ�����ޤ���
+@param ch 出力する文字です。数または文字列で指定します。
+@return ch を返します
+@raise RangeError [[c:Bignum]] を引数にした場合に発生します。
+@raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。
+@raise TypeError [[c:Integer]] に変換できないオブジェクトを引数に
+                 指定した場合に発生します。
 
-#@#1.9�Ǥ⤤�ޤΤȤ���Ʊ�����
+#@#1.9でもいまのところ同じ結果
     putc("ch")
     putc(?c)
     putc(99)
@@ -1454,28 +1454,28 @@ ch ��ʸ����ʤ顢������Ƭ 1byte ����Ϥ��ޤ���
 #@end
 #@todo
 
-������ʹ֤��ɤߤ䤹�������������Ʋ��ԤȽ��֤�ɸ����� [[m:$stdout]] �˽��Ϥ��ޤ�����˥ǥХå��˻��Ѥ��ޤ���
+引数を人間に読みやすい形に整形して改行と順番に標準出力 [[m:$stdout]] に出力します。主にデバッグに使用します。
 
-������ inspect �᥽�åɤ��֤��ͤȲ��Ԥ���֤˽��Ϥ��ޤ����Ĥޤ�ʲ��Υ����ɤ�Ʊ���Ǥ���
+引数の inspect メソッドの返り値と改行を順番に出力します。つまり以下のコードと同じです。
 
   print arg[0].inspect, "\n", arg[1].inspect, "\n", ...
 
-�������Ѥ�����[[m:Object#inspect]]�����̤�ʸ������Ѵ������
-���̤��Ĥ��ʤ��ʤ�褦�ʥ��饹�֤κ��ۤ�ɽ���Ǥ���褦�˹��פ���Ƥ��ޤ���
+整形に用いられる[[m:Object#inspect]]は普通に文字列に変換すると
+区別がつかなくなるようなクラス間の差異も表現できるように工夫されています。
 
-p �˰�����Ϳ�����˸ƤӽФ��������ä˲��⤷�ޤ���
+p に引数を与えずに呼び出した場合は特に何もしません。
 
-@param arg ���Ϥ��륪�֥������Ȥ�Ǥ�ոĻ��ꤷ�ޤ���
-#@#inspect���������Ƥ��륪�֥������ȤǤ���ɬ�פ�����ޤ��ʼ¼�Ǥ�դΥ��֥������ȡˡ�
-@raise IOError ɸ����Ϥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@param arg 出力するオブジェクトを任意個指定します。
+#@#inspectが定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
+@raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 #@since 1.9.1
-@return ���ꤵ�줿���� arg ���֤��ޤ���ʣ���ΰ��������ꤵ�줿���Ϥ��������ǤȤ���������֤��ޤ���
+@return 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
 #@else
-@return nil ���֤��ޤ���
+@return nil を返します。
 #@end
 
-  puts "" #=> �ʶ��ԡ�
+  puts "" #=> （空行）
   p "" #=> ""
   
   puts 50,"50"
@@ -1489,24 +1489,24 @@ p �˰�����Ϳ�����˸ƤӽФ��������ä˲��⤷�ޤ���
 
 --- print(*arg) -> nil
 
-��������ɸ����� [[m:$stdout]] �˽��Ϥ��ޤ���������Ϳ�����ʤ����ˤ��ѿ�
-[[m:$_]] ���ͤ���Ϥ��ޤ���
+引数を順に標準出力 [[m:$stdout]] に出力します。引数が与えられない時には変数
+[[m:$_]] の値を出力します。
 
-ʸ����ʳ��Υ��֥������Ȥ������Ȥ���Ϳ����줿���ˤϡ�
-to_s �᥽�åɤˤ��ʸ������Ѵ����Ƥ�����Ϥ��ޤ���
+文字列以外のオブジェクトが引数として与えられた場合には、
+to_s メソッドにより文字列に変換してから出力します。
 #@if (version < "1.9.1")
-��������nil ���Ф��Ƥ�ʸ���� "nil" ����Ϥ��ޤ�
+ただし、nil に対しては文字列 "nil" を出力します
 #@end
 
-�ѿ� [[m:$,]] (���ϥե�����ɥ��ѥ졼��)�� nil ��
-�ʤ��ͤ����åȤ���Ƥ�����ˤϡ��ư����δ֤ˤ���ʸ�������Ϥ��ޤ���
-�ѿ� [[m:$\]] (���ϥ쥳���ɥ��ѥ졼��)�� nil �Ǥ�
-���ͤ����åȤ���Ƥ�����ˤϡ��Ǹ�ˤ������Ϥ��ޤ���
+変数 [[m:$,]] (出力フィールドセパレータ)に nil で
+ない値がセットされている時には、各引数の間にその文字列を出力します。
+変数 [[m:$\]] (出力レコードセパレータ)に nil でな
+い値がセットされている時には、最後にそれを出力します。
 
-@param arg ���Ϥ��륪�֥������Ȥ�Ǥ�ոĻ��ꤷ�ޤ���
-#@#to_s ���������Ƥ��륪�֥������ȤǤ���ɬ�פ�����ޤ��ʼ¼�Ǥ�դΥ��֥������ȡˡ�
-@raise IOError ɸ����Ϥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@param arg 出力するオブジェクトを任意個指定します。
+#@#to_s が定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
+@raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 #@since 1.9.1
   print "Hello, world!"
@@ -1541,28 +1541,28 @@ to_s �᥽�åɤˤ��ʸ������Ѵ����Ƥ�����Ϥ��ޤ���
 
 --- puts(*arg) -> nil
 
-�����Ȳ��Ԥ���֤� ɸ����� [[m:$stdout]] �˽��Ϥ��ޤ���
-�������ʤ���в��ԤΤߤ���Ϥ��ޤ���
+引数と改行を順番に 標準出力 [[m:$stdout]] に出力します。
+引数がなければ改行のみを出力します。
 
-����������ξ�硢�������ǤȲ��Ԥ��˽��Ϥ��ޤ���
-�����ʸ����ʳ��Υ��֥������Ȥ������Ȥ���Ϳ����줿���ˤϡ�
-�������֥������Ȥ�ǽ�� to_ary �ˤ������ء�
-���� to_s �᥽�åɤˤ��ʸ������Ѵ����ߤޤ���
+引数が配列の場合、その要素と改行を順に出力します。
+配列や文字列以外のオブジェクトが引数として与えられた場合には、
+当該オブジェクトを最初に to_ary により配列へ、
+次に to_s メソッドにより文字列へ変換を試みます。
 #@if (version < "1.9.1")
-��������nil ���Ф��Ƥ�ʸ���� "nil" ����Ϥ��ޤ�
+ただし、nil に対しては文字列 "nil" を出力します
 #@end
-���������Ԥǽ��äƤ����������������Ǥ��Ф��Ƥ� puts ����
-�ϲ��Ԥ���Ϥ��ޤ���
+末尾が改行で終っている引数や配列の要素に対しては puts 自身
+は改行を出力しません。
 
-@param arg ���Ϥ��륪�֥������Ȥ�Ǥ�ոĻ��ꤷ�ޤ���
-@raise IOError ɸ����Ϥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@param arg 出力するオブジェクトを任意個指定します。
+@raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 #@since 1.9.1
     puts "foo", "bar\n", "baz"
-    puts ""    # ���ԤΤ߽���
-    puts       # ���ԤΤ߽���
-    puts nil   # ���ԤΤ߽���
+    puts ""    # 改行のみ出力
+    puts       # 改行のみ出力
+    puts nil   # 改行のみ出力
     puts ["oui", "non"]
     #=> foo
     #   bar
@@ -1574,8 +1574,8 @@ to_s �᥽�åɤˤ��ʸ������Ѵ����Ƥ�����Ϥ��ޤ���
     #   non
 #@else
     puts "foo", "bar\n", "baz"
-    puts ""    # ���ԤΤ߽���
-    puts       # ���ԤΤ߽���
+    puts ""    # 改行のみ出力
+    puts       # 改行のみ出力
     puts nil
     puts ["oui", "non"]
     #=> foo
@@ -1593,42 +1593,42 @@ to_s �᥽�åɤˤ��ʸ������Ѵ����Ƥ�����Ϥ��ޤ���
 #@since 1.8.0
 --- warn(message) -> nil
 
-message �� ɸ�२�顼���� [[m:$stderr]] �˽��Ϥ��ޤ��� [[m:$VERBOSE]] 
-�ե饰 �� nil �ΤȤ��ϲ�����Ϥ��ޤ���
+message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]] 
+フラグ が nil のときは何も出力しません。
 
-ʸ����ʳ��Υ��֥������Ȥ������Ȥ���Ϳ����줿���ˤϡ�
-to_s �᥽�åɤˤ��ʸ������Ѵ����Ƥ�����Ϥ��ޤ���
+文字列以外のオブジェクトが引数として与えられた場合には、
+to_s メソッドにより文字列に変換してから出力します。
 
-���Υ᥽�åɤϰʲ���Ʊ���Ǥ���
+このメソッドは以下と同じです。
   $stderr.print message, "\n" unless $VERBOSE.nil?
 
-@param message ���Ϥ��륪�֥������ȤǤ���
-@raise IOError ɸ�२�顼���Ϥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@param message 出力するオブジェクトです。
+@raise IOError 標準エラー出力が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
   warn "caution!" #=> caution!
   $VERBOSE = nil
-  warn "caution!" # ���⤷�ʤ�
+  warn "caution!" # 何もしない
 
 @see [[m:$stderr]],[[m:$VERBOSE]]
 #@end
 
 --- Array(arg) -> Array
 
-����������([[c:Array]])���Ѵ�������̤��֤��ޤ���
+引数を配列([[c:Array]])に変換した結果を返します。
 
-arg.to_ary �� arg.to_a �򤳤ν�˸ƤӽФ��ơ��֤äƤ���������Ѵ���̤Ȥ��ޤ���
+arg.to_ary と arg.to_a をこの順に呼び出して、返ってきた配列を変換結果とします。
 
 #@if (version > "1.9.1")
-arg �� to_ary, to_a �Τ�����Υ᥽�åɤ��������Ƥ��ʤ�����
-�����Ǥ����� [arg] ���֤��ޤ���
+arg に to_ary, to_a のいずれのメソッドも定義されていない場合は
+一要素の配列 [arg] を返します。
 #@else
-arg �� to_ary, to_a �Τ�����Υ᥽�åɤ�ʤ�����
-[[m:Object#to_a]]�ˤ�äư����Ǥ����� [arg] ���֤��ޤ���
+arg に to_ary, to_a のいずれのメソッドもない場合は
+[[m:Object#to_a]]によって一要素の配列 [arg] を返します。
 #@end
 
-@param arg �Ѵ��оݤΥ��֥������ȤǤ���
-@raise TypeError to_ary, to_a ���֤��ͤ�����Ǥʤ����ȯ�����ޤ�
+@param arg 変換対象のオブジェクトです。
+@raise TypeError to_ary, to_a の返り値が配列でなければ発生します
 
   p Array({:it => 3}) #=> [[:it, 3]]
   p Array(nil) #=> []
@@ -1638,17 +1638,17 @@ arg �� to_ary, to_a �Τ�����Υ᥽�åɤ�ʤ�����
 
 --- Float(arg) -> Float
 
-��������ư��������([[c:Float]])���Ѵ�������̤��֤��ޤ���
+引数を浮動小数点数([[c:Float]])に変換した結果を返します。
 
-���������ͤξ�����ľ���Ѵ�����ʸ����ξ��
-����������ư���������ȸ��ʤ����ΤΤ��Ѵ����ޤ���
+引数が数値の場合は素直に変換し、文字列の場合
+は整数や浮動小数点数と見なせるもののみ変換します。
 
-�᥽�å� Float ��ʸ������Ф� [[m:String#to_f]] ���⸷̩���Ѵ���Ԥ��ޤ���
+メソッド Float は文字列に対し [[m:String#to_f]] よりも厳密な変換を行います。
 
-@param arg �Ѵ��оݤΥ��֥������ȤǤ���
-@raise ArgumentError ��������ư���������ȸ��ʤ��ʤ�ʸ���������˻��ꤷ������ȯ�����ޤ���
-@raise TypeError nil �ޤ��ϥ᥽�å� to_f ������ʤ����֥������Ȥ�����˻��ꤷ������
-                 to_f ����ư�����������֤��ʤ��ä�����ȯ�����ޤ���
+@param arg 変換対象のオブジェクトです。
+@raise ArgumentError 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
+@raise TypeError nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
+                 to_f が浮動小数点数を返さなかった場合に発生します。
 
     p Float(4)            #=> 4.0
     p Float(4_000)        #=> 4000.0
@@ -1668,41 +1668,41 @@ arg �� to_ary, to_a �Τ�����Υ᥽�åɤ�ʤ�����
     p Float("-Inf")       # invalid value (ArgumentError)
     p Float(("10" * 1000)) #=> Infinity
     p Float("0xa.a")      # invalid value (ArgumentError)
-    p Float(" \n10\s \t") #=> 10.0 # �������̵�뤵���
+    p Float(" \n10\s \t") #=> 10.0 # 空白類は無視される
     p Float("")           # invalid value (ArgumentError)
 
 @see [[m:String#to_f]],[[c:Float]]
 
 --- Integer(arg) -> Integer
 
-����������([[c:Fixnum]],[[c:Bignum]])���Ѵ�������̤��֤��ޤ���
+引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
 
-���������ͤξ���ľ���Ѵ����ʾ������ʲ��ڤ���Ȥ��ˡ�
-ʸ����ξ��ϡ��ʿ���ɽ����Ƭ����ޤ�����ɽ���Ȥߤʤ���ʸ����Τ�
-�Ѵ����ޤ���
+引数が数値の場合は直接変換し（小数点以下切り落とし）、
+文字列の場合は、進数を表す接頭辞を含む整数表現とみなせる文字列のみ
+変換します。
 #@if (version < "1.8.0")
-���������Ƭ����16 ��(0x)��2 ��(0b)��8 �ʿ�(0)�Ǥ���
+許される接頭辞は16 進(0x)、2 進(0b)、8 進数(0)です。
 #@end
 
 #@since 1.8.0
-���ͤ�ʸ����ʳ��Υ��֥������Ȥ��Ф��Ƥ� arg.to_int, arg.to_i ��
-���ν�˻��Ѥ����Ѵ����ޤ���
+数値と文字列以外のオブジェクトに対しては arg.to_int, arg.to_i を
+この順に使用して変換します。
 #@else
-���͡�ʸ����ʳ��Υ��֥������Ȥ��Ф��Ƥ� arg.to_i ��
-���Ѥ��ޤ���
+数値、文字列以外のオブジェクトに対しては arg.to_i を
+使用します。
 #@end
 
-@param arg �Ѵ��оݤΥ��֥������ȤǤ���
-@raise ArgumentError �����ȸ��ʤ��ʤ�ʸ���������˻��ꤷ������ȯ�����ޤ���
+@param arg 変換対象のオブジェクトです。
+@raise ArgumentError 整数と見なせない文字列を引数に指定した場合に発生します。
 #@since 1.8.0
-@raise TypeError �᥽�å� to_int, to_i ������ʤ����֥������Ȥ�����˻��ꤷ������to_int, to_i
-  ������([[c:Integer]]�Υ��֥��饹)���֤��ʤ��ä�����ȯ�����ޤ���
+@raise TypeError メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
+  が整数([[c:Integer]]のサブクラス)を返さなかった場合に発生します。
 #@else
-@raise TypeError �᥽�å� to_i ������ʤ����֥������Ȥ�����˻��ꤷ������
-                 to_i ���������֤��ʤ��ä�����ȯ�����ޤ���
+@raise TypeError メソッド to_i を持たないオブジェクトを引数に指定したか、
+                 to_i が整数を返さなかった場合に発生します。
 #@end
 #@since 1.9.1
-@raise TypeError ������ nil ����ꤷ������ȯ�����ޤ���
+@raise TypeError 引数に nil を指定した場合に発生します。
 #@end
 
 #@since 1.8.0
@@ -1723,7 +1723,7 @@ arg �� to_ary, to_a �Τ�����Υ᥽�åɤ�ʤ�����
     p Integer("0o10")     #=> 8
     p Integer("0x10")     #=> 16
     p Integer("0b10")     #=> 2
-    p Integer(" \n10\t ") #=> 10 # �������̵�뤵���
+    p Integer(" \n10\t ") #=> 10 # 空白類は無視される
     p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
     p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
 #@else
@@ -1738,7 +1738,7 @@ arg �� to_ary, to_a �Τ�����Υ᥽�åɤ�ʤ�����
     p Integer("010")      #=> 8
     p Integer("0x10")     #=> 16
     p Integer("0b10")     #=> 2
-    p Integer(" \n10\t ") #=> 10 # �������̵�뤵���
+    p Integer(" \n10\t ") #=> 10 # 空白類は無視される
     p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
     p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
 #@end
@@ -1747,13 +1747,13 @@ arg �� to_ary, to_a �Τ�����Υ᥽�åɤ�ʤ�����
 
 --- String(arg) -> String
 
-������ʸ����([[c:String]])���Ѵ�������̤��֤��ޤ���
+引数を文字列([[c:String]])に変換した結果を返します。
 
-arg.to_s ��ƤӽФ���ʸ������Ѵ����ޤ���
-arg ��ʸ����ξ�硢���⤻�� arg ���֤��ޤ���
+arg.to_s を呼び出して文字列に変換します。
+arg が文字列の場合、何もせず arg を返します。
 
-@param arg �Ѵ��оݤΥ��֥������ȤǤ���
-@raise TypeError to_s ���֤��ͤ�ʸ����Ǥʤ����ȯ�����ޤ���
+@param arg 変換対象のオブジェクトです。
+@raise TypeError to_s の返り値が文字列でなければ発生します。
 
   class Foo
    def to_s
@@ -1768,13 +1768,13 @@ arg ��ʸ����ξ�硢���⤻�� arg ���֤��ޤ���
 
 --- at_exit{ ... } -> Proc
 
-Ϳ����줿�֥��å��򥤥󥿥ץ꥿��λ���˼¹Ԥ��ޤ���
+与えられたブロックをインタプリタ終了時に実行します。
 
-at_exit���᥽�åɤǤ�����������С�END �֥��å��ˤ�뽪λ
-��������Ͽ��Ʊ���Ǥ�����Ͽ������������ä����ȤϤǤ��ޤ���
-[[d:spec/terminate]]�⻲�Ȥ��Ƥ���������
+at_exitがメソッドである点を除けば、END ブロックによる終了
+処理の登録と同等です。登録した処理を取り消すことはできません。
+[[d:spec/terminate]]も参照してください。
 
-@return ��Ͽ���������� [[c:Proc]] ���֥������Ȥ��֤��ޤ���
+@return 登録した処理を [[c:Proc]] オブジェクトで返します。
 
   3.times do |i|
     at_exit{puts "at_exit#{i}"}
@@ -1794,20 +1794,20 @@ at_exit���᥽�åɤǤ�����������С�END �֥��å��ˤ�뽪λ
 
 #@since 1.8.0
 --- loop { ... } -> object
-(���Ǥ���ʤ��¤�)�ʱ�˥֥��å���ɾ���򷫤��֤��ޤ���
+(中断されない限り)永遠にブロックの評価を繰り返します。
 
 #@since 1.8.7
-Ϳ����줿�֥��å���� [[c:StopIteration]] �� [[m:Kernel.#raise]] �����
-�롼�פ�λ���� nil ���֤��ޤ���
-�롼�פ�λ�������硢�̾�� break ����Ѥ��Ƥ���������
+与えられたブロック内で [[c:StopIteration]] を [[m:Kernel.#raise]] すると
+ループを終了して nil を返します。
+ループを終了させる場合、通常は break を使用してください。
 #@end
 
-@return break �ΰ����ʤɡ��롼��æ�л����ͤ��֤��ޤ���
+@return break の引数など、ループ脱出時の値を返します。
 #@else
 --- loop { ... } -> nil
-(���Ǥ���ʤ��¤�)�ʱ�˥֥��å���ɾ���򷫤��֤��ޤ���
+(中断されない限り)永遠にブロックの評価を繰り返します。
 
-@return nil ���֤��ޤ���
+@return nil を返します。
 #@end
 
   def try int
@@ -1823,16 +1823,16 @@ at_exit���᥽�åɤǤ�����������С�END �֥��å��ˤ�뽪λ
 --- sleep -> Integer
 --- sleep(sec) -> Integer
 
-sec �ä����ץ������μ¹Ԥ���ߤ��ޤ���
+sec 秒だけプログラムの実行を停止します。
 
-sec ����ά���줿��硢¾����åɤ���� [[m:Thread#run]]
-�ʤɤ�����Ū�˵������ʤ��¤�ʵפ˥��꡼�פ��ޤ���Thread#run��Ƥ֤Ȥ��λ�����
-sleep�μ¹Ԥ����Ǥ���ޤ���
+sec が省略された場合、他スレッドからの [[m:Thread#run]]
+などで明示的に起こさない限り永久にスリープします。Thread#runを呼ぶとその時点で
+sleepの実行が中断されます。
 
-@param sec ��ߤ����ÿ�������ο��ͤǻ��ꤷ�ޤ�����ư�������������Ǥ��ޤ��� 
-           ��ά���줿��硢�ʵפ˥��꡼�פ��ޤ���
+@param sec 停止する秒数を非負の数値で指定します。浮動小数点数も指定できます。 
+           省略された場合、永久にスリープします。
 
-@return �ºݤ���ߤ��Ƥ����ÿ� (�����˴ݤ��줿��) �Ǥ���
+@return 実際に停止していた秒数 (整数に丸められた値) です。
 
   it = Thread.new do
     sleep
@@ -1851,13 +1851,13 @@ sleep�μ¹Ԥ����Ǥ���ޤ���
 --- block_given? -> bool
 --- iterator? -> bool
 
-�᥽�åɤ˥֥��å���Ϳ�����Ƥ���п����֤��ޤ���
+メソッドにブロックが与えられていれば真を返します。
 
-���Υ᥽�åɤϥ����ȥ���ƥ����Ȥ˥֥��å���Ϳ�����Ƥ��뤫��Ĵ�٤�Τǡ�
-�᥽�å������ʳ��ǻȤäƤ�ñ�� false ���֤��ޤ���
+このメソッドはカレントコンテキストにブロックが与えられているかを調べるので、
+メソッド内部以外で使っても単に false を返します。
 
-iterator? �� �ʥ֥��å���ɬ�����ƥ졼�Ȥ���ȤϤ����ʤ��Τǡ˿侩����Ƥ��ʤ���
-�� block_given? ��ȤäƤ���������
+iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
+で block_given? を使ってください。
 
   def check
     if block_given?
@@ -1872,7 +1872,7 @@ iterator? �� �ʥ֥��å���ɬ�����ƥ졼�Ȥ���ȤϤ����ʤ��Τǡ˿侩����Ƥ��ʤ���
 #@until 1.9.1
 --- callcc {|cont| .... } -> object
 
-��³��������ޤ��� [[c:Continuation]] �򻲾Ȥ��Ƥ���������
+継続を作成します。 [[c:Continuation]] を参照してください。
 #@end
 
 #@since 1.9.1
@@ -1880,26 +1880,26 @@ iterator? �� �ʥ֥��å���ɬ�����ƥ졼�Ȥ���ȤϤ����ʤ��Τǡ˿侩����Ƥ��ʤ���
 #@end
 --- catch(tag) {|tag| .... } -> object
 
-[[m:Kernel.#throw]]�Ȥ��Ȥ߹�碌�����æ�Ф�Ԥ��ޤ��� catch �ϥ֥��å���¹Ԥ��ޤ���
+[[m:Kernel.#throw]]との組み合わせで大域脱出を行います。 catch はブロックを実行します。
 
 #@since 1.9.1
-�֥��å��μ¹���� tag ��Ʊ��Υ��֥������Ȥ�����Ȥ��� [[m:Kernel.#throw]] ���Ԥ�줿
+ブロックの実行中に tag と同一のオブジェクトを引数とする [[m:Kernel.#throw]] が行われた
 #@else
-�֥��å��μ¹���� tag ��Ʊ��̾���� [[m:Kernel.#throw]] ���Ԥ�줿
+ブロックの実行中に tag と同じ名前の [[m:Kernel.#throw]] が行われた
 #@end
-���ϡ����� throw ���������������ͤȤ��ơ��֥��å��μ¹Ԥ�λ���ޤ���
+場合は、その throw の第二引数を戻り値として、ブロックの実行を終了します。
 
-��˥ͥ��Ȥ����롼�פ���쵤��æ�Ф���Τ˻��Ѥ��ޤ���
+主にネストしたループから一気に脱出するのに使用します。
 
 #@since 1.9.1
-�������ά������硢�����Ȥʤ륪�֥������Ȥ��������������졢�֥��å��ѥ�᡼�� tag ��
-�Ϥ���ޤ���
+引数を省略した場合、タグとなるオブジェクトが内部で生成され、ブロックパラメータ tag に
+渡されます。
 
-@param tag �����Ȥʤ�Ǥ�դΥ��֥������ȤǤ���
+@param tag タグとなる任意のオブジェクトです。
 #@else
-@param tag ����ܥ��ʸ����ʤɥ���ܥ벽�Ǥ����ΤǤ���
+@param tag シンボルや文字列などシンボル化できるものです。
 #@end
-@return �֥��å����֤��ͤ����б�����throw������������֤��ͤȤ����֤��ޤ���
+@return ブロックの返り値か、対応するthrowの第二引数を返り値として返します。
 
 #@since 1.9.1
   result = catch do |tag|
@@ -1931,27 +1931,27 @@ iterator? �� �ʥ֥��å���ɬ�����ƥ졼�Ȥ���ȤϤ����ʤ��Τǡ˿侩����Ƥ��ʤ���
 
 --- throw(tag, value = nil) -> ()
 
-[[m:Kernel.#catch]]�Ȥ��Ȥ߹�碌�����æ�Ф�Ԥ��ޤ��� throw 
-��Ʊ�� tag ����ꤷ�� catch �Υ֥��å��ν����ޤǥ����פ��ޤ���
+[[m:Kernel.#catch]]との組み合わせで大域脱出を行います。 throw 
+は同じ tag を指定した catch のブロックの終わりまでジャンプします。
 
-throw ��õ�����˸ƤӽФ������å��򤵤��Τܤ�Τǡ�
-���������Ʊ���᥽�å���ˤ���Ȥϸ¤�ޤ���
-�⤷ ensure�� ��¸�ߤ���ʤ饸�������˼¹Ԥ��ޤ���
+throw は探索時に呼び出しスタックをさかのぼるので、
+ジャンプ先は同じメソッド内にあるとは限りません。
+もし ensure節 が存在するならジャンプ前に実行します。
 
-�⤷Ʊ�� tag ���ԤäƤ��� catch ��¸�ߤ��ʤ����� [[c:NameError]] ��
-����åɤ���λ���ޤ���
+もし同じ tag で待っている catch が存在しない場合は [[c:NameError]] で
+スレッドが終了します。
 
 #@since 1.9.1
-Ʊ�������Ǥ���Ȥ� [[m:Object#object_id]] ��Ʊ���Ǥ���Ȥ�����̣�Ǥ���
+同じタグであるとは [[m:Object#object_id]] が同じであるという意味です。
 #@end
 
 #@since 1.9.1
-@param tag catch �ΰ������б�����Ǥ�դΥ��֥������ȤǤ���
+@param tag catch の引数に対応する任意のオブジェクトです。
 #@else
-@param tag ����ܥ�ޤ���ʸ����Ǥ���
+@param tag シンボルまたは文字列です。
 #@end
-@param value catch ������ͤˤʤ�ޤ���
-@raise NameError Ʊ�� tag ���ԤäƤ��� catch ��¸�ߤ��ʤ�����ȯ�����ޤ���
+@param value catch の戻り値になります。
+@raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
 
   def foo
     throw :exit, 25
@@ -1960,7 +1960,7 @@ throw ��õ�����˸ƤӽФ������å��򤵤��Τܤ�Τǡ�
   ret = catch(:exit) do
     begin
       foo
-      some_process()    # ���Ф˼¹Ԥ���ʤ�
+      some_process()    # 絶対に実行されない
       10
     ensure
       puts "ensure"
@@ -1974,15 +1974,15 @@ throw ��õ�����˸ƤӽФ������å��򤵤��Τܤ�Τǡ�
 
 --- rand(max = 0) -> Integer|Float
 
-�������������᥽�åɤǤ���
+擬似乱数を得るメソッドです。
 
-max.to_i.abs�ʰ���������ɽ���������͡ˤ� 0�ʳ� �ξ�硢
-0 �ʾ� max.to_i.abs ̤�����ϰϤ��������������֤��ޤ���
-�ޤ� 0 �ξ�硢0.0 �ʾ� 1.0 ̤�����ϰϤ���ư�����������������֤��ޤ���
+max.to_i.abs（引数の整数表現の絶対値）が 0以外 の場合、
+0 以上 max.to_i.abs 未満の範囲の整数をランダムに返します。
+また 0 の場合、0.0 以上 1.0 未満の範囲の浮動小数点数をランダムに返します。
 
-�ޤ� [[m:Kernel.#srand]] ���ƤФ�Ƥ��ʤ���м�ưŪ�˸ƤӽФ��ޤ���
+まだ [[m:Kernel.#srand]] が呼ばれていなければ自動的に呼び出します。
 
-@param max ���ͥ��֥������ȤǤ���
+@param max 数値オブジェクトです。
 
   p rand(63) #=> 20
   p rand(63) #=> 56
@@ -1998,22 +1998,22 @@ max.to_i.abs�ʰ���������ɽ���������͡ˤ� 0�ʳ� �ξ�硢
 --- srand -> Integer
 --- srand(seed) -> Integer
 
-[[m:Kernel.#rand]] ������μ�����ꤷ���Ť�����֤��ޤ���
+[[m:Kernel.#rand]] の乱数の種を設定し、古い種を返します。
 
-seed.to_i�ʰ���������ɽ���ˤ�����μ�����ꤷ�ޤ���
-seed �˴��Τ��ͤ�Ϳ����ȡ������� Kernel.#rand ���ͤ�Ƹ��Ǥ��ޤ���
+seed.to_i（引数の整数表現）を乱数の種に設定します。
+seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 
-#@#(�������ǽ������ 0 ���֤��ޤ�)��
-����� seed ����ά���줿���ˤ�
-���ߤλ����ץ����� ID��srand ��ƤӽФ��������
-�ޤ���ǽ�ʤ� /dev/urandom �����ɤ߽Ф����ǡ����ʤɤ򸵤˼����ޤ���
+#@#(ただし最初だけは 0 を返します)。
+初期値 seed が省略された時には
+現在の時刻やプロセス ID、srand を呼び出した回数、
+また可能なら /dev/urandom から読み出したデータなどを元に種を作ります。
 
 #@since 1.8.3
-@param seed ����μ�Ȥʤ���ͤ���ꤷ�ޤ���to_int �᥽�åɤˤ���������Ѵ�����ޤ���
-            [[c:Bignum]] ������ǽ�Ǥ���
+@param seed 乱数の種となる数値を指定します。to_int メソッドにより整数に変換されます。
+            [[c:Bignum]] も指定可能です。
 #@else
-@param seed ����μ�Ȥʤ���ͤ���ꤷ�ޤ���to_int �᥽�åɤˤ���������Ѵ�����ޤ���
-            unsigned long �����礭���ͤ�Ϳ���뤳�ȤϽ���ޤ���
+@param seed 乱数の種となる数値を指定します。to_int メソッドにより整数に変換されます。
+            unsigned long よりも大きな値を与えることは出来ません。
 #@end
 
   num = 455675
@@ -2052,8 +2052,8 @@ seed �˴��Τ��ͤ�Ϳ����ȡ������� Kernel.#rand ���ͤ�Ƹ��Ǥ��ޤ���
 --- global_variables -> [String]
 #@end
 
-�ץ����������������Ƥ��륰�����Х��ѿ�(`$'�ǻϤޤ��ѿ�)̾��
-������֤��ޤ���
+プログラム中で定義されているグローバル変数(`$'で始まる変数)名の
+配列を返します。
 
 #@since 1.9.1
   p global_variables #=> [:$;, :$-F, :$@, ... ]
@@ -2069,7 +2069,7 @@ seed �˴��Τ��ͤ�Ϳ����ȡ������� Kernel.#rand ���ͤ�Ƹ��Ǥ��ޤ���
 --- local_variables -> [String]
 #@end
 
-���ߤΥ������פ��������Ƥ�����������ѿ�̾��������֤��ޤ���
+現在のスコープで定義されているローカル変数名の配列を返します。
 
   yuyu = 0
 #@since 1.9.1
@@ -2088,21 +2088,21 @@ seed �˴��Τ��ͤ�Ϳ����ȡ������� Kernel.#rand ���ͤ�Ƹ��Ǥ��ޤ���
 --- sub(pattern) {|matched| ... }  -> String
 --- sub!(pattern) {|matched| ... } -> String
 
-�Ȥ߹����ѿ� [[m:$_]] �λؤ�ʸ������� pattern ��
-�ޥå�����ǽ����ʬ�� replace ���֤������ޤ���$_ ���֤��ޤ���
+組み込み変数 [[m:$_]] の指す文字列内で pattern に
+マッチする最初の部分を replace に置き換えます。$_ を返します。
 
-$_.sub, $_.sub! �Ȥۤ�Ʊ���Ǥ���
+$_.sub, $_.sub! とほぼ同じです。
 
-�Ź�Ū�ˤʤꤹ���뤭�餤�����뤿�ᡢ���Υ᥽�åɤλ��ѤϿ侩����Ƥ��ޤ���
-����Ϥ������Ū�� $_.sub, $_.sub! ��ȤäƤ���������
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.sub, $_.sub! を使ってください。
 
-$_.sub �Ȥ��Υ᥽�å� sub �ϰʲ������ǰ㤤������ޤ���
+$_.sub とこのメソッド sub は以下の点で違いがあります。
 
-  * sub �� $_ ���ͤ򥳥ԡ����ơ����ԡ������򹹿�����
-  $_ �˺��������ޤ���
+  * sub は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
-@param pattern [[m:String#sub]] ����
-@param replace [[m:String#sub]] ����
+@param pattern [[m:String#sub]] 参照
+@param replace [[m:String#sub]] 参照
 @see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace)          -> String
@@ -2110,87 +2110,87 @@ $_.sub �Ȥ��Υ᥽�å� sub �ϰʲ������ǰ㤤������ޤ���
 --- gsub(pattern) {|matched| ... }  -> String
 --- gsub!(pattern) {|matched| ... } -> String
 
-�Ȥ߹����ѿ� [[m:$_]] �λؤ�ʸ������� pattern ��
-�ޥå�������ʬ������ replace ���֤������ޤ���$_ ���֤��ޤ���
+組み込み変数 [[m:$_]] の指す文字列内で pattern に
+マッチする部分を全て replace に置き換えます。$_ を返します。
 
-$_.gsub, $_.gsub! �Ȥۤ�Ʊ���Ǥ���
+$_.gsub, $_.gsub! とほぼ同じです。
 
-�Ź�Ū�ˤʤꤹ���뤭�餤�����뤿�ᡢ���Υ᥽�åɤλ��ѤϿ侩����Ƥ��ޤ���
-����Ϥ������Ū�� $_.gsub, $_.gsub! ��ȤäƤ���������
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.gsub, $_.gsub! を使ってください。
 
-$_.gsub �Ȥ��Υ᥽�å� gsub �ϰʲ������ǰ㤤������ޤ���
+$_.gsub とこのメソッド gsub は以下の点で違いがあります。
 
-  * gsub �� $_ ���ͤ򥳥ԡ����ơ����ԡ������򹹿�����
-  $_ �˺��������ޤ���
+  * gsub は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
-@param pattern [[m:String#gsub]] ����
-@param replace [[m:String#gsub]] ����
+@param pattern [[m:String#gsub]] 参照
+@param replace [[m:String#gsub]] 参照
 @see [[m:String#gsub]],[[m:$_]]
 
 --- chop  -> String
 --- chop! -> String | nil
 
-�Ȥ߹����ѿ� $_ ��Ǹ��ʸ�������������Τˤ�
-�ޤ�(��ü��"\r\n"�Ǥ����2ʸ���������ޤ�)��
+組み込み変数 $_ を最後の文字を取り除いたものにし
+ます(終端が"\r\n"であれば2文字取り除きます)。
 
-chop! ��ʸ���󤽤Τ�Τ��ѹ������η�̤��֤��ޤ�����
-������ʸ���󤬤ʤ���� nil ���֤��ޤ���
+chop! は文字列そのものを変更しその結果を返しますが、
+取り除く文字列がなければ nil を返します。
 
-$_.chop, $_.chop! �Ȥۤ�Ʊ���Ǥ���
+$_.chop, $_.chop! とほぼ同じです。
 
-�Ź�Ū�ˤʤꤹ���뤭�餤�����뤿�ᡢ���Υ᥽�åɤλ��ѤϿ侩����Ƥ��ޤ���
-����Ϥ������Ū�� $_.chop, $_.chop! ��ȤäƤ���������
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chop, $_.chop! を使ってください。
 
-$_.chop�Ȥ��Υ᥽�å� chop �ϰʲ������ǰ㤤������ޤ���
+$_.chopとこのメソッド chop は以下の点で違いがあります。
 
-  * chop �� $_ ���ͤ򥳥ԡ����ơ����ԡ������򹹿�����
-  $_ �˺��������ޤ���
+  * chop は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
 @see [[m:String#chop]],[[m:$_]]
 
 --- chomp(rs = $/)  -> String
 --- chomp!(rs = $/) -> String | nil
 
-�Ȥ߹����ѿ� $_ �� rs �ǻ��ꤵ�������
-��ʸ��������������Τˤ��ޤ���
+組み込み変数 $_ を rs で指定される末尾
+の文字列を取り除いたものにします。
 
-chomp! ��ʸ���󤽤Τ�Τ��ѹ������η�̤��֤��ޤ�����
-������ʸ���󤬤ʤ���� nil ���֤��ޤ���
-rs �Υǥե�����ͤ� $/ �Ǥ���
+chomp! は文字列そのものを変更しその結果を返しますが、
+取り除く文字列がなければ nil を返します。
+rs のデフォルト値は $/ です。
 
-$_.chomp, $_.chomp! �Ȥۤ�Ʊ���Ǥ���
+$_.chomp, $_.chomp! とほぼ同じです。
 
-�Ź�Ū�ˤʤꤹ���뤭�餤�����뤿�ᡢ���Υ᥽�åɤλ��ѤϿ侩����Ƥ��ޤ���
-����Ϥ������Ū�� $_.chomp, $_.chomp!��ȤäƤ���������
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chomp, $_.chomp!を使ってください。
 
-$_.chomp �Ȥ��Υ᥽�å� chomp �ϰʲ������ǰ㤤������ޤ���
+$_.chomp とこのメソッド chomp は以下の点で違いがあります。
 
-  * chomp �� $_ ���ͤ򥳥ԡ����ơ����ԡ������򹹿�����
-  $_ �˺��������ޤ���
+  * chomp は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
-@param rs [[m:String#chomp]] ����
+@param rs [[m:String#chomp]] 参照
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 
 --- split(sep = $/, limit = 0) -> [String]
 
-$_.split ��Ʊ���Ǥ���
+$_.split と同じです。
 
-�Ź�Ū�ˤʤꤹ���뤭�餤�����뤿�ᡢ���Υ᥽�åɤλ��ѤϿ侩����Ƥ��ޤ���
-����Ϥ������Ū�� $_.split ��ȤäƤ���������
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.split を使ってください。
 
-@param sep [[m:String#split]] ����
-@param limit [[m:String#split]] ����
+@param sep [[m:String#split]] 参照
+@param limit [[m:String#split]] 参照
 @see [[m:String#split]],[[m:$_]]
 
 --- scan(re)                  -> [String] | [[String]]
 --- scan(re) {|matched| ... } -> [String] | [[String]]
 
-$_.scan ��Ʊ���Ǥ���
+$_.scan と同じです。
 
-�Ź�Ū�ˤʤꤹ���뤭�餤�����뤿�ᡢ���Υ᥽�åɤλ��ѤϿ侩����Ƥ��ޤ���
-����Ϥ������Ū�� $_.scan ��ȤäƤ���������
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.scan を使ってください。
 
-@param re [[m:String#scan]] ����
+@param re [[m:String#scan]] 参照
 @see [[m:String#scan]],[[m:$_]]
 
 #@end
@@ -2198,55 +2198,55 @@ $_.scan ��Ʊ���Ǥ���
 --- trap(signal, command) -> object
 --- trap(signal) { ... } -> object
 #@since 1.8.0
-signal �ǻ��ꤵ�줿�����ߤˤ�������ϥ�ɥ�Ȥ���
-command ����Ͽ���ޤ���[[m:Signal.#trap]]��Ʊ���Ǥ���
+signal で指定された割り込みにたいするハンドラとして
+command を登録します。[[m:Signal.#trap]]と同じです。
 
-[[m:Signal.#trap]]�λ��Ѥ�侩���ޤ���
+[[m:Signal.#trap]]の使用を推奨します。
 
-@param signal [[m:Signal.#trap]] ����
-@param command [[m:Signal.#trap]] ����
+@param signal [[m:Signal.#trap]] 参照
+@param command [[m:Signal.#trap]] 参照
 
 @see [[m:Signal.#trap]],[[c:Signal]]
 #@else
-signal �ǻ��ꤵ�줿�����ߤˤ�������ϥ�ɥ�Ȥ���
-command ����Ͽ���ޤ���signal �ϥ����ʥ�̾��
-ʸ���� [[c:Symbol]]���ޤ��ϥ����ʥ��ֹ�ǻ��ꤷ�ޤ���
+signal で指定された割り込みにたいするハンドラとして
+command を登録します。signal はシグナル名の
+文字列か [[c:Symbol]]、またはシグナル番号で指定します。
 
-command ��ʸ����ޤ��ϥ֥��å��ǻ��ꤷ�ޤ���
-nil����ʸ����""��"SIG_IGN" �ޤ���
-"IGNORE" ����ꤷ�����ϡ����Υ����ʥ��̵�뤷�ޤ�
-(��ǽ�ʤ��)��
-"SIG_DFL" �ޤ��� "DEFAULT" ����ꤷ�����ϡ�
-�ǥե���Ȥ�ư���Ԥʤ��褦�ˤʤ�ޤ���
-"EXIT"����ꤷ�����ϡ������ʥ��������Ƚ�λ������
-�Ԥä����ȥ��ơ����� 0 �ǽ�λ���ޤ���
+command は文字列またはブロックで指定します。
+nil、空文字列""、"SIG_IGN" または
+"IGNORE" を指定した時は、そのシグナルを無視します
+(可能ならば)。
+"SIG_DFL" または "DEFAULT" を指定した時は、
+デフォルトの動作を行なうようになります。
+"EXIT"を指定した時は、シグナルを受け取ると終了処理を
+行ったあとステータス 0 で終了します。
 
-�ޤ� signal �����̤��ͤȤ��� 0 �ޤ��� "EXIT"
-�����Ǥ��ޤ�������ϡ֥ץ������ν�λ���פ�ɽ���ޤ���
+また signal の特別な値として 0 または "EXIT"
+を指定できます。これは「プログラムの終了時」を表します。
 
-�����Ĥ��Υ����ʥ���Ф��ơ�Ruby ���󥿥ץ꥿���㳰 [[c:Interrupt]] ��
-[[c:SignalException]] ��ȯ�������ޤ������Τ褦�ʥ����ʥ���㳰�����ˤ��
-����ª���뤳�Ȥ�Ǥ��ޤ���
+いくつかのシグナルに対して、Ruby インタプリタは例外 [[c:Interrupt]] や
+[[c:SignalException]] を発生させます。このようなシグナルは例外処理によっ
+て捕捉することもできます。
 
     begin
-      Process.kill :QUIT, $$   # ���Ȥ�SIGQUIT������
+      Process.kill :QUIT, $$   # 自身にSIGQUITを送信
     rescue SignalException
       puts "rescue #$!"
     end
     #=> rescue SIGQUIT
 
-trap() �ˤ����ª���줿�����ʥ���㳰��ȯ�������ޤ���
+trap() により捕捉されたシグナルは例外を発生させません。
 
-trap �ϴ��˥����ʥ���б����� command ����Ͽ�����
-����С�������֤��ޤ�(�֥��å��� [[c:Proc]] ���֥�����
-�ȤȤ����֤���ޤ���"IGNORE" �� "DEFAULT" ���Ф��Ƥ�
-nil ���֤��ޤ�)��������Ͽ����Ƥ��ʤ����
-nil ���֤��ޤ���
+trap は既にシグナルに対応する command が登録されて
+いれば、それを返します(ブロックは [[c:Proc]] オブジェク
+トとして返されます。"IGNORE" や "DEFAULT" に対しては
+nil を返します)。何も登録されていなければ
+nil を返します。
 
 #@##@since 1.8.0
-trap �¹�����"IGNORE" �� "DEFAULT" ����Ͽ����Ƥ����ʤ顢
-"IGNORE"��"DEFAULT" ���֤��ޤ���ruby ���󥿥ץ꥿���Τ����ʤ�
-�����ʥ�ϥ�ɥ餬��Ͽ����Ƥ������((-����äȥ���-))�� nil ���֤��ޤ���
+trap 実行前に"IGNORE" や "DEFAULT" が登録されていたなら、
+"IGNORE"、"DEFAULT" を返します。ruby インタプリタが知り得ない
+シグナルハンドラが登録されていた場合((-ちょっとウソ-))は nil を返します。
 
     p trap(:INT, "p true")     #=> nil
     p trap(:INT) { }           #=> "p true"
@@ -2256,40 +2256,40 @@ trap �¹�����"IGNORE" �� "DEFAULT" ����Ͽ����Ƥ����ʤ顢
     p trap(:INT, nil)          #=> "EXIT"
 #@##@end
 
-¸�ߤ��ʤ������ʥ����ꤷ�����ϡ��㳰 [[c:ArgumentError]] ��ȯ
-�����ޤ����ʤ���Windows (mswin32, mingw32)�Ǥϡ�INT
-ILL FPE SEGV TERM BREAK ABRT ������ EXIT ��������Ǥ��ޤ���
+存在しないシグナルを指定した場合は、例外 [[c:ArgumentError]] が発
+生します。なお、Windows (mswin32, mingw32)では、INT
+ILL FPE SEGV TERM BREAK ABRT そして EXIT しか指定できません。
 #@end
 
 --- trace_var(varname, hook) -> nil
 --- trace_var(varname){|new_val| .... } -> nil
 --- trace_var(varname, hook) -> [String|Proc]
 
-�������Х��ѿ� varname �ؤ������Υեå�����Ͽ���ޤ���
+グローバル変数 varname への代入のフックを登録します。
 
-�����ǤΡ֥������Х��ѿ��פϡ��ü��ѿ�
-([[ref:d:spec/variables#builtin]] �򻲾�)��ޤ᤿ `$' �ǻϤޤ��ѿ��Τ�
-�ȤǤ���
+ここでの「グローバル変数」は、特殊変数
+([[ref:d:spec/variables#builtin]] を参照)も含めた `$' で始まる変数のこ
+とです。
 
-���θƤӽФ��ʹߡ�varname �ǻ��ꤷ���������Х��ѿ���
-�ͤ���������뤿�Ӥ� hook ���֥��å���ɾ������ޤ���hook �� Proc ���֥������Ȥξ��
-�������줿�ͤ��֥��å��������Ϥ���ޤ���ʸ����ξ���Ruby�����ɤȤ���ɾ������ޤ���
+この呼び出し以降、varname で指定したグローバル変数に
+値が代入されるたびに hook かブロックが評価されます。hook が Proc オブジェクトの場合
+代入された値がブロック引数に渡されます。文字列の場合はRubyコードとして評価されます。
 
-trace_var ���եå�����Τ�����Ū�����������Ǥ���
-�եå���ʣ����Ͽ�Ǥ��ޤ���
+trace_var がフックするのは明示的な代入だけです。
+フックは複数登録できます。
 
-�եå���������ˤϡ�hook �� nil ��
-���ꤹ�뤫��[[m:Kernel.#untrace_var]] ���Ѥ��ޤ���
+フックを解除するには、hook に nil を
+指定するか、[[m:Kernel.#untrace_var]] を用います。
 
-hook �� nil �ʤ�С����ꤵ��Ƥ���
-hook �򤹤٤Ʋ�����Ƥ���������֤��ޤ�(�֥��å�����Ͽ����Ƥ����
-[[c:Proc]] ���֥������Ȥ��֤���ޤ�)
-����ʳ��ϡ�nil ���֤��ޤ���
+hook が nil ならば、設定されていた
+hook をすべて解除してその配列を返します(ブロックで登録されていれば
+[[c:Proc]] オブジェクトで返されます)
+それ以外は、nil を返します。
 
-@param varname �������Х��ѿ�̾��ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
-@param hook �եå��ˤʤ�ʸ����ޤ��� [[c:Proc]] ���֥������ȤǤ���
-@return �եå�����Ͽ�������� nil ���֤��ޤ�������������ϲ������
-        �եå����¤٤�������֤��ޤ���
+@param varname グローバル変数名を文字列か [[c:Symbol]] で指定します。
+@param hook フックになる文字列または [[c:Proc]] オブジェクトです。
+@return フックを登録した場合は nil を返します。解除した場合は解除した
+        フックを並べた配列を返します。
 
     trace_var(:$v){|val| puts "hook: $v=#{val.inspect}" }
     $v = 1       #=> hook: $v=1
@@ -2301,15 +2301,15 @@ hook �򤹤٤Ʋ�����Ƥ���������֤��ޤ�(�֥��å�����Ͽ����Ƥ����
 
 --- untrace_var(varname, hook = nil) -> [String|Proc]
 
-�������Х��ѿ� varname �˴�Ϣ�դ���줿�եå��������ޤ���
+グローバル変数 varname に関連付けられたフックを解除します。
 
-hook �����ꤵ�줿���ˤϤ��Υեå������������ޤ���
-��ά���뤫 nil ��Ϳ��������
-varname �Υեå������Ʋ�����ޤ���
+hook が指定された場合にはそのフックだけを解除します。
+省略するか nil を与えた場合は
+varname のフックを全て解除します。
 
-@param varname �������Х��ѿ�̾��ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
-@param hook ʸ����ޤ��� [[c:Proc]] ���֥������ȤǤ���
-@return ������줿�եå���������֤��ޤ���
+@param varname グローバル変数名を文字列か [[c:Symbol]] で指定します。
+@param hook 文字列または [[c:Proc]] オブジェクトです。
+@return 解除されたフックの配列を返します。
 
   trace_var(:$v){|val| print "hookA.#{val.inspect},\n" }
   block = proc{|val| print "hookB.#{val.inspect}," }
@@ -2321,7 +2321,7 @@ varname �Υեå������Ʋ�����ޤ���
   
   trace_var(:$v){|val| print "hookC.#{val.inspect}," }
   p untrace_var(:$v) #=> [#<Proc:0x02b68f58@..:9>, #<Proc:0x02b6978c@..:3>]
-  $v = 'str'        # �ʤˤ���Ϥ���ʤ�
+  $v = 'str'        # なにも出力されない
 
 @see [[m:Kernel.#trace_var]]
 
@@ -2332,14 +2332,14 @@ varname �Υեå������Ʋ�����ޤ���
 --- raise(error_type, message = nil, backtrace = caller(0)) -> ()
 --- fail(error_type, message = nil, backtrace = caller(0))  -> ()
 
-�㳰��ȯ�������ޤ���
-ȯ�������㳰���ѿ� [[m:$!]] �˳�Ǽ����ޤ����ޤ��㳰��
-ȯ���������Υ����å��ȥ졼�����ѿ� [[m:$@]] �˳�Ǽ����
-�ޤ���ȯ�������㳰�� rescue �����ª�Ǥ��ޤ���
+例外を発生させます。
+発生した例外は変数 [[m:$!]] に格納されます。また例外が
+発生した時のスタックトレースは変数 [[m:$@]] に格納され
+ます。発生した例外は rescue 節で捕捉できます。
 
-����̵���ξ��ϡ�Ʊ����åɤ�Ʊ���֥��å���ǺǸ�� rescue ���줿
-�㳰���֥������� ([[m:$!]]) ���ȯ�������ޤ������Τ褦��
-�㳰��¸�ߤ��ʤ������Ȥ���ª����Ƥ�����ˤ��㳰 [[c:RuntimeError]] ��ȯ�������ޤ���
+引数無しの場合は、同スレッドの同じブロック内で最後に rescue された
+例外オブジェクト ([[m:$!]]) を再発生させます。そのような
+例外が存在しないが自身は捕捉されている時には例外 [[c:RuntimeError]] を発生させます。
 
     begin
       open("nonexist")
@@ -2347,22 +2347,22 @@ varname �Υեå������Ʋ�����ޤ���
       raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
     end
 
-�������Ϥ������ϡ��㳰��å����� message ����ä� error_type �μ����㳰(��ά�� RuntimeError)��
-ȯ�������ޤ���
+引数を渡した場合は、例外メッセージ message を持った error_type の示す例外(省略時 RuntimeError)を
+発生させます。
 
-error_type �Ȥ����㳰�ǤϤʤ����饹�䥪�֥������Ȥ���ꤷ����硢
-���Υ��֥������Ȥ� exception �᥽�åɤ��֤��ͤ�ȯ�������㳰�ˤ��ޤ���
-���κݡ�exception �᥽�åɤ˰����Ȥ����ѿ� message ���Ϥ����Ȥ��Ǥ��ޤ���
+error_type として例外ではないクラスやオブジェクトを指定した場合、
+そのオブジェクトの exception メソッドが返す値を発生する例外にします。
+その際、exception メソッドに引数として変数 message を渡すことができます。
 
-@param error_type ȯ���������㳰���㳰���饹�ޤ����㳰���饹�Υ��󥹥��󥹤ǻ��ꤷ�ޤ���
-@param message �㳰�Υ�å������Ȥʤ�ʸ����Ǥ���
-@param backtrace �㳰ȯ�����Υ����å��ȥ졼���ǡ�[[m:Kernel.#caller]] ������ͤ�Ʊ��
-  �����ǻ��ꤷ�ʤ���Ф����ޤ���
-@raise TypeError exception �᥽�åɤ��㳰���֥������Ȥ��֤��ʤ��ä�����ȯ�����ޤ���
+@param error_type 発生させる例外を例外クラスまたは例外クラスのインスタンスで指定します。
+@param message 例外のメッセージとなる文字列です。
+@param backtrace 例外発生時のスタックトレースで、[[m:Kernel.#caller]] の戻り値と同じ
+  形式で指定しなければいけません。
+@raise TypeError exception メソッドが例外オブジェクトを返さなかった場合に発生します。
 
-�㳰����ª����򼨤��ޤ���
+例外の捕捉の例を示します。
 
-  #��1
+  #例1
   begin
     raise NameError,"!!error!!"
   rescue ArgumentError => err
@@ -2372,7 +2372,7 @@ error_type �Ȥ����㳰�ǤϤʤ����饹�䥪�֥������Ȥ���ꤷ����硢
     p err #=> #<NameError: !!error!!>
   end
   
-  #��2
+  #例2
   def foo num
     print 'in method.'
     raise "error!!" if num <= 9
@@ -2388,7 +2388,7 @@ error_type �Ȥ����㳰�ǤϤʤ����饹�䥪�֥������Ȥ���ꤷ����硢
   
   foo(4) #=> in method.in rescue.in method.in else.in ensure.
   
-  #��3
+  #例3
   class MyException
     def exception(mesg=nil)
       SecurityError.new(mesg)
@@ -2402,22 +2402,22 @@ error_type �Ȥ����㳰�ǤϤʤ����饹�䥪�֥������Ȥ���ꤷ����硢
 --- printf(format, *arg) -> nil
 --- printf(port, format, *arg) -> nil
 
-C ����� printf ��Ʊ���褦�ˡ�format �˽���������ʸ�������
-������ port �˽��Ϥ��ޤ���
+C 言語の printf と同じように、format に従い引数を文字列に変
+換して port に出力します。
 
-port ���ά��������ɸ����� [[m:$stdout]] �˽��Ϥ��ޤ���
+port を省略した場合は標準出力 [[m:$stdout]] に出力します。
 
-������ 1 �Ĥ���ꤷ�ʤ���в��⤷�ޤ���
+引数を 1 つも指定しなければ何もしません。
 
-Ruby �ˤ����� format ʸ����γ�ĥ�ˤĤ��Ƥ�
-[[m:Kernel.#sprintf]]�ι�򻲾Ȥ��Ƥ���������
+Ruby における format 文字列の拡張については
+[[m:Kernel.#sprintf]]の項を参照してください。
 
-@param port ������ˤʤ�[[c:IO]] �Υ��֥��饹�Υ��󥹥��󥹤Ǥ���
-@param format �ե����ޥå�ʸ����Ǥ���
-@param arg �ե����ޥåȤ��������Ǥ���
-@raise ArgumentError port ����ꤷ���Τ� format ���ά��������ȯ�����ޤ���
-@raise IOError port ���񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ��� 
+@param port 出力先になる[[c:IO]] のサブクラスのインスタンスです。
+@param format フォーマット文字列です。
+@param arg フォーマットされる引数です。
+@raise ArgumentError port を指定したのに format を省略した場合に発生します。
+@raise IOError port が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。 
 
   printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI) 
   #=> calculate PI...   3.141592653589793
@@ -2434,19 +2434,19 @@ Ruby �ˤ����� format ʸ����γ�ĥ�ˤĤ��Ƥ�
 --- sprintf(format, *arg) -> String
 --- format(format, *arg) -> String
 
-format ʸ����� C ����� sprintf ��Ʊ���褦�˲�ᤷ��
-������ե����ޥåȤ���ʸ������֤��ޤ���
+format 文字列を C 言語の sprintf と同じように解釈し、
+引数をフォーマットした文字列を返します。
 
-@param format �ե����ޥå�ʸ����Ǥ���
-@param arg �ե����ޥåȤ��������Ǥ���
+@param format フォーマット文字列です。
+@param arg フォーマットされる引数です。
 @see [[m:Kernel.#printf]],[[m:Time#strftime]],[[m:Date.strptime]]
 
 #@include(printf-format)
 
 --- binding -> Binding
 
-�ѿ����᥽�åɤʤɤδĶ������ޤ�� [[c:Binding]] ���֥������Ȥ�
-���������֤��ޤ����̾[[m:Kernel.#eval]] ����������Ȥ��ƻȤ��ޤ���
+変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
+生成して返します。通常、[[m:Kernel.#eval]] の第二引数として使います。
 
   def foo
     a = 1
@@ -2460,26 +2460,26 @@ format ʸ����� C ����� sprintf ��Ʊ���褦�˲�ᤷ��
 --- eval(expr) -> object
 --- eval(expr, bind, fname = __FILE__, lineno = 1) -> object
 
-ʸ���� expr �� Ruby �ץ������Ȥ���ɾ�����Ƥ��η�̤��֤���
-������2������ [[c:Proc]] ���֥������Ȥޤ��� [[c:Binding]] ���֥���
-���Ȥ�Ϳ������硢���Υ��֥������Ȥ�������������ƥ����Ȥ�ʸ�����
-ɾ�����ޤ���
+文字列 expr を Ruby プログラムとして評価してその結果を返しま
+す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
+クトを与えた場合、そのオブジェクトを生成したコンテキストで文字列を
+評価します。
 
-expr ����Υ��������ѿ��ΰ����ϥ֥��å��ξ���Ʊ���Ǥ������ʤ����eval 
-�¹�������­����Ƥ����ѿ��� eval �¹Ը�˥֥��å����˻����Ф��ޤ���
+expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval 
+実行前に補足されていた変数は eval 実行後にブロック外に持ち出せます。
 
-fname �� lineno ��Ϳ����줿���ˤϡ��ե�����
-fname �ι��ֹ� lineno ����ʸ���� expr ���񤫤�Ƥ��뤫�Τ褦��
-����ѥ��뤵��ޤ��������å��ȥ졼����ɽ���ʤɤ򺹤��ؤ��뤳�Ȥ�
-�Ǥ��ޤ���
+fname と lineno が与えられた場合には、ファイル
+fname の行番号 lineno から文字列 expr が書かれているかのように
+コンパイルされます。スタックトレースの表示などを差し替えることが
+できます。
 
-bind �ˤ�餺������Υ��֥������ȤΥ���ƥ����Ȥ� expr ��ɾ��������
-��硢 [[m:Module#module_eval]], [[m:Object#instance_eval]] ���Ȥ��ޤ���
+bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
+場合、 [[m:Module#module_eval]], [[m:Object#instance_eval]] が使えます。
 
-@param expr  ɾ������ʸ����Ǥ���
-@param bind  [[c:Proc]] ���֥������Ȥޤ��� [[c:Binding]] ���֥������ȤǤ���
-@param fname �����å��ȥ졼����ɽ������ե�����̾�Ǥ���
-@param lineno ʸ���� expr ���񤫤�Ƥ�������ꤹ����Ƭ�ι��ֹ�������ǻ��ꤷ�ޤ���
+@param expr  評価する文字列です。
+@param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトです。
+@param fname スタックトレースに表示するファイル名です。
+@param lineno 文字列 expr が書かれていると想定する先頭の行番号を整数で指定します。
 
   a = nil
   eval('a = RUBY_RELEASE_DATE')
@@ -2494,24 +2494,24 @@ bind �ˤ�餺������Υ��֥������ȤΥ���ƥ����Ȥ� expr ��ɾ��������
 
 @see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Object#method]],[[m:Object#send]]
 
-#@#==== ��ե쥯�����
+#@#==== リフレクション
 
 --- proc { ... } -> Proc
 --- lambda { ... } -> Proc
 --- proc -> Proc
 --- lambda -> Proc
 
-Ϳ����줿�֥��å������³�����֥������� ([[c:Proc]] �Υ��󥹥���)
-�����������֤��ޤ���[[m:Proc.new]] �˶ᤤƯ���򤷤ޤ���
+与えられたブロックから手続きオブジェクト ([[c:Proc]] のインスタンス)
+を生成して返します。[[m:Proc.new]] に近い働きをします。
 
-�֥��å������ꤵ��ʤ���С��ƤӽФ����Υ᥽�åɤǻ��ꤵ�줿�֥��å�
-���³�����֥������ȤȤ����֤��ޤ����ƤӽФ����Υ᥽�åɤ��֥��å��ʤ�
-�ǸƤФ��� [[c:ArgumentError]] �㳰��ȯ�����ޤ���
+ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
+を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
+で呼ばれると [[c:ArgumentError]] 例外が発生します。
 
-���������֥��å�����ꤷ�ʤ��ƤӽФ��Ͽ侩����Ƥ��ޤ��󡣸ƤӽФ����Υ᥽�åɤǻ��ꤵ�줿�֥��å�
-����������������Ū�� & �����Ǥ�����٤��Ǥ���
+ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
+を得たい場合は明示的に & 引数でうけるべきです。
 
-@raise ArgumentError �����å���˥֥��å����ʤ��Τ˥֥��å����ά�����ƤӽФ���Ԥä��Ȥ���ȯ�����ޤ���
+@raise ArgumentError スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
 
   def foo &block
     lambda(&block)
@@ -2532,8 +2532,8 @@ bind �ˤ�餺������Υ��֥������ȤΥ���ƥ����Ȥ� expr ��ɾ��������
 --- __callee__ -> Symbol | nil
 #@end
 
-���ߤΥ᥽�å�̾���֤��ޤ���
-�᥽�åɤγ��ǸƤФ��� nil ���֤��ޤ���
+現在のメソッド名を返します。
+メソッドの外で呼ばれると nil を返します。
 
   def foo
     p __method__
@@ -2547,74 +2547,74 @@ bind �ˤ�餺������Υ��֥������ȤΥ���ƥ����Ȥ� expr ��ɾ��������
 --- Complex(r, i = 0) -> Complex
 --- Complex(s)        -> Complex
 
-������ r�������� i �Ǥ��� [[c:Complex]] ���饹�Υ��֥������Ȥ��������ޤ���
+実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
 
-@param r ��������ʣ�ǿ��μ�����
+@param r 生成する複素数の実部。
 
-@param i ��������ʣ�ǿ��ε�������ά�������� 0 �Ǥ���
+@param i 生成する複素数の虚部。省略した場合は 0 です。
 
-@param s ��������ʣ�ǿ���ɽ��ʸ����
+@param s 生成する複素数を表す文字列。
 
-@raise ArgumentError �Ѵ��Ǥ��ʤ����֥������Ȥ���ꤷ������ȯ�����ޤ���
+@raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 
-��:
+例:
 
   Complex(1)       # => (1+0i)
   Complex(1, 2)    # => (1+2i)
   Complex('1+1i')  # => (1+1i)
   Complex('1+1j')  # => (1+1i)
-  # Complex.polar(10, 10) ��Ʊ�졣
+  # Complex.polar(10, 10) と同一。
   Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
   Complex('_')     # => ArgumentError
 
-r �ˤ� i �ˤ�ʣ�ǿ��Ȳ�ᤵ��륪�֥������Ȥ���ꤷ�����ˤϡ�
-Complex(a, b) �� a+bi �Ȥ��Ʒ׻����� [[c:Complex]] ���֥������Ȥ��֤���
-����
+r にも i にも複素数と解釈されるオブジェクトを指定した場合には、
+Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを返しま
+す。
 
   Complex('1+1i', '2+3i')                          # => (-2+3i)
   Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
 
-@see [[m:Complex.rect]]��[[m:Complex.rectangular]]
+@see [[m:Complex.rect]]、[[m:Complex.rectangular]]
 
-[����] Complex.new��Complex.new! �� 1.9 �ϤǤ��ѻߤ���ޤ�����
+[注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
 
 --- Rational(x, y = 1) -> Rational
 
-������ͭ����([[c:Rational]])���Ѵ�������̤��֤��ޤ���
+引数を有理数([[c:Rational]])に変換した結果を返します。
 
-@param x �Ѵ��оݤΥ��֥������ȤǤ���
+@param x 変換対象のオブジェクトです。
 
-@param y �Ѵ��оݤΥ��֥������ȤǤ�����ά�������� x �������Ѥ���
-         [[c:Rational]] ���֥������Ȥ�������ޤ���
+@param y 変換対象のオブジェクトです。省略した場合は x だけを用いて
+         [[c:Rational]] オブジェクトを作成します。
 
-@raise ArgumentError �Ѵ��Ǥ��ʤ����֥������Ȥ���ꤷ������ȯ�����ޤ���
+@raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 
-���� x��y ��ξ������ꤷ����硢x/y ���� [[c:Rational]] ���֥������Ȥ�
-�֤��ޤ���
+引数 x、y の両方を指定した場合、x/y した [[c:Rational]] オブジェクトを
+返します。
 
   Rational("1/3")           # => (1/3)
   Rational(1, 3)            # => (1/3)
   Rational("0.1", "0.3")    # => (1/3)
   Rational(Complex(1,2), 2) # => ((1/2)+(1/1)*i)
 
-��������1.8�ϤȤϰۤʤꡢ[[c:Rational]] ���֥������ȤϾ�˴���(����ʾ�
-��ʬ�Ǥ��ʤ�����)�Ǥ���������դ��Ƥ���������
+ただし、1.8系とは異なり、[[c:Rational]] オブジェクトは常に既約(それ以上
+約分できない状態)である事に注意してください。
 
   Rational(2, 6)         # => (1/3)
   Rational(1, 3) * 3     # => (1/1)
 
-������ʸ�������ꤹ���硢�ʲ��Τ����줫�η����ǻ��ꤷ�ޤ���
+引数に文字列を指定する場合、以下のいずれかの形式で指定します。
 
- * "1/3" �Τ褦��ʬ���η���
- * "0.3" �Τ褦��10�ʿ��η���
- * "0.3E0" �Τ褦�� x.xEn �η���
- * �����򥢥�����������ǷҤ�������
+ * "1/3" のような分数の形式
+ * "0.3" のような10進数の形式
+ * "0.3E0" のような x.xEn の形式
+ * 数字をアンダースコアで繋いだ形式
 
-"1.2/3" �Τ褦�ˡ�ʬ�Ҥ�¿��ˤ�������ǽ�Ǥ�����ʬ��ˤϻ���Ǥ��ޤ�
-�󡣤ޤ���[[m:Kernel.#Integer]] �Ȥϰ㤤 "0x10" �Τ褦�ʿʿ���ɽ����Ƭ
-����ޤ᤿����ϹԤ��ޤ���
+"1.2/3" のように、分子を実数にする事も可能ですが、分母には指定できませ
+ん。また、[[m:Kernel.#Integer]] とは違い "0x10" のような進数を表す接頭
+辞を含めた指定は行えません。
 
-��:
+例:
 
   Rational("1/3")        # => (1/3)
   Rational("0.3")        # => (3/10)
@@ -2625,18 +2625,18 @@ Complex(a, b) �� a+bi �Ȥ��Ʒ׻����� [[c:Complex]] ���֥������Ȥ��֤���
   Rational('3.0', '3.0') # => (1/1)
   Rational('3/3', '3/3') # => (1/1)
   Rational('1_234_567')  # => (1234567/1)
-  Rational(" \n10\t ")   # => (10/1) # �������̵�뤵���
+  Rational(" \n10\t ")   # => (10/1) # 空白類は無視される
   Rational("0x10")       # => ArgumentError
 
-�������Ѵ��Ǥ��ʤ����֥������Ȥ���ꤷ�����ˤ� [[c:ArgumentError]] ��
-ȯ�����ޤ���
+引数に変換できないオブジェクトを指定した場合には [[c:ArgumentError]] が
+発生します。
 
   Rational(Object.new)   # => ArgumentError
   Rational("")           # => ArgumentError
   Rational(nil)          # => ArgumentError
 
-�ޤ���Rational('0.3') �� Rational(0.3) �ϰۤʤ륪�֥������Ȥ��֤�������
-�դ��Ƥ������������Ԥ����Τ� 3/10 �Ǥ�������ԤϤ����ǤϤ���ޤ���
+また、Rational('0.3') と Rational(0.3) は異なるオブジェクトを返す事に注
+意してください。前者は正確に 3/10 ですが、後者はそうではありません。
 
   Rational('0.3')        # => (3/10)
   Rational(0.3)          # => (5404319552844595/18014398509481984)

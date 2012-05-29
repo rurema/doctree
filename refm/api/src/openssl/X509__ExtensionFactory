@@ -1,187 +1,187 @@
 = class OpenSSL::X509::ExtensionFactory < Object
 
-[[c:OpenSSL::X509::Extension]] ����ؤ��������뤿���
-���饹�Ǥ���
+[[c:OpenSSL::X509::Extension]] を簡便に生成するための
+クラスです。
 
 
-��
-  # ca_cert: CA �ξ����񥪥֥�������
-  # req: CSR ���֥�������
-  # newcert: �������������������Υ��֥�������
+例
+  # ca_cert: CA の証明書オブジェクト
+  # req: CSR オブジェクト
+  # newcert: 新たに生成する証明書のオブジェクト
   ca_cert = OpenSSL::X509::Certificate.new(File.read('ca_cert.pem'))
   req = OpenSSL::X509::Request.new(File.read('req.pem'))
   newcert = OpenSSL::X509::Certificate.new
-  # ������ ExtensionFactory ���֥������Ȥ��������� CA �ξ����񥪥֥�������
-  # ������
+  # 新しい ExtensionFactory オブジェクトを生成し、 CA の証明書オブジェクト
+  # を設定
   factory = OpenSSL::X509::ExtensionFactory.new(ca_cert)
-  # CSR ���֥������Ȥ�����
+  # CSR オブジェクトを設定
   factory.subject_request = req
-  # basicConstraints ��ĥ�ΰ������
+  # basicConstraints 拡張領域を生成
   p factory.create_extension("basicConstraints", "CA:FALSE")
   # => basicConstraints = CA:FALSE
 
-  # subjectKeyIdentifier ��ĥ�ΰ������
-  # �����ͤ� CSR ���֥������Ȥθ������������������
+  # subjectKeyIdentifier 拡張領域を生成
+  # この値は CSR オブジェクトの公開鍵から生成される
   p factory.create_extension("subjectKeyIdentifier", "hash")
   # => subjectKeyIdentifier = 99:E7:A1:.....
   
-  # authorityKeyIdentifier ��ĥ�ΰ������
-  # �����ͤ� CA �ξ����񥪥֥������Ȥ������������
+  # authorityKeyIdentifier 拡張領域を生成
+  # この値は CA の証明書オブジェクトから生成される
   p factory.create_extension("authorityKeyIdentifier", "keyid,issuer:always")
   # => authorityKeyIdentifier = keyid:D1:AB:87:....
   
-  # ����������ĥ�ΰ襪�֥������Ȥ������γ�ĥ�ΰ���ɲ�
+  # 生成した拡張領域オブジェクトを証明書の拡張領域に追加
   newcert.add_extension(factory.create_extension("basicConstraints", "CA:FALSE"))
 
 
 == Class Methods
 
 --- new(issuer_cert=nil, subject_cert=nil, subject_req=nil, crl=nil) -> OpenSSL::X509::ExtensionFactory
-ExtensionFactory ���֥������Ȥ��������ޤ���
+ExtensionFactory オブジェクトを生成します。
 
-�������ȯ�ԼԤ��ͭ�Ԥ� [[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�
-[[c:OpenSSL::X509::Request]]��[[c:OpenSSL::X509::CRL]] ���֥������Ȥ�
-�Ϥ����Ȥˤ�äơ���ĥ�ΰ����Ȥ� ExtensionFactory ���֥������Ȥ�
-�׻����뤳�Ȥ��Ǥ��ޤ���
-�㤨�С�"subjectKeyIdentifier" ��ĥ�ΰ�Ͼ�����ΰ����Υϥå�����
-���ͤȤ��ƻ����ޤ�����
-[[c:OpenSSL::X509::Certificate]] ���֥������Ȥ򤢤餫�����Ϥ��Ƥ������Ȥˤ�ä�
-[[m:OpenSSL::X509::ExtensionFactory#create_extension]] �������ͤ�׻����ޤ���
-�����ξ���ɬ�פʤ����� nil ���Ϥ��ޤ���
+証明書の発行者や所有者の [[c:OpenSSL::X509::Certificate]] オブジェクトや
+[[c:OpenSSL::X509::Request]]、[[c:OpenSSL::X509::CRL]] オブジェクトを
+渡すことによって、拡張領域の中身を ExtensionFactory オブジェクトが
+計算することができます。
+例えば、"subjectKeyIdentifier" 拡張領域は証明書の一部のハッシュ値
+を値として持ちますが、
+[[c:OpenSSL::X509::Certificate]] オブジェクトをあらかじめ渡しておくことによって
+[[m:OpenSSL::X509::ExtensionFactory#create_extension]] がその値を計算します。
+これらの情報が必要ない場合は nil を渡します。
 
-�ʲ��Υ᥽�åɤˤ�äƥ��֥�������������˾����񥪥֥�����������
-���ꤹ�뤳�Ȥ��Ǥ��ޤ���
+以下のメソッドによってオブジェクト生成後に証明書オブジェクト等を
+設定することができます。
   * [[m:OpenSSL::X509::ExtensionFactory#issuer_certificate=]]
   * [[m:OpenSSL::X509::ExtensionFactory#subject_certificate=]]
   * [[m:OpenSSL::X509::ExtensionFactory#subject_request=]]
   * [[m:OpenSSL::X509::ExtensionFactory#crl=]] 
 
-@param issuer_cert ������ȯ�Լԡ����ʤ�� CA �� 
-       [[c:OpenSSL::X509::Certificate]] ���֥�������
-@param subject_cert �������ͭ�Ԥ�
-       [[c:OpenSSL::X509::Certificate]] ���֥�������
-@param subject_req ��Ϣ����������̾�׵�([[c:OpenSSL::X509::Request]])
-       ���֥�������
-@param crl ��Ϣ���� �����񼺸��ꥹ��([[c:OpenSSL::X509::CRL]])���֥�������
+@param issuer_cert 証明書発行者、すなわち CA の 
+       [[c:OpenSSL::X509::Certificate]] オブジェクト
+@param subject_cert 証明書所有者の
+       [[c:OpenSSL::X509::Certificate]] オブジェクト
+@param subject_req 関連する証明書署名要求([[c:OpenSSL::X509::Request]])
+       オブジェクト
+@param crl 関連する 証明書失効リスト([[c:OpenSSL::X509::CRL]])オブジェクト
 
 == Instance Methods
 
 --- create_ext(oid, value, critical = false)  -> OpenSSL::X509::Extension
-[[c:OpenSSL::X509::Extension]] �Υ��󥹥��󥹤����������֤��ޤ���
+[[c:OpenSSL::X509::Extension]] のインスタンスを生成して返します。
 
-@param oid ��ĥ�ΰ�μ��̻Ҥ�ɽ��ʸ����
-@param value ��ĥ�ΰ���ͤ�ɽ��ʸ����
-@param critical ������(������)
+@param oid 拡張領域の識別子を表す文字列
+@param value 拡張領域の値を表す文字列
+@param critical 重要度(真偽値)
 
 --- create_extension(obj)  -> OpenSSL::X509::Extension
 --- create_extension(oid, value, critical=false)  -> OpenSSL::X509::Extension
-[[c:OpenSSL::X509::Extension]] �Υ��󥹥��󥹤����������֤��ޤ���
+[[c:OpenSSL::X509::Extension]] のインスタンスを生成して返します。
 
-�����θĿ���1�ĤǤ����硢���줬���󡢥ϥå��塢ʸ����Τ����줫�Ǥ���
-�ʤ�С�
-[[m:OpenSSL::X509::ExtensionFactory#create_ext_from_array]]��
-[[m:OpenSSL::X509::ExtensionFactory#create_ext_from_hash]]��
-[[m:OpenSSL::X509::ExtensionFactory#create_ext_from_string]]��
-�����줾��ƤӤ�����ƥ��֥������Ȥ��������ޤ���
+引数の個数が1個である場合、それが配列、ハッシュ、文字列のいずれかである
+ならば、
+[[m:OpenSSL::X509::ExtensionFactory#create_ext_from_array]]、
+[[m:OpenSSL::X509::ExtensionFactory#create_ext_from_hash]]、
+[[m:OpenSSL::X509::ExtensionFactory#create_ext_from_string]]、
+がそれぞれ呼びだされてオブジェクトを生成します。
 
-������2�İʾ�Ǥ�����ϡ�
-[[m:OpenSSL::X509::ExtensionFactory#create_ext]] ���ƤӤ������
-���֥������Ȥ��������ޤ���
+引数が2個以上である場合は、
+[[m:OpenSSL::X509::ExtensionFactory#create_ext]] が呼びだされて
+オブジェクトを生成します。
 
-@param obj ��ĥ�ΰ�Υǡ��������󡢥ϥå��塢ʸ����Τ����줫
-@param oid ��ĥ�ΰ�μ��̻Ҥ�ɽ��ʸ����
-@param value ��ĥ�ΰ���ͤ�ɽ��ʸ����
-@param critical ������(������)
+@param obj 拡張領域のデータ。配列、ハッシュ、文字列のいずれか
+@param oid 拡張領域の識別子を表す文字列
+@param value 拡張領域の値を表す文字列
+@param critical 重要度(真偽値)
 
 #@since 1.8.1
 --- issuer_certificate -> OpenSSL::X509::Certificate | nil
-���Ȥ����ꤵ��Ƥ���ȯ�Լ�(issuer)�ξ����񥪥֥������Ȥ��֤��ޤ���
+自身に設定されている発行者(issuer)の証明書オブジェクトを返します。
 
-���������ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+証明書が設定されていない場合は nil を返します。
 
 #@end
 
 --- issuer_certificate=(cert)
-���Ȥ�ȯ�Լ�(issuer)�ξ����񥪥֥������Ȥ����ꤷ�ޤ���
+自身に発行者(issuer)の証明書オブジェクトを設定します。
 
-@param cert ���ꤹ�������([[c:OpenSSL::X509::Certificate]])���֥�������
+@param cert 設定する証明書([[c:OpenSSL::X509::Certificate]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 #@since 1.8.1
 --- subject_certificate -> OpenSSL::X509::Certificate | nil
-���Ȥ����ꤵ��Ƥ����ͭ��(subject)�ξ����񥪥֥������Ȥ��֤��ޤ���
+自身に設定されている所有者(subject)の証明書オブジェクトを返します。
 
-���������ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+証明書が設定されていない場合は nil を返します。
 
 #@end
 --- subject_certificate=(name)
-���Ȥ˽�ͭ��(subject)�ξ����񥪥֥������Ȥ����ꤷ�ޤ���
+自身に所有者(subject)の証明書オブジェクトを設定します。
 
-@param cert ���ꤹ�������([[c:OpenSSL::X509::Certificate]])���֥�������
+@param cert 設定する証明書([[c:OpenSSL::X509::Certificate]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
 #@since 1.8.1
 --- subject_request -> OpenSSL::X509::Request | nil
-���Ȥ����ꤵ��Ƥ���������̾�׵ᥪ�֥������Ȥ��֤��ޤ���
+自身に設定されている証明書署名要求オブジェクトを返します。
 
-���ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+設定されていない場合は nil を返します。
 
 #@end
 --- subject_request=(req)
-���Ȥ˾������̾�׵ᥪ�֥������Ȥ����ꤷ�ޤ���
+自身に証明書署名要求オブジェクトを設定します。
 
-@param  req ���ꤹ��������̾�׵�([[c:OpenSSL::X509::Request]])���֥�������
+@param  req 設定する証明書署名要求([[c:OpenSSL::X509::Request]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
 #@since 1.8.1
 --- crl -> OpenSSL::X509::CRL | nil
-���Ȥ����ꤵ�줿�����񼺸��ꥹ�ȥ��֥������Ȥ��֤��ޤ���
+自身に設定された証明書失効リストオブジェクトを返します。
 
-���ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+設定されていない場合は nil を返します。
 #@end
 --- crl=(crl)
-���Ȥ˾����񼺸��ꥹ�ȥ��֥������Ȥ����ꤷ�ޤ���
+自身に証明書失効リストオブジェクトを設定します。
 
-@param crl ���ꤹ������񼺸��ꥹ��([[c:OpenSSL::X509::CRL]])���֥�������
+@param crl 設定する証明書失効リスト([[c:OpenSSL::X509::CRL]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
 #@since 1.8.1
 --- config -> OpenSSL::Config
-���Ȥ����ꤵ��Ƥ��륳��ե����ե����륪�֥������Ȥ����ꤷ�ޤ���
+自身に設定されているコンフィグファイルオブジェクトを設定します。
 
 --- config=(config) 
-���Ȥ˥���ե����ե����륪�֥������Ȥ����ꤷ�ޤ���
+自身にコンフィグファイルオブジェクトを設定します。
 
-��
+例
   factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 
-@param config ����ե�����([[c:OpenSSL::Config]] ���֥�������)
+@param config 設定ファイル([[c:OpenSSL::Config]] オブジェクト)
 #@end
 
 --- create_ext_from_array(ary) -> OpenSSL::X509::Extension
-[oid, value, critical] �⤷���� [oid, value] �Ȥ������󤫤�
-[[c:OpenSSL::X509::Extension]] ���֥������Ȥ��������ޤ���
+[oid, value, critical] もしくは [oid, value] という配列から
+[[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
 
-@param ary ���������ĥ�ΰ�Υǡ���������
+@param ary 生成する拡張領域のデータの配列
 @see [[m:OpenSSL::X509::ExtensionFactory#create_ext]]
 
 --- create_ext_from_hash(hash)  -> OpenSSL::X509::Extension
-�ϥå��夫�� [[c:OpenSSL::X509::Extension]] ���֥������Ȥ��������ޤ���
+ハッシュから [[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
 
-�Ϥ��ϥå���ơ��֥�� 
-  {"oid" => OIDʸ����, "value" => valueʸ���� "critical" => ������ }
-�Ȥ������Ƥ�ɬ�פǤ���"critical" ���ά�������� false ��
-�Ϥ����Τ�Ʊ���ˤʤ�ޤ���
+渡すハッシュテーブルは 
+  {"oid" => OID文字列, "value" => value文字列 "critical" => 真偽値 }
+という内容が必要です。"critical" を省略した場合は false が
+渡されるのと同じになります。
 
-@param hash ���������ĥ�ΰ�Υǡ����Υϥå���ơ��֥�
+@param hash 生成する拡張領域のデータのハッシュテーブル
 @see [[m:OpenSSL::X509::ExtensionFactory#create_ext]]
 
 --- create_ext_from_string(str)  -> OpenSSL::X509::Extension
-ʸ���󤫤� [[c:OpenSSL::X509::Extension]] ���֥������Ȥ��������ޤ���
+文字列から [[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
 
-ʸ����� "oid = value" �⤷���� "oid = critical, value" �Ȥ���
-�����Ǥ���ɬ�פ�����ޤ���
+文字列は "oid = value" もしくは "oid = critical, value" という
+形式である必要があります。
 
-@param str ���������ĥ�ΰ�Υǡ�����ʸ����
+@param str 生成する拡張領域のデータの文字列
 @see [[m:OpenSSL::X509::ExtensionFactory#create_ext]]
 
 

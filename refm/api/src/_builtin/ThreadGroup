@@ -1,15 +1,15 @@
 = class ThreadGroup < Object
 
-����åɥ��롼�פ�ɽ�����饹�Ǥ������롼�פ�°���� [[c:Thread]] ��ޤȤ��
-���뤳�Ȥ��Ǥ��ޤ���
+スレッドグループを表すクラスです。グループに属する [[c:Thread]] をまとめて
+操作することができます。
 
-[[c:Thread]] ��ɬ�������줫�ҤȤĤΥ���åɥ��롼�פ�°���ޤ���
-�������줿�Ф���� Thread �ϡ��������� Thread �Υ��롼�פ�����Ѥ��ޤ���
-�ᥤ�󥹥�åɤϥǥե���ȤǤ� [[m:ThreadGroup::Default]] ��°���ޤ���
+[[c:Thread]] は必ずいずれかひとつのスレッドグループに属します。
+生成されたばかりの Thread は、生成した Thread のグループを引き継ぎます。
+メインスレッドはデフォルトでは [[m:ThreadGroup::Default]] に属します。
 
-: ��:
+: 例:
 
-�����������٤Ƥ�Thread����λ����Τ��Ԥ�
+生成したすべてのThreadが終了するのを待つ
 
     5.times {
        Thread.new { sleep 1; puts "#{Thread.current} finished" }
@@ -19,53 +19,53 @@
     
     puts "all threads finished"
 
-�оݤ� Thread �� Thread �򵯤�����ǽ����������
-([[m:Thread.exclusive]]����)
+対象の Thread が Thread を起こす可能性がある場合
+([[m:Thread.exclusive]]参照)
 
     Thread.exclusive do
       (ThreadGroup::Default.list - [Thread.current]).each {|th| th.join}
     end
 
-=== ThreadGroup#freeze �� ThreadGroup#enclose �ΰ㤤
+=== ThreadGroup#freeze と ThreadGroup#enclose の違い
 
-�ɤ���Υ᥽�åɤǤ� [[m:ThreadGroup#add]] �ˤ�륹��åɤ��ɲä��Ǥ��ʤ��ʤ�����Ʊ���Ǥ�����
-[[m:Thread.new]] �˴ؤ��ư㤤������ޤ������ߤΥ���åɤ�°���� ThreadGroup �� freeze 
-����Ƥ����硢Thread.new{ ... } �ϥ��顼�ˤʤ�ޤ���ThreadGroup �� enclose ����Ƥ�������Ǥϡ�
-Thread.new{ ... } �ϥ��顼�ˤʤ�ޤ����������줿����åɤϽ����̤� �ƥ���åɤ� ThreadGroup ��°���ޤ���
+どちらのメソッドでも [[m:ThreadGroup#add]] によるスレッドの追加ができなくなる点は同じですが、
+[[m:Thread.new]] に関して違いがあります。現在のスレッドが属する ThreadGroup が freeze 
+されている場合、Thread.new{ ... } はエラーになります。ThreadGroup が enclose されているだけでは、
+Thread.new{ ... } はエラーになりません。生成されたスレッドは従来通り 親スレッドの ThreadGroup に属します。
 
 == Class Methods
 
 --- new    -> ThreadGroup
 
-������ ThreadGroup �����������֤��ޤ���
+新たな ThreadGroup を生成して返します。
 
 == Instance Methods
 
 --- add(thread)    -> self
 
-����å� thread ��°���륰�롼�פ򼫿Ȥ��ѹ����ޤ���
+スレッド thread が属するグループを自身に変更します。
 
-@param thread ���Ȥ˲ä���������åɤ���ꤷ�ޤ���
+@param thread 自身に加えたいスレッドを指定します。
 
-@raise ThreadError ���Ȥ� freeze ����Ƥ��뤫 enclose ����Ƥ�����ˡ�ȯ�����ޤ����ޤ����� thread ��°���� ThreadGroup �� freeze ����Ƥ��뤫 enclose ����Ƥ�����ˤ�ȯ�����ޤ���
+@raise ThreadError 自身が freeze されているか enclose されている場合に、発生します。また引数 thread が属する ThreadGroup が freeze されているか enclose されている場合にも発生します。
 
 #@since 1.8.0
 --- enclose    -> self
 
-���Ȥؤ� [[m:ThreadGroup#add]] �ˤ�륹��åɤ��ɲá������ػߤ��ޤ���
-enclose ���줿 ThreadGroup ���ɲä�����Ԥ����㳰 [[c:ThreadError]] ��ȯ�����ޤ���
+自身への [[m:ThreadGroup#add]] によるスレッドの追加・削除を禁止します。
+enclose された ThreadGroup に追加や削除を行うと例外 [[c:ThreadError]] が発生します。
 
-��������[[m:Thread.new]] �ˤ�륹��åɤ��ɲä϶ػߤ���ޤ���enclose ���줿����åɥ��롼�� A ��
-°���륹��åɤ������˥���åɤ�����������硢�������줿����åɤϥ���åɥ��롼�� A ��°���ޤ���
+ただし、[[m:Thread.new]] によるスレッドの追加は禁止されません。enclose されたスレッドグループ A に
+属するスレッドが新たにスレッドを生成した場合、生成されたスレッドはスレッドグループ A に属します。
 
-�ɲä���:
+追加の例:
 
   thg = ThreadGroup.new.enclose
   thg.add Thread.new {}
 
   => -:2:in `add': can't move to the enclosed thread group (ThreadError)
 
-�������:
+削除の例:
 
   thg1 = ThreadGroup.new
   thg2 = ThreadGroup.new
@@ -82,9 +82,9 @@ enclose ���줿 ThreadGroup ���ɲä�����Ԥ����㳰 [[c:ThreadError]] ��ȯ������
 #@since 1.8.0
 --- enclosed?    -> bool
 
-���Ȥ� enclose ����Ƥ���ʤ� true ���֤��ޤ��������Ǥʤ��ʤ� false ���֤��ޤ����ǥե���Ȥ� false �Ǥ���
+自身が enclose されているなら true を返します。そうでないなら false を返します。デフォルトは false です。
 
-freeze ���줿 ThreadGroup �ˤ� Thread ���ɲ�/������Ǥ��ޤ��󤬡�enclosed? �� false ���֤��ޤ���
+freeze された ThreadGroup には Thread の追加/削除ができませんが、enclosed? は false を返します。
 
     thg = ThreadGroup.new
     p thg.enclosed?         # => false
@@ -100,18 +100,18 @@ freeze ���줿 ThreadGroup �ˤ� Thread ���ɲ�/������Ǥ��ޤ��󤬡�enclosed? �� fa
 #@end
 --- list    -> [Thread] 
 
-self ��°���륹��åɤ�������֤��ޤ���
+self に属するスレッドの配列を返します。
 #@since 1.8.0
-version 1.8 �Ǥϡ�aborting ���֤Ǥ��륹��å�
-�����Ǥ˴ޤޤ�ޤ����Ĥޤ�������Ƥ���ץ���åɤ�������֤��ޤ���
+version 1.8 では、aborting 状態であるスレッド
+も要素に含まれます。つまり「生きている」スレッドの配列を返します。
 #@else
-��λ������(aborting)���佪λ����(dead)�Ǥ��륹��åɤ����Ǥ˴ޤޤ�
-�ޤ���([[m:Thread.list]]��Ʊ���Ǥ�)��
+終了処理中(aborting)、や終了状態(dead)であるスレッドは要素に含まれ
+ません([[m:Thread.list]]と同じです)。
 #@end
 
 == Constants
 
 --- Default -> ThreadGroup
 
-�ǥե���Ȥ��������Ƥ��� [[c:ThreadGroup]] �Ǥ����ᥤ�󥹥�å�
-�Ϻǽ餳�Υ��롼�פ�°���ޤ���
+デフォルトで定義されている [[c:ThreadGroup]] です。メインスレッド
+は最初このグループに属します。

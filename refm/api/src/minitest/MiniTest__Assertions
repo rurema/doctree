@@ -1,332 +1,332 @@
 = module MiniTest::Assertions
 
-�Ƽ� assert �᥽�åɤ��󶡤��ޤ���
+各種 assert メソッドを提供します。
 
 == Public Instance Methods
 
 --- _assertions -> Fixnum
 
-���������������֤��ޤ���
+アサーション数を返します。
 
 --- _assertions=(count)
 
-�������������򥻥åȤ��ޤ���
+アサーション数をセットします。
 
-@param count �������ꤷ�ޤ���
+@param count 件数を指定します。
 
 --- assert(test, message = nil) -> true
 
-Ϳ����줿����ɾ����̤����Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられた式の評価結果が真である場合、検査にパスしたことになります。
 
-@param test �����ͤ��֤�������ꤷ�ޤ���
+@param test 真偽値を返す式を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿�������Ǥ������ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた式が偽である場合に発生します。
 
 --- assert_block(message = nil){ ... } -> true
 
-Ϳ����줿�֥��å���ɾ����̤����Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたブロックの評価結果が真である場合、検査にパスしたことになります。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿�֥��å���ɾ����̤����Ǥ������ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたブロックの評価結果が偽である場合に発生します。
 
 --- assert_empty(object, message = nil) -> true
 
-Ϳ����줿���֥������Ȥ����Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが空である場合、検査にパスしたことになります。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿���֥������Ȥ� empty? �᥽�åɤ�����ʤ�����ȯ�����ޤ���
-                           �ޤ���Ϳ����줿���֥������Ȥ����Ǥʤ����ˤ�ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたオブジェクトが empty? メソッドを持たない場合に発生します。
+                           また、与えられたオブジェクトが空でない場合にも発生します。
 
 --- assert_equal(expected, actual, message = nil) -> true
 
-Ϳ����줿�����ͤȼºݤ��ͤ���������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられた期待値と実際の値が等しい場合、検査にパスしたことになります。
 
-@param expected �����ͤ���ꤷ�ޤ���
+@param expected 期待値を指定します。
 
-@param actual �ºݤ��ͤ���ꤷ�ޤ���
+@param actual 実際の値を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿�����ͤȼºݤ��ͤ��������ʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた期待値と実際の値が等しくない場合に発生します。
 
 @see [[m:Object#==]]
 
 --- assert_in_delta(expected, actual, delta = 0.001, message = nil) -> true
 
-�����ͤȼºݤ��ͤκ��������ͤ�Ϳ����줿���и����ʲ��Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+期待値と実際の値の差の絶対値が与えられた絶対誤差以下である場合、検査にパスしたことになります。
 
-@param expected �����ͤ���ꤷ�ޤ���
+@param expected 期待値を指定します。
 
-@param actual �ºݤ��ͤ���ꤷ�ޤ���
+@param actual 実際の値を指定します。
 
-@param delta ���Ƥ������и�������ꤷ�ޤ���
+@param delta 許容する絶対誤差を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿�����ͤȼºݤ��ͤκ��������ͤ�Ϳ����줿��ʬ��ۤ������ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
 
 --- assert_in_epsilon(actual, expected, epsilon = 0.001, message = nil) -> true
-#@# �ȤäƤ����Ѹ줬�������ʤ����⤷��ʤ���
-Ϳ����줿�����ͤȼºݤ��ͤ����и����������ϰ���Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+#@# 使っている用語が正しくないかもしれない。
+与えられた期待値と実際の値の相対誤差が許容範囲内である場合、検査にパスしたことになります。
 
-����������Ȱʲ��μ������Ǥ����硢������ѥ����ޤ���
+言い換えると以下の式が真である場合、検査をパスします。
 
   [expected, actual].min * epsilon >= (extected - actual).abs
 
-@param expected �����ͤ���ꤷ�ޤ���
+@param expected 期待値を指定します。
 
-@param actual �ºݤ��ͤ���ꤷ�ޤ���
+@param actual 実際の値を指定します。
 
-@param epsilon ���Ƥ������и�������ꤷ�ޤ���
+@param epsilon 許容する相対誤差を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion �����˼��Ԥ�������ȯ�����ޤ���
+@raise MiniTest::Assertion 検査に失敗した場合に発生します。
 
 --- assert_includes(collection, object, message = nil) -> true
 
-Ϳ����줿���쥯�����˥��֥������Ȥ��ޤޤ�Ƥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたコレクションにオブジェクトが含まれている場合、検査にパスしたことになります。
 
-@param collection Ǥ�դΥ��쥯��������ꤷ�ޤ���
+@param collection 任意のコレクションを指定します。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion �������Υ��֥������Ȥ� include? �᥽�åɤ�����ʤ�����ȯ�����ޤ���
-                           Ϳ����줿���쥯�����˥��֥������Ȥ��ޤޤ�Ƥ��ʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 第一引数のオブジェクトが include? メソッドを持たない場合に発生します。
+                           与えられたコレクションにオブジェクトが含まれていない場合に発生します。
 
 --- assert_instance_of(klass, object, message = nil) -> true
 
-Ϳ����줿���֥������Ȥ�Ϳ����줿���饹��ľ�ܤΥ��󥹥��󥹤Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが与えられたクラスの直接のインスタンスである場合、検査にパスしたことになります。
 
-@param klass ���֥������Ȥ�ľ�ܤΥ��󥿥󥹤Ǥ��뤳�Ȥ���Ԥ��륯�饹����ꤷ�ޤ���
+@param klass オブジェクトが直接のインタンスであることを期待するクラスを指定します。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿���֥������Ȥ�Ϳ����줿���饹��ľ�ܤΥ��󥹥��󥹤Ǥʤ�
-                           ����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスの直接のインスタンスでない
+                           場合に発生します。
 
 @see [[m:Module#===]], [[m:MiniTest::Assertions#assert_kind_of]]
 
 --- assert_kind_of(klass, object, message) -> true
 
-Ϳ����줿���֥������Ȥ�Ϳ����줿���饹�ޤ��Ϥ��Υ��֥��饹�Υ��󥹥���
-�Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが与えられたクラスまたはそのサブクラスのインスタンス
+である場合、検査にパスしたことになります。
 
-@param klass ���֥������Ȥ���°���뤳�Ȥ���Ԥ��륯�饹����ꤷ�ޤ���
+@param klass オブジェクトが所属することを期待するクラスを指定します。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿���֥������Ȥ�Ϳ����줿���饹�ޤ��Ϥ��Υ��֥��饹��
-                           ���󥹥��󥹤ǤϤʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスまたはそのサブクラスの
+                           インスタンスではない場合に発生します。
 
 @see [[m:Object#kind_of?]], [[m:MiniTest::Assertions#assert_instance_of]]
 
 --- assert_match(regexp, str, message = nil) -> true
 
-Ϳ����줿ʸ����Ϳ����줿����ɽ���˥ޥå�������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられた文字列が与えられた正規表現にマッチした場合、検査にパスしたことになります。
 
-@param regexp ����ɽ����ʸ�������ꤷ�ޤ���ʸ�������ꤷ����������ɽ�����Ѵ����Ƥ���
-              ���Ѥ��ޤ���
+@param regexp 正規表現か文字列を指定します。文字列を指定した場合は正規表現に変換してから
+              使用します。
 
-@param str �����оݤ�ʸ�������ꤷ�ޤ���
+@param str 検査対象の文字列を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿ʸ����Ϳ����줿����ɽ���˥ޥå����ʤ��ä�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチしなかった場合に発生します。
 
 --- assert_nil(object, message = nil) -> true
 
-Ϳ����줿���֥������Ȥ� nil �Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが nil である場合、検査にパスしたことになります。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿���֥������Ȥ� nil �Ǥʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたオブジェクトが nil でない場合に発生します。
 
 --- assert_operator(operand1, operator, operand2, message = nil) -> true
 
-Ϳ����줿���֥������Ȥ���������뼰��ɾ��������̤������֤���硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトから作成する式を評価した結果が真を返す場合、検査にパスしたことになります。
 
-@param operand1 Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param operand1 任意のオブジェクトを指定します。
 
-@param operator �����ͤ��֤��᥽�åɤ���ꤷ�ޤ���
+@param operator 真偽値を返すメソッドを指定します。
 
-@param operand2 Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param operand2 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿���֥������Ȥ���������뼰��ɾ��������̤����Ǥʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたオブジェクトから作成する式を評価した結果が真でない場合に発生します。
 
-��:
-   # �ʲ�����Ĥ�Ʊ��
+例:
+   # 以下の二つは同じ
    assert_operator('aaa', :==, 'aaa', 'message')
    assert('aaa'.__send__(:==, 'aaa'), 'message')
 
 
 --- assert_raises(*args){ ... } -> true
 
-Ϳ����줿�֥��å���ɾ�����Ϳ����줿�㳰��ȯ�������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたブロックを評価中に与えられた例外が発生する場合、検査にパスしたことになります。
 
-@param args Ϳ����줿�֥��å���ɾ�����ȯ�������ǽ���Τ����㳰���饹���İʾ���ꤷ�ޤ���
-            �Ǹ�ΰ����ϡ���å���������ꤹ�뤳�Ȥ��Ǥ��ޤ���
+@param args 与えられたブロックを評価中に発生する可能性のある例外クラスを一つ以上指定します。
+            最後の引数は、メッセージを指定することができます。
 
-@raise MiniTest::Assertion Ϳ����줿�֥��å���ɾ��������̡��㳰��ȯ�����ʤ�����ȯ�����ޤ���
-                           �ޤ���Ϳ����줿�֥��å���ɾ�����ȯ�������㳰����Ϳ����줿�㳰
-                           �ޤ��Ϥ��Υ��֥��饹�Ǥʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたブロックを評価した結果、例外が発生しない場合に発生します。
+                           また、与えられたブロックを評価中に発生した例外が、与えられた例外
+                           またはそのサブクラスでない場合に発生します。
 
 
 --- assert_respond_to(object, method_name, message = nil) -> true
 
-Ϳ����줿���֥������Ȥ�Ϳ����줿�᥽�åɤ���ľ�硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたオブジェクトが与えられたメソッドを持つ場合、検査にパスしたことになります。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param method_name �᥽�å�̾����ꤷ�ޤ���
+@param method_name メソッド名を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿���֥������Ȥ�Ϳ����줿�᥽�åɤ�����ʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたメソッドを持たない場合に発生します。
 
 @see [[m:Object#respond_to?]]
 
 --- assert_same(expected, actual, message = nil) -> true
 
-Ϳ����줿��ĤΥ��֥������Ȥ� [[m:Object#object_id]] ��Ʊ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられた二つのオブジェクトの [[m:Object#object_id]] が同じ場合、検査にパスしたことになります。
 
-@param expected Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param expected 任意のオブジェクトを指定します。
 
-@param actual Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param actual 任意のオブジェクトを指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿��ĤΥ��֥������Ȥ��ۤʤ����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた二つのオブジェクトが異なる場合に発生します。
 
 @see [[m:Object#equal?]]
 
 --- assert_send(array, message = nil) -> true
 
-�������顢������Ф���ɾ��������̤����ξ�硢�����˥ѥ��������Ȥˤʤ�ޤ���
+引数から、式を取り出して評価した結果が真の場合、検査にパスしたことになります。
 
-@param array ������Ǥ˥쥷���ФȤʤ�Ǥ�դΥ��֥������ȡ��������Ǥ˥᥽�å�̾��
-             �軰���Ǥ˥ѥ�᡼���򤽤줾����ꤷ���������ꤷ�ޤ���
+@param array 第一要素にレシーバとなる任意のオブジェクト、第二要素にメソッド名、
+             第三要素にパラメータをそれぞれ指定した配列を指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion ���Ф������������֤�����ȯ�����ޤ���
+@raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
 
-��:
+例:
   assert_send([%w[foo bar baz], :include?, 'baz'])
 
 --- assert_throws(tag, message = nil){ ... } -> true
 
-Ϳ����줿�֥��å���ɾ����ˡ�Ϳ����줿������ [[m:Kernel.#throw]] ���줿��硢�����˥ѥ��������Ȥˤʤ�ޤ���
+与えられたブロックを評価中に、与えられたタグが [[m:Kernel.#throw]] された場合、検査にパスしたことになります。
 
-@param tag Ϳ����줿�֥��å�ɾ����� [[m:Kernel.#throw]] ����륿����Ǥ�դΥ��֥������ȤȤ��ƻ��ꤷ�ޤ���
+@param tag 与えられたブロック評価中に [[m:Kernel.#throw]] されるタグを任意のオブジェクトとして指定します。
 
-@param message �����˼��Ԥ�������ɽ�������å���������ꤷ�ޤ���
-               ʸ���� [[c:Proc]] ����ꤷ�ޤ���[[c:Proc]] �Ǥ������ [[m:Proc#call]] ����
-               ��̤���Ѥ��ޤ���
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
+               結果を使用します。
 
-@raise MiniTest::Assertion Ϳ����줿������ [[m:Kernel.#throw]] ����ʤ��ä�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたタグが [[m:Kernel.#throw]] されなかった場合に発生します。
 
 @see [[m:Kernel.#throw]]
 
 --- capture_io{ ... } -> Array
 
-Ϳ����줿�֥��å���ɾ�����ɸ����Ϥ�ɸ�२�顼���Ϥ� [[c:StringIO]] ��
-�ѹ����ޤ���
+与えられたブロックを評価中の標準出力と標準エラー出力を [[c:StringIO]] に
+変更します。
 
-@return �֥��å�ɾ����˽��Ϥ��줿ʸ�����ɸ����Ϥ�������ǡ�ɸ�२�顼���Ϥ��������ǤȤ���
-        ����ˤ����֤��ޤ���
+@return ブロック評価中に出力された文字列を標準出力を第一要素、標準エラー出力を第二要素とした
+        配列にして返します。
 
 --- exception_details(exception, message) -> String
 
-Ϳ����줿�㳰�ξܺ٤�ʸ����Ȥ����֤��ޤ���
+与えられた例外の詳細を文字列として返します。
 
-@param exception �㳰����ꤷ�ޤ���
+@param exception 例外を指定します。
 
-@param message ��å���������ꤷ�ޤ���
+@param message メッセージを指定します。
 
 --- flunk(message = nil)
 
-ɬ�����Ԥ���᥽�åɤǤ���
+必ず失敗するメソッドです。
 
-@param message ��å���������ꤷ�ޤ���
+@param message メッセージを指定します。
 
-@raise MiniTest::Assertion ɬ��ȯ�����ޤ���
+@raise MiniTest::Assertion 必ず発生します。
 
 --- message(message){ ... } -> Proc
 
-Ϳ����줿�֥��å���ɾ��������̤�Ϳ����줿��å�������Ϣ�뤷���֤��ޤ���
+与えられたブロックを評価した結果と与えられたメッセージを連結して返します。
 
-@param message ��å���������ꤷ�ޤ���
+@param message メッセージを指定します。
 
 --- mu_pp(object) -> String
 
-[[m:Object#inspect]] ������̤Υ��󥳡��ǥ��󥰤��ѹ������֤��ޤ���
+[[m:Object#inspect]] した結果のエンコーディングを変更して返します。
 
-���󥳡��ǥ��󥰤� [[m:Encoding.default_external]] ���ѹ�����ޤ���
+エンコーディングは [[m:Encoding.default_external]] に変更されます。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
 --- pass(message = nil) -> true
 
-�������������򥫥���Ȥ��뤿��˻��Ѥ��ޤ���
+アサーション数をカウントするために使用します。
 
-@param message ̵�뤵��ޤ���
+@param message 無視されます。
 
 --- skip(message = nil, backtrace = caller)
 
-���Υ᥽�åɤ�ƤӽФ����ƥ��ȥ᥽�åɤ򥹥��åפ��ޤ���
+このメソッドを呼び出したテストメソッドをスキップします。
 
-@param message ��å���������ꤷ�ޤ���
+@param message メッセージを指定します。
 
-@param backtrace �㳰ȯ�����Υ����å��ȥ졼���ǡ�[[m:Kernel.#caller]] ������ͤ�Ʊ��
-                 �����ǻ��ꤷ�ʤ���Ф����ޤ���
+@param backtrace 例外発生時のスタックトレースで、[[m:Kernel.#caller]] の戻り値と同じ
+                 形式で指定しなければいけません。
 
-@raise MiniTest::Skip ɬ��ȯ�����ޤ���
+@raise MiniTest::Skip 必ず発生します。
 
 @see [[m:Kernel.#raise]]

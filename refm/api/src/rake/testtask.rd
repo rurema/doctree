@@ -1,22 +1,22 @@
 require rake
 require rake/tasklib
 
-��˥åȥƥ��Ȥ�¹Ԥ��뤿��Υ��������������饤�֥��Ǥ���
+ユニットテストを実行するためのタスクを定義するライブラリです。
 
 = class Rake::TestTask < Rake::TaskLib
 
-��˥åȥƥ��Ȥ�¹Ԥ��뤿��Υ�������������륯�饹�Ǥ���
+ユニットテストを実行するためのタスクを作成するクラスです。
 
-��:
+例:
   Rake::TestTask.new do |t|
     t.libs << "test"
     t.test_files = FileList['test/test*.rb']
     t.verbose = true
   end
 
-�ʲ��� test �������åȤλ�����򼨤��ޤ���
+以下に test ターゲットの使用例を示します。
 
-��:
+例:
    rake test                           # run tests normally
    rake test TEST=just_one_file.rb     # run just one test file.
    rake test TESTOPTS="-v"             # run in verbose mode
@@ -26,119 +26,119 @@ require rake/tasklib
 
 --- define -> self
 
-��������������ޤ���
+タスクを定義します。
 
 --- libs -> Array
 
-�ƥ��ȼ¹����� [[m:$LOAD_PATH]] ���ɲä���ѥ����֤��ޤ���
+テスト実行前に [[m:$LOAD_PATH]] に追加するパスを返します。
 
 --- libs=(libs)
 
-�ƥ��ȼ¹����� [[m:$LOAD_PATH]] ���ɲä���ѥ��򥻥åȤ��ޤ���
+テスト実行前に [[m:$LOAD_PATH]] に追加するパスをセットします。
 
-@param libs [[m:$LOAD_PATH]] ���ɲä���ѥ�������ǻ��ꤷ�ޤ���
+@param libs [[m:$LOAD_PATH]] に追加するパスを配列で指定します。
 
 --- loader -> Symbol
 
-�ƥ��Ȥ�����ɤ�����ˡ���֤��ޤ���
+テストをロードする方法を返します。
 
 --- loader=(style)
 
-�ƥ��Ȥ�����ɤ�����ˡ����ꤷ�ޤ���
+テストをロードする方法を指定します。
 
-����Ǥ�����ˡ�ϰʲ����̤�Ǥ���
+指定できる方法は以下の通りです。
 
 : rake
-  Rake ���󶡤�����ˡ�ǥƥ��Ȥ�����ɤ��ޤ����ǥե���ȤϤ���Ǥ���
+  Rake が提供する方法でテストをロードします。デフォルトはこれです。
 : testrb
-  Ruby ���󶡤��� testrb ���ޥ�ɤ��Ѥ��ƥƥ��Ȥ�����ɤ��ޤ���
+  Ruby が提供する testrb コマンドを用いてテストをロードします。
 : direct
-  ���ޥ�ɥ饤��ǻ��ꤷ���ե����������ɤ��ޤ���
+  コマンドラインで指定したファイルをロードします。
 
-@param style ����ܥ�ǥƥ��Ȥ�����ɤ�����ˡ����ꤷ�ޤ���
+@param style シンボルでテストをロードする方法を指定します。
 
 --- name -> String
 
-�ƥ��ȥ�������̾�����֤��ޤ����ǥե���Ȥ� "test" �Ǥ���
+テストタスクの名前を返します。デフォルトは "test" です。
 
 --- name=(str)
 
-�ƥ��ȥ�������̾���򥻥åȤ��ޤ���
+テストタスクの名前をセットします。
 
-@param str �ƥ��ȥ�������̾������ꤷ�ޤ���
+@param str テストタスクの名前を指定します。
 
 --- options -> String
 
-�ƥ��ȥ������Ȥ��Ϥ��ѥ�᡼�����֤��ޤ���
+テストスイートに渡すパラメータを返します。
 
-���ޥ�ɥ饤��� "TESTOPTS=options" �����ꤵ���ȡ������ͤ��񤭤��ޤ���
-�ǥե���Ȥϲ�����ꤵ��Ƥ��ޤ���
+コマンドラインで "TESTOPTS=options" が指定されると、この値を上書きします。
+デフォルトは何も指定されていません。
 
 --- options=(option_str)
 
-�ƥ��ȥ������Ȥ��Ϥ��ѥ�᡼���򥻥åȤ��ޤ���
+テストスイートに渡すパラメータをセットします。
 
-@param option_str �ƥ��ȥ������Ȥ��Ϥ��ѥ�᡼������ꤷ�ޤ���
+@param option_str テストスイートに渡すパラメータを指定します。
 
 --- pattern -> String
 
-�ƥ��ȥե�����˥ޥå����� glob �ѥ�������֤��ޤ���
+テストファイルにマッチする glob パターンを返します。
 
-�ǥե���Ȥ� 'test/test*.rb' �Ǥ���
+デフォルトは 'test/test*.rb' です。
 
 --- pattern=(pattern)
 
-�ƥ��ȥե�����˥ޥå����� glob �ѥ��������ꤷ�ޤ���
+テストファイルにマッチする glob パターンを指定します。
 
 #@# --- rake_loader
 #@# nodoc
 
 --- ruby_opts -> Array
 
-�ƥ��ȼ¹Ի��� Ruby ���ޥ�ɤ��Ϥ���륪�ץ������֤��ޤ���
+テスト実行時に Ruby コマンドに渡されるオプションを返します。
 
 --- ruby_opts=(options)
 
-�ƥ��ȼ¹Ի��� Ruby ���ޥ�ɤ��Ϥ���륪�ץ����򥻥åȤ��ޤ���
+テスト実行時に Ruby コマンドに渡されるオプションをセットします。
 
-@param options ����ǥ��ץ�������ꤷ�ޤ���
+@param options 配列でオプションを指定します。
 
 --- test_files=(list)
 
-����Ū�˥ƥ����оݤΥե��������ꤷ�ޤ���
+明示的にテスト対象のファイルを指定します。
 
-[[m:Rake::TestTask#pattern=]], [[m:Rake::TestTask#test_files=]] ��
-ξ���ǥƥ����оݤ���ꤷ����硢ξ�Ԥϰ�ĤˤޤȤ�ƻ��Ѥ���ޤ���
+[[m:Rake::TestTask#pattern=]], [[m:Rake::TestTask#test_files=]] の
+両方でテスト対象を指定した場合、両者は一つにまとめて使用されます。
 
-@param list ���� [[c:Rake::FileList]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param list 配列か [[c:Rake::FileList]] のインスタンスを指定します。
 
 --- verbose -> bool
 
-�����ͤ����Ǥ����硢�ƥ��Ȥμ¹Է�̤�ܺ٤�ɽ�����ޤ���
+この値が真である場合、テストの実行結果を詳細に表示します。
 
 --- verbose=(flag)
 
-�ƥ��Ȥμ¹Է�̤�ܺ٤�ɽ�����뤫�ɤ����򥻥åȤ��ޤ���
+テストの実行結果を詳細に表示するかどうかをセットします。
 
-@param flag ���ޤ��ϵ�����ꤷ�ޤ���
+@param flag 真または偽を指定します。
 
 --- warning -> bool
 
-�����ͤ����Ǥ����硢�ƥ��ȼ¹Ի��� ruby -w ��¹Ԥ����Τ�Ʊ�����̤������ޤ���
+この値が真である場合、テスト実行時に ruby -w を実行したのと同じ効果が生じます。
 
 --- warning=(flag)
 
-�ƥ��ȼ¹Ի��˷ٹ��ɽ�������뤫�ɤ����򥻥åȤ��ޤ���
+テスト実行時に警告を表示させるかどうかをセットします。
 
-@param flag ���ޤ��ϵ�����ꤷ�ޤ���
+@param flag 真または偽を指定します。
 
 == Singleton Methods
 
 --- new(name = :test){|t| ... } -> Rake::TestTask
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-�֥��å���Ϳ����줿���ϡ����Ȥ�֥��å��ѥ�᡼���Ȥ���Ϳ����줿
-�֥��å���ɾ�����ޤ���
+ブロックが与えられた場合は、自身をブロックパラメータとして与えられた
+ブロックを評価します。
 
-@param name �������å�̾����ꤷ�ޤ���
+@param name ターゲット名を指定します。

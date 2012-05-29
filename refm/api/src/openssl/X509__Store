@@ -1,111 +1,111 @@
 = class OpenSSL::X509::Store < Object
 
-�����񥹥ȥ����饹��
+証明書ストアクラス。
 
-�����񥹥ȥ��ȤϾ����񤪤�� CRL �ν���Ǥ���������򸡾ڤ���ݡ�
-���Ȥ�������Ƥ�������񤫤鸡�ڤ�ɬ�פʾ������õ���Ф���ǽ��
-�󶡤��Ƥ��ޤ���
+証明書ストアとは証明書および CRL の集合です。証明書を検証する際、
+自身が所持している証明書から検証に必要な証明書を探し出す機能を
+提供しています。
 
 == Class Methods
 
 --- new -> OpenSSL::X509::Store
-���� Store ���֥������Ȥ��������ޤ���
+空の Store オブジェクトを生成します。
 
-@raise OpenSSL::X509::StoreError ���֥������Ȥ������˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::StoreError オブジェクトの生成に失敗した場合に発生します
 
 == Instance Methods
 
 --- verify_callback -> Proc | nil
-���֥������Ȥ����ꤵ��Ƥ��븡�ڤ�ե��륿���륳����Хå���
-�֤��ޤ���
+オブジェクトに設定されている検証をフィルタするコールバックを
+返します。
 
-�ǥե���ȤΥ�����Хå������ꤵ��Ƥ�����ˤ� nil ���֤��ޤ���
+デフォルトのコールバックが設定されている場合には nil を返します。
 
 @see [[m:OpenSSL::X509::Store#verify_callback=]]
 
 --- verify_callback=(proc)
-���ڤ�ե��륿���륳����Хå������ꤷ�ޤ���
+検証をフィルタするコールバックを設定します。
 
-������Хå��ˤ� [[c:Proc]] �� [[c:Method]] ���Ϥ��ޤ���
+コールバックには [[c:Proc]] や [[c:Method]] を渡します。
 
-�Ϥ��줿������Хå����֥������ȤϾ������������θ��ڻ���
-��������˴ޤޤ��ƾ�����ν�̾�򸡾ڤ��뤿�Ӥ˸ƤӤ�����ޤ���
-���ΤȤ����Ϥ��������ϰʲ��Τ褦��
+渡されたコールバックオブジェクトは証明書チェインの検証時に
+チェインに含まれる各証明書の署名を検証するたびに呼びだされます。
+そのときに渡される引数は以下のように
   proc{|ok, ctx| ... }
-2�Ĥǡ�1�Ĥ�ϸ��ڤ������������ο����͡�
-2�Ĥ�ϸ��ڸ�ξ��֤���¸����
-[[c:OpenSSL::X509::StoreContext]] ���֥������ȤǤ���
-���Υ�����Хå��ˤ�2�Ĥ���䤬����ޤ���1���ܤϥ���ƥ����ȥ��֥�������
-��Ĵ�٤뤳�ȤǾܺ٤ʥ��顼��������뤳�ȤǤ���2���ܤϸ��ڤ򥫥����ޥ���
-���뤳�ȤǤ������Υ�����Хå��� true ���֤��ȡ����Ȥ�
-OpenSSL �����ڼ��Ԥ�Ƚ�ꤷ�Ƥ⡢���ڤ�����������Τ�Ƚ�Ǥ��������������
-�θ��ڤ�³���ޤ����դ� false ���֤��ȡ����ڤ����Ԥ�����ΤȤߤʤ���
-���ڤ���ߤ������ڥ᥽�åɤϸ��ڼ��Ԥ��֤��ޤ����ܺ٤ʥ��顼�����
-�����������ξ��ϥ�����Хå����������򤽤Τޤ��֤��褦�ˤ��Ƥ���������
+2つで、1つめは検証が成功したかの真偽値、
+2つめは検証後の状態を保存した
+[[c:OpenSSL::X509::StoreContext]] オブジェクトです。
+このコールバックには2つの役割があります。1つ目はコンテキストオブジェクト
+を調べることで詳細なエラー情報を得ることです。2つ目は検証をカスタマイズ
+することです。このコールバックが true を返すと、たとえ
+OpenSSL が検証失敗と判定しても、検証が成功したものと判断し証明書チェイン
+の検証を続けます。逆に false を返すと、検証が失敗したものとみなされ
+検証を停止し、検証メソッドは検証失敗を返します。詳細なエラー情報を
+得たいだけの場合はコールバックは第一引数をそのまま返すようにしてください。
 
-nil �����ꤹ��ȥǥե���ȤΥ�����Хå�(ñ���������򤽤Τޤ��֤�����)
-���Ȥ��ޤ���
+nil を設定するとデフォルトのコールバック(単に第一引数をそのまま返すだけ)
+が使われます。
 
-������֤� nil �Ǥ���
+初期状態は nil です。
 
-@param proc ���ꤹ�� [[c:Proc]] ���֥�������
+@param proc 設定する [[c:Proc]] オブジェクト
 @see [[m:OpenSSL::X509::Store#verify_callback]],
      [[m:OpenSSL::X509::Store#verify]],
      [[m:OpenSSL::X509::StoreContext#verify]]
 
 --- error_string -> String | nil
-�Ǹ�� [[m:OpenSSL::X509::Store#verify]] ��Ƥӡ�
-���ڤ����Ȥ��Υ��顼ʸ������֤��ޤ���
+最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
+検証したときのエラー文字列を返します。
 
-���ڤ������������� "ok" ���֤��ޤ���
+検証に成功した場合は "ok" を返します。
 
-verify ����٤�ƤӤ����Ƥ��ʤ����� nil ���֤��ޤ���
+verify を一度も呼びだしていない場合は nil を返します。
 
-�֤��ͤ� verify ��Ƥ֤��Ȥ˹�������ޤ���
+返り値は verify を呼ぶごとに更新されます。
 
 --- error -> Integer | nil
-�Ǹ�� [[m:OpenSSL::X509::Store#verify]] ��Ƥӡ�
-���ڤ����Ȥ��Υ��顼�����ɤ��֤��ޤ���
+最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
+検証したときのエラーコードを返します。
 
-���顼�����ɤ������ͤ� [[c:OpenSSL::X509]] ��������������Ƥ��ޤ���
-�ܤ����� [[ref:c:OpenSSL::X509#verify_error]] �򸫤Ƥ���������
-���ڤ������������� [[m:OpenSSL::X509::V_OK]] ���֤��ޤ���
+エラーコードの整数値は [[c:OpenSSL::X509]] に定数が定義されています。
+詳しくは [[ref:c:OpenSSL::X509#verify_error]] を見てください。
+検証に成功した場合は [[m:OpenSSL::X509::V_OK]] を返します。
 
-verify ����٤�ƤӤ����Ƥ��ʤ����� nil ���֤��ޤ���
+verify を一度も呼びだしていない場合は nil を返します。
 
-�֤��ͤ� verify ��Ƥ֤��Ȥ˹�������ޤ���
+返り値は verify を呼ぶごとに更新されます。
 
 --- flags=(flags)
-CRL �˴ؤ���ե饰�����ꤷ�ޤ���
+CRL に関するフラグを設定します。
 
-�ʲ����������ɬ�פʤ�Τ������ OR ��ꡢ�Ϥ��ޤ���
+以下の定数から必要なものを選んで OR 取り、渡します。
   * [[m:OpenSSL::X509::V_FLAG_CRL_CHECK]]
   * [[m:OpenSSL::X509::V_FLAG_CRL_CHECK_ALL]]
 
-���Υե饰�� [[m:OpenSSL::X509::Store#verify]] �Ǹ��ڤ���������Ѥ���ޤ���
-[[m:OpenSSL::X509::StoreContext.new]] �Ǿ����񥹥ȥ�����ƥ����Ȥ�
-����������ˤϤ��Υ���ƥ����Ȥ˥ե饰�����ԡ�����ޤ���
+このフラグは [[m:OpenSSL::X509::Store#verify]] で検証する場合に利用されます。
+[[m:OpenSSL::X509::StoreContext.new]] で証明書ストアコンテキストを
+生成する場合にはそのコンテキストにフラグがコピーされます。
 
-�ǥե���ȤǤϥե饰�����ꤵ��Ƥ��ޤ���
+デフォルトではフラグは設定されていません。
 
-@param flags ���ꤹ��ե饰(������)
+@param flags 設定するフラグ(整数値)
 @see [[m:OpenSSL::X509::StoreContext#flags=]]
 --- chain -> [OpenSSL::X509::Certificate] | nil
-�Ǹ�� [[m:OpenSSL::X509::Store#verify]] ��Ƥӡ�
-���ڤ����Ȥ��Υ롼�� CA �ޤǤξ�����Υ���������֤��ޤ���
+最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
+検証したときのルート CA までの証明書のチェインを返します。
 
-������ν���ϰʲ����̤�Ǥ���
+証明書の順序は以下の通りです。
 
-  [������, ���� CA ������, ��� CA ������, ... , �롼�� CA ������]
+  [証明書, 下位 CA 証明書, 中間 CA 証明書, ... , ルート CA 証明書]
 
-verify ����٤�ƤӤ����Ƥ��ʤ����� nil ���֤��ޤ���
+verify を一度も呼びだしていない場合は nil を返します。
 
-�֤��ͤ� verify ��Ƥ֤��Ȥ˹�������ޤ���
+返り値は verify を呼ぶごとに更新されます。
 
 --- purpose=(purpose)
-������λ�����Ū�����ꤷ�ޤ���
+証明書の使用目的を設定します。
 
-�ʲ�������ͤΤ��������줫1�Ĥ��Ϥ��ޤ���
+以下の定数値のうちいずれか1つを渡します。
   * [[m:OpenSSL::X509::PURPOSE_ANY]]
   * [[m:OpenSSL::X509::PURPOSE_CRL_SIGN]]
   * [[m:OpenSSL::X509::PURPOSE_NS_SSL_SERVER]]
@@ -115,30 +115,30 @@ verify ����٤�ƤӤ����Ƥ��ʤ����� nil ���֤��ޤ���
   * [[m:OpenSSL::X509::PURPOSE_SSL_SERVER]]
   * [[m:OpenSSL::X509::PURPOSE_OSCP_HELPER]]
 
-�����ͤ� [[m:OpenSSL::X509::Store#verify]] �Ǹ��ڤ���������Ѥ���ޤ���
-������˵��ܤ���Ƥ��������Ū��Ŭ�礷�Ƥ��ʤ����ˤϸ��ڤ����Ԥ��ޤ���
-[[m:OpenSSL::X509::StoreContext.new]] �Ǿ����񥹥ȥ�����ƥ����Ȥ�
-����������ˤϤ��Υ���ƥ����Ȥˤ����ͤ����ԡ�����ޤ���
+この値は [[m:OpenSSL::X509::Store#verify]] で検証する場合に利用されます。
+証明書に記載されている使用目的が適合していない場合には検証が失敗します。
+[[m:OpenSSL::X509::StoreContext.new]] で証明書ストアコンテキストを
+生成する場合にはそのコンテキストにこの値がコピーされます。
 
-@param purpose ������λ�����Ū��ɽ��������
+@param purpose 証明書の使用目的を表す整数値
 @see [[m:OpenSSL::X509::StoreContext#purpose=]]
 
 #@# memo: 
-#@# purpose ��
-#@# �ɤ���� X509v3 ��ĥ�ΰ��keyUsage��ĥ�ΰ�
-#@# ��extKeyKeyUsage��ĥ�ΰ������å�����餷����
-#@# ���ڤ��Ƥ��������䡢����˾������Ƥ������CA�ʤɤ�
-#@# ��Ū�����Ѥ��Ƥ��ʤ����ɤ�����Ƚ�ꤹ��餷����
-#@# SMIME_SIGN �ʤ�С��־����� S/MIME �Ȥ��ƻȤ��뤫��& 
-#@# ��CA ������ S/MIME CA �Ȥ��ƻȤ��뤫�פ�2�Ĥ�Ƚ�ꤷ�Ƥ���褦�Ǥ��롣
-#@# ��Network Security with OpenSSL:Cryptography for Secure Communications��
-#@# �ˤ��ȡ����γ�ĥ�ΰ��
-#@# ������ˡ����������ΤǤʤ��סִ�¸���եȥ������Ǥϳ���̵�뤵����
-#@# �ּ�����ˡ�ϥ٥�����ˤ�äƤޤ��ޤ��ס��ؤ����Ω���ʤ��פȤ�
+#@# purpose は
+#@# どうやら X509v3 拡張領域のkeyUsage拡張領域
+#@# やextKeyKeyUsage拡張領域をチェックするらしい。
+#@# 検証している証明書や、それに証明している中間CAなどが
+#@# 目的外使用していないかどうかを判定するらしい。
+#@# SMIME_SIGN ならば、「証明書が S/MIME として使えるか」& 
+#@# 「CA 証明書が S/MIME CA として使えるか」の2つを判定しているようである。
+#@# 「Network Security with OpenSSL:Cryptography for Secure Communications」
+#@# によると、この拡張領域は
+#@# 「利用法の定義が明確でない」「既存ソフトウェアでは概ね無視される」
+#@# 「実装方法はベンダーによってまちまち」「殆ど役に立たない」とか
 
 --- trust=(trust)
 #@todo
-�ʲ��Τ����줫��������ͤ���ꤷ�ޤ���
+以下のいずれかの定数の値を指定します。
 
  * [[m:OpenSSL::X509::TRUST_COMPAT]]
  * [[m:OpenSSL::X509::TRUST_EMAIL]]
@@ -147,76 +147,76 @@ verify ����٤�ƤӤ����Ƥ��ʤ����� nil ���֤��ޤ���
  * [[m:OpenSSL::X509::TRUST_SSL_SERVER]]
  * [[m:OpenSSL::X509::TRUST_OCSP_REQUEST]]
  * [[m:OpenSSL::X509::TRUST_OCSP_SIGN]]
-@param trust ������
+@param trust 整数値
 @see [[m:OpenSSL::X509::StoreContext#trust=]]
 
-#@# TRUST_COMPAT ����ꤹ��� root ca �� self signed ����Ƥ��뤫��
-#@# Ƚ�ꤹ��
-#@# ����ʳ��� 0.9.8o �Υ����ɾ�ǤϷ�ɲ��⤷�Ƥ��ʤ�(OCSP�ʳ���
-#@# COMPAT��Ʊ��)�褦�˸�����
+#@# TRUST_COMPAT を指定すると root ca が self signed されているかを
+#@# 判定する
+#@# それ以外は 0.9.8o のコード上では結局何もしていない(OCSP以外は
+#@# COMPATと同じ)ように見える
 
 --- add_path(path) -> self
-path ���ؤ������ǥ��쥯�ȥ�˴ޤޤ�������ե������
-���ꤹ�������Ȥ��Ʋä��ޤ���
+path が指し示すディレクトリに含まれる証明書ファイルを
+信頼する証明書として加えます。
 
-@param path �����񤬴ޤޤ��ǥ��쥯�ȥ�Υѥ�
-@raise OpenSSL::X509::StoreError �ɲä˼��Ԥ�������ȯ�����ޤ�
+@param path 証明書が含まれるディレクトリのパス
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
 --- add_file(file) -> self
-�ե�����˴ޤޤ�� CA ��������ꤹ�������Ȥ��ƾ����񥹥ȥ��˲ä��ޤ���
+ファイルに含まれる CA 証明書を信頼する証明書として証明書ストアに加えます。
 
-@param file �ե�����̾ʸ����
-@raise OpenSSL::X509::StoreError �ɲä˼��Ԥ�������ȯ�����ޤ�
+@param file ファイル名文字列
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
 --- add_cert(cert) -> self
-CA ��������ꤹ�������Ȥ��ƾ����񥹥ȥ��˲ä��ޤ���
+CA 証明書を信頼する証明書として証明書ストアに加えます。
 
-@param cert �ɲä��� CA ������� [[c:OpenSSL::X509::Certificate]] ���֥�������
-@raise OpenSSL::X509::StoreError �ɲä˼��Ԥ�������ȯ�����ޤ�
+@param cert 追加する CA 証明書の [[c:OpenSSL::X509::Certificate]] オブジェクト
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
 --- add_crl(crl) -> self
-���ꤹ�� CRL(�����񼺸��ꥹ��)
-������񥹥ȥ��˲ä��ޤ���
+信頼する CRL(証明書失効リスト)
+を証明書ストアに加えます。
 
-@param crl �ɲä��� CRL �� [[c:OpenSSL::X509::CRL]] ���֥�������
-@raise OpenSSL::X509::StoreError �ɲä˼��Ԥ�������ȯ�����ޤ�
+@param crl 追加する CRL の [[c:OpenSSL::X509::CRL]] オブジェクト
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
 --- verify(cert, chain = nil) -> bool
 --- verify(cert, chain = nil){|ok, ctx| ... } -> bool
-�����������񥹥ȥ���¸�ߤ��� CA ������Ǹ��ڤ��ޤ���
+証明書を証明書ストアに存在する CA 証明書で検証します。
 
-chain �ˤϸ��ڤ�����������ξ���������������Τ� 
-[[c:OpenSSL::X509::Certificate]] ��������Ϥ��ޤ���
+chain には検証したい証明書の証明書チェイン全体を 
+[[c:OpenSSL::X509::Certificate]] の配列で渡します。
 
-���ڤ������������� true �򡢼��Ԥ������� false ���֤��ޤ���
+検証に成功した場合は true を、失敗した場合は false を返します。
 
-���Υ᥽�åɤ�֥��å��դ��ǸƤӽФ��ȡ����Υ֥��å���
-���ڤ�ե��륿���륳����Хå��ȸ�������ޤ������Υ�����Хå��ˤĤ��Ƥ�
-[[m:OpenSSL::X509::Store#verify_callback=]] �򻲾Ȥ��Ƥ���������
+このメソッドをブロック付きで呼び出すと、そのブロックが
+検証をフィルタするコールバックと見做されます。このコールバックについては
+[[m:OpenSSL::X509::Store#verify_callback=]] を参照してください。
 
-�����Ǥ� [[m:OpenSSL::X509::StoreContext.new]] ��
-[[m:OpenSSL::X509::StoreContext#verify]] ��ƤӤ������Ȥˤ�äƸ��ڤ��Ƥ��ޤ���
+内部では [[m:OpenSSL::X509::StoreContext.new]] と
+[[m:OpenSSL::X509::StoreContext#verify]] を呼びだすことによって検証しています。
 
-@param cert ���ڤ������������ [[c:OpenSSL::X509::Certificate]]
-@param chain ���ڤ�����������ξ���������������Τ�����
-@raise OpenSSL::X509::StoreError ���ڻ��˥��顼���������Ȥ���ȯ�����ޤ�
+@param cert 検証したい証明書の [[c:OpenSSL::X509::Certificate]]
+@param chain 検証したい証明書の証明書チェイン全体の配列
+@raise OpenSSL::X509::StoreError 検証時にエラーが生じたときに発生します
 
 #@since 1.8.2
 --- time=(time)
-�������ͭ�����¤θ��ڤ˻Ȥ����������ꤷ�ޤ���
+証明書の有効期限の検証に使う日時を設定します。
 
-�ǥե���ȤǤϸ��߻��郎�Ȥ��ޤ���
+デフォルトでは現在時刻が使われます。
 
-@param time ���ڤ˻Ȥ������� [[c:Time]] ���֥�������
+@param time 検証に使う日時の [[c:Time]] オブジェクト
 @see [[m:OpenSSL::X509::StoreContext#time=]]
 #@end
 
 #@since 1.8.3
 --- set_default_paths -> nil
-�����ƥ���ȹ��ޤ�Ƥ����������ɤ߹��ߤޤ���
+システムに組込まれている証明書を読み込みます。
 
-@raise OpenSSL::X509::StoreError �ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::StoreError 読み込みに失敗した場合に発生します
 #@end
 
 = class OpenSSL::X509::StoreError < OpenSSL::OpenSSLError
-[[c:OpenSSL::X509::Store]] ��Ϣ�Υ��顼��ɽ���㳰���饹�Ǥ���
+[[c:OpenSSL::X509::Store]] 関連のエラーを表す例外クラスです。

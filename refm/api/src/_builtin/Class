@@ -1,25 +1,25 @@
 = class Class < Module
 
-���饹�Υ��饹�Ǥ���
+クラスのクラスです。
 
-������Τ˸����С��ġ��Υ��饹�Ϥ��줾��᥿���饹�ȸ�
-�Ф��̾���Τʤ����饹�򥯥饹�Ȥ��ƻ��äƤ��ơ�Class �Ϥ��Υ᥿
-���饹�Υ��饹�Ǥ������δط��Ͼ���ʣ���Ǥ�����Ruby �����Ѥ���ˤ�����
-�Ƥ��ä˽��פǤϤ���ޤ���
+より正確に言えば、個々のクラスはそれぞれメタクラスと呼
+ばれる名前のないクラスをクラスとして持っていて、Class はそのメタ
+クラスのクラスです。この関係は少し複雑ですが、Ruby を利用するにあたっ
+ては特に重要ではありません。
 
-���饹�ȥ⥸�塼��ˤ�
+クラスとモジュールには
 
-  * ���饹�ϥ��󥹥��󥹤�����Ǥ��뤬���⥸�塼��ϤǤ��ʤ���
-  * �⥸�塼���¾�Υ⥸�塼��䥯�饹�˥��󥯥롼�ɤ��뤳�ȤϤǤ��뤬�����饹�򥤥󥯥롼�ɤ��뤳�ȤϤǤ��ʤ���
+  * クラスはインスタンスを作成できるが、モジュールはできない。
+  * モジュールを他のモジュールやクラスにインクルードすることはできるが，クラスをインクルードすることはできない。
 
-�Ȥ����㤤������ޤ���������ʳ��ΤۤȤ�ɤε�ǽ�� [[c:Module]] �����
-������Ƥ��ޤ���Module �Υ᥽�åɤΤ���
+という違いがありますが、それ以外のほとんどの機能は [[c:Module]] から継
+承されています。Module のメソッドのうち
 
   * [[m:Module#module_function]]
   * [[m:Module#extend_object]]
   * [[m:Module#append_features]]
 
-�� Class �Ǥ�̤����ˤ���Ƥ��ޤ���
+は Class では未定義にされています。
 
 == Class Methods
 
@@ -28,33 +28,33 @@
 --- new(superclass = Object) {|klass| ... } -> Class
 #@end
 
-������̾�����դ��Ƥ��ʤ� superclass �Υ��֥��饹���������ޤ���
+新しく名前の付いていない superclass のサブクラスを生成します。
 
-̾���Τʤ����饹�ϡ��ǽ��̾�������ݤ���������Ƥ������̾��
-���������Ĥ��ä����̾�򥯥饹̾�Ȥ��ޤ���
+名前のないクラスは、最初に名前を求める際に代入されている定数名を検
+索し、見つかった定数名をクラス名とします。
 
   p foo = Class.new   # => #<Class:0x401b90f8>
   p foo.name          # => ""
-  Foo = foo           # ������ p foo ����� "Foo" ����
+  Foo = foo           # ここで p foo すれば "Foo" 固定
   Bar = foo
-  p foo.name          # => "Bar"  ("Foo" �ˤʤ뤫 "Bar" �ˤʤ뤫������)
+  p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
 
 #@since 1.8.0
-�֥��å���Ϳ����줿��硢�����������饹������Ȥ���
-���饹�Υ���ƥ����Ȥǥ֥��å���¹Ԥ��ޤ����ʲ��Υ����ɤ�Ʊ���Ǥ���
+ブロックが与えられた場合、生成したクラスを引数として
+クラスのコンテキストでブロックを実行します。以下のコードと同じです。
 
   klass = Class.new(superclass)
   klass.module_eval {|m| ... }
   klass
 
-���ξ��������������饹���֤��ޤ���
-�֥��å��μ¹Ԥ� Class#initialize ���Ԥ��ޤ���
+この場合も生成したクラスを返します。
+ブロックの実行は Class#initialize が行います。
 #@end
 
-@param superclass �������륯�饹�Υ����ѡ����饹����ꤷ�ޤ���
+@param superclass 生成するクラスのスーパークラスを指定します。
 
 #@since 1.8.0
-��:
+例:
 
  k = Class.new{|c| 
        def initialize
@@ -74,51 +74,51 @@
 #@since 1.8.0
 --- allocate    -> object
 
-���ȤΥ��󥹥��󥹤����������֤��ޤ��������������֥������Ȥ�
-���ȤΥ��󥹥��󥹤Ǥ��뤳�Ȱʳ��ˤϲ�������������ޤ���
+自身のインスタンスを生成して返します。生成したオブジェクトは
+自身のインスタンスであること以外には何も特性を持ちません。
 #@end
 
 --- new(*args, &block)    -> object
 
-���ȤΥ��󥹥��󥹤����������֤��ޤ���
-���Υ᥽�åɤΰ����ϥ֥��å�������ޤ� [[m:Object#initialize]] ���Ϥ���ޤ���
+自身のインスタンスを生成して返します。
+このメソッドの引数はブロック引数も含め [[m:Object#initialize]] に渡されます。
 
 #@since 1.8.0
-new �� [[m:Class#allocate]] �ǥ��󥹥��󥹤���������
-[[m:Object#initialize]] �ǽ������Ԥ��ޤ���
+new は [[m:Class#allocate]] でインスタンスを生成し、
+[[m:Object#initialize]] で初期化を行います。
 #@end
 
-@param args [[m:Object#initialize]] ���Ϥ�����������ꤷ�ޤ���
+@param args [[m:Object#initialize]] に渡される引数を指定します。
 
-@param block [[m:Object#initialize]] ���Ϥ����֥��å�����ꤷ�ޤ���
+@param block [[m:Object#initialize]] に渡されるブロックを指定します。
 
 --- superclass    -> Class | nil
 
-���ȤΥ����ѡ����饹���֤��ޤ���
+自身のスーパークラスを返します。
 
 #@since 1.9.1
-������ [[c:BasicObject]].superclass �� nil ���֤��ޤ���
+ただし [[c:BasicObject]].superclass は nil を返します。
 #@else
-������ [[c:Object]].superclass �� nil ���֤��ޤ���
+ただし [[c:Object]].superclass は nil を返します。
 #@end
 
 --- _load(str)    -> Class
 
-[[m:Object#_dump]] �򻲾Ȥ��Ʋ�������
+[[m:Object#_dump]] を参照して下さい。
 
-@param str Ruby �Υ��֥������Ȥ�����פ��줿ʸ�������ꤷ�ޤ���
+@param str Ruby のオブジェクトがダンプされた文字列を指定します。
 
 == Private Instance Methods
 
 --- inherited(subclass)     -> ()
 
-���饹�Υ��֥��饹��������줿�����������������줿���֥��饹�����
-�˥��󥿥ץ꥿����ƤӽФ���ޤ������Υ᥽�åɤ��ƤФ�륿���ߥ󥰤�
-���饹���ʸ�μ¹�ľ���Ǥ���
+クラスのサブクラスが定義された時、新しく生成されたサブクラスを引数
+にインタプリタから呼び出されます。このメソッドが呼ばれるタイミングは
+クラス定義文の実行直前です。
 
-@param subclass �ץ��������ǿ�����������줿���ȤΥ��֥��饹�Ǥ���
+@param subclass プログラム内で新たに定義された自身のサブクラスです。
 
-��:
+例:
 
   class Foo
     def Foo.inherited(subclass)

@@ -2,55 +2,55 @@ require rubygems/digest/md5
 require rubygems/format
 require rubygems/installer
 
-�͡��� Gem �ե������ Gem �ǡ����١�������ޤ��뤿��Υ饤�֥��Ǥ���
+様々な Gem ファイルや Gem データベースを懸賞するためのライブラリです。
 
 = class Gem::Validator < Object
 
-�͡��� Gem �ե������ Gem �ǡ����١�������ޤ��뤿��Υ��饹�Ǥ���
+様々な Gem ファイルや Gem データベースを懸賞するためのクラスです。
 
 == Public Instance Methods
 
 --- alien -> [Gem::Validator.ErrorData]
 
-Gem �ǥ��쥯�ȥ����¸�ߤ��뤫�⤷��ʤ��ʲ��Τ褦������򸡾ڤ��ޤ���
+Gem ディレクトリ内に存在するかもしれない以下のような問題を検証します。
 
- * Gem �ѥå������Υ����å����ब����������
- * ���줾��� Gem �˴ޤޤ�뤽�줾��Υե����뤬���󥹥ȡ��뤵�줿�С������Ǥ��뤳�Ȥΰ����
- * Gem �ǥ��쥯�ȥ�˴ط���̵���ե����뤬¸�ߤ��ʤ�����
- * ����å��塢���ڥå����ǥ��쥯�ȥ꤬���줾���Ĥ���¸�ߤ��뤳��
+ * Gem パッケージのチェックサムが正しいこと
+ * それぞれの Gem に含まれるそれぞれのファイルがインストールされたバージョンであることの一貫性
+ * Gem ディレクトリに関係の無いファイルが存在しないこと
+ * キャッシュ、スペック、ディレクトリがそれぞれ一つずつ存在すること
 
-���Υ᥽�åɤϸ��ڤ˼��Ԥ��Ƥ��㳰��ȯ�������ޤ���
+このメソッドは検証に失敗しても例外を発生させません。
 
 
 --- remove_leading_dot_dir(path) -> String
 #@# should be private ?
 
-Ϳ����줿�ѥ�����Ƭ�ΥɥåȤ��������ʸ������֤��ޤ���
+与えられたパスの先頭のドットを取り除いた文字列を返します。
 
 --- unit_test(gem_spec)
 
-Ϳ����줿 Gem ���ڥå��ˤ������äƥ�˥åȥƥ��Ȥ�¹Ԥ��ޤ���
+与えられた Gem スペックにしたがってユニットテストを実行します。
 
-@param gem_spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- verify_gem(gem_data) -> ()
 
-Ϳ����줿 Gem �ե���������Ƥ� MD5 �����å�����򸡾ڤ��ޤ���
+与えられた Gem ファイルの内容の MD5 チェックサムを検証します。
 
-@param gem_data Gem �ե���������Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param gem_data Gem ファイルの内容を文字列で指定します。
 
-@raise Gem::VerificationError ���� Gem �ե��������ꤷ������ȯ�����ޤ���
+@raise Gem::VerificationError 空の Gem ファイルを指定した場合に発生します。
 
-@raise Gem::VerificationError MD5 �����å����ब�����Ǥ������ȯ�����ޤ���
+@raise Gem::VerificationError MD5 チェックサムが不正である場合に発生します。
 
 
 --- verify_gem_file(gem_path) -> ()
 
-Ϳ����줿 Gem �ե�����Υѥ�����Ѥ��� MD5 �����å�����򸡾ڤ��ޤ���
+与えられた Gem ファイルのパスを使用して MD5 チェックサムを検証します。
 
-@param gem_path Gem �ե�����Υѥ�����ꤷ�ޤ���
+@param gem_path Gem ファイルのパスを指定します。
 
-@raise Gem::VerificationError Gem �ե����뤬���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise Gem::VerificationError Gem ファイルが見つからなかった場合に発生します。
 
 
 == Constants
@@ -58,8 +58,8 @@ Gem �ǥ��쥯�ȥ����¸�ߤ��뤫�⤷��ʤ��ʲ��Τ褦������򸡾ڤ��ޤ���
 --- ErrorData
 #@todo
 
-���顼�����Ͽ���뤿��ι�¤�ΤǤ���
-�ʲ���°������äƤ��ޤ���
+エラー情報を記録するための構造体です。
+以下の属性を持っています。
 
  * path
  * problem

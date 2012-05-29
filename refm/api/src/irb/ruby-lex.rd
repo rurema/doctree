@@ -2,6 +2,6 @@ require e2mmap
 require irb/slex
 require irb/ruby-token
 
-Ruby �Υ����������ɤ������Ϥ��뤿��Υ��֥饤�֥��Ǥ���
+Ruby のソースコードを字句解析するためのサブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。

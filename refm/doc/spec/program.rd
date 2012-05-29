@@ -1,59 +1,59 @@
-= �ץ�����ࡦʸ����
+= プログラム・文・式
 
   * [[ref:exp]]
   * [[ref:terminate]]
 
-�ץ�������[[ref:exp]]���¤٤���ΤǤ������ȼ��δ֤ϥ��ߥ���
-��(;)�ޤ��ϲ��ԤǶ��ڤ�ޤ������������Хå�����å����³�����Ԥ�ʸ
-�ζ��ڤ�ˤʤ餺�����ιԤط�³���ޤ���
+プログラムは[[ref:exp]]を並べたものです。式と式の間はセミコロ
+ン(;)または改行で区切ります。ただし、バックスラッシュに続く改行は文
+の区切りにならず、次の行へ継続します。
 
-��:
+例:
 
    print "hello world!\n"
 
 
-===[a:exp] ��
+===[a:exp] 式
 
-��:
+例:
 
           true
           (1+2)*3
           foo()
           if test then ok else ng end
 
-Ruby �μ��ˤϡ�[[d:spec/variables]]�����ޤ��ޤ�[[d:spec/literal]]��������
-[[d:spec/operator]]��if �� while �ʤɤ�[[d:spec/control]]��[[d:spec/call]]��
-[[d:spec/def]]������ޤ���
+Ruby の式には、[[d:spec/variables]]、さまざまな[[d:spec/literal]]、それらの
+[[d:spec/operator]]、if や while などの[[d:spec/control]]、[[d:spec/call]]、
+[[d:spec/def]]があります。
 
-���ϳ�̤ˤ�äƥ��롼�ԥ󥰤��뤳�Ȥ��Ǥ��ޤ���
+式は括弧によってグルーピングすることができます。
 
-���μ� () �� nil ���֤��ޤ���
+空の式 () は nil を返します。
 
-Ruby�μ��ˤ��ͤ��֤������֤��ʤ���������ޤ���
+Rubyの式には値を返す式と返さない式があります。
 
-: �ͤ��֤��ʤ�������
+: 値を返さない式の例
 
-    while, until, while ������, until ������
+    while, until, while 修飾式, until 修飾式
 
-�ޤ����᥽�åɤΰ����˻���Ǥ��ʤ����Ȼ���Ǥ��뼰������ޤ�(���Τ褦
-�ʼ����ʸ�פȸƤ�ʬ�����礬����ޤ�)��
+また、メソッドの引数に指定できない式と指定できる式があります(このよう
+な式を「文」と呼び分ける場合があります)。
 
-: �᥽�åɤΰ����˻���Ǥ��ʤ�������
+: メソッドの引数に指定できない式の例
 
     and, or, not
 
-    if/unless/rescue ������, ...
+    if/unless/rescue 修飾式, ...
 
-�᥽�åɤΰ����˻���Ǥ��ʤ����ϡ���̤ˤ�륰�롼�ԥ󥰤�Ԥ����Ȥ���
-�̤μ��Ȥ��ƻ��Ѥ��뤳�Ȥ��Ǥ��ޤ���
+メソッドの引数に指定できない式は、括弧によるグルーピングを行うことで普
+通の式として使用することができます。
 
-===[a:terminate] �ץ������ν���
+===[a:terminate] プログラムの終り
 
-Ruby���󥿥ץ꥿�ϥץ��������ɤߤ���Ǥ���ݤ˰ʲ��Τ�Τ˽Ф����Ȥ���
-���ɤߤ��ߤ�λ���ޤ���
+Rubyインタプリタはプログラムを読みこんでいる際に以下のものに出あうとそこ
+で読みこみを終了します。
 
-    * �ե�����ν���(ʸ�����eval���Ƥ������ʸ����ν���)
+    * ファイルの終り(文字列をevalしている場合は文字列の終り)
 
-    *  ^D(����ȥ�����D) ��^Z(����ȥ�����Z)
+    *  ^D(コントロールD) 、^Z(コントロールZ)
 
-    *  __END__�Τߤι�(����˶��򤬤����ǧ������ޤ���)
+    *  __END__のみの行(前後に空白があると認識されません)

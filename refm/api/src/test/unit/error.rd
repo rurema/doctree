@@ -1,47 +1,47 @@
 = class Test::Unit::Error < Object
 
-�ƥ��Ȼ��Υ��顼��ɽ�����륯�饹�Ǥ����ƥ�������㳰��ȯ����������
-[[c:Test::Unit::TestCase]] �������ޤ���
+テスト時のエラーを表現するクラスです。テスト中に例外が発生した時に
+[[c:Test::Unit::TestCase]] から作られます。
 
 == Class Methods
 
 --- new(test_name, exception) -> Test::Unit::Error
 
-Test::Unit::Error ���֥������ȤΥ��󥹥��󥹤��������ޤ���
+Test::Unit::Error オブジェクトのインスタンスを生成します。
 
-@param test_name �б�����ƥ��ȥ᥽�åɤ�̾������ꤷ�ޤ���
+@param test_name 対応するテストメソッドの名前を指定します。
 
-@param exception �б������㳰���֥������Ȥ���ꤷ�ޤ���
+@param exception 対応する例外オブジェクトを指定します。
 
 == Instance Methods
 
 --- exception -> Exception
 
-���Ȥ��б������㳰���֥������Ȥ��֤��ޤ���
+自身に対応する例外オブジェクトを返します。
 
 --- long_display -> String
 --- to_s -> String
 
-���顼�ξܺ٤�������ʸ������֤��ޤ���
+エラーの詳細な説明を文字列で返します。
 
 --- message -> String
 
-ȯ�������㳰�˴�Ϣ���륨�顼��å�������ʸ������֤��ޤ���
+発生した例外に関連するエラーメッセージを文字列で返します。
 
-[[m:Test::Unit::Error#short_display]] ��
-[[m:Test::Unit::Error#long_display]] �ǻȤ��ޤ���
+[[m:Test::Unit::Error#short_display]] や
+[[m:Test::Unit::Error#long_display]] で使われます。
 
 @see [[m:Test::Unit::Error#short_display]],
      [[m:Test::Unit::Error#long_display]]
 
 --- short_display -> String
 
-���顼�δ�ñ��������ʸ������֤��ޤ���
+エラーの簡単な説明を文字列で返します。
 
 --- single_character_display -> String
 
-�ƥ��ȥ᥽�åɼ¹�����㳰��ȯ����������ɽ������ 'E' ���֤��ޤ���
+テストメソッド実行中に例外が発生した時に表示する 'E' を返します。
 
 --- test_name -> String
 
-���Ȥ��б�����ƥ��ȥ᥽�åɤ�̾�����֤��ޤ���
+自身に対応するテストメソッドの名前を返します。

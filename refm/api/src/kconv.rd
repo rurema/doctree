@@ -1,17 +1,17 @@
-���ܸ�ʸ�������ɤ��Ѵ����ڤ˹Ԥ�����Υ饤�֥��Ǥ���
+日本語文字コードの変換を手軽に行うためのライブラリです。
 
-kconv �� require ����� [[c:String]] ���饹���Ѵ��ѤΥ᥽�åɤ��������ޤ���
-[[c:Kconv]] �ˤ�Ʊ���Υ᥽�åɤ��������ޤ��� [[c:Kconv]] �ˤ�
-���󥳡��ǥ��󥰤�ɽ��������������Ƥ��ޤ���
+kconv を require すると [[c:String]] クラスに変換用のメソッドが定義されます。
+[[c:Kconv]] にも同等のメソッドが定義されます。 [[c:Kconv]] には
+エンコーディングを表す定数も定義されています。
 
 #@since 1.9.1
-1.9.1 �ʹߤǤϡ�Ruby �� m17n ��ǽ���Ѥ��ƥ��󥳡��ǥ��󥰤��Ѵ���
-�Ԥ����Ȥ��Ǥ��ޤ���1.8 �Ȥθߴ���������Ǥʤ��Τʤ�С�
-m17n ��ǽ��Ȥ��ۤ����褤�Ǥ��礦��MIME�Υǥ����������ݤ������
-�򤱤뤳�Ȥ��Ǥ��ޤ���
+1.9.1 以降では、Ruby の m17n 機能を用いてエンコーディングの変換を
+行うことができます。1.8 との互換性が問題でないのならば、
+m17n 機能を使うほうがよいでしょう。MIMEのデコード等面倒な問題を
+避けることができます。
 #@end
 
-=== ������
+=== 使用例
 
   newstring = Kconv.kconv(string, Kconv::JIS, Kconv::AUTO)
   newstring = Kconv.tojis(string)
@@ -19,7 +19,7 @@ m17n ��ǽ��Ȥ��ۤ����褤�Ǥ��礦��MIME�Υǥ����������ݤ������
   newstring = Kconv.tosjis(string)
   guessed_code = Kconv.guess(string)
 
-�ޤ���
+または
 
   newstring = string.kconv(Kconv::JIS, Kconv::AUTO)
   newstring = string.tojis
@@ -33,63 +33,63 @@ m17n ��ǽ��Ȥ��ۤ����褤�Ǥ��礦��MIME�Υǥ����������ݤ������
 
 --- kconv(out_code, in_code = Kconv::AUTO) -> String
 
-self �Υ��󥳡��ǥ��󥰤� out_code ���Ѵ�����ʸ�����
-�֤��ޤ���
-out_code in_code �� [[c:Kconv]] ������ǻ��ꤷ�ޤ���
+self のエンコーディングを out_code に変換した文字列を
+返します。
+out_code in_code は [[c:Kconv]] の定数で指定します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]] ��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]] を使ってください。
 
-@param out_code �Ѵ���Υ��󥳡��ǥ��󥰤� [[c:Kconv]] ������ǻ��ꤷ�ޤ���
-@param in_code �Ѵ�����ʸ����Υ��󥳡��ǥ��󥰤� [[c:Kconv]] ������ǻ��ꤷ�ޤ���
+@param out_code 変換後のエンコーディングを [[c:Kconv]] の定数で指定します。
+@param in_code 変換する文字列のエンコーディングを [[c:Kconv]] の定数で指定します。
 
 @see [[m:Kconv.#kconv]]
 
 --- tojis -> String
 
-self �Υ��󥳡��ǥ��󥰤� iso-2022-jp ���Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングを iso-2022-jp に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-jxm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-jxm0', str)
+を使ってください。
 
 @see [[m:Kconv.#tojis]]
 --- toeuc -> String
 
-self �Υ��󥳡��ǥ��󥰤� EUC-JP ���Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングを EUC-JP に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-exm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-exm0', str)
+を使ってください。
 
 @see [[m:Kconv.#toeuc]]
 --- tosjis -> String
 
-self �Υ��󥳡��ǥ��󥰤� shift_jis ���Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングを shift_jis に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-sxm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-sxm0', str)
+を使ってください。
 
 @see [[m:Kconv.#tosjis]]
 
 #@since 1.8.2
 --- toutf8 -> String
 
-self �Υ��󥳡��ǥ��󥰤� UTF-8 ���Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングを UTF-8 に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-wxm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-wxm0', str)
+を使ってください。
 
 @see [[m:Kconv.#toutf8]]
 #@end
@@ -97,13 +97,13 @@ self �Υ��󥳡��ǥ��󥰤� UTF-8 ���Ѵ�����ʸ�����
 #@since 1.8.2
 --- toutf16 -> String
 
-self �Υ��󥳡��ǥ��󥰤� UTF-16BE ���Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングを UTF-16BE に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-w16xm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w16xm0', str)
+を使ってください。
 
 @see [[m:Kconv.#toutf16]]
 
@@ -112,26 +112,26 @@ self �Υ��󥳡��ǥ��󥰤� UTF-16BE ���Ѵ�����ʸ�����
 #@since 1.9.1
 --- toutf32 -> String
 
-self �Υ��󥳡��ǥ��󥰤� UTF-32 ���Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングを UTF-32 に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-w32xm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w32xm0', str)
+を使ってください。
 
 @see [[m:Kconv.#toutf32]]
 
 --- tolocale -> String
-self �Υ��󥳡��ǥ��󥰤�������륨�󥳡��ǥ��󥰤��Ѵ�����ʸ�����
-�֤��ޤ����Ѵ����Υ��󥳡��ǥ��󥰤�ʸ��������Ƥ����¬���ޤ���
+self のエンコーディングをロケールエンコーディングに変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
 
-�������륨�󥳡��ǥ��󥰤ˤĤ��Ƥ� [[m:Encoding.locale_charmap]] �򸫤Ƥ���������
+ロケールエンコーディングについては [[m:Encoding.locale_charmap]] を見てください。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:String#encode]]
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:String#encode]]
+を使ってください。
 
 @see [[m:Kconv.#tolocale]]
 
@@ -141,42 +141,42 @@ self �Υ��󥳡��ǥ��󥰤�������륨�󥳡��ǥ��󥰤��Ѵ�����ʸ�����
 #@since 1.8.2
 --- iseuc -> bool
 
-self �� EUC-JP �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+self が EUC-JP なバイト列として正当であるかどうかを判定します。
 
-[[m:Kconv.#iseuc]](self) ��Ʊ���Ǥ���
+[[m:Kconv.#iseuc]](self) と同じです。
 
 #@end
 
 #@since 1.8.2
 --- issjis -> bool
 
-self �� Shift_JIS �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+self が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
 
-[[m:Kconv.#issjis]] ��Ʊ���Ǥ���
+[[m:Kconv.#issjis]] と同じです。
 
 #@end
 
 #@since 1.8.2
 --- isutf8 -> bool
 
-self �� UTF-8 �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+self が UTF-8 なバイト列として正当であるかどうかを判定します。
 
-[[m:Kconv.#isutf8]](self) ��Ʊ���Ǥ���
+[[m:Kconv.#isutf8]](self) と同じです。
 #@end
 
 #@since 1.9.1
 --- isjis -> bool
 
-self �� ISO-2022-JP �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+self が ISO-2022-JP なバイト列として正当であるかどうかを判定します。
 
-Kconv.isjis(self) ��Ʊ���Ǥ���
+Kconv.isjis(self) と同じです。
 
 #@end
 = module Kconv
 
-ʸ�������ɥ��󥳡��ǥ��󥰤��Ѵ����뤿��Υ⥸�塼�롣
-[[c:Kconv]] �� [[lib:nkf]] �Υ�åѡ��Ǥ���
+文字コードエンコーディングを変換するためのモジュール。
+[[c:Kconv]] は [[lib:nkf]] のラッパーです。
 
 #@#[[trap:Kconv]]
 
@@ -184,61 +184,61 @@ Kconv.isjis(self) ��Ʊ���Ǥ���
 
 --- kconv(str, out_code, in_code = Kconv::AUTO) -> String
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� out_code ���Ѵ�������Τ�
-�֤��ޤ���in_code ����ꤵ��Ƥ����� str �Υ��󥳡��ǥ��󥰤�
-in_code ���Ȥ���ư��ޤ���
+文字列 str のエンコーディングを out_code に変換したものを
+返します。in_code も指定されていたら str のエンコーディングが
+in_code だとして動作します。
 
-���Υ᥽�åɤ�MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]] ��ȤäƤ���������
+このメソッドはMIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]] を使ってください。
 
-@param str �Ѵ�����ʸ����
-@param out_code �Ѵ���Υ��󥳡��ǥ���
-@param in_code str�Υ��󥳡��ǥ���
+@param str 変換元の文字列
+@param out_code 変換後のエンコーディング
+@param in_code strのエンコーディング
 
 @see [[m:String#kconv]]
 
 --- tojis(str) -> String
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� iso-2022-jp ���Ѵ������֤��ޤ���
+文字列 str のエンコーディングを iso-2022-jp に変換して返します。
 
-Kconv.kconv(str, Kconv::JIS) ��Ʊ���Ǥ���
+Kconv.kconv(str, Kconv::JIS) と同じです。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-jxm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-jxm0', str)
+を使ってください。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 
 @see [[m:Kconv.#kconv]], [[m:String#tojis]]
 --- toeuc(str) -> String
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� EUC-JP ���Ѵ������֤��ޤ���
+文字列 str のエンコーディングを EUC-JP に変換して返します。
 
-Kconv.kconv(str, Kconv::EUC)��Ʊ���Ǥ���
+Kconv.kconv(str, Kconv::EUC)と同じです。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-exm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-exm0', str)
+を使ってください。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 
 @see [[m:Kconv.#kconv]], [[m:String#toeuc]]
 
 --- tosjis(str) -> String
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� shift_jis ���Ѵ������֤��ޤ���
+文字列 str のエンコーディングを shift_jis に変換して返します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-sxm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-sxm0', str)
+を使ってください。
 
-Kconv.kconv(str, Kconv::SJIS)��Ʊ���Ǥ���
+Kconv.kconv(str, Kconv::SJIS)と同じです。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 
 @see [[m:Kconv.#kconv]], [[m:String#tosjis]]
 
@@ -248,10 +248,10 @@ Kconv.kconv(str, Kconv::SJIS)��Ʊ���Ǥ���
 --- guess(str) -> Encoding | nil
 #@end
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤�Ƚ�ꤷ�ޤ�������ͤ�
-Kconv ������Ǥ���
+文字列 str のエンコーディングを判定します。戻り値は
+Kconv の定数です。
 
-���Υ⥸�塼��ؿ���Ƚ��Ǥ���Τϡ�
+このモジュール関数で判定できるのは、
   * ISO-2022-JP ([[m:Kconv::JIS]])
   * Shift_JIS ([[m:Kconv::SJIS]])
   * EUC-JP ([[m:Kconv::EUC]])
@@ -260,27 +260,27 @@ Kconv ������Ǥ���
   * UTF-8 ([[m:Kconv::UTF8]])
   * UTF-16BE ([[m:Kconv::UTF16]])
 #@end
-  * ���� ([[m:Kconv::UNKNOWN]])
-  * �ʾ�Τɤ�Ǥ�ʤ� ([[m:Kconv::BINARY]])
-�Τ����줫�Ǥ���
+  * 不明 ([[m:Kconv::UNKNOWN]])
+  * 以上のどれでもない ([[m:Kconv::BINARY]])
+のいずれかです。
 
-@param str ���󥳡��ǥ���Ƚ���оݤ�ʸ����
+@param str エンコーディング判定対象の文字列
 
 #@since 1.8.2
 #@until 1.9.1
 --- guess_old(str) -> Integer
-ʸ���� str �Υ��󥳡��ǥ��󥰤�Ƚ�ꤷ�ޤ�������ͤ�
-Kconv ������Ǥ���
+文字列 str のエンコーディングを判定します。戻り値は
+Kconv の定数です。
 
-���Υ⥸�塼��ؿ���Ƚ��Ǥ���Τϡ�
+このモジュール関数で判定できるのは、
   * ISO-2022-JP ([[m:Kconv::JIS]])
   * Shift_JIS ([[m:Kconv::SJIS]])
   * EUC-JP ([[m:Kconv::EUC]])
-  * ���� ([[m:Kconv::UNKNOWN]])
-  * �ʾ�Τɤ�Ǥ�ʤ� ([[m:Kconv::BINARY]])
-�Τ����줫�Ǥ���
+  * 不明 ([[m:Kconv::UNKNOWN]])
+  * 以上のどれでもない ([[m:Kconv::BINARY]])
+のいずれかです。
 
-@param str ���󥳡��ǥ���Ƚ���оݤ�ʸ����
+@param str エンコーディング判定対象の文字列
 @see [[m:Kconv.#guess]]
 #@end
 #@end
@@ -288,16 +288,16 @@ Kconv ������Ǥ���
 #@since 1.8.2
 --- toutf8(str) -> String
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� UTF-8 ���Ѵ������֤��ޤ���
+文字列 str のエンコーディングを UTF-8 に変換して返します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-wxm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-wxm0', str)
+を使ってください。
 
-Kconv.kconv(str, Kconv::UTF8)��Ʊ���Ǥ���
+Kconv.kconv(str, Kconv::UTF8)と同じです。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 @see [[m:String#toutf8]]
 
 #@end
@@ -305,16 +305,16 @@ Kconv.kconv(str, Kconv::UTF8)��Ʊ���Ǥ���
 #@since 1.8.2
 --- toutf16(str) -> String
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� UTF-16BE ���Ѵ������֤��ޤ���
+文字列 str のエンコーディングを UTF-16BE に変換して返します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-w16xm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w16xm0', str)
+を使ってください。
 
-Kconv.kconv(str, Kconv::UTF16)��Ʊ���Ǥ���
+Kconv.kconv(str, Kconv::UTF16)と同じです。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 @see [[m:String#toutf16]]
 
 #@end
@@ -322,16 +322,16 @@ Kconv.kconv(str, Kconv::UTF16)��Ʊ���Ǥ���
 #@since 1.9.1
 --- toutf32(str)
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤� UTF-32 ���Ѵ������֤��ޤ���
+文字列 str のエンコーディングを UTF-32 に変換して返します。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:NKF.#nkf]]('-w32xm0', str)
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w32xm0', str)
+を使ってください。
 
-Kconv.kconv(str, Kconv::UTF32)��Ʊ���Ǥ���
+Kconv.kconv(str, Kconv::UTF32)と同じです。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 @see [[m:String#toutf32]]
 
 #@end
@@ -339,53 +339,53 @@ Kconv.kconv(str, Kconv::UTF32)��Ʊ���Ǥ���
 #@since 1.9.1
 --- tolocale(str)
 
-ʸ���� str �Υ��󥳡��ǥ��󥰤�������륨�󥳡��ǥ��󥰤��Ѵ������֤��ޤ���
+文字列 str のエンコーディングをロケールエンコーディングに変換して返します。
 
-�������륨�󥳡��ǥ��󥰤ˤĤ��Ƥ� [[m:Encoding.locale_charmap]] �򸫤Ƥ���������
+ロケールエンコーディングについては [[m:Encoding.locale_charmap]] を見てください。
 
-���Υ᥽�åɤ� MIME ���󥳡��ɤ��줿ʸ�����Ÿ������
-������Ⱦ�ѥ��ʤ����Ѥ��Ѵ����ޤ���
-�������Ѵ��������ʤ����ϡ� [[m:String#encode]]
-��ȤäƤ���������
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:String#encode]]
+を使ってください。
 
-Kconv.kconv(str, Encoding.locale_charmap)��Ʊ���Ǥ���
+Kconv.kconv(str, Encoding.locale_charmap)と同じです。
 
-@param str �Ѵ�����ʸ����
+@param str 変換元の文字列
 @see [[m:String#tolocale]]
 
 #@end
 
 #@since 1.8.2
 --- iseuc(str) -> bool
-ʸ���� str �� EUC-JP �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+文字列 str が EUC-JP なバイト列として正当であるかどうかを判定します。
 
-@param str Ƚ���оݤ�ʸ����
+@param str 判定対象の文字列
 @see [[m:String#iseuc]]
 
 #@end
 
 #@since 1.8.2
 --- issjis(str) -> bool
-ʸ���� str �� Shift_JIS �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+文字列 str が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
-@param str Ƚ���оݤ�ʸ����
+@param str 判定対象の文字列
 @see [[m:String#issjis]]
 
 #@end
 
 #@since 1.8.2
 --- isutf8(str) -> bool
-ʸ���� str �� UTF-8 �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+文字列 str が UTF-8 なバイト列として正当であるかどうかを判定します。
 
-@param str Ƚ���оݤ�ʸ����
+@param str 判定対象の文字列
 @see [[m:String#isutf8]]
 #@end
 
 #@since 1.9.1
 --- isjis(str) -> bool
-ʸ���� str �� ISO-2022-JP �ʥХ�����Ȥ��������Ǥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
+文字列 str が ISO-2022-JP なバイト列として正当であるかどうかを判定します。
 
-@param str Ƚ���оݤ�ʸ����
+@param str 判定対象の文字列
 @see [[m:String#isjis]]
 #@end
 == Constants
@@ -396,8 +396,8 @@ Kconv.kconv(str, Encoding.locale_charmap)��Ʊ���Ǥ���
 --- AUTO -> nil
 #@end
 
-���󥳡��ǥ��󥰤�ư���Ф��ޤ���
-���Ϥλ���ǤΤ�ͭ���Ǥ���
+エンコーディングを自動検出します。
+入力の指定でのみ有効です。
 
 #@until 1.9.1
 --- JIS -> Integer
@@ -405,7 +405,7 @@ Kconv.kconv(str, Encoding.locale_charmap)��Ʊ���Ǥ���
 --- JIS -> Encoding
 #@end
 
-ISO-2022-JP ��ɽ���ޤ���
+ISO-2022-JP を表します。
 
 #@until 1.9.1
 --- EUC -> Integer
@@ -413,7 +413,7 @@ ISO-2022-JP ��ɽ���ޤ���
 --- EUC -> Encoding
 #@end
 
-EUC-JP ��ɽ���ޤ���
+EUC-JP を表します。
 
 #@until 1.9.1
 --- SJIS -> Integer
@@ -421,8 +421,8 @@ EUC-JP ��ɽ���ޤ���
 --- SJIS -> Encoding
 #@end
 
-Shift_JIS ��ɽ���ޤ���
-cp932�ǤϤʤ����Ȥ����դ��Ƥ���������
+Shift_JIS を表します。
+cp932ではないことに注意してください。
 
 #@until 1.9.1
 --- BINARY -> Integer
@@ -431,11 +431,11 @@ cp932�ǤϤʤ����Ȥ����դ��Ƥ���������
 #@end
 
 #@since 1.8.2
-JIS EUC SJIS �ʳ���ɽ���ޤ���
+JIS EUC SJIS 以外を表します。
 #@else
-JIS EUC SJIS UTF8 UTF16 �ʳ���ɽ���ޤ���
+JIS EUC SJIS UTF8 UTF16 以外を表します。
 #@end
-�����ͤ�[[m:Kconv.#guess]]���֤��ͤȤ��ƤΤ��Ѥ����ޤ���
+この値は[[m:Kconv.#guess]]の返り値としてのみ用いられます。
 
 #@until 1.9.1
 --- UNKNOWN -> Integer
@@ -443,8 +443,8 @@ JIS EUC SJIS UTF8 UTF16 �ʳ���ɽ���ޤ���
 --- UNKNOWN -> nil
 #@end
 
-���Ϥˤ����Ƥϡ֥��󥳡��ǥ��󥰤�Ƚ��Ǥ��ʤ��ä���
-���Ϥˤ����Ƥ� AUTO ��Ʊ�ͤˡּ�ư���Сפ�ɽ���ޤ���
+出力においては「エンコーディングを判定できなかった」
+入力においては AUTO と同様に「自動検出」を表します。
 
 #@until 1.9.1
 --- NOCONV -> Integer
@@ -452,8 +452,8 @@ JIS EUC SJIS UTF8 UTF16 �ʳ���ɽ���ޤ���
 --- NOCONV -> nil
 #@end
 
-�Ѵ�����ʤ����Ȥ�ɽ���ޤ���
-���ϥ��󥳡��ǥ��󥰤λ���ˤΤ��Ѥ��ޤ���
+変換されないことを表します。
+出力エンコーディングの指定にのみ用います。
 
 #@since 1.8.2
 #@until 1.9.1
@@ -462,7 +462,7 @@ JIS EUC SJIS UTF8 UTF16 �ʳ���ɽ���ޤ���
 --- ASCII -> Encoding
 #@end
 
-ASCII ��ɽ���ޤ���
+ASCII を表します。
 #@end
 
 #@since 1.8.2
@@ -472,7 +472,7 @@ ASCII ��ɽ���ޤ���
 --- UTF8 -> Encoding
 #@end
 
-UTF8 ��ɽ���ޤ���
+UTF8 を表します。
 #@end
 
 #@since 1.8.2
@@ -482,7 +482,7 @@ UTF8 ��ɽ���ޤ���
 --- UTF16 -> Encoding
 #@end
 
-UTF16 ��ɽ���ޤ���
+UTF16 を表します。
 #@end
 
 #@since 1.8.2
@@ -492,36 +492,36 @@ UTF16 ��ɽ���ޤ���
 --- UTF32 -> Encoding
 #@end
 
-UTF32 ��ɽ���ޤ���
+UTF32 を表します。
 #@end
 
 #@since 1.8.2
 #@until 1.9.1
 --- RegexpShiftjis -> Regexp
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 
 --- RegexpEucjp -> Regexp
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 
 --- RegexpUtf8 -> Regexp
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 #@end
 #@end
 
 #@since 1.8.5
 #@until 1.9.1
 --- REVISION -> String
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 #@end
 #@end
 
 #@since 1.8.2
 #@until 1.8.5
 --- Iconv_EUC_JP -> Regexp
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 --- Iconv_Shift_JIS -> Regexp
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 --- Iconv_UTF8 -> Regexp
-��������ϻȤ��٤��ǤϤ���ޤ���
+この定数は使うべきではありません。
 #@end
 #@end

@@ -1,16 +1,16 @@
 require readline
 
-[[c:IRB::Context]] �˥ҥ��ȥ���ɤ߹��ߡ���¸�ε�ǽ���󶡤��륵�֥饤��
-���Ǥ���
+[[c:IRB::Context]] にヒストリの読み込み、保存の機能を提供するサブライブ
+ラリです。
 
-conf.save_history �� IRB.conf[:SAVE_HISTORY] �˥ҥ��ȥ����¸���������
-������ǻ��ѤǤ��ޤ���
+conf.save_history か IRB.conf[:SAVE_HISTORY] にヒストリの保存件数を設定
+する事で使用できます。
 
-��������[[lib:readline]] �����ѤǤ��ʤ��Ķ��Ǥϥҥ��ȥ���ɤ߹��ߡ���¸
-�ϹԤ��ޤ���
+ただし、[[lib:readline]] が利用できない環境ではヒストリの読み込み、保存
+は行えません。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ�
-��ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
 
 = reopen IRB::Context
 
@@ -18,51 +18,51 @@ conf.save_history �� IRB.conf[:SAVE_HISTORY] �˥ҥ��ȥ����¸���������
 
 --- init_save_history -> ()
 
-���Ȥλ��� [[c:IRB::InputMethod]] ���֥������Ȥ� irb �Υҥ��ȥ�򰷤���
-�褦�ˤ��ޤ���
+自身の持つ [[c:IRB::InputMethod]] オブジェクトが irb のヒストリを扱える
+ようにします。
 
 @see [[m:IRB::HistorySavingAbility.extended]]
 
 --- save_history -> Integer | nil
 
-����κ�����¸����� [[c:Integer]] �� nil ���֤��ޤ���
+履歴の最大保存件数を [[c:Integer]] か nil で返します。
 
-@return ����κ�����¸����� [[c:Integer]] �� nil ���֤��ޤ���0 �ʲ���
-        nil ���֤��������ɲä���¸�ϹԤ��ޤ���
+@return 履歴の最大保存件数を [[c:Integer]] か nil で返します。0 以下や
+        nil を返した場合は追加の保存は行いません。
 
 @see [[ref:lib:irb#history]]
 
 --- save_history=(val)
 
-����κ�����¸����� val �����ꤷ�ޤ���
+履歴の最大保存件数を val に設定します。
 
-.irbrc �ե�������� IRB.conf[:SAVE_HISTORY] �����ꤹ����Ǥ�Ʊ�ͤλ���
-�Ԥ��ޤ���
+.irbrc ファイル中で IRB.conf[:SAVE_HISTORY] を設定する事でも同様の事が
+行えます。
 
-@param val ����κ�����¸����� [[c:Integer]] �ǻ��ꤷ�ޤ���0 �ʲ���
-           nil ���֤��������ɲä���¸�ϹԤ��ޤ��󡣸��ߤη����꾮��
-           ���ͤ����ꤷ�����ϡ��ǿ������򤫤���ꤷ�����ʬ�Τߤ���¸
-           ����ޤ���
+@param val 履歴の最大保存件数を [[c:Integer]] で指定します。0 以下や
+           nil を返した場合は追加の保存は行いません。現在の件数より小さ
+           い値を設定した場合は、最新の履歴から指定した件数分のみが保存
+           されます。
 
 @see [[ref:lib:irb#history]]
 
 --- history_file -> String | nil
 
-����ե�����Υѥ����֤��ޤ���
+履歴ファイルのパスを返します。
 
-@return ����ե�����Υѥ��� [[c:String]] �� nil ���֤��ޤ���nil ���֤�
-        �����ϡ�~/.irb_history ��������¸����ޤ���
+@return 履歴ファイルのパスを [[c:String]] か nil で返します。nil を返し
+        た場合は、~/.irb_history に履歴が保存されます。
 
 @see [[ref:lib:irb#history]]
 
 --- history_file=(hist)
 
-����ե�����Υѥ��� val �����ꤷ�ޤ���
+履歴ファイルのパスを val に設定します。
 
-.irbrc �ե�������� IRB.conf[:HISTORY_FILE] �����ꤹ����Ǥ�Ʊ�ͤλ���
-�Ԥ��ޤ���
+.irbrc ファイル中で IRB.conf[:HISTORY_FILE] を設定する事でも同様の事が
+行えます。
 
-@param hist ����ե�����Υѥ���ʸ����ǻ��ꤷ�ޤ���
+@param hist 履歴ファイルのパスを文字列で指定します。
 
 @see [[ref:lib:irb#history]]
 
@@ -70,29 +70,29 @@ conf.save_history �� IRB.conf[:SAVE_HISTORY] �˥ҥ��ȥ����¸���������
 
 include Readline
 
-[[c:IRB::HistorySavingAbility]] �� extend �������֥������Ȥ� irb �Υҥ�
-�ȥ���ɤ߹��ߡ���¸�ε�ǽ���󶡤���⥸�塼��Ǥ���
+[[c:IRB::HistorySavingAbility]] を extend したオブジェクトに irb のヒス
+トリの読み込み、保存の機能を提供するモジュールです。
 
 == Class Methods
 
 --- extended(obj) -> object
 
-obj �� irb �Υҥ��ȥ���ɤ߹��ߡ���¸�ε�ǽ���󶡤��ޤ���
+obj に irb のヒストリの読み込み、保存の機能を提供します。
 
-obj ���֤��ޤ���
+obj を返します。
 
-@param obj [[c:IRB::HistorySavingAbility]] �� extend �������֥������ȤǤ���
+@param obj [[c:IRB::HistorySavingAbility]] を extend したオブジェクトです。
 
 == Instance Methods
 
 --- load_history -> ()
 
-irb �Υҥ��ȥ������ե����뤫���ɤ߹��ߤޤ���
+irb のヒストリを履歴ファイルから読み込みます。
 
 @see [[ref:lib:irb#history]]
 
 --- save_history -> ()
 
-irb �Υҥ��ȥ������ե��������¸���ޤ���
+irb のヒストリを履歴ファイルに保存します。
 
 @see [[ref:lib:irb#history]]

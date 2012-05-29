@@ -3,15 +3,15 @@
 =begin
 = TkVirtualEvent
 
-== •π°º•—°º•Ø•È•π:
+== „Çπ„Éº„Éë„Éº„ÇØ„É©„Çπ:
 
 ((<TkObject>))
 
-== extend§∑§∆§§§Î•‚•∏•Â°º•Î:
+== extend„Åó„Å¶„ÅÑ„Çã„É¢„Ç∏„É•„Éº„É´:
 
 ((<Tk>))
 
-== •Ø•È•π•·•Ω•√•…:
+== „ÇØ„É©„Çπ„É°„ÇΩ„ÉÉ„Éâ:
 
 --- TkVirtualEvent.getobj(event)
 #@todo
@@ -22,7 +22,7 @@
 --- TkVirtualEvent.new(*sequences)
 #@todo
 
-== •·•Ω•√•…:
+== „É°„ÇΩ„ÉÉ„Éâ:
 
 --- TkVirtualEvent#add(*sequences)
 #@todo

@@ -1,36 +1,36 @@
 #@until 1.9.1
-[[c:String]]���饹�Υ᥽�åɤ��ɲá����������
-���ܸ��ռ�����ʸ����������󶡤��ޤ���
+[[c:String]]クラスのメソッドを追加、再定義し、
+日本語を意識した文字列処理を提供します。
 
-�оݤ�ʸ����Υ��󥳡��ǥ��󥰤� [[m:$KCODE]] ��
-�����ΤȤ��ƽ������ޤ����Ĥޤꥹ����ץ����
-[[m:$KCODE]] ���ѹ�����Ȱʸ�᥽�åɤ�ư��Ѥ��ޤ���
+対象の文字列のエンコーディングが [[m:$KCODE]] で
+あるものとして処理します。つまりスクリプト中で
+[[m:$KCODE]] を変更すると以後メソッドの動作が変わります。
 
-[[m:String#chop]]��[[m:String#delete]] �Ȥ��ä���¸��
-�᥽�åɤ��֤������뤿�ᡢ�̤Υ饤�֥���
-ư��Ѳ����Ƥ��ޤ���ǽ��������ޤ���
-���Τ��ᤳ�Υ饤�֥���ȤäƤ褤�Τ�
-���Ѥ��Ƥ���饤�֥���ޤ�
-ư��Ƥ��륽�������٤Ƥ��İ���ǽ�ʾ��ΤߤǤ���
+[[m:String#chop]]、[[m:String#delete]] といった既存の
+メソッドを置き換えるため、別のライブラリの
+動作が変化してしまう可能性があります。
+そのためこのライブラリを使ってよいのは
+利用しているライブラリを含め
+動作しているソースすべてが把握可能な場合のみです。
 
-�ޥ���Х���ʸ����μ谷�˴ؤ��������
-���Υ饤�֥��ǲ�褷�褦�Ȥ���ΤϤ����ᤷ�ޤ���
-Ruby ��ʸ����Υ��󥳡��ǥ��󥰤μ�갷���˴ؤ��Ƥϡ�
-[[d:spec/rubycmd]] �� -K ���ץ����ν�䡢 [[m:$KCODE]] ��
-���Ƥ���������
+マルチバイト文字列の取扱に関する問題を
+このライブラリで解決しようとするのはお勧めしません。
+Ruby の文字列のエンコーディングの取り扱いに関しては、
+[[d:spec/rubycmd]] の -K オプションの所や、 [[m:$KCODE]] を
+見てください。
 
-=== ������ 
+=== 使用例 
 
   #!/usr/bin/ruby -Ke
   # -*- coding: euc-jp -*-
-  # ���������ɤ�EUC-JP�ˡ�
-  # Windows �� Shift JIS �ʤ� -Ks, coding: cp932 �ˤ���
+  # 漢字コードをEUC-JPに。
+  # Windows で Shift JIS なら -Ks, coding: cp932 にする
   
-  # jcode �饤�֥����ɤ߹��ߡ��᥽�åɤ��ɲá��������Ԥ�
+  # jcode ライブラリを読み込み、メソッドの追加、再定義を行う
   require 'jcode' 
   
-  # ��������줿 String#tr ��ƤӤ���
-  puts 'abcdef'.tr('a-z', '��-��')
+  # 再定義された String#tr を呼びだす
+  puts 'abcdef'.tr('a-z', 'Ａ-Ｚ')
 
 = reopen String
 
@@ -39,10 +39,10 @@ Ruby ��ʸ����Υ��󥳡��ǥ��󥰤μ�갷���˴ؤ��Ƥϡ�
 #@until 1.8.7
 --- each_char -> [String]
 --- each_char {|char| ... } -> String
-ʸ������γ�ʸ�����Ф��ƥ֥��å���ƤӤ����ޤ���
-�֥��å�����ꤻ���˸ƤӽФ��줿���ˤϡ���ʸ����������֤��ޤ���
+文字列中の各文字に対してブロックを呼びだします。
+ブロックを指定せずに呼び出された時には、各文字の配列を返します。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
@@ -50,87 +50,87 @@ Ruby ��ʸ����Υ��󥳡��ǥ��󥰤μ�갷���˴ؤ��Ƥϡ�
 
   require 'jcode'
 
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   zstr.each_char do |x|
     print "+#{x}+"
-  end                     # => +��++��++��++��++��++��+
+  end                     # => +Ａ++Ｂ++Ｃ++Ｄ++Ｅ++Ｆ+
 #@end
 
 #@# --- end_regexp
 #@# 
-#@# �Ǹ��ʸ����¿�Х���ʸ���Ǥ���ʸ����˥ޥå���������ɽ�����֤��ޤ���
-#@# ��������줿 [[m:String#succ]] ������Ū�˻Ȥ��ޤ���
+#@# 最後の文字が多バイト文字である文字列にマッチする正規表現を返します。
+#@# 再定義された [[m:String#succ]] で内部的に使われます。
 
 --- jcount(str) -> Integer
-[[m:String#count]] �����ܸ��б��ǤǤ���
+[[m:String#count]] の日本語対応版です。
 
-self ��ʸ���� str �ǻ��ꤷ��ʸ���������Ĵޤޤ�Ƥ��뤫������ޤ�
+self に文字列 str で指定した文字がいくつ含まれているかを数えます
 
-������ [[m:String#count]] �Ȥϰۤʤ����ѤǤ���ѥ������
-"��-��" �Τ褦�ʡ�^��(����)��ޤޤʤ��ѥ�����ΤߤǤ��ꡢ
-�ޤ�ʣ���Υѥ�������뤳�ȤϤǤ��ޤ���
+ただし [[m:String#count]] とは異なり利用できるパターンは
+"Ａ-Ｄ" のような「^」(否定)を含まないパターンのみであり、
+また複数のパターンを取ることはできません。
 
-@param str �и�����������ʸ���Υѥ������ʸ�����Ϳ���ޤ���
+@param str 出現回数を数える文字のパターンを文字列で与えます。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
   $KCODE = 'e'
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   hogehoge = 'hogehoge'
 
-  p zstr.count('��')     # => 7   ������������ʤ�
-  p zstr.jcount('����')  # => 8 
+  p zstr.count('Ａ')     # => 7   これは正しくない
+  p zstr.jcount('ＡＢ')  # => 8 
   p hogehoge.count('g')  # => 2
 
   require 'jcode'
-  p zstr.jcount('��')    # => 1   �����������
+  p zstr.jcount('Ａ')    # => 1   これは正しい
   p hogehoge.jcount('g') # => 2
 
-  p zstr.jcount('����')  # => 2 
+  p zstr.jcount('ＡＢ')  # => 2 
 
 
 --- jlength -> Integer
 --- jsize -> Integer
 
-[[m:String#length]] �����ܸ��б��ǤǤ���
+[[m:String#length]] の日本語対応版です。
 
-ʸ�������������֤��ޤ���
+文字数を整数で返します。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
   $KCODE = 'EUC'
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   hogehoge = 'hogehoge'
   
-  p zstr.size       # => 12   ������������ʤ�
+  p zstr.size       # => 12   これは正しくない
   p hogehoge.size   # => 8
 
   require 'jcode'
-  p zstr.jsize      # => 6    �����������
+  p zstr.jsize      # => 6    これは正しい
   p hogehoge.jsize  # => 8
 
 --- mbchar? -> Integer|nil
 
-self ��¿�Х���ʸ�����ǽ�˸������֤��֤��ޤ���
-¿�Х���ʸ�����ޤޤ�Ƥ��ʤ���� nil ���֤��ޤ���
+self に多バイト文字が最初に現れる位置を返します。
+多バイト文字が含まれていなければ nil を返します。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
   $KCODE = 'EUC'
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   hoge = 'hogehoge'
 
   require 'jcode'
   p zstr.mbchar?   # => 0
   p hoge.mbchar?   # => nil
 
-#@# �ʲ���������᥽�åɤ�����Ū���Ѥ���졢�桼�����Ȥ��٤��Ǥʤ���  
+#@# 以下の定数、メソッドは内部的に用いられ、ユーザが使うべきでない。  
 #@# == Constant
 #@# --- PATTERN_SJIS
 #@# --- PATTERN_EUC
@@ -155,10 +155,10 @@ self ��¿�Х���ʸ�����ǽ�˸������֤��֤��ޤ���
 #@since 1.8.7
 --- each_char -> [String]
 --- each_char {|char| ... } -> String
-ʸ������γ�ʸ�����Ф��ƥ֥��å���ƤӤ����ޤ���
-�֥��å�����ꤻ���˸ƤӽФ��줿���ˤϡ���ʸ����������֤��ޤ���
+文字列中の各文字に対してブロックを呼びだします。
+ブロックを指定せずに呼び出された時には、各文字の配列を返します。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
@@ -166,201 +166,201 @@ self ��¿�Х���ʸ�����ǽ�˸������֤��֤��ޤ���
 
   require 'jcode'
 
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   zstr.each_char do |x|
     print "+#{x}+"
-  end                     # => +��++��++��++��++��++��+
+  end                     # => +Ａ++Ｂ++Ｃ++Ｄ++Ｅ++Ｆ+
 #@end
 
 --- chop -> String
 
-[[m:String#chop]] �����ܸ��б��ǤǤ���
+[[m:String#chop]] の日本語対応版です。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
   $KCODE = 'e'
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   hoge = 'hogehoge'
 
-  p zstr.chop       # => "���£ãģ�\243"
+  p zstr.chop       # => "ＡＢＣＤＥ\243"
   p hoge.chop       # => "hogehog"
 
   require 'jcode'
-  p zstr.chop       # => "���£ãģ�"
+  p zstr.chop       # => "ＡＢＣＤＥ"
   p hoge.chop       # => "hogehog"
 
 --- chop! -> self | nil
 
-[[m:String#chop!]] �����ܸ��б��ǤǤ���
+[[m:String#chop!]] の日本語対応版です。
 
 --- delete(str) -> String
 
-[[m:String#delete]] �����ܸ��б��ǤǤ���
-���ꤷ���ѥ������ʸ�����������ޤ���
+[[m:String#delete]] の日本語対応版です。
+指定したパターンの文字列を取り除きます。
 
-���������Υ᥽�åɤ��֤���������ʪ�Ȥϰۤʤ�
-ʣ���ΰ�������ޤ���
+ただしこのメソッドは置き換え前の物とは異なり
+複数の引数を取れません。
 
-@param str ������ʸ���Υѥ�����
+@param str 取り除く文字のパターン。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
   $KCODE = 'EUC'
-  zstr = '���£ãģţ�'
+  zstr = 'ＡＢＣＤＥＦ'
   hoge = 'hogehoge'
 
-  p zstr.delete("��")  # => "����\306"
+  p zstr.delete("Ａ")  # => "唾津\306"
   p hoge.delete("e")   # => "hoghog"
 
   require 'jcode'
-  p zstr.delete("��")  # => "�£ãģţ�"
+  p zstr.delete("Ａ")  # => "ＢＣＤＥＦ"
   p hoge.delete("e")   # => "hoghog"
 
 --- delete!(str) -> self|nil
 
-[[m:String#delete!]] �����ܸ��б��ǤǤ���
-���ꤷ���ѥ������ʸ������˲�Ū�˼������ޤ���
+[[m:String#delete!]] の日本語対応版です。
+指定したパターンの文字列を破壊的に取り除きます。
 
-���������Υ᥽�åɤ��֤���������ʪ�Ȥϰۤʤ�
-ʣ���ΰ�������ޤ���
+ただしこのメソッドは置き換え前の物とは異なり
+複数の引数を取れません。
 
-@param str ������ʸ���Υѥ�����
+@param str 取り除く文字のパターン。
 
 --- squeeze(str = nil) -> String
 
-[[m:String#squeeze]] �����ܸ��б��ǤǤ���
-���ꤷ��ʸ����1ʸ���ˤޤȤ᤿ʸ������֤��ޤ���
+[[m:String#squeeze]] の日本語対応版です。
+指定した文字を1文字にまとめた文字列を返します。
 
-���������Υ᥽�åɤ��֤���������ʪ�Ȥϰۤʤꡢ
-2�İʾ�ΰ������뤳�ȤϤǤ��ޤ���
+ただしこのメソッドは置き換え前の物とは異なり、
+2つ以上の引数を取ることはできません。
 
-@param str 1ʸ���ˤޤȤ��ʸ���Υѥ�����
+@param str 1文字にまとめる文字のパターン。
 
-�㡧
+例：
 
   #!/usr/bin/env ruby
 
   $KCODE = 'EUC'
-  zstr = '�����££ã�'
+  zstr = 'ＡＡＢＢＣＣ'
   hoge = 'hhoge'
 
-  p zstr.squeeze   # => "�����££ã�"
+  p zstr.squeeze   # => "ＡＡＢＢＣＣ"
   p hoge.squeeze   # => "hoge"
 
   require 'jcode'
-  p zstr.squeeze   # => "���£�"
+  p zstr.squeeze   # => "ＡＢＣ"
   p hoge.squeeze   # => "hoge"
 
 --- squeeze!(str = nil) -> self | nil
 
-[[m:String#squeeze!]] �����ܸ��б��ǤǤ���
-���ꤷ��ʸ����1ʸ���ˤޤȤ᤿ʸ����˼��Ȥ��֤������ޤ���
+[[m:String#squeeze!]] の日本語対応版です。
+指定した文字を1文字にまとめた文字列に自身を置き換えます。
 
-���������Υ᥽�åɤ��֤���������ʪ�Ȥϰۤʤꡢ
-2�İʾ�ΰ������뤳�ȤϤǤ��ޤ���
+ただしこのメソッドは置き換え前の物とは異なり、
+2つ以上の引数を取ることはできません。
 
-@param str 1ʸ���ˤޤȤ��ʸ���Υѥ�����
+@param str 1文字にまとめる文字のパターン。
     
 --- succ -> String
 
-[[m:String#succ]] �����ܸ��б��ǤǤ���
-�ּ��Ρ�ʸ������֤��ޤ���
+[[m:String#succ]] の日本語対応版です。
+「次の」文字列を返します。
 
-�ʲ��Τ褦�ʼ���ʸ������֤��ޤ���
+以下のような次の文字列を返します。
 
-  "��a��".succ => "��a��"
-  "r��".succ => "r��"
-  "_�ȶ�".succ => "_�ȶ�"
+  "あaあ".succ => "あaぃ"
+  "rｂ".succ => "rｃ"
+  "_紅玉".succ => "_紅桐"
 
-����� [[m:String#succ]] �ϡ�
-¿�Х���ʸ����Ⱦ��ʸ�������ߤ��Ƥ���ʸ�����
-�տ��̤�˽������뤳�Ȥ��Ǥ��ޤ���
-�㤨�о嵭�Υ����ɤϡ����줾��
-"��b��"��"s��"��"_�ɶ�"(�Ǹ�Τ� SJIS �Ķ��ξ�����ǡ�
-EUC-JP �ξ��Ϥ����Ϥʤ�ޤ���)���֤��ޤ���
+従来の [[m:String#succ]] は、
+多バイト文字と半角文字が混在している文字列を
+意図通りに処理することができません。
+例えば上記のコードは、それぞれ
+"あbあ"、"sｂ"、"_紘玉"(最後のは SJIS 環境の場合の例で、
+EUC-JP の場合はこうはなりません)を返します。
 
-�ʤ���"99" �μ��� "100" �ˤʤ�Τ��Ф���
-"����" �μ��� "������" �ˤϤʤ�ʤ����Ȥ����ա�
-"����" �� "����" ��Ʊ�ͤǤ����Ĥޤ�¿�Х���ʸ���Ǥ�
-����� [[m:String#succ]] �Τ褦�ʥ���ե��٥åȤ������
-�ؤ��뷫��夲��Ԥ�ʤ��Ȥ������ȤǤ���
-#@# CozoH: ���Τ����ꡢ��ä����Τ�ʬ����䤹���������ߤ����Ǥ����伫�ȡ��褯ʬ���äƤ��ʤ��Τǡ�
+なお、"99" の次は "100" になるのに対し、
+"９９" の次は "１００" にはならないことに注意。
+"Ａｚ" や "ｚｚ" も同様です。つまり多バイト文字では
+従来の [[m:String#succ]] のようなアルファベットや数字に
+関する繰り上げを行わないということです。
+#@# CozoH: このあたり、もっと正確で分かりやすい説明が欲しいです。私自身、よく分かっていないので。
 
 --- succ! -> self | nil
 
-[[m:String#succ!]] �����ܸ��б��ǤǤ���
-���Ȥ�ּ��Ρ�ʸ������֤������ޤ���
+[[m:String#succ!]] の日本語対応版です。
+自身を「次の」文字列に置き換えます。
 
 --- tr(search, replace) -> String
 
-[[m:String#tr]] �����ܸ��б��ǤǤ���
-search �˴ޤޤ��ʸ���򸡺����� replace ���б�����ʸ����
-�֤�������ʸ������֤��ޤ���
+[[m:String#tr]] の日本語対応版です。
+search に含まれる文字を検索し、 replace の対応する文字に
+置き換えた文字列を返します。
 
-@param search    �֤�������ʸ���Υѥ�����
-@param replace    pattern �ǻ��ꤷ��ʸ�����֤�������ʸ��
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
-��:
+例:
 
   #!/usr/bin/env ruby
 
   $KCODE = 'EUC'
-  zstr = '�����££ã�'
+  zstr = 'ＡＡＢＢＣＣ'
   hoge = 'hhoge'
 
-  p zstr.tr('��-��','A-Z')    # => "A����������\303"
-  p hoge.tr('a-z','��-��')    # => "����\332"
+  p zstr.tr('Ａ-Ｚ','A-Z')    # => "A疏疏汰汰蛋\303"
+  p hoge.tr('a-z','Ａ-Ｚ')    # => "旙旙\332"
 
   require 'jcode'
-  p zstr.tr('��-��','A-Z')    # => "AABBCC"
-  p hoge.tr('a-z','��-��')    # => "�ȣȣϣǣ�"
+  p zstr.tr('Ａ-Ｚ','A-Z')    # => "AABBCC"
+  p hoge.tr('a-z','Ａ-Ｚ')    # => "ＨＨＯＧＥ"
 
 @see [[m:String#tr_s]]
 
 --- tr!(search, replace) -> self | nil
 
-[[m:String#tr!]] �����ܸ��б��ǤǤ���
-search �˴ޤޤ��ʸ���򸡺����� replace ���б�����ʸ����
-�˲�Ū���֤������ޤ���
+[[m:String#tr!]] の日本語対応版です。
+search に含まれる文字を検索し、 replace の対応する文字に
+破壊的に置き換えます。
 
-@param search    �֤�������ʸ���Υѥ�����
-@param replace    pattern �ǻ��ꤷ��ʸ�����֤�������ʸ��
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 --- tr_s(search, replace) -> String
 
-[[m:String#tr_s]] �����ܸ��б��ǤǤ���
-ʸ�������� search ʸ����˴ޤޤ��ʸ����¸�ߤ����顢
-replace ʸ������б�����ʸ�����֤�������
-�ִ�������ʬ���Ʊ���ʸ�����¤Ӥ����ä��餽��� 
-1 ʸ���˰��̤���ʸ������֤��ޤ���
+[[m:String#tr_s]] の日本語対応版です。
+文字列の中に search 文字列に含まれる文字が存在したら、
+replace 文字列の対応する文字に置き換え、
+置換した部分内に同一の文字の並びがあったらそれを 
+1 文字に圧縮した文字列を返します。
 
-@param search    �֤�������ʸ���Υѥ�����
-@param replace    pattern �ǻ��ꤷ��ʸ�����֤�������ʸ��
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
-��:
+例:
   $KCODE = 'EUC'
 
   p "foo".tr_s("o", "f")        # => "ff"
-  p "����".tr_s("��", "��")   # => TODO: fill result
+  p "ｆｏｏ".tr_s("ｏ", "ｆ")   # => TODO: fill result
 
   require 'jcode'
   p "foo".tr_s("o", "f")        # => "ff"
-  p "����".tr_s("��", "��")   # => "���"
+  p "ｆｏｏ".tr_s("ｏ", "ｆ")   # => "ｆｆ"
 
 --- tr_s!(search, replace) -> self | nil
 
-[[m:String#tr_s!]] �����ܸ��б��ǤǤ���
-ʸ�������� search ʸ����˴ޤޤ��ʸ����¸�ߤ����顢
-replace ʸ������б�����ʸ�����֤������ޤ�������ˡ�
-�ִ�������ʬ���Ʊ���ʸ�����¤Ӥ����ä��餽��� 
-1 ʸ���˰��̤��ޤ���
+[[m:String#tr_s!]] の日本語対応版です。
+文字列の中に search 文字列に含まれる文字が存在したら、
+replace 文字列の対応する文字に置き換えます。さらに、
+置換した部分内に同一の文字の並びがあったらそれを 
+1 文字に圧縮します。
 
-@param search    �֤�������ʸ���Υѥ�����
-@param replace    pattern �ǻ��ꤷ��ʸ�����֤�������ʸ��
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 #@end
 

@@ -2,161 +2,161 @@ require ripper/filter
 require ripper/lexer
 require ripper/sexp
 
-Ruby �ץ���������Ϥ��뤿��Υ饤�֥��Ǥ���
+Ruby プログラムを解析するためのライブラリです。
 
 = class Ripper
 
-Ruby �ץ������Υѡ����Ǥ���
+Ruby プログラムのパーサです。
 
-�ʲ��򻲾Ȥ��Ʋ�������
+以下を参照して下さい。
 
   * [[url:http://i.loveruby.net/w/RipperTutorial.html]]
   * [[url:http://i.loveruby.net/w/RipperTutorial.TokenStreamInterface.html]]
 
-Ruby �ץ�������ƥ����ȤȤ��ư���������硢
-�㤨�Х��������դ���Ԥ��������ϡ�
-[[c:Ripper::Filter]] ���饹��Ȥ��Ȥ褤�Ǥ��礦��
+Ruby プログラムをテキストとして扱いたい場合、
+例えばソース色付けを行いたい場合は、
+[[c:Ripper::Filter]] クラスを使うとよいでしょう。
 
 == Class Methods
 
 --- new(src, filename = "(ripper)", lineno = 1) -> Ripper
 
-Ripper ���֥������Ȥ�������ޤ���
+Ripper オブジェクトを作成します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "(ripper)" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "(ripper)" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-src �β��Ϥ�Ԥ��ˤϹ��� [[m:Ripper#parse]] �ʤɤθƤӽФ���ɬ�פǤ���
+src の解析を行うには更に [[m:Ripper#parse]] などの呼び出しが必要です。
 
 @see [[m:Ripper.parse]], [[m:Ripper#parse]]
 
 --- parse(src, filename = '(ripper)', lineno = 1) -> nil
 
-���ꤵ�줿ʸ�������Ϥ��ޤ������ nil ���֤��ޤ���
+指定された文字列を解析します。常に nil を返します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "(ripper)" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "(ripper)" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
 @see [[m:Ripper#parse]]
 
 --- yydebug -> bool
 
-yydebug�ι�ʸ���ϴ�����׵�ǽ��ͭ����̵�������֤��ޤ���
+yydebugの構文解析器の追跡機能が有効か無効かを返します。
 
 --- yydebug=(flag)
 
-yydebug�ι�ʸ���ϴ�����׵�ǽ��ͭ����̵��������ꤷ�ޤ���
+yydebugの構文解析器の追跡機能が有効か無効かを指定します。
 
-@param flag true �� false ����ꤷ�ޤ���
+@param flag true か false を指定します。
 
 == Instance Methods
 
 --- parse -> nil
 
-���Ȥλ��� Ruby �ץ���������Ϥ��ޤ������ nil ���֤��ޤ���
+自身の持つ Ruby プログラムを解析します。常に nil を返します。
 
-���֥��饹�ǥ����Х饤�ɤ��ƻ��Ѥ��ޤ���Ruby �ץ������β��ϤϹԤ��ޤ�
-�������ΤޤޤǤϲ��Ϸ�̤����ѤǤ��ޤ��󡣥��֥��饹�ǥ��٥�ȥϥ�ɥ�
-��������ܥ᥽�åɤ�����ͤ��ɲäʤɤ��б�����ɬ�פ�����ޤ���
+サブクラスでオーバライドして使用します。Ruby プログラムの解析は行います
+が、そのままでは解析結果は利用できません。サブクラスでイベントハンドラ
+の定義や本メソッドの戻り値の追加などで対応する必要があります。
 
 @see [[m:Ripper.parse]]
 
 --- column -> Integer | nil
 
-���ߤΥȡ�����η��ֹ�� 0 ����Ϥޤ���ͤ��֤��ޤ���
+現在のトークンの桁番号を 0 から始まる数値で返します。
 
-���Υ᥽�åɤϥ��٥�ȥϥ�ɥ����ǤΤ߰�̣�Τ����ͤ��֤��ޤ������٥�
-�ȥϥ�ɥ����� self.column ��¹Ԥ��Ƥ���������
+このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベン
+トハンドラの中で self.column を実行してください。
 
 --- filename -> String
 
-���Ȥλ��� Ruby �ץ������Υե�����̾��ʸ������֤��ޤ���
+自身の持つ Ruby プログラムのファイル名を文字列で返します。
 
 --- lineno -> Integer | nil
 
-���ߤΥȡ�����ι��ֹ�� 1 ����Ϥޤ���ͤ��֤��ޤ���
+現在のトークンの行番号を 1 から始まる数値で返します。
 
-���Υ᥽�åɤϥ��٥�ȥϥ�ɥ����ǤΤ߰�̣�Τ����ͤ��֤��ޤ������٥�
-�ȥϥ�ɥ����� self.lineno ��¹Ԥ��Ƥ���������
+このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベン
+トハンドラの中で self.lineno を実行してください。
 
 --- end_seen? -> bool
 
-����ޤǤ˲��Ϥ��� Ruby �ץ���������� __END__ ���ޤޤ�Ƥ������ɤ���
-���֤��ޤ���
+これまでに解析した Ruby プログラムの中に __END__ が含まれていたかどうか
+を返します。
 
 --- encoding -> Encoding
 
-���Ȥλ��� Ruby �ץ�������ʸ�����󥳡��ǥ��󥰤��֤��ޤ���
+自身の持つ Ruby プログラムの文字エンコーディングを返します。
 
-Ruby �ץ������β������� [[m:Encoding::US_ASCII]] ���֤��ޤ���
+Ruby プログラムの解析前は [[m:Encoding::US_ASCII]] を返します。
 
 == Private Instance Methods
 
 --- warn(fmt, *args) -> nil
 
-���Ϥ��� Ruby �ץ���������˷ٹ�([[m:$-w]] �� true �λ��������Ϥ����
-�ٹ�)����Ϥ���褦�ʤ�Τ����ä����˼¹Ԥ���ޤ���
+解析した Ruby プログラムの中に警告([[m:$-w]] が true の時だけ出力される
+警告)を出力するようなものがあった場合に実行されます。
 
-@param fmt ���顼��å������Υե����ޥå�ʸ����Ǥ���
+@param fmt エラーメッセージのフォーマット文字列です。
 
-@param args ���顼��å������Υե����ޥåȤ��������Ǥ���
+@param args エラーメッセージのフォーマットされる引数です。
 
-���֥��饹�ǥ����Х饤�ɤ��ƻ��Ѥ��ޤ���
+サブクラスでオーバライドして使用します。
 
-�����Υ��顼��å������� printf �ե����ޥåȤ˽��ä��Ϥ���ޤ���
+引数のエラーメッセージは printf フォーマットに従って渡されます。
 
 --- warning(fmt, *args) -> nil
 
-���Ϥ��� Ruby �ץ���������˽��פʷٹ�([[m:$-w]] �� false �λ�������
-�Ϥ����ٹ�)����Ϥ���褦�ʤ�Τ����ä����˼¹Ԥ���ޤ���
+解析した Ruby プログラムの中に重要な警告([[m:$-w]] が false の時だけ出
+力される警告)を出力するようなものがあった場合に実行されます。
 
-@param fmt ���顼��å������Υե����ޥå�ʸ����Ǥ���
+@param fmt エラーメッセージのフォーマット文字列です。
 
-@param args ���顼��å������Υե����ޥåȤ��������Ǥ���
+@param args エラーメッセージのフォーマットされる引数です。
 
-���֥��饹�ǥ����Х饤�ɤ��ƻ��Ѥ��ޤ���
+サブクラスでオーバライドして使用します。
 
-�����Υ��顼��å������� printf �ե����ޥåȤ˽��ä��Ϥ���ޤ���
+引数のエラーメッセージは printf フォーマットに従って渡されます。
 
 --- compile_error(msg) -> nil
 
-���Ϥ��� Ruby �ץ���������˥���ѥ��륨�顼�����ä����˼¹Ԥ����
-����
+解析した Ruby プログラムの中にコンパイルエラーがあった場合に実行されま
+す。
 
-@param msg ���顼��å�������
+@param msg エラーメッセージ。
 
-���֥��饹�ǥ����Х饤�ɤ��ƻ��Ѥ��ޤ���
+サブクラスでオーバライドして使用します。
 
 == Constants
 
 --- Version -> String
 
-ripper �ΥС�������ʸ������֤��ޤ���
+ripper のバージョンを文字列で返します。
 
 --- EVENTS -> [Symbol]
 
-ripper �ΰ������ƤΥ��٥�� ID (����ܥ�) �Υꥹ�Ȥ��֤��ޤ���
+ripper の扱う全てのイベント ID (シンボル) のリストを返します。
 
 --- PARSER_EVENTS -> [Symbol]
 
-�ѡ������٥�ȤΥ��٥�� ID (����ܥ�) �Υꥹ�Ȥ��֤��ޤ���
+パーサイベントのイベント ID (シンボル) のリストを返します。
 
 --- PARSER_EVENT_TABLE -> {Symbol => Integer}
 
-�ѡ������٥�ȤΥ��٥�� ID (����ܥ�) ���б�����ϥ�ɥ�ΰ����θĿ���
-�ꥹ�Ȥ�ϥå�����֤��ޤ���
+パーサイベントのイベント ID (シンボル) と対応するハンドラの引数の個数の
+リストをハッシュで返します。
 
 --- SCANNER_EVENTS -> [Symbol]
 
-������ʥ��٥�ȤΥ��٥�� ID (����ܥ�) �Υꥹ�Ȥ��֤��ޤ���
+スキャナイベントのイベント ID (シンボル) のリストを返します。
 
 --- SCANNER_EVENT_TABLE -> {Symbol => Integer}
 
-������ʥ��٥�ȤΥ��٥�� ID (����ܥ�) ���б�����ϥ�ɥ�ΰ����θĿ�
-�Υꥹ�Ȥ�ϥå�����֤��ޤ���
+スキャナイベントのイベント ID (シンボル) と対応するハンドラの引数の個数
+のリストをハッシュで返します。

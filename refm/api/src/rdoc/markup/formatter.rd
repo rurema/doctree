@@ -1,13 +1,13 @@
 require rdoc/markup
 
-RDoc �����Υɥ�����Ȥ��������뤿��Υ��֥饤�֥��Ǥ���
+RDoc 形式のドキュメントを整形するためのサブライブラリです。
 
 = class RDoc::Markup::Formatter
 
-RDoc �����Υɥ�����Ȥ��������뤿��δ��ܥ��饹�Ǥ���
+RDoc 形式のドキュメントを整形するための基本クラスです。
 
-�ºݤ˥ɥ�����Ȥ���������ˤϡ�[[c:RDoc::Markup::ToHtml]] �Τ褦�ʡ�
-�Ѿ��������饹�� convert �᥽�åɤ�¹Ԥ��Ƥ���������
+実際にドキュメントを整形するには、[[c:RDoc::Markup::ToHtml]] のような、
+継承したクラスで convert メソッドを実行してください。
 
 == Class Methods
 
@@ -17,39 +17,39 @@ RDoc �����Υɥ�����Ȥ��������뤿��δ��ܥ��饹�Ǥ���
 --- new -> RDoc::Markup::Formatter
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 #@since 1.9.3
-@param markup [[c:RDoc::Markup]] ���֥������Ȥ���ꤷ�ޤ�����ά�������
-              �Ͽ������������ޤ���
+@param markup [[c:RDoc::Markup]] オブジェクトを指定します。省略した場合
+              は新しく作成します。
 #@end
 
 == Instance Methods
 
 --- convert(content) -> ()
 
-content �ǻ��ꤵ�줿ʸ������Ѵ����ޤ���
+content で指定された文字列を変換します。
 
-@param content �Ѵ�����ʸ�������ꤷ�ޤ���
+@param content 変換する文字列を指定します。
 
 #@since 1.9.2
 --- add_tag(name, start, stop) -> ()
 
-name ����Ͽ���줿��§�Ǽ������줿ʸ����� start �� stop �ǰϤ�褦�˻�
-�ꤷ�ޤ���
+name で登録された規則で取得された文字列を start と stop で囲むように指
+定します。
 
-@param name [[c:RDoc::Markup::ToHtml]] �ʤɤΥե����ޥå��˼��̤������
-            ��̾���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name [[c:RDoc::Markup::ToHtml]] などのフォーマッタに識別させる時
+            の名前を [[c:Symbol]] で指定します。
 
-@param start ���Ϥε����ʸ����ǻ��ꤷ�ޤ���
+@param start 開始の記号を文字列で指定します。
 
-@param stop ��λ�ε����ʸ����ǻ��ꤷ�ޤ���
+@param stop 終了の記号を文字列で指定します。
 
-��:
+例:
 
   require 'rdoc/markup/to_html'
 
-  # :STRIKE �Υե����ޥåȤ� <strike> �� </strike> �˻��ꡣ
+  # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
   h = RDoc::Markup::ToHtml.new
   h.add_tag(:STRIKE, "<strike>", "</strike>")
 

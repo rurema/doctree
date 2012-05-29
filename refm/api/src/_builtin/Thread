@@ -1,7 +1,7 @@
 = class Thread < Object
 
-����åɤ�ɽ�����饹�Ǥ�������åɤȤϥ�����֤�ͭ����Ʊ���˼¹Ԥ���������ή��Ǥ���
-Thread ��Ȥ����Ȥ��¹ԥץ�����ߥ󥰤���ǽ�ˤʤ�ޤ���
+スレッドを表すクラスです。スレッドとはメモリ空間を共有して同時に実行される制御の流れです。
+Thread を使うことで並行プログラミングが可能になります。
 
 #@include(thread.inc)
 
@@ -9,15 +9,15 @@ Thread ��Ȥ����Ȥ��¹ԥץ�����ߥ󥰤���ǽ�ˤʤ�ޤ���
 --- abort_on_exception             -> bool
 --- abort_on_exception=(newstate)
 
-���λ��ϡ������줫�Υ���åɤ��㳰�ˤ�äƽ�λ�������ˡ����󥿥ץ꥿
-���Τ����Ǥ����ޤ���false �ξ�硢���륹��åɤǵ����ä��㳰�ϡ�[[m:Thread#join]]
-�ʤɤǸ��Ф���ʤ��¤ꤽ�Υ���åɤ�����ʤˤ�ٹ��Ф����˽�λ�����ޤ���
+真の時は、いずれかのスレッドが例外によって終了した時に、インタプリタ
+全体を中断させます。false の場合、あるスレッドで起こった例外は、[[m:Thread#join]]
+などで検出されない限りそのスレッドだけをなにも警告を出さずに終了させます。
 
-�ǥե���Ȥ� false �Ǥ���
+デフォルトは false です。
 
-[[ref:c:Thread#exception]]�򻲾Ȥ��Ƥ���������
+[[ref:c:Thread#exception]]を参照してください。
 
-@param newstate ����åɼ¹�����㳰ȯ��������硢���󥿥ץ꥿���Τ�λ�����뤫�ɤ����� true �� false �ǻ��ꤷ�ޤ���
+@param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
 #@since 1.9.1
 --- critical             -> nil
@@ -27,40 +27,40 @@ Thread ��Ȥ����Ȥ��¹ԥץ�����ߥ󥰤���ǽ�ˤʤ�ޤ���
 --- critical=(newstate)
 
 #@since 1.9.1
-���ݡ��Ȥ���Ƥ��ޤ��󡣷ٹ����Ϥ������⤻���� nil ���֤��ޤ���
+サポートされていません。警告を出力し、何もせずに nil を返します。
 #@else
-���Ǥ���֡�����åɤ����ؤ���Ԥ��ޤ���
+真である間、スレッドの切替えを行いません。
 
-�����ȥ���åɤ���߾��֤ˤʤä����䡢�����ʥ�˳����ޤ줿���ˤϡ�
-��ưŪ�� false �ˤʤ�ޤ���
-��������[[m:Thread.new]] �ˤ�ꥹ��åɤ������������ˤϡ�critical 
-���ͤ˴ؤ�餺 ���Υ���åɤϼ¹Ԥ���ޤ���
-�ޤ���[[m:Thread.pass]] �ˤ������Ū�����ؤ��뤳�Ȥ�Ǥ��ޤ���
+カレントスレッドが停止状態になった場合や、シグナルに割り込まれた場合には、
+自動的に false になります。
+ただし、[[m:Thread.new]] によりスレッドを生成した場合には、critical 
+の値に関わらず そのスレッドは実行されます。
+また、[[m:Thread.pass]] により明示的に切替えることもできます。
 
-�ǥե���Ȥ� false �Ǥ���
+デフォルトは false です。
 
-����: I/O �� GC����ĥ�饤�֥�꤬�����Ȥ��Υե饰��̵�뤵
-��뤳�Ȥ⤢��ޤ�����¾�����Ԥ��ˤϤ��Υ᥽�åɤ���餺
-[[c:Mutex]] �� [[c:Monitor]] ��Ȥ��٤��Ǥ���
+注意: I/O や GC、拡張ライブラリがからむとこのフラグは無視さ
+れることもあります。排他制御を行うにはこのメソッドに頼らず
+[[c:Mutex]] や [[c:Monitor]] を使うべきです。
 
-@param newstate ����åɤ����ؤ���������ɤ�����true �� false �ǻ��ꤷ�ޤ���
+@param newstate スレッドの切替えを許すかどうかを、true か false で指定します。
 #@end
 
 --- current    -> Thread
 
-���߼¹���Υ���å�(�����ȥ���å�)���֤��ޤ���
+現在実行中のスレッド(カレントスレッド)を返します。
 
   p Thread.current #=> #<Thread:0x4022e6fc run>
 
 --- exit    -> ()
 
-�����ȥ���åɤ��Ф��� [[m:Thread#exit]] ��ƤӤޤ���
+カレントスレッドに対して [[m:Thread#exit]] を呼びます。
 
 --- kill(thread)    -> Thread
 
-���ꤷ������å� thread ���Ф��� [[m:Thread#exit]] ��ƤӤޤ�����λ��������åɤ��֤��ޤ���
+指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。終了したスレッドを返します。
 
-@param thread ��λ������ Thread ���֥������Ȥ���ꤷ�ޤ���
+@param thread 終了したい Thread オブジェクトを指定します。
 
   th = Thread.new do
   end
@@ -70,11 +70,11 @@ Thread ��Ȥ����Ȥ��¹ԥץ�����ߥ󥰤���ǽ�ˤʤ�ޤ���
 --- list    -> [Thread]
 
 #@since 1.8.0
-���Ƥ������Ƥ��륹��åɤ�ޤ���������������֤��ޤ���aborting ���֤Ǥ��륹��å�
-�����Ǥ˴ޤޤ�ޤ���
+全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
+も要素に含まれます。
 #@else
-�����Ƥ��륹��åɤΤ������¹���(run)�ޤ��������(stop)�Υ���å�
-��������֤��ޤ���
+生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
+の配列を返します。
 #@end
 
   Thread.new do
@@ -86,35 +86,35 @@ Thread ��Ȥ����Ȥ��¹ԥץ�����ߥ󥰤���ǽ�ˤʤ�ޤ���
 
 --- main    -> Thread
 
-�ᥤ�󥹥�åɤ��֤��ޤ���
+メインスレッドを返します。
 
   p Thread.main #=> #<Thread:0x4022e6fc run>
 
 --- start(*arg) {|*arg| ... }       -> Thread
 --- fork(*arg) {|*arg| ... }        -> Thread
 
-����åɤ��������ơ��֥��å���ɾ���򳫻Ϥ��ޤ���
-������������åɤ��֤��ޤ���
+スレッドを生成して、ブロックの評価を開始します。
+生成したスレッドを返します。
 
-����Ū�� [[m:Thread.new]] ��Ʊ���Ǥ�����
-new �᥽�åɤȰ㤤 initialize �᥽�åɤ�ƤӤޤ���
+基本的に [[m:Thread.new]] と同じですが、
+new メソッドと違い initialize メソッドを呼びません。
 
-@param arg ���� arg �Ϥ��Τޤޥ֥��å����Ϥ���ޤ�������åɤγ��Ϥ�Ʊ���ˤ���
-           ����åɸ�ͭ�Υ��������ѿ����ͤ��Ϥ�����˻��Ѥ��ޤ���
+@param arg 引数 arg はそのままブロックに渡されます。スレッドの開始と同時にその
+           スレッド固有のローカル変数に値を渡すために使用します。
 
-@raise ThreadError ���ߤΥ���åɤ�°���� [[c:ThreadGroup]] �� freeze ����Ƥ������ȯ�����ޤ����ޤ��֥��å���Ϳ����줺�˸ƤФ줿���ˤ�ȯ�����ޤ���
+@raise ThreadError 現在のスレッドが属する [[c:ThreadGroup]] が freeze されている場合に発生します。またブロックを与えられずに呼ばれた場合にも発生します。
 
 
-����:
+注意:
 
-�㤨�С��ʲ��Υ����ɤϴְ㤤�Ǥ�������åɤμ¹Ԥ����Ϥ��������
-�ѿ� i �����Ѥ���ǽ�������뤫��Ǥ���
+例えば、以下のコードは間違いです。スレッドの実行が開始される前に
+変数 i が書き変わる可能性があるからです。
 
   for i in 1..5
      Thread.start { p i }
   end
 
-�����ϰʲ��Τ褦�˽�ľ���٤��Ǥ���
+上の例は以下のように書き直すべきです。
 
   for i in 1..5
      Thread.start(i) {|t| p t }
@@ -122,24 +122,24 @@ new �᥽�åɤȰ㤤 initialize �᥽�åɤ�ƤӤޤ���
 
 --- new(*arg) {|*arg| ... }         -> Thread
 
-����åɤ��������ơ��֥��å���ɾ���򳫻Ϥ��ޤ���
-������������åɤ��֤��ޤ���
+スレッドを生成して、ブロックの評価を開始します。
+生成したスレッドを返します。
 
-@param arg ���� arg �Ϥ��Τޤޥ֥��å����Ϥ���ޤ�������åɤγ��Ϥ�Ʊ���ˤ���
-           ����åɸ�ͭ�Υ��������ѿ����ͤ��Ϥ�����˻��Ѥ��ޤ���
+@param arg 引数 arg はそのままブロックに渡されます。スレッドの開始と同時にその
+           スレッド固有のローカル変数に値を渡すために使用します。
 
-@raise ThreadError ���ߤΥ���åɤ�°���� [[c:ThreadGroup]] �� freeze ����Ƥ������ȯ�����ޤ����ޤ��֥��å���Ϳ����줺�˸ƤФ줿���ˤ�ȯ�����ޤ���
+@raise ThreadError 現在のスレッドが属する [[c:ThreadGroup]] が freeze されている場合に発生します。またブロックを与えられずに呼ばれた場合にも発生します。
 
-����:
+注意:
 
-�㤨�С��ʲ��Υ����ɤϴְ㤤�Ǥ�������åɤμ¹Ԥ����Ϥ��������
-�ѿ� i �����Ѥ���ǽ�������뤫��Ǥ���
+例えば、以下のコードは間違いです。スレッドの実行が開始される前に
+変数 i が書き変わる可能性があるからです。
 
   for i in 1..5
      Thread.new { p i }
   end
 
-�����ϰʲ��Τ褦�˽�ľ���٤��Ǥ���
+上の例は以下のように書き直すべきです。
 
   for i in 1..5
      Thread.new(i) {|t| p t }
@@ -147,8 +147,8 @@ new �᥽�åɤȰ㤤 initialize �᥽�åɤ�ƤӤޤ���
 
 --- pass    -> nil
 
-¾�Υ���åɤ˼¹Ը������ޤ����¹���Υ���åɤξ��֤��Ѥ����ˡ�
-¾�μ¹Բ�ǽ���֤Υ���åɤ������ܤ��ޤ���
+他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、
+他の実行可能状態のスレッドに制御を移します。
 
  Thread.new do
    (1..3).each{|i|
@@ -173,18 +173,18 @@ new �᥽�åɤȰ㤤 initialize �᥽�åɤ�ƤӤޤ���
 
 --- stop     -> nil
 
-¾�Υ���åɤ��� [[m:Thread#run]] �᥽�åɤǺƵ�ư�����ޤǡ�����
-��ȥ���åɤμ¹Ԥ���ߤ��ޤ���
+他のスレッドから [[m:Thread#run]] メソッドで再起動されるまで、カレ
+ントスレッドの実行を停止します。
 
 #@since 1.9.1
 --- exclusive { ... }  -> object
-#@# 1.8 ������ ../thread.rb �ˤ���ޤ���
-VM �������Х�� Mutex ����å������֥��å���¹Ԥ��ޤ���
+#@# 1.8 以前は ../thread.rb にあります。
+VM グローバルの Mutex をロックし、ブロックを実行します。
 
-���Υ��饹�᥽�åɤε�ư�� 1.8 �����Ȥϰ㤤�ޤ���
-Thread.exclusive �� VM �������Х�� [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] ��
-synchronize ��ƤӽФ��Ƥ�������ǡ�Thread.exclusive ���Ƥ��ʤ�����åɤ�ư���ޤ���
-[[c:Mutex]] �� [[c:Monitor]] �ʤɤ�¾����¾�������ˡ��Ƥ���Ƥ���������
+このクラスメソッドの挙動は 1.8 以前とは違います。
+Thread.exclusive は VM グローバルの [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] の
+synchronize を呼び出しているだけで、Thread.exclusive していないスレッドは動きます。
+[[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
 
 #@end
 
@@ -192,51 +192,51 @@ synchronize ��ƤӽФ��Ƥ�������ǡ�Thread.exclusive ���Ƥ��ʤ�����åɤ�ư���ޤ
 
 --- [](name)    -> object | nil
 
-name ���б���������åɤ˸�ͭ�Υǡ�������Ф��ޤ���
-name ���б����륹��åɸ�ͭ�ǡ������ʤ���� nil ���֤�
-�ޤ���
+name に対応したスレッドに固有のデータを取り出します。
+name に対応するスレッド固有データがなければ nil を返し
+ます。
 
-@param name ����åɸ�ͭ�ǡ����Υ�����ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。
 
 --- []=(name,val)
 
-val �� name ���б����륹��åɸ�ͭ�Υǡ����Ȥ��Ƴ�Ǽ���ޤ���
+val を name に対応するスレッド固有のデータとして格納します。
 
-@param name ����åɸ�ͭ�ǡ����Υ�����ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���ʸ�������ꤷ������ [[m:String#to_sym]] �ˤ�ꥷ��ܥ���Ѵ�����ޤ���
+@param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。文字列を指定した場合は [[m:String#to_sym]] によりシンボルに変換されます。
 
-@param val ����åɸ�ͭ�ǡ�������ꤷ�ޤ���nil ����ꤹ��Ȥ��Υ���åɸ�ͭ�ǡ����Ϻ������ޤ���
+@param val スレッド固有データを指定します。nil を指定するとそのスレッド固有データは削除されます。
 
 --- abort_on_exception               -> bool
 --- abort_on_exception=(newstate)
 
-���ξ�硢���Υ���åɤ��㳰�ˤ�äƽ�λ�������ˡ����󥿥ץ꥿
-���Τ����Ǥ����ޤ���false �ξ�硢���륹��åɤǵ����ä���
-���ϡ�[[m:Thread#join]] �ʤɤǸ��Ф���ʤ��¤ꤽ�Υ����
-�ɤ�����ʤˤ�ٹ��Ф����˽�λ�����ޤ���
+真の場合、そのスレッドが例外によって終了した時に、インタプリタ
+全体を中断させます。false の場合、あるスレッドで起こった例
+外は、[[m:Thread#join]] などで検出されない限りそのスレッ
+ドだけをなにも警告を出さずに終了させます。
 
-�ǥե���Ȥϵ��Ǥ���[[ref:c:Thread#exception]]�򻲾Ȥ��Ƥ���������
+デフォルトは偽です。[[ref:c:Thread#exception]]を参照してください。
 
-@param newstate ���Ȥ�¹�����㳰ȯ��������硢���󥿥ץ꥿���Τ�λ�����뤫�ɤ����� true �� false �ǻ��ꤷ�ޤ���
+@param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
 --- alive?     -> bool
 
-����åɤ��������Ƥ���׻���true ���֤��ޤ���
+スレッドが「生きている」時、true を返します。
 
-[[m:Thread#status]] �������֤��ʤ顢���Υ᥽�åɤ⿿�Ǥ���
+[[m:Thread#status]] が真を返すなら、このメソッドも真です。
 
 --- exit         -> self
 --- kill         -> self
 --- terminate    -> self
 
-����åɤμ¹Ԥ�λ�����ޤ�����λ���� ensure �᤬�¹Ԥ���ޤ���
+スレッドの実行を終了させます。終了時に ensure 節が実行されます。
 
-������������åɤϽ�λ������(aborting)�ˤϤʤ�ޤ�����
-ľ���˽�λ����Ȥϸ¤�ޤ��󡣤��Ǥ˽�λ���Ƥ�����ϲ��⤷�ޤ��󡣤��Υ᥽�åɤˤ��
-��λ��������åɤ� [[m:Thread#value]] ���֤��ͤ�����Ǥ���
-���Ȥ��ᥤ�󥹥�åɤǤ��뤫�Ǹ�Υ���åɤǤ�����ϡ��ץ������� [[m:Kernel.#exit]](0) 
-�ˤ�꽪λ���ޤ���
+ただし、スレッドは終了処理中(aborting)にはなりますが、
+直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
+終了したスレッドの [[m:Thread#value]] の返り値は不定です。
+自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
+により終了します。
 
-[[m:Kernel.#exit]] �Ȱ㤤�㳰  [[c:SystemExit]] ��ȯ�����ޤ���
+[[m:Kernel.#exit]] と違い例外  [[c:SystemExit]] を発生しません。
 
   th1 = Thread.new do
     begin
@@ -262,13 +262,13 @@ val �� name ���б����륹��åɸ�ͭ�Υǡ����Ȥ��Ƴ�Ǽ���ޤ���
 --- kill!         -> self
 --- terminate!    -> self
 
-ensure ���¹Ԥ����˥���åɤμ¹Ԥ�λ�����ޤ���
+ensure 節を実行せずにスレッドの実行を終了させます。
 
-������������åɤϽ�λ������(aborting)�ˤϤʤ�ޤ�����
-ľ���˽�λ����Ȥϸ¤�ޤ��󡣤��Ǥ˽�λ���Ƥ�����ϲ��⤷�ޤ��󡣤��Υ᥽�åɤˤ��
-��λ��������åɤ� [[m:Thread#value]] ���֤��ͤ�����Ǥ���
-���Ȥ��ᥤ�󥹥�åɤǤ��뤫�Ǹ�Υ���åɤǤ�����ϡ��ץ������� [[m:Kernel.#exit]](0) 
-�ˤ�꽪λ���ޤ���
+ただし、スレッドは終了処理中(aborting)にはなりますが、
+直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
+終了したスレッドの [[m:Thread#value]] の返り値は不定です。
+自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
+により終了します。
 
   th1 = Thread.new do
     begin
@@ -295,8 +295,8 @@ ensure ���¹Ԥ����˥���åɤμ¹Ԥ�λ�����ޤ���
 
 --- group    -> ThreadGroup | nil
 
-����åɤ�°���Ƥ��� [[c:ThreadGroup]] ���֥������Ȥ��֤��ޤ���
-���Ǥ��륹��åɤ� nil ���֤��ޤ���
+スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
+死んでいるスレッドは nil を返します。
 
     p Thread.current.group == ThreadGroup::Default
     # => true
@@ -306,19 +306,19 @@ ensure ���¹Ԥ����˥���åɤμ¹Ԥ�λ�����ޤ���
 --- join(limit)    -> self | nil
 #@end
 
-����å� self �μ¹Ԥ���λ����ޤǡ������ȥ���åɤ���ߤ�
-�ޤ���self ���㳰�ˤ�꽪λ���Ƥ���С������㳰�������ȥ�
-��åɤ��Ф���ȯ�����ޤ���
+スレッド self の実行が終了するまで、カレントスレッドを停止し
+ます。self が例外により終了していれば、その例外がカレントス
+レッドに対して発生します。
 
 #@since 1.8.0
-limit ����ꤷ�ơ�limit �ò᤮�Ƥ⼫�Ȥ���λ���ʤ���硢nil ���֤��ޤ���
+limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
 
-@param limit �����ॢ���Ȥ�����֤������������ǻ��ꤷ�ޤ���ñ�̤��äǤ���
+@param limit タイムアウトする時間を整数か小数で指定します。単位は秒です。
 #@end
 
-@raise ThreadError join ��¹Ԥ��뤳�Ȥˤ�äƥǥåɥ��å������������ȯ�����ޤ����ޤ������ȥ���åɤ� join �����Ȥ��ˤ�ȯ�����ޤ���
+@raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
 
-�ʲ��ϡ������������٤ƤΥ���åɤν�λ���Ԥ���Ǥ���
+以下は、生成したすべてのスレッドの終了を待つ例です。
 
    threads = []
    threads.push(Thread.new { n = rand(5); sleep n; n })
@@ -329,15 +329,15 @@ limit ����ꤷ�ơ�limit �ò᤮�Ƥ⼫�Ȥ���λ���ʤ���硢nil ���֤��ޤ���
 
 --- key?(name)     -> bool
 
-name ���б���������åɤ˸�ͭ�Υǡ������������Ƥ����
-true ���֤��ޤ���
+name に対応したスレッドに固有のデータが定義されていれば
+true を返します。
 
-@param name ʸ���� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name 文字列か [[c:Symbol]] で指定します。
 
 --- keys    -> [Symbol]
 
-����åɸ�ͭ�ǡ����˴�Ϣ�Ť���줿������������֤��ޤ���������
-[[c:Symbol]] ���֤���ޤ���
+スレッド固有データに関連づけられたキーの配列を返します。キーは
+[[c:Symbol]] で返されます。
 
     th = Thread.current
     th[:foo] = 'FOO'
@@ -349,25 +349,25 @@ true ���֤��ޤ���
 --- priority    -> Integer
 --- priority=(val)
 
-����åɤ�ͥ���٤��֤��ޤ��������ͤ��礭���ۤ�ͥ���٤��⤯�ʤ�ޤ���
-�ᥤ�󥹥�åɤΥǥե�����ͤ� 0 �Ǥ����������������줿����åɤϿƥ���åɤ�
-priority ������Ѥ��ޤ���
+スレッドの優先度を返します。この値の大きいほど優先度が高くなります。
+メインスレッドのデフォルト値は 0 です。新しく生成されたスレッドは親スレッドの
+priority を引き継ぎます。
 
 #@since 1.9.1
-@param val ����åɤ�ͥ���٤���ꤷ�ޤ����ץ�åȥե�����˰�¸���ޤ���
+@param val スレッドの優先度を指定します。プラットフォームに依存します。
 #@else
-@param val ����åɤ�ͥ���٤���ꤷ�ޤ�������ͤ����Ǥ��ޤ���
+@param val スレッドの優先度を指定します。負の値も指定できます。
 #@end
 
 --- raise(error_type, message, traceback)     -> ()
 
-���Ȥ�ɽ������åɤǶ���Ū���㳰��ȯ�������ޤ���
+自身が表すスレッドで強制的に例外を発生させます。
 
-@param error_type [[m:Kernel.#raise]] �򻲾Ȥ��Ƥ���������
+@param error_type [[m:Kernel.#raise]] を参照してください。
 
-@param message [[m:Kernel.#raise]] �򻲾Ȥ��Ƥ���������
+@param message [[m:Kernel.#raise]] を参照してください。
 
-@param traceback [[m:Kernel.#raise]] �򻲾Ȥ��Ƥ���������
+@param traceback [[m:Kernel.#raise]] を参照してください。
 
   Thread.new {
     sleep 1
@@ -385,42 +385,42 @@ priority ������Ѥ��ޤ���
 
 --- run    -> self
 
-��߾���(stop)�Υ���åɤ�Ƴ������ޤ���
-[[m:Thread#wakeup]] �Ȱۤʤꤹ���˥���åɤ��ڤ��ؤ�
-��Ԥ��ޤ���
+停止状態(stop)のスレッドを再開させます。
+[[m:Thread#wakeup]] と異なりすぐにスレッドの切り替え
+を行います。
 
-@raise ThreadError ���Ǥ��륹��åɤ��Ф��Ƽ¹Ԥ����ȯ�����ޤ���
+@raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
 --- safe_level    -> Integer
 
-self �Υ����ե�٥���֤��ޤ��������ȥ���åɤ�
-safe_level �ϡ�[[m:$SAFE]] ��Ʊ���Ǥ���
+self のセーフレベルを返します。カレントスレッドの
+safe_level は、[[m:$SAFE]] と同じです。
 
-�����ե�٥�ˤĤ��Ƥ�[[d:spec/safelevel]]�򻲾Ȥ��Ƥ���������
+セーフレベルについては[[d:spec/safelevel]]を参照してください。
 
 --- status    -> String | false | nil
 
-�����Ƥ��륹��åɤξ��֤�ʸ���� "run"��"sleep", "aborting" �Τ���
-�줫���֤��ޤ������ｪλ��������åɤ��Ф��� false���㳰�ˤ�
-�꽪λ��������åɤ��Ф��� nil ���֤��ޤ���
-#@#((-((<ruby 1.6 feature>)): version 1.6.5 �ޤǤϡ���λ������
-#@#(aborting)�Υ���åɤ��Ф��Ƥ� "run" ���֤��Ƥ��ޤ���-))
+生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
+れかで返します。正常終了したスレッドに対して false、例外によ
+り終了したスレッドに対して nil を返します。
+#@#((-((<ruby 1.6 feature>)): version 1.6.5 までは、終了処理中
+#@#(aborting)のスレッドに対しては "run" を返していました-))
 
-[[m:Thread#alive?]] �������֤��ʤ顢���Υ᥽�åɤ⿿�Ǥ���
+[[m:Thread#alive?]] が真を返すなら、このメソッドも真です。
 
 --- stop?    -> bool
 
-����åɤ���λ(dead)���뤤�����(stop)���Ƥ������true ���֤��ޤ���
+スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
 
 --- value    -> object 
 
-����å� self ����λ����ޤ��Ԥ�([[m:Thread#join]] ��Ʊ��)��
-���Υ���åɤΥ֥��å����֤����ͤ��֤��ޤ�������åɼ¹�����㳰��
-ȯ���������ˤϡ������㳰���ȯ�������ޤ���
+スレッド self が終了するまで待ち([[m:Thread#join]] と同じ)、
+そのスレッドのブロックが返した値を返します。スレッド実行中に例外が
+発生した場合には、その例外を再発生させます。
 
-����åɤ� [[m:Thread#kill]] �ˤ�äƽ�λ�������ϡ��֤��ͤ�����Ǥ���
+スレッドが [[m:Thread#kill]] によって終了した場合は、返り値は不定です。
 
-�ʲ��ϡ������������٤ƤΥ���åɤν�λ���Ԥ���̤���Ϥ�����Ǥ���
+以下は、生成したすべてのスレッドの終了を待ち結果を出力する例です。
 
    threads = []
    threads.push(Thread.new { n = rand(5); sleep n; n })
@@ -429,43 +429,43 @@ safe_level �ϡ�[[m:$SAFE]] ��Ʊ���Ǥ���
 
    threads.each {|t| p t.value}
 
-�Ǹ�ιԤǡ��Ԥ���碌��ԤäƤ��뤳�Ȥ��狼��ˤ����Ȼפ��ʤ�ʲ�
-�Τ褦�˽񤯤��Ȥ�Ǥ��ޤ���
+最後の行で、待ち合わせを行っていることがわかりにくいと思うなら以下
+のように書くこともできます。
 
    threads.each {|t| p t.join.value}
 
 --- wakeup    -> self
 
-��߾���(stop)�Υ���åɤ�¹Բ�ǽ����(run)�ˤ��ޤ���
+停止状態(stop)のスレッドを実行可能状態(run)にします。
 
-@raise ThreadError ���Ǥ��륹��åɤ��Ф��Ƽ¹Ԥ����ȯ�����ޤ���
+@raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
 
 #@since 1.9.2
 --- add_trace_func(pr) -> Proc
 
-����åɤ˥ȥ졼���ѥϥ�ɥ���ɲä��ޤ���
+スレッドにトレース用ハンドラを追加します。
 
-�ɲä����ϥ�ɥ���֤��ޤ���
+追加したハンドラを返します。
 
-@param pr �ȥ졼���ϥ�ɥ�([[c:Proc]] ���֥�������)
+@param pr トレースハンドラ([[c:Proc]] オブジェクト)
 @see [[m:Thread#set_trace_func]] [[m:Kernel.#set_trace_func]]
 
 --- set_trace_func(pr) -> Proc | nil
 
-����åɤ˥ȥ졼���ѥϥ�ɥ�����ꤷ�ޤ���
+スレッドにトレース用ハンドラを設定します。
 
-nil ���Ϥ��ȥȥ졼���������ޤ���
+nil を渡すとトレースを解除します。
 
-���ꤷ���ϥ�ɥ���֤��ޤ���
+設定したハンドラを返します。
 
-@param pr �ȥ졼���ϥ�ɥ�([[c:Proc]] ���֥�������) �⤷���� nil
+@param pr トレースハンドラ([[c:Proc]] オブジェクト) もしくは nil
 @see [[m:Thread#add_trace_func]] [[m:Kernel.#set_trace_func]]
 
 --- backtrace    -> [String] | nil
-����åɤθ��ߤΥХå��ȥ졼�����֤��ޤ���
+スレッドの現在のバックトレースを返します。
 
-����åɤ����Ǥ˽�λ���Ƥ������ nil ���֤��ޤ���
+スレッドがすでに終了している場合は nil を返します。
 
 #@end
 == Constants
@@ -473,5 +473,5 @@ nil ���Ϥ��ȥȥ졼���������ޤ���
 #@since 1.9.1
 --- MUTEX_FOR_THREAD_EXCLUSIVE
 
-[[m:Thread.exclusive]]�Ѥ�[[c:Mutex]]���֥������ȤǤ���
+[[m:Thread.exclusive]]用の[[c:Mutex]]オブジェクトです。
 #@end

@@ -5,28 +5,28 @@ include Enumerable
 == Instance Methods
 --- new_item
 #@todo
-¿·¤·¤¯item¤òºîÀ®¤·¡¤ÊÖ¤·¤Þ¤¹¡¥ºîÀ®¤µ¤ì¤¿
-item¤Ïitem¥ê¥¹¥È¤ÎºÇ¸å¤ËÄÉ²Ã¤µ¤ì¤Æ¤¤¤Þ¤¹¡¥
+æ–°ã—ãitemã‚’ä½œæˆã—ï¼Œè¿”ã—ã¾ã™ï¼Žä½œæˆã•ã‚ŒãŸ
+itemã¯itemãƒªã‚¹ãƒˆã®æœ€å¾Œã«è¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ï¼Ž
 
 --- do_sort
 #@todo
-¸½ºß¤Îdo_sort¤ÎÃÍ¤ò¼èÆÀ¤·¤Þ¤¹¡¥¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï
-false¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡¥
+ç¾åœ¨ã®do_sortã®å€¤ã‚’å–å¾—ã—ã¾ã™ï¼Žãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯
+falseã«ãªã£ã¦ã„ã¾ã™ï¼Ž
 
 --- do_sort=()
 #@todo
-true¤ËÀßÄê¤¹¤ë¤Èitem.date¤¬¿·¤·¤¤½ç¤ËÊÂ¤ÓÂØ
-¤¨¤Þ¤¹¡¥Proc¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤¹¤ë¤³¤È¤Ë¤è¤êÊÂ¤Ó
-ÂØ¤¨ÊýË¡¤ò¥«¥¹¥¿¥Þ¥¤¥º¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡¥
+trueã«è¨­å®šã™ã‚‹ã¨item.dateãŒæ–°ã—ã„é †ã«ä¸¦ã³æ›¿
+ãˆã¾ã™ï¼ŽProcã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã™ã‚‹ã“ã¨ã«ã‚ˆã‚Šä¸¦ã³
+æ›¿ãˆæ–¹æ³•ã‚’ã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ï¼Ž
 
 --- max_size
 #@todo
-¸½ºß¤Îmax_size¤ÎÃÍ¤ò¼èÆÀ¤·¤Þ¤¹¡¥¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï
--1¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡¥
+ç¾åœ¨ã®max_sizeã®å€¤ã‚’å–å¾—ã—ã¾ã™ï¼Žãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯
+-1ã«ãªã£ã¦ã„ã¾ã™ï¼Ž
 
 --- max_size=()
 #@todo
-½ÐÎÏ¤¹¤ëitem¤Î¿ô¤ÎºÇÂçÃÍ¤òÀßÄê¤·¤Þ¤¹¡¥
+å‡ºåŠ›ã™ã‚‹itemã®æ•°ã®æœ€å¤§å€¤ã‚’è¨­å®šã—ã¾ã™ï¼Ž
 
 
 = class RSS::Maker::RSS09::Items < RSS::Maker::ItemsBase
@@ -36,14 +36,14 @@ true¤ËÀßÄê¤¹¤ë¤Èitem.date¤¬¿·¤·¤¤½ç¤ËÊÂ¤ÓÂØ
 = class RSS::Maker::ItemsBase::ItemBase < Object
 
 
-item¤Ïmaker.items.new_item¤ÇºîÀ®¤µ¤ì¤¿¥ª¥Ö¥¸¥§¥¯
-¥È¤È¤·¤Þ¤¹¡¥
+itemã¯maker.items.new_itemã§ä½œæˆã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯
+ãƒˆã¨ã—ã¾ã™ï¼Ž
 
-RSS 1.0/0.91¤Î¾ì¹ç¤Ïtitle¡¤link¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢
-¤ê¤Þ¤¹¡¥
+RSS 1.0/0.91ã®å ´åˆã¯titleï¼Œlinkã‚’è¨­å®šã™ã‚‹å¿…è¦ãŒã‚
+ã‚Šã¾ã™ï¼Ž
 
-RSS 2.0¤Î¾ì¹ç¤Ïtitle¤Þ¤¿¤Ïdescription¤òÀßÄê¤¹¤ë
-É¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
+RSS 2.0ã®å ´åˆã¯titleã¾ãŸã¯descriptionã‚’è¨­å®šã™ã‚‹
+å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼Ž
 
 == Instance Methods
 
@@ -65,11 +65,11 @@ RSS 2.0¤Î¾ì¹ç¤Ïtitle¤Þ¤¿¤Ïdescription¤òÀßÄê¤¹¤ë
 
 --- pubDate
 #@todo
-item.date¤ÎÊÌÌ¾¤Ç¤¹¡¥
+item.dateã®åˆ¥åã§ã™ï¼Ž
 
 --- pubDate=()
 #@todo
-item.date=¤ÎÊÌÌ¾¤Ç¤¹¡¥
+item.date=ã®åˆ¥åã§ã™ï¼Ž
 
 --- author
 --- author=()
@@ -94,9 +94,9 @@ item.date=¤ÎÊÌÌ¾¤Ç¤¹¡¥
 = class RSS::Maker::RSS09::Items::Item::Guid < RSS::Maker::ItemsBase::ItemBase::GuidBase
 = class RSS::Maker::RSS20::Items::Item::Guid < RSS::Maker::RSS09::Items::Item::Guid
 
-RSS 2.0¤òÀ¸À®¤¹¤ë¤È¤­¤À¤±ÍøÍÑ¤µ¤ì¤Þ¤¹¡¥
+RSS 2.0ã‚’ç”Ÿæˆã™ã‚‹ã¨ãã ã‘åˆ©ç”¨ã•ã‚Œã¾ã™ï¼Ž
 
-content¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
+contentã‚’è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼Ž
 
 == Instance Methods
 
@@ -112,9 +112,9 @@ content¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
 = class RSS::Maker::RSS09::Items::Item::Enclosure < RSS::Maker::ItemsBase::ItemBase::EnclosureBase
 = class RSS::Maker::RSS20::Items::Item::Enclosure < RSS::Maker::RSS09::Items::Item::Enclosure
 
-RSS 2.0¤òÀ¸À®¤¹¤ë¤È¤­¤À¤±ÍøÍÑ¤µ¤ì¤Þ¤¹¡¥
+RSS 2.0ã‚’ç”Ÿæˆã™ã‚‹ã¨ãã ã‘åˆ©ç”¨ã•ã‚Œã¾ã™ï¼Ž
 
-url¡¤length¡¤type¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
+urlï¼Œlengthï¼Œtypeã‚’è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼Ž
 
 == Instance Methods
 
@@ -134,9 +134,9 @@ url¡¤length¡¤type¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
 = class RSS::Maker::RSS09::Items::Item::Source < RSS::Maker::ItemsBase::ItemBase::SourceBase
 = class RSS::Maker::RSS20::Items::Item::Source < RSS::Maker::RSS09::Items::Item::Source
 
-RSS 2.0¤òÀ¸À®¤¹¤ë¤È¤­¤À¤±ÍøÍÑ¤µ¤ì¤Þ¤¹¡¥
+RSS 2.0ã‚’ç”Ÿæˆã™ã‚‹ã¨ãã ã‘åˆ©ç”¨ã•ã‚Œã¾ã™ï¼Ž
 
-url¡¤content¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
+urlï¼Œcontentã‚’è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼Ž
 
 == Instance Methods
 
@@ -154,17 +154,17 @@ url¡¤content¤òÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
 
 include Enumerable
 
-RSS 2.0¤òÀ¸À®¤¹¤ë¤È¤­¤À¤±ÍøÍÑ¤µ¤ì¤Þ¤¹¡¥
+RSS 2.0ã‚’ç”Ÿæˆã™ã‚‹ã¨ãã ã‘åˆ©ç”¨ã•ã‚Œã¾ã™ï¼Ž
 
 == Instance Methods
 
 --- new_category
 #@todo
-¿·¤·¤¯category¤òºîÀ®¤·¡¤ÊÖ¤·¤Þ¤¹¡¥ºîÀ®¤µ¤ì¤¿
-category¤Ïcategory¥ê¥¹¥È¤ÎºÇ¸å
-¤ËÄÉ²Ã¤µ¤ì¤Æ¤¤¤Þ¤¹¡¥
+æ–°ã—ãcategoryã‚’ä½œæˆã—ï¼Œè¿”ã—ã¾ã™ï¼Žä½œæˆã•ã‚ŒãŸ
+categoryã¯categoryãƒªã‚¹ãƒˆã®æœ€å¾Œ
+ã«è¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ï¼Ž
 
-item.categories.new_category¤¬ºîÀ®¤¹¤ë
-category¤Ï
-maker.channel.categories.new_category¤¬ºîÀ®¤¹¤ë
-category¤ÈÆ±¤¸API¤ò»ý¤Á¤Þ¤¹¡¥
+item.categories.new_categoryãŒä½œæˆã™ã‚‹
+categoryã¯
+maker.channel.categories.new_categoryãŒä½œæˆã™ã‚‹
+categoryã¨åŒã˜APIã‚’æŒã¡ã¾ã™ï¼Ž

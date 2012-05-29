@@ -1,72 +1,72 @@
 require rubygems/indexer
 
-Gem �Υ���ǥå������ۤ��뤿�����ݥ��饹�򰷤��饤�֥��Ǥ���
+Gem のインデックスを構築するための抽象クラスを扱うライブラリです。
 
-�ƥ�ץ졼�ȥѥ��������Ѥ��Ƥ��ޤ���
+テンプレートパターンを使用しています。
 
 = class Gem::Indexer::AbstractIndexBuilder
 
-Gem �Υ���ǥå������ۤ��뤿�����ݥ��饹�Ǥ���
+Gem のインデックスを構築するための抽象クラスです。
 
-�ƥ�ץ졼�ȥѥ��������Ѥ��Ƥ��ޤ���
+テンプレートパターンを使用しています。
 
 == Public Instance Methods
 
 --- build{ ... }
 #@# -> discard
-Gem �Υ���ǥå�����������ޤ���
+Gem のインデックスを作成します。
 
-�ºݤΥ���ǥå����������������ξܺ٤�Ϳ����줿�֥��å��˵��Ҥ���Ƥ��ޤ���
-����Ū�ʽ����򥫥����ޥ������뤿��ˡ�Ŭ�ڤʥ����ߥ󥰤�
-begin_index, end_index, cleanup ���ƤӽФ����褦�ˤʤäƤ��ޤ���
+実際のインデックスを作成する処理の詳細は与えられたブロックに記述されています。
+基本的な処理をカスタマイズするために、適切なタイミングで
+begin_index, end_index, cleanup が呼び出されるようになっています。
 
 --- cleanup -> nil
 
-����ǥå����ե�������Ĥ������Ȥ˸ƤӽФ���ޤ���
+インデックスファイルを閉じたあとに呼び出されます。
 
 --- compress(filename, ext = 'rz')
 #@# -> discard
-Ϳ����줿�ե�����򰵽̤��ޤ���
+与えられたファイルを圧縮します。
 
-@param filename ���̤���ե������̾������ꤷ�ޤ���
+@param filename 圧縮するファイルの名前を指定します。
 
-@param ext ���̸�Υե�����γ�ĥ�Ҥ���ꤷ�ޤ���
+@param ext 圧縮後のファイルの拡張子を指定します。
 
 --- directory -> String
 
-����ǥå����ե�����������ե���������֤��Ƥ���ǥ��쥯�ȥ�̾���֤��ޤ���
+インデックスファイルに入れるファイルを配置しているディレクトリ名を返します。
 
 --- end_index -> nil
 
-[[m:Gem::Indexer::AbstractIndexBuilder#build]] ��ǥ֥��å����¹Ԥ��줿��˸ƤӽФ���ޤ���
-����ǥå����ե������ͭ���ǡ�@file �⻲�Ȳ�ǽ�Ǥ���
+[[m:Gem::Indexer::AbstractIndexBuilder#build]] 内でブロックが実行された後に呼び出されます。
+インデックスファイルは有効で、@file も参照可能です。
 
 --- filename -> String
 
-�������륤��ǥå����ե������̾�����֤��ޤ���
+作成するインデックスファイルの名前を返します。
 
 --- files -> [String]
 
-�������륤��ǥå����ե�����˴ޤޤ��ե�����Υꥹ�Ȥ��֤��ޤ���
+作成するインデックスファイルに含まれるファイルのリストを返します。
 
 --- start_index -> nil
 
-[[m:Gem::Indexer::AbstractIndexBuilder#build]] ��ǥ֥��å����¹Ԥ�������˸ƤӽФ���ޤ���
-����ǥå����ե������ͭ���ǡ�@file �⻲�Ȳ�ǽ�Ǥ���
+[[m:Gem::Indexer::AbstractIndexBuilder#build]] 内でブロックが実行される前に呼び出されます。
+インデックスファイルは有効で、@file も参照可能です。
 
 --- unzip(string) -> String
 
-Ϳ����줿���̺Ѥ�ʸ�����Ÿ�������֤��ޤ���
+与えられた圧縮済み文字列を展開して返します。
 
-@param string ���̤���Ƥ���ǡ�������ꤷ�ޤ���
+@param string 圧縮されているデータを指定します。
 
 @see [[m:Zlib::Inflate.inflate]]
 
 --- zip(string) -> String
 
-Ϳ����줿ʸ����򰵽̤����֤��ޤ���
+与えられた文字列を圧縮して返します。
 
-@param string ���̤���ǡ�������ꤷ�ޤ���
+@param string 圧縮するデータを指定します。
 
 @see [[m:Zlib::Deflate.deflate]]
 
@@ -74,8 +74,8 @@ begin_index, end_index, cleanup ���ƤӽФ����褦�ˤʤäƤ��ޤ���
 
 --- new(filename, directory) -> Gem::Indexer::AbstractIndexBuilder
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param filename �������륤��ǥå�������¸����ե�����̾�Ǥ���
+@param filename 作成するインデックスを保存するファイル名です。
 
-@param directory ����ǥå����ե��������¸�����ȥǥ��쥯�ȥ�Ǥ���
+@param directory インデックスファイルを保存する作業ディレクトリです。

@@ -1,69 +1,69 @@
 
 = class OpenSSL::X509::Attribute < Object
-X.509 ¾ÚÌÀ½ñ½ğÌ¾Í×µá¤Î attribute ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+X.509 è¨¼æ˜æ›¸ç½²åè¦æ±‚ã® attribute ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-[[m:OpenSSL::X509::Request#attributes]] ¤Ç¼è¤ê½Ğ¤¹¤³¤È¤ä¡¢
-[[m:OpenSSL::X509::Request#add_attribute]] ¤ÇÄÉ²Ã¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ş¤¹¡£
+[[m:OpenSSL::X509::Request#attributes]] ã§å–ã‚Šå‡ºã™ã“ã¨ã‚„ã€
+[[m:OpenSSL::X509::Request#add_attribute]] ã§è¿½åŠ ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
 
 == Class Methods
 
 --- new(der) -> OpenSSL::X509::Attribute
 --- new(oid, value) -> OpenSSL::X509::Attribute
-attribute ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
+attribute ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-°ú¿ô¤¬1¸Ä¤Ç¡¢Ê¸»úÎó¤Ç¤¢¤ë¤Ê¤é¤Ğ¡¢¤½¤ì¤ò DER ·Á¼°¤Î
-¥Ç¡¼¥¿¤Ç¤¢¤ë¤È¸«¤Ê¤·¤Æ attribute ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
-°ú¿ô¤¬1¸Ä¤Ç¡¢¤½¤ì°Ê³°¤Î¾ì¹ç¤Ï to_der ¥á¥½¥Ã¥É¤Ç DER ·Á¼°¤ËÊÑ´¹¤·¤Æ¤«¤é
-¤½¤ì¤ò attribute ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤·¤Ş¤¹¡£
+å¼•æ•°ãŒ1å€‹ã§ã€æ–‡å­—åˆ—ã§ã‚ã‚‹ãªã‚‰ã°ã€ãã‚Œã‚’ DER å½¢å¼ã®
+ãƒ‡ãƒ¼ã‚¿ã§ã‚ã‚‹ã¨è¦‹ãªã—ã¦ attribute ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+å¼•æ•°ãŒ1å€‹ã§ã€ãã‚Œä»¥å¤–ã®å ´åˆã¯ to_der ãƒ¡ã‚½ãƒƒãƒ‰ã§ DER å½¢å¼ã«å¤‰æ›ã—ã¦ã‹ã‚‰
+ãã‚Œã‚’ attribute ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›ã—ã¾ã™ã€‚
 
-°ú¿ô¤¬2¸Ä¤Î¾ì¹ç¤Ï¡¢¤½¤ì¤¾¤ì¤ò attribute ¤Î Object ID (¼±ÊÌ»Ò)¤È
-ÃÍ(ÆâÍÆ)¤È¸«¤Ê¤·¤Æ attribute ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
-¤³¤Î¾ì¹ç¡¢oid ¤Ï Object ID ¤ÎÊ¸»úÎó¡¢value ¤Ë¤Ï
-[[c:OpenSSL::ASN1::ASN1Data]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÅÏ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤ê¤Ş¤»¤ó¡£
+å¼•æ•°ãŒ2å€‹ã®å ´åˆã¯ã€ãã‚Œãã‚Œã‚’ attribute ã® Object ID (è­˜åˆ¥å­)ã¨
+å€¤(å†…å®¹)ã¨è¦‹ãªã—ã¦ attribute ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+ã“ã®å ´åˆã€oid ã¯ Object ID ã®æ–‡å­—åˆ—ã€value ã«ã¯
+[[c:OpenSSL::ASN1::ASN1Data]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ¸¡ã•ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
-@param der DER ·Á¼°¤ÎÊ¸»úÎó¡¢¤â¤·¤¯¤Ï to_der ¤ò»ı¤Ä¥ª¥Ö¥¸¥§¥¯¥È
-@param oid Object ID Ê¸»úÎó
-@param value ÃÍ¤òÉ½¤¹ [[c:OpenSSL::ASN1::ASN1Data]] ¥¤¥ó¥¹¥¿¥ó¥¹
-@raise OpenSSL::X509::AttributeError attribute¥ª¥Ö¥¸¥§¥¯¥È¤ÎÀ¸À®¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤Ë
-       È¯À¸¤·¤Ş¤¹¡£DER ·Á¼°Ê¸»úÎó¤¬ÉÔÀµ¤Ç¤¢¤Ã¤¿¾ì¹ç¡¢oid, value ¤¬ÉÔÀµ¤Ç¤¢¤Ã¤¿
-       ¾ì¹ç¤Ê¤É¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@param der DER å½¢å¼ã®æ–‡å­—åˆ—ã€ã‚‚ã—ãã¯ to_der ã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+@param oid Object ID æ–‡å­—åˆ—
+@param value å€¤ã‚’è¡¨ã™ [[c:OpenSSL::ASN1::ASN1Data]] ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+@raise OpenSSL::X509::AttributeError attributeã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆã«å¤±æ•—ã—ãŸå ´åˆã«
+       ç™ºç”Ÿã—ã¾ã™ã€‚DER å½¢å¼æ–‡å­—åˆ—ãŒä¸æ­£ã§ã‚ã£ãŸå ´åˆã€oid, value ãŒä¸æ­£ã§ã‚ã£ãŸ
+       å ´åˆãªã©ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 
 == Instance Methods
 
 --- oid -> String
-attribute ¤Î Object ID(¼±ÊÌ»Ò)¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£
+attribute ã® Object ID(è­˜åˆ¥å­)ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@raise OpenSSL::X509::AttributeError Object ID ¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@raise OpenSSL::X509::AttributeError Object ID ã®å–å¾—ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::X509::Attribute#oid=]]
 
 --- oid=(oid)
-attribute ¤Î Object ID(¼±ÊÌ»Ò)¤òÊ¸»úÎó¤ÇÀßÄê¤·¤Ş¤¹¡£
+attribute ã® Object ID(è­˜åˆ¥å­)ã‚’æ–‡å­—åˆ—ã§è¨­å®šã—ã¾ã™ã€‚
 
-@param oid ÀßÄê¤¹¤ë Object ID Ê¸»úÎó
-@raise OpenSSL::X509::AttributeError oid¤¬ÉÔÀµ¤Ç¤¢¤Ã¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param oid è¨­å®šã™ã‚‹ Object ID æ–‡å­—åˆ—
+@raise OpenSSL::X509::AttributeError oidãŒä¸æ­£ã§ã‚ã£ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::X509::Attribute#oid]]
 
 --- value -> OpenSSL::ASN1::ASN1Data
-attribute ¤ÎÃÍ¤ò [[c:OpenSSL::ASN1::ASN1Data]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç
-ÊÖ¤·¤Ş¤¹¡£
+attribute ã®å€¤ã‚’ [[c:OpenSSL::ASN1::ASN1Data]] ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§
+è¿”ã—ã¾ã™ã€‚
 
-@raise OpenSSL::X509::AttributeError ÃÍ¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@raise OpenSSL::X509::AttributeError å€¤ã®å–å¾—ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::X509::Attribute#value=]]
 --- value=(val)
-attribute ¤ÎÃÍ¤òÀßÄê¤·¤Ş¤¹¡£
+attribute ã®å€¤ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-°ú¿ô¤Ë¤Ï [[c:OpenSSL::ASN1::ASN1Data]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤òÅÏ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤ê¤Ş¤»¤ó¡£
+å¼•æ•°ã«ã¯ [[c:OpenSSL::ASN1::ASN1Data]] ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¸¡ã•ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
-@param val ÀßÄê¤¹¤ëÃÍ¤Î [[c:OpenSSL::ASN1::ASN1Data]] ¥ª¥Ö¥¸¥§¥¯¥È
-@raise OpenSSL::X509::AttributeError val ¤¬ÉÔÀµ¤Ç¤¢¤Ã¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param val è¨­å®šã™ã‚‹å€¤ã® [[c:OpenSSL::ASN1::ASN1Data]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+@raise OpenSSL::X509::AttributeError val ãŒä¸æ­£ã§ã‚ã£ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::X509::Attribute#value]]
 
 --- to_der -> String
-¼«¿È¤ò DER ·Á¼°¤Î¥Ğ¥¤¥ÈÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’ DER å½¢å¼ã®ãƒã‚¤ãƒˆåˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@raise OpenSSL::X509::AttributeError ÊÑ´¹¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@raise OpenSSL::X509::AttributeError å¤‰æ›ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 = class OpenSSL::X509::AttributeError < OpenSSL::OpenSSLError
-[[c:OpenSSL::X509::Attribute]] ´ØÏ¢¤Î¥¨¥é¡¼¤¬µ¯¤­¤¿¾ì¹ç¤Ë
-È¯À¸¤¹¤ëÎã³°¤Ç¤¹¡£
+[[c:OpenSSL::X509::Attribute]] é–¢é€£ã®ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸå ´åˆã«
+ç™ºç”Ÿã™ã‚‹ä¾‹å¤–ã§ã™ã€‚

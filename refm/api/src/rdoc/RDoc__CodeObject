@@ -4,9 +4,9 @@
 include RDoc::Text
 #@end
 
-RDoc �Υ����ɥĥ꡼��ɽ�����륯�饹�δ��ܥ��饹�Ǥ���
+RDoc のコードツリーを表現するクラスの基本クラスです。
 
-�ʲ��� [[c:RDoc::CodeObject]] �Υ��֥��饹�Υĥ꡼�Ǥ���
+以下は [[c:RDoc::CodeObject]] のサブクラスのツリーです。
 
 //emlist{
  * RDoc::Context
@@ -30,131 +30,131 @@ RDoc �Υ����ɥĥ꡼��ɽ�����륯�饹�δ��ܥ��饹�Ǥ���
 
 --- new -> RDoc::CodeObject
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- comment -> String
 
-���ȤΥ����Ȥ��֤��ޤ���
+自身のコメントを返します。
 
 --- comment=(comment)
 
-���ȤΥ����Ȥ� comment �����ꤷ�ޤ���
+自身のコメントを comment に設定します。
 
-��������comment ����ʸ������ä����ϲ��⤷�ޤ���
+ただし、comment が空文字列だった場合は何もしません。
 
-@param comment �����Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param comment コメントを文字列で指定します。
 
 --- document_children -> bool
 
-���Ȥ˴ޤޤ��᥽�åɡ������ꥢ���������°����ɥ�����Ȥ˴ޤ�뤫
-�ɤ������֤��ޤ���
+自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるか
+どうかを返します。
 
 @see [[m:RDoc::CodeObject#document_self]]
 
 --- document_children=(val)
 
-���Ȥ˴ޤޤ��᥽�åɡ������ꥢ���������°����ɥ�����Ȥ˴ޤ�뤫
-�ɤ��������ꤷ�ޤ���
+自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるか
+どうかを設定します。
 
-:nodoc:��:stopdoc: ����ꤷ������ false �����ꤵ��ޤ���
+:nodoc:、:stopdoc: を指定した時に false が設定されます。
 
-@param val true ����ꤷ����硢�嵭��ɥ�����Ȥ˴ޤ�ޤ���
+@param val true を指定した場合、上記をドキュメントに含めます。
 
 @see [[m:RDoc::CodeObject#document_self=]],
      [[m:RDoc::CodeObject#remove_classes_and_modules]]
 
 --- document_self -> bool
 
-���Ȥ�ɥ�����Ȥ˴ޤ�뤫�ɤ������֤��ޤ���
+自身をドキュメントに含めるかどうかを返します。
 
 @see [[m:RDoc::CodeObject#document_children]]
 
 --- document_self=(val)
 
-���Ȥ�ɥ�����Ȥ˴ޤ�뤫�ɤ��������ꤷ�ޤ���
+自身をドキュメントに含めるかどうかを設定します。
 
-:doc: ����ꤷ������ true �����ꤵ��ޤ���
-:nodoc:��:stopdoc: ����ꤷ������ false �����ꤵ��ޤ���
+:doc: を指定した時に true が設定されます。
+:nodoc:、:stopdoc: を指定した時に false が設定されます。
 
-@param val true ����ꤷ����硢���Ȥ�ɥ�����Ȥ˴ޤ�ޤ���
+@param val true を指定した場合、自身をドキュメントに含めます。
 
 @see [[m:RDoc::CodeObject#document_children=]],
      [[m:RDoc::CodeObject#remove_methods_etc]]
 
 --- remove_classes_and_modules -> ()
 
-���⤷�ޤ���[[m:RDoc::CodeObject#document_children=]] �� false �����
-�������Υ�����Хå��Ȥ��ƸƤӽФ���ޤ��������С��饤�ɤ��ƻ��Ѥ��ޤ���
+何もしません。[[m:RDoc::CodeObject#document_children=]] に false を指定
+した時のコールバックとして呼び出されます。オーバーライドして使用します。
 
 --- remove_methods_etc -> ()
 
-���⤷�ޤ���[[m:RDoc::CodeObject#document_self=]] �� false ����ꤷ��
-���Υ�����Хå��Ȥ��ƸƤӽФ���ޤ��������С��饤�ɤ��ƻ��Ѥ��ޤ���
+何もしません。[[m:RDoc::CodeObject#document_self=]] に false を指定した
+時のコールバックとして呼び出されます。オーバーライドして使用します。
 
 --- start_doc -> ()
 
-�ʹߤ˲��Ϥ��������Ȥ� [[m:RDoc::CodeObject#stop_doc]] ��ƤӽФ��ޤ�
-�δ֡��ɥ�����Ȥ˴ޤ�ޤ���
+以降に解析したコメントを [[m:RDoc::CodeObject#stop_doc]] を呼び出すまで
+の間、ドキュメントに含めます。
 
-:startdoc: �򸫤Ĥ������˸ƤӽФ���ޤ���
-[[m:RDoc::CodeObject#document_self]] ��
-[[m:RDoc::CodeObject#document_children]] �� true �����ꤷ�ޤ���
+:startdoc: を見つけた時に呼び出されます。
+[[m:RDoc::CodeObject#document_self]] と
+[[m:RDoc::CodeObject#document_children]] を true に設定します。
 
 @see [[m:RDoc::CodeObject#end_doc]]
 
 --- stop_doc -> ()
 
-�ʹߤ˲��Ϥ��������Ȥ� [[m:RDoc::CodeObject#start_doc]] ��ƤӽФ���
-�Ǥδ֡��ɥ�����Ȥ˴ޤ�ޤ���
+以降に解析したコメントを [[m:RDoc::CodeObject#start_doc]] を呼び出すま
+での間、ドキュメントに含めません。
 
-:stopdoc: �򸫤Ĥ������˸ƤӽФ���ޤ���
-[[m:RDoc::CodeObject#document_self]] ��
-[[m:RDoc::CodeObject#document_children]] �� false �����ꤷ�ޤ���
+:stopdoc: を見つけた時に呼び出されます。
+[[m:RDoc::CodeObject#document_self]] と
+[[m:RDoc::CodeObject#document_children]] を false に設定します。
 
 @see [[m:RDoc::CodeObject#start_doc]]
 
 --- parent -> RDoc::CodeObject
 
-���Ȥ��ͭ����(�ѿ�������ʤɤη����ݻ�����)���֥������Ȥ��֤��ޤ���
+自身を所有する(変数や定数などの形で保持する)オブジェクトを返します。
 
 --- parent=(val)
 
-���Ȥ��ͭ����(�ѿ�������ʤɤη����ݻ�����)���֥������Ȥ����ꤷ�ޤ���
+自身を所有する(変数や定数などの形で保持する)オブジェクトを設定します。
 
-@param val [[c:RDoc::CodeObject]] �Υ��֥��饹�Υ��֥������Ȥ���ꤷ��
-           ����
+@param val [[c:RDoc::CodeObject]] のサブクラスのオブジェクトを指定しま
+           す。
 
 --- section -> RDoc::Context::Section
 
-��°���Ƥ��� section ���֤��ޤ���
+所属している section を返します。
 
 --- section=(val)
 
-��°���� section �����ꤷ�ޤ���
+所属する section を設定します。
 
-@param val [[c:RDoc::Context::Section]] ���֥������Ȥ���ꤷ�ޤ���
+@param val [[c:RDoc::Context::Section]] オブジェクトを指定します。
 
 #@since 1.9.1
 --- parent_file_name -> String
 
-self.parent �Υե�����̾���֤��ޤ���
+self.parent のファイル名を返します。
 
 @see [[m:RDoc::CodeObject#parent]]
 
 --- parent_name -> String
 
-self.parent ��̾�����֤��ޤ���
+self.parent の名前を返します。
 
 @see [[m:RDoc::CodeObject#parent]]
 #@end
 #@since 1.9.2
 --- documented? -> bool
 
-���Ϥ��٤��ɥ�����Ȥ����뤫�ɤ������֤��ޤ���
+出力すべきドキュメントがあるかどうかを返します。
 
 --- metadata -> Hash
 
-���Ȥ����ĥ᥿�ǡ���(¾����Ǥ�դ��ͤ����ꤷ�Ƥ�褤)���֤��ޤ���
+自身が持つメタデータ(他から任意の値を設定してもよい)を返します。
 #@end

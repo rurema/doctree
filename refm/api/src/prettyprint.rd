@@ -1,17 +1,17 @@
-pretty printing ���르�ꥺ��Τ���Υ饤�֥��Ǥ���
+pretty printing アルゴリズムのためのライブラリです。
 
-=== �Ȥ���
+=== 使い方
 
-pretty printing ���르�ꥺ����ɤߤ䤹������ǥ�ȤȲ��Ԥ���ꤹ�뤿��Υ��르�ꥺ��Ǥ���
-����ǥ�ȤȲ��Ԥϥ桼���ˤ�ä�Ϳ����줿�ĥ꡼��¤������ꤵ��ޤ���
-�Ĥޤ�桼���ϰʲ��Τ褦��ɽ�����������Ƥ��ݻ������ĥ꡼���������ɬ�פ�����ޤ���
+pretty printing アルゴリズムは読みやすいインデントと改行を決定するためのアルゴリズムです。
+インデントと改行はユーザによって与えられたツリー構造から決定されます。
+つまりユーザは以下のように表示したい内容を保持したツリーを作成する必要があります。
 
- * [[m:PrettyPrint.new]] �ǥХåե����������ޤ������ΤȤ����Хåե������Ȳ���ʸ������ꤷ�ޤ���
- * [[m:PrettyPrint#text]] ��Ȥäơ�ʸ�����Ŭ�� �������ޤ���
- * [[m:PrettyPrint#group]] ��ȤäƻҥΡ��ɤ�Ĥ���ޤ���Ʊ���˻ҥΡ��ɤΥ���ǥ�Ȥο�������ޤ���
- * [[m:PrettyPrint#breakable]] ��ȤäƲ��Ԥ��Ƥ��ɤ�������ꤷ�ޤ���
+ * [[m:PrettyPrint.new]] でバッファを生成します。このとき、バッファの幅と改行文字を指定します。
+ * [[m:PrettyPrint#text]] を使って、文字列を適宜 挿入します。
+ * [[m:PrettyPrint#group]] を使って子ノードをつくります。同時に子ノードのインデントの深さも決めます。
+ * [[m:PrettyPrint#breakable]] を使って改行しても良い場所を指定します。
 
-Ʊ���Ρ�����ǸƤФ줿 breakable �ϡ����Ԥ���ʤ������Ʊ���˲��Ԥ��ޤ���
+同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。
 
  p2 = PrettyPrint.new('', 10)
  s = 'hello'
@@ -41,48 +41,48 @@ Philip Wadler, A prettier printer, March 1998,
 
 = class PrettyPrint < Object
 
-pretty printing ���르�ꥺ��Τ���Υ��饹�Ǥ���
-���Ԥΰ��֤�õ�������줤�ʥ���ǥ�Ȥ�ܤ��ޤ���
+pretty printing アルゴリズムのためのクラスです。
+改行の位置を探し、きれいなインデントを施します。
 
-�ǥե���ȤǤϡ����Υ��饹��ʸ����򰷤��ޤ���
-�ޤ���ʸ��1�Х��Ȥ������������1����������Ȳ��ꤷ�Ƥ��ޤ���
-���������ʲ��Υ᥽�åɤ��Ф���Ŭ�ڤʰ�����Ϳ���뤳�Ȥǡ�
-�����Ǥʤ����ˤ����ѤǤ��ޤ���
- * [[m:PrettyPrint.new]]: ���ϥХåե�������������򤹤�֥��å�����ԥ��֥������Ȥ�����Ǥ��ޤ���
- * [[m:PrettyPrint#text]]: ��������Ǥ��ޤ���
+デフォルトでは、このクラスは文字列を扱います。
+また、文字1バイトが出力幅の中で1カラムを占めると仮定しています。
+しかし、以下のメソッドに対して適切な引数を与えることで、
+そうでない場合にも利用できます。
+ * [[m:PrettyPrint.new]]: 出力バッファ、空白の生成をするブロックや改行オブジェクトを設定できます。
+ * [[m:PrettyPrint#text]]: 幅を設定できます。
  * [[m:PrettyPrint#breakable]] 
-�Ǥ��Τǡ����Υ��饹�ϰʲ��Τ褦�ʤ��Ȥˤ���Ѥ���ǽ�Ǥ���
- * proportional font ��Ȥä��ƥ����Ȥ�����
- * �������ȥХ��ȿ����ۤʤ�褦��¿�Х���ʸ��
- * ʸ���ʳ�������
+ですので、このクラスは以下のようなことにも応用が可能です。
+ * proportional font を使ったテキストの整形
+ * 出力幅とバイト数が異なるような多バイト文字
+ * 文字以外の整形
 
 == Class Methods
 --- new(output = '', maxwidth = 79, newline = "\n")               -> PrettyPrint
 --- new(output = '', maxwidth = 79, newline = "\n"){|width| ...}  -> PrettyPrint
 
-pretty printing �Τ���ΥХåե����������ޤ���
-output �Ͻ�����Ǥ���output �� << �᥽�åɤ���äƤ��ʤ���Фʤ�ޤ���
-<< �᥽�åɤˤ�
- * [[m:PrettyPrint#text]] ����1���� obj 
- * [[m:PrettyPrint#breakable]] ����1���� sep 
- * [[m:PrettyPrint.new]] ����3���� newline 
- * [[m:PrettyPrint.new]] ��Ϳ�����֥��å���ɾ���������
-�Τɤ줫�ҤȤĤ������Ȥ���Ϳ�����ޤ���
+pretty printing のためのバッファを生成します。
+output は出力先です。output は << メソッドを持っていなければなりません。
+<< メソッドには
+ * [[m:PrettyPrint#text]] の第1引数 obj 
+ * [[m:PrettyPrint#breakable]] の第1引数 sep 
+ * [[m:PrettyPrint.new]] の第3引数 newline 
+ * [[m:PrettyPrint.new]] に与えたブロックを評価した結果
+のどれかひとつが引数として与えられます。
 
-�֥��å������ꤵ�줿���ϡ�������������뤿��˻Ȥ��ޤ����֥��å��ϡ��������������������ɽ������������Ȥ��ƸƤФ�ޤ����֥��å������ꤵ��ʤ����ϡ�������������뤿��� {|width| ' ' * width} ���Ȥ��ޤ���
+ブロックが指定された場合は、空白を生成するために使われます。ブロックは、生成したい空白の幅を表す整数を引数として呼ばれます。ブロックが指定されない場合は、空白を生成するために {|width| ' ' * width} が使われます。
 
-@param output ���������ꤷ�ޤ���output �� << �᥽�åɤ���äƤ��ʤ���Фʤ�ޤ���
+@param output 出力先を指定します。output は << メソッドを持っていなければなりません。
 
-@param maxwidth �Ԥκ���������ꤷ�ޤ��������������ԤǤ��ʤ���Τ��Ϥ��줿���ϡ��ºݤν������� maxwidth ��ۤ��뤳�Ȥ�����ޤ���
+@param maxwidth 行の最大幅を指定します。ただし、改行できないものが渡された場合は、実際の出力幅は maxwidth を越えることがあります。
 
-@param newline ���Ԥ˻Ȥ��ޤ���
+@param newline 改行に使われます。
 
 
 --- format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
-PrettyPrint ���֥������Ȥ������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-Ϳ����줿 output ���֤��ޤ���
+PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
+与えられた output を返します。
 
-�ʲ���Ʊ��Ư���򤹤��ΤǴ��ؤΤ�����Ѱդ���Ƥ��ޤ���
+以下と同じ働きをするもので簡便のために用意されています。
 
   begin
     pp = PrettyPrint.new(output, maxwidth, newline, &genspace)
@@ -91,95 +91,95 @@ PrettyPrint ���֥������Ȥ������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
     output
   end
 
-@param output ���������ꤷ�ޤ���output �� << �᥽�åɤ���äƤ��ʤ���Фʤ�ޤ���
+@param output 出力先を指定します。output は << メソッドを持っていなければなりません。
 
-@param maxwidth �Ԥκ���������ꤷ�ޤ��������������ԤǤ��ʤ���Τ��Ϥ��줿���ϡ�
-                �ºݤν������� maxwidth ��ۤ��뤳�Ȥ�����ޤ���
+@param maxwidth 行の最大幅を指定します。ただし、改行できないものが渡された場合は、
+                実際の出力幅は maxwidth を越えることがあります。
 
-@param newline ���Ԥ˻Ȥ��ޤ���
+@param newline 改行に使われます。
 
-@param genspace ����������˻Ȥ��� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
-                �������������������ɽ������������Ȥ��ƸƤФ�ޤ���
+@param genspace 空白の生成に使われる [[c:Proc]] オブジェクトを指定します。
+                生成したい空白の幅を表す整数を引数として呼ばれます。
 
 --- singleline_format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
 
-PrettyPrint ���֥������Ȥ������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-[[m:PrettyPrint.format]] �˻��Ƥ��ޤ��������Ԥ��ޤ���
+PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
+[[m:PrettyPrint.format]] に似ていますが、改行しません。
 
-���� maxwidth, newline �� genspace ��̵�뤵��ޤ����֥��å���� breakable �μ¹Ԥϡ�
-���Ԥ����� text �μ¹ԤǤ��뤫�Τ褦�˰����ޤ���
+引数 maxwidth, newline と genspace は無視されます。ブロック中の breakable の実行は、
+改行せずに text の実行であるかのように扱います。
 
-@param output ���������ꤷ�ޤ���output �� << �᥽�åɤ���äƤ��ʤ���Фʤ�ޤ���
+@param output 出力先を指定します。output は << メソッドを持っていなければなりません。
 
-@param maxwidth ̵�뤵��ޤ���
+@param maxwidth 無視されます。
 
-@param newline ̵�뤵��ޤ���
+@param newline 無視されます。
 
-@param genspace ̵�뤵��ޤ���
+@param genspace 無視されます。
 
 == Instance Methods
 --- text(obj)           -> ()
 --- text(obj, width = obj.length)    -> ()
 
-obj �� width �����Υƥ����ȤȤ��Ƽ��Ȥ��ɲä��ޤ���
+obj を width カラムのテキストとして自身に追加します。
 
-@param obj ���Ȥ��ɲä���ƥ����Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param obj 自身に追加するテキストを文字列で指定します。
 
-@param width obj �Υ�������ꤷ�ޤ������ꤵ��ʤ��ä���硢obj.length �����Ѥ���ޤ���
+@param width obj のカラムを指定します。指定されなかった場合、obj.length が利用されます。
 
 --- breakable(sep = ' ')     -> ()
 --- breakable(sep, width = sep.length)    -> ()
 
-��ɬ�פʤ餳���ǲ��Խ����פȤ������Ȥ򼫿Ȥ����Τ��ޤ���
-�⤷���ΰ��֤ǲ��Ԥ���ʤ���С�width �����Υƥ����� sep �����Ϥκݤˤ�������������ޤ���
+「必要ならここで改行出来る」ということを自身に通知します。
+もしその位置で改行されなければ、width カラムのテキスト sep が出力の際にそこに挿入されます。
 
-@param sep ���Ԥ������ʤ��ä��������������ƥ����Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param sep 改行が起きなかった場合に挿入されるテキストを文字列で指定します。
 
-@param width �ƥ����� sep �� width �����Ǥ���Ȳ��ꤵ��ޤ������ꤵ��ʤ���С�
-             sep.length �����Ѥ���ޤ����㤨�� sep ��¿�Х���ʸ���κݤ˻��ꤹ��ɬ�פ����뤫���Τ�ޤ���
+@param width テキスト sep は width カラムであると仮定されます。指定されなければ、
+             sep.length が利用されます。例えば sep が多バイト文字の際に指定する必要があるかも知れません。
 
 --- nest(indent) {...}     -> ()
 
-���Ȥθ��ߤΥ���ǥ�Ȥ� indent �������ä����Ƥ��顢�֥��å���¹Ԥ��������ᤷ�ޤ���
+自身の現在のインデントを indent だけ増加させてから、ブロックを実行し、元に戻します。
 
-@param indent ����ǥ�Ȥ�����ʬ�������ǻ��ꤷ�ޤ���
+@param indent インデントの増加分を整数で指定します。
 
 --- group(indent = 0, open_obj = '', close_obj = '', open_width = open_obj.length, close_width = close_obj.length){...}      -> ()
 
-Ϳ����줿�֥��å���¹Ԥ��ޤ���
-�֥��å���Ǽ��Ȥ��ɲä����ʸ����䥪�֥������Ȥϡ�1�ԤˤޤȤ��ɽ�����Ƥ�
-�褤Ʊ�����롼�פ�°����Ȳ��ꤵ��ޤ���
+与えられたブロックを実行します。
+ブロック内で自身に追加される文字列やオブジェクトは、1行にまとめて表示しても
+よい同じグループに属すると仮定されます。
 
-�⤦�����ܤ����������ޤ���pretty printing ���르�ꥺ��ϥ���ǥ�ȤȲ��Ԥ�
-�ĥ꡼��¤���뤳�Ȥˤ�äƷ��ꤷ�ޤ��������ơ�group �᥽�åɤϻҥΡ��ɤκ�����
-�ҥΡ��ɤΥ���ǥ�Ȥο����η����ô�����ޤ���
+もう少し詳しく説明します。pretty printing アルゴリズムはインデントと改行を、
+ツリー構造を作ることによって決定します。そして、group メソッドは子ノードの作成と
+子ノードのインデントの深さの決定を担当します。
 
-Ʊ���Ρ�����ǸƤФ줿 breakable �ϡ����Ԥ���ʤ������Ʊ���˲��Ԥ��ޤ���
+同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。
 
-@param indent ���롼�פΥ���ǥ�Ȥο�������ꤷ�ޤ���
+@param indent グループのインデントの深さを指定します。
 
-@param open_obj ���ꤵ�줿��硢self.text(open_obj, open_width) ���֥��å���
-                �¹Ԥ�������˸ƤФ�ޤ���������̤ʤɤ���Ϥ���Τ˻��Ѥ���ޤ���
+@param open_obj 指定された場合、self.text(open_obj, open_width) がブロックが
+                実行される前に呼ばれます。開き括弧などを出力するのに使用されます。
 
-@param close_obj ���ꤵ�줿��硢self.text(close_obj, close_width) ���֥��å���
-                 �¹Ԥ��줿��˸ƤФ�ޤ����Ĥ���̤ʤɤ���Ϥ���Τ˻��Ѥ���ޤ���
+@param close_obj 指定された場合、self.text(close_obj, close_width) がブロックが
+                 実行された後に呼ばれます。閉じ括弧などを出力するのに使用されます。
 
-@param open_width open_obj �Υ�������ꤷ�ޤ���
+@param open_width open_obj のカラムを指定します。
 
-@param close_width close_obj �Υ�������ꤷ�ޤ���
+@param close_width close_obj のカラムを指定します。
 
 --- flush     -> ()
 
-�Хåե����줿�ǡ�������Ϥ��ޤ���
+バッファされたデータを出力します。
 
 --- first?    -> bool
 
 #@since 1.8.2
-���Υ᥽�åɤ� obsolete �Ǥ���
+このメソッドは obsolete です。
 #@end
 
-���ߤΥ��롼�פ� first? ���Ф���ǽ�θƤӽФ����ɤ�����Ƚ�ꤹ��
-�Ҹ�Ǥ�������ϥ���ޤǶ��ڤ�줿�ͤ���������Τ�ͭ�ѤǤ���
+現在のグループで first? に対する最初の呼び出しかどうかを判定する
+述語です。これはカンマで区切られた値を整形するのに有用です。
 
   pp.group(1, '[', ']') {
     xxx.each {|yyy|
@@ -193,20 +193,20 @@ obj �� width �����Υƥ����ȤȤ��Ƽ��Ȥ��ɲä��ޤ���
 
 --- output    -> object
 
-���Ȥ� output ���֤��ޤ���
+自身の output を返します。
 
 --- maxwidth    -> Integer
 
-���Ȥ������֤��ޤ���
+自身の幅を返します。
 
 --- newline    -> String
 
-���Ȥβ���ʸ�����֤��ޤ���
+自身の改行文字を返します。
 
 --- genspace    -> Proc
 
-������������� Proc ���֤��ޤ���
+空白を生成する Proc を返します。
 
 --- indent    -> Integer
 
-���ߤΥ���ǥ�Ȥο������֤��ޤ���
+現在のインデントの深さを返します。

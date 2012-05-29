@@ -3,15 +3,15 @@
 =begin
 = TkPhotoImage
 
-== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
+== ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹:
 
 ((<TkImage>))
 
-== ¥¯¥é¥¹¥á¥½¥Ã¥É:
+== ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkPhotoImage.new(*args)
 #@todo
-== ¥á¥½¥Ã¥É:
+== ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkPhotoImage#blank
 #@todo

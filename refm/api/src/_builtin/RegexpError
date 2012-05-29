@@ -1,8 +1,8 @@
 = class RegexpError < StandardError
 
-Àµµ¬É½¸½¤Î¥³¥ó¥Ñ¥¤¥ë¤Ë¼ºÇÔ¤·¤¿¤È¤­¤ËÈ¯À¸¤·¤Þ¤¹¡£
+æ­£è¦è¡¨ç¾ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã«å¤±æ•—ã—ãŸã¨ãã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   $ ruby -e 'Regexp.compile("*")'
   -e:1:in `initialize': target of repeat operator is not specified: /*/ (RegexpError)

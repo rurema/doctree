@@ -3,12 +3,12 @@
 
 --- add_builtin_type(type_tag){|type, val| ...} -> nil
 
-yaml.org,2002�ɥᥤ���°���Ƥ��륯�饹��YAML���ɲä�
-���Υ��饹�򸫤Ĥ����Ȥ���������ꤷ�ޤ���
+yaml.org,2002ドメインに属しているクラスをYAMLに追加し
+そのクラスを見つけたときの操作を指定します。
 
-@param type_tag �ä��륯�饹����ꤹ�롣
-@param type YAML�ɥᥤ��ȥ��饹��ʸ����
-@param val YAML�ǡ�����¤
+@param type_tag 加えるクラスを指定する。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
 
   require 'yaml'
   
@@ -32,23 +32,23 @@ yaml.org,2002�ɥᥤ���°���Ƥ��륯�饹��YAML���ɲä�
   
   p YAML.load(str1)
   #=> #<YAML::DomainType:0x2b06fec @type_id="Rational", @domain="ruby.yaml.org,2002", @value="5/6">
-  ## ������Ѳ��ʤ�
+  ## 前回と変化なし
   
   rt = YAML.load(str2)
   p rt        # => Rational(3, 4)
   p rt + 0.25 # => 1.0
 
-#@# require "yaml" �������˴���Ū�� require "rational" ����롣
+#@# require "yaml" した時に間接的に require "rational" される。
 
 --- add_domain_type(domain, type_tag){|type, val| ...} -> nil
 
-YAML�ɥᥤ���°���Ƥ��륯�饹��YAML���ɲä���
-���Υ��饹�򸫤Ĥ����Ȥ���������ꤷ�ޤ���
+YAMLドメインに属しているクラスをYAMLに追加し、
+そのクラスを見つけたときの操作を指定します。
 
-@param domain YAML�Υɥᥤ���ʸ����ǻ��ꤹ�롣
-@param type_tag �ä��륯�饹����ꤹ�롣
-@param type YAML�ɥᥤ��ȥ��饹��ʸ����
-@param val YAML�ǡ�����¤
+@param domain YAMLのドメインを文字列で指定する。
+@param type_tag 加えるクラスを指定する。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
 
 #@since 1.9.3
   require 'syck'
@@ -80,12 +80,12 @@ YAML�ɥᥤ���°���Ƥ��륯�饹��YAML���ɲä���
 
 --- add_private_type(type_re){|type, val| ...} -> nil
 
-�ץ饤�١��ȥ����פΥ��饹��YAML���ɲä���
-���Υ��饹�򸫤Ĥ����Ȥ���������ꤷ�ޤ���
+プライベートタイプのクラスをYAMLに追加し、
+そのクラスを見つけたときの操作を指定します。
 
-@param type_re �ץ饤�١��ȥ����פΥ��饹��ʸ����ǻ��ꤷ�ޤ���
-@param type YAML�ɥᥤ��ȥ��饹��ʸ����
-@param val YAML�ǡ�����¤
+@param type_re プライベートタイプのクラスを文字列で指定します。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
 
 #@since 1.9.3
   require 'syck'
@@ -131,12 +131,12 @@ YAML�ɥᥤ���°���Ƥ��륯�饹��YAML���ɲä���
 
 --- add_ruby_type(type_tag){|type, val| ...} -> nil
 
-ruby�����פΥ��饹��YAML���ɲä���
-���Υ��饹�򸫤Ĥ����Ȥ���������ꤷ�ޤ���
+rubyタイプのクラスをYAMLに追加し、
+そのクラスを見つけたときの操作を指定します。
 
-@param type_tag ruby�����פΥ��饹��ʸ����ǻ��ꤷ�ޤ���
-@param type YAML�ɥᥤ��ȥ��饹��ʸ����
-@param val YAML�ǡ�����¤
+@param type_tag rubyタイプのクラスを文字列で指定します。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
 
 #@since 1.9.3
   require 'syck'
@@ -177,9 +177,9 @@ ruby�����פΥ��饹��YAML���ɲä���
 
 --- detect_implicit(val) -> String
 
-�������ά�����ͤη���Ƚ�ꤷ�ޤ���
+タグを省略した値の型を判定します。
 
-@param val Ƚ�ꤵ���ʸ�������ꤷ�ޤ���
+@param val 判定される文字列を指定します。
 
   require 'yaml'
   
@@ -196,12 +196,12 @@ ruby�����פΥ��饹��YAML���ɲä���
 
 --- dump(obj, io = nil) -> String | IO
 
-Ϳ����줿 obj �� YAML �ե����ޥåȤ��Ѵ�����io �˽񤭹��ߤޤ���io ����
-���ޤ���io ��Ϳ�����Ƥ��ʤ����ϡ�YAML �ե����ޥåȤ�ʸ������֤���
-����
+与えられた obj を YAML フォーマットに変換し、io に書き込みます。io を返
+します。io が与えられていない場合は、YAML フォーマットの文字列を返しま
+す。
 
-@param obj YAML�ե����ޥåȤ��Ѵ�����륪�֥�������
-@param io �������IO���֥�������
+@param obj YAMLフォーマットに変換されるオブジェクト
+@param io 出力先のIOオブジェクト
 
   YAML.dump( ['badger', 'elephant', 'tiger'],
              File.open('sample.yml', 'w')    )
@@ -209,9 +209,9 @@ ruby�����פΥ��饹��YAML���ɲä���
 #@since 1.8.2
 --- dump_stream(*objs) -> String
 
-Ϳ����줿 objs ���� YAML �ե����ޥåȤ��Ѵ����Ƥ�������Ĥ�ʸ����ˤޤȤ᤿��Τ��֤��ޤ���
+与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
 
-@param objs YAML�ե����ޥåȤ��Ѵ�����륪�֥�������
+@param objs YAMLフォーマットに変換されるオブジェクト
 
   require "yaml"
   puts YAML.dump_stream( "hoge\nfoo", [1,2], {"foo" => "bar"} )
@@ -228,11 +228,11 @@ ruby�����פΥ��饹��YAML���ɲä���
 --- each_document(io) {|obj| ...} -> nil
 --- load_documents(io) {|obj| ...} -> nil
 
-Ϳ����줿 io ���� YAML �ե����ޥåȤ�ʸ��򤹤٤ƽ���ɤ߹���
-Ruby �Υ��֥������Ȥ��Ѵ�����
-�����������֥������Ȥ�����Ȥ��ƥ֥��å���ɾ�����Ƥ����ޤ���
+与えられた io から YAML フォーマットの文書をすべて順に読み込み
+Ruby のオブジェクトに変換し、
+生成したオブジェクトを引数としてブロックを評価していきます。
 
-@param io YAML�ե����ޥåȤ�ʸ����ɤ߹������IO���֥�������
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト
 
   # sample.yml
   - apple
@@ -251,21 +251,21 @@ Ruby �Υ��֥������Ȥ��Ѵ�����
   #=>   ["apple", "banana", "carrot"]
   #=>   {"foo"=>"bar"}
 
-#@# �ʲ���@raise �ˤϤ��ʤ��ä����ΰդǤϤʤ��Ȼפ��뤿�ᡣ
+#@# 以下、@raise にはしなかった。故意ではないと思われるため。
 
-[����] �֥��å�����ꤷ�ʤ��� NoMethodError ��ȯ������������դ��Ƥ���������
+[注意] ブロックを指定しないと NoMethodError が発生する事に注意してください。
 
 --- each_node(io) {|obj| ...} -> nil
 
-Ϳ����줿 io ���� YAML �ե����ޥåȤ�ʸ��򤹤٤ƽ���ɤ߹���
+与えられた io から YAML フォーマットの文書をすべて順に読み込み
 #@since 1.9.2
-[[c:Syck::Map]] ���֥������Ȥ��Ѵ�����
+[[c:Syck::Map]] オブジェクトに変換し、
 #@else
-[[c:YAML::Syck::Map]] ���֥������Ȥ��Ѵ�����
+[[c:YAML::Syck::Map]] オブジェクトに変換し、
 #@end
-�����������֥������Ȥ�����Ȥ��ƥ֥��å���ɾ�����Ƥ����ޤ���
+生成したオブジェクトを引数としてブロックを評価していきます。
 
-@param io YAML �ե����ޥåȤ�ʸ��� IO ���֥�������
+@param io YAML フォーマットの文書の IO オブジェクト
 
   food:
    - apple
@@ -291,13 +291,13 @@ Ruby �Υ��֥������Ȥ��Ѵ�����
 --- load(io)  -> object
 --- load(str) -> object
 
-YAML �ե����ޥåȤ�ʸ����ɤ߹��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
-�����Ȥ��� IO ���֥������Ȥ�ʸ���������դ��ޤ���
-io �� ʸ����ʣ���� YAML �ɥ�����Ȥ�ޤ�Ǥ��Ƥ⡢�ǽ�Τ�Τ���
-Ruby �Υ��֥������Ȥ��Ѵ����ޤ���
+YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+引数として IO オブジェクトと文字列を受け付けます。
+io や 文字列が複数の YAML ドキュメントを含んでいても、最初のものしか
+Ruby のオブジェクトに変換しません。
 
-@param io YAML�ե����ޥåȤ�ʸ����ɤ߹������IO���֥�������
-@param str YAML�ե����ޥåȤ�ʸ����ɤ߹������ʸ����
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト
+@param str YAMLフォーマットの文書の読み込み先の文字列
 
 
   $ ruby-1.8 -ryaml -e '
@@ -314,50 +314,50 @@ Ruby �Υ��֥������Ȥ��Ѵ����ޤ���
 #@since 1.8.2
 --- load_file(file) -> object
 
-Ϳ����줿̾���Υե����뤫�� YAML �ե����ޥåȤ�ʸ����ɤ߹���
-Ruby �Υ��֥������Ȥ����������֤��ޤ���
-�ե����뤬ʣ���� YAML �ɥ�����Ȥ�ޤ�Ǥ��Ƥ⡢
-�ǽ�Τ�Τ��� Ruby �Υ��֥������Ȥ��Ѵ����ޤ���
+与えられた名前のファイルから YAML フォーマットの文書を読み込み
+Ruby のオブジェクトを生成して返します。
+ファイルが複数の YAML ドキュメントを含んでいても、
+最初のものしか Ruby のオブジェクトに変換しません。
 
-@param file YAML�ե����ޥåȤΥե�����
+@param file YAMLフォーマットのファイル
 
   ---
   - Monday
   -
-   - ��� 
-   - ����
-   - ����
-   - �Ҳ�
-   - �ΰ�
+   - 国語 
+   - 算数
+   - 理科
+   - 社会
+   - 体育
   ---
   - Friday
   -
-   - �ΰ�
-   - ����
-   - ����
-   - ��� 
-   - �Ҳ�
+   - 体育
+   - 算数
+   - 理科
+   - 国語 
+   - 社会
   #end of jikanwari.yaml
 
   require 'yaml'
   
   puts YAML.load_file('jikanwari.yaml').join(",")
   
-  #=> Monday,���,����,����,�Ҳ�,�ΰ�
+  #=> Monday,国語,算数,理科,社会,体育
 
 #@end
 
 --- load_stream(io) -> object
 
-Ϳ����줿 io ���� YAML �ե����ޥåȤ�ʸ���
-���٤ƽ���ɤ߹���� Ruby �Υ��֥������Ȥ��Ѵ����Ƥ�����
+与えられた io から YAML フォーマットの文書を
+すべて順に読み込んで Ruby のオブジェクトに変換していき、
 #@since 1.9.2
-����饪�֥������Ȥ�ޤ�� [[c:Syck::Stream]] ���֤��ޤ���
+それらオブジェクトを含んだ [[c:Syck::Stream]] を返します。
 #@else
-����饪�֥������Ȥ�ޤ�� [[c:YAML::Stream]] ���֤��ޤ���
+それらオブジェクトを含んだ [[c:YAML::Stream]] を返します。
 #@end
 
-@param io YAML �ե����ޥåȤ�ʸ���IO���֥������Ȥ⤷����ʸ����
+@param io YAML フォーマットの文書のIOオブジェクトもしくは文字列
 
 #@since 1.9.3
   require 'syck'
@@ -396,15 +396,15 @@ Ruby �Υ��֥������Ȥ����������֤��ޤ���
 --- object_maker(obj_class, val, is_attr = false) -> object
 #@end
 
-Ϳ����줿obj_class ���饹�ˡ�val�ϥå���򥤥󥹥����ѿ��Ȥ����ɲä�
-obj_class���饹�Υ��󥹥��󥹤����������֤��ޤ���
+与えられたobj_class クラスに、valハッシュをインスタンス変数として追加し
+obj_classクラスのインスタンスを生成して返します。
 
-@param obj_class ���饹����ꤷ�ޤ���
+@param obj_class クラスを指定します。
 
-@param val [[c:Hash]] ����ꤷ�ޤ���obj_class�Υ��󥹥����ѿ������˻�
-           �Ѥ���ޤ���
+@param val [[c:Hash]] を指定します。obj_classのインスタンス変数作成に使
+           用されます。
 
-@raise YAML::Error val �� [[c:Hash]] ����ꤷ�ʤ��ä�����ȯ�����ޤ���
+@raise YAML::Error val に [[c:Hash]] を指定しなかった場合に発生します。
 
   require 'yaml'
 
@@ -425,7 +425,7 @@ obj_class���饹�Υ��󥹥��󥹤����������֤��ޤ���
   age: 8
   # end of sample
 
-  ���
+  結果
   #=> #<Cat:0xb7ccb174 @name="taro", @age=13>
   #=> #<Cat:0xb7ccafa8 @name="jiro", @age=23>
   #=> #<Cat:0xb7ccaad0 @name="saburo", @age=8>
@@ -436,17 +436,17 @@ obj_class���饹�Υ��󥹥��󥹤����������֤��ޤ���
 --- parse(io) -> YAML::Syck::Node
 #@end
 
-Ϳ����줿 io ���� YAML �ե����ޥåȤ�ʸ���ѡ�����
+与えられた io から YAML フォーマットの文書をパースし
 #@since 1.9.2
-[[c:Syck::Node]] �����Υ��֥��饹�Υ��֥������Ȥ��Ѵ����ޤ���
-ʣ���Υɥ�����Ȥ��ɤ߹�����ϡ�YAML.parse_documents(���Τ�
-[[m:Syck.parse_documents]]) ����Ѥ��ޤ���
+[[c:Syck::Node]] かそのサブクラスのオブジェクトに変換します。
+複数のドキュメントを読み込む場合は、YAML.parse_documents(実体は
+[[m:Syck.parse_documents]]) を使用します。
 #@else
-[[c:YAML::Syck::Node]] �����Υ��֥��饹�Υ��֥������Ȥ��Ѵ����ޤ���
-ʣ���Υɥ�����Ȥ��ɤ߹�����ϡ�[[m:YAML.parse_documents]] ����Ѥ��ޤ���
+[[c:YAML::Syck::Node]] かそのサブクラスのオブジェクトに変換します。
+複数のドキュメントを読み込む場合は、[[m:YAML.parse_documents]] を使用します。
 #@end
 
-@param io YAML�ե����ޥåȤ�IO���֥������Ȥ⤷����ʸ����
+@param io YAMLフォーマットのIOオブジェクトもしくは文字列
 
   #!/usr/bin/env ruby
   
@@ -476,19 +476,19 @@ obj_class���饹�Υ��󥹥��󥹤����������֤��ޤ���
   # end of sample
   #=> "/cat/0/name"
   #=> "/cat/1/name"
-  # dog ���ɤ߹��ޤʤ�
+  # dog は読み込まない
 
 --- parse_documents(io) {|obj| ...} -> nil
 
-Ϳ����줿 io ���� YAML �ե����ޥåȤ�ʸ���ѡ�����
+与えられた io から YAML フォーマットの文書をパースし
 #@since 1.9.2
-[[c:Syck::Node]]���֥������Ȥ��Ѵ�����
+[[c:Syck::Node]]オブジェクトに変換し、
 #@else
-[[c:YAML::Syck::Node]]���֥������Ȥ��Ѵ�����
+[[c:YAML::Syck::Node]]オブジェクトに変換し、
 #@end
-�����������֥������Ȥ�����Ȥ��ƥ֥��å���ɾ�����Ƥ����ޤ���
+生成したオブジェクトを引数としてブロックを評価していきます。
 
-@param io YAML �ե����ޥåȤ�ʸ��� IO ���֥������Ȥ⤷����ʸ����
+@param io YAML フォーマットの文書の IO オブジェクトもしくは文字列
 
 #@since 1.9.3
   require 'syck'
@@ -522,18 +522,18 @@ obj_class���饹�Υ��󥹥��󥹤����������֤��ޤ���
   #=> "/dog/shiba/1/name"
   #=> "-->"
 
-[����] �֥��å�����ꤷ�ʤ��� NoMethodError ��ȯ������������դ��Ƥ���������
+[注意] ブロックを指定しないと NoMethodError が発生する事に注意してください。
 
 #@since 1.8.2
 --- parse_file(file_path)
-file_path�Υե����뤫���Ĥ�YAML�ɥ�����Ȥ�ѡ�������
+file_pathのファイルから一つのYAMLドキュメントをパースし、
 #@since 1.9.2
-[[c:Syck::Node]]���֥������Ȥ��֤��ޤ���
+[[c:Syck::Node]]オブジェクトを返します。
 #@else
-[[c:YAML::Syck::Node]]���֥������Ȥ��֤��ޤ���
+[[c:YAML::Syck::Node]]オブジェクトを返します。
 #@end
 
-@param file_path YAML�ɥ�����Ȥ��񤫤줿�ե�����ؤΥѥ���ʸ����ǻ��ꤹ��
+@param file_path YAMLドキュメントが書かれたファイルへのパスを文字列で指定する
 
   cat:
    - name: taro
@@ -559,20 +559,20 @@ file_path�Υե����뤫���Ĥ�YAML�ɥ�����Ȥ�ѡ�������
 
 --- quick_emit(oid, opts={}) {|obj| ...} -> String
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- read_type_class(type, obj_class) -> [String, Class]
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 #@since 1.8.3
 --- tagurize(val) -> String
 
-val �ǻ��ꤷ�������򸵤˥��� URI ��������ޤ���
+val で指定したタグを元にタグ URI を作成します。
 
-@param val ������ʸ����ǻ��ꤷ�ޤ���
+@param val タグを文字列で指定します。
 
-��:
+例:
 
   require 'yaml'
   YAML.tagurize("str")      # => "tag:yaml.org,2002:str"
@@ -584,11 +584,11 @@ val �ǻ��ꤷ�������򸵤˥��� URI ��������ޤ���
 
 --- transfer(type_id, obj) -> object
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- try_implicit(obj) -> object
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 #@since 1.9.2
 --- emitter -> Syck::Emitter
@@ -596,7 +596,7 @@ val �ǻ��ꤷ�������򸵤˥��� URI ��������ޤ���
 --- emitter -> YAML::Syck::Emitter
 #@end
 
-YAML ����Ϥ��뤿��Υ��֥������Ȥ��֤��ޤ���
+YAML を出力するためのオブジェクトを返します。
 
 #@since 1.9.2
 --- generic_parser -> Syck::Parser
@@ -604,11 +604,11 @@ YAML ����Ϥ��뤿��Υ��֥������Ȥ��֤��ޤ���
 --- generic_parser -> YAML::Syck::Parser
 #@end
 
-YAML �ѡ������֤��ޤ�����������[[m:YAML.parser]] �Ȥϰۤʤꡢ�꥾��Ф�
+YAML パーサを返します。ただし、[[m:YAML.parser]] とは異なり、リゾルバに
 #@since 1.9.2
-[[m:Syck::GenericResolver]] �����ꤵ��Ƥ��ޤ���
+[[m:Syck::GenericResolver]] が指定されています。
 #@else
-[[m:YAML::Syck::GenericResolver]] �����ꤵ��Ƥ��ޤ���
+[[m:YAML::Syck::GenericResolver]] が指定されています。
 #@end
 
 @see [[m:YAML.parser]]
@@ -619,7 +619,7 @@ YAML �ѡ������֤��ޤ�����������[[m:YAML.parser]] �Ȥϰۤʤꡢ�꥾��Ф�
 --- parser -> YAML::Syck::Parser
 #@end
 
-YAML �ѡ������֤��ޤ���
+YAML パーサを返します。
 
 @see [[m:YAML.generic_parser]]
 
@@ -629,4 +629,4 @@ YAML �ѡ������֤��ޤ���
 --- resolver -> YAML::Syck::DefaultResolver
 #@end
 
-���� URI �Ȥδ�Ϣ�դ����褹��꥾��Ф��֤��ޤ���
+タグ URI との関連付けを解決するリゾルバを返します。

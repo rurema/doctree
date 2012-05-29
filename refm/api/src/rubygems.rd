@@ -12,99 +12,99 @@ require rubygems/defaults/operating_system
 
 sublibrary rubygems/gem_runner
 
-RubyGems �򰷤�����Υ��饹��⥸�塼�뤬�������Ƥ���饤�֥��Ǥ���
+RubyGems を扱うためのクラスやモジュールが定義されているライブラリです。
 
-#@# _builtin/ �ʲ��˰�ư����ͽ����ä����������㤤�����뤿����α
+#@# _builtin/ 以下に移動する予定だったが形式が違いすぎるため保留
 
-=== gem ���ޥ�ɤλȤ���
+=== gem コマンドの使い方
 
   $ gem help
   
-    RubyGems �� Ruby �Τ���ιⵡǽ�ʥѥå����������ġ���Ǥ���
-    ����Ϥ��¿���ξ���ؤΥݥ��󥿤�ޤ�Ǥ������Ū�ʥإ�ץ�å������Ǥ���
+    RubyGems は Ruby のための高機能なパッケージ管理ツールです。
+    これはより多くの情報へのポインタを含んでいる基本的なヘルプメッセージです。
   
-      ������ˡ:
+      使用方法:
         gem -h/--help
         gem -v/--version
         gem command [arguments...] [options...]
   
-      ��:
+      例:
         gem install rake
         gem list --local
         gem build package.gemspec
         gem help install
   
-      ����˥إ��:
-        gem help commands            ���Ƥ� 'gem' ���ޥ�ɤ�ꥹ�ȥ��åפ��ޤ�
-        gem help examples            �����Ĥ��λ�����ˡ�����ɽ�����ޤ�
-        gem help platforms           �ץ�åȥե�����˴ؤ�������ɽ�����ޤ�
-        gem help <COMMAND>           COMMAND �˴ؤ���إ�פ�ɽ�����ޤ�
+      さらにヘルプ:
+        gem help commands            全ての 'gem' コマンドをリストアップします
+        gem help examples            いくつかの使用方法の例を表示します
+        gem help platforms           プラットフォームに関する情報を表示します
+        gem help <COMMAND>           COMMAND に関するヘルプを表示します
                                        (e.g. 'gem help install')
-      ���ܤ�������:
+      より詳しい情報:
         http://rubygems.rubyforge.org
 
-==== Gem �ѥå������򥤥󥹥ȡ��뤹��
+==== Gem パッケージをインストールする
 
-�㤨�� rak ( [[url:http://rak.rubyforge.org/]] ) �򥤥󥹥ȡ��뤹��ˤϡ��ʲ��Τ����줫��¹Ԥ��ޤ���
+例えば rak ( [[url:http://rak.rubyforge.org/]] ) をインストールするには、以下のいずれかを実行します。
 
   $ gem install rak
   $ sudo gem install rak
 
-����ΥС������� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
+特定のバージョンの Gem パッケージをインストールするには以下のようにします。
 
-  $ gem install rak --version 0.8.1    # �С������ 0.8.1 �򥤥󥹥ȡ��뤹��
-  $ gem install rak --version '>= 0.5' # �С������ 0.5 �ʾ�Τ�Τ򥤥󥹥ȡ��뤹��
+  $ gem install rak --version 0.8.1    # バージョン 0.8.1 をインストールする
+  $ gem install rak --version '>= 0.5' # バージョン 0.5 以上のものをインストールする
 
-Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
+Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
 
   $ gem install rak -p http://user:pasword@proxy.example.com/
 
-==== Gem �ѥå������򥢥󥤥󥹥ȡ��뤹��
+==== Gem パッケージをアンインストールする
 
-�㤨�� rak �򥢥󥤥󥹥ȡ��뤹��ˤϡ��ʲ��Τ����줫��¹Ԥ��ޤ���
+例えば rak をアンインストールするには、以下のいずれかを実行します。
 
   $ gem uninstall rak
   $ sudo gem uninstall rak
 
-����ΥС������� Gem �ѥå������򥢥󥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
+特定のバージョンの Gem パッケージをアンインストールするには以下のようにします。
 
   $ gem uninstall rak --version 0.8.1
 
-==== Gem �ѥå������򹹿�����
+==== Gem パッケージを更新する
 
-���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������򹹿�����ˤϰʲ��Τ褦�ˤ��ޤ���
+インストールされている Gem パッケージを更新するには以下のようにします。
 
   $ gem update
   $ sudo gem update
 
-����� Gem �ѥå������򹹿�����ˤϰʲ��Τ褦�ˤ��ޤ���
+特定の Gem パッケージを更新するには以下のようにします。
 
   $ gem update rak
 
-==== Gem �ѥå�������õ��
+==== Gem パッケージを探す
 
-�ѥå�����̾���� Gem �ѥå�������õ�����Ȥ��Ǥ��ޤ���
-'active' �Ȥ���ʸ�����ѥå�����̾�˴ޤ�ѥå�������õ���ˤϰʲ��Τ褦�ˤ��ޤ���
+パッケージ名から Gem パッケージを探すことができます。
+'active' という文字列をパッケージ名に含むパッケージを探すには以下のようにします。
 
-  $ gem search active       # �ǥե���ȤǤϥ�������˥��󥹥ȡ��뤵��Ƥ����Τ��鸡�����ޤ�
-  $ gem search active -r    # -r ���ץ�����Ĥ�����ݥ��ȥ꤫�鸡�����ޤ�
-  $ gem search active -r -a # -a ���ץ�����Ĥ�������ƤΥС�������ɽ�����ޤ�
+  $ gem search active       # デフォルトではローカルにインストールされているものから検索します
+  $ gem search active -r    # -r オプションをつけるをリポジトリから検索します
+  $ gem search active -r -a # -a オプションをつけると全てのバージョンを表示します
 
-���ܺ٤ʾ��Ǹ������������� query ����Ѥ��Ƥ���������
+より詳細な条件で検索したい場合は query を使用してください。
 
-  $ gem query -n ^rails$ -r # rails �ˤ��礦�ɰ��פ����Τ򸡺�����
-  $ gem query -n ^rails -r  # rails �ǻϤޤ��Τ򸡺�����
+  $ gem query -n ^rails$ -r # rails にちょうど一致するものを検索する
+  $ gem query -n ^rails -r  # rails で始まるものを検索する
 
-�ѥå������ξܺ٤��饭����ɸ������뤳�ȤϤǤ��ޤ���
+パッケージの詳細からキーワード検索することはできません。
 
-==== Gem �ѥå��������������
+==== Gem パッケージを作成する
 
-�������� gemspec �ե�����򸵤ˤ��� Gem �ѥå��������ñ�˺������뤳�Ȥ��Ǥ��ޤ���
+作成した gemspec ファイルを元にして Gem パッケージを簡単に作成することができます。
 
   $ gem build <gemspec filename>
 
-�Ǿ��� gemspec �ϰʲ��Τ褦�ˤʤ�ޤ����ӥ�ɤ��뤿���ɬ�פʺǾ��� gemspec �ʤΤǽ���夬��Τ�
-�᥿�ǡ����Τߤ�ޤ� Gem �ѥå������Ǥ����ޤ��������Ĥ��ηٹ�ɽ������ޤ���
+最小の gemspec は以下のようになります。ビルドするために必要な最小の gemspec なので出来上がるのは
+メタデータのみを含む Gem パッケージです。また、いくつかの警告が表示されます。
 
   Gem::Specification.new do |s|
     s.name    = 'hello'
@@ -112,8 +112,8 @@ Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
     s.summary = 'hello summary'
   end
 
-����Ū�ʥ饤�֥���������뤿��� gemspec ����򼨤��ޤ���
-�ٹ��å����������Ϥ���ʤ��褦�ˤ����Ĥ�������ɲä��Ƥ��ޤ���
+実用的なライブラリを作成するための gemspec の例を示します。
+警告メッセージが出力されないようにいくつか設定を追加しています。
 
   Gem::Specification.new do |s|
     s.name              = 'hello'
@@ -128,25 +128,25 @@ Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
   end
 
 : name
-  ���� Gem ��̾������ꤷ�ޤ���
+  この Gem の名前を指定します。
 : version
-  ���� Gem �ΥС���������ꤷ�ޤ���
+  この Gem のバージョンを指定します。
 : summary
-  ���� Gem ��û����������ꤷ�ޤ���
+  この Gem の短い説明を指定します。
 : files
-  ���� Gem �˴ޤ�ե�����Υꥹ�Ȥ���ꤷ�ޤ���
+  この Gem に含むファイルのリストを指定します。
 : authors
-  ���� Gem �κ�ԤΥꥹ�Ȥ���ꤷ�ޤ���
+  この Gem の作者のリストを指定します。
 : email
-  ���� Gem �κ�Ԥ�Ϣ����᡼�륢�ɥ쥹����ꤷ�ޤ���
+  この Gem の作者の連絡先メールアドレスを指定します。
 : homepage
-  ���� Gem �Υ����֥����Ȥ� URI ����ꤷ�ޤ���
+  この Gem のウェブサイトの URI を指定します。
 : description
-  ���� Gem ��Ĺ����������ꤷ�ޤ���
+  この Gem の長い説明を指定します。
 : rubyforge_project
-  Rubyforge �˥ץ��������Ȥ������硢���Υץ���������̾����ꤷ�ޤ���
+  Rubyforge にプロジェクトがある場合、そのプロジェクト名を指定します。
 
-�¹Բ�ǽ�ʥե����� (���ޥ��) ��ޤ���� gemspec �ϰʲ��Τ褦�ˤʤ�ޤ���
+実行可能なファイル (コマンド) を含む場合の gemspec は以下のようになります。
 
   Gem::Specification.new do |s|
     s.name              = 'hello'
@@ -161,9 +161,9 @@ Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
     s.description       = 'hello description'
   end
 
-�饤�֥�����˲ä��� executables ���ɲä��Ƥ��ޤ���
+ライブラリの例に加えて executables を追加しています。
 
-�ޤ����ʲ��Τ褦�� Rakefile �˥��������ɲä��뤳�Ȥ�Ǥ��ޤ���
+また、以下のように Rakefile にタスクを追加することもできます。
 
   require 'rake/gempackagetask'
   
@@ -192,16 +192,16 @@ Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
 
 @see [[c:Gem::Specification]], [[lib:rake]]
 
-=== gem ���ޥ�ɤ�����
-  * GEM_HOME Gem �Υۡ���ǥ��쥯�ȥ�
-  * GEM_PATH Gem �Υ������ѥ�
+=== gem コマンドの設定
+  * GEM_HOME Gem のホームディレクトリ
+  * GEM_PATH Gem のサーチパス
   * $HOME/.gemrc
 
-�Ķ��ѿ� GEM_HOME, GEM_PATH �����ꤹ����ˤ�ä� Gem ���ޥ�ɤ�ư����ѹ����뤳�Ȥ��Ǥ��ޤ���
-�ޤ����ۡ���ǥ��쥯�ȥ�� .gemrc �Ȥ��� YAML �ե����ޥåȤǽ񤫤줿�ե�������֤����ȤǤ�
-ư����ѹ����뤳�Ȥ��Ǥ��ޤ���
+環境変数 GEM_HOME, GEM_PATH を設定する事によって Gem コマンドの動作を変更することができます。
+また、ホームディレクトリに .gemrc という YAML フォーマットで書かれたファイルを置くことでも
+動作を変更することができます。
 
-��:
+例:
 
   --- 
   :backtrace: false
@@ -217,10 +217,10 @@ Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
   gem: --no-rdoc --no-ri
 
 
-=== ����
-: Rubyist Magazine - ���꡼�� �ѥå������ޥͥ����� ���� 1 ��� RubyGems (1)
+=== 参考
+: Rubyist Magazine - シリーズ パッケージマネジメント 【第 1 回】 RubyGems (1)
   [[url:http://jp.rubyist.net/magazine/?0006-PackageManagement]]
-: Rubyist Magazine - ���꡼�� �ѥå������ޥͥ����� ���� 2 ��� RubyGems (2)
+: Rubyist Magazine - シリーズ パッケージマネジメント 【第 2 回】 RubyGems (2)
   [[url:http://jp.rubyist.net/magazine/?0010-PackageManagement]]
 
 
@@ -229,35 +229,35 @@ Proxy �����з�ͳ�� Gem �ѥå������򥤥󥹥ȡ��뤹��ˤϰʲ��Τ褦�ˤ��ޤ���
 == Private Instance Methods
 
 --- gem(gem_name, *version_requirements) -> bool
-[[m:$LOAD_PATH]] �� Ruby Gem ���ɲä��ޤ���
+[[m:$LOAD_PATH]] に Ruby Gem を追加します。
 
-���ꤵ�줿 Gem ������ɤ������ˤ��� Gem ��ɬ�פȤ��� Gem ������ɤ��ޤ���
-�С�����������ά�������ϡ��Ǥ�⤤�С������� Gem ������ɤ��ޤ���
-���ꤵ�줿 Gem �䤽�� Gem ��ɬ�פȤ��� Gem �����Ĥ���ʤ��ä�����
-[[c:Gem::LoadError]] ��ȯ�����ޤ���
+指定された Gem をロードする前にその Gem が必要とする Gem をロードします。
+バージョン情報を省略した場合は、最も高いバージョンの Gem をロードします。
+指定された Gem やその Gem が必要とする Gem が見つからなかった場合は
+[[c:Gem::LoadError]] が発生します。
 
-�С������λ�����ˡ�˴ؤ��Ƥ� [[c:Gem::Version]] �򻲾Ȥ��Ƥ���������
+バージョンの指定方法に関しては [[c:Gem::Version]] を参照してください。
 
-rubygems �饤�֥�꤬�饤�֥��С������ξ��ͤ򸡽Ф��ʤ��¤ꡢ
-gem �᥽�åɤ����Ƥ� require �᥽�åɤ������˼¹Ԥ���ޤ���
+rubygems ライブラリがライブラリバージョンの衝突を検出しない限り、
+gem メソッドは全ての require メソッドよりも前に実行されます。
 
-==== �Ķ��ѿ� GEM_SKIP
+==== 環境変数 GEM_SKIP
 
-����� Gem ������ɤ��ʤ��褦�ˤ��뤿��˴Ķ��ѿ� GEM_SKIP ��������뤳�Ȥ��Ǥ��ޤ���
-����� Gem ���ޤ����󥹥ȡ��뤵��Ƥ��ʤ��Ȥ�������������˻��ѤǤ��ޤ���
+特定の Gem をロードしないようにするために環境変数 GEM_SKIP を定義することができます。
+特定の Gem がまだインストールされていないという状況を試すために使用できます。
 
-��:
+例:
 
   GEM_SKIP=libA:libB ruby-I../libA -I../libB ./mycode.rb
 
-@param gem Gem ��̾����ʸ���󤫡�Gem �ΰ�¸�ط��� [[c:Gem::Dependency]] �Υ��󥹥��󥹤ǻ��ꤷ�ޤ���
+@param gem Gem の名前の文字列か、Gem の依存関係を [[c:Gem::Dependency]] のインスタンスで指定します。
 
-@param version_requirements ɬ�פȤ��� gem �ΥС���������ꤷ�ޤ���
+@param version_requirements 必要とする gem のバージョンを指定します。
 
-@return Gem �������ɤǤ������� true ���֤��ޤ��������ɤǤ��ʤ��ä����� false ���֤��ޤ���
+@return Gem がロードできた場合は true を返します。ロードできなかった場合は false を返します。
 
-@raise Gem::LoadError ���ꤵ�줿 Gem �䤽�� Gem ��ɬ�פȤ��� Gem �����Ĥ���ʤ��ä�����ȯ�����ޤ���
-                      ���������Ķ��ѿ� GEM_SKIP �˻��ꤵ��Ƥ��� Gem �˴ؤ��ƤϤ����㳰��ȯ�����ޤ���
+@raise Gem::LoadError 指定された Gem やその Gem が必要とする Gem が見つからなかった場合に発生します。
+                      ただし、環境変数 GEM_SKIP に指定されている Gem に関してはこの例外は発生しません。
 
 @see [[c:Gem::Version]]
 
@@ -267,57 +267,57 @@ gem �᥽�åɤ����Ƥ� require �᥽�åɤ������˼¹Ԥ���ޤ���
 
 --- clear_paths -> nil
 
-[[m:Gem.#dir]], [[m:Gem.#path]] ���ͤ�ꥻ�åȤ��ޤ���
+[[m:Gem.#dir]], [[m:Gem.#path]] の値をリセットします。
 
-���� [[m:Gem.#dir]], [[m:Gem.#path]] ���ƤФ줿���ϡ��ͤ�ǽ餫��׻����ޤ���
-���Υ᥽�åɤϼ�˥�˥åȥƥ��Ȥ���Ω�����󶡤��뤿��˻��Ѥ��ޤ���
+次に [[m:Gem.#dir]], [[m:Gem.#path]] が呼ばれた時は、値を最初から計算します。
+このメソッドは主にユニットテストの独立性を提供するために使用します。
 
 --- marshal_version -> String
 
-[[c:Marshal]] �ΥС�������ɽ��ʸ������֤��ޤ���
+[[c:Marshal]] のバージョンを表す文字列を返します。
 
 --- prefix -> String
 
-���Υ饤�֥�꤬���󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ�οƥǥ��쥯�ȥ���֤��ޤ���
+このライブラリがインストールされているディレクトリの親ディレクトリを返します。
 
 --- source_index -> Gem::SourceIndex
 
-[[m:Gem.#path]] �ˤ��� [[c:Gem::Specification]] �Υ���å�����֤��ޤ���
-���󥹥ȡ��뤵��Ƥ��� [[c:Gem::Specification]] �Υ���ǥå������֤��ޤ�
+[[m:Gem.#path]] にある [[c:Gem::Specification]] のキャッシュを返します。
+インストールされている [[c:Gem::Specification]] のインデックスを返します
 
 @see [[c:Gem::SourceIndex]], [[c:Gem::Specification]]
 
 --- win_platform? -> bool
 
-Windows �ץ�åȥե�����Ǥ���п����֤��ޤ��������Ǥʤ���е����֤��ޤ���
+Windows プラットフォームであれば真を返します。そうでなければ偽を返します。
 
 @see [[m:Kernel::RUBY_PLATFORM]]
 
 --- dir -> String
 
-Gem �Υ��󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ���֤��ޤ���
+Gem のインストールされているディレクトリを返します。
 
 --- ensure_gem_subdirectories
 
-Gem �򥤥󥹥ȡ��뤹�뤿���ɬ�פʥ��֥ǥ��쥯�ȥ��Ŭ�ڤ˺������ޤ���
+Gem をインストールするために必要なサブディレクトリを適切に作成します。
 
-�ǥ��쥯�ȥ��������븢�¤�̵�����⤳�Υ᥽�åɤ�����㳰��ȯ�����ޤ���
+ディレクトリを作成する権限が無い場合もこのメソッドからは例外は発生しません。
 
 @see [[m:Gem::DIRECTORIES]]
 
 --- path -> Array
 
-Gem �򸡺�����ѥ���������֤��ޤ���
+Gem を検索するパスの配列を返します。
 
 --- set_home
 
-Gem �Υۡ���ǥ��쥯�ȥ�򥻥åȤ��ޤ���
+Gem のホームディレクトリをセットします。
 
 @see [[m:Gem.#set_home]]
 
 --- set_paths
 
-Gem �򸡺�����ѥ��򥻥åȤ��ޤ���
+Gem を検索するパスをセットします。
 
 @see [[m:Gem.#path]]
 
@@ -325,92 +325,92 @@ Gem �򸡺�����ѥ��򥻥åȤ��ޤ���
 
 --- ConfigMap -> Hash
 
-[[m:RbConfig::CONFIG]] ���椫�餳�Υ饤�֥��ǻ��Ѥ����Τ���Ф�����������ϥå��塣
+[[m:RbConfig::CONFIG]] の中からこのライブラリで使用するものを抽出して定義したハッシュ。
 
 --- DIRECTORIES -> Array
 
-Gem �Υۡ���ǥ��쥯�ȥ�ʲ��˺�������륵�֥ǥ��쥯�ȥ������
+Gem のホームディレクトリ以下に作成されるサブディレクトリの配列。
 
 --- RubyGemsVersion        -> String
 --- RubyGemsPackageVersion -> String
 
-���Υ饤�֥��ΥС�������ɽ��ʸ����
+このライブラリのバージョンを表す文字列。
 
 --- WIN_PATTERNS -> Array
 
-Windows ���ư���Ƥ��� Ruby ���̤��뤿�������ɽ��������
+Windows 上で動いている Ruby を識別するための正規表現の配列。
 
 
 = class Gem::LoadError < LoadError
 
-Gem ������ɤǤ��ʤ��ä�����ȯ�����륨�顼�Ǥ���
+Gem をロードできなかった場合に発生するエラーです。
 
 == Public Instance Methods
 
 --- name -> String
 
-�����ɤ˼��Ԥ��� Gem ��̾�����֤��ޤ���
+ロードに失敗した Gem の名前を返します。
 
 --- name=(gem_name)
 
-�����ɤ˼��Ԥ��� Gem ��̾���򥻥åȤ��ޤ���
+ロードに失敗した Gem の名前をセットします。
 
-@param gem_name Gem ��̾������ꤷ�ޤ���
+@param gem_name Gem の名前を指定します。
 
 --- version_requirement -> Get::Requirement
 
-�����ɤ˼��Ԥ��� Gem ��ɬ�׾����֤��ޤ���
+ロードに失敗した Gem の必要条件を返します。
 
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
 
 --- version_requirement=(version_requirement)
 
-�����ɤ˼��Ԥ��� Gem ��ɬ�׾��򥻥åȤ��ޤ���
+ロードに失敗した Gem の必要条件をセットします。
 
-@param version_requirement [[c:Gem::Requirement]] �Υ��󥹥��󥹤򥻥åȤ��ޤ���
+@param version_requirement [[c:Gem::Requirement]] のインスタンスをセットします。
 
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
 
 
 = module Gem::QuickLoader
 
-prelude.c ���������Ƥ��������ѤΥ⥸�塼��Ǥ���
+prelude.c で定義されている内部用のモジュールです。
 
 == Public Instance Methods
 
 --- calculate_integers_for_gem_version
 
-prelude.c ���������Ƥ��������ѤΥ᥽�åɤǤ���
+prelude.c で定義されている内部用のメソッドです。
 
 --- const_missing
 
-prelude.c ���������Ƥ��������ѤΥ᥽�åɤǤ���
+prelude.c で定義されている内部用のメソッドです。
 
 --- method_missing
 
-prelude.c ���������Ƥ��������ѤΥ᥽�åɤǤ���
+prelude.c で定義されている内部用のメソッドです。
 
 --- push_all_highest_version_gems_on_load_path
 
-prelude.c ���������Ƥ��������ѤΥ᥽�åɤǤ���
+prelude.c で定義されている内部用のメソッドです。
 
 --- push_gem_version_on_load_path
 
-prelude.c ���������Ƥ��������ѤΥ᥽�åɤǤ���
+prelude.c で定義されている内部用のメソッドです。
 
 == Singleton Methods
 
 --- load_full_rubygems_library
-prelude.c ���������Ƥ��������ѤΥ᥽�åɤǤ���
+prelude.c で定義されている内部用のメソッドです。
 
 == Constants
 
 --- GemPaths -> Hash
 
-prelude.c ���������Ƥ��������Ѥ�����Ǥ���
+prelude.c で定義されている内部用の定数です。
 
 --- GemVersions -> Hash
 
-prelude.c ���������Ƥ��������Ѥ�����Ǥ���
+prelude.c で定義されている内部用の定数です。
 
 #@end

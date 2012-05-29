@@ -1,44 +1,44 @@
 require rubygems/ext
 
-��ĥ�饤�֥���ӥ�ɤ��뤿��Υ��饹�򰷤��饤�֥��Ǥ���
+拡張ライブラリをビルドするためのクラスを扱うライブラリです。
 
 = class Gem::Ext::Builder
 
-��ĥ�饤�֥���ӥ�ɤ��뤿��Υ��饹�Ǥ���
-¾�Υӥ�������饹�Ϥ��Υ��饹��Ѿ����Ƥ��ޤ���
+拡張ライブラリをビルドするためのクラスです。
+他のビルダークラスはこのクラスを継承しています。
 
 == Singleton Methods
 
 --- class_name -> String
 #@todo
 
-�ӥ�����Υ��饹̾���֤��ޤ���
+ビルダーのクラス名を返します。
 
 --- make(dest_path, results)
 #@todo
 
-Makefile ���Խ����� make, make install ��¹Ԥ��ޤ���
+Makefile を編集して make, make install を実行します。
 
 @param dest_path ???
 
-@param results ��̤�����뤿�������Ǥ��������ѿ����˲�Ū���ѹ�����ޤ���
+@param results 結果を入れるための配列です。この変数は破壊的に変更されます。
 
-@raise Gem::InstallError Makefile ��¸�ߤ��ʤ�����ȯ�����ޤ���
+@raise Gem::InstallError Makefile が存在しない場合に発生します。
 
-@raise Gem::InstallError make �μ¹Ԥ˼��Ԥ�������ȯ�����ޤ���
+@raise Gem::InstallError make の実行に失敗した場合に発生します。
 
 --- redirector -> String
 #@todo
 
-'2>&1' �Ȥ���ʸ������֤��ޤ���
+'2>&1' という文字列を返します。
 
 --- run(command, results)
 #@todo
 
-Ϳ����줿���ޥ�ɤ�¹Ԥ��ޤ���
+与えられたコマンドを実行します。
 
-@param command �¹Ԥ��륳�ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param command 実行するコマンドを文字列で指定します。
 
-@param results ��̤�����뤿�������Ǥ��������ѿ����˲�Ū���ѹ�����ޤ���
+@param results 結果を入れるための配列です。この変数は破壊的に変更されます。
 
-@raise Gem::InstallError ���ޥ�ɤμ¹Ԥ˼��Ԥ�������ȯ�����ޤ���
+@raise Gem::InstallError コマンドの実行に失敗した場合に発生します。

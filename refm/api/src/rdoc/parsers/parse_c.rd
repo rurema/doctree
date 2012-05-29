@@ -9,14 +9,14 @@ require rdoc/options
 require rdoc/rdoc
 #@end
 
-C ����ǵ��Ҥ��줿�����������ɤ����Ȥ߹��ߥ��饹/�⥸�塼��Υɥ�����
-�Ȥ���Ϥ��뤿��Υ��֥饤�֥��Ǥ���
+C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
+トを解析するためのサブライブラリです。
 
-C ����ǵ��Ҥ��줿��ĥ�饤�֥��ʤɤ���Ϥ���Τ˻��Ѥ��ޤ���
-[[f:rb_define_class]] �� [[f:rb_define_method]] �ʤɤ�������줿��Τ�
-�б����� C ����δؿ��Υ����Ȥ���Ϥ��ޤ���
+C 言語で記述された拡張ライブラリなどを解析するのに使用します。
+[[f:rb_define_class]] や [[f:rb_define_method]] などで定義されたものに
+対応する C 言語の関数のコメントを解析します。
 
-��: Array#flatten �ξ�硣rb_ary_flatten �Υ����Ȥ����Ϥ���ޤ���
+例: Array#flatten の場合。rb_ary_flatten のコメントが解析されます。
 
   /*
    * Returns a new array that is a one-dimensional flattening of this
@@ -45,33 +45,33 @@ C ����ǵ��Ҥ��줿��ĥ�饤�֥��ʤɤ���Ϥ���Τ˻��Ѥ��ޤ���
      ...
      rb_define_method(rb_cArray, "flatten", rb_ary_flatten, 0);
 
-�嵭����ξ�硢rb_ary_flatten �ؿ��� Init_Array �ؿ���Ʊ���ե�����˵�
-�Ҥ���Ƥ���ɬ�פ�����ޤ���
+上記の例の場合、rb_ary_flatten 関数と Init_Array 関数は同じファイルに記
+述されている必要があります。
 
-�ޤ���Ruby �Υ����������ɤȤ��̤˥����Ȥˤ����̤�̿�����ꤹ�������
-���ޤ���
+また、Ruby のソースコードとは別にコメントには特別な命令を指定する事がで
+きます。
 
 : Document-class: name
 
-  ���Ҥ������Ƥ� name �ǻ��ꤷ�� Ruby �Υ��饹�Τ�Τ˻��ꤷ�ޤ���Ʊ��
-  .c �ե������ʣ���Υ��饹�����������ʤɤΤ褦�ˡ�Init_xxx �ؿ���
-  xxx ����ʬ�����饹̾��Ʊ��ǤϤʤ����˻��Ѥ��ޤ���
+  記述する内容を name で指定した Ruby のクラスのものに指定します。同じ
+  .c ファイルに複数のクラス定義がある場合などのように、Init_xxx 関数の
+  xxx の部分がクラス名と同一ではない場合に使用します。
 
 : Document-method: name
 
-  ���Ҥ������Ƥ� name �ǻ��ꤷ�� Ruby �Υ᥽�åɤΤ�Τ˻��ꤷ�ޤ���
-  RDoc ���б�����᥽�åɤ򸫤Ĥ����ʤ��ä����˻��Ѥ��ޤ���
+  記述する内容を name で指定した Ruby のメソッドのものに指定します。
+  RDoc が対応するメソッドを見つけられなかった場合に使用します。
 
 : call-seq:
 
-  ���ꤷ�����ιԤ��鼡�ζ��ԤޤǤ�᥽�åɸƤӽФ���Ȳ�ᤷ�ޤ���
+  指定した次の行から次の空行までをメソッド呼び出し列と解釈します。
 
-�ޤ���RDoc �� rb_define_method �ʤɤ������ C ����δؿ��μ�����Ʊ���ե�
-����ˤ����������Ȥ��Ƥ��ޤ��������Ǥʤ����ϰʲ��Τ褦�ʻ����Ԥ��ޤ���
+また、RDoc は rb_define_method などの定義と C 言語の関数の実装が同じファ
+イルにある事を前提としています。そうでない場合は以下のような指定を行います。
 
-  rb_define_method(....);  // in �ե�����̾
+  rb_define_method(....);  // in ファイル名
 
-��:
+例:
 
   /*
    * Document-class:  MyClass
@@ -102,8 +102,8 @@ C ����ǵ��Ҥ��줿��ĥ�饤�֥��ʤɤ���Ϥ���Τ˻��Ѥ��ޤ���
 extend RDoc::ParserFactory
 #@end
 
-C ����ǵ��Ҥ��줿�����������ɤ����Ȥ߹��ߥ��饹/�⥸�塼��Υɥ�����
-�Ȥ���Ϥ��뤿��Υ��饹�Ǥ���
+C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
+トを解析するためのクラスです。
 
 == Class Methods
 
@@ -113,34 +113,34 @@ C ����ǵ��Ҥ��줿�����������ɤ����Ȥ߹��ߥ��饹/�⥸�塼��Υɥ�����
 --- new(top_level, file_name, body, options, stats) -> RDoc::C_Parser
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
-@param body �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param body ソースコードの内容を文字列で指定します。
 
 #@since 1.9.1
-@param options [[c:RDoc::Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:RDoc::Options]] オブジェクトを指定します。
 #@else
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 #@end
 
-@param stats [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 
 == Instance Methods
 
 --- progress=(val)
 
-��Ľ����Ϥ��� [[c:IO]] ����ꤷ�ޤ���
+進捗を出力する [[c:IO]] を指定します。
 
-@param val ��Ľ����Ϥ��� [[c:IO]] ����ꤷ�ޤ������ꤷ�ʤ��ä�����
-           [[m:$stderr]] ���Ȥ��ޤ���
+@param val 進捗を出力する [[c:IO]] を指定します。指定しなかった場合は
+           [[m:$stderr]] が使われます。
 
 --- scan -> RDoc::TopLevel
 
-C ����ǵ��Ҥ��줿�����������ɤ����Ȥ߹��ߥ��饹/�⥸�塼��Υɥ�����
-�Ȥ���Ϥ��ޤ���
+C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
+トを解析します。
 
-@return [[c:RDoc::TopLevel]] ���֥������Ȥ��֤��ޤ���
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。

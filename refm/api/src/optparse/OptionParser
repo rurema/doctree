@@ -1,36 +1,36 @@
 = class OptionParser < Object
 
-���ޥ�ɥ饤��Υ��ץ������갷������Υ��饹�Ǥ���
+コマンドラインのオプションを取り扱うためのクラスです。
 
-���ץ���󤬻��ꤵ�줿���˸ƤФ��֥��å���
-[[m:OptionParser#on]] �᥽�åɤ���Ͽ���Ƥ����ޤ���
-�ĤޤꡢOptionParser ��Ȥ���硢����Ū�ˤ�
+オプションが指定された時に呼ばれるブロックを
+[[m:OptionParser#on]] メソッドで登録していきます。
+つまり、OptionParser を使う場合、基本的には
 
-  (1) OptionParser ���֥������� opt ���������롣
-  (2) ���ץ������갷���֥��å��� opt ����Ͽ���롣
-  (3) opt.parse(ARGV) �ǥ��ޥ�ɥ饤���ºݤ� parse ���롣
+  (1) OptionParser オブジェクト opt を生成する。
+  (2) オプションを取り扱うブロックを opt に登録する。
+  (3) opt.parse(ARGV) でコマンドラインを実際に parse する。
 
-�Ȥ����褦��ή��ˤʤ�ޤ���
+というような流れになります。
 
   require "optparse"
   ProgramConfig = Hash.new
   opts = OptionParser.new
-  opts.on("-a"){|v| ProgramConfig[:a] = true } # ���ץ�����-a�פ����ޥ�ɥ饤��ǻ��ꤵ��Ƥ�������ư�
-  opts.parse!(ARGV)                            # �ºݤ˥��ޥ�ɥ饤��� parse ��Ԥ���
+  opts.on("-a"){|v| ProgramConfig[:a] = true } # オプション「-a」がコマンドラインで指定されていた場合の動作。
+  opts.parse!(ARGV)                            # 実際にコマンドラインの parse を行う。
 
-=== �ǥե���Ȥ����Ѳ�ǽ�ʥ��ץ����
+=== デフォルトで利用可能なオプション
 
-�ʲ��ϥǥե���Ȥ����Ѳ�ǽ�ʥ��ץ����Ǥ������ץ���󥵥ޥ�ˤ�
-�ФƤ��ޤ���
+以下はデフォルトで利用可能なオプションです。オプションサマリには
+出てきません。
 
 : --help
- ���ץ���󥵥ޥ��ɽ�����Ƥ��� exit ���ޤ���
+ オプションサマリを表示してから exit します。
 
 : --version
 
- [[m:OptionParser#ver]] ��ɽ�����Ƥ��� exit ���ޤ���
- [[m:OptionParser#ver]] ���������Ƥ��ʤ����ϡ����Τ褦�˥��顼��å���������Ϥ��� abort ���ޤ���
- ���ץ�����--version�פˡ�,�פǶ��ڤ�줿���饹̾���⥸�塼��̾������Ȥ���Ϳ�������ϡ����Υ��饹����ӥ⥸�塼����������Ƥ��������Version�פ���ӡ�Release�פ�ɽ�����ơ���λ���ޤ���
+ [[m:OptionParser#ver]] を表示してから exit します。
+ [[m:OptionParser#ver]] が定義されていない場合は、そのようにエラーメッセージを出力して abort します。
+ オプション「--version」に「,」で区切られたクラス名かモジュール名を引数として与えた場合は、そのクラスおよびモジュールで定義されている定数「Version」および「Release」を表示して、終了します。
 //emlist{
  $ ruby t.rb --version=OptionParser,URI,OpenSSL
  t: OptionParser version 12203 (2007-04-20)
@@ -42,10 +42,10 @@
 --- new(banner = nil, width = 32, indent = ' ' * 4)              -> OptionParser
 --- new(banner = nil, width = 32, indent = ' ' * 4) {|opt| ...}  -> OptionParser
 
-OptionParser ���֥������Ȥ����������֤��ޤ���
+OptionParser オブジェクトを生成して返します。
 
-�֥��å���Ϳ����줿��硢�������� OptionParser ���֥������Ȥ�����Ȥ��ƥ֥��å���ɾ
-�����ޤ����Ĥޤꡢ�ʲ��Τ褦�ʽ�������ǽ�Ǥ���
+ブロックが与えられた場合、生成した OptionParser オブジェクトを引数としてブロックを評
+価します。つまり、以下のような書き方が可能です。
 
   require 'optparse'
   OptionParser.new do |opt|
@@ -56,22 +56,22 @@ OptionParser ���֥������Ȥ����������֤��ޤ���
     opt.parse!(ARGV)
   end
 
-@param banner �إ��(���ޥ�)�κǽ����ʬ��ɽ������롢���ץꥱ�������������ʤɤ�ʸ�����Ϳ���ޤ���
+@param banner ヘルプ(サマリ)の最初の部分に表示される、アプリケーションの説明などを文字列で与えます。
 
-@param width ���ޥ������������Ϳ���ޤ���
+@param width サマリの幅を整数で与えます。
 
-@param indent ���ޥ�Υ���ǥ�Ȥ�ʸ�����Ϳ���ޤ���
+@param indent サマリのインデントを文字列で与えます。
 
 --- accept(klass, pat = /.*/){|str| ...}    -> ()
 
-���ץ����ΰ�����ʸ���󤫤� Ruby �Υ��֥������Ȥ��Ѵ����뤿���
-�֥��å�����Ͽ���ޤ������٤Ƥ� OptionParser ���󥹥��󥹤˶��̤Ǥ���
+オプションの引数を文字列から Ruby のオブジェクトに変換するための
+ブロックを登録します。すべての OptionParser インスタンスに共通です。
 
-�֥��å��ˤϡ�ʸ����Ȥ���Ϳ�����륪�ץ����ΰ������� klass �Υ��󥹥��󥹤����������֤���Τ���ꤷ�ޤ���
+ブロックには、文字列として与えられるオプションの引数から klass のインスタンスを生成して返すものを指定します。
 
-[[m:OptionParser#on]] �� klass ����ꤷ����硢
-���ޥ�ɥ饤��Υ��ץ�����Ϳ����줿�����ϡ����� accept ����Ͽ�����֥��å���
-klass �Υ��󥹥��󥹤��Ѵ�����Ƥ��顢OptionParser#on �᥽�åɤ���Ͽ�����֥��å����Ϥ���ޤ���
+[[m:OptionParser#on]] で klass を指定した場合、
+コマンドラインのオプションに与えられた引数は、この accept で登録したブロックで
+klass のインスタンスに変換されてから、OptionParser#on メソッドで登録したブロックに渡されます。
 
   require "optparse"
   require "time"
@@ -92,36 +92,36 @@ klass �Υ��󥹥��󥹤��Ѵ�����Ƥ��顢OptionParser#on �᥽�åɤ���Ͽ�����֥��å�
 
   opts.parse!(ARGV)
 
-�����Ĥ��Υ��饹���Ф��Ƥ��Ѵ��ѤΥ֥��å����ǥե���Ȥ���Ͽ�����
-���ޤ���[[m:OptionParser#on]] �򻲾Ȥ��Ʋ�������
+いくつかのクラスに対しては変換用のブロックがデフォルトで登録されて
+います。[[m:OptionParser#on]] を参照して下さい。
 
-@param klass ���饹���֥������Ȥ�Ϳ���ޤ���
+@param klass クラスオブジェクトを与えます。
 
-@param pat match �᥽�åɤ���ä����֥�������([[c:Regexp]] ���֥������Ȥʤ�)��Ϳ���ޤ���
+@param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
 
 --- reject(klass)    -> ()
 
-[[m:OptionParser.accept]] �᥽�åɤ���Ͽ�����֥��å��������ޤ���
+[[m:OptionParser.accept]] メソッドで登録したブロックを削除します。
 
-@param klass ������������饹���֥������Ȥ���ꤷ�ޤ���
+@param klass 削除したいクラスオブジェクトを指定します。
 
 #@since 1.8.5
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
-������ѡ���������̤�Hash �Ȥ����֤��ޤ���(self.new.getopts ��Ʊ���Ǥ�)
+引数をパースした結果を、Hash として返します。(self.new.getopts と同じです)
 
-@param argv �ѡ����������������ꤷ�ޤ���
+@param argv パースしたい配列を指定します。
 
 #@since 1.9.1
-@param opts ������ʸ����ǻ��ꤷ�ޤ���
+@param opts 引数を文字列で指定します。
 #@else
-@param opts ������ʸ����ǻ��ꤷ�ޤ���[[m:Kernel#getopts]] �򻲾Ȥ��Ʋ�������
+@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
 #@end
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 @see [[m:OptionParser#getopts]]
 
@@ -131,133 +131,133 @@ klass �Υ��󥹥��󥹤��Ѵ�����Ƥ��顢OptionParser#on �᥽�åɤ���Ͽ�����֥��å�
 
 --- accept(klass, pat = /.*/){|str| ...}    -> ()
 
-[[m:OptionParser.accept]] ��Ʊ�ͤǤ�����
-��Ͽ�����֥��å��ϥ쥷���С��˸��ꤵ��ޤ���
+[[m:OptionParser.accept]] と同様ですが、
+登録したブロックはレシーバーに限定されます。
 
-@param klass ���饹���֥������Ȥ�Ϳ���ޤ���
+@param klass クラスオブジェクトを与えます。
 
-@param pat match �᥽�åɤ���ä����֥�������([[c:Regexp]] ���֥������Ȥʤ�)��Ϳ���ޤ���
+@param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
 
 --- reject(klass)    -> ()
 
-[[m:OptionParser#accept]] ����Ͽ�������饹�ȥ֥��å���
-���Ȥ��������ޤ���
+[[m:OptionParser#accept]] で登録したクラスとブロックを
+自身から削除します。
 
-@param klass ���Ȥ��������������饹����ꤷ�ޤ���
+@param klass 自身から削除したいクラスを指定します。
 
 --- banner            -> String
 
-���ޥ�κǽ��ɽ�������ʸ������֤��ޤ���
+サマリの最初に表示される文字列を返します。
 
-@return ���ޥ�κǽ��ɽ�������ʸ������֤��ޤ���
+@return サマリの最初に表示される文字列を返します。
 
 --- banner=(heading)
 
-���ޥ�κǽ��ɽ�������ʸ�������ꤷ�ޤ���
+サマリの最初に表示される文字列を指定します。
 
-@param heading ���ޥ�κǽ��ɽ�������ʸ�������ꤷ�ޤ���
+@param heading サマリの最初に表示される文字列を指定します。
 
 --- summary_width         -> Integer
 
-���ޥ��ɽ������Ȥ��������������֤��ޤ���
+サマリを表示するときの幅を整数で返します。
 
-@return ���ޥ��ɽ������Ȥ��������������֤��ޤ���
+@return サマリを表示するときの幅を整数で返します。
 
 --- summary_width=(width)
 
-���ޥ��ɽ������Ȥ������������ǻ��ꤷ�ޤ���
+サマリを表示するときの幅を整数で指定します。
 
-@param width ���ޥ��ɽ������Ȥ������������ǻ��ꤷ�ޤ���
+@param width サマリを表示するときの幅を整数で指定します。
 
 --- summary_indent          -> String
 
-���ޥ��ɽ��������Υ���ǥ�Ȥ�ʸ������֤��ޤ���
+サマリを表示する時のインデントを文字列で返します。
 
-@return ���ޥ��ɽ��������Υ���ǥ�Ȥ�ʸ������֤��ޤ���
+@return サマリを表示する時のインデントを文字列で返します。
 
 --- summary_indent=(indent)
 
-���ޥ��ɽ��������Υ���ǥ�Ȥ�ʸ����ǻ��ꤷ�ޤ���
+サマリを表示する時のインデントを文字列で指定します。
 
-@param indent ���ޥ��ɽ��������˻Ȥ��륤��ǥ�Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param indent サマリを表示する時に使われるインデントを文字列で指定します。
 
 --- program_name           -> String
 
-�ץ�������̾����ʸ������֤��ޤ���
+プログラムの名前を文字列で返します。
 
-�ǥե���Ȥ� $0 ���Ȥ��ޤ���
+デフォルトは $0 が使われます。
 
-@return �ץ�������̾����ʸ������֤��ޤ���
+@return プログラムの名前を文字列で返します。
 
 --- program_name=(name)
 
-�ץ�������̾����ʸ����ǻ��ꤷ�ޤ���
+プログラムの名前を文字列で指定します。
 
-@param name �ץ�������̾����ʸ����ǻ��ꤷ�ޤ���
+@param name プログラムの名前を文字列で指定します。
 
 --- version       -> String
 
-�ץ������ΥС�������ʸ������֤��ޤ���
+プログラムのバージョンを文字列で返します。
 
-@return �ץ������ΥС�������ʸ������֤��ޤ���
+@return プログラムのバージョンを文字列で返します。
 
 --- version=(ver)
 
-�ץ������ΥС�������ʸ����ǻ��ꤷ�ޤ���
+プログラムのバージョンを文字列で指定します。
 
-@param ver �ץ������ΥС�������ʸ����ǻ��ꤷ�ޤ���
+@param ver プログラムのバージョンを文字列で指定します。
 
 --- release       -> String
 
-�ץ������Υ�꡼����ʸ������֤��ޤ���
+プログラムのリリースを文字列で返します。
 
 --- release=(rel)
 
-�ץ������Υ�꡼����ʸ����ǻ��ꤷ�ޤ���
+プログラムのリリースを文字列で指定します。
 
-@param rel �ץ������Υ�꡼����ʸ����ǻ��ꤷ�ޤ���
+@param rel プログラムのリリースを文字列で指定します。
 
 --- ver    -> String
 
-program_name��version �� release �������������С�������ɽ��ʸ������֤��ޤ���
+program_name、version と release から生成したバージョンを表す文字列を返します。
 
 --- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent)               -> ()
 --- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent) {|line| ... } -> ()
 
-���ޥ����ꤵ�줿 to �ؤȲä��Ƥ����ޤ���
+サマリを指定された to へと加えていきます。
 
-�֥��å���Ϳ����줿��硢���ޥ�γƹԤ�����Ȥ��ƥ֥��å���ɾ�����ޤ���
-���ξ�硢�֥��å����������Ū�� to �ؤȲä��Ƥ����ʤ��¤ꡢ
-to �˥��ޥ꤬�ä����뤳�ȤϤ���ޤ���
+ブロックが与えられた場合、サマリの各行を引数としてブロックを評価します。
+この場合、ブロックの中で明示的に to へと加えていかない限り、
+to にサマリが加えられることはありません。
 
-@param to ���ޥ����Ϥ��륪�֥������Ȥ���ꤷ�ޤ���to �ˤ� << �᥽�åɤ�������줤��ɬ�פ�����ޤ���
+@param to サマリを出力するオブジェクトを指定します。to には << メソッドが定義されいる必要があります。
 
-@param width ���ޥ�����������ǻ��ꤷ�ޤ���
+@param width サマリの幅を整数で指定します。
 
-@param max ���ޥ�κ������������ǻ��ꤷ�ޤ���
+@param max サマリの最大幅を整数で指定します。
 
-@param indent ���ޥ�Υ���ǥ�Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param indent サマリのインデントを文字列で指定します。
 
 --- help    -> String
 --- to_s    -> String
 
-���ޥ��ʸ������֤��ޤ���
+サマリの文字列を返します。
 
 --- to_a    -> [String]
 
-���ޥ�γƹԤ����ǤȤ���������֤��ޤ���
+サマリの各行を要素とした配列を返します。
 
 --- separator(sep)    -> ()
 
-���ޥ�˥��ץ�������ڤ뤿���ʸ���� sep ���������ޤ���
-���ץ����ˤ����Ĥ��μ��ब������ˡ����ޥ꤬�狼��䤹���ʤ�ޤ���
+サマリにオプションを区切るための文字列 sep を挿入します。
+オプションにいくつかの種類がある場合に、サマリがわかりやすくなります。
 
-���ޥ�ˤ� on �᥽�åɤ�Ƥ����˥��ץ����ɽ�������Τǡ����ڤ������������
-�Ȥ����Ǥ��Υ᥽�åɤ�ƤӤޤ���
+サマリには on メソッドを呼んだ順にオプションが表示されるので、区切りを挿入したい
+ところでこのメソッドを呼びます。
 
-@param sep ���ޥ�ζ��ڤ��ʸ����ǻ��ꤷ�ޤ���
+@param sep サマリの区切りを文字列で指定します。
 
-��:
+例:
        require 'optparse'
        opts = OptionParser.new
        opts.banner = "Usage: example.rb [options]"
@@ -281,88 +281,88 @@ to �˥��ޥ꤬�ä����뤳�ȤϤ���ޤ���
 --- on(long, desc = "") {|v| ... }         -> self
 --- on(short, long, desc = "") {|v| ... }  -> self
 
-���ץ������갷������Υ֥��å��򼫿Ȥ���Ͽ���ޤ���
-�֥��å��ϥ��ޥ�ɥ饤��Υѡ������ˡ����ץ���󤬻��ꤵ��Ƥ���иƤФ�ޤ���
+オプションを取り扱うためのブロックを自身に登録します。
+ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-���硼�ȥ��ץ����ȥ��󥰥��ץ�����Ʊ������Ͽ���뤳�Ȥ�Ǥ��ޤ���
+ショートオプションとロングオプションを同時に登録することもできます。
   opts.on("-r", "--require LIBRARY"){|lib| ...}
-����ϰʲ���Ʊ�ͤǤ���
+これは以下と同値です。
   opts.on("-r LIBRARY"){|lib| ...}
   opts.on("--require LIBRARY"){|lib| ...}
 
-ʣ���ΰۤʤ륪�ץ�����Ʊ���֥��å�����٤���Ͽ���뤳�Ȥ�Ǥ��ޤ���
+複数の異なるオプションに同じブロックを一度に登録することもできます。
 
   opt.on('-v', '-vv'){|boolean| ...}
   opt.on('--require X', '--need', '--dependon'){|x| ... }
 
-@param short ���硼�ȥ��ץ�����ɽ��ʸ�������ꤷ�ޤ���
-             ���Υ��ץ���󤬰�����Ȥ�ʤ����ϡ�
+@param short ショートオプションを表す文字列を指定します。
+             そのオプションが引数をとらない場合は、
 //emlist{
   on("-x"){|boolean| ...}
 //}
-             �Ȥʤ�ޤ������ޥ�ɥ饤��˥��ץ����¸�ߤ������ true �������
-             ���ƥ֥��å���ɾ�����ޤ���
-             ���硼�ȥ��ץ���󤬰�����Ȥ���ϡ�
+             となります。コマンドラインにオプションが存在した場合 true を引数と
+             してブロックを評価します。
+             ショートオプションが引数をとる場合は、
 //emlist{
   on("-x MANDATORY"){|val| ...}
 //}
-             �Ȥʤ�ޤ���"MANDATORY" ����ʬ��Ǥ�դ�ʸ����ǹ����ޤ���
-             ���ץ����ΰ�����ɬ�ܤǤʤ����� [ ] ��Ĥ��ơ�
+             となります。"MANDATORY" の部分は任意の文字列で構いません。
+             オプションの引数が必須でない場合は [ ] をつけて、
 //emlist{
   on("-x [OPTIONAL]"){|val| ...}
 //}
-             �Ȥʤ�ޤ���
+             となります。
 
-@param long ���󥰥��ץ�����ɽ��ʸ�������ꤷ�ޤ������硼�ȥ��ץ����λ���Ʊ�ͤˡ�
+@param long ロングオプションを表す文字列を指定します。ショートオプションの時と同様に、
 //emlist{
   on("--long"){|boolean| ...}
   on("--long MANDATORY"){|val| ...}
   on("--long [OPTIONAL]"){|val| ...}
 //}
-            �Ȼ���Ǥ��ޤ���
+            と指定できます。
 
-@param desc ���ץ�����������ʸ�����Ϳ���ޤ������ޥ��ɽ������ޤ���
+@param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
 --- on(short, pat = /.*/, desc = "") {|v| ...}        -> self
 --- on(long, pat = /.*/, desc = "") {|v| ...}         -> self
 --- on(short, long, pat = /.*/, desc = "") {|v| ...}  -> self
 
-���ץ������갷������Υ֥��å��򼫿Ȥ���Ͽ���ޤ���
-�֥��å��ϥ��ޥ�ɥ饤��Υѡ������ˡ����ץ���󤬻��ꤵ��Ƥ���иƤФ�ޤ���
+オプションを取り扱うためのブロックを自身に登録します。
+ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-pat �ˤϥ��ץ����ΰ����˵����ѥ������ɽ������ɽ����Ϳ���ޤ���
-���ޥ�ɤ�Ϳ����줿�������ѥ�����˥ޥå����ʤ���硢
-�㳰 OptionParser::InvalidArgument �� parse �¹Ի����ꤲ���ޤ���
+pat にはオプションの引数に許すパターンを表す正規表現で与えます。
+コマンドに与えられた引数がパターンにマッチしない場合、
+例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
 
   opts.on("--username VALUE", /[a-zA-Z0-9_]+/){|name| ...}
   # ruby command --username=ruby_user
   # ruby command --username=ruby.user #=> Error
 
-@param short ���硼�ȥ��ץ�����ɽ��ʸ�������ꤷ�ޤ���
+@param short ショートオプションを表す文字列を指定します。
 
-@param long ���󥰥��ץ�����ɽ��ʸ�������ꤷ�ޤ���
+@param long ロングオプションを表す文字列を指定します。
 
-@param pat ���ץ����ΰ����˵����ѥ������ɽ������ɽ���ǻ��ꤷ�ޤ���
+@param pat オプションの引数に許すパターンを表す正規表現で指定します。
 
-@param desc ���ץ�����������ʸ�����Ϳ���ޤ������ޥ��ɽ������ޤ���
+@param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
 --- on(short, klass = String, desc = "") {|v| ...}        -> self
 --- on(long, klass = String, desc = "") {|v| ...}         -> self
 --- on(short, long, klass = String, desc = "") {|v| ...}  -> self
 
-���ץ������갷������Υ֥��å��򼫿Ȥ���Ͽ���ޤ���
-�֥��å��ϥ��ޥ�ɥ饤��Υѡ������ˡ����ץ���󤬻��ꤵ��Ƥ���иƤФ�ޤ���
+オプションを取り扱うためのブロックを自身に登録します。
+ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-klass �ˤϥ��饹��Ϳ���ޤ����ɤΤ褦�ʥ��饹������դ��뤫�ϡ�
-�ʲ��Ρ֥ǥե���Ȥ����Ѳ�ǽ�ʰ������饹�פ򻲾Ȥ��Ʋ�������
-OptionParser.accept �� OptionParser#accept �ˤ�äơ������դ�
-�륯�饹�����䤹���Ȥ��Ǥ��ޤ�����Ͽ����Ƥ��ʤ����饹�����ꤵ�줿
-��硢�㳰 [[c:ArgumentError]] ���ꤲ�ޤ���
-�ޤ�����Ͽ���줿���饹�Ǥ��äƤ�������Ѵ��Ǥ��ʤ���ΤǤ����硢�㳰
-[[c:OptionParser::InvalidArgument]] ���ꤲ�ޤ���
+klass にはクラスを与えます。どのようなクラスを受け付けるかは、
+以下の「デフォルトで利用可能な引数クラス」を参照して下さい。
+OptionParser.accept や OptionParser#accept によって、受け付け
+るクラスを増やすことができます。登録されていないクラスが指定された
+場合、例外 [[c:ArgumentError]] を投げます。
+また、登録されたクラスであっても引数が変換できないものである場合、例外
+[[c:OptionParser::InvalidArgument]] を投げます。
 
-���ץ����ΰ����� accept ����Ͽ�����֥��å��� klass �Υ��󥹥���
-���Ѵ�����Ƥ��顢�֥��å����Ϥ���ޤ���
+オプションの引数は accept で登録したブロックで klass のインスタンス
+に変換されてから、ブロックに渡されます。
 
   opts.on("-w", "--width N", Integer){|w|
     p w.class #=> Integer
@@ -372,80 +372,80 @@ OptionParser.accept �� OptionParser#accept �ˤ�äơ������դ�
   opts.on("-o", "--overwrite VALUE", TrueClass){|boolean| ...}
   # ruby command --overwrite yes
 
-@param short ���硼�ȥ��ץ�����ɽ��ʸ�������ꤷ�ޤ���
+@param short ショートオプションを表す文字列を指定します。
 
-@param long ���󥰥��ץ�����ɽ��ʸ�������ꤷ�ޤ���
+@param long ロングオプションを表す文字列を指定します。
 
-@param klass ���ץ����ΰ����Υ��饹����ꤷ�ޤ���
+@param klass オプションの引数のクラスを指定します。
 
-@param desc ���ץ�����������ʸ�����Ϳ���ޤ������ޥ��ɽ������ޤ���
+@param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
-@raise ArgumentError ��Ͽ����Ƥ��ʤ����饹�� klass �˻��ꤵ�줿����ȯ�����ޤ���
+@raise ArgumentError 登録されていないクラスが klass に指定された場合に発生します。
 
-==== �ǥե���Ȥ����Ѳ�ǽ�ʰ������饹
+==== デフォルトで利用可能な引数クラス
 
 : Object
- ���ץ����ΰ������Ѵ�����ޤ���
+ オプションの引数は変換されません。
 
 : String
- ���ץ����ΰ������Ѵ�����ޤ��󡣤���������ʸ�������ꤹ���
- [[c:OptionParser::InvalidArgument]] ��ȯ�����ޤ���
+ オプションの引数は変換されません。ただし、空文字列を指定すると
+ [[c:OptionParser::InvalidArgument]] が発生します。
 
 : Integer
- Integer ���֥������Ȥ��Ѵ�����ޤ���"0b1"��"07"��"99"��"0xff" �Ȥ��ä�
- 2�ʿ���8�ʿ���10�ʿ���16�ʿ��������Υե����ޥåȤ����Ǥ��ޤ���
+ Integer オブジェクトに変換されます。"0b1"、"07"、"99"、"0xff" といった
+ 2進数、8進数、10進数、16進数の整数のフォーマットを指定できます。
 
 : Float
- Float ���֥������Ȥ��Ѵ�����ޤ���"1.0" �� "0.5e0" �Τ褦�ʥե����ޥ�
- �Ȥ����Ǥ��ޤ���
+ Float オブジェクトに変換されます。"1.0" や "0.5e0" のようなフォーマッ
+ トを指定できます。
 
 : Numeric
- �����ξ��� Integer ���֥������Ȥˡ��¿��ξ��� Float ���֥������Ȥ�
- �Ѵ�����ޤ���
+ 整数の場合は Integer オブジェクトに、実数の場合は Float オブジェクトに
+ 変換されます。
 
 : OptionParser::DecimalInteger
- Integer ���֥������Ȥ��Ѵ�����ޤ���10�ʿ��������������Υե����ޥåȤ�
- �ߤ����Ǥ��ޤ���
+ Integer オブジェクトに変換されます。10進数の整数の整数のフォーマットの
+ みを指定できます。
 
 : OptionParser::OctalInteger
- Integer ���֥������Ȥ��Ѵ�����ޤ���"0b1"��"07"��"0xff" �Ȥ��ä� 2�ʿ���
- 8�ʿ���16�ʿ��������Υե����ޥåȤ����Ǥ��ޤ���
+ Integer オブジェクトに変換されます。"0b1"、"07"、"0xff" といった 2進数、
+ 8進数、16進数の整数のフォーマットを指定できます。
 
 : OptionParser::DecimalNumeric
- �����ξ��� Integer ���֥������Ȥˡ��¿��ξ��� Float ���֥������Ȥ�
- �Ѵ�����ޤ���10�ʿ��Υե����ޥåȤ����Ǥ��ޤ���
+ 整数の場合は Integer オブジェクトに、実数の場合は Float オブジェクトに
+ 変換されます。10進数のフォーマットを指定できます。
 
 : TrueClass
- true �� false ���Ѵ�����ޤ���"yes" �� "no"��"true" �� "false"��"+"
- �� "-" �����Ǥ��ޤ������ץ����ΰ������ά�������� true �ˤʤ�ޤ���
- �ޤ���"no-" �򥪥ץ�������Ƭ���դ��������ͤ�ȿž���ޤ���
+ true か false に変換されます。"yes" や "no"、"true" や "false"、"+"
+ や "-" を指定できます。オプションの引数を省略した場合は true になります。
+ また、"no-" をオプションの先頭に付けた場合は値が反転します。
 
 : FalseClass
- true �� false ���Ѵ�����ޤ���TrueClass �Ȥΰ㤤�ϥ��ץ����ΰ������
- ά�������� false �ˤʤ�ޤ���
+ true か false に変換されます。TrueClass との違いはオプションの引数を省
+ 略した場合に false になります。
 
 : Array
- ʸ�����������Ѵ�����ޤ���"," ���Ȥ� 1�Ĥ����Ǥˤʤ�ޤ���
+ 文字列の配列に変換されます。"," ごとに 1つの要素になります。
 
 --- on(short, *rest) {|v| ...}        -> self
 --- on(long, *rest) {|v| ...}         -> self
 --- on(short, long, *rest) {|v| ...}  -> self
 
-���ץ������갷������Υ֥��å��򼫿Ȥ���Ͽ���ޤ���
-�֥��å��ϥ��ޥ�ɥ饤��Υѡ������ˡ����ץ���󤬻��ꤵ��Ƥ���иƤФ�ޤ���
+オプションを取り扱うためのブロックを自身に登録します。
+ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-���ޥ�ɤ�Ϳ����줿�����������ϥå���˴ޤޤ�ʤ���硢�㳰
-[[c:OptionParser::InvalidArgument]] �� [[m:OptionParser#parse]] �¹Ի�
-��ȯ�����ޤ���
+コマンドに与えられた引数が配列やハッシュに含まれない場合、例外
+[[c:OptionParser::InvalidArgument]] が [[m:OptionParser#parse]] 実行時
+に発生します。
 
-@param short ���硼�ȥ��ץ�����ɽ��ʸ�������ꤷ�ޤ���
+@param short ショートオプションを表す文字列を指定します。
 
-@param long ���󥰥��ץ�����ɽ��ʸ�������ꤷ�ޤ���
+@param long ロングオプションを表す文字列を指定します。
 
-@param rest ��ǽ�ʰ�������󤷤������ϥå����Ϳ���ޤ���ʸ�����Ϳ�������ϡ�
-            ���ޥ��ɽ������륪�ץ����������ȸ��ʤ��ޤ���
+@param rest 可能な引数を列挙した配列やハッシュを与えます。文字列を与えた場合は、
+            サマリに表示されるオプションの説明と見なします。
 
-��:
+例:
   opts.on("--protocol VALUE", [:http, :ftp, :https]){|w|
     p w
   }
@@ -459,17 +459,17 @@ OptionParser.accept �� OptionParser#accept �ˤ�äơ������դ�
 --- on_head(*arg, &block)
 --- on_tail(*arg, &block)
 
-[[m:OptionParser#on]]��Ʊ�͡����ץ������갷������Υ֥��å��򼫿Ȥ���Ͽ���ޤ���
-on �᥽�åɤȰ㤦���ϡ�OptionParser ���֥������Ȥ��ݻ����Ƥ���
-�ꥹ�Ȥκǽ餫���뤤�ϺǸ�˥֥��å�����Ͽ�������Ǥ���
+[[m:OptionParser#on]]と同様、オプションを取り扱うためのブロックを自身に登録します。
+on メソッドと違う点は、OptionParser オブジェクトが保持している
+リストの最初かあるいは最後にブロックを登録する点です。
 
---version �� --help �������򥵥ޥ�κǸ��ɽ�����������������Ǥ���
+--version や --help の説明をサマリの最後に表示したい時に便利です。
 
-@param arg [[m:OptionParser#on]] ��Ʊ�ͤǤ���
+@param arg [[m:OptionParser#on]] と同様です。
 
-@param block [[m:OptionParser#on]] ��Ʊ�ͤǤ���
+@param block [[m:OptionParser#on]] と同様です。
 
-��:
+例:
 
   opts.on_tail("-h", "--help", "Show this message") do
     puts opts
@@ -486,25 +486,25 @@ on �᥽�åɤȰ㤦���ϡ�OptionParser ���֥������Ȥ��ݻ����Ƥ���
 --- order(*args)                    -> [String]
 --- order(*args){|s| ...}           -> [String]
 
-Ϳ����줿 argv ����֤˥ѡ������ޤ���
-���ץ����ǤϤʤ����ޥ�ɤΰ���(������Ǹ����� somefile)�˽в񤦤ȡ��ѡ��������Ǥ��ޤ���
-argv ���饪�ץ��������������Τ��֤��ޤ���
+与えられた argv を順番にパースします。
+オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
+argv からオプションを取り除いたものを返します。
 
-�֥��å���Ϳ�����Ƥ�����ϡ��ѡ��������Ǥ����˰�����֥��å����Ϥ��ƥ֥��å���ɾ������
-�ѡ������³���ޤ���argv ���֤��ޤ���
+ブロックが与えられている場合は、パースを中断せずに引数をブロックに渡してブロックを評価し、
+パースを継続します。argv を返します。
 
-������Ǹ����ȡ����ޥ�ɤΰ��� somefile �������˥��ץ������֤����Ȥ��Ǥ���
-����-b �⥳�ޥ�ɤΥ��ץ����ǤϤʤ������Ȥ��ư����Ƥ��ޤ��ޤ���
+下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができま
+せん。-b もコマンドのオプションではない引数として扱われてしまいます。
 
-@param argv �ѡ���������������ʸ���������ǻ��ꤷ�ޤ���
+@param argv パースしたい引数を文字列の配列で指定します。
 
-@param args �ѡ�����������������ʸ����Ȥ���Ϳ���ޤ���
+@param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
-��:
+例:
   $ cat opt.rb
   require 'optparse'
   opt = OptionParser.new
@@ -522,24 +522,24 @@ argv ���饪�ץ��������������Τ��֤��ޤ���
 --- order!(argv = self.default_argv)             -> [String]
 --- order!(argv = self.default_argv) {|s| ...}   -> [String]
 
-Ϳ����줿 argv ����֤��˲�Ū�˥ѡ������ޤ���
-argv ���饪�ץ���󤬤��٤Ƽ�������ޤ���
-argv ���֤��ޤ���
+与えられた argv を順番に破壊的にパースします。
+argv からオプションがすべて取り除かれます。
+argv を返します。
 
-���ץ����ǤϤʤ����ޥ�ɤΰ���(������Ǹ����� somefile)�˽в񤦤ȡ��ѡ��������Ǥ��ޤ���
-�֥��å���Ϳ�����Ƥ�����ϡ��ѡ��������Ǥ�����
-������֥��å����Ϥ��ƥ֥��å���ɾ�������ѡ������³���ޤ���argv ���֤��ޤ���
+オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
+ブロックが与えられている場合は、パースを中断せずに
+引数をブロックに渡してブロックを評価し、パースを継続します。argv を返します。
 
-������Ǹ����ȡ����ޥ�ɤΰ��� somefile �������˥��ץ������֤����Ȥ��Ǥ��ޤ���
--b �⥳�ޥ�ɤΥ��ץ����ǤϤʤ������Ȥ��ư����Ƥ��ޤ��ޤ���
+下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができません。
+-b もコマンドのオプションではない引数として扱われてしまいます。
 
-@param argv �ѡ���������������ʸ���������ǻ��ꤷ�ޤ���
+@param argv パースしたい引数を文字列の配列で指定します。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
-��:
+例:
   $ cat opt.rb
   require 'optparse'
   opt = OptionParser.new
@@ -557,22 +557,22 @@ argv ���֤��ޤ���
 --- permute(argv)            -> [String]
 --- permute(*args)           -> [String]
 
-Ϳ����줿 argv ��ѡ������ޤ���
-���ץ����ǤϤʤ����ޥ�ɤΰ���(������Ǹ����� somefile)�����äƤ�ѡ��������Ǥ��ޤ���
-argv ���饪�ץ��������������Τ��֤��ޤ���
+与えられた argv をパースします。
+オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
+argv からオプションを取り除いたものを返します。
 
-������Ǹ����ȡ�order �Ȱ㤤���ޥ�ɤΰ��� somefile �������˥��ץ������֤����Ȥ�
-�Ǥ��ޤ���
+下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
+できます。
 
-@param argv �ѡ���������������ʸ���������ǻ��ꤷ�ޤ���
+@param argv パースしたい引数を文字列の配列で指定します。
 
-@param args �ѡ�����������������ʸ����Ȥ���Ϳ���ޤ���
+@param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
-��:
+例:
 
   $ cat opt.rb
   require 'optparse'
@@ -591,20 +591,20 @@ argv ���饪�ץ��������������Τ��֤��ޤ���
 
 --- permute!(argv = self.default_argv)    -> [String]
 
-Ϳ����줿 argv ���˲�Ū�˥ѡ������ޤ���argv ���饪�ץ���󤬤��٤Ƽ�������ޤ�
-���ץ����ǤϤʤ����ޥ�ɤΰ���(������Ǹ����� somefile)�����äƤ�ѡ��������Ǥ��ޤ���
-argv ���֤��ޤ���
+与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます
+オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
+argv を返します。
 
-������Ǹ����ȡ�order �Ȱ㤤���ޥ�ɤΰ��� somefile �������˥��ץ������֤����Ȥ�
-�Ǥ��ޤ���
+下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
+できます。
 
-@param argv �ѡ���������������ʸ���������ǻ��ꤷ�ޤ���
+@param argv パースしたい引数を文字列の配列で指定します。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
-��:
+例:
 
   $ cat opt.rb
   require 'optparse'
@@ -624,72 +624,72 @@ argv ���֤��ޤ���
 --- parse(argv)           -> [String]
 --- parse(*args)          -> [String]
 
-Ϳ����줿 argv ��ѡ������ޤ���
-argv ���饪�ץ��������������Τ��֤��ޤ���
+与えられた argv をパースします。
+argv からオプションを取り除いたものを返します。
 
-[[m:OptionParser#permute]] ��Ʊ�ͤ˿��񤤤ޤ�����������
-�Ķ��ѿ��� POSIXLY_CORRECT �����ꤵ��Ƥ�����ϡ�
-[[m:OptionParser#order]] ��Ʊ�ͤ˿��񤤤ޤ���
+[[m:OptionParser#permute]] と同様に振舞います。しかし、
+環境変数に POSIXLY_CORRECT が設定されている場合は、
+[[m:OptionParser#order]] と同様に振舞います。
 
-@param argv �ѡ���������������ʸ���������ǻ��ꤷ�ޤ���
+@param argv パースしたい引数を文字列の配列で指定します。
 
-@param args �ѡ�����������������ʸ����Ȥ���Ϳ���ޤ���
+@param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 --- parse!(argv = self.default_argv)   -> [String]
 
-Ϳ����줿 argv ��ѡ������ޤ���
+与えられた argv をパースします。
 
-[[m:OptionParser#permute!]] ��Ʊ�ͤ� argv ���˲�Ū�˥ѡ������ޤ���
-�Ķ��ѿ��� POSIXLY_CORRECT �����ꤵ��Ƥ�����ϡ�
-[[m:OptionParser#order!]] ��Ʊ�ͤ˿��񤤤ޤ���
+[[m:OptionParser#permute!]] と同様に argv を破壊的にパースします。
+環境変数に POSIXLY_CORRECT が設定されている場合は、
+[[m:OptionParser#order!]] と同様に振舞います。
 
-@param argv �ѡ���������������ʸ���������ǻ��ꤷ�ޤ���
+@param argv パースしたい引数を文字列の配列で指定します。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 --- load(filename = nil)     -> bool
 
-���ꤵ�줿 filename ���ɤ߹���ǳƹԤ�ޤȤ᤿��Τ��Ф��� [[m:OptionParser#parse]] ��Ԥʤ��ޤ���
+指定された filename を読み込んで各行をまとめたものに対して [[m:OptionParser#parse]] を行ないます。
 
-�ѡ����������������� true ���֤��ޤ���
-�ե����뤬¸�ߤ��ʤ��ä����� false ���֤��ޤ���
+パースが成功した場合に true を返します。
+ファイルが存在しなかった場合に false を返します。
 
-@param filename �ƹԤ�ѡ����������ե������̾����ʸ����ǻ��ꤷ�ޤ���
-                ���ꤵ��ʤ��� nil �Ǥ����硢~/.options/ ��
-                �ץ������Υ��ե��å������դ��� '~/.options/���ޥ��̾' �Ȥ����ե������ѡ������ޤ���
+@param filename 各行をパースしたいファイルの名前を文字列で指定します。
+                指定されないか nil である場合、~/.options/ に
+                プログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
 
 --- environment(env)    -> [String]
 
-�Ķ��ѿ� env ���Ф���
-[[m:Shellwords.#shellwords]] ���
-�������ˤ��Ƥ��� parse ��Ԥʤ��ޤ���
+環境変数 env に対して
+[[m:Shellwords.#shellwords]] を呼
+んで配列にしてから parse を行ないます。
 
-@param env �Ķ��ѿ�̾��ʸ�����Ϳ���ޤ���
+@param env 環境変数名を文字列で与えます。
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 #@since 1.8.3
 --- default_argv    -> [String]
 
-���Ȥ��ǥե���Ȥǥѡ������������ʸ�����������֤��ޤ���
+自身がデフォルトでパースする引数を文字列の配列で返します。
 
-@param argv �ǥե���Ȥǥѡ�������ʸ�����������֤��ޤ���
+@param argv デフォルトでパースする文字列の配列を返します。
 
 --- default_argv=(argv)
 
-���Ȥ��ǥե���Ȥǥѡ������������ʸ���������ǻ��ꤷ�ޤ���
+自身がデフォルトでパースする引数を文字列の配列で指定します。
 
-[[m:OptionParser#parse]] �ΰ��������ꤵ��ʤ��ä��Ȥ��˻Ȥ��ޤ���
+[[m:OptionParser#parse]] の引数が指定されなかったときに使われます。
 
-@param argv �ǥե���Ȥǥѡ���������ʸ������������ꤷ�ޤ���
+@param argv デフォルトでパースしたい文字列の配列を指定します。
 
 #@end
 
@@ -699,13 +699,13 @@ argv ���饪�ץ��������������Τ��֤��ޤ���
 #@todo
 
 #@until 1.9.1
-[[lib:getopts]] �����ε�ǽ���󶡤��ޤ���
-getopts �Ȱ�äơ��������Х��ѿ���������ޤ���
+[[lib:getopts]] 相当の機能を提供します。
+getopts と違って、グローバル変数を定義しません。
 #@end
-������ѡ���������̤�Hash �Ȥ����֤��ޤ���
+引数をパースした結果を、Hash として返します。
 
-���� argv ��Ϳ������硢argv ��ѡ������ޤ��������Ǥʤ����ϡ�
-default_argv ��ѡ������ޤ���
+配列 argv を与えた場合、argv をパースします。そうでない場合は、
+default_argv をパースします。
 
  opt = OptionParser.new
  params = opt.getopts(ARGV, "ab:", "foo", "bar:")
@@ -714,16 +714,16 @@ default_argv ��ѡ������ޤ���
  # params["foo"] = true  # --foo
  # params["bar"] = "x"  # --bar x
 
-@param argv �ѡ����������������ꤷ�ޤ���
+@param argv パースしたい配列を指定します。
 
 #@since 1.9.1
-@param opts ������ʸ����ǻ��ꤷ�ޤ���
+@param opts 引数を文字列で指定します。
 #@else
-@param opts ������ʸ����ǻ��ꤷ�ޤ���[[m:Kernel#getopts]] �򻲾Ȥ��Ʋ�������
+@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
 #@end
 
-@raise OptionParser::ParseError �ѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹�ˤʤ�ޤ���
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 #@end

@@ -1,20 +1,20 @@
-���ѥǡ���ž���ץ��ȥ��� HTTP �򰷤��饤�֥��Ǥ���
-������ [[RFC:2616]] �˴𤭤ޤ���
+汎用データ転送プロトコル HTTP を扱うライブラリです。
+実装は [[RFC:2616]] に基きます。
 
-=== ������
+=== 使用例
 
-==== �����֥����Ф���ɥ�����Ȥ����� (GET)
+==== ウェブサーバからドキュメントを得る (GET)
 
-��1: GET ���� ɽ���������
+例1: GET して 表示するだけ
   require 'net/http'
   Net::HTTP.get_print 'www.example.com', '/index.html'
 
-��2: [[c:URI]] ��Ȥ�
+例2: [[c:URI]] を使う
   require 'net/http'
   require 'uri'
   Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
 
-��3: �������Ū����
+例3: より汎用的な例
 
   require 'net/http'
   require 'uri'
@@ -25,7 +25,7 @@
   }
   puts res.body
 
-��4: ������ꤵ�������Ū����
+例4: 上の例よりさらに汎用的な例
   require 'net/http'
   
   url = URI.parse('http://www.example.com/index.html')
@@ -35,21 +35,21 @@
   }
   puts res.body
 
-==== �ե�����ξ������������ (POST)
+==== フォームの情報を送信する (POST)
   require 'net/http'
   require 'uri'
 
-  #��1: POST�������
+  #例1: POSTするだけ
   res = Net::HTTP.post_form(URI.parse('http://www.example.com/search'),
                             {'q'=>'ruby', 'max'=>'50'})
   puts res.body
   
-  #��2: ǧ���դ��� POST ����
+  #例2: 認証付きで POST する
   res = Net::HTTP.post_form(URI.parse('http://jack:pass@www.example.com/todo.cgi'),
                             {'from'=>'2005-01-01', 'to'=>'2005-03-31'})
   puts res.body
 
-  #��3: ���٤������椹��
+  #例3: より細かく制御する
   url = URI.parse('http://www.example.com/todo.cgi')
   req = Net::HTTP::Post.new(url.path)
   req.basic_auth 'jack', 'pass'
@@ -62,12 +62,12 @@
     res.value
   end
 
-==== �ץ�������ͳ�Υ�������
+==== プロクシ経由のアクセス
 
-[[m:Net::HTTP.Proxy]] �ϥץ�������ͳ�Ǥ���³��Ԥʤ����饹��
-���������֤��ޤ������Υ��饹�� [[c:Net::HTTP]] ��Ʊ��
-�᥽�åɤ������Ʊ���褦��ư��򤷤ޤ���������
-��³����ݤˤϾ�˥ץ�������ͳ�Ȥʤ�ޤ���
+[[m:Net::HTTP.Proxy]] はプロクシ経由での接続を行なうクラスを
+生成して返します。このクラスは [[c:Net::HTTP]] と同じ
+メソッドを持ち、同じように動作をします。ただし
+接続する際には常にプロクシ経由となります。
   require 'net/http'
   
   proxy_addr = 'your.proxy.host'
@@ -78,13 +78,13 @@
           :
   }
 
-�ޤ� [[m:Net::HTTP.Proxy]] ���������� nil ���� 
-Net::HTTP ���Ȥ��֤��Τ�
-��Υ����ɤΤ褦�˽񤤤Ƥ����Хץ������ʤ��ξ��ˤ��б��Ǥ��ޤ���
+また [[m:Net::HTTP.Proxy]] は第一引数が nil だと 
+Net::HTTP 自身を返すので
+上のコードのように書いておけばプロクシなしの場合にも対応できます。
 
-[[m:Net::HTTP.Proxy]] �ˤϥ桼��̾�ȥѥ���ɤ���
-���ץ������������ꡢ�ʲ��Τ褦�ˤ���
-�ץ�������ǧ�ڤ򤹤뤳�Ȥ��Ǥ��ޤ���
+[[m:Net::HTTP.Proxy]] にはユーザ名とパスワードを取る
+オプション引数があり、以下のようにして
+プロクシの認証をすることができます。
   proxy_host = 'your.proxy.host'
   proxy_port = 8080
   uri = URI.parse(ENV['http_proxy'])
@@ -94,13 +94,13 @@ Net::HTTP ���Ȥ��֤��Τ�
     # always connect to your.proxy.addr:8080 using specified username and password
           :
   }
-���Υ饤�֥��ϴĶ��ѿ� HTTP_PROXY ����ڹ�θ���ʤ�����
-�����դ��Ƥ����������ץ�������Ȥ��������Ͼ����Τ褦��
-����Ū�˼�갷��ʤ���Фʤ�ޤ���
+このライブラリは環境変数 HTTP_PROXY を一切考慮しないこと
+に注意してください。プロクシを使いたい場合は上の例のように
+明示的に取り扱わなければなりません。
 
-==== ������쥯�Ȥ��б�����
-�ʲ������ fetch �ϥ�����쥯�Ȥ��б����Ƥ��ޤ���
-limit ����ʾ������쥯�Ȥ����饨�顼�ˤ��ޤ���
+==== リダイレクトに対応する
+以下の例の fetch はリダイレクトに対応しています。
+limit 回数以上リダイレクトしたらエラーにします。
 
   require 'net/http'
   require 'uri'
@@ -122,10 +122,10 @@ limit ����ʾ������쥯�Ȥ����饨�顼�ˤ��ޤ���
 
   print fetch('http://www.example.org')
 
-���ܤ����� [[c:Net::HTTPResponse]]�� [[c:Net::HTTPSuccess]]��
-[[c:Net::HTTPRedirection]] �򻲾Ȥ��Ƥ���������
+より詳しくは [[c:Net::HTTPResponse]]、 [[c:Net::HTTPSuccess]]、
+[[c:Net::HTTPRedirection]] を参照してください。
 
-==== Basic ǧ��
+==== Basic 認証
 
   require 'net/http'
   
@@ -137,58 +137,58 @@ limit ����ʾ������쥯�Ȥ����饨�顼�ˤ��ޤ���
   }
 
 
-#@# === �㳰
+#@# === 例外
 
-#@# get��head��post �᥽�åɤ�ȯ������ HTTP �ץ��ȥ����Ϣ���㳰�Ȥ��ơ�
-#@# �ʲ��˵󤲤��Τ�����ޤ���
-#@# �����˵󤲤��㳰���饹�οƥ��饹�Ϥ��٤� Net::ProtocolError ���饹�ǡ�
-#@# response �᥽�åɤˤ�äƥ��顼�θ����Ȥʤä��쥹�ݥ󥹥��֥������Ȥ�
-#@# ���뤳�Ȥ��Ǥ��ޤ���
+#@# get、head、post メソッドで発生する HTTP プロトコル関連の例外として、
+#@# 以下に挙げるものがあります。
+#@# ここに挙げる例外クラスの親クラスはすべて Net::ProtocolError クラスで、
+#@# response メソッドによってエラーの原因となったレスポンスオブジェクトを
+#@# 得ることができます。
 
 #@# : ProtoRetriableError
-#@#     HTTP ���ơ����������� 3xx �������ä�����ȯ�����ޤ���
-#@#     �꥽��������ư�����ʤɤ���ͳ�ˤ�ꡢ�ꥯ�����Ȥ�λ������ˤϹ���
-#@#     �륢�������ɬ�פˤʤ�ޤ���
+#@#     HTTP ステータスコード 3xx を受け取った時に発生します。
+#@#     リソースが移動したなどの理由により、リクエストを完了させるには更な
+#@#     るアクションが必要になります。
 #@# : ProtoFatalError
-#@#     HTTP ���ơ����������� 4xx �������ä�����ȯ�����ޤ���
-#@#     ���饤����ȤΥꥯ�����Ȥ˸��꤬���뤫�������Ф˥ꥯ�����Ȥ���ݤ�
-#@#     �줿(ǧ�ڤ�ɬ�ס��꥽������¸�ߤ��ʤ��ʤɤ�)���Ȥ򼨤��ޤ���
+#@#     HTTP ステータスコード 4xx を受け取った時に発生します。
+#@#     クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+#@#     れた(認証が必要、リソースが存在しないなどで)ことを示します。
 #@# : ProtoServerError
-#@#     HTTP ���ơ����������� 5xx �������ä�����ȯ�����ޤ���
-#@#     �����Ф��ꥯ�����Ȥ������˥��顼��ȯ���������Ȥ򼨤��ޤ���
+#@#     HTTP ステータスコード 5xx を受け取った時に発生します。
+#@#     サーバがリクエストを処理中にエラーが発生したことを示します。
 #@# : ProtoUnknownError
-#@#     �ץ��ȥ���ΥС�����󤬾夬�ä������뤤�ϥ饤�֥��ΥХ��ʤɤǡ�
-#@#     �饤�֥�꤬�б����Ƥ��ʤ�������ȯ�����ޤ�����
+#@#     プロトコルのバージョンが上がった、あるいはライブラリのバグなどで、
+#@#     ライブラリが対応していない状況が発生しました。
 
-=== �ե�������ͤζ��ڤ�ʸ���ˤĤ���
+=== フォームの値の区切り文字について
 
-POST�� application/x-www-form-urlencoded �Ȥ���ʣ���Υե�������ͤ������硢
-���߹����Ԥʤ��Ƥ���Τϡ� name0=value0&name1=value1 �Τ褦�˥���ѥ����
-(`&') �Ƕ��ڤ��꤫���Ǥ���
-������ˡ�ϡ�[[RFC:1866]] Hypertext Markup Language - 2.0 �ǽ��Ƹ������о줷��
-HTML 4.01 Specification �� 17.13.4 Form content types
-�Ǥ⤽�Τ褦�˽񤫤�Ƥ��ޤ���
+POSTで application/x-www-form-urlencoded として複数のフォームの値を送る場合、
+現在広く行なわれているのは、 name0=value0&name1=value1 のようにアンパサンド
+(`&') で区切るやりかたです。
+この方法は、[[RFC:1866]] Hypertext Markup Language - 2.0 で初めて公式に登場し、
+HTML 4.01 Specification の 17.13.4 Form content types
+でもそのように書かれています。
 
-�Ȥ�������Ʊ�� HTML 4.01 Specification ��
-B.2.2 Ampersands in URI attribute values �Ǥϡ�
-���� `&' ��SGML��ʸ�����λ��Ȥ��Ѥ����뤳�Ȥ���Ŧ����Ƥ��ꡢ
-CGI�䥵���Фμ����Ԥ��Ф� `&' �������
-���ߥ����� `;' �򥵥ݡ��Ȥ��뤳�Ȥ򾩤�Ƥ��ޤ���
+ところが、同じ HTML 4.01 Specification の
+B.2.2 Ampersands in URI attribute values では、
+この `&' がSGMLの文字実体参照で用いられることが指摘されており、
+CGIやサーバの実装者に対し `&' の代わりに
+セミコロン `;' をサポートすることを奨めています。
 
-���������ºݤˤ� `;' ���ᤷ�ʤ�CGI�䥵���Ф�ޤ��ޤ����������뤿��
-���Υ�ե���󥹥ޥ˥奢��Ǥ���Ȥ��� `&' ���Ѥ��ޤ�����
+しかし、実際には `;' を解釈しないCGIやサーバもまだまだ見受けられるため
+このリファレンスマニュアルでは例として `&' を用いました。
 
-�ʤ� Ruby ɸ��� [[lib:cgi]] �饤�֥��Ǥ� '&' �� ';' ��ξ�����ݡ��Ȥ��Ƥ��ޤ��Τǡ�
-[[lib:cgi]] �饤�֥���Ȥä� CGI ������ץȤ�񤯾��Ϥ����ΰ㤤�򵤤ˤ���
-ɬ�פϤ���ޤ���
+なお Ruby 標準の [[lib:cgi]] ライブラリでは '&' と ';' の両方サポートしていますので、
+[[lib:cgi]] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする
+必要はありません。
 
 #@until 1.9.3
-=== ���������ͤؤ��ѹ��Ȱܹ����֤ˤĤ���
+=== 新しい仕様への変更と移行措置について
 
-net/http 1.1 (Ruby 1.6�˴ޤޤ�Ƥ��ޤ�)�ε�ư��Ȥ��������ˤ�
-[[m:Net::HTTP.version_1_1]] ��Ƥ�Ǥ���������
-���θ� [[m:Net::HTTP.version_1_2]] ��Ƥ֤ȵ�ư�� 1.2 ��
-���ޤ���
+net/http 1.1 (Ruby 1.6に含まれています)の挙動を使いたい場合には
+[[m:Net::HTTP.version_1_1]] を呼んでください。
+その後 [[m:Net::HTTP.version_1_2]] を呼ぶと挙動が 1.2 に
+戻ります。
 
   # example
   Net::HTTP.start {|http1| ...(http1 has 1.2 features)... }
@@ -199,207 +199,207 @@ net/http 1.1 (Ruby 1.6�˴ޤޤ�Ƥ��ޤ�)�ε�ư��Ȥ��������ˤ�
   Net::HTTP.version_1_2
   Net::HTTP.start {|http3| ...(http3 has 1.2 features)... }
 
-�����������ε�ǽ�ϥ���åɥ����դǤϤ���ޤ���
-�Ĥޤꡢʣ������åɤǤ��줾��� version_1_1 �� version_1_2 ��Ƥ����硢
-������������ Net::HTTP ���֥������Ȥ��ɤ���ΥС������ˤʤ뤫���ݾڤǤ��ޤ���
-���ץꥱ����������ΤǤɤ��餫�ΥС������˸��ꤹ��ɬ�פ�����ޤ���
+ただし、この機能はスレッドセーフではありません。
+つまり、複数スレッドでそれぞれに version_1_1 や version_1_2 を呼んだ場合、
+次に生成する Net::HTTP オブジェクトがどちらのバージョンになるかは保証できません。
+アプリケーション全体でどちらかのバージョンに固定する必要があります。
 
-�̾盧�ε�ǽ�ϻȤ�ʤ��Ϥ��Ǥ���1.2��������Ѥ��Ƥ���������
+通常この機能は使わないはずです。1.2固定で利用してください。
 #@end
 
 = class Net::HTTP < Object
 alias HTTPSession
 
-HTTP �Υ��饤����ȤΤ���Υ��饹�Ǥ���
+HTTP のクライアントのためのクラスです。
 
 == Class Methods
 
 --- new(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 
-������ [[c:Net::HTTP]] ���֥������Ȥ��������ޤ���
+新しい [[c:Net::HTTP]] オブジェクトを生成します。
 
-proxy_addr ��Ϳ����ȥץ�������𤷤���³���륪�֥������Ȥ�
-�������ޤ������ΤȤ��� proxy_user����ꤹ��ȥץ�������ǧ�ڤ�
-�Ԥ��ޤ�
+proxy_addr を与えるとプロクシを介して接続するオブジェクトを
+生成します。このときに proxy_userを指定するとプロクシの認証が
+行われます
 
-���Υ᥽�åɤ� TCP ���ͥ�������ĥ��ޤ���
+このメソッドは TCP コネクションを張りません。
 
-@param address ��³����ۥ���̾��ʸ����ǻ��ꤷ�ޤ���
-@param port ��³����ݡ����ֹ����ꤷ�ޤ���
-@param proxy_addr �ץ������Υۥ���̾����ꤷ�ޤ�����ά�������ˤ�ľ����³���ޤ���
-@param proxy_port �ץ������Υۥ���̾����ꤷ�ޤ���
-@param proxy_user �ץ�������ǧ�ڤΥ桼��̾����ꤷ�ޤ�����ά�������ˤ�ǧ�ڤϤʤ���ޤ���
-@param proxy_pass �ץ�������ǧ�ڤΥѥ���ɤ���ꤷ�ޤ���
+@param address 接続するホスト名を文字列で指定します。
+@param port 接続するポート番号を指定します。
+@param proxy_addr プロクシのホスト名を指定します。省略した場合には直接接続します。
+@param proxy_port プロクシのホスト名を指定します。
+@param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
+@param proxy_pass プロクシの認証のパスワードを指定します。
 
 
 --- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 --- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
 
-������ [[c:Net::HTTP]] ���֥������Ȥ���������
-TCP ���ͥ������ HTTP ���å����򳫻Ϥ��ޤ���
+新しい [[c:Net::HTTP]] オブジェクトを生成し、
+TCP コネクション、 HTTP セッションを開始します。
 
-�֥��å���Ϳ�������ˤ������������֥������Ȥ򤽤Υ֥��å���
-�Ϥ����֥��å�������ä��Ȥ�����³���Ĥ��ޤ������ΤȤ���
-�֥��å����ͤ��֤��ͤȤ��ޤ���
+ブロックを与えた場合には生成したオブジェクトをそのブロックに
+渡し、ブロックが終わったときに接続を閉じます。このときは
+ブロックの値を返り値とします。
 
-�֥��å���Ϳ���ʤ��ä����ˤ������������֥������Ȥ��Ϥ��ޤ���
-���Ѹ�ˤϤ��Υ��֥������Ȥ� [[m:Net::HTTP#finish]] ���Ƥ���������
+ブロックを与えなかった場合には生成したオブジェクトを渡します。
+利用後にはこのオブジェクトを [[m:Net::HTTP#finish]] してください。
 
-���Υ᥽�åɤϰʲ���Ʊ���Ǥ���
+このメソッドは以下と同じです。
 
   Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).start(&block)
 
-@param address ��³����ۥ���̾��ʸ����ǻ��ꤷ�ޤ���
-@param port ��³����ݡ����ֹ����ꤷ�ޤ���
-@param proxy_addr �ץ������Υۥ���̾����ꤷ�ޤ�����ά�������ˤ�ľ����³���ޤ���
-@param proxy_port �ץ������Υۥ���̾����ꤷ�ޤ���
-@param proxy_user �ץ�������ǧ�ڤΥ桼��̾����ꤷ�ޤ�����ά�������ˤ�ǧ�ڤϤʤ���ޤ���
-@param proxy_pass �ץ�������ǧ�ڤΥѥ���ɤ���ꤷ�ޤ���
+@param address 接続するホスト名を文字列で指定します。
+@param port 接続するポート番号を指定します。
+@param proxy_addr プロクシのホスト名を指定します。省略した場合には直接接続します。
+@param proxy_port プロクシのホスト名を指定します。
+@param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
+@param proxy_pass プロクシの認証のパスワードを指定します。
 @see [[m:Net::HTTP.new]], [[m:Net::HTTP#start]]
 
 --- get(uri) -> String
 --- get(host, path, port = 80) -> String
-���ꤷ���оݤ� GET �ꥯ�����Ȥ����ꡢ���Υܥǥ���
-ʸ����Ȥ����֤��ޤ���
+指定した対象に GET リクエストを送り、そのボディを
+文字列として返します。
 
-�оݤλ�����ˡ�� [[c:URI]] �ǻ��ꤹ�뤫��
-(host, port, path) �ǻ��ꤹ�뤫�Τ����줫�Ǥ���
+対象の指定方法は [[c:URI]] で指定するか、
+(host, port, path) で指定するかのいずれかです。
 
-@param uri �ǡ����μ����оݤ� [[c:URI]] �ǻ��ꤷ�ޤ���
-@param host ��³��Υۥ��Ȥ�ʸ����ǻ��ꤷ�ޤ���
-@param path �ǡ�����¸�ߤ���ѥ���ʸ����ǻ��ꤷ�ޤ���
-@param port ��³����ݡ��Ȥ������ǻ��ꤷ�ޤ���
+@param uri データの取得対象を [[c:URI]] で指定します。
+@param host 接続先のホストを文字列で指定します。
+@param path データの存在するパスを文字列で指定します。
+@param port 接続するポートを整数で指定します。
 @see [[m:Net::HTTP#get]]
 
 --- get_print(uri) -> ()
 --- get_print(host, path, port = 80) -> ()
-���ꤷ���оݤ��� HTTP �ǥ���ƥ��ƥ��ܥǥ����������
-[[m:$stdout]] �˽��Ϥ��ޤ���
+指定した対象から HTTP でエンティティボディを取得し、
+[[m:$stdout]] に出力します。
 
-�оݤλ�����ˡ�� [[c:URI]] �ǻ��ꤹ�뤫��
-(host, port, path) �ǻ��ꤹ�뤫�Τ����줫�Ǥ���
+対象の指定方法は [[c:URI]] で指定するか、
+(host, port, path) で指定するかのいずれかです。
 
-@param uri �ǡ����μ����оݤ� [[c:URI]] �ǻ��ꤷ�ޤ���
-@param host ��³��Υۥ��Ȥ�ʸ����ǻ��ꤷ�ޤ���
-@param path �ǡ�����¸�ߤ���ѥ���ʸ����ǻ��ꤷ�ޤ���
-@param port ��³����ݡ��Ȥ������ǻ��ꤷ�ޤ���
+@param uri データの取得対象を [[c:URI]] で指定します。
+@param host 接続先のホストを文字列で指定します。
+@param path データの存在するパスを文字列で指定します。
+@param port 接続するポートを整数で指定します。
 @see [[m:Net::HTTP.get]]
 
-=== ��
+=== 例
   Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
-�⤷����
+もしくは
   Net::HTTP.get_print 'www.example.com', '/index.html'
 
 --- get_response(uri) -> Net::HTTPResponse
 --- get_response(host, path = nil, port = nil) -> Net::HTTPResponse
-���ꤷ���оݤ� GET �ꥯ�����Ȥ����ꡢ���Υ쥹�ݥ󥹤�
-[[c:Net::HTTPResponse]] �Ȥ����֤��ޤ���
+指定した対象に GET リクエストを送り、そのレスポンスを
+[[c:Net::HTTPResponse]] として返します。
 
-�оݤλ�����ˡ�� [[c:URI]] �ǻ��ꤹ�뤫��
-(host, port, path) �ǻ��ꤹ�뤫�Τ����줫�Ǥ���
+対象の指定方法は [[c:URI]] で指定するか、
+(host, port, path) で指定するかのいずれかです。
 
-@param uri �ǡ����μ����оݤ� [[c:URI]] �ǻ��ꤷ�ޤ���
-@param host ��³��Υۥ��Ȥ�ʸ����ǻ��ꤷ�ޤ���
-@param path �ǡ�����¸�ߤ���ѥ���ʸ����ǻ��ꤷ�ޤ���
-@param port ��³����ݡ��Ȥ������ǻ��ꤷ�ޤ���
+@param uri データの取得対象を [[c:URI]] で指定します。
+@param host 接続先のホストを文字列で指定します。
+@param path データの存在するパスを文字列で指定します。
+@param port 接続するポートを整数で指定します。
 @see [[m:Net::HTTP#get]]
 
 #@since 1.8.3
 --- post_form(uri, params) -> Net::HTTPResponse
-[[c:URI]] �ǻ��ꤷ���оݤ� �ե�����Υǡ����� HTTP �� 
-POST ���ޤ���
+[[c:URI]] で指定した対象に フォームのデータを HTTP で 
+POST します。
 
-����ǡ����� params ��ʸ���󤫤�ʸ����ؤ� [[c:Hash]] �Ȥ���
-�Ϥ��ޤ���
+送るデータは params に文字列から文字列への [[c:Hash]] として
+渡します。
 
-@param uri POST �����оݤ� [[c:URI]] �ǻ��ꤷ�ޤ���
-@param params POST ����ǡ����Ǥ���
+@param uri POST する対象を [[c:URI]] で指定します。
+@param params POST するデータです。
 
 #@end
 
 --- proxy_address -> String|nil
-���Ȥ� ([[m:Net::HTTP.Proxy]] �ˤ�äƺ������줿) 
-�ץ������ѤΥ��饹�ʤ�Хץ������Υ��ɥ쥹���֤��ޤ���
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスならばプロクシのアドレスを返します。
 
-�����Ǥʤ���� nil ���֤��ޤ���
+そうでなければ nil を返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_port -> Integer|nil
-���Ȥ� ([[m:Net::HTTP.Proxy]] �ˤ�äƺ������줿) 
-�ץ������ѤΥ��饹�ʤ�Хץ������Υݡ����ֹ���֤��ޤ���
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスならばプロクシのポート番号を返します。
 
-�����Ǥʤ���� nil ���֤��ޤ���
+そうでなければ nil を返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_pass -> String|nil
-���Ȥ� ([[m:Net::HTTP.Proxy]] �ˤ�äƺ������줿) 
-�ץ������ѤΥ��饹�ʤ�Хץ�����ǧ�ڤΥѥ���ɤ��֤��ޤ���
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスならばプロクシ認証のパスワードを返します。
 
-�����Ǥʤ���� nil ���֤��ޤ���
+そうでなければ nil を返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_user -> String|nil
-���Ȥ� ([[m:Net::HTTP.Proxy]] �ˤ�äƺ������줿) 
-�ץ������ѤΥ��饹�ǡ����ĥץ�������ǧ�ڤ����Ѥ������
-�ץ�����ǧ�ڤΥ桼��̾���֤��ޤ���
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスで、かつプロクシの認証を利用する場合は
+プロクシ認証のユーザ名を返します。
 
-�����Ǥʤ���� nil ���֤��ޤ���
+そうでなければ nil を返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
 #@# --- socket_type -> Net::BufferedIO
 #@# 
-#@# ���Υ᥽�åɤ� obsolete �Ǥ���
+#@# このメソッドは obsolete です。
 
 --- Proxy(address, port = 80) -> Class
 
-Proxy ��ͳ�� http �����Ф���³���뤿��Υ��饹��������֤��ޤ���
+Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 
-���Υ��饹�� Net::HTTP ��Ѿ����Ƥ���Τ� Net::HTTP ������
-Ʊ���褦�˻Ȥ��ޤ������ꤵ�줿�ץ��������˷�ͳ���� http ������
-����³���ޤ���
+このクラスは Net::HTTP を継承しているので Net::HTTP と全く
+同じように使えます。指定されたプロクシを常に経由して http サーバ
+に接続します。
 
-address �� nil �ΤȤ��� Net::HTTP ���饹�򤽤Τޤ��֤��ޤ���
+address が nil のときは Net::HTTP クラスをそのまま返します。
 
-��1: [[m:Net::HTTP.new]] ��Ȥ�
+例1: [[m:Net::HTTP.new]] を使う
   require 'net/http'
   proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
   http = proxy_class.new('www.example.org')
   http.start {|h|
-    h.get('/ja/') # proxy.example.com ��ͳ����³���ޤ���
+    h.get('/ja/') # proxy.example.com 経由で接続します。
   }
-��2: [[m:Net::HTTP.start]] ��Ȥ�
+例2: [[m:Net::HTTP.start]] を使う
   require 'net/http'
   proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
   proxy_class.start('www.example.org') {|h|
-    h.get('/ja/') # proxy.example.com ��ͳ����³���ޤ���
+    h.get('/ja/') # proxy.example.com 経由で接続します。
   }
 
-@param address �ץ������Υۥ���̾��ʸ�����Ϳ���ޤ���
-@param port �ץ������Υݡ����ֹ��Ϳ���ޤ���
+@param address プロクシのホスト名を文字列で与えます。
+@param port プロクシのポート番号を与えます。
 
 --- proxy_class? -> bool
 
-���Ȥ� ([[m:Net::HTTP.Proxy]] �ˤ�äƺ������줿) �ץ������ѤΥ��饹�ʤ�п����֤��������Ǥʤ���е����֤��ޤ���
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) プロクシ用のクラスならば真を返し、そうでなければ偽を返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
 #@since 1.8.3
 --- http_default_port -> Integer
 --- default_port -> Integer
-HTTP �Υǥե���ȥݡ��� (80) ���֤��ޤ���
+HTTP のデフォルトポート (80) を返します。
 
 --- https_default_port -> Integer
-HTTPS �Υǥե���ȥݡ��� (443) ���֤��ޤ���
+HTTPS のデフォルトポート (443) を返します。
 
 #@end
 
 #@until 1.9.3
 --- version_1_1 -> ()
-�饤�֥���ư���С������1.1�ߴ��ˤ��ޤ���
+ライブラリの動作をバージョン1.1互換にします。
 
 @see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
      [[m:Net::HTTP.version_1_2?]]
@@ -408,13 +408,13 @@ HTTPS �Υǥե���ȥݡ��� (443) ���֤��ޤ���
 #@since 1.9.3
 --- version_1_1? -> false
 --- is_version_1_1? -> false
-���⤷�ޤ��󡣸ߴ����Τ���˻Ĥ���Ƥ��ꡢ��� false ���֤��ޤ���
+何もしません。互換性のために残されており、常に false を返します。
 
 @see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_2?]]
 #@else
 --- version_1_1? -> bool
 --- is_version_1_1? -> bool 
-�饤�֥���ư��С������1.1�ߴ��Ǥ�����˿����֤��ޤ���
+ライブラリの動作がバージョン1.1互換である場合に真を返します。
 
 @see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
      [[m:Net::HTTP.version_1_2?]]
@@ -422,13 +422,13 @@ HTTPS �Υǥե���ȥݡ��� (443) ���֤��ޤ���
 
 #@since 1.9.3
 --- version_1_2 -> true
-���⤷�ޤ��󡣸ߴ����Τ���˻Ĥ���Ƥ��ꡢ��� true ���֤��ޤ���
+何もしません。互換性のために残されており、常に true を返します。
 
 @see [[m:Net::HTTP.version_1_1?]], [[m:Net::HTTP.version_1_2?]]
 #@else
 --- version_1_2 -> ()
-�饤�֥���ư���С������1.2�ߴ����Ĥޤ�
-�̾��ư��ˤ��ޤ���
+ライブラリの動作をバージョン1.2互換、つまり
+通常の動作にします。
 
 @see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_1?]]
      [[m:Net::HTTP.version_1_2?]]
@@ -437,13 +437,13 @@ HTTPS �Υǥե���ȥݡ��� (443) ���֤��ޤ���
 #@since 1.9.3
 --- version_1_2? -> true
 --- is_version_1_2? -> true
-���⤷�ޤ��󡣸ߴ����Τ���˻Ĥ���Ƥ��ꡢ��� true ���֤��ޤ���
+何もしません。互換性のために残されており、常に true を返します。
 
 @see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
 #@else
 --- version_1_2? -> bool
 --- is_version_1_2? -> bool 
-�饤�֥���ư��С������1.2�ߴ��Ǥ�����˿����֤��ޤ���
+ライブラリの動作がバージョン1.2互換である場合に真を返します。
 
 @see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
      [[m:Net::HTTP.version_1_1?]]
@@ -454,185 +454,185 @@ HTTPS �Υǥե���ȥݡ��� (443) ���֤��ޤ���
 --- start -> self
 --- start {|http| .... } -> object
 
-TCP ���ͥ�������ĥ�ꡢHTTP ���å����򳫻Ϥ��ޤ���
-���Ǥ˥��å���󤬳��Ϥ��Ƥ������㳰 IOError ��ȯ�����ޤ���
+TCP コネクションを張り、HTTP セッションを開始します。
+すでにセッションが開始していたら例外 IOError を発生します。
 
-�֥��å���Ϳ�������ˤϼ�ʬ���Ȥ򤽤Υ֥��å���
-�Ϥ����֥��å�������ä��Ȥ�����³���Ĥ��ޤ������ΤȤ���
-�֥��å����ͤ��֤��ͤȤ��ޤ���
+ブロックを与えた場合には自分自身をそのブロックに
+渡し、ブロックが終わったときに接続を閉じます。このときは
+ブロックの値を返り値とします。
 
-�֥��å���Ϳ���ʤ��ä����ˤϼ�ʬ���Ȥ��֤��ޤ���
-���Ѹ�ˤϤ��Υ��֥������Ȥ� [[m:Net::HTTP#finish]] ���Ƥ���������
+ブロックを与えなかった場合には自分自身を返します。
+利用後にはこのオブジェクトを [[m:Net::HTTP#finish]] してください。
 
-@raise IOError ���Ǥ˥��å���󤬳��Ϥ��Ƥ�������ȯ�����ޤ���
+@raise IOError すでにセッションが開始していた場合に発生します。
 
 --- started? -> bool
 --- active? -> bool
 
-HTTP ���å���󤬳��Ϥ���Ƥ����鿿���֤��ޤ���
+HTTP セッションが開始されていたら真を返します。
 
-active? �ϻ����٤�Υ᥽�åɤǤ���
+active? は時代遅れのメソッドです。
 
 --- set_debug_output(io) -> ()
 
-�ǥХå����Ϥν��������ꤷ�ޤ���
-���Υ᥽�åɤϿ���ʥ������ƥ��ۡ���θ���
-�ˤʤ뤿�ᡢ�ǥХå��ʳ��ǤϷ褷�ƻȤ�ʤ��Ǥ���������
+デバッグ出力の出力先を指定します。
+このメソッドは深刻なセキュリティホールの原因
+になるため、デバッグ以外では決して使わないでください。
 
-io �� nil ����ꤹ��ȥǥХå����Ϥ�ߤ�ޤ���
+io に nil を指定するとデバッグ出力を止めます。
 
-@param io ���������ꤷ�ޤ������Υ��֥������Ȥ� 
-          �᥽�å� << ����äƤ���ɬ�פ�����ޤ���
+@param io 出力先を指定します。このオブジェクトは 
+          メソッド << を持っている必要があります。
 
   http.set_debug_output($stderr)
 
 
 --- close_on_empty_response -> bool
-�쥹�ݥ󥹤��ܥǥ�����äƤ��ʤ����˥��ͥ�������
-�Ĥ��뤫�ɤ������֤��ޤ���
+レスポンスがボディを持っていない場合にコネクションを
+閉じるかどうかを返します。
 
-�ǥե���ȤǤϵ�(�Ĥ��ʤ�)�Ǥ���
+デフォルトでは偽(閉じない)です。
 
 @see [[m:Net::HTTP#close_on_empty_response=]]
 
 --- close_on_empty_response=(bool)
-�쥹�ݥ󥹤��ܥǥ�����äƤ��ʤ����˥��ͥ�������
-�Ĥ��뤫�ɤ��������ꤷ�ޤ���
+レスポンスがボディを持っていない場合にコネクションを
+閉じるかどうかを設定します。
 
 
-@param bool �쥹�ݥ󥹤��ܥǥ�����äƤ��ʤ����˥��ͥ�������
-            �Ĥ��뤫�ɤ������ꤷ�ޤ���
+@param bool レスポンスがボディを持っていない場合にコネクションを
+            閉じるかどうか指定します。
 
 @see [[m:Net::HTTP#close_on_empty_response]]
 
 --- address -> String
 
-��³���륢�ɥ쥹���֤��ޤ���
+接続するアドレスを返します。
 
 @see [[m:Net::HTTP.new]]
 --- port -> Integer
 
-��³����ݡ����ֹ���֤��ޤ���
+接続するポート番号を返します。
 
 @see [[m:Net::HTTP.new]]
 --- proxy? -> bool
 
-�ץ�������𤷤���³����ʤ鿿���֤��ޤ���
+プロクシを介して接続するなら真を返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_address -> String|nil
 --- proxyaddr -> String|nil
 
-�ץ�������ͳ����³���� HTTP ���֥������Ȥʤ�ץ������Υ��ɥ쥹
-���֤��ޤ���
+プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス
+を返します。
 
-�����Ǥʤ��ʤ� nil ���֤��ޤ���
+そうでないなら nil を返します。
 
-proxyaddr �ϻ����٤�Υ᥽�åɤǤ���
+proxyaddr は時代遅れのメソッドです。
 
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_port -> Integer|nil
 --- proxyport -> Integer|nil
 
-�ץ�������ͳ����³���� HTTP ���֥������Ȥʤ�ץ������Υݡ����ֹ�
-���֤��ޤ���
+プロクシ経由で接続する HTTP オブジェクトならプロクシのポート番号
+を返します。
 
-�����Ǥʤ��ʤ� nil ���֤��ޤ���
+そうでないなら nil を返します。
 
-proxyport �ϻ����٤�Υ᥽�åɤǤ���
+proxyport は時代遅れのメソッドです。
 @see [[m:Net::HTTP.Proxy]]
 --- proxy_pass -> String|nil
-�ץ�������ͳ����³��������˥ץ������Υ桼��ǧ�ڤ�
-���� HTTP ���֥������Ȥʤ�ǧ�ڤΥѥ���ɤ�
-���֤��ޤ���
+プロクシ経由で接続し、さらにプロクシのユーザ認証を
+する HTTP オブジェクトなら認証のパスワードを
+を返します。
 
-�����Ǥʤ��ʤ� nil ���֤��ޤ���
+そうでないなら nil を返します。
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_user -> String|nil
-�ץ�������ͳ����³��������˥ץ������Υ桼��ǧ�ڤ�
-���� HTTP ���֥������Ȥʤ�ǧ�ڤΥ桼��̾��
-���֤��ޤ���
+プロクシ経由で接続し、さらにプロクシのユーザ認証を
+する HTTP オブジェクトなら認証のユーザ名を
+を返します。
 
-�����Ǥʤ��ʤ� nil ���֤��ޤ���
+そうでないなら nil を返します。
 @see [[m:Net::HTTP.Proxy]]
 
 --- open_timeout -> Integer
-��³�����Ԥĺ����ÿ����֤��ޤ���
+接続時に待つ最大秒数を返します。
 
-�����ÿ����äƤ⥳�ͥ������
-�����ʤ�����㳰 [[c:TimeoutError]] ��ȯ�����ޤ���
-�ǥե���Ȥ� 30 (��)�Ǥ���
+この秒数たってもコネクションが
+開かなければ例外 [[c:TimeoutError]] を発生します。
+デフォルトは 30 (秒)です。
 
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
 
 --- open_timeout=(seconds)
-��³�����Ԥĺ����ÿ������ꤷ�ޤ���
+接続時に待つ最大秒数を設定します。
 
-�����ÿ����äƤ⥳�ͥ������
-�����ʤ�����㳰 [[c:TimeoutError]] ��ȯ�����ޤ���
+この秒数たってもコネクションが
+開かなければ例外 [[c:TimeoutError]] を発生します。
 
-@param second �Ԥ��ÿ�����ꤷ�ޤ���
+@param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout]]
 
 --- read_timeout -> Integer
-�ɤߤ���([[man:read(2)]]) ���ǥ֥��å����Ƥ褤�����ÿ�
-���֤��ޤ���
+読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数
+を返します。
 
-�����ÿ����äƤ��ɤߤ���ʤ�����㳰 [[c:TimeoutError]]
-��ȯ�����ޤ���
-�ǥե���Ȥ� 60 (��)�Ǥ���
+この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
+を発生します。
+デフォルトは 60 (秒)です。
 
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout=]]
 
 --- read_timeout=(seconds)
 
-�ɤߤ���([[man:read(2)]]) ���ǥ֥��å����Ƥ褤�����ÿ���
-���ꤷ�ޤ���
+読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数を
+設定します。
 
-�����ÿ����äƤ��ɤߤ���ʤ�����㳰 [[c:TimeoutError]]
-��ȯ�����ޤ���
+この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
+を発生します。
 
-@param second �Ԥ��ÿ�����ꤷ�ޤ���
+@param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
 
 --- finish -> ()
 
-HTTP ���å�����λ���ޤ������å���󳫻����ˤ��Υ᥽�åɤ�
-�ƤФ줿�����㳰 IOError ��ȯ�����ޤ���
+HTTP セッションを終了します。セッション開始前にこのメソッドが
+呼ばれた場合は例外 IOError を発生します。
 
-@raise IOError ���å���󳫻����˸Ƥ֤�ȯ�����ޤ���
+@raise IOError セッション開始前に呼ぶと発生します。
 
 --- get(path, header = nil, dest = nil) -> Net::HTTPResponse
 --- get(path, header = nil, dest = nil) {|body_segment| .... } -> Net::HTTPResponse
 
-�����о�� path �ˤ��륨��ƥ��ƥ����������
-[[c:Net::HTTPResponse]] �Υ��󥹥��󥹤Ȥ����֤��ޤ���
+サーバ上の path にあるエンティティを取得し、
+[[c:Net::HTTPResponse]] のインスタンスとして返します。
 
-header �� nil
-�Ǥʤ���С��ꥯ�����Ȥ�����Ȥ��ˤ������Ƥ� HTTP �إå��Ȥ���
-����ޤ��� header �� { 'Accept' = > '*/*', ... } �Ȥ���
-���Υϥå���Ǥʤ���Ф����ޤ���
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-�֥��å��Ȱ��˸ƤӤ����줿�Ȥ���
-����ƥ��ƥ��ܥǥ��򾯤�����ʸ����Ȥ���
-�֥��å���Ϳ���ޤ������ΤȤ�����ͤ� 
-[[c:Net::HTTPResponse]] ���֥������Ȥ�ͭ���� body ��
-�����ޤ���
+ブロックと一緒に呼びだされたときは
+エンティティボディを少しずつ文字列として
+ブロックに与えます。このとき戻り値の 
+[[c:Net::HTTPResponse]] オブジェクトは有効な body を
+持ちません。
 
-dest �ϻ����٤�ΰ����Ǥ������Ѥ��ʤ��Ǥ���������
-dest ����ꤷ�����ˤ�
-�ܥǥ��򾯤����ļ������ƽ缡
-��dest << �ܥǥ������ҡפ�¹Ԥ��ޤ���
+dest は時代遅れの引数です。利用しないでください。
+dest を指定した場合には
+ボディを少しずつ取得して順次
+「dest << ボディの断片」を実行します。
 
-@param path �������륨��ƥ��ƥ��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param header �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
-@param dest ���Ѥ��ʤ��Ǥ���������
+@param path 取得するエンティティのパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@param dest 利用しないでください。
 
-1.1 �ߴ��⡼�ɤξ��ϡ��쥹�ݥ󥹤˱������㳰��ȯ�����ޤ���
-�ޤ����֤��ͤ� [�쥹�ݥ󥹥��֥�������, ���Υܥǥ�] �Ȥʤ�ޤ���
+1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
+また、返り値が [レスポンスオブジェクト, そのボディ] となります。
 
   # net/http version 1.1 (Ruby 1.6.x)
   response, body = http.get( '/index.html' )
@@ -655,18 +655,18 @@ dest ����ꤷ�����ˤ�
 
 --- head(path, header = nil) -> Net::HTTPResponse
 
-�����о�� path �ˤ��륨��ƥ��ƥ��Υإå��Τߤ�������ޤ���
-[[c:Net::HTTPResponse]] �Υ��󥹥��󥹤��֤��ޤ���
+サーバ上の path にあるエンティティのヘッダのみを取得します。
+[[c:Net::HTTPResponse]] のインスタンスを返します。
 
-header �� nil
-�Ǥʤ���С��ꥯ�����Ȥ�����Ȥ��ˤ������Ƥ� HTTP �إå��Ȥ���
-����ޤ��� header �� { 'Accept' = > '*/*', ... } �Ȥ���
-���Υϥå���Ǥʤ���Ф����ޤ���
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-@param path �������륨��ƥ��ƥ��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param header �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
+@param path 取得するエンティティのパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
 
-1.1 �ߴ��⡼�ɤξ��ϡ��쥹�ݥ󥹤˱������㳰��ȯ�����ޤ���
+1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
 
   response = nil
   Net::HTTP.start('some.www.server', 80) {|http|
@@ -679,32 +679,32 @@ header �� nil
 --- post(path, data, header = nil, dest = nil) -> Net::HTTPResponse
 --- post(path, data, header = nil, dest = nil) {|body_segment| .... } -> Net::HTTPResponse
 
-�����о�� path �ˤ��륨��ƥ��ƥ����Ф�ʸ���� data ��
-POST ������ޤ���
+サーバ上の path にあるエンティティに対し文字列 data を
+POST で送ります。
 
-�֤��ͤ� [[c:Net::HTTPResponse]] �Υ��󥹥��󥹤Ǥ���
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
 
-�֥��å��Ȱ��˸ƤӤ����줿�Ȥ��ϥ���ƥ��ƥ��ܥǥ��򾯤�����ʸ����Ȥ���
-�֥��å���Ϳ���ޤ������ΤȤ�����ͤ� HTTPResponse ���֥������Ȥ�ͭ���� body ��
-�����ޤ���
+ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列として
+ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
+持ちません。
 
-POST ������ˤϥإå��� Content-Type: ����ꤹ��ɬ�פ�����ޤ���
-�⤷ header �˻��ꤷ�ʤ��ä��ʤ�С� Content-Type �Ȥ���
-"application/x-www-form-urlencoded" ���Ѥ��ޤ���
+POST する場合にはヘッダに Content-Type: を指定する必要があります。
+もし header に指定しなかったならば、 Content-Type として
+"application/x-www-form-urlencoded" を用います。
 
-dest �ϻ����٤�ΰ����Ǥ������Ѥ��ʤ��Ǥ���������
-dest ����ꤷ�����ˤ�
-�ܥǥ��򾯤����ļ������ƽ缡
-��dest << �ܥǥ������ҡפ�¹Ԥ��ޤ���
+dest は時代遅れの引数です。利用しないでください。
+dest を指定した場合には
+ボディを少しずつ取得して順次
+「dest << ボディの断片」を実行します。
 
-@param path POST��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param header �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
-@param dest ���Ѥ��ʤ��Ǥ���������
+@param path POST先のパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@param dest 利用しないでください。
 
-1.1 �ߴ��⡼�ɤξ��ϡ��쥹�ݥ󥹤˱������㳰��ȯ�����ޤ���
-�ޤ����֤��ͤ� [�쥹�ݥ󥹥��֥�������, ���Υܥǥ�] �Ȥʤ�ޤ���
+1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
+また、返り値が [レスポンスオブジェクト, そのボディ] となります。
 
-��:
+例:
   # net/http version 1.1 (Ruby 1.6.x)
   response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
@@ -725,23 +725,23 @@ dest ����ꤷ�����ˤ�
 --- get2(path, header = nil) -> Net::HTTPResponse
 --- get2(path, header = nil) {|response| .... } -> Net::HTTPResponse
 
-�����о�� path �ˤ��륨��ƥ��ƥ���������ޤ���
-[[c:Net::HTTPResponse]] ���֥������Ȥ��֤��ޤ���
+サーバ上の path にあるエンティティを取得します。
+[[c:Net::HTTPResponse]] オブジェクトを返します。
 
-header �� nil
-�Ǥʤ���С��ꥯ�����Ȥ�����Ȥ��ˤ������Ƥ� HTTP �إå��Ȥ���
-����ޤ��� header �� { 'Accept' = > '*/*', ... } �Ȥ���
-���Υϥå���Ǥʤ���Ф����ޤ���
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿�Ȥ��ϡ�
-����ƥ��ƥ��ܥǥ��򥽥��åȤ����ɤ߽Ф����ˡ�
-��³��ݻ��������֤� [[c:Net::HTTPResponse]]
-���֥������Ȥ�֥��å����Ϥ��ޤ���
-�礭�ʥ������Υܥǥ�����٤��ɤߤ����Ȥޤ�����
-�����ʥ�������ʬ���Ƽ������������ˤϤ�������Ѥ��ޤ���
+ブロックとともに呼び出されたときは、
+エンティティボディをソケットから読み出す前に、
+接続を維持した状態で [[c:Net::HTTPResponse]]
+オブジェクトをブロックに渡します。
+大きなサイズのボディを一度に読みだすとまずく、
+小さなサイズに分けて取りだしたい場合にはこれを利用します。
 
-@param path �������륨��ƥ��ƥ��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param header �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
+@param path 取得するエンティティのパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
 
   # example
   response = http.request_get('/index.html')
@@ -756,7 +756,7 @@ header �� nil
     end
   }
 
-get2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
+get2 は時代遅れなので使わないでください。
 
 @see [[m:Net::HTTP#get]], [[m:Net::HTTPResponse#read_body]]
 
@@ -765,25 +765,25 @@ get2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
 --- head2(path, header = nil) -> Net::HTTPResponse
 --- head2(path, header = nil) {|response| .... } -> Net::HTTPResponse
 
-�����о�� path �ˤ��륨��ƥ��ƥ��Υإå��Τߤ�������ޤ���
-[[c:Net::HTTPResponse]] ���֥������Ȥ��֤��ޤ���
+サーバ上の path にあるエンティティのヘッダのみを取得します。
+[[c:Net::HTTPResponse]] オブジェクトを返します。
 
-header �� nil
-�Ǥʤ���С��ꥯ�����Ȥ�����Ȥ��ˤ������Ƥ� HTTP �إå��Ȥ���
-����ޤ��� header �� { 'Accept' = > '*/*', ... } �Ȥ���
-���Υϥå���Ǥʤ���Ф����ޤ���
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿�Ȥ��ϡ�
-[[m:Net::HTTP#request_get]] ��Ʊ��ư���
-���ޤ��������⤽��إå������׵ᤷ�Ƥ��ʤ��Τ�
-body �϶��Ǥ������Τ��ᤳ��ư��Ϥ���ۤɰ�̣�Ϥ���ޤ���
+ブロックとともに呼び出されたときは、
+[[m:Net::HTTP#request_get]] と同じ動作を
+しますが、そもそもヘッダしか要求していないので
+body は空です。そのためこの動作はそれほど意味はありません。
 
-@param path �إå���������륨��ƥ��ƥ��Υѥ���
-            ʸ����ǻ��ꤷ�ޤ���
-@param header �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
+@param path ヘッダを取得するエンティティのパスを
+            文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
 
 
-head2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
+head2 は時代遅れなので使わないでください。
 
   response = http.request_head('/index.html')
   p response['content-type']
@@ -795,31 +795,31 @@ head2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
 --- post2(path, data, header = nil) -> Net::HTTPResponse
 --- post2(path, data, header = nil) {|response| .... } -> Net::HTTPResponse
 
-�����о�� path �ˤ��륨��ƥ��ƥ����Ф�ʸ���� data ��
-POST ������ޤ���
-�֤��ͤ� [[c:Net::HTTPResponse]] �Υ��󥹥��󥹤Ǥ���
+サーバ上の path にあるエンティティに対し文字列 data を
+POST で送ります。
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
 
-header �� nil
-�Ǥʤ���С��ꥯ�����Ȥ�����Ȥ��ˤ������Ƥ� HTTP �إå��Ȥ���
-����ޤ��� header �� { 'Accept' = > '*/*', ... } �Ȥ���
-���Υϥå���Ǥʤ���Ф����ޤ���
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿�Ȥ��ϡ�
-����ƥ��ƥ��ܥǥ��򥽥��åȤ����ɤ߽Ф����ˡ�
-��³��ݻ��������֤� [[c:Net::HTTPResponse]]
-���֥������Ȥ�֥��å����Ϥ��ޤ���
+ブロックとともに呼び出されたときは、
+エンティティボディをソケットから読み出す前に、
+接続を維持した状態で [[c:Net::HTTPResponse]]
+オブジェクトをブロックに渡します。
 
-POST ������ˤϥإå��� Content-Type: ����ꤹ��ɬ�פ�����ޤ���
-�⤷ header �˻��ꤷ�ʤ��ä��ʤ�С� Content-Type �Ȥ���
-"application/x-www-form-urlencoded" ���Ѥ��ޤ���
+POST する場合にはヘッダに Content-Type: を指定する必要があります。
+もし header に指定しなかったならば、 Content-Type として
+"application/x-www-form-urlencoded" を用います。
 
-@param path POST��Υ���ƥ��ƥ��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param data POST����ǡ�����Ϳ���ޤ���
-@param header �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
+@param path POST先のエンティティのパスを文字列で指定します。
+@param data POSTするデータを与えます。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
 
-post2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
+post2 は時代遅れなので使わないでください。
 
-  # ��
+  # 例
   response = http.request_post('/cgi-bin/nice.rb', 'datadatadata...')
   p response.status
   puts response.body          # body is already read
@@ -838,50 +838,50 @@ post2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
 
 
 --- put(path, data, initheader = nil) -> Net::HTTPResponse
-�����о�� path �ˤ��륨��ƥ��ƥ����Ф�ʸ���� data ��
-PUT ������ޤ���
+サーバ上の path にあるエンティティに対し文字列 data を
+PUT で送ります。
 
-�֤��ͤ� [[c:Net::HTTPResponse]] �Υ��󥹥��󥹤Ǥ���
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
 
-@param path �������륨��ƥ��ƥ��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param data ����ǡ�����ʸ����ǻ��ꤷ�ޤ���
-@param initheader �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
+@param path 取得するエンティティのパスを文字列で指定します。
+@param data 送るデータを文字列で指定します。
+@param initheader リクエストの HTTP ヘッダをハッシュで指定します。
 
 @see [[m:Net::HTTP#request_put]]
 
-1.1 �ߴ��⡼�ɤξ��ϡ��쥹�ݥ󥹤˱������㳰��ȯ�����ޤ���
+1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
 
 --- request_put(path, data, initheader = nil) -> Net::HTTPResponse
 --- request_put(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
 --- put2(path, data, initheader = nil) -> Net::HTTPResponse
 --- put2(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
-�����о�� path �ˤ��륨��ƥ��ƥ����Ф�ʸ���� data ��
-PUT ������ޤ���
+サーバ上の path にあるエンティティに対し文字列 data を
+PUT で送ります。
 
-�֤��ͤ� [[c:Net::HTTPResponse]] �Υ��󥹥��󥹤Ǥ���
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿�Ȥ��ϡ�
-�ܥǥ��򥽥��åȤ����ɤ߽Ф����ˡ�
-��³��ݻ��������֤� [[c:Net::HTTPResponse]]
-���֥������Ȥ�֥��å����Ϥ��ޤ���
+ブロックとともに呼び出されたときは、
+ボディをソケットから読み出す前に、
+接続を維持した状態で [[c:Net::HTTPResponse]]
+オブジェクトをブロックに渡します。
 
-@param path �������륨��ƥ��ƥ��Υѥ���ʸ����ǻ��ꤷ�ޤ���
-@param data ����ǡ�����ʸ����ǻ��ꤷ�ޤ���
-@param initheader �ꥯ�����Ȥ� HTTP �إå���ϥå���ǻ��ꤷ�ޤ���
+@param path 取得するエンティティのパスを文字列で指定します。
+@param data 送るデータを文字列で指定します。
+@param initheader リクエストの HTTP ヘッダをハッシュで指定します。
 
-put2 �ϻ����٤�ʤΤǻȤ�ʤ��Ǥ���������
+put2 は時代遅れなので使わないでください。
 
 @see [[m:Net::HTTP#put]]
 
 
 --- send_request(name, path, data = nil, header = nil) -> Net::HTTPResponse
-HTTP �ꥯ�����Ȥ򥵡��Ф����ꡢ���Υ쥹�ݥ󥹤�
-[[c:Net::HTTPResponse]] �Υ��󥹥��󥹤Ȥ����֤��ޤ���
+HTTP リクエストをサーバに送り、そのレスポンスを
+[[c:Net::HTTPResponse]] のインスタンスとして返します。
 
-@param name �ꥯ�����ȤΥ᥽�å�̾��ʸ�����Ϳ���ޤ���
-@param path �ꥯ�����ȤΥѥ���ʸ�����Ϳ���ޤ���
-@param data �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param header �ꥯ�����ȤΥإå���ϥå����Ϳ���ޤ���
+@param name リクエストのメソッド名を文字列で与えます。
+@param path リクエストのパスを文字列で与えます。
+@param data リクエストのボディを文字列で与えます。
+@param header リクエストのヘッダをハッシュで与えます。
 
   response = http.send_request('GET', '/index.html')
   puts response.body
@@ -891,21 +891,21 @@ HTTP �ꥯ�����Ȥ򥵡��Ф����ꡢ���Υ쥹�ݥ󥹤�
 --- request(request, data = nil) -> Net::HTTPResponse
 --- request(request, data = nil) {|response| .... } -> Net::HTTPResponse
 
-[[c:Net::HTTPRequest]] ���֥������� request �򥵡��Ф��������ޤ���
+[[c:Net::HTTPRequest]] オブジェクト request をサーバに送信します。
 
-POST/PUT �λ��� data ��Ϳ�����ޤ� 
-(GET/HEAD �ʤɤ�  data ��Ϳ����� 
-[[c:ArgumentError]] ��ȯ�����ޤ�)��
+POST/PUT の時は data も与えられます 
+(GET/HEAD などで  data を与えると 
+[[c:ArgumentError]] を発生します)。
 
-�֥��å��ȤȤ�˸ƤӤ����줿�Ȥ���
-�����åȤ���ܥǥ����ɤߤ��ޤ��� [[c:Net::HTTPResponse]]
-���֥������Ȥ�֥��å���Ϳ���ޤ���
+ブロックとともに呼びだされたときは
+ソケットからボディを読みこまずに [[c:Net::HTTPResponse]]
+オブジェクトをブロックに与えます。
 
-@param request �ꥯ�����ȥ��֥������Ȥ�Ϳ���ޤ���
-@param data �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
+@param request リクエストオブジェクトを与えます。
+@param data リクエストのボディを文字列で与えます。
 
-@raise ArgumentError data��Ϳ����٤��Ǥʤ��ꥯ�����Ȥ�data��
-                     Ϳ��������ȯ�����ޤ���
+@raise ArgumentError dataを与えるべきでないリクエストでdataを
+                     与えた場合に発生します。
 @see [[m:Net::HTTP#send_request]]
 
 #@# --- inspect
@@ -913,181 +913,181 @@ POST/PUT �λ��� data ��Ϳ�����ޤ�
 
 #@since 1.8.3
 --- copy(path, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� COPY �ꥯ�����Ȥ�
-�إå��� initheader �Ȥ�������ޤ���
+サーバの path に COPY リクエストを
+ヘッダを initheader として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Copy]]
 
 --- delete(path, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� DELETE �ꥯ�����Ȥ�
-�إå��� initheader �Ȥ�������ޤ���
+サーバの path に DELETE リクエストを
+ヘッダを initheader として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Delete]]
 
 --- lock(path, body, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� LOCK �ꥯ�����Ȥ�
-�إå��� initheader, �ܥǥ��� body �Ȥ�������ޤ���
+サーバの path に LOCK リクエストを
+ヘッダを initheader, ボディを body として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param body �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Lock]]
 
 --- mkcol(path, body, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� MKCOL �ꥯ�����Ȥ�
-�إå��� initheader, �ܥǥ��� body �Ȥ�������ޤ���
+サーバの path に MKCOL リクエストを
+ヘッダが initheader, ボディを body として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param body �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Mkcol]]
 
 --- move(path, body, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� MOVE �ꥯ�����Ȥ�
-�إå��� initheader, �ܥǥ��� body �Ȥ�������ޤ���
+サーバの path に MOVE リクエストを
+ヘッダが initheader, ボディを body として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param body �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Move]]
 
 --- options(path, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� OPTIONS �ꥯ�����Ȥ�
-�إå��� initheader �Ȥ������ꡢ
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+サーバの path に OPTIONS リクエストを
+ヘッダが initheader として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Options]]
 
 --- propfind(path, body, initheader = {'Depth' => '0'}) -> Net::HTTPResponse
-�����Ф� path �� PROPFIND �ꥯ�����Ȥ�
-�إå��� initheader, �ܥǥ��� body �Ȥ�������ޤ���
+サーバの path に PROPFIND リクエストを
+ヘッダを initheader, ボディを body として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param body �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Propfind]]
 
 --- proppatch(path, body, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� PROPPATCH �ꥯ�����Ȥ�
-�إå��� initheader, �ܥǥ��� body �Ȥ�������ޤ���
+サーバの path に PROPPATCH リクエストを
+ヘッダを initheader, ボディを body として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param body �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Proppatch]]
 
 --- trace(path, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� TRACE �ꥯ�����Ȥ�
-�إå��� initheader �Ȥ�������ޤ���
+サーバの path に TRACE リクエストを
+ヘッダを initheader として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 
 @see [[c:Net::HTTP::Trace]]
 
 
 --- unlock(path, body, initheader = nil) -> Net::HTTPResponse
-�����Ф� path �� UNLOCK �ꥯ�����Ȥ�
-�إå��� initheader, �ܥǥ��� body �Ȥ�������ޤ���
+サーバの path に UNLOCK リクエストを
+ヘッダを initheader, ボディを body として送ります。
 
-�쥹�ݥ󥹤� [[c:Net::HTTPResponse]] �Υ��֥�������
-���֤��ޤ���
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
-@param path �ꥯ�����Ȥ�����ѥ���ʸ�����Ϳ���ޤ���
-@param body �ꥯ�����ȤΥܥǥ���ʸ�����Ϳ���ޤ���
-@param initheader �ꥯ�����ȤΥإå����ʸ����=>ʸ����פ�
-                  �ϥå����Ϳ���ޤ���
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
 @see [[c:Net::HTTP::Unlock]]
 
 
 --- use_ssl? -> bool
-SSL�����Ѥ�����³������˿����֤��ޤ���
+SSLを利用して接続する場合に真を返します。
 
-[[lib:net/https]] ��Ȥ�ʤ����ˤϾ�˵����֤��ޤ���
+[[lib:net/https]] を使わない場合には常に偽を返します。
 
 @see [[lib:net/https]], [[lib:openssl]] 
 
 #@end
 
 = module Net::HTTPHeader
-HTTP �إå��Τ���Υ⥸�塼��Ǥ���
+HTTP ヘッダのためのモジュールです。
 
-���Υ⥸�塼��� mix-in �� @header �Ȥ���(�ϥå�����������Ƥ���)
-�ѿ��ؤΡ���ʸ����ʸ����̵�뤷���ץϥå���Ū���������᥽�åɤ�
-�󶡤��ޤ����ޤ��褯���� HTTP �إå��ؤ������ʥ��������᥽�åɤ�
-�Ѱդ��ޤ���
+このモジュールを mix-in に @header という(ハッシュを代入してある)
+変数への「大文字小文字を無視した」ハッシュ的アクセスメソッドを
+提供します。またよくある HTTP ヘッダへの便利なアクセスメソッドも
+用意します。
 
 == Instance Methods
 
 #@# --- initialize_http_header(initheader) -> ()
-#@# ���Υ⥸�塼��� mix-in �������饹��
-#@# ��������˸ƤӤ����� ���Υ⥸�塼��γƥ᥽�å�
-#@# �����Ѳ�ǽ�ˤ��ޤ��� 
-#@# @param initheader ��������Υإå������Ƥ�
-#@#                   {�إå��ե������̾(ʸ����)=>�������(ʸ����)}
-#@#                   �Ȥ����ϥå����Ϳ���ޤ���
+#@# このモジュールを mix-in したクラスの
+#@# 初期化時に呼びだし、 このモジュールの各メソッド
+#@# を利用可能にします。 
+#@# @param initheader 初期化時のヘッダの内容を
+#@#                   {ヘッダフィールド名(文字列)=>その中身(文字列)}
+#@#                   というハッシュで与えます。
 
 --- [](key) -> String|nil
-key �إå��ե�����ɤ��֤��ޤ���
+key ヘッダフィールドを返します。
 
-���Ȥ��Х��� 'content-length' ���Ф��Ƥ�  '2048'
-�Τ褦��ʸ���������ޤ���������¸�ߤ��ʤ���� nil ���֤��ޤ���
+たとえばキー 'content-length' に対しては  '2048'
+のような文字列が得られます。キーが存在しなければ nil を返します。
 
 #@since 1.8.3
-�����Υإå��ե�����ɤ���ĤΥإå������ʣ��¸�ߤ���
-���ˤϤ�������� ", " ��Ϣ�뤷��ʸ������֤��ޤ���
+一種類のヘッダフィールドが一つのヘッダの中に複数存在する
+場合にはそれを全て ", " で連結した文字列を返します。
 #@end
-key ����ʸ����ʸ������̤��ޤ���
+key は大文字小文字を区別しません。
 
-@param key �إå��ե�����̾��ʸ�����Ϳ���ޤ���
+@param key ヘッダフィール名を文字列で与えます。
 
 @see [[m:Net::HTTPHeader#[]=]],
 #@since 1.8.3
@@ -1096,14 +1096,14 @@ key ����ʸ����ʸ������̤��ޤ���
 #@end
 
 --- []=(key, val)
-key �إå��ե�����ɤ�ʸ���� val �򥻥åȤ��ޤ���
+key ヘッダフィールドに文字列 val をセットします。
 
-key �˸������ꤵ��Ƥ����ͤ��˴�����ޤ���
-key ����ʸ����ʸ������̤��ޤ���
-val �� nil ��Ϳ����Ȥ��Υե�����ɤ������ޤ���
+key に元々設定されていた値は破棄されます。
+key は大文字小文字を区別しません。
+val に nil を与えるとそのフィールドを削除します。
 
-@param key �إå��ե�����̾��ʸ�����Ϳ���ޤ���
-@param val key�ǻ��ꤷ���ե�����ɤ˥��åȤ���ʸ�����Ϳ���ޤ���
+@param key ヘッダフィール名を文字列で与えます。
+@param val keyで指定したフィールドにセットする文字列を与えます。
 
 @see [[m:Net::HTTPHeader#[] ]],
 #@since 1.8.3
@@ -1114,16 +1114,16 @@ val �� nil ��Ϳ����Ȥ��Υե�����ɤ������ޤ���
 #@since 1.8.3
 --- add_field(key, val) -> ()
 
-key �إå��ե�����ɤ� val ���ɲä��ޤ���
+key ヘッダフィールドに val を追加します。
 
-key �˸������ꤵ��Ƥ����ͤ��˴����줺������� val �ɲä���ޤ���
+key に元々設定されていた値は破棄されず、それに val 追加されます。
 
-@param key �إå��ե�����̾��ʸ�����Ϳ���ޤ���
-@param val key�ǻ��ꤷ���ե�����ɤ��ɲä���ʸ�����Ϳ���ޤ���
+@param key ヘッダフィール名を文字列で与えます。
+@param val keyで指定したフィールドに追加する文字列を与えます。
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#get_fields]]
 
-��:
+例:
   request.add_field 'X-My-Header', 'a'
   p request['X-My-Header']              #=> "a"
   p request.get_fields('X-My-Header')   #=> ["a"]
@@ -1135,14 +1135,14 @@ key �˸������ꤵ��Ƥ����ͤ��˴����줺������� val �ɲä���ޤ���
   p request.get_fields('X-My-Header')   #=> ["a", "b", "c"]
    
 --- get_fields(key) -> [String]
-key �إå��ե�����ɤ��� (ʸ����) ��������֤��ޤ���
+key ヘッダフィールドの値 (文字列) を配列で返します。
 
-���Ȥ��Х��� 'content-length' ���Ф��Ƥ� ['2048'] �Τ褦��
-ʸ���������ޤ��������Υإå��ե�����ɤ���ĤΥإå�����
-��ʣ��¸�ߤ��뤳�Ȥ����ꤨ�ޤ���
-key ����ʸ����ʸ������̤��ޤ���
+たとえばキー 'content-length' に対しては ['2048'] のような
+文字列が得られます。一種類のヘッダフィールドが一つのヘッダの中
+に複数存在することがありえます。
+key は大文字小文字を区別しません。
 
-@param key �إå��ե�����̾��ʸ�����Ϳ���ޤ���
+@param key ヘッダフィール名を文字列で与えます。
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#add_field]],
 
@@ -1151,192 +1151,192 @@ key ����ʸ����ʸ������̤��ޤ���
 --- fetch(key) -> String
 --- fetch(key, default) -> String
 --- fetch(key) {|hash| .... } -> String
-key �إå��ե�����ɤ��֤��ޤ���
+key ヘッダフィールドを返します。
 
-���Ȥ��Х��� 'content-length' ���Ф��Ƥ�  '2048'
-�Τ褦��ʸ���������ޤ���������¸�ߤ��ʤ���� nil ���֤��ޤ���
+たとえばキー 'content-length' に対しては  '2048'
+のような文字列が得られます。キーが存在しなければ nil を返します。
 
-�������륭������Ͽ����Ƥ�
-�ʤ����ˤϡ����� default ��Ϳ�����Ƥ���Ф����ͤ򡢥֥���
-����Ϳ�����Ƥ���Ф��Υ֥��å���ɾ�������ͤ��֤��ޤ���
+該当するキーが登録されてい
+ない時には、引数 default が与えられていればその値を、ブロッ
+クが与えられていればそのブロックを評価した値を返します。
 
 #@since 1.8.3
-�����Υإå��ե�����ɤ���ĤΥإå������ʣ��¸�ߤ���
-���ˤϤ�������� ", " ��Ϣ�뤷��ʸ������֤��ޤ���
+一種類のヘッダフィールドが一つのヘッダの中に複数存在する
+場合にはそれを全て ", " で連結した文字列を返します。
 #@end
-key ����ʸ����ʸ������̤��ޤ���
+key は大文字小文字を区別しません。
 
-@param key �إå��ե�����̾��ʸ�����Ϳ���ޤ���
-@param default �������륭������Ͽ����Ƥ��ʤ������֤��ͤ���ꤷ�ޤ���
-@raise IndexError ����default��֥��å���Ϳ�����Ƥʤ�����������õ���� ���Ԥ����ȯ�����ޤ���
+@param key ヘッダフィール名を文字列で与えます。
+@param default 該当するキーが登録されていない時の返り値を指定します。
+@raise IndexError 引数defaultもブロックも与えられてない時、キーの探索に 失敗すると発生します。
 @see [[m:Net::HTTPHeader#[] ]]
 
 --- size -> Integer
 --- length -> Integer
 
-���Υ᥽�åɤ� obsolete �Ǥ���
+このメソッドは obsolete です。
 
-�إå��ե�����ɤο����֤��ޤ���
+ヘッダフィールドの数を返します。
 
 --- basic_auth(account, password) -> ()
-Authorization: �إå��� BASIC ǧ���Ѥ˥��åȤ��ޤ���
+Authorization: ヘッダを BASIC 認証用にセットします。
 
-@param account ���������̾��ʸ�����Ϳ���ޤ���
-@param password �ѥ���ɤ�ʸ�����Ϳ���ޤ���
+@param account アカウント名を文字列で与えます。
+@param password パスワードを文字列で与えます。
 
 --- chunked? -> bool
-Transfer-Encoding: �إå��ե�����ɤ� "chunked" �Ǥ���
-���˿����֤��ޤ���
+Transfer-Encoding: ヘッダフィールドが "chunked" である
+場合に真を返します。
 
-Transfer-Encoding: �إå��ե�����ɤ�¸�ߤ��ʤ��ä��ꡢ
-"chunked" �ʳ��Ǥ�����ˤϵ����֤��ޤ���
+Transfer-Encoding: ヘッダフィールドが存在しなかったり、
+"chunked" 以外である場合には偽を返します。
 
 --- content_type -> String|nil
-"text/html" �Τ褦�� Content-Type ��ɽ��
-ʸ������֤��ޤ���
+"text/html" のような Content-Type を表す
+文字列を返します。
 
-Content-Type: �إå��ե�����ɤ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
+Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
 --- content_type=(type)
 --- set_content_type(type, params = {})
-type �� params ���� Content-Type: �إå��ե�����ɤ�
-�ͤ����ꤷ�ޤ���
+type と params から Content-Type: ヘッダフィールドの
+値を設定します。
 
-@param type ��ǥ��������פ�ʸ����ǻ��ꤷ�ޤ���
-@param params �ѥ�᡼��°����ϥå���ǻ��ꤷ�ޤ���
+@param type メディアタイプを文字列で指定します。
+@param params パラメータ属性をハッシュで指定します。
 
 --- main_type -> String|nil
-"text/html" �ˤ����� "text" �Τ褦�ʥ����פ�ɽ��
-ʸ������֤��ޤ���
+"text/html" における "text" のようなタイプを表す
+文字列を返します。
 
-Content-Type: �إå��ե�����ɤ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
+Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
 --- sub_type -> String|nil
-"text/html" �ˤ����� "html" �Τ褦�ʥ��֥����פ�ɽ��
-ʸ������֤��ޤ���
+"text/html" における "html" のようなサブタイプを表す
+文字列を返します。
 
-Content-Type: �إå��ե�����ɤ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
+Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
 --- type_params -> Hash
-Content-Type �Υѥ�᡼���� {"charset" => "iso-2022-jp"}
-�Ȥ������� [[c:Hash]] ���֤��ޤ���
+Content-Type のパラメータを {"charset" => "iso-2022-jp"}
+という形の [[c:Hash]] で返します。
 
-Content-Type: �إå��ե�����ɤ�¸�ߤ��ʤ����ˤ�
-���Υϥå�����֤��ޤ���
+Content-Type: ヘッダフィールドが存在しない場合には
+空のハッシュを返します。
 
 --- form_data=(params)
 --- set_form_data(params, sep = '&') -> ()
-HTML�Υե�����Υǡ��� params ����
-�إå��ե�����ɤȥܥǥ������ꤷ�ޤ���
+HTMLのフォームのデータ params から
+ヘッダフィールドとボディを設定します。
 
-�إå��ե������ Content-Type: �ˤ�
-'application/x-www-form-urlencoded' �����ꤵ��ޤ���
+ヘッダフィールド Content-Type: には
+'application/x-www-form-urlencoded' が設定されます。
 
-@param params HTML �Υե�����ǡ����� [[c:Hash]] ��Ϳ���ޤ���
-@param sep �ǡ����Υ��ѥ졼����ʸ�����Ϳ���ޤ���
+@param params HTML のフォームデータの [[c:Hash]] を与えます。
+@param sep データのセパレータを文字列で与えます。
 
 --- content_length -> Integer|nil
-Content-Length: �إå��ե�����ɤ�ɽ���Ƥ����ͤ��������֤��ޤ���
+Content-Length: ヘッダフィールドの表している値を整数で返します。
 
-�إå������ꤵ��Ƥ��ʤ����ˤ� nil ���֤��ޤ���
+ヘッダが設定されていない場合には nil を返します。
 
-@raise Net::HTTPHeaderSyntaxError �ե�����ɤ��ͤ������Ǥ������
-                                  ȯ�����ޤ���
+@raise Net::HTTPHeaderSyntaxError フィールドの値が不正である場合に
+                                  発生します。
 
 --- content_length=(len)
-Content-Length: �إå��ե�����ɤ��ͤ����ꤷ�ޤ���
+Content-Length: ヘッダフィールドに値を設定します。
 
-len �� nil ��Ϳ����� Content-Length: �إå��ե�����ɤ�
-������ޤ���
+len に nil を与えると Content-Length: ヘッダフィールドを
+削除します。
 
-@param len ���ꤹ���ͤ�������Ϳ���ޤ���
+@param len 設定する値を整数で与えます。
 
 --- content_range -> Range|nil
 
-Content-Range: �إå��ե�����ɤ��ͤ� Range ���֤��ޤ���
-Range ��ɽ�魯Ĺ���� [[m:Net::HTTPHeader#range_length]] �������ޤ���
+Content-Range: ヘッダフィールドの値を Range で返します。
+Range の表わす長さは [[m:Net::HTTPHeader#range_length]] で得られます。
 
-�إå������ꤵ��Ƥ��ʤ����ˤ� nil ���֤��ޤ���
+ヘッダが設定されていない場合には nil を返します。
 
 --- range_length -> Integer|nil
 
-Content-Range: �إå��ե�����ɤ�ɽ���Ƥ���Ĺ�����������֤��ޤ���
+Content-Range: ヘッダフィールドの表している長さを整数で返します。
 
-�إå������ꤵ��Ƥ��ʤ����ˤ� nil ���֤��ޤ���
+ヘッダが設定されていない場合には nil を返します。
 
-@raise Net::HTTPHeaderSyntaxError Content-Range: �إå��ե������
-                                  ���ͤ������Ǥ������
-                                  ȯ�����ޤ���
+@raise Net::HTTPHeaderSyntaxError Content-Range: ヘッダフィールド
+                                  の値が不正である場合に
+                                  発生します。
                                   
 --- delete(key) -> String | nil
-key �إå��ե�����ɤ������ޤ���
+key ヘッダフィールドを削除します。
 
-@param key �������ե������̾
-@return �������줿�ե�����ɤ��ͤ��֤��ޤ���
-        key �إå��ե�����ɤ�¸�ߤ��ʤ��ä����ˤ�
-        nil ���֤��ޤ���
+@param key 削除するフィールド名
+@return 取り除かれたフィールドの値を返します。
+        key ヘッダフィールドが存在しなかった場合には
+        nil を返します。
 
 --- each {|name, val| .... } -> ()
 --- each_header {|name, val| .... } -> ()
 
-�ݻ����Ƥ���إå�̾�Ȥ����ͤ򤽤줾��
-�֥��å����Ϥ��ƸƤӤ����ޤ���
+保持しているヘッダ名とその値をそれぞれ
+ブロックに渡して呼びだします。
 
-�إå�̾�Ͼ�ʸ�������줵��ޤ���
-val �� ", " ��Ϣ�뤷��ʸ���󤬥֥��å����Ϥ���ޤ���
+ヘッダ名は小文字で統一されます。
+val は ", " で連結した文字列がブロックに渡されます。
 
 --- each_capitalized {|name, value| .... } -> ()
 --- canonical_each {|name, value| .... } -> ()
 
-�إå��ե�����ɤ�������̾�Ȥ����ͤΥڥ���
-�֥��å����Ϥ����ƤӤ����ޤ���
+ヘッダフィールドの正規化名とその値のペアを
+ブロックに渡し、呼びだします。
 
-������̾�� name ���Ф�
+正規化名は name に対し
   name.downcase.split(/-/).capitalize.join('-')
-�ǵ�ޤ�ʸ����Ǥ���
+で求まる文字列です。
 
 --- each_capitalized_name {|name| .... } -> ()
-�ݻ����Ƥ���إå�̾��������
+保持しているヘッダ名を正規化
 ('x-my-header' -> 'X-My-Header') 
-���ơ��֥��å����Ϥ��ޤ���
+して、ブロックに渡します。
 
 --- each_name {|name| ... } -> ()
 --- each_key {|name| ... } -> ()
 
-�ݻ����Ƥ���إå�̾��֥��å����Ϥ��ƸƤӤ����ޤ���
+保持しているヘッダ名をブロックに渡して呼びだします。
 
-�إå�̾�Ͼ�ʸ�������줵��ޤ���
+ヘッダ名は小文字で統一されます。
 
 --- each_value {|value| .... } -> ()
-�ݻ����Ƥ���إå����ͤ�֥��å����Ϥ����ƤӤ����ޤ���
+保持しているヘッダの値をブロックに渡し、呼びだします。
 
-�Ϥ����ʸ����� ", " ��Ϣ�뤷����ΤǤ���
+渡される文字列は ", " で連結したものです。
 
 --- key?(key) -> bool
-key �Ȥ����إå��ե�����ɤ�����п����֤��ޤ���
-key ����ʸ����ʸ������̤��ޤ���
+key というヘッダフィールドがあれば真を返します。
+key は大文字小文字を区別しません。
 
-@param key õ���إå��ե������̾��ʸ�����Ϳ���ޤ���
+@param key 探すヘッダフィールド名を文字列で与えます。
 
 --- method -> String
 
-�ꥯ�����Ȥ� HTTP �᥽�åɤ�ʸ������֤��ޤ���
+リクエストの HTTP メソッドを文字列で返します。
 
 --- proxy_basic_auth(account, password) -> ()
 
-Proxy ǧ�ڤΤ���� Proxy-Authorization: �إå��򥻥åȤ��ޤ���
+Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 
-@param account ���������̾��ʸ�����Ϳ���ޤ���
-@param password �ѥ���ɤ�ʸ�����Ϳ���ޤ���
+@param account アカウント名を文字列で与えます。
+@param password パスワードを文字列で与えます。
 
 --- range -> Range|nil
 
-Range: �إå��μ����ϰϤ� [[c:Range]] ���֥������Ȥ��֤��ޤ���
+Range: ヘッダの示す範囲を [[c:Range]] オブジェクトで返します。
 
-�إå��ˤʤ����� nil ���֤��ޤ���
+ヘッダにない場合は nil を返します。
 
-@raise Net::HTTPHeaderSyntaxError Range:�إå�����Ȥ������̤�
-                                  �Ǥʤ�����ȯ�����ޤ���
+@raise Net::HTTPHeaderSyntaxError Range:ヘッダの中身が規格通り
+                                  でない場合に発生します。
 
 --- range=(r)
 --- range=(n)
@@ -1344,9 +1344,9 @@ Range: �إå��μ����ϰϤ� [[c:Range]] ���֥������Ȥ��֤��ޤ���
 --- set_range(r) -> ()
 --- set_range(n) -> ()
 
-�ϰϤ���ꤷ�ƥ���ƥ��ƥ���������뤿��Υإå� Range: �򥻥åȤ��ޤ���
+範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
 
-�ʲ���Ʊ�����Ȥ�ɽ���Ƥ��ޤ���
+以下は同じことを表しています。
   req.range = 0..1023
   req.range = 0...1024
   req.range = 1024
@@ -1355,18 +1355,18 @@ Range: �إå��μ����ϰϤ� [[c:Range]] ���֥������Ȥ��֤��ޤ���
   req.set_range(0...1024)
   req.set_range(1024)
 
-���̤ʾ��Ȥ��ơ�
-n �������Ϳ��������n�Ϻǽ餫��(-n)�Х��ȤޤǤ��ϰϤ�ɽ���ޤ���
-r �� x..-1 �Ȥ������ˤϡ�x �����ʤ��
-x �Х����ܤ���Ǹ�ޤǤ��ϰϤ�
-x ����ʤ�кǽ餫�� x �Х����ܤޤǤ��ϰϤ�ɽ���ޤ���
+特別な場合として、
+n に負数を与えた場合にnは最初から(-n)バイトまでの範囲を表します。
+r を x..-1 とした場合には、x が正ならば
+x バイト目から最後までの範囲を、
+x が負ならば最初から x バイト目までの範囲を表します。
 
-@param r �ϰϤ� [[c:Range]] ���֥������Ȥ�Ϳ���ޤ���
-@param i �ϰϤλ�����������Ϳ���ޤ���
-@param len �ϰϤ�Ĺ����������Ϳ���ޤ���
-@param n 0�����Ĺ����������Ϳ���ޤ���
+@param r 範囲を [[c:Range]] オブジェクトで与えます。
+@param i 範囲の始点を整数で与えます。
+@param len 範囲の長さを整数で与えます。
+@param n 0からの長さを整数で与えます。
 
-#@# ���λ��ͤϤɤ��ޤǰտ�Ū�ʤΤ���������
+#@# この仕様はどこまで意図的なのだろうか？
 
 #@include(Net__HTTPRequest)
 

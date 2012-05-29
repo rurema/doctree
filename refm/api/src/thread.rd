@@ -1,16 +1,16 @@
-����åɴ֥��塼������ѿ� (condition variable) ���󶡤���饤�֥��Ǥ���
+スレッド間キューや状態変数 (condition variable) を提供するライブラリです。
 
-���Υ饤�֥��� [[c:Thread]] ���ĥ���ޤ���ruby���󥿥ץ꥿��
-�ǥХå����ץ�����դ�([[m:$DEBUG]]��)�Ǽ¹Ԥ����Ȥ��ˤϡ�
-[[m:Thread.abort_on_exception]] �� true �ˤ��ޤ���
+このライブラリは [[c:Thread]] を拡張します。rubyインタプリタを
+デバッグオプション付き([[m:$DEBUG]]を真)で実行したときには、
+[[m:Thread.abort_on_exception]] を true にします。
 
 = reopen Thread
 == Class Methods
 #@until 1.9.1
 --- exclusive { ... } -> object
 
-#@# 1.9.1 �ʹߤ� prelude.rb ���������Ƥ���Τ� _builtin/Thread �˰�ư���ޤ�����
-�֥��å��¹��桢Thread���ڤ��ؤ���Ԥ��ޤ���
+#@# 1.9.1 以降は prelude.rb で定義されているので _builtin/Thread に移動しました。
+ブロック実行中、Threadの切り替えを行いません。
 
 #@end
 

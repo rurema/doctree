@@ -1,25 +1,25 @@
 require rubygems/command
 require rubygems/commands/query_command
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤ÎÌ¾Á°¤òÁ°Êı°ìÃ×¤Ç¸¡º÷¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®åå‰ã‚’å‰æ–¹ä¸€è‡´ã§æ¤œç´¢ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem list [STRING] [options]
     Options:
       -i, --[no-]installed             Check for installed gem
-      -v, --version VERSION            »ØÄê¤µ¤ì¤¿¥Ğ¡¼¥¸¥ç¥ó¤Î°ìÍ÷¤ò½ĞÎÏ¤·¤Ş¤¹
-      -d, --[no-]details               Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¾ÜºÙ¤âÉ½¼¨¤·¤Ş¤¹
-          --[no-]versions              Gem ¥Ñ¥Ã¥±¡¼¥¸¤ÎÌ¾Á°¤Î¤ßÉ½¼¨¤·¤Ş¤¹
-      -a, --all                        Á´¤Æ¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸¤òÉ½¼¨¤·¤Ş¤¹
+      -v, --version VERSION            æŒ‡å®šã•ã‚ŒãŸãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®ä¸€è¦§ã‚’å‡ºåŠ›ã—ã¾ã™
+      -d, --[no-]details               Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®è©³ç´°ã‚‚è¡¨ç¤ºã—ã¾ã™
+          --[no-]versions              Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®åå‰ã®ã¿è¡¨ç¤ºã—ã¾ã™
+      -a, --all                        å…¨ã¦ã® Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã—ã¾ã™
 #@include(local_remote_options)
 #@include(common_options)
     Arguments:
-      STRING        Ãµ¤·¤¿¤¤ Gem ¤ÎÌ¾Á°¤òÁ°Êı°ìÃ×¤Ç»ØÄê¤·¤Ş¤¹
+      STRING        æ¢ã—ãŸã„ Gem ã®åå‰ã‚’å‰æ–¹ä¸€è‡´ã§æŒ‡å®šã—ã¾ã™
     Summary:
-      »ØÄê¤µ¤ì¤¿Ê¸»úÎó¤Ç»Ï¤Ş¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤òÎóµó¤·¤Ş¤¹
+      æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã§å§‹ã¾ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’åˆ—æŒ™ã—ã¾ã™
     Defaults:
       --local --no-details
 
 
 = class Gem::Commands::ListCommand < Gem::Commands::QueryCommand
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤ÎÌ¾Á°¤òÁ°Êı°ìÃ×¤Ç¸¡º÷¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®åå‰ã‚’å‰æ–¹ä¸€è‡´ã§æ¤œç´¢ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚

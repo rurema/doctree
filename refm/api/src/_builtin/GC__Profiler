@@ -1,9 +1,9 @@
 #@since 1.9.1
 = module GC::Profiler
 
-GC �ε�ư����䵯ư���������ߥ󥰡��������֤ʤɤ� GC �˴ؤ���ץ��ե�����
-����䡢�ҡ������ΤΥ��������ҡ�����Ǥλ��ѥ�������ҡ������¸�ߤ���
-���֥������ȤθĿ��Ȥ��ä�����򰷤��⥸�塼��Ǥ���
+GC の起動回数や起動したタイミング、処理時間などの GC に関するプロファイル
+情報や、ヒープ全体のサイズ、ヒープ内での使用サイズやヒープ内に存在する
+オブジェクトの個数といった情報を扱うモジュールです。
 
 @see [[c:GC]]
 
@@ -11,9 +11,9 @@ GC �ε�ư����䵯ư���������ߥ󥰡��������֤ʤɤ� GC �˴ؤ���ץ��ե�����
 
 --- enabled? -> bool
 
-GC �Υץ��ե������ư��Ǥ���� true�������Ǥ���� false ���֤��ޤ���
+GC のプロファイラを起動中であれば true、停止中であれば false を返します。
 
-��:
+例:
   GC::Profiler.enabled? #=> false
   GC::Profiler.enable
   GC::Profiler.enabled? #=> true
@@ -24,12 +24,12 @@ GC �Υץ��ե������ư��Ǥ���� true�������Ǥ���� false ���֤��ޤ���
 
 --- enable -> nil
 
-GC �Υץ��ե������ư���ޤ���
+GC のプロファイラを起動します。
 
-���Υ᥽�åɤ�ƤӽФ��Ƥ��� GC ��ȯ������ȡ�
-GC �ˤĤ��ƥץ��ե���������������ޤ���
+このメソッドを呼び出してから GC が発生すると、
+GC についてプロファイル情報を取得します。
 
-��:
+例:
   GC::Profiler.enable
   GC::Profiler.enabled? #=> true
 
@@ -37,36 +37,36 @@ GC �ˤĤ��ƥץ��ե���������������ޤ���
 
 --- disable -> nil
 
-GC �Υץ��ե��������ߤ��ޤ���
+GC のプロファイラを停止します。
 
-��:
+例:
   GC::Profiler.disable
   GC::Profiler.enabled? #=> false
 
-���Υ᥽�åɤǤϡ����Ѥ����ץ��ե����������˴����ޤ���
-�˴����������� [[m:GC::Profiler.clear]] ��ƤӽФ��Ƥ���������
+このメソッドでは、蓄積したプロファイル情報は破棄しません。
+破棄したい場合は [[m:GC::Profiler.clear]] を呼び出してください。
 
 @see [[m:GC::Profiler.enable]], [[m:GC::Profiler.enabled?]]
 
 --- clear -> nil
 
-���Ѥ��Ƥ��� GC �Υץ��ե��������򤹤٤ƺ�����ޤ���
+蓄積している GC のプロファイル情報をすべて削除します。
 
-��:
+例:
   GC::Profiler.enable
   GC.start
   GC.start
-  GC::Profiler.report #=> 2 ��ʬ�� GC �Υץ��ե����������Ϥ��롣
+  GC::Profiler.report #=> 2 回分の GC のプロファイル情報出力する。
   GC::Profiler.clear
   GC.start
-  GC::Profiler.report #=> 1 ��ʬ�� GC �Υץ��ե����������Ϥ��롣
+  GC::Profiler.report #=> 1 回分の GC のプロファイル情報出力する。
 
 --- result -> String
 
-GC �Υץ��ե���������ե����ޥåȤ���ʸ����Ȥ����֤��ޤ���
+GC のプロファイル情報をフォーマットし、文字列として返します。
 
-�ץ��ե��������ϡ�GC ��ȯ�����Ȥ˽��פ��ޤ���
-�ʲ��ϡ�5 �� GC ��ȯ���������μ¹���Ǥ���
+プロファイル情報は、GC の発生ごとに集計します。
+以下は、5 回 GC が発生した場合の実行例です。
 
   $ ruby -e "GC::Profiler.enable; a = Array.new(100000){ 'aa' }; puts GC::Profiler.result"
   GC 5 invokes.
@@ -77,33 +77,33 @@ GC �Υץ��ե���������ե����ޥåȤ���ʸ����Ȥ����֤��ޤ���
       4               0.028              1080280              1097460                54873         0.40010000000000001119
       5               0.044              1931420              1949220                97461         0.40009999999999984466
 
-�ƹ��ܤΰ�̣��ʲ��˼����ޤ���
+各項目の意味を以下に示します。
 
 : GC invokes
-  GC �ε�ư���
+  GC の起動回数
 : Invoke Time
-  Ruby ����ư���Ƥ��� GC ����ư����ޤǤ˷вᤷ������
+  Ruby が起動してから GC が起動するまでに経過した時間
 : Use Size
-  �ҡ�����Ǥλ��ѥ�����
+  ヒープ内での使用サイズ
 : Total Size
-  �ҡ������ΤΥ�����
+  ヒープ全体のサイズ
 : Total Object
-  �ҡ������¸�ߤ��륪�֥������ȤθĿ�
+  ヒープ内に存在するオブジェクトの個数
 : GC Time
-  GC �ν�������
+  GC の処理時間
 
 @see [[m:GC::Profiler.report]]
 
 --- report(out = $stdout) -> nil
 
-[[m:GC::Profiler.result]] �η�̤� out �˽��Ϥ��ޤ���
+[[m:GC::Profiler.result]] の結果を out に出力します。
 
-@param out ��̤ν��������ꤷ�ޤ����ǥե���Ȥ� $stdout �Ǥ���
+@param out 結果の出力先を指定します。デフォルトは $stdout です。
 
 @see [[m:GC::Profiler.result]]
 
 #@since 1.9.2
 --- total_time -> Float
-GC �Υץ��ե�������󤫤� GC �����׻��֤�׻�����msec ñ�̤��֤��ޤ���
+GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
 #@end
 #@end

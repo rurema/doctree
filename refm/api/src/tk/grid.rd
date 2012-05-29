@@ -5,10 +5,10 @@ require tk
 extend Tk
 include Tk
 
-���������åȤ����֤��뤿��Υ⥸�塼��Ǥ���
-���Υ⥸�塼��ˤ�ꡢ���������åȤϳʻҾ������֤���ޤ���
+ウィジェットを配置するためのモジュールです。
+このモジュールにより、ウィジェットは格子状に配置されます。
 
-���̡����������åȤ�ʻҾ������֤���ˤ�[[m:TkWindow#grid]]���Ȥ��ޤ���
+普通、ウィジェットを格子状に配置するには[[m:TkWindow#grid]]が使われます。
 
 == Module Functions
 
@@ -19,16 +19,16 @@ include Tk
 --- grid(widget1, widget2, ..., options=nil)
 #@todo
 
-wigetN���Ф��ơ�options�ǻ��ꤷ�����֤�Ԥ��ޤ���
-options�ϡ��ʲ��Υ�������ĥϥå���Ǥ���
+wigetNに対して、optionsで指定した配置を行います。
+optionsは、以下のキーを持つハッシュです。
 
 *"column"
 
-����֤���ꤷ�ޤ�������֤Ϻ�������0,1,2,...�ȿ����ޤ���
+桁位置を指定します。桁位置は左から順に0,1,2,...と数えます。
 
 *"columnspan"
 
-���֤˻��Ѥ��벣�����Υ���ο�����ꤷ�ޤ���
+配置に使用する横方向のセルの数を指定します。
 
 *"in"
 *"ipadx"
@@ -38,26 +38,26 @@ options�ϡ��ʲ��Υ�������ĥϥå���Ǥ���
 
 *"row"
 
-�԰��֤���ꤷ�ޤ����԰��֤Ͼ夫����0,1,2,...�ȿ����ޤ���
+行位置を指定します。行位置は上から順に0,1,2,...と数えます。
 
 *"rowspan"
 
-���֤˻��Ѥ���������Υ���ο�����ꤷ�ޤ���
+配置に使用する縦方向のセルの数を指定します。
 
 *"sticky"
 
 --- columnconfigure(master, index, args)
 #@todo
 
-�ޥ������������å�master�η����index�˴ؤ���°����
-args�ǻ��ꤷ�ޤ���args�ϡ��ʲ��򥭡��˻��ĥϥå���Ǥ���
+マスタウィジェットmasterの桁位置indexに関する属性を
+argsで指定します。argsは、以下をキーに持つハッシュです。
 
 *"minsize"
 *"weight"
 *"pad"
 
-args�˶��Υϥå���{}����ꤹ��ȸ��ߤ�������֤��ޤ���
-((-args�Υǥե�����ͤϡ�[[c:TkComm::None]]�ˤ��������ɤ�-))
+argsに空のハッシュ{}を指定すると現在の設定を返します。
+((-argsのデフォルト値は、[[c:TkComm::None]]にした方が良い-))
 
   require "tk"
   
@@ -66,20 +66,20 @@ args�˶��Υϥå���{}����ꤹ��ȸ��ߤ�������֤��ޤ���
   
   => "-minsize 0 -pad 0 -weight 0"
 
-((-����ͤϡ�hash�ˤ�����-))
+((-戻り値は、hashにしたい-))
 
 --- rowconfigure(master, index, args)
 #@todo
 
-�ޥ������������å�master�ι԰���index�˴ؤ���°����
-args�ǻ��ꤷ�ޤ���args�ϡ��ʲ��򥭡��˻��ĥϥå���Ǥ���
+マスタウィジェットmasterの行位置indexに関する属性を
+argsで指定します。argsは、以下をキーに持つハッシュです。
 
 *"minsize"
 *"weight"
 *"pad"
 
-args�˶��Υϥå���{}����ꤹ��ȸ��ߤ�������֤��ޤ���
-((-args�Υǥե�����ͤϡ�[[c:TkComm::None]]�ˤ��������ɤ�-))
+argsに空のハッシュ{}を指定すると現在の設定を返します。
+((-argsのデフォルト値は、[[c:TkComm::None]]にした方が良い-))
 
   require "tk"
   
@@ -92,7 +92,7 @@ args�˶��Υϥå���{}����ꤹ��ȸ��ߤ�������֤��ޤ���
      ""
      "-minsize 10 -pad 0 -weight 0"
 
-((-����ͤϡ�hash�ˤ�����-))
+((-戻り値は、hashにしたい-))
 
   require "tk"
   

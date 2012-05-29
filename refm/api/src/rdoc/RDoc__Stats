@@ -1,55 +1,55 @@
 = class RDoc::Stats
 
-RDoc �Υ��ơ�������������륯�饹�Ǥ���
+RDoc のステータスを管理するクラスです。
 
 == Class Methods
 
 --- new -> RDoc::Stats
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- print -> ()
 
-���Ȥλ��ľ����ɸ����Ϥ�ɽ�����ޤ���
+自身の持つ情報を標準出力に表示します。
 
 --- num_files -> Integer
 
-���Ϥ����ե�����ο����֤��ޤ���
+解析したファイルの数を返します。
 
 --- num_files=(val)
 
-���Ϥ����ե�����ο�����ꤷ�ޤ���
+解析したファイルの数を指定します。
 
-@param val ���ͤ���ꤷ�ޤ���
+@param val 数値を指定します。
 
 --- num_classes -> Integer
 
-���Ϥ������饹�ο����֤��ޤ���
+解析したクラスの数を返します。
 
 --- num_classes=(val)
 
-���Ϥ������饹�ο�����ꤷ�ޤ���
+解析したクラスの数を指定します。
 
-@param val ���ͤ���ꤷ�ޤ���
+@param val 数値を指定します。
 
 --- num_modules -> Integer
 
-���Ϥ����⥸�塼��ο����֤��ޤ���
+解析したモジュールの数を返します。
 
 --- num_modules=(val)
 
-���Ϥ����⥸�塼��ο�����ꤷ�ޤ���
+解析したモジュールの数を指定します。
 
-@param val ���ͤ���ꤷ�ޤ���
+@param val 数値を指定します。
 
 --- num_methods -> Integer
 
-���Ϥ����᥽�åɤο����֤��ޤ���
+解析したメソッドの数を返します。
 
 --- num_methods=(val)
 
-���Ϥ����᥽�åɤο�����ꤷ�ޤ���
+解析したメソッドの数を指定します。
 
-@param val ���ͤ���ꤷ�ޤ���
+@param val 数値を指定します。

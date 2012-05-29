@@ -2,36 +2,36 @@ require test/unit
 require test/unit/util/observable
 require test/unit/testresult
 
-�Ƽ� TestRunner ��������뤿��˻Ȥ��ޤ���
+各種 TestRunner を実装するために使われます。
 
-Unit �ƥ��Ȥ�Ԥ����������Υ桼���������Υ饤�֥��� require ����
-ɬ�פϤ���ޤ���
+Unit テストを行いたいだけのユーザが、このライブラリを require する
+必要はありません。
 
 = class Test::Unit::UI::TestRunnerMediator
 include Test::Unit::Util::Observable
 
-�Ƽ� TestRunner ��������뤿��Υ��饹�Ǥ���
+各種 TestRunner を実装するためのクラスです。
 
 == Class Methods
 
 --- new(suite) -> Test::Unit::UI::TestRunnerMediator
 
-������ TestRunnerMediator ���֥������Ȥ����������֤��ޤ���
+新しく TestRunnerMediator オブジェクトを生成して返します。
 
-@param suite �¹Ԥ������ƥ��Ȥ���ä� Test::Unit::TestSuite ���֥������Ȥ�
-             Ϳ���ޤ���
+@param suite 実行したいテストを持った Test::Unit::TestSuite オブジェクトを
+             与えます。
 
 == Instance Methods
 
 --- run_suite -> Test::Unit::TestResult
 
-��������Ϳ����줿 Test::Unit::TestSuite ���ݻ����Ƥ���ƥ��Ȥ�¹Ԥ��ޤ���
-�¹Է�̤�ɽ�� Test::Unit::TestResult ���֥������Ȥ��֤��ޤ���
+生成時に与えられた Test::Unit::TestSuite が保持しているテストを実行します。
+実行結果を表す Test::Unit::TestResult オブジェクトを返します。
 
 == Private Instance Methods
 
 --- create_result -> Test::Unit::TestResult
 
-���Ȥ���̥��֥������Ȥ��������뤿��Υե����ȥ�᥽�åɤǤ���
+自身が結果オブジェクトを生成するためのファクトリメソッドです。
 
-�ۤʤ��̥��֥������Ȥ�ɬ�פʾ��Ϻ�������ƻȤ��ޤ���
+異なる結果オブジェクトが必要な場合は再定義して使います。

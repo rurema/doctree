@@ -2,12 +2,12 @@ require shell/error
 require shell/command-processor
 require shell/process-controller
 
-Ruby ��� sh/csh �Τ褦�˥��ޥ�ɤμ¹Եڤӥե��륿��󥰤��ڤ˹Ԥ�����Υ饤�֥��Ǥ���
+Ruby 上で sh/csh のようにコマンドの実行及びフィルタリングを手軽に行うためのライブラリです。
 #@# Author: Keiju ISHITSUKA
 
-sh/csh ������ʸ�� Ruby �ε�ǽ���Ѥ��Ƽ¸����ޤ���
+sh/csh の制御文は Ruby の機能を用いて実現します。
 
-=== ����ץ�
+=== サンプル
 
 ==== Example 1:
 
@@ -62,29 +62,29 @@ sh/csh ������ʸ�� Ruby �ε�ǽ���Ѥ��Ƽ¸����ޤ���
 extend Exception2MessageMapper
 include Shell::Error
 
-Shell ���֥������Ȥϥ����ȥǥ��쥯�ȥ�����, 
-���ޥ�ɼ¹ԤϤ�����������Хѥ��ˤʤ�ޤ�.
+Shell オブジェクトはカレントディレクトリを持ち, 
+コマンド実行はそこからの相対パスになります.
 
 == Class Methods
 
 --- def_system_command(command, path = command) -> nil
 
-Shell �Υ᥽�åɤȤ��� command ����Ͽ���ޤ�.
+Shell のメソッドとして command を登録します.
 
-OS��Υ��ޥ�ɤ�¹Ԥ���ˤϤޤ�, Shell�Υ᥽�åɤȤ���������ޤ�.
-��) ���ޥ�ɤ�������ʤ��Ȥ�ľ�ܼ¹ԤǤ��� [[m:Shell#system]] ���ޥ�ɤ⤢��ޤ�.
+OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
+注) コマンドを定義しなくとも直接実行できる [[m:Shell#system]] コマンドもあります.
 
-@param command Shell �Υ᥽�åɤȤ���������륳�ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param command Shell のメソッドとして定義するコマンドを文字列で指定します。
 
-@param path command �Υѥ�����ꤷ�ޤ���
-            ���ꤷ�ʤ�����command ��Ʊ���ˤʤ�ޤ���
+@param path command のパスを指定します。
+            指定しない場合はcommand と同じになります。
 
-��)
+例)
   Shell.def_system_command "ls"
-  # ls �����
+  # ls を定義
 
   Shell.def_system_command "sys_sort", "sort"
-  # sort���ޥ�ɤ�sys_sort�Ȥ������
+  # sortコマンドをsys_sortとして定義
 
   sh = Shell.new
   sh.transact {
@@ -99,15 +99,15 @@ OS��Υ��ޥ�ɤ�¹Ԥ���ˤϤޤ�, Shell�Υ᥽�åɤȤ���������ޤ�.
 
 --- undef_system_command(command) -> Shell::CommandProcessor
 
-command�������ޤ�.
+commandを削除します.
 
-@param command ������륳�ޥ�ɤ�ʸ�������ꤷ�ޤ���
+@param command 削除するコマンドの文字列を指定します。
 
-ư���㡧
+動作例：
   Shell.def_system_command("ls")
-  # ls �����
+  # ls を定義
   Shell.undef_system_command("ls")
-  # ls �� ���
+  # ls を 削除
 
   sh = Shell.new
   begin
@@ -122,16 +122,16 @@ command�������ޤ�.
 
 --- alias_command(alias, command, *opts) {...} -> self
 
-���ޥ�ɤ���̾(�����ꥢ��)��������ޤ���
-���ޥ�ɤ�̵�����ϡ�[[m:Shell.def_system_command]] �ʤɤǤ��餫����������ޤ�.
+コマンドの別名(エイリアス)を作成します。
+コマンドが無い場合は、[[m:Shell.def_system_command]] などであらかじめ作成します.
 
-@param alias �����ꥢ����̾����ʸ����ǻ��ꤷ�ޤ�.
+@param alias エイリアスの名前を文字列で指定します.
 
-@param command ���ޥ��̾��ʸ����ǻ��ꤷ�ޤ�.
+@param command コマンド名を文字列で指定します.
 
-@param opts command �ǻ��ꤷ�����ޥ�ɤΥ��ץ�������ꤷ�ޤ�.
+@param opts command で指定したコマンドのオプションを指定します.
 
-������: ls -la | sort -k 5 �Τ褦���㡣
+使用例: ls -la | sort -k 5 のような例。
 
   Shell.def_system_command("ls")
   Shell.alias_command("lsla", "ls", "-a", "-l")
@@ -145,13 +145,13 @@ command�������ޤ�.
 
 --- unalias_command(alias) -> ()
 
-command��alias�������ޤ�.
+commandのaliasを削除します.
 
-@param alias ��������������ꥢ����̾����ʸ����ǻ��ꤷ�ޤ���
+@param alias 削除したいエイリアスの名前を文字列で指定します。
 
-@raise NameError alias �ǻ��ꤷ�����ޥ�ɤ�̵������ȯ�����ޤ���
+@raise NameError alias で指定したコマンドが無い場合に発生します。
 
-������: ls -la | sort -k 5 �Τ褦���㡣
+使用例: ls -la | sort -k 5 のような例。
   Shell.def_system_command("ls")
   Shell.alias_command("lsla", "ls", "-a", "-l")
   Shell.def_system_command("sort")
@@ -170,12 +170,12 @@ command��alias�������ޤ�.
 
 --- install_system_commands(pre = "sys_") -> ()
 
-system_path��ˤ������Ƥμ¹Բ�ǽ�ե������Shell���������. �᥽��
-��̾�ϸ��Υե�����̾��Ƭ��pre��Ĥ�����ΤȤʤ�.
+system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
+ド名は元のファイル名の頭にpreをつけたものとなる.
 
-@param pre Shell���������᥽�å�̾����Ƭ���ղä����ʸ�������ꤷ�ޤ���
+@param pre Shellに定義するメソッド名の先頭に付加される文字列を指定します。
 
-������: ls -l | head -n 5 �Τ褦���㡣
+使用例: ls -l | head -n 5 のような例。
 
   Shell.install_system_commands
   sh = Shell.new
@@ -189,22 +189,22 @@ system_path��ˤ������Ƥμ¹Բ�ǽ�ե������Shell���������. �᥽��
 #@since 1.9.1
 --- new(pwd = Dir.pwd, umask = nil) -> Shell
 
-�ץ������Υ����ȥǥ��쥯�ȥ��pwd �ǻ��ꤵ�줿�ǥ��쥯�ȥ�Ȥ���Shell��
-�֥������Ȥ��������ޤ�.
+プロセスのカレントディレクトリをpwd で指定されたディレクトリとするShellオ
+ブジェクトを生成します.
 
-@param pwd �ץ������Υ����ȥǥ��쥯�ȥ��pwd �ǻ��ꤵ�줿�ǥ��쥯�ȥ�Ȥ��ޤ���
-           ���ꤷ�ʤ����ϡ�[[m:Dir.pwd]] �����Ѥ���ޤ���
+@param pwd プロセスのカレントディレクトリをpwd で指定されたディレクトリとします。
+           指定しない場合は、[[m:Dir.pwd]] が使用されます。
 
-@param umask �ե���������κݤ��Ѥ����� umask ����Ѥ��ޤ���
+@param umask ファイル作成の際に用いられる umask を使用します。
 
 
 #@else
 --- new -> Shell
 
-�ץ������Υ����ȥǥ��쥯�ȥ�򥫥��ȥǥ��쥯�ȥ�Ȥ���Shell��
-�֥������Ȥ��������ޤ�.
+プロセスのカレントディレクトリをカレントディレクトリとするShellオ
+ブジェクトを生成します.
 
-�����㡧�����ȥǥ��쥯�ȥ��ɽ��
+使用例：カレントディレクトリを表示
 
   sh = Shell.new
   puts sh.pwd.to_s
@@ -215,22 +215,22 @@ system_path��ˤ������Ƥμ¹Բ�ǽ�ե������Shell���������. �᥽��
 
 --- cd(path = nil, verbose = self.verbose) -> self
 
-path�򥫥��ȥǥ��쥯�ȥ�Ȥ���Shell���֥������Ȥ��������ޤ�.
+pathをカレントディレクトリとするShellオブジェクトを生成します.
 
-@param path �����ȥǥ��쥯�ȥ�Ȥ���ǥ��쥯�ȥ��ʸ����ǻ��ꤷ�ޤ���
+@param path カレントディレクトリとするディレクトリを文字列で指定します。
 
-@param verbose true ����ꤹ��Ⱦ�Ĺ�ʽ��Ϥ�Ԥ��ޤ���
+@param verbose true を指定すると冗長な出力を行います。
 
 #@else
 --- cd(path = nil) -> self
 
-path�򥫥��ȥǥ��쥯�ȥ�Ȥ���Shell���֥������Ȥ��������ޤ�.
+pathをカレントディレクトリとするShellオブジェクトを生成します.
 
-@param path �����ȥǥ��쥯�ȥ�Ȥ���ǥ��쥯�ȥ��ʸ����ǻ��ꤷ�ޤ���
+@param path カレントディレクトリとするディレクトリを文字列で指定します。
 
 #@end
 
-������
+使用例
   require 'shell'
   sh = Shell.new
   sh.cd("/tmp")
@@ -240,13 +240,13 @@ path�򥫥��ȥǥ��쥯�ȥ�Ȥ���Shell���֥������Ȥ��������ޤ�.
 --- debug? -> bool | Integer
 #@todo
 
-�ǥХå��ѥե饰�򻲾Ȥ��ޤ���
+デバッグ用フラグを参照します。
 
 --- debug=(val) 
 
-�ǥХå��ѤΥե饰�����ꤷ�ޤ���
+デバッグ用のフラグを設定します。
 
-@param val bool �ͤ������ͤ���ꤷ�ޤ����ܺ٤ϲ����򻲾Ȥ��Ƥ���������
+@param val bool 値や整数値を指定します。詳細は下記を参照してください。
 
   # debug: true -> normal debug
   # debug: 1    -> eval definition debug
@@ -255,25 +255,25 @@ path�򥫥��ȥǥ��쥯�ȥ�Ȥ���Shell���֥������Ȥ��������ޤ�.
 --- default_record_separator -> String
 --- default_record_separator=(rs)
 
-��ɮ���罸
+執筆者募集
 
-Shell ���Ѥ��������ϥ쥳���ɥ��ѥ졼����ɽ��ʸ��������ꤪ��ӻ��Ȥ��ޤ���
-�ʤˤ���ꤷ�ʤ�����[[m:$/]] ���ͤ��Ѥ����ޤ���
+Shell で用いられる入力レコードセパレータを表す文字列を設定および参照します。
+なにも指定しない場合は[[m:$/]] の値が用いられます。
 
-@param rs Shell ���Ѥ��������ϥ쥳���ɥ��ѥ졼����ɽ��ʸ�������ꤷ�ޤ���
+@param rs Shell で用いられる入力レコードセパレータを表す文字列を指定します。
 
 
 --- default_system_path -> Array
 --- default_system_path=(path)
 
-Shell�Ǥ�������륳�ޥ�ɤ򸡺������оݤΥѥ������ꤪ��ӡ����Ȥ��ޤ���
+Shellでもちいられるコマンドを検索する対象のパスを設定および、参照します。
 
-@param path Shell�Ǥ�������륳�ޥ�ɤ򸡺������оݤΥѥ���ʸ����ǻ��ꤷ�ޤ���
+@param path Shellでもちいられるコマンドを検索する対象のパスを文字列で指定します。
 
-ư����
+動作例
   require 'shell'
   p Shell.default_system_path 
-  # ��
+  # 例
   #=> [ "/opt/local/bin", "/opt/local/sbin", "/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/bin", "/usr/X11/bin", "/Users/kouya/bin"]
   Shell.default_system_path = ENV["HOME"] + "/bin"
   p Shell.default_system_path
@@ -285,9 +285,9 @@ Shell�Ǥ�������륳�ޥ�ɤ򸡺������оݤΥѥ������ꤪ��ӡ����Ȥ��ޤ���
 
 --- verbose=(flag)
 
-true �ʤ�о�Ĺ�ʽ��Ϥ������Ԥ��ޤ���
+true ならば冗長な出力の設定を行います。
 
-@param flag true �ʤ�о�Ĺ�ʽ��Ϥ������Ԥ��ޤ���
+@param flag true ならば冗長な出力の設定を行います。
 
 
 --- cascade -> bool
@@ -334,30 +334,30 @@ true �ʤ�о�Ĺ�ʽ��Ϥ������Ԥ��ޤ���
 #@end
 
 == Instance Methods
-#@#=== �ץ���������
+#@#=== プロセス管理
 
 --- cwd -> String
 --- dir -> String
 --- getwd -> String
 --- pwd -> String
 
-�����ȥǥ��쥯�ȥ�Υѥ���ʸ������֤��ޤ���
+カレントディレクトリのパスを文字列で返します。
 
-������
+使用例
   require 'shell'
   sh = Shell.new
   p sh.cwd 
-  # ��
+  # 例
   #=> "/Users/kouya/tall"
 
 
 --- system_path -> Array 
 --- system_path=(path)
-���ޥ�ɥ������ѥ���������֤���
+コマンドサーチパスの配列を返す。
 
-@param path ���ޥ�ɥ������ѥ����������ꤷ�ޤ���
+@param path コマンドサーチパスの配列を指定します。
 
-������
+使用例
 
   require 'shell'
   sh = Shell.new
@@ -367,37 +367,37 @@ true �ʤ�о�Ĺ�ʽ��Ϥ������Ԥ��ޤ���
 --- umask -> object
 #@todo
 
-umask���֤��ޤ���
+umaskを返します。
 
 --- umask=(umask)
 #@todo
 
 --- jobs -> Array
 
-�������塼��󥰤���Ƥ���job�ΰ������֤��ޤ���
+スケジューリングされているjobの一覧を返します。
 
 --- kill(signal, job) -> Integer
 #@todo
 
-����֤˥����ʥ������ޤ���
+ジョブにシグナルを送ります。
 
 @param signal
 
 @param job
 
-#@#=== �����ȥǥ��쥯�ȥ����
+#@#=== カレントディレクトリ操作
 
 --- cd(path, &block) -> self
 --- chdir(path, &block) -> self
 
-�����ȥǥ��쥯�ȥ��path�ˤ���. ���ƥ졼���Ȥ��ƸƤФ줿�Ȥ��ˤ�
-�֥��å��¹���Τߥ����ȥǥ��쥯�ȥ���ѹ�����.
+カレントディレクトリをpathにする. イテレータとして呼ばれたときには
+ブロック実行中のみカレントディレクトリを変更する.
 
-@param path �����ȥǥ��쥯�ȥ��ʸ����ǻ��ꤷ�ޤ�.  
+@param path カレントディレクトリを文字列で指定します.  
 
-@param block path �ǻ��ꤷ���ǥ��쥯�ȥ�ǹԤ�����֥��å��ǻ��ꤷ�ޤ�.
+@param block path で指定したディレクトリで行う操作をブロックで指定します.
 
-������
+使用例
   require 'shell'
   sh = Shell.new
   sh.transact {
@@ -410,16 +410,16 @@ umask���֤��ޤ���
 --- pushd(path = nil, &block) -> object
 --- pushdir(path = nil, &block) -> object
 
-�����ȥǥ��쥯�ȥ��ǥ��쥯�ȥꥹ���å��ˤĤ�, �����ȥǥ��쥯
-�ȥ��path�ˤ���. path����ά���줿�Ȥ��ˤ�, �����ȥǥ��쥯�ȥ��
-�ǥ��쥯�ȥꥹ���å��Υȥåפ�򴹤���. ���ƥ졼���Ȥ��ƸƤФ줿��
-���ˤ�, �֥��å��¹���Τ�pushd����.
+カレントディレクトリをディレクトリスタックにつみ, カレントディレク
+トリをpathにする. pathが省略されたときには, カレントディレクトリと
+ディレクトリスタックのトップを交換する. イテレータとして呼ばれたと
+きには, ブロック実行中のみpushdする.
 
-@param path  �����ȥǥ��쥯�ȥ��path�ˤ��롣ʸ����ǻ��ꤷ�ޤ���
+@param path  カレントディレクトリをpathにする。文字列で指定します。
 
-@param block ���ƥ졼���Ȥ��ƸƤ־��, �֥��å�����ꤷ�ޤ���
+@param block イテレータとして呼ぶ場合, ブロックを指定します。
  
-ư����
+動作例
   require 'shell'
   Shell.verbose = false
   sh = Shell.new
@@ -437,9 +437,9 @@ umask���֤��ޤ���
 --- popd -> ()
 --- popdir -> ()
 
-�ǥ��쥯�ȥꥹ���å�����ݥåפ�, ����򥫥��ȥǥ��쥯�ȥ�ˤ���.
+ディレクトリスタックからポップし, それをカレントディレクトリにする.
 
-ư����
+動作例
   require 'shell'
   Shell.verbose = false
   sh = Shell.new
@@ -451,14 +451,14 @@ umask���֤��ޤ���
   p sh.cwd #=> "/tmp"
 
 
-#@# �ȹ��ߥ��ޥ��
+#@# 組込みコマンド
 #@include(shell/builtincommands)
 
 --- expand_path(path) -> String
 
-File���饹�ˤ���Ʊ̾�Υ��饹�᥽�åɤ�Ʊ���Ǥ�.
+Fileクラスにある同名のクラスメソッドと同じです.
 
-@param path �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param path ファイル名を表す文字列を指定します。
 
 @see [[m:File.expand_path]]
 

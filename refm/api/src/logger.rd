@@ -1,29 +1,29 @@
 #@since 1.8.1
-������Ͽ���뤿��Υ饤�֥��Ǥ���
+ログを記録するためのライブラリです。
 
-=== �Ȥ���
+=== 使い方
 
-5�ʳ��Υ�����٥��ʬ���ƥ�����Ͽ���ޤ���
+5段階のログレベルに分けてログを記録します。
 
 : FATAL
-  �ץ������򥯥�å��夵����褦�������Բ�ǽ�ʥ��顼
+  プログラムをクラッシュさせるような制御不可能なエラー
 : ERROR
-  ���顼
+  エラー
 : WARN
-  �ٹ�
+  警告
 : INFO
-  ����Ū�ʾ���
+  一般的な情報
 : DEBUG
-  ���٥�ξ���
+  低レベルの情報
 
-���ƤΥ�å�������ɬ��������٥������ޤ����ޤ� Logger ���֥������Ȥ�Ʊ���褦��
-������٥������ޤ�����å������Υ�����٥뤬 Logger ���֥������ȤΥ�����٥����
-�㤤����å������ϵ�Ͽ����ޤ���
+全てのメッセージは必ずログレベルを持ちます。また Logger オブジェクトも同じように
+ログレベルを持ちます。メッセージのログレベルが Logger オブジェクトのログレベルよりも
+低い場合メッセージは記録されません。
 
-���ʤ� INFO ������Ͽ���Ƥ��ʤ������ǥХå�����ɬ�פˤʤä����ˤϡ�
-Logger ���֥������ȤΥ�����٥�� DEBUG �˲�����ʤɤȤ����Ȥ����򤷤ޤ���
+普段は INFO しか記録していないが、デバッグ情報が必要になった時には、
+Logger オブジェクトのログレベルを DEBUG に下げるなどという使い方をします。
 
-��:
+例:
 
   require 'logger'
   log = Logger.new(STDOUT)
@@ -33,13 +33,13 @@ Logger ���֥������ȤΥ�����٥�� DEBUG �˲�����ʤɤȤ����Ȥ����򤷤ޤ���
   log.info("Program started")
   log.warn("Nothing to do!")
 
-�����Ǥϥ����ˤ� WARN �Τߤ���Ͽ����ޤ�������������Ǥ���
+上の例ではログには WARN のみが記録されます。下が出力例です。
 
   W, [2005-02-10T20:03:56.489954 #12469]  WARN -- : Nothing to do!
 
-�㳰���֥������Ȥ⵭Ͽ�����å������Ȥ��ƻȤ��ޤ���
+例外オブジェクトも記録するメッセージとして使えます。
 
-��:
+例:
 
   require 'logger'
   log = Logger.new(STDOUT)
@@ -56,42 +56,42 @@ Logger ���֥������ȤΥ�����٥�� DEBUG �˲�����ʤɤȤ����Ȥ����򤷤ޤ���
     log.fatal(err)
   end
 
-[[m:Logger#formatter=]] ���Ѥ��ƥե����ޥåȤ��ѹ����뤳�Ȥ��Ǥ��ޤ���
+[[m:Logger#formatter=]] を用いてフォーマットを変更することができます。
 
    logger.formatter = proc { |severity, datetime, progname, msg|
      "#{datetime}: #{msg}\n"
    }
    # => "Thu Sep 22 08:51:08 GMT+9:00 2005: hello world"
 
-=== ����
+=== 参考
 
 : Rubyist Magazine
   [[url:http://jp.rubyist.net/magazine/]]
-: ɸ��ź�ե饤�֥��Ҳ���� 2 ���
+: 標準添付ライブラリ紹介【第 2 回】
   [[url:http://jp.rubyist.net/magazine/?0008-BundledLibraries]]
 
 = class Logger < Object
 include Logger::Severity
 
 
-������Ͽ���뤿��Υ��饹�Ǥ���
+ログを記録するためのクラスです。
 
 == Class Methods
 
 --- new(logdev, shift_age = 0, shift_size = 1048576) -> Logger
 
-Logger ���֥������Ȥ��������롣
+Logger オブジェクトを生成する。
 
-@param logdev ������񤭹���ե�����̾���� IO ���֥�������(STDOUT, STDERR �ʤ�)����ꤷ�ޤ���
+@param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
 
-@param shift_age �����ե�������ݻ���������������ե�������ڤ��ؤ������٤���ꤷ�ޤ���
-                 ���٤ˤ� daily, weekly, monthly ��ʸ����ǻ��ꤹ�뤳�Ȥ��Ǥ��ޤ���
-                 ��ά����ȡ���������¸����ڤ��ؤ��ޤ���
+@param shift_age ログファイルを保持する数か、ログファイルを切り替える頻度を指定します。
+                 頻度には daily, weekly, monthly を文字列で指定することができます。
+                 省略すると、ログの保存先を切り替えません。
 
-@param shift_size shift_age �������ǻ��ꤷ�����Τ�ͭ���Ǥ���
-                  ���Υ������ǥ����ե�������ڤ��ؤ��ޤ���
+@param shift_size shift_age を整数で指定した場合のみ有効です。
+                  このサイズでログファイルを切り替えます。
 
-��:
+例:
 
   logger = Logger.new(STDERR)
   logger = Logger.new(STDOUT)
@@ -105,97 +105,97 @@ Logger ���֥������Ȥ��������롣
 
 --- <<(msg) -> Integer | nil
 
-��������Ϥ��ޤ���
+ログを出力します。
 
-@param msg �����˽��Ϥ����å�������
+@param msg ログに出力するメッセージ。
 
 --- add(severity, message = nil, progname = nil) -> true
 --- add(severity, message = nil, progname = nil){ ... } -> true
 --- log(severity, message = nil, progname = nil) -> true
 --- log(severity, message = nil, progname = nil){ ... } -> true
 
-��å�����������˵�Ͽ���ޤ���
+メッセージをログに記録します。
 
-�֥��å���Ϳ�������ϥ֥��å���ɾ�������֤��ͤ��å������Ȥ��ƥ����˵�Ͽ���ޤ���
-�桼�������Υ᥽�åɤ�ľ�ܻȤ����ȤϤ��ޤꤢ��ޤ���
+ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
+ユーザがこのメソッドを直接使うことはあまりありません。
 
-@param severity ������٥롣[[c:Logger]] ���饹���������Ƥ����������ꤷ�ޤ���
-                �����ͤ��쥷���С������ꤵ��Ƥ����٥�����㤤��硢
-                ��å������ϵ�Ͽ����ޤ���
+@param severity ログレベル。[[c:Logger]] クラスで定義されている定数を指定します。
+                この値がレシーバーに設定されているレベルよりも低い場合、
+                メッセージは記録されません。
 
-@param message �����˽��Ϥ����å�������ʸ�����㳰���֥������Ȥ���ꤷ�ޤ���
-               ��ά����� nil ���Ѥ����ޤ���
+@param message ログに出力するメッセージを文字列か例外オブジェクトを指定します。
+               省略すると nil が用いられます。
 
-@param progname ������å������Ȱ��˵�Ͽ����ץ������̾����ꤷ�ޤ���
-                ��ά����� nil �����Ѥ���ޤ������ºݤˤ��������ݻ�����Ƥ����ͤ����Ѥ���ޤ���
+@param progname ログメッセージと一緒に記録するプログラム名を指定します。
+                省略すると nil が使用されますが、実際には内部で保持されている値が使用されます。
 
 --- close -> nil
 
-�������Ϥ˻��Ѥ��Ƥ��� IO ���֥������Ȥ��Ĥ��ޤ���
+ログ出力に使用していた IO オブジェクトを閉じます。
 
 --- datetime_format -> String | nil
 
-�����˵�Ͽ����������դΥե����ޥåȤǤ���
+ログに記録する時の日付のフォーマットです。
 
-�ǥե���ȤǤ� nil �Ǥ����������ͤ� nil �ξ������դΥե����ޥåȤȤ���
-"%Y-%m-%dT%H:%M:%S.%06d " ����Ѥ��ޤ���
+デフォルトでは nil ですが、この値が nil の場合は日付のフォーマットとして
+"%Y-%m-%dT%H:%M:%S.%06d " を使用します。
 
-�ʤ���"%06d" �ˤ� [[m:Time#strftime]] �ǤϤʤ���ñ�� [[m:Time#usec]] ��
-�ͤ� [[m:String#%]] �ǥե����ޥåȤ�����Τ�����ޤ���
+なお、"%06d" には [[m:Time#strftime]] ではなく、単に [[m:Time#usec]] の
+値を [[m:String#%]] でフォーマットしたものが入ります。
 
 @see [[m:Time#strftime]], [[m:Logger#datetime_format=]]
 
 
 --- datetime_format=(format)
 
-�����˵�Ͽ����������դΥե����ޥåȤ򥻥åȤ��ޤ���
+ログに記録する時の日付のフォーマットをセットします。
 
 @see [[m:Time#strftime]], [[m:Logger#datetime_format]]
 
 --- debug? -> bool
 
-���ߤ� Logger ���֥������Ȥ� DEBUG �ʾ�Υ�����٥�Υ�å�������Ͽ����ʤ�
-�����֤��ޤ���
+現在の Logger オブジェクトが DEBUG 以上のログレベルのメッセージを記録するなら
+真を返します。
 
 --- info? -> bool
 
-���ߤ� Logger ���֥������Ȥ� INFO �ʾ�Υ�����٥�Υ�å�������Ͽ����ʤ�
-�����֤��ޤ���
+現在の Logger オブジェクトが INFO 以上のログレベルのメッセージを記録するなら
+真を返します。
 
 --- warn? -> bool
 
-���ߤ� Logger ���֥������Ȥ� WARN �ʾ�Υ�����٥�Υ�å�������Ͽ����ʤ�
-�����֤��ޤ���
+現在の Logger オブジェクトが WARN 以上のログレベルのメッセージを記録するなら
+真を返します。
 
 --- error? -> bool
 
-���ߤ� Logger ���֥������Ȥ� ERROR �ʾ�Υ�����٥�Υ�å�������Ͽ����ʤ�
-�����֤��ޤ���
+現在の Logger オブジェクトが ERROR 以上のログレベルのメッセージを記録するなら
+真を返します。
 
 --- fatal? -> bool
 
-���ߤ� Logger ���֥������Ȥ� FATAL �ʾ�Υ�����٥�Υ�å�������Ͽ����ʤ�
-�����֤��ޤ���
+現在の Logger オブジェクトが FATAL 以上のログレベルのメッセージを記録するなら
+真を返します。
 
 --- debug(progname = nil) -> true
 --- debug(progname = nil){ ... } -> true
 
-������٥뤬 DEBUG �Υ�å���������Ϥ��ޤ���
+ログレベルが DEBUG のメッセージを出力します。
 
-���ߤ� Logger �Υ�����٥뤬 DEBUG ����⤤��硢��å������Ͻ��Ϥ���ޤ���
+現在の Logger のログレベルが DEBUG よりも高い場合、メッセージは出力されません。
 
-�֥��å���Ϳ���ʤ��ä����ϡ�progname ���å������Ȥ��ƥ�������Ϥ��ޤ���
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
-�֥��å���Ϳ�������ϡ��֥��å���ɾ��������̤��å������Ȥ���
-��������Ϥ��ޤ���
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
 
-�����ȥ֥��å���Ʊ����Ϳ�������ϡ�progname ��ץ������̾���֥��å���ɾ������
-��̤��å������Ȥ��ƥ�������Ϥ��ޤ���
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+結果をメッセージとしてログを出力します。
 
-@param progname �֥��å���Ϳ���ʤ����ϡ���å������Ȥ���ʸ����ޤ����㳰���֥������Ȥ���ꤷ�ޤ���
-                �֥��å���Ϳ�������ϡ��ץ������̾��ʸ����Ȥ���Ϳ���ޤ���
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
-��:
+例:
 
   logger.debug "Waiting for input from user"
   # ...
@@ -206,128 +206,128 @@ Logger ���֥������Ȥ��������롣
 --- info(progname = nil){ ... } -> true
 --- info(progname = nil) -> true
 
-INFO �������Ϥ��ޤ���
+INFO 情報を出力します。
 
-�֥��å���Ϳ���ʤ��ä����ϡ�progname ���å������Ȥ��ƥ�������Ϥ��ޤ���
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
-�֥��å���Ϳ�������ϡ��֥��å���ɾ��������̤��å������Ȥ���
-��������Ϥ��ޤ���
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
 
-�����ȥ֥��å���Ʊ����Ϳ�������ϡ�progname ��ץ������̾���֥��å���ɾ������
-��̤��å������Ȥ��ƥ�������Ϥ��ޤ���
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+結果をメッセージとしてログを出力します。
 
-@param progname �֥��å���Ϳ���ʤ����ϡ���å������Ȥ���ʸ����ޤ����㳰���֥������Ȥ���ꤷ�ޤ���
-                �֥��å���Ϳ�������ϡ��ץ������̾��ʸ����Ȥ���Ϳ���ޤ���
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
 @see [[m:Logger#debug]]
 
 --- warn(progname = nil){ ... } -> true
 --- warn(progname = nil) -> true
 
-WARN �������Ϥ��ޤ���
+WARN 情報を出力します。
 
-�֥��å���Ϳ���ʤ��ä����ϡ�progname ���å������Ȥ��ƥ�������Ϥ��ޤ���
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
-�֥��å���Ϳ�������ϡ��֥��å���ɾ��������̤��å������Ȥ���
-��������Ϥ��ޤ���
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
 
-�����ȥ֥��å���Ʊ����Ϳ�������ϡ�progname ��ץ������̾���֥��å���ɾ������
-��̤��å������Ȥ��ƥ�������Ϥ��ޤ���
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+結果をメッセージとしてログを出力します。
 
-@param progname �֥��å���Ϳ���ʤ����ϡ���å������Ȥ���ʸ����ޤ����㳰���֥������Ȥ���ꤷ�ޤ���
-                �֥��å���Ϳ�������ϡ��ץ������̾��ʸ����Ȥ���Ϳ���ޤ���
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
 @see [[m:Logger#debug]]
 
 --- error(progname = nil){ ... } -> true
 --- error(progname = nil) -> true
 
-ERROR �������Ϥ��ޤ���
+ERROR 情報を出力します。
 
-�֥��å���Ϳ���ʤ��ä����ϡ�progname ���å������Ȥ��ƥ�������Ϥ��ޤ���
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
-�֥��å���Ϳ�������ϡ��֥��å���ɾ��������̤��å������Ȥ���
-��������Ϥ��ޤ���
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
 
-�����ȥ֥��å���Ʊ����Ϳ�������ϡ�progname ��ץ������̾���֥��å���ɾ������
-��̤��å������Ȥ��ƥ�������Ϥ��ޤ���
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+結果をメッセージとしてログを出力します。
 
-@param progname �֥��å���Ϳ���ʤ����ϡ���å������Ȥ���ʸ����ޤ����㳰���֥������Ȥ���ꤷ�ޤ���
-                �֥��å���Ϳ�������ϡ��ץ������̾��ʸ����Ȥ���Ϳ���ޤ���
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
 @see [[m:Logger#debug]]
 
 --- fatal(progname = nil){ ... } -> true
 --- fatal(progname = nil) -> true
 
-FATAL �������Ϥ��ޤ���
+FATAL 情報を出力します。
 
-�֥��å���Ϳ���ʤ��ä����ϡ�progname ���å������Ȥ��ƥ�������Ϥ��ޤ���
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
-�֥��å���Ϳ�������ϡ��֥��å���ɾ��������̤��å������Ȥ���
-��������Ϥ��ޤ���
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
 
-�����ȥ֥��å���Ʊ����Ϳ�������ϡ�progname ��ץ������̾���֥��å���ɾ������
-��̤��å������Ȥ��ƥ�������Ϥ��ޤ���
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+結果をメッセージとしてログを出力します。
 
-@param progname �֥��å���Ϳ���ʤ����ϡ���å������Ȥ���ʸ����ޤ����㳰���֥������Ȥ���ꤷ�ޤ���
-                �֥��å���Ϳ�������ϡ��ץ������̾��ʸ����Ȥ���Ϳ���ޤ���
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
 @see [[m:Logger#debug]]
 
 --- unknown(progname = nil){ ... } -> true
 --- unknown(progname = nil) -> true
 
-UNKNOWN �������Ϥ��ޤ���
+UNKNOWN 情報を出力します。
 
-�֥��å���Ϳ���ʤ��ä����ϡ�progname ���å������Ȥ��ƥ�������Ϥ��ޤ���
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
-�֥��å���Ϳ�������ϡ��֥��å���ɾ��������̤��å������Ȥ���
-��������Ϥ��ޤ���
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
 
-�����ȥ֥��å���Ʊ����Ϳ�������ϡ�progname ��ץ������̾���֥��å���ɾ������
-��̤��å������Ȥ��ƥ�������Ϥ��ޤ���
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+結果をメッセージとしてログを出力します。
 
-@param progname �֥��å���Ϳ���ʤ����ϡ���å������Ȥ���ʸ����ޤ����㳰���֥������Ȥ���ꤷ�ޤ���
-                �֥��å���Ϳ�������ϡ��ץ������̾��ʸ����Ȥ���Ϳ���ޤ���
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
 @see [[m:Logger#debug]]
 
 --- level -> Integer
 --- sev_threshold -> Integer
 
-�쥷���Ф˥��åȤ���Ƥ��������٥��������ޤ���
+レシーバにセットされているログレベルを取得します。
 
 --- level=(level)
 --- sev_threshold=(level)
 
-Logger ���֥������ȤΥ�����٥�����ꤷ�ޤ���������٥뤬�������㤤��å�������
-���Ϥ���ޤ���
+Logger オブジェクトのログレベルを設定します。ログレベルがこれより低いメッセージは
+出力されません。
 
-@param level ������٥����ꤷ�ޤ���
+@param level ログレベルを指定します。
 
 --- progname -> String
 
-�����˽��Ϥ���ץ������̾��������ޤ���
+ログに出力するプログラム名を取得します。
 
 --- progname=(name)
 
-�����˽��Ϥ���ץ������̾�����ꤷ�ޤ���
+ログに出力するプログラム名を設定します。
 
 #@since 1.8.3
 --- formatter -> String
 
-��������Ϥ���ݤ˻��Ѥ���ե����ޥå�����������ޤ���
+ログを出力する際に使用するフォーマッターを取得します。
 
-���Υ᥽�åɤ��֤��ͤ����� call �᥽�åɤ� 4 �Ĥΰ��� (severity, time, program name, message) ������Ȥ�ޤ���
+このメソッドの返り値が持つ call メソッドは 4 つの引数 (severity, time, program name, message) を受けとります。
 
 
 --- formatter=(formatter)
 
-��������Ϥ���ݤ˻��Ѥ���ե����ޥå����򥻥åȤ��ޤ���
+ログを出力する際に使用するフォーマッターをセットします。
 
-@param formatter 4 �Ĥΰ��� (severity, time, program name, message) �������� call �᥽�åɤ�
-                 ���ĥ��֥������Ȥ���ꤷ�ޤ���call �᥽�åɤ��֤��ͤ�ʸ����ˤ��Ƥ���������
+@param formatter 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを
+                 持つオブジェクトを指定します。call メソッドの返り値は文字列にしてください。
 
   logger = Logger.new
   logger.formatter = proc{|severity, datetime, progname, message|
@@ -341,36 +341,36 @@ Logger ���֥������ȤΥ�����٥�����ꤷ�ޤ���������٥뤬�������㤤��å������
 #@until 1.8.3
 --- Format -> String
 
-�����ѤΥե����ޥå�ʸ����
+ログ用のフォーマット文字列。
 
 #@end
 
 --- ProgName -> String
-�����ե�����������˻Ȥ��ץ������̾��
+ログファイル作成時に使うプログラム名。
 
 #@since 1.9.1
 --- VERSION -> String
-���Υ饤�֥��ΥС�������ɽ��ʸ����
+このライブラリのバージョンを表す文字列。
 
 #@end
 
 --- SEV_LABEL -> Array
 
-������٥�Υ�٥���Ǽ��������
+ログレベルのラベルを格納した配列。
 
 = class Logger::Application < Object
 include Logger::Severity
 
-�桼������Υ��ץꥱ�������˥�����ǽ���ñ���ɲä��뤳�Ȥ��Ǥ��ޤ���
+ユーザ定義のアプリケーションにログ機能を簡単に追加することができます。
 
-=== ������ˡ
+=== 使用方法
 
-  (1) ���Υ��饹�Υ��֥��饹�Ȥ��ƥ桼������Υ��ץꥱ�������Υ��饹��������ޤ���
-  (2) �桼������Υ��饹�ǥᥤ�������Ԥ� run �᥽�åɤ�������ޤ���
-  (3) ���Υ��饹�򥤥󥹥��󥹲����� start �᥽�åɤ�ƤӽФ��ޤ���
+  (1) このクラスのサブクラスとしてユーザ定義のアプリケーションのクラスを定義します。
+  (2) ユーザ定義のクラスでメイン処理を行う run メソッドを定義します。
+  (3) そのクラスをインスタンス化して start メソッドを呼び出します。
 
 
-��:
+例:
 
   class FooApp < Application
     def initialize(foo_app, application_specific, arguments)
@@ -392,109 +392,109 @@ include Logger::Severity
 
 --- new(appname = nil) -> Logger::Application
 
-���Υ��饹���������ޤ���
+このクラスを初期化します。
 
-@param appname ���ץꥱ�������̾����ꤷ�ޤ���
+@param appname アプリケーション名を指定します。
 
 == Instance Methods
 
 --- appname -> String
 
-���ץꥱ�������̾��������ޤ���
+アプリケーション名を取得します。
 
 --- level=(level)
 
-�����Υ�����٥�򥻥åȤ��ޤ���
+ログのログレベルをセットします。
 
-@param level �����Υ�����٥롣
+@param level ログのログレベル。
 
 @see [[c:Logger::Severity]]
 
 --- log(severity, message = nil) -> true
 --- log(severity, message = nil){ ... } -> true
 
-��å�����������˵�Ͽ���ޤ���
+メッセージをログに記録します。
 
-�֥��å���Ϳ�������ϥ֥��å���ɾ�������֤��ͤ��å������Ȥ��ƥ����˵�Ͽ���ޤ���
+ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
 
-@param severity ������٥롣[[c:Logger::Severity]] ���饹���������Ƥ����������ꤷ�ޤ���
-                �����ͤ��쥷���С������ꤵ��Ƥ����٥�����㤤��硢
-                ��å������ϵ�Ͽ����ޤ���
+@param severity ログレベル。[[c:Logger::Severity]] クラスで定義されている定数を指定します。
+                この値がレシーバーに設定されているレベルよりも低い場合、
+                メッセージは記録されません。
 
-@param message �����˽��Ϥ����å�������ʸ�����㳰���֥������Ȥ���ꤷ�ޤ���
-               ��ά����� nil ���Ѥ����ޤ���
+@param message ログに出力するメッセージを文字列か例外オブジェクトを指定します。
+               省略すると nil が用いられます。
 
 @see [[m:Logger#add]]
 
 --- log=(logdev)
 
-�����ν�����򥻥åȤ��ޤ���
+ログの出力先をセットします。
 
-@param logdev �����ե�����̾�� IO ���֥������Ȥ���ꤷ�ޤ���
+@param logdev ログファイル名か IO オブジェクトを指定します。
 
 #@until 1.9.1
 --- logdev -> ()
 
-���Υ᥽�åɤϻ��Ѥ���Ƥ��ޤ���
+このメソッドは使用されていません。
 
 #@end
 
 --- set_log(logdev, shift_age = 0, shift_size = 1024000) -> Integer
 
-�����ǻ��Ѥ��� [[c:Logger]] �Υ��֥������Ȥ��������ޤ���
+内部で使用する [[c:Logger]] のオブジェクトを初期化します。
 
-@param logdev ������񤭹���ե�����̾���� IO ���֥�������(STDOUT, STDERR �ʤ�)����ꤷ�ޤ���
+@param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
 
-@param shift_age �����ե�������ݻ���������������ե�������ڤ��ؤ������٤���ꤷ�ޤ���
-                 ���٤ˤ� daily, weekly, monthly ��ʸ����ǻ��ꤹ�뤳�Ȥ��Ǥ��ޤ���
-                 ��ά����ȡ���������¸����ڤ��ؤ��ޤ���
+@param shift_age ログファイルを保持する数か、ログファイルを切り替える頻度を指定します。
+                 頻度には daily, weekly, monthly を文字列で指定することができます。
+                 省略すると、ログの保存先を切り替えません。
 
-@param shift_size shift_age �������ǻ��ꤷ�����Τ�ͭ���Ǥ���
-                  ���Υ������ǥ����ե�������ڤ��ؤ��ޤ���
+@param shift_size shift_age を整数で指定した場合のみ有効です。
+                  このサイズでログファイルを切り替えます。
 
-@return �����Υ�����٥���֤��ޤ���
+@return ログのログレベルを返します。
 
 --- start -> ()
 
-���ץꥱ�������򥹥����Ȥ����ޤ���
+アプリケーションをスタートさせます。
 
-@return run �᥽�åɤ����ͤ��֤��ޤ���
+@return run メソッドの返値を返します。
 
-@raise RuntimeError ���֥��饹�� run �᥽�åɤ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise RuntimeError サブクラスで run メソッドを定義していない場合に発生します。
 
 #@since 1.8.3
 = class Logger::Formatter < Object
 
-�������Υե����ޥå�ʸ����򰷤����饹��
+ロガーのフォーマット文字列を扱うクラス。
 
-[[c:Logger]] �Υǥե���ȤΥե����ޥå����Ǥ���
+[[c:Logger]] のデフォルトのフォーマッターです。
 
 == Instance Methods
 
 --- call(severity, time, progname, msg) -> String
 
-���������ե����ޥåȤ����֤��ޤ���
+ログ情報をフォーマットして返します。
 
-@param severity ������٥롣
+@param severity ログレベル。
 
-@param time ���֡�[[c:Time]] ���饹�Υ��֥������ȡ�
+@param time 時間。[[c:Time]] クラスのオブジェクト。
 
-@param progname �ץ������̾
+@param progname プログラム名
 
-@param msg ��å�������
+@param msg メッセージ。
 
 --- datetime_format -> String
 
-�����������ե����ޥåȤ�������ޤ���
+ログの日時フォーマットを取得します。
 
 @see [[m:Time#strftime]]
 
 --- datetime_format=(format)
 
-�����������ե����ޥåȤ򥻥åȤ��ޤ���
+ログの日時フォーマットをセットします。
 
-@param format �����Υե����ޥå�ʸ����[[m:Time#strftime]] �ǻ��Ѥ���ե����ޥå�ʸ�����
-              Ʊ����Τ���ѤǤ��ޤ���
+@param format 日時のフォーマット文字列。[[m:Time#strftime]] で使用するフォーマット文字列と
+              同じものを使用できます。
 
 @see [[m:Time#strftime]]
 
@@ -502,26 +502,26 @@ include Logger::Severity
 
 --- Format -> String
 
-�ե����ޥå�ʸ����
+フォーマット文字列。
 
 #@end
 
 = class Logger::LogDevice < Object
 
-[[c:Logger]] �������ǻ��Ѥ�������ν������ɽ�����饹�Ǥ���
+[[c:Logger]] の内部で使用するログの出力先を表すクラスです。
 
 == Class Methods
 
 --- new(log = nil, opt = {}) -> Logger::LogDevice
 
-�����ν�������������ޤ���
+ログの出力先を初期化します。
 
-@param log �����ν����衣IO ���֥������Ȥ���ꤷ�ޤ���
-           ��ά����� nil �����Ѥ���ޤ������¹�����㳰��ȯ�����ޤ���
+@param log ログの出力先。IO オブジェクトを指定します。
+           省略すると nil が使用されますが、実行中に例外が発生します。
 
-@param opt ���ץ�����ϥå���ǻ��ꤷ�ޤ���
-           �ϥå���Υ����ˤ� :shift_age, :shift_size ����ꤷ�ޤ���
-           ��ά����ȡ����줾�� 7, 1048756 (1 MByte) �����Ѥ���ޤ���
+@param opt オプションをハッシュで指定します。
+           ハッシュのキーには :shift_age, :shift_size を指定します。
+           省略すると、それぞれ 7, 1048756 (1 MByte) が使用されます。
 
 @see [[m:Logger.new]]
 
@@ -530,27 +530,27 @@ include Logger::Severity
 
 --- close -> nil
 
-������� IO ���֥������Ȥ��Ĥ��ޤ���
+出力先の IO オブジェクトを閉じます。
 
-���Υ᥽�åɤ�Ʊ������ޤ���
+このメソッドは同期されます。
 
 @see [[m:IO#close]]
 
 --- dev -> IO
 
-������� IO ���֥������Ȥ�������ޤ���
+出力先の IO オブジェクトを取得します。
 
 --- filename -> String | nil
 
-������Υե�����̾��������ޤ���
+出力先のファイル名を取得します。
 
-�����褬�ե�����ǤϤʤ����� nil ���֤��ޤ���
+出力先がファイルではない場合は nil を返します。
 
 --- write(message) -> Integer
 
-������� IO ���֥������Ȥ˥�å�������񤭹��ߤޤ���
+出力先の IO オブジェクトにメッセージを書き込みます。
 
-���Υ᥽�åɤ�Ʊ������ޤ���
+このメソッドは同期されます。
 
 @see [[m:IO#write]]
 
@@ -558,7 +558,7 @@ include Logger::Severity
 = class Logger::LogDevice::LogDeviceMutex < Object
 include MonitorMixin
 
-�����ν�����ե������Ʊ�����뤿��Υ��饹�Ǥ���
+ログの出力先ファイルを同期するためのクラスです。
 
 @see [[c:MonitorMixin]]
 
@@ -566,33 +566,33 @@ include MonitorMixin
 
 = module Logger::Severity
 
-[[lib:logger]] �ǻ��Ѥ��������٥����������⥸�塼�롣
+[[lib:logger]] で使用するログレベルを定義したモジュール。
 
 == Constants
 --- DEBUG -> Integer
-������٥�:�ǥХå���ɽ������Ǥ���
+ログレベル:デバッグを表す定数です。
 
 --- INFO  -> Integer
-������٥�:�����ɽ������Ǥ���
+ログレベル:情報を表す定数です。
 
 --- WARN  -> Integer
-������٥�:�ٹ��ɽ������Ǥ���
+ログレベル:警告を表す定数です。
 
 --- ERROR -> Integer
-������٥�:���顼��ɽ������Ǥ���
+ログレベル:エラーを表す定数です。
 
 --- FATAL -> Integer
-������٥�:��̿Ū�ʥ��顼��ɽ������Ǥ���
+ログレベル:致命的なエラーを表す定数です。
 
 --- UNKNOWN -> Integer
-������٥�:�����ʥ��顼��ɽ������Ǥ���
+ログレベル:不明なエラーを表す定数です。
 
 = class Logger::Error < RuntimeError
 
-���Υ饤�֥��ǻ��Ѥ����㳰�Ǥ���
+このライブラリで使用する例外です。
 
 = class Logger::ShiftingError < Logger::Error
 
-�����ե�������ڤ��ؤ��˼��Ԥ�������ȯ�������㳰�Ǥ���
+ログファイルの切り替えに失敗した場合に発生する例外です。
 
 #@end

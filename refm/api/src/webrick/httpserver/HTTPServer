@@ -1,8 +1,8 @@
 = class WEBrick::HTTPServer < WEBrick::GenericServer
 
-HTTP �����Фε�ǽ���󶡤��륯�饹�Ǥ���
+HTTP サーバの機能を提供するクラスです。
 
-�ʲ��� HTTP �����ФȤ��Ƥ�����ư�����Ǥ���
+以下は HTTP サーバとしてちゃんと動作する例です。
 
  require 'webrick'
  srv = WEBrick::HTTPServer.new({:DocumentRoot => '/home/username/public_html/',
@@ -16,60 +16,60 @@ HTTP �����Фε�ǽ���󶡤��륯�饹�Ǥ���
 
 --- new(config = {}, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPServer
 
-HTTPServer ���֥������Ȥ����������֤��ޤ���
+HTTPServer オブジェクトを生成して返します。
 
-@param config �������¸�����ϥå������ꤷ�ޤ���ͭ���ʥ���([[c:Symbol]] ���֥�������)���ͤϰʲ��ΤȤ���Ǥ���
+@param config 設定を保存したハッシュを指定します。有効なキー([[c:Symbol]] オブジェクト)と値は以下のとおりです。
 : :RequestTimeout
-  �ɤ�����λ��� ���饤����Ȥ�������Ϥ��ԤĤ��������� [[c:Float]] �ǻ��ꤷ�ޤ���
-  ñ�̤��äǤ���
+  どれだけの時間 クライアントからの入力を待つかを整数か [[c:Float]] で指定します。
+  単位は秒です。
 : :HTTPVersion
-  ���Ѥ��� HTTP �ΥС������Ǥ���[[c:WEBrick::HTTPVersion]] ���֥������Ȥǻ��ꤷ�ޤ����ǥե���Ȥ� 1.1 �Ǥ���
+  使用する HTTP のバージョンです。[[c:WEBrick::HTTPVersion]] オブジェクトで指定します。デフォルトは 1.1 です。
 : :AccessLog
-  �������������ν�����ȥե����ޥåȤ� [[io, format], [io, format], ...] �Τ褦��
-  ����ǻ��ꤷ�ޤ���io �� [[c:IO]] ���֥������ȤǤ���format ��ʸ����Ǥ����ǥե���ȤǤ�
-  �ե����ޥåȤη����� Apache �Τ���˽��ɸ�२�顼���Ϥ˽��Ϥ��ޤ���
+  アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような
+  配列で指定します。io は [[c:IO]] オブジェクトです。format は文字列です。デフォルトでは
+  フォーマットの形式は Apache のそれに準拠し標準エラー出力に出力します。
   [[url:http://httpd.apache.org/docs/mod/mod_log_config.html#formats]]
   [[m:WEBrick::AccessLog::COMMON_LOG_FORMAT]] [[m:WEBrick::AccessLog::REFERER_LOG_FORMAT]]
-  �⻲�Ȥ��Ʋ�������
+  も参照して下さい。
 : :MimeTypes
-  ��ĥ�Ҥ� mime-type �Ȥ��б���ϥå���ǻ��ꤷ�ޤ����ǥե���Ȥ�
-  [[m:WEBrick::HTTPUtils::DefaultMimeTypes]] �Ǥ���
+  拡張子と mime-type との対応をハッシュで指定します。デフォルトは
+  [[m:WEBrick::HTTPUtils::DefaultMimeTypes]] です。
 : :DirectoryIndex
-  �ǥ��쥯�ȥ�Υ���ǥå����Ȥʤ�ե�����̾������ǻ��ꤷ�ޤ���
+  ディレクトリのインデックスとなるファイル名を配列で指定します。
 : :DocumentRoot
-  �����о�Υ롼�ȥǥ��쥯�ȥ���б������롢��������Υե����륷���ƥ��
-  �ǥ��쥯�ȥ��ʸ����ǻ��ꤷ�ޤ���
+  サーバ上のルートディレクトリに対応させる、ローカルのファイルシステムの
+  ディレクトリを文字列で指定します。
 : :DocumentRootOptions
-  �롼�ȥǥ��쥯�ȥ�ν�����ô������ [[c:WEBrick::HTTPServlet::FileHandler]] �Υ��󥹥ȥ饯����
-  �Ϥ���륪�ץ�����ϥå���ǻ��ꤷ�ޤ����ǥե���Ȥ� { :FancyIndexing => true } �Ǥ��Τǡ�
-  �ǥ��쥯�ȥ�˥�����������ȥǥ��쥯�ȥ�����Ƥ�Ŭ���ʷ�����ɽ�����ޤ���
+  ルートディレクトリの処理を担当する [[c:WEBrick::HTTPServlet::FileHandler]] のコンストラクタに
+  渡されるオプションをハッシュで指定します。デフォルトは { :FancyIndexing => true } ですので、
+  ディレクトリにアクセスするとディレクトリの内容を適当な形式で表示します。
 : :RequestCallback
-  ���饤����Ȥ���Υꥯ�����Ȥ�����դ������˸ƤФ�� [[c:Proc]] ���֥������Ȥ�
-  ���ꤷ�ޤ���callback.call(req, res) �Τ褦�� [[c:WEBrick::HTTPRequest]] ���֥������Ȥ�
-  [[c:WEBrick::HTTPResponse]] ���֥������Ȥ�����Ȥ��ƸƤФ�ޤ���
+  クライアントからのリクエストを受け付けた時に呼ばれる [[c:Proc]] オブジェクトを
+  指定します。callback.call(req, res) のように [[c:WEBrick::HTTPRequest]] オブジェクトと
+  [[c:WEBrick::HTTPResponse]] オブジェクトを引数として呼ばれます。
 : :ServerAlias
-  �����ФΥۥ���̾����̾��ʸ���������ǻ��ꤷ�ޤ���
+  サーバのホスト名の別名を文字列の配列で指定します。
 : :CGIInterpreter
-  CGI ��¹Ԥ��륤�󥿥ץ꥿��ʸ����ǻ��ꤷ�ޤ���
+  CGI を実行するインタプリタを文字列で指定します。
 : :CGIPathEnv
-  CGI ���Ϥ���� PATH �Ķ��ѿ���ʸ����ǻ��ꤷ�ޤ���
+  CGI に渡される PATH 環境変数を文字列で指定します。
 : :Escape8bitURI
-  �����ͤ� true �ξ�硢���饤����Ȥ���Υꥯ������ URI �˴ޤޤ�� 8bit �ܤ�Ω�ä�ʸ���򥨥������פ��ޤ���
-  �ǥե���Ȥ� false �Ǥ���
+  この値が true の場合、クライアントからのリクエスト URI に含まれる 8bit 目が立った文字をエスケープします。
+  デフォルトは false です。
 
-@param default config �ǻ��ꤵ��ʤ��ä����Υǥե���Ȥ��������¸�����ϥå������ꤷ�ޤ���
+@param default config で指定されなかった場合のデフォルトの設定を保存したハッシュを指定します。
 
 == Instance Methods
 
 --- mount(dir, servlet, *options)    -> ()
 
-�����о�Υǥ��쥯�ȥ� dir �˥����֥�å� servlet ���б������ޤ���
+サーバ上のディレクトリ dir にサーブレット servlet を対応させます。
 
-@param dir �ǥ��쥯�ȥ�򤢤�魯ʸ�������ꤷ�ޤ���
+@param dir ディレクトリをあらわす文字列を指定します。
 
-@param servlet [[c:WEBrick::HTTPServlet::AbstractServlet]] �Υ��֥��饹�Υ��󥹥��󥹤���ꤷ�ޤ���
+@param servlet [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインスタンスを指定します。
 
-@param options �����֥�åȤΥ��󥹥ȥ饯���ΰ�������ꤷ�ޤ���
+@param options サーブレットのコンストラクタの引数を指定します。
 
   include WEBrick
   srv = HTTPServer.new( { :BindAddress => '127.0.0.1', :Port => 10080 } )
@@ -78,31 +78,31 @@ HTTPServer ���֥������Ȥ����������֤��ޤ���
 --- mount_proc(dir, proc)             -> ()
 --- mount_proc(dir){|req, res| ...}   -> ()
 
-�����о�Υǥ��쥯�ȥ� dir �˥ꥯ�����Ȥ�������� [[c:Proc]] ���֥������� proc ���б������ޤ���
+サーバ上のディレクトリ dir にリクエストを処理する [[c:Proc]] オブジェクト proc を対応させます。
 
-@param dir �ǥ��쥯�ȥ�򤢤�魯ʸ�������ꤷ�ޤ���
+@param dir ディレクトリをあらわす文字列を指定します。
 
-@param proc �ꥯ�����Ȥ�������� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
-            [[c:WEBrick::HTTPResponse]] ���֥������Ȥ� [[c:WEBrick::HTTPRequest]] 
-            ���֥������Ȥ�����Ȥ��� proc.call(request, response) �ΰ����ν�ǸƤӽФ���ޤ���
+@param proc リクエストを処理する [[c:Proc]] オブジェクトを指定します。
+            [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]] 
+            オブジェクトを引数として proc.call(request, response) の引数の順で呼び出されます。
 
-@raise WEBrick::HTTPServerError proc ����ꤵ�줺�֥��å���Ϳ�����ʤ�����ȯ�����ޤ���
+@raise WEBrick::HTTPServerError proc も指定されずブロックも与えられない場合に発生します。
 
 --- unmount(dir)    -> ()
 --- umount(dir)     -> ()
 
-�����о�Υǥ��쥯�ȥ� dir �ȥ����֥�åȤȤ��б����ä��ޤ���
+サーバ上のディレクトリ dir とサーブレットとの対応を解消します。
 
-@param dir �б����ä���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param dir 対応を解消するディレクトリを指定します。
 
   srv.mount('/img')
 
 --- virtual_host(server)    -> ()
 
-�����Ф��ݻ����Ƥ���С������ۥ��ȤΥꥹ�Ȥ� HTTP ������ server ��ä��ޤ���
-���饤����Ȥ���Υꥯ�����ȤΤ��� server �ؤΤ�Τ� server �˰Ѿ������褦�ˤʤ�ޤ���
+サーバの保持しているバーチャルホストのリストに HTTP サーバ server を加えます。
+クライアントからのリクエストのうち server へのものは server に委譲されるようになります。
 
-@param server �С������ۥ��Ȥ�ɽ�� WEBrick::HTTPServer ���֥������Ȥ���ꤷ�ޤ���
+@param server バーチャルホストを表す WEBrick::HTTPServer オブジェクトを指定します。
 
 
   include WEBrick

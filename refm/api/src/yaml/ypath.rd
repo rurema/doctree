@@ -1,5 +1,5 @@
-YAML �ɥ�����Ȥ�������Υǡ����򸡺����뵡ǽ���󶡤��륵�֥饤�֥��
-�Ǥ���
+YAML ドキュメントから特定のデータを検索する機能を提供するサブライブラリ
+です。
 
 #@since 1.9.2
 = class Syck::YPath
@@ -7,9 +7,9 @@ YAML �ɥ�����Ȥ�������Υǡ����򸡺����뵡ǽ���󶡤��륵�֥饤�֥��
 = class YAML::YPath
 #@end
 
-YAML �ɥ�����Ȥ�������Υǡ����򸡺����뵡ǽ���󶡤��륯�饹�Ǥ���
+YAML ドキュメントから特定のデータを検索する機能を提供するクラスです。
 
-�����㡨"name" ��ޤॻ�����Ȥ�ɽ�����롣
+使用例；"name" を含むセグメントを表示する。
 
 #@since 1.9.3
   require 'syck'
@@ -39,11 +39,11 @@ YAML �ɥ�����Ȥ�������Υǡ����򸡺����뵡ǽ���󶡤��륯�饹�Ǥ���
       age: 1
   # end of sample
 
-=== ����
+=== 参考
 
 Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
- * �ץ�����ޡ��Τ���� YAML ���� (õ����): [[url:http://jp.rubyist.net/magazine/?0013-YAML]]
+ * プログラマーのための YAML 入門 (探索編): [[url:http://jp.rubyist.net/magazine/?0013-YAML]]
 
 == class methods
 
@@ -53,11 +53,11 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 --- new(str) -> YAML::YPath
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param str YPath �ǥѡ�����ǽ�ʥѥ���ʸ����ǻ��ꤷ�ޤ���
+@param str YPath でパース可能なパスを文字列で指定します。
 
-��:
+例:
 
 #@since 1.9.3
   require 'syck'
@@ -73,15 +73,15 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 --- each_path(str) {|ypath| ...} -> Array
 
 #@since 1.9.2
-���� str �� [[c:Syck::YPath]] ��
+引数 str を [[c:Syck::YPath]] が
 #@else
-���� str �� [[c:YAML::YPath]] ��
+引数 str を [[c:YAML::YPath]] が
 #@end
-�����Ǥ���ʣ���Υѥ��˺ƹ��ۤ��ơ����γƥѥ����Ф��ƥ֥��å���ɾ�����ޤ���
+検索できる複数のパスに再構築して、その各パスに対してブロックを評価します。
 
-�ƥѥ����Ф��ƥ֥��å���ɾ��������̤�������֤��ޤ���
+各パスに対してブロックを評価した結果の配列を返します。
 
-��1: YAML::YPath.each_path ����Ѥ�����
+例1: YAML::YPath.each_path を使用する場合
 
 #@since 1.9.3
   require 'syck'
@@ -93,7 +93,7 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
     ...
   }
 
-��2: YAML::YPath.each_path ����Ѥ��ʤ����
+例2: YAML::YPath.each_path を使用しない場合
 
 #@since 1.9.3
   require 'syck'
@@ -108,28 +108,28 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 == instance methods
 --- segments -> [String]
 
-��������ѥ��� / �Ƕ��ڤä�ʸ�����������֤��ޤ���
+検索するパスを / で区切った文字列の配列を返します。
 
 --- segments=(val)
 
-��������ѥ���ʸ�������������ꤷ�ޤ���
+検索するパスを文字列の配列で設定します。
 
-@param val ʸ������������ꤷ�ޤ���
+@param val 文字列の配列を指定します。
 
 --- predicates -> [String]
 
-self.segments ��Ʊ�����֤��б����븡������ʸ�����������֤��ޤ���
+self.segments の同じ位置に対応する検索条件を文字列の配列で返します。
 
 --- predicates=(val)
 
-self.segments ��Ʊ�����֤��б����븡������ʸ�������������ꤷ�ޤ���
+self.segments の同じ位置に対応する検索条件を文字列の配列で設定します。
 
-@param val ��������ʸ���������ǻ��ꤷ�ޤ���
+@param val 検索条件を文字列の配列で指定します。
 
 --- flags -> nil
 
-���Ѥ���Ƥ��ޤ��󡣾�� nil ���֤��ޤ���
+使用されていません。常に nil を返します。
 
 --- flags=(val)
 
-���Ѥ���Ƥ��ޤ���
+使用されていません。

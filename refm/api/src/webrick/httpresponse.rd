@@ -3,22 +3,22 @@ require webrick/htmlutils
 require webrick/httputils
 require webrick/httpstatus
 
-HTTP �Υ쥹�ݥ󥹤�ɽ������Υ��饹���󶡤���饤�֥��Ǥ���
+HTTP のレスポンスを表すためのクラスを提供するライブラリです。
 
 = class WEBrick::HTTPResponse < Object
 
-HTTP �Υ쥹�ݥ󥹤�ɽ������Υ��饹�Ǥ���
+HTTP のレスポンスを表すためのクラスです。
 
-�̾� WEBrick::HTTPResponse ���֥������Ȥϥ����֥�åȤ� service �᥽�åɤ� do_XXX �᥽�åɤ�
-�����Ȥ���Ϳ�������ΤǤ��ꡢ�桼��������Ū����������ɬ�פϤ���ޤ���
+通常 WEBrick::HTTPResponse オブジェクトはサーブレットの service メソッドや do_XXX メソッドの
+引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
 
 == Class Methods
 
 --- new(config) -> WEBrick::HTTPResponse
 
-HTTPResponse ���֥������Ȥ����������֤��ޤ���
+HTTPResponse オブジェクトを生成して返します。
 
-@param config �������¸�����ϥå������ꤷ�ޤ���:HTTPVersion ��ɬ�ܤǤ���
+@param config 設定を保存したハッシュを指定します。:HTTPVersion は必須です。
 
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 
@@ -26,19 +26,19 @@ HTTPResponse ���֥������Ȥ����������֤��ޤ���
 
 --- [](field)    -> String
 
-�쥹�ݥ󥹤Υإå��γ����������Ƥ�ʸ������֤��ޤ���
+レスポンスのヘッダの該当する内容を文字列で返します。
 
-@param field �إå�̾��ʸ����ǻ��ꤷ�ޤ�����ʸ���Ⱦ�ʸ������̤��ޤ���
+@param field ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
   p res['date']   #=> "Sat, 27 Oct 2007 08:53:03 GMT"
 
 --- []=(field, val)
 
-�쥹�ݥ󥹤γ�������إå��� val �����ꤷ�ޤ���
+レスポンスの該当するヘッダに val を設定します。
 
-@param field �إå�̾��ʸ����ǻ��ꤷ�ޤ�����ʸ���Ⱦ�ʸ������̤��ޤ���
+@param field ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
-@param val �إå����ͤ���ꤷ�ޤ���to_s �᥽�åɤˤ�ä�ʸ������Ѵ�����ޤ���
+@param val ヘッダの値を指定します。to_s メソッドによって文字列に変換されます。
 
   require 'time'
   res['last-modified'] = Time.now.httpdate
@@ -47,19 +47,19 @@ HTTPResponse ���֥������Ȥ����������֤��ޤ���
      [[m:WEBrick::HTTPResponse#content_type]]
 
 --- body        -> String | IO
-���饤����Ȥ��֤�����(����ƥ��ƥ��ܥǥ�)���֤��ޤ���
+クライアントに返す内容(エンティティボディ)を返します。
 
-���Ȥ� chunked �Ǥ��äƤ� body ���ͤϥ���󥯷����ǤϤ���ޤ���
+自身が chunked であっても body の値はチャンク形式ではありません。
 
 --- body=(val)
 
-���饤����Ȥ��֤�����(����ƥ��ƥ��ܥǥ�)�򥻥åȤ��ޤ���
+クライアントに返す内容(エンティティボディ)をセットします。
 
-���Ȥ� chunked �Ǥ��äƤ� body ���ͤϥ���󥯷����ǤϤ���ޤ���
+自身が chunked であっても body の値はチャンク形式ではありません。
 
-@param val ��å������ܥǥ���ʸ���� [[c:IO]] ���֥������Ȥǻ��ꤷ�ޤ���
-           ���Ȥ� chunked �Ǥ��äƤ����󥯷����ˤ���ɬ�פϤ���ޤ���
-           Ŭ�ڤ˥���󥯷������󥳡��ǥ��󥰤���ޤ���
+@param val メッセージボディを文字列か [[c:IO]] オブジェクトで指定します。
+           自身が chunked であってもチャンク形式にする必要はありません。
+           適切にチャンク形式エンコーディングされます。
 
   require 'webrick'
   include WEBrick
@@ -67,7 +67,7 @@ HTTPResponse ���֥������Ȥ����������֤��ޤ���
   res.body = 'hoge'
   print res.to_s
 
-  #=> ���Ϸ��
+  #=> 出力結果
   HTTP/1.1 200 OK
   Connection: Keep-Alive
   Date: Sat, 27 Oct 2007 08:58:49 GMT
@@ -77,15 +77,15 @@ HTTPResponse ���֥������Ȥ����������֤��ޤ���
   hoge
 
 --- chunked?     -> bool
-���Ǥ���Х��饤����Ȥ��֤�����(����ƥ��ƥ��ܥǥ�)�� chunk ��ʬ���ޤ���
+真であればクライアントに返す内容(エンティティボディ)を chunk に分けます。
 
 --- chunked=(flag)
 
-�������ꤹ��ȥ��饤����Ȥ��֤�����(����ƥ��ƥ��ܥǥ�)�� chunk ��ʬ����褦�ˤʤ�ޤ���
+真に設定するとクライアントに返す内容(エンティティボディ)を chunk に分けるようになります。
 
-���Ȥ� [[m:WEBrick::HTTPResponse#request_http_version]] �� 1.0 �ʲ��Ǥ����硢�����ͤ�̵�뤵��ޤ���
+自身の [[m:WEBrick::HTTPResponse#request_http_version]] が 1.0 以下である場合、この値は無視されます。
 
-@param flag true ����ꤷ����硢�쥹�ݥ󥹤� chunk ��ʬ���ƥ��饤����Ȥ��֤��ޤ���
+@param flag true を指定した場合、レスポンスを chunk に分けてクライアントに返します。
 
   require 'webrick'
   include WEBrick
@@ -94,7 +94,7 @@ HTTPResponse ���֥������Ȥ����������֤��ޤ���
   res.chunked = true
   print res.to_s
 
-  #=> ���Ϸ��
+  #=> 出力結果
   HTTP/1.1 200 OK
   Connection: Keep-Alive
   Date: Sat, 27 Oct 2007 09:04:28 GMT
@@ -108,26 +108,26 @@ HTTPResponse ���֥������Ȥ����������֤��ޤ���
   #
 --- config    -> Hash
 
-���Ȥ������������˻��ꤵ�줿�ϥå�����֤��ޤ���
+自身が生成される時に指定されたハッシュを返します。
 
 #@since 1.8.2
 --- content_length         -> Integer | nil
 --- content_length=(len)
 
-Content-Length �إå����ͤ�������ɽ�����������Ǥ����ǥե���Ȥ� nil �Ǥ���
+Content-Length ヘッダの値を整数で表すアクセサです。デフォルトは nil です。
 
-: body �� String ���֥������ȤǤ�����
-  content_length ���ͤ� nil �ΤȤ� Content-Length �إå��ˤ�
-  body �Υ��������Ȥ��ޤ���nil �Ǥʤ��Ȥ� body �μºݤΥ������Ȥ����ͤ�Ʊ�����ɤ����θ��ڤϹԤ��ޤ���
-: body �� IO ���֥������ȤǤ�����
-  content_length ���ͤ� nil �ΤȤ� Content-Length �إå��ϥ쥹�ݥ󥹤˴ޤޤ줺��IO �������Ƥ��ɤ߹���
-  �Ǥ���򥨥�ƥ��ƥ��ܥǥ��Ȥ��ޤ���nil �Ǥʤ��Ȥ� IO ���� content_length �Х��Ȥ����ɤ߹��ߤ����
-  ����ƥ��ƥ��ܥǥ��Ȥ��ޤ���
+: body が String オブジェクトである場合
+  content_length の値が nil のとき Content-Length ヘッダには
+  body のサイズが使われます。nil でないとき body の実際のサイズとこの値が同じかどうかの検証は行われません。
+: body が IO オブジェクトである場合
+  content_length の値が nil のとき Content-Length ヘッダはレスポンスに含まれず、IO から全てを読み込ん
+  でそれをエンティティボディとします。nil でないとき IO から content_length バイトだけ読み込みそれを
+  エンティティボディとします。
 
-�ޤ� [[RFC:2616]] 4.4 ������줿 Content-Length �إå������äƤϤ����ʤ��������ƤϤޤ���ˤ�
-content_length ���ͤ�̵�뤵�� Content-Length �إå��ϥ쥹�ݥ󥹤˴ޤޤ�ޤ���
+また [[RFC:2616]] 4.4 で定められた Content-Length ヘッダを送ってはいけない場合に当てはまる時には
+content_length の値は無視され Content-Length ヘッダはレスポンスに含まれません。
 
-@param len �إå����ͤ������ǻ��ꤷ�ޤ���nil ����ꤹ�뤳�ȤϽ���ޤ���
+@param len ヘッダの値を整数で指定します。nil を指定することは出来ません。
 
   require 'webrick'
   include WEBrick
@@ -137,7 +137,7 @@ content_length ���ͤ�̵�뤵�� Content-Length �إå��ϥ쥹�ݥ󥹤˴ޤޤ�ޤ���
   res.content_length = 2
   print res.to_s
   
-  #=> ���Ϸ��
+  #=> 出力結果
   HTTP/1.1 200 OK
   Connection: Keep-Alive
   Date: Sat, 27 Oct 2007 12:04:32 GMT
@@ -147,13 +147,13 @@ content_length ���ͤ�̵�뤵�� Content-Length �إå��ϥ쥹�ݥ󥹤˴ޤޤ�ޤ���
   ho
 
 --- content_type         -> String | nil
-Content-Type �إå����ͤ��֤��ޤ���
+Content-Type ヘッダの値を返します。
 
 --- content_type=(val)
 
-Content-Type �إå����ͤ򥻥åȤ��ޤ���
+Content-Type ヘッダの値をセットします。
 
-@param val Content-Type �إå����ͤ�ʸ����ǻ��ꤷ�ޤ���
+@param val Content-Type ヘッダの値を文字列で指定します。
 
   res.content_type = "text/html"
 
@@ -162,34 +162,34 @@ Content-Type �إå����ͤ򥻥åȤ��ޤ���
 
 --- cookies    -> [WEBrick::Cookie]
 
-�쥹�ݥ󥹤� Set-Cookie �إå����ͤ�ɽ�� [[c:WEBrick::Cookie]] ���֥������Ȥ�����Ǥ���
-�쥹�ݥ󥹤˿����� Cookie ��ä��������Ϥ�������� [[c:WEBrick::Cookie]] ���֥������Ȥ�ä��ޤ���
+レスポンスの Set-Cookie ヘッダの値を表す [[c:WEBrick::Cookie]] オブジェクトの配列です。
+レスポンスに新たに Cookie を加えたい場合はこの配列に [[c:WEBrick::Cookie]] オブジェクトを加えます。
 
   res.cookies << WEBrick::Cookie.parse_set_cookie(k)
 
 --- each{|key, val| ... }
 
-�쥹�ݥ󥹤Υإå�̾�� key�����Ƥ� val �Ȥ��ƥ֥��å���ɾ�����ޤ���
+レスポンスのヘッダ名を key、内容を val としてブロックを評価します。
 
 --- filename            -> String | nil
 
-���Ȥ����Ƥ�����ե�����Τ���Ǥ�����ˡ����Υե�����̾���֤��ޤ���
-�ǥե���Ȥ� nil �Ǥ���
+自身の内容があるファイルのそれである場合に、そのファイル名を返します。
+デフォルトは nil です。
 
 --- filename=(file)
 
-���Ȥ����Ƥ�����ե�����Τ���Ǥ�����ˡ����Υե�����̾�򥻥åȤ��ޤ���
-�ǥե���Ȥ� nil �Ǥ���
+自身の内容があるファイルのそれである場合に、そのファイル名をセットします。
+デフォルトは nil です。
 
-@param file �ե�����̾��ɽ��ʸ����Ǥ���
+@param file ファイル名を表す文字列です。
 
 --- header     -> Hash
 
-�إå�̾�򥭡����إå����ͤ��ͤȤ���ϥå�����֤��ޤ����ϥå���Υ������ͤ�ʸ����Ǥ���
+ヘッダ名をキー、ヘッダの値を値とするハッシュを返します。ハッシュのキーも値も文字列です。
 
 --- http_version    -> WEBrick::HTTPVersion
 
-�쥹�ݥ󥹤� HTTP �ΥС�������ɽ�� [[c:WEBrick::HTTPVersion]] ���֥������Ȥ��֤��ޤ���
+レスポンスの HTTP のバージョンを表す [[c:WEBrick::HTTPVersion]] オブジェクトを返します。
 
   require 'webrick'
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
@@ -199,29 +199,29 @@ Content-Type �إå����ͤ򥻥åȤ��ޤ���
 --- keep_alive?        -> bool
 --- keep_alive         -> bool
 
-�쥹�ݥ󥹤� keep_alive ��ͭ���Ǥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
-�ǥե���ȤϿ��Ǥ���
+レスポンスの keep_alive が有効である場合は、真を返します。
+そうでない場合は偽を返します。
+デフォルトは真です。
 
 --- keep_alive=(flag)
 
-���򥻥åȤ���ȥ쥹�ݥ󥹤� keep_alive ��ͭ���ˤʤ�ޤ���
-�ǥե���ȤϿ��Ǥ���
+真をセットするとレスポンスの keep_alive が有効になります。
+デフォルトは真です。
 
-@param flag ������ꤹ��� Keep-Alive ��ͭ���ˤ��ޤ���
+@param flag 真を指定すると Keep-Alive を有効にします。
 
 --- reason_phrase         -> String | nil
-HTTP �Υ쥹�ݥ󥹤κǽ�ιԤ� reason phrase ���֤��ޤ���
-�����ͤ� nil �ξ�� reason phrase �� status ������������ޤ���
-�ǥե���Ȥ� nil �Ǥ���
+HTTP のレスポンスの最初の行の reason phrase を返します。
+この値が nil の場合 reason phrase は status から生成されます。
+デフォルトは nil です。
 
 --- reason_phrase=(val)
 
-HTTP �Υ쥹�ݥ󥹤κǽ�ιԤ� reason phrase �򥻥åȤ��ޤ���
-�����ͤ� nil �ξ�� reason phrase �� status ������������ޤ���
-�ǥե���Ȥ� nil �Ǥ���
+HTTP のレスポンスの最初の行の reason phrase をセットします。
+この値が nil の場合 reason phrase は status から生成されます。
+デフォルトは nil です。
 
-@param val reason phrase ��ɽ��ʸ�������ꤷ�ޤ���
+@param val reason phrase を表す文字列を指定します。
 
   require 'webrick'
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
@@ -230,70 +230,70 @@ HTTP �Υ쥹�ݥ󥹤κǽ�ιԤ� reason phrase �򥻥åȤ��ޤ���
   p res.reason_phrase    #=> "Not Found"
 
 --- request_http_version           -> WEBrick::HTTPVersion
-�ꥯ�����Ȥ� HTTP �С��������֤��ޤ���
-�ǥե���ȤǤϼ��Ȥ� [[m:WEBrick::HTTPResponse#http_version]] ���Ȥ��ޤ���
+リクエストの HTTP バージョンを返します。
+デフォルトでは自身の [[m:WEBrick::HTTPResponse#http_version]] が使われます。
 
 --- request_http_version=(ver)
 
-�ꥯ�����Ȥ� HTTP �С������򥻥åȤ��ޤ���
+リクエストの HTTP バージョンをセットします。
 
-@param ver �ꥯ�����Ȥ� HTTP �С������� [[c:WEBrick::HTTPVersion]] ���֥������Ȥǻ��ꤷ�ޤ���
+@param ver リクエストの HTTP バージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで指定します。
 
 --- request_method          -> String | nil
-�ꥯ�����Ȥ� HTTP �᥽�åɤ��֤��ޤ���
+リクエストの HTTP メソッドを返します。
 
 --- request_method=(method)
 
-�ꥯ�����Ȥ� HTTP �᥽�åɤ򥻥åȤ��ޤ���
-�ǥե���Ȥ� nil �Ǥ���
+リクエストの HTTP メソッドをセットします。
+デフォルトは nil です。
 
-@param method �ꥯ�����Ȥ� HTTP �᥽�åɤ�ʸ����ǻ��ꤷ�ޤ���
+@param method リクエストの HTTP メソッドを文字列で指定します。
 
 --- request_uri        -> URI | nil
-�ꥯ�����Ȥ� URI ���֤��ޤ���
+リクエストの URI を返します。
 
 --- request_uri=(uri)
 
-�ꥯ�����Ȥ� URI �򥻥åȤ��ޤ���
-�ǥե���Ȥ� nil �Ǥ���
+リクエストの URI をセットします。
+デフォルトは nil です。
 
-@param uri �ꥯ�����Ȥ� URI �� [[c:URI]] ���֥������Ȥǻ��ꤷ�ޤ���
+@param uri リクエストの URI を [[c:URI]] オブジェクトで指定します。
 
 --- sent_size    -> Integer
 
-���饤����Ȥ�����줿����(����ƥ��ƥ��ܥǥ�)�ΥХ��ȿ���ɽ���������֤��ޤ���
+クライアントに送られた内容(エンティティボディ)のバイト数を表す整数を返します。
 
 --- set_error(status, backtrace = false)    -> ()
 
-���Ȥ�����(����ƥ��ƥ��ܥǥ�)����ꤵ�줿 status �Υ��顼�ڡ����ˤ��ޤ���
+自身の内容(エンティティボディ)を指定された status のエラーページにします。
 
-@param status [[c:WEBrick::HTTPStatus::Status]] �Υ��֥��饹�����̤��㳰���饹����ꤷ�ޤ���
+@param status [[c:WEBrick::HTTPStatus::Status]] のサブクラスか一般の例外クラスを指定します。
 
-@param backtrace true ����ꤷ�����Хå��ȥ졼���򥨥顼�ڡ����˽��Ϥ��ޤ���
+@param backtrace true を指定した場合バックトレースをエラーページに出力します。
 
 --- set_redirect(status, url)    -> ()
 
-���ꤵ�줿 url �˥�����쥯�Ȥ��뤿��Υإå�������(����ƥ��ƥ��ܥǥ�)��
-���ꤷ�㳰 status ��ȯ�������ޤ���
+指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を
+設定し例外 status を発生させます。
 
-@param status [[c:WEBrick::HTTPStatus::Redirect]] ����ꤷ�ޤ���
+@param status [[c:WEBrick::HTTPStatus::Redirect]] を指定します。
 
-@param url URL ����ꤷ�ޤ���
+@param url URL を指定します。
 
-��:
+例:
   res.set_redirect WEBrick::HTTPStatus::TemporaryRedirect
 
 --- status           -> Integer
 
-�쥹�ݥ󥹤Υ��ơ����������ɤ�ɽ���������֤��ޤ���
-�ǥե���Ȥ� [[m:WEBrick::HTTPStatus::RC_OK]] �Ǥ���
+レスポンスのステータスコードを表す整数を返します。
+デフォルトは [[m:WEBrick::HTTPStatus::RC_OK]] です。
 
 --- status=(status)
 
-�쥹�ݥ󥹤Υ��ơ����������ɤ������ǻ��ꤷ�ޤ���
-reason_phrase ��Ŭ�ڤʤ�Τ����ꤵ��ޤ���
+レスポンスのステータスコードを整数で指定します。
+reason_phrase も適切なものに設定されます。
 
-@param status ���ơ����������ɤ������ǻ��ꤷ�ޤ���
+@param status ステータスコードを整数で指定します。
 
   require 'webrick'
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
@@ -303,7 +303,7 @@ reason_phrase ��Ŭ�ڤʤ�Τ����ꤵ��ޤ���
 
 --- status_line    -> String
 
-HTTP �Υ��ơ������饤��� CR+LF �դ�ʸ������֤��ޤ���
+HTTP のステータスラインを CR+LF 付き文字列で返します。
 
   require 'webrick'
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
@@ -313,7 +313,7 @@ HTTP �Υ��ơ������饤��� CR+LF �դ�ʸ������֤��ޤ���
 
 --- to_s    -> String
 
-�ºݤ˥��饤����Ȥ�������ǡ�����ʸ����Ȥ����֤��ޤ���
+実際にクライアントに送られるデータを文字列として返します。
 
   require 'webrick'
   include WEBrick
@@ -321,7 +321,7 @@ HTTP �Υ��ơ������饤��� CR+LF �դ�ʸ������֤��ޤ���
   res.body = 'hoge'
   print res.to_s
 
-  #=> ���Ϸ��
+  #=> 出力結果
   HTTP/1.1 200 OK
   Connection: Keep-Alive
   Date: Sat, 27 Oct 2007 08:58:49 GMT

@@ -1,4 +1,4 @@
-���� URI �ȥ��饹���Ϣ�դ��뤿��Υ��֥饤�֥��Ǥ���
+タグ URI とクラスを関連付けるためのサブライブラリです。
 
 #@since 1.9.2
 = reopen Syck
@@ -10,11 +10,11 @@
 
 --- tag_class(tag, cls) -> ()
 
-tag �ǻ��ꤷ������ URI �ˡ�cls �ǻ��ꤷ�����饹���Ϣ�դ��ޤ���
+tag で指定したタグ URI に　cls で指定したクラスを関連付けます。
 
-@param tag ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param tag タグ URI を文字列で指定します。
 
-@param cls ��Ϣ�դ��륯�饹���֥������Ȥ���ꤷ�ޤ���
+@param cls 関連付けるクラスオブジェクトを指定します。
 
 #@since 1.9.2
 @see [[m:Syck.tagged_classes]]
@@ -24,9 +24,9 @@ tag �ǻ��ꤷ������ URI �ˡ�cls �ǻ��ꤷ�����饹���Ϣ�դ��ޤ���
 
 --- tagged_classes -> {String => Class}
 
-���� URI �ȡ����줬�б����륯�饹�ΰ������֤��ޤ���
+タグ URI と、それが対応するクラスの一覧を返します。
 
-��:
+例:
 
  require "pp"
 #@since 1.9.3

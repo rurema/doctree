@@ -1,25 +1,25 @@
 = class RSS::Maker::ChannelBase::SkipDaysBase < Object
 
-RSS 0.91/2.0¤òÀ¸À®¤¹¤ë¤È¤­¤À¤±ÍøÍÑ¤µ¤ì¤Þ¤¹¡¥
+RSS 0.91/2.0ã‚’ç”Ÿæˆã™ã‚‹ã¨ãã ã‘åˆ©ç”¨ã•ã‚Œã¾ã™ï¼Ž
 
 == Instance Methods
 
 --- new_day
 #@todo
-¿·¤·¤¯day¤òºîÀ®¤·¡¤ÊÖ¤·¤Þ¤¹¡¥ºîÀ®¤µ¤ì¤¿
-day¤Ïday¥ê¥¹¥È¤ÎºÇ¸å
-¤ËÄÉ²Ã¤µ¤ì¤Æ¤¤¤Þ¤¹¡¥
+æ–°ã—ãdayã‚’ä½œæˆã—ï¼Œè¿”ã—ã¾ã™ï¼Žä½œæˆã•ã‚ŒãŸ
+dayã¯dayãƒªã‚¹ãƒˆã®æœ€å¾Œ
+ã«è¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ï¼Ž
 
 = class RSS::Maker::RSS09::Channel::SkipDays < RSS::Maker::ChannelBase::SkipDaysBase
 = class RSS::Maker::RSS20::Channel::SkipDays < RSS::Maker::RSS09::Channel::SkipDays
 
 = class RSS::Maker::ChannelBase::SkipDaysBase::DayBase < Object
 
-day¤Ï
-maker.channel.skipDays.new_day¤ÇºîÀ®¤µ¤ì¤¿¥ª
-¥Ö¥¸¥§¥¯¥È¤È¤·¤Þ¤¹¡¥
+dayã¯
+maker.channel.skipDays.new_dayã§ä½œæˆã•ã‚ŒãŸã‚ª
+ãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¾ã™ï¼Ž
 
-content¤ò»ØÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥
+contentã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼Ž
 
 == Instance Methods
 

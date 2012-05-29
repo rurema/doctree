@@ -1,35 +1,35 @@
 = module OptionParser::Arguable
 
-��� [[m:Kernel::ARGV]] ���ĥ���뤿����Ѱդ��줿�⥸�塼��Ǥ���
-[[lib:optparse]] �� require ���뤳�Ȥˤ�ꡢARGV ��
-OptionParser::Arguable �� [[m:Object#extend]] ���ޤ���
+主に [[m:Kernel::ARGV]] を拡張するために用意されたモジュールです。
+[[lib:optparse]] を require することにより、ARGV は
+OptionParser::Arguable を [[m:Object#extend]] します。
 
-���ޥ�ɥ饤�������ɽ��ʸ���������򡢳�ĥ���뤿��ˤ�Ȥ����Ȥ��Ǥ��ޤ���
+コマンドライン引数を表す文字列の配列を、拡張するためにも使うことができます。
 
 == Instance Methods
 
 --- options=(opt)
 
-���Ȥ�ѡ������뤿��� [[c:OptionParser]] ���֥������Ȥ򥻥åȤ��ޤ���
+自身をパースするための [[c:OptionParser]] オブジェクトをセットします。
 
-@param opt ���Ȥ�ѡ������� [[c:OptionParser]] �����뤤�� nil �� false ����ꤷ�ޤ���
-           nil �� false �Ǥ����硢���Ȥ� options= �᥽�åɤ� options �᥽�åɤ�
-           undef ���ޤ���
+@param opt 自身をパースする [[c:OptionParser]] 、あるいは nil か false を指定します。
+           nil か false である場合、自身の options= メソッドと options メソッドを
+           undef します。
 
 --- options                -> OptionParser
 --- options{|opt| ... }    -> object | nil
 
-���Ȥ�ѡ������뤿��� [[c:OptionParser]] ���֥������Ȥ��֤��ޤ���
-���ƤӽФ����˼�ưŪ����������ޤ���
-���� [[m:OptionParser#default_argv]] �ˤ� self �����åȤ���Ƥ��ޤ���
+自身をパースするための [[c:OptionParser]] オブジェクトを返します。
+初回呼び出し時に自動的に生成されます。
+この [[m:OptionParser#default_argv]] には self がセットされています。
 
-�֥��å���Ϳ�������ϡ�[[c:OptionParser]] ������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-�֥��å��μ¹Է�̤��֤��ޤ���
-�֥��å��μ¹������ [[c:OptionParser::ParseError]]
-��ȯ���������ϡ����� rescue �������顼��å���������Ϥ���
-nil ���֤��ޤ���
+ブロックを与えた場合は、[[c:OptionParser]] を引数としてブロックを実行します。
+ブロックの実行結果を返します。
+ブロックの実行途中で [[c:OptionParser::ParseError]]
+が発生した場合は、全て rescue し、エラーメッセージを出力し、
+nil を返します。
 
-��:
+例:
 
  require 'optparse'
  
@@ -43,14 +43,14 @@ nil ���֤��ޤ���
 --- order!               -> [String]
 --- order!{|s| ... }     -> [String]
 
-���Ȥ��˲�Ū�˥ѡ��������ѡ������줺�˻Ĥä�������ʸ���������Ȥ����֤��ޤ���
-[[m:OptionParser#order!]] �򻲾Ȥ��Ʋ�������
+自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
+[[m:OptionParser#order!]] を参照して下さい。
 
-@raise OptionParser::ParseError ���ȤΥѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹���㳰�ˤʤ�ޤ���
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
-��:
+例:
 
   require 'optparse'
   
@@ -61,14 +61,14 @@ nil ���֤��ޤ���
 
 --- permute!             -> [String]
 
-���Ȥ��˲�Ū�˥ѡ��������ѡ������줺�˻Ĥä�������ʸ���������Ȥ����֤��ޤ���
-[[m:OptionParser#permute!]] �򻲾Ȥ��Ʋ�������
+自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
+[[m:OptionParser#permute!]] を参照して下さい。
 
-@raise OptionParser::ParseError ���ȤΥѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹���㳰�ˤʤ�ޤ���
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
-��:
+例:
 
   require 'optparse'
   
@@ -79,14 +79,14 @@ nil ���֤��ޤ���
 
 --- parse!               -> [String]
 
-���Ȥ��˲�Ū�˥ѡ��������ѡ������줺�˻Ĥä�������ʸ���������Ȥ����֤��ޤ���
-[[m:OptionParser#parse!]] �򻲾Ȥ��Ʋ�������
+自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
+[[m:OptionParser#parse!]] を参照して下さい。
 
-@raise OptionParser::ParseError ���ȤΥѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹���㳰�ˤʤ�ޤ���
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
-��:
+例:
 
   require 'optparse'
   
@@ -98,32 +98,32 @@ nil ���֤��ޤ���
 #@since 1.8.5
 --- getopts(short_opt, *long_opt)    -> Hash
 
-���ꤵ�줿 short_opt �� long_opt �˱����Ƽ��Ȥ�ѡ���������̤� Hash �Ȥ����֤��ޤ���
+指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
 
-���ޥ�ɥ饤��� - �⤷���� -- ����ꤷ����硢����ʹߤβ��Ϥ�Ԥʤ��ޤ���
+コマンドラインに - もしくは -- を指定した場合、それ以降の解析を行ないません。
 
-@param short_opt ���硼�ȥ͡���Υ��ץ����(-f �� -fx)��ʸ����ǻ��ꤷ�ޤ������ץ���� -f �� -x ��
-                 2�Ĥξ��� "fx" ���ͤ˻��ꤷ�ޤ��������ǥ��ץ���󤬤ʤ��Ȥ��϶�ʸ�������ꤷ�ޤ���
-                 ���ץ���󤬰�����Ȥ����ľ��� ":" ���դ��ޤ���
+@param short_opt ショートネームのオプション(-f や -fx)を文字列で指定します。オプションが -f と -x の
+                 2つの場合は "fx" の様に指定します。ここでオプションがないときは空文字列を指定します。
+                 オプションが引数をとる場合は直後に ":" を付けます。
 
-@param long_opt ���󥰥͡���Υ��ץ����(--version �� --bufsize=512)��ʸ����ǻ���򤷤ޤ���
-                ���ץ���󤬰�����Ȥ���ϸ���� ":" ���դ��ޤ���
-                ���ץ����ΰ����Υǥե�����ͤ� ":" ��ľ��˻��ꤹ�뤳�Ȥ��Ǥ��ޤ���
-                �㤨�С�"bufsize:1024" �Ȥʤ�ޤ���
+@param long_opt ロングネームのオプション(--version や --bufsize=512)を文字列で指定をします。
+                オプションが引数をとる場合は後ろに ":" を付けます。
+                オプションの引数のデフォルト値を ":" の直後に指定することができます。
+                例えば、"bufsize:1024" となります。
 
-@raise OptionParser::ParseError ���ȤΥѡ����˼��Ԥ�����硢ȯ�����ޤ���
-                                �ºݤ� OptionParser::ParseError �Υ��֥�
-                                �饹���㳰�ˤʤ�ޤ���
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
-��:
+例:
 
- # t.rb ������
+ # t.rb の内容
  require 'optparse'
  params = ARGV.getopts("ab:", "foo", "bar:", "bufsize:1024")
  p params
 
- # �¹Է��
+ # 実行結果
  $ ruby t.rb -b 1 --foo  --bar xxx -- -a
- {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false �Ǥ��뤳�Ȥ����ա�
+ {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
 
 #@end

@@ -1,11 +1,11 @@
 require digest
 
-NIST (the US' National Institute of Standards and Technology) ¤ÎSHA-1
-Secure Hash Algorithm¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+NIST (the US' National Institute of Standards and Technology) ã®SHA-1
+Secure Hash Algorithmã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Digest::SHA1 < Digest::Base
 
-NIST (the US' National Institute of Standards and Technology) ¤Î
-SHA-1 Secure Hash Algorithm¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
-FIPS PUB 180-1¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
+NIST (the US' National Institute of Standards and Technology) ã®
+SHA-1 Secure Hash Algorithmã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+FIPS PUB 180-1ã«è¨˜è¿°ã•ã‚Œã¦ã„ã¾ã™ã€‚
 

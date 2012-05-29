@@ -3,44 +3,44 @@
 =begin
 = TkCore
 
-���Υ⥸�塼��Υ��󥹥��󥹥᥽�åɤϡ����̡��⥸�塼��((<Tk>))�Υ�
-���塼��᥽�åɤȤ��ƻ��Ѥ���ޤ���
+このモジュールのインスタンスメソッドは、普通、モジュール((<Tk>))のモ
+ジュールメソッドとして使用されます。
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
-
-((<TkComm>))
-
-== extend���Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkComm>))
 
-== ���饹�᥽�å�:
+== extendしているモジュール:
+
+((<TkComm>))
+
+== クラスメソッド:
 
 --- TkCore.callback(arg)
 #@todo
 
-== �᥽�å�:
+== メソッド:
 
 --- TkCore#callback_break
 #@todo
-    �㳰((<TkCallbackBreak>))��ȯ�������ޤ���
+    例外((<TkCallbackBreak>))を発生させます。
 
 --- TkCore#callback_continue
 #@todo
-    �㳰((<TkCallbackContinue>))��ȯ�������ޤ���
+    例外((<TkCallbackContinue>))を発生させます。
 
 --- TkCore#after(ms, cmd=Proc.new)
 #@todo
-    ((|ms|))�ߥ��ø�ˡ�������Хå��ؿ�((|cmd|))��¹Ԥ��ޤ���((|ms|))��
-    ʸ����(({"idle"}))�Ǥ����硢������ץȤ������Ԥ��ʤɥ����ɥ���֤ˤʤ�
-    ���Ȥ���((|cmd|))��¹Ԥ��ޤ���
+    ((|ms|))ミリ秒後に、コールバック関数((|cmd|))を実行します。((|ms|))が
+    文字列(({"idle"}))である場合、スクリプトが入力待ちなどアイドル状態になっ
+    たときに((|cmd|))を実行します。
 
-    ������Хå��ؿ��μ¹Բ������ꤹ��ʤɡ����ʣ���ʥ���������Ԥ���
-    ������((<TkAfter>))����Ѥ��Ƥ���������
+    コールバック関数の実行回数を指定するなど、より複雑なタイマ操作を行いた
+    い場合は((<TkAfter>))を使用してください。
 
 --- TkCore#after_idle(cmd=Proc.new)
 #@todo
-    ((<TkCore#after>))(({('idle', cmd)})) ��Ʊ���Ǥ���
+    ((<TkCore#after>))(({('idle', cmd)})) と同じです。
 
 --- TkCore#clock_clicks(ms=nil)
 #@todo
@@ -59,13 +59,13 @@
 
 --- TkCore#clock_seconds
 #@todo
-    (({Time.now.to_i})) ��Tcl�ǤǤ������Υ᥽�åɤϤ��ޤ�ɬ�פʤ��Ǥ��礦��
+    (({Time.now.to_i})) のTcl版です。このメソッドはあまり必要ないでしょう。
 
 --- TkCore#scaling
 --- TkCore#scaling(scale)
 #@todo
-    ((<�롼�ȥ��������å�>))��ɽ�������ǥ����ץ쥤�Υ�������򻲾ȡ�����
-    ���ޤ�����������ϥݥ����(1/72�����)������Υԥ�������Ǥ���
+    ((<ルートウィジェット>))が表示されるディスプレイのスケールを参照／設定
+    します。スケールはポイント(1/72インチ)あたりのピクセル数です。
 
       require 'tk'
       print Tk.scaling * 72, " dpi monitor\n"
@@ -75,22 +75,22 @@
 --- TkCore#scaling_displayof(win)
 --- TkCore#scaling_displayof(win, scale)
 #@todo
-    ((|win|))��ɽ�����Ƥ���ǥ����ץ쥤�Υ�������򻲾ȡ����ꤷ�ޤ���
+    ((|win|))を表示しているディスプレイのスケールを参照／設定します。
 
 --- TkCore#appname(name=None)
 #@todo
-    ���ץꥱ�������̾��((|name|))�ˤ��ޤ�����ʸ���ǻϤޤ륢�ץꥱ�������
-    ̾�ϵ�����ޤ���((-�ȥޥ˥奢��˽񤤤Ƥ��뤬����ϤǤ���ߤ���-))��
+    アプリケーション名を((|name|))にします。大文字で始まるアプリケーション
+    名は許されません((-とマニュアルに書いているが指定はできるみたい-))。
 
-    �������ά����ȥ��ץꥱ�������̾���֤��ޤ���
+    引数を省略するとアプリケーション名を返します。
 
-    ���ץꥱ�������̾�ϡ�((<TkCore#appsend>))�ǻ��Ѥ���ޤ���
+    アプリケーション名は、((<TkCore#appsend>))で使用されます。
 
-    ���ץꥱ�������̾�Ͼ�˰�դˤʤ�褦��Ĵ������ޤ������ꤷ�����ץꥱ��
-    �����̾������¸�ߤ����硢���ץꥱ�������̾��" #N"�η��������֤���
-    �����ޤ���
+    アプリケーション名は常に一意になるように調整されます。指定したアプリケー
+    ション名が既に存在する場合、アプリケーション名に" #N"の形式で通番が付
+    けられます。
 
-    ���ץꥱ�������̾�Υǥե���Ȥ�"tk"�Ǥ���
+    アプリケーション名のデフォルトは"tk"です。
 
 --- TkCore#appsend(interp, async, *args)
 #@todo
@@ -106,11 +106,11 @@
 
 --- TkCore#info(*args)
 #@todo
-    Tcl���󥿥ץ꥿������������֤��ޤ���
+    Tclインタプリタの内部情報を返します。
 
-    ��1�����Ǿ���μ������ꤷ�ޤ�������ϰʲ��Τ����줫��ʸ����Ǥ�����
-    ��ΰ�������1�����ˤ�äƤ��줾��ۤʤ�ޤ���(�ܺ٤�info(n)�򻲾Ȥ���
-    ��������)
+    第1引数で情報の種類を指定します。これは以下のいずれかの文字列です。残
+    りの引数は第1引数によってそれぞれ異なります。(詳細はinfo(n)を参照して
+    ください)
 
       *"args"
       *"body"
@@ -134,13 +134,13 @@
 
 --- TkCore#mainloop
 #@todo
-    Ruby/TK�Υᥤ��롼�פ�¹Ԥ��ޤ������٥�Ȥδƻ�ȥ�����Хå��ؿ���
-    �¹ԤϤ��٤Ƥ��Υ᥽�åɤ������ǹԤ��ޤ������äơ�Ruby/Tk������ץ�
-    �κǸ�Ϥ��Υ᥽�åɤθƤӽФ��ˤʤ�ޤ���
+    Ruby/TKのメインループを実行します。イベントの監視とコールバック関数の
+    実行はすべてこのメソッドの内部で行われます。従って、Ruby/Tkスクリプト
+    の最後はこのメソッドの呼び出しになります。
 
 --- TkCore#event_generate(window, context, keys=nil)
 #@todo
-    ((<���٥��>))((|context|))��((|window|))��ȯ�������ޤ���
+    ((<イベント>))((|context|))を((|window|))で発生させます。
 
       require "tk"
       b = TkButton.new {
@@ -157,11 +157,11 @@
 
       Tk.mainloop
 
-    ((|context|)) ��"<���ۥ��٥��̾>"�Ȥ���ʸ����((<TkVirtualEvent>))��
-    ���󥹥��󥹤���ꤹ�뤳�Ȥ�((<���ۥ��٥��>))��ȯ�������뤳�Ȥ�Ǥ���
-    ����
+    ((|context|)) に"<仮想イベント名>"という文字列か((<TkVirtualEvent>))の
+    インスタンスを指定することで((<仮想イベント>))を発生させることもできま
+    す。
 
-    ��ά��ǽ�ʰ���((|keys|))�ˤϰʲ��򥭡��ˤ����ϥå������ꤷ�ޤ���
+    省略可能な引数((|keys|))には以下をキーにしたハッシュを指定します。
 
      *"above"
      *"borderwidth"
@@ -186,29 +186,29 @@
      *"width"
      *"when"
 
-      ���ꤷ�����٥�Ȥ�ɤΥ����ߥ󥰤�ȯ�������뤫��ʲ��Τ����줫�ǻؼ����ޤ���
+      指定したイベントをどのタイミングで発生させるかを以下のいずれかで指示します。
       *"now"
 
-       ¨�¤˥��٥�Ȥ�ȯ�������ޤ�(�ǥե����)
+       即座にイベントを発生させます(デフォルト)
       *"tail"
 
-       ¾�Υ��٥�Ȥ����塼��ί�äƤ���Х��٥�ȥ��塼�κǸ�˻��ꤷ������
-       ��Ȥ��֤��ޤ���
+       他のイベントがキューに溜っていればイベントキューの最後に指定したイベ
+       ントを置きます。
       *"head"
 
-       ¾�Υ��٥�Ȥ����塼��ί�äƤ���Х��٥�ȥ��塼����Ƭ�˻��ꤷ������
-       ��Ȥ��֤��ޤ���
+       他のイベントがキューに溜っていればイベントキューの先頭に指定したイベ
+       ントを置きます。
       *"mark"
 
-       ¾�Υ��٥�Ȥ����塼��ί�äƤ���Х��٥�ȥ��塼����Ƭ�˻��ꤷ������
-       ��Ȥ��֤��ޤ��������������塼���"mark"�������٥�Ȥ�����Ф��Υ���
-       ��Ȥ������֤���ޤ���
+       他のイベントがキューに溜っていればイベントキューの先頭に指定したイベ
+       ントを置きます。ただし、キュー内に"mark"したイベントがあればそのイベ
+       ントよりも後に置かれます。
      *"x"
      *"y"
 
 --- TkCore#messageBox(keys)
 #@todo
-    ����((|keys|))�ˤϰʲ��򥭡��ˤ����ϥå������ꤷ�ޤ���
+    引数((|keys|))には以下をキーにしたハッシュを指定します。
 
      *"default"
      *"icon"
@@ -220,9 +220,9 @@
 --- TkCore#getOpenFile(keys=nil)
 --- TkCore#getSaveFile(keys=nil)
 #@todo
-    �����ɡ��������Ѥ˥ե���������򤹤�����������ܥå����Ǥ���
+    ロード／セーブ用にファイルを選択するダイアログボックスです。
 
-    ����((|keys|))�ˤϰʲ��򥭡��ˤ����ϥå������ꤷ�ޤ���
+    引数((|keys|))には以下をキーにしたハッシュを指定します。
 
      *"defaultextension"
      *"filetypes"
@@ -231,34 +231,34 @@
      *"parent"
      *"title"
 
-    ���򤷤��ե�����̾���֤��ޤ����ե�����̾���򤬥���󥻥뤵�줿���϶�
-    ʸ����(({""}))���֤��ޤ���
+    選択したファイル名を返します。ファイル名選択がキャンセルされた場合は空
+    文字列(({""}))を返します。
 
 --- TkCore#chooseColor(keys=nil)
 #@todo
-    �������򤹤뤿��Υ����������ܥå����Ǥ���
+    色を選択するためのダイアログボックスです。
 
-    ����((|keys|))�ˤϰʲ��򥭡��ˤ����ϥå������ꤷ�ޤ���
+    引数((|keys|))には以下をキーにしたハッシュを指定します。
 
      *"initialcolor"
      *"parent"
      *"title"
 
-    ���򤷤�����"#RRGGBB"�η�����ɽ����ʸ������֤��ޤ����������򤬥����
-    ���뤵�줿���϶�ʸ����(({""}))���֤��ޤ���
+    選択した色を"#RRGGBB"の形式で表した文字列で返します。色の選択がキャン
+    セルされた場合は空文字列(({""}))を返します。
 
 --- TkCore#chooseDirectory(keys = nil)
 #@todo
 
 --- TkCore#tk_call(*args)
 #@todo
-    ����((|args|))��((<TkComm#_get_eval_string>))�᥽�åɤ�Tclʸ������Ѵ�
-    ����Tcl/Tk���ޥ�ɤȤ��Ƽ¹Ԥ��ޤ���
+    引数((|args|))を((<TkComm#_get_eval_string>))メソッドでTcl文字列に変換
+    し、Tcl/Tkコマンドとして実行します。
 
-== ���:
+== 定数:
 
 --- TkCore::INTERP
 #@todo
-    Tcl/Tk���󥿥ץ꥿(((<TclTkIp>))�Υ��󥹥���)�Ǥ���
+    Tcl/Tkインタプリタ(((<TclTkIp>))のインスタンス)です。
 
 =end

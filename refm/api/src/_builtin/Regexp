@@ -1,54 +1,54 @@
 = class Regexp < Object
 
-����ɽ���Υ��饹������ɽ���Υ�ƥ��ϥ���å���ǰϤ������
-�ǵ��Ҥ��ޤ���
+正規表現のクラス。正規表現のリテラルはスラッシュで囲んだ形式
+で記述します。
 
   /^this is regexp/
 
-Regexp.new(string) ��Ȥä�����ɽ�����֥������Ȥ�ưŪ����������
-���Ȥ�Ǥ��ޤ���
+Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
+こともできます。
 
   str = "this is regexp"
   rp1 = Regexp.new("^this is regexp")
   p rp1 =~ str           #=> 0
   p Regexp.last_match[0] #=> "this is regexp"
 
-[[d:spec/regexp]] �� [[ref:d:spec/literal#regexp]] �⻲�Ȥ��Ƥ���������
+[[d:spec/regexp]] や [[ref:d:spec/literal#regexp]] も参照してください。
 
 == Class Methods
 
 --- compile(string, option = nil, code = nil) -> Regexp
 --- new(string, option = nil, code = nil) -> Regexp
 
-ʸ���� string �򥳥�ѥ��뤷������ɽ�����֥������Ȥ����������֤��ޤ���
+文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
 
 #@since 1.8.0
-������������ɽ���Ǥ������������ʣ�������֤��ޤ��������軰�����Ϸٹ�ξ�̵�뤵��ޤ���
+第一引数が正規表現であれば第一引数を複製して返します。第二、第三引数は警告の上無視されます。
 #@end
 
-@param string ����ɽ����ʸ����Ȥ���Ϳ���ޤ���
+@param string 正規表現を文字列として与えます。
 
 @param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],  
               [[m:Regexp::EXTENDED]] 
-              �������¤���ꤷ�ޤ���
-              [[c:Fixnum]] �ʳ��Ǥ���п����ͤλ���Ȥ��Ƹ��ʤ���
-              ����(nil, false �ʳ�)�Ǥ����
-              [[m:Regexp::IGNORECASE]] �λ����Ʊ���ˤʤ�ޤ���
+              の論理和を指定します。
+              [[c:Fixnum]] 以外であれば真偽値の指定として見なされ
+              、真(nil, false 以外)であれば
+              [[m:Regexp::IGNORECASE]] の指定と同じになります。
 
 #@since 1.9.1
 #@since 1.9.2
-@param code "n", "N" ��Ϳ����줿���ˤϡ��������줿����ɽ���Υ��󥳡��ǥ��󥰤� ASCII-8BIT �ˤʤ�ޤ���
-            ����ʳ��λ���Ϸٹ����Ϥ��ޤ���
+@param code "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
+            それ以外の指定は警告を出力します。
 #@else
-@param code "n" ��Ϳ����줿���ˤϡ��������줿����ɽ���Υ��󥳡��ǥ��󥰤� ASCII-8BIT �ˤʤ�ޤ���
-            ����ʳ��λ���Ϸٹ����Ϥ��ޤ���
+@param code "n" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
+            それ以外の指定は警告を出力します。
 #@end
 #@else
-@param code ���ΰ�����Ϳ����줿���� [[m:$KCODE]] ���ͤˤ�����餺�����ꤵ�줿ʸ�������ɤǥޥå���Ԥ��ޤ���
-            ʸ�������ɤ� [[m:$KCODE]] �ؤ�������Ʊ�ͤ�ʸ��������κǽ�ΰ�ʸ���Ƿ��ꤵ��ޤ���
+@param code この引数が与えられた場合は [[m:$KCODE]] の値にかかわらず、指定された文字コードでマッチを行います。
+            文字コードは [[m:$KCODE]] への代入と同様に文字列引数の最初の一文字で決定されます。
 #@end
 
-@raise  RegexpError ����ɽ���Υ���ѥ���˼��Ԥ������ȯ�����ޤ���
+@raise  RegexpError 正規表現のコンパイルに失敗した場合発生します。
 
   str = "This is Regexp"
   t1 = Regexp.compile("this is regexp", Regexp::IGNORECASE)
@@ -56,17 +56,17 @@ Regexp.new(string) ��Ȥä�����ɽ�����֥������Ȥ�ưŪ����������
   puts $~ #=> This is Regexp 
 
   t2 = Regexp.compile('
-	this         # �����ϻ��Ѥ���ʤ�
+	this         # ここは使用されない
 	\ is
-	\ regexp     # ��������Ѥ���ʤ�
+	\ regexp     # ここも使用されない
   ', Regexp::EXTENDED | Regexp::IGNORECASE)
   t2.match(str)
   puts Regexp.last_match #=> This is Regexp
 
-  str = "�դ뤤����\n���鷺�ȤӤ���\n�ߤ��Τ���"
-  t2 = Regexp.compile("�դ�.*?��", Regexp::MULTILINE)
-  puts t2.match(str)[0]  #=> �դ뤤����
-                         #=> ���鷺��
+  str = "ふるいけや\nかわずとびこむ\nみずのおと"
+  t2 = Regexp.compile("ふる.*?と", Regexp::MULTILINE)
+  puts t2.match(str)[0]  #=> ふるいけや
+                         #=> かわずと
 
 #@until 1.9.1
 @see [[m:$KCODE]]
@@ -80,20 +80,20 @@ Regexp.new(string) ��Ȥä�����ɽ�����֥������Ȥ�ưŪ����������
 --- quote(string, kcode = $KCODE) -> String
 #@end
 
-string ���������ɽ���ˤ��������̤ʰ�̣�����ʸ����ľ���˥�
-��������ʸ��(�Хå�����å���)����������ʸ������֤��ޤ���
+string の中で正規表現において特別な意味を持つ文字の直前にエ
+スケープ文字(バックスラッシュ)を挿入した文字列を返します。
 
 #@until 1.9.1
-��ά��ǽ�ʰ��� kcode ��ʸ�����ʸ�������ɤ���ꤷ�ޤ�
-(��ά���� [[m:$KCODE]] ���ͤ����Ѥ���ޤ�)��
+省略可能な引数 kcode で文字列の文字コードを指定します
+(省略時は [[m:$KCODE]] の値が使用されます)。
 
-ʸ�������ɤλ���� [[m:$KCODE]] ��Ʊ�ͤ˹Ԥ��ޤ���
+文字コードの指定は [[m:$KCODE]] と同様に行います。
 #@end
 
-@param string ����ɽ���ˤ��������̤ʰ�̣����ʸ������ʸ�������ꤷ�ޤ���
+@param string 正規表現において特別な意味をもつ文字をもつ文字列を指定します。
 
 #@until 1.9.1
-@param kcode ʸ�������ɤ�ʸ����ǻ��ꤷ�ޤ���ʸ�������ɤλ���� [[m:$KCODE]] ��Ʊ�ͤ˹Ԥ��ޤ���
+@param kcode 文字コードを文字列で指定します。文字コードの指定は [[m:$KCODE]] と同様に行います。
 #@end
 
   rp = Regexp.escape("$bc^")
@@ -101,9 +101,9 @@ string ���������ɽ���ˤ��������̤ʰ�̣�����ʸ����ľ���˥�
 
 --- last_match -> MatchData
 
-�����ȥ������פǺǸ�˹Ԥä�����ɽ���ޥå��� [[c:MatchData]] ��
-�֥������Ȥ��֤��ޤ������Υ᥽�åɤθƤӽФ��� [[m:$~]]
-�λ��Ȥ�Ʊ���Ǥ���
+カレントスコープで最後に行った正規表現マッチの [[c:MatchData]] オ
+ブジェクトを返します。このメソッドの呼び出しは [[m:$~]]
+の参照と同じです。
 
   /(.)(.)/ =~ "ab"
   p Regexp.last_match      # => #<MatchData:0x4599e58>
@@ -114,11 +114,11 @@ string ���������ɽ���ˤ��������̤ʰ�̣�����ʸ����ľ���˥�
 
 --- last_match(nth) -> String | nil
 
-���� nth �� 0 �ξ�硢�ޥå�����ʸ������֤��ޤ�
-([[m:$&]])������ʳ��Ǥϡ�nth ���ܤγ�̤˥ޥå�
-������ʬʸ������֤��ޤ�([[m:$1]],[[m:$2]],...)��
-�б������̤��ʤ�����ޥå����ʤ��ä����ˤ� nil ���֤�
-�ޤ���
+整数 nth が 0 の場合、マッチした文字列を返します
+([[m:$&]])。それ以外では、nth 番目の括弧にマッチ
+した部分文字列を返します([[m:$1]],[[m:$2]],...)。
+対応する括弧がない場合やマッチしなかった場合には nil を返し
+ます。
 
   /(.)(.)/ =~ "ab"
   p Regexp.last_match      # => #<MatchData:0x4599e58>
@@ -127,84 +127,84 @@ string ���������ɽ���ˤ��������̤ʰ�̣�����ʸ����ľ���˥�
   p Regexp.last_match(2)   # => "b"
   p Regexp.last_match(3)   # => nil
 
-����ɽ�����Τ��ޥå����ʤ��ä���硢�����ʤ���
-Regexp.last_match ��nil ���֤����ᡢ
-last_match[1] �η����Ǥ��㳰 [[c:NameError]] ��ȯ�����ޤ���
-�Ф��ơ�last_match(1) �� nil ���֤��ޤ���
+正規表現全体がマッチしなかった場合、引数なしの
+Regexp.last_match はnil を返すため、
+last_match[1] の形式では例外 [[c:NameError]] が発生します。
+対して、last_match(1) は nil を返します。
 
   str = "This is Regexp"
   /That is Regexp/ =~ str
   p Regexp.last_match #=> nil
   begin
-    p Regexp.last_match[1] # �㳰��ȯ������
+    p Regexp.last_match[1] # 例外が発生する
   rescue 
     puts $! #=> undefined method `[]' for nil:NilClass
   end
   p Regexp.last_match(1) #=> nil
 
-@param nth ��������ꤷ�ޤ���
-	���� nth �� 0 �ξ�硢�ޥå�����ʸ������֤��ޤ�������ʳ��Ǥϡ�nth ���ܤγ�̤˥ޥå�������ʬʸ������֤��ޤ���
+@param nth 整数を指定します。
+	整数 nth が 0 の場合、マッチした文字列を返します。それ以外では、nth 番目の括弧にマッチした部分文字列を返します。
 
 
 #@since 1.8.1
 --- union(*pattern) -> Regexp
 
-�����Ȥ���Ϳ���� pattern ������ | ��Ϣ�뤷��Regexp �Ȥ����֤��ޤ���
-��̤� Regexp ��Ϳ���� pattern �Τɤ줫�˥ޥå�������˥ޥå������Τˤʤ�ޤ���
+引数として与えた pattern を選択 | で連結し、Regexp として返します。
+結果の Regexp は与えた pattern のどれかにマッチする場合にマッチするものになります。
 
   p Regexp.union(/a/, /b/, /c/) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 
 #@since 1.8.7
-�������Ĥ���Ϳ������ϡ�[[c:Array]] ��Ϳ���Ƥ� Regexp ���������ޤ���
-�Ĥޤꡢ�ʲ��Τ褦�˽񤯤��Ȥ��Ǥ��ޤ���
+引数を一つだけ与える場合は、[[c:Array]] を与えても Regexp を生成します。
+つまり、以下のように書くことができます。
 
   arr = [/a/, /b/, /c/]
   p Regexp.union(arr)  #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
-  # 1.8.7 ������ϡ��ʲ��Τ褦�˽�ɬ�פ����ä�
+  # 1.8.7 より前は、以下のように書く必要があった
   p Regexp.union(*arr) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 
 #@end
 
-pattern �� Regexp �ޤ��� String ��Ϳ���ޤ���
-String ��Ϳ������硢���켫�Ȥ�������ʸ����˥ޥå������ΤȲ�ᤵ�졢
-���������פ���Ʒ�̤� Regexp ���Ȥ߹��ޤ�ޤ���
+pattern は Regexp または String で与えます。
+String で与えた場合、それ自身と等しい文字列にマッチするものと解釈され、
+エスケープされて結果の Regexp に組み込まれます。
 
   p Regexp.union("a", "?", "b") # => /a|\?|b/
   p Regexp.union(/a/, "*") # => /(?-mix:a)|\*/
 
-������ҤȤĤ�Ϳ���ʤ��ä���硢�褷�ƥޥå����ʤ� Regexp ���֤��ޤ���
+引数をひとつも与えなかった場合、決してマッチしない Regexp を返します。
 
   p Regexp.union() # => /(?!)/
 
-��̤� Regexp ���б�����ʸ�������ɤϰ����Ȥ���Ϳ���� Regexp ������ʸ�������ɤ�
-���פ��ޤ���
-���ꥳ���ɤ��Ф��ƥ���ѥ��뤵��Ƥ��� Regexp ��ʣ��Ϳ�����硢
-�����Υ����ɤϰ��פ��Ƥ��ʤ���Фʤ�ޤ���
-�ۤʤ���ꥳ���ɤ��Ф��ƥ���ѥ��뤵��Ƥ��� Regexp ��¸�ߤ����硢
-[[c:ArgumentError]] ��ȯ�����ޤ���
+結果の Regexp が対応する文字コードは引数として与えた Regexp が扱う文字コードに
+一致します。
+固定コードに対してコンパイルされている Regexp を複数与える場合、
+それらのコードは一致していなければなりません。
+異なる固定コードに対してコンパイルされている Regexp が存在する場合、
+[[c:ArgumentError]] が発生します。
 
   p Regexp.union(/a/e, /b/e) # => /(?-mix:a)|(?-mix:b)/e
   p Regexp.union(/a/e, /b/s) # => ArgumentError
 
-�����ɤ����ꤵ��Ƥ��� Regexp �ȥ����ɤ����ꤵ��Ƥ��ʤ� Regexp �򺮤�����硢
-��̤� Regexp �ϸ��ꤵ��Ƥ��륳���ɤ��б������Τˤʤ�ޤ���
+コードが固定されている Regexp とコードが固定されていない Regexp を混ぜた場合、
+結果の Regexp は固定されているコードに対応するものになります。
 
   p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
 
-@param pattern | ��Ϣ�뤷��������ɽ������ꤷ�ޤ�
+@param pattern | で連結したい正規表現を指定します
 
 
-  # ���ץ����Ϲ�������ʤ�
+  # オプションは合成されない
   p Regexp.union(/foo/i, /bar/x, /hoge/m) #=> /(?i-mx:foo)|(?x-mi:bar)|(?m-ix:hoge)/
 
-  # ʸ���󤽤Τ�Τ˥ޥå�����
+  # 文字列そのものにマッチする
   rep1 = [ "foo", "bar", "hoge"] 
   p Regexp.union(*rep1) #=> /foo|bar|hoge/
 #@since 1.8.7
   p Regexp.union(rep1)  #=> /foo|bar|hoge/
 #@end
 
-  # �����ξ�祪�ץ���󤬤Ĥ��ΤϺǽ����
+  # 下記の場合オプションがつくのは最初だけ
   rep2 = [ /foo/x, "bar", "hoge"] 
   p Regexp.union(*rep2) #=> /(?x-mi:foo)|bar|hoge/
 #@since 1.8.7
@@ -217,10 +217,10 @@ String ��Ϳ������硢���켫�Ȥ�������ʸ����˥ޥå������ΤȲ�ᤵ�졢
 #@since 1.9.1
 --- try_convert(obj) -> Regexp | nil
 
-obj �� to_regexp �᥽�åɤ� Regexp ���֥������Ȥ��Ѵ����褦��
-��ߤޤ���
+obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
+試みます。
 
-�Ѵ��������������Ϥ�����֤������Ի��ˤ� nil ���֤��ޤ���
+変換に成功した場合はそれを返し、失敗時には nil を返します。
 
    Regexp.try_convert(/re/)      # => /re/
    Regexp.try_convert("re")      # => nil
@@ -231,30 +231,30 @@ obj �� to_regexp �᥽�åɤ� Regexp ���֥������Ȥ��Ѵ����褦��
 --- =~(string) -> Fixnum | nil
 --- ===(string) -> bool
 
-ʸ���� string �Ȥ�����ɽ���ޥå���Ԥ��ޤ����ޥå�������硢
-�ޥå��������֤Υ���ǥå������֤��ޤ�(��Ƭ��0)���ޥå����ʤ��ä�
-��硢���뤤�� string �� nil �ξ��ˤ� nil ����
-���ޤ���
+文字列 string との正規表現マッチを行います。マッチした場合、
+マッチした位置のインデックスを返します(先頭は0)。マッチしなかった
+場合、あるいは string が nil の場合には nil を返
+します。
 
   p /foo/ =~ "foo"  #=> 0
   p /foo/ =~ "afoo" #=> 1
   p /foo/ =~ "bar"  #=> nil
 
-�Ȥ߹����ѿ� [[m:$~]] �⤷���� [[m:Regexp.last_match]] �˥ޥå��˴ؤ������ [[c:MatchData]] �����ꤵ��ޤ���
+組み込み変数 [[m:$~]] もしくは [[m:Regexp.last_match]] にマッチに関する情報 [[c:MatchData]] が設定されます。
 
-string ��nil �Ǥ� [[c:String]] ���֥������ȤǤ�ʤ���
-���㳰 [[c:TypeError]] ��ȯ�����ޤ���
+string がnil でも [[c:String]] オブジェクトでもなけれ
+ば例外 [[c:TypeError]] が発生します。
 
 #@since 1.8.0
-Regexp#=== �ϡ������ͤ��֤��ޤ���������ʸ
-����Ǥʤ������ޥå����ʤ���� false �򡢥ޥå������
-true ���֤��ޤ���
+Regexp#=== は、真偽値を返します。引数が文
+字列でないか、マッチしなければ false を、マッチすれば
+true を返します。
 #@end
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise TypeError string ��nil �Ǥ� [[c:String]] ���֥������ȤǤ�ʤ�
-                 ���ȯ�����ޤ���
+@raise TypeError string がnil でも [[c:String]] オブジェクトでもない
+                 場合発生します。
 
   p /foo/ =~ "foo"        #=> 0
   p Regexp.last_match(0)  #=> "foo"
@@ -277,12 +277,12 @@ true ���֤��ޤ���
 
 --- ~ -> Fixnum | nil
 
-�ѿ� [[m:$_]] ���ͤȤδ֤ǤΥޥå���Ȥ�ޤ������礦�ɰʲ���Ʊ����
-̣�Ǥ���
+変数 [[m:$_]] の値との間でのマッチをとります。ちょうど以下と同じ意
+味です。
 
   self =~ $_
 
-������
+使用例
   $_ = "hogehoge"
 
   if  /foo/
@@ -291,7 +291,7 @@ true ���֤��ޤ���
     puts "no match"
   end
   #=> no match
-  # ���������ٹ𤬤Ǥ롣warning: regex literal in condition
+  # ただし、警告がでる。warning: regex literal in condition
 
   reg = Regexp.compile("foo")
 
@@ -308,13 +308,13 @@ true ���֤��ޤ���
     puts "no match"
   end
   #=> match
-  # reg �� nil �Ǥ� false �Ǥ�̵���ΤǾ��true
+  # reg は nil でも false でも無いので常にtrue
 
 
 --- casefold? -> bool
 
-����ɽ������ʸ����ʸ����Ƚ��򤷤ʤ��褦�˥���ѥ��뤵��Ƥ������
-�����֤��ޤ���
+正規表現が大文字小文字の判定をしないようにコンパイルされている時、
+真を返します。
 
   reg = Regexp.new("foobar", Regexp::IGNORECASE)
   p reg.casefold? #=> true
@@ -325,16 +325,16 @@ true ���֤��ޤ���
 #@since 1.9.1
 --- fixed_encoding? -> bool
 
-����ɽ����Ǥ�դ� ASCII �ߴ����󥳡��ǥ��󥰤ȥޥå���ǽ�ʻ��� false ���֤��ޤ���
+正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。
 #@end
 
 #@until 1.9.1
 --- kcode -> String | nil
 
-��������ɽ�����б�����褦�˥���ѥ��뤵��Ƥ���ʸ�������ɤ�
-[[m:$KCODE]] ��Ʊ���������֤��ޤ����⤷������ɽ��������
-�����ɤ��Ф��ƥ���ѥ��뤵��Ƥ��ʤ�(�ޥå������Ǥ� [[m:$KCODE]]
-���ͤ��Ѥ���)���ˤϡ�nil ���֤��ޤ���
+その正規表現が対応するようにコンパイルされている文字コードを
+[[m:$KCODE]] と同じ形式で返します。もし、正規表現が固定
+コードに対してコンパイルされていない(マッチ時点での [[m:$KCODE]]
+の値を用いる)場合には、nil を返します。
 
   reg = Regexp.new("hogehoge", nil, "u")
   p reg.kcode #=> "utf8"
@@ -349,35 +349,35 @@ true ���֤��ޤ���
 --- match(str) -> MatchData | nil
 #@end
 
-���ꤵ�줿ʸ���� str ���Ф���
+指定された文字列 str に対して
 #@since 1.9.1
-���� pos ����
+位置 pos から
 #@end
-���Ȥ�ɽ������ɽ���ˤ��ޥå��󥰤�Ԥ��ޤ����ޥå��������ˤϷ�̤� MatchData ���֥������Ȥ��֤��ޤ���
-�ޥå����ʤ��ä���� nil ���֤��ޤ���
+自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。
+マッチしなかった場合 nil を返します。
 
 #@since 1.9.1
-��ά��ǽ��������� pos ����ꤹ��ȡ��ޥå��γ��ϰ��֤� pos �����
-���褦����Ǥ��ޤ�(pos �Υǥե�����ͤ� 0)��
+省略可能な第二引数 pos を指定すると、マッチの開始位置を pos から行
+うよう制御できます(pos のデフォルト値は 0)。
 
   p(/(.).(.)/.match("foobar", 3).captures)   # => ["b", "r"]
   p(/(.).(.)/.match("foobar", -3).captures)  # => ["b", "r"]
 
-pos ����ꤷ�Ƥ� [[m:MatchData#offset]] ���η��
-�ˤϱƶ����ޤ��󡣤Ĥޤꡢ
+pos を指定しても [[m:MatchData#offset]] 等の結果
+には影響しません。つまり、
   re.match(str[pos..-1])
-��
+と
   re.match(str, pos)
-�ϰۤʤ�ޤ���
+は異なります。
 #@end
 
-@param str ʸ�������ꤷ�ޤ���str �Ȥ�����ɽ���ޥå���Ԥ��ޤ���
+@param str 文字列を指定します。str との正規表現マッチを行います。
 
 #@since 1.9.1
-@param pos ��������ꤷ�ޤ����ޥå��γ��ϰ��֤� pos ����Ԥ��褦����Ǥ��ޤ�(pos �Υǥե�����ͤ� 0)��
+@param pos 整数を指定します。マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
 #@end
 
-������
+使用例
 
   reg = Regexp.new("foo")
 
@@ -390,30 +390,30 @@ pos ����ꤷ�Ƥ� [[m:MatchData#offset]] ���η��
 
   p /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3) #=> ["foo", "bar", "baz"]
 
-==== �����ʻȤ�����
-����ɽ���˥ޥå�������ʬʸ���������ɬ�פʾ��ˡ�
+==== 便利な使いかた
+正規表現にマッチした部分文字列だけが必要な場合に、
 
   bar = /foo(.*)baz/.match("foobarbaz").to_a[1]
   
   foo, bar, baz = /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3)
 
-�Τ褦�˻��ѤǤ��ޤ���(to_a �ϡ��ޥå��˼��Ԥ��������θ���Ƥ��ޤ���)
+のように使用できます。(to_a は、マッチに失敗した場合を考慮しています。)
 
 #@since 1.8.0
-¿�������ε�§�Ǥϱ��դ�����Ǥʤ���ĤΥ��֥������Ȥ� to_a
-�᥽�åɤ���ľ�硢���դ� * ���դ��뤳�Ȥ� to_a �η�̤����ѤǤ�
-�ޤ����Ĥޤꡢ�嵭�ϰʲ��Τ褦�˽񤯤��Ȥ��Ǥ��ޤ���(�����Ǥ�
-`_' �ϡ�[[m:$&]] ��ΤƤ뤿���Ŭ����������ѿ�̾)
+多重代入の規則では右辺が配列でない一つのオブジェクトで to_a
+メソッドを持つ場合、右辺に * を付けることで to_a の結果を利用でき
+ます。つまり、上記は以下のように書くことができます。(ここでの
+`_' は、[[m:$&]] を捨てるために適当に選んだ変数名)
 
   _, foo, bar, baz = */(foo)(bar)(baz)/.match("foobarbaz")
   p [foo, bar, baz]
 
   # => ["foo", "bar", "baz"]
 
-���Τ褦�����Ӥ� [[m:MatchData#captures]] ����
-����ȹͤ��뤫���Τ�ޤ��󤬡�captures �Ǥϡ��ޥå��˼��Ԥ�����硢
-nil.captures ��ƤӽФ����Ȥ����㳰 [[c:NoMethodError]] ��ȯ������
-���ޤ��ޤ���
+このような用途に [[m:MatchData#captures]] が使
+えると考えるかも知れませんが、captures では、マッチに失敗した場合、
+nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生して
+しまいます。
 
   foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 
@@ -422,7 +422,7 @@ nil.captures ��ƤӽФ����Ȥ����㳰 [[c:NoMethodError]] ��ȯ������
 
 --- options -> Integer
 
-����ɽ�����������˻��ꤵ�줿���ץ������֤��ޤ�������ͤϡ�
+正規表現の生成時に指定されたオプションを返します。戻り値は、
 [[m:Regexp::EXTENDED]], [[m:Regexp::IGNORECASE]],
 [[m:Regexp::MULTILINE]],
 #@since 1.9.2
@@ -431,13 +431,13 @@ nil.captures ��ƤӽФ����Ȥ����㳰 [[c:NoMethodError]] ��ȯ������
 [[m:Regexp::NOENCODING]],
 #@end
 #@end
-�������¤Ǥ���
+の論理和です。
 
 #@since 1.9.1
-����������륪�ץ����ˤ��������˻��ꤷ����ΰʳ���
-���ץ�����ޤ�Ǥ����礬����ޤ��������ΥӥåȤ�
-����Ū���Ѥ����Ƥ����Τǡ�[[m:Regexp.new]] �ˤ�����
-�Ϥ��Ƥ�̵�뤵��ޤ���
+これで得られるオプションには生成時に指定したもの以外の
+オプションを含んでいる場合があります。これらのビットは
+内部的に用いられているもので、[[m:Regexp.new]] にこれらを
+渡しても無視されます。
 #@end
 
   p Regexp::IGNORECASE # => 1
@@ -453,29 +453,29 @@ nil.captures ��ƤӽФ����Ȥ����㳰 [[c:NoMethodError]] ��ȯ������
 
 --- source -> String
 
-��������ɽ���Τ�ȤȤʤä�ʸ����ɽ�������������֤��ޤ���
+その正規表現のもととなった文字列表現を生成して返します。
 
   re = /foo|bar|baz/i
   p re.source     # => "foo|bar|baz"
 
 --- to_s -> String
 
-����ɽ����ʸ����ɽ�������������֤��ޤ����֤����ʸ�����¾������ɽ
-����������Ǥ⤽�ΰ�̣���ݻ������褦�ˤʤäƤ��ޤ���
+正規表現の文字列表現を生成して返します。返される文字列は他の正規表
+現に埋め込んでもその意味が保持されるようになっています。
 
   re = /foo|bar|baz/i
   p re.to_s       # => "(?i-mx:foo|bar|baz)"
   p /#{re}+/o     # => /(?i-mx:foo|bar|baz)+/
 
-���������������Ȥ�ޤ�����ɽ���ϰտ��̤�ˤϤʤ�ʤ���礬����ޤ���
-����ϸ������������Ȥ��ֹ�Ǥ�������Ǥ��ʤ�����Ǥ���
+ただし、後方参照を含む正規表現は意図通りにはならない場合があります。
+これは現状、後方参照を番号でしか指定できないためです。
 
-  re = /(foo|bar)\1/      # \1 �ϡ�foo �� bar
-  p /(baz)#{re}/          # \1 �ϡ�baz
+  re = /(foo|bar)\1/      # \1 は、foo か bar
+  p /(baz)#{re}/          # \1 は、baz
   
   # => /(baz)(?-mix:(foo|bar)\1)/
 
-������
+使用例
 
   re = /foo|bar|baz/i
   p re.to_s       # => "(?i-mx:foo|bar|baz)"
@@ -485,9 +485,9 @@ nil.captures ��ƤӽФ����Ȥ����㳰 [[c:NoMethodError]] ��ȯ������
 
 --- ==(other) -> bool
 --- eql?(other) -> bool
-other��Ʊ���ѥ����󡢥��ץ����ʸ�������ɤ�����ɽ���Ǥ��ä���true���֤��ޤ���
+otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
 
-@param other ����ɽ������ꤷ�ޤ���
+@param other 正規表現を指定します。
 
   p /^eee$/   == /~eee$/x   #=> false
   p /^eee$/   == /~eee$/i   #=> false
@@ -496,13 +496,13 @@ other��Ʊ���ѥ����󡢥��ץ����ʸ�������ɤ�����ɽ���Ǥ��ä���true���֤��ޤ���
   p /^eee$/.eql?(/^eee$/)          #=> true
 
 --- hash -> Fixnum
-����ɽ���Υ��ץ�����ƥ����Ȥ˴�Ť����ϥå����ͤ��֤��ޤ���
+正規表現のオプションやテキストに基づいたハッシュ値を返します。
 
   p /abc/i.hash #=> 4893115
   p /abc/.hash  #=> 4856055
 
 --- inspect -> String
-[[m:Regexp#to_s]] ��꼫����ʸ������֤��ޤ���
+[[m:Regexp#to_s]] より自然な文字列を返します。
 
   p /^ugou.*?/i.to_s    #=> "(?i-mx:^ugou.*?)"
   p /^ugou.*?/i.inspect #=> "/^ugou.*?/i"
@@ -511,15 +511,15 @@ other��Ʊ���ѥ����󡢥��ץ����ʸ�������ɤ�����ɽ���Ǥ��ä���true���֤��ޤ���
 
 #@since 1.9.1
 --- encoding   -> Encoding
-����ɽ�����֥������ȤΥ��󥳡��ǥ��󥰤�ɽ�� [[c:Encoding]] ���֥�������
-���֤��ޤ���
+正規表現オブジェクトのエンコーディングを表す [[c:Encoding]] オブジェクト
+を返します。
 
 --- named_captures -> { String => [Integer] }
-����ɽ���˴ޤޤ��̾���դ�����ץ���(named capture)�ξ����
-[[c:Hash]] ���֤��ޤ���
+正規表現に含まれる名前付きキャプチャ(named capture)の情報を
+[[c:Hash]] で返します。
 
-Hash �Υ�����̾���դ�����ץ����̾���ǡ��ͤ�
-����̾���˴�Ϣ�դ���줿����ץ���� index �Υꥹ�Ȥ��֤��ޤ���
+Hash のキーは名前付きキャプチャの名前で、値は
+その名前に関連付けられたキャプチャの index のリストを返します。
 
   /(?<foo>.)(?<bar>.)/.named_captures
   #=> {"foo"=>[1], "bar"=>[2]}
@@ -527,13 +527,13 @@ Hash �Υ�����̾���դ�����ץ����̾���ǡ��ͤ�
   /(?<foo>.)(?<foo>.)/.named_captures
   #=> {"foo"=>[1, 2]}
 
-  # ̾���դ�����ץ��������ʤ��Ȥ��϶��� Hash ���֤��ޤ���
+  # 名前付きキャプチャを持たないときは空の Hash を返します。
   /(.)(.)/.named_captures
   #=> {}
 
 --- names -> [String]
-����ɽ���˴ޤޤ��̾���դ�����ץ���(named capture)��̾����
-ʸ�����������֤��ޤ���
+正規表現に含まれる名前付きキャプチャ(named capture)の名前を
+文字列の配列で返します。
 
   /(?<foo>.)(?<bar>.)(?<baz>.)/.names
   
@@ -550,26 +550,26 @@ Hash �Υ�����̾���դ�����ץ����̾���ǡ��ͤ�
 
 --- EXTENDED -> Fixnum
 
-�Хå�����å���ǥ��������פ���Ƥ��ʤ������ # ������ԤޤǤ�̵
-�뤷�ޤ�������ɽ����ƥ��� //x ���ץ�����Ʊ��
-�Ǥ���(�������������\�ǥ��������פ���\ (<-����)��
-���ꤷ�ޤ�)
+バックスラッシュでエスケープされていない空白と # から改行までを無
+視します。正規表現リテラルの //x オプションと同じ
+です。(空白を入れる場合は\でエスケープして\ (<-空白)と
+指定します)
 
 --- IGNORECASE -> Fixnum
 
-ʸ�����羮�ΰ㤤��̵�뤷�ޤ���
-����ɽ����ƥ��� //i ���ץ�����Ʊ���Ǥ���
+文字の大小の違いを無視します。
+正規表現リテラルの //i オプションと同じです。
 
 --- MULTILINE -> Fixnum
 
-ʣ���ԥ⡼�ɡ�����ɽ�� "." �����Ԥ˥ޥå�����褦�ˤʤ�ޤ���
-����ɽ����ƥ��� //m ���ץ�����Ʊ���Ǥ���
+複数行モード。正規表現 "." が改行にマッチするようになります。
+正規表現リテラルの //m オプションと同じです。
 
 #@since 1.9.2
 
 --- FIXEDENCODING -> Fixnum
 
-����ɽ��������Υ��󥳡��ǥ��󥰤�ʸ����ˤ����ޥå����ʤ����Ȥ��̣���ޤ���
+正規表現が特定のエンコーディングの文字列にしかマッチしないことを意味します。
 
 @see [[m:Regexp#fixed_encoding?]]
 
@@ -577,10 +577,10 @@ Hash �Υ�����̾���դ�����ץ����̾���ǡ��ͤ�
 
 --- NOENCODING -> Fixnum
 
-����ɽ���Υޥå�����ʸ����Υ��󥳡��ǥ��󥰤�̵�뤷��
-�Х�����Ȥ��ƥޥå����뤳�Ȥ��̣���ޤ���
+正規表現のマッチ時に文字列のエンコーディングを無視し、
+バイト列としてマッチすることを意味します。
 
-����ɽ����ƥ��� n ���ץ������б����ޤ���
+正規表現リテラルの n オプションに対応します。
 
 #@end
 

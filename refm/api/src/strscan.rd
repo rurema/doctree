@@ -1,10 +1,10 @@
 #@since 1.8.0
-strscan �� ʸ������®�˥�����󤹤뤿��Υ饤�֥��Ǥ���
+strscan は 文字列を高速にスキャンするためのライブラリです。
 
 = class StringScanner < Object
 
-StringScanner ��ʸ���󥹥���ʥ��饹�Ǥ���
-��ñ�˹�®�ʥ�����ʤ򵭽ҤǤ��ޤ���
+StringScanner は文字列スキャナクラスです。
+簡単に高速なスキャナを記述できます。
 
     s = StringScanner.new('This is an example string')
     s.eos?            #=> false
@@ -27,10 +27,10 @@ StringScanner ��ʸ���󥹥���ʥ��饹�Ǥ���
     p s.scan(/\s+/)   #=> nil
     p s.scan(/\w+/)   #=> nil
 
-StringScanner ���֥������Ȥϥ�����󤹤�ʸ����ȡ֥������ݥ��󥿡פΥ��åȤǤ���
-�������ݥ��󥿤Ȥϥ�����󤷤���ä��Ȥ����򼨤�����ǥå����Τ��ȤǤ���
-���֥������Ⱥ���ľ��ˤϥ������ݥ��󥿤�ʸ������Ƭ�ˤ��ꡢ
-���������ǤΤߥޥå����ޤ����ޥå������餽�θ���˥ݥ��󥿤�ʤ�ޤ���
+StringScanner オブジェクトはスキャンする文字列と「スキャンポインタ」のセットです。
+スキャンポインタとはスキャンしおわったところを示すインデックスのことです。
+オブジェクト作成直後にはスキャンポインタは文字列先頭にあり、
+その地点でのみマッチを試します。マッチしたらその後ろにポインタを進めます。
 
     ## a string and a scan pointer   ("_" = scan pointer)
 
@@ -56,10 +56,10 @@ StringScanner ���֥������Ȥϥ�����󤹤�ʸ����ȡ֥������ݥ��󥿡פΥ��åȤǤ�
     This is an example string_     s.eos? = true
 
 
-���ߤΥ������ݥ��󥿤����������ʳ��Ǥ�ޥå����������ϡ�[[m:StringScanner#scan_until]]�ʤ�
-��ȤäƤ���������
+現在のスキャンポインタがさす地点以外でもマッチしたい場合は、[[m:StringScanner#scan_until]]など
+を使ってください。
 
-��: scan, scan_full ��ư��ΰ㤤
+例: scan, scan_full の動作の違い
 
   def case1
     s = StringScanner.new('test string')
@@ -84,35 +84,35 @@ StringScanner ���֥������Ȥϥ�����󤹤�ʸ����ȡ֥������ݥ��󥿡פΥ��åȤǤ�
   p "case2"
   case2
 
-�������ݥ��󥿤ΰ��֤�ʸ��ñ�̤Ǥʤ��Х���ñ�̤Ȥʤ�ޤ���
+スキャンポインタの位置は文字単位でなくバイト単位となります。
 
       # vim:set fileencoding=euc-jp:
       require 'strscan'
-      s = StringScanner.new("��Ӥ�") # ʸ�������ɤ�EUC-JP�Ȥ��ޤ�
-      p s.exist?(/��/) #=> 4
+      s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
+      p s.exist?(/び/) #=> 4
 
-StringScanner �� $~ $& $1 $2 �ġ� �ʤɤ�����ɽ����Ϣ�ѿ���
-���åȤ��ޤ�������� [[m:StringScanner#[] ]], [[m:StringScanner#matched?]] �ʤɤ�
-�ޥå��ǡ�����Ϣ�᥽�åɤ�ȤäƤ���������
+StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
+セットしません。代わりに [[m:StringScanner#[] ]], [[m:StringScanner#matched?]] などの
+マッチデータ関連メソッドを使ってください。
 
 
 == Class Methods
 
 --- new(str, dup = false) -> StringScanner 
 
-������ StringScanner ���֥������Ȥ��������ޤ���
+新しい StringScanner オブジェクトを生成します。
 
-@param str ��������оݤ�ʸ�������ꤷ�ޤ���
+@param str スキャン対象の文字列を指定します。
 
 #@if (version <= "1.8.0")
-@param dup dup �� true �λ���ʸ�����ʣ������ freeze ���ޤ���
-           dup �� false �ʤ�ʣ�������� freeze ���ޤ���
+@param dup dup が true の時は文字列を複製して freeze します。
+           dup が false なら複製せずに freeze します。
 #@else
-@param dup dup ��ñ��̵�뤷�ޤ���
-           ������ʸ�����ʣ���� freeze �⤵�줺�����Τޤ޻Ȥ��ޤ���
+@param dup dup は単に無視します。
+           引数の文字列は複製も freeze もされず、そのまま使います。
 #@end
 
-������
+使用例
     s = StringScanner.new('This is an example string')
     s.eos?            #=> false
 
@@ -121,18 +121,18 @@ StringScanner �� $~ $& $1 $2 �ġ� �ʤɤ�����ɽ����Ϣ�ѿ���
     p s.scan(/\s+/)   #=> " "
 
 ---  must_C_version -> self
-���Υ᥽�åɤϸ����ߴ����Τ�����������Ƥ��ޤ���
+このメソッドは後方互換性のために定義されています。
 
 == Instance Methods
 
 --- [](nth) -> String | nil
 
-����ޥå���������ɽ���� nth ���ܤΤ��ä����б�������ʬʸ�����
-�֤��ޤ�������ǥå��� 0 �ϥޥå�������ʬ���ΤǤ�������Υޥå���
-���Ԥ��Ƥ���Ⱦ�� nil ���֤��ޤ���
+前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
+返します。インデックス 0 はマッチした部分全体です。前回のマッチが
+失敗していると常に nil を返します。
 
-@param nth ����ޥå���������ɽ���� nth ���ܤΤ��ä����б�������ʬʸ�����
-           �֤��ޤ���
+@param nth 前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
+           返します。
 
 
       s = StringScanner.new('test string')
@@ -157,14 +157,14 @@ StringScanner �� $~ $& $1 $2 �ġ� �ʤɤ�����ɽ����Ϣ�ѿ���
 --- <<(str) -> self
 --- concat(str) -> self
 
-����оݤ�ʸ������Ф� str ���˲�Ū��Ϣ�뤷�ޤ���
-�ޥå���Ͽ���ѹ�����ޤ���
+操作対象の文字列に対し str を破壊的に連結します。
+マッチ記録は変更されません。
 
-self���֤��ޤ���
+selfを返します。
 
-@param str ����оݤ�ʸ������Ф� str ���˲�Ū��Ϣ�뤷�ޤ���
+@param str 操作対象の文字列に対し str を破壊的に連結します。
 
-������
+使用例
       s = StringScanner.new('test') # => #<StringScanner 0/4 @ "test">
       s.match(/\w(\w*)/)            # => "test"
       s[0]                          # => "test"
@@ -175,7 +175,7 @@ self���֤��ޤ���
       s.match(/\s+/)                # => " "
       s.match(/\w+/)                # => "string"
 
-�������� StringScanner.new ���Ϥ���ʸ����ˤ�ƶ����뤳�Ȥ�����ޤ���
+この操作は StringScanner.new に渡した文字列にも影響することがあります。
 
       str = 'test'
       s = StringScanner.new(str) # => #<StringScanner 0/4 @ "test">
@@ -186,13 +186,13 @@ self���֤��ޤ���
 #@if (version >= "1.8.1")
 --- beginning_of_line? -> bool
 --- bol? -> bool
-�������ݥ��󥿤���Ƭ��ؤ��Ƥ���ʤ� true ��
-��Ƭ�ʳ���ؤ��Ƥ���ʤ� false ���֤��ޤ���
+スキャンポインタが行頭を指しているなら true を、
+行頭以外を指しているなら false を返します。
 
-��Ƭ������ϡ�ʸ������Ƭ���ޤ��� \n ��ľ���ؤ��Ƥ��뤳�ȤǤ���
-ʸ����������ɬ�������Ƭ�ǤϤ���ޤ���
+行頭の定義は、文字列先頭かまたは \n の直後を指していることです。
+文字列末尾は必ずしも行頭ではありません。
 
-������
+使用例
       s = StringScanner.new("test\nstring")
       s.bol?        # => true
       s.scan(/\w+/)
@@ -204,15 +204,15 @@ self���֤��ޤ���
 #@end
 
 --- check(regexp) -> String | nil
-���߰��֤��� regexp �ȤΥޥå����ߤޤ���
-�ޥå�������������ޥå�������ʬʸ������֤��ޤ���
-�ޥå��˼��Ԥ����� nil ���֤��ޤ���
+現在位置から regexp とのマッチを試みます。
+マッチに成功したらマッチした部分文字列を返します。
+マッチに失敗したら nil を返します。
 
-���Υ᥽�åɤϥޥå����������Ƥ⥹�����ݥ��󥿤�ʤ�ޤ���
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.check(/\w+/) # => "test"
       s.pos          # => 0
@@ -221,15 +221,15 @@ self���֤��ޤ���
       s.matched      # => nil
 
 --- check_until(regexp) -> String | nil
-regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
-�ޥå������������饹����󳫻ϰ��֤���ޥå���ʬ�������ޤǤ���ʬʸ������֤��ޤ���
-�ޥå��˼��Ԥ����� nil ���֤��ޤ���
+regexp が一致するまで文字列をスキャンします。
+マッチに成功したらスキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
+マッチに失敗したら nil を返します。
 
-���Υ᥽�åɤϥޥå����������Ƥ⥹�����ݥ��󥿤�ʤ�ޤ���
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.check_until(/str/) # => "test str"
       s.matched            # => "str"
@@ -238,10 +238,10 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
 
 --- eos? -> bool
 --- empty? -> bool
-�������ݥ��󥿤�ʸ�����������ؤ��Ƥ���ʤ� true ��
-�����ʳ���ؤ��Ƥ���ʤ� false ���֤��ޤ���
+スキャンポインタが文字列の末尾を指しているなら true を、
+末尾以外を指しているなら false を返します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.eos?        # => false
       s.scan(/\w+/)
@@ -249,24 +249,24 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
       s.scan(/\w+/)
       s.eos?        # => true
 
-[[m:StringScanner#empty?]] �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-����� [[m:StringScanner#eos?]] ��ȤäƤ���������
+[[m:StringScanner#empty?]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#eos?]] を使ってください。
 
 --- exist?(regexp) -> Fixnum | nil
 #@if (version <= "1.8.5")
-[����] ���Υ᥽�åɤ� Ruby 1.8.5 �����Ǥ�������ư��ޤ���
+[注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
 #@else
-#@#Ruby 1.8.6 �ʹߤϰʲ��ε��Ҥ˱�ä����ͤ��Ѥ��ޤ���
+#@#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 
-�������ݥ��󥿤ΰ��֤��顤���˥ޥå�����ʸ����������ޤǤ�Ĺ�����֤��ޤ���
+スキャンポインタの位置から，次にマッチする文字列の末尾までの長さを返します。
 
-�ޥå��˼��Ԥ����� nil ���֤��ޤ���
+マッチに失敗したら nil を返します。
 
-���Υ᥽�åɤϥޥå����������Ƥ⥹�����ݥ��󥿤�ʤ�ޤ���
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.exist?(/s/) # => 3
       s.exist?(//)  # => 0
@@ -276,36 +276,36 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
 #@end
 
 --- getch -> String | nil
-��ʸ��������󤷤�ʸ������֤��ޤ���
-�������ݥ��󥿤򤽤θ���˿ʤ�ޤ���
-�������ݥ��󥿤�ʸ�����������ؤ��ʤ�nil���֤��ޤ���
+一文字スキャンして文字列で返します。
+スキャンポインタをその後ろに進めます。
+スキャンポインタが文字列の末尾を指すならnilを返します。
 
 #@since 1.9.1
-��ʸ��������ϡ�Ϳ����ʸ����Υ��󥳡��ɤ˰�¸���ޤ���
+一文字の定義は、与えた文字列のエンコードに依存します。
 
-������
+使用例
   require 'strscan'
 
   utf8 = "\u{308B 3073 3044}"
   s = StringScanner.new(utf8.encode("UTF-8")) 
-  p s.getch                         # => "��"
-  p s.getch                         # => "��"
-  p s.getch                         # => "��"
+  p s.getch                         # => "る"
+  p s.getch                         # => "び"
+  p s.getch                         # => "い"
   p s.getch                         # => nil
 
 #@else
-��ʸ��������� $KCODE �˰�¸���ޤ���
+一文字の定義は $KCODE に依存します。
 
-������
+使用例
       require 'strscan'
 
-      s = StringScanner.new("��Ӥ�") # ʸ�������ɤ�EUC-JP�Ȥ��ޤ�
-      $KCODE = 'n'                    # ñ�ʤ�Х�����Ȥ���ǧ������ޤ�
+      s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
+      $KCODE = 'n'                    # 単なるバイト列として認識されます
       s.getch                         # => "\244"
       s.getch                         # => "\353"
-      $KCODE = "e"                    # EUC-JP��ʸ����Ȥ���ǧ������ޤ�
-      s.getch                         # => "��"
-      s.getch                         # => "��"
+      $KCODE = "e"                    # EUC-JPの文字列として認識されます
+      s.getch                         # => "び"
+      s.getch                         # => "い"
       s.getch                         # => nil
 #@end
 
@@ -314,14 +314,14 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
 --- getbyte -> String | nil
 
 #@since 1.9.1
-1 �Х��ȥ�����󤷤�ʸ������֤��ޤ���
-�������ݥ��󥿤򤽤θ���˿ʤ�ޤ���
-�������ݥ��󥿤�ʸ�����������ؤ��ʤ� nil ���֤��ޤ���
+1 バイトスキャンして文字列で返します。
+スキャンポインタをその後ろに進めます。
+スキャンポインタが文字列の末尾を指すなら nil を返します。
 
-[[m:StringScanner#getbyte]] �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-����� [[m:StringScanner#get_byte]] ��ȤäƤ���������
+[[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#get_byte]] を使ってください。
 
-������
+使用例
   require 'strscan'
 
   utf8 = "\u{308B 3073 3044}"
@@ -335,21 +335,21 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
   p s.get_byte       #=> nil   
 
 #@else
-$KCODE �˴ؤ餺 1 �Х��ȥ�����󤷤�ʸ������֤��ޤ���
-�������ݥ��󥿤򤽤θ���˿ʤ�ޤ���
-�������ݥ��󥿤�ʸ�����������ؤ��ʤ� nil ���֤��ޤ���
+$KCODE に関らず 1 バイトスキャンして文字列で返します。
+スキャンポインタをその後ろに進めます。
+スキャンポインタが文字列の末尾を指すなら nil を返します。
 
-[[m:StringScanner#getbyte]] �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-����� [[m:StringScanner#get_byte]] ��ȤäƤ���������
+[[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#get_byte]] を使ってください。
 
-������
+使用例
       require 'strscan'
 
-      s = StringScanner.new("��Ӥ�") # ʸ�������ɤ�EUC-JP�Ȥ��ޤ�
-      $KCODE = 'n'                    # ñ�ʤ�Х�����Ȥ���ǧ������ޤ�
+      s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
+      $KCODE = 'n'                    # 単なるバイト列として認識されます
       s.get_byte                      # => "\244"
       s.get_byte                      # => "\353"
-      $KCODE = 'e'                    # ��Ϥ�ñ�ʤ�Х�����Ȥ���ǧ������ޤ�
+      $KCODE = 'e'                    # やはり単なるバイト列として認識されます
       s.get_byte                      # => "\244"
       s.get_byte                      # => "\323"
       s.get_byte                      # => "\244"
@@ -360,15 +360,15 @@ $KCODE �˴ؤ餺 1 �Х��ȥ�����󤷤�ʸ������֤��ޤ���
 
 
 --- inspect -> String
-StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
+StringScannerオブジェクトを表す文字列を返します。
 
-ʸ����ˤϥ��饹̾��¾���ʲ��ξ��󤬴ޤޤ�ޤ���
+文字列にはクラス名の他、以下の情報が含まれます。
 
-    * ������ʥݥ��󥿤θ��߰��֡�
-    * ��������оݤ�ʸ�����Ĺ����
-    * �������ݥ��󥿤�����ˤ���ʸ�����嵭�¹���� @ ���������ݥ��󥿤�ɽ���ޤ���
+    * スキャナポインタの現在位置。
+    * スキャン対象の文字列の長さ。
+    * スキャンポインタの前後にある文字。上記実行例の @ がスキャンポインタを表します。
 
-������
+使用例
       require 'strscan'
 
       s = StringScanner.new('test string')
@@ -382,12 +382,12 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
 
 
 --- match?(regexp) -> Fixnum | nil
-�������ݥ��󥿤����������� regexp ��ʸ����Υޥå����ޤ���
-�ޥå������顢�������ݥ��󥿤Ͽʤ᤺�˥ޥå�����
-��ʬʸ�����Ĺ�����֤��ޤ����ޥå����ʤ��ä��� nil ��
-�֤��ޤ���
+スキャンポインタの地点だけで regexp と文字列のマッチを試します。
+マッチしたら、スキャンポインタは進めずにマッチした
+部分文字列の長さを返します。マッチしなかったら nil を
+返します。
 
-�ޥå�������������ʸ��ñ�̤Ǥʤ��Х���ñ�̤Ȥʤ�ޤ���
+マッチしたサイズは文字単位でなくバイト単位となります。
 
 #@since 1.9.1
   require 'strscan'
@@ -401,25 +401,25 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
 #@else
 
   require 'strscan'
-  s = StringScanner.new("��Ӥ�") # ʸ�������ɤ�UTF-8�Ȥ��ޤ�
-  puts s.string      #=> ��Ӥ�
-  puts s.match?(/��/)  #=> 3
+  s = StringScanner.new("るびい") # 文字コードはUTF-8とします
+  puts s.string      #=> るびい
+  puts s.match?(/る/)  #=> 3
 
 #@end
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-������
+使用例
         s = StringScanner.new('test string')
         p s.match?(/\w+/)   #=> 4
         p s.match?(/\w+/)   #=> 4
         p s.match?(/\s+/)   #=> nil
 
 --- matched -> String | nil
-����ޥå�������ʬʸ������֤��ޤ���
-����Υޥå��˼��Ԥ��Ƥ���� nil ���֤��ޤ���
+前回マッチした部分文字列を返します。
+前回のマッチに失敗していると nil を返します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.matched     # => nil
       s.scan(/\w+/) # => "test"
@@ -430,10 +430,10 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
       s.matched     # => " "
 
 --- matched? -> bool
-����Υޥå����������Ƥ����� true ��
-���Ԥ��Ƥ����� false ���֤��ޤ���
+前回のマッチが成功していたら true を、
+失敗していたら false を返します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.matched?    # => false
       s.scan(/\w+/) # => "test"
@@ -444,14 +444,14 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
       s.matched?    # => true
 
 --- matched_size -> Fixnum | nil
-����ޥå�������ʬʸ�����Ĺ�����֤��ޤ���
-����ޥå��˼��Ԥ��Ƥ����� nil ���֤��ޤ���
+前回マッチした部分文字列の長さを返します。
+前回マッチに失敗していたら nil を返します。
 
-�ޥå�������������ʸ��ñ�̤Ǥʤ��Х���ñ�̤Ȥʤ�ޤ���
+マッチしたサイズは文字単位でなくバイト単位となります。
 
 #@since 1.9.1
   def run(encode)
-    utf8 = "\u{308B 3073 3044}" # ��Ӥ�
+    utf8 = "\u{308B 3073 3044}" # るびい
     s = StringScanner.new(utf8.encode(encode))
     s.scan(/#{"\u{308B}".encode(encode)}/)
     s.matched_size
@@ -465,14 +465,14 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
 
  require 'strscan'
 
- s = StringScanner.new("��Ӥ�") # ʸ�������ɤ�UTF-8�Ȥ��ޤ�
- puts s.string       #=> ��Ӥ�
- puts s.scan(/��/)   #=> ��
+ s = StringScanner.new("るびい") # 文字コードはUTF-8とします
+ puts s.string       #=> るびい
+ puts s.scan(/る/)   #=> る
  p s.matched_size    #=> 3
 
 #@end
 
-������
+使用例
       s = StringScanner.new('test string')
       s.matched_size # => nil
       s.scan(/\w+/)  # => "test"
@@ -483,26 +483,26 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
 
 --- peek(bytes) -> String
 --- peep(bytes) -> String
-�������ݥ��󥿤���Ĺ�� bytes �Х���ʬ����ʸ������֤��ޤ���
+スキャンポインタから長さ bytes バイト分だけ文字列を返します。
 
-ư����:
+動作例:
       require 'strscan'
       s = StringScanner.new('test string')
       s.peek(4)   # => "test"
 
-�ޤ������Υ᥽�åɤ�¹Ԥ��Ƥ⥹�����ݥ��󥿤ϰ�ư���ޤ���
+また、このメソッドを実行してもスキャンポインタは移動しません。
 
-[[m:StringScanner#peep]] �Ͼ���ΥС������ǤϺ�������ͽ��Ǥ���
-����� [[m:StringScanner#peek]] ��ȤäƤ���������
+[[m:StringScanner#peep]] は将来のバージョンでは削除される予定です。
+代わりに [[m:StringScanner#peek]] を使ってください。
 
-@param bytes 0 �ʾ����������ꤷ�ޤ���
-             ����������������оݤ�ʸ�����Ĺ����Ķ����ʬ��̵�뤵��ޤ���
-             bytes �� 0 �ΤȤ����ޤ��ϥ������ݥ��󥿤�ʸ�����������
-             �ؤ��Ƥ���Ȥ��϶�ʸ���� ("") ���֤��ޤ���
+@param bytes 0 以上の整数を指定します。
+             ただし、スキャン対象の文字列の長さを超える分は無視されます。
+             bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
+             指しているときは空文字列 ("") を返します。
 
-@raise ArgumentError bytes �������Ϳ�����ȯ�����ޤ���
+@raise ArgumentError bytes に負数を与えると発生します。
 
-������
+使用例
       require 'strscan'
 
       s = StringScanner.new('test string')
@@ -519,7 +519,7 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
       p s.scan(/\w+/) # => "string"
       p s.peek(4)     # => ""
 
-      # ���Υ᥽�åɤ�¹Ԥ��Ƥ⥹�����ݥ��󥿤ϰ�ư���ޤ���
+      # このメソッドを実行してもスキャンポインタは移動しません。
 
       s = StringScanner.new('test string')
       p s.peek(4)     # => "test"
@@ -530,9 +530,9 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
 
 --- pointer -> Fixnum
 --- pos -> Fixnum
-���ߤΥ������ݥ��󥿤Υ���ǥå������֤��ޤ���
+現在のスキャンポインタのインデックスを返します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.pos         # => 0
       s.scan(/\w+/) # => "test"
@@ -544,15 +544,15 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
 
 --- pointer=(n)
 --- pos=(n)
-�������ݥ��󥿤Υ���ǥå����� n �˥��åȤ��ޤ���
+スキャンポインタのインデックスを n にセットします。
 
-@param n �����ǡ��Х���ñ�̤ǻ��ꤷ�ޤ���
-         �������ꤹ���ʸ�������������Υ��ե��åȤȤ��ư����ޤ���
-@raise RangeError  �ޥå��оݤ�ʸ�����Ĺ����Ķ�����ͤ���ꤹ���ȯ�����ޤ���
+@param n 整数で、バイト単位で指定します。
+         負数を指定すると文字列の末尾からのオフセットとして扱います。
+@raise RangeError  マッチ対象の文字列の長さを超える値を指定すると発生します。
 
-@return n ���֤��ޤ���
+@return n を返します。
 
-������
+使用例
       require 'strscan'
 
       s = StringScanner.new('test string')
@@ -571,13 +571,13 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
       p s.scan(/\w+/) # => "ring"
 
 #@if (version <= "1.8.0")
-���Υ᥽�åɤϥޥå���Ͽ��ΤƤޤ���
+このメソッドはマッチ記録を捨てます。
 #@end
 
 --- post_match -> String | nil
-����ޥå���Ԥä�ʸ����Τ������ޥå������Ȥ�����������
-��ʬʸ������֤��ޤ�������Υޥå������Ԥ��Ƥ���Ⱦ�� nil ��
-�֤��ޤ���
+前回マッチを行った文字列のうち、マッチしたところよりも後ろの
+部分文字列を返します。前回のマッチが失敗していると常に nil を
+返します。
 
       s = StringScanner.new('test string')
       s.post_match  # => nil
@@ -593,9 +593,9 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
       s.post_match  # => nil
 
 --- pre_match -> String | nil
-����ޥå���Ԥä�ʸ����Τ������ޥå������Ȥ�����������
-��ʬʸ������֤��ޤ�������Υޥå������Ԥ��Ƥ���Ⱦ�� nil ��
-�֤��ޤ���
+前回マッチを行った文字列のうち、マッチしたところよりも前の
+部分文字列を返します。前回のマッチが失敗していると常に nil を
+返します。
 
       s = StringScanner.new('test string')
       s.pre_match   # => nil
@@ -611,12 +611,12 @@ StringScanner���֥������Ȥ�ɽ��ʸ������֤��ޤ���
       s.pre_match   # => nil
 
 --- reset -> self
-�������ݥ��󥿤�ʸ�������Ƭ (����ǥå��� 0) ���ᤷ��
-�ޥå���Ͽ��ΤƤޤ���
+スキャンポインタを文字列の先頭 (インデックス 0) に戻し、
+マッチ記録を捨てます。
 
-pos = 0��Ʊ��ư��Ǥ���
+pos = 0と同じ動作です。
 
-@return self ���֤��ޤ���
+@return self を返します。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -629,10 +629,10 @@ pos = 0��Ʊ��ư��Ǥ���
       s.pos         # => 0
 
 --- rest -> String
-ʸ����λĤ� (rest) ���֤��ޤ���
-����Ū�ˤϡ��������ݥ��󥿤��ؤ����֤����ʸ������֤��ޤ���
+文字列の残り (rest) を返します。
+具体的には、スキャンポインタが指す位置からの文字列を返します。
 
-�������ݥ��󥿤�ʸ�����������ؤ��Ƥ������ʸ���� ("") ���֤��ޤ���
+スキャンポインタが文字列の末尾を指していたら空文字列 ("") を返します。
 
       s = StringScanner.new('test string')
       s.rest         # => "test string"
@@ -644,15 +644,15 @@ pos = 0��Ʊ��ư��Ǥ���
       s.rest         # => ""
 
 --- rest? -> bool
-ʸ���󤬻ĤäƤ���ʤ�� true��
-�ĤäƤ��ʤ��ʤ�� false ���֤��ޤ���
+文字列が残っているならば trueを、
+残っていないならば false を返します。
 
-[[m:StringScanner#eos?]] �ȵդη�̤��֤��ޤ���
+[[m:StringScanner#eos?]] と逆の結果を返します。
 
-[[m:StringScanner#rest?]] �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-����� [[m:StringScanner#eos?]] ��ȤäƤ���������
+[[m:StringScanner#rest?]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#eos?]] を使ってください。
 
-������
+使用例
       s = StringScanner.new('test string')
       p s.eos?        # => false
       p s.rest?       # => true
@@ -664,25 +664,25 @@ pos = 0��Ʊ��ư��Ǥ���
 
 --- rest_size -> Fixnum
 --- restsize -> Fixnum
-ʸ����λĤ��Ĺ�����֤��ޤ���
-stringscanner.rest.size ��Ʊ���Ǥ���
+文字列の残りの長さを返します。
+stringscanner.rest.size と同じです。
 
-[[m:StringScanner#restsize]] �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-�����[[m:StringScanner#rest_size]] ��ȤäƤ���������
+[[m:StringScanner#restsize]] は将来のバージョンで削除される予定です。
+代わりに[[m:StringScanner#rest_size]] を使ってください。
 
-������
+使用例
       s = StringScanner.new('test string')
       p s.rest_size # => 11
       p s.rest.size # => 11
 
 --- scan(regexp) -> String | nil
-�������ݥ��󥿤����������� regexp ��ʸ����Υޥå����ޤ���
-�ޥå������顢�������ݥ��󥿤�ʤ������ɽ���˥ޥå�����
-��ʬʸ������֤��ޤ����ޥå����ʤ��ä��� nil ���֤��ޤ���
+スキャンポインタの地点だけで regexp と文字列のマッチを試します。
+マッチしたら、スキャンポインタを進めて正規表現にマッチした
+部分文字列を返します。マッチしなかったら nil を返します。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-������
+使用例
         s = StringScanner.new('test string')
         p s.scan(/\w+/)   #=> "test"
         p s.scan(/\w+/)   #=> nil
@@ -691,33 +691,33 @@ stringscanner.rest.size ��Ʊ���Ǥ���
         p s.scan(/./)     #=> nil
 
 --- scan_full(regexp, s, f) -> object
-�������ݥ��󥿤ΰ��֤��� regexp ��ʸ����Υޥå����ޤ���
-�ޥå�����������ȡ�s �� f ���ͤˤ�äưʲ��Τ褦��ư��ޤ���
+スキャンポインタの位置から regexp と文字列のマッチを試します。
+マッチに成功すると、s と f の値によって以下のように動作します。
 
-    * s �� true �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
-    * s �� false �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
-    * f �� true �ʤ�Хޥå�������ʬʸ������֤��ޤ���
-    * f �� false �ʤ�Хޥå�������ʬʸ�����Ĺ�����֤��ޤ���
+    * s が true ならばスキャンポインタを進めます。
+    * s が false ならばスキャンポインタを進めません。
+    * f が true ならばマッチした部分文字列を返します。
+    * f が false ならばマッチした部分文字列の長さを返します。
 
-�ޥå��˼��Ԥ���� s �� f �˴ط��ʤ� nil ���֤��ޤ���
+マッチに失敗すると s や f に関係なく nil を返します。
 
-���Υ᥽�åɤ� s �� f ���Ȥ߹�碌�ˤ�ꡢ
-¾�Υ᥽�åɤ�Ʊ����ư��ˤʤ�ޤ���
+このメソッドは s と f の組み合わせにより、
+他のメソッドと同等の動作になります。
 
-    * scan_full(regexp, true, true) �� [[m:StringScanner#scan]] ��Ʊ����
-    * scan_full(regexp, true, false) �� [[m:StringScanner#skip]] ��Ʊ����
-    * scan_full(regexp, false, true) �� [[m:StringScanner#check]] ��Ʊ����
-    * scan_full(regexp, false, false) �� [[m:StringScanner#match?]] ��Ʊ����
+    * scan_full(regexp, true, true) は [[m:StringScanner#scan]] と同等。
+    * scan_full(regexp, true, false) は [[m:StringScanner#skip]] と同等。
+    * scan_full(regexp, false, true) は [[m:StringScanner#check]] と同等。
+    * scan_full(regexp, false, false) は [[m:StringScanner#match?]] と同等。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-@param s true �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
-         false �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
+@param s true ならばスキャンポインタを進めます。
+         false ならばスキャンポインタを進めません。
 
-@param f true �ʤ�Хޥå�������ʬʸ������֤��ޤ���
-         false �ʤ�Хޥå�������ʬʸ�����Ĺ�����֤��ޤ���
+@param f true ならばマッチした部分文字列を返します。
+         false ならばマッチした部分文字列の長さを返します。
 
-������
+使用例
   s = StringScanner.new('test string')
   p s.scan_full(/\w+/, true, true)     #=> "test"
   p s.scan_full(/\s+/, false, true)    #=> " "
@@ -728,14 +728,14 @@ stringscanner.rest.size ��Ʊ���Ǥ���
 @see [[m:StringScanner#scan]] [[m:StringScanner#skip]] [[m:StringScanner#check]]  [[m:StringScanner#match?]] 
 
 --- scan_until(regexp) -> String | nil
-regexp �ǻ��ꤵ�줿����ɽ���ȥޥå�����ޤ�ʸ����򥹥���󤷤ޤ���
-�ޥå������������饹�����ݥ��󥿤�ʤ�ơ�
-������󳫻ϰ��֤���ޥå���ʬ�������ޤǤ���ʬʸ������֤��ޤ���
-�ޥå��˼��Ԥ����� nil ���֤��ޤ���
+regexp で指定された正規表現とマッチするまで文字列をスキャンします。
+マッチに成功したらスキャンポインタを進めて、
+スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
+マッチに失敗したら nil を返します。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => "test str"
       s.matched           # => "str"
@@ -743,33 +743,33 @@ regexp �ǻ��ꤵ�줿����ɽ���ȥޥå�����ޤ�ʸ����򥹥���󤷤ޤ���
       s.pre_match         # => "test "
 
 --- search_full(regexp, s, f) -> object
-regexp �ǻ��ꤵ�줿����ɽ���ȥޥå�����ޤ�ʸ����򥹥���󤷤ޤ���
-�ޥå�����������ȡ�s �� f ���ͤˤ�äưʲ��Τ褦��ư��ޤ���
+regexp で指定された正規表現とマッチするまで文字列をスキャンします。
+マッチに成功すると、s と f の値によって以下のように動作します。
 
-    * s �� true �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
-    * s �� false �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
-    * f �� true �ʤ�Х�����󳫻ϰ��֤���ޥå�������ʬ�������ޤǤ���ʬʸ������֤��ޤ���
-    * f �� false �ʤ�Х�����󳫻ϰ��֤���ޥå�������ʬ�������ޤǤ���ʬʸ�����Ĺ�����֤��ޤ���
+    * s が true ならばスキャンポインタを進めます。
+    * s が false ならばスキャンポインタを進めません。
+    * f が true ならばスキャン開始位置からマッチした部分の末尾までの部分文字列を返します。
+    * f が false ならばスキャン開始位置からマッチした部分の末尾までの部分文字列の長さを返します。
 
-�ޥå��˼��Ԥ���� s �� f �˴ط��ʤ� nil ���֤��ޤ���
+マッチに失敗すると s や f に関係なく nil を返します。
 
-���Υ᥽�åɤ� s �� f ���Ȥ߹�碌�ˤ�ꡢ
-¾�Υ᥽�åɤ�Ʊ����ư��ˤʤ�ޤ���
+このメソッドは s と f の組み合わせにより、
+他のメソッドと同等の動作になります。
 
-    * search_full(regexp, true, true) �� [[m:StringScanner#scan_until]] ��Ʊ����
-    * search_full(regexp, true, false) �� [[m:StringScanner#skip_until]] ��Ʊ����
-    * search_full(regexp, false, true) �� [[m:StringScanner#check_until]] ��Ʊ����
-    * search_full(regexp, false, false) �� [[m:StringScanner#exist?]] ��Ʊ����
+    * search_full(regexp, true, true) は [[m:StringScanner#scan_until]] と同等。
+    * search_full(regexp, true, false) は [[m:StringScanner#skip_until]] と同等。
+    * search_full(regexp, false, true) は [[m:StringScanner#check_until]] と同等。
+    * search_full(regexp, false, false) は [[m:StringScanner#exist?]] と同等。
 
-@param regexp �ޥå����Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに用いる正規表現を指定します。
 
-@param s true �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
-         false �ʤ�Х������ݥ��󥿤�ʤ�ޤ���
+@param s true ならばスキャンポインタを進めます。
+         false ならばスキャンポインタを進めません。
 
-@param f true �ʤ�Хޥå�������ʬʸ������֤��ޤ���
-         false �ʤ�Хޥå�������ʬʸ�����Ĺ�����֤��ޤ���
+@param f true ならばマッチした部分文字列を返します。
+         false ならばマッチした部分文字列の長さを返します。
 
-������
+使用例
 
   s = StringScanner.new('test string')   
   p s.search_full(/t/, true, true)       #=> "t"
@@ -780,13 +780,13 @@ regexp �ǻ��ꤵ�줿����ɽ���ȥޥå�����ޤ�ʸ����򥹥���󤷤ޤ���
 @see [[m:StringScanner#scan_until]] [[m:StringScanner#skip_until]] [[m:StringScanner#check_until]] [[m:StringScanner#exist?]]
 
 --- skip(regexp) -> Fixnum | nil
-�������ݥ��󥿤����������� regexp ��ʸ����Υޥå����ޤ���
-�ޥå������饹�����ݥ��󥿤�ʤ�ޥå�������ʬʸ�����
-Ĺ�����֤��ޤ����ޥå����ʤ��ä��� nil ���֤��ޤ���
+スキャンポインタの地点だけで regexp と文字列のマッチを試します。
+マッチしたらスキャンポインタを進めマッチした部分文字列の
+長さを返します。マッチしなかったら nil を返します。
 
-@param regexp �ޥå��˻��Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに使用する正規表現を指定します。
 
-������
+使用例
         s = StringScanner.new('test string')
         p s.skip(/\w+/)   #=> 4
         p s.skip(/\w+/)   #=> nil
@@ -795,14 +795,14 @@ regexp �ǻ��ꤵ�줿����ɽ���ȥޥå�����ޤ�ʸ����򥹥���󤷤ޤ���
         p s.skip(/./)     #=> nil
 
 --- skip_until(regexp) -> Fixnum | nil
-regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
-�ޥå������������饹�����ݥ��󥿤�ʤ�ơ�
-������󳫻ϰ��֤���ޥå���ʬ�������ޤǤ���ʬʸ�����Ĺ�����֤��ޤ���
-�ޥå��˼��Ԥ����� nil ���֤��ޤ���
+regexp が一致するまで文字列をスキャンします。
+マッチに成功したらスキャンポインタを進めて、
+スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
+マッチに失敗したら nil を返します。
 
-@param regexp �ޥå��˻��Ѥ�������ɽ������ꤷ�ޤ���
+@param regexp マッチに使用する正規表現を指定します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => 8
       s.matched           # => "str"
@@ -810,53 +810,53 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
       s.pre_match         # => "test "
 
 --- string -> String
-��������оݤˤ��Ƥ���ʸ������֤��ޤ���
+スキャン対象にしている文字列を返します。
 
-������
+使用例
       s = StringScanner.new('test string')
       s.string # => "test string"
 
 #@if (version <= "1.8.0")
-#@#Ruby 1.8.0 �Ǥ�
-�֤��ͤ� freeze ����Ƥ��ޤ���
+#@#Ruby 1.8.0 では
+返り値は freeze されています。
 
       s = StringScanner.new('test string')
       s.string.frozen? # => true
 #@else
-#@#Ruby 1.8.1 �ʹߤǤ�
-�֤��ͤ� freeze ����Ƥ��ޤ���
+#@#Ruby 1.8.1 以降では
+返り値は freeze されていません。
 
       s = StringScanner.new('test string')
       s.string.frozen? # => false
 #@end
 
-�ʤ������Υ᥽�åɤ� StringScanner.new ���Ϥ���
-ʸ����򤽤Τޤ��֤��ޤ��������λ��ͤ�������Ϥä��ݾڤ����櫓�ǤϤ���ޤ���
-���λ��ͤ˰�¸���������ɤ�񤫤ʤ��褦�ˤ��ޤ��礦��
+なお、このメソッドは StringScanner.new に渡した
+文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。
+この仕様に依存したコードを書かないようにしましょう。
 
       str = 'test string'
       s = StringScanner.new(str)
       s.string == str    # => true
-      s.string.eql?(str) # => true (����� false �ˤʤ��ǽ��������)
+      s.string.eql?(str) # => true (将来は false になる可能性がある)
 
-�ޤ����֤��ͤ�ʸ������Ф����˲�Ū���ѹ���Ǥ��ޤ�����
-��������������оݤ�ʸ������ѹ����뤳�Ȥ��ݾڤ���ޤ���
-���λ��ͤ˰�¸���������ɤ�񤫤ʤ��Ǥ���������
+また、返り値の文字列に対して破壊的な変更もできますが、
+この操作がスキャン対象の文字列を変更することも保証されません。
+この仕様に依存したコードを書かないでください。
 
       str = 'test string'
       s = StringScanner.new(str)
       s.string.replace("0123")
-      s.scan(/\w+/)     # => "0123" (����� "test" ���֤��ǽ������)
-      str               # => "0123" (����� "test string" ���֤��ǽ������)
+      s.scan(/\w+/)     # => "0123" (将来は "test" が返る可能性あり)
+      str               # => "0123" (将来は "test string" が返る可能性あり)
 
 --- string=(str)
-��������оݤ�ʸ����� str ���ѹ����ơ��ޥå���Ͽ��ΤƤޤ���
+スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
 
-@param str ��������оݤ�ʸ����� str ���ѹ����ơ��ޥå���Ͽ��ΤƤޤ���
+@param str スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
 
-@return str ���֤��ޤ���
+@return str を返します。
 
-������
+使用例
       str = '0123'
       s = StringScanner.new('test string')
       s.string = str     # => "0123"
@@ -864,11 +864,11 @@ regexp �����פ���ޤ�ʸ����򥹥���󤷤ޤ���
 
 --- terminate -> self
 --- clear -> self
-�������ݥ��󥿤�ʸ����������ޤǿʤᡢ�ޥå���Ͽ��ΤƤޤ���
+スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
 
-@return self ���֤��ޤ���
+@return self を返します。
 
-pos = self.string.size ��Ʊ��ư��Ǥ���
+pos = self.string.size と同じ動作です。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -880,11 +880,11 @@ pos = self.string.size ��Ʊ��ư��Ǥ���
       s[0]          # => nil
       s.pos         # => 11
 
-[[m:StringScanner#clear]] �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-����� [[m:StringScanner#terminate]] ��ȤäƤ���������
+[[m:StringScanner#clear]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#terminate]] を使ってください。
 
 --- unscan -> self
-�������ݥ��󥿤�����Υޥå������ΰ��֤��ᤷ�ޤ���
+スキャンポインタを前回のマッチの前の位置に戻します。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -892,41 +892,41 @@ pos = self.string.size ��Ʊ��ư��Ǥ���
       s.scan(/\w+/) # => "test"
 
 
-@return self���֤��ޤ���
+@return selfを返します。
 
 #@since 1.8.2
-���Υ᥽�åɤǥݥ��󥿤��᤻��Τ� 1 ��ʬ�����Ǥ���
-2 ��ʬ�ʾ��᤽���Ȥ����Ȥ����㳰 StringScanner::Error ��ȯ�����ޤ���
-�ޤ����ޤ��ޥå�����٤�ԤäƤ��ʤ��Ȥ��䡢
-����Υޥå������Ԥ��Ƥ����Ȥ����㳰 StringScanner::Error ��ȯ�����ޤ���
+このメソッドでポインタを戻せるのは 1 回分だけです。
+2 回分以上戻そうとしたときは例外 StringScanner::Error が発生します。
+また、まだマッチを一度も行っていないときや、
+前回のマッチが失敗していたときも例外 StringScanner::Error が発生します。
 
-@raise StringScanner::Error 2 ��ʬ�ʾ��᤽���Ȥ������䡢
-                            �ޤ��ޥå�����٤�ԤäƤ��ʤ�����
-                            ����Υޥå������Ԥ��Ƥ�������ȯ�����ޤ���
+@raise StringScanner::Error 2 回分以上戻そうとした時や、
+                            まだマッチを一度も行っていない時、
+                            前回のマッチが失敗していた時に発生します。
 #@else
-���Υ᥽�åɤǥݥ��󥿤��᤻��Τ� 1 ��ʬ�����Ǥ���
-2 ��ʬ�ʾ��᤽���Ȥ����Ȥ����㳰 ScanError ��ȯ�����ޤ���
-�ޤ����ޤ��ޥå�����٤�ԤäƤ��ʤ��Ȥ��䡢
-����Υޥå������Ԥ��Ƥ����Ȥ����㳰 ScanError ��ȯ�����ޤ���
+このメソッドでポインタを戻せるのは 1 回分だけです。
+2 回分以上戻そうとしたときは例外 ScanError が発生します。
+また、まだマッチを一度も行っていないときや、
+前回のマッチが失敗していたときも例外 ScanError が発生します。
 
-@raise ScanError 2 ��ʬ�ʾ��᤽���Ȥ������䡢
-                 �ޤ��ޥå�����٤�ԤäƤ��ʤ�����
-                 ����Υޥå������Ԥ��Ƥ�������ȯ�����ޤ���
+@raise ScanError 2 回分以上戻そうとした時や、
+                 まだマッチを一度も行っていない時、
+                 前回のマッチが失敗していた時に発生します。
 #@end
-������
+使用例
       s = StringScanner.new('test string')
       begin
-        # �ޥå�����٤�ԤäƤ��ʤ��Τǡ��㳰��ȯ�����롣
+        # マッチを一度も行っていないので、例外が発生する。
         s.unscan
       rescue StringScanner::Error => err
         puts err
-        # ������
+        # 出力例
         #=> unscan failed: previous match had failed
       end
       p s.scan(/\w+/) # => "test"
       s.unscan
       begin
-        # ���ʾ��᤽���Ȥ����Τǡ��㳰��ȯ�����롣
+        # 二回以上戻そうとしたので、例外が発生する。
         s.unscan
 #@since 1.8.2
       rescue StringScanner::Error => err
@@ -934,17 +934,17 @@ pos = self.string.size ��Ʊ��ư��Ǥ���
       rescue ScanError => err
 #@end
         puts err
-        # ������
+        # 出力例
         #=> unscan failed: previous match had failed
       end
       p s.scan(/\w+/) # => "test"
       p s.scan(/\w+/) # => nil
       begin
-        # ����Υޥå������Ԥ��Ƥ���Τǡ��㳰��ȯ�����롣
+        # 前回のマッチが失敗しているので、例外が発生する。
         s.unscan
       rescue => err
         puts err
-        # ������
+        # 出力例
         #=> unscan failed: previous match had failed
       end
 
@@ -952,38 +952,38 @@ pos = self.string.size ��Ʊ��ư��Ǥ���
 #@# bc-rdoc: detected missing name: matchedsize
 --- matchedsize -> Fixnum | nil
 
-[[m:StringScanner#matched_size]] ��Ʊ���Ǥ���
+[[m:StringScanner#matched_size]] と同じです。
 
-���Υ᥽�åɤ� �Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
-����� [[m:StringScanner#matched_size]] ��ȤäƤ���������
+このメソッドは は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#matched_size]] を使ってください。
 
 @see [[m:StringScanner#matched_size]] 
 
 == Constants
 
 --- Version -> String
-[[c:StringScanner]] ���饹�ΥС�������ʸ������֤��ޤ���
-����ʸ����� [[m:Object#freeze]] ����Ƥ��ޤ���
+[[c:StringScanner]] クラスのバージョンを文字列で返します。
+この文字列は [[m:Object#freeze]] されています。
 
       StringScanner::Version           # => "0.7.0"
       StringScanner::Version.frozen?   # => true
 
 --- Id -> String
 
-[[c:StringScanner]] ���饹�ξܤ����С�������ʸ������֤��ޤ���
-����ʸ����� [[m:Object#freeze]] ����Ƥ��ޤ���
+[[c:StringScanner]] クラスの詳しいバージョンを文字列で返します。
+この文字列は [[m:Object#freeze]] されています。
 
 
 #@until 1.8.2
 = class ScanError
 
-����������ȯ���������顼�򤢤�魯�㳰�Ǥ���
+スキャン中に発生したエラーをあらわす例外です。
 
 #@end
 #@since 1.8.2
 = class StringScanner::Error
 
-����������ȯ���������顼�򤢤�魯�㳰�Ǥ���
+スキャン中に発生したエラーをあらわす例外です。
 
 #@end
 #@end

@@ -1,45 +1,45 @@
-= 1. ����Ū�ʼ���
+= 1. 一般的な質問
 
-== 1.1 Ruby/Tk �Ȥϲ��Ǥ�����
+== 1.1 Ruby/Tk とは何ですか？
 
-Ruby/Tk �ϡ����Ϥʥ��֥������Ȼظ�������ץȸ���Ǥ��� Ruby �ȡ�
-��ڤ� GUI �ץ�����������Ǥ��� Tcl/Tk ���Ȥ߹�碌�뤳�Ȥǡ�
-�ڤ������ץ������򤹤뤳�Ȥ��ܻؤ�����ΤǤ���
+Ruby/Tk は、強力なオブジェクト指向スクリプト言語である Ruby と、
+手軽に GUI プログラムを作成できる Tcl/Tk を組み合わせることで、
+楽しく、プログラムをすることを目指したものです。
 
-== 1.2 �ɤ�� OS ��ư���ΤǤ��礦����
-
-
-== 1.3 Tcl/Tk �Ǥʤ� Ruby/Tk ��Ȥ��Ȳ������줷���ΤǤ�����
-
-Ʊ��������ץȸ���Ȥ��äƤ� Ruby �� Tcl ��꤫�ʤ궯�ϤǤ���
-Tk �ϻȤ��������ɡ�Tcl �ϻȤ������ʤ��ͤˤȤä� Ruby/Tk ��Ȥ���̣��
-�礤�ˤ���Ǥ��礦��
-
-== 1.4 Ruby/Tk �� tcltk, tcltklib �饤�֥��ΰ㤤�ϲ��Ǥ�����
+== 1.2 どんな OS で動作するのでしょうか？
 
 
-== 1.5 Ruby/Gtk �Ȥϲ����㤦�ΤǤ�����
+== 1.3 Tcl/Tk でなく Ruby/Tk を使うと何がうれしいのですか？
 
-Ruby/Tk �ˤϰʲ��Τ褦������������ޤ���
+同じスクリプト言語といっても Ruby は Tcl よりかなり強力です。
+Tk は使いたいけど、Tcl は使いたくない人にとって Ruby/Tk を使う意味は
+大いにあるでしょう。
 
-* ���ͤ˽���� Tcl/Tk, Perl/Tk �ʤɤν��Ҥ�¿��
-* ư�ʬ����ʤ��Ȥ��ˡ���ǧ�Τ���� C �ޤ����ɬ�פ��ʤ�
-* Canvas �ε�ǽ�����¤��Ƥ���
+== 1.4 Ruby/Tk と tcltk, tcltklib ライブラリの違いは何ですか？
 
-Ruby/Tk �ˤϰʲ��Τ褦�ʷ���������ޤ���
 
-* ɸ��ǻȤ��� Widget �μ��ब���ʤ�
-* �Ϥ��ʤΤ� Tcl/Tk ��� Gtk+
+== 1.5 Ruby/Gtk とは何が違うのですか？
 
-== 1.6 Ruby/Qt �Ȥϲ����㤦�ΤǤ�����
+Ruby/Tk には以下のような利点があります。
 
-Ruby/Tk �ˤϰʲ��Τ褦������������ޤ���
+* 参考に出来る Tcl/Tk, Perl/Tk などの書籍が多い
+* 動作が分からないときに、確認のために C まで戻る必要がない
+* Canvas の機能が充実している
 
-* ���ͤ˽���� Tcl/Tk, Perl/Tk �ʤɤν��Ҥ�¿��
-* ư�ʬ����ʤ��Ȥ��ˡ���ǧ�Τ���� C++ �ޤ����ɬ�פ��ʤ�
-* Windows �Ǥ⤿���Ǥ���
+Ruby/Tk には以下のような欠点があります。
 
-Ruby/Tk �ˤϰʲ��Τ褦�ʷ���������ޤ���
+* 標準で使える Widget の種類が少ない
+* はやりなのは Tcl/Tk より Gtk+
 
-* ɸ��ǻȤ��� Widget �μ��ब���ʤ�
-* �Ϥ��ʤΤ� Tcl/Tk ��� Qt
+== 1.6 Ruby/Qt とは何が違うのですか？
+
+Ruby/Tk には以下のような利点があります。
+
+* 参考に出来る Tcl/Tk, Perl/Tk などの書籍が多い
+* 動作が分からないときに、確認のために C++ まで戻る必要がない
+* Windows 版もただである
+
+Ruby/Tk には以下のような欠点があります。
+
+* 標準で使える Widget の種類が少ない
+* はやりなのは Tcl/Tk より Qt

@@ -1,6 +1,6 @@
-Ê¬»¶¥ª¥Ö¥¸¥§¥¯¥È¥×¥í¥°¥é¥ß¥ó¥°¤Î¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+åˆ†æ•£ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°ã®ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-[[unknown:¼¹É®¼ÔÊç½¸]]
+[[unknown:åŸ·ç­†è€…å‹Ÿé›†]]
 
   * [[url:http://www2a.biglobe.ne.jp/~seki/ruby/druby.html]]
   * [[url:http://www.ruby-doc.org/stdlib/libdoc/drb/rdoc/index.html]]

@@ -1,46 +1,46 @@
 = module DL
 
-UNIX �� [[man:dlopen(3)]] �� Windows �� LoadLibrary() 
-�ʤɤΥ����ʥߥå���󥫤ؤ����٥�ʥ��󥿡��ե��������󶡤���⥸�塼��Ǥ���
+UNIX の [[man:dlopen(3)]] や Windows の LoadLibrary() 
+などのダイナミックリンカへの低レベルなインターフェースを提供するモジュールです。
 
 == Module Functions
 
 --- dlopen(lib)                    -> DL::Handle
 --- dlopen(lib) {|handle| ... }    -> DL::Handle
 
-�����ʥߥå��饤�֥�� lib ������ɤ���
-[[c:DL::Handle]] �Ȥ����֤��ޤ���
+ダイナミックライブラリ lib をロードし、
+[[c:DL::Handle]] として返します。
 
-�֥��å���Ϳ�����Ƥ�����ϡ�[[c:DL::Handle]] �����Ȥ���
-Ϳ����줿�֥��å���¹Ԥ��ޤ���[[c:DL::Handle]] ���֤��ޤ���
+ブロックが与えられている場合は、[[c:DL::Handle]] 引数として
+与えられたブロックを実行します。[[c:DL::Handle]] を返します。
 
-[[m:DL::Handle.new]](lib) �������Ǥ���
+[[m:DL::Handle.new]](lib) と等価です。
 
-@param lib �����ɤ������饤�֥���ʸ�����Ϳ���ޤ���
+@param lib ロードしたいライブラリを文字列で与えます。
 
-@raise RuntimeError [[man:dlopen(3)]] �˼��Ԥ�������ȯ�����ޤ���
+@raise RuntimeError [[man:dlopen(3)]] に失敗した時に発生します。
 
 --- malloc(size)    -> Integer
 
-size �Х��ȤΥ����ΰ����ݤ��������ΰ��ؤ��������֤��ޤ���
+size バイトのメモリ領域を確保し、その領域を指す整数を返します。
 
-�������ݤǤ��ʤ��ä���硢�㳰 NoMemoryError ��ȯ�����뤫�����뤤�� ruby ���󥿥ץ꥿��������λ���ޤ���
+メモリを確保できなかった場合、例外 NoMemoryError が発生するか、あるいは ruby インタプリタが強制終了します。
 
-@param size ɬ�פʥ����ΰ�Υ������������ǻ��ꤷ�ޤ���
+@param size 必要なメモリ領域のサイズを整数で指定します。
 
 --- realloc(addr, size)   -> Integer
 #@todo
 
 --- free(addr)      -> nil
 
-���ꤵ�줿 addr ���ؤ������ΰ�������ޤ���
+指定された addr が指すメモリ領域を開放します。
 
-ɬ�� [[m:DL.#malloc]] ���֤��������� addr ��Ϳ���ʤ���Ф����ޤ���
-�����Ǥʤ���硢ruby ���󥿥ץ꥿���۾ｪλ���ޤ���
+必ず [[m:DL.#malloc]] が返した整数を addr に与えなければいけません。
+そうでない場合、ruby インタプリタが異常終了します。
 
-@param addr [[m:DL.#malloc]] �ǳ��ݤ��줿�����ΰ��ؤ���������ꤷ�ޤ���
+@param addr [[m:DL.#malloc]] で確保されたメモリ領域を指す整数を指定します。
 
-��:
+例:
   require 'dl'
   addr = DL.malloc(10)
   p addr               #=> 136942800
@@ -48,11 +48,11 @@ size �Х��ȤΥ����ΰ����ݤ��������ΰ��ؤ��������֤��ޤ���
 
 --- dlwrap(obj)    -> Integer
 
-���ꤵ�줿���֥������� obj �Υ��ɥ쥹��ɽ���������֤��ޤ���
+指定されたオブジェクト obj のアドレスを表す整数を返します。
 
-@param obj Ruby �Υ��֥������Ȥ���ꤷ�ޤ���
+@param obj Ruby のオブジェクトを指定します。
 
-��:
+例:
 
   require 'dl'
   s = 'abc'
@@ -61,11 +61,11 @@ size �Х��ȤΥ����ΰ����ݤ��������ΰ��ؤ��������֤��ޤ���
 
 --- dlunwrap(addr)  -> object
 
-���ꤵ�줿���ɥ쥹�� Ruby ���֥������Ȥ��֤��ޤ���
+指定されたアドレスの Ruby オブジェクトを返します。
 
-@param addr [[m:DL.#dlwrap]] ���֤��� Ruby ���֥������ȤΥ��ɥ쥹(����)����ꤷ�ޤ���
+@param addr [[m:DL.#dlwrap]] が返した Ruby オブジェクトのアドレス(整数)を指定します。
 
-��:
+例:
 
   require 'dl'
   s = 'abc'
@@ -124,11 +124,11 @@ size �Х��ȤΥ����ΰ����ݤ��������ΰ��ؤ��������֤��ޤ���
 --- TYPE_VOID
 --- TYPE_VOIDP
 
-�ѿ��η���ɽ������Ǥ���unsigned char �ʤɤ�ɽ���������� - ���դ���
+変数の型を表す定数です。unsigned char などを表したい場合は - を付けて
 
  - TYPE_CHAR
 
-�ʤɤȤ��ޤ���
+などとします。
 
 = class DL::DLError < StandardError
 

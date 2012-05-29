@@ -2,7 +2,7 @@ require webrick/config
 require webrick/httpstatus
 require webrick/httpauth/authenticator
 
-HTTP ¤Î Basic Ç§¾Ú¤Î¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+HTTP ã® Basic èªè¨¼ã®ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(basicauth/HTTPAuth__BasicAuth)
 #@include(basicauth/HTTPAuth__ProxyBasicAuth)

@@ -1,5 +1,5 @@
 
-#@# tcltklib.so¤ÎÃæ¿È¤òÅ¸³«
+#@# tcltklib.soã®ä¸­èº«ã‚’å±•é–‹
 
 #@include(tcltklib/TclTkIp)
 #@include(tcltklib/TclTkLib)

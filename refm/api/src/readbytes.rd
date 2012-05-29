@@ -1,24 +1,24 @@
-[[m:IO#readbytes]] ���󶡤���饤�֥��Ǥ���
+[[m:IO#readbytes]] を提供するライブラリです。
 
 = reopen IO
 == Instance Methods
 
 --- readbytes(size) -> String
-[[m:IO#read]] ��Ʊ�ͤ� size �Х����ɤ߹��ߤޤ�����
-EOF����ã���������㳰 [[c:EOFError]] ��ȯ�������ޤ���
+[[m:IO#read]] と同様に size バイト読み込みますが、
+EOFに到達した時に例外 [[c:EOFError]] を発生させます。
 
-@param size �ɤ߹���Ĺ���������ǻ��ꤷ�ޤ���nil ����ꤷ������ EOF �ޤ��ɤ߹��ߤޤ���
+@param size 読み込む長さを整数で指定します。nil を指定した場合は EOF まで読み込みます。
 
-@raise EOFError EOF ����ã��������ȯ�����ޤ���
+@raise EOFError EOF に到達した場合に発生します。
 
-@raise TruncatedDataError size �Х���̤�������ɤ߹���ʤ��ä�����ȯ�����ޤ���
+@raise TruncatedDataError size バイト未満しか読み込めなかった場合に発生します。
 
 = class TruncatedDataError < IOError
 
-[[m:IO#readbytes]] ��ȯ���������㳰�Ǥ���
+[[m:IO#readbytes]] が発生させる例外です。
 
 == Instance Methods
 
 --- data -> String
 
-�㳰��ȯ������ޤǤ��ɤ߹�����ǡ�����ʸ������֤��ޤ���
+例外が発生するまでに読み込んだデータを文字列で返します。

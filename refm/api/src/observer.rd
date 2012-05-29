@@ -1,20 +1,20 @@
-Observer �ѥ�����򰷤�����Υ饤�֥��Ǥ���
+Observer パターンを扱うためのライブラリです。
 
 = module Observable
 
-Observer �ѥ�������󶡤���⥸�塼��Ǥ���
+Observer パターンを提供するモジュールです。
 
-Mix-in �ˤ�� Observer �ѥ�������󶡤��ޤ���
+Mix-in により Observer パターンを提供します。
 
-Observable �⥸�塼��� include �������饹��
-[[m:Observable#changed]] �᥽�åɤˤ�깹���ե饰��Ω�ơ�
-[[m:Observable#notify_observers]] ���ƤӽФ�����
-�����ե饰��Ω�äƤ�����ϥ��֥����Ф����Τ��ޤ�
-(���֥����Ф� update �᥽�åɤ�ƤӽФ�)��
-[[m:Observable#notify_observers]] �ΰ�����
-���Τޤޥ��֥����Ф� update �᥽�åɤ��Ϥ���ޤ���
+Observable モジュールを include したクラスは
+[[m:Observable#changed]] メソッドにより更新フラグを立て、
+[[m:Observable#notify_observers]] が呼び出されると
+更新フラグが立っている場合はオブザーバに通知します
+(オブザーバの update メソッドを呼び出す)。
+[[m:Observable#notify_observers]] の引数は
+そのままオブザーバの update メソッドに渡されます。
 
-=== ����ץ륳����
+=== サンプルコード
   require 'observer'
   class AObservable
     include Observable
@@ -36,63 +36,63 @@ Observable �⥸�塼��� include �������饹��
 
 --- add_observer(observer) -> Array
 
-���֥����Ф���Ͽ���ޤ���
+オブザーバを登録します。
 
-���֥����Ф���Ͽ������Ͽ����Ƥ��륪�֥����ФΥꥹ�Ȥ��֤��ޤ���
+オブザーバを登録し、登録されているオブザーバのリストを返します。
 
-���֥����Ф� update �᥽�åɤ������Ƥ���ɬ�פ�����ޤ���
+オブザーバは update メソッドを備えている必要があります。
 
-observer �� update �᥽�åɤ�����ʤ��Ȥ���
-�㳰 [[c:NoMethodError]] ��ȯ�����ޤ���
+observer が update メソッドを持たないときは
+例外 [[c:NoMethodError]] が発生します。
 
-@param observer ���������Τ�����륪�֥�����
+@param observer 更新の通知を受けるオブザーバ
 
-@raise NoMethodError update�᥽�åɤ�����ʤ����֥������Ȥ򥪥֥����Ф˻��ꤷ������ȯ�����ޤ���
+@raise NoMethodError updateメソッドを持たないオブジェクトをオブザーバに指定した場合に発生します。
 
 --- delete_observer(observer) -> object | nil
 
-���֥����Ф������ޤ���
+オブザーバを削除します。
 
-���ꤵ�줿���֥������Ȥ����֥����ФȤ�����Ͽ����Ƥ������ϡ�
-�ꥹ�Ȥ��饪�֥������Ȥ��������������줿���֥������Ȥ��֤��ޤ���
-��Ͽ����Ƥ��ʤ��ä����ϡ�nil ���֤��ޤ���
+指定されたオブジェクトがオブザーバとして登録されていた場合は、
+リストからオブジェクトを削除し、取り除かれたオブジェクトを返します。
+登録されていなかった場合は、nil を返します。
 
-@param observer ������륪�֥�����
+@param observer 削除するオブザーバ
 
 --- delete_observers -> Array
 
-���֥����Ф򤹤٤ƺ�����ޤ���
+オブザーバをすべて削除します。
 
-��Ͽ����Ƥ��륪�֥����ФΥꥹ�Ȥ������ƤΥ��֥������Ȥ��������
-���Ȥʤä����֥����ФΥꥹ�Ȥ��֤��ޤ���
+登録されているオブザーバのリストから全てのオブジェクトを取り除き、
+空となったオブザーバのリストを返します。
 
 --- count_observers -> Fixnum
 
-��Ͽ����Ƥ��륪�֥����Фο����֤��ޤ���
+登録されているオブザーバの数を返します。
 
 --- changed(state = true) -> bool
 
-�����ե饰��Ω�Ƥޤ���
+更新フラグを立てます。
 
-�����ե饰����ꤵ�줿���Ƥ��ѹ������ѹ���ι����ե饰�ξ��֤��֤��ޤ���
-����Ū�˰�������ꤷ�ơ������ե饰���������뤳�Ȥ����ޤ���
+更新フラグを指定された内容へ変更し、変更後の更新フラグの状態を返します。
+明示的に引数を指定して、更新フラグを初期化することも出来ます。
 
-@param state �����ե饰��Ω�Ƥ����true�򡢽�����������false����ꤷ�ޤ���
+@param state 更新フラグを立てる場合はtrueを、初期化する場合はfalseを指定します。
 
 --- changed? -> bool
 
-�����ե饰�ξ��֤��֤��ޤ���
+更新フラグの状態を返します。
 
 --- notify_observers(*arg) -> nil
 
-���֥����Фع��������Τ��ޤ���
+オブザーバへ更新を通知します。
 
-�����ե饰��Ω�äƤ������ϡ�
-��Ͽ����Ƥ��륪�֥����Ф� update �᥽�åɤ�缡�ƤӽФ��ޤ���
-Ϳ����줿�����Ϥ��� update �᥽�åɤ��Ϥ���ޤ���
-Ϳ����줿�����ο�����Ͽ����Ƥ��륪�֥����Ф�update �᥽�åɤΰ����ο��˰㤤���������
-�㳰[[c:ArgumentError]]��ȯ�����ޤ���
-���ƤΥ��֥����Ф� update �᥽�åɤ�ƤӽФ��塢�����ե饰���������ޤ���
+更新フラグが立っていた場合は、
+登録されているオブザーバの update メソッドを順次呼び出します。
+与えられた引数はその update メソッドに渡されます。
+与えられた引数の数と登録されているオブザーバのupdate メソッドの引数の数に違いがある場合は
+例外[[c:ArgumentError]]を発生します。
+全てのオブザーバの update メソッドを呼び出し後、更新フラグを初期化します。
 
-@raise ArgumentError Ϳ����줿�����ο�����Ͽ����Ƥ��륪�֥����Ф�update �᥽�åɤΰ����ο��˰㤤���������ȯ�����ޤ���
+@raise ArgumentError 与えられた引数の数と登録されているオブザーバのupdate メソッドの引数の数に違いがある場合に発生します。
 

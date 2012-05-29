@@ -1,4 +1,4 @@
-�ץ����������椹�뤿��Υ��饹����������饤�֥��Ǥ���
+プロセスを制御するためのクラスを定義したライブラリです。
 
 = class Shell::ProcessController < Object
 
@@ -6,9 +6,9 @@
 
 --- new(shell)
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param shell [[c:Shell]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param shell [[c:Shell]] のインスタンスを指定します。
 
 --- activate(pc) -> ()
 #@todo
@@ -38,90 +38,90 @@
 
 --- active_job?(job) -> bool
 
-���ꤵ�줿����֤��¹���Ǥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+指定されたジョブが実行中である場合は真を返します。
+そうでない場合は偽を返します。
 
-@param job ����֤���ꤷ�ޤ���
+@param job ジョブを指定します。
 
 --- active_jobs -> Array
 
-�¹���Υ���֤�������֤��ޤ���
+実行中のジョブの配列を返します。
 
 --- active_jobs_exist? -> bool
 
-�¹���Υ���֤�¸�ߤ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+実行中のジョブが存在する場合は真を返します。
+そうでない場合は偽を返します。
 
 --- add_schedule(command) -> ()
 
-���ꤵ�줿���ޥ�ɤ��Ե�����֤Ȥ�����Ͽ���ޤ���
-���������¹���Υ���֤�¸�ߤ��ʤ����ϡ����Υ���֤�ľ���˼¹Ԥ��ޤ���
+指定されたコマンドを待機ジョブとして登録します。
+ただし、実行中のジョブが存在しない場合は、そのジョブを直ちに実行します。
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 
 --- jobs -> Array
 
-���ƤΥ���֤�������֤��ޤ���
+全てのジョブの配列を返します。
 
 --- jobs_exist? -> bool
 
-�¹��椫�Ե���Υ���֤�¸�ߤ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+実行中か待機中のジョブが存在する場合は真を返します。
+そうでない場合は偽を返します。
 
 --- kill_job(signal, command) -> Integer
 
-���ꤵ�줿���ޥ�ɤ˥����ʥ������ޤ���
+指定されたコマンドにシグナルを送ります。
 
-@param signal �����ʥ������������̾����ʸ����ǻ��ꤷ�ޤ���
-              ����ͤ���ĥ����ʥ�(���뤤�ϥ����ʥ�̾������-)����ꤹ��ȡ�
-              �ץ������ǤϤʤ��ץ��������롼�פ˥����ʥ������ޤ��� 
+@param signal シグナルを整数かその名前の文字列で指定します。
+              負の値を持つシグナル(あるいはシグナル名の前に-)を指定すると、
+              プロセスではなくプロセスグループにシグナルを送ります。 
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 
 @see [[m:Process.#kill]]
 
 --- sfork(command){ ... } -> [Integer, IO, IO]
 
-����ץ�� fork �Ǥ���
+シンプルな fork です。
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 
-@return [PID, ������ IO, ������ IO] ����ʤ�������֤��ޤ���
+@return [PID, 入力用 IO, 出力用 IO] からなる配列を返します。
 
 
 --- start_job(command = nil)
 
-���ꤵ�줿���ޥ�ɤμ¹Ԥ򳫻Ϥ��ޤ���
+指定されたコマンドの実行を開始します。
 
-���ޥ�ɤ��ά�������ϡ��Ԥ����֤Υ���֤Τ�����Ƭ�Τ�Τ�¹Ԥ��ޤ���
+コマンドを省略した場合は、待ち状態のジョブのうち先頭のものを実行します。
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 
 --- terminate_job(command)
 
-���ꤵ�줿���ޥ�ɤ�λ���ޤ���
+指定されたコマンドを終了します。
 
-@param command ���ޥ�ɤ���ꤷ�ޤ���
+@param command コマンドを指定します。
 
 --- wait_all_jobs_execution -> ()
 
-���ƤΥ���֤μ¹Ԥ������ޤ��Ԥ��ޤ���
+全てのジョブの実行が終わるまで待ちます。
 
 --- waiting_job?(job) -> bool
 
-���ꤵ�줿����֤�¸�ߤ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+指定されたジョブが存在する場合は真を返します。
+そうでない場合は偽を返します。
 
-@param job ����֤���ꤷ�ޤ���
+@param job ジョブを指定します。
 
 --- waiting_jobs -> Array
 
-�Ե���Υ���֤��֤��ޤ���
+待機中のジョブを返します。
 
 --- waiting_jobs_exist? -> bool
 
-�Ե���Υ���֤�¸�ߤ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+待機中のジョブが存在する場合は真を返します。
+そうでない場合は偽を返します。
 
 #@since 1.9.1
 --- shell -> Shell

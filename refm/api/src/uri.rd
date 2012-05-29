@@ -1,8 +1,8 @@
-URI (Uniform Resource Identifier) �Τ���Υ饤�֥��Ǥ���
+URI (Uniform Resource Identifier) のためのライブラリです。
 
-=== ��Ϣ RFC
+=== 関連 RFC
 
-�ʲ��ϼ����κݤ˻��Ȥ���Ƥ��� RFC �Ǥ��ꡢ�ǿ��� RFC �Ǥ���Ȥϸ¤�ޤ���
+以下は実装の際に参照されている RFC であり、最新の RFC であるとは限りません。
 
   * [[RFC:1738]] Uniform Resource Locators (URL)                       (Updated by [[RFC:2396]])
   * [[RFC:2255]] The LDAP URL Format                                   (Obsoleted by [[RFC:4510]], [[RFC:4516]])
@@ -32,12 +32,12 @@ URI (Uniform Resource Identifier) �Τ���Υ饤�֥��Ǥ���
 
 --- URI(uri_str) -> object
 
-Ϳ����줿 URI ���鳺������ [[c:URI::Generic]] �Υ��֥��饹�Υ��󥹥��󥹤���������
-�֤��ޤ���scheme �����ꤵ��Ƥ��ʤ����ϡ�[[c:URI::Generic]] ���֥������Ȥ��֤��ޤ���
+与えられた URI から該当する [[c:URI::Generic]] のサブクラスのインスタンスを生成して
+返します。scheme が指定されていない場合は、[[c:URI::Generic]] オブジェクトを返します。
 
-@param uri_str �ѡ��������� URI ��ʸ����Ȥ���Ϳ���ޤ���
+@param uri_str パースしたい URI を文字列として与えます。
 
-@raise URI::InvalidURIError �ѡ����˼��Ԥ�������ȯ�����ޤ���
+@raise URI::InvalidURIError パースに失敗した場合に発生します。
 
 @see [[m:URI.parse]]
 
@@ -45,16 +45,16 @@ URI (Uniform Resource Identifier) �Τ���Υ饤�֥��Ǥ���
 
 = class URI::Error < StandardError
 
-���٤Ƥ� URI �㳰���饹�δ��쥯�饹�Ǥ���
+すべての URI 例外クラスの基底クラスです。
 
 = class URI::InvalidURIError < URI::Error
 
-������ URI ����ꤷ���Ȥ���ȯ�����ޤ���
+不正な URI を指定したときに発生します。
 
 = class URI::InvalidComponentError < URI::Error
 
-�����ʹ������Ǥ���ꤷ���Ȥ���ȯ�����ޤ���
+不正な構成要素を指定したときに発生します。
 
 = class URI::BadURIError < URI::Error
 
-URI �Ȥ��������������Ȥ����������Ȥ���ȯ�����ޤ���
+URI として正しいが、使い方が悪いときに発生します。

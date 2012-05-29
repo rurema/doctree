@@ -3,7 +3,7 @@
 include TkItemConfigMethod
 include Tk::BLT::PlotComponent::OptKeys
 
-¥×¥í¥Ã¥È¥³¥ó¥İ¡¼¥Í¥ó¥È
+ãƒ—ãƒ­ãƒƒãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 
 == Instance Methods
 
@@ -320,14 +320,14 @@ alias bar
 
 --- element_create(id = nil, keys = {})
 
-¥×¥í¥Ã¥ÈÍ×ÁÇ¤òºîÀ®¤·¤Ş¤¹¡£
+ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ ã‚’ä½œæˆã—ã¾ã™ã€‚
 
-id ¤ò»ØÄê¤·¤¿¾ì¹ç¡¢»ØÄê¤·¤¿ id ¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ¤¬ OBJ_TBL ¾å¤ËÂ¸ºß¤¹¤ë¤È¤­¤Ï¡¢¤½¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ¤òÊÖ¤·¤Ş¤¹¡£
+id ã‚’æŒ‡å®šã—ãŸå ´åˆã€æŒ‡å®šã—ãŸ id ã®ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ ãŒ OBJ_TBL ä¸Šã«å­˜åœ¨ã™ã‚‹ã¨ãã¯ã€ãã®ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ ã‚’è¿”ã—ã¾ã™ã€‚
 
-¤³¤ì¤Ï¼¡¤Î¸Æ¤Ó½Ğ¤·¤ÈÆ±¤¸¤Ç¤¹¡£
+ã“ã‚Œã¯æ¬¡ã®å‘¼ã³å‡ºã—ã¨åŒã˜ã§ã™ã€‚
   Tk::BLT::PlotComponent::Element.new(self, tagid(id), keys)
 @param id id
-@param keys ¥ª¥×¥·¥ç¥ó
+@param keys ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 
 --- element_deactivate(*ids)
 #@todo
@@ -647,12 +647,12 @@ alias bar
 
 --- tagid(tag)
 
-id ¤òÊÖ¤·¤Ş¤¹¡£
+id ã‚’è¿”ã—ã¾ã™ã€‚
 
-tag ¤¬ Axis, Crosshairs, Element, GridLine, Legend, Pen, Postscript, Marker ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Î¾ì¹ç tag.id ¤òÊÖ¤·¤Ş¤¹¡£
-¤½¤Î¤Û¤«¤Î¾ì¹ç tag ¤òÊÖ¤·¤Ş¤¹¡£
+tag ãŒ Axis, Crosshairs, Element, GridLine, Legend, Pen, Postscript, Marker ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å ´åˆ tag.id ã‚’è¿”ã—ã¾ã™ã€‚
+ãã®ã»ã‹ã®å ´åˆ tag ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param tag Ç¤°Õ¤Î¥×¥í¥Ã¥ÈÍ×ÁÇ
+@param tag ä»»æ„ã®ãƒ—ãƒ­ãƒƒãƒˆè¦ç´ 
 
 --- x2axis_bind(context, *args)
 #@todo
@@ -731,46 +731,46 @@ tag ¤¬ Axis, Crosshairs, Element, GridLine, Legend, Pen, Postscript, Marker ¤Î¥¤
 
 --- xaxis_cget(option)
 
-¸½ºß¤Î¥ª¥×¥·¥ç¥ó¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
+ç¾åœ¨ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param option ¥ª¥×¥·¥ç¥óÌ¾
+@param option ã‚ªãƒ—ã‚·ãƒ§ãƒ³å
 
 --- xaxis_configinfo(slot = nil)
 
-¥ª¥×¥·¥ç¥ó slot ¤ÎÃÍ¤ò¼èÆÀ¤·¤Ş¤¹¡£
+ã‚ªãƒ—ã‚·ãƒ§ãƒ³ slot ã®å€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 
-@param slot ¥ª¥×¥·¥ç¥óÌ¾
+@param slot ã‚ªãƒ—ã‚·ãƒ§ãƒ³å
 
 --- xaxis_configure(slot, value = None)
 
-¥ª¥×¥·¥ç¥ó slot ¤ÎÃÍ¤ò value ¤ËÀßÄê¤·¤Ş¤¹¡£
+ã‚ªãƒ—ã‚·ãƒ§ãƒ³ slot ã®å€¤ã‚’ value ã«è¨­å®šã—ã¾ã™ã€‚
 
-@param slot ¥ª¥×¥·¥ç¥óÌ¾
-@param value ÀßÄê¤¹¤ëÃÍ
+@param slot ã‚ªãƒ—ã‚·ãƒ§ãƒ³å
+@param value è¨­å®šã™ã‚‹å€¤
 
 --- xaxis_invtransform(val)
 
-µÕÊÑ´¹¤ò¼Â¹Ô¤·¤Ş¤¹¡£
-x ¥¹¥¯¥ê¡¼¥óºÂÉ¸ÃÍ val ¤ò¥°¥é¥ÕºÂÉ¸¤ËÊÑ´¹¤·¤Ş¤¹¡£
+é€†å¤‰æ›ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
+x ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™å€¤ val ã‚’ã‚°ãƒ©ãƒ•åº§æ¨™ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@param val ¥¹¥¯¥ê¡¼¥óºÂÉ¸ÃÍ
+@param val ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™å€¤
 
 --- xaxis_limits
 
-x ¼´¤ÎºÇ¾®ÃÍ¡¦ºÇÂçÃÍ¤ÎÁÈ¤òÇÛÎó¤ÇÊÖ¤·¤Ş¤¹¡£
+x è»¸ã®æœ€å°å€¤ãƒ»æœ€å¤§å€¤ã®çµ„ã‚’é…åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
 
 --- xaxis_transform(val)
 
-x ¥°¥é¥ÕºÂÉ¸ÃÍ val ¤ò¥¹¥¯¥ê¡¼¥óºÂÉ¸¤ËÊÑ´¹¤·¤Ş¤¹¡£
+x ã‚°ãƒ©ãƒ•åº§æ¨™å€¤ val ã‚’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@param val ¥°¥é¥ÕºÂÉ¸ÃÍ
+@param val ã‚°ãƒ©ãƒ•åº§æ¨™å€¤
 
 --- xaxis_use(target = nil)
 
-¼´ target ¤ò x ¼´¤È¤·¤Æ»È¤¤¤Ş¤¹¡£
+è»¸ target ã‚’ x è»¸ã¨ã—ã¦ä½¿ã„ã¾ã™ã€‚
 
-@param target ¼´
+@param target è»¸
 
 --- y2axis_bind(context, *args)
 #@todo

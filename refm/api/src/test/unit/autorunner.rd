@@ -1,44 +1,44 @@
 require test/unit
 require test/unit/ui/testrunnerutilities
 
-��˥åȥƥ��Ȥμ¹Ԥ��������Ȥ��˻Ȥ��ޤ���
+ユニットテストの実行を操作したいときに使います。
 
 #@since 1.8.1
 = class Test::Unit::AutoRunner
 
-�ƥ��Ȥμ¹Ԥ��������Ȥ��ˤ��� AutoRunner ���饹��Ȥ��ޤ���
-���̤Υƥ��Ȥ��椫������Υƥ��ȥ�����ץȤΤߤ�¹Ԥ�������硢
-����Υƥ��ȥ��饹�Τߤ�¹Ԥ��������ʤɤ˻Ȥ��ޤ���
-AutoRunner �� Collector::Dir ���֥������Ȥʤɤ� Collector ��
-�ƥ��Ȥ򽸤ᤵ���ơ�UI::Console::TestRunner ���֥������Ȥʤɤ�
-Runner �˥ƥ��Ȥ�¹Ԥ����Ƥ��륯�饹�Ǥ���
+テストの実行を操作したいときにこの AutoRunner クラスを使います。
+大量のテストの中から特定のテストスクリプトのみを実行したい場合、
+特定のテストクラスのみを実行したい場合などに使います。
+AutoRunner は Collector::Dir オブジェクトなどの Collector に
+テストを集めさせて、UI::Console::TestRunner オブジェクトなどの
+Runner にテストを実行させているクラスです。
 
-=== ��
+=== 例
 
-�ǥ��쥯�ȥ� ./somedir �ʲ��ˤ������ƤΥƥ��Ȥ�¹Ԥ��������ϼ��Τ褦
-�ʥե�����(runner.rb)���Ѱդ��Ƽ¹Ԥ��ޤ����ƥ��Ȥ� test_*.rb �Ȥ����ե�
-����̾�Ǥ���ɬ�פ�����ޤ���
+ディレクトリ ./somedir 以下にある全てのテストを実行したい場合は次のよう
+なファイル(runner.rb)を用意して実行します。テストは test_*.rb というファ
+イル名である必要があります。
 
 #@since 1.8.3
-�������� true ��Ϳ����ȡ�./somedir �ʲ��ˤ������ƤΥƥ��Ȥ�¹Ԥ��ޤ���
+第一引数に true を与えると、./somedir 以下にある全てのテストを実行します。
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir')
 #@else
-�������� false ��Ϳ����ȡ�./somedir �ʲ��ˤ������ƤΥƥ��Ȥ�¹Ԥ��ޤ���
+第一引数に false を与えると、./somedir 以下にある全てのテストを実行します。
   require 'test/unit'
   Test::Unit::AutoRunner.run(false, './somedir')
 #@end
 
-ñ�˼¹Ԥ��ޤ���
+単に実行します。
 
   $ ruby runner.rb
 
-�ǥ��쥯�ȥ� ./somedir �ʲ��ˤ���ƥ��Ȥ�ե����� somefile ������Ƽ¹�
-���������ϼ��Τ褦�� runner.rb �˥��ץ�����Ϳ���ޤ���
+ディレクトリ ./somedir 以下にあるテストをファイル somefile を除いて実行
+したい場合は次のように runner.rb にオプションを与えます。
 
   $ ruby runner.rb --exclude=somefile
 
-Ʊ�����Ȥϡ�runner.rb ��ľ�ܥ��ץ�����񤤤Ƥ�¸��Ǥ��ޤ���
+同じことは、runner.rb に直接オプションを書いても実現できます。
 
 #@since 1.8.3
   require 'test/unit'
@@ -48,8 +48,8 @@ Runner �˥ƥ��Ȥ�¹Ԥ����Ƥ��륯�饹�Ǥ���
   Test::Unit::AutoRunner.run(false, './somedir', ['--exclude=somefile'])
 #@end
 
-��Τ�����Ǥϳ�ĥ�Ҥ� .rb �Υե����뤷������ޤ��󡣳�ĥ�Ҥ� .rbx �Υե������
-�ƥ��ȤȤ��ƽ��᤿�����ϼ��Τ褦�ˤ��ޤ���
+上のやり方では拡張子が .rb のファイルしか集めません。拡張子が .rbx のファイルも
+テストとして集めたい場合は次のようにします。
 
 #@since 1.8.3
   require 'test/unit'
@@ -67,35 +67,35 @@ Runner �˥ƥ��Ȥ�¹Ԥ����Ƥ��륯�饹�Ǥ���
 --- run(force_standalone = nil, dir = '.', argv = ARGV)    -> bool
 #@end
 
-�ƥ��Ȥ�¹Ԥ��ޤ������ƤΥƥ��Ȥ�����������硢true ���֤��ޤ��������Ǥʤ����ϡ�
-false ���֤��ޤ���
+テストを実行します。全てのテストが成功した場合、true を返します。そうでない場合は、
+false を返します。
 
 #@since 1.8.3
-@param force_standalone true ��Ϳ����ȡ�dir �ʲ��ˤ������ƤΥƥ��Ȥ��
-                        �Ԥ��ޤ���false ��Ϳ�������ϴ����ɤ߹��ޤ줿
-                        �ե�������椫��ƥ��Ȥ�õ���Ƽ¹Ԥ��ޤ����ƥ�
-                        �Ȥ��ɤ߹��ޤ�Ƥ��餺��������ץȤ� -e �����
-                        �Ԥ��Ƥ�����ϡ�dir �ʲ��ˤ������ƤΥƥ��Ȥ�
-                        �¹Ԥ��ޤ����ǥե���Ȥ� false �Ǥ���
+@param force_standalone true を与えると、dir 以下にある全てのテストを実
+                        行します。false を与えた場合は既に読み込まれた
+                        ファイルの中からテストを探して実行します。テス
+                        トが読み込まれておらず、スクリプトを -e から実
+                        行している場合は、dir 以下にある全てのテストを
+                        実行します。デフォルトは false です。
 
-@param dir force_standalone �� true ��Ϳ�������˺Ƶ�Ū��õ������ǥ��쥯�ȥ�̾��
-           Ϳ���ޤ����ǥե���ȤǤϥ����ȥǥ��쥯�ȥ��Ƶ�Ū��õ�����ޤ���
+@param dir force_standalone に true を与えた時に再帰的に探査するディレクトリ名を
+           与えます。デフォルトではカレントディレクトリを再帰的に探査します。
 #@else
-@param force_standalone $0 �� false ��Ϳ���ޤ���$0 ��Ϳ�������ϴ�����
-                        �߹��ޤ줿�ե�������椫��ƥ��Ȥ�õ���Ƽ¹Ԥ�
-                        �ޤ���false ��Ϳ�������ϡ�dir ���椫��ƥ���
-                        ������ץȤ�Ƶ�Ū��õ�����Ƽ¹Ԥ��ޤ����ǥե�
-                        ��ȤǤϥե�����̾�� test_*.rb �Υƥ��ȥ������
-                        �Ȥ���õ�����ޤ���false ��Ϳ�������Ǥ⡢��
-                        ���ɤ߹��ޤ줿�ե�����ϼ¹Ԥ���ƥ��Ȥ˴ޤޤ�
-                        �ޤ���
+@param force_standalone $0 か false を与えます。$0 を与えた場合は既に読
+                        み込まれたファイルの中からテストを探して実行し
+                        ます。false を与えた場合は、dir の中からテスト
+                        スクリプトを再帰的に探査して実行します。デフォ
+                        ルトではファイル名が test_*.rb のテストスクリプ
+                        トしか探査しません。false を与えた場合でも、既
+                        に読み込まれたファイルは実行するテストに含まれ
+                        ます。
 
-@param dir force_standalone �� false ��Ϳ�������˺Ƶ�Ū��õ������ǥ��쥯�ȥ�̾��
-           Ϳ���ޤ����ǥե���ȤǤϥ����ȥǥ��쥯�ȥ��Ƶ�Ū��õ�����ޤ���
+@param dir force_standalone に false を与えた時に再帰的に探査するディレクトリ名を
+           与えます。デフォルトではカレントディレクトリを再帰的に探査します。
 #@end
 
-@param argv ���ץ���������Ȥ���Ϳ���ޤ�����᤹�륪�ץ��������
-            �ФƤ�����Τ�Ʊ���Ǥ���
+@param argv オプションを配列として与えます。解釈するオプションは先に
+            出てきたものと同じです。
 
       -r, --runner=RUNNER              Use the given RUNNER.
                                        (c[onsole], f[ox], g[tk], g[tk]2, t[k])
@@ -114,9 +114,9 @@ false ���֤��ޤ���
                                        test.
       -h, --help                       Display this help.
 #@since 1.8.2
-force_standalone �� false ��Ϳ�������ˤϼ��Υ��ץ�����ɲä���ޤ���
+force_standalone に false を与えた時には次のオプションが追加されます。
 #@else
-force_standalone �� true ��Ϳ�������ˤϼ��Υ��ץ�����ɲä���ޤ���
+force_standalone に true を与えた時には次のオプションが追加されます。
 #@end
       -a, --add=TORUN                  Add TORUN to the list of things to run;
                                        can be a file or a directory.
@@ -125,19 +125,19 @@ force_standalone �� true ��Ϳ�������ˤϼ��Υ��ץ�����ɲä���ޤ���
       -x, --exclude=PATTERN            Ignore files to collect against PATTERN.
 #@end
 
-��
+例
 
       require 'test/unit'
       Test::Unit::AutoRunner.run(true, './', ['--runner=tk', '-v',
                                               '--exclude=/test_hoge.*\.rb\Z/i'])
 
-argv �˥ǥե���ȤΤޤ� ARGV ���Ϥ��Ƥ����Х��ޥ�ɥ饤�󤫤饪�ץ�����
-����Ǥ��ޤ���
+argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
+指定できます。
 
       require 'test/unit'
       Test::Unit::AutoRunner.run(true, './')
 
-�ȡ�runner.rb �˽񤤤Ƥ����ơ����ޥ�ɥ饤�󤫤�ʲ��Τ褦�˼¹ԡ�
+と、runner.rb に書いておいて、コマンドラインから以下のように実行。
 
       $ ruby runner.rb --runner=tk -v --exclude=/test_hoge.\*\\.rb\\Z/i
 

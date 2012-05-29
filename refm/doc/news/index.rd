@@ -1,8 +1,8 @@
-= RubyÊÑ¹¹ÍúÎò
+= Rubyå¤‰æ›´å±¥æ­´
 
 * ((<ruby 1.6 feature>))
 * ((<ruby 1.7 feature>))
-* ((<1.6.8¤«¤é1.8.0¤Ø¤ÎÊÑ¹¹ÅÀ(¤Þ¤È¤á)>))
+* ((<1.6.8ã‹ã‚‰1.8.0ã¸ã®å¤‰æ›´ç‚¹(ã¾ã¨ã‚)>))
 * ((<ruby 1.8 feature>))
 * ((<ruby 1.8.2 feature>))
 * ((<ruby 1.8.3 feature>))
@@ -10,4 +10,4 @@
 * ((<ruby 1.8.5 feature>))
 * ((<ruby 1.9 feature>))
 * ((<obsolete>))
-* ((<DOSISH ÂÐ±þ>))
+* ((<DOSISH å¯¾å¿œ>))

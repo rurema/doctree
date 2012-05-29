@@ -5,8 +5,8 @@ extend TkCore
 include Tk
 include Comparable
 
-Tcl¤ÎÊÑ¿ô¤ò¥¢¥¯¥»¥¹¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
-((-Tcl¤ÎÇÛÎó¤È¤·¤Æ¤Î¿¶¤ëÉñ¤¤¤Ï»ÅÍÍ¤¬ÉÔ°ÂÄê¤Î¤è¤¦¤Ç¤¹-))
+Tclã®å¤‰æ•°ã‚’ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+((-Tclã®é…åˆ—ã¨ã—ã¦ã®æŒ¯ã‚‹èˆžã„ã¯ä»•æ§˜ãŒä¸å®‰å®šã®ã‚ˆã†ã§ã™-))
 
   require "tk"
   p TkVariable.new(0).value                     # => "0"
@@ -20,16 +20,16 @@ Tcl¤ÎÊÑ¿ô¤ò¥¢¥¯¥»¥¹¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
 --- callback(args)
 #@todo
 
-[[m:TkVariable#trace]]¤Ë¤è¤êÅÐÏ¿¤µ¤ì¤¿Proc¥ª¥Ö¥¸¥§¥¯¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
-args ¤Ï¡¢ [TkVariable¤Î¥¤¥ó¥¹¥¿¥ó¥¹, "¥­¡¼", "Áàºî"]
-¤Ç¤¢¤ëÇÛÎó¤Ç¤¹¡£
+[[m:TkVariable#trace]]ã«ã‚ˆã‚Šç™»éŒ²ã•ã‚ŒãŸProcã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
+args ã¯ã€ [TkVariableã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹, "ã‚­ãƒ¼", "æ“ä½œ"]
+ã§ã‚ã‚‹é…åˆ—ã§ã™ã€‚
 
 --- new(val="")
 #@todo
 
-ÃÍ¤¬val¤Ç¤¢¤ëTkVariable¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£val¤¬
-[[c:Array]] ¤Þ¤¿¤Ï [[c:Hash]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¢¤ë¾ì¹ç¡¢À¸À®¤µ¤ì¤¿¥¤¥ó¥¹
-¥¿¥ó¥¹¤Ï Tcl¤ÎÇÛÎó¤È¤·¤Æ¿¶¤ëÉñ¤¤¤Þ¤¹¡£
+å€¤ãŒvalã§ã‚ã‚‹TkVariableã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚valãŒ
+[[c:Array]] ã¾ãŸã¯ [[c:Hash]] ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã‚ã‚‹å ´åˆã€ç”Ÿæˆã•ã‚ŒãŸã‚¤ãƒ³ã‚¹
+ã‚¿ãƒ³ã‚¹ã¯ Tclã®é…åˆ—ã¨ã—ã¦æŒ¯ã‚‹èˆžã„ã¾ã™ã€‚
 
 --- new_hash(val = {})
 #@todo
@@ -39,24 +39,24 @@ args ¤Ï¡¢ [TkVariable¤Î¥¤¥ó¥¹¥¿¥ó¥¹, "¥­¡¼", "Áàºî"]
 --- wait
 #@todo
 
-ÃÍ¤¬ÊÑ²½¤¹¤ë¤Þ¤ÇÂÔ¤Á¤Þ¤¹¡£
+å€¤ãŒå¤‰åŒ–ã™ã‚‹ã¾ã§å¾…ã¡ã¾ã™ã€‚
 
 --- value
 #@todo
 
-ÃÍ¤òÊÖ¤·¤Þ¤¹¡£self¤¬Tcl¤ÎÇÛÎó¤Ê¤é¤Ð(Tcl¤ÎÇÛÎó¤ÏÏ¢ÁÛÇÛÎó¤Ê
-¤Î¤Ç) [[c:Hash]]¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£¤½¤ì°Ê³°¤Ç¤Ï¾ï¤ËÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+å€¤ã‚’è¿”ã—ã¾ã™ã€‚selfãŒTclã®é…åˆ—ãªã‚‰ã°(Tclã®é…åˆ—ã¯é€£æƒ³é…åˆ—ãª
+ã®ã§) [[c:Hash]]ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚ãã‚Œä»¥å¤–ã§ã¯å¸¸ã«æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- value=(val)
 #@todo
 
-ÃÍ¤òval¤ËÀßÄê¤·¤Þ¤¹¡£
+å€¤ã‚’valã«è¨­å®šã—ã¾ã™ã€‚
 
 #@since 1.8.3
 --- set_value(val)
 #@todo
 
-ÃÍ¤ò val ¤ËÀßÄê¤·¡¢self ¤òÊÖ¤·¤Þ¤¹¡£
+å€¤ã‚’ val ã«è¨­å®šã—ã€self ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- set_value_type(val)
 --- value_type=
@@ -67,20 +67,20 @@ args ¤Ï¡¢ [TkVariable¤Î¥¤¥ó¥¹¥¿¥ó¥¹, "¥­¡¼", "Áàºî"]
 --- [](index)
 #@todo
 
-indexÈÖÌÜ¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£
-self¤ÏTcl¤ÎÇÛÎó¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+indexç•ªç›®ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
+selfã¯Tclã®é…åˆ—ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
 --- []=(index, val)
 #@todo
 
-indexÈÖÌÜ¤ÎÍ×ÁÇ¤òval¤Ë¤·¤Þ¤¹¡£
-self¤ÏTcl¤ÎÇÛÎó¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+indexç•ªç›®ã®è¦ç´ ã‚’valã«ã—ã¾ã™ã€‚
+selfã¯Tclã®é…åˆ—ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
 --- to_i
 #@todo
 
-ÃÍ¤ò¿ôÃÍ([[c:Fixnum]])¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£(¸½¾õ¤ÎTkVariable¤Ï¡¢
-Bignum¤òÃÍ¤Ë¤¹¤ë¤³¤È¤Ï¤Ç¤­¤Þ¤»¤ó)
+å€¤ã‚’æ•°å€¤([[c:Fixnum]])ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚(ç¾çŠ¶ã®TkVariableã¯ã€
+Bignumã‚’å€¤ã«ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“)
 
 #@since 1.8.3
 --- element_to_i(*idxs)
@@ -91,7 +91,7 @@ Bignum¤òÃÍ¤Ë¤¹¤ë¤³¤È¤Ï¤Ç¤­¤Þ¤»¤ó)
 --- to_f
 #@todo
 
-ÃÍ¤ò¿ôÃÍ([[c:Float]])¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+å€¤ã‚’æ•°å€¤([[c:Float]])ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
 
 #@since 1.8.3
@@ -103,18 +103,18 @@ Bignum¤òÃÍ¤Ë¤¹¤ë¤³¤È¤Ï¤Ç¤­¤Þ¤»¤ó)
 --- to_s
 #@todo
 
-ÃÍ¤òÊ¸»úÎó([[c:String]])¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+å€¤ã‚’æ–‡å­—åˆ—([[c:String]])ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
 --- to_a
 #@todo
 
-ÃÍ¤òÇÛÎó([[c:Array]])¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+å€¤ã‚’é…åˆ—([[c:Array]])ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
 --- ==(other)
 #@todo
 
-ÃÍ¤¬other¤ÈÆ±¤¸¤Ç¤¢¤ë¾ì¹ç¤Ë¿¿¤Ç¤¹¡£other¤Ï¡¢
-TkVariable, String, Integer, Float, Array¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
+å€¤ãŒotherã¨åŒã˜ã§ã‚ã‚‹å ´åˆã«çœŸã§ã™ã€‚otherã¯ã€
+TkVariable, String, Integer, Float, Arrayã®ã„ãšã‚Œã‹ã§ã™ã€‚
 
 --- <=>(other)
 #@todo
@@ -150,7 +150,7 @@ TkVariable, String, Integer, Float, Array¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
 --- remove(elem=nil)
 #@todo
 
-ÃÍ¤¬TclÇÛÎó¤Ç¤¢¤ë¤È¤­¡¢elem¤ÎÃÍ¤òºï½ü¤·¤Þ¤¹¡£
+å€¤ãŒTclé…åˆ—ã§ã‚ã‚‹ã¨ãã€elemã®å€¤ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 
 --- id
 #@todo
@@ -176,8 +176,8 @@ TkVariable, String, Integer, Float, Array¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
 --- trace_callback(elem, op)
 #@todo
 
-[[m:TkVariable#trace]]¤Ë¤è¤êÅÐÏ¿¤µ¤ì¤¿Proc¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤Ëself,
-elem, op¤ò»ØÄê¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
+[[m:TkVariable#trace]]ã«ã‚ˆã‚Šç™»éŒ²ã•ã‚ŒãŸProcã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å¼•æ•°ã«self,
+elem, opã‚’æŒ‡å®šã—ã¦å®Ÿè¡Œã—ã¾ã™ã€‚
 
   require "tk"
 
@@ -189,14 +189,14 @@ elem, op¤ò»ØÄê¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
 --- trace(opts, cmd)
 #@todo
 
-opts¤Ï¡¢"r", "w", "u" ¤Î¤¤¤º¤ì¤«¡¢¤Þ¤¿¤Ï¤³¤ì¤é¤ÎÁÈ¤ß¹ç¤ï¤»¤Ç¡¢¤½¤ì¤¾¤ì
-ÊÑ¿ô¤¬»²¾È¡¢ÀßÄê¡¢ºï½ü ¤µ¤ì¤¿¤È¤­¤Ë[[c:Proc]]¥ª¥Ö¥¸¥§¥¯¥È cmd ¤ò
-¸Æ¤Ó½Ð¤·¤Þ¤¹¡£2²óÌÜ°Ê¹ß¤Î¸Æ¤Ó½Ð¤·¤Ç¤Ï¡¢opts ¤¬°ÊÁ°¤ÎÀßÄê¤È°Û¤Ê¤ì
-¤Ðcmd¤òºÆÀßÄê¤·¤Þ¤¹¡£
+optsã¯ã€"r", "w", "u" ã®ã„ãšã‚Œã‹ã€ã¾ãŸã¯ã“ã‚Œã‚‰ã®çµ„ã¿åˆã‚ã›ã§ã€ãã‚Œãžã‚Œ
+å¤‰æ•°ãŒå‚ç…§ã€è¨­å®šã€å‰Šé™¤ ã•ã‚ŒãŸã¨ãã«[[c:Proc]]ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ cmd ã‚’
+å‘¼ã³å‡ºã—ã¾ã™ã€‚2å›žç›®ä»¥é™ã®å‘¼ã³å‡ºã—ã§ã¯ã€opts ãŒä»¥å‰ã®è¨­å®šã¨ç•°ãªã‚Œ
+ã°cmdã‚’å†è¨­å®šã—ã¾ã™ã€‚
 
-cmd¤Ï¡¢°ú¿ô¤Ë¡¢self¡¢¶õÇÛÎó¡¢"Áàºî" ¤òÅÏ¤µ¤ì¤Æ¸Æ¤Ð¤ì
-¤Þ¤¹¡£"ÇÛÎó¤Î¥­¡¼" ¤Ï¡¢ÊÑ¿ô¤¬ÇÛÎó¤Î¾ì¹ç°Ê³°¤Ï¶õÊ¸»úÎó¤Ç¤¹¡£"Áàºî"¤Ï¡¢
-"r","w","u" ¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
+cmdã¯ã€å¼•æ•°ã«ã€selfã€ç©ºé…åˆ—ã€"æ“ä½œ" ã‚’æ¸¡ã•ã‚Œã¦å‘¼ã°ã‚Œ
+ã¾ã™ã€‚"é…åˆ—ã®ã‚­ãƒ¼" ã¯ã€å¤‰æ•°ãŒé…åˆ—ã®å ´åˆä»¥å¤–ã¯ç©ºæ–‡å­—åˆ—ã§ã™ã€‚"æ“ä½œ"ã¯ã€
+"r","w","u" ã®ã„ãšã‚Œã‹ã§ã™ã€‚
 
   require "tk"
   
@@ -230,8 +230,8 @@ cmd¤Ï¡¢°ú¿ô¤Ë¡¢self¡¢¶õÇÛÎó¡¢"Áàºî" ¤òÅÏ¤µ¤ì¤Æ¸Æ¤Ð¤ì
 --- trace_vdelete(opts, cmd)
 #@todo
 
-[[m:TkVariable#trace]] ¤ÇÀßÄê¤·¤¿cmd¤òºï½ü¤·¤Þ¤¹¡£opts ¤¬ TkVariable#trace ¤Ç
-ÀßÄê¤·¤¿¤È¤­¤È°ìÃ×¤·¤Ê¤±¤ì¤Ð²¿¤â¤·¤Þ¤»¤ó¡£
+[[m:TkVariable#trace]] ã§è¨­å®šã—ãŸcmdã‚’å‰Šé™¤ã—ã¾ã™ã€‚opts ãŒ TkVariable#trace ã§
+è¨­å®šã—ãŸã¨ãã¨ä¸€è‡´ã—ãªã‘ã‚Œã°ä½•ã‚‚ã—ã¾ã›ã‚“ã€‚
 
 --- trace_vdelete_for_element(elem, opts, cmd)
 #@todo
@@ -555,15 +555,15 @@ cmd¤Ï¡¢°ú¿ô¤Ë¡¢self¡¢¶õÇÛÎó¡¢"Áàºî" ¤òÅÏ¤µ¤ì¤Æ¸Æ¤Ð¤ì
 --- TkVar_CB_TBL
 #@todo
 
-¥³¡¼¥ë¥Ð¥Ã¥¯´Ø¿ô¤òµ­Ï¿¤¹¤ë¥Ï¥Ã¥·¥å¤Ç¤¹¡£ÆâÉô¤ÇÍøÍÑ¤·¤Æ¤¤¤Þ¤¹¡£
+ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‚’è¨˜éŒ²ã™ã‚‹ãƒãƒƒã‚·ãƒ¥ã§ã™ã€‚å†…éƒ¨ã§åˆ©ç”¨ã—ã¦ã„ã¾ã™ã€‚
 
 --- Tk_VARIABLE_ID
 #@todo
 
-Tcl¥ì¥Ù¥ë¤ÎÊÑ¿ôÌ¾¤ò¥¤¥ó¥¹¥¿¥ó¥¹¤Ë³ä¤êÅö¤Æ¤ë¤¿¤á¤ËÆâÉô¤ÇÍøÍÑ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+Tclãƒ¬ãƒ™ãƒ«ã®å¤‰æ•°åã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«å‰²ã‚Šå½“ã¦ã‚‹ãŸã‚ã«å†…éƒ¨ã§åˆ©ç”¨ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
-Tk_VARIABLE_ID¤Ï¡¢ÇÛÎó¤Ç¤¹¤¬0ÈÖÌÜ¤ÎÍ×ÁÇ¤·¤«»È¤ï¤ì¤Æ¤¤¤Þ¤»¤ó¡£
-Ruby¤Ë¤ª¤±¤ëÄê¿ô¤¬ÃÍ¤òÊÑ¹¹¤Ç¤­¤Ê¤¤¤¿¤á¤Ç¤¹¡£
+Tk_VARIABLE_IDã¯ã€é…åˆ—ã§ã™ãŒ0ç•ªç›®ã®è¦ç´ ã—ã‹ä½¿ã‚ã‚Œã¦ã„ã¾ã›ã‚“ã€‚
+Rubyã«ãŠã‘ã‚‹å®šæ•°ãŒå€¤ã‚’å¤‰æ›´ã§ããªã„ãŸã‚ã§ã™ã€‚
 
 --- TkCommandNames
 #@todo
@@ -576,9 +576,9 @@ Ruby¤Ë¤ª¤±¤ëÄê¿ô¤¬ÃÍ¤òÊÑ¹¹¤Ç¤­¤Ê¤¤¤¿¤á¤Ç¤¹¡£
 
 = class TkVarAccess < TkVariable
 
-Tcl¥é¥¤¥Ö¥é¥ê¤Ê¤É¤Ç´û¤ËÄêµÁ¤µ¤ì¤Æ¤¤¤ëÊÑ¿ô¤Ë¥¢¥¯¥»¥¹¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç
-¤¹¡£((-Tcl¤Î¥¹¥³¡¼¥×¤ò°Õ¼±¤·¤ÆÍøÍÑ¤·¤Ê¤¤¤È¤¦¤Þ¤¯¥¢¥¯¥»¥¹¤Ç¤­¤Ê¤¤¤È»×¤ï
-¤ì¤ë¡£¤Þ¤¿¡¢¸½¾õTcl¤ÎÇÛÎó¤Ë¤Ï¥¢¥¯¥»¥¹¤¹¤ë¤³¤È¤Ï¤Ç¤­¤Ê¤¤-))
+Tclãƒ©ã‚¤ãƒ–ãƒ©ãƒªãªã©ã§æ—¢ã«å®šç¾©ã•ã‚Œã¦ã„ã‚‹å¤‰æ•°ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§
+ã™ã€‚((-Tclã®ã‚¹ã‚³ãƒ¼ãƒ—ã‚’æ„è­˜ã—ã¦åˆ©ç”¨ã—ãªã„ã¨ã†ã¾ãã‚¢ã‚¯ã‚»ã‚¹ã§ããªã„ã¨æ€ã‚
+ã‚Œã‚‹ã€‚ã¾ãŸã€ç¾çŠ¶Tclã®é…åˆ—ã«ã¯ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã“ã¨ã¯ã§ããªã„-))
 
   require 'tk'
   p TkCore::INTERP._eval("set tclvar 1")  # => 1
@@ -592,8 +592,8 @@ Tcl¥é¥¤¥Ö¥é¥ê¤Ê¤É¤Ç´û¤ËÄêµÁ¤µ¤ì¤Æ¤¤¤ëÊÑ¿ô¤Ë¥¢¥¯¥»¥¹¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç
 --- new(name, *args)
 #@todo
 
-TclÊÑ¿ô varname ¤ÈÀ¸À®¤·¤¿¥¤¥ó¥¹¥¿¥ó¥¹¤ò´ØÏ¢ÉÕ¤±¤Þ¤¹¡£
-val ¤ò»ØÄê¤¹¤ë¤ÈÃÍ¤ÎÀßÄê¤â¹Ô¤¤¤Þ¤¹¡£
+Tclå¤‰æ•° varname ã¨ç”Ÿæˆã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’é–¢é€£ä»˜ã‘ã¾ã™ã€‚
+val ã‚’æŒ‡å®šã™ã‚‹ã¨å€¤ã®è¨­å®šã‚‚è¡Œã„ã¾ã™ã€‚
 
 --- new_hash(name, *args)
 #@todo

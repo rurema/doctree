@@ -3,57 +3,57 @@ require webrick/httpstatus
 require webrick/httputils
 require webrick/cookie
 
-HTTP �ꥯ�����ȤΤ���Υ��饹���󶡤���饤�֥��Ǥ���
+HTTP リクエストのためのクラスを提供するライブラリです。
 
 = class WEBrick::HTTPRequest < Object
 
-HTTP �ꥯ�����ȤΤ���Υ��饹�Ǥ���
+HTTP リクエストのためのクラスです。
 
-�̾� WEBrick::HTTPRequest ���֥������Ȥϥ����֥�åȤ� service �᥽�åɤ� do_XXX �᥽�åɤ�
-�����Ȥ���Ϳ�������ΤǤ��ꡢ�桼��������Ū����������ɬ�פϤ���ޤ���
+通常 WEBrick::HTTPRequest オブジェクトはサーブレットの service メソッドや do_XXX メソッドの
+引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
 
 == Class Methods
 
 --- new(config) -> WEBrick::HTTPRequest
 
-WEBrick::HTTPRequest �����������֤��ޤ���
+WEBrick::HTTPRequest を生成して返します。
 
-@param config ������ݻ������ϥå������ꤷ�ޤ���
+@param config 設定を保持したハッシュを指定します。
 
 == Instance Methods
 
 --- [](header_name)    -> String
 
-�ꥯ�����ȤΥإå��γ����������Ƥ�ʸ������֤��ޤ���
+リクエストのヘッダの該当する内容を文字列で返します。
 
-@param header_name �إå���̾��ʸ����ǻ��ꤷ�ޤ�����ʸ���Ⱦ�ʸ������̤��ޤ���
+@param header_name ヘッダー名を文字列で指定します。大文字と小文字を区別しません。
 
 #@since 1.8.2
 --- accept    -> [String]
 
-Accept �إå������Ƥ��ǥ��������פ�ɽ��ʸ�����������֤��ޤ���
-������ʼ�����(qvalue)�ǥ����Ȥ���Ƥ��ޤ���
+Accept ヘッダの内容をメディアタイプを表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
 
 --- accept_charset    -> [String]
 
-Accept-Charset  �إå������Ƥ�ʸ�����åȤ�ɽ��ʸ�����������֤��ޤ���
-������ʼ�����(qvalue)�ǥ����Ȥ���Ƥ��ޤ���
+Accept-Charset  ヘッダの内容を文字セットを表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
 
 --- accept_encoding    -> [String]
 
-Accept-Encoding  �إå������Ƥ򥳡��ǥ��󥰤�ɽ��ʸ�����������֤��ޤ���
-������ʼ�����(qvalue)�ǥ����Ȥ���Ƥ��ޤ���
+Accept-Encoding  ヘッダの内容をコーディングを表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
 
 --- accept_language    -> [String]
 
-Accept-Language  �إå������Ƥ��������ɽ��ʸ�����������֤��ޤ���
-������ʼ�����(qvalue)�ǥ����Ȥ���Ƥ��ޤ���
+Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
 
 #@end
 
 --- addr    -> Array
 
-���饤����Ȥ���³����Ƥ��륽���åȤ� [[m:IPSocket#addr]] ���֤��ޤ���
+クライアントと接続されているソケットの [[m:IPSocket#addr]] を返します。
 
 --- attributes    -> Hash
 #@todo ???
@@ -61,23 +61,23 @@ Accept-Language  �إå������Ƥ��������ɽ��ʸ�����������֤��ޤ���
 --- body                 -> String | nil
 --- body {|chunk| ... }  -> String | nil
 
-���饤����Ȥ��饨��ƥ��ƥ��ܥǥ����ɤ߹����֤��ޤ���
-�ꥯ�����Ȥ˥���ƥ��ƥ��ܥǥ����ޤޤ�ʤ����� nil ���֤��ޤ���
+クライアントからエンティティボディを読み込み返します。
+リクエストにエンティティボディが含まれない場合は nil を返します。
 
-�ꥯ�����Ȥ� chunked �����Ǥ��äƤ��֤��ͤϥǥ����ɤ�����֤���ޤ���
-2���ܤθƤӽФ��ʹߤϺǽ���ɤ߹��������ƥ��ƥ��ܥǥ����֤��ޤ���
-�֥��å�����ꤵ�줿��硢���饤����Ȥ���ǡ������ɤ߹��ि�Ӥˤ��Υǡ���(ʸ����)
-������Ȥ��ƥ֥��å���¹Ԥ��ޤ����ꥯ�����Ȥ� chunked �����Ǥ��äƤ�����ϥǥ����ɤ���Ƥ��ޤ���
+リクエストが chunked 形式であっても返り値はデコードされて返されます。
+2回目の呼び出し以降は最初に読み込んだエンティティボディを返します。
+ブロックを指定された場合、クライアントからデータを読み込むたびにそのデータ(文字列)
+を引数としてブロックを実行します。リクエストが chunked 形式であっても引数はデコードされています。
 
 #@since 1.8.2
 --- content_length    -> Integer
 
-�ꥯ�����Ȥ� Content-Length �إå����ͤ��������֤��ޤ����ꥯ�����Ȥ� Content-Length �إå�
-���ޤޤ�Ƥ��ʤ����� 0 ���֤��ޤ���
+リクエストの Content-Length ヘッダの値を整数で返します。リクエストに Content-Length ヘッダ
+が含まれていない場合は 0 を返します。
 
 --- content_type    -> String | nil
 
-�ꥯ�����Ȥ� Content-Type �إå���ʸ������֤��ޤ���
+リクエストの Content-Type ヘッダを文字列で返します。
 
 #@end
 
@@ -90,88 +90,88 @@ otherwise does nothing.
 
 --- cookies    -> [WEBrick::Cookie]
 
-�ꥯ�����Ȥ˴ޤޤ�� Cookie �إå����ͤ� [[c:WEBrick::Cookie]] ������Ȥ����֤��ޤ���
+リクエストに含まれる Cookie ヘッダの値を [[c:WEBrick::Cookie]] の配列として返します。
 
 --- each {|key, val| ... }
 
-�ꥯ�����Ȥγƥإå�̾�� key�����Ƥ� val �Ȥ��ƥ֥��å���ɾ�����ޤ���
+リクエストの各ヘッダ名を key、内容を val としてブロックを評価します。
 
 --- fixup    -> ()
 
-�ꥯ�����ȤλĤ�Υ���ƥ��ƥ��ܥǥ����ɤ߹��ߤޤ���
+リクエストの残りのエンティティボディを読み込みます。
 
 --- header    -> Hash
 
-�إå�̾�򥭡������Ƥ򤽤��ͤȤ���ϥå�����֤��ޤ����������ͤ�ʸ����Ǥ���
+ヘッダ名をキー、内容をその値とするハッシュを返します。キーも値も文字列です。
 
 --- host    -> String
 
-�ꥯ������ URI �� host ��ʸ������֤��ޤ���
+リクエスト URI の host を文字列で返します。
 
 --- http_version     -> WEBrick::HTTPVersion
 
-�ꥯ�����Ȥ� HTTP �С�������ɽ�� [[c:WEBrick::HTTPVersion]] ���֥������Ȥ��֤��ޤ���
+リクエストの HTTP バージョンを表す [[c:WEBrick::HTTPVersion]] オブジェクトを返します。
 
 --- keep_alive     -> bool
 --- keep_alive?    -> bool
 
-�ꥯ�����Ȥ� Keep-Alive ���׵ᤷ�Ƥ��뤫�򿿵����֤��ޤ���
-http_version �� 1.1 ��꾮�������� Keep-Alive ���׵ᤷ�Ƥ��Ƥ�̵�뤷��
-false �Ȥʤ�ޤ���
+リクエストが Keep-Alive を要求しているかを真偽で返します。
+http_version が 1.1 より小さい場合は Keep-Alive を要求していても無視して
+false となります。
 
 --- meta_vars    -> Hash
 
-�᥿�ѿ����֤��ޤ���
+メタ変数を返します。
 
-�᥿�ѿ��ϡ�The WWW Common Gateway Interface Version 1.1�פΥС������
-3 ���������Ƥ��ޤ���
+メタ変数は「The WWW Common Gateway Interface Version 1.1」のバージョン
+3 で定義されています。
 
 @see [[url:http://Web.Golux.Com/coar/cgi/]]
 
 --- parse(socket = nil)    -> ()
 
-���ꤵ�줿 socket ���饯�饤����ȤΥꥯ�����Ȥ��ɤ߹��ߡ�
-���ȤΥ��������ʤɤ�Ŭ�ڤ����ꤷ�ޤ���
+指定された socket からクライアントのリクエストを読み込み、
+自身のアクセサなどを適切に設定します。
 
-@param socket ���饤����Ȥ���³���줿 IO ���֥������Ȥ���ꤷ�ޤ���
+@param socket クライアントに接続された IO オブジェクトを指定します。
 
 --- path    -> String
 
-�ꥯ������ URI �Υѥ���ɽ��ʸ������֤��ޤ���
+リクエスト URI のパスを表す文字列を返します。
 
 --- path_info          -> String
 
-�ꥯ������ URI �Υѥ���ʸ������֤��ޤ����ǥե���Ȥ� path ��Ʊ���Ǥ���
+リクエスト URI のパスを文字列で返します。デフォルトは path と同じです。
 
 --- path_info=(value)
 
-�ꥯ������ URI �Υѥ��򥻥åȤ��ޤ���
+リクエスト URI のパスをセットします。
 
-@param value �ꥯ������ URI �Υѥ�����ꤷ�ޤ���
+@param value リクエスト URI のパスを指定します。
 
 --- peeraddr    -> Array
 
-���饤����Ȥ���³����Ƥ��륽���åȤ� [[m:IPSocket#peeraddr]] ���֤��ޤ���
+クライアントと接続されているソケットの [[m:IPSocket#peeraddr]] を返します。
 
 --- port    -> String
 
-�����ФΥݡ��Ȥ�ʸ������֤��ޤ���
+サーバのポートを文字列で返します。
 
 --- query    -> Hash
 
-�ꥯ�����ȤΥ����꡼���뤤�ϥ��饤����Ȥ��ե���������Ϥ����ͤ�ɽ���ϥå�����֤��ޤ���
+リクエストのクエリーあるいはクライアントがフォームへ入力した値を表すハッシュを返します。
 
-�ϥå���Υ������ͤ� unescape ����Ƥ��ޤ��������� multipart/form-data �ʥե�����ǡ����ξ��ˤ�
-�桼���� content-transfer-encoding �إå��򸫤�Ŭ�ڤ˽�������ɬ�פ�����ޤ���
+ハッシュのキーも値も unescape されています。ただし multipart/form-data なフォームデータの場合には
+ユーザが content-transfer-encoding ヘッダを見て適切に処理する必要があります。
 
-�ϥå�����ͤ����Τˤ�ʸ����ǤϤʤ� String ���饹�Υ��֥��饹�Ǥ��� [[c:WEBrick::HTTPUtils::FormData]]
-���饹�Υ��󥹥��󥹤Ǥ���
+ハッシュの値は正確には文字列ではなく String クラスのサブクラスである [[c:WEBrick::HTTPUtils::FormData]]
+クラスのインスタンスです。
 
-multipart/form-data �ʥե�����ǡ����Ǥ��äƤ⥵���������¤ʤ����̾�Υե�����ǡ�����
-Ʊ���褦�˰����뤳�Ȥ����դ��Ƥ������������饤����Ȥ�������Ϥˤ�äƤϵ����ʸ����
-��������Ƥ��ޤ��ޤ���
+multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデータと
+同じように扱われることに注意してください。クライアントからの入力によっては巨大な文字列が
+生成されてしまいます。
 
-��:
+例:
 
   h = req.query
   p h['q']                       #=>  "ruby rails session"  
@@ -181,76 +181,76 @@ multipart/form-data �ʥե�����ǡ����Ǥ��äƤ⥵���������¤ʤ����̾�Υե������
 
 --- query_string          -> String
 
-�ꥯ������ URI �Υ����꡼��ʸ�����ɽ�����������Ǥ���
-�ǥե���Ȥ� request_uri.query �Ǥ���
+リクエスト URI のクエリーを文字列で表すアクセサです。
+デフォルトは request_uri.query です。
 
 #@since 1.8.4
 --- query_string=(value)
 #@end
 
-�ꥯ������ URI �Υ����꡼��ʸ�����ɽ�����������Ǥ���
-�ǥե���Ȥ� request_uri.query �Ǥ���
+リクエスト URI のクエリーを文字列で表すアクセサです。
+デフォルトは request_uri.query です。
 
-@param value �����꡼��ɽ��ʸ�������ꤷ�ޤ���
+@param value クエリーを表す文字列を指定します。
 
 --- raw_header -> String
-���Υإå����֤��ޤ���
+生のヘッダを返します。
 
 --- request_line -> String
 
-���饤����ȤΥꥯ�����Ȥκǽ�ι�(GET / HTTP/1.1)��ʸ������֤��ޤ���
+クライアントのリクエストの最初の行(GET / HTTP/1.1)を文字列で返します。
 
 --- request_method     -> String
 
-���饤����ȤΥꥯ�����Ȥ� HTTP �᥽�å�(GET, POST,...)��ʸ������֤��ޤ���
+クライアントのリクエストの HTTP メソッド(GET, POST,...)を文字列で返します。
 
 --- request_time    -> Time
 
-�ꥯ�����Ȥ��줿����� [[c:Time]] ���֥������Ȥ��֤��ޤ���
+リクエストされた時刻を [[c:Time]] オブジェクトで返します。
 
 --- request_uri -> URI
 
-�ꥯ������ URI ��ɽ�� [[c:URI]] ���֥������Ȥ��֤��ޤ���
+リクエスト URI を表す [[c:URI]] オブジェクトを返します。
 
 --- script_name          -> String
 
-CGI �ǤδĶ��ѿ� SCRIPT_NAME ��ʸ�����ɽ�����������Ǥ���
+CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
 --- script_name=(value)
 
-CGI �ǤδĶ��ѿ� SCRIPT_NAME ��ʸ�����ɽ�����������Ǥ���
+CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
-@param value SCRIPT_NAME ��ʸ����ǻ��ꤷ�ޤ���
+@param value SCRIPT_NAME を文字列で指定します。
 
 #@since 1.9.1
 --- server_name -> String
 
-�����Ф�̾�����֤��ޤ���
+サーバの名前を返します。
 
 --- ssl? -> bool
 
-�ꥯ������ URI �Υ������ब https �Ǥ���п����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+リクエスト URI のスキームが https であれば真を返します。
+そうでない場合は偽を返します。
 
 #@end
 
 --- to_s    -> String
 
-�ꥯ�����ȤΥإå��ȥܥǥ���ޤȤ��ʸ����Ȥ����֤��ޤ���
+リクエストのヘッダとボディをまとめて文字列として返します。
 
 --- unparsed_uri    -> String
 
-�ꥯ�����Ȥ� URI ��ʸ������֤��ޤ���
+リクエストの URI を文字列で返します。
 
 --- user          -> String
 
-REMOTE_USER ��ʸ����Ȥ����֤��ޤ���
+REMOTE_USER を文字列として返します。
 
 --- user=(value)
 
-REMOTE_USER ��ʸ�����ɽ������Τ��ͤ򥻥åȤ��ޤ���
+REMOTE_USER を文字列で表したものに値をセットします。
 
-@param value �桼��̾��ʸ����ǻ��ꤷ�ޤ���
+@param value ユーザ名を文字列で指定します。
 
 #@#== Constants
 

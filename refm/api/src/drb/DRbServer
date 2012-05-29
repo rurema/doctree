@@ -41,11 +41,11 @@ See new(). The initial default value is 25 MB.
 Create a new DRbServer instance.
 
 uri is the URI to bind to. This is normally of the form 
-¡Ædruby://<hostname>:<port>¡Ç where <hostname> is a hostname of the
-local machine. If nil, then the system¡Çs default hostname will be
+â€˜druby://<hostname>:<port>â€™ where <hostname> is a hostname of the
+local machine. If nil, then the systemâ€™s default hostname will be
 bound to, on a port selected by the system; these value can be
-retrieved from the uri attribute. ¡Ædruby:¡Ç specifies the default
-dRuby transport protocol: another protocol, such as ¡Ædrbunix:¡Ç, can
+retrieved from the uri attribute. â€˜druby:â€™ specifies the default
+dRuby transport protocol: another protocol, such as â€˜drbunix:â€™, can
 be specified instead.
 
 front is the front object for the server, that is, the object to which
@@ -135,7 +135,7 @@ The configuration of this DRbServer
 #@todo
 The front object of the DRbServer.
 
-This object receives remote method calls made on the server¡Çs URI alone, with an object id.
+This object receives remote method calls made on the serverâ€™s URI alone, with an object id.
 --- safe_level
 #@todo
 
@@ -143,7 +143,7 @@ This object receives remote method calls made on the server¡Çs URI alone, with a
 #@todo
 The main thread of this DRbServer.
 
-This is the thread that listens for and accepts connections from clients, not that handles each client¡Çs request-response session.
+This is the thread that listens for and accepts connections from clients, not that handles each clientâ€™s request-response session.
 
 --- uri
 #@todo

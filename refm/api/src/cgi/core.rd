@@ -1,20 +1,20 @@
 #@since 1.9.1
-cgi �饤�֥��Υ�����ǽ���󶡤���饤�֥��Ǥ���
+cgi ライブラリのコア機能を提供するライブラリです。
 #@end
 
 = class CGI < Object
 include CGI::QueryExtension
 
-CGI ������ץȤ�񤯤����ɬ�פʵ�ǽ���󶡤��륯�饹�Ǥ���
+CGI スクリプトを書くために必要な機能を提供するクラスです。
 
 == Class Methods
 --- parse(query) -> Hash
 
-Ϳ����줿������ʸ�����ѡ������ޤ���
+与えられたクエリ文字列をパースします。
 
-@param query ������ʸ�������ꤷ�ޤ���
+@param query クエリ文字列を指定します。
 
-�㡧
+例：
         require "cgi"
 
         params = CGI.parse("query_string")
@@ -24,14 +24,14 @@ CGI ������ץȤ�񤯤����ɬ�פʵ�ǽ���󶡤��륯�饹�Ǥ���
 #@since 1.9.1
 --- accept_charset -> String
 
-�����Ȥ뤳�Ȥ��Ǥ��륭��饯�����åȤ�ʸ������֤��ޤ���
-�ǥե���Ȥ� UTF-8 �Ǥ���
+受けとることができるキャラクタセットを文字列で返します。
+デフォルトは UTF-8 です。
 
 --- accept_charset=(charset)
 
-�����Ȥ뤳�Ȥ��Ǥ��륭��饯�����åȤ����ꤷ�ޤ���
+受けとることができるキャラクタセットを設定します。
 
-@param charset ʸ����ǥ���饯�����åȤ�̾������ꤷ�ޤ���
+@param charset 文字列でキャラクタセットの名前を指定します。
 
 @see [[d:spec/m17n]]
 
@@ -44,8 +44,8 @@ CGI ������ץȤ�񤯤����ɬ�פʵ�ǽ���󶡤��륯�饹�Ǥ���
 #@since 1.9.1
 --- accept_charset -> String
 
-�����Ȥ뤳�Ȥ��Ǥ��륭��饯�����åȤ�ʸ������֤��ޤ���
-�ǥե���Ȥ� UTF-8 �Ǥ���
+受けとることができるキャラクタセットを文字列で返します。
+デフォルトは UTF-8 です。
 
 @see [[m:CGI.accept_charset]], [[m:CGI.accept_charset=]]
 
@@ -56,39 +56,39 @@ CGI ������ץȤ�񤯤����ɬ�פʵ�ǽ���󶡤��륯�饹�Ǥ���
 
 --- header(options = "text/html") -> String
 
-HTTP �إå��� options �˽��ä��������ޤ��� [[m:CGI#out]] �Ȱ㤤��ɸ����ϤˤϽ��Ϥ��ޤ���
-[[m:CGI#out]] ��Ȥ鷺�˼��Ϥ� HTML ����Ϥ��������ʤɤ˻Ȥ��ޤ���
-���Υ᥽�åɤ�ʸ���󥨥󥳡��ǥ��󥰤��Ѵ����ޤ���
+HTTP ヘッダを options に従って生成します。 [[m:CGI#out]] と違い、標準出力には出力しません。
+[[m:CGI#out]] を使わずに自力で HTML を出力したい場合などに使います。
+このメソッドは文字列エンコーディングを変換しません。
 
-�إå��Υ����Ȥ��Ƥϰʲ������Ѳ�ǽ�Ǥ���
+ヘッダのキーとしては以下が利用可能です。
 
 : type
-  Content-Type �إå��Ǥ����ǥե���Ȥ� "text/html" �Ǥ���
+  Content-Type ヘッダです。デフォルトは "text/html" です。
 : charset
-  �ܥǥ��Υ���饯�����åȤ� Content-Type �إå����ɲä��ޤ���
+  ボディのキャラクタセットを Content-Type ヘッダに追加します。
 : nph
-  �����ͤ���ꤷ�ޤ������ʤ�С�HTTP �ΥС�����󡢥��ơ����������ɡ�
-  Date �إå��򥻥åȤ��ޤ����ޤ� Server �� Connection �γƥإå��ˤ�ǥե�����ͤ򥻥åȤ��ޤ���
-  ������ꤹ����ϡ��������ͤ�����Ū�˥��åȤ��Ƥ���������
+  真偽値を指定します。真ならば、HTTP のバージョン、ステータスコード、
+  Date ヘッダをセットします。また Server と Connection の各ヘッダにもデフォルト値をセットします。
+  偽を指定する場合は、これらの値を明示的にセットしてください。
 : status
-  HTTP �Υ��ơ����������ɤ���ꤷ�ޤ���
-  ���Υꥹ�Ȥβ������Ѳ�ǽ�ʥ��ơ����������ɤΥꥹ�Ȥ�����ޤ���
+  HTTP のステータスコードを指定します。
+  このリストの下に利用可能なステータスコードのリストがあります。
 : server
-  �����Х��եȥ�������̾�λ��ꤷ�ޤ���Server �إå����б����ޤ���
+  サーバソフトウェアの名称指定します。Server ヘッダに対応します。
 : connection
-  ��³�μ������ꤷ�ޤ���Connection �إå����б����ޤ���
+  接続の種類を指定します。Connection ヘッダに対応します。
 : length
-  �������륳��ƥ�Ĥ�Ĺ������ꤷ�ޤ���Content-Length �إå����б����ޤ���
+  送信するコンテンツの長さを指定します。Content-Length ヘッダに対応します。
 : language
-  �������륳��ƥ�Ĥθ������ꤷ�ޤ���Content-Language �إå����б����ޤ���
+  送信するコンテンツの言語を指定します。Content-Language ヘッダに対応します。
 : expires
-  �������륳��ƥ�Ĥ�ͭ�����¤� [[c:Time]] �Υ��󥹥��󥹤ǻ��ꤷ�ޤ���
-  Expires �إå����б����ޤ���
+  送信するコンテンツの有効期限を [[c:Time]] のインスタンスで指定します。
+  Expires ヘッダに対応します。
 : cookie
-  ���å����Ȥ���ʸ���� [[c:CGI::Cookie]] �Υ��󥹥��󥹡��ޤ��Ϥ��������󤫥ϥå������ꤷ�ޤ���
-  ��İʾ�� Set-Cookie �إå����б����ޤ���
+  クッキーとして文字列か [[c:CGI::Cookie]] のインスタンス、またはそれらの配列かハッシュを指定します。
+  一つ以上の Set-Cookie ヘッダに対応します。
 
-status �ѥ�᡼���ˤϰʲ���ʸ���󤬻Ȥ��ޤ���
+status パラメータには以下の文字列が使えます。
 
         "OK"                  --> "200 OK"
         "PARTIAL_CONTENT"     --> "206 Partial Content"
@@ -109,9 +109,9 @@ status �ѥ�᡼���ˤϰʲ���ʸ���󤬻Ȥ��ޤ���
         "BAD_GATEWAY"         --> "502 Bad Gateway"
         "VARIANT_ALSO_VARIES" --> "506 Variant Also Negotiates"
 
-@param options [[c:Hash]] ��ʸ����� HTTP �إå����������뤿��ξ������ꤷ�ޤ���
+@param options [[c:Hash]] か文字列で HTTP ヘッダを生成するための情報を指定します。
 
-�㡧
+例：
         header
           # Content-Type: text/html
 
@@ -132,7 +132,7 @@ status �ѥ�᡼���ˤϰʲ���ʸ���󤬻Ȥ��ޤ���
                 "my_header1" => "my_value"
                 "my_header2" => "my_value"})
 
-�㡧
+例：
         cgi = CGI.new('html3')
         print cgi.header({"charset" => "shift_jis", "status" => "OK"})
         print "<html><head><title>TITLE</title></head>\r\n"
@@ -142,16 +142,16 @@ status �ѥ�᡼���ˤϰʲ���ʸ���󤬻Ȥ��ޤ���
 
 --- out(options = "text/html") { .... }
 
-HTTP �إå��ȡ��֥��å���Ϳ����줿ʸ�����ɸ����Ϥ˽��Ϥ��ޤ���
+HTTP ヘッダと、ブロックで与えられた文字列を標準出力に出力します。
 
-HEAD�ꥯ������ (REQUEST_METHOD == "HEAD") �ξ��� HTTP �إå��Τߤ���Ϥ��ޤ���
+HEADリクエスト (REQUEST_METHOD == "HEAD") の場合は HTTP ヘッダのみを出力します。
 
-charset �� "iso-2022-jp"��"euc-jp"��"shift_jis" �Τ����줫��
-�������ʸ���󥨥󥳡��ǥ��󥰤�ư�Ѵ�����language �� "ja"�ˤ��ޤ���
+charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
+ある場合は文字列エンコーディングを自動変換し、language を "ja"にします。
 
-@param options [[c:Hash]] ��ʸ����� HTTP �إå����������뤿��ξ������ꤷ�ޤ���
+@param options [[c:Hash]] か文字列で HTTP ヘッダを生成するための情報を指定します。
 
-�㡧
+例：
         cgi = CGI.new
         cgi.out{ "string" }
           # Content-Type: text/html
@@ -183,10 +183,10 @@ charset �� "iso-2022-jp"��"euc-jp"��"shift_jis" �Τ����줫��
 --- print(*strings)
 #@todo
 
-������ʸ�����ɸ����Ϥ˽��Ϥ��ޤ���
-cgi.print �� $DEFAULT_OUTPUT.print �������Ǥ���
+引数の文字列を標準出力に出力します。
+cgi.print は $DEFAULT_OUTPUT.print と等価です。
 
-�㡧
+例：
        cgi = CGI.new
        cgi.print "This line is a part of content body.\r\n"
 
@@ -194,15 +194,15 @@ cgi.print �� $DEFAULT_OUTPUT.print �������Ǥ���
 
 --- CR -> String
 
-�����å��꥿�����ɽ��ʸ����Ǥ���
+キャリッジリターンを表す文字列です。
 
 --- LF -> String
 
-�饤��ե����ɤ�ɽ��ʸ����Ǥ���
+ラインフィードを表す文字列です。
 
 --- EOL -> String
 
-����ʸ���Ǥ���
+改行文字です。
 
 #@# --- REVISION -> String
 #@# nodoc
@@ -210,29 +210,29 @@ cgi.print �� $DEFAULT_OUTPUT.print �������Ǥ���
 #@since 1.9.2
 --- NEEDS_BINMODE -> bool
 
-�ե�����򳫤��Ȥ��˥Х��ʥ�⡼�ɤ�ɬ�פ��ɤ�����ɽ������Ǥ���
-�ץ�åȥե������¸������Ǥ���
+ファイルを開くときにバイナリモードが必要かどうかを表す定数です。
+プラットフォーム依存の定数です。
 #@end
 
 --- PATH_SEPARATOR -> Hash
 
-�ѥ��ζ��ڤ�ʸ�����Ǽ���ޤ���
+パスの区切り文字を格納します。
 
 --- HTTP_STATUS -> Hash
 
-HTTP �Υ��ơ����������ɤ�ɽ���ϥå���Ǥ���
+HTTP のステータスコードを表すハッシュです。
 
 #@until 1.9.1
-#@# 1.9.1 �ʹߤ� cgi/util.rd �򻲾�
+#@# 1.9.1 以降は cgi/util.rd を参照
 --- RFC822_DAYS -> [String]
 
-[[rfc:822]] ���������Ƥ���������ά�Τ��֤��ޤ���
+[[rfc:822]] で定義されている曜日の略称を返します。
 
 @see [[rfc:822]]
 
 --- RFC822_MONTHS -> [String]
 
-[[rfc:822]] ���������Ƥ����̾��ά�Τ��֤��ޤ���
+[[rfc:822]] で定義されている月名の略称を返します。
 
 @see [[rfc:822]]
 #@end
@@ -248,92 +248,92 @@ Maximum number of request parameters when multipart
 #@end
 = module CGI::QueryExtension
 
-������ʸ����򰷤�����Υ᥽�åɤ�������Ƥ���⥸�塼��Ǥ���
+クエリ文字列を扱うためのメソッドを定義しているモジュールです。
 
 == Instance Methods
 
 --- [](key) -> Array
 
-ʸ���� key ���б�����ѥ�᡼����������֤��ޤ���
-key ���б�����ѥ�᡼�������Ĥ���ʤ��ä����ϡ�nil ���֤��ޤ�����[[m:CGI#params]]�������Ǥ���
+文字列 key に対応するパラメータを配列で返します。
+key に対応するパラメータが見つからなかった場合は、nil を返します。（[[m:CGI#params]]と等価です）
 
-�ե����फ�����Ϥ��줿�ͤ䡢URL �������ޤ줿 QUERY_STRING �Υѡ�����̤μ����ʤɤ˻��Ѥ��ޤ���
+フォームから入力された値や、URL に埋め込まれた QUERY_STRING のパース結果の取得などに使用します。
 
-@param key ������ʸ����ǻ��ꤷ�ޤ���
+@param key キーを文字列で指定します。
 
 --- accept -> String
 
-ENV['HTTP_ACCEPT'] ���֤��ޤ���
+ENV['HTTP_ACCEPT'] を返します。
 
 --- accept_charset -> String
 
-ENV['HTTP_ACCEPT_CHARSET'] ���֤��ޤ���
+ENV['HTTP_ACCEPT_CHARSET'] を返します。
 
 --- accept_encoding -> String
 
-ENV['HTTP_ACCEPT_ENCODING'] ���֤��ޤ���
+ENV['HTTP_ACCEPT_ENCODING'] を返します。
 
 --- accept_language -> String
 
-ENV['HTTP_ACCEPT_LANGUAGE'] ���֤��ޤ���
+ENV['HTTP_ACCEPT_LANGUAGE'] を返します。
 
 --- auth_type -> String
 
-ENV['AUTH_TYPE'] ���֤��ޤ���
+ENV['AUTH_TYPE'] を返します。
 
 --- cache_control -> String
 
-ENV['HTTP_CACHE_CONTROL'] ���֤��ޤ���
+ENV['HTTP_CACHE_CONTROL'] を返します。
 
 --- content_length -> Fixnum
 
-ENV['CONTENT_LENGTH'] ���֤��ޤ���
+ENV['CONTENT_LENGTH'] を返します。
 
 --- content_type -> String
 
-ENV['CONTENT_TYPE'] ���֤��ޤ���
+ENV['CONTENT_TYPE'] を返します。
 
 --- cookies -> Hash
 
-���å�����̾�����ͤ�ڥ��ˤ������Ǥ���ĥϥå�����֤��ޤ���
+クッキーの名前と値をペアにした要素を持つハッシュを返します。
 
 --- cookies=(value)
 
-���å����򥻥åȤ��ޤ���
+クッキーをセットします。
 
-@param value ���å�����̾�����ͤ�ڥ��ˤ������Ǥ���ĥϥå������ꤷ�ޤ���
+@param value クッキーの名前と値をペアにした要素を持つハッシュを指定します。
 
 --- from -> String
 
-ENV['HTTP_FROM'] ���֤��ޤ���
+ENV['HTTP_FROM'] を返します。
 
 --- gateway_interface -> String
 
-ENV['GATEWAY_INTERFACE'] ���֤��ޤ���
+ENV['GATEWAY_INTERFACE'] を返します。
 
 --- has_key?(*args) -> bool
 --- key?(*args) -> bool
 --- include?(*args) -> bool
 
-Ϳ����줿������������˴ޤޤ�Ƥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+与えられたキーがクエリに含まれている場合は、真を返します。
+そうでない場合は、偽を返します。
 
-@param args �������İʾ���ꤷ�ޤ���
+@param args キーを一つ以上指定します。
 
 --- host -> String
 
-ENV['HTTP_HOST'] ���֤��ޤ���
+ENV['HTTP_HOST'] を返します。
 
 --- keys(*args) -> [String]
 
-���٤ƤΥѥ�᡼���Υ���������Ȥ����֤��ޤ���
+すべてのパラメータのキーを配列として返します。
 
 --- multipart? -> bool
 
-�ޥ���ѡ��ȥե�����ξ��ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+マルチパートフォームの場合は、真を返します。
+そうでない場合は、偽を返します。
 
-       �㡧
+       例：
        cgi = CGI.new
        if cgi.multipart?
          field1=cgi['field1'].read
@@ -343,13 +343,13 @@ ENV['HTTP_HOST'] ���֤��ޤ���
 
 --- negotiate -> String
 
-ENV['HTTP_NEGOTIATE'] ���֤��ޤ���
+ENV['HTTP_NEGOTIATE'] を返します。
 
 --- params -> Hash
 
-�ѥ�᡼�����Ǽ�����ϥå�����֤��ޤ���
+パラメータを格納したハッシュを返します。
 
-�ե����फ�����Ϥ��줿�ͤ䡢URL�������ޤ줿 QUERY_STRING �Υѡ�����̤μ����ʤɤ˻��Ѥ��ޤ���
+フォームから入力された値や、URLに埋め込まれた QUERY_STRING のパース結果の取得などに使用します。
 
       cgi = CGI.new
       cgi.params['developer']     # => ["Matz"] (Array)
@@ -358,82 +358,82 @@ ENV['HTTP_NEGOTIATE'] ���֤��ޤ���
 
 --- params=(hash)
 
-Ϳ����줿�ϥå����ѥ�᡼���˥��åȤ��ޤ���
+与えられたハッシュをパラメータにセットします。
 
-@param hash �ϥå������ꤷ�ޤ���
+@param hash ハッシュを指定します。
 
 
 --- path_info -> String
 
-ENV['PATH_INFO'] ���֤��ޤ���
+ENV['PATH_INFO'] を返します。
 
 --- path_translated -> String
 
-ENV['PATH_TRANSLATED'] ���֤��ޤ���
+ENV['PATH_TRANSLATED'] を返します。
 
 --- pragma -> String
 
-ENV['HTTP_PRAGMA'] ���֤��ޤ���
+ENV['HTTP_PRAGMA'] を返します。
 
 --- query_string -> String
 
-ENV['QUERY_STRING'] ���֤��ޤ���
+ENV['QUERY_STRING'] を返します。
 
 --- raw_cookie -> String
 
-ENV["HTTP_COOKIE"] ���֤��ޤ���
+ENV["HTTP_COOKIE"] を返します。
 
 --- raw_cookie2 -> String
 
-ENV["HTTP_COOKIE2"] ���֤��ޤ���
+ENV["HTTP_COOKIE2"] を返します。
 
 --- referer -> String
 
-ENV['HTTP_REFERER'] ���֤��ޤ���
+ENV['HTTP_REFERER'] を返します。
 
 --- remote_addr -> String
 
-ENV['REMOTE_ADDR'] ���֤��ޤ���
+ENV['REMOTE_ADDR'] を返します。
 
 --- remote_host -> String
 
-ENV['REMOTE_HOST'] ���֤��ޤ���
+ENV['REMOTE_HOST'] を返します。
 
 --- remote_ident -> String
 
-ENV['REMOTE_IDENT'] ���֤��ޤ���
+ENV['REMOTE_IDENT'] を返します。
 
 --- remote_user -> String
 
-ENV['REMOTE_USER'] ���֤��ޤ���
+ENV['REMOTE_USER'] を返します。
 
 --- request_method -> String
 
-ENV['REQUEST_METHOD'] ���֤��ޤ���
+ENV['REQUEST_METHOD'] を返します。
 
 --- script_name -> String
 
-ENV['SCRIPT_NAME'] ���֤��ޤ���
+ENV['SCRIPT_NAME'] を返します。
 
 --- server_name -> String
 
-ENV['SERVER_NAME'] ���֤��ޤ���
+ENV['SERVER_NAME'] を返します。
 
 --- server_port -> Fixnum
 
-ENV['SERVER_PORT'] ���֤��ޤ���
+ENV['SERVER_PORT'] を返します。
 
 --- server_protocol -> String
 
-ENV['SERVER_PROTOCOL'] ���֤��ޤ���
+ENV['SERVER_PROTOCOL'] を返します。
 
 --- server_software -> String
 
-ENV['SERVER_SOFTWARE'] ���֤��ޤ���
+ENV['SERVER_SOFTWARE'] を返します。
 
 --- user_agent -> String
 
-ENV['HTTP_USER_AGENT'] ���֤��ޤ���
+ENV['HTTP_USER_AGENT'] を返します。
 
 #@since 1.9.1
 --- create_body(is_large) -> StringIO | Tempfile
@@ -441,7 +441,7 @@ ENV['HTTP_USER_AGENT'] ���֤��ޤ���
 
 --- files -> Hash
 
-���åץ����ɤ��줿�ե������̾���Ȥ������Ƥ�ɽ�����֥������Ȥ�ڥ��Ȥ������Ǥ���ĥϥå�����֤��ޤ���
+アップロードされたファイルの名前とその内容を表すオブジェクトをペアとする要素を持つハッシュを返します。
 
 --- unescape_filename? -> bool
 #@# nodoc
@@ -469,5 +469,5 @@ ENV['HTTP_USER_AGENT'] ���֤��ޤ���
 
 = class CGI::InvalidEncoding < Exception
 
-������ʸ�����󥳡��ǥ��󥰤����줿�Ȥ���ȯ�������㳰�Ǥ���
+不正な文字エンコーディングが現れたときに発生する例外です。
 

@@ -1,18 +1,18 @@
-= Ruby/Tk ¤È Tcl/Tk, Perl/Tk, Python Tkinter¤Ê¤É¤È¤Î°ã¤¤
+= Ruby/Tk ã¨ Tcl/Tk, Perl/Tk, Python Tkinterãªã©ã¨ã®é•ã„
 
-== Ruby/Tk ¤È Tcl/Tk ¤È¤Î°ã¤¤¤Ï¤É¤³¤Ç¤¹¤«¡©
+== Ruby/Tk ã¨ Tcl/Tk ã¨ã®é•ã„ã¯ã©ã“ã§ã™ã‹ï¼Ÿ
 
-: °ÍÂ¸´Ø·¸¤Î¤¢¤ë widget ¤ÎÀ¸À®ÊıË¡
-  ScrollBar ¤È ListBox, Text, Canvas
+: ä¾å­˜é–¢ä¿‚ã®ã‚ã‚‹ widget ã®ç”Ÿæˆæ–¹æ³•
+  ScrollBar ã¨ ListBox, Text, Canvas
 
 : TkVariable
 
-: ¥¹¥³¡¼¥×
+: ã‚¹ã‚³ãƒ¼ãƒ—
 
-: É¾²Á¥¿¥¤¥ß¥ó¥°
+: è©•ä¾¡ã‚¿ã‚¤ãƒŸãƒ³ã‚°
 
 
-== Ruby/Tk ¤È Tcl/Tk ¤È¤Î°ã¤¤°ìÍ÷¤Ï¡©
+== Ruby/Tk ã¨ Tcl/Tk ã¨ã®é•ã„ä¸€è¦§ã¯ï¼Ÿ
 
     what              Tcl/Tk                 Ruby/Tk
     variable          set a 123              a = 123 or a = '123'
@@ -61,17 +61,17 @@
                       puts stdout "Hello!"   STDOUT.print "Hello World!\n"
 
 
-== Ruby/Tk ¤È Perl/Tk ¤È¤Î°ã¤¤¤Ï¤É¤³¤Ç¤¹¤«¡©
+== Ruby/Tk ã¨ Perl/Tk ã¨ã®é•ã„ã¯ã©ã“ã§ã™ã‹ï¼Ÿ
 
-* Ruby/Tk ¤Ç¤Ï°ìÉô¤Î¥á¥½¥Ã¥É¤¬Æ±¤¸Ì¾Á°¤Ç¥¹¡¼¥Ñ¡¼¥¯¥é¥¹¤ÇÄêµÁ¤µ¤ì¤Æ¤·¤Ş¤Ã¤Æ¤ª¤ê¡¢ÊÌÌ¾¤Î¥á¥½¥Ã¥ÉÌ¾¤È¤Ê¤Ã¤Æ¤¤¤ë¡£((-ÊÑ-))
+* Ruby/Tk ã§ã¯ä¸€éƒ¨ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒåŒã˜åå‰ã§ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã§å®šç¾©ã•ã‚Œã¦ã—ã¾ã£ã¦ãŠã‚Šã€åˆ¥åã®ãƒ¡ã‚½ãƒƒãƒ‰åã¨ãªã£ã¦ã„ã‚‹ã€‚((-å¤‰-))
   type
-* Ruby/Tk ¤Ç¤ÏÊÑ¿ô¤Î¤ä¤ê¼è¤ê¤Ë TkVariable ¥¯¥é¥¹¤ò»ÈÍÑ¤¹¤ë
-* Tcl/Tk ¤Ç¥³¥Ş¥ó¥É¤ò2¤Ä°Ê¾å»È¤Ã¤Æ¤¤¤ë¥á¥½¥Ã¥ÉÌ¾¤Î°ã¤¤
-* Perl/Tk ¤Ï Perl5 ¤Îµ¡Ç½¤òÃÎ¤é¤Ê¤¤¤È»È¤¦¤Î¤¬¤Ä¤é¤¤
-* Perl/Tk ¤Ï Tcl/Tk ¤È¤ÏÆÈÎ©¤·¤¿¥×¥í¥°¥é¥à¤È¤Ê¤Ã¤Æ¤¤¤Æ°ìÉô Tix ¤Îµ¡Ç½¤¬»È¤¨¤ë
-* Perl/Tk ¤ÏËÜ¤¬½ĞÈÇ¤µ¤ì¤Æ¤¤¤ë
+* Ruby/Tk ã§ã¯å¤‰æ•°ã®ã‚„ã‚Šå–ã‚Šã« TkVariable ã‚¯ãƒ©ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹
+* Tcl/Tk ã§ã‚³ãƒãƒ³ãƒ‰ã‚’2ã¤ä»¥ä¸Šä½¿ã£ã¦ã„ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰åã®é•ã„
+* Perl/Tk ã¯ Perl5 ã®æ©Ÿèƒ½ã‚’çŸ¥ã‚‰ãªã„ã¨ä½¿ã†ã®ãŒã¤ã‚‰ã„
+* Perl/Tk ã¯ Tcl/Tk ã¨ã¯ç‹¬ç«‹ã—ãŸãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¨ãªã£ã¦ã„ã¦ä¸€éƒ¨ Tix ã®æ©Ÿèƒ½ãŒä½¿ãˆã‚‹
+* Perl/Tk ã¯æœ¬ãŒå‡ºç‰ˆã•ã‚Œã¦ã„ã‚‹
 
-== Ruby/Tk ¤È Perl/Tk ¤È¤Î°ã¤¤°ìÍ÷¤Ï¡©
+== Ruby/Tk ã¨ Perl/Tk ã¨ã®é•ã„ä¸€è¦§ã¯ï¼Ÿ
 
     what              Perl/Tk                     Ruby/Tk
     variable          $a = 123; or $a = '123';    a = 123 or a = '123'
@@ -113,10 +113,10 @@
     STDOUT            print "Hello World!\n"      print "Hello World!\n"
                       STDOUT "Hello!\n"           STDOUT.print "Hello World!\n"
 
-== Ruby/Tk ¤È Python Tkinter ¤È¤Î°ã¤¤¤Ï¤É¤³¤Ç¤¹¤«¡©
+== Ruby/Tk ã¨ Python Tkinter ã¨ã®é•ã„ã¯ã©ã“ã§ã™ã‹ï¼Ÿ
 
-* Python Tkinter ¤ÏÄê¿ôÄêµÁ Tkconstants.py ¤¬¤¢¤ë¤¬¡¢Ruby/Tk ¤Ë¤Ï¤Ê¤¤
-* Python Tkinter ¤Ï PMW (Python Mega Widgets) ¤Ê¤É¤¬À°È÷¤µ¤ì¤Æ¤¤¤ë
-* Python Tkinter ¤ÏËÜ¤¬½ĞÈÇ¤µ¤ì¤Æ¤¤¤ë(±Ñ¸ì)
+* Python Tkinter ã¯å®šæ•°å®šç¾© Tkconstants.py ãŒã‚ã‚‹ãŒã€Ruby/Tk ã«ã¯ãªã„
+* Python Tkinter ã¯ PMW (Python Mega Widgets) ãªã©ãŒæ•´å‚™ã•ã‚Œã¦ã„ã‚‹
+* Python Tkinter ã¯æœ¬ãŒå‡ºç‰ˆã•ã‚Œã¦ã„ã‚‹(è‹±èª)
 
-== Ruby/Tk ¤È Python Tkinter ¤È¤Î°ã¤¤°ìÍ÷¤Ï¡©
+== Ruby/Tk ã¨ Python Tkinter ã¨ã®é•ã„ä¸€è¦§ã¯ï¼Ÿ

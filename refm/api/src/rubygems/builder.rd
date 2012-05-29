@@ -1,32 +1,32 @@
 #@since 1.9.1
 
-[[c:Gem::Specification]] �Υ��󥹥��󥹤��� Gem �ѥå�������������뤿��Υ饤�֥��Ǥ���
+[[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのライブラリです。
 
 = class Gem::Builder < Object
 include Gem::UserInteraction
 
-[[c:Gem::Specification]] �Υ��󥹥��󥹤��� Gem �ѥå�������������뤿��Υ��饹�Ǥ���
+[[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのクラスです。
 
 == Singleton Methods
 
 --- new(spec) -> Gem::Builder
 
-Ϳ����줿 [[c:Gem::Specification]] �Υ��󥹥��󥹤ˤ�ä�
-[[c:Gem::Builder]] �Υ��󥹥��󥹤��������ޤ���
+与えられた [[c:Gem::Specification]] のインスタンスによって
+[[c:Gem::Builder]] のインスタンスを生成します。
 
-@param spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 == Instance Methods
 
 --- build -> String
 
-���ڥå����� Gem ��������롣
+スペックから Gem を作成する。
 
-@return ���������ե�����̾���֤��ޤ���
+@return 作成したファイル名を返します。
 
 --- success -> String
 
-Gem �κ��������������Ȥ���ɽ�������å��������֤��ޤ���
+Gem の作成に成功したときに表示するメッセージを返します。
 
 #@end
 

@@ -1,15 +1,15 @@
-net/telnet �� SSL ��ĥ���������饤�֥��Ǥ���
+net/telnet に SSL 拡張を実装するライブラリです。
 
-telnet �� STATT-TLS option ��������Ƥ��ޤ���
-[[c:Net::Telnet]] ��ľ�ܵ�ǽ���ɲä��ޤ���
-[[m:Net::Telnet#ssl?]] �� SSL �̿������Ϥ���Ƥ��뤫�ɤ�����Ƚ�ꤷ�ޤ���
-���줬���Ǥ�����ˤϥ����Ф� STATT-TLS option ��������Ƥ��ʤ�
-�ʤɡ�SSL�����ѤǤ��ʤ����Ȥ��̣���ޤ���
+telnet の STATT-TLS option を実装しています。
+[[c:Net::Telnet]] に直接機能を追加します。
+[[m:Net::Telnet#ssl?]] で SSL 通信が開始されているかどうかを判定します。
+これが偽である場合にはサーバが STATT-TLS option を実装していない
+など、SSLが利用できないことを意味します。
 
-SSL�ξ�����ʤɤΥѥ�᡼�����Ϥ���ˡ��¸�ߤ��ޤ���
+SSLの証明書などのパラメータを渡す方法は存在しません。
 
-���Υ饤�֥��� 1.9.1 �ʹ��ѻߤ���ޤ���
-���Υ饤�֥������ѤϿ侩����ޤ���ssh�ʤɡ�¾�μ��ʤ���Ѥ��Ƥ���������
+このライブラリは 1.9.1 以降廃止されます。
+このライブラリの利用は推奨されません。sshなど、他の手段を使用してください。
 
 = reopen Net::Telnet
 
@@ -17,22 +17,22 @@ SSL�ξ�����ʤɤΥѥ�᡼�����Ϥ���ˡ��¸�ߤ��ޤ���
 
 --- ssl -> bool
 --- ssl? -> bool
-SSL �ؤΰܹԤ������������˿����֤��ޤ���
+SSL への移行に成功した場合に真を返します。
 
 
 --- preprocess(string) -> String
-�ۥ��Ȥ��������ä�ʸ������������򤷤ޤ���
+ホストから受け取った文字列の前処理をします。
 
-SSL �ν�����ɬ�פʽ������ղä���Ƥ��ޤ���
+SSL の処理に必要な処理が付加されています。
 
-@param string �������оݤ�ʸ����
-@return �Ѵ����ʸ����
+@param string 前処理対象の文字列
+@return 変換後の文字列
 
 --- waitfor(opt) -> String|nil
 --- waitfor(opt){|buf| ...} -> String|nil
-���ꤷ������ɽ���˥ޥå�����ʸ���󤬥ۥ��Ȥ������ޤǥǡ������ɤ߹��ߤޤ���
+指定した正規表現にマッチする文字列がホストから来るまでデータを読み込みます。
 
-SSL �ν�����ɬ�פʽ������ղä���Ƥ��ޤ���
+SSL の処理に必要な処理が付加されています。
 
-@param opt �Ԥ���碌��ɬ�פʾ������ꤷ�ޤ�
+@param opt 待ち合わせに必要な情報を指定します
 

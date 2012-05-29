@@ -1,154 +1,154 @@
 #@since 1.8.0
 = module Process::Sys
 
-�桼�� ID�����롼�� ID �����륷���ƥॳ�����ľ�ܸƤ֤���Υ⥸�塼��Ǥ���
+ユーザ ID・グループ ID を操作するシステムコールを直接呼ぶためのモジュールです。
 
-�ݡ����֥�˥桼�� ID�����롼�� ID �����뤿��Υ⥸�塼�� [[c:Process::UID]], [[c:Process::GID]] 
-���󶡤���Ƥ��ޤ���Process::Sys �� [[c:Process::UID]] �� [[c:Process::GID]] ��Ʊ���˻Ȥ����Ȥ�
-��侩�Ǥ���
+ポータブルにユーザ ID・グループ ID を操作するためのモジュール [[c:Process::UID]], [[c:Process::GID]] 
+も提供されています。Process::Sys と [[c:Process::UID]] や [[c:Process::GID]] を同時に使うことは
+非推奨です。
 
 == Module Functions
 
 --- getuid    -> Integer
 
-�����ƥॳ����� [[man:getuid(2)]] ��ƤӤޤ����֤��ͤ��������֤��ޤ���
+システムコールの [[man:getuid(2)]] を呼びます。返り値を整数で返します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 --- geteuid    -> Integer
 
-�����ƥॳ����� [[man:geteuid(2)]] ��ƤӤޤ����֤��ͤ��������֤��ޤ���
+システムコールの [[man:geteuid(2)]] を呼びます。返り値を整数で返します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 --- getgid    -> Integer
 
-�����ƥॳ����� [[man:getgid(2)]] ��ƤӤޤ����֤��ͤ��������֤��ޤ���
+システムコールの [[man:getgid(2)]] を呼びます。返り値を整数で返します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 --- getegid    -> Integer
 
-�����ƥॳ����� [[man:getegid(2)]] ��ƤӤޤ����֤��ͤ��������֤��ޤ���
+システムコールの [[man:getegid(2)]] を呼びます。返り値を整数で返します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 --- setuid(id)    -> nil
 
-�����ƥॳ����� [[man:setuid(2)]] ��ƤӤޤ���
+システムコールの [[man:setuid(2)]] を呼びます。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setgid(id)    -> nil
 
-�����ƥॳ����� [[man:setgid(2)]] ��ƤӤޤ���
+システムコールの [[man:setgid(2)]] を呼びます。
 
-@param id �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param id システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setruid(id)    -> nil
 
-�����ƥॳ����� setruid ��ƤӤޤ���
+システムコールの setruid を呼びます。
 
-@param id �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param id システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setrgid(id)    -> nil
 
-�����ƥॳ����� setrgid ��ƤӤޤ���
+システムコールの setrgid を呼びます。
 
-@param id �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param id システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- seteuid(id)    -> nil
 
-�����ƥॳ����� [[man:seteuid(2)]] ��ƤӤޤ���
+システムコールの [[man:seteuid(2)]] を呼びます。
 
-@param id �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param id システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setegid(id)    -> nil
 
-�����ƥॳ����� [[man:setegid(2)]] ��ƤӤޤ���
+システムコールの [[man:setegid(2)]] を呼びます。
 
-@param id �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param id システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setreuid(rid, eid)    -> nil
 
-�����ƥॳ����� [[man:setreuid(2)]] ��ƤӤޤ���
+システムコールの [[man:setreuid(2)]] を呼びます。
 
-@param rid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param rid システムコールの引数を整数で指定します。
 
-@param eid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param eid システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setregid(rid, eid)    -> nil
 
-�����ƥॳ����� [[man:setregid(2)]] ��ƤӤޤ���
+システムコールの [[man:setregid(2)]] を呼びます。
 
-@param rid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param rid システムコールの引数を整数で指定します。
 
-@param eid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param eid システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setresuid(rid, eid, sid)    -> nil
 
-�����ƥॳ����� setresuid ��ƤӤޤ���
+システムコールの setresuid を呼びます。
 
-@param rid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param rid システムコールの引数を整数で指定します。
 
-@param eid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param eid システムコールの引数を整数で指定します。
 
-@param sid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param sid システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setresgid(rid, eid, sid)    -> nil
 
-�����ƥॳ����� setresgid ��ƤӤޤ���
+システムコールの setresgid を呼びます。
 
-@param rid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param rid システムコールの引数を整数で指定します。
 
-@param eid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param eid システムコールの引数を整数で指定します。
 
-@param sid �����ƥॳ����ΰ����������ǻ��ꤷ�ޤ���
+@param sid システムコールの引数を整数で指定します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX �����ƥॳ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- issetugid    -> bool
 
-�����ƥॳ����� issetugid() ��ƤӤޤ���
+システムコールの issetugid() を呼びます。
 
-�ץ������� setuid �⤷���� setgid �ӥåȤ�Ȥä�
-��ư����Ƥ�����˿����֤��ޤ���
+プロセスが setuid もしくは setgid ビットを使って
+起動されている場合に真を返します。
 
-@raise NotImplementedError �����ƥॳ���뤬���ߤΥץ�åȥե�������󶡤���Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 #@end

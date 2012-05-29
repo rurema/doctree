@@ -1,11 +1,11 @@
-Ruby ���󥿥ץ꥿�����������ꤵ�줿������Ǽ�����饤�֥��Ǥ���
+Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 
 #@since 1.9.1
 = module RbConfig
 alias Config
 
-Ruby ���󥿥ץ꥿�����������ꤵ�줿������Ǽ�����饤�֥��Ǥ���
-RbConfig �⥸�塼���������ޤ���
+Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
+RbConfig モジュールを定義します。
 
 #@else
 = module Config
@@ -13,11 +13,11 @@ RbConfig �⥸�塼���������ޤ���
 alias RbConfig
 #@end
 
-Ruby ���󥿥ץ꥿�����������ꤵ�줿������Ǽ�����饤�֥��Ǥ���
-Config �⥸�塼���������ޤ���
+Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
+Config モジュールを定義します。
 
 #@since 1.8.5
-RbConfig �⥸�塼��� Config ��Ʊ����ΤȤ���������ޤ���
+RbConfig モジュールを Config と同じものとして定義します。
 #@end
 
 #@end
@@ -27,13 +27,13 @@ RbConfig �⥸�塼��� Config ��Ʊ����ΤȤ���������ޤ���
 #@since 1.8.5
 --- expand(val, config = CONFIG) -> String
 
-Ϳ����줿�ѥ���Ÿ�����ޤ���
+与えられたパスを展開します。
 
   RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
 
-@param val Ÿ���������ѿ�̾�� Makefile �˽񤯷����ǻ��ꤷ�ޤ���
+@param val 展開したい変数名を Makefile に書く形式で指定します。
 
-@param config �ѿ�Ÿ���˻��Ѥ�������� [[c:Hash]] �ǻ��ꤷ�ޤ���
+@param config 変数展開に使用する設定を [[c:Hash]] で指定します。
   
 #@since 1.9.1
 @see [[m:RbConfig::MAKEFILE_CONFIG]]
@@ -44,34 +44,34 @@ RbConfig �⥸�塼��� Config ��Ʊ����ΤȤ���������ޤ���
 #@since 1.9.2
 --- ruby -> String
 
-ruby ���ޥ�ɤΥե�ѥ����֤��ޤ���
+ruby コマンドのフルパスを返します。
 #@end
 
 == Constants
 
 --- DESTDIR -> String
 
-make install ����Ȥ��˻��ꤷ�� DESTDIR ���֤��ޤ���
-����������ѥ��뤷���Ȥ��ʤɤ��ͤ����åȤ���Ƥ��ޤ���
+make install するときに指定した DESTDIR を返します。
+クロスコンパイルしたときなどは値がセットされています。
 
 --- TOPDIR -> String
 
-Ruby �����󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ�Ǥ���
+Ruby がインストールされているディレクトリです。
 
   TOPDIR
-  ������ bin
-  ��   ������ ...
-  ��   ������ ruby
-  ������ include
-  ������ lib
-  ������ share
+  ├── bin
+  │   ├── ...
+  │   └── ruby
+  ├── include
+  ├── lib
+  └── share
   
 --- CONFIG -> Hash
 
-�����ͤ��Ǽ�����ϥå���Ǥ���
+設定値を格納したハッシュです。
 
-��Ǽ����Ƥ������ǤΥ������ͤ� Ruby �ΥС���������Ѥ��Ƥ���ץ�å�
-�ե�����ˤ�ä��Ѥ��ޤ���
+格納されている要素のキーと値は Ruby のバージョンや使用しているプラット
+フォームによって変わります。
 
 @see [[man:autoconf(1)]], [[man:make(1)]]
 
@@ -82,11 +82,11 @@ Ruby �����󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ�Ǥ���
 #@else
 [[m:Config::CONFIG]]
 #@end
-��Ʊ���Ǥ����������ͤϰʲ��Τ褦�ʷ�
-��¾���ѿ��ؤλ��Ȥ�ޤߤޤ���
+と同じですが、その値は以下のような形
+で他の変数への参照を含みます。
   MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
-����ϡ�Makefile ���ѿ����Ȥη����� MAKEFILE_CONFIG �ϡ�
-Makefile �����κݤ����Ѥ���뤳�Ȥ����ꤷ�Ƥ��ޤ���
+これは、Makefile の変数参照の形式で MAKEFILE_CONFIG は、
+Makefile 作成の際に利用されることを想定しています。
 
   require 'rbconfig'
   
@@ -105,15 +105,15 @@ Makefile �����κݤ����Ѥ���뤳�Ȥ����ꤷ�Ƥ��ޤ���
 #@else
 [[m:Config.expand]]
 #@end
-�ϡ����Τ褦�ʻ��Ȥ��褹��
-�᥽�åɤȤ��� rbconfig ���������Ѥ���Ƥ��ޤ���
-(CONFIG �ѿ��ϡ�MAKEFILE_CONFIG �����Ƥ���
+は、このような参照を解決する
+メソッドとして rbconfig 内部で利用されています。
+(CONFIG 変数は、MAKEFILE_CONFIG の内容から
 #@since 1.9.1
 [[m:RbConfig.expand]]
 #@else
 [[m:Config.expand]]
 #@end
-��Ȥä���������Ƥ��ޤ�)
+を使って生成されています)
 
   require 'rbconfig'
   p Config.expand(Config::MAKEFILE_CONFIG["bindir"])

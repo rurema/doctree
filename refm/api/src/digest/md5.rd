@@ -1,10 +1,10 @@
 require digest
 
-[[RFC:1321]] ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë RSA Data Security, Inc. ¤Î MD5 Message-Digest
-Algorithm¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+[[RFC:1321]] ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ RSA Data Security, Inc. ã® MD5 Message-Digest
+Algorithmã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Digest::MD5 < Digest::Base
 
-[[RFC:1321]] ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë RSA Data Security, Inc. ¤Î MD5 Message-Digest
-Algorithm¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+[[RFC:1321]] ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ RSA Data Security, Inc. ã® MD5 Message-Digest
+Algorithmã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 

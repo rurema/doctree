@@ -1,36 +1,36 @@
 = class UDPSocket < IPSocket
 
-UDP/IP�ǡ�������෿�����åȤΥ��饹��
+UDP/IPデータグラム型ソケットのクラス。
 
 == Class Methods
 
 --- open(address_family=Socket::AF_INET) -> UDPSocket
 --- new(address_family=Socket::AF_INET) -> UDPSocket
-������ UDP �����åȤ��֤��ޤ���
+新しい UDP ソケットを返します。
 
 #@since 1.9.1
-address_family �ˤ� Socket::AF_INET �Τ褦��������:INET �Τ褦��
-����ܥ롢"INET" �Τ褦��ʸ�������ꤹ�뤳�Ȥ��Ǥ��ޤ���
+address_family には Socket::AF_INET のような整数、:INET のような
+シンボル、"INET" のような文字列を指定することができます。
 #@end
 
-@param address_family �����åȤΥ��ɥ쥹�ե��ߥ꡼
+@param address_family ソケットのアドレスファミリー
 == Instance Methods
 
 --- bind(host, port) -> 0
-�����åȤ� host �� port �� [[man:bind(2)]] ���ޤ���
+ソケットを host の port に [[man:bind(2)]] します。
 
-bind �����ݡ��Ȥ��� [[m:Socket#recv]] �ǥǡ����������뤳�Ȥ��Ǥ��ޤ���
+bind したポートから [[m:Socket#recv]] でデータを受け取ることができます。
 
-@param host bind ����ۥ���̾ʸ����
-@param port bind ����ݡ����ֹ�
+@param host bind するホスト名文字列
+@param port bind するポート番号
 
 --- connect(host, port) -> 0
 
-�����åȤ� host �� port �� [[man:connect(2)]] ���ޤ���
+ソケットを host の port に [[man:connect(2)]] します。
 
-����ˤ�ä� [[m:UDPSocket#send]] ��������Υ��ɥ쥹����ꤻ����
-�ǡ��������뤳�Ȥ��Ǥ��ޤ�(connect ���ʤ��Ȥ�������Υ��ɥ쥹�����������
-�ǡ��������뤳�Ȥ��Ǥ��ޤ�)��
+これによって [[m:UDPSocket#send]] で送り先のアドレスを指定せずに
+データを送ることができます(connect しなくとも送り先のアドレスを明示すれば
+データを送ることができます)。
 
   u1 = UDPSocket.new
   u1.bind("127.0.0.1", 4913)
@@ -39,69 +39,69 @@ bind �����ݡ��Ȥ��� [[m:Socket#recv]] �ǥǡ����������뤳�Ȥ��Ǥ��ޤ���
   u2.send "uuuu", 0
   p u1.recvfrom(10) #=> ["uuuu", ["AF_INET", 33230, "localhost", "127.0.0.1"]]
 
-@param host ��³����ۥ���̾ʸ����
-@param port ��³����ݡ����ֹ�
+@param host 接続するホスト名文字列
+@param port 接続するポート番号
 
 --- send(mesg, flags, host, port) -> Integer
 --- send(mesg, flags, sockaddr_to) -> Integer
 --- send(mesg, flags) -> Integer
 
-UDP �����åȤ�𤷤ƥǡ���������ޤ���
+UDP ソケットを介してデータを送ります。
 
-flags �ˤ� Socket::MSG_* �Ȥ�������� bitwise OR ���Ϥ��ޤ���
-�ܤ�����̣�� [[man:send(2)]] �򻲾Ȥ��Ƥ���������
+flags には Socket::MSG_* という定数の bitwise OR を渡します。
+詳しい意味は [[man:send(2)]] を参照してください。
 
-host, port ���С��⤷���� sockaddr_to �����������ꤷ�ޤ���
-��������ά�������� [[m:UDPSocket#connect]] ����³����
-��˥ǡ���������ޤ���
+host, port の対、もしくは sockaddr_to で送り先を指定します。
+送り先を省略した場合は [[m:UDPSocket#connect]] で接続した
+先にデータを送ります。
 
-�ºݤ����ä��ǡ�����Ĺ�����֤��ޤ���
+実際に送ったデータの長さを返します。
 
 #@until 1.9.1
-sockaddr_to �ˤ�[[ref:lib:socket#pack_string]]
-����ꤷ�ޤ���
+sockaddr_to には[[ref:lib:socket#pack_string]]
+を指定します。
 #@else
-sockaddr_to �ˤ�[[ref:lib:socket#pack_string]] �⤷����
-[[c:Addrinfo]] ���֥������Ȥ���ꤷ�ޤ���
+sockaddr_to には[[ref:lib:socket#pack_string]] もしくは
+[[c:Addrinfo]] オブジェクトを指定します。
 #@end
 
-host, port �˴ؤ��Ƥ� [[ref:lib:socket#host_format]]��
-[[ref:lib:socket#service_format]]�򻲾Ȥ��Ƥ���������
+host, port に関しては [[ref:lib:socket#host_format]]、
+[[ref:lib:socket#service_format]]を参照してください。
 
-2 ������3 �����η����ξ���ư��ϡ�
-[[m:BasicSocket#send]] ��Ʊ���Ǥ���
+2 引数、3 引数の形式の場合の動作は、
+[[m:BasicSocket#send]] と同じです。
 
-4 �����η����ǡ����ꤷ���ۥ��Ȥ�ʣ���Υ��ɥ쥹����ľ�硢�����줫
-�Υ��ɥ쥹�ؤ���������������ޤ�(���뤤�Ϥ��٤Ƥ����������Ԥ����
-��)���ƥ��ɥ쥹�ؤ��������˻�ߤޤ���
+4 引数の形式で、指定したホストが複数のアドレスを持つ場合、いずれか
+のアドレスへの送信が成功するまで(あるいはすべての送信が失敗するま
+で)、各アドレスへの送信を順に試みます。
 
-�ǡ����������˼��Ԥ��������㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+データの送信に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-@param mesg ����ǡ���ʸ����
-@param flags �ե饰
-@param host ������Υۥ���̾
-@param port ������Υݡ����ֹ�
-@param sockaddr_to ������Υ��ɥ쥹����
+@param mesg 送るデータ文字列
+@param flags フラグ
+@param host 送り先のホスト名
+@param port 送り先のポート番号
+@param sockaddr_to 送り先のアドレス情報
 
 #@if (version >= "1.8.5")
 --- recvfrom_nonblock(maxlen, flags=0) -> [String, Array]
-�����åȤ�Υ�֥��å��󥰥⡼�ɤ����ꤷ���塢
-[[man:recvfrom(2)]] �ǥ����åȤ���ǡ�����������ޤ���
+ソケットをノンブロッキングモードに設定した後、
+[[man:recvfrom(2)]] でソケットからデータを受け取ります。
 
-maxlen �Ǽ������ǡ����κ���Х��ȿ�����ꤷ�ޤ���
+maxlen で受け取るデータの最大バイト数を指定します。
 
-flags �ϥե饰�ǡ�Socket::MSG_* �� bitwise OR ���Ϥ��ޤ���
-�ܤ����� [[man:recvfrom(2)]] �򻲾Ȥ��Ƥ���������
+flags はフラグで、Socket::MSG_* の bitwise OR を渡します。
+詳しくは [[man:recvfrom(2)]] を参照してください。
 
-�֤��ͤϥǡ�����ʸ��������긵�Υ��ɥ쥹�����
-2���Ǥ�����Ȥʤ�ޤ���
+返り値はデータの文字列と送り元のアドレス情報の
+2要素の配列となります。
 
-[[man:recvfrom(2)]] �����顼�ˤʤä���硢
-Errno::EAGAIN, Errno::EINTR ��ޤ��㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+[[man:recvfrom(2)]] がエラーになった場合、
+Errno::EAGAIN, Errno::EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@since 1.9.1
-Errno::EWOULDBLOCK��Errno::EAGAIN �Τ褦���ԤäƤ����ȥ饤���뤳�Ȥ�
-��ǽ�Ǥ��뤳�Ȥ��̣�����㳰�ˤϡ�[[c:IO::WaitReadable]] �� extend
-����Ƥ��ޤ���
+Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
+可能であることを意味する例外には、[[c:IO::WaitReadable]] が extend
+されています。
 #@end
 
 #@since 1.9.1
@@ -122,8 +122,8 @@ Errno::EWOULDBLOCK��Errno::EAGAIN �Τ褦���ԤäƤ����ȥ饤���뤳�Ȥ�
   end
 #@end
 
-@param maxlen �������ǡ����κ���Х��ȿ�
-@param flags �ե饰
+@param maxlen 受け取るデータの最大バイト数
+@param flags フラグ
 @see [[m:IPSocket#recvfrom]]
 
 #@end

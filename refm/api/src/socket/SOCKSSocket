@@ -1,24 +1,24 @@
 = class SOCKSSocket < TCPSocket
 
-[[c:TCPSocket]] �� SOCKS([[url:http://www.sw.nec.co.jp/middle/socks/]]) �б��������饹�Ǥ���
+[[c:TCPSocket]] を SOCKS([[url:http://www.sw.nec.co.jp/middle/socks/]]) 対応したクラスです。
 
 == Class Methods
 
 --- open(host, service) -> SOCKSSocket
 --- new(host, service) -> SOCKSSocket
 
-host �ǻ��ꤷ���ۥ��Ȥ� service �ǻ��ꤷ���ݡ��Ȥ���³����������
-�Ȥ��֤��ޤ���host �ϥۥ���̾���ޤ��� octet decimal
-�ˤ�륤�󥿡��ͥåȥ��ɥ쥹�򼨤�ʸ����service
-�� /etc/services (�ޤ��� NIS) ����Ͽ����Ƥ��륵��
-�ӥ�̾���ݡ����ֹ�Ǥ���
+host で指定したホストの service で指定したポートと接続したソケッ
+トを返します。host はホスト名、または octet decimal
+によるインターネットアドレスを示す文字列、service
+は /etc/services (または NIS) に登録されているサー
+ビス名かポート番号です。
 
-@param host  �ۥ���̾���ޤ��� octet decimal �ˤ�륤�󥿡��ͥåȥ��ɥ쥹�򼨤�ʸ�������ꤷ�ޤ���
-@param service /etc/services (�ޤ��� NIS) ����Ͽ����Ƥ��륵���ӥ�̾���ݡ����ֹ�Ǥ���
+@param host  ホスト名、または octet decimal によるインターネットアドレスを示す文字列を指定します。
+@param service /etc/services (または NIS) に登録されているサービス名かポート番号です。
 
 
 == Instance Methods
 
 --- close -> nil
 
-�����åȤ��Ĥ��ޤ���
+ソケットを閉じます。

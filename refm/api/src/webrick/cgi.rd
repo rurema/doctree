@@ -3,19 +3,19 @@ require webrick/httprequest
 require webrick/httpresponse
 require webrick/config
 
-���̤� CGI �Ķ��� [[lib:webrick]] �饤�֥��Υ����֥�åȤ�Ʊ���褦�� CGI ������ץȤ�񤯤����
-�饤�֥��Ǥ��������Ф� WEBrick �Ǥʤ��Ƥ�Ȥ����Ȥ�����ޤ���
+一般の CGI 環境で [[lib:webrick]] ライブラリのサーブレットと同じように CGI スクリプトを書くための
+ライブラリです。サーバが WEBrick でなくても使うことが出来ます。
 
-=== �Ȥ���
+=== 使い方
 
-WEBrick �Υ����֥�åȤ��������Τ�Ʊ���褦�ˡ�[[c:WEBrick::CGI]] �Υ��֥��饹�ǥ᥽�å�
-do_GET �� do_POST ��������뤳�Ȥˤ�ä� CGI ������ץȤ�񤭤ޤ���
+WEBrick のサーブレットを作成するのと同じように、[[c:WEBrick::CGI]] のサブクラスでメソッド
+do_GET や do_POST を定義することによって CGI スクリプトを書きます。
 
-������ץȤκǸ�� [[m:WEBrick::CGI#start]] �᥽�åɤ�Ƥ�ɬ�פ�����ޤ���
-WEBrick::CGI#start �᥽�åɤ� service �᥽�åɤ�ƤӽФ���service �᥽�åɤϥꥯ�����Ȥ˱�����
-do_XXX �᥽�åɤ�ƤӽФ��ޤ������Τ褦�ˤ��ƥ�����ץȤϼ¹Ԥ���ޤ���
+スクリプトの最後で [[m:WEBrick::CGI#start]] メソッドを呼ぶ必要があります。
+WEBrick::CGI#start メソッドは service メソッドを呼び出し、service メソッドはリクエストに応じて
+do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
 
-��:
+例:
 
  #!/usr/local/bin/ruby
  require 'webrick/cgi'
@@ -30,74 +30,74 @@ do_XXX �᥽�åɤ�ƤӽФ��ޤ������Τ褦�ˤ��ƥ�����ץȤϼ¹Ԥ���ޤ���
  
  MyCGI.new.start()
 
-==== do_XXX �᥽�å�
+==== do_XXX メソッド
 
-do_XXX �᥽�åɤ� XXX �ˤ� GET, HEAD, POST, PUT, DELETE, OPTIONS �����ѤǤ��ޤ���
+do_XXX メソッドの XXX には GET, HEAD, POST, PUT, DELETE, OPTIONS が使用できます。
 
-[[c:WEBrick::CGI]] �Υ��֥��饹��������줿 do_XXX �᥽�åɤ� [[m:WEBrick::CGI#service]] �᥽�å�
-���� HTTP �Υꥯ�����Ȥ˱����Ƽ�ưŪ�˸ƤӽФ���ޤ���
-�ʤΤ� [[c:WEBrick::CGI]] �Υ��֥��饹�Ϥ����Υ᥽�åɤ�Ŭ�ڤ˼������ʤ���Фʤ�ޤ���
-�����Υ᥽�åɤ��֤��ͤ��ä˵��ꤵ��Ƥ��ޤ���
+[[c:WEBrick::CGI]] のサブクラスで定義された do_XXX メソッドは [[m:WEBrick::CGI#service]] メソッド
+から HTTP のリクエストに応じて自動的に呼び出されます。
+なので [[c:WEBrick::CGI]] のサブクラスはこれらのメソッドを適切に実装しなければなりません。
+これらのメソッドの返り値は特に規定されていません。
 
-[[c:WEBrick::CGI]] �Υ��֥��饹�Ǥϡ����饤����Ȥ��Ȥ���ǽ���Τ��� RFC ��������줿 HTTP ��
-�᥽�åɤϤ��٤Ƽ�������ɬ�פ�����ޤ���
-���饤����Ȥ���Υꥯ�����Ȥ˻Ȥ��ʤ���ʬ���äƤ���᥽�åɤϼ������ʤ��Ƥ⤫�ޤ��ޤ���
-��������Ƥ��ʤ� HTTP �᥽�åɤǤ��ä���硢[[m:WEBrick::CGI#service]] �᥽�åɤ��㳰��ȯ�������ޤ���
+[[c:WEBrick::CGI]] のサブクラスでは、クライアントが使う可能性のある RFC で定義された HTTP の
+メソッドはすべて実装する必要があります。
+クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
+実装されていない HTTP メソッドであった場合、[[m:WEBrick::CGI#service]] メソッドが例外を発生させます。
 
-do_XXX �᥽�åɤ��ƤФ줿�����Ǥϡ����饤����Ȥ���Υꥯ�����Ȥ˴ޤޤ�� Entity Body ���ɤ߹��ߤ�
-�ޤ��Ԥ��Ƥ��ޤ���[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] �ʤɤ�
-�᥽�åɤ��ɤФ줿�������ɤ߹��ߤ��Ԥ��ޤ������饤����Ȥ������ʥǡ����������Ƥ��뤳�Ȥ��θ����
-�桼���ϥץ�����ߥ󥰤�Ԥ��٤��Ǥ���
+do_XXX メソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
+まだ行われていません。[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] などの
+メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
+ユーザはプログラミングを行うべきです。
 
-do_XXX �᥽�åɤˤ���Ĥΰ���������ޤ���
-�������ϡ����饤����Ȥ���Υꥯ�����Ȥ�ɽ�� [[c:WEBrick::HTTPRequest]] ���֥������ȤǤ���
-��������ϡ����饤����ȤؤΥ쥹�ݥ󥹤�ɽ�� [[c:WEBrick::HTTPResponse]] ���֥������ȤǤ���
+do_XXX メソッドには二つの引数があります。
+第一引数は、クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+第二引数は、クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
-==== �ե�����ե�����ɤ��ͤ�����
+==== フォームフィールドの値を得る
 
-�ե�����ե�����ɤ��ͤ� [[m:WEBrick::HTTPRequest#query]] �᥽�åɤ��֤� Hash ���֥������Ȥ�
-��Ǽ����Ƥ��ޤ���
+フォームフィールドの値は [[m:WEBrick::HTTPRequest#query]] メソッドが返す Hash オブジェクトに
+収納されています。
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
    def do_GET(req, res)
-     req.query               #=> Hash ���֤��ޤ���
+     req.query               #=> Hash を返します。
      req.query['q']          
      req.query['num']       
    end
  end
  MyCGI.new.start()
 
-Ʊ��̾���Υե�����ɤ�ʣ�������硢list �᥽�åɤ� each_data �᥽�åɤ�Ȥ��ޤ���
+同じ名前のフィールドが複数ある場合、list メソッドや each_data メソッドを使います。
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
    def do_GET(req, res)
-     req.query['q'].list     #=> �ե�������ͤ��ݻ�����ʸ�����������֤��ޤ���
+     req.query['q'].list     #=> フォームの値を保持した文字列の配列を返します。
    end
  end
  MyCGI.new.start()
 
-query �᥽�åɤ��֤� Hash ���֥������ȤΥ������ͤΤ����ͤ� [[c:WEBrick::HTTPUtils::FormData]] ���饹��
-���󥹥��󥹤ˤʤ�ޤ���FormData ���饹�� String ���饹�Υ��֥��饹�Ǥ���
+query メソッドが返す Hash オブジェクトのキーと値のうち値は [[c:WEBrick::HTTPUtils::FormData]] クラスの
+インスタンスになります。FormData クラスは String クラスのサブクラスです。
 
 
-==== �ޥ���ѡ��ȥե�����ɤ��ͤ��������ʥե�����������
+==== マルチパートフィールドの値を取得する（ファイル送信）
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
    def do_GET(req, res)
-     d = req.query['field_name']   #=> FormData ���饹�Υ��󥹥���
+     d = req.query['field_name']   #=> FormData クラスのインスタンス
      d.name                        #=> "field_name"
-     d.filename                    #=> �⤷����Хե�����̾���֤���
-     d['content-type']             #=> �إå����ͤ� [] �᥽�åɤǼ�������
-     d                             #=> �����Ƥ����ե���������
+     d.filename                    #=> もしあればファイル名を返す。
+     d['content-type']             #=> ヘッダの値は [] メソッドで取得する
+     d                             #=> 送られてきたファイルの中身
    end
  end
  MyCGI.new.start()
 
 
-==== ���饤����Ȥ˥��å������Ϥ�
+==== クライアントにクッキーを渡す
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -113,22 +113,22 @@ query �᥽�åɤ��֤� Hash ���֥������ȤΥ������ͤΤ����ͤ� [[c:WEBrick::HTTPUtil
  end
  MyCGI.new.start()
 
-==== ���饤����Ȥ��饯�å���������
+==== クライアントからクッキーを得る
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
    def do_GET(req, res)
-     req.cookies                                   #=> WEBrick::Cookie ���֥������Ȥ�����
-     c = req.cookies.find{|c| c.name == "name1" }  #=> WEBrick::Cookie ���֥�������
+     req.cookies                                   #=> WEBrick::Cookie オブジェクトの配列
+     c = req.cookies.find{|c| c.name == "name1" }  #=> WEBrick::Cookie オブジェクト
    end
  end
  MyCGI.new.start()
 
 
-==== CGI �˴�Ϣ����Ķ��ѿ����ͤ��������
+==== CGI に関連する環境変数の値を取得する
 
-CGI �˴�Ϣ����Ķ��ѿ����ͤ�ľ�� ENV ��������¾�ˡ�
-WEBrick::HTTPRequest ���֥������Ȥγƥ᥽�åɤ������뤳�Ȥ��Ǥ��ޤ���
+CGI に関連する環境変数の値は直接 ENV から得る他に、
+WEBrick::HTTPRequest オブジェクトの各メソッドから得ることができます。
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -147,62 +147,62 @@ WEBrick::HTTPRequest ���֥������Ȥγƥ᥽�åɤ������뤳�Ȥ��Ǥ��ޤ���
  end
  MyCGI.new.start()
 
-=== ���
+=== リンク
 
  * [[rfc:3875]]
 
 = class WEBrick::CGI < Object
 
-���̤� CGI �Ķ��� [[c:WEBrick]] �Υ����֥�åȤ�Ʊ���褦�� CGI ������ץȤ�񤯤����
-���饹�Ǥ���
+一般の CGI 環境で [[c:WEBrick]] のサーブレットと同じように CGI スクリプトを書くための
+クラスです。
 
 == Class Methods
 
 --- new(config = {}, *options)    -> WEBrick::CGI
 
-WEBrick::CGI ���֥������Ȥ��������Ƥ������ޤ���
+WEBrick::CGI オブジェクトを生成してかえします。
 
-@param config �������¸�����ϥå������ꤷ�ޤ���
+@param config 設定を保存したハッシュを指定します。
 
-config ��ͭ���ʥ����Ȥ����ͤϰʲ��ΤȤ���Ǥ���
-�����Ϥ��٤� [[c:Symbol]] ���֥������ȤǤ���
+config で有効なキーとその値は以下のとおりです。
+キーはすべて [[c:Symbol]] オブジェクトです。
 
 : :ServerName     
- ������̾��ʸ����ǻ��ꤷ�ޤ����ǥե���ȤǤ� ENV["SERVER_SOFTWARE"] ���Ȥ��ޤ���
- ENV["SERVER_SOFTWARE"] �� nil �ξ��� "null" ���Ȥ��ޤ���
+ サーバ名を文字列で指定します。デフォルトでは ENV["SERVER_SOFTWARE"] が使われます。
+ ENV["SERVER_SOFTWARE"] が nil の場合は "null" が使われます。
 : :HTTPVersion
- HTTP �С������� [[c:WEBrick::HTTPVersion]] ���֥������Ȥǻ��ꤷ�ޤ���
- �ǥե���ȤǤ� ENV["SERVER_PROTOCOL"] �� HTTP �С�����󤬻Ȥ��ޤ��� 
- ENV["SERVER_PROTOCOL"] �� nil �ξ�� HTTP �С������� 1.0 �Ǥ���
+ HTTP バージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで指定します。
+ デフォルトでは ENV["SERVER_PROTOCOL"] の HTTP バージョンが使われます。 
+ ENV["SERVER_PROTOCOL"] が nil の場合 HTTP バージョンは 1.0 です。
 : :NPH            
- NPH ������ץȤȤ��Ƽ¹Ԥ������� true ����ꤷ�ޤ��������Ǥʤ����� false ����ꤷ�ޤ���
- �ǥե���Ȥ� false �Ǥ���
+ NPH スクリプトとして実行される場合に true を指定します。そうでない場合に false を指定します。
+ デフォルトは false です。
 : :Logger 
- �������뤿��� [[c:WEBrick::BasicLog]] ���֥������Ȥ���ꤷ�ޤ����ǥե���ȤǤ�ɸ�२�顼���Ϥ�
- ���������Ϥ���ޤ���
+ ログを取るための [[c:WEBrick::BasicLog]] オブジェクトを指定します。デフォルトでは標準エラー出力に
+ ログが出力されます。
 : :RequestTimeout
- �ꥯ�����Ȥ��ɤ߹�����Υ����ॢ���Ȥ��äǻ��ꤷ�ޤ����ǥե���Ȥ� 30 �äǤ���
+ リクエストを読み込む時のタイムアウトを秒で指定します。デフォルトは 30 秒です。
 : :Escape8bitURI
- �����ͤ� true �ξ�硢���饤����Ȥ���Υꥯ������ URI �˴ޤޤ�� 8bit �ܤ�Ω�ä�ʸ���򥨥������פ��ޤ���
- �ǥե���Ȥ� false �Ǥ��� 
+ この値が true の場合、クライアントからのリクエスト URI に含まれる 8bit 目が立った文字をエスケープします。
+ デフォルトは false です。 
 
-@param options �桼�������Υ��饹��Ѿ����ƺ����������饹�� @options �Ȥ������󥹥����ѿ��Ȥ��ƻ��ѤǤ��ޤ���
+@param options ユーザがこのクラスを継承して作成したクラスで @options というインスタンス変数として使用できます。
 
 == Instance Methods
 
 #@since 1.8.3
 --- [](key)    -> object
 
-���ꤵ�줿 key ���б��������Ȥ������ͤ��֤��ޤ���
+指定された key に対応した自身の設定値を返します。
 
-@param key ����̾�� Symbol ���֥������Ȥǻ��ꤷ�ޤ���
+@param key 設定名を Symbol オブジェクトで指定します。
 
 #@end
 
 #@since 1.8.3
 --- config     -> Hash
 
-���Ȥ�������ݻ������ϥå�����֤��ޤ���
+自身の設定を保持したハッシュを返します。
 
 @see [[m:WEBrick::CGI.new]]
 #@end
@@ -210,42 +210,42 @@ config ��ͭ���ʥ����Ȥ����ͤϰʲ��ΤȤ���Ǥ���
 #@since 1.8.3
 --- logger     -> WEBrick::BasicLog 
 
-���ꤵ��Ƥ���������֥������Ȥ��֤��ޤ���
+設定されているログオブジェクトを返します。
 
-�ǥե���ȤǤ� [[c:WEBrick::BasicLog]].new($stderr) �Ǥ���
+デフォルトでは [[c:WEBrick::BasicLog]].new($stderr) です。
 #@end
 
 --- service(req, res)     -> ()
 
-���ꤵ�줿 [[c:WEBrick::HTTPRequest]] ���֥������� req �� [[m:WEBrick::HTTPRequest#request_method]] �˱����ơ�
-���Ȥ� do_GET, do_HEAD, do_POST, do_OPTIONS... �����줫�Υ᥽�åɤ� req �� res ������Ȥ��ƸƤӤޤ���
+指定された [[c:WEBrick::HTTPRequest]] オブジェクト req の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
+自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
 
-�ä���ͳ��̵���¤� [[c:WEBrick::CGI]] �Υ��֥��饹�����Υ᥽�åɤ��������ɬ�פϤ���ޤ���
+特に理由が無い限り [[c:WEBrick::CGI]] のサブクラスがこのメソッドを定義する必要はありません。
 
-@param req ���饤����Ȥ���Υꥯ�����Ȥ�ɽ�� [[c:WEBrick::HTTPRequest]] ���֥������ȤǤ���
+@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param res ���饤����ȤؤΥ쥹�ݥ󥹤�ɽ�� [[c:WEBrick::HTTPResponse]] ���֥������ȤǤ���
+@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
-@raise WEBrick::HTTPStatus::MethodNotAllowed ���ꤵ�줿
-       [[c:WEBrick::HTTPRequest]] ���֥������� req �����Ȥ��������Ƥ�
-       �ʤ�HTTP �Υ᥽�åɤǤ��ä����ȯ�����ޤ���
+@raise WEBrick::HTTPStatus::MethodNotAllowed 指定された
+       [[c:WEBrick::HTTPRequest]] オブジェクト req が自身に定義されてい
+       ないHTTP のメソッドであった場合発生します。
 
 --- start(env = ENV, stdin = $stdin, stdout = $stdout)     -> ()
 
-���Ȥ�������줿�����ӥ���¹Ԥ��ޤ���
+自身に定義されたサービスを実行します。
 
-start �᥽�åɤ� service �᥽�åɤ�ƤӽФ���service �᥽�åɤϥꥯ�����Ȥ˱�����
-do_XXX �᥽�åɤ�ƤӽФ��ޤ������Τ褦�ˤ��� CGI ������ץȤϼ¹Ԥ���ޤ���
+start メソッドは service メソッドを呼び出し、service メソッドはリクエストに応じて
+do_XXX メソッドを呼び出します。このようにして CGI スクリプトは実行されます。
 
-@param env CGI ������ץȤ�������ä� Meta-Variables (�Ķ��ѿ�)���ݻ������ϥå��夫��
-           �����Ʊ�� [] �᥽�åɤ���ä����֥������Ȥ���ꤷ�ޤ���
+@param env CGI スクリプトが受け取った Meta-Variables (環境変数)を保持したハッシュか、
+           それと同じ [] メソッドを持ったオブジェクトを指定します。
 
-@param stdin �ꥯ�����ȥǡ��������ϸ��� [[c:IO]] ���֥������Ȥǻ��ꤷ�ޤ���
+@param stdin リクエストデータの入力元を [[c:IO]] オブジェクトで指定します。
 
-@param stdout �쥹�ݥ󥹥ǡ����ν������ [[c:IO]] ���֥������Ȥǻ��ꤷ�ޤ���
+@param stdout レスポンスデータの出力先を [[c:IO]] オブジェクトで指定します。
 
 = class WEBrick::CGI::CGIError < StandardError
 
-CGI �˴ط������㳰���饹�Ǥ���
+CGI に関係する例外クラスです。
 
 #@end

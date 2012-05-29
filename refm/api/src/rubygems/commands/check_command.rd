@@ -2,20 +2,20 @@ require rubygems/command
 require rubygems/version_option
 require rubygems/validator
 
-���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������򸡾ڤ��뤿��Υ饤�֥��Ǥ���
+インストールされている Gem パッケージを検証するためのライブラリです。
 
   Usage: gem check [options]
     Options:
-          --verify FILE                �����Υ����å�����ˤ�� Gem �ѥå������򸡾ڤ��ޤ�
-      -a, --alien                      ��������Ƥ��ʤ��ѥå���������𤷤ޤ�
-      -t, --test                       Gem �ѥå������Υ�˥åȥƥ��Ȥ�¹Ԥ��ޤ�
-      -v, --version VERSION            ����ΥС������Υƥ��Ȥ�¹Ԥ��ޤ�
+          --verify FILE                内部のチェックサムにより Gem パッケージを検証します
+      -a, --alien                      管理されていないパッケージを報告します
+      -t, --test                       Gem パッケージのユニットテストを実行します
+      -v, --version VERSION            特定のバージョンのテストを実行します
 #@include(common_options)
     Summary:
-      ���󥹥ȡ��뤵��Ƥ��� Gem �ѥå�����������å����ޤ�
+      インストールされている Gem パッケージをチェックします
 
 
 = class Gem::Commands::CheckCommand < Gem::Command
 
-���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������򸡾ڤ��뤿��Υ��饹�Ǥ���
+インストールされている Gem パッケージを検証するためのクラスです。
 

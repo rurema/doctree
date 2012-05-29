@@ -1,15 +1,15 @@
 = class WEBrick::Log < WEBrick::BasicLog
 
-�������뵡ǽ���󶡤��륯�饹�Ǥ���
-[[c:WEBrick::BasicLog]] �Ȥΰ㤤�ϥ����γƹԤ���Ƭ��
-���߻��郎��ư��������������Ǥ���
+ログを取る機能を提供するクラスです。
+[[c:WEBrick::BasicLog]] との違いはログの各行の先頭に
+現在時刻が自動で挿入される点です。
 
 == Instance Methods
 
 --- time_format      -> String
 --- time_format=()
 
-���֤�Ͽ����ե����ޥåȤ�ʸ�����ɽ�����������Ǥ���
-������ [[m:Time#strftime]] ��Ʊ���Ǥ���
-�ǥե���Ȥ� "[%Y-%m-%d %H:%M:%S]" �Ǥ���
+時間を記録するフォーマットを文字列で表すアクセサです。
+形式は [[m:Time#strftime]] と同じです。
+デフォルトは "[%Y-%m-%d %H:%M:%S]" です。
 

@@ -1,2 +1,2 @@
-= sprintf ¥Õ¥©¡¼¥Þ¥Ã¥È
+= sprintf ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 #@include(../api/src/_builtin/printf-format)

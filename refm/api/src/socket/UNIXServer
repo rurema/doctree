@@ -1,6 +1,6 @@
 = class UNIXServer < UNIXSocket
 
-UNIX���ȥ꡼�෿��³�Υ�����¦�Υ����åȤΥ��饹��
+UNIXストリーム型接続のサーバ側のソケットのクラス。
 
 == Class Methods
 
@@ -9,25 +9,25 @@ UNIX���ȥ꡼�෿��³�Υ�����¦�Υ����åȤΥ��饹��
 --- open(path){|sock| ...} -> object
 --- new(path){|sock| ...} -> object
 
-path �ǻ��ꤷ���ѥ�̾���Ѥ�����³������դ��륽���å�
-��������ޤ���
+path で指定したパス名を用いて接続を受け付けるソケット
+を作成します。
 
-�֥��å����ά����Ⱥ������������Х����åȤ��֤��ޤ���
+ブロックを省略すると作成したサーバソケットを返します。
 
-�֥��å����Ϥ������ϡ��������������åȤ�����Ȥ��Ƥ��Υ֥��å���ƤӤ�����
-�֥��å���λ���˥����åȤ��Ĥ��ޤ������ξ��ˤ�
-�֥��å���ɾ���ͤ��֤��ͤȤ����֤��ޤ���
+ブロックを渡した場合は、作成したソケットを引数としてそのブロックを呼びだし、
+ブロック終了時にソケットを閉じます。この場合には
+ブロックの評価値を返り値として返します。
 
-@param path ��³������դ���ѥ�̾ʸ����
+@param path 接続を受け付けるパス名文字列
 
 == Instance Methods
 
 --- accept -> UnixSocket
 
-���饤����Ȥ������³�׵�� [[man:accept(2)]]���Ԥ���������³����
-[[c:UNIXSocket]] �Υ��󥹥��󥹤��֤��ޤ���
+クライアントからの接続要求を [[man:accept(2)]]で待ち受け、接続した
+[[c:UNIXSocket]] のインスタンスを返します。
 
-��:
+例:
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")
@@ -40,20 +40,20 @@ path �ǻ��ꤷ���ѥ�̾���Ѥ�����³������դ��륽���å�
 
 #@if (version >= "1.8.5")
 --- accept_nonblock -> UnixSocket
-�����åȤ�Υ�֥��å��󥰥⡼�ɤ����ꤷ���塢
-[[man:accept(2)]] ��ƤӽФ��ޤ���
+ソケットをノンブロッキングモードに設定した後、
+[[man:accept(2)]] を呼び出します。
 
-��³����
-[[c:UNIXSocket]] �Υ��󥹥��󥹤��֤��ޤ���
+接続した
+[[c:UNIXSocket]] のインスタンスを返します。
 
-[[man:accept(2)]] �����顼�ˤʤä���硢[[m:Socket#accept]] ��Ʊ���㳰��
-ȯ�����ޤ���
+[[man:accept(2)]] がエラーになった場合、[[m:Socket#accept]] と同じ例外が
+発生します。
 
 #@since 1.9.1
 [[m:Errno::EWOULDBLOCK]], [[m:Errno::AGAIN]], 
-[[m:Errno::ECONNABORTED]], [[Errno::EPROTO]] �Τ����줫���㳰��
-ȯ���������ϡ������㳰�ˤ� [[c:IO::WaitReadable]] �� extend
-����ޤ�����������Ѥ��ƥ�ȥ饤��ǽ���㳰���Ϥޤ��뤳�Ȥ��Ǥ��ޤ���
+[[m:Errno::ECONNABORTED]], [[Errno::EPROTO]] のいずれかの例外が
+発生した場合は、その例外には [[c:IO::WaitReadable]] が extend
+されます。それを利用してリトライ可能な例外を掴まえることができます。
 
   require 'socket'
   serv = UNIXServer.new("/tmp/sock")
@@ -72,22 +72,22 @@ path �ǻ��ꤷ���ѥ�̾���Ѥ�����³������դ��륽���å�
 
 --- listen(backlog) -> 0
 
-[[man:listen(2)]] ��¹Ԥ��ޤ���
-([[m:Socket#listen]]��Ʊ��)
+[[man:listen(2)]] を実行します。
+([[m:Socket#listen]]と同じ)
 
-backlog �ϡ����饤����Ȥ������³�׵����α�Ǥ�����Ǥ���
-UNIXServer �Υ��󥹥��󥹤Ϻǽ�� backlog ���ͤ� 5 ����������ޤ���
+backlog は、クライアントからの接続要求を保留できる数です。
+UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
-[[man:listen(2)]] ����������� 0 ���֤��ޤ���
-���Ԥ���� �㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+[[man:listen(2)]] が成功すれば 0 を返します。
+失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 
-@param backlog �Хå������κ����(��³�׵����α�Ǥ����)
+@param backlog バックログの最大数(接続要求を保留できる数)
 
 --- sysaccept -> Integer
-��³�������饤����ȤΥ����åȤ�ե����뵭�һҤ��֤����Ȥ������
-[[m:UNIXServer#accept]] ��Ʊ���Ǥ���
+接続したクライアントのソケットをファイル記述子で返すことを除けば
+[[m:UNIXServer#accept]] と同じです。
 
-��:
+例:
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")

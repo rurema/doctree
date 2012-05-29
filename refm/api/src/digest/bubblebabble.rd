@@ -3,6 +3,6 @@ require digest
 == Module Functions
 --- bubblebabble(string) -> String
 
-Ϳ����줿ʸ����� BubbleBabble ���󥳡��ɤ���ʸ������֤��ޤ���
+与えられた文字列を BubbleBabble エンコードした文字列を返します。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。

@@ -32,5 +32,5 @@ This class walks a YAML AST, converting each node to ruby
 --- visit_Psych_Nodes_Alias(o)
 #@todo
 
-#@# psych.so ╓к╓╒╓К build_exception║╒path2class ╔А╔╫╔ц╔и╓о private ╔А╔╫╔ц
-#@# ╔и╓н╓©╓А╬йн╛║ё
+#@# psych.so Ц│╚Ц│┌Ц┌▀ build_exceptionЦ─│path2class Ц┐║Ц┌╫Ц┐┐Ц┐┴Ц│╞ private Ц┐║Ц┌╫Ц┐┐
+#@# Ц┐┴Ц│╝Ц│÷Ц┌│Г°│Г∙╔Ц─┌

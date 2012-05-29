@@ -5,9 +5,9 @@ include Enumerable
 --- new_hour
 #@todo
 
-¿·¤·¤¯hour¤òºîÀ®¤·¡¤ÊÖ¤·¤Ş¤¹¡¥ºîÀ®¤µ¤ì¤¿
-hour¤Ïhour¥ê¥¹¥È¤ÎºÇ¸å
-¤ËÄÉ²Ã¤µ¤ì¤Æ¤¤¤Ş¤¹¡¥
+æ–°ã—ãhourã‚’ä½œæˆã—ï¼Œè¿”ã—ã¾ã™ï¼ä½œæˆã•ã‚ŒãŸ
+hourã¯hourãƒªã‚¹ãƒˆã®æœ€å¾Œ
+ã«è¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ï¼
 
 
 = class RSS::Maker::RSS09::Channel::SkipHours < RSS::Maker::ChannelBase::SkipHoursBase
@@ -15,11 +15,11 @@ hour¤Ïhour¥ê¥¹¥È¤ÎºÇ¸å
 
 = class RSS::Maker::ChannelBase::SkipHoursBase::HourBase < Object
 
-hour¤Ï
-maker.channel.skipHours.new_hour¤ÇºîÀ®¤µ¤ì¤¿¥ª
-¥Ö¥¸¥§¥¯¥È¤È¤·¤Ş¤¹¡¥
+hourã¯
+maker.channel.skipHours.new_hourã§ä½œæˆã•ã‚ŒãŸã‚ª
+ãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¾ã™ï¼
 
-content¤ò»ØÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Ş¤¹¡¥
+contentã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼
 
 == Instance Methods
 

@@ -1,115 +1,115 @@
-���Υ饤�֥��� obsolete �Ǥ���
-[[lib:cgi]] �饤�֥���ȤäƤ���������
+このライブラリは obsolete です。
+[[lib:cgi]] ライブラリを使ってください。
 
 = class CGI_cgi_lib
 
-���Υ饤�֥��� obsolete �Ǥ���
-[[lib:cgi]] �饤�֥���ȤäƤ���������
+このライブラリは obsolete です。
+[[lib:cgi]] ライブラリを使ってください。
 
 == Singleton Methods
 
 --- new(input = $stdin) -> CGI_cgi_lib
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 --- rfc1123_date(time) -> String
 
-Ϳ����줿 [[c:Time]] ���֥������Ȥ� [[rfc:1123]] ������줿������ʸ������Ѵ����ޤ���
+与えられた [[c:Time]] オブジェクトを [[rfc:1123]] で定められた形式の文字列に変換します。
 
-@param time [[c:Time]] ���֥������Ȥ���ꤷ�ޤ���
+@param time [[c:Time]] オブジェクトを指定します。
 
 --- escape(str) -> String
 
-Ϳ����줿ʸ����� URL ���󥳡��ɤ��ޤ���
+与えられた文字列を URL エンコードします。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- unescape(str) -> String
 
-URL ���󥳡��ɤ��줿ʸ�����ǥ����ɤ��ޤ���
+URL エンコードされた文字列をデコードします。
 
-@param str URL ���󥳡��ɤ��줿ʸ�������ꤷ�ޤ���
+@param str URL エンコードされた文字列を指定します。
 
 --- escapeHTML(str) -> String
 
-Ϳ����줿ʸ����˴ޤޤ�������ʸ�������ֻ��Ȥ��֤������ޤ���
+与えられた文字列に含まれる危険な文字列を実態参照に置き換えます。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- tag(element, attributes = {}) -> String
 --- tag(element, attributes = {}){ ... } -> String
 
-HTML ������ɽ��ʸ������ä��֤��ޤ���
+HTML タグを表す文字列を作って返します。
 
-�֥��å���Ϳ����줿���ϡ��֥��å���ɾ��������̤� HTML �����˶��ޤ�ޤ���
+ブロックが与えられた場合は、ブロックを評価した結果が HTML タグに挟まれます。
 
-@param element ������̾������ꤷ�ޤ���
+@param element タグの名前を指定します。
 
-@param attributes �����˻��ꤹ��°����ϥå���ǻ��ꤷ�ޤ���
+@param attributes タグに指定する属性をハッシュで指定します。
 
 --- cookie(options) -> String
 
-���Υ��å���ʸ�����������ޤ���
+生のクッキー文字列を作成します。
 
-@param options �ϥå������ꤷ�ޤ���
+@param options ハッシュを指定します。
 
 --- header(*options) -> String
-HTTP �إå�ʸ�����������ޤ���
+HTTP ヘッダ文字列を作成します。
 
-@param options ���ץ�������ꤷ�ޤ���
+@param options オプションを指定します。
 
 --- print(*options){ ... } -> ()
 
-ɸ����Ϥ˥֥��å���ɾ��������̤�񤭹��ߤޤ���
+標準出力にブロックを評価した結果を書き込みます。
 
-@param options [[m:CGI_cgi_lib.header]] ��Ʊ���Ǥ���
+@param options [[m:CGI_cgi_lib.header]] と同じです。
 
 --- message(message, title = "", header = ["Content-Type: text/html"]) -> true
-��å�������ɸ����Ϥ˽��Ϥ��ޤ���
+メッセージを標準出力に出力します。
 
-@param message ��å���������ꤷ�ޤ���
+@param message メッセージを指定します。
 
-@param title �����ȥ����ꤷ�ޤ���
+@param title タイトルを指定します。
 
-@param header HTTP �إå�������ꤷ�ޤ���
+@param header HTTP ヘッダーを指定します。
 
 --- error -> ()
-���顼��å���������Ϥ��� [[m:Kernel.#exit]] ���ޤ���
+エラーメッセージを出力して [[m:Kernel.#exit]] します。
 
 == Instance Methods
 
 --- read_from_cmdline
 
-���ե饤��⡼�ɡ�
+オフラインモード。
 
-���ޥ�ɥ饤���������ɸ�����Ϥ��饯����ѥ�᡼�����ɤ߹��ߤޤ���
+コマンドライン引数か、標準入力からクエリパラメータを読み込みます。
 
 --- inputs -> Hash
 
-������ѥ�᡼����ɽ���ϥå��塣
+クエリパラメータを表すハッシュ。
 
 --- cookie -> Hash
 
-���å�����ɽ���ϥå��塣
+クッキーを表すハッシュ。
 
 == Constants
 
 --- CR -> String
 
-�����å��꥿����Ǥ���
+キャリッジリターンです。
 
 --- LF -> String
 
-�饤��ե����ɤǤ���
+ラインフィードです。
 
 --- EOL -> String
 
-�����Ǥ���
+行末です。
 
 --- RFC822_DAYS -> [String]
 
-[[rfc:822]] �������Ƥ���������ά�ΤǤ���
+[[rfc:822]] で定められている曜日の略称です。
 
 --- RFC822_MONTHS -> [String]
 
-[[rfc:822]] �������Ƥ�����ά�ΤǤ���
+[[rfc:822]] で定められている月の略称です。

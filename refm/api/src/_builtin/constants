@@ -1,151 +1,151 @@
 == Constants
 
 --- TRUE -> TrueClass
-��侩�Ǥ�����ɽŪ�ʿ����͡�true ��Ʊ����
+非推奨です。代表的な真の値。true と同じ。
 
-��������ϲ��Ȥθߴ����Τ�����󶡤���Ƥ��ޤ��������ѿ� true ��ȤäƤ���������
+この定数は過去との互換性のために提供されています。擬似変数 true を使ってください。
 
-Ruby �Ǥ� false �� nil �����Ȥ��ư����ޤ���
-���Ǥʤ���(false �Ǥ� nil �Ǥ�ʤ���) �����ƿ��Ȥߤʤ���ޤ���
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- FALSE -> FalseClass
-��侩�Ǥ�����ɽŪ�ʵ����͡�false ��Ʊ����
+非推奨です。代表的な偽の値。false と同じ。
 
-��������ϲ��Ȥθߴ����Τ�����󶡤���Ƥ��ޤ��������ѿ� false ��ȤäƤ���������
-Ruby �Ǥ� false �� nil �����Ȥ��ư����ޤ���
-���Ǥʤ���(false �Ǥ� nil �Ǥ�ʤ���) �����ƿ��Ȥߤʤ���ޤ���
+この定数は過去との互換性のために提供されています。擬似変数 false を使ってください。
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- NIL -> NilClass
-��侩�Ǥ��� nil ��Ʊ����
+非推奨です。 nil と同じ。
 
-��������ϲ��Ȥθߴ����Τ�����󶡤���Ƥ��ޤ��������ѿ� nil ��ȤäƤ���������
+この定数は過去との互換性のために提供されています。擬似変数 nil を使ってください。
 
-Ruby �Ǥ� false �� nil �����Ȥ��ư����ޤ���
-���Ǥʤ���(false �Ǥ� nil �Ǥ�ʤ���) �����ƿ��Ȥߤʤ���ޤ���
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- STDIN -> IO
-ɸ�����ϡ�[[m:$stdin]] �Υǥե�����͡� [[m:$stdin]] �⻲�Ȥ��Ƥ���������
+標準入力。[[m:$stdin]] のデフォルト値。 [[m:$stdin]] も参照してください。
 
-STDIN �ϡ� ruby �ץ���������ư���줿�����Ǥ�ɸ�����Ϥ�ɽ���ޤ���
-��ư�����Ǥ� [[m:$stdin]] ��Ʊ���ͤ˽��������Ƥ��ޤ���
+STDIN は、 ruby プロセスが起動された時点での標準入力を表します。
+起動時点では [[m:$stdin]] も同じ値に初期化されています。
 
-[[m:$stdin]] ��¾�����ϥ��֥������Ȥ��������뤳�ȤǴʰפʥ�����쥯�Ȥ�¸��Ǥ��ޤ���
-�����ơ� [[m:$stdin]] �� STDIN ����������Ф��Υ�����쥯�Ȥ������Ǥ���櫓�Ǥ���
+[[m:$stdin]] に他の入力オブジェクトを代入することで簡易なリダイレクトを実現できます。
+そして、 [[m:$stdin]] に STDIN を代入すればこのリダイレクトを復元できるわけです。
 
-==== ����
-STDIN �� ruby ���Τ���ư���줿�����Ǥ�ɸ�����ϤǤ���
-�֥����ƥ�ˤ�����ɸ������ϥ��ȥ꡼��פȤϰۤʤ�ޤ���
+==== 注意
+STDIN は ruby 自体が起動された時点での標準入力です。
+「システムにおける標準の入力ストリーム」とは異なります。
 
-¿���Υ����ƥ�Ǥ�ɸ������ϥ��ȥ꡼���ü���Ǥ���
-ruby ���Τ�¾�Υ��ȥ꡼��˸��������Ϥ������쥯�Ȥ��줿���֤ǵ�ư���줿��硢
-STDIN ���ݻ�����Τ�ü���ǤϤʤ���������쥯����Υ��ȥ꡼��Ǥ���
+多くのシステムでは標準の入力ストリームは端末です。
+ruby 自体が他のストリームに向けて入力をリダイレクトされた状態で起動された場合、
+STDIN が保持するのは端末ではなく、リダイレクト先のストリームです。
 
 --- STDOUT -> IO
-ɸ����ϡ�[[m:$stdout]] �Υǥե�����͡� [[m:$stdout]] �⻲�Ȥ��Ƥ���������
+標準出力。[[m:$stdout]] のデフォルト値。 [[m:$stdout]] も参照してください。
 
-STDOUT �ϡ� ruby �ץ���������ư���줿�����Ǥ�ɸ����Ϥ�ɽ���ޤ���
-��ư�����Ǥ� [[m:$stdout]] ��Ʊ���ͤ˽��������Ƥ��ޤ���
+STDOUT は、 ruby プロセスが起動された時点での標準出力を表します。
+起動時点では [[m:$stdout]] も同じ値に初期化されています。
 
-[[m:$stdout]] ��¾�ν��ϥ��֥������Ȥ��������뤳�ȤǴʰפʥ�����쥯�Ȥ�¸��Ǥ��ޤ���
-�����ơ� [[m:$stdout]] �� STDOUT ����������Ф��Υ�����쥯�Ȥ������Ǥ���櫓�Ǥ���
+[[m:$stdout]] に他の出力オブジェクトを代入することで簡易なリダイレクトを実現できます。
+そして、 [[m:$stdout]] に STDOUT を代入すればこのリダイレクトを復元できるわけです。
 
-==== ����
-STDOUT �� ruby ���Τ���ư���줿�����Ǥ�ɸ����ϤǤ���
-�֥����ƥ�ˤ�����ɸ��ν��ϥ��ȥ꡼��פȤϰۤʤ�ޤ���
+==== 注意
+STDOUT は ruby 自体が起動された時点での標準出力です。
+「システムにおける標準の出力ストリーム」とは異なります。
 
-¿���Υ����ƥ�Ǥ�ɸ��ν��ϥ��ȥ꡼���ü���Ǥ���
-ruby ���Τ�¾�Υ��ȥ꡼��˸����ƽ��Ϥ������쥯�Ȥ��줿���֤ǵ�ư���줿��硢
-STDOUT ���ݻ�����Τ�ü���ǤϤʤ���������쥯����Υ��ȥ꡼��Ǥ���
+多くのシステムでは標準の出力ストリームは端末です。
+ruby 自体が他のストリームに向けて出力をリダイレクトされた状態で起動された場合、
+STDOUT が保持するのは端末ではなく、リダイレクト先のストリームです。
 
 
 --- STDERR -> IO
-ɸ�२�顼���ϡ�[[m:$stderr]] �Υǥե�����͡� [[m:$stderr]] �⻲�Ȥ��Ƥ���������
+標準エラー出力。[[m:$stderr]] のデフォルト値。 [[m:$stderr]] も参照してください。
 
-STDERR �ϡ� ruby �ץ���������ư���줿�����Ǥ�ɸ�२�顼���Ϥ�ɽ���ޤ���
-��ư�����Ǥ� [[m:$stderr]] ��Ʊ���ͤ˽��������Ƥ��ޤ���
+STDERR は、 ruby プロセスが起動された時点での標準エラー出力を表します。
+起動時点では [[m:$stderr]] も同じ値に初期化されています。
 
-[[m:$stderr]] ��¾�ν��ϥ��֥������Ȥ��������뤳�ȤǴʰפʥ�����쥯�Ȥ�¸��Ǥ��ޤ���
-�����ơ� [[m:$stderr]] �� STDERR ����������Ф��Υ�����쥯�Ȥ������Ǥ���櫓�Ǥ���
+[[m:$stderr]] に他の出力オブジェクトを代入することで簡易なリダイレクトを実現できます。
+そして、 [[m:$stderr]] に STDERR を代入すればこのリダイレクトを復元できるわけです。
 
-==== ����
-STDERR �� ruby ���Τ���ư���줿�����Ǥ�ɸ�२�顼���ϤǤ���
-�֥����ƥ�ˤ�����ɸ��Υ��顼���ϥ��ȥ꡼��פȤϰۤʤ�ޤ���
+==== 注意
+STDERR は ruby 自体が起動された時点での標準エラー出力です。
+「システムにおける標準のエラー出力ストリーム」とは異なります。
 
-¿���Υ����ƥ�Ǥ�ɸ��Υ��顼���ϥ��ȥ꡼���ü���Ǥ���
-ruby ���Τ�¾�Υ��ȥ꡼��˸����ƥ��顼���Ϥ������쥯�Ȥ��줿���֤ǵ�ư���줿��硢
-STDERR ���ݻ�����Τ�ü���ǤϤʤ���������쥯����Υ��ȥ꡼��Ǥ���
+多くのシステムでは標準のエラー出力ストリームは端末です。
+ruby 自体が他のストリームに向けてエラー出力をリダイレクトされた状態で起動された場合、
+STDERR が保持するのは端末ではなく、リダイレクト先のストリームです。
 
 --- ENV -> Object
-�Ķ��ѿ���ɽ�� (����) Ϣ������ (�ܺ٤� [[c:ENV]] �򻲾�)��
+環境変数を表す (疑似) 連想配列 (詳細は [[c:ENV]] を参照)。
 
-����Ϣ��������ͤ��ѹ�����Ȼҥץ������δĶ��Ȥ��ư����Ѥ���ޤ���
+この連想配列の値を変更すると子プロセスの環境として引き継がれます。
 
 --- ARGF -> Object
-���� (�ʤ����ɸ������) �ǹ�������벾�ۥե����� (�ܺ٤� [[c:ARGF]] �򻲾�)��
+引数 (なければ標準入力) で構成される仮想ファイル (詳細は [[c:ARGF]] を参照)。
 
-�Ĥޤ� [[m:Kernel.#gets]] �� [[m:ARGF.gets]] ��Ʊ����̣�Ǥ���
-[[m:ARGF.file]] �Ǹ����ɤ߹�����Υե����륪�֥������Ȥ���
-[[m:ARGF.filename]] �Ǹ����ɤ߹�����Υե�����̾�������ޤ���
+つまり [[m:Kernel.#gets]] は [[m:ARGF.gets]] と同じ意味です。
+[[m:ARGF.file]] で現在読み込み中のファイルオブジェクトが、
+[[m:ARGF.filename]] で現在読み込み中のファイル名が得られます。
 
 --- ARGV -> Array
-Ruby ������ץȤ�Ϳ����줿������ɽ������Ǥ���
+Ruby スクリプトに与えられた引数を表す配列です。
 
-�Ȥ߹����ѿ� [[m:$*]] ����̾�Ǥ���
-Ruby ���Ȥ��Ф�������ϼ�������Ƥ��ޤ���
+組み込み変数 [[m:$*]] の別名です。
+Ruby 自身に対する引数は取り除かれています。
 
-��:
+例:
 
-������ץ� argv.rb �����Ƥ�
+スクリプト argv.rb の内容が
     p ARGV
-�Ǥ��ä��Ȥ��ޤ������ΤȤ������뤫�鼡��¹Ԥ���ȡ�
+であったとします。このときシェルから次を実行すると、
     $ ruby argv.rb foo bar baz
-��̤ϰʲ��Τ褦�˽��Ϥ���ޤ���
+結果は以下のように出力されます。
     ["foo", "bar", "baz"]
 
 --- DATA -> File
-������ץȤ� __END__
-�ץ������ν���ʹߤ򥢥��������� [[c:File]] ���֥������ȡ�
+スクリプトの __END__
+プログラムの終り以降をアクセスする [[c:File]] オブジェクト。
 
-[[ref:d:spec/program#terminate]]�⻲�ȡ�
+[[ref:d:spec/program#terminate]]も参照。
 
-�������ե������ __END__ �ʹߤϲ��ϡ��¹Ԥ��оݤˤʤ�ʤ��Τ�
-������ʬ�˥ץ�����ब���Ѥ��뤿��Υǡ�����񤭹���Ǥ������Ȥ��Ǥ��ޤ���
-DATA ����Ϥ��Υǡ�����ʬ�˥����������뤿��� [[c:File]] ���֥������Ȥ��ݻ����Ƥ��ޤ���
+ソースファイルの __END__ 以降は解析・実行の対象にならないので
+その部分にプログラムが利用するためのデータを書き込んでおくことができます。
+DATA 定数はそのデータ部分にアクセスするための [[c:File]] オブジェクトを保持しています。
 
-__END__ ��ޤޤʤ��ץ������ˤ����Ƥ� DATA ���������ޤ���
+__END__ を含まないプログラムにおいては DATA は定義されません。
 
-==== ����
+==== 注意
 
-    * DATA.rewind �ǰ�ư�����ɤߤȤ���֤� __END__ ľ��ǤϤʤ���
-      ������ץȥե��������Ƭ�Ǥ���
-    * ������ץȤ�ɸ�����Ϥ����ɤߤ��ޤ줿����ɸ�����Ϥˤʤ�ޤ���
-    * ������ץȤ��ե������ɸ�����Ϥ����ɤߤ��ޤ�ʤ��ä����䡢
-      __END__ �ǽ��äƤ��ʤ����ˤ��������ޤ���
-    * [[m:Kernel.#require]] �� [[m:Kernel.#load]] ��
-      �ɤ߹��ޤ줿�ե��������Ǥ��äƤ⤽�Υե����� (__FILE__, [[ref:d:spec/variables#pseudo]])
-      �ǤϤʤ��¹Ԥ��줿�ե����� ([[m:$0]]) ��ؤ��ޤ���
+    * DATA.rewind で移動する読みとり位置は __END__ 直後ではなく、
+      スクリプトファイルの先頭です。
+    * スクリプトが標準入力から読みこまれた場合は標準入力になります。
+    * スクリプトがファイルや標準入力から読みこまれなかった場合や、
+      __END__ で終っていない場合には定義されません。
+    * [[m:Kernel.#require]] や [[m:Kernel.#load]] で
+      読み込まれたファイルの中であってもそのファイル (__FILE__, [[ref:d:spec/variables#pseudo]])
+      ではなく実行されたファイル ([[m:$0]]) を指します。
 
-==== ��1
-    print DATA.gets # => �ο���������ϰ
-    print DATA.gets # => �ݲֻ���Ƚ�
-    print DATA.gets # => ��������˶���
-    print DATA.gets # => ͣ��Ĺ��ŷ��ή
+==== 例1
+    print DATA.gets # => 故人西辞黄鶴楼
+    print DATA.gets # => 烟花三月下揚州
+    print DATA.gets # => 孤帆遠影碧空尽
+    print DATA.gets # => 唯見長江天際流
     DATA.gets       # => nil
     
     __END__
-    �ο���������ϰ
-    �ݲֻ���Ƚ�
-    ��������˶���
-    ͣ��Ĺ��ŷ��ή
+    故人西辞黄鶴楼
+    烟花三月下揚州
+    孤帆遠影碧空尽
+    唯見長江天際流
 
-==== ��2
+==== 例2
     sum = 0
     DATA.each_line do |line|
       sum += line.to_i
     end
     
     DATA.rewind
-    p DATA.gets    # => "sum = 0��n"
+    p DATA.gets    # => "sum = 0¥n"
     
     __END__
     17
@@ -154,12 +154,12 @@ __END__ ��ޤޤʤ��ץ������ˤ����Ƥ� DATA ���������ޤ���
     29
     31
 
-==== ��3
+==== 例3
     DATA.gets    # => uninitialized constant DATA (NameError)
 
-==== ��4
+==== 例4
 
-�ե����� library.rb �� app.rb �����Ƥ��ʲ��Ǥ��ä��Ȥ��ޤ���
+ファイル library.rb と app.rb の内容が以下であったとします。
 
 library.rb:
     print DATA.gets
@@ -173,71 +173,71 @@ app.rb:
     __END__
     data from app
 
-���ΤȤ������뤫�鼡��¹Ԥ����
+このときシェルから次を実行すると
     $ ruby app.rb
-��̤ϰʲ��Τ褦�˽��Ϥ���ޤ���
+結果は以下のように出力されます。
     data from app
 
 
 --- TOPLEVEL_BINDING -> Binding
 
-�ȥåץ�٥�Ǥ� [[c:Binding]] ���֥������ȡ�
+トップレベルでの [[c:Binding]] オブジェクト。
 
-�ܺ٤� [[c:Binding]] �򻲾Ȥ��Ƥ���������
+詳細は [[c:Binding]] を参照してください。
 
 --- RUBY_VERSION -> String
 
-Ruby �ΥС�������ɽ��ʸ����
+Ruby のバージョンを表す文字列。
 
-Ruby �ΥС������ϡ�major.minor.teeny �Ȥ��������Ǥ���
-���줾����ֹ�� (���ΤȤ���) 2 ��ʾ�ˤʤ�ʤ�����«����Ƥ��ޤ��Τǡ�
+Ruby のバージョンは、major.minor.teeny という形式です。
+それぞれの番号は (今のところ) 2 桁以上にならないと約束されていますので、
 
     if RUBY_VERSION >= '1.6.7'
-      # �С������ 1.6.7 �ʹߤ�ͭ���ʽ���
+      # バージョン 1.6.7 以降で有効な処理
     else
-      # ��������ΥС�������ͭ���ʽ���
+      # それ以前のバージョンで有効な処理
     end
 
-�ȥС������ΰ㤤�ˤ�������ʬ����񤯤��Ȥ��Ǥ��ޤ���
+とバージョンの違いによる処理の分岐を書くことができます。
 
-Ruby 1.8 �ޤǤϡ�minor ������ΥС������ϳ�ȯ�ǡ�
-minor �������ΥС������ϰ����ǤǤ���
-RUby 1.9.0 �ʹߤϡ�teeny �� 0 �ΥС�����󤬳�ȯ�ǤȤʤ�ͽ��Ǥ���
+Ruby 1.8 までは、minor が奇数のバージョンは開発版、
+minor が偶数のバージョンは安定版です。
+RUby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
 
 --- RUBY_RELEASE_DATE -> String
 
-Ruby �Υ�꡼������ɽ��ʸ����
+Ruby のリリース日を表す文字列。
 
 --- RUBY_PLATFORM -> String
 
-�ץ�åȥե������ɽ��ʸ����
+プラットフォームを表す文字列。
 
 #@since 1.8.7
 --- RUBY_COPYRIGHT -> String
-Ruby �Υ��ԡ��饤�Ȥ�ɽ��ʸ����
+Ruby のコピーライトを表す文字列。
 
 --- RUBY_DESCRIPTION -> String
-Ruby �ξܺ٤�ɽ��ʸ����
+Ruby の詳細を表す文字列。
 
-ruby -v ��ɽ����������Ƥ���Ǽ����Ƥ��ޤ���
+ruby -v で表示される内容が格納されています。
 
 #@end
 #@since 1.8.5
 --- RUBY_PATCHLEVEL -> Fixnum
-Ruby �Υѥå���٥��ɽ�� [[c:Fixnum]] ���֥������ȤǤ���
+Ruby のパッチレベルを表す [[c:Fixnum]] オブジェクトです。
 
-�ѥå���٥��Ruby�γƥС��������Ф���Х������ѥå���Ŭ�Ѥ򥫥���Ȥ��Ƥ��ޤ���
-teeny ��꡼���Τ��줾��ˤĤ��ƥѥå���٥�� 0 ����Ϥޤꡢ
-���� teeny ��꡼�����Ф��ƥХ������ѥå���Ŭ�Ѥ�����٤������Ƥ����ޤ���
+パッチレベルはRubyの各バージョンに対するバグ修正パッチの適用をカウントしています。
+teeny リリースのそれぞれについてパッチレベルは 0 から始まり、
+その teeny リリースに対してバグ修正パッチが適用される度に増えていきます。
 
-�ѥå���٥�Ȥ�����ǰ����� RUBY_PATCHLEVEL ����ϡ� Ruby 1.8.5-p1 �ʹߡ� 1.8.6 �ʹߤ�Ƴ������ޤ�����
-1.8.5�䤽������ΥС������Ǥ��������Ƥ��ޤ���
+パッチレベルという概念および RUBY_PATCHLEVEL 定数は、 Ruby 1.8.5-p1 以降、 1.8.6 以降で導入されました。
+1.8.5やそれ以前のバージョンでは定義されていません。
 #@end
 #@since 1.9.1
 --- RUBY_ENGINE -> String
-Ruby�����ϼ����μ����ɽ��ʸ����
+Ruby処理系実装の種類を表す文字列。
 
-��:
+例:
   $ ruby-1.9.1 -ve 'p RUBY_ENGINE'
   ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]
   "ruby"
@@ -249,39 +249,39 @@ Ruby�����ϼ����μ����ɽ��ʸ����
 #@if (version < "1.9.1")
 --- VERSION -> String
 
-��侩�Ǥ��� [[m:Kernel::RUBY_VERSION]] �θŤ�̾���Ǥ���
+非推奨です。 [[m:Kernel::RUBY_VERSION]] の古い名前です。
 
-��������ϲ��Ȥθߴ����Τ�����󶡤���Ƥ��ޤ��� RUBY_VERSION ��ȤäƤ���������
+この定数は過去との互換性のために提供されています。 RUBY_VERSION を使ってください。
 
 --- RELEASE_DATE -> String
 
-��侩�Ǥ��� [[m:Kernel::RUBY_RELEASE_DATE]] �θŤ�̾���Ǥ���
+非推奨です。 [[m:Kernel::RUBY_RELEASE_DATE]] の古い名前です。
 
-��������ϲ��Ȥθߴ����Τ�����󶡤���Ƥ��ޤ��� RUBY_RELEASE_DATE ��ȤäƤ���������
+この定数は過去との互換性のために提供されています。 RUBY_RELEASE_DATE を使ってください。
 
 --- PLATFORM -> String
 
-��侩�Ǥ��� [[m:Kernel::RUBY_PLATFORM]] �θŤ�̾���Ǥ���
+非推奨です。 [[m:Kernel::RUBY_PLATFORM]] の古い名前です。
 
-��������ϲ��Ȥθߴ����Τ�����󶡤���Ƥ��ޤ��� RUBY_PLATFORM ��ȤäƤ���������
+この定数は過去との互換性のために提供されています。 RUBY_PLATFORM を使ってください。
 #@end
 
 --- SCRIPT_LINES__ -> Hash
 
-�������ե������̤ˤޤȤ��줿�����������ɤγƹԡ�
+ソースファイル別にまとめられたソースコードの各行。
 
-��������ϡ��ǥե���ȤǤ��������Ƥ��ޤ���
-����������ϥå���Ȥ���������줿��˥�������((*����ѥ���*))�����ȡ�
-���Υ������ե�����̾�򥭡��ˡ�
-������������ʬ�䤷��������ͤˤ����ϥå������Ǥ����ꤵ��ޤ���
+この定数は、デフォルトでは定義されていません。
+この定数がハッシュとして定義された後にソースが((*コンパイル*))されると、
+そのソースファイル名をキーに、
+ソースを行毎に分割した配列を値にしたハッシュ要素が設定されます。
 
-��������ϥǥХå� ([[lib:debug]]) �ʤɤ����Ѥ���Ƥ��ޤ���
+この定数はデバッガ ([[lib:debug]]) などで利用されています。
 
-�ʤ��� [[m:$SAFE]] ��٥뤬 0 �Ǥʤ����ͭ���ˤϤʤ�ޤ���
-�ޤ��� [[m:Kernel.#eval]] �ˤ�륳��ѥ�����оݤˤϤʤ�ޤ���
+なお、 [[m:$SAFE]] レベルが 0 でなければ有効にはなりません。
+また、 [[m:Kernel.#eval]] によるコンパイルは対象にはなりません。
 
 
-��:
+例:
     require 'pp'
     SCRIPT_LINES__ = {}
     require 'English'

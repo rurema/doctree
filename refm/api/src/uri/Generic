@@ -1,16 +1,16 @@
 = class URI::Generic
 include URI
 
-¤¹¤Ù¤Æ¤Î URI ¥¯¥é¥¹¤Î´ğÄì¥¯¥é¥¹¤Ç¤¹¡£
+ã™ã¹ã¦ã® URI ã‚¯ãƒ©ã‚¹ã®åŸºåº•ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-hash ¤È eql? ¤¬ºÆÄêµÁ¤µ¤ì¤Æ¤¤¤ë¤¿¤á¡¢[[c:Hash]] ¤Î¥­¡¼¤È¤·¤Æ
-ÍøÍÑ¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ş¤¹¡£
+hash ã¨ eql? ãŒå†å®šç¾©ã•ã‚Œã¦ã„ã‚‹ãŸã‚ã€[[c:Hash]] ã®ã‚­ãƒ¼ã¨ã—ã¦
+åˆ©ç”¨ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
 
 == Class Methods
 
 --- default_port    -> Integer | nil
 
-¥¹¥­¡¼¥à¤ËÂĞ±ş¤¹¤ë¥Ç¥Õ¥©¥ë¥È¤Î¥İ¡¼¥ÈÈÖ¹æ¤òÀ°¿ô¤ÇÊÖ¤·¤Ş¤¹¡£
+ã‚¹ã‚­ãƒ¼ãƒ ã«å¯¾å¿œã™ã‚‹ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒãƒ¼ãƒˆç•ªå·ã‚’æ•´æ•°ã§è¿”ã—ã¾ã™ã€‚
 
   require 'uri'
   URI::Generic.default_port     # => nil
@@ -25,7 +25,7 @@ hash ¤È eql? ¤¬ºÆÄêµÁ¤µ¤ì¤Æ¤¤¤ë¤¿¤á¡¢[[c:Hash]] ¤Î¥­¡¼¤È¤·¤Æ
 
 --- component     -> [Symbol]
 
-URI ¤Î¹½À®Í×ÁÇ¤òÉ½¤¹¥·¥ó¥Ü¥ë¤ÎÇÛÎó¤òÊÖ¤·¤Ş¤¹¡£
+URI ã®æ§‹æˆè¦ç´ ã‚’è¡¨ã™ã‚·ãƒ³ãƒœãƒ«ã®é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
   require 'uri'
   p URI::Generic.component
@@ -36,23 +36,23 @@ URI ¤Î¹½À®Í×ÁÇ¤òÉ½¤¹¥·¥ó¥Ü¥ë¤ÎÇÛÎó¤òÊÖ¤·¤Ş¤¹¡£
 
 --- use_registry    -> bool
 
-¹½À®Í×ÁÇ registry ¤ò¼õ¤±ÉÕ¤±¤ë¤Ê¤é true ¤òÊÖ¤·¤Ş¤¹¡£
-URI::Generic ¥¯¥é¥¹¤Ç¤Ï false ¤Ç¤¹¡£
+æ§‹æˆè¦ç´  registry ã‚’å—ã‘ä»˜ã‘ã‚‹ãªã‚‰ true ã‚’è¿”ã—ã¾ã™ã€‚
+URI::Generic ã‚¯ãƒ©ã‚¹ã§ã¯ false ã§ã™ã€‚
 
 --- build2(ary)     -> URI::Generic
 --- build2(hash)    -> URI::Generic
 
-URI::Generic.build ¤ÈÆ±¤¸¤Ç¤¹¤¬¡¢Îã³° URI::InvalidComponentError
-¤¬È¯À¸¤·¤¿¾ì¹ç¤Ë¡¢°ú¿ô¤Î³ÆÍ×ÁÇ¤ò URI.escape ¤·¤ÆºÆÅÙ build ¤ò»î¤ß
-¤Ş¤¹¡£
+URI::Generic.build ã¨åŒã˜ã§ã™ãŒã€ä¾‹å¤– URI::InvalidComponentError
+ãŒç™ºç”Ÿã—ãŸå ´åˆã«ã€å¼•æ•°ã®å„è¦ç´ ã‚’ URI.escape ã—ã¦å†åº¦ build ã‚’è©¦ã¿
+ã¾ã™ã€‚
 
-@param ary ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤ÎÇÛÎó¤òÍ¿¤¨¤Ş¤¹¡£Í×ÁÇ¤Ï°Ê²¼¤Î½ç¤Ç¤¹¡£
+@param ary æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã®é…åˆ—ã‚’ä¸ãˆã¾ã™ã€‚è¦ç´ ã¯ä»¥ä¸‹ã®é †ã§ã™ã€‚
 //emlist{
       [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
 //}
 
-@param hash  ¹½À®Í×ÁÇ¤òÉ½¤¹¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Ş¤¹¡£¥Ï¥Ã¥·¥å¤Î¥­¡¼¤Ï¥·¥ó¥Ü¥ë¤Ï°Ê²¼
-            ¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£ ¥Ï¥Ã¥·¥å¤ÎÃÍ¤ÏÊ¸»úÎó¤ÇÍ¿¤¨¤Ş¤¹¡£
+@param hash  æ§‹æˆè¦ç´ ã‚’è¡¨ã™ãƒãƒƒã‚·ãƒ¥ã‚’ä¸ãˆã¾ã™ã€‚ãƒãƒƒã‚·ãƒ¥ã®ã‚­ãƒ¼ã¯ã‚·ãƒ³ãƒœãƒ«ã¯ä»¥ä¸‹
+            ã®ã„ãšã‚Œã‹ã§ã™ã€‚ ãƒãƒƒã‚·ãƒ¥ã®å€¤ã¯æ–‡å­—åˆ—ã§ä¸ãˆã¾ã™ã€‚
 //emlist{
       :scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
 //}
@@ -60,90 +60,90 @@ URI::Generic.build ¤ÈÆ±¤¸¤Ç¤¹¤¬¡¢Îã³° URI::InvalidComponentError
 --- build(ary)     -> URI::Generic
 --- build(hash)    -> URI::Generic
 
-°ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿ URI ¹½À®Í×ÁÇ¤«¤é URI::Generic ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
+å¼•æ•°ã§ä¸ãˆã‚‰ã‚ŒãŸ URI æ§‹æˆè¦ç´ ã‹ã‚‰ URI::Generic ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-@param ary ¹½À®Í×ÁÇ¤òÉ½¤¹ÇÛÎó¤òÍ¿¤¨¤Ş¤¹¡£Í×ÁÇ¤Ï°Ê²¼¤Î½ç¤Ç¤¹¡£
+@param ary æ§‹æˆè¦ç´ ã‚’è¡¨ã™é…åˆ—ã‚’ä¸ãˆã¾ã™ã€‚è¦ç´ ã¯ä»¥ä¸‹ã®é †ã§ã™ã€‚
 //emlist{
       [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
 //}
 
-@param hash  ¹½À®Í×ÁÇ¤òÉ½¤¹¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Ş¤¹¡£¥Ï¥Ã¥·¥å¤Î¥­¡¼¤Ï¥·¥ó¥Ü¥ë¤Ï°Ê²¼¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
-             ¥Ï¥Ã¥·¥å¤ÎÃÍ¤ÏÊ¸»úÎó¤ÇÍ¿¤¨¤Ş¤¹¡£
+@param hash  æ§‹æˆè¦ç´ ã‚’è¡¨ã™ãƒãƒƒã‚·ãƒ¥ã‚’ä¸ãˆã¾ã™ã€‚ãƒãƒƒã‚·ãƒ¥ã®ã‚­ãƒ¼ã¯ã‚·ãƒ³ãƒœãƒ«ã¯ä»¥ä¸‹ã®ã„ãšã‚Œã‹ã§ã™ã€‚
+             ãƒãƒƒã‚·ãƒ¥ã®å€¤ã¯æ–‡å­—åˆ—ã§ä¸ãˆã¾ã™ã€‚
 //emlist{
       :scheme ,:userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
 //}
 
-@raise URI::InvalidComponentError ³ÆÍ×ÁÇ¤¬Å¬¹ç¤·¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError å„è¦ç´ ãŒé©åˆã—ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::Generic
 
-³Æ°ú¿ô¤òÀ®Ê¬¤È¤¹¤ë URI::Generic ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+å„å¼•æ•°ã‚’æˆåˆ†ã¨ã™ã‚‹ URI::Generic ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param scheme ¹½À®Í×ÁÇ scheme ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param scheme æ§‹æˆè¦ç´  scheme ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param userinfo ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param userinfo æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param host ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param host æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param port ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param port æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param registry ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param registry æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param path ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param path æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param opaque ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param opaque æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param query ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param query æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param fragment ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param fragment æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param arg_check ¿¿¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¤Ï¡¢³Æ°ú¿ô¤¬»ú¶çµ¬Â§¤ËÅ¬¹ç¤·¤Æ¤¤¤ë¤«Èİ¤«¤ò¸¡ºº¤·¤Ş¤¹¡£Å¬¹ç¤·¤Ê¤¤¾ì¹ç¤ÏÎã³° URI::InvalidComponentError ¤¬µ¯¤ê¤Ş¤¹¡£
+@param arg_check çœŸãŒä¸ãˆã‚‰ã‚ŒãŸå ´åˆã¯ã€å„å¼•æ•°ãŒå­—å¥è¦å‰‡ã«é©åˆã—ã¦ã„ã‚‹ã‹å¦ã‹ã‚’æ¤œæŸ»ã—ã¾ã™ã€‚é©åˆã—ãªã„å ´åˆã¯ä¾‹å¤– URI::InvalidComponentError ãŒèµ·ã‚Šã¾ã™ã€‚
 
-@raise URI::InvalidURIError use_registry ¤¬µ¶¤Î¤È¤­¡¢registry ¤¬Í¿¤¨¤é¤ì¤ë¤ÈÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError use_registry ãŒå½ã®ã¨ãã€registry ãŒä¸ãˆã‚‰ã‚Œã‚‹ã¨ç™ºç”Ÿã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- default_port     -> Integer | nil
 
-self.class.default_port ¤òÊÖ¤·¤Ş¤¹¡£
+self.class.default_port ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:URI::Generic.default_port]]
 
 --- component     -> [Symbol]
 
-self.class.component ¤òÊÖ¤·¤Ş¤¹¡£
+self.class.component ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:URI::Generic.component]]
 
 --- scheme    -> String | nil
 
-¼«¿È¤Î scheme ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® scheme ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- scheme=(s)
 
-¼«¿È¤Î scheme ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® scheme ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î scheme ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® scheme ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- userinfo    -> String | nil
 
-¼«¿È¤Î userinfo ¤ò "username:password" ¤È¤¤¤¦·Á¼°¤ÎÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£
-ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® userinfo ã‚’ "username:password" ã¨ã„ã†å½¢å¼ã®æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
+è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- userinfo=(s)
 
-¼«¿È¤Î userinfo ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® userinfo ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î userinfo ¤ò "username" ¤« "username:password" ¤È¤¤¤¦·Á¼°¤ÎÊ¸»úÎó¡¢¤¢¤ë¤¤¤Ï
-         [username, password] ¤È¤¤¤¦·Á¼°¤ÎÊ¸»úÎó¤ÎÇÛÎó¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® userinfo ã‚’ "username" ã‹ "username:password" ã¨ã„ã†å½¢å¼ã®æ–‡å­—åˆ—ã€ã‚ã‚‹ã„ã¯
+         [username, password] ã¨ã„ã†å½¢å¼ã®æ–‡å­—åˆ—ã®é…åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError userinfo ¤È registry ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError userinfo ã¨ registry ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   u = URI.parse('http://example.com/')
   u.userinfo = 'hoge-san:jfae82kj'
@@ -157,82 +157,82 @@ self.class.component ¤òÊÖ¤·¤Ş¤¹¡£
 
 --- user    -> String | nil
 
-¼«¿È¤Î userinfo ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® userinfo ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-userinfo ¤¬¡Öusername:password¡×¤Î·Á¼°¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢username Éô¤òÊÖ¤·¤Ş¤¹¡£
-ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+userinfo ãŒã€Œusername:passwordã€ã®å½¢å¼ã§ã‚ã‚‹å ´åˆã¯ã€username éƒ¨ã‚’è¿”ã—ã¾ã™ã€‚
+è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- user=(s)
 
-¼«¿È¤Î user ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® user ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î user ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® user ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError user ¤È registry ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError user ã¨ registry ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- password    -> String | nil
 
-¼«¿È¤Î password ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® password ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- password=(s)
 
-¼«¿È¤Î password ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® password ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-¼«¿È¤Ë user ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ë¤ÏÎã³°¤¬È¯À¸¤·¤Ş¤¹¡£
+è‡ªèº«ã« user ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã«ã¯ä¾‹å¤–ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î password ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® password ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError userinfo ¤È registry ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError userinfo ã¨ registry ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- host    -> String | nil
 
-¼«¿È¤Î host ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® host ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- host=(s)
 
-¼«¿È¤Î host ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® host ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î host ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® host ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError host ¤È registry ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError host ã¨ registry ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- port     -> String | nil
 
-¼«¿È¤Î port ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® port ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- port=(s)
 
-¼«¿È¤Î port ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® port ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î port ¤òÉ½¤¹Ê¸»úÎó¤«À°¿ô¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® port ã‚’è¡¨ã™æ–‡å­—åˆ—ã‹æ•´æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError port ¤È registry ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError port ã¨ registry ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- registry    -> String | nil
 
-¼«¿È¤Î registry ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® registry ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- registry=(s)
 
-¼«¿È¤Î registry ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® registry ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î registry ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® registry ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError server Éô¤È registry ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError server éƒ¨ã¨ registry ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- path     -> String | nil
 
-¼«¿È¤Î path ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® path ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
   p URI.parse('http://example.com/hoge').path       #=> "/hoge"
   p URI.parse('http://example.com').path            #=> ""
@@ -247,98 +247,98 @@ userinfo ¤¬¡Öusername:password¡×¤Î·Á¼°¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢username Éô¤òÊÖ¤·¤Ş¤¹¡£
 
 --- path=(s)
 
-¼«¿È¤Î path ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® path ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î path ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® path ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError opaque ¤È path ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError opaque ã¨ path ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- query     -> String | nil
 
-¼«¿È¤Î query ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® query ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   p URI.parse('http://example.com/?hoge').query   #=> "hoge"
 
 --- query=(s)
 
-¼«¿È¤Î query ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® query ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î query ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® query ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError opaque ¤È query ¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError opaque ã¨ query ã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- opaque     -> String | nil
 
-¼«¿È¤Î opaque ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® opaque ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
  p URI.parse('http://example.com/').opaque       #=> nil
  p URI.parse('mailto:nospam@localhost').opaque   #=> "nospam@localhost"
  p URI.parse('urn:ietf:rfc:1149').opaque         #=> "ietf:rfc:1149"
 
 --- opaque=(s)
 
-¼«¿È¤Î opaque ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® opaque ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î opaque ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® opaque ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidURIError  opaque ¤È¥Ò¥¨¥é¥ë¥­¡¼¥Ñ¡¼¥È¤òÆ±»ş¤ËÀßÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError  opaque ã¨ãƒ’ã‚¨ãƒ©ãƒ«ã‚­ãƒ¼ãƒ‘ãƒ¼ãƒˆã‚’åŒæ™‚ã«è¨­å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- fragment     -> String | nil
 
-¼«¿È¤Î fragment ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® fragment ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   u = URI.parse('http://example.com/#frgmt')
   p u.fragment                                #=> "frgmt"
 
 --- fragment=(s)
 
-¼«¿È¤Î fragment ¤òÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® fragment ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î fragment ¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® fragment ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- hierarchical?    -> bool
 
-¼«¿È¤Ë path ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ë¤Ê¤é true ¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï false ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã« path ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ãªã‚‰ true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã¯ false ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- absolute     -> bool
 --- absolute?    -> bool
 
-¼«¿È¤Ë scheme ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ë¤Ê¤é true ¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï false ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã« scheme ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ãªã‚‰ true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã¯ false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   p URI.parse('http://example.com/').absolute?    #=> true
   p URI.parse('./').absolute?                     #=> false
 
 --- relative?    -> bool
 
-¼«¿È¤Ë scheme ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¤Ê¤é true ¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï false ¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã« scheme ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ãªã‚‰ true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã¯ false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   p URI.parse('http://example.com/').relative?    #=> false
   p URI.parse('./').relative?                     #=> true
 
 --- merge!(rel)    -> self
 
-Í¿¤¨¤é¤ì¤¿¥Ñ¥¹ rel ¤ò¼«¿È¤ØÏ¢·ë¤·¤Ş¤¹¡£
+ä¸ãˆã‚‰ã‚ŒãŸãƒ‘ã‚¹ rel ã‚’è‡ªèº«ã¸é€£çµã—ã¾ã™ã€‚
 
-[[rfc:2396]] ¤Î Section 5.2 ¤Î»ÅÍÍ¤Ë½¾¤¤¤Ş¤¹¡£
-rel ¤¬Ê¸»úÎó¤Î¾ì¹ç¤Ï URI.parse(rel) ¤Ë¤è¤Ã¤Æ¡¢URI ¤ËÊÑ´¹¤·¤Æ¤«¤éÏ¢·ë¤·¤Ş¤¹¡£
+[[rfc:2396]] ã® Section 5.2 ã®ä»•æ§˜ã«å¾“ã„ã¾ã™ã€‚
+rel ãŒæ–‡å­—åˆ—ã®å ´åˆã¯ URI.parse(rel) ã«ã‚ˆã£ã¦ã€URI ã«å¤‰æ›ã—ã¦ã‹ã‚‰é€£çµã—ã¾ã™ã€‚
 
-@param rel Ï¢·ë¤·¤¿¤¤¥Ñ¥¹¤òÊ¸»úÎó¤« URI ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÍ¿¤¨¤Ş¤¹¡£
+@param rel é€£çµã—ãŸã„ãƒ‘ã‚¹ã‚’æ–‡å­—åˆ—ã‹ URI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ä¸ãˆã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   u = URI.parse('http://www.ruby-lang.org/')
   u.merge!('/en/raa.html')
   p u.to_s                                   #=> http://www.ruby-lang.org/en/raa.html
@@ -346,19 +346,19 @@ rel ¤¬Ê¸»úÎó¤Î¾ì¹ç¤Ï URI.parse(rel) ¤Ë¤è¤Ã¤Æ¡¢URI ¤ËÊÑ´¹¤·¤Æ¤«¤éÏ¢·ë¤·¤Ş¤¹¡£
 --- merge(rel)     -> URI::Generic
 --- +(rel)         -> URI::Generic
 
-¼«¿È¤ÈÍ¿¤¨¤é¤ì¤¿¥Ñ¥¹ rel ¤òÏ¢·ë¤·¤¿¿·¤·¤¤ URI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã¨ä¸ãˆã‚‰ã‚ŒãŸãƒ‘ã‚¹ rel ã‚’é€£çµã—ãŸæ–°ã—ã„ URI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
 #@since 1.8.7
-[[RFC:3986]] ¤Î Section 5.2 ¤Î»ÅÍÍ¤Ë½¾¤¤¤Ş¤¹¡£
+[[RFC:3986]] ã® Section 5.2 ã®ä»•æ§˜ã«å¾“ã„ã¾ã™ã€‚
 #@else
-[[RFC:2396]] ¤Î Section 5.2 ¤Î»ÅÍÍ¤Ë½¾¤¤¤Ş¤¹¡£
+[[RFC:2396]] ã® Section 5.2 ã®ä»•æ§˜ã«å¾“ã„ã¾ã™ã€‚
 #@end
-rel ¤¬Ê¸»úÎó¤Î¾ì¹ç¤Ï URI.parse(rel) ¤Ë¤è¤Ã¤Æ¡¢URI ¤ËÊÑ´¹¤·¤Æ¤«¤éÏ¢·ë¤·¤Ş¤¹¡£
+rel ãŒæ–‡å­—åˆ—ã®å ´åˆã¯ URI.parse(rel) ã«ã‚ˆã£ã¦ã€URI ã«å¤‰æ›ã—ã¦ã‹ã‚‰é€£çµã—ã¾ã™ã€‚
 
 
-@param rel Ï¢·ë¤·¤¿¤¤¥Ñ¥¹¤òÊ¸»úÎó¤« URI ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÍ¿¤¨¤Ş¤¹¡£
+@param rel é€£çµã—ãŸã„ãƒ‘ã‚¹ã‚’æ–‡å­—åˆ—ã‹ URI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ä¸ãˆã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
   #=> #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
@@ -381,22 +381,22 @@ rel ¤¬Ê¸»úÎó¤Î¾ì¹ç¤Ï URI.parse(rel) ¤Ë¤è¤Ã¤Æ¡¢URI ¤ËÊÑ´¹¤·¤Æ¤«¤éÏ¢·ë¤·¤Ş¤¹¡£
 --- route_from(src)    -> URI::Generic
 --- -(src)             -> URI::Generic
 
-Í¿¤¨¤é¤ì¤¿ URI ¤òÉ½¤¹ src ¤«¤é¤ÎÁêÂĞ¥Ñ¥¹¤òÊÖ¤·¤Ş¤¹¡£
+ä¸ãˆã‚‰ã‚ŒãŸ URI ã‚’è¡¨ã™ src ã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param src ¼«¿È¤ÎÁêÂĞ¥Ñ¥¹¤ò»»½Ğ¤¹¤ë¤¿¤á¤Î¡¢¥ë¡¼¥È¤È¤Ê¤ë Absolute URI ¤òÍ¿¤¨¤Ş¤¹¡£
+@param src è‡ªèº«ã®ç›¸å¯¾ãƒ‘ã‚¹ã‚’ç®—å‡ºã™ã‚‹ãŸã‚ã®ã€ãƒ«ãƒ¼ãƒˆã¨ãªã‚‹ Absolute URI ã‚’ä¸ãˆã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/en/raa.html') - 'http://www.ruby-lang.org/'
   #=> #<URI::Generic:0x20100256 URL:en/raa.html>
 
 --- route_to(dst)     -> URI::Generic
 
-¼«¿È¤«¤é dst ¤Ø¤ÎÁêÂĞ¥Ñ¥¹¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‹ã‚‰ dst ã¸ã®ç›¸å¯¾ãƒ‘ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param dst URI ¤òÊ¸»úÎó¤«URI¥ª¥Ö¥¸¥§¥¯¥È¤ÇÍ¿¤¨¤Ş¤¹¡£
+@param dst URI ã‚’æ–‡å­—åˆ—ã‹URIã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ä¸ãˆã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
   
@@ -405,29 +405,29 @@ rel ¤¬Ê¸»úÎó¤Î¾ì¹ç¤Ï URI.parse(rel) ¤Ë¤è¤Ã¤Æ¡¢URI ¤ËÊÑ´¹¤·¤Æ¤«¤éÏ¢·ë¤·¤Ş¤¹¡£
 --- normalize     -> URI::Generic
 --- normalize!    -> nil
 
-URI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀµµ¬²½¤·¤ÆÊÖ¤·¤Ş¤¹¡£¥Û¥¹¥ÈÌ¾¤ò¾®Ê¸»ú¤Ë¤·¡¢¥Ñ¥¹¤È
-¹½À®Í×ÁÇ¤¬¤Ê¤±¤ì¤Ğ '/' ¤ò¥»¥Ã¥È¤·¤Ş¤¹¡£
+URI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ­£è¦åŒ–ã—ã¦è¿”ã—ã¾ã™ã€‚ãƒ›ã‚¹ãƒˆåã‚’å°æ–‡å­—ã«ã—ã€ãƒ‘ã‚¹ã¨
+æ§‹æˆè¦ç´ ãŒãªã‘ã‚Œã° '/' ã‚’ã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   u = URI.parse('http://Example.Com')
   p u.to_s                            #=> "http://Example.Com"
   p u.normalize.to_s                  #=> "http://example.com/"
 
 --- to_s      -> String
 
-¼«¿È¤¬É½¤¹ URI ¤òÊ¸»úÎó¤È¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ãŒè¡¨ã™ URI ã‚’æ–‡å­—åˆ—ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
  p URI.parse('http://example.com/').to_s #=> "http://example.com/"
 
 --- ==(uri)    -> bool
 
-°ú¿ô¤Ë»ØÄê¤·¤¿ URI (Ê¸»úÎó¤Ş¤¿¤ÏURI¥ª¥Ö¥¸¥§¥¯¥È)¤È¤Î°ìÃ×È½Äê¤ò¹Ô¤¤
-¤Ş¤¹¡£URI ¤ÏÀµµ¬²½¤·¤ÆÈæ³Ó¤µ¤ì¤Ş¤¹¡£
+å¼•æ•°ã«æŒ‡å®šã—ãŸ URI (æ–‡å­—åˆ—ã¾ãŸã¯URIã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)ã¨ã®ä¸€è‡´åˆ¤å®šã‚’è¡Œã„
+ã¾ã™ã€‚URI ã¯æ­£è¦åŒ–ã—ã¦æ¯”è¼ƒã•ã‚Œã¾ã™ã€‚
 
-@param uri Èæ³Ó¤·¤¿¤¤ URI ¤ò URI ¥ª¥Ö¥¸¥§¥¯¥È¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param uri æ¯”è¼ƒã—ãŸã„ URI ã‚’ URI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   u1 = URI.parse('http://example.com/?hoge')
   u2 = URI.parse('http://Example.Com/?hoge')
@@ -435,11 +435,11 @@ URI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀµµ¬²½¤·¤ÆÊÖ¤·¤Ş¤¹¡£¥Û¥¹¥ÈÌ¾¤ò¾®Ê¸»ú¤Ë¤·¡¢¥Ñ¥¹¤È
 
 --- select(*components)    -> [String]
 
-»ØÄê¤µ¤ì¤¿ components ¤ËÂĞ±ş¤¹¤ë¹½À®Í×ÁÇ¤òÊ¸»úÎó¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸ components ã«å¯¾å¿œã™ã‚‹æ§‹æˆè¦ç´ ã‚’æ–‡å­—åˆ—ã®é…åˆ—ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param components ¹½À®Í×ÁÇÌ¾¤ò¥·¥ó¥Ü¥ë¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param components æ§‹æˆè¦ç´ åã‚’ã‚·ãƒ³ãƒœãƒ«ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   
   uri = URI.parse('http://myuser:mypass@my.example.com/test.rbx')

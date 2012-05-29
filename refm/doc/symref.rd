@@ -1,30 +1,30 @@
-= Ruby�ǻȤ��뵭��ΰ�̣������ɽ����ʣ���ʵ���Ͻ�����
+= Rubyで使われる記号の意味（正規表現の複雑な記号は除く）
 
-[[ref:ex]]��[[ref:q]]��[[ref:num]]��[[ref:per]]��[[ref:and]]��[[ref:or]]��
-[[ref:plus]]��[[ref:minus]]��[[ref:ast]]��[[ref:slash]]��[[ref:hat]]��[[ref:sq]]��
-[[ref:period]]��[[ref:comma]]��[[ref:langl]]��[[ref:rangl]]��[[ref:eq]]��[[ref:tilde]]��
-[[ref:dollar]]��[[ref:at]]��[[ref:under]]��[[ref:lbra]][[ref:rbra]]��
-[[ref:lbra2]][[ref:rbra2]]��[[ref:lbra3]][[ref:rbra3]]��[[ref:dq]]��[[ref:colon]]��[[ref:ac]]��
-[[ref:backslash]]��[[ref:semicolon]]
+[[ref:ex]]　[[ref:q]]　[[ref:num]]　[[ref:per]]　[[ref:and]]　[[ref:or]]　
+[[ref:plus]]　[[ref:minus]]　[[ref:ast]]　[[ref:slash]]　[[ref:hat]]　[[ref:sq]]　
+[[ref:period]]　[[ref:comma]]　[[ref:langl]]　[[ref:rangl]]　[[ref:eq]]　[[ref:tilde]]　
+[[ref:dollar]]　[[ref:at]]　[[ref:under]]　[[ref:lbra]][[ref:rbra]]　
+[[ref:lbra2]][[ref:rbra2]]　[[ref:lbra3]][[ref:rbra3]]　[[ref:dq]]　[[ref:colon]]　[[ref:ac]]　
+[[ref:backslash]]　[[ref:semicolon]]
 
 ===[a:ex] !
 
 :  !true 
 
- not �黻�ҡ�[[ref:d:spec/operator#not]]�򻲾ȡ�
+ not 演算子。[[ref:d:spec/operator#not]]を参照。
 
 : 3 != 5
 
- ���������ʤ�����ӱ黻�ҡ�[[ref:d:spec/operator#not]]�򻲾ȡ�
+ 「等しくない」比較演算子。[[ref:d:spec/operator#not]]を参照。
 
 : def xxx!
 
- ��!�פϥ᥽�å�̾�ΰ����Ǥ�������Ū�ˡ�
- Ʊ̾��(! ��̵��)�᥽�åɤ���٤Ƥ���˲�Ū�ʺ��Ѥ��ĥ᥽�å�(��: tr �� tr!)�ǻȤ��ޤ���
+ 「!」はメソッド名の一部です。慣用的に、
+ 同名の(! の無い)メソッドに比べてより破壊的な作用をもつメソッド(例: tr と tr!)で使われます。
 
 : /xxx/ !~ yyy
 
- ����ɽ���Υ᥽�å� =~ �����ꡣ�ޥå������Ԥ�����true���֤��ޤ���
+ 正規表現のメソッド =~ の否定。マッチが失敗したらtrueを返します。
 
 
 ===[a:q] ?
@@ -32,41 +32,41 @@
 :  ?a 
 
 #@since 1.9.1
- [[ref:d:spec/literal#num]]��Ĺ�� 1 ��ʸ����
+ [[ref:d:spec/literal#num]]。長さ 1 の文字列。
 #@else
- [[ref:d:spec/literal#num]]��ʸ���� ascii �����ɤο��͡�
+ [[ref:d:spec/literal#num]]。文字の ascii コードの数値。
 #@end
 
 : def xx?
 
- ���ξ��Ρ�?�פϥ᥽�å�̾�ΰ���ʬ�Ǥ���
- ����Ū�ˡ������ͤ��֤������פΥ᥽�åɤ򼨤�����˻Ȥ��ޤ���
+ この場合の「?」はメソッド名の一部分です。
+ 慣用的に、真偽値を返すタイプのメソッドを示すために使われます。
 
 : xx ? yy : zz
 
- [[ref:d:spec/operator#cond]]������黻�ҤȤ�ƤФ�ޤ���if xx then yy else zz end ��Ʊ����̣�Ǥ���
+ [[ref:d:spec/operator#cond]]。三項演算子とも呼ばれます。if xx then yy else zz end と同じ意味です。
 
 : /xxx?/
 
- ����ɽ���Ρ��̻����(quantifiers)��ľ��������ɽ���� 0 �ޤ��� 1 ��η����֤���
+ 正規表現の、量指定子(quantifiers)。直前の正規表現の 0 または 1 回の繰り返し。
 
 ===[a:num] #
 
-: #������
- [[ref:d:spec/lexical#comment]]��# ��������ޤǤ������Ȥˤʤ�ޤ���
+: #コメント
+ [[ref:d:spec/lexical#comment]]。# から行末までがコメントになります。
 
-: xxx #=> �¹Է��
-: xxx # => �¹Է��
+: xxx #=> 実行結果
+: xxx # => 実行結果
 
- ����Ū�˼¹Է�̤򼨤�����˻Ȥ��륳���Ȥν�����
+ 慣用的に実行結果を示すために使われるコメントの書き方。
 
 : #! ruby -Ks
 
- shebang��[[ref:d:spec/rubycmd#shebang]]�򻲾ȡ�
+ shebang。[[ref:d:spec/rubycmd#shebang]]を参照。
 
 : # coding: utf-8
 
- �ޥ��å������ȡ�[[ref:d:spec/m17n#magic_comment]] �򻲾ȡ�
+ マジックコメント。[[ref:d:spec/m17n#magic_comment]] を参照。
 
 : "a is #{a}"
 
@@ -78,24 +78,24 @@
 
 : Range#each
 
- ����ʸ����ǤΤ߻Ȥ��ޤ���Ruby��������ǤǤϤ���ޤ��󡣥��饹�Υ��󥹥��󥹥᥽�åɤǤ��뤳�Ȥ�
- ��ñ��ɽ�����뤿���ɽ��ˡ�Ǥ������������饹�᥽�åɤϡ�Range.new�פΤ褦�ˡ�.�פǤĤʤ��ޤ���
+ 説明文の中でのみ使われます。Ruby言語の要素ではありません。クラスのインスタンスメソッドであることを
+ 簡単に表示するための表記法です。一方、クラスメソッドは「Range.new」のように「.」でつなぎます。
 
 ===[a:per] %
 
 :  10 % 3 
 
- �ƥ��饹��������줿��%�ױ黻�ҡ��������饹�Ǥϡ־�;�פ��̣����᥽�åɡ�[[m:Fixnum#%]]�᥽�åɤʤɤ򻲾ȡ�
+ 各クラスで定義された「%」演算子。整数クラスでは「剰余」を意味するメソッド。[[m:Fixnum#%]]メソッドなどを参照。
 
 :  "%04b" % 10 
 
- String���饹�Ρ�%�ױ黻�ҡ�[[m:String#%]] �᥽�åɡ�ʸ������Ǥϥե����ޥåȻ���ҤȤ��Ƥ�Ȥ��롣
+ Stringクラスの「%」演算子。[[m:String#%]] メソッド。文字列中ではフォーマット指定子としても使われる。
 
-: %r{/etc/httpd/logs$} �� %w[foo bar baz] ���� %<ʸ��><���ڤ�ʸ��><ʸ����><���ڤ�ʸ��>
+: %r{/etc/httpd/logs$} や %w[foo bar baz] ・・ %<文字><区切り文字><文字列><区切り文字>
 
- [[ref:d:spec/literal#percent]]��<���ڤ�ʸ��>�ˤ�Ǥ�դ���ѿ������Ѥ��뤳�Ȥ��Ǥ���
- <ʸ��>�ˤ�äƼ��ΰ�̣���ۤʤ�ޤ����ʤ����ǽ�� <���ڤ�ʸ��> ������¦�γѳ�� [���ݳ�� (��
- �֥졼�� {�����ʤ������� <���ξ��ϡ��б����뱦¦�γ�̤������� <���ڤ�ʸ��> �ˤʤ�ޤ���
+ [[ref:d:spec/literal#percent]]。<区切り文字>には任意の非英数字を用いることができ、
+ <文字>によって式の意味が異なります。なお、最初の <区切り文字> が、左側の角括弧 [、丸括弧 (、
+ ブレース {、小なり不等号 <、の場合は、対応する右側の括弧が終わりの <区切り文字> になります。
 //emlist{
     p %r{/etc/httpd/logs$} #=> /\/etc\/httpd\/logs$/
     p %w[foo bar baz] #=> ["foo", "bar", "baz"]
@@ -103,56 +103,56 @@
 
 : %!STRING!
 
- % ��ˡ�ΰ�[[ref:d:spec/literal#percent]]�����֥륯������ʸ����� %Q!STRING! ��Ʊ����
+ % 記法の一種。[[ref:d:spec/literal#percent]]。ダブルクォート文字列で %Q!STRING! と同じ。
 //emlist{
     p %!nomad! #=> "nomad"
 //}
 
 : % ruby -e "puts 'Hello'"
 
- ���ޥ�ɥ饤��ؤ����Ϥ򼨤���ruby������ץȾ�����Ϥ�Ԥ��ˤ� `command` �� system(command) �ʤɤȽ�
+ コマンドラインへの入力を示す。rubyスクリプト上で入力を行うには `command` や system(command) などと書く
 
 ===[a:and] &
 
 : xxx & yyy
 
- �����ѱ黻�ҡ��ޤ�������α黻��Ԥ��᥽�åɡ�
+ 論理積演算子。または類似の演算を行うメソッド。
 //emlist{
-    p( 3 & 5 ) #=> 1 ���� ��ʿ��� 0011 & 0101 #=> 0001
+    p( 3 & 5 ) #=> 1 ・・ 二進数で 0011 & 0101 #=> 0001
 //}
 
 : a &= yyy
 
- ��&�ץ᥽�åɤμ��������黻�ҡ�
+ 「&」メソッドの自己代入演算子。
 
 : xxx && yyy
 
- ��and�ױ黻�ҡ�
+ 「and」演算子。
 //emlist{
-    p( 3 && 5 ) #=> 5 ���� 3 �� 5 �⿿�ʤΤǱ����ͤ��֤���
+    p( 3 && 5 ) #=> 5 ・・ 3 も 5 も真なので右の値を返す。
 //}
 
-: def xxx(&yyy) ���� &���Ĥ�������
+: def xxx(&yyy) ・・ &がついた引数
 
- �᥽�å�����Υ֥��å�������[[ref:d:spec/def#method]]�򻲾ȡ�
+ メソッド定義のブロック引数。[[ref:d:spec/def#method]]を参照。
 
 : xxx(&b)
 
- [[c:Proc]] ���֥������Ȥ�֥��å��Ȥ��ƻȤ���[[ref:d:spec/call#block]] �򻲾ȡ�
+ [[c:Proc]] オブジェクトをブロックとして使う。[[ref:d:spec/call#block]] を参照。
 
 ===[a:or] |
 
 :  3 | 5 
 
- �����±黻�Ҥޤ�������Υ᥽�åɡ���ʿ��� 0011 | 0101 => 0111��
+ 論理和演算子または類似のメソッド。二進数で 0011 | 0101 => 0111。
 
 :  3 || 5 
 
- ��or�ױ黻�Ҥޤ�������Υ᥽�åɡ�3 �Ͽ��ʤΤǺ����ͤ��֤���
+ 「or」演算子または類似のメソッド。3 は真なので左の値を返す。
 
 : a ||= xxx
 
- ��||�ױ黻�Ҥμ��������黻�ҡ�a �� �� �� ̤��� �ʤ� a �� xxx ���������롢�Ȥ�����̣�ˤʤ�ޤ���
+ 「||」演算子の自己代入演算子。a が 偽 か 未定義 なら a に xxx を代入する、という意味になります。
 //emlist{
   a ||= :some
   p a #=> some
@@ -162,128 +162,128 @@
 
 : 5.times{|n| p n}
 
- �֥��å��ѥ�᡼���Ǥ��뤳�Ȥ򼨤����ڤ�ʸ����
+ ブロックパラメータであることを示す区切り文字。
 
 : /xx(xx|xx)/
 
- ����ɽ��������
+ 正規表現の選択
 
 ===[a:plus] +
 
 : 2 + 3
 
- ���������ޤ�������α黻��Ԥ��᥽�åɡ�
+ たし算。または類似の演算を行うメソッド。
 
 : + 3
 
- ���ο���ɽ����ñ��黻��+��
+ 正の数を表す、単項演算子+。
 
 : /xxx+/
 
- ����ɽ���Ρ��̻����(quantifiers)��ľ����ɽ���� 1 ��ʾ�η����֤�
+ 正規表現の、量指定子(quantifiers)。直前の表現の 1 回以上の繰り返し
 
 ===[a:minus] -
 
 : 3 - 2
 
- ���������ޤ�������Υ᥽�å�
+ 引き算。または類似のメソッド
 
 
 : 3 * (-5)
 
- ñ�� - (�ޥ��ʥ�)��������򤱤뤿��Ŭ��()�Ǥ�����Ȥ褤��
+ 単項 - (マイナス)。混乱を避けるため適宜()でくくるとよい。
 
-: % ruby -w �ʤ� ���ޥ�ɥ饤������� -AAA
+: % ruby -w など コマンドラインの入力 -AAA
 
- ���ޥ�ɥ饤�󥪥ץ����
+ コマンドラインオプション
 
 ===[a:ast] *
 
 : 2 * 3
 
- ���������ޤ�������α黻��Ԥ��᥽�åɡ�
+ かけ算。または類似の演算を行うメソッド。
 
 : 2**3
 
- �߾衣�ޤ�������α黻��Ԥ��᥽�åɡ�
+ 累乗。または類似の演算を行うメソッド。
 
-: def xxx(*yy) ���� *���Ĥ�������
+: def xxx(*yy) ・・ *がついた引数
 
- �᥽�åɸƽФΰ���Ÿ����[[d:spec/call]] �� [[ref:d:spec/def#method]] �򻲾ȡ�
+ メソッド呼出の引数展開。[[d:spec/call]] と [[ref:d:spec/def#method]] を参照。
 
 : x, *y = foo()
 
- ¿��������[[ref:d:spec/operator#multiassign]] �򻲾ȡ�
+ 多重代入。[[ref:d:spec/operator#multiassign]] を参照。
 
 : /xx*/
 
- ����ɽ���Ρ�ľ����ɽ���� 0 ��ʾ�η����֤����Ǥ������Ĺ���ޥå����褦�Ȥ��롣
- [[d:spec/regexp]] �򻲾ȡ�
+ 正規表現の、直前の表現の 0 回以上の繰り返し。できるだけ長くマッチしようとする。
+ [[d:spec/regexp]] を参照。
 
 ===[a:slash] /
 
 : 10 / 3
 
- ��껻���ޤ�������Υ᥽�åɡ�
+ 割り算、または類似のメソッド。
 
 : /xxx/
 
- [[ref:d:spec/literal#regexp]]��
+ [[ref:d:spec/literal#regexp]]。
 
-: '1�󻰻�5'.split(//)
+: '1二三四5'.split(//)
 
-  // �϶�������ɽ�����̣����
+  // は空の正規表現を意味する
 
 ===[a:hat] ^
 
 :  true ^ true 
 
- ��xor�ױ黻�ҡ���¾Ū�����¡��ޤ�������Υ᥽�åɡ�
+ 「xor」演算子。排他的論理和。または類似のメソッド。
 
 : a ^= true
 
- ��^�ױ黻�Ҥμ��������黻�ҡ�a�������ͤ�ȿž��
+ 「^」演算子の自己代入演算子。aの論理値の反転。
 //emlist{
     p(a=true);p(a^=true);p(a^=true) #=> true false true
 //}
 
 : /^xxx/
 
- ����ɽ���ǡ���Ƭ��ʸ�������Ƭ�����ʸ����ľ��ΰ��֤˥ޥå����ޤ���
+ 正規表現で、行頭。文字列の先頭や改行文字の直後の位置にマッチします。
 
 ===[a:colon] :
 
-: :exit����:�ΤĤ������̻�
+: :exit等の:のついた識別子
 
- ����ܥ��ƥ�롣[[ref:d:spec/literal#symbol]] �򻲾ȡ�
+ シンボルリテラル。[[ref:d:spec/literal#symbol]] を参照。
 
 : Net::HTTP
 
- ����Υ������ױ黻�ҡ�[[ref:d:spec/variables#const]] �򻲾ȡ�
+ 定数のスコープ演算子。[[ref:d:spec/variables#const]] を参照。
 
 : ::DateTime
 
- ����Υ������ױ黻�Ҥǡ��ȥåץ�٥������Ǥ��뤳�Ȥ򼨤���Object ���饹��
- �������Ƥ������(�ȥåץ�٥������ȸ���)��μ¤˻��Ȥ��뤿��ˤ�
- [[ref:d:spec/variables#const]] �򻲾ȡ�
+ 定数のスコープ演算子で、トップレベルの定数であることを示す。Object クラスで
+ 定義されている定数(トップレベルの定数と言う)を確実に参照するためには
+ [[ref:d:spec/variables#const]] を参照。
 
 : xx ? yy : zz
 
- ���黻�ҡ�����黻�ҤȤ�ƤФ�ޤ���if xx then yy else zz end ��Ʊ����̣�Ǥ���
- [[ref:d:spec/operator#cond]] �򻲾ȡ�
+ 条件演算子。三項演算子とも呼ばれます。if xx then yy else zz end と同じ意味です。
+ [[ref:d:spec/operator#cond]] を参照。
 
 #@until 1.9.1
-: if 30 > 20 : ... �ʤ� ��Ｐ �� :
+: if 30 > 20 : ... など 条件式 式 :
 
- then�ξ�ά������Ｐ�ȼ���Ʊ��Ԥ˽񤭤����Ȥ���ɽ��ˡ��
+ thenの省略形。条件式と式を同一行に書きたいときの表記法。
 
- Ruby1.9.1 �ʹߤǤϻ��ѤǤ��ޤ���
+ Ruby1.9.1 以降では使用できません。
 #@end
 
 #@since 1.9.1
 : { a:"aaa", b:"bbb" }
 
- �ϥå���ο�������ˡ���ʲ���Ʊ���Ǥ���
+ ハッシュの新しい記法。以下と同じです。
 //emlist{
 { :a => "aaa", :b => "bbb" }
 //}
@@ -293,127 +293,127 @@
 
 : xxx.yyy
 
- ���֥������ȤΥ᥽�å�
+ オブジェクトのメソッド
 
 : Range.new
 
- ���֥������ȤΥ᥽�åɤ���������ʸ����Ǥ��ä˥��饹�Υ��饹�᥽�åɡ��⥸�塼���
- �⥸�塼��᥽�åɤ򼨤����Ȥ˻Ȥ��ޤ������������󥹥��󥹥᥽�åɤϡ�Range#each�פΤ褦��
- ��#�פǤĤʤ��ޤ���
+ オブジェクトのメソッドだが、説明文の中では特にクラスのクラスメソッド／モジュールの
+ モジュールメソッドを示すことに使われます。一方、インスタンスメソッドは「Range#each」のように
+ 「#」でつなぎます。
 
 : 1 .. 20
 
- �����ͤ�ޤ� Range ���֥������Ȥ����ϰϱ黻�ҤǤ������Τ��ϰϼ��Ȥ����ޤ���[[ref:d:spec/operator#range]]��
+ 最大値を含む Range オブジェクトを作る範囲演算子です。全体で範囲式といいます。[[ref:d:spec/operator#range]]。
 
 : 1 ... 20
 
- �����ͤ�ޤޤʤ� Range ���֥������Ȥ����ϰϱ黻�ҤǤ���
- ���Τ��ϰϼ��Ȥ����ޤ���[[ref:d:spec/operator#range]]��
+ 最大値を含まない Range オブジェクトを作る範囲演算子です。
+ 全体で範囲式といいます。[[ref:d:spec/operator#range]]。
 
-: if /^begin/ .. /^end/ �ʤ� ��Ｐ �� .. ��
+: if /^begin/ .. /^end/ など 条件式 式 .. 式
 
- ��Ｐ����ϰϼ������̤˥ե�åץե��åפΤ褦��Ư���ޤ���
+ 条件式中の範囲式は特別にフリップフロップのように働きます。
 
 //emlist{
     '1234543212345'.each_byte{|n|print( (n==?2)..(n==?4) ? n.chr : '_' )} #=> _234___21234_
-    #"2"���Ф�ޤǤ�false��"2"���ФƤ���"4"���Ф�ޤǤ�true��"4"����"2"�ޤǤ�false���֤���
+    #"2"が出るまではfalse、"2"が出てから"4"が出るまではtrue、"4"から"2"まではfalseを返す。
 //}
 
 : /xx.xx/
 
- ����ɽ����Ǥ�դΰ�ʸ����
+ 正規表現の任意の一文字。
 
 ===[a:comma] ,
 
-: a,b, = [1,2,3] ���� �����κ��դΡ�,��
+: a,b, = [1,2,3] ・・ 代入の左辺の「,」
 
- ¿��������[[ref:d:spec/operator#multiassign]]�򻲾ȡ�
+ 多重代入。[[ref:d:spec/operator#multiassign]]を参照。
 
 : a = b, c
 
- ¿��������[[ref:d:spec/operator#multiassign]]�򻲾ȡ�
+ 多重代入。[[ref:d:spec/operator#multiassign]]を参照。
 
 : def foo(bar, baz)
 
- �᥽�åɰ����ζ��ڤꡣ
+ メソッド引数の区切り。
 
 : { :a => 1, :b => 2 }
 
- �ϥå�������Ǥζ��ڤꡣ
+ ハッシュの要素の区切り。
 
 : [:a, :b, :c]
 
- ��������Ǥζ��ڤꡣ
+ 配列の要素の区切り。
 
 : { :a => 1, :b => 2 }.each{|key, val|}
 
- �֥��å��ѥ�᡼���ζ��ڤꡣ
+ ブロックパラメータの区切り。
 
 ===[a:langl] <
 
 : 3 < 5
 
- �֤�꾮��������ӱ黻��
+ 「より小さい」比較演算子
 
 : 3 <= 5
 
- �֤�꾮����������������ӱ黻��
+ 「より小さいか等しい」比較演算子
 
 : 3 <=> 5
 
- ����Ū����ӱ黻�ҡ��ۤ�����ӱ黻�ҤϤ��α黻�Ҥ򸵤� [[c:Comparable]] �⥸�塼����������Ƥ��ޤ���
- �����礭����� 1, ���������0, �����礭����� -1 ���֤��褦�˺�뤳�Ȥ����Ԥ���Ƥ��ޤ���
+ 基本的な比較演算子。ほかの比較演算子はこの演算子を元に [[c:Comparable]] モジュールで定義されています。
+ 左が大きければ 1, 等しければ0, 右が大きければ -1 を返すように作ることが期待されています。
 
 : 3 << 1
 
- ���եȱ黻��Ԥ��᥽�åɡ��ޤ�������Υ᥽�åɡ�[[m:Array#<<]] �ʤɡ�
+ シフト演算を行うメソッド。または類似のメソッド。[[m:Array#<<]] など。
 
 : a <<= 1
 
- ��<<�ױ黻�Ҥμ��������黻�ҡ�
+ 「<<」演算子の自己代入演算子。
 //emlist{
   a = 3
   a <<= 1
   p a #=> 6
 //}
 
-: <<EOS �ޤ��� <<-EOS ��<<"EOS" �ʤɡ�
+: <<EOS または <<-EOS 、<<"EOS" など。
 
- �ҥ��ɥ�����ȤǤ���[[ref:d:spec/literal#here]]���ҥ��ɥ�����Ȥ� `<<���̻�' ��ޤ�Ԥμ��ιԤ���
- `���̻�' �����ιԤ�ľ���ޤǤ�ʸ����Ȥ���Իظ��Υ�ƥ��Ǥ���
+ ヒアドキュメントです。[[ref:d:spec/literal#here]]。ヒアドキュメントは `<<識別子' を含む行の次の行から
+ `識別子' だけの行の直前までを文字列とする行指向のリテラルです。
 
 : class Foo < Super
 
- ���饹����ǥ����ѡ����饹����ꤷ�Ƥ��ޤ���
- [[ref:d:spec/def#class]]��
+ クラス定義でスーパークラスを指定しています。
+ [[ref:d:spec/def#class]]。
 
 : class << obj
 
- �ðۥ��饹�����[[ref:d:spec/def#singleton_class]]�򻲾ȡ�
+ 特異クラス定義。[[ref:d:spec/def#singleton_class]]を参照。
 
 ===[a:rangl] >
 
 : 3 > 5
 
- �֤���礭������ӱ黻��
+ 「より大きい」比較演算子
 
 : 3 >= 5
 
- �֤���礭��������������ӱ黻��
+ 「より大きいか等しい」比較演算子
 
 : 3 <=> 3
 
- ����Ū����ӱ黻�ҡ��ۤ�����ӱ黻�ҤϤ��α黻�Ҥ򸵤� [[c:Comparable]] 
- �⥸�塼����������Ƥ��ޤ��������礭�����1, ���������0, �����礭����� -1 
- ���֤��褦�˺�뤳�Ȥ����Ԥ���Ƥ��ޤ���
+ 基本的な比較演算子。ほかの比較演算子はこの演算子を元に [[c:Comparable]] 
+ モジュールで定義されています。左が大きければ1, 等しければ0, 右が大きければ -1 
+ を返すように作ることが期待されています。
 
 : 3 >> 1
 
- ���եȱ黻�ҡ��ޤ�������Υ᥽�åɡ�
+ シフト演算子。または類似のメソッド。
 
 : a >>= 1
 
- ��>>�ױ黻�Ҥμ��������黻�ҡ�
+ 「>>」演算子の自己代入演算子。
 //emlist{
   a = 3
   a >>= 1
@@ -422,12 +422,12 @@
 
 : { 1 => "11" , 3 => "333" }
 
- �ϥå���Υ�ƥ��
+ ハッシュのリテラル
 
 #@since 1.9.1
 : ->(a,b){ p [a,b] }
 
- Ruby1.9 ��Ƴ�����줿 lambda �ο�������ˡ���ʲ���Ʊ����
+ Ruby1.9 で導入された lambda の新しい記法。以下と同じ。
 //emlist{
 lambda{|a, b| p [a, b] }
 //}
@@ -438,25 +438,25 @@ lambda{|a, b| p [a, b] }
 
 : a = 12
 
- �����黻�ҡ�
+ 代入演算子。
 
 : xxx.a = 12
 
- �����᥽�åɤθƤӽФ���
+ 代入メソッドの呼び出し。
 
 : a == 12
 
- ����黻�ҡ��ޤ�������Υ᥽�åɡ�
+ 等号演算子。または類似のメソッド。
 
 : a === 12
 
- �ü������黻�ҡ�[[m:Object#===]]�Ǥ��������֤��Υ᥽�åɤ� case ʸ�Ǥ���Ӥ��Ѥ����ޤ���
- �ǥե���Ȥ� Object#== ��Ʊ��Ư���򤷤ޤ����� ���ε�ư�ϥ��֥��饹�ǽ�°���Υ����å���¸����뤿�� 
- Ŭ�����������ޤ��ס����Ȥ��С�[[m:Range#===]] ��other ���ϰ���˴ޤޤ�Ƥ�����˿����֤��ޤ���
+ 特殊な等号演算子。[[m:Object#===]]での説明：「このメソッドは case 文での比較に用いられます。
+ デフォルトは Object#== と同じ働きをしますが、 この挙動はサブクラスで所属性のチェックを実現するため 
+ 適宜再定義されます」。たとえば、[[m:Range#===]] はother が範囲内に含まれている時に真を返します。
 
-: a += 12 , a *= 12 , a ||= 12 �ʤɡ���a ���黻�� = b
+: a += 12 , a *= 12 , a ||= 12 など・・a 二項演算子 = b
 
- ���������黻�ҡ�[[ref:d:spec/operator#selfassign]]�򻲾ȡ�
+ 自己代入演算子。[[ref:d:spec/operator#selfassign]]を参照。
 //emlist{
   a = 7
   a **= 2
@@ -465,74 +465,74 @@ lambda{|a, b| p [a, b] }
 
 : def xx=
 
- ���ξ��Ρ�=�פϥ᥽�å�̾�ΰ���ʬ�Ǥ������Υ����פ�̾���Υ᥽�åɤ��������ȡ�
- Ʊ���ˡ�=�ױ黻�Ҥ�������뤳�Ȥˤʤ�ޤ���
+ この場合の「=」はメソッド名の一部分です。このタイプの名前のメソッドを定義すると、
+ 同時に「=」演算子を定義することになります。
 
-: =begin ���� =end
+: =begin ・・ =end
 
- �����ߥɥ�����ȤǤ���[[ref:d:spec/lexical#embed]]�򻲾ȡ�
+ 埋め込みドキュメントです。[[ref:d:spec/lexical#embed]]を参照。
 
 : { 1 => "11" , 3 => "333" }
 
- �ϥå���Υ�ƥ��
+ ハッシュのリテラル
 
 : rescue => XXX
 
- �㳰�������㳰��̤��ѿ� XXX ���������ޤ���
+ 例外処理で例外結果を変数 XXX に代入します。
 
-: xxx #=> �¹Է��
+: xxx #=> 実行結果
 
- ����Ū�˼¹Է�̤򼨤�����˻Ȥ��륳���Ȥν�����
+ 慣用的に実行結果を示すために使われるコメントの書き方。
 
 ===[a:tilde] ~
 
 : '%04b %04b' % [3, ~ 3]
 
- �ӥåȱ黻�����ꡣ
+ ビット演算の否定。
 //emlist{
  '%04b %04b' % [3, ~ 3] #=> "0011 1100"
 //}
 
 : /xxx/ =~ yyy
 
- ����ɽ���Υ᥽�å� =~ ������ɽ����ʸ�����ޥå������롣ξ�դ������ؤ��Ƥⵡǽ���ޤ���
+ 正規表現のメソッド =~ 。正規表現と文字列をマッチさせる。両辺を入れ替えても機能します。
 
 : /xxx/ !~ yyy
 
- ����ɽ���Υ᥽�å� =~ �����ꡣ�ޥå������Ԥ�����true���֤��ޤ���
+ 正規表現のメソッド =~ の否定。マッチが失敗したらtrueを返します。
 
 : ~ /xxx/
 
- /xxx/ =~ $_ �ξ�ά����~�θ��������ɽ���Ǥʤ���Ф����ޤ���
+ /xxx/ =~ $_ の省略形。~の後ろは正規表現でなければいけません。
 
 ===[a:dollar] $
 
 : $xxx
 
- �������Х��ѿ���[[ref:d:spec/variables#global]]�򻲾ȡ�
+ グローバル変数。[[ref:d:spec/variables#global]]を参照。
 
-: $_ �� $! �ʤ� ����$<1ʸ���ο���������>
+: $_ や $! など ・・$<1文字の数字、記号>
 
- �ü��ѿ�(�Ȥ߹����ѿ�)��[[ref:d:spec/variables#builtin]] �򻲾ȡ�
+ 特殊変数(組み込み変数)。[[ref:d:spec/variables#builtin]] を参照。
 
 : /xx$/
 
- ����ɽ���ǹ�����ʸ��������������ʸ����ľ���ΰ��֤˥ޥå����ޤ������Լ��Ȥϴޤߤޤ���
- [[d:spec/regexp]]�򻲾ȡ�
+ 正規表現で行末。文字列の末尾や改行文字の直前の位置にマッチします。改行自身は含みません。
+ [[d:spec/regexp]]を参照。
 
 ===[a:at] @
 
 : @xxx
 
- ���󥹥����ѿ���[[ref:d:spec/variables#instance]]�򻲾ȡ�
+ インスタンス変数。[[ref:d:spec/variables#instance]]を参照。
 
 : @@xxx
 
- ���饹�ѿ���[[ref:d:spec/variables#class]]�򻲾ȡ�
+ クラス変数。[[ref:d:spec/variables#class]]を参照。
 
-: def +@ �ޤ��� def -@
+: def +@ または def -@
 
- ñ��黻�� +X �� -X ���������Ȥ���ɽ��ˡ��
+ 単項演算子 +X や -X を定義するときの表記法。
 //emlist{
   class String
     def +@
@@ -547,32 +547,32 @@ lambda{|a, b| p [a, b] }
 
 : xxx_yyy
 
- ���̻Ҥ���ǤϾ�ʸ����Ʊ������
+ 識別子の中では小文字と同じ扱い
 
 : 123_456
 
- ʸ�������ɰʳ��ο��ͥ�ƥ��ˤϡ�`_' ��ޤ�뤳�Ȥ��Ǥ��ޤ��� ruby ���󥿥ץ꥿�� `_' ��ñ��̵�뤷��
- ���̤ʲ��ϲ��⤷�ޤ��� ����ϡ��礭�ʿ��ͤη�����Ҥ��ܤǤ狼��褦�˵��Ҥ���Τ������Ǥ���
- [[ref:d:spec/literal#num]]�򻲾ȡ�
+ 文字コード以外の数値リテラルには、`_' を含めることができます。 ruby インタプリタは `_' を単に無視し、
+ 特別な解釈は何もしません。 これは、大きな数値の桁数がひと目でわかるように記述するのに便利です。
+ [[ref:d:spec/literal#num]]を参照。
 
 ===[a:lbra] {
 ===[a:rbra] }
 
 : { 1 => "11" , 3 => "333" }
 
- �ϥå���Υ�ƥ��
+ ハッシュのリテラル
 
 : 5.times{|n| p n}
 
- �֥��å�
+ ブロック
 
 : /xx{2,3}/
 
- ����ɽ���Ρ��ϰϻ��귫���֤�����(interval quantifier)��
+ 正規表現の、範囲指定繰り返し制御(interval quantifier)。
 
 : "a is #{a}"
 
- ��Ÿ����[[ref:d:spec/literal#exp]]�򻲾ȡ�
+ 式展開。[[ref:d:spec/literal#exp]]を参照。
 //emlist{
   a = 10
   p "a is #{a}"  #=> "a is 10"
@@ -583,11 +583,11 @@ lambda{|a, b| p [a, b] }
 
 : [1,"some",:ok]
 
- ����Υ�ƥ��
+ 配列のリテラル
 
 : 'abcde'[1,2]
 
- []�᥽�åɤμ¹�
+ []メソッドの実行
 //emlist{
   class String
     def [](*a)
@@ -599,34 +599,34 @@ lambda{|a, b| p [a, b] }
 
 : /xx[abc]/
 
- ����ɽ����ʸ�����饹���ꡣ
+ 正規表現の文字クラス指定。
 
 ===[a:lbra3] (
 ===[a:rbra3] )
 
 : (true and false)
 
- �ݥ��å�()�ϸ�̩�ˤϡ�ʣ����ʸ������ޤȤ�ƤҤȤĤμ��ˤ��륰�롼�ײ���()�������¦�Υ��å��ˤȥ᥽�åɤΰ�������������()����γ�¦�Υ��å��ˤ�����ޤ�����Τ褦�����̤ʾ�����������ʤϻȤ�ʬ����ռ�����ɬ�פϤ���ޤ���()�ϰ�̣�������Ƥˤʤ�ʤ��ϰϤǾ�ά����ǽ�Ǥ���
+ 丸カッコ()は厳密には、複数の文、式をまとめてひとつの式にするグループ化の()（例の内側のカッコ）とメソッドの引数を明示する()（例の外側のカッコ）があります。例のような特別な場合を除き、普段は使い分けを意識する必要はありません。()は意味が不明瞭にならない範囲で省略が可能です。
 
 ===[a:dq] "
 
 : "abc"
 
- ʸ�����ƥ�롣��Ÿ���ʤɤ���ǽ�ʥ����פ�ʸ�����ƥ��Ǥ���
- [[ref:d:spec/literal#string]]�򻲾ȡ�
+ 文字列リテラル。式展開などが可能なタイプの文字列リテラルです。
+ [[ref:d:spec/literal#string]]を参照。
 
 ===[a:sq] '
 
 : 'abc'
 
- ʸ�����ƥ�롣����¤Υ��������פ����������ޤ��󡣼�Ÿ���ʤɤ򤷤������Ϥ�����""���Ѥ��ޤ���
+ 文字列リテラル。最低限のエスケープだけしかしません。式展開などをしたい場合はかわりに""を用います。
 
 ===[a:ac] `
 
 : `ls`
 
- ���ޥ�ɽ��ϡ��Хå���������(`)�ǰϤޤ줿ʸ����ϡ����ޥ�ɤȤ��Ƽ¹Ԥ��졢
- ����ɸ����Ϥ�ʸ����Ȥ���Ϳ�����ޤ���[[ref:d:spec/literal#command]]�򻲾ȡ�
+ コマンド出力。バッククォート(`)で囲まれた文字列は、コマンドとして実行され、
+ その標準出力が文字列として与えられます。[[ref:d:spec/literal#command]]を参照。
 //emlist{
     puts `ruby -h`
     #=> Usage: ruby [switches] [--] [programfile] [arguments]
@@ -634,18 +634,18 @@ lambda{|a, b| p [a, b] }
 //}
 
 ===[a:backslash] \
-�Хå�����å��塣�Ķ��ˤ�äơ�˸������ꤷ�ޤ���
+バックスラッシュ。環境によって¥に見えたりします。
 
 : puts "abc\"def"
 
- ʸ���������ɽ������Υ��������ס�
+ 文字列や正規表現の中のエスケープ。
 //emlist{
  puts "abc\"def" #=> abc"def
 //}
 
 : xxx \
 
- ��³�ԡ����Ԥ�ľ�����֤���롣�ѡ������ʳ���ľ��β��Ԥ�¸�ߤ��ʤ���ΤȤ��ư����ޤ���
+ 継続行。改行の直前に置かれる。パースの段階で直後の改行が存在しないものとして扱われます。
 //emlist{
     puts(3 \
     + 4) #=> 7
@@ -655,10 +655,10 @@ lambda{|a, b| p [a, b] }
 
 : a = 3 ;
 
- ���ζ��ڤꡣ���Ԥ�Ʊ��
+ 式の区切り。改行と同じ
 
 #@since 1.9.1
 : [1,2,3].each{|v; z| z = v * 2 ... }
 
-  �֥��å����������ѿ���������뤿��ζ��ڤꡣ
+  ブロックローカル変数を宣言するための区切り。
 #@end

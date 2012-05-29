@@ -2,67 +2,67 @@
 
 extend Enumerable
 
-�Ķ��ѿ���ɽ�����֥������ȡ�[[c:Hash]] ��Ʊ�ͤΥ��󥿡��ե����������
-�ޤ�����������Hash �ȰۤʤꡢENV �Υ������ͤˤ�ʸ���󤷤�
-�Ȥ뤳�Ȥ��Ǥ��ޤ���
+環境変数を表すオブジェクト。[[c:Hash]] と同様のインターフェースを持ち
+ます。ただし、Hash と異なり、ENV のキーと値には文字列しか
+とることができません。
 
-ENV ��������ʸ����� ENV['PATH'] ������Ʊ�������Ƥ���
-�������֥������Ȥα����˴ؤ��Ƥ� [[d:spec/safelevel]] �򻲾Ȥ��Ʋ�������
-ENV['PATH'] �Ϥ������Ǥ�ï�Ǥ�񤭹��߲�ǽ�ʥǥ��쥯�ȥ��ޤ�
-�Ǥ�����˸¤��������ޤ���
+ENV で得られる文字列は ENV['PATH'] を除いて汚染されていま
+す。オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
+ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
+でいる場合に限り汚染されます。
 
-��:
+例:
 
   p ENV['TERM'].tainted?  # => true
   p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
   p path.tainted?         # => false
 
-�ޤ���ENV ��������ʸ����� [[m:Object#freeze]] ����Ƥ��ޤ���
+また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
-��:
+例:
 
   p ENV['TERM'].frozen?  # => true
 
-Windows �ǤϴĶ��ѿ�����ʸ������ʸ������̤��ޤ���(cygwin �����)
+Windows では環境変数は大文字、小文字を区別しません。(cygwin を除く)
 
-��:
+例:
 
   ENV['OS'] # => Windows_NT
   ENV['os'] # => Windows_NT
 
 --- [](key) -> String
 
-key ���б�����Ķ��ѿ����ͤ��֤��ޤ�����������Ķ��ѿ���¸��
-���ʤ����ˤ� nil ���֤��ޤ���
+key に対応する環境変数の値を返します。該当する環境変数が存在
+しない時には nil を返します。
 
-@param key  �Ķ��ѿ�̾����ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
+@param key  環境変数名を指定します。 to_str で文字列化されます。
 
 --- []=(key, value)
 --- store(key, value) -> String
 
-key ���б�����Ķ��ѿ����ͤ� value �ˤ��ޤ���
-value �� nil �λ���key ���б�����Ķ��ѿ���������ޤ��� 
+key に対応する環境変数の値を value にします。
+value が nil の時、key に対応する環境変数を取り除きます。 
 
-@param key    �Ķ��ѿ�̾����ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
-@param value  �֤�������٤��ͤ���ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
+@param key    環境変数名を指定します。 to_str で文字列化されます。
+@param value  置き換えるべき値を指定します。 to_str で文字列化されます。
 
-@return value ���֤��ޤ���
+@return value を返します。
 
 --- clear  -> self
 
-�Ķ��ѿ��򤹤٤ƥ��ꥢ���ޤ���self ���֤��ޤ���
+環境変数をすべてクリアします。self を返します。
 
 --- delete(key) -> String | nil
 --- delete(key) {|key| ... } -> String | nil
 
-key ���б�����Ķ��ѿ���������ޤ����������줿�Ķ��ѿ���
-�ͤ��֤��ޤ�����key ���б�����Ķ��ѿ���¸�ߤ��ʤ����ˤ�
-nil ���֤��ޤ���
+key に対応する環境変数を取り除きます。取り除かれた環境変数の
+値を返しますが、key に対応する環境変数が存在しない時には
+nil を返します。
 
-�֥��å���Ϳ����줿���ˤ� key �˥ޥå������Τ��ʤ��ä���
-��ɾ������ޤ���
+ブロックが与えられた時には key にマッチするものがなかった時
+に評価されます。
 
-@param key  �Ķ��ѿ�̾����ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
+@param key  環境変数名を指定します。 to_str で文字列化されます。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -73,9 +73,9 @@ nil ���֤��ޤ���
 #@end
 --- reject {|key, value| ... } -> Hash
 
-�Ķ��ѿ��Τ������֥��å���ɾ�������ͤ����Ǥ����Τ�Ȥ�����ޤ���
-[[m:Enumerable#reject]] �Ȱۤʤ� Hash ���֤��ޤ����ޤ����Ȥ���������
-�ϼºݤδĶ��ѿ��˱ƶ���Ϳ���ޤ���
+環境変数のうち、ブロックを評価した値が真であるものをとり除きます。
+[[m:Enumerable#reject]] と異なり Hash を返します。また、とり除いた結果
+は実際の環境変数に影響を与えません。
 
 --- delete_if {|key, value| ... } -> ENV
 --- reject! {|key, value| ... }   -> ENV | nil
@@ -89,10 +89,10 @@ nil ���֤��ޤ���
 #@end
 #@end
 
-key �� value ������Ȥ��ƥ֥��å���ɾ�������ͤ����Ǥ�
-������Ķ��ѿ��������ޤ���
+key と value を引数としてブロックを評価した値が真であ
+る時、環境変数を削除します。
 
-reject! �����Ǥ��Ѳ����ʤ���� nil ���֤��ޤ���
+reject! は要素に変化がなければ nil を返します。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -105,7 +105,7 @@ reject! �����Ǥ��Ѳ����ʤ���� nil ���֤��ޤ���
 #@end
 --- each {|key, value| ... }      -> self
 --- each_pair {|key, value| ... } -> self
-key �� value ������Ȥ��ƥ֥��å���ɾ�����ޤ���
+key と value を引数としてブロックを評価します。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -115,7 +115,7 @@ key �� value ������Ȥ��ƥ֥��å���ɾ�����ޤ���
 #@end
 #@end
 --- each_key {|key| ... } -> self
-key ������Ȥ��ƥ֥��å���ɾ�����ޤ���
+key を引数としてブロックを評価します。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -125,94 +125,94 @@ key ������Ȥ��ƥ֥��å���ɾ�����ޤ���
 #@end
 #@end
 --- each_value {|value| ... } -> self
-value ������Ȥ��ƥ֥��å���ɾ�����ޤ���
+value を引数としてブロックを評価します。
 
 --- empty? -> bool
 
-�Ķ��ѿ����ҤȤĤ��������Ƥ��ʤ��������֤��ޤ���
+環境変数がひとつも定義されていない時真を返します。
 
 --- fetch(key) -> String
 --- fetch(key, default) -> String
 --- fetch(key) {|key| ... } -> String
 
-key �˴�Ϣ�Ť���줿�ͤ��֤��ޤ����������륭������Ͽ����Ƥ�
-�ʤ����ˤϡ����� default ��Ϳ�����Ƥ���Ф����ͤ򡢥֥���
-����Ϳ�����Ƥ���Ф��Υ֥��å���ɾ�������ͤ��֤��ޤ������Τ�����
-�Ǥ�ʤ�����㳰 [[c:IndexError]] ��ȯ�����ޤ���
+key に関連づけられた値を返します。該当するキーが登録されてい
+ない時には、引数 default が与えられていればその値を、ブロッ
+クが与えられていればそのブロックを評価した値を返します。そのいずれ
+でもなければ例外 [[c:IndexError]] が発生します。
 
-@param key       �Ķ��ѿ���̾������ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
-@param default   key���б�����Ķ��ѿ����ͤ��ʤ��Ȥ��ˤ����ͤ��֤��ޤ��� 
+@param key       環境変数の名前を指定します。 to_str で文字列化されます。
+@param default   keyに対応する環境変数の値がないときにこの値を返します。 
 
 --- has_key?(key) -> bool
 --- include?(key) -> bool
 --- key?(key)     -> bool
 --- member?(key)  -> bool
 
-key �ǻ��ꤵ���Ķ��ѿ���¸�ߤ�����������֤��ޤ���
+key で指定される環境変数が存在する時、真を返します。
 
-@param key   �Ķ��ѿ���̾������ꤷ�ޤ���to_str ��ʸ���󲽤���ޤ���
+@param key   環境変数の名前を指定します。to_str で文字列化されます。
 
 --- has_value?(val) -> bool
 --- value?(val)     -> bool
 
-val ���ͤȤ��ƻ��ĴĶ��ѿ���¸�ߤ�����������֤��ޤ���
+val を値として持つ環境変数が存在する時、真を返します。
 
-@param val  �ͤ���ꤷ�ޤ���to_str ��ʸ���󲽤���ޤ���
+@param val  値を指定します。to_str で文字列化されます。
 
 #@since 1.9.1
 --- key(val)   -> String | nil
 #@end
 --- index(val) -> String | nil
 
-val ���б����륭�����֤��ޤ����б��������Ǥ�¸�ߤ��ʤ����ˤ�
-nil ���֤��ޤ���
+val に対応するキーを返します。対応する要素が存在しない時には
+nil を返します。
 
 #@since 1.9.1
-[[m:ENV.index]] �� obsolete �Ǥ������Ѥ���ȷٹ��å�������ɽ������ޤ���
-[[m:ENV.key]] ����Ѥ��Ƥ���������
+[[m:ENV.index]] は obsolete です。使用すると警告メッセージが表示されます。
+[[m:ENV.key]] を使用してください。
 #@end
 
-@param val  �ͤ���ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
+@param val  値を指定します。 to_str で文字列化されます。
 
 #@until 1.9.1
 --- indexes(*key) -> [String]
 --- indices(*key) -> [String]
 
-���Υ᥽�åɤ� obsolete �Ǥ���
-���Ѥ���ȷٹ��å�������ɽ������ޤ���
-����� [[m:ENV.values_at]] ����Ѥ��ޤ���
+このメソッドは obsolete です。
+使用すると警告メッセージが表示されます。
+代わりに [[m:ENV.values_at]] を使用します。
 
-�����ǻ��ꤵ�줿̾���δĶ��ѿ����ͤ�������֤��ޤ���
+引数で指定された名前の環境変数の値の配列を返します。
 
-@param key  ������̾������ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
+@param key  キーの名前を指定します。 to_str で文字列化されます。
 #@end
 
 --- inspect -> String
 
-ENV ���֥������Ȥ�ʸ���󲽤��ޤ��� [[m:Hash#inspect]] ��Ʊ���褦��ư��ޤ���
+ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 
 --- invert -> Hash
 
-�Ķ��ѿ����ͤ򥭡���̾�����ͤȤ��� [[c:Hash]] �����������֤��ޤ���
+環境変数の値をキー、名前を値とした [[c:Hash]] を生成して返します。
 
 --- keys -> [String]
 
-���Ķ��ѿ���̾����������֤��ޤ���
+全環境変数の名前の配列を返します。
 
 --- length -> Fixnum
 --- size   -> Fixnum
 
-�Ķ��ѿ��ο����֤��ޤ���
+環境変数の数を返します。
 
 --- rehash -> nil
 
-���⤷�ޤ���nil���֤��ޤ���
+何もしません。nilを返します。
 
 --- replace(hash) -> ENV
 
-�Ķ��ѿ��� hash ��Ʊ�����Ƥ��ѹ����ޤ��� self ���֤��ޤ���
+環境変数を hash と同じ内容に変更します。 self を返します。
 
-@param hash  �������ͤ��б��ط�����ꤷ�ޤ��� to_hash �ǥϥå�����Ѵ�����ޤ���
+@param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 
 #@since 1.8.7
 #@since 1.8.8
@@ -223,70 +223,70 @@ ENV ���֥������Ȥ�ʸ���󲽤��ޤ��� [[m:Hash#inspect]] ��Ʊ���褦��ư��ޤ���
 #@end
 --- select {|key, value| ... }  -> [[String, String]]
 
-�Ķ��ѿ�̾���ͤˤĤ��ƥ֥��å���ɾ�����������֤�����Τ򽸤᤿�������
-���ޤ�������γ����Ǥ�����Ȥʤꡢ������Ǥ��ѿ�̾���������Ǥ��ͤˤʤ�
-�ޤ���
+環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
+します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
+ます。
 
 --- shift -> [String, String]
 
-�Ķ��ѿ����ļ������ơ������̾�����ͤ��Ȥ�������֤��ޤ���
-�Ķ��ѿ�����Ĥ����ꤵ��Ƥ��ʤ���� nil ���֤��ޤ���
+環境変数を一つ取り除いて、それを名前と値の組の配列で返します。
+環境変数が一つも設定されていなければ nil を返します。
 
 --- to_a -> [[String, String]]
 
-�Ķ��ѿ����� [�ѿ�̾, ��] �Ȥʤ� 2 ���Ǥ������������������ޤ���
+環境変数から [変数名, 値] となる 2 要素の配列の配列を生成します。
 
 --- to_hash -> Hash
 
-�Ķ��ѿ���̾���򥭡��Ȥ����б������ͤ��ĥϥå�����֤��ޤ���
+環境変数の名前をキーとし、対応する値をもつハッシュを返します。
 
 --- to_s -> String
 
-�Ķ��ѿ���ʸ���󲽤��ޤ��� Hash#to_s ��Ʊ���褦��ư��ޤ���
+環境変数を文字列化します。 Hash#to_s と同じように動作します。
 
 --- update(other) -> ENV
 
-�ϥå��� other �����Ƥ�Ķ��ѿ��˥ޡ������ޤ�����ʣ���륭��
-���б������ͤ� other �����ƤǾ�񤭤���ޤ���
+ハッシュ other の内容を環境変数にマージします。重複するキー
+に対応する値は other の内容で上書きされます。
 
-self ���֤��ޤ���
+self を返します。
 
-@param other  ��񤭤���ϥå������ꤷ�ޤ���
+@param other  上書きするハッシュを指定します。
 
 --- values -> [String]
 
-�Ķ��ѿ������ͤ�������֤��ޤ���
+環境変数の全値の配列を返します。
 
 --- values_at(*key) -> [String]
 
-�����ǻ��ꤵ�줿����(�Ķ��ѿ�̾)���б������ͤ�������֤��ޤ���¸��
-���ʤ��������Ф��Ƥ� nil ���б����ޤ���
+引数で指定されたキー(環境変数名)に対応する値の配列を返します。存在
+しないキーに対しては nil が対応します。
 #@until 1.9.1
-[[m:ENV.indexes]] �� [[m:ENV.indices]] ��Ʊ���Ǥ���
+[[m:ENV.indexes]] と [[m:ENV.indices]] と同じです。
 #@end
 
-��:
+例:
 
   ENV.update({'FOO','foo', 'BAR','bar'})
   p ENV.values_at(*%w(FOO BAR BAZ))   # => ["foo", "bar", nil]
 
-@param key �Ķ��ѿ�̾����ꤷ�ޤ��� to_str ��ʸ���󲽤���ޤ���
+@param key 環境変数名を指定します。 to_str で文字列化されます。
 #@since 1.9.1
 --- assoc(key) -> Array | nil
 
-���Ȥ�Ϳ����줿�������б��������Ǥ���ĤȤ������Ĥ��ä����ǤΥ������ͤΥڥ���
-����Ȥ����֤��ޤ���
+自身が与えられたキーに対応する要素を持つとき、見つかった要素のキーと値のペアを
+配列として返します。
 
-@param key �������륭������ꤷ�ޤ���
+@param key 検索するキーを指定します。
 
 @see [[m:Hash#assoc]]
 
 --- rassoc(value) -> Array | nil
 
-���Ȥ�Ϳ����줿�ͤ��б��������Ǥ���ĤȤ������Ĥ��ä����ǤΥ������ͤΥڥ���
-����Ȥ����֤��ޤ���
+自身が与えられた値に対応する要素を持つとき、見つかった要素のキーと値のペアを
+配列として返します。
 
-@param value ���������ͤ���ꤷ�ޤ���
+@param value 検索する値を指定します。
 
 @see [[m:Hash#rassoc]]
 
@@ -298,14 +298,14 @@ self ���֤��ޤ���
 --- keep_if -> Enumerator
 --- select! -> Enumerator
 
-�������ͤ�����Ȥ��ƥ֥��å���ɾ��������̤����Ǥ�
-��褦�����Ǥ�Ķ��ѿ��˻Ĥ��ޤ���
+キーと値を引数としてブロックを評価した結果が真であ
+るような要素を環境変数に残します。
 
-keey_if �Ͼ�� self ���֤��ޤ���
-select! �ϥ��֥������Ȥ��ѹ����줿���� self ��
-����Ƥ��ʤ����� nil ���֤��ޤ���
+keey_if は常に self を返します。
+select! はオブジェクトが変更された場合に self を、
+されていない場合に nil を返します。
 
-�֥��å�����ά���줿���ˤ� [[c:Enumerator]] ���֤��ޤ���
+ブロックが省略された場合には [[c:Enumerator]] を返します。
 
 @see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [[m:Hash#select!]],
 #@end

@@ -6,7 +6,7 @@ require rubygems/digest/sha2
 require rubygems/remote_fetcher
 require rubygems/source_info_cache
 
-�ġ��Υ�������������������Ƥ�ͭ���� Gem �ѥå������򥤥�ǥå��������뤿��Υ饤�֥��Ǥ���
+個々のソースから取得した全ての有効な Gem パッケージをインデックス化するためのライブラリです。
 
 = class Gem::SourceIndex
 alias Gem::Cache
@@ -14,27 +14,27 @@ extend Gem::UserInteraction
 include Enumerable
 include Gem::UserInteraction
 
-�ġ��Υ�������������������Ƥ�ͭ���� Gem �ѥå������򥤥�ǥå��������뤿��Υ��饹�Ǥ���
+個々のソースから取得した全ての有効な Gem パッケージをインデックス化するためのクラスです。
 
-Gem �ѥå������Υե�͡���� ���줾��� [[c:Gem::Specification]] ���֥������Ȥ��б��դ��ޤ���
+Gem パッケージのフルネームと それぞれの [[c:Gem::Specification]] オブジェクトを対応付けます。
 
 == Instance Methods
 
 --- add_spec(gem_spec) -> Gem::Specification
 
-���Ȥ˰�����Ϳ����줿 [[c:Gem::Specification]] �Υ��󥹥��󥹤��ɲä��ޤ���
+自身に引数で与えられた [[c:Gem::Specification]] のインスタンスを追加します。
 
-@param gem_spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- add_specs(*gem_specs) -> Hash
 
-���Ȥ˰�����Ϳ����줿 [[c:Gem::Specification]] �Υ��󥹥��󥹤������ɲä��ޤ���
+自身に引数で与えられた [[c:Gem::Specification]] のインスタンスを全て追加します。
 
-@param gem_specs ʣ���� [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem_specs 複数の [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- dump -> ()
 
-���Ȥ� [[m:Marshal.#dump]] ���ޤ���
+自身を [[m:Marshal.#dump]] します。
 
 --- each{|full_name, gem| ... } -> Hash
 #@since 1.8.7
@@ -45,14 +45,14 @@ Gem �ѥå������Υե�͡���� ���줾��� [[c:Gem::Specification]] ���֥������Ȥ��
 #@end
 #@end
 
-���Ȥ���Ͽ����Ƥ��뤽�줾��� Gem �ˤĤ��ƥ֥��å���ɾ�����ޤ���
+自身に登録されているそれぞれの Gem についてブロックを評価します。
 
 
 --- find_name(gem_name, version_requirement = Gem::Requirement.default) -> Gem::Specification
 
-û��̾�������Τ˥ޥå����� Gem ���֤��ޤ���
+短い名前で正確にマッチする Gem を返します。
 
-@param gem_name Gem ��̾������ꤷ�ޤ���
+@param gem_name Gem の名前を指定します。
 
 @param version_requirement
 
@@ -60,115 +60,115 @@ Gem �ѥå������Υե�͡���� ���줾��� [[c:Gem::Specification]] ���֥������Ȥ��
 
 --- gem_signature(gem_full_name) -> String
 
-Ϳ����줿̾������� Gem �� SHA256 �����������Ȥ��֤��ޤ���
+与えられた名前を持つ Gem の SHA256 ダイジェストを返します。
 
-@param gem_full_name Gem ��̾������ꤷ�ޤ���
+@param gem_full_name Gem の名前を指定します。
 
 --- index_signature -> String
 
-����������ǥå����� SHA256 �����������Ȥ��֤��ޤ���
+ソースインデックスの SHA256 ダイジェストを返します。
 
-�����ͤϥ���ǥå������ѹ��������Ѳ����ޤ���
+この値はインデックスが変更されると変化します。
 
 --- latest_specs -> Array
 
-���Ȥ˴ޤޤ��ǿ��� [[c:Gem::Specification]] �Υꥹ�Ȥ��֤��ޤ���
+自身に含まれる最新の [[c:Gem::Specification]] のリストを返します。
 
 --- size   -> Integer
 --- length -> Integer
 
-���Ȥ˴ޤޤ�� Gem �θĿ����֤��ޤ���
+自身に含まれる Gem の個数を返します。
 
 --- load_gems_in(*spec_dirs) -> self
 
-������Ϳ����줿�ǥ��쥯�ȥ�˴ޤޤ�� gemspec ���鼫�Ȥ�ƹ��ۤ����֤��ޤ���
+引数で与えられたディレクトリに含まれる gemspec から自身を再構築して返します。
 
-@param spec_dirs gemspec �δޤޤ�Ƥ���ǥ��쥯�ȥ��ʣ�����ꤷ�ޤ���
+@param spec_dirs gemspec の含まれているディレクトリを複数指定します。
 
 --- outdated -> Array
 
-��������Ƥ��ʤ� [[c:Gem::Specification]] �Υꥹ�Ȥ��֤��ޤ���
+更新されていない [[c:Gem::Specification]] のリストを返します。
 
 --- refresh! -> self
 
-���Ȥ�ƺ������ޤ���
+自身を再作成します。
 
-@raise StandardError ���Ȥ��ǥ����������ɤ߹���Ǻ�������Ƥ��ʤ�����ȯ�����ޤ���
+@raise StandardError 自身がディスクから読み込んで作成されていない場合に発生します。
 
 --- remove_spec(full_name) -> Gem::Specification
 
-�����ǻ��ꤵ�줿̾������� Gem �򥤥�ǥå������������ޤ���
+引数で指定された名前を持つ Gem をインデックスから削除します。
 
 --- search(gem_pattern, platform_only = false) -> [Gem::Specification]
 
-�����ǻ��ꤵ�줿���������� Gem �Υꥹ�Ȥ��֤��ޤ���
+引数で指定された条件を満たす Gem のリストを返します。
 
-@param gem_pattern ���������� Gem ��ɽ�� [[c:Gem::Dependency]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem_pattern 検索したい Gem を表す [[c:Gem::Dependency]] のインスタンスを指定します。
 
-@param platform_only ������ꤹ��ȥץ�åȥե����ब���פ����ΤΤߤ��֤��ޤ����ǥե���Ȥϵ��Ǥ���
+@param platform_only 真を指定するとプラットフォームが一致するもののみを返します。デフォルトは偽です。
 
 --- size -> Integer
 
-���ȤΥ��������֤��ޤ���
+自身のサイズを返します。
 
 --- spec_dirs -> [String]
 
-[[m:Gem::SourceIndex#refresh!]] �Ǽ��Ȥ򹹿�������˻��Ѥ���ǥ��쥯�ȥ��������ޤ���
+[[m:Gem::SourceIndex#refresh!]] で自身を更新する時に使用するディレクトリを取得します。
 
 --- spec_dirs=(dirs)
 
-[[m:Gem::SourceIndex#refresh!]] �Ǽ��Ȥ򹹿�������˻��Ѥ���ǥ��쥯�ȥ�����ꤷ�ޤ���
+[[m:Gem::SourceIndex#refresh!]] で自身を更新する時に使用するディレクトリを設定します。
 
 --- specification(full_name) -> Gem::Specification | nil
 
-���ꤵ�줿̾���� [[c:Gem::Specification]] ���֥������Ȥ��֤��ޤ���
+指定された名前の [[c:Gem::Specification]] オブジェクトを返します。
 
-@param full_name Gem �Υե�͡������ꤷ�ޤ���
+@param full_name Gem のフルネームを指定します。
 
 --- update(source_uri, all) -> bool
 
-�������ǻ��ꤵ�줿 URI ����Ѥ��Ƽ��Ȥ򹹿����ޤ���
+第一引数で指定された URI を使用して自身を更新します。
 
-@param source_uri �����˻��Ѥ��� URI ����ꤷ�ޤ���ʸ���� [[c:URI::Generic]] �Υ��֥��饹����ꤷ�ޤ���
+@param source_uri 更新に使用する URI を指定します。文字列か [[c:URI::Generic]] のサブクラスを指定します。
 
-@param all ������ꤹ��Ⱥǿ��С������� Gem �Τ߼������ޤ���������ꤹ������ƤΥС������� Gem ��������ޤ���
+@param all 偽を指定すると最新バージョンの Gem のみ取得します。真を指定すると全てのバージョンの Gem を取得します。
 
 == Singleton Methods
 
 --- new(specifications = {}) -> Gem::SourceIndex
 
-Ϳ����줿�ϥå���򸵤˼��Ȥ��������ޤ���
+与えられたハッシュを元に自身を初期化します。
 
-@param specifications ������ Gem ��̾�����ͤ� [[c:Gem::Specification]] �Υ��󥹥��󥹤Ȥ���ϥå������ꤷ�ޤ���
+@param specifications キーを Gem の名前、値を [[c:Gem::Specification]] のインスタンスとするハッシュを指定します。
 
 --- from_gems_in(*spec_dirs) -> Gem::SourceIndex
 
-������Ϳ����줿�ǥ��쥯�ȥ���֤���Ƥ��� Ruby ������ץȷ����� gemspec �ե��������Ѥ���
-���������󥹥��󥹤�������ޤ���
+引数で与えられたディレクトリに置かれている Ruby スクリプト形式の gemspec ファイルを使用して
+新しいインスタンスを作成します。
 
-@param spec_dirs gemspec �ե����뤬�֤���Ƥ���ǥ��쥯�ȥ���İʾ���ꤷ�ޤ���
+@param spec_dirs gemspec ファイルが置かれているディレクトリを一つ以上指定します。
 
 --- from_installed_gems(*deprecated) -> Gem::SourceIndex
 
-Ϳ����줿�ѥ����Ȥˡ����󥹥��󥹤��������ե����ȥ�᥽�åɤǤ���
+与えられたパスをもとに、インスタンスを作成するファクトリメソッドです。
 
-@param deprecated ���ΰ�������侩�Ǥ��������ߴ����Τ���ˤΤ��󶡤���Ƥ���Τǻ��Ѥ��٤��ǤϤ���ޤ���
+@param deprecated この引数は非推奨です。後方互換性のためにのみ提供されているので使用すべきではありません。
 
 @see [[m:Gem::SourceIndex.from_gems_in]]
 
 --- installed_spec_directories -> [String]
 
-gemspec �ե����뤬���󥹥ȡ��뤵��Ƥ���ǥ��쥯�ȥ�Υꥹ�Ȥ��֤��ޤ���
+gemspec ファイルがインストールされているディレクトリのリストを返します。
 
 @see [[m:Gem.#path]]
 
 --- load_specification(file_name) -> Gem::Specification | nil
 
-Ϳ����줿�ե�����̾���� Ruby ������ץȷ����� gemspec ������ɤ���
-[[c:Gem::Specification]] �Υ��󥹥��󥹤��֤��ޤ���
+与えられたファイル名から Ruby スクリプト形式の gemspec をロードして
+[[c:Gem::Specification]] のインスタンスを返します。
 
-@param file_name �ե�����̾����ꤷ�ޤ���
+@param file_name ファイル名を指定します。
 
-@raise SignalException gemspec ������ɤ��Ƥ���Ȥ���ȯ�����ޤ���
+@raise SignalException gemspec をロードしているときに発生します。
 
-@raise SystemExit gemspec ������ɤ��Ƥ���Ȥ���ȯ�����ޤ���
+@raise SystemExit gemspec をロードしているときに発生します。

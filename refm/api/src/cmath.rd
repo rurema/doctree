@@ -1,17 +1,17 @@
 #@since 1.9.1
 
-ʣ�ǿ��黻�򥵥ݡ��Ȥ���饤�֥��Ǥ���
+複素数演算をサポートするライブラリです。
 
 = module CMath
 
 include Math
 
-ʣ�ǿ��黻�򥵥ݡ��Ȥ���⥸�塼��Ǥ���
+複素数演算をサポートするモジュールです。
 
-[[c:Math]] �⥸�塼���ʣ�ǿ��ǤǤ���Ʊ̾�Υ᥽�åɤ�ʣ�ǿ��б����ޤ���
-����η׻���̤�ɬ�פʾ��ϡ��֥᥽�å�̾!�פη����ǸƤӽФ��ޤ���
+[[c:Math]] モジュールの複素数版です。同名のメソッドを複素数対応します。
+従来の計算結果が必要な場合は、「メソッド名!」の形式で呼び出します。
 
-��:
+例:
 
   require "cmath"
   CMath.sqrt(-9)  # => (0+3.0i)
@@ -21,16 +21,16 @@ include Math
 
 --- exp!(x) -> Float
 
-�¿� x �λؿ��ؿ�([[m:Math::E]] �� x ��)���ͤ��֤��ޤ���
-[[m:Math.#exp]] �Υ����ꥢ���Ǥ���
+実数 x の指数関数([[m:Math::E]] の x 乗)の値を返します。
+[[m:Math.#exp]] のエイリアスです。
 
-@param x [[m:Math::E]] �� x �褹�����¿��ǻ��ꤷ�ޤ���
+@param x [[m:Math::E]] を x 乗する数を実数で指定します。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.exp!(0)   # => 1
@@ -42,15 +42,15 @@ include Math
 
 --- exp(z) -> Float | Complex
 
-z �λؿ��ؿ�([[m:Math::E]] �� z ��)���ͤ��֤��ޤ���
+z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 
-@param z [[m:Math::E]] �� z �褹�������ꤷ�ޤ���
+@param z [[m:Math::E]] を z 乗する数を指定します。
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
-��:
+例:
 
   require "cmath"
   CMath.exp(Complex(0, 0))              # => (1.0+0.0i)
@@ -60,19 +60,19 @@ z �λؿ��ؿ�([[m:Math::E]] �� z ��)���ͤ��֤��ޤ���
 --- log!(x) -> Float
 --- log!(x, b) -> Float
 
-�¿� x ���п����֤��ޤ���[[m:Math.#log]] �Υ����ꥢ���Ǥ���
+実数 x の対数を返します。[[m:Math.#log]] のエイリアスです。
 
-@param x ���������μ¿��ǻ��ꤷ�ޤ���
+@param x 真数を正の実数で指定します。
 
-@param b �����ꤷ�ޤ�����ά�������ϼ����п���׻����ޤ���
+@param b 底を指定します。省略した場合は自然対数を計算します。
 
-@raise Math::DomainError x ����ο��Ǥ������ȯ�����ޤ���
+@raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError �����Τɤ��餫�˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
-@raise RangeError �����Τɤ��餫�˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.log!(Math::E) # => 1.0
@@ -85,25 +85,25 @@ z �λؿ��ؿ�([[m:Math::E]] �� z ��)���ͤ��֤��ޤ���
 --- log(z) -> Float | Complex
 --- log(z, b) -> Float | Complex
 
-z ���п����֤��ޤ���
+z の対数を返します。
 
-@param z ��������ꤷ�ޤ���
+@param z 真数を指定します。
 
-@param b �����ꤷ�ޤ�����ά�������ϼ����п���׻����ޤ���
+@param b 底を指定します。省略した場合は自然対数を計算します。
 
 #@since 1.9.3
-@raise TypeError �����Τɤ��餫�˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 #@end
 
-��:
+例:
 
   require "cmath"
   CMath.log(Complex(0, 0)) # => -Infinity+0.0i
   CMath.log(0)             # => -Infinity
 
 #@until 1.9.3
-[����] 1.9.2 �ʲ��Ǥ� z �� 0+0i ��Ϳ����� [[c:Math::DomainError]] ��ȯ
-������Х�������ޤ���
+[注意] 1.9.2 以下では z に 0+0i を与えると [[c:Math::DomainError]] が発
+生するバグがあります。
 #@end
 
 #@since 1.9.2
@@ -112,53 +112,53 @@ z ���п����֤��ޤ���
 --- log2(x) -> Float
 #@end
 
-2 ����Ȥ���¿� x ���п� (binary logarithm) ���֤��ޤ���
-[[m:Math.#log2]]�Υ����ꥢ���Ǥ���
+2 を底とする実数 x の対数 (binary logarithm) を返します。
+[[m:Math.#log2]]のエイリアスです。
 
-@param x ���������μ¿��ǻ��ꤷ�ޤ���
+@param x 真数を正の実数で指定します。
 
-@raise Math::DomainError x ����ο��Ǥ������ȯ�����ޤ���
+@raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#log2]]
 
 #@since 1.9.2
 --- log2(z) -> Float | Complex
 
-2 ����Ȥ��� z ���п� (binary logarithm) ���֤��ޤ���
+2 を底とする z の対数 (binary logarithm) を返します。
 
-@param z ��������ꤷ�ޤ���
+@param z 真数を指定します。
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 #@end
 
 --- log10!(x) -> Float
 
-�¿� x �ξ����п����֤��ޤ���[[m:Math.#log10]] �Υ����ꥢ���Ǥ���
+実数 x の常用対数を返します。[[m:Math.#log10]] のエイリアスです。
 
-@param x ���������μ¿��ǻ��ꤷ�ޤ���
+@param x 真数を正の実数で指定します。
 
-@raise Math::DomainError x ����ο��Ǥ������ȯ�����ޤ���
+@raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#log10]]
 
 --- log10(z) -> Float | Complex
 
-x �ξ����п����֤��ޤ���
+x の常用対数を返します。
 
-@param x ����
+@param x 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 #@since 1.9.2
@@ -167,15 +167,15 @@ x �ξ����п����֤��ޤ���
 --- cbrt(x) -> Float
 #@end
 
-�¿� x ��Ω�������֤��ޤ���[[m:Math.#cbrt]] �Υ����ꥢ���Ǥ���
+実数 x の立方根を返します。[[m:Math.#cbrt]] のエイリアスです。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.cbrt!(8.0)  # => 2.0
@@ -186,20 +186,20 @@ x �ξ����п����֤��ޤ���
 #@since 1.9.2
 --- cbrt(z) -> Float | Complex
 
-z ��Ω�������⡢���ͤ��֤��ޤ���
+z の立方根の内、主値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
   require "cmath"
   CMath.cbrt(-8)    # => (1.0000000000000002+1.7320508075688772i)
 
 #@until 1.9.3
-[����] 1.9.2 �ʲ��Ǥ���μ¿��������Ϳ����ȡ����Ͱʳ���Ω����(�¿���)��
-�֤��Х�������ޤ���
+[注意] 1.9.2 以下では負の実数を引数に与えると、主値以外の立方根(実数解)を
+返すバグがあります。
 #@end
 
 @see [[m:Complex#**]]
@@ -208,17 +208,17 @@ z ��Ω�������⡢���ͤ��֤��ޤ���
 
 --- sqrt!(x) -> Float
 
-�¿� x ��ʿ�������֤��ޤ���[[m:Math.#sqrt]] �Υ����ꥢ���Ǥ���
+実数 x の平方根を返します。[[m:Math.#sqrt]] のエイリアスです。
 
-@param x ���μ¿�
+@param x 正の実数
 
-@raise Math::DomainError x ����ο��Ǥ������ȯ�����ޤ���
+@raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.sqrt!(4.0) # => 2.0
@@ -228,15 +228,15 @@ z ��Ω�������⡢���ͤ��֤��ޤ���
 
 --- sqrt(z) -> Float | Complex
 
-z ��ʿ�������֤��ޤ���
+z の平方根を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
-��:
+例:
 
   require "cmath"
   CMath.sqrt(-1)               # => (0+1.0i)
@@ -245,16 +245,16 @@ z ��ʿ�������֤��ޤ���
 
 --- sin!(x) -> Float
 
-�¿� x �������ؿ����ͤ�饸������֤��ޤ���[[m:Math.#sin]] �Υ����ꥢ��
-�Ǥ���
+実数 x の正弦関数の値をラジアンで返します。[[m:Math.#sin]] のエイリアス
+です。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.sin!(0 * Math::PI / 4) # => 0.0
@@ -265,28 +265,28 @@ z ��ʿ�������֤��ޤ���
 
 --- sin(z) -> Float | Complex
 
-z �������ؿ����ͤ�饸������֤��ޤ���
+z の正弦関数の値をラジアンで返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- cos!(x) -> Float
 
-�¿� x ��;���ؿ����ͤ�饸������֤��ޤ���[[m:Math.#cos]] �Υ����ꥢ��
-�Ǥ���
+実数 x の余弦関数の値をラジアンで返します。[[m:Math.#cos]] のエイリアス
+です。
 
-@param x �¿�
+@param x 実数
 
-@return [-1, 1] �μ¿�
+@return [-1, 1] の実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.cos!(0 * Math::PI / 4) # => 1.0
@@ -297,26 +297,26 @@ z �������ؿ����ͤ�饸������֤��ޤ���
 
 --- cos(z) -> Float | Complex
 
-z ��;���ؿ����ͤ�饸������֤��ޤ���
+z の余弦関数の値をラジアンで返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- tan!(x) -> Float
 
-�¿� x �����ܴؿ����ͤ�饸������֤��ޤ���[[m:Math.#tan]] �Υ����ꥢ��
-�Ǥ���
+実数 x の正接関数の値をラジアンで返します。[[m:Math.#tan]] のエイリアス
+です。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-��:
+例:
 
   require "cmath"
   CMath.tan!(0 * Math::PI / 4) # => 0.0
@@ -327,259 +327,259 @@ z ��;���ؿ����ͤ�饸������֤��ޤ���
 
 --- tan(z) -> Float | Complex
 
-z �����ܴؿ����ͤ�饸������֤��ޤ���
+z の正接関数の値をラジアンで返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- sinh!(x) -> Float
 
-�¿� x ���ж��������ؿ����ͤ��֤��ޤ���[[m:Math.#sinh]] �Υ����ꥢ����
-����
+実数 x の双曲線正弦関数の値を返します。[[m:Math.#sinh]] のエイリアスで
+す。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#sinh]]
 
 --- sinh(z) -> Float | Complex
 
-z ���ж��������ؿ����ͤ��֤��ޤ���
+z の双曲線正弦関数の値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- cosh!(x) -> Float
 
-�¿� x ���ж���;���ؿ����ͤ��֤��ޤ���[[m:Math.#cosh]] �Υ����ꥢ����
-����
+実数 x の双曲線余弦関数の値を返します。[[m:Math.#cosh]] のエイリアスで
+す。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#cosh]]
 
 --- cosh(z) -> Float | Complex
 
-z ���ж���;���ؿ����ͤ��֤��ޤ���
+z の双曲線余弦関数の値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- tanh!(x) -> Float
 
-�¿� x ���ж������ܴؿ����ͤ��֤��ޤ���[[m:Math.#tanh]] �Υ����ꥢ����
-����
+実数 x の双曲線正接関数の値を返します。[[m:Math.#tanh]] のエイリアスで
+す。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#tanh]]
 
 --- tanh(z) -> Float | Complex
 
-z ���ж������ܴؿ����ͤ��֤��ޤ���
+z の双曲線正接関数の値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- asin!(x) -> Float
 
-�¿� x �ε������ؿ����ͤ�饸������֤��ޤ���[[m:Math.#asin]] �Υ�����
-�����Ǥ���
+実数 x の逆正弦関数の値をラジアンで返します。[[m:Math.#asin]] のエイリ
+アスです。
 
-@param x -1.0 <= x <= 1 ���ϰ���μ¿���
+@param x -1.0 <= x <= 1 の範囲内の実数。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError x ���ϰϳ��μ¿�����ꤷ������ȯ�����ޤ���
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#asin]]
 
 --- asin(z) -> Float | Complex
 
-z �ε������ؿ����ͤ�饸������֤��ޤ���
+z の逆正弦関数の値をラジアンで返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- acos!(x) -> Float
 
-�¿� x �ε�;���ؿ����ͤ�饸������֤��ޤ���[[m:Math.#acos]] �Υ�����
-�����Ǥ���
+実数 x の逆余弦関数の値をラジアンで返します。[[m:Math.#acos]] のエイリ
+アスです。
 
-@param x -1.0 <= x <= 1 ���ϰ���μ¿�
+@param x -1.0 <= x <= 1 の範囲内の実数
 
-@return �֤�����ͤ��ϰϤ� [0, +��] �Ǥ���
+@return 返される値の範囲は [0, +π] です。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError x ���ϰϳ��μ¿�����ꤷ������ȯ�����ޤ���
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#acos]]
 
 --- acos(z) -> Float | Complex
 
-z �ε�;���ؿ����ͤ�饸������֤��ޤ���
+z の逆余弦関数の値をラジアンで返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- atan!(x) -> Float
 
-�¿� x �ε����ܴؿ����ͤ�饸������֤��ޤ���[[m:Math.#atan]] �Υ�����
-�����Ǥ���
+実数 x の逆正接関数の値をラジアンで返します。[[m:Math.#atan]] のエイリ
+アスです。
 
-@param x �¿���
+@param x 実数。
 
-@return �֤�����ͤ��ϰϤ� [-��/2, +��/2] �Ǥ���
+@return 返される値の範囲は [-π/2, +π/2] です。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#atan]]
 
 --- atan(z) -> Float | Complex
 
-z �ε����ܴؿ����ͤ�饸������֤��ޤ���
+z の逆正接関数の値をラジアンで返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- atan2!(x, y) -> Float
 
-�¿� x / y �ε����ܴؿ����ͤ��֤��ޤ���[[m:Math.#atan2]] �Υ����ꥢ����
-����
+実数 x / y の逆正接関数の値を返します。[[m:Math.#atan2]] のエイリアスで
+す。
 
-@param x �¿���
+@param x 実数。
 
-@param y �¿���
+@param y 実数。
 
-@return �֤�����ͤ��ϰϤ� [-��/2, ��/2] �Ǥ���
+@return 返される値の範囲は [-π/2, π/2] です。
 
-@raise TypeError �����Τɤ��餫�˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#atan2]]
 
 --- atan2(x, y) -> Float | Complex
 
-x / y �ε����ܴؿ����ͤ��֤��ޤ���
+x / y の逆正接関数の値を返します。
 
-@param x ����
+@param x 数値
 
-@param y ����
+@param y 数値
 
 #@since 1.9.3
-@raise TypeError �����Τɤ��餫�˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 #@end
 
 --- asinh!(x) -> Float
 
-�¿� x �ε��ж��������ؿ����ͤ��֤��ޤ���[[m:Math.#asinh]] �Υ����ꥢ���Ǥ���
+実数 x の逆双曲線正弦関数の値を返します。[[m:Math.#asinh]] のエイリアスです。
 
-@param x �¿�
+@param x 実数
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#asinh]]
 
 --- asinh(z) -> Float | Complex
 
-z �ε��ж��������ؿ����ͤ��֤��ޤ���
+z の逆双曲線正弦関数の値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- acosh!(x) -> Float
 
-�¿� x �ε��ж���;���ؿ����ͤ��֤��ޤ���[[m:Math.#acosh]] �Υ����ꥢ���Ǥ���
+実数 x の逆双曲線余弦関数の値を返します。[[m:Math.#acosh]] のエイリアスです。
 
-@param x x >= 1 ���ϰϤμ¿���
+@param x x >= 1 の範囲の実数。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError x ���ϰϳ��μ¿�����ꤷ������ȯ�����ޤ���
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#acosh]]
 
 --- acosh(z) -> Float | Complex
 
-z �ε��ж���;���ؿ����ͤ��֤��ޤ���
+z の逆双曲線余弦関数の値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 --- atanh!(x) -> Float
 
-�¿� x �ε��ж������ܴؿ����ͤ��֤��ޤ���[[m:Math.#atanh]] �Υ����ꥢ���Ǥ���
+実数 x の逆双曲線正接関数の値を返します。[[m:Math.#atanh]] のエイリアスです。
 
-@param x -1 < x < 1 �μ¿���
+@param x -1 < x < 1 の実数。
 
-@return �¿���
+@return 実数。
 
-@raise TypeError x �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError x ���ϰϳ��μ¿�����ꤷ������ȯ�����ޤ���
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError x �˼¿��ʳ��ο��ͤ���ꤷ������ȯ�����ޤ���
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#atanh]]
 
 --- atanh(z) -> Float | Complex
 
-z �ε��ж������ܴؿ����ͤ��֤��ޤ���
+z の逆双曲線正接関数の値を返します。
 
-@param z ����
+@param z 数値
 
 #@since 1.9.3
-@raise TypeError z �˿��Ͱʳ�����ꤷ������ȯ�����ޤ���
+@raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
 #@end

@@ -5,32 +5,32 @@ include Enumerable
 include File::Constants
 #@end
 
-����Ū�������ϵ�ǽ�Τ���Υ��饹�Ǥ���
+基本的な入出力機能のためのクラスです。
 
-#@#  * [[unknown:Traps: IO �ݡ��ȤΥ����ץ�˴ؤ������|trap::IO]]
+#@#  * [[unknown:Traps: IO ポートのオープンに関わる問題|trap::IO]]
 
 #@if (version >="1.8.0")
-File::Constants �ϡ�[[c:File]] ���� IO �ذ�ư���ޤ�����
+File::Constants は、[[c:File]] から IO へ移動しました。
 #@end
 
 #@since 1.9.1
-===[a:m17n] ¿���첽�� IO �Υ��󥳡��ǥ���
+===[a:m17n] 多言語化と IO のエンコーディング
 
-IO ���֥������Ȥϥ��󥳡��ǥ��󥰤�����ޤ���
-���󥳡��ǥ��󥰤αƶ��������᥽�åɤȼ����ʤ��᥽�åɤ�����ޤ���
+IO オブジェクトはエンコーディングを持ちます。
+エンコーディングの影響を受けるメソッドと受けないメソッドがあります。
 
-�ƶ��������᥽�åɤǤϡ�IO �Υ��󥳡��ǥ��󥰤˽����ɤ߹��ޤ줿ʸ����Υ��󥳡��ǥ��󥰤����ꤵ��ޤ���
-�ޤ� IO �Υ��󥳡��ǥ��󥰤�Ŭ�ڤ����ꤹ�뤳�Ȥˤ�ꡢ�ɤ߹��߻����񤭹��߻���ʸ����Υ��󥳡��ǥ��󥰤�
-�Ѵ������뤳�Ȥ�Ǥ��ޤ���
+影響を受けるメソッドでは、IO のエンコーディングに従い読み込まれた文字列のエンコーディングが決定されます。
+また IO のエンコーディングを適切に設定することにより、読み込み時・書き込み時に文字列のエンコーディングを
+変換させることもできます。
 
-==== ���󥳡��ǥ��󥰤αƶ��������᥽�åɤȼ����ʤ��᥽�å�
+==== エンコーディングの影響を受けるメソッドと受けないメソッド
 
-IO ���ɤ߹��ߥ᥽�åɤ�2����¸�ߤ��ޤ���
-�ƥ������ɤ߹��ߥ᥽�åɤȥХ��ʥ��ɤ߹��ߥ᥽�åɤǤ���
+IO の読み込みメソッドは2種類存在します。
+テキスト読み込みメソッドとバイナリ読み込みメソッドです。
 
-�ƥ������ɤ߹��ߥ᥽�åɤ� IO �Υ��󥳡��ǥ��󥰤αƶ��򤦤��ޤ���
-�ܤ����ϡ�[[ref:io_encoding]]�פ򻲾Ȥ��Ʋ�������
-�ʲ����ƥ������ɤ߹��ߥ᥽�åɤǤ���
+テキスト読み込みメソッドは IO のエンコーディングの影響をうけます。
+詳しくは「[[ref:io_encoding]]」を参照して下さい。
+以下がテキスト読み込みメソッドです。
 
  * [[m:IO.foreach]]
  * [[m:IO.readlines]]
@@ -45,159 +45,159 @@ IO ���ɤ߹��ߥ᥽�åɤ�2����¸�ߤ��ޤ���
  * [[m:IO#readline]]
  * [[m:IO#readlines]]
 
-�Х��ʥ��ɤ߹��ߥ᥽�åɤ� IO �Υ��󥳡��ǥ��󥰤αƶ�������ޤ���
-�֤�ʸ����Υ��󥳡��ǥ��󥰤Ͼ�� ASCII-8BIT �ˤʤ�ޤ���
-�ʲ����Х��ʥ��ɤ߹��ߥ᥽�åɤǤ���
+バイナリ読み込みメソッドは IO のエンコーディングの影響を受けません。
+返す文字列のエンコーディングは常に ASCII-8BIT になります。
+以下がバイナリ読み込みメソッドです。
 
  * [[m:IO#read]](size) 
  * [[m:IO#read_nonblock]]
  * [[m:IO#readpartial]]
  * [[m:IO#sysread]]
 
-�ޤ��񤭹��ߥ᥽�å� [[m:IO#write]] �� IO �Υ��󥳡��ǥ��󥰤αƶ�������ޤ���
-IO �Τ��٤Ƥν񤭹��ߥ᥽�åɤ������� [[m:IO#write]] ��ƤӤޤ��Τǡ�
-�񤭹��ߥ᥽�åɤϤ��٤� IO �Υ��󥳡��ǥ��󥰤αƶ�������ޤ���
+また書き込みメソッド [[m:IO#write]] も IO のエンコーディングの影響を受けます。
+IO のすべての書き込みメソッドは内部で [[m:IO#write]] を呼びますので、
+書き込みメソッドはすべて IO のエンコーディングの影響を受けます。
 
-��������Ϣ�Υ᥽�åɤϥ��󥳡��ǥ��󥰤αƶ�������ޤ���
-���1�Х��Ȥ�ñ�̤Ȥ���ư��ޤ���
+シーク関連のメソッドはエンコーディングの影響を受けません。
+常に1バイトを単位として動作します。
 
-��:
+例:
 
   f = File.open('t.txt', 'r+:euc-jp')
   p f.getc.encoding                             #=> Encoding::EUC_JP
   p f.read(1).encoding                          #=> Encoding::ASCII_8BIT 
 
-====[a:io_encoding] IO �Υ��󥳡��ǥ��󥰤ȥ��󥳡��ǥ��󥰤��Ѵ�
+====[a:io_encoding] IO のエンコーディングとエンコーディングの変換
 
-IO ���֥������Ȥϳ������󥳡��ǥ��󥰤��������󥳡��ǥ��󥰤�����ޤ���
-�������󥳡��ǥ��󥰤Ȥ� IO ��ɽ���ե�����ʤɤ�ʸ�����󥳡��ǥ��󥰤Ǥ���
-�������󥳡��ǥ��󥰤Ȥ� IO �����ɤ߹��ޤ줿ʸ���󡢤��뤤�� IO �ν񤭹��ߥ᥽�åɤ��Ϥ�ʸ����
-��ʸ�����󥳡��ǥ��󥰤Ǥ���
+IO オブジェクトは外部エンコーディングと内部エンコーディングを持ちます。
+外部エンコーディングとは IO が表すファイルなどの文字エンコーディングです。
+内部エンコーディングとは IO から読み込まれた文字列、あるいは IO の書き込みメソッドへ渡す文字列
+の文字エンコーディングです。
 
-�ʲ��λ��̤꤬����ޤ���
+以下の三通りがあります。
 
-: IO �Υ��󥳡��ǥ��󥰤����ꤵ��Ƥ��ʤ����
+: IO のエンコーディングが指定されていない場合
 
-  IO ����ƥ������ɤ߹��ߥ᥽�åɤˤ�ä��ɤ߹��ޤ줿ʸ����Υ��󥳡��ǥ��󥰤� [[m:Encoding.default_external]]
-  �����ꤵ��ޤ������ΤȤ��ºݤ�ʸ�����󥳡��ǥ��󥰤ϸ������줺���Ѵ��⤵��ޤ���
+  IO からテキスト読み込みメソッドによって読み込まれた文字列のエンコーディングは [[m:Encoding.default_external]]
+  に設定されます。このとき実際の文字エンコーディングは検査されず、変換もされません。
 
-: �������󥳡��ǥ��󥰤Τߤ����ꤵ��Ƥ�����
+: 外部エンコーディングのみが指定されている場合
 
- IO ����ƥ������ɤ߹��ߥ᥽�åɤˤ�ä��ɤ߹��ޤ줿ʸ����Υ��󥳡��ǥ��󥰤ϳ������󥳡��ǥ���
- �����ꤵ��ޤ������ΤȤ��ºݤ�ʸ�����󥳡��ǥ��󥰤ϸ������줺���Ѵ��⤵��ޤ���
+ IO からテキスト読み込みメソッドによって読み込まれた文字列のエンコーディングは外部エンコーディング
+ に設定されます。このとき実際の文字エンコーディングは検査されず、変換もされません。
 
- IO �ؽ񤭹��ޤ��ʸ����ϳ������󥳡��ǥ��󥰤ؤ��Ѵ�����ޤ���
- �������󥳡��ǥ��󥰤ؤ��Ѵ���ˡ��ʬ����ʤ������㳰��ȯ�����ޤ���
+ IO へ書き込まれる文字列は外部エンコーディングへと変換されます。
+ 外部エンコーディングへの変換方法が分からない場合は例外が発生します。
 
-: �������󥳡��ǥ��󥰤��������󥳡��ǥ���(���뤤�� default_internal)�����ꤵ��Ƥ�����
- IO ����ƥ������ɤ߹��ߥ᥽�åɤˤ�ä��ɤ߹��ޤ줿ʸ����ϡ��������󥳡��ǥ��󥰤���
- �������󥳡��ǥ���(���뤤�� default_internal)�ؤ��Ѵ�����ޤ���
- ���ꤵ�줿ʸ�����󥳡��ǥ��󥰤ȼºݤ�ʸ�����󥳡��ǥ��󥰤���äƤ�����硢�㳰��ȯ�����ޤ���
- �������󥳡��ǥ��󥰤�  [[m:Encoding.default_internal]] ��ξ���Ȥ���ꤵ��Ƥ�����ϡ�
- �������󥳡��ǥ��󥰤�ͥ�褵��ޤ���
+: 外部エンコーディングと内部エンコーディング(あるいは default_internal)が指定されている場合
+ IO からテキスト読み込みメソッドによって読み込まれた文字列は、外部エンコーディングから
+ 内部エンコーディング(あるいは default_internal)へと変換されます。
+ 指定された文字エンコーディングと実際の文字エンコーディングが違っていた場合、例外が発生します。
+ 内部エンコーディングと  [[m:Encoding.default_internal]] が両方とも指定されている場合は、
+ 内部エンコーディングが優先されます。
 
- IO �ؽ񤭹��ޤ��ʸ����ϳ������󥳡��ǥ��󥰤ؤ��Ѵ�����ޤ���
- �������󥳡��ǥ��󥰤ؤ��Ѵ���ˡ��ʬ����ʤ������㳰��ȯ�����ޤ���
+ IO へ書き込まれる文字列は外部エンコーディングへと変換されます。
+ 外部エンコーディングへの変換方法が分からない場合は例外が発生します。
 
 
-IO ���Ф��ƥ��󥳡��ǥ��󥰤���ꤹ����ˡ�ˤϡ��������� [[m:IO.open]] �� [[m:File.open]] 
-���Ϥ��⡼�ɤȤȤ�˻��ꤹ���Τ�
-������� [[m:IO#set_encoding]] ��Ȥäƻ��ꤹ���Τ����̤꤬����ޤ����ܤ����Ϥ��줾��Υ᥽�åɤι��
-���Ȥ��Ʋ��������̾�����Ԥ���ˡ��Ȥ��ޤ���
+IO に対してエンコーディングを指定する方法には、生成時に [[m:IO.open]] や [[m:File.open]] 
+に渡すモードとともに指定するものと
+生成後に [[m:IO#set_encoding]] を使って指定するものの二通りがあります。詳しくはそれぞれのメソッドの項を
+参照して下さい。通常は前者の方法を使います。
 
-��1:
+例1:
 
   f = File.open('file1')
   p f.getc.encoding        #=> Encoding::EUC_JP
 
-��2:
+例2:
 
   f = File.open('t.txt', 'w+:shift_jis:euc-jp')
-  f.write "\xB4\xC1\xBB\xFA"            # ʸ���� "����" �� EUC-JP ��ƥ��
+  f.write "\xB4\xC1\xBB\xFA"            # 文字列 "漢字" の EUC-JP リテラル
   f.rewind
   s = f.read(4)
   puts s.dump                           #=> "\x8A\xBF\x8E\x9A" 
-                                        # ���󥳡��ǥ��󥰤�SJIS���Ѵ�����Ƥ��뤳�Ȥ�ʬ���롣
+                                        # エンコーディングがSJISへ変換されていることが分かる。
 
-===== �ޤȤ�
+===== まとめ
 
-�ʾ��ޤȤ��Ȱʲ���ɽ�Τ褦�ˤʤ�ޤ���[[m:Encoding.default_external]] �Ͼ�����ꤵ��Ƥ���Τǡ���ά���Ƥ���ޤ���
+以上をまとめると以下の表のようになります。[[m:Encoding.default_external]] は常に設定されているので、省略してあります。
 
-�ɤ߹����ʸ����Υ��󥳡��ǥ���
-                                                    �Х��ʥ��ɤ߹��ߥ᥽�å�      �ƥ������ɤ߹��ߥ᥽�å�
+読み込んだ文字列のエンコーディング
+                                                    バイナリ読み込みメソッド      テキスト読み込みメソッド
  ----------------------------------------------------------------------------------------------------------
-                                         ����̵��        ASCII-8BIT                   default_external
+                                         指定無し        ASCII-8BIT                   default_external
  
-                            default_internal �Τ�        ASCII-8BIT                   default_internal
+                            default_internal のみ        ASCII-8BIT                   default_internal
  
-                         �������󥳡��ǥ��󥰤Τ�        ASCII-8BIT                 �������󥳡��ǥ���
+                         外部エンコーディングのみ        ASCII-8BIT                 外部エンコーディング
  
-                     �������󥳡��ǥ��󥰻��ꤢ��        ASCII-8BIT                 �������󥳡��ǥ���
+                     内部エンコーディング指定あり        ASCII-8BIT                 内部エンコーディング
   
-     �������󥳡��ǥ��󥰤� default_internal ξ��        ASCII-8BIT                 �������󥳡��ǥ���
+     内部エンコーディングと default_internal 両方        ASCII-8BIT                 内部エンコーディング
 
-���󥳡��ǥ��󥰤��Ѵ�
-                                               �Х��ʥ��ɤ߹��ߥ᥽�å�   �ƥ������ɤ߹��ߥ᥽�å�   �񤭹��ߥ᥽�å�
+エンコーディングの変換
+                                               バイナリ読み込みメソッド   テキスト読み込みメソッド   書き込みメソッド
  ---------------------------------------------------------------------------------------------------------------------
-                                   ����̵��           �Ѵ��ʤ�                 �Ѵ��ʤ�                   �Ѵ��ʤ�
+                                   指定無し           変換なし                 変換なし                   変換なし
 
-                   �������󥳡��ǥ��󥰤Τ�           �Ѵ��ʤ�                 �Ѵ��ʤ�                   �Ѵ�����
+                   外部エンコーディングのみ           変換なし                 変換なし                   変換あり
          
-                      default_internal �Τ�           �Ѵ��ʤ�                 �Ѵ�����                   �Ѵ����� 
+                      default_internal のみ           変換なし                 変換あり                   変換あり 
   
-                   �������󥳡��ǥ��󥰤Τ�           �Ѵ��ʤ�                 �Ѵ�����                   �Ѵ�����
+                   内部エンコーディングのみ           変換なし                 変換あり                   変換あり
 
- �������󥳡��ǥ��󥰤��������󥳡��ǥ���           �Ѵ��ʤ�                 �Ѵ�����                   �Ѵ�����
+ 外部エンコーディングと内部エンコーディング           変換なし                 変換あり                   変換あり
 
-    �������󥳡��ǥ��󥰤� default_internal           �Ѵ��ʤ�                 �Ѵ�����                   �Ѵ�����
+    外部エンコーディングと default_internal           変換なし                 変換あり                   変換あり
 
-==== �ǥե���Ȥγ������󥳡��ǥ��󥰤λ���
+==== デフォルトの外部エンコーディングの指定
 
-[[m:Encoding.default_external]] �ϥ��ޥ�ɥ��ץ���� -E �ǻ��ꤷ�ޤ���
--E �����ꤵ��ʤ��ä����ϼ��Τ褦��ͥ���̤Ƿ��ꤵ��ޤ���
+[[m:Encoding.default_external]] はコマンドオプション -E で指定します。
+-E が指定されなかった場合は次のような優先順位で決定されます。
 
- -E (��ͥ��) > -K > locale
+ -E (最優先) > -K > locale
 
-==== �ե�����̾�Υ��󥳡��ǥ���
+==== ファイル名のエンコーディング
 
-�ե�����̾��ʸ�����󥳡��ǥ��󥰤ϥץ�åȥե�����˰�¸���ޤ���
-�ե�����̾��ʸ�����󥳡��ǥ��󥰤����ꤵ��Ƥ���ץ�åȥե�����(Win, Mac)�Ǥϡ�
-���󥳡��ǥ��󥰤ϰ��ۤ��Ѵ�����ޤ�(ͽ��)��UNIX �Ǥ��Ѵ����줺���Τޤޥ����ƥॳ������Ϥ���ޤ���
+ファイル名の文字エンコーディングはプラットフォームに依存します。
+ファイル名の文字エンコーディングが固定されているプラットフォーム(Win, Mac)では、
+エンコーディングは暗黙に変換されます(予定)。UNIX では変換されずそのままシステムコールに渡されます。
 
-[[m:Dir.glob]], [[m:Dir.foreach]] �ʤɤ��֤��ե�����̾�Υ��󥳡��ǥ��󥰤�Ʊ�ͤ˥ץ�åȥե������¸�Ǥ���
-#@#Win, Mac �Ǥ� UTF-8 �Ǥ�(ͽ��)��
-UNIX �Ǥ� ASCII-8BIT �Ǥ���
+[[m:Dir.glob]], [[m:Dir.foreach]] などが返すファイル名のエンコーディングも同様にプラットフォーム依存です。
+#@#Win, Mac では UTF-8 です(予定)。
+UNIX では ASCII-8BIT です。
 
 ==== binmode
 
-Windows �� IO �ˤϥƥ����ȥ⡼�ɤȥХ��ʥ�⡼�ɤȤ���2����Υ⡼�ɤ�¸�ߤ��ޤ���
-�����Υ⡼�ɤϾ���������� IO �Υ��󥳡��ǥ��󥰤Ȥ���Ω�Ǥ������Ԥ��Ѵ��ˤ����ƶ����ޤ���
+Windows の IO にはテキストモードとバイナリモードという2種類のモードが存在します。
+これらのモードは上で説明した IO のエンコーディングとは独立です。改行の変換にしか影響しません。
 
 #@end
 
-=== EOF �Ǥ��ɤ߹��ߥ᥽�åɤο����񤤤ΰ㤤
+=== EOF での読み込みメソッドの振る舞いの違い
 
-���ե������ EOF �Ǥγ��ɤ߹��ߥ᥽�åɤο����񤤤ϰʲ��ΤȤ���Ǥ���
-��������length �����Ǥ���᥽�åɤ˴ؤ��Ƥϡ�length �� nil �ޤ��� 0 ����ꤷ����硢
-EOF �Ǥ��äƤ��˶�ʸ���� "" ���֤��ޤ���
+空ファイルや EOF での各読み込みメソッドの振る舞いは以下のとおりです。
+ただし、length を指定できるメソッドに関しては、length に nil または 0 を指定した場合、
+EOF であっても常に空文字列 "" を返します。
 #@if (version < "1.9.1")
-��������[[m:IO#read]](0) �� EOF �Ǥ� nil ���֤��ޤ���
+ただし、[[m:IO#read]](0) は EOF では nil を返します。
 #@end
 
 //emlist{
-�᥽�å�                      ���Υե�������Ф���
+メソッド                      空のファイルに対して
 
-IO.read(���ե�����)           ""
-IO.read(���ե�����, length)   nil
-IO.readlines(���ե�����)      []
-IO.foreach(���ե�����)        ���⤷�ʤ�
+IO.read(空ファイル)           ""
+IO.read(空ファイル, length)   nil
+IO.readlines(空ファイル)      []
+IO.foreach(空ファイル)        何もしない
 //}
 
 //emlist{
-�᥽�å�                      ����EOF���ä���
+メソッド                      既にEOFだったら
 
-IO#each                       ���⤷�ʤ�
-IO#each_byte                  ���⤷�ʤ�
+IO#each                       何もしない
+IO#each_byte                  何もしない
 IO#getc                       nil
 IO#gets                       nil
 IO#read()                     ""
@@ -213,8 +213,8 @@ IO#readpartial                EOFError
 #@end
 IO#sysread                    EOFError
 #@since 1.9.1
-IO#bytes                      �̾�ɤ���
-IO#lines                      �̾�ɤ���
+IO#bytes                      通常どおり
+IO#lines                      通常どおり
 #@end
 //}
 
@@ -225,32 +225,32 @@ IO#lines                      �̾�ɤ���
 --- copy_stream(src, dst, copy_length = nil)             -> Integer
 --- copy_stream(src, dst, copy_length, src_offset) -> Integer
 
-���ꤵ�줿 src ���� dst �إ��ԡ����ޤ���
-���ԡ������Х��ȿ����֤��ޤ���
+指定された src から dst へコピーします。
+コピーしたバイト数を返します。
 
-���ԡ����� src �� IO ���֥������Ȥξ��ϡ�src �Υ��ե��åȤ���
-�ե�����̾�ξ��ϥե�����κǽ餫�饳�ԡ��򳫻Ϥ��ޤ���
-���ԡ���� dst �˴ؤ��Ƥ�Ʊ�ͤǤ���
+コピー元の src が IO オブジェクトの場合は、src のオフセットから
+ファイル名の場合はファイルの最初からコピーを開始します。
+コピー先の dst に関しても同様です。
 
-dst �˥ե�����̾����ꤷ�����Υե����뤬¸�ߤ��ʤ���硢
-�ե�����Ϻ�������ޤ����ե����뤬¸�ߤ������Ĺ�� 0 ���ڤ�ͤ���ޤ���
+dst にファイル名を指定し、そのファイルが存在しない場合、
+ファイルは作成されます。ファイルが存在する場合は長さ 0 に切り詰められます。
 
-src �� IO ���֥������ȤǤ��� src_offset �����ꤵ��Ƥ����硢
-src �Υ��ե��å�(src.pos)���ѹ�����ޤ���
+src が IO オブジェクトでかつ src_offset が指定されている場合、
+src のオフセット(src.pos)は変更されません。
 
-@param src ���ԡ����Ȥʤ� IO ���֥������Ȥ��ե�����̾����ꤷ�ޤ���
+@param src コピー元となる IO オブジェクトかファイル名を指定します。
 
-@param dst ���ԡ���Ȥʤ� IO ���֥������Ȥ��ե�����̾����ꤷ�ޤ���
+@param dst コピー先となる IO オブジェクトかファイル名を指定します。
 
-@param copy_length ���ԡ�����Ĺ����Х���ñ�̤ǻ��ꤷ�ޤ������� copy_length �ޤǥ��ԡ�����ޤ���
-                   nil ����ꤷ����硢���ԡ�����Ĺ�������¤Ϥ���ޤ���
+@param copy_length コピーする長さをバイト単位で指定します。最大 copy_length までコピーされます。
+                   nil を指定した場合、コピーする長さに制限はありません。
 
-@param src_offset  ���ԡ���Ϥ�륪�ե��åȤ���ͤǻ��ꤷ�ޤ���
+@param src_offset  コピーを始めるオフセットを数値で指定します。
 
 --- try_convert(obj) -> IO | nil
 
-obj �� to_io �᥽�åɤˤ�ä� [[c:IO]] ���֥������Ȥ��Ѵ����ޤ���
-�Ѵ��Ǥ��ʤ��ä����� nil ���֤��ޤ���
+obj を to_io メソッドによって [[c:IO]] オブジェクトに変換します。
+変換できなかった場合は nil を返します。
 
    IO.try_convert(STDOUT)     # => STDOUT
    IO.try_convert("STDOUT")   # => nil
@@ -269,47 +269,47 @@ obj �� to_io �᥽�åɤˤ�ä� [[c:IO]] ���֥������Ȥ��Ѵ����ޤ���
 --- open(fd, mode = "r" opt={}) {|io| ... }   -> object
 #@end
 
-�����ץ�ѤߤΥե�����ǥ�������ץ� fd ���Ф��뿷����
-IO ���֥������Ȥ����������֤��ޤ���
+オープン済みのファイルディスクリプタ fd に対する新しい
+IO オブジェクトを生成して返します。
 
-IO.open �˥֥��å���Ϳ����줿��硢IO ���֥������Ȥ����������������Ȥ��ƥ֥��å���
-�¹Ԥ��ޤ����֥��å��ν�λ�ȤȤ�� fd �ϥ�����������ޤ����֥��å��η�̤��֤��ޤ���
-IO.new, IO.for_fd �ϥ֥��å�������դ��ޤ���
+IO.open にブロックが与えられた場合、IO オブジェクトを生成しそれを引数としてブロックを
+実行します。ブロックの終了とともに fd はクローズされます。ブロックの結果を返します。
+IO.new, IO.for_fd はブロックを受け付けません。
 
 #@since 1.9.1
-=== ���ץ�������
-���Υ᥽�åɤϰʲ��Υ��ץ��������ѤǤ��ޤ���
-  * :mode mode������Ʊ����̣�Ǥ�
-  * :external_encoding �������󥳡��ǥ��󥰡�"-" �ϥǥե���ȳ������󥳡��ǥ��󥰤�
-    ��̾�Ǥ���
-  * :internal_encoding �������󥳡��ǥ��󥰡�"-" �ϥǥե�����������󥳡��ǥ��󥰤�
-    ��̾�Ǥ���nil�ʤ��Ѵ����ޤ���
-  * :encoding "extenc:intenc" �η��ǳ���/�������󥳡��ǥ��󥰤���ꤷ�ޤ���
-  * :textmode �����Ϥ��� mode �� "t" ��Ʊ����̣�ˤʤ�ޤ���
-  * :binmode �����Ϥ��� mode �� "b" ��Ʊ����̣�ˤʤ�ޤ���
+=== オプション引数
+このメソッドは以下のオプションを利用できます。
+  * :mode mode引数と同じ意味です
+  * :external_encoding 外部エンコーディング。"-" はデフォルト外部エンコーディングの
+    別名です。
+  * :internal_encoding 内部エンコーディング。"-" はデフォルト内部エンコーディングの
+    別名です。nilなら変換しません。
+  * :encoding "extenc:intenc" の形で外部/内部エンコーディングを指定します。
+  * :textmode 真を渡すと mode の "t" と同じ意味になります。
+  * :binmode 真を渡すと mode の "b" と同じ意味になります。
 #@since 1.9.2
-  * :autoclose �����Ϥ��� close��/GC�ǤΥե����ʥ饤���ƽл��� fd �� close ���ޤ���
+  * :autoclose 偽を渡すと close時/GCでのファイナライザ呼出時に fd を close しません。
 #@end
-�ޤ���[[m:String#encode]] ����������Ƥ��� :invalid => :replace �ʤɤ�
-�Ѵ����ץ�������ꤹ�뤳�Ȥ��Ǥ��ޤ����������󥳡��ǥ��󥰤���
-�������󥳡��ǥ��󥰤ؤ��Ѵ��򤹤�Ȥ����Ѥ����ޤ���
+また、[[m:String#encode]] で説明されている :invalid => :replace などの
+変換オプションも指定することができます。外部エンコーディングから
+内部エンコーディングへの変換をするときに用いられます。
 
 #@end
 
-@param fd �ե�����ǥ�������ץ��Ǥ�����������ꤷ�ޤ���
+@param fd ファイルディスクリプタである整数を指定します。
 
-@param mode [[m:Kernel.#open]] ��Ʊ�������� IO �Υ⡼�ɤ���ꤷ�ޤ���[[m:File::Constants::RDONLY]] �ʤɤ�
-            ���(����)�ǥ⡼�ɤ����Ǥ��ޤ����ܺ٤��Ȥ߹��ߴؿ� [[m:Kernel.#open]] �򻲾�
-            ���Ƥ���������
-            mode �Ͼ�ά��ǽ�ǡ���ά���Υǥե���ȤΥ⡼�ɤϡ�
-            [[man:fcntl(2)]] �� F_GETFL �ե饰�����ѤǤ���Ķ��Ǥ��������ǻ��ꤷ�� fd �Υ⡼�ɤ�����Ѥ���
-            ���ѤǤ��ʤ��Ķ��Ǥ� "r" �ˤʤ�ޤ���
+@param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します。[[m:File::Constants::RDONLY]] などの
+            定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照
+            してください。
+            mode は省略可能で、省略時のデフォルトのモードは、
+            [[man:fcntl(2)]] で F_GETFL フラグが利用できる環境では第一引数で指定した fd のモードを引き継ぎ、
+            利用できない環境では "r" になります。
 
 #@since 1.9.1
-@param opt ���ץ�������
+@param opt オプション引数
 #@end
 
-@raise Errno::EXXX IO ���֥������Ȥ������˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
 #@since 1.8.7
@@ -320,30 +320,30 @@ IO.new, IO.for_fd �ϥ֥��å�������դ��ޤ���
 #@end
 #@end
 
-path �ǻ��ꤵ�줿�ե�����γƹԤ�����Ȥ��ƥ֥��å��򷫤��֤��¹Ԥ��ޤ���
-path �Υ����ץ����������� nil ���֤��ޤ���
+path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
+path のオープンに成功すれば nil を返します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ�path �ǻ��ꤵ�줿�ե�����γƹԤ򷫤��֤�
+ブロックが与えられなかった場合は、path で指定されたファイルの各行を繰り返す
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ����������֤��ޤ���
+[[c:Enumerator]] オブジェクトを生成して返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ����������֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
 #@end
 #@end
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
-path �����ե�����ξ�硢���⤻���� nil ���֤��ޤ���
-[[m:Kernel.#open]] ��Ʊ�� path ����Ƭ�� "|" �ʤ�С�"|" ��³�����ޥ�ɤν��Ϥ��ɤ߼��ޤ���
+path が空ファイルの場合、何もせずに nil を返します。
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
-@param path �ե�����̾��ɽ��ʸ���� "|���ޥ��̾" ����ꤷ�ޤ���
+@param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
-          ��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise Errno::EXXX path �Υ����ץ�˼��Ԥ�����硢ȯ�����ޤ���
+@raise Errno::EXXX path のオープンに失敗した場合、発生します。
 
 @see [[m:$/]]
 
@@ -360,33 +360,33 @@ path �����ե�����ξ�硢���⤻���� nil ���֤��ޤ���
 #@end
 #@end
 
-[[man:pipe(2)]] ��¹Ԥ��ơ���ߤˤĤʤ��ä�2�Ĥ�
-[[c:IO]] ���֥������Ȥ����ǤȤ���������֤��ޤ���
+[[man:pipe(2)]] を実行して、相互につながった2つの
+[[c:IO]] オブジェクトを要素とする配列を返します。
 
-����ͤ�����Ϻǽ�����Ǥ��ɤ߹���¦�ǡ��������Ǥ��񤭹���¦�Ǥ���
+戻り値の配列は最初の要素が読み込み側で、次の要素が書き込み側です。
 
 #@since 1.9.2
-�֥��å����Ϥ��줿���ϡ����Υ֥��å���2�Ĥ� IO ���֥������Ȥ��Ϥ��졢
-�֥��å����֤��ͤ����Υ᥽�åɤ��֤��ͤȤʤ�ޤ���
-�֥��å���λ���� IO ���֥������Ȥ��⤷ close ����Ƥ��ʤ��ʤ��
-close ���ޤ�(close ����Ƥ��Ƥ륪�֥������ȤϤ��ΤޤޤǤ�)��
+ブロックが渡された場合は、そのブロックに2つの IO オブジェクトが渡され、
+ブロックの返り値がこのメソッドの返り値となります。
+ブロック終了時に IO オブジェクトがもし close されていないならば
+close します(close されていてるオブジェクトはそのままです)。
 #@end
 
 #@since 1.9.1
-������2�Ĥ� IO ���֥������ȤΥ��󥳡��ǥ��󥰤�����ǻ��ꤹ�뤳�Ȥ�
-�Ǥ��ޤ���
+得られる2つの IO オブジェクトのエンコーディングを引数で指定することが
+できます。
 
-@param enc_str �ɤ߹���¦�γ������󥳡��ǥ��󥰤�ʸ����ǻ��ꤷ�ޤ���
-               ʸ���󤬥�����򶴤����ĤΥ��󥳡��ǥ���̾ "A:B" �Ǥ�����
-               �ǽ�Τ�Τ��������󥳡��ǥ��󥰡������������󥳡��ǥ��󥰤��̣���ޤ���
+@param enc_str 読み込み側の外部エンコーディングを文字列で指定します。
+               文字列がコロンを挟んだ二つのエンコーディング名 "A:B" である場合
+               最初のものが外部エンコーディング、次が内部エンコーディングを意味します。
 
-@param ext_enc �ɤ߹���¦�γ������󥳡��ǥ��󥰤� Encoding ���֥������Ȥǻ��ꤷ�ޤ���
+@param ext_enc 読み込み側の外部エンコーディングを Encoding オブジェクトで指定します。
 
-@param int_enc �ɤ߹���¦���������󥳡��ǥ��󥰤� Encoding ���֥������Ȥǻ��ꤷ�ޤ���
-@param opt ���󥳡��ǥ��󥰤ʤɤ����ꤹ�륪�ץ�������(see [[m:IO.new]])
+@param int_enc 読み込み側の内部エンコーディングを Encoding オブジェクトで指定します。
+@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
 #@end
 
-@raise Errno::EXXX IO ���֥������Ȥκ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX IO オブジェクトの作成に失敗した場合に発生します。
 
   r, w = IO.pipe
   p [r, w]            # => [#<IO:0x401b90f8>, #<IO:0x401b7718>]
@@ -405,15 +405,15 @@ close ���ޤ�(close ����Ƥ��Ƥ륪�֥������ȤϤ��ΤޤޤǤ�)��
 #@end
 
 #@since 1.9.1
-command �򥵥֥ץ������Ȥ��Ƽ¹Ԥ������Υץ�������ɸ��������
-�Ȥδ֤˥ѥ��ץ饤����Ω���ޤ������������ѥ��פ� [[c:IO]] ���֥������ȤȤ����֤��ޤ���
+command をサブプロセスとして実行し、そのプロセスの標準入出力
+との間にパイプラインを確立します。生成したパイプを [[c:IO]] オブジェクトとして返します。
 
-command ��ʸ����ξ��ϡ���������ͳ���ƻҥץ�������¹Ԥ��ޤ���
-command ������ξ��ϡ���������ͳ�����˻ҥץ�������¹Ԥ��ޤ���
+command が文字列の場合は、シェルを経由して子プロセスを実行します。
+command が配列の場合は、シェルを経由せずに子プロセスを実行します。
 #@else
-command �򥵥֥ץ������Ȥ��Ƽ¹Ԥ������Υץ�������ɸ��������
-�Ȥδ֤˥ѥ��ץ饤����Ω���ޤ���command �ϥ�������ͳ���Ƽ¹Ԥ���ޤ���
-���������ѥ��פ� [[c:IO]] ���֥������ȤȤ����֤��ޤ���
+command をサブプロセスとして実行し、そのプロセスの標準入出力
+との間にパイプラインを確立します。command はシェルを経由して実行されます。
+生成したパイプを [[c:IO]] オブジェクトとして返します。
 #@end
 
   p io = IO.popen("cat", "r+")  # => #<IO:0x401b75c8>
@@ -421,9 +421,9 @@ command �򥵥֥ץ������Ȥ��Ƽ¹Ԥ������Υץ�������ɸ��������
   io.close_write
   p io.gets                     # => "foo\n"
 
-�֥��å���Ϳ����줿������������ IO ���֥������Ȥ�����˥�
-���å���¹Ԥ������η�̤��֤��ޤ����֥��å��μ¹Ը塢���������ѥ�
-�פϼ�ưŪ�˥�����������ޤ���
+ブロックが与えられた場合は生成した IO オブジェクトを引数にブ
+ロックを実行し、その結果を返します。ブロックの実行後、生成したパイ
+プは自動的にクローズされます。
 
   p IO.popen("cat", "r+") {|io|
     io.puts "foo"
@@ -433,18 +433,18 @@ command �򥵥֥ץ������Ȥ��Ƽ¹Ԥ������Υץ�������ɸ��������
   # => "foo\n"
 
 #@since 1.9.1
-@param command ���ޥ��̾��ʸ��������ǻ��ꤷ�ޤ������󤬻��ꤵ�줿���ˤϡ�
-               ��������ͳ�����˻ҥץ�������¹Ԥ��ޤ���
+@param command コマンド名を文字列か配列で指定します。配列が指定された場合には、
+               シェルを経由せずに子プロセスを実行します。
 #@else
-@param command ���ޥ��̾��ʸ����ǻ��ꤷ�ޤ���
+@param command コマンド名を文字列で指定します。
 #@end
 
-@param mode �����ץ󤹤� IO �ݡ��ȤΥ⡼�ɤ���ꤷ�ޤ���mode �ξܺ٤� [[m:Kernel.#open]] ���Ȥ��Ʋ�������
+@param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 #@since 1.9.1
-@param opt ���󥳡��ǥ��󥰤ʤɤ����ꤹ�륪�ץ�������(see [[m:IO.new]])
+@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
 #@end
 
-@raise Errno::EXXX �ѥ��ס����뤤�ϻҥץ������������˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
 #@until 1.9.1
 --- popen("-", mode = "r")                -> IO
@@ -454,10 +454,10 @@ command �򥵥֥ץ������Ȥ��Ƽ¹Ԥ������Υץ�������ɸ��������
 --- popen("-", mode = "r", opt={}) {|io| ... }    -> object
 #@end
 
-��������ʸ���� "-" �����ꤵ�줿����[[man:fork(2)]] ��
-�Ԥ��ҥץ�������ɸ�������ϤȤδ֤˥ѥ��ץ饤����Ω���ޤ���
-�ƥץ������Ǥ� IO ���֥������Ȥ��֤����ҥץ������Ǥ�
-nil ���֤��ޤ���
+第一引数に文字列 "-" が指定された時、[[man:fork(2)]] を
+行い子プロセスの標準入出力との間にパイプラインを確立します。
+親プロセスでは IO オブジェクトを返し、子プロセスでは
+nil を返します。
 
   io = IO.popen("-", "r+")
   if io  # parent
@@ -470,10 +470,10 @@ nil ���֤��ޤ���
     exit
   end
   
-�֥��å���Ϳ����줿��硢�ƥץ������Ǥ��������� IO ���֥������Ȥ������
-�֥��å���¹Ԥ������η�̤��֤��ޤ����֥��å��μ¹Ը塢���������ѥ�
-�פϼ�ưŪ�˥�����������ޤ���
-�ҥץ������Ǥ� nil ������˥֥��å���¹Ԥ���λ���ޤ���  
+ブロックを与えられた場合、親プロセスでは生成した IO オブジェクトを引数に
+ブロックを実行し、その結果を返します。ブロックの実行後、生成したパイ
+プは自動的にクローズされます。
+子プロセスでは nil を引数にブロックを実行し終了します。  
 
   p IO.popen("-", "r+") {|io|
     if io   # parent
@@ -486,12 +486,12 @@ nil ���֤��ޤ���
   }
   # => "child output: foo\n"
 
-@param mode �����ץ󤹤� IO �ݡ��ȤΥ⡼�ɤ���ꤷ�ޤ���mode �ξܺ٤� [[m:Kernel.#open]] ���Ȥ��Ʋ�������
+@param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 #@since 1.9.1
-@param opt ���󥳡��ǥ��󥰤ʤɤ����ꤹ�륪�ץ�������(see [[m:IO.new]])
+@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
 #@end
 
-@raise Errno::EXXX �ѥ��ס����뤤�ϻҥץ������������˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
 #@since 1.8.0
 #@since 1.9.1
@@ -502,58 +502,58 @@ nil ���֤��ޤ���
 --- read(path, length = nil, offset = 0)     -> String | nil
 #@end
 
-path �ǻ��ꤵ�줿�ե������ offset ���֤���
-length �Х���ʬ�ɤ߹�����֤��ޤ���
+path で指定されたファイルを offset 位置から
+length バイト分読み込んで返します。
 
-���� EOF ��ã���Ƥ������ nil ���֤��ޤ�����������length �� nil �� 0 �����ꤵ��Ƥ�����ϡ���ʸ���� "" ���֤��ޤ����㤨�С�IO.read(���ե�����) �� "" ���֤��ޤ���
+既に EOF に達している場合は nil を返します。ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。例えば、IO.read(空ファイル) は "" を返します。
 
 #@since 1.9.1
-���� length �����ꤵ�줿���ϥХ��ʥ��ɤ߹��ߥ᥽�åɡ������Ǥʤ����ϥƥ������ɤ߹��ߥ᥽�åɤȤ���
-ư��ޤ���
+引数 length が指定された場合はバイナリ読み込みメソッド、そうでない場合はテキスト読み込みメソッドとして
+動作します。
 #@end
 
-[[m:Kernel.#open]] ��Ʊ�� path ����Ƭ�� "|" �ʤ�С�"|" ��³�����ޥ�ɤν��Ϥ��ɤ߼��ޤ���
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
-@param path �ե�����̾��ɽ��ʸ���� "|���ޥ��̾" ����ꤷ�ޤ���
+@param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
-@param length �ɤ߹���Ĺ���������ǻ��ꤷ�ޤ���nil �Ǥ��뤫��ά�������ˤϡ�EOF �ޤ��ɤ߹��ߤޤ���
+@param length 読み込む長さを整数で指定します。nil であるか省略した場合には、EOF まで読み込みます。
 
-@param offset �ɤ߹��ߤ�Ϥ�륪�ե��åȤ������ǻ��ꤷ�ޤ���
+@param offset 読み込みを始めるオフセットを整数で指定します。
 
 #@since 1.9.1
-@param opt �ե����� path �� open ������˻Ȥ��륪�ץ����� Hash �ǻ��ꤷ�ޤ���
+@param opt ファイル path を open する時に使われるオプションを Hash で指定します。
 #@end
 
-@raise Errno::EXXX path �Υ����ץ�offset ���֤ؤ����ꡢ�ե�������ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX path のオープン、offset 位置への設定、ファイルの読み込みに失敗した場合に発生します。
 
-@raise ArgumentError length ����ξ���ȯ�����ޤ���
+@raise ArgumentError length が負の場合に発生します。
 
 #@since 1.9.1
-���� opt ��ͭ���ʥ������ͤϰʲ��ΤȤ���Ǥ���
-�����Ϥ������ Symbol ���֥������ȤǤ���
+引数 opt で有効なキーと値は以下のとおりです。
+キーはいずれも Symbol オブジェクトです。
 
 : :encoding
   
-  �ɤ߹����ʸ����Υ��󥳡��ǥ��󥰤���ꤷ�ޤ���
-  �ɤ߹���Ĺ������ꤷ�����Ϥ����̵�뤵��ޤ���
+  読み込んだ文字列のエンコーディングを指定します。
+  読み込む長さを指定した場合はこれは無視されます。
 
 : :mode
   
-  [[m:IO.open]] �Υ⡼�ɤ���ꤷ�ޤ���
-  "r" �ǻϤޤ�ʸ����Ǥ���ɬ�פ�����ޤ���
+  [[m:IO.open]] のモードを指定します。
+  "r" で始まる文字列である必要があります。
 
 : :open_args
   
-  [[m:IO.open]] ���Ϥ�������������ǻ��ꤷ�ޤ���
+  [[m:IO.open]] に渡される引数を配列で指定します。
 
-������¾�� :external_encoding �ʤ�
-[[m:IO.open]] �Υ��ץ�������������Ǥ��ޤ���
+これらの他、 :external_encoding など
+[[m:IO.open]] のオプション引数が指定できます。
 
 @see [[m:IO.binread]]
 
 #@end
 
-��:
+例:
 
   IO.read(empty_file)             #=> ""
   IO.read(empty_file, 1)          #=> nil
@@ -565,53 +565,53 @@ length �Х���ʬ�ɤ߹�����֤��ޤ���
 
 #@since 1.9.1
 --- binread(path, length = nil, offset = 0)     -> String | nil
-path �ǻ��ꤷ���ե������ open ����offset �ν�ޤ� seek ����
-length �Х����ɤ߹��ߤޤ���
+path で指定したファイルを open し、offset の所まで seek し、
+length バイト読み込みます。
 
-length ���ά����ȥե�����������ޤ��ɤ߹��ߤޤ���
+length を省略するとファイルの末尾まで読み込みます。
 
-�ե�����򳫤��Ȥ��� mode �� "rb:ASCII-8BIT" �Ǥ���
+ファイルを開くときの mode は "rb:ASCII-8BIT" です。
 
 @see [[m:IO.read]]
 #@end
 
 --- readlines(path, rs = $/)    -> [String]
 
-path �ǻ��ꤵ�줿�ե�����������ɤ߹���ǡ����γƹԤ����ǤȤ��Ƥ��������֤��ޤ���
+path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
-���� EOF ��ã���Ƥ���ж����� [] ���֤��ޤ���
-[[m:Kernel.#open]] ��Ʊ�� path ����Ƭ�� "|" �ʤ�С�"|" ��³�����ޥ�ɤν��Ϥ��ɤ߼��ޤ���
+既に EOF に達していれば空配列 [] を返します。
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
-@param path �ե�����̾��ɽ��ʸ���� "|���ޥ��̾" ����ꤷ�ޤ���
+@param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ�����ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise Errno::EXXX path �Υ����ץ󡢥ե�������ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
 
 --- select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
 
-[[man:select(2)]] ��¹Ԥ��ޤ���
+[[man:select(2)]] を実行します。
 
-Ϳ����줿����/����/�㳰�Ԥ���  IO ���֥������Ȥ��椫��������Ǥ�����Τ�
-���줾������ˤ��ơ����������Ȥ����֤��ޤ���
-�����ॢ���Ȥ������ˤ� nil ���֤��ޤ���
+与えられた入力/出力/例外待ちの  IO オブジェクトの中から準備ができたものを
+それぞれ配列にして、配列の配列として返します。
+タイムアウトした時には nil を返します。
 
-[[m:Kernel.#select]] ��Ʊ���Ǥ���
+[[m:Kernel.#select]] と同じです。
 
-@param reads �����Ԥ����� [[c:IO]] ���֥������Ȥ�������Ϥ��ޤ���
+@param reads 入力待ちする [[c:IO]] オブジェクトの配列を渡します。
 
-@param writes �����Ԥ����� [[c:IO]] ���֥������Ȥ�������Ϥ��ޤ���
+@param writes 出力待ちする [[c:IO]] オブジェクトの配列を渡します。
 
-@param excepts �㳰�Ԥ����� [[c:IO]] ���֥������Ȥ�������Ϥ��ޤ���
+@param excepts 例外待ちする [[c:IO]] オブジェクトの配列を渡します。
 
-@param timeout �����ॢ���ȤޤǤλ��֤�ɽ�����ͤޤ��� nil ����ꤷ�ޤ������ͤǻ��ꤷ���Ȥ���ñ�̤��äǤ���nil ����ꤷ�����ˤ� IO ���ɤ줫�ҤȤĥ�ǥ����֤ˤʤ�ޤ��Ԥ�³���ޤ���
+@param timeout タイムアウトまでの時間を表す数値または nil を指定します。数値で指定したときの単位は秒です。nil を指定した時には IO がどれかひとつレディ状態になるまで待ち続けます。
 
-@raise IOError Ϳ����줿 IO ���֥������Ȥ��Ĥ����Ƥ�������ȯ�����ޤ���
+@raise IOError 与えられた IO オブジェクトが閉じられていた時に発生します。
 
-@raise Errno::EXXX [[man:select(2)]] �˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX [[man:select(2)]] に失敗した場合に発生します。
 
  rp, wp = IO.pipe
  mesg = "ping "
@@ -635,20 +635,20 @@ path �ǻ��ꤵ�줿�ե�����������ɤ߹���ǡ����γƹԤ����ǤȤ��Ƥ��������֤��ޤ
 #@if (version >="1.8.0")
 --- sysopen(path, mode = "r", perm = 0666)     -> Integer
 
-path �ǻ��ꤵ���ե�����򥪡��ץ󤷡��ե����뵭�һҤ��֤���
-����
+path で指定されるファイルをオープンし、ファイル記述子を返しま
+す。
 
-[[m:IO.for_fd]] �ʤɤ� IO ���֥������Ȥˤ��ʤ��¤ꡢ���Υ᥽��
-�ɤǥ����ץ󤷤��ե�����򥯥�����������ʤϤ���ޤ���
+[[m:IO.for_fd]] などで IO オブジェクトにしない限り、このメソッ
+ドでオープンしたファイルをクローズする手段はありません。
 
-@param path �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param path ファイル名を表す文字列を指定します。
 
-@param mode �⡼�ɤ�ʸ��������������¤ǻ��ꤷ�ޤ���[[m:Kernel.#open]] ��Ʊ���Ǥ���
+@param mode モードを文字列か定数の論理和で指定します。[[m:Kernel.#open]] と同じです。
 
-@param perm [[man:open(2)]] ���� 3 �����Τ褦�ˡ��ե�����������������
-            �ե�����Υѡ��ߥå����������ǻ��ꤷ�ޤ���[[m:Kernel.#open]] ��Ʊ���Ǥ���
+@param perm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合の
+            ファイルのパーミッションを整数で指定します。[[m:Kernel.#open]] と同じです。
 
-@raise Errno::EXXX �ե�����Υ����ץ�˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
 @see [[m:Kernel.#open]]
 
@@ -656,37 +656,37 @@ path �ǻ��ꤵ���ե�����򥪡��ץ󤷡��ե����뵭�һҤ��֤���
 
 #@since 1.9.3
 --- write(path, string, offset=nil, opt={}) -> Integer
-path �ǻ��ꤵ���ե�����򳫤���string ��񤭹��ߡ�
-�Ĥ��ޤ���
+path で指定されるファイルを開き、string を書き込み、
+閉じます。
 
-offset ����ꤹ��Ȥ��ΰ��֤ޤǥ��������ޤ���
+offset を指定するとその位置までシークします。
 
-offset ����ꤷ�ʤ��ȡ��񤭹��ߤ������ǥե������
-�ڤ�ΤƤޤ���
+offset を指定しないと、書き込みの末尾でファイルを
+切り捨てます。
 
-�����Ǹ�Υϥå���ϥե�����򳫤��Ȥ��˻Ȥ��ޤ���
-���󥳡��ǥ��󥰤ʤɤ���ꤹ�뤳�Ȥ��Ǥ��ޤ���
-�ܤ����� [[m:IO.open]] �򸫤Ƥ���������
+引数最後のハッシュはファイルを開くときに使われます。
+エンコーディングなどを指定することができます。
+詳しくは [[m:IO.open]] を見てください。
 
-@param path �ե�����̾ʸ����
-@param string �񤭹���ʸ����
-@param offset �񤭹��߳��ϰ���
-@param opt �ե�����򳫤��Ȥ��Υ��ץ�������
+@param path ファイル名文字列
+@param string 書き込む文字列
+@param offset 書き込み開始位置
+@param opt ファイルを開くときのオプション引数
 
 @see [[m:IO.binwrite]]
 
 --- binwrite(path, string, offset=nil) -> Integer
-path �ǻ��ꤵ���ե�����򳫤���string ��񤭹��ߡ�
-�Ĥ��ޤ���
+path で指定されるファイルを開き、string を書き込み、
+閉じます。
 
-offset ����ꤹ��Ȥ��ΰ��֤ޤǥ��������ޤ���
+offset を指定するとその位置までシークします。
 
-offset ����ꤷ�ʤ��ȡ��񤭹��ߤ������ǥե������
-�ڤ�ΤƤޤ���
+offset を指定しないと、書き込みの末尾でファイルを
+切り捨てます。
 
-@param path �ե�����̾ʸ����
-@param string �񤭹���ʸ����
-@param offset �񤭹��߳��ϰ���
+@param path ファイル名文字列
+@param string 書き込む文字列
+@param offset 書き込み開始位置
 
 @see [[m:IO.write]]
 
@@ -696,73 +696,73 @@ offset ����ꤷ�ʤ��ȡ��񤭹��ߤ������ǥե������
 
 --- <<(object)    -> self
 
-object ����Ϥ��ޤ���object ��ʸ����Ǥʤ����ˤϥ᥽��
-�� to_s ���Ѥ���ʸ������Ѵ����ޤ���
+object を出力します。object が文字列でない時にはメソッ
+ド to_s を用いて文字列に変換します。
 
-�ʲ��Τ褦�� << ��Ϣ����Ȥ����Ȥ��Ǥ��ޤ���
+以下のような << の連鎖を使うことができます。
 
   STDOUT << 1 << " is a " << Fixnum << "\n"
 
-@param object ���Ϥ��������֥������Ȥ�Ϳ���ޤ���
+@param object 出力したいオブジェクトを与えます。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- binmode    -> self
 
-���ȥ꡼���Х��ʥ�⡼�ɤˤ��ޤ���MSDOS �ʤɥХ��ʥ�⡼�ɤ�¸��
-���� OS �ǤΤ�ͭ���Ǥ��������Ǥʤ���礳�Υ᥽�åɤϲ��⤷�ޤ���
+ストリームをバイナリモードにします。MSDOS などバイナリモードの存在
+する OS でのみ有効です。そうでない場合このメソッドは何もしません。
 
-�Х��ʥ�⡼�ɤ����̾�Υ⡼�ɤ��᤹��ˡ�Ϻƥ����ץ󤷤�����ޤ���
+バイナリモードから通常のモードに戻す方法は再オープンしかありません。
 
-@raise Errno::EXXX �⡼�ɤ��ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
 --- clone    -> IO
 --- dup      -> IO
 
-�쥷���Ф�Ʊ�� IO �򻲾Ȥ��뿷���� IO ���֥������Ȥ��֤��ޤ���
-���Ȥ��Ƥ���ե����뵭�һҤ� [[man:dup(2)]] ����ޤ���
+レシーバと同じ IO を参照する新しい IO オブジェクトを返します。
+参照しているファイル記述子は [[man:dup(2)]] されます。
 
-clone �κݤ� self �ϰ�ö [[m:IO#flush]] ����ޤ���
-�ե꡼������ IO �� clone ��Ʊ�ͤ˥ե꡼�����줿 IO ���֤��ޤ�����
-dup �����Ƥ��������ե꡼������Ƥ��ʤ� IO ���֤��ޤ���
+clone の際に self は一旦 [[m:IO#flush]] されます。
+フリーズした IO の clone は同様にフリーズされた IO を返しますが、
+dup は内容の等しいフリーズされていない IO を返します。
 
-@raise IOError ���� close ����Ƥ�������ȯ�����ޤ��� 
+@raise IOError 既に close されていた場合に発生します。 
 
 --- close    -> nil
 
-�����ϥݡ��Ȥ򥯥��������ޤ���
+入出力ポートをクローズします。
 
-�ʸ夳�Υݡ��Ȥ��Ф��������Ϥ�Ԥ����㳰 [[c:IOError]] ��ȯ������
-���������١������쥯�Ȥκݤˤϥ�����������Ƥ��ʤ� IO �ݡ��Ȥϥ�����
-������ޤ���
-#@# [[unknown:Traps:close��GC�ˤޤ�����|trap::IO]]
-self ���ѥ��פǥץ������ˤĤʤ��äƤ���С����Υץ������ν�
-λ���Ԥ���碌�ޤ���
+以後このポートに対して入出力を行うと例外 [[c:IOError]] が発生しま
+す。ガーベージコレクトの際にはクローズされていない IO ポートはクロー
+ズされます。
+#@# [[unknown:Traps:closeをGCにまかせる|trap::IO]]
+self がパイプでプロセスにつながっていれば、そのプロセスの終
+了を待ち合わせます。
 
-@raise Errno::EXXX close �˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX close に失敗した場合に発生します。
 
-@raise IOError ���� close ����Ƥ�������ȯ�����ޤ���
+@raise IOError 既に close されていた場合に発生します。
 
 --- close_read    -> nil
 
-�ɤ߹����Ѥ� IO �� close ���ޤ�����˥ѥ��פ��ɤ߽�ξ�Ѥ˺�����
-�� IO ���֥������Ȥǻ��Ѥ��ޤ���
+読み込み用の IO を close します。主にパイプや読み書き両用に作成し
+た IO オブジェクトで使用します。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX close �˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX close に失敗した場合に発生します。
 
 --- close_write    -> nil
 
-�񤭹����Ѥ� IO �� close ���ޤ���
+書き込み用の IO を close します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX close �˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX close に失敗した場合に発生します。
 
 --- closed?    -> bool
 
-�ݡ��Ȥ�������������Ƥ�����˿����֤��ޤ���
+ポートがクローズされている時に真を返します。
 
 --- each(rs = $/) {|line| ... }         -> self
 #@since 1.9.1
@@ -801,29 +801,29 @@ self ���ѥ��פǥץ������ˤĤʤ��äƤ���С����Υץ������ν�
 --- lines(rs, limit)                    -> Enumerator
 #@end
 
-IO �θ��߰��֤��� 1 �Ԥ���ʸ����Ȥ����ɤ߹��ߡ����������Ȥ���
-Ϳ����줿�֥��å���¹Ԥ��ޤ���
+IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
+与えられたブロックを実行します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ�����������
+ブロックが与えられなかった場合は、自身から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
-          ��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 #@since 1.9.1
-@param limit ������ɤ߹��ߥХ��ȿ�
+@param limit 最大の読み込みバイト数
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @see [[m:$/]], [[m:IO#gets]]
 
@@ -836,122 +836,122 @@ IO �θ��߰��֤��� 1 �Ԥ���ʸ����Ȥ����ɤ߹��ߡ����������Ȥ���
 #@end
 #@end
 
-IO �θ��߰��֤��� 1 �Х��Ȥ����ɤ߹��ߡ�����������Ȥ���Ϳ�����֥��å���¹Ԥ��ޤ���
+IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ�����������
+ブロックが与えられなかった場合は、自身から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
 #@since 1.9.1
-�Х��ʥ��ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+バイナリ読み込みメソッドとして動作します。
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- eof     -> bool
 --- eof?    -> bool
 
-���ȥ꡼�ब�ե�����ν�ü��ã������硢true ���֤��ޤ��������Ǥʤ���硢false ���֤��ޤ���
+ストリームがファイルの終端に達した場合、true を返します。そうでない場合、false を返します。
 
    f = File.new("testfile")
    dummy = f.readlines
    f.eof   #=> true
 
-���Ȥ��ѥ��פ䥽���åȤʤɤΥ��ȥ꡼��Ǥ��ä���硢��꤬�ǡ��������뤫 close ����ޤǥ֥��å����ޤ���
+自身がパイプやソケットなどのストリームであった場合、相手がデータを送るか close するまでブロックします。
 
    r, w = IO.pipe
    Thread.new { sleep 10; w.close }
-   r.eof?  #=> 10�å֥��å����Ƥ��� true ���֤���
+   r.eof?  #=> 10秒ブロックしてから true を返す。
 
    r, w = IO.pipe
    Thread.new { sleep 10; w.puts "a" }
-   r.eof?  #=> 10�å֥��å����Ƥ��� true ���֤���
+   r.eof?  #=> 10秒ブロックしてから true を返す。
 
    r, w = IO.pipe
-   r.eof?  # �ʵפ˥֥��å����ޤ���
+   r.eof?  # 永久にブロックします。
 
-eof, eof? �����ϥХåե��˥ǡ������ɤ߹���Τǡ�[[m:IO#sysread]] ��Ʊ���˻Ȥ��������
-ư��ޤ���
+eof, eof? は入力バッファにデータを読み込むので、[[m:IO#sysread]] と同時に使うと正常に
+動作しません。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- fcntl(cmd, arg = 0)    -> Integer
 
-IO���Ф��ƥ����ƥॳ���� fcntl ��¹Ԥ��ޤ���
-��ǽ�ξܺ٤� [[man:fcntl(2)]] �򻲾Ȥ��Ƥ���������
-fcntl(2) ���֤����������֤��ޤ���
+IOに対してシステムコール fcntl を実行します。
+機能の詳細は [[man:fcntl(2)]] を参照してください。
+fcntl(2) が返した整数を返します。
 
-@param cmd IO ���Ф��륳�ޥ�ɤ�ź�ե饤�֥�� [[lib:fcntl]] ���󶡤��Ƥ�������ǻ��ꤷ�ޤ���
+@param cmd IO に対するコマンドを、添付ライブラリ [[lib:fcntl]] が提供している定数で指定します。
 
-@param arg cmd ���Ф��������������ʸ����boolean�Τ����줫�ǻ��ꤷ�ޤ���
-           �����λ��ˤϤ����ͤ� [[man:fcntl(2)]] ���Ϥ��ޤ���
-           ʸ����ξ��ˤ� Array#pack ������¤�Τ��Ȥߤʤ����Ϥ��ޤ���
-           arg �� nil �� false �ξ��ˤ� 0��true �ξ��ˤ� 1 ���Ϥ��ޤ���
+@param arg cmd に対する引数を整数、文字列、booleanのいずれかで指定します。
+           整数の時にはその値を [[man:fcntl(2)]] に渡します。
+           文字列の場合には Array#pack した構造体だとみなして渡します。
+           arg が nil か false の場合には 0を、true の場合には 1 を渡します。
 
-@raise Errno::EXXX fcntl �μ¹Ԥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 #@since 1.8.0
 --- fsync    -> 0 | nil
 
-�񤭹����Ѥ� IO ���Ф��ơ������ƥॳ���� [[man:fsync(2)]]
-��¹Ԥ��ޤ���[[m:IO#flush]] ��Ԥä����ȡ�(OS��٥��)�ޤ��ǥ�������
-�񤭹��ޤ�Ƥ��ʤ������ˤ���ǡ�����ǥ������˽񤭽Ф��ޤ���
+書き込み用の IO に対して、システムコール [[man:fsync(2)]]
+を実行します。[[m:IO#flush]] を行ったあと、(OSレベルで)まだディスクに
+書き込まれていないメモリ上にあるデータをディスクに書き出します。
 
-��������� 0 ���֤��ޤ���
-[[man:fsync(2)]] �����ݡ��Ȥ���Ƥ��ʤ����� nil ���֤��ޤ���
+成功すれば 0 を返します。
+[[man:fsync(2)]] がサポートされていない場合は nil を返します。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 #@end
 
 --- fileno    -> Integer
 --- to_i      -> Integer
 
-�ե����뵭�һҤ�ɽ���������֤��ޤ���
+ファイル記述子を表す整数を返します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 --- flush    -> self
 
-IO �ݡ��Ȥ������Хåե���ե�å��夷�ޤ���
+IO ポートの内部バッファをフラッシュします。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX [[man:fflush(3)]] �����Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX [[man:fflush(3)]] が失敗した場合に発生します。
 
 #@since 1.9.1
 --- getc    -> String | nil
 
-IO �ݡ��Ȥ��鳰�����󥳡��ǥ��󥰤˽��� 1 ʸ���ɤ߹�����֤��ޤ���
-EOF ����ã�������ˤ� nil ���֤��ޤ���
+IO ポートから外部エンコーディングに従い 1 文字読み込んで返します。
+EOF に到達した時には nil を返します。
 
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
-[[m:IO#readchar]] �Ȥΰ㤤�� EOF �Ǥο����񤤤ΤߤǤ���
+テキスト読み込みメソッドとして動作します。
+[[m:IO#readchar]] との違いは EOF での振る舞いのみです。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-��:
+例:
 
 
 @see [[m:IO#readchar]]
 #@else
 --- getc    -> Integer | nil
 
-IO �ݡ��Ȥ��� 1 ʸ���ɤ߹���ǡ�����ʸ�����б����� [[c:Fixnum]] ��
-�֤��ޤ���EOF ����ã�������ˤ� nil ���֤��ޤ���
+IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
+返します。EOF に到達した時には nil を返します。
 
-[[m:IO#readchar]] �Ȥΰ㤤�� EOF �Ǥο����񤤤ΤߤǤ���
+[[m:IO#readchar]] との違いは EOF での振る舞いのみです。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
    f = File.new("testfile")
    f.getc                   #=> 84
@@ -968,29 +968,29 @@ IO �ݡ��Ȥ��� 1 ʸ���ɤ߹���ǡ�����ʸ�����б����� [[c:Fixnum]] ��
 --- gets(rs = $/)    -> String | nil
 #@end
 
-����ɤ߹���ǡ��ɤ߹��ߤ������������ˤϤ���ʸ������֤��ޤ���
-EOF ����ã�������ˤ� nil ���֤��ޤ���
+一行読み込んで、読み込みに成功した時にはその文字列を返します。
+EOF に到達した時には nil を返します。
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
-�ɤ߹����ʸ������ѿ� [[m:$_]] �˥��åȤ��ޤ���
-[[m:IO#readline]] �Ȥΰ㤤�� EOF �Ǥο����񤤤ΤߤǤ���
+読み込んだ文字列を変数 [[m:$_]] にセットします。
+[[m:IO#readline]] との違いは EOF での振る舞いのみです。
 
 #@since 1.9.1
-limit �Ǻ�����ɤ߹��ߥХ��ȿ�����ꤷ�ޤ���������
-�ե�����Υ��󥳡��ǥ��󥰤��ޥ���Х��ȥ��󥳡��ǥ��󥰤Ǥ�����ˤ�
-�ɤ߹����ʸ���󤬥ޥ���Х���ʸ����������ڤ�ʤ��褦��
-���Х���;ʬ���ɤ߹����礬����ޤ���
+limit で最大の読み込みバイト数を指定します。ただし
+ファイルのエンコーディングがマルチバイトエンコーディングである場合には
+読み込んだ文字列がマルチバイト文字の途中で切れないように
+数バイト余分に読み込む場合があります。
 #@end
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
-          ��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 #@since 1.9.1
-@param limit ������ɤ߹��ߥХ��ȿ�
+@param limit 最大の読み込みバイト数
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
    f = File.new("oneline_file")
    f.gets                          #=> "This is line one\n"
@@ -1002,30 +1002,30 @@ limit �Ǻ�����ɤ߹��ߥХ��ȿ�����ꤷ�ޤ���������
 
 --- ioctl(cmd, arg = 0)    -> Integer
 
-IO ���Ф��ƥ����ƥॳ���� ioctl ��¹Ԥ������η�̤��֤��ޤ���
-��ǽ�ξܺ٤� [[man:ioctl(2)]] �򻲾Ȥ��Ƥ���������
+IO に対してシステムコール ioctl を実行し、その結果を返します。
+機能の詳細は [[man:ioctl(2)]] を参照してください。
 
-@param cmd IO ���Ф��륳�ޥ�ɤ������ǻ��ꤷ�ޤ����ɤΤ褦�ʥ��ޥ�ɤ��Ȥ��뤫�ϥץ�åȥե�����˰�¸���ޤ���
+@param cmd IO に対するコマンドを整数で指定します。どのようなコマンドが使えるかはプラットフォームに依存します。
 
-@param arg cmd ���Ф����������ꤷ�ޤ��������λ��ˤϤ����ͤ� ioctl ���Ϥ��ޤ���
-           ʸ����ξ��ˤ� [[m:Array#pack]] ������¤�Τ��Ȥߤʤ����Ϥ��ޤ���
-           arg �� nil �� false �ξ��ˤ� 0��true �ξ��ˤ� 1 ���Ϥ��ޤ���
+@param arg cmd に対する引数を指定します。整数の時にはその値を ioctl に渡します。
+           文字列の場合には [[m:Array#pack]] した構造体だとみなして渡します。
+           arg が nil か false の場合には 0を、true の場合には 1 を渡します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 --- isatty    -> bool
 --- tty?      -> bool
 
-�����ϥݡ��Ȥ�tty�˷�礷�Ƥ�����������֤��ޤ��������Ǥʤ���� false ���֤��ޤ���
+入出力ポートがttyに結合している時、真を返します。そうでない場合 false を返します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 --- lineno    -> Integer
 
-���ߤι��ֹ���������֤��ޤ����ºݤˤ� [[m:IO#gets]] ���ƤФ줿����Ǥ���
-���԰ʳ��Υ��ѥ졼���� gets ���ƤФ줿���ʤɡ��ºݤι��ֹ�Ȱۤʤ��礬����ޤ���
+現在の行番号を整数で返します。実際には [[m:IO#gets]] が呼ばれた回数です。
+改行以外のセパレータで gets が呼ばれた場合など、実際の行番号と異なる場合があります。
 
-@raise IOError �ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 読み込み用にオープンされていなければ発生します。
 
   f = File.new("testfile")
   f.lineno                 #=> 0
@@ -1038,11 +1038,11 @@ IO ���Ф��ƥ����ƥॳ���� ioctl ��¹Ԥ������η�̤��֤��ޤ���
 
 --- lineno=(number)
 
-���ߤι��ֹ�� number �˥��åȤ��ޤ��� [[m:$.]] �ϼ�����ɤ߹��ߤλ��˹�������ޤ���
+現在の行番号を number にセットします。 [[m:$.]] は次回の読み込みの時に更新されます。
 
-@param number ���ֹ�������ǻ��ꤷ�ޤ���
+@param number 行番号を整数で指定します。
 
-@raise IOError �ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 読み込み用にオープンされていなければ発生します。
 
   f = File.new("testfile")
   f.gets                     #=> "This is line one\n"
@@ -1057,79 +1057,79 @@ IO ���Ф��ƥ����ƥॳ���� ioctl ��¹Ԥ������η�̤��֤��ޤ���
 
 --- pid    -> Integer | nil
 
-���Ȥ� [[m:IO.popen]] �Ǻ��줿IO�ݡ��Ȥʤ顢�ҥץ������Υץ����� ID ��
-�֤��ޤ�������ʳ��� nil ���֤��ޤ���
+自身が [[m:IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
+返します。それ以外は nil を返します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 --- pos    -> Integer
 --- tell   -> Integer
 
-�ե�����ݥ��󥿤θ��ߤΰ��֤��������֤��ޤ���
+ファイルポインタの現在の位置を整数で返します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 --- pos=(n)
 
-�ե�����ݥ��󥿤������֤˰�ư���ޤ���
-[[m:IO#seek]](n, IO::SEEK_SET) ��Ʊ���Ǥ���
+ファイルポインタを指定位置に移動します。
+[[m:IO#seek]](n, IO::SEEK_SET) と同じです。
 
-@param n ��Ƭ����Υ��ե��åȤ������ǻ��ꤷ�ޤ���
+@param n 先頭からのオフセットを整数で指定します。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
 --- print(*arg)    -> nil
 
-������ IO �ݡ��Ȥ˽�˽��Ϥ��ޤ����������ά�������ϡ�[[m:$_]] ����Ϥ��ޤ���
+引数を IO ポートに順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
 
-@param arg [[m:Kernel.#print]] ��Ʊ���Ǥ���
+@param arg [[m:Kernel.#print]] と同じです。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- printf(format, *arg)    -> nil
 
-C ����� printf ��Ʊ���褦�ˡ�format �˽�������
-��ʸ������Ѵ����ơ�self �˽��Ϥ��ޤ���
+C 言語の printf と同じように、format に従い引数
+を文字列に変換して、self に出力します。
 
-�������� IO �����Ǥ��ʤ����ȡ��������ά�Ǥ��ʤ����Ȥ������ [[m:Kernel.#printf]] ��Ʊ���Ǥ���
+第一引数に IO を指定できないこと、引数を省略できないことを除けば [[m:Kernel.#printf]] と同じです。
 
-@param format [[m:Kernel.#printf]] ��Ʊ���Ǥ���[[d:print_format]] �򻲾Ȥ��Ƥ���������
+@param format [[m:Kernel.#printf]] と同じです。[[d:print_format]] を参照してください。
 
-@param arg [[m:Kernel.#printf]] ��Ʊ���Ǥ���
+@param arg [[m:Kernel.#printf]] と同じです。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 @see [[m:Kernel.#printf]]
 
 --- putc(ch)    -> object
 
-ʸ�� ch �� self �˽��Ϥ��ޤ���
-�����ΰ����� [[m:Kernel.#putc]] ��Ʊ���Ǥ����ܺ٤Ϥ�����򻲾Ȥ�
-�Ƥ���������ch ���֤��ޤ���
+文字 ch を self に出力します。
+引数の扱いは [[m:Kernel.#putc]] と同じです。詳細はこちらを参照し
+てください。ch を返します。
 
-@param ch ���Ϥ�����ʸ����ʸ����ʸ��������(����)��Ϳ���ޤ���
+@param ch 出力したい文字を、文字列か文字コード(整数)で与えます。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 @see [[m:Kernel.#putc]]
 
 --- puts(*obj)    -> nil
 
-�� obj �� self �˽��Ϥ������줾��θ�˲��Ԥ���Ϥ��ޤ���
-�����ΰ����� [[m:Kernel.#puts]] ��Ʊ���Ǥ����ܺ٤Ϥ�����򻲾Ȥ�
-�Ƥ���������
+各 obj を self に出力し、それぞれの後に改行を出力します。
+引数の扱いは [[m:Kernel.#puts]] と同じです。詳細はこちらを参照し
+てください。
 
-@param obj ���Ϥ��������֥������Ȥ���ꤷ�ޤ���[[m:Kernel.#puts]] ��Ʊ���Ǥ���
+@param obj 出力したいオブジェクトを指定します。[[m:Kernel.#puts]] と同じです。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
      $stdout.puts("this", "is", "a", "test", [1, [nil, 3]])
      
@@ -1150,41 +1150,41 @@ C ����� printf ��Ʊ���褦�ˡ�format �˽�������
 --- read(length = nil)            -> String | nil
 #@end
 
-length �Х����ɤ߹���ǡ�����ʸ������֤��ޤ���
+length バイト読み込んで、その文字列を返します。
 
 #@since 1.9.1
-���� length �����ꤵ�줿���ϥХ��ʥ��ɤ߹��ߥ᥽�åɡ������Ǥʤ����ϥƥ������ɤ߹��ߥ᥽�åɤȤ���
-ư��ޤ���
+引数 length が指定された場合はバイナリ読み込みメソッド、そうでない場合はテキスト読み込みメソッドとして
+動作します。
 #@end
-���� EOF ��ã���Ƥ���� nil ���֤��ޤ���
+既に EOF に達していれば nil を返します。
 #@since 1.9.1
-��������length �� nil �� 0 �����ꤵ��Ƥ�����ϡ���ʸ���� "" ���֤��ޤ���
+ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。
 #@else
-��������length �� nil �����ꤵ��Ƥ�����ϡ���ʸ���� "" ���֤��ޤ���
+ただし、length に nil が指定されている場合は、空文字列 "" を返します。
 #@end
-�㤨�С�open(���ե�����) {|f| f.read } �� "" �Ȥʤ�ޤ���
+例えば、open(空ファイル) {|f| f.read } は "" となります。
 
-@param length �ɤ߹��ॵ�����������ǻ��ꤷ�ޤ���
-              nil �����ꤵ�줿��硢EOF �ޤǤ����ƤΥǡ������ɤ߹���ǡ�����ʸ������֤��ޤ���
+@param length 読み込むサイズを整数で指定します。
+              nil が指定された場合、EOF までの全てのデータを読み込んで、その文字列を返します。
 
 #@since 1.8.0
-@param outbuf �����ѤΥХåե���ʸ����ǻ��ꤷ�ޤ���IO#read ���ɤ߹����
-              �ǡ����򤽤�ʸ���󥪥֥������Ȥ˾�񤭤����֤��ޤ������ꤷ
-              ��ʸ���󥪥֥������Ȥ����餫���� length Ĺ���ΰ�Ǥ���С�
-              ;�פʥ���γ����Ƥ��Ԥ��ޤ��󡣻��ꤷ��ʸ�����Ĺ����
-              length �Ȱۤʤ��硢����ʸ����ϰ�ö length Ĺ�˳�ĥ(����
-              ���Ͻ̾�)���줿���ȡ��ºݤ��ɤ߹�����ǡ����Υ������ˤʤ�ޤ���
+@param outbuf 出力用のバッファを文字列で指定します。IO#read は読み込んだ
+              データをその文字列オブジェクトに上書きして返します。指定し
+              た文字列オブジェクトがあらかじめ length 長の領域であれば、
+              余計なメモリの割当てが行われません。指定した文字列の長さが
+              length と異なる場合、その文字列は一旦 length 長に拡張(ある
+              いは縮小)されたあと、実際に読み込んだデータのサイズになります。
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX �ǡ������ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX データの読み込みに失敗した場合に発生します。
 
-@raise ArgumentError length ����ξ���ȯ�����ޤ���
+@raise ArgumentError length が負の場合に発生します。
 
 #@since 1.8.0              
-�����������ꤷ�� read �θƤӽФ��ǥǡ��������Ǥ��ä����
-(read �� nil ���֤����)��outbuf �϶�ʸ����ˤʤ�ޤ���
+第二引数を指定した read の呼び出しでデータが空であった場合
+(read が nil を返す場合)、outbuf は空文字列になります。
 
   outbuf = "x" * 20;
   io = File.open("/dev/null")
@@ -1201,27 +1201,27 @@ length �Х����ɤ߹���ǡ�����ʸ������֤��ޤ���
 #@end
 
 #@since 1.9.1
-IO �ݡ��Ȥ��� 1 ʸ���ɤ߹�����֤��ޤ���
+IO ポートから 1 文字読み込んで返します。
 #@else
-IO �ݡ��Ȥ��� 1 ʸ���ɤ߹���ǡ�����ʸ�����б����� [[c:Fixnum]] ��
-�֤��ޤ���
+IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
+返します。
 #@end
-EOF ����ã�������ˤ� EOFError ��ȯ�����ޤ���
+EOF に到達した時には EOFError が発生します。
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
-[[m:IO#getc]] �Ȥΰ㤤�� EOF �Ǥο����񤤤ΤߤǤ���
+[[m:IO#getc]] との違いは EOF での振る舞いのみです。
 
-@raise EOFError EOF ����ã��������ȯ�����ޤ���
+@raise EOFError EOF に到達した時に発生します。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 #@since 1.9.1
    f = File.new("testfile")
-   p f.readchar                   #=> "��"
-   p f.readchar                   #=> "��"
-   p f.readchar                   #=> "��"
+   p f.readchar                   #=> "い"
+   p f.readchar                   #=> "ろ"
+   p f.readchar                   #=> "は"
    f.read
    f.readchar                   #=> EOFError
 #@else
@@ -1236,19 +1236,19 @@ EOF ����ã�������ˤ� EOFError ��ȯ�����ޤ���
 
 --- readline(rs = $/)    -> String
 
-����ɤ߹���ǡ��ɤ߹��ߤ������������ˤϤ���ʸ������֤��ޤ���
-EOF ����ã�������ˤ� EOFError ��ȯ�����ޤ���
+一行読み込んで、読み込みに成功した時にはその文字列を返します。
+EOF に到達した時には EOFError が発生します。
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
-�ɤ߹����ʸ������ѿ� [[m:$_]] �˥��åȤ��ޤ���[[m:IO#gets]] �Ȥΰ㤤�� EOF �Ǥο����񤤤ΤߤǤ���
+読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#gets]] との違いは EOF での振る舞いのみです。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ�����ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise EOFError EOF ����ã��������ȯ�����ޤ���
+@raise EOFError EOF に到達した時に発生します。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
    f = File.new("oneline_file")
    f.readline                      #=> "This is line one\n"
@@ -1264,99 +1264,99 @@ EOF ����ã�������ˤ� EOFError ��ȯ�����ޤ���
 --- readlines(rs = $/, limit)    -> [String]
 #@end
 
-�ǡ����������ɤ߹���ǡ����γƹԤ����ǤȤ��Ƥ��������֤��ޤ���
-���� EOF ��ã���Ƥ���ж����� [] ���֤��ޤ���
+データを全て読み込んで、その各行を要素としてもつ配列を返します。
+既に EOF に達していれば空配列 [] を返します。
 
 #@since 1.9.1
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 #@end
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
-          ��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 #@since 1.9.1
-@param limit ������ɤ߹��ߥХ��ȿ�
+@param limit 最大の読み込みバイト数
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @see [[m:$/]], [[m:IO#gets]]
 
 #@since 1.8.5
 --- read_nonblock(maxlen, outbuf = "")    -> String
 
-IO ��Υ�֥��å��󥰥⡼�ɤ����ꤷ��
-���θ�� [[man:read(2)]] �����ƥॳ����ˤ��
-Ĺ�� maxlen ���¤Ȥ����ɤ߹��ߡ�ʸ����Ȥ����֤��ޤ���
-EAGAIN, EINTR �ʤɤ� [[c:Errno::EXXX]] �㳰�Ȥ��Ƹƽи�����𤵤�ޤ���
+IO をノンブロッキングモードに設定し、
+その後で [[man:read(2)]] システムコールにより
+長さ maxlen を上限として読み込み、文字列として返します。
+EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告されます。
 
 #@since 1.9.2
-ȯ�������㳰 ��Errno::EAGAIN�� Errno::EWOULDBLOCK �Ǥ�����ϡ�
-�����㳰���֥������Ȥ� [[m:IO::WaitReadable]] �� [[m:Object#extend]]
-����ޤ���
+発生した例外 がErrno::EAGAIN、 Errno::EWOULDBLOCK である場合は、
+その例外オブジェクトに [[m:IO::WaitReadable]] が [[m:Object#extend]]
+されます。
 #@end
 
-�ʤ����Хåե������Ǥʤ����ϡ�read_nonblock �ϥХåե������ɤ߹��ߤޤ������ξ�硢read(2) �����ƥॳ����ϸƤФ�ޤ���
+なお、バッファが空でない場合は、read_nonblock はバッファから読み込みます。この場合、read(2) システムコールは呼ばれません。
 
-���Υ᥽�åɤϥΥ�֥��å��󥰥⡼�ɤˤ������������ [[m:IO#readpartial]] ��
-Ʊ���Ǥ��뤳�Ȥ����դ��Ƥ���������
+このメソッドはノンブロッキングモードにする点を除いて [[m:IO#readpartial]] と
+同じであることに注意してください。
 
 #@since 1.9.1
-�Х��ʥ��ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+バイナリ読み込みメソッドとして動作します。
 #@end
-���� EOF ��ã���Ƥ���� EOFError ��ȯ�����ޤ�����������maxlen �� 0 �����ꤵ��Ƥ�����ϡ���ʸ���� "" ���֤��ޤ���
+既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定されている場合は、空文字列 "" を返します。
 
-@param maxlen �ɤ߹���Ĺ���ξ�¤������ǻ��ꤷ�ޤ���
+@param maxlen 読み込む長さの上限を整数で指定します。
 
-@param outbuf ʸ����ǻ��ꤷ�ޤ���IO#read_nonblock ���ɤ߹�����ǡ����� outbuf ���˲�Ū�˳�Ǽ����
-              �֤��ͤ� outbuf �Ȥʤ�ޤ���outbuf �ϰ�ö maxlen Ĺ�˳�ĥ(���뤤�Ͻ̾�)���줿���ȡ�
-              �ºݤ��ɤ߹�����ǡ����Υ������ˤʤ�ޤ���read(2) �����ƥॳ���뤬 0 ���֤������ϡ���ʸ����ˤʤ�ޤ���
+@param outbuf 文字列で指定します。IO#read_nonblock は読み込んだデータを outbuf に破壊的に格納し、
+              返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX read(2) �����ƥॳ����η�̤Ȥ��ƥ��顼������������ȯ�����ޤ���
+@raise Errno::EXXX read(2) システムコールの結果としてエラーが起きた場合に発生します。
 
-@raise EOFError read(2) �����ƥॳ���뤬 0 ���֤�������ȯ�����ޤ�������ϡ�IO ������ EOF ��ã���Ƥ��뤳�Ȥ��̣���ޤ���
+@raise EOFError read(2) システムコールが 0 を返した場合に発生します。これは、IO が既に EOF に達していることを意味します。
 
 #@end
 
 #@since 1.8.3
 --- readpartial(maxlen, outbuf = "")    -> String
 
-IO ����Ĺ�� maxlen ���¤Ȥ����ɤ߹��ߡ�ʸ����Ȥ����֤��ޤ���
-¨�¤�������ǡ�����¸�ߤ��ʤ��Ȥ��ˤϥ֥��å����ƥǡ�����������Ԥ��ޤ���
-¨�¤�������ǡ����� 1byte �Ǥ�¸�ߤ���Х֥��å����ޤ���
+IO から長さ maxlen を上限として読み込み、文字列として返します。
+即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちます。
+即座に得られるデータが 1byte でも存在すればブロックしません。
 
 #@since 1.9.1
-�Х��ʥ��ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+バイナリ読み込みメソッドとして動作します。
 #@end
-���� EOF ��ã���Ƥ���� EOFError ��ȯ�����ޤ���
-��������maxlen �� 0 �����ꤵ��Ƥ�����ϡ���ʸ���� "" ���֤��ޤ���
+既に EOF に達していれば EOFError が発生します。
+ただし、maxlen に 0 が指定されている場合は、空文字列 "" を返します。
 
-readpartial �ϥ֥��å���Ǿ��¤��ޤ��뤳�Ȥˤ�äơ�
-�ѥ��ס������åȡ�ü���ʤɤΥ��ȥ꡼����Ф���Ŭ�ڤ�ư���褦�߷פ���Ƥ��ޤ���
-readpartial ���֥��å�����Τϼ������Ƥξ�郎�������줿�Ȥ������Ǥ���
-  * IO ���֥���������ΥХåե�����
-  * ���ȥ꡼��˥ǡ��������夷�Ƥ��ʤ�
-  * ���ȥ꡼�ब EOF �ˤʤäƤ��ʤ�
-�����ξ�郎����������硢���餫�Υǡ��������夹�뤫 EOF �ˤʤ�ޤ� readpartial �ϥ֥��å����ޤ���
+readpartial はブロックを最小限に抑えることによって、
+パイプ、ソケット、端末などのストリームに対して適切に動作するよう設計されています。
+readpartial がブロックするのは次の全ての条件が満たされたときだけです。
+  * IO オブジェクト内のバッファが空
+  * ストリームにデータが到着していない
+  * ストリームが EOF になっていない
+これらの条件が満たされる場合、何らかのデータが到着するか EOF になるまで readpartial はブロックします。
 
-readpartial �η�̤ϰʲ��Τ褦�ˤʤ�ޤ���
-  (1) �Хåե������Ǥʤ���С����ΥХåե��Υǡ������ɤ߹�����֤��ޤ���
-  (2) ���ȥ꡼��˥ǡ���������С����ȥ꡼�फ��ǡ������ɤ߹�����֤��ޤ���
-  (3) ���ȥ꡼�ब EOF �ˤʤäƤ���С��㳰 [[c:EOFError]] ��ȯ�������ޤ���
+readpartial の結果は以下のようになります。
+  (1) バッファが空でなければ、そのバッファのデータを読み込んで返します。
+  (2) ストリームにデータがあれば、ストリームからデータを読み込んで返します。
+  (3) ストリームが EOF になっていれば、例外 [[c:EOFError]] を発生させます。
 
-�㤨�С��ѥ��פ��Ф��Ƥϼ��Τ褦��ư��ޤ���
+例えば、パイプに対しては次のように動作します。
 
   r, w = IO.pipe           #               buffer          pipe content
   w << "abc"               #               ""              "abc".
   r.readpartial(4096)      #=> "abc"       ""              ""
-  r.readpartial(4096)      # �Хåե��ˤ�ѥ��פˤ�ǡ������ʤ��Τǥ֥��å�����
+  r.readpartial(4096)      # バッファにもパイプにもデータがないのでブロックする
   
   r, w = IO.pipe           #               buffer          pipe content
   w << "abc"               #               ""              "abc"
   w.close                  #               ""              "abc" EOF
   r.readpartial(4096)      #=> "abc"       ""              EOF
-  r.readpartial(4096)      # �㳰 EOFError ȯ��
+  r.readpartial(4096)      # 例外 EOFError 発生
   
   r, w = IO.pipe           #               buffer          pipe content
   w << "abc\ndef\n"        #               ""              "abc\ndef\n"
@@ -1365,59 +1365,59 @@ readpartial �η�̤ϰʲ��Τ褦�ˤʤ�ޤ���
   r.readpartial(4096)      #=> "def\n"     ""              "ghi\n"
   r.readpartial(4096)      #=> "ghi\n"     ""              ""
 
-�ʤ���readpartial �� nonblock �ե饰�˱ƶ�����ޤ���
-�Ĥޤꡢnonblock �ե饰�����ꤵ��Ƥ��� sysread �Ǥ���� Errno::EAGAIN �ˤʤ���Ǥ�֥��å����ޤ���
+なお、readpartial は nonblock フラグに影響されません。
+つまり、nonblock フラグが設定されていて sysread であれば Errno::EAGAIN になる場合でもブロックします。
 
-�ޤ���readpartial �ε�ư�� sysread �ˤ褯���Ƥ��ޤ���
-�Ȥ��ˡ��Хåե������ξ��ˤ�Ʊ����ư�򼨤��ޤ���
-��������EAGAIN ����� EINTR ���顼��������ȯ�������Ȥ��Ƥ����Τ��줺���ǡ��������夹��ޤǥ֥��å���³���ޤ���
+また、readpartial の挙動は sysread によく似ています。
+とくに、バッファが空の場合には同じ挙動を示します。
+ただし、EAGAIN および EINTR エラーは内部で発生したとしても通知されず、データが到着するまでブロックし続けます。
 
-@param maxlen �ɤ߹���Ĺ���ξ�¤������ǻ��ꤷ�ޤ���
+@param maxlen 読み込む長さの上限を整数で指定します。
 
-@param outbuf ʸ����ǻ��ꤷ�ޤ���IO#readpartial ���ɤ߹�����ǡ����� outbuf ���˲�Ū�˳�Ǽ����
-              �֤��ͤ� outbuf �Ȥʤ�ޤ���outbuf �ϰ�ö maxlen Ĺ�˳�ĥ(���뤤�Ͻ̾�)���줿���ȡ�
-              �ºݤ��ɤ߹�����ǡ����Υ������ˤʤ�ޤ���IO ������ EOF ��ã���Ƥ���С���ʸ����ˤʤ�ޤ���
+@param outbuf 文字列で指定します。IO#readpartial は読み込んだデータを outbuf に破壊的に格納し、
+              返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@raise EOFError IO ������ EOF ��ã���Ƥ����ȯ�����ޤ���
+@raise EOFError IO が既に EOF に達していれば発生します。
 
 #@end
 
 --- reopen(io)                   -> self
 
-���Ȥ���ꤵ�줿 io �˷Ҥ������ޤ���
+自身を指定された io に繋ぎ換えます。
 
-���饹�� io ���������ʤ뤳�Ȥ����դ��Ƥ���������
-[[m:IO#pos]], [[m:IO#lineno]] �ʤɤϻ��ꤵ�줿 io ���������ʤ�ޤ���
+クラスも io に等しくなることに注意してください。
+[[m:IO#pos]], [[m:IO#lineno]] などは指定された io と等しくなります。
 
-@param io ���Ȥ�Ҥ��������� IO ���֥������Ȥ���ꤷ�ޤ���
+@param io 自身を繋ぎ換えたい IO オブジェクトを指定します。
 
-@raise IOError ���ꤵ�줿 io �� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 指定された io が close されている場合に発生します。
 
 --- reopen(path)                 -> self
 --- reopen(path, mode)     -> self
 
-path �ǻ��ꤵ�줿�ե�����˥��ȥ꡼���Ҥ������ޤ���
+path で指定されたファイルにストリームを繋ぎ換えます。
 
 #@if (version >= "1.8.0")
-����������ά�����Ȥ� self �Υ⡼�ɤ򤽤Τޤް����Ѥ��ޤ���
+第二引数を省略したとき self のモードをそのまま引き継ぎます。
 #@end
-[[m:IO#pos]], [[m:IO#lineno]] �ʤɤϥꥻ�åȤ���ޤ���
+[[m:IO#pos]], [[m:IO#lineno]] などはリセットされます。
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
-@param mode �ѥ��򳫤��ݤΥ⡼�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param mode パスを開く際のモードを文字列で指定します。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 @see [[m:Kernel.#open]]
 
 --- rewind    -> 0
 
-�ե�����ݥ��󥿤���Ƭ�˰�ư���ޤ���[[m:IO#lineno]] �� 0 �ˤʤ�ޤ���
+ファイルポインタを先頭に移動します。[[m:IO#lineno]] は 0 になります。
 
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 既に close されている場合に発生します。
 
      f = File.new("testfile")
      f.readline               #=> "This is line one\n"
@@ -1427,20 +1427,20 @@ path �ǻ��ꤵ�줿�ե�����˥��ȥ꡼���Ҥ������ޤ���
 
 --- seek(offset, whence = IO::SEEK_SET)    -> 0
 
-�ե�����ݥ��󥿤� whence �ΰ��֤��� offset ������ư�����ޤ���
-offset ���֤ؤΰ�ư����������� 0 ���֤��ޤ���
+ファイルポインタを whence の位置から offset だけ移動させます。
+offset 位置への移動が成功すれば 0 を返します。
 
-@param offset �ե�����ݥ��󥿤��ư�����륪�ե��åȤ������ǻ��ꤷ�ޤ���
+@param offset ファイルポインタを移動させるオフセットを整数で指定します。
 
-@param whence �ͤϰʲ��Τ����줫�Ǥ���
+@param whence 値は以下のいずれかです。
 
-  * IO::SEEK_SET: �ե��������Ƭ���� (�ǥե����)
-  * IO::SEEK_CUR: ���ߤΥե�����ݥ��󥿤���
-  * IO::SEEK_END: �ե��������������
+  * IO::SEEK_SET: ファイルの先頭から (デフォルト)
+  * IO::SEEK_CUR: 現在のファイルポインタから
+  * IO::SEEK_END: ファイルの末尾から
 
-@raise Errno::EXXX �ե�����ݥ��󥿤ΰ�ư�˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルポインタの移動に失敗した場合に発生します。
 
-@raise IOError ���� close ����Ƥ�������ȯ�����ޤ��� 
+@raise IOError 既に close されていた場合に発生します。 
 
      f = File.new("testfile")
      f.seek(-13, IO::SEEK_END)   #=> 0
@@ -1450,28 +1450,28 @@ offset ���֤ؤΰ�ư����������� 0 ���֤��ޤ���
 
 --- stat    -> File::Stat
 
-�ե�����Υ��ơ�������ޤ� [[c:File::Stat]] ���֥������Ȥ���������
-�֤��ޤ���
+ファイルのステータスを含む [[c:File::Stat]] オブジェクトを生成して
+返します。
 
-@raise Errno::EXXX ���ơ��������ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ステータスの読み込みに失敗した場合に発生します。
 
-@raise IOError ���� close ����Ƥ�������ȯ�����ޤ��� 
+@raise IOError 既に close されていた場合に発生します。 
 
 @see [[m:File#lstat]], [[m:File.stat]], [[m:File.lstat]] 
 
 --- sync    -> bool
 
-���ߤν��Ϥ�Ʊ���⡼�ɤʤ�� true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+現在の出力が同期モードならば true を返します。そうでない場合は false を返します。
 
-@raise IOError ���� close ����Ƥ�������ȯ�����ޤ��� 
+@raise IOError 既に close されていた場合に発生します。 
 
 --- sync=(newstate)
 
-���Ȥ�Ʊ���⡼�ɤ����ꤹ��ȡ����ϴؿ��θƽ���˥Хåե����ե�å��夵��ޤ���
+自身を同期モードに設定すると、出力関数の呼出毎にバッファがフラッシュされます。
 
-@param newstate ���Ȥ�Ʊ���⡼�ɤ����ꤹ�뤫�� boolean �ǻ��ꤷ�ޤ���
+@param newstate 自身を同期モードに設定するかを boolean で指定します。
 
-@raise IOError ���� close ����Ƥ�������ȯ�����ޤ��� 
+@raise IOError 既に close されていた場合に発生します。 
 
 #@since 1.8.0
 --- sysread(maxlen, outbuf = "")   -> String
@@ -1479,35 +1479,35 @@ offset ���֤ؤΰ�ư����������� 0 ���֤��ޤ���
 --- sysread(maxlen)           -> String
 #@end
 
-[[man:read(2)]] ���Ѥ������Ϥ�Ԥʤ������Ϥ��줿�ǡ�����
-�ޤ�ʸ������֤��ޤ���stdio ���ͳ���ʤ��Τ� gets �� getc �� eof? �ʤɤȺ��Ѥ���Ȼפ��ư��
-�򤹤뤳�Ȥ�����ޤ���
+[[man:read(2)]] を用いて入力を行ない、入力されたデータを
+含む文字列を返します。stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
+をすることがあります。
 
 #@since 1.9.1
-�Х��ʥ��ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+バイナリ読み込みメソッドとして動作します。
 #@end
-���� EOF ��ã���Ƥ���� EOFError ��ȯ�����ޤ�����������maxlen �� 0 �����ꤵ��Ƥ�����ϡ���ʸ���� "" ���֤��ޤ���
+既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定されている場合は、空文字列 "" を返します。
 
-@param maxlen ���ϤΥ������������ǻ��ꤷ�ޤ���
+@param maxlen 入力のサイズを整数で指定します。
 
 #@since 1.8.0
-@param outbuf �����ѤΥХåե���ʸ����ǻ��ꤷ�ޤ���IO#sysread ���ɤ߹�����ǡ�����
-              ����ʸ���󥪥֥������Ȥ˾�񤭤����֤��ޤ������ꤷ��ʸ���󥪥֥�������
-              �����餫���� maxlen Ĺ���ΰ�Ǥ���С�;�פʥ���γ����Ƥ��Ԥ��ޤ���
-              ���ꤷ��ʸ�����Ĺ���� maxlen �Ȱۤʤ��硢����ʸ����ϰ�ö maxlen Ĺ��
-              ��ĥ(���뤤�Ͻ̾�)���줿���ȡ��ºݤ��ɤ߹�����ǡ����Υ������ˤʤ�ޤ���
+@param outbuf 出力用のバッファを文字列で指定します。IO#sysread は読み込んだデータを
+              その文字列オブジェクトに上書きして返します。指定した文字列オブジェクト
+              があらかじめ maxlen 長の領域であれば、余計なメモリの割当てが行われません。
+              指定した文字列の長さが maxlen と異なる場合、その文字列は一旦 maxlen 長に
+              拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@raise EOFError IO ������ EOF ��ã���Ƥ����ȯ�����ޤ���
+@raise EOFError IO が既に EOF に達していれば発生します。
 
-@raise Errno::EXXX �ǡ������ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX データの読み込みに失敗した場合に発生します。
 
 #@since 1.8.0
-�����������ꤷ�� sysread �θƤӽФ��ǥǡ��������Ǥ��ä���
-��(sysread ���㳰 [[c:EOFError]] ��ȯ����������)��
-outbuf �϶�ʸ����ˤʤ�ޤ���
+第二引数を指定した sysread の呼び出しでデータが空であった場
+合(sysread が例外 [[c:EOFError]] を発生させる場合)、
+outbuf は空文字列になります。
 
   outbuf = "x" * 20;
   io = File.open("/dev/null")
@@ -1520,11 +1520,11 @@ outbuf �϶�ʸ����ˤʤ�ޤ���
 #@if (version >="1.8.0")
 --- sysseek(offset, whence = IO::SEEK_SET)    -> Integer
 
-[[man:lseek(2)]] ��Ʊ���Ǥ���[[m:IO#seek]] �Ǥϡ�
-[[m:IO#sysread]], [[m:IO#syswrite]] ��ʻ�Ѥ����������ư��ʤ��Τ�����ˤ��Υ᥽�åɤ�Ȥ��ޤ���
-���� offset �ؤΰ�ư����������а�ư��������(�ե�������Ƭ����Υ��ե��å�)���֤��ޤ���
+[[man:lseek(2)]] と同じです。[[m:IO#seek]] では、
+[[m:IO#sysread]], [[m:IO#syswrite]] と併用すると正しく動作しないので代わりにこのメソッドを使います。
+位置 offset への移動が成功すれば移動した位置(ファイル先頭からのオフセット)を返します。
 
-�񤭹����Ѥ˥Хåե���󥰤��줿 IO ���Ф��Ƽ¹Ԥ���ȷٹ𤬽Фޤ���
+書き込み用にバッファリングされた IO に対して実行すると警告が出ます。
 
   File.open("/dev/zero") {|f|
     buf = f.read(3)
@@ -1538,18 +1538,18 @@ outbuf �϶�ʸ����ˤʤ�ޤ���
   }
   # => -:3: warning: sysseek for buffered IO
 
-@param offset �ե�����ݥ��󥿤��ư�����륪�ե��åȤ������ǻ��ꤷ�ޤ���
+@param offset ファイルポインタを移動させるオフセットを整数で指定します。
 
-@param whence �ͤϰʲ��Τ����줫�Ǥ���
+@param whence 値は以下のいずれかです。
 
-  * IO::SEEK_SET: �ե��������Ƭ���� (�ǥե����)
-  * IO::SEEK_CUR: ���ߤΥե�����ݥ��󥿤���
-  * IO::SEEK_END: �ե��������������
+  * IO::SEEK_SET: ファイルの先頭から (デフォルト)
+  * IO::SEEK_CUR: 現在のファイルポインタから
+  * IO::SEEK_END: ファイルの末尾から
 
-@raise IOError �ɤ߹����Ѥ˥Хåե���󥰤��줿 IO ���Ф��Ƽ¹Ԥ����ȯ�����ޤ���
-               ���� close ����Ƥ������ˤ�ȯ�����ޤ��� 
+@raise IOError 読み込み用にバッファリングされた IO に対して実行すると発生します。
+               既に close されていた場合にも発生します。 
 
-@raise Errno::EXXX ��ư�˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 移動に失敗した場合に発生します。
 
 @see [[m:IO#seek]]
 
@@ -1557,38 +1557,38 @@ outbuf �϶�ʸ����ˤʤ�ޤ���
 
 --- syswrite(string)    -> Integer    
 
-[[man:write(2)]] ���Ѥ��� string ����Ϥ��ޤ���
-string ��ʸ����Ǥʤ���� to_s �ˤ��ʸ���󲽤��ߤޤ���
-�ºݤ˽��ϤǤ����Х��ȿ����֤��ޤ���
+[[man:write(2)]] を用いて string を出力します。
+string が文字列でなければ to_s による文字列化を試みます。
+実際に出力できたバイト数を返します。
 
-stdio ���ͳ���ʤ��Τ�¾�ν��ϥ᥽�åɤȺ��Ѥ���Ȼפ��ư��
-�򤹤뤳�Ȥ�����ޤ���
+stdio を経由しないので他の出力メソッドと混用すると思わぬ動作
+をすることがあります。
 
-@param string ���Ȥ˽񤭹��ߤ���ʸ�������ꤷ�ޤ���
+@param string 自身に書き込みたい文字列を指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- to_io    -> self
 
-self ���֤��ޤ���
+self を返します。
 
 --- ungetc(char)     -> nil
 
-���ꤵ�줿 char ���ɤ��ᤷ�ޤ���
+指定された char を読み戻します。
 #@until 1.9.1
-2�Х��Ȱʾ���ɤ��ᤷ���ݾڤ���ޤ���
+2バイト以上の読み戻しは保証されません。
 #@end
 
 #@since 1.9.1
-@param char �ɤ��ᤷ����1ʸ�������Υ����ɥݥ���Ȥ���ꤷ�ޤ���
+@param char 読み戻したい1文字かそのコードポイントを指定します。
 #@else
-@param char �ɤ��ᤷ����1�Х���ʸ�����б����� [[c:Fixnum]] ����ꤷ�ޤ���
+@param char 読み戻したい1バイト文字に対応する [[c:Fixnum]] を指定します。
 #@end
 
-@raise IOError �ɤ��ᤷ�˼��Ԥ�������ȯ�����ޤ����ޤ������Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ�����
-               ���Ȥ��ޤ����٤� read ����Ƥ��ʤ�����ȯ�����ޤ���
+@raise IOError 読み戻しに失敗した場合に発生します。また、自身が読み込み用にオープンされていない時、
+               自身がまだ一度も read されていない時に発生します。
 
 #@since 1.9.1
 #@else
@@ -1600,50 +1600,50 @@ self ���֤��ޤ���
 
 --- write(str)     -> Integer
 
-IO�ݡ��Ȥ��Ф��� str ����Ϥ��ޤ���str ��ʸ����Ǥʤ�
-��� to_s �ˤ��ʸ���󲽤��ߤޤ���
-�ºݤ˽��ϤǤ����Х��ȿ����֤��ޤ���
+IOポートに対して str を出力します。str が文字列でなけ
+れば to_s による文字列化を試みます。
+実際に出力できたバイト数を返します。
 
-[[m:IO#syswrite]] ��������Ƥν��ϥ᥽�åɤϡ��ǽ�Ū��
-"write" �Ȥ���̾�Υ᥽�åɤ�ƤӽФ��Τǡ����Υ᥽�åɤ��֤�������
-���Ȥǽ��ϴؿ��ε�ư���ѹ����뤳�Ȥ��Ǥ��ޤ���
+[[m:IO#syswrite]] を除く全ての出力メソッドは、最終的に
+"write" という名のメソッドを呼び出すので、このメソッドを置き換える
+ことで出力関数の挙動を変更することができます。
 #@##@since 1.8.0
-#@#������ [[m:Kernel.#putc]], 
-#@#[[m:IO#putc]] ���Ф��Ƥ������Τ��Ȥ�Ŭ�Ѥ���ޤ���Ǥ���
-#@#([[ruby-dev:16305]])������������ޤ���([[ruby-dev:18038]])��
+#@#以前は [[m:Kernel.#putc]], 
+#@#[[m:IO#putc]] に対してだけこのことは適用されませんでした
+#@#([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
 #@##@end
 
-@param str ���Ȥ˽񤭹��ߤ���ʸ�������ꤷ�ޤ���
+@param str 自身に書き込みたい文字列を指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���Ϥ˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
 #@if (version >= "1.8.5")
 --- write_nonblock(string)    -> Integer
 
-IO ��Υ�֥��å��󥰥⡼�ɤ����ꤷ��string �� [[man:write(2)]] �����ƥॳ����ǽ񤭽Ф��ޤ���
+IO をノンブロッキングモードに設定し、string を [[man:write(2)]] システムコールで書き出します。
 
-write(2) ������������硢�񤭹����Ĺ�����֤��ޤ���
-EAGAIN, EINTR �ʤɤ��㳰 [[c:Errno::EXXX]] �Ȥ��Ƹƽи�����𤵤�ޤ���
+write(2) が成功した場合、書き込んだ長さを返します。
+EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 #@since 1.8.7
-�񤭹�����Х��ȿ�(�Ĥޤ��֤���)�� [[m:String#bytesize]] ��
-�ͤ�꾮������ǽ��������ޤ���
+書き込んだバイト数(つまり返り値)は [[m:String#bytesize]] の
+値より小さい可能性があります。
 #@end
 
 #@since 1.9.2
-ȯ�������㳰 ��Errno::EAGAIN�� Errno::EWOULDBLOCK �Ǥ�����ϡ�
-�����㳰���֥������Ȥ� [[m:IO::WaitWritable]] �� [[m:Object#extend]]
-����ޤ�����ä� IO::WaitWritable �� write_nonblock �Υ�ȥ饤��ɬ��
-����Ƚ����Ѥ��뤳�Ȥ��Ǥ��ޤ���
+発生した例外 がErrno::EAGAIN、 Errno::EWOULDBLOCK である場合は、
+その例外オブジェクトに [[m:IO::WaitWritable]] が [[m:Object#extend]]
+されます。よって IO::WaitWritable を write_nonblock のリトライが必要
+かの判定に用いることができます。
 #@end
 
 
-@param string ���Ȥ˽񤭹��ߤ���ʸ�������ꤷ�ޤ���
+@param string 自身に書き込みたい文字列を指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX [[man:write(2)]] �����Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX [[man:write(2)]] が失敗した場合に発生します。
 #@end
 
 #@since 1.8.7
@@ -1652,11 +1652,11 @@ EAGAIN, EINTR �ʤɤ��㳰 [[c:Errno::EXXX]] �Ȥ��Ƹƽи�����𤵤�ޤ���
 #@else
 --- bytes    -> Enumerable::Enumerator
 #@end
-���Ȥ� 1 �Х��Ȥ��������Ȥ��ƥ��ƥ졼�Ȥ���褦��
+自身を 1 バイトずつ整数としてイテレートするような
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ����������֤��ޤ���
+[[c:Enumerator]] オブジェクトを生成して返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ����������֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
 #@end
 
    "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
@@ -1664,13 +1664,13 @@ EAGAIN, EINTR �ʤɤ��㳰 [[c:Errno::EXXX]] �Ȥ��Ƹƽи�����𤵤�ޤ���
 #@until 1.9.1
 --- lines(rs = $/)    -> Enumerable::Enumerator
 
-���Ȥ� 1 �Ԥ��ĥ��ƥ졼�Ȥ���褦��
-[[c:Enumerable::Enumerator]] ���֥������Ȥ����������֤��ޤ���
+自身を 1 行ずつイテレートするような
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
 
-�ƥ������ɤ߹��ߥ᥽�åɤȤ���ư��ޤ���
+テキスト読み込みメソッドとして動作します。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ���
-          ��ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
    "foo\nbar\n".lines.to_a   #=> ["foo\n", "bar\n"]
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
@@ -1681,8 +1681,8 @@ EAGAIN, EINTR �ʤɤ��㳰 [[c:Errno::EXXX]] �Ȥ��Ƹƽи�����𤵤�ޤ���
 
 --- getbyte   -> Integer | nil
 
-IO ����1�Х��Ȥ��ɤ߹��������Ȥ����֤��ޤ���
-���� EOF ��ã���Ƥ���� nil ���֤��ޤ���
+IO から1バイトを読み込み整数として返します。
+既に EOF に達していれば nil を返します。
 
    f = File.new("testfile")
    f.getbyte   #=> 84
@@ -1690,10 +1690,10 @@ IO ����1�Х��Ȥ��ɤ߹��������Ȥ����֤��ޤ���
 
 --- readbyte   -> Integer
 
-IO ����1�Х��Ȥ��ɤ߹��������Ȥ����֤��ޤ���
-���� EOF ��ã���Ƥ���� EOFError ��ȯ�����ޤ���
+IO から1バイトを読み込み整数として返します。
+既に EOF に達していれば EOFError が発生します。
 
-@raise EOFError ���� EOF ��ã���Ƥ������ȯ�����ޤ���
+@raise EOFError 既に EOF に達している場合に発生します。
 
 --- each_char{|c| ... }     -> self
 --- chars{|c| ... }         -> self
@@ -1705,22 +1705,22 @@ IO ����1�Х��Ȥ��ɤ߹��������Ȥ����֤��ޤ���
 --- chars                   -> Enumerable::Enumerator
 #@end
 
-self �˴ޤޤ��ʸ�����ʸ���Ĥĥ֥��å����Ϥ���ɾ�����ޤ���
+self に含まれる文字を一文字つつブロックに渡して評価します。
 
-self ���ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ���Фʤ�ޤ���
+self は読み込み用にオープンされていなければなりません。
 
 #@until 1.9.1
-�ޤ����ޥ���Х���ʸ�������Ѥ������ [[m:$KCODE]] ��Ŭ�ڤ����ꤷ�Ƥ���������
+また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
 #@end
 
 #@until 1.9.1
-�֥��å����ά�������ϳ�ʸ���ˤĤ��Ʒ����֤� [[c:Enumerable::Enumerator]] 
-���֤��ޤ���
+ブロックを省略した場合は各文字について繰り返す [[c:Enumerable::Enumerator]] 
+を返します。
 #@else
-�֥��å����ά�������ϳ�ʸ���ˤĤ��Ʒ����֤� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は各文字について繰り返す [[c:Enumerator]] を返します。
 #@end
 
-@raise IOError self ���ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ�����ȯ�����ޤ���
+@raise IOError self が読み込み用にオープンされていない場合に発生します。
 
   f = File.new("testfile")
   f.each_char {|c| print c, ' ' }   #=> #<File:testfile>
@@ -1730,16 +1730,16 @@ self ���ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ���Фʤ�ޤ���
 #@since 1.8.8
 --- ungetbyte(c) -> nil
 
-���ꤷ���Х��������ᤷ�ޤ���
+指定したバイト列を書き戻します。
 
-2�Х��Ȱʾ�ν��ᤷ�ϻ��ͤȤ����ݾڤ��ޤ���
+2バイト以上の書き戻しは仕様として保証しません。
 
-���Υ᥽�åɤϥХåե����ͳ���ʤ��ɤ߽Ф�([[m:IO#sysread]] �ʤ�)
-�ˤϱƶ����ޤ���
+このメソッドはバッファを経由しない読み出し([[m:IO#sysread]] など)
+には影響しません。
 
-@param c �Х�����(ʸ����)���⤷����0����255�ޤǤ�����
+@param c バイト列(文字列)、もしくは0から255までの整数
 
-��:
+例:
 
    f = File.new("testfile")   #=> #<File:testfile>
    b = f.getbyte              #=> 0x38
@@ -1750,16 +1750,16 @@ self ���ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ���Фʤ�ޤ���
 #@since 1.9.1
 --- binmode? -> bool
 
-���Ȥ��Х��ʥ�⡼�ɤʤ� true ���֤��ޤ��������Ǥʤ���硢false ���֤��ޤ���
+自身がバイナリモードなら true を返します。そうでない場合、false を返します。
 
 --- close_on_exec=(bool)
-���Ȥ� close-on-exec �ե饰�����ꤷ�ޤ���
+自身に close-on-exec フラグを設定します。
 
-���Υե饰�򥻥åȤ���� [[man:exec(2)]] ���ˤ��Υե�����ǥ�����ץ���
-close ���ޤ���
+このフラグをセットすると [[man:exec(2)]] 時にそのファイルデスクリプタを
+close します。
 
 @see [[man:fcntl(2)]]
-@param bool ���Ȥ� close-on-exec �ե饰�� true �� false �ǻ��ꤷ�ޤ���
+@param bool 自身の close-on-exec フラグを true か false で指定します。
 
    f = open("/dev/null")
    f.close_on_exec = true
@@ -1769,8 +1769,8 @@ close ���ޤ���
 @see [[m:IO#close_on_exec?]]
 
 --- close_on_exec?   -> bool
-���Ȥ� close-on-exec �ե饰�����ꤵ��Ƥ������ true ���֤��ޤ���
-�����Ǥʤ����� false ���֤��ޤ���
+自身に close-on-exec フラグが設定されていた場合 true を返します。
+そうでない場合に false を返します。
 
    f = open("/dev/null")
    f.close_on_exec?                 #=> false
@@ -1783,42 +1783,42 @@ close ���ޤ���
 
 --- external_encoding   -> Encoding | nil
 
-IO �γ������󥳡��ǥ��󥰤��֤��ޤ���
-�������󥳡��ǥ��󥰤����ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+IO の外部エンコーディングを返します。
+外部エンコーディングが指定されていない場合は nil を返します。
 
 --- internal_encoding   -> Encoding | nil
 
-IO ���������󥳡��ǥ��󥰤��֤��ޤ���
-�������󥳡��ǥ��󥰤����ꤵ��Ƥ��ʤ����� nil ���֤��ޤ���
+IO の内部エンコーディングを返します。
+内部エンコーディングが指定されていない場合は nil を返します。
 
 --- set_encoding(enc_str, opt={})           -> self
 --- set_encoding(ext_enc)           -> self
 --- set_encoding(ext_enc, int_enc, opt={})  -> self
 
-IO �Υ��󥳡��ǥ��󥰤����ꤷ�ޤ���
+IO のエンコーディングを設定します。
 
-������ "A:B" �Τ褦�˥�����Ƕ��ڤ�줿ʸ����ξ��ϡ�
-A �������󥳡��ǥ��󥰡� B ���������󥳡��ǥ��󥰤˻��ꤷ�ޤ���
+引数が "A:B" のようにコロンで区切られた文字列の場合は、
+A を外部エンコーディング、 B を内部エンコーディングに指定します。
 
-��������Ĥǡ���Τ褦�ʷ����Ǥʤ����ˤϡ�
-���줬�������󥳡��ǥ��󥰤ȸ��ʤ���ޤ���
+引数が一つで、上のような形式でない場合には、
+それが外部エンコーディングと見なされます。
 
-������2�Ĥξ��Ϥ��Τ��줾��������󥳡��ǥ��󥰡��������󥳡��ǥ���
-�����ꤷ�ޤ���
+引数が2つの場合はそのそれぞれを外部エンコーディング、内部エンコーディング
+に設定します。
 
-opt �Υϥå���ǳ������󥳡��ǥ��󥰤��������󥳡��ǥ��󥰤��Ѵ�����ݤ�
-���ץ�������ꤷ�ޤ���
-�ܤ����� [[m:String#encode]] �򻲾Ȥ��Ƥ���������
+opt のハッシュで外部エンコーディングを内部エンコーディングに変換する際の
+オプションを指定します。
+詳しくは [[m:String#encode]] を参照してください。
 
-@param enc_str ���󥳡��ǥ��󥰤�ɽ��ʸ�������ꤷ�ޤ���"A:B" �Τ褦�˥�����Ƕ��ڤ�줿
-               ʸ�������ꤷ����� A ���������󥳡��ǥ��󥰡�B ���������󥳡��ǥ��󥰤�
-               ɽ���ޤ���
+@param enc_str エンコーディングを表す文字列を指定します。"A:B" のようにコロンで区切られた
+               文字列を指定した場合 A が外部エンコーディング、B が内部エンコーディングを
+               表します。
 
-@param ext_enc �������󥳡��ǥ��󥰤�ɽ��ʸ���� [[c:Encoding]] ���֥������Ȥ���ꤷ�ޤ���
+@param ext_enc 外部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 
-@param int_enc �������󥳡��ǥ��󥰤�ɽ��ʸ���� [[c:Encoding]] ���֥������Ȥ���ꤷ�ޤ���
-@param opt ���󥳡��ǥ����Ѵ��Υ��ץ����
-��:
+@param int_enc 内部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
+@param opt エンコーディング変換のオプション
+例:
     io = File.open(file)
     io.set_encoding("ASCII-8BIT", "EUC-JP")
 
@@ -1826,13 +1826,13 @@ opt �Υϥå���ǳ������󥳡��ǥ��󥰤��������󥳡��ǥ��󥰤��Ѵ�����ݤ�
 #@since 1.9.2
 --- autoclose=(bool)
 
-auto-close �ե饰�����ꤷ�ޤ���
+auto-close フラグを設定します。
 
-�ե饰�����ꤵ��Ƥ��륪�֥������Ȥ�
-close��/GC�ǤΥե����ʥ饤���ƽл��˥ե�����ǥ�����ץ��� close ���ޤ���
-���ꤵ��Ƥ��ʤ����� close ���ޤ���
+フラグが設定されているオブジェクトは
+close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
+設定されていない場合は close しません。
 
-@param bool �����ͤǥե饰�����ꤷ�ޤ�
+@param bool 真偽値でフラグを設定します
 @see [[m:IO#autoclose?]]
 
    f = open("/dev/null")
@@ -1846,7 +1846,7 @@ close��/GC�ǤΥե����ʥ饤���ƽл��˥ե�����ǥ�����ץ��� close ���ޤ���
    f.gets # won't cause IOError
 --- autoclose? -> bool
 
-auto-close �ե饰���֤��ޤ���
+auto-close フラグを返します。
 
 @see [[m:IO#autoclose=]]
 
@@ -1855,58 +1855,58 @@ auto-close �ե饰���֤��ޤ���
 --- each_codepoint               -> Enumerator
 --- codepoints                   -> Enumerator
 
-IO �γƥ����ɥݥ���Ȥ��Ф��Ʒ����֤��֥��å���ƤӤ����ޤ���
+IO の各コードポイントに対して繰り返しブロックを呼びだします。
 
-�֥��å��ΰ����ˤϥ����ɥݥ���Ȥ�ɽ���������Ϥ���ޤ���
+ブロックの引数にはコードポイントを表す整数が渡されます。
 
-�֥��å����ά�������ˤϡ�[[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合には、[[c:Enumerator]] を返します。
 
 --- fdatasync -> 0 | nil
 
-IO �Τ��٤ƤΥХåե�����Ƥ���ǡ�����ľ���˥ǥ������˽񤭹��ߤޤ���
+IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
 
-[[man:fdatasync(2)]] �򥵥ݡ��Ȥ��Ƥ��ʤ� OS ��Ǥ������
-[[m:IO#fsync]] ��ƤӤ����ޤ���
+[[man:fdatasync(2)]] をサポートしていない OS 上では代わりに
+[[m:IO#fsync]] を呼びだします。
 
-[[m:IO#fsync]] �Ȥΰ㤤�� [[man:fdatasync(2)]] �򻲾Ȥ��Ƥ���������
+[[m:IO#fsync]] との違いは [[man:fdatasync(2)]] を参照してください。
 
-@raise NotImplementedError [[man:fdatasync(2)]] �� [[man:fsync(2)]] ��
-       ���ݡ��Ȥ���Ƥ��ʤ� OS ��ȯ�����ޤ���
+@raise NotImplementedError [[man:fdatasync(2)]] も [[man:fsync(2)]] も
+       サポートされていない OS で発生します。
 #@end
 
 #@since 1.9.3
 --- advise(advice, offset=0, len=0) -> nil
 
-[[man:posix_fadvise(2)]] ��ƤӤ�����
-�ե�����ؤΥ��������ѥ������OS���Τ餻�ޤ���
+[[man:posix_fadvise(2)]] を呼びだし、
+ファイルへのアクセスパターンをOSに知らせます。
 
-advice �ˤϰʲ��Τ����줫�Υ���ܥ����ꤷ�ޤ���
-  * :normal - �ǥե����
-  * :sequential - �ǡ������������˥������������
-  * :random - �ǡ����ϥ����ॢ�����������
-  * :willneed - �ǡ����Ϥ���ľ��˥������������
-  * :dontneed - �ǡ�����ľ��ˤϥ����������ʤ�
-  * :noreuse - �ǡ����ϰ��٤���������������ʤ�
-������ advice ������Ū�˲��򤹤�Τ��ϥץ�åȥե������¸�Ǥ���
+advice には以下のいずれかのシンボルを指定します。
+  * :normal - デフォルト
+  * :sequential - データは前から順にアクセスされる
+  * :random - データはランダムアクセスされる
+  * :willneed - データはこの直後にアクセスされる
+  * :dontneed - データは直後にはアクセスしない
+  * :noreuse - データは一度しかアクセスされない
+これらの advice が具体的に何をするのかはプラットフォーム依存です。
 
-�����Ǥ����֥ǡ����פ� offset �� len �����ꤹ�뤳�Ȥ��Ǥ��ޤ���
-len �� 0 �ʤ�С�offset ����ե����������ޤǤ���ꤷ�����Ȥˤʤ�ޤ���
-�ǥե���ȤǤ� offset �� len ���Ȥ�� 0 �ʤΤǡ�
-�ե��������Τ���ꤷ�����Ȥˤʤ�ޤ���
+ここでいう「データ」は offset と len で特定することができます。
+len が 0 ならば、offset からファイル末尾までを指定したことになります。
+デフォルトでは offset と len がともに 0 なので、
+ファイル全体を指定したことになります。
 
-posix_fadvise �򥵥ݡ��Ȥ��Ƥ��ʤ��ץ�åȥե������Ǥ�
-���⤷�ޤ���
+posix_fadvise をサポートしていないプラットフォーム上では
+何もしません。
 
-@param advice ���������ѥ������ɽ������ܥ�
-@param offset �ѥ��������ꤹ��ǡ�������Ƭ����
-@param len �ѥ��������ꤹ��ǡ�����Ĺ��
+@param advice アクセスパターンを表すシンボル
+@param offset パターンを指定するデータの先頭位置
+@param len パターンを指定するデータの長さ
 
-@raise IOError ���ȥ꡼�ब�����Ĥ����Ƥ���Ȥ���ȯ�������㳰
-@raise Errno::EBADF �ե�����ǥ�����ץ��������Ǥ���Ȥ���ȯ�������㳰
-@raise Errno::EINVAL advice ������
-@raise Errno::ESPIPE �ե�����ǥ�����ץ��� FIFO �� pipe ��ؤ��Ƥ���
-       ����ȯ�������㳰(Linux �Ϥ��ξ��ˤ� Errno::EINVAL ��ȯ������)
-@raise RangeError offset,len��ͭ���ϰϤ���ФƤ������ȯ�������㳰
+@raise IOError ストリームが既に閉じられているときに発生する例外
+@raise Errno::EBADF ファイルデスクリプタが不正であるときに発生する例外
+@raise Errno::EINVAL advice が不正
+@raise Errno::ESPIPE ファイルデスクリプタが FIFO か pipe を指している
+       場合に発生する例外(Linux はこの場合には Errno::EINVAL を発生する)
+@raise RangeError offset,lenが有効範囲から出ている場合に発生する例外
 
 #@end
 
@@ -1914,28 +1914,28 @@ posix_fadvise �򥵥ݡ��Ȥ��Ƥ��ʤ��ץ�åȥե������Ǥ�
 
 --- SEEK_CUR -> Fixnum
 
-[[m:IO#seek]] �򻲾Ȥ��Ƥ���������
+[[m:IO#seek]] を参照してください。
 
 --- SEEK_END -> Fixnum
 
-[[m:IO#seek]] �򻲾Ȥ��Ƥ���������
+[[m:IO#seek]] を参照してください。
 
 --- SEEK_SET -> Fixnum
 
-[[m:IO#seek]] �򻲾Ȥ��Ƥ���������
+[[m:IO#seek]] を参照してください。
 
 #@since 1.9.2
 
 --- WaitReadable -> Module
-�㳰���ɤ߹����Ԥ���ȯ���������Ȥ��̣���ޤ���
+例外が読み込み待ちで発生したことを意味します。
 
-�㳰���֥������Ȥ� extend ����ޤ����ܤ�����
-[[m:IO#read_nonblock]] �򻲾Ȥ��Ƥ���������
+例外オブジェクトに extend されます。詳しくは
+[[m:IO#read_nonblock]] を参照してください。
 
 --- WaitWritable -> Module
-�㳰���񤭹����Ԥ���ȯ���������Ȥ��̣���ޤ���
+例外が書き込み待ちで発生したことを意味します。
 
-�㳰���֥������Ȥ� extend ����ޤ����ܤ�����
-[[m:IO#write_nonblock]] �򻲾Ȥ��Ƥ���������
+例外オブジェクトに extend されます。詳しくは
+[[m:IO#write_nonblock]] を参照してください。
 
 #@end

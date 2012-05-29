@@ -2,31 +2,31 @@
 #@# require rdoc/ri/util
 require irb/cmd/nop
 
-irb ��� help ���ޥ�ɤΤ���γ�ĥ������������֥饤�֥��Ǥ���
+irb 中の help コマンドのための拡張を定義したサブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ�
-��ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
 
 = class IRB::ExtendCommand::Help < IRB::ExtendCommand::Nop
 
-irb ��� help ���ޥ�ɤΤ���γ�ĥ������������饹�Ǥ���
+irb 中の help コマンドのための拡張を定義したクラスです。
 
 == Instance Methods
 
 --- execute(*names) -> nil
 
-RI ���� Ruby �Υɥ�����Ȥ򻲾Ȥ��ޤ���
+RI から Ruby のドキュメントを参照します。
 
   irb(main):001:0> help String#match
   ...
 
-@param names ���Ȥ��������饹̾��᥽�å�̾�ʤɤ�ʸ����ǻ��ꤷ�ޤ���
+@param names 参照したいクラス名やメソッド名などを文字列で指定します。
 
 #@since 1.9.2
-names ����ꤷ�ʤ��ä����ϡ�RI ������Ū�ʥ⡼�ɤǵ�ư���ޤ����᥽�å�
-̾�ʤɤ����Ϥ�����ǥɥ�����Ȥθ������Ԥ��ޤ������ϤΥ����䴰�򤹤�
-�����Ǥ��ޤ����ޤ������Ԥ����Ϥ������ irb �Υץ���ץȤ��������Ǥ���
-����
+names を指定しなかった場合は、RI を対話的なモードで起動します。メソッド
+名などを入力する事でドキュメントの検索が行えます。入力のタブ補完をする
+事ができます。また、空行を入力する事で irb のプロンプトに戻る事ができま
+す。
 
   irb(main):001:0> help
 
@@ -44,4 +44,4 @@ names ����ꤷ�ʤ��ä����ϡ�RI ������Ū�ʥ⡼�ɤǵ�ư���ޤ����᥽�å�
   ...
 #@end
 
-#@# TODO: RDoc::RI::Driver.new �� SystemExit �ˤʤ�����ɵ���
+#@# TODO: RDoc::RI::Driver.new が SystemExit になる場合を追記。

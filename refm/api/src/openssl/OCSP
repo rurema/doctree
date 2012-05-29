@@ -1,22 +1,22 @@
 = module OpenSSL::OCSP
 
-OCSP(Online Certificate Status Protocol)���갷�������
-�⥸�塼��Ǥ���OCSP �� [[RFC:2560]] ���������Ƥ��ޤ���
+OCSP(Online Certificate Status Protocol)を取り扱うための
+モジュールです。OCSP は [[RFC:2560]] で定義されています。
 
-���Υ⥸�塼��� OCSP �Υꥯ�����Ȥȥ쥹�ݥ󥹤��갷��
-��ǽ����äƤ��ޤ���
+このモジュールは OCSP のリクエストとレスポンスを取り扱う
+機能を持っています。
 
-OCSP �쥹�ݥ�����̿����뵡ǽ�Ϥ���ޤ��󡣥桼�����㤨��
-OCSP over http �ʤɤ��������ɬ�פ�����ޤ���
+OCSP レスポンダと通信する機能はありません。ユーザが例えば
+OCSP over http などを実装する必要があります。
 
-=== ��
-OCSP �쥹�ݥ���˥ꥯ�����Ȥ����äƤ���������ɽ������
+=== 例
+OCSP レスポンダにリクエストを送ってその返答を表示する
   require 'openssl'
   require 'net/http'
   # ...
-  cert # �����оݤξ�����(Certificate ���֥�������)
-  ca_cert # cert �� CA �ξ�����(Certificate ���֥�������)
-  store # ���ꤷ�Ƥ�������񥹥ȥ�
+  cert # 検証対象の証明書(Certificate オブジェクト)
+  ca_cert # cert の CA の証明書(Certificate オブジェクト)
+  store # 信頼している証明書ストア
   cid = OpenSSL::OCSP::CertificateId(cert, ca_cert)
   req = OpenSSL::OCSP::Response.new(cid)
   req.add_nonce
@@ -51,254 +51,254 @@ OCSP �쥹�ݥ���˥ꥯ�����Ȥ����äƤ���������ɽ������
 == Constants
 
 --- NOCASIGN -> Integer
-���Υե饰����ϻȤ��Ƥ��ޤ���
+このフラグ定数は使われていません。
 
-#@# ��̣��
+#@# 意味は
 #@# don't allow an OCSP response to be signed by the issuing
 #@# CA certificate. 
-#@# �ȤΤ���
+#@# とのこと
 
 --- NOCERTS -> Integer
-��̾���˽�̾�ǡ����˾������ޤ�ʤ����Ȥ��̣���ޤ���
+署名時に署名データに証明書を含めないことを意味します。
 
 --- NOCHAIN -> Integer
-��������������Ȥ�ʤ����Ȥ��̣���ޤ���
+証明書チェインを使わないことを意味します。
 
 --- NOCHECKS -> Integer
-��̾�θ��ڤˤ������ɲ�Ū�ʥ����å����ά���뤳�Ȥ��̣���ޤ���
+署名の検証における追加的なチェックを省略することを意味します。
 
 --- NODELEGATED -> Integer
-delegated trust ����Ĥ��ʤ����Ȥ��̣���ޤ���
+delegated trust を許可しないことを意味します。
 
-���Υե饰����ϻȤ��Ƥ��ޤ���
+このフラグ定数は使われていません。
 
 --- NOEXPLICIT -> Integer
-�����񥹥ȥ���� Root CA ���Ѥ��ʤ����Ȥ��̣���ޤ���
+証明書ストア内の Root CA を信用しないことを意味します。
 
 --- NOINTERN -> Integer
-Request/Response �ν�̾�ǡ����˴ޤޤ�Ƥ�������񤫤�
-��̾�Ԥξ�������õ���ʤ��פ��Ȥ��̣���ޤ���
+Request/Response の署名データに含まれている証明書から
+署名者の証明書を「探さない」ことを意味します。
 
 --- NOSIGS -> Integer
-��̾�θ��ڤ�Ԥ�ʤ����Ȥ��̣���ޤ���
+署名の検証を行わないことを意味します。
 
 --- NOTIME -> Integer
-OCSP ������������������������ꤷ�ʤ����Ȥ��̣���ޤ���
+OCSP 応答の生成時刻を正しく設定しないことを意味します。
 
 --- NOVERIFY -> Integer
-��̾�˻Ȥä����ξ�����θ��ڤ�Ԥ�ʤ����Ȥ��̣���ޤ���
+署名に使った鍵の証明書の検証を行わないことを意味します。
 
 --- RESPID_KEY -> Integer
-OCSP �쥹�ݥ�� �� ID �Ȥ��Ƹ������Υϥå����ͤ��Ѥ��뤳��
-���̣���ޤ���
+OCSP レスポンダ の ID として公開鍵のハッシュ値を用いること
+を意味します。
 
-�ܤ����� [[RFC:2560]] ����� X.509 ���ǧ���Ƥ���������
+詳しくは [[RFC:2560]] および X.509 を確認してください。
 
 --- RESPONSE_STATUS_INTERNALERROR -> Integer
-[[m:OpenSSL::OCSP::Response#status]] �Υ��ơ����������ɤ� ��
-OCSP �쥹�ݥ�����������顼�ˤ�������ʱ������֤��ʤ����Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+OCSP レスポンダの内部エラーにより妥当な応答を返せないことを意味します。
 
-�ܤ����� [[RFC:2560]] 2.3 �򸫤Ƥ���������
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
 
 --- RESPONSE_STATUS_MALFORMEDREQUEST -> Integer
-[[m:OpenSSL::OCSP::Response#status]] �Υ��ơ����������ɤ� ��
-�ꥯ�����Ȥι�ʸ���������ʤ����Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+リクエストの構文が正しくないことを意味します。
 
-�ܤ����� [[RFC:2560]] 2.3 �򸫤Ƥ���������
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
 
 --- RESPONSE_STATUS_SIGREQUIRED -> Integer
-[[m:OpenSSL::OCSP::Response#status]] �Υ��ơ����������ɤ� ��
-�����Ф����饤����Ȥ˥ꥯ�����Ȥؤν�̾���׵ᤷ�Ƥ��뤳�Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+サーバがクライアントにリクエストへの署名を要求していることを意味します。
 
-�ܤ����� [[RFC:2560]] 2.3 �򸫤Ƥ���������
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
 
 --- RESPONSE_STATUS_SUCCESSFUL -> Integer
-[[m:OpenSSL::OCSP::Response#status]] �Υ��ơ����������ɤ� ��
-�����������������Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+正しく応答したことを意味します。
 
-�ܤ����� [[RFC:2560]] 2.3 �򸫤Ƥ���������
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
 --- RESPONSE_STATUS_TRYLATER -> Integer
-[[m:OpenSSL::OCSP::Response#status]] �Υ��ơ����������ɤ� ��
-�쥹�ݥ�������Ū�˱����Ǥ��ʤ����Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+レスポンダが一時的に応答できないことを意味します。
 
-�ܤ����� [[RFC:2560]] 2.3 �򸫤Ƥ���������
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
 --- RESPONSE_STATUS_UNAUTHORIZED -> Integer
-[[m:OpenSSL::OCSP::Response#status]] �Υ��ơ����������ɤ� ��
-���饤����Ȥ��饵���Фؤα�����ǧ�Ĥ���Ƥ��ʤ����Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+クライアントからサーバへの応答が認可されていないことを意味します。
 
-�ܤ����� [[RFC:2560]] 2.3 �򸫤Ƥ���������
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
 --- REVOKED_STATUS_AFFILIATIONCHANGED -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-������ε������Ƥ��ѹ����줿���Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+証明書の記載内容が変更されたことを意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 --- REVOKED_STATUS_CACOMPROMISE -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-CA �����ز��������Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+CA が危殆化したことを意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 --- REVOKED_STATUS_CERTIFICATEHOLD -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-���Ū����α���̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+一時的な保留を意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 --- REVOKED_STATUS_CESSATIONOFOPERATION -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-������α��Ѥ�ߤ᤿���Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+証明書の運用を止めたことを意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 --- REVOKED_STATUS_KEYCOMPROMISE -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-�������ز��������Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+鍵が危殆化したことを意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 
 --- REVOKED_STATUS_NOSTATUS -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-BasicResponse �˥����ɤ��ޤޤ�Ƥ��ʤ����Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+BasicResponse にコードが含まれていないことを意味します。
 
 
 --- REVOKED_STATUS_REMOVEFROMCRL -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-CRL ����κ�����̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+CRL からの削除を意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 
 --- REVOKED_STATUS_SUPERSEDED -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-�������˴����줿���Ȥ��̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+証明書が破棄されたことを意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 --- REVOKED_STATUS_UNSPECIFIED -> Integer
-[[m:OpenSSL::OCSP::BasicResponse#status]] �μ�����ͳ�����ɤǡ�
-̤������̣���ޤ���
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+未指定を意味します。
 
-�ܤ����� [[RFC:3280]] �� X.509 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
 --- TRUSTOTHER -> Integer
-����Ū���Ϥ���������򸡾ڤʤ��ǿ��Ѥ��뤳�Ȥ��̣���ޤ���
+明示的に渡した証明書を検証なしで信用することを意味します。
 
 --- V_CERTSTATUS_GOOD -> Integer
 [[m:OpenSSL::OCSP::BasicResponse#status]] 
-�Υ��ơ����������ɤǾ�����ͭ���Ǥ��뤳�Ȥ��̣���ޤ���
+のステータスコードで証明書が有効であることを意味します。
 
 --- V_CERTSTATUS_REVOKED -> Integer
 [[m:OpenSSL::OCSP::BasicResponse#status]] 
-�Υ��ơ����������ɤǾ����񤬼������Ƥ��뤳�Ȥ��̣���ޤ���
+のステータスコードで証明書が失効していることを意味します。
 
 --- V_CERTSTATUS_UNKNOWN -> Integer
 [[m:OpenSSL::OCSP::BasicResponse#status]] 
-�Υ��ơ����������ɤǾ������ͭ�����������Ǥ��뤳�Ȥ��̣���ޤ���
+のステータスコードで証明書の有効性が不明であることを意味します。
 
-#@# �ʲ���2�Ĥ�����Ϥ����餯�Ȥ�ƻ���ʤ�
+#@# 以下の2つの定数はおそらく使い道がない
 #@# --- V_RESPID_KEY -> Integer
 #@# #@todo
 #@# --- V_RESPID_NAME -> Integer
 #@# #@todo 
 
 = class OpenSSL::OCSP::OCSPError < OpenSSL::OpenSSLError
-OCSP ��Ϣ�Υ��顼������������ȯ�������㳰�Ǥ���
+OCSP 関連のエラーが生じた場合に発生する例外です。
 
 = class OpenSSL::OCSP::BasicResponse < Object
-OCSP �� Basic OCSP Response ��ɽ�����饹�Ǥ���
+OCSP の Basic OCSP Response を表すクラスです。
 
-�쥹�ݥ󥹤μ¼�Ū������(�����񤬼������Ƥ��뤫�ɤ���)
-�Ϥ��Υ��饹�Υ��֥������Ȥ��ݻ����ޤ���
+レスポンスの実質的な内容(証明書が失効しているかどうか)
+はこのクラスのオブジェクトが保持します。
 
-OCSP �쥹�ݥ������Υ쥹�ݥ󥹼��Τ�
-[[c:OpenSSL::OCSP::Response]] �Υ��֥������Ȥ�ɽ�����Ƥ��ơ�
-���Υ��֥������Ȥ� [[m:OpenSSL::OCSP::Request#basic]] �ˤ�ä�
-BasicResponse �Υ��֥������Ȥ����ޤ���
+OCSP レスポンダからのレスポンス自体は
+[[c:OpenSSL::OCSP::Response]] のオブジェクトが表現していて、
+このオブジェクトの [[m:OpenSSL::OCSP::Request#basic]] によって
+BasicResponse のオブジェクトを得ます。
 
 == Class Methods
 --- new -> OpenSSL::OCSP::BasicResponse
-���� BasicResponse ���֥������Ȥ��������ޤ���
+空の BasicResponse オブジェクトを生成します。
 
 @see [[m:OpenSSL::OCSP::Response.create]]
 
 == Instance Methods
 
 --- add_nonce(val=nil) -> self
-BasicResponse �� nonce ���ɲä��ޤ���
+BasicResponse に nonce を追加します。
 
-�������ά����ȡ�������� nonce �����������Ѥ��ޤ���
+引数を省略すると、ランダムな nonce を生成し利用します。
 
-�̾�Ϥ��Υ᥽�åɤ�Ȥ鷺 [[c:OpenSSL::OCSP::BasicResponse#copy_nonce]] ��
-�Ѥ��ޤ���
+通常はこのメソッドを使わず [[c:OpenSSL::OCSP::BasicResponse#copy_nonce]] を
+用います。
 
-@param val �ɲä��� nonce ����(ʸ����)
+@param val 追加する nonce の値(文字列)
 
 --- add_status(cid, status, reason, revtime, thisupd, nextupd, exts) -> self
-������ξ��֤��䤤��碌�η�̤򥪥֥������Ȥ��ɲä��ޤ���
+証明書の状態の問い合わせの結果をオブジェクトに追加します。
 
-�ܤ����� [[m:OpenSSL::OCSP::BasicResponse#status]] �򸫤Ƥ���������
+詳しくは [[m:OpenSSL::OCSP::BasicResponse#status]] を見てください。
 
-@param cid �䤤��碌��([[c:OpenSSL::OCSP::CertificateId]] ���֥�������)
-@param status ���ơ�����������(����)
-@param reason ������ͳ������(����)
-@param revtime ��������([[c:Time]] ���֥������Ȥ⤷���� nil)
-@param thisupd �ǽ���������([[c:Time]] ���֥�������)
-@param nextupd ���󹹿�����([[c:Time]] ���֥�������)
-@param exts  ��ĥ�ΰ�([[c:OpenSSL::X509::Extension]] ���֥������Ȥ�����)
+@param cid 問い合わせの([[c:OpenSSL::OCSP::CertificateId]] オブジェクト)
+@param status ステータスコード(整数)
+@param reason 失効理由コード(整数)
+@param revtime 失効時刻([[c:Time]] オブジェクトもしくは nil)
+@param thisupd 最終更新時刻([[c:Time]] オブジェクト)
+@param nextupd 次回更新時刻([[c:Time]] オブジェクト)
+@param exts  拡張領域([[c:OpenSSL::X509::Extension]] オブジェクトの配列)
 
 
 --- copy_nonce(request) -> Integer
-request ���� nonce ���ͤ򥳥ԡ����ޤ���
+request から nonce の値をコピーします。
 
-@param request ���ԡ�����nonce���ݻ����Ƥ��� Request ([[c:OpenSSL::OCSP::Request]] ���֥�������)
+@param request コピー元のnonceを保持している Request ([[c:OpenSSL::OCSP::Request]] オブジェクト)
 
 --- sign(signer_cert, signer_key, certs = [], flags=0) -> self
-Response �˽�̾���ޤ���
+Response に署名します。
 
-OCSP �쥹�ݥ��(�⤷���� CA)�ϥ쥹�ݥ󥹤˽�̾�򤹤뤳�Ȥǡ�
-�쥹�ݥ󥹤����Ƥ��ݾڤ��ޤ���
+OCSP レスポンダ(もしくは CA)はレスポンスに署名をすることで、
+レスポンスの内容を保証します。
 
-flags �ˤϰʲ����ͤ� OR ���Ϥ����Ȥ��Ǥ��ޤ���
+flags には以下の値の OR を渡すことができます。
   * [[m:OpenSSL::OCSP::NOTIME]]
   * [[m:OpenSSL::OCSP::RESPID_KEY]]
   * [[m:OpenSSL::OCSP::NOCERTS]]
 
-certs �˾������������Ϥ����Ȥǡ����ν�̾�򸡾ڤ��뤿���
-ɬ�פȤʤ��̤ξ�������ղä��뤳�Ȥ��Ǥ��ޤ���
+certs に証明書の配列を渡すことで、この署名を検証するために
+必要となる別の証明書を付加することができます。
 
-@param signer_cert ��̾�Ԥξ�����([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@param signer_key �������Ѥ�����̩��([[c:OpenSSL::PKey::PKey]] ���֥�������)
-@param certs ź�դ��������([[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�����)
-@param flags �ե饰(����)
+@param signer_cert 署名者の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param signer_key 証明に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param certs 添付する証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param flags フラグ(整数)
 
 
 --- status -> [[OpenSSL::OCSP::CertificateId, Integer, Integer, Time|nil, Time, Time|nil, [OpenSSL::X509::Extension]]]
-������ξ��֤��䤤��碌�η�̤��֤��ޤ���
+証明書の状態の問い合わせの結果を返します。
 
-�����֤��ͤˤ�ʣ�����䤤��碌��̤��ޤޤ�Ƥ��ޤ���
-�ġ��η�̤ϰʲ������Ƥ�����Ǥ���
-  [ �䤤��碌�� CertificateId ���֥�������,
-    ���ơ�����������,
-    ������ͳ������,
-    ��������,
-    �ǽ���������,
-    ���󹹿�����,
-    ��ĥ�ΰ� ]
+この返り値には複数の問い合わせ結果が含まれています。
+個々の結果は以下の内容の配列です。
+  [ 問い合わせの CertificateId オブジェクト,
+    ステータスコード,
+    失効理由コード,
+    失効時刻,
+    最終更新時刻,
+    次回更新時刻,
+    拡張領域 ]
 
-���ơ����������ɤϤ����Τ����줫���ͤ���ޤ�
-  * [[m:OpenSSL::OCSP::V_CERTSTATUS_GOOD]] ����
-  * [[m:OpenSSL::OCSP::V_CERTSTATUS_REVOKED]] ����
-  * [[m:OpenSSL::OCSP::V_CERTSTATUS_UNKNOWN]] ����
+ステータスコードはいかのいずれかの値を取ります
+  * [[m:OpenSSL::OCSP::V_CERTSTATUS_GOOD]] 正常
+  * [[m:OpenSSL::OCSP::V_CERTSTATUS_REVOKED]] 失効
+  * [[m:OpenSSL::OCSP::V_CERTSTATUS_UNKNOWN]] 不明
 
-������ͳ�����ɤϰʲ��Τ����줫���֤��ޤ���
+失効理由コードは以下のいずれかを返します。
   * [[m:OpenSSL::OCSP::REVOKED_STATUS_NOSTATUS]] 
   * [[m:OpenSSL::OCSP::REVOKED_STATUS_UNSPECIFIED]]
   * [[m:OpenSSL::OCSP::REVOKED_STATUS_KEYCOMPROMISE]]
@@ -309,22 +309,22 @@ certs �˾������������Ϥ����Ȥǡ����ν�̾�򸡾ڤ��뤿���
   * [[m:OpenSSL::OCSP::REVOKED_STATUS_CERTIFICATEHOLD]]
   * [[m:OpenSSL::OCSP::REVOKED_STATUS_REMOVEFROMCRL]]
 
-��������Ͼ����񤬼������������ɽ���ޤ����������Ƥ��ʤ����� nil ��
-�֤��ޤ���
+失効時刻は証明書が失効した時刻を表します。失効していない場合は nil を
+返します。
 
-�ǽ���������ϼ������󤬹������줿�����ɽ���ޤ������λ��郎���߻�����
-��Ǥ�����ˤϡ����� Response �����ƤϿ��ѤǤ��ޤ���
+最終更新時刻は失効情報が更新された時刻を表します。この時刻が現在時刻より
+先である場合には、この Response の内容は信用できません。
 
-���󹹿�����ϡ���������ι���ͽ�����Ǥ���
-���λ��郎���߻�����
-��Ǥ�����ˤϡ����� Response �����ƤϿ��ѤǤ��ޤ���
-���󹹿����郎���ꤵ��Ƥ��ʤ����ˤ� nil ���֤��ޤ���
+次回更新時刻は、失効情報の更新予定時刻です。
+この時刻が現在時刻より
+後である場合には、この Response の内容は信用できません。
+次回更新時刻が指定されていない場合には nil を返します。
 
-��ĥ�ΰ�ˤϡ�[[c:OpenSSL::X509::Extension]] �������Ϥ���ޤ���
+拡張領域には、[[c:OpenSSL::X509::Extension]] の配列が渡されます。
 
-��̤�ɤΤ褦�˲�᤹�٤��������ܤ����� [[RFC:2560]] �� X.509 �򸫤Ƥ���������
+結果をどのように解釈すべきか、より詳しくは [[RFC:2560]] や X.509 を見てください。
 
-��:
+例:
   res.basic.status  
   # => [
   #      [#<OpenSSL::OCSP::CertificateId:0x00000000e3c290>, # certificate ID
@@ -336,30 +336,30 @@ certs �˾������������Ϥ����Ȥǡ����ν�̾�򸡾ڤ��뤿���
   #       []]                                               # extensions
   #    ]
 
-@raise OpenSSL::OCSP::OCSPError ���ơ��������ɤ߽Ф��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::OCSP::OCSPError ステータスの読み出しに失敗した場合に発生します
 
 --- verify(certs, store, flags=0) -> bool
-��̾�򸡾ڤ��ޤ���
+署名を検証します。
 
-flags�ˤϰʲ����ͤ� OR ���ä���Τ��Ϥ��ޤ���
+flagsには以下の値の OR を取ったものを渡します。
   * [[m:OpenSSL::OCSP::TRUSTOTHER]]
   * [[m:OpenSSL::OCSP::NOSIGS]]
   * [[m:OpenSSL::OCSP::NOVERIFY]]
   * [[m:OpenSSL::OCSP::NOINTERN]]
 
-TRUSTOTHER ��ͭ���ˤ���� certs �ǻ��ꤷ��������򸡾ڤ����˿��ꤷ�ޤ���
+TRUSTOTHER を有効にすると certs で指定した証明書を検証せずに信頼します。
 
-@param certs ���ڤ��Ѥ����ɲ�Ū�ʾ�����([[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�����)
-@param store ���ڤ��Ѥ�������񥹥ȥ�([[c:OpenSSL::X509::Store]] ���֥�������)
-@param flags �ե饰(����)
+@param certs 検証に用いる追加的な証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param store 検証に用いる証明書ストア([[c:OpenSSL::X509::Store]] オブジェクト)
+@param flags フラグ(整数)
 
 = class OpenSSL::OCSP::CertificateId < Object
-�������֤��䤤��碌�����ġ��ξ������ɽ�����饹�Ǥ���
+失効状態を問い合わせたい個々の証明書を表すクラスです。
 
-�������issuer�ξ���+�����ղä������֥������ȤǤ���
+証明書にissuerの情報+αを付加したオブジェクトです。
 
-CertificateId ���֥������Ȥ�ʣ�� [[c:OpenSSL::OCSP::Request]] �˴ޤᡢ
-Ʊ�����䤤��碌�뤳�Ȥ��Ǥ��ޤ���
+CertificateId オブジェクトを複数 [[c:OpenSSL::OCSP::Request]] に含め、
+同時に問い合わせることができます。
 
 == Class Methods
 #@until 1.9.2
@@ -367,181 +367,181 @@ CertificateId ���֥������Ȥ�ʣ�� [[c:OpenSSL::OCSP::Request]] �˴ޤᡢ
 #@else
 --- new(subject, issuer, digest=nil) -> OpenSSL::OCSP::CertificateId
 #@end
-CertificateId ���֥������Ȥ��������ޤ���
+CertificateId オブジェクトを生成します。
 
-subject �ˤ���礻�оݤξ������issuer�ˤ�subject��issuer(ȯ�Լ�)
-�ξ�������Ϥ��ޤ���
+subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発行者)
+の証明書を渡します。
 
-@param subject ��礻�оݤξ�����([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@param issuer subject��issuer(ȯ�Լ�)�ξ�����([[c:OpenSSL::X509::Certificate]] ���֥�������)
+@param subject 問合せ対象の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param issuer subjectのissuer(発行者)の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
 #@since 1.9.3
-@param digest issuer��̾���Υϥå����ͤ��뤿��Υϥå��奢�르�ꥺ�ࡣnil�ǥǥե���ȤΥ��르�ꥺ�ब�Ȥ��ޤ�
+@param digest issuerの名前のハッシュ値を取るためのハッシュアルゴリズム。nilでデフォルトのアルゴリズムが使われます
 #@end
 
-@raise OpenSSL::OCSP::OCSPError ���֥������Ȥ������˼��Ԥ����ݤ�ȯ�����ޤ�
+@raise OpenSSL::OCSP::OCSPError オブジェクトの生成に失敗した際に発生します
 
 == Instance Methods
 
 --- cmp(other) -> bool
-2�Ĥ� CertificateId ���֥������Ȥ���Ӥ���
-Ʊ����ΤǤ���п����֤��ޤ���
+2つの CertificateId オブジェクトを比較し、
+同じものであれば真を返します。
 
-@param other ��Ӥ��� [[c:OpenSSL::OCSP::CertificateId]] ���֥�������
+@param other 比較する [[c:OpenSSL::OCSP::CertificateId]] オブジェクト
 @see [[m:OpenSSL::OCSP::CertificateId#cmp_issuer]]
 
 --- cmp_issuer(other) -> bool
-2�Ĥ� CertificateId ���֥������Ȥ� issuer(������ȯ�Լ�)����Ӥ���
-Ʊ�� issuer �Ǥ���п����֤��ޤ���
+2つの CertificateId オブジェクトの issuer(証明書発行者)を比較し、
+同じ issuer であれば真を返します。
 
-@param other ��Ӥ��� [[c:OpenSSL::OCSP::CertificateId]] ���֥�������
+@param other 比較する [[c:OpenSSL::OCSP::CertificateId]] オブジェクト
 @see [[m:OpenSSL::OCSP::CertificateId#cmp]]
 
 --- serial -> OpenSSL::BN
-������μ����ֹ���֤��ޤ���
+証明書の識別番号を返します。
 
 @see [[m:OpenSSL::X509::Certificate#serial]]
 
 = class OpenSSL::OCSP::Request < Object
-OCSP �ꥯ�����Ȥ�ɽ�����饹�Ǥ���
+OCSP リクエストを表すクラスです。
 
-��礻����������� [[c:OpenSSL::OCSP::CertificateId]] ���֥������Ȥ�
-����ʣ�����Ĥ��Ȥ��Ǥ��ޤ���
+問合せたい証明書を [[c:OpenSSL::OCSP::CertificateId]] オブジェクトの
+形で複数持つことができます。
 
 == Class Methods
 --- new -> OpenSSL::OCSP::Request
 --- new(der) -> OpenSSL::OCSP::Request
 
-Request ���֥������Ȥ��������ޤ���
-�����ʤ��ξ��ϡ���Ȥ����Υ��֥������Ȥ��������ޤ���
-ʸ������Ϥ������� der �����Ǥ���ȸ��ʤ����ɤ߹��ߤޤ���
+Request オブジェクトを生成します。
+引数なしの場合は、中身が空のオブジェクトを生成します。
+文字列を渡した場合は der 形式であると見なして読み込みます。
 
-@param der �ꥯ�����Ȥξ���򥨥󥳡��ɤ���der������ʸ����
-@raise OpenSSL::OCSP::OCSPError ʸ����Υǥ����ɤ˼��Ԥ�������ȯ�����ޤ�
+@param der リクエストの情報をエンコードしたder形式の文字列
+@raise OpenSSL::OCSP::OCSPError 文字列のデコードに失敗した場合に発生します
 
 == Instance Methods
 
 --- add_certid(cid) -> self
-Request ���֥������Ȥ��䤤��碌�оݤξ����������ɲä��ޤ���
+Request オブジェクトに問い合わせ対象の証明書情報を追加します。
 
-���������� [[c:OpenSSL::OCSP::CertificateId]] �η����Ϥ�ɬ�פ�����ޤ���
+証明書情報は [[c:OpenSSL::OCSP::CertificateId]] の形で渡す必要があります。
 
-@param cid �䤤��碌�оݤξ��������([[c:OpenSSL::OCSP::CertificateId]] ���֥�������)
-@raise OpenSSL::OCSP::OCSPError �ɲä˼��Ԥ�������ȯ�����ޤ���
+@param cid 問い合わせ対象の証明書情報([[c:OpenSSL::OCSP::CertificateId]] オブジェクト)
+@raise OpenSSL::OCSP::OCSPError 追加に失敗した場合に発生します。
 @see [[m:OpenSSL::OCSP::Request#certid]]
 
 --- add_nonce(nonce = nil) -> self
-Request ���֥������Ȥ� nonce ���ɲä��ޤ���
+Request オブジェクトに nonce を追加します。
 
-nonce �Ȥϡ���ץ쥤������ɻߤ��뤿������ꤹ������Ǥ���
+nonce とは、リプレイ攻撃を防止するために設定する乱数です。
 
-@param nonce ���ꤹ��nonceʸ����nil�ξ���Ŭ���������ư�����ꤷ�ޤ�
+@param nonce 設定するnonce文字列。nilの場合は適当な乱数を自動で設定します
 
 --- certid -> [OpenSSL::OCSP::CertificateId]
-Request ���֥������Ȥ��ݻ����Ƥ����䤤��碌�оݤξ�����ξ����
-������֤��ޤ���
+Request オブジェクトが保持している問い合わせ対象の証明書の情報を
+配列で返します。
 
 @see [[m:OpenSSL::OCSP::Request#add_certid]]
 
 --- check_nonce(basic_resp) -> Integer
-���Ȥ� nonce �ȥ쥹�ݥ󥹤� nonce �����礷�Ƥ��뤫
-�����å����ޤ���
+自身の nonce とレスポンスの nonce が整合しているか
+チェックします。
 
--1 ���� 3 �ޤǤ��������֤��ޤ������줾��ΰ�̣�ϰʲ����̤�Ǥ���
-* -1 ���Ȥˤ��� nonce �����ꤵ��Ƥ��ʤ�
-* 0 nonce �����Ȥȥ쥹�ݥ󥹤�ξ���ˤ��뤬�������ʤ�
-* 1 nonce �����Ȥȥ쥹�ݥ󥹤�ξ���ˤ���������
-* 2 nonce �����Ȥȥ쥹�ݥ󥹤Τɤ���ˤ�ʤ�
-* 3 nonce ���쥹�ݥ󥹤ˤ������ꤵ��Ƥ��ʤ�
+-1 から 3 までの整数を返します。それぞれの意味は以下の通りです。
+* -1 自身にしか nonce が設定されていない
+* 0 nonce が自身とレスポンスの両方にあるが等しくない
+* 1 nonce が自身とレスポンスの両方にあり等しい
+* 2 nonce が自身とレスポンスのどちらにもない
+* 3 nonce がレスポンスにしか設定されていない
 
-0 �����餫�������ʤΤǡ������ɬ�������å�����ɬ�פ�����ޤ���
-1 �� nonce ���������Ȥ������Ȥ��̣���ޤ���
-����ʳ��ϡ����(�����Фμ����ʤ�)
-�ˤ�ä������Ǥ��ä��ꤽ���Ǥʤ��ä��ꤷ�ޤ��Τǡ�Ŭ�ڤ˥����å�
-����ɬ�פ�����ޤ���
+0 は明らかに不正なので、これは必ずチェックする必要があります。
+1 は nonce が正しいということを意味します。
+それ以外は、場合(サーバの実装など)
+によって不正であったりそうでなかったりしますので、適切にチェック
+する必要があります。
 
-@param basic_resp ��Ӥ���쥹�ݥ�([[c:OpenSSL::OCSP::BasicResponse]] ���֥�������)
+@param basic_resp 比較するレスポンス([[c:OpenSSL::OCSP::BasicResponse]] オブジェクト)
 
 --- sign(signer_cert, signer_key, certs=nil, flags=nil) -> self
-Request ���֥������Ȥ˽�̾�򤷤ޤ���
+Request オブジェクトに署名をします。
 
-���ν�̾�ϥꥯ����������ʬ���Ȥ�������뤿��˽�̾���ޤ���
-OSCP �쥹�ݥ���Ϥ��ν�̾���ǧ���ޤ���
-Request ���Ф����̾��ɬ�ܤǤϤ���ޤ���
+この署名はリクエスタが自分自身を証明するために署名します。
+OSCP レスポンダはこの署名を確認します。
+Request に対する署名は必須ではありません。
 
-certs �˾������������Ϥ����Ȥǡ����ν�̾�򸡾ڤ��뤿���
-ɬ�פȤʤ��̤ξ�������ղä��뤳�Ȥ��Ǥ��ޤ���
+certs に証明書の配列を渡すことで、この署名を検証するために
+必要となる別の証明書を付加することができます。
 
-@param signer_cert ��̾�Ԥξ�����([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@param signer_key �������Ѥ�����̩��([[c:OpenSSL::PKey::PKey]] ���֥�������)
-@param certs ź�դ��������([[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�����)
-@param flags �ե饰(����)
+@param signer_cert 署名者の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param signer_key 証明に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param certs 添付する証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param flags フラグ(整数)
 
-@raise OpenSSL::OCSP::OCSPError ��̾�˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::OCSP::OCSPError 署名に失敗した場合に発生します
 
 
 --- to_der -> String
-Request ���֥������Ȥ� DER ������ʸ������Ѵ����ޤ���
+Request オブジェクトを DER 形式の文字列に変換します。
 
 --- verify(certs, store, flags=0) -> bool
-Request ���֥������Ȥν�̾�򸡾ڤ��ޤ���
+Request オブジェクトの署名を検証します。
 
-���ڤ������������Ͽ����֤��ޤ���
+検証に成功した場合は真を返します。
 
-flags �ˤϰʲ����ͤ� OR ���ä���Τ��Ϥ��ޤ���
+flags には以下の値の OR を取ったものを渡します。
   * [[m:OpenSSL::OCSP::TRUSTOTHER]]
   * [[m:OpenSSL::OCSP::NOSIGS]]
   * [[m:OpenSSL::OCSP::NOVERIFY]]
   * [[m:OpenSSL::OCSP::NOINTERN]]
 
-TRUSTOTHER ��ͭ���ˤ���� certs �ǻ��ꤷ��������򸡾ڤ����˿��ꤷ�ޤ���
+TRUSTOTHER を有効にすると certs で指定した証明書を検証せずに信頼します。
 
-@param certs ���ڤ��Ѥ����ɲ�Ū�ʾ�����([[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�����)
-@param store ���ڤ��Ѥ�������񥹥ȥ�([[c:OpenSSL::X509::Store]] ���֥�������)
-@param flags �ե饰(����)
+@param certs 検証に用いる追加的な証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param store 検証に用いる証明書ストア([[c:OpenSSL::X509::Store]] オブジェクト)
+@param flags フラグ(整数)
 
 = class OpenSSL::OCSP::Response < Object
-OCSP �쥹�ݥ������Υ쥹�ݥ󥹤�ɽ�魯���֥������ȤǤ���
+OCSP レスポンダからのレスポンスを表わすオブジェクトです。
 
-�쥹�ݥ󥹤μ¼�Ū������(�����񤬼������Ƥ��뤫�ݤ�)
-�� [[m:OpenSSL::OCSP::Response#basic]] 
-�������� [[c:OpenSSL::OCSP::BasicResponse]] ���֥������Ȥ�
-�ݻ����Ƥ��ޤ������Υ��֥������ȼ��Τϥ쥹�ݥ󥹤Υ��ơ�����������
-�ʤɤ��ݻ����Ƥ��ޤ���
+レスポンスの実質的な内容(証明書が失効しているか否か)
+は [[m:OpenSSL::OCSP::Response#basic]] 
+で得られる [[c:OpenSSL::OCSP::BasicResponse]] オブジェクトが
+保持しています。このオブジェクト自体はレスポンスのステータスコード
+などを保持しています。
 
 
 == Class Methods
 
 --- new -> OpenSSL::OCSP::Response
 --- new(der) -> OpenSSL::OCSP::Response
-Response ���֥������Ȥ��������ޤ���
+Response オブジェクトを生成します。
 
-DER ������ʸ������Ϥ������Ϥ������Ƥ�
-�����ɤ��ޤ��������ʤ��ξ��϶��Υ��֥������Ȥ��֤��ޤ���
+DER 形式の文字列を渡した場合はその内容を
+ロードします。引数なしの場合は空のオブジェクトを返します。
 
-@param der DER ������ʸ����
+@param der DER 形式の文字列
 @see [[m:OpenSSL::OCSP::Response.create]]
 
 --- create(status, basic_resp) -> OpenSSL::OCSP::Response
-Response ���֥������Ȥ� [[c:OpenSSL::OCSP::BasicResponse]] ���֥�������
-�����������ޤ���
+Response オブジェクトを [[c:OpenSSL::OCSP::BasicResponse]] オブジェクト
+から生成します。
 
 
-@param status ���ơ�����������(����)
-@param basic_resp [[c:OpenSSL::OCSP::BasicResponse]] ���֥�������
+@param status ステータスコード(整数)
+@param basic_resp [[c:OpenSSL::OCSP::BasicResponse]] オブジェクト
 @see [[m:OpenSSL::OCSP::Response.new]]
 
 == Instance Methods
 
 --- basic -> OpenSSL::OCSP::BasicResponse | nil
-Response ���֥������Ȥ��ݻ����Ƥ��� BasicResponse ���֥������Ȥ�
-�֤��ޤ���
+Response オブジェクトが保持している BasicResponse オブジェクトを
+返します。
 
 @see [[c:OpenSSL::OCSP::BasicResponse]]
 
 --- status  -> Integer
-���ơ����������ɤ��������֤��ޤ���
+ステータスコードを整数で返します。
 
-�ʲ��Τ����줫���֤��ޤ���
+以下のいずれかを返します。
   * [[m:OpenSSL::OCSP::RESPONSE_STATUS_SUCCESSFUL]]
   * [[m:OpenSSL::OCSP::RESPONSE_STATUS_MALFORMEDREQUEST]]
   * [[m:OpenSSL::OCSP::RESPONSE_STATUS_INTERNALERROR]]
@@ -553,11 +553,11 @@ Response ���֥������Ȥ��ݻ����Ƥ��� BasicResponse ���֥������Ȥ�
 
 
 --- status_string -> String
-�쥹�ݥ󥹥��ơ������� human-readable ��ʸ������֤��ޤ���
+レスポンスステータスを human-readable な文字列で返します。
 
 @see [[m:OpenSSL::OCSP::Response#status]]
 
 --- to_der -> String
-Response ���֥������Ȥ� DER ������ʸ������Ѵ����ޤ���
+Response オブジェクトを DER 形式の文字列に変換します。
 
 

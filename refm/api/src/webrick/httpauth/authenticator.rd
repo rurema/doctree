@@ -1,4 +1,4 @@
-HTTP ╟з╛┌д╟═°═╤д╣дыете╕ехб╝еыдЄ─є╢бд╣дыещеде╓ещеъд╟д╣бг
+HTTP шкНши╝уБзхИйчФиуБЩуВЛуГвуВ╕уГеуГ╝уГлуВТцПРф╛ЫуБЩуВЛуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 #@include(authenticator/HTTPAuth__Authenticator)
 #@include(authenticator/HTTPAuth__ProxyAuthenticator)

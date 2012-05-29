@@ -2,7 +2,7 @@
 =begin
 = Ruby/Tk Classes and Modules
 
-== ¥¯¥é¥¹
+== ã‚¯ãƒ©ã‚¹
 
 *((<Object>))
  *((<TclTkIp>))
@@ -82,7 +82,7 @@
  *((<TkEntry::ValidateCmd>))
  *((<TkEntry::ValidateCmd::ValidateArgs>))
 
-== ¥â¥¸¥å¡¼¥ë
+== ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 
 *((<TclTkLib>))
 *((<TkBindCore>))
@@ -113,7 +113,7 @@
 *((<TkXIM>))
 *((<TkcTagAccess>))
 
-== Îã³°¥¯¥é¥¹
+== ä¾‹å¤–ã‚¯ãƒ©ã‚¹
 
 *((<Object>))
  *((<Exception>))

@@ -1,53 +1,53 @@
 = module MonitorMixin
 
-����åɤ�Ʊ�������Ȥ��ƤΥ�˥�����ǽ���󶡤���⥸�塼��Ǥ���
+スレッドの同期機構としてのモニター機能を提供するモジュールです。
 
-���饹�� [[m:Module#include]] �����ꡢ���֥������Ȥ�
-[[m:Object#extend]] �����ꤹ�뤳�ȤǤ��Υ��饹/���֥������Ȥ�
-��˥���ǽ���ɲä��ޤ���
+クラスに [[m:Module#include]] したり、オブジェクトに
+[[m:Object#extend]] したりすることでそのクラス/オブジェクトに
+モニタ機能を追加します。
 
-=== ��
-����ԡ��������������
+=== 例
+消費者、生産者問題の例
   require 'monitor'
     
   buf = []
-  buf.extend(MonitorMixin) # ����˥�˥���ǽ���ɲ�
-  empty_cond = buf.new_cond # ���󤬶��Ǥ��뤫�ʤ��������Τ������ѿ�
+  buf.extend(MonitorMixin) # 配列にモニタ機能を追加
+  empty_cond = buf.new_cond # 配列が空であるかないかを通知する条件変数
   
   # consumer
   Thread.start do
     loop do
-      buf.synchronize do # ���å�����
-        empty_cond.wait_while { buf.empty? } # ���󤬶��Ǥ���֤ϥ��å����������Ԥ�
-        print buf.shift # ���󤬶��Ǥʤ��ʤä�����å���������Ƥ��ιԤ�¹�
-      end # ���å�����
+      buf.synchronize do # ロックする
+        empty_cond.wait_while { buf.empty? } # 配列が空である間はロックを開放して待つ
+        print buf.shift # 配列が空でなくなった後ロックを取得してこの行を実行
+      end # ロックを開放
     end
   end
   
   # producer
   while line = ARGF.gets
-    buf.synchronize do # ���å�����
-      buf.push(line) # ������ѹ�(�ɲ�)
-      empty_cond.signal # ��������Ǥ��ɲä��줿���Ȥ����ѿ����̤�������
-    end # �����ǥ��å�����
+    buf.synchronize do # ロックする
+      buf.push(line) # 配列を変更(追加)
+      empty_cond.signal # 配列に要素が追加されたことを条件変数を通して通知
+    end # ここでロックを開放
   end
 
-=== �����
+=== 初期化
 
-MonitorMixin �Ͻ���������ɬ�פ�����ޤ���
-�����Τ褦�� [[m:Object#extend]] ��Ȥä����Ѥ������
-��ưŪ�˽��������ޤ���
+MonitorMixin は初期化される必要があります。
+上の例のように [[m:Object#extend]] を使って利用する場合は
+自動的に初期化されます。
 
   require 'monitor'
   buf = []
   buf.extend(MonitorMixin)
 
-��������MonitorMixin �򥯥饹����κݤ� [[m:Module#include]] ��Ȥä�
-���Ѥ�����ϡ�initialize �᥽�åɤ� super() �� super ��Ƥ�ǡ����������ɬ�פ�����ޤ���
-�����ѡ����饹�� initialize �˰������Ϥ��������� super �򡢤����Ǥʤ����� super() ��Ƥ�ǲ�������
-�ܤ����ϡ�[[ref:d:spec/call#super]] �򻲾Ȥ��Ʋ�������
-�㤨�С��ʲ��� MyObject �Υ����ѡ����饹�� Object �Ǥ��ꡢ���� initialize �ϰ���������դ��ʤ��Τ�
-super �ǤϤʤ� super() ��Ƥ�ɬ�פ�����ޤ���
+しかし、MonitorMixin をクラス定義の際に [[m:Module#include]] を使って
+利用する場合は、initialize メソッドで super() か super を呼んで、初期化する必要があります。
+スーパークラスの initialize に引数を渡したい場合は super を、そうでない場合は super() を呼んで下さい。
+詳しくは、[[ref:d:spec/call#super]] を参照して下さい。
+例えば、以下の MyObject のスーパークラスは Object であり、その initialize は引数を受け付けないので
+super ではなく super() を呼ぶ必要があります。
 
   require 'monitor'
   class MyObject
@@ -65,7 +65,7 @@ super �ǤϤʤ� super() ��Ƥ�ɬ�פ�����ޤ���
     end
   end
 
-�ʲ��⻲�ͤˤʤ�ޤ���
+以下も参考になります。
 
   * [[ruby-dev:9384]]
   * [[ruby-dev:9386]]
@@ -74,18 +74,18 @@ super �ǤϤʤ� super() ��Ƥ�ɬ�פ�����ޤ���
 
 --- mon_enter -> ()
 
-��˥�������å����ޤ���
+モニターをロックします。
 
-���٤˰�ĤΥ���åɤ�������˥�������å��Ǥ��ޤ���
-���˥�˥��������å�����Ƥ�����ϡ����å������������ޤ�
-���Υ���åɤ��Ԥ��ޤ���
+一度に一つのスレッドだけがモニターをロックできます。
+既にモニターがロックされている場合は、ロックが開放されるまで
+そのスレッドは待ちます。
 
-[[m:Mutex#lock]] ���������ޤ���
-Mutex#lock �Ȱ㤦�Τϸ��ߤΥ�˥����ν�ͭ�Ԥ����߼¹Ԥ���Ƥ��륹��åɤǤ����硢
-���٤Ǥ���å��Ǥ������Ǥ������å������������ mon_exit ��ƤФʤ���Х�˥�����
-��������ޤ���
+[[m:Mutex#lock]] に相当します。
+Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
+何度でもロックできる点です。ロックした回数だけ mon_exit を呼ばなければモニターは
+解放されません。
 
-��:
+例:
 
   require 'monitor'
   buf = []
@@ -93,9 +93,9 @@ Mutex#lock �Ȱ㤦�Τϸ��ߤΥ�˥����ν�ͭ�Ԥ����߼¹Ԥ���Ƥ��륹��åɤǤ����
   buf.mon_enter
   buf.mon_enter
 
-Mutex#lock �Ǥϥǥåɥ��å��������ޤ���
+Mutex#lock ではデッドロックが起きます。
 
-��:
+例:
 
   require 'thread'
   m = Mutex.new
@@ -104,37 +104,37 @@ Mutex#lock �Ǥϥǥåɥ��å��������ޤ���
 
 --- mon_exit -> ()
 
-��˥����Υ��å���������ޤ���
+モニターのロックを解放します。
 
-mon_enter �ǥ��å������������ mon_exit ��
-�ƤФʤ���Х�˥����ϲ�������ޤ���
+mon_enter でロックした回数だけ mon_exit を
+呼ばなければモニターは解放されません。
 
-��˥��������������Х�˥����Υ��å��Ԥ��ˤʤäƤ���
-����åɤ���ļ¹Ԥ�Ƴ����ޤ���
+モニターが解放されればモニターのロック待ちになっていた
+スレッドが一つ実行を再開します。
 
-@raise ThreadError ���å�����äƤ��ʤ�����åɤ��ƤӤ���������ȯ�����ޤ�
+@raise ThreadError ロックを持っていないスレッドが呼びだした場合に発生します
 
 --- mon_synchronize { ... } -> object
 --- synchronize     { ... } -> object
 
-��˥�������å������֥��å���¹Ԥ��ޤ����¹Ը��ɬ����˥����Υ��å���������ޤ���
+モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
 
-�֥��å���ɾ���ͤ��֤��ͤȤ����֤��ޤ���
+ブロックの評価値を返り値として返します。
 
 @see [[m:MonitorMixin#mon_enter]]
 
 --- mon_try_enter -> bool
 --- try_mon_enter -> bool
 
-��˥����Υ��å���������褦�Ȼ�ߤޤ���
-���å�����������(���å����������֤��ä����⤷����
-���å���������Ƥ�������åɤ���ʬ���ȤǤ��ä�)���ˤ�
-�����֤��ޤ���
+モニターのロックを取得しようと試みます。
+ロックに成功した(ロックが開放状態だった、もしくは
+ロックを取得していたスレッドが自分自身であった)場合には
+真を返します。
 
-���å����Ǥ��ʤ��ä����ϵ����֤����¹Ԥ��³���ޤ������ξ��ˤ�
-����åɤϥ֥��å����ޤ���
+ロックができなかった場合は偽を返し、実行を継続します。この場合には
+スレッドはブロックしません。
 
 --- new_cond -> MonitorMixin::ConditionVariable
-��˥��˴�Ϣ�դ���줿�������� 
-[[c:MonitorMixin::ConditionVariable]] �����������֤��ޤ���
+モニタに関連付けられた、新しい 
+[[c:MonitorMixin::ConditionVariable]] を生成して返します。
 

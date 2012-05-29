@@ -3,35 +3,35 @@ require rdoc/markup/simple_markup/to_flow
 #@# require rdoc/ri/ri_formatter
 #@# require rdoc/ri/ri_options
 
-�ץ������λȤ���(RDoc.usage ��ƤӽФ����������ե��������Ƭ�˵��Ҥ�
-�줿������)��ɽ�����뤿��Υ��֥饤�֥��Ǥ���
+プログラムの使い方(RDoc.usage を呼び出したソースファイルの先頭に記述さ
+れたコメント)を表示するためのサブライブラリです。
 
-[����] rdoc/usage �饤�֥��� 1.9 �ϤǤ��ѻߤ���ޤ�����
+[注意] rdoc/usage ライブラリは 1.9 系では廃止されました。
 
-===[a:usage] �Ȥ���
+===[a:usage] 使い方
 
-�ʲ��Τ褦�˼¹Ԥ��ޤ���exit_status��section �Τɤ�����ά��ǽ�Ǥ���
+以下のように実行します。exit_status、section のどちらも省略可能です。
 
   RDoc.usage(exit_status, section, ...)
   RDoc.usage_no_exit(section, ...)
 
-���줾��ΰ����ϰʲ��Τ褦�ʰ�̣�Ǥ���
+それぞれの引数は以下のような意味です。
 
 : exit_status
 
-  �ץ������ν�λ���ơ���������ͤ��Ѵ���ǽ�ʥ��֥������Ȥǻ��ꤷ�ޤ���
-  ���ꤷ�ʤ��ä����� 0 �Ǥ���
+  プログラムの終了ステータスを数値に変換可能なオブジェクトで指定します。
+  指定しなかった場合は 0 です。
 
 : section
 
-  ���Ф����˻��ꤷ��̾���� 1 �ġ��ޤ���ʣ�����ꤷ�ޤ������꤬����С���
-  �θ��Ф�����ʬ������ɽ���������ꤷ�ʤ��ä���������ɽ�����ޤ�������
-  ����٥��̾������ʸ������ʸ���ζ��̤Ϥ���ޤ���
+  見出し部に指定した名前を 1 つ、または複数指定します。指定があれば、そ
+  の見出しの部分だけを表示し、指定しなかった場合は全て表示します。見出
+  しレベルや名前の大文字、小文字の区別はありません。
 
-=== ������
+=== 使用例
 
-�ʲ��Τ褦�˻��Ѥ��ޤ����ºݤˤ� RDoc::usage �ιԤ�Ŭ�������ȥ����Ȥ�
-�Ƽ¹Ԥ��Ƥ���������
+以下のように使用します。実際には RDoc::usage の行を適宜コメントアウトし
+て実行してください。
 
   # Comment block describing usage
   # with (optional) section headings
@@ -45,21 +45,21 @@ require rdoc/markup/simple_markup/to_flow
 
   require 'rdoc/usage'
 
-  # �ץ������λȤ���������ɽ��������λ���ơ����� 0 �ǥץ�������λ��
+  # プログラムの使い方を全て表示し、終了ステータス 0 でプログラムを終了。
   RDoc::usage
 
-  # �ץ������λȤ���������ɽ��������λ���ơ����� 99 �ǥץ�������
-  # λ��
+  # プログラムの使い方を全て表示し、終了ステータス 99 でプログラムを終
+  # 了。
   RDoc::usage(99)
 
-  # ��= Summary�פ����== Author�פμ����ޤǤ�ɽ��������λ���ơ�����
-  # 99 �ǥץ�������λ��
+  # 「= Summary」から「== Author」の手前までを表示し、終了ステータス
+  # 99 でプログラムを終了。
   RDoc::usage(99, 'Summary')
 
-  # Author��Copyright ��ɽ��������λ���ơ����� 0 �ǥץ�������λ��
+  # Author、Copyright を表示し、終了ステータス 0 でプログラムを終了。
   RDoc::usage('Author', 'Copyright')
 
-  # Author��Copyright ��ɽ�������ץ��������³��
+  # Author、Copyright を表示し、プログラムを継続。
   RDoc::usage_no_exit('Author', 'Copyright')
 
 = reopen RDoc
@@ -68,20 +68,20 @@ require rdoc/markup/simple_markup/to_flow
 
 --- usage(*args) -> ()
 
-�ץ������λȤ���(RDoc.usage ��ƤӽФ����������ե��������Ƭ�˵��Ҥ�
-�줿������)��ɸ����Ϥ�ɽ�����ƥץ�������λ���ޤ���
+プログラムの使い方(RDoc.usage を呼び出したソースファイルの先頭に記述さ
+れたコメント)を標準出力に表示してプログラムを終了します。
 
-���ͤ��Ѵ���ǽ�ʥ��֥������Ȥ� args[0] �˻��ꤷ����硢��λ���ơ�������
-args[0] �ǻ��ꤷ���ͤˤ��ޤ������ꤷ�ʤ��ä����� 0 �Ǥ���
+数値に変換可能なオブジェクトを args[0] に指定した場合、終了ステータスを
+args[0] で指定した値にします。指定しなかった場合は 0 です。
 
-@param args �ץ������ν�λ���ơ�������ɽ�����륻�������λ����
-            ����ǻ��ꤷ�ޤ����ܤ����� [[ref:lib:rdoc/usage#usage]] ��
-            ��������������
+@param args プログラムの終了ステータスや表示するセクションの指定を
+            配列で指定します。詳しくは [[ref:lib:rdoc/usage#usage]] を
+            ご覧ください。
 
 --- usage_no_exit(*args) -> ()
 
-�ץ������λȤ���(RDoc.usage ��ƤӽФ����������ե��������Ƭ�˵��Ҥ�
-�줿������)��ɸ����Ϥ�ɽ�����ޤ���
+プログラムの使い方(RDoc.usage を呼び出したソースファイルの先頭に記述さ
+れたコメント)を標準出力に表示します。
 
-@param args ɽ�����륻�������λ��������ǻ��ꤷ�ޤ����ܤ�����
-            [[ref:lib:rdoc/usage#usage]] ��������������
+@param args 表示するセクションの指定を配列で指定します。詳しくは
+            [[ref:lib:rdoc/usage#usage]] をご覧ください。

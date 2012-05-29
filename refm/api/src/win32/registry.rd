@@ -1,34 +1,34 @@
 #@since 1.8.0
-win32/registry ¤Ï Win32 ¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ç¥ì¥¸¥¹¥È¥ê¤ò¥¢¥¯¥»¥¹¤¹¤ë¤¿¤á¤Î
-¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£Win32 API ¤Î¸Æ¤Ó½Ğ¤·¤Ë [[c:Win32API]] ¤ò»È¤¤¤Ş¤¹¡£
+win32/registry ã¯ Win32 ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã§ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚’ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®
+ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚Win32 API ã®å‘¼ã³å‡ºã—ã« [[c:Win32API]] ã‚’ä½¿ã„ã¾ã™ã€‚
 
 //emlist{
 Win32::Registry::HKEY_CURRENT_USER.open('SOFTWARE\foo') do |reg|
-  value = reg['foo']                               # ÃÍ¤ÎÆÉ¤ß¹ş¤ß
-  value = reg['foo', Win32::Registry::REG_SZ]      # ·¿¤ò¸ÂÄê¤·¤¿ÆÉ¤ß¹ş¤ß
-  type, value = reg.read('foo')                    # ÃÍ¤ÎÆÉ¤ß¹ş¤ß
-  reg['foo'] = 'bar'                               # ÃÍ¤Î½ñ¤­¹ş¤ß
-  reg['foo', Win32::Registry::REG_SZ] = 'bar'      # ·¿»ØÄêÉÕ¤­ÃÍ¤Î½ñ¤­¹ş¤ß
-  reg.write('foo', Win32::Registry::REG_SZ, 'bar') # ÃÍ¤Î½ñ¤­¹ş¤ß
+  value = reg['foo']                               # å€¤ã®èª­ã¿è¾¼ã¿
+  value = reg['foo', Win32::Registry::REG_SZ]      # å‹ã‚’é™å®šã—ãŸèª­ã¿è¾¼ã¿
+  type, value = reg.read('foo')                    # å€¤ã®èª­ã¿è¾¼ã¿
+  reg['foo'] = 'bar'                               # å€¤ã®æ›¸ãè¾¼ã¿
+  reg['foo', Win32::Registry::REG_SZ] = 'bar'      # å‹æŒ‡å®šä»˜ãå€¤ã®æ›¸ãè¾¼ã¿
+  reg.write('foo', Win32::Registry::REG_SZ, 'bar') # å€¤ã®æ›¸ãè¾¼ã¿
 
-  reg.each_value { |name, type, data| ... }        # ÃÍ¤ÎÎóµó
-  reg.each_key { |key, wtime| ... }                # ¥µ¥Ö¥­¡¼¤ÎÎóµó
+  reg.each_value { |name, type, data| ... }        # å€¤ã®åˆ—æŒ™
+  reg.each_key { |key, wtime| ... }                # ã‚µãƒ–ã‚­ãƒ¼ã®åˆ—æŒ™
 
-  reg.delete_value('foo')                          # ÃÍ¤Îºï½ü
-  reg.delete_key('foo')                            # ¥µ¥Ö¥­¡¼¤Îºï½ü
-  reg.delete_key('foo', true)                      # ¥µ¥Ö¥­¡¼¤ÎºÆµ¢ºï½ü
+  reg.delete_value('foo')                          # å€¤ã®å‰Šé™¤
+  reg.delete_key('foo')                            # ã‚µãƒ–ã‚­ãƒ¼ã®å‰Šé™¤
+  reg.delete_key('foo', true)                      # ã‚µãƒ–ã‚­ãƒ¼ã®å†å¸°å‰Šé™¤
 end
 //}
 
-=== WSH ¤òÍÑ¤¤¤¿¥ì¥¸¥¹¥È¥ê¥¢¥¯¥»¥¹
+=== WSH ã‚’ç”¨ã„ãŸãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚¢ã‚¯ã‚»ã‚¹
 
-¥ì¥¸¥¹¥È¥ê¤ò¥¢¥¯¥»¥¹¤¹¤ë¤Ë¤Ï [[c:WIN32OLE]] ¤ò»È¤Ã¤Æ WScript.Shell ¥ª¥Ö¥¸¥§¥¯¥È·ĞÍ³¤Ç¥¢¥¯¥»¥¹¤¹¤ëÊıË¡¤â¤¢¤ê¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚’ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã«ã¯ [[c:WIN32OLE]] ã‚’ä½¿ã£ã¦ WScript.Shell ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆçµŒç”±ã§ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹æ–¹æ³•ã‚‚ã‚ã‚Šã¾ã™ã€‚
 
   wsh = WIN32OLE.new('WScript.Shell')
   value = wsh.RegRead 'HKLM\Software\Microsoft\Windows\...'
   wsh.RegWrite 'HKCR\foofile\shell\open\command\', 'REG_SZ', '"C:\..." "%1"'
 
-¤¿¤À¤·¡¤¥­¡¼¤òÎóµó¤·¤¿¤ê¡¤¼«Í³¤Ê¥Ğ¥¤¥Ê¥êÃÍ¤òÆÉ¤ß½ñ¤­¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ş¤»¤ó¡£
+ãŸã ã—ï¼Œã‚­ãƒ¼ã‚’åˆ—æŒ™ã—ãŸã‚Šï¼Œè‡ªç”±ãªãƒã‚¤ãƒŠãƒªå€¤ã‚’èª­ã¿æ›¸ãã™ã‚‹ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚
 
 = class Win32::Registry < Object
 
@@ -43,151 +43,151 @@ include Win32::Registry::Constants
 --- open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
 #@todo
 
-¥ì¥¸¥¹¥È¥ê¥­¡¼ key ²¼¤Î¥­¡¼ subkey ¤ò³«¤­¡¤
-³«¤¤¤¿¥­¡¼¤òÉ½¤¹ Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Ş¤¹¡£
-key ¤Ï¿Æ¤Î¥­¡¼¤ò Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤Ç»ØÄê¤·¤Ş¤¹¡£
-¿Æ¤Î¥­¡¼¤Ë¤ÏÄêµÁºÑ¥­¡¼ HKEY_* ¤ò»ÈÍÑ¤Ç¤­¤Ş¤¹ (¢Í[[c:Win32::Registry::Constants]])
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚­ãƒ¼ key ä¸‹ã®ã‚­ãƒ¼ subkey ã‚’é–‹ãï¼Œ
+é–‹ã„ãŸã‚­ãƒ¼ã‚’è¡¨ã™ Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
+key ã¯è¦ªã®ã‚­ãƒ¼ã‚’ Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§æŒ‡å®šã—ã¾ã™ã€‚
+è¦ªã®ã‚­ãƒ¼ã«ã¯å®šç¾©æ¸ˆã‚­ãƒ¼ HKEY_* ã‚’ä½¿ç”¨ã§ãã¾ã™ (â‡’[[c:Win32::Registry::Constants]])
 
-desired ¤Ï¥¢¥¯¥»¥¹¥Ş¥¹¥¯¤Ç¤¹¡£opt ¤Ï¥­¡¼¤Î¥ª¥×¥·¥ç¥ó¤Ç¤¹¡£
-¾ÜºÙ¤Ï°Ê²¼¤Î MSDN Library ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+desired ã¯ã‚¢ã‚¯ã‚»ã‚¹ãƒã‚¹ã‚¯ã§ã™ã€‚opt ã¯ã‚­ãƒ¼ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã§ã™ã€‚
+è©³ç´°ã¯ä»¥ä¸‹ã® MSDN Library ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
  * Registry Key Security and Access Rights: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp]]
 
-¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤ë¤È¡¤¥­¡¼¤Ï¼«Æ°Åª¤ËÊÄ¤¸¤é¤ì¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ãŒä¸ãˆã‚‰ã‚Œã‚‹ã¨ï¼Œã‚­ãƒ¼ã¯è‡ªå‹•çš„ã«é–‰ã˜ã‚‰ã‚Œã¾ã™ã€‚
 
 --- create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
 --- create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
 #@todo
 
-¥ì¥¸¥¹¥È¥ê¥­¡¼ key ²¼¤Ë¥­¡¼ subkey ¤òºîÀ®¤·¡¤
-³«¤¤¤¿¥­¡¼¤òÉ½¤¹ Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Ş¤¹¡£
-key ¤Ï¿Æ¤Î¥­¡¼¤ò Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤Ç»ØÄê¤·¤Ş¤¹¡£
-¿Æ¤Î¥­¡¼¤Ë¤ÏÄêµÁºÑ¥­¡¼ HKEY_* ¤ò»ÈÍÑ¤Ç¤­¤Ş¤¹ (¢Í[[c:Win32::Registry::Constants]])
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚­ãƒ¼ key ä¸‹ã«ã‚­ãƒ¼ subkey ã‚’ä½œæˆã—ï¼Œ
+é–‹ã„ãŸã‚­ãƒ¼ã‚’è¡¨ã™ Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
+key ã¯è¦ªã®ã‚­ãƒ¼ã‚’ Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§æŒ‡å®šã—ã¾ã™ã€‚
+è¦ªã®ã‚­ãƒ¼ã«ã¯å®šç¾©æ¸ˆã‚­ãƒ¼ HKEY_* ã‚’ä½¿ç”¨ã§ãã¾ã™ (â‡’[[c:Win32::Registry::Constants]])
 
-¥µ¥Ö¥­¡¼¤¬´û¤ËÂ¸ºß¤·¤Æ¤¤¤ì¤Ğ¥­¡¼¤Ï¤¿¤À³«¤«¤ì¡¤[[m:Win32::Registry#created?]]
-¥á¥½¥Ã¥É¤¬ false ¤òÊÖ¤·¤Ş¤¹¡£
+ã‚µãƒ–ã‚­ãƒ¼ãŒæ—¢ã«å­˜åœ¨ã—ã¦ã„ã‚Œã°ã‚­ãƒ¼ã¯ãŸã é–‹ã‹ã‚Œï¼Œ[[m:Win32::Registry#created?]]
+ãƒ¡ã‚½ãƒƒãƒ‰ãŒ false ã‚’è¿”ã—ã¾ã™ã€‚
 
-¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤ë¤È¡¤¥­¡¼¤Ï¼«Æ°Åª¤ËÊÄ¤¸¤é¤ì¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ãŒä¸ãˆã‚‰ã‚Œã‚‹ã¨ï¼Œã‚­ãƒ¼ã¯è‡ªå‹•çš„ã«é–‰ã˜ã‚‰ã‚Œã¾ã™ã€‚
 
 --- expand_environ(str)
 #@todo
 
-str ¤Î %\w+% ¤È¤¤¤¦ÊÂ¤Ó¤ò´Ä¶­ÊÑ¿ô¤ËÃÖ´¹¤·¤Ş¤¹¡£
-REG_EXPAND_SZ ¤ÇÍÑ¤¤¤é¤ì¤Ş¤¹¡£
+str ã® %\w+% ã¨ã„ã†ä¸¦ã³ã‚’ç’°å¢ƒå¤‰æ•°ã«ç½®æ›ã—ã¾ã™ã€‚
+REG_EXPAND_SZ ã§ç”¨ã„ã‚‰ã‚Œã¾ã™ã€‚
 
-¾ÜºÙ¤Ï°Ê²¼¤Î Win32 API ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+è©³ç´°ã¯ä»¥ä¸‹ã® Win32 API ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
  * ExpandEnvironmentStrings: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp]]
 
 --- type2name(type)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤òÀ°¿ô¤«¤é²ÄÆÉÊ¸»úÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ã‚’æ•´æ•°ã‹ã‚‰å¯èª­æ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- wtime2time(wtime)
 #@todo
 
-64bit ¤Î FILETIME ¤ò Time ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤·¤Ş¤¹¡£
+64bit ã® FILETIME ã‚’ Time ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›ã—ã¾ã™ã€‚
 
-¾ÜºÙ¤Ï°Ê²¼¤Î MSDN Library ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+è©³ç´°ã¯ä»¥ä¸‹ã® MSDN Library ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
  * FILETIME Structure: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp]]
 
 --- time2wtime(time)
 #@todo
 
-Time ¥ª¥Ö¥¸¥§¥¯¥È¤Ş¤¿¤Ï Integer ¥ª¥Ö¥¸¥§¥¯¥È¤ò¼õ¤±¼è¤ê¡¤
-64bit ¤Î FILETIME ¤ËÊÑ´¹¤·¤Ş¤¹¡£
+Time ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¾ãŸã¯ Integer ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å—ã‘å–ã‚Šï¼Œ
+64bit ã® FILETIME ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- open(subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
 #@todo
 
-[[m:Win32::Registry.open]](self, subkey, desired, opt) ¤ÈÆ±¤¸¤Ç¤¹¡£
+[[m:Win32::Registry.open]](self, subkey, desired, opt) ã¨åŒã˜ã§ã™ã€‚
 
 --- create(subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
 #@todo
 
-[[m:Win32::Registry.create]](self, subkey, desired, opt) ¤ÈÆ±¤¸¤Ç¤¹¡£
+[[m:Win32::Registry.create]](self, subkey, desired, opt) ã¨åŒã˜ã§ã™ã€‚
 
 --- close
 #@todo
 
-³«¤«¤ì¤Æ¤¤¤ë¥­¡¼¤òÊÄ¤¸¤Ş¤¹¡£
+é–‹ã‹ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼ã‚’é–‰ã˜ã¾ã™ã€‚
 
-ÊÄ¤¸¤é¤ì¤¿¸å¤Ç¤Ï¡¤Â¿¤¯¤Î¥á¥½¥Ã¥É¤ÏÎã³°¤òÈ¯À¸¤·¤Ş¤¹¡£
+é–‰ã˜ã‚‰ã‚ŒãŸå¾Œã§ã¯ï¼Œå¤šãã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ä¾‹å¤–ã‚’ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- read(name, *rtype)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ name ¤òÆÉ¤ß¡¤[ type, data ]
-¤ÎÇÛÎó¤ÇÊÖ¤·¤Ş¤¹¡£
-name ¤¬ nil ¤Î¾ì¹ç¡¤(É¸½à) ¥ì¥¸¥¹¥È¥êÃÍ¤¬ÆÉ¤ß¹ş¤Ş¤ì¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã‚’èª­ã¿ï¼Œ[ type, data ]
+ã®é…åˆ—ã§è¿”ã—ã¾ã™ã€‚
+name ãŒ nil ã®å ´åˆï¼Œ(æ¨™æº–) ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ãŒèª­ã¿è¾¼ã¾ã‚Œã¾ã™ã€‚
 
-type ¤Ï¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤Ç¤¹¡£(¢Í[[c:Win32::Registry::Constants]])
-data ¤Ï¥ì¥¸¥¹¥È¥êÃÍ¤Î¥Ç¡¼¥¿¤Ç¡¤¥¯¥é¥¹¤Ï°Ê²¼¤ÎÄÌ¤ê¤Ç¤¹:
+type ã¯ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ã§ã™ã€‚(â‡’[[c:Win32::Registry::Constants]])
+data ã¯ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®ãƒ‡ãƒ¼ã‚¿ã§ï¼Œã‚¯ãƒ©ã‚¹ã¯ä»¥ä¸‹ã®é€šã‚Šã§ã™:
   * REG_SZ, REG_EXPAND_SZ
     String
   * REG_MULTI_SZ
-    String ¤ÎÇÛÎó
+    String ã®é…åˆ—
   * REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_QWORD
     Integer
   * REG_BINARY
-    String (¥Ğ¥¤¥Ê¥ê¥Ç¡¼¥¿¤ò´Ş¤ß¤Ş¤¹)
+    String (ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‚’å«ã¿ã¾ã™)
 
-¥ª¥×¥·¥ç¥ó°ú¿ô rtype ¤¬»ØÄê¤µ¤ì¤Æ¤¤¤¿¾ì¹ç¡¤¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤¬
-Í¿¤¨¤é¤ì¤¿ rtype ¤ÎÇÛÎó¤ËÂ¸ºß¤¹¤ë¤«¥Á¥§¥Ã¥¯¤µ¤ì¡¤Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ë
-[[c:TypeError]] ¤¬È¯À¸¤·¤Ş¤¹¡£
+ã‚ªãƒ—ã‚·ãƒ§ãƒ³å¼•æ•° rtype ãŒæŒ‡å®šã•ã‚Œã¦ã„ãŸå ´åˆï¼Œãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ãŒ
+ä¸ãˆã‚‰ã‚ŒãŸ rtype ã®é…åˆ—ã«å­˜åœ¨ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã•ã‚Œï¼Œå­˜åœ¨ã—ãªã„å ´åˆã«
+[[c:TypeError]] ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- [](name, *rtype)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ name ¤òÆÉ¤ß¡¤¤½¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£¥¯¥é¥¹¤Ï
-[[m:Win32::Registry#read]] ¤Ë½à¤¸¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã‚’èª­ã¿ï¼Œãã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚ã‚¯ãƒ©ã‚¹ã¯
+[[m:Win32::Registry#read]] ã«æº–ã˜ã¾ã™ã€‚
 
-¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤¬ REG_EXPAND_SZ ¤À¤Ã¤¿¾ì¹ç¡¤´Ä¶­ÊÑ¿ô¤¬ÃÖ´¹¤µ¤ì¤Ş¤¹¡£
-¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤¬ REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,
-REG_DWORD_BIG_ENDIAN, REG_QWORD °Ê³°¤À¤Ã¤¿¾ì¹ç¤Ï TypeError ¤¬È¯À¸¤·¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ãŒ REG_EXPAND_SZ ã ã£ãŸå ´åˆï¼Œç’°å¢ƒå¤‰æ•°ãŒç½®æ›ã•ã‚Œã¾ã™ã€‚
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ãŒ REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,
+REG_DWORD_BIG_ENDIAN, REG_QWORD ä»¥å¤–ã ã£ãŸå ´åˆã¯ TypeError ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
-¥ª¥×¥·¥ç¥ó°ú¿ô rtype ¤Î°ÕÌ£¤Ï read ¤ÈÆ±¤¸¤Ç¤¹¡£
+ã‚ªãƒ—ã‚·ãƒ§ãƒ³å¼•æ•° rtype ã®æ„å‘³ã¯ read ã¨åŒã˜ã§ã™ã€‚
 
 --- read_s(name)
 --- read_i(name)
 --- read_bin(name)
 #@todo
 
-·¿¤¬¤½¤ì¤¾¤ì REG_SZ(read_s), REG_DWORD(read_i), REG_BINARY(read_bin)
-¤Ç¤¢¤ë¥ì¥¸¥¹¥È¥êÃÍ name ¤òÆÉ¤ß¡¤¤½¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
+å‹ãŒãã‚Œãã‚Œ REG_SZ(read_s), REG_DWORD(read_i), REG_BINARY(read_bin)
+ã§ã‚ã‚‹ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã‚’èª­ã¿ï¼Œãã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-·¿¤¬¥Ş¥Ã¥Á¤·¤Ê¤«¤Ã¤¿¾ì¹ç¡¤TypeError ¤¬È¯À¸¤·¤Ş¤¹¡£
+å‹ãŒãƒãƒƒãƒã—ãªã‹ã£ãŸå ´åˆï¼ŒTypeError ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- read_s_expand(name)
 #@todo
 
-·¿¤¬ REG_SZ ¤Ş¤¿¤Ï REG_EXPAND_SZ ¤Ç¤¢¤ë¥ì¥¸¥¹¥È¥êÃÍ name ¤òÆÉ¤ß¡¤
-¤½¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
+å‹ãŒ REG_SZ ã¾ãŸã¯ REG_EXPAND_SZ ã§ã‚ã‚‹ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã‚’èª­ã¿ï¼Œ
+ãã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-·¿¤¬ REG_EXPAND_SZ ¤À¤Ã¤¿¾ì¹ç¡¤´Ä¶­ÊÑ¿ô¤¬ÃÖ´¹¤µ¤ì¤¿ÃÍ¤¬ÊÖ¤ê¤Ş¤¹¡£
-REG_SZ ¤Ş¤¿¤Ï REG_EXPAND_SZ °Ê³°¤À¤Ã¤¿¾ì¹ç¡¤TypeError ¤¬È¯À¸¤·¤Ş¤¹¡£
+å‹ãŒ REG_EXPAND_SZ ã ã£ãŸå ´åˆï¼Œç’°å¢ƒå¤‰æ•°ãŒç½®æ›ã•ã‚ŒãŸå€¤ãŒè¿”ã‚Šã¾ã™ã€‚
+REG_SZ ã¾ãŸã¯ REG_EXPAND_SZ ä»¥å¤–ã ã£ãŸå ´åˆï¼ŒTypeError ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- write(name, type, data)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ name ¤Ë·¿ type ¤Ç data ¤ò½ñ¤­¹ş¤ß¤Ş¤¹¡£
-name ¤¬ nil ¤Î¾ì¹ç¡¤(É¸½à) ¥ì¥¸¥¹¥È¥êÃÍ¤Ë½ñ¤­¹ş¤ß¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã«å‹ type ã§ data ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚
+name ãŒ nil ã®å ´åˆï¼Œ(æ¨™æº–) ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã«æ›¸ãè¾¼ã¿ã¾ã™ã€‚
 
-type ¤Ï¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤Ç¤¹¡£(¢Í[[c:Win32::Registry::Constants]])
-data ¤Î¥¯¥é¥¹¤Ï [[m:Win32::Registry#read]]
-¥á¥½¥Ã¥É¤Ë½à¤¸¤Æ¤¤¤Ê¤±¤ì¤Ğ¤Ê¤ê¤Ş¤»¤ó¡£
+type ã¯ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ã§ã™ã€‚(â‡’[[c:Win32::Registry::Constants]])
+data ã®ã‚¯ãƒ©ã‚¹ã¯ [[m:Win32::Registry#read]]
+ãƒ¡ã‚½ãƒƒãƒ‰ã«æº–ã˜ã¦ã„ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
 --- [](name, wtype = nil)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ name ¤Ë value ¤ò½ñ¤­¹ş¤ß¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã« value ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚
 
-¥ª¥×¥·¥ç¥ó°ú¿ô wtype ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¤¤½¤Î·¿¤Ç½ñ¤­¹ş¤ß¤Ş¤¹¡£
-»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¡¤value ¤Î¥¯¥é¥¹¤Ë±ş¤¸¤Æ¼¡¤Î·¿¤Ç½ñ¤­¹ş¤ß¤Ş¤¹:
+ã‚ªãƒ—ã‚·ãƒ§ãƒ³å¼•æ•° wtype ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ï¼Œãã®å‹ã§æ›¸ãè¾¼ã¿ã¾ã™ã€‚
+æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆï¼Œvalue ã®ã‚¯ãƒ©ã‚¹ã«å¿œã˜ã¦æ¬¡ã®å‹ã§æ›¸ãè¾¼ã¿ã¾ã™:
   * Integer
     REG_DWORD
   * String
@@ -200,102 +200,102 @@ data ¤Î¥¯¥é¥¹¤Ï [[m:Win32::Registry#read]]
 --- write_bin(name, value)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ name ¤Ë value ¤ò½ñ¤­¹ş¤ß¤Ş¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã« value ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚
 
-¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¤Ï¤½¤ì¤¾¤ì REG_SZ(write_s), REG_DWORD(write_i),
-REG_BINARY(write_bin) ¤Ç¤¹¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ã¯ãã‚Œãã‚Œ REG_SZ(write_s), REG_DWORD(write_i),
+REG_BINARY(write_bin) ã§ã™ã€‚
 
 --- each {|name, type, value| ... }
 --- each_value {|name, type, value| ... }
 #@todo
 
-¥­¡¼¤¬»ı¤Ä¥ì¥¸¥¹¥È¥êÃÍ¤òÎóµó¤·¤Ş¤¹¡£
+ã‚­ãƒ¼ãŒæŒã¤ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã‚’åˆ—æŒ™ã—ã¾ã™ã€‚
 
 --- each_key {|subkey, wtime| ... }
 #@todo
 
-¥­¡¼¤Î¥µ¥Ö¥­¡¼¤òÎóµó¤·¤Ş¤¹¡£
+ã‚­ãƒ¼ã®ã‚µãƒ–ã‚­ãƒ¼ã‚’åˆ—æŒ™ã—ã¾ã™ã€‚
 
-subkey ¤Ï¥µ¥Ö¥­¡¼¤ÎÌ¾Á°¤òÉ½¤¹ String ¤Ç¤¹¡£
-wtime ¤ÏºÇ½ª¹¹¿·»ş¹ï¤òÉ½¤¹ FILETIME (64-bit À°¿ô) ¤Ç¤¹¡£
-(¢Í[[m:Win32::Registry.wtime2time]])
+subkey ã¯ã‚µãƒ–ã‚­ãƒ¼ã®åå‰ã‚’è¡¨ã™ String ã§ã™ã€‚
+wtime ã¯æœ€çµ‚æ›´æ–°æ™‚åˆ»ã‚’è¡¨ã™ FILETIME (64-bit æ•´æ•°) ã§ã™ã€‚
+(â‡’[[m:Win32::Registry.wtime2time]])
 
 --- delete(name)
 --- delete_value(name)
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ name ¤òºï½ü¤·¤Ş¤¹¡£
-(É¸½à) ¥ì¥¸¥¹¥È¥êÃÍ¤òºï½ü¤¹¤ë¤³¤È¤Ï¤Ç¤­¤Ş¤»¤ó¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ name ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
+(æ¨™æº–) ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã‚’å‰Šé™¤ã™ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“ã€‚
 
 --- delete_key(name, recursive = false)
 #@todo
 
-¥µ¥Ö¥­¡¼ name ¤È¤½¤Î¥­¡¼¤¬»ı¤Ä¤¹¤Ù¤Æ¤ÎÃÍ¤òºï½ü¤·¤Ş¤¹¡£
+ã‚µãƒ–ã‚­ãƒ¼ name ã¨ãã®ã‚­ãƒ¼ãŒæŒã¤ã™ã¹ã¦ã®å€¤ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 
-recursive ¤¬ false ¤Î¾ì¹ç¡¤¤½¤Î¥µ¥Ö¥­¡¼¤Ï¥µ¥Ö¥­¡¼¤ò»ı¤Ã¤Æ¤¤¤Æ¤Ï¤Ê¤ê¤Ş¤»¤ó¡£
-true ¤Î¾ì¹ç¡¤¥­¡¼¤ÏºÆµ¢Åª¤Ëºï½ü¤µ¤ì¤Ş¤¹¡£
+recursive ãŒ false ã®å ´åˆï¼Œãã®ã‚µãƒ–ã‚­ãƒ¼ã¯ã‚µãƒ–ã‚­ãƒ¼ã‚’æŒã£ã¦ã„ã¦ã¯ãªã‚Šã¾ã›ã‚“ã€‚
+true ã®å ´åˆï¼Œã‚­ãƒ¼ã¯å†å¸°çš„ã«å‰Šé™¤ã•ã‚Œã¾ã™ã€‚
 
 --- flush
 #@todo
 
-¥­¡¼¤ÎÁ´¤Æ¤Î¥Ç¡¼¥¿¤ò¥ì¥¸¥¹¥È¥ê¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹ş¤ß¤Ş¤¹¡£
+ã‚­ãƒ¼ã®å…¨ã¦ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãè¾¼ã¿ã¾ã™ã€‚
 
 --- created?
 #@todo
 
-¥­¡¼¤¬¿·¤·¤¯ºîÀ®¤µ¤ì¤¿¾ì¹ç¡¤¿¿¤òÊÖ¤·¤Ş¤¹¡£
-(¢Í[[m:Win32::Registry.create]])
+ã‚­ãƒ¼ãŒæ–°ã—ãä½œæˆã•ã‚ŒãŸå ´åˆï¼ŒçœŸã‚’è¿”ã—ã¾ã™ã€‚
+(â‡’[[m:Win32::Registry.create]])
 
 --- opened?
 #@todo
 
-¥­¡¼¤¬¤Ş¤ÀÊÄ¤¸¤é¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¡¤¿¿¤òÊÖ¤·¤Ş¤¹¡£
+ã‚­ãƒ¼ãŒã¾ã é–‰ã˜ã‚‰ã‚Œã¦ã„ãªã„å ´åˆï¼ŒçœŸã‚’è¿”ã—ã¾ã™ã€‚
 
 --- parent
 #@todo
 
-¿Æ¤Î¥­¡¼¤òÉ½¤¹ Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Ş¤¹¡£
-ÄêµÁºÑ¥­¡¼¤Ç¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
+è¦ªã®ã‚­ãƒ¼ã‚’è¡¨ã™ Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
+å®šç¾©æ¸ˆã‚­ãƒ¼ã§ã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- keyname
 #@todo
 
-[[m:Win32::Registry.open]] ¤Ş¤¿¤Ï [[m:Win32::Registry.create]] ¤Ë»ØÄê¤µ¤ì¤¿
-subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
+[[m:Win32::Registry.open]] ã¾ãŸã¯ [[m:Win32::Registry.create]] ã«æŒ‡å®šã•ã‚ŒãŸ
+subkey ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- disposition
 #@todo
 
-¥­¡¼¤Î disposition ÃÍ¤òÊÖ¤·¤Ş¤¹¡£
-(REG_CREATED_NEW_KEY ¤Ş¤¿¤Ï REG_OPENED_EXISTING_KEY)
+ã‚­ãƒ¼ã® disposition å€¤ã‚’è¿”ã—ã¾ã™ã€‚
+(REG_CREATED_NEW_KEY ã¾ãŸã¯ REG_OPENED_EXISTING_KEY)
 
 --- name
 --- to_s
 #@todo
 
-¥­¡¼¤Î¥Õ¥ë¥Ñ¥¹¤ò 'HKEY_CURRENT_USER\SOFTWARE\foo\bar'
-¤Î¤è¤¦¤Ê·Á¤ÇÊÖ¤·¤Ş¤¹¡£
+ã‚­ãƒ¼ã®ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’ 'HKEY_CURRENT_USER\SOFTWARE\foo\bar'
+ã®ã‚ˆã†ãªå½¢ã§è¿”ã—ã¾ã™ã€‚
 
 --- info
 #@todo
 
-¥­¡¼¾ğÊó¤ò°Ê²¼¤ÎÃÍ¤ÎÇÛÎó¤ÇÊÖ¤·¤Ş¤¹:
+ã‚­ãƒ¼æƒ…å ±ã‚’ä»¥ä¸‹ã®å€¤ã®é…åˆ—ã§è¿”ã—ã¾ã™:
   * num_keys
-    ¥µ¥Ö¥­¡¼¤Î¸Ä¿ô
+    ã‚µãƒ–ã‚­ãƒ¼ã®å€‹æ•°
   * max_key_length
-    ¥µ¥Ö¥­¡¼Ì¾¤ÎºÇÂçÄ¹
+    ã‚µãƒ–ã‚­ãƒ¼åã®æœ€å¤§é•·
   * num_values
-    ÃÍ¤Î¸Ä¿ô
+    å€¤ã®å€‹æ•°
   * max_value_name_length
-    ÃÍ¤ÎÌ¾Á°¤ÎºÇÂçÄ¹
+    å€¤ã®åå‰ã®æœ€å¤§é•·
   * max_value_length
-    ÃÍ¤ÎºÇÂçÄ¹
+    å€¤ã®æœ€å¤§é•·
   * descriptor_length
-    ¥»¥­¥å¥ê¥Æ¥£µ­½Ò»Ò¤ÎÄ¹¤µ
+    ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£è¨˜è¿°å­ã®é•·ã•
   * wtime
-    ºÇ½ª¹¹¿·»ş¹ï (FILETIME)
+    æœ€çµ‚æ›´æ–°æ™‚åˆ» (FILETIME)
 
-¾ÜºÙ¤Ï°Ê²¼¤Î Win32 API ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+è©³ç´°ã¯ä»¥ä¸‹ã® Win32 API ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
  * RegQueryInfoKey: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/regqueryinfokey.asp]]
 
@@ -308,7 +308,7 @@ subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 --- wtime
 #@todo
 
-¥­¡¼¾ğÊó¤Î¸Ä¡¹¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
+ã‚­ãƒ¼æƒ…å ±ã®å€‹ã€…ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
 
 --- []=(name, rtype, value = nil)
@@ -340,9 +340,9 @@ subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 --- HKEY_DYN_DATA
 #@todo
 
-¤½¤ì¤¾¤ì¤ÎÄêµÁºÑ¥­¡¼¤òÉ½¤¹ Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
+ãã‚Œãã‚Œã®å®šç¾©æ¸ˆã‚­ãƒ¼ã‚’è¡¨ã™ Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã™ã€‚
 
-¾ÜºÙ¤Ï°Ê²¼¤Î MSDN Library ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+è©³ç´°ã¯ä»¥ä¸‹ã® MSDN Library ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
  * Predefined Keys: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp]]
 
@@ -410,7 +410,7 @@ subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 
 = module Win32::Registry::Constants
 
-¾ÜºÙ¤Ï°Ê²¼¤Î MSDN Library ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+è©³ç´°ã¯ä»¥ä¸‹ã® MSDN Library ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
  * Registry: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp]]
 
@@ -427,8 +427,8 @@ subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 --- HKEY_DYN_DATA
 #@todo
 
-ÄêµÁºÑ¥­¡¼ÃÍ¡£
-¤³¤ì¤é¤Ï Integer ¤Ç¡¢Win32::Registry ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤¢¤ê¤Ş¤»¤ó¡£
+å®šç¾©æ¸ˆã‚­ãƒ¼å€¤ã€‚
+ã“ã‚Œã‚‰ã¯ Integer ã§ã€Win32::Registry ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
 
 --- REG_NONE
 --- REG_SZ
@@ -446,7 +446,7 @@ subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 --- REG_QWORD_LITTLE_ENDIAN
 #@todo
 
-¥ì¥¸¥¹¥È¥êÃÍ¤Î·¿¡£
+ãƒ¬ã‚¸ã‚¹ãƒˆãƒªå€¤ã®å‹ã€‚
 
 --- STANDARD_RIGHTS_READ
 --- STANDARD_RIGHTS_WRITE
@@ -462,15 +462,15 @@ subkey ¤ÎÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 --- KEY_ALL_ACCESS
 #@todo
 
-¥»¥­¥å¥ê¥Æ¥£¥¢¥¯¥»¥¹¥Ş¥¹¥¯¡£
+ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚¢ã‚¯ã‚»ã‚¹ãƒã‚¹ã‚¯ã€‚
 
 
 --- REG_CREATED_NEW_KEY
 --- REG_OPENED_EXISTING_KEY
 #@todo
 
-¥­¡¼¤¬¿·¤·¤¯ºî¤é¤ì¤¿¤«¡¢´ûÂ¸¥­¡¼¤¬³«¤«¤ì¤¿¤«¡£
-[[m:Win32::Registry#disposition]] ¥á¥½¥Ã¥É¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+ã‚­ãƒ¼ãŒæ–°ã—ãä½œã‚‰ã‚ŒãŸã‹ã€æ—¢å­˜ã‚­ãƒ¼ãŒé–‹ã‹ã‚ŒãŸã‹ã€‚
+[[m:Win32::Registry#disposition]] ãƒ¡ã‚½ãƒƒãƒ‰ã‚‚å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
 --- REG_OPTION_RESERVED
 --- REG_OPTION_NON_VOLATILE

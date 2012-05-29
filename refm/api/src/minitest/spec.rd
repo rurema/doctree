@@ -1,11 +1,11 @@
 
-BDD ���˥ƥ��Ȥ�񤯤���Υ��饹��᥽�åɤ�������뤿��Υ饤�֥��Ǥ���
+BDD 風にテストを書くためのクラスやメソッドを定義するためのライブラリです。
 
-���Υ饤�֥��� [[c:Object]] �� BDD (Behavior Driven Development) �Ѥθ����᥽�åɤ��ɲä��ޤ���
-�ɲä����᥽�åɤ� [[c:MiniTest::Assertions]] ���������Ƥ���᥽�åɤؤ�
-������åѡ��ˤʤäƤ��ޤ���
+このライブラリは [[c:Object]] に BDD (Behavior Driven Development) 用の検査メソッドを追加します。
+追加されるメソッドは [[c:MiniTest::Assertions]] に定義されているメソッドへの
+薄いラッパーになっています。
 
-#@# message ����ꤹ��Ȥ������ʤ��Ȥˤʤ�
+#@# message を指定するとおかしなことになる
 
 = reopen Module
 
@@ -13,15 +13,15 @@ BDD ���˥ƥ��Ȥ�񤯤���Υ��饹��᥽�åɤ�������뤿��Υ饤�֥��Ǥ���
 
 --- infect_with_assertions(positive_prefix, negative_prefix, skip_regexp, map = {}) -> ()
 
-BDD ���˥ƥ��Ȥ�񤯤���˻��Ѥ���᥽�åɷ���������ޤ���
+BDD 風にテストを書くために使用するメソッド群を定義します。
 
-@param positive_prefix assert ������Υץ�ե��å�������ꤷ�ޤ���
+@param positive_prefix assert の代わりのプレフィックスを指定します。
 
-@param negative_prefix refute ������Υץ�ե��å�������ꤷ�ޤ���
+@param negative_prefix refute の代わりのプレフィックスを指定します。
 
-@param skip_regexp ��������ɽ���˥ޥå������᥽�åɤ�������ޤ���
+@param skip_regexp この正規表現にマッチしたメソッドは定義しません。
 
-@param map �᥽�å�̾���Ѵ���§�Υϥå������ꤷ�ޤ���
+@param map メソッド名の変換規則のハッシュを指定します。
 
 = reopen Object
 
@@ -29,149 +29,149 @@ BDD ���˥ƥ��Ȥ�񤯤���˻��Ѥ���᥽�åɷ���������ޤ���
 
 --- must_be_empty -> true
 
-���Ȥ����Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身が空である場合、検査にパスしたことになります。
 
-@raise MiniTest::Assertion ���Ȥ� empty? �᥽�åɤ�����ʤ�����ȯ�����ޤ���
-                           �ޤ������Ȥ����Ǥʤ����ˤ�ȯ�����ޤ���
+@raise MiniTest::Assertion 自身が empty? メソッドを持たない場合に発生します。
+                           また、自身が空でない場合にも発生します。
 
 @see [[m:MiniTest::Assertions#assert_empty]]
 
 --- must_equal(expected) -> true
 
-���Ȥ�����оݤΥ��֥������Ȥ���������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身が比較対象のオブジェクトと等しい場合、検査にパスしたことになります。
 
-@param expected ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param expected 比較対象のオブジェクトを指定します。
 
-@raise MiniTest::Assertion Ϳ����줿�����ͤȼºݤ��ͤ��������ʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた期待値と実際の値が等しくない場合に発生します。
 
 @see [[m:Object#==]], [[m:MiniTest::Assertions#assert_equal]]
 
 --- must_be_within_delta(expected, delta = 0.001) -> true
 --- must_be_close_to(expected, delta = 0.001) -> true
 
-���Ȥȴ����ͤκ��������ͤ�Ϳ����줿���и����ʲ��Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身と期待値の差の絶対値が与えられた絶対誤差以下である場合、検査にパスしたことになります。
 
-@param expected �����ͤ���ꤷ�ޤ���
+@param expected 期待値を指定します。
 
-@param delta ���Ƥ������и�������ꤷ�ޤ���
+@param delta 許容する絶対誤差を指定します。
 
-@raise MiniTest::Assertion Ϳ����줿�����ͤȼºݤ��ͤκ��������ͤ�Ϳ����줿��ʬ��ۤ������ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_in_delta]]
 
 --- must_be_within_epsilon(actual, epsilon = 0.001) -> true
-���Ȥȼºݤ��ͤ����и����������ϰ���Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身と実際の値の相対誤差が許容範囲内である場合、検査にパスしたことになります。
 
-@param actual �ºݤ��ͤ���ꤷ�ޤ���
+@param actual 実際の値を指定します。
 
-@param epsilon ���Ƥ������и�������ꤷ�ޤ���
+@param epsilon 許容する相対誤差を指定します。
 
-@raise MiniTest::Assertion �����˼��Ԥ�������ȯ�����ޤ���
+@raise MiniTest::Assertion 検査に失敗した場合に発生します。
 
 --- must_include(object) -> true
 
-���Ȥ�Ϳ����줿���֥������Ȥ��ޤޤ�Ƥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身に与えられたオブジェクトが含まれている場合、検査にパスしたことになります。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@raise MiniTest::Assertion ���Ȥ� include? �᥽�åɤ�����ʤ�����ȯ�����ޤ���
-                           ���Ȥ�Ϳ����줿���֥������Ȥ��ޤޤ�Ƥ��ʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身が include? メソッドを持たない場合に発生します。
+                           自身に与えられたオブジェクトが含まれていない場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_includes]]
 
 --- must_be_instance_of(klass) -> true
 
-���Ȥ�Ϳ����줿���饹�Υ��󥹥��󥹤Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身が与えられたクラスのインスタンスである場合、検査にパスしたことになります。
 
-@param klass Ǥ�դΥ��饹����ꤷ�ޤ���
+@param klass 任意のクラスを指定します。
 
-@raise MiniTest::Assertion ���Ȥ���Ϳ����줿���饹��ľ�ܤΥ��󥹥��󥹤Ǥʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身がが与えられたクラスの直接のインスタンスでない場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_instance_of]]
 
 --- must_be_kind_of(klass) -> true
 
-���Ȥ���Ϳ����줿���饹�ޤ��Ϥ��Υ��֥��饹�Υ��󥹥���
-�Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身がが与えられたクラスまたはそのサブクラスのインスタンス
+である場合、検査にパスしたことになります。
 
-@param klass ���Ȥ���°���뤳�Ȥ���Ԥ��륯�饹����ꤷ�ޤ���
+@param klass 自身が所属することを期待するクラスを指定します。
 
-@raise MiniTest::Assertion ���Ȥ�Ϳ����줿���饹�ޤ��Ϥ��Υ��֥��饹�Υ��󥹥��󥹤ǤϤʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身が与えられたクラスまたはそのサブクラスのインスタンスではない場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_kind_of]]
 
 --- must_match(regexp) -> true
 
-���Ȥ���Ϳ����줿����ɽ���˥ޥå�������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身がが与えられた正規表現にマッチした場合、検査にパスしたことになります。
 
-@param regexp ����ɽ����ʸ�������ꤷ�ޤ���ʸ�������ꤷ����������ɽ�����Ѵ����Ƥ���
-              ���Ѥ��ޤ���
+@param regexp 正規表現か文字列を指定します。文字列を指定した場合は正規表現に変換してから
+              使用します。
 
-@raise MiniTest::Assertion ���Ȥ�Ϳ����줿����ɽ���˥ޥå����ʤ��ä�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身が与えられた正規表現にマッチしなかった場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_match]]
 
 --- must_be_nil -> true
 
-���Ȥ� nil �Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身が nil である場合、検査にパスしたことになります。
 
-@raise MiniTest::Assertion ���Ȥ� nil �Ǥʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身が nil でない場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_nil]]
 
 --- must_be -> true
 
-���Ȥ�ɾ����̤����Ǥ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身の評価結果が死んである場合、検査にパスしたことになります。
 
-@raise MiniTest::Assertion ���Ȥ�ɾ����̤����Ǥ������ȯ�����ޤ���
+@raise MiniTest::Assertion 自身の評価結果が偽である場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert]]
 
 --- must_raise(*args) -> true
-���Ȥ�ɾ�����Ϳ����줿�㳰��ȯ�������硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身を評価中に与えられた例外が発生する場合、検査にパスしたことになります。
 
-@param args ���Ȥ�ɾ�����ȯ�������ǽ���Τ����㳰���饹���İʾ���ꤷ�ޤ���
+@param args 自身を評価中に発生する可能性のある例外クラスを一つ以上指定します。
 
-@raise MiniTest::Assertion ���Ȥ�ɾ��������̡��㳰��ȯ�����ʤ�����ȯ�����ޤ���
-                           �ޤ������Ȥ�ɾ�����ȯ�������㳰����Ϳ����줿�㳰
-                           �ޤ��Ϥ��Υ��֥��饹�Ǥʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身を評価した結果、例外が発生しない場合に発生します。
+                           また、自身を評価中に発生した例外が、与えられた例外
+                           またはそのサブクラスでない場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_raises]]
 
 --- must_respond_to(method_name) -> true
-���Ȥ�Ϳ����줿�᥽�åɤ���ľ�硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身が与えられたメソッドを持つ場合、検査にパスしたことになります。
 
-@param method_name �᥽�å�̾����ꤷ�ޤ���
+@param method_name メソッド名を指定します。
 
-@raise MiniTest::Assertion ���Ȥ�Ϳ����줿�᥽�åɤ�����ʤ�����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身が与えられたメソッドを持たない場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_respond_to]]
 
 --- must_be_same_as(actual) -> true
-���Ȥ�Ϳ����줿���֥������Ȥ� [[m:Object#object_id]] ��Ʊ����硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身と与えられたオブジェクトの [[m:Object#object_id]] が同じ場合、検査にパスしたことになります。
 
-@param actual Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param actual 任意のオブジェクトを指定します。
 
-@raise MiniTest::Assertion ���Ȥ�Ϳ����줿���֥������Ȥ��ۤʤ����ȯ�����ޤ���
+@raise MiniTest::Assertion 自身と与えられたオブジェクトが異なる場合に発生します。
 
 --- must_send -> true
 #@todo
-#@# �ɤ���äƻȤ���
-#@# �������顢������Ф���ɾ��������̤����ξ�硢�����˥ѥ��������Ȥˤʤ�ޤ���
+#@# どうやって使う？
+#@# 引数から、式を取り出して評価した結果が真の場合、検査にパスしたことになります。
 #@# 
-#@# @param array ������Ǥ˥쥷���ФȤʤ�Ǥ�դΥ��֥������ȡ��������Ǥ˥᥽�å�̾��
-#@#              �軰���Ǥ˥ѥ�᡼���򤽤줾����ꤷ���������ꤷ�ޤ���
+#@# @param array 第一要素にレシーバとなる任意のオブジェクト、第二要素にメソッド名、
+#@#              第三要素にパラメータをそれぞれ指定した配列を指定します。
 #@# 
-#@# @raise MiniTest::Assertion ���Ф������������֤�����ȯ�����ޤ���
+#@# @raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
 #@#
 #@# @see [[m:MiniTest::Assertions#assert_send]]
 
 --- must_throw(tag) -> true
-���Ȥ�ɾ����ˡ�Ϳ����줿������ [[m:Kernel.#throw]] ���줿��硢�����˥ѥ��������Ȥˤʤ�ޤ���
+自身を評価中に、与えられたタグが [[m:Kernel.#throw]] された場合、検査にパスしたことになります。
 
-@param tag ���Ȥ�ɾ����� [[m:Kernel.#throw]] ����륿����Ǥ�դΥ��֥������ȤȤ��ƻ��ꤷ�ޤ���
+@param tag 自身を評価中に [[m:Kernel.#throw]] されるタグを任意のオブジェクトとして指定します。
 
-@raise MiniTest::Assertion Ϳ����줿������ [[m:Kernel.#throw]] ����ʤ��ä�����ȯ�����ޤ���
+@raise MiniTest::Assertion 与えられたタグが [[m:Kernel.#throw]] されなかった場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_throws]]
 
@@ -181,48 +181,48 @@ BDD ���˥ƥ��Ȥ�񤯤���˻��Ѥ���᥽�åɷ���������ޤ���
 
 --- describe(desc){ ... }
 
-Ϳ����줿����ʸ����̾����������ƥƥ��ȥ��饹��������ޤ���
+与えられた説明文から名前を作成してテストクラスを定義します。
 
-���饹������ϡ�Ϳ����줿�֥��å������Ƥˤʤ�ޤ���
+クラスの定義は、与えられたブロックの内容になります。
 
-@param desc �֥��å����Ф�����������ꤷ�ޤ���
+@param desc ブロックに対する説明を指定します。
 
 = class MiniTest::Unit::TestCase
 = class MiniTest::Spec < MiniTest::Unit::TestCase
 
-BDD ���˥ƥ��Ȥ�񤯤���� [[c:MiniTest::Unit::TestCase]] ���Ф����åѡ����饹�Ǥ���
+BDD 風にテストを書くための [[c:MiniTest::Unit::TestCase]] に対するラッパークラスです。
 
 == Singleton Methods
 
 --- new(name)
 
-Ϳ����줿̾���Ǽ��Ȥ��������ޤ���
+与えられた名前で自身を初期化します。
 
 --- current -> MiniTest::Spec
 
-���߼¹���� [[c:MiniTest::Spec]] �Υ��󥹥��󥹤��֤��ޤ���
+現在実行中の [[c:MiniTest::Spec]] のインスタンスを返します。
 
 --- before(type = :each){ ... } -> Proc
 
-�ƥƥ��Ȥ����˼¹Ԥ���֥��å�����Ͽ���ޤ���
+各テストの前に実行するブロックを登録します。
 
-@param type :each ����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+@param type :each を指定することができます。
 
-@raise RuntimeError type �� :each �ʳ�����ꤹ���ȯ�����ޤ���
+@raise RuntimeError type に :each 以外を指定すると発生します。
 
 --- after(type = :each){ ... } -> Proc
 
-�ƥƥ��Ȥθ�˼¹Ԥ���֥��å�����Ͽ���ޤ���
+各テストの後に実行するブロックを登録します。
 
-@param type :each ����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+@param type :each を指定することができます。
 
-@raise RuntimeError type �� :each �ʳ�����ꤹ���ȯ�����ޤ���
+@raise RuntimeError type に :each 以外を指定すると発生します。
 
 --- it(desc){ ... } -> ()
 
-�ƥ��ȥ���������������ޤ���
+テストケースを一つ定義します。
 
-Ϳ����줿�֥��å�����ĤΥƥ��ȥ��������������ޤ���
+与えられたブロックが一つのテストケースに相当します。
 
-@param desc �ƥ��ȥ���������������ꤷ�ޤ���
+@param desc テストケースの説明を指定します。
 

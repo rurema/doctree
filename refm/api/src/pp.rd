@@ -1,15 +1,15 @@
-���֥������Ȥʤɤ򸫤䤹�����Ϥ��뤿��Υ饤�֥��Ǥ���
+オブジェクトなどを見やすく出力するためのライブラリです。
 
-���Υ饤�֥��� require ����� [[m:Kernel.#pp]] ���������ޤ���
-[[m:Kernel.#p]] �Τ����� [[m:Kernel.#pp]] ��Ȥ����Ȥˤ�ꡢ
-Ŭ�ڤ˥���ǥ�ȤȲ��Ԥ��줿ʬ����䤹�����Ϥ����뤳�Ȥ�����ޤ���pp �饤�֥��ϡ�
-�桼���������餷������������饹���Ф��Ƥ⸫�䤹��ɽ����
-����褦�˺���Ƥ��ޤ��Τǡ�[[m:Kernel.#pp]] ��Ȥ����;�פʺ�Ȥ򤹤�
-ɬ�פϤ���ޤ���
+このライブラリを require すると [[m:Kernel.#pp]] が定義されます。
+[[m:Kernel.#p]] のかわりに [[m:Kernel.#pp]] を使うことにより、
+適切にインデントと改行された分かりやすい出力を得ることが出来ます。pp ライブラリは、
+ユーザがあたらしく定義したクラスに対しても見やすい表示を
+するように作られていますので、[[m:Kernel.#pp]] を使う上で余計な作業をする
+必要はありません。
 
-=== �ɤ��餬�ɤߤ䤹���Ǥ��礦��?
+=== どちらが読みやすいでしょうか?
 
-p �ˤ�� pretty-print ����Ƥʤ�����:
+p による pretty-print されてない出力:
   #<PP:0x81a0d10 @stack=[], @genspace=#<Proc:0x81a0cc0>, @nest=[0], @newline="\n",
    @buf=#<PrettyPrint::Group:0x81a0c98 @group=0, @tail=0, @buf=[#<PrettyPrint::Gro
   up:0x81a0ba8 @group=1, @tail=0, @buf=[#<PrettyPrint::Text:0x81a0b30 @tail=2, @wi
@@ -22,7 +22,7 @@ p �ˤ�� pretty-print ����Ƥʤ�����:
   idth=1>, #<PrettyPrint::Text:0x81a0af4 @tail=0, @width=1, @text="]">], @singleli
   ne_width=6>], @singleline_width=6>, @sharing_detection=false>
 
-pp �ˤ�� pretty-print ���줿����:
+pp による pretty-print された出力:
   #<PP:0x40d0688
    @buf=
     #<PrettyPrint::Group:0x40d064c
@@ -63,23 +63,23 @@ pp �ˤ�� pretty-print ���줿����:
    @stack=[]>
 
 
-=== ���ϤΥ������ޥ���
+=== 出力のカスタマイズ
 
-���륯�饹�� pp �ν��Ϥ򥫥����ޥ������������ϡ�
-���Υ��饹�� pretty_print �᥽�åɤ� pretty_print_cycle �᥽�åɤ��������ޤ���
-���Υ᥽�åɤ� [[c:PP]] ���֥������Ȥ�����Ȥ��� pp �¹Ի��˸ƤФ�ޤ���
-�桼����ɽ�����������Ƥ�ɽ���ĥ꡼��
-�����Ȥ���Ϳ����줿 [[c:PP]] ���֥������Ȥ�Ȥäưʲ��Τ褦�˺������ޤ���
+あるクラスの pp の出力をカスタマイズしたい場合は、
+そのクラスで pretty_print メソッドと pretty_print_cycle メソッドを再定義します。
+このメソッドは [[c:PP]] オブジェクトを引数として pp 実行時に呼ばれます。
+ユーザは表示したい内容を表すツリーを、
+引数として与えられた [[c:PP]] オブジェクトを使って以下のように作成します。
 
-  * [[m:PrettyPrint#group]] ��ȤäƻҥΡ��ɤ�Ĥ���ޤ���Ʊ���˻ҥΡ��ɤΥ���ǥ�Ȥο�������ޤ���
-  * [[m:PrettyPrint#breakable]] ��ȤäƲ��Ԥ��Ƥ��ɤ�������ꤷ�ޤ���
-  * [[m:PP#pp]] ��Ȥäƽ��Ϥ��������󥹥����ѿ��ʤɤ���Ϥ��ޤ���
-  * [[m:PrettyPrint#text]] ��Ȥäơ����Ϥ����䤹���ʤ�褦�ˡ�,�פʤɤν���ʸ����Ŭ���������ޤ���
+  * [[m:PrettyPrint#group]] を使って子ノードをつくります。同時に子ノードのインデントの深さも決めます。
+  * [[m:PrettyPrint#breakable]] を使って改行しても良い場所を指定します。
+  * [[m:PP#pp]] を使って出力したいインスタンス変数などを出力します。
+  * [[m:PrettyPrint#text]] を使って、出力が見やすくなるように「,」などの修飾文字を適宜挿入します。
 
-[[c:PP]] �� [[c:PrettyPrint]] �Υ��֥��饹�Ǥ��Τǡ���� PrettyPrint �Υ᥽�åɤȤ���Ƥ����Τ�
-PP �Υ᥽�åɤǤ⤢��ޤ���
+[[c:PP]] は [[c:PrettyPrint]] のサブクラスですので、上で PrettyPrint のメソッドとされているものは
+PP のメソッドでもあります。
 
-�ʲ��� Hash �� pretty printing �Υ������ޥ�������Ǥ���
+以下は Hash の pretty printing のカスタマイズの例です。
 
   require 'pp'
   class Hash
@@ -126,19 +126,19 @@ PP �Υ᥽�åɤǤ⤢��ޤ���
   </hash>
 
 = class PP < PrettyPrint
-���֥������Ȥʤɤ򸫤䤹�����Ϥ��뤿��Υ��饹�Ǥ���
+オブジェクトなどを見やすく出力するためのクラスです。
 
 == Class Methods
 --- pp(obj, out = $>, width = 79)    -> object
 
-���ꤵ�줿���֥������� obj ������� out ���� width �ǽ��Ϥ��ޤ���
-������ out ���֤��ޤ���
+指定されたオブジェクト obj を出力先 out に幅 width で出力します。
+出力先 out を返します。
 
-@param obj ɽ�����������֥������Ȥ���ꤷ�ޤ���
+@param obj 表示したいオブジェクトを指定します。
 
-@param out ���������ꤷ�ޤ���<< �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
+@param out 出力先を指定します。<< メソッドが定義されている必要があります。
 
-@param width �������������ꤷ�ޤ���
+@param width 出力先の幅を指定します。
 
   str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
   puts str
@@ -154,14 +154,14 @@ PP �Υ᥽�åɤǤ⤢��ޤ���
 --- sharing_detection                 -> bool
 --- sharing_detection=(boolean)
 
-��ͭ���Хե饰��ɽ�����������Ǥ���
-�ǥե���Ȥ� false �Ǥ���true �Ǥ����硢
-[[m:PP.pp]] �ϰ��ٽ��Ϥ������֥������Ȥ�Ƥӽ��Ϥ����
-[[m:Object#pretty_print_cycle]] ��Ȥ��ޤ���
+共有検出フラグを表すアクセサです。
+デフォルトは false です。true である場合、
+[[m:PP.pp]] は一度出力したオブジェクトを再び出力する時
+[[m:Object#pretty_print_cycle]] を使います。
 
-@param boolean ��ͭ���Хե饰�� true �� false �ǻ��ꤷ�ޤ���
+@param boolean 共有検出フラグを true か false で指定します。
 
-��:
+例:
 
   require 'pp'
   b = [1, 2, 3]
@@ -175,37 +175,37 @@ PP �Υ᥽�åɤǤ⤢��ޤ���
 
 --- singleline_pp(obj, out=$>)    -> object
 
-���ꤵ�줿���֥������� obj ������� out �˽��Ϥ��ޤ���
-������������ǥ�Ȥ���Ԥ⤷�ޤ���
-������ out ���֤��ޤ���
+指定されたオブジェクト obj を出力先 out に出力します。
+ただし、インデントも改行もしません。
+出力先 out を返します。
 
-@param obj ɽ�����������֥������Ȥ���ꤷ�ޤ���
+@param obj 表示したいオブジェクトを指定します。
 
-@param out ���������ꤷ�ޤ���<< �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
+@param out 出力先を指定します。<< メソッドが定義されている必要があります。
 
 == Instance Methods
 --- pp(obj)    -> ()
 
-���ꤵ�줿���֥������� obj �� [[m:Object#pretty_print]] ��ȤäƼ��ȤΥХåե����ɲä��ޤ���
+指定されたオブジェクト obj を [[m:Object#pretty_print]] を使って自身のバッファに追加します。
 
-obj �����Ǥˡ����ߤΥΡ��ɤοƤˤ����ƽ��Ϥ���Ƥ������ˤϡ�
-���ȤΥ롼�פ�¸�ߤ��Ƥ���Τǡ�[[m:Object#pretty_print]] �������
-[[m:Object#pretty_print_cycle]] ���Ȥ��ޤ���
+obj がすでに、現在のノードの親において出力されていた場合には、
+参照のループが存在しているので、[[m:Object#pretty_print]] の代わりに
+[[m:Object#pretty_print_cycle]] が使われます。
 
-@param obj ɽ�����������֥������Ȥ���ꤷ�ޤ���
+@param obj 表示したいオブジェクトを指定します。
 
 --- object_group(obj) { ... }    -> ()
 
-�ʲ���������Ư���򤹤��ΤǴ��ؤΤ�����Ѱդ���Ƥ��ޤ���
+以下と等価な働きをするもので簡便のために用意されています。
   group(1, '#<' + obj.class.name, '>') { ... }
 
-@param obj ɽ�����������֥������Ȥ���ꤷ�ޤ���
+@param obj 表示したいオブジェクトを指定します。
 
 @see [[m:PrettyPrint#group]]
 
 --- comma_breakable    -> ()
 
-�ʲ���������Ư���򤹤��ΤǴ��ؤΤ�����Ѱդ���Ƥ��ޤ���
+以下と等価な働きをするもので簡便のために用意されています。
   text ','
   breakable
 
@@ -213,12 +213,12 @@ obj �����Ǥˡ����ߤΥΡ��ɤοƤˤ����ƽ��Ϥ���Ƥ������ˤϡ�
 
 --- seplist(list, sep = lambda { comma_breakable }, iter_method = :each){|e| ...}    -> ()
 
-�ꥹ�Ȥγ����Ǥ򲿤��Ƕ��ڤ�Ĥġ����Ȥ��ɲä��Ƥ�������˻Ȥ��ޤ���
+リストの各要素を何かで区切りつつ、自身に追加していくために使われます。
 
-list �� iter_method �ˤ�äƥ��ƥ졼�Ȥ��������Ǥ�����Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-�ޤ������줾��Υ֥��å��μ¹Ԥι�֤� sep ���ƤФ�ޤ���
+list を iter_method によってイテレートし、各要素を引数としてブロックを実行します。
+また、それぞれのブロックの実行の合間に sep が呼ばれます。
 
-�Ĥޤꡢ�ʲ��Τդ��Ĥ�Ʊ�ͤǤ���
+つまり、以下のふたつは同値です。
 
   q.seplist([1,2,3]) {|v| q.pp v }
 
@@ -228,13 +228,13 @@ list �� iter_method �ˤ�äƥ��ƥ졼�Ȥ��������Ǥ�����Ȥ��ƥ֥��å���¹Ԥ��ޤ�
   q.comma_breakable
   q.pp 3
 
-@param list ���Ȥ��ɲä����������Ϳ���ޤ���iter_method ��Ŭ�ڤ˻��ꤹ��С�
-            Enumerable �Ǥʤ��Ƥ⹽���ޤ���
+@param list 自身に追加したい配列を与えます。iter_method を適切に指定すれば、
+            Enumerable でなくても構いません。
 
-@param sep ���ڤ�򼫿Ȥ��ɲä���֥��å���Ϳ���ޤ���list �����ƥ졼�Ȥ���ʤ��ʤ顢
-           sep �Ϸ褷�ƸƤФ�ޤ���
+@param sep 区切りを自身に追加するブロックを与えます。list がイテレートされないなら、
+           sep は決して呼ばれません。
 
-@param iter_method list �򥤥ƥ졼�Ȥ���᥽�åɤ򥷥�ܥ��Ϳ���ޤ���
+@param iter_method list をイテレートするメソッドをシンボルで与えます。
 
 @see [[m:PP#comma_breakable]]
 
@@ -243,17 +243,17 @@ list �� iter_method �ˤ�äƥ��ƥ졼�Ȥ��������Ǥ�����Ȥ��ƥ֥��å���¹Ԥ��ޤ�
 
 --- pretty_print(pp)    -> ()
 
-[[m:PP.pp]] �� [[m:Kernel.#pp]] �����֥������Ȥ����Ƥ���Ϥ���Ȥ���
-�ƤФ��᥽�åɤǤ���[[c:PP]] ���֥������� pp ������Ȥ��ƸƤФ�ޤ���
+[[m:PP.pp]] や [[m:Kernel.#pp]] がオブジェクトの内容を出力するときに
+呼ばれるメソッドです。[[c:PP]] オブジェクト pp を引数として呼ばれます。
 
-���륯�饹�� pp �ν��Ϥ򥫥����ޥ������������ϡ����Υ᥽�åɤ��������ޤ���
-���ΤȤ� pretty_print �᥽�åɤϻ��ꤵ�줿 pp ���Ф���ɽ�����������Ȥ����Ƥ��ɲä���
-�����ʤ���Ф����ޤ��󡣤����Ĥ����Ȥ߹��ߥ��饹�ˤĤ��ơ�
-[[lib:pp]] �饤�֥��Ϥ��餫���� pretty_print �᥽�åɤ�������Ƥ��ޤ���
+あるクラスの pp の出力をカスタマイズしたい場合は、このメソッドを再定義します。
+そのとき pretty_print メソッドは指定された pp に対して表示したい自身の内容を追加して
+いかなければいけません。いくつかの組み込みクラスについて、
+[[lib:pp]] ライブラリはあらかじめ pretty_print メソッドを定義しています。
 
-@param pp [[c:PP]] ���֥������ȤǤ���
+@param pp [[c:PP]] オブジェクトです。
 
-��:
+例:
   
  class Array
    def pretty_print(q)
@@ -269,15 +269,15 @@ list �� iter_method �ˤ�äƥ��ƥ졼�Ȥ��������Ǥ�����Ȥ��ƥ֥��å���¹Ԥ��ޤ�
 
 --- pretty_print_cycle(pp)    -> ()
 
-�ץ�ƥ��ץ��Ȼ��˥��֥������Ȥν۴Ļ��Ȥ����Ф��줿��硢
-[[m:Object#pretty_print]] ������˸ƤФ��᥽�åɤǤ���
+プリティプリント時にオブジェクトの循環参照が検出された場合、
+[[m:Object#pretty_print]] の代わりに呼ばれるメソッドです。
 
-���륯�饹�� pp �ν��Ϥ򥫥����ޥ������������ϡ�
-���Υ᥽�åɤ���������ɬ�פ�����ޤ���
+あるクラスの pp の出力をカスタマイズしたい場合は、
+このメソッドも再定義する必要があります。
 
-@param pp [[c:PP]] ���֥������ȤǤ���
+@param pp [[c:PP]] オブジェクトです。
 
-��:
+例:
  
  class Array 
    def pretty_print_cycle(q)
@@ -289,21 +289,21 @@ list �� iter_method �ˤ�äƥ��ƥ졼�Ȥ��������Ǥ�����Ȥ��ƥ֥��å���¹Ԥ��ޤ�
 
 --- pretty_print_instance_variables    -> [String | Symbol]
 
-�ץ�ƥ��ץ��Ȼ���ɽ�����٤����ȤΥ��󥹥����ѿ�̾������򥽡��Ȥ����֤��ޤ���
-�֤��줿���󥹥����ѿ��ϥץ�ƥ��ץ��Ȼ���ɽ������ޤ���
+プリティプリント時に表示すべき自身のインスタンス変数名の配列をソートして返します。
+返されたインスタンス変数はプリティプリント時に表示されます。
 
-pp ��ɽ���������ʤ����󥹥����ѿ���������ˤ��Υ᥽�åɤ��������ޤ���
+pp に表示したくないインスタンス変数がある場合にこのメソッドを再定義します。
 
 --- pretty_print_inspect    -> String
 
-[[m:Object#pretty_print]] ��Ȥä� [[m:Object#inspect]] ��Ʊ�ͤ�
-���֥������Ȥ�ʹ֤��ɤ��������Ѵ�����ʸ������֤��ޤ���
+[[m:Object#pretty_print]] を使って [[m:Object#inspect]] と同様に
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
-���Ϥ������ƤΥ��֥������Ȥ� [[m:Object#pretty_print]] ���������Ƥ���ɬ�פ�����ޤ���
-�����Ǥʤ����ˤ� [[c:RuntimeError]] ��ȯ�����ޤ���
+出力する全てのオブジェクトに [[m:Object#pretty_print]] が定義されている必要があります。
+そうでない場合には [[c:RuntimeError]] が発生します。
 
-@raise RuntimeError ���Ϥ������ƤΥ��֥������Ȥ� [[m:Object#pretty_print]] ����������
-                    ���ʤ�����ȯ�����ޤ���
+@raise RuntimeError 出力する全てのオブジェクトに [[m:Object#pretty_print]] が定義されて
+                    いない場合に発生します。
 
 = reopen Kernel
 == Module Functions
@@ -313,12 +313,12 @@ pp ��ɽ���������ʤ����󥹥����ѿ���������ˤ��Υ᥽�åɤ��������ޤ���
 --- pp(*obj)    -> nil
 #@end
 
-���ꤵ�줿���֥������� obj ��ɸ����Ϥ˸��䤹������(�ץ�ƥ��ץ���)�ǽ��Ϥ��ޤ���
-obj ���줾�������Ȥ��� [[m:PP.pp]] ��ƤӤ��Ȥ�Ʊ���Ǥ���
+指定されたオブジェクト obj を標準出力に見やすい形式(プリティプリント)で出力します。
+obj それぞれを引数として [[m:PP.pp]] を呼びことと同等です。
 
-@param obj ɽ�����������֥������Ȥ���ꤷ�ޤ���
+@param obj 表示したいオブジェクトを指定します。
 
-��:
+例:
   require 'pp'
 
   b = [1, 2, 3] * 4
@@ -337,5 +337,5 @@ obj ���줾�������Ȥ��� [[m:PP.pp]] ��ƤӤ��Ȥ�Ʊ���Ǥ���
 == Instance Methods
 --- pretty_inspect    -> String
 
-self �� pp ��ɽ�������Ȥ��η�̤�ʸ����Ȥ����֤��ޤ���
+self を pp で表示したときの結果を文字列として返します。
 #@end

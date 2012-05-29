@@ -1,6 +1,6 @@
 require rinda/rinda
 
-Ruby¤Ë¤è¤ë¥¿¥×¥ë¶õ´Ö(Tuple Space)¤Î¼ÂÁõ¤Ç¤¹¡£
+Rubyã«ã‚ˆã‚‹ã‚¿ãƒ—ãƒ«ç©ºé–“(Tuple Space)ã®å®Ÿè£…ã§ã™ã€‚
 
 #@include(Rinda__TupleSpace)
 #@include(Rinda__TupleEntry)

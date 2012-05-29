@@ -1,264 +1,264 @@
 --- static int clone_method(ID mid, NODE *body, st_table *tbl)
 
-m_tbl ��Ǽ�����Υ᥽�å� (��ʸ��) �򥳥ԡ������֤��ޤ���
-ST_CONTINUE ���֤��ޤ���
+m_tbl 格納形式のメソッド (構文木) をコピーして返します。
+ST_CONTINUE を返します。
 
 --- static VALUE include_class_new(VALUE module, VALUE super)
 
-super �򥹡��ѡ����饹�Ȥ���
-�⥸�塼��Ρֲ��ȡץ��饹��������֤��ޤ���
+super をスーパークラスとして
+モジュールの「化身」クラスを作成し返します。
 
 --- static int ins_methods_i(ID key, NODE *body, VALUE ary)
 
-rb_class_instance_methods() �Υ��ƥ졼���֥��å� (�̾���)��
+rb_class_instance_methods() のイテレータブロック (通常版)。
 
 --- static int ins_methods_priv_i(ID key, NODE *body, VALUE ary)
 
-rb_class_instance_methods() �Υ��ƥ졼���֥��å�
-(private �᥽�å���)��
+rb_class_instance_methods() のイテレータブロック
+(private メソッド版)。
 
 --- static int ins_methods_prot_i(ID key, NODE *body, VALUE ary)
 
-rb_class_instance_methods() �Υ��ƥ졼���֥��å�
-(protected �᥽�å���)��
+rb_class_instance_methods() のイテレータブロック
+(protected メソッド版)。
 
 --- static VALUE method_list(VALUE mod, int option, int (*func)())
 
-�⥸�塼�� mod ���������Ƥ���᥽�åɤ��Ф���
-���֤� func �򷫤��֤��ƤӽФ��ޤ���
+モジュール mod に定義されているメソッドに対して
+順番に func を繰り返し呼び出します。
 
 --- VALUE rb_class_boot(VALUE super)
 
-�����ѡ����饹�� super �Ȥ��륯�饹���֥������Ȥ���������֤��ޤ���
+スーパークラスを super とするクラスオブジェクトを作成し、返します。
 
 --- VALUE rb_class_inherited(VALUE super, VALUE klass)
 
-���饹 super �β��̥��饹 klass ���������줿���Ȥ�
-�����ơ�super ���Ф� inherited �᥽�åɤ�ƤӽФ��ޤ���
+クラス super の下位クラス klass が作成されたことを
+受けて、super に対し inherited メソッドを呼び出します。
 
 --- VALUE rb_class_instance_methods(int argc, VALUE *argv, VALUE mod)
 
-Module#instance_methods �μ��Ρ�
-�⥸�塼�� mod ���������Ƥ��� public �᥽�å�̾��
-�ꥹ�Ȥ�ʸ�����������֤��ޤ���
+Module#instance_methods の実体。
+モジュール mod に定義されている public メソッド名の
+リストを文字列の配列で返します。
 
 --- VALUE rb_class_new(VALUE super)
 
-super �򥹡��ѡ����饹�Ȥ���
-���������饹���֥������Ȥ����������֤��ޤ���
+super をスーパークラスとして
+新しいクラスオブジェクトを生成し、返します。
 
 --- VALUE rb_class_private_instance_methods(int argc, VALUE *argv, VALUE mod)
 
-Module#private_instance_methods �μ��Ρ�
-�⥸�塼�� mod ���������Ƥ��� private �᥽�å�̾��
-�ꥹ�Ȥ�ʸ�����������֤��ޤ���
+Module#private_instance_methods の実体。
+モジュール mod に定義されている private メソッド名の
+リストを文字列の配列で返します。
 
 --- VALUE rb_class_protected_instance_methods(int argc, VALUE *argv, VALUE mod)
 
-Module#protected_instance_methods �μ��Ρ�
-�⥸�塼�� mod ���������Ƥ��� protected �᥽�å�̾��
-�ꥹ�Ȥ�ʸ�����������֤��ޤ���
+Module#protected_instance_methods の実体。
+モジュール mod に定義されている protected メソッド名の
+リストを文字列の配列で返します。
 
 --- void rb_define_alias(VALUE klass, const char *new, const char *old)
 
-���饹 klass �Υ��󥹥��󥹥᥽�å� old ��
-��̾ new ��������ޤ���
+クラス klass のインスタンスメソッド old の
+別名 new を定義します。
 
 --- void rb_define_attr(VALUE klass, const char *name, int read, int write)
 
-���饹 klass �˥᥽�å� name �� name= ��������ޤ���
-read �����ΤȤ��� name ���������
-write �����ΤȤ��� name= ��������ޤ���
+クラス klass にメソッド name と name= を定義します。
+read が真のときは name を定義し、
+write が真のときは name= を定義します。
 
 --- VALUE rb_define_class(const char *name, VALUE super)
 
-���饹 super �β��̥��饹 name ��������֤��ޤ���
+クラス super の下位クラス name を作成し返します。
 
 --- VALUE rb_define_class_id(ID id, VALUE super)
 
-���饹̾ id �ǥ��饹 super ��Ѿ��������饹��
-�������������롣���饹�����饹̾ (���̾) �δ�Ϣ�դ���
-�ʤ���뤬����������饹�δ�Ϣ�դ��Ϥʤ���ʤ���
+クラス名 id でクラス super を継承したクラスを
+新しく作成する。クラス→クラス名 (定数名) の関連付けは
+なされるが、定数→クラスの関連付けはなされない。
 
 --- VALUE rb_define_class_under(VALUE outer, const char *name, VALUE super)
 
-���饹 super �β��̥��饹 outer::name
-��������֤��ޤ���
+クラス super の下位クラス outer::name
+を作成し返します。
 
 --- void rb_define_global_function(const char *name, VALUE (*func)(), int argc)
 
-�ؿ� name ��������ޤ���
-func �� argc �� rb_define_method ��Ʊ���Ǥ���
+関数 name を定義します。
+func と argc は rb_define_method と同じです。
 
 --- void rb_define_method(VALUE klass, const char *name, VALUE(*func)(), int argc)
 
-���饹klass�Υ��󥹥��󥹥᥽�å�name��������ޤ���
+クラスklassのインスタンスメソッドnameを定義します。
 
-argc��C�δؿ����Ϥ��������ο�(�ȷ���)����ޤ���
+argcはCの関数へ渡される引数の数(と形式)を決めます．
 
-: argc��0�ʾ�λ�
-    argc�ǻ��ꤷ���ͤ����Υ᥽�åɤΰ����ο��ˤʤ�ޤ���
-    16�İʾ�ΰ����ϻȤ��ޤ���
+: argcが0以上の時
+    argcで指定した値がそのメソッドの引数の数になります。
+    16個以上の引数は使えません，
 
         VALUE func(VALUE self, VALUE arg1, ... VALUE argN)
 
-: argc��-1�ΤȤ�
-    ������C������Ȥ������������������Ϥ���ޤ���
-    ����������������ǿ��Ǥ���
+: argcが-1のとき
+    引数はCの配列として第二引数に入れて渡されます。
+    第一引数は配列の要素数です。
 
         VALUE func(int argc, VALUE *argv, VALUE self)
 
-: argc��-2�ΤȤ�
-    ������Ruby�������������Ϥ���ޤ���
+: argcが-2のとき
+    引数はRubyの配列に入れて渡されます。
 
         VALUE func(VALUE self, VALUE args)
 
-[[f:rb_scan_args]] �⻲��
+[[f:rb_scan_args]] も参照
 
 --- void rb_define_method_id(VALUE klass, ID name, VALUE (*func)(), int argc)
 
-klass �� public �᥽�å� name ��������ޤ���
-���μ��Τϴؿ� func �Ǥ����ޤ� argc �ΰ�̣��
-rb_define_method ��Ʊ���Ǥ���
+klass に public メソッド name を定義します。
+その実体は関数 func です。また argc の意味は
+rb_define_method と同じです。
 
 --- VALUE rb_define_module(const char *name)
 
-�⥸�塼�� name ��������֤��ޤ���
+モジュール name を作成し返します。
 
 --- void rb_define_module_function(VALUE module, const char *name, VALUE (*func)(), int argc)
 
-�⥸�塼�� module �˥⥸�塼��ؿ� name ��������ޤ���
-func �� argc �� rb_define_method ��Ʊ���Ǥ���
+モジュール module にモジュール関数 name を定義します。
+func と argc は rb_define_method と同じです。
 
 --- VALUE rb_define_module_id(ID id)
 
-̾���� id �Ǥ��뿷�����⥸�塼����������������֤��ޤ���
-�⥸�塼�뢪̾�� (���) �Υ�󥯤ϳ�Ω���ޤ���
-̾�����⥸�塼��Υ�󥯤Ϥޤ���Ω���Ƥ��ޤ���
+名前が id である新しいモジュールを定義し、それを返します。
+モジュール→名前 (定数) のリンクは確立しますが
+名前→モジュールのリンクはまだ確立していません。
 
 --- VALUE rb_define_module_under(VALUE outer, const char *name)
 
-�⥸�塼�� outer::name ��������֤��ޤ���
+モジュール outer::name を作成し返します。
 
 --- void rb_define_private_method(VALUE klass, const char *name, VALUE(*func)(), int argc)
 
-���饹 klass �˥ץ饤�١��ȥ��󥹥��󥹥᥽�å� name ��
-������ޤ������μ��Τϴؿ� func �Ǥ��ꡢ���δؿ����Ȥ�
-�����Υ����פ� argc �ǻ��ꤷ�ޤ���argc �Υե����ޥåȤ�
-�Ĥ��Ƥ� rb_define_method �ι�򻲾Ȥ��Ƥ���������
+クラス klass にプライベートインスタンスメソッド name を
+定義します。その実体は関数 func であり、その関数がとる
+引数のタイプを argc で指定します。argc のフォーマットに
+ついては rb_define_method の項を参照してください。
 
 --- void rb_define_protected_method(VALUE klass, const char *name, VALUE (*func)(), int argc)
 
-���饹 klass �� protected ���󥹥��󥹥᥽�å� name ��
-������ޤ������μ��Τϴؿ� func �Ǥ��ꡢ���δؿ����Ȥ�
-�����Υ����פ� argc �ǻ��ꤷ�ޤ���argc �Υե����ޥåȤ�
-�Ĥ��Ƥ� rb_define_method �ι�򻲾Ȥ��Ƥ���������
+クラス klass に protected インスタンスメソッド name を
+定義します。その実体は関数 func であり、その関数がとる
+引数のタイプを argc で指定します。argc のフォーマットに
+ついては rb_define_method の項を参照してください。
 
 --- void rb_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(), int argc)
 
-obj ���ðۥ᥽�å� name ��������ޤ���
-�᥽�åɤμ��Τ� func �˴ؿ��ݥ��󥿤�Ϳ�������δؿ����Ȥ�
-�����Υ����פ� argc ���Ϥ��ޤ���argc �Υե����ޥåȤ�
-�Ĥ��Ƥ� rb_define_method �ε��Ҥ򻲾Ȥ��Ƥ���������
+obj に特異メソッド name を定義します。
+メソッドの実体を func に関数ポインタで与え、その関数がとる
+引数のタイプを argc に渡します。argc のフォーマットに
+ついては rb_define_method の記述を参照してください。
 
 --- void rb_include_module(VALUE klass, VALUE module)
 
-Module#append_features �μ��Ρ�
-���饹�ޤ��ϥ⥸�塼�� klass �˥⥸�塼�� module ��
-���󥯥롼�ɤ��ޤ���
+Module#append_features の実体。
+クラスまたはモジュール klass にモジュール module を
+インクルードします。
 
 --- VALUE rb_make_metaclass(VALUE obj, VALUE klass)
 
-���饹 klass �Υ��󥹥��� obj ���ðۥ��饹��Ƴ����
-�ðۥ��饹�� obj ���ӤĤ��ޤ���
+クラス klass のインスタンス obj に特異クラスを導入し
+特異クラスと obj を結びつけます。
 
 --- VALUE rb_mod_ancestors(VALUE mod)
 
-�⥸�塼�� mod �˥��󥯥롼�ɤ���Ƥ���⥸�塼�롢
-����� mod �����饹�ʤ�Х����ѡ����饹�Ȥ����
-���󥯥롼�ɤ���Ƥ���⥸�塼���Ƶ�Ū�˽����
-�᥽�å�õ��ͥ���̽���¤٤��֤��ޤ� (�᤯õ�������ۤ�����)��
+モジュール mod にインクルードされているモジュール、
+さらに mod がクラスならばスーパークラスとそれに
+インクルードされているモジュールを再帰的に集めて
+メソッド探索優先順位順に並べて返します (早く探索されるほうが前)。
 
 --- VALUE rb_mod_clone(VALUE mod)
 
-�⥸�塼�� mod �� clone �����֤��ޤ���
+モジュール mod を clone して返します。
 
 --- VALUE rb_mod_dup(VALUE mod)
 
-�⥸�塼�� mod �� dup �����֤��ޤ���
+モジュール mod を dup して返します。
 
 --- VALUE rb_mod_include_p(VALUE mod, VALUE mod2)
 
-�⥸�塼�� mod �� mod2 �򥤥󥯥롼�ɤ��Ƥ���п���
+モジュール mod が mod2 をインクルードしていれば真。
 
 --- VALUE rb_mod_included_modules(VALUE mod)
 
-�⥸�塼�� mod �˥��󥯥롼�ɤ���Ƥ���⥸�塼���������֤��ޤ���
+モジュール mod にインクルードされているモジュールの配列を返します。
 
 --- VALUE rb_module_new(void)
 
-�������⥸�塼�륪�֥������Ȥ���������֤��ޤ���
+新しいモジュールオブジェクトを作成し、返します。
 
 --- VALUE rb_obj_singleton_methods(int argc, VALUE *argv, VALUE obj)
 
-Object#singleton_methods �μ��Ρ�
-���֥������� obj ���������Ƥ����ðۥ᥽�å�̾�Υꥹ�Ȥ�
-ʸ�����������֤���
+Object#singleton_methods の実体。
+オブジェクト obj に定義されている特異メソッド名のリストを
+文字列の配列で返す。
 
 --- int rb_scan_args(int argc, const VALUE *argv, const char *fmt, ...)
 
-Ĺ�� argc ������ argv �� fmt �˽��ä�
-���Ϥ�����Ͱ����ʹߤ��Ϥ��줿���ɥ쥹�˽񤭹��ߤޤ���
+長さ argc の配列 argv を fmt に従って
+解析し、第四引数以降で渡されたアドレスに書き込みます。
 
-fmt �Υե����ޥåȤϰʲ����̤�Ǥ���
+fmt のフォーマットは以下の通りです。
 
-  * ɬ�ܰ����ο� (��ά��ǽ�ʰ���������ʤ��ά�Բ�)
-  * ��ά��ǽ�ʰ����ο� (�����Ĥʤ�о�ά��)
-  * �Ĥ�ΰ����� Ruby ������Ȥ��Ƽ�����뤳�Ȥ򼨤� '*' (��ά��)
-  * �֥��å��� Proc ���֥������Ȳ����Ƽ�����뤳�Ȥ򼨤� '&' (��ά��)
+  * 必須引数の数 (省略可能な引数があるなら省略不可)
+  * 省略可能な引数の数 (ゼロ個ならば省略可)
+  * 残りの引数を Ruby の配列として受け取ることを示す '*' (省略可)
+  * ブロックを Proc オブジェクト化して受け取ることを示す '&' (省略可)
 
-�����λ���ʸ���Ϥ��줾���ά��ǽ�Ǥ�����
-ɬ�����ν��֤Ǹ���ʤ���Ф����ޤ���
+これらの指定文字はそれぞれ省略可能ですが、
+必ずこの順番で現れなければいけません。
 
-������
+使用例
 
       VALUE a, b, optv;
       rb_scan_args(argc, argv, "21", &a, &b, &optv);
 
-�б����� Ruby �ץ������Ǥ����
+対応する Ruby プログラムでの宣言
 
       def some_method(a, b, opt = nil)
 
-������ (2)
+使用例 (2)
 
       VALUE a, rest, block;
       rb_scan_args(argc, argv, "1*&", &a, &rest, &block);
 
-�б����� Ruby �ץ������Ǥ����
+対応する Ruby プログラムでの宣言
 
       def some_method(a, *rest, &block)
 
 --- VALUE rb_singleton_class(VALUE obj)
 
-obj ���ðۥ��饹��Ƴ�����������ðۥ��饹���֤��ޤ���
-���Ǥ��ðۥ��饹��Ƴ������Ƥ���Ȥ��Ϥ���򤽤Τޤ��֤��ޤ���
+obj に特異クラスを導入し、その特異クラスを返します。
+すでに特異クラスが導入されているときはそれをそのまま返します。
 
-obj ���ðۥ᥽�åɤ�����Ǥ��ʤ����Υ��֥������ȤǤ���
-�Ȥ����㳰 TypeError ��ȯ�����ޤ���
+obj が特異メソッドを定義できない型のオブジェクトである
+ときは例外 TypeError を発生します。
 
 --- void rb_singleton_class_attached(VALUE klass, VALUE obj)
 
-�ðۥ��饹 klass �ˤ���ͣ��Υ��󥹥��� obj ���ӤĤ��ޤ���
+特異クラス klass にその唯一のインスタンス obj を結びつけます。
 
 --- VALUE rb_singleton_class_clone(VALUE klass)
 
-�ðۥ��饹 klass �� clone �����֤��ޤ���
-klass ���ðۥ��饹�Ǥʤ��Ȥ��Ϥ��� klass ���֤��ޤ���
+特異クラス klass を clone して返します。
+klass が特異クラスでないときはただ klass を返します。
 
 --- VALUE rb_singleton_class_new(VALUE super)
 
-super �򥹡��ѡ����饹�Ȥ����ðۥ��饹�����������֤��ޤ���
+super をスーパークラスとする特異クラスを生成し、返します。
 
 --- void rb_undef_method(VALUE klass, const char *name)
 
-���饹 klass �Υ��󥹥��󥹥᥽�å� name �� undef ���ޤ���
+クラス klass のインスタンスメソッド name を undef します。

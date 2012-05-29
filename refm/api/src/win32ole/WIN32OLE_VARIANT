@@ -2,68 +2,68 @@
 
 = class WIN32OLE_VARIANT < Object
 
-OLE�����ȥ᡼������ɸ�෿��VARIANT���֥������Ȥ�Ruby�����Ѥ��뤿���
-���饹�Ǥ���
+OLEオートメーションの標準型のVARIANTオブジェクトをRubyで利用するための
+クラスです。
 
-VARIANT���Ȥϡ���������ͤΥڥ����鹽�������ǡ������ǡ�����VB�η�̵��
-�ѿ��Τ���ι�¤�ΤǤ���OLE�����ȥ᡼�����Υ᥽�åɸƤӽФ��ˤ����ѷ�
-�Ȥ��ư����ˤ�VARIANT�������Ѥ��ޤ���
+VARIANT型とは、型情報と値のペアから構成されるデータ型で、元はVBの形無し
+変数のための構造体です。OLEオートメーションのメソッド呼び出しには汎用型
+として引数にはVARIANT型を利用します。
 
- * ������ϡ�[[m:WIN32OLE_VARIANT#vartype]]�Ǽ����Ǥ��ޤ���
- * �ͤϡ�[[m:WIN32OLE_VARIANT#value]]�Ǽ����Ǥ��ޤ���
+ * 型情報は、[[m:WIN32OLE_VARIANT#vartype]]で取得できます。
+ * 値は、[[m:WIN32OLE_VARIANT#value]]で取得できます。
 
-OLE�����ȥ᡼�����Υ᥽�åɸƤӽФ�����Ǥϡ�������VARIANT���������
-�����������Ƥ��ޤ���
+OLEオートメーションのメソッド呼び出し規約では、引数はVARIANT型の配列と
+して定義されています。
 
-���ε�����Ф��ơ�WIN32OLE�Ǥϡ�VARIANT�����ͤ��Ф��뻲�Ȥ��������γ�
-���Ǥ����ꤷ�ޤ������μ����ϡ��ۤȤ�ɤ�OLE�����ȥ᡼����󥵡��Ф�����
-����������ޤ���
+この規約に対して、WIN32OLEでは、VARIANT型の値に対する参照を引数配列の各
+要素に設定します。この実装は、ほとんどのOLEオートメーションサーバで正し
+く処理されます。
 
-��������������OLE�����ȥ᡼����󥵡��Фϡ�������������Ǥ�VARIANT����
-�ͤ��Τ�Τ��׵ᤷ�ޤ������ξ�硢WIN32OLE�μ�������������������ޤ���
+しかし、一部のOLEオートメーションサーバは、引数配列の要素にVARIANT型の
+値そのものを要求します。この場合、WIN32OLEの実装は正しく処理されません。
 
-WIN32OLE_VARIANT���֥������Ȥ����Ѥ���ȡ����Τ褦��OLE�����ȥ᡼�����
-�����ФΥ᥽�åɸƤӽФ����Ф��ơ�VARIANT�����ͤ������������ꤹ�뤳��
-��WIN32OLE�ػؼ��Ǥ��ޤ���
+WIN32OLE_VARIANTオブジェクトを利用すると、このようなOLEオートメーション
+サーバのメソッド呼び出しに対して、VARIANT型の値を引数配列に設定すること
+をWIN32OLEへ指示できます。
 
-�ʤ���WIN32OLE_VARIANT�����Ѥ���ɬ�פ�̵ͭ�ϡ��ƤӽФ��оݤ�OLE�����ȥ᡼
-����󥵡��Фλ��ͤޤ��ϼ����˰�¸���ޤ���
+なお、WIN32OLE_VARIANTを利用する必要の有無は、呼び出し対象のOLEオートメー
+ションサーバの仕様または実装に依存します。
 
-=== ����ץ륳����
+=== サンプルコード
 
    shell = WIN32OLE.new('Shell.Application')
    folder = shell.NameSpace('C:\\Users\\Public\\Documents')
    item = folder.ParseName('test.txt')
    v = WIN32OLE_VARIANT.new('Delete')
-   item.invokeVerb(v)     # => ����Ȣ�ؤΰ�ư������������ɽ��
+   item.invokeVerb(v)     # => ゴミ箱への移動ダイアログを表示
 
-�嵭����ץ�κǸ�ιԤ�
+上記サンプルの最後の行を
 
    item.invokeVerb('Delete')
 
-�Ȥ���ȡ�FolderItem���֥������Ȥϰ�����ǧ���Ǥ����������ư��Ȥ���
-Open��¹Ԥ��ޤ���
+とすると、FolderItemオブジェクトは引数を認識できず、既定の動作として
+Openを実行します。
 
-�ץ������θ����ܤȰۤʤꡢ��ԤΥ����ɤ��Ф���WIN32OLE�ϡ�'Delete'��
-����ʸ������Ǽ����VARIANT���ؤλ��Ȥ�����Ȥ���Ϳ���뤿��Ǥ��������
-�Ф������ԤǤϡ�'Delete'�Ȥ���ʸ������Ǽ����VARIANT��������Ȥ���Ϳ��
-�ޤ���
+プログラムの見た目と異なり、後者のコードに対してWIN32OLEは、'Delete'と
+いう文字列を格納したVARIANT型への参照を引数として与えるためです。それに
+対して前者では、'Delete'という文字列を格納したVARIANT型を引数として与え
+ます。
 
 == Class Methods
 
 --- array(dims, vt) -> WIN32OLE_VARIANT
-�����Ѥ�VARIANT���֥������Ȥ��������ޤ���
+配列用のVARIANTオブジェクトを生成します。
 
-�����ȥ᡼�����᥽�åɸƤӽФ��Ѥ�������������ޤ����ʤ���OLE�����ȥ᡼
-����������μ�����ź�����δط���VB�����Ȥ����������դ��Ƥ�����������
-���C�ȵս���¤ӤǤ���
+オートメーションメソッド呼び出し用の配列を生成します。なお、OLEオートメー
+ションの配列の次元と添え字の関係はVB型だという点に注意してください。こ
+れはCと逆順の並びです。
 
-@param dims �Ƽ��������ǿ��򼨤������Ϳ���ޤ������Ȥ���4���ǤΥ٥�����
-            �Ǥ����[4]����3���Ǥ�2��������Ǥ����[3, 3]�Ȥ��ޤ���
-@param vt �������Ǥη���[[c:WIN32OLE::VARIANT]]������ǻ��ꤷ�ޤ���
-@return ���ꤵ�줿����/���ǿ������WIN32OLE_VARIANT���֥������ȡ�
+@param dims 各次元の要素数を示す配列を与えます。たとえば4要素のベクター
+            であれば[4]、各3要素の2次元配列であれば[3, 3]とします。
+@param vt 配列要素の型を[[c:WIN32OLE::VARIANT]]の定数で指定します。
+@return 指定された次元/要素数を持つWIN32OLE_VARIANTオブジェクト。
 
-������ϡ��ǽ�μ�����3���ǡ����μ�����4���Ǥ�2�������������������Ǥ���
+次の例は、最初の次元が3要素、次の次元が4要素の2次元配列を生成する例です。
 
    ole_ary = WIN32OLE_VARIANT.array([3,4], WIN32OLE::VARIANT::VT_I4)
    ruby_ary = ole_ary.value # => [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
@@ -72,26 +72,26 @@ Open��¹Ԥ��ޤ���
 @see [[c:WIN32OLE::VARIANT]]
 
 --- new(val, vartype = nil) -> WIN32OLE_VARIANT
-���ꤷ�����֥������Ȥ��ͤȤ���WIN32OLE_VARIANT���֥������Ȥ��������ޤ���
+指定したオブジェクトを値とするWIN32OLE_VARIANTオブジェクトを生成します。
 
-@param val ��åפ���Ruby���֥������Ȥ���ꤷ�ޤ���
-@param vartype ��ά����WIN32OLE����ư���Ѵ���Ԥ��ޤ������ꤹ�����
-               [[c:WIN32OLE::VARIANT]]���������ꤷ�Ƥ���������
-@return val�������ͤȤ��ƻ���WIN32OLE_VARIANT���֥������Ȥ��֤��ޤ���
+@param val ラップするRubyオブジェクトを指定します。
+@param vartype 省略時はWIN32OLEが自動型変換を行います。指定する場合は
+               [[c:WIN32OLE::VARIANT]]の定数を指定してください。
+@return val引数を値として持つWIN32OLE_VARIANTオブジェクトを返します。
 
-@raise TypeError val�����η���Array��String��Integer��Float��Time��
-                 WIN32OLE��WIN32OLE_VARIANT��TrueClass��FalseClass��
-                 NilClass �Τ�����Ǥ⤢��ޤ���
+@raise TypeError val引数の型がArray、String、Integer、Float、Time、
+                 WIN32OLE、WIN32OLE_VARIANT、TrueClass、FalseClass、
+                 NilClass のいずれでもありません。
 
    shell = WIN32OLE.new('Shell.Application')
    folder = shell.NameSpace('C:\\Users\\Public\\Documents')
    item = folder.ParseName('test.txt')
    v = WIN32OLE_VARIANT.new('Delete')
-   item.invokeVerb(v)     # => ����Ȣ�ؤΰ�ư������������ɽ��
+   item.invokeVerb(v)     # => ゴミ箱への移動ダイアログを表示
 
-�Х����������������ˤϡ��ʲ��Τ褦��vartype������VT_UI1 | VT_ARRAY��
-���ꤷ�ޤ����Х���������ͤ�Rubyɽ���ϥ��󥳡��ǥ��󥰤�ASCII-8BIT����
-�ꤷ��ʸ����Ȥʤ�ޤ���
+バイト配列を生成するには、以下のようにvartype引数にVT_UI1 | VT_ARRAYを
+設定します。バイト配列の値のRuby表現はエンコーディングをASCII-8BITに設
+定した文字列となります。
 
    include WIN32OLE::VARIANT
    bytes = WIN32OLE_VARIANT.new([1,2,3,4,5], VT_UI1 | VT_ARRAY)
@@ -103,19 +103,19 @@ Open��¹Ԥ��ޤ���
 == Instance Methods
 
 --- [](i...) -> object
-���󷿤�WIN32OLE_VARIANT�����Ǥ�������ޤ���
+配列型のWIN32OLE_VARIANTの要素を取得します。
 
-self�ϡ�[[m:WIN32OLE_VARIANT.array]]�ޤ��ϰ������������ꤷ��
-[[m:WIN32OLE_VARIANT.new]]�Ǻ����������󥹥��󥹤�ɬ�פ�����ޤ���
+selfは、[[m:WIN32OLE_VARIANT.array]]または引数に配列を指定して
+[[m:WIN32OLE_VARIANT.new]]で作成したインスタンスの必要があります。
 
-@param i �Ƽ�����0����Υ���ǥå������,�פǶ��ڤäƼ�����ʬ���ꤷ�ޤ���
-         ����ǥå�����0�������ǿ�-1�ޤǤ�Integer�ǻ��ꤷ�Ƥ���������
-@return �����ǻ��ꤷ������ǥå��������Ǥ��֤��ޤ���
-@raise ArgError �����ο����������Ȱ��פ��Ƥ��ޤ���
+@param i 各次元の0からのインデックスを「,」で区切って次元数分指定します。
+         インデックスは0から要素数-1までのIntegerで指定してください。
+@return 引数で指定したインデックスの要素を返します。
+@raise ArgError 引数の数が次元数と一致していません。
 
-@raise WIN32OLERuntimeError self�����󷿤�WIN32OLE_VARIANT�ǤϤ���ޤ�
-                            �󡣤��뤤�ϥ���ǥå�����0̤���ޤ������ǿ�
-                            �ʾ����ꤷ�Ƥ��ޤ���
+@raise WIN32OLERuntimeError selfが配列型のWIN32OLE_VARIANTではありませ
+                            ん。あるいはインデックスが0未満または要素数
+                            以上を指定しています。
 
    obj = WIN32OLE_VARIANT.new([[1,2,3],[4,5,6]])
    p obj[0,0] # => 1
@@ -124,22 +124,22 @@ self�ϡ�[[m:WIN32OLE_VARIANT.array]]�ޤ��ϰ������������ꤷ��
    p obj[0, -1] # => WIN32OLERuntimeError
 
 --- []=(i..., val) -> object
-���󷿤�WIN32OLE_VARIANT�����Ǥ����ꤷ�ޤ���
+配列型のWIN32OLE_VARIANTの要素を設定します。
 
-self�ϡ�[[m:WIN32OLE_VARIANT.array]]�ޤ��ϰ������������ꤷ��
-[[m:WIN32OLE_VARIANT.new]]�Ǻ����������󥹥��󥹤�ɬ�פ�����ޤ���
+selfは、[[m:WIN32OLE_VARIANT.array]]または引数に配列を指定して
+[[m:WIN32OLE_VARIANT.new]]で作成したインスタンスの必要があります。
 
-@param i �Ƽ�����0����Υ���ǥå������,�פǶ��ڤäƼ�����ʬ���ꤷ�ޤ���
-         ����ǥå�����0�������ǿ�-1�ޤǤ�Integer�ǻ��ꤷ�Ƥ���������
-@param val �����ͤ���ꤷ�ޤ���Array��String��Integer��Float��
-           TrueClass��FalseClass��NilClass�ʳ��Υ��֥������Ȥϥ����ȥ᡼
-           ����󥪥֥������ȡ�WIN32OLE���֥������ȡˤ��Ѵ����ޤ���
-@return �����ǻ��ꤷ������ǥå��������Ǥ��֤��ޤ���
-@raise ArgError �����ο����������Ȱ��פ��Ƥ��ޤ���
+@param i 各次元の0からのインデックスを「,」で区切って次元数分指定します。
+         インデックスは0から要素数-1までのIntegerで指定してください。
+@param val 設定値を指定します。Array、String、Integer、Float、
+           TrueClass、FalseClass、NilClass以外のオブジェクトはオートメー
+           ションオブジェクト（WIN32OLEオブジェクト）に変換します。
+@return 引数で指定したインデックスの要素を返します。
+@raise ArgError 引数の数が次元数と一致していません。
 
-@raise WIN32OLERuntimeError self�����󷿤�WIN32OLE_VARIANT�ǤϤ���ޤ�
-                            �󡣤��뤤�ϥ���ǥå�����0̤���ޤ������ǿ�
-                            �ʾ����ꤷ�Ƥ��ޤ���
+@raise WIN32OLERuntimeError selfが配列型のWIN32OLE_VARIANTではありませ
+                            ん。あるいはインデックスが0未満または要素数
+                            以上を指定しています。
 
    obj = WIN32OLE_VARIANT.new([[1,2,3],[4,5,6]])
    obj[0,0] = 7
@@ -149,37 +149,37 @@ self�ϡ�[[m:WIN32OLE_VARIANT.array]]�ޤ��ϰ������������ꤷ��
    obj[0, -1] = 9 # => WIN32OLERuntimeError
 
 --- value -> object
-�ͤ��б�����Ruby���֥������Ȥ�������ޤ���
+値に対応するRubyオブジェクトを取得します。
 
-@return �ͤ��б�����Ruby�Υ��֥������Ȥ��֤��ޤ���
+@return 値に対応するRubyのオブジェクトを返します。
 
    obj = WIN32OLE_VARIANT.new(1, WIN32OLE::VARIANT::VT_BSTR)
-   obj.value # => "1" (VT_BSTR����ꤷ�����������Τǡ�String���֥������ȤȤʤ�)
+   obj.value # => "1" (VT_BSTRを指定して生成したので、Stringオブジェクトとなる)
 
 --- value=(val) -> ()
-WIN32OLE_VARIANT���ͤ�����ꤷ�ޤ���
+WIN32OLE_VARIANTの値を再設定します。
 
-���ꤷ���ͤ�self������ꤷ�ޤ��������ͤ�����VARIANT���˹��ʤ����ϸ�
-��VARIANT���˹礦�褦�˰������Ѵ����ޤ����Ѵ��ϡ����������VARIANT����
-�Ѵ����Ƥ���COM��VARIANT���Ѵ��ؿ���VariantChangeTypeEx�ˤ�ƤӽФ�����
-�Ǽ¸����ޤ���
+指定した値でselfを再設定します。指定値が元のVARIANT型に合わない場合は元
+のVARIANT型に合うように引数を変換します。変換は、引数を一度VARIANT型に
+変換してからCOMのVARIANT型変換関数（VariantChangeTypeEx）を呼び出すこと
+で実現します。
 
-@param val �����ͤ���ꤷ�ޤ���
-@raise WIN32OLERuntimeError self�����󷿤Ǥ������뤤�ϡ����Ѵ��˼��Ԥ�
-                            �ޤ�����
+@param val 設定値を指定します。
+@raise WIN32OLERuntimeError selfが配列型です。あるいは、型変換に失敗し
+                            ました。
 
-   obj = WIN32OLE_VARIANT.new(1) # VARIANT����WIN32OLE::VARIANT::VT_I4������
-   obj.value = 3.2      # 3.2���鿷����VARIANT����������������VT_I4���Ѵ�
-   p obj.value # => 3   # VT_I4���Ѵ�������̤����ꤵ���
+   obj = WIN32OLE_VARIANT.new(1) # VARIANT型にWIN32OLE::VARIANT::VT_I4を設定
+   obj.value = 3.2      # 3.2から新たなVARIANT型を作成し、それをVT_I4に変換
+   p obj.value # => 3   # VT_I4に変換した結果が設定される
 
-self�����󷿤�WIN32OLE_VARIANT�ξ�硢�Х������󤫤İ�����ʸ����ξ��
-�������[[c:WIN32OLERuntimeError]]�����Τ��ޤ������󷿤ξ��ϡ�
-[[m:WIN32OLE_VARIANT#[]=]]�����Ѥ��Ƥ���������
+selfが配列型のWIN32OLE_VARIANTの場合、バイト配列かつ引数が文字列の場合
+を除いて[[c:WIN32OLERuntimeError]]を通知します。配列型の場合は、
+[[m:WIN32OLE_VARIANT#[]=]]を利用してください。
 
 --- vartype -> Integer
-self�η������������ޤ���
+selfの型情報を取得します。
 
-������ϡ�[[c:WIN32OLE::VARIANT]]������ͤ��Ȥ߹�碌�Ǥ���
+型情報は、[[c:WIN32OLE::VARIANT]]の定数値の組み合わせです。
 
    obj = WIN32OLE_VARIANT.new("string")
    obj.vartype   # => 8 (WIN32OLE::VARIANT::VT_BSTR)
@@ -189,23 +189,23 @@ self�η������������ޤ���
 == Constants
 
 --- Empty -> WIN32OLE_VARIANT
-EMPTY����WIN32OLE_VARIANT���֥������ȤǤ���
+EMPTY型のWIN32OLE_VARIANTオブジェクトです。
 
-���Υ��֥������Ȥϡ�VOID��������ͤ䡢�ͤ����ʤ��Ȥ��������ʤ���Фʤ�
-�ʤ��ü�ʰ��������Ѥ��ޤ���
+このオブジェクトは、VOID型の戻り値や、値が空なことを明示しなければなら
+ない特殊な引数に利用します。
 
 @see [[m:WIN32OLE::VARIANT::VT_EMPTY]]
 
 --- Null -> WIN32OLE_VARIANT
-NULL����WIN32OLE_VARIANT���֥������ȤǤ���
+NULL型のWIN32OLE_VARIANTオブジェクトです。
 
-���Υ��֥������Ȥϡ�ADO�ʤɤΥǡ����١������󥿡��ե�������NULL����ꤹ
-��Τ����Ѳ�ǽ�Ǥ���
+このオブジェクトは、ADOなどのデータベースインターフェイスでNULLを指定す
+るのに利用可能です。
 
 @see [[m:WIN32OLE::VARIANT::VT_NULL]]
 
 --- Nothing -> WIN32OLE_VARIANT
-DISPATCH���ζ��Υ��֥������ȤǤ���
+DISPATCH型の空のオブジェクトです。
 
 @see [[m:WIN32OLE::VARIANT::VT_DISPATCH]]
 

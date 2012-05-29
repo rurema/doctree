@@ -1,4 +1,4 @@
-�ƥ�ݥ��ǥ��쥯�ȥ�Τ���Υ饤�֥��Ǥ���
+テンポラリディレクトリのためのライブラリです。
 
 = reopen Dir
 
@@ -8,53 +8,53 @@
 --- mktmpdir(prefix_suffix = nil, tmpdir = nil)             -> String
 --- mktmpdir(prefix_suffix = nil, tmpdir = nil){|dir| ... } -> object
 
-����ǥ��쥯�ȥ��������ޤ���
+一時ディレクトリを作成します。
 
-�������줿�ǥ��쥯�ȥ�Υѡ��ߥå����� 0700 �Ǥ���
+作成されたディレクトリのパーミッションは 0700 です。
 
-�֥��å���Ϳ����줿���ϡ��֥��å���ɾ����������
-�������줿����ǥ��쥯�ȥ�䤽���۲��ˤ��ä��ե������
-[[m:FileUtils.#remove_entry_secure]] ���Ѥ��ƺ�����ޤ���
-�֥��å���Ϳ�����ʤ��ä����ϡ�������������ǥ��쥯�ȥ�Υѥ���
-�֤��ޤ������ξ�硢���Υ᥽�åɤϺ�����������ǥ��쥯�ȥ�������ޤ���
+ブロックが与えられた場合は、ブロックの評価が終わると
+作成された一時ディレクトリやその配下にあったファイルを
+[[m:FileUtils.#remove_entry_secure]] を用いて削除します。
+ブロックが与えられなかった場合は、作成した一時ディレクトリのパスを
+返します。この場合、このメソッドは作成した一時ディレクトリを削除しません。
 
-@param prefix_suffix nil �ξ��ϡ�'d' ��ǥե���ȤΥץ�ե������Ȥ��ƻ��Ѥ��ޤ������ե��å������դ��ޤ���
-                     ʸ����Ϳ����줿���ϡ�����ʸ�����ץ�ե������Ȥ��ƻ��Ѥ��ޤ������ե��å������դ��ޤ���
-                     2 ���Ǥ�����Ϳ����줿���ϡ�����ܤ����Ǥ�ץ�ե�����������ܤ����Ǥ򥵥ե��å����Ȥ��ƻ��Ѥ��ޤ���
+@param prefix_suffix nil の場合は、'd' をデフォルトのプレフィクスとして使用します。サフィックスは付きません。
+                     文字列が与えられた場合は、その文字列をプレフィクスとして使用します。サフィックスは付きません。
+                     2 要素の配列が与えられた場合は、一つ目の要素をプレフィクス、二つ目の要素をサフィックスとして使用します。
 
-@param tmpdir nil �ξ��� [[m:Dir.tmpdir]] ����Ѥ��ޤ���
-              �����Ǥʤ����ϡ����Υǥ��쥯�ȥ����Ѥ��ޤ���
+@param tmpdir nil の場合は [[m:Dir.tmpdir]] を使用します。
+              そうでない場合は、そのディレクトリを使用します。
 
 
-������
+使用例
   require 'tmpdir'
 
   puts Dir.tmpdir
-  # ������: ư��Ķ��ˤ����Ϥϰۤʤ�ޤ���
+  # 出力例: 動作環境により出力は異なります。
   #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp
   Dir.mktmpdir{|dir| 
     puts dir
-    # ������: ����ǥ��쥯�ȥ� ��̾������Ƭ��'d' ��Ĥ��롣
+    # 出力例: 一時ディレクトリ の名前の先頭に'd' をつける。
     #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/d20081011-4524-1m69psi
     #                                            ^                    
   }
   Dir.mktmpdir("foo"){|dir|
     puts dir
-    # ������:����ǥ��쥯�ȥ� ��̾������Ƭ��'foo' ��Ĥ��롣
+    # 出力例:一時ディレクトリ の名前の先頭に'foo' をつける。
     #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/foo20081011-4824-pjvhwx
     #                                            ^^^                    
   }
   Dir.mktmpdir(["foo", "bar"]){|dir| 
     puts dir
-    # ������: ����ǥ��쥯�ȥ��̾������Ƭ��'foo' ���Ǹ��'bar'��Ĥ��롣
+    # 出力例: 一時ディレクトリの名前の先頭に'foo' 、最後に'bar'をつける。
     #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/foo20081011-5624-1hyxrqbbar
     #                                            ^^^                     ^^^
   }
   
   Dir.mktmpdir(nil, "/var/tmp") {|dir|
     puts dir
-    # ������: tmpdir �κ����褬'/var/tmp'�Ȥʤ롣
-    #         ����ˡ�����ǥ��쥯�ȥ� ��̾������Ƭ��'d' ��Ĥ��롣
+    # 出力例: tmpdir の作成先が'/var/tmp'となる。
+    #         さらに、一時ディレクトリ の名前の先頭に'd' をつける。
     #=> /var/tmp/d20081011-5304-h6b13j
   }
   
@@ -65,11 +65,11 @@
      fp.puts "hogehoge"
     }
   }
-  # �֥��å���ȴ�����顢�ƥ�ݥ��ǥ��쥯�ȥ�Ͼä���롣
+  # ブロックを抜けたら、テンポラリディレクトリは消される。
   p FileTest.directory?(memory_dir) #=> false
   
   dir = Dir.mktmpdir
-  # �֥��å���Ϳ���ʤ����ϡ��ǥ��쥯�ȥ��¸�ߤ��롣
+  # ブロックを与えない場合は、ディレクトリは存在する。
   begin
     File.open("#{dir}/foo", "w") { |fp|
       fp.puts "hogehoge"
@@ -84,11 +84,11 @@
 
 --- tmpdir    -> String
 
-�ƥ�ݥ��ե�������������Τ˻Ȥ��ǥ��쥯�ȥ�(�ƥ�ݥ��ǥ��쥯�ȥ�)�����Хѥ���
-ʸ����Ȥ����֤��ޤ���
-[[m:$SAFE]] �ˤ�ä��֤�ʸ������Ѥ��ޤ���
+テンポラリファイルを作成するのに使うディレクトリ(テンポラリディレクトリ)の絶対パスを
+文字列として返します。
+[[m:$SAFE]] によって返す文字列は変わります。
 
-  # WindowsXP�ξ��
+  # WindowsXPの場合
 
   require "tmpdir"
 
@@ -100,6 +100,6 @@
   $SAFE = 3
   p Dir.tmpdir #=> "C:/WINDOWS/temp"
 
-  # Linux�ξ�� /tmp �˲ä����Ķ��ѿ� ENV['TMPDIR'], ENV['TMP'], ENV['TEMP'], ENV['USERPROFILE']�򻲾Ȥ��ޤ�
+  # Linuxの場合 /tmp に加え、環境変数 ENV['TMPDIR'], ENV['TMP'], ENV['TEMP'], ENV['USERPROFILE']を参照します
   
 

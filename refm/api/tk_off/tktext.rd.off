@@ -3,35 +3,35 @@
 =begin
 = TkText
 
-е╞ене╣е╚ежеге╕езе├е╚д╬епеще╣д╟д╣бг
+уГЖуВнуВ╣уГИуВжуВгуВ╕уВзуГГуГИуБоуВпуГйуВ╣уБзуБЩуАВ
 
-((*░╠├╓*))
+((*ф╜Нч╜о*))
 
 *"line.char"
 *"@x,y"
 *"end"
-*е▐б╝еп
-*е┐е░.first
-*е┐е░.last
-*е╤е╣
-*едесб╝е╕
+*уГЮуГ╝уВп
+*уВ┐уВ░.first
+*уВ┐уВ░.last
+*уГСуВ╣
+*уВдуГбуГ╝уВ╕
 
-== е╣б╝е╤б╝епеще╣:
+== уВ╣уГ╝уГСуГ╝уВпуГйуВ╣:
 
 ((<TkTextWin>))
 
-== едеєепеыб╝е╔д╖д╞дддыете╕ехб╝еы:
+== уВдуГ│уВпуГлуГ╝уГЙуБЧуБжуБДуВЛуГвуВ╕уГеуГ╝уГл:
 
 ((<TkTreatTextTagFont>))
 
 ((<Scrollable>))
 
-== епеще╣есе╜е├е╔:
+== уВпуГйуВ╣уГбуВ╜уГГуГЙ:
 
 --- TkText.new(*args, &block)
 #@todo
 
-== privateесе╜е├е╔:
+== privateуГбуВ╜уГГуГЙ:
 
 --- TkText#_ktext_length(txt)
 #@todo
@@ -42,7 +42,7 @@
 --- TkText#_retrieve_backslashed_text(str, i)
 #@todo
 
-== есе╜е├е╔:
+== уГбуВ╜уГГуГЙ:
 
 --- TkText#init_instance_variable
 #@todo
@@ -191,7 +191,7 @@
 --- TkText#dump_image(*index, &block)
 #@todo
 
-== ╔╕╜реке╫е╖ечеє:
+== циЩц║ЦуВкуГЧуВ╖уГзуГ│:
 
 ((<TkObject#background>))
 
@@ -241,7 +241,7 @@
 
 ### ((<TkObject#yscrollcommand>))
 
-== еке╫е╖ечеє:
+== уВкуГЧуВ╖уГзуГ│:
 
 --- TkText#height
 #@todo

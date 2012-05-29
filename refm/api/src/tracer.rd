@@ -1,34 +1,34 @@
-�¹ԥȥ졼�����Ϥ�Ȥ뵡ǽ���󶡤��ޤ���
+実行トレース出力をとる機能を提供します。
 
-�Ȥ������礭��ʬ����2�̤ꡣ
+使い方は大きく分けて2通り。
 
-�ҤȤĤϰʲ��Τ褦�˥��ޥ�ɥ饤�󤫤� [[m:Kernel.#require]] ������ˡ�Ǥ���
-hoge.rb �μ¹Ԥ򤹤٤ƥȥ졼�����Ϥ��ޤ���
+ひとつは以下のようにコマンドラインから [[m:Kernel.#require]] する方法です。
+hoge.rb の実行をすべてトレース出力します。
 
   ruby -rtracer hoge.rb
 
-�⤦�ҤȤĤϥ���������require������ˡ�Ǥ���
+もうひとつはソースからrequireする方法です。
 
   require 'tracer'
 
-�Ȥ�����
+とした後
 
   Tracer.on
 
-�ˤ��ȥ졼�����Ϥ�ͭ���ˤ��ޤ���
+によりトレース出力を有効にします。
 
   Tracer.off
 
-�ˤ��ȥ졼�����Ϥ�̵���ˤ��ޤ���
+によりトレース出力を無効にします。
 
-�ޤ����֥��å��դ��� Tracer.on ��ƤӽФ��ȡ����Υ֥��å���Τ�
-�ȥ졼������Ϥ��ޤ���
+また、ブロック付きで Tracer.on を呼び出すと、そのブロック内のみ
+トレースを出力します。
 
-=== ����ץ륳����
+=== サンプルコード
 
-  # ��: ����ɾ�������Hoge���饹�Υ᥽�åɤ��ƤӽФ��������ȥ졼�����롣
+  # 例: 式の評価の中でHogeクラスのメソッドが呼び出される時、トレースする。
 
-  # ruby 1.8 �ǤϷٹ𤬤Ǥޤ�����ư��ޤ���
+  # ruby 1.8 では警告がでますが、動作します。
   require 'tracer'
 
   class Hoge
@@ -51,19 +51,19 @@ hoge.rb �μ¹Ԥ򤹤٤ƥȥ졼�����Ϥ��ޤ���
 [[m:Kernel.#set_trace_func]]
 
 = class Tracer < Object
-�¹ԥȥ졼�����Ϥ�Ȥ뵡ǽ���󶡤��륯�饹�Ǥ���
+実行トレース出力をとる機能を提供するクラスです。
 
 == Class Methods
 
 --- new
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 --- on -> nil
 --- on {...}
 
-�ȥ졼�����Ϥ򳫻Ϥ��ޤ���
-�֥��å���Ϳ����줿���Ϥ��Υ֥��å���Τߥȥ졼�����Ϥ�Ԥ��ޤ���
+トレース出力を開始します。
+ブロックを与えられた場合はそのブロック内のみトレース出力を行います。
 
   require 'tracer'
 
@@ -81,22 +81,22 @@ hoge.rb �μ¹Ԥ򤹤٤ƥȥ졼�����Ϥ��ޤ���
 
 --- off -> nil
 
-�ȥ졼�����Ϥ����Ǥ��ޤ���
-�ȥ졼�����Ϥ򳫻Ϥ���ˤϡ�[[m:Tracer.on]]����Ѥ��ޤ���
+トレース出力を中断します。
+トレース出力を開始するには、[[m:Tracer.on]]を使用します。
 
 @see [[m:Tracer.on]]
 
 --- set_get_line_procs(filename, proc)
 --- set_get_line_procs(filename) {|line| .... }
 
-����ե�����ˤĤ������Ѥ��롢���ֹ椫�饽�����Τ��ιԤ����Ƥ��֤�
-��³������ꤷ�ޤ���������ꤷ�ʤ���Хǥե���Ȥ�ư����Ѥ���ޤ���
-���ꤹ���³���Ϲ��ֹ��ͣ��ΰ����Ȥ��ƸƤӽФ���ޤ���
+あるファイルについて利用する、行番号からソースのその行の内容を返す
+手続きを指定します。何も指定しなければデフォルトの動作が利用されます。
+指定する手続きは行番号を唯一の引数として呼び出されます。
 
-@param filename �������ե�����ξ���ʸ����ǻ��ꤷ�ޤ���
-@param proc �̾ʸ������֤���³�����֥������Ȥ���ꤷ�ޤ���
+@param filename ソースファイルの場所を文字列で指定します。
+@param proc 通常、文字列を返す手続きオブジェクトを指定します。
 
-  # �� dummy.rb ��3���ܤ���6 ���ܤΥȥ졼�����Ϥ� !! ��Ĥ���
+  # 例 dummy.rb の3行目から6 行目のトレース出力に !! をつける
   require 'tracer'
 
   Tracer.set_get_line_procs('./dummy.rb'){|line|
@@ -123,70 +123,70 @@ hoge.rb �μ¹Ԥ򤹤٤ƥȥ졼�����Ϥ��ޤ���
 --- add_filter(proc)
 --- add_filter {|event, file, line, id, binding, klass| .... }
 
-�ȥ졼�����Ϥ��뤫�ɤ�������ꤹ��ե��륿���ɲä��ޤ���
-����ե��륿��Ϳ���ʤ����Ϥ��٤ƤιԤˤĤ��ƥȥ졼�����󤬽��Ϥ���ޤ���
-Ϳ����줿��³��(�֥��å��ޤ���Proc���֥�������)�������֤���
-�ȥ졼���Ͻ��Ϥ���ޤ���
+トレース出力するかどうかを決定するフィルタを追加します。
+何もフィルタを与えない場合はすべての行についてトレース情報が出力されます。
+与えられた手続き(ブロックまたはProcオブジェクト)が真を返せば
+トレースは出力されます。
 
 
 #@if (version < "1.9.1")
-ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
+ruby 1.8 ではブロックを与えると警告がでます。
 #@end
 
-�ե��륿��ʣ���ɲäǤ���
-���Τ�����ĤǤ⵶���֤��ȥȥ졼���ν��Ϥ���������ޤ���
+フィルタは複数追加でき、
+そのうち一つでも偽を返すとトレースの出力は抑制されます。
 
-@param proc �ȥ졼�����Ϥ��뤫�ɤ�������ꤹ���³�����֥������Ȥ���ꤷ�ޤ���
-            �̾true �� false���֤�ɬ�פ�����ޤ���
+@param proc トレース出力するかどうかを決定する手続きオブジェクトを指定します。
+            通常、true か falseを返す必要があります。
 
-�ե��륿��³���ϰ����Ȥ��� event, file, line, id, binding, klass ��
-6 �Ĥ�Ȥ�ޤ���
-[[m:Kernel.#set_trace_func]] �ǻ��ꤹ���ΤȤۤ�Ʊ���Ǥ���
+フィルタ手続きは引数として event, file, line, id, binding, klass の
+6 つをとります。
+[[m:Kernel.#set_trace_func]] で指定するものとほぼ同じです。
 
-==== �ե��륿��³���Υѥ�᡼��
+==== フィルタ手続きのパラメータ
 
 : event
-  ���٥�Ȥ�ɽ��ʸ����
-  �ʲ��μ��ब���롣���å���� tracer �ν��ϤǤ�ɽ����
+  イベントを表す文字列。
+  以下の種類がある。カッコ内は tracer の出力での表記。
 
 //emlist{
-  * line (-)   ����Ԥ�¹�
-  * call (>)   �᥽�åɸƤӽФ�
-  * return (<) �᥽�åɤ���Υ꥿����
-  * class (C)  ���饹����ƥ����Ȥ����ä�
-  * end (E)    ���饹����ƥ����Ȥ���Ф�
-  * raise      �㳰��ȯ������
-  * c-call     C�ǵ��Ҥ��줿�᥽�åɤ��ƤФ줿
-  * c-return   C�ǵ��Ҥ��줿�᥽�åɤ���return
+  * line (-)   ある行を実行
+  * call (>)   メソッド呼び出し
+  * return (<) メソッドからのリターン
+  * class (C)  クラスコンテキストに入った
+  * end (E)    クラスコンテキストから出た
+  * raise      例外が発生した
+  * c-call     Cで記述されたメソッドが呼ばれた
+  * c-return   Cで記述されたメソッドからreturn
 //}
 
 : file
-  ���߽������Ƥ���ե������̾��
+  現在処理しているファイルの名前
 
 : line
-  ���߽������Ƥ�����ֹ�
+  現在処理している行番号
 
 : id
-  �Ǹ�˸ƤӽФ��줿�᥽�åɤΥ᥽�å�̾(�Υ���ܥ�)
-  ���Τ褦�ʥ᥽�åɤ��ʤ����0�ˤʤ롣
+  最後に呼び出されたメソッドのメソッド名(のシンボル)
+  そのようなメソッドがなければ0になる。
 
 : binding
-  ���ߤΥ���ƥ�����
+  現在のコンテキスト
 
 : klass
-  ���߸ƤӽФ���Ƥ���᥽�åɤΥ��饹���֥������ȡ�
+  現在呼び出されているメソッドのクラスオブジェクト。
 
 
 --- verbose -> bool
 --- verbose? -> bool
 
-���ʤ�Хȥ졼�����Ϥγ��Ϥ佪λ���Τ餻�ޤ���
+真ならばトレース出力の開始や終了を知らせます。
 
 --- verbose=(flag)
 
-�ȥ졼�����Ϥγ��Ϥ佪λ���Τ餻��ʸ����("Trace on"�ޤ���"Trace off")��ɬ�פʤ鿿�����ꤷ�ޤ���
+トレース出力の開始や終了を知らせる文字列("Trace on"または"Trace off")が必要なら真を設定します。
 
-@param flag �ȥ졼�����Ϥγ��Ϥ佪λ���Τ餻��ʸ����ɬ�פʤ�true�����ꤷ�ޤ���
+@param flag トレース出力の開始や終了を知らせる文字列が必要ならtrueを設定します。
 
   require 'tracer'
 
@@ -195,7 +195,7 @@ ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
     puts "Hello"
   }
 
-  # ������
+  # 出力例
   Trace on
   #0:t5.rb:7::-:   puts "Hello"
   #0:t5.rb:7:Kernel:>:   puts "Hello"
@@ -209,13 +209,13 @@ ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
 
 --- stdout -> object
 
-�ȥ졼��������򻲾Ȥ��ޤ���
+トレース出力先を参照します。
 
 --- stdout=(fp)
 
-�ȥ졼����������ѹ����ޤ���
+トレース出力先を変更します。
 
-@param fp �������ȥ졼�����������ꤷ�ޤ���
+@param fp 新しいトレース出力先を指定します。
 
   require 'tracer'
 
@@ -231,38 +231,38 @@ ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
 --- display_c_call -> bool
 --- display_c_call? -> bool
 
-���ʤ�С��ӥ�ȥ���᥽�åɤθƤӽФ���ɽ�����ޤ���
-�ǥե���Ȥϵ��Ǥ���
+真ならば、ビルトインメソッドの呼び出しを表示します。
+デフォルトは偽です。
 
 --- display_c_call=(flag)
 
-�ӥ�ȥ���᥽�åɤθƤӽФ���ɽ�����뤫�ɤ��������ꤷ�ޤ���
+ビルトインメソッドの呼び出しを表示するかどうかを設定します。
 
-@param flag �ӥ�ȥ���᥽�åɤθƤӽФ���ɽ������ʤ�С�������ꤷ�ޤ���
+@param flag ビルトインメソッドの呼び出しを表示するならば、真を指定します。
 
 --- display_process_id -> bool
 --- display_process_id? -> bool
 
-���ʤ�С��ץ����� ID ��ɽ�����ޤ���
-�ǥե���Ȥϡ����Ǥ���
+真ならば、プロセス ID を表示します。
+デフォルトは、偽です。
 
 --- display_process_id=(flag)
 
-�ץ����� ID ��ɽ�����뤫�ɤ��������ꤷ�ޤ���
+プロセス ID を表示するかどうかを設定します。
 
-@param flag �ץ����� ID ��ɽ������ʤ�С�������ꤷ�ޤ���
+@param flag プロセス ID を表示するならば、真を指定します。
 
 --- display_thread_id -> bool
 --- display_thread_id? -> bool
 
-���ʤ�С�����å� ID ��ɽ�����ޤ���
-�ǥե���Ȥϡ����Ǥ���
+真ならば、スレッド ID を表示します。
+デフォルトは、真です。
 
 --- display_thread_id=(flag)
 
-����å� ID ��ɽ�����뤫�ɤ��������ꤷ�ޤ���
+スレッド ID を表示するかどうかを設定します。
 
-@param flag ����å� ID ��ɽ������ʤ�С�������ꤷ�ޤ���
+@param flag スレッド ID を表示するならば、真を指定します。
 
 --- stdout_mutex -> Mutex
 #@todo
@@ -274,9 +274,9 @@ ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
 --- add_filter(p = proc)
 #@todo
 
-�ե��륿�����ɲä��ޤ���
+フィルターを追加します。
 
-@param p [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
+@param p [[c:Proc]] オブジェクトを指定します。
 
 --- get_line(file, line) -> String
 #@todo
@@ -290,14 +290,14 @@ ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
 
 --- off -> ()
 
-�ȥ졼�����Ϥ����Ǥ��ޤ���
+トレース出力を中断します。
 
 --- on -> ()
 --- on{ ... } -> ()
 
-�ȥ졼�����Ϥ�Ƴ����ޤ���
+トレース出力を再開します。
 
-�֥��å���Ϳ����ȥ֥��å��μ¹���Τߥȥ졼������Ϥ��ޤ���
+ブロックを与えるとブロックの実行中のみトレースを出力します。
 
 --- set_get_line_procs(file, p = proc)
 #@todo
@@ -320,8 +320,8 @@ ruby 1.8 �Ǥϥ֥��å���Ϳ����ȷٹ𤬤Ǥޤ���
 
 --- EVENT_SYMBOL
   
-�ȥ졼�����ϤΥ���ܥ�Υϥå���Ǥ���
-�����Τ褦��ʸ���󤬤���ޤ���
+トレース出力のシンボルのハッシュです。
+下記のような文字列があります。
 
   EVENT_SYMBOL = {
     "line" => "-",

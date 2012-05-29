@@ -1,384 +1,384 @@
 = module OpenSSL::SSL::SocketForwarder 
-to_io ���֤���륽���åȥ��֥������Ȥ˥᥽�åɤ�
-�ե���ɤ���⥸�塼��Ǥ���
+to_io で返されるソケットオブジェクトにメソッドを
+フォワードするモジュールです。
 
-[[c:OpenSSL::SSL::SSLSocket]] �� [[c:OpenSSL::SSL::SSLServer]] ��
-���ä������åȤ� SSL ��åѥ��饹�˥����åȴ�Ϣ�Υ᥽�åɤ�������뤿��
-�˻Ȥ��ޤ���
+[[c:OpenSSL::SSL::SSLSocket]] や [[c:OpenSSL::SSL::SSLServer]] と
+いったソケットの SSL ラッパクラスにソケット関連のメソッドを定義するため
+に使われます。
 
 == Instance Methods
 --- addr -> Array
-��åפ���Ƥ��륽���åȤ���³������֤��ޤ���
+ラップされているソケットの接続情報を返します。
 
-[[m:IPSocket#addr]] ��Ʊ�ͤǤ���
+[[m:IPSocket#addr]] と同様です。
 
 --- peeraddr -> Array
-��åפ���Ƥ��륽���åȤ���³�����ξ�����֤��ޤ���
+ラップされているソケットの接続先相手の情報を返します。
 
-[[m:IPSocket#peeraddr]] ��Ʊ�ͤǤ���
+[[m:IPSocket#peeraddr]] と同様です。
 
 --- setsockopt(level, optname, optval) -> 0
-��åפ���Ƥ��륽���åȤΥ��ץ��������ꤷ�ޤ���
+ラップされているソケットのオプションを設定します。
 
-[[m:BasicSocket#setsockopt]] ��Ʊ�ͤǤ���
+[[m:BasicSocket#setsockopt]] と同様です。
 
-@param level    [[man:setsockopt(2)]] �� level ������������������ꤷ�ޤ�
-@param optname  [[man:setsockopt(2)]] �� option_name ������������������ꤷ�ޤ�
-@param optval  ���ꤵ����ͤ�ʸ����ǻ��ꤷ�ޤ���
+@param level    [[man:setsockopt(2)]] の level に相当する整数を指定します
+@param optname  [[man:setsockopt(2)]] の option_name に相当する整数を指定します
+@param optval  設定される値を文字列で指定します。
 
-@raise Errno::EXXX  ���ץ���������˼��Ԥ������ȯ�����ޤ���
+@raise Errno::EXXX  オプションの設定に失敗した場合発生します。
 
 --- getsockopt(level, optname) -> String
-��åפ���Ƥ��륽���åȤΥ��ץ��������ꤷ�ޤ���
+ラップされているソケットのオプションを設定します。
 
-[[m:BasicSocket#getsockopt]] ��Ʊ�ͤǤ���
+[[m:BasicSocket#getsockopt]] と同様です。
 
-@param level    [[man:getsockopt(2)]] �� ���������level ������������������ꤷ�ޤ�
-@param optname  [[man:getsockopt(2)]] �� �軰������option_name ������������������ꤷ�ޤ�
+@param level    [[man:getsockopt(2)]] の 第二引数のlevel に相当する整数を指定します
+@param optname  [[man:getsockopt(2)]] の 第三引数のoption_name に相当する整数を指定します
 
 
 --- fcntl(cmd, arg=0) -> Integer
-��åפ���Ƥ��륽���åȤ��Ф��ƥ����ƥॳ���� fcntl ��¹Ԥ��ޤ���
+ラップされているソケットに対してシステムコール fcntl を実行します。
 
-[[m:IO#fcntl]] ��Ʊ�ͤǤ���
+[[m:IO#fcntl]] と同様です。
 
-@param cmd IO ���Ф��륳�ޥ�ɤ�ź�ե饤�֥�� [[lib:fcntl]] ���󶡤��Ƥ�������ǻ��ꤷ�ޤ���
-@param arg cmd ���Ф��������������ʸ����boolean�Τ����줫�ǻ��ꤷ�ޤ���
-@raise Errno::EXXX fcntl �μ¹Ԥ˼��Ԥ�������ȯ�����ޤ���
-@raise IOError ���� close ����Ƥ������ȯ�����ޤ���
+@param cmd IO に対するコマンドを、添付ライブラリ [[lib:fcntl]] が提供している定数で指定します。
+@param arg cmd に対する引数を整数、文字列、booleanのいずれかで指定します。
+@raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
+@raise IOError 既に close されている場合に発生します。
 
 --- closed? -> bool
-��åפ���Ƥ��륽���åȤ�
-close ���Ƥ����� true ���֤��ޤ���
+ラップされているソケットが
+close していたら true を返します。
 
 --- do_not_reverse_lookup=(bool)
-�����Ϥ��ȥ��ɥ쥹����ۥ���̾�ؤεհ�����Ԥ�ʤ��ʤ�ޤ���
+真を渡すとアドレスからホスト名への逆引きを行わなくなります。
 
-[[m:BasicSocket#do_not_reverse_lookup]] ��Ʊ�ͤǤ���
+[[m:BasicSocket#do_not_reverse_lookup]] と同様です。
 
-@param bool ���ǵհ������������ޤ�
+@param bool 真で逆引きを抑制します
 
 = module OpenSSL::Buffering
-[[c:OpenSSL::SSL::SSLSocket]] �˥Хåե�����դ�IO��ǽ���󶡤���
-�⥸�塼��Ǥ���
+[[c:OpenSSL::SSL::SSLSocket]] にバッファリング付きIO機能を提供する
+モジュールです。
 
 
-[[c:IO]] ���饹��Ʊ�ͤΥ᥽�åɤ��󶡤��Ƥ��ޤ���
+[[c:IO]] クラスと同様のメソッドを提供しています。
 
-����Ū�ˤ� sysread, syswrite, sysread_nonblock, syswrite_nonblock, 
-sysclose �Ȥ��ä� [[c:OpenSSL::SSL::SSLSocket]] ���󶡤���᥽�åɤ�
-���Ѥ��� [[c:OpenSSL::SSL::SSLSocket]] ����åפ��Ƥ��륽���å�
-��Хåե���ͳ�ǥǡ�����Ź沽���Ƥ��Ȥ��Ԥ��ޤ���
+内部的には sysread, syswrite, sysread_nonblock, syswrite_nonblock, 
+sysclose といった [[c:OpenSSL::SSL::SSLSocket]] が提供するメソッドを
+利用し、 [[c:OpenSSL::SSL::SSLSocket]] がラップしているソケット
+をバッファ経由でデータを暗号化してやりとりを行います。
 
-=== IO �Ȥΰ㤤
-���Υ��饹�� IO ���饹��Ʊ�ͤΥ᥽�åɤ��󶡤��Ƥ��ޤ�����
-�ʲ������ǰۤʤ�ޤ��������Ϻ���ΥС��������ѹ�(����)
-������ǽ��������ޤ���
-  * gets �� readlines �ʤɹ��ɤ߹��ߥ᥽�åɤΰ���(�Զ��ڤ�ʸ����λ���)
-    �ΰ�̣���ۤʤ�ޤ����㤨�� "" ��Ϣ³���Ԥ���ڤ�Ȥߤʤ��⡼�ɤϤʤ�
-    nil ���Ϥ��ȥ��顼�Ȥʤ�ޤ�
-  * read_nonblock ���񤭹����Բ�ǽ���㳰��ȯ���������ꡢ
-    write_nonblock ���ɤ߹����Բ�ǽ���㳰��ȯ���������ꤷ�ޤ���
-    ����ϰŹ沽�̿��ǤΥǡ����������ˤ��������Υ�å�������
-    ���Ȥ꤬ɬ�פʾ�礬���뤿��Ǥ���
-  * 1.9 �Ǥ� encoding ��Ϣ�����ꤷ�ޤ���
-  * 1.9 �� each_byte �� String ��֥��å����Ϥ��ޤ�
+=== IO との違い
+このクラスは IO クラスと同様のメソッドを提供していますが、
+以下の点で異なります。これらは今後のバージョンで変更(改善)
+される可能性があります。
+  * gets や readlines など行読み込みメソッドの引数(行区切り文字列の指定)
+    の意味が異なります。例えば "" で連続改行を区切りとみなすモードはなく
+    nil を渡すとエラーとなります
+  * read_nonblock が書き込み不可能で例外を発生させたり、
+    write_nonblock が読み込み不可能で例外を発生させたりします。
+    これは暗号化通信でのデータの送信には双方向のメッセージの
+    やりとりが必要な場合があるためです。
+  * 1.9 では encoding 関連を設定しません
+  * 1.9 で each_byte が String をブロックに渡します
 
 == Instance Methods
 --- <<(s) -> self
-ʸ���� s ��񤭹��ߤޤ���
+文字列 s を書き込みます。
 
-[[m:IO#<<]] ��Ʊ�ͤǤ���
+[[m:IO#<<]] と同様です。
 
-@param s ���Ϥ���ʸ����
+@param s 出力する文字列
 
 --- close -> nil
-��³���Ĥ��ޤ���
+接続を閉じます。
 
-[[m:OpenSSL::Buffering#flush]] ��Ƥ�Ǥ����Ĥ��ޤ���
+[[m:OpenSSL::Buffering#flush]] を呼んでから閉じます。
 
 --- each(eol=$/){|line| ... } -> ()
 --- each_line(eol=$/){|line| ... } -> ()
-���ߤ��ɤ߹��߰��֤���1�Ԥ���ʸ����Ȥ����ɤ߹��ߡ�
-���������Ȥ��ƥ֥��å���ƤӽФ��ޤ���
+現在の読み込み位置から1行ずつ文字列として読み込み、
+それを引数としてブロックを呼び出します。
 
-[[m:IO#each]] ��Ʊ�ͤǤ��������ڤ�ʸ�����
-"" ���Ϥ������䡢nil ���Ϥ����Ȥ��ΰ�̣���ۤʤꡢ
-�����ξ���������ư��ޤ���
+[[m:IO#each]] と同様ですが、区切り文字列に
+"" を渡した場合や、nil を渡したときの意味が異なり、
+これらの場合は正しく動作しません。
 
 
-@param eol �Զ��ڤ�ʸ����/����ɽ��
+@param eol 行区切り文字列/正規表現
 
 --- each_byte{|ch| ... } -> ()
 
 #@until 1.9.1
-���ߤ��ɤ߹��߰��֤��� 1 �Х��Ȥ����ɤ߹��ߡ�
-����������Ȥ��ƥ֥��å��ΰ����Ȥ��ƸƤӽФ��ޤ���
+現在の読み込み位置から 1 バイトずつ読み込み、
+それを整数としてブロックの引数として呼び出します。
 #@else
-���ߤ��ɤ߹��߰��֤��� 1 �Х��Ȥ����ɤ߹��ߡ�
-�����ʸ����Ȥ��ƥ֥��å��ΰ����Ȥ��ƸƤӽФ��ޤ���
-#@# ����� each_byte �Ȥϰۤʤ롣each_byte�� 1.9 �Ǥ�������֥��å����Ϥ���
+現在の読み込み位置から 1 バイトずつ読み込み、
+それを文字列としてブロックの引数として呼び出します。
+#@# これは each_byte とは異なる。each_byteは 1.9 でも整数をブロックに渡す。
 #@end
 
-[[m:IO#each_byte]] ��Ʊ�ͤǤ���
+[[m:IO#each_byte]] と同様です。
 
 --- eof? -> bool
 --- eof -> bool
-��꤫����̿�����ü��ã������ true ���֤��ޤ���
+相手からの通信が終端に達したら true を返します。
 
-[[m:IO#eof?]] ��Ʊ�ͤǤ���
+[[m:IO#eof?]] と同様です。
 
 --- flush -> ()
-�����Хåե��˻ĤäƤ���ǡ����򤹤٤ƽ��Ϥ���
-�Хåե���ե�å��夷�ޤ���
+内部バッファに残っているデータをすべて出力し、
+バッファをフラッシュします。
 
-[[m:IO#flush]] ��Ʊ�ͤǤ���
+[[m:IO#flush]] と同様です。
 
-�Хåե������٤ƽ��Ϥ����ޤǥ֥��å����ޤ���
+バッファがすべて出力されるまでブロックします。
 
 #@until 1.9.1
 --- getc -> Integer | nil
 #@else
 --- getc -> String | nil
 #@end
-�Хåե�����1ʸ���ɤ߹��ߡ������֤��ޤ���
+バッファから1文字読み込み、それ返します。
 
-�ɤ߹��ߤ���ü����ã�������� nil ���֤��ޤ���
+読み込みが終端に到達した場合は nil を返します。
 
-[[m:IO#getc]] ��Ʊ�ͤǤ���
+[[m:IO#getc]] と同様です。
 
 --- gets(eol=$/, limit=nil) -> String | nil
-�̿�ϩ�������ɤ߹���ǡ�������֤��ޤ���
+通信路から一行読み込んで、それを返します。
 
-�Զ��ڤ�� eol �ǻ��ꤷ��ʸ����/����ɽ���ˤʤ�ޤ���
+行区切りは eol で指定した文字列/正規表現になります。
 
-���� limit �Х��Ȥ�ʸ������֤��ޤ���1 �Ԥ�������
-Ĺ�����Ϥ������ڤ��ޤ���limit �� nil �ξ���
-eol ����ã����ޤ��ɤ߹��ߤޤ���
+最大 limit バイトの文字列を返します。1 行がそれより
+長い場合はそこで切られます。limit が nil の場合は
+eol に到達するまで読み込みます。
 
-�ɤ߹��ߤ���ü����ã�������� nil ���֤��ޤ���
+読み込みが終端に到達した場合は nil を返します。
 
-[[m:IO#gets]] ��Ʊ�ͤǤ��������ڤ�ʸ�����
-"" ���Ϥ������䡢nil ���Ϥ����Ȥ��ΰ�̣���ۤʤꡢ
-�����ξ���������ư��ޤ���
+[[m:IO#gets]] と同様ですが、区切り文字列に
+"" を渡した場合や、nil を渡したときの意味が異なり、
+これらの場合は正しく動作しません。
 
-@param eol �Զ��ڤ�ʸ����/����ɽ��
-@param limit ������ɤ߹��ߥХ��ȿ�
+@param eol 行区切り文字列/正規表現
+@param limit 最大の読み込みバイト数
 
 --- print(*args) -> nil
-args ���˽��Ϥ��ޤ���
+args を順に出力します。
 
-args �γ����Ǥ� to_s ��ʸ������Ѵ�����
-���Ϥ��ޤ���
-[[m:IO#print]] �Ȥۤ�Ʊ�ͤǤ������������ά�������� $_ ����Ϥ���
-��ǽ�Ϥ���ޤ���
+args の各要素を to_s で文字列に変換して
+出力します。
+[[m:IO#print]] とほぼ同様ですが、引数を省略した場合に $_ を出力する
+機能はありません。
 
-@param args ���Ϥ��륪�֥�������
+@param args 出力するオブジェクト
 
 --- printf(format, *args) -> nil
-format �˽������� args ��ʸ������Ѵ�����
-���Ϥ��ޤ���
+format に従い引数 args を文字列に変換して
+出力します。
 
-[[m:IO#printf]] ��Ʊ�ͤǤ���
+[[m:IO#printf]] と同様です。
 
-@param format ���ϥե����ޥå�ʸ����
-@param arg ���Ϥ��륪�֥�������
+@param format 出力フォーマット文字列
+@param arg 出力するオブジェクト
 @see [[m:Kernel.#printf]]
 
 --- puts(*objs) -> nil
-�ƥ��֥������Ȥ���Ϥ������줾��θ�˲��Ԥ���Ϥ��ޤ���
+各オブジェクトを出力し、それぞれの後に改行を出力します。
 
-[[m:IO#puts]] ��Ʊ�ͤǤ���
+[[m:IO#puts]] と同様です。
 
-@param objs ���Ϥ��������֥�������
+@param objs 出力したいオブジェクト
 
 --- read(length=nil, buf=nil) -> String | nil
-ʸ������̿�ϩ�����ɤ߹��ߡ��֤��ޤ���
+文字列を通信路から読み込み、返します。
 
-�ɤ߹��ߤ���ü����ã���Ƥ������ nil ���֤��ޤ���
+読み込みが終端に到達している場合は nil を返します。
 
-length ���ɤ߹���Х��ȿ�����ꤷ�ޤ���
-length �� 0 ���Ϥ������϶�ʸ������֤��ޤ���
-length �� nil ���Ϥ������(��ά�������)�ϺǸ�
-�ޤǤΥǡ������ɤ߹��ߤޤ���
+length で読み込むバイト数を指定します。
+length に 0 を渡した場合は空文字列を返します。
+length に nil を渡した場合(省略した場合)は最後
+までのデータを読み込みます。
 
-buf��ʸ������Ϥ������Ϥ����ΰ褬�����ѤΥХåե��Ȥ������Ѥ���ޤ���
+bufに文字列を渡した場合はその領域が出力用のバッファとして利用されます。
 
-[[m:IO#read]] ��Ʊ�ͤǤ���
+[[m:IO#read]] と同様です。
 
-@param length �ɤ߹���Х��ȿ�
-@param buf �ɤ߹��ߥХåե�
+@param length 読み込むバイト数
+@param buf 読み込みバッファ
 
 
 --- readchar -> String
-�Хåե�����1ʸ���ɤ߹��ߡ������֤��ޤ���
+バッファから1文字読み込み、それ返します。
 
-�ɤ߹��ߤ���ü����ã���Ƥ�������㳰 EOFError ���֤��ޤ���
+読み込みが終端に到達している場合は例外 EOFError を返します。
 
-[[m:IO#readchar]] ��Ʊ�ͤǤ���
+[[m:IO#readchar]] と同様です。
 
-@raise EOFError �ɤ߹��ߤ���ü����ã��������ȯ�����ޤ���
+@raise EOFError 読み込みが終端に到達した場合に発生します。
 
 --- readlines(eol=$/) -> [String]
-�ǡ������̿�ϩ������ü�ޤ������ɤ߹���ǡ�
-�ƹԤ����ǤȤ��ƻ���������֤��ޤ���
+データを通信路から末端まで全て読み込んで、
+各行を要素として持つ配列を返します。
 
-�Զ��ڤ�� eol �ǻ��ꤷ��ʸ����/����ɽ���ˤʤ�ޤ���
+行区切りは eol で指定した文字列/正規表現になります。
 
-[[m:IO#readlines]] ��Ʊ�ͤǤ��������ڤ�ʸ�����
-"" ���Ϥ������䡢nil ���Ϥ����Ȥ��ΰ�̣���ۤʤꡢ
-�����ξ���������ư��ޤ���
+[[m:IO#readlines]] と同様ですが、区切り文字列に
+"" を渡した場合や、nil を渡したときの意味が異なり、
+これらの場合は正しく動作しません。
 
-@param eol �Զ��ڤ�ʸ����/����ɽ��
+@param eol 行区切り文字列/正規表現
 
 --- ungetc(char) -> ()
-���ꤷ��ʸ�� char ��Хåե����ɤ��ᤷ�ޤ���
+指定した文字 char をバッファに読み戻します。
 
-char �ˤ� String �� Integer ���Ϥ��ޤ���
+char には String か Integer を渡します。
 
-[[m:IO#ungetc]] ��Ʊ�ͤǤ���
+[[m:IO#ungetc]] と同様です。
 
-@param char �ɤ��᤹ʸ��
+@param char 読み戻す文字
 --- write(str) -> Integer
-str ����Ϥ��ޤ���
+str を出力します。
 
-�񤭹�����ǡ�����Ĺ�����֤��ޤ���
+書き込んだデータの長さを返します。
 
-[[m:IO#write]] ��Ʊ�ͤǤ���
+[[m:IO#write]] と同様です。
 
-@param str ���Ϥ���ʸ����
+@param str 出力する文字列
 
 --- readline(eol=$/) -> String
-�̿�ϩ�������ɤ߹���ǡ�������֤��ޤ���
+通信路から一行読み込んで、それを返します。
 
-�Զ��ڤ�� eol �ǻ��ꤷ��ʸ����/����ɽ���ˤʤ�ޤ���
+行区切りは eol で指定した文字列/正規表現になります。
 
-�ɤ߹��ߤ���ü����ã���������㳰 EOFError ��ȯ�����ޤ���
+読み込みが終端に到達した場合は例外 EOFError を発生します。
 
-[[m:IO#readline]] ��Ʊ�ͤǤ��������ڤ�ʸ�����
-"" ���Ϥ������䡢nil ���Ϥ����Ȥ��ΰ�̣���ۤʤꡢ
-�����ξ���������ư��ޤ���
+[[m:IO#readline]] と同様ですが、区切り文字列に
+"" を渡した場合や、nil を渡したときの意味が異なり、
+これらの場合は正しく動作しません。
 
-@param eol �Զ��ڤ�ʸ����/����ɽ��
-@raise EOFError �ɤ߹��ߤ���ü����ã��������ȯ�����ޤ���
+@param eol 行区切り文字列/正規表現
+@raise EOFError 読み込みが終端に到達した場合に発生します。
 
 --- read_nonblock(maxlen, buf) -> String
-�̿�ϩ���� maxlen  �Х��Ȥ��¤Ȥ��ƥǡ������ɤ߹��ߡ�
-ʸ����Ȥ����֤��ޤ���
+通信路から maxlen  バイトを上限としてデータを読み込み、
+文字列として返します。
 
-¨�¤�������ǡ����� 1byte �Ǥ�¸�ߤ���Х֥��å����ޤ���
-�����Хåե������Ǥʤ����ϥХåե��Υǡ������֤��ޤ���
-¨�¤�������ǡ�����¸�ߤ��ʤ��Ȥ��ˤ��㳰��ȯ�����ޤ���
-�㳰��ȯ��������硢�����Υ����åȤ����Ѳ�ǽ�ˤʤäƤ���
-�ƤӤ��Υ᥽�åɤ�Ƥ�Ǥ���������
+即座に得られるデータが 1byte でも存在すればブロックしません。
+内部バッファが空でない場合はバッファのデータを返します。
+即座に得られるデータが存在しないときには例外が発生します。
+例外が発生した場合、内部のソケットが利用可能になってから
+再びこのメソッドを呼んでください。
 
-����Ū�ˤ� [[m:IO#read_nonblock]] ��Ʊ�ͤǤ����������ʲ��Τ褦��
-�㤤�⤢��ޤ���
+基本的には [[m:IO#read_nonblock]] と同様です。しかし以下のような
+違いもあります。
 
-���Υ᥽�åɤϥ����åȤ��񤭹����Բ�ǽ([[c:IO::WaitWritable]])�Ȥ�����ͳ��
-�㳰��ȯ���������ǽ��������ޤ����Ź�ץ��ȥ���δط���
-�ǡ������ɤ߹��ߤˤʤ�餫�Υǡ�������������ɬ�פˤʤ��礬���뤫��Ǥ���
+このメソッドはソケットが書き込み不可能([[c:IO::WaitWritable]])という理由で
+例外を発生させる可能性があります。暗号プロトコルの関係上
+データの読み込みになんらかのデータの送受信が必要になる場合があるからです。
 
-�����Υ����åȤ��ɤ߹���/�񤭹��߲�ǽ�Ǥ�����Ǥ⡢���Υ᥽�åɤ�
-ʸ���������줺���㳰��ȯ�������礬����ޤ���
-�Ȥ����Τϡ��Ź�ץ��ȥ���ˤ�äƤ�(�Ȥ��˥֥��å��Ź�Ǥ�)
-�̿��ǡ����򤢤����٤��礭���Υ֥��å�ñ�̤ǰŹ沽/���沽
-���뤿��Ǥ���
+内部のソケットが読み込み/書き込み可能である場合でも、このメソッドが
+文字列を得られず、例外が発生する場合があります。
+というのは、暗号プロトコルによっては(とくにブロック暗号では)
+通信データをある程度の大きさのブロック単位で暗号化/復号化
+するためです。
 
 
 
-@param maxlen �ɤ߹���Ĺ���ξ��(����)
-@param buf �ɤ߹��ߥХåե�
-@raise EOFError �ɤ߹��ߤ����˽�ü����ã���Ƥ������ȯ�����ޤ�
-@raise OpenSSL::SSL::SSLError �����åȤ��ɤ߹���/�񤭹��߲�ǽ���֤ˤʤ�Τ�
-       �Ԥ�ɬ�פ��������ȯ�����ޤ���
-       �ɤ߹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitReadable]] ��
-       �񤭹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitWritable]] ��
-       ���줾�� extend �����㳰���֥������Ȥ���������ޤ���
+@param maxlen 読み込む長さの上限(整数)
+@param buf 読み込みバッファ
+@raise EOFError 読み込みが既に終端に到達している場合に発生します
+@raise OpenSSL::SSL::SSLError ソケットが読み込み/書き込み可能状態になるのを
+       待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [[c:IO::WaitReadable]] を、
+       書き込み可能状態を待つ必要がある場合には [[c:IO::WaitWritable]] を、
+       それぞれ extend した例外オブジェクトが生成されます。
 
 --- write_nonblock(s) -> Integer
-ʸ���� s ��Υ�֥��å��󥰥⡼�ɤǽ񤭹��ߤޤ���
+文字列 s をノンブロッキングモードで書き込みます。
 
-����������硢�񤭹�����Х��ȿ����֤��ޤ���
+成功した場合、書き込んだバイト数を返します。
 
-1 �Х��Ȥ�񤯤��Ȥ��Ǥ����������åȤξ��֤��Ѳ�����Τ�
-�Ԥ�ɬ�פ���������㳰��ȯ�������ޤ���
-�㳰��ȯ��������硢�����Υ����åȤ����Ѳ�ǽ�ˤʤäƤ���
-�ƤӤ��Υ᥽�åɤ�Ƥ�Ǥ���������
+1 バイトも書くことができず、ソケットの状態が変化するのを
+待つ必要がある場合は例外を発生させます。
+例外が発生した場合、内部のソケットが利用可能になってから
+再びこのメソッドを呼んでください。
 
-�����������Хåե��˽񤭹���Ǥ��ʤ��ǡ������ĤäƤ�����ϡ�
-�ޤ��Хåե������Ƥ򤹤٤ƽ��Ϥ��Ƥ��ޤ������λ�����
-�֥��å������ǽ��������ޤ���
+ただし内部バッファに書き込んでいないデータが残っている場合は、
+まずバッファの内容をすべて出力してします。この時点で
+ブロックする可能性があります。
 
-����Ū�ˤ� [[m:IO#write_nonblock]] ��Ʊ�ͤǤ����������ʲ��Τ褦��
-�㤤�⤢��ޤ���
+基本的には [[m:IO#write_nonblock]] と同様です。しかし以下のような
+違いもあります。
 
-���Υ᥽�åɤϥ����åȤ��ɤ߹����Բ�ǽ([[c:IO::WaitReadable]])
-�Ȥ�����ͳ��
-�㳰��ȯ���������ǽ��������ޤ����Ź�ץ��ȥ���δط���
-�ǡ����ν񤭹��ߤˤʤ�餫�Υǡ�����
-��������ɬ�פˤʤ��礬���뤫��Ǥ���
+このメソッドはソケットが読み込み不可能([[c:IO::WaitReadable]])
+という理由で
+例外を発生させる可能性があります。暗号プロトコルの関係上
+データの書き込みになんらかのデータの
+送受信が必要になる場合があるからです。
 
-�����Υ����åȤ��ɤ߹���/�񤭹��߲�ǽ�Ǥ�����Ǥ⡢���Υ᥽�åɤ�
-ʸ�����񤭹��᤺���㳰��ȯ�������礬����ޤ���
-�Ȥ����Τϡ��Ź�ץ��ȥ���ˤ�äƤ�(�Ȥ��˥֥��å��Ź�Ǥ�)
-�̿��ǡ����򤢤����٤��礭���Υ֥��å�ñ�̤ǰŹ沽/���沽
-���뤿��Ǥ���
+内部のソケットが読み込み/書き込み可能である場合でも、このメソッドで
+文字列を書き込めず、例外が発生する場合があります。
+というのは、暗号プロトコルによっては(とくにブロック暗号では)
+通信データをある程度の大きさのブロック単位で暗号化/復号化
+するためです。
 
-@param s ���Ϥ���ʸ����
-@raise OpenSSL::SSL::SSLError �����åȤ��ɤ߹���/�񤭹��߲�ǽ���֤ˤʤ�Τ�
-       �Ԥ�ɬ�פ��������ȯ�����ޤ���
-       �ɤ߹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitReadable]] ��
-       �񤭹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitWritable]] ��
-       ���줾�� extend �����㳰���֥������Ȥ���������ޤ���
+@param s 出力する文字列
+@raise OpenSSL::SSL::SSLError ソケットが読み込み/書き込み可能状態になるのを
+       待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [[c:IO::WaitReadable]] を、
+       書き込み可能状態を待つ必要がある場合には [[c:IO::WaitWritable]] を、
+       それぞれ extend した例外オブジェクトが生成されます。
 
 --- readpartial(maxlen, buf=nil) -> String | nil
-�̿�ϩ����Ĺ�� maxlen  �Х��Ȥ��¤Ȥ��ƥǡ������ɤ߹��ߡ�
-ʸ����Ȥ����֤��ޤ���
-¨�¤�������ǡ�����¸�ߤ��ʤ��Ȥ��ˤϥ֥��å����ƥǡ�����������Ԥ��ޤ���
-¨�¤�������ǡ����� 1byte �Ǥ�¸�ߤ���Х֥��å����ޤ���
+通信路から長さ maxlen  バイトを上限としてデータを読み込み、
+文字列として返します。
+即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちます。
+即座に得られるデータが 1byte でも存在すればブロックしません。
 
-[[m:IO#readpartial]] ��Ʊ�ͤǤ���
+[[m:IO#readpartial]] と同様です。
 
-@param maxlen �ɤ߹���Ĺ���ξ��(����)
-@param buf �ɤ߹��ߥХåե�
-@raise EOFError �ɤ߹��ߤ����˽�ü����ã���Ƥ������ȯ�����ޤ�
+@param maxlen 読み込む長さの上限(整数)
+@param buf 読み込みバッファ
+@raise EOFError 読み込みが既に終端に到達している場合に発生します
 
 --- sync -> bool
-���Ϥ�Ʊ���⡼�ɤʤ� true ���֤��ޤ���
+出力が同期モードなら true を返します。
 
 @see [[m:OpenSSL::Buffering#sync=]]
 
 --- sync=(sync)
-���Ϥ�Ʊ���⡼�ɤ����ꤷ�ޤ���
+出力の同期モードを設定します。
 
-true �����ꤹ���Ʊ���⡼�ɤˤʤꡢ
-[[m:OpenSSL::Buffering#write_nonblock]] ��
-[[m:OpenSSL::SSL::SSLSocket#syswrite]] ��������٤Ƥν񤭹���
-([[m:OpenSSL::Buffering#write]], [[m:OpenSSL::Buffering#print]] �ʤ�)
-�ϥХåե���󥰤��줺�˽��Ϥ���ޤ���
+true に設定すると同期モードになり、
+[[m:OpenSSL::Buffering#write_nonblock]] と
+[[m:OpenSSL::SSL::SSLSocket#syswrite]] を除くすべての書き込み
+([[m:OpenSSL::Buffering#write]], [[m:OpenSSL::Buffering#print]] など)
+はバッファリングされずに出力されます。
 
-false �����ꤹ��Ƚ񤭹��ߤϥХåե���󥰤���ޤ���
+false に設定すると書き込みはバッファリングされます。
 
-@param sync ���ꤹ��⡼��(������)
+@param sync 設定するモード(真偽値)
 @see [[m:OpenSSL::Buffering#sync]]
 
 == Constants
 
 --- BLOCK_SIZE -> Integer
-�����ΥХåե��Υ��������֤��ޤ���
+内部のバッファのサイズを返します。
 
 = class OpenSSL::SSL::SSLSocket < Object
 include Enumerable
 include OpenSSL::SSL::SocketForwarder 
 include OpenSSL::Buffering
 
-�����åȤ��åפ��� SSL �Ǥ�ǧ�ڤȰŹ��̿���¸����뤿��Υ��饹�Ǥ���
+ソケットをラップして SSL での認証と暗号通信を実現するためのクラスです。
 
 
-=== ��
+=== 例
 
-SSL/TLS �����Ф���³���� write ���ޤ���
+SSL/TLS サーバに接続して write します。
 
   require 'socket'
   require 'openssl'
@@ -398,299 +398,299 @@ SSL/TLS �����Ф���³���� write ���ޤ���
 
 --- new(socket) -> OpenSSL::SSL::SSLSocket
 --- new(socket, context) -> OpenSSL::SSL::SSLSocket
-socket ���åפ��� SSLSocket ���֥������Ȥ��������ޤ���
+socket をラップして SSLSocket オブジェクトを生成します。
 
 
-socket �ˤ� ��åפ��� [[c:TCPSocket]] ���֥������Ȥ�Ϳ����
-context �ˤ� SSL ���������������Ƥ���
-[[c:OpenSSL::SSL::SSLContext]] ���֥������Ȥ�Ϳ���ޤ���
+socket には ラップする [[c:TCPSocket]] オブジェクトを与え、
+context には SSL の設定情報を所持している
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトを与えます。
 
-context ���ά�������� [[m:OpenSSL::SSL::SSLContext.new]] ��
-�����˥���ƥ����Ȥ��������Ƥ�����Ѥ��ޤ���
+context を省略した場合は [[m:OpenSSL::SSL::SSLContext.new]] で
+新たにコンテキストを生成してそれを用います。
 
-@param socket ��åפ��륽���å�
-@param context SSL ������������� SSL ����ƥ����ȥ��֥�������
-@raise OpenSSL::SSL::SSLError ���֥������Ȥ������˼��Ԥ�������ȯ�����ޤ�
+@param socket ラップするソケット
+@param context SSL の設定情報を持つ SSL コンテキストオブジェクト
+@raise OpenSSL::SSL::SSLError オブジェクトの生成に失敗した場合に発生します
 
 == Instance Methods
 
 --- io -> IO
 --- to_io -> IO
-SSLSocket ���֥������Ȥ�������������Ϥ��줿�����åȤ��֤��ޤ���
+SSLSocket オブジェクトを生成する時に渡されたソケットを返します。
 
 @see [[m:OpenSSL::SSL::SSLSocket.new]]
 
 --- context -> OpenSSL::SSL::SSLContext
-SSLSocket ���֥������Ȥ�������������Ϥ��줿����ƥ����Ȥ��֤��ޤ���
+SSLSocket オブジェクトを生成する時に渡されたコンテクストを返します。
 
 @see [[m:OpenSSL::SSL::SSLSocket.new]]
 
 --- sync_close -> bool
-SSLSocket �� close ����Ȥ��˥�åפ��Ƥ��륽���åȤ� close ���뤫�ɤ�����
-�֤��ޤ���
+SSLSocket を close するときにラップしているソケットも close するかどうかを
+返します。
 
-true �ǥ����åȤ� close ���ޤ���
+true でソケットも close します。
 
 --- sync_close=(bool)
-SSLSocket �� close ����Ȥ��˥�åפ��Ƥ��륽���åȤ� close ���뤫�ɤ�����
-���ꤷ�ޤ���
+SSLSocket を close するときにラップしているソケットも close するかどうかを
+設定します。
 
-true �ǥ����åȤ� close ����褦�ˤʤ�ޤ���
+true でソケットも close するようになります。
 
-@param bool ���ꤹ�뿿����
+@param bool 設定する真偽値
 
 --- cert -> OpenSSL::X509::Certificate | nil
-��ʬ���Ȥ���������������֤��ޤ���
+自分自身を証明する証明書を返します。
 
-��ʬ���Ȥ��������������Ȥ�ʤ��ä����� nil ���֤��ޤ���
-[[m:OpenSSL::SSL::SSLSocket#connect]] �� [[m:OpenSSL::SSL::SSLSocket#accept]] 
-�� SSL/TLS �ϥ�ɥ���������Ԥ����ˤ��Υ᥽�åɤ�Ƥ��
-���� nil ���֤��ޤ���
+自分自身を証明する証明書を使わなかった場合は nil を返します。
+[[m:OpenSSL::SSL::SSLSocket#connect]] や [[m:OpenSSL::SSL::SSLSocket#accept]] 
+で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼んだ
+場合も nil を返します。
 
 @see [[m:OpenSSL::SSL::SSLContext#cert]]
 
 --- peer_cert -> OpenSSL::X509::Certificate | nil
-��³���ξ����񥪥֥������Ȥ��֤��ޤ���
+接続相手の証明書オブジェクトを返します。
 
-[[m:OpenSSL::SSL::SSLSocket#connect]] �� [[m:OpenSSL::SSL::SSLSocket#accept]] 
-�� SSL/TLS �ϥ�ɥ���������Ԥ����ˤ��Υ᥽�åɤ�Ƥ֤� nil ���֤��ޤ���
+[[m:OpenSSL::SSL::SSLSocket#connect]] や [[m:OpenSSL::SSL::SSLSocket#accept]] 
+で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 @see [[m:OpenSSL::SSL::SSLSocket#peer_cert_chain]]
 
 #@since 1.8.1
 --- peer_cert_chain -> [OpenSSL::X509::Certificate] | nil
-��³���ξ������������� [[c:OpenSSL::X509::Certificate]] ���֥�������
-��������֤��ޤ���
+接続相手の証明書チェインを [[c:OpenSSL::X509::Certificate]] オブジェクト
+の配列で返します。
 
-[[m:OpenSSL::SSL::SSLSocket#connect]] �� [[m:OpenSSL::SSL::SSLSocket#accept]] 
-�� SSL/TLS �ϥ�ɥ���������Ԥ����ˤ��Υ᥽�åɤ�Ƥ֤� nil ���֤��ޤ���
+[[m:OpenSSL::SSL::SSLSocket#connect]] や [[m:OpenSSL::SSL::SSLSocket#accept]] 
+で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
-�ʲ��ν��������֤��ޤ���
-  [��³���ξ�����, ����CA�ξ�����,... ���CA�ξ�����]
-�롼�� CA �ξ�����ϴޤޤ�ʤ����Ȥ����դ��Ƥ���������
+以下の順の配列を返します。
+  [接続相手の証明書, 下位CAの証明書,... 中間CAの証明書]
+ルート CA の証明書は含まれないことに注意してください。
 
 @see [[m:OpenSSL::SSL::SSLSocket#peer_cert]]
 #@end
 
 --- state -> String
 
-���ߤξ��֤򥢥�ե��٥å� 6 ʸ����ʸ������֤��ޤ���
+現在の状態をアルファベット 6 文字の文字列で返します。
 
 --- cipher -> [String, String, Integer, Integer]
-���߼ºݤ˻Ȥ��Ƥ���Ź�ξ����������֤��ޤ���
+現在実際に使われている暗号の情報を配列で返します。
 
-�֤��������η����ϰʲ�����Τ褦�� [�Ź�̾, TLS/SSL�ΥС������, ��Ĺ, ���르�ꥺ��ǻȤ��� bit ��] �Ȥʤ�ޤ���
+返される配列の形式は以下の例のように [暗号名, TLS/SSLのバージョン, 鍵長, アルゴリズムで使われる bit 数] となります。
 
   ["DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168]
 
-[[m:OpenSSL::SSL::SSLSocket#connect]] �� [[m:OpenSSL::SSL::SSLSocket#accept]] 
-�� SSL/TLS �ϥ�ɥ���������Ԥ����ˤ��Υ᥽�åɤ�Ƥ֤� nil ���֤��ޤ���
+[[m:OpenSSL::SSL::SSLSocket#connect]] や [[m:OpenSSL::SSL::SSLSocket#accept]] 
+で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 
 #@since 1.8.2
 --- pending -> Integer | nil
-OpenSSL�����ΥХåե����ݻ����Ƥ��롢ľ�����ɤ߼���ǽ��
-�ǡ����ΥХ��ȿ����֤��ޤ���
+OpenSSL内部のバッファが保持している、直ちに読み取り可能な
+データのバイト数を返します。
 
-�ϥ�ɥ��������������ˤ� nil ���֤��ޤ���
+ハンドシェイク開始前には nil を返します。
 
 #@end
 
 --- accept -> self
-TLS/SSL �̿��򥵡��Х⡼�ɤȤ��Ƴ��Ϥ������饤����Ȥ����
-�ϥ�ɥ����������Ϥ��Ԥ������饤����ȤȤΥϥ�ɥ���������¹Ԥ��ޤ���
+TLS/SSL 通信をサーバモードとして開始し、クライアントからの
+ハンドシェイク開始を待ち、クライアントとのハンドシェイクを実行します。
 
-@raise OpenSSL::SSL::SSLError �ϥ�ɥ��������˼��Ԥ���(VERIFY_PEER ��
-       ������θ��ڤ˼��Ԥ������䡢�ץ��ȥ����դ˼��Ԥ����ʤ�)
-       ����ȯ�����ޤ�
+@raise OpenSSL::SSL::SSLError ハンドシェイクに失敗した(VERIFY_PEER で
+       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+       場合に発生します
 @see [[m:OpenSSL::SSL::SSLSocket#connect]],
      [[m:OpenSSL::SSL::SSLSocket#accept_nonblock]]
 
 --- connect -> self
-TLS/SSl �̿��򥯥饤����ȥ⡼�ɤȤ��Ƴ��Ϥ���
-�����ФȤΥϥ�ɥ���������¹Ԥ��ޤ���
+TLS/SSl 通信をクライアントモードとして開始し、
+サーバとのハンドシェイクを実行します。
 
 
-@raise OpenSSL::SSL::SSLError �ϥ�ɥ��������˼��Ԥ���(VERIFY_PEER ��
-       ������θ��ڤ˼��Ԥ������䡢�ץ��ȥ����դ˼��Ԥ����ʤ�)
-       ����ȯ�����ޤ�
+@raise OpenSSL::SSL::SSLError ハンドシェイクに失敗した(VERIFY_PEER で
+       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+       場合に発生します
 @see [[m:OpenSSL::SSL::SSLSocket#accept]],
      [[m:OpenSSL::SSL::SSLSocket#connect_nonblock]]
 
 #@since 1.8.3
 --- post_connection_check(hostname) -> true
-��³�帡�ڤ�Ԥ��ޤ���
+接続後検証を行います。
 
-���ڤ������������� true ���֤������Ԥ��������㳰 
-[[c:OpenSSL::SSL::SSLError]] ��ȯ�������ޤ���
+検証に成功した場合は true を返し、失敗した場合は例外 
+[[c:OpenSSL::SSL::SSLError]] を発生させます。
 
-OpenSSL �� API �Ǥϡ�
-[[m:OpenSSL::SSL::SSLSocket#connect]] �� [[m:OpenSSL::SSL::SSLSocket#accept]] 
-�Ǥθ��ڤϼ���Ū�ˤ��Դ����Ǥ���
-CA ��������˽�̾���Ƥ��줬�������Ƥ��ʤ����Ȥ�����ǧ���ޤ���
-���Ѿ�Ͼ�����˵��ܤ���Ƥ������򸫤ơ���³�褬�����Ǥ��뤫���ǧ����
-ɬ�פ�����ޤ����̾����³��ۥ��Ȥ� FQDN �Ⱦ�����˵��ܤ���Ƥ��� FQDN ��
-���פ��Ƥ��뤫�ɤ�����Ĵ�٤ޤ������Υ᥽�åɤϤ��� FQDN �Υ����å���Ԥʤ��ޤ���
+OpenSSL の API では、
+[[m:OpenSSL::SSL::SSLSocket#connect]] や [[m:OpenSSL::SSL::SSLSocket#accept]] 
+での検証は実用的には不完全です。
+CA が証明書に署名してそれが失効していないことしか確認しません。
+実用上は証明書に記載されている事項を見て、接続先が妥当であるかを確認する
+必要があります。通常は接続先ホストの FQDN と証明書に記載されている FQDN が
+一致しているかどうかを調べます。このメソッドはその FQDN のチェックを行ないます。
 
-@param hostname �����å����� FQDN ��ʸ����
-@raise OpenSSL::SSL::SSLError �����å��˼��Ԥ�������ȯ�����ޤ�
+@param hostname チェックする FQDN の文字列
+@raise OpenSSL::SSL::SSLError チェックに失敗した場合に発生します
 
 #@end
 
 --- sysclose -> nil
-��³���Ĥ��ޤ�������'close notify'������ޤ���
+接続を閉じます。相手に'close notify'を送ります。
 
-���Υ᥽�åɤ� openssl �饤�֥����Ǵ������Ƥ���Хåե���
-�ե�å��夻������³���Ĥ��ޤ������Τ��ᡢ�̾��
-����ǤϤʤ� [[m:OpenSSL::Buffering#close]] ��Ƥ֤٤��Ǥ���
+このメソッドは openssl ライブラリ内で管理しているバッファを
+フラッシュせずに接続を閉じます。そのため、通常は
+これではなく [[m:OpenSSL::Buffering#close]] を呼ぶべきです。
 
-[[m:OpenSSL::SSL::SSLSocket#sync_close]] �����Ǥ������
-���Υ᥽�åɤ�ƤӤ����������Ǽ��Ȥ��ݻ����Ƥ��륽���å�
-��Ʊ�����Ĥ��ޤ���
+[[m:OpenSSL::SSL::SSLSocket#sync_close]] が真である場合は
+このメソッドを呼びだした時点で自身が保持しているソケット
+を同時に閉じます。
 
 --- sysread(length, buf=nil) -> String
-�ǡ�����Хåե����ͳ�����˰Ź沽�̿�ϩ�����ɤ߹��ߡ�
-�ɤ߹�����ǡ�����ʸ������֤��ޤ���
+データをバッファを経由せずに暗号化通信路から読み込み、
+読み込んだデータを文字列で返します。
 
-����Ū�ˤϤ��Υ᥽�åɤϻȤ鷺��[[c:OpenSSL::Buffering]] ��
-�᥽�åɤ�Ȥäƥǡ������ɤ߹���٤��Ǥ���
+基本的にはこのメソッドは使わず、[[c:OpenSSL::Buffering]] の
+メソッドを使ってデータを読み込むべきです。
 
-length ���ɤ߹���Х��ȿ�����ꤷ�ޤ���
+length で読み込むバイト数を指定します。
 
-buf��ʸ�������ꤹ��Ȥ���ʸ����Υ����ΰ�˥ǡ�����ľ�ܽ񤭹��ߡ�
-���� String ���֥������Ȥ��֤��ޤ���
+bufに文字列を指定するとその文字列のメモリ領域にデータを直接書き込み、
+その String オブジェクトを返します。
 
-[[m:IO#sysread]] ��Ʊ�ͤǤ���
+[[m:IO#sysread]] と同様です。
 
-@param length �ɤ߹���Х��ȿ�����ꤷ�ޤ�
-@param buf �ǡ�����񤭹���Хåե�
-@raise EOFError ���Ϥ���ü������������ȯ�����ޤ�
-@raise OpenSSL::SSL::SSLError �ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ�
+@param length 読み込むバイト数を指定します
+@param buf データを書き込むバッファ
+@raise EOFError 入力が終端に逹した場合に発生します
+@raise OpenSSL::SSL::SSLError 読み込みに失敗した場合に発生します
 
 --- syswrite(string) -> Integer
-�ǡ�����Хåե����ͳ�����˰Ź沽�̿�ϩ�˽񤭹��ߤޤ���
+データをバッファを経由せずに暗号化通信路に書き込みます。
 
-�񤭹�����Х��ȿ����������֤��ޤ���
+書き込んだバイト数を整数で返します。
 
-����Ū�ˤϤ��Υ᥽�åɤϻȤ鷺��[[c:OpenSSL::Buffering]] ��
-�᥽�åɤ�Ȥäƥǡ�����񤭹���٤��Ǥ���
+基本的にはこのメソッドは使わず、[[c:OpenSSL::Buffering]] の
+メソッドを使ってデータを書き込むべきです。
 
-[[m:IO#syswrite]] ��Ʊ�ͤǤ���
+[[m:IO#syswrite]] と同様です。
 
-@param string �񤭹���ǡ���ʸ����
-@raise OpenSSL::SSL::SSLError �񤭹��ߤ˼��Ԥ�������ȯ�����ޤ�
+@param string 書き込むデータ文字列
+@raise OpenSSL::SSL::SSLError 書き込みに失敗した場合に発生します
 
 --- accept_nonblock -> self
-�Υ�֥��å���������
-TLS/SSL �̿��򥵡��Х⡼�ɤȤ��Ƴ��Ϥ���
-���饤����ȤȤΥϥ�ɥ���������¹Ԥ��ޤ���
+ノンブロッキング方式で
+TLS/SSL 通信をサーバモードとして開始し、
+クライアントとのハンドシェイクを実行します。
 
-IO ���ɤ߹����Ԥ����⤷���Ͻ񤭹����Ԥ��ˤʤä������㳰��
-ȯ���������ϥ�ɥ������������Ǥ��ޤ���IO ���ɤ߹���/�񤭹���
-��ǽ���֤ˤʤäƤ��餳�Υ᥽�åɤ�⤦���ٸƤ֤�
-�ϥ�ɥ���������Ƴ����ޤ���
+IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を
+発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み
+可能状態になってからこのメソッドをもう一度呼ぶと
+ハンドシェイクを再開します。
 
-@raise OpenSSL::SSL::SSLError �ϥ�ɥ��������˼��Ԥ���(VERIFY_PEER ��
-       ������θ��ڤ˼��Ԥ������䡢�ץ��ȥ����դ˼��Ԥ����ʤ�)
-       ����ȯ�����ޤ�
-       (�ºݤ� [[m:OpenSSL::SSL::SSLError]] �򤳤Υ⥸�塼��� extend ����
-       �㳰���֥������Ȥ���������ޤ�)
-@raise OpenSSL::SSL::SSLError �����åȤ��ɤ߹���/�񤭹��߲�ǽ���֤ˤʤ�Τ�
-       �Ԥ�ɬ�פ��������ȯ�����ޤ���
-       �ɤ߹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitReadable]] ��
-       �񤭹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitWritable]] ��
-       ���줾�� extend �����㳰���֥������Ȥ���������ޤ���
+@raise OpenSSL::SSL::SSLError ハンドシェイクに失敗した(VERIFY_PEER で
+       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+       場合に発生します
+       (実際は [[m:OpenSSL::SSL::SSLError]] をこのモジュールで extend した
+       例外オブジェクトが生成されます)
+@raise OpenSSL::SSL::SSLError ソケットが読み込み/書き込み可能状態になるのを
+       待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [[c:IO::WaitReadable]] を、
+       書き込み可能状態を待つ必要がある場合には [[c:IO::WaitWritable]] を、
+       それぞれ extend した例外オブジェクトが生成されます。
 @see [[m:OpenSSL::SSL::SSLSocket#connect_nonblock]],
      [[m:OpenSSL::SSL::SSLSocket#accept]]
 
 
 --- connect_nonblock -> self
-�Υ�֥��å���������
-TLS/SSL �̿��򥯥饤����ȥ⡼�ɤȤ��Ƴ��Ϥ���
-�����ФȤΥϥ�ɥ���������¹Ԥ��ޤ���
+ノンブロッキング方式で
+TLS/SSL 通信をクライアントモードとして開始し、
+サーバとのハンドシェイクを実行します。
 
-IO ���ɤ߹����Ԥ����⤷���Ͻ񤭹����Ԥ��ˤʤä������㳰��
-ȯ���������ϥ�ɥ������������Ǥ��ޤ���IO ���ɤ߹���/�񤭹���
-��ǽ���֤ˤʤäƤ��餳�Υ᥽�åɤ�⤦���ٸƤ֤�
-�ϥ�ɥ���������Ƴ����ޤ���
+IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を
+発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み
+可能状態になってからこのメソッドをもう一度呼ぶと
+ハンドシェイクを再開します。
 
-@raise OpenSSL::SSL::SSLError �ϥ�ɥ��������˼��Ԥ���(VERIFY_PEER ��
-       ������θ��ڤ˼��Ԥ������䡢�ץ��ȥ����դ˼��Ԥ����ʤ�)
-       ����ȯ�����ޤ�
-@raise OpenSSL::SSL::SSLError �����åȤ��ɤ߹���/�񤭹��߲�ǽ���֤ˤʤ�Τ�
-       �Ԥ�ɬ�פ��������ȯ�����ޤ���
-       �ɤ߹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitReadable]] ��
-       �񤭹��߲�ǽ���֤��Ԥ�ɬ�פ�������ˤ� [[c:IO::WaitWritable]] ��
-       ���줾�� extend �����㳰���֥������Ȥ���������ޤ���
+@raise OpenSSL::SSL::SSLError ハンドシェイクに失敗した(VERIFY_PEER で
+       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+       場合に発生します
+@raise OpenSSL::SSL::SSLError ソケットが読み込み/書き込み可能状態になるのを
+       待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [[c:IO::WaitReadable]] を、
+       書き込み可能状態を待つ必要がある場合には [[c:IO::WaitWritable]] を、
+       それぞれ extend した例外オブジェクトが生成されます。
 @see [[m:OpenSSL::SSL::SSLSocket#accept_nonblock]],
      [[m:OpenSSL::SSL::SSLSocket#connect]]
 
 --- hostname -> String | nil
-TLS �� Server Name Indication ��ĥ�����Ѥ��륵���ФΥۥ���̾���֤��ޤ���
+TLS の Server Name Indication 拡張で利用するサーバのホスト名を返します。
 
-[[m:OpenSSL::SSL::SSLSocket#hostname=]] �����ꤷ���ͤ����Τޤ��֤���ޤ���
+[[m:OpenSSL::SSL::SSLSocket#hostname=]] で設定した値がそのまま返されます。
 
-���ꤷ�Ƥ��ʤ����� nil ���֤��ޤ���
+設定していない場合は nil を返します。
 
 @see [[m:OpenSSL::SSL::SSLSocket#hostname=]]
 --- hostname=(hostname)
-TLS �� Server Name Indication(SNI) ��ĥ�����Ѥ��륵���ФΥۥ���̾�����ꤷ�ޤ���
+TLS の Server Name Indication(SNI) 拡張で利用するサーバのホスト名を設定します。
 
-Server Name Indication �ˤĤ��Ƥ� [[RFC:3546]] �򻲾Ȥ��Ƥ���������
+Server Name Indication については [[RFC:3546]] を参照してください。
 
-���Υ᥽�åɤϥϥ�ɥ����������˥��饤�����¦��������¦��
-�����ФΥۥ���̾�������뤿����Ѥ��ޤ������Τ��ᡢ
-���饤�����¦�� [[m:OpenSSL::SSL::SSLSocket#connect]] ��Ƥ�����
-���Υ᥽�åɤǥۥ���̾����ꤹ��ɬ�פ�����ޤ���
+このメソッドはハンドシェイク時にクライアント側がサーバ側に
+サーバのホスト名を伝えるために用います。そのため、
+クライアント側が [[m:OpenSSL::SSL::SSLSocket#connect]] を呼ぶ前に
+このメソッドでホスト名を指定する必要があります。
 
-hostname �� nil ���Ϥ��� SNI ��ĥ�����Ѥ��ޤ���
+hostname に nil を渡すと SNI 拡張を利用しません。
 
-������¦�ˤĤ��Ƥ� [[m:OpenSSL::SSL::SSLContext#servername_cb=]] ��
-���Ȥ��Ƥ���������
+サーバ側については [[m:OpenSSL::SSL::SSLContext#servername_cb=]] を
+参照してください。
 
-@param hostname �ۥ���̾ʸ����
+@param hostname ホスト名文字列
 @see [[m:OpenSSL::SSL::SSLSocket#hostname]],
      [[m:OpenSSL::SSL::SSLContext#servername_cb]],
      [[m:OpenSSL::SSL::SSLContext#servername_cb=]],
 
 
 --- session -> OpenSSL::SSL::Session
-���Ѥ��Ƥ��� SSL ���å����� [[c:OpenSSL::SSL::Session]]
-���֥������Ȥ��֤��ޤ���
+利用している SSL セッションを [[c:OpenSSL::SSL::Session]]
+オブジェクトで返します。
 
 @see [[m:OpenSSL::SSL::SSLSocket#session=]],
      [[m:OpenSSL::SSL::SSLSocket#session_reused?]]
 
 --- session=(sess)
-�ϥ�ɥ��������Ǻ����Ѥ��� SSL ���å�����
-���ꤷ�ޤ���
+ハンドシェイクで再利用する SSL セッションを
+設定します。
 
-���Υ᥽�åɤϥ��饤�����¦�ǤΤ�ͭ�ѤǤ���
-���å���������Ѥ�����ϡ�
-[[m:OpenSSL::SSL::SSLSocket#connect]] ��Ƥ�����
-���Υ᥽�åɤǥ��å���󥪥֥�������
-([[c:OpenSSL::SSL::Session]] �Υ��󥹥���)
-�����ꤷ�ޤ���
+このメソッドはクライアント側でのみ有用です。
+セッションを再利用する場合は、
+[[m:OpenSSL::SSL::SSLSocket#connect]] を呼ぶ前に
+このメソッドでセッションオブジェクト
+([[c:OpenSSL::SSL::Session]] のインスタンス)
+を設定します。
 
-������¦�ξ�� [[c:OpenSSL::SSL::SSLContext]] ������å�����ݻ���
-������Ԥ��ޤ���
+サーバ側の場合 [[c:OpenSSL::SSL::SSLContext]] がキャッシュの保持と
+管理を行います。
 
-@param sess ���ꤹ�륻�å����
+@param sess 設定するセッション
 @see [[m:OpenSSL::SSL::SSLSocket#session]],
      [[m:OpenSSL::SSL::SSLSocket#session_reused?]]
 
 --- session_reused? -> bool
-���Ѥ��Ƥ��� SSL ���å���󤬺����Ѥ��줿��ΤǤ���
-���˿����֤��ޤ���
+利用している SSL セッションが再利用されたものである
+場合に真を返します。
 
 @see [[c:OpenSSL::SSL::Session]],
      [[m:OpenSSL::SSL::SSLSocket#session]],
      [[m:OpenSSL::SSL::SSLSocket#session=]]
 
 --- verify_result -> Integer
-���ڷ�̤Υ��顼�����ɤ������ͤ��֤��ޤ���
+検証結果のエラーコードを整数値で返します。
 
-���顼�����ɤ������ͤ� [[c:OpenSSL::X509]] ��������������Ƥ��ޤ���
-�ܤ����� [[ref:c:OpenSSL::X509#verify_error]] �򸫤Ƥ���������
-���ڤ������������� [[m:OpenSSL::X509::V_OK]] ���֤��ޤ���
+エラーコードの整数値は [[c:OpenSSL::X509]] に定数が定義されています。
+詳しくは [[ref:c:OpenSSL::X509#verify_error]] を見てください。
+検証に成功した場合は [[m:OpenSSL::X509::V_OK]] を返します。
 

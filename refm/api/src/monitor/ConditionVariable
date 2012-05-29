@@ -1,90 +1,90 @@
 = class MonitorMixin::ConditionVariable < Object
 
-[[c:MonitorMixin]] �� [[c:Monitor]] �Τ����
-����ѿ����饹�Ǥ���
-[[m:MonitorMixin#new_cond]] ���֤��ޤ����桼����
-MonitorMixin::ConditionVariable.new ��ľ�ܸƤ֤��ȤϤ���ޤ���
+[[c:MonitorMixin]] と [[c:Monitor]] のための
+条件変数クラスです。
+[[m:MonitorMixin#new_cond]] が返します。ユーザが
+MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 
 == Instance Methods
 
 --- broadcast -> ()
-���ξ���ѿ���
-�ԤäƤ������ƤΥ���åɤμ¹Ԥ�Ƴ����ޤ���
+その条件変数で
+待っている全てのスレッドの実行を再開します。
 
 @see [[m:MonitorMixin::ConditionVariable#signal]]
 
 #@until 1.9.2
 --- count_waiters -> Integer
 #@since 1.9.1
-����㳰 NotImplementedError ��ȯ�����ޤ���
+常に例外 NotImplementedError を発生します。
 #@else
-���ξ���ѿ����ԤäƤ��륹��åɤο����֤��ޤ���
+その条件変数で待っているスレッドの数を返します。
 #@end
 #@end
 
 --- signal -> ()
 
-���ξ���ѿ����ԤäƤ��륹��åɤ�����м¹Ԥ�Ƴ������ޤ���
+その条件変数で待っているスレッドがあれば実行を再開させます。
 
-ʣ���Υ���åɤ��ԤäƤ�����ˤ�1�ĤΥ���åɤΤ�
-�¹Ԥ�Ƴ����ޤ���
+複数のスレッドが待っている場合には1つのスレッドのみ
+実行を再開します。
 
 @see [[m:MonitorMixin::ConditionVariable#broadcast]]
 
 --- wait(timeout = nil) -> bool
 
-��˥��Υ��å������������ߤΥ���åɤ���ߤ��ޤ���
+モニタのロックを開放し、現在のスレッドを停止します。
 
-�����Ƥ֥���åɤϥ�˥��Υ��å����ݻ����Ƥ���ɬ�פ�����ޤ���
+これを呼ぶスレッドはモニタのロックを保持している必要があります。
 
-[[m:MonitorMixin::ConditionVariable#signal]] ��
+[[m:MonitorMixin::ConditionVariable#signal]] や
 [[m:MonitorMixin::ConditionVariable#broadcast]]
-�ǵ��������ޤǥ���åɤ���ߤ�³���ޤ���
+で起こされるまでスレッドは停止し続けます。
 
-timeout ��Ϳ�������Ϻ��� timeout �äޤ���ߤ�����˥���åɤ�
-�Ƴ����ޤ���
+timeout を与えた場合は最大 timeout 秒まで停止した後にスレッドを
+再開します。
 
-�¹Ԥ�Ƴ���������åɤϥ�˥��Υ��å����ݻ��������֤ˤʤ�ޤ���
-����ˤ�äƴ����ΰ�(critical section)���ư��Ƥ���
-����åɤϤ�����Ĥˤʤꡢ��¾��¸����ޤ���
+実行を再開したスレッドはモニタのロックを保持した状態になります。
+これによって危険領域(critical section)上で動作している
+スレッドはただ一つになり、排他を実現します。
 
-true ���֤��ޤ���timeout ��Ϳ�����Ƥ����Ԥ����֤� timeout ��
-�ۤ������� false ���֤��ޤ���
+true を返します。timeout が与えられていて待ち時間が timeout を
+越えた場合は false を返します。
 
-@param timeout �����ॢ���ȤޤǤ��ÿ������ꤷ�ʤ��ä����ϥ����ॢ���Ȥ��ޤ���
+@param timeout タイムアウトまでの秒数。指定しなかった場合はタイムアウトしません。
 
-@raise ThreadError ���å�����äƤ��ʤ�����åɤ����Υ᥽�åɤ�ƤӤ���������ȯ�����ޤ�
+@raise ThreadError ロックを持っていないスレッドがこのメソッドを呼びだした場合に発生します
 #@if (version == "1.9.1")
-@raise NotImplementedError �����ॢ���Ȥ� 1.9.1 �Ǥϼ�������Ƥ��ޤ���
+@raise NotImplementedError タイムアウトは 1.9.1 では実装されていません
 #@end
 
 @see [[m:MonitorMixin::ConditionVariable#wait_while]], [[m:MonitorMixin::ConditionVariable#wait_until]]
 
 --- wait_while { ... } -> ()
-��˥��Υ��å������������ߤΥ���åɤ�
-�֥��å��ǻ��ꤷ�������������Ƥ������ߤ��ޤ���
+モニタのロックを開放し、現在のスレッドを
+ブロックで指定した条件を満たしている間停止します。
 
-[[m:MonitorMixin::ConditionVariable#signal]] ��
-[[m:MonitorMixin::ConditionVariable#broadcast]] ��
-����åɤ����������ȡ����å�����������֥��å���ɾ����
-���η�̤ˤ�äƤ��Υ᥽�åɤ���ȴ���������³���뤫
-�Ƥӥ��å�����������åɤ���ߤ��뤫����ޤ���
+[[m:MonitorMixin::ConditionVariable#signal]] や
+[[m:MonitorMixin::ConditionVariable#broadcast]] で
+スレッドが起こされると、ロックを取得し、ブロックを評価し
+その結果によってこのメソッドから抜け処理を継続するか
+再びロックを開放しスレッドを停止するかを決めます。
 
-@raise ThreadError ���å�����äƤ��ʤ�����åɤ����Υ᥽�åɤ�ƤӤ���������ȯ�����ޤ�
+@raise ThreadError ロックを持っていないスレッドがこのメソッドを呼びだした場合に発生します
 @see [[m:MonitorMixin::ConditionVariable#wait]]
 
 --- wait_until { ... } -> ()
-��˥��Υ��å������������ߤΥ���åɤ�
-�֥��å��ǻ��ꤷ�������������ޤ���ߤ��ޤ���
+モニタのロックを開放し、現在のスレッドを
+ブロックで指定した条件を満たすまで停止します。
 
-[[m:MonitorMixin::ConditionVariable#signal]] ��
-[[m:MonitorMixin::ConditionVariable#broadcast]] ��
-����åɤ����������ȡ����å�����������֥��å���ɾ����
-���η�̤ˤ�äƤ��Υ᥽�åɤ���ȴ���������³���뤫
-�Ƥӥ��å�����������åɤ���ߤ��뤫����ޤ���
+[[m:MonitorMixin::ConditionVariable#signal]] や
+[[m:MonitorMixin::ConditionVariable#broadcast]] で
+スレッドが起こされると、ロックを取得し、ブロックを評価し
+その結果によってこのメソッドから抜け処理を継続するか
+再びロックを開放しスレッドを停止するかを決めます。
 
 @see [[m:MonitorMixin::ConditionVariable#wait]]
 
 #@# = class MonitorMixin::ConditionVariable::Timeout < Exception
-#@# ���Υ��饹�������ǥ����ॢ���Ȥ�������뤿��Υ��饹
-#@# �桼�������Ѥ��ƤϤʤ�ʤ�
+#@# このクラスは内部でタイムアウトを実装するためのクラス
+#@# ユーザは利用してはならない

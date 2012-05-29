@@ -1,54 +1,54 @@
-���߼¹���Υե졼�������갷������Υ��֥饤�֥��Ǥ���
+現在実行中のフレーム情報を取り扱うためのサブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
 #@# Author: Keiju ISHITSUKA
 
 = class IRB::Frame
 
-���߼¹���Υե졼�������갷������Υ��饹�Ǥ���
+現在実行中のフレーム情報を取り扱うためのクラスです。
 
-[��]
-set_trace_func ���Ѥ��� Ruby �μ¹Ԥ�ȥ졼�����Ƥ��ޤ���
-�ޥ������åɤˤ��б����Ƥ��ޤ���
+[注]
+set_trace_func を用いて Ruby の実行をトレースしています。
+マルチスレッドには対応していません。
 
 == Class Methods
 
 --- top(n = 0) -> Binding
 
-�夫�� n ���ܤΥ���ƥ����Ȥ���Ф��ޤ���
+上から n 番目のコンテキストを取り出します。
 
-@param n ���Ф�����ƥ����Ȥ� [[c:Integer]] �ǻ��ꤷ�ޤ���n �� 0 ����
-         ��̤ˤʤ�ޤ���
+@param n 取り出すコンテキストを [[c:Integer]] で指定します。n は 0 が最
+         上位になります。
 
 --- bottom(n = 0) -> Binding
 
-������ n ���ܤΥ���ƥ����Ȥ���Ф��ޤ���
+下から n 番目のコンテキストを取り出します。
 
-@param n ���Ф�����ƥ����Ȥ� [[c:Integer]] �ǻ��ꤷ�ޤ���n �� 0 ����
-         ���̤ˤʤ�ޤ���
+@param n 取り出すコンテキストを [[c:Integer]] で指定します。n は 0 が最
+         下位になります。
 
 --- sender -> object
 
-������ˤʤäƤ��륪�֥������Ȥ���Ф��ޤ���
-������Ȥϡ����Υ᥽�åɤ�ƤӽФ���¦�� self �Τ��ȤǤ���
+センダになっているオブジェクトを取り出します。
+センダとは、そのメソッドを呼び出した側の self のことです。
 
 == Instance Methods
 
 --- bottom(n = 0) -> Binding
 
-������ n ���ܤΥ���ƥ����Ȥ���Ф��ޤ���
+下から n 番目のコンテキストを取り出します。
 
-@param n ���Ф�����ƥ����Ȥ� [[c:Integer]] �ǻ��ꤷ�ޤ���n �� 0 ����
-         ���̤ˤʤ�ޤ���
+@param n 取り出すコンテキストを [[c:Integer]] で指定します。n は 0 が最
+         下位になります。
 
 --- top(n = 0) -> Binding
 
-�夫�� n ���ܤΥ���ƥ����Ȥ���Ф��ޤ���
+上から n 番目のコンテキストを取り出します。
 
-@param n ���Ф�����ƥ����Ȥ� [[c:Integer]] �ǻ��ꤷ�ޤ���n �� 0 ����
-         ��̤ˤʤ�ޤ���
+@param n 取り出すコンテキストを [[c:Integer]] で指定します。n は 0 が最
+         上位になります。
 
 --- trace_func(event, file, line, id, binding) -> Binding
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。

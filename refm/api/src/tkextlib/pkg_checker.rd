@@ -4,7 +4,7 @@ require tk
 
 Ruby/Tk extension library checker
 
-=== ¥³¥Þ¥ó¥É¥é¥¤¥ó¥ª¥×¥·¥ç¥ó
+=== ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 
   Usage: #{$0} [-l] [-v] [-h] [--] [dir]
     -l : Add dir to $LOAD_PATH

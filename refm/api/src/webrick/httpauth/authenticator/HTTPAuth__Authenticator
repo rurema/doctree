@@ -4,15 +4,15 @@
 
 --- logger -> object
 
-���������֥������Ȥ��֤��ޤ���
+ロガーオブジェクトを返します。
 
 --- realm -> String
 
-������֤��ޤ���
+レルムを返します。
 
 --- userdb -> WEBrick::HTTPAuth::Htpasswd | WEBrick::HTTPAuth::Htdigest
 
-ǧ�ڤΤ���Υ桼���ǡ����١������֤��ޤ���
+認証のためのユーザデータベースを返します。
 
 @see [[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::Htdigest]]
 
@@ -20,20 +20,20 @@
 
 --- RequestField -> String
 
-�ꥯ�����ȥե�����ɤΥ�����̾���Ǥ���
+リクエストフィールドのキーの名前です。
 
 --- ResponseField -> String
 
-�쥹�ݥ󥹥ե�����ɤΥ�����̾���Ǥ���
+レスポンスフィールドのキーの名前です。
 
 --- ResponseInfoField -> String
 
-�쥹�ݥ󥹥���ե��ե�����ɤΥ�����̾���Ǥ���
+レスポンスインフォフィールドのキーの名前です。
 
 --- AuthException -> Class
 
-ǧ�ڼ��Ի���ȯ�������㳰�Υ��饹�Ǥ���
+認証失敗時に発生する例外のクラスです。
 
 --- AuthScheme -> nil
 
-ǧ����ˡ��ɽ�路�ޤ����������饹�Ǿ�񤭤��ʤ���Фʤ�ޤ���
+認証方法を表わします。派生クラスで上書きしなければなりません。

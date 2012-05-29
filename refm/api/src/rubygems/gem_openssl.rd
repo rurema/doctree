@@ -1,6 +1,6 @@
 
-OpenSSL �����󥹥ȡ��뤵��Ƥ��ʤ������ƥब���뤫�⤷��ʤ��Τǡ�
-OpenSSL ���Ȥ��뤫�ɤ������ǧ���뤿��Υ饤�֥��Ǥ���
+OpenSSL がインストールされていないシステムがあるかもしれないので、
+OpenSSL が使えるかどうかを確認するためのライブラリです。
 
 = reopen Gem
 
@@ -8,14 +8,14 @@ OpenSSL ���Ȥ��뤫�ɤ������ǧ���뤿��Υ饤�֥��Ǥ���
 
 --- ssl_available? -> bool
 
-���߼¹���Υץ�åȥե������ OpenSSL ��ͭ���Ǥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+現在実行中のプラットフォームで OpenSSL が有効である場合は真を返します。
+そうでない場合は偽を返します。
 
 --- ensure_ssl_available
 
-OpenSSL �����Ѳ�ǽ�Ǥʤ������㳰��ȯ�������ޤ���
+OpenSSL が使用可能でない場合は例外を発生させます。
 
-@raise Gem::Exception OpenSSL ��ͭ���Ǥʤ�����ȯ�����ޤ���
+@raise Gem::Exception OpenSSL が有効でない場合に発生します。
 
 
 = module Gem::SSL

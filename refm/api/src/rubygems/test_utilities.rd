@@ -1,13 +1,13 @@
 require rubygems
 require rubygems/remote_fetcher
 
-�ƥ��Ȥǻ��Ѥ��륯�饹��᥽�åɤ�������Ƥ��ޤ���
+テストで使用するクラスやメソッドを定義しています。
 
 = class Gem::FakeFetcher
 
-[[c:Gem::RemoteFetcher]] ���֤�������ƥ����ѤΥ��饹�Ǥ���
+[[c:Gem::RemoteFetcher]] を置き換えるテスト用のクラスです。
 
-�����㤬���������ϥƥ��ȥ����ɤ򻲾Ȥ��Ƥ���������
+使用例が見たい場合はテストコードを参照してください。
 
 = reopen Gem::RemoteFetcher
 
@@ -15,11 +15,11 @@ require rubygems/remote_fetcher
 
 --- fetcher=(fetcher)
 
-�ƥ����ѤΥ᥽�åɤǤ���
+テスト用のメソッドです。
 
 = class TempIO
 
-�ƥ����Ѥ� [[c:Tempfile]] ���åפ��ޤ���
+テスト用に [[c:Tempfile]] をラップします。
 
-[[c:StringIO]] ��Ʊ�����󥿥ե���������äƤ��ޤ�����
-�ǡ�����񤭹������ [[c:Tempfile]] �ˤʤäƤ��ޤ���
+[[c:StringIO]] と同じインタフェイスを持っていますが、
+データを書き込む先は [[c:Tempfile]] になっています。

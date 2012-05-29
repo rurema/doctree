@@ -1,41 +1,41 @@
 = class WEBrick::HTTPServer::MountTable
 
-�����о�Υѥ��ȥ����֥�åȤ��б��ط���������뤿��Υ��饹�Ǥ���
+サーバ上のパスとサーブレットの対応関係を管理するためのクラスです。
 
 == Class Methods
 
 --- new -> WEBrick::HTTPServer::MountTable
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- [](dir) -> WEBrick::HTTPServlet::AbstractServlet
 
-Ϳ����줿�ǥ��쥯�ȥ���б����륵���֥�åȤ��֤��ޤ���
+与えられたディレクトリに対応するサーブレットを返します。
 
-@param dir �ǥ��쥯�ȥ����ꤷ�ޤ���
+@param dir ディレクトリを指定します。
 
-@return [[c:WEBrick::HTTPServlet::AbstractServlet]] �Υ��֥��饹�Υ��󥿥󥹤��֤��ޤ���
+@return [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインタンスを返します。
 
 --- []=(dir, val)
 
-Ϳ����줿�ǥ��쥯�ȥ���б����륵���֥�åȤ���Ͽ���ޤ���
+与えられたディレクトリに対応するサーブレットを登録します。
 
-@param dir �ǥ��쥯�ȥ����ꤷ�ޤ���
+@param dir ディレクトリを指定します。
 
-@param val �����֥�åȤ���ꤷ�ޤ���
+@param val サーブレットを指定します。
 
 --- delete(dir) -> WEBrick::HTTPServlet::AbstractServlet
 
-�ǥ��쥯�ȥ�ȥ����֥�åȤ��б��������ƥ����֥�åȤ��֤��ޤ���
+ディレクトリとサーブレットの対応を削除してサーブレットを返します。
 
-@param dir �ǥ��쥯�ȥ����ꤷ�ޤ���
+@param dir ディレクトリを指定します。
 
-@return [[c:WEBrick::HTTPServlet::AbstractServlet]] �Υ��֥��饹�Υ��󥿥󥹤��֤��ޤ���
+@return [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインタンスを返します。
 
 --- scan(path) -> Array
-#@# �����ʤ�
-Ϳ����줿�ѥ��򥹥���ץȤ�̾���� PATH_INFO ��ʬ�䤷�ޤ���
+#@# 自信ない
+与えられたパスをスクリプトの名前と PATH_INFO に分割します。
 
-@param path �ѥ�����ꤷ�ޤ���
+@param path パスを指定します。

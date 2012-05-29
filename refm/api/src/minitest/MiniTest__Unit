@@ -1,124 +1,124 @@
 = class MiniTest::Unit
 
-��˥åȥƥ��Ȥǻ��Ѥ����͡��ʥ᥽�åɤ�������Ƥ��륯�饹�Ǥ���
+ユニットテストで使用する様々なメソッドを定義しているクラスです。
 
 == Public Instance Methods
 
 --- assertion_count -> Fixnum
 
-���������������֤��ޤ���
+アサーション数を返します。
 
 --- assertion_count=(count)
 
-�������������򥻥åȤ��ޤ���
+アサーション数をセットします。
 
-@param count �������ꤷ�ޤ���
+@param count 件数を指定します。
 
 --- errors -> Fixnum
 
-���顼�����֤��ޤ���
+エラー数を返します。
 
 --- errors=(count)
 
-���顼���򥻥åȤ��ޤ���
+エラー数をセットします。
 
-@param count �������ꤷ�ޤ���
+@param count 件数を指定します。
 
 --- failures -> Fixnum
 
-���Ԥ������������������֤��ޤ���
+失敗したアサーション数を返します。
 
 --- failures=(count)
 
-���Ԥ����������������򥻥åȤ��ޤ���
+失敗したアサーション数をセットします。
 
-@param count �������ꤷ�ޤ���
+@param count 件数を指定します。
 
 --- location(exception) -> String
 
-Ϳ����줿�㳰��ȯ�����������֤��ޤ���
+与えられた例外の発生した場所を返します。
 
 --- puke(klass, method_name, exception) -> String
 
-�ƥ��ȥ᥽�åɤμ¹Է�̤������ʳ��ξ��ˡ����μ������ͳ��Ͽ���ޤ���
+テストメソッドの実行結果が成功以外の場合に、その種類と理由を記録します。
 
-@param klass �ƥ��ȥ��饹����ꤷ�ޤ���
+@param klass テストクラスを指定します。
 
-@param method_name �ƥ��ȥ᥽�åɤ�̾������ꤷ�ޤ���
+@param method_name テストメソッドの名前を指定します。
 
-@param exception �㳰���饹����ꤷ�ޤ���
+@param exception 例外クラスを指定します。
 
-@return Ϳ����줿�㳰���饹�ˤ�ä� "Skip", "Failure", "Error" ��
-        �����줫��Ƭʸ�����֤��ޤ���
+@return 与えられた例外クラスによって "Skip", "Failure", "Error" の
+        いずれかの頭文字を返します。
 
 --- report -> Array
 
-�ƥ��ȥ᥽�åɤμ¹Է�̤Υꥹ�Ȥ��֤��ޤ���
+テストメソッドの実行結果のリストを返します。
 
 --- report=(list)
 
-�ƥ��ȥ᥽�åɤμ¹Է�̤Υꥹ�Ȥ򥻥åȤ��ޤ���
+テストメソッドの実行結果のリストをセットします。
 
-@param list �ƥ��ȥ᥽�åɤμ¹Է�̤Υꥹ�Ȥ���ꤷ�ޤ���
+@param list テストメソッドの実行結果のリストを指定します。
 
 --- run(args = []) -> Fixnum | nil
 
-���ƤΥƥ��Ȥ�¹Ԥ��뤿��Υ᥽�åɤǤ���
+全てのテストを実行するためのメソッドです。
 
-@param args ���ޥ�ɥ饤���������ꤷ�ޤ���
+@param args コマンドライン引数を指定します。
 
 --- run_test_suites(filter = /./) -> Array
 
-���ƤΥƥ��Ȥ�¹Ԥ��ޤ���
+全てのテストを実行します。
 
-@param filter �¹Ԥ���ƥ��ȥ᥽�å�̾������ɽ���ǻ��ꤷ�ޤ���
+@param filter 実行するテストメソッド名を正規表現で指定します。
 
-@return �ƥ��ȥ��������ȥ��������������֤��ޤ���
+@return テストケース数とアサーション数を返します。
 
 --- skips -> Fixnum
 
-�¹Ԥ��ʤ��ä��ƥ��ȥ����������֤��ޤ���
+実行しなかったテストケース数を返します。
 
 --- skips=(count)
 
-�¹Ԥ��ʤ��ä��ƥ��ȥ��������򥻥åȤ��ޤ���
+実行しなかったテストケース数をセットします。
 
-@param count �������ꤷ�ޤ���
+@param count 件数を指定します。
 
 --- test_count -> Fixnum
 
-�ƥ��ȥ����������֤��ޤ���
+テストケース数を返します。
 
 --- test_count=(count)
 
-�ƥ��ȥ��������򥻥åȤ��ޤ���
+テストケース数をセットします。
 
-@param count �������ꤷ�ޤ���
+@param count 件数を指定します。
 
 #@since 1.9.2
 --- process_args(args = []) -> Hash
 
-[[lib:optparse]] ��Ȥäƥ��ޥ�ɥ饤���������Ϥ�����̤��֤��ޤ���
+[[lib:optparse]] を使ってコマンドライン引数を解析した結果を返します。
 
-@param args ���ޥ�ɥ饤���������ꤷ�ޤ���
+@param args コマンドライン引数を指定します。
 
 @see [[lib:optparse]]
 
 --- start_time -> Time
 
-�ƥ��Ȥμ¹Գ��ϻ�����֤��ޤ���
+テストの実行開始時刻を返します。
 
 --- start_time=(time)
 
-�ƥ��Ȥμ¹Գ��ϻ���򥻥åȤ��ޤ���
+テストの実行開始時刻をセットします。
 
-@param time [[c:Time]] ���֥������Ȥ���ꤷ�ޤ���
+@param time [[c:Time]] オブジェクトを指定します。
 
 --- status(io = @@out) -> ()
 
-�ƥ��ȷ�̤�Ϳ����줿 IO �˽񤭹��ߤޤ���
+テスト結果を与えられた IO に書き込みます。
 
-@param io �ƥ��ȷ�̤ν��������ꤷ�ޤ���
+@param io テスト結果の出力先を指定します。
 
 
 #@end
@@ -127,19 +127,19 @@
 
 --- autorun -> true
 
-�ץ������ν�λ���˥ƥ��Ȥ�¹Ԥ���褦����Ͽ���ޤ���
+プロセスの終了時にテストを実行するように登録します。
 
 --- output=(stream)
 
-������򥻥åȤ��ޤ���
+出力先をセットします。
 
-@param stream [[c:IO]] ����ꤷ�ޤ���
+@param stream [[c:IO]] を指定します。
 
 == Constants
 
 --- VERSION -> String
 
-���Υ饤�֥��ΥС��������֤��ޤ���
+このライブラリのバージョンを返します。
 
 
 

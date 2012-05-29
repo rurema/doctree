@@ -3,11 +3,11 @@
 =begin
 = TkTextTagSel
 
-== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
+== ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹:
 
 ((<TkTextTag>))
 
-== ¥¯¥é¥¹¥á¥½¥Ã¥É:
+== ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkTextTagSel.new(parent, keys=nil)
 #@todo

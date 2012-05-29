@@ -1,39 +1,39 @@
 #@since 1.8.0
 = class CSV::IOReader < CSV::Reader
-CSV���ɤ߹��߽�����Ԥ����饹
+CSVの読み込み処理を行うクラス
 
 == Class Methods
 
 --- new(io, fs = ',', rs = nil) -> CSV::IOReader
-�����˽�����[[c:CSV::IOReader]]���饹�Υ��֥������Ȥ��������ޤ���
+引数に従い、[[c:CSV::IOReader]]クラスのオブジェクトを生成します。
 
-@param io �ɤ߹�����λ��ꡣ
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param io 読み込み先の指定。
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 == Instance Methods
 
 --- close_on_terminate -> true
 
-�ܥ᥽�åɤ�ƤӽФ����Ȥǽ�λ([[m:CSV::IOReader#terminate]] �᥽�åɼ�
-��)���� [[c:CSV::IOReader]] ���֥������Ȥ� new �᥽�åɤǻ��ꤷ���ɤ߹�
-�����IO��������������Ԥ��ޤ���
+本メソッドを呼び出すことで終了([[m:CSV::IOReader#terminate]] メソッド実
+行)時に [[c:CSV::IOReader]] オブジェクトが new メソッドで指定した読み込
+み先のIOクローズ処理を行います。
 
 == Private Instance Methods
 
 --- get_row(row) -> Fixnum
-CSV�ǡ�����1��ʬ�Υǡ�����������ޤ���
+CSVデータの1行分のデータを取得します。
 
-1��ʬ�Υǡ�������������ѥ�᡼��row������Ȥ��ƽ��Ϥ��ޤ���
-�֤��ͤȤ��ơ�����ο�(����Υ�����)���֤��ޤ���
+1行分のデータを取得し、パラメータrowに配列として出力します。
+返り値として、セルの数(配列のサイズ)を返します。
 
-@param row 1��ʬ�Υǡ������Ǽ��������
+@param row 1行分のデータを格納する配列
 
 --- terminate -> nil
-���֥��������˴���Ԥ��ޤ���
-close_on_terminate�᥽�åɤ����˸ƤӽФ���Ƥ���С�IO(new�᥽�åɤǥѥ�᥿�Ȥ����Ϥ������֥�������)�ν�λ������Ԥ��ޤ���
+オブジェクト破棄を行います。
+close_on_terminateメソッドが既に呼び出されていれば、IO(newメソッドでパラメタとして渡したオブジェクト)の終了処理を行います。
 
 #@end
 

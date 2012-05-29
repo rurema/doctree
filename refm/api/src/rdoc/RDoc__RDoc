@@ -1,39 +1,39 @@
 = class RDoc::RDoc
 
-rdoc �ɥ�����Ȥκ�����Ԥ����饹�Ǥ���
+rdoc ドキュメントの作成を行うクラスです。
 
-�ʲ��Τ褦�ˤ��ơ�rdoc ���ޥ�ɤ�¹Ԥ���Τ�Ʊ�ͤ˼¹Ԥ��ޤ���
+以下のようにして、rdoc コマンドを実行するのと同様に実行します。
 
    require 'rdoc/rdoc'
    rdoc = RDoc::RDoc.new
    rdoc.document(args)
 
-args �ˤ� rdoc ���ޥ�ɤ��Ϥ��Τ�Ʊ�ͤΰ�����ʸ���������ǻ��ꤷ�ޤ���
+args には rdoc コマンドに渡すのと同様の引数を文字列の配列で指定します。
 
-rdoc ���ޥ�ɤ�Ʊ�ͤ��Ѵ���̤ϥե�����˽��Ϥ���뤿�ᡢ�ƥ����Ȥ�
-HTML ���Ѵ�������ʬ��饤�֥��Ȥ��ƻ��Ѥ�������硢
+rdoc コマンドと同様に変換結果はファイルに出力されるため、テキストを
+HTML に変換する部分をライブラリとして使用したい場合、
 #@since 1.9.1
-[[lib:rdoc/markup]] �򻲾Ȥ��Ƥ���������
+[[lib:rdoc/markup]] を参照してください。
 #@else
-[[lib:rdoc/markup/simple_markup]] �򻲾Ȥ��Ƥ���������
+[[lib:rdoc/markup/simple_markup]] を参照してください。
 #@end
 
 == Instance Methods
 
 --- document(argv) -> nil
 
-argv ��Ϳ����줿�����򸵤˥ɥ�����Ȥ�ե����ޥåȤ��ƻ��ꤵ�줿�ǥ�
-�쥯�ȥ�˽��Ϥ��ޤ���
+argv で与えられた引数を元にドキュメントをフォーマットして指定されたディ
+レクトリに出力します。
 
-@param argv ���ޥ�ɥ饤��� rdoc ���ޥ�ɤ˻��ꤹ��Τ�Ʊ��������ʸ��
-            �������ǻ��ꤷ�ޤ���
+@param argv コマンドラインで rdoc コマンドに指定するのと同じ引数を文字
+            列の配列で指定します。
 
 #@since 1.9.1
-@raise RDoc::Error �ɥ�����Ȥν�����˥��顼�����ä�����ȯ�����ޤ���
+@raise RDoc::Error ドキュメントの処理中にエラーがあった場合に発生します。
 #@else
-@raise RDoc::RDocError �ɥ�����Ȥν�����˥��顼�����ä�����ȯ�����ޤ���
+@raise RDoc::RDocError ドキュメントの処理中にエラーがあった場合に発生します。
 #@end
 
-����Ǥ��륪�ץ����ˤĤ��Ƥϡ�[[ref:lib:rdoc#usage]] �򻲾Ȥ��Ƥ�����
-�������ϥǥ��쥯�ȥ꤬���ꤵ��ʤ��ä����ϥ����ȥǥ��쥯�ȥ� ��
-doc �ʲ��˽��Ϥ��ޤ���
+指定できるオプションについては、[[ref:lib:rdoc#usage]] を参照してくださ
+い。出力ディレクトリが指定されなかった場合はカレントディレクトリ の
+doc 以下に出力します。

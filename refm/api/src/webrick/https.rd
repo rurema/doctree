@@ -1,8 +1,8 @@
 #@since 1.8.1
 require webrick/ssl
 
-[[c:WEBrick::HTTPServer]] дЄ SSL/TLS д╦┬╨▒■д╡д╗дыд┐дсд╬╝┬┴їбг
-д│д╬е╒ебедеыдЄ [[m:Kernel.#require]] д╣дыд╚ [[c:WEBrick::HTTPServer]] дм SSL/TLS ┬╨▒■д╦д╩дъд▐д╣бг
+[[c:WEBrick::HTTPServer]] уВТ SSL/TLS уБлхп╛х┐ЬуБХуБЫуВЛуБЯуВБуБохоЯшгЕуАВ
+уБУуБоуГХуВбуВдуГлуВТ [[m:Kernel.#require]] уБЩуВЛуБи [[c:WEBrick::HTTPServer]] уБМ SSL/TLS хп╛х┐ЬуБлуБкуВКуБ╛уБЩуАВ
 
 = redefine WEBrick::Config
 
@@ -10,7 +10,7 @@ require webrick/ssl
 
 --- HTTP -> Hash
 
-[[m:WEBrick::Config::SSL]] д╬╞т═╞дме▐б╝е╕д╡дьд╞ддд▐д╣бг
+[[m:WEBrick::Config::SSL]] уБохЖЕхо╣уБМуГЮуГ╝уВ╕уБХуВМуБжуБДуБ╛уБЩуАВ
 
 = reopen WEBrick::HTTPRequest
 
@@ -18,19 +18,19 @@ require webrick/ssl
 
 --- cipher -> Array
 
-╕╜║▀╝┬║▌д╦╗╚дядьд╞ддды░┼╣цд╬╛Ё╩єдЄ╟█╬єд╟╩╓д╖д▐д╣бг 
+чП╛хЬихоЯщЪЫуБлф╜┐уВПуВМуБжуБДуВЛцЪЧхП╖уБоцГЕха▒уВТщЕНхИЧуБзш┐ФуБЧуБ╛уБЩуАВ 
 
 @see [[m:OpenSSL::SSL::SSLSocket#cipher]]
 
 --- server_cert -> OpenSSL::X509::Certificate
 
-е╡б╝е╨╛┌╠└╜ёдЄ╔╜д╣еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+уВ╡уГ╝уГРши╝цШОцЫ╕уВТшбиуБЩуВкуГЦуВ╕уВзуВпуГИуВТш┐ФуБЧуБ╛уБЩуАВ
 
 @see [[c:OpenSSL::X509::Certificate]]
 
 --- client_cert -> OpenSSL::X509::Certificate
 
-епещедевеєе╚╛┌╠└╜ёдЄ╔╜д╣еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+уВпуГйуВдуВвуГ│уГИши╝цШОцЫ╕уВТшбиуБЩуВкуГЦуВ╕уВзуВпуГИуВТш┐ФуБЧуБ╛уБЩуАВ
 
 @see [[m:OpenSSL::X509::Certificate]]
 
@@ -40,16 +40,16 @@ require webrick/ssl
 
 --- parse(socket = nil) -> ()
 
-╗╪─ъд╡дьд┐ socket длдщепещедевеєе╚д╬еъепеие╣е╚дЄ╞╔д▀╣■д▀бв
-╝л┐╚д╬евепе╗е╡д╩д╔дЄ┼м└┌д╦└▀─ъд╖д▐д╣бг
+цМЗхоЪуБХуВМуБЯ socket уБЛуВЙуВпуГйуВдуВвуГ│уГИуБоуГкуВпуВиуВ╣уГИуВТшкнуБ┐ш╛╝уБ┐уАБ
+шЗкш║луБоуВвуВпуВ╗уВ╡уБкуБйуВТщБйхИЗуБлшинхоЪуБЧуБ╛уБЩуАВ
 
-@param socket епещедевеєе╚д╦└▄┬│д╡дьд┐ IO еке╓е╕езепе╚дЄ╗╪─ъд╖д▐д╣бг
+@param socket уВпуГйуВдуВвуГ│уГИуБлцОеч╢ЪуБХуВМуБЯ IO уВкуГЦуВ╕уВзуВпуГИуВТцМЗхоЪуБЧуБ╛уБЩуАВ
 
 #@#--- parse_uri(str, scheme = "https")
 #@#todo should be private
 
 --- meta_vars -> Hash
 
-есе┐╩╤┐ЇдЄ╩╓д╖д▐д╣бг
+уГбуВ┐хдЙцХ░уВТш┐ФуБЧуБ╛уБЩуАВ
 
 #@end

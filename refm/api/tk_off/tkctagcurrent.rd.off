@@ -3,11 +3,11 @@
 =begin
 = TkcTagCurrent
 
-== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
+== ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹:
 
 ((<TkcTag>))
 
-== ¥¯¥é¥¹¥á¥½¥Ã¥É:
+== ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkcTagCurrent.new(parent)
 #@todo
@@ -18,16 +18,16 @@
 =begin
 = TkcTagString
 
-== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
+== ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹:
 
 ((<TkcTag>))
 
-== ¥¯¥é¥¹¥á¥½¥Ã¥É:
+== ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- self.new(parent, name, *args)
 #@todo
 
-== private¥á¥½¥Ã¥É:
+== privateãƒ¡ã‚½ãƒƒãƒ‰:
 
 --- TkcTagString#initialize(parent, name, mode=nil, *args)
 #@todo

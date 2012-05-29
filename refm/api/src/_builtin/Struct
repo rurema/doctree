@@ -2,47 +2,47 @@
 
 include Enumerable
 
-��¤�Υ��饹��Struct.new �Ϥ��Υ��饹�Υ��֥��饹�򿷤����������ޤ���
+構造体クラス。Struct.new はこのクラスのサブクラスを新たに生成します。
 
-�ġ��ι�¤�Τϥ��֥��饹���� [[m:Struct.new]] ��Ȥä��������ޤ����ġ�
-�ι�¤�Υ��֥��饹�ǤϹ�¤�ΤΥ��Ф��Ф��륢�������᥽�åɤ��������
-�Ƥ��ޤ���
+個々の構造体はサブクラスから [[m:Struct.new]] を使って生成します。個々
+の構造体サブクラスでは構造体のメンバに対するアクセスメソッドが定義され
+ています。
 
 == Class Methods
 
 --- new(*args) -> Class
 
-[[c:Struct]] ���饹�˿��������֥��饹���äơ�������֤��ޤ���
+[[c:Struct]] クラスに新しいサブクラスを作って、それを返します。
 
-���֥��饹�ǤϹ�¤�ΤΥ��Ф��Ф��륢�������᥽�åɤ��������Ƥ��ޤ���
+サブクラスでは構造体のメンバに対するアクセスメソッドが定義されています。
 
   dog = Struct.new("Dog", :name, :age)
   fred = dog.new("fred", 5)
   fred.age = 6
   printf "name:%s age:%d", fred.name, fred.age
-  #=> "name:fred age:6" ����Ϥ��ޤ�
+  #=> "name:fred age:6" を出力します
 
-�������Թ�ˤ�ꡢ���饹̾�ξ�ά�ϸ�Ť��ε�ǽ�Ǥ�����
-����̾�� [[c:String]] �����Ǥ���Τϸ����ߴ����Τ�����ȹͤ��������ɤ��Ǥ��礦��
-�������äơ�����̾�� [[c:Symbol]] �ǻ��ꤹ��Τ�̵��Ǥ���
+実装の都合により、クラス名の省略は後づけの機能でした。
+メンバ名に [[c:String]] を指定できるのは後方互換性のためだと考えた方が良いでしょう。
+したがって、メンバ名は [[c:Symbol]] で指定するのが無難です。
 
-@param args ��¤�Τ�������뤿��β���Ĺ������[[c:String]] �ޤ��� [[c:Symbol]] ����ꤷ�ޤ���
+@param args 構造体を定義するための可変長引数。[[c:String]] または [[c:Symbol]] を指定します。
 
-==== �������� String �ξ��
-args[0] �� [[c:String]] �ξ�硢���饹̾�ˤʤ�Τǡ���ʸ���ǻϤޤ�ɬ��
-������ޤ����Ĥޤꡢ�ʲ��Τ褦�ʻ���ϥ��顼�ˤʤ�ޤ���
+==== 第一引数が String の場合
+args[0] が [[c:String]] の場合、クラス名になるので、大文字で始まる必要
+があります。つまり、以下のような指定はエラーになります。
 
     p Struct.new('foo', 'bar')
     # => -:1:in `new': identifier foo needs to be constant (NameError)
 
-�ޤ� args[1..-1] �ϡ�[[c:Symbol]] �� [[c:String]] �ǻ��ꤷ�ޤ���
+また args[1..-1] は、[[c:Symbol]] か [[c:String]] で指定します。
 
     p Struct.new("Foo", :foo, :bar)   # => Struct::Foo
 
-==== �������� Symbol �ξ��
-args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
-���饹�ˤʤ�ޤ���̾����̵�����饹�Ϻǽ��̾�������ݤ���������
-�Ƥ������̾�򸡺��������Ĥ��ä����̾�򥯥饹̾�Ȥ��ޤ���
+==== 第一引数が Symbol の場合
+args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
+クラスになります。名前の無いクラスは最初に名前を求める際に代入され
+ている定数名を検索し、見つかった定数名をクラス名とします。
 
     Foo = Struct.new(:foo, :bar)
     p Foo                             # => Foo
@@ -51,14 +51,14 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 
 --- new(*args) -> Struct
 --- [](*args) -> Struct
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�Υ��֥������Ȥ����������֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体オブジェクトを生成して返します。
 
-@param args ��¤�Τν���ͤ���ꤷ�ޤ������Фν���ͤϻ��ꤵ��ʤ���� nil �Ǥ���
+@param args 構造体の初期値を指定します。メンバの初期値は指定されなければ nil です。
 
-@return ��¤�Υ��饹�Υ��󥹥��󥹡�
+@return 構造体クラスのインスタンス。
 
-@raise ArgumentError ��¤�ΤΥ��Фο�����¿���ΰ�������ꤷ������ȯ�����ޤ���
+@raise ArgumentError 構造体のメンバの数よりも多くの引数を指定した場合に発生します。
 
     Foo = Struct.new(:foo, :bar)
     foo = Foo.new(1)
@@ -69,15 +69,15 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 #@else
 --- members -> [String]
 #@end
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
+(このメソッドは Struct の下位クラスにのみ定義されています)
 #@since 1.9.1
-��¤�ΤΥ��Ф�̾��([[c:Symbol]])��������֤��ޤ���
+構造体のメンバの名前([[c:Symbol]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.members      # => [:foo, :bar]
 
 #@else
-��¤�ΤΥ��Ф�̾��([[c:String]])��������֤��ޤ���
+構造体のメンバの名前([[c:String]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.members      # => ["foo", "bar"]
@@ -86,15 +86,15 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 == Instance Methods
 
 --- [](member) -> object
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�ΤΥ��Ф��ͤ��֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバの値を返します。
 
-@param member [[c:Fixnum]] �ǥ��ФΥ���ǥå�������ꤷ�ޤ���
-              [[c:Symbol]], [[c:String]] �ǥ��Ф�̾������ꤷ�ޤ���
+@param member [[c:Fixnum]] でメンバのインデックスを指定します。
+              [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
-@raise IndexError member ��������¸�ߤ��ʤ����Ф���ꤷ������ȯ�����ޤ���
+@raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
-@raise NameError member �� [[c:String]], [[c:Symbol]] ��¸�ߤ��ʤ����Ф���ꤷ������ȯ�����ޤ���
+@raise NameError member が [[c:String]], [[c:Symbol]] で存在しないメンバを指定した場合に発生します。
 
     Foo = Struct.new(:foo, :bar)
     obj = Foo.new('FOO', 'BAR')
@@ -103,21 +103,21 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
     # p obj[:baz]     # => in `[]': no member 'baz' in struct (NameError)
     p obj[0]        # => "FOO"
     p obj[1]        # => "BAR"
-    p obj[-1]       # => "BAR"    # Array �Τ褦����Υ���ǥå��������Ǥ��ޤ���
+    p obj[-1]       # => "BAR"    # Array のように負のインデックスも指定できます。
     p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
 
 --- []=(member, value)
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�Τ� member �ǻ��ꤵ�줿���Ф��ͤ� value �ˤ��� value ���֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体の member で指定されたメンバの値を value にして value を返します。
 
-@param member [[c:Fixnum]] �ǥ��ФΥ���ǥå�������ꤷ�ޤ���
-              [[c:Symbol]], [[c:String]] �ǥ��Ф�̾������ꤷ�ޤ���
+@param member [[c:Fixnum]] でメンバのインデックスを指定します。
+              [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
-@param value ���Ф����ꤹ���ͤ���ꤷ�ޤ���
+@param value メンバに設定する値を指定します。
 
-@raise IndexError member ��������¸�ߤ��ʤ����Ф���ꤷ������ȯ�����ޤ���
+@raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
-@raise NameError member �� [[c:String]], [[c:Symbol]] ��¸�ߤ��ʤ����Ф���ꤷ������ȯ�����ޤ���
+@raise NameError member が [[c:String]], [[c:Symbol]] で存在しないメンバを指定した場合に発生します。
 
 --- each {|value| ... } -> self
 #@since 1.8.7
@@ -127,8 +127,8 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 --- each -> Enumerable::Enumerator
 #@end
 #@end
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�Τγƥ��Ф��Ф��Ʒ����֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体の各メンバに対して繰り返します。
 
 #@since 1.8.0
 --- each_pair {|member, value| ... } -> self
@@ -139,8 +139,8 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 --- each_pair -> Enumerable::Enumerator
 #@end
 #@end
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�ΤΥ���̾([[c:Symbol]])���ͤ��Ȥ�����˥֥��å��򷫤��֤��¹Ԥ��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバ名([[c:Symbol]])と値の組を引数にブロックを繰り返し実行します。
 
     Foo = Struct.new(:foo, :bar)
     Foo.new('FOO', 'BAR').each_pair {|m, v| p [m,v]}
@@ -150,34 +150,34 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 
 --- length -> Fixnum
 --- size -> Fixnum
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�ΤΥ��Фο����֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバの数を返します。
 
 --- members -> [String]
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�ΤΥ��Ф�̾��(ʸ����)��������֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバの名前(文字列)の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.new.members  # => ["foo", "bar"]
 
 --- values -> [object]
 --- to_a -> [object]
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-��¤�ΤΥ��Ф��ͤ�����ˤ�����֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバの値を配列にいれて返します。
 
-�㤨�аʲ��Τ褦�ˤ��� passwd �Υ���ȥ����ϤǤ��ޤ���
+例えば以下のようにして passwd のエントリを出力できます。
 
   require 'etc'
   print Etc.getpwuid.values.join(":"), "\n"
 
 #@since 1.8.0
 --- values_at(*members) -> [object]
-(���Υ᥽�åɤ� Struct �β��̥��饹�ˤΤ��������Ƥ��ޤ�)
-�����ǻ��ꤵ�줿���Ф��ͤ�������֤��ޤ���
+(このメソッドは Struct の下位クラスにのみ定義されています)
+引数で指定されたメンバの値の配列を返します。
 
-@param members [[c:Fixnum]] �� [[c:Range]] �ǥ��ФΥ���ǥå�������ꤷ�ޤ���
+@param members [[c:Fixnum]] か [[c:Range]] でメンバのインデックスを指定します。
 
-@raise IndexError member ��������¸�ߤ��ʤ����Ф���ꤷ������ȯ�����ޤ���
+@raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
     Foo = Struct.new(:foo, :bar, :baz)
     obj = Foo.new('FOO', 'BAR', 'BAZ')
@@ -187,10 +187,10 @@ args[0] �� [[c:Symbol]] �ξ�硢����������¤�Υ��饹��̾����̵��
 
 --- ==(other)    -> bool
 
-���Ȥ� other �Υ��饹��Ʊ���Ǥ��ꡢ�ƥ��Ф� == �᥽�åɤ���Ӥ�������������
-true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身と other のクラスが同じであり、各メンバが == メソッドで比較して等しい場合に
+true を返します。そうでない場合に false を返します。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
   Dog = Struct.new(:name, :age)
   dog1 = Dog.new("fred", 5)
@@ -204,10 +204,10 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 
 --- eql?(other)    -> bool
 
-���Ȥ� other �Υ��饹��Ʊ���Ǥ��ꡢ�ƥ��Ф� eql? �᥽�åɤ���Ӥ�������������
-true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身と other のクラスが同じであり、各メンバが eql? メソッドで比較して等しい場合に
+true を返します。そうでない場合に false を返します。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
   Dog = Struct.new(:name, :age)
   dog1 = Dog.new("fred", 5)
@@ -221,16 +221,16 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 
 --- equal?(other)   -> bool
 
-���ꤵ�줿 other �� self ���ȤǤ�����Τ߿����֤��ޤ���
-����� [[c:Object]] ���饹��������줿�ǥե���Ȥ�ư���
-����
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
 
 @see [[m:Struct#eql?]], [[m:Struct#==]]
 
 --- hash    -> Integer
 
-���Ȥ��ݻ�������ФΥϥå����ͤ򸵤ˤ��ƻ��Ф����������֤��ޤ���
-���Ȥ��ݻ�������Ф��ͤ��Ѳ�����Ф��Υ᥽�åɤ��֤��ͤ��Ѳ����ޤ���
+自身が保持するメンバのハッシュ値を元にして算出した整数を返します。
+自身が保持するメンバの値が変化すればこのメソッドが返す値も変化します。
 
   Dog = Struct.new(:name, :age)
   dog = Dog.new("fred", 5)

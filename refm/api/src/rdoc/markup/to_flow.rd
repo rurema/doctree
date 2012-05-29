@@ -1,8 +1,8 @@
 require rdoc/markup/formatter
 require cgi
 
-RDoc �����Υɥ�����Ȥ�ɽ��������ʳ����ι�¤�����줿���֤ˤ��뤿���
-���֥饤�֥��Ǥ���
+RDoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
+サブライブラリです。
 
   require 'stringio'
   require 'rdoc/ri/formatter'
@@ -16,17 +16,17 @@ RDoc �����Υɥ�����Ȥ�ɽ��������ʳ����ι�¤�����줿���֤ˤ��뤿���
   formatter.display_flow(flow)
   puts output.string
 
-�Ѵ�������̤Ϲ�¤�Τ�����Ǽ����Ǥ��ޤ���[[c:RDoc::Markup::ToHtml]] ��
-�ɤȤϰۤʤ� convert �᥽�åɤ�ʸ������֤��ʤ����ᡢ�嵭�Τ褦�˥ե���
-�ޥå����Ѵ�������̤��Ϥ�ɬ�פ�����ޤ���
+変換した結果は構造体の配列で取得できます。[[c:RDoc::Markup::ToHtml]] な
+どとは異なり convert メソッドが文字列を返さないため、上記のようにフォー
+マッタに変換した結果を渡す必要があります。
 
 = class RDoc::Markup::ToFlow < RDoc::Markup::Formatter
 
-RDoc �����Υɥ�����Ȥ�ɽ��������ʳ����ι�¤�����줿���֤ˤ��뤿���
-���饹�Ǥ���
+RDoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
+クラスです。
 
 == Class Methods
 
 --- new -> RDoc::Markup::ToFlow
 
-���Ȥ��������ޤ���
+自身を初期化します。

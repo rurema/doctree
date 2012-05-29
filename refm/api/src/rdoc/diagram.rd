@@ -5,45 +5,45 @@ require rdoc/dot/dot
 require rdoc/options
 #@end
 
-�⥸�塼��䥯�饹�δط��������ޤ�������뤿��Υ��֥饤�֥��Ǥ���
+モジュールやクラスの関係を描く図を作成するためのサブライブラリです。
 
-�ܥ��֥饤�֥������Ѥ��뤿��ˤ� dot ���ޥ��
-([[url:http://www.research.att.com/sw/tools/graphviz/]] ����)�ΥС�����
-�� 1.8.6 �ʹߤ� PATH ���̤äƤ���ɬ�פ�����ޤ���
+本サブライブラリを利用するためには dot コマンド
+([[url:http://www.research.att.com/sw/tools/graphviz/]] 参照)のバージョ
+ン 1.8.6 以降に PATH が通っている必要があります。
 
-[����] rdoc/diagram �饤�֥��� 1.9.2 ���ѻߤ���ޤ�����
+[注意] rdoc/diagram ライブラリは 1.9.2 で廃止されました。
 
 = class RDoc::Diagram
 
-�⥸�塼��䥯�饹�δط��������ޤ�������뤿��Υ��饹�Ǥ���
+モジュールやクラスの関係を描く図を作成するためのクラスです。
 
 == Constants
 
 --- FONT -> "Arial"
 
-[[c:RDoc::Diagram]] �����Ѥ���ե����̾���֤��ޤ���
+[[c:RDoc::Diagram]] が使用するフォント名を返します。
 
 --- DOT_PATH -> "dot"
 
-������������륵�֥ǥ��쥯�ȥ�̾���֤��ޤ���
+画像を作成するサブディレクトリ名を返します。
 
 == Class Methods
 
 --- new(info, options) -> RDoc::Diagram
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param info [[c:RDoc::TopLevel]] ���֥������Ȥ��������ꤷ�ޤ���
+@param info [[c:RDoc::TopLevel]] オブジェクトの配列を指定します。
 
 #@since 1.9.1
-@param options [[c:RDoc::Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:RDoc::Options]] オブジェクトを指定します。
 #@else
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 #@end
 
 == Instance Methods
 
 --- draw -> ()
 
-���Ȥ��������Ƥ� [[c:RDoc::TopLevel]] ���֥������Ȥ���Ϥ��ƥ⥸�塼��
-�䥯�饹�δط��������ޤ�������ޤ���
+自身が持つ全ての [[c:RDoc::TopLevel]] オブジェクトを解析してモジュール
+やクラスの関係を描く図を作成します。

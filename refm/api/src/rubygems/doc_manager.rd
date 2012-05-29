@@ -1,90 +1,90 @@
 require rubygems
 
-Gem �ѥå������� RDoc, RI ���������뤿��Υ��饹�򰷤��饤�֥��Ǥ���
+Gem パッケージの RDoc, RI を生成するためのクラスを扱うライブラリです。
 
 = class Gem::DocManager
 include Gem::UserInteraction
 
-Gem �ѥå������� RDoc, RI ���������뤿��Υ��饹�Ǥ���
+Gem パッケージの RDoc, RI を生成するためのクラスです。
 
 == Public Instance Methods
 
 --- generate_rdoc
 #@# -> discard
 
-���Ȥ˥��åȤ���Ƥ��� [[c:Gem::Specification]] �ξ�����Ȥ� RDoc �Υɥ�����Ȥ��������ޤ���
+自身にセットされている [[c:Gem::Specification]] の情報をもとに RDoc のドキュメントを生成します。
 
 --- generate_ri
 #@# -> discard
 
-���Ȥ˥��åȤ���Ƥ��� [[c:Gem::Specification]] �ξ�����Ȥ� RI �ѤΥǡ������������ޤ���
+自身にセットされている [[c:Gem::Specification]] の情報をもとに RI 用のデータを生成します。
 
 --- install_rdoc
 #@# -> discard
 
-RDoc ���������ƥ��󥹥ȡ��뤷�ޤ���
+RDoc を生成してインストールします。
 
 --- install_ri
 #@# -> discard
 
-RI �Υǡ������������ƥ��󥹥ȡ��뤷�ޤ���
+RI のデータを生成してインストールします。
 
 --- rdoc_installed? -> bool
 
-RDoc �����󥹥ȡ���Ѥߤξ��ϡ������֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+RDoc がインストール済みの場合は、真を返します。
+そうでない場合は偽を返します。
 
 --- run_rdoc(*args)
 #@# -> discard
 
-Ϳ����줿��������Ѥ��� RDoc ��¹Ԥ��ޤ���
+与えられた引数を使用して RDoc を実行します。
 
-@param args RDoc ��Ϳ�����������ꤷ�ޤ���
+@param args RDoc に与える引数を指定します。
 
-@raise Gem::FilePermissionError RDoc �ǥɥ������������˥ե�����˥�����������ʤ��ä�����ȯ�����ޤ���
+@raise Gem::FilePermissionError RDoc でドキュメント生成中にファイルにアクセス出来なかった場合に発生します。
 
 --- setup_rdoc
 #@# -> discard
 
-RDoc ��¹Ԥ��뤿��ν�����Ԥ��ޤ���
+RDoc を実行するための準備を行います。
 
-@raise Gem::FilePermissionError RDoc ����¸����ǥ��쥯�ȥ�˥����������븢�¤��ʤ�����ȯ�����ޤ���
+@raise Gem::FilePermissionError RDoc を保存するディレクトリにアクセスする権限がない場合に発生します。
 
 --- uninstall_doc
 #@# -> discard
 
-RDoc �� RI �ѤΥǡ����������ޤ���
+RDoc と RI 用のデータを削除します。
 
 == Singleton Methods
 
 --- new(spec, rdoc_args = "") -> Gem::DocManager
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param spec �ɥ�����Ȥ����������оݤ� [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param spec ドキュメントを生成する対象の [[c:Gem::Specification]] のインスタンスを指定します。
 
-@param rdoc_args RDoc ���Ϥ����ץ�������ꤷ�ޤ���
+@param rdoc_args RDoc に渡すオプションを指定します。
 
 --- configured_args -> Array
 
-RDoc ���Ϥ��������֤��ޤ���
+RDoc に渡す引数を返します。
 
 --- configured_args=(args)
 
-RDoc ���Ϥ������򥻥åȤ��ޤ���
+RDoc に渡す引数をセットします。
 
-@param args ʸ��������󤫶�����ڤ��ʸ�������ꤷ�ޤ���
+@param args 文字列の配列か空白区切りの文字列を指定します。
 
 --- load_rdoc
 #@# -> discard
 
-Gem �� RDoc �����Ѳ�ǽ�ʾ��ϻ��Ѥ��ޤ���
-�����Ǥʤ����ϡ�ɸ��ź�դ� RDoc ����Ѥ��ޤ���
+Gem の RDoc が使用可能な場合は使用します。
+そうでない場合は、標準添付の RDoc を使用します。
 
-@raise Gem::DocumentError RDoc �����ѤǤ��ʤ�����ȯ�����ޤ���
+@raise Gem::DocumentError RDoc が使用できない場合に発生します。
 
 --- update_ri_cache
 #@# -> discard
 
-RDoc 2 �����󥹥ȡ��뤵��Ƥ������ RI �Υ���å���򹹿����ޤ���
-�����Ǥʤ����ϲ��⤷�ޤ���
+RDoc 2 がインストールされている場合は RI のキャッシュを更新します。
+そうでない場合は何もしません。

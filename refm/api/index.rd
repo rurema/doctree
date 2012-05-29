@@ -1,13 +1,13 @@
-= Ruby ɸ�� API ��ե���󥹥ޥ˥奢��
+= Ruby 標準 API リファレンスマニュアル
 
-== �Ȥ߹��ߥ��饹
+== 組み込みクラス
 
 * ((<Object>))
   * ((<Array>))
   * ((<Binding>))
   * ((<Continuation>))
   * ((<Data>))
-  * ((<Exception>)) (((<�Ȥ߹��ߥ��饹���⥸�塼�롿�㳰���饹/�㳰���饹>))����)
+  * ((<Exception>)) (((<組み込みクラス／モジュール／例外クラス/例外クラス>))参照)
   * ((<Dir>))
   * ((<File::Stat>))
   * ((<Hash>))
@@ -15,7 +15,7 @@
     * ((<File>))
   * ((<MatchData>))
   * ((<Method>))
-    * (((<UnboundMethod>)))  (((<ruby 1.7 feature>)) ((*version 1.6�����ΰ���*)))
+    * (((<UnboundMethod>)))  (((<ruby 1.7 feature>)) ((*version 1.6以前の位置*)))
   * ((<Module>))
     * ((<Class>))
   * ((<Numeric>))
@@ -38,7 +38,7 @@
   * ((<FalseClass>))
   * ((<NilClass>))
 
-== �Ȥ߹��ߥ⥸�塼��
+== 組み込みモジュール
 
 * ((<Comparable>))
 * ((<Enumerable>))
@@ -57,15 +57,15 @@
 * ((<Process::UID>))
 * ((<Signal>))
 
-== �㳰���饹
+== 例外クラス
 
 * ((<Object>))
   * ((<Exception>))
-    * (((<Interrupt>))) (((<ruby 1.7 feature>)) ((*version 1.6�����ΰ���*)))
+    * (((<Interrupt>))) (((<ruby 1.7 feature>)) ((*version 1.6以前の位置*)))
     * ((<NoMemoryError>))
     * ((<ScriptError>))
       * ((<LoadError>))
-      * (((<NameError>)))  (((<ruby 1.7 feature>)) ((*version 1.6�����ΰ���*)))
+      * (((<NameError>)))  (((<ruby 1.7 feature>)) ((*version 1.6以前の位置*)))
       * ((<NotImplementedError>))
       * ((<SyntaxError>))
     * ((<SignalException>))
@@ -93,38 +93,38 @@
     * ((<SystemExit>))
     * ((<fatal>))
 
-* ((<ź�ե饤�֥��>))
+* ((<添付ライブラリ>))
 
-== ñ��
+== 単品
 
-�Ĥ�����
+残したい
 
-  * ((<pack�ƥ�ץ졼��ʸ����>))
-  * ((<sprintf�ե����ޥå�>))
-  * ((<Marshal�ե����ޥå�>))
-  * ((<����BNF�ˤ��Ruby��ʸˡ>))
+  * ((<packテンプレート文字列>))
+  * ((<sprintfフォーマット>))
+  * ((<Marshalフォーマット>))
+  * ((<疑似BNFによるRubyの文法>))
 
-��̯
+微妙
 
-  * ((<����ʸ����������>))
-  * ((<Ruby�Ѹ콸>))
-  * ((<����|method>))
+  * ((<参考文献・サイト>))
+  * ((<Ruby用語集>))
+  * ((<索引|method>))
 
-== �ѹ�����
+== 変更履歴
 
-������ư���٤���
+これも移動すべきか
 
-* ((<Ruby�ѹ�����>))
+* ((<Ruby変更履歴>))
   * ((<ruby 1.8.5 feature>))
   * ((<ruby 1.9 feature>))
 
-== ��ư����
+== 移動する
 
-* ((<�ޥ˥奢������������>))         �� ��ե���󥹥ޥ˥奢������
-* ((<��ե���󥹥ޥ˥奢�븡���ġ��� ReFe|ReFe>)) �� ����������ɤζ᤯
-* ((<Ruby�˴ؤ������>))              �� www.ruby-lang.org
-* ((<Ruby ��ư���ץ�åȥե�����>)) �� www.ruby-lang.org
+* ((<マニュアルダウンロード>))         → リファレンスマニュアルよりも上
+* ((<リファレンスマニュアル検索ツール ReFe|ReFe>)) → ダウンロードの近く
+* ((<Rubyに関する書籍>))              → www.ruby-lang.org
+* ((<Ruby が動作するプラットフォーム>)) → www.ruby-lang.org
 
-== �Խ��Ը����ξ��� (���)
+== 編集者向けの情報 (削除)
 
-* ((<�ޥ˥奢�빹������ML����������|URL:http://www.atdot.net/mla/mandiff@ruby/>))
+* ((<マニュアル更新履歴MLアーカイブ|URL:http://www.atdot.net/mla/mandiff@ruby/>))

@@ -13,52 +13,52 @@ require rdoc/token_stream
 require rdoc/tokenstream
 #@end
 
-Ruby �Υ����������ɤ���Ϥ��뤿��Υ��֥饤�֥��Ǥ���
+Ruby のソースコードを解析するためのサブライブラリです。
 
-��ĥ�Ҥ� .rb��.rbw �Υե��������Ϥ�������Ǥ��ޤ���
+拡張子が .rb、.rbw のファイルを解析する事ができます。
 
 #@since 1.9.1
-=== �᥿�ץ�����ߥ󥰤��줿�᥽�å�
+=== メタプログラミングされたメソッド
 
-ưŪ��������줿�᥽�åɤ�ɥ�����Ȥ˴ޤ᤿����硢## �ǥ����Ȥ򳫻Ϥ��ޤ���
+動的に定義されたメソッドをドキュメントに含めたい場合、## でコメントを開始します。
 
   ##
   # This is a meta-programmed method!
 
   add_my_method :meta_method, :arg1, :arg2
 
-[[c:RDoc::Parser::Ruby]] �Ͼ嵭�� :meta_method �褦�˥᥽�åɤ�������
-���褦�ʼ��̻Ҥθ��³���ȡ������᥽�å�̾�Ȥ��Ʋ�ᤷ�ޤ����᥽�å�
-̾�����Ĥ���ʤ��ä���硢�ٹ�ɽ������ޤ����ޤ������ξ��ϥ᥽�å�
-̾�� 'unknown' �ˤʤ�ޤ���
+[[c:RDoc::Parser::Ruby]] は上記の :meta_method ようにメソッドの定義を行
+うような識別子の後に続くトークンをメソッド名として解釈します。メソッド
+名が見つからなかった場合、警告が表示されます。また、この場合はメソッド
+名は 'unknown' になります。
 
-:method: ̿���Ȥ����ǥ᥽�å�̾����ꤹ�����Ǥ��ޤ���
+:method: 命令を使う事でメソッド名を指定する事もできます。
 
   ##
   # :method: woo_hoo!
 
-�ǥե���ȤǤ�ưŪ��������줿�᥽�åɤϥ��󥹥��󥹥᥽�åɤȤ��Ʋ���
-����ޤ����ðۥ᥽�åɤȤ��������ϡ�:singleton-method: ̿�����ꤷ��
-����
+デフォルトでは動的に定義されたメソッドはインスタンスメソッドとして解析
+されます。特異メソッドとしたい場合は、:singleton-method: 命令を指定しま
+す。
 
   ##
   # :singleton-method:
 
-�ʲ��Τ褦�˥᥽�å�̾����ꤹ�����Ǥ��ޤ���
+以下のようにメソッド名を指定する事もできます。
 
   ##
   # :singleton-method: woo_hoo!
 
-�ޤ���°���ˤĤ��Ƥ�Ʊ�ͤ� :attr:�� :attr_reader:�� :attr_writer:��
-:attr_accessor: ����ꤹ������Ǥ��ޤ���°����̾���Ͼ�ά�Ǥ��ޤ���
+また、属性についても同様に :attr:、 :attr_reader:、 :attr_writer:、
+:attr_accessor: を指定する事ができます。属性の名前は省略できます。
 
   ##
   # :attr_reader: my_attr_name
 
-=== �����᥽�åɡ�°��
+=== 隠しメソッド、属性
 
-:method:�� :singleton-method: �� :attr: ̿���Ȥ����Ǽºݤˤ��������
-�Ƥ��ʤ��᥽�åɤ�ɥ�����Ȥ˴ޤ������Ǥ��ޤ���
+:method:、 :singleton-method: や :attr: 命令を使う事で実際には定義され
+ていないメソッドもドキュメントに含める事ができます。
 
   ##
   # :attr_writer: ghost_writer
@@ -80,7 +80,7 @@ Ruby �Υ����������ɤ���Ϥ��뤿��Υ��֥饤�֥��Ǥ���
 = module RubyToken
 #@end
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 #@since 1.9.1
 = class RDoc::RubyLex
@@ -88,7 +88,7 @@ Ruby �Υ����������ɤ���Ϥ��뤿��Υ��֥饤�֥��Ǥ���
 = class RubyLex
 #@end
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 #@until 1.9.1
 = reopen RDoc
@@ -115,7 +115,7 @@ include RubyToken
 include TokenStream
 #@end
 
-Ruby �Υ����������ɤ���Ϥ��뤿��Υ��饹�Ǥ���
+Ruby のソースコードを解析するためのクラスです。
 
 #@since 1.9.1
 == Constants
@@ -138,26 +138,26 @@ RDoc::SingleClass type
 --- new(top_level, file_name, body, options, stats) -> RDoc::RubyParser
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
-@param body �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param body ソースコードの内容を文字列で指定します。
 
 #@since 1.9.1
-@param options [[c:RDoc::Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:RDoc::Options]] オブジェクトを指定します。
 #@else
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 #@end
 
-@param stats [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 
 == Instance Methods
 
 --- scan -> RDoc::TopLevel
 
-Ruby �Υ����������ɤ��饯�饹/�⥸�塼��Υɥ�����Ȥ���Ϥ��ޤ���
+Ruby のソースコードからクラス/モジュールのドキュメントを解析します。
 
-@return [[c:RDoc::TopLevel]] ���֥������Ȥ��֤��ޤ���
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。

@@ -41,56 +41,56 @@
 --- AF_UNSPEC -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè°ì°ú¿ô domain ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸€å¼•æ•° domain ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- SOCK_DGRAM -> Integer
 
-[[m:Socket.open]] ¤ÎÂèÆó°ú¿ô type ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
-¾Ü¤·¤¯¤Ï [[man:socket(2)]] ¤ò¸«¤Æ¤¯¤À¤µ¤¤¡£
+[[m:Socket.open]] ã®ç¬¬äºŒå¼•æ•° type ã«ä½¿ç”¨ã—ã¾ã™ã€‚
+è©³ã—ãã¯ [[man:socket(2)]] ã‚’è¦‹ã¦ãã ã•ã„ã€‚
 
 @see [[m:Socket.open]]
 
 --- SOCK_PACKET -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂèÆó°ú¿ô type ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬äºŒå¼•æ•° type ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- SOCK_RAW -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂèÆó°ú¿ô type ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬äºŒå¼•æ•° type ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- SOCK_RDM -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂèÆó°ú¿ô type ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬äºŒå¼•æ•° type ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- SOCK_SEQPACKET -> Integer
 
-[[m:Socket.open]] ¤ÎÂèÆó°ú¿ô type ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
-¾Ü¤·¤¯¤Ï [[man:socket(2)]] ¤ò¸«¤Æ¤¯¤À¤µ¤¤¡£
+[[m:Socket.open]] ã®ç¬¬äºŒå¼•æ•° type ã«ä½¿ç”¨ã—ã¾ã™ã€‚
+è©³ã—ãã¯ [[man:socket(2)]] ã‚’è¦‹ã¦ãã ã•ã„ã€‚
 
 @see [[m:Socket.open]]
 
 --- SOCK_STREAM -> Integer
 
-[[m:Socket.open]] ¤ÎÂèÆó°ú¿ô type ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
-¾Ü¤·¤¯¤Ï [[man:socket(2)]] ¤ò¸«¤Æ¤¯¤À¤µ¤¤¡£
+[[m:Socket.open]] ã®ç¬¬äºŒå¼•æ•° type ã«ä½¿ç”¨ã—ã¾ã™ã€‚
+è©³ã—ãã¯ [[man:socket(2)]] ã‚’è¦‹ã¦ãã ã•ã„ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_APPLETALK -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -98,7 +98,7 @@
 --- PF_ATM -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -106,7 +106,7 @@
 --- PF_AX25 -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -114,63 +114,63 @@
 --- PF_CCITT -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_CHAOS -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_CNT -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_COIP -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_DATAKIT -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_DEC -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_DLI -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_ECMA -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_HYLINK -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -178,28 +178,28 @@
 --- PF_IMPLINK -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_INET -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_INET6 -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_IPX -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -207,91 +207,91 @@
 --- PF_ISDN -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_ISO -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_KEY -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_LAT -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_LINK -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_LOCAL -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_MAX -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_NATM -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_NDRV -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_NETBIOS -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_NETGRAPH -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_NS -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_OSI -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -303,56 +303,56 @@
 --- PF_PIP -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_PPP -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_PUP -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_ROUTE -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_RTIP -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_SIP -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_SNA -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_SYSTEM -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -360,14 +360,14 @@
 --- PF_UNIX -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
 --- PF_UNSPEC -> Integer
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -376,7 +376,7 @@
 #@end
 #@todo
 
-[[m:Socket.open]] ¤ÎÂè»°°ú¿ô protocol ¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:Socket.open]] ã®ç¬¬ä¸‰å¼•æ•° protocol ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 @see [[m:Socket.open]]
 
@@ -414,18 +414,18 @@
 --- IPPROTO_XTP -> Integer
 #@todo
 
-IP¥×¥í¥È¥³¥ë:
-[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] ¤Î level °ú¿ô¤Ë
-»ÈÍÑ¤·¤Ş¤¹¡£
+IPãƒ—ãƒ­ãƒˆã‚³ãƒ«:
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] ã® level å¼•æ•°ã«
+ä½¿ç”¨ã—ã¾ã™ã€‚
 
-¤Ş¤¿¡¢[[m:Socket.open]] ¤Î
-Âè°ì°ú¿ô domain ¤Ë AF_INET ¤â¤·¤¯¤Ï AF_INET6,
-ÂèÆó°ú¿ô type ¤Ë SOCK_RAW ¤ò»ØÄê¤·¤¿¾ì¹ç¤Î¡¢
-Âè»°°ú¿ô protocol ¤Ë¤â»ÈÍÑ¤·¤Ş¤¹¡£
+ã¾ãŸã€[[m:Socket.open]] ã®
+ç¬¬ä¸€å¼•æ•° domain ã« AF_INET ã‚‚ã—ãã¯ AF_INET6,
+ç¬¬äºŒå¼•æ•° type ã« SOCK_RAW ã‚’æŒ‡å®šã—ãŸå ´åˆã®ã€
+ç¬¬ä¸‰å¼•æ•° protocol ã«ã‚‚ä½¿ç”¨ã—ã¾ã™ã€‚
 
-¤Ê¤ª¡¢AF_INET ¤Ç SOCK_STREAM ¤Ê¾ì¹ç¤Ë¤Ï IPPROTO_TCP ¤ò»ÈÍÑ¤Ç¤­¤Ş¤¹¤¬¡¢
-¤½¤Î¾ì¹ç¤Ï 0 ¤ò»ØÄê¤·¤Æ¤âÆ±¤¸·ë²Ì¤òÆÀ¤é¤ì¤Ş¤¹¤Î¤ÇÄÌ¾ï¤Ï»ÈÍÑ¤µ¤ì¤Ş¤»¤ó¡£
-AF_INET ¤Ç SOCK_DGRAM ¤Î¾ì¹ç¤Î IPPROTO_UDP ¤âÆ±ÍÍ¤Ç¤¹¡£
+ãªãŠã€AF_INET ã§ SOCK_STREAM ãªå ´åˆã«ã¯ IPPROTO_TCP ã‚’ä½¿ç”¨ã§ãã¾ã™ãŒã€
+ãã®å ´åˆã¯ 0 ã‚’æŒ‡å®šã—ã¦ã‚‚åŒã˜çµæœã‚’å¾—ã‚‰ã‚Œã¾ã™ã®ã§é€šå¸¸ã¯ä½¿ç”¨ã•ã‚Œã¾ã›ã‚“ã€‚
+AF_INET ã§ SOCK_DGRAM ã®å ´åˆã® IPPROTO_UDP ã‚‚åŒæ§˜ã§ã™ã€‚
 
 --- AI_ADDRCONFIG -> Integer
 --- AI_ALL -> Integer
@@ -441,9 +441,9 @@ AF_INET ¤Ç SOCK_DGRAM ¤Î¾ì¹ç¤Î IPPROTO_UDP ¤âÆ±ÍÍ¤Ç¤¹¡£
 --- AI_V4MAPPED_CFG -> Integer
 #@todo
 
-¥Õ¥é¥°:
-[[m:Socket.getaddrinfo]] ¤Î flags °ú¿ô¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
-[[man:getaddrinfo(3)]]¤â»²¾È¤·¤Æ²¼¤µ¤¤¡£
+ãƒ•ãƒ©ã‚°:
+[[m:Socket.getaddrinfo]] ã® flags å¼•æ•°ã«ä½¿ç”¨ã—ã¾ã™ã€‚
+[[man:getaddrinfo(3)]]ã‚‚å‚ç…§ã—ã¦ä¸‹ã•ã„ã€‚
 
 --- EAI_ADDRFAMILY -> Integer
 --- EAI_AGAIN -> Integer
@@ -464,8 +464,8 @@ AF_INET ¤Ç SOCK_DGRAM ¤Î¾ì¹ç¤Î IPPROTO_UDP ¤âÆ±ÍÍ¤Ç¤¹¡£
 --- EAI_SYSTEM -> Integer
 #@todo
 
-[[m:Socket.getaddrinfo]]¤¬¼ºÇÔ¤·¤¿¤È¤­¤ËÊÖ¤¹¥¨¥é¡¼¥³¡¼¥É¤Ç¤¹¡£
-[[man:getaddrinfo(3)]]¤â»²¾È¤·¤Æ²¼¤µ¤¤¡£
+[[m:Socket.getaddrinfo]]ãŒå¤±æ•—ã—ãŸã¨ãã«è¿”ã™ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã§ã™ã€‚
+[[man:getaddrinfo(3)]]ã‚‚å‚ç…§ã—ã¦ä¸‹ã•ã„ã€‚
 
 --- INADDR_ALLHOSTS_GROUP -> Integer
 --- INADDR_ANY -> Integer
@@ -496,8 +496,8 @@ AF_INET ¤Ç SOCK_DGRAM ¤Î¾ì¹ç¤Î IPPROTO_UDP ¤âÆ±ÍÍ¤Ç¤¹¡£
 --- NI_NUMERICSERV -> Integer
 #@todo
 
-Socket.getnameinfo¤ÎÂè2°ú¿ô flags ¤ËÍ¿¤¨¤ëÄê¿ô¤Ç¤¹¡£
-[[man:getnameinfo(3)]]¤â»²¾È¤·¤Æ²¼¤µ¤¤¡£
+Socket.getnameinfoã®ç¬¬2å¼•æ•° flags ã«ä¸ãˆã‚‹å®šæ•°ã§ã™ã€‚
+[[man:getnameinfo(3)]]ã‚‚å‚ç…§ã—ã¦ä¸‹ã•ã„ã€‚
 
 --- IP_ADD_MEMBERSHIP -> Integer
 --- IP_DEFAULT_MULTICAST_LOOP -> Integer
@@ -648,13 +648,13 @@ Socket.getnameinfo¤ÎÂè2°ú¿ô flags ¤ËÍ¿¤¨¤ëÄê¿ô¤Ç¤¹¡£
 #@end
 
 --- SHUT_RD -> Integer
-[[m:BasicSocket#shutdown]] ¤Î how °ú¿ô¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:BasicSocket#shutdown]] ã® how å¼•æ•°ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 --- SHUT_RDWR -> Integer
-[[m:BasicSocket#shutdown]] ¤Î how °ú¿ô¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:BasicSocket#shutdown]] ã® how å¼•æ•°ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 --- SHUT_WR -> Integer
-[[m:BasicSocket#shutdown]] ¤Î how °ú¿ô¤Ë»ÈÍÑ¤·¤Ş¤¹¡£
+[[m:BasicSocket#shutdown]] ã® how å¼•æ•°ã«ä½¿ç”¨ã—ã¾ã™ã€‚
 
 #@since 1.8.3
 --- SO_ACCEPTCONN -> Integer

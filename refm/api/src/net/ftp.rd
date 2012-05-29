@@ -1,48 +1,48 @@
-FTP �ץ��ȥ���򰷤��饤�֥��Ǥ���
+FTP プロトコルを扱うライブラリです。
 
-����Ū�ˤ�  unix �� ftp ���ޥ�ɤΤ褦��
-command-line interface �� FTP ���饤����Ȥ�Ȥä����ȤΤ���
-�ͤˤȤäƤ狼��䤹�����󥿡��ե������ˤʤäƤ��ޤ���
-����Ruby Ū�פǤ��륤�󥿡��ե��������Ѱդ��Ƥ��ޤ���
+基本的には  unix の ftp コマンドのような
+command-line interface の FTP クライアントを使ったことのある
+人にとってわかりやすいインターフェースになっています。
+より「Ruby 的」であるインターフェースも用意しています。
 
-FTP �ˤĤ��Ƥ� [[RFC:959]]��[[RFC:3659]] �򻲹ͤˤ��Ƥ���������
+FTP については [[RFC:959]]、[[RFC:3659]] を参考にしてください。
 
-=== �Х��ʥ�⡼�ɤȥƥ����ȥ⡼��
-FTP �Υǡ���ž���ˤϥƥ����ȥ⡼�ɤȥХ��ʥ�⡼��
-������ޤ����ƥ����ȥ⡼�ɤ�ž��������ˤ�
-���Ԥ�Ŭ��CRLF���Ѵ����ޤ����Х��ʥ�⡼�ɤξ���
-���ڤ��Ѵ��򤷤ޤ���
+=== バイナリモードとテキストモード
+FTP のデータ転送にはテキストモードとバイナリモード
+があります。テキストモードで転送する場合には
+改行を適宜CRLFに変換します。バイナリモードの場合は
+一切の変換をしません。
 
-�̾�ϥХ��ʥ�⡼�ɰʳ���Ȥ�ɬ�פϤʤ��Ǥ��礦��
+通常はバイナリモード以外を使う必要はないでしょう。
 
-[[m:Net::FTP#get]]��[[m:Net::FTP#put]] ��
-[[m:Net::FTP#binary]] ���ͤ˽��äƥƥ����ȥ⡼�ɤ�
-�Х��ʥ�⡼�ɤΰ��������Ӥޤ����ޤ���
-[[m:Net::FTP#getbinaryfile]]��[[m:Net::FTP#putbinaryfile]]
-�� [[m:Net::FTP#binary]] ���ͤˤ�餺�Х��ʥ�⡼�ɤǡ�
-[[m:Net::FTP#gettextfile]]��[[m:Net::FTP#puttextfile]] ��
-[[m:Net::FTP#binary]] ���ͤˤ�餺�ƥ����ȥ⡼�ɤ�
-�ǡ���ž�����Ԥ��ޤ���
+[[m:Net::FTP#get]]、[[m:Net::FTP#put]] は
+[[m:Net::FTP#binary]] の値に従ってテキストモードと
+バイナリモードの一方を選びます。また、
+[[m:Net::FTP#getbinaryfile]]、[[m:Net::FTP#putbinaryfile]]
+は [[m:Net::FTP#binary]] の値によらずバイナリモードで、
+[[m:Net::FTP#gettextfile]]、[[m:Net::FTP#puttextfile]] は
+[[m:Net::FTP#binary]] の値によらずテキストモードで
+データ転送が行われます。
 
-=== �ѥå��֥⡼�ɤȥ����ƥ��֥⡼��
-FTP �ϥե�����ž����ǥ��쥯�ȥ��������Τ����
-�ǡ���ž���Ѥ� TCP ���ͥ�������
-�����ФȤ����楳�ޥ�ɤ���Ȥ�
-���뤿��Υ��ͥ������Ȥ��̤˺������ޤ���
+=== パッシブモードとアクティブモード
+FTP はファイル転送やディレクトリ情報取得のための
+データ転送用の TCP コネクションを、
+サーバとの制御コマンドをやりとり
+するためのコネクションとは別に作成します。
 
-���Υǡ���ž���ѥ��ͥ��������������ݤˡ�
-�����ƥ��֥⡼�ɤǤ�
-������¦���饯�饤�����¦�إ��ͥ��������ꡢ
-�ѥå��֥⡼�ɤǤ�
-���饤�����¦���饵����¦�إ��ͥ��������ޤ���
+このデータ転送用コネクションを作成する際に、
+アクティブモードでは
+サーバ側からクライアント側へコネクションを作り、
+パッシブモードでは
+クライアント側からサーバ側へコネクションを作ます。
 
-���Τ��ᡢ�����ƥ��֥⡼�ɤǤϥ�����-���饤����ȴ֤�
-�ե���������������� NAT ��������ˤϤ��ޤ���³�Ǥ��ʤ�
-��礬����ޤ������λ��ˤϥѥå��֥⡼�ɤ����Ѥ��Ƥ���������
+そのため、アクティブモードではサーバ-クライアント間に
+ファイアーウォールや NAT がある場合にはうまく接続できない
+場合があります。この時にはパッシブモードを利用してください。
 
-=== ��
+=== 例
 
-��1:
+例1:
   require 'net/ftp'
   ftp = Net::FTP.new('ftp.example.org')
   ftp.login
@@ -52,7 +52,7 @@ FTP �ϥե�����ž����ǥ��쥯�ȥ��������Τ����
   ftp.getbinaryfile('ruby-1.9.1-p243.tar.bz2', 'ruby.bz2', 1024)
   ftp.close
 
-��2:
+例2:
   require 'net/ftp'
   Net::FTP.open('ftp.example.org') do |ftp|
     ftp.login
@@ -63,319 +63,319 @@ FTP �ϥե�����ž����ǥ��쥯�ȥ��������Τ����
   end
 
 = class Net::FTP < Object
-FTP ������������饹�Ǥ���
+FTP を実装したクラスです。
 
 
 == Class Methods
 
 --- new(host = nil, user = nil, passwd = nil, acct = nil) -> Net::FTP
 
-������ Net::FTP �Υ��󥹥��󥹤��������ޤ���
+新しい Net::FTP のインスタンスを生成します。
 
-host �����ꤵ�줿��硢�������줿���󥹥��󥹤��Ф��� 
-[[m:Net::FTP#connect]] ��ƤӽФ���
-����� user �����ꤵ�줿���� [[m:Net::FTP#login]] 
-��ƤӽФ��ޤ���
+host が指定された場合、生成されたインスタンスに対して 
+[[m:Net::FTP#connect]] を呼び出し、
+さらに user が指定された場合は [[m:Net::FTP#login]] 
+を呼び出します。
 
-@param host ��³����ۥ��Ȥ���ꤷ�ޤ���
-@param user ��������˻Ȥ��桼��̾����ꤷ�ޤ���
-@param passwd ��������˻Ȥ��ѥ���ɤ���ꤷ�ޤ���
-@param acct �������������� ACCT ���ޥ�ɤΥѥ�᡼������ꤷ�ޤ���
+@param host 接続するホストを指定します。
+@param user ログインに使うユーザ名を指定します。
+@param passwd ログインに使うパスワードを指定します。
+@param acct ログイン後に送る ACCT コマンドのパラメータを指定します。
 
 @see [[m:Net::FTP.open]]
 
 --- open(host, user = nil, passwd = nil, acct = nil) -> Net::FTP
 --- open(host, user = nil, passwd = nil, acct = nil){|ftp| ... } -> object
 
-������ Net::FTP ���󥹥��󥹤��������ޤ���
+新しい Net::FTP インスタンスを生成します。
 
-[[m:Net::FTP.new]] �Ȱۤʤ� host ���ά�Ǥ��ޤ���
+[[m:Net::FTP.new]] と異なり host を省略できません。
 
-�֥��å���Ϳ�������ˤϡ������������󥹥��󥹤�
-�֥��å����Ϥ��ƸƤӤ����ޤ������ξ�硢�֥��å���λ����
-[[m:Net::FTP#close]] ��ƤӤ������֥��å����ͤ�
-�֤��ޤ���
+ブロックを与えた場合には、生成したインスタンスを
+ブロックに渡して呼びだします。この場合、ブロック終了時に
+[[m:Net::FTP#close]] を呼びだし、ブロックの値を
+返します。
 
-�֥��å���Ϳ���ʤ��ä����ˤ������������󥹥��󥹤��֤��ޤ���
+ブロックを与えなかった場合には生成したインスタンスを返します。
 
-user �����ꤵ�줿���� [[m:Net::FTP#login]] 
-��ƤӽФ��ޤ���
+user が指定された場合は [[m:Net::FTP#login]] 
+を呼び出します。
 
-@param host ��³����ۥ��Ȥ���ꤷ�ޤ���
-@param user ��������˻Ȥ��桼��̾����ꤷ�ޤ���
-@param passwd ��������˻Ȥ��ѥ���ɤ���ꤷ�ޤ���
-@param acct �������������� ACCT ���ޥ�ɤΥѥ�᡼������ꤷ�ޤ���
+@param host 接続するホストを指定します。
+@param user ログインに使うユーザ名を指定します。
+@param passwd ログインに使うパスワードを指定します。
+@param acct ログイン後に送る ACCT コマンドのパラメータを指定します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 == Instance Methods
 
 --- connect(host, port = FTP_PORT) -> ()
 
-host �ǻ��ꤵ�줿�ۥ��Ȥ���³���ޤ���
+host で指定されたホストに接続します。
 
-�Ķ��ѿ� SOCK_SERVER �����ꤵ��Ƥ����硢SOCKS �ץ�������
-��ͳ������³���ޤ���
+環境変数 SOCK_SERVER が指定されている場合、SOCKS プロクシを
+経由して接続します。
 
 #@since 1.9.2
-�����ƤӤ��������̿��򤷤褦�Ȥ���ȡ�
-[[c:Net::FTPConnectionError]] �㳰��ȯ�����ޤ���
+これを呼びだす前に通信をしようとすると、
+[[c:Net::FTPConnectionError]] 例外が発生します。
 #@end
 
-@param host ��³����ۥ���̾�Ǥ���
-@param port ��³����ݡ����ֹ�Ǥ���
+@param host 接続するホスト名です。
+@param port 接続するポート番号です。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- sendcmd(cmd) -> String
-cmd �ǻ��ꤵ�줿���ޥ�ɤ򥵡��С������ꡢ
-�����С�����α������֤��ޤ���
+cmd で指定されたコマンドをサーバーに送り、
+サーバーからの応答を返します。
 
-@param cmd ���ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param cmd コマンドを文字列で指定します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 
 --- voidcmd(cmd) -> nil
-cmd �ǻ��ꤵ�줿���ޥ�ɤ򥵡��С�������ޤ���
+cmd で指定されたコマンドをサーバーに送ります。
 
-@param cmd ���ޥ�ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param cmd コマンドを文字列で指定します。
 
-@raise Net::FTPReplyError ���������ɤ� 2yz �ʳ��ξ���ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが 2yz 以外の場合に発生します。
 
 --- login(user = "anonymous", passwd = nil, acct = nil) -> ()
-�ۥ��ȤؤΥ������������Ԥʤ��ޤ���
+ホストへのログイン処理を行ないます。
 
-���Υ᥽�åɤϥۥ��Ȥؤ���³��ˤ����Ȥ��ޤ���
+このメソッドはホストへの接続後にしか使えません。
 
-user, passwd ����ά���줿��硢�桼��̾
-"anonymous", �ѥ���� user@host �Ȥʤ�ޤ���
+user, passwd が省略された場合、ユーザ名
+"anonymous", パスワード user@host となります。
 
-acct ���ά���ʤ��ä����ˤϡ� ACCT ���ޥ�ɤ�
-acct �ǻ��ꤷ���ѥ�᡼��������ޤ���
+acct を省略しなかった場合には、 ACCT コマンドを
+acct で指定したパラメータで送ります。
 
-@param user ��������˻Ȥ��桼��̾����ꤷ�ޤ���
-@param passwd ��������˻Ȥ��ѥ���ɤ���ꤷ�ޤ���
-@param acct �������������� ACCT ���ޥ�ɤΥѥ�᡼������ꤷ�ޤ���
+@param user ログインに使うユーザ名を指定します。
+@param passwd ログインに使うパスワードを指定します。
+@param acct ログイン後に送る ACCT コマンドのパラメータを指定します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- retrbinary(cmd, blocksize, rest_offset = nil) -> nil
 --- retrbinary(cmd, blocksize, rest_offset = nil){|data| ...} -> nil
 
-�����С��� cmd �ǻ��ꤵ�줿���ޥ�ɤ����ꡢ�Х��ʥ�ǡ����� 
-���󤻤ޤ���
+サーバーに cmd で指定されたコマンドを送り、バイナリデータを 
+取り寄せます。
 
-blocksize �ǻ��ꤵ�줿�Х���ñ�̤ǥǡ�����
-�ɤ߹��ߡ��֥��å����Ϥ��ޤ���
+blocksize で指定されたバイト単位でデータを
+読み込み、ブロックに渡します。
 
-rest_offset ����ά����ʤ��ä����ϡ�cmd����������
-REST ���ޥ�ɤ����ꡢ���ꤷ���Х��ȿ��ΰ��֤���
-ž���򳫻Ϥ��ޤ���
+rest_offset が省略されなかった場合は、cmdを送る前に
+REST コマンドを送り、指定したバイト数の位置から
+転送を開始します。
 
-@param cmd ���ޥ�ɤ�ʸ�����Ϳ���ޤ���
-@param blocksize �ɤ߹���ñ�̤�Х���ñ�̤�Ϳ���ޤ���
-@param rest_offset REST ���ޥ�ɤ�Ϳ���륪�ե��åȤ�Ϳ���ޤ���
+@param cmd コマンドを文字列で与えます。
+@param blocksize 読み込み単位をバイト単位で与えます。
+@param rest_offset REST コマンドに与えるオフセットを与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#getbinaryfile]]
 
 --- retrlines(cmd){|line| ...} -> nil
-�����С��� cmd �ǻ��ꤵ�줿���ޥ�ɤ����ꡢ�ƥ����ȥǡ����� 
-���󤻤ޤ���
+サーバーに cmd で指定されたコマンドを送り、テキストデータを 
+取り寄せます。
 
-��Ԥ��ĥƥ����Ȥ��ɤ߹��ߡ��֥��å����Ϥ��ޤ���
+一行ずつテキストを読み込み、ブロックに渡します。
 
-@param cmd ���ޥ�ɤ�ʸ�����Ϳ���ޤ���
+@param cmd コマンドを文字列で与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#gettextfile]]
 
 --- storbinary(cmd, file, blocksize, rest_offset = nil) -> nil
 --- storbinary(cmd, file, blocksize, rest_offset = nil){|data| ...} -> nil
-�����С��� cmd �ǻ��ꤵ�줿���ޥ�ɤ����ꡢ�Х��ʥ�ǡ����� 
-����ޤ���
+サーバーに cmd で指定されたコマンドを送り、バイナリデータを 
+送ります。
 
-����ǡ����� [[c:IO]] �Υ��󥹥��󥹤�
-file �ǻ��ꤷ�ޤ���
-(�ºݤˤ� [[c:StringIO]] �Τ褦�� IO �ȥ᥽�åɥ�٥��
-�ߴ����륪�֥������ȤǤ���Фʤ�Ǥ⤫�ޤ��ޤ���)��
+送るデータは [[c:IO]] のインスタンスを
+file で指定します。
+(実際には [[c:StringIO]] のような IO とメソッドレベルで
+互換するオブジェクトであればなんでもかまいません)。
 
-blocksize �ǻ��ꤵ�줿�Х���ñ�̤� file ����ǡ������ɤߤ��ߡ�
-�����Ф�����ޤ���
+blocksize で指定されたバイト単位で file からデータを読みこみ、
+サーバに送ります。
 
-rest_offset ����ά����ʤ��ä����ϡ�cmd����������
-REST ���ޥ�ɤ����ꡢ���ꤷ���Х��ȿ��ΰ��֤���
-ž���򳫻Ϥ��ޤ���
+rest_offset が省略されなかった場合は、cmdを送る前に
+REST コマンドを送り、指定したバイト数の位置から
+転送を開始します。
 
-�֥��å������ꤵ�줿���ˤϡ�ž������ǡ����� blocksize ���Ȥ�
-�֥��å��ˤ��Ϥ��ޤ���
+ブロックが指定された場合には、転送するデータを blocksize ごとに
+ブロックにも渡します。
 
-@param cmd ���ޥ�ɤ�ʸ�����Ϳ���ޤ���
-@param file ����ǡ�����Ϳ���ޤ���
-@param blocksize �ɤ߹���ñ�̤�Х���ñ�̤�Ϳ���ޤ���
-@param rest_offset REST ���ޥ�ɤ�Ϳ���륪�ե��åȤ�Ϳ���ޤ���
+@param cmd コマンドを文字列で与えます。
+@param file 送るデータを与えます。
+@param blocksize 読み込み単位をバイト単位で与えます。
+@param rest_offset REST コマンドに与えるオフセットを与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#putbinaryfile]]
 
 --- storlines(cmd, file) -> nil
 --- storlines(cmd, file){|line| ...} -> nil
-�����С��� cmd �ǻ��ꤵ�줿���ޥ�ɤ����ꡢ�ƥ����ȥǡ�����
-����ޤ���
+サーバーに cmd で指定されたコマンドを送り、テキストデータを
+送ります。
 
-��Ԥ��Ĥ� file ����ƥ����Ȥ��ɤ߹��ߡ������С�������ޤ���
+一行ずつで file からテキストを読み込み、サーバーに送ります。
 
-����ǡ����� [[c:IO]] �Υ��󥹥��󥹤�
-file �ǻ��ꤷ�ޤ���
-(�ºݤˤ� [[c:StringIO]] �Τ褦�� IO �ȥ᥽�åɥ�٥��
-�ߴ����륪�֥������ȤǤ���Фʤ�Ǥ⤫�ޤ��ޤ���)��
+送るデータは [[c:IO]] のインスタンスを
+file で指定します。
+(実際には [[c:StringIO]] のような IO とメソッドレベルで
+互換するオブジェクトであればなんでもかまいません)。
 
-�֥��å���Ϳ����줿���ˤϳƹԤ򤽤Υ֥��å����Ϥ��ޤ���
+ブロックが与えられた場合には各行をそのブロックに渡します。
 
-@param cmd ���ޥ�ɤ�ʸ�����Ϳ���ޤ���
-@param file ����ǡ�����Ϳ���ޤ���
+@param cmd コマンドを文字列で与えます。
+@param file 送るデータを与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#puttextfile]]
 
 --- getbinaryfile(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE){|data| ...} -> nil
 --- getbinaryfile(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) -> nil
 
-�����о�Υե������Х��ʥ�⡼�ɤǼ������ޤ���
+サーバ上のファイルをバイナリモードで取得します。
 
-�����С���ˤ��� remotefile �Ȥ���̾���Υե�������������
-��������� localfile �Ȥ���̾���Υե��������¸���ޤ���
+サーバー上にある remotefile という名前のファイルを取得し、
+ローカルの localfile という名前のファイルに保存します。
 
-localfile �� nil �Ǥ�����ˤ���¸�Ϥ��ޤ���
+localfile が nil である場合には保存はしません。
 
-�ǡ�����ž���� blocksize �Х�����˹Ԥʤ��ޤ���
+データの転送は blocksize バイト毎に行なわれます。
 
-�֥��å������ꤵ�줿����
-�ǡ����� blocksize �Х��ȼ������뤴�Ȥˡ����Υǡ�����
-�֥��å����Ϥ��ޤ���
+ブロックが指定された場合は
+データを blocksize バイト受信するごとに、そのデータを
+ブロックに渡します。
 
-@param remotefile �����оݤΥ�⡼�ȤΥե�����̾��Ϳ���ޤ���
-@param localfile ���������ǡ������Ǽ�����������Υե�����̾��Ϳ���ޤ���
-@param blocksize �ǡ���ž����ñ�̤�Х���ñ�̤�Ϳ���ޤ���
+@param remotefile 取得対象のリモートのファイル名を与えます。
+@param localfile 取得したデータを格納するローカルのファイル名を与えます。
+@param blocksize データ転送の単位をバイト単位で与えます。
 
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- gettextfile(remotefile, localfile = File.basename(remotefile)) -> nil
 --- gettextfile(remotefile, localfile = File.basename(remotefile)){|line| ...} -> nil
 
-�����о�Υե������ƥ����ȥ⡼�ɤǼ������ޤ���
+サーバ上のファイルをテキストモードで取得します。
 
-�����С���ˤ��� remotefile �Ȥ���̾���Υե�������������
-��������� localfile �Ȥ���̾���Υե��������¸���ޤ���
+サーバー上にある remotefile という名前のファイルを取得し、
+ローカルの localfile という名前のファイルに保存します。
 
-localfile �� nil �Ǥ�����ˤ���¸�Ϥ��ޤ���
+localfile が nil である場合には保存はしません。
 
-�֥��å������ꤵ�줿����
-�ǡ�����1�Լ������뤴�Ȥˡ����ιԤ�֥��å����Ϥ��ޤ���
+ブロックが指定された場合は
+データを1行受信するごとに、その行をブロックに渡します。
 
-@param remotefile �����оݤΥ�⡼�ȤΥե�����̾��Ϳ���ޤ���
-@param localfile ���������ǡ������Ǽ�����������Υե�����̾��Ϳ���ޤ���
+@param remotefile 取得対象のリモートのファイル名を与えます。
+@param localfile 取得したデータを格納するローカルのファイル名を与えます。
 
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- putbinaryfile(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) -> nil
 --- putbinaryfile(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) {|data| ...} -> nil
 
-�����Ф˥ե������Х��ʥ�⡼�ɤ�ž�����ޤ���
+サーバにファイルをバイナリモードで転送します。
 
-��������� localfile �Ȥ���̾���Υե�������ɤߤ�����
-�����С���� remotefile �Ȥ���̾���Υե��������¸���ޤ���
+ローカルの localfile という名前のファイルを読みだし、
+サーバー上の remotefile という名前のファイルに保存します。
 
-�ǡ�����ž���� blocksize �Х�����˹Ԥʤ��ޤ���
+データの転送は blocksize バイト毎に行なわれます。
 
-�֥��å������ꤵ�줿����
-�ǡ����� blocksize �Х���ž�����뤴�Ȥˡ����Υǡ�����
-�֥��å����Ϥ��ޤ���
+ブロックが指定された場合は
+データを blocksize バイト転送するごとに、そのデータを
+ブロックに渡します。
 
-@param localfile ž�������������Υե�����̾��Ϳ���ޤ���
-@param remotefile ž���ǡ�������¸�����⡼�ȤΥե�����̾��Ϳ���ޤ���
-@param blocksize �ǡ���ž����ñ�̤�Х���ñ�̤�Ϳ���ޤ���
+@param localfile 転送するローカルのファイル名を与えます。
+@param remotefile 転送データを保存するリモートのファイル名を与えます。
+@param blocksize データ転送の単位をバイト単位で与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- puttextfile(localfile, remotefile = File.basename(localfile)) -> nil
 --- puttextfile(localfile, remotefile = File.basename(localfile)) {|line| ... } -> nil
-�����Ф˥ե������ƥ����ȥ⡼�ɤ�ž�����ޤ���
+サーバにファイルをテキストモードで転送します。
 
-��������� localfile �Ȥ���̾���Υե�������ɤߤ�����
-�����С���� remotefile �Ȥ���̾���Υե��������¸���ޤ���
+ローカルの localfile という名前のファイルを読みだし、
+サーバー上の remotefile という名前のファイルに保存します。
 
-�֥��å������ꤵ�줿����
-�ǡ�����1��ž�����뤴�Ȥˡ����ιԤ�
-�֥��å����Ϥ��ޤ���
+ブロックが指定された場合は
+データを1行転送するごとに、その行を
+ブロックに渡します。
 
-@param localfile ž�������������Υե�����̾��Ϳ���ޤ���
-@param remotefile ž���ǡ�������¸�����⡼�ȤΥե�����̾��Ϳ���ޤ���
+@param localfile 転送するローカルのファイル名を与えます。
+@param remotefile 転送データを保存するリモートのファイル名を与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- acct(account) -> nil
 
-�����С��� ACCT ���ޥ�ɤǥ�������Ⱦ��������ޤ���
+サーバーに ACCT コマンドでアカウント情報を送ります。
 
-@param account ���ꤿ����������Ⱦ����ʸ�����Ϳ���ޤ���
+@param account 送りたいアカウント情報を文字列で与えます。
 
-@raise Net::FTPReplyError ���������ɤ�2yz�Ǥʤ�����ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが2yzでない場合に発生します。
 
 --- nlst(dir = nil) -> [String]
 
-dir �ǻ��ꤷ���ǥ��쥯�ȥ�Υե������������֤��ޤ���
+dir で指定したディレクトリのファイルの配列を返します。
 
-dir ���ά������祫���ȥǥ��쥯�ȥ꤬���ꤵ��ޤ���
+dir を省略した場合カレントディレクトリが指定されます。
 
-@param dir �ǥ��쥯�ȥ��ʸ����ǻ��ꤷ�ޤ���
+@param dir ディレクトリを文字列で指定します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- list(*args) -> [String]
 --- list(*args) {|line| ... } -> nil
@@ -384,345 +384,345 @@ dir ���ά������祫���ȥǥ��쥯�ȥ꤬���ꤵ��ޤ���
 --- dir(*args) -> [String]
 --- dir(*args) {|line| ...} -> nil
 
-LIST ���ޥ�ɤ�����������̤��֤��ޤ���
+LIST コマンドを送信し、結果を返します。
 
-�֥��å��ȤȤ�˸ƤӽФ��줿���ϳƹԤ��Ф��ƥ֥��å���
-�¹Ԥ��ޤ����֥��å��ʤ��ξ��ˤ�ʸ���������Ƿ�̤��֤��ޤ���
+ブロックとともに呼び出された場合は各行に対してブロックを
+実行します。ブロックなしの場合には文字列の配列で結果を返します。
 
-@param args LIST �ΰ�����ʸ������Ϥ��ޤ���ʣ���Ϥ����Ȥ��Ǥ��ޤ���
+@param args LIST の引数を文字列で渡します。複数渡すことができます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ����(1xy, 3xy�����٤��Ǥʤ��Ȥ����褿���ʤ�)��ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- rename(fromname, toname) -> nil
-�ե�������͡��ष�ޤ���
+ファイルをリネームします。
 
-��⡼�ȥ����о�� fromname �Ȥ���̾���Υե������
-toname �Ȥ���̾�����ѹ����ޤ���
+リモートサーバ上の fromname という名前のファイルを
+toname という名前に変更します。
 
-@param fromname �ѹ����Υե�����̾��Ϳ���ޤ���
-@param toname �ѹ���Υե�����̾��Ϳ���ޤ���
+@param fromname 変更前のファイル名を与えます。
+@param toname 変更後のファイル名を与えます。
 
-@raise Net::FTPReplyError ���������ɤ��������ʤ�����ȯ�����ޤ�����͡���˼��Ԥ�������ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが正しくない場合に発生します。リネームに失敗した場合に発生します。
 
 --- delete(filename) -> nil
-�ե�����������ޤ���
+ファイルを削除します。
 
-��⡼�ȥ����о�� fromname �Ȥ���̾���Υե�����������ޤ���
+リモートサーバ上の fromname という名前のファイルを削除します。
 
-����˼��Ԥ������ˤ� �㳰��ȯ�����ޤ���
+削除に失敗した場合には 例外が発生します。
 
-@param filename �������ե������̾����Ϳ���ޤ���
+@param filename 削除するファイルの名前を与えます。
 
-@raise Net::FTPPermError ���������ɤ� 5yz �Ǥ��ä�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ� 5yz �ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPPermError 応答コードが 5yz であった場合に発生します。
+@raise Net::FTPReplyError 応答コードが 5yz 以外で正しくない場合に発生します。
 
 --- chdir(dirname) -> nil
-��⡼�ȥ����ФǤΥ����ȥǥ��쥯�ȥ�� dirname ���ѹ����ޤ���
+リモートサーバでのカレントディレクトリを dirname に変更します。
 
-@param dirname �ѹ���Υǥ��쥯�ȥ��Ϳ���ޤ���
-@raise Net::FTPReplyError ���������ɤ����顼�Ǥ������ȯ�����ޤ��������ȥǥ��쥯�ȥ��ѹ��˼��Ԥ�������ȯ�����ޤ���
+@param dirname 変更先のディレクトリを与えます。
+@raise Net::FTPReplyError 応答コードがエラーである場合に発生します。カレントディレクトリ変更に失敗した場合に発生します。
 
 --- size(filename) -> Integer
-��⡼�ȥ����о�Υե�����Υ��������֤��ޤ���
+リモートサーバ上のファイルのサイズを返します。
 
-@param filename ��������Ĵ�٤����ե�����̾��Ϳ���ޤ���
+@param filename サイズを調べたいファイル名を与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- mtime(filename, local = false) -> Time
 
-filename �ι�������� Time ���֥������Ȥ��֤��ޤ���
+filename の更新時刻を Time オブジェクトで返します。
 
-local �򿿤Ȥ���ȡ�����줿����������������Ȥߤʤ��ޤ���
-���ξ��Ϲ�����������������Ȥߤʤ��ޤ���
+local を真とすると、得られた更新時刻を地方時とみなします。
+偽の場合は更新時刻を協定世界時とみなします。
 
-@param filename ����������������ե������̾����ʸ�����Ϳ���ޤ���
-@param local �֤��ͤλ�����������Ȥߤʤ����ɤ����򿿵��ͤ�Ϳ���ޤ���
+@param filename 更新時刻を得たいファイルの名前を文字列で与えます。
+@param local 返り値の時刻を地方時とみなすかどうかを真偽値で与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- mkdir(dirname) -> String
-��⡼�ȥ����о�˥ǥ��쥯�ȥ��������ޤ���
+リモートサーバ上にディレクトリを作成します。
 
-�����˼��Ԥ������ˤ��㳰��ȯ�����ޤ���
+作成に失敗した場合には例外が発生します。
 
-@param dirname ��������ǥ��쥯�ȥ�̾��ʸ����ǻ��ꤷ�ޤ���
+@param dirname 作成するディレクトリ名を文字列で指定します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- rmdir(dirname) -> nil
-��⡼�ȥ����о�Υǥ��쥯�ȥ�������ޤ���
+リモートサーバ上のディレクトリを削除します。
 
-@param dirname �������ǥ��쥯�ȥ�̾��ʸ����ǻ��ꤷ�ޤ���
+@param dirname 削除するディレクトリ名を文字列で指定します。
 
-@raise Net::FTPReplyError ���������ɤ��������ʤ�����ȯ�����ޤ�������˼��Ԥ�������ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが正しくない場合に発生します。削除に失敗した場合に発生します。
 
 --- pwd -> String
 --- getdir -> String
-�����ȥǥ��쥯�ȥ���֤��ޤ���
+カレントディレクトリを返します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- system -> String
-�����С��� OS �Υ����פ��֤��ޤ���
+サーバーの OS のタイプを返します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ��ǥ��顼�Ǥ������ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外でエラーである場合に発生します。
 
 --- abort -> String
-�ǡ�����ž������ߤ��ޤ���
+データの転送を中止します。
 
-@return �����Ф���α�����ʸ������֤��ޤ���
+@return サーバからの応答を文字列で返します。
 
-@raise Net::FTPReplyError ���������ɤ��������ʤ�����ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが正しくない場合に発生します。
 
 --- status -> String
-���ߤξ��֤��֤��ޤ���
+現在の状態を返します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 --- mdtm(filename) -> String
-MDTM ���ޥ�ɤ�����������̤��֤��ޤ���
+MDTM コマンドを送信し、結果を返します。
 
-@param filename ���ޥ�ɤ�ȯ�Ԥ������ե�����̾��ʸ����ǻ��ꤷ�ޤ���
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
+@param filename コマンドを発行したいファイル名を文字列で指定します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 --- passive -> bool
-passive �⡼�ɤǤ���ʤ�п��򡢤����Ǥʤ����
-�����֤��ޤ���
+passive モードであるならば真を、そうでなければ
+偽を返します。
 
-�ǥե���Ȥϵ��Ǥ���
+デフォルトは偽です。
 
 @see [[m:Net::FTP#passive=]]
 --- passive=(bool)
-passive �⡼�ɤ����ꤷ�ޤ���
+passive モードを設定します。
 
 @see [[m:Net::FTP#passive]]
 
 --- return_code -> String
-���Υ᥽�åɤ� obsolete �Ǥ����Ȥ�ʤ��Ǥ���������
+このメソッドは obsolete です。使わないでください。
 
-"\n" ���֤��ޤ���
+"\n" を返します。
 
 --- return_code=(string)
-���Υ᥽�åɤ� obsolete �Ǥ����Ȥ�ʤ��Ǥ���������
+このメソッドは obsolete です。使わないでください。
 
 --- lastresp -> String
 --- last_response_code -> String
 
-�����Ф���κǸ�α����Υ����ɤ�ʸ������֤��ޤ���
+サーバからの最後の応答のコードを文字列で返します。
 
-�㤨�Х�������([[m:Net::FTP#login]])�������������ˤ�
-"230" ���֤��ޤ���
+例えばログイン([[m:Net::FTP#login]])に成功した場合には
+"230" を返します。
 
-�����ΰ�̣�� [[rfc:959]] ���Ȥ��Ƥ���������
+数字の意味は [[rfc:959]] 参照してください。
 
 @see [[m:Net::FTP#last_response]]
 --- last_response -> String
-�����Ф���κǸ�α�����ʸ������֤��ޤ���
+サーバからの最後の応答を文字列で返します。
 
-�㤨�Х�������([[m:Net::FTP#login]])�������������ˤ�
-"230 Login successful.\n" ���֤��ޤ���
+例えばログイン([[m:Net::FTP#login]])に成功した場合には
+"230 Login successful.\n" を返します。
 
 @see [[m:Net::FTP#last_response_code]]
 --- welcome -> String
-�����ФΥ����륫���å��������֤��ޤ���
+サーバのウェルカムメッセージを返します。
 
-���Υ�å������ϥ�������([[m:Net::FTP#login]])����
-�����Ф��������ޤ���
+このメッセージはログイン([[m:Net::FTP#login]])時に
+サーバから送られます。
 
 --- help(arg = nil) -> String
-�����Ф���� help ������֤��ޤ���
+サーバからの help 情報を返します。
 
-@param arg HELP ���ޥ�ɤΥѥ�᡼������ꤷ�ޤ���
+@param arg HELP コマンドのパラメータを指定します。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 --- quit -> nil
-FTP �Υ��å���󤫤���������Ȥ��ޤ���
+FTP のセッションからログアウトします。
 
 --- close -> ()
-�����ФȤ���³���ڤ�ޤ���
+サーバとの接続を切ります。
 
-�Ƥ� [[m:Net::FTP#connect]] ����³���ʤ��¤�
-���ڤ����Բ�ǽ�ˤʤ�ޤ���
+再び [[m:Net::FTP#connect]] で接続しない限り
+一切の操作が不可能になります。
 
 --- closed? -> bool
-��³���ڤ�Ƥ�����˿����֤��ޤ���
+接続が切れている時に真を返します。
 
 --- resume -> bool
-���ߤΥꥸ�塼��⡼�ɤξ��֤��֤��ޤ���
+現在のリジュームモードの状態を返します。
 
-�ꥸ�塼��⡼�ɤ�ͭ���Ǥ���ʤ�С�
-�����Ĥ���ž���᥽�åɤˤ�����
-ž�������Ǥ����Դ�����ž�������Ǥ��ʤ��ä�����
-�Ƴ�����ǽ�ˤʤ�ޤ���
+リジュームモードが有効であるならば、
+いくつかの転送メソッドにおいて
+転送が中断され不完全な転送しかできなかった場合に
+再開が可能になります。
 
-�ǥե���Ȥ� false �Ǥ���
+デフォルトは false です。
 
-ž�������ǤȺƳ�����ǽ�ʤΤϰʲ��Υ᥽�åɤǤ���
+転送の中断と再開が可能なのは以下のメソッドです。
   * [[m:Net::FTP#get]]
   * [[m:Net::FTP#put]]
   * [[m:Net::FTP#getbinaryfile]]
   * [[m:Net::FTP#putbinaryfile]]
 
-ž�������Ǥ������ɤ�����ž���������Υե����뤬¸�ߤ��뤫
-�ɤ�����Ƚ�ꤵ�졢���Υե����륵�����ǺƳ�������֤�
-���ޤ���
+転送が中断したかどうかは転送先に問題のファイルが存在するか
+どうかで判定され、そのファイルサイズで再開する位置を
+決めます。
 
 @see [[m:Net::FTP#resume=]]
-#@# �ꥸ�塼��⡼�ɤȤ���������Ǥ��줿
-#@# �ǡ���ž����Ƴ����뤿��Τ�ΤǤ����ǥե���Ȥ��ͤ� false �Ǥ���
-#@# �����ͤ����Ǥ���Ȥ��������Ĥ���ž���᥽�åɤϻ����� REST ���ޥ�ɤ�
-#@# ȯ�Ԥ��뤳�Ȥˤ�ä�ž������ž�����Υ��ե��åȤ򥻥åȤ��ޤ���
-#@# ����ˤ�ꡢ���Ǥ�ž�����줿�ǡ�����ž������ʤ��ʤ�ޤ���
-#@# ����Ū�ˤϰʲ��Υ᥽�åɤ��ƶ�������ޤ���
+#@# リジュームモードとは途中で中断された
+#@# データ転送を再開するためのものです。デフォルトの値は false です。
+#@# この値が真であるとき、いくつかの転送メソッドは事前に REST コマンドを
+#@# 発行することによって転送元と転送元のオフセットをセットします。
+#@# これにより、すでに転送されたデータは転送されなくなります。
+#@# 具体的には以下のメソッドが影響を受けます。
 
-#@# getbinaryfile �ϥ�������ե�����Υ������򥪥ե��åȤȤ��ޤ���
+#@# getbinaryfile はローカルファイルのサイズをオフセットとします。
 
-#@# putbinaryfile �ϥ�⡼�ȥե�����Υ������򥪥ե��åȤȤ��ޤ���
+#@# putbinaryfile はリモートファイルのサイズをオフセットとします。
 
 --- resume=(boolean)
-���ߤΥꥸ�塼��⡼�ɤ����ꤷ�ޤ���
+現在のリジュームモードを設定します。
 
-@param boolean true�ʤ�Хꥸ�塼��⡼�ɤ� on �ˤ��ޤ���
+@param boolean trueならばリジュームモードを on にします。
 @see [[m:Net::FTP#resume]]
 
 --- debug_mode -> bool
-�ǥХå��⡼�ɤǤ���п��򡢤����Ǥʤ���е����֤��ޤ���
+デバッグモードであれば真を、そうでなければ偽を返します。
 
-�ͤ����Ǥ���Ȥ����������ε�Ͽ�� ABOR, STAT �η�̤�
-[[m:$stdout]] �˿��ɽ������ޤ���
+値が真であるとき、送受信の記録と ABOR, STAT の結果が
+[[m:$stdout]] に随時表示されます。
 
-�ǥե���Ȥϵ��Ǥ���
+デフォルトは偽です。
 @see [[m:Net::FTP#debug_mode=]]
 
 --- debug_mode=(boolean)
 
-�ǥХå��⡼�ɤ� on/off �����ꤷ�ޤ���
+デバッグモードの on/off を設定します。
 
-@param boolean ���ʤ�ХǥХå��⡼�ɤ� on �ˤ��ޤ���
+@param boolean 真ならばデバッグモードを on にします。
 @see [[m:Net::FTP#debug_mode]]
 
 --- set_socket(sock, get_greeting = true) -> nil
-FTP �Υ���ȥ�������³��
-�����åȤ� TCPSocket ���֥������� sock �����ꤷ�ޤ���
+FTP のコントロール接続の
+ソケットを TCPSocket オブジェクト sock に設定します。
 
-get_greeting �˵���Ϳ������ȡ�
-set_socket ���̿�������ꤹ������� sock ���Ф�������
-����Ԥʤ��ޤ���
-get_greeting �����ʤ�С��̿���� sock ��
-���ꤷ�����ȡ��̾�FTP�����Ф���³�������äƤ����å��������ɤ߹��ߤޤ���
+get_greeting に偽が与えられると、
+set_socket は通信先を設定するだけで sock に対する操作を
+何も行ないません。
+get_greeting が真ならば、通信先を sock に
+設定したあと、通常FTPサーバが接続時に送ってくるメッセージを読み込みます。
 
-�̾盧�Υ᥽�åɤϻȤ��٤��ǤϤ���ޤ��󡣤��Υ饤�֥���
-���������򤷤����ɬ�פʾ��Τ����Ѥ��Ƥ���������
+通常このメソッドは使うべきではありません。このライブラリの
+実装を理解した上で必要な場合のみ利用してください。
 
-@param sock ����ȥ�������³�˻Ȥ������åȤ���ꤷ�ޤ���
-@param get_greeting �����åȤ����ꤷ������³����å������򥽥��åȤ����ɤߤ��फ�ɤ�������ꤷ�ޤ���
+@param sock コントロール接続に使うソケットを指定します。
+@param get_greeting ソケットを設定した後接続時メッセージをソケットから読みこむかどうかを指定します。
 
 --- get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) -> nil
 --- get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... } -> nil
 
-�����о�Υե������������ޤ���
+サーバ上のファイルを取得します。
 
-[[m:Net::FTP#binary]] ���ͤ˽��ä�
-[[m:Net::FTP#getbinaryfile]] �⤷����
-[[m:Net::FTP#gettextfile]] ��ƤӤ����ޤ���
+[[m:Net::FTP#binary]] の値に従って
+[[m:Net::FTP#getbinaryfile]] もしくは
+[[m:Net::FTP#gettextfile]] を呼びだします。
 
-binary �����ΤȤ����Ĥޤ�ƥ����ȥ⡼�ɤ�
-�Ȥ��ˤ� blocksize ��̵�뤵��ޤ���
+binary が偽のとき、つまりテキストモードの
+ときには blocksize は無視されます。
 
-@param remotefile �����оݤΥ�⡼�ȤΥե�����̾��Ϳ���ޤ���
-@param localfile ���������ǡ������Ǽ�����������Υե�����̾��Ϳ���ޤ���
-@param blocksize �ǡ���ž����ñ�̤�Х���ñ�̤�Ϳ���ޤ���
+@param remotefile 取得対象のリモートのファイル名を与えます。
+@param localfile 取得したデータを格納するローカルのファイル名を与えます。
+@param blocksize データ転送の単位をバイト単位で与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 
 --- put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) -> nil
 --- put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... } -> nil
 
-�����Фإե������ž�����ޤ���
+サーバへファイルを転送します。
 
-[[m:Net::FTP#binary]] ���ͤ˽��ä�
-[[m:Net::FTP#putbinaryfile]] �⤷����
-[[m:Net::FTP#puttextfile]] ��ƤӤ����ޤ���
+[[m:Net::FTP#binary]] の値に従って
+[[m:Net::FTP#putbinaryfile]] もしくは
+[[m:Net::FTP#puttextfile]] を呼びだします。
 
-binary �����ΤȤ����Ĥޤ�ƥ����ȥ⡼�ɤ�
-�Ȥ��ˤ� blocksize ��̵�뤵��ޤ���
+binary が偽のとき、つまりテキストモードの
+ときには blocksize は無視されます。
 
-@param localfile ž�������������Υե�����̾��Ϳ���ޤ���
-@param remotefile ž���ǡ�������¸�����⡼�ȤΥե�����̾��Ϳ���ޤ���
-@param blocksize �ǡ���ž����ñ�̤�Х���ñ�̤�Ϳ���ޤ���
+@param localfile 転送するローカルのファイル名を与えます。
+@param remotefile 転送データを保存するリモートのファイル名を与えます。
+@param blocksize データ転送の単位をバイト単位で与えます。
 
-@raise Net::FTPTempError ���������ɤ� 4yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPPermError ���������ɤ� 5yz �ΤȤ���ȯ�����ޤ���
-@raise Net::FTPProtoError ���������ɤ� RFC Ū���������ʤ�����ȯ�����ޤ���
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ����������ʤ�����ȯ�����ޤ���
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
+@raise Net::FTPPermError 応答コードが 5yz のときに発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- binary -> bool
-[[m:Net::FTP#put]], [[m:Net::FTP#get]] �ˤ��ž����
-�Х��ʥ�⡼��(IMAGE)�ǹԤ����ɤ������֤��ޤ���
+[[m:Net::FTP#put]], [[m:Net::FTP#get]] による転送を
+バイナリモード(IMAGE)で行うかどうかを返します。
 
-�ǥե���Ȥ��ͤ� true �Ǥ���
+デフォルトの値は true です。
 
-���ξ�硢�ƥ����ȥ⡼��(ASCII)�����ꤵ��ޤ���
+偽の場合、テキストモード(ASCII)が仮定されます。
 
-EBCDIC �� LOCAL �ʤ�¾��ɽ�������פϥ��ݡ��Ȥ���Ƥ��ޤ���
+EBCDIC や LOCAL など他の表現タイプはサポートされていません。
 
 @see [[m:Net::FTP#binary=]]
 --- binary=(bool)
-[[m:Net::FTP#put]], [[m:Net::FTP#get]] �ˤ��ž����
-�Х��ʥ�⡼��(IMAGE)��ž�����뤫�ɤ�������ꤷ�ޤ���
+[[m:Net::FTP#put]], [[m:Net::FTP#get]] による転送を
+バイナリモード(IMAGE)で転送するかどうかを指定します。
 
-�ǥե���Ȥ��ͤ� true �Ǥ���
+デフォルトの値は true です。
 
-���ξ�硢�ƥ����ȥ⡼��(ASCII)�����ꤵ��ޤ���
+偽の場合、テキストモード(ASCII)が仮定されます。
 
-EBCDIC �� LOCAL �ʤ�¾��ɽ�������פϥ��ݡ��Ȥ���Ƥ��ޤ���
+EBCDIC や LOCAL など他の表現タイプはサポートされていません。
 
-@param bool ���ʤ�ХХ��ʥ�⡼�ɤ� on �ˤ��ޤ���
+@param bool 真ならばバイナリモードを on にします。
 @see [[m:Net::FTP#binary]]
 
 --- noop -> nil
-NOOP ���ޥ�ɤ�ȯ�Ԥ��ޤ���
+NOOP コマンドを発行します。
 
-�����Ф��������������¾�ϲ��⤷�ޤ���
+サーバから応答が得られる他は何もしません。
 
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ��ǥ��顼�Ǥ������ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが上の場合以外でエラーである場合に発生します。
 
 --- site(arg) -> nil
-SITE ���ޥ�ɤ�ȯ�Ԥ��ޤ���
+SITE コマンドを発行します。
 
-@param arg SITE���ޥ�ɤΥѥ�᡼������ꤷ�ޤ���
+@param arg SITEコマンドのパラメータを指定します。
 
-@raise Net::FTPReplyError ���������ɤ���ξ��ʳ��ǥ��顼�Ǥ������ȯ�����ޤ���
+@raise Net::FTPReplyError 応答コードが上の場合以外でエラーである場合に発生します。
 
 == Constants
 
@@ -730,10 +730,10 @@ SITE ���ޥ�ɤ�ȯ�Ԥ��ޤ���
 #@# nodoc
 
 --- DEFAULT_BLOCKSIZE -> Integer
-get, put �򤹤�Ȥ��Υǥե���ȤΥ֥��å��������Ǥ���
+get, put をするときのデフォルトのブロックサイズです。
 
 --- FTP_PORT -> Integer
-FTP�Υǥե���ȤΥݡ����ֹ�(21)�Ǥ���
+FTPのデフォルトのポート番号(21)です。
 
 #@# --- MDTM_REGEXP
 #@# nodoc
@@ -741,43 +741,43 @@ FTP�Υǥե���ȤΥݡ����ֹ�(21)�Ǥ���
 #@# #@since 1.9.2
 #@# = class Net::FTP::NullSocket < Object
 #@# 
-#@# ���ƤΥ᥽�åɸƤӽФ����Ф��� [[c:Net::FTPConnectionError]] ��ȯ�������ޤ���
+#@# 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
 #@# 
 #@# #@end
 
 = class Net::FTPError < StandardError
-net/ftp �饤�֥���Ϣ�Υ��顼���̤�ɽ���㳰���饹�Ǥ���
+net/ftp ライブラリ関連のエラー全般を表す例外クラスです。
 
-�����Фα��������ɤ����顼�򼨤��Ƥ������ȯ�����ޤ���
+サーバの応答コードがエラーを示している場合に発生します。
 
-�㳰ȯ���θ����Ȥʤä������б����� [[m:Exception#message]]
-���������ޤ���
+例外発生の原因となったサーバ応答は [[m:Exception#message]]
+から得られます。
 
 = class Net::FTPReplyError < Net::FTPError
-FTP�α����� 1yz �� 3yz �Ǥ��ꡢ���줬
-���곰�Ǥ��뤳�Ȥ�ɽ�魯�㳰���饹�Ǥ���
+FTPの応答が 1yz や 3yz であり、それが
+想定外であることを表わす例外クラスです。
 
 = class Net::FTPTempError < Net::FTPError
-FTP �α��������� 4yz 
+FTP の応答コード 4yz 
 (Transient Negative Completion reply)
-��ɽ���㳰���饹�Ǥ���
+を表す例外クラスです。
 
-�ܤ����� [[RFC:959]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:959]] を参照してください。
 
 = class Net::FTPPermError < Net::FTPError
-FTP �α��������� 5yz 
+FTP の応答コード 5yz 
 (Permanent Negative Completion reply)
-��ɽ���㳰���饹�Ǥ���
+を表す例外クラスです。
 
-�ܤ����� [[RFC:959]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:959]] を参照してください。
 
 = class Net::FTPProtoError < Net::FTPError
-�����Фα����� FTP �Υץ��ȥ���˱�äƤ��ʤ�����
-ȯ�������㳰�Υ��饹�Ǥ���
+サーバの応答が FTP のプロトコルに沿っていない場合に
+発生する例外のクラスです。
 
 #@since 1.9.2
 = class Net::FTPConnectionError < Net::FTPError
-���ͥ��������Ω���������̿����褦�Ȥ�������
-ȯ�������㳰�Υ��饹�Ǥ���
+コネクションを確立する前に通信しようとした場合に
+発生する例外のクラスです。
 
 #@end

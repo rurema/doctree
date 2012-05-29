@@ -1,29 +1,29 @@
 require webrick/httpservlet/abstract
 
-ERB �򰷤�����Υ����֥�åȤ��󶡤���饤�֥��Ǥ���
+ERB を扱うためのサーブレットを提供するライブラリです。
 
 = class WEBrick::HTTPServlet::ERBHandler < WEBrick::HTTPServlet::AbstractServlet
 
-ERB �򰷤�����Υ����֥�åȤǤ���
+ERB を扱うためのサーブレットです。
 
 == Class Methods
 
 --- new(server, name) -> WEBrick::HTTPServlet::ERBHandler
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param server [[c:WEBrick::GenericServer]] �Υ��֥��饹�Υ��󥹥��󥹤�
-              ���ꤷ�ޤ���
+@param server [[c:WEBrick::GenericServer]] のサブクラスのインスタンスを
+              指定します。
 
-@param name �¹Ԥ����� ERB �Υե�����̾����ꤷ�ޤ���
+@param name 実行したい ERB のファイル名を指定します。
 
 == Instance Methods
 
 --- do_GET(request, response) -> ()
 --- do_POST(request, response) -> ()
 
-GET, POST �ꥯ�����Ȥ�������ޤ���
+GET, POST リクエストを処理します。
 
-@param request [[c:WEBrick::HTTPRequest]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
 
-@param response [[c:WEBrick::HTTPResponse]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。

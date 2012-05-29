@@ -1,10 +1,10 @@
-= ���湽¤
+= 制御構造
 
-���ʬ��:
+条件分岐:
     * [[ref:if]]
     * [[ref:unless]]
     * [[ref:case]]
-�����֤�:
+繰り返し:
     * [[ref:while]]
     * [[ref:until]]
     * [[ref:for]]
@@ -12,27 +12,27 @@
     * [[ref:next]]
     * [[ref:redo]]
     * [[ref:retry]]
-�㳰����:
+例外処理:
     * [[ref:raise]]
     * [[ref:begin]]
-����¾:
+その他:
     * [[ref:return]]
     * [[ref:BEGIN]]
     * [[ref:END]]
 
-Ruby�Ǥ�(C�ʤɤȤϰۤʤ�)���湽¤�ϼ��Ǥ��äơ����餫���ͤ��֤���Τ�
-����ޤ�(�֤��ʤ���Τ⤢��ޤ����ͤ��֤��ʤ������������α��դ��֤���
-parse error �ˤʤ�ޤ�)��
+Rubyでは(Cなどとは異なり)制御構造は式であって、何らかの値を返すものが
+あります(返さないものもあります。値を返さない式を代入式の右辺に置くと
+parse error になります)。
 
-Ruby��C�����Perl��������Ѥ������湽¤������ޤ�����
-����¾��[[ref:d:spec/call#block]]�Ȥ���
-���湽¤����ݲ��������뵡ǽ������ޤ����֥��å��դ��᥽�åɸƤӽФ���
-�����֤���Ϥ�Ȥ������湽¤�򥯥饹�߷׼Ԥ�����������������ΤǤ�.
+RubyはC言語やPerlから引き継いだ制御構造を持ちますが、
+その他に[[ref:d:spec/call#block]]という
+制御構造の抽象化を援助する機能があります。ブロック付きメソッド呼び出しは
+繰り返しを始めとする制御構造をクラス設計者が定義する事が出来るものです.
 
-=== ���ʬ��
+=== 条件分岐
 ====[a:if] if
 
-��:
+例:
 
           if age >= 12 then
             print "adult fee\n"
@@ -41,54 +41,54 @@ Ruby��C�����Perl��������Ѥ������湽¤������ޤ�����
           end
           gender = if foo.gender == "male" then "male" else "female" end
 
-ʸˡ:
+文法:
 
-          if �� [then]
-            �� ...
-          [elsif �� [then]
-            �� ... ]
+          if 式 [then]
+            式 ...
+          [elsif 式 [then]
+            式 ... ]
           ...
           [else
-            �� ... ]
+            式 ... ]
           end
 
-��Ｐ��ɾ��������̤����Ǥ������then �ʲ��μ���ɾ�����ޤ���
-if �ξ�Ｐ�����Ǥ���� elsif �ξ���ɾ�����ޤ���
-elsif ���ʣ������Ǥ������Ƥ� if ����� elsif
-�ξ�Ｐ�����Ǥ��ä��Ȥ� else �᤬����Ф��μ���ɾ������ޤ���
+条件式を評価した結果が真である時、then 以下の式を評価します。
+if の条件式が偽であれば elsif の条件を評価します。
+elsif 節は複数指定でき、全ての if および elsif
+の条件式が偽であったとき else 節があればその式が評価されます。
 
-if ���ϡ���郎��Ω������(���뤤�� else ��)�κǸ��ɾ����
-�����η�̤��֤��ޤ���else �᤬�ʤ�������ξ�������Ω���ʤ���
-�� nil ���֤��ޤ���
+if 式は、条件が成立した節(あるいは else 節)の最後に評価し
+た式の結果を返します。else 節がなくいずれの条件も成り立たなけれ
+ば nil を返します。
 
-Ruby �Ǥ� false �ޤ��� nil ���������ǡ�����ʳ��� 0 ���ʸ
-�����ޤ����ƿ��Ǥ���
+Ruby では false または nil だけが偽で、それ以外は 0 や空文
+字列も含め全て真です。
 
-Ruby �Ǥ� if ��Ҥ���Τ� elsif �Ǥ��ꡢelse if
-(C �Τ褦��)�Ǥ� elif(sh �Τ褦��)�Ǥ�ʤ����Ȥ����դ��Ƥ���������
+Ruby では if を繋げるのは elsif であり、else if
+(C のように)でも elif(sh のように)でもないことに注意してください。
 
-�ޤ� if �ξ�Ｐ������ɽ���Υ�ƥ��Ǥ�����ˤ����̤�
+また if の条件式が正規表現のリテラルである時には特別に
 
-          $_ =~ ��ƥ��
+          $_ =~ リテラル
 
-�Ǥ��뤫�Τ褦��ɾ������ޤ���
+であるかのように評価されます。
 
-==== if ������
+==== if 修飾子
 
-��:
+例:
 
           print "debug\n" if $DEBUG
 
-ʸˡ:
+文法:
 
-          �� if ��
+          式 if 式
 
-���դξ�郎��Ω������ˡ����դμ���ɾ�����Ƥ��η�̤��֤��ޤ���
-��郎��Ω���ʤ���� nil ���֤��ޤ���
+右辺の条件が成立する時に、左辺の式を評価してその結果を返します。
+条件が成立しなければ nil を返します。
 
 ====[a:unless] unless
 
-��:
+例:
 
           unless baby?
             feed_meat
@@ -96,34 +96,34 @@ Ruby �Ǥ� if ��Ҥ���Τ� elsif �Ǥ��ꡢelse if
             feed_milk
           end
 
-ʸˡ:
+文法:
 
-          unless �� [then]
-            �� ...
+          unless 式 [then]
+            式 ...
           [else
-            �� ... ]
+            式 ... ]
           end
 
-unless �� if ��ȿ�Фǡ���Ｐ�����λ��� then �ʲ���
-����ɾ�����ޤ���unless ����elsif ����ꤹ�뤳�ȤϤǤ��ޤ�
-��
+unless は if と反対で、条件式が偽の時に then 以下の
+式を評価します。unless 式にelsif を指定することはできませ
+ん。
 
-==== unless ������
+==== unless 修飾子
 
-��:
+例:
 
           print "stop\n" unless valid(passwd)
 
-ʸˡ:
+文法:
 
-          �� unless ��
+          式 unless 式
 
-���դξ�郎��Ω���ʤ����ˡ����դμ���ɾ�����Ƥ��η�̤��֤��ޤ���
-��郎��Ω���ʤ���� nil ���֤��ޤ���
+右辺の条件が成立しない時に、左辺の式を評価してその結果を返します。
+条件が成立しなければ nil を返します。
 
 ====[a:case] case
 
-��:
+例:
 
           case $age
           when 0 .. 2
@@ -138,48 +138,48 @@ unless �� if ��ȿ�Фǡ���Ｐ�����λ��� then �ʲ���
             "adult"
           end
 
-ʸˡ:
+文法:
 
-          case [��]
-          [when �� [, ��] ...[, `*' ��] [then]
-            ��..]..
-          [when `*' �� [then]
-            ��..]..
+          case [式]
+          [when 式 [, 式] ...[, `*' 式] [then]
+            式..]..
+          [when `*' 式 [then]
+            式..]..
           [else
-            ��..]
+            式..]
           end
 
-case �ϰ�Ĥμ����Ф������Ƚ��ˤ��ʬ����Ԥ��ޤ���when
-��ǻ��ꤵ�줿�ͤȺǽ�μ���ɾ��������̤Ȥ�黻�� === ���Ѥ���
-��Ӥ��ơ����פ�����ˤ� when ������Τ�ɾ�����ޤ���
+case は一つの式に対する一致判定による分岐を行います。when
+節で指定された値と最初の式を評価した結果とを演算子 === を用いて
+比較して、一致する場合には when 節の本体を評価します。
 
-�Ĥޤꡢ
+つまり、
 
-          case ��0
-          when ��1, ��2
+          case 式0
+          when 式1, 式2
             stmt1
-          when ��3, ��4
+          when 式3, 式4
             stmt2
           else
             stmt3
           end
 
-�ϰʲ��� if ���Ȥۤ������Ǥ���
+は以下の if 式とほぼ等価です。
 
-          _tmp = ��0
-          if ��1 === _tmp or ��2 === _tmp
+          _tmp = 式0
+          if 式1 === _tmp or 式2 === _tmp
             stmt1
-          elsif ��3 === _tmp or ��4 === _tmp
+          elsif 式3 === _tmp or 式4 === _tmp
             stmt2
           else
             stmt3
           end
 
-when ���ɾ������Ϥ��ξ嵭 if ʸ�˽�ľ��������Ʊ���Ǥ����Ĥޤ��
-������(�����ƺ�������) === ��ɾ������ޤ����ޤ��ּ�0�פ�1�����ɾ
-������ޤ���
+when 節の評価順序はこの上記 if 文に書き直した場合と同じです。つまり上
+から順に(そして左から順に) === が評価されます。また「式0」は1回だけ評
+価されます。
 
-when ��κǸ�μ��� `*' �����֤���Ф��μ�������Ÿ������ޤ���
+when 節の最後の式に `*' を前置すればその式は配列展開されます。
 
         ary = [1,2,3]
 
@@ -188,20 +188,20 @@ when ��κǸ�μ��� `*' �����֤���Ф��μ�������Ÿ������ޤ���
          ..
         end
 
-�ϡ�
+は、
 
         case v
         when 1, 2, 3
          ..
         end
 
-�������Ǥ���
+と等価です。
 
-�ޤ� === ���ɤΤ褦�ʾ��ǿ��ˤʤ뤫�ϡ��ƥ��饹�� === �᥽��
-�ɤ�ư��ˤĤ��ƤΥɥ�����Ȥ򻲾Ȥ��Ʋ�������
+また === がどのような条件で真になるかは、各クラスの === メソッ
+ドの動作についてのドキュメントを参照して下さい。
 
-case �Ρּ��פ��ά������硢when �ξ�Ｐ�����Ǥʤ��ǽ��
-����ɾ�����ޤ���
+case の「式」を省略した場合、when の条件式が偽でない最初の
+式を評価します。
 
         foo = false
         bar = true
@@ -212,17 +212,17 @@ case �Ρּ��פ��ά������硢when �ξ�Ｐ�����Ǥʤ��ǽ��
         when bar then puts 'bar is true'
         when quu then puts 'quu is true'
         end
-        # "bar is true"��ɽ�������
+        # "bar is true"と表示される
 
-case �ϡ���郎��Ω���� when �ᡢ(���뤤�� else ��)
-�κǸ��ɾ���������η�̤��֤��ޤ���������ξ�������Ω���ʤ����
-nil ���֤��ޤ���
+case は、条件が成立した when 節、(あるいは else 節)
+の最後に評価した式の結果を返します。いずれの条件も成り立たなければ
+nil を返します。
 
-=== �����֤�
+=== 繰り返し
 
 ====[a:while] while
 
-��:
+例:
 
           ary = [0,2,4,8,16,32,64,128,256,512,1024]
           i = 0
@@ -231,131 +231,131 @@ nil ���֤��ޤ���
             i += 1
           end
 
-ʸˡ:
+文法:
 
-          while �� [do]
+          while 式 [do]
              ...
           end
 
-����ɾ�������ͤ����δ֡����Τ򷫤��֤��¹Ԥ��ޤ���
-while ���ͤ��֤��ޤ���
+式を評価した値が真の間、本体を繰り返し実行します。
+while は値を返しません。
 
 #@since 1.8.0
-while �� nil ���֤��ޤ����ޤ���������ȼ�ä� break �ˤ��
-while ��������ͤ򤽤��ͤˤ��뤳�Ȥ�Ǥ��ޤ���
+while は nil を返します。また、引数を伴った break により
+while 式の戻り値をその値にすることもできます。
 #@end
 
-==== while ������
+==== while 修飾子
 
-��:
+例:
           sleep(60) while io_not_ready?
 
-ʸˡ:
+文法:
 
-          �� while ��
+          式 while 式
 
-���դμ���ɾ�������ͤ����δ֡����դ򷫤��֤��¹Ԥ��ޤ���
+右辺の式を評価した値が真の間、左辺を繰り返し実行します。
 
-���դμ��� rescue ��� ensure ���ʤ� begin �Ǥ�����ˤϡ�
-�����ǽ�˰��ɾ�����Ƥ��鷫���֤��ޤ���
+左辺の式が rescue 節も ensure 節もない begin である場合には、
+それを最初に一回評価してから繰り返します。
 
 #@since 1.8.0
-rescue/ensure �᤬���äƤ⡢Ʊ�ͤ˲�ᤵ��ޤ���
+rescue/ensure 節があっても、同様に解釈されます。
 #@end
 
-��:
+例:
         send_request(data)
         begin
           res = get_response()
         end while res == 'Continue'
 
-while �������������ͤ��֤��ޤ���
+while 修飾した式は値を返しません。
 
 #@since 1.8.0
-while ������������ nil ���֤��ޤ���
-�ޤ���������ȼ�ä� break �ˤ�� while ����������������ͤ�
-�����ͤˤ��뤳�Ȥ�Ǥ��ޤ���
+while 修飾した式は nil を返します。
+また、引数を伴った break により while 修飾した式の戻り値を
+その値にすることもできます。
 #@end
 
 ====[a:until] until
 
-��:
+例:
           until f.eof?
             print f.gets
           end
 
-ʸˡ:
-          until �� [do]
+文法:
+          until 式 [do]
              ...
           end
 
-����ɾ�������ͤ����ˤʤ�ޤǡ����Τ򷫤��֤��Ƽ¹Ԥ��ޤ���
-until �ϡ��ͤ��֤��ޤ���
+式を評価した値が真になるまで、本体を繰り返して実行します。
+until は、値を返しません。
 
 #@since 1.8.0
-until �� nil ���֤��ޤ����ޤ���������ȼ�ä� break �ˤ��
-until ��������ͤ򤽤��ͤˤ��뤳�Ȥ�Ǥ��ޤ���
+until は nil を返します。また、引数を伴った break により
+until 式の戻り値をその値にすることもできます。
 #@end
 
-==== until������
+==== until修飾子
 
-��:
+例:
           print(f.gets) until f.eof?
 
-ʸˡ:
-          �� until ��
+文法:
+          式 until 式
 
-���դμ���ɾ�������ͤ����ˤʤ�ޤǡ����դ򷫤��֤��Ƽ¹Ԥ���
-����
+右辺の式を評価した値が真になるまで、左辺を繰り返して実行しま
+す。
 
-���դμ��� rescue ��� ensure ���ʤ� begin �Ǥ�����ˤϡ�
-�����ǽ�˰��ɾ�����Ƥ��鷫���֤��ޤ���
+左辺の式が rescue 節も ensure 節もない begin である場合には、
+それを最初に一回評価してから繰り返します。
 
 #@since 1.8.0
-rescue/ensure �᤬���äƤ⡢Ʊ�ͤ˲�ᤵ��ޤ�
+rescue/ensure 節があっても、同様に解釈されます
 #@end
 
-��:
+例:
         send_request(data)
         begin
           res = get_response()
         end until res == 'OK'
 
-until �������������ͤ��֤��ޤ���
+until 修飾した式は値を返しません。
 
 #@since 1.8.0
-until ������������ nil ���֤��ޤ���
-�ޤ���������ȼ�ä� break �ˤ�� until ����������������ͤ򤽤��ͤˤ��뤳�Ȥ�Ǥ��ޤ���
+until 修飾した式は nil を返します。
+また、引数を伴った break により until 修飾した式の戻り値をその値にすることもできます。
 #@end
 
 ====[a:for] for
 
-��:
+例:
 
           for i in [1, 2, 3]
             print i*2, "\n"
           end
 
-ʸˡ:
+文法:
 
-          for lhs ...  in �� [do]
-            ��..
+          for lhs ...  in 式 [do]
+            式..
           end
 
-����ɾ��������̤Υ��֥������Ȥγ����Ǥ��Ф������Τ򷫤��֤�
-�Ƽ¹Ԥ��ޤ�������ϰʲ��μ��Ȥۤ������Ǥ���
+式を評価した結果のオブジェクトの各要素に対して本体を繰り返し
+て実行します。これは以下の式とほぼ等価です。
 
-          (��).each `{' `|' lhs..`|' ��.. `}'
+          (式).each `{' `|' lhs..`|' 式.. `}'
 
-�֤ۤܡפȤ����Τϡ�do  ...  end�ޤ���{ }�ˤ��
-�֥��å��Ͽ��������������ѿ���ͭ���ϰϤ�Ƴ������Τ��Ф���
-forʸ�ϥ��������ѿ��Υ������פ˱ƶ���ڤܤ��ʤ�����
-�ۤʤ뤫��Ǥ���
+「ほぼ」というのは、do  ...  endまたは{ }による
+ブロックは新しいローカル変数の有効範囲を導入するのに対し、
+for文はローカル変数のスコープに影響を及ぼさない点が
+異なるからです。
 
-for �ϡ�in �˻��ꤷ�����֥������Ȥ� each
-�᥽�åɤ�����ͤ��֤��ޤ���
+for は、in に指定したオブジェクトの each
+メソッドの戻り値を返します。
 
-ʣ���Υ롼���ѿ�����ϰʲ��Τ褦�ʾ��˻��Ѥ��ޤ���
+複数のループ変数指定は以下のような場合に使用します。
 
         for i,j in [[1,2], [3,4], [5,6]]
           p [i,j]
@@ -364,8 +364,8 @@ for �ϡ�in �˻��ꤷ�����֥������Ȥ� each
            [3, 4]
            [5, 6]
 
-for �� each ���������Ǥ�ʣ���Ĥ��ļ������ʤ���롼�פ��뤳�Ȥ�
-�Ǥ��ޤ���
+for や each で配列要素を複数個ずつ取得しながらループすることは
+できません。
 
         for i,j in [1, 2, 3]
           p [i,j]
@@ -375,10 +375,10 @@ for �� each ���������Ǥ�ʣ���Ĥ��ļ������ʤ���롼�פ��뤳�Ȥ�
            [2, nil]
            [3, nil]
 
-        # [1,2] [3,nil] ����Ԥ��뤫�⤷��ʤ��������Ϥʤ�ʤ�
+        # [1,2] [3,nil] を期待するかもしれないがそうはならない
 
-����ˤ��Τ褦�ʥ᥽�å�(���ƥ졼��)���������ɬ�פ�����ޤ���
-[[m:Array#each]] ����⻲�Ȥ��Ƥ���������
+代わりにそのようなメソッド(イテレータ)を定義する必要があります。
+[[m:Array#each]] の例も参照してください。
 
         class Array
           def each2
@@ -392,7 +392,7 @@ for �� each ���������Ǥ�ʣ���Ĥ��ļ������ʤ���롼�פ��뤳�Ȥ�
 
 ====[a:break] break
 
-��:
+例:
 
           i = 0
           while i < 3
@@ -400,7 +400,7 @@ for �� each ���������Ǥ�ʣ���Ĥ��ļ������ʤ���롼�פ��뤳�Ȥ�
             break
           end
 
-ʸˡ:
+文法:
 
           break
 
@@ -408,32 +408,32 @@ for �� each ���������Ǥ�ʣ���Ĥ��ļ������ʤ���롼�פ��뤳�Ȥ�
           break val          
 #@end
 
-break �Ϥ�äȤ���¦�Υ롼�פ�æ�Ф��ޤ����롼�פȤ�
+break はもっとも内側のループを脱出します。ループとは
 
     * while
     * until
     * for
-    * ���ƥ졼��
+    * イテレータ
 
-�Τ����줫��ؤ��ޤ���C ����Ȱۤʤꡢbreak �ϥ롼�פ�æ�Ф����
-�Ѥ����������case ��ȴ������Ѥϻ����ޤ���
+のいずれかを指します。C 言語と異なり、break はループを脱出する作
+用だけを持ち、case を抜ける作用は持ちません。
 
-break �ˤ��롼�פ�ȴ���� for �䥤�ƥ졼���� nil
-���֤��ޤ���
+break によりループを抜けた for やイテレータは nil
+を返します。
 #@since 1.8.0
-����������������ꤷ�����ϥ롼�פ�����ͤϤ��ΰ����ˤʤ�ޤ���
+ただし、引数を指定した場合はループの戻り値はその引数になります。
 #@end
 
 ====[a:next] next
 
-��:
-          # ���Ԥ�ΤƤ�cat
+例:
+          # 空行を捨てるcat
           ARGF.each_line do |line|
             next if line.strip.empty?
             print line
           end
 
-ʸˡ:
+文法:
 
           next
 
@@ -441,58 +441,58 @@ break �ˤ��롼�פ�ȴ���� for �䥤�ƥ졼���� nil
           next val              
 #@end
 
-next�Ϥ�äȤ���¦�Υ롼�פμ��η����֤��˥����פ��ޤ���
-���ƥ졼���Ǥϡ�yield �ƤӽФ���æ�Фˤʤ�ޤ���
+nextはもっとも内側のループの次の繰り返しにジャンプします。
+イテレータでは、yield 呼び出しの脱出になります。
 
-next �ˤ��ȴ���� yield ���� nil ���֤��ޤ���
+next により抜けた yield 式は nil を返します。
 #@since 1.8.0
-����������������ꤷ����硢yield ��������ͤϤ��ΰ����ˤʤ�ޤ���
+ただし、引数を指定した場合、yield 式の戻り値はその引数になります。
 #@end
 
 ====[a:redo] redo
 
-��:
+例:
 
           redo
 
-ʸˡ:
+文法:
 
           redo
 
-�롼�׾��Υ����å���Ԥʤ鷺�����ߤη����֤�����ľ���ޤ���
+ループ条件のチェックを行なわず、現在の繰り返しをやり直します。
 
 ====[a:retry] retry
 
-��:
+例:
 
           retry
 
-ʸˡ:
+文法:
 
           retry
 
 #@since 1.9.1
-retry �ϡ�rescue ��� begin ����Ϥ��ᤫ��⤦���ټ¹Ԥ���Τ˻��Ѥ��ޤ���
+retry は、rescue 節で begin 式をはじめからもう一度実行するのに使用します。
 #@else
-���ƥ졼�����֥��å��ޤ���forʸ����ǻȤ�줿���ˤϡ����Υ��ƥ졼��
-��ư���ʤ����ޤ������ƥ졼���ΰ������ɾ������ޤ���
+イテレータ、ブロックまたはfor文の中で使われた場合には、そのイテレータ
+を起動しなおします。イテレータの引数も再評価されます。
 
           for i in 1..5
-            retry if some_condition # i == 1 ������ľ��
+            retry if some_condition # i == 1 からやり直し
           end
 
-          # �桼������� "until�롼��"
+          # ユーザ定義の "untilループ"
           def UNTIL(cond)
             return if cond
             yield
             retry
           end
 
-retry �ϡ��롼�װʳ��˸�Ҥ� rescue ��Ǥ�Ȥ��ޤ������ξ�
-��ϡ�begin ����Ϥᤫ��⤦���ټ¹Ԥ��ޤ���
+retry は、ループ以外に後述の rescue 節でも使えます。この場
+合は、begin 式を始めからもう一度実行します。
 #@end
-retry ��Ȥ����ȤǤ����������������ޤǽ����򷫤��֤��褦�ʥ롼�פ��
-�뤳�Ȥ��Ǥ��ޤ���
+retry を使うことである処理が成功するまで処理を繰り返すようなループを作
+ることができます。
 
           begin
             do_something # exception raised
@@ -502,17 +502,17 @@ retry ��Ȥ����ȤǤ����������������ޤǽ����򷫤��֤��褦�ʥ롼�פ��
           end
 
 #@since 1.9.1
-rescue ��ʳ��� retry ���Ѥ���줿���ˤ��㳰 [[c:SyntaxError]] ��ȯ��
-���ޤ���
+rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]] が発生
+します。
 #@else
-rescue ��䥤�ƥ졼���֥��å���for ʸ�ʳ��� retry ���Ѥ���줿���ˤ�
-�㳰 [[c:LocalJumpError]] ��ȯ�����ޤ���
-((-���뤤�ϡ��������顼�ˤʤäƥ��󥿥ץ꥿����λ���ޤ���
+rescue 節やイテレータブロック、for 文以外で retry が用いられた場合には
+例外 [[c:LocalJumpError]] が発生します。
+((-あるいは、突然エラーになってインタプリタが終了します。
 retry #=> -:1: retry outside of rescue clause-))
 #@end
 
-���ƥ졼���ƤӽФ��ˤ����� break, next, redo,
-retry ��ޤȤ��Ȱʲ��Τ褦�ˤʤ�ޤ���
+イテレータ呼び出しにおける break, next, redo,
+retry をまとめると以下のようになります。
 
         def iter
          (a)
@@ -524,15 +524,15 @@ retry ��ޤȤ��Ȱʲ��Τ褦�ˤʤ�ޤ���
          (d)
         end
 #@until 1.9.0
-        iter { retry }   -> (a) ������
+        iter { retry }   -> (a) へ飛ぶ
 #@end
-        iter { redo  }   -> (b) ������
-        iter { next  }   -> (c) ������
-        iter { break }   -> (d) ������
+        iter { redo  }   -> (b) へ飛ぶ
+        iter { next  }   -> (c) へ飛ぶ
+        iter { break }   -> (d) へ飛ぶ
 
-(a) �ϡ���̩�ˤϰ���ɾ������Ϥޤ�ޤ���(b) �ϥ֥��å��¹Ԥ�ľ����ؤ�
-�Ƥ��ޤ�(yield �ΰ�������ɾ�������櫓�ǤϤʤ�)��(d) �ϡ��᥽�åɤν�
-λ�Ǥ���
+(a) は、厳密には引数評価から始まります。(b) はブロック実行の直前を指し
+ています(yield の引数が再評価されるわけではない)。(d) は、メソッドの終
+了です。
 
         def iter(var = p("(a)"))
           p " : "
@@ -549,50 +549,50 @@ retry ��ޤȤ��Ȱʲ��Τ褦�ˤʤ�ޤ���
         iter { p "(b)"; next  }     # => (a) .. (b)(c) .. (d)
         iter { p "(b)"; break }     # => (a)..(b)(d)
 
-((-���餤 2002-01-13: ensure �����æ�Ф���ޤ���Τ� retry �� (d)
-������Ǥ��뤢�ޤ��ɤ��㤸��ʤ���-))
+((-あらい 2002-01-13: ensure は大域脱出を捕まえるので retry が (d)
+に飛んでいるあまり良い例じゃないか-))
 
-=== �㳰����
+=== 例外処理
 
 ====[a:raise] raise
 
-��:
+例:
 
-          raise "you lose"  # �㳰 RuntimeError ��ȯ��������
-          # �ʲ�����Ĥ� SyntaxError ��ȯ��������
+          raise "you lose"  # 例外 RuntimeError を発生させる
+          # 以下の二つは SyntaxError を発生させる
           raise SyntaxError, "invalid syntax"
           raise SyntaxError.new("invalid syntax")
-          raise             # �Ǹ���㳰�κ�ȯ��
+          raise             # 最後の例外の再発生
 
-ʸˡ:
+文法:
 
           raise
-          raise message�ޤ���exception
+          raise messageまたはexception
           raise error_type, message
           raise error_type, message, traceback
 
-�㳰��ȯ�������ޤ������η����Ǥ�ľ�����㳰���ȯ�������ޤ���
-����η����Ǥϡ�������ʸ����Ǥ��ä���硢����ʸ������å���
-���Ȥ��� [[c:RuntimeError]] �㳰��ȯ�������ޤ����������㳰
-���֥������ȤǤ��ä����ˤϤ����㳰��ȯ�������ޤ����軰�η���
-�Ǥ��������ǻ��ꤵ�줿�㳰������������å������Ȥ���ȯ����
-���ޤ�����ͤη������軰������
-[[m:$@]]�ޤ���
-[[m:Kernel.#caller]]��������
-�����å�����ǡ��㳰��ȯ���������򼨤��ޤ���
+例外を発生させます。第一の形式では直前の例外を再発生させます。
+第二の形式では、引数が文字列であった場合、その文字列をメッセー
+ジとする [[c:RuntimeError]] 例外を発生させます。引数が例外
+オブジェクトであった場合にはその例外を発生させます。第三の形式
+では第一引数で指定された例外を、第二引数をメッセージとして発生さ
+せます。第四の形式の第三引数は
+[[m:$@]]または
+[[m:Kernel.#caller]]で得られる
+スタック情報で、例外が発生した場所を示します。
 
-ȯ�������㳰�ϸ�Ҥ� begin ���� rescue �����館�뤳�Ȥ��Ǥ��ޤ���
-���ξ�� rescue error_type => var �η�����Ȥ���
-�㳰���֥������Ȥ������ޤ������Υ��֥������Ȥ��Ȥ߹���
-�ѿ� [[m:$!]] �Ǥ������ޤ����ޤ��㳰��
-ȯ�����������������ɾ�ΰ��֤��ѿ� [[m:$@]] �˳�Ǽ����ޤ���
+発生した例外は後述の begin 式の rescue 節で捕らえることができます。
+その場合 rescue error_type => var の形式を使えば
+例外オブジェクトを得られます。このオブジェクトは組み込み
+変数 [[m:$!]] でも得られます。また例外が
+発生したソースコード上の位置は変数 [[m:$@]] に格納されます。
 
-[[m:Kernel.#raise]] �� Ruby ��ͽ���ǤϤʤ���[[c:Kernel]] �⥸�塼���
-�������Ƥ���ؿ�Ū�᥽�åɤǤ���
+[[m:Kernel.#raise]] は Ruby の予約語ではなく、[[c:Kernel]] モジュールで
+定義されている関数的メソッドです。
 
 ====[a:begin] begin
 
-��:
+例:
 
           begin
             do_something
@@ -602,24 +602,24 @@ retry ��ޤȤ��Ȱʲ��Τ褦�ˤʤ�ޤ���
             must_to_do
           end
 
-ʸˡ:
+文法:
 
           begin
-            ��..
+            式..
           [rescue [error_type,..] [=> evar] [then]
-            ��..]..
+            式..]..
           [else
-            ��..]
+            式..]
           [ensure
-            ��..]
+            式..]
           end
 
-���Τμ¹�����㳰��ȯ��������硢rescue ��(ʣ������Ǥ��ޤ�)��
-Ϳ�����Ƥ�����㳰����ª�Ǥ��ޤ���ȯ�������㳰�Ȱ��פ���
-rescue �᤬¸�ߤ�����ˤ� rescue ������Τ��¹Ԥ���ޤ���
-ȯ�������㳰�� [[m:$!]] ��Ȥäƻ��Ȥ��뤳�Ȥ��Ǥ��ޤ����ޤ���
-���ꤵ��Ƥ�����ѿ� evar �ˤ� $! ��Ʊ�ͤ�ȯ�������㳰����
-Ǽ����ޤ���
+本体の実行中に例外が発生した場合、rescue 節(複数指定できます)が
+与えられていれば例外を捕捉できます。発生した例外と一致する
+rescue 節が存在する時には rescue 節の本体が実行されます。
+発生した例外は [[m:$!]] を使って参照することができます。また、
+指定されていれば変数 evar にも $! と同様に発生した例外が格
+納されます。
 
         begin
           raise "error message"
@@ -630,65 +630,65 @@ rescue �᤬¸�ߤ�����ˤ� rescue ������Τ��¹Ԥ���ޤ���
         # => #<RuntimeError: error message>
              #<RuntimeError: error message>
 
-�㳰�ΰ���Ƚ��ϡ�ȯ�������㳰�� rescue ��ǻ��ꤷ��
-���饹�Υ��󥹥��󥹤Ǥ��뤫�ɤ����ǹԤ��ޤ��� 
+例外の一致判定は，発生した例外が rescue 節で指定した
+クラスのインスタンスであるかどうかで行われます。 
 
-error_type ����ά���줿���� [[c:StandardError]] �Υ��֥��饹�Ǥ�
-�����Ƥ��㳰����ª���ޤ���Ruby���Ȥ߹����㳰��([[c:SystemExit]] ��
-[[c:Interrupt]] �Τ褦��æ�Ф���Ū�Ȥ�����Τ������)
-[[c:StandardError]] �Υ��֥��饹�Ǥ���
+error_type が省略された時は [[c:StandardError]] のサブクラスであ
+る全ての例外を捕捉します。Rubyの組み込み例外は([[c:SystemExit]] や
+[[c:Interrupt]] のような脱出を目的としたものを除いて)
+[[c:StandardError]] のサブクラスです。
 
-�㳰���饹�Υ��饹���ؤˤĤ��Ƥ�
-[[unknown:�Ȥ߹��ߥ��饹���⥸�塼�롿�㳰���饹/�㳰���饹]]
-�򻲾Ȥ��Ƥ���������
+例外クラスのクラス階層については
+[[unknown:組み込みクラス／モジュール／例外クラス/例外クラス]]
+を参照してください。
 
-rescue �Ǥ� error_type ���̾�ΰ�����Ʊ���褦��ɾ�����졢
-���Τ����줫�����פ�������Τ��¹Ԥ���ޤ���error_type ��ɾ����
-���ͤ����饹��⥸�塼��Ǥʤ����ˤ��㳰 [[c:TypeError]] ��ȯ������
-����
+rescue では error_type は通常の引数と同じように評価され、
+そのいずれかが一致すれば本体が実行されます。error_type を評価し
+た値がクラスやモジュールでない場合には例外 [[c:TypeError]] が発生しま
+す。
 
-��ά��ǽ�� else ��ϡ����Τμ¹Ԥˤ�ä��㳰��ȯ�����ʤ��ä����
-��ɾ������ޤ���
+省略可能な else 節は、本体の実行によって例外が発生しなかった場合
+に評価されます。
 
-ensure �᤬¸�ߤ������ begin ����λ����ľ����ɬ��
-ensure ������Τ�ɾ�����ޤ���
+ensure 節が存在する時は begin 式を終了する直前に必ず
+ensure 節の本体を評価します。
 
-begin�����Τ�ɾ���ͤϡ����Ρ�rescue�᡿else��Τ���
-�Ǹ��ɾ�����줿ʸ���ͤǤ����ޤ�����ˤ�����ʸ��¸�ߤ��ʤ��ä��Ȥ�����
-��nil�Ǥ���������ˤ��Ƥ�ensure����ͤ�̵�뤵��ޤ���
+begin式全体の評価値は、本体／rescue節／else節のうち
+最後に評価された文の値です。また各節において文が存在しなかったときの値
+はnilです。いずれにしてもensure節の値は無視されます。
 
-==== rescue������
+==== rescue修飾子
 
-��:
+例:
           open("nonexistent file") rescue STDERR.puts "Warning: #$!"
 
-ʸˡ:
+文法:
 
-          ��1 rescue ��2
+          式1 rescue 式2
 
-��1���㳰��ȯ�������Ȥ�����2��ɾ�����ޤ���
-�ʲ���Ʊ����̣�Ǥ�����ª�����㳰���饹����ꤹ�뤳�ȤϤǤ��ޤ���
-(�Ĥޤꡢ[[c:StandardError]] �㳰���饹�Υ��֥��饹����������ª�Ǥ��ޤ���)
+式1で例外が発生したとき、式2を評価します。
+以下と同じ意味です。捕捉する例外クラスを指定することはできません。
+(つまり、[[c:StandardError]] 例外クラスのサブクラスだけしか捕捉できません)
 
           begin
-            ��1
+            式1
           rescue
-            ��2
+            式2
           end
 
-rescue�����Ҥ�ȼ�������ͤ��㳰��ȯ�����ʤ���м�1���㳰��ȯ������м�2
-�Ǥ���������������ξ�硢ͥ���̤��Թ�ˤ�꼰���Τ��̤ǰϤ�ɬ�פ�
-����ޤ���
+rescue修飾子を伴う式の値は例外が発生しなければ式1、例外が発生すれば式2
+です。ただし、大抵の場合、優先順位の都合により式全体を括弧で囲む必要が
+あります。
 
           var = open("nonexistent file") rescue false
           p var
-          => nil      # �ͤ�����ʤ��ѿ� var ��������줿����
+          => nil      # 値を持たない変数 var が定義されただけ
 
           var = (open("nonexistent file") rescue false)
           p var
           => false
 
-�ä˥᥽�åɤΰ������Ϥ�������Ť˳�̤�ɬ�פȤʤ�ޤ���
+特にメソッドの引数に渡す場合は二重に括弧が必要となります。
 
           p(open("nonexistent file") rescue false)
           => parse error
@@ -697,7 +697,7 @@ rescue�����Ҥ�ȼ�������ͤ��㳰��ȯ�����ʤ���м�1���㳰��ȯ������м�2
           => false
 
 #@since 1.8.0
-rescue ��ͥ���٤��ѹ����졢���ο��ۤϤʤ��ʤäƤ��ޤ���
+rescue の優先度が変更され、この心配はなくなっています。
 #@end
 
           var = open("nonexistent file") rescue false
@@ -707,43 +707,43 @@ rescue ��ͥ���٤��ѹ����졢���ο��ۤϤʤ��ʤäƤ��ޤ���
           p(open("nonexistent file") rescue false)
           => false
 
-=== ����¾
+=== その他
 
 ====[a:return] return
 
-��:
+例:
 
           return
           return 12
           return 1,2,3
 
-ʸˡ:
+文法:
 
-          return [��[`,' �� ... ]]
+          return [式[`,' 式 ... ]]
 
-�����ͤ�����ͤȤ��ƥ᥽�åɤμ¹Ԥ�λ���ޤ�������2�İʾ�
-Ϳ����줿���ˤϡ����������ǤȤ��������᥽�åɤ�����ͤ�
-���ޤ���������ά���줿���ˤ� nil ������ͤȤ��ޤ���
+式の値を戻り値としてメソッドの実行を終了します。式が2つ以上
+与えられた時には、それらを要素とする配列をメソッドの戻り値と
+します。式が省略された場合には nil を戻り値とします。
 
 ====[a:BEGIN] BEGIN
 
-��:
+例:
 
           BEGIN {
              ...
           }
 
-ʸˡ:
+文法:
 
-          BEGIN '{' ʸ.. '}'
+          BEGIN '{' 文.. '}'
 
-������롼�������Ͽ���ޤ���BEGIN�֥��å��ǻ��ꤷ��ʸ�������ե�
-����Τɤ�ʸ���¹Ԥ���������˼¹Ԥ���ޤ���ʣ����BEGIN������
-���줿���ˤϻ��ꤵ�줿��˼¹Ԥ���ޤ���
+初期化ルーチンを登録します。BEGINブロックで指定した文は当該ファ
+イルのどの文が実行されるより前に実行されます。複数のBEGINが指定
+された場合には指定された順に実行されます。
 
-BEGIN�֥��å��ϥ���ѥ��������Ͽ����ޤ���
+BEGINブロックはコンパイル時に登録されます。
 #@until 1.9.1
-¨����Ĥε��ҤˤĤ�������������Ͽ���Ԥ��ޤ���
+即ち一つの記述につきただ一回だけ登録が行われます。
 
         if false
           BEGIN { p "begin" }
@@ -752,16 +752,16 @@ BEGIN�֥��å��ϥ���ѥ��������Ͽ����ޤ���
         # => "begin"
 
 #@end
-BEGIN�֥��å�����Ω�������������ѿ��Υ������פ�Ƴ�����뤿�ᡢ����
-�����ѿ������ȶ�ͭ�Ǥ��ޤ��󡣥֥��å��γ��Ⱦ������ã����ˤ������
-�������Х��ѿ��ʤɤ�𤹤�ɬ�פ�����ޤ���
+BEGINブロックは独立したローカル変数のスコープを導入するため、ロー
+カル変数を外部と共有できません。ブロックの外と情報を伝達するには定数や
+グローバル変数などを介する必要があります。
 
         BEGIN { $foo, foo = true, true }
         p $foo  # => true
         p foo   # undefined local variable or method `foo' for main:Object (NameError)
 
 #@since 1.9.1
-BEGIN�ϥȥåץ�٥�ʳ��ǤϽ񤱤ޤ������� [[c:SyntaxError]]�ˤʤ�ޤ���
+BEGINはトップレベル以外では書けません。全て [[c:SyntaxError]]になります。
 
         def foo
           BEGIN { p "begin" }
@@ -779,7 +779,7 @@ BEGIN�ϥȥåץ�٥�ʳ��ǤϽ񤱤ޤ������� [[c:SyntaxError]]�ˤʤ�ޤ���
         # => -e:2: syntax error, unexpected keyword_BEGIN
 
 #@else
-BEGIN�ϥ᥽�å��������ˤϽ񤱤ޤ���parse error �ˤʤ�ޤ���
+BEGINはメソッド定義式中には書けません。parse error になります。
 
         def foo
           BEGIN { p "begin" }
@@ -789,22 +789,22 @@ BEGIN�ϥ᥽�å��������ˤϽ񤱤ޤ���parse error �ˤʤ�ޤ���
 
 ====[a:END] END
 
-��:
+例:
 
           END {
              ...
           }
 
-ʸˡ:
+文法:
 
-          END '{' ʸ.. '}'
+          END '{' 文.. '}'
 
-�ָ�����ץ롼�������Ͽ���ޤ���END �֥��å��ǻ��ꤷ��ʸ�ϥ���
-�ץ꥿����λ������˼¹Ԥ���ޤ���Ruby �ν�λ�������ˤĤ��ƾܤ�����
-[[d:spec/terminate]]�򻲾Ȥ��Ƥ���������
+「後始末」ルーチンを登録します。END ブロックで指定した文はインタ
+プリタが終了する時に実行されます。Ruby の終了時処理について詳しくは
+[[d:spec/terminate]]を参照してください。
 
-ʣ���� END �֥��å�����Ͽ�������ϡ���Ͽ�����Ȥ��ȵդν���Ǽ�
-�Ԥ���ޤ���
+複数の END ブロックを登録した場合は、登録したときと逆の順序で実
+行されます。
 
         END { p 1 }
         END { p 2 }
@@ -814,20 +814,20 @@ BEGIN�ϥ᥽�å��������ˤϽ񤱤ޤ���parse error �ˤʤ�ޤ���
              2
              1
 
-END �֥��å��ϰ�Ĥε��ҤˤĤ��ǽ�ΰ��Τ�ͭ���Ǥ������Ȥ��а�
-���Τ褦�˥롼�פ���Ǽ¹Ԥ��Ƥ�ʣ���� END �֥��å�����Ͽ�����
-�櫓�ǤϤ���ޤ��󡣤��Τ褦����Ū�ˤ� [[m:Kernel.#at_exit]] ���
-���ޤ���
+END ブロックは一つの記述につき最初の一回のみ有効です。たとえば以
+下のようにループの中で実行しても複数の END ブロックが登録される
+わけではありません。そのような目的には [[m:Kernel.#at_exit]] を使
+います。
 
         5.times do |i|
           END { p i }
         end
         # => 0
 
-END ��᥽�å��������˽񤯤ȷٹ𤬽Фޤ�
-#@#((-((<ruby 1.8 feature>)): ����� 1.8.1 ���� [[unknown:ruby-dev:21513]]-))��
-�տ�Ū�ˤ��Τ褦�ʤ��Ȥ�Ԥ��������� [[m:Kernel.#at_exit]] ���
-���ޤ���
+END をメソッド定義式中に書くと警告が出ます
+#@#((-((<ruby 1.8 feature>)): これは 1.8.1 から [[unknown:ruby-dev:21513]]-))。
+意図的にこのようなことを行いたい場合は [[m:Kernel.#at_exit]] を使
+います。
 
         def foo
           END { p "end" }
@@ -838,24 +838,24 @@ END ��᥽�å��������˽񤯤ȷٹ𤬽Фޤ�
              nil
              "end"
 
-END �ϡ�BEGIN �Ȥϰۤʤ�¹Ի��˸��������Ͽ���ޤ�����������
-�ơ��ʲ�����Ǥ� END �֥��å��ϼ¹Ԥ���ޤ���
+END は、BEGIN とは異なり実行時に後処理を登録します。したがっ
+て、以下の例では END ブロックは実行されません。
 
         if false
           END { p "end" }
         end
 
-END �� [[m:Kernel.#at_exit]] ����Ͽ�������������ä�����
-�ϤǤ��ޤ���
+END や [[m:Kernel.#at_exit]] で登録した後処理を取り消すこと
+はできません。
 
-END �֥��å��� BEGIN �֥��å��Ȥϰۤʤ���Ϥȥ������פ�ͭ��
-�ޤ������ʤ�����ƥ졼����Ʊ�ͤΥ������פ�����ޤ���
+END ブロックは BEGIN ブロックとは異なり周囲とスコープを共有し
+ます。すなわちイテレータと同様のスコープを持ちます。
 
-END �֥��å������ȯ�������㳰�Ϥ��� END �֥��å������Ǥ�
-�ޤ��������٤Ƥθ�����롼���󤬼¹Ԥ����褦�����󥿥ץ꥿�Ͻ�λ����
-�˥�å�������������Ϥ��ޤ���
+END ブロックの中で発生した例外はその END ブロックを中断し
+ますが、すべての後始末ルーチンが実行されるよう、インタプリタは終了せず
+にメッセージだけを出力します。
 
-��:
+例:
 
         END { p "FOO" }
         END { raise "bar"; p "BAR" }

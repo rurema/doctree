@@ -1,4 +1,4 @@
-Mix-in ¤Ë¤è¤êºÆÆş²ÄÇ½¤Ê reader/writer ¥í¥Ã¥¯µ¡Ç½¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Mix-in ã«ã‚ˆã‚Šå†å…¥å¯èƒ½ãª reader/writer ãƒ­ãƒƒã‚¯æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(sync/Sync)
 #@include(sync/Sync_m)

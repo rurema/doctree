@@ -1,80 +1,80 @@
 
 = class OpenSSL::Netscape::SPKI < Object
 
-Netscape SPKI¡¢¤â¤·¤¯¤Ï SPKAC(Signed Public Key And Challenge) ¤È¸Æ¤Ğ¤ì¤ë
-¥Ç¡¼¥¿¥Õ¥©¡¼¥Ş¥Ã¥È¤ò°·¤¦¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Netscape SPKIã€ã‚‚ã—ãã¯ SPKAC(Signed Public Key And Challenge) ã¨å‘¼ã°ã‚Œã‚‹
+ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æ‰±ã†ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 --- new() -> OpenSSL::Netscape::SPKI
 --- new(buf) -> OpenSSL::Netscape::SPKI
 
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-Ê¸»úÎó¤òÅÏ¤¹¤È¡¢PEM ·Á¼°¡¢¤â¤·¤¯¤Ï DER ·Á¼°¤Î¥Ç¡¼¥¿¤È¤ß¤Ê¤·¡¢
-¤½¤ÎÆâÍÆ¤òÆÉ¤ß¹ş¤ß¤Ş¤¹¡£
+æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ã€PEM å½¢å¼ã€ã‚‚ã—ãã¯ DER å½¢å¼ã®ãƒ‡ãƒ¼ã‚¿ã¨ã¿ãªã—ã€
+ãã®å†…å®¹ã‚’èª­ã¿è¾¼ã¿ã¾ã™ã€‚
 
-@param buf SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¤¿¤á¤ÎÊ¸»úÎó¥Ç¡¼¥¿
-@raise OpenSSL::Netscape::SPKIError ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÀ¸À®¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param buf SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹ãŸã‚ã®æ–‡å­—åˆ—ãƒ‡ãƒ¼ã‚¿
+@raise OpenSSL::Netscape::SPKIError ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 == Instance Methods
 
 --- challenge -> String
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤ËÀßÄê¤µ¤ì¤¿¥Á¥ã¥ì¥ó¥¸Ê¸»úÎó¤òÊÖ¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¨­å®šã•ã‚ŒãŸãƒãƒ£ãƒ¬ãƒ³ã‚¸æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-@raise OpenSSL::Netscape::SPKIError Ê¸»úÎó¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@raise OpenSSL::Netscape::SPKIError æ–‡å­—åˆ—ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::Netscape::SPKI#challenge=]]
 
 --- challenge=(chg)
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤Ë¥Á¥ã¥ì¥ó¥¸Ê¸»úÎó¤òÀßÄê¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ãƒãƒ£ãƒ¬ãƒ³ã‚¸æ–‡å­—åˆ—ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param chg ÀßÄê¤¹¤ëÊ¸»úÎó
-@raise OpenSSL::Netscape::SPKIError Ê¸»úÎó¤ÎÀßÄê¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param chg è¨­å®šã™ã‚‹æ–‡å­—åˆ—
+@raise OpenSSL::Netscape::SPKIError æ–‡å­—åˆ—ã®è¨­å®šã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::Netscape::SPKI#challenge]]
 
 --- public_key -> OpenSSL::PKey::PKey
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤ËÀßÄê¤µ¤ì¤¿¸ø³«¸°¤òÊÖ¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¨­å®šã•ã‚ŒãŸå…¬é–‹éµã‚’è¿”ã—ã¾ã™ã€‚
 
-@raise OpenSSL::Netscape::SPKIError ¸ø³«¸°¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@raise OpenSSL::Netscape::SPKIError å…¬é–‹éµãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::Netscape::SPKI#public_key=]]
 
 --- public_key=(pubkey)
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤Ë¸ø³«¸°¤òÀßÄê¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å…¬é–‹éµã‚’è¨­å®šã—ã¾ã™ã€‚
 
-@param pubkey ÀßÄê¤¹¤ë¸ø³«¸°([[c:OpenSSL::PKey::PKey]] ¥ª¥Ö¥¸¥§¥¯¥È)
-@raise OpenSSL::Netscape::SPKIError ¸ø³«¸°¤ÎÀßÄê¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param pubkey è¨­å®šã™ã‚‹å…¬é–‹éµ([[c:OpenSSL::PKey::PKey]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
+@raise OpenSSL::Netscape::SPKIError å…¬é–‹éµã®è¨­å®šã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::Netscape::SPKI#public_key]]
 
 --- sign(key, digest) -> self
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤Ë½ğÌ¾¤ò¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ç½²åã‚’ã—ã¾ã™ã€‚
 
-@param key ½ğÌ¾¤Ë»È¤¦ÈëÌ©¸°([[c:OpenSSL::PKey::PKey]] ¥ª¥Ö¥¸¥§¥¯¥È)
-@param digest ½ğÌ¾¤Ë»È¤¦¥À¥¤¥¸¥§¥¹¥È´Ø¿ô(Ê¸»úÎó¤â¤·¤¯¤Ï [[c:OpenSSL::Digest]] ¥ª¥Ö¥¸¥§¥¯¥È)
-@raise OpenSSL::Netscape::SPKIError ½ğÌ¾¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param key ç½²åã«ä½¿ã†ç§˜å¯†éµ([[c:OpenSSL::PKey::PKey]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
+@param digest ç½²åã«ä½¿ã†ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆé–¢æ•°(æ–‡å­—åˆ—ã‚‚ã—ãã¯ [[c:OpenSSL::Digest]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
+@raise OpenSSL::Netscape::SPKIError ç½²åã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::Netscape::SPKI#verify]]
 
 --- to_der -> String
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤ò DER ·Á¼°¤ÎÊ¸»úÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ DER å½¢å¼ã®æ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 
 --- to_pem -> String
 --- to_s -> String
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤ò PEM ·Á¼°¤ÎÊ¸»úÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ PEM å½¢å¼ã®æ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@raise OpenSSL::Netscape::SPKIError ÊÑ´¹¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@raise OpenSSL::Netscape::SPKIError å¤‰æ›ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 
 --- to_text -> String
-SPKI ¥ª¥Ö¥¸¥§¥¯¥È¤ò¿Í´Ö¤¬ÆÉ¤á¤ë·Á¼°¤ÎÊ¸»úÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£
+SPKI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’äººé–“ãŒèª­ã‚ã‚‹å½¢å¼ã®æ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- verify(key) -> bool
-½ğÌ¾¤ò¸¡¾Ú¤·¤Ş¤¹¡£
+ç½²åã‚’æ¤œè¨¼ã—ã¾ã™ã€‚
 
-¸¡¾Ú¤ËÀ®¸ù¤·¤¿¾ì¹ç¤Ï true ¤òÊÖ¤·¡¢¼ºÇÔ¤·¤¿¾ì¹ç¤Ï false ¤òÊÖ¤·¤Ş¤¹¡£
+æ¤œè¨¼ã«æˆåŠŸã—ãŸå ´åˆã¯ true ã‚’è¿”ã—ã€å¤±æ•—ã—ãŸå ´åˆã¯ false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param key ½ğÌ¾¤Ë»È¤¦¸ø³«¸°([[c:OpenSSL::PKey::PKey]] ¥ª¥Ö¥¸¥§¥¯¥È)
-@raise OpenSSL::Netscape::SPKIError ¸¡¾Ú»ş¤Ë¥¨¥é¡¼¤¬µ¯¤­¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹
+@param key ç½²åã«ä½¿ã†å…¬é–‹éµ([[c:OpenSSL::PKey::PKey]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)
+@raise OpenSSL::Netscape::SPKIError æ¤œè¨¼æ™‚ã«ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:OpenSSL::Netscape::SPKI#sign]]
 
 = class OpenSSL::Netscape::SPKIError < OpenSSL::OpenSSLError
-Netscape SPKI ´ØÏ¢¤Î¥¨¥é¡¼¤¬À¸¤¸¤¿¾ì¹ç¤ËÈ¯À¸¤¹¤ëÎã³°¤Ç¤¹¡£
+Netscape SPKI é–¢é€£ã®ã‚¨ãƒ©ãƒ¼ãŒç”Ÿã˜ãŸå ´åˆã«ç™ºç”Ÿã™ã‚‹ä¾‹å¤–ã§ã™ã€‚
 

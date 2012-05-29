@@ -1,9 +1,9 @@
 = class WIN32OLE_TYPE < Object
 
-WIN32OLE_TYPE���֥������Ȥϡ�������饤�֥���TypeLib�����������줿
-1�Ĥη�������ݻ����ޤ���
+WIN32OLE_TYPEオブジェクトは、型情報ライブラリ（TypeLib）内に定義された
+1つの型情報を保持します。
 
-=== ����ץ륳����
+=== サンプルコード
 
   require 'win32ole'
 
@@ -13,10 +13,10 @@ WIN32OLE_TYPE���֥������Ȥϡ�������饤�֥���TypeLib�����������줿
 
 #@since 1.9.1
 
-Ruby-1.9.1�ʹߡ�[[c:WIN32OLE_TYPELIB]]���֥������Ȥ�
-[[m:WIN32OLE_TYPELIB#ole_types]]�᥽�åɤ����Ѥ��ơ�������饤�֥����
-���������Ƥ��뤹�٤Ƥη������WIN32OLE_TYPE���֥������Ȥ�����Ȥ��Ƽ�
-���Ǥ��ޤ���
+Ruby-1.9.1以降、[[c:WIN32OLE_TYPELIB]]オブジェクトの
+[[m:WIN32OLE_TYPELIB#ole_types]]メソッドを利用して、型情報ライブラリ内
+に定義されているすべての型情報をWIN32OLE_TYPEオブジェクトの配列として取
+得できます。
 
 @see [[c:WIN32OLE_TYPELIB]]
 #@end
@@ -24,56 +24,56 @@ Ruby-1.9.1�ʹߡ�[[c:WIN32OLE_TYPELIB]]���֥������Ȥ�
 == Class Methods
 
 --- new(libname, ole_class) -> WIN32OLE_TYPE
-WIN32OLE_TYPE���֥������Ȥ��������ޤ���
+WIN32OLE_TYPEオブジェクトを生成します。
 
-@param libname ��������TypeLib�Υ쥸���ȥ��Υɥ������ʸ����
-              ��[[m:WIN32OLE_TYPELIB#name]]�ˤޤ���
-               GUID��[[m:WIN32OLE_TYPELIB#guid]]�ˤޤ���TLB�ե�����̾��
-               ʸ����ǻ��ꤷ�ޤ���
-@param ole_class ���������Ф�����̾������ꤷ�ޤ���
-@return ���ꤵ�줿TypeLIb��������줿���ξ�����Ǽ����WIN32OLE_TYPE���֥������Ȥ��֤��ޤ���
-@raise WIN32OLERuntimeError TypeLib�����Ĥ���ޤ��󡣤ޤ���ole_class�ǻ��ꤷ������̤����Ǥ���
+@param libname 生成するTypeLibのレジストリ上のドキュメント文字列
+              （[[m:WIN32OLE_TYPELIB#name]]）または
+               GUID（[[m:WIN32OLE_TYPELIB#guid]]）またはTLBファイル名を
+               文字列で指定します。
+@param ole_class 型情報を取り出す型の名前を指定します。
+@return 指定されたTypeLIbに定義された型の情報を格納したWIN32OLE_TYPEオブジェクトを返します。
+@raise WIN32OLERuntimeError TypeLibが見つかりません。またはole_classで指定した型が未定義です。
 
   excel_app_type = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
   puts excel_app_type.progid # => "Excel.Application.14"
 
 #@if (version < "1.9.0")
-TypeLib���������Ƥ��뤹�٤Ƥη����������ˤϡ�
-[[m:WIN32OLE_TYPE.ole_classes]]�����Ѥ��ޤ���
+TypeLibに定義されているすべての型を取得するには、
+[[m:WIN32OLE_TYPE.ole_classes]]を利用します。
 #@else
-TypeLib���������Ƥ��뤹�٤Ƥη����������ˤϡ�
-[[c:WIN32OLE_TYPELIB]]���֥������Ȥ�[[m:WIN32OLE_TYPELIB#ole_types]]��
-���åɤ����Ѥ��ޤ���
+TypeLibに定義されているすべての型を取得するには、
+[[c:WIN32OLE_TYPELIB]]オブジェクトの[[m:WIN32OLE_TYPELIB#ole_types]]メ
+ソッドを利用します。
 #@end
 
 --- ole_classes(libname) -> [WIN32OLE_TYPE]
-TypeLib���������Ƥ��뤹�٤Ƥη������������ޤ���
+TypeLibで定義されているすべての型情報を取得します。
 
-@param libname ��������TypeLib�Υ쥸���ȥ��Υɥ������ʸ����
-              ��[[m:WIN32OLE_TYPELIB#name]]�ˤޤ���
-               GUID��[[m:WIN32OLE_TYPELIB#guid]]�ˤޤ���TLB�ե�����̾��
-               ʸ����ǻ��ꤷ�ޤ���
-@return TypeLib�˳�Ǽ����Ƥ��뤹�٤Ƥη���[[c:WIN32OLE_TYPE]]���֥������Ȥ�����Ȥ����֤��ޤ���
-@raise WIN32OLERuntimeError �����ǻ��ꤷ��TypeLib�����Ĥ���ޤ���
+@param libname 生成するTypeLibのレジストリ上のドキュメント文字列
+              （[[m:WIN32OLE_TYPELIB#name]]）または
+               GUID（[[m:WIN32OLE_TYPELIB#guid]]）またはTLBファイル名を
+               文字列で指定します。
+@return TypeLibに格納されているすべての型を[[c:WIN32OLE_TYPE]]オブジェクトの配列として返します。
+@raise WIN32OLERuntimeError 引数で指定したTypeLibが見つかりません。
 
    types = WIN32OLE_TYPE.ole_classes('Microsoft Excel 14.0 Object Library')
    classes = types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", ...]
 
 #@since 1.9.1
-Ruby-1.9.1����ϡ�TypeLib���������Ƥ��뤹�٤Ƥη����������ˤϡ�
-[[c:WIN32OLE_TYPELIB]]���֥������Ȥ�[[m:WIN32OLE_TYPELIB#ole_types]]��
-���åɤ����Ѥ��Ƥ���������
+Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得するには、
+[[c:WIN32OLE_TYPELIB]]オブジェクトの[[m:WIN32OLE_TYPELIB#ole_types]]メ
+ソッドを利用してください。
 #@end
 
 --- progids -> [String]
-�����ƥ����Ͽ����Ƥ��뤹�٤ƤΥ���ݡ��ͥ�ȥ��饹��PROGID��������ޤ���
+システムに登録されているすべてのコンポーネントクラスのPROGIDを取得します。
 
-@return �����ƥ����Ͽ����Ƥ��뤹�٤ƤΥ���ݡ��ͥ�ȥ��饹��PROGID��
-        ʸ����������֤��ޤ���
+@return システムに登録されているすべてのコンポーネントクラスのPROGIDを
+        文字列配列で返します。
 
   excel = nil
   WIN32OLE_TYPE.progids.each do |pg|
-    if pg =~ /excel\.application/i   # Excel��PROGID��С������̵��Ǽ��Ф�
+    if pg =~ /excel\.application/i   # ExcelのPROGIDをバージョン無視で取り出す
       excel = WIN32OLE.new(pg)
       break
     end
@@ -86,20 +86,20 @@ Ruby-1.9.1����ϡ�TypeLib���������Ƥ��뤹�٤Ƥη����������ˤϡ�
   # ...
   excel.Quit
 
-PROGID�ϡ�������ǽ��OLE�����ȥ᡼����󥵡��Ф�CoClass�ʥ���ݡ��ͥ��
-���饹�ˤ����ĥ쥸���ȥ���Ͽ̾�Ǥ���[[m:WIN32OLE.new]]�ΰ����˻��ꤷ��
-WIN32OLE���֥������Ȥ������Ǥ��ޤ���
+PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネント
+クラス）が持つレジストリ登録名です。[[m:WIN32OLE.new]]の引数に指定して
+WIN32OLEオブジェクトを生成できます。
 
 --- typelibs -> [String]
-�����ƥ����Ͽ����Ƥ��뤹�٤Ƥ�TypeLib�Υɥ������ʸ�����������ޤ���
+システムに登録されているすべてのTypeLibのドキュメント文字列を取得します。
 
-@return �����ƥ����Ͽ����Ƥ��뤹�٤Ƥ�TypeLib�Υɥ������ʸ�������
-        ����֤��ޤ���
+@return システムに登録されているすべてのTypeLibのドキュメント文字列の配
+        列を返します。
 
 #@since 1.9.1
-Ruby-1.9.1����ϡ����٤Ƥ�TypeLib�Υɥ������ʸ������������ˤϡ�
-[[c:WIN32OLE_TYPELIB]]���֥������Ȥ����Ѥ��ơ��ʲ��Τ褦�˵��Ҥ��Ƥ���
-������
+Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得するには、
+[[c:WIN32OLE_TYPELIB]]オブジェクトを利用して、以下のように記述してくだ
+さい。
 
  WIN32OLE_TYPELIB.typelibs.map {|t| t.name}
 
@@ -108,91 +108,91 @@ Ruby-1.9.1����ϡ����٤Ƥ�TypeLib�Υɥ������ʸ������������ˤϡ�
 == Instance Methods
 
 --- guid -> String | nil
-���η���GUID�ʥ������Х��ռ��̻ҡˤ�������ޤ���
+この型のGUID（グローバル一意識別子）を取得します。
 
-@return GUID��ʸ������֤��ޤ���GUID������ʤ����ξ���nil���֤��ޤ���
+@return GUIDを文字列で返します。GUIDを持たない型の場合はnilを返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
   puts tobj.guid  # => {00024500-0000-0000-C000-000000000046}
 
-GUID�ϡ�COM�Υ��饹���̻�(CLSID)�����󥿡��ե��������̻�(IID)�ʤ�¿����
-�ΰ��Windows��Υ��֥������Ȥμ��̤����Ѥ����128�ӥåȤ��ͤǤ���
+GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(IID)など多数の
+領域でWindows上のオブジェクトの識別に利用される128ビットの値です。
 
 --- helpcontext -> Integer | nil
-���η��˴�Ϣ����إ�ץե�����Υȥԥå�ID�ʥإ�ץ���ƥ����ȡˤ����
-���ޤ���
+この型に関連するヘルプファイルのトピックID（ヘルプコンテキスト）を取得
+します。
 
-@return ���˴�Ϣ����إ�ץ���ƥ����Ȥ��������֤��ޤ����إ�ץ���ƥ�
-        ���Ȥ���Ͽ����Ƥ��ʤ�����nil���֤��ޤ���
+@return 型に関連するヘルプコンテキストを整数で返します。ヘルプコンテキ
+        ストが登録されていない場合はnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    puts tobj.helpcontext # => 131185
 
 --- helpfile -> String | nil
-���֥������Ȥ˴�Ϣ�դ���줿�إ�ץե�����Υե�ѥ�̾��
+オブジェクトに関連付けられたヘルプファイルのフルパス名。
 
-�������֤��줿�إ�ץե������ɽ������ˤϡ�
-[[m:WIN32OLE#ole_show_help]]�᥽�åɤ�ƤӽФ��ޤ���
+ここで返されたヘルプファイルを表示するには、
+[[m:WIN32OLE#ole_show_help]]メソッドを呼び出します。
 
-���֥������Ȥ��إ�ץե����������ʤ�����nil���֤��ޤ���
+オブジェクトがヘルプファイルを持たない場合はnilを返します。
 
-@return ���֥������Ȥ˴�Ϣ�դ���줿�إ�ץե�����Υե�ѥ�̾��ʸ������֤��ޤ���
-        �إ�ץե����뤬̤����ξ���nil���֤��ޤ���
+@return オブジェクトに関連付けられたヘルプファイルのフルパス名を文字列で返します。
+        ヘルプファイルが未定義の場合はnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    puts tobj.helpfile # => C:\...\VBAXL9.CHM
    WIN32OLE.ole_show_help tobj.helpfile, tobj.helpcontext
-   # ����WIN32OLE.ole_show_help(tobj) �θƤӽФ���˾�ޤ���
+   # 注）WIN32OLE.ole_show_help(tobj) の呼び出しが望ましい
 
-���᥽�åɤ��ե�ѥ�̾���֤��Ƥ⡢�إ�ץե����뤬���󥹥ȡ��뤵��Ƥ�
-�ʤ���礬���뤳�Ȥ����դ��Ƥ���������
+当メソッドがフルパス名を返しても、ヘルプファイルがインストールされてい
+ない場合があることに注意してください。
 
-�ޤ��������ͤ�OLE�����Ф���Ͽ�ͤ򤽤Τޤ����Ѥ��뤿�ᡢRuby�Υѥ�̾����
-�ʥǥ��쥯�ȥ���ڤ�ϡ�/�סˤǤϤʤ���Windows�Υѥ�̾�����ʥǥ��쥯��
-����ڤ�ϡ�\�סˤǤ���
+また、返送値はOLEサーバの登録値をそのまま利用するため、Rubyのパス名形式
+（ディレクトリ区切りは「/」）ではなく、Windowsのパス名形式（ディレクト
+リ区切りは「\」）です。
 
 --- helpstring -> String | nil
-���Υɥ������ʸ�����������ޤ���
+型のドキュメント文字列を取得します。
 
-@return �ɥ������ʸ������֤��ޤ���̤����ξ���nil���֤��ޤ���
+@return ドキュメント文字列を返します。未定義の場合はnilを返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
   p tobj.helpstring   # => "Web Browser interface"
 
-�ɥ������ʸ����ϡ�����ƥ����ȥإ�פʤɤ����Ѳ�ǽ�ʷ��δ�ñ������ʸ�Ǥ���
+ドキュメント文字列は、コンテキストヘルプなどに利用可能な型の簡単な説明文です。
 
 --- major_version -> Integer
-���Υ᥸�㡼�С�������ֹ��������ޤ���
+型のメジャーバージョン番号を取得します。
 
-@return ���Υ᥸�㡼�С�������ֹ���������֤��ޤ���
-@raise WIN32OLERuntimeError ��°�����ɤ߼��˼��Ԥ�������Τ��ޤ���
+@return 型のメジャーバージョン番号を整数で返します。
+@raise WIN32OLERuntimeError 型属性の読み取りに失敗すると通知します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Word 14.0 Object Library', 'Documents')
    p tobj.major_version   # => 8
 
 --- minor_version -> Integer
-���Υޥ��ʡ��С�������ֹ��������ޤ���
+型のマイナーバージョン番号を取得します。
 
-@return ���Υޥ��ʡ��С�������ֹ���������֤��ޤ���
-@raise WIN32OLERuntimeError ��°�����ɤ߼��˼��Ԥ�������Τ��ޤ���
+@return 型のマイナーバージョン番号を整数で返します。
+@raise WIN32OLERuntimeError 型属性の読み取りに失敗すると通知します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Word 14.0 Object Library', 'Documents')
    p tobj.minor_version   # => 5
 
 --- name -> String
 --- to_s
-��̾��������ޤ���
+型名を取得します。
 
-@return ��̾��ʸ������֤��ޤ���
+@return 型名を文字列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
    p tobj.name  # => "Application"
 
 --- ole_methods -> [WIN32OLE_METHOD]
-�������ĥ᥽�åɤΥ᥿�ǡ�����������ޤ���
+型が持つメソッドのメタデータを取得します。
 
-@return �������ĥ᥽�åɤΥ᥿�ǡ�����[[c:WIN32OLE_METHOD]]������Ȥ����֤��ޤ���
-        �᥽�åɤ�����ʤ����϶�������֤��ޤ���
+@return 型が持つメソッドのメタデータを[[c:WIN32OLE_METHOD]]の配列として返します。
+        メソッドを持たない場合は空配列を返します。
 
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
@@ -202,84 +202,84 @@ GUID�ϡ�COM�Υ��饹���̻�(CLSID)�����󥿡��ե��������̻�(IID)�ʤ�¿����
 @see [[c:WIN32OLE_METHOD]]
 
 --- ole_type -> String | nil
-self�η��μ����TYPEKIND�ˤ�������ޤ���
+selfの型の種類（TYPEKIND）を取得します。
 
-@return self�η��μ����ʸ������֤��ޤ������󤬼����Ǥ��ʤ�����nil���֤��ޤ���
+@return selfの型の種類を文字列で返します。情報が取得できない場合はnilを返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
   p tobj.ole_type  # => Class
 
-ole_type�ˤϰʲ�������ޤ���
+ole_typeには以下があります。
 
 : Enum
-  ���ҡ�0��
+  列挙子（0）
 : Record
-  �桼��������ʥ᥽�åɤ�����ʤ���¤�Ρˡ�1��
+  ユーザ定義型（メソッドを持たない構造体）（1）
 : Module
-  �⥸�塼�����Ū�ؿ���ǡ����������ݻ��ˡ�2��
+  モジュール（静的関数やデータだけを保持）（2）
 : Interface
-  COM�Υ��󥿡��ե������ʥ᥽�å�����ν���ˡ�3��
+  COMのインターフェイス（メソッド定義の集合）（3）
 : Dispatch
-  OLE�����ȥ᡼����󥵡��С�4��
+  OLEオートメーションサーバ（4）
 : Class
-  ����ݡ��ͥ�ȥ��饹��Interface��Dispatch�μ����ˡ�5��
+  コンポーネントクラス（InterfaceやDispatchの実装）（5）
 : Alias
-  ¾�η�����̾��6��
+  他の型の別名（6）
 : Union
-  �����Ρ�7��
+  共用体（7）
 : Max
-  ���μ���򼨤�����Τν�ü�ޡ�����8��
+  型の種類を示す列挙体の終端マーカ（8）
 
-Max��TYPEKIND�ν�ü�ޡ����ʤΤǰ�̣������ޤ���
+MaxはTYPEKINDの終端マーカなので意味を持ちません。
 
 @see [[m:WIN32OLE_TYPE#typekind]]
 
 --- progid -> String | nil
-self��PROGID��������ޤ���
+selfのPROGIDを取得します。
 
-PROGID�ϡ�������ǽ��OLE�����ȥ᡼����󥵡��Ф�CoClass�ʥ���ݡ��ͥ��
-���饹�ˤ����ĥ쥸���ȥ���Ͽ̾�Ǥ���[[m:WIN32OLE.new]]�ΰ����˻��ꤷ��
-WIN32OLE���֥������Ȥ������Ǥ��ޤ���
+PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネント
+クラス）が持つレジストリ登録名です。[[m:WIN32OLE.new]]の引数に指定して
+WIN32OLEオブジェクトを生成できます。
 
-@return self��PROGID��ʸ������֤��ޤ���self��PROGID������ʤ����ޤ���
-        CoClass�Ǥʤ�����nil���֤��ޤ���
+@return selfのPROGIDを文字列で返します。selfがPROGIDを持たない、または
+        CoClassでない場合はnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    p tobj.progid   # => "Excel.Application.14"
 
-������ϡ�Excle��Application���饹����Excel.Application.14�פȤ���
-PROGID����Ĥ��Ȥ򼨤��ޤ���
+この例は、ExcleのApplicationクラスが「Excel.Application.14」という
+PROGIDを持つことを示します。
 
 @see [[m:WIN32OLE.new]]
 
 --- src_type -> String | nil
-self��¾�η�����̾�ʤ�С����η�̾��������ޤ���
+selfが他の型の別名ならば、元の型名を取得します。
 
-@return self����̾�ʤ�и��η�̾��ʸ������֤��ޤ�����̾�Ǥʤ����nil��
-        �֤��ޤ���
+@return selfが別名ならば元の型名を文字列で返します。別名でなければnilを
+        返します。
 
    tobj =  WIN32OLE_TYPE.new('Microsoft Office 14.0 Object Library', 'MsoRGBType')
    p tobj.src_type   # => "I4"
 
-������ϡ�Office��MsoRGBType��������դ�32�ӥå�������I4�ˤ���̾���Ȥ�
-�����Ȥ򼨤��ޤ���
+この例は、OfficeのMsoRGBType型は符号付き32ビット整数（I4）の別名だとい
+うことを示します。
 
 --- name -> String
 --- to_s -> String
-self�η�̾��������ޤ���
+selfの型名を取得します。
 
-@return self�η�̾��ʸ������֤��ޤ���
+@return selfの型名を文字列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    p tobj.name   # => "Application"
 
 --- typekind -> Integer
-self�μ���򼨤��ͤ�������ޤ���
+selfの種類を示す値を取得します。
 
-�ͤΰ�̣�ˤĤ��Ƥϡ�[[m:WIN32OLE_TYPE#ole_type]]�򻲾Ȥ��Ƥ���������
+値の意味については、[[m:WIN32OLE_TYPE#ole_type]]を参照してください。
 
-@return ���μ���򼨤����ͤ��֤��ޤ���
-@raise WIN32OLERuntimeError ���μ����TYPEKIND�ˤ�����Ǥ��ʤ��������Τ��ޤ���
+@return 型の種類を示す数値を返します。
+@raise WIN32OLERuntimeError 型の種類（TYPEKIND）を取得できない場合に通知します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Word 14.0 Object Library', 'Documents')
   p tobj.typekind   # => 4
@@ -287,14 +287,14 @@ self�μ���򼨤��ͤ�������ޤ���
 @see [[m:WIN32OLE_TYPE#ole_type]]
 
 --- variables -> [WIN32OLE_VARIABLE]
-���������ѿ���������ޤ���
+型が持つ変数を取得します。
 
-����Enum����󷿡ˤ�桼��������ξ�硢�����ѿ��ξ����
-[[c:WIN32OLE_VARIABLE]]���֥������Ȥ�����Ȥ����֤��ޤ���
+型がEnum（列挙型）やユーザ定義型の場合、メンバ変数の情報を
+[[c:WIN32OLE_VARIABLE]]オブジェクトの配列として返します。
 
-@return ���������ѿ������[[c:WIN32OLE_VARIABLE]]������Ȥ����֤��ޤ���
-        �ѿ�������ʤ����϶�������֤��ޤ���
-@raise WIN32OLERuntimeError ��°���������Ǥ��ʤ��������Τ��ޤ���
+@return 型が持つ変数情報を[[c:WIN32OLE_VARIABLE]]の配列として返します。
+        変数を持たない場合は空配列を返します。
+@raise WIN32OLERuntimeError 型属性が取得できない場合に通知します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
    vars = tobj.variables
@@ -302,7 +302,7 @@ self�μ���򼨤��ͤ�������ޤ���
      puts "#{v.name} = #{v.value}"
    end
 
-�嵭��¹Ԥ���Ȱʲ��ν��Ϥ������ޤ���
+上記を実行すると以下の出力が得られます。
 
      xlChart = -4109
      xlDialogSheet = -4116
@@ -313,79 +313,79 @@ self�μ���򼨤��ͤ�������ޤ���
 @see [[c:WIN32OLE_VARIABLE]]
 
 --- visible? -> bool
-���η�����������Ƥ��뤫�ɤ�����Ȳ񤷤ޤ���
+この型が公開されているかどうかを照会します。
 
-@return ��������Ƥ���п����֤��ޤ���
+@return 公開されていれば真を返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
   p tobj.visible?  # => true
 
 #@since 1.9.1
 --- ole_typelib -> WIN32OLE_TYPELIB | nil
-���η�����Ͽ���Ƥ��뷿����饤�֥���TypeLib�ˤ�������ޤ���
+この型を登録してある型情報ライブラリ（TypeLib）を取得します。
 
-@return ���η�����Ͽ���Ƥ���TypeLib��[[c:WIN32OLE_TYPELIB]]���֥�������
-        �Ȥ����֤��ޤ������Ĥ���ʤ�����nil���֤��ޤ���
+@return この型を登録しているTypeLibを[[c:WIN32OLE_TYPELIB]]オブジェクト
+        として返します。見つからない場合はnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    puts tobj.ole_typelib.name  # => 'Microsoft Excel 14.0 Object Library'
 
 --- implemented_ole_types -> [WIN32OLE_TYPE]
-���η����������륤�󥿡��ե�������������ޤ���
+この型が実装するインターフェイスを取得します。
 
-implemented_ole_types�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
-�ξ�硢���Υ��饹���������Ƥ��뤹�٤ƤΥ��󥿡��ե��������֤��ޤ���
+implemented_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）
+の場合、そのクラスが実装しているすべてのインターフェイスを返します。
 
-@return ���饹���������뤹�٤ƤΥ��󥿡��ե�������[[c:WIN32OLE_TYPE]]��
-        ����Ȥ����֤��ޤ������η������󥿡��ե�������������ʤ����ϡ�
-        ��������֤��ޤ���
+@return クラスが実装するすべてのインターフェイスを[[c:WIN32OLE_TYPE]]の
+        配列として返します。この型がインターフェイスを実装しない場合は、
+        空配列を返します。
 
-@raise WIN32OLERuntimeError ��°���������Ǥ��ʤ��������Τ��ޤ���
+@raise WIN32OLERuntimeError 型属性が取得できない場合に通知します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    tobj.implemented_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
 
 --- source_ole_types -> [WIN32OLE_TYPE]
-�������ĥ��������󥿡��ե�������������ޤ���
+型が持つソースインターフェイスを取得します。
 
-source_ole_types�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹�ˤξ�硢
-���Υ��饹�����ݡ��Ȥ��뤹�٤ƤΥ��������󥿡��ե������ʥ��٥�Ȥ�����
-���Ȥʤ륤�󥿡��ե������ˤ��֤��ޤ���
+source_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、
+そのクラスがサポートするすべてのソースインターフェイス（イベントの通知
+元となるインターフェイス）を返します。
 
-ActiveX����ȥ�����Τ褦�˥��٥�ȡ�[[c:WIN32OLE_EVENT]]�ˤ򥵥ݡ��Ȥ�
-�Ƥ��륳��ݡ��ͥ�ȥ��饹�ξ��ϡ����Υ᥽�åɤθƤӽФ��ˤ�ꥤ�٥�
-�ȥ��󥿡��ե�������Ĵ�٤뤳�Ȥ���ǽ�Ǥ���
+ActiveXコントロールのようにイベント（[[c:WIN32OLE_EVENT]]）をサポートし
+ているコンポーネントクラスの場合は、このメソッドの呼び出しによりイベン
+トインターフェイスを調べることが可能です。
 
-@return ���������󥿡��ե�������[[c:WIN32OLE_TYPE]]������Ȥ����֤��ޤ���
-        ���������󥿡��ե�����������ʤ����϶�������֤��ޤ���
+@return ソースインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。
+        ソースインターフェイスを持たない場合は空配列を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    tobj.source_ole_types.map {|intf| intf.name} #=> ["DocEvents"]
 
 --- default_event_sources -> [WIN32OLE_TYPE]
-�������ĥ��������󥿡��ե�������������ޤ���
+型が持つソースインターフェイスを取得します。
 
-default_event_sources�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
-�ξ�硢���Υ��饹�����ݡ��Ȥ���ǥե���ȤΥ��������󥿡��ե������ʥ�
-�٥�Ȥ����θ��Ȥʤ륤�󥿡��ե������ˤ��֤��ޤ���
+default_event_sourcesメソッドは、selfがCoClass（コンポーネントクラス）
+の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イ
+ベントの通知元となるインターフェイス）を返します。
 
-@return �ǥե���ȤΥ��������󥿡��ե�������[[c:WIN32OLE_TYPE]]�������
-        �����֤��ޤ����֤��Τ�����Ǥ������ǥե���ȤΥ��������󥿡��ե�
-        �����Ϻ���Ǥ�1���󥿡��ե������Ǥ������������󥿡��ե��������
-        ���ʤ����϶�������֤��ޤ���
+@return デフォルトのソースインターフェイスを[[c:WIN32OLE_TYPE]]の配列と
+        して返します。返すのは配列ですが、デフォルトのソースインターフェ
+        イスは最大でも1インターフェイスです。ソースインターフェイスを持
+        たない場合は空配列を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    tobj.default_event_sources.map {|intf| intf.name} #=> ["DocEvents"]
 
-[[m:WIN32OLE_EVENT.new]]�ǥ��󥿡��ե�����̾����ꤷ�ʤ����ϡ�������
-�֤��줿���󥿡��ե����������򤵤�ޤ���
+[[m:WIN32OLE_EVENT.new]]でインターフェイス名を指定しない場合は、ここで
+返されたインターフェイスが選択されます。
 
-���Υ���ץ�ϡ�IE��naviaget2�᥽�åɤˤ�äƤɤΤ褦�ʥ��٥�Ȥ����Τ�
-��뤫�򡢼ºݤ˥᥽�åɸƤӽФ���=���٥�����Ρˤ�ȥ졼������Ĵ�٤��
-�������Ǥ������٥�Ȥ�����դ��뤿��ˡ�
-[[m:WIN32OLE_EVENT.message_loop]]�θƤӽФ���ɬ�פ��������դ��Ƥ���������
-�����ǤϺǽ����٥�Ȥ�StatusTextChange���٥�ȤΥ�å������ˤĤ��Ƥϴ�
-�ΤȤ��Ƥ��ޤ���
+次のサンプルは、IEのnaviaget2メソッドによってどのようなイベントが通知さ
+れるかを、実際にメソッド呼び出し（=イベント通知）をトレースして調べるプ
+ログラムです。イベントを受け付けるために、
+[[m:WIN32OLE_EVENT.message_loop]]の呼び出しが必要な点に注意してください。
+ここでは最終イベントのStatusTextChangeイベントのメッセージについては既
+知としています。
 
  # coding : cp932
  require 'win32ole'
@@ -402,7 +402,7 @@ default_event_sources�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
  source.ole_methods.each do |m|
    WebEvent.module_eval do
      define_method("on#{m.name}") do |*arg|
-       if arg[0] == "�ڡ�����ɽ������ޤ���"
+       if arg[0] == "ページが表示されました"
          @completed = true
        end
        puts "#{Time.now}: #{m.name} was called"
@@ -419,8 +419,8 @@ default_event_sources�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
  end
  ctl.Quit
 
-���Υץ�������¹Ԥ����Windows7��IE8�Ķ��Ǥϰʲ��Τ褦�ʽ��Ϥ������
-�ޤ���
+このプログラムを実行するとWindows7のIE8環境では以下のような出力を得られ
+ます。
 
  2010-10-06 22:33:54 +0900: PropertyChange was called
  ["{265b75c1-4158-11d0-90f6-00c04fd497ea}"]
@@ -435,18 +435,18 @@ default_event_sources�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
  2010-10-06 22:33:54 +0900: CommandStateChange was called
  [1, false]
  2010-10-06 22:33:54 +0900: StatusTextChange was called
- ["www.ruby-lang.org �򸡺����Ƥ��ޤ�"]
+ ["www.ruby-lang.org を検索しています"]
  2010-10-06 22:33:54 +0900: ProgressChange was called
  [100, 10000]
  2010-10-06 22:33:54 +0900: StatusTextChange was called
- ["������ 221.186.184.68 ����³���Ƥ��ޤ�"]
+ ["サイト 221.186.184.68 に接続しています"]
  2010-10-06 22:33:54 +0900: StatusTextChange was called
- ["Web �����Ȥ����Ĥ���ޤ������������ԤäƤ��ޤ�..."]
- �ġ�
+ ["Web サイトが見つかりました。応答を待っています..."]
+ ……
  2010-10-06 22:33:54 +0900: TitleChange was called
- ["���֥������Ȼظ�������ץȸ��� Ruby"]
+ ["オブジェクト指向スクリプト言語 Ruby"]
  2010-10-06 22:33:54 +0900: StatusTextChange was called
- ["�Ե���: http://www.ruby-lang.org/ja/ ..."]
+ ["待機中: http://www.ruby-lang.org/ja/ ..."]
  2010-10-06 22:33:54 +0900: ProgressChange was called
  [10000, 10000]
  2010-10-06 22:33:54 +0900: ProgressChange was called
@@ -458,7 +458,7 @@ default_event_sources�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
  2010-10-06 22:33:54 +0900: DocumentComplete was called
  [#<WIN32OLE:0x438a2f8>, "http://www.ruby-lang.org/ja/"]
  2010-10-06 22:33:54 +0900: StatusTextChange was called
- ["�ڡ�����ɽ������ޤ���"]
+ ["ページが表示されました"]
 
 @see [[m:WIN32OLE_TYPE.new]]
 @see [[m:WIN32OLE_TYPE#progid]]
@@ -469,26 +469,26 @@ default_event_sources�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹��
 @see [[m:WIN32OLE_EVENT.event_loop]]
 
 --- default_ole_types -> [WIN32OLE_TYPE]
-�������ĥǥե���ȤΥ��󥿡��ե�������������ޤ���
+型が持つデフォルトのインターフェイスを取得します。
 
-default_ole_types�᥽�åɤϡ�self��CoClass�ʥ���ݡ��ͥ�ȥ��饹�ˤξ�
-�硢���Υ��饹���������Ƥ���ǥե���ȤΥ��󥿡��ե������ȡ����ݡ��Ȥ�
-�Ƥ���Хǥե���ȤΥ��������󥿡��ե��������֤��ޤ���
+default_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場
+合、そのクラスが実装しているデフォルトのインターフェイスと、サポートし
+ていればデフォルトのソースインターフェイスを返します。
 
-@return �ǥե���ȥ��󥿡��ե�������[[c:WIN32OLE_TYPE]]������Ȥ����֤�
-        �ޤ����ǥե���ȥ��󥿡��ե������ϡ�����Ǥ⡢���饹����ѤΥ�
-        �󥿡��ե�������OLE�����ȥ᡼������ѡˤȡ����٥���ѤΥ�������
-        �󥿡��ե�������2���ǤǤ����ǥե���ȥ��󥿡��ե�����������ʤ�
-        ���϶�������֤��ޤ���
+@return デフォルトインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返し
+        ます。デフォルトインターフェイスは、最大でも、クラス操作用のイ
+        ンターフェイス（OLEオートメーション用）と、イベント用のソースイ
+        ンターフェイスの2要素です。デフォルトインターフェイスを持たない
+        場合は空配列を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    tobj.default_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
 
 --- inspect -> String
-self������Ū��ʸ�����ɽ�����ޤ���
+selfを説明的な文字列で表現します。
 
-@return "#<WIN32OLE_TYPE"��[[m:WIN32OLE_TYPE#to_s]]�η�̤��:�פǷ��
-        ������>�פ��Ĥ���ʸ������֤��ޤ���
+@return "#<WIN32OLE_TYPE"と[[m:WIN32OLE_TYPE#to_s]]の結果を「:」で結合
+        し、「>」で閉じた文字列を返します。
 
    x = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    puts x.inspect #=> #<WIN32OLE_TYPE:Worksheet>

@@ -1,178 +1,178 @@
 require rubygems
 
-����ե�����˽񤫤�Ƥ��� gem ���ޥ�ɤΥ��ץ�����
-���֥������Ȥ���¸���뤿��Υ饤�֥��Ǥ���
+設定ファイルに書かれている gem コマンドのオプションを
+オブジェクトに保存するためのライブラリです。
 
 = class Gem::ConfigFile
 
-����ե�����˽񤫤�Ƥ��� gem ���ޥ�ɤΥ��ץ�����
-���֥������Ȥ���¸���뤿��Υ��饹�Ǥ���
+設定ファイルに書かれている gem コマンドのオプションを
+オブジェクトに保存するためのクラスです。
 
-���Υ��饹�Υ��󥹥��󥹤ϥϥå���Τ褦�˿����񤤤ޤ���
+このクラスのインスタンスはハッシュのように振る舞います。
 
 == Public Instance Methods
 
 --- [](key) -> object
 
-������Ϳ����줿�������б��������������֤��ޤ���
+引数で与えられたキーに対応する設定情報を返します。
 
-@param key ��������������뤿��˻��Ѥ��륭������ꤷ�ޤ���
+@param key 設定情報を取得するために使用するキーを指定します。
 
 --- []=(key, value)
 
-������Ϳ����줿�������б������������򼫿Ȥ���¸���ޤ���
+引数で与えられたキーに対応する設定情報を自身に保存します。
 
-@param key �������򥻥åȤ��뤿��˻��Ѥ��륭������ꤷ�ޤ���
+@param key 設定情報をセットするために使用するキーを指定します。
 
-@param value ���������ͤ���ꤷ�ޤ���
+@param value 設定情報の値を指定します。
 
 --- args -> Array
 
-����ե����륪�֥������Ȥ�Ϳ����줿���ޥ�ɥ饤������Υꥹ�Ȥ��֤��ޤ���
+設定ファイルオブジェクトに与えられたコマンドライン引数のリストを返します。
 
 --- backtrace -> bool
 
-���顼ȯ�����˥Хå��ȥ졼������Ϥ��뤫�ɤ������֤��ޤ���
+エラー発生時にバックトレースを出力するかどうかを返します。
 
-���ξ��ϥХå��ȥ졼������Ϥ��ޤ��������Ǥʤ����ϥХå��ȥ졼������Ϥ��ޤ���
+真の場合はバックトレースを出力します。そうでない場合はバックトレースを出力しません。
 
 --- backtrace=(backtrace)
 
-���顼ȯ�����˥Хå��ȥ졼������Ϥ��뤫�ɤ������ꤷ�ޤ���
+エラー発生時にバックトレースを出力するかどうか設定します。
 
-@param backtrace ������ꤹ��ȥ��顼ȯ�����˥Хå��ȥ졼������Ϥ���褦�ˤʤ�ޤ���
+@param backtrace 真を指定するとエラー発生時にバックトレースを出力するようになります。
 
 --- benchmark -> bool
 
-���ξ��ϥ٥���ޡ�����¹Ԥ��ޤ���
-�����Ǥʤ����ϡ��٥���ޡ�����¹Ԥ��ޤ���
+真の場合はベンチマークを実行します。
+そうでない場合は、ベンチマークを実行しません。
 
 --- benchmark=(benchmark)
 
-�٥���ޡ�����¹Ԥ��뤫�ɤ������ꤷ�ޤ���
+ベンチマークを実行するかどうか設定します。
 
-@param benchmark ������ꤹ��ȥ٥���ޡ�����¹Ԥ���褦�ˤʤ�ޤ���
+@param benchmark 真を指定するとベンチマークを実行するようになります。
 
 --- bulk_threshold -> Integer
 
-������������ɤ����ͤ��֤��ޤ���
-���󥹥ȡ��뤷�Ƥ��ʤ� Gem �����ο��ͤ�ۤ���Ȥ�������������ɤ�Ԥ��ޤ���
+一括ダウンロードの閾値を返します。
+インストールしていない Gem がこの数値を越えるとき一括ダウンロードを行います。
 
 --- bulk_threshold=(bulk_threshold)
 
-������������ɤ����ͤ����ꤷ�ޤ���
+一括ダウンロードの閾値を設定します。
 
-@param bulk_threshold ���ͤ���ꤷ�ޤ���
+@param bulk_threshold 数値を指定します。
 
 --- config_file_name -> String
 
-����ե������̾�����֤��ޤ���
+設定ファイルの名前を返します。
 
 --- each{|key, value| ... } -> Hash
 
-����ե�����γƹ��ܤΥ������ͤ�֥��å������Ȥ���Ϳ����줿�֥��å���ɾ�����ޤ���
+設定ファイルの各項目のキーと値をブロック引数として与えられたブロックを評価します。
 
 --- handle_arguments(arg_list)
 
-���ޥ�ɤ��Ϥ��줿������������ޤ���
+コマンドに渡された引数を処理します。
 
-@param arg_list ���ޥ�ɤ��Ϥ��줿�������������ꤷ�ޤ���
+@param arg_list コマンドに渡された引数の配列を指定します。
 
 --- load_file(file_name) -> object
 
-Ϳ����줿�ե�����̾�Υե����뤬¸�ߤ���� YAML �ե�����Ȥ��ƥ����ɤ��ޤ���
+与えられたファイル名のファイルが存在すれば YAML ファイルとしてロードします。
 
-@param file_name YAML �����ǵ��Ҥ��줿����ե�����̾����ꤷ�ޤ���
+@param file_name YAML 形式で記述された設定ファイル名を指定します。
 
 --- path -> String
 
-Gem ��õ������ѥ����֤��ޤ���
+Gem を探索するパスを返します。
 
 --- path=(path)
 
-Gem ��õ������ѥ��򥻥åȤ��ޤ���
+Gem を探索するパスをセットします。
 
 --- really_verbose -> bool
 
-���Υ᥽�åɤ��֤��ͤ����ξ��� verbose �⡼�ɤ���¿���ξ����ɽ�����ޤ���
+このメソッドの返り値が真の場合は verbose モードよりも多くの情報を表示します。
 
 --- update_sources -> bool
 
-���ξ��� [[c:Gem::SourceInfoCache]] ����󹹿����ޤ���
-�����Ǥʤ����ϡ�����å��夬����Х���å���ξ������Ѥ��ޤ���
+真の場合は [[c:Gem::SourceInfoCache]] を毎回更新します。
+そうでない場合は、キャッシュがあればキャッシュの情報を使用します。
 
 --- update_sources=(update_sources)
 
-[[c:Gem::SourceInfoCache]] ����󹹿����뤫�ɤ������ꤷ�ޤ���
+[[c:Gem::SourceInfoCache]] を毎回更新するかどうか設定します。
 
-@param update_sources ������ꤹ������ [[c:Gem::SourceInfoCache]] �򹹿����ޤ���
+@param update_sources 真を指定すると毎回 [[c:Gem::SourceInfoCache]] を更新します。
 
 --- verbose -> bool | Symbol
 
-�����ν��ϥ�٥���֤��ޤ���
+ログの出力レベルを返します。
 
 @see [[m:Gem::ConfigFile#verbose=]]
 
 --- verbose=(verbose_level)
 
-�����ν��ϥ�٥�򥻥åȤ��ޤ���
+ログの出力レベルをセットします。
 
-�ʲ��ν��ϥ�٥�����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+以下の出力レベルを設定することができます。
 
 : false
-  ������Ϥ��ޤ���
+  何も出力しません。
 : true
-  �̾�Υ�������Ϥ��ޤ���
+  通常のログを出力します。
 : :loud
-  ���¿���Υ�������Ϥ��ޤ���
+  より多くのログを出力します。
 
-@param verbose_level �����ͤޤ��ϥ���ܥ����ꤷ�ޤ���
+@param verbose_level 真偽値またはシンボルを指定します。
 
 --- write
 #@# -> discard
 
-���Ȥ��ɤ߹��������ե������񤭴����ޤ���
+自身を読み込んだ設定ファイルを書き換えます。
 
 == Protected Instance Methods
 
 --- hash -> Hash
 
-����ե�����γƹ��ܤΥ������ͤ����ǤȤ��ƻ��ĥϥå���Ǥ���
+設定ファイルの各項目のキーと値を要素として持つハッシュです。
 
 == Constants
 
 --- DEFAULT_BACKTRACE -> false
 
-�Хå��ȥ졼����ɽ������뤫�ɤ����Υǥե�����ͤǤ���
+バックトレースが表示されるかどうかのデフォルト値です。
 
 --- DEFAULT_BENCHMARK -> false
 
-�٥���ޡ�����¹Ԥ��뤫�ɤ����Υǥե�����ͤǤ���
+ベンチマークを実行するかどうかのデフォルト値です。
 
 --- DEFAULT_BULK_THRESHOLD -> 1000
 
-������������ɤ򤹤뤫�ɤ����Υǥե�����ͤǤ���
+一括ダウンロードをするかどうかのデフォルト値です。
 
 --- DEFAULT_UPDATE_SOURCES -> true
 
-��� [[c:Gem::SourceInfoCache]] �򹹿����뤫�ɤ����Υǥե�����ͤǤ���
+毎回 [[c:Gem::SourceInfoCache]] を更新するかどうかのデフォルト値です。
 
 --- DEFAULT_VERBOSITY -> true
 
-������٥�Υǥե�����ͤǤ���
+ログレベルのデフォルト値です。
 
 --- OPERATING_SYSTEM_DEFAULTS -> {}
 
-Ruby ��ѥå������󥰤��Ƥ���ͤ��ǥե���Ȥ������ͤ򥻥åȤ��뤿��˻��Ѥ��ޤ���
+Ruby をパッケージングしている人がデフォルトの設定値をセットするために使用します。
 
-���Ѥ���ե������ rubygems/defaults/operating_system.rb �Ǥ���
+使用するファイルは rubygems/defaults/operating_system.rb です。
 
 --- PLATFORM_DEFAULTS -> {}
 
-Ruby �μ����Ԥ��ǥե���Ȥ������ͤ򥻥åȤ��뤿��˻��Ѥ��ޤ���
+Ruby の実装者がデフォルトの設定値をセットするために使用します。
 
-���Ѥ���ե������ rubygems/defaults/#{RUBY_ENGINE}.rb �Ǥ���
+使用するファイルは rubygems/defaults/#{RUBY_ENGINE}.rb です。
 
 --- SYSTEM_WIDE_CONFIG_FILE -> String
 
-�����ƥ����Τ�����ե�����Υѥ��Ǥ���
+システム全体の設定ファイルのパスです。

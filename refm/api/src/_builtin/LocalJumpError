@@ -1,20 +1,20 @@
 = class LocalJumpError < StandardError
 
-¤¢¤ë [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÎºîÀ®¸µ¥¹¥³¡¼¥×¤¬¤¹¤Ç¤Ë½ªÎ»¤·¤Æ¤¤¤ë¤È¤­¡¢
-¤½¤Î [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥ÈÆâ¤Ç
-return, break, retry ¤Î¤¤¤º¤ì¤«¤ò¼Â¹Ô¤¹¤ë¤ÈÈ¯À¸¤·¤Þ¤¹¡£
+ã‚ã‚‹ [[c:Proc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆå…ƒã‚¹ã‚³ãƒ¼ãƒ—ãŒã™ã§ã«çµ‚äº†ã—ã¦ã„ã‚‹ã¨ãã€
+ãã® [[c:Proc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå†…ã§
+return, break, retry ã®ã„ãšã‚Œã‹ã‚’å®Ÿè¡Œã™ã‚‹ã¨ç™ºç”Ÿã—ã¾ã™ã€‚
 
-[[c:Proc]] ¤ÎÎã¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[c:Proc]] ã®ä¾‹ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
 == Instance Methods
 
 #@since 1.8.0
 --- exit_value -> object
 
-Îã³° LocalJumpError ¤òÈ¯À¸¤¹¤ë¸¶°ø¤È¤Ê¤Ã¤¿
-break ¤ä return ¤ËÅÏ¤·¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+ä¾‹å¤– LocalJumpError ã‚’ç™ºç”Ÿã™ã‚‹åŽŸå› ã¨ãªã£ãŸ
+break ã‚„ return ã«æ¸¡ã—ãŸå€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   def foo
     proc { return 10 }
@@ -38,9 +38,9 @@ break ¤ä return ¤ËÅÏ¤·¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- reason -> Symbol
 
-Îã³°¤òÈ¯À¸¤µ¤»¤¿¸¶°ø¤ò¥·¥ó¥Ü¥ë¤ÇÊÖ¤·¤Þ¤¹¡£
+ä¾‹å¤–ã‚’ç™ºç”Ÿã•ã›ãŸåŽŸå› ã‚’ã‚·ãƒ³ãƒœãƒ«ã§è¿”ã—ã¾ã™ã€‚
 
-ÊÖ¤¹ÃÍ¤Ï°Ê²¼¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
+è¿”ã™å€¤ã¯ä»¥ä¸‹ã®ã„ãšã‚Œã‹ã§ã™ã€‚
 
   * :break
   * :redo
@@ -49,7 +49,7 @@ break ¤ä return ¤ËÅÏ¤·¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
   * :return
 #@#       * :noreason
 
-Îã:
+ä¾‹:
 
   def foo
     proc { return 10 }

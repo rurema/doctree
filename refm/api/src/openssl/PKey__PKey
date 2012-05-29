@@ -1,66 +1,66 @@
 = module OpenSSL::PKey
-�������Ź��Ϣ�򽸤᤿�⥸�塼��Ǥ���
+公開鍵暗号関連を集めたモジュールです。
 
 = class OpenSSL::PKey::PKey < Object
 
-�������Ź�Τ������ݥ��饹�Ǥ���
+公開鍵暗号のための抽象クラスです。
 
-�ʲ��Υ��֥��饹������ޤ���
+以下のサブクラスを持ちます。
   * [[c:OpenSSL::PKey::RSA]]
   * [[c:OpenSSL::PKey::DSA]]
   * [[c:OpenSSL::PKey::DH]]
   * [[c:OpenSSL::PKey::EC]]
 
-��:
+例:
 
   require "openssl"
-  # ��̾�Ѥθ��򿷵�����
+  # 署名用の鍵を新規作成
   dsa512 = OpenSSL::PKey::DSA.new(512)
   data = 'hoge'
-  # ��̾
+  # 署名
   sign = dsa512.sign("dss1", data)
-  # ��̾�θ���
+  # 署名の検証
   p dsa512.verify(dss1, sign, data)
 
 == Instance Methods
 
 --- sign(digest, data) -> String
-��̩���� data �˽�̾������̾��ʸ������֤��ޤ���
+秘密鍵で data に署名し、署名の文字列を返します。
 
-digest �����Ѥ���ϥå���ؿ���̾���� "sha256" �� "md5" 
-�Ȥ��ä�ʸ����ǻ��ꤷ�ޤ���
+digest は利用するハッシュ関数の名前を "sha256" や "md5" 
+といった文字列で指定します。
 
-DSA �ǽ�̾�򤹤���ϥϥå���ؿ��ˤ� "dss1" ����ꤷ�Ƥ���������
+DSA で署名をする場合はハッシュ関数には "dss1" を指定してください。
 
-@param digest ���Ѥ���ϥå���ؿ���̾��
-@param data ��̾����ʸ����
-@raise OpenSSL::PKey::PKeyError ��̾���˥��顼������������ȯ�����ޤ�
+@param digest 利用するハッシュ関数の名前
+@param data 署名する文字列
+@raise OpenSSL::PKey::PKeyError 署名時にエラーが起きた場合に発生します
 
 --- verify(digest, sign, data) -> bool
-data ����̩���ǽ�̾�������ν�̾ʸ���� sign 
-�Ǥ��뤳�Ȥ��������ȤäƸ��ڤ������ڤ���������� true
-���֤��ޤ���
+data を秘密鍵で署名したその署名文字列が sign 
+であることを公開鍵を使って検証し、検証に成功すれば true
+を返します。
 
-digest �����Ѥ���ϥå���ؿ���̾���� "sha256" �� "md5" 
-�Ȥ��ä�ʸ����ǻ��ꤷ�ޤ���
+digest は利用するハッシュ関数の名前を "sha256" や "md5" 
+といった文字列で指定します。
 
-DSA �Ǹ��ڤ򤹤���ϥϥå���ؿ��ˤ� "dss1" ����ꤷ�Ƥ���������
+DSA で検証をする場合はハッシュ関数には "dss1" を指定してください。
 
-���ڤ˼��Ԥ������Ĥޤ��̾���Ȱۤʤ�ϥå���ؿ���Ȥä���
-sign ����������̾�Ǥʤ��ä����ʤɤ� false ���֤��ޤ���
+検証に失敗した、つまり署名時と異なるハッシュ関数を使った、
+sign が正しい署名でなかった場合などは false を返します。
 
-@param digest ���Ѥ���ϥå���ؿ���̾��
-@param sign ���ڤ����Ѥ����̾ʸ����
-@param data �����оݤ�ʸ����
-@raise OpenSSL::PKey::PKeyError ���ڻ��˥��顼������������ȯ�����ޤ���
-       ��������̾�Ǥʤ��ä����ʤɡ����ڤ˼��Ԥ������Ϥ���
-       �㳰��ȯ�����ʤ����Ȥ����դ��Ƥ�������
+@param digest 利用するハッシュ関数の名前
+@param sign 検証に利用する署名文字列
+@param data 検証対象の文字列
+@raise OpenSSL::PKey::PKeyError 検証時にエラーが起きた場合に発生します。
+       正しい署名でなかった場合など、検証に失敗した場合はこの
+       例外は発生しないことに注意してください
 
 #@until 1.8.2
 --- to_der -> String
-DER ������ʸ������Ѵ����ޤ���
+DER 形式の文字列に変換します。
 
 #@end
 
 = class OpenSSL::PKey::PKeyError < OpenSSL::OpenSSLError
-OpenSSL �θ�������Ϣ�Υ��顼�ξ���ȯ�������㳰
+OpenSSL の公開鍵関連のエラーの場合に発生する例外

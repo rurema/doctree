@@ -1,16 +1,16 @@
 require rubygems/indexer
 
-[[c:Marshal]] ·Á¼°¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¤òºîÀ®¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+[[c:Marshal]] å½¢å¼ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä½œæˆã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Gem::Indexer::MarshalIndexBuilder < Gem::Indexer::MasterIndexBuilder
 
-[[c:Marshal]] ·Á¼°¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¤òºîÀ®¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+[[c:Marshal]] å½¢å¼ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä½œæˆã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Public Instance Methods
 
 --- end_index
 #@# -> discard
-¼èÆÀ¤·¤¿¥¤¥ó¥Ç¥Ã¥¯¥¹¤ò¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹ş¤ß¤Ş¤¹¡£
+å–å¾—ã—ãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãè¾¼ã¿ã¾ã™ã€‚
 
 @see [[m:Gem::Indexer::AbstractIndexBuilder#end_index]]
 

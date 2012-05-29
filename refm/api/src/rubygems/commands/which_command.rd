@@ -1,11 +1,11 @@
 require rubygems/command
 require rubygems/gem_path_searcher
 
-»ØÄê¤µ¤ì¤¿ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Ë´Ş¤Ş¤ì¤ë¥é¥¤¥Ö¥é¥ê¤Î¥Ñ¥¹¤ò¸«¤Ä¤±¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã«å«ã¾ã‚Œã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ãƒ‘ã‚¹ã‚’è¦‹ã¤ã‘ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Gem::Commands::WhichCommand < Gem::Command
 
-»ØÄê¤µ¤ì¤¿ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Ë´Ş¤Ş¤ì¤ë¥é¥¤¥Ö¥é¥ê¤Î¥Ñ¥¹¤ò¸«¤Ä¤±¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã«å«ã¾ã‚Œã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ãƒ‘ã‚¹ã‚’è¦‹ã¤ã‘ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
   Usage: gem which FILE [...] [options]
     Options:
@@ -13,9 +13,9 @@ require rubygems/gem_path_searcher
       -g, --[no-]gems-first            search gems before non-gems
 #@include(common_options)
     Arguments:
-      FILE          Gem ¥Ñ¥Ã¥±¡¼¥¸Ì¾¤ò»ØÄê¤·¤Ş¤¹
+      FILE          Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸åã‚’æŒ‡å®šã—ã¾ã™
     Summary:
-      »ØÄê¤µ¤ì¤¿ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥é¥¤¥Ö¥é¥ê¤Î¤¢¤ë¾ì½ê¤òÉ½¼¨¤·¤Ş¤¹
+      æŒ‡å®šã•ã‚ŒãŸ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ã‚ã‚‹å ´æ‰€ã‚’è¡¨ç¤ºã—ã¾ã™
     Defaults:
       --no-gems-first --no-all
 
@@ -23,27 +23,27 @@ require rubygems/gem_path_searcher
 == Public Instance Methods
 --- find_paths(package_name, dirs) -> Array
 
-dirs ¤«¤é package_name ¤È¤¤¤¦Ì¾Á°¤ò»ı¤Ä¥Õ¥¡¥¤¥ë¤òÃµº÷¤·¤Ş¤¹¡£
+dirs ã‹ã‚‰ package_name ã¨ã„ã†åå‰ã‚’æŒã¤ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¢ç´¢ã—ã¾ã™ã€‚
 
-°Ê²¼¤Î³ÈÄ¥»Ò¤ò»ı¤Ä¥Õ¥¡¥¤¥ë¤¬ÂĞ¾İ¤Ç¤¹¡£
+ä»¥ä¸‹ã®æ‹¡å¼µå­ã‚’æŒã¤ãƒ•ã‚¡ã‚¤ãƒ«ãŒå¯¾è±¡ã§ã™ã€‚
 
   %w[.rb .rbw .so .dll .bundle]
 
-@param package_name ¥Õ¥¡¥¤¥ë¤ÎÌ¾Á°¤ò»ØÄê¤·¤Ş¤¹¡£
+@param package_name ãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param dirs Ãµº÷¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤òÊ¸»úÎó¤ÎÇÛÎó¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param dirs æ¢ç´¢ã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æ–‡å­—åˆ—ã®é…åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
 --- gem_paths(spec) -> Array
 
-Í¿¤¨¤é¤ì¤¿ [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤«¤é¤½¤Î Gem ¤¬
-require ¤¹¤ë¥Õ¥¡¥¤¥ë¤Î¤¢¤ë¥Ç¥£¥ì¥¯¥È¥ê¤ò¤Ş¤È¤á¤ÆÊÖ¤·¤Ş¤¹¡£
+ä¸ãˆã‚‰ã‚ŒãŸ [[c:Gem::Specification]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‹ã‚‰ãã® Gem ãŒ
+require ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ã¾ã¨ã‚ã¦è¿”ã—ã¾ã™ã€‚
 
-@param spec [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Ş¤¹¡£
+@param spec [[c:Gem::Specification]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 == Constants
 
 --- EXT -> [String]
 
-³ÈÄ¥»Ò¤òÉ½¤¹ÇÛÎó¤Ç¤¹¡£
+æ‹¡å¼µå­ã‚’è¡¨ã™é…åˆ—ã§ã™ã€‚
 
   %w[.rb .rbw .so .dll .bundle]

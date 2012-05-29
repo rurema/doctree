@@ -12,7 +12,7 @@ require wsdl/info
 --- binding
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- find_binding
 #@todo
@@ -23,7 +23,7 @@ require wsdl/info
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- outputoperation_map
 #@todo
@@ -40,7 +40,7 @@ require wsdl/info
 --- soap_address
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- targetnamespace
 #@todo

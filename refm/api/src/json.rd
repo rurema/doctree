@@ -1,13 +1,13 @@
 #@since 1.9.1
 
-JSON (JavaScript Object Notation)�򰷤��饤�֥��Ǥ���
+JSON (JavaScript Object Notation)を扱うライブラリです。
 
-JSON �λ��ͤ� [[rfc:4627]] �򻲾Ȥ��Ƥ���������
+JSON の仕様は [[rfc:4627]] を参照してください。
 
 #@until 1.9.2
-��ĥ�饤�֥��ˤ������� Ruby �ˤ����������ꡢ��ĥ�饤�֥��ˤ����������ѤǤ���Ȥ���
-��ĥ�饤�֥��ˤ���������Ѥ��ޤ���
-Ruby �ˤ������� [[lib:iconv]] �� [[lib:strscan]] �˰�¸���Ƥ��ޤ���
+拡張ライブラリによる実装と Ruby による実装があり、拡張ライブラリによる実装が使用できるときは
+拡張ライブラリによる実装を使用します。
+Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
 #@end
 
 #@include(json/JSON)
@@ -21,30 +21,30 @@ Ruby �ˤ������� [[lib:iconv]] �� [[lib:strscan]] �˰�¸���Ƥ��ޤ���
 
 --- j(*objects) -> nil
 
-Ϳ����줿���֥������Ȥ� JSON ������ʸ�����ɸ����Ϥ˰�Ԥǽ��Ϥ��ޤ���
+与えられたオブジェクトを JSON 形式の文字列で標準出力に一行で出力します。
 
-@param objects JSON �����ǽ��Ϥ��������֥������Ȥ���ꤷ�ޤ���
+@param objects JSON 形式で出力したいオブジェクトを指定します。
 
 @see [[m:Kernel.#p]]
 
 --- jj(*objects) -> nil
 
-Ϳ����줿���֥������Ȥ� JSON ������ʸ�����ɸ����Ϥ˿ʹ֤��ɤߤ䤹���������ƽ��Ϥ��ޤ���
+与えられたオブジェクトを JSON 形式の文字列で標準出力に人間に読みやすく整形して出力します。
 
-@param objects JSON �����ǽ��Ϥ��������֥������Ȥ���ꤷ�ޤ���
+@param objects JSON 形式で出力したいオブジェクトを指定します。
 
 @see [[m:Kernel.#pp]]
 
 --- JSON(object, options = {}) -> object
 
-��������Ϳ����줿���֥������Ȥμ���ˤ�ä� Ruby �Υ��֥������Ȥ� JSON ������ʸ������֤��ޤ���
+第一引数に与えられたオブジェクトの種類によって Ruby のオブジェクトか JSON 形式の文字列を返します。
 
-��������ʸ����Τ褦�ʥ��֥������Ȥ���ꤷ�����ϡ������ [[m:JSON.#parse]] ���Ѥ��ƥѡ���������̤��֤��ޤ���
-�����Ǥʤ����֥������Ȥ���ꤷ�����ϡ������ [[m:JSON.#generate]] ���Ѥ����Ѵ�������̤��֤��ޤ���
+第一引数に文字列のようなオブジェクトを指定した場合は、それを [[m:JSON.#parse]] を用いてパースした結果を返します。
+そうでないオブジェクトを指定した場合は、それを [[m:JSON.#generate]] を用いて変換した結果を返します。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
-@param options [[m:JSON.#parse]], [[m:JSON.#generate]] ���Ϥ����ץ�������ꤷ�ޤ���
+@param options [[m:JSON.#parse]], [[m:JSON.#generate]] に渡すオプションを指定します。
 
 @see [[m:JSON.#parse]], [[m:JSON.#generate]]
 
@@ -54,11 +54,11 @@ Ruby �ˤ������� [[lib:iconv]] �� [[lib:strscan]] �˰�¸���Ƥ��ޤ���
 
 --- json_creatable? -> bool
 
-���ꥢ�饤�����줿 JSON ������ʸ���󤫤顢���󥹥��󥹤��������Τˤ��Υ��饹����ѤǤ������
-�����֤��ޤ��������Ǥʤ����ϡ������֤��ޤ���
+シリアライズされた JSON 形式の文字列から、インスタンスを作成するのにこのクラスを使用できる場合は
+真を返します。そうでない場合は、偽を返します。
 
-���Υ᥽�åɤ������֤����饹�� json_create �Ȥ����᥽�åɤ�������Ƥ��ʤ���Фʤ�ޤ���
-�ޤ� json_create ����������ɬ�פʥǡ�����ޤ�ϥå������Ԥ��Ƥ��ޤ���
+このメソッドが真を返すクラスは json_create というメソッドを実装していなければなりません。
+また json_create の第一引数は必要なデータを含むハッシュを期待しています。
 
 = reopen Array
 include JSON::Generator::GeneratorMethods::Array

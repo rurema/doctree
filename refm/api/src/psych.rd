@@ -10,13 +10,13 @@ require psych/coder
 require psych/core_ext
 require psych/deprecated
 require psych/json
-#@# °Ê²¼¤Ï autoload ¤Ç¤¢¤ë»ö¤ËÃí°Õ¡£
+#@# ä»¥ä¸‹ã¯ autoload ã§ã‚ã‚‹äº‹ã«æ³¨æ„ã€‚
 require psych/stream
 
-[[lib:yaml]] ¤Î¥Ğ¥Ã¥¯¥¨¥ó¥É¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£libyaml ¥Ù¡¼¥¹¤ÇºîÀ®¤µ¤ì¤Æ¤ª
-¤ê¡¢YAML ¥Ğ¡¼¥¸¥ç¥ó 1.1 ¤ò°·¤¦»ö¤¬¤Ç¤­¤Ş¤¹¡£
+[[lib:yaml]] ã®ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚libyaml ãƒ™ãƒ¼ã‚¹ã§ä½œæˆã•ã‚Œã¦ãŠ
+ã‚Šã€YAML ãƒãƒ¼ã‚¸ãƒ§ãƒ³ 1.1 ã‚’æ‰±ã†äº‹ãŒã§ãã¾ã™ã€‚
 
-#@# ¾åµ­¡¢libyaml ¤¬¹¹¿·¤µ¤ì¤ë»ö¤¬¤¢¤ì¤Ğ¡¢µ­½Ò¤ÎÊÑ¹¹¤ò¤ª´ê¤¤¤·¤Ş¤¹¡£
+#@# ä¸Šè¨˜ã€libyaml ãŒæ›´æ–°ã•ã‚Œã‚‹äº‹ãŒã‚ã‚Œã°ã€è¨˜è¿°ã®å¤‰æ›´ã‚’ãŠé¡˜ã„ã—ã¾ã™ã€‚
 
 === Overview
 
@@ -95,7 +95,7 @@ information on dumping a Ruby data structure.
 
 = module Psych
 
-[[lib:yaml]] ¤Î¥Ğ¥Ã¥¯¥¨¥ó¥É¤Î¤¿¤á¤Î¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+[[lib:yaml]] ã®ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ã®ãŸã‚ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
 
 == Constants
 
@@ -111,7 +111,7 @@ The version of libyaml Psych is using
 
 == Class Methods
 
-#@# psych.so ¤è¤ê¡£
+#@# psych.so ã‚ˆã‚Šã€‚
 --- libyaml_version
 #@todo
 
@@ -210,7 +210,7 @@ as a list.  For example:
 Load the document contained in +filename+.  Returns the yaml contained in
 +filename+ as a ruby object
 
-#@# °Ê²¼¤Î¥á¥½¥Ã¥É¤Ë¤Ä¤¤¤Æ¤Ï¡¢stopdoc ¤¬»ØÄê¤µ¤ì¤Æ¤¤¤ë¤¿¤á¡¢¾ÊÎ¬¡£
+#@# ä»¥ä¸‹ã®ãƒ¡ã‚½ãƒƒãƒ‰ã«ã¤ã„ã¦ã¯ã€stopdoc ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹ãŸã‚ã€çœç•¥ã€‚
 #@# --- add_domain_type(domain, type_tag, &block)
 #@# --- add_builtin_type(type_tag, &block)
 #@# --- remove_type(type_tag)
@@ -224,7 +224,7 @@ Load the document contained in +filename+.  Returns the yaml contained in
 
 = class Psych::Exception < RuntimeError
 
-#@# °Ê¹ß¡¢psych.so ¤è¤ê¡£
+#@# ä»¥é™ã€psych.so ã‚ˆã‚Šã€‚
 = class Psych::Parser
 
 == Constants
@@ -268,11 +268,11 @@ information.
 --- external_encoding=(encoding)
 #@todo
 
-¼«¿È¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò encoding ¤Ç»ØÄê¤·¤¿¤â¤Î¤ËÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã®ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã‚’ encoding ã§æŒ‡å®šã—ãŸã‚‚ã®ã«è¨­å®šã—ã¾ã™ã€‚
 
 @param encoding
 
-@raise Psych::Exception 2 ²ó°Ê¾å¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise Psych::Exception 2 å›ä»¥ä¸Šã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 = class Psych::Handler
 
@@ -283,7 +283,7 @@ information.
 --- new(io) -> Psych::Emitter
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -292,7 +292,7 @@ information.
 
 Start a stream emission with +encoding+
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#start_stream]]
 
@@ -301,7 +301,7 @@ Start a stream emission with +encoding+
 
 End a stream emission
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#end_stream]]
 
@@ -311,9 +311,9 @@ End a stream emission
 Start a document emission with YAML +version+, +tags+, and an +implicit+
 start.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
-@raise RuntimeError tag tuple ¤ÎÄ¹¤µ¤¬ 2 °Ê²¼¤Î¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise RuntimeError tag tuple ã®é•·ã•ãŒ 2 ä»¥ä¸‹ã®å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#start_document]]
 
@@ -322,7 +322,7 @@ start.
 
 End a document emission with an +implicit+ ending.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#end_document]]
 
@@ -332,7 +332,7 @@ End a document emission with an +implicit+ ending.
 Emit a scalar with +value+, +anchor+, +tag+, and a +plain+ or +quoted+
 string type with +style+.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#scalar]]
 
@@ -342,7 +342,7 @@ string type with +style+.
 Start emitting a sequence with +anchor+, a +tag+, +implicit+ sequence
 start and end, along with +style+.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#start_sequence]]
 
@@ -351,7 +351,7 @@ start and end, along with +style+.
 
 End sequence emission.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#end_sequence]]
 
@@ -361,7 +361,7 @@ End sequence emission.
 Start emitting a YAML map with +anchor+, +tag+, an +implicit+ start
 and end, and +style+.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#start_mapping]]
 
@@ -370,7 +370,7 @@ and end, and +style+.
 
 Emit the end of a mapping.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 See Psych::Handler#end_mapping
 
@@ -379,7 +379,7 @@ See Psych::Handler#end_mapping
 
 Emit an alias with +anchor+.
 
-¼«¿È¤òÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Psych::Handler#alias]]
 

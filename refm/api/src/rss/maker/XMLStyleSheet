@@ -1,12 +1,12 @@
 = class RSS::Maker::XMLStyleSheets::XMLStyleSheet < Object
 
-xml_stylesheet¤Ï
-maker.xml_stylesheet.new_xml_stylesheet¤ÇºîÀ®¤µ¤ì¤¿¥ª
-¥Ö¥¸¥§¥¯¥È¤È¤·¤Þ¤¹¡¥
+xml_stylesheetã¯
+maker.xml_stylesheet.new_xml_stylesheetã§ä½œæˆã•ã‚ŒãŸã‚ª
+ãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¾ã™ï¼Ž
 
-href¤Ètype¤ÏÉ¬¤º»ØÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡¥¤¿¤À¤·¡¤
-href¤ËÀßÄê¤·¤¿ÃÍ¤Î³ÈÄ¥»Ò¤¬.xsl¤Þ¤¿¤Ï.css¤Î¾ì¹ç¤Ï
-type¤ò»ØÄê¤¹¤ëÉ¬Í×¤Ï¤¢¤ê¤Þ¤»¤ó¡¥¼«Æ°¤Ç¿äÂ¬¤·¤Þ¤¹¡¥
+hrefã¨typeã¯å¿…ãšæŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼ŽãŸã ã—ï¼Œ
+hrefã«è¨­å®šã—ãŸå€¤ã®æ‹¡å¼µå­ãŒ.xslã¾ãŸã¯.cssã®å ´åˆã¯
+typeã‚’æŒ‡å®šã™ã‚‹å¿…è¦ã¯ã‚ã‚Šã¾ã›ã‚“ï¼Žè‡ªå‹•ã§æŽ¨æ¸¬ã—ã¾ã™ï¼Ž
 
 == Instance Methods
 

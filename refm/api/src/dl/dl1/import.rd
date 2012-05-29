@@ -3,10 +3,10 @@ require dl/types
 
 = module DL::Importable
 
-DL �⥸�塼��γƥ��饹�������ʥ�åѡ��Ǥ���
+DL モジュールの各クラスの便利なラッパーです。
 
-Importable �⥸�塼��ϡ��⥸�塼�뤫�� extend ��Ƥ�ǻȤ��ޤ���include �ǤϤ���ޤ���
-���饹�䥪�֥������Ȥ��� extend ��Ƥ�ǻȤ����ȤϤǤ��ޤ���
+Importable モジュールは、モジュールから extend を呼んで使います。include ではありません。
+クラスやオブジェクトから extend を呼んで使うことはできません。
 
   require "dl/import"
   
@@ -24,21 +24,21 @@ Importable �⥸�塼��ϡ��⥸�塼�뤫�� extend ��Ƥ�ǻȤ��ޤ���include �ǤϤ��
 --- dllink(*lib)    -> ()
 #@todo
 
-[[m:DL.#dlopen]] ���Ѥ��ƥ饤�֥�������ɤ���extend ����
-�⥸�塼����Ǥ��Υ饤�֥����������Ƥ��뻲�Ȳ�ǽ�ʥ���ܥ������Ǥ����
-���ˤ��ޤ���
+[[m:DL.#dlopen]] を用いてライブラリをロードし、extend した
+モジュール内でそのライブラリで定義されている参照可能なシンボルを取得できるよ
+うにします。
 
-@param lib �����ɤ������饤�֥���ʸ�����Ϳ���ޤ���
+@param lib ロードしたいライブラリを文字列で与えます。
 
-@raise RuntimeError [[man:dlopen(3)]] �˼��Ԥ�������ȯ�����ޤ���
+@raise RuntimeError [[man:dlopen(3)]] に失敗した時に発生します。
 
 --- extern(proto)    -> DL::Symbol
 #@todo
 
-Ϳ����줿�ץ��ȥ����פˤ������äơ������ʥߥå��饤�֥����Υ���ܥ�򸡺�����
-���Ȥ��ðۥ᥽�åɤȤ��ơ�������ޤ���
+与えられたプロトタイプにしたがって、ダイナミックライブラリ内のシンボルを検索し、
+自身の特異メソッドとして、定義します。
 
-@param proto C �δؿ��ץ��ȥ����פ�ʸ�����Ϳ���ޤ���Ƭʸ������ʸ���ξ��Ͼ�ʸ���˼�ưŪ���Ѵ�����ޤ���
+@param proto C の関数プロトタイプを文字列で与えます。頭文字が大文字の場合は小文字に自動的に変換されます。
 
   require "dl/import"
   
@@ -53,10 +53,10 @@ Importable �⥸�塼��ϡ��⥸�塼�뤫�� extend ��Ƥ�ǻȤ��ޤ���include �ǤϤ��
 --- callback(proto)    -> DL::Symbol
 #@todo
 
-Ϳ����줿�ץ��ȥ����פˤ������äơ����ȤΥ��󥹥��󥹥᥽�åɤ�
-C �Υ�����Хå��ؿ����Ѵ�����[[c:DL::Symbol]] �Ȥ����֤��ޤ���
+与えられたプロトタイプにしたがって、自身のインスタンスメソッドを
+C のコールバック関数に変換し、[[c:DL::Symbol]] として返します。
 
-@param proto C �δؿ��ץ��ȥ����פ�ʸ�����Ϳ���ޤ���Ƭʸ������ʸ���ξ��Ͼ�ʸ���˼�ưŪ���Ѵ�����ޤ���
+@param proto C の関数プロトタイプを文字列で与えます。頭文字が大文字の場合は小文字に自動的に変換されます。
 
  require 'dl/import'
  module M
@@ -78,65 +78,65 @@ C �Υ�����Хå��ؿ����Ѵ�����[[c:DL::Symbol]] �Ȥ����֤��ޤ���
 --- typealias(newtype, oldtype)    -> ()
 #@todo
 
-newtype ���� oldtype ���Υ����ꥢ���Ȥ���������ޤ���
-newtype ��Ϳ�������� extern �� callback �᥽�å�
-�Υץ��ȥ����פ�Ϳ����Ȥ������Ѥ��ޤ���
+newtype 型を oldtype 型のエイリアスとして定義します。
+newtype で与えた型は extern や callback メソッド
+のプロトタイプを与えるときに利用します。
 
 --- symbol(sym)    -> DL::PtrData
 #@todo
-�����ɤ��������ʥߥå��饤�֥����Υ���ܥ�򸡺���
-����ܥ�ؤΥݥ��󥿤� [[c:DL::PtrData]] �Ȥ����֤��ޤ���
+ロードしたダイナミックライブラリ内のシンボルを検索し
+シンボルへのポインタを [[c:DL::PtrData]] として返します。
 
-@param sym �ߤ�������ܥ�̾��ʸ�����Ϳ���ޤ���
+@param sym 欲しいシンボル名を文字列で与えます。
 
-@raise RuntimeError �饤�֥����ǥ���ܥ뤬���Ĥ���ʤ�����ȯ�����ޤ���
+@raise RuntimeError ライブラリ内でシンボルが見つからない時に発生します。
 
 --- symbol(func, typespec)    -> DL::Symbol 
 #@todo
 
-�����ɤ��������ʥߥå��饤�֥����δؿ��򸡺���
-̾���� func �δؿ��� [[c:DL::Symbol]] �Ȥ����֤��ޤ���
+ロードしたダイナミックライブラリ内の関数を検索し
+名前が func の関数を [[c:DL::Symbol]] として返します。
 
-@param func �ߤ����ؿ�̾��ʸ�����Ϳ���ޤ���
+@param func 欲しい関数名を文字列で与えます。
 
-@param typespec �ؿ��η��򷿻���Ҥ�Ȥä�ʸ�����Ϳ���ޤ���
+@param typespec 関数の型を型指定子を使って文字列で与えます。
 
-@raise RuntimeError �饤�֥����ǥ���ܥ뤬���Ĥ���ʤ�����ȯ�����ޤ���
+@raise RuntimeError ライブラリ内でシンボルが見つからない時に発生します。
 
 --- [](func)    -> nil |  DL::Symbol | DL::PtrData
 
-[[m:DL::Importable#extern]]��[[m:DL::Importable#import]] �ޤ���
-[[m:DL::Importable#callback]] �ˤ�ä����������
-C ��٥�δؿ����ѿ�̾ func ���б����� [[c:DL::Symbol]] ���֥������Ȥ��֤��ޤ���
+[[m:DL::Importable#extern]]、[[m:DL::Importable#import]] または
+[[m:DL::Importable#callback]] によって定義した、
+C レベルの関数や変数名 func に対応する [[c:DL::Symbol]] オブジェクトを返します。
 
-�������Ƥ��ʤ����ϡ�nil ���֤��ޤ���
+定義されていない場合は、nil を返します。
 
-@param func ��������������ܥ��ʸ�����Ϳ���ޤ���
+@param func 取得したいシンボルを文字列で与えます。
 
 --- import(sym, rettype, argtypes = nil)    -> DL::Symbol
 #@todo
 
-�����ʥߥå��饤�֥����Υ���ܥ�򸡺�����
-���Ȥ��ðۥ᥽�åɤȤ��ơ�������ޤ���
+ダイナミックライブラリ内のシンボルを検索し、
+自身の特異メソッドとして、定義します。
 
-@param sym �ߤ�������ܥ�̾��ʸ�����Ϳ���ޤ���
+@param sym 欲しいシンボル名を文字列で与えます。
 
-@param rettype �֤��ͤη���C �δؿ��ץ��ȥ����פ�Ȥä�ʸ�����Ϳ���ޤ���
+@param rettype 返り値の型を、C の関数プロトタイプを使って文字列で与えます。
 
-@param argtypes �����η���C �δؿ��ץ��ȥ����פ�Ȥä�ʸ����������Ϳ���ޤ���
+@param argtypes 引数の型を、C の関数プロトタイプを使って文字列の配列で与えます。
 
  import("get_length", "int", ["void*", "int"])
 
 --- _args_ -> [object]
 
-ľ���˸Ƥ�������ʥߥå��饤�֥��δؿ��ΰ�����������֤��ޤ���
+直前に呼んだダイナミックライブラリの関数の引数の配列を返します。
 
 --- _retval_ -> object
 
-ľ���˸Ƥ�������ʥߥå��饤�֥��δؿ����֤��ͤ��֤��ޤ���
+直前に呼んだダイナミックライブラリの関数の返り値を返します。
 
 == Constants
 
 --- LIB_MAP
 #@todo
-�����ɤ��줿�饤�֥����ݻ�����[[c:Hash]]���֥������ȤǤ���
+ロードされたライブラリを保持する[[c:Hash]]オブジェクトです。

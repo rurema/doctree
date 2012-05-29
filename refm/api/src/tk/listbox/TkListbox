@@ -2,8 +2,8 @@
 include TkListItemConfig
 include Tk::Scrollable
 
-�ꥹ�ȥܥå������������åȤΥ��饹�Ǥ���
-�ꥹ�ȥܥå������������åȤϹ��ܤΰ�����ɽ�����������åȤǤ���
+リストボックスウィジェットのクラスです。
+リストボックスウィジェットは項目の一覧を表すウィジェットです。
 
   require "tk"
   list = TkListbox.new { setgrid 'yes'; pack }
@@ -13,24 +13,24 @@ include Tk::Scrollable
   list.insert 'end', "456"
   Tk.mainloop
 
-�᥽�åɤ����������((*����*))�ϡ��ʲ��Τ����줫��ؤ��ޤ���
+メソッドの説明の中で((*位置*))は、以下のいずれかを指します。
 
-  *����
+  *数字
 
-   �����ǻ��ꤷ�����ǰ���(��ü��0)
+   数字で指定した要素位置(上端は0)
 
   *"@x,y"
 
-   x��y �Ͽ����Ǥ���
-   �����ǻ��ꤷ���ԥ��������(������κ���ü��0����Ϥޤ�)
+   x、y は数字です。
+   数字で指定したピクセル位置(入力欄の左上端は0から始まる)
 
   *"active"
 
-   �����ƥ���(����������֤Τ���)�Ǥ������Ǥΰ���
+   アクティブ(カーソル位置のこと)である要素の位置
 
   *"end"
 
-   �Ǹ�����Ǥΰ���
+   最後の要素の位置
 
   *"anchor"
 
@@ -46,9 +46,9 @@ include Tk::Scrollable
 --- activate(y)
 #@todo
 
-((|y|))�ǻ��ꤷ��((*����*))�����Ǥ򥢥��ƥ��֤ˤ��ޤ������Υꥹ��
-�ܥå�����((<���ϥե�������>))������С������ƥ��֤ʹԤˤϲ�������
-����ޤ���
+((|y|))で指定した((*位置*))の要素をアクティブにします。そのリスト
+ボックスに((<入力フォーカス>))があれば、アクティブな行には下線が引
+かれます。
 
      require "tk"
      TkListbox.new {
@@ -64,42 +64,42 @@ include Tk::Scrollable
 --- curselection
 #@todo
 
-((<����>))���줿���Ǥ������ֹ������ˤ����֤��ޤ�(�����ֹ�Ͼ�ü��0)
+((<選択>))された要素の要素番号を配列にして返します(要素番号は上端が0)
 
 --- get(index)
 --- get(first, last)
 #@todo
 
-������1�Ĥξ�硢���ꤷ��((*����*))�����Ǥ�ʸ������֤��ޤ���
-������2�Ĥξ�硢���ꤷ���ϰϤ����Ǥ�ʸ�����������֤��ޤ���
+引数が1つの場合、指定した((*位置*))の要素を文字列で返します。
+引数が2つの場合、指定した範囲の要素を文字列の配列で返します。
 
 --- nearest(y)
 #@todo
 
-((|y|))�ǻ��ꤷ��Y��ɸ�˶ᤤ���Ǥ������ֹ���֤��ޤ���
+((|y|))で指定したY座標に近い要素の要素番号を返します。
 
 --- size
 #@todo
 
-���Ǥο����֤��ޤ���
+要素の数を返します。
 
 --- selection_anchor(index)
 #@todo
 
-((|index|))�ǻ��ꤷ��((*����*))�����Ǥ�((<���󥫡�>))�ˤ��ޤ���
+((|index|))で指定した((*位置*))の要素を((<アンカー>))にします。
 
 --- selection_clear(first, last = Tk::None)
 #@todo
 
-((|first|))��((|last|))�ǻ��ꤷ��((*����*))���ϰϤ����Ǥ�((<����>))��
-��Ƥ����������ˤ��ޤ���((|last|))���ά������硢((|first|))��((*��
-��*))�����Ǥ�������ˤ��ޤ���
+((|first|))、((|last|))で指定した((*位置*))の範囲の要素が((<選択>))さ
+れていれば非選択にします。((|last|))を省略した場合、((|first|))の((*位
+置*))の要素を非選択にします。
 
 --- selection_includes(index)
 #@todo
 
-(({index}))�ǻ��ꤷ��((*����*))�����Ǥ�((<����>))����Ƥ��뤫�ɤ�����
-������(({true}))/(({false}))���֤��ޤ���
+(({index}))で指定した((*位置*))の要素が((<選択>))されているかどうかを
+真偽値(({true}))/(({false}))で返します。
 
       require "tk"
       l = TkListbox.new {
@@ -112,9 +112,9 @@ include Tk::Scrollable
 --- selection_set(first, last = Tk::None)
 #@todo
 
-((|first|))��((|last|))�ǻ��ꤷ��((*����*))���ϰϤ����Ǥ�((<����>))��
-�ޤ���((|last|))���ά������硢((|first|))��((*����*))�����Ǥ�����
-�ޤ���
+((|first|))、((|last|))で指定した((*位置*))の範囲の要素を((<選択>))し
+ます。((|last|))を省略した場合、((|first|))の((*位置*))の要素を選択し
+ます。
 
 --- index(idx)
 #@todo

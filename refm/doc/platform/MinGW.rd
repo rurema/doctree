@@ -1,14 +1,14 @@
 ###nonref
 = MinGW
 
-�ե꡼���եȥ����������ǽ��� Win32 �Ѽ¹ԥե�������뤿���
-����ѥ���Ķ��Τ��Ȥǡ�MinGW �� Minimalist GNU on Windows ��ά�Ǥ���
-�ܺ٤� ((<URL:http://www.mingw.org/>)) �򻲾Ȥ��Ƥ���������
+フリーソフトウェアだけで純粋な Win32 用実行ファイルを作るための
+コンパイル環境のことで、MinGW は Minimalist GNU on Windows の略です。
+詳細は ((<URL:http://www.mingw.org/>)) を参照してください。
 
-�ʤ������ξ��Ρֽ��ʡפϡ�msvcrt.dll ��Ȥä����ץꥱ�������פ�ؤ��ޤ���
-MFC (Microsoft Foundation Classes) �ϻȤ��ޤ���
+なお、この場合の「純粋な」は「msvcrt.dll を使ったアプリケーション」を指します。
+MFC (Microsoft Foundation Classes) は使えません。
 
-MinGW �Ǻ��줿 ruby �� mingw32 �ǤȸƤФ�Ƥ��ꡢ
-((<mswin32>)) �ǤȤۤȤ��Ʊ���褦��ư��ޤ���
+MinGW で作られた ruby は mingw32 版と呼ばれており、
+((<mswin32>)) 版とほとんど同じように動作します。
 
-��((<Win32�ͥ��ƥ�����>))
+→((<Win32ネイティブ版>))

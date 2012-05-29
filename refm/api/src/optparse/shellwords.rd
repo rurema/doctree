@@ -1,9 +1,9 @@
 require optparse
 
-[[m:OptionParser#on]] �ǻ��Ѳ�ǽ�ʰ����� [[c:Shellwords]]
-�ɲä���ޤ���
-���ץ����ΰ����� [[m:Shellwords.#shellwords]] �ˤ�ä�������Ѵ�����Ƥ��顢
-[[m:OptionParser#on]] �Υ֥��å����Ϥ���ޤ���
+[[m:OptionParser#on]] で使用可能な引数に [[c:Shellwords]]
+追加されます。
+オプションの引数は [[m:Shellwords.#shellwords]] によって配列に変換されてから、
+[[m:OptionParser#on]] のブロックに渡されます。
 
  require 'optparse/shellwords'
  opts = OptionParser.new

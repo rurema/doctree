@@ -1,11 +1,11 @@
 #@since 1.8.1
-Ϳ����줿ʸ�����û�̷�����������⥸�塼��Ǥ���
+与えられた文字列の短縮形を生成するモジュールです。
 
 = module Abbrev
 
-Ϳ����줿ʸ�����û�̷�����������⥸�塼��Ǥ���
+与えられた文字列の短縮形を生成するモジュールです。
 
-=== ��
+=== 例
 
   require 'abbrev'
   require 'pp'
@@ -21,30 +21,30 @@
 
 --- abbrev(words, pattern = nil) -> Hash
 
-ʸ��������󤫤��դ˷�ޤ�û�̷���׻�����
-û�̷��򥭡�������ʸ������ͤȤ���ϥå�����֤��ޤ���
+文字列の配列から一意に決まる短縮形を計算し、
+短縮形をキー、元の文字列を値とするハッシュを返します。
 
-�������������ɽ������ꤹ��ȡ�words �Τ������Υѥ�����˥ޥå�������Τ���û�̷���׻����ޤ���
-���������ʸ�������ꤹ��ȡ�words �Τ�������ʸ����ǻϤޤ��Τ���û�̷���׻����ޤ���
+第二引数に正規表現を指定すると、words のうちそのパターンにマッチしたものから短縮形を計算します。
+第二引数に文字列を指定すると、words のうちその文字列で始まるものから短縮形を計算します。
 
-@param words   ���Ȥʤ�ʸ���������
-@param pattern [[c:Regexp]] �� [[c:String]] ����ꤷ�ޤ���
+@param words   元となる文字列の配列。
+@param pattern [[c:Regexp]] か [[c:String]] を指定します。
 
-@return û�̷��򥭡�������ʸ������ͤȤ���ϥå�����֤��ޤ���
+@return 短縮形をキー、元の文字列を値とするハッシュを返します。
 
-  # words ��Ʊ��ʸ���󤬴ޤޤ�Ƥ������
-  # �ʲ��Τ褦�ˤ���ʸ���󤷤��֤��ޤ���
+  # words に同じ文字列が含まれている場合は
+  # 以下のようにその文字列しか返しません。
   pp Abbrev.abbrev(%w[ruby ruby]).sort
       # => [["ruby", "ruby"]]
   
-  # ���򤬴ޤޤ�Ƥ��Ƥ�Ŭ�ڤ˽������ޤ���
+  # 空白が含まれていても適切に処理します。
   pp Abbrev.abbrev(['ru by']).sort" 
       # => [["r", "ru by"],
       #     ["ru", "ru by"],
       #     ["ru ", "ru by"],
       #     ["ru b", "ru by"],
       #     ["ru by", "ru by"]]
-  # sort ���Ƥ��ʤ���
+  # sort していない例
   p %w[ruby rubyist].abbrev
     #=> {"ruby"    => "ruby",
     #    "rubyi"   => "rubyist",
@@ -57,15 +57,15 @@
 
 --- abbrev(pattern = nil) -> Hash
 
-self ��ʸ���������ξ�硢self �����դ˷�ޤ�û�̷���׻�����
-û�̷��򥭡�������ʸ������ͤȤ���ϥå�����֤��ޤ���
+self が文字列の配列の場合、self から一意に決まる短縮形を計算し、
+短縮形をキー、元の文字列を値とするハッシュを返します。
 
-����������ɽ������ꤹ��ȡ�self �Τ������Υѥ�����˥ޥå�������Τ���û�̷���׻����ޤ���
-������ʸ�������ꤹ��ȡ�self �Τ�������ʸ����ǻϤޤ��Τ���û�̷���׻����ޤ���
+引数に正規表現を指定すると、self のうちそのパターンにマッチしたものから短縮形を計算します。
+引数に文字列を指定すると、self のうちその文字列で始まるものから短縮形を計算します。
 
-[[m:Abbrev.#abbrev]](self, pattern) ��Ʊ���Ǥ���
+[[m:Abbrev.#abbrev]](self, pattern) と同じです。
 
-@param pattern [[c:Regexp]] �� [[c:String]] ����ꤷ�ޤ���
+@param pattern [[c:Regexp]] か [[c:String]] を指定します。
 
 
   p %w[ruby rubyist].abbrev

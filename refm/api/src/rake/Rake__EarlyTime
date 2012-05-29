@@ -2,18 +2,18 @@
 include Comparable
 include Singleton
 
-���Υ��饹�����ƤΥ����ॹ����פ�����λ���򤢤�路�ޤ���
+このクラスは全てのタイムスタンプより前の時刻をあらわします。
 
 == Public Instance Methods
 
 --- <=>(other) -> Fixnum
 
-ɬ�� -1 ���֤��ޤ���
+必ず -1 を返します。
 
-@param other ����оݤΥ��֥�������
+@param other 比較対象のオブジェクト
 
-@return -1 ���֤��ޤ���
+@return -1 を返します。
 
 --- to_s -> String
 
-"<EARLY TIME>" �Ȥ���ʸ������֤��ޤ���
+"<EARLY TIME>" という文字列を返します。

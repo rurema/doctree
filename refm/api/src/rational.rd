@@ -1,13 +1,13 @@
-Í­Íý¿ô¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+æœ‰ç†æ•°ã‚’æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@since 1.9.1
 
-1.9·Ï¤Ç¤Ï [[c:Rational]] ¥¯¥é¥¹¤ÏÁÈ¤ß¹þ¤ß¥¯¥é¥¹¤Ë¤Ê¤ê¤Þ¤·¤¿¡£
+1.9ç³»ã§ã¯ [[c:Rational]] ã‚¯ãƒ©ã‚¹ã¯çµ„ã¿è¾¼ã¿ã‚¯ãƒ©ã‚¹ã«ãªã‚Šã¾ã—ãŸã€‚
 
 #@else
 
-require ¤¹¤ë»ö¤Ç¿ôÃÍ·×»»¤Î·ë²Ì¤ò [[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤¹¤è¤¦
-¤Ë¤Ç¤­¤Þ¤¹¡£
+require ã™ã‚‹äº‹ã§æ•°å€¤è¨ˆç®—ã®çµæžœã‚’ [[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¿”ã™ã‚ˆã†
+ã«ã§ãã¾ã™ã€‚
 
   1.quo(2)              # => 0.5
   require 'rational'
@@ -17,36 +17,36 @@ require ¤¹¤ë»ö¤Ç¿ôÃÍ·×»»¤Î·ë²Ì¤ò [[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤¹¤è¤¦
 == Module Functions
 --- Rational(num, den = 1) -> Rational
 
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-@param num Ê¬»Ò¤ò»ØÄê¤·¤Þ¤¹¡£
+@param num åˆ†å­ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param den Ê¬Êì¤ò»ØÄê¤·¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï 1 ¤Ç¤¹¡£
+@param den åˆ†æ¯ã‚’æŒ‡å®šã—ã¾ã™ã€‚çœç•¥ã—ãŸå ´åˆã¯ 1 ã§ã™ã€‚
 
-@raise ZeroDivisionError den ¤Ë 0 ¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ZeroDivisionError den ã« 0 ã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-°ú¿ô num¡¢den ¤ÎÎ¾Êý¤ò»ØÄê¤·¤¿¾ì¹ç¡¢num/den ¤ò´ûÌó¤Ë¤Ê¤ë¤Þ¤ÇÌóÊ¬¤·¤¿
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
+å¼•æ•° numã€den ã®ä¸¡æ–¹ã‚’æŒ‡å®šã—ãŸå ´åˆã€num/den ã‚’æ—¢ç´„ã«ãªã‚‹ã¾ã§ç´„åˆ†ã—ãŸ
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
 
-num ¤È den ¤Ë¤ÏÀ°¿ô¤ò»ØÄê¤·¤Þ¤¹¡£den ¤¬ 1 ¤Î»þ¤Ë¸Â¤ê¡¢num ¤Ë
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤¹¤ë»ö¤â¤Ç¤­¤Þ¤¹¡£
+num ã¨ den ã«ã¯æ•´æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚den ãŒ 1 ã®æ™‚ã«é™ã‚Šã€num ã«
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã™ã‚‹äº‹ã‚‚ã§ãã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(1, 3)              # => Rational(1, 3)
   Rational(2, 6)              # => Rational(1, 3)
   Rational(Rational(1, 3), 1) # => Rational(1, 3)
 
-¤½¤ì°Ê³°¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤¹¤ë¤ÈÎã³°¤¬È¯À¸¤·¤Þ¤¹¡£
+ãã‚Œä»¥å¤–ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã™ã‚‹ã¨ä¾‹å¤–ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
   Rational(Rational(1, 3), 2) # => NoMethodError
   Rational(1.1, 2.3)          # => NoMethodError
   Rational("1/3")             # => NoMethodError
   Rational(nil)               # => NoMethodError
 
-ÌóÊ¬¤·¤Æ¤¤¤Ê¤¤ [[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤¹¤ë¾ì¹ç¤Ï
-[[m:Rational.new!]] ¤ò»ÈÍÑ¤·¤Þ¤¹¡£¤¿¤À¤·¡¢1.9·Ï¤Ç¤Ï»ÈÍÑ¤Ç¤­¤Ê¤¤»ö¤ËÃí°Õ
-¤·¤Æ¤¯¤À¤µ¤¤¡£
+ç´„åˆ†ã—ã¦ã„ãªã„ [[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹å ´åˆã¯
+[[m:Rational.new!]] ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚ãŸã ã—ã€1.9ç³»ã§ã¯ä½¿ç”¨ã§ããªã„äº‹ã«æ³¨æ„
+ã—ã¦ãã ã•ã„ã€‚
 
 @see [[m:Rational.new!]], [[m:Rational.reduce]]
 
@@ -56,33 +56,33 @@ num ¤È den ¤Ë¤ÏÀ°¿ô¤ò»ØÄê¤·¤Þ¤¹¡£den ¤¬ 1 ¤Î»þ¤Ë¸Â¤ê¡¢num ¤Ë
 
 --- /(other)   -> Rational | Float | Integer
 
-¾¦¤ò·×»»¤·¤Þ¤¹¡£
+å•†ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-·×»»·ë²Ì¤Ï°Ê²¼¤Î¤è¤¦¤Ë¤Ê¤ê¤Þ¤¹¡£
+è¨ˆç®—çµæžœã¯ä»¥ä¸‹ã®ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
 
-  * other¤¬Í­Íý¿ô(Rational)¤Ê¤é¤Ð¡¢Í­Íý¿ô(Rational)¤òÊÖ¤¹¡£
-  * other¤¬¤½¤ì°Ê³°¤Ê¤é¡¢[[m:Integer#/]]¤ÈÆ±¤¸¡£¤Ä¤Þ¤ê¡¢
-    other ¤¬À°¿ô(Integer)¤Ê¤é¤Ð¡¢À°¿ô(Integer)¤ò(À°½ü)¡¢ÉâÆ°¾®¿ô(Float)¤Ê¤é¤Ð¡¢
-    ÉâÆ°¾®¿ô(Float)¤òÊÖ¤¹¡£
-    ¤¿¤À¤·¡¢¤¤¤º¤ì¤â¡¢other == 0 ¤Î»þ¤Ï¡¢[[c:ZeroDivisionError]]¤È¤Ê¤ë¡£
+  * otherãŒæœ‰ç†æ•°(Rational)ãªã‚‰ã°ã€æœ‰ç†æ•°(Rational)ã‚’è¿”ã™ã€‚
+  * otherãŒãã‚Œä»¥å¤–ãªã‚‰ã€[[m:Integer#/]]ã¨åŒã˜ã€‚ã¤ã¾ã‚Šã€
+    other ãŒæ•´æ•°(Integer)ãªã‚‰ã°ã€æ•´æ•°(Integer)ã‚’(æ•´é™¤)ã€æµ®å‹•å°æ•°(Float)ãªã‚‰ã°ã€
+    æµ®å‹•å°æ•°(Float)ã‚’è¿”ã™ã€‚
+    ãŸã ã—ã€ã„ãšã‚Œã‚‚ã€other == 0 ã®æ™‚ã¯ã€[[c:ZeroDivisionError]]ã¨ãªã‚‹ã€‚
 
-@raise ZeroDivisionError other ¤¬ 0 ¤Î»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ZeroDivisionError other ãŒ 0 ã®æ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- **(other)  -> Rational | Float | Integer
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
-·×»»·ë²Ì¤Ï°Ê²¼¤Î¤è¤¦¤Ë¤Ê¤ê¤Þ¤¹¡£
+è¨ˆç®—çµæžœã¯ä»¥ä¸‹ã®ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
 
-  * other¤¬Àµ¤Þ¤¿¤Ï0¤ÎÀ°¿ô(Integer)¤Ê¤é¤Ð¡¢À°¿ô(Integer)¤òÊÖ¤¹¡£
-  * other¤¬Éé¤ÎÀ°¿ô(Integer)¤Ê¤é¤Ð¡¢Í­Íý¿ô(Rational)¤òÊÖ¤¹¡£
-  * other¤¬Í­Íý¿ô(Rational)¤äÉâÆ°¾®¿ô(Float)¤Ê¤é¤Ð¡¢ÉâÆ°¾®¿ô(Float)¤òÊÖ¤¹¡£
+  * otherãŒæ­£ã¾ãŸã¯0ã®æ•´æ•°(Integer)ãªã‚‰ã°ã€æ•´æ•°(Integer)ã‚’è¿”ã™ã€‚
+  * otherãŒè² ã®æ•´æ•°(Integer)ãªã‚‰ã°ã€æœ‰ç†æ•°(Rational)ã‚’è¿”ã™ã€‚
+  * otherãŒæœ‰ç†æ•°(Rational)ã‚„æµ®å‹•å°æ•°(Float)ãªã‚‰ã°ã€æµ®å‹•å°æ•°(Float)ã‚’è¿”ã™ã€‚
 
-Îã:
+ä¾‹:
 
   2 **  3             #=> 8
   2 ** -3             #=> Rational(1, 8)
@@ -95,35 +95,35 @@ num ¤È den ¤Ë¤ÏÀ°¿ô¤ò»ØÄê¤·¤Þ¤¹¡£den ¤¬ 1 ¤Î»þ¤Ë¸Â¤ê¡¢num ¤Ë
 
 --- power!(other) -> Integer | Float
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
-[[lib:rational]]¤ÇºÆÄêµÁ¤µ¤ì¤ëÁ°¤Î[[m:Integer#**]]¤ÎÊÌÌ¾¤Ç¤¹¡£
-other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
-¤Ê¤é¡¢ÉâÆ°¾®¿ô (Float) ¤òÊÖ¤·¤Þ¤¹¡£
+[[lib:rational]]ã§å†å®šç¾©ã•ã‚Œã‚‹å‰ã®[[m:Integer#**]]ã®åˆ¥åã§ã™ã€‚
+other ãŒæ­£ã¾ãŸã¯ 0 ã®æ•´æ•° (Integer) ãªã‚‰ã°ã€æ•´æ•° (Integer) ã‚’ã€ãã‚Œä»¥å¤–
+ãªã‚‰ã€æµ®å‹•å°æ•° (Float) ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- to_r -> Rational
 
-¼«¿È¤ò [[c:Rational]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Rational]] ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   1.to_r        # => Rational(1, 1)
   (1<<64).to_r  # => Rational(18446744073709551616, 1)
 
 --- gcd(n) -> Integer
 
-¼«¿È¤ÈÀ°¿ô n ¤ÎºÇÂç¸øÌó¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨æ•´æ•° n ã®æœ€å¤§å…¬ç´„æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param n ¼«¿È¤È¤ÎºÇÂç¸øÌó¿ô¤ò·×»»¤¹¤ë¿ô
+@param n è‡ªèº«ã¨ã®æœ€å¤§å…¬ç´„æ•°ã‚’è¨ˆç®—ã™ã‚‹æ•°
 
   2.gcd(2)                    # => 2
   3.gcd(7)                    # => 1
   3.gcd(-7)                   # => 1
   ((1<<31)-1).gcd((1<<61)-1)  # => 1
 
-¤Þ¤¿¡¢self ¤ä n ¤¬ 0 ¤À¤Ã¤¿¾ì¹ç¤Ï¡¢0 ¤Ç¤Ï¤Ê¤¤Êý¤ÎÀ°¿ô¤ÎÀäÂÐÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+ã¾ãŸã€self ã‚„ n ãŒ 0 ã ã£ãŸå ´åˆã¯ã€0 ã§ã¯ãªã„æ–¹ã®æ•´æ•°ã®çµ¶å¯¾å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
   3.gcd(0)              # => 3
   0.gcd(-7)             # => 7
@@ -132,17 +132,17 @@ other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
 
 --- lcm(n) -> Integer
 
-¼«¿È¤ÈÀ°¿ô n ¤ÎºÇ¾®¸øÇÜ¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨æ•´æ•° n ã®æœ€å°å…¬å€æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param n ¼«¿È¤È¤ÎºÇ¾®¸øÇÜ¿ô¤ò·×»»¤¹¤ë¿ô
+@param n è‡ªèº«ã¨ã®æœ€å°å…¬å€æ•°ã‚’è¨ˆç®—ã™ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   2.lcm(2)                    # => 2
   3.lcm(-7)                   # => 21
   ((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
 
-¤Þ¤¿¡¢self ¤ä n ¤¬ 0 ¤À¤Ã¤¿¾ì¹ç¤Ï¡¢0 ¤òÊÖ¤·¤Þ¤¹¡£
+ã¾ãŸã€self ã‚„ n ãŒ 0 ã ã£ãŸå ´åˆã¯ã€0 ã‚’è¿”ã—ã¾ã™ã€‚
 
   3.lcm(0)                    # => 0
   0.lcm(-7)                   # => 0
@@ -151,14 +151,14 @@ other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
 
 --- gcdlcm(n) -> [Integer]
 
-¼«¿È¤ÈÀ°¿ô n ¤ÎºÇÂç¸øÌó¿ô¤ÈºÇ¾®¸øÇÜ¿ô¤ÎÇÛÎó [self.gcd(n), self.lcm(n)]
-¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨æ•´æ•° n ã®æœ€å¤§å…¬ç´„æ•°ã¨æœ€å°å…¬å€æ•°ã®é…åˆ— [self.gcd(n), self.lcm(n)]
+ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param n ¼«¿È¤È¤ÎºÇÂç¸øÌó¿ô¤ÈºÇ¾®¸øÇÜ¿ô¤ò·×»»¤¹¤ë¿ô
+@param n è‡ªèº«ã¨ã®æœ€å¤§å…¬ç´„æ•°ã¨æœ€å°å…¬å€æ•°ã‚’è¨ˆç®—ã™ã‚‹æ•°
 
-@raise ArgumentError n ¤ËÀ°¿ô°Ê³°¤Î¤â¤Î¤ò»ØÄê¤¹¤ë¤ÈÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError n ã«æ•´æ•°ä»¥å¤–ã®ã‚‚ã®ã‚’æŒ‡å®šã™ã‚‹ã¨ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   6.gcdlcm(9)                    # => [3, 18]
   2.gcdlcm(2)                    # => [2, 2]
@@ -169,17 +169,17 @@ other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
 
 --- numerator -> Integer
 
-Ê¬»Ò(¾ï¤Ë¼«¿È)¤òÊÖ¤·¤Þ¤¹¡£
+åˆ†å­(å¸¸ã«è‡ªèº«)ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¬»Ò¤òÊÖ¤·¤Þ¤¹¡£
+@return åˆ†å­ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Integer#denominator]]
 
 --- denominator -> Integer
 
-Ê¬Êì(¾ï¤Ë1)¤òÊÖ¤·¤Þ¤¹¡£
+åˆ†æ¯(å¸¸ã«1)ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¬Êì¤òÊÖ¤·¤Þ¤¹¡£
+@return åˆ†æ¯ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Integer#numerator]]
 
@@ -190,21 +190,21 @@ other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
 
 --- quo(other) -> Rational
 
-¾¦¤ò·×»»¤·¤Æ·×»»·ë²Ì¤ò [[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤·¤Þ¤¹¡£
+å•†ã‚’è¨ˆç®—ã—ã¦è¨ˆç®—çµæžœã‚’ [[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   1.quo(2)              # => Rational(1,2)
 
 --- **(other) -> Integer | Float | Rational
 --- rpower (other) -> Integer | Float | Rational
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£other ¤¬ 0 °Ê²¼¤Î¾ì¹ç¡¢·×»»·ë²Ì¤ò
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚other ãŒ 0 ä»¥ä¸‹ã®å ´åˆã€è¨ˆç®—çµæžœã‚’
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
   2.rpower(3)           # => 8
   2.rpower(-3)          # => Rational(1, 8)
@@ -213,21 +213,21 @@ other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
 == Instance Methods
 --- power!(other) -> Integer | Float
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
-[[lib:rational]]¤ÇºÆÄêµÁ¤µ¤ì¤ëÁ°¤Î[[m:Fixnum#**]]¤ÎÊÌÌ¾¤Ç¤¹¡£
-other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
-¤Ê¤é¡¢ÉâÆ°¾®¿ô (Float) ¤òÊÖ¤·¤Þ¤¹¡£
+[[lib:rational]]ã§å†å®šç¾©ã•ã‚Œã‚‹å‰ã®[[m:Fixnum#**]]ã®åˆ¥åã§ã™ã€‚
+other ãŒæ­£ã¾ãŸã¯ 0 ã®æ•´æ•° (Integer) ãªã‚‰ã°ã€æ•´æ•° (Integer) ã‚’ã€ãã‚Œä»¥å¤–
+ãªã‚‰ã€æµ®å‹•å°æ•° (Float) ã‚’è¿”ã—ã¾ã™ã€‚
 
 #@since 1.8.8
 #@until 1.9.1
 --- gcd(other) -> Integer
 
-¼«¿È¤ÈÀ°¿ô other ¤ÎºÇÂç¸øÌó¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨æ•´æ•° other ã®æœ€å¤§å…¬ç´„æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤È¤ÎºÇÂç¸øÌó¿ô¤ò·×»»¤¹¤ë¿ô
+@param other è‡ªèº«ã¨ã®æœ€å¤§å…¬ç´„æ•°ã‚’è¨ˆç®—ã™ã‚‹æ•°
 
 @see [[m:Integer#gcd]]
 
@@ -238,119 +238,119 @@ other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
 == Instance Methods
 --- quo(other) -> Rational
 
-¾¦¤ò·×»»¤·¤Æ·×»»·ë²Ì¤ò [[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤·¤Þ¤¹¡£
+å•†ã‚’è¨ˆç®—ã—ã¦è¨ˆç®—çµæžœã‚’ [[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   (1<<32).quo(2)              # => Rational(2147483648, 1)
 
 --- **(other) -> Integer | Float | Rational
 --- rpower (other) -> Integer | Float | Rational
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£other ¤¬ 0 °Ê²¼¤Î¾ì¹ç¡¢·×»»·ë²Ì¤ò
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚other ãŒ 0 ä»¥ä¸‹ã®å ´åˆã€è¨ˆç®—çµæžœã‚’
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¿”ã—ã¾ã™ã€‚
 
   (1<<32).rpower(2)           # => 18446744073709551616
   (1<<32).rpower(-2)          # => Rational(1, 18446744073709551616)
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
 = reopen  Bignum
 == Instance Methods
 --- power!(other) -> Integer | Float
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
-[[lib:rational]]¤ÇºÆÄêµÁ¤µ¤ì¤ëÁ°¤Î[[m:Bignum#**]]¤ÎÊÌÌ¾¤Ç¤¹¡£
-other ¤¬Àµ¤Þ¤¿¤Ï 0 ¤ÎÀ°¿ô (Integer) ¤Ê¤é¤Ð¡¢À°¿ô (Integer) ¤ò¡¢¤½¤ì°Ê³°
-¤Ê¤é¡¢ÉâÆ°¾®¿ô (Float) ¤òÊÖ¤·¤Þ¤¹¡£
+[[lib:rational]]ã§å†å®šç¾©ã•ã‚Œã‚‹å‰ã®[[m:Bignum#**]]ã®åˆ¥åã§ã™ã€‚
+other ãŒæ­£ã¾ãŸã¯ 0 ã®æ•´æ•° (Integer) ãªã‚‰ã°ã€æ•´æ•° (Integer) ã‚’ã€ãã‚Œä»¥å¤–
+ãªã‚‰ã€æµ®å‹•å°æ•° (Float) ã‚’è¿”ã—ã¾ã™ã€‚
 
 #@until 1.9.1
 = class Rational < Numeric
 
-Í­Íý¿ô¤ò°·¤¦¥¯¥é¥¹¤Ç¤¹¡£
+æœ‰ç†æ•°ã‚’æ‰±ã†ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-¡Ö1/3¡×¤Î¤è¤¦¤ÊÍ­Íý¿ô¤ò°·¤¦»ö¤¬¤Ç¤­¤Þ¤¹¡£[[c:Integer]] ¤ä [[c:Float]]
-¤ÈÆ±ÍÍ¤Ë Rational.new ¤Ç¤Ï¤Ê¤¯¡¢ [[m:Kernel.#Rational]] ¤ò»ÈÍÑ¤·¤Æ
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Þ¤¹¡£
+ã€Œ1/3ã€ã®ã‚ˆã†ãªæœ‰ç†æ•°ã‚’æ‰±ã†äº‹ãŒã§ãã¾ã™ã€‚[[c:Integer]] ã‚„ [[c:Float]]
+ã¨åŒæ§˜ã« Rational.new ã§ã¯ãªãã€ [[m:Kernel.#Rational]] ã‚’ä½¿ç”¨ã—ã¦
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™ã€‚
 
-Integer < Rational < Float ¤Î½ç¤Ë¶¯¤¤¤Ç¤¹¡£¤Ä¤Þ¤ê other ¤¬ Float ¤Ê¤é¡¢
-self ¤ò Float ¤ËÊÑ´¹¤·¤Æ¤«¤é±é»»»Ò¤òÅ¬ÍÑ¤·¤Þ¤¹¡£other ¤¬ Integer ¤Ê¤é other ¤ò
-Rational ¤ËÊÑ´¹¤·¤Æ¤«¤é±é»»»Ò¤òÅ¬ÍÑ¤·¤Þ¤¹¡£ÑÑ¾è¤ÏÎã³°¤Ç¤¹¡£
+Integer < Rational < Float ã®é †ã«å¼·ã„ã§ã™ã€‚ã¤ã¾ã‚Š other ãŒ Float ãªã‚‰ã€
+self ã‚’ Float ã«å¤‰æ›ã—ã¦ã‹ã‚‰æ¼”ç®—å­ã‚’é©ç”¨ã—ã¾ã™ã€‚other ãŒ Integer ãªã‚‰ other ã‚’
+Rational ã«å¤‰æ›ã—ã¦ã‹ã‚‰æ¼”ç®—å­ã‚’é©ç”¨ã—ã¾ã™ã€‚å†ªä¹—ã¯ä¾‹å¤–ã§ã™ã€‚
 
 == Class Methods
 --- new!(num, den = 1) -> Rational
 
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-@param num Ê¬»Ò¤ò»ØÄê¤·¤Þ¤¹¡£
+@param num åˆ†å­ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param den Ê¬Êì¤ò»ØÄê¤·¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï 1 ¤Ç¤¹¡£
+@param den åˆ†æ¯ã‚’æŒ‡å®šã—ã¾ã™ã€‚çœç•¥ã—ãŸå ´åˆã¯ 1 ã§ã™ã€‚
 
-[[m:Kernel#Rational]] ¤È¤Ï°Û¤Ê¤ê¡¢ÌóÊ¬¤·¤Æ¤¤¤Ê¤¤ [[c:Rational]] ¥ª¥Ö¥¸¥§
-¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
+[[m:Kernel#Rational]] ã¨ã¯ç•°ãªã‚Šã€ç´„åˆ†ã—ã¦ã„ãªã„ [[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§
+ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational.new!(1, 3)         # => Rational(1, 3)
   Rational.new!(2, 6)         # => Rational(2, 6)
 
-¤Þ¤¿¡¢°ú¿ô¤Î¥Á¥§¥Ã¥¯¤â¹Ô¤ï¤ì¤Þ¤»¤ó¡£
+ã¾ãŸã€å¼•æ•°ã®ãƒã‚§ãƒƒã‚¯ã‚‚è¡Œã‚ã‚Œã¾ã›ã‚“ã€‚
 
-Îã:
+ä¾‹:
 
   Rational.new!(1, 0)         # => Rational(1, 0)
   Rational(1, 0)              # => ZeroDivisionError
 
-Ãí°Õ:
+æ³¨æ„:
 
-Rational.new! ¤Ï 1.9·Ï ¤Ç¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£[[m:Kernel.#Rational]] ¤ÎÊý
-¤ò»ÈÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
+Rational.new! ã¯ 1.9ç³» ã§ã¯å»ƒæ­¢ã•ã‚Œã¾ã—ãŸã€‚[[m:Kernel.#Rational]] ã®æ–¹
+ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ã€‚
 
-  # 1.9.1 ¤Î¾ì¹ç
+  # 1.9.1 ã®å ´åˆ
   Rational.new!(1, 3)  # => NoMethodError
 
 --- reduce(num, den = 1) -> Rational
 
-ÌóÊ¬¤µ¤ì¤¿ [[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+ç´„åˆ†ã•ã‚ŒãŸ [[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-@param num Ê¬»Ò¤ò»ØÄê¤·¤Þ¤¹¡£
+@param num åˆ†å­ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param den Ê¬Êì¤ò»ØÄê¤·¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï 1 ¤Ç¤¹¡£
+@param den åˆ†æ¯ã‚’æŒ‡å®šã—ã¾ã™ã€‚çœç•¥ã—ãŸå ´åˆã¯ 1 ã§ã™ã€‚
 
-@raise ZeroDivisionError den ¤Ë 0 ¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ZeroDivisionError den ã« 0 ã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-°ú¿ô num¡¢den ¤ÎÎ¾Êý¤ò»ØÄê¤·¤¿¾ì¹ç¡¢num/den ¤ò´ûÌó¤Ë¤Ê¤ë¤Þ¤ÇÌóÊ¬¤·¤¿
-[[c:Rational]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
+å¼•æ•° numã€den ã®ä¸¡æ–¹ã‚’æŒ‡å®šã—ãŸå ´åˆã€num/den ã‚’æ—¢ç´„ã«ãªã‚‹ã¾ã§ç´„åˆ†ã—ãŸ
+[[c:Rational]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
 
-[[m:Kernel#Rational]] ¤È¤Ï°Û¤Ê¤ê¡¢num ¤È den ¤Ë¤ÏÀ°¿ô¤·¤«»ØÄê¤Ç¤­¤Þ¤»¤ó¡£
+[[m:Kernel#Rational]] ã¨ã¯ç•°ãªã‚Šã€num ã¨ den ã«ã¯æ•´æ•°ã—ã‹æŒ‡å®šã§ãã¾ã›ã‚“ã€‚
 
-Îã:
+ä¾‹:
 
   Rational.reduce(2, 6)              # => Rational(1, 3)
   Rational.reduce(Rational(1, 3), 1) # => NoMethodError: undefined method `gcd' for Rational(1, 3):Rational
 
-Ãí°Õ:
+æ³¨æ„:
 
-Rational.reduce ¤Ï 1.9 ·Ï ¤Ç¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£[[m:Kernel.#Rational]] ¤Î
-Êý¤ò»ÈÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
+Rational.reduce ã¯ 1.9 ç³» ã§ã¯å»ƒæ­¢ã•ã‚Œã¾ã—ãŸã€‚[[m:Kernel.#Rational]] ã®
+æ–¹ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ã€‚
 
-  # 1.9.1 ¤Î¾ì¹ç
+  # 1.9.1 ã®å ´åˆ
   Rational.reduce(2, 6)  # => NoMethodError
 
 == Instance Methods
 
 --- numerator -> Integer
 
-Ê¬»Ò¤òÊÖ¤·¤Þ¤¹¡£
+åˆ†å­ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¬»Ò¤òÊÖ¤·¤Þ¤¹¡£
+@return åˆ†å­ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(7).numerator       # => 7
   Rational(7, 1).numerator    # => 7
@@ -361,11 +361,11 @@ Rational.reduce ¤Ï 1.9 ·Ï ¤Ç¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£[[m:Kernel.#Rational]] ¤Î
 
 --- denominator -> Integer
 
-Ê¬Êì¤òÊÖ¤·¤Þ¤¹¡£¾ï¤ËÀµ¤ÎÀ°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+åˆ†æ¯ã‚’è¿”ã—ã¾ã™ã€‚å¸¸ã«æ­£ã®æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¬Êì¤òÊÖ¤·¤Þ¤¹¡£
+@return åˆ†æ¯ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(7).denominator       # => 1
   Rational(7, 1).denominator    # => 1
@@ -376,14 +376,14 @@ Rational.reduce ¤Ï 1.9 ·Ï ¤Ç¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£[[m:Kernel.#Rational]] ¤Î
 
 --- +(other) -> Rational | Float
 
-ÏÂ¤ò·×»»¤·¤Þ¤¹¡£
+å’Œã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ËÂ­¤¹¿ô
+@param other è‡ªèº«ã«è¶³ã™æ•°
 
-other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢·×»»·ë²Ì¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ
-¤¹¡£
+other ã« [[c:Float]] ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ã€è¨ˆç®—çµæžœã‚’ [[c:Float]] ã§è¿”ã—ã¾
+ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3, 4) + 2               # => Rational(11, 4)
   Rational(3, 4) + Rational(2, 1)  # => Rational(11, 4)
@@ -391,64 +391,64 @@ other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢·×»»·ë²Ì¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ
 
 --- -(other) -> Rational | Float
 
-º¹¤ò·×»»¤·¤Þ¤¹¡£
+å·®ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤«¤é°ú¤¯¿ô
+@param other è‡ªèº«ã‹ã‚‰å¼•ãæ•°
 
-other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢·×»»·ë²Ì¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ
-¤¹¡£
+other ã« [[c:Float]] ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ã€è¨ˆç®—çµæžœã‚’ [[c:Float]] ã§è¿”ã—ã¾
+ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3, 4) - 1   # => Rational(-1, 4)
   Rational(3, 4) - 0.5 # => 0.25
 
 --- *(other) -> Rational | Float
 
-ÀÑ¤ò·×»»¤·¤Þ¤¹¡£
+ç©ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤Ë³Ý¤±¤ë¿ô
+@param other è‡ªèº«ã«æŽ›ã‘ã‚‹æ•°
 
-other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢·×»»·ë²Ì¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ
-¤¹¡£
+other ã« [[c:Float]] ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ã€è¨ˆç®—çµæžœã‚’ [[c:Float]] ã§è¿”ã—ã¾
+ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3, 4) * 2              # => Rational(3, 2)
   Rational(3, 4) * 4              # => Rational(3, 1)
   Rational(3, 4) * 0.5            # => 0.375
   Rational(3, 4) * Rational(1, 2) # => Rational(3, 8)
 
-other ¤Ë 0 ¤ò»ØÄê¤·¤¿¾ì¹ç¤â [[c:Rational]] ¤òÊÖ¤·¤Þ¤¹¡£
+other ã« 0 ã‚’æŒ‡å®šã—ãŸå ´åˆã‚‚ [[c:Rational]] ã‚’è¿”ã—ã¾ã™ã€‚
 
   Rational(3, 4) * 0              # => Rational(0, 1)
 
 --- /(other)   -> Rational | Float
 
-¾¦¤ò·×»»¤·¤Þ¤¹¡£
+å•†ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢·×»»·ë²Ì¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ
-¤¹¡£
+other ã« [[c:Float]] ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ã€è¨ˆç®—çµæžœã‚’ [[c:Float]] ã§è¿”ã—ã¾
+ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3, 4) / 2              # => Rational(3, 8)
   Rational(3, 4) / Rational(2, 1) # => Rational(3, 8)
   Rational(3, 4) / 2.0            # => 0.375
   Rational(3, 4) / 0              # => ZeroDivisionError
 
-@raise ZeroDivisionError other ¤¬ 0 ¤Î»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ZeroDivisionError other ãŒ 0 ã®æ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- %(other)      -> Rational | Float
 
-¾êÍ¾¤ò·×»»¤·¤Þ¤¹¡£ÀäÂÐÃÍ¤¬ self ¤ÎÀäÂÐÃÍ¤ò±Û¤¨¤Ê¤¤¡¢Éä¹æ¤¬ self ¤ÈÆ±¤¸
-Numeric ¤òÊÖ¤·¤Þ¤¹¡£
+å‰°ä½™ã‚’è¨ˆç®—ã—ã¾ã™ã€‚çµ¶å¯¾å€¤ãŒ self ã®çµ¶å¯¾å€¤ã‚’è¶Šãˆãªã„ã€ç¬¦å·ãŒ self ã¨åŒã˜
+Numeric ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Rational(3, 4) % 2               # => Rational(3, 4)
   Rational(3, 4) % Rational(2, 1)  # => Rational(3, 4)
@@ -456,36 +456,36 @@ Numeric ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- **(other) -> Rational | Float
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
-other ¤ËÀ°¿ô¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢·×»»·ë²Ì¤ò [[c:Rational]] ¤ÇÊÖ¤·¤Þ¤¹¡£
-other ¤ËÀ°¿ô°Ê³°¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï·×»»·ë²Ì¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ¤¹¡£
+other ã«æ•´æ•°ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ã€è¨ˆç®—çµæžœã‚’ [[c:Rational]] ã§è¿”ã—ã¾ã™ã€‚
+other ã«æ•´æ•°ä»¥å¤–ã‚’æŒ‡å®šã—ãŸå ´åˆã¯è¨ˆç®—çµæžœã‚’ [[c:Float]] ã§è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3, 4) ** 2              # => Rational(9, 16)
   Rational(3, 4) ** Rational(2, 1) # => 0.5625
   Rational(3, 4) ** 2.0            # => 0.5625
 
-Ãí°Õ:
+æ³¨æ„:
 
-1.9 ·Ï¤È¤Ï·×»»·ë²Ì¤Î¥ª¥Ö¥¸¥§¥¯¥È¤¬°Û¤Ê¤ë¾ì¹ç¤¬¤¢¤ë»ö¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£
-other ¤Ë [[c:Rational]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ë¤ÏÌá¤êÃÍ¤¬ [[c:Rational]] ¤òÊÖ
-¤¹¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£
+1.9 ç³»ã¨ã¯è¨ˆç®—çµæžœã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç•°ãªã‚‹å ´åˆãŒã‚ã‚‹äº‹ã«æ³¨æ„ã—ã¦ãã ã•ã„ã€‚
+other ã« [[c:Rational]] ã‚’æŒ‡å®šã—ãŸå ´åˆã«ã¯æˆ»ã‚Šå€¤ãŒ [[c:Rational]] ã‚’è¿”
+ã™å ´åˆãŒã‚ã‚Šã¾ã™ã€‚
 
-  # 1.9.1 ¤Î¾ì¹ç
+  # 1.9.1 ã®å ´åˆ
   Rational(3, 4) ** Rational(2, 1)  # => (9/16)
 
 #@since 1.8.7
 --- div(other) -> Integer
 
-self ¤ò other ¤Ç³ä¤Ã¤¿À°¿ô¤Î¾¦¤òÊÖ¤·¤Þ¤¹¡£
+self ã‚’ other ã§å‰²ã£ãŸæ•´æ•°ã®å•†ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Rational(1, 2).div(Rational(2, 3)) # => 0
 
@@ -493,13 +493,13 @@ self ¤ò other ¤Ç³ä¤Ã¤¿À°¿ô¤Î¾¦¤òÊÖ¤·¤Þ¤¹¡£
 
 --- divmod(other) -> [Integer, Float | Rational]
 
-self ¤ò other ¤Ç³ä¤Ã¤¿¡¢¾¦¤ÈÍ¾¤ê¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+self ã‚’ other ã§å‰²ã£ãŸã€å•†ã¨ä½™ã‚Šã®é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢Í¾¤ê¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ¤¹¡£
+other ã« [[c:Float]] ã‚’æŒ‡å®šã—ãŸå ´åˆã¯ã€ä½™ã‚Šã‚’ [[c:Float]] ã§è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Rational(3,4).divmod(Rational(2,3))  # => [1, Rational(1, 12)]
   Rational(-3,4).divmod(Rational(2,3)) # => [-2, Rational(7, 12)]
@@ -513,23 +513,23 @@ other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢Í¾¤ê¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ¤¹¡£
 
 --- abs -> Rational
 
-¼«¿È¤ÎÀäÂÐÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®çµ¶å¯¾å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(1, 2).abs.to_s  # => 1/2
   Rational(-1, 2).abs.to_s # => 1/2
 
 --- ==(other) -> bool
 
-¿ôÃÍ¤È¤·¤ÆÅù¤·¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ•°å€¤ã¨ã—ã¦ç­‰ã—ã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ÈÈæ³Ó¤¹¤ë¿ôÃÍ
+@param other è‡ªèº«ã¨æ¯”è¼ƒã™ã‚‹æ•°å€¤
 
-@return      self ¤È other ¤¬Åù¤·¤¤¾ì¹ç true ¤òÊÖ¤·¤Þ¤¹¡£
-             ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+@return      self ã¨ other ãŒç­‰ã—ã„å ´åˆ true ã‚’è¿”ã—ã¾ã™ã€‚
+             ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(2, 3)  == Rational(2, 3)   # => true
   Rational(5)     == 5                # => true
@@ -537,26 +537,26 @@ other ¤Ë [[c:Float]] ¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï¡¢Í¾¤ê¤ò [[c:Float]] ¤ÇÊÖ¤·¤Þ¤¹¡£
   Rational(1, 3)  == 0.33             # => false
   Rational(1, 2)  == '1/2'            # => false
 
-Ãí°Õ:
+æ³¨æ„:
 
-[[m:Rational.new!]] ¤ÇºîÀ®¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È¤ÈÈæ³Ó¤·¤¿¾ì¹ç¡¢Æ±¤¸¿ôÃÍ¤òÉ½
-¤¹¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤â true ¤òÊÖ¤µ¤Ê¤¤»ö¤¬¤¢¤ê¤Þ¤¹¡£
+[[m:Rational.new!]] ã§ä½œæˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨æ¯”è¼ƒã—ãŸå ´åˆã€åŒã˜æ•°å€¤ã‚’è¡¨
+ã™ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã‚‚ true ã‚’è¿”ã•ãªã„äº‹ãŒã‚ã‚Šã¾ã™ã€‚
 
   Rational(1,2) == Rational(4,8)          # => true
   Rational(1,2) == Rational.new!(4,8)     # => false
 
-¾Ü¤·¤¯¤Ï [[m:Rational.new!]] ¤ò³ÎÇ§¤·¤Æ¤¯¤À¤µ¤¤¡£
+è©³ã—ãã¯ [[m:Rational.new!]] ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
-self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
--1 ¤òÊÖ¤·¤Þ¤¹¡£Èæ³Ó¤Ç¤­¤Ê¤¤¾ì¹ç¤Ïnil¤òÊÖ¤·¤Þ¤¹¡£
+self ã¨ other ã‚’æ¯”è¼ƒã—ã¦ã€self ãŒå¤§ãã„æ™‚ã« 1ã€ç­‰ã—ã„æ™‚ã« 0ã€å°ã•ã„æ™‚ã«
+-1 ã‚’è¿”ã—ã¾ã™ã€‚æ¯”è¼ƒã§ããªã„å ´åˆã¯nilã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ÈÈæ³Ó¤¹¤ë¿ôÃÍ
+@param other è‡ªèº«ã¨æ¯”è¼ƒã™ã‚‹æ•°å€¤
 
-@return -1 ¤« 0 ¤« 1 ¤« nil ¤òÊÖ¤·¤Þ¤¹¡£
+@return -1 ã‹ 0 ã‹ 1 ã‹ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(2, 3)  <=> Rational(2, 3)  # => 0
   Rational(5)     <=> 5               # => 0
@@ -567,12 +567,12 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- coerce(other) -> Array
 
-¼«¿È¤È other ¤¬Æ±¤¸¥¯¥é¥¹¤Ë¤Ê¤ë¤è¤¦¡¢¼«¿È¤« other ¤òÊÑ´¹¤· [other, self] ¤È¤¤¤¦
-ÇÛÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ other ãŒåŒã˜ã‚¯ãƒ©ã‚¹ã«ãªã‚‹ã‚ˆã†ã€è‡ªèº«ã‹ other ã‚’å¤‰æ›ã— [other, self] ã¨ã„ã†
+é…åˆ—ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param other Èæ³Ó¤Þ¤¿¤ÏÊÑ´¹¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È
+@param other æ¯”è¼ƒã¾ãŸã¯å¤‰æ›ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-Îã:
+ä¾‹:
 
   Rational(1).coerce(2)   # => [Rational(2, 1), Rational(1, 1)]
   Rational(1).coerce(2.2) # => [2.2, 1.0]
@@ -580,18 +580,18 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 #@since 1.8.7
 --- floor -> Integer
 
-¼«¿È¤ÈÅù¤·¤¤¤«¤è¤ê¾®¤µ¤ÊÀ°¿ô¤Î¤¦¤ÁºÇÂç¤Î¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ç­‰ã—ã„ã‹ã‚ˆã‚Šå°ã•ãªæ•´æ•°ã®ã†ã¡æœ€å¤§ã®ã‚‚ã®ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3).floor     # => 3
   Rational(2, 3).floor  # => 0
   Rational(-3, 2).floor # => -2
 
-¼«¿È¤Ë¤â¤Ã¤È¤â¶á¤¤À°¿ô¤òÊÖ¤¹ [[m:Rational#to_i]] ¤È¤Ï°ã¤¦·ë²Ì¤òÊÖ¤¹»ö¤Ë
-Ãí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£
+è‡ªèº«ã«ã‚‚ã£ã¨ã‚‚è¿‘ã„æ•´æ•°ã‚’è¿”ã™ [[m:Rational#to_i]] ã¨ã¯é•ã†çµæžœã‚’è¿”ã™äº‹ã«
+æ³¨æ„ã—ã¦ãã ã•ã„ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(+7, 4).to_i  # => 1
   Rational(+7, 4).floor # => 1
@@ -602,9 +602,9 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- ceil                -> Integer
 
-¼«¿È¤ÈÅù¤·¤¤¤«¤è¤êÂç¤­¤ÊÀ°¿ô¤Î¤¦¤ÁºÇ¾®¤Î¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ç­‰ã—ã„ã‹ã‚ˆã‚Šå¤§ããªæ•´æ•°ã®ã†ã¡æœ€å°ã®ã‚‚ã®ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3).ceil      # => 3
   Rational(2, 3).ceil   # => 1
@@ -614,11 +614,11 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- round -> Integer
 
-¼«¿È¤È¤â¤Ã¤È¤â¶á¤¤À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ã‚‚ã£ã¨ã‚‚è¿‘ã„æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-Ãæ±ûÃÍ 0.5, -0.5 ¤Ï¤½¤ì¤¾¤ì 1,-1 ¤ËÀÚ¤ê¾å¤²¤µ¤ì¤Þ¤¹¡£
+ä¸­å¤®å€¤ 0.5, -0.5 ã¯ãã‚Œãžã‚Œ 1,-1 ã«åˆ‡ã‚Šä¸Šã’ã•ã‚Œã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(3).round     # => 3
   Rational(2, 3).round  # => 1
@@ -630,9 +630,9 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 #@end
 --- to_i -> Integer
 
-0 ¤«¤é ¼«¿È¤Þ¤Ç¤ÎÀ°¿ô¤Ç¡¢¼«¿È¤Ë¤â¤Ã¤È¤â¶á¤¤À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+0 ã‹ã‚‰ è‡ªèº«ã¾ã§ã®æ•´æ•°ã§ã€è‡ªèº«ã«ã‚‚ã£ã¨ã‚‚è¿‘ã„æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(2, 3).to_i   # => 0
   Rational(3).to_i      # => 3
@@ -645,11 +645,11 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- to_f -> Float
 
-¼«¿È¤ò [[c:Float]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Float]] ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@return ¼Â¿ô¤òÊÖ¤·¤Þ¤¹¡£
+@return å®Ÿæ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(9, 4).to_f   # => 2.25
   Rational(-3, 4).to_f  # => -0.75
@@ -657,13 +657,13 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- to_s -> String
 
-¼«¿È¤ò¿Í´Ö¤¬ÆÉ¤ß¤ä¤¹¤¤·Á¤ÎÊ¸»úÎóÉ½¸½¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’äººé–“ãŒèª­ã¿ã‚„ã™ã„å½¢ã®æ–‡å­—åˆ—è¡¨ç¾ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-"3/5", "-17/7" ¤Î¤è¤¦¤Ë10¿Ê¿ô¤ÎÉ½µ­¤òÊÖ¤·¤Þ¤¹¡£
+"3/5", "-17/7" ã®ã‚ˆã†ã«10é€²æ•°ã®è¡¨è¨˜ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Í­Íý¿ô¤ÎÉ½µ­¤Ë¤·¤¿Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+@return æœ‰ç†æ•°ã®è¡¨è¨˜ã«ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(-3, 4).to_s # => "-3/4"
   Rational(8).to_s     # => "8"
@@ -673,31 +673,31 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- to_r -> Rational
 
-¼«¿È¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return ¼«¿È¤òÊÖ¤·¤Þ¤¹¡£
+@return è‡ªèº«ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- hash -> Integer
 
-¼«¿È¤Î¥Ï¥Ã¥·¥åÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®ãƒãƒƒã‚·ãƒ¥å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return ¥Ï¥Ã¥·¥åÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+@return ãƒãƒƒã‚·ãƒ¥å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- inspect -> String
 
-¼«¿È¤ò"Rational(Ê¬»Ò, Ê¬Êì)" ·Á¼°¤ÎÊ¸»úÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’"Rational(åˆ†å­, åˆ†æ¯)" å½¢å¼ã®æ–‡å­—åˆ—ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@return Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+@return æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(5, 8).inspect  # => "Rational(5, 8)"
   Rational(2).inspect     # => "Rational(2, 1)"
   Rational(-8, 6).inspect # => "Rational(-4, 3)"
 
-1.9·Ï¤È¤Ï·ë²Ì¤¬°Û¤Ê¤ë»ö¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£
+1.9ç³»ã¨ã¯çµæžœãŒç•°ãªã‚‹äº‹ã«æ³¨æ„ã—ã¦ãã ã•ã„ã€‚
 
-  # 1.9.1¤Î¾ì¹ç
+  # 1.9.1ã®å ´åˆ
   Rational(5, 8).inspect  # => "(5/8)"
   Rational(2).inspect     # => "(2/1)"
   Rational(-8, 6).inspect # => "(-4/3)"
@@ -707,13 +707,13 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 #@since 1.8.8
 --- -@ -> Rational
 
-¼«¿È¤ÎÉä¹æ¤òÈ¿Å¾¤µ¤»¤¿¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®ç¬¦å·ã‚’åè»¢ã•ã›ãŸã‚‚ã®ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- zero? -> bool
 
-¿ôÃÍ¤È¤·¤Æ 0 ¤ÈÅù¤·¤¤¾ì¹ç¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
+æ•°å€¤ã¨ã—ã¦ 0 ã¨ç­‰ã—ã„å ´åˆã«çœŸã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Rational(0, 3).zero?  # => true
 
@@ -721,7 +721,7 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤Ë 1¡¢Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤Ë
 
 --- nonzero? -> bool
 
-¿ôÃÍ¤È¤·¤Æ 0 ¤ÈÅù¤·¤¯¤Ê¤¤¾ì¹ç¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
+æ•°å€¤ã¨ã—ã¦ 0 ã¨ç­‰ã—ããªã„å ´åˆã«çœŸã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Rational#zero?]]
 

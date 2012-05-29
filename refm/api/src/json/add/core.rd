@@ -1,25 +1,25 @@
 
-Ruby �Υ������饹�� JSON ������ʸ������Ѵ�����᥽�åɤ�
-JSON ������ʸ���󤫤� Ruby �Υ��֥������Ȥ��Ѵ�����᥽�åɤ�������ޤ���
+Ruby のコアクラスに JSON 形式の文字列に変換するメソッドや
+JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
 = reopen Time
 == Singleton Methods
 
 --- json_create(hash) -> Time
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����Ϥ��Τޤ� [[m:Hash#to_json]] ���Ϥ���ޤ���
+@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
 
 @see [[m:Hash#to_json]]
 
@@ -28,19 +28,19 @@ JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
 
 --- json_create(hash) -> Date
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����Ϥ��Τޤ� [[m:Hash#to_json]] ���Ϥ���ޤ���
+@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
 
 @see [[m:Hash#to_json]]
 
@@ -50,19 +50,19 @@ JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
 
 --- json_create(hash) -> DateTime
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����Ϥ��Τޤ� [[m:Hash#to_json]] ���Ϥ���ޤ���
+@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
 
 @see [[m:Hash#to_json]]
 
@@ -72,19 +72,19 @@ JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
 
 --- json_create(hash) -> Range
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����Ϥ��Τޤ� [[m:Hash#to_json]] ���Ϥ���ޤ���
+@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
 
 @see [[m:Hash#to_json]]
 
@@ -94,19 +94,19 @@ JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
 
 --- json_create(hash) -> Struct
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����Ϥ��Τޤ� [[m:Hash#to_json]] ���Ϥ���ޤ���
+@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
 
 @see [[m:Hash#to_json]]
 
@@ -116,19 +116,19 @@ JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
 
 --- json_create(hash) -> Exception
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����Ϥ��Τޤ� [[m:Hash#to_json]] ���Ϥ���ޤ���
+@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
 
 @see [[m:Hash#to_json]]
 
@@ -138,18 +138,18 @@ JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
 
 --- json_create(hash) -> Regexp
 
-JSON �Υ��֥������Ȥ��� Ruby �Υ��֥������Ȥ����������֤��ޤ���
+JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 
-@param hash Ŭ�ڤʥ�������ĥϥå������ꤷ�ޤ���
+@param hash 適切なキーを持つハッシュを指定します。
 
 == Public Instance Methods
 
 --- to_json(*args) -> String
 
-���Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を JSON 形式の文字列に変換して返します。
 
-����Ū�ˤϥϥå���˥ǡ����򥻥åȤ��Ƥ��� [[m:Hash#to_json]] ��ƤӽФ��Ƥ��ޤ���
+内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
 
-@param args �����ˤϲ��ΰ�̣�⤢��ޤ���
+@param args 引数には何の意味もありません。
 
 

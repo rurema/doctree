@@ -3,21 +3,21 @@ require irb/frame
 
 #@# Author: Keiju ISHITSUKA
 
-Ruby �Υ����������ɤȤ��μ¹Է�̤򡢹Ԥ��Ȥ˸�ߤ�ɽ�����뤿��Υ饤��
-���Ǥ���irb ��¹Ԥ��ʤ��Ƥ⡢���Ѥ��뤳�Ȥ�����ޤ���
+Ruby のソースコードとその実行結果を、行ごとに交互に表示するためのライブ
+ラリです。irb を実行しなくても、使用することが出来ます。
 
-#@# ���Ȥ��� xmp ([[ruby-list:8489]])�ξ�̸ߴ��С������Ǥ�.
-#@# ����, ���˽Ť��ΤǤ��Ȥ��� xmp �Ǥ��б��Ǥ��ʤ����˻��Ѥ�����ɤ��Ǥ��礦.
+#@# ごとけん xmp ([[ruby-list:8489]])の上位互換バージョンです.
+#@# ただ, 非常に重いのでごとけん xmp では対応できない時に使用すると良いでしょう.
 
-�¹Է�̤����뤿��ˤϡ�[[m:Kernel#xmp]] �ȡ�[[m:XMP#puts]] ��Ȥä���
-ˡ������ޤ����ɤ���ξ��� [[c:XMP]] ������ƥ����Ⱦ�����ݻ����뤿�ᡢ
-�¹Է�̤˺�ʬ�Ϥ���ޤ���([[c:Binding]] �����Ǥ��륿���ߥ󥰤ϰ㤤
-�ޤ�)
+実行結果を得るためには、[[m:Kernel#xmp]] と、[[m:XMP#puts]] を使った方
+法があります。どちらの場合も [[c:XMP]] がコンテキスト情報を保持するため、
+実行結果に差分はありません。([[c:Binding]] を指定できるタイミングは違い
+ます)
 
-==== �ؿ�(Kernel#xmp)��ȤäƼ¹Է�̤�����
+==== 関数(Kernel#xmp)を使って実行結果を得る
 
-[[m:Kernel#xmp]] �Ǥϡ��ʲ��Τ褦�� Ruby �Υ����������ɤ�ʸ����Ȥ�����
-�����Ǽ¹Է�̤�ɸ����Ϥ�ɽ�����ޤ���
+[[m:Kernel#xmp]] では、以下のように Ruby のソースコードを文字列として渡
+す事で実行結果を標準出力に表示します。
 
   $ cat t.rb
   require "irb/xmp"
@@ -31,10 +31,10 @@ Ruby �Υ����������ɤȤ��μ¹Է�̤򡢹Ԥ��Ȥ˸�ߤ�ɽ�����뤿��Υ饤��
   foo
       ==>1
 
-==== XMP ���󥹥���(XMP#puts)��ȤäƼ¹Է�̤�����
+==== XMP インスタンス(XMP#puts)を使って実行結果を得る
 
-[[m:XMP#puts]] �Ǥϡ��ʲ��Τ褦�� Ruby �Υ����������ɤ�ʸ����Ȥ����Ϥ�
-���Ǽ¹Է�̤�ɸ����Ϥ�ɽ�����ޤ���
+[[m:XMP#puts]] では、以下のように Ruby のソースコードを文字列として渡す
+事で実行結果を標準出力に表示します。
 
   $ cat t.rb
   require "irb/xmp"
@@ -54,27 +54,27 @@ Ruby �Υ����������ɤȤ��μ¹Է�̤򡢹Ԥ��Ȥ˸�ߤ�ɽ�����뤿��Υ饤��
   foo
       ==>1
 
-[[c:XMP]] ������ƥ����Ⱦ����������Ƥ��뤿�ᡢ�ѿ� foo �� 2 ���ܤθ�
-�ӽФ��Ǥ��ݻ����Ƥ��ޤ���[[m:Kernel#xmp]] �Ǥ�Ʊ�ͤ�����Ԥ��ޤ���
+[[c:XMP]] がコンテキスト情報を管理しているため、変数 foo を 2 度目の呼
+び出しでも保持しています。[[m:Kernel#xmp]] でも同様の操作を行えます。
 
-==== ����ƥ�����
+==== コンテキスト
 
-[[c:XMP]] �᥽�åɷ��Υ���ƥ����Ȥϡ��ƤӽФ����Υ���ƥ����Ȥ�ɾ����
-��ޤ�������Ū�˥���ƥ����Ȥ���ꤹ��Ȥ��Υ���ƥ����Ȥ�ɾ�����ޤ���
+[[c:XMP]] メソッド群のコンテキストは、呼び出す前のコンテキストで評価さ
+れます。明示的にコンテキストを指定するとそのコンテキストで評価します。
 
-��:
+例:
 
   xmp "foo", an_binding
 
-[����] �ޥ������åɤˤ��б����Ƥ��ޤ���
+[注意] マルチスレッドには対応していません。
 
-==== ����
+==== 注意
 
-[[lib:xmp]] �������� irb ����Ѥ�����Ǽ¹Է�̤�ɽ�����Ƥ��ޤ�
-([[m:IRB::Context#prompt_mode]] ������Ǥ��� :XMP �⡼�ɤϤ��Τ������
-�դ���Ƥ��ޤ�)�����Τ��ᡢirb �ץ���ץ���ǻ��Ѳ�ǽ�ʥ��ޥ�ɤ�¹Ԥ�
-�����˼¹Է�̤���������Ǥ����������դ��Ƥ���������(��. nil ���֤����
-���Ԥ��� conf ��¹Ԥ���)
+[[lib:xmp]] は内部で irb を使用する事で実行結果を表示しています
+([[m:IRB::Context#prompt_mode]] で選択できる :XMP モードはそのために用
+意されています)。そのため、irb プロンプト中で使用可能なコマンドを実行し
+た時に実行結果を得る事ができる点に注意してください。(例. nil が返る事を
+期待して conf を実行する)
 
 = reopen Kernel
 
@@ -82,30 +82,30 @@ Ruby �Υ����������ɤȤ��μ¹Է�̤򡢹Ԥ��Ȥ˸�ߤ�ɽ�����뤿��Υ饤��
 
 --- xmp(exps, bind = nil) -> XMP
 
-���� exps �ǻ��ꤵ�줿Ruby �Υ����������ɤȤ��μ¹Է�̤�ɸ����Ϥ˹�
-���Ȥ˸�ߤ�ɽ�����ޤ���
+引数 exps で指定されたRuby のソースコードとその実行結果を、標準出力に行
+ごとに交互に表示します。
 
-@param exps ɾ������Ruby �Υ����������ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param exps 評価するRuby のソースコードを文字列で指定します。
 
-@param bind [[c:Binding]] ���֥������Ȥ���ꤷ�ޤ�����ά�������ϡ���
-            ��˼¹Ԥ��� [[m:XMP#puts]]��[[m:Kernel#xmp]] ��
-            [[c:Binding]] ����Ѥ��ޤ����ޤ�����¹Ԥ��Ƥ��ʤ�����
-            [[m:Kernel::TOPLEVEL_BINDING]] ����Ѥ��ޤ���
+@param bind [[c:Binding]] オブジェクトを指定します。省略した場合は、最
+            後に実行した [[m:XMP#puts]]、[[m:Kernel#xmp]] の
+            [[c:Binding]] を使用します。まだ何も実行していない場合は
+            [[m:Kernel::TOPLEVEL_BINDING]] を使用します。
 
 = class XMP
 
-Ruby �Υ����������ɤȤ��μ¹Է�̤򡢹Ԥ��Ȥ˸�ߤ�ɽ�����뤿��Υ��饹�Ǥ���
+Ruby のソースコードとその実行結果を、行ごとに交互に表示するためのクラスです。
 
 == Class Methods
 
 --- new(bind = nil) -> XMP
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param bind [[c:Binding]] ���֥������Ȥ���ꤷ�ޤ�����ά�������ϡ���
-            ��˼¹Ԥ��� [[m:XMP#puts]]��[[m:Kernel#xmp]] ��
-            [[c:Binding]] ����Ѥ��ޤ����ޤ�����¹Ԥ��Ƥ��ʤ�����
-            [[m:Kernel::TOPLEVEL_BINDING]] ����Ѥ��ޤ���
+@param bind [[c:Binding]] オブジェクトを指定します。省略した場合は、最
+            後に実行した [[m:XMP#puts]]、[[m:Kernel#xmp]] の
+            [[c:Binding]] を使用します。まだ何も実行していない場合は
+            [[m:Kernel::TOPLEVEL_BINDING]] を使用します。
 
 @see [[m:XMP#puts]]
 
@@ -113,7 +113,7 @@ Ruby �Υ����������ɤȤ��μ¹Է�̤򡢹Ԥ��Ȥ˸�ߤ�ɽ�����뤿��Υ��饹�Ǥ���
 
 --- puts(exps) -> nil
 
-���� exps �ǻ��ꤵ�줿Ruby �Υ����������ɤȤ��μ¹Է�̤�ɸ����Ϥ˹�
-���Ȥ˸�ߤ�ɽ�����ޤ���
+引数 exps で指定されたRuby のソースコードとその実行結果を、標準出力に行
+ごとに交互に表示します。
 
-@param exps ɾ������Ruby �Υ����������ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param exps 評価するRuby のソースコードを文字列で指定します。

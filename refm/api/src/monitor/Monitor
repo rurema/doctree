@@ -2,12 +2,12 @@
 
 include MonitorMixin
 
-¥¹¥ì¥Ã¥É¤ÎÆ±´üµ¡¹½¤È¤·¤Æ¤Î¥â¥Ë¥¿¡¼µ¡Ç½¤òÄó¶¡¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
-¤Ş¤¿Æ±¤¸¥¹¥ì¥Ã¥É¤«¤é²¿ÅÙ¤â lock ¤Ç¤­¤ë Mutex ¤È¤·¤Æ¤Îµ¡Ç½¤âÄó¶¡¤·¤Ş¤¹¡£
+ã‚¹ãƒ¬ãƒƒãƒ‰ã®åŒæœŸæ©Ÿæ§‹ã¨ã—ã¦ã®ãƒ¢ãƒ‹ã‚¿ãƒ¼æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+ã¾ãŸåŒã˜ã‚¹ãƒ¬ãƒƒãƒ‰ã‹ã‚‰ä½•åº¦ã‚‚ lock ã§ãã‚‹ Mutex ã¨ã—ã¦ã®æ©Ÿèƒ½ã‚‚æä¾›ã—ã¾ã™ã€‚
 
-[[c:MonitorMixin]] ¤ò include ¤·¡¢¤¤¤¯¤Ä¤«¤ÎÊÌÌ¾¤òÄêµÁ¤·¤¿¥¯¥é¥¹¤Ç¤¹¡£
+[[c:MonitorMixin]] ã‚’ include ã—ã€ã„ãã¤ã‹ã®åˆ¥åã‚’å®šç¾©ã—ãŸã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-=== Îã
+=== ä¾‹
 
   require 'monitor'
   
@@ -33,7 +33,7 @@ include MonitorMixin
     end
   end
 
-2²ó¥í¥Ã¥¯¤·¤Æ¤â¥Ç¥Ã¥É¥í¥Ã¥¯¤Ë¤Ê¤é¤Ê¤¤Îã¤Ç¤¹¡£
+2å›ãƒ­ãƒƒã‚¯ã—ã¦ã‚‚ãƒ‡ãƒƒãƒ‰ãƒ­ãƒƒã‚¯ã«ãªã‚‰ãªã„ä¾‹ã§ã™ã€‚
 
    require 'monitor'
    mon = Monitor.new
@@ -43,7 +43,7 @@ include MonitorMixin
      }
    }
 
-[[c:Mutex]] ¤Ç¤Ï¥Ç¥Ã¥É¥í¥Ã¥¯¤Ë¤Ê¤ê¤Ş¤¹¡£
+[[c:Mutex]] ã§ã¯ãƒ‡ãƒƒãƒ‰ãƒ­ãƒƒã‚¯ã«ãªã‚Šã¾ã™ã€‚
 
    require 'thread'
    mx = Mutex.new
@@ -57,15 +57,15 @@ include MonitorMixin
 == Class Methods
 
 --- new -> Monitor
-¿·¤·¤¤ Monitor ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
+æ–°ã—ã„ Monitor ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- enter -> ()
-[[m:MonitorMixin#mon_enter]] ¤ÎÊÌÌ¾¤Ç¤¹¡£
+[[m:MonitorMixin#mon_enter]] ã®åˆ¥åã§ã™ã€‚
 
 --- exit -> ()
-[[m:MonitorMixin#mon_exit]] ¤ÎÊÌÌ¾¤Ç¤¹¡£
+[[m:MonitorMixin#mon_exit]] ã®åˆ¥åã§ã™ã€‚
 
 --- try_enter -> bool
-[[m:MonitorMixin#mon_try_enter]] ¤ÎÊÌÌ¾¤Ç¤¹¡£
+[[m:MonitorMixin#mon_try_enter]] ã®åˆ¥åã§ã™ã€‚

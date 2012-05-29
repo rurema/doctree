@@ -12,12 +12,12 @@ require wsdl/info
 --- element
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo
@@ -28,4 +28,4 @@ require wsdl/info
 --- type
 #@todo
 
-Â°À­
+å±žæ€§

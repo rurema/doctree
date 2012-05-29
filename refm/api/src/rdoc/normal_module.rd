@@ -1,3 +1,3 @@
-[[c:RDoc::NormalModule]] дЄ─ъ╡┴д╣дые╡е╓ещеде╓ещеъд╟д╣бг
+[[c:RDoc::NormalModule]] уВТхоЪч╛йуБЩуВЛуВ╡уГЦуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 #@include(RDoc__NormalModule)

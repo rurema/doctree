@@ -1,52 +1,52 @@
-���Υ饤�֥��� RubyUnit �Ȥθߴ������󶡤��뤿��������󶡤���Ƥ��ޤ���
-���줫���˥åȥƥ��Ȥ�񤯤Ȥ���
-[[lib:test/unit]] �饤�֥���ȤäƤ���������
+このライブラリは RubyUnit との互換性を提供するためだけに提供されています。
+これからユニットテストを書くときは
+[[lib:test/unit]] ライブラリを使ってください。
 
 
 = class RUNIT::TestResult < Test::Unit::TestResult
 
-�ƥ��Ȥμ¹Է�̤��Ǽ���륯�饹�Ǥ���
+テストの実行結果を格納するクラスです。
 
 == Instance Methods
 
 --- errors -> Array
 
-���顼��ȯ�������ƥ��ȥ�������������֤��ޤ���
+エラーが発生したテストケースの配列を返します。
 
 --- failures -> Array
 
-���Ԥ����ƥ��ȥ�������������֤��ޤ���
+失敗したテストケースの配列を返します。
 
 --- succeed? -> bool
 
-�������Ƥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+成功している場合は、真を返します。
+そうでない場合は、偽を返します。
 
 --- failure_size -> Integer
 
-���Ԥ���������֤��ޤ���
+失敗した件数を返します。
 
 --- run_asserts -> Integer
 
-�����������η�����֤��ޤ���
+アサーションの件数を返します。
 
 --- error_size -> Integer
 
-���顼��ȯ������������֤��ޤ���
+エラーが発生した件数を返します。
 
 --- run_tests -> Integer
 
-�ƥ��Ȥη�����֤��ޤ���
+テストの件数を返します。
 
 --- add_failure(failure) -> ()
 
-���Ԥ����ƥ��Ȥ��ɲä��ޤ���
+失敗したテストを追加します。
 
-@param failure ���Ԥ����ƥ��Ȥ���ꤷ�ޤ���
+@param failure 失敗したテストを指定します。
 
 --- add_error(error) -> ()
 
-���顼��ȯ�������ƥ��Ȥ��ɲä��ޤ���
+エラーが発生したテストを追加します。
 
-@param error ���顼��ȯ�������ƥ��Ȥ���ꤷ�ޤ���
+@param error エラーが発生したテストを指定します。
 

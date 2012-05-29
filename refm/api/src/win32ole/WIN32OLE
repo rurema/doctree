@@ -1,25 +1,25 @@
 = class WIN32OLE < Object
 
-OLE�����ȥ᡼����󥵡��Ф�Ruby�����뤿��Υ��饹�Ǥ���
+OLEオートメーションサーバをRubyで操作するためのクラスです。
 
-Windows��¿���Υ��ץꥱ��������饤�֥��ϡ�COM�ȸƤФ��API��������
-����¾�Υץ�����फ�����Ǥ��ޤ���WIN32OLE�����ݡ��Ȥ��Ƥ���Τϡ�
-COM��API�Τ������ä˥��󥿡��ץ꥿�ѤΥ��󥿡��ե������Ǥ���OLE�����ȥ᡼
-������IDispatch���󥿡��ե������ˤȤ�����տ魯���ե쥯������ѤΥ�
-�󥿡��ե������Ǥ���
+Windowsの多くのアプリケーションやライブラリは、COMと呼ばれるAPI群を利用
+して他のプログラムから操作できます。WIN32OLEがサポートしているのは、
+COMのAPIのうち、特にインタープリタ用のインターフェイスであるOLEオートメー
+ション（IDispatchインターフェイス）とそれに付随するリフレクション用のイ
+ンターフェイスです。
 
-�����Υ��󥿡��ե������򥵥ݡ��Ȥ��Ƥ�����ɽŪ��Windows���ץꥱ������
-��ˡ�Office��IE��iTunes��Illustrator������ޤ����ޤ���WMI��WshShell��
-�ɤΥ饤�֥������Ѥ���Windows�ξ�������뤳�Ȥ��ǽ�Ǥ���������
-�ץ�������OLE�����ȥ᡼����󥵡��ФȸƤӤޤ���
+これらのインターフェイスをサポートしている代表的なWindowsアプリケーショ
+ンに、Office、IE、iTunes、Illustratorがあります。また、WMI、WshShellな
+どのライブラリを利用してWindowsの情報を操作することも可能です。これらの
+プログラムをOLEオートメーションサーバと呼びます。
 
-WIN32OLE���֥������Ȥϡ�OLE�����ȥ᡼����󥵡��Ф��󶡤���᥽�åɤ��
-���ѥƥ���Ruby��°�����б��ˤ򥹥���ץȤ���ƤӽФ����ʤ��󶡤��ޤ���
-�ƤӽФ��ˤϡ�Ruby�Υ��֥������Ȥ�Ʊ�ͤ˥��֥������Ȥ�³���ơ�.�פȥ᥽��
-��̾��ɬ�פǤ���а����Υꥹ�Ȥ򵭽Ҥ��ޤ����Ǹ�ΰ�����Hash����ꤷ��
-���ϡ�̾���դ������Ȥ��ƥ����˥ѥ�᡼��̾���ͤ˰��������Ǥ��ޤ���
+WIN32OLEオブジェクトは、OLEオートメーションサーバが提供するメソッドやプ
+ロパティ（Rubyの属性に対応）をスクリプトから呼び出す手段を提供します。
+呼び出しには、Rubyのオブジェクトと同様にオブジェクトに続けて「.」とメソッ
+ド名、必要であれば引数のリストを記述します。最後の引数にHashを指定した
+場合は、名前付き引数としてキーにパラメータ名、値に引数を指定できます。
 
-=== ����ץ륳����
+=== サンプルコード
 
 #@if (version < "1.9.0")
   require 'win32ole'
@@ -39,9 +39,9 @@ WIN32OLE���֥������Ȥϡ�OLE�����ȥ᡼����󥵡��Ф��󶡤���᥽�åɤ��
   excel.Quit
 #@end
 
-�ʤ���OLE�����ȥ᡼�����λ��ͤǤϥ᥽�å�̾����ʸ���Ⱦ�ʸ������̤���
-���󡣤��Τ��ᡢ�ʲ��Τ褦��OLE�����ȥ᡼����󥵡��ФΥ᥽�å�̾�Ͼ�ʸ
-���ǵ��Ҥ��Ƥ⹽���ޤ���
+なお、OLEオートメーションの仕様ではメソッド名は大文字と小文字を区別しま
+せん。そのため、以下のようにOLEオートメーションサーバのメソッド名は小文
+字で記述しても構いません。
 
 #@if (version < "1.9.0")
   require 'win32ole'
@@ -63,14 +63,14 @@ WIN32OLE���֥������Ȥϡ�OLE�����ȥ᡼����󥵡��Ф��󶡤���᥽�åɤ��
 
 #@since 1.9.1
 
-=== �ޥ������åɤǤ���������
+=== マルチスレッドでの利用制限
 
-���˰ʲ��ε��Ҥ�WIN32OLE�ξ���ΥС������λ��ͤ��ꤹ���ΤǤϤ���
-�ޤ���
+注）以下の記述はWIN32OLEの将来のバージョンの仕様を規定するものではあり
+ません。
 
-WIN32OLE�ϥ��󥰥륹��åɥ⡼�ɤ�COM�ȥ��󥿡��ե��������ޤ������Τ��ᡢ
-ruby 1.9�ʹߤ�Ruby��Thread�ȥͥ��ƥ��֥���åɤ�1��1���б�����¹ԴĶ�
-�Ǥϥ���åɤ�ޤ�����ƤӽФ��ϥ��顼�Ȥʤ�ޤ���
+WIN32OLEはシングルスレッドモードでCOMとインターフェイスします。このため、
+ruby 1.9以降のRubyのThreadとネイティブスレッドが1対1で対応する実行環境
+ではスレッドをまたがる呼び出しはエラーとなります。
 
   excel = WIN32OLE.new('Excel.Application')
   Thread.start do
@@ -80,9 +80,9 @@ ruby 1.9�ʹߤ�Ruby��Thread�ȥͥ��ƥ��֥���åɤ�1��1���б�����¹ԴĶ�
   end.join
   excel.Quit
 
-ȯ�����륨�顼��Thread�μ¹���ˡ�ˤ�ä�
-0x800401f0��CO_E_NOTINITIALIZED�ˤޤ���0x8001010e��RPC_E_WRONG_THREAD��
-�Ǥ���
+発生するエラーはThreadの実行方法によって
+0x800401f0（CO_E_NOTINITIALIZED）または0x8001010e（RPC_E_WRONG_THREAD）
+です。
 
 #@end
 
@@ -92,152 +92,152 @@ ruby 1.9�ʹߤ�Ruby��Thread�ȥͥ��ƥ��֥���åɤ�1��1���б�����¹ԴĶ�
 
 --- create_guid -> String
 
-GUID(�������Х��ռ��̻ҡ�Global Unique Identifier)���������ޤ���
+GUID(グローバル一意識別子：Global Unique Identifier)を生成します。
 
-GUID�ϡ�COM�Υ��饹���̻�(CLSID)�����󥿡��ե��������̻�(IID)�ʤ�¿����
-�ΰ��Windows��Υ��֥������Ȥμ��̤����Ѥ����128�ӥåȤ��ͤǤ���
+GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(IID)など多数の
+領域でWindows上のオブジェクトの識別に利用される128ビットの値です。
 
-WIN32OLE����������GUID�ϰʲ��η����ˤ��GUID��ʸ����ɽ���Ǥ����ʤ�00��
-FF��GUID����Ƭ����ΥХ��Ȱ��֤򼨤��ޤ�������ϥ쥸���ȥ�Υ����Ȥ���
-���Ѥ��������Ǥ���
+WIN32OLEが生成するGUIDは以下の形式によるGUIDの文字列表現です。なお00〜
+FFはGUIDの先頭からのバイト位置を示します。これはレジストリのキーとして
+利用される形式です。
 
   {33221100-5544-7766-8899-AABBCCDDEEFF}
 
-@return GUID��ʸ����ɽ�����֤��ޤ���
+@return GUIDの文字列表現を返します。
 
    WIN32OLE.create_guid   # => "{????????-????-????-????-????????????}"
 
 --- locale -> Fixnum
 
-WIN32OLE�������ȥ᡼�����ƤӽФ��������ꤹ��������뼱�̻�(LCID)���
-�����ޤ���
+WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を取
+得します。
 
-OLE�����ȥ᡼�����Ǥϡ�UNIX�����Ѥ����"ja_JP"�ʤɤι�̾�ȸ���̾���_��
-����³����ʸ����ǤϤʤ���32�ӥå������Ǽ����ޤ���32�ӥåȤ������Ͼ��
-16�ӥåȤ�ͽ���ΰ��0������16�ӥåȤ�����ID(LANGID�ˤǤ���LANGID�ϡ�0��
-9�ӥåȤǥץ饤�ޥ����ID��10��15�ӥåȤǥ��ָ���ID�򼨤��ޤ���
+OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名と言語名を「_」
+で接続した文字列ではなく、32ビット整数で示します。32ビットの内訳は上位
+16ビットが予約領域で0、下位16ビットが言語ID(LANGID）です。LANGIDは、0〜
+9ビットでプライマリ言語ID、10〜15ビットでサブ言語IDを示します。
 
-�����ɻ��δ����ͤ�[[m:WIN32OLE::LOCALE_SYSTEM_DEFAULT]]�Ǥ���
+ロード時の既定値は[[m:WIN32OLE::LOCALE_SYSTEM_DEFAULT]]です。
 
-@return WIN32OLE�������ȥ᡼�����ƤӽФ��������ꤹ��������뼱�̻�
-        (LCID)���֤��ޤ���
+@return WIN32OLEがオートメーション呼び出し時に設定するロケール識別子
+        (LCID)を返します。
 
    lcid = WIN32OLE.locale
 
 --- locale=(lcid) -> nil
 
-WIN32OLE�������ȥ᡼�����ƤӽФ��������ꤹ��������뼱�̻�(LCID)����
-�ꤷ�ޤ���
+WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を設
+定します。
 
-OLE�����ȥ᡼�����Ǥϡ�UNIX�����Ѥ����"ja_JP"�ʤɤι�̾�ȸ���̾���_��
-����³����ʸ����ǤϤʤ���32�ӥå������Ǽ����ޤ���32�ӥåȤ������Ͼ��
-16�ӥåȤ�ͽ���ΰ��0������16�ӥåȤ�����ID(LANGID�ˤǤ���LANGID�ϡ�0��
-9�ӥåȤǥץ饤�ޥ����ID��10��15�ӥåȤǥ��ָ���ID�򼨤��ޤ���
+OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名と言語名を「_」
+で接続した文字列ではなく、32ビット整数で示します。32ビットの内訳は上位
+16ビットが予約領域で0、下位16ビットが言語ID(LANGID）です。LANGIDは、0〜
+9ビットでプライマリ言語ID、10〜15ビットでサブ言語IDを示します。
 
-@param lcid ���������ꤹ��������뼱�̻Ҥ������ǻ��ꤷ�ޤ���
+@param lcid 新たに設定するロケール識別子を整数で指定します。
 
-@raise WIN32OLERuntimeError �����ƥ�˥��󥹥ȡ��뤵��Ƥ��ʤ���������
-                            ����ꤹ���ȯ�����ޤ���
+@raise WIN32OLERuntimeError システムにインストールされていないロケール
+                            を指定すると発生します。
 
    WIN32OLE.locale = 1033 # set locale English(U.S)
    obj = WIN32OLE_VARIANT.new("$100,000", WIN32OLE::VARIANT::VT_CY)
 
-���֥������Ȥ����ݡ��Ȥ��Ƥ��ʤ�������������ꤷ����硢���֥������ȤΥ᥽�åɸƤӽФ�����DISP_E_UNKNOWNLCID(HRESULT error code:0x8002000C)�䡢TYPE_E_INVDATAREAD(HRESULT error code:0x80028018)�ʤɤ���ͳ�Ȥ���WIN32OLERuntimeError�㳰�Ȥʤ�ޤ����ۤȤ�ɤ��٤Ƥξ��ˤ����ơ������ͤ��ѹ�����ɬ�פϤ���ޤ���
+オブジェクトがサポートしていないロケールを設定した場合、オブジェクトのメソッド呼び出し時にDISP_E_UNKNOWNLCID(HRESULT error code:0x8002000C)や、TYPE_E_INVDATAREAD(HRESULT error code:0x80028018)などを理由としたWIN32OLERuntimeError例外となります。ほとんどすべての場合において、既定値を変更する必要はありません。
 
 #@end
 
 --- codepage -> Fixnum
 
-WIN32OLE��OLE�����ȥ᡼�����Υ��󥿡��ե����������Ѥ��륳���ɥڡ�����
-�������ޤ���
+WIN32OLEがOLEオートメーションのインターフェイスに利用するコードページを
+取得します。
 
-OLE�����ȥ᡼���������Ѥ���ʸ�����Unicode�ǥ��󥳡��ɤ��ޤ���
-WIN32OLE�Ϥ����Ǽ����줿�����ɥڡ��������Ѥ���Ruby��String��Unicode����
-���Ѵ���Ԥ��ޤ���
+OLEオートメーションに利用する文字列はUnicodeでエンコードします。
+WIN32OLEはここで示されたコードページを利用してRubyのStringとUnicodeの相
+互変換を行います。
 
-�����ɻ��δ����ͤ�Encoding.default_internal���ޤ���
-Encoding.default_internal��nil�ξ���Encoding.default_external�ˤ�ä�
-��᤿���󥳡��ǥ��󥰤��б����륳���ɥڡ����Ǥ����⤷���������륳����
-�ڡ��������Ĥ���ʤ����ϡ�[[m:WIN32OLE::CP_ACP]]�����Ѥ��ޤ���
+ロード時の既定値はEncoding.default_internal、または
+Encoding.default_internalがnilの場合はEncoding.default_externalによって
+求めたエンコーディングに対応するコードページです。もし、該当するコード
+ページが見つからない場合は、[[m:WIN32OLE::CP_ACP]]を利用します。
 
-@return WIN32OLE�������ȥ᡼�����ƤӽФ���ʸ�����Ѵ������Ѥ��륳����
-        �ڡ������֤��ޤ���
+@return WIN32OLEがオートメーション呼び出しの文字列変換に利用するコード
+        ページを返します。
 
-   WIN32OLE.codepage   # => 932 �����ܸ�Windows�δ����͡�
+   WIN32OLE.codepage   # => 932 （日本語Windowsの既定値）
 
 --- codepage=(cp) -> nil
 
-WIN32OLE��OLE�����ȥ᡼�����Υ��󥿡��ե����������Ѥ��륳���ɥڡ�����
-���ꤷ�ޤ���
+WIN32OLEがOLEオートメーションのインターフェイスに利用するコードページを
+設定します。
 
-WIN32OLE�ϡ�OLE�����ȥ᡼�����ƤӽФ������Ѥ���ʸ�����Unicode�Ѵ���
-���������ꤷ�������ɥڡ��������Ѥ��ޤ����̾WIN32OLE�ϥ����ɻ���
-Encoding.default_internal�ޤ���Encoding.default_external����Ŭ�ڤʥ���
-�ɥڡ�����Ƚ�Ǥ�����������Ѥ��ޤ����������äơ����᥽�åɤ�ƤӽФ�ɬ
-�פ�����Τϡ�WIN32OLE��require����������ץȤȰۤʤ륨�󥳡��ǥ��󥰤�
-���Ѥ��Ƥ��륹����ץȤ䡢�ۤʤ륨�󥳡��ǥ��󥰤����Ѥ��Ƥ���ե�����
-�����ɤ߹����ʸ��������Ѥ���WIN32OLE��ƤӽФ����Ǥ���
+WIN32OLEは、OLEオートメーション呼び出しに利用する文字列のUnicode変換に
+ここで設定したコードページを利用します。通常、WIN32OLEはロード時の
+Encoding.default_internalまたはEncoding.default_externalから適切なコー
+ドページを判断し、それを利用します。したがって、当メソッドを呼び出す必
+要があるのは、WIN32OLEをrequireしたスクリプトと異なるエンコーディングを
+利用しているスクリプトや、異なるエンコーディングを利用しているファイル
+から読み込んだ文字列を利用してWIN32OLEを呼び出す場合です。
 
-@param cp �����ɥڡ�������ꤷ�ޤ���
+@param cp コードページを指定します。
 
 
    WIN32OLE.codepage = WIN32OLE::CP_UTF8
 
 --- connect(ole) -> WIN32OLE
 
-���߼¹����OLE�����ȥ᡼����󥵡��Ф���³���ޤ���
+現在実行中のOLEオートメーションサーバに接続します。
 
-connect�᥽�åɤϡ�COM�Υ�˥������Ѥ��ơ����߼¹����OLE�����ȥ᡼����
-�󥵡��Ф򸡺�������³���ޤ�����³������������硢���������Ф�����ǽ
-��WIN32OLE���֥������Ȥ��֤�ޤ���
+connectメソッドは、COMのモニカを利用して、現在実行中のOLEオートメーショ
+ンサーバを検索し、接続します。接続に成功した場合、該当サーバを操作可能
+なWIN32OLEオブジェクトが返ります。
 
-@param ole ��³�оݤΥ����Ф򼨤�PROGID��CLSID�ޤ��ϥ�˥�����̾�ˤ���ꤷ�ޤ���
+@param ole 接続対象のサーバを示すPROGID、CLSIDまたはモニカ（別名）を指定します。
 
-@return ole���������ꤵ���WIN32OLE���֥������Ȥ��֤��ޤ���
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@return ole引数で特定されるWIN32OLEオブジェクトを返します。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
    WIN32OLE.connect('Excel.Application') # => WIN32OLE object which represents running Excel.
 
 : PROGID
-  OLE�����ȥ᡼����󥵡��Ф��̤��뤿���ʸ�����̾�֥٥����̾.��
-  �ץꥱ�������̾.���󥿡��ե�����̾�פη�������ޤ����쥸���ȥ��
-  HKEY_CLASSES_ROOT�Ρ�.�פǻϤޤ�ʤ������Ȥ�����Ͽ����ޤ���
+  OLEオートメーションサーバを識別するための文字列。通常「ベンダー名.ア
+  プリケーション名.インターフェイス名」の形式を取ります。レジストリの
+  HKEY_CLASSES_ROOTの「.」で始まらないキーとして登録されます。
 : CLSID
-  OLE�����ȥ᡼����󥵡��Ф�ޤ�COM�Υ��饹���̤��뤿���128�ӥå�
-  GUID��ʸ����ɽ���ϡ��쥸���ȥ��HKEY_CLASSES_ROOT\CLSID���Υ����Ȥ�����
-  Ͽ����ޤ���
-: ��˥�
-  ��˥��ϡ�URI�Τ褦��Windows��Υ꥽�������դ˼��̤��뤿��Υ��֥���
-  ���ȤΥ��󥿡��ե������ǡ�ʸ��ɽ��������ޤ����ܺ٤ˤĤ��Ƥ�
+  OLEオートメーションサーバを含むCOMのクラスを識別するための128ビット
+  GUID。文字列表現は、レジストリのHKEY_CLASSES_ROOT\CLSID下のキーとして登
+  録されます。
+: モニカ
+  モニカは、URIのようにWindows上のリソースを一意に識別するためのオブジェ
+  クトのインターフェイスで、文字表現を持ちます。詳細については
   [[url:http://msdn.microsoft.com/en-us/library/ms691261(v=VS.85).aspx]]
-  �򻲾Ȥ��Ƥ���������
+  を参照してください。
 
 --- const_load(ole, mod = WIN32OLE) -> ()
 
-OLE�����ȥ᡼����󥵡��Ф��ݻ�����������ɤ߹��ߡ����ꤵ�줿�⥸�塼��
-���Ȥ߹��ߤޤ���
+OLEオートメーションサーバが保持する定数を読み込み、指定されたモジュール
+に組み込みます。
 
-OLE�����ȥ᡼����󥵡��Фϡ�����򥯥饤����Ȥ��󶡤Ǥ��ޤ���
+OLEオートメーションサーバは、定数をクライアントへ提供できます。
 
-const_load�᥽�åɤϤ�����������ɤ߹��ߡ����ꤷ���⥸�塼����Ȥ߹�
-�ळ�Ȥǻ��Ȳ�ǽ�Ȥ��ޤ���
+const_loadメソッドはこれらの定数を読み込み、指定したモジュールに組み込
+むことで参照可能とします。
 
-@param ole ������ɤ߹����оݤ�WIN32OLE���֥������Ȥޤ��ϥ����ץ饤�֥�
-           ��̾��ʸ����ˤ���ꤷ�ޤ���
+@param ole 定数を読み込む対象のWIN32OLEオブジェクトまたはタイプライブラ
+           リ名（文字列）を指定します。
 
-@param mod �������������оݤΥ⥸�塼�����ꤷ�ޤ�����ά����
-           WIN32OLE���Ȥ߹��ޤ�ޤ���
+@param mod 定数を定義する対象のモジュールを指定します。省略時は
+           WIN32OLEに組み込まれます。
 
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
-OLE�����ȥ᡼������������̾VB�Υ����ɵ���˽स�ơ�vbConstants��
-�褦�˾�ʸ���ǻϤޤ�ޤ�����������Ruby���������ʸ���ǳ��Ϥ��뵬§�Τ�
-�ᡢWIN32OLE�ˤ�ä�VbConstants�Τ褦�˼�ưŪ����Ƭ����ʸ��������ޤ���
+OLEオートメーションの定数は通常、VBのコード規約に準じて、vbConstantsの
+ように小文字で始まります。しかし、Rubyの定数は大文字で開始する規則のた
+め、WIN32OLEによってVbConstantsのように自動的に先頭が大文字化されます。
 
-�ޤ�����Ƭ���ѻ��ǻϤޤ�ʤ�����ˤĤ��Ƥϡ�CONSTANTS�ϥå������Ͽ����
-�ޤ������ξ�硢�������̾�������Ȥʤ�ޤ���
+また、先頭が英字で始まらない定数については、CONSTANTSハッシュに登録され
+ます。この場合、元の定数名がキーとなります。
 
    module EXCEL_CONST
    end
@@ -247,12 +247,12 @@ OLE�����ȥ᡼������������̾VB�Υ����ɵ���˽स�ơ�vbConstants��
    puts EXCEL_CONST::XlTop # => -4160
    puts EXCEL_CONST::CONSTANTS['_xlDialogChartSourceData'] # => 541
 
-�⥸�塼��̾���ά������
+モジュール名を省略した例
 
    WIN32OLE.const_load(excel)
    puts WIN32OLE::XlTop # => -4160
 
-�����ץ饤�֥��̾����ꤷ����
+タイプライブラリ名を指定した例
 
    module MSO
    end
@@ -261,26 +261,26 @@ OLE�����ȥ᡼������������̾VB�Υ����ɵ���˽स�ơ�vbConstants��
    puts MSO::MsoLineSingle # => 1
 
 --- new(server, host=nil) -> WIN32OLE
-OLE�����ȥ᡼����󥵡��Ф��������ޤ���
+OLEオートメーションサーバを生成します。
 
-�����ǻ��ꤷ��CLSID�ޤ���PROGID�����OLE�����ȥ᡼����󥵡��Ф�������
-�ޤ�������������������硢���������Ф�����ǽ��WIN32OLE���֥������Ȥ�
-�֤�ޤ���
+引数で指定したCLSIDまたはPROGIDを持つOLEオートメーションサーバを生成し
+ます。生成に成功した場合、該当サーバを操作可能なWIN32OLEオブジェクトが
+返ります。
 
-CLSID�����PROGID�ˤĤ��Ƥ�[[m:WIN32OLE.connect]]�򻲾Ȥ��Ƥ���������
+CLSIDおよびPROGIDについては[[m:WIN32OLE.connect]]を参照してください。
 
-@param server OLE�����ȥ᡼����󥵡��Ф򼨤�PROGID�ޤ���CLSID��ʸ����
-              �ǻ��ꤷ�ޤ���
+@param server OLEオートメーションサーバを示すPROGIDまたはCLSIDを文字列
+              で指定します。
 
-@param host �����Ф���������ۥ��ȤΥۥ���̾�ޤ���IP���ɥ쥹��ʸ�����
-            ���ꤷ�ޤ�����ά���ϸ��ߥ�����ץȤ�¹���Υۥ��Ȥ�������
-            �ޤ���
+@param host サーバを生成するホストのホスト名またはIPアドレスを文字列で
+            指定します。省略時は現在スクリプトを実行中のホストで生成し
+            ます。
 
-@return host�ǻ��ꤷ���ۥ��Ⱦ��server�����ǻ��ꤷ��WIN32OLE���֥�����
-        �Ȥ��֤��ޤ���
+@return hostで指定したホスト上のserver引数で指定したWIN32OLEオブジェク
+        トを返します。
 
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
     WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
 
@@ -288,55 +288,55 @@ CLSID�����PROGID�ˤĤ��Ƥ�[[m:WIN32OLE.connect]]�򻲾Ȥ��Ƥ���������
 
 --- ole_free(aWIN32OLE) -> Integer
 
-�����ǻ��ꤷ�����֥������Ȥ�������ޤ���
+引数で指定したオブジェクトを解放します。
 
-���Υ᥽�åɤϼ��WIN32OLE�ΥǥХå������WIN32OLE�����Ѥ���ߥɥ륦��
-���μ����Τ�����Ѱդ���Ƥ��ޤ������Τ��ᡢ�᥽�åɤ�����ư��������
-����COM�λ��ͤ�WIN32OLE�����������˽��Τ��Ƥ��ʤ����ϻ��Ѥ��ʤ��Ǥ���
-������
+このメソッドは主にWIN32OLEのデバッグおよびWIN32OLEを利用するミドルウェ
+アの実装のために用意されています。このため、メソッドの内部動作は不定で
+す。COMの仕様とWIN32OLEの内部処理に熟知していない場合は使用しないでくだ
+さい。
 
-@param aWIN32OLE ��������WIN32OLE���֥������ȡ�
+@param aWIN32OLE 解放するWIN32OLEオブジェクト。
 
-@return Release������͡�COM�λ��;�ϸ��ߤΥ��֥������Ȥλ��ȥ������
-        �ͤ򼨤��ޤ���
+@return Releaseの戻り値。COMの仕様上は現在のオブジェクトの参照カウント
+        値を示します。
 
 --- ole_reference_count(aWIN32OLE) -> Integer
 
-�����ǻ��ꤷ�����֥������Ȥθ��ߤλ��ȥ�������ͤ��֤��ޤ���
+引数で指定したオブジェクトの現在の参照カウント値を返します。
 
-���Υ᥽�åɤϼ��WIN32OLE�ΥǥХå������WIN32OLE�����Ѥ���ߥɥ륦��
-���μ����Τ�����Ѱդ���Ƥ��ޤ������Τ��ᡢ�᥽�åɤ�����ư��������
-����COM�λ��ͤ�WIN32OLE�����������˽��Τ��Ƥ��ʤ����ϻ��Ѥ��ʤ��Ǥ���
-������
+このメソッドは主にWIN32OLEのデバッグおよびWIN32OLEを利用するミドルウェ
+アの実装のために用意されています。このため、メソッドの内部動作は不定で
+す。COMの仕様とWIN32OLEの内部処理に熟知していない場合は使用しないでくだ
+さい。
 
-@param aWIN32OLE ���ȥ�������ͤ����WIN32OLE���֥������ȡ�
+@param aWIN32OLE 参照カウント値を求めるWIN32OLEオブジェクト。
 
-@return AddRef�ƤӽФ����Release������͡�COM�λ��;�ϸ��ߤΥ��֥���
-        ���Ȥλ��ȥ�������ͤ򼨤��ޤ���
+@return AddRef呼び出し後のReleaseの戻り値。COMの仕様上は現在のオブジェ
+        クトの参照カウント値を示します。
 
 --- ole_show_help(obj, helpcontext = nil) -> ()
 
-WIN32OLE���֥������ȤΥإ�ץե������ɽ�����ޤ���
+WIN32OLEオブジェクトのヘルプファイルを表示します。
 
-Windowsɸ��Υإ��ɽ������ݡ��ͥ�Ȥ�HHCtrl.OCX�����Ѥ��ơ����֥�����
-�Ȥ˴�Ϣ�դ���줿�إ�ץե������chm�ե�����ˤ�ɽ�����ޤ���
+Windows標準のヘルプ表示コンポーネントのHHCtrl.OCXを利用して、オブジェク
+トに関連付けられたヘルプファイル（chmファイル）を表示します。
 
-�ޤ���chm�ե�����Υե�ѥ�̾����ꤷ��ɽ�������뤳�Ȥ��ǽ�Ǥ���
+また、chmファイルのフルパス名を指定して表示させることも可能です。
 
-@param obj [[c:WIN32OLE_TYPE]]���֥������Ȥޤ���[[c:WIN32OLE_METHOD]]��
-           �֥������ȡ�ľ�ܥإ�ץե�����Υե�ѥ�̾����ꤹ�뤳�Ȥ��
-           ǽ�Ǥ���
+@param obj [[c:WIN32OLE_TYPE]]オブジェクトまたは[[c:WIN32OLE_METHOD]]オ
+           ブジェクト。直接ヘルプファイルのフルパス名を指定することも可
+           能です。
 
-@param helpcontext obj������[[c:WIN32OLE_TYPE]]���֥������Ȥޤ���
-                  [[c:WIN32OLE_METHOD]]���֥������Ȥ���ꤷ�����ϡ���
-                  ���Υ��֥������Ȥ������ͤ����Ѥ��뤿��������פǤ���
-                  obj�����˥إ�ץե�����Υե�ѥ�̾�����ꤷ������
-                  0����ꤷ�Ƥ���������
+@param helpcontext obj引数に[[c:WIN32OLE_TYPE]]オブジェクトまたは
+                  [[c:WIN32OLE_METHOD]]オブジェクトを指定した場合は、こ
+                  れらのオブジェクトの設定値を利用するため指定不要です。
+                  obj引数にヘルプファイルのフルパス名を設定した場合は
+                  0を指定してください。
 
-@raise RuntimeError ���֥������Ȥ���Ϣ����إ�ץե����������ʤ����
-                    (no helpfile of `���֥�������̾') �䡢�إ�ץե�����
-                    �����󥹥ȡ��뤵��Ƥ��ʤ���� (failed to open
-                    help file `�ե�����̾') �����Τ��ޤ���
+@raise RuntimeError オブジェクトが関連するヘルプファイルを持たない場合
+                    (no helpfile of `オブジェクト名') や、ヘルプファイル
+                    がインストールされていない場合 (failed to open
+                    help file `ファイル名') に通知します。
 
    excel = WIN32OLE.new('Excel.Application')
    typeobj = excel.ole_obj_help
@@ -348,73 +348,73 @@ Windowsɸ��Υإ��ɽ������ݡ��ͥ�Ȥ�HHCtrl.OCX�����Ѥ��ơ����֥�����
 
 --- [](name) -> object
 --- [](name, param...) -> object
-���֥������ȤΥץ��ѥƥ��򻲾Ȥ��ޤ���
+オブジェクトのプロパティを参照します。
 
-���ա� ���Υ᥽�åɤ�Ruby-1.9�ʹߤ�ư��Ѥ��ޤ���Ruby-1.9�Ǥϥץ���
-�ƥ�̾��᥽�å�̾�Ȥ����᥽�åɸƤӽФ������ǵ��Ҥ��Ƥ���������
+注意： このメソッドはRuby-1.9以降で動作が変わります。Ruby-1.9ではプロパ
+ティ名をメソッド名としたメソッド呼び出し形式で記述してください。
 
-[]�����WIN32OLE���֥������ȤΥץ��ѥƥ�̾����ꤹ�뤳�Ȥǡ����֥�����
-�Ȥ�Hash�Τ褦�˰��äƥץ��ѥƥ��ͤ򻲾Ȥ��ޤ���
+[]の中にWIN32OLEオブジェクトのプロパティ名を指定することで、オブジェク
+トをHashのように扱ってプロパティ値を参照します。
 
-�ѥ�᡼���դ��ץ��ѥƥ��ξ��ϡ��ץ��ѥƥ�̾��³���ư������,�פǶ��ڤ�
-���󵭤��ޤ���
+パラメータ付きプロパティの場合は、プロパティ名に続けて引数を「,」で区切っ
+て列記します。
 
-�ʤ���OLE�����ȥ᡼�����λ��ͤˤ�ꡢ�ץ��ѥƥ�̾����ʸ������ʸ���϶�
-�̤���ޤ���
+なお、OLEオートメーションの仕様により、プロパティ名の大文字、小文字は区
+別されません。
 
-@param name �ץ��ѥƥ�̾��ʸ����ǻ��ꤷ�ޤ���
-@param param �ץ��ѥƥ�������������˻��ꤷ�ޤ���
+@param name プロパティ名を文字列で指定します。
+@param param プロパティが引数を取る場合に指定します。
 
-@return �ץ��ѥƥ��ͤ��֤��ޤ���
+@return プロパティ値を返します。
 
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ���
-                            ��������ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���
-                            ������
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しま
+                            した。理由はメッセージのHRESULTを調べてくだ
+                            さい。
 
    excel = WIN32OLE.new('Excel.Application')
    visible = excel['visible'] #=> false
 
-�嵭�Υ����ɤϰʲ���Ʊ���Ǥ���
+上記のコードは以下と同等です。
 
    excel = WIN32OLE.new('Excel.Application')
    visible = excel.visible  #=> false
 
 --- []=(name, value) -> ()
 --- []=(name, param..., value) -> ()
-���֥������ȤΥץ��ѥƥ������ꤷ�ޤ���
+オブジェクトのプロパティを設定します。
 
-���ա� ���Υ᥽�åɤ�Ruby-1.9�ʹߤ�ư��Ѥ��ޤ���Ruby-1.9�Ǥ�
-[[c:WIN32OLE#setproperty]]�����Ѥ��Ƥ���������
+注意： このメソッドはRuby-1.9以降で動作が変わります。Ruby-1.9では
+[[c:WIN32OLE#setproperty]]を利用してください。
 
-[]�ǥץ��ѥƥ�̾����ꤷ���ץ��ѥƥ����ͤ����ꤷ�ޤ���
+[]でプロパティ名を指定したプロパティに値を設定します。
 
-�ѥ�᡼���դ��ץ��ѥƥ��ξ��ϡ��ץ��ѥƥ�̾��³���ư������,�פǶ��ڤ�
-���󵭤��ޤ���
+パラメータ付きプロパティの場合は、プロパティ名に続けて引数を「,」で区切っ
+て列記します。
 
-�ʤ���OLE�����ȥ᡼�����λ��ͤˤ�ꡢ�ץ��ѥƥ�̾����ʸ������ʸ���϶�
-�̤���ޤ���
+なお、OLEオートメーションの仕様により、プロパティ名の大文字、小文字は区
+別されません。
 
-@param name �ץ��ѥƥ�̾��ʸ����ǻ��ꤷ�ޤ���
-@param param �ץ��ѥƥ�������������˻��ꤷ�ޤ���
-@param value �ץ��ѥƥ������ꤹ���ͤ���ꤷ�ޤ���
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@param name プロパティ名を文字列で指定します。
+@param param プロパティが引数を取る場合に指定します。
+@param value プロパティに設定する値を指定します。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
-OLE�����ȥ᡼�����Υץ��ѥƥ���Ruby��°���Ȱۤʤꡢ�ѥ�᡼�����뤳
-�Ȥ��Ǥ��ޤ���
+OLEオートメーションのプロパティはRubyの属性と異なり、パラメータを取るこ
+とができます。
 
-���Ȥ���Excel��Worksheet���֥������Ȥ�Cells�ץ��ѥƥ��Ϸ���֤ȹ��ֹ��
-2�ĤΥѥ�᡼������ޤ���
+たとえばExcelのWorksheetオブジェクトのCellsプロパティは桁位置と行番号の
+2つのパラメータを取ります。
 
-�����VB�Ǥϼ��Τ褦�˵��ҤǤ��ޤ���
+これはVBでは次のように記述できます。
 
-  sheet.Cells(1, 1) = sheet.Cells(1, 2) ' ����B1�����Ƥ򥻥�A1��
+  sheet.Cells(1, 1) = sheet.Cells(1, 2) ' セルB1の内容をセルA1へ
 
-Ruby�ǤϾ嵭�Υ����ɤα��դ�VB��Ʊ������sheet.Cells(1, 2)�פΤ褦�˵���
-�Ǥ��ޤ��������դε��ҤϤǤ��ޤ���
+Rubyでは上記のコードの右辺をVBと同じく「sheet.Cells(1, 2)」のように記述
+できますが、左辺の記述はできません。
 
-���Τ��ᡢ������Τ褦��[]=�᥽�åɤ����Ѥ��ơ��ѥ�᡼���դ��ץ��ѥƥ�
-�����ꤷ�ޤ���
+そのため、次の例のように[]=メソッドを利用して、パラメータ付きプロパティ
+を設定します。
 
    excel = WIN32OLE.new('Excel.Application')
    excel.visible = true
@@ -425,46 +425,46 @@ Ruby�ǤϾ嵭�Υ����ɤα��դ�VB��Ʊ������sheet.Cells(1, 2)�פΤ褦�˵���
 #@else
 
 --- [](key...) -> object
-���֥������ȤΥǥե���ȥץ��ѥƥ��򻲾Ȥ��ޤ���
+オブジェクトのデフォルトプロパティを参照します。
 
-OLE�����ȥ᡼�����ˤϥǥե���ȥץ��ѥƥ��Ȥ����ץ��ѥƥ�̾����ꤻ��
-�˥��������Ǥ���ץ��ѥƥ�������ޤ���
+OLEオートメーションにはデフォルトプロパティというプロパティ名を指定せず
+にアクセスできるプロパティがあります。
 
-WIN32OLE����ǥե���ȥץ��ѥƥ��˥�����������ˤϡ�[]���ɬ�פʥ�����
-��,�פǶ��ڤäƵ��Ҥ��ޤ�������ܥ��ʸ����Ȥ��ư����ޤ���
+WIN32OLEからデフォルトプロパティにアクセスするには、[]内に必要なキーを
+「,」で区切って記述します。シンボルは文字列として扱います。
 
-�ʤ��ǥե���ȥץ��ѥƥ��ϵ��Ҥ���ά�Ǥ���ץ��ѥƥ�̾�˰�̣���ʤ����ᡢ
-OLE�����ȥ᡼�������Ǥ�Item��̿̾���뤳�Ȥ������Ƥ��ޤ���
+なおデフォルトプロパティは記述が省略できるプロパティ名に意味がないため、
+OLEオートメーション規約ではItemと命名することが決められています。
 
-@param key �ץ��ѥƥ��ǥ������������������ꤹ�륭������ꤷ�ޤ����ץ�
-           �ѥƥ��������ʣ���Υ�����ɬ�פʾ��ϡ�,�פǶ��ڤä��󵭤��ޤ���
+@param key プロパティでアクセスする情報を特定するキーを指定します。プロ
+           パティの特定に複数のキーが必要な場合は「,」で区切って列記します。
 
-@return �ץ��ѥƥ��ͤ��֤��ޤ���
+@return プロパティ値を返します。
 
   fsys = WIN32OLE.new('Scripting.FileSystemObject')
-  fsys.Drives[:c].FreeSpace #=> C�ɥ饤�֤ζ�������
+  fsys.Drives[:c].FreeSpace #=> Cドライブの空き容量
 
 --- []=(key..., value) -> ()
-���֥������ȤΥǥե���ȥץ��ѥƥ������ꤷ�ޤ���
+オブジェクトのデフォルトプロパティを設定します。
 
-OLE�����ȥ᡼�����ˤϥǥե���ȥץ��ѥƥ��Ȥ����ץ��ѥƥ�̾����ꤻ��
-�˥��������Ǥ���ץ��ѥƥ�������ޤ���
+OLEオートメーションにはデフォルトプロパティというプロパティ名を指定せず
+にアクセスできるプロパティがあります。
 
-WIN32OLE����ǥե���ȥץ��ѥƥ��˥�����������ˤϡ�[]���ɬ�פʥ�����
-���Ҥ��ޤ���
+WIN32OLEからデフォルトプロパティにアクセスするには、[]内に必要なキーを
+記述します。
 
-�ʤ��ǥե���ȥץ��ѥƥ��ϵ��Ҥ���ά�Ǥ���ץ��ѥƥ�̾�ˤϰ�̣�������
-���󡣤��Τ���OLE�����ȥ᡼�������Ǥϰ�Χ��Item��̿̾���뤳�Ȥ����
-���Ƥ��ޤ���
+なおデフォルトプロパティは記述が省略できるプロパティ名には意味がありま
+せん。このためOLEオートメーション規約では一律にItemと命名することが決め
+られています。
 
-@param key �ץ��ѥƥ��ǥ������������������ꤹ�륭������ꤷ�ޤ����ץ�
-           �ѥƥ��������ʣ���Υ�����ɬ�פʾ��ϡ�,�פǶ��ڤä��󵭤�
-           �ޤ���
+@param key プロパティでアクセスする情報を特定するキーを指定します。プロ
+           パティの特定に複数のキーが必要な場合は「,」で区切って列記し
+           ます。
 
-@param value �ץ��ѥƥ������ꤹ���ͤ���ꤷ�ޤ���
+@param value プロパティに設定する値を指定します。
 
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
   dict = WIN32OLE.new('Scripting.Dictionary')
   dict[:a] = 0x41
@@ -476,36 +476,36 @@ WIN32OLE����ǥե���ȥץ��ѥƥ��˥�����������ˤϡ�[]���ɬ�פʥ�����
 
 
 --- _getproperty(dispid, args, types) -> object
-DISPID�ȥѥ�᡼���η�����ꤷ�ƥ��֥������ȤΥץ��ѥƥ��򻲾Ȥ��ޤ���
+DISPIDとパラメータの型を指定してオブジェクトのプロパティを参照します。
 
-������������ץ��ѥƥ��Υ��󥿡��ե�������������ΤäƤ�����ˡ�
-DISPID�ȥѥ�᡼���η�����ꤷ�ƥץ��ѥƥ��򻲾Ȥ��ޤ���
+アクセスするプロパティのインターフェイスを事前に知っている場合に、
+DISPIDとパラメータの型を指定してプロパティを参照します。
 
-@param dispid �ץ��ѥƥ���DISPID�ʥ᥽�åɤ��դ����ꤹ����͡ˤ����
-              ���ޤ���
+@param dispid プロパティのDISPID（メソッドを一意に特定する数値）を指定
+              します。
 
-@param args �ץ��ѥƥ������������������ǻ��ꤷ�ޤ��������ν����
-            �Ǻ�ü�ΰ����Υ���ǥå�����0�Ȥ��ޤ������������פʾ��϶�
-            �������ꤷ�ޤ���
+@param args プロパティが引数を取る場合に配列で指定します。引数の順序は
+            最左端の引数のインデックスを0とします。引数が不要な場合は空
+            配列を指定します。
 
-@param types �ץ��ѥƥ������������������ǰ����η�����ꤷ�ޤ�����
-             ���ν���ϺǺ�ü�ΰ����Υ���ǥå�����0�Ȥ��ޤ������λ���
-             �ˤϡ�[[c:WIN32OLE::VARIANT]]����������Ѥ��ޤ�����������
-             �פʾ��϶��������ꤷ�ޤ���
+@param types プロパティが引数を取る場合に配列で引数の型を指定します。引
+             数の順序は最左端の引数のインデックスを0とします。型の指定
+             には、[[c:WIN32OLE::VARIANT]]の定数を利用します。引数が不
+             要な場合は空配列を指定します。
 
-���Υ᥽�åɤ�COM�����꡼�Х���ǥ��󥰤����Ѥ��뤳�Ȥǳ����ץ���������
-�ФȤΥ饦��ɥȥ�åפ򸺤餷�ƽ���®�٤���夵���뤳�Ȥ���Ū�Ȥ�����
-�ΤǤ������Τ��ᡢDLL�η����Ƿ������TypeLib�ˤ��󶡤��Ƥ��륵���Ф���
-���ƤϤ��ޤ��̣������ޤ���
+このメソッドはCOMアーリーバインディングを利用することで外部プロセスサー
+バとのラウンドトリップを減らして処理速度を向上させることを目的としたも
+のです。このため、DLLの形式で型情報（TypeLib）を提供しているサーバに対
+してはあまり意味を持ちません。
 
-@return �ץ��ѥƥ��ͤ��֤��ޤ���
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@return プロパティ値を返します。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
    DISPID_CELLS = 238
    include WIN32OLE::VARIANT
    excel = WIN32OLE.new('Excel.Application')
-   puts excel._getproperty(558, [], []) # Visible�ץ��ѥƥ���DISPID��558
+   puts excel._getproperty(558, [], []) # VisibleプロパティのDISPIDは558
    workbook = excel.Workbooks.Add
 #@if (version < "1.9.0")
    sheet = workbook.Worksheets(1)
@@ -517,94 +517,94 @@ DISPID�ȥѥ�᡼���η�����ꤷ�ƥץ��ѥƥ��򻲾Ȥ��ޤ���
    workbook.Close(:SaveChanges => false)
    excel.Quit
 
-DISPID��[[m:WIN32OLE_METHOD#dispid]]��������Ǥ��ޤ���
+DISPIDは[[m:WIN32OLE_METHOD#dispid]]から取得できます。
 
 @see [[c:WIN32OLE::VARIANT]]
 
 --- _invoke(dispid, args, types) -> object | nil
-DISPID�ȥѥ�᡼���η�����ꤷ�ƥ��֥������ȤΥ᥽�åɤ�ƤӽФ��ޤ���
+DISPIDとパラメータの型を指定してオブジェクトのメソッドを呼び出します。
 
-�ƤӽФ��᥽�åɤΥ��󥿡��ե�������������ΤäƤ�����ˡ�DISPID�ȥ�
-��᡼���η�����ꤷ�ƥ᥽�åɤ�ƤӽФ��ޤ���
+呼び出すメソッドのインターフェイスを事前に知っている場合に、DISPIDとパ
+ラメータの型を指定してメソッドを呼び出します。
 
-���Υ᥽�åɤϰ������Ѵ���ˡ��ץ�����ޤ�����Ǥ���褦�ˤ��뤳�Ȥȡ�
-COM�����꡼�Х���ǥ��󥰤����Ѥ��Ƴ����ץ����������ФȤΥ饦��ɥȥ��
-�פ򸺤餷�ƽ���®�٤���夵���뤳�Ȥ���Ū�Ȥ�����ΤǤ�����Ԥ���Ū��
-�Ĥ��Ƥϡ�DLL�η����Ƿ������TypeLib�ˤ��󶡤��Ƥ��륵���Ф��Ф��ƤϤ�
-�ޤ��̣������ޤ��󡣤��Τ��ᡢ���ι����٤����椬���פʾ��ϡ�ľ�ܥ�
-���å�̾����ꤷ���᥽�åɸƤӽФ���Ԥ����Ȥ򡢥ץ������β���������
-����侩���ޤ���
+このメソッドは引数の変換方法をプログラマが制御できるようにすることと、
+COMアーリーバインディングを利用して外部プロセスサーバとのラウンドトリッ
+プを減らして処理速度を向上させることを目的としたものです。後者の目的に
+ついては、DLLの形式で型情報（TypeLib）を提供しているサーバに対してはあ
+まり意味を持ちません。そのため、型の高精度な制御が不要な場合は、直接メ
+ソッド名を指定したメソッド呼び出しを行うことを、プログラムの可読性の点
+から推奨します。
 
-@param dispid �᥽�åɤ�DISPID�ʥ᥽�åɤ��դ����ꤹ����͡ˤ���ꤷ
-              �ޤ���
+@param dispid メソッドのDISPID（メソッドを一意に特定する数値）を指定し
+              ます。
 
-@param args �᥽�åɤΰ���������ǻ��ꤷ�ޤ��������ν���ϺǺ�ü�ΰ���
-            �Υ���ǥå�����0�Ȥ��ޤ������������פʾ��϶��������ꤷ
-            �ޤ���
+@param args メソッドの引数を配列で指定します。引数の順序は最左端の引数
+            のインデックスを0とします。引数が不要な場合は空配列を指定し
+            ます。
 
-@param types �᥽�åɤΰ����η�������ǻ��ꤷ�ޤ��������ν���ϺǺ�ü��
-             �����Υ���ǥå�����0�Ȥ��ޤ������λ���ˤϡ�
-             [[c:WIN32OLE::VARIANT]]����������Ѥ��ޤ������������פʾ�
-             ��϶��������ꤷ�ޤ���
+@param types メソッドの引数の型を配列で指定します。引数の順序は最左端の
+             引数のインデックスを0とします。型の指定には、
+             [[c:WIN32OLE::VARIANT]]の定数を利用します。引数が不要な場
+             合は空配列を指定します。
 
-@return �᥽�åɤ��֤��͡��������֤��ͤ�����ʤ��᥽�åɤξ���nil��
+@return メソッドの返り値。ただし返り値を持たないメソッドの場合はnil。
 
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
    excel = WIN32OLE.new('Excel.Application')
-   excel._invoke(302, [], []) #  DISPID 302�ϡ�Quit�᥽�å�
+   excel._invoke(302, [], []) #  DISPID 302は、Quitメソッド
 
-MFC������ˤ�ꡢ�Х�������η�������̾�
-[[m:WIN32OLE::VARIANT::VT_VARIANT]]�Ȥʤ�ޤ������Τ褦�ʾ��ˡ��Х���
-�����Ϳ����Ĥ���
+MFCの制約により、バイト配列の型情報は通常
+[[m:WIN32OLE::VARIANT::VT_VARIANT]]となります。このような場合に、バイト
+配列を与えるつもりで
 
  include WIN32OLE::VARIANT
  obj.method(DISPID, [[0, 1, 2, 3]], [VT_VARIANT])
 
-�Τ褦�˵��Ҥ���ȡ�ñ��32�ӥå�������VT_I4�ˤ����������뤳�Ȥˤʤ�
-���ָ�Ψ���㲼���ޤ���
+のように記述すると、単に32ビット整数（VT_I4）の配列が送られることになり
+空間効率が低下します。
 
-�����κǽ�Ū�ʷ����狼�äƤ�����ϡ���������Τ褦�˷�����ѥ�᡼��
-�ˤϼºݤη�����ꤷ�Ƥ���������
+引数の最終的な型がわかっている場合は、下記の例のように型指定パラメータ
+には実際の型を指定してください。
 
  include WIN32OLE::VARIANT
  obj.method(DISPID, [[0, 1, 2, 3]], [VT_BYREF | VT_ARRAY | VT_UI1])
 
-�ʤ���VB6�Ǻ�������COM����ݡ��ͥ�ȤΥѥ�᡼���������Ϳ������ϡ�
-[[m:WIN32OLE::VARIANT::VT_BYREF]]�λ��꤬ɬ�ܤǤ���
+なお、VB6で作成したCOMコンポーネントのパラメータに配列を与える場合は、
+[[m:WIN32OLE::VARIANT::VT_BYREF]]の指定が必須です。
 
-DISPID��[[m:WIN32OLE_METHOD#dispid]]��������Ǥ��ޤ���
+DISPIDは[[m:WIN32OLE_METHOD#dispid]]から取得できます。
 
 @see [[c:WIN32OLE::VARIANT]]
 --- _setproperty(dispid, args, types) -> ()
-DISPID�ȥѥ�᡼���η�����ꤷ�ƥ��֥������ȤΥץ��ѥƥ������ꤷ�ޤ���
+DISPIDとパラメータの型を指定してオブジェクトのプロパティを設定します。
 
-������������ץ��ѥƥ��Υ��󥿡��ե�������������ΤäƤ�����ˡ�
-DISPID�ȥѥ�᡼���η�����ꤷ�ƥץ��ѥƥ������ꤷ�ޤ���
+アクセスするプロパティのインターフェイスを事前に知っている場合に、
+DISPIDとパラメータの型を指定してプロパティを設定します。
 
-���Υ᥽�åɤ�COM�����꡼�Х���ǥ��󥰤����Ѥ��뤳�Ȥǳ����ץ���������
-�ФȤΥ饦��ɥȥ�åפ򸺤餷�ƽ���®�٤���夵���뤳�Ȥ���Ū�Ȥ�����
-�ΤǤ������Τ��ᡢDLL�η����Ƿ������TypeLib�ˤ��󶡤��Ƥ��륵���Ф���
-���ƤϤ��ޤ��̣������ޤ���
+このメソッドはCOMアーリーバインディングを利用することで外部プロセスサー
+バとのラウンドトリップを減らして処理速度を向上させることを目的としたも
+のです。このため、DLLの形式で型情報（TypeLib）を提供しているサーバに対
+してはあまり意味を持ちません。
 
-@param dispid �ץ��ѥƥ���DISPID�ʥ᥽�åɤ��դ����ꤹ����͡ˤ����
-              ���ޤ���
+@param dispid プロパティのDISPID（メソッドを一意に特定する数値）を指定
+              します。
 
-@param args ����������ǻ��ꤷ�ޤ��������ν���ϺǺ�ü�ΰ����Υ���ǥ�
-            ������0�Ȥ��ޤ����ץ��ѥƥ����Ф��������ͤϺǱ�ü�����ǤǤ���
+@param args 引数を配列で指定します。引数の順序は最左端の引数のインデッ
+            クスを0とします。プロパティに対する設定値は最右端の要素です。
 
-@param types �ץ��ѥƥ��ΰ����η�������ǻ��ꤷ�ޤ��������ν���ϺǺ�ü
-             �ΰ����Υ���ǥå�����0�Ȥ��ޤ������λ���ˤϡ�
-             [[c:WIN32OLE::VARIANT]]����������Ѥ��ޤ���
+@param types プロパティの引数の型を配列で指定します。引数の順序は最左端
+             の引数のインデックスを0とします。型の指定には、
+             [[c:WIN32OLE::VARIANT]]の定数を利用します。
 
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
    DISPID_CELLS = 238
    include WIN32OLE::VARIANT
    excel = WIN32OLE.new('Excel.Application')
-   puts excel._setproperty(558,      # Visible�ץ��ѥƥ���DISPID��558
+   puts excel._setproperty(558,      # VisibleプロパティのDISPIDは558
                           [true], [VT_BOOL])
    workbook = excel.Workbooks.Add
 #@if (version < "1.9.0")
@@ -617,23 +617,23 @@ DISPID�ȥѥ�᡼���η�����ꤷ�ƥץ��ѥƥ������ꤷ�ޤ���
    workbook.Close(:SaveChanges => false)
    excel.Quit
 
-DISPID��[[m:WIN32OLE_METHOD#dispid]]��������Ǥ��ޤ���
+DISPIDは[[m:WIN32OLE_METHOD#dispid]]から取得できます。
 
 @see [[c:WIN32OLE::VARIANT]]
 
 --- each {|i|...} -> ()
 
-���֥������Ȥ���󥤥󥿡��ե�������ƤӽФ��ƥ����ƥ�ñ�̤˥֥��å���
-�¹Ԥ��ޤ���
+オブジェクトの列挙インターフェイスを呼び出してアイテム単位にブロックを
+実行します。
 
-OLE�����ȥ᡼����󥵡��Ф���ˤϡ����쥯������ѥ��󥿡��ե����������
-��Τ�����ޤ���each�᥽�åɤϡ����Τ褦�ʥ��֥������Ȥ����᥽�åɤ�
-�ƤӽФ��ơ������ƥ���Υ��ƥ졼������Ԥ��ޤ���
+OLEオートメーションサーバの中には、コレクション用インターフェイスを持つ
+ものがあります。eachメソッドは、このようなオブジェクトの列挙メソッドを
+呼び出して、アイテム毎のイテレーションを行います。
 
-@param i ���쥯�������Υ����ƥ�
+@param i コレクション内のアイテム
 
-@raise WIN32OLERuntimeError self����󥤥󥿡��ե������򥵥ݡ��Ȥ��Ƥ�
-                            �ʤ��������Τ��ޤ���
+@raise WIN32OLERuntimeError selfが列挙インターフェイスをサポートしてい
+                            ない場合に通知します。
 
    excel = WIN32OLE.new('Excel.Application')
    book = excel.workbooks.add
@@ -645,27 +645,27 @@ OLE�����ȥ᡼����󥵡��Ф���ˤϡ����쥯������ѥ��󥿡��ե����������
    excel.Quit
 
 --- invoke(name, *args) -> object | nil
-�᥽�å�̾����ꤷ�ƥ��֥������ȤΥ᥽�åɤ�ƤӽФ��ޤ���
+メソッド名を指定してオブジェクトのメソッドを呼び出します。
 
-OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤ�ưŪ�˸ƤӽФ������������Ѥ��ޤ���
+OLEオートメーションサーバのメソッドを動的に呼び出したい場合に利用します。
 
-�ʤ���OLE�����ȥ᡼�����λ��ͤˤ�ꡢ�᥽�å�̾����ʸ������ʸ���϶���
-����ޤ���
+なお、OLEオートメーションの仕様により、メソッド名の大文字、小文字は区別
+されません。
 
 #@if (version < "1.9.0")
-@param name �᥽�å�̾��ʸ����ǻ��ꤷ�ޤ���
-@param args �᥽�åɤΰ�������ꤷ�ޤ����ޤ����Ǹ�ΰ�����[[c:Hash]]��
-            Ϳ���뤳�Ȥǡ�̾���դ����������Ǥ��ޤ������ξ�硢������
-            ʸ����ǥѥ�᡼��̾���ͤ˰�������ꤷ�ޤ���
+@param name メソッド名を文字列で指定します。
+@param args メソッドの引数を指定します。また、最後の引数に[[c:Hash]]を
+            与えることで、名前付き引数を指定できます。この場合、キーに
+            文字列でパラメータ名、値に引数を指定します。
 #@else
-@param name �᥽�å�̾��ʸ����ޤ��ϥ���ܥ�ǻ��ꤷ�ޤ���
-@param args �᥽�åɤΰ�������ꤷ�ޤ����ޤ����Ǹ�ΰ�����[[c:Hash]]��
-            Ϳ���뤳�Ȥǡ�̾���դ����������Ǥ��ޤ������ξ�硢������
-            ʸ����ޤ��ϥ���ܥ�ǥѥ�᡼��̾���ͤ˰�������ꤷ�ޤ���
+@param name メソッド名を文字列またはシンボルで指定します。
+@param args メソッドの引数を指定します。また、最後の引数に[[c:Hash]]を
+            与えることで、名前付き引数を指定できます。この場合、キーに
+            文字列またはシンボルでパラメータ名、値に引数を指定します。
 #@end
-@return �᥽�åɤ��֤��͡��������֤��ͤ�����ʤ��᥽�åɤξ���nil��
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@return メソッドの返り値。ただし返り値を持たないメソッドの場合はnil。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 #@if (version < "1.9.0")
   excel = WIN32OLE.new('Excel.Application')
   workbook = excel.workbooks.invoke('Open', 'FileName' => 'c:\\users\\public\\test.xml',
@@ -680,7 +680,7 @@ OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤ�ưŪ�˸ƤӽФ������������Ѥ��ޤ���
   excel.invoke(:Quit)
 #@end
 
-���Υꥹ�Ȥϡ��ʲ��ε��Ҥ�Ʊ���Ǥ���
+このリストは、以下の記述と同等です。
 
 #@if (version < "1.9.0")
   excel = WIN32OLE.new('Excel.Application')
@@ -697,92 +697,92 @@ OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤ�ưŪ�˸ƤӽФ������������Ѥ��ޤ���
 #@end
 
 --- method_missing(id, *args) -> object | nil
-[[m:WIN32OLE#invoke]]�᥽�åɤ�¹Ԥ��ޤ���
+[[m:WIN32OLE#invoke]]メソッドを実行します。
 
-WIN32OLE�Υ��󥹥��󥹤��Ф��ơ����Υ�ե���󥹤���������Ƥ��ʤ��᥽��
-�ɤ�ƤӽФ�����硢OLE�����ȥ᡼����󥵡��ФΥ᥽�åɡʥץ��ѥƥ��˸�
-�ӽФ��Ȳ�ᤷ�ޤ���
+WIN32OLEのインスタンスに対して、このリファレンスに明記されていないメソッ
+ドを呼び出した場合、OLEオートメーションサーバのメソッド（プロパティ）呼
+び出しと解釈します。
 
-@param id �᥽�å�̾�򥷥�ܥ�ǻ��ꤷ�ޤ���
-@param args �᥽�åɤΰ�������ꤷ�ޤ���
-@return �᥽�åɤ��֤��͡��������֤��ͤ�����ʤ��᥽�åɤξ���nil��
-@raise RuntimeError id��ͭ���ʥ���ܥ�ǤϤ���ޤ���
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@param id メソッド名をシンボルで指定します。
+@param args メソッドの引数を指定します。
+@return メソッドの返り値。ただし返り値を持たないメソッドの場合はnil。
+@raise RuntimeError idが有効なシンボルではありません。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
-WIN32OLE��OLE�����ȥ᡼����󥪥֥������ȤΥ᥽�åɸƤӽФ���
-method_missing�����Ѥ��Ƽ¹Ԥ��ޤ������Τ���WIN32OLE��Ѿ����륯�饹��
-��������method_missing�򥪡��С��饤�ɤ����硢super��ƤӽФ��Ƥ�����
-����
+WIN32OLEはOLEオートメーションオブジェクトのメソッド呼び出しを
+method_missingを利用して実行します。このためWIN32OLEを継承するクラスを
+作成してmethod_missingをオーバーライドする場合、superを呼び出してくださ
+い。
 
 @see [[m:WIN32OLE#invoke]]
 
 --- ole_activex_initialize -> nil
 
-ActiveX����ȥ������Ѥν������Ԥ��ޤ���
+ActiveXコントロール用の初期化を行います。
 
-ole_activex_initialize�᥽�åɤϡ�������ץ����ActiveX����ȥ��������
-�ѤǤ���褦�ˡ����֥������Ȥ����ı�³���ǡ������������ޤ���
+ole_activex_initializeメソッドは、スクリプト内でActiveXコントロールを利
+用できるように、オブジェクトが持つ永続化データを初期化します。
 
-ActiveX����ȥ������OCX�ˤϡ����UI�Ѥ����Ѥ����OLE�����ȥ᡼����󥵡�
-�ФǤ���ActiveX����ȥ�����ϡ�IDE�����Ѥ�����ȯ���ȡ��ץ������μ¹�
-����2����μ¹ԥ⡼�ɤ�����ޤ�������ϡ���ȯ����������³�����뤿���
-����
+ActiveXコントロール（OCX）は、主にUI用に利用されるOLEオートメーションサー
+バです。ActiveXコントロールは、IDEを利用した開発時と、プログラムの実行
+時の2種類の実行モードを持ちます。これは、開発時の設定を永続化するためで
+す。
 
-���Ĥ���ActiveX����ȥ�����ϡ��嵭��ư���������Ȥޤ�Ƥ��뤿�ᡢ�¹�
-������äƱ�³���ǡ�����ž����ǡ�����̵ͭ�ȴط��ʤ��׵ᤷ�ޤ������ξ�
-�硢�⤷��³���ǡ������������ʤ��ȡ��¹Ի��⡼�ɾ��֤����ܤ�������³
-�Υ᥽�åɸƤӽФ������٤ƥ��顼�Ȥʤ�ޤ���
+幾つかのActiveXコントロールは、上記の動作を前提に組まれているため、実行
+に先だって永続化データの転送をデータの有無と関係なく要求します。この場
+合、もし永続化データを初期化しないと、実行時モード状態へ遷移せず、後続
+のメソッド呼び出しがすべてエラーとなります。
 
-@raise WIN32OLERuntimeError ���֥������Ȥ�ActiveX����ȥ�����α�³����
-                            �󥿡��ե�����������ʤ��������Τ��ޤ���
+@raise WIN32OLERuntimeError オブジェクトがActiveXコントロールの永続化イ
+                            ンターフェイスを持たない場合に通知します。
 
    obj = WIN32OLE.new("ProgID_or_GUID_of_ActiveX_Control")
    obj.ole_activex_initialize
    obj.method(...)
 
-�ʤ�����������OLE�����ȥ᡼����󥵡��Ф���³���ǡ����ν������ɬ�פȤ�
-��ActiveX����ȥ����뤫�������Ǥʤ������ñ�˶��̤�����ˡ�Ϥ���ޤ���
-���Τ��ᡢ�Ȥꤢ�������̤˥᥽�åɤ�ƤӽФ������η��
-WIN32OLERuntimeError�����Τ��졢��å�������HRESULT 0x8000ffff�ȼ�����
-�Ƥ�����ˤΤߡ����֥�����������ľ������᥽�åɤ�ƤӽФ��ƤߤƤ���
-������
+なお、生成したOLEオートメーションサーバが永続化データの初期化を必要とす
+るActiveXコントロールか、そうでないかを簡単に区別する方法はありません。
+そのため、とりあえず普通にメソッドを呼び出し、その結果
+WIN32OLERuntimeErrorが通知され、メッセージにHRESULT 0x8000ffffと示され
+ている場合にのみ、オブジェクト生成直後に当メソッドを呼び出してみてくだ
+さい。
 
-�ޤ������֥������Ȥˤ�äƤϡ����᥽�åɤθƤӽФ��ˤ���³�Υǡ�����
-�׵ᤷ�ƥϥ󥰥��åפ����礬����ޤ������ξ��ϡ�Ctrl-C�ʤɤˤ�ä�
-�¹Ԥ���ߤ��Ƥ���������
+また、オブジェクトによっては、当メソッドの呼び出しにより後続のデータを
+要求してハングアップする場合があります。その場合は、Ctrl-Cなどによって
+実行を中止してください。
 
 --- ole_free -> ()
 
-self�����Ȥ���COM���֥������Ȥ�������ޤ���
+selfが参照するCOMオブジェクトを解放します。
 
-self�����Ȥ���COM���֥������Ȥ�IUnknown::Release��ƤӽФ����Ȥǡ�COM��
-�֥������Ȥ������ޤ���ole_free��ƤӽФ�����ϡ����Υ��֥������Ȥ���
-�������ϹԤ��ޤ���
+selfが参照するCOMオブジェクトのIUnknown::Releaseを呼び出すことで、COMオ
+ブジェクトを開放します。ole_freeを呼び出した後は、このオブジェクトに対
+する操作は行えません。
 
   excel = WIN32OLE.new('Excel.Application')
-  excel.ole_free  # ���֥������Ȥβ���
+  excel.ole_free  # オブジェクトの解放
   excel.Quit      #=> RuntimeError (failed to get Dispatch Interface)
 
-�̾�����Ѥ���ʤ��ʤä�WIN32OLE���֥������Ȥ�GC�Υ����ߥ󥰤Ǽ�ưŪ��
-��������뤿�ᡢ���᥽�åɤ�ƤӽФ�ɬ�פϤ���ޤ���Office�Τ褦�ʳ�
-���ץ����������иƤӽФ����ˡ�������ץȽ�λ��⥵���Ф���������ʤ���
-��˶���Ū�˥����Ф�λ���뤿������᥽�åɤ����ѤǤ��ޤ�������������
-�¤ˤ���������������ҥ��֥������Ȥ���εջ��Ȥʤɤ����뤿�ᡢ
-WIN32OLE��IUnknown::Release��ƤӽФ��Ƥ⥪�֥������Ȥ����������Ȥϸ�
-��ޤ���
+通常は利用されなくなったWIN32OLEオブジェクトはGCのタイミングで自動的に
+解放されるため、当メソッドを呼び出す必要はありません。Officeのような外
+部プロセスサーバ呼び出し時に、スクリプト終了後もサーバが解放されない場
+合に強制的にサーバを終了するために当メソッドを利用できます。ただし、現
+実には途中で生成される子オブジェクトからの逆参照などがあるため、
+WIN32OLEがIUnknown::Releaseを呼び出してもオブジェクトが解放されるとは限
+りません。
 
   excel = WIN32OLE.new('Excel.Application')
   workbook = excel.Workbooks.Open('workbook.xls') 
   workbook.Close(:SaveChanges => false)
   workbook.ole_free
   excel.ole_free
-  # ���λ�����Excel.EXE�Ͻ�λ���ʤ�
+  # この時点でExcel.EXEは終了しない
 
-�����Ǥϡ�excel.Workbooks.Open�ιԤǡ�excel.Workbooks���֥������Ȥ���
-������Ƥ��ޤ�������������³�ν����ǳ������֥������Ȥ���������Ƥ��ʤ�
-���ᡢWorkbooks���֥������Ȥˤ�äƻ��Ȥ���Ƥ���excel���֥������Ȥϲ�
-������ޤ��󡣤�����Ф��Ʋ�����Ǥ���������������ޤ���
+上の例では、excel.Workbooks.Openの行で、excel.Workbooksオブジェクトが生
+成されています。しかし、後続の処理で該当オブジェクトが解放されていない
+ため、Workbooksオブジェクトによって参照されているexcelオブジェクトは解
+放されません。それに対して下の例では正しく解放されます。
 
   excel = WIN32OLE.new('Excel.Application')
   books = excel.Workbooks
@@ -793,16 +793,16 @@ WIN32OLE��IUnknown::Release��ƤӽФ��Ƥ⥪�֥������Ȥ����������Ȥϸ�
   excel.ole_free
 
 --- ole_func_methods -> [WIN32OLE_METHOD]
-���֥������ȤΥե��󥯥��������[[c:WIN32OLE_METHOD]]������Ȥ����֤�
-�ޤ���
+オブジェクトのファンクション情報を[[c:WIN32OLE_METHOD]]の配列として返し
+ます。
 
-ole_func_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤΤ����ե�
-�󥯥����ʲ��餫�ε�ǽŪ�����ˤ�°�����Τ�[[c:WIN32OLE_METHOD]]��
-����Ȥ����֤��ޤ���
+ole_func_methodsメソッドは、OLEオートメーションサーバのメソッドのうちファ
+ンクション（何らかの機能的な操作）に属するものを[[c:WIN32OLE_METHOD]]の
+配列として返します。
 
-@return [[c:WIN32OLE_METHOD]]������
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ������饤�֥��(TypeLib)���󶡤���Ƥ��ʤ����ʤɤ�ȯ�����ޤ���
+@return [[c:WIN32OLE_METHOD]]の配列。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            型情報ライブラリ(TypeLib)が提供されていない場合などに発生します。
 
    excel = WIN32OLE.new('Excel.Application')
    excel.visible = true
@@ -818,15 +818,15 @@ ole_func_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤΤ����ե�
 @see [[m:WIN32OLE#ole_put_methods]]
 
 --- ole_get_methods -> [WIN32OLE_METHOD]
-���֥������Ȥλ��Ȳ�ǽ�ץ��ѥƥ������[[c:WIN32OLE_METHOD]]������Ȥ���
-�֤��ޤ���
+オブジェクトの参照可能プロパティ情報を[[c:WIN32OLE_METHOD]]の配列として
+返します。
 
-ole_get_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤΤ�����
-�߼���ǽ�ʥץ��ѥƥ���[[c:WIN32OLE_METHOD]]������Ȥ����֤��ޤ���
+ole_get_methodsメソッドは、OLEオートメーションサーバのメソッドのうち読
+み取り可能なプロパティを[[c:WIN32OLE_METHOD]]の配列として返します。
 
-@return [[c:WIN32OLE_METHOD]]������
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ������饤�֥��(TypeLib)���󶡤���Ƥ��ʤ����ʤɤ�ȯ�����ޤ���
+@return [[c:WIN32OLE_METHOD]]の配列。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            型情報ライブラリ(TypeLib)が提供されていない場合などに発生します。
 
    excel = WIN32OLE.new('Excel.Application')
    excel.ole_get_methods.each do |prop|
@@ -844,30 +844,30 @@ ole_get_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤΤ�����
 --- ole_method(method) -> WIN32OLE_METHOD
 --- ole_method_help(method) -> WIN32OLE_METHOD
 
-�᥽�å�̾����ꤷ���б�����[[c:WIN32OLE_METHOD]]���֥������Ȥ��������
-����
+メソッド名を指定して対応する[[c:WIN32OLE_METHOD]]オブジェクトを取得しま
+す。
 
-OLE�����ȥ᡼�����λ��ͤˤ�ꡢ�᥽�å�̾����ʸ������ʸ���϶��̤����
-����
+OLEオートメーションの仕様により、メソッド名の大文字、小文字は区別されま
+せん。
 
-@param method �᥽�åɾ������Ф��оݤΥ᥽�å�̾��ʸ����ǻ��ꤷ�ޤ���
-@return [[c:WIN32OLE_METHOD]]���֥������ȡ�
-@raise WIN32OLERuntimeError ���ꤷ���᥽�å�̾��̤������뤤�Ϸ������
-                            ���֥��(TypeLib)���󶡤���Ƥ��ʤ����ʤ�
-                            ��ȯ�����ޤ���
+@param method メソッド情報を取り出す対象のメソッド名を文字列で指定します。
+@return [[c:WIN32OLE_METHOD]]オブジェクト。
+@raise WIN32OLERuntimeError 指定したメソッド名が未定義あるいは型情報ラ
+                            イブラリ(TypeLib)が提供されていない場合など
+                            に発生します。
 
    excel = WIN32OLE.new('Excel.Application')
    method = excel.ole_method_help('Quit')
 
 --- ole_methods -> [WIN32OLE_METHOD]
-���֥������ȤΥ᥽�åɾ����[[c:WIN32OLE_METHOD]]������Ȥ����֤��ޤ���
+オブジェクトのメソッド情報を[[c:WIN32OLE_METHOD]]の配列として返します。
 
-ole_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��Ф��󶡤��뤹�٤ƤΥ᥽��
-�ɤ�[[c:WIN32OLE_METHOD]]������Ȥ����֤��ޤ���
+ole_methodsメソッドは、OLEオートメーションサーバが提供するすべてのメソッ
+ドを[[c:WIN32OLE_METHOD]]の配列として返します。
 
-@return [[c:WIN32OLE_METHOD]]������
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ������饤�֥��(TypeLib)���󶡤���Ƥ��ʤ����ʤɤ�ȯ�����ޤ���
+@return [[c:WIN32OLE_METHOD]]の配列。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            型情報ライブラリ(TypeLib)が提供されていない場合などに発生します。
 
    excel = WIN32OLE.new('Excel.Application')
    methods = excel.ole_methods
@@ -878,13 +878,13 @@ ole_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��Ф��󶡤��뤹�٤ƤΥ᥽��
 
 --- ole_obj_help -> WIN32OLE_TYPE | nil
 --- ole_type -> WIN32OLE_TYPE | nil
-[[c:WIN32OLE_TYPE]]���֥������Ȥ��֤��ޤ���
+[[c:WIN32OLE_TYPE]]オブジェクトを返します。
 
-[[c:WIN32OLE_TYPE]]���֥������Ȥϡ�WIN32OLE���֥������Ȥ�ʸ�����ȷ���
-����ݻ����륪�֥������ȤǤ���
+[[c:WIN32OLE_TYPE]]オブジェクトは、WIN32OLEオブジェクトの文書情報と型情
+報を保持するオブジェクトです。
 
-@return ���֥������Ȥ˴�Ϣ����[[c:WIN32OLE_TYPE]]���֥������Ȥ��֤��ޤ���
-        ���֥������Ȥ��ɥ�����Ⱦ��������ʤ�����nil���֤��ޤ���
+@return オブジェクトに関連する[[c:WIN32OLE_TYPE]]オブジェクトを返します。
+        オブジェクトがドキュメント情報を持たない場合はnilを返します。
 
    excel = WIN32OLE.new('Excel.Application')
    tobj = excel.ole_obj_help
@@ -893,16 +893,16 @@ ole_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��Ф��󶡤��뤹�٤ƤΥ᥽��
 
 --- ole_put_methods -> [WIN32OLE_METHOD]
 
-���֥������Ȥ������ǽ�ץ��ѥƥ������[[c:WIN32OLE_METHOD]]������Ȥ���
-�֤��ޤ���
+オブジェクトの設定可能プロパティ情報を[[c:WIN32OLE_METHOD]]の配列として
+返します。
 
-ole_put_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤΤ�����
-���ѥƥ�����᥽�åɤ�°�����Τ�[[c:WIN32OLE_METHOD]]������Ȥ����֤�
-�ޤ���
+ole_put_methodsメソッドは、OLEオートメーションサーバのメソッドのうちプ
+ロパティ設定メソッドに属するものを[[c:WIN32OLE_METHOD]]の配列として返し
+ます。
 
-@return [[c:WIN32OLE_METHOD]]������
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ������饤�֥��(TypeLib)���󶡤���Ƥ��ʤ����ʤɤ�ȯ�����ޤ���
+@return [[c:WIN32OLE_METHOD]]の配列。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            型情報ライブラリ(TypeLib)が提供されていない場合などに発生します。
 
    excel = WIN32OLE.new('Excel.Application')
    properties = excel.ole_put_methods
@@ -914,40 +914,40 @@ ole_put_methods�᥽�åɤϡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤΤ�����
 --- setproperty(name, val) -> ()
 --- setproperty(name, args..., val) -> ()
 
-���֥������ȤΥץ��ѥƥ������ꤷ�ޤ���
+オブジェクトのプロパティを設定します。
 
-�ץ��ѥƥ�̾����ꤷ��OLE�����ȥ᡼����󥪥֥������ȤΥץ��ѥƥ�
-��Ruby��°���������ˤ����ꤷ�ޤ���
+プロパティ名を指定してOLEオートメーションオブジェクトのプロパティ
+（Rubyの属性に相当）を設定します。
 
-�ʤ���OLE�����ȥ᡼�����λ��ͤˤ�ꡢ�ץ��ѥƥ�̾����ʸ������ʸ���϶�
-�̤���ޤ���
+なお、OLEオートメーションの仕様により、プロパティ名の大文字、小文字は区
+別されません。
 
 #@if (version < "1.9.0")
-@param name �ץ��ѥƥ�̾��ʸ����ǻ��ꤷ�ޤ���
+@param name プロパティ名を文字列で指定します。
 #@else
-@param name �ץ��ѥƥ�̾��ʸ����ޤ��ϥ���ܥ�ǻ��ꤷ�ޤ���
+@param name プロパティ名を文字列またはシンボルで指定します。
 #@end
-@param val �ץ��ѥƥ������ꤹ���ͤ���ꤷ�ޤ���
-@param args ����Ū�ʥץ��ѥƥ����Ф���������ܤ����ꤹ�뤿��ΰ������
-            �ꤷ�ޤ���
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ��ͳ�ϥ�å�������HRESULT��Ĵ�٤Ƥ���������
+@param val プロパティに設定する値を指定します。
+@param args 集合的なプロパティに対する設定項目を特定するための引数を指
+            定します。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            理由はメッセージのHRESULTを調べてください。
 
-OLE�����ȥ᡼�����Υץ��ѥƥ���Ruby��°���Ȱۤʤꡢ�ѥ�᡼�����뤳
-�Ȥ��Ǥ��ޤ���
+OLEオートメーションのプロパティはRubyの属性と異なり、パラメータを取るこ
+とができます。
 
-���Ȥ���Excel��Worksheet���֥������Ȥ�Cells�ץ��ѥƥ��Ϸ���֤ȹ��ֹ��
-2�ĤΥѥ�᡼������ޤ���
+たとえばExcelのWorksheetオブジェクトのCellsプロパティは桁位置と行番号の
+2つのパラメータを取ります。
 
-�����VB�Ǥϼ��Τ褦�˵��ҤǤ��ޤ���
+これはVBでは次のように記述できます。
 
-  sheet.Cells(1, 1) = sheet.Cells(1, 2) ' ����B1�����Ƥ򥻥�A1��
+  sheet.Cells(1, 1) = sheet.Cells(1, 2) ' セルB1の内容をセルA1へ
 
-Ruby�ǤϾ嵭�Υ����ɤα��դ�VB��Ʊ������sheet.Cells(1, 2)�פΤ褦�˵���
-�Ǥ��ޤ��������դε��ҤϤǤ��ޤ���
+Rubyでは上記のコードの右辺をVBと同じく「sheet.Cells(1, 2)」のように記述
+できますが、左辺の記述はできません。
 
-���Τ��ᡢ������Τ褦��setproperty�᥽�åɤ����Ѥ��ơ��ѥ�᡼���դ���
-���ѥƥ������ꤷ�ޤ���
+そのため、次の例のようにsetpropertyメソッドを利用して、パラメータ付きプ
+ロパティを設定します。
 
 #@if (version < "1.9.0")
 
@@ -971,64 +971,64 @@ Ruby�ǤϾ嵭�Υ����ɤα��դ�VB��Ʊ������sheet.Cells(1, 2)�פΤ褦�˵���
 
 --- ole_query_interface(iid) -> WIN32OLE
 
-IID�ʥ��󥿡��ե�����ID�ˤ���ꤷ�ƥ��֥������Ȥ��̤Υ��󥿡��ե�������
-���ĥ��֥������Ȥ�������ޤ���
+IID（インターフェイスID）を指定してオブジェクトの別のインターフェイスを
+持つオブジェクトを取得します。
 
-���֥������Ȥ�ʣ���Υ����ȥ᡼������ѥ��󥿡��ե���������ľ��ˡ���
-�᥽�åɤ����Ѥ��ƴ���Υ��󥿡��ե������Ȥϰۤʤ륤�󥿡��ե��������
-�����ޤ���
+オブジェクトが複数のオートメーション用インターフェイスを持つ場合に、当
+メソッドを利用して既定のインターフェイスとは異なるインターフェイスを取
+得します。
 
-@param iid �������륤�󥿡��ե�������IID��ʸ����ǻ��ꤷ�ޤ���
-@return iid�ѥ�᡼���ǻ��ꤷ�����󥿡��ե����������WIN32OLE���֥�������
-@raise WIN32OLERuntimeError ���ꤷ��IID�򥪥֥������Ȥ������ʤ��������Τ���ޤ���
+@param iid 取得するインターフェイスのIIDを文字列で指定します。
+@return iidパラメータで指定したインターフェイスを持つWIN32OLEオブジェクト
+@raise WIN32OLERuntimeError 指定したIIDをオブジェクトが持たない場合に通知されます。
 
     ie = WIN32OLE.new('InternetExplorer.Application')
     ie_web_app = ie.ole_query_interface('{0002DF05-0000-0000-C000-000000000046}')
 
-�����ie_web_app�ϡ�ie��Ʊ�����󥹥��󥹤Ȥʤ�ޤ���
+上例のie_web_appは、ieと同じインスタンスとなります。
 
-COM�λ��ͤǤ�1�ĤΥ��󥿡��ե������ˤĤ���Ʊ��IID�䤤��碌���Ф��ƤϾ�
-��Ʊ��Υ��󥿡��ե��������֤����Ȥ������Ƥ��ޤ���
+COMの仕様では1つのインターフェイスについて同じIID問い合わせに対しては常
+に同一のインターフェイスを返すことが決められています。
 
-���Τ��ᡢ�������������줿OLE�����ȥ᡼����󥵡��ФǤ��ܥ᥽�åɤ���̣
-����Ĥ��ȤϤ���ޤ��󡣤Ȥ����Τϡ�2�İʾ�ΰۤʤ�WIN32OLE������ǽ��
-���󥿡��ե���������ĤȤ������Ȥϡ�IID_IDispatch��OLE�����ȥ᡼�����
-�Υ��󥿡��ե�����ID�ˤ���ꤷ���䤤��碌���Ф��ưۤʤ륤�󥿡��ե���
-�����֤��Ȥ������Ȥˤʤ뤫��Ǥ�������ϡ����Ū�˸ƤӽФ�¦�ץ������
-�����ĤǤ�ְ㤨�����󥿡��ե�������ƤӽФ���ǽ������ĤȤ������Ȥ��
-̣���ޤ�������������ϥ����м����ΥХ��Ǥ���
+このため、正しく実装されたOLEオートメーションサーバでは本メソッドが意味
+を持つことはありません。というのは、2つ以上の異なるWIN32OLEで操作可能な
+インターフェイスを持つということは、IID_IDispatch（OLEオートメーション
+のインターフェイスID）を指定した問い合わせに対して異なるインターフェイ
+スを返すということになるからです。これは、結果的に呼び出し側プログラム
+がいつでも間違えたインターフェイスを呼び出す可能性を持つということを意
+味します。当然、それはサーバ実装のバグです。
 
-����ϡ�C++��vtbl����������.NET Framework��COM Interop�Τ������Ū����
-��ɬ�פȤʤ뤳�ȤǤ������Τ��ᡢ���٤��륤�󥿡��ե��������֤����Ȥ�
-��᤿��硢�ºݤ��֤����󥿡��ե����������Υ��󥿡��ե�������Ѿ�����
-�����Ȥ��Ƥ⡢�ɥ�����Ⱦ�ϰۤʤ륤�󥿡��ե������Ȥ���������ʤ���
-���ɲäΥ᥽�åɤ��ƤӽФ��ޤ���
+問題は、C++のvtblアクセスや.NET FrameworkのCOM Interopのために静的型情
+報が必要となることです。このため、一度あるインターフェイスを返すことに
+決めた場合、実際に返すインターフェイスが元のインターフェイスを継承して
+いたとしても、ドキュメント上は異なるインターフェイスとして定義しなけれ
+ば追加のメソッドが呼び出せません。
 
-���Ȥ��С����᥽�åɤ�¸����ͳ�Ǥ���
-[[url:http://www.ruby-forum.com/topic/109954]]�ʤʤ������Υѥå��Ȱۤ�
-��GUID������ե����ޥåȤ����Ѥ���褦�˲�¤����Ƥ��뤿�ᡢIID�������
-{}��ɬ�פǤ��ˤˤϡ�Solution���֥������Ȥ��Ф���Solution2���֥������Ȥ�
-��������ꤹ�뤿��ˡ�ɬ�פȤ������ȤˤʤäƤ��ޤ����ºݡ�Solution�ץ�
-�ѥƥ����֤��Τϡ����ξ���Solution���󥿡��ե�������Ѿ�����
-Solution2���󥿡��ե������Ǥ�����������Solution�ץ��ѥƥ��η������
-Solution���󥿡��ե��������֤����ȤˤʤäƤ��뤿�ᡢ��Ū�˷����褷��
-������ϡ��ɲäΥ᥽�åɤθƤӽФ��򵭽ҤǤ��ޤ���
+たとえば、当メソッドの存在理由である
+[[url:http://www.ruby-forum.com/topic/109954]]（なお、元のパッチと異な
+りGUIDの統一フォーマットを利用するように改造されているため、IIDの前後に
+{}が必要です）には、Solutionオブジェクトに対してSolution2オブジェクトの
+取得を依頼するために、必要ということになっています。実際、Solutionプロ
+パティが返すのは、この場合はSolutionインターフェイスを継承した
+Solution2インターフェイスです。しかし、Solutionプロパティの型情報は
+Solutionインターフェイスを返すことになっているため、静的に型を解決して
+いる場合は、追加のメソッドの呼び出しを記述できません。
 
-��������WIN32OLE�����Ѥ���IDispatch���󥿡��ե������ϡ��᥽�å�̾�ˤ��
-ưŪ�ʥ᥽�åɸ������Ԥ��ޤ������Τ��ᡢSolution���֥������ȡʤ�����
-���μ��֤�Solution2���֥������ȡˤ��Ф���Solution2���ɲä��줿�᥽�å�
-�ʤ��Ȥ���GetProjectTemplate�ˤ���ꤷ���Ȥ��Ƥ��������ƤӽФ��ޤ�����
-�ޤꡢ[[url:http://www.ruby-forum.com/topic/109954]]���㼨����Ƥ����
-����ole_query_interface�᥽�åɤθƤӽФ������פǤ���
+しかし、WIN32OLEが利用するIDispatchインターフェイスは、メソッド名による
+動的なメソッド検索が行われます。このため、Solutionオブジェクト（しかし
+その実態はSolution2オブジェクト）に対してSolution2で追加されたメソッド
+（たとえばGetProjectTemplate）を指定したとしても正しく呼び出せます。つ
+まり、[[url:http://www.ruby-forum.com/topic/109954]]で例示されているよ
+うなole_query_interfaceメソッドの呼び出しは不要です。
 
-�⤷�����᥽�åɤθƤӽФ���������ɬ�פʤΤǤ���С��ޤ�����������OLE����
-�ȥ᡼����󥵡��Фν�������ꤷ�Ƥ������������μ���������������ޤ���
+もし、当メソッドの呼び出しが本当に必要なのであれば、まず、該当するOLEオー
+トメーションサーバの修正を依頼してください。その実装は正しくありません。
 
-�������������줿���֥������Ȥ��Ф������᥽�åɤ�Ŭ�Ѥ���ȡ���̤Ȥ��ơ�
-Ʊ�쥪�֥������Ȥλ��ȥ�������ͤ�̵�̤����ä����뤳�Ȥˤʤ�ޤ���
+正しく実装されたオブジェクトに対して当メソッドを適用すると、結果として、
+同一オブジェクトの参照カウント値を無駄に増加させることになります。
 
-�ʤ������ݡ��Ȥ��Ƥ��륤�󥿡��ե������ΥС�������Ĵ�٤������ˡ���
-���Τ褦����ˡ�ǡ����󥿡��ե������ΥС�������Ĵ�٤뤳�Ȥ��Ǥ��ޤ���
+なお、サポートしているインターフェイスのバージョンを調べたい場合に、以
+下のような方法で、インターフェイスのバージョンを調べることができます。
 
   def check_solution_version(obj)
     [['{CDA7305C-78B6-4D9D-90AD-93EBE71F9341}', 4],
@@ -1044,26 +1044,26 @@ Solution���󥿡��ե��������֤����ȤˤʤäƤ��뤿�ᡢ��Ū�˷����褷��
     1
   end
 
-��������ole_query_interface�Τ褦���ðۤʥ᥽�åɤ����Ѥ�����⡢
-WIN32OLE.new('VisualStudio.DTE.8.0') �Τ褦���������˥С�������ֹ�ʤ�
-����Ǥ�8.0�ˤ���ꤹ��ۤ����ɤ���������Ǥ���
+しかし、ole_query_interfaceのような特異なメソッドを利用するよりも、
+WIN32OLE.new('VisualStudio.DTE.8.0') のように生成時にバージョン番号（こ
+の例では8.0）を指定するほうが良いスタイルです。
 
-�ޤ���ñ������Υ᥽�åɤ򥵥ݡ��Ȥ��Ƥ��뤫�ɤ������Τꤿ�������Ǥ���
-�С�[[m:WIN32OLE#ole_respond_to?]]�����Ѥ������å������ԥ󥰤򤷤Ƥ���
-������
+また、単に特定のメソッドをサポートしているかどうかを知りたいだけであれ
+ば、[[m:WIN32OLE#ole_respond_to?]]を利用したダックタイピングをしてくだ
+さい。
 
 --- ole_respond_to?(name) -> bool
-���ꤷ���᥽�åɤ򥪥֥������Ȥ����ݡ��Ȥ��Ƥ��뤫Ĵ�٤ޤ���
+指定したメソッドをオブジェクトがサポートしているか調べます。
 
-OLE�����ȥ᡼����󥵡��Ф������ǻ��ꤷ��̾���Υ᥽�åɡʥץ��ѥƥ��ˤ�
-���ݡ��Ȥ��Ƥ��뤫�ɤ�����Ĵ�٤ޤ���
+OLEオートメーションサーバが引数で指定した名前のメソッド（プロパティ）を
+サポートしているかどうかを調べます。
 
-�ʤ���OLE�����ȥ᡼�����λ��ͤˤ�ꡢ�᥽�å�̾����ʸ������ʸ���϶���
-����ޤ���
+なお、OLEオートメーションの仕様により、メソッド名の大文字、小文字は区別
+されません。
 
-@param name Ĵ�٤�᥽�å�̾��ʸ����ޤ��ϥ���ܥ�ǻ��ꤷ�ޤ���
+@param name 調べるメソッド名を文字列またはシンボルで指定します。
 
-@return name�ǻ��ꤷ���᥽�åɤ򥪥֥������Ȥ��󶡤��Ƥ���п����֤��ޤ���
+@return nameで指定したメソッドをオブジェクトが提供していれば真を返します。
 
    excel = WIN32OLE.new('Excel.Application')
    excel.ole_respond_to?(:quit) #=> true
@@ -1071,22 +1071,22 @@ OLE�����ȥ᡼����󥵡��Ф������ǻ��ꤷ��̾���Υ᥽�åɡʥץ��ѥƥ��ˤ�
 
 --- ole_typelib -> WIN32OLE_TYPELIB
 
-���֥������Ȥ��б����뷿����饤�֥���TypeLib�ˤ�
-[[c:WIN32OLE_TYPELIB]]�Ȥ����֤��ޤ���
+オブジェクトに対応する型情報ライブラリ（TypeLib）を
+[[c:WIN32OLE_TYPELIB]]として返します。
 
-OLE�����ȥ᡼�����Ǥϥ��饹�����󥿡��ե��������᥽�åɡ������ʤɤη�
-�����ʸ�����򷿾���饤�֥��Ȥ������Ѥ��ޤ���������饤�֥�����
-Ω�����ե�����ʳ�ĥ��tlb�ˤξ��⤢��С����֥������ȤΥХ��ʥ�إ꥽��
-���Ȥ��������ޤ�Ƥ����礬����ޤ���
+OLEオートメーションではクラス、インターフェイス、メソッド、引数などの型
+情報と文書情報を型情報ライブラリとして利用します。型情報ライブラリは独
+立したファイル（拡張子tlb）の場合もあれば、オブジェクトのバイナリへリソー
+スとして埋め込まれている場合があります。
 
-OLE�����ȥ᡼�����ǤϷ�����饤�֥�������ˡ����鷺�����줷������
-�����ե������ǥ��ץꥱ������󤬻��ȤǤ���褦�ˡ����֥������Ȥη���
-��ITypeInfo���󥿡��ե������ˤ��󶡤��ޤ���WIN32OLE�ϡ����Υ��֥�������
-���åפ���[[c:WIN32OLE_TYPELIB]]�Ȥ����󶡤��ޤ���
+OLEオートメーションでは型情報ライブラリの提供方法を問わずに統一したイン
+ターフェイスでアプリケーションが参照できるように、オブジェクトの形式
+（ITypeInfoインターフェイス）で提供します。WIN32OLEは、このオブジェクト
+をラップして[[c:WIN32OLE_TYPELIB]]として提供します。
 
-@return ���֥������Ȥ��б�����[[c:WIN32OLE_TYPELIB]]���֥������ȡ�
-@raise WIN32OLERuntimeError �����ȥ᡼����󥵡��ФθƤӽФ��˼��Ԥ��ޤ�����
-                            ������饤�֥��(TypeLib)���󶡤���Ƥ��ʤ����ʤɤ�ȯ�����ޤ���
+@return オブジェクトに対応する[[c:WIN32OLE_TYPELIB]]オブジェクト。
+@raise WIN32OLERuntimeError オートメーションサーバの呼び出しに失敗しました。
+                            型情報ライブラリ(TypeLib)が提供されていない場合などに発生します。
 
    excel = WIN32OLE.new('Excel.Application')
    tlib = excel.ole_typelib
@@ -1097,20 +1097,20 @@ OLE�����ȥ᡼�����ǤϷ�����饤�֥�������ˡ����鷺�����줷������
 == Constants
 --- VERSION  -> String
 
-Major.Minor.Patch������WIN32OLE�ΥС�������ֹ�򼨤�ʸ����Ǥ���
+Major.Minor.Patch形式のWIN32OLEのバージョン番号を示す文字列です。
 
 --- ARGV -> [object]
 
-ľ���Υ᥽�åɸƤӽФ��ΰ������Ǽ��������Ǥ���
+直前のメソッド呼び出しの引数を格納した配列です。
 
-OLE�����ȥ᡼�����ǤϸƤӽФ��褬�������Ф����ͤ�����Ǥ��ޤ�����������
-Ruby�Υ᥽�åɰ������ͤΤߤ��뤿�ᡢ���ΤޤޤǤϸƤӽФ��褬���ꤷ��
-�ͤ򻲾ȤǤ��ޤ��󡣤��Τ褦�ʾ�硢ARGV�򻲾Ȥ��뤳�ȤǸƤӽФ������
-���ͤ򻲾ȤǤ��ޤ���
+OLEオートメーションでは呼び出し先が引数に対して値を設定できます。しかし、
+Rubyのメソッド引数は値のみを取るため、そのままでは呼び出し先が設定した
+値を参照できません。このような場合、ARGVを参照することで呼び出し先の設
+定値を参照できます。
 
-�ʲ��Υꥹ�Ȥϡ�VB�ǳ�ȯ�������֥������ȤΥ᥽�åɸƤӽФ�����Ȥ��Ƥ�
-�ޤ������Υ᥽�åɡ�Accm�ˤϡ���1�����ǻ��ꤷ���黻����2��������3������
-Ŭ�Ѥ�����̤���2���������ꤷ�ޤ���
+以下のリストは、VBで開発したオブジェクトのメソッド呼び出しを例としてい
+ます。このメソッド（Accm）は、第1引数で指定した演算を第2引数と第3引数に
+適用し、結果を第2引数に設定します。
 
   ' VB (OLE Automation server)
   Public Sub Accm(ByVal Operator, ByRef Accumulator, ByVal Operand)
@@ -1124,16 +1124,16 @@ Ruby�Υ᥽�åɰ������ͤΤߤ��뤿�ᡢ���ΤޤޤǤϸƤӽФ��褬���ꤷ��
   # Ruby
   x = 10
   obj.Accm '*', x, 11
-  p x               # => 10 �ġ� �ƤӽФ��ˤ�äƱƶ�������ʤ�
-  p WIN32OLE::ARGV  # => ['*', 110, 11] �ġ� ��̤�ARGV���б����������ȿ�Ǥ����
+  p x               # => 10 …… 呼び出しによって影響を受けない
+  p WIN32OLE::ARGV  # => ['*', 110, 11] …… 結果はARGVの対応する引数に反映される
   obj.Accm '+', 10, 11
   p WIN32OLE::ARGV  # => ['+', 21, 11]
 
-ľ���Υ᥽�åɸƤӽФ����㳰�Ȥʤä���硢ARGV���������ƤϸƤӽФ�����
-���֤��ݤ���ޤ����ĤޤꡢWIN32OLE���Ȥ�ARGV�����Ƥ�õ��Τϡ��᥽��
-�ɸƤӽФ��������������ΤߤǤ������Τ���Ǹ�Υ᥽�åɸƤӽФ�������
-�˥��֥������Ȥ��֤������פΥ᥽�åɤ��ä���硢GC�˥��֥������Ȥ���
-�����뤿��ˡ��ƤӽФ�¦��ARGV��õ�Ƥ���������
+直前のメソッド呼び出しが例外となった場合、ARGVの設定内容は呼び出し前の
+状態が保たれます。つまり、WIN32OLE自身がARGVの内容を消去するのは、メソッ
+ド呼び出しに成功した場合のみです。このため最後のメソッド呼び出しが引数
+にオブジェクトを返すタイプのメソッドだった場合、GCにオブジェクトを回収
+させるために、呼び出し側でARGVを消去してください。
 
   ' VB (OLE Automation server)
   Public Sub GetInterface(ByRef obj)
@@ -1141,44 +1141,44 @@ Ruby�Υ᥽�åɰ������ͤΤߤ��뤿�ᡢ���ΤޤޤǤϸƤӽФ��褬���ꤷ��
   End Sub
 
   # Ruby
-  obj.GetInterface nil   # �����ο����碌�뤿����ߡ����������
-  WIN32OLE::ARGV.clear   # �̾�ϡ���³�Υ᥽�åɸƤӽФ��ˤ�äƾõ���
+  obj.GetInterface nil   # 引数の数を合わせるためダミー引数を指定
+  WIN32OLE::ARGV.clear   # 通常は、後続のメソッド呼び出しによって消去される
 
 --- CP_ACP -> Fixnum
 
-Windows�����ANSI�����ɥڡ�����0�ˤ򼨤��ޤ���
+Windows既定のANSIコードページ（0）を示します。
 
 --- CP_MACCP -> Fixnum
 
-Macintosh�����ɥڡ�����2�ˤ򼨤��ޤ���
+Macintoshコードページ（2）を示します。
 
 --- CP_OEMCP -> Fixnum
 
-OEM�����ɥڡ�����1�ˤ򼨤��ޤ���
+OEMコードページ（1）を示します。
 
 --- CP_SYMBOL -> Fixnum
 
-ʸ�������ɤ��Ѵ��˥���ܥ�����Ѥ��뤳�Ȥ򼨤��ޤ���42�ˡ�
+文字コードの変換にシンボルを利用することを示します（42）。
 
 --- CP_THREAD_ACP -> Fixnum
 
-���߼¹���Υ���åɤδ���Υ����ɥڡ�����3�ˤ򼨤��ޤ���
+現在実行中のスレッドの既定のコードページ（3）を示します。
 
-Windows�Υ����ɥڡ����ϥ���å���˰ۤʤ��ͤ�����Ǥ��ޤ���
+Windowsのコードページはスレッド毎に異なる値を設定できます。
 
 --- CP_UTF7 -> Fixnum
 
-ʸ�������ɤ��Ѵ���UTF-7�����Ѥ��뤳�Ȥ򼨤��ޤ���65000�ˡ�
+文字コードの変換にUTF-7を利用することを示します（65000）。
 
 --- CP_UTF8 -> Fixnum
 
-ʸ�������ɤ��Ѵ���UTF-8�����Ѥ��뤳�Ȥ򼨤��ޤ���65001�ˡ�
+文字コードの変換にUTF-8を利用することを示します（65001）。
 
 --- LOCALE_SYSTEM_DEFAULT  -> Fixnum
 
-�����ƥ����Υ�������򼨤�LCID(0x0800)�Ǥ���WIN32OLE�������ȥ᡼����
-������Ѥ�����δ����ͤǤ���
+システム既定のロケールを示すLCID(0x0800)です。WIN32OLEがオートメーショ
+ンを利用する場合の既定値です。
 
 --- LOCALE_USER_DEFAULT  -> Fixnum
 
-�桼������Υ�������򼨤�LCID(0x0400)�Ǥ���
+ユーザ既定のロケールを示すLCID(0x0400)です。

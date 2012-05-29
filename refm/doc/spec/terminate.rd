@@ -1,34 +1,34 @@
-= ��λ����
+= 終了処理
 
-Ruby �ϥ�����ץȤν�ü��ã����������ª���Ƥ��ʤ��㳰��ȯ��������
-��˽�λ���ޤ�(�ؿ� [[m:Kernel.#exit]] �� [[m:Kernel.#abort]]
-���ᥤ�󥹥�åɤ��Ф��� [[m:Thread.kill]] �ʤɤ�
-[[c:SystemExit]] �㳰��ȯ�������ޤ�)����λ���ˤϰʲ�
-�ν�������˼¹Ԥ���ޤ���
+Ruby はスクリプトの終端に達した場合や捕捉していない例外が発生した場
+合に終了します(関数 [[m:Kernel.#exit]] や [[m:Kernel.#abort]]
+、メインスレッドに対する [[m:Thread.kill]] などは
+[[c:SystemExit]] 例外を発生させます)。終了時には以下
+の処理が順に実行されます。
 
-  (1) ���٤ƤΥ���åɤ� [[m:Thread.kill]] ���롣
-  (1) Ruby �ε��������ʥ� SIGEXIT �Υϥ�ɥ餬��Ͽ����Ƥ���Ф�����
-      �Ԥ���([[m:Kernel.#trap]] �򻲾�)��
-  (1) [[ref:d:spec/control#END]] �֥��å�(END { ... } �ޤ��ϴؿ�
-      [[m:Kernel.#at_exit]] �ǻ��ꤷ���֥��å�)����Ͽ����Ƥ���С�
-      ���Υ֥��å�����Ͽ�Ȥϵս�˼¹Ԥ��롣���Υ֥��å��μ¹����ȯ��
-      �������æ�ФϤ��Υ֥��å��ν��������Ǥ��뤬��������ץȤϤޤ���
-      λ���ʤ���
-  (1) [[m:ObjectSpace.#define_finalizer]] �ˤ�ꡢ�ե�����
-      �饤������Ͽ����Ƥ���Ф�����¹Ԥ��롣�¹Խ�������ꡣ
-      �ե����ʥ饤���¹����ȯ���������æ�ФϤ��Υե����ʥ饤���ν���
-      �����Ǥ��뤬��������ץȤϤޤ���λ���ʤ���
-  (1) [[man:exit(3)]] �ˤ�꽪λ���롣
-      ���ΤȤ��Ϥ���뽪λ���ơ������ͤϽ�λ��ˡ�ˤ��ޤ���
-      �㤨�С�
+  (1) すべてのスレッドを [[m:Thread.kill]] する。
+  (1) Ruby の疑似シグナル SIGEXIT のハンドラが登録されていればそれを実
+      行する([[m:Kernel.#trap]] を参照)。
+  (1) [[ref:d:spec/control#END]] ブロック(END { ... } または関数
+      [[m:Kernel.#at_exit]] で指定したブロック)が登録されていれば、
+      そのブロックを登録とは逆順に実行する。このブロックの実行中に発生
+      した大域脱出はそのブロックの処理を中断するが。スクリプトはまだ終
+      了しない。
+  (1) [[m:ObjectSpace.#define_finalizer]] により、ファイナ
+      ライザが登録されていればそれらを実行する。実行順序は不定。
+      ファイナライザ実行中に発生した大域脱出はそのファイナライザの処理
+      を中断するが、スクリプトはまだ終了しない。
+  (1) [[man:exit(3)]] により終了する。
+      このとき渡される終了ステータス値は終了方法によります。
+      例えば、
 //emlist{
-      * ������ץȤν�ü��ã�������� 0
-      * [[m:Kernel.#exit]] ���Ϥ�������
-      * [[c:SystemExit]] �ˤ���㳰�ʳ��� 1
+      * スクリプトの終端に達した場合は 0
+      * [[m:Kernel.#exit]] に渡した引数
+      * [[c:SystemExit]] による例外以外は 1
 #@until 1.8.0
-      * [[c:SystemExit]] ������Ū�� raise �����Ȥ��� 0
+      * [[c:SystemExit]] を明示的に raise したときは 0
 #@end
 
 //}
-�ؿ� [[m:Kernel.#exit!]] �ˤ�뽪λ�ϡ�[[man:_exit(2)]]
-��¹Ԥ�������ǡ��嵭�ν����Ϥ������Ԥ��ޤ���
+関数 [[m:Kernel.#exit!]] による終了は、[[man:_exit(2)]]
+を実行するだけで、上記の処理はいずれも行われません。

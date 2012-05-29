@@ -3,47 +3,47 @@
 include File::Constants
 #@end
 
-�ե����륢�������Τ���Υ��饹�Ǥ���
+ファイルアクセスのためのクラスです。
 
-�̾� [[m:Kernel.#open]] �ޤ��� [[m:File.open]] ��Ȥä��������ޤ���
+通常 [[m:Kernel.#open]] または [[m:File.open]] を使って生成します。
 #@since 1.8.0
-[[c:IO]] ���饹�����󥯥롼�ɤ��Ƥ��� [[c:File::Constants]] �� File ���饹�˴ط����������
-��Ǽ�����⥸�塼��Ǥ���
+[[c:IO]] クラスがインクルードしている [[c:File::Constants]] は File クラスに関係する定数を
+格納したモジュールです。
 #@end
-�ޤ� [[c:File::Stat]] �� stat ��¤��( [[man:stat(2)]] ����)��ɽ�����饹�Ǥ���
+また [[c:File::Stat]] は stat 構造体( [[man:stat(2)]] 参照)を表すクラスです。
 
 == Class Methods
 
 --- atime(filename)    -> Time
 
-�ǽ���������������֤��ޤ���
+最終アクセス時刻を返します。
 
-@param filename �ե�����̾��ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@raise Errno::EXXX �ե�����λ���μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- ctime(filename)    -> Time
 
-���֤��Ǹ���ѹ����줿������֤��ޤ���
-���֤��ѹ��Ȥ� chmod �ʤɤˤ���ΤǤ���
+状態が最後に変更された時刻を返します。
+状態の変更とは chmod などによるものです。
 
-@param filename �ե�����̾��ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@raise Errno::EXXX �ե�����λ���μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- mtime(filename)    -> Time
 
-�ǽ�����������֤��ޤ���
+最終更新時刻を返します。
 
-@param filename �ե�����̾��ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@raise Errno::EXXX �ե�����λ���μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- basename(filename, suffix = "")     -> String
 
-filename �ΰ��ָ���Υ���å����³�����Ǥ��֤��ޤ����⤷��
-���� suffix ��Ϳ�����ơ����Ĥ��줬 filename ��������
-���פ���ʤ顢��������������Τ��֤��ޤ���
+filename の一番後ろのスラッシュに続く要素を返します。もし、
+引数 suffix が与えられて、かつそれが filename の末尾に
+一致するなら、それを取り除いたものを返します。
 
   p File.basename("ruby/ruby.c")          #=> "ruby.c"
   p File.basename("ruby/ruby.c", ".c")    #=> "ruby"
@@ -52,112 +52,112 @@ filename �ΰ��ָ���Υ���å����³�����Ǥ��֤��ޤ����⤷��
   p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
 
 #@since 1.8.0
-File.basename ��ư��� [[man:basename(3)]] 
+File.basename の動作は [[man:basename(3)]] 
 #@#[[url:http://www.unix-systems.org/version3/online.html]]
-�˽����ޤ���
+に従います。
   p File.basename("foo/bar/")      # => "bar"
 #@end
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
-@param suffix ���ե��å�����ʸ�����Ϳ���ޤ���'.*' �Ȥ���ʸ�����Ϳ������硢'*' �ϥ磻��ɥ����ɤȤ���Ư��
-              '.' ��ޤޤʤ�Ǥ�դ�ʸ����˥ޥå����ޤ���
+@param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
+              '.' を含まない任意の文字列にマッチします。
 
 @see [[m:File.dirname]], [[m:File.extname]]
 
 --- chmod(mode, *filename)    -> Integer
 
-�ե�����Υ⡼�ɤ� mode ���ѹ����ޤ����⡼�ɤ��ѹ������ե���
-��ο����֤��ޤ���
+ファイルのモードを mode に変更します。モードを変更したファイ
+ルの数を返します。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
-@param mode [[man:chmod(2)]] ��Ʊ�ͤ������ǻ��ꤷ�ޤ���
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
 
-@raise Errno::EXXX �⡼�ɤ��ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
 --- lchmod(mode, *filename)    -> Integer
 
-[[m:File.chmod]] ��Ʊ�ͤǤ���������ܥ�å���󥯤˴ؤ��ƥ�󥯤��Τ�Τ�
-�⡼�ɤ��ѹ����ޤ���
+[[m:File.chmod]] と同様ですが、シンボリックリンクに関してリンクそのものの
+モードを変更します。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
-@param mode [[man:chmod(2)]] ��Ʊ�ͤ������ǻ��ꤷ�ޤ���
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
 
-@raise NotImplementedError [[man:lchmod(2)]] ��������Ƥ��ʤ������ƥ�Ǥ��Υ᥽�åɤ�ƤӽФ���ȯ�����ޤ���
+@raise NotImplementedError [[man:lchmod(2)]] を実装していないシステムでこのメソッドを呼び出すと発生します。
 
-@raise Errno::EXXX �⡼�ɤ��ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
 --- chown(owner, group, *filename)    -> Integer
 
-�ե�����Υ����ʡ��ȥ��롼�פ��ѹ����ޤ��������ѡ��桼���������ե�
-����Υ����ʡ��ȥ��롼�פ��ѹ��Ǥ��ޤ����ѹ���Ԥä��ե�����ο���
-�֤��ޤ���
+ファイルのオーナーとグループを変更します。スーパーユーザだけがファ
+イルのオーナーとグループを変更できます。変更を行ったファイルの数を
+返します。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
-@param owner [[man:chown(2)]] ��Ʊ�ͤ˿��ͤǻ��ꤷ�ޤ���nil �ޤ��� -1 ����ꤹ�뤳�Ȥǡ������ʡ��򸽺ߤΤޤޤˤ��뤳�Ȥ��Ǥ��ޤ���
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
 
-@param group [[man:chown(2)]] ��Ʊ�ͤ˿��ͤǻ��ꤷ�ޤ���nil �ޤ��� -1 ����ꤹ�뤳�Ȥǡ����롼�פ򸽺ߤΤޤޤˤ��뤳�Ȥ��Ǥ��ޤ���
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
 
-@raise Errno::EXXX �ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 変更に失敗した場合に発生します。
 
 --- lchown(owner, group, *filename)    -> Integer
 
-[[m:File#chown]] ��Ʊ�ͤǤ�����
-����ܥ�å���󥯤˴ؤ��ƥ�󥯤��Τ�ΤΥ����ʡ���
-���롼�פ��ѹ����ޤ���
+[[m:File#chown]] と同様ですが、
+シンボリックリンクに関してリンクそのもののオーナー、
+グループを変更します。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
-@param owner [[man:chown(2)]] ��Ʊ�ͤ˿��ͤǻ��ꤷ�ޤ���nil �ޤ��� -1 ����ꤹ�뤳�Ȥǡ������ʡ��򸽺ߤΤޤޤˤ��뤳�Ȥ��Ǥ��ޤ���
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
 
-@param group [[man:chown(2)]] ��Ʊ�ͤ˿��ͤǻ��ꤷ�ޤ���nil �ޤ��� -1 ����ꤹ�뤳�Ȥǡ����롼�פ򸽺ߤΤޤޤˤ��뤳�Ȥ��Ǥ��ޤ���
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
 
-@raise NotImplementedError [[man:lchown(2)]] ��������Ƥ��ʤ������ƥ�Ǥ��Υ᥽�åɤ�ƤӽФ���ȯ�����ޤ���
+@raise NotImplementedError [[man:lchown(2)]] を実装していないシステムでこのメソッドを呼び出すと発生します。
 
 --- delete(*filename)    -> Integer
 --- unlink(*filename)    -> Integer
 
-�ե�����������ޤ�����������ե�����ο����֤��ޤ���
-����˼��Ԥ��������㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+ファイルを削除します。削除したファイルの数を返します。
+削除に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-���Υ᥽�åɤ��̾�ե�����κ���Ѥǡ��ǥ��쥯�ȥ�κ���ˤ�
-[[m:Dir.rmdir]] ��Ȥ��ޤ���
+このメソッドは通常ファイルの削除用で、ディレクトリの削除には
+[[m:Dir.rmdir]] を使います。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- dirname(filename)    -> String
 
-filename �ΰ��ָ���Υ���å���������ʸ
-����Ȥ����֤��ޤ�������å����ޤޤʤ��ե�����̾���Ф��Ƥ�
-"."(�����ȥǥ��쥯�ȥ�)���֤��ޤ���
+filename の一番後ろのスラッシュより前を文
+字列として返します。スラッシュを含まないファイル名に対しては
+"."(カレントディレクトリ)を返します。
 
     p File.dirname("dir/file.ext")    # => "dir"
     p File.dirname("file.ext")        # => "."
 
 #@if (version >= "1.8.0")
-File.dirname ��ư��� [[man:dirname(3)]]
+File.dirname の動作は [[man:dirname(3)]]
 #@#[[url:http://www.unix-systems.org/version3/online.html]] 
-�˽����ޤ���
+に従います。
     p File.dirname("foo/bar/")      # => "foo"
     p File.dirname("foo//bar")      # => "foo"
 #@end
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
 @see [[m:File.basename]], [[m:File.extname]]
 
 --- expand_path(path, default_dir = '.')    -> String
 
-path �����Хѥ���Ÿ������ʸ������֤��ޤ���
-path �����Хѥ��Ǥ���� default_dir ����ˤ��ޤ���
+path を絶対パスに展開した文字列を返します。
+path が相対パスであれば default_dir を基準にします。
 
-��Ƭ�� ~ �ϥۡ���ǥ��쥯�ȥ�(�Ķ��ѿ� HOME ���Ȥ��ޤ�)�ˡ�
-~USER �Ϥ��Υ桼���Υۡ���ǥ��쥯�ȥ��Ÿ������ޤ���
+先頭の ~ はホームディレクトリ(環境変数 HOME が使われます)に、
+~USER はそのユーザのホームディレクトリに展開されます。
 
   p Dir.getwd                      #=> "/home/matz/work/foo"
   p ENV["HOME"]                    #=> "/home/matz"
@@ -166,20 +166,20 @@ path �����Хѥ��Ǥ���� default_dir ����ˤ��ޤ���
   p File.expand_path("~")          #=> "/home/matz"
   p File.expand_path("~foo")       #=> "/home/foo"
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
-@param default_dir path �����Хѥ��Ǥ���� default_dir �����Ÿ������ޤ���
+@param default_dir path が相対パスであれば default_dir を基準に展開されます。
 
 #@since 1.9.2
 --- absolute_path(file_name, dir_string=nil)
 
-file_name �����Хѥ����Ѵ�����ʸ������֤��ޤ���
+file_name を絶対パスに変換した文字列を返します。
 
-���Хѥ��ξ��ϥ����ȥǥ��쥯�ȥ����Ȥ��ޤ���
-dir_string ���Ϥ������Ϥ��Υǥ��쥯�ȥ����Ȥ��ޤ���
+相対パスの場合はカレントディレクトリを基準とします。
+dir_string を渡した場合はそのディレクトリを基準とします。
 
-[[m:File.expand_path]] �Ȱۤʤꡢ file_name ��Ƭ�� "~" �Ǥ�����
-�����Ÿ������ޤ������̤Υǥ��쥯�ȥ�̾�Ȥ��ƽ�������ޤ���
+[[m:File.expand_path]] と異なり、 file_name 先頭が "~" である場合
+それは展開されません。普通のディレクトリ名として処理されます。
 
   p Dir.getwd                      #=> "/home/matz/work/bar"
   p ENV["HOME"]                    #=> "/home/matz"
@@ -194,10 +194,10 @@ dir_string ���Ϥ������Ϥ��Υǥ��쥯�ȥ����Ȥ��ޤ���
 
 --- extname(filename)    -> String
 
-�ե�����̾ filename �γ�ĥ����ʬ(�Ǹ�� "." ��³��ʸ����)��
-�֤��ޤ����ǥ��쥯�ȥ�̾�˴ޤޤ�� "." �䡢�ե�����̾��Ƭ�� "."
-�ϳ�ĥ�Ҥΰ����Ȥ��Ƥϸ��ʤ���ޤ���filename �˳�ĥ�Ҥ���
-�ޤ�ʤ����϶�ʸ������֤��ޤ���
+ファイル名 filename の拡張子部分(最後の "." に続く文字列)を
+返します。ディレクトリ名に含まれる "." や、ファイル名先頭の "."
+は拡張子の一部としては見なされません。filename に拡張子が含
+まれない場合は空文字列を返します。
 
   p File.extname("foo/foo.txt")     # => ".txt"
   p File.extname("foo/foo.tar.gz")  # => ".gz"
@@ -206,18 +206,18 @@ dir_string ���Ϥ������Ϥ��Υǥ��쥯�ȥ����Ȥ��ޤ���
   p File.extname("foo.txt/bar")     # => ""
   p File.extname(".foo")            # => ""
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ���
+@param filename ファイル名を表す文字列を指定します。
 
 @see [[m:File.basename]], [[m:File.dirname]]
 
 --- fnmatch(pattern, path, flags = 0)     -> bool 
 --- fnmatch?(pattern, path, flags = 0)    -> bool
 
-�ե�����̾�Υѥ�����ޥå� [[man:fnmatch(3)]] ��Ԥ��ޤ���
-path �� pattern �˥ޥå�����п����֤��ޤ��������Ǥʤ����ˤ� false ���֤��ޤ���
+ファイル名のパターンマッチ [[man:fnmatch(3)]] を行います。
+path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
 
-@param pattern �ѥ������ʸ����ǻ��ꤷ�ޤ����磻��ɥ����ɤȤ��� `*', `?', `[]' �����ѤǤ���
-               ����[[m:Dir.glob]] �Ȥϰ�ä� `{}' �� `**/' �ϻ��ѤǤ��ޤ���
+@param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
+               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
 //emlist{
     %w(foo foobar bar).each {|f|
       p File.fnmatch("foo*", f)
@@ -227,41 +227,41 @@ path �� pattern �˥ޥå�����п����֤��ޤ��������Ǥʤ����ˤ� false ���֤��ޤ��
          false
 //}
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
-@param flags �ѥ�����ޥå���ư���ʲ��ǽҤ٤�����������¤ǻ��ꤷ�ޤ���
-             flags �Υǥե�����ͤ�0(�ե饰����ʤ�)�Ǥ���
+@param flags パターンマッチの動作を以下で述べる定数の論理和で指定します。
+             flags のデフォルト値は0(フラグ指定なし)です。
 
-���� flags �˻���Ǥ�������ϰʲ��ΤȤ���Ǥ���
-����������� [[c:File::Constants]] ���������Ƥ��ޤ�����
-[[c:File]] ���饹�οƥ��饹�� IO �� [[c:File::Constants]] �򥤥󥯥롼�ɤ��Ƥ���Τǡ�
-����������� File::FNM_NOESCAPE �ʤɤȤ��ƻ��Ȳ�ǽ�Ǥ���
+引数 flags に指定できる定数は以下のとおりです。
+これらの定数は [[c:File::Constants]] で定義されていますが、
+[[c:File]] クラスの親クラスの IO が [[c:File::Constants]] をインクルードしているので、
+これらの定数は File::FNM_NOESCAPE などとして参照可能です。
 
 : FNM_NOESCAPE
- ����������ʸ�� `\' �����̤�ʸ���Ȥߤʤ��ޤ���
+ エスケープ文字 `\' を普通の文字とみなします。
 
- �ǥե���ȤǤ� \ ��ȼ��Ǥ�դ�ʸ���Ϥ���ʸ���˥ޥå����ޤ�����
- ���Υե饰��Ĥ���ȡ�\ �����̤�ʸ���Ȥ��ư����ޤ���
+ デフォルトでは \ を伴う任意の文字はその文字にマッチしますが、
+ このフラグをつけると、\ が普通の文字として扱われます。
 //emlist{
   p File.fnmatch('\a', 'a')                       # => true
   p File.fnmatch('\a', '\a', File::FNM_NOESCAPE)  # => true
 //}
- ���Ԥ� * �ϡ����������פ���Ƥ���Τ� "*" ���Τ�Τ˥ޥå�
- ���ޤ���
+ 前者で * は、エスケープされているので "*" そのものにマッチ
+ します。
 //emlist{
   p File.fnmatch('\*', 'a')                       # => false
   p File.fnmatch('\*', '\a', File::FNM_NOESCAPE)  # => true
 //}
-  ñ�Τ� \ �ϡ����Υե饰��̵ͭ�˴ؤ�餺 \ �˥ޥå����ޤ���
-  (���󥰥륯������ʸ������Ǥ� \\ �ϡ�\ �Ǥ��뤳�Ȥ�����)
+  単体の \ は、このフラグの有無に関わらず \ にマッチします。
+  (シングルクォート文字列中では \\ は、\ であることに注意)
 //emlist{
   p File.fnmatch('\\', '\\')                      # => true
   p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
 //}
 
 : FNM_PATHNAME
- �磻��ɥ����� `*', `?', `[]' �� `/' �˥ޥå����ʤ��ʤ�ޤ���
- ������Υѥ�����ޥå��ˤϤ��Υե饰�����Ѥ���Ƥ��ޤ���
+ ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
+ シェルのパターンマッチにはこのフラグが使用されています。
 //emlist{
   p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
   p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
@@ -269,13 +269,13 @@ path �� pattern �˥ޥå�����п����֤��ޤ��������Ǥʤ����ˤ� false ���֤��ޤ��
 //}
 
 : FNM_CASEFOLD
- ����ե��٥åȤ��羮ʸ������̤����˥ѥ�����ޥå���Ԥ��ޤ���
+ アルファベットの大小文字を区別せずにパターンマッチを行います。
 //emlist{
   p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
 //}
 
 : FNM_DOTMATCH
- �磻��ɥ����� `*', `?', `[]' ����Ƭ�� `.' �˥ޥå�����褦�ˤʤ�ޤ���
+ ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
 //emlist{
   p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
   p File.fnmatch('?', '.', File::FNM_DOTMATCH)           # => true
@@ -285,9 +285,9 @@ path �� pattern �˥ޥå�����п����֤��ޤ��������Ǥʤ����ˤ� false ���֤��ޤ��
 
 --- ftype(filename)    -> String
 
-�ե�����Υ����פ�ɽ��ʸ������֤��ޤ���ʸ����ϰʲ��Τ����Τ�����
-���Ǥ���File.lstat(filename).ftype ��Ʊ����
-��������ܥ�å���󥯤��Ф��� "link" ���֤��ޤ���
+ファイルのタイプを表す文字列を返します。文字列は以下のうちのいずれ
+かです。File.lstat(filename).ftype と同じで
+す。シンボリックリンクに対して "link" を返します。
 
  * "file"
  * "directory"
@@ -298,375 +298,375 @@ path �� pattern �˥ޥå�����п����֤��ޤ��������Ǥʤ����ˤ� false ���֤��ޤ��
  * "socket"
  * "unknown"
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param filename ファイル名を表す文字列を指定します。 
 
-@raise Errno::EXXX ����μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
 --- join(*item)    -> String
 
-File::SEPARATOR��֤������ʸ�����Ϣ�뤷�ޤ���
+File::SEPARATORを間に入れて文字列を連結します。
 
   [item, item, ...].join(File::SEPARATOR)
 
-��Ʊ���Ǥ���[[d:platform/DOSISH-support]]�ǴĶ���¸�ˤʤ�ͽ��Ǥ���
+と同じです。[[d:platform/DOSISH-support]]で環境依存になる予定です。
 
-@param item Ϣ�뤷�����ǥ��쥯�ȥ�̾��ե�����̾��ʸ�����Ϳ���ޤ���
+@param item 連結したいディレクトリ名やファイル名を文字列で与えます。
 
 --- link(old, new)    -> 0
 
-old ��ؤ� new �Ȥ���̾���Υϡ��ɥ�󥯤�
-�������ޤ���old �Ϥ��Ǥ�¸�ߤ��Ƥ���ɬ�פ�����ޤ���
-�ϡ��ɥ�󥯤������������� 0 ���֤��ޤ���
+old を指す new という名前のハードリンクを
+生成します。old はすでに存在している必要があります。
+ハードリンクに成功した場合は 0 を返します。
 
-���Ԥ��������㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-@param old �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param old ファイル名を表す文字列を指定します。 
 
-@param new �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param new ファイル名を表す文字列を指定します。 
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- new(path, mode = "r", perm = 0666)                -> File 
 --- open(path, mode = "r", perm = 0666)               -> File 
 --- open(path, mode = "r", perm = 0666) {|file| ... } -> object
 
-path �ǻ��ꤵ���ե�����򥪡��ץ󤷡�[[c:File]] ���֥������Ȥ���������
-�֤��ޤ���
+path で指定されるファイルをオープンし、[[c:File]] オブジェクトを生成して
+返します。
 
-path �������ξ��ϥե�����ǥ�������ץ��Ȥ��ư�����������б�����
-[[c:File]] ���֥������Ȥ����������֤��ޤ���[[m:IO.open]] ��Ʊ���Ǥ���
-�֥��å�����ꤷ�ƸƤӽФ������ϡ�File ���֥������Ȥ�����Ȥ���
-�֥��å���¹Ԥ��ޤ����֥��å��μ¹Ԥ���λ����ȡ��ե�����ϼ�ưŪ��
-������������ޤ����֥��å��μ¹Է�̤��֤��ޤ���
+path が整数の場合はファイルディスクリプタとして扱い、それに対応する
+[[c:File]] オブジェクトを生成して返します。[[m:IO.open]] と同じです。
+ブロックを指定して呼び出した場合は、File オブジェクトを引数として
+ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に
+クローズされます。ブロックの実行結果を返します。
 
-@param path �ե������ʸ����ǻ��ꤷ�ޤ�����������ꤷ�����ϥե�����ǥ�������ץ��Ȥ��ư����ޤ���
+@param path ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
 
-@param mode �⡼�ɤ�ʸ��������������¤ǻ��ꤷ�ޤ���[[m:Kernel.#open]] ��Ʊ���Ǥ���
+@param mode モードを文字列か定数の論理和で指定します。[[m:Kernel.#open]] と同じです。
 
-@param perm �ե����������������Υե�����Υѡ��ߥå����������ǻ��ꤷ�ޤ���[[m:Kernel.#open]] ��Ʊ���Ǥ���
+@param perm ファイルを生成する場合のファイルのパーミッションを整数で指定します。[[m:Kernel.#open]] と同じです。
 
-@raise Errno::EXXX �ե�����Υ����ץ�˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
 #@since 1.9.1
 --- path(filename)    -> String
 
-���ꤵ�줿�ե�����̾��ʸ������֤��ޤ���filename ��ʸ����Ǥʤ����ϡ�to_path �᥽�åɤ�ƤӤޤ���
+指定されたファイル名を文字列で返します。filename が文字列でない場合は、to_path メソッドを呼びます。
 
-@param filename �ե�����̾��ɽ��ʸ���� to_path �᥽�åɤ�������줿���֥������Ȥ���ꤷ�ޤ���
+@param filename ファイル名を表す文字列か to_path メソッドが定義されたオブジェクトを指定します。
 #@end
 
 --- readlink(path)    -> String
 
-����ܥ�å���󥯤Υ����Υѥ���ʸ������֤��ޤ���
+シンボリックリンクのリンク先のパスを文字列で返します。
 
-@param path ����ܥ�å���󥯤�ɽ��ʸ�������ꤷ�ޤ���
+@param path シンボリックリンクを表す文字列を指定します。
 
-@raise Errno::EXXX ���ꤵ�줿 path ������ܥ�å���󥯤Ǥʤ����䡢��󥯤��ɤ߼��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 指定された path がシンボリックリンクでない場合や、リンクの読み取りに失敗した場合に発生します。
 
 #@since 1.9.2
 --- realpath(pathname, basedir = nil) -> String
 
-Ϳ����줿 pathname ���б��������Хѥ����֤��ޤ���
+与えられた pathname に対応する絶対パスを返します。
 
-pathname �����ƤΥ���ݡ��ͥ�Ȥ�¸�ߤ��ʤ���Фʤ�ޤ���
+pathname の全てのコンポーネントは存在しなければなりません。
 
-@param pathname �ե�����̾����ꤷ�ޤ���
+@param pathname ファイル名を指定します。
 
-@param basedir �١����ǥ��쥯�ȥ����ꤷ�ޤ�����ά����ȥ����ȥǥ��쥯�ȥ����Ѥ��ޤ���
+@param basedir ベースディレクトリを指定します。省略するとカレントディレクトリを使用します。
 
-@raise Errno::ENOENT �ե����뤬¸�ߤ��ʤ�����ȯ�����ޤ���
+@raise Errno::ENOENT ファイルが存在しない場合に発生します。
 
 --- realdirpath(pathname, basedir = nil) -> String
 
-Ϳ����줿 pathname ���б��������Хѥ����֤��ޤ���
+与えられた pathname に対応する絶対パスを返します。
 
-pathname �κǸ�Υ���ݡ��ͥ�Ȥ�¸�ߤ��Ƥ��ʤ��Ƥ��㳰��ȯ�����ޤ���
+pathname の最後のコンポーネントは存在していなくても例外は発生しません。
 
-@param pathname �ե�����̾����ꤷ�ޤ���
+@param pathname ファイル名を指定します。
 
-@param basedir �١����ǥ��쥯�ȥ����ꤷ�ޤ�����ά����ȥ����ȥǥ��쥯�ȥ����Ѥ��ޤ���
+@param basedir ベースディレクトリを指定します。省略するとカレントディレクトリを使用します。
 
-@raise Errno::ENOENT �ե����뤬¸�ߤ��ʤ�����ȯ�����ޤ���
+@raise Errno::ENOENT ファイルが存在しない場合に発生します。
 
 #@end
 
 --- rename(from, to)    -> 0
 
-�ե������̾�����ѹ����ޤ����ǥ��쥯�ȥ꤬�ۤʤ���ˤϰ�ư��Ԥ�
-�ޤ���[[man:rename(2)]] �򻲾Ȥ��Ƥ�����������ư��Υե�
-���뤬¸�ߤ�����ˤϾ�񤭤���ޤ���
+ファイルの名前を変更します。ディレクトリが異なる場合には移動も行い
+ます。[[man:rename(2)]] を参照してください。移動先のファ
+イルが存在する時には上書きされます。
 
-�ե�����ΰ�ư������������� 0 ���֤��ޤ������Ԥ��������㳰
-[[c:Errno::EXXX]] ��ȯ�����ޤ���
+ファイルの移動に成功した場合 0 を返します。失敗した場合は例外
+[[c:Errno::EXXX]] が発生します。
 
-@param from �ե������̾����ʸ�����Ϳ���ޤ���
+@param from ファイルの名前を文字列で与えます。
 
-@param to �������ե�����̾��ʸ�����Ϳ���ޤ���
+@param to 新しいファイル名を文字列で与えます。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- split(pathname)    -> [String]
 
-pathname �� dirname ��basename ��ʬ�䤷�ơ�2 ��
-�Ǥ�������֤��ޤ���
+pathname を dirname とbasename に分割して、2 要
+素の配列を返します。
 
   [File.dirname(pathname), File.basename(pathname)]
 
-��Ʊ���Ǥ���
+と同じです。
 
-@param pathname �ѥ�̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param pathname パス名を表す文字列を指定します。 
 
 --- stat(filename)    -> File::Stat
 
-filename �ξ����ޤ� [[c:File::Stat]] ���֥������Ȥ�������
-���֤��ޤ���
+filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
+て返します。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param filename ファイル名を表す文字列を指定します。 
 
-@raise Errno::EXXX ����μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
 @see [[m:IO#stat]], [[m:File#lstat]]
 
 --- lstat(filename)   -> File::Stat
 
-[[m:File.stat]]��Ʊ�ͤǤ���������ܥ�å���󥯤˴ؤ��ƥ�󥯤��Τ�Τ�
-����� File::Stat �Ȥ����֤��ޤ���[[man:lstat(2)]] ��������Ƥ��ʤ������ƥ�Ǥϡ�File.stat ��Ʊ���Ǥ���
+[[m:File.stat]]と同様ですが、シンボリックリンクに関してリンクそのものの
+情報を File::Stat として返します。[[man:lstat(2)]] を実装していないシステムでは、File.stat と同じです。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param filename ファイル名を表す文字列を指定します。 
 
-@raise Errno::EXXX ����μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
 @see [[m:IO#stat]], [[m:File#lstat]]
 
 --- symlink(old, new)    -> 0
 
-old �ؤ� new �Ȥ���̾���Υ���ܥ�å���󥯤��������ޤ���
+old への new という名前のシンボリックリンクを生成します。
 
-����ܥ�å���󥯤κ�������������� 0 ���֤��ޤ������Ԥ�������
-�㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は
+例外 [[c:Errno::EXXX]] が発生します。
 
-@param old �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param old ファイル名を表す文字列を指定します。 
 
-@param new ����ܥ�å���󥯤�ɽ��ʸ�������ꤷ�ޤ��� 
+@param new シンボリックリンクを表す文字列を指定します。 
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- truncate(path, length)    -> 0
 
-path �ǻ��ꤵ�줿�ե�����Υ���������� length �Х���
-�ˤ��ޤ���
+path で指定されたファイルのサイズを最大 length バイト
+にします。
 
-���������ѹ������������ 0 ���֤��ޤ������Ԥ��������㳰
-[[c:Errno::EXXX]] ��ȯ�����ޤ���
+サイズの変更に成功すれば 0 を返します。失敗した場合は例外
+[[c:Errno::EXXX]] が発生します。
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
-@param length �ѹ���������������������Ϳ���ޤ���
+@param length 変更したいサイズを整数で与えます。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- umask           -> Integer
 
-���ߤ� umask ���ͤ��֤��ޤ���
+現在の umask の値を返します。
 
 @see [[man:umask(2)]]
 
 --- umask(umask)    -> Integer
 
-umask ���ѹ����ޤ����ѹ����� umask ���ͤ��֤��ޤ���
+umask を変更します。変更前の umask の値を返します。
 
-@param umask ���ꤷ���� umask ���ͤ������ǻ��ꤷ�ޤ���
+@param umask 設定したい umask の値を整数で指定します。
 
 @see [[man:umask(2)]]
 
 --- utime(atime, mtime, *filename)    -> Integer
 
-�ե�����κǽ�������������ȹ���������ѹ����ޤ����ѹ������ե�����
-�ο����֤��ޤ����ѹ��˼��Ԥ��������㳰 [[c:Errno::EXXX]] ��ȯ��
-���ޤ���
+ファイルの最終アクセス時刻と更新時刻を変更します。変更したファイル
+の数を返します。変更に失敗した場合は例外 [[c:Errno::EXXX]] が発生
+します。
 
-@param filename �ե�����̾��ɽ��ʸ�������ꤷ�ޤ��� 
+@param filename ファイル名を表す文字列を指定します。 
 
-@param atime �ǽ�������������� [[c:Time]] ��������������ηв��ÿ�����ͤǻ��ꤷ�ޤ���
+@param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime ��������� [[c:Time]] ��������������ηв��ÿ�����ͤǻ��ꤷ�ޤ���
+@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@raise Errno::EXXX �ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 変更に失敗した場合に発生します。
 
 --- blockdev?(path)    -> bool
 
-[[m:FileTest.#blockdev?]] ��Ʊ���Ǥ���
+[[m:FileTest.#blockdev?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- chardev?(path)    -> bool
 
-[[m:FileTest.#chardev?]] ��Ʊ���Ǥ���
+[[m:FileTest.#chardev?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- directory?(path)    -> bool
 
-[[m:FileTest.#directory?]] ��Ʊ���Ǥ���
+[[m:FileTest.#directory?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- executable?(path)    -> bool
 
-[[m:FileTest.#executable?]] ��Ʊ���Ǥ���
+[[m:FileTest.#executable?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
 --- executable_real?(path)    -> bool
 
-[[m:FileTest.#executable_real?]] ��Ʊ���Ǥ���
+[[m:FileTest.#executable_real?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
 --- exist?(path)    -> bool
 
-[[m:FileTest.#exist?]] ��Ʊ���Ǥ���
+[[m:FileTest.#exist?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- exists?(path)    -> bool
 
-���Υ᥽�åɤ�obsolete�Ǥ���
+このメソッドはobsoleteです。
 
-[[m:FileTest.#exist?]] ��Ʊ���Ǥ���
-[[m:File.exist?]]��ȤäƲ�������
+[[m:FileTest.#exist?]] と同じです。
+[[m:File.exist?]]を使って下さい。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- file?(path)    -> bool
 
-[[m:FileTest.#file?]] ��Ʊ���Ǥ���
+[[m:FileTest.#file?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- grpowned?(path)    -> bool
 
-[[m:FileTest.#grpowned?]] ��Ʊ���Ǥ���
+[[m:FileTest.#grpowned?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- owned?(path)    -> bool
 
-[[m:FileTest.#owned?]] ��Ʊ���Ǥ���
+[[m:FileTest.#owned?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- identical?(filename1, filename2)    -> bool
 
-[[m:FileTest.#identical?]] ��Ʊ���Ǥ���
+[[m:FileTest.#identical?]] と同じです。
 
-@param filename1 �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param filename1 パスを表す文字列か IO オブジェクトを指定します。
 
-@param filename2 �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param filename2 パスを表す文字列か IO オブジェクトを指定します。
 
 --- pipe?(path)    -> bool
 
-[[m:FileTest.#pipe?]] ��Ʊ���Ǥ���
+[[m:FileTest.#pipe?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- readable?(path)    -> bool
 
-[[m:FileTest.#readable?]] ��Ʊ���Ǥ���
+[[m:FileTest.#readable?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- readable_real?(path)    -> bool
 
-[[m:FileTest.#readable_real?]] ��Ʊ���Ǥ���
+[[m:FileTest.#readable_real?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- setgid?(path)    -> bool
 
-[[m:FileTest.#setgid?]] ��Ʊ���Ǥ���
+[[m:FileTest.#setgid?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- setuid?(path)    -> bool
 
-[[m:FileTest.#setuid?]] ��Ʊ���Ǥ���
+[[m:FileTest.#setuid?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- size(path)    -> Integer
 
-[[m:FileTest.#size]] ��Ʊ���Ǥ���
+[[m:FileTest.#size]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- size?(path)    -> bool
 
-[[m:FileTest.#size?]] ��Ʊ���Ǥ���
+[[m:FileTest.#size?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- socket?(path)    -> bool
 
-[[m:FileTest.#socket?]] ��Ʊ���Ǥ���
+[[m:FileTest.#socket?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- sticky?(path)    -> bool
 
-[[m:FileTest.#sticky?]] ��Ʊ���Ǥ���
+[[m:FileTest.#sticky?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- symlink?(path)    -> bool
 
-[[m:FileTest.#symlink?]] ��Ʊ���Ǥ���
+[[m:FileTest.#symlink?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 --- writable?(path)    -> bool
 
-[[m:FileTest.#writable?]] ��Ʊ���Ǥ���
+[[m:FileTest.#writable?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
 --- writable_real?(path)    -> bool
 
-[[m:FileTest.#writable_real?]] ��Ʊ���Ǥ���
+[[m:FileTest.#writable_real?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ�������ꤷ�ޤ���
+@param path パスを表す文字列を指定します。
 
 --- zero?(path)    -> bool
 
-[[m:FileTest.#zero?]] ��Ʊ���Ǥ���
+[[m:FileTest.#zero?]] と同じです。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
 #@since 1.9.1
 --- world_readable?(path)    -> Integer | nil
 
-path �����ƤΥ桼�������ɤ��ʤ�Ф��Υե�����Υѡ��ߥå�����ɽ��
-�������֤��ޤ��������Ǥʤ����� nil ���֤��ޤ���
+path が全てのユーザから読めるならばそのファイルのパーミッションを表す
+整数を返します。そうでない場合は nil を返します。
 
-�����ΰ�̣�ϥץ�åȥե�����˰�¸���ޤ���
+整数の意味はプラットフォームに依存します。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
-��:
+例:
 
    m = File.world_readable?("/etc/passwd")
    "%o" % m                               # => "644"
 
 --- world_writable?(path)    -> bool
 
-path �����ƤΥ桼������񤭹����ʤ�С����Υե�����Υѡ��ߥå�����ɽ��
-�������֤��ޤ��������Ǥʤ����� nil ���֤��ޤ���
+path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
+整数を返します。そうでない場合は nil を返します。
 
-�����ΰ�̣�ϥץ�åȥե�����˰�¸���ޤ���
+整数の意味はプラットフォームに依存します。
 
-@param path �ѥ���ɽ��ʸ���� IO ���֥������Ȥ���ꤷ�ޤ���
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
-��:
+例:
 
    m = File.world_writable?("/tmp")
    "%o" % m                               #=> "777"
@@ -676,140 +676,140 @@ path �����ƤΥ桼������񤭹����ʤ�С����Υե�����Υѡ��ߥå�����ɽ��
 
 --- atime    -> Time
 
-�ǽ�������������� Time ���֥������ȤȤ����֤��ޤ���
+最終アクセス時刻を Time オブジェクトとして返します。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX �ե�����λ���μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 @see [[m:File#lstat]], [[m:File#ctime]], [[m:File#mtime]]
 
 --- ctime    -> Time
 
-���֤��Ǹ���ѹ����줿����� Time ���֥������ȤȤ����֤��ޤ������֤��ѹ��Ȥ� chmod �ʤɤˤ���ΤǤ���
+状態が最後に変更された時刻を Time オブジェクトとして返します。状態の変更とは chmod などによるものです。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX �ե�����λ���μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]]
 
 --- mtime    -> Time
 
-�ǽ���������� Time ���֥������ȤȤ����֤��ޤ���
+最終更新時刻を Time オブジェクトとして返します。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX �ե�����λ���μ����˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#ctime]]
 
 #@since 1.9.2
 --- size     -> Integer
 
-�ե�����Υ��������֤��ޤ���
+ファイルのサイズを返します。
 
-��:
+例:
 
    File.open("/dev/null") do |f|
      f.size   #=> 0
    end
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
 @see [[m:File#lstat]]
 
 #@end
 --- chmod(mode)    -> 0
 
-�ե�����Υ⡼�ɤ���ꤵ�줿 mode ���ѹ����ޤ���
+ファイルのモードを指定された mode に変更します。
 
-�⡼�ɤ��ѹ��������������� 0 ���֤��ޤ������Ԥ��������㳰 [[c:Errno::EXXX]] ��ȯ����
-�ޤ���
+モードの変更に成功した場合は 0 を返します。失敗した場合は例外 [[c:Errno::EXXX]] が発生し
+ます。
 
-@param mode [[man:chmod(2)]] ��Ʊ�ͤ������ǻ��ꤷ�ޤ���
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
-��:
+例:
 
    f = File.new("out", "w");
    f.chmod(0644)   #=> 0
 
 --- chown(owner, group)    -> 0
 
-�ե�����Υ����ʡ��ȥ��롼�פ��ѹ����ޤ���
+ファイルのオーナーとグループを変更します。
 
-Ŭ�ڤʸ��¤�����Хե�����Υ����ʡ��ȥ��롼�פ��ѹ��Ǥ��ޤ���
-��ͭ�Ԥ��ѹ��������������� 0 ���֤��ޤ����ѹ��˼��Ԥ�������
-�㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+適切な権限があればファイルのオーナーとグループを変更できます。
+所有者の変更に成功した場合は 0 を返します。変更に失敗した場合は
+例外 [[c:Errno::EXXX]] が発生します。
 
-@param owner [[man:chown(2)]] ��Ʊ�ͤ˿��ͤǻ��ꤷ�ޤ���nil �ޤ��� -1 ����ꤹ�뤳�Ȥǡ������ʡ��򸽺ߤΤޤޤˤ��뤳�Ȥ��Ǥ��ޤ���
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
 
-@param group [[man:chown(2)]] ��Ʊ�ͤ˿��ͤǻ��ꤷ�ޤ���nil �ޤ��� -1 ����ꤹ�뤳�Ȥǡ����롼�פ򸽺ߤΤޤޤˤ��뤳�Ȥ��Ǥ��ޤ���
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX �ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 変更に失敗した場合に発生します。
 
 --- flock(operation)    -> 0 | false
 
-�ե��������å����ޤ���
+ファイルをロックします。
 
-���å����������ޤǥ֥��å�����ޤ���
-���å��μ����������������� 0 ���֤��ޤ���
-File::LOCK_NB (�Υ�֥��å���) ����ꤹ��ȡ�����ʤ�֥��å���������
-�֥��å����줺�� false ���֤��褦�ˤʤ�ޤ���
+ロックを取得するまでブロックされます。
+ロックの取得に成功した場合は 0 を返します。
+File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロックされる場合に
+ブロックされずに false を返すようになります。
 
-@param operation ���å����Ф������μ���򼨤��������ꤷ�ޤ���
-                 �ɤΤ褦����������Ѳ�ǽ���ϰʲ��򻲾Ȥ��Ʋ�������
+@param operation ロックに対する操作の種類を示す定数を指定します。
+                 どのような定数が利用可能かは以下を参照して下さい。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
-@raise Errno::EXXX operation ��������������Ϳ�������ʤɤ�ȯ�����ޤ���
+@raise Errno::EXXX operation に不正な整数を与えた場合などに発生します。
 
-���� operation ��ͭ��������ϰʲ����̤�Ǥ�������� [[c:File::Constants]] ���������Ƥ��ޤ�����
-[[c:File]] ���饹�οƥ��饹�� IO �� [[c:File::Constants]] �򥤥󥯥롼�ɤ��Ƥ���Τǡ�
-����������� File::LOCK_SH �ʤɤȤ��ƻ��Ȳ�ǽ�Ǥ���
+引数 operation に有効な定数は以下の通りです。定数は [[c:File::Constants]] で定義されていますが、
+[[c:File]] クラスの親クラスの IO が [[c:File::Constants]] をインクルードしているので、
+これらの定数は File::LOCK_SH などとして参照可能です。
 
 : LOCK_SH
- ��ͭ���å���ʣ���Υץ�������Ʊ���˥��å���ͭ�Ǥ��ޤ���
- �����ƥ�ˤ�äƤϥ��å��оݤΥե�������ɤ߹��ߥ⡼��
- ("r", "r+" �ʤ�)�ǥ����ץ󤵤�Ƥ���ɬ�פ�����ޤ������Τ�
- ���ʥ����ƥ�Ǥ��ɤ߹��߲�ǽ�Ǥʤ��ե�������Ф�����å����㳰
- [[c:Errno::EXXX]] ��ȯ�����뤫�⤷��ޤ���
+ 共有ロック。複数のプロセスが同時にロックを共有できます。
+ システムによってはロック対象のファイルは読み込みモード
+ ("r", "r+" など)でオープンされている必要があります。そのよ
+ うなシステムでは読み込み可能でないファイルに対するロックは例外
+ [[c:Errno::EXXX]] が発生するかもしれません。
 : LOCK_EX
- ��¾���å���Ʊ���ˤϤ����ҤȤĤΥץ��������������å����ݻ��Ǥ��ޤ���
- �����ƥ�ˤ�äƤϥ��å��оݤΥե�����Ͻ񤭹��ߥ⡼��
- ("w", "r+" �ʤ�)�ǥ����ץ󤵤�Ƥ���ɬ�פ�����ޤ������Τ�
- ���ʥ����ƥ�ǤϽ񤭹��߲�ǽ�Ǥʤ��ե�������Ф�����å����㳰
- [[c:Errno::EXXX]] ��ȯ�����뤫�⤷��ޤ���
+ 排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
+ システムによってはロック対象のファイルは書き込みモード
+ ("w", "r+" など)でオープンされている必要があります。そのよ
+ うなシステムでは書き込み可能でないファイルに対するロックは例外
+ [[c:Errno::EXXX]] が発生するかもしれません。
 : LOCK_UN
- ������å���
- ��������Ū�ʥ�����å��ʳ��ˡ��ե������close��Ruby���󥿥ץ꥿�ν�λ
- (�ץ������ν�λ)�ˤ�äƤ⼫ưŪ�˥��å����֤ϲ������ޤ���
+ アンロック。
+ この明示的なアンロック以外に、ファイルのcloseやRubyインタプリタの終了
+ (プロセスの終了)によっても自動的にロック状態は解除されます。
 : LOCK_NB
- �Υ�֥��å��⡼�ɡ�
- File::LOCK_SH | File::LOCK_NB �Τ褦��¾�λ���� or ���뤳�Ȥǻ�
- �ꤷ�ޤ������λ��꤬�ʤ���硢�֥��å��������Ǥ� flock
- �θƤӽФ��ϥ��å�����������ޤǥ֥��å�����ޤ���
+ ノンブロックモード。
+ File::LOCK_SH | File::LOCK_NB のように他の指定と or することで指
+ 定します。この指定がない場合、ブロックされる条件での flock
+ の呼び出しはロックが解除されるまでブロックされます。
 
-File::LOCK_NB �λ��꤬�����硢�֥��å��������Ǥ�
-flock �� false ���֤��ޤ���
+File::LOCK_NB の指定がある場合、ブロックされる条件での
+flock は false を返します。
 
-�֥֥��å��������פȤϰʲ��Τ����줫�Ǥ���
-  * ¾�Υץ���������¾���å��򤹤Ǥ˹ԤäƤ�����˥��å���Ԥ�
-  * ¾�Υץ����������å����Ƥ�����֤���¾���å���Ԥ�
+「ブロックされる条件」とは以下のいずれかです。
+  * 他のプロセスが排他ロックをすでに行っている場合にロックを行う
+  * 他のプロセスがロックしている状態で排他ロックを行う
 
-��1:
+例1:
 
-    # �񤭹��ߥ��å�(write lock)����Ѥ��ƥ����󥿤򹹿���
-    # ���å����˥ե�������ڤ�ͤ�Ƥ��ޤ��Τǡ�
-    # �⡼�ɤ�"w"��ȤäƤϤ����ޤ���
+    # 書き込みロック(write lock)を使用してカウンタを更新。
+    # ロック前にファイルを切り詰めてしまうので、
+    # モードに"w"を使ってはいけません。
     File.open("counter", File::RDWR|File::CREAT, 0644) {|f|
       f.flock(File::LOCK_EX)
       value = f.read.to_i + 1
@@ -819,13 +819,13 @@ flock �� false ���֤��ޤ���
       f.truncate(f.pos)
     }
 
-    # �ɤ߹��ߥ��å�(read lock)����Ѥ��ƥ����󥿤��ɤ߹��ߡ�
+    # 読み込みロック(read lock)を使用してカウンタを読み込み。
     File.open("counter", "r") {|f|
       f.flock(File::LOCK_SH)
       p f.read
     }
 
-��2:
+例2:
 
     f = File.open("/tmp/foo", "w")
 
@@ -844,7 +844,7 @@ flock �� false ���֤��ޤ���
 
     f.flock(File::LOCK_UN)
     puts "unlocked by process1"
-    sleep 1 # <- �ҥץ��������μ¤���˥��å����뤿��� sleep
+    sleep 1 # <- 子プロセスが確実に先にロックするための sleep
     f.flock(File::LOCK_EX)
     puts "re-locked by process1"
 
@@ -859,50 +859,50 @@ flock �� false ���֤��ޤ���
 --- to_path -> String
 #@end
 
-�����ץ���˻��Ѥ����ѥ���ʸ������֤��ޤ���
+オープン時に使用したパスを文字列で返します。
 
    File.new("testfile").path               #=> "testfile"
    File.new("/tmp/../tmp/xxx", "w").path   #=> "/tmp/../tmp/xxx"
 
 --- lstat    -> File::Stat
 
-�ե�����ξ��֤�ޤ� [[c:File::Stat]] ���֥������Ȥ����������֤��ޤ���
-����ܥ�å���󥯤˴ؤ��ƥ�󥯤��Τ�Τξ�����֤��ޤ���
-[[man:lstat(2)]] ��������Ƥ��ʤ������ƥ�Ǥϡ�[[m:IO#stat]]��Ʊ���Ǥ���
+ファイルの状態を含む [[c:File::Stat]] オブジェクトを生成して返します。
+シンボリックリンクに関してリンクそのものの情報を返します。
+[[man:lstat(2)]] を実装していないシステムでは、[[m:IO#stat]]と同じです。
 
-@raise Errno::EXXX ���Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX 失敗した場合に発生します。
 
-@raise IOError ���Ȥ� close ����Ƥ������ȯ�����ޤ���
+@raise IOError 自身が close されている場合に発生します。
 
 @see [[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]]
 
 --- truncate(length)    -> 0
 
-�ե�����Υ���������� length �Х��Ȥˤ��ޤ���
+ファイルのサイズを最大 length バイトにします。
 
-���������ѹ������������ 0 ���֤��ޤ������Ԥ��������㳰
-[[c:Errno::EXXX]] ��ȯ�����ޤ���
+サイズの変更に成功すれば 0 を返します。失敗した場合は例外
+[[c:Errno::EXXX]] が発生します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-@raise Errno::EXXX ���������ѹ��˼��Ԥ�������ȯ�����ޤ���
+@raise Errno::EXXX サイズの変更に失敗した場合に発生します。
 
 == Constants
 
 --- ALT_SEPARATOR
 
-�����ƥ�Υե�����ѥ��Υ��ѥ졼���� SEPARATOR �Ȱۤʤ���
-�����ꤵ��ޤ���MS-DOS �ʤɤǤ� "\" �Ǥ���UNIX �� Cygwin �ʤɤǤ� nil �Ǥ���
+システムのファイルパスのセパレータが SEPARATOR と異なる場合
+に設定されます。MS-DOS などでは "\" です。UNIX や Cygwin などでは nil です。
 
 --- PATH_SEPARATOR
 
-PATH �Ķ��ѿ������ǤΥ��ѥ졼���Ǥ���UNIX �Ǥ� ":" MS-DOS ��
-�ɤǤ� ";" �Ǥ���
+PATH 環境変数の要素のセパレータです。UNIX では ":" MS-DOS な
+どでは ";" です。
 
 --- SEPARATOR
 --- Separator
 
-�ե�����ѥ��Υ��ѥ졼���Ǥ����ե�����򰷤��᥽�åɤ˥ѥ�̾���Ϥ�
-���ʤɥ�����ץ���Υѥ�̾�ϴĶ��ˤ�餺���Υ��ѥ졼�������줵��
-�ޤ����ͤ� "/" �Ǥ���
+ファイルパスのセパレータです。ファイルを扱うメソッドにパス名を渡す
+場合などスクリプト内のパス名は環境によらずこのセパレータで統一され
+ます。値は "/" です。
 

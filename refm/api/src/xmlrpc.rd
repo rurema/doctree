@@ -1,8 +1,8 @@
 #@since 1.8.0
-XML-RPC ¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+XML-RPC ã‚’æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-¤³¤Î¥Ú¡¼¥¸¤Ï xmlrpc ¥é¥¤¥Ö¥é¥ê¤Î¤Ş¤È¤á¤Î¥Ú¡¼¥¸¤Ç¤¢¤ê¡¢require 'xmlrpc' ¤ò¼Â¹Ô¤·¤Æ¤â
-¥¨¥é¡¼¤Ë¤Ê¤ë¤³¤È¤ËÃí°Õ¤·¤Æ²¼¤µ¤¤¡£
+ã“ã®ãƒšãƒ¼ã‚¸ã¯ xmlrpc ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ã¾ã¨ã‚ã®ãƒšãƒ¼ã‚¸ã§ã‚ã‚Šã€require 'xmlrpc' ã‚’å®Ÿè¡Œã—ã¦ã‚‚
+ã‚¨ãƒ©ãƒ¼ã«ãªã‚‹ã“ã¨ã«æ³¨æ„ã—ã¦ä¸‹ã•ã„ã€‚
 
 === Author and Copyright
 
@@ -106,7 +106,7 @@ NQXMLTreeParser and still ~18 times as fast as XMLTreeParser.
 
 You can change the XML-writer by calling method <i>set_writer</i>.
 
-=== »²¹Í
+=== å‚è€ƒ
 
   * [[url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/index.html]]
   * [[url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/xmlrpc-howto-ruby.html]]

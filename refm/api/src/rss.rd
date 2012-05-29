@@ -1,9 +1,9 @@
 #@if (version >= "1.8.2")
 #@# = rss
 
-RSS ¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+RSS ã‚’æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-=== »²¹Í
+=== å‚è€ƒ
   * [[url:http://www.cozmixng.org/~rwiki/?cmd=view;name=RSS+Parser]]
   * RSS 0.91 [[url:http://backend.userland.com/rss091]]
   * RSS 1.0  [[url:http://purl.org/rss/1.0/spec]]  

@@ -3,7 +3,7 @@
 =begin
 = TkTreatCItemFont
 
-== �᥽�å�:
+== メソッド:
 
 --- TkTreatCItemFont#tagfont_configinfo(tagOrId)
 #@todo

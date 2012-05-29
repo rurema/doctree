@@ -4,9 +4,9 @@ require irb/magic-file
 #@end
 require readline
 
-irb �����Ϥ򰷤�����Υ��֥饤�֥��Ǥ���
+irb が入力を扱うためのサブライブラリです。
 
-�桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+ユーザが直接使用するものではありません。
 
 = reopen IRB
 
@@ -14,131 +14,131 @@ irb �����Ϥ򰷤�����Υ��֥饤�֥��Ǥ���
 
 --- STDIN_FILE_NAME -> "(line)"
 
-ɸ�����Ϥ���Ѥ���ݤΥե�����̾��ʸ������֤��ޤ���
+標準入力を使用する際のファイル名を文字列で返します。
 
 = class IRB::InputMethod < Object
 
-���Ū�����Ϥ�ɽ�����饹�Ǥ����饤�֥�������ǻ��Ѥ��ޤ���
+抽象的な入力を表すクラスです。ライブラリ内部で使用します。
 
 == Class Methods
 
 --- new(file = STDIN_FILE_NAME) -> IRB::InputMethod
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- file_name -> String
 
-�ե�����̾��ʸ������֤��ޤ���
+ファイル名を文字列で返します。
 
-#@# ���Ѥ���Ƥ��ʤ��褦�ʤΤǾ�ά��
+#@# 使用されていないようなので省略。
 #@# --- prompt -> String
 #@# --- prompt=(val)
 
 --- gets
 
-[[c:NotImplementedError]] ��ȯ�����ޤ���
+[[c:NotImplementedError]] が発生します。
 
-@raise NotImplementedError ɬ��ȯ�����ޤ���
+@raise NotImplementedError 必ず発生します。
 
 --- readable_atfer_eof? -> false
 
-���Ϥ� EOF(End Of File)��ã��������ɤ߹��ߤ��Ԥ��뤫�ɤ������֤��ޤ���
+入力が EOF(End Of File)に達した後も読み込みが行えるかどうかを返します。
 
 = class IRB::StdioInputMethod < IRB::InputMethod
 
-ɸ�����Ϥ�ɽ�����饹�Ǥ����饤�֥�������ǻ��Ѥ��ޤ���
+標準入力を表すクラスです。ライブラリ内部で使用します。
 
 == Class Methods
 
 --- new -> IRB::StdioInputMethod
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- gets -> String
 
-ɸ�����Ϥ���ʸ����� 1 ���ɤ߹��ߤޤ���
+標準入力から文字列を 1 行読み込みます。
 
-#@# �ޤ����ƤӽФ��٤� irb �Υץ���ץȤ�ɸ����Ϥ�ɽ�����ޤ���
+#@# また、呼び出す度に irb のプロンプトを標準出力に表示します。
 
 --- eof? -> bool
 
-���Ϥ� EOF(End Of File)��ã�������ɤ������֤��ޤ���
+入力が EOF(End Of File)に達したかどうかを返します。
 
 --- readable_atfer_eof? -> true
 
-���Ϥ� EOF(End Of File)��ã��������ɤ߹��ߤ��Ԥ��뤫�ɤ������֤��ޤ���
+入力が EOF(End Of File)に達した後も読み込みが行えるかどうかを返します。
 
 --- line(line_no) -> String
 
-���� line_no �ǻ��ꤷ���������Ϥ��ñ�̤��֤��ޤ���
+引数 line_no で指定した過去の入力を行単位で返します。
 
-@param line_no ����������ֹ�������ǻ��ꤷ�ޤ���
+@param line_no 取得する行番号を整数で指定します。
 
 --- encoding -> Encoding
 
-���Ȥ�ʸ�����󥳡��ǥ��󥰤��֤��ޤ���
+自身の文字エンコーディングを返します。
 
 = class IRB::FileInputMethod < IRB::InputMethod
 
-�ե����뤫������Ϥ�ɽ�����饹�Ǥ����饤�֥�������ǻ��Ѥ��ޤ���
+ファイルからの入力を表すクラスです。ライブラリ内部で使用します。
 
 == Class Methods
 
 --- new(path) -> IRB::FileInputMethod
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param path �ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param path パスを文字列で指定します。
 
 == Instance Methods
 
 --- gets -> String
 
-�ɤ߹�����ե����뤫��ʸ����� 1 ���ɤ߹��ߤޤ���
+読み込んだファイルから文字列を 1 行読み込みます。
 
-#@# �ޤ����ƤӽФ��٤� irb �Υץ���ץȤ�ɸ����Ϥ�ɽ�����ޤ���
+#@# また、呼び出す度に irb のプロンプトを標準出力に表示します。
 
 --- encoding -> Encoding
 
-�ɤ߹�����ե������ʸ�����󥳡��ǥ��󥰤��֤��ޤ���
+読み込んだファイルの文字エンコーディングを返します。
 
 = class IRB::ReadlineInputMethod < IRB::InputMethod
 
 include Readline
 
-readline ���Ѥ���ɸ�����Ϥ�������Ϥ�ɽ�����饹�Ǥ����饤�֥�������ǻ�
-�Ѥ��ޤ���[[lib:readline]] �� require �˼��Ԥ��������������ޤ���
+readline を用いた標準入力からの入力を表すクラスです。ライブラリ内部で使
+用します。[[lib:readline]] の require に失敗した場合は定義されません。
 
 == Class Methods
 
 --- new -> IRB::ReadlineInputMethod
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- gets -> String
 
-ɸ�����Ϥ���ʸ����� 1 ���ɤ߹��ߤޤ���
+標準入力から文字列を 1 行読み込みます。
 
 --- eof? -> bool
 
-���Ϥ� EOF(End Of File)��ã�������ɤ������֤��ޤ���
+入力が EOF(End Of File)に達したかどうかを返します。
 
 --- readable_atfer_eof? -> false
 
-���Ϥ� EOF(End Of File)��ã��������ɤ߹��ߤ��Ԥ��뤫�ɤ������֤��ޤ���
+入力が EOF(End Of File)に達した後も読み込みが行えるかどうかを返します。
 
 --- line(line_no) -> String
 
-���� line_no �ǻ��ꤷ���������Ϥ��ñ�̤��֤��ޤ���
+引数 line_no で指定した過去の入力を行単位で返します。
 
-@param line_no ����������ֹ�������ǻ��ꤷ�ޤ���
+@param line_no 取得する行番号を整数で指定します。
 
 --- encoding -> Encoding
 
-���Ȥ�ʸ�����󥳡��ǥ��󥰤��֤��ޤ���
+自身の文字エンコーディングを返します。

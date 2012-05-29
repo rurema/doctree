@@ -1,10 +1,10 @@
-= Marshal�ե����ޥå�
+= Marshalフォーマット
 
-2002-04-04 �ɥ�եȤΥɥ�եȤΥɥ�եȤ�....
+2002-04-04 ドラフトのドラフトのドラフトの....
 
-* �ե����ޥåȥС������ 4.8 (1.8����)�򸵤˵���
+* フォーマットバージョン 4.8 (1.8仕様)を元に記述
 
-    # 2003-05-02 ���ߤΥե����ޥåȥС������ϰʲ�
+    # 2003-05-02 現在のフォーマットバージョンは以下
     p Marshal.dump(Object.new).unpack("cc").join(".")
         => ruby 1.6.0 (2000-09-19) [i586-linux]
            "4.4"
@@ -31,18 +31,18 @@
         => ruby 1.8.0 (2003-08-03) [i586-linux]
            "4.8"
 
-* ���С������ˤĤ��Ƥ⿨��롣�ߴ����ˤĤ��Ƥ�
-* Ruby �� Marshal �ΥХ��ˤĤ��Ƥ⤳���ǿ����(?)
+* 過去バージョンについても触れる。互換性についても
+* Ruby の Marshal のバグについてもここで触れる(?)
 
 : nil
 : true
 : false
-  ���줾�졢'0', 'T', 'F'
+  それぞれ、'0', 'T', 'F'
 
     p Marshal.dump(nil).unpack("x2 a*")
     # => ["0"]
 
-  ���󥹥����ѿ������ꤷ�Ƥ� dump ����ޤ���
+  インスタンス変数を設定しても dump されません。
 
     class NilClass
       attr_accessor :foo
@@ -53,38 +53,38 @@
 
 : Fixnum
 
-  'i' ��³���� Fixnum ��ɽ���ǡ�����¤��³���ޤ���
+  'i' に続けて Fixnum を表すデータ構造が続きます。
 
-  ������ʬ��ɽ������(����� Fixnum �˸¤餺¾�βս�Ǥ�Ȥ��ޤ�)�ϡ�
-  ���� n ���Ф���
+  数値部分を表す形式(これは Fixnum に限らず他の箇所でも使われます)は、
+  数値 n に対して
 
-  ���� 1:
+  形式 1:
       n == 0:       0
       0 < n < 123:  n + 5
       -124 < n < 0: n - 5
 
-  �Ȥ�������(1 byte)���Ǽ���ޤ���5 ��­������������ꤹ��Τϲ�����
-  �����Ȥζ��̤Τ���Ǥ���
+  という数値(1 byte)を格納します。5 を足したり引いたりするのは下記の
+  形式との区別のためです。
 
-  ��:
+  例:
 
     p Marshal.dump(-1).unpack("x2 a*") # => "i\372"
     p Marshal.dump(0).unpack("x2 a*")  # => "i\000"
     p Marshal.dump(1).unpack("x2 a*")  # => "i\006"
     p Marshal.dump(2).unpack("x2 a*")  # => "i\a"   ("i\007")
 
-  ���� 1 ���ϰϤ�Ķ������� N ���Ф��Ƥϡ��ʲ��η����ˤʤ�ޤ���
+  形式 1 の範囲を超える数値 N に対しては、以下の形式になります。
 
-  ���� 2:
+  形式 2:
 
     | len | n1 | n2 | n3 | n4 |
      <-1-> <-     len       ->
      byte        bytes
 
-  len ���ͤ� -4 �� -1, 1 �� 4 �ǡ����ȸ�³�Υǡ����� n1 �� n|len| ��
-  �Ǥ��뤳�Ȥ򼨤��ޤ���
+  len の値は -4 〜 -1, 1 〜 4 で。符号と後続のデータが n1 〜 n|len| ま
+  であることを示します。
 
-    # ��äȤ��ޤ�����...
+    # もっとうまい式を...
     def foo(len, n1, n2 = 0, n3 = 0, n4 = 0)
 
         case len
@@ -115,7 +115,7 @@
     p Marshal.dump(256).unpack("x2 acC*") # => ["i", 2, 0, 1]
     p foo(2, 0, 1)
 
-  ���󥹥����ѿ������ꤷ�Ƥ� dump ����ޤ���
+  インスタンス変数を設定しても dump されません。
 
     class Fixnum
       attr_accessor :foo
@@ -127,11 +127,11 @@
 
 : instance of the user class
 
-  'C': String, Regexp, Array, Hash �Υ��֥��饹�Υ��󥹥����ѿ�
+  'C': String, Regexp, Array, Hash のサブクラスのインスタンス変数
 
-    | 'C' | ���饹̾(Symbol)�� dump | �ƥ��饹�Υ��󥹥��󥹤� dump |
+    | 'C' | クラス名(Symbol)の dump | 親クラスのインスタンスの dump |
 
-  �� 1:
+  例 1:
 
     class Foo < String # (or Regexp, Array, Hash)
     end
@@ -139,7 +139,7 @@
     # => ["C", ":", 8, "Foo", "\"", 8, "foo"]
                               ^^^ (or '/', '[', '{')
 
-  �� 2: ���󥹥����ѿ�����([[unknown:Marshal�ե����ޥå�/instance variable]] ����)
+  例 2: インスタンス変数あり([[unknown:Marshalフォーマット/instance variable]] 参照)
 
     class Foo < String # (or Regexp, Array, Hash)
       def initialize(obj)
@@ -151,10 +151,10 @@
     # => ["I", "C", ":", 8, "Foo", "\"", 8, "foo", 6, ":", 9, "@foo", "\"", 8, "foo"]
 
 
-  �嵭�ʳ��Ǥϡ�'o' �ˤʤ롣����ϡ�������������¤���ۤʤ뤿��
-  ([[unknown:Marshal�ե����ޥå�/Object]] ����)
+  上記以外では、'o' になる。これは、実装上内部構造が異なるため
+  ([[unknown:Marshalフォーマット/Object]] 参照)
 
-  ��:
+  例:
     class Foo
     end
     p Marshal.dump(Foo.new).unpack("x2 a a c a*")
@@ -162,14 +162,14 @@
 
   'u'
 
-  _dump��_load ��������Ƥ���� 'u' �ˤʤ롣
-  ���󥹥����ѿ��� dump ����ʤ��ʤ�Τǡ�_dump/_load ���б�����ɬ��
-  �����롣
+  _dump、_load を定義していれば 'u' になる。
+  インスタンス変数は dump されなくなるので、_dump/_load で対応する必要
+  がある。
 
-    | 'u' | ���饹̾(Symbol)�� dump | _dump �η�̤�Ĺ��(Fixnum����) |
-    | _dump ���֤��� |
+    | 'u' | クラス名(Symbol)の dump | _dump の結果の長さ(Fixnum形式) |
+    | _dump が返す値 |
 
-  ��:
+  例:
     class Foo
       def self._load
       end
@@ -182,13 +182,13 @@
 
   'U'  ((<ruby 1.8 feature>))
 
-  marshal_dump��marshal_load ��������Ƥ���� 'U' �ˤʤ롣
-  ���󥹥����ѿ��� dump ����ʤ��ʤ�Τǡ�marshal_dump/marshal_load
-  ���б�����ɬ�פ����롣
+  marshal_dump、marshal_load を定義していれば 'U' になる。
+  インスタンス変数は dump されなくなるので、marshal_dump/marshal_load
+  で対応する必要がある。
 
-    | 'U' | ���饹̾(Symbol)�� dump | marshal_dump �᥽�åɤ�����ͤ� dump |
+    | 'U' | クラス名(Symbol)の dump | marshal_dump メソッドの戻り値の dump |
 
-  ��:
+  例:
     class Foo
       def marshal_dump
         "hogehoge"
@@ -204,17 +204,17 @@
 
   'o'
 
-    | 'o' | ���饹̾(Symbol)�� dump | ���󥹥����ѿ��ο�(Fixnum����) |
-    | ���󥹥����ѿ�̾(Symbol) ��dump(1) | ��(1) |
+    | 'o' | クラス名(Symbol)の dump | インスタンス変数の数(Fixnum形式) |
+    | インスタンス変数名(Symbol) のdump(1) | 値(1) |
               :
               :
-    | ���󥹥����ѿ�̾(Symbol) ��dump(n) | ��(n) |
+    | インスタンス変数名(Symbol) のdump(n) | 値(n) |
 
-  �� 1:
+  例 1:
     p Marshal.dump(Object.new).unpack("x2 a a c a*")
     # => ["o", ":", 11, "Object\000"]
 
-  �� 2: ���󥹥����ѿ�����
+  例 2: インスタンス変数あり
     class Foo
       def initialize
         @foo = "foo"
@@ -230,9 +230,9 @@
 
   'f'
 
-   | 'f' | �������Ĺ��(Fixnum����) | "%.16g" ��ʸ���� |
+   | 'f' | 数値列の長さ(Fixnum形式) | "%.16g" の文字列 |
 
-  ��:
+  例:
     p Marshal.dump(Math::PI).unpack("x2 a c a*")
     # => ["f", 22, "3.141592653589793"]
 
@@ -241,18 +241,18 @@
     p Marshal.dump(-1.0/0).unpack("x2 a c a*") # => ["f", 9, "-inf"]
     p Marshal.dump(-0.0).unpack("x2 a c a*")   # => ["f", 9, "-0"]
 
-  ((-((<ruby 1.7 feature>)): version 1.6 �Ǥϡ�nan �ʤɤν��Ϥ�
-  [[man:sprintf(3)]] �˰�¸���Ƥ��롣�ɤ߹��ߤϸ��ߤΤȤ�
-  �� "nan", "inf", "-inf" �ʳ��� [[man:strtod(3)]] �˰�¸
-  ���Ƥ��롣-> 1.7 �Ǥϡ�sprintf(3)/strtod(3) �ؤΰ�¸�Ϥʤ��ʤä�-))
+  ((-((<ruby 1.7 feature>)): version 1.6 では、nan などの出力は
+  [[man:sprintf(3)]] に依存している。読み込みは現在のとこ
+  ろ "nan", "inf", "-inf" 以外は [[man:strtod(3)]] に依存
+  している。-> 1.7 では、sprintf(3)/strtod(3) への依存はなくなった-))
 
 : Bignum
 
   'l'
 
-    | 'l' | '+'/'-' | short�θĿ�(Fixnum����) | ... |
+    | 'l' | '+'/'-' | shortの個数(Fixnum形式) | ... |
 
-  ��:
+  例:
     p Marshal.dump(2**32).unpack("x2 a a c a*")
     # => ["l", "+", 8, "\000\000\000\000\001\000"]
 
@@ -261,9 +261,9 @@
 : String
 
   '"'
-    | '"' | Ĺ��(Fixnum����) | ʸ���� |
+    | '"' | 長さ(Fixnum形式) | 文字列 |
 
-  ��:
+  例:
     p Marshal.dump("hogehoge").unpack("x2 a c a*")
     # => ["\"", 13, "hogehoge"]
 
@@ -271,11 +271,11 @@
 
   '/'
 
-    | '/' | Ĺ��(Fixnum����) | ������ʸ���� | ���ץ���� |
+    | '/' | 長さ(Fixnum形式) | ソース文字列 | オプション |
 
-  ���ץ����ϡ�[[m:Regexp#options]]�η�� + ���������ɤΥե饰�͡�
+  オプションは、[[m:Regexp#options]]の結果 + 漢字コードのフラグ値。
 
-  ��:
+  例:
     p Marshal.dump(/(hoge)*/).unpack("x2 a c a7 c")
     # => ["/", 12, "(hoge)*", 0]
 
@@ -290,9 +290,9 @@
 
   '['
 
-    | '[' | ���ǿ�(Fixnum����) | ���Ǥ� dump | ... |
+    | '[' | 要素数(Fixnum形式) | 要素の dump | ... |
 
-  ��:
+  例:
     p Marshal.dump(["hogehoge", /hogehoge/]).unpack("x2 a c aca8 aca*")
     # => ["[", 7, "\"", 13, "hogehoge", "/", 13, "hogehoge\000"]
 
@@ -300,9 +300,9 @@
 
   '{'
 
-    | '{' | ���ǿ�(Fixnum����) | ������ dump | �ͤ� dump | ... |
+    | '{' | 要素数(Fixnum形式) | キーの dump | 値の dump | ... |
 
-  ��:
+  例:
     p Marshal.dump({"hogehoge", /hogehoge/}).unpack("x2 a c aca8 aca*")
     # => ["{", 6, "\"", 13, "hogehoge", "/", 13, "hogehoge\000"]
 
@@ -310,15 +310,15 @@
 
   '}'
 
-    | '}' | ���ǿ�(Fixnum����) | ������ dump | �ͤ� dump | ... | �ǥե������ |
+    | '}' | 要素数(Fixnum形式) | キーの dump | 値の dump | ... | デフォルト値 |
 
-  ��:
+  例:
     h = Hash.new(true)
     h["foo"] = "bar"
     p Marshal.dump(h).unpack("x2 a c aca3 aca*")
     # => ["}", 6, "\"", 8, "foo", "\"", 8, "barT"]
 
-  �ǥե���ȥ��֥������Ȥ� Proc �Ǥ��� Hash �� dump �Ǥ��ʤ�
+  デフォルトオブジェクトが Proc である Hash は dump できない
 
     h = Hash.new { }
     Marshal.dump(h)
@@ -326,12 +326,12 @@
 
 : Struct
 
-  'S': ��¤�Υ��饹�Υ��󥹥��󥹤Υ����
+  'S': 構造体クラスのインスタンスのダンプ
 
-    | 'S' | ���饹̾(Symbol) �� dump | ���Фο�(Fixnum����) |
-    | ����̾(Symbol) �� dump | �� | ... |
+    | 'S' | クラス名(Symbol) の dump | メンバの数(Fixnum形式) |
+    | メンバ名(Symbol) の dump | 値 | ... |
 
-  ��:
+  例:
     Struct.new("XXX", :foo, :bar)
     p Marshal.dump(Struct::XXX.new).unpack("x2 a ac a11 c aca3a aca3a")
     # => ["S", ":", 16, "Struct::XXX", 7,
@@ -342,9 +342,9 @@
 
   'M'
 
-    | 'M' | Ĺ��(Fixnum����) | �⥸�塼��/���饹̾ |
+    | 'M' | 長さ(Fixnum形式) | モジュール/クラス名 |
 
-  ��: ��Ϥ䤳�η����� dump ���뤳�ȤϤǤ��ʤ��Τ� load ����򼨤��Ƥ��롣
+  例: もはやこの形式を dump することはできないので load で例を示している。
     class Mod
     end
     p Marshal.load([4,7, 'M', 3+5, 'Mod'].pack("ccaca*"))
@@ -354,14 +354,14 @@
 
   'c', 'm'
 
-    | 'c'/'m' | ���饹̾��Ĺ��(Fixnum ����) | ���饹̾ |
+    | 'c'/'m' | クラス名の長さ(Fixnum 形式) | クラス名 |
 
-  ��:
+  例:
     class Foo
     end
     p Marshal.dump(Foo).unpack("x2 a c a*") # => ["c", 8, "Foo"]
 
-  �� 2: ���饹/�⥸�塼��Υ��󥹥����ѿ��� dump ����ʤ�
+  例 2: クラス/モジュールのインスタンス変数は dump されない
 
     module Bar
       @bar = 1
@@ -376,7 +376,7 @@
     p bar.instance_eval { @bar }
     # => nil
 
-  �� 3: ���饹�ѿ��� dump ����ʤ�
+  例 3: クラス変数は dump されない
 
     module Baz
       @@baz = 1
@@ -403,9 +403,9 @@
 
   ':'
 
-    | ':' | ����ܥ�̾��Ĺ��(Fixnum����) | ����ܥ�̾ |
+    | ':' | シンボル名の長さ(Fixnum形式) | シンボル名 |
 
-  ��:
+  例:
     p Marshal.dump(:foo).unpack("x2 a c a*")
     # => [":", 8, "foo"]
 
@@ -413,13 +413,13 @@
 
   ';'
 
-    | ';' | Symbol�μ��֤�ؤ��ֹ�(Fixnum����) |
+    | ';' | Symbolの実態を指す番号(Fixnum形式) |
 
-  �б����륷��ܥ�̾������ dump/load ����Ƥ�����˻��Ѥ���롣�ֹ�
-  �����������Τ�Ρ�(dump/load ���� Symbol �����Ѥ˥ϥå���ơ��֥뤬
-  ����롣���Υ쥳���ɰ���)
+  対応するシンボル名が既に dump/load されている場合に使用される。番号
+  は内部管理のもの。(dump/load 時に Symbol 管理用にハッシュテーブルが
+  作られる。そのレコード位置)
 
-  ��:
+  例:
     p Marshal.dump([:foo, :foo]).unpack("x2 ac aca3 aC*")
     # => ["[", 7, ":", 8, "foo", ";", 0]
 
@@ -429,39 +429,39 @@
 
 : instance variable
 
-  'I': Object, Class, Module �Υ��󥹥��󥹰ʳ�
+  'I': Object, Class, Module のインスタンス以外
 
-    | 'I' | ���֥������Ȥ� dump | ���󥹥����ѿ��ο�(Fixnum����) |
-    | ���󥹥����ѿ�̾(Symbol) ��dump(1) | ��(1) |
+    | 'I' | オブジェクトの dump | インスタンス変数の数(Fixnum形式) |
+    | インスタンス変数名(Symbol) のdump(1) | 値(1) |
               :
               :
-    | ���󥹥����ѿ�̾(Symbol) ��dump(n) | ��(n) |
+    | インスタンス変数名(Symbol) のdump(n) | 値(n) |
 
-  Object �Υ��󥹥��󥹤Ϥ��켫�Ȥ����󥹥����ѿ��ι�¤����ĤΤ�
-  �̷����� dump ����� ([[unknown:Marshal�ե����ޥå�/Object]] ����)
-  ���η����ϡ�Array �� String �Υ��󥹥����ѡ�
+  Object のインスタンスはそれ自身がインスタンス変数の構造を持つので
+  別形式で dump される ([[unknown:Marshalフォーマット/Object]] 参照)
+  この形式は、Array や String のインスタンス用。
 
-  ��:
+  例:
     obj = String.new
     obj.instance_eval { @foo = "bar" }
     p Marshal.dump(obj).unpack("x2 a ac c a c a4 aca*")
     # => ["I", "\"", 0, 6, ":", 9, "@foo", "\"", 8, "bar"]
 
-  ���饹��⥸�塼��(Class/Module �Υ��󥹥���)�ϡ�
-  ���󥹥����ѿ��ξ���� dump ���ʤ���
-  ([[unknown:Marshal�ե����ޥå�/"Class/Module"]] ����)
+  クラスやモジュール(Class/Module のインスタンス)は、
+  インスタンス変数の情報を dump しない。
+  ([[unknown:Marshalフォーマット/"Class/Module"]] 参照)
 
 : link
 
   '@'
 
-    | '@' | ���֥������Ȥμ��֤�ؤ��ֹ�(Fixnum���� |
+    | '@' | オブジェクトの実態を指す番号(Fixnum形式 |
 
-  �б����륪�֥������Ȥ����� dump/load ����Ƥ�����˻��Ѥ���롣��
-  ������������Τ�Ρ�(dump/load ���� ���֥������ȴ����Ѥ˥ϥå���ơ�
-  �֥뤬����롣���Υ쥳���ɰ���)
+  対応するオブジェクトが既に dump/load されている場合に使用される。番
+  号は内部管理のもの。(dump/load 時に オブジェクト管理用にハッシュテー
+  ブルが作られる。そのレコード位置)
 
-  ��:
+  例:
     obj = Object.new
     p Marshal.dump([obj, obj]).unpack("x2 ac aaca6c aca*")
     # => ["[", 7, "o", ":", 11, "Object", 0, "@", 6, ""]
@@ -472,48 +472,48 @@
 
     # => ["[", 6, "@", 0]
 
-=== Marshal �ΥХ�
+=== Marshal のバグ
 
-���� ruby version 1.6 �ˤϡ����줾��ΥС������ǰʲ��ΥХ��������
-���������()��ε��Ҥ�����ε�ư(1.7 �ο���ޤ�)�Ǥ���
+過去の ruby version 1.6 には、それぞれのバージョンで以下のバグがありま
+した。括弧()内の記述は本来の挙動(1.7 の振るまい)です。
 
 : <= 1.6.7
-    * ���饹�� clone ������ΤΥ��󥹥��󥹤ϥ���פǤ��뤬������
-      �ɤǤ��ʤ�(̵̾���饹�Υ��֥������Ȥˤʤ�Τǥ���פǤ��ʤ�)
-    * ̵̾ Module �� include/extend �ˤ���ðۥ᥽�åɤ�������줿
-      ���֥������Ȥ����ס������ɤǤ���(̵̾�⥸�塼��� include
-      �������֥������Ȥϥ���פǤ��ʤ�)
+    * クラスを clone したもののインスタンスはダンプできるが、ロー
+      ドできない(無名クラスのオブジェクトになるのでダンプできない)
+    * 無名 Module の include/extend により特異メソッドが定義された
+      オブジェクトをダンプ、ロードできる(無名モジュールを include
+      したオブジェクトはダンプできない)
 
 : 1.6.6, 1.6.7
 
-    * ���󥹥����ѿ������ Array �� String �ϥ���פǤ��뤬��
-      �����ɤǤ��ʤ�(����ס������ɤǤ���)
+    * インスタンス変数を持つ Array や String はダンプできるが、
+      ロードできない(ダンプ、ロードできる)
 
 : <= 1.6.5
-    * ���饹�� clone ������ΤΥ��󥹥��󥹤ϥ���פǤ��뤬������
-      �ɤ�����Ѥʥ��֥������Ȥ��Ǥ���(?)
-    * �ðۥ��饹�ϡ��ðۤǤʤ����饹�˥���פ����(�ðۥ��饹�ϥ���פǤ��ʤ�)
-    * ̵̾���饹�ϡ�����פǤ��뤬�����ɤǤ��ʤ�(̵̾���饹�ϥ���פǤ��ʤ�)
+    * クラスを clone したもののインスタンスはダンプできるが、ロー
+      ドすると変なオブジェクトができる(?)
+    * 特異クラスは、特異でないクラスにダンプされる(特異クラスはダンプできない)
+    * 無名クラスは、ダンプできるがロードできない(無名クラスはダンプできない)
 
 : <= 1.6.4
-    * �⥸�塼��ϥ���פǤ��뤬�����ɤǤ��ʤ�(�����ɤǤ���)
-    * ̵̾�⥸�塼��ϡ�����פǤ��뤬�����ɤǤ��ʤ�(̵̾�⥸�塼
-      ��ϥ���פǤ��ʤ�)
+    * モジュールはダンプできるがロードできない(ロードできる)
+    * 無名モジュールは、ダンプできるがロードできない(無名モジュー
+      ルはダンプできない)
 
 : <= 1.6.3
-    * Float �����פ����Ȥ�����¸�������٤��㤤
+    * Float をダンプしたときに保存する精度が低い
 
 : <= 1.6.2
-    * ����ɽ���� /m, /x ���ץ�����̵ͭ������׻�����¸����ʤ�
+    * 正規表現の /m, /x オプションの有無がダンプ時に保存されない
 
 : 1.6.2, 1.6.3
-    * 1.6.2, 1.6.3�Τ�Bignum �����פ�����Τ�����ɤǤ��ʤ�
-      ���δ�Ϣ�Х���¾�ˤ⤢�ä��Ȼפ����Ƹ�������ץȤ�������
+    * 1.6.2, 1.6.3のみBignum をダンプしたものをロードできない
+      この関連バグは他にもあったと思うが再現スクリプトが不明。
 
 : <= 1.6.1
-    * Range ����ü��ޤफ�ɤ����Υե饰������׻�����¸����ʤ�
+    * Range が終端を含むかどうかのフラグがダンプ時に保存されない
 
-�ʲ��ϡ��ƥ��ȥ�����ץȤǤ�(�� [[c:RAA:RubyUnit]])
+以下は、テストスクリプトです(要 [[c:RAA:RubyUnit]])
 
     # test for Marshal for ruby version 1.6
     require 'rubyunit'

@@ -1,32 +1,32 @@
 ###nonref
 
-= DOSISH �б�
+= DOSISH 対応
 
-ruby version 1.7 �Ǥϡ�DOSISH�б�(DOS/Windows �Υѥ�̾�ΰ������Ф�����
-��)���ޤޤ�Ƥ��ޤ�((-��ĥ�饤�֥��ˤ���̼����Ȥ��ơ�
-((<RAA|URL:http://www.ruby-lang.org/en/raa.html>))��
-((<RAA:DOSish>))������ޤ� -))��
-(���ߤ�)�ѹ�����ʲ��˼����ޤ���
+ruby version 1.7 では、DOSISH対応(DOS/Windows のパス名の扱いに対する変
+更)が含まれています((-拡張ライブラリによる別実装として、
+((<RAA|URL:http://www.ruby-lang.org/en/raa.html>))に
+((<RAA:DOSish>))があります -))。
+(現在の)変更点を以下に示します。
 
-�ʤ����������ѹ��� ((<mswin32>))�ǡ�((<mingw32>))��, ((<bccwin32>))��, 
-((<human68k>))��, ((<os2_emx>))�Ǥ� Ruby �ˤΤߤ��ƤϤޤ�ޤ���
+なお、これらの変更は ((<mswin32>))版、((<mingw32>))版, ((<bccwin32>))版, 
+((<human68k>))版, ((<os2_emx>))版の Ruby にのみあてはまります。
 
-�Ȥꤢ��������ɸ�Ȥ��ơ�
+とりあえずの目標として、
 
-* \ �� / ��Ʊ�ͥѥ����ѥ졼���Ȥ��ư���
-* �ޥ���Х��ȥѥ�̾�ؤ��б�("ɽ" �ʤ� 2 byte �ܤ� 0x5c(`\') �Ǥ���ʸ��������������)
-* UNC �б�(���켫�Τ�1.6�ˤ����äƤ���)
-* �ɥ饤�֥쥿���б�
+* \ も / と同様パスセパレータとして扱う
+* マルチバイトパス名への対応("表" など 2 byte 目が 0x5c(`\') である文字を正しく扱う)
+* UNC 対応(これ自体は1.6にも入っている)
+* ドライブレター対応
 
-�ؤ��б����󤲤��Ƥ��ޤ������ɥ饤�֥쥿���б��ʤɤ���̯����ʬ�ˤĤ��Ƥϸ��ߤ�ruby-list�ʤɤǵ�������³����Ƥ��ޤ���
-�������Ǥϡ�File�γƥ᥽�åɤ��Ф���\�б�, �ޥ���Х��ȥѥ�̾�б�, UNC �б�����������Ƥ��ޤ���((<ruby-dev:13817>)), ((<ruby-dev:14097>))
+への対応が挙げられていますが、ドライブレター対応などの微妙な部分については現在もruby-listなどで議論が継続されています。
+現時点では、Fileの各メソッドに対する\対応, マルチバイトパス名対応, UNC 対応が実装されています。((<ruby-dev:13817>)), ((<ruby-dev:14097>))
 
-�ʲ����ƥ᥽�åɤε�ư�ˤĤ���...
+以下、各メソッドの挙動について...
 
 : File.dirname
 
-  �ѥ����ѥ졼���Ȥ��ƽ����/�˲ä���\��ǧ������褦�ˤʤäƤ��ޤ���
-  ����˹�碌�ơ��ޥ���Х��Ȥǵ��Ҥ��줿�ѥ�̾�ؤ��б���Ԥ��Ƥ��ޤ���
+  パスセパレータとして従来の/に加えて\も認識するようになっています。
+  これに合わせて、マルチバイトで記述されたパス名への対応も行われています。
 
     p File.dirname("C:\\foo\\bar")
 
@@ -57,8 +57,8 @@ ruby version 1.7 �Ǥϡ�DOSISH�б�(DOS/Windows �Υѥ�̾�ΰ������Ф�����
 
 : File.basename
 
-  �ѥ����ѥ졼���Ȥ��ƽ����/�˲ä���\��ǧ������褦�ˤʤäƤ��ޤ���
-  ����˹�碌�ơ��ޥ���Х��Ȥǵ��Ҥ��줿�ѥ�̾�ؤ��б���Ԥ��Ƥ��ޤ���
+  パスセパレータとして従来の/に加えて\も認識するようになっています。
+  これに合わせて、マルチバイトで記述されたパス名への対応も行われています。
 
     p File.basename("C:\\foo\\bar")
 
@@ -70,12 +70,12 @@ ruby version 1.7 �Ǥϡ�DOSISH�б�(DOS/Windows �Υѥ�̾�ΰ������Ф�����
 
 : File.split
 
-  File.dirname �� File.basename ���ѹ�����Ƥ���Τǡ�File.split �⤽��˽स��
-  ��̤��֤��ޤ���
+  File.dirname と File.basename が変更されているので、File.split もそれに準じた
+  結果を返します。
 
 : File.expand_path
 
-  �ɥ饤�֥쥿���б��˴ؤ��ơ������Τ褦�ʰƤ��󼨤���Ƥ��ޤ���
+  ドライブレター対応に関して、下記のような案が提示されています。
 
     Dir.chdir("D:/")
     p File.expand_path("C:foo", "C:/bar")
@@ -89,13 +89,13 @@ ruby version 1.7 �Ǥϡ�DOSISH�б�(DOS/Windows �Υѥ�̾�ΰ������Ф�����
        "C:/bar/foo"
        "D:/foo"
 
-    => ����� ((<ruby-list:30970>))
+    => 新井案 ((<ruby-list:30970>))
        "C:/bar/foo"
-       (�ʤ�餫���㳰)
+       (なんらかの例外)
 
 : File.join
 
-  �ɥ饤�֥쥿���б��˴ؤ��ơ������Τ褦�ʰƤ��󼨤���Ƥ��ޤ���
+  ドライブレター対応に関して、下記のような案が提示されています。
 
     p File.join("c:", "foo")
     p File.join("c:/", "foo")
@@ -114,7 +114,7 @@ ruby version 1.7 �Ǥϡ�DOSISH�б�(DOS/Windows �Υѥ�̾�ΰ������Ф�����
        "c:./foo"
        "c://foo"
 
-    => ����� ((<ruby-list:31185>))
+    => 新井案 ((<ruby-list:31185>))
        "c:./foo"
        "c:/foo"
        "c:./foo"

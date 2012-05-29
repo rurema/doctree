@@ -13,12 +13,12 @@ require xsd/namedelements
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- operations
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo
@@ -31,7 +31,7 @@ require xsd/namedelements
 --- soapbinding
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- targetnamespace
 #@todo
@@ -39,5 +39,5 @@ require xsd/namedelements
 --- type
 #@todo
 
-Â°À­
+å±žæ€§
 

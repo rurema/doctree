@@ -1,52 +1,52 @@
-���Υ饤�֥��� Internet Message Access Protocol (IMAP) ��
-���饤����ȥ饤�֥��Ǥ���[[RFC:2060]] �򸵤�
-��������Ƥ��ޤ���
+このライブラリは Internet Message Access Protocol (IMAP) の
+クライアントライブラリです。[[RFC:2060]] を元に
+実装されています。
 
-=== IMAP �γ���
+=== IMAP の概要
 
-IMAP�����Ѥ���ˤϡ��ޤ������Ф���³����
-[[m:Net::IMAP#authenticate]] �⤷����
-[[m:Net::IMAP#login]] ��ǧ�ڤ��ޤ���
-IMAP �Ǥϥ᡼��ܥå����Ȥ�����ǰ�����פǤ���
-�᡼��ܥå����ϳ���Ū��̾��������ޤ���
-�ƥ᡼��ܥå����ϥ᡼����ݻ����뤳�Ȥ��Ǥ��ޤ���
-�᡼��ܥå����μ����ϥ����Х��եȥ������ˤ�äưۤʤ�ޤ���
-Unix�����ƥ�Ǥϡ��ǥ��쥯�ȥ곬�ؾ��
-�ե������ġ��Υ᡼��ܥå����Ȥߤʤ��Ƽ�������뤳�Ȥ�¿���Ǥ���
+IMAPを利用するには、まずサーバに接続し、
+[[m:Net::IMAP#authenticate]] もしくは
+[[m:Net::IMAP#login]] で認証します。
+IMAP ではメールボックスという概念が重要です。
+メールボックスは階層的な名前を持ちます。
+各メールボックスはメールを保持することができます。
+メールボックスの実装はサーバソフトウェアによって異なります。
+Unixシステムでは、ディレクトリ階層上の
+ファイルを個々のメールボックスとみなして実装されることが多いです。
 
-�᡼��ܥå�����Υ�å�����(�᡼��)����������硢
-�ޤ� [[m:Net::IMAP#select]] �⤷����
-[[m:Net::IMAP#examine]] �ǽ����оݤΥ᡼��ܥå�����
-���ꤹ��ɬ�פ�����ޤ��������������������ʤ�С�
-��selected�׾��֤˰ܹԤ������Υ᡼��ܥå������ֽ����оݤΡ�
-�᡼��ܥå����Ȥʤ�ޤ������Τ褦�ˤ��ƥ᡼��ܥå�����
-���򤷤Ƥ��顢selected���֤򽪤���(�̤Υ᡼��ܥå��������򤷤��ꡢ
-��³��λ������)�ޤǤ򥻥å����ȸƤӤޤ���
+メールボックス内のメッセージ(メール)を処理する場合、
+まず [[m:Net::IMAP#select]] もしくは
+[[m:Net::IMAP#examine]] で処理対象のメールボックスを
+指定する必要があります。これらの操作が成功したならば、
+「selected」状態に移行し、そのメールボックスが「処理対象の」
+メールボックスとなります。このようにしてメールボックスを
+選択してから、selected状態を終える(別のメールボックスを選択したり、
+接続を終了したり)までをセッションと呼びます。
 
-��å������ˤ�2����μ��̻Ҥ�¸�ߤ��ޤ���message sequence number ��
-UID �Ǥ���
+メッセージには2種類の識別子が存在します。message sequence number と
+UID です。
 
-message sequence number �ϥ᡼��ܥå�����γƥ�å�������1������
-����줿�ֹ�Ǥ������å������˽����оݤΥ᡼��ܥå�����
-�����ʥ�å��������ɲä��줿��硢���Υ�å�������
-message sequence number ��
-�Ǹ�Υ�å������� message sequence number+1�Ȥʤ�ޤ���
-��å�������᡼��ܥå�������ä������ˤϡ�Ϣ�֤η������褦��
-message sequence number ���դ��ؤ����ޤ���
+message sequence number はメールボックス内の各メッセージに1から順に
+振られた番号です。セッション中に処理対象のメールボックスに
+新たなメッセージが追加された場合、そのメッセージの
+message sequence number は
+最後のメッセージの message sequence number+1となります。
+メッセージをメールボックスから消した場合には、連番の穴を埋めるように
+message sequence number が付け替えられます。
 
-������UID �ϥ��å�����ۤ��ƹ���Ū���ݻ�����ޤ���
-����᡼��ܥå�����ΰۤʤ�2�ĤΥ�å�������Ʊ��  UID 
-����Ĥ��ȤϤ���ޤ���
-����ϡ���å��������᡼��ܥå������������줿��Ǥ���Ω���ޤ���
+一方、UID はセッションを越えて恒久的に保持されます。
+あるメールボックス内の異なる2つのメッセージが同じ  UID 
+を持つことはありません。
+これは、メッセージがメールボックスから削除された後でも成立します。
 
-��������UID �ϥ᡼��ܥå�����Ǿ���Ǥ��뤳�Ȥ�
-���ʾ���������Ƥ���Τǡ�
-IMAP ��Ȥ�ʤ��᡼�륢�ץꥱ������󤬥᡼��ν��֤�
-�Ѥ��Ƥ��ޤä����ϡ�UID ������ľ����ޤ���
+しかし、UID はメールボックス内で昇順であることが
+規格上要請されているので、
+IMAP を使わないメールアプリケーションがメールの順番を
+変えてしまった場合は、UID が振り直されます。
 
-=== ��
+=== 例
 
-�ǥե���ȤΥ᡼��ܥå���(INBOX)�����긵�ȥ��֥������Ȥ�ɽ�����롣
+デフォルトのメールボックス(INBOX)の送り元とサブジェクトを表示する。
   imap = Net::IMAP.new('mail.example.com')
   imap.authenticate('LOGIN', 'joe_user', 'joes_password')
   imap.examine('INBOX')
@@ -55,7 +55,7 @@ IMAP ��Ȥ�ʤ��᡼�륢�ץꥱ������󤬥᡼��ν��֤�
     puts "#{envelope.from[0].name}: \t#{envelope.subject}"
   end
 
-2003ǯ4��Υ᡼��򤹤٤� Mail/sent-mail ���� "Mail/sent-apr03" �ذ�ư������
+2003年4月のメールをすべて Mail/sent-mail から "Mail/sent-apr03" へ移動させる
 
   imap = Net::IMAP.new('mail.example.com')
   imap.authenticate('LOGIN', 'joe_user', 'joes_password')
@@ -69,8 +69,8 @@ IMAP ��Ȥ�ʤ��᡼�륢�ץꥱ������󤬥᡼��ν��֤�
   end
   imap.expunge
 
-=== ����åɰ�����
-Net::IMAP ������¹Ԥ򥵥ݡ��Ȥ��Ƥ��ޤ�����Ȥ��ơ�
+=== スレッド安全性
+Net::IMAP は並列実行をサポートしています。例として、
 
   imap = Net::IMAP.new("imap.foo.net", "imap2")
   imap.authenticate("cram-md5", "bar", "password")
@@ -80,72 +80,72 @@ Net::IMAP ������¹Ԥ򥵥ݡ��Ȥ��Ƥ��ޤ�����Ȥ��ơ�
   fetch_result = fetch_thread.value
   imap.disconnect
 
-�Ȥ���� FETCH ���ޥ�ɤ� SEARCH ���ޥ�ɤ�����˼¹Ԥ��ޤ���
+とすると FETCH コマンドと SEARCH コマンドを並列に実行します。
 
-=== ���顼�ˤĤ���
-IMAP �����Фϰʲ���3����Υ��顼������ޤ���
+=== エラーについて
+IMAP サーバは以下の3種類のエラーを送ります。
 
 : NO
-  ���ޥ�ɤ�����˴�λ���ʤ��ä����Ȥ��̣���ޤ���
-  �㤨�С���������ǤΥ桼��̾/�ѥ���ɤ��ְ�äƤ�����
-  ���򤷤��᡼��ܥå�����¸�ߤ��ʤ����ʤɤǤ���
+  コマンドが正常に完了しなかったことを意味します。
+  例えば、ログインでのユーザ名/パスワードが間違っていた、
+  選択したメールボックスが存在しない、などです。
 
 : BAD
-  ���饤����Ȥ���Υꥯ�����Ȥ򥵡��Ф�����Ǥ��ʤ��ä�
-  ���Ȥ��̣���ޤ���
-  ���饤����Ȥθ��ߤξ��֤ǤϻȤ��ʤ����ޥ�ɤ�Ȥ����Ȥ���
-  ���ˤ�ȯ�����ޤ����㤨�С�
-  selected����(SELECT/EXAMINE�Ǥ��ξ��֤˰ܹԤ���)�ˤʤ餺��
-  SEARCH ���ޥ�ɤ�Ȥ����Ȥ�������ȯ�����ޤ���
-  �����Ф��������顼(�ǥ����������줿�ʤ�)�ξ���
-  ���Υ��顼��ȯ�����ޤ���
+  クライアントからのリクエストをサーバが理解できなかった
+  ことを意味します。
+  クライアントの現在の状態では使えないコマンドを使おうとした
+  場合にも発生します。例えば、
+  selected状態(SELECT/EXAMINEでこの状態に移行する)にならずに
+  SEARCH コマンドを使おうとした場合に発生します。
+  サーバの内部エラー(ディスクが壊れたなど)の場合も
+  このエラーが発生します。
 
 : BYE
-  �����Ф���³���ڤ����Ȥ��Ƥ��뤳�Ȥ��̣���ޤ���
-  ������̾�Υ��������Ƚ�����ȯ�����ޤ���
-  �ޤ�������������˥����Ф�(�ʤ�餫����ͳ��)��³
-  �������ʤ����ˤ�ȯ�����ޤ���
-  ����ʳ��Ǥϡ������Ф�����åȥ����󤹤��礫
-  �����Ф������ॢ���Ȥ������ȯ�����ޤ���
+  サーバが接続を切ろうとしていることを意味します。
+  これは通常のログアウト処理で発生します。
+  また、ログイン時にサーバが(なんらかの理由で)接続
+  したくない場合にも発生します。
+  それ以外では、サーバがシャットダウンする場合か
+  サーバがタイムアウトする場合に発生します。
 
-�����Υ��顼�Ϥ��줾��
+これらのエラーはそれぞれ
   * [[c:Net::IMAP::NoResponseError]]
   * [[c:Net::IMAP::BadResponseError]]
   * [[c:Net::IMAP::ByeResponseError]]
-�Ȥ����㳰���饹���б����Ƥ��ޤ���
-����Ū�ˤϡ��������㳰�ϥ����Ф˥��ޥ�ɤ����ä����ˤ�
-���ȯ�������ǽ��������ޤ��������������Υɥ�����ȤǤ�
-�褯���륨�顼�Τ߲��⤷�ޤ���
+という例外クラスに対応しています。
+原理的には、これらの例外はサーバにコマンドを送った場合には
+常に発生する可能性があります。しかし、このドキュメントでは
+よくあるエラーのみ解説します。
 
-IMAP �� Socket ���̿��򤹤뤿�ᡢIMAP���饹�Υ᥽�åɤ�
-Socket ��Ϣ�Υ��顼��ȯ�����뤫�⤷��ޤ����㤨�С�
-�̿������³���ڤ��� [[c:Errno::EPIPE]] �㳰��
-ȯ�����ޤ����ܤ����� [[c:Socket]] �ʤɤ򸫤Ƥ���������
+IMAP は Socket で通信をするため、IMAPクラスのメソッドは
+Socket 関連のエラーが発生するかもしれません。例えば、
+通信中に接続が切れると [[c:Errno::EPIPE]] 例外が
+発生します。詳しくは [[c:Socket]] などを見てください。
 
-[[c:Net::IMAP::DataFormatError]]��
-[[c:Net::IMAP::ResponseParseError]] �Ȥ����㳰���饹��
-¸�ߤ��ޤ������Ԥϥǡ����Υե����ޥåȤ��������ʤ����ˡ�
-��Ԥϥ����Ф���Υ쥹�ݥ󥹤��ѡ����Ǥ��ʤ�����ȯ�����ޤ���
-�����Υ��顼�Ϥ��Υ饤�֥��⤷���ϥ����Ф˿�������꤬
-���뤳�Ȥ��̣���ޤ���
+[[c:Net::IMAP::DataFormatError]]、
+[[c:Net::IMAP::ResponseParseError]] という例外クラスも
+存在します。前者はデータのフォーマットが正しくない場合に、
+後者はサーバからのレスポンスがパースできない場合に発生します。
+これらのエラーはこのライブラリもしくはサーバに深刻な問題が
+あることを意味します。
 
-=== tagged response �� untagged response
-IMAP �ץ��ȥ���ˤ����ƥ����Ф���α����ˤ� tagged �ʤ�Τ�
-untagged �ʤ�Τ�2�̤�¸�ߤ��ޤ���
-tagged �ʱ����ϡ����饤����Ȥ���Υ��ޥ�ɤ�
-�����⤷���ϼ��ԤΤ����줫�Ǵ�λ�������Ȥ�ɽ����ΤǤ���
-���� untagged �ʱ����Ϥ���ʳ��ξ�����Ϥ�����Τ�ΤǤ���
-untagged �ʱ����ϥ��饤����Ȥ���Υ��ޥ�ɤη�̤ξ����
-�Ϥ�����ˤ��Ѥ����ޤ����������Ǥʤ�(�����ФΥ���åȥ�����ʤ�)
-��ȯŪ�����ˤ��Ѥ����ޤ���
+=== tagged response と untagged response
+IMAP プロトコルにおいてサーバからの応答には tagged なものと
+untagged なものの2通り存在します。
+tagged な応答は、クライアントからのコマンドが
+成功もしくは失敗のいずれかで完了したことを表すものです。
+一方 untagged な応答はそれ以外の情報を渡すためのものです。
+untagged な応答はクライアントからのコマンドの結果の情報を
+渡すためにも用いられますし、そうでない(サーバのシャットダウンなど)
+自発的応答にも用いられます。
 
-����Ϥ��줾��
-[[c:Net::IMAP::TaggedResponse]] �� [[c:Net::IMAP::UntaggedResponse]]
-���б����ޤ���
+これはそれぞれ
+[[c:Net::IMAP::TaggedResponse]] と [[c:Net::IMAP::UntaggedResponse]]
+に対応します。
 
-untagged �ʱ����ϥ��ޥ�ɤ������Ȥ���Ʊ��Ū�˥����Ф��������뤿�ᡢ
-[[c:Net::IMAP]] ���֥������Ȥϥ桼���Τ��ᤳ���
-[[m:Net::IMAP#responses]] �˵�Ͽ���Ƥ����ޤ���
+untagged な応答はコマンドの送信とは非同期的にサーバから送られるため、
+[[c:Net::IMAP]] オブジェクトはユーザのためこれを
+[[m:Net::IMAP#responses]] に記録しておきます。
 
 === References
 
@@ -182,160 +182,160 @@ untagged �ʱ����ϥ��ޥ�ɤ������Ȥ���Ʊ��Ū�˥����Ф��������뤿�ᡢ
   * [RSSL]
     [[url:http://savannah.gnu.org/projects/rubypki]]
 
-�ʾ�Τ����������Ĥ��� RFC �� obsolete �ˤʤä��֤��������Ƥ��ޤ���
-[[RFC:2060]] �� [[RFC:3501]] �ˡ�[[RFC:822]] �� [[RFC:2822]] �ˡ�
-�֤��������Ƥ��ޤ���
+以上のうち、いくつかの RFC は obsolete になって置き換えられています。
+[[RFC:2060]] は [[RFC:3501]] に、[[RFC:822]] は [[RFC:2822]] に、
+置き換えられています。
 
 = class Net::IMAP < Object
 
-IMAP ��³��ɽ�����륯�饹�Ǥ���
+IMAP 接続を表現するクラスです。
 
 == Class Methods
 
 --- new(host, port = 143, usessl = false, certs = nil, verify = false) -> Net::IMAP
 --- new(host, options) -> Net::IMAP
 
-������ Net::IMAP ���֥������Ȥ������������ꤷ���ۥ��Ȥ�
-���ꤷ���ݡ��Ȥ���³������³��� IMAP ���֥������Ȥ��֤��ޤ���
+新たな Net::IMAP オブジェクトを生成し、指定したホストの
+指定したポートに接続し、接続語の IMAP オブジェクトを返します。
 
-usessl �����ʤ�С������Ф˷Ҥ��Τ� SSL/TLS ���Ѥ��ޤ���
-SSL/TLS �Ǥ���³�ˤ� OpenSSL �� [[lib:openssl]] ���Ȥ���ɬ�פ�����ޤ���
-certs �����Ѥ��������Υե�����̾�⤷���Ͼ����񤬤���ǥ��쥯�ȥ�̾��
-ʸ������Ϥ��ޤ���
-certs �� nil ���Ϥ��ȡ�OpenSSL �Υǥե���Ȥξ������Ȥ��ޤ���
-verify ����³��򸡾ڤ��뤫�򿿵��ͤ����ꤷ�ޤ���
-���� [[m:OpenSSL::SSL::VERIFY_PEER]] �ˡ�
-���� [[m:OpenSSL::SSL::VERIFY_NONE]] ���б����ޤ���
+usessl が真ならば、サーバに繋ぐのに SSL/TLS を用います。
+SSL/TLS での接続には OpenSSL と [[lib:openssl]] が使える必要があります。
+certs は利用する証明書のファイル名もしくは証明書があるディレクトリ名を
+文字列で渡します。
+certs に nil を渡すと、OpenSSL のデフォルトの証明書を使います。
+verify は接続先を検証するかを真偽値で設定します。
+真が [[m:OpenSSL::SSL::VERIFY_PEER]] に、
+偽が [[m:OpenSSL::SSL::VERIFY_NONE]] に対応します。
 
-�ѥ�᡼���� Hash ���Ϥ����Ȥ�Ǥ��ޤ����ʲ��Υ�����Ȥ����Ȥ��Ǥ��ޤ���
-  * :port �ݡ����ֹ�
-    ��ά���� SSL/TLS ���ѻ���993 �Ի��ѻ���143 �Ȥʤ�ޤ���
-  * :ssl OpenSSL ���Ϥ��ѥ�᡼����ϥå���ǻ��ꤷ�ޤ���
-    ��ά���� SSL/TLS ��Ȥ鷺��³���ޤ���
-    ������Ϥ���ѥ�᡼����
-    [[m:OpenSSL::SSL::SSLContext#set_params]] ��Ʊ���Ǥ���
-����� :ssl �ѥ�᡼����Ȥ����Ȥǡ�OpenSSL �Υѥ�᡼����ܺ٤�
-Ĵ���Ǥ��ޤ���
+パラメータは Hash で渡すこともできます。以下のキーを使うことができます。
+  * :port ポート番号
+    省略時は SSL/TLS 使用時→993 不使用時→143 となります。
+  * :ssl OpenSSL に渡すパラメータをハッシュで指定します。
+    省略時は SSL/TLS を使わず接続します。
+    これで渡せるパラメータは
+    [[m:OpenSSL::SSL::SSLContext#set_params]] と同じです。
+これの :ssl パラメータを使うことで、OpenSSL のパラメータを詳細に
+調整できます。
 
 
-��
+例
   imap = Net::IMAP.new('imap.example.com', :port => 993,
                        :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
                                  :timeout => 600 } )
 
-@param host ��³����ۥ���̾��ʸ����
-@param port ��³����ݡ����ֹ�
-@param usessl ����SSL/TLS��Ȥ�
-@param certs ������Υե�����̾/�ǥ��쥯�ȥ�̾��ʸ����
-@param verify ������³��򸡾ڤ���
-@param options �Ƽ���³�ѥ�᡼���Υϥå���
+@param host 接続するホスト名の文字列
+@param port 接続するポート番号
+@param usessl 真でSSL/TLSを使う
+@param certs 証明書のファイル名/ディレクトリ名の文字列
+@param verify 真で接続先を検証する
+@param options 各種接続パラメータのハッシュ
 
 --- debug -> bool
 
-�ǥХå��⡼�ɤ� on �ˤʤäƤ���п����֤��ޤ���
+デバッグモードが on になっていれば真を返します。
 
 @see [[m:Net::IMAP#debug=]]
 
 --- debug=(val)
-�ǥХå��⡼�ɤ� on/off �򤷤ޤ���
+デバッグモードの on/off をします。
 
-�����Ϥ��� on �ˤʤ�ޤ���
+真を渡すと on になります。
 
-@param val ���ꤹ��ǥХå��⡼�ɤ� on/off �ο�����
+@param val 設定するデバッグモードの on/off の真偽値
 @see [[m:Net::IMAP#debug]]
 
 --- add_authenticator(auth_type, authenticator) -> ()
-[[m:Net::IMAP#authenticate]] �ǻȤ� 
-ǧ���ѥ��饹�����ꤷ�ޤ���
+[[m:Net::IMAP#authenticate]] で使う 
+認証用クラスを設定します。
 
-imap �饤�֥��˿�����ǧ���������ɲä��뤿����Ѥ��ޤ���
+imap ライブラリに新たな認証方式を追加するために用います。
 
-�̾�ϻȤ�ɬ�פϤʤ��Ǥ��礦���⤷������Ѥ���
-ǧ���������ɲä������ net/imap.rb ��
-Net::IMAP::LoginAuthenticator �ʤɤ򻲹ͤˤ��Ƥ���������
+通常は使う必要はないでしょう。もしこれを用いて
+認証方式を追加する場合は net/imap.rb の
+Net::IMAP::LoginAuthenticator などを参考にしてください。
 
-@param auth_type ǧ�ڤμ���(ʸ����)
-@param authenticator ǧ�ڥ��饹(Class ���֥�������)
+@param auth_type 認証の種類(文字列)
+@param authenticator 認証クラス(Class オブジェクト)
 
 --- decode_utf7(str) -> String
-modified UTF-7 ��ʸ����� UTF-8 ��ʸ������Ѵ����ޤ���
+modified UTF-7 の文字列を UTF-8 の文字列に変換します。
 
-modified UTF-7 �� IMAP �Υ᡼��ܥå���̾�˻Ȥ��륨�󥳡��ǥ��󥰤ǡ�
-UTF-7 ����������ΤǤ���
+modified UTF-7 は IMAP のメールボックス名に使われるエンコーディングで、
+UTF-7 を修正したものです。
 
-�ܤ����� [[RFC:2060]] �� 5.1.3 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] の 5.1.3 を参照してください。
 
-Net::IMAP �Ǥϥ᡼��ܥå���̾�Υ��󥳡��ɤ�ưŪ�Ѵ��֤��ʤ���
-���Ȥ����դ��Ƥ���������ɬ�פ�����Х桼�����Ѵ����٤��Ǥ���
+Net::IMAP ではメールボックス名のエンコードを自動的変換「しない」
+ことに注意してください。必要があればユーザが変換すべきです。
 
-@param str �Ѵ��оݤ� modified UTF-7 �ǥ��󥳡��ɤ��줿ʸ����
+@param str 変換対象の modified UTF-7 でエンコードされた文字列
 @see [[m:Net::IMAP.encode_utf7]]
 --- encode_utf7(str) -> String
-UTF-8 ��ʸ����� modified UTF-7 ��ʸ������Ѵ����ޤ���
+UTF-8 の文字列を modified UTF-7 の文字列に変換します。
 
-modified UTF-7 �� IMAP �Υ᡼��ܥå���̾�˻Ȥ��륨�󥳡��ǥ��󥰤ǡ�
-UTF-7 ����������ΤǤ���
+modified UTF-7 は IMAP のメールボックス名に使われるエンコーディングで、
+UTF-7 を修正したものです。
 
-�ܤ����� [[m:Net::IMAP.encode_utf7]] �򸫤Ƥ���������
+詳しくは [[m:Net::IMAP.encode_utf7]] を見てください。
 
-@param str �Ѵ��оݤ� UTF-8 �ǥ��󥳡��ɤ��줿ʸ����
+@param str 変換対象の UTF-8 でエンコードされた文字列
 @see [[m:Net::IMAP.decode_utf7]]
 
 #@since 1.9.1
 
 --- format_date(time) -> String
-���索�֥������Ȥ� IMAP �����եե����ޥåȤǤ�ʸ������Ѵ����ޤ���
+時刻オブジェクトを IMAP の日付フォーマットでの文字列に変換します。
 
   Net::IMAP.format_date(Time.new(2011, 6, 20))
   # => "20-Jun-2011"
 
-@param time �Ѵ�������索�֥�������
+@param time 変換する時刻オブジェクト
 
 --- format_datetime(time) -> String
-���索�֥������Ȥ� IMAP �����ջ���ե����ޥåȤǤ�ʸ������Ѵ����ޤ�
+時刻オブジェクトを IMAP の日付時刻フォーマットでの文字列に変換します
 
   Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
   # => "20-Jun-2011 13:20 +0900"
 
-@param time �Ѵ�������索�֥�������
+@param time 変換する時刻オブジェクト
 
 --- max_flag_count -> Integer
-�����Ф���Υ쥹�ݥ󥹤˴ޤޤ�� flag �ξ�¤��֤��ޤ���
+サーバからのレスポンスに含まれる flag の上限を返します。
 
-�����ۤ��� flag ���쥹�ݥ󥹤˴ޤޤ�Ƥ�����ϡ�
-[[c:Net::IMAP::FlagCountError]] �㳰��ȯ�����ޤ���
+これを越えた flag がレスポンスに含まれている場合は、
+[[c:Net::IMAP::FlagCountError]] 例外が発生します。
 
 @see [[m:Net::IMAP.max_flag_count=]]
 
 --- max_flag_count=(count)
-�����Ф���Υ쥹�ݥ󥹤˴ޤޤ�� flag �ξ�¤����ꤷ�ޤ���
+サーバからのレスポンスに含まれる flag の上限を設定します。
 
-�����ۤ��� flag ���쥹�ݥ󥹤˴ޤޤ�Ƥ�����ϡ�
-[[c:Net::IMAP::FlagCountError]] �㳰��ȯ�����ޤ���
+これを越えた flag がレスポンスに含まれている場合は、
+[[c:Net::IMAP::FlagCountError]] 例外が発生します。
 
-�ǥե���Ȥ� 10000 �Ǥ����̾���Ѥ���ɬ�פϤʤ��Ǥ��礦��
+デフォルトは 10000 です。通常は変える必要はないでしょう。
 
-@param count ���ꤹ������ͤ�����
+@param count 設定する最大値の整数
 @see [[m:Net::IMAP.max_flag_count]]
 #@end
 
 == Methods
 
 --- greeting -> Net::IMAP::UntaggedResponse
-�����Ф���ǽ�������Ƥ����å�����(greeting message)
-���֤��ޤ���
+サーバから最初に送られてくるメッセージ(greeting message)
+を返します。
 
 --- responses -> { String => [object] }
-�����Ф��������Ƥ��� untagged �ʱ����ε�Ͽ���֤��ޤ���
+サーバから送られてきた untagged な応答の記録を返します。
 
-untagged �ʱ����ϼ��ऴ�Ȥ˵�Ͽ����ޤ���
-�����μ���ˤ� "FLAGS", "OK", "UIDVALIDITY", "EXISTS" �ʤɤ����ꡢ
-����ʸ���󤬥ϥå���ơ��֥�Υ����Ȥʤ�ޤ���
-�����ƳƼ��ऴ�Ȥ������Ѱդ��졢untagged �ʱ�����������뤿�Ӥ�
-��������������ˤ������Ƥ���Ͽ����ޤ���
+untagged な応答は種類ごとに記録されます。
+応答の種類には "FLAGS", "OK", "UIDVALIDITY", "EXISTS" などがあり、
+この文字列がハッシュテーブルのキーとなります。
+そして各種類ごとに配列が用意され、untagged な応答を受信するたびに
+その配列の末尾にその内容が記録されます。
 
 
-��:
+例:
   imap.select("inbox")
   p imap.responses["EXISTS"].last
   #=> 2
@@ -343,158 +343,158 @@ untagged �ʱ����ϼ��ऴ�Ȥ˵�Ͽ����ޤ���
   #=> 968263756
 
 --- disconnect -> nil
-�����ФȤ���³�����Ǥ��ޤ���
+サーバとの接続を切断します。
 
 @see [[m:Net::IMAP#disconnected?]]
 
 --- capability -> [String]
-CAPABILITY ���ޥ�ɤ����äƥ����Ф����ݡ��Ȥ��Ƥ���
-��ǽ(capabilities)�Υꥹ�Ȥ�ʸ���������Ȥ����֤��ޤ���
+CAPABILITY コマンドを送ってサーバがサポートしている
+機能(capabilities)のリストを文字列の配列として返します。
 
-capability �� IMAP �˴�Ϣ���� RFC �ʤɤ��������Ƥ��ޤ���
+capability は IMAP に関連する RFC などで定義されています。
 
   imap.capability
   # => ["IMAP4REV1", "UNSELECT", "IDLE", "NAMESPACE", "QUOTA", ... ]
 
 --- noop -> Net::IMAP::TaggedResponse
-NOOP ���ޥ�ɤ�����ޤ���
+NOOP コマンドを送ります。
 
-���Υ��ޥ�ɤϲ��⤷�ޤ���
+このコマンドは何もしません。
 
 --- logout -> Net::IMAP::TaggedResponse
-LOGOUT ���ޥ�ɤ����ꡢ���ͥ����������Ǥ��뤳�Ȥ�
-�����Ф������ޤ���
+LOGOUT コマンドを送り、コネクションを切断することを
+サーバに伝えます。
 
 --- authenticate(auth_type, user, password) -> Net::IMAP::TaggedResponse
 
-AUTHENTICATE ���ޥ�ɤ����ꡢ���饤����Ȥ�ǧ�ڤ��ޤ���
+AUTHENTICATE コマンドを送り、クライアントを認証します。
 
-auth_type �����Ѥ���ǧ��������ʸ����ǻ��ꤷ�ޤ���
+auth_type で利用する認証方式を文字列で指定します。
 
 
-��:
+例:
   imap.authenticate('LOGIN', user, password)
 
-auth_type �Ȥ��Ƥϰʲ������ݡ��Ȥ���Ƥ��ޤ���
+auth_type としては以下がサポートされています。
   * "LOGIN"
   * "PLAIN"
   * "CRAM-MD5"
   * "DIGEST-MD5"
 
-@param auth_type ǧ��������ɽ��ʸ����
-@param user �桼��̾ʸ����
-@param password �ѥ����ʸ����
+@param auth_type 認証方式を表す文字列
+@param user ユーザ名文字列
+@param password パスワード文字列
 @see [[m:Net::IMAP#login]]
 
 --- login(user, password) -> Net::IMAP::TaggedResponse
-LOGIN ���ޥ�ɤ����ꡢʿʸ�ǥѥ���ɤ����ꥯ�饤�����
-�桼����ǧ�ڤ��ޤ���
+LOGIN コマンドを送り、平文でパスワードを送りクライアント
+ユーザを認証します。
 
-[[m:Net::IMAP#authenticate]] �� "LOGIN" ��Ȥ��ΤȤϰۤʤ�
-���Ȥ����դ��Ƥ���������authenticate �Ǥ� AUTHENTICATE ���ޥ�ɤ�
-����ޤ���
+[[m:Net::IMAP#authenticate]] で "LOGIN" を使うのとは異なる
+ことに注意してください。authenticate では AUTHENTICATE コマンドを
+送ります。
 
-ǧ���������ˤ�
-ǧ�������쥹�ݥ󥹤��֤��ͤȤ����֤��ޤ���
+認証成功時には
+認証成功レスポンスを返り値として返します。
 
-ǧ�ڼ��Ի��ˤ��㳰��ȯ�����ޤ���
+認証失敗時には例外が発生します。
 
-@param user �桼��̾ʸ����
-@param password �ѥ����ʸ����
-@raise Net::IMAP::NoResponseError ǧ�ڤ˼��Ԥ�������ȯ�����ޤ�
+@param user ユーザ名文字列
+@param password パスワード文字列
+@raise Net::IMAP::NoResponseError 認証に失敗した場合に発生します
 @see [[m:Net::IMAP#authenticate]]
 
 --- select(mailbox) -> Net::IMAP::TaggedResponse
-SELECT ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå���������оݤ�
-�᡼��ܥå����ˤ��ޤ���
+SELECT コマンドを送り、指定したメールボックスを処理対象の
+メールボックスにします。
 
-���Υ��ޥ�ɤ���������ȡ����饤����Ȥξ��֤���selected�פˤʤ�ޤ���
+このコマンドが成功すると、クライアントの状態が「selected」になります。
 
-���Υ��ޥ�ɤ�¹Ԥ���ľ��� [[m:Net::IMAP#responses]]["EXISTS"].last
-��Ĵ�٤�ȡ��᡼��ܥå�����Υ᡼��ο����狼��ޤ���
-�ޤ���[[m:Net::IMAP#responses]]["RECENT"].last�ǡ�
-�ǿ��Υ᡼��ο����狼��ޤ���
-�������ͤϥ��å��������Ѥ�ꤦ�뤳�Ȥ����դ��Ƥ���������
-[[m:Net::IMAP#add_response_handler]] ��Ȥ��Ȥ��Τ褦�ʹ��������
-¨�¤˼����Ǥ��ޤ���
+このコマンドを実行した直後に [[m:Net::IMAP#responses]]["EXISTS"].last
+を調べると、メールボックス内のメールの数がわかります。
+また、[[m:Net::IMAP#responses]]["RECENT"].lastで、
+最新のメールの数がわかります。
+これらの値はセッション中に変わりうることに注意してください。
+[[m:Net::IMAP#add_response_handler]] を使うとそのような更新情報を
+即座に取得できます。
 
-@param mailbox �����оݤȤ������᡼��ܥå�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError mailbox��¸�ߤ��ʤ�������ͳ�ǥ��ޥ�ɤμ¹Ԥ˼���
-       ��������ȯ�����ޤ���
+@param mailbox 処理対象としたいメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError mailboxが存在しない等の理由でコマンドの実行に失敗
+       した場合に発生します。
 
 --- examine(mailbox) -> Net::IMAP::TaggedResponse
-EXAMINE ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå���������оݤ�
-�᡼��ܥå����ˤ��ޤ���
+EXAMINE コマンドを送り、指定したメールボックスを処理対象の
+メールボックスにします。
 
-[[m:Net::IMAP#select]] �Ȱۤʤꥻ�å������ϥ᡼��ܥå�����
-�ɤ߼�����ѤȤʤ�ޤ�������ʳ��� select ��Ʊ���Ǥ���
+[[m:Net::IMAP#select]] と異なりセッション中はメールボックスが
+読み取り専用となります。それ以外は select と同じです。
 
-@param mailbox �����оݤȤ������᡼��ܥå�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError mailbox��¸�ߤ��ʤ�������ͳ�ǥ��ޥ�ɤμ¹Ԥ˼���
-       ��������ȯ�����ޤ���
+@param mailbox 処理対象としたいメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError mailboxが存在しない等の理由でコマンドの実行に失敗
+       した場合に発生します。
 
 --- create(mailbox) -> Net::IMAP::TaggedResponse
-CREATE  ���ޥ�ɤ����ꡢ�������᡼��ܥå�������ޤ���
+CREATE  コマンドを送り、新しいメールボックスを作ります。
 
-@param mailbox �������᡼��ܥå�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError ���ꤷ��̾���Υ᡼��ܥå��������ʤ��ä�����ȯ�����ޤ�
+@param mailbox 新しいメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスが作れなかった場合に発生します
 
 --- delete(mailbox) -> Net::IMAP::TaggedResponse
-DELETE ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå����������ޤ���
+DELETE コマンドを送り、指定したメールボックスを削除します。
 
-@param mailbox �������᡼��ܥå�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError ���ꤷ��̾���Υ᡼��ܥå��������Ǥ��ʤ��ä����
-       ��ȯ�����ޤ������ꤷ��̾���Υ᡼��ܥå�����¸�ߤ��ʤ����䡢
-       �桼���˥᡼��ܥå����������븢�¤��ʤ�����ȯ�����ޤ���
+@param mailbox 削除するメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを削除できなかった場合
+       に発生します。指定した名前のメールボックスが存在しない場合や、
+       ユーザにメールボックスを削除する権限がない場合に発生します。
 
 --- rename(mailbox, newname) -> Net::IMAP::TaggedResponse
-RENAME ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå������͡��ष�ޤ���
+RENAME コマンドを送り、指定したメールボックスをリネームします。
 
-@param mailbox ��͡��ह��᡼��ܥå���(ʸ����)
-@param newname ��͡�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError ���ꤷ��̾���Υ᡼��ܥå�����
-       ��͡���Ǥ��ʤ��ä�����ȯ�����ޤ���
-       ���ꤷ��̾���Υ᡼��ܥå�����¸�ߤ��ʤ����䡢
-       ��͡�����̾������ĥ᡼��ܥå���������¸�ߤ���
-       ����ȯ�����ޤ���
+@param mailbox リネームするメールボックス(文字列)
+@param newname リネーム後の名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを
+       リネームできなかった場合に発生します。
+       指定した名前のメールボックスが存在しない場合や、
+       リネーム後の名前を持つメールボックスが既に存在する
+       場合に発生します。
 
 
 --- subscribe(mailbox) -> Net::IMAP::TaggedResponse
-SUBSCRIBE ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå�����
-"active" �⤷���� "subscribe" �ʥ᡼��ܥå����ν����
-�ɲä��ޤ���
+SUBSCRIBE コマンドを送り、指定したメールボックスを
+"active" もしくは "subscribe" なメールボックスの集合に
+追加します。
 
-@param mailbox �ɲä���᡼��ܥå�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError ���ꤷ��̾���Υ᡼��ܥå�����
-       �ɲäǤ��ʤ��ä�����ȯ�����ޤ���
-       ���ꤷ��̾���Υ᡼��ܥå�����¸�ߤ��ʤ����ʤɤ�
-       �����ޤ���
+@param mailbox 追加するメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを
+       追加できなかった場合に発生します。
+       指定した名前のメールボックスが存在しない場合などに
+       生じます。
 
 --- unsubscribe(mailbox) -> Net::IMAP::TaggedResponse
-UNSUBSCRIBE ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå�����
-"active" �⤷���� "subscribe" �ʥ᡼��ܥå����ν��礫��
-������ޤ���
+UNSUBSCRIBE コマンドを送り、指定したメールボックスを
+"active" もしくは "subscribe" なメールボックスの集合から
+削除します。
 
-@param mailbox ������뤹��᡼��ܥå�����̾��(ʸ����)
-@raise Net::IMAP::NoResponseError ���ꤷ��̾���Υ᡼��ܥå�����
-       ����Ǥ��ʤ��ä�����ȯ�����ޤ���
-       ���ꤷ��̾���Υ᡼��ܥå����� active/subscribe �Ǥʤ��ä�
-       ���ʤɤ�ȯ�����ޤ���
+@param mailbox 削除するするメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを
+       削除できなかった場合に発生します。
+       指定した名前のメールボックスが active/subscribe でなかった
+       場合などに発生します。
 
 --- list(refname, mailbox) -> [Net::IMAP::MailboxList] | nil
 
-LIST ���ޥ�ɤ����ꡢ���饤����Ȥ������Ѳ�ǽ�ʥ᡼��ܥå���̾�ν��礫��
-�����˥ޥå������Τ��٤Ƥ��֤��ޤ���
+LIST コマンドを送り、クライアントから利用可能なメールボックス名の集合から
+引数にマッチするものすべてを返します。
 
-�ܤ�����  [[RFC:2060]] �� 6.3.8 �򻲾Ȥ��Ƥ���������
+詳しくは  [[RFC:2060]] の 6.3.8 を参照してください。
 
-�֤��ͤ� [[c:Net::IMAP::MailboxList]] ��������֤��ޤ���
-�֤��ͤ�������Ǥ�����϶�������Ǥʤ� nil ���֤��ޤ���
+返り値は [[c:Net::IMAP::MailboxList]] の配列で返します。
+返り値が空集合である場合は空の配列でなく nil を返します。
 
-@param refname ����̾(ʸ����)
-@param mailbox Ĵ�٤�᡼��ܥå�����̾��(ʸ����)���磻��ɥ����ɤ�ޤ�Ǥ��Ƥ⤫�ޤ��ޤ���
+@param refname 参照名(文字列)
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもかまいません。
 
-��:
+例:
   imap.create("foo/bar")
   imap.create("foo/baz")
   p imap.list("", "foo/%")
@@ -503,20 +503,20 @@ LIST ���ޥ�ɤ����ꡢ���饤����Ȥ������Ѳ�ǽ�ʥ᡼��ܥå���̾�ν��礫��
 #@since 1.9.3
 --- xlist(refname, mailbox) -> [Net::IMAP::MailboxList]
 
-XLIST���ޥ�ɤ����ꡢ���饤����Ȥ������Ѳ�ǽ�ʥ᡼��ܥå���̾�ν��礫��
-�����˥ޥå������Τ��٤Ƥ��֤��ޤ���
+XLISTコマンドを送り、クライアントから利用可能なメールボックス名の集合から
+引数にマッチするものすべてを返します。
 
-[[m:Net::IMAP#list]] �Ȥۤ�Ʊ�ͤǤ�����
-��:Sent�פʤɤγ�ĥ���줿�ե饰��ޤळ�Ȥ��ۤʤ�ޤ���
+[[m:Net::IMAP#list]] とほぼ同様ですが、
+「:Sent」などの拡張されたフラグを含むことが異なります。
 
-�ܤ�����
+詳しくは
 [[url:http://code.google.com/apis/gmail/imap/]]
-�򻲾Ȥ��Ƥ���������
+を参照してください。
 
-@param refname ����̾(ʸ����)
-@param mailbox Ĵ�٤�᡼��ܥå�����̾��(ʸ����)���磻��ɥ����ɤ�ޤ�Ǥ��Ƥ⤫�ޤ��ޤ���
+@param refname 参照名(文字列)
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもかまいません。
 
-��:
+例:
   imap.create("foo/bar")
   imap.create("foo/baz")
   p imap.xlist("", "foo/%")
@@ -528,41 +528,41 @@ XLIST���ޥ�ɤ����ꡢ���饤����Ȥ������Ѳ�ǽ�ʥ᡼��ܥå���̾�ν��礫��
 
 --- lsub(refname, mailbox) -> [Net::IMAP::MailboxList]
 
-LIST ���ޥ�ɤ����ꡢactive/subscribed �ʥ᡼��ܥå���̾�ν��礫��
-�����˥ޥå������Τ��٤Ƥ��֤��ޤ���
+LIST コマンドを送り、active/subscribed なメールボックス名の集合から
+引数にマッチするものすべてを返します。
 
-�ܤ�����  [[RFC:2060]] �� 6.3.8 �򻲾Ȥ��Ƥ���������
+詳しくは  [[RFC:2060]] の 6.3.8 を参照してください。
 
-�֤��ͤ� [[c:Net::IMAP::MailboxList]] ��������֤��ޤ���
-�֤��ͤ�������Ǥ�����϶�������Ǥʤ� nil ���֤��ޤ���
+返り値は [[c:Net::IMAP::MailboxList]] の配列で返します。
+返り値が空集合である場合は空の配列でなく nil を返します。
 
-@param refname ����̾(ʸ����)
-@param mailbox Ĵ�٤�᡼��ܥå�����̾��(ʸ����)���磻��ɥ����ɤ�ޤ�Ǥ��Ƥ⤫�ޤ��ޤ���
+@param refname 参照名(文字列)
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもかまいません。
 
 --- status(mailbox, attr) -> {String => Integer}
-STATUS ���ޥ�ɤ����ꡢmailbox �Υ��ơ����������ޤ���
+STATUS コマンドを送り、mailbox のステータスを得ます。
 
-�䤤��碌�������ơ������� attr ��ʸ�����������Ϥ��ޤ���
+問い合わせたいステータスは attr に文字列の配列で渡します。
 
-�֤��ͤ� ���ȥ�ӥ塼��ʸ����򥭡��Ȥ���ϥå���Ǥ���
+返り値は アトリビュート文字列をキーとするハッシュです。
 
-�ܤ����� [[RFC:2060]] �� 6.3.10 �򻲹ͤˤ��Ƥ���������
+詳しくは [[RFC:2060]] の 6.3.10 を参考にしてください。
 
-��:
+例:
   p imap.status("inbox", ["MESSAGES", "RECENT"])
   #=> {"RECENT"=>0, "MESSAGES"=>44}
 
-@param mailbox �䤤��碌�оݤΥ᡼��ܥå���(ʸ����)
-@param attr ��礻�������ȥ�ӥ塼��̾(ʸ����)������
-@raise Net::IMAP::NoResponseError �᡼��ܥå�����¸�ߤ��ʤ����䡢
-       ���ȥ�ӥ塼��̾��¸�ߤ��ʤ�����ȯ�����ޤ�
+@param mailbox 問い合わせ対象のメールボックス(文字列)
+@param attr 問合せたいアトリビュート名(文字列)の配列
+@raise Net::IMAP::NoResponseError メールボックスが存在しない場合や、
+       アトリビュート名が存在しない場合に発生します
 
 --- append(mailbox, message, flags = nil, date_time = nil) -> Net::IMAP::TaggedResponse
 
-APPEND ���ޥ�ɤ����äƥ�å�������᡼��ܥå������������ɲä��ޤ���
+APPEND コマンドを送ってメッセージをメールボックスの末尾に追加します。
 
 
-��:
+例:
   imap.append("inbox", <<EOF.gsub(/\n/, "\r\n"), [:Seen], Time.now)
   Subject: hello
   From: someone@example.com
@@ -571,52 +571,52 @@ APPEND ���ޥ�ɤ����äƥ�å�������᡼��ܥå������������ɲä��ޤ���
   hello world
   EOF
 
-@param mailbox ��å��������ɲä���᡼��ܥå���̾(ʸ����)
-@param message ��å�����ʸ����
-@param flags ��å��������ղä���ե饰([[c:Symbol]] ������)
-@param date_time ��å������λ���([[c:Time]] ���֥�������)����ά���ϸ��߻��郎�Ȥ���
-@raise Net::IMAP::NoResponseError �᡼��ܥå�����¸�ߤ��ʤ�����ȯ�����ޤ�
+@param mailbox メッセージを追加するメールボックス名(文字列)
+@param message メッセージ文字列
+@param flags メッセージに付加するフラグ([[c:Symbol]] の配列)
+@param date_time メッセージの時刻([[c:Time]] オブジェクト)。省略時は現在時刻が使われる
+@raise Net::IMAP::NoResponseError メールボックスが存在しない場合に発生します
 
 
 --- check -> Net::IMAP::TaggedResponse
-CHECK ���ޥ�ɤ����ꡢ���߽������Ƥ���᡼��ܥå�����
-�����å��ݥ���Ȥ��׵ᤷ�ޤ���
+CHECK コマンドを送り、現在処理しているメールボックスの
+チェックポイントを要求します。
 
-�����å��ݥ���Ȥ��׵�Ȥϡ���������������α���֤ˤʤäƤ���
-����λ�����뤳�Ȥ��̣���ޤ����㤨�Х����ˤ���᡼���
-�ǡ�����ǥ������˽񤭹��ि�ᡢfsync��Ƥ���ꤹ�뤳�ȤǤ���
-�ºݤ˲����Ԥʤ��뤫�ϥ����Фμ����ˤ��ޤ���������Ԥʤ��ʤ�
-���⤢��ޤ���
+チェックポイントの要求とは、サーバ内部で保留状態になっている
+操作を完了させることを意味します。例えばメモリ上にあるメールの
+データをディスクに書き込むため、fsyncを呼んだりすることです。
+実際に何が行なわれるかはサーバの実装によりますし、何も行なわれない
+場合もあります。
 
 
 --- close -> Net::IMAP::TaggedResponse
-CLOSE ���ޥ�ɤ����ꡢ������Υ᡼��ܥå������Ĥ��ޤ���
+CLOSE コマンドを送り、処理中のメールボックスを閉じます。
 
-���Υ��ޥ�ɤˤ�äơ��ɤΥ᡼��ܥå��������򤵤�Ƥ��ʤ�
-���֤˰ܹԤ��ޤ���
-������ \Deleted �ե饰���դ���줿�᡼�뤬���٤ƺ������ޤ���
+このコマンドによって、どのメールボックスも選択されていない
+状態に移行します。
+そして \Deleted フラグが付けられたメールがすべて削除されます。
 
 --- expunge -> [Integer] | nil
-EXPUNGE���ޥ�ɤ����ꡢ:Deleted�ե饰�򥻥åȤ�����å�������
-���٤ƽ�����Υ᡼��ܥå������������ޤ���
+EXPUNGEコマンドを送り、:Deletedフラグをセットしたメッセージを
+すべて処理中のメールボックスから削除します。
 
-���������å������� message sequence number ��������֤��ޤ���
+削除したメッセージの message sequence number を配列で返します。
 
-@raise Net::IMAP::NoResponseError �᡼��ܥå����� read-only �Ǥ������ȯ�����ޤ�
+@raise Net::IMAP::NoResponseError メールボックスが read-only である場合に発生します
 
 --- search(keys, charset = nil) -> [Integer]
-SEARCH ���ޥ�ɤ����ꡢ���˹礦��å������� message sequence number
-��������֤��ޤ���
+SEARCH コマンドを送り、条件に合うメッセージの message sequence number
+を配列で返します。
 
-[[m:Net::IMAP#examine]] �⤷���� [[m:Net::IMAP#select]] ��
-���ꤷ���᡼��ܥå����򸡺��оݤȤ��ޤ���
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを検索対象とします。
 
-�����ξ��� key ��ʸ�����1��������⤷����ʸ������Ϥ��ޤ���
+検索の条件は key に文字列の1次元配列もしくは文字列で渡します。
 
-�������� "SUBJECT", "FROM" �ʤɤ��Ѥ��뤳�Ȥ��Ǥ��ޤ���
-�ܤ����� [[RFC:2060]] �� 6.4.4 �򸫤Ƥ���������
+検索条件は "SUBJECT", "FROM" などを用いることができます。
+詳しくは [[RFC:2060]] の 6.4.4 を見てください。
 
-��:
+例:
   p imap.search(["SUBJECT", "hello"])
   #=> [1, 6, 7, 8]
   p imap.search(["SUBJECT", "hello", "FROM", "foo@example.com"])
@@ -624,24 +624,24 @@ SEARCH ���ޥ�ɤ����ꡢ���˹礦��å������� message sequence number
   p imap.search('SUBJECT "hello"')
   #=> [1, 6, 7, 8]
 
-@param key ��������(ʸ���������⤷����ʸ����)
-@param charset �������Ѥ���charset
+@param key 検索キー(文字列の配列もしくは文字列)
+@param charset 検索に用いるcharset
 @see [[m:Net::IMAP#search]]
 
 --- uid_search(keys, charset = nil) -> [Integer]
 
-UID SEARCH ���ޥ�ɤ����ꡢ���˹礦��å������� UID
-��������֤��ޤ���
+UID SEARCH コマンドを送り、条件に合うメッセージの UID
+を配列で返します。
 
-[[m:Net::IMAP#examine]] �⤷���� [[m:Net::IMAP#select]] ��
-���ꤷ���᡼��ܥå����򸡺��оݤȤ��ޤ���
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを検索対象とします。
 
-�����ξ��� key ��ʸ�����1��������⤷����ʸ������Ϥ��ޤ���
+検索の条件は key に文字列の1次元配列もしくは文字列で渡します。
 
-�������� "SUBJECT", "FROM" �ʤɤ��Ѥ��뤳�Ȥ��Ǥ��ޤ���
-�ܤ����� [[RFC:2060]] �� 6.4.4 �򸫤Ƥ���������
+検索条件は "SUBJECT", "FROM" などを用いることができます。
+詳しくは [[RFC:2060]] の 6.4.4 を見てください。
 
-��:
+例:
   p imap.uid_search(["SUBJECT", "hello"])
   #=> [1, 6, 7, 8]
   p imap.uid_search(["SUBJECT", "hello", "FROM", "foo@example.com"])
@@ -649,26 +649,26 @@ UID SEARCH ���ޥ�ɤ����ꡢ���˹礦��å������� UID
   p imap.uid_search('SUBJECT "hello"')
   #=> [1, 6, 7, 8]
 
-@param key ��������(ʸ���������⤷����ʸ����)
-@param charset �������Ѥ���charset
+@param key 検索キー(文字列の配列もしくは文字列)
+@param charset 検索に用いるcharset
 @see [[m:Net::IMAP#uid_search]]
 
 --- fetch(set, attr) -> [Net::IMAP::FetchData]
 
-FETCH ���ޥ�ɤ����ꡢ�᡼��ܥå�����Υ�å�������
-�ؤ���ǡ�����������ޤ���
+FETCH コマンドを送り、メールボックス内のメッセージに
+関するデータを取得します。
 
-[[m:Net::IMAP#examine]] �⤷���� [[m:Net::IMAP#select]] ��
-���ꤷ���᡼��ܥå������оݤȤ��ޤ���
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを対象とします。
 
-set ���оݤȤ����å���������ꤷ�ޤ���
-����ˤ� sequence number��sequence number �����󡢤⤷����
-[[c:Range]] ���֥������Ȥ��Ϥ��ޤ���
-attr �ˤϼ������륢�ȥ�ӥ塼�Ȥ�ʸ�����������Ϥ��Ƥ���������
-�����ǽ�ʥ��ȥ�ӥ塼�ȤˤĤ��Ƥ� [[m:Net::IMAP::FetchData#attr]] 
-�򸫤Ƥ���������
+set で対象とするメッセージを指定します。
+これには sequence number、sequence number の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
+attr には取得するアトリビュートを文字列の配列で渡してください。
+指定可能なアトリビュートについては [[m:Net::IMAP::FetchData#attr]] 
+を見てください。
 
-��:
+例:
 
   p imap.fetch(6..8, "UID")
   #=> [#<Net::IMAP::FetchData seqno=6, attr={"UID"=>98}>, #<Net::IMAP::FetchData seqno=7, attr={"UID"=>99}>, #<Net::IMAP::FetchData seqno=8, attr={"UID"=>100}>]
@@ -684,266 +684,266 @@ attr �ˤϼ������륢�ȥ�ӥ塼�Ȥ�ʸ�����������Ϥ��Ƥ���������
   p data.attr["UID"]
   #=> 98
 
-@param set �����оݤΥ�å������� sequence number
-@param attr ���ȥ�ӥ塼��(ʸ��������)
+@param set 処理対象のメッセージの sequence number
+@param attr アトリビュート(文字列配列)
 @see [[m:Net::IMAP#uid_fetch]]
 
 --- uid_fetch(set, attr) -> [Net::IMAP::FetchData]
 
-UID FETCH ���ޥ�ɤ����ꡢ�᡼��ܥå�����Υ�å�������
-�ؤ���ǡ�����������ޤ���
+UID FETCH コマンドを送り、メールボックス内のメッセージに
+関するデータを取得します。
 
-[[m:Net::IMAP#examine]] �⤷���� [[m:Net::IMAP#select]] ��
-���ꤷ���᡼��ܥå������оݤȤ��ޤ���
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを対象とします。
 
-set ���оݤȤ����å���������ꤷ�ޤ���
-����ˤ� UID��UID �����󡢤⤷����
-[[c:Range]] ���֥������Ȥ��Ϥ��ޤ���
-attr �ˤϼ������륢�ȥ�ӥ塼�Ȥ�ʸ�����������Ϥ��Ƥ���������
-�����ǽ�ʥ��ȥ�ӥ塼�ȤˤĤ��Ƥ� [[m:Net::IMAP::FetchData#attr]] 
-�򸫤Ƥ���������
+set で対象とするメッセージを指定します。
+これには UID、UID の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
+attr には取得するアトリビュートを文字列の配列で渡してください。
+指定可能なアトリビュートについては [[m:Net::IMAP::FetchData#attr]] 
+を見てください。
 
-@param set �����оݤΥ�å������� UID
-@param attr ���ȥ�ӥ塼��(ʸ��������)
+@param set 処理対象のメッセージの UID
+@param attr アトリビュート(文字列配列)
 @see [[m:Net::IMAP#fetch]]
 
 --- store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
-STORE ���ޥ�ɤ����ꡢ�᡼��ܥå�����Υ�å�������
-�������ޤ���
+STORE コマンドを送り、メールボックス内のメッセージを
+更新します。
 
-set �ǹ��������å���������ꤷ�ޤ���
-����ˤ� sequence number��sequence number �����󡢤⤷����
-[[c:Range]] ���֥������Ȥ��Ϥ��ޤ���
+set で更新するメッセージを指定します。
+これには sequence number、sequence number の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
 
-[[m:Net::IMAP#select]] �ǻ��ꤷ���᡼��ܥå������оݤȤ��ޤ���
+[[m:Net::IMAP#select]] で指定したメールボックスを対象とします。
 
-attr �ǲ���ɤΤ褦���Ѳ������뤫����ꤷ�ޤ���
-�ʲ�����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+attr で何をどのように変化させるかを指定します。
+以下を指定することができます。
   * "FLAGS"
   * "+FLAGS"
   * "-FLAGS"
-���줾���å������Υե饰���֤��������ɲá�������̣���ޤ���
-�ܤ����� [[RFC:2060]] �� 6.4.6 �򻲹ͤˤ��Ƥ���������
+それぞれメッセージのフラグの置き換え、追加、削除を意味します。
+詳しくは [[RFC:2060]] の 6.4.6 を参考にしてください。
 
-flags �ˤ� ����ܥ��������֤��������ɲä⤷���Ϻ�������
-�ե饰����ꤷ�ޤ���
+flags には シンボルの配列で置き換え、追加もしくは削除される
+フラグを指定します。
 
-�֤��ͤϹ������줿���Ƥ� [[c:Net::IMAP::FetchData]] ���֥������Ȥ�
-������֤��ޤ���
+返り値は更新された内容を [[c:Net::IMAP::FetchData]] オブジェクトの
+配列で返します。
 
-��:
+例:
 
   p imap.store(6..8, "+FLAGS", [:Deleted])
   #=> [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS"=>[:Seen, :Deleted]}>]
 
-@param set ���������å�������sequence number
-@param attr ��������(ʸ����)
-@param flags ��������([[c:Symbol]] ������)
+@param set 更新するメッセージのsequence number
+@param attr 更新方式(文字列)
+@param flags 更新内容([[c:Symbol]] の配列)
 @see [[m:Net::IMAP#uid_store]], [[m:Net::IMAP#fetch]]
 
 --- uid_store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
 
-UID STORE ���ޥ�ɤ����ꡢ�᡼��ܥå�����Υ�å�������
-�������ޤ���
+UID STORE コマンドを送り、メールボックス内のメッセージを
+更新します。
 
-set �ǹ��������å���������ꤷ�ޤ���
-����ˤ� UID��UID �����󡢤⤷����
-[[c:Range]] ���֥������Ȥ��Ϥ��ޤ���
+set で更新するメッセージを指定します。
+これには UID、UID の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
 
-[[m:Net::IMAP#select]] �ǻ��ꤷ���᡼��ܥå������оݤȤ��ޤ���
+[[m:Net::IMAP#select]] で指定したメールボックスを対象とします。
 
-attr �ǲ���ɤΤ褦���Ѳ������뤫����ꤷ�ޤ���
-�ʲ�����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+attr で何をどのように変化させるかを指定します。
+以下を指定することができます。
   * "FLAGS"
   * "+FLAGS"
   * "-FLAGS"
-���줾���å������Υե饰���֤��������ɲá�������̣���ޤ���
-�ܤ����� [[RFC:2060]] �� 6.4.6 �򻲹ͤˤ��Ƥ���������
+それぞれメッセージのフラグの置き換え、追加、削除を意味します。
+詳しくは [[RFC:2060]] の 6.4.6 を参考にしてください。
 
-�֤��ͤϹ������줿���Ƥ� [[c:Net::IMAP::FetchData]] ���֥������Ȥ�
-������֤��ޤ���
+返り値は更新された内容を [[c:Net::IMAP::FetchData]] オブジェクトの
+配列で返します。
 
-@param set ���������å������� UID
-@param attr ��������(ʸ����)
-@param flags ��������([[c:Symbol]] ������)
+@param set 更新するメッセージの UID
+@param attr 更新方式(文字列)
+@param flags 更新内容([[c:Symbol]] の配列)
 
 @see [[m:Net::IMAP#store]], [[m:Net::IMAP#uid_fetch]]
 
 --- copy(set, mailbox) -> Net::IMAP::TaggedResponse
-COPY ���ޥ�ɤ����ꡢ���ꤷ����å�������
-���ꤷ���᡼��ܥå������������ɲä��ޤ���
+COPY コマンドを送り、指定したメッセージを
+指定したメールボックスの末尾に追加します。
 
-set �ǥ��ԡ������å���������ꤷ�ޤ���
-message sequence number(����)��
-message sequence number�����󡢤⤷���� [[c:Range]] ��
-���ꤷ�ޤ������ԡ����Υ᡼��ܥå�����
-[[m:Net::IMAP#examine]] �⤷���� [[m:Net::IMAP#select]] ��
-���ꤷ����Τ��Ѥ��ޤ���
-mailbox �ϥ��ԡ���Υ᡼��ܥå����Ǥ���
+set でコピーするメッセージを指定します。
+message sequence number(整数)、
+message sequence numberの配列、もしくは [[c:Range]] で
+指定します。コピー元のメールボックスは
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したものを用います。
+mailbox はコピー先のメールボックスです。
 
-@param set ���ԡ������å������� message sequence number
-@param mailbox ���ԡ���Υ᡼��ܥå���(ʸ����)
+@param set コピーするメッセージの message sequence number
+@param mailbox コピー先のメールボックス(文字列)
 @see [[m:Net::IMAP#uid_copy]]
 
 --- uid_copy(set, mailbox) -> Net::IMAP::TaggedResponse
-UID COPY ���ޥ�ɤ����ꡢ���ꤷ����å�������
-���ꤷ���᡼��ܥå������������ɲä��ޤ���
+UID COPY コマンドを送り、指定したメッセージを
+指定したメールボックスの末尾に追加します。
 
-set �ǥ��ԡ������å���������ꤷ�ޤ���
-UID (����)��
-UID �����󡢤⤷���� [[c:Range]] ��
-���ꤷ�ޤ������ԡ����Υ᡼��ܥå�����
-[[m:Net::IMAP#examine]] �⤷���� [[m:Net::IMAP#select]] ��
-���ꤷ����Τ��Ѥ��ޤ���
-mailbox �ϥ��ԡ���Υ᡼��ܥå����Ǥ���
+set でコピーするメッセージを指定します。
+UID (整数)、
+UID の配列、もしくは [[c:Range]] で
+指定します。コピー元のメールボックスは
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したものを用います。
+mailbox はコピー先のメールボックスです。
 
-@param set ���ԡ������å������� UID
-@param mailbox ���ԡ���Υ᡼��ܥå���(ʸ����)
+@param set コピーするメッセージの UID
+@param mailbox コピー先のメールボックス(文字列)
 @see [[m:Net::IMAP#copy]]
 
 --- sort(sort_keys, search_keys, charset) -> [Integer]
 --- uid_sort(sort_keys, search_keys, charset) -> [Integer]
-SORT ���ޥ�����ꡢ�᡼��ܥå������
-��å������򥽡��Ȥ�����̤��֤��ޤ���
+SORT コマンド送り、メールボックス内の
+メッセージをソートした結果を返します。
 
-SORT ���ޥ�ɤ� [[RFC:5256]] ���������Ƥ��ޤ���
-�ܤ����Ϥ�����򻲾Ȥ��Ƥ���������
-���Υ��ޥ�ɤ� [[m:Net::IMAP#capability]] ���֤��ͤ򸫤뤳�Ȥ�
-���Ѳ�ǽ���ɤ���Ƚ�ǤǤ��ޤ���
+SORT コマンドは [[RFC:5256]] で定義されています。
+詳しくはそちらを参照してください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
-sort_keys �ˤϥ����Ƚ����륭����ʸ���������ǻ��ꤷ�ޤ���
-"ARRIVAL", "CC", "FROM", "TO", "SUBJECT" �ʤɤ�����Ǥ��ޤ���
-�ܤ����� [[RFC:5265]] �� BASE.6.4.SORT �ν�򸫤Ƥ���������
+sort_keys にはソート順を決めるキーを文字列の配列で指定します。
+"ARRIVAL", "CC", "FROM", "TO", "SUBJECT" などが指定できます。
+詳しくは [[RFC:5265]] の BASE.6.4.SORT の所を見てください。
 
-search_key �ˤϸ��������Ϥ��ޤ���[[m:Net::IMAP#search]] ��
-�ۤ�Ʊ���Ǥ������ξ��˥ޥå������å������Τߤ������Ȥ���ޤ���
+search_key には検索条件を渡します。[[m:Net::IMAP#search]] と
+ほぼ同じです。この条件にマッチするメッセージのみがソートされます。
 
-[[m:Net::IMAP#examine]] �⤷����
-[[m:Net::IMAP#select]] �ǻ��ꤷ���᡼��ܥå������оݤȤ��ޤ���
+[[m:Net::IMAP#examine]] もしくは
+[[m:Net::IMAP#select]] で指定したメールボックスを対象とします。
 
-�֤��ͤ� message sequence number ��������֤��ޤ���
+返り値は message sequence number の配列を返します。
 
-��:
+例:
   p imap.sort(["FROM"], ["ALL"], "US-ASCII")
   #=> [1, 2, 3, 5, 6, 7, 8, 4, 9]
   p imap.sort(["DATE"], ["SUBJECT", "hello"], "US-ASCII")
   #=> [6, 7, 8, 1]
-@param sort_key �����Ƚ�Υ���(ʸ��������)
-@param search_key �������(ʸ��������)
-@param charset �������β����Ѥ���CHARSET̾(ʸ����)
+@param sort_key ソート順のキー(文字列配列)
+@param search_key 検索条件(文字列配列)
+@param charset 検索条件の解釈に用いるCHARSET名(文字列)
 
 --- setquota(mailbox, quota) -> Net::IMAP::TaggedResponse
-SETQUOTA ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå�����
-quota �����ꤷ�ޤ���
+SETQUOTA コマンドを送り、指定したメールボックスに
+quota を設定します。
 
-quota �� nil �ʤ�С�mailbox �� quota ���˴����ޤ���
-quota �������ʤ� STORAGE �򤽤��ͤ��ѹ����ޤ���
+quota が nil ならば、mailbox の quota を破棄します。
+quota が整数なら STORAGE をその値に変更します。
 
-�ܤ����� [[RFC:2087]] �򸫤Ƥ���������
-���Υ��ޥ�ɤ� [[m:Net::IMAP#capability]] ���֤��ͤ򸫤뤳�Ȥ�
-���Ѳ�ǽ���ɤ���Ƚ�ǤǤ��ޤ���
+詳しくは [[RFC:2087]] を見てください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
-@param mailbox quota �����ꤹ��᡼��ܥå���̾(ʸ����)
-@param quota quota����(���ȥ졼���Υ��������⤷���� nil)
-@raise Net::IMAP::NoResponseError ���ꤷ���᡼��ܥå����� quota root 
-       �Ǥʤ���硢�⤷���ϸ��¤�¸�ߤ��ʤ�����ȯ�����ޤ���
+@param mailbox quota を設定するメールボックス名(文字列)
+@param quota quotaの値(ストレージのサイズ、もしくは nil)
+@raise Net::IMAP::NoResponseError 指定したメールボックスが quota root 
+       でない場合、もしくは権限が存在しない場合に発生します。
 
 --- getquota(mailbox) -> [Net::IMAP::MailboxQuota]
-GETQUOTA ���ޥ�ɤ����ä�
-���ꤷ���᡼��ܥå����� quota �ξ�����֤��ޤ���
+GETQUOTA コマンドを送って
+指定したメールボックスの quota の情報を返します。
 
-quota �ξ���� [[c:Net::IMAP::MailboxQuota]] ���֥������Ȥ������
-�����ޤ���
+quota の情報は [[c:Net::IMAP::MailboxQuota]] オブジェクトの配列で
+得られます。
 
-�ܤ����� [[RFC:2087]] �򸫤Ƥ���������
-���Υ��ޥ�ɤ� [[m:Net::IMAP#capability]] ���֤��ͤ򸫤뤳�Ȥ�
-���Ѳ�ǽ���ɤ���Ƚ�ǤǤ��ޤ���
+詳しくは [[RFC:2087]] を見てください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
-@param mailbox quota ������������᡼��ܥå���̾
-@raise Net::IMAP::NoResponseError ���ꤷ���᡼��ܥå����� quota root �Ǥʤ�����ȯ�����ޤ�
+@param mailbox quota 情報を得たいメールボックス名
+@raise Net::IMAP::NoResponseError 指定したメールボックスが quota root でない場合に発生します
 
 --- getquotaroot(mailbox) -> [Net::IMAP::MailboxQuotaRoot | Net::IMAP::MailboxQuota]
-GETQUOTAROOT ���ޥ�ɤ����ä�
-���ꤷ���᡼��ܥå����� quota root �ΰ����ȡ�
-��Ϣ���� quota �ξ�����֤��ޤ���
+GETQUOTAROOT コマンドを送って
+指定したメールボックスの quota root の一覧と、
+関連する quota の情報を返します。
 
-quota root �ξ���� [[c:Net::IMAP::MailboxQuotaRoot]] �Υ��֥������Ȥǡ�
-�֤��ͤ���������ͣ��ޤޤ�Ƥ��ޤ���
-quota �ξ���ϥ᡼��ܥå����˴�Ϣ�դ���줿 quota root ���Ȥ�
-[[c:Net::IMAP::MailboxQuota]] ���֥������Ȥ������ޤ���
+quota root の情報は [[c:Net::IMAP::MailboxQuotaRoot]] のオブジェクトで、
+返り値の配列の中に唯一含まれています。
+quota の情報はメールボックスに関連付けられた quota root ごとに
+[[c:Net::IMAP::MailboxQuota]] オブジェクトで得られます。
 
-�ܤ����� [[RFC:2087]] �򸫤Ƥ���������
-���Υ��ޥ�ɤ� [[m:Net::IMAP#capability]] ���֤��ͤ򸫤뤳�Ȥ�
-���Ѳ�ǽ���ɤ���Ƚ�ǤǤ��ޤ���
+詳しくは [[RFC:2087]] を見てください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
-@param mailbox quota root ���������᡼��ܥå���̾(ʸ����)
-@raise Net::IMAP::NoResponseError ���ꤷ���᡼��ܥå�����¸�ߤ��ʤ�����ȯ�����ޤ�
+@param mailbox quota root を得たいメールボックス名(文字列)
+@raise Net::IMAP::NoResponseError 指定したメールボックスが存在しない場合に発生します
 
 --- setacl(mailbox, user, rights)
 
-SETACL ���ޥ�ɤ����ꡢ���ꤷ���᡼��ܥå�����
-���ꤷ���桼���˴ؤ��븢�¤����ꤷ�ޤ���
+SETACL コマンドを送り、指定したメールボックスに
+指定したユーザに関する権限を設定します。
 
-rights �ˤ����ꤹ�븢�¤�ɽ��ʸ�������ꤷ�ޤ���
-�ɤΤ褦��ʸ�������ꤹ�٤����� [[RFC:2086]] �򻲾Ȥ��Ƥ���������
-rights �� nil ���Ϥ��ȡ���ʸ�������ꤷ���Τ�Ʊ�͡��Ĥޤ�
-���٤Ƥθ��¤������ޤ���
+rights には設定する権限を表す文字列を指定します。
+どのような文字列を指定すべきかは [[RFC:2086]] を参照してください。
+rights に nil を渡すと、空文字列を指定したのと同様、つまり
+すべての権限を削除します。
 
-@param mailbox ���¤����ꤹ��᡼��ܥå�����̾��(ʸ����)
-@param user ���¤����ꤹ��桼����̾��(ʸ����)
-@param rights ���¤�ɽ��ʸ����
+@param mailbox 権限を設定するメールボックスの名前(文字列)
+@param user 権限を設定するユーザの名前(文字列)
+@param rights 権限を表す文字列
 
 --- getacl(mailbox) -> [Net::IMAP::MailboxACLItem]
-GETACL ���ޥ�ɤ����ꡢ�᡼��ܥå����� 
-ACL(Access Control List) ��������ޤ���
+GETACL コマンドを送り、メールボックスの 
+ACL(Access Control List) を取得します。
 
-[[m:Net::IMAP#getacl]] �ǻ��ꤷ���᡼��ܥå�����
-�Ф����餫�θ��¤���ĳƥ桼�����Ф���
-[[c:Net::IMAP::MailboxACLItem]] ���֥������Ȥ�
-���졢���������֤���ޤ���
+[[m:Net::IMAP#getacl]] で指定したメールボックスに
+対し何らかの権限を持つ各ユーザに対して
+[[c:Net::IMAP::MailboxACLItem]] オブジェクトが
+作られ、その配列が返されます。
 
-GETACL ���ޥ�ɤ� [[RFC:2086]] ���������Ƥ��ޤ���
-�ܤ����Ϥ�����򻲾Ȥ��Ƥ���������
+GETACL コマンドは [[RFC:2086]] で定義されています。
+詳しくはそちらを参照してください。
 
-@param mailbox �᡼��ܥå���̾(ʸ����)
+@param mailbox メールボックス名(文字列)
 @see [[c:Net::IMAP::MailboxACLItem]]
 
 --- add_response_handler(handler) -> ()
 --- add_response_handler(handler){|resp| ...} -> ()
-�쥹�ݥ󥹥ϥ�ɥ���ɲä��ޤ���
+レスポンスハンドラを追加します。
 
-�쥹�ݥ󥹥ϥ�ɥ�ϥ����Ф�������������뤴�Ȥ�
-�ƤӤ�����ޤ����ϥ�ɥ�ˤ�
-[[c:Net::IMAP::TaggedResponse]] �⤷����
-[[c:Net::IMAP::UntaggedResponse]] ���֥������Ȥ�
-�Ϥ���ޤ���
+レスポンスハンドラはサーバから応答を受け取るごとに
+呼びだされます。ハンドラには
+[[c:Net::IMAP::TaggedResponse]] もしくは
+[[c:Net::IMAP::UntaggedResponse]] オブジェクトが
+渡されます。
 
-��˥����Ф������Ʊ��Ū�ʥ��٥�Ȥ������뤿��
-���Ѥ��ޤ����㤨�� EXISTS ������������
-(�᡼��ܥå����˿����ʥ᡼�뤬�ɲä��줿�����ߥ󥰤�ȯ�����ޤ�)
-����ʤɤ��Ѥ����ޤ���
+主にサーバからの非同期的なイベントを受け取るため
+に用います。例えば EXISTS 応答を受け取る
+(メールボックスに新たなメールが追加されたタイミングで発生します)
+ためなどに用いられます。
 
-�쥹�ݥ󥹥ϥ�ɥ�ϥᥤ��Υ���åɤȤ��̤Υ���åɤ�
-�ƤӤ�����뤳�Ȥ����դ��Ƥ���������
+レスポンスハンドラはメインのスレッドとは別のスレッドで
+呼びだされることに注意してください。
 
-��:
+例:
 
   imap.add_response_handler do |resp|
     p resp
   end
 
-@param handler �ɲä���ϥ�ɥ�([[c:Proc]] �� [[c:Method]] ���֥�������)
+@param handler 追加するハンドラ([[c:Proc]] や [[c:Method]] オブジェクト)
 @see [[m:Net::IMAP#remove_response_handler]]
 
 --- remove_response_handler(handler) -> ()
-�쥹�ݥ󥹥ϥ�ɥ�������ޤ���
+レスポンスハンドラを削除します。
 
-@param handler �������ϥ�ɥ�
+@param handler 削除するハンドラ
 @see [[m:Net::IMAP#add_response_handler]]
 
 --- response_handlers -> Array
-���ꤵ��Ƥ���쥹�ݥ󥹥ϥ�ɥ����Ƥ�
-������֤��ޤ���
+設定されているレスポンスハンドラ全てを
+配列で返します。
 
 @see [[m:Net::IMAP#add_response_handler]]
 
@@ -951,247 +951,247 @@ GETACL ���ޥ�ɤ� [[RFC:2086]] ���������Ƥ��ޤ���
 --- starttls(options) -> Net::IMAP::TaggedResponse
 --- starttls(certs, verify) -> Net::IMAP::TaggedResponse
 
-STARTTLS ���ޥ�ɤ����ä� TLS �Υ��å����򳫻Ϥ��ޤ���
+STARTTLS コマンドを送って TLS のセッションを開始します。
 
-options �� [[lib:openssl]] ���Ϥ����ץ�������ꤷ�ޤ���
-[[m:OpenSSL::SSL::SSLContext#set_params]] �ΰ�����Ʊ����̣�Ǥ���
+options で [[lib:openssl]] に渡すオプションを指定します。
+[[m:OpenSSL::SSL::SSLContext#set_params]] の引数と同じ意味です。
 
-�ߴ����Τ��ᡢcerts �Ǿ�����or������ǥ��쥯�ȥ�Υե�����̾(ʸ����)��
-verify �Ǹ��ڤ��뤫�ɤ���([[m:Net::IMAP::VERIFY_PEER]]��
-[[m:Net::IMAP::VERIFY_NONE]]���б����ޤ�)��
-���ꤹ�뤳�Ȥ��Ǥ��ޤ���
+互換性のため、certs で証明書or証明書ディレクトリのファイル名(文字列)、
+verify で検証するかどうか([[m:Net::IMAP::VERIFY_PEER]]、
+[[m:Net::IMAP::VERIFY_NONE]]に対応します)を
+指定することができます。
 
-@param options SSL/TLS �Υ��ץ����([[c:Hash]] ���֥�������)
-@param certs ������ե�����̾���⤷���Ͼ�����ǥ��쥯�ȥ�̾(ʸ����)
-@param verify ���ʤ� SSL/TLS ��³���˾�����򸡾ڤ��ޤ�
+@param options SSL/TLS のオプション([[c:Hash]] オブジェクト)
+@param certs 証明書ファイル名、もしくは証明書ディレクトリ名(文字列)
+@param verify 真なら SSL/TLS 接続時に証明書を検証します
 
 #@end
 
 #@since 1.8.2
 --- disconnected? -> bool
 
-�����ФȤ���³�����Ǥ���Ƥ���п����֤��ޤ���
+サーバとの接続が切断されていれば真を返します。
 
 @see [[m:Net::IMAP#disconnect]]
 
 #@end
 
 --- thread(algorithm, search_keys, charset) -> [Net::IMAP::ThreadMember]
-THREAD���ޥ�ɤ����ꡢ�᡼��ܥå����򸡺�������̤�
-����åɷ������ڹ�¤���֤��ޤ���
+THREADコマンドを送り、メールボックスを検索した結果を
+スレッド形式の木構造で返します。
 
-THREAD ���ޥ�ɤ� [[RFC:5256]] ���������Ƥ��ޤ���
-�ܤ����Ϥ�����򻲾Ȥ��Ƥ���������
-���Υ��ޥ�ɤ� [[m:Net::IMAP#capability]] ���֤��ͤ򸫤뤳�Ȥ�
-���Ѳ�ǽ���ɤ���Ƚ�ǤǤ��ޤ���
+THREAD コマンドは [[RFC:5256]] で定義されています。
+詳しくはそちらを参照してください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
-algorithm ���ڹ�¤����ꤹ�뤿��Υ��르�ꥺ�����ꤷ�ޤ���
-�ʲ���2�Ĥ����Ѳ�ǽ�Ǥ���
-  * "ORDEREDSUBJECT" subject��Ȥä�ʿó�˶��ڤ����
-  * "REFERENCES" �ɤΥ�å��������ֻ��򤷤Ƥ��뤫�򸫤��ڹ�¤����
-�ܤ����� [[RFC:5256]] �򸫤Ƥ���������
+algorithm は木構造を決定するためのアルゴリズムを指定します。
+以下の2つが利用可能です。
+  * "ORDEREDSUBJECT" subjectを使って平坦に区切るだけ
+  * "REFERENCES" どのメッセージに返事をしているかを見て木構造を作る
+詳しくは [[RFC:5256]] を見てください。
 
-search_key �ˤϸ��������Ϥ��ޤ���
-[[m:Net::IMAP#search]] ��Ʊ���Ǥ���
+search_key には検索条件を渡します。
+[[m:Net::IMAP#search]] と同等です。
 
 
-@param algorithm ����åɹ�¤���ۥ��르�ꥺ��̾(ʸ����)
-@param search_key �������(ʸ��������)
-@param charset �������β����Ѥ���CHARSET̾(ʸ����)
+@param algorithm スレッド構造構築アルゴリズム名(文字列)
+@param search_key 検索条件(文字列配列)
+@param charset 検索条件の解釈に用いるCHARSET名(文字列)
 @see [[c:Net::IMAP::ThreadMember]], [[m:Net::IMAP#uid_thread]]
 
 --- uid_thread(algorithm, search_keys, charset)  -> [Net::IMAP::ThreadMember]
-THREAD���ޥ�ɤ����ꡢ�᡼��ܥå����򸡺�������̤�
-����åɷ������ڹ�¤���֤��ޤ���
+THREADコマンドを送り、メールボックスを検索した結果を
+スレッド形式の木構造で返します。
 
-�ۤ� [[m:Net::IMAP#thread]] ��Ʊ���Ǥ������֤äƤ��륪�֥������Ȥ�
-[[m:Net::IMAP::ThreadMember#seqno]] �����Ƥ� message sequence number
-�ǤϤʤ� UID �Ȥʤ�ޤ���
+ほぼ [[m:Net::IMAP#thread]] と同じですが、返ってくるオブジェクトの
+[[m:Net::IMAP::ThreadMember#seqno]] の内容が message sequence number
+ではなく UID となります。
 
-@param algorithm ����åɹ�¤���ۥ��르�ꥺ��̾(ʸ����)
-@param search_key �������(ʸ��������)
-@param charset �������β����Ѥ���CHARSET̾(ʸ����)
+@param algorithm スレッド構造構築アルゴリズム名(文字列)
+@param search_key 検索条件(文字列配列)
+@param charset 検索条件の解釈に用いるCHARSET名(文字列)
 @see [[c:Net::IMAP::ThreadMember]], [[m:Net::IMAP#thread]]
 
 
 --- client_thread -> Thread
 #@until 1.9.1
-�㳰�����Ф���륹��åɤ��֤��ޤ���
+例外が送出されるスレッドを返します。
 
 #@else
-���Υ᥽�åɤ� obsolete �Ǥ����Ȥ�ʤ��Ǥ���������
+このメソッドは obsolete です。使わないでください。
 #@end
 
 --- client_thread=(th)
 #@until 1.9.1
-�㳰�����Ф���륹��åɤ����ꤷ�ޤ���
+例外が送出されるスレッドを設定します。
 
-@param th ���ꤹ�륹��å�
+@param th 設定するスレッド
 #@else
-���Υ᥽�åɤ� obsolete �Ǥ����Ȥ�ʤ��Ǥ���������
+このメソッドは obsolete です。使わないでください。
 #@end
 
 #@since 1.9.2
 --- idle {|resp| ...} -> Net::IMAP::TaggedResponse
-IDLE ̿������ꡢ�᡼��ܥå�������Ʊ��Ū�Ѳ����Ԥ������ޤ���
+IDLE 命令を送り、メールボックスの非同期的変化を待ち受けます。
 
-���Υ᥽�åɤ��Ϥ����֥��å���
-[[m:Net::IMAP#add_response_handler]] �ˤ�ä�
-�쥹�ݥ󥹥ϥ�ɥ�Ȥ����Ѥ����ޤ���
-�ޤ������Υ᥽�åɤ���λ���������
-[[m:Net::IMAP#remove_response_handler]] ��
-�ϥ�ɥ餬�������ޤ���
+このメソッドに渡したブロックは
+[[m:Net::IMAP#add_response_handler]] によって
+レスポンスハンドラとして用いられます。
+また、このメソッドが終了する時点で
+[[m:Net::IMAP#remove_response_handler]] で
+ハンドラが削除されます。
 
-�쥹�ݥ󥹥ϥ�ɥ�ˤĤ��Ƥ�
-[[m:Net::IMAP#add_response_handler]] �򻲾Ȥ��Ƥ���������
+レスポンスハンドラについては
+[[m:Net::IMAP#add_response_handler]] を参照してください。
 
-�̤Υ���åɤ� [[m:Net::IMAP#idle_done]] ��ƤӤ����ޤ�
-���Υ᥽�åɤ�ƤӤ���������åɤ���ߤ��ޤ���
+別のスレッドが [[m:Net::IMAP#idle_done]] を呼びだすまで
+このメソッドを呼びだしたスレッドは停止します。
 
-����̿��� [[RFC:2177]] ���������Ƥ��ޤ����ܤ����Ϥ������
-���Ȥ��Ƥ���������
+この命令は [[RFC:2177]] で定義されています。詳しくはそちらを
+参照してください。
 
 --- idle_done -> ()
-[[m:Net::IMAP#idle]] ��
-��ߤ��Ƥ��륹��åɤ�1�ĵ������ޤ���
+[[m:Net::IMAP#idle]] で
+停止しているスレッドを1つ起こします。
 #@end
 
 == Constants
 --- SEEN -> Symbol
-��:Seen�פȤ�������ܥ���֤��ޤ���
+「:Seen」というシンボルを返します。
 
-���Υ�å������������ɤޤ�Ƥ��뤳�Ȥ��̣���ޤ���
+そのメッセージが既に読まれていることを意味します。
 
-�ե饰��å�����°���Ȥ����Ѥ����ޤ�
-([[m:Net::IMAP::FetchData#attr]])��
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- ANSWERED -> Symbol
-��:Answered�פȤ�������ܥ���֤��ޤ���
+「:Answered」というシンボルを返します。
 
-���Υ�å������������������Ȥ��̣���ޤ���
+そのメッセージに返答したことを意味します。
 
-�ե饰��å�����°���Ȥ����Ѥ����ޤ�
-([[m:Net::IMAP::FetchData#attr]])��
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- FLAGGED -> Symbol
-��:Flagged�פȤ�������ܥ���֤��ޤ���
+「:Flagged」というシンボルを返します。
 
-���Υ�å����������̤ʥե饰��Ω�ƤƤ��뤳�Ȥ��̣���ޤ���
+そのメッセージに特別なフラグを立てていることを意味します。
 
-�ե饰��å�����°���Ȥ����Ѥ����ޤ�
-([[m:Net::IMAP::FetchData#attr]])��
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- DELETED -> Symbol
-��:Deleted�פȤ�������ܥ���֤��ޤ���
+「:Deleted」というシンボルを返します。
 
-��å��������������Ƥ��뤳�Ȥ��̣���ޤ���
-EXPUNGE �Ǵ����˽����ޤ���
+メッセージが削除されていることを意味します。
+EXPUNGE で完全に除去されます。
 
-�ե饰��å�����°���Ȥ����Ѥ����ޤ�
-([[m:Net::IMAP::FetchData#attr]])��
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- DRAFT -> Symbol
-��:Draft�פȤ�������ܥ���֤��ޤ���
+「:Draft」というシンボルを返します。
 
-��å���������ƤǤ��뤳�Ȥ��̣���ޤ���
+メッセージが草稿であることを意味します。
 
-�ե饰��å�����°���Ȥ����Ѥ����ޤ�
-([[m:Net::IMAP::FetchData#attr]])��
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- RECENT -> Symbol
-��:Recent�פȤ�������ܥ���֤��ޤ���
+「:Recent」というシンボルを返します。
 
-��å��������ֺǶ�ץ᡼��ܥå��������夷�����Ȥ��̣���ޤ���
+メッセージが「最近」メールボックスに到着したことを意味します。
 
-�ե饰��å�����°���Ȥ����Ѥ����ޤ�
-([[m:Net::IMAP::FetchData#attr]])��
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- NOINFERIORS -> Symbol
-��:Noinferiors�פȤ�������ܥ���֤��ޤ���
+「:Noinferiors」というシンボルを返します。
 
-���Υ᡼��ܥå�����
-���˻ҥ�٥�γ��ؤ�¸���Բ�ǽ�Ǥ��뤳�Ȥ��̣���ޤ���
+このメールボックスの
+下に子レベルの階層が存在不可能であることを意味します。
 
-LIST������°��
-([[m:Net::IMAP#list]]��[[m:Net::IMAP::MailboxList#attr]])
-�Ȥ����Ѥ����ޤ���
+LIST応答の属性
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 
 --- NOSELECT -> Symbol
-��:Noselect�פȤ�������ܥ���֤��ޤ���
+「:Noselect」というシンボルを返します。
 
-�᡼��ܥå����������ǽ�Ǥʤ����Ȥ��̣���ޤ���
+メールボックスが選択可能でないことを意味します。
 
-LIST������°��
-([[m:Net::IMAP#list]]��[[m:Net::IMAP::MailboxList#attr]])
-�Ȥ����Ѥ����ޤ���
+LIST応答の属性
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 --- MARKED -> Symbol
-��:Marked�פȤ�������ܥ���֤��ޤ���
+「:Marked」というシンボルを返します。
 
-�᡼��ܥå�������interesting�פǤ���ȥ����Фˤ�ä�
-���դ����Ƥ��뤳�Ȥ��̣���ޤ����̾�᡼��ܥå�����
-�������᡼�뤬�Ϥ��Ƥ��뤳�Ȥ��̣���ޤ���
+メールボックスが「interesting」であるとサーバによって
+印付けられていることを意味します。通常メールボックスに
+新しいメールが届いていることを意味します。
 
-LIST������°��
-([[m:Net::IMAP#list]]��[[m:Net::IMAP::MailboxList#attr]])
-�Ȥ����Ѥ����ޤ���
+LIST応答の属性
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 --- UNMARKED -> Symbol
-��:Unmarked�פȤ�������ܥ���֤��ޤ���
+「:Unmarked」というシンボルを返します。
 
-�᡼��ܥå�����
-���դ����Ƥ��ʤ����Ȥ��̣���ޤ���
-�᡼��ܥå����˿������᡼�뤬�Ϥ��Ƥ��ʤ����Ȥ��̣���ޤ���
+メールボックスが
+印付けられていないことを意味します。
+メールボックスに新しいメールが届いていないことを意味します。
 
-LIST������°��
-([[m:Net::IMAP#list]]��[[m:Net::IMAP::MailboxList#attr]])
-�Ȥ����Ѥ����ޤ���
+LIST応答の属性
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
 
-�ܤ����� [[RFC:2060]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] を参照してください。
 
 = class Net::IMAP::ContinuationRequest < Struct
 
-IMAP �� continuation request (̿���³�׵�) ��ɽ�����饹�Ǥ���
+IMAP の continuation request (命令継続要求) を表すクラスです。
 
-�̾盧�Υ��饹��ľ�ܰ������ȤϤ���ޤ���
-�쥹�ݥ󥹥ϥ�ɥ�([[c:Net::IMAP#add_response_handler]])
-���Ϥ���ޤ���
+通常このクラスを直接扱うことはありません。
+レスポンスハンドラ([[c:Net::IMAP#add_response_handler]])
+に渡されます。
 
-�ܤ����� [[RFC:2060]] �� 7.5 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2060]] の 7.5 を参照してください。
 
 == Instance Methods
 
 --- data -> Net::IMAP::ResponseText
-�쥹�ݥ󥹤Υǡ������֤��ޤ���
+レスポンスのデータを返します。
 
 --- raw_data -> String
-�쥹�ݥ�ʸ������֤��ޤ���
+レスポンス文字列を返します。
 
 = class Net::IMAP::UntaggedResponse < Struct
 
-IMAP �Υ����դ��쥹�ݥ󥹤�ɽ�����饹�Ǥ���
+IMAP のタグ付きレスポンスを表すクラスです。
 
-IMAP �Υ쥹�ݥ󥹤ˤϥ����դ��Τ�Τȥ����ʤ��Τ�Τ����ꡢ
-�����ʤ��Τ�Τϥ��饤����Ȥ���Υ��ޥ�ɴ�λ�����ǤϤʤ�
-�쥹�ݥ󥹤Ǥ���
+IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
+タグなしのものはクライアントからのコマンド完了応答ではない
+レスポンスです。
 
 @see [[c:Net::IMAP::TaggedResponse]]
 
@@ -1199,10 +1199,10 @@ IMAP �Υ쥹�ݥ󥹤ˤϥ����դ��Τ�Τȥ����ʤ��Τ�Τ����ꡢ
 
 --- name -> String
 
-�쥹�ݥ󥹤�̾��(����)���֤��ޤ���
+レスポンスの名前(種類)を返します。
 
-�㤨�аʲ��Τ褦���ͤ��֤��ޤ��������ζ���Ū�ʰ�̣��
-[[RFC:2060]] �򻲹ͤˤ��Ƥ���������
+例えば以下のような値を返します。これらの具体的な意味は
+[[RFC:2060]] を参考にしてください。
   * "OK"
   * "NO"
   * "BAD"
@@ -1215,26 +1215,26 @@ IMAP �Υ쥹�ݥ󥹤ˤϥ����դ��Τ�Τȥ����ʤ��Τ�Τ����ꡢ
 
 --- data -> object
 
-�쥹�ݥ󥹤���Ϥ�����̤Υ��֥������Ȥ��֤��ޤ���
+レスポンスを解析した結果のオブジェクトを返します。
 
-�쥹�ݥ󥹤ˤ�äưۤʤ륪�֥������Ȥ��֤��ޤ���
-[[c:Net::IMAP::MailboxList]] �Ǥ��ä���ե饰��ɽ�魯
-����ܥ������Ǥ��ä��ꤷ�ޤ���
+レスポンスによって異なるオブジェクトを返します。
+[[c:Net::IMAP::MailboxList]] であったりフラグを表わす
+シンボルの配列であったりします。
 
 --- raw_data -> String
 
-�쥹�ݥ�ʸ������֤��ޤ���
+レスポンス文字列を返します。
 
 @see [[m:Net::IMAP::UntaggedResponse#data]]
 = class Net::IMAP::TaggedResponse < Struct
 
-IMAP �Υ����դ��쥹�ݥ󥹤�ɽ�����饹�Ǥ���
+IMAP のタグ付きレスポンスを表すクラスです。
 
-IMAP �Υ쥹�ݥ󥹤ˤϥ����դ��Τ�Τȥ����ʤ��Τ�Τ����ꡢ
-�����դ��Υ쥹�ݥ󥹤ϥ��饤����Ȥ�ȯ�Ԥ������ޥ�ɤˤ��
-���������뤫���Ԥ��뤫�Τɤ��餫��
-��λ�������Ȥ��̣���ޤ��������ˤ�ä�
-�ɤΥ��ޥ�ɤ���λ�����Τ��򼨤��ޤ���
+IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
+タグ付きのレスポンスはクライアントが発行したコマンドによる
+操作が成功するか失敗するかのどちらかで
+完了したことを意味します。タグによって
+どのコマンドが完了したのかを示します。
 
 @see [[c:Net::IMAP::UntaggedResponse]]
 
@@ -1242,370 +1242,370 @@ IMAP �Υ쥹�ݥ󥹤ˤϥ����դ��Τ�Τȥ����ʤ��Τ�Τ����ꡢ
 
 --- tag -> String
 
-�쥹�ݥ󥹤��б��դ���줿�������֤��ޤ���
+レスポンスに対応付けられたタグを返します。
 
 --- name -> String
 
-�쥹�ݥ󥹤�̾��(����)���֤��ޤ���
+レスポンスの名前(種類)を返します。
 
-�㤨�аʲ��Τ褦���ͤ��֤��ޤ��������ζ���Ū�ʰ�̣��
-[[RFC:2060]] �򻲹ͤˤ��Ƥ���������
+例えば以下のような値を返します。これらの具体的な意味は
+[[RFC:2060]] を参考にしてください。
   * "OK"
   * "NO"
   * "BAD"
 
 --- data -> Net::IMAP::ResponseText 
 
-�쥹�ݥ󥹤���Ϥ������֥������Ȥ��֤��ޤ���
+レスポンスを解析したオブジェクトを返します。
 
 @see [[c:Net::IMAP::ResponseText]]
 
 --- raw_data -> String
 
-�쥹�ݥ�ʸ������֤��ޤ���
+レスポンス文字列を返します。
 
 @see [[m:Net::IMAP::TaggedResponse#data]]
 
 = class Net::IMAP::ResponseText < Struct
 
-�����Υƥ����Ȥ�ɽ�����饹�Ǥ���
+応答のテキストを表すクラスです。
 
 == Instance Methods
 
 --- code -> Net::IMAP::ResponseCode | nil
-�쥹�ݥ󥹥����ɤ��֤��ޤ���
+レスポンスコードを返します。
 
-�������쥹�ݥ󥹥����ɤ�ޤ�Ǥ��ʤ����� nil ���֤��ޤ���
+応答がレスポンスコードを含んでいない場合は nil を返します。
 
 @see [[c:Net::IMAP::ResponseCode]]
 
 --- text -> String
-�����Υƥ����Ȥ�ʸ������֤��ޤ���
+応答のテキストを文字列で返します。
 
 = class Net::IMAP::ResponseCode < Struct
 
-�����Υ쥹�ݥ󥹥����ɤ�ɽ�����饹�Ǥ���
+応答のレスポンスコードを表すクラスです。
 
-�쥹�ݥ󥹥����ɤˤĤ��Ƥ� [[RFC:2060]] �� 7.1 �򻲾Ȥ��Ƥ���������
+レスポンスコードについては [[RFC:2060]] の 7.1 を参照してください。
 
 == Instance Methods
 
 --- name -> String
-�쥹�ݥ󥹥����ɤ�ɽ��ʸ������֤��ޤ���
+レスポンスコードを表す文字列を返します。
  
-"ALERT"��"PERMANENTFLAGS"��"UIDVALIDITY" �ʤɤ��֤��ޤ���
+"ALERT"、"PERMANENTFLAGS"、"UIDVALIDITY" などを返します。
 
 --- data -> object | nil
-�쥹�ݥ󥹥����ɤΥǡ������֤��ޤ���
+レスポンスコードのデータを返します。
 
-�쥹�ݥ󥹥����ɤμ���ˤ�ä��֤����֥������Ȥϰۤʤ�ޤ���
-�ʤ����� nil ���֤��ޤ���
+レスポンスコードの種類によって返すオブジェクトは異なります。
+ない場合は nil を返します。
 
 = class Net::IMAP::MailboxList < Struct
 
 #@since 1.9.3
-[[m:Net::IMAP#list]]��[[m:Net::IMAP#xlist]]��[[m:Net::IMAP#lsub]]
+[[m:Net::IMAP#list]]、[[m:Net::IMAP#xlist]]、[[m:Net::IMAP#lsub]]
 #@else
-[[m:Net::IMAP#list]]��[[m:Net::IMAP#lsub]]
+[[m:Net::IMAP#list]]、[[m:Net::IMAP#lsub]]
 #@end
-���֤����᡼��ܥå����Υǡ�����ɽ���ޤ���
+で返されるメールボックスのデータを表します。
 
 == Instance Methods
 
 --- attr -> [Symbol]
-�᡼��ܥå�����°���򥷥�ܥ��������֤��ޤ���
+メールボックスの属性をシンボルの配列で返します。
 
-����������륷��ܥ�� [[m:String#capitalize]] �ǥ���ԥ��饤��
-����Ƥ��ޤ���
+これで得られるシンボルは [[m:String#capitalize]] でキャピタライズ
+されています。
 
-��������ˤ��㤨�аʲ��Τ褦���ͤ�ޤ�Ǥ��ޤ���
-�ܤ����� [[RFC:2060]] 7.2.2 �ʤɤ򻲾Ȥ��Ƥ���������
-�ʲ��Τ�ΰʳ��ǡ�IMAP ��Ϣ RFC �ǳ�ĥ���줿�ͤ�ޤ�Ǥ���
-���⤢��ޤ�
+この配列には例えば以下のような値を含んでいます。
+詳しくは [[RFC:2060]] 7.2.2 などを参照してください。
+以下のもの以外で、IMAP 関連 RFC で拡張された値を含んでいる
+場合もあります
   * :Noselect
   * :Noinferiors
   * :Marked
   * :Unmarked
 
 --- delim -> String|nil
-���ض��ڤ�ʸ������֤��ޤ���
+階層区切り文字列を返します。
 
-�ޤä������ؤ�¸�ߤ��ʤ����� nil ���֤��ޤ���
+まったく階層が存在しない場合は nil を返します。
 
 --- name -> String
-�᡼��ܥå�����̾����ʸ������֤��ޤ���
+メールボックスの名前を文字列で返します。
 
 
 = class Net::IMAP::MailboxQuota < Struct
 
-[[m:Net::IMAP#getquota]] �� [[m:Net::IMAP#getquotaroot]] ��������
-quota �ξ����ɽ�����֥������ȤǤ���
+[[m:Net::IMAP#getquota]] や [[m:Net::IMAP#getquotaroot]] で得られる
+quota の情報を表すオブジェクトです。
 
-�ܤ����� [[RFC:2087]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2087]] を参照してください。
 
 
 == Instance Methods
 
 --- mailbox -> String
-quota �����ꤵ��Ƥ���᡼��ܥå�����̾�����֤��ޤ���
+quota が設定されているメールボックスの名前を返します。
 
 --- usage -> Integer
-���ߤΥ᡼��ܥå�����λ����̤��֤��ޤ���
+現在のメールボックス内の使用量を返します。
 
 --- quota -> Integer
-�᡼��ܥå����˻��ꤵ��Ƥ������ͤ��֤��ޤ���
+メールボックスに指定されている上限値を返します。
 
 
 = class Net::IMAP::MailboxQuotaRoot < Struct
 
-[[m:Net::IMAP#getquotaroot]] �η�̤Ȥ���������
-quota root �����ɽ�魯���֥������ȤǤ���
+[[m:Net::IMAP#getquotaroot]] の結果として得られる
+quota root 情報を表わすオブジェクトです。
 
-�ܤ����� [[RFC:2087]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2087]] を参照してください。
 
 == Instance Methods
 
 --- mailbox -> String
-�䤤��碌�����᡼��ܥå�����̾�����֤��ޤ���
+問い合わせしたメールボックスの名前を返します。
 
 --- quotaroots -> [String]
-�䤤��碌�����᡼��ܥå����� quota root ̾��������֤��ޤ���
+問い合わせしたメールボックスの quota root 名を配列で返します。
 
-���ξ��⤢�ꤨ�ޤ���
+空の場合もありえます。
 
 
 = class Net::IMAP::MailboxACLItem < Struct
 
-GETACL �α����γ����Ǥ�ɽ�����饹�Ǥ���
+GETACL の応答の各要素を表すクラスです。
 
-[[m:Net::IMAP#getacl]] ���֤��ͤȤ����Ѥ����ޤ���
+[[m:Net::IMAP#getacl]] の返り値として用いられます。
 
-�ܤ����� [[RFC:2086]] �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2086]] を参照してください。
 
 == Instance Methods
 
 --- user -> String
-�桼��̾���֤��ޤ���
+ユーザ名を返します。
 
-���Υ桼����
-[[m:Net::IMAP#getacl]] �ǻ��ꤷ���᡼��ܥå�����
-�Ф����餫�θ��¤���äƤ��ޤ���
+このユーザは
+[[m:Net::IMAP#getacl]] で指定したメールボックスに
+対し何らかの権限を持っています。
 
 --- rights -> String
-�����������¤�ʸ������֤��ޤ���
+アクセス権限を文字列で返します。
 
-[[m:Net::IMAP::MailboxACLItem#user]] ��������桼����
-���äƤ��븢�¤��֤���ޤ���
+[[m:Net::IMAP::MailboxACLItem#user]] で得られるユーザが
+持っている権限が返されます。
 
-����ʸ����ΰ�̣�ˤĤ��Ƥ� [[RFC:2086]] �򻲾Ȥ��Ƥ���������
+この文字列の意味については [[RFC:2086]] を参照してください。
 
 = class Net::IMAP::StatusData < Struct
-STATUS ������ɽ�魯���饹�Ǥ���
+STATUS 応答を表わすクラスです。
 
 == Instance Methods
 
 --- mailbox -> String
-�᡼��ܥå���̾���֤��ޤ���
+メールボックス名を返します。
 
 --- attr -> { String => Integer }
-STATUS ���������Ƥ�ϥå�����֤��ޤ���
+STATUS 応答の内容をハッシュで返します。
 
-�ϥå���Υ�����
+ハッシュのキーは
 "MESSAGES", "RECENT", "UIDNEXT", "UIDVALIDITY", "UNSEEN"
-�ʤɤ��Ȥ��ޤ���
+などが使われます。
 
-�ܤ����� [[RFC:2060]] �� 6.3.10��7.2.4 �򸫤Ƥ���������
+詳しくは [[RFC:2060]] の 6.3.10、7.2.4 を見てください。
 
 = class Net::IMAP::FetchData < Object
 
-FETCH ���ޥ�ɤα�����ɽ�����饹�Ǥ���
+FETCH コマンドの応答を表すクラスです。
 
-[[m:Net::IMAP#fetch]]��[[m:Net::IMAP#uid_fetch]]��
-[[m:Net::IMAP#store]]��[[m:Net::IMAP#uid_store]] ��
-�֤��ͤȤ������Ѥ���ޤ���
+[[m:Net::IMAP#fetch]]、[[m:Net::IMAP#uid_fetch]]、
+[[m:Net::IMAP#store]]、[[m:Net::IMAP#uid_store]] の
+返り値として利用されます。
 
 == Instance Methods
 
 --- seqno -> Integer
 
-��å������� sequence number ���֤��ޤ���
+メッセージの sequence number を返します。
 
-[[m:Net::IMAP#uid_fetch]]��[[m:Net::IMAP#uid_store]]�Ǥ��äƤ�
-UID �ǤϤʤ���sequence number���֤��ޤ���
+[[m:Net::IMAP#uid_fetch]]、[[m:Net::IMAP#uid_store]]であっても
+UID ではなく、sequence numberを返します。
 
 --- attr -> { String => object }
 
-�ƥ�å������Υ��ȥ�ӥ塼�Ȥ��ͤ�ϥå���ơ��֥���֤��ޤ���
+各メッセージのアトリビュートの値をハッシュテーブルで返します。
 
-�����ϥ��ȥ�ӥ塼��̾��ʸ�����ͤϥ��ȥ�ӥ塼�Ȥ��ͤȤʤ�ޤ���
-�ͤΥ��饹�ϥ��ȥ�ӥ塼�Ȥˤ�äưۤʤ�ޤ���
+キーはアトリビュート名の文字列、値はアトリビュートの値となります。
+値のクラスはアトリビュートによって異なります。
 
-���Ѳ�ǽ�ʥ��ȥ�ӥ塼�Ȥϰʲ����̤�Ǥ���
+利用可能なアトリビュートは以下の通りです。
 
 : BODY
-    BODYSTRUCTURE �γ�ĥ�ǡ����ʤ��η�����
+    BODYSTRUCTURE の拡張データなしの形式。
     [[c:Net::IMAP::BodyTypeBasic]], [[c:Net::IMAP::BodyTypeText]],
     [[c:Net::IMAP::BodyTypeMessage]], [[c:Net::IMAP::BodyTypeMultipart]]
-    �Τ����줫��
+    のいずれか。
 : BODY[<section>]<<partial>>
-    section �ǻ��ꤵ�줿���������Υܥǥ������ơ�ʸ����
+    section で指定されたセクションのボディの内容。文字列。
 : BODY.PEEK[<section>]<<partial>>
-    section �ǻ��ꤵ�줿���������Υ�å������ܥǥ������ơ�ʸ����
-    ��������������Ƥ򸫤Ƥ� :Seen �ե饰�����ꤷ�ʤ�����
-    BODY[<section>]��Ʊ��
+    section で指定されたセクションのメッセージボディの内容。文字列。
+    ただしこれで内容を見ても :Seen フラグを設定しない点が
+    BODY[<section>]と同様
 : BODYSTRUCTURE
-    MIME-IMB �ǤΥ�å������ܥǥ���
+    MIME-IMB でのメッセージボディ。
     [[c:Net::IMAP::BodyTypeBasic]], [[c:Net::IMAP::BodyTypeText]],
     [[c:Net::IMAP::BodyTypeMessage]], [[c:Net::IMAP::BodyTypeMultipart]]
-    �Τ����줫��
+    のいずれか。
 : ENVELOPE
-    ��å������Υ���٥����ס�
-    [[c:Net::IMAP::Envelope]] ���֥������ȡ�
+    メッセージのエンベロープ。
+    [[c:Net::IMAP::Envelope]] オブジェクト。
 : FLAGS
-    ��å������˥��åȤ��줿�ե饰��
-    [[c:Symbol]] ������[[m:String#capitalize]] �ǥ���ԥ��饤��
-    ����Ƥ��롣
+    メッセージにセットされたフラグ。
+    [[c:Symbol]] の配列。[[m:String#capitalize]] でキャピタライズ
+    されている。
 : INTERNALDATE
-    ��å��������������ա�ʸ����
+    メッセージの内部日付。文字列。
 : RFC822
-    BODY[] ��Ʊ����ʸ����
+    BODY[] と同じ。文字列。
 : RFC822.HEADER
-    BODY.PEEK[HEADER] ��Ʊ����ʸ����
+    BODY.PEEK[HEADER] と同じ。文字列。
 : RFC822.SIZE
-    ��å������� [[RFC:822]] ��������������
+    メッセージの [[RFC:822]] サイズ。整数。
 : RFC822.TEXT
-    BODY[TEXT] ��Ʊ����ʸ����
+    BODY[TEXT] と同じ。文字列。
 : UID
-    UID��������
+    UID。整数。
 
-�ܤ����� [[RFC:2060]] �� FETCH command ����򸫤Ƥ���������
+詳しくは [[RFC:2060]] の FETCH command の節を見てください。
 
 @see [[m:Net::IMAP#fetch]], [[m:Net::IMAP#uid_fetch]]
 
 = class Net::IMAP::Envelope < Struct
 
-��å������Υ���٥����פ�ɽ�����饹�Ǥ���
+メッセージのエンベロープを表すクラスです。
 
-[[m:Net::IMAP::FetchData#attr]] �����ǤȤ����Ѥ����ޤ���
+[[m:Net::IMAP::FetchData#attr]] の要素として用いられます。
 
 == Instance Methods
 
 --- date -> String | nil
-���դ�ʸ������֤��ޤ���
+日付の文字列を返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 --- subject -> String | nil
-��å������Υ��֥������Ȥ��֤��ޤ���
+メッセージのサブジェクトを返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- from -> [Net::IMAP::Address] | nil
-From �� [[c:Net::IMAP::Address]] ���֥������Ȥ�������֤��ޤ���
+From を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- sender -> [Net::IMAP::Address] | nil
-Sender �� [[c:Net::IMAP::Address]] ���֥������Ȥ�������֤��ޤ���
+Sender を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- reply_to -> [Net::IMAP::Address] | nil
-Reply-To �� [[c:Net::IMAP::Address]] ���֥������Ȥ�������֤��ޤ���
+Reply-To を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- to -> [Net::IMAP::Address] | nil
-To �� [[c:Net::IMAP::Address]] ���֥������Ȥ�������֤��ޤ���
+To を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- cc -> [Net::IMAP::Address] | nil
-Cc �� [[c:Net::IMAP::Address]] ���֥������Ȥ�������֤��ޤ���
+Cc を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- bcc -> [Net::IMAP::Address] | nil
-Bcc �� [[c:Net::IMAP::Address]] ���֥������Ȥ�������֤��ޤ���
+Bcc を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 
 --- in_reply_to -> String | nil
-In-reply-to �����Ƥ�ʸ������֤��ޤ���
+In-reply-to の内容を文字列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 --- message_id -> String | nil
-message_id ��ʸ������֤��ޤ���
+message_id を文字列で返します。
 
-����٥����פ�¸�ߤ��ʤ��Ȥ��� nil ���֤��ޤ���
+エンベロープに存在しないときは nil を返します。
 
 = class Net::IMAP::Address < Struct
 
-�᡼�륢�ɥ쥹��ɽ�����饹�Ǥ���
+メールアドレスを表すクラスです。
 
 == Instance Methods
 
 --- name -> String | nil
-�᡼�륢�ɥ쥹�� [[RFC:822]] �θĿ�̾(personal name)���֤��ޤ���
+メールアドレスの [[RFC:822]] の個人名(personal name)を返します。
 
-�Ŀ�̾��¸�ߤ��ʤ����� nil ���֤��ޤ���
+個人名が存在しない場合は nil を返します。
 
-�̾�� nil ���֤��ޤ���
+通常は nil を返します。
 
 --- route -> String | nil
-�᡼�륢�ɥ쥹�� SMTP at-domain-list ���֤��ޤ���
+メールアドレスの SMTP at-domain-list を返します。
 
-¸�ߤ��ʤ����� nil ���֤��ޤ���
+存在しない場合は nil を返します。
 
-�̾�� nil ���֤��ޤ���
+通常は nil を返します。
 
 --- mailbox -> String | nil
-�᡼�륢�ɥ쥹�Υ᡼��ܥå���̾���֤��ޤ���
+メールアドレスのメールボックス名を返します。
 
-���줬 nil �ʤ�Ф���� [[RFC:822]] group �ν������̣���ޤ���
-���줬 nil �Ǥʤ���[[m:Net::IMAP::Address#mailbox]] �� nil �ʤ�С�
-[[RFC:822]] �Υ��롼��̾��ɽ���ޤ���
-�ɤ�Ǥ�ʤ���С�[[RFC:822]] �� local-part ��ɽ���ޤ���
+これが nil ならばそれは [[RFC:822]] group の終わりを意味します。
+これが nil でなく、[[m:Net::IMAP::Address#mailbox]] が nil ならば、
+[[RFC:822]] のグループ名を表します。
+どれでもなければ、[[RFC:822]] の local-part を表します。
 
-�̾�ϡ��᡼�륢�ɥ쥹�Ρ�@�פμ������֤��ޤ���
+通常は、メールアドレスの「@」の手前を返します。
 
 --- host -> String | nil
-�᡼�륢�ɥ쥹�Υۥ���̾���֤��ޤ���
+メールアドレスのホスト名を返します。
 
-nil �� [[RFC:822]] �Υ��롼��ʸˡ���б����ޤ���
-����ˤĤ��Ƥ� [[m:Net::IMAP::Address#mailbox]] �⻲�Ȥ��Ƥ���������
-�����Ǥʤ����� [[RFC:822]] �Υɥᥤ��̾��ɽ���ޤ���
+nil は [[RFC:822]] のグループ文法に対応します。
+これについては [[m:Net::IMAP::Address#mailbox]] も参照してください。
+そうでない場合は [[RFC:822]] のドメイン名を表します。
 
-�̾�ϡ��᡼�륢�ɥ쥹�Ρ�@�פθ���Υɥᥤ��̾���֤��ޤ���
+通常は、メールアドレスの「@」の後ろのドメイン名を返します。
 
 = class Net::IMAP::ContentDisposition < Struct
 
-[[RFC:1806]], [[RFC:2183]] ���������Ƥ��� MIME ��
-Content-Disposition �ե�����ɤ�ɽ�����饹�Ǥ���
+[[RFC:1806]], [[RFC:2183]] で定義されている MIME の
+Content-Disposition フィールドを表すクラスです。
 
 == Instance Methods
 
 --- dsp_type -> String
-Content-Disposition �ե�����ɤΥ����פ�ʸ������֤��ޤ���
+Content-Disposition フィールドのタイプを文字列で返します。
 
-"INLINE", "ATTACHMENT" �ʤɤ�ʸ������֤��ޤ���
+"INLINE", "ATTACHMENT" などの文字列を返します。
 
-�ܤ����� [[RFC:2183]] �ʤɤ򸫤Ƥ���������
+詳しくは [[RFC:2183]] などを見てください。
 
 --- param -> { String => String } | nil
-Content-Disposition �ե�����ɤΥѥ�᡼����ϥå���ơ��֥��
-�֤��ޤ���
+Content-Disposition フィールドのパラメータをハッシュテーブルで
+返します。
 
-�ϥå���ơ��֥�Υ����ϰʲ��Τ褦���ͤ���ޤ����ܤ�����
-[[RFC:2183]] �ʤɤ򸫤Ƥ���������
+ハッシュテーブルのキーは以下のような値を取ります。詳しくは
+[[RFC:2183]] などを見てください。
   * "FILENAME"
   * "CREATION-DATE"
   * "MODIFICATION-DATE"
@@ -1614,299 +1614,299 @@ Content-Disposition �ե�����ɤΥѥ�᡼����ϥå���ơ��֥��
 
 = class Net::IMAP::ThreadMember < Struct
 
-[[m:Net::IMAP#thread]]�� [[m:Net::IMAP#uid_thread]] ����
-�����륹��åɤ��ڹ�¤�ΥΡ��ɤ�ɽ�����饹�Ǥ���
+[[m:Net::IMAP#thread]]、 [[m:Net::IMAP#uid_thread]] から
+得られるスレッドの木構造のノードを表すクラスです。
 
 == Instance Methods
 
 --- seqno -> Integer | nil
-��å������� sequence number �⤷���� UID ���֤��ޤ���
+メッセージの sequence number もしくは UID を返します。
 
-root �Ȥʤ��å�������¸�ߤ��ʤ���礷�ʤ��ڤξ���
-nil ���֤��ޤ���
+root となるメッセージが存在しない場合しない木の場合は
+nil を返します。
 
 --- children -> [Net::IMAP::ThreadMember]
-����åɤ��ڹ�¤�ˤ����뼫�Ȥβ��̤���ʬ���֤��ޤ���
+スレッドの木構造における自身の下位の部分を返します。
 
 
 = class Net::IMAP::BodyTypeBasic < Struct
 
-text ��([[c:Net::IMAP::BodyTypeText]])��
-multipart ��([[c:Net::IMAP::BodyTypeMultipart]])��
-message ��([[c:Net::IMAP::BodyTypeMessage]])��
-�Τ�����Ǥ�ʤ��褦�ʥ�å������ܥǥ���¤��ɽ�����饹�Ǥ���
+text 型([[c:Net::IMAP::BodyTypeText]])、
+multipart 型([[c:Net::IMAP::BodyTypeMultipart]])、
+message 型([[c:Net::IMAP::BodyTypeMessage]])、
+のいずれでもないようなメッセージボディ構造を表すクラスです。
 
-ź�եե�����ʤɤ�ɽ���ޤ���
-�ܤ����� MIME ��RFC([[RFC:2045]])�򻲾Ȥ��Ƥ���������
+添付ファイルなどを表します。
+詳しくは MIME のRFC([[RFC:2045]])を参照してください。
 
 == Instance Methods
 
 --- media_type -> String
-MIME �Υ�ǥ��������פ��֤��ޤ���
+MIME のメディアタイプを返します。
 
 @see [[m:Net::IMAP::BodyTypeBasic#subtype]]
 
 --- subtype -> String
 --- media_subtype -> String
-MIME �Υ�ǥ��������פΥ��֥����פ��֤��ޤ���
+MIME のメディアタイプのサブタイプを返します。
  
-media_subtype �� obsolete �Ǥ���
+media_subtype は obsolete です。
 
 @see [[m:Net::IMAP::BodyTypeBasic#media_type]]
 
 --- param -> { String => String } | nil
-MIME �Υܥǥ��ѥ�᡼����ϥå���ơ��֥���֤��ޤ���
+MIME のボディパラメータをハッシュテーブルで返します。
 
-�ϥå���ơ��֥�Υ������ѥ�᡼��̾�Ȥʤ�ޤ���
+ハッシュテーブルのキーがパラメータ名となります。
 
 @see [[RFC:2045]]
 
 --- content_id -> String | nil
-Content-ID ���ͤ�ʸ������֤��ޤ���
+Content-ID の値を文字列で返します。
 
 @see [[RFC:2045]]
 --- description -> String | nil
-Content-Description ���ͤ�ʸ������֤��ޤ���
+Content-Description の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- encoding -> String
-Content-Transfer-Encoding ���ͤ�ʸ������֤��ޤ���
+Content-Transfer-Encoding の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- size -> Integer
-�ܥǥ��Υ������Υ����ƥåȿ����֤��ޤ���
+ボディのサイズのオクテット数を返します。
 
 --- md5 -> String | nil
-�ܥǥ��� MD5 �ͤ�ʸ������֤��ޤ���
+ボディの MD5 値を文字列で返します。
 
 --- disposition -> Net::IMAP::ContentDisposition | nil
-Content-Dispotition ���ͤ��֤��ޤ���
+Content-Dispotition の値を返します。
 
-[[c:Net::IMAP::ContentDisposition]] ���֥������Ȥ��֤��ޤ���
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
 @see [[RFC:1806]], [[RFC:2183]]
 
 --- language -> String | [String] | nil
-[[RFC:1766]] ���������Ƥ���ܥǥ������ɽ�魯
-ʸ����⤷����ʸ�����������֤��ޤ���
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
 --- extension -> Array | nil
-��å������γ�ĥ�ǡ������֤��ޤ���
+メッセージの拡張データを返します。
 
 --- multipart? -> bool
-�ޥ���ѡ��Ȥ��ɤ������֤��ޤ���
-false ���֤��ޤ���
+マルチパートかどうかを返します。
+false を返します。
 
 = class Net::IMAP::BodyTypeText < Struct
 
-Content-Type �� text �Ǥ����å�������ɽ�����饹�Ǥ���
+Content-Type が text であるメッセージを表すクラスです。
 
-ʿʸ�Υ᡼���ɽ���ޤ���
-�ܤ����� MIME ��RFC([[RFC:2045]])�򻲾Ȥ��Ƥ���������
+平文のメールを表します。
+詳しくは MIME のRFC([[RFC:2045]])を参照してください。
 
 == Instance Methods
 
 --- media_type -> String
-MIME �Υ�ǥ��������פ��֤��ޤ���
+MIME のメディアタイプを返します。
 
-����� "TEXT" ���֤��ޤ���
+これは "TEXT" を返します。
 
 @see [[m:Net::IMAP::BodyTypeText#subtype]]
 
 --- subtype -> String
 --- media_subtype -> String
-MIME �Υ�ǥ��������פΥ��֥����פ��֤��ޤ���
+MIME のメディアタイプのサブタイプを返します。
  
-media_subtype �� obsolete �Ǥ���
+media_subtype は obsolete です。
 
 @see [[m:Net::IMAP::BodyTypeText#media_type]]
 
 --- param -> { String => String } | nil
-MIME �Υܥǥ��ѥ�᡼����ϥå���ơ��֥���֤��ޤ���
+MIME のボディパラメータをハッシュテーブルで返します。
 
-�ϥå���ơ��֥�Υ������ѥ�᡼��̾�Ȥʤ�ޤ���
+ハッシュテーブルのキーがパラメータ名となります。
 
 @see [[RFC:2045]]
 
 --- content_id -> String | nil
-Content-ID ���ͤ�ʸ������֤��ޤ���
+Content-ID の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- description -> String | nil
-Content-Description ���ͤ�ʸ������֤��ޤ���
+Content-Description の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- encoding -> String
-Content-Transfer-Encoding ���ͤ�ʸ������֤��ޤ���
+Content-Transfer-Encoding の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- size -> Integer
-�ܥǥ��Υ������Υ����ƥåȿ����֤��ޤ���
+ボディのサイズのオクテット数を返します。
 
 --- lines -> Integer
-�ܥǥ��ιԿ����֤��ޤ���
+ボディの行数を返します。
 
 --- md5 -> String | nil
-�ܥǥ��� MD5 �ͤ�ʸ������֤��ޤ���
+ボディの MD5 値を文字列で返します。
 
 --- disposition -> Net::IMAP::ContentDisposition | nil
-Content-Dispotition ���ͤ��֤��ޤ���
+Content-Dispotition の値を返します。
 
-[[c:Net::IMAP::ContentDisposition]] ���֥������Ȥ��֤��ޤ���
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
 @see [[RFC:1806]], [[RFC:2183]]
 
 --- language -> String | [String] | nil
-[[RFC:1766]] ���������Ƥ���ܥǥ������ɽ�魯
-ʸ����⤷����ʸ�����������֤��ޤ���
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
 
 --- extension -> Array | nil
-��å������γ�ĥ�ǡ������֤��ޤ���
+メッセージの拡張データを返します。
 
 --- multipart? -> bool
-�ޥ���ѡ��Ȥ��ɤ������֤��ޤ���
-false ���֤��ޤ���
+マルチパートかどうかを返します。
+false を返します。
 
 = class Net::IMAP::BodyTypeMessage < Struct
 
-Content-Type �� "message" �Ǥ����å�������ɽ�����饹�Ǥ���
+Content-Type が "message" であるメッセージを表すクラスです。
 
-�᡼���᡼���ź�դ������ʤɤ˻Ȥ��ޤ���
-�ܤ����� [[RFC:2045]], [[RFC:822]] �򻲾Ȥ��Ƥ���������
+メールをメールに添付した場合などに使われます。
+詳しくは [[RFC:2045]], [[RFC:822]] を参照してください。
 
 
 == Instance Methods
 
 --- media_type -> String
-MIME �Υ�ǥ��������פ��֤��ޤ���
+MIME のメディアタイプを返します。
 
-����� "MESSAGE" ���֤��ޤ���
+これは "MESSAGE" を返します。
 
 @see [[m:Net::IMAP::BodyTypeMessage#subtype]]
 
 --- subtype -> String
 --- media_subtype -> String
 
-MIME �Υ�ǥ��������פΥ��֥����פ��֤��ޤ���
+MIME のメディアタイプのサブタイプを返します。
  
-media_subtype �� obsolete �Ǥ���
+media_subtype は obsolete です。
 
 @see [[m:Net::IMAP::BodyTypeMessage#media_type]]
 
 --- param -> { String => String } | nil
-MIME �Υܥǥ��ѥ�᡼����ϥå���ơ��֥���֤��ޤ���
+MIME のボディパラメータをハッシュテーブルで返します。
 
-�ϥå���ơ��֥�Υ������ѥ�᡼��̾�Ȥʤ�ޤ���
+ハッシュテーブルのキーがパラメータ名となります。
 
 @see [[RFC:2045]]
 
 --- content_id -> String | nil
-Content-ID ���ͤ�ʸ������֤��ޤ���
+Content-ID の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- description -> String | nil
-Content-Description ���ͤ�ʸ������֤��ޤ���
+Content-Description の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- encoding -> String
-Content-Transfer-Encoding ���ͤ�ʸ������֤��ޤ���
+Content-Transfer-Encoding の値を文字列で返します。
 
 @see [[RFC:2045]]
 
 --- size -> Integer
-�ܥǥ��Υ������Υ����ƥåȿ����֤��ޤ���
+ボディのサイズのオクテット数を返します。
 
 --- envelope -> Net::IMAP::Envelpe | nil
-��å������Υ���٥����פ��֤��ޤ���
+メッセージのエンベロープを返します。
 
 --- body -> Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMultipart
 
-�ܥǥ����֤��ޤ���
+ボディを返します。
 
 --- lines -> Integer
-�ܥǥ��Υƥ����ȤιԿ����֤��ޤ���
+ボディのテキストの行数を返します。
 
 --- md5 -> String | nil
-�ܥǥ��� MD5 �ͤ�ʸ������֤��ޤ���
+ボディの MD5 値を文字列で返します。
 
 --- disposition -> Net::IMAP::ContentDisposition | nil
-Content-Dispotition ���ͤ��֤��ޤ���
+Content-Dispotition の値を返します。
 
-[[c:Net::IMAP::ContentDisposition]] ���֥������Ȥ��֤��ޤ���
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
 @see [[RFC:1806]], [[RFC:2183]]
 
 --- language -> String | [String] | nil
-[[RFC:1766]] ���������Ƥ���ܥǥ������ɽ�魯
-ʸ����⤷����ʸ�����������֤��ޤ���
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
 --- extension  -> Array | nil
-��å������γ�ĥ�ǡ������֤��ޤ���
+メッセージの拡張データを返します。
 
 --- multipart?  -> bool
-�ޥ���ѡ��Ȥ��ɤ������֤��ޤ���
-false ���֤��ޤ���
+マルチパートかどうかを返します。
+false を返します。
 
 
 = class Net::IMAP::BodyTypeMultipart < Struct
 
-�ޥ���ѡ��Ȥʥ�å�������ɽ�����饹�Ǥ���
+マルチパートなメッセージを表すクラスです。
 
-�ܤ����� MIME ��RFC([[RFC:2045]])�򻲾Ȥ��Ƥ���������
+詳しくは MIME のRFC([[RFC:2045]])を参照してください。
 
 == Instance Methods
 
 --- media_type -> String
-MIME �Υ�ǥ��������פ��֤��ޤ���
+MIME のメディアタイプを返します。
 
-"MULTIPART" ���֤��ޤ���
+"MULTIPART" を返します。
 
 @see [[m:Net::IMAP::BodyTypeMultipart#subtype]]
 
 --- subtype -> String
 --- media_subtype -> String
-MIME �Υ�ǥ��������פΥ��֥����פ��֤��ޤ���
+MIME のメディアタイプのサブタイプを返します。
  
-media_subtype �� obsolete �Ǥ���
+media_subtype は obsolete です。
 
 @see [[RFC:2045]], [[m:Net::IMAP::BodyTypeText#media_type]]
 
 --- parts -> [Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeMultipart]
 
-�ޥ���ѡ��Ȥγ���ʬ���֤��ޤ���
+マルチパートの各部分を返します。
 
 --- param -> { String => String }
-MIME �Υܥǥ��ѥ�᡼����ϥå���ơ��֥���֤��ޤ���
+MIME のボディパラメータをハッシュテーブルで返します。
 
-�ϥå���ơ��֥�Υ������ѥ�᡼��̾�Ȥʤ�ޤ���
+ハッシュテーブルのキーがパラメータ名となります。
 
 @see [[RFC:2045]]
 
 --- disposition -> Net::IMAP::ContentDisposition | nil
-Content-Dispotition ���ͤ��֤��ޤ���
+Content-Dispotition の値を返します。
 
-[[c:Net::IMAP::ContentDisposition]] ���֥������Ȥ��֤��ޤ���
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
 @see [[RFC:1806]], [[RFC:2183]]
 
 --- language -> String | [String] | nil
-[[RFC:1766]] ���������Ƥ���ܥǥ������ɽ�魯
-ʸ����⤷����ʸ�����������֤��ޤ���
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
 --- extension -> Array | nil
-��å������γ�ĥ�ǡ������֤��ޤ���
+メッセージの拡張データを返します。
 
 --- multipart? -> bool
-�ޥ���ѡ��Ȥ��ɤ������֤��ޤ���
-true ���֤��ޤ���
+マルチパートかどうかを返します。
+true を返します。
 
 
 
@@ -1991,62 +1991,62 @@ true ���֤��ޤ���
 
 = class Net::IMAP::Error < StandardError
 
-���٤Ƥ� IMAP �㳰���饹�Υ����ѡ����饹��
+すべての IMAP 例外クラスのスーパークラス。
 
 = class Net::IMAP::DataFormatError < Net::IMAP::Error
 
-�ǡ����ե����ޥåȤ��������ʤ�����ȯ�������㳰�Υ��饹�Ǥ���
+データフォーマットが正しくない場合に発生する例外のクラスです。
 
 = class Net::IMAP::ResponseParseError < Net::IMAP::Error
 
-�����Ф���Υ쥹�ݥ󥹤��������ѡ����Ǥ��ʤ�����ȯ������
-�㳰�Υ��饹�Ǥ���
+サーバからのレスポンスが正しくパースできない場合に発生する
+例外のクラスです。
 
 = class Net::IMAP::ResponseError < Net::IMAP::Error
 
-�����Ф���Υ쥹�ݥ󥹤����顼�򼨤��Ƥ������ȯ�������㳰
-�Υ��饹�Ǥ���
+サーバからのレスポンスがエラーを示している場合に発生する例外
+のクラスです。
 
-�ºݤˤϤ����Ѿ�����
+実際にはこれを継承した
   * [[c:Net::IMAP::NoResponseError]]
   * [[c:Net::IMAP::BadResponseError]]
   * [[c:Net::IMAP::ByeResponseError]]
-�����Υ��饹���㳰��ȯ�����ޤ���
+これらのクラスの例外が発生します。
 
 == Instance Methods
 #@since 1.9.2
 --- response -> Net::IMAP::TaggedResponse | Net::IMAP::UntaggedResponse
-���顼�Ȥʤä��쥹�ݥ󥹤�ɽ�����֥������Ȥ��֤��ޤ���
+エラーとなったレスポンスを表すオブジェクトを返します。
 
 --- response=(resp)
-���顼�Ȥʤä��쥹�ݥ󥹤�ɽ�����֥������Ȥ����ꤷ�ޤ���
+エラーとなったレスポンスを表すオブジェクトを設定します。
 
-@param resp ���ꤹ��쥹�ݥ󥹥��֥�������
+@param resp 設定するレスポンスオブジェクト
 #@end
 
 = class Net::IMAP::NoResponseError < Net::IMAP::ResponseError
 
-�����Ф��� "NO" �쥹�ݥ󥹤��褿����ȯ�������㳰�Υ��饹�Ǥ���
-���ޥ�ɤ�����˴�λ���ʤ��ä�����ȯ�����ޤ���
+サーバから "NO" レスポンスが来た場合に発生する例外のクラスです。
+コマンドが正常に完了しなかった場合に発生します。
 
 = class Net::IMAP::BadResponseError < Net::IMAP::ResponseError
 
-�����Ф��� "BAD" �쥹�ݥ󥹤��褿����ȯ�������㳰�Υ��饹�Ǥ���
-���饤����Ȥ���Υ��ޥ�ɤ� IMAP �ε��ʤ��鳰��Ƥ������
-�������������顼�ξ���ȯ�����ޤ���
+サーバから "BAD" レスポンスが来た場合に発生する例外のクラスです。
+クライアントからのコマンドが IMAP の規格から外れている場合や
+サーバ内部エラーの場合に発生します。
 
 = class Net::IMAP::ByeResponseError < Net::IMAP::ResponseError
 
-�����Ф��� "BYE" �쥹�ݥ󥹤��褿����ȯ�������㳰�Υ��饹�Ǥ���
-�������󤬵��ݤ��줿���䡢���饤����Ȥ�̵ȿ����
-�����ॢ���Ȥ�������ȯ�����ޤ���
+サーバから "BYE" レスポンスが来た場合に発生する例外のクラスです。
+ログインが拒否された場合や、クライアントが無反応で
+タイムアウトした場合に発生します。
 
 #@since 1.9.1
 = class Net::IMAP::FlagCountError < Net::IMAP::Error
 
-�����Ф���Υ쥹�ݥ󥹤˴ޤޤ��ե饰��¿������Ȥ���ȯ�������㳰�Ǥ���
+サーバからのレスポンスに含まれるフラグが多すぎるときに発生する例外です。
 
-���ξ�¤� [[m:Net::IMAP.max_flag_count=]] �����ꤷ�ޤ���
+この上限は [[m:Net::IMAP.max_flag_count=]] で設定します。
 
 #@end
 

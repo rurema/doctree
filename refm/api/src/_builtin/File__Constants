@@ -1,167 +1,167 @@
 = module File::Constants
 
-[[c:File]] �˴ؤ�����򽸤᤿�⥸�塼�롣
+[[c:File]] に関る定数を集めたモジュール。
 
-[[c:File]] �Ϥ��Υ⥸�塼��򥤥󥯥롼�ɤ��Ƥ���Τǡ�
-�ʲ��˵󤲤������ [[c:File]] ������Τ褦�˰������Ȥ��Ǥ��ޤ���
+[[c:File]] はこのモジュールをインクルードしているので、
+以下に挙げる定数は [[c:File]] の定数のように扱うことができます。
 
 #@since 1.8.0
-Ruby 1.8 �ʹߤǤϡ�[[c:File]] �ǤϤʤ���[[c:IO]] �ǥ��󥯥롼��
-�����褦�ˤʤ�ޤ�����
+Ruby 1.8 以降では、[[c:File]] ではなく、[[c:IO]] でインクルード
+されるようになりました。
 #@end
 
-#@# ����: RUBY/ext/fcntl/fcntl.c
+#@# 情報源: RUBY/ext/fcntl/fcntl.c
 
 == Constants
 
-#@# [[m:File#flock]] �ǻȤ������ ----------------------------------
+#@# [[m:File#flock]] で使われる定数 ----------------------------------
 
 --- LOCK_SH -> Integer
-��ͭ���å���ʣ���Υץ�������Ʊ���˥��å���ͭ�Ǥ��ޤ���
-[[m:File#flock]] �ǻ��Ѥ��ޤ���
+共有ロック。複数のプロセスが同時にロックを共有できます。
+[[m:File#flock]] で使用します。
 
 --- LOCK_EX -> Integer
-��¾���å���Ʊ���ˤϤ����ҤȤĤΥץ��������������å����ݻ��Ǥ��ޤ���
-[[m:File#flock]] �ǻ��Ѥ��ޤ���
+排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
+[[m:File#flock]] で使用します。
 
 --- LOCK_UN -> Integer
-������å���[[m:File#flock]] �ǻ��Ѥ��ޤ���
+アンロック。[[m:File#flock]] で使用します。
 
 --- LOCK_NB -> Integer
-���å��κݤ˥֥��å����ʤ���¾�λ���� or ���뤳�Ȥǻ��ꤷ�ޤ���
-[[m:File#flock]] �ǻ��Ѥ��ޤ���
+ロックの際にブロックしない。他の指定と or することで指定します。
+[[m:File#flock]] で使用します。
 
-#@# [[m:File.open]] �ǻȤ������ -----------------------------------
+#@# [[m:File.open]] で使われる定数 -----------------------------------
 
 --- RDONLY -> Integer
-�ɤ߹��ߤΤߤΥ⡼�ɤǥե�����򳫤��Ȥ��˻��ꤷ�ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+読み込みのみのモードでファイルを開くときに指定します。
+[[m:File.open]]で使用します。
 
 --- WRONLY -> Integer
-�񤭹��ߤΤߤΥ⡼�ɤǥե�����򳫤��Ȥ��˻��ꤷ�ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+書き込みのみのモードでファイルを開くときに指定します。
+[[m:File.open]]で使用します。
 
 --- RDWR -> Integer
-�ɤ߽�ξ���Υ⡼�ɤǥե�����򳫤��Ȥ��˻��ꤷ�ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+読み書き両方のモードでファイルを開くときに指定します。
+[[m:File.open]]で使用します。
 
 --- APPEND -> Integer
-�ɵ��⡼�ɤǥե�����򳫤��Ȥ��˻��ꤷ�ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+追記モードでファイルを開くときに指定します。
+[[m:File.open]]で使用します。
 
 --- CREAT -> Integer
-�ե����뤬�ʤ���к�������褦���ꤷ�ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルがなければ作成するよう指定します。
+[[m:File.open]]で使用します。
 
 --- EXCL -> Integer
-CREAT��ʻ�Ѥ����⤷�ե����뤬���ˤ�����ˤϼ��Ԥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+CREATと併用し、もしファイルが既にある場合には失敗します。
+[[m:File.open]]で使用します。
 
 --- NONBLOCK -> Integer
-�ե����뤬���Ѳ�ǽ����ʤ��Ƥ�֥��å����ޤ���
-#@# IO.open �ǻ��ѡ�����...
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルが利用可能じゃなくてもブロックしません。
+#@# IO.open で使用、かも...
+[[m:File.open]]で使用します。
 
 --- TRUNC -> Integer
-�⤷�ե����뤬¸�ߤ���ʤ顢��Ȥ����ä��ƥ������򥼥��ˤ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+もしファイルが存在するなら、中身を抹消してサイズをゼロにします。
+[[m:File.open]]で使用します。
 
 --- NOCTTY -> Integer
-���Ȥ�TTY���椷�ʤ��褦��TTY�򳫤��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+自身がTTY制御しないようにTTYを開きます。
+[[m:File.open]]で使用します。
 
 #@since 1.9.1
 --- BINARY -> Integer
-�ե������Х��ʥ�Ȥ��Ƴ����ޤ���
-open(2) �� O_BINARY������Ǥ�����˻Ȥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルをバイナリとして開きます。
+open(2) で O_BINARYが指定できる場合に使えます。
+[[m:File.open]]で使用します。
 #@end
 
 --- SYNC -> Integer
-�ե������Ʊ���⡼�ɤǳ����ޤ���
-open(2) �� O_SYNC������Ǥ�����˻Ȥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルを同期モードで開きます。
+open(2) で O_SYNCが指定できる場合に使えます。
+[[m:File.open]]で使用します。
 
 #@since 1.9.1
 --- DSYNC -> Integer
-�ե������ǡ���Ʊ���⡼�ɤǳ����ޤ���
-open(2) �� O_DSYNC ������Ǥ�����˻Ȥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルをデータ同期モードで開きます。
+open(2) で O_DSYNC が指定できる場合に使えます。
+[[m:File.open]]で使用します。
 
 --- NOFOLLOW -> Integer
-�ե����뤬����ܥ�å���󥯤Ǥ��ä�����
-�㳰��ȯ�������ޤ���
-open(2) �� O_NOFOLLOW ������Ǥ�����˻Ȥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルがシンボリックリンクであった場合に
+例外を発生させます。
+open(2) で O_NOFOLLOW が指定できる場合に使えます。
+[[m:File.open]]で使用します。
 
 --- RSYNC -> Integer
-�ե�������ɤ߹��߻�Ʊ���⡼�ɤǳ����ޤ���
-open(2) �� O_RSYNC ������Ǥ�����˻Ȥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイルを読み込み時同期モードで開きます。
+open(2) で O_RSYNC が指定できる場合に使えます。
+[[m:File.open]]で使用します。
 
 #@end
 
 #@since 1.9.2
 --- NOATIME -> Integer
-�ե������ɤ߹��߻��� atime �򹹿����ޤ���
-open(2) �� O_ATIME ������Ǥ�����˻Ȥ��ޤ���
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+ファイル読み込み時に atime を更新しません。
+open(2) で O_ATIME が指定できる場合に使えます。
+[[m:File.open]]で使用します。
 
-atime ����������ʤ��Τϳμ¤ǤϤʤ��Ȥ������Ȥ����դ��Ƥ���������
-�������ǽ�Τ���Υ��ץ����Ǥ���
+atime が更新されないのは確実ではないということに注意してください。
+これは性能のためのオプションです。
 #@end
 
 #@since 1.9.3
 --- DIRECT -> Integer
-���Υե�������Ф��� I/O �Υ���å���θ��̤�Ǿ������褦�Ȥ��롣 
+このファイルに対する I/O のキャッシュの効果を最小化しようとする。 
 
-���Υե饰��Ȥ��ȡ�����Ū����ǽ���㲼���롣 ���������ץꥱ��������ȼ���
-����å��󥰤�ԤäƤ���褦�� ���̤ʾ��ˤ����Ω�ġ� �ե������ I/O
-�ϥ桼�������֥Хåե����Ф���ľ�ܹԤ��롣 [[m:File::Constants::DIRECT]] �ե饰���Ȥϥǡ�
-����Ʊ����ž�����褦�ȤϤ��뤬�� [[m:File::Constants::SYNC]] �Τ褦�˥ǡ�����ɬ�פʥ᥿�ǡ�
-����ž�����ݾڤ����櫓�ǤϤʤ��� Ʊ�� I/O ���ݾڤ��뤿��ˤϡ�
-[[m:File::Constants::DIRECT]] �˲ä��� [[m:File::Constants::SYNC]] ����Ѥ��ʤ���Фʤ�ʤ���
+このフラグを使うと、一般的に性能が低下する。 しかしアプリケーションが独自に
+キャッシングを行っているような 特別な場合には役に立つ。 ファイルの I/O
+はユーザー空間バッファに対して直接行われる。 [[m:File::Constants::DIRECT]] フラグ自身はデー
+タを同期で転送しようとはするが、 [[m:File::Constants::SYNC]] のようにデータと必要なメタデー
+タの転送が保証されるわけではない。 同期 I/O を保証するためには、
+[[m:File::Constants::DIRECT]] に加えて [[m:File::Constants::SYNC]] を使用しなければならない。
 
-[[m:File.open]]�ǻ��Ѥ��ޤ���
+[[m:File.open]]で使用します。
 
 #@end
 
-#@# [[m:File.fnmatch]], [[m:Dir.glob �ǻȤ������ ------------------
+#@# [[m:File.fnmatch]], [[m:Dir.glob で使われる定数 ------------------
 
 --- FNM_NOESCAPE -> Integer
-����������ʸ�� `\' �����̤�ʸ���Ȥߤʤ��ޤ���
-[[m:File.fnmatch]], [[m:Dir.glob]]�ǻ��Ѥ��ޤ���
+エスケープ文字 `\' を普通の文字とみなします。
+[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
 --- FNM_PATHNAME -> Integer
-�磻��ɥ����� `*', `?', `[]' �� `/' �˥ޥå����ʤ��ʤ�ޤ���
-������Υѥ�����ޥå��ˤϤ��Υե饰�����Ѥ���Ƥ��ޤ���
-[[m:File.fnmatch]], [[m:Dir.glob]]�ǻ��Ѥ��ޤ���
+ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
+シェルのパターンマッチにはこのフラグが使用されています。
+[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
 #@if (version >= "1.8.0")
 --- FNM_DOTMATCH -> Integer
-�磻��ɥ����� `*', `?', `[]' ����Ƭ�� `.' �˥ޥå�����褦�ˤʤ�ޤ���
-[[m:File.fnmatch]], [[m:Dir.glob]]�ǻ��Ѥ��ޤ���
+ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
+[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
-1.8.0�����Ǥϡ�FNM_DOTMATCH�Ȥ���̾���Ǥ�����
+1.8.0以前では、FNM_DOTMATCHという名前でした。
 #@else
 --- FNM_PERIOD -> Integer
-�磻��ɥ����� `*', `?', `[]' ����Ƭ�� `.' �˥ޥå�����褦�ˤʤ�ޤ���
-1.8.0�ʹߤǤϡ�FNM_DOTMATCH ���֤��������ޤ�����
-[[m:File.fnmatch]], [[m:Dir.glob]]�ǻ��Ѥ��ޤ���
+ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
+1.8.0以降では、FNM_DOTMATCH に置き換えられました。
+[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 #@end
 
 --- FNM_CASEFOLD -> Integer
-����ե��٥åȤ��羮ʸ������̤����˥ѥ�����ޥå���Ԥ��ޤ���
-[[m:File.fnmatch]], [[m:Dir.glob]]�ǻ��Ѥ��ޤ���
+アルファベットの大小文字を区別せずにパターンマッチを行います。
+[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
 #@since 1.8.5
 --- FNM_SYSCASE -> Integer
-case hold �ʥե����륷���ƥ�ξ�硢FNM_CASEFOLD ���ͤˤʤꡢ�����Ǥʤ���Х������ͤˤʤ�ޤ���
-[[m:File.fnmatch]], [[m:Dir.glob]]�ǻ��Ѥ��ޤ���
+case hold なファイルシステムの場合、FNM_CASEFOLD の値になり、そうでなければゼロの値になります。
+[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 #@end
 
 #@since 1.9.3
 --- NULL -> String
-NULL�ǥХ����Υե�����̾�Ǥ���
+NULLデバイスのファイル名です。
 
 #@end

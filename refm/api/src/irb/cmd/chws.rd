@@ -1,35 +1,35 @@
 require irb/cmd/nop
 require irb/ext/change-ws
 
-irb ��� irb_current_working_workspace��irb_change_workspace ���ޥ�ɤ�
-����γ�ĥ������������֥饤�֥��Ǥ���
+irb 中の irb_current_working_workspace、irb_change_workspace コマンドの
+ための拡張を定義したサブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ�
-��ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
 
 = class IRB::ExtendCommand::CurrentWorkingWorkspace < IRB::ExtendCommand::Nop
 
-irb ��� irb_current_working_workspace ���ޥ�ɤΤ���γ�ĥ�����������
-�饹�Ǥ���
+irb 中の irb_current_working_workspace コマンドのための拡張を定義したク
+ラスです。
 
 == Instance Methods
 
 --- execute(*obj) -> obj
 
-irb �� self ���֤��ޤ���
+irb の self を返します。
 
-@param obj ���Ѥ��ޤ���
+@param obj 使用しません。
 
 = class IRB::ExtendCommand::ChangeWorkspace < IRB::ExtendCommand::Nop
 
-irb ��� irb_change_workspace ���ޥ�ɤΤ���γ�ĥ������������饹�Ǥ���
+irb 中の irb_change_workspace コマンドのための拡張を定義したクラスです。
 
 == Instance Methods
 
 --- execute(*obj) -> obj
 
-irb �� self �� obj �ǻ��ꤷ�����֥������Ȥ����ꤷ�ޤ���self �����ꤵ��
-�����֥������Ȥ��֤��ޤ���
+irb の self を obj で指定したオブジェクトに設定します。self に設定され
+たオブジェクトを返します。
 
-@param obj Ǥ�դΥ��֥������Ȥ����Ǥ��ޤ���ʣ�����ꤷ��������Ƭ�Υ�
-           �֥������ȤΤߤ����ꤵ��ޤ���
+@param obj 任意のオブジェクトを指定できます。複数指定した場合は先頭のオ
+           ブジェクトのみが設定されます。

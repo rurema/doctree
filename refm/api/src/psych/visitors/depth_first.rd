@@ -5,4 +5,4 @@
 
 --- new(block) -> Psych::Visitors::DepthFirst
 
-¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚

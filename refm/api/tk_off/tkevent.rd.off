@@ -3,38 +3,38 @@
 =begin
 = TkComm::Event
 
-ȯ������((<���٥��>))�ξ��֤�ɽ������Υ��饹�Ǥ���
-((<TkBindCore#bind>))����3�������ά������硢���Υ��饹�Υ��󥹥��󥹤�
-((<���٥�ȥ�����Хå��ؿ�>))�ΰ����Ȥ����Ϥ���ޤ���
+発生した((<イベント>))の状態を表すためのクラスです。
+((<TkBindCore#bind>))の第3引数を省略した場合、このクラスのインスタンスが
+((<イベントコールバック関数>))の引数として渡されます。
 
  require "tk"
  Tk.root.bind('Enter') {|e| p e.is_a? TkComm::Event}
  Tk.mainloop
 
- => true        # <- �ޥ����������뤬������ɥ��������ɽ������ޤ�
+ => true        # <- マウスカーソルがウィンドウに入ると表示されます
 
-((*����*))
-���ޤ�³��Ϥ���ޤ��󤬡�((<Object#type>))(���֥������ȤΥ��饹���֤�
-�᥽�å�)�Ϻ��������Ƥ���Τ�
+((*注意*))
+あまり実害はありませんが、((<Object#type>))(オブジェクトのクラスを返す
+メソッド)は再定義されているので
 
  require "tk"
  Tk.root.bind('Enter') {|e| p e.type}
  Tk.mainloop
 
-�ǡ�(({TkComm::Event}))�Ȥ�ɽ������ޤ���
+で、(({TkComm::Event}))とは表示されません。
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<Object>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkComm::Event#initialize(serial,a,b,c,d,f,h,k,m,o,p,s,t,w,x,y,aa,bb,dd,ee,kk,nn,rr,ss,tt,ww,xx,yy)
 #@todo
-    ���٥�ȥ��֥������Ȥ��������ޤ���
-    �ư������ͤϡ��б�����°���᥽�åɤ��ͤˤʤ�ޤ���
+    イベントオブジェクトを生成します。
+    各引数の値は、対応する属性メソッドの値になります。
 
-== �᥽�å�:
+== メソッド:
 
 --- TkComm::Event#serial
 #@todo
@@ -48,9 +48,9 @@
 #@todo
     %b
 
-    ���٥�Ȥ�ȯ���������ޥ����ܥ�����ֹ���֤��ޤ���
+    イベントを発生させたマウスボタンの番号を返します。
 
-    ButtonPress,ButtonRelease���٥�ȤΤȤ�������̣������ޤ���
+    ButtonPress,ButtonReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#count
 #@todo
@@ -64,23 +64,23 @@
 #@todo
     %f
 
-    ���٥�Ȥ�ȯ�������Ȥ��Υե��������ξ��֤�true/false���֤��ޤ���
+    イベントが発生したときのフォーカスの状態をtrue/falseで返します。
 
-    Enter, Leave���٥�ȤΤȤ�������̣������ޤ���
+    Enter, Leaveイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#height
 #@todo
     %h
 
-    Configure,Expose���٥�ȤΤȤ�������̣������ޤ���
+    Configure,Exposeイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#keycode
 #@todo
     %k
 
-    ���٥�Ȥ�ȯ�����������������ɤ��֤��ޤ���
+    イベントを発生させたキーコードを返します。
 
-    KeyPress,KeyRelease���٥�ȤΤȤ�������̣������ޤ���
+    KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#mode
 #@todo
@@ -98,7 +98,7 @@
 #@todo
     %s
 
-    �ʲ����ͤ������¤��֤��ޤ���((-Visibility�ΤȤ��ϡ��㤦-))
+    以下の値の論理和を返します。((-Visibilityのときは、違う-))
     *Shift               1
     *Lock                2
     *Control             4
@@ -108,14 +108,14 @@
     *Mod4                64
     *Mod5                128
 
-    �����ο��ͤ�((<X Window System>))��(({XEvent}))��¤�Τ�(({state}))��
-    �ͤǤ���((-RCS��ID�� "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
-    �Ǥ���X.h�򸵤˵��Ҥ���-))
+    これらの数値は((<X Window System>))の(({XEvent}))構造体の(({state}))の
+    値です。((-RCSのIDが "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
+    であるX.hを元に記述した-))
 
-    ((-Win��Mac�ǤϤɤ��ʤ롩-))
+    ((-WinやMacではどうなる？-))
 
     ButtonPress,ButtonRelease,Enter,KeyPress,KeyRelease,Leave,Motion,Visibility
-    ���٥�ȤΤȤ�������̣������ޤ���
+    イベントのときだけ意味を持ちます。
 
 --- TkComm::Event#time
 #@todo
@@ -125,30 +125,30 @@
 #@todo
     %w
 
-    Configure,Expose���٥�ȤΤȤ�������̣������ޤ���
+    Configure,Exposeイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#x
 #@todo
     %x
 
-    ���٥�Ȥ�ȯ�������Ȥ��Υޥ������������X��ɸ���֤��ޤ���
+    イベントが発生したときのマウスカーソルのX座標を返します。
 
 --- TkComm::Event#y
 #@todo
     %y
 
-    ���٥�Ȥ�ȯ�������Ȥ��Υޥ������������Y��ɸ���֤��ޤ���
+    イベントが発生したときのマウスカーソルのY座標を返します。
 
 --- TkComm::Event#char
 #@todo
     %A
 
-    ���٥�Ȥ��б�����ASCIIʸ�����֤��ޤ���(������0��9�����򲡤����Ȥ���
-    Fixnum��0��9���֤��ޤ�)
+    イベントに対応するASCII文字を返します。(ただし0〜9キーを押したときは
+    Fixnumで0〜9を返します)
 
-    KeyPress,KeyRelease���٥�ȤΤȤ�������̣������ޤ���
+    KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
-    ((-Fixnum���֤��Ƥ���Τ�˾�ޤ���ư���ʤ�������-))
+    ((-Fixnumを返しているのは望ましい動作じゃないだろう-))
 
 --- TkComm::Event#borderwidth
 #@todo
@@ -168,15 +168,15 @@
 #@todo
     %K
 
-    ���٥�Ȥ��б����륭������ܥ���֤��ޤ���
-    KeyPress,KeyRelease���٥�ȤΤȤ�������̣������ޤ���
+    イベントに対応するキーシンボルを返します。
+    KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#keysym_num
 #@todo
     %N
 
-    ���٥�Ȥ��б����륭������ܥ���ֹ���֤��ޤ���
-    KeyPress,KeyRelease���٥�ȤΤȤ�������̣������ޤ���
+    イベントに対応するキーシンボルの番号を返します。
+    KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#rootwin_id
 #@todo
@@ -190,40 +190,40 @@
 #@todo
     %T
 
-    ���٥�Ȥη�����ͤ��֤��ޤ����֤������ͤϰʲ��Υ��٥�ȷ����б�����
-    ����
+    イベントの型を数値で返します。返される数値は以下のイベント型に対応しま
+    す。
 
     *KeyPress                2
     *KeyRelease              3
     *ButtonPress             4
     *...
 
-    �����ο��ͤ�((<X Window System>))��(({XEvent}))��¤�Τ�(({type}))��
-    �ͤǤ���((-RCS��ID�� "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
-    �Ǥ���X.h�򸵤˵��Ҥ���-))
+    これらの数値は((<X Window System>))の(({XEvent}))構造体の(({type}))の
+    値です。((-RCSのIDが "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
+    であるX.hを元に記述した-))
 
-    ((-ʸ������֤��������褤��������Win��Mac�ǤϤɤ��ʤ롩-))
+    ((-文字列を返した方がよいだろう？WinやMacではどうなる？-))
 
 --- TkComm::Event#widget
 #@todo
     %W
 
-    ���٥�Ȥ�ȯ���������������åȤ��֤��ޤ���
+    イベントが発生したウィジェットを返します。
 
 --- TkComm::Event#x_root
 #@todo
     %X
 
-    ���٥�Ȥ�ȯ�������Ȥ��Υ롼�ȥ�����ɥ���ǤΥޥ������������X��ɸ��
-    �֤��ޤ���ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion���٥��
-    �ǰ�̣������ޤ���
+    イベントが発生したときのルートウィンドウ上でのマウスカーソルのX座標を
+    返します。ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motionイベント
+    で意味を持ちます。
 
 --- TkComm::Event#y_root
 #@todo
     %Y
 
-    ���٥�Ȥ�ȯ�������Ȥ��Υ롼�ȥ�����ɥ���ǤΥޥ������������Y��ɸ��
-    �֤��ޤ���ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion���٥��
-    �ǰ�̣������ޤ���
+    イベントが発生したときのルートウィンドウ上でのマウスカーソルのY座標を
+    返します。ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motionイベント
+    で意味を持ちます。
 
 =end

@@ -1,8 +1,8 @@
 = class DateTime < Date
 
-���դ����Ǥʤ�����ⰷ���� [[c:Date]] �Υ��֥��饹�Ǥ���
+日付だけでなく時刻も扱える [[c:Date]] のサブクラスです。
 
-=== ��ñ�ʤĤ�������
+=== 簡単なつかいかた
 
   require 'date'
 
@@ -20,154 +20,154 @@
 
 --- civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 --- new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
-�����դ����������������֥������Ȥ��������ޤ���
+暦日付に相当する日時オブジェクトを生成します。
 
-������ñ�̤����Ǥ���
+時差の単位は日です。
 #@since 1.8.6
-1.8.6 �ʹߤǤϡ�"+0900" �Τ褦�ʻ����򤢤�魯ʸ�����Ĥ����ޤ���
+1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
 #@end
 
-@param year ǯ
-@param mon ��
-@param mday ��
-@param hour ��
-@param min ʬ
-@param sec ��
-@param offset ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ�����
+@param year 年
+@param mon 月
+@param mday 日
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
 
 #@since 1.9.0
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@else
 --- commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@end
-�����դ����������������֥������Ȥ��������ޤ���
+暦週日付に相当する日時オブジェクトを生成します。
 
-[[m:DateTime.new]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime.new]] も参照してください。
 
-@param cwyear ǯ
-@param cweek ��
-@param cwday ������ (����)
-@param hour ��
-@param min ʬ
-@param sec ��
-@param offset ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ�����
+@param cwyear 年
+@param cweek 週
+@param cwday 週の日 (曜日)
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
 
 #@since 1.9.0
 #@# exp
 --- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
-[[RFC:2616]] ������줿�񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+[[RFC:2616]] で定められた書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:DateTime._httpdate]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime._httpdate]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.9.0
 #@# exp
 --- iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-�����Ĥ�����ɽŪ�� [[ISO:8601]] �񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+いくつかの代表的な [[ISO:8601]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
-[[m:DateTime._iso8601]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime._iso8601]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 --- jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
-��ꥦ���������������������֥������Ȥ��������ޤ���
+ユリウス日に相当する日時オブジェクトを生成します。
 
-[[m:DateTime.new]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime.new]] も参照してください。
 
-@param jd ��ꥦ����
-@param hour ��
-@param min ʬ
-@param sec ��
-@param offset ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ�����
+@param jd ユリウス日
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
 
 #@since 1.9.0
 #@# exp
 --- jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-�����Ĥ�����ɽŪ�� [[JIS:X 0301]] �񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+いくつかの代表的な [[JIS:X 0301]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:DateTime._jisx0301]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime._jisx0301]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 --- now(start = Date::ITALY) -> DateTime
-���ߤλ�������������������֥������Ȥ��������ޤ���
+現在の時刻に相当する日時オブジェクトを生成します。
 
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 --- ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
-ǯ���դ����������������֥������Ȥ��������ޤ���
+年日付に相当する日時オブジェクトを生成します。
 
-[[m:DateTime.new]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime.new]] も参照してください。
 
-@param year ǯ
-@param yday ǯ����
-@param hour ��
-@param min ʬ
-@param sec ��
-@param offset ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ�����
+@param year 年
+@param yday 年の日
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
 
 #@since 1.9.0
 #@# exp
 --- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 --- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
-[[RFC:2822]] ������줿�񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+[[RFC:2822]] で定められた書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:DateTime._rfc2822]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime._rfc2822]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.9.0
 #@# exp
 --- rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-[[RFC:3339]] �񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+[[RFC:3339]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:DateTime._rfc3339]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime._rfc3339]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 --- today(start = Date::ITALY) -> Date
-���Υ��饹�Ǥ����ѤǤ��ޤ���
+このクラスでは利用できません。
 
-[[m:DateTime.now]] �򻲾Ȥ��Ƥ���������
+[[m:DateTime.now]] を参照してください。
 
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.0
 #@# exp
 --- xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-XML Schema �ˤ��񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+XML Schema による書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:DateTime._xmlschema]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime._xmlschema]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.8.0
@@ -176,25 +176,25 @@ XML Schema �ˤ��񼰤����դ���Ϥ���
 #@else
 --- parse(str = '-4712-01-01T00:00:00+00:00', complete = false, start = Date::ITALY) -> DateTime
 #@end
-Ϳ����줿����ɽ������Ϥ���
-���ξ���˴�Ť��� DateTime ���֥������Ȥ��������ޤ���
+与えられた日時表現を解析し、
+その情報に基づいて DateTime オブジェクトを生成します。
 
 #@since 1.9.1
-ǯ�� "00" ���� "99" ���ϰϤǤ���С�
-ǯ�β�2��ɽ���Ǥ���Ȥߤʤ�������䤤�ޤ���
-���ο��񤤤��޻ߤ��������ϡ��ҥ�ȤȤ��ơ�complete �� false ��Ϳ���ޤ���
+年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
 #@else
-complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
-ǯ�β�2��ɽ���Ǥ���Ȥߤʤ�������䤤�ޤ���
-�ʤ�����ά�������ϡ����Ȥߤʤ��ޤ���
+complete が真で、年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+なお、省略した場合は、偽とみなします。
 #@end
 
-@param str �����򤢤�魯ʸ����
-@param complete ǯ���䴰���뤫
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ������ˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param str 日時をあらわす文字列
+@param complete 年を補完するか
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時になる組み合わせである場合に発生します。
 
-��:
+例:
 
   DateTime.parse('2001-02-03T12:13:14Z').to_s
   # => "2001-02-03T12:13:14+00:00"
@@ -203,31 +203,31 @@ complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
 
 --- _strptime(str, format = '%FT%T%z') -> Hash
 
-Ϳ����줿����������ɽ������Ϥ������ξ���˴�Ť��ƥϥå�����������ޤ���
+与えられた雛型で日時表現を解析し、その情報に基づいてハッシュを生成します。
 
-@param str �����򤢤�魯ʸ����
-@param format ��
+@param str 日時をあらわす文字列
+@param format 書式
 
-��:
+例:
 
   DateTime._strptime('2001-02-03T12:13:14Z')
   # => {:sec=>14, :zone=>"Z", :year=>2001, :hour=>12, :mday=>3, :min=>13, :offset=>0, :mon=>2}
 
-[[m:DateTime.strptime]] �������ǻ��Ѥ���Ƥ��ޤ���
+[[m:DateTime.strptime]] の内部で使用されています。
 
 @see [[m:Date._strptime]], [[m:DateTime.strptime]]
 
 --- strptime(str = '-4712-01-01T00:00:00+00:00', format = '%FT%T%z', start = Date::ITALY) -> DateTime
 
-Ϳ����줿����������ɽ������Ϥ���
-���ξ���˴�Ť��� DateTime ���֥������Ȥ��������ޤ���
+与えられた雛型で日時表現を解析し、
+その情報に基づいて DateTime オブジェクトを生成します。
 
-@param str �����򤢤�魯ʸ����
-@param format ��
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ������ˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param str 日時をあらわす文字列
+@param format 書式
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時になる組み合わせである場合に発生します。
 
-��:
+例:
 
   DateTime.strptime('2001-02-03T12:13:14Z').to_s
   # => "2001-02-03T12:13:14+00:00"
@@ -239,53 +239,53 @@ complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
 == Instance Methods
 
 --- hour -> Integer
-���֤��֤��ޤ� (0-23)��
+時間を返します (0-23)。
 
 #@since 1.9.0
 --- iso8601(n = 0) -> String
 --- rfc3339(n = 0) -> String
 #@# exp
 --- xmlschema(n = 0) -> String
-[[ISO:8601]] �񼰤�ʸ������֤��ޤ� (XML Schema �� dateTime ����)��
-��ά��ǽ�ʰ����ˤ�ꡢ���������äξ������ʲ��η����Ϳ���뤳�Ȥ��Ǥ��ޤ���
+[[ISO:8601]] 書式の文字列を返します (XML Schema の dateTime 相当)。
+省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
-@param n �������ʲ��η��
+@param n 小数点以下の桁数
 
 #@since 1.9.0
 --- jisx0301(n = 0) -> String
-[[JIS:X 0301]] �񼰤�ʸ������֤��ޤ���
-��ά��ǽ�ʰ����ˤ�ꡢ���������äξ������ʲ��η����Ϳ���뤳�Ȥ��Ǥ��ޤ���
+[[JIS:X 0301]] 書式の文字列を返します。
+省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
-@param n �������ʲ��η��
+@param n 小数点以下の桁数
 
 --- min -> Integer
-ʬ���֤��ޤ� (0-59)��
+分を返します (0-59)。
 
 #@since 1.8.0
 --- new_offset(offset = 0) -> DateTime
 #@else
 --- newof(offset = 0) -> DateTime
 #@end
-self ��ʣ�����ơ����λ��������ꤷ�ʤ����ޤ���
-�������ά�������ϡ��� (����������) �ˤʤ�ޤ���
+self を複製して、その時差を設定しなおします。
+引数を省略した場合は、零 (協定世界時) になります。
 
-[[m:DateTime.new]] �⻲�Ȥ��Ƥ���������
+[[m:DateTime.new]] も参照してください。
 
-@param offset ����
+@param offset 時差
 
 #@since 1.8.0
 --- offset -> Rational
 #@else
 --- of -> Rational
 #@end
-�������֤��ޤ���
+時差を返します。
 
 --- sec -> Integer
-�ä��֤��ޤ� (0-59)��
+秒を返します (0-59)。
 
 --- zone -> String
-�����ॾ������֤��ޤ���
+タイムゾーンを返します。
 
-����ϡ����Τˤϻ����򤢤�魯ʸ����Ǥ���
+これは、正確には時差をあらわす文字列です。

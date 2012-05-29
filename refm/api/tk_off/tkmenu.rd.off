@@ -3,10 +3,10 @@
 =begin
 = TkMenu
 
-��˥塼���������åȤΥ��饹�Ǥ���
-��˥塼���������åȤϥȥåץ�٥�Υ�����ɥ��Ǥ���
+メニューウィジェットのクラスです。
+メニューウィジェットはトップレベルのウィンドウです。
 
-((<TkMenubutton>))�⻲��
+((<TkMenubutton>))も参照
 
   require "tk"
 
@@ -36,77 +36,77 @@
 
   Tk.mainloop
 
-�᥽�åɤ����������((*����*))�ϡ��ʲ��Τ����줫��ؤ��ޤ���
+メソッドの説明の中で((*位置*))は、以下のいずれかを指します。
 
-*����
+*数値
 
- ���ꤷ���������ܤι���(��ü��0�Ǥ�)
+ 指定した数値番目の項目(上端は0です)
 
-*"@����"
+*"@数値"
 
- �夫����ͥԥ�����������ˤ������
+ 上から数値ピクセルだけ下にある項目
 
-*"end" �ޤ��� "last"
+*"end" または "last"
 
- �Ǹ�ι���
+ 最後の項目
 
 *"active"
 
- �����ƥ��֤ˤʤäƤ������
+ アクティブになっている項目
 
 *"none"
 
- �ɤι��ܤ⥢���ƥ��֤ˤ��ʤ�
+ どの項目もアクティブにしない
 
-*�ѥ�����
+*パターン
 
- �ѥ�����˰��פ������(�ѥ�����Υޥå��ˤϥ������Ʊ���褦��
- (('"*","?","[...]"'))����Ѥ���)
- ((-��٥�Ȥΰ��ס�-))
+ パターンに一致する項目(パターンのマッチにはシェルと同じように
+ (('"*","?","[...]"'))を使用する)
+ ((-ラベルとの一致？-))
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkWindow>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkTreatMenuEntryFont>))
 
-== �᥽�å�:
+== メソッド:
 
 --- TkMenu#activate(index)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�Υ�˥塼���ܤ򥢥��ƥ��֤ˤ��ޤ���
+    ((|index|))で指定した((*位置*))のメニュー項目をアクティブにします。
 
 --- TkMenu#add(type, keys=nil)
 #@todo
-    ((|type|))�ǻ��ꤷ����˥塼���ܤ��ɲä��ޤ���((|type|))�ϰʲ��Τ�����
-    ���Ǥ���
+    ((|type|))で指定したメニュー項目を追加します。((|type|))は以下のいずれ
+    かです。
 
       *"command"
 
-       �ܥ���
+       ボタン
       *"checkbutton"
 
-       �����å��ܥ���
+       チェックボタン
       *"radiobutton"
 
-       �饸���ܥ���
+       ラジオボタン
       *"cascade"
 
-       ���������ɥ�˥塼
+       カスケードメニュー
       *"separator"
 
-       ���ѥ졼��(����)
+       セパレータ(横線)
 
-    ((|keys|))�ˤϡ���˥塼���ܤ��Ф��륪�ץ�����ϥå���ǻ��ꤷ�ޤ���
-    ���ץ����ˤϰʲ�������ޤ���
+    ((|keys|))には、メニュー項目に対するオプションをハッシュで指定します。
+    オプションには以下があります。
 
       *"activebackground"
       *"activeforeground"
       *"accelerator"
 
-       ��˥塼���ܤα�ü��ɽ������ʸ����(�б����륭������������Τ˻��Ѥ���)
+       メニュー項目の右端に表示する文字列(対応するキーを明示するのに使用する)
       *"background"
       *"bitmap"
       *"columnbreak"
@@ -118,7 +118,7 @@
       *"indicatoron"
       *"label"
 
-       ��˥塼���ܤȤ���ɽ������ʸ����
+       メニュー項目として表示する文字列
       *"menu"
       *"offvalue"
       *"onvalue"
@@ -131,28 +131,28 @@
 
 --- TkMenu#index(index)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�ι��ܤ������ܤ����֤��ޤ���
+    ((|index|))で指定した((*位置*))の項目が何番目かを返します。
 
 --- TkMenu#invoke(index)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�ι��ܤ�¹Ԥ��ޤ���
+    ((|index|))で指定した((*位置*))の項目を実行します。
 
 --- TkMenu#insert(index, type, keys=nil)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�˥�˥塼���ܤ��ɲä��ޤ���((|type|))��((|keys|))��
-    ((<TkMenu#add>)) ��Ʊ���Ǥ���
+    ((|index|))で指定した((*位置*))にメニュー項目を追加します。((|type|))、((|keys|))は
+    ((<TkMenu#add>)) と同じです。
 
 --- TkMenu#delete(index, last=None)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�ι��ܤ������ޤ���((|last|))����ꤷ�����ϡ�
-    ((|index|))����((|last|))�ޤǤι��ܤ򤹤٤ƺ�����ޤ���
+    ((|index|))で指定した((*位置*))の項目を削除します。((|last|))を指定した場合は、
+    ((|index|))から((|last|))までの項目をすべて削除します。
 
 --- TkMenu#popup(x, y, index=nil)
 #@todo
 
 --- TkMenu#post(x, y)
 #@todo
-    (({self}))������ǻ��ꤷ����ɸ�����֤��ޤ���
+    (({self}))を引数で指定した座標に配置します。
 
       require "tk"
       menu = TkMenu.new {
@@ -164,18 +164,18 @@
       Tk.root.bind 'Button',   proc {|e| menu.unpost }
       Tk.mainloop
 
-    ((-�嵭��Ǥϡ����٥�ȥ�����Хå��ؿ��μ¹Խ���˴ؤ���
-    �������ʤ���Фʤ�ʤ���ʬ��ޤ�Ǥ���-))
+    ((-上記例では、イベントコールバック関数の実行順序に関して
+    説明しなければならない部分を含んでいる-))
 
 --- TkMenu#postcascade(index)
 #@todo
-    ���������ɥ�˥塼��((|index|))�ǻ��ꤷ��((*����*))�����֤��ޤ���
-    ((-��������-))
+    カスケードメニューを((|index|))で指定した((*位置*))に配置します。
+    ((-うそかも-))
 
 --- TkMenu#postcommand(cmd=Proc.new)
 #@todo
-    (({self}))�����֤����Ȥ���((|cmd|))��¹Ԥ��ޤ���((<TkMenu#post>))�᥽�åɤ���
-    �ƤӽФ���ޤ���
+    (({self}))を配置したときに((|cmd|))を実行します。((<TkMenu#post>))メソッドから
+    呼び出されます。
 
 --- TkMenu#tearoffcommand(cmd=Proc.new)
 #@todo
@@ -189,32 +189,32 @@
 
 --- TkMenu#unpost
 #@todo
-    (({self}))�����֤��겼���ޤ�����ɽ���ˤʤ�ޤ���
+    (({self}))の配置を取り下げます。非表示になります。
 
 --- TkMenu#yposition(index)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�ι��ܤΰ���(�ԥ�����)���֤��ޤ���
+    ((|index|))で指定した((*位置*))の項目の位置(ピクセル)を返します。
 
 --- TkMenu#entrycget(index, key)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�Υ�˥塼���ܤ�((|key|))�ǻ��ꤷ�����ץ������ͤ�
-    �֤��ޤ���
+    ((|index|))で指定した((*位置*))のメニュー項目の((|key|))で指定したオプションの値を
+    返します。
 
 --- TkMenu#entryconfiure(index, key, val=None)
 --- TkMenu#entryconfiure(index, hash)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�Υ�˥塼���ܤΥ��ץ����((|key|))��((|val|))�ˤ�
-    �ޤ���
+    ((|index|))で指定した((*位置*))のメニュー項目のオプション((|key|))を((|val|))にし
+    ます。
 
-    ��2����((|hash|))�˥ϥå������ꤷ����硢���Υ��������ץ����̾����
-    �����ץ����������ͤȤ��ư����ޤ���
+    第2引数((|hash|))にハッシュを指定した場合、そのキーがオプション名、値
+    がオプションの設定値として扱われます。
 
 --- TkMenu#entryconfiginfo(index, key=nil)
 #@todo
-    ((|index|))�ǻ��ꤷ��((*����*))�Υ�˥塼���ܤΥ��ץ����((|key|))���ͤ�((|val|))�ˤ�
-    �ޤ���
+    ((|index|))で指定した((*位置*))のメニュー項目のオプション((|key|))の値を((|val|))にし
+    ます。
 
-== ɸ�४�ץ����
+== 標準オプション
 
 ((<TkObject#activebackground>))
 
@@ -238,7 +238,7 @@
 
 ((<TkObject#takefocus>))
 
-== ���ץ����
+== オプション
 
 ### --- TkMenu#postcommand
 
@@ -262,11 +262,11 @@
 =begin
 = TkMenuClone
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkMenu>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkMenuClone.new(parent, type=None)
 #@todo
@@ -277,11 +277,11 @@
 =begin
 = TkOptionMenubutton::OptionMenu
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkMenu>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkOptionMenubutton::OptionMenu.new(parent)
 #@todo
@@ -292,11 +292,11 @@
 =begin
 = TkSysMenu_Apple
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkMenu>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkSystemMenu>))
 
@@ -306,11 +306,11 @@
 =begin
 = TkSysMenu_Help
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkMenu>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkSystemMenu>))
 
@@ -320,11 +320,11 @@
 =begin
 = TkSysMenu_System
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkMenu>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkSystemMenu>))
 

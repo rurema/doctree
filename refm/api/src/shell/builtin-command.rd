@@ -1,8 +1,8 @@
-[[c:Shell]] �ǻ��Ѥ���ӥ�ȥ��󥳥ޥ�ɤ�������Ƥ���饤�֥��Ǥ���
+[[c:Shell]] で使用するビルトインコマンドを定義しているライブラリです。
 
 = class Shell::BuiltInCommand < Shell::Filter
 
-���饹�Ȥ��Ƽ�������Ƥ������ƤΥӥ�ȥ��󥳥ޥ�ɤΥ����ѡ����饹�Ǥ���
+クラスとして実装されている全てのビルトインコマンドのスーパークラスです。
 
 == Instance Methods
 
@@ -104,7 +104,7 @@
 
 = class Shell::Void < Shell::BuiltInCommand
 
-���⤷�ʤ����ޥ�ɤǤ���
+何もしないコマンドです。
 
 == Singleton Methods
 
@@ -114,6 +114,6 @@
 
 --- each(rs = nil){ ... } -> nil
 
-���⤷�ޤ���
+何もしません。
 
 #@end

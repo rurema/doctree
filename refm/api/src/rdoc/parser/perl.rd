@@ -1,51 +1,51 @@
 require rdoc/parser
 
-Perl �Υ����������ɤ���Ϥ��뤿��Υ��֥饤�֥��Ǥ���Perl �Υ���������
-����˵��Ҥ��줿 POD (Plain old Documentation) �����Υ����Ȥ���Ϥ���
-�����Ǥ��ޤ���
+Perl のソースコードを解析するためのサブライブラリです。Perl のソースコー
+ド中に記述された POD (Plain old Documentation) 形式のコメントを解析する
+事ができます。
 
-��ĥ�Ҥ� .pl��.pm �Υե��������Ϥ�������Ǥ��ޤ���
+拡張子が .pl、.pm のファイルを解析する事ができます。
 
-[����] rdoc 3.0.1 ���� rdoc-perl_pod ��ʬ���줿���ᡢ1.9.3 ����
-[[lib:rdoc/parser/perl]] ��ɸ��ź�ե饤�֥��˴ޤޤ�ʤ��ʤ�ޤ�����
-1.9.3 �ʹߤǤ���Ѥ��������� rdoc-perl_pod �� RubyGems �ǥ��󥹥ȡ���
-���Ƥ���������
+[注意] rdoc 3.0.1 から rdoc-perl_pod に分かれたため、1.9.3 から
+[[lib:rdoc/parser/perl]] は標準添付ライブラリに含まれなくなりました。
+1.9.3 以降でも使用したい場合は rdoc-perl_pod を RubyGems でインストール
+してください。
 
 = class RDoc::Parser::PerlPOD < RDoc::Parser
 
-Perl �Υ����������ɤ���Ϥ��뤿��Υ��饹�Ǥ���
+Perl のソースコードを解析するためのクラスです。
 
 == Class Methods
 
 --- new(top_level, file_name, body, options, stats) -> RDoc::Parser::PerlPOD
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
-@param body �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param body ソースコードの内容を文字列で指定します。
 
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 
-@param stats [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 
 == Instance Methods
 
 --- scan -> RDoc::TopLevel
 
-Perl ��������������˵��Ҥ��줿 POD (Plain old Documentation) �����Υ�
-���Ȥ���Ϥ��ޤ���
+Perl ソースコード中に記述された POD (Plain old Documentation) 形式のコ
+メントを解析します。
 
-@return [[c:RDoc::TopLevel]] ���֥������Ȥ��֤��ޤ���
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。
 
 --- filter(comment) -> String
 
-Perl �Υ����ȤγƹԤΥޡ������åפ� rdoc �����Τ�Τ��Ѵ�����ʸ�����
-�֤��ޤ���
+Perl のコメントの各行のマークアップを rdoc 向けのものに変換した文字列を
+返します。
 
-���ߤϴ���Ū����ʬ�Τߤ�����Ǥ��ޤ����ޤ� C<<...>> �ʤɤ�Ŭ�ڤ˽�����
-������Ǥ��ޤ���
+現在は基本的な部分のみを処理できます。まだ C<<...>> などを適切に処理す
+る事ができません。
 
-@param comment �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param comment ソースコードの内容を文字列で指定します。

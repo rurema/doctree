@@ -1,13 +1,13 @@
-Makefile ¤ò¥í¡¼¥É¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Makefile ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Rake::MakefileLoader
 
-Makefile ¤ò¥í¡¼¥É¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+Makefile ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Public Instance Methods
 
 --- load(filename)
 
-Í¿¤¨¤é¤ì¤¿ Makefile ¤ò¥í¡¼¥É¤·¤Ş¤¹¡£
+ä¸ãˆã‚‰ã‚ŒãŸ Makefile ã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¾ã™ã€‚
 
-@param filename ÆÉ¤ß¹ş¤à Makefile ¤ÎÌ¾Á°¤ò»ØÄê¤·¤Ş¤¹¡£
+@param filename èª­ã¿è¾¼ã‚€ Makefile ã®åå‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚

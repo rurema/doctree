@@ -3,19 +3,19 @@ require rubygems/local_remote_options
 require rubygems/spec_fetcher
 require rubygems/version_option
 
-¹¹¿·¤¬É¬Í×¤Ê Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î°ìÍ÷¤ò½ĞÎÏ¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+æ›´æ–°ãŒå¿…è¦ãª Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ä¸€è¦§ã‚’å‡ºåŠ›ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem outdated [options]
     Options:
-          --platform PLATFORM          »ØÄê¤µ¤ì¤¿¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ë´Ø¤¹¤ë¾ğÊó¤òÉ½¼¨¤·¤Ş¤¹
+          --platform PLATFORM          æŒ‡å®šã•ã‚ŒãŸãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã«é–¢ã™ã‚‹æƒ…å ±ã‚’è¡¨ç¤ºã—ã¾ã™
 #@include(local_remote_options)
 #@include(common_options)
     Summary:
-      ¹¹¿·¤¬É¬Í×¤Ê Gem ¥Ñ¥Ã¥±¡¼¥¸¤òÁ´¤ÆÉ½¼¨¤·¤Ş¤¹¡£
+      æ›´æ–°ãŒå¿…è¦ãª Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’å…¨ã¦è¡¨ç¤ºã—ã¾ã™ã€‚
 
 
 = class Gem::Commands::OutdatedCommand < Gem::Command
 
-¹¹¿·¤¬É¬Í×¤Ê Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î°ìÍ÷¤ò½ĞÎÏ¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+æ›´æ–°ãŒå¿…è¦ãª Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ä¸€è¦§ã‚’å‡ºåŠ›ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 

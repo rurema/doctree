@@ -1,35 +1,35 @@
 = class Zlib::GzipFile < Object
 
-gzip �����ΰ��̥ե�����򰷤���ݥ��饹��
-����Ū���ɤ߹���/�񤭹������ϡ����줾�쥵�֥��饹��
-[[c:Zlib::GzipReader]], [[c:Zlib::GzipWriter]] ���������Ƥ��ޤ���
+gzip 形式の圧縮ファイルを扱う抽象クラス。
+具体的な読み込み/書き込み操作は、それぞれサブクラスの
+[[c:Zlib::GzipReader]], [[c:Zlib::GzipWriter]] で定義されています。
 
-IO ���饹�Υ��󥹥��� (���� IO ���饹�Υ��󥹥��󥹤�Ʊ���᥽�åɤ�
-���ĥ��֥�������) �ȴ�Ϣ�դ��ƻ��Ѥ��ޤ���
+IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
+持つオブジェクト) と関連付けて使用します。
 
 == Class Methods
 
 --- new(*args) -> ()
 
-ľ�ܻ��Ѥ��ޤ���
-�̾����Ū���ɤ߽񤭤򤪤��ʤ�����ˤϡ�
-[[m:Zlib::GzipReader.new]] �⤷���ϡ� [[m:Zlib::GzipWriter.new]] ����Ѥ��ޤ���
+直接使用しません。
+通常、具体的な読み書きをおこなうためには、
+[[m:Zlib::GzipReader.new]] もしくは、 [[m:Zlib::GzipWriter.new]] を使用します。
 
 @see [[m:Zlib::GzipReader.new]], [[m:Zlib::GzipWriter.new]] 
 
 --- wrap(*args) {|gz| ... } -> ()
 
-ľ�ܻ��Ѥ��ޤ���
-�̾����Ū���ɤ߽񤭤򤪤��ʤ�����ˤϡ�
-[[m:Zlib::GzipReader.wrap]] �⤷���ϡ�[[m:Zlib::GzipWriter.wrap]] ����Ѥ��ޤ���
+直接使用しません。
+通常、具体的な読み書きをおこなうためには、
+[[m:Zlib::GzipReader.wrap]] もしくは、[[m:Zlib::GzipWriter.wrap]] を使用します。
 
 @see [[m:Zlib::GzipReader.wrap]],[[m:Zlib::GzipWriter.wrap]]
 
 --- open(*args) {|gz| ... } -> ()
 
-ľ�ܻ��Ѥ��ޤ���
-�̾����Ū���ɤ߽񤭤򤪤��ʤ�����ˤϡ�
-[[m:Zlib::GzipReader.open]] �⤷���ϡ�[[m:Zlib::GzipWriter.open]] ����Ѥ��ޤ���
+直接使用しません。
+通常、具体的な読み書きをおこなうためには、
+[[m:Zlib::GzipReader.open]] もしくは、[[m:Zlib::GzipWriter.open]] を使用します。
 
 @see [[m:Zlib::GzipReader.open]], [[m:Zlib::GzipWriter.open]]
 
@@ -38,61 +38,61 @@ IO ���饹�Υ��󥹥��� (���� IO ���饹�Υ��󥹥��󥹤�Ʊ���᥽�åɤ�
 --- closed? -> bool
 --- to_io -> IO
 
-IO ���饹��Ʊ̾�᥽�åɤ�Ʊ����
+IO クラスの同名メソッドと同じ。
 
 @see [[m:IO#to_io]], [[m:IO#closed?]]
 
 --- close -> IO
 
-GzipFile ���֥������Ȥ򥯥��������ޤ������Υ᥽�åɤ�
-��Ϣ�դ����Ƥ��� IO ���֥������Ȥ� close �᥽�åɤ�ƤӽФ��ޤ���
-��Ϣ�դ����Ƥ��� IO ���֥������Ȥ��֤��ޤ���
+GzipFile オブジェクトをクローズします。このメソッドは
+関連付けられている IO オブジェクトの close メソッドを呼び出します。
+関連付けられている IO オブジェクトを返します。
 
 --- finish -> IO
 
-GzipFile ���֥������Ȥ򥯥��������ޤ���[[m:Zlib::GzipFile#close]]�Ȱ㤤��
-���Υ᥽�åɤϴ�Ϣ�դ����Ƥ��� IO ���֥������Ȥ� close �᥽�åɤ�
-�ƤӽФ��ޤ��󡣴�Ϣ�դ����Ƥ��� IO ���֥������Ȥ��֤��ޤ���
+GzipFile オブジェクトをクローズします。[[m:Zlib::GzipFile#close]]と違い、
+このメソッドは関連付けられている IO オブジェクトの close メソッドを
+呼び出しません。関連付けられている IO オブジェクトを返します。
 
 --- crc -> Integer
 
-���̤���Ƥ��ʤ��ǡ����� CRC �ͤ��֤��ޤ���
+圧縮されていないデータの CRC 値を返します。
 
 --- level -> Integer
 
-���̥�٥���֤��ޤ���
+圧縮レベルを返します。
 
 --- mtime -> Time
 
-gzip �ե�����Υإå����˵�Ͽ����Ƥ���ǽ��������֤��֤��ޤ���
+gzip ファイルのヘッダーに記録されている最終更新時間を返します。
 
 --- os_code -> Integer
 
-gzip �ե�����Υإå����˵�Ͽ����Ƥ��� OS �������ֹ���֤��ޤ���
+gzip ファイルのヘッダーに記録されている OS コード番号を返します。
 
 --- orig_name -> String | nil
 
-gzip �ե�����Υإå����˵�Ͽ����Ƥ��븵�ե�����̾���֤��ޤ���
-�ե�����̾����Ͽ����Ƥ��ʤ����� nil ���֤��ޤ���
+gzip ファイルのヘッダーに記録されている元ファイル名を返します。
+ファイル名が記録されていない場合は nil を返します。
 
 --- comment -> String | nil
 
-gzip �ե�����Υإå����˵�Ͽ����Ƥ��륳���Ȥ��֤��ޤ���
-�����Ȥ�¸�ߤ��ʤ����� nil ���֤��ޤ���
+gzip ファイルのヘッダーに記録されているコメントを返します。
+コメントが存在しない場合は nil を返します。
 
 --- sync -> bool
 --- sync=(flag) 
 
-IO ���饹��Ʊ����flag �����λ�����Ϣ�դ����Ƥ���
-IO ���֥������Ȥ� flush �᥽�åɤ���äƤ��ʤ���Фʤ�ޤ���
-�ޤ���true �ˤ���Ȱ���Ψ���������㲼���ޤ���
+IO クラスと同じ。flag が真の時、関連付けられている
+IO オブジェクトが flush メソッドを持っていなければなりません。
+また、true にすると圧縮率が著しく低下します。
 
 @see [[m:IO#sync]], [[m:IO#sync]]
 
 #@since 1.9.2
 --- path -> String
 
-��Ϣ�դ����Ƥ��� IO ���֥������ȤΥѥ����֤��ޤ���
-���Υ᥽�åɤ� IO ���֥������Ȥ� path �Ȥ����᥽�åɤ���ľ��Τ��������ޤ���
+関連付けられている IO オブジェクトのパスを返します。
+このメソッドは IO オブジェクトが path というメソッドを持つ場合のみ定義されます。
 
 #@end

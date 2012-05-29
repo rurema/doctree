@@ -44,19 +44,19 @@ sublibrary tkextlib/treectrl
 sublibrary tkextlib/vu
 sublibrary tkextlib/winico
 
-tk¤òÍÑ¤¤¤ÆGUI¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤òºîÀ®¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+tkã‚’ç”¨ã„ã¦GUIã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ä½œæˆã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@since 1.8.0
- * multi-tk Ê£¿ô¤Î Tcl ¥¤¥ó¥¿¡¼¥×¥ê¥¿¤ò¥µ¥İ¡¼¥È¤¹¤ë
+ * multi-tk è¤‡æ•°ã® Tcl ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ—ãƒªã‚¿ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹
  Ruby/Tk [[ruby-dev:20949]]
 #@end
- * tcltk Tcl/Tk ¥é¥¤¥Ö¥é¥ê tk ¤È¤Ï°Û¤Ê¤êÄ¾ÀÜ Tcl/Tk ¤ò¸Æ¤Ó½Ğ¤¹¥¤¥ó¥¿¥Õ¥§¡¼¥¹)
- * tk    Ruby/Tk [[url:http://ns103.net/~arai/ruby/rubytk.html.gz]] ¤ò»²¾È¤Î¤³¤È
+ * tcltk Tcl/Tk ãƒ©ã‚¤ãƒ–ãƒ©ãƒª tk ã¨ã¯ç•°ãªã‚Šç›´æ¥ Tcl/Tk ã‚’å‘¼ã³å‡ºã™ã‚¤ãƒ³ã‚¿ãƒ•ã‚§ãƒ¼ã‚¹)
+ * tk    Ruby/Tk [[url:http://ns103.net/~arai/ruby/rubytk.html.gz]] ã‚’å‚ç…§ã®ã“ã¨
 
-=== »²¹Í
+=== å‚è€ƒ
 
  * [[unknown:RubyTkFAQ]]
- * "Rubyist Magazine - 0003-Ruby/Tk ¤ÎÆ°¸ş"[[url:http://jp.rubyist.net/magazine/?0003-RubyTkMovement]]
+ * "Rubyist Magazine - 0003-Ruby/Tk ã®å‹•å‘"[[url:http://jp.rubyist.net/magazine/?0003-RubyTkMovement]]
 
 
 

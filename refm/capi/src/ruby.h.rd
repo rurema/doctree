@@ -1,54 +1,54 @@
 --- MACRO type* ALLOC(type)
 
-type ���Υ���������Ƥ롣
+type 型のメモリを割り当てる。
 
 --- MACRO type* ALLOC_N(type, n)
 
-type ���Υ���� n �ĳ�����Ƥ롣
+type 型のメモリを n 個割り当てる。
 
 --- MACRO type* ALLOCA_N(type, n)
 
-type ���Υ���� n �ĥ����å��ե졼��˳�����Ƥ롣
-���Υ���ϴؿ��������ȼ�ưŪ�˲�������롣
+type 型のメモリを n 個スタックフレームに割り当てる。
+このメモリは関数が終わると自動的に解放される。
 
 --- MACRO int BUILTIN_TYPE(VALUE obj)
 
-obj �ι�¤�η� ID ���֤��ޤ���
-[[f:SPECIAL_CONST_P]](obj) �����Υ��֥������Ȥ��Ф��ƻȤ�������ޤ���
+obj の構造体型 ID を返します。
+[[f:SPECIAL_CONST_P]](obj) が真のオブジェクトに対して使うと落ちます。
 
 --- void Check_SafeStr(VALUE v)
 
-�Ť� API �Ǥ���[[f:SafeStringValue]] ��ȤäƤ���������
+古い API です。[[f:SafeStringValue]] を使ってください。
 
 --- void Check_Type(VALUE val, int typeflag)
 
-val �ι�¤�η��ե饰�� typeflag �Ǥʤ����
-�㳰 TypeError ��ȯ�����ޤ���val ��¨�ͤ� VALUE �Ǥ��äƤ�
-�����ޤ���
+val の構造体型フラグが typeflag でなければ
+例外 TypeError を発生します。val は即値の VALUE であっても
+構いません。
 
 --- MACRO VALUE CHR2FIX(char x)
 
-char �������� x �� Ruby �� Fixnum ���Ѵ����ޤ���
+char 型の整数 x を Ruby の Fixnum に変換します。
 
 --- MACRO VALUE CLASS_OF(VALUE obj)
 
-obj �Υ��饹���֤��ޤ���
-���ξ��Ρ֥��饹�פȤ� C ��٥�Υ��饹��
-�Ĥޤ� RBasic ��¤�Τ� klass ���Ф��ͤǤ���
-�ޤ�����¤�Τ�����ʤ� Fixnum �ʤɤ��Ф��Ƥ������Ư���ޤ���
+obj のクラスを返します。
+この場合の「クラス」とは C レベルのクラス、
+つまり RBasic 構造体の klass メンバの値です。
+また、構造体を持たない Fixnum などに対しても正常に働きます。
 
 --- MACRO void CLONESETUP(VALUE clone, VALUE obj)
 
-OBJSETUP() ���Ѽ
-clone ��obj ���� clone �Ǻ�ä�
-���֥������ȤȤ��ƽ�������ޤ���
+OBJSETUP() の変種。
+clone を、obj から clone で作った
+オブジェクトとして初期化します。
 
 --- MACRO void Data_Get_Struct(VALUE obj, type, type *svar)
 
-Ruby �Υ��֥������� obj ���� type ���ؤΥݥ��󥿤�
-�Ȥ���� svar ���������ޤ���
+Ruby のオブジェクト obj から type 型へのポインタを
+とりだし svar に代入します。
 
-������
+使用例
 
     struct mytype {
         int i;
@@ -65,19 +65,19 @@ Ruby �Υ��֥������� obj ���� type ���ؤΥݥ��󥿤�
 
 --- MACRO VALUE Data_Make_Struct(VALUE klass, type, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, type *svar)
 
-type ���ι�¤�Τ�ҡ��פ˳�����ƤƤ���ؤΥݥ��󥿤�
-svar �������������饹 klass �Υ��󥹥��󥹤Ǥ���
-Ruby �Υ��֥������Ȥ���������������֤��ޤ���mark
-free �Ϥ��줾��ޡ����ѡ������Ѥδؿ��ؤΥݥ��󥿤Ǥ���
-�ɤ���⡢ɬ�פʤ��Ȥ��Ϥ����� 0 ���Ϥ��ޤ���
+type 型の構造体をヒープに割り当ててそれへのポインタを
+svar に代入し、クラス klass のインスタンスである
+Ruby のオブジェクトを生成し、それを返します。mark
+free はそれぞれマーク用・解放用の関数へのポインタです。
+どちらも、必要ないときはかわりに 0 を渡します。
 
-�ޤ� RUBY_DATA_FUNC ������ϰʲ��Τ褦�Ǥ���
+また RUBY_DATA_FUNC の定義は以下のようです。
 
     typedef void (*RUBY_DATA_FUNC)(void *st)
 
-������ st �ˤ� svar ���ͤ��Ϥ���ޤ���
+第一引数 st には svar の値が渡されます。
 
-������
+使用例
 
     struct mytype {
         int i;
@@ -95,23 +95,23 @@ free �Ϥ��줾��ޡ����ѡ������Ѥδؿ��ؤΥݥ��󥿤Ǥ���
 
 --- MACRO void *DATA_PTR(VALUE dta)
 
-�ºݤ� struct RData* ���Ǥ��� dta ���顢
-���줬��åפ��Ƥ���ݥ��󥿤���Ф��ޤ���
+実際は struct RData* 型である dta から、
+それがラップしているポインタを取り出します。
 
 --- MACRO VALUE Data_Wrap_Struct(VALUE klass, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, void *sval)
 
-C �ι�¤�� sval ���åפ��� klass ���饹��
-���󥹥��󥹤Ǥ��� Ruby ���֥������Ȥ���������������֤��ޤ���
-mark��free �Ϥ��줾�� sval �Υޡ����ѡ������Ѥ�
-�ؿ��ؤΥݥ��󥿤Ǥ����ɤ���⡢ɬ�פʤ��Ȥ��Ϥ����� 0 ���Ϥ��ޤ���
+C の構造体 sval をラップして klass クラスの
+インスタンスである Ruby オブジェクトを生成し、それを返します。
+mark、free はそれぞれ sval のマーク用・解放用の
+関数へのポインタです。どちらも、必要ないときはかわりに 0 を渡します。
 
-�ޤ� RUBY_DATA_FUNC ������ϰʲ��Τ褦�Ǥ���
+また RUBY_DATA_FUNC の定義は以下のようです。
 
     typedef void (*RUBY_DATA_FUNC)(void *st)
 
-������ st �ˤ� sval ���Ϥ���ޤ���
+第一引数 st には sval が渡されます。
 
-������
+使用例
 
     struct mytype {
         int i;
@@ -130,84 +130,84 @@ mark��free �Ϥ��줾�� sval �Υޡ����ѡ������Ѥ�
 
 --- MACRO void DUPSETUP(dup, obj)
 
-OBJSETUP() ���Ѽ
-dup ��obj ���� dup �Ǻ�ä�
-���֥������ȤȤ��ƽ�������ޤ���
+OBJSETUP() の変種。
+dup を、obj から dup で作った
+オブジェクトとして初期化します。
 
 --- MACRO int FIX2INT(VALUE x)
 
-Fixnum �� int ���Ѵ����ޤ���
-�֤��ͤ� int ���ϰϤ��鳰������ RangeError ��ȯ�����ޤ���
+Fixnum を int に変換します。
+返り値が int の範囲から外れる場合は RangeError が発生します。
 
 --- MACRO long FIX2LONG(VALUE x)
 
-Fixnum �� long ���Ѵ����ޤ���
-Fixnum �Ͼ�� long �˼��ޤ�ޤ���
+Fixnum を long に変換します。
+Fixnum は常に long に収まります。
 
 --- MACRO unsigned int FIX2UINT(VALUE x)
 
-Fixnum �� unsigned int ���Ѵ����ޤ���
-�֤��ͤ� unsigned int ���ϰϤ��鳰������ RangeError ��ȯ�����ޤ���
+Fixnum を unsigned int に変換します。
+返り値が unsigned int の範囲から外れる場合は RangeError が発生します。
 
 --- MACRO unsigned long FIX2ULONG(VALUE x)
 
-Fixnum �� unsigned long ���Ѵ����ޤ���
-Fixnum �Ͼ�� unsigned long �˼��ޤ�ޤ���
+Fixnum を unsigned long に変換します。
+Fixnum は常に unsigned long に収まります。
 
 --- MACRO int FIXABLE(long f)
 
-f �� Fixnum ���ϰϤ˼��ޤäƤ���ʤ鿿��
+f が Fixnum の範囲に収まっているなら真。
 
 --- MACRO long FIXNUM_MAX
 
-Fixnum �ˤǤ��������ξ���͡�
+Fixnum にできる整数の上限値。
 
 --- MACRO long FIXNUM_MIN
 
-Fixnum �ˤǤ��������β����͡�
+Fixnum にできる整数の下限値。
 
 --- MACRO int FIXNUM_P(VALUE obj)
 
-obj �� Fixnum �Υ��󥹥��󥹤ΤȤ�����
+obj が Fixnum のインスタンスのとき真。
 
 --- MACRO int FL_ABLE(VALUE x)
 
-x ��¨�ͤ� VALUE �Ǥʤ���п���
+x が即値の VALUE でなければ真。
 
 --- MACRO void FL_REVERSE(VALUE x, int f)
 
-x �Υե饰 f ��ȿž���롣
+x のフラグ f を反転する。
 
 --- MACRO void FL_SET(VALUE x, int f)
 
-x ���Ф��ƥե饰 f �򥻥åȤ��롣
+x に対してフラグ f をセットする。
 
 --- MACRO int FL_TEST(VALUE x, int f)
 
-x �Υե饰 f ��Ω�äƤ����鿿��
+x のフラグ f が立っていたら真。
 
 --- MACRO void FL_UNSET(VALUE x, int f)
 
-x �Υե饰 f �򥯥ꥢ���롣
+x のフラグ f をクリアする。
 
 --- MACRO VALUE ID2SYM(ID id)
 
-id �� Symbol ���Ѵ����ޤ���
+id を Symbol に変換します。
 
 --- MACRO int IMMEDIATE_P(VALUE obj)
 
-obj ��¨�ͤǤ��Ŀ����ͤǤ���Ȥ�����
-���ʤ�����ߤμ����Ǥ�
-obj �� Symbol �� Fixnum �Υ��󥹥��󥹤Ǥ��뤫�� Qtrue �ΤȤ�����
+obj が即値でかつ真な値であるとき真。
+すなわち現在の実装では
+obj が Symbol か Fixnum のインスタンスであるか、 Qtrue のとき真。
 
 --- MACRO VALUE INT2FIX(int i)
 
-Fixnum �ˤ����ޤ뤳�Ȥ������������� Fixnum ���Ѵ����ޤ���
-�ʤ���Fixnum ������ long ���� - 1 �Ǥ���
+Fixnum におさまることが自明な整数を Fixnum に変換します。
+なお、Fixnum の幅は long の幅 - 1 です。
 
 --- MACRO VALUE INT2NUM(int i)
 
-Ǥ�դ������� Fixnum �� Bignum ���Ѵ����ޤ���
+任意の整数を Fixnum か Bignum に変換します。
 
 --- MACRO int ISALNUM(char c)
 
@@ -231,27 +231,27 @@ Fixnum �ˤ����ޤ뤳�Ȥ������������� Fixnum ���Ѵ����ޤ���
 
 --- MACRO VALUE LONG2FIX(long i)
 
-INT2FIX ��Ʊ���Ǥ���
+INT2FIX と同じです。
 
 --- MACRO VALUE LONG2NUM(long v)
 
 --- MACRO int MEMCMP(p1, p2, type, n)
 
-type ���Υ����ΰ� p1 �� p2 ����Ƭ n �Ĥ���Ӥ��롣
-p1 �� p2 �κǽ�� n �Ĥ�꾮���������������礭���Ȥ�����
-�줾������0������ͤ��֤���
+type 型のメモリ領域 p1 と p2 の先頭 n 個を比較する。
+p1 が p2 の最初の n 個より小さい、等しい、大きいとき、そ
+れぞれ正、0、負の値を返す。
 
 --- MACRO void MEMCPY(p1, p2, type, n)
 
-type ���Υ����ΰ� p2 �Τ�����Ƭ�� n �Ĥ� p1 �˥��ԡ����롣
+type 型のメモリ領域 p2 のうち先頭の n 個を p1 にコピーする。
 
 --- MACRO void MEMMOVE(p1, p2, type, n)
 
-type ���Υ����ΰ� p2 �Τ�����Ƭ�� n �Ĥ� p1 �˰�ư���롣
+type 型のメモリ領域 p2 のうち先頭の n 個を p1 に移動する。
 
 --- MACRO void MEMZERO(p, type, n)
 
-type ���Υ����ΰ� p �򥼥����ꥢ���롣 n �����ǿ���
+type 型のメモリ領域 p をゼロクリアする。 n は要素数。
 
 --- MACRO int NEGFIXABLE(long f)
 
@@ -259,7 +259,7 @@ type ���Υ����ΰ� p �򥼥����ꥢ���롣 n �����ǿ���
 
 --- MACRO int NIL_P(VALUE obj)
 
-obj �� Qnil �ΤȤ�����
+obj が Qnil のとき真。
 
 --- MACRO char NUM2CHR(VALUE x)
 
@@ -279,29 +279,29 @@ obj �� Qnil �ΤȤ�����
 
 --- MACRO void OBJ_INFECT(VALUE dest, VALUE src)
 
-src �˱����ޡ������դ��Ƥ����� dest ��������롣
+src に汚染マークが付いていたら dest も汚染する。
 
 --- MACRO void OBJ_TAINT(VALUE x)
 
-x �˱����ޡ������դ��롣
+x に汚染マークを付ける。
 
 --- MACRO int OBJ_TAINTED(VALUE x)
 
-x �˱����ޡ������դ��Ƥ����鿿��
+x に汚染マークが付いていたら真。
 
 --- MACRO void OBJSETUP(obj, VALUE klass, int typeflag)
 
-obj �򥯥饹 klass �ȥե饰 typeflag �ǽ�������롣
-$SAFE >= 3 �ΤȤ���̵���Ǳ������롣
+obj をクラス klass とフラグ typeflag で初期化する。
+$SAFE >= 3 のときは無条件で汚染する。
 
 --- MACRO int POSFIXABLE(long f)
 
-f �� Fixnum �ξ���Ͱʲ��ʤ�п���
+f が Fixnum の上限値以下ならば真。
 
 --- MACRO struct RArray *RARRAY(VALUE obj)
 
-obj �� struct RArray* �˥��㥹�Ȥ��롣
-������ obj �� struct RArray* �Ǥʤ��Ȥ��Ƥ⥭�㥹�Ȥ��Ƥ��ޤ���
+obj を struct RArray* にキャストする。
+本当は obj が struct RArray* でないとしてもキャストしてしまう。
 
 --- VALUE rb_fix_new(long v)
 
@@ -309,7 +309,7 @@ obj �� struct RArray* �˥��㥹�Ȥ��롣
 
 --- int rb_safe_level(void)
 
-���ߤΥ����ե�٥���֤��ޤ���
+現在のセーフレベルを返します。
 
 --- VALUE rb_uint_new(unsigned int v)
 
@@ -323,7 +323,7 @@ obj �� struct RArray* �˥��㥹�Ȥ��롣
 
 --- MACRO type* REALLOC_N(var, type, n)
 
-type ���Υ����ΰ� var �Υ������� n �Ĥ��ѹ����롣
+type 型のメモリ領域 var のサイズを n 個に変更する。
 
 --- MACRO struct RFile *RFILE(VALUE obj)
 
@@ -343,79 +343,79 @@ type ���Υ����ΰ� var �Υ������� n �Ĥ��ѹ����롣
 
 --- MACRO int RTEST(VALUE obj)
 
-obj �� Qfalse �Ǥ� Qnil �Ǥ�ʤ��Ȥ�����
+obj が Qfalse でも Qnil でもないとき真。
 
 --- MACRO RUBY_DATA_FUNC(func)
 
-Ǥ�դδؿ��ؤΥݥ��� func �� struct RData �� dmark/dfree ��
-�ͤȤ���Ŭ���뷿�˶������㥹�Ȥ��ޤ���
+任意の関数へのポインタ func を struct RData の dmark/dfree の
+値として適する型に強制キャストします。
 
 --- MACRO RUBY_METHOD_FUNC(func)
 
-Ǥ�դδؿ��ؤΥݥ��� func �� Ruby �Υ᥽�åɤμ��ΤȤ���Ŭ����
-���˶������㥹�Ȥ��ޤ���
+任意の関数へのポインタ func を Ruby のメソッドの実体として適する
+型に強制キャストします。
 
 --- MACRO SafeStringValue(v)
 
-[[f:StringValue]] ��Ʊ������val �� String �Ǥʤ���� to_str �᥽�åɤ�
-�Ȥä� String ���Ѵ����ޤ���Ʊ���� rb_check_safe_str() �ˤ������å���
-�Ԥ��ޤ���
+[[f:StringValue]] と同じく、val が String でなければ to_str メソッドを
+使って String に変換します。同時に rb_check_safe_str() によるチェックも
+行います。
 
 --- MACRO int SPECIAL_CONST_P(VALUE obj)
 
-obj �����Τι�¤�Τ�����ʤ��Ȥ�����
-�������ǿ��ˤʤ�Τ� Qnil, Qtrue, Qfalse �ȡ�
-Fixnum, Symbol �Υ��󥹥��󥹡�
+obj が実体の構造体を持たないとき真。
+現時点で真になるのは Qnil, Qtrue, Qfalse と、
+Fixnum, Symbol のインスタンス。
 
 --- MACRO char *STR2CSTR(VALUE str)
 
-Ruby �Υ��֥������� str ���� C ��ʸ�������Ф��ޤ���
-str �� String �Ǥʤ����� to_str �ˤ�ä��Ѵ����ߤޤ���
+Ruby のオブジェクト str から C の文字列を取り出します。
+str が String でない場合は to_str によって変換を試みます。
 
-�֤��ͤ� free ������ľ�ܽ񤭴������ꤷ�ƤϤ����ޤ���
+返り値を free したり直接書き換えたりしてはいけません。
 
-STR2CSTR �ϡ�Ϳ����줿���֥������Ȥ�ʸ����Ǥʤ� to_str �᥽��
-�ɤ���ľ�硢������ to_str ��ƤӽФ��ư��ۤη��Ѵ���Ԥ���
-���줬�ݻ�����ʸ����ݥ��󥿤��֤��ޤ���
-������������API�Ǥϰ��ۤη��Ѵ���̤Ȥʤ륪�֥������Ȥ��ɤ������
-�ݻ�����ʤ����ᡢ���դ��ƻ��Ѥ��ʤ��ȷ�̤� GC ������ǽ��������ޤ���
+STR2CSTR は、与えられたオブジェクトが文字列でなく to_str メソッ
+ドを持つ場合、内部で to_str を呼び出して暗黙の型変換を行い、
+それが保持する文字列ポインタを返します。
+しかし、このAPIでは暗黙の型変換結果となるオブジェクトがどこからも
+保持されないため、注意して使用しないと結果が GC される可能性があります。
 
-Ruby 1.7 �ʹߤǤ������ [[f:StringValuePtr]] ����Ѥ��ޤ���������
-�ϡ������λ����褬���ۤη��Ѵ��η�̤��֤�����뤿���Ѵ���̤� GC
-����ޤ���(Ruby 1.7 �Ǥϡ�STR2CSTR() �ϡ�obsolete �Ǥ�)
+Ruby 1.7 以降では代わりに [[f:StringValuePtr]] を使用します。こちら
+は、引数の参照先が暗黙の型変換の結果に置き換わるため変換結果が GC
+されません。(Ruby 1.7 では、STR2CSTR() は、obsolete です)
 
-[[f:StringValue]] �ϡ������� to_str �ˤ����ۤη��Ѵ�����Ԥ���
-���˻��Ѥ��ޤ���
+[[f:StringValue]] は、引数が to_str による暗黙の型変換を期待する
+場合に使用します。
 
 --- MACRO void StringValue(VALUE val)
 
-val �� String �Ǥʤ���� to_str �᥽�åɤ�Ȥä� String ���Ѵ����ޤ���
+val が String でなければ to_str メソッドを使って String に変換します。
 
-���Υޥ������Ϥ��� VALUE �� ruby �� GC ����μ¤��ݸ��ޤ���
+このマクロに渡した VALUE は ruby の GC から確実に保護されます。
 
 --- MACRO char *StringValuePtr(VALUE val)
 
-val �� String �Ǥʤ���� to_str �᥽�åɤ�Ȥä� String ���Ѵ�����
-���μ��ΤΥݥ��󥿤��֤��ޤ���
+val が String でなければ to_str メソッドを使って String に変換し、
+その実体のポインタを返します。
 
-���Υޥ������Ϥ��� VALUE �� ruby �� GC ����μ¤��ݸ��ޤ���
+このマクロに渡した VALUE は ruby の GC から確実に保護されます。
 
 --- MACRO int SYM2ID(VALUE symbol)
 
-Symbol symbol ����ͤ��Ѵ����ޤ���
-1.4�Ǥϡ�[[f:FIX2INT]](symbol)��Ʊ���Ǥ���
+Symbol symbol を数値に変換します。
+1.4では、[[f:FIX2INT]](symbol)と同じです。
 
 --- MACRO int SYMBOL_P(VALUE obj)
 
-obj �� Symbol �Υ��󥹥��󥹤ΤȤ�����
+obj が Symbol のインスタンスのとき真。
 
 --- MACRO int TYPE(VALUE obj)
 
-obj �ι�¤�η� ID ���֤��ޤ���
+obj の構造体型 ID を返します。
 
 --- MACRO VALUE UINT2NUM(unsigned int i)
 
-Ǥ�դ������� Fixnum �� Bignum ���Ѵ����ޤ���
+任意の整数を Fixnum か Bignum に変換します。
 
 --- MACRO VALUE ULL2NUM(unsigned long long n)
 

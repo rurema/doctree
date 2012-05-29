@@ -1,12 +1,12 @@
 = class WIN32OLE_METHOD < Object
 
-OLE�����ȥ᡼����󥵡��Ф����ĥ᥽�åɤξ�����󶡤��ޤ���
+OLEオートメーションサーバが持つメソッドの情報を提供します。
 
-WIN32OLE_METHOD�ϡ�[[m:WIN32OLE#ole_methods]]�ʤɤθƤӽФ��ˤ�ä��֤�
-��륪�֥������Ȥǡ�OLE�����ȥ᡼����󥵡��ФΥ᥽�åɤξ���ʥ᥿�ǡ�
-���ˤ��ݻ����ޤ���
+WIN32OLE_METHODは、[[m:WIN32OLE#ole_methods]]などの呼び出しによって返さ
+れるオブジェクトで、OLEオートメーションサーバのメソッドの情報（メタデー
+タ）を保持します。
 
-=== ����ץ륳����
+=== サンプルコード
 
    excel = WIN32OLE.new('Excel.Application')
    excel.ole_methods.each do |method|
@@ -31,20 +31,20 @@ WIN32OLE_METHOD�ϡ�[[m:WIN32OLE#ole_methods]]�ʤɤθƤӽФ��ˤ�ä��֤�
 == Class Methods
 
 --- new(ole_type,  method) -> WIN32OLE_METHOD
-[[c:WIN32OLE_TYPE]]�ȥ᥽�å�̾����ꤷ��WIN32OLE_METHOD�Υ��󥹥���
-���������ޤ���
+[[c:WIN32OLE_TYPE]]とメソッド名を指定してWIN32OLE_METHODのインスタンス
+を生成します。
 
-OLE�����ȥ᡼����󥵡��Фη�����ȥ᥽�å�̾����WIN32OLE_METHOD�Υ���
-�����󥹤��������ޤ���
+OLEオートメーションサーバの型情報とメソッド名からWIN32OLE_METHODのイン
+スタンスを生成します。
 
-���ץꥱ�������ץ������Ǥϡ�WIN32OLE_METHOD���֥������Ȥ�new�᥽��
-�ɤ�����������⡢[[m:WIN32OLE#ole_method]]�ʤɤΥ᥽�åɤ򻲾Ȥ����
-������ñ�Ǥ���
+アプリケーションプログラムでは、WIN32OLE_METHODオブジェクトをnewメソッ
+ドで生成するよりも、[[m:WIN32OLE#ole_method]]などのメソッドを参照するほ
+うが簡単です。
 
-@param ole_type [[c:WIN32OLE_TYPE]]�Υ��󥹥��󥹡�
-@param method �᥽�å�̾��ʸ����ǻ��ꤷ�ޤ���
-@return method�ѥ�᡼�����б�����WIN32OLE_METHOD�Υ��󥹥��󥹡�
-@raise WIN32OLERuntimeError method�ѥ�᡼���ǻ��ꤷ���᥽�åɤ����Ĥ���ޤ���
+@param ole_type [[c:WIN32OLE_TYPE]]のインスタンス。
+@param method メソッド名を文字列で指定します。
+@return methodパラメータに対応するWIN32OLE_METHODのインスタンス。
+@raise WIN32OLERuntimeError methodパラメータで指定したメソッドが見つかりません。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -52,13 +52,13 @@ OLE�����ȥ᡼����󥵡��Фη�����ȥ᥽�å�̾����WIN32OLE_METHOD�Υ���
 == Instance Methods
 
 --- dispid -> Integer
-�᥽�åɤΥǥ����ѥå�ID��DISPID�ˤ�������ޤ���
+メソッドのディスパッチID（DISPID）を取得します。
 
-�ǥ����ѥå�ID�ϥ᥽�åɤΰ�ռ��̻ҤǤ���WIN32OLE�Ǥϡ�
-[[m:WIN32OLE#_invoke]]�ʤɤΥ᥽�åɤǡ��ƤӽФ������ФΥ᥽�åɤ����
-����Τ����Ѥ��ޤ���
+ディスパッチIDはメソッドの一意識別子です。WIN32OLEでは、
+[[m:WIN32OLE#_invoke]]などのメソッドで、呼び出すサーバのメソッドを指定
+するのに利用します。
 
-@return �᥽�åɤ�DISPID���֤��ޤ���
+@return メソッドのDISPIDを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
@@ -69,12 +69,12 @@ OLE�����ȥ᡼����󥵡��Фη�����ȥ᥽�å�̾����WIN32OLE_METHOD�Υ���
 @see [[m:WIN32OLE#_setproperty]]
 
 --- event? -> bool
-�᥽�åɤ����٥�Ȥ��ɤ�����������ޤ���
+メソッドがイベントかどうかを取得します。
 
-���٥�ȤȤϤ��Υ����Ф��������Ƥ���᥽�åɤǤϤʤ������饤�����¦��
-������¦�����Τ�����뤿��˼�������᥽�åɤǤ���
+イベントとはこのサーバが実装しているメソッドではなく、クライアント側が
+サーバ側の通知を受けるために実装するメソッドです。
 
-@return �᥽�åɤ����٥�ȤǤ���п���
+@return メソッドがイベントであれば真。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
@@ -83,151 +83,151 @@ OLE�����ȥ᡼����󥵡��Фη�����ȥ᥽�å�̾����WIN32OLE_METHOD�Υ���
 @see [[c:WIN32OLE_EVENT]]
 
 --- event_interface -> String | nil
-�᥽�åɤ����٥�Ȥξ�硢���٥�ȤΥ��󥿡��ե�����̾��������ޤ���
+メソッドがイベントの場合、イベントのインターフェイス名を取得します。
 
-@return �᥽�åɤ����٥�ȤǤ���С����٥�ȤΥ��󥿡��ե�����̾���֤�
-        �ޤ������٥�ȤǤʤ����nil���֤��ޤ���
+@return メソッドがイベントであれば、イベントのインターフェイス名を返し
+        ます。イベントでなければnilを返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
   method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
   puts method.event_interface # =>  WorkbookEvents
 
 --- helpcontext -> Integer | nil
-�᥽�åɤΥإ�ץ���ƥ����Ȥ�������ޤ���
+メソッドのヘルプコンテキストを取得します。
 
-�إ�ץ���ƥ����Ȥϡ���Ϣ����إ�ץե������Υȥԥå����֤򼨤�����
-�ͤǤ���
+ヘルプコンテキストは、関連するヘルプファイル上のトピック位置を示す整数
+値です。
 
-@return �إ�ץ���ƥ����Ȥ��֤��ޤ���̤����ξ���nil���֤��ޤ���
+@return ヘルプコンテキストを返します。未定義の場合はnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.helpcontext # => 65717
 
-WIN32OLE_METHOD���֥������Ȥ�����Ȥ��ơ�[[m:WIN32OLE.ole_show_help]]��
-�إ�ץե������ɽ��������ˤϡ�WIN32OLE�����������᥽�åɤ�ƤӽФ�
-�ޤ���
+WIN32OLE_METHODオブジェクトを引数として、[[m:WIN32OLE.ole_show_help]]で
+ヘルプファイルを表示する場合には、WIN32OLEが内部で当メソッドを呼び出し
+ます。
 
 @see [[m:WIN32OLE.ole_show_help]]
 
 --- helpfile -> String | nil
-�إ�ץե�����Υѥ�̾��������ޤ���
+ヘルプファイルのパス名を取得します。
 
-�᥽�åɤ˥إ�ץե����뤬��Ϣ�դ����Ƥ����硢�����إ�ץե������
-�ѥ�̾���֤��ޤ���
+メソッドにヘルプファイルが関連付けられている場合、該当ヘルプファイルの
+パス名を返します。
 
-@return �إ�ץե�����Υѥ�̾��ʸ������֤��ޤ����إ�ץե����뤬̤��
-        ���ʤ��nil���֤��ޤ���
+@return ヘルプファイルのパス名を文字列で返します。ヘルプファイルが未定
+        義ならばnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.helpfile # => C:\...\VBAXL9.CHM
 
-�᥽�åɤ˥إ�ץե����뤬��Ϣ�դ����Ƥ����硢[[m:WIN32OLE.ole_show_help]]��WIN32OLE_METHOD���֥������Ȥ�Ϳ���ƥإ�ץե������ɽ���Ǥ��ޤ���
+メソッドにヘルプファイルが関連付けられている場合、[[m:WIN32OLE.ole_show_help]]にWIN32OLE_METHODオブジェクトを与えてヘルプファイルを表示できます。
 
 @see [[m:WIN32OLE.ole_show_help]]
 
 --- helpstring -> String | nil
-�᥽�åɤΥإ��ʸ�����������ޤ���
+メソッドのヘルプ文字列を取得します。
 
-helpstring�ϡ�IDE���᥽�åɤΥХ롼��إ�פ�ɽ������褦�ʾ������Ѳ�
-ǽ�ʡ�1�����٤ǥ᥽�åɤ���������ʸ����Ǥ���
+helpstringは、IDEがメソッドのバルーンヘルプを表示するような場合に利用可
+能な、1行程度でメソッドを説明する文字列です。
 
-@return �إ��ʸ������֤��ޤ���̤����ʤ��nil���֤��ޤ���
+@return ヘルプ文字列を返します。未定義ならばnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
    method = WIN32OLE_METHOD.new(tobj, 'Navigate')
    puts method.helpstring # => Navigates to a URL or file.
 
 --- invkind -> Integer
-�᥽�åɤμ���򼨤�INVOKEKIND����ͤ�������ޤ���
+メソッドの種類を示すINVOKEKIND列挙値を取得します。
 
-�����Ǹ����᥽�åɤμ���Ȥ����Τϡ�OLE�����ȥ᡼����󥯥饤����Ȥε�
-�Ҹ��줬�ɤΤ褦�ʷ����ǥ����иƤӽФ��򵭽Ҥ��٤�������ꤷ��°���ͤ�
-����
+ここで言うメソッドの種類というのは、OLEオートメーションクライアントの記
+述言語がどのような形式でサーバ呼び出しを記述すべきかを指定した属性値で
+す。
 
-@return �᥽�åɤ�INVOKEKIND���֤��ޤ���
+@return メソッドのINVOKEKINDを返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
   method = WIN32OLE_METHOD.new(tobj, 'Add')
   puts method.invkind # => 1
 
-INVOKEKIND����ͤϰʲ����̤�Ǥ����᥽�åɤμ���ϰʲ����ͤ������¤Ǽ�
-����ޤ���
+INVOKEKIND列挙値は以下の通りです。メソッドの種類は以下の値の論理和で示
+されます。
 
 : INVOKE_FUNC(1)
-  �ؿ��ƤӽФ������ǵ��Ҥ���᥽�åɤǤ���
+  関数呼び出し形式で記述するメソッドです。
 : INVOKE_PROPERTYGET(2)
-  �ץ��ѥƥ����ȷ����ǵ��Ҥ���᥽�åɤǤ���
+  プロパティ参照形式で記述するメソッドです。
 : INVOKE_PROPERTYPUT(4)
-  �ץ��ѥƥ����ͤ����ꤹ������ǵ��Ҥ���᥽�åɤǤ���
+  プロパティに値を設定する形式で記述するメソッドです。
 : INVOKE_PROPERTYPUTREF(8)
-  �ץ��ѥƥ��˻��Ȥ����ꤹ������ǵ��Ҥ���᥽�åɤǤ���
+  プロパティに参照を設定する形式で記述するメソッドです。
 
-�ʤ�INVOKE_PROPERTYPUTREF��INVOKE_PROPERTYPUT�ϡ��ץ��ѥƥ����������2
-���ढ������Ѥζ�ʬ�Ǥ���Ruby�Ǥε��һ��Ϥɤ�����prop=(arg)�פη���
-�ǵ��Ҥ��ޤ���
+なおINVOKE_PROPERTYPUTREFとINVOKE_PROPERTYPUTは、プロパティ設定形式が2
+種類ある言語用の区分です。Rubyでの記述時はどちらも「prop=(arg)」の形式
+で記述します。
 
 --- invoke_kind -> String
-�᥽�åɤμ����ʸ����Ǽ������ޤ���
+メソッドの種類を文字列で取得します。
 
-�����Ǹ����᥽�åɤμ���Ȥ����Τϡ�OLE�����ȥ᡼����󥯥饤����Ȥε�
-�Ҹ��줬�ɤΤ褦�ʷ����ǥ����иƤӽФ��򵭽Ҥ��٤�������ꤷ��°���ͤ�
-����
+ここで言うメソッドの種類というのは、OLEオートメーションクライアントの記
+述言語がどのような形式でサーバ呼び出しを記述すべきかを指定した属性値で
+す。
 
-@return �᥽�åɤμ���򼨤�ʸ������֤��ޤ���
+@return メソッドの種類を示す文字列を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.invoke_kind # => "FUNC"
 
-�����ͤϰʲ��Τ����줫�Ȥʤ�ޤ����ͤΰ�̣��
-[[m:WIN32OLE_METHOD#invkind]]�������򻲾Ȥ��Ƥ���������
+返送値は以下のいずれかとなります。値の意味は
+[[m:WIN32OLE_METHOD#invkind]]の説明を参照してください。
 
 : PORPERTY
-  INVOKE_PROPETYGET��INVOKE_PROPETYPUT��ξ�������ꤵ��Ƥ��ޤ���
+  INVOKE_PROPETYGETとINVOKE_PROPETYPUTの両方が設定されています。
 : PROPERTYGET
-  INVOKE_PROPETYGET�����ꤵ��Ƥ��ޤ���
+  INVOKE_PROPETYGETが設定されています。
 : PROPERTYPUT
-  INVOKE_PROPERTYPUT�����ꤵ��Ƥ��ޤ���
+  INVOKE_PROPERTYPUTが設定されています。
 : PROPERTYPUTREF
-  INVOKE_PROPERTYPUTREF�����ꤵ��Ƥ��ޤ���
+  INVOKE_PROPERTYPUTREFが設定されています。
 : FUNC
-  INVOKE_FUNC�����ꤵ��Ƥ��ޤ���
+  INVOKE_FUNCが設定されています。
 : UNKNOWN
-  �嵭�Τ�����ˤ����ƤϤޤ�ޤ���
+  上記のいずれにも当てはまりません。
 
 @see [[m:WIN32OLE_METHOD#invkind]]
 
 --- name -> String
 --- to_s -> String
-�᥽�å�̾��������ޤ���
+メソッド名を取得します。
 
-@return �᥽�å�̾��ʸ������֤��ޤ���
+@return メソッド名を文字列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    puts method.name # => SaveAs
 
 --- offset_vtbl -> Integer
-���Υ᥽�åɤ�VTBL�Υ��ե��åȤ�������ޤ���
+このメソッドのVTBLのオフセットを取得します。
 
-VTBL��C++��C�ǥ᥽�åɤ�ƤӽФ���������Ѥ���ؿ��ݥ��󥿤Υơ��֥�Ǥ���
+VTBLはC++やCでメソッドを呼び出すために利用する関数ポインタのテーブルです。
 
-@return �᥽�åɤ�VTBL��Υ��ե��åȤ��֤��ޤ���
+@return メソッドのVTBL上のオフセットを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.offset_vtbl # => 40
 
 --- params -> [WIN32OLE_PARAM]
-�᥽�åɤΥѥ�᡼�������������ޤ���
+メソッドのパラメータ情報を取得します。
 
-���Υ᥽�åɤΥѥ�᡼����[[c:WIN32OLE_PARAM]]������Ȥ����֤��ޤ�����
-��κǽ�����Ǥ��Ǻ�ü�Υѥ�᡼�����б����ޤ���
+このメソッドのパラメータを[[c:WIN32OLE_PARAM]]の配列として返します。配
+列の最初の要素が最左端のパラメータに対応します。
 
-@return [[c:WIN32OLE_PARAM]]������̵�����Υ᥽�åɤǤ�������ǿ�0����
-        ����֤��ޤ���
+@return [[c:WIN32OLE_PARAM]]の配列。無引数のメソッドであれば要素数0の配
+        列を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -237,67 +237,67 @@ VTBL��C++��C�ǥ᥽�åɤ�ƤӽФ���������Ѥ���ؿ��ݥ��󥿤Υơ��֥�Ǥ���
                          TextVisualLayout]
 
 --- return_type -> String
-�᥽�åɤ��֤��ͤη�̾��������ޤ���
+メソッドの返り値の型名を取得します。
 
-@return �֤��ͤη�̾�򼨤�ʸ������֤��ޤ���
-@raise WIN32OLERuntimeError �᥽�åɤη����������Ǥ��ʤ��ä��������Τ��ޤ���
+@return 返り値の型名を示す文字列を返します。
+@raise WIN32OLERuntimeError メソッドの型情報を取得できなかった場合に通知します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    method = WIN32OLE_METHOD.new(tobj, 'Visible')
    puts method.return_type # => BOOL
 
-OLE�����ȥ᡼�����η�̾�ϡ��б�����[[c:WIN32OLE::VARIANT]]���������
-Ƭ�Ρ�VT_�פ�������̾�Τ�����ޤ���
+OLEオートメーションの型名は、対応する[[c:WIN32OLE::VARIANT]]の定数の先
+頭の「VT_」を削除した名称を持ちます。
 
-���Ȥ��С�32�ӥå�����դ������Ǥ���С�I4�פȤʤ�ޤ���
+たとえば、32ビット符号付き整数であれば「I4」となります。
 
 @see [[c:WIN32OLE::VARIANT]]
 
 
 --- return_type_detail -> [String]
-�֤��ͤη���°����������ޤ���
+返り値の型と属性を取得します。
 
-@return �֤��ͤη���°����ʸ����������֤��ޤ���
+@return 返り値の型と属性を文字列配列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    method = WIN32OLE_METHOD.new(tobj, 'Workbooks')
    p method.return_type_detail # => ["PTR", "USERDEFINED", "Workbooks"]
 
-°�����ղä���Ƥ��ʤ����ϡ�[[m:WIN32OLE_METHOD#return_type]]�����Ǥ�
-���������֤�ޤ���
+属性が付加されていない場合は、[[m:WIN32OLE_METHOD#return_type]]を要素と
+した配列が返ります。
 
-�֤��ͤμ������°���ͤ�COM��IDL�ʥ��󥿡��ե������������ˤˤ�äƵ�
-�ꤵ��Ƥ��ޤ���
+返り値の取り得る属性値はCOMのIDL（インターフェイス定義言語）によって規
+定されています。
 
 @see [[url:http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx]]
 
 --- return_vtype -> Integer
-�᥽�åɤ��֤��ͤη��򼨤����ͤ�������ޤ���
+メソッドの返り値の型を示す数値を取得します。
 
-@return �֤��ͤη��򼨤����͡�VARENUM�ˤ��֤��ޤ���
-@raise WIN32OLERuntimeError �᥽�åɤη����������Ǥ��ʤ��ä��������Τ��ޤ���
+@return 返り値の型を示す数値（VARENUM）を返します。
+@raise WIN32OLERuntimeError メソッドの型情報を取得できなかった場合に通知します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    method = WIN32OLE_METHOD.new(tobj, 'Visible')
    puts method.return_vtype # => 11
 
-VARENUM������ϡ�Platform SDK��wtypes.h�ˤ���ޤ���
+VARENUMの定義は、Platform SDKのwtypes.hにあります。
 
 --- size_opt_params -> Integer | nil
-���ץ����ѥ�᡼������������ޤ���
+オプションパラメータ数を取得します。
 
-@return ���ץ����ѥ�᡼�������������֤��ޤ����᥽�åɤξܺپ�����
-        ���Ǥ��ʤ�����nil���֤��ޤ���
+@return オプションパラメータ数を整数で返します。メソッドの詳細情報を取
+        得できない場合はnilを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    puts method.size_opt_params # => 5
 
 --- size_params -> Integer | nil
-�ѥ�᡼������������ޤ���
+パラメータ数を取得します。
 
-@return �ѥ�᡼�������������֤��ޤ����᥽�åɤξܺپ��������Ǥ��ʤ�
-        ����nil���֤��ޤ���
+@return パラメータ数を整数で返します。メソッドの詳細情報を取得できない
+        場合はnilを返します。
 
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
@@ -307,10 +307,10 @@ VARENUM������ϡ�Platform SDK��wtypes.h�ˤ���ޤ���
 
 --- visible? -> bool
 
-���Υ᥽�åɤ����饤����Ȥ��Ф��Ƹ�������Ƥ��뤫�ʲĻ�������Ĥ��ˤ�
-�������֤��ޤ���
+このメソッドがクライアントに対して公開されているか（可視性を持つか）ど
+うかを返します。
 
-@return �᥽�åɤ���������Ƥ���п���
+@return メソッドが公開されていれば真。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')

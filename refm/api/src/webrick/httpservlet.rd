@@ -4,9 +4,9 @@ require webrick/httpservlet/cgihandler
 require webrick/httpservlet/erbhandler
 require webrick/httpservlet/prochandler
 
-¤³¤Î¥Õ¥¡¥¤¥ë¤ò [[m:Kernel.#require]] ¤¹¤ë¤È¡¢
-[[c:WEBrick::HTTPServlet::FileHandler]] ¤ËÂĞ¤·¤Æ
-³ÈÄ¥»Ò .cgi ¤È .rhtml ¤Î¤¿¤á¤Î¥Ï¥ó¥É¥é¤òÀßÄê¤·¤Ş¤¹¡£
+ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ [[m:Kernel.#require]] ã™ã‚‹ã¨ã€
+[[c:WEBrick::HTTPServlet::FileHandler]] ã«å¯¾ã—ã¦
+æ‹¡å¼µå­ .cgi ã¨ .rhtml ã®ãŸã‚ã®ãƒãƒ³ãƒ‰ãƒ©ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-[[lib:webrick]] ¤ä [[lib:webrick/httpserver]] ¤ò [[m:Kernel.#require]] ¤¹¤ë¤È
-¤³¤Î¥é¥¤¥Ö¥é¥ê¤â°ì½ï¤Ë [[m:Kernel.#require]] ¤µ¤ì¤Ş¤¹¡£
+[[lib:webrick]] ã‚„ [[lib:webrick/httpserver]] ã‚’ [[m:Kernel.#require]] ã™ã‚‹ã¨
+ã“ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚‚ä¸€ç·’ã« [[m:Kernel.#require]] ã•ã‚Œã¾ã™ã€‚

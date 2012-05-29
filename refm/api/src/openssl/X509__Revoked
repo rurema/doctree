@@ -1,59 +1,59 @@
 = class OpenSSL::X509::Revoked < Object
 
-¼º¸ú¤·¤¿¾ÚÌÀ½ñ¤Î¥¯¥é¥¹¡£
+å¤±åŠ¹ã—ãŸè¨¼æ˜Žæ›¸ã®ã‚¯ãƒ©ã‚¹ã€‚
 
-[[m:OpenSSL::X509::CRL#revoked]] ¤ÇÊÖ¤µ¤ì¤ë
-¼º¸ú¾ÚÌÀ½ñ¥ê¥¹¥È¤¬¤³¤Î¥¯¥é¥¹¤ÎÇÛÎó¤Ç¤¹¡£
+[[m:OpenSSL::X509::CRL#revoked]] ã§è¿”ã•ã‚Œã‚‹
+å¤±åŠ¹è¨¼æ˜Žæ›¸ãƒªã‚¹ãƒˆãŒã“ã®ã‚¯ãƒ©ã‚¹ã®é…åˆ—ã§ã™ã€‚
 
 == Class Methods
 
 --- new -> OpenSSL::X509::Revoked
-¶õ¤Î Revoked ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¡¢ÊÖ¤·¤Þ¤¹¡£
+ç©ºã® Revoked ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã€è¿”ã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- serial -> OpenSSL::BN
-¼º¸ú¤·¤¿¾ÚÌÀ½ñ¤Î¥·¥ê¥¢¥ë¤òÊÖ¤·¤Þ¤¹¡£
+å¤±åŠ¹ã—ãŸè¨¼æ˜Žæ›¸ã®ã‚·ãƒªã‚¢ãƒ«ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- serial=(serial)
-¼º¸ú¤·¤¿¾ÚÌÀ½ñ¤Î¥·¥ê¥¢¥ë¤òÀßÄê¤·¤Þ¤¹¡£
+å¤±åŠ¹ã—ãŸè¨¼æ˜Žæ›¸ã®ã‚·ãƒªã‚¢ãƒ«ã‚’è¨­å®šã—ã¾ã™ã€‚
 
-¥·¥ê¥¢¥ë¤Ï [[c:OpenSSL::BN]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç»ØÄê¤·¤Þ¤¹¡£
+ã‚·ãƒªã‚¢ãƒ«ã¯ [[c:OpenSSL::BN]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@param serial ¼º¸ú¤·¤¿¾ÚÌÀ½ñ¤Î¥·¥ê¥¢¥ë
+@param serial å¤±åŠ¹ã—ãŸè¨¼æ˜Žæ›¸ã®ã‚·ãƒªã‚¢ãƒ«
 @see [[m:OpenSSL::X509::Revoked#serial]]
 
 --- time -> Time
-¼º¸ú¤·¤¿Æü»þ¤òÊÖ¤·¤Þ¤¹¡£
+å¤±åŠ¹ã—ãŸæ—¥æ™‚ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- time=(time)
-¼º¸ú¤·¤¿Æü»þ¤ò Time ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÀßÄê¤·¤Þ¤¹¡£
+å¤±åŠ¹ã—ãŸæ—¥æ™‚ã‚’ Time ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¨­å®šã—ã¾ã™ã€‚
 
-@param time ¼º¸úÆü»þ
+@param time å¤±åŠ¹æ—¥æ™‚
 @see [[m:OpenSSL::X509::Revoked#time]]
 
 --- extensions -> [OpenSSL::X509::Extension]
-³ÈÄ¥ÎÎ°è¤Î¥Ç¡¼¥¿¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+æ‹¡å¼µé ˜åŸŸã®ãƒ‡ãƒ¼ã‚¿ã‚’é…åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
 --- extensions=(extensions)
-³ÈÄ¥ÎÎ°è¤ò extensions ¤Ç¹¹¿·¤·¤Þ¤¹¡£
+æ‹¡å¼µé ˜åŸŸã‚’ extensions ã§æ›´æ–°ã—ã¾ã™ã€‚
 
-extensions ¤Ë¤Ï [[c:OpenSSL::X509::Extension]] ¤ÎÇÛÎó¤òÅÏ¤·¤Þ¤¹¡£
+extensions ã«ã¯ [[c:OpenSSL::X509::Extension]] ã®é…åˆ—ã‚’æ¸¡ã—ã¾ã™ã€‚
 
-¹¹¿·Á°¤Î³ÈÄ¥ÎÎ°è¤Î¥Ç¡¼¥¿¤ÏÇË´þ¤µ¤ì¤Þ¤¹¡£
+æ›´æ–°å‰ã®æ‹¡å¼µé ˜åŸŸã®ãƒ‡ãƒ¼ã‚¿ã¯ç ´æ£„ã•ã‚Œã¾ã™ã€‚
 
-@param extensions ³ÈÄ¥ÎÎ°è¤Î¥Ç¡¼¥¿
-@raise OpenSSL::X509::RevokedError ¹¹¿·¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+@param extensions æ‹¡å¼µé ˜åŸŸã®ãƒ‡ãƒ¼ã‚¿
+@raise OpenSSL::X509::RevokedError æ›´æ–°ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 --- add_extension(ex) -> OpenSSL::X509::Extension
-³ÈÄ¥ÎÎ°è¤Ë ex ¤òÄÉ²Ã¤·¤Þ¤¹¡£
+æ‹¡å¼µé ˜åŸŸã« ex ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 
-ÄÉ²Ã¤¹¤ë¥Ç¡¼¥¿¤Ï [[c:OpenSSL::X509::Extension]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤òÅÏ¤·¤Þ¤¹¡£
+è¿½åŠ ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã¯ [[c:OpenSSL::X509::Extension]] ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¸¡ã—ã¾ã™ã€‚
 
-ex ¤òÊÖ¤·¤Þ¤¹¡£
+ex ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param ex ÄÉ²Ã¤¹¤ë¥Ç¡¼¥¿
-@raise OpenSSL::X509::RevokedError ÄÉ²Ã¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+@param ex è¿½åŠ ã™ã‚‹ãƒ‡ãƒ¼ã‚¿
+@raise OpenSSL::X509::RevokedError è¿½åŠ ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 = class OpenSSL::X509::RevokedError < OpenSSL::OpenSSLError
-[[c:OpenSSL::X509::Revoked]] ´ØÏ¢¤Î¥¨¥é¡¼¤¬À¸¤¸¤¿¤È¤­¤ËÈ¯À¸¤·¤Þ¤¹¡£
+[[c:OpenSSL::X509::Revoked]] é–¢é€£ã®ã‚¨ãƒ©ãƒ¼ãŒç”Ÿã˜ãŸã¨ãã«ç™ºç”Ÿã—ã¾ã™ã€‚

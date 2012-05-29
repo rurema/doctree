@@ -1,64 +1,64 @@
 require e2mmap
 
-irb �����Ϥ򰷤�����Υ��֥饤�֥��Ǥ���
+irb が出力を扱うためのサブライブラリです。
 
 = class IRB::OutputMethod
 
-���Ū�ʽ��Ϥ�ɽ�����饹�Ǥ����饤�֥�������ǻ��Ѥ��ޤ���
+抽象的な出力を表すクラスです。ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- print(*objs)
 
-[[c:NotImplementedError]] ��ȯ�����ޤ���
+[[c:NotImplementedError]] が発生します。
 
-@param objs Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param objs 任意のオブジェクトを指定します。
 
-@raise NotImplementedError ɬ��ȯ�����ޤ���
+@raise NotImplementedError 必ず発生します。
 
 --- printn(*objs) -> nil
 
-�� obj �� self �˽��Ϥ����Ǹ�˲��Ԥ���Ϥ��ޤ���
+各 obj を self に出力し、最後に改行を出力します。
 
-@param objs Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param objs 任意のオブジェクトを指定します。
 
-#@# parse_printf_format ��  %%%%%I �Τ褦�� format �˥ޥå�����?
-#@# �ޤ���%I ����ʤ��ȡ�printf �� ArgumentError �� raise ����ΤǤ�?
+#@# parse_printf_format は  %%%%%I のような format にマッチする?
+#@# また、%I を削らないと、printf が ArgumentError を raise するのでは?
 #@# --- printf(format, *opts) -> nil
 #@# --- parse_printf_format(format, opts) -> [String, Array]
 
 --- puts(*objs) -> object
 
-�� obj �� self �˽��Ϥ������줾��θ�˲��Ԥ���Ϥ��ޤ���
+各 obj を self に出力し、それぞれの後に改行を出力します。
 
-@param objs Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param objs 任意のオブジェクトを指定します。
 
 --- pp(*objs) -> object
 
-�� obj �� inspect ����ʸ����� self �˽��Ϥ����Ǹ�˲��Ԥ���Ϥ��ޤ���
+各 obj を inspect した文字列を self に出力し、最後に改行を出力します。
 
-@param objs Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param objs 任意のオブジェクトを指定します。
 
 --- ppx(prefix, *objs) -> object
 
-���� prefix + �� obj �� inspect ����ʸ����� self �˽��Ϥ����Ǹ�˲���
-����Ϥ��ޤ���
+引数 prefix + 各 obj を inspect した文字列を self に出力し、最後に改行
+を出力します。
 
-@param prefix �� obj ����Ƭ���ɵ�����ʸ�������ꤷ�ޤ���
+@param prefix 各 obj の先頭に追記する文字列を指定します。
 
-@param objs Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param objs 任意のオブジェクトを指定します。
 
-#@# ���Ѥ���Ƥ��ʤ�����1.9.1 �Ǻ������Ƥ���������ά���ޤ�����
+#@# 使用されていない事、1.9.1 で削除されている事から省略しました。
 #@# --- foo(format)
 
 = class IRB::StdioOutputMethod < IRB::OutputMethod
 
-ɸ����Ϥ�ɽ�����饹�Ǥ����饤�֥�������ǻ��Ѥ��ޤ���
+標準出力を表すクラスです。ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- print(*objs) -> nil
 
-������ɸ����Ϥ˽��Ϥ��ޤ���
+引数を標準出力に出力します。
 
-@param objs Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param objs 任意のオブジェクトを指定します。

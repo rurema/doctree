@@ -4,102 +4,102 @@ require rdoc/parser
 require rdoc/code_objects
 #@end
 
-Fortran95 �Υ����������ɤ���Ϥ��뤿��Υ��֥饤�֥��Ǥ���
+Fortran95 のソースコードを解析するためのサブライブラリです。
 
-��ĥ�Ҥ� .f90��.F90��.f95��.F95 �Υե��������Ϥ�������Ǥ��ޤ�������
-�Τ���ˤϡ�Fortran95 �λ��ͤ�Ŭ�礷�Ƥ���ɬ�פ�����ޤ���
+拡張子が .f90、.F90、.f95、.F95 のファイルを解析する事ができます。解析
+のためには、Fortran95 の仕様に適合している必要があります。
 
-[����] rdoc 2.4.0 ���� rdoc-f95 ��ʬ���줿���ᡢ1.9.2 ����
+[注意] rdoc 2.4.0 から rdoc-f95 に分かれたため、1.9.2 から
 #@since 1.9.1
-[[lib:rdoc/parser/f95]] ��ɸ��ź�ե饤�֥��˴ޤޤ�ʤ��ʤ�ޤ�����
+[[lib:rdoc/parser/f95]] は標準添付ライブラリに含まれなくなりました。
 #@else
-[[lib:rdoc/parsers/parse_f95]] ��ɸ��ź�ե饤�֥��˴ޤޤ�ʤ��ʤ�ޤ�����
+[[lib:rdoc/parsers/parse_f95]] は標準添付ライブラリに含まれなくなりました。
 #@end
-1.9.2 �ʹߤǤ���Ѥ��������� rdoc-f95 �� RubyGems �ǥ��󥹥ȡ��뤷��
-����������
+1.9.2 以降でも使用したい場合は rdoc-f95 を RubyGems でインストールして
+ください。
 
-=== Fortran95 �ץ������Ȥ��б�
+=== Fortran95 プログラムとの対応
 
 #@since 1.9.1
-[[lib:rdoc/parser/f95]] �ϰʲ�����Ϥ�������Ǥ��ޤ���
+[[lib:rdoc/parser/f95]] は以下を解析する事ができます。
 #@else
-[[lib:rdoc/parsers/parse_f95]] �ϰʲ�����Ϥ�������Ǥ��ޤ���
+[[lib:rdoc/parsers/parse_f95]] は以下を解析する事ができます。
 #@end
 
- * main �ץ������
+ * main プログラム
  * module
  * subroutine
  * function
- * ������
- * public �ѿ�
- * public ���
- * �桼�����ñ��黻��
- * �桼�����������
+ * 派生型
+ * public 変数
+ * public 定数
+ * ユーザ定義単項演算子
+ * ユーザー定義代入
 
-Ruby ����٤Ƥߤ�Ȱʲ��Τ褦�ˤʤ�ޤ���
+Ruby と比べてみると以下のようになります。
 
-: �ե�����
+: ファイル
 
-  �ե�����(Ruby ��Ʊ��)
+  ファイル(Ruby と同じ)
 
-: ���饹
+: クラス
 
   module
 
-: �᥽�å�
+: メソッド
 
-  subroutine, function, �ѿ�, ���, ������, �桼�����ñ��黻��, �桼�����������
+  subroutine, function, 変数, 定数, 派生型, ユーザ定義単項演算子, ユーザー定義代入
 
-: require ���줿�ե�����
+: require されたファイル
 
-  use ʸ���ɤ߹��ޤ줿 module, external ������줿 subroutine��function
+  use 文で読み込まれた module, external 宣言された subroutine、function
 
-: include ���줿�⥸�塼��
+: include されたモジュール
 
-  use ʸ���ɤ߹��ޤ줿 module
+  use 文で読み込まれた module
 
-: °��
+: 属性
 
-  �������� use ʸ���ɤ߹��ޤ줿 module
+  派生型や use 文で読み込まれた module
 
-=== ���ϲ�ǽ�ʾ���
+=== 解析可能な情報
 
-�ʲ��ξ���ϼ�ưŪ�˲��Ϥ���ޤ���
+以下の情報は自動的に解析されます。
 
- * �����η�
- * �ѿ�������η�
- * �������η�������
- * NAMELIST ����ѿ��η�������
+ * 引数の型
+ * 変数、定数の型
+ * 派生型の型や初期値
+ * NAMELIST 中の変数の型や初期値
 
-interface ʸ������������ alias �Ͼ嵭�Ρ֥᥽�åɡפ�Ʊ�ͤ˽�������ޤ���
+interface 文の中で定義した alias は上記の「メソッド」と同様に処理されます。
 
-=== �����ȤΥե����ޥå�
+=== コメントのフォーマット
 
-����Ū�ʵ�§�� Ruby �Υ�������������˥ɥ�����Ȥ򵭽Ҥ������Ʊ��
-�Ǥ�����������Fortran95 �Ǥϡ������Ȥ򵭽Ҥ��뤿��ˤϡ�#�פǤϤʤ���
-��!�פ��Ƭ�˵��Ҥ��ʤ���Фʤ�ޤ��󡣥����Ȥ�ʸ�θ�(�⤷���ϲ�)�˵�
-�Ҥ��ޤ���
+基本的な規則は Ruby のソースコード中にドキュメントを記述する場合と同じ
+です。ただし、Fortran95 では、コメントを記述するためには「#」ではなく、
+「!」を行頭に記述しなければなりません。コメントは文の後(もしくは下)に記
+述します。
 
-��������Ǥ�դΰ��֤˹Ԥ������Ǥ��ޤ���
+字下げは任意の位置に行う事ができます。
 
      ! (Top of file)
      !
-     ! ���Υե�������Ф��륳���Ȥ򵭽Ҥ��ޤ���
+     ! このファイルに対するコメントを記述します。
      !
      !--
-     ! "!--" ���� "!++" �ǰϤޤ줿�����Ȥ�̵�뤵��ޤ���
+     ! "!--" から "!++" で囲まれたコメントは無視されます。
      !++
      !
      module hogehoge
        !
-       ! ���� module(�⤷���ϡ�program) ���Ф��륳���Ȥ򵭽Ҥ��ޤ���
+       ! この module(もしくは、program) に対するコメントを記述します。
        !
 
        private
 
-       logical            :: a     ! private �ѿ�
-       real, public       :: b     ! public �ѿ�
-       integer, parameter :: c = 0 ! public ���
+       logical            :: a     ! private 変数
+       real, public       :: b     ! public 変数
+       integer, parameter :: c = 0 ! public 定数
 
        public :: c
        public :: MULTI_ARRAY
@@ -107,29 +107,29 @@ interface ʸ������������ alias �Ͼ嵭�Ρ֥᥽�åɡפ�Ʊ�ͤ˽�������ޤ���
 
        type MULTI_ARRAY
          !
-         ! ���������Ф��륳���Ȥ򵭽Ҥ��ޤ���
+         ! 派生型に対するコメントを記述します。
          !
-         real, pointer :: var(:) =>null() ! �ѿ����Ф��륳����
+         real, pointer :: var(:) =>null() ! 変数に対するコメント
          integer       :: num = 0
        end type MULTI_ARRAY
 
      contains
 
-       subroutine hoge( in,   &   ! ��³����Ԥ��Ф��륳���Ȥ�̵�뤵��ޤ���
+       subroutine hoge( in,   &   ! 継続する行に対するコメントは無視されます。
            &            out )
          !
-         ! subroutine �� function ���Ф��륳���Ȥ򵭽Ҥ��ޤ���
+         ! subroutine や function に対するコメントを記述します。
          !
-         character(*),intent(in):: in ! �������Ф��륳���Ȥ򵭽Ҥ��ޤ���
+         character(*),intent(in):: in ! 引数に対するコメントを記述します。
          character(*),intent(out),allocatable,target  :: in
 
-         character(32) :: file ! ������ NAMELIST ����ѿ����Ф��륳���ȤȤ��ƽ�������ޤ���
+         character(32) :: file ! 下記の NAMELIST 中の変数に対するコメントとして処理されます。
          integer       :: id
 
          namelist /varinfo_nml/ file, id
                  !
-                 ! NAMELIST ���Ф��륳���Ȥ򵭽Ҥ��ޤ���
-                 ! �嵭���ѿ����Ф��륳���Ȥ򵭽ҤǤ��ޤ���
+                 ! NAMELIST に対するコメントを記述します。
+                 ! 上記の変数に対するコメントを記述できます。
                  !
 
        ....
@@ -138,21 +138,21 @@ interface ʸ������������ alias �Ͼ嵭�Ρ֥᥽�åɡפ�Ʊ�ͤ˽�������ޤ���
 
        integer function foo( in )
          !
-         ! ���ιԤϽ�������ޤ�����
+         ! この行は処理されますが、
 
-         ! ���ιԤΤ褦�ʡ����Ԥβ��˵��Ҥ��������Ȥ�̵�뤵��ޤ���
+         ! この行のような、空行の下に記述したコメントは無視されます。
          !
-         integer, intent(in):: inA ! ���ιԤϽ�������ޤ�����
+         integer, intent(in):: inA ! この行は処理されますが、
 
-                                   ! ���ιԤ�̵�뤵��ޤ���
+                                   ! この行は無視されます。
 
        end function foo
 
        subroutine hide( in,   &
          &              out )      !:nodoc:
          !
-         ! �嵭�Τ褦�� subroutine �κǸ�ιԤ� "!:nodoc:" �򵭽Ҥ�����
-         ! ��Ͻ�������ޤ���
+         ! 上記のように subroutine の最後の行に "!:nodoc:" を記述した場
+         ! 合は処理されません。
 
        ....
 
@@ -168,44 +168,44 @@ interface ʸ������������ alias �Ͼ嵭�Ρ֥᥽�åɡפ�Ʊ�ͤ˽�������ޤ���
 extend RDoc::ParserFactory
 #@end
 
-Fortran95 �Υ����������ɤ���Ϥ��뤿��Υ��饹�Ǥ���
+Fortran95 のソースコードを解析するためのクラスです。
 
 == Constants
 
 --- COMMENTS_ARE_UPPER -> false
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 --- INTERNAL_ALIAS_MES -> "Alias for"
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 --- EXTERNAL_ALIAS_MES -> "The entity is"
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。
 
 #@until 1.9.1
 == Class Methods
 
 --- new(top_level, file_name, body, options, stats) -> RDoc::Fortran95parser
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
-@param body �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param body ソースコードの内容を文字列で指定します。
 
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 
-@param stats [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 #@end
 
 == Instance Methods
 
 --- scan -> RDoc::TopLevel
 
-��������������Υɥ�����Ȥ���Ϥ��ޤ���
+ソースコード中のドキュメントを解析します。
 
-@return [[c:RDoc::TopLevel]] ���֥������Ȥ��֤��ޤ���
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。

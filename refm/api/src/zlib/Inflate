@@ -1,15 +1,15 @@
 = class Zlib::Inflate < Zlib::ZStream
 
-���ϥǡ�����Ÿ�����륹�ȥ꡼��Υ��饹��[[c:Zlib::Deflate]] �Ȱ㤤��
-���Υ��饹�Υ��󥹥��󥹤�ʣ�� (clone, dup) ���뤳�ȤϤǤ��ޤ���
+入力データを展開するストリームのクラス。[[c:Zlib::Deflate]] と違い、
+このクラスのインスタンスを複製 (clone, dup) することはできません。
 
 == Class Methods
 
 --- inflate(string) -> String
 
-string ��Ÿ�����ޤ���
+string を展開します。
 
-���ʤߤˡ����Υ᥽�åɤϰʲ��Υ����ɤȤۤ�Ʊ���Ǥ�:
+ちなみに、このメソッドは以下のコードとほぼ同じです:
 
   def inflate(string)
     zstream = Zlib::Inflate.new
@@ -19,9 +19,9 @@ string ��Ÿ�����ޤ���
     buf
   end
 
-@param string Ÿ������ʸ�������ꤷ�ޤ���
+@param string 展開する文字列を指定します。
 
-@raise Zlib::NeedDict Ÿ���˼���ɬ�פʾ���ȯ�����ޤ���
+@raise Zlib::NeedDict 展開に辞書が必要な場合に発生します。
 
   require 'zlib'
 
@@ -30,11 +30,11 @@ string ��Ÿ�����ޤ���
 
 --- new(window_bits = Zlib::MAX_WBITS) -> Zlib::Inflate
 
-Ÿ�����ȥ꡼���������ޤ���
+展開ストリームを作成します。
 
-@param window_bits ������ɤ��礭���������ǻ��ꤷ�ޤ���
-                   nil �ξ��ϥǥե���Ȥ��ͤ���Ѥ��ޤ���
-                   �ܺ٤� zlib.h �򻲾Ȥ��Ƥ���������
+@param window_bits ウィンドの大きさを整数で指定します。
+                   nil の場合はデフォルトの値を使用します。
+                   詳細は zlib.h を参照してください。
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new(15)
@@ -45,18 +45,18 @@ string ��Ÿ�����ޤ���
 
 --- inflate(string) -> String
 
-string ��Ÿ�����ȥ꡼������Ϥ��ޤ���
+string を展開ストリームに入力します。
 
-�����塢���ȥ꡼�फ��ν��Ϥ��֤��ޤ���
-���Υ᥽�åɤ�Ƥ֤Ƚ��ϥХåե��ڤ����ϥХåե��϶��ˤʤ�ޤ���
-string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
-��λ���ޤ���([[m:Zlib::ZStream#finish]] ��Ʊ��)��
+処理後、ストリームからの出力を返します。
+このメソッドを呼ぶと出力バッファ及び入力バッファは空になります。
+string が nil の場合はストリームへの入力を
+終了します。([[m:Zlib::ZStream#finish]] と同じ)。
 
-@param string Ÿ������ʸ��������Ϥ��ޤ���
+@param string 展開する文字列を入力します。
 
-@raise Zlib::NeedDict Ÿ���˼���ɬ�פʾ���ȯ�����ޤ���
-                      [[m:Zlib::Inflate#set_dictionary]] �᥽�åɤǼ���򥻥åȤ���
-                      ��ǡ���ʸ����ȶ��ˤ��Υ᥽�åɤ���ٸƤӽФ��Ʋ�������
+@raise Zlib::NeedDict 展開に辞書が必要な場合に発生します。
+                      [[m:Zlib::Inflate#set_dictionary]] メソッドで辞書をセットした
+                      後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
@@ -64,10 +64,10 @@ string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
 
 --- <<(string) -> self
 
-[[m:Zlib::Inflate#inflate]] ��Ʊ���褦�� string ��
-Ÿ�����ȥ꡼������Ϥ��ޤ�����Zlib::Inflate ���֥�������
-���Τ�Τ��֤��ޤ���Ÿ�����ȥ꡼�फ��ν��Ϥϡ�
-���ϥХåե�����¸����ޤ���
+[[m:Zlib::Inflate#inflate]] と同じように string を
+展開ストリームに入力しますが、Zlib::Inflate オブジェクト
+そのものを返します。展開ストリームからの出力は、
+出力バッファに保存されます。
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
@@ -79,17 +79,17 @@ string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
 
 --- finish -> String
 
-Ÿ�����ȥ꡼���λ���ޤ���
+展開ストリームを終了します。
 
-���ȥ꡼����˻ĤäƤ����ǡ��� (�Ĥޤ갵�̥ǡ����θ�ˤĤ��Ƥ���
-���ߥǡ���) ���֤��ޤ���
-[[m:Zlib::ZStream#finished?]] �����Ǥʤ����� finish ��Ƥ֤�
-�㳰��ȯ�����ޤ���
+ストリーム内に残っていたデータ (つまり圧縮データの後についていた
+ゴミデータ) を返します。
+[[m:Zlib::ZStream#finished?]] が真でない時に finish を呼ぶと
+例外が発生します。
 
-Ÿ�����ȥ꡼��ϰ��̥ǡ�����˽�λ�����ɤ�ȯ������������
-���齪λ���뤿�ᡢ����Ū�� finish ��Ƥ�ɬ�פ�ɬ������
-����ޤ��󤬡����Υ᥽�åɤϰ��̥ǡ�������������λ���Ƥ��뤫��
-��ǧ����Τ������Ǥ���
+展開ストリームは圧縮データ内に終了コードを発見した時点で
+自ら終了するため、明示的に finish を呼ぶ必要は必ずしも
+ありませんが、このメソッドは圧縮データが正しく終了しているかを
+確認するのに便利です。
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
@@ -98,11 +98,11 @@ string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
 
 --- set_dictionary(string) -> String
 
-Ÿ�����Ѥ��뼭�����ꤷ�ޤ���string ���֤��ޤ���
-���Υ᥽�åɤ� [[c:Zlib::NeedDict]] �㳰��ȯ������ľ��Τ�
-ͭ���Ǥ����ܺ٤� zlib.h �򻲾Ȥ��Ʋ�������
+展開に用いる辞書を指定します。string を返します。
+このメソッドは [[c:Zlib::NeedDict]] 例外が発生した直後のみ
+有効です。詳細は zlib.h を参照して下さい。
 
-@param string Ÿ�����Ѥ��뼭���ʸ����ǻ��ꤷ�ޤ���
+@param string 展開に用いる辞書を文字列で指定します。
 
   def case2(str, dict)
     dez = Zlib::Deflate.new
@@ -115,7 +115,7 @@ string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
       inz.inflate(comp_str)
     rescue Zlib::NeedDict
     end
-    # Ÿ�����Ѥ��뼭��ɬ�פǤ���
+    # 展開に用いる辞書が必要です。
     inz.set_dictionary(dict) 
     p inz.inflate(comp_str)
   end
@@ -129,16 +129,16 @@ string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
 
 --- sync(string) -> bool
 
-string �����ϥХåե����������ɲä������� full flush
-point �ޤ��ɤ����Ф��ޤ������ϥХåե���� full flush point
-��¸�ߤ��ʤ����ϡ����ϥХåե�����ˤ� false ���֤��ޤ���
-���ϥХåե���� full flush point �����Ĥ��ä�����
-true ���֤����Ĥ�Υǡ��������ϥХåե�����ݻ�����ޤ���
+string を入力バッファの末尾に追加し、次の full flush
+point まで読み飛ばします。入力バッファ内に full flush point
+が存在しない場合は、入力バッファを空にし false を返します。
+入力バッファ内に full flush point が見つかった場合は
+true を返し、残りのデータは入力バッファ内に保持されます。
 
-@param string ���ϥХåե����������ɲä���ʸ�������ꤷ�ޤ���
+@param string 入力バッファの末尾に追加する文字列を指定します。
 
 --- sync_point? -> bool
-#@todo zlib.h �ˤ�ɥ�����Ȥ�̵����
+#@todo zlib.h にもドキュメントが無い？
 
 What is this?
 

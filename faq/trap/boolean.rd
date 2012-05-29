@@ -1,6 +1,6 @@
-= ������
-== true��false
+= 真偽値
+== trueとfalse
 
-* Ruby�ο����ͤϤĤ����̤ꡣtrue�Ͽ����ͤΤ�������ɽŪ���ͤǤ��롣0��""�⵶����ʤ���
-  * �� - nil, false�Τ�
-  * �� - ���ʳ�
+* Rubyの真偽値はつぎの通り。trueは真な値のうちの代表的な値である。0や""も偽じゃない。
+  * 偽 - nil, falseのみ
+  * 真 - 偽以外

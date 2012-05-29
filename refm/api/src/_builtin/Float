@@ -3,29 +3,29 @@
 include Precision
 #@end
 
-ÉâÆ°¾®¿ôÅÀ¿ô¤Î¥¯¥é¥¹¡£Float ¤Î¼ÂÁõ¤Ï C ¸À¸ì¤Î double ¤Ç¡¢¤½¤ÎÀºÅÙ¤Ï´Ä
-¶­¤Ë°ÍÂ¸¤·¤Þ¤¹¡£
+æµ®å‹•å°æ•°ç‚¹æ•°ã®ã‚¯ãƒ©ã‚¹ã€‚Float ã®å®Ÿè£…ã¯ C è¨€èªžã® double ã§ã€ãã®ç²¾åº¦ã¯ç’°
+å¢ƒã«ä¾å­˜ã—ã¾ã™ã€‚
 
-°ìÈÌ¤Ë¤Ï¤»¤¤¤¼¤¤15·å¤Ç¤¹¡£¾Ü¤·¤¯¤ÏÂ¿¤¯¤Î¥·¥¹¥Æ¥à¤ÇºÎÍÑ¤µ¤ì¤Æ¤¤¤ë
-ÉâÆ°¾®¿ôÅÀÉ¸½àµ¬³Ê¡¢IEEE (Institute of Electrical and
-Electronics Engineers: ÊÆ¹ñÅÅµ¤ÅÅ»Òµ»½Ñ¼Ô¶¨²ñ) 754 ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+ä¸€èˆ¬ã«ã¯ã›ã„ãœã„15æ¡ã§ã™ã€‚è©³ã—ãã¯å¤šãã®ã‚·ã‚¹ãƒ†ãƒ ã§æŽ¡ç”¨ã•ã‚Œã¦ã„ã‚‹
+æµ®å‹•å°æ•°ç‚¹æ¨™æº–è¦æ ¼ã€IEEE (Institute of Electrical and
+Electronics Engineers: ç±³å›½é›»æ°—é›»å­æŠ€è¡“è€…å”ä¼š) 754 ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
-  # ¤¢¤ë¥·¥¹¥Æ¥à¤Ç¤Î 1/3(=0.333...) ¤Î·ë²Ì
+  # ã‚ã‚‹ã‚·ã‚¹ãƒ†ãƒ ã§ã® 1/3(=0.333...) ã®çµæžœ
   printf("%.50f\n", 1.0/3)
   => 0.33333333333333331482961625624739099293947219848633
 
-[[m:Math::PI]] ¤Ê¤É¡¢ÉâÆ°¾®¿ôÅÀ±é»»¤Ë´Ø¤¹¤ëÄê¿ô¤Ë¤Ä¤¤¤Æ¤Ï [[c:Math]] ¤ò
-»²¾È¤Î¤³¤È¡£
+[[m:Math::PI]] ãªã©ã€æµ®å‹•å°æ•°ç‚¹æ¼”ç®—ã«é–¢ã™ã‚‹å®šæ•°ã«ã¤ã„ã¦ã¯ [[c:Math]] ã‚’
+å‚ç…§ã®ã“ã¨ã€‚
 
 == Class Methods
 
 #@until 1.9.1
 --- induced_from(num) -> Float
-num ¤ò Float ¤ËÊÑ´¹¤·¤¿·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
+num ã‚’ Float ã«å¤‰æ›ã—ãŸçµæžœã‚’è¿”ã—ã¾ã™ã€‚
 
-@param num ÊÑ´¹Á°¤Î¿ôÃÍ
+@param num å¤‰æ›å‰ã®æ•°å€¤
 
-@raise TypeError [[c:Fixnum]], [[c:Bignum]], [[c:Float]]°Ê³°¤òÆþÎÏ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+@raise TypeError [[c:Fixnum]], [[c:Bignum]], [[c:Float]]ä»¥å¤–ã‚’å…¥åŠ›ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 
   p Float.induced_from(30) #=> 30.0
@@ -40,65 +40,65 @@ num ¤ò Float ¤ËÊÑ´¹¤·¤¿·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
 == Instance Methods
 
 --- +(other) -> Float
-»»½Ñ±é»»»Ò¡£ÏÂ¤ò·×»»¤·¤Þ¤¹¡£
+ç®—è¡“æ¼”ç®—å­ã€‚å’Œã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other Æó¹à±é»»¤Î±¦Â¦¤Î°ú¿ô(ÂÐ¾Ý)
+@param other äºŒé …æ¼”ç®—ã®å³å´ã®å¼•æ•°(å¯¾è±¡)
 
-  # ÏÂ
+  # å’Œ
   p 3.0 + 4.5 #=> 7.5
 
 --- -(other) -> Float
-»»½Ñ±é»»»Ò¡£º¹¤ò·×»»¤·¤Þ¤¹¡£
+ç®—è¡“æ¼”ç®—å­ã€‚å·®ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other Æó¹à±é»»¤Î±¦Â¦¤Î°ú¿ô(ÂÐ¾Ý)
+@param other äºŒé …æ¼”ç®—ã®å³å´ã®å¼•æ•°(å¯¾è±¡)
 
-  # º¹
+  # å·®
   p 4.5 - 1.3 #=> 3.2
 
 --- *(other) -> Float
-»»½Ñ±é»»»Ò¡£ÀÑ¤ò·×»»¤·¤Þ¤¹¡£
+ç®—è¡“æ¼”ç®—å­ã€‚ç©ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other Æó¹à±é»»¤Î±¦Â¦¤Î°ú¿ô(ÂÐ¾Ý)
+@param other äºŒé …æ¼”ç®—ã®å³å´ã®å¼•æ•°(å¯¾è±¡)
 
-  # ÀÑ
+  # ç©
   p 2.4 * 3   #=> 7.2
 
 
 --- /(other) -> Float
-»»½Ñ±é»»»Ò¡£¾¦¤ò·×»»¤·¤Þ¤¹¡£
+ç®—è¡“æ¼”ç®—å­ã€‚å•†ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other Æó¹à±é»»¤Î±¦Â¦¤Î°ú¿ô(ÂÐ¾Ý)
+@param other äºŒé …æ¼”ç®—ã®å³å´ã®å¼•æ•°(å¯¾è±¡)
 
-  # ¾¦
+  # å•†
   p 1.3 / 2.4 #=> 0.541666666666667
   p 1.0 / 0   #=> Infinity
 
 --- %(other) -> Float
 --- modulo(other) -> Float
-»»½Ñ±é»»»Ò¡£¾êÍ¾¤ò·×»»¤·¤Þ¤¹¡£
+ç®—è¡“æ¼”ç®—å­ã€‚å‰°ä½™ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other Æó¹à±é»»¤Î±¦Â¦¤Î°ú¿ô(ÂÐ¾Ý)
+@param other äºŒé …æ¼”ç®—ã®å³å´ã®å¼•æ•°(å¯¾è±¡)
 
-  # ¾êÍ¾
+  # å‰°ä½™
   p 3 % 1.2   #=> 0.6
   p 3.0 % 0   #=> NaN
 
 --- **(other) -> Float
-»»½Ñ±é»»»Ò¡£ÑÑ¤ò·×»»¤·¤Þ¤¹¡£
+ç®—è¡“æ¼”ç®—å­ã€‚å†ªã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other Æó¹à±é»»¤Î±¦Â¦¤Î°ú¿ô(ÂÐ¾Ý)
+@param other äºŒé …æ¼”ç®—ã®å³å´ã®å¼•æ•°(å¯¾è±¡)
 
-  # ÑÑ
+  # å†ª
   p 1.2 ** 3.0  #=> 1.728
   p 3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 #=> 5.875
   p 0.0 ** 0 #=> 1.0
 
 --- <=>(other) -> nil | 1 | 0 | -1
-self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤ËÀµ¡¢
-Åù¤·¤¤»þ¤Ë 0¡¢¾®¤µ¤¤»þ¤ËÉé¤ÎÀ°¿ô¤òÊÖ¤·¤Þ¤¹¡£
-Èæ³Ó¤Ç¤­¤Ê¤¤¾ì¹ç¤Ïnil¤òÊÖ¤·¤Þ¤¹
+self ã¨ other ã‚’æ¯”è¼ƒã—ã¦ã€self ãŒå¤§ãã„æ™‚ã«æ­£ã€
+ç­‰ã—ã„æ™‚ã« 0ã€å°ã•ã„æ™‚ã«è² ã®æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
+æ¯”è¼ƒã§ããªã„å ´åˆã¯nilã‚’è¿”ã—ã¾ã™
 
-Îã:
+ä¾‹:
 
   p 3.05 <=> 3.14 #=> -1
   p 1.732 <=> 1.414  #=> 1
@@ -108,80 +108,80 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤ËÀµ¡¢
 
 --- ==(other) -> bool
 
-Èæ³Ó±é»»»Ò¡£¿ôÃÍ¤È¤·¤ÆÅù¤·¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ¯”è¼ƒæ¼”ç®—å­ã€‚æ•°å€¤ã¨ã—ã¦ç­‰ã—ã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-¤¿¤À¤·¡¢NaN Æ±»Î¤ÎÈæ³Ó¤Ç¤Ï¾ï¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+ãŸã ã—ã€NaN åŒå£«ã®æ¯”è¼ƒã§ã¯å¸¸ã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other Èæ³ÓÂÐ¾Ý¤Î¿ôÃÍ
+@param other æ¯”è¼ƒå¯¾è±¡ã®æ•°å€¤
 
-@return      self ¤È other ¤¬Åù¤·¤¤¾ì¹ç true ¤òÊÖ¤·¤Þ¤¹¡£
-             ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+@return      self ã¨ other ãŒç­‰ã—ã„å ´åˆ true ã‚’è¿”ã—ã¾ã™ã€‚
+             ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14 == 3.14000 #=> true
   p 3.14 == 3.1415  #=> false
 
-  # NaN Æ±»Î¤Ç¤Ï¾ï¤Ë false
+  # NaN åŒå£«ã§ã¯å¸¸ã« false
   nan = 0.0/0
   p nan == nan      # => false
 
 --- <(other)  -> bool
-Èæ³Ó±é»»»Ò¡£¿ôÃÍ¤È¤·¤Æ¾®¤µ¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ¯”è¼ƒæ¼”ç®—å­ã€‚æ•°å€¤ã¨ã—ã¦å°ã•ã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-@param other Èæ³ÓÂÐ¾Ý¤Î¿ôÃÍ
-@return      self ¤è¤ê¤â other ¤¬Âç¤­¤¤¾ì¹ç true ¤òÊÖ¤·¤Þ¤¹¡£
-             ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+@param other æ¯”è¼ƒå¯¾è±¡ã®æ•°å€¤
+@return      self ã‚ˆã‚Šã‚‚ other ãŒå¤§ãã„å ´åˆ true ã‚’è¿”ã—ã¾ã™ã€‚
+             ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14 <  3.1415  #=> true
   p 3.14 <= 3.1415  #=> true
 
 --- <=(other) -> bool
-Èæ³Ó±é»»»Ò¡£¿ôÃÍ¤È¤·¤ÆÅù¤·¤¤¤Þ¤¿¤Ï¾®¤µ¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ¯”è¼ƒæ¼”ç®—å­ã€‚æ•°å€¤ã¨ã—ã¦ç­‰ã—ã„ã¾ãŸã¯å°ã•ã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-@param other Èæ³ÓÂÐ¾Ý¤Î¿ôÃÍ
-@return      self ¤è¤ê¤â other ¤ÎÊý¤¬Âç¤­¤¤¾ì¹ç¤«¡¢
-             Î¾¼Ô¤¬Åù¤·¤¤¾ì¹ç true ¤òÊÖ¤·¤Þ¤¹¡£
-             ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+@param other æ¯”è¼ƒå¯¾è±¡ã®æ•°å€¤
+@return      self ã‚ˆã‚Šã‚‚ other ã®æ–¹ãŒå¤§ãã„å ´åˆã‹ã€
+             ä¸¡è€…ãŒç­‰ã—ã„å ´åˆ true ã‚’è¿”ã—ã¾ã™ã€‚
+             ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14 <  3.1415  #=> true
   p 3.14 <= 3.1415  #=> true
 
 --- >(other)  -> bool
-Èæ³Ó±é»»»Ò¡£¿ôÃÍ¤È¤·¤ÆÂç¤­¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ¯”è¼ƒæ¼”ç®—å­ã€‚æ•°å€¤ã¨ã—ã¦å¤§ãã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-@param other Èæ³ÓÂÐ¾Ý¤Î¿ôÃÍ
-@return      self ¤è¤ê¤â other ¤ÎÊý¤¬¾®¤µ¤¤¾ì¹ç true ¤òÊÖ¤·¤Þ¤¹¡£
-             ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+@param other æ¯”è¼ƒå¯¾è±¡ã®æ•°å€¤
+@return      self ã‚ˆã‚Šã‚‚ other ã®æ–¹ãŒå°ã•ã„å ´åˆ true ã‚’è¿”ã—ã¾ã™ã€‚
+             ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14 >  3.1415  #=> false
   p 3.14 >= 3.1415  #=> false
 
 --- >=(other) -> bool
-Èæ³Ó±é»»»Ò¡£¿ôÃÍ¤È¤·¤ÆÅù¤·¤¤¤Þ¤¿¤ÏÂç¤­¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ¯”è¼ƒæ¼”ç®—å­ã€‚æ•°å€¤ã¨ã—ã¦ç­‰ã—ã„ã¾ãŸã¯å¤§ãã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-@param other Èæ³ÓÂÐ¾Ý¤Î¿ôÃÍ
-@return      self ¤è¤ê¤â other ¤ÎÊý¤¬¾®¤µ¤¤¾ì¹ç¤«¡¢
-             Î¾¼Ô¤¬Åù¤·¤¤¾ì¹ç true ¤òÊÖ¤·¤Þ¤¹¡£
-             ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+@param other æ¯”è¼ƒå¯¾è±¡ã®æ•°å€¤
+@return      self ã‚ˆã‚Šã‚‚ other ã®æ–¹ãŒå°ã•ã„å ´åˆã‹ã€
+             ä¸¡è€…ãŒç­‰ã—ã„å ´åˆ true ã‚’è¿”ã—ã¾ã™ã€‚
+             ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14 >  3.1415  #=> false
   p 3.14 >= 3.1415  #=> false
 
 --- finite? -> bool
 
-¿ôÃÍ¤¬ ¡ç, -¡ç, ¤¢¤ë¤¤¤Ï NaN ¤Ç¤Ê¤¤¾ì¹ç¤Ë true ¤òÊÖ¤·¤Þ¤¹¡£
-¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+æ•°å€¤ãŒ âˆž, -âˆž, ã‚ã‚‹ã„ã¯ NaN ã§ãªã„å ´åˆã« true ã‚’è¿”ã—ã¾ã™ã€‚
+ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14.finite? #=> true
   inf = 1.0/0
@@ -189,10 +189,10 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤ËÀµ¡¢
 
 --- infinite? -> 1 | -1 | nil
 
-¿ôÃÍ¤¬ +¡ç ¤Î¤È¤­ 1¡¢-¡ç¤Î¤È¤­ -1 ¤òÊÖ¤·¤Þ¤¹¡£¤½¤ì°Ê³°¤Ï nil ¤òÊÖ
-¤·¤Þ¤¹¡£
+æ•°å€¤ãŒ +âˆž ã®ã¨ã 1ã€-âˆžã®ã¨ã -1 ã‚’è¿”ã—ã¾ã™ã€‚ãã‚Œä»¥å¤–ã¯ nil ã‚’è¿”
+ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   inf = 1.0/0
   p inf
@@ -210,9 +210,9 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤ËÀµ¡¢
 
 --- nan? -> bool
 
-¿ôÃÍ¤¬ NaN(Not a number)¤Î¤È¤­¿¿¤òÊÖ¤·¤Þ¤¹¡£
+æ•°å€¤ãŒ NaN(Not a number)ã®ã¨ãçœŸã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   nan = 0.0/0.0
   p nan
@@ -222,27 +222,27 @@ self ¤È other ¤òÈæ³Ó¤·¤Æ¡¢self ¤¬Âç¤­¤¤»þ¤ËÀµ¡¢
      true
 
 --- to_f -> self
-self ¤òÊÖ¤·¤Þ¤¹¡£
+self ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 3.14.to_f   #=> 3.14
 
 --- to_i -> Integer
 --- truncate -> Integer
 
-¾®¿ôÅÀ°Ê²¼¤òÀÚ¤ê¼Î¤Æ¤ÆÃÍ¤òÀ°¿ô¤ËÊÑ´¹¤·¤Þ¤¹¡£
+å°æ•°ç‚¹ä»¥ä¸‹ã‚’åˆ‡ã‚Šæ¨ã¦ã¦å€¤ã‚’æ•´æ•°ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
    p 3.14.to_i   #=> 3
 
 @see [[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]]
 
 --- hash -> Fixnum
-¥Ï¥Ã¥·¥åÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+ãƒãƒƒã‚·ãƒ¥å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   pi1 = 3.14
   pi2 = 3.14
@@ -254,18 +254,18 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- abs    -> Float
 
-¼«¿È¤ÎÀäÂÐÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®çµ¶å¯¾å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
  p   34.56.abs     #=> 34.56
  p  -34.56.abs     #=> 34.56
 
 --- ceil   -> Integer
 
-¼«¿È¤ÈÅù¤·¤¤¤«¤è¤êÂç¤­¤ÊÀ°¿ô¤Î¤¦¤ÁºÇ¾®¤Î¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ç­‰ã—ã„ã‹ã‚ˆã‚Šå¤§ããªæ•´æ•°ã®ã†ã¡æœ€å°ã®ã‚‚ã®ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
      1.0.ceil      #=> 1
      1.2.ceil      #=> 2
@@ -276,27 +276,27 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- divmod(other) -> [Numeric]
 
-self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
-[q, r] ¤È¤¤¤¦ 2 Í×ÁÇ¤ÎÇÛÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+self ã‚’ other ã§å‰²ã£ãŸå•† q ã¨ä½™ã‚Š r ã‚’ã€
+[q, r] ã¨ã„ã† 2 è¦ç´ ã®é…åˆ—ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 #@since 1.8.5
-¾¦ q ¤Ï¾ï¤ËÀ°¿ô¤Ç¤¹¤¬¡¢Í¾¤ê r ¤ÏÀ°¿ô¤Ç¤¢¤ë¤È¤Ï¸Â¤ê¤Þ¤»¤ó¡£
+å•† q ã¯å¸¸ã«æ•´æ•°ã§ã™ãŒã€ä½™ã‚Š r ã¯æ•´æ•°ã§ã‚ã‚‹ã¨ã¯é™ã‚Šã¾ã›ã‚“ã€‚
 #@else
-¾¦ q ¡¢Í¾¤ê r ¤È¤â¤Ë Float ¤Ë¤Ê¤ê¤Þ¤¹¡£
+å•† q ã€ä½™ã‚Š r ã¨ã‚‚ã« Float ã«ãªã‚Šã¾ã™ã€‚
 #@end
 
-¤³¤³¤Ç¡¢¾¦ q ¤ÈÍ¾¤ê r ¤Ï¡¢
+ã“ã“ã§ã€å•† q ã¨ä½™ã‚Š r ã¯ã€
 
   * self == other * q + r
-¤È
-  * other > 0 ¤Î¤È¤­:  0     <= r < other
-  * other < 0 ¤Î¤È¤­:  other <  r <= 0
-  * q ¤ÏÀ°¿ô
-¤ò¤ß¤¿¤¹¿ô¤Ç¤¹¡£
-¤³¤Î¥á¥½¥Ã¥É¤Ï¡¢¥á¥½¥Ã¥É / ¤È % ¤Ë¤è¤Ã¤ÆÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+ã¨
+  * other > 0 ã®ã¨ã:  0     <= r < other
+  * other < 0 ã®ã¨ã:  other <  r <= 0
+  * q ã¯æ•´æ•°
+ã‚’ã¿ãŸã™æ•°ã§ã™ã€‚
+ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ã€ãƒ¡ã‚½ãƒƒãƒ‰ / ã¨ % ã«ã‚ˆã£ã¦å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô¤ò»ØÄê¤·¤Þ¤¹¡£
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
 #@since 1.8.5
    11.divmod(3)         #=> [3, 2]
@@ -316,9 +316,9 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 
 --- floor  -> Integer
 
-¼«¿È¤ÈÅù¤·¤¤¤«¤è¤ê¾®¤µ¤ÊÀ°¿ô¤Î¤¦¤ÁºÇÂç¤Î¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ç­‰ã—ã„ã‹ã‚ˆã‚Šå°ã•ãªæ•´æ•°ã®ã†ã¡æœ€å¤§ã®ã‚‚ã®ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
      1.0.floor      #=> 1
      1.2.floor      #=> 1
@@ -329,12 +329,12 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 
 --- eql?(other)   -> bool
 
-¼«¿È¤È other ¤Î¥¯¥é¥¹¤¬Åù¤·¤¯¤«¤Ä == ¥á¥½¥Ã¥É¤ÇÈæ³Ó¤·¤ÆÅù¤·¤¤¾ì¹ç¤Ë true ¤òÊÖ¤·¤Þ¤¹¡£
-¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ other ã®ã‚¯ãƒ©ã‚¹ãŒç­‰ã—ãã‹ã¤ == ãƒ¡ã‚½ãƒƒãƒ‰ã§æ¯”è¼ƒã—ã¦ç­‰ã—ã„å ´åˆã« true ã‚’è¿”ã—ã¾ã™ã€‚
+ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ÈÈæ³Ó¤·¤¿¤¤¿ôÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
+@param other è‡ªèº«ã¨æ¯”è¼ƒã—ãŸã„æ•°å€¤ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   1.0.eql?(1)   #=> false
   1.0.eql?(1.0) #=> true
@@ -342,23 +342,23 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 #@since 1.9.1
 --- round(ndigits = 0)  -> Fixnum | Float
 
-¼«¿È¤È¤â¤Ã¤È¤â¶á¤¤À°¿ô¤â¤·¤¯¤Ï¼Â¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ã‚‚ã£ã¨ã‚‚è¿‘ã„æ•´æ•°ã‚‚ã—ãã¯å®Ÿæ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-Ãæ±ûÃÍ 0.5, -0.5 ¤Ï¤½¤ì¤¾¤ì 1,-1 ¤ËÀÚ¤ê¾å¤²¤µ¤ì¤Þ¤¹¡£
-¤¤¤ï¤æ¤ë»Í¼Î¸ÞÆþ¤Ç¤¹¤¬¡¢¶ö¿ô´Ý¤á¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£
+ä¸­å¤®å€¤ 0.5, -0.5 ã¯ãã‚Œãžã‚Œ 1,-1 ã«åˆ‡ã‚Šä¸Šã’ã•ã‚Œã¾ã™ã€‚
+ã„ã‚ã‚†ã‚‹å››æ¨äº”å…¥ã§ã™ãŒã€å¶æ•°ä¸¸ã‚ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
 
-@param ndigits ´Ý¤á¤ë°Ì¤ò»ØÄê¤·¤Þ¤¹¡£
-       ndigits¤¬0¤Ê¤é¤Ð¡¢¾®¿ôÅÀ°Ê²¼¤ò»Í¼Î¸ÞÆþ¤·¡¢À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
-       ndigits¤¬0°Ê¾å¤Ê¤é¤Ð¡¢¾®¿ôÅÀ°Ê²¼¤Î»ØÄê¤µ¤ì¤¿°Ì¤Ç»Í¼Î¸ÞÆþ¤µ¤ì¤Þ¤¹¡£
-       ndigits¤¬0°Ê²¼¤Ê¤é¤Ð¡¢¾®¿ôÅÀ°Ê¾å¤Î»ØÄê¤µ¤ì¤¿°Ì¤Ç»Í¼Î¸ÞÆþ¤µ¤ì¤Þ¤¹¡£
+@param ndigits ä¸¸ã‚ã‚‹ä½ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+       ndigitsãŒ0ãªã‚‰ã°ã€å°æ•°ç‚¹ä»¥ä¸‹ã‚’å››æ¨äº”å…¥ã—ã€æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
+       ndigitsãŒ0ä»¥ä¸Šãªã‚‰ã°ã€å°æ•°ç‚¹ä»¥ä¸‹ã®æŒ‡å®šã•ã‚ŒãŸä½ã§å››æ¨äº”å…¥ã•ã‚Œã¾ã™ã€‚
+       ndigitsãŒ0ä»¥ä¸‹ãªã‚‰ã°ã€å°æ•°ç‚¹ä»¥ä¸Šã®æŒ‡å®šã•ã‚ŒãŸä½ã§å››æ¨äº”å…¥ã•ã‚Œã¾ã™ã€‚
 
-@return »ØÄê¤µ¤ì¤¿°ú¿ô¤Ë±þ¤¸¤Æ¡¢À°¿ô¤â¤·¤¯¤Ï¼Â¿ô¤òÊÖ¤·¤Þ¤¹¡£
-       ndigits¤¬0¤Ê¤é¤Ð¡¢À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
-       ndigits¤¬0°Ê¾å¤Ê¤é¤Ð¡¢¼Â¿ô¤òÊÖ¤·¤Þ¤¹¡£
-       ndigits¤¬0°Ê²¼¤Ê¤é¤Ð¡¢À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+@return æŒ‡å®šã•ã‚ŒãŸå¼•æ•°ã«å¿œã˜ã¦ã€æ•´æ•°ã‚‚ã—ãã¯å®Ÿæ•°ã‚’è¿”ã—ã¾ã™ã€‚
+       ndigitsãŒ0ãªã‚‰ã°ã€æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
+       ndigitsãŒ0ä»¥ä¸Šãªã‚‰ã°ã€å®Ÿæ•°ã‚’è¿”ã—ã¾ã™ã€‚
+       ndigitsãŒ0ä»¥ä¸‹ãªã‚‰ã°ã€æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-@raise TypeError ndigits ¤Ç»ØÄê¤µ¤ì¤¿¥ª¥Ö¥¸¥§¥¯¥È¤¬À°¿ô¤ËÊÑ´¹¤Ç¤­¤Ê¤¤¾ì
-                 ¹çÈ¯À¸¤·¤Þ¤¹¡£
+@raise TypeError ndigits ã§æŒ‡å®šã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒæ•´æ•°ã«å¤‰æ›ã§ããªã„å ´
+                 åˆç™ºç”Ÿã—ã¾ã™ã€‚
 
   p 1.0.round      #=> 1
   p 1.2.round      #=> 1
@@ -384,12 +384,12 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 #@else
 --- round  -> Fixnum
 
-¼«¿È¤È¤â¤Ã¤È¤â¶á¤¤À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ã‚‚ã£ã¨ã‚‚è¿‘ã„æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-Ãæ±ûÃÍ 0.5, -0.5 ¤Ï¤½¤ì¤¾¤ì 1,-1 ¤ËÀÚ¤ê¾å¤²¤µ¤ì¤Þ¤¹¡£
-¤¤¤ï¤æ¤ë»Í¼Î¸ÞÆþ¤Ç¤¹¤¬¡¢¶ö¿ô´Ý¤á¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£
+ä¸­å¤®å€¤ 0.5, -0.5 ã¯ãã‚Œãžã‚Œ 1,-1 ã«åˆ‡ã‚Šä¸Šã’ã•ã‚Œã¾ã™ã€‚
+ã„ã‚ã‚†ã‚‹å››æ¨äº”å…¥ã§ã™ãŒã€å¶æ•°ä¸¸ã‚ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
 
-Îã:
+ä¾‹:
 
      1.0.round      #=> 1
      1.2.round      #=> 1
@@ -401,9 +401,9 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 
 --- zero?  -> bool
 
-¼«¿È¤¬¥¼¥í¤Î»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï false ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒã‚¼ãƒ­ã®æ™‚ã€çœŸã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã¯ false ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p 10.0.zero?            #=> false
   p 0.zero?               #=> true
@@ -411,14 +411,14 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 
 --- to_s -> String
 
-¼«¿È¤ò¿Í´Ö¤¬ÆÉ¤ß¤ä¤¹¤¤·Á¤ÎÊ¸»úÎóÉ½¸½¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’äººé–“ãŒèª­ã¿ã‚„ã™ã„å½¢ã®æ–‡å­—åˆ—è¡¨ç¾ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-¸ÇÄê¾®¿ôÅÀ¡¢ÉâÆ°¾®¿ôÅÀ¤Î·Á¼°¤«¡¢ "Infinity"¡¢"-Infinity"¡¢"NaN" ¤Î¤¤¤º
-¤ì¤«¤òÊÖ¤·¤Þ¤¹¡£
+å›ºå®šå°æ•°ç‚¹ã€æµ®å‹•å°æ•°ç‚¹ã®å½¢å¼ã‹ã€ "Infinity"ã€"-Infinity"ã€"NaN" ã®ã„ãš
+ã‚Œã‹ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+@return æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   3.14.to_s                # => "3.14"
   10000_00000_00000.0.to_s # => "1.0e+14"
@@ -430,20 +430,20 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 --- angle -> 0 | Float
 --- phase -> 0 | Float
 
-¼«¿È¤ÎÊÐ³Ñ(Àµ¤Î¿ô¤Ê¤é 0¡¢Éé¤Î¿ô¤Ê¤é [[m:Math::PI]])¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®åè§’(æ­£ã®æ•°ãªã‚‰ 0ã€è² ã®æ•°ãªã‚‰ [[m:Math::PI]])ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   1.arg  # => 0
   -1.arg # => 3.141592653589793
 
-¤¿¤À¤·¡¢¼«¿È¤¬ NaN(Not a number) ¤Ç¤¢¤Ã¤¿¾ì¹ç¤Ï¡¢NaN ¤òÊÖ¤·¤Þ¤¹¡£
+ãŸã ã—ã€è‡ªèº«ãŒ NaN(Not a number) ã§ã‚ã£ãŸå ´åˆã¯ã€NaN ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- denominator -> Integer
 
-¼«¿È¤ò [[c:Rational]] ¤ËÊÑ´¹¤·¤¿»þ¤ÎÊ¬Êì¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Rational]] ã«å¤‰æ›ã—ãŸæ™‚ã®åˆ†æ¯ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¬Êì¤òÊÖ¤·¤Þ¤¹¡£
+@return åˆ†æ¯ã‚’è¿”ã—ã¾ã™ã€‚
 
   2.0.denominator         # => 1
   0.5.denominator         # => 2
@@ -452,9 +452,9 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 
 --- numerator -> Integer
 
-¼«¿È¤ò [[c:Rational]] ¤ËÊÑ´¹¤·¤¿»þ¤ÎÊ¬»Ò¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Rational]] ã«å¤‰æ›ã—ãŸæ™‚ã®åˆ†å­ã‚’è¿”ã—ã¾ã™ã€‚
 
-@return Ê¬»Ò¤òÊÖ¤·¤Þ¤¹¡£
+@return åˆ†å­ã‚’è¿”ã—ã¾ã™ã€‚
 
   2.0.numerator           # => 2
   0.5.numerator           # => 1
@@ -463,9 +463,9 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 
 --- to_r -> Rational
 
-¼«¿È¤ò [[c:Rational]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Rational]] ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   0.5.to_r      # => (1/2)
 #@end
@@ -474,15 +474,15 @@ self ¤ò other ¤Ç³ä¤Ã¤¿¾¦ q ¤ÈÍ¾¤ê r ¤ò¡¢
 --- rationalize      -> Rational
 --- rationalize(eps) -> Rational
 
-¼«¿È¤«¤é eps ¤Ç»ØÄê¤·¤¿µöÍÆ¸íº¹¤ÎÈÏ°Ï¤Ë¼ý¤Þ¤ë¤è¤¦¤Ê [[c:Rational]] ¤òÊÖ
-¤·¤Þ¤¹¡£
+è‡ªèº«ã‹ã‚‰ eps ã§æŒ‡å®šã—ãŸè¨±å®¹èª¤å·®ã®ç¯„å›²ã«åŽã¾ã‚‹ã‚ˆã†ãª [[c:Rational]] ã‚’è¿”
+ã—ã¾ã™ã€‚
 
-eps ¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¸íº¹¤¬ºÇ¤â¾®¤µ¤¯¤Ê¤ë¤è¤¦¤Ê [[c:Rational]] ¤òÊÖ¤·¤Þ
-¤¹¡£
+eps ã‚’çœç•¥ã—ãŸå ´åˆã¯èª¤å·®ãŒæœ€ã‚‚å°ã•ããªã‚‹ã‚ˆã†ãª [[c:Rational]] ã‚’è¿”ã—ã¾
+ã™ã€‚
 
-@param eps µöÍÆ¤¹¤ë¸íº¹
+@param eps è¨±å®¹ã™ã‚‹èª¤å·®
 
-Îã:
+ä¾‹:
 
   0.3.rationalize          #=> (3/10)
   1.333.rationalize        #=> (1333/1000)
@@ -496,57 +496,57 @@ eps ¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¸íº¹¤¬ºÇ¤â¾®¤µ¤¯¤Ê¤ë¤è¤¦¤Ê [[c:Rational]] ¤òÊÖ¤·¤Þ
 
 --- DIG -> Fixnum
 
-Float ¤¬É½¸½¤Ç¤­¤ëºÇÂç¤Î 10 ¿Ê·å¿ô
+Float ãŒè¡¨ç¾ã§ãã‚‹æœ€å¤§ã® 10 é€²æ¡æ•°
 
 --- EPSILON -> Float
 
-1.0 + Float::EPSILON != 1.0 ¤È¤Ê¤ëºÇ¾®¤ÎÃÍ
+1.0 + Float::EPSILON != 1.0 ã¨ãªã‚‹æœ€å°ã®å€¤
 
 --- MANT_DIG -> Fixnum
 
-²¾¿ôÉô¤Î Float::RADIX ¿ÊË¡¤Ç¤Î·å¿ô
+ä»®æ•°éƒ¨ã® Float::RADIX é€²æ³•ã§ã®æ¡æ•°
 
 --- MAX -> Float
-Float ¤¬¼è¤êÆÀ¤ëºÇÂçÃÍ
+Float ãŒå–ã‚Šå¾—ã‚‹æœ€å¤§å€¤
 
 --- MIN -> Float
 
-Float ¤¬¼è¤êÆÀ¤ëºÇ¾®ÃÍ
+Float ãŒå–ã‚Šå¾—ã‚‹æœ€å°å€¤
 
 --- MAX_10_EXP -> Fixnum
 
-ºÇÂç¤Î 10 ¿Ê¤Î»Ø¿ô
+æœ€å¤§ã® 10 é€²ã®æŒ‡æ•°
 
 --- MIN_10_EXP -> Fixnum
 
-ºÇ¾®¤Î 10 ¿Ê¤Î»Ø¿ô
+æœ€å°ã® 10 é€²ã®æŒ‡æ•°
 
 --- MAX_EXP -> Fixnum
 
-ºÇÂç¤Î Float::RADIX ¿Ê¤Î»Ø¿ô
+æœ€å¤§ã® Float::RADIX é€²ã®æŒ‡æ•°
 
 --- MIN_EXP -> Fixnum
 
-ºÇ¾®¤Î Float::RADIX ¿Ê¤Î»Ø¿ô
+æœ€å°ã® Float::RADIX é€²ã®æŒ‡æ•°
 
 --- RADIX -> Fixnum
 
-»Ø¿ôÉ½¸½¤Î´ð¿ô
+æŒ‡æ•°è¡¨ç¾ã®åŸºæ•°
 
 --- ROUNDS -> Fixnum
 
-´Ý¤á¥â¡¼¥É (-1: ÉÔÄê¡¢0: 0.0 ¤ÎÊý¸þ¤Ë´Ý¤á¡¢1: »Í¼Î¸ÞÆþ¡¢2:Àµ¤ÎÌµ¸Â
-Âç¤ÎÊý¸þ¤Ë´Ý¤á¡¢3:Éé¤ÎÌµ¸ÂÂç¤ÎÊý¸þ¤Ë´Ý¤á)
+ä¸¸ã‚ãƒ¢ãƒ¼ãƒ‰ (-1: ä¸å®šã€0: 0.0 ã®æ–¹å‘ã«ä¸¸ã‚ã€1: å››æ¨äº”å…¥ã€2:æ­£ã®ç„¡é™
+å¤§ã®æ–¹å‘ã«ä¸¸ã‚ã€3:è² ã®ç„¡é™å¤§ã®æ–¹å‘ã«ä¸¸ã‚)
 
 #@since 1.9.2
 --- INFINITY -> Float
 
-ÉâÆ°¾®¿ôÅÀ¿ô¤Ë¤ª¤±¤ëÀµ¤ÎÌµ¸ÂÂç
+æµ®å‹•å°æ•°ç‚¹æ•°ã«ãŠã‘ã‚‹æ­£ã®ç„¡é™å¤§
 
 @see [[m:Float#finite?]], [[m:Float#infinite?]]
 
 --- NAN -> Float
-ÉâÆ°¾®¿ôÅÀ¿ô¤Ë¤ª¤±¤ë NaN(Not a number)
+æµ®å‹•å°æ•°ç‚¹æ•°ã«ãŠã‘ã‚‹ NaN(Not a number)
 
 
 @see [[m:Float#nan?]]

@@ -1,11 +1,11 @@
 
-Ruby 1.8.5 �� 1.8.6 �δ֤�¸�ߤ��� API �κ��ۤ�ۼ����뤿��Υ饤�֥��Ǥ���
+Ruby 1.8.5 と 1.8.6 の間に存在する API の差異を吸収するためのライブラリです。
 
-�Ť��С������� API �򿷤����С������Τ�Τ˹�碌�ޤ���
-RubyGems �Ǥ� digest, hexdigest ����ĤΥ᥽�åɤ����Ѥ����ΤǤ�����ĤΥ᥽�åɤΤ�
-API ���Ѵ�����褦�ˤ��Ƥ��ޤ���
+古いバージョンの API を新しいバージョンのものに合わせます。
+RubyGems では digest, hexdigest の二つのメソッドが使用されるのでこの二つのメソッドのみ
+API を変換するようにしています。
 
-Ruby 1.8.6 �ʹߤǤϤ��Υ饤�֥��ϻ��Ѥ���ޤ���
+Ruby 1.8.6 以降ではこのライブラリは使用されません。
 
 @see [[lib:digest]]
 
@@ -16,16 +16,16 @@ Ruby 1.8.6 �ʹߤǤϤ��Υ饤�֥��ϻ��Ѥ���ޤ���
 --- digest(string) -> String
 #@todo
 
-Ϳ����줿ʸ����Υ����������Ȥ��֤��ޤ���
+与えられた文字列のダイジェストを返します。
 
-@param string �����������Ȥ����������ʸ�������ꤷ�ޤ���
+@param string ダイジェストを取得したい文字列を指定します。
 
 --- hexdigest(string) -> String
 #@todo
 
-Ϳ����줿ʸ����Υإå��������������Ȥ��֤��ޤ���
+与えられた文字列のヘックスダイジェストを返します。
 
-@param string �����������Ȥ����������ʸ�������ꤷ�ޤ���
+@param string ダイジェストを取得したい文字列を指定します。
 
 --- new -> self
 #@todo
@@ -34,4 +34,4 @@ Ruby 1.8.6 �ʹߤǤϤ��Υ饤�֥��ϻ��Ѥ���ޤ���
 
 --- new(digest_class)
 
-���Ȥ��������ޤ���
+自身を初期化します。

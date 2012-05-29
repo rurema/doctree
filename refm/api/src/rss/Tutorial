@@ -1,47 +1,47 @@
 #@# Author: kou
 
-=== ����
+=== 注意
 
-RSS Parser��RSS 0.9x/1.0/2.0�򥵥ݡ��Ȥ��Ƥ��ޤ�����RSS 0.90
-�ϥ��ݡ��Ȥ��Ƥޤ��󡥤����ʤ�����
+RSS ParserはRSS 0.9x/1.0/2.0をサポートしていますが，RSS 0.90
+はサポートしてません．ごめんなさい．
 
-RSS �Υ⥸�塼��Ϥ��줾�졢
- * Dublin Core �⥸�塼�� [[url:http://web.resource.org/rss/1.0/modules/dc/]] 
- * Syndication �⥸�塼�� [[url:http://web.resource.org/rss/1.0/modules/syndication/]]
- * Content �⥸�塼�� [[url:http://web.resource.org/rss/1.0/modules/content/]]
- * Trackback �⥸�塼�� [[url:http://madskills.com/public/xml/rss/module/trackback/]]
- * Image �⥸�塼�� [[url:http://web.resource.org/rss/1.0/modules/image/]]
-�򥵥ݡ��Ȥ��Ƥ��ޤ���
-��������Content �⥸�塼��� content:encoded �������ݡ��Ȥ��Ƥ��ޤ���
+RSS のモジュールはそれぞれ、
+ * Dublin Core モジュール [[url:http://web.resource.org/rss/1.0/modules/dc/]] 
+ * Syndication モジュール [[url:http://web.resource.org/rss/1.0/modules/syndication/]]
+ * Content モジュール [[url:http://web.resource.org/rss/1.0/modules/content/]]
+ * Trackback モジュール [[url:http://madskills.com/public/xml/rss/module/trackback/]]
+ * Image モジュール [[url:http://web.resource.org/rss/1.0/modules/image/]]
+をサポートしています。
+ただし，Content モジュールは content:encoded しかサポートしていません．
 
-=== �ѡ���
+=== パース
 
-RSS ��ѡ������������� RSS::Parser ���饹��Ȥ��ޤ���
-RSS::Parser.parse �� String �� RSS�� �ѡ������ޤ�(���Ѥ���XML�ѡ�
-���ˤ�äƤ� File �� IO ���֥������ȤʤɤǤ�ѡ�����ǽ�Ǥ�)��
- * RSS 1.0��ѡ����������� [[c:RSS::RDF]] ���֥�������
- * RSS 0.9x/2.0��ѡ����������� [[c:RSS::Rss]] ���֥�������
-�򤽤줾���֤��ޤ����ѡ�������
-String �� well formed �� XML ��̵�����ϡ�
-�㳰 [[c:RSS::NotWellFormedError]] ��ȯ�����ޤ���well formed ��
-XML ������RSS 0.9x/1.0/2.0 �Τ�����Ǥ�ʤ����ϡ�nil ���֤��
-����
+RSS をパースしたい場合は RSS::Parser クラスを使います。
+RSS::Parser.parse は String の RSSを パースします(使用するXMLパー
+サによっては File や IO オブジェクトなどでもパース可能です)。
+ * RSS 1.0をパースした場合は [[c:RSS::RDF]] オブジェクト
+ * RSS 0.9x/2.0をパースした場合は [[c:RSS::Rss]] オブジェクト
+をそれぞれ返します。パースした
+String が well formed な XML で無い場合は，
+例外 [[c:RSS::NotWellFormedError]] が発生します。well formed な
+XML だが，RSS 0.9x/1.0/2.0 のいずれでもない場合は，nil が返りま
+す．
 
-�㤨�С�RSS 1.0 ��Х�ǡ�������դ��ǥѡ�������ˤϰʲ��Τ�
-���ˤ��ޤ��������ǡ��ѿ� rss_source �ˤ� RSS 1.0 ������ʸ
-���󤬳�Ǽ����Ƥ����ΤȤ��ޤ���
+例えば、RSS 1.0 をバリデーション付きでパースするには以下のよ
+うにします。ここで、変数 rss_source には RSS 1.0 形式の文
+字列が格納されているものとします。
 
   require 'rss'
   rss = RSS::Parser.parse(rss_source, true)
 
-RSS::Parser.parse ����������Ͼ�ά����� true �����ꤵ�줿���
-�Ȥߤʤ����Τǡ�����ϰʲ��Τ褦�ˤ�񤱤ޤ���
+RSS::Parser.parse の第二引数は省略すると true が指定されたもの
+とみなされるので、これは以下のようにも書けます。
 
   require 'rss'
   rss = RSS::Parser.parse(rss_source)
 
-�ǽ�ϥХ�ǡ�������դ��ǥѡ������ơ�valid �ǤϤʤ� RSS ���ä�
-���ϥХ�ǡ������̵���ǥѡ�������ˤϰʲ��Τ褦�˽񤭤ޤ���
+最初はバリデーション付きでパースして，valid ではない RSS だった
+場合はバリデーション無しでパースするには以下のように書きます。
 
   require 'rss'
   rss = nil
@@ -51,130 +51,130 @@ RSS::Parser.parse ����������Ͼ�ά����� true �����ꤵ�줿���
     rss = RSS::Parser.parse(rss_source, false)
   end
 
-����� rss_source �� RSS 0.9x/1.0/2.0 �Τɤ줫ʬ����ʤ���
-�ˤ�ͭ���Ǥ���RSS 1.0�Ȥ��ƥХ�ǡ�
-������դ��ǥѡ��������Х�ǡ������˼��Ԥ���� RSS 0.9x/(��
-�줿)1.0/2.0 �Τ����줫�Ȥ��ƥѡ������ޤ���
+これは rss_source が RSS 0.9x/1.0/2.0 のどれか分からない時
+にも有効です。RSS 1.0としてバリデー
+ション付きでパースし、バリデーションに失敗すると RSS 0.9x/(壊
+れた)1.0/2.0 のいずれかとしてパースします。
 
-==== �Τ�ʤ����Ǥΰ���
+==== 知らない要素の扱い
 
-�ѡ����ϥǥե���ȤǤ��Τ�ʤ�����(���ͽ�˵��ꤵ��Ƥ��ʤ�
-����)��̵�뤷�ޤ����⤷���Τ�ʤ����Ǥ��������������㳰��ȯ
-������������С�RSS::Parser.parse ���軰������ false ����ꤷ��
-������������������ȡ��ѡ�������Τ�ʤ����Ǥ�������������
-[[c:RSS::UnknownTagError]] �㳰��ȯ�����ޤ���
+パーサはデフォルトでは知らない要素(仕様書に規定されていない
+要素)を無視します。もし、知らない要素に遭遇した時に例外を発
+生させたければ，RSS::Parser.parse の第三引数に false を指定して
+ください。こうすると、パース中に知らない要素に遭遇した時に
+[[c:RSS::UnknownTagError]] 例外が発生します。
 
-�ʲ��Τ褦�ˤ���ȡ���긷̩��RSS 1.0��ѡ����Ǥ��ޤ���
+以下のようにすると，より厳密にRSS 1.0をパースできます。
 
   RSS::Parser.parse(rss_source, true, false)
 
-=== �ѡ������줿RSS
+=== パースされたRSS
 
-RSS �ϥѡ��������� [[c:String]] ���֥������Ȥ��� [[c:RSS::RDF]],
-[[c:RSS::RDF::Channel]], [[c:RSS::Rss]] ���Υ��֥������Ȥˤʤ�ޤ����ƥ�
-�֥������Ȥǻ����ǥ��֥������Ȥ˥����������뤿��ˡ�����̾��
-Ʊ��̾���Υ�������������ޤ���
+RSS はパースされると [[c:String]] オブジェクトから [[c:RSS::RDF]],
+[[c:RSS::RDF::Channel]], [[c:RSS::Rss]] 等のオブジェクトになります。各オ
+ブジェクトで子要素オブジェクトにアクセスするために，要素名と
+同じ名前のアクセサがあります。
 
-==== �꡼��(reader)
+==== リーダ(reader)
 
-rdf:RDF ���Ǥλ����ǤǤ��� channel ���Ǥ򻲾Ȥ���ˤϡ��ʲ��Τ褦
-�ˤ��ޤ���
+rdf:RDF 要素の子要素である channel 要素を参照するには，以下のよう
+にします。
 
   rss = RSS::Parser.parse(rss_source)
-  rss.channel # => /rdf:RDF/channel����; RSS::RDF::Channel
+  rss.channel # => /rdf:RDF/channel要素; RSS::RDF::Channel
 
-�⤷�����Ǥ������Ǥ�°��������ʤ����� String ���֤äƤ��ޤ���
-�������Ǥ���ά��ǽ�ʤ��nil���֤ä���뤫�⤷��ޤ��󡣤���
-�����Ǥ������Ǥޤ���°������ľ���Ʊ�ͤǤ���
+もし、要素が子要素も属性も持たない場合は String が返ってきます。
+その要素が省略可能ならばnilが返って来るかもしれません。これ
+は要素が子要素または属性を持つ場合も同様です。
 
   rss = RSS::Parser.parse(rss_source)
   rss.channel.description # => /rdf:RDF/channel/text(); String
 
-°���˥��������������Ʊ�ͤǤ���channel���Ǥ�rdf:about°����
-������������ˤϰʲ��Τ褦�ˤ��ޤ���°�����ͤ�String��nil��
-����
+属性にアクセスする時も同様です。channel要素のrdf:about属性に
+アクセスするには以下のようにします。属性の値はStringかnilで
+す。
 
   rss = RSS::Parser.parse(rss_source)
-  rss.channel.about # => /rdf:RDF/channel/@about°��; String �ޤ��� nil
+  rss.channel.about # => /rdf:RDF/channel/@about属性; String または nil
 
-Ʊ̾��ʣ���λ����Ǥ����뤫�⤷��ʤ��Ȥ���Ʊ�ͤǤ�����������
-�꡼���˰�������ꤷ�ʤ��Ⱥǽ�λ����Ǥ��֤äƤ��ޤ����㤨�С�
-rdf:RDF���Ǥκǽ��item���Ǥ˥�����������ˤϰʲ��Τ褦�ˤ�
-�ޤ���
-
-  rss = RSS::Parser.parse(rss_source)
-  rss.item # => /rdf:RDF/item[1]����; RSS::RDF::Item
-
-3���ܤ�item���Ǥ˥�����������ˤϰʲ��Τ褦�ˤ��ޤ�����ά��
-��ʤ��ä��꡼���ΰ�����Array#[]�ΰ�����Ʊ���褦�˰����ޤ���
+同名の複数の子要素があるかもしれないときも同様です。ただし、
+リーダに引数を指定しないと最初の子要素が返ってきます。例えば、
+rdf:RDF要素の最初のitem要素にアクセスするには以下のようにし
+ます。
 
   rss = RSS::Parser.parse(rss_source)
-  rss.item(2) # => /rdf:RDF/item[3]����; RSS::RDF::Item
+  rss.item # => /rdf:RDF/item[1]要素; RSS::RDF::Item
 
-�����Ǥ��٤Ƥ�����������Ȥ�������̾��ʣ�������꡼���Ȥʤ��
-�������٤Ƥ�item���Ǥ��������ˤϰʲ��Τ褦�ˤ��ޤ���
+3番目のitem要素にアクセスするには以下のようにします。省略さ
+れなかったリーダの引数はArray#[]の引数と同じように扱われます。
 
   rss = RSS::Parser.parse(rss_source)
-  rss.items # => /rdf:RDF/item���Ǥ�����; [RSS::RDF::Item, ...]
+  rss.item(2) # => /rdf:RDF/item[3]要素; RSS::RDF::Item
 
-==== �饤��(writer)
+子要素すべてを取得したいときは要素名の複数形がリーダとなりま
+す。すべてのitem要素を取得するには以下のようにします。
 
-rdf:RDF���Ǥλ����ǤǤ���channel���Ǥ����ꤹ��ˤϰʲ��Τ褦
-�ˤ��ޤ���RSS::RDF::Channel.new���������ˤ�rdf:about°����
-�ͤ���ꤹ�뤳�Ȥ�Ǥ��ޤ���
+  rss = RSS::Parser.parse(rss_source)
+  rss.items # => /rdf:RDF/item要素の配列; [RSS::RDF::Item, ...]
+
+==== ライタ(writer)
+
+rdf:RDF要素の子要素であるchannel要素を設定するには以下のよう
+にします。RSS::RDF::Channel.newの第一引数にはrdf:about属性の
+値を指定することもできます。
 
   rss = RSS::Parser.parse(rss_source)
   rss.channel = RSS::RDF::Channel.new(rdf_about_value)
 
-°���ͤ����ꤹ�����Ʊ�ͤǤ���
+属性値を設定する場合も同様です。
 
   rss = RSS::Parser.parse(rss_source)
   rss.channel.about = "http://cozmixng.www.cozmixng.org/"
 
-Ʊ̾��ʣ���λ����Ǥ�¸�ߤ�����Ͼ����ۤʤ�ޤ�������̾��ʣ
-�����ǤΥ᥽�åɤ����Ǥ������������ơ�����������Ф���
-Array#<<��Array#[]=�ʤɤ��Ѥ������Ǥ����ꤷ�ޤ���
+同名の複数の子要素が存在する場合は少し異なります．要素名の複
+数形でのメソッドで要素の配列を取得して，その配列に対して
+Array#<<やArray#[]=などを用いて要素を設定します．
 
   rss = RSS::Parser.parse(rss_source)
   item = RSS::RDF::Item.new(rdf_about_value)
   rss.items << item
   rss.items.last == item # => true
 
-����: item=/set_item�ʤɤ�Ruby�äݤ��ʤ��ΤǻȤ�ʤ��Ǥ�����
-����
+注意: item=/set_itemなどはRubyっぽくないので使わないでくださ
+い．
 
-=== ����
+=== 出力
 
-RSS Parser�Ȥ��äƤ���ΤǸ��򤵤줬���Ǥ�����RSS����Ϥ���
-���Ȥ�Ǥ��ޤ���
+RSS Parserといっているので誤解されがちですが，RSSを出力する
+こともできます．
 
-==== ����
+==== 基本
 
-to_s�����RSS������ʸ������֤��ޤ���
+to_sするとRSS形式の文字列を返します．
 
-RSS����Ϥ���ή��ϰʲ��Τ褦�ˤʤ�ޤ���
+RSSを出力する流れは以下のようになります．
 
-  * RSS���֥������ȡ�RSS::RDF�Ȥ�RSS::Rss���饹
-    �Υ��֥������ȡˤ��������
+  * RSSオブジェクト（RSS::RDFとかRSS::Rssクラス
+    のオブジェクト）を作成する
 
-  * ���ϥ��󥳡��ǥ��󥰤���ꤹ��(��ά��)
+  * 出力エンコーディングを指定する(省略可)
 
-  * RSS���֥������Ȥ�to_s�᥽�åɤ�Ƥ�
+  * RSSオブジェクトのto_sメソッドを呼ぶ
 
 ==== xml-stylesheet
 
-xml-stylesheet����Ϥ��뤳�Ȥ��Ǥ��ޤ���
+xml-stylesheetも出力することができます．
 
-RSS�Υ롼�����ǡ�RSS::RDF�ޤ���RSS::Rss�˥��֥���
-���Ȥ�xml_stylesheets�Ȥ���̾�����������äƤ��ޤ���������
-���RSS::XMLStyleSheet���֥������Ȥ��������뤳�Ȥ�RSS
-��xml-stylesheet���Ϣ�Ť��뤳�Ȥ��Ǥ��ޤ���
+RSSのルート要素（RSS::RDFまたはRSS::Rss）オブジェ
+クトはxml_stylesheetsという名前の配列を持っています．この配
+列にRSS::XMLStyleSheetオブジェクトを挿入することでRSS
+にxml-stylesheetを関連づけることができます．
 
   rss.xml_stylesheets << RSS::XMLStyleSheet.new(...)
 
-RSS::XMLStyleSheet.new�ˤϰʲ��Τ褦��Hash�ޤ���
-Ϣ��������Ϥ��ޤ������������RSS::XMLStyleSheet���֥���
-���Ȥ�Ϳ����줿�����ˤ�äƽ��������ޤ���
+RSS::XMLStyleSheet.newには以下のようなHashまたは
+連想配列を渡します．作成されるRSS::XMLStyleSheetオブジェ
+クトは与えられた引数によって初期化されます．
 
 Hash:
 
@@ -187,7 +187,7 @@ Hash:
     :alternate => "...",
   }
 
-Ϣ������:
+連想配列:
 
   [
     [:href, "..."],
@@ -198,40 +198,40 @@ Hash:
     [:alternate, "..."],
   ]
 
-���ƤΥ����Ͼ�ά��ǽ�Ǥ���
+全てのキーは省略可能です．
 
-�㤨�С�xml-stylesheet�Ȥ���sample.xsl����ꤹ����ϰʲ���
-�褦�ˤ��ޤ���
+例えば，xml-stylesheetとしてsample.xslを指定する場合は以下の
+ようにします．
 
   rss.xml_stylesheets << RSS::XMLStyleSheet.new({:href => "sample.xsl"})
 
-������{:type => "text/xsl"}����ꤷ�ʤ��Ȥ����ʤ��Ȥ�
-���Ǥ�������ĥ�Ҥ�.xsl�ޤ��ϡ�.css�ξ���Ŭ���˿�¬���Ƥ���
-��ΤǾ�ά��ǽ�Ǥ���
+本当は{:type => "text/xsl"}も指定しないといけないとこ
+ろですが，拡張子が.xslまたは，.cssの場合は適当に推測してくれ
+るので省略可能です．
 
-==== RSS���֥������Ȥ���
+==== RSSオブジェクトを作る
 
-��¸��RSS��ѡ��������ˡ��줫�鿷����RSS���������ˤ�RSS
-Maker�������Ǥ���
+既存のRSSをパースせずに，一から新しくRSSを作成するにはRSS
+Makerが便利です．
 
 
-�ʲ��Τ褦�˻Ȥ��ޤ���
+以下のように使います．
 
   require "rss"
 
-  rss = RSS::Maker.make("�С������") do |maker|
+  rss = RSS::Maker.make("バージョン") do |maker|
     maker.XXX = YYY
     ...
   end
 
-�㤨�С�
+例えば，
 
-  * http://example.com/�ˤ���
-  * Example Site�Ȥ�������ʸ�����
-  * Example�Ȥ��������Ȥ�
-  * http://example.com/index.rdf�Ȥ���̾����RSS 1.0
+  * http://example.com/にある
+  * Example Siteという説明文を持つ
+  * Exampleというサイトを
+  * http://example.com/index.rdfという名前のRSS 1.0
 
-����������ˤϰʲ��Τ褦�ˤ��ޤ���
+を生成するには以下のようにします．
 
   require "rss"
 
@@ -242,12 +242,12 @@ Maker�������Ǥ���
     maker.channel.link = "http://example.com/"
   end
 
-�⤷��
+もし，
 
-  * http://example.com/article.html�ˤ���
-  * Sample Article�Ȥ��������ȥ��
+  * http://example.com/article.htmlにある
+  * Sample Articleというタイトルの
 
-����ȥ��ޤ᤿����аʲ��Τ褦�ˤ��ޤ���
+エントリを含めたければ以下のようにします．
 
   require "rss"
 
@@ -262,11 +262,11 @@ Maker�������Ǥ���
     item.title = "Sample Article"
   end
 
-�⤷����Υ���ȥ꤬
+もし，先のエントリが
 
   * 2004/11/1 10:10
 
-�Τ�Τʤ餳�����ޤ���
+のものならこうします．
 
   require "rss"
 
@@ -282,25 +282,25 @@ Maker�������Ǥ���
     item.date = Time.parse("2004/11/1 10:10")
   end
 
-����ץ����
+サンプル中の
 
   item.date = ...
 
-��
+は
 
   item.dc_date = ...
 
-�Ǥ⹽���ޤ���#dc_date=��#date=��ñ�ʤ���̾��
-����
+でも構いません．#dc_date=は#date=の単なる別名で
+す．
 
 
-����ˡ�
+さらに，
 
-  * http://example.com/article2.html�ˤ���
-  * Sample Article2�Ȥ���
-  * 2004/11/2 10:10�˺������줿
+  * http://example.com/article2.htmlにある
+  * Sample Article2という
+  * 2004/11/2 10:10に作成された
 
-����ȥ����Ĥʤ�ʲ��Τ褦�ˤ��ޤ���
+エントリを持つなら以下のようにします．
 
   require "rss"
 
@@ -321,11 +321,11 @@ Maker�������Ǥ���
     item.date = Time.parse("2004/11/2 10:10")
   end
 
-�⤷��������������������¤��ؤ��������
+もし，更新日が新しい順に並び替えたければ
 
   maker.items.do_sort = true
 
-���ɲä����ʲ��Τ褦�ˤ��ޤ���
+を追加し，以下のようにします．
 
   require "rss"
 
@@ -348,12 +348,12 @@ Maker�������Ǥ���
     item.date = Time.parse("2004/11/2 10:10")
   end
 
-�⤷�������Ȥ�
+もし，サイトに
 
-  * Example Site�Ȥ���̾����
-  * http://example.com/logo.png�Ȥ�������
+  * Example Siteという名前の
+  * http://example.com/logo.pngというロゴ
 
-��������ϰʲ��Τ褦�ˤ��ޤ���
+がある場合は以下のようにします．
 
   require "rss"
 
@@ -379,14 +379,14 @@ Maker�������Ǥ���
     maker.image.url = "http://example.com/logo.png"
   end
 
-�⤷��
+もし，
 
-  * http://example.com/search.cgi��
-  * keyword�Ȥ����ѥ�᥿̾�Ǹ����Ǥ���
-  * Search Example Site�Ȥ���̾����
-  * Search Example Site's all text�Ȥ��������դ���
+  * http://example.com/search.cgiに
+  * keywordというパラメタ名で検索できる
+  * Search Example Siteという名前で
+  * Search Example Site's all textという説明付きの
 
-������CGI�����ä���ʲ��Τ褦�ˤ��ޤ���
+検索用CGIがあったら以下のようにします．
 
   require "rss"
 
@@ -417,11 +417,11 @@ Maker�������Ǥ���
     maker.textinput.link = "http://example.com/search.cgi"
   end
 
-�⤷��
+もし，
 
-  * http://example.com/index.xsl�ˤ���
+  * http://example.com/index.xslにある
 
-xml-stylesheet���ɲä��������ϰʲ��Τ褦�ˤ��ޤ���
+xml-stylesheetを追加したい場合は以下のようにします．
 
   require "rss"
 
@@ -455,8 +455,8 @@ xml-stylesheet���ɲä��������ϰʲ��Τ褦�ˤ��ޤ���
     maker.textinput.link = "http://example.com/search.cgi"
   end
 
-�⤷��RSS 2.0���������������ϰʲ��Τ褦�ˡ�
-RSS::Maker.make�����������ѹ����ޤ���
+もし，RSS 2.0を生成したい場合は以下のように，
+RSS::Maker.makeの第一引数を変更します．
 
   require "rss"
 
@@ -490,24 +490,24 @@ RSS::Maker.make�����������ѹ����ޤ���
     maker.textinput.link = "http://example.com/search.cgi"
   end
 
-�⤷��RSS 0.91���������������ϡ�RSS 2.0�ξ���Ʊ�ͤ�
-RSS::Maker.make ����������"0.91"���ѹ����ޤ���
+もし，RSS 0.91を生成したい場合は，RSS 2.0の場合と同様に
+RSS::Maker.make の第一引数を"0.91"に変更します．
 
-=== ����ץ�
+=== サンプル
 
-RSS Parser �Υ���ץ륹����ץȤ򤤤��Ĥ��Ҳ𤷤ޤ���������
-������ץȤ� sample/ �ʲ������äƤ��ޤ���
+RSS Parser のサンプルスクリプトをいくつか紹介します．これらの
+スクリプトは sample/ 以下に入っています．
 
-==== ����ץ�1 - ���ܰ���
+==== サンプル1 - 項目一覧
 
-����Ǥϡ�ʣ����RSS��ѡ�������item���Ǥ�ɽ�����륹����ץ�
-��񤤤Ƥߤޤ��礦��
+それでは、複数のRSSをパースしてitem要素を表示するスクリプト
+を書いてみましょう。
 
-�ޤ���RSS 0.9x/1.0/2.0��ѡ����Ǥ���褦�˰ʲ��Τ褦��require���ޤ���
+まず、RSS 0.9x/1.0/2.0をパースできるように以下のようにrequireします。
 
   require 'rss'
 
-�ѡ�������RSS�ϥե��������¸����Ƥ��ư�����Ϳ�������ΤȤ��ޤ���
+パースするRSSはファイルに保存されていて引数で与えられるものとします。
 
   ARGV.each do |fname|
     rss_source = nil
@@ -522,23 +522,23 @@ RSS Parser �Υ���ץ륹����ץȤ򤤤��Ĥ��Ҳ𤷤ޤ���������
     end
 
     if rss.nil?
-      puts "#{fname}��RSS 0.9x/1.0/2.0�Τ�����Ǥ⤢��ޤ���"
+      puts "#{fname}はRSS 0.9x/1.0/2.0のいずれでもありません。"
     else
       print_items(rss)
     end
   end
 
-���Ȥ�print_items�Ȥ����᥽�åɤ������������Ǥ���
+あとはprint_itemsというメソッドを定義するだけです。
 
-RSS::RDF��RSS::Rss�ˤ������Τ����items�Ȥ����᥽�åɤ�image
-�Ȥ����᥽�åɤ��������Ƥ��ޤ���
+RSS::RDFとRSS::Rssには便利のためにitemsというメソッドとimage
+というメソッドが定義されています。
 
-items��RSS::RDF�ξ������Ƥ�/rdf:RDF/item���Ǥ�������֤���
-����RSS::Rss�ξ������Ƥ�/rss/channel/item���Ǥ�������֤�
-�ޤ���
+itemsはRSS::RDFの場合は全ての/rdf:RDF/item要素を配列で返しま
+す。RSS::Rssの場合は全ての/rss/channel/item要素を配列で返し
+ます。
 
-image��RSS::RDF�ξ���/rdf:RDF/image���Ǥ��֤��ޤ���
-RSS::Rss�ξ���/rss/channel/image���Ǥ��֤��ޤ���
+imageはRSS::RDFの場合は/rdf:RDF/image要素を返します。
+RSS::Rssの場合は/rss/channel/image要素を返します。
 
   def print_items(rss)
     rss.items.each do |item|
@@ -546,12 +546,12 @@ RSS::Rss�ξ���/rss/channel/image���Ǥ��֤��ޤ���
     end
   end
 
-���Ϥ���ʸ�������ɤ��ѹ�����ˤ�RSS::RDF#output_encoding=��
-����RSS::Rss#output_encoding=���Ȥ��ޤ����⤷���Ѵ��Ǥ��ʤ�
-���󥳡��ǥ��󥰤���ꤵ�줿����
-RSS::UnknownConversionMethodError�㳰��ȯ�����ޤ���
+出力する文字コードを変更するにはRSS::RDF#output_encoding=ま
+たはRSS::Rss#output_encoding=が使えます。もし、変換できない
+エンコーディングを指定された場合は
+RSS::UnknownConversionMethodError例外が発生します。
 
-������print_items��EUC-JP�ǽ��Ϥ���褦�˽񤭴����Ƥߤޤ��礦��
+先程のprint_itemsをEUC-JPで出力するように書き換えてみましょう。
 
   def print_items(rss)
     begin
@@ -565,49 +565,49 @@ RSS::UnknownConversionMethodError�㳰��ȯ�����ޤ���
 
 
 
-==== ����ץ�2 - ������ɽ��
+==== サンプル2 - 更新順表示
 
-����Dublin Core�⥸�塼���date°����Ȥäƹ������item��ɽ
-�����Ƥߤޤ��礦��
+次はDublin Coreモジュールのdate属性を使って更新順にitemを表
+示してみましょう。
 
-�ǽ�˸��줿Dublin Core�⥸�塼������Ǥ˥�����������ˤ�
-��dc_����̾�פȤ��������������Ѱդ���Ƥ��ޤ������Ƥ����Ǥ�
-����˥�����������ˤϡ�dc_���Ǥ�ʣ������((-dc:rights��
-dc_rightses�Ȥ������ˤʤäƤ��Ƶ������äƤ��ޤ��󡥤��줫��
-���Ƥ򲼤�����-))�Ȥ��ޤ���
+最初に現れたDublin Coreモジュールの要素にアクセスするには
+「dc_要素名」というアクセサが用意されています。全ての要素の
+配列にアクセスするには「dc_要素の複数形」((-dc:rightsは
+dc_rightsesという風になっていて気に入っていません．だれか良
+い案を下さい．-))とします．
 
-ʣ�����ǥ��������������ϡ����Ǥ����Ƥ�ɽ��ʸ����פǤϤʤ���
-�����Ǥ�ɽ�����֥������ȡפ������֤�ޤ��������Ǥ�ɽ������
-�������ȡפ�������Ǥ����Ƥ�ɽ��ʸ����פ��������ˤ�
-content�᥽�åɤ䤽����̾�Ǥ���value�᥽�åɤ���
-�Ѥ��ޤ��������Ǥ����Ƥ�ɽ��ʸ����פ����ꤹ��ˤ�
-content=�᥽�åɤ䤽����̾�Ǥ���value=�᥽�åɤ�
-���Ѥ��ޤ���
+複数形でアクセスした場合は「要素の内容を表す文字列」ではなく，
+「要素を表すオブジェクト」の配列が返ります．「要素を表すオブ
+ジェクト」から「要素の内容を表す文字列」を取得するには
+contentメソッドやその別名であるvalueメソッドを利
+用します．「要素の内容を表す文字列」を設定するには
+content=メソッドやその別名であるvalue=メソッドを
+利用します．
 
-  rss.channel.dc_title  # => �����Ǥ����Ƥ�ɽ��ʸ�����
-                        # ��"My site"�ʤɡ�
+  rss.channel.dc_title  # => 「要素の内容を表す文字列」
+                        # （"My site"など）
 
-  rss.channel.dc_titles # => �����Ǥ�ɽ�����֥������ȡפ�����
-                        # ��[DublinCoreTitle���֥�������, ...]��
+  rss.channel.dc_titles # => 「要素を表すオブジェクト」の配列
+                        # （[DublinCoreTitleオブジェクト, ...]）
 
   rss.channel.dc_titles.collect {|title| title.value}
-                        # => �����Ǥ����Ƥ�ɽ��ʸ����פ�����
-                        # ��["My site", ...]�ʤɡ�
+                        # => 「要素の内容を表す文字列」の配列
+                        # （["My site", ...]など）
 
   rss.channel.dc_titles.first.value == rss.channel.dc_title
                         # => true
-  # ��̩�ˤϤ���
+  # 厳密にはこう
   first_title = rss.channel.dc_titles.first
   first_title = first_title.value if first_title
   first_title == rss.channel.dc_title
                         # => true
 
-���ʤߤ�Syndication�⥸�塼������Ǥ˥�����������ˤϡ�sy_��
-��̾�פȤ���������������Content�⥸�塼������Ǥ˥���������
-��ˤϡ�content_����̾�פȤ��������������Ѱդ���Ƥ��ޤ���
+ちなみにSyndicationモジュールの要素にアクセスするには「sy_要
+素名」というアクセサが，Contentモジュールの要素にアクセスす
+るには「content_要素名」というアクセサが用意されています。
 
-����ץ�1��Ʊ���褦�˥ѡ�������RSS�ϥե��������¸����Ƥ���
-������Ϳ�������ΤȤ��ޤ���
+サンプル1と同じようにパースするRSSはファイルに保存されていて
+引数で与えられるものとします。
 
   items = []
   ARGV.each do |fname|
@@ -623,7 +623,7 @@ content=�᥽�åɤ䤽����̾�Ǥ���value=�᥽�åɤ�
     end
 
     if rss.nil?
-      puts "#{fname}��RSS 1.0�ǤϤ���ޤ���"
+      puts "#{fname}はRSS 1.0ではありません。"
     else
       begin
         rss.output_encoding = "euc-jp"
@@ -636,11 +636,11 @@ content=�᥽�åɤ䤽����̾�Ǥ���value=�᥽�åɤ�
   end
   print_items(items)
 
-���Ȥ�print_items�Ȥ����᥽�åɤ������������Ǥ���
+あとはprint_itemsというメソッドを定義するだけです。
 
-Item#dc_date��Time���֥������Ȥ�nil���֤��ޤ���������
-items�ˤ�dc_date��nil�ǤϤʤ���Τ����ޤޤ�Ƥ��ʤ���
-���ʤΤǰʲ��Τ褦�˥����ȤǤ��ޤ���
+Item#dc_dateはTimeオブジェクトかnilを返します。引数の
+itemsにはdc_dateがnilではないものしか含まれていないは
+ずなので以下のようにソートできます。
 
   def print_items(items)
     items.sort do |x, y|
@@ -650,6 +650,6 @@ items�ˤ�dc_date��nil�ǤϤʤ���Τ����ޤޤ�Ƥ��ʤ���
     end
   end
 
-==== ����ץ�3 - ʣ����RSS��֥���
+==== サンプル3 - 複数のRSSをブレンド
 
-TODO: sample/blend.rb�򸵤ˤ�������ץ��񤯡�
+TODO: sample/blend.rbを元にしたサンプルを書く．

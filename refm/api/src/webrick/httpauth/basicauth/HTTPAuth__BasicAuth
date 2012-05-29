@@ -1,9 +1,9 @@
 = class WEBrick::HTTPAuth::BasicAuth < Object
 include WEBrick::HTTPAuth::Authenticator
 
-HTTP �� Basic ǧ�ڤΤ���Υ��饹�Ǥ���
+HTTP の Basic 認証のためのクラスです。
 
-��
+例
 
     realm = "WEBrick's realm"
     srv = HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
@@ -20,62 +20,62 @@ HTTP �� Basic ǧ�ڤΤ���Υ��饹�Ǥ���
 == Class Methods
 
 --- make_passwd(realm, user, pass) -> String
-pass �������ʥ���Ȥ� crypt ����ʸ������֤��ޤ���
+pass をランダムなソルトで crypt した文字列を返します。
 
-@param realm �������ꤷ�ޤ���
+@param realm レルムを指定します。
 
-@param user �桼��̾����ꤷ�ޤ���
+@param user ユーザ名を指定します。
 
-@param pass �ѥ���ɤ���ꤷ�ޤ���
+@param pass パスワードを指定します。
 
 --- new(config, default = Config::BasicAuth) -> WEBrick::HTTPAuth::BasicAuth
 
-BasicAuth ���֥������Ȥ��������ޤ���config ���������¸�����ϥå���Ǥ���
+BasicAuth オブジェクトを生成します。config は設定を保存したハッシュです。
 
-config ��ͭ���ʥϥå��奭���ϰʲ����̤�Ǥ���
+config で有効なハッシュキーは以下の通りです。
 
  :Realm            =>
  :UserDB           =>
  :Logger           =>
  :AutoReloadUserDB =>
 
-realm ��ɽ��ʸ���� :Realm �ˤ�Ϳ���ޤ���:UserDB
-�ˤ� [[c:WEBrick::HTTPAuth::Htpasswd]] ���֥������Ȥ�Ϳ���ޤ���:Logger �ˤ�
-���������֥������Ȥ�Ϳ���ޤ����ޤ���:AutoReloadUserDB �ˤ�
-[[m:WEBrick::HTTPAuth::Htpasswd#get_passwd]] ��
-reload_db ���Ϥ�������Ϳ���ޤ���
+realm を表す文字列 :Realm には与えます。:UserDB
+には [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを与えます。:Logger には
+ロガーオブジェクトを与えます。また、:AutoReloadUserDB には
+[[m:WEBrick::HTTPAuth::Htpasswd#get_passwd]] の
+reload_db に渡す引数を与えます。
 
-@param config ������ݻ����Ƥ���ϥå������ꤷ�ޤ���
+@param config 設定を保持しているハッシュを指定します。
 
-@param default �ǥե���Ȥ� [[m:WEBrick::Config::BasicAuth]] �Ǥ���
+@param default デフォルトは [[m:WEBrick::Config::BasicAuth]] です。
 
 == Instance Methods
 
 --- authenticate(request, response) -> bool
-���饤����Ȥ��������Ƥ����桼��̾�ȥѥ���ɤ�ǧ�ڤ��ޤ���
-ǧ�ڤ˼��Ԥ������� challenge ��ƤӤޤ���
+クライアントから送られてきたユーザ名とパスワードを認証します。
+認証に失敗した場合は challenge を呼びます。
 
-@param request [[c:WEBrick::HTTPRequest]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
 
-@param response [[c:WEBrick::HTTPResponse]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
-@raise WEBrick::HTTPStatus::Unauthorized ǧ�ڤ˼��Ԥ�������ȯ�����ޤ���
+@raise WEBrick::HTTPStatus::Unauthorized 認証に失敗した場合に発生します。
 
 --- challenge(request, response) -> ()
 
-���饤����Ȥ˥ѥ���ɤ��׵᤹�뤿��˥쥹�ݥ󥹤� WWW-Authenticate �إå���
-���ꤷ���㳰 WEBrick::HTTPStatus::Unauthorized ���ꤲ�ޤ���
+クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
+設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
 
-@raise WEBrick::HTTPStatus::Unauthorized ���Υ᥽�åɤ�Ƥ֤�ɬ��ȯ�����ޤ���
+@raise WEBrick::HTTPStatus::Unauthorized このメソッドを呼ぶと必ず発生します。
 
 --- logger -> object
 
-���������֥������Ȥ��֤��ޤ���
+ロガーオブジェクトを返します。
 
 --- realm -> String
 
-realm ��ʸ������֤��ޤ���
+realm を文字列で返します。
 
 --- userdb -> WEBrick::HTTPAuth::Htpasswd
 
-�桼��̾�ȥѥ���ɤ���¸���� [[c:WEBrick::HTTPAuth::Htpasswd]] ���֥������Ȥ��֤��ޤ���
+ユーザ名とパスワードを保存した [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを返します。

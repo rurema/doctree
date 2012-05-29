@@ -1,6 +1,6 @@
-ÆÃ¼ìÊÑ¿ô $! ¤Ê¤É¤Ë±Ñ¸ìÌ¾¤ÎÊÌÌ¾ ($ERROR_INFO ¤Ê¤É)¤ò¤Ä¤±¤Ş¤¹¡£
+ç‰¹æ®Šå¤‰æ•° $! ãªã©ã«è‹±èªåã®åˆ¥å ($ERROR_INFO ãªã©)ã‚’ã¤ã‘ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   p $/  #=> "\n"
   p $RS #=> nil
@@ -16,7 +16,7 @@
 
 --- $ERROR_INFO -> Exception
 
-[[m:$!]] ¤ÎÊÌÌ¾
+[[m:$!]] ã®åˆ¥å
 
   require "English"
   class SomethingError < StandardError; end
@@ -30,7 +30,7 @@
 
 --- $ERROR_POSITION -> [String] | nil
 
-[[m:$@]] ¤ÎÊÌÌ¾
+[[m:$@]] ã®åˆ¥å
 
   require "English"
   class SomethingError < StandardError; end
@@ -44,7 +44,7 @@
 #@until 1.8.2
 --- $LOADED_FEATURES -> [String]
 
-[[m:$"]] ¤ÎÊÌÌ¾
+[[m:$"]] ã®åˆ¥å
 
   require "English"
   require "find"
@@ -56,7 +56,7 @@
 --- $FS              -> String | nil
 --- $FIELD_SEPARATOR -> String | nil
 
-[[m:$;]] ¤ÎÊÌÌ¾
+[[m:$;]] ã®åˆ¥å
 
   require "English"
 
@@ -68,7 +68,7 @@
 --- $OFS                    -> String | nil
 --- $OUTPUT_FIELD_SEPARATOR -> String | nil
 
-[[m:$,]] ¤ÎÊÌÌ¾
+[[m:$,]] ã®åˆ¥å
 
   require "English"
 
@@ -80,7 +80,7 @@
 --- $RS                     -> String | nil
 --- $INPUT_RECORD_SEPARATOR -> String | nil
 
-[[m:$/]] ¤ÎÊÌÌ¾
+[[m:$/]] ã®åˆ¥å
 
   require "English"
 
@@ -98,7 +98,7 @@
 --- $ORS                     -> String | nil
 --- $OUTPUT_RECORD_SEPARATOR -> String | nil
 
-[[m:$\]] ¤ÎÊÌÌ¾
+[[m:$\]] ã®åˆ¥å
 
   require "English"
 
@@ -117,7 +117,7 @@
 --- $INPUT_LINE_NUMBER -> Fixnum
 --- $NR                -> Fixnum
 
-[[m:$.]] ¤ÎÊÌÌ¾
+[[m:$.]] ã®åˆ¥å
 
   1 e
   2 f
@@ -139,7 +139,7 @@
 
 --- $LAST_READ_LINE -> String | nil
 
-[[m:$_]] ¤ÎÊÌÌ¾
+[[m:$_]] ã®åˆ¥å
   
   1 e
   2 f
@@ -158,7 +158,7 @@
   
 --- $DEFAULT_OUTPUT -> IO
 
-[[m:$>]] ¤ÎÊÌÌ¾
+[[m:$>]] ã®åˆ¥å
  
   require "English"
 
@@ -172,7 +172,7 @@
 
 --- $DEFAULT_INPUT -> IO
 
-[[m:$<]] ¤ÎÊÌÌ¾
+[[m:$<]] ã®åˆ¥å
   
   require "English"
   while line = $DEFAULT_INPUT.gets
@@ -187,15 +187,15 @@
 --- $PID        -> Fixnum
 --- $PROCESS_ID -> Fixnum
 
-[[m:$$]] ¤ÎÊÌÌ¾
+[[m:$$]] ã®åˆ¥å
  
   require "English"
 
-	p sprintf("something%s", $PID) #=> "something5543" ¤Ê¤É
+	p sprintf("something%s", $PID) #=> "something5543" ãªã©
 
 --- $CHILD_STATUS -> Process::Status | nil
 
-[[m:$?]] ¤ÎÊÌÌ¾
+[[m:$?]] ã®åˆ¥å
 
   require "English"
 
@@ -213,7 +213,7 @@
 
 --- $LAST_MATCH_INFO -> MatchData
 
-[[m:$~]] ¤ÎÊÌÌ¾
+[[m:$~]] ã®åˆ¥å
 
   require "English"
 
@@ -227,9 +227,9 @@
 
 --- $IGNORECASE -> bool
 
-Èó¿ä¾©(obsolete): ¤³¤ÎÊÑ¿ô¤Ï¾­Íè¤Î¥Ğ¡¼¥¸¥ç¥ó¤Çºï½ü¤µ¤ì¤ëÍ½Äê¤Ç¤¹¡£
+éæ¨å¥¨(obsolete): ã“ã®å¤‰æ•°ã¯å°†æ¥ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã§å‰Šé™¤ã•ã‚Œã‚‹äºˆå®šã§ã™ã€‚
 
-[[m:$=]] ¤ÎÊÌÌ¾
+[[m:$=]] ã®åˆ¥å
 
   require "English"
 
@@ -245,7 +245,7 @@
 
 --- $PROGRAM_NAME -> String
 
-[[m:$0]] ¤ÎÊÌÌ¾
+[[m:$0]] ã®åˆ¥å
 
   require "English"
   
@@ -258,7 +258,7 @@
 
 --- $ARGV -> [String]
 
-[[m:$*]] ¤ÎÊÌÌ¾
+[[m:$*]] ã®åˆ¥å
 
   require "English"
   p $ARGV
@@ -269,7 +269,7 @@
 
 --- $MATCH -> String | nil
 
-[[m:$&]] ¤ÎÊÌÌ¾
+[[m:$&]] ã®åˆ¥å
 
   require "English"
 
@@ -280,7 +280,7 @@
 
 --- $PREMATCH -> String | nil
 
-[[m:$`]] ¤ÎÊÌÌ¾
+[[m:$`]] ã®åˆ¥å
 
   require "English"
 
@@ -291,7 +291,7 @@
 
 --- $POSTMATCH -> String | nil
 
-[[m:$']] ¤ÎÊÌÌ¾
+[[m:$']] ã®åˆ¥å
 
   require "English"
 
@@ -302,7 +302,7 @@
 
 --- $LAST_PAREN_MATCH -> String | nil
 
-[[m:$+]] ¤ÎÊÌÌ¾
+[[m:$+]] ã®åˆ¥å
 
   require "English"
 

@@ -1,29 +1,29 @@
 require test/unit/ui/testrunnerutilities
 require test/unit/ui/testrunnermediator
 
-GTK ¤òÍÑ¤¤¤¿ UI ¾å¤Ç¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¼Â¹Ô¤·¡¢·ë²Ì¤òÉ½¼¨¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö
-¥é¥ê¤Ç¤¹¡£
+GTK ã‚’ç”¨ã„ãŸ UI ä¸Šã§ãƒ¦ãƒ‹ãƒƒãƒˆãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã—ã€çµæœã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–
+ãƒ©ãƒªã§ã™ã€‚
 
 = class Test::Unit::UI::GTK::TestRunner < Object
 extend Test::Unit::UI::TestRunnerUtilities
 
-GTK ¤òÍÑ¤¤¤¿ UI ¤Ç Test::Unit::TestSuite ¤ò¼Â¹Ô¤·¤Ş¤¹¡£
+GTK ã‚’ç”¨ã„ãŸ UI ã§ Test::Unit::TestSuite ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
-¤³¤Îµ¡Ç½¤òÍøÍÑ¤¹¤ë¤Ë¤Ï¡¢GTK ¤Î³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤ò¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ëÉ¬Í×¤¬¤¢
-¤ê¤Ş¤¹¡£
+ã“ã®æ©Ÿèƒ½ã‚’åˆ©ç”¨ã™ã‚‹ã«ã¯ã€GTK ã®æ‹¡å¼µãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹å¿…è¦ãŒã‚
+ã‚Šã¾ã™ã€‚
 
 == Class Methods
 --- new(suite, output_level = NORMAL)   -> Test::Unit::UI::GTK::TestRunner
 
-TestRunner ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Ş¤¹¡£
+TestRunner ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param suite ¼Â¹Ô¤·¤¿¤¤¥Æ¥¹¥È¤òÊİ»ı¤·¤Æ¤¤¤ë TestSuite ¥ª¥Ö¥¸¥§¥¯¥È¤«
-             TestCase ¥ª¥Ö¥¸¥§¥¯¥È¤òÍ¿¤¨¤Ş¤¹¡£
+@param suite å®Ÿè¡Œã—ãŸã„ãƒ†ã‚¹ãƒˆã‚’ä¿æŒã—ã¦ã„ã‚‹ TestSuite ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹
+             TestCase ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸ãˆã¾ã™ã€‚
 
-@param output_level ½ĞÎÏ¥ì¥Ù¥ë¤ò»ØÄê¤·¤Ş¤¹¡£
+@param output_level å‡ºåŠ›ãƒ¬ãƒ™ãƒ«ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-°ú¿ô output_level ¤Ë¤Ï°Ê²¼¤Î 4 ¤Ä¤Î¤¤¤º¤ì¤«¤ò»ØÄê¤·¤Ş¤¹¡£¾Ü¤·¤¯¤Ï
-[[c:Test::Unit::UI]] ¤ò¤´Í÷¤¯¤À¤µ¤¤¡£
+å¼•æ•° output_level ã«ã¯ä»¥ä¸‹ã® 4 ã¤ã®ã„ãšã‚Œã‹ã‚’æŒ‡å®šã—ã¾ã™ã€‚è©³ã—ãã¯
+[[c:Test::Unit::UI]] ã‚’ã”è¦§ãã ã•ã„ã€‚
 
  * Test::Unit::UI::SILENT
  * Test::Unit::UI::PROGRESS_ONLY
@@ -33,6 +33,6 @@ TestRunner ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Ş¤¹¡£
 == Instance Methods
 --- start   -> Test::Unit::TestResult
 
-¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Ş¤¹¡£
+ãƒ†ã‚¹ãƒˆã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
-¥Æ¥¹¥È·ë²Ì¤òÊİ»ı¤·¤¿ Test::Unit::TestResult ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Ş¤¹¡£
+ãƒ†ã‚¹ãƒˆçµæœã‚’ä¿æŒã—ãŸ Test::Unit::TestResult ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™ã€‚

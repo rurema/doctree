@@ -1,24 +1,24 @@
-�ǥ��쥯�ȥ��۲��Υե������õ�����뤿��Υ⥸�塼��Ǥ���
+ディレクトリ配下のファイルを探索するためのモジュールです。
 
-=== �Ȥ���
+=== 使い方
 
   require "find"
   
   Find.find('/foo','/bar') {|f| ...}
 
-�ޤ���
+または
 
   require "find"
   
   include Find
   find('/foo','/bar') {|f| ...}
 
-�ʲ��ϡ�ruby �Υ��������֤˴ޤޤ�륵��ץ륹����ץ�
-([[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/sample/trojan.rb?view=markup]]) �򤳤Υ⥸�塼��ǽ񤭴�������ΤǤ���
+以下は、ruby のアーカイブに含まれるサンプルスクリプト
+([[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/sample/trojan.rb?view=markup]]) をこのモジュールで書き換えたものです。
 
   #! /usr/bin/env ruby
   require "find"
-  # ¾�ͤ��񤭹��߲�ǽ�ʴ����ʥ��ޥ�ɤ�õ��
+  # 他人が書き込み可能な危険なコマンドを探す
   
   for dir in ENV['PATH'].split(File::PATH_SEPARATOR)
     Find.find(dir) do |fpath|
@@ -30,21 +30,21 @@
 
 = module Find
 
-�ǥ��쥯�ȥ��۲��Υե������õ�����뤿��Υ⥸�塼��Ǥ���
+ディレクトリ配下のファイルを探索するためのモジュールです。
 
 == Module Functions
 
 --- find(*dirs){|file| ... } -> nil
 
-[[man:find(1)]] �Τ褦�� dir �۲��Τ��٤ƤΥե������
-�ǥ��쥯�ȥ���Ĥ��İ��� file ���Ϥ��ƥ֥��å���¹Ԥ��ޤ���
+[[man:find(1)]] のように dir 配下のすべてのファイルや
+ディレクトリを一つずつ引数 file に渡してブロックを実行します。
 
-�ǥ��쥯�ȥ�Υ���ܥ�å���󥯤�é��ޤ���
-�ޤ� file ���Ϥ������������Ǥ���
+ディレクトリのシンボリックリンクは辿りません。
+また file に渡される順序は不定です。
 
-@param dirs õ������ǥ��쥯�ȥ���İʾ���ꤷ�ޤ���
+@param dirs 探索するディレクトリを一つ以上指定します。
 
-��:
+例:
 
   require 'find'
   
@@ -53,15 +53,15 @@
     ...
   }
 
-����ǥ��쥯�ȥ��۲���õ�����ά���������Ͼ嵭�Τ褦�ˡ�
-[[m:Find.#prune]] ����Ѥ��ޤ���������Ǥ� "/tmp/bar"
-�۲��Υե������ǥ��쥯�ȥ��õ�����ޤ���prune �������
-[[ref:d:spec/control#next]] ����Ѥ�����硢"/tmp/bar" ���Τ򥹥��åפ���
-�����ǡ������۲���õ����³�Ԥ���ޤ���
+あるディレクトリ配下の探索を省略したい場合は上記のように、
+[[m:Find.#prune]] を使用します。この例では "/tmp/bar"
+配下のファイルやディレクトリを探索しません。prune の代わりに
+[[ref:d:spec/control#next]] を使用した場合、"/tmp/bar" 自体をスキップする
+だけで、その配下の探索は続行されます。
 
 @see [[man:find(1)]], [[m:Find.#prune]]
 
 --- prune -> ()
 
-[[m:Find.#find]] �᥽�åɤΥ֥��å��˥ǥ��쥯�ȥ꤬�Ϥ��줿�Ȥ��ˤ�
-�Υ᥽�åɤ�¹Ԥ���ȡ����Υǥ��쥯�ȥ��۲���õ����̵�뤷�ޤ���
+[[m:Find.#find]] メソッドのブロックにディレクトリが渡されたときにこ
+のメソッドを実行すると、そのディレクトリ配下の探索を無視します。

@@ -1,11 +1,11 @@
 = class WEBrick::HTTPAuth::DigestAuth < Object
 include WEBrick::HTTPAuth::Authenticator
 
-HTTP �� Digest ǧ�ڤΤ���Υ��饹�Ǥ���
+HTTP の Digest 認証のためのクラスです。
 
-[[RFC:2617]] �⻲�Ȥ��Ƥ���������
+[[RFC:2617]] も参照してください。
 
-��:
+例:
   config = { :Realm => 'DigestAuth example realm' }
 
   htdigest = WEBrick::HTTPAuth::Htdigest.new 'my_password_file'
@@ -16,35 +16,35 @@ HTTP �� Digest ǧ�ڤΤ���Υ��饹�Ǥ���
 
   digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
-�����֥�åȤ� initialize �᥽�åɤ���Ǥ��Υ��饹�Υ��󥹥��󥹤����
-���ʤ��褦�ˤ��Ƥ����������ǥե���ȤǤ� WEBrick �ϥꥯ�����ȤΤ��Ӥ˥���
-�֥�åȤΥ��󥹥��󥹤��������ޤ�����
-[[c:WEBrick::HTTPAuth::DigestAuth]] �Υ��֥������Ȥϥꥯ�����Ȥ�ޤ���
-�����Ѥ��ʤ���Фʤ�ʤ�����Ǥ���
+サーブレットの initialize メソッドの中でこのクラスのインスタンスを作成
+しないようにしてください。デフォルトでは WEBrick はリクエストのたびにサー
+ブレットのインスタンスを生成しますが、
+[[c:WEBrick::HTTPAuth::DigestAuth]] のオブジェクトはリクエストをまたい
+で利用しなければならないためです。
 
 == Class Methods
 
 --- make_passwd(realm, user, pass) -> String
 
-Ϳ����줿�������Ѥ��ƥϥå��岽�����ѥ���ɤ��������ޤ���
+与えられた情報を使用してハッシュ化したパスワードを生成します。
 
-@param realm �������ꤷ�ޤ���
+@param realm レルムを指定します。
 
-@param user �桼��̾����ꤷ�ޤ���
+@param user ユーザ名を指定します。
 
-@param pass �ѥ���ɤ���ꤷ�ޤ���
+@param pass パスワードを指定します。
 
 --- new(config, default = WEBrick::Config::DigestAuth) -> WEBrick::HTTPAuth::DigestAuth
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-ǧ�ڤ�¹Ԥ��뤿��ˡ��ꥯ�����ȴ֤Ǿ��֤���¸����ʣ���Υꥯ�����Ȥ���
-����Ʊ��Υ��󥹥��󥹤���Ѥ��Ƥ���������
+認証を実行するために、リクエスト間で状態を保存し、複数のリクエストに対
+して同一のインスタンスを使用してください。
 
-@param config ������ݻ����Ƥ���ϥå������ꤷ�ޤ���
-              :Realm �� :UserDB ��ɬ�����ꤷ�ʤ���Фʤ�ޤ���
+@param config 設定を保持しているハッシュを指定します。
+              :Realm と :UserDB は必ず指定しなければなりません。
 
-@param default �ǥե���Ȥ� [[m:WEBrick::Config::DigestAuth]] �Ǥ���
+@param default デフォルトは [[m:WEBrick::Config::DigestAuth]] です。
 
 @see [[m:WEBrick::Config::DigestAuth]]
 
@@ -52,32 +52,32 @@ HTTP �� Digest ǧ�ڤΤ���Υ��饹�Ǥ���
 
 --- algorithm -> String
 
-���르�ꥺ���ɽ��ʸ������֤��ޤ���
+アルゴリズムを表す文字列を返します。
 
 --- authenticate(request, response) -> true
 
-���饤����Ȥ��������Ƥ����桼��̾�ȥѥ���ɤ�ǧ�ڤ��ޤ���
-ǧ�ڤ˼��Ԥ������� challenge ��ƤӤޤ���
+クライアントから送られてきたユーザ名とパスワードを認証します。
+認証に失敗した場合は challenge を呼びます。
 
-@param request [[c:WEBrick::HTTPRequest]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
 
-@param response [[c:WEBrick::HTTPResponse]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
-@raise WEBrick::HTTPStatus::Unauthorized ǧ�ڤ˼��Ԥ�������ȯ�����ޤ���
+@raise WEBrick::HTTPStatus::Unauthorized 認証に失敗した場合に発生します。
 
 --- challenge(request, response, stale = false)
 
-���饤����Ȥ˥ѥ���ɤ��׵᤹�뤿��˥쥹�ݥ󥹤� WWW-Authenticate �إå���
-���ꤷ���㳰 WEBrick::HTTPStatus::Unauthorized ��ȯ�������ޤ���
+クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
+設定し、例外 WEBrick::HTTPStatus::Unauthorized を発生させます。
 
-@param request [[c:WEBrick::HTTPRequest]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
 
-@param response [[c:WEBrick::HTTPResponse]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
-@raise WEBrick::HTTPStatus::Unauthorized ���Υ᥽�åɤ�Ƥ֤�ɬ��ȯ�����ޤ���
+@raise WEBrick::HTTPStatus::Unauthorized このメソッドを呼ぶと必ず発生します。
 
 --- qop -> String
 
-Qop �������ͤ��֤��ޤ���
+Qop キーの値を返します。
 
 

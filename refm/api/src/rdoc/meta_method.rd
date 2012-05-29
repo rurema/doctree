@@ -1,3 +1,3 @@
-[[c:RDoc::MetaMethod]] ¤òÄêµÁ¤¹¤ë¥µ¥Ö¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+[[c:RDoc::MetaMethod]] ã‚’å®šç¾©ã™ã‚‹ã‚µãƒ–ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(RDoc__MetaMethod)

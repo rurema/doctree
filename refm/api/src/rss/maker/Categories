@@ -9,17 +9,17 @@ include Enumerable
 
 --- new_category
 #@todo
-¿·¤·¤¯category¤òºîÀ®¤·¡¤ÊÖ¤·¤Ş¤¹¡¥ºîÀ®¤µ¤ì¤¿
-category¤Ïcategory¥ê¥¹¥È¤ÎºÇ¸å
-¤ËÄÉ²Ã¤µ¤ì¤Æ¤¤¤Ş¤¹¡¥
+æ–°ã—ãcategoryã‚’ä½œæˆã—ï¼Œè¿”ã—ã¾ã™ï¼ä½œæˆã•ã‚ŒãŸ
+categoryã¯categoryãƒªã‚¹ãƒˆã®æœ€å¾Œ
+ã«è¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ï¼
 
 
 = class RSS::Maker::ChannelBase::CategoriesBase::CategoryBase < Object
-category¤Ï
-maker.channel.categories.new_category¤ÇºîÀ®¤µ¤ì¤¿¥ª
-¥Ö¥¸¥§¥¯¥È¤È¤·¤Ş¤¹¡¥
+categoryã¯
+maker.channel.categories.new_categoryã§ä½œæˆã•ã‚ŒãŸã‚ª
+ãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¾ã™ï¼
 
-content¤ò»ØÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Ş¤¹¡¥
+contentã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ï¼
 
 == Instance Methods
 

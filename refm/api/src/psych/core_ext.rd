@@ -1,9 +1,9 @@
-[[c:Class]]��[[c:Module]]��[[c:Kernel]] �Ȥ��ä�����Ū�ʥ��饹���ĥ��
-�뤿��Υ��֥饤�֥��Ǥ���
+[[c:Class]]、[[c:Module]]、[[c:Kernel]] といった基本的なクラスを拡張す
+るためのサブライブラリです。
 
-[����] [[m:Object.psych_to_yaml]] �ʤɤΥ᥽�åɤ� [[lib:syck]] �����
-�ɤ߹��ޤ�Ƥ������Τ�����������Ƥ��ޤ���[[lib:syck]] ���ѻߤȶ���
-���ѤǤ��ʤ��ʤ�ͽ��Ǥ��Τǡ�psych_ �Τʤ��������Ѥ��Ƥ���������
+[注意] [[m:Object.psych_to_yaml]] などのメソッドは [[lib:syck]] が先に
+読み込まれていた場合のために定義されています。[[lib:syck]] の廃止と共に
+使用できなくなる予定ですので、psych_ のない方を利用してください。
 
 = reopen Object
 

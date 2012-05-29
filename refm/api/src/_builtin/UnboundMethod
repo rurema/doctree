@@ -4,15 +4,15 @@
 = class UnboundMethod < Method
 #@end
 
-�쥷���Ф�����ʤ��᥽�åɤ�ɽ�����饹�Ǥ���
-�ƤӽФ�����ˤϥ쥷���Ф˥Х���ɤ���ɬ�פ�����ޤ���
+レシーバを持たないメソッドを表すクラスです。
+呼び出すためにはレシーバにバインドする必要があります。
 
-[[m:Module#instance_method]] ��
-[[m:Method#unbind]] �ˤ�������������
-[[m:UnboundMethod#bind]] �ˤ��쥷���Ф�
-������Ƥ� [[c:Method]] ���֥������Ȥ��뤳�Ȥ��Ǥ��ޤ���
+[[m:Module#instance_method]] や
+[[m:Method#unbind]] により生成し、後で
+[[m:UnboundMethod#bind]] によりレシーバを
+割り当てた [[c:Method]] オブジェクトを作ることができます。
 
-��: [[c:Method]] ���饹����Ƭ�ˤ������ UnboundMethod �ǽ񤯤Ȱʲ��Τ褦�ˤʤ�ޤ���
+例: [[c:Method]] クラスの冒頭にある例を UnboundMethod で書くと以下のようになります。
 
   class Foo
     def foo() "foo" end
@@ -20,20 +20,20 @@
     def baz() "baz" end
   end
 
-  # Ǥ�դΥ����ȥ᥽�åɤδط���ϥå�����ݻ����Ƥ���
-  # �쥷���Фξ��󤬤����ˤϤʤ����Ȥ�����
+  # 任意のキーとメソッドの関係をハッシュに保持しておく
+  # レシーバの情報がここにはないことに注意
   methods = {1 => Foo.instance_method(:foo),
              2 => Foo.instance_method(:bar),
              3 => Foo.instance_method(:baz)}
 
-  # ������Ȥäƴ�Ϣ����᥽�åɤ�ƤӽФ�
-  # �쥷���Ф�Ǥ��(Foo ���饹�Υ��󥹥��󥹤Ǥʤ���Фʤ�ʤ�)
+  # キーを使って関連するメソッドを呼び出す
+  # レシーバは任意(Foo クラスのインスタンスでなければならない)
   p methods[1].bind(Foo.new).call      # => "foo"
   p methods[2].bind(Foo.new).call      # => "bar"
   p methods[3].bind(Foo.new).call      # => "baz"
 
-��: �ʲ��ϥ᥽�åɤκ������ UnboundMethod ��ȤäƹԤ���ˡ�Ǥ������̤�
-alias �� super ��Ȥ��ޤ���
+例: 以下はメソッドの再定義を UnboundMethod を使って行う方法です。普通は
+alias や super を使います。
 
   class Foo
     def foo
@@ -58,10 +58,10 @@ alias �� super ��Ȥ��ޤ���
 --- call(*args)          
 --- call(*args) { ... }  
 
-����㳰 [[c:TypeError]] ��ȯ�����ޤ���
-UnboundMethod �� [[m:UnboundMethod#bind]] ���ʤ���е�ư�Ǥ��ޤ���
+常に例外 [[c:TypeError]] が発生します。
+UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
 
-@raise TypeError ���ȯ�����ޤ���
+@raise TypeError 常に発生します。
 
     class Foo
       def foo
@@ -74,16 +74,16 @@ UnboundMethod �� [[m:UnboundMethod#bind]] ���ʤ���е�ư�Ǥ��ޤ���
 
 --- bind(obj)    -> Method
 
-self �� obj �˥Х���ɤ��� [[c:Method]] ���֥������Ȥ��������֤��ޤ���
+self を obj にバインドした [[c:Method]] オブジェクトを生成し返します。
 
-@param obj ���Ȥ�Х���ɤ��������֥������Ȥ���ꤷ�ޤ����������Х���ɤǤ���Τϡ�
-           unbind �������֥������ȤΥ��饹�Υ��󥹥��󥹤����᥽�å�������Υ⥸�塼���
-           ���󥯥롼�ɤ������饹�Υ��󥹥��󥹤����Ǥ���
+@param obj 自身をバインドしたいオブジェクトを指定します。ただしバインドできるのは、
+           unbind したオブジェクトのクラスのインスタンスか、メソッド定義元のモジュールを
+           インクルードしたクラスのインスタンスだけです。
 
-@raise TypeError obj �Υ��饹����unbind �������֥������ȤΥ��饹�Υ��󥹥��󥹤���
-                 �᥽�å�������Υ⥸�塼��򥤥󥯥롼�ɤ������饹�Ǥʤ���С�ȯ�����ޤ���
+@raise TypeError obj のクラスが、unbind したオブジェクトのクラスのインスタンスか、
+                 メソッド定義元のモジュールをインクルードしたクラスでなければ、発生します。
 
-    # ���饹�Υ��󥹥��󥹥᥽�åɤ� UnboundMethod �ξ��
+    # クラスのインスタンスメソッドの UnboundMethod の場合
 
     class Foo
       def foo
@@ -91,30 +91,30 @@ self �� obj �˥Х���ɤ��� [[c:Method]] ���֥������Ȥ��������֤��ޤ���
       end
     end
 
-    # UnboundMethod `m' ������
+    # UnboundMethod `m' を生成
     p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
 
-    # Foo �Υ��󥹥��󥹤�쥷���ФȤ��� Method ���֥������Ȥ�����
+    # Foo のインスタンスをレシーバとする Method オブジェクトを生成
     p m.bind(Foo.new)               # => #<Method: Foo(Foo)#foo>
 
-    # Foo �Υ��֥��饹 Bar �Υ��󥹥��󥹤�쥷���ФȤ��� Method
+    # Foo のサブクラス Bar のインスタンスをレシーバとする Method
 #@if (version < "1.8.0")
-    # ���֥������Ȥ�����(����ϵ�����ʤ�)
+    # オブジェクトを生成(これは許されない)
 #@end
-    #@#  ruby 1.8 feature: �������褦�ˤʤ�ޤ���
+    #@#  ruby 1.8 feature: 許されるようになりました
 
     class Bar < Foo
     end
     # p m.bind(Bar.new)               # => -18:in `bind': bind argument must be an instance of Foo (TypeError)
 
-    # Ʊ̾���ðۥ᥽�åɤ��������Ƥ���ȥ���
+    # 同名の特異メソッドが定義されているとダメ
     class << obj = Foo.new
       def foo
       end
     end
     p m.bind(obj)                   # => -:25:in `bind': method `foo' overridden (TypeError)
 
-    # �⥸�塼��Υ��󥹥��󥹥᥽�åɤ� UnboundMethod �ξ��
+    # モジュールのインスタンスメソッドの UnboundMethod の場合
 
     module Foo
       def foo
@@ -122,22 +122,22 @@ self �� obj �˥Х���ɤ��� [[c:Method]] ���֥������Ȥ��������֤��ޤ���
       end
     end
 
-    # UnboundMethod `m' ������
+    # UnboundMethod `m' を生成
     p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
 
-    # Foo �򥤥󥯥롼�ɤ������饹 Bar �Υ��󥹥��󥹤�쥷���Ф�
-    # ���� Method ���֥������Ȥ�����
+    # Foo をインクルードしたクラス Bar のインスタンスをレシーバと
+    # する Method オブジェクトを生成
     class Bar
       include Foo
     end
     p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 
-    # Bar �Υ��֥��饹�� Foo �򥤥󥯥롼�ɤ��Ƥ���Τ�Ʊ���ʤΤǤ褤
+    # Bar のサブクラスは Foo をインクルードしているのと同等なのでよい
     class Baz <Bar
     end
     p m.bind(Baz.new)               # => #<Method: Baz(Foo)#foo>
 
-    # Ʊ̾���ðۥ᥽�åɤ��������Ƥ���ȥ���
+    # 同名の特異メソッドが定義されているとダメ
     class << obj = Baz.new
       def foo
       end
@@ -147,23 +147,23 @@ self �� obj �˥Х���ɤ��� [[c:Method]] ���֥������Ȥ��������֤��ޤ���
 #@if (version < "1.8.0")
 --- to_proc    -> Proc
 
-self �� call ���� [[c:Proc]] ���֥������Ȥ����������֤��ޤ���
+self を call する [[c:Proc]] オブジェクトを生成して返します。
 #@end
 
 #@if (version < "1.8.0")
 --- unbind    -> self
 
-self ���֤��ޤ���
+self を返します。
 #@end
 
 --- arity    -> Integer
 
-�᥽�åɤ������դ�������ο����֤��ޤ���
+メソッドが受け付ける引数の数を返します。
 
-���������᥽�åɤ�����Ĺ����������դ����硢�������
-  -(ɬ�פȤ��������ο� + 1)
-���֤��ޤ���C �����٥�Ǽ������줿�᥽�åɤ�����Ĺ������
-�����դ����硢-1 ���֤��ޤ���
+ただし、メソッドが可変長引数を受け付ける場合、負の整数
+  -(必要とされる引数の数 + 1)
+を返します。C 言語レベルで実装されたメソッドが可変長引数を
+受け付ける場合、-1 を返します。
   
   class C
     def one;    end
@@ -190,10 +190,10 @@ self ���֤��ޤ���
 --- ==(other)     -> bool
 --- ===(other)    -> bool
 
-���Ȥ� other ��Ʊ�����饹���뤤��Ʊ���⥸�塼���Ʊ���᥽�åɤ�ɽ������
-true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身と other が同じクラスあるいは同じモジュールの同じメソッドを表す場合に
+true を返します。そうでない場合に false を返します。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
   a = String.instance_method(:size)
   b = String.instance_method(:size)
@@ -207,11 +207,11 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 --- eql?(other)     -> bool
 --- equal?(other)   -> bool
 
-���ꤵ�줿 other �� self ���ȤǤ�����Τ߿����֤��ޤ���
-����� [[c:Object]] ���饹��������줿�ǥե���Ȥ�ư���
-����
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
   a = String.instance_method(:size)
   b = String.instance_method(:size)
@@ -222,7 +222,7 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 
 --- hash    -> Integer
 
-���Ȥ� [[m:Object#object_id]] ���֤��ޤ�������� [[c:Object]] ���饹��������줿�ǥե���Ȥ�ư��Ǥ���
+自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
 
 #@since 1.8.7
 --- name    -> String
@@ -230,10 +230,10 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 --- name    -> Symbol
 #@end
 
-���Υ᥽�åɤ�̾�����֤��ޤ���
+このメソッドの名前を返します。
 
 --- owner    -> Class | Module
 
-���Υ᥽�åɤ��������Ƥ��� class �� module ���֤��ޤ���
+このメソッドが定義されている class か module を返します。
 
 #@end

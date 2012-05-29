@@ -1,3 +1,3 @@
-[[c:RDoc::NormalClass]] дЄ─ъ╡┴д╣дые╡е╓ещеде╓ещеъд╟д╣бг
+[[c:RDoc::NormalClass]] уВТхоЪч╛йуБЩуВЛуВ╡уГЦуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 #@include(RDoc__NormalClass)

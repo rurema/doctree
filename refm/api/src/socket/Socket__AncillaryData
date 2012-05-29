@@ -1,43 +1,43 @@
 = class Socket::AncillaryData
 
-[[m:BasicSocket#sendmsg]] ¤ä [[m:BasicSocket#recvmsg]]
- ¤ÇÍÑ¤¤¤ë ancillary data (Êä½õ¥Ç¡¼¥¿¡¢À©¸æ¾ðÊó)
-¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+[[m:BasicSocket#sendmsg]] ã‚„ [[m:BasicSocket#recvmsg]]
+ ã§ç”¨ã„ã‚‹ ancillary data (è£œåŠ©ãƒ‡ãƒ¼ã‚¿ã€åˆ¶å¾¡æƒ…å ±)
+ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 [[m:Socket::AncillaryData#family]](socket family), 
 [[m:Socket::AncillaryData#level]](cmsg level),
 [[m:Socket::AncillaryData#type]](cmsg type),
 [[m:Socket::AncillaryData#data]](cmsg data),
-¤È¤¤¤Ã¤¿Í×ÁÇ¤ò»ý¤Á¤Þ¤¹¡£
+ã¨ã„ã£ãŸè¦ç´ ã‚’æŒã¡ã¾ã™ã€‚
 
 == Class Methods
 --- new(family, cmsg_level, cmsg_type, cmsg_data) -> Socket::AncillaryData
 
-¿·¤¿¤Ê Socket::AncillaryData ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ãŸãª Socket::AncillaryData ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-family ¤Ï¥½¥±¥Ã¥È¥Õ¥¡¥ß¥ê¡¼¤ò»ØÄê¤·¤Þ¤¹¡£
-À°¿ô¡¢Ê¸»úÎó¡¢¥·¥ó¥Ü¥ë¤òÅÏ¤·¤Þ¤¹¡£
+family ã¯ã‚½ã‚±ãƒƒãƒˆãƒ•ã‚¡ãƒŸãƒªãƒ¼ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+æ•´æ•°ã€æ–‡å­—åˆ—ã€ã‚·ãƒ³ãƒœãƒ«ã‚’æ¸¡ã—ã¾ã™ã€‚
  * Socket::AF_INET, "AF_INET", "INET", :AF_INET, :INET
  * Socket::AF_UNIX, "AF_UNIX", "UNIX", :AF_UNIX, :UNIX
- * ¤Ê¤É
+ * ãªã©
 
-cmsg_level ¤Ë¤Ï¥á¥Ã¥»¡¼¥¸¤Î¸µ¤È¤Ê¤ë¥×¥í¥È¥³¥ë¤ò»ØÄê¤·¤Þ¤¹¡£
-À°¿ô¡¢Ê¸»úÎó¡¢¥·¥ó¥Ü¥ë¤òÅÏ¤·¤Þ¤¹¡£
+cmsg_level ã«ã¯ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å…ƒã¨ãªã‚‹ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+æ•´æ•°ã€æ–‡å­—åˆ—ã€ã‚·ãƒ³ãƒœãƒ«ã‚’æ¸¡ã—ã¾ã™ã€‚
  * Socket::SOL_SOCKET, "SOL_SOCKET", "SOCKET", :SOL_SOCKET and :SOCKET
  * Socket::IPPROTO_IP, "IP" and :IP
  * Socket::IPPROTO_IPV6, "IPV6" and :IPV6
  * Socket::IPPROTO_TCP, "TCP" and :TCP
- * ¤Ê¤É
+ * ãªã©
 
-cmsg_type ¤ÏÊä½õ¥Ç¡¼¥¿¤Î¼ïÎà¤ò»ØÄê¤·¤Þ¤¹¡£
-cmsg_level ¤Ç»ØÄê¤·¤¿¥×¥í¥È¥³¥ë¤Ë¤è¤Ã¤Æ¤³¤ÎÉôÊ¬¤Î²ò¼á¤Ï°Û¤Ê¤ê¤Þ¤¹¡£
-À°¿ô¡¢Ê¸»úÎó¡¢¥·¥ó¥Ü¥ë¤òÅÏ¤·¤Þ¤¹¡£
+cmsg_type ã¯è£œåŠ©ãƒ‡ãƒ¼ã‚¿ã®ç¨®é¡žã‚’æŒ‡å®šã—ã¾ã™ã€‚
+cmsg_level ã§æŒ‡å®šã—ãŸãƒ—ãƒ­ãƒˆã‚³ãƒ«ã«ã‚ˆã£ã¦ã“ã®éƒ¨åˆ†ã®è§£é‡ˆã¯ç•°ãªã‚Šã¾ã™ã€‚
+æ•´æ•°ã€æ–‡å­—åˆ—ã€ã‚·ãƒ³ãƒœãƒ«ã‚’æ¸¡ã—ã¾ã™ã€‚
  * Socket::SCM_RIGHTS, "SCM_RIGHTS", "RIGHTS", :SCM_RIGHTS, :RIGHTS for SOL_SOCKET
  * Socket::IP_RECVTTL, "RECVTTL" and :RECVTTL for IPPROTO_IP
  * Socket::IPV6_PKTINFO, "PKTINFO" and :PKTINFO for IPPROTO_IPV6
- * ¤Ê¤É
+ * ãªã©
 
-cmsg_data ¤Ë¤ÏÊä½õ¥Ç¡¼¥¿¤ÎÆâÍÆ¤È¤Ê¤ëÊ¸»úÎó¤òÅÏ¤·¤Þ¤¹
+cmsg_data ã«ã¯è£œåŠ©ãƒ‡ãƒ¼ã‚¿ã®å†…å®¹ã¨ãªã‚‹æ–‡å­—åˆ—ã‚’æ¸¡ã—ã¾ã™
 
   p Socket::AncillaryData.new(:INET, :TCP, :NODELAY, "")
   #=> #<Socket::AncillaryData: INET TCP NODELAY "">
@@ -45,44 +45,44 @@ cmsg_data ¤Ë¤ÏÊä½õ¥Ç¡¼¥¿¤ÎÆâÍÆ¤È¤Ê¤ëÊ¸»úÎó¤òÅÏ¤·¤Þ¤¹
   p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
   #=> #<Socket::AncillaryData: INET6 IPV6 PKTINFO "">
 
-@param family ¥½¥±¥Ã¥È¥Õ¥¡¥ß¥ê¡¼
-@param cmsg_level ¥×¥í¥È¥³¥ë
-@param cmsg_type Êä½õ¥Ç¡¼¥¿¤Î¼ïÎà
-@param cmsg_data ¥Ç¡¼¥¿ÆâÍÆ
+@param family ã‚½ã‚±ãƒƒãƒˆãƒ•ã‚¡ãƒŸãƒªãƒ¼
+@param cmsg_level ãƒ—ãƒ­ãƒˆã‚³ãƒ«
+@param cmsg_type è£œåŠ©ãƒ‡ãƒ¼ã‚¿ã®ç¨®é¡ž
+@param cmsg_data ãƒ‡ãƒ¼ã‚¿å†…å®¹
 
 
 --- int(family, cmsg_level, cmsg_type, integer) -> Socket::AncillaryData
 
-¥Ç¡¼¥¿¤È¤·¤ÆÀ°¿ô¤òÊÝ»ý¤¹¤ë
-Socket::AncillaryData ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦æ•´æ•°ã‚’ä¿æŒã™ã‚‹
+Socket::AncillaryData ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-À°¿ô¥Ç¡¼¥¿¤Î¥µ¥¤¥º¤ª¤è¤Ó¥¨¥ó¥Ç¥£¥¢¥ó¤Ï¼Â¹Ô¤¹¤ë¥Û¥¹¥È¤Ë¤è¤Ã¤Æ°Û¤Ê¤ê¤Þ¤¹¡£
+æ•´æ•°ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºãŠã‚ˆã³ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³ã¯å®Ÿè¡Œã™ã‚‹ãƒ›ã‚¹ãƒˆã«ã‚ˆã£ã¦ç•°ãªã‚Šã¾ã™ã€‚
 
   p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
   #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
 
-@param family ¥½¥±¥Ã¥È¥Õ¥¡¥ß¥ê¡¼
-@param cmsg_level ¥×¥í¥È¥³¥ë
-@param cmsg_type Êä½õ¥Ç¡¼¥¿¤Î¼ïÎà
-@param cmsg_data ¥Ç¡¼¥¿ÆâÍÆ
+@param family ã‚½ã‚±ãƒƒãƒˆãƒ•ã‚¡ãƒŸãƒªãƒ¼
+@param cmsg_level ãƒ—ãƒ­ãƒˆã‚³ãƒ«
+@param cmsg_type è£œåŠ©ãƒ‡ãƒ¼ã‚¿ã®ç¨®é¡ž
+@param cmsg_data ãƒ‡ãƒ¼ã‚¿å†…å®¹
 
 @see [[m:Socket::AncillaryData.new]]
 
 --- unix_rights(*ios) -> Socket::AncillaryData
-ios ¤Ç»ØÄê¤·¤¿¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ç¥¹¥¯¥ê¥×¥¿¤ò
-¥Ç¡¼¥¿¤È¤·¤Æ»ý¤Ä family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
-¤È¤¤¤¦ Socket::AncillaryData ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+ios ã§æŒ‡å®šã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚’
+ãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦æŒã¤ family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
+ã¨ã„ã† Socket::AncillaryData ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
   p Socket::AncillaryData.unix_rights(STDERR)
   #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
 
-@param ios IO ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÇÛÎó
+@param ios IO ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é…åˆ—
 
 --- ip_pktinfo(addr, ifindex, spec_dst=addr) -> Socket::AncillaryData
 
-type ¤¬ IP_PKTINFO ¤Ç¤¢¤ë AncillaryData ¤òÀ¸À®¤·¤Þ¤¹¡£
+type ãŒ IP_PKTINFO ã§ã‚ã‚‹ AncillaryData ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-IP_PKTINFO ¤ÏÈóÉ¸½àÅª³ÈÄ¥¤Ç¤¢¤ê¡¢¥·¥¹¥Æ¥à¤Ë¤è¤Ã¤Æ¤Ï»È¤¨¤Ê¤¤¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£
+IP_PKTINFO ã¯éžæ¨™æº–çš„æ‹¡å¼µã§ã‚ã‚Šã€ã‚·ã‚¹ãƒ†ãƒ ã«ã‚ˆã£ã¦ã¯ä½¿ãˆãªã„å ´åˆãŒã‚ã‚Šã¾ã™ã€‚
 
   addr = Addrinfo.ip("127.0.0.1")
   ifindex = 0
@@ -90,31 +90,31 @@ IP_PKTINFO ¤ÏÈóÉ¸½àÅª³ÈÄ¥¤Ç¤¢¤ê¡¢¥·¥¹¥Æ¥à¤Ë¤è¤Ã¤Æ¤Ï»È¤¨¤Ê¤¤¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£
   p Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dst)
   #=> #<Socket::AncillaryData: INET IP PKTINFO 127.0.0.1 ifindex:0 spec_dst:127.0.0.1>
 
-@param addr ¥¢¥É¥ì¥¹(Ê¸»úÎó¤â¤·¤¯¤Ï [[c:Addrinfo]])
-@param ifindex ¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹(À°¿ô)
-@param spec_dst ¥Ñ¥±¥Ã¥È¤Î¥í¡¼¥«¥ë¥¢¥É¥ì¥¹(Ê¸»úÎó¤â¤·¤¯¤Ï [[c:Addrinfo]])
+@param addr ã‚¢ãƒ‰ãƒ¬ã‚¹(æ–‡å­—åˆ—ã‚‚ã—ãã¯ [[c:Addrinfo]])
+@param ifindex ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(æ•´æ•°)
+@param spec_dst ãƒ‘ã‚±ãƒƒãƒˆã®ãƒ­ãƒ¼ã‚«ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹(æ–‡å­—åˆ—ã‚‚ã—ãã¯ [[c:Addrinfo]])
 
 @see [[m:Socket::AncillaryData#ip_pktinfo]]
 
 --- ipv6_pktinfo(addr, ifindex) -> Socket::AncillaryData
 
-type ¤¬ IPV6_PKTINFO ¤Ç¤¢¤ë AncillaryData ¤òÀ¸À®¤·¤Þ¤¹¡£
+type ãŒ IPV6_PKTINFO ã§ã‚ã‚‹ AncillaryData ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-IPV6_PKTINFO ¤Ï [[RFC:3542]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+IPV6_PKTINFO ã¯ [[RFC:3542]] ã§å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
   addr = Addrinfo.ip("::1")
   ifindex = 0
   p Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
   #=> #<Socket::AncillaryData: INET6 IPV6 PKTINFO ::1 ifindex:0>
 
-@param addr ¥¢¥É¥ì¥¹(Ê¸»úÎó¤â¤·¤¯¤Ï [[c:Addrinfo]])
-@param ifindex ¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹(À°¿ô)
+@param addr ã‚¢ãƒ‰ãƒ¬ã‚¹(æ–‡å­—åˆ—ã‚‚ã—ãã¯ [[c:Addrinfo]])
+@param ifindex ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹(æ•´æ•°)
 
 @see [[m:Socket::AncillaryData#ipv6_pktinfo]]
 
 == Instance Methods
 --- family -> Integer
-¼«¿È¤¬ÊÝ»ý¤·¤Æ¤¤¤ë socket family ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒä¿æŒã—ã¦ã„ã‚‹ socket family ã‚’è¿”ã—ã¾ã™ã€‚
 
   p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").family
   #=> 10
@@ -122,7 +122,7 @@ IPV6_PKTINFO ¤Ï [[RFC:3542]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 @see [[m:Socket::AncillaryData.new]]
 
 --- level -> Integer
-¼«¿È¤¬ÊÝ»ý¤·¤Æ¤¤¤ë cmsg level (¸µ¥×¥í¥È¥³¥ë) ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒä¿æŒã—ã¦ã„ã‚‹ cmsg level (å…ƒãƒ—ãƒ­ãƒˆã‚³ãƒ«) ã‚’è¿”ã—ã¾ã™ã€‚
 
   p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").level
   #=> 41
@@ -130,7 +130,7 @@ IPV6_PKTINFO ¤Ï [[RFC:3542]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 @see [[m:Socket::AncillaryData.new]]
 
 --- type -> Integer
-¼«¿È¤¬ÊÝ»ý¤·¤Æ¤¤¤ë cmsg type (¼ïÎà) ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒä¿æŒã—ã¦ã„ã‚‹ cmsg type (ç¨®é¡ž) ã‚’è¿”ã—ã¾ã™ã€‚
 
   p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
   #=> 2
@@ -138,7 +138,7 @@ IPV6_PKTINFO ¤Ï [[RFC:3542]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 @see [[m:Socket::AncillaryData.new]]
 
 --- data -> String
-¼«¿È¤¬ÊÝ»ý¤·¤Æ¤¤¤ë cmsg data (¥Ç¡¼¥¿) ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒä¿æŒã—ã¦ã„ã‚‹ cmsg data (ãƒ‡ãƒ¼ã‚¿) ã‚’è¿”ã—ã¾ã™ã€‚
 
   p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
   #=> ""
@@ -146,7 +146,7 @@ IPV6_PKTINFO ¤Ï [[RFC:3542]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 @see [[m:Socket::AncillaryData.new]]
 
 --- cmsg_is?(level, type) -> bool
-¼«¿È¤Î level ¤È type ¤¬°ú¿ô¤Î¤â¤Î¤È°ìÃ×¤·¤Æ¤¤¤ë¾ì¹ç¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã® level ã¨ type ãŒå¼•æ•°ã®ã‚‚ã®ã¨ä¸€è‡´ã—ã¦ã„ã‚‹å ´åˆã«çœŸã‚’è¿”ã—ã¾ã™ã€‚
 
   ancdata = Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
   ancdata.cmsg_is?(Socket::IPPROTO_IPV6, Socket::IPV6_PKTINFO) #=> true
@@ -154,34 +154,34 @@ IPV6_PKTINFO ¤Ï [[RFC:3542]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
   ancdata.cmsg_is?(:IP, :PKTINFO)         #=> false
   ancdata.cmsg_is?(:SOCKET, :RIGHTS)      #=> false
 
-@param level °ìÃ×¤ò³ÎÇ§¤¹¤ë cmsg_level (Ê¸»úÎó¡¢¥·¥ó¥Ü¥ë¡¢À°¿ô)
-@param type °ìÃ×¤ò³ÎÇ§¤¹¤ë cmsg_type (Ê¸»úÎó¡¢¥·¥ó¥Ü¥ë¡¢À°¿ô)
+@param level ä¸€è‡´ã‚’ç¢ºèªã™ã‚‹ cmsg_level (æ–‡å­—åˆ—ã€ã‚·ãƒ³ãƒœãƒ«ã€æ•´æ•°)
+@param type ä¸€è‡´ã‚’ç¢ºèªã™ã‚‹ cmsg_type (æ–‡å­—åˆ—ã€ã‚·ãƒ³ãƒœãƒ«ã€æ•´æ•°)
 @see [[m:Socket::AncillaryData#level]], [[m:Socket::AncillaryData#type]]
 
 --- int -> Integer
-¼«¿È¤¬ÊÝ»ý¤·¤Æ¤¤¤ë cmsg data (¥Ç¡¼¥¿) ¤òÀ°¿ô¤Î·Á¤ÇÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒä¿æŒã—ã¦ã„ã‚‹ cmsg data (ãƒ‡ãƒ¼ã‚¿) ã‚’æ•´æ•°ã®å½¢ã§è¿”ã—ã¾ã™ã€‚
 
-À°¿ô¥Ç¡¼¥¿¤Î¥µ¥¤¥º¤ª¤è¤Ó¥¨¥ó¥Ç¥£¥¢¥ó¤Ï¼Â¹Ô¤¹¤ë¥Û¥¹¥È¤Ë¤è¤Ã¤Æ°Û¤Ê¤ê¤Þ¤¹¡£
+æ•´æ•°ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºãŠã‚ˆã³ã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³ã¯å®Ÿè¡Œã™ã‚‹ãƒ›ã‚¹ãƒˆã«ã‚ˆã£ã¦ç•°ãªã‚Šã¾ã™ã€‚
 
   ancdata = Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
   p ancdata.int #=> 2
 
-@raise TypeError cmgs data ¤Î¥µ¥¤¥º¤¬ int ¤Î¥Ð¥¤¥È¿ô¤È°Û¤Ê¤ë¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+@raise TypeError cmgs data ã®ã‚µã‚¤ã‚ºãŒ int ã®ãƒã‚¤ãƒˆæ•°ã¨ç•°ãªã‚‹å ´åˆã«ç™ºç”Ÿã—ã¾ã™
 @see [[m:Socket::AncillaryData.new]] [[m:Socket::AncillaryData.int]]
 
 --- unix_rights -> [IO] | nil
 
-Unix domain socket ¤Î SCM_RIGHTS À©¸æ¥á¥Ã¥»¡¼¥¸¤Ë´Þ¤Þ¤ì¤ë
-¥Õ¥¡¥¤¥ë¥Ç¥£¥¹¥¯¥ê¥×¥¿¤ò IO ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+Unix domain socket ã® SCM_RIGHTS åˆ¶å¾¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«å«ã¾ã‚Œã‚‹
+ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚’ IO ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é…åˆ—ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-ÆÀ¤é¤ì¤ë IO ¥ª¥Ö¥¸¥§¥¯¥È¤« [[c:IO]] ¤« [[c:Socket]] ¤Ç¤¹¡£
+å¾—ã‚‰ã‚Œã‚‹ IO ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ [[c:IO]] ã‹ [[c:Socket]] ã§ã™ã€‚
 
-¤³¤ÎÇÛÎó¤Ï [[c:Socket::AncillaryData]] ¤¬½é´ü²½¤µ¤ì¤¿¤È¤­¤Ë
-ºî¤é¤ì¤Þ¤¹¡£Îã¤¨¤Ð [[m:BasicSocket#recvmsg]] ¤ò :scm_rights => true
- ¥ª¥×¥·¥ç¥ó¤òÉÕ¤±¤Æ¸Æ¤Ó¤À¤·¡¢
-SCM_RIGHTS ¤Ê À©¸æ¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¼è¤Ã¤¿¤È¤­¤ËÇÛÎó¤¬ºî¤é¤ì¤Þ¤¹¡£
-Å¬ÀÚ¤Ê¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÇÛÎó¤ÏÀ¸À®¤µ¤ì¤º¡¢
-¤³¤Î¥á¥½¥Ã¥É¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
+ã“ã®é…åˆ—ã¯ [[c:Socket::AncillaryData]] ãŒåˆæœŸåŒ–ã•ã‚ŒãŸã¨ãã«
+ä½œã‚‰ã‚Œã¾ã™ã€‚ä¾‹ãˆã° [[m:BasicSocket#recvmsg]] ã‚’ :scm_rights => true
+ ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’ä»˜ã‘ã¦å‘¼ã³ã ã—ã€
+SCM_RIGHTS ãª åˆ¶å¾¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã£ãŸã¨ãã«é…åˆ—ãŒä½œã‚‰ã‚Œã¾ã™ã€‚
+é©åˆ‡ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’æŒ‡å®šã—ãªã‹ã£ãŸå ´åˆã¯é…åˆ—ã¯ç”Ÿæˆã•ã‚Œãšã€
+ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
   # recvmsg needs :scm_rights=>true for unix_rights
   s1, s2 = UNIXSocket.pair
@@ -202,15 +202,15 @@ SCM_RIGHTS ¤Ê À©¸æ¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¼è¤Ã¤¿¤È¤­¤ËÇÛÎó¤¬ºî¤é¤ì¤Þ¤¹¡£
   p ctl.unix_rights #=> nil
   
 
-@raise TypeError family/level/type ¤¬ AF_UNIX/SOL_SOCKET/SCM_RIGHTS ¤Ç¤Ê¤¤¾ì¹ç
-       ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise TypeError family/level/type ãŒ AF_UNIX/SOL_SOCKET/SCM_RIGHTS ã§ãªã„å ´åˆ
+       ã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- timestamp -> Time
 
-¥¿¥¤¥à¥¹¥¿¥ó¥×À©¸æ¥á¥Ã¥»¡¼¥¸¤Ë´Þ¤Þ¤ì¤ë»þ¹ï¤ò [[c:Time]] ¥ª¥Ö¥¸¥§¥¯¥È
-¤ÇÊÖ¤·¤Þ¤¹¡£
+ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—åˆ¶å¾¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«å«ã¾ã‚Œã‚‹æ™‚åˆ»ã‚’ [[c:Time]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+ã§è¿”ã—ã¾ã™ã€‚
 
-"¥¿¥¤¥à¥¹¥¿¥ó¥×À©¸æ¥á¥Ã¥»¡¼¥¸" ¤Ï°Ê²¼¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
+"ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—åˆ¶å¾¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸" ã¯ä»¥ä¸‹ã®ã„ãšã‚Œã‹ã§ã™ã€‚
   *  SOL_SOCKET/SCM_TIMESTAMP (micro second) GNU/Linux, FreeBSD, NetBSD, OpenBSD, Solaris, MacOS X
   *  SOL_SOCKET/SCM_TIMESTAMPNS (nano second) GNU/Linux
   *  SOL_SOCKET/SCM_BINTIME (2**(-64) second) FreeBSD
@@ -231,11 +231,11 @@ SCM_RIGHTS ¤Ê À©¸æ¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¼è¤Ã¤¿¤È¤­¤ËÇÛÎó¤¬ºî¤é¤ì¤Þ¤¹¡£
 
 
 --- ip_pktinfo -> [Addrinfo, Integer, Addrinfo]
-¼«¿È¤Î type ¤¬ IP_PKTINFO ¤Ç¤¢¤ë¾ì¹ç¡¢ÊÝ»ý¤·¤Æ¤¤¤ë¥Ç¡¼¥¿
-(¥¢¥É¥ì¥¹¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¡¢¥í¡¼¥«¥ë¥¢¥É¥ì¥¹)
-¤ò3Í×ÁÇ¤ÎÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã® type ãŒ IP_PKTINFO ã§ã‚ã‚‹å ´åˆã€ä¿æŒã—ã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿
+(ã‚¢ãƒ‰ãƒ¬ã‚¹ã€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€ãƒ­ãƒ¼ã‚«ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹)
+ã‚’3è¦ç´ ã®é…åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-IP_PKTINFO ¤ÏÈóÉ¸½àÅª³ÈÄ¥¤Ç¤¢¤ê¡¢¥·¥¹¥Æ¥à¤Ë¤è¤Ã¤Æ¤Ï»È¤¨¤Ê¤¤¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£
+IP_PKTINFO ã¯éžæ¨™æº–çš„æ‹¡å¼µã§ã‚ã‚Šã€ã‚·ã‚¹ãƒ†ãƒ ã«ã‚ˆã£ã¦ã¯ä½¿ãˆãªã„å ´åˆãŒã‚ã‚Šã¾ã™ã€‚
 
   addr = Addrinfo.ip("127.0.0.1")
   ifindex = 0
@@ -244,16 +244,16 @@ IP_PKTINFO ¤ÏÈóÉ¸½àÅª³ÈÄ¥¤Ç¤¢¤ê¡¢¥·¥¹¥Æ¥à¤Ë¤è¤Ã¤Æ¤Ï»È¤¨¤Ê¤¤¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£
   p ancdata.ip_pktinfo
   #=> [#<Addrinfo: 127.0.0.1>, 0, #<Addrinfo: 127.0.0.1>]
 
-@raise TypeError level, type ¤¬ IPPROTO_IP, IP_PKTINFO ¤Ç¤Ê¤¤¾ì¹ç¤Ë
-       È¯À¸¤·¤Þ¤¹¡£
+@raise TypeError level, type ãŒ IPPROTO_IP, IP_PKTINFO ã§ãªã„å ´åˆã«
+       ç™ºç”Ÿã—ã¾ã™ã€‚
 @see [[m:Socket::AncillaryData.ip_pktinfo]]
 
 --- ipv6_pktinfo -> [Addrinfo, Integer]
-¼«¿È¤Î type ¤¬ IPV6_PKTINFO ¤Ç¤¢¤ë¾ì¹ç¡¢ÊÝ»ý¤·¤Æ¤¤¤ë¥Ç¡¼¥¿
-(¥¢¥É¥ì¥¹¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹)
-¤ò2Í×ÁÇ¤ÎÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã® type ãŒ IPV6_PKTINFO ã§ã‚ã‚‹å ´åˆã€ä¿æŒã—ã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿
+(ã‚¢ãƒ‰ãƒ¬ã‚¹ã€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹)
+ã‚’2è¦ç´ ã®é…åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-IPV6_PKTINFO ¤Ë¤Ä¤¤¤Æ¤Ï [[RFC:3542]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+IPV6_PKTINFO ã«ã¤ã„ã¦ã¯ [[RFC:3542]] ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
   addr = Addrinfo.ip("::1")
   ifindex = 0
@@ -265,9 +265,9 @@ IPV6_PKTINFO ¤Ë¤Ä¤¤¤Æ¤Ï [[RFC:3542]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
      [[m:Socket::AncillaryData#ipv6_pktinfo_ifindex]]
 
 --- ipv6_pktinfo_addr -> Addrinfo
-¼«¿È¤Î type ¤¬ IPV6_PKTINFO ¤Ç¤¢¤ë¾ì¹ç¡¢ÊÝ»ý¤·¤Æ¤¤¤ë¥Ç¡¼¥¿
-(¥¢¥É¥ì¥¹¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹)
-¤Î¥¢¥É¥ì¥¹¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã® type ãŒ IPV6_PKTINFO ã§ã‚ã‚‹å ´åˆã€ä¿æŒã—ã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿
+(ã‚¢ãƒ‰ãƒ¬ã‚¹ã€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹)
+ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
   addr = Addrinfo.ip("::1")
   ifindex = 0
@@ -279,9 +279,9 @@ IPV6_PKTINFO ¤Ë¤Ä¤¤¤Æ¤Ï [[RFC:3542]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
      [[m:Socket::AncillaryData#ipv6_pktinfo_ifindex]]
 
 --- ipv6_pktinfo_ifindex -> Integer
-¼«¿È¤Î type ¤¬ IPV6_PKTINFO ¤Ç¤¢¤ë¾ì¹ç¡¢ÊÝ»ý¤·¤Æ¤¤¤ë¥Ç¡¼¥¿
-(¥¢¥É¥ì¥¹¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹)
-¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã® type ãŒ IPV6_PKTINFO ã§ã‚ã‚‹å ´åˆã€ä¿æŒã—ã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿
+(ã‚¢ãƒ‰ãƒ¬ã‚¹ã€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹)
+ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
   addr = Addrinfo.ip("::1")
   ifindex = 0

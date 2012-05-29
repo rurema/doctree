@@ -1,21 +1,21 @@
 = class SystemCallError < StandardError
 
-Ruby �μ������Ѥ����Ƥ��륷���ƥॳ����ޤ��ϰ����� C ����ؿ������Ԥ�������ȯ�������㳰�Ǥ���
-�����ƥॳ����μ��Ԥ���������ɽ�����顼�����ɤ��ݻ����ޤ���
+Ruby の実装に用いられているシステムコールまたは一部の C 言語関数が失敗した時に発生する例外です。
+システムコールの失敗した原因を表すエラーコードを保持します。
 
-¿���ξ�硢�ºݤˤ� SystemCallError ���Τ�ΤǤϤʤ�
-���֥��饹�Ǥ��� [[c:Errno::EXXX]] (XXX �ϥ��顼�����ɤ��ͤˤ�äưۤʤ롣
-�����ƥ�����Υ��顼̾��Ʊ��̾��) ��ȯ�����ޤ���
-�ܤ����� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+多くの場合、実際には SystemCallError そのものではなく
+サブクラスである [[c:Errno::EXXX]] (XXX はエラーコードの値によって異なる。
+システム定義のエラー名と同じ名前) が発生します。
+詳しくは [[c:Errno::EXXX]] を参照してください。
 
 == Class Methods
 
 --- new(error_message) -> SystemCallError
-SystemCallError ���֥������Ȥ����������֤��ޤ���
+SystemCallError オブジェクトを生成して返します。
 
-@param error_message ���顼��å�������ɽ��ʸ����
+@param error_message エラーメッセージを表す文字列
 
-��:
+例:
 
   p SystemCallError.new("message")
       # => #<SystemCallError: unknown error - message>
@@ -23,23 +23,23 @@ SystemCallError ���֥������Ȥ����������֤��ޤ���
 #@since 1.8.0
 --- new(error_message, errno) -> SystemCallError
 --- new(errno) -> SystemCallError
-���� errno ���б����� [[c:Errno::EXXX]] ���֥������Ȥ����������֤��ޤ���
+整数 errno に対応する [[c:Errno::EXXX]] オブジェクトを生成して返します。
 
-���� errno �򥷥��ƥॳ�����ȯ���������顼�θ����򼨤������ɤǤ���Ȳ�ᤷ��
-�б������㳰���饹�Υ��󥹥��󥹤����������֤��ޤ���
+整数 errno をシステムコールで発生したエラーの原因を示すコードであると解釈し、
+対応する例外クラスのインスタンスを生成して返します。
 
-��������륪�֥������Ȥ� SystemCallError ��ľ�ܤΥ��󥹥��󥹤ǤϤʤ������֥��饹�Υ��󥹥��󥹤Ǥ���
-�����Υ��֥��饹�� [[c:Errno]] �⥸�塼������������Ƥ��ޤ���
-�б����륵�֥��饹��¸�ߤ��ʤ������ɤ�Ϳ�������ˤϡ� SystemCallError ��ľ�ܤΥ��󥹥��󥹤���������ޤ���
+生成されるオブジェクトは SystemCallError の直接のインスタンスではなく、サブクラスのインスタンスです。
+それらのサブクラスは [[c:Errno]] モジュール内に定義されています。
+対応するサブクラスが存在しないコードを与えた場合には、 SystemCallError の直接のインスタンスが生成されます。
 
-���顼�����ɤμ�������ͤ���Ӱ�̣�ϥ����ƥ�˰�¸���ޤ����ܤ����� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+エラーコードの取り得る値および意味はシステムに依存します。詳しくは [[c:Errno::EXXX]] を参照してください。
 
-@param error_message ���顼��å�������ɽ��ʸ����
-@param errno �����ƥ��¸�Υ��顼������
-@raise TypeError errno ���������Ѵ��Ǥ��ʤ��Ȥ���ȯ�����ޤ���
-@raise RangeError errno �� [[c:Fixnum]] ��ɽ�����ϰϤ�Ķ����Ȥ���ȯ�����ޤ���
+@param error_message エラーメッセージを表す文字列
+@param errno システム依存のエラーコード
+@raise TypeError errno を整数に変換できないときに発生します。
+@raise RangeError errno が [[c:Fixnum]] で表せる範囲を超えるときに発生します。
 
-��:
+例:
 
   p SystemCallError.new("message", 2)
       # => #<Errno::ENOENT: No such file or directory - message>
@@ -54,10 +54,10 @@ SystemCallError ���֥������Ȥ����������֤��ޤ���
 
 --- errno -> Fixnum | nil
 
-�쥷���Ф��б����륷���ƥ��¸�Υ��顼�����ɤ��֤��ޤ���
+レシーバに対応するシステム依存のエラーコードを返します。
 
 #@since 1.8.0
-���顼�����ɤ��Ϥ��ʤ������������������� nil ���֤��ޤ���
+エラーコードを渡さない形式で生成した場合は nil を返します。
 
   begin
     raise Errno::ENOENT
@@ -73,8 +73,8 @@ SystemCallError ���֥������Ȥ����������֤��ޤ���
   end
 
 #@else
-�ºݤ˥����ƥॳ���뤬ȯ�����Ƥ��ʤ����ˤ� nil ���֤��ޤ���
-[[m:Kernel.#raise]] �ˤ�äƥ����ƥॳ���륨�顼��ȯ�����Ƥ��뤫�Τ褦�˸���������������դ��Ƥ���������
+実際にシステムコールが発生していない場合には nil を返します。
+[[m:Kernel.#raise]] によってシステムコールエラーが発生しているかのように見せかける場合は注意してください。
 
   begin
     open("nonexistent file")
@@ -92,12 +92,12 @@ SystemCallError ���֥������Ȥ����������֤��ޤ���
 
 #@end
 
-�ʤ����㳰��ȯ���������˥��顼�����ɤ�����ˤϡ�
-[[m:Errno::EXXX::Errno]] �����Ȥ��ޤ���
+なお、例外を発生させずにエラーコードを得るには、
+[[m:Errno::EXXX::Errno]] 定数を使います。
 
 = module Errno
 
-�����ƥॳ����Υ��顼���б������㳰�򽸤᤿�⥸�塼��Ǥ���
+システムコールのエラーに対応する例外を集めたモジュールです。
 
 @see [[c:SystemCallError]]
 @see [[c:Errno::EXXX]]
@@ -105,36 +105,36 @@ SystemCallError ���֥������Ȥ����������֤��ޤ���
 
 = class Errno::EXXX < SystemCallError
 
-�����ƥ��¸�Υ��顼�����ɤΤ��줾����б������Ϣ���㳰���饹�Ǥ���
-Ruby�Υ饤�֥�������ǥ����ƥॳ����������C����ؿ������Ԥ����Ȥ���ȯ�����ޤ���
+システム依存のエラーコードのそれぞれに対応する一連の例外クラスです。
+Rubyのライブラリ内部でシステムコールや一部のC言語関数が失敗したときに発生します。
 
-�ºݤˤϡ�EXXX�פȤ������饹���������Ƥ���櫓�ǤϤ���ޤ��󡣡�XXX�פ���ʬ�ϲ�������󤷤��褦�ʳƼ�Υ��顼̾������ޤ���
-�㤨�С�[[m:File.open]] �������ǥ����ƥॳ���� [[man:open(2)]] �����顼������ ENOENT ���֤��ȡ�Ruby���㳰 Errno::ENOENT ��ȯ�������ޤ���
+実際には「EXXX」というクラスが定義されているわけではありません。「XXX」の部分は下記に列挙したような各種のエラー名が入ります。
+例えば、[[m:File.open]] の内部でシステムコール [[man:open(2)]] がエラーコード ENOENT を返すと、Rubyは例外 Errno::ENOENT を発生させます。
 
-Ruby �Ͻ����Ϥ�����ѥ��뤵���Ȥ��ˡ��ǥե���Ȥǲ����ꥹ�ȤΤ褦�� Errno::EXXX ���饹��������褦�Ȥ��ޤ���
+Ruby は処理系がコンパイルされるときに、デフォルトで下記リストのような Errno::EXXX クラスを定義しようとします。
 #@since 1.9.1
-ư��Ķ��� EXXX �Ȥ������顼�����ɤ�¸�ߤ��ʤ���硢Ruby�Ϥ��� Errno::EXXX �� Errno::NOERROR ����̾�Ȥ���������ޤ���
+動作環境に EXXX というエラーコードが存在しない場合、Rubyはその Errno::EXXX を Errno::NOERROR の別名として定義します。
 #@else
-Errno::EXXX ���饹�ϡ��б����륨�顼̾��ư��Ķ���¸�ߤ�����Τ��������ޤ���
-���Τ��ᡢ�����δĶ��ˤ���¸�ߤ��ʤ����顼�����ɤˤĤ��� rescue ��ʤɤ� Errno::EXXX �����Ѥ����
-�տޤ����ץ������β�������»�ʤ���礬����ޤ���
-������򤱤�ˤϡ����顼�����ɤμ�������ꤹ��ɬ�פ������������Ƥ� [[c:SystemCallError]] �� rescue ����褦�ˤ��Ƥ���������
+Errno::EXXX クラスは、対応するエラー名が動作環境に存在する場合のみ定義されます。
+このため、一部の環境にしか存在しないエラーコードについて rescue 節などで Errno::EXXX を利用すると
+意図せずプログラムの可搬性を損なう場合があります。
+それを避けるには、エラーコードの種類を特定する必要がある場合を除いては [[c:SystemCallError]] で rescue するようにしてください。
 #@end
 
 
-�ޤ����ʲ��ΰ����ˤϤʤ������ƥ२�顼��ȯ���������ϡ�
-[[c:Errno::EXXX]] (XXX �ϥ��顼�ֹ��ɽ�� 3 ��ο���)
-�Ȥ���̾�����㳰���饹����ưŪ�˺������졢ȯ�����ޤ���
-(����� Ruby �����ǤΤ߹Ԥ�졢 Ruby �ץ�������� [[m:SystemCallError.new]] �˰����ˤʤ������ɤ��Ϥ��Ƥ⥯�饹�Ϻ�������ޤ���)
+また、以下の一覧にはないシステムエラーが発生した場合は、
+[[c:Errno::EXXX]] (XXX はエラー番号を表す 3 桁の数字)
+という名前の例外クラスが自動的に作成され、発生します。
+(これは Ruby 内部でのみ行われ、 Ruby プログラム上で [[m:SystemCallError.new]] に一覧にないコードを渡してもクラスは作成されません)
 
-���줾����㳰��ȯ�������륱�����ˤĤ��Ƥϡ����ι�Ǥϵ��Ҥ��ޤ���
-�㳰��ȯ������ƥ᥽�åɤΥޥ˥奢�뤪��ӥ��ڥ졼�ƥ��󥰥����ƥ�Υޥ˥奢��򻲾Ȥ��Ƥ���������
+それぞれの例外が発生し得るケースについては、この項では記述しません。
+例外を発生する各メソッドのマニュアルおよびオペレーティングシステムのマニュアルを参照してください。
 
-=== ���顼̾�ꥹ��
+=== エラー名リスト
 
-�ġ����㳰�ΰ�̣�ϥ����ƥ��¸�Ǥ���
-�����ƥ�Υޥ˥奢�� [[man:errno(3)]] �򻲾Ȥ��Ƥ���������
-Microsoft Windows �����ƥ�ˤ����Ƥ� [[url:http://msdn2.microsoft.com/ja-jp/library/5814770t.aspx]] �򻲾Ȥ��Ƥ���������
+個々の例外の意味はシステム依存です。
+システムのマニュアル [[man:errno(3)]] を参照してください。
+Microsoft Windows システムにおいては [[url:http://msdn2.microsoft.com/ja-jp/library/5814770t.aspx]] を参照してください。
 
   * ERROR
   * EPERM
@@ -264,9 +264,9 @@ Microsoft Windows �����ƥ�ˤ����Ƥ� [[url:http://msdn2.microsoft.com/ja-jp/libr
 
 --- new() -> Errno::EXXX
 --- new(error_message) -> Errno::EXXX
-Errno::EXXX ���֥������Ȥ����������֤��ޤ���
+Errno::EXXX オブジェクトを生成して返します。
 
-@param error_message ���顼��å�������ɽ��ʸ����
+@param error_message エラーメッセージを表す文字列
 
   p Errno::ENOENT
       # => #<Errno::ENOENT: No such file or directory>
@@ -276,18 +276,18 @@ Errno::EXXX ���֥������Ȥ����������֤��ޤ���
 #@since 1.8.0
 --- ===(other) -> bool
 
-other �� SystemCallError �Υ��֥��饹�Υ��󥹥��󥹤ǡ�
-���ġ�other.errno ���ͤ� self::Errno ��Ʊ�����˿����֤��ޤ��������Ǥʤ����ϵ����֤��ޤ���
+other が SystemCallError のサブクラスのインスタンスで、
+かつ、other.errno の値が self::Errno と同じ場合に真を返します。そうでない場合は偽を返します。
 
-���äơ��ä� other �� self.kind_of?(other) �Ǥ�����ˤ� [[m:Module#===]] ��Ʊ�ͤ˿����֤��ޤ���
-����¾�ˡ� Errno::EXXX::Errno == Errno::EYYY::Errno �Ǥ�����ˤ� Errno::EXXX == Errno::EYYY.new �Ͽ����֤��ޤ���
+従って、特に other が self.kind_of?(other) である場合には [[m:Module#===]] と同様に真を返します。
+その他に、 Errno::EXXX::Errno == Errno::EYYY::Errno である場合にも Errno::EXXX == Errno::EYYY.new は真を返します。
 
-���顼̾�ϰۤʤ뤬���顼�����ɤ�Ʊ���Ǥ���褦�� Errno::EXXX �㳰��ޤȤ����ª���뤿��� [[m:Module#===]] ���񤭤��Ƥ��ޤ�����
-��������Ruby 1.8 �Υ�꡼�������Ǥ�Ʊ�� errno �ͤ���ĥ��饹�ϰ�Ĥ�������ʤ��褦�ˤʤ�ޤ��������Τ��ḽ�ߤϤ��Υ᥽�åɤϼ¼��� [[m:Module#===]] ��Ʊ����̣��������ޤ���
+エラー名は異なるがエラーコードは同じであるような Errno::EXXX 例外をまとめて捕捉するために [[m:Module#===]] を上書きしていました。
+しかし、Ruby 1.8 のリリース時点では同じ errno 値を持つクラスは一つしか作られないようになりました。そのため現在はこのメソッドは実質上 [[m:Module#===]] と同じ意味しかありません。
 
-@param other Ǥ�դΥ��֥�������
+@param other 任意のオブジェクト
 
-��
+例
     p Errno::EAGAIN::Errno
     p Errno::EWOULDBLOCK::Errno
     begin
@@ -305,383 +305,383 @@ other �� SystemCallError �Υ��֥��饹�Υ��󥹥��󥹤ǡ�
 
 --- Errno
 
-Errno::EXXX �γƥ��饹���б����륷���ƥ��¸�Υ��顼��������(����)�Ǥ���
+Errno::EXXX の各クラスに対応するシステム依存のエラーコード値(整数)です。
 
-��:
+例:
 
     p Errno::EAGAIN::Errno            # => 11
     p Errno::EWOULDBLOCK::Errno       # => 11
 
 = class Errno::ERROR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPERM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOENT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESRCH < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EINTR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EIO < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENXIO < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::E2BIG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOEXEC < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADF < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ECHILD < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EAGAIN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOMEM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EACCES < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EFAULT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTBLK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBUSY < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EEXIST < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EXDEV < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENODEV < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTDIR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EISDIR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EINVAL < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENFILE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EMFILE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTTY < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ETXTBSY < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EFBIG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOSPC < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESPIPE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EROFS < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EMLINK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPIPE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EDOM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ERANGE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EDEADLK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENAMETOOLONG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOLCK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOSYS < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTEMPTY < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELOOP < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EWOULDBLOCK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOMSG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EIDRM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ECHRNG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EL2NSYNC < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EL3HLT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EL3RST < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELNRNG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EUNATCH < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOCSI < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EL2HLT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EXFULL < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOANO < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADRQC < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADSLT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EDEADLOCK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBFONT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOSTR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENODATA < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ETIME < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOSR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENONET < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOPKG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EREMOTE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOLINK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EADV < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESRMNT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ECOMM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPROTO < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EMULTIHOP < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EDOTDOT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADMSG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EOVERFLOW < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTUNIQ < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EBADFD < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EREMCHG < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELIBACC < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELIBBAD < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELIBSCN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELIBMAX < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ELIBEXEC < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EILSEQ < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ERESTART < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESTRPIPE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EUSERS < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTSOCK < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EDESTADDRREQ < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EMSGSIZE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPROTOTYPE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOPROTOOPT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPROTONOSUPPORT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESOCKTNOSUPPORT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EOPNOTSUPP < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPFNOSUPPORT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EAFNOSUPPORT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EADDRINUSE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EADDRNOTAVAIL < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENETDOWN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENETUNREACH < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENETRESET < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ECONNABORTED < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ECONNRESET < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOBUFS < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EISCONN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTCONN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESHUTDOWN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ETOOMANYREFS < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ETIMEDOUT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ECONNREFUSED < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EHOSTDOWN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EHOSTUNREACH < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EALREADY < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EINPROGRESS < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ESTALE < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EUCLEAN < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENOTNAM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::ENAVAIL < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EISNAM < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EREMOTEIO < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EDQUOT < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 #@since 1.9.1
 = class Errno::NOERROR < SystemCallError
-�����ƥॳ����Υ��顼�����ɤ�ɽ���㳰���饹�Ǥ����ܺ٤� [[c:Errno::EXXX]] �򻲾Ȥ��Ƥ���������
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 #@end

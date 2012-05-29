@@ -1,27 +1,27 @@
-�ץ�������¹Ԥ������Υץ�������ɸ�����ϡ�ɸ����ϡ�
-ɸ�२�顼���Ϥ˥ѥ��פ�Ĥʤ��ޤ���
+プログラムを実行し、そのプロセスの標準入力・標準出力・
+標準エラー出力にパイプをつなぎます。
 
 = module Open3
 
-�ץ�������¹Ԥ������Υץ�������ɸ�����ϡ�ɸ����ϡ�
-ɸ�२�顼���Ϥ˥ѥ��פ�Ĥʤ��ޤ���
+プログラムを実行し、そのプロセスの標準入力・標準出力・
+標準エラー出力にパイプをつなぎます。
 
-=== ������
+=== 使用例
 
-nroff ��¹Ԥ��Ƥ���ɸ�����Ϥ� man �ڡ�����������߽��������롣
-nroff �ץ�������ɸ����Ϥ��������̤������롣
+nroff を実行してその標準入力に man ページを送り込み処理させる。
+nroff プロセスの標準出力から処理結果を受け取る。
 
   require "open3"
 
   stdin, stdout, stderr = *Open3.popen3('nroff -man')
-  # �����餫���
+  # こちらから書く
   Thread.fork {
     File.foreach('/usr/man/man1/ruby.1') do |line|
       stdin.print line
     end
-    stdin.close    # �ޤ��� close_write
+    stdin.close    # または close_write
   }
-  # �����餫���ɤ�
+  # こちらから読む
   stdout.each do |line|
     print line
   end
@@ -32,27 +32,27 @@ nroff �ץ�������ɸ����Ϥ��������̤������롣
 --- popen3(*cmd) -> [IO, IO, IO, Thread]
 --- popen3(*cmd) {|stdin, stdout, stderr, wait_thr| ... } -> ()
 
-�����ץ������ cmd ��¹Ԥ������Υץ�������ɸ�����ϡ�ɸ����ϡ�ɸ�२�顼
-���Ϥ���³���줿�ѥ��פȼ¹Ԥ����ץ��������ԤĤ���Υ���åɤ� 4 ���Ǥ�
-������֤��ޤ���
+外部プログラム cmd を実行し、そのプロセスの標準入力、標準出力、標準エラー
+出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の
+配列で返します。
 
   stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä�����ɸ�����ϡ�ɸ����ϡ�ɸ�२�顼��
-        �Ϥȼ¹Ԥ����ץ��������ԤĤ���Υ���åɤ���³���줿�ѥ��פ���
-        ���ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は標準入力、標準出力、標準エラー出
+        力と実行したプロセスを待つためのスレッドに接続されたパイプを返
+        します。
 
-�֥��å�����ꤹ��ȥѥ��פ����������˥֥��å���¹Ԥ����Ǹ�˥ѥ���
-�� close ���ޤ������ξ��ϥ֥��å��κǸ�μ��η�̤��֤��ޤ���
+ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
+を close します。この場合はブロックの最後の式の結果を返します。
 
   require 'open3'
 
   Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr, wait_thr|
     stdin.puts "stdin"
-    stdin.close     # �ޤ��� close_write
+    stdin.close     # または close_write
     p stdout.read
     p stderr.read
   }
@@ -63,26 +63,26 @@ nroff �ץ�������ɸ����Ϥ��������̤������롣
 --- popen3(*cmd) -> [IO, IO, IO]
 --- popen3(*cmd) {|stdin, stdout, stderr| ... } -> ()
 
-�����ץ������ cmd ��¹Ԥ������Υץ�������ɸ�����ϡ�
-ɸ����ϡ�ɸ�२�顼���Ϥ���³���줿�ѥ��פ� 3 ���Ǥ�������֤��ޤ���
-cmd ���Ȥ߹��ߴؿ� [[m:Kernel.#exec]] ��Ʊ����§�ǲ�ᤵ��ޤ���
+外部プログラム cmd を実行し、そのプロセスの標準入力、
+標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返します。
+cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈されます。
 
   stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä�����ɸ�����ϡ�ɸ����ϡ�ɸ�२�顼
-        ���֤��ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は標準入力、標準出力、標準エラー
+        を返します。
 
-�֥��å�����ꤹ��ȥѥ��פ����������˥֥��å���¹Ԥ����Ǹ�˥ѥ���
-�� close ���ޤ������ξ��ϥ֥��å��κǸ�μ��η�̤��֤��ޤ���
+ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
+を close します。この場合はブロックの最後の式の結果を返します。
 
   require 'open3'
 
   Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr|
     stdin.puts "stdin"
-    stdin.close     # �ޤ��� close_write
+    stdin.close     # または close_write
     p stdout.read
     p stderr.read
   }
@@ -91,18 +91,18 @@ cmd ���Ȥ߹��ߴؿ� [[m:Kernel.#exec]] ��Ʊ����§�ǲ�ᤵ��ޤ���
 
 #@end
 
-stdin �ؤ����Ϥ�����ä���Ǥ���¤��᤯ close �� close_write
-���Ĥ���٤��Ǥ���
+stdin への入力が終わったらできる限り早く close か close_write
+で閉じるべきです。
 
-[UNIX��OS��ͭ������] Open3 �Ǻ��������ҥץ�������
-[[man:wait(2)]] ���ʤ��Ƥ⥾��Ӥˤʤ�ޤ���
+[UNIX系OS固有の注意] Open3 で作成した子プロセスは
+[[man:wait(2)]] しなくてもゾンビになりません。
 
 #@since 1.9.1
-���� cmd �Ϥ��Τޤ� [[m:Kernel.#spawn]] ���Ϥ���ޤ���
-[[m:Kernel.#spawn]]��Ʊ�ͤˡ������ꥹ�Ȥκǽ�˴Ķ��ѿ���ϥå��������
-���ꤹ������Ǥ��ޤ���
+引数 cmd はそのまま [[m:Kernel.#spawn]] に渡されます。
+[[m:Kernel.#spawn]]と同様に、引数リストの最初に環境変数をハッシュ形式で
+指定する事ができます。
 
-��:
+例:
 
   require 'open3'
 
@@ -114,20 +114,20 @@ stdin �ؤ����Ϥ�����ä���Ǥ���¤��᤯ close �� close_write
       foo=1
       bar=2
 
-[[m:Kernel.#spawn]]��Ʊ�ͤˡ������ꥹ�ȤκǸ�˥��ץ�����ϥå������
-�ǻ��ꤹ������Ǥ��ޤ���
+[[m:Kernel.#spawn]]と同様に、引数リストの最後にオプションをハッシュ形式
+で指定する事ができます。
 
-��:
+例:
 
   require "open3"
   
-  # ���ץ�������ꤷ����硣
+  # オプションを指定した場合。
   Dir.chdir("/tmp")
   Open3.popen3("pwd", :chdir=> "/") {|i,o,e,t|
     p o.read.chomp #=> "/"
   }
   
-  # ���ץ�������ꤷ�ʤ���硣
+  # オプションを指定しない場合。
   Dir.chdir("/tmp")
   Open3.popen3("pwd") {|i,o,e,t|
     p o.read.chomp #=> "/tmp"
@@ -135,8 +135,8 @@ stdin �ؤ����Ϥ�����ä���Ǥ���¤��᤯ close �� close_write
 
 @see [[m:Kernel.#spawn]]
 #@else
-���ޥ�ɤϼºݤˤ�¹�ץ������Ȥ���ư��뤿�ᡢ�Ȥ߹����ѿ� [[m:$?]] �ǥ��ޥ�ɤν�λ���ơ����������뤳�ȤϤǤ��ޤ���
-#@#��λ���ơ��������ۤ����ҤȤϡ�((<POpen4|URL:http://popen4.rubyforge.org/>)) ���Ƥߤ�Ȥ������⤷��ޤ���
+コマンドは実際には孫プロセスとして動作するため、組み込み変数 [[m:$?]] でコマンドの終了ステータスを得ることはできません。
+#@#終了ステータスがほしいひとは、((<POpen4|URL:http://popen4.rubyforge.org/>)) を試してみるといいかもしれません。
 #@end
 
 #@since 1.9.2
@@ -144,55 +144,55 @@ stdin �ؤ����Ϥ�����ä���Ǥ���¤��᤯ close �� close_write
 --- popen2(*cmd) -> [IO, IO, Thread]
 --- popen2(*cmd) {|stdin, stdout, wait_thr| ... } -> ()
 
-cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ�����ϡ�ɸ����Ϥ˥ѥ�
-�פ�Ĥʤ��ޤ���Open3.popen3�˻��Ƥ��ޤ�����ɸ�२�顼�򰷤��ޤ���
+cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力にパイ
+プをつなぎます。Open3.popen3に似ていますが、標準エラーを扱いません。
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä�����ɸ�����ϡ�ɸ����Ϥ���³���줿��
-        ���פȼ¹Ԥ����ץ��������ԤĤ���Υ���åɤ��֤��ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は標準入力、標準出力に接続されたパ
+        イプと実行したプロセスを待つためのスレッドを返します。
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- popen2e(*cmd) -> [IO, IO, Thread]
 --- popen2e(*cmd) {|stdin, stdout_and_stderr, wait_thr| ... } -> ()
 
-cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ�����ϡ�ɸ����Ϥ�ɸ��
-���顼�˥ѥ��פ�Ĥʤ��ޤ���Open3.popen3�˻��Ƥ��ޤ�����ɸ����Ϥ�ɸ��
-���顼��1�Ĥ��ѿ��ǰ����ޤ���
+cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力と標準
+エラーにパイプをつなぎます。Open3.popen3に似ていますが、標準出力と標準
+エラーが1つの変数で扱われます。
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä�����ɸ�����ϡ�ɸ����Ϥ�ɸ�२�顼��
-        ��³���줿�ѥ��פȼ¹Ԥ����ץ��������ԤĤ���Υ���åɤ��֤���
-        ����
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は標準入力、標準出力と標準エラーに
+        接続されたパイプと実行したプロセスを待つためのスレッドを返しま
+        す。
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- capture3(*cmd) -> [String, String, Process::Status]
 
-cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼����
-�������ν�λ���ơ�������ɽ�����֥������Ȥ��֤��ޤ���
+cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラー、プ
+ロセスの終了ステータスを表すオブジェクトを返します。
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �¹Ԥ������ޥ�ɤ�ɸ����Ϥ�ɸ�२�顼���ץ������ν�λ���ơ���
-        ����ɽ�����֥������Ȥ�������֤��ޤ���
+@return 実行したコマンドの標準出力と標準エラー、プロセスの終了ステータ
+        スを表すオブジェクトを配列で返します。
 
-���ꤵ�줿������opts[:stdin_data]��opts[:binmode]�ʳ�������
-[[m:Open3.#popen3]]���Ϥ���ޤ���opts[:stdin_data]�ϼ¹Ԥ��륳�ޥ�ɤ�
-ɸ����Ϥ��Ϥ���ޤ���opts[:binmode]�򿿤˻��ꤵ���������ǻ��Ѥ����
-�ѥ��פ�Х��ʥ�⡼�ɤ˻��ꤷ�ޤ���
+指定された引数はopts[:stdin_data]とopts[:binmode]以外は全て
+[[m:Open3.#popen3]]に渡されます。opts[:stdin_data]は実行するコマンドの
+標準出力に渡されます。opts[:binmode]を真に指定されると内部で使用される
+パイプをバイナリモードに指定します。
 
-��:
+例:
 
   require "open3"
   
@@ -201,56 +201,56 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼����
   p e #=> "bar\nbaz\nfoo\n"
   p s #=> #<Process::Status: pid 32682 exit 0>
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- capture2(*cmd) -> [String, Process::Status]
 
-cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥȥץ������ν�λ
-���ơ�������ɽ�����֥������Ȥ��֤��ޤ���
+cmdで指定されたコマンドを実行し、そのプロセスの標準出力とプロセスの終了
+ステータスを表すオブジェクトを返します。
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �¹Ԥ������ޥ�ɤ�ɸ����ϤȽ�λ���ơ�������ɽ�����֥������Ȥ�
-        ������֤��ޤ���
+@return 実行したコマンドの標準出力と終了ステータスを表すオブジェクトを
+        配列で返します。
 
-���ꤵ�줿������opts[:stdin_data]��opts[:binmode]�ʳ�������
-[[m:Open3.#popen3]]���Ϥ���ޤ���opts[:stdin_data]�ϼ¹Ԥ��륳�ޥ�ɤ�
-ɸ����Ϥ��Ϥ���ޤ���opts[:binmode]�򿿤˻��ꤵ���������ǻ��Ѥ����
-�ѥ��פ�Х��ʥ�⡼�ɤ˻��ꤷ�ޤ���
+指定された引数はopts[:stdin_data]とopts[:binmode]以外は全て
+[[m:Open3.#popen3]]に渡されます。opts[:stdin_data]は実行するコマンドの
+標準出力に渡されます。opts[:binmode]を真に指定されると内部で使用される
+パイプをバイナリモードに指定します。
 
-��:
+例:
 
   require "open3"
   
-  # factor���ޥ�ɤ�Ϳ����줿����(42)���ǰ���ʬ�򤹤롣
+  # factorコマンドで与えられた数値(42)を素因数分解する。
   o, s = Open3.capture2("factor", :stdin_data=>"42")
   p o #=> "42: 2 3 7\n"
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- capture2e(*cmd) -> [String, Process::Status]
 
-cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
-�Ĥ�ʸ����ˤ�����Τȥץ������ν�λ���ơ�������ɽ�����֥������Ȥ��֤�
-�ޤ���
+cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
+つの文字列にしたものとプロセスの終了ステータスを表すオブジェクトを返し
+ます。
 
-@param cmd �¹Ԥ��륳�ޥ�ɤ���ꤷ�ޤ���
+@param cmd 実行するコマンドを指定します。
 
-@return �¹Ԥ������ޥ�ɤ�ɸ����Ϥ�ɸ�२�顼��1�Ĥ�ʸ����ˤ�����Τ�
-        ��λ���ơ�������ɽ�����֥������Ȥ�������֤��ޤ���
+@return 実行したコマンドの標準出力と標準エラーを1つの文字列にしたものと
+        終了ステータスを表すオブジェクトを配列で返します。
 
-���ꤵ�줿������opts[:stdin_data]��opts[:binmode]�ʳ�������
-[[m:Open3.#popen3]]���Ϥ���ޤ���opts[:stdin_data]�ϼ¹Ԥ��륳�ޥ�ɤ�
-ɸ����Ϥ��Ϥ���ޤ���opts[:binmode]�򿿤˻��ꤵ���������ǻ��Ѥ����
-�ѥ��פ�Х��ʥ�⡼�ɤ˻��ꤷ�ޤ���
+指定された引数はopts[:stdin_data]とopts[:binmode]以外は全て
+[[m:Open3.#popen3]]に渡されます。opts[:stdin_data]は実行するコマンドの
+標準出力に渡されます。opts[:binmode]を真に指定されると内部で使用される
+パイプをバイナリモードに指定します。
 
-��:
+例:
 
   require "open3"
   
@@ -258,26 +258,26 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
   p o #=> "a\nbar\nbaz\nfoo\n"
   p s #=> #<Process::Status: pid 20574 exit 0>
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- pipeline_rw(*cmds) -> [IO, IO, [Thread]]
 --- pipeline_rw(*cmds) {|first_stdin, last_stdout, wait_thrs| ... } -> ()
 
-���ꤷ�����ޥ�ɤΥꥹ�Ȥ�ѥ��פǷҤ��ǽ��֤˼¹Ԥ��ޤ����ǽ��
-���ޥ�ɤ�ɸ�����Ϥ˽񤭹������Ǹ�Υ��ޥ�ɤ�ɸ����Ϥ�����Ȥ����
-�Ǥ��ޤ���
+指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
+コマンドの標準入力に書き込む事も最後のコマンドの標準出力を受けとる事も
+できます。
 
-@param cmds �¹Ԥ��륳�ޥ�ɤΥꥹ�Ȥ���ꤷ�ޤ���
+@param cmds 実行するコマンドのリストを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä����Ϻǽ�˼¹Ԥ��륳�ޥ�ɤ�ɸ������
-        �ȺǸ�˼¹Ԥ��륳�ޥ�ɤ�ɸ����ϡ��¹Ԥ����ץ��������ԤĤ���
-        �Υ���åɤ������������֤��ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は最初に実行するコマンドの標準入力
+        と最後に実行するコマンドの標準出力、実行したプロセスを待つため
+        のスレッドの配列を配列で返します。
 
-��:
+例:
 
   require "open3"
   
@@ -286,32 +286,32 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
     stdin.puts "bar"
     stdin.puts "baz"
     
-    # sort���ޥ�ɤ�EOF�����롣
+    # sortコマンドにEOFを送る。
     stdin.close
     
-    # stdin���Ϥ���ʸ�����sort���ޥ�ɤ��¤��ؤ�����Τˡ�cat���ޥ��
-    # �����ֹ���դ���ʸ����ɽ������롣
+    # stdinに渡した文字列をsortコマンドが並べ替えたものに、catコマンド
+    # が行番号を付けた文字列が表示される。
     p stdout.read   #=> "     1\tbar\n     2\tbaz\n     3\tfoo\n"
   }
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- pipeline_r(*cmds) -> [IO, [Thread]]
 --- pipeline_r(*cmds) {|last_stdout, wait_thrs| ... } -> ()
 
-���ꤷ�����ޥ�ɤΥꥹ�Ȥ�ѥ��פǷҤ��ǽ��֤˼¹Ԥ��ޤ����Ǹ��
-���ޥ�ɤ�ɸ����Ϥ�����Ȥ�����Ǥ��ޤ���
+指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
+コマンドの標準出力を受けとる事ができます。
 
-@param cmds �¹Ԥ��륳�ޥ�ɤΥꥹ�Ȥ���ꤷ�ޤ���
+@param cmds 実行するコマンドのリストを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä����ϺǸ�˼¹Ԥ��륳�ޥ�ɤ�ɸ����ϡ�
-        �¹Ԥ����ץ��������ԤĤ���Υ���åɤ������������֤��ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は最後に実行するコマンドの標準出力、
+        実行したプロセスを待つためのスレッドの配列を配列で返します。
 
-��:
+例:
 
   require "open3"
   
@@ -321,24 +321,24 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
     p ts[1].value #=> #<Process::Status: pid 24913 exit 0>
   }
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- pipeline_w(*cmds) -> [IO, [Thread]]
 --- pipeline_w(*cmds) {|first_stdin, wait_thrs| ... } -> ()
 
-���ꤷ�����ޥ�ɤΥꥹ�Ȥ�ѥ��פǷҤ��ǽ��֤˼¹Ԥ��ޤ����ǽ��
-���ޥ�ɤ�ɸ�����Ϥ˽񤭹�������Ǥ��ޤ���
+指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
+コマンドの標準入力に書き込む事ができます。
 
-@param cmds �¹Ԥ��륳�ޥ�ɤΥꥹ�Ȥ���ꤷ�ޤ���
+@param cmds 実行するコマンドのリストを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä����Ϻǽ�˼¹Ԥ��륳�ޥ�ɤ�ɸ�����ϡ�
-        �¹Ԥ����ץ��������ԤĤ���Υ���åɤ������������֤��ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は最初に実行するコマンドの標準入力、
+        実行したプロセスを待つためのスレッドの配列を配列で返します。
 
-��:
+例:
 
   require "open3"
   
@@ -346,27 +346,27 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
     w.puts "hello"
   }
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- pipeline_start(*cmds) -> [Thread]
 --- pipeline_start(*cmds) {|wait_thrs| ... } -> ()
 
-���ꤷ�����ޥ�ɤΥꥹ�Ȥ�ѥ��פǷҤ��ǽ��֤˼¹Ԥ��ޤ���
+指定したコマンドのリストをパイプで繋いで順番に実行します。
 
-@param cmds �¹Ԥ��륳�ޥ�ɤΥꥹ�Ȥ���ꤷ�ޤ���
+@param cmds 実行するコマンドのリストを指定します。
 
-@return �֥��å�����ꤷ�����ϥ֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å�����ꤷ�ʤ��ä����ϼ¹Ԥ����ץ��������ԤĤ���Υ����
-        �ɤ�������֤��ޤ���
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は実行したプロセスを待つためのスレッ
+        ドの配列を返します。
 
-��:
+例:
 
   require "open3"
   
-  # xeyes��10�ä����¹Ԥ��롣
+  # xeyesを10秒だけ実行する。
   Open3.pipeline_start("xeyes") {|ts|
     sleep 10
     t = ts[0]
@@ -374,20 +374,20 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
     p t.value #=> #<Process::Status: pid 911 SIGTERM (signal 15)>
   }
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 
 --- pipeline(*cmds) -> [Process::Status]
 
-���ꤷ�����ޥ�ɤΥꥹ�Ȥ�ѥ��פǷҤ��ǽ��֤˼¹Ԥ��ޤ���
+指定したコマンドのリストをパイプで繋いで順番に実行します。
 
-@param cmds �¹Ԥ��륳�ޥ�ɤΥꥹ�Ȥ���ꤷ�ޤ���
+@param cmds 実行するコマンドのリストを指定します。
 
-@return �¹Ԥ������ޥ�ɤν�λ���ơ�������������֤��ޤ���
+@return 実行したコマンドの終了ステータスを配列で返します。
 
-��:
+例:
 
   require "open3"
   
@@ -397,8 +397,8 @@ cmd�ǻ��ꤵ�줿���ޥ�ɤ�¹Ԥ������Υץ�������ɸ����Ϥ�ɸ�२�顼��1
   #    #<Process::Status: pid 11820 exit 0>,
   #    #<Process::Status: pid 11828 exit 0>]
 
-[[m:Open3.#popen3]]��Ʊ�ͤ˰����˴Ķ��ѿ��ȥ��ץ�������ꤷ�ƥ��ޥ��
-��¹Ԥ�������Ǥ��ޤ���
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
 @see [[m:Open3.#popen3]]
 

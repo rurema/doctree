@@ -12,7 +12,7 @@
 
 --- static VALUE find_class_path(VALUE klass)
 
-¥¯¥é¥¹ klass ¤Î¥¯¥é¥¹¥Ñ¥¹¤òÃµº÷¤·¡¢Ruby ¤ÎÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+ã‚¯ãƒ©ã‚¹ klass ã®ã‚¯ãƒ©ã‚¹ãƒ‘ã‚¹ã‚’æŽ¢ç´¢ã—ã€Ruby ã®æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
 --- static VALUE generic_ivar_defined(VALUE obj, ID id)
 
@@ -54,91 +54,91 @@
 
 --- char *rb_class2name(VALUE klass)
 
-klass ¤ÎÌ¾Á°¤òÊÖ¤·¤Þ¤¹¡£
-ÊÖ¤êÃÍ¤ÎÆâÍÆ¤òÊÑ¹¹¤·¤¿¤ê free ¤·¤Æ¤Ï¤¤¤±¤Þ¤»¤ó¡£
+klass ã®åå‰ã‚’è¿”ã—ã¾ã™ã€‚
+è¿”ã‚Šå€¤ã®å†…å®¹ã‚’å¤‰æ›´ã—ãŸã‚Š free ã—ã¦ã¯ã„ã‘ã¾ã›ã‚“ã€‚
 
   RSTRING(rb_class_path(klass))->ptr
 
-¤ÈÆ±¤¸¤Ç¤¹¡£
+ã¨åŒã˜ã§ã™ã€‚
 
 --- VALUE rb_class_path(VALUE klass)
 
-klass ¤ÎÌ¾Á°¤òÊÖ¤·¤Þ¤¹¡¥klass¤¬ÌµÌ¾¥¯¥é¥¹¡¢ÌµÌ¾¥â¥¸¥å¡¼
-¥ë¤Î¾ì¹ç #<Class 0xXXXX>, #<Module 0xXXXX> ¤Î·Á¼°¤ÇÊÖ¤·¤Þ¤¹¡£
+klass ã®åå‰ã‚’è¿”ã—ã¾ã™ï¼ŽklassãŒç„¡åã‚¯ãƒ©ã‚¹ã€ç„¡åãƒ¢ã‚¸ãƒ¥ãƒ¼
+ãƒ«ã®å ´åˆ #<Class 0xXXXX>, #<Module 0xXXXX> ã®å½¢å¼ã§è¿”ã—ã¾ã™ã€‚
 
-[[m:Module#to_s]] ¤ÎÄêµÁ¤Ï
+[[m:Module#to_s]] ã®å®šç¾©ã¯
 
   rb_str_dup(rb_class_path(klass));
 
-¤Ç¤¹¡£
+ã§ã™ã€‚
 
 --- void rb_const_assign(VALUE klass, ID id, VALUE val)
 
 --- int rb_const_defined(VALUE klass, ID id)
 
-klass ¤È¤½¤Î¥¹¡¼¥Ñ¡¼¥¯¥é¥¹¤ËÄê¿ô id ¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤ì¤Ð¿¿¡£
+klass ã¨ãã®ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã«å®šæ•° id ãŒå®šç¾©ã•ã‚Œã¦ã„ã‚Œã°çœŸã€‚
 
 --- int rb_const_defined_at(VALUE klass, ID id)
 
-klass ¼«ÂÎ¤ËÄê¿ô id ¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤ì¤Ð¿¿¡£
+klass è‡ªä½“ã«å®šæ•° id ãŒå®šç¾©ã•ã‚Œã¦ã„ã‚Œã°çœŸã€‚
 
 --- VALUE rb_const_get(VALUE klass, ID name)
 
-Äê¿ô klass::name ¤ÎÃÍ¤ò¼èÆÀ¤·¤Þ¤¹¡£
+å®šæ•° klass::name ã®å€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 
 --- VALUE rb_const_get_at(VALUE klass, ID name)
 
-¥¯¥é¥¹ klass ¤ÇÄêµÁ¤µ¤ì¤¿Äê¿ô name ¤ÎÃÍ¤ò¼èÆÀ¤·¤Þ¤¹
-(ÁÄÀè¤ä³°¤Î¥¯¥é¥¹¤ÏÄ´¤Ù¤Ê¤¤)¡£
+ã‚¯ãƒ©ã‚¹ klass ã§å®šç¾©ã•ã‚ŒãŸå®šæ•° name ã®å€¤ã‚’å–å¾—ã—ã¾ã™
+(ç¥–å…ˆã‚„å¤–ã®ã‚¯ãƒ©ã‚¹ã¯èª¿ã¹ãªã„)ã€‚
 
 --- VALUE rb_const_list(void *data)
 
 --- void rb_const_set(VALUE klass, ID name, VALUE val)
 
-Äê¿ô klass::name ¤ÎÃÍ¤ò val ¤È¤·¤ÆÄêµÁ¤·¤Þ¤¹¡£
+å®šæ•° klass::name ã®å€¤ã‚’ val ã¨ã—ã¦å®šç¾©ã—ã¾ã™ã€‚
 
 --- void rb_copy_generic_ivar(VALUE clone, VALUE obj)
 
 --- VALUE rb_cv_get(VALUE klass, char *name)
 
-klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤ÎÃÍ¤ò
-¼èÆÀ¤·¤Þ¤¹¡£
+klass ã®ã‚¯ãƒ©ã‚¹å¤‰æ•° name ã®å€¤ã‚’
+å–å¾—ã—ã¾ã™ã€‚
 
 --- void rb_cv_set(VALUE klass, char *name, VALUE val)
 
-klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤Ë val ¤òÂåÆþ¤·¤Þ¤¹¡£
-ÊÑ¿ô¤¬¤Þ¤ÀÄêµÁ¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï NameError ¤òÈ¯À¸¤·¤Þ¤¹¡£
+klass ã®ã‚¯ãƒ©ã‚¹å¤‰æ•° name ã« val ã‚’ä»£å…¥ã—ã¾ã™ã€‚
+å¤‰æ•°ãŒã¾ã å®šç¾©ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ NameError ã‚’ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- void rb_cvar_declear(VALUE klass, ID name, VALUE val)
 
-klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤Ë val ¤òÂåÆþ¤·¤Þ¤¹¡£
+klass ã®ã‚¯ãƒ©ã‚¹å¤‰æ•° name ã« val ã‚’ä»£å…¥ã—ã¾ã™ã€‚
 
 --- VALUE rb_cvar_defined(VALUE klass, ID id)
 
 --- VALUE rb_cvar_get(VALUE klass, ID name)
 
-klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤ÎÃÍ¤ò
-¼èÆÀ¤·¤Þ¤¹¡£
+klass ã®ã‚¯ãƒ©ã‚¹å¤‰æ•° name ã®å€¤ã‚’
+å–å¾—ã—ã¾ã™ã€‚
 
 --- void rb_cvar_set(VALUE klass, ID name, VALUE val)
 
-klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤Ë val ¤òÂåÆþ¤·¤Þ¤¹¡£
-ÊÑ¿ô¤¬¤Þ¤ÀÄêµÁ¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï NameError ¤òÈ¯À¸¤·¤Þ¤¹¡£
+klass ã®ã‚¯ãƒ©ã‚¹å¤‰æ•° name ã« val ã‚’ä»£å…¥ã—ã¾ã™ã€‚
+å¤‰æ•°ãŒã¾ã å®šç¾©ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ NameError ã‚’ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- void rb_define_class_variable(VALUE klass, const char *name, VALUE val)
 
-¥¯¥é¥¹ klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤ò½é´üÃÍ val ¤Ç
-ÄêµÁ¤·¤Þ¤¹¡£´û¤ËÆ±Ì¾¤ÎÊÑ¿ô¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤¿¤é·Ù¹ð¤·¤Þ¤¹¡£
+ã‚¯ãƒ©ã‚¹ klass ã®ã‚¯ãƒ©ã‚¹å¤‰æ•° name ã‚’åˆæœŸå€¤ val ã§
+å®šç¾©ã—ã¾ã™ã€‚æ—¢ã«åŒåã®å¤‰æ•°ãŒå®šç¾©ã•ã‚Œã¦ã„ãŸã‚‰è­¦å‘Šã—ã¾ã™ã€‚
 
 --- void rb_define_const(VALUE klass, const char *name, VALUE val)
 
-¥¯¥é¥¹ klass ¤ÎÄê¿ô name ¤ò½é´üÃÍ val ¤Ç
-ÄêµÁ¤·¤Þ¤¹¡£´û¤ËÆ±Ì¾¤ÎÄê¿ô¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤¿¤é·Ù¹ð¤·¤Þ¤¹¡£
+ã‚¯ãƒ©ã‚¹ klass ã®å®šæ•° name ã‚’åˆæœŸå€¤ val ã§
+å®šç¾©ã—ã¾ã™ã€‚æ—¢ã«åŒåã®å®šæ•°ãŒå®šç¾©ã•ã‚Œã¦ã„ãŸã‚‰è­¦å‘Šã—ã¾ã™ã€‚
 
 --- void rb_define_global_const(const char *name, VALUE val)
 
-¥È¥Ã¥×¥ì¥Ù¥ë (¸½ºß¤Ï [[c:Object]]) ¤ÎÄê¿ô name ¤ò½é´üÃÍ val ¤Ç
-ÄêµÁ¤·¤Þ¤¹¡£´û¤ËÆ±Ì¾¤ÎÄê¿ô¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤¿¤é·Ù¹ð¤·¤Þ¤¹¡£
+ãƒˆãƒƒãƒ—ãƒ¬ãƒ™ãƒ« (ç¾åœ¨ã¯ [[c:Object]]) ã®å®šæ•° name ã‚’åˆæœŸå€¤ val ã§
+å®šç¾©ã—ã¾ã™ã€‚æ—¢ã«åŒåã®å®šæ•°ãŒå®šç¾©ã•ã‚Œã¦ã„ãŸã‚‰è­¦å‘Šã—ã¾ã™ã€‚
 
 --- void rb_define_hooked_variable(const char *name, VALUE *var, VALUE (*getter)(), VALUE (*setter)())
 
@@ -168,54 +168,54 @@ klass ¤Î¥¯¥é¥¹ÊÑ¿ô name ¤Ë val ¤òÂåÆþ¤·¤Þ¤¹¡£
 --- VALUE rb_gv_get(const char *name)
 #@# [1.5 feature]
 
-Ruby ¤Î¥°¥í¡¼¥Ð¥ëÊÑ¿ô¤ÎÃÍ¤ò¼èÆÀ¤·¤Þ¤¹¡£
+Ruby ã®ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã®å€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
 
     VALUE v = rb_gv_get("$!")
 
 --- VALUE rb_gv_set(const char *name, VALUE val)
 #@# [1.5 feature]
 
-Ruby ¤Î¥°¥í¡¼¥Ð¥ëÊÑ¿ô name ¤Ë val ¤òÂåÆþ¤·¤Þ¤¹¡£
-val ¤òÊÖ¤·¤Þ¤¹¡£
+Ruby ã®ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•° name ã« val ã‚’ä»£å…¥ã—ã¾ã™ã€‚
+val ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- VALUE rb_gvar_defined(struct global_entry *entry)
 
-entry ¤Ç¼¨¤µ¤ì¤ë¥°¥í¡¼¥Ð¥ëÊÑ¿ô¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤ë¤Ê¤é¿¿¡£
+entry ã§ç¤ºã•ã‚Œã‚‹ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ãŒå®šç¾©ã•ã‚Œã¦ã„ã‚‹ãªã‚‰çœŸã€‚
 
 --- VALUE rb_gvar_get(struct global_entry *entry)
 
-¥°¥í¡¼¥Ð¥ëÊÑ¿ô¤Î¥¨¥ó¥È¥ê entry ¤«¤éÃÍ¤ò¼èÆÀ¤·¤Þ¤¹¡£
+ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã®ã‚¨ãƒ³ãƒˆãƒª entry ã‹ã‚‰å€¤ã‚’å–å¾—ã—ã¾ã™ã€‚
 
 --- VALUE rb_gvar_set(struct global_entry *entry, VALUE val)
 
-¥°¥í¡¼¥Ð¥ëÊÑ¿ô¤Î¥¨¥ó¥È¥ê entry ¤ËÃÍ¤òÂåÆþ¤·¤Þ¤¹¡£
+ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã®ã‚¨ãƒ³ãƒˆãƒª entry ã«å€¤ã‚’ä»£å…¥ã—ã¾ã™ã€‚
 
 --- VALUE rb_iv_get(VALUE obj, char *name)
 
-¥ª¥Ö¥¸¥§¥¯¥È obj ¤Î¥¤¥ó¥¹¥¿¥ó¥¹ÊÑ¿ô name ¤ÎÃÍ¤ò
-¼èÆÀ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ obj ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å¤‰æ•° name ã®å€¤ã‚’
+å–å¾—ã—ã¾ã™ã€‚
 
 --- VALUE rb_iv_set(VALUE obj, char *name, VALUE val)
 
-¥ª¥Ö¥¸¥§¥¯¥È obj ¤Î¥¤¥ó¥¹¥¿¥ó¥¹ÊÑ¿ô name ¤Ë
-val ¤òÂåÆþ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ obj ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å¤‰æ•° name ã«
+val ã‚’ä»£å…¥ã—ã¾ã™ã€‚
 
 --- VALUE rb_ivar_defined(VALUE obj, ID id)
 
-¥ª¥Ö¥¸¥§¥¯¥È obj ¤Î¥¤¥ó¥¹¥¿¥ó¥¹ÊÑ¿ô name ¤¬
-ÄêµÁ¤µ¤ì¤Æ¤¤¤ì¤Ð¿¿¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ obj ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å¤‰æ•° name ãŒ
+å®šç¾©ã•ã‚Œã¦ã„ã‚Œã°çœŸã€‚
 
 --- VALUE rb_ivar_get(VALUE obj, ID name)
 
-¥ª¥Ö¥¸¥§¥¯¥È obj ¤Î¥¤¥ó¥¹¥¿¥ó¥¹ÊÑ¿ô name ¤ÎÃÍ¤ò
-¼èÆÀ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ obj ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å¤‰æ•° name ã®å€¤ã‚’
+å–å¾—ã—ã¾ã™ã€‚
 
 --- VALUE rb_ivar_set(VALUE obj, ID name, VALUE val)
 
-¥ª¥Ö¥¸¥§¥¯¥È obj ¤Î¥¤¥ó¥¹¥¿¥ó¥¹ÊÑ¿ô name ¤Ë
-val ¤òÂåÆþ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ obj ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å¤‰æ•° name ã«
+val ã‚’ä»£å…¥ã—ã¾ã™ã€‚
 
 --- void rb_mark_generic_ivar(VALUE obj)
 
@@ -231,8 +231,8 @@ val ¤òÂåÆþ¤·¤Þ¤¹¡£
 
 --- VALUE rb_mod_name(VALUE mod)
 
-[[m:Module#name]] ¤Î¼ÂÂÎ¤Ç¤¹¡£
-ÌµÌ¾¥¯¥é¥¹¡¢ÌµÌ¾¥â¥¸¥å¡¼¥ë¤ËÂÐ¤·¤Æ¤Ï¶õÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+[[m:Module#name]] ã®å®Ÿä½“ã§ã™ã€‚
+ç„¡åã‚¯ãƒ©ã‚¹ã€ç„¡åãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã«å¯¾ã—ã¦ã¯ç©ºæ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- VALUE rb_mod_remove_const(VALUE mod, VALUE name)
 
@@ -240,7 +240,7 @@ val ¤òÂåÆþ¤·¤Þ¤¹¡£
 
 --- void rb_name_class(VALUE klass, ID id)
 
-¥¯¥é¥¹ klass ¤ò id ¤ÈÌ¿Ì¾¤·¤Þ¤¹¡£
+ã‚¯ãƒ©ã‚¹ klass ã‚’ id ã¨å‘½åã—ã¾ã™ã€‚
 
 --- VALUE rb_obj_instance_variables(VALUE obj)
 
@@ -260,9 +260,9 @@ val ¤òÂåÆþ¤·¤Þ¤¹¡£
 
 --- static int top_const_get(ID id, VALUE *klassp)
 
-¥È¥Ã¥×¥ì¥Ù¥ë¤ÎÄê¿ô id ¤ò»²¾È¤·¤Þ¤¹¡£
-Äê¿ô id ¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤¿¤é¿¿¤òÊÖ¤· klassp ¤Ë
-¤½¤ÎÃÍ¤ò½ñ¤­¹þ¤ß¤Þ¤¹¡£Ì¤ÄêµÁ¤Ê¤éµ¶¤òÊÖ¤·¤Þ¤¹¡£
+ãƒˆãƒƒãƒ—ãƒ¬ãƒ™ãƒ«ã®å®šæ•° id ã‚’å‚ç…§ã—ã¾ã™ã€‚
+å®šæ•° id ãŒå®šç¾©ã•ã‚Œã¦ã„ãŸã‚‰çœŸã‚’è¿”ã— klassp ã«
+ãã®å€¤ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚æœªå®šç¾©ãªã‚‰å½ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- static VALUE trace_en(struct global_variable *var)
 

@@ -1,73 +1,73 @@
 = module Sync_m
 alias Synchronizer_m
 
-����å�Ʊ�������Ǥ��������ǽ�� reader/writer ���å���ǽ�� Mix-in �ˤ���󶡤��ޤ���
+スレッド同期機構である再入可能な reader/writer ロック機能を Mix-in により提供します。
 
-include�������饹�Ǥ�initialize��super��ƤӽФ��Ƥ���ɬ�פ�����ޤ���
+includeしたクラスではinitializeでsuperを呼び出しておく必要があります。
 
 
 == Constants
 --- UN
-���å�����Ƥ��ʤ����֤�ɽ������Ǥ���
+ロックされていない状態を表す定数です。
 
 --- EX
-��¾���å�����Ƥ�����֤�ɽ������Ǥ���
-���֥������Ȥξ��֤򹹿�������Τ褦�ˡ�
-1�ĤΥ���åɤ����֥������Ȥ�����Ū�˻��Ѥ����������Ѥ��ޤ���
-��¾���å����¾�Υ���åɤϥ��֥������Ȥ�ͭ/��¾���å��Ǥ��ޤ���
+排他ロックされている状態を表す定数です。
+オブジェクトの状態を更新する場合のように、
+1つのスレッドがオブジェクトを独占的に使用したい場合に用います。
+排他ロック中に他のスレッドはオブジェクトを共有/排他ロックできません。
 
 --- SH
-��ͭ���å�����Ƥ�����֤�ɽ������Ǥ���
-ʣ���Υ���åɤ�Ʊ���˥��֥������Ȥ���ѤǤ�������Ѥ��ޤ���
-ʣ���Υ���åɤ���ͭ���å����Ƥ����硢
-�ɤΥ���åɤ⥪�֥������Ȥ���¾���å��Ǥ��ޤ���
+共有ロックされている状態を表す定数です。
+複数のスレッドが同時にオブジェクトを使用できる場合に用います。
+複数のスレッドが共有ロックしている場合、
+どのスレッドもオブジェクトを排他ロックできません。
 
 == Instance Methods
 --- sync_mode -> Symbol
-���ߤΥ��å����֤��֤��ޤ���
+現在のロック状態を返します。
 
 --- sync_locked? -> bool
 --- locked? -> bool
-���å�����Ƥ��뤫�ɤ������֤��ޤ���
+ロックされているかどうかを返します。
 
 --- sync_shared? -> bool
 --- shared? -> bool
-��ͭ���å�����Ƥ��뤫�ɤ������֤��ޤ���
+共有ロックされているかどうかを返します。
 
 --- sync_exclusive? -> bool
 --- exclusive? -> bool
-��¾���å�����Ƥ��뤫�ɤ������֤��ޤ���
+排他ロックされているかどうかを返します。
 
 --- sync_try_lock(mode = EX) -> bool
 --- try_lock(mode = EX) -> bool
-���å����֤��ѹ����ޤ���
-�ѹ��Ǥ������ɤ�����true��false���֤����֥��å����ޤ���
+ロック状態を変更します。
+変更できたかどうかをtrueかfalseで返し、ブロックしません。
 
-@param mode �ѹ���ξ��֤���ꤷ�ޤ���
-            �̾ [[m:Sync_m::EX]], [[m:Sync_m::SH]] �Τɤ줫����ꤷ�ޤ���
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_lock(mode = EX) -> self
 --- lock(mode = EX) -> self
-���å����֤��ѹ����ޤ���
-�ѹ��Ǥ���ޤǸ��ߤΥ���åɤμ¹Ԥ�֥��å����ޤ���
+ロック状態を変更します。
+変更できるまで現在のスレッドの実行をブロックします。
 
-@param mode �ѹ���ξ��֤���ꤷ�ޤ���
-            �̾ [[m:Sync_m::EX]], [[m:Sync_m::SH]] �Τɤ줫����ꤷ�ޤ���
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_unlock(mode = EX) -> self
 --- unlock(mode = EX) -> self
-���å��������ޤ���
+ロックを解除します。
 
-@param mode �ѹ���ξ��֤���ꤷ�ޤ���
-            �̾ [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] �Τɤ줫����ꤷ�ޤ���
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_synchronize(mode = EX) {...} -> object
 --- synchronize(mode = EX) {...} -> object
-���å����֤��ѹ����ƥ֥��å���¹Ԥ��ޤ���
-�֥��å��μ¹Է�̤��֤��ޤ���
+ロック状態を変更してブロックを実行します。
+ブロックの実行結果を返します。
 
-@param mode �ѹ���ξ��֤���ꤷ�ޤ���
-            �̾ [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] �Τɤ줫����ꤷ�ޤ���
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_waiting -> [Thread]
 #@todo
@@ -117,32 +117,32 @@ include�������饹�Ǥ�initialize��super��ƤӽФ��Ƥ���ɬ�פ�����ޤ���
 
 = class Sync_m::Err < StandardError
 
-���Υ饤�֥��ǻ��Ѥ����㳰�δ��쥯�饹�Ǥ���
+このライブラリで使用する例外の基底クラスです。
 
 == Singleton Methods
 
 --- Fail(*options) -> ()
 
-���Ȥ��������Ƥ����å������򥻥åȤ����㳰��ȯ�������ޤ���
+自身に定義されているメッセージをセットして例外を発生させます。
 
 = class Sync_m::UnknownLocker < Sync_m::Err
 
-����åɤ����å�����Ƥ���٤������ߥ󥰤ǥ��å������ʤ�����ȯ�������㳰�Ǥ���
+スレッドがロックされているべきタイミングでロックさせない場合に発生する例外です。
 
 == Singleton Methods
 
 --- Fail(*options) -> ()
 
-���Ȥ��������Ƥ����å������򥻥åȤ����㳰��ȯ�������ޤ���
+自身に定義されているメッセージをセットして例外を発生させます。
 
 = class Sync_m::LockModeFailer < Sync_m::Err
 
-���ä����å��⡼�ɤ����åȤ���Ƥ������ȯ�������㳰�Ǥ���
+誤ったロックモードがセットされている場合に発生する例外です。
 
 == Singleton Methods
 
 --- Fail(*options) -> ()
 
-���Ȥ��������Ƥ����å������򥻥åȤ����㳰��ȯ�������ޤ���
+自身に定義されているメッセージをセットして例外を発生させます。
 
 

@@ -2,38 +2,38 @@ require rubygems
 require rubygems/source_index
 require rubygems/remote_fetcher
 
-[[c:Gem::SourceInfoCache]] �����ĥ���ȥ��ɽ������Υ饤�֥��Ǥ���
+[[c:Gem::SourceInfoCache]] が持つエントリを表すためのライブラリです。
 
 = class Gem::SourceInfoCacheEntry
 
-[[c:Gem::SourceInfoCache]] �����ĥ���ȥ��ɽ������Υ��饹�Ǥ���
+[[c:Gem::SourceInfoCache]] が持つエントリを表すためのクラスです。
 
 == Public Instance Methods
 
 --- refresh(source_uri, all) -> Gem::SourceIndex
 
-����������ǥå����򹹿����ޤ���
+ソースインデックスを更新します。
 
-@param source_uri �ǡ������������ URI ����ꤷ�ޤ���
+@param source_uri データを取得する URI を指定します。
 
-@param all ���ƤΥ���ǥå����򹹿����뤫�ɤ�������ꤷ�ޤ���
+@param all 全てのインデックスを更新するかどうかを指定します。
 
 --- size -> Fixnum
 
-����������ȥ�Υ������Ǥ���
+ソースエントリのサイズです。
 
-����������ǥå������Ѳ��������Ȥ򸡽Ф��뤿��˻��Ѥ��ޤ���
+ソースインデックスが変化したことを検出するために使用します。
 
 --- source_index -> Gem::SourceIndex
 
-���Υ���å��奨��ȥ���Ф��륽��������ǥå����Ǥ���
+このキャッシュエントリに対するソースインデックスです。
 
 == Singleton Methods
 
 --- new(si, size) -> Gem::SourceInfoCacheEntry
 
-����å���Υ���ȥ��������ޤ���
+キャッシュのエントリを作成します。
 
-@param si [[c:Gem::SourceIndex]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param si [[c:Gem::SourceIndex]] のインスタンスを指定します。
 
-@param size ����ȥ�Υ���������ꤷ�ޤ���
+@param size エントリのサイズを指定します。

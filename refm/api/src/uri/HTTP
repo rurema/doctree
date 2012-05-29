@@ -1,70 +1,70 @@
 = class URI::HTTP < URI::Generic
 
-HTTP URI ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTP URI ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 
 --- build(ary)     -> URI::HTTP
 --- build(hash)    -> URI::HTTP
 
-°ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿ URI ¹½À®Í×ÁÇ¤«¤é URI::HTTP ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
-°ú¿ô¤ÎÀµÅöÀ­¤ò¸¡ºº¤·¤Þ¤¹¡£
+å¼•æ•°ã§ä¸Žãˆã‚‰ã‚ŒãŸ URI æ§‹æˆè¦ç´ ã‹ã‚‰ URI::HTTP ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+å¼•æ•°ã®æ­£å½“æ€§ã‚’æ¤œæŸ»ã—ã¾ã™ã€‚
 
-@param ary ¹½À®Í×ÁÇ¤òÉ½¤¹ÇÛÎó¤òÍ¿¤¨¤Þ¤¹¡£Í×ÁÇ¤Ï¼¡¤Î½ç¤Ç¤¹¡£
+@param ary æ§‹æˆè¦ç´ ã‚’è¡¨ã™é…åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚è¦ç´ ã¯æ¬¡ã®é †ã§ã™ã€‚
 //emlist{
       [userinfo, host, port, path, query, fragment]
 //}
-@param hash ¹½À®Í×ÁÇ¤òÉ½¤¹¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Þ¤¹¡£¥Ï¥Ã¥·¥å¤Î¥­¡¼¤Ï  :scheme, :userinfo, :host, :port, :path, :query, :fragment ¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
+@param hash æ§‹æˆè¦ç´ ã‚’è¡¨ã™ãƒãƒƒã‚·ãƒ¥ã‚’ä¸Žãˆã¾ã™ã€‚ãƒãƒƒã‚·ãƒ¥ã®ã‚­ãƒ¼ã¯  :scheme, :userinfo, :host, :port, :path, :query, :fragment ã®ã„ãšã‚Œã‹ã§ã™ã€‚
 
-@raise URI::InvalidComponentError ³ÆÍ×ÁÇ¤¬Å¬¹ç¤·¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise URI::InvalidComponentError å„è¦ç´ ãŒé©åˆã—ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   newuri = URI::HTTP.build({:host => 'www.example.com', :path> => '/foo/bar'})  
   newuri = URI::HTTP.build([nil, "www.example.com", nil, "/path", "query", 'fragment'])
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)     -> URI::HTTP   
 
-ÈÆÍÑÅª¤Ê¹½À®Í×ÁÇ¤«¤é URI::HTTP ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£build
-¤È°Û¤Ê¤ê¡¢¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï°ú¿ô¤ÎÀµÅöÀ­¤ò¸¡ºº¤·¤Þ¤»¤ó¡£
+æ±Žç”¨çš„ãªæ§‹æˆè¦ç´ ã‹ã‚‰ URI::HTTP ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚build
+ã¨ç•°ãªã‚Šã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯å¼•æ•°ã®æ­£å½“æ€§ã‚’æ¤œæŸ»ã—ã¾ã›ã‚“ã€‚
 
-@param scheme ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param scheme æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param userinfo ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param userinfo æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param host ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param host æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param port ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param port æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param registry nil ¤òÍ¿¤¨¤Þ¤¹¡£
+@param registry nil ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param path ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param path æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param opaque ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param opaque æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param query ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param query æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param fragment ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Þ¤¹¡£
+@param fragment æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸Žãˆã¾ã™ã€‚
 
-@param arg_check ¿¿¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¤Ï¡¢³Æ°ú¿ô¤¬»ú¶çµ¬Â§¤ËÅ¬¹ç¤·¤Æ¤¤¤ë¤«ÈÝ¤«¤ò¸¡ºº¤·¤Þ¤¹¡£Å¬¹ç¤·¤Ê ¤¤¾ì¹ç¤ÏÎã³° URI::InvalidComponentError ¤¬µ¯¤ê¤Þ¤¹¡£
+@param arg_check çœŸãŒä¸Žãˆã‚‰ã‚ŒãŸå ´åˆã¯ã€å„å¼•æ•°ãŒå­—å¥è¦å‰‡ã«é©åˆã—ã¦ã„ã‚‹ã‹å¦ã‹ã‚’æ¤œæŸ»ã—ã¾ã™ã€‚é©åˆã—ãª ã„å ´åˆã¯ä¾‹å¤– URI::InvalidComponentError ãŒèµ·ã‚Šã¾ã™ã€‚
 
-@raise URI::InvalidURIError registry ¤Ë nil °Ê³°¤òÍ¿¤¨¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï°ú¿ô¤ÎÀµÅöÀ­¤Ï¡¢¤³¤ì°Ê³° ¸¡ºº¤·¤Þ¤»¤ó¡£
+@raise URI::InvalidURIError registry ã« nil ä»¥å¤–ã‚’ä¸ŽãˆãŸæ™‚ã«ç™ºç”Ÿã—ã¾ã™ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯å¼•æ•°ã®æ­£å½“æ€§ã¯ã€ã“ã‚Œä»¥å¤– æ¤œæŸ»ã—ã¾ã›ã‚“ã€‚
 
-@raise URI::InvalidComponentError ³ÆÍ×ÁÇ¤¬Å¬¹ç¤·¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise URI::InvalidComponentError å„è¦ç´ ãŒé©åˆã—ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- request_uri     -> String
 
-¼«¿È¤Î¡Öpath + '?' + query¡×¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
-query ¤¬ nil ¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢¼«¿È¤Î path ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®ã€Œpath + '?' + queryã€ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
+query ãŒ nil ã§ã‚ã‚‹å ´åˆã¯ã€è‡ªèº«ã® path ã‚’è¿”ã—ã¾ã™ã€‚
 
-path ¤¬¶õ¤Ç¤¢¤ë¾ì¹ç¤Ë¤Ï¡¢path ¤Ï¡Ö'/'¡×¤Ç¤¢¤ë¤È¤·¤Þ¤¹¡£
+path ãŒç©ºã§ã‚ã‚‹å ´åˆã«ã¯ã€path ã¯ã€Œ'/'ã€ã§ã‚ã‚‹ã¨ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require 'uri'
   u = URI.parse("http://example.com/search?q=xxx")
   p u.request_uri                                  #=> "/search?q=xxx"
 
 = class URI::HTTPS < URI::HTTP
 
-HTTPS URI ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£
+HTTPS URI ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚

@@ -1,85 +1,85 @@
 require rubygems
 
-���򤷤� Gem �Υ��󥹥ȡ����¹ԤǤ���ץ�åȥե�����Υꥹ�Ȥ򰷤��饤�֥��Ǥ���
+選択した Gem のインストールを実行できるプラットフォームのリストを扱うライブラリです。
 
 = class Gem::Platform
 
-���򤷤� Gem �Υ��󥹥ȡ����¹ԤǤ���ץ�åȥե�����Υꥹ�Ȥ򰷤����饹�Ǥ���
+選択した Gem のインストールを実行できるプラットフォームのリストを扱うクラスです。
 
 == Public Instance Methods
 
 --- ==(other) -> bool
 
-���Ȥ� other ��Ʊ���ץ�åȥե�����Ǥ�����˿����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身と other が同じプラットフォームである場合に真を返します。
+そうでない場合は偽を返します。
 
-Ʊ���ץ�åȥե�����Ǥ���Ȥϡ���ĤΥץ�åȥե������
-CPU, OS, �С������Ʊ���Ǥ���Ȥ������ȤǤ���
+同じプラットフォームであるとは、二つのプラットフォームの
+CPU, OS, バージョンが同じであるということです。
 
-@param other ����оݤΥ��֥������ȤǤ���
+@param other 比較対象のオブジェクトです。
 
 --- ===(other) -> bool
 
-���Ȥ� other �Υץ�åȥե����ब���פ�����˿����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身と other のプラットフォームが一致する場合に真を返します。
+そうでない場合は、偽を返します。
 
-�ץ�åȥե����ब���פ���Ȥϡ��ʲ��ξ������������ȤǤ���
+プラットフォームが一致するとは、以下の条件を満たすことです。
 
-  * Ʊ�� CPU �Ǥ��뤳�ȡ��ޤ��ϡ��ɤ��餫������ 'universal' �Ǥ��뤳��
-  * Ʊ�� OS �Ǥ��뤳��
-  * Ʊ���С������Ǥ��뤳�ȡ��ޤ��ϡ��ɤ��餫�������С�����������ʤ�����
+  * 同じ CPU であること、または、どちらか一方が 'universal' であること
+  * 同じ OS であること
+  * 同じバージョンであること、または、どちらか一方がバージョンを持たないこと
 
-@param other ����оݤΥ��֥������ȤǤ���
+@param other 比較対象のオブジェクトです。
 
 --- =~(other) -> bool
 
-���Ȥ� other �Υץ�åȥե����ब���פ�����˿����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身と other のプラットフォームが一致する場合に真を返します。
+そうでない場合は、偽を返します。
 
-other ��ʸ����ξ��ϡ��ޤ� [[c:Gem::Platform]] ���Ѵ����Ƥ�����Ӥ�Ԥ��ޤ���
-other ��ʸ����Ǥ� [[c:Gem::Platform]] �Ǥ�ʤ����� nil ���֤��ޤ���
+other が文字列の場合は、まず [[c:Gem::Platform]] に変換してから比較を行います。
+other が文字列でも [[c:Gem::Platform]] でもない場合は nil を返します。
 
-@param other ����оݤΥ��֥������ȤǤ���
+@param other 比較対象のオブジェクトです。
 
 @see [[m:Gem::Platform#===]]
 
 --- cpu -> String
 
-CPU �Υ������ƥ�������֤��ޤ���
+CPU のアーキテクチャを返します。
 
 --- cpu=(cpu)
 
-CPU �Υ������ƥ�����򥻥åȤ��ޤ���
+CPU のアーキテクチャをセットします。
 
-@param cpu CPU �Υ������ƥ��������ꤷ�ޤ���
+@param cpu CPU のアーキテクチャを指定します。
 
 --- os -> String
 
-OS �μ�����֤��ޤ���
+OS の種類を返します。
 
 --- os=(os)
 
-OS �μ���򥻥åȤ��ޤ���
+OS の種類をセットします。
 
-@param os OS �μ������ꤷ�ޤ���
+@param os OS の種類を指定します。
 
 --- to_a -> Array
 
-���Ȥ˥��åȤ���Ƥ��� CPU, OS, �С�����������Ȥ����֤��ޤ���
+自身にセットされている CPU, OS, バージョンを配列として返します。
 
 --- to_s -> String
 
-���Ȥ˥��åȤ���Ƥ��� CPU, OS, �С�������ʸ����Ȥ����֤��ޤ���
+自身にセットされている CPU, OS, バージョンを文字列として返します。
 
 --- version -> String
 
-�ץ�åȥե�����ΥС��������֤��ޤ���
+プラットフォームのバージョンを返します。
 
 --- version=(version)
 
-�ץ�åȥե�����ΥС������򥻥åȤ��ޤ���
+プラットフォームのバージョンをセットします。
 
-@param version �ץ�åȥե�����ΥС���������ꤷ�ޤ���
+@param version プラットフォームのバージョンを指定します。
 
 == Singleton Methods
 
@@ -91,17 +91,17 @@ OS �μ���򥻥åȤ��ޤ���
 
 --- new(arch)-> Gem::Platform
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param arch �������ƥ��������ꤷ�ޤ���
+@param arch アーキテクチャを指定します。
 
 == Constants
 
 --- CURRENT -> String
 
-����Υץ�åȥե���������� Gem ��ӥ�ɤ���Ȥ��˻��Ѥ��ޤ���
+特定のプラットフォーム向けの Gem をビルドするときに使用します。
 
 --- RUBY -> String
 
-Pure Ruby �� Gem �ϥХ��ʥ�ե������ӥ�ɤ��뤿��� [[m:Gem::Specification#extensions]]
-����Ѥ����ǽ��������ޤ���
+Pure Ruby の Gem はバイナリファイルをビルドするために [[m:Gem::Specification#extensions]]
+を使用する可能性があります。

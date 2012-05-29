@@ -7,12 +7,12 @@ require yaml/tag
 require yaml/stream
 require yaml/constants
 
-#@# yaml/encoding �������Ǥ������Ѥ��ʤ������ά��
+#@# yaml/encoding は内部でしか使用しないため省略。
 #@end
 
-��¤�����줿�ǡ�����ɽ������ե����ޥåȤǤ���YAML (YAML Ain't Markup Language) �򰷤�����Υ饤�֥��Ǥ���
+構造化されたデータを表現するフォーマットであるYAML (YAML Ain't Markup Language) を扱うためのライブラリです。
 
-��1: ��¤�����줿����
+例1: 構造化された配列
   require 'yaml'
 
   data = [ "Taro san", "Jiro san", "Saburo san"]
@@ -27,7 +27,7 @@ require yaml/constants
 
   p str_r == str_l #=> true
 
-��2: ��¤�����줿�ϥå���
+例2: 構造化されたハッシュ
 
   require 'yaml'
   require 'date'
@@ -52,7 +52,7 @@ require yaml/constants
 
   p str_r == YAML.load(str_l) #=> true
 
-��3: ��¤�����줿����
+例3: 構造化されたログ
 
   require 'yaml'
   require 'stringio'
@@ -63,14 +63,14 @@ require yaml/constants
   target: YAML
   version: 4
   log: | 
-    ���ä�����
-    ���֥��ȥ饯�Ȥ���������
+    例を加えた。
+    アブストラクトを修正した。
   ---
   time: 2008-02-24 17:00:35 +09:00
   target: YAML
   version: 3
   log: | 
-    ���֥��ȥ饯�Ȥ�񤤤��� 
+    アブストラクトを書いた。 
 
   EOT
   )
@@ -79,39 +79,39 @@ require yaml/constants
     printf "version %d\ntime %s\ntarget:%s\n%s\n", obj["version"], obj["time"], obj["target"], obj["log"]
   }
 
-=== �Хå�����ɤ�����
+=== バックエンドの選択
 
-[[lib:yaml]] �饤�֥��Ǥϡ��ʲ��Υ饤�֥���Хå�����ɤȤ��ƻ��Ѥ��ޤ���
+[[lib:yaml]] ライブラリでは、以下のライブラリをバックエンドとして使用します。
 
- * [[lib:syck]] �饤�֥��: YAML �С������ 1.0 �򰷤������Ǥ��ޤ���
+ * [[lib:syck]] ライブラリ: YAML バージョン 1.0 を扱う事ができます。
 #@since 1.9.2
- * [[lib:psych]] �饤�֥��: YAML �С������ 1.1 �򰷤������Ǥ��ޤ���
+ * [[lib:psych]] ライブラリ: YAML バージョン 1.1 を扱う事ができます。
 
-require "yaml" ������硢�ä˲��⤷�ʤ����
+require "yaml" した場合、特に何もしなければ
 #@since 1.9.3
-[[lib:psych]] �饤�֥�����Ѥ��ޤ���
+[[lib:psych]] ライブラリを使用します。
 #@else
-[[lib:syck]] �饤�֥�����Ѥ��ޤ���
+[[lib:syck]] ライブラリを使用します。
 #@end
 
-�ǥե���Ȱʳ��ΥХå�����ɤ���Ѥ�������硢[[lib:yaml]] �饤�֥���
-require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
+デフォルト以外のバックエンドを使用したい場合、[[lib:yaml]] ライブラリを
+require する前に [[lib:psych]] か [[lib:syck]] を require してください。
 
-��1: [[lib:psych]] ����Ѥ�����
+例1: [[lib:psych]] を使用する場合
 
   require "psych"
   require "yaml"
   YAML.load(...)
 
-��2: [[lib:syck]] ����Ѥ�����
+例2: [[lib:syck]] を使用する場合
 
   require "syck"
   require "yaml"
   YAML.load(...)
 
-�ޤ���[[lib:yaml]] �� require ������Ǥ⡢YAML::ENGINE.yamler ��
-"psych" ������������� [[lib:psych]] ����ѤǤ��ޤ���([[lib:syck]] �ξ�
-���Ʊ�ͤǤ�)
+また、[[lib:yaml]] を require した後でも、YAML::ENGINE.yamler に
+"psych" を代入する事で [[lib:psych]] を使用できます。([[lib:syck]] の場
+合も同様です)
 
   require "yaml"
   require "psych"
@@ -120,12 +120,12 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
 
 #@end
 
-=== �����λ���
+=== タグの指定
 
-!ruby/sym :foo �ʤɤΤ褦�˥�������ꤹ�뤳�Ȥǡ��ɤ߹��߻��˵��Ҥ�����
-�η������Ǥ��ޤ���
+!ruby/sym :foo などのようにタグを指定することで、読み込み時に記述した値
+の型を指定できます。
 
-��:
+例:
 
   require 'yaml'
   p YAML.load(<<EOS)
@@ -134,21 +134,21 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
   EOS
   # => :foo
 
-[[lib:yaml]] �Ǥϡ�Ruby �����˰ʲ��Υ������륿���򰷤��ޤ���
+[[lib:yaml]] では、Ruby 向けに以下のローカルタグを扱えます。
 
- * !ruby/array: [[c:Array]] ���֥�������
- * !ruby/class: [[c:Class]] ���֥�������
- * !ruby/hash:  [[c:Hash]] ���֥�������
- * !ruby/module:  [[c:Module]] ���֥�������
- * !ruby/regexp:  [[c:Regexp]] ���֥�������
- * !ruby/range: [[c:Range]] ���֥�������
- * !ruby/string: [[c:String]] ���֥�������
- * !ruby/struct: [[c:Struct]] ���֥�������
- * !ruby/sym(�⤷���� !ruby/symbol): [[c:Symbol]] ���֥�������
- * !ruby/exception: �㳰���֥�������
- * !ruby/object:<���饹̾>: �嵭�ʳ��Υ��֥�������
+ * !ruby/array: [[c:Array]] オブジェクト
+ * !ruby/class: [[c:Class]] オブジェクト
+ * !ruby/hash:  [[c:Hash]] オブジェクト
+ * !ruby/module:  [[c:Module]] オブジェクト
+ * !ruby/regexp:  [[c:Regexp]] オブジェクト
+ * !ruby/range: [[c:Range]] オブジェクト
+ * !ruby/string: [[c:String]] オブジェクト
+ * !ruby/struct: [[c:Struct]] オブジェクト
+ * !ruby/sym(もしくは !ruby/symbol): [[c:Symbol]] オブジェクト
+ * !ruby/exception: 例外オブジェクト
+ * !ruby/object:<クラス名>: 上記以外のオブジェクト
 
-��:
+例:
 
   require 'yaml'
   p YAML.load(<<EOS)
@@ -160,9 +160,9 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
   EOS
   # => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
 
-������ tag:ruby.yaml.org,2002:array �Τ褦�˻��ꤹ�����Ǥ��ޤ���
+これらは tag:ruby.yaml.org,2002:array のように指定する事もできます。
 
-��:
+例:
 
   require 'yaml'
   p YAML.load(<<EOS)
@@ -172,12 +172,12 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
   EOS
   # => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
 
-��ʬ������������饹�ʤɤ� !ruby/object:<���饹̾> ����ꤷ�ޤ����ʤ���
-�ɤ߹�����ˤϴ��ˤ��Υ��饹������ѤߤǤʤ����ɤ߹���ޤ���
+自分で定義したクラスなどは !ruby/object:<クラス名> を指定します。なお、
+読み込む場合には既にそのクラスが定義済みでないと読み込めません。
 
-�ޤ����������ͤ���ꤹ����ǥ��󥹥����ѿ��������Ǥ��ޤ���
+また、キーと値を指定する事でインスタンス変数を代入できます。
 
-��1:
+例1:
 
   require 'yaml'
   
@@ -194,7 +194,7 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
   EOS
   # => #<Foo:0xf743f754 @bar="test.modified">
 
-��2:
+例2:
 
   require 'yaml'
   
@@ -209,13 +209,13 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
   EOS
   # => #<Foo::Bar:0xf73907b8>
 
-�ޤ���YAML �������Ѵ�����ݤΥ������ѹ���������硢to_yaml_type �᥽��
-�ɤ򥪡��Х饤�ɤ��Ƥ���������
+また、YAML 形式に変換する際のタグを変更したい場合、to_yaml_type メソッ
+ドをオーバライドしてください。
 #@since 1.9.2
-([[lib:syck]] �Τ�)
+([[lib:syck]] のみ)
 #@end
 
-��:
+例:
 
 #@since 1.9.3
   require "syck"
@@ -228,32 +228,32 @@ require �������� [[lib:psych]] �� [[lib:syck]] �� require ���Ƥ���������
   end
   p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
 
-=== ����
+=== 注意
 
-̵̾���饹�� YAML �������Ѵ������ [[c:TypeError]] ��ȯ�����ޤ����ޤ���
-[[c:IO]] �� [[c:Thread]] ���֥������Ȥʤɤϥ��󥹥����ѿ������֥�����
-�Ȥξ��֤��ݻ����Ƥ��ʤ����ᡢ�Ѵ��ϤǤ��ޤ�����YAML.load �������˴���
-�������Ǥ��ʤ��������դ��Ƥ���������
+無名クラスを YAML 形式に変換すると [[c:TypeError]] が発生します。また、
+[[c:IO]] や [[c:Thread]] オブジェクトなどはインスタンス変数がオブジェク
+トの状態を保持していないため、変換はできますが、YAML.load した時に完全
+に復元できない事に注意してください。
 
-ɸ��ź�դ� yaml ��Ϣ�饤�֥��ˤ� 1.8 �ϡ�1.9 �ϤȤ�˰ʲ��Τ褦��
-Ruby �ȼ��γ�ĥ�����¤�����ޤ���ɸ��ź�ե饤�֥��ʳ��� yaml �򰷤���
-���֥�����Ѥ�����ʤɤ����դ��Ƥ���������
+標準添付の yaml 関連ライブラリには 1.8 系、1.9 系ともに以下のような
+Ruby 独自の拡張、制限があります。標準添付ライブラリ以外で yaml を扱うラ
+イブラリを使用する場合などに注意してください。
 
- * ":foo" �Τ褦��ʸ����Ϥ��Τޤ� [[c:Symbol]] �Ȥ��ư�����
- * "y" �� "n" �Ͽ����ͤȤ��ư����ʤ�
- * !!str �Τ褦��û�̷ϤΥ������Х륿���ϰ����ʤ�
+ * ":foo" のような文字列はそのまま [[c:Symbol]] として扱える
+ * "y" や "n" は真偽値として扱われない
+ * !!str のような短縮系のグローバルタグは扱われない
 #@since 1.9.2
-   ([[lib:syck]] �Τ�)
+   ([[lib:syck]] のみ)
 #@end
- * !<tag:yaml.org,2002:str> "foo" �Τ褦�˥����򰷤��ʤ���
-   !tag:yaml.org,2002:str "foo" �Τ褦�˵��Ҥ���ɬ�פ�����
+ * !<tag:yaml.org,2002:str> "foo" のようにタグを扱えない。
+   !tag:yaml.org,2002:str "foo" のように記述する必要がある
 
-#@# �Ǹ�Τ�Τ����餫����Զ����Ȼפ��ޤ���psych �饤�֥��ʤɤ�
-#@# �б�������������С�ʬ�����ɲä���ɬ�פ�����ޤ���
-#@# �ޤ���!str "foo" �Τ褦�ʥ������륿���򸵤˷�����ꤹ����ˡ�ˤĤ���
-#@# �Ͽ���ʤ�����Ŭ�ڤȹͤ������Ҥ��Ƥ��ޤ���
+#@# 最後のものは当初からの不具合だと思われます。psych ライブラリなどで
+#@# 対応される事があれば、分岐を追加する必要があります。
+#@# また、!str "foo" のようなローカルタグを元に型を指定する方法について
+#@# は触れない方が適切と考え、記述していません。
 
-=== ����
+=== 参考
 
 YAML Specification
 
@@ -268,25 +268,25 @@ YAML4R
 
 Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
- * �ץ�����ޡ��Τ���� YAML ���� (�����): [[url:http://jp.rubyist.net/magazine/?0009-YAML]]
- * �ץ�����ޡ��Τ���� YAML ���� (�����): [[url:http://jp.rubyist.net/magazine/?0010-YAML]]
- * �ץ�����ޡ��Τ���� YAML ���� (������): [[url:http://jp.rubyist.net/magazine/?0011-YAML]]
- * �ץ�����ޡ��Τ���� YAML ���� (������): [[url:http://jp.rubyist.net/magazine/?0012-YAML]]
- * �ץ�����ޡ��Τ���� YAML ���� (õ����): [[url:http://jp.rubyist.net/magazine/?0013-YAML]]
+ * プログラマーのための YAML 入門 (初級編): [[url:http://jp.rubyist.net/magazine/?0009-YAML]]
+ * プログラマーのための YAML 入門 (中級編): [[url:http://jp.rubyist.net/magazine/?0010-YAML]]
+ * プログラマーのための YAML 入門 (実践編): [[url:http://jp.rubyist.net/magazine/?0011-YAML]]
+ * プログラマーのための YAML 入門 (検証編): [[url:http://jp.rubyist.net/magazine/?0012-YAML]]
+ * プログラマーのための YAML 入門 (探索編): [[url:http://jp.rubyist.net/magazine/?0013-YAML]]
 
-����¾
+その他
 
  * Ruby with YAML: [[url:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
 
 = module YAML
 
-YAML (YAML Ain't Markup Language) �򰷤��⥸�塼��Ǥ���
+YAML (YAML Ain't Markup Language) を扱うモジュールです。
 
 #@since 1.9.2
-YAML ���֥������Ȥϼºݤ� [[c:Psych]] ���֥������ȡ�[[c:Syck]] ���֥���
-���ȤΤɤ��餫�Ǥ�������¾�Υ��֥������Ȥ�Ʊ�ͤ˼��Τ��̤Υ��֥�������
-�Ǥ����⤷��ǧ�������᥽�åɤε��Ҥ����Ĥ���ʤ����ϡ����줾��Υ饤
-�֥����ǧ���Ƥ���������
+YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
+クトのどちらかです。その他のオブジェクトも同様に実体は別のオブジェクト
+です。もし確認したいメソッドの記述が見つからない場合は、それぞれのライ
+ブラリを確認してください。
 
   require "psych"
   require "syck"
@@ -304,27 +304,27 @@ YAML ���֥������Ȥϼºݤ� [[c:Psych]] ���֥������ȡ�[[c:Syck]] ���֥���
 
 --- ENGINE -> YAML::EngineManager
 
-[[c:YAML::EngineManager]] ���֤��ޤ���
+[[c:YAML::EngineManager]] を返します。
 
 @see [[m:YAML::EngineManager#yamler]], [[m:YAML::EngineManager#yamler=]]
 
 = class YAML::EngineManager
 
-[[lib:yaml]] �ΥХå�����ɤ�������륯�饹�Ǥ���
+[[lib:yaml]] のバックエンドを管理するクラスです。
 
 == Class Methods
 
 --- new -> YAML::EngineManager
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- yamler -> String
 
-������ΥХå�����ɤ�ʸ������֤��ޤ���
+使用中のバックエンドを文字列で返します。
 
-��:
+例:
 
   require "psych"
   require "yaml"
@@ -332,15 +332,15 @@ YAML ���֥������Ȥϼºݤ� [[c:Psych]] ���֥������ȡ�[[c:Syck]] ���֥���
 
 --- yamler=(engine)
 
-���Ѥ���Хå�����ɤ����ꤷ�ޤ���
+使用するバックエンドを設定します。
 
-�ޤ���engine ���ޤ� require ����Ƥ��ʤ��ä����� require ���ޤ���
+また、engine がまだ require されていなかった場合は require します。
 
-@param engine �Хå�����ɤ�ʸ����ǻ��ꤷ�ޤ���
+@param engine バックエンドを文字列で指定します。
 
-@raise ArgumentError ̤�б��ΥХå�����ɤ���ꤷ������ȯ�����ޤ���
+@raise ArgumentError 未対応のバックエンドを指定した場合に発生します。
 
-��:
+例:
 
   require "psych"
   require "yaml"
@@ -351,8 +351,8 @@ YAML ���֥������Ȥϼºݤ� [[c:Psych]] ���֥������ȡ�[[c:Syck]] ���֥���
 
 --- syck? -> bool
 
-[[lib:syck]] �饤�֥��������ξ��� true ���֤��ޤ�������ʳ��ξ��
-�� false ���֤��ޤ���
+[[lib:syck]] ライブラリを使用中の場合に true を返します。それ以外の場合
+は false を返します。
 
   require "psych"
   require "yaml"

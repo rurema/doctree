@@ -2,7 +2,7 @@ require webrick/config
 require webrick/httpstatus
 require webrick/httpauth/authenticator
 
-HTTP ¤Î Digest Ç§¾Ú¤Î¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+HTTP ã® Digest èªè¨¼ã®ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(digestauth/HTTPAuth__DigestAuth)
 #@include(digestauth/HTTPAuth__ProxyDigestAuth)

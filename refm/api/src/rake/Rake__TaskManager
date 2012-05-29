@@ -1,108 +1,108 @@
 = module Rake::TaskManager
 
-��������������뤿��Υ⥸�塼��Ǥ���
+タスクを管理するためのモジュールです。
 
 == Public Instance Methods
 
 --- [](task_name, scopes = nil) -> Rake::Task
 
-Ϳ����줿������̾�˥ޥå����륿�����򸡺����ޤ���
+与えられたタスク名にマッチするタスクを検索します。
 
-@param task_name ������̾����ꤷ�ޤ���
+@param task_name タスク名を指定します。
 
-@param scopes �������פ���ꤷ�ޤ���
+@param scopes スコープを指定します。
 
 --- clear
 
-���ƤΥ������ȥ롼��򥯥ꥢ���ޤ���
+全てのタスクとルールをクリアします。
 
 --- create_rule(*args){ ... }
 
-Ϳ����줿�ѥ�᡼���˽��äƥ롼���������ޤ���
+与えられたパラメータに従ってルールを作成します。
 
-@param args �롼���Ϳ����ѥ�᡼������ꤷ�ޤ���
+@param args ルールに与えるパラメータを指定します。
 
 --- current_scope -> Array
 
-���ߤΥ������פ��֤��ޤ���
+現在のスコープを返します。
 
 --- define_task(task_class, *args){ ... } -> Rake::Task
 
-��������������ޤ���
+タスクを定義します。
 
-@param task_class ���������饹����ꤷ�ޤ���
+@param task_class タスククラスを指定します。
 
-@param args ���������Ϥ��ѥ�᡼������ꤷ�ޤ���
+@param args タスクに渡すパラメータを指定します。
 
 --- enhance_with_matching_rule(task_name, level = 0) -> Rake::Task | nil
 
-Ϳ����줿������̾�˥ޥå������롼�뤬¸�ߤ�����ϡ����Υ������˸��Ĥ��ä��롼���
-�����������ȥ����������ɲä����֤��ޤ���
+与えられたタスク名にマッチしたルールが存在する場合は、そのタスクに見つかったルールの
+事前タスクとアクションを追加して返します。
 
-@param task_name ��������̾������ꤷ�ޤ���
+@param task_name タスクの名前を指定します。
 
-@param level ���ߤΥ롼����Υͥ��Ȥο�������ꤷ�ޤ���
+@param level 現在のルール解決のネストの深さを指定します。
 
-@raise RuntimeError �롼��β����˥����С��ե�����������ȯ�����ޤ���
+@raise RuntimeError ルールの解決時にオーバーフローした場合に発生します。
 
 --- in_namespace(name){|name_space| ... } -> Array
 
-Ϳ����줿̾����̾�����֤ǥ֥��å���ɾ�����ޤ���
+与えられた名前の名前空間でブロックを評価します。
 
-@param name ̾������ꤷ�ޤ���
+@param name 名前を指定します。
 
 
 --- intern(task_class, task_name) -> Rake::Task
 
-�������򸡺����ޤ���
+タスクを検索します。
 
-�����������Ĥ���и��Ĥ��ä����������֤��ޤ���
-���Ĥ���ʤ���С�Ϳ����줿���Υ���������������֤��ޤ���
+タスクが見つかれば見つかったタスクを返します。
+見つからなければ、与えられた型のタスクを作成して返します。
 
-@param task_class �������Υ��饹����ꤷ�ޤ���
+@param task_class タスクのクラスを指定します。
 
-@param task_name ��������̾������ꤷ�ޤ���
+@param task_name タスクの名前を指定します。
 
 --- last_description -> String
 --- last_comment -> String
 
-Rakefile ��κǿ��ξܺ����������פ��뤿��Υ᥽�åɤǤ���
+Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 
 --- last_description=(description)
 
-�ǿ��ξܺ������򥻥åȤ��ޤ���
+最新の詳細説明をセットします。
 
 --- lookup(task_name, initial_scope = nil) -> Rake::Task | nil
 
-Ϳ����줿������̾�˥ޥå����륿�����򸡺����ޤ���
+与えられたタスク名にマッチするタスクを検索します。
 
-���Υ᥽�åɤϡ��ե����륿������롼�����������˥�������õ���ޤ���
-���̤ʥ������� ('^' �ʤ�) ��¸�ߤ��ޤ����������פ���ά���줿����
-���ߤΥ������פ���Ѥ��ޤ���
+このメソッドは、ファイルタスクやルールを合成せずにタスクを探します。
+特別なスコープ ('^' など) が存在します。スコープが省略された場合は
+現在のスコープを使用します。
 
-@param task_name ������̾����ꤷ�ޤ���
+@param task_name タスク名を指定します。
 
-@param initial_scope �������륹�����פ���ꤷ�ޤ���
+@param initial_scope 検索するスコープを指定します。
 
 --- resolve_args(args) -> Array
 
-��������롼���Ϳ����줿�ѥ�᡼�����ᤷ�ޤ���
+タスクやルールに与えられたパラメータを解釈します。
 
-@param args �ѥ�᡼������ꤷ�ޤ���
+@param args パラメータを指定します。
 
-@return [task_name, arg_name_list, prerequisites] ���֤��ޤ���
+@return [task_name, arg_name_list, prerequisites] を返します。
 
 --- synthesize_file_task(task_name) -> Rake::FileTask | nil
 
-Ϳ����줿������̾���Ȥ˥ե����륿������������ޤ���
+与えられたタスク名をもとにファイルタスクを合成します。
 
-@param task_name ������̾����ꤷ�ޤ���
+@param task_name タスク名を指定します。
 
-@return Ϳ����줿������̾��Ʊ̾�Υե����뤬¸�ߤ�����ϡ��ե����륿��������������֤��ޤ���
-        �����Ǥʤ����� nil ���֤��ޤ���
+@return 与えられたタスク名と同名のファイルが存在する場合は、ファイルタスクを作成して返します。
+        そうでない場合は nil を返します。
 
-@raise RuntimeError ������������Ǥ��ʤ��ä�����ȯ�����ޤ���
+@raise RuntimeError タスクを合成できなかった場合に発生します。
 
 --- tasks -> Array
 
-���ƤΥ������ꥹ�Ȥ��֤��ޤ���
+全てのタスクリストを返します。

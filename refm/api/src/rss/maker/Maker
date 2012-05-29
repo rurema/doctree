@@ -3,72 +3,72 @@
 == Singleton Methods
 --- make(version, &block)
 #@todo
-version�ˤ�"1.0"�ޤ���"0.9"�ޤ���
-"0.91"�ޤ���"2.0"����ꤷ�ޤ���"0.9"
-��"0.91"��Ʊ���Ǥ��뤳�Ȥ����դ��Ƥ���������
+versionには"1.0"または"0.9"または
+"0.91"または"2.0"を指定します．"0.9"
+と"0.91"は同じであることに注意してください．
 
-block��¹Ԥ������Ȥ�maker���֥������Ȥ���
-RSS���֥������Ȥ����������֤��ޤ���
+blockを実行したあとのmakerオブジェクトから
+RSSオブジェクトを生成して返します．
 
 = class RSS::Maker::RSSBase
 
-RSS�Υ롼�����Ǥ��������륪�֥������ȤǤ���
+RSSのルート要素を生成するオブジェクトです．
 
-maker.channel��Ŭ�ڤ����ꤷ�ʤ����RSS����������ޤ���
+maker.channelを適切に設定しなければRSSは生成されません．
 
 == Instance Methods
 
 --- version
 #@todo
-��������XML�ΥС��������֤��ޤ���
+作成するXMLのバージョンを返します．
 
 --- version=()
 #@todo
-��������XML�ΥС����������ꤷ�ޤ���
+作成するXMLのバージョンを設定します．
 
 --- encoding
 #@todo
-��������XML�Υ��󥳡��ǥ��󥰤��֤��ޤ����ǥե���Ȥ�
-UTF-8�Ǥ���
+作成するXMLのエンコーディングを返します．デフォルトは
+UTF-8です．
 
 --- encoding=()
 #@todo
-��������XML�Υ��󥳡��ǥ��󥰤����ꤷ�ޤ���maker
-�����ꤹ��ݤΥ��󥳡��ǥ��󥰤Ϥ����ǻ��ꤷ����Τˤ�
-��ɬ�פ�����ޤ���
+作成するXMLのエンコーディングを設定します．maker
+に設定する際のエンコーディングはここで指定したものにす
+る必要があります．
 
 --- standalone
 #@todo
-��������XML��standalone���֤��ޤ���
+作成するXMLのstandaloneを返します．
 
 --- standalone=()
 #@todo
-��������XML��standalone�����ꤷ�ޤ���
+作成するXMLのstandaloneを設定します．
 
 --- rss_version
 #@todo
-��������RSS�ΥС��������֤��ޤ���
+作成するRSSのバージョンを返します．
 
 --- xml_stylesheets
 #@todo
-xml_stylesheet��������륪�֥������Ȥ��֤��ޤ���
+xml_stylesheetを管理するオブジェクトを返します．
 
 --- channel
 #@todo
-channel���Ǥ��������륪�֥������Ȥ��֤��ޤ���
+channel要素を生成するオブジェクトを返します．
 
 --- image
 #@todo
-image���Ǥ��������륪�֥������Ȥ��֤��ޤ���
+image要素を生成するオブジェクトを返します．
 
 --- items
 #@todo
-item���Ǥ��������륪�֥������Ȥ�������륪�֥������Ȥ�
-�֤��ޤ���
+item要素を生成するオブジェクトを管理するオブジェクトを
+返します．
 
 --- textinput
 #@todo
-textinput���Ǥ��������륪�֥������Ȥ��֤��ޤ���
+textinput要素を生成するオブジェクトを返します．
 
 = class RSS::Maker::RSS10 < RSS::Maker::RSSBase
 

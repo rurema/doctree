@@ -1,32 +1,32 @@
-Pure Ruby ¤Î XML ¥Ñ¡¼¥µ¤Ç¤¹¡£
-DOM ¥¹¥¿¥¤¥ë¤È SAX ¥¹¥¿¥¤¥ë¤ÎÎ¾Êı¤ò¥«¥Ğ¡¼¤·¤Æ¤¤¤Ş¤¹¡£
+Pure Ruby ã® XML ãƒ‘ãƒ¼ã‚µã§ã™ã€‚
+DOM ã‚¹ã‚¿ã‚¤ãƒ«ã¨ SAX ã‚¹ã‚¿ã‚¤ãƒ«ã®ä¸¡æ–¹ã‚’ã‚«ãƒãƒ¼ã—ã¦ã„ã¾ã™ã€‚
 
-  * DOM¤Ã¤İ¤¤API
+  * DOMã£ã½ã„API
     * rexml/document
     * rexml/element
     * rexml/attribute
     * rexml/namespace
-    * rexml/text (¤ª¤Ş¤±¤Ç rexml/cdata ¤â¡©)
+    * rexml/text (ãŠã¾ã‘ã§ rexml/cdata ã‚‚ï¼Ÿ)
     * rexml/instruction
 
-  * SAX¤Ã¤İ¤¤API
+  * SAXã£ã½ã„API
     * rexml/parsers/streamparser
     * rexml/streamlistener
 
     * rexml/parsers/sax2parser
     * rexml/sax2listener
 
-=== ¥ê¥ó¥¯
+=== ãƒªãƒ³ã‚¯
 
   * REXML Home
     [[url:http://www.germane-software.com/software/rexml]]
-  * API ¥ê¥Õ¥¡¥ì¥ó¥¹
+  * API ãƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹
     [[url:http://www.germane-software.com/software/rexml_doc]]
-    ÆüËÜ¸ìÌõ [[url:http://pub.cozmixng.org/~kou/rexml-doc-ja/]]
-  * ¥Á¥å¡¼¥È¥ê¥¢¥ë
+    æ—¥æœ¬èªè¨³ [[url:http://pub.cozmixng.org/~kou/rexml-doc-ja/]]
+  * ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«
     [[url:http://www.germane-software.com/software/rexml/docs/tutorial.html]]
-    ÆüËÜ¸ìÌõ [[url:http://www.baykit.org/~makotos/cgi-bin/wiliki.cgi?REXML%A5%C1%A5%E5%A1%BC%A5%C8%A5%EA%A5%A2%A5%EB&l=jp]]
-  * ÆüËÜ¸ì
+    æ—¥æœ¬èªè¨³ [[url:http://www.baykit.org/~makotos/cgi-bin/wiliki.cgi?REXML%A5%C1%A5%E5%A1%BC%A5%C8%A5%EA%A5%A2%A5%EB&l=jp]]
+  * æ—¥æœ¬èª
     [[url:http://www.cozmixng.org/~kou/ruby/rexml/]]
     [[url:http://www.cozmixng.org/~kou/ruby/rexml/reference]]
 

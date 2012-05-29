@@ -1,14 +1,14 @@
-[[c:RDoc::RubyLex]] �� [[c:RDoc::RubyToken]] ��Ȥä� Ruby �Υ���������
-�ɤΥѡ����򵭽Ҥ��뤿��Υ⥸�塼���������륵�֥饤�֥��Ǥ���
+[[c:RDoc::RubyLex]] と [[c:RDoc::RubyToken]] を使って Ruby のソースコー
+ドのパーサを記述するためのモジュールを定義するサブライブラリです。
 
 = module RDoc::Parser::RubyTools
 
 include RDoc::RubyToken
 
-[[c:RDoc::RubyLex]] �� [[c:RDoc::RubyToken]] ��Ȥä� Ruby �Υ���������
-�ɤΥѡ����򵭽Ҥ��뤿��Υ᥽�åɤ��������⥸�塼��Ǥ���
+[[c:RDoc::RubyLex]] と [[c:RDoc::RubyToken]] を使って Ruby のソースコー
+ドのパーサを記述するためのメソッドを定義するモジュールです。
 
-[[c:RDoc::Parser]] ��Ѿ����Ƥ��ʤ����ᡢ�ѡ������饹�Ȥ��Ƥ����ѤǤ���
-����
+[[c:RDoc::Parser]] を継承していないため、パーサクラスとしては利用できま
+せん。
 
-�饤�֥��������ǻ��Ѥ��ޤ���
+ライブラリの内部で使用します。

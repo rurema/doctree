@@ -1,36 +1,36 @@
 = class Socket < BasicSocket
 
 #@until 1.9.1
-�����åȤ��Τ�Τ��Ф��륷���ƥॳ�����٥�Υ�����������
-���륯�饹��
+ソケットそのものに対するシステムコールレベルのアクセスを提供
+するクラス。
 
-Perl �Υ����åȤ��Ф��륢��������Ʊ��٥�ε�ǽ��
-�󶡤��Ƥ��ޤ������Υ��饹�Ǥϥ����åȥ��ɥ쥹�� [[m:Array#pack]]
-���줿ʸ����ǻ��ꤷ�ޤ�
-([[ref:lib:socket#pack_string]]�򻲾�)��
+Perl のソケットに対するアクセスと同レベルの機能を
+提供しています。このクラスではソケットアドレスは [[m:Array#pack]]
+された文字列で指定します
+([[ref:lib:socket#pack_string]]を参照)。
 
-����Ū�ʥ����åȥץ�����ߥ󥰤Ϥ����٥��
-[[c:TCPSocket]] ���饹��
-[[c:TCPServer]] ���饹���Ѥ�
-�ƹԤ��뤳�Ȥ�¿�������Υ��饹�Ϥ��ޤ��Ѥ����ޤ���
+一般的なソケットプログラミングはより高レベルの
+[[c:TCPSocket]] クラスや
+[[c:TCPServer]] クラスを用い
+て行われることが多く、このクラスはあまり用いられません。
 #@else
 
-���ѥ����åȥ��饹��
+汎用ソケットクラス。
 
-�����ƥॳ�����٥뤫�����ε�ǽ�ޤǤ��󶡤��ޤ���
+システムコールレベルから高水準の機能までを提供します。
 
-�����åȥ��֥������Ȥ�������������Ū����ˡ�Ȥ���
-[[m:Socket.new]] ������ޤ������ʲ��Τ褦�ʤ��������
-�᥽�åɤ�����ޤ���
-  * TCP �Υ��饤����ȥ����å� [[m:Socket.tcp]] [[m:TCPSocket.open]]
-  * TCP �Υ����Х����å� [[m:Socket.tcp_server_loop]],
+ソケットオブジェクトを生成する汎用的な方法として
+[[m:Socket.new]] がありますが、以下のようなより便利な
+メソッドがあります。
+  * TCP のクライアントソケット [[m:Socket.tcp]] [[m:TCPSocket.open]]
+  * TCP のサーバソケット [[m:Socket.tcp_server_loop]],
     [[m:Socket.tcp_server_sockets]], [[m:TCPServer.open]]
-  * UNIX socket �Υ��饤����ȥ����å� [[m:Socket.unix]] [[m:UNIXSocket.open]]
-  * UNIX socket �Υ����Х����å� [[m:Socket.unix_server_loop]], 
+  * UNIX socket のクライアントソケット [[m:Socket.unix]] [[m:UNIXSocket.open]]
+  * UNIX socket のサーバソケット [[m:Socket.unix_server_loop]], 
     [[m:Socket.unix_server_socket]], [[m:UNIXServer.open]]
-�ޤ������饤����ȥ����åȤ� [[c:Addrinfo#connect]] �ǡ�
-�����Х����åȤ� [[c:Addrinfo#bind]] �� [[c:Addrinfo#listen]] ��
-��뤳�Ȥ�Ǥ��ޤ���
+また、クライアントソケットは [[c:Addrinfo#connect]] で、
+サーバソケットを [[c:Addrinfo#bind]] や [[c:Addrinfo#listen]] で
+作ることもできます。
 
 #@end
 
@@ -44,95 +44,95 @@ Perl �Υ����åȤ��Ф��륢��������Ʊ��٥�ε�ǽ��
 --- new(domain, type, protocol=0) -> Socket
 #@end
 
-�����������åȤ��������ޤ���domain��type��
-protocol �ϥ��󥯥롼�ɥե�����ˤ�������ǻ��ꤷ��
-�����ۤȤ�ɤ������ Socket::AF_INET �Τ褦��
-Socket ���饹������Ȥ����������Ƥ��ޤ���domain
-��type �˴ؤ��Ƥϡ�"AF_INET",
-"SOCK_STREAM" �Τ褦��ʸ����Ǥ����Ǥ��ޤ�����ʸ
-����Ǥ��٤Ƥε�ǽ�����Ǥ����ݾڤϤ���ޤ���
+新しいソケットを生成します。domain、type、
+protocol はインクルードファイルにある定数で指定しま
+す。ほとんどの定数は Socket::AF_INET のように
+Socket クラスの定数として定義されています。domain
+とtype に関しては、"AF_INET",
+"SOCK_STREAM" のように文字列でも指定できますが、文
+字列ですべての機能を指定できる保証はありません。
 
-�㤨�С�IPv4 �� TCP �����åȤϰʲ��Τ褦����������ޤ���
+例えば、IPv4 の TCP ソケットは以下のように生成されます。
 
   s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
 
-�ʤ���[[man:socket(2)]] �� domain �����ˤ����� AF_ �� PF_ �Τɤ�����������Ѥ��뤫�ˤĤ��ƤϺ��𤬤���ޤ�����
-Stevens �Ρ�UNIX �ͥåȥ���ץ�����ߥ���2�� Vol.1��4.2��˽Ҥ٤��Ƥ���褦�ˡ�
-����Ū�ˤϤɤ���Ǥ�����ʤ����ޤ�����¸�Υ����ǥ��󥰽����Ȥ��� AF_ ���Ѥ����뤳�Ȥ�¿�����ᡢ
-�����Ǥ� AF_ ����Ѥ��Ƥ��ޤ���
+なお、[[man:socket(2)]] の domain 引数において AF_ と PF_ のどちらの定数を使用するかについては混乱がありますが、
+Stevens の「UNIX ネットワークプログラミング第2版 Vol.1」4.2節に述べられているように、
+現実的にはどちらでも問題なく、また、既存のコーディング習慣として AF_ が用いられることが多いため、
+ここでは AF_ を使用しています。
 
-@param domain �㤨�С�<sys/socket.h> �Τ褦�ʥ��󥯥롼�ɥե�������������Ƥ����������ꤷ�ޤ���
-@param type   �㤨�С�<sys/socket.h> �Τ褦�ʥ��󥯥롼�ɥե�������������Ƥ����������ꤷ�ޤ���
-@param protocol �ץ��ȥ���˻��Ѥ�����ͤ���ꤷ�ޤ���
+@param domain 例えば、<sys/socket.h> のようなインクルードファイルに定義されている定数を指定します。
+@param type   例えば、<sys/socket.h> のようなインクルードファイルに定義されている定数を指定します。
+@param protocol プロトコルに使用する数値を指定します。
 
 --- getaddrinfo(nodename, servname, family=nil, socktype=nil, protocol=nil, flags=nil) -> Array
 
-[[RFC:2553]]��������줿
-getaddrinfo() �ε�ǽ���󶡤��륯�饹�᥽�åɡ����δؿ���
-gethostbyname() �� getservbyname() ������Ȥ����Ѱդ���Ƥ��ꡢ
-IP �ΥС������˰�¸���ʤ��ץ�������񤯤����ɸ��Ū�� API �Ǥ���
+[[RFC:2553]]で定義された
+getaddrinfo() の機能を提供するクラスメソッド。この関数は
+gethostbyname() や getservbyname() の代わりとして用意されており、
+IP のバージョンに依存しないプログラムを書くための標準的な API です。
 
-@param nodename �ۥ���̾����ꤷ�ޤ��� ɬ�ܰ����Ǥ��� ([[ref:lib:socket#host_format]]�򻲾�)
+@param nodename ホスト名を指定します。 必須引数です。 ([[ref:lib:socket#host_format]]を参照)
 
-@param servname �����ӥ�̾����ꤷ�ޤ��� ɬ�ܰ����Ǥ��� ([[ref:lib:socket#service_format]]�򻲾�)
+@param servname サービス名を指定します。 必須引数です。 ([[ref:lib:socket#service_format]]を参照)
 
-@param family ���ɥ쥹�ե��ߥ꡼��[[m:Socket::Constants::AF_INET]] �ʤɡ�AF_ �ǻϤޤ��������ꤷ�ޤ���
+@param family アドレスファミリー。[[m:Socket::Constants::AF_INET]] など、AF_ で始まる定数を指定します。
 
-@param socktype �����åȥ����ס� [[m:Socket::Constants::SOCK_STREAM]] �ʤɡ� SOCK_ �ǻϤޤ��������ꤷ�ޤ���
+@param socktype ソケットタイプ。 [[m:Socket::Constants::SOCK_STREAM]] など、 SOCK_ で始まる定数を指定します。
 
-@param protocol �ץ��ȥ��롣[[m:Socket::Constants::IPPROTO_IP]] �ʤɡ�IPPROTO_ �ǻϤޤ��������ꤷ�ޤ���
+@param protocol プロトコル。[[m:Socket::Constants::IPPROTO_IP]] など、IPPROTO_ で始まる定数を指定します。
 
-@param flags [[man:getaddrinfo(3)]] ����3�����˻��ꤹ�� addrinfo ��¤�Τ� ai_flags ���Ф��������� Fixnum�� Socket::AI_PASSIVE�ʤɡ�
+@param flags [[man:getaddrinfo(3)]] の第3引数に指定する addrinfo 構造体の ai_flags メンバに相当する Fixnum。 Socket::AI_PASSIVEなど。
 
-@return 7�Ĥ����Ǥ���ʤ륢�ɥ쥹����˴ؤ���������֤��ޤ���
+@return 7つの要素からなるアドレス情報に関する配列を返します。
 
-=== ���ɥ쥹����ˤĤ���
-���ɥ쥹����Ȥ�7�Ĥ����Ǥ���ʤ뼡�η�������Ǥ���
+=== アドレス情報について
+アドレス情報とは7つの要素からなる次の形の配列です。
 
-  * ��0���� - ���ɥ쥹�ե��ߥ꡼ (String)
-  * ��1���� - �ݡ����ֹ� (Integer)
-  * ��2���� - �ۥ���̾ (String)
-  * ��3���� - ���ɥ쥹 (String)
-  * ��4���� - ���ɥ쥹�ե��ߥ꡼���б����� Integer
-  * ��5���� - �����åȥ����פ��б����� Integer
-  * ��6���� - �ץ��ȥ�����б����� Integer
+  * 第0要素 - アドレスファミリー (String)
+  * 第1要素 - ポート番号 (Integer)
+  * 第2要素 - ホスト名 (String)
+  * 第3要素 - アドレス (String)
+  * 第4要素 - アドレスファミリーに対応する Integer
+  * 第5要素 - ソケットタイプに対応する Integer
+  * 第6要素 - プロトコルに対応する Integer
 
-=== ɬ�ܰ����ˤĤ���
-ɬ�ܰ����ΰ�̣�ϰʲ����̤�Ǥ���
+=== 必須引数について
+必須引数の意味は以下の通りです。
 
-  * nodename - �ۥ���̾
-    ([[ref:lib:socket#host_format]]�򻲾�)
-  * servname - �����ӥ�̾
-    ([[ref:lib:socket#service_format]]�򻲾�)
+  * nodename - ホスト名
+    ([[ref:lib:socket#host_format]]を参照)
+  * servname - サービス名
+    ([[ref:lib:socket#service_format]]を参照)
 
-=== ��ά��ǽ�ʰ����ˤĤ���
-�Ĥ�ΰ����Ͼ�ά��ǽ�Ǥ���
+=== 省略可能な引数について
+残りの引数は省略可能です。
 
-  * family - ���ɥ쥹�ե��ߥ꡼��
-    [[m:Socket::Constants::AF_INET]] �ʤɡ�AF_ �ǻϤޤ��������ꤷ�ޤ���
-  * socktype - �����åȥ����ס�
-    [[m:Socket::Constants::SOCK_STREAM]] �ʤɡ�SOCK_ �ǻϤޤ���������
-    ���ޤ���
-  * protocol - �ץ��ȥ��롣
-    [[m:Socket::Constants::IPPROTO_IP]] �ʤɡ�IPPROTO_ �ǻϤޤ�������
-    �ꤷ�ޤ���
-  * flags - [[man:getaddrinfo(3)]] ����3�����˻��ꤹ�� addrinfo ��¤�Τ�
-    ai_flags ���Ф��������� Fixnum��
-    Socket::AI_PASSIVE��
-    Socket::AI_CANONNAME��
+  * family - アドレスファミリー。
+    [[m:Socket::Constants::AF_INET]] など、AF_ で始まる定数を指定します。
+  * socktype - ソケットタイプ。
+    [[m:Socket::Constants::SOCK_STREAM]] など、SOCK_ で始まる定数を指定
+    します。
+  * protocol - プロトコル。
+    [[m:Socket::Constants::IPPROTO_IP]] など、IPPROTO_ で始まる定数を指
+    定します。
+  * flags - [[man:getaddrinfo(3)]] の第3引数に指定する addrinfo 構造体の
+    ai_flags メンバに相当する Fixnum。
+    Socket::AI_PASSIVE、
+    Socket::AI_CANONNAME、
     Socket::AI_NUMERICHOST
-    ���Ѱդ���Ƥ����礬����ޤ���
+    が用意されている場合があります。
 
-=== ����ΰ�̣�ˤĤ���
-�����˻���Ǥ�������ΰ�̣�ˤĤ��Ƥ�
-[[man:getaddrinfo(3)]] �򻲾Ȥ��Ʋ�������
+=== 定数の意味について
+引数に指定できる定数の意味については
+[[man:getaddrinfo(3)]] を参照して下さい。
 
-=== ������
-��:
+=== 使用例
+例:
 
-#@# Linux�Ǥ�servname�˥ݡ����ֹ�(0��21��"0"��"21"�ʤ�)��
-#@# getaddrinfo: Servname not supported for ai_socktype (SocketError)��
-#@# �ʤäƻȤ��ʤ��褦�Ǥ���
+#@# Linuxではservnameにポート番号(0や21や"0"や"21"など)は
+#@# getaddrinfo: Servname not supported for ai_socktype (SocketError)に
+#@# なって使えないようです。
   p Socket.getaddrinfo(Socket.gethostname, "ftp")
   #=> [["AF_INET", 21, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6]]
   
@@ -143,70 +143,70 @@ IP �ΥС������˰�¸���ʤ��ץ�������񤯤����ɸ��Ū�� API �Ǥ���
 
 --- getnameinfo(sa, flags = 0) -> Array
 
-[[RFC:2553]] ��������줿 getnameinfo() �ε�ǽ���󶡤��륯
-�饹�᥽�åɡ� gethostbyaddr() �� getservbyport() ����
-���Ȥ����Ѱդ���Ƥ��ޤ���IP�ΥС������˰�¸���ʤ��ץ�������
-�񤯤����ɸ��Ū��API�Ǥ���
+[[RFC:2553]] で定義された getnameinfo() の機能を提供するク
+ラスメソッド。 gethostbyaddr() や getservbyport() の代
+わりとして用意されています。IPのバージョンに依存しないプログラムを
+書くための標準的なAPIです。
 
-@param sa ʸ���������Ϳ���ޤ���
+@param sa 文字列か配列を与えます。
 
-@param flags ��ά��ǽ����2���� flags �ˤ� [[man:getnameinfo(3)]] ����7���ܤΰ����˻��ꤹ�� flags ���������� [[c:Fixnum]] ��Ϳ���ޤ���
+@param flags 省略可能な第2引数 flags には [[man:getnameinfo(3)]] の第7番目の引数に指定する flags に相当する [[c:Fixnum]] を与えます。
 
-@return ������֤����������Ǥϥ��ɥ쥹�ȥݡ��Ȥ�ɽ��ʸ����Ǥ���
+@return 配列を返し、その要素はアドレスとポートを表す文字列です。
 
 #@since 1.9.1
 @see [[m:Addrinfo#getnameinfo]]
 #@end
 
-=== ���� sa �ˤĤ���
-���� sa �ˤ�ʸ���������Ϳ���ޤ���ʸ����ξ��� sockaddr ��¤��
-�Υѥå�ʸ�����Ϳ���ޤ�������Ū�ˤ� [[m:BasicSocket#getsockname]]
-���ͤ����ѤǤ��ޤ��������Ϳ������ˤϡ����Ǥ�3�Ĥξ���4�Ĥξ��
-������ޤ���
+=== 引数 sa について
+引数 sa には文字列か配列を与えます。文字列の場合は sockaddr 構造体
+のパック文字列を与えます。具体的には [[m:BasicSocket#getsockname]]
+の値が利用できます。配列を与える場合には、要素が3つの場合と4つの場合
+があります。
 
-  * ���Ǥ�3�Ĥξ��:
-       [���ɥ쥹�ե��ߥ꡼, �����ӥ�, �ۥ���]
-  * ���Ǥ�4�Ĥξ��:
-       [���ɥ쥹�ե��ߥ꡼, �����ӥ�, Ǥ��, ���ɥ쥹��ɽ��ʸ����]
+  * 要素が3つの場合:
+       [アドレスファミリー, サービス, ホスト]
+  * 要素が4つの場合:
+       [アドレスファミリー, サービス, 任意, アドレスを表す文字列]
 
-���ɥ쥹�ե��ߥ꡼�ˤ� Socket::AF_INET ���������¾��ʸ����
-�� "AF_INET" �⤷���� "AF_INET6" �⤷���� nil ��
-����Ǥ��ޤ���������IPv6���Ȥ��ʤ��褦�˥���ѥ��뤵��Ƥ������
-"AF_INET6" ��̵���ʻ���Ȥʤ�ޤ������ɥ쥹�ե��ߥ꡼��
-nil ����ꤹ�뤳�Ȥ� Socket::AF_UNSPEC ����ꤹ�뤳��
-�������Ǥ���
+アドレスファミリーには Socket::AF_INET 等の定数の他に文字列
+で "AF_INET" もしくは "AF_INET6" もしくは nil が
+指定できます。ただしIPv6が使えないようにコンパイルされている場合は
+"AF_INET6" は無効な指定となります。アドレスファミリーに
+nil を指定することは Socket::AF_UNSPEC を指定すること
+と等価です。
 
-�����ӥ����ۥ��Ȥλ���˴ؤ��Ƥ� [[ref:lib:socket#service_format]]��
-[[ref:lib:socket#host_format]]�򻲾Ȥ��Ƥ���������
+サービス、ホストの指定に関しては [[ref:lib:socket#service_format]]、
+[[ref:lib:socket#host_format]]を参照してください。
 
-���Ǥ�3�Ĥξ��Ǥ⡢�ۥ��Ȥˤϥ��ɥ쥹�����Ǥ��ޤ��������Ǥ�4��
-�ξ��ˤϡ��Ǹ�����Ǥ�̾����褷�ʤ����Ȥ��ݾڤ���ޤ���
-#@# 4�Ĥ�
-#@# ����3���ܤΰ����äƤʤ�����Ѥʥ��󥿥ե������Ǥ��͡�4���ܤΰ���
-#@# �� nil �ξ�������3�Ĥ�Ʊ�������ˤʤ��Ǥ��͡��ɤ������櫓�Ǥ���
-#@# �ʤäƤ�Τ����褯�狼��ޤ��󡣥ۥ��Ȼ���Ͼ��3���ܤ����Ǥˤ���
-#@# [���ɥ쥹�ե��ߥ꡼, �����ӥ�, �ۥ���, �ե饰] �Ȥ���4���ܤ����Ǥ�
-#@# ̾����褦��̤����ꤹ��󤸤������ä���Ǥ��礦���͡�-���餤
+要素が3つの場合でも、ホストにはアドレスを指定できますが、要素が4つ
+の場合には、最後の要素を名前解決しないことが保証されます。
+#@# 4つの
+#@# 場合の3番目の引数ってなんだか変なインタフェースですね。4番目の引数
+#@# が nil の場合は要素3つと同じ扱いになるんですね。どういうわけでこう
+#@# なってるのかがよくわかりません。ホスト指定は常に3番目の要素にして
+#@# [アドレスファミリー, サービス, ホスト, フラグ] として4番目の要素で
+#@# 名前解決うんぬんを指定するんじゃダメだったんでしょうかね？-あらい
 #@#2002-01-01
 
-=== ����flags�ˤĤ���
-��ά��ǽ����2���� flags �ˤ� [[man:getnameinfo(3)]]
-����7���ܤΰ����˻��ꤹ�� flags ���������� [[c:Fixnum]] ��Ϳ���ޤ���
+=== 引数flagsについて
+省略可能な第2引数 flags には [[man:getnameinfo(3)]]
+の第7番目の引数に指定する flags に相当する [[c:Fixnum]] を与えます。
 
-����flags�������뤿�������Ȥ���
-Socket::NI_MAXHOST��
-Socket::NI_MAXSERV��
-Socket::NI_NOFQDN��
-Socket::NI_NUMERICHOST��
-Socket::NI_NAMEREQD��
-Socket::NI_NUMERICSERV��
+引数flagsを構成するための定数として
+Socket::NI_MAXHOST、
+Socket::NI_MAXSERV、
+Socket::NI_NOFQDN、
+Socket::NI_NUMERICHOST、
+Socket::NI_NAMEREQD、
+Socket::NI_NUMERICSERV、
 Socket::NI_DGRAM
-���Ѱդ���Ƥ����礬����ޤ���
+が用意されている場合があります。
 
-����������ΰ�̣�ˤĤ��Ƥ� [[man:getnameinfo(3)]]�򻲾�
-���Ʋ�������
+これらの定数の意味については [[man:getnameinfo(3)]]を参照
+して下さい。
 
-=== ������
+=== 使用例
 
   Socket.getnameinfo(Socket.sockaddr_in('21','127.0.0.1'))
   #=> ["localhost", "ftp"]
@@ -216,41 +216,41 @@ Socket::NI_DGRAM
 
 --- gethostbyaddr(host, type = Socket::AF_INET) -> Array
 
-sockaddr ��¤�Τ�ѥå�����ʸ���󤫤�ۥ��Ⱦ�����֤��ޤ���
-�ۥ��Ⱦ���ι�¤�� [[m:Socket.gethostbyname]] ��Ʊ���Ǥ���
-type �ˤϡ����ɥ쥹������(�ǥե���Ȥ�
-Socket::AF_INET)����ꤷ�ޤ���
+sockaddr 構造体をパックした文字列からホスト情報を返します。
+ホスト情報の構造は [[m:Socket.gethostbyname]] と同じです。
+type には、アドレスタイプ(デフォルトは
+Socket::AF_INET)を指定します。
 
-@param host �ۥ��Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param host ホストを文字列で指定します。
 
-@param type ���ɥ쥹������(�ǥե���Ȥ�Socket::AF_INET)����ꤷ�ޤ���
+@param type アドレスタイプ(デフォルトはSocket::AF_INET)を指定します。
 
-@raise SocketError [[man:gethostbyaddr(3)]] �θƤӽФ��˥��顼�����ä�����ȯ�����ޤ���
+@raise SocketError [[man:gethostbyaddr(3)]] の呼び出しにエラーがあった場合に発生します。
 
 --- gethostbyname(host) -> Array
 
-�ۥ���̾�ޤ��� IP ���ɥ쥹(������ˡ�˴ؤ��Ƥ�
-[[ref:lib:socket#host_format]]�򻲾�)
-����ۥ��Ȥξ�����֤��ޤ���
+ホスト名または IP アドレス(指定方法に関しては
+[[ref:lib:socket#host_format]]を参照)
+からホストの情報を返します。
 
-@param host ʸ����ǥۥ��Ȥ���ꤷ�ޤ���
+@param host 文字列でホストを指定します。
 
-@return �ۥ��Ⱦ����ޤ�������Ǥ�������֤��ޤ���
+@return ホスト情報を含んだ４要素の配列を返します。
 
-=== �֤��ͤΥۥ��Ⱦ���ˤĤ���
-�ۥ��Ⱦ���ϰʲ��� 4 ���Ǥ������ɽ������Ƥ��ޤ���
+=== 返り値のホスト情報について
+ホスト情報は以下の 4 要素の配列で表現されています。
 
-  * �ۥ���̾
-  * �ۥ��Ȥ���̾������
-  * �ۥ��ȤΥ��ɥ쥹������ (�������)
-  * �ۥ��ȤΥ��ɥ쥹
+  * ホスト名
+  * ホストの別名の配列
+  * ホストのアドレスタイプ (整数定数)
+  * ホストのアドレス
 
-������ǤΥۥ��ȤΥ��ɥ쥹�ϡ��ƥ��ɥ쥹�����פ��б�����
-C �Υ��ɥ쥹��¤�Τ� pack ����ʸ����Ȥ���ɽ������Ƥ��ޤ���
-�㤨�Х��ɥ쥹�����פ� AF_INET (��� 2) �ʤ��
-Socket.unpack_sockaddr_in �� unpack �Ǥ��ޤ���
+第四要素のホストのアドレスは、各アドレスタイプに対応する
+C のアドレス構造体を pack した文字列として表現されています。
+例えばアドレスタイプが AF_INET (定数 2) ならば
+Socket.unpack_sockaddr_in で unpack できます。
 
-=== ������
+=== 使用例
 
   irb(main):009:0> Socket.gethostbyname("210.251.121.214")
   ["helium.ruby-lang.org", ["helium"], 2, "\322\373y\326"]
@@ -260,41 +260,41 @@ Socket.unpack_sockaddr_in �� unpack �Ǥ��ޤ���
 
 --- gethostname -> String
 
-�����ƥ��ɸ��Υۥ���̾��������ޤ���
+システムの標準のホスト名を取得します。
 
-�ۥ��Ȥ���̾�䥢�ɥ쥹�ʤ�¾�ξ��������ˤ�
-[[m:Socket.getaddrinfo]] ��ȤäƤ���������
-��������������Բ�ǽ�ʾ��⤢��ޤ���
+ホストの別名やアドレスなど他の情報を得るには
+[[m:Socket.getaddrinfo]] を使ってください。
+ただし、これは不可能な場合もあります。
 
-��:
+例:
 
   p Socket.gethostname   #=> "helium.ruby-lang.org"
 
 --- getservbyname(service, proto = "tcp") -> Fixnum
 
-service, proto���б�����ݡ����ֹ����
-���ޤ���proto�ξ�ά�ͤ�"tcp"�Ǥ���
+service, protoに対応するポート番号を返
+します。protoの省略値は"tcp"です。
 
-@param service �����ӥ�̾��ʸ����ǻ��ꤷ�ޤ����㤨�С�"ftp", "telnet" ���������ޤ���
-@param proto  �ץ��ȥ���̾��ʸ����ǻ��ꤷ�ޤ�����ά�ͤ�"tcp" �Ǥ���
+@param service サービス名を文字列で指定します。例えば、"ftp", "telnet" が相当します。
+@param proto  プロトコル名を文字列で指定します。省略値は"tcp" です。
 
-@return �ݡ����ֹ���������֤��ޤ���
+@return ポート番号を整数で返します。
 
 #@if (version >= "1.8.0")
 --- sockaddr_in(port, host) -> String
 --- pack_sockaddr_in(port, host) -> String
 
-���ꤷ�����ɥ쥹��[[ref:lib:socket#pack_string]]
-���֤��ޤ���port �ϡ��ݡ����ֹ��ɽ�� [[c:Fixnum]] ���뤤�ϡ��ݡ���
-�ֹ桢�����ӥ�̾��ɽ��ʸ����Ǥ���
+指定したアドレスを[[ref:lib:socket#pack_string]]
+で返します。port は、ポート番号を表す [[c:Fixnum]] あるいは、ポート
+番号、サービス名を表す文字列です。
 
-@param port  �ݡ����ֹ��ɽ�� [[c:Fixnum]] ���뤤�ϡ��ݡ����ֹ桢�����ӥ�̾��ɽ��ʸ�������ꤷ�ޤ���
+@param port  ポート番号を表す [[c:Fixnum]] あるいは、ポート番号、サービス名を表す文字列を指定します。
 
-@param host �ۥ��Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param host ホストを文字列で指定します。
 
-@return ���ꤷ�����ɥ쥹���֤��ޤ���
+@return 指定したアドレスを返します。
 
-��:
+例:
 
   require 'socket'
   p Socket.sockaddr_in("echo", "localhost")
@@ -307,12 +307,12 @@ service, proto���б�����ݡ����ֹ����
 --- sockaddr_un(path) -> String
 --- pack_sockaddr_un(path) -> String
 
-���ꤷ�����ɥ쥹��[[ref:lib:socket#pack_string]]
-���֤��ޤ���
+指定したアドレスを[[ref:lib:socket#pack_string]]
+で返します。
 
-@param path �ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param path パスを文字列で指定します。
 
-��:
+例:
 
   require 'socket'
   p Socket.sockaddr_un("/tmp/.X11-unix/X0")
@@ -322,27 +322,27 @@ service, proto���б�����ݡ����ֹ����
 --- pair(domain, type, protocol) -> Array
 --- socketpair(domain, type, protocol) -> Array
 
-��ߤ˷�礵�줿�����åȤΥڥ���ޤ�2���Ǥ�������֤��ޤ���
-�����λ���� [[m:Socket.open]] ��Ʊ���Ǥ���
+相互に結合されたソケットのペアを含む2要素の配列を返します。
+引数の指定は [[m:Socket.open]] と同じです。
 
-@param domain [[m:Socket.open]] �򻲾Ȥ��Ƥ���������
+@param domain [[m:Socket.open]] を参照してください。
 
-@param type   [[m:Socket.open]] �򻲾Ȥ��Ƥ���������
+@param type   [[m:Socket.open]] を参照してください。
 
-@param protocol [[m:Socket.open]] �򻲾Ȥ��Ƥ���������
+@param protocol [[m:Socket.open]] を参照してください。
 
 @see [[m:Socket.open]]
 
 #@if (version >= "1.8.0")
 --- unpack_sockaddr_in(sockaddr) -> Array
 
-[[ref:lib:socket#pack_string]]��
-unpack �������ɥ쥹���֤��ޤ����֤�����ͤ� [port, ipaddr]
-������Ǥ���
+[[ref:lib:socket#pack_string]]を
+unpack したアドレスを返します。返される値は [port, ipaddr]
+の配列です。
 
-@param sockaddr �����åȥ��ɥ쥹��¤�Τ� pack ����ʸ����[[ref:lib:socket#pack_string]]����ꤷ�ޤ���
+@param sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
 
-��:
+例:
 
   require 'socket'
   p Socket.unpack_sockaddr_in(Socket.sockaddr_in("echo", "localhost"))
@@ -354,12 +354,12 @@ unpack �������ɥ쥹���֤��ޤ����֤�����ͤ� [port, ipaddr]
 #@if (version >= "1.8.0")
 --- unpack_sockaddr_un(sockaddr) -> String
 
-[[ref:lib:socket#pack_string]]��
-unpack ���������åȥѥ�̾���֤��ޤ���
+[[ref:lib:socket#pack_string]]を
+unpack したソケットパス名を返します。
 
-@param sockaddr �����åȥ��ɥ쥹��¤�Τ� pack ����ʸ����[[ref:lib:socket#pack_string]]����ꤷ�ޤ���
+@param sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
 
-��:
+例:
 
   require 'socket'
   p Socket.unpack_sockaddr_un(Socket.sockaddr_un("/tmp/.X11-unix/X0"))
@@ -368,12 +368,12 @@ unpack ���������åȥѥ�̾���֤��ޤ���
 #@since 1.9.1
 --- getservbyport(port, protocol_name="tcp") -> String
 
-�ݡ����ֹ���б����륵���ӥ�������̾���֤��ޤ���
-#@#rdoc �� Obtains the port number for _port_. �ä���?
+ポート番号に対応するサービスの正式名を返します。
+#@#rdoc の Obtains the port number for _port_. って変?
 
-@param port �ݡ����ֹ�
-@param protocol_name "tcp" �� "udp" �ʤɤΥץ��ȥ���̾
-@return �����ӥ�������̾
+@param port ポート番号
+@param protocol_name "tcp" や "udp" などのプロトコル名
+@return サービスの正式名
 
    Socket.getservbyport(80)         #=> "www"
    Socket.getservbyport(514, "tcp") #=> "shell"
@@ -381,41 +381,41 @@ unpack ���������åȥѥ�̾���֤��ޤ���
 #@end
 #@since 1.9.2
 --- accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
-sockets �ǥ����Х����åȤ������ꡢ��³���Ԥ�������
-���饤����ȤȤ���³����Ω���뤿�Ӥ˥֥��å��ˤ�����³
-�����åȤ��Ϥ��ƤӽФ��ޤ���
+sockets でサーバソケットを受け取り、接続を待ち受け、
+クライアントとの接続が確立するたびにブロックにその接続
+ソケットを渡し呼び出します。
 
-�֥��å��ΰ����ϥ��饤����Ȥ���³���������åȥ��֥������Ȥ�
-[[c:Addrinfo]] ���֥������ȤǤ���
+ブロックの引数はクライアントと接続したソケットオブジェクトと
+[[c:Addrinfo]] オブジェクトです。
 
-[[m:Socket.tcp_server_loop]] ��Ʊ�͡��֥��å���
-�༡Ū�˸ƤӽФ���ޤ����Ĥޤ�֥��å�����λ����ޤ�
-������³�� accept ����ޤ���
-������̿�����������
-����åɤΤ褦������¹Ե�����Ȥ�ɬ�פ�����ޤ���
+[[m:Socket.tcp_server_loop]] と同様、ブロックは
+逐次的に呼び出されます。つまりブロックか終了するまで
+次の接続は accept されません。
+並列に通信したい場合は
+スレッドのような並列実行機構を使う必要があります。
 
-@param sockets �Ԥ��������������Х����åȤ�����
+@param sockets 待ち受けたいサーバソケットの配列
 
 @see [[m:Socket.tcp_server_loop]], [[m:Socket.unix_server_loop]],
 
 --- ip_address_list -> [Addrinfo]
-��������� IP ���ɥ쥹��������֤��ޤ���
+ローカルの IP アドレスを配列で返します。
 
 --- tcp(host, port, local_host=nil, local_port=nil) -> Socket
 --- tcp(host, port, local_host=nil, local_port=nil) {|socket| ... } -> object
-TCP/IP �� host:port ����³���륽���åȥ��֥������Ȥ�������ޤ���
+TCP/IP で host:port に接続するソケットオブジェクトを作成します。
 
-local_host �� local_port ����ꤷ����硢�����åȤ򤽤��˥Х���ɤ��ޤ���
+local_host や local_port を指定した場合、ソケットをそこにバインドします。
 
-�֥��å����Ϥ��ȡ��������������åȤ򤽤Υ֥��å����Ϥ��ƤӽФ��ޤ���
-�֥��å���λ���˥����åȥ��֥������Ȥ��Ĥ��ޤ���
+ブロックを渡すと、生成したソケットをそのブロックに渡し呼び出します。
+ブロック終了時にソケットオブジェクトを閉じます。
 
-@param host ��³��Υۥ���̾
-@param port ��³��Υݡ����ֹ�
-@param local_host ��³���Υۥ���̾
-@param local_port ��³���Υݡ����ֹ�
-@return �֥��å��դ��ǸƤФ줿���ϥ֥��å����֤����ͤǤ���
-        �֥��å��ʤ��ǸƤФ줿���ϥ����åȥ��֥������Ȥ��֤��ޤ���
+@param host 接続先のホスト名
+@param port 接続先のポート番号
+@param local_host 接続元のホスト名
+@param local_port 接続元のポート番号
+@return ブロック付きで呼ばれた場合はブロックが返した値です。
+        ブロックなしで呼ばれた場合はソケットオブジェクトを返します。
 
   Socket.tcp("www.ruby-lang.org", 80) {|sock|
     sock.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
@@ -424,29 +424,29 @@ local_host �� local_port ����ꤷ����硢�����åȤ򤽤��˥Х���ɤ��ޤ���
   }
 --- tcp_server_loop(port){|sock,addr| ...} -> ()
 --- tcp_server_loop(host, port){|sock,addr| ...} -> ()
-TCP/IP �� host:port ���Ԥ������륵����¦�Υ����åȤ��������
-��������³���������뤴�Ȥ˥֥��å���ƤӽФ��ޤ���
+TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し、
+新しい接続を受け入れるごとにブロックを呼び出します。
 
-�֥��å��ˤϿ�������³��ɽ�������åȥ��֥������Ȥȡ�
-���饤����ȥ��ɥ쥹��ɽ�� [[c:Addrinfo]] ���֥������Ȥ��Ϥ���ޤ���
+ブロックには新しい接続を表すソケットオブジェクトと、
+クライアントアドレスを表す [[c:Addrinfo]] オブジェクトが渡されます。
 
-�֥��å��μ¹Ԥ�����äƤ⥽���åȤ� close ����ޤ���
-���ץꥱ�������¦������Ū�� close ����ɬ�פ�����ޤ���
+ブロックの実行が終わってもソケットは close されません。
+アプリケーション側が明示的に close する必要があります。
 
-���Υ᥽�åɤϥ֥��å����༡Ū�˸ƤӽФ��ޤ���
-�Ĥޤ�֥��å�����꥿���󤹤�ޤǼ��Υ��ͥ��������������ޤ���
-���Τ��ᡢƱ����ʣ���Υ��饤����Ȥ��̿�����������
-����åɤΤ褦�����󵡹���Ȥ�ɬ�פ�����ޤ���
+このメソッドはブロックを逐次的に呼び出します。
+つまりブロックからリターンするまで次のコネクションを受け入れません。
+そのため、同時に複数のクライアントと通信したい場合は
+スレッドのような並列機構を使う必要があります。
 
-�����ФΥ����åȥ��ɥ쥹����뤿���
-[[m:Addrinfo.getaddrinfo]] ���Ѥ����뤳�Ȥ����դ��Ƥ���������
-[[m:Addrinfo.getaddrinfo]] ��ʣ���Υ��ɥ쥹���֤�(IPv4 �� IPv6 �ʤ�)
-��礬���ꡢ���ξ�礽�����Ƥ��Ѥ����ޤ����Ĥޤ� IPv4 �� IPv6 ��
-ξ�����Ԥ������ޤ���getaddrinfo �� 0 �ĤΥ��ɥ쥹���֤����ϥ��顼
-�ˤʤ�ޤ���1�İʾ���֤������ˤ��줬�Ѥ����ޤ���
+サーバのソケットアドレスを決めるために
+[[m:Addrinfo.getaddrinfo]] が用いられることに注意してください。
+[[m:Addrinfo.getaddrinfo]] は複数のアドレスを返す(IPv4 と IPv6 など)
+場合があり、その場合その全てが用いられます。つまり IPv4 と IPv6 の
+両方を待ち受けます。getaddrinfo が 0 個のアドレスを返す場合はエラー
+になります。1つ以上を返した場合にそれが用いられます。
 
-  # �༡Ū�� echo ������
-  # ���٤˰�ĤΥ��饤����Ȥ�����갷���ʤ�
+  # 逐次的な echo サーバ
+  # 一度に一つのクライアントした取り扱えない
   Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
     begin
       IO.copy_stream(sock, sock)
@@ -455,9 +455,9 @@ TCP/IP �� host:port ���Ԥ������륵����¦�Υ����åȤ��������
     end
   }
   
-  # ����åɤ�Ȥä� echo ������
-  # Ʊ����ʣ���Υ��饤����Ȥ��갷����
-  # �ʲ����������³���¤��ʤ�(�Ĥޤ���³���ˤʤꤨ��)���Ȥ�����
+  # スレッドを使った echo サーバ
+  # 同時に複数のクライアントを取り扱える
+  # 以下の例だと接続制限がない(つまり接続過剰になりえる)ことに注意
   Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
     Thread.new {
       begin
@@ -468,11 +468,11 @@ TCP/IP �� host:port ���Ԥ������륵����¦�Υ����åȤ��������
     }
   }
 
-����Ū�ˤ� [[m:Socket.tcp_server_sockets]] ��
-�������������åȤ� [[m:Socket.accept_loop]] �ǽ������Ƥ��ޤ���
+内部的には [[m:Socket.tcp_server_sockets]] で
+生成したソケットを [[m:Socket.accept_loop]] で処理しています。
 
-@param host ������Ƥ�ۥ���̾
-@param port ������Ƥ�ݡ����ֹ�
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
 @see [[m:Socket.tcp_server_sockets]], [[m:Socket.accept_loop]]
 
 --- tcp_server_sockets(port) -> [Socket]
@@ -480,82 +480,82 @@ TCP/IP �� host:port ���Ԥ������륵����¦�Υ����åȤ��������
 --- tcp_server_sockets(port){|sockets| ...}  -> object
 --- tcp_server_sockets(host, port){|sockets| ...}  -> object
 
-TCP/IP �� host:port ���Ԥ������륵����¦�Υ����åȤ�
-�������ޤ���
+TCP/IP で host:port で待ち受けるサーバ側のソケットを
+作成します。
 
-�֥��å��ʤ��ξ��ϡ������åȥ��֥������Ȥ�������֤��ޤ���
+ブロックなしの場合は、ソケットオブジェクトの配列を返します。
 
-�֥��å��դ��ξ��ϡ������åȥ��֥������Ȥ򤽤Υ֥��å���
-�Ϥ��ƸƤӽФ��ޤ����֥��å���λ���ˤ����Υ����åȤ��Ĥ��ޤ���
-�֤��ͤϥ֥��å���ɾ���ͤȤʤ�ޤ���
+ブロック付きの場合は、ソケットオブジェクトをそのブロックに
+渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
+返り値はブロックの評価値となります。
 
-port �� 0 �ξ��ϡ��ºݤΥݡ����ֹ��ưŪ�����Ф�ޤ���
-�������֤��ͤΥ����åȤϤ��٤�Ʊ���ֹ������ޤ���
+port が 0 の場合は、実際のポート番号は動的に選ばれます。
+ただし返り値のソケットはすべて同じ番号を持ちます。
 
-  # tcp_server_sockets returns ��2�ĤΥ����åȤ��֤�
+  # tcp_server_sockets returns は2つのソケットを返す
   sockets = Socket.tcp_server_sockets(1296)
   p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
   
-  # ���줾��� IPv4 �� IPv6 �Υ����å�
+  # それぞれは IPv4 と IPv6 のソケット
   sockets.each {|s| p s.local_address }
   #=> #<Addrinfo: [::]:1296 TCP>
   #   #<Addrinfo: 0.0.0.0:1296 TCP>
   
-  # �ݡ����ֹ��ưŪ������Ǥ� IPv6 �� IPv4 ��Ʊ���ݡ����ֹ�����
+  # ポート番号を動的に選んでも IPv6 と IPv4 で同じポート番号を持つ
   sockets = Socket.tcp_server_sockets(0)
   sockets.each {|s| p s.local_address }
   #=> #<Addrinfo: [::]:53114 TCP>
   #   #<Addrinfo: 0.0.0.0:53114 TCP>
   
-  # �֥��å��˥����åȤ������Ϥ����
+  # ブロックにソケットの配列が渡される
   Socket.tcp_server_sockets(0) {|sockets|
     p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
   }
 
 
-@param host ������Ƥ�ۥ���̾
-@param port ������Ƥ�ݡ����ֹ�
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
 @see [[m:Socket.tcp_server_loop]]
 
 --- udp_server_loop(port) {|msg, msg_src| ... } -> ()
 --- udp_server_loop(host, port) {|msg, msg_src| ... } -> ()
-UDP �Υ����Ф�ư���ơ���å���������뤴�Ȥ�
-�֥��å���ƤӽФ��ޤ���
+UDP のサーバを起動して、メッセージが来るごとに
+ブロックを呼び出します。
 
-�֥��å����Ϥ��������� msg �� msg_src �� 2 �Ĥǡ�
-msg �ϼ�����ä���å�����ʸ����ǡ� msg_src �� 
-�̿����� [[c:Socket::UDPSource]] ���֥������ȤǤ���
+ブロックに渡される引数は msg と msg_src の 2 つで、
+msg は受け取ったメッセージ文字列で、 msg_src は 
+通信相手の [[c:Socket::UDPSource]] オブジェクトです。
 
-@param host ������Ƥ�ۥ���̾
-@param port ������Ƥ�ݡ����ֹ�
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
 @see [[m:Socket.udp_server_sockets]], [[m:Socket.udp_server_loop_on]]
 
 --- udp_server_loop_on(sockets) {|msg, msg_src| ... } -> ()
 
-sockets (UDP �Υ����å�)���Ф����̿����Ԥ������ޤ���
+sockets (UDP のソケット)に対し、通信を待ち受けます。
 
-[[m:Socket.udp_server_sockets]] ���֤��ͤ�����ΰ�����Ŭ�ڤǤ���
+[[m:Socket.udp_server_sockets]] の返り値がこれの引数に適切です。
 
-�����åȤ����å������������뤿�Ӥ˥֥��å���ƤӽФ��ޤ���
-�֥��å����Ϥ��������� msg �� msg_src �� 2 �Ĥǡ�
-msg �ϼ�����ä���å�����ʸ����ǡ� msg_src �� 
-�̿����� [[c:Socket::UDPSource]] ���֥������ȤǤ���
+ソケットからメッセージを受け取るたびにブロックを呼び出します。
+ブロックに渡される引数は msg と msg_src の 2 つで、
+msg は受け取ったメッセージ文字列で、 msg_src は 
+通信相手の [[c:Socket::UDPSource]] オブジェクトです。
 
-̵�¥롼�׹�¤�ˤʤäƤ��ޤ���
+無限ループ構造になっています。
 
-@see sockets �̿����Ԥ������륽���åȤ�����
+@see sockets 通信を待ち受けるソケットの配列
 @see [[m:Socket.udp_server_recv]], [[m:Socket.udp_server_loop]]
 
 --- udp_server_recv(sockets){|msg, msg_src| ... } -> ()
-sockets��Ϳ����줿�� UDP �����åȤ���ǡ������ɤ߼��ޤ���
+socketsで与えられた各 UDP ソケットからデータを読み取ります。
 
-�ƥ����åȤ����å��������ɤ߼�뤴�Ȥ˥֥��å���ƤӽФ��ޤ���
-�֥��å����Ϥ��������� msg �� msg_src �� 2 �Ĥǡ�
-msg �ϼ�����ä���å�����ʸ����ǡ� msg_src �� 
-�̿����� [[c:Socket::UDPSource]] ���֥������ȤǤ���
+各ソケットからメッセージを読み取るごとにブロックを呼び出します。
+ブロックに渡される引数は msg と msg_src の 2 つで、
+msg は受け取ったメッセージ文字列で、 msg_src は 
+通信相手の [[c:Socket::UDPSource]] オブジェクトです。
 
-[[m:Socket.udp_server_loop]] �Ϥ��Υ᥽�åɤ��Ѥ��ưʲ��Τ褦�ˤ���
-�����Ǥ��ޤ���
+[[m:Socket.udp_server_loop]] はこのメソッドの用いて以下のようにして
+実装できます。
 
   udp_server_sockets(host, port) {|sockets|
     loop {
@@ -564,22 +564,22 @@ msg �ϼ�����ä���å�����ʸ����ǡ� msg_src ��
     }
   }
 
-@see sockets �ɤ߹��ॽ���åȤ�����
+@see sockets 読み込むソケットの配列
 
 --- udp_server_sockets(port) -> [Sockets]
 --- udp_server_sockets(host, port) -> [Sockets]
 --- udp_server_sockets(port) {|sockets| ... } -> object
 --- udp_server_sockets(host, port) {|sockets| ... } -> object
 
-UDP �� host:port ���Ԥ������륵����¦�Υ����åȤ�������ޤ���
+UDP で host:port を待ち受けるサーバ側のソケットを作成します。
 
-�֥��å��ʤ��ξ��ϡ������åȥ��֥������Ȥ�������֤��ޤ���
+ブロックなしの場合は、ソケットオブジェクトの配列を返します。
 
-�֥��å��դ��ξ��ϡ������åȥ��֥������Ȥ򤽤Υ֥��å���
-�Ϥ��ƸƤӽФ��ޤ����֥��å���λ���ˤ����Υ����åȤ��Ĥ��ޤ���
+ブロック付きの場合は、ソケットオブジェクトをそのブロックに
+渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
 
-port �� 0 �ξ��ϡ��ºݤΥݡ����ֹ��ưŪ�����Ф�ޤ���
-�������֤��ͤΥ����åȤϤ��٤�Ʊ���ֹ������ޤ���
+port が 0 の場合は、実際のポート番号は動的に選ばれます。
+ただし返り値のソケットはすべて同じ番号を持ちます。
 
   # UDP/IP echo server
   Socket.udp_server_sockets(0) {|sockets|
@@ -589,59 +589,59 @@ port �� 0 �ξ��ϡ��ºݤΥݡ����ֹ��ưŪ�����Ф�ޤ���
     }
   }
 
-@param host ������Ƥ�ۥ���̾
-@param port ������Ƥ�ݡ����ֹ�
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
 
 --- unix(path) -> Socket
 --- unix(path){|sock| ... } -> object
-Unix ���饤����ȥ����åȤ��������ޤ���
+Unix クライアントソケットを生成します。
 
-�֥��å�����ά���줿�Ȥ��ϡ��������줿�����åȤ��֤���ޤ���
+ブロックが省略されたときは、生成されたソケットが返されます。
 
-�֥��å����Ϥ��줿�Ȥ��ϡ��������줿�����åȤ�
-�����Ȥ��ƥ֥��å���ƤӽФ��ޤ����᥽�åɤ��֤��ͤ�
-�֥��å���ɾ���ͤȤʤ�ޤ����ޤ����֥��å��ν�λ���
-�����åȤ� [[m:IO#close]] ���ޤ���
+ブロックが渡されたときは、生成されたソケットを
+引数としてブロックを呼び出します。メソッドの返り値は
+ブロックの評価値となります。また、ブロックの終了後に
+ソケットを [[m:IO#close]] します。
 
-  # /tmp/sock ���̿�����
+  # /tmp/sock と通信する
   Socket.unix("/tmp/sock") {|sock|
     t = Thread.new { IO.copy_stream(sock, STDOUT) }
     IO.copy_stream(STDIN, sock)
     t.join
   }
 
-@param path ��³�оݤΥѥ�(ʸ����)
+@param path 接続対象のパス(文字列)
 
 --- unix_server_loop(path) {|socket, client_addrinfo| ... } -> ()
-Unix �����Х����åȤ���������
-��������³���������뤴�Ȥ˥֥��å���ƤӽФ��ޤ���
+Unix サーバソケットを生成し、
+新しい接続を受け入れるごとにブロックを呼び出します。
 
-�֥��å��ˤϿ�������³��ɽ�������åȥ��֥������Ȥȡ�
-���饤����ȥ��ɥ쥹��ɽ�� [[c:Addrinfo]] ���֥������Ȥ��Ϥ���ޤ���
+ブロックには新しい接続を表すソケットオブジェクトと、
+クライアントアドレスを表す [[c:Addrinfo]] オブジェクトが渡されます。
 
-�֥��å��μ¹Ԥ�����äƤ⥽���åȤ� close ����ޤ���
-���ץꥱ�������¦������Ū�� close ����ɬ�פ�����ޤ���
+ブロックの実行が終わってもソケットは close されません。
+アプリケーション側が明示的に close する必要があります。
 
-path �Ȥ���̾���Υե����뤬����¸�ߤ���Ȥ��ϡ�
-���Υե�����Υ����ʤǤ��������ˤ��Υե�����������Ƥ��ޤ��ޤ���
-����� path �����դ���桼���ˤ�ä��ѹ�����ʤ����˸¤�ϰ����Ǥ���
-�Ĥޤꡢ /tmp/malicious-users-directory/socket �Ȥ���̾���Υѥ���
-�Ȥ��٤��ǤϤ���ޤ���
-/tmp �˥��ƥ��å����ӥåȤ�Ω�äƤ����硢/tmp/socket ��
-/tmp/your-private-directory/socket �Ȥ����ѥ�̾�ϰ����ȹͤ����ɤ��Ǥ��礦��
+path という名前のファイルが既に存在するときは、
+そのファイルのオーナである場合は先にそのファイルを削除してしまいます。
+これは path が悪意あるユーザによって変更されない場合に限りは安全です。
+つまり、 /tmp/malicious-users-directory/socket という名前のパスは
+使うべきではありません。
+/tmp にスティッキービットが立っている場合、/tmp/socket や
+/tmp/your-private-directory/socket というパス名は安全と考えて良いでしょう。
 
-@param path ��³���Ԥ�������ѥ�(ʸ����)
+@param path 接続を待ち受けるパス(文字列)
 
 --- unix_server_socket(path) -> Socket
 --- unix_server_socket(path){|sock| ... } -> object
-Unix �����Х����åȤ��������ޤ���
+Unix サーバソケットを生成します。
 
-�֥��å�����ά���줿�Ȥ��ϡ��������줿�����åȤ��֤���ޤ���
+ブロックが省略されたときは、生成されたソケットが返されます。
 
-�֥��å����Ϥ��줿�Ȥ��ϡ��������줿�����åȤ�
-�����Ȥ��ƥ֥��å���ƤӽФ��ޤ����᥽�åɤ��֤��ͤ�
-�֥��å���ɾ���ͤȤʤ�ޤ����ޤ����֥��å��ν�λ���
-�����åȤ� [[m:IO#close]] ���ޤ���
+ブロックが渡されたときは、生成されたソケットを
+引数としてブロックを呼び出します。メソッドの返り値は
+ブロックの評価値となります。また、ブロックの終了後に
+ソケットを [[m:IO#close]] します。
 
   socket = Socket.unix_server_socket("/tmp/s")
   p socket                  #=> #<Socket:fd 3>
@@ -652,19 +652,19 @@ Unix �����Х����åȤ��������ޤ���
     p s.local_address       #=> # #<Addrinfo: /tmp/sock SOCK_STREAM>
   }
 
-@param path ��³���Ԥ�������ѥ�(ʸ����)
+@param path 接続を待ち受けるパス(文字列)
 
 #@end
 == Instance Methods
 
 --- accept -> Array
 
-��������³������դ��ơ���������³���Ф��륽���åȤȥ��ɥ쥹��
-�ڥ����֤��ޤ���[[man:accept(2)]] �򻲾ȡ�
+新しい接続を受け付けて、新しい接続に対するソケットとアドレスの
+ペアを返します。[[man:accept(2)]] を参照。
 
-���Ȥ��� IPv4 �� TCP �����Х����åȤ���������accept �ǥ��饤����Ȥ������³������դ���ˤϰʲ��Τ褦�ˤ��ޤ���
+たとえば IPv4 の TCP サーバソケットを生成し、accept でクライアントからの接続を受け付けるには以下のようにします。
 
-��:
+例:
 
   serv = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
   sockaddr = Socket.sockaddr_in(8080, "0.0.0.0")
@@ -675,48 +675,48 @@ Unix �����Х����åȤ��������ޤ���
 #@if (version >= "1.8.5")
 --- accept_nonblock -> Array
 
-�����åȤ�Υ�֥��å��󥰥⡼�ɤ����ꤷ���塢
-[[man:accept(2)]] ��ƤӽФ��ޤ���
+ソケットをノンブロッキングモードに設定した後、
+[[man:accept(2)]] を呼び出します。
 
-�������֤��ͤ� [[m:Socket#accept]] ��Ʊ���Ǥ���
+引数、返り値は [[m:Socket#accept]] と同じです。
 
-[[man:accept(2)]] �����顼�ˤʤä���硢
-EAGAIN, EINTR ��ޤ��㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+[[man:accept(2)]] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
 --- bind(my_sockaddr) -> 0
 
-�����åȤ� my_sockaddr �˷�礷�ޤ���[[man:bind(2)]]
-��Ʊ��Ư���򤷤ޤ���
+ソケットを my_sockaddr に結合します。[[man:bind(2)]]
+と同じ働きをします。
 
 #@until 1.9.1
-@param my_sockaddr �����åȥ��ɥ쥹��¤�Τ� pack ����ʸ����[[ref:lib:socket#pack_string]]����ꤷ�ޤ���
+@param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
 #@else
-@param my_sockaddr �����åȥ��ɥ쥹��¤�Τ� pack ����ʸ����[[ref:lib:socket#pack_string]]�⤷����[[c:Addrinfo]]���֥������Ȥ���ꤷ�ޤ���
+@param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]もしくは[[c:Addrinfo]]オブジェクトを指定します。
 #@end
-@return 0 ���֤��ޤ���
+@return 0 を返します。
 
 --- connect(server_sockaddr) -> 0
 
-[[man:connect(2)]] �ǥ����åȤ���³���ޤ���
+[[man:connect(2)]] でソケットを接続します。
 
-server_sockaddr �ϡ�
+server_sockaddr は、
 [[ref:lib:socket#pack_string]]
 #@since 1.9.1
-�⤷���� [[c:Addrinfo]] ���֥�������
+もしくは [[c:Addrinfo]] オブジェクト
 #@end
-�Ǥ���
+です。
 
-0 ���֤��ޤ���
+0 を返します。
 
-@param server_sockaddr ��³�襢�ɥ쥹
-@raise Errno::EXXX [[man:connect(2)]] �����顼����𤷤�����ȯ�����ޤ����ܤ�����
-       man �򻲾Ȥ��Ƥ���������
+@param server_sockaddr 接続先アドレス
+@raise Errno::EXXX [[man:connect(2)]] がエラーを報告した場合に発生します。詳しくは
+       man を参照してください。
 
 
-���Ȥ��� IPv4 �� TCP �����åȤ���������connect �� www.ruby-lang.org:80 ����³����ˤϰʲ��Τ褦�ˤ��ޤ���
+たとえば IPv4 の TCP ソケットを生成し、connect で www.ruby-lang.org:80 に接続するには以下のようにします。
 
-��:
+例:
 
   s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
   sockaddr = Socket.sockaddr_in(80, "www.ruby-lang.org")
@@ -727,15 +727,15 @@ server_sockaddr �ϡ�
 #@if (version >= "1.8.5")
 --- connect_nonblock(server_sockaddr) -> 0
 
-�����åȤ�Υ�֥��å��󥰥⡼�ɤ����ꤷ���塢
-[[man:connect(2)]] ��ƤӽФ��ޤ���
+ソケットをノンブロッキングモードに設定した後、
+[[man:connect(2)]] を呼び出します。
 
-�������֤��ͤ� [[m:Socket#connect]] ��Ʊ���Ǥ���
+引数、返り値は [[m:Socket#connect]] と同じです。
 
 #@since 1.9.1
-connect �� EINPROGRESS ���顼����𤷤���硢�����㳰(Errno::EINPROGRESS)
-�ˤ� [[c:IO::WaitWritable]] �� [[m:Object#extend]] ����ޤ���
-����� connect_nonblock ���ȥ饤���뤿��˻Ȥ����Ȥ��Ǥ��ޤ���
+connect が EINPROGRESS エラーを報告した場合、その例外(Errno::EINPROGRESS)
+には [[c:IO::WaitWritable]] が [[m:Object#extend]] されます。
+これを connect_nonblock をリトライするために使うことができます。
 
   # Pull down Google's web page
   require 'socket'
@@ -757,21 +757,21 @@ connect �� EINPROGRESS ���顼����𤷤���硢�����㳰(Errno::EINPROGRESS)
 #@end
 
 
-@param server_sockaddr ��³�襢�ɥ쥹
-@raise Errno::EXXX [[man:connect(2)]] �����顼����𤷤�����ȯ�����ޤ����ܤ�����
-       man �򻲾Ȥ��Ƥ���������
+@param server_sockaddr 接続先アドレス
+@raise Errno::EXXX [[man:connect(2)]] がエラーを報告した場合に発生します。詳しくは
+       man を参照してください。
 
 #@end
 
 --- listen(backlog) -> 0
 
-[[man:listen(2)]] ��Ʊ��Ư���򤷤ޤ���
+[[man:listen(2)]] と同じ働きをします。
 
-0 ���֤��ޤ���
+0 を返します。
 
-@param backlog ��³����α�Ǥ�������
+@param backlog 接続を保留できる最大数
 
-@return 0 ���֤��ޤ���
+@return 0 を返します。
 
 
 #@until 1.9.1
@@ -780,19 +780,19 @@ connect �� EINPROGRESS ���顼����𤷤���硢�����㳰(Errno::EINPROGRESS)
 --- recvfrom(maxlen, flags=0) -> [String, Addrinfo]
 #@end
 
-�����åȤ���ǡ�����������ޤ���
+ソケットからデータを受け取ります。
 
-[[m:Socket#recv]] ��Ʊ�ͤǤ������֤��ͤȤ���
-�ǡ���ʸ�������꥽���åȤΥ��ɥ쥹�Υڥ����֤���ޤ���
+[[m:Socket#recv]] と同様ですが、返り値として
+データ文字列と相手ソケットのアドレスのペアが返されます。
 
-flags �ˤ� Socket::MSG_* �Ȥ�������� bitwise OR ���Ϥ��ޤ���
-�ܤ����� [[man:recvfrom(2)]] �򻲾Ȥ��Ƥ���������
+flags には Socket::MSG_* という定数の bitwise OR を渡します。
+詳しくは [[man:recvfrom(2)]] を参照してください。
 
-@param maxlen �����åȤ�������Ȥ�ǡ����κ�����
-@param flags �ե饰
-@raise Errno::EXXX [[man:recvfrom(2)]] �����顼����𤷤�����ȯ�����ޤ����ܤ�����
-       Errno �� man �򸫤Ƥ���������
-��:
+@param maxlen ソケットから受けとるデータの最大値
+@param flags フラグ
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーを報告した場合に発生します。詳しくは
+       Errno と man を見てください。
+例:
 
   s1 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
   s2 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
@@ -810,38 +810,38 @@ flags �ˤ� Socket::MSG_* �Ȥ�������� bitwise OR ���Ϥ��ޤ���
 --- recvfrom_nonblock(maxlen, flags=0) -> [String, Addrinfo]
 #@end
 
-�����åȤ�Υ�֥��å��󥰥⡼�ɤ����ꤷ���塢
-[[man:recvfrom(2)]] ��ƤӽФ��ޤ���
+ソケットをノンブロッキングモードに設定した後、
+[[man:recvfrom(2)]] を呼び出します。
 
-�������֤��ͤ� [[m:Socket#recvfrom]] ��Ʊ���Ǥ���
+引数、返り値は [[m:Socket#recvfrom]] と同じです。
 
-[[man:recvfrom(2)]] �����顼�ˤʤä���硢
-EAGAIN, EINTR ��ޤ��㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+[[man:recvfrom(2)]] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@since 1.9.1
-Errno::EWOULDBLOCK��Errno::EAGAIN �Τ褦���ԤäƤ����ȥ饤���뤳�Ȥ�
-��ǽ�Ǥ��뤳�Ȥ��̣�����㳰�ˤϡ�[[c:IO::WaitReadable]] �� extend
-����Ƥ��ޤ���
+Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
+可能であることを意味する例外には、[[c:IO::WaitReadable]] が extend
+されています。
 #@end
 
-@param maxlen �����åȤ�������Ȥ�ǡ����κ�����
-@param flags �ե饰
-@raise Errno::EXXX [[man:recvfrom(2)]] �����顼����𤷤�����ȯ�����ޤ����ܤ�����
-       man �򻲾Ȥ��Ƥ�������
+@param maxlen ソケットから受けとるデータの最大値
+@param flags フラグ
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーを報告した場合に発生します。詳しくは
+       man を参照してください
 
 #@end
 
 #@if (version >= "1.8.0")
 --- sysaccept -> Array
 
-��³�������饤����ȤΥե����뵭�һҤȥ��ɥ쥹�Υڥ����֤����Ȥ��
-���� [[m:Socket#accept]] ��Ʊ���Ǥ���
+接続したクライアントのファイル記述子とアドレスのペアを返すことを除
+けば [[m:Socket#accept]] と同じです。
 #@end
 
 #@since 1.9.2
 --- ipv6only! -> ()
-�����åȤ� IPV6_V6ONLY ���ץ�����ͭ���ˤ��ޤ���
+ソケットの IPV6_V6ONLY オプションを有効にします。
 
-IPV6_V6ONLY ���ץ���󤬻Ȥ��ʤ����Ϥ��Υ᥽�åɤϲ��⤷�ޤ���
+IPV6_V6ONLY オプションが使えない場合はこのメソッドは何もしません。
 #@end
 == Constants
 

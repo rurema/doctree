@@ -1,11 +1,11 @@
-Win32 API ��ƤӽФ�����Υ饤�֥��Ǥ���
+Win32 API を呼び出すためのライブラリです。
 
 = class Win32API < Object
 
-Win32 API ��ƤӽФ�����Υ��饹�Ǥ���
+Win32 API を呼び出すためのクラスです。
 
-=== ������ 1: MessageBox
-#@# Win32API �Υ��饹�᥽�åɤˤ��Ƥߤ�
+=== 使用例 1: MessageBox
+#@# Win32API のクラスメソッドにしてみた
 
   require 'Win32API'
   # require 'dl/win32'
@@ -43,10 +43,10 @@ Win32 API ��ƤӽФ�����Υ��饹�Ǥ���
   
   p Win32API.MessageBox(0, "test message", "test caption")
   p Win32API.MessageBoxEx(0, "test message", "test caption")
-  p Win32API.MessageBox(0, "�Ƥ���", "�ƥ���")
-  p Win32API.MessageBoxEx(0, "�Ƥ���", "�ƥ���")
+  p Win32API.MessageBox(0, "てすと", "テスト")
+  p Win32API.MessageBoxEx(0, "てすと", "テスト")
 
-=== ������ 2: Cygwin �� uname ���ޥ�ɤ�����
+=== 使用例 2: Cygwin の uname コマンドの代わり
 
   require 'Win32API'
   
@@ -65,7 +65,7 @@ Win32 API ��ƤӽФ�����Υ��饹�Ǥ���
   
   => ["CYGWIN_98-4.10", "hoge", "1.1.7(0.31/3/2)", "2000-12-25 12:39", "i586"]
 
-=== ������ 3: Cygwin �� cygpath ���ޥ�ɤ�����
+=== 使用例 3: Cygwin の cygpath コマンドの代わり
 
   require 'Win32API'
   
@@ -115,20 +115,20 @@ Win32 API ��ƤӽФ�����Υ��饹�Ǥ���
 --- new(dllname, func, import, export)
 #@todo
 
-DLL dllname ������ɤ���API func �Υ��֥������Ȥ��������ޤ���
+DLL dllname をロードし、API func のオブジェクトを生成します。
 
-�� 3 ���� import �ˤ� func �ΰ����η��Υꥹ�Ȥ���ꤷ�ޤ���
-nil �ξ��ϰ����ʤ��ȸ��ʤ���ޤ���
+第 3 引数 import には func の引数の型のリストを指定します。
+nil の場合は引数なしと見なされます。
 
-�� 4 ���� export �ˤ� func ������ͤη�����ꤷ�ޤ���
-nil �ξ�������ͤʤ� (void) �ȸ��ʤ���ޤ���
+第 4 引数 export には func の戻り値の型を指定します。
+nil の場合は戻り値なし (void) と見なされます。
 
-�� 3 ���� import ���� 4 ���� export ��
-������ꤹ��ˤϰʲ���ʸ������Ѥ��ޤ���
+第 3 引数 import と第 4 引数 export で
+型を指定するには以下の文字列を用います。
 
 : "p"
-    �ݥ���
-#@# ���餤: 2001-03-23 ����?
+    ポインタ
+#@# あらい: 2001-03-23 本当?
 : "n", "l"
     long
 : "i"
@@ -142,20 +142,20 @@ nil �ξ�������ͤʤ� (void) �ȸ��ʤ���ޤ���
 --- Call(*args)
 #@todo
 
-API ��ƤӽФ��ޤ���
-���ꤹ�����������ͤ� [[m:Win32API.new]] �ΰ����λ���˽����ޤ���
-�ä˥ݥ��󥿤��Ϥ��Ƥ��Υݥ��󥿤λؤ��ΰ���ͤ����ꤵ������
-�����ΰ�򤢤餫������ݤ��Ƥ���ɬ�פ�����ޤ���
+API を呼び出します。
+指定する引数と戻り値は [[m:Win32API.new]] の引数の指定に従います。
+特にポインタを渡してそのポインタの指す領域に値が設定される場合は
+その領域をあらかじめ確保しておく必要があります。
 
-�㤨�С������ΥХåե��˽񤭹���ؿ���ƤӽФ��ˤϰʲ��Τ褦�ˤ��ޤ���
+例えば、引数のバッファに書き込む関数を呼び出すには以下のようにします。
 
   api = Win32API.new('foo.dll', 'foo', 'p', 'v')
   buf = "\0" * 256
   api.call(buf)
 
-�ݥ��󥿤�������Ϥ����ϰʲ��Τ褦�ˤ��ޤ���
-#@# ���餤: 2001-03-23 �ޤ���Ƥʤ������äƤ뤫�ʡ�
-#@# �Х���: 2004-01-29 obj.call([args.pack("p3")].pack("P"))�Τ褦�ʡ�
+ポインタの配列を渡す場合は以下のようにします。
+#@# あらい: 2001-03-23 まだ試してない。あってるかな？
+#@# バグ？: 2004-01-29 obj.call([args.pack("p3")].pack("P"))のような？
 
   api = Win32API.new('foo.dll', 'foo', 'p', 'v')
   args = ["\0" * 256, "\0" * 256, "\0" * 256]

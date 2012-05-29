@@ -1,12 +1,12 @@
-#@# 1.9 �Ϥ� to_html.rb �ˤĤ��Ƥϡ�../to_html.rd ��������������
-#@# ʬ�����Ƥⶦͭ�Ǥ���ɥ�����Ȥ����ʤ��ä����ᡢ�ե������ʬ���ޤ�����
+#@# 1.9 系の to_html.rb については、../to_html.rd をご覧ください。
+#@# 分岐しても共有できるドキュメントが少なかったため、ファイルを分けました。
 
 require cgi
 
-RDoc �����Υɥ�����Ȥ� HTML ���������뤿��Υ��֥饤�֥��Ǥ���
+RDoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
-[[m:SM::SimpleMarkup#convert]] �ΰ����� [[c:SM::ToHtml]] �Υ��󥹥���
-���Ϥ��ƻ��Ѥ��ޤ���
+[[m:SM::SimpleMarkup#convert]] の引数に [[c:SM::ToHtml]] のインスタンス
+を渡して使用します。
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -15,25 +15,25 @@ RDoc �����Υɥ�����Ȥ� HTML ���������뤿��Υ��֥饤�֥��Ǥ���
   h = SM::ToHtml.new
   puts m.convert(input_string, h)
 
-�Ѵ�������̤�ʸ����Ǽ����Ǥ��ޤ���
+変換した結果は文字列で取得できます。
 
 = class SM::ToHtml
 
-RDoc �����Υɥ�����Ȥ� HTML ���������륯�饹�Ǥ���
+RDoc 形式のドキュメントを HTML に整形するクラスです。
 
-[����] 1.9 �ϤǤϡ�require ��䥯�饹̾���ʲ��Τ褦���ѹ��ˤʤ�ޤ�����
+[注意] 1.9 系では、require 先やクラス名が以下のように変更になりました。
 
- * require ��: rdoc/markup/to_html
- * ���饹̾: RDoc::Markup::ToHtml
+ * require 先: rdoc/markup/to_html
+ * クラス名: RDoc::Markup::ToHtml
 
 == Class Methods
 
 --- new -> SM::ToHtml
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-�ºݤ�ʸ������Ѵ�����ݤˤϡ�[[m:SM::SimpleMarkup#convert]] �ΰ����˼�
-�Ȥ��Ϥ��ޤ���
+実際に文字列を変換する際には、[[m:SM::SimpleMarkup#convert]] の引数に自
+身を渡します。
 
 @see [[m:SM::SimpleMarkup#convert]]
 
@@ -41,21 +41,21 @@ RDoc �����Υɥ�����Ȥ� HTML ���������륯�饹�Ǥ���
 
 --- add_tag(name, start, stop) -> ()
 
-name ����Ͽ���줿��§�Ǽ������줿ʸ����� start �� stop �ǰϤ�褦�˻�
-�ꤷ�ޤ���
+name で登録された規則で取得された文字列を start と stop で囲むように指
+定します。
 
-@param name [[c:SM::ToHtml]] �ʤɤΥե����ޥå��˼��̤��������̾����
-            [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
 
-@param start ���Ϥε����ʸ����ǻ��ꤷ�ޤ���
+@param start 開始の記号を文字列で指定します。
 
-@param stop ��λ�ε����ʸ����ǻ��ꤷ�ޤ���
+@param stop 終了の記号を文字列で指定します。
 
-��:
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
 
   h = SM::ToHtml.new
-  # :STRIKE �Υե����ޥåȤ� <strike> �� </strike> �˻��ꡣ
+  # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
   h.add_tag(:STRIKE, "<strike>", "</strike>")

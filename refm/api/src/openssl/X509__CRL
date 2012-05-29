@@ -1,14 +1,14 @@
 = class OpenSSL::X509::CRL < Object
 
-CRL(�����񼺸��ꥹ��) ���饹��
+CRL(証明書失効リスト) クラス。
 
-CRL �Ȥϡ����ز��������ʤ�餫����ͳ�Ǽ�������������Υꥹ�ȤǤ���
-�̾� CA �ˤ�ä�ȯ�Ԥ�����ΤǤ���
-[[c:OpenSSL::X509::Store]] ���ȹ��ळ�ȤǼ�������������θ��ڤ�
-���Ԥ����뤳�Ȥ��Ǥ��ޤ���
+CRL とは、危殆化した等なんらかの理由で失効した証明書のリストです。
+通常 CA によって発行されるものです。
+[[c:OpenSSL::X509::Store]] に組込むことで失効した証明書の検証を
+失敗させることができます。
 
-�̾� CRL �ο��������ǧ���뤿��ˤ� CRL �ˤʤ��줿
-��̾�򸡾ڤ���ɬ�פ�����ޤ���
+通常 CRL の信頼性を確認するためには CRL になされた
+署名を検証する必要があります。
 
   * [[RFC:5280]]
 
@@ -16,153 +16,153 @@ CRL �Ȥϡ����ز��������ʤ�餫����ͳ�Ǽ�������������Υꥹ�ȤǤ���
 
 --- new -> OpenSSL::X509::CRL
 --- new(obj) -> OpenSSL::X509::CRL
-CRL(�����񼺸��ꥹ��)���֥������Ȥ��������ޤ���
+CRL(証明書失効リスト)オブジェクトを生成します。
 
-������ OpenSSL::X509::Request ���֥������Ȥ��������ޤ���
+新しい OpenSSL::X509::Request オブジェクトを生成します。
 
-�����ʤ��ξ��϶��� OpenSSL::X509::Request ���֥������Ȥ��������ޤ���
+引数なしの場合は空の OpenSSL::X509::Request オブジェクトを生成します。
 
-������ʸ����ξ��ϡ�PEM �����⤷���� DER �����Ǥ����
-�ߤʤ��ƥ��֥������Ȥ��������ޤ���
+引数が文字列の場合は、PEM 形式もしくは DER 形式であると
+みなしてオブジェクトを生成します。
 
-������ [[c:IO]] ���֥������ȤǤ�����ϡ����Υե��������Ȥ���
-���֥������Ȥ��������ޤ���
+引数が [[c:IO]] オブジェクトである場合は、そのファイルの中身から
+オブジェクトを生成します。
 
-������ OpenSSL::X509::CRL �Ǥ�����ˤϡ��������Ƥ�
-���ԡ��������֥������Ȥ��������ޤ���
+引数が OpenSSL::X509::CRL である場合には、その内容を
+コピーしたオブジェクトを生成します。
 
-������ to_der �᥽�åɤ���ľ��ϡ����Υ᥽�åɤˤ�ä�
-DER ������ʸ������Ѵ����Ƥ��饪�֥������Ȥ��������ޤ���
+引数が to_der メソッドを持つ場合は、そのメソッドによって
+DER 形式の文字列に変換してからオブジェクトを生成します。
 
-@param obj CRL �Υǡ���
-@raise OpenSSL::X509::CRLError ���֥������Ȥ������˼��Ԥ�������ȯ�����ޤ�
+@param obj CRL のデータ
+@raise OpenSSL::X509::CRLError オブジェクトの生成に失敗した場合に発生します
 
 == Instance Methods
 
 --- version -> Integer
-���� CRL ����򤷤Ƥ��뵬�ʤΥС��������֤��ޤ���
+その CRL が準拠している規格のバージョンを返します。
 
-X.509 v2 CRL �Ǥ���� 1 ���֤��ޤ���
+X.509 v2 CRL であれば 1 を返します。
 
 @see [[m:OpenSSL::X509::CRL#version=]]
 
 --- version=(version)
-���� CRL ����򤷤Ƥ��뵬�ʤΥС����������ꤷ�ޤ���
+その CRL が準拠している規格のバージョンを設定します。
 
-X.509 v2 CRL �Ǥ���� 1 ���Ϥ��ޤ���
+X.509 v2 CRL であれば 1 を渡します。
 
-@param version ���ꤹ��С�����������
-@raise OpenSSL::X509::CRLError ����˼��Ԥ�������ȯ�����ޤ�
+@param version 設定するバージョンの整数
+@raise OpenSSL::X509::CRLError 設定に失敗した場合に発生します
 @see [[m:OpenSSL::X509::CRL#version]]
 
 --- signature_algorithm -> String
-��̾�˻Ȥä����르�ꥺ��̾��ʸ������֤��ޤ���
+署名に使ったアルゴリズム名を文字列で返します。
 
-@raise OpenSSL::X509::CRLError ̾���μ����˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::CRLError 名前の取得に失敗した場合に発生します
 
 --- issuer -> OpenSSL::X509::Name
-CRL ��ȯ�ԼԤ��֤��ޤ���
+CRL の発行者を返します。
 
 --- issuer=(issuer)
-CRL ��ȯ�ԼԤ����ꤷ�ޤ���
+CRL の発行者を設定します。
 
-@param issuer ȯ�ԼԤ� [[c:OpenSSL::X509::Name]] ���֥�������
-@raise OpenSSL::X509::CRLError ����˼��Ԥ�������ȯ�����ޤ�
+@param issuer 発行者の [[c:OpenSSL::X509::Name]] オブジェクト
+@raise OpenSSL::X509::CRLError 設定に失敗した場合に発生します
 @see [[m:OpenSSL::X509::CRL#issuer]]
 
 --- last_update -> Time
-CRL ���Ǹ�˹������줿������ Time ���֥������Ȥ��֤��ޤ���
+CRL が最後に更新された日時を Time オブジェクトで返します。
 
 --- last_update=(time)
-CRL ���Ǹ�˹������줿������ Time ���֥������Ȥ����ꤷ�ޤ���
+CRL が最後に更新された日時を Time オブジェクトで設定します。
 
-@param time �ǽ���������
-@raise OpenSSL::X509::CRLError ����˼��Ԥ�������ȯ�����ޤ�
+@param time 最終更新日時
+@raise OpenSSL::X509::CRLError 設定に失敗した場合に発生します
 @see [[m:OpenSSL::X509::CRL#last_update]]
 
 --- next_update -> Time
-CRL �μ��󹹿������� Time ���֥������Ȥ��֤��ޤ���
+CRL の次回更新日時を Time オブジェクトで返します。
 
 --- next_update=(time)
-CRL �μ��󹹿������� Time ���֥������Ȥ����ꤷ�ޤ���
+CRL の次回更新日時を Time オブジェクトで設定します。
 
-@param time �ǽ���������
-@raise OpenSSL::X509::CRLError ����˼��Ԥ�������ȯ�����ޤ�
+@param time 最終更新日時
+@raise OpenSSL::X509::CRLError 設定に失敗した場合に発生します
 @see [[m:OpenSSL::X509::CRL#next_update]]
 
 --- revoked -> [OpenSSL::X509::Revoked]
-���Ȥ����äƤ��뼺�������������������֤��ޤ���
+自身が持っている失効した証明書の配列を返します。
 
 
 --- revoked=(revs)
-����������ꥹ�Ȥ򹹿����ޤ���
+失効証明書リストを更新します。
 
-���Υ᥽�åɤ�ƤӤ������Υꥹ�Ȥ��˴�����ޤ���
-revs �ˤϼ�������������� [[c:OpenSSL::X509::Revoked]] ��������Ϥ��ޤ���
+このメソッドを呼びだす前のリストは破棄されます。
+revs には失効した証明書を [[c:OpenSSL::X509::Revoked]] の配列で渡します。
 
-@param revs ���ꤹ�뼺�����������������
-@raise OpenSSL::X509::CRLError ����˼��Ԥ�������ȯ�����ޤ�
+@param revs 設定する失効した証明書の配列
+@raise OpenSSL::X509::CRLError 設定に失敗した場合に発生します
 
 --- add_revoked(rev) -> OpenSSL::X509::Revoked
-����������ꥹ�Ȥ˿��������Ǥ�ä��ޤ���
+失効証明書リストに新たな要素を加えます。
 
-rev �ϼ��������������ɽ�� [[c:OpenSSL::X509::Revoked]] ���֥������ȤǤ���
+rev は失効した証明書を表す [[c:OpenSSL::X509::Revoked]] オブジェクトです。
 
-�����ͤ� rev �Ǥ���
+帰り値は rev です。
 
-@param rev �ɲä��뼺�������������ɽ�����֥�������
-@raise OpenSSL::X509::CRLError �ɲä˼��Ԥ�������ȯ�����ޤ�
+@param rev 追加する失効した証明書を表すオブジェクト
+@raise OpenSSL::X509::CRLError 追加に失敗した場合に発生します
 
 --- sign(pkey, digest) -> self
-CRL ����̩���ǽ�̾���ޤ���
+CRL に秘密鍵で署名します。
 
-@param pkey ��̩��([[c:OpenSSL::PKey::PKey]] ���֥�������)
-@param digest �ϥå��奢�르�ꥺ��
-@raise OpenSSL::X509::CRLError ��̾�˼��Ԥ�������ȯ�����ޤ�
+@param pkey 秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param digest ハッシュアルゴリズム
+@raise OpenSSL::X509::CRLError 署名に失敗した場合に発生します
 
 --- verify(key) -> bool
-ȯ�ԼԤθ������� CRL �˵��ܤ���Ƥ����̾�򸡾ڤ��ޤ���
+発行者の公開鍵で CRL に記載されている署名を検証します。
 
-���ڤ������������� true ���֤��ޤ���
+検証に成功した場合は true を返します。
 
-@param key ������([[c:OpenSSL::PKey::PKey]] ���֥�������)
-@raise OpenSSL::X509::CRLError ���ڻ��˥��顼������������ȯ�����ޤ�
+@param key 公開鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@raise OpenSSL::X509::CRLError 検証時にエラーが生じた場合に発生します
 
 --- to_der -> String
-DER �������Ѵ����ޤ���
+DER 形式に変換します。
 
-@raise OpenSSL::X509::CRLError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::CRLError 変換に失敗した場合に発生します
 --- to_pem -> String
 --- to_s -> String
-PEM �������Ѵ����ޤ���
+PEM 形式に変換します。
 
-@raise OpenSSL::X509::CRLError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::CRLError 変換に失敗した場合に発生します
 
 --- to_text -> String
-�ʹ֤��ɤ��������Ѵ����ޤ���
+人間が読める形式に変換します。
 
-@raise OpenSSL::X509::CRLError �Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@raise OpenSSL::X509::CRLError 変換に失敗した場合に発生します
 --- extensions -> [OpenSSL::X509::Extension]
-CRL �����äƤ����ĥ�ΰ�Υǡ�����������֤��ޤ���
+CRL が持っている拡張領域のデータを配列で返します。
 
 --- extensions=(extensions)
-CRL �γ�ĥ�ΰ�� extensions �ǹ������ޤ���
+CRL の拡張領域を extensions で更新します。
 
-extensions �ˤ� [[c:OpenSSL::X509::Extension]] ��������Ϥ��ޤ���
+extensions には [[c:OpenSSL::X509::Extension]] の配列を渡します。
 
-�������γ�ĥ�ΰ�Υǡ������˴�����ޤ���
+更新前の拡張領域のデータは破棄されます。
 
-@param extensions ��ĥ�ΰ�Υǡ���
-@raise OpenSSL::X509::CRLError �����˼��Ԥ�������ȯ�����ޤ�
+@param extensions 拡張領域のデータ
+@raise OpenSSL::X509::CRLError 更新に失敗した場合に発生します
 --- add_extension(ex) -> OpenSSL::X509::Extension
-��ĥ�ΰ�� ex ���ɲä��ޤ���
+拡張領域に ex を追加します。
 
-�ɲä���ǡ����� [[c:OpenSSL::X509::Extension]] �Υ��֥������Ȥ��Ϥ��ޤ���
+追加するデータは [[c:OpenSSL::X509::Extension]] のオブジェクトを渡します。
 
-ex ���֤��ޤ���
+ex を返します。
 
-@param ex �ɲä���ǡ���
-@raise OpenSSL::X509::CRLError �ɲä˼��Ԥ�������ȯ�����ޤ�
+@param ex 追加するデータ
+@raise OpenSSL::X509::CRLError 追加に失敗した場合に発生します
 
 = class OpenSSL::X509::CRLError < OpenSSL::OpenSSLError
-[[c:OpenSSL::X509::CRL]] ��Ϣ�Υ��顼���������Ȥ���ȯ�����ޤ���
+[[c:OpenSSL::X509::CRL]] 関連のエラーが生じたときに発生します。

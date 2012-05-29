@@ -1,12 +1,12 @@
-�Ȥ߹��ߤ� [[c:Time]] ���饹���ĥ���ޤ���
-������ɽ��ʸ�����ѡ������� [[c:Time]] ���֥������Ȥ��Ѵ������ꡢ
-�դ� [[c:Time]] ���֥������Ȥ� RFC �ʤɤ�����줿ʸ�����
-�Ѵ����뵡ǽ���󶡤��ޤ���
+組み込みの [[c:Time]] クラスを拡張します。
+日時を表す文字列をパースして [[c:Time]] オブジェクトに変換したり、
+逆に [[c:Time]] オブジェクトを RFC などで定められた文字列に
+変換する機能を提供します。
 
- * date-time �� [[RFC:2822]] ���������Ƥ��ޤ���
- * HTTP-date �� [[RFC:2616]] ���������Ƥ��ޤ���
- * dateTime �� XML Schema Part 2: Datatypes (ISO 8601) ���������Ƥ��ޤ���
- * ʸ���󤫤� [[c:Time]] ���֥������Ȥؤ��Ѵ��Ǥ� [[m:Date._parse]] �ˤ���͡��ʷ����򰷤��ޤ���
+ * date-time は [[RFC:2822]] で定義されています。
+ * HTTP-date は [[RFC:2616]] で定義されています。
+ * dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
+ * 文字列から [[c:Time]] オブジェクトへの変換では [[m:Date._parse]] により様々な形式を扱えます。
 
 = reopen Time
 
@@ -16,59 +16,59 @@
 --- parse(date, now = Time.now) {|year| year } -> Time
 
 
-date �� [[m:Date._parse]] �ˤ�ä�
-�ѡ������� [[c:Time]]���֥������Ȥ��Ѵ����ޤ���
+date を [[m:Date._parse]] によって
+パースして [[c:Time]]オブジェクトに変換します。
 
-�֥��å��դ��ǸƤФ줿��硢date��ǯ�ϥ֥��å��ˤ�ä��Ѵ�����ޤ���
+ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
   Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 
-Ϳ����줿����˾�̤����Ǥ��ʤ��ä������Ƥ�����硢now��
-�������Ǥ��Ȥ��ޤ���
-���̤����Ǥ��ʤ��ä������Ƥ�����硢�Ǿ���(1��0)���Ȥ��ޤ���
+与えられた時刻に上位の要素がなかったり壊れていた場合、nowの
+該当要素が使われます。
+下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
 
-@param date [[c:Time]] ���֥������Ȥ��Ѵ���ǽ��ʸ�������ꤷ�ޤ���
-@param now  ���߻����[[c:Time]] ���֥������Ȥǻ��ꤷ�ޤ���
-            �ǥե���Ȥ�[[m:Time.now]]�Ȥʤ�ޤ���
+@param date [[c:Time]] オブジェクトに変換可能な文字列を指定します。
+@param now  現在時刻を[[c:Time]] オブジェクトで指定します。
+            デフォルトは[[m:Time.now]]となります。
 
-  # ���߻��郎 "Thu Nov 29 14:33:20 GMT 2001" ��
-  # �����ॾ����GMT�Ȥ����:
+  # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
+  # タイムゾーンがGMTとすると:
   Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
   Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
   Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
 
-[[m:Date._parse]]��date����������Ф��ʤ��Ȥ���
-�ޤ��� [[c:Time]] ���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ���
-[[c:ArgumentError]] ��ȯ�����ޤ���
+[[m:Date._parse]]がdateから情報を取り出せないとき、
+または [[c:Time]] クラスが指定された日時を表現できないときに
+[[c:ArgumentError]] が発生します。
 
-���Υ᥽�åɤ�¾�Υѡ����ѥ᥽�åɤΥե����륻���դȤ���
-�ʲ��Τ褦�˻��ѤǤ��ޤ�:
+このメソッドは他のパース用メソッドのフェイルセーフとして
+以下のように使用できます:
 
   Time.rfc2822(date) rescue Time.parse(date)
   Time.httpdate(date) rescue Time.parse(date)
   Time.xmlschema(date) rescue Time.parse(date)
 
-���ä� [[m:Time.parse]] �μ��Ԥϥ����å����٤��Ǥ���
+従って [[m:Time.parse]] の失敗はチェックすべきです。
 
 --- rfc2822(date) -> Time
 --- rfc822(date) -> Time
 
-[[RFC:2822]]���������Ƥ���date-time�Ȥ���date��ѡ�������
-[[c:Time]]���֥������Ȥ��Ѵ����ޤ���
-���η�����[[RFC:822]]����������[[RFC:1123]]�ǹ������줿������
-Ʊ���Ǥ���
+[[RFC:2822]]で定義されているdate-timeとしてdateをパースして
+[[c:Time]]オブジェクトに変換します。
+この形式は[[RFC:822]]で定義されて[[RFC:1123]]で更新された形式と
+同じです。
 
-date��[[RFC:2822]]�˽�򤷤Ƥ��ʤ����ޤ���
-[[c:Time]]���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ���[[c:ArgumentError]]��
-ȯ�����ޤ���
+dateが[[RFC:2822]]に準拠していない、または
+[[c:Time]]クラスが指定された日時を表現できないときに[[c:ArgumentError]]が
+発生します。
 
-@param date [[RFC:2822]] ����������date-time �Ȥ���ʸ�������ꤷ�ޤ���
+@param date [[RFC:2822]] で定義されるdate-time として文字列を指定します。
 
-@raise ArgumentError date��[[RFC:2822]]�˽�򤷤Ƥ��ʤ����ޤ��� 
-                     [[c:Time]]���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ���
-                     ȯ�����ޤ���
+@raise ArgumentError dateが[[RFC:2822]]に準拠していない、または 
+                     [[c:Time]]クラスが指定された日時を表現できないときに
+                     発生します。
 
-������
+使用例
   require 'time'
 
   rfc2822_time = 'Sun, 31 Aug 2008 12:08:19 +0900'
@@ -84,16 +84,16 @@ date��[[RFC:2822]]�˽�򤷤Ƥ��ʤ����ޤ���
 
 --- httpdate(date) -> Time
 
-[[RFC:2616]]���������Ƥ���HTTP-date�Ȥ���date��ѡ�������
-[[c:Time]]���֥������Ȥ��Ѵ����ޤ���
+[[RFC:2616]]で定義されているHTTP-dateとしてdateをパースして
+[[c:Time]]オブジェクトに変換します。
 
-date��[[RFC:2616]]�˽�򤷤Ƥ��ʤ����ޤ���
-[[c:Time]]���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ���[[c:ArgumentError]]��
-ȯ�����ޤ���
+dateが[[RFC:2616]]に準拠していない、または
+[[c:Time]]クラスが指定された日時を表現できないときに[[c:ArgumentError]]が
+発生します。
 
-@param date [[RFC:2616]]���������Ƥ���HTTP-date�Ȥ��ƥѡ��������ʸ�������ꤷ�ޤ���
+@param date [[RFC:2616]]で定義されているHTTP-dateとしてパースされる文字列を指定します。
 
-@raise ArgumentError date��[[RFC:2616]]�˽�򤷤Ƥ��ʤ����ޤ��� [[c:Time]]���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ���ȯ�����ޤ���
+@raise ArgumentError dateが[[RFC:2616]]に準拠していない、または [[c:Time]]クラスが指定された日時を表現できないときに発生します。
 
   require 'time'
   rfc2616_time = 'Sun, 31 Aug 2008 12:34:56 GMT'
@@ -112,20 +112,20 @@ date��[[RFC:2616]]�˽�򤷤Ƥ��ʤ����ޤ���
 --- xmlschema(date) -> Time
 --- iso8601(date) -> Time
 
-XML Schema ���������Ƥ��� dateTime �Ȥ���
-date ��ѡ������� [[c:Time]] ���֥������Ȥ��Ѵ����ޤ���
+XML Schema で定義されている dateTime として
+date をパースして [[c:Time]] オブジェクトに変換します。
 
-date ��ISO 8601���������Ƥ�������˽�򤷤Ƥ��ʤ���
-�ޤ��� [[c:Time]] ���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ���
-[[c:ArgumentError]] ��ȯ�����ޤ���
+date がISO 8601で定義されている形式に準拠していない、
+または [[c:Time]] クラスが指定された日時を表現できないときに
+[[c:ArgumentError]] が発生します。
 
-@param date XML Schema ���������Ƥ��� dateTime �Ȥ���
-            �ѡ��������ʸ�������ꤷ�ޤ���
+@param date XML Schema で定義されている dateTime として
+            パースされる文字列を指定します。
 
-@raise ArgumentError date ��ISO 8601���������Ƥ�������˽�򤷤Ƥ��ʤ���
-                     �ޤ��� [[c:Time]] ���饹�����ꤵ�줿������ɽ���Ǥ��ʤ��Ȥ�
-                     ��ȯ�����ޤ���
-������
+@raise ArgumentError date がISO 8601で定義されている形式に準拠していない、
+                     または [[c:Time]] クラスが指定された日時を表現できないとき
+                     に発生します。
+使用例
   require 'time'
 
   iso8601_time = '2008-08-31T12:34:56+09:00'
@@ -143,13 +143,13 @@ date ��ISO 8601���������Ƥ�������˽�򤷤Ƥ��ʤ���
 #@since 1.9.1
 --- strptime(date, format) -> Time
 --- strptime(date, format){|y| ... } -> Time
-ʸ����� [[m:Date._strptime]] ���Ѥ��� [[c:Time]] ���֥�������
-���Ѵ����ޤ���
+文字列を [[m:Date._strptime]] を用いて [[c:Time]] オブジェクト
+に変換します。
 
   Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
   #=> 2001-02-03 06:05:06 +0900
 
-�֥��å����Ϥ���ǯ����ʬ��֥��å��ˤ�ä��Ѵ��Ǥ��ޤ���
+ブロックを渡すと年の部分をブロックによって変換できます。
   Time.strptime('91/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
     if y > 100 then y
     elsif y >= 69 then y + 1900
@@ -166,10 +166,10 @@ date ��ISO 8601���������Ƥ�������˽�򤷤Ƥ��ʤ���
   }
   #=>  2001-05-18 04:13:00 +0900
 
-�ܤ����� [[m:DateTime.strptime]], [[m:Date.strptime]] �򸫤Ƥ���������
+詳しくは [[m:DateTime.strptime]], [[m:Date.strptime]] を見てください。
 
-@param date �����ɽ��ʸ����
-@param format ��ʸ����
+@param date 時刻を表す文字列
+@param format 書式文字列
 #@end
 
 == Instance Methods
@@ -177,16 +177,16 @@ date ��ISO 8601���������Ƥ�������˽�򤷤Ƥ��ʤ���
 --- rfc2822 -> String
 --- rfc822 -> String
 
-[[RFC:2822]] ���������Ƥ��� date-time �Ȥ���ɽ�������
-�ʲ��η�����ʸ������֤��ޤ�:
+[[RFC:2822]] で定義されている date-time として表現される
+以下の形式の文字列を返します:
 
  day-of-week, DD month-name CCYY hh:mm:ss zone
 
-������ zone �� [+-]hhmm �Ǥ���
+ただし zone は [+-]hhmm です。
 
-self �� UTC time �ξ�硢zone �� +0000 �ˤʤ�ޤ���
+self が UTC time の場合、zone は +0000 になります。
 
-������
+使用例
   require 'time'
 
   iso8601_time = '2008-08-31T12:34:56+09:00'
@@ -195,14 +195,14 @@ self �� UTC time �ξ�硢zone �� +0000 �ˤʤ�ޤ���
 
 --- httpdate -> String
 
-[[RFC:2616]]���������Ƥ���HTTP-date��rfc1123-date�Ȥ���
-ɽ�������ʲ��η�����ʸ������֤��ޤ�:
+[[RFC:2616]]で定義されているHTTP-dateのrfc1123-dateとして
+表現される以下の形式の文字列を返します:
 
   day-of-week, DD month-name CCYY hh:mm:ss GMT
 
-����: ��̤Ϥ��Ĥ� UTC (GMT) �Ǥ���
+注意: 結果はいつも UTC (GMT) です。
 
-������
+使用例
   require 'time'
 
   iso8601_time = '2008-08-31T12:34:56+09:00'
@@ -213,24 +213,24 @@ self �� UTC time �ξ�硢zone �� +0000 �ˤʤ�ޤ���
 --- xmlschema(fractional_seconds = 0) -> String
 --- iso8601(fractional_seconds = 0) -> String
 
-XML Schema ���������Ƥ��� dateTime �Ȥ���
-ɽ�������ʲ��η�����ʸ������֤��ޤ�:
+XML Schema で定義されている dateTime として
+表現される以下の形式の文字列を返します:
 
   CCYY-MM-DDThh:mm:ssTZD
   CCYY-MM-DDThh:mm:ss.sssTZD
 
-������ TZD �� Z �ޤ��� [+-]hh:mm �Ǥ���
+ただし TZD は Z または [+-]hh:mm です。
 
 If self is a UTC time, Z is used as TZD.
 [+-]hh:mm is used otherwise.
 
-fractional_seconds �Ͼ������ʲ����ä���ꤷ�ޤ���
-fractional_seconds �Υǥե�����ͤ� 0 �Ǥ���
+fractional_seconds は小数点以下の秒を指定します。
+fractional_seconds のデフォルト値は 0 です。
 
-@param fractional_seconds �������ʲ����äη���������ǻ��ꤷ�ޤ���
-                          ��ά��������0 �Ȥʤ�ޤ���
+@param fractional_seconds 小数点以下の秒の桁数を整数で指定します。
+                          省略した場合は0 となります。
 
-������
+使用例
   require 'time'
 
   iso8601_time = '2008-08-31T12:34:56+09:00'

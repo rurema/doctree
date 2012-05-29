@@ -1,47 +1,47 @@
 = module WEBrick::HTTPAuth::UserDB
 
-[[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::DigestAuth]] �ǻ��Ѥ��Ƥ���⥸�塼��Ǥ���
+[[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::DigestAuth]] で使用しているモジュールです。
 
 == Instance Methods
 
 --- auth_type -> Class
 
-[[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::DigestAuth]] �Τ����줫���֤��ޤ���
+[[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::DigestAuth]] のいずれかを返します。
 
 --- auth_type=(type)
 
-ǧ�ڤΥ����פ򥻥åȤ��ޤ���
+認証のタイプをセットします。
 
-@param type [[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::DigestAuth]] �Τ����줫����ꤷ�ޤ���
+@param type [[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::DigestAuth]] のいずれかを指定します。
 
 --- make_passwd(realm, user, pass) -> String
 
-[[m:WEBrick::HTTPAuth::UserDB#auth_type]] �� make_passwd ��ƤӽФ��ޤ���
+[[m:WEBrick::HTTPAuth::UserDB#auth_type]] の make_passwd を呼び出します。
 
-@param realm �������ꤷ�ޤ���
+@param realm レルムを指定します。
 
-@param user �桼��̾����ꤷ�ޤ���
+@param user ユーザ名を指定します。
 
-@param pass �ѥ���ɤ���ꤷ�ޤ���
+@param pass パスワードを指定します。
 
 @see [[m:WEBrick::HTTPAuth::BasicAuth#make_passwd]], [[m:WEBrick::HTTPAuth::DigestAuth#make_passwd]]
 
 --- set_passwd(realm, user, pass)
 #@# -> discard
-Ϳ����줿������Ȥˡ��ѥ���ɤ�ϥå��岽������¸���ޤ���
+与えられた情報をもとに、パスワードをハッシュ化して保存します。
 
-@param realm �������ꤷ�ޤ���
+@param realm レルムを指定します。
 
-@param user �桼��̾����ꤷ�ޤ���
+@param user ユーザ名を指定します。
 
-@param pass �ѥ���ɤ���ꤷ�ޤ���
+@param pass パスワードを指定します。
 
 --- get_passwd(realm, user, reload_db = false) -> String
 
-Ϳ����줿����ȥ桼��̾����ѥ���ɤΥϥå����ͤ���������֤��ޤ���
+与えられたレルムとユーザ名からパスワードのハッシュ値を取得して返します。
 
-@param realm �������ꤷ�ޤ���
+@param realm レルムを指定します。
 
-@param user �桼��̾����ꤷ�ޤ���
+@param user ユーザ名を指定します。
 
-@param reload_db ̵�뤵��ޤ���
+@param reload_db 無視されます。

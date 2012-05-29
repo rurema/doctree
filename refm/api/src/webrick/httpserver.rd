@@ -6,7 +6,7 @@ require webrick/httpresponse
 require webrick/httpservlet
 require webrick/accesslog
 
-HTTP ¥µ¡¼¥Ğ¤Îµ¡Ç½¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+HTTP ã‚µãƒ¼ãƒã®æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class WEBrick::HTTPServerError < WEBrick::ServerError
 

@@ -1,7 +1,7 @@
 = mswince
 
-((<WindowsCE>))���ư��롣
+((<WindowsCE>))上で動作する。
 
-((<mswin32>))�Ǥ�Ʊ�ͤ�VC++�ǥ���ѥ��뤵�졢�������ⶦ����ʬ��¿����
+((<mswin32>))版と同様にVC++でコンパイルされ、ソースも共通部分が多い。
 
-mips��sh3��sh4�����ݡ��Ȥ���Ƥ��롣
+mips・sh3・sh4がサポートされている。

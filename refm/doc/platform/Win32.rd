@@ -1,22 +1,22 @@
 = Win32
 
-32 �ӥåȥ������ƥ�������ư���
-Windows 95/98/Me/NT/2000/XP �ʤɤ����Τ��� Win32 �����ƥ�ȸƤӤޤ���
-16 �ӥåȥ������������ Windows 3.1
-����� MS-DOS �Ǥ� ((<DJGPP>)) �� Ruby ��ư��ޤ���
+32 ビットアーキテクチャ上で動作する
+Windows 95/98/Me/NT/2000/XP などを総称して Win32 システムと呼びます。
+16 ビットアーキクチャの Windows 3.1
+および MS-DOS では ((<DJGPP>)) 版 Ruby が動作します。
 
-�ʤ����ߤ� Win64 �����ƥ� (Alpha �� IA64) ��¸�ߤ��ޤ�����
-Ruby ��ư�����Ϥޤ�����ޤ���
+なお現在は Win64 システム (Alpha と IA64) も存在しますが、
+Ruby の動作報告はまだありません。
 
-Win32 �Ѥ� Ruby ���礭��ʬ�����
+Win32 用の Ruby は大きく分けると
 
-  * ((<Cygwin>)) ��
-  * ((<Win32�ͥ��ƥ�����>)) Ruby
+  * ((<Cygwin>)) 版
+  * ((<Win32ネイティブ版>)) Ruby
 
-������ब����ޤ���
+の二種類があります。
 
-���Υޥ˥奢�����ʸ���Ǥ�ʤ� Win32 �Ǥȸ����Ȥ���
-Win32 �ͥ��ƥ����Ǥ�ؤ���ΤȤ��ޤ���
-Cygwin �Ϥ��⤽�� Unix �ߴ��쥤����ܻؤ��Ƴ�ȯ����Ƥ���Τǡ�
-����Ū�� Unix ��ή���Τۤ������Ѥ��ޤ���
-�и�Ū�ˤ⡢Cygwin �Ǥ� mswin32 �Ǥ��� Unix �Ǥ˶ᤤ��ư�򼨤��ޤ���
+このマニュアルの本文で断りなく Win32 版と言うときは
+Win32 ネイティブ版を指すものとします。
+Cygwin はそもそも Unix 互換レイヤを目指して開発されているので、
+基本的に Unix の流儀のほうが通用します。
+経験的にも、Cygwin 版は mswin32 版よりも Unix 版に近い挙動を示します。

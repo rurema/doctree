@@ -3,29 +3,29 @@
 =begin
 = TclTkIp
 
-Tcl/Tk��ľ�ܰ�������Υ��饹�Ǥ���
+Tcl/Tkを直接扱うためのクラスです。
 
-Ruby/Tk�ץ�����ߥ󥰤ˤ����Ƥ��Υ��饹��¸�ߤ�ռ�����ɬ�פϤ���ޤ�
-��((*�ܺ٤ϡ�ext/tcltklib/MANUAL.euc �򻲾�*))
+Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
+ん。((*詳細は、ext/tcltklib/MANUAL.euc を参照*))
 
-((<TkCore::INTERP>))�ϡ����Υ��饹�Υ��󥹥��󥹤Ǥ���
+((<TkCore::INTERP>))は、このクラスのインスタンスです。
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<Object>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TclTkIp.new
 #@todo
-    Tcl/Tk ���󥿥ץ꥿���֥������Ȥ��������ޤ���
+    Tcl/Tk インタプリタオブジェクトを生成します。
 
-== �᥽�å�:
+== メソッド:
 
 --- TclTkIp#_eval(str)
 #@todo
-    ʸ����((|str|))�ǻ��ꤷ��Ǥ�դ� Tcl/Tk ������ץȤ�¹Ԥ��ޤ����¹Է�
-    �̤�ʸ������֤��ޤ���
+    文字列((|str|))で指定した任意の Tcl/Tk スクリプトを実行します。実行結
+    果を文字列で返します。
 
       require 'tcltklib'
 
@@ -39,8 +39,8 @@ Ruby/Tk�ץ�����ߥ󥰤ˤ����Ƥ��Υ��饹��¸�ߤ�ռ�����ɬ�פϤ���ޤ�
 
 --- TclTkIp#_invoke(cmd, *args)
 #@todo
-    Ǥ�դ� Tcl/Tk ���ޥ��((|cmd|))��((|args|))������˼¹Ԥ��ޤ����¹Է�
-    �̤�ʸ������֤��ޤ���
+    任意の Tcl/Tk コマンド((|cmd|))を((|args|))を引数に実行します。実行結
+    果を文字列で返します。
 
       require 'tcltklib'
 
@@ -52,14 +52,14 @@ Ruby/Tk�ץ�����ߥ󥰤ˤ����Ƥ��Υ��饹��¸�ߤ�ռ�����ɬ�פϤ���ޤ�
 
 --- TclTkIp#_return_value
 #@todo
-    ľ���˼¹Ԥ��� ((<TclTkIp#_invoke>))��((<TclTkIp#_eval>))������˽�λ������硢0���֤�
-    �ޤ���
+    直前に実行した ((<TclTkIp#_invoke>))、((<TclTkIp#_eval>))が正常に終了した場合、0を返し
+    ます。
 
 --- TclTkIp#mainloop
 #@todo
-    Tcl/Tk �Υᥤ��롼�פ�¹Ԥ��ޤ���((<TclTkLib.mainloop>))��Ʊ���Ǥ���
+    Tcl/Tk のメインループを実行します。((<TclTkLib.mainloop>))と同じです。
 
-    �ʲ��Τ褦�ˡ����󥿥ץ꥿���Ȥ˥ᥤ��롼�פ�¹Ԥ��뤳�Ȥ��Ǥ��ޤ���
+    以下のように、インタプリタごとにメインループを実行することができます．
 
         require 'tcltklib'
 
@@ -83,9 +83,9 @@ Ruby/Tk�ץ�����ߥ󥰤ˤ����Ƥ��Υ��饹��¸�ߤ�ռ�����ɬ�פϤ���ޤ�
 --- TclTkIp#_fromUTF8(str, encodename)
 #@todo
 
-�ʲ��Υ᥽�åɤ� Tcl/Tk �С������ 8.1 �ʹ�(���ܸ�������饤���ʤ�)��
-�����������ޤ����ޤ������ΤȤ� _eval, _invoke �ϡ�����������ͤ�
-UTF-8��encoding�ǻ��ꤷ��ʸ����Ȥδ֤�����Ѵ������褦���������ޤ���
+以下のメソッドは Tcl/Tk バージョンが 8.1 以降(日本語ローカライズなし)の
+場合に定義されます。また、このとき _eval, _invoke は，引数と戻り値が
+UTF-8とencodingで指定した文字列との間で相互変換されるよう再定義されます。
 
 --- TclTkIp#encoding
 #@todo

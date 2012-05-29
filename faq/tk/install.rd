@@ -1,10 +1,10 @@
-= ¤Ï¤¸¤á¤Î°ìÊâ
+= ã¯ã˜ã‚ã®ä¸€æ­©
 
-Â¾¤Î ruby ¥¹¥¯¥ê¥×¥È¤ÈÆ±¤¸¤è¤¦¤Ë½ñ¤­»Ï¤á¤Þ¤¹¡£ Îã¤¨¤Ð¡¢
+ä»–ã® ruby ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¨åŒã˜ã‚ˆã†ã«æ›¸ãå§‹ã‚ã¾ã™ã€‚ ä¾‹ãˆã°ã€
 
   #!/usr/local/bin/ruby
 
-¤È¤«¡£°ìÈÖ´ÊÃ±¤Ê "¤³¤ó¤Ë¤Á¤Ï" ¤òÉ½¼¨¤¹¤ë¥¹¥¯¥ê¥×¥È¤Ï¤³¤¦½ñ¤±¤Þ¤¹¡£
+ã¨ã‹ã€‚ä¸€ç•ªç°¡å˜ãª "ã“ã‚“ã«ã¡ã¯" ã‚’è¡¨ç¤ºã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¯ã“ã†æ›¸ã‘ã¾ã™ã€‚
 
 
     #!/usr/local/bin/ruby
@@ -12,18 +12,18 @@
     require "tk"
 
     TkLabel.new {
-      text '¤³¤ó¤Ë¤Á¤Ï'
+      text 'ã“ã‚“ã«ã¡ã¯'
     }.pack
 
     TkButton.new {
-      text '½ªÎ»'
+      text 'çµ‚äº†'
       command 'exit'
     }.pack
 
     Tk.mainloop
 
 
-ÊÌ¤Î½ñ¤­Êý¤ò¤¹¤ë¤È¡¢ 
+åˆ¥ã®æ›¸ãæ–¹ã‚’ã™ã‚‹ã¨ã€ 
 
 
     #!/usr/local/bin/ruby
@@ -31,26 +31,26 @@
     require "tk"
 
     TkLabel.new {
-      text '¤³¤ó¤Ë¤Á¤Ï'
+      text 'ã“ã‚“ã«ã¡ã¯'
       pack
     }
 
     TkButton.new {
-      text '½ªÎ»'
+      text 'çµ‚äº†'
       command 'exit'
       pack
     }
 
     Tk.mainloop
 
-¤³¤ó¤ÊÉ÷¤Ë¤â½ñ¤±¤Þ¤¹¡£
+ã“ã‚“ãªé¢¨ã«ã‚‚æ›¸ã‘ã¾ã™ã€‚
 
     #!/usr/local/bin/ruby
 
     require "tk"
 
-    TkLabel.new (Tk.root, 'text' => '¤³¤ó¤Ë¤Á¤Ï').pack
-    TkButton.new (Tk.root, 'text' => '½ªÎ»', 'command' => 'exit').pack
+    TkLabel.new (Tk.root, 'text' => 'ã“ã‚“ã«ã¡ã¯').pack
+    TkButton.new (Tk.root, 'text' => 'çµ‚äº†', 'command' => 'exit').pack
 
     Tk.mainloop
 

@@ -1,6 +1,6 @@
 = class OpenSSL::ASN1::ObjectId < OpenSSL::ASN1::Primitive
 
-ASN.1 ¤Î¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤òÉ½¤¹¥¯¥é¥¹¡£
+ASN.1 ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã€‚
 
 * ITU-T X.660 [[url:http://www.itu.int/rec/T-REC-X.660/en]]
 
@@ -8,34 +8,34 @@ ASN.1 ¤Î¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤òÉ½¤¹¥¯¥é¥¹¡£
 
 --- new(value) -> OpenSSL::ASN1::ObjectId
 --- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
-ASN.1 ¤Î¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤òÉ½¤ï¤¹ OpenSSL::ASN1::ObjectId ¤Î
-¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+ASN.1 ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã‚’è¡¨ã‚ã™ OpenSSL::ASN1::ObjectId ã®
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-value ¤È¤·¤Æ¤Ï¡¢¥É¥Ã¥È¶èÀÚ¤ê¿ô»úÉ½µ­¡¢short name¡¢long name ¤ÎÊ¸»úÎó¤Î
-¤ò¤¤¤º¤ì¤«¤òÅÏ¤·¤Þ¤¹¡£
+value ã¨ã—ã¦ã¯ã€ãƒ‰ãƒƒãƒˆåŒºåˆ‡ã‚Šæ•°å­—è¡¨è¨˜ã€short nameã€long name ã®æ–‡å­—åˆ—ã®
+ã‚’ã„ãšã‚Œã‹ã‚’æ¸¡ã—ã¾ã™ã€‚
 
-value °Ê³°¤Î°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¥¿¥°¥¯¥é¥¹¤Ï :UNIVERSAL¡¢
-¥¿¥° ¤Ï [[m:OpenSSL::ASN1::OBJECT]] ¤È¤Ê¤ê¤Þ¤¹¡£
+value ä»¥å¤–ã®å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯ã‚¿ã‚°ã‚¯ãƒ©ã‚¹ã¯ :UNIVERSALã€
+ã‚¿ã‚° ã¯ [[m:OpenSSL::ASN1::OBJECT]] ã¨ãªã‚Šã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   require "openssl"
   include OpenSSL
   p ASN1::ObjectId.new("1.2.840.10040.4.3").long_name # => "dsaWithSHA1"
   p ASN1::ObjectId.new("dsaWithSHA1").oid             # => "1.2.840.10040.4.3"
 
-@param value ASN.1 ¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤òÉ½¤¹Ê¸»úÎó
-@param tag ¥¿¥°ÈÖ¹æ
-@param tagging ¥¿¥°ÉÕ¤±¤ÎÊýË¡(:IMPLICIT ¤â¤·¤¯¤Ï :EXPLICIT)
-@param tag_class ¥¿¥°¥¯¥é¥¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ¤Î¤¤¤º¤ì¤«)
+@param value ASN.1 ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã‚’è¡¨ã™æ–‡å­—åˆ—
+@param tag ã‚¿ã‚°ç•ªå·
+@param tagging ã‚¿ã‚°ä»˜ã‘ã®æ–¹æ³•(:IMPLICIT ã‚‚ã—ãã¯ :EXPLICIT)
+@param tag_class ã‚¿ã‚°ã‚¯ãƒ©ã‚¹(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE ã®ã„ãšã‚Œã‹)
 
 --- register(oid, short_name, long_name) -> true
-¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤ËÂÐ±þ¤¹¤ëÌ¾Á°(short name ¤È long name)¤ò
-OpenSSL¤ÎÆâÉô¥Æ¡¼¥Ö¥ë¤ËÅÐÏ¿¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã«å¯¾å¿œã™ã‚‹åå‰(short name ã¨ long name)ã‚’
+OpenSSLã®å†…éƒ¨ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç™»éŒ²ã—ã¾ã™ã€‚
 
-ÅÐÏ¿¤·¤¿Ì¾Á°¤Ï [[c:OpenSSL::X509::Extension]] ¤Ê¤É¤ÇÍøÍÑ¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤ê¤Þ¤¹¡£
+ç™»éŒ²ã—ãŸåå‰ã¯ [[c:OpenSSL::X509::Extension]] ãªã©ã§åˆ©ç”¨ã§ãã‚‹ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   require "openssl"
   OpenSSL::ASN1::ObjectId.register(
@@ -43,28 +43,28 @@ OpenSSL¤ÎÆâÉô¥Æ¡¼¥Ö¥ë¤ËÅÐÏ¿¤·¤Þ¤¹¡£
   p OpenSSL::ASN1::ObjectId.new("2.5.29.9").long_name 
   # => "X509v3 Subject Directory Attributes"
 
-@param oid ÅÐÏ¿¤¹¤ë¼±ÊÌ»Ò(¥É¥Ã¥È¶èÀÚ¤ê¿ô»úÉ½µ­¤ÎÊ¸»úÎó)
-@param short_name short name¤È¤·¤ÆÅÐÏ¿¤¹¤ëÊ¸»úÎó
-@param long_name long name¤È¤·¤ÆÅÐÏ¿¤¹¤ëÊ¸»úÎó
-@raise OpenSSL::ASN1Error ÅÐÏ¿¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@param oid ç™»éŒ²ã™ã‚‹è­˜åˆ¥å­(ãƒ‰ãƒƒãƒˆåŒºåˆ‡ã‚Šæ•°å­—è¡¨è¨˜ã®æ–‡å­—åˆ—)
+@param short_name short nameã¨ã—ã¦ç™»éŒ²ã™ã‚‹æ–‡å­—åˆ—
+@param long_name long nameã¨ã—ã¦ç™»éŒ²ã™ã‚‹æ–‡å­—åˆ—
+@raise OpenSSL::ASN1Error ç™»éŒ²ã«å¤±æ•—ã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- oid -> String
-¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤Î¥É¥Ã¥È¶èÀÚ¤ê¿ôÃÍ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã®ãƒ‰ãƒƒãƒˆåŒºåˆ‡ã‚Šæ•°å€¤ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require "openssl"
   oid = OpenSSL::ASN1::ObjectId.new("subjectAltName")
   p oid.oid   #=> "2.5.29.17"
 
-@raise OpenSSL::ASN1::ASN1Error ¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»ÒÌ¾¤¬Ì¤ÃÎ¤Ç¤¢¤ë¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+@raise OpenSSL::ASN1::ASN1Error ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­åãŒæœªçŸ¥ã§ã‚ã‚‹å ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 --- sn -> String | nil
 --- short_name -> String | nil
-¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤ËÂÐ±þ¤¹¤ë short name ¤òÊÖ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã«å¯¾å¿œã™ã‚‹ short name ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require "openssl"
   oid = OpenSSL::ASN1::ObjectId.new("subjectAltName")
   p oid.sn   #=> "subjectAltName"
@@ -74,9 +74,9 @@ OpenSSL¤ÎÆâÉô¥Æ¡¼¥Ö¥ë¤ËÅÐÏ¿¤·¤Þ¤¹¡£
 --- ln -> String | nil
 --- long_name -> String | nil
 
-¥ª¥Ö¥¸¥§¥¯¥È¼±ÊÌ»Ò¤ËÂÐ±þ¤¹¤ë long name ¤òÊÖ¤·¤Þ¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè­˜åˆ¥å­ã«å¯¾å¿œã™ã‚‹ long name ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   require "openssl"
   oid = OpenSSL::ASN1::ObjectId.new("subjectAltName")
   p oid.ln   #=> "X509v3 Subject Alternative Name"

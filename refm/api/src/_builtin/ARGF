@@ -2,17 +2,17 @@
 
 extend Enumerable
 
-¥¹¥¯¥ê¥×¥È¤Ë»ØÄê¤·¤¿°ú¿ô
-([[m:Kernel::ARGV]] ¤ò»²¾È) ¤ò¥Õ¥¡¥¤¥ëÌ¾¤È¤ß¤Ê¤·¤Æ¡¢
-¤½¤ì¤é¤Î¥Õ¥¡¥¤¥ë¤òÏ¢·ë¤·¤¿ 1 ¤Ä¤Î²¾ÁÛ¥Õ¥¡¥¤¥ë¤òÉ½¤¹¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
-ARGV ¤¬¶õ¤Ê¤éÉ¸½àÆþÎÏ¤òÂÐ¾Ý¤È¤·¤Þ¤¹¡£
-ARGV ¤òÊÑ¹¹¤¹¤ì¤Ð¤³¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ÎÆ°ºî¤Ë±Æ¶Á¤·¤Þ¤¹¡£
+ã‚¹ã‚¯ãƒªãƒ—ãƒˆã«æŒ‡å®šã—ãŸå¼•æ•°
+([[m:Kernel::ARGV]] ã‚’å‚ç…§) ã‚’ãƒ•ã‚¡ã‚¤ãƒ«åã¨ã¿ãªã—ã¦ã€
+ãã‚Œã‚‰ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é€£çµã—ãŸ 1 ã¤ã®ä»®æƒ³ãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¡¨ã™ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã™ã€‚
+ARGV ãŒç©ºãªã‚‰æ¨™æº–å…¥åŠ›ã‚’å¯¾è±¡ã¨ã—ã¾ã™ã€‚
+ARGV ã‚’å¤‰æ›´ã™ã‚Œã°ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‹•ä½œã«å½±éŸ¿ã—ã¾ã™ã€‚
 
     while line = ARGF.gets
       ....
     end
 
-¤Ï¡¢
+ã¯ã€
 
     while argv = ARGV.shift
       File.open(argv) {|file|
@@ -22,36 +22,36 @@ ARGV ¤òÊÑ¹¹¤¹¤ì¤Ð¤³¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ÎÆ°ºî¤Ë±Æ¶Á¤·¤Þ¤¹¡£
       }
     end
 
-¤Î¤è¤¦¤ËÆ°ºî¤·¤Þ¤¹¡£
+ã®ã‚ˆã†ã«å‹•ä½œã—ã¾ã™ã€‚
 
-ARGF ¤ò½èÍý¤¹¤ë¤´¤È¤Ë ARGV ¤ÎÍ×ÁÇ¤Ï°ì¤Ä¤º¤Ä¼è¤ê½ü¤«¤ì¤Þ¤¹¡£
-ºÇ¸å¤Þ¤Ç ARGF ¤òÆÉ¤ß¹þ¤ó¤À¸å¡¢ºÆÅÙ ARGF ¤«¤éÆâÍÆ¤òÆÉ¤à¤È
-(ARGV ¤¬¶õ¤Ê¤Î¤Ç)É¸½àÆþÎÏ¤«¤é¤ÎÆÉ¤ß¹þ¤ß¤È¤Ê¤ê¤Þ¤¹¡£
+ARGF ã‚’å‡¦ç†ã™ã‚‹ã”ã¨ã« ARGV ã®è¦ç´ ã¯ä¸€ã¤ãšã¤å–ã‚Šé™¤ã‹ã‚Œã¾ã™ã€‚
+æœ€å¾Œã¾ã§ ARGF ã‚’èª­ã¿è¾¼ã‚“ã å¾Œã€å†åº¦ ARGF ã‹ã‚‰å†…å®¹ã‚’èª­ã‚€ã¨
+(ARGV ãŒç©ºãªã®ã§)æ¨™æº–å…¥åŠ›ã‹ã‚‰ã®èª­ã¿è¾¼ã¿ã¨ãªã‚Šã¾ã™ã€‚
 
     ARGV.replace %w(/tmp/foo /tmp/bar)
     ARGF.each {|line|
-        # ½èÍýÃæ¤Î ARGV ¤ÎÆâÍÆ¤òÉ½¼¨
+        # å‡¦ç†ä¸­ã® ARGV ã®å†…å®¹ã‚’è¡¨ç¤º
         p [ARGF.filename, ARGV]
         ARGF.skip
     }
         # => ["/tmp/foo", ["/tmp/bar"]]
         #    ["/tmp/bar", []]
-    # ºÇ¸å¤Þ¤ÇÆÉ¤ó¤À¸å (ARGV ¤¬¶õ) ¤ÎÆ°ºî
+    # æœ€å¾Œã¾ã§èª­ã‚“ã å¾Œ (ARGV ãŒç©º) ã®å‹•ä½œ
     p ARGF.gets      # => nil
     p ARGF.filename  # => "-"
 
-[[m:Kernel.#gets]] ¤Ê¤É°ìÉô¤ÎÁÈ¤ß¹þ¤ß´Ø¿ô¤Ï
-ARGF.gets ¤Ê¤É¤³¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ò¥ì¥·¡¼¥Ð¤È¤·¤¿¥á¥½¥Ã¥É¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
+[[m:Kernel.#gets]] ãªã©ä¸€éƒ¨ã®çµ„ã¿è¾¼ã¿é–¢æ•°ã¯
+ARGF.gets ãªã©ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒ¬ã‚·ãƒ¼ãƒã¨ã—ãŸãƒ¡ã‚½ãƒƒãƒ‰ã®çœç•¥å½¢ã§ã™ã€‚
 
 #@if (version >= "1.8.0")
 --- filename -> String
 --- path -> String
 
-½èÍýÂÐ¾Ý¤Î¥Õ¥¡¥¤¥ëÌ¾¤òÊÖ¤·¤Þ¤¹¡£
-É¸½àÆþÎÏ¤ËÂÐ¤·¤Æ¤Ï - ¤òÊÖ¤·¤Þ¤¹¡£
-ÁÈ¤ß¹þ¤ßÊÑ¿ô [[m:$FILENAME]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+å‡¦ç†å¯¾è±¡ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿”ã—ã¾ã™ã€‚
+æ¨™æº–å…¥åŠ›ã«å¯¾ã—ã¦ã¯ - ã‚’è¿”ã—ã¾ã™ã€‚
+çµ„ã¿è¾¼ã¿å¤‰æ•° [[m:$FILENAME]] ã¨åŒã˜ã§ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -59,15 +59,15 @@ ARGF.gets ¤Ê¤É¤³¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ò¥ì¥·¡¼¥Ð¤È¤·¤¿¥á¥½¥Ã¥É¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
     p [ARGF.filename, ARGF.path, ARGV]
     ARGF.skip
   }
-  #Îã
+  #ä¾‹
   #=> ["test.rb", "test.rb", ["test.rb~", "third.txt", "ugo.yaml"]]
   #=> ["test.rb~", "test.rb~", ["third.txt", "ugo.yaml"]]
   #...
 
 --- to_s -> String
-¾ï¤ËÊ¸»úÎó "ARGF" ¤òÊÖ¤·¤Þ¤¹¡£
+å¸¸ã«æ–‡å­—åˆ— "ARGF" ã‚’è¿”ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -76,7 +76,7 @@ ARGF.gets ¤Ê¤É¤³¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ò¥ì¥·¡¼¥Ð¤È¤·¤¿¥á¥½¥Ã¥É¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
     ARGF.skip
   end
 
-  #Îã
+  #ä¾‹
   #=> ["test.rb", "ARGF", ["test.rb~", "third.txt", "ugo.yaml"]]
   #=> ["test.rb~", "ARGF", ["third.txt", "ugo.yaml"]]
   #...
@@ -86,32 +86,32 @@ ARGF.gets ¤Ê¤É¤³¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ò¥ì¥·¡¼¥Ð¤È¤·¤¿¥á¥½¥Ã¥É¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
 --- filename -> String
 --- to_s -> String
 
-½èÍýÂÐ¾Ý¤Î¥Õ¥¡¥¤¥ëÌ¾¤òÊÖ¤·¤Þ¤¹¡£
-É¸½àÆþÎÏ¤ËÂÐ¤·¤Æ¤Ï - ¤òÊÖ¤·¤Þ¤¹¡£
-ÁÈ¤ß¹þ¤ßÊÑ¿ô [[m:$FILENAME]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+å‡¦ç†å¯¾è±¡ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿”ã—ã¾ã™ã€‚
+æ¨™æº–å…¥åŠ›ã«å¯¾ã—ã¦ã¯ - ã‚’è¿”ã—ã¾ã™ã€‚
+çµ„ã¿è¾¼ã¿å¤‰æ•° [[m:$FILENAME]] ã¨åŒã˜ã§ã™ã€‚
 #@end
 
 --- file -> IO
-½èÍýÂÐ¾Ý¤Î [[c:File]] ¥ª¥Ö¥¸¥§¥¯¥È(¤Þ¤¿¤Ï [[c:IO]] ¥ª¥Ö¥¸¥§¥¯¥È)¤ò
-ÊÖ¤·¤Þ¤¹¡£
+å‡¦ç†å¯¾è±¡ã® [[c:File]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(ã¾ãŸã¯ [[c:IO]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)ã‚’
+è¿”ã—ã¾ã™ã€‚
 
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
 
   until ARGF.closed?
-    printf("ºÇ½ª¹¹¿·»þ¹ï %s (%s)\n", ARGF.file.stat.mtime, ARGF.filename)
+    printf("æœ€çµ‚æ›´æ–°æ™‚åˆ» %s (%s)\n", ARGF.file.stat.mtime, ARGF.filename)
     ARGF.skip
   end 
-  #Îã
-  #=> ºÇ½ª¹¹¿·»þ¹ï Thu May 03 14:05:53 +0900 2007 (sample.yaml)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sun Aug 26 11:28:09 +0900 2007 (test.rb)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sun Aug 26 11:27:58 +0900 2007 (test.rb~)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sun Jun 24 13:08:12 +0900 2007 (third.txt)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
+  #ä¾‹
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Thu May 03 14:05:53 +0900 2007 (sample.yaml)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sun Aug 26 11:28:09 +0900 2007 (test.rb)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sun Aug 26 11:27:58 +0900 2007 (test.rb~)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sun Jun 24 13:08:12 +0900 2007 (third.txt)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
 
 
-$stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin¤òÊÖ¤·¤Þ¤¹¡£
+$stdinãŒIOã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãªã„å ´åˆã¯$stdinã‚’è¿”ã—ã¾ã™ã€‚
 
   class MyIO
     def to_io
@@ -127,16 +127,16 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin¤òÊÖ¤·¤Þ¤¹¡£
 
   __END__
   MyIO Test
-  ¤Ç¤¹¡£
+  ã§ã™ã€‚
 
 @see [[m:ARGF.to_io]]
 
 --- lineno -> Integer
 
-Á´°ú¿ô¥Õ¥¡¥¤¥ë¤ò°ì¤Ä¤Î¥Õ¥¡¥¤¥ë¤È¤ß¤Ê¤·¤¿¤È¤­¤Î¸½ºß¤Î¹ÔÈÖ¹æ¤òÊÖ¤·¤Þ¤¹¡£
-¸Ä¡¹¤Î°ú¿ô¥Õ¥¡¥¤¥ëËè¤Î¹ÔÈÖ¹æ¤òÆÀ¤ë¤Ë¤Ï ARGF.file.lineno ¤È¤·¤Þ¤¹¡£
+å…¨å¼•æ•°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸€ã¤ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨ã¿ãªã—ãŸã¨ãã®ç¾åœ¨ã®è¡Œç•ªå·ã‚’è¿”ã—ã¾ã™ã€‚
+å€‹ã€…ã®å¼•æ•°ãƒ•ã‚¡ã‚¤ãƒ«æ¯Žã®è¡Œç•ªå·ã‚’å¾—ã‚‹ã«ã¯ ARGF.file.lineno ã¨ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -146,16 +146,16 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin¤òÊÖ¤·¤Þ¤¹¡£
     end
     p [ ARGF.lineno, line]
   }
-  #Îã
+  #ä¾‹
   #=> [10, "cat:\n"]
   #=> [11, " - name: taro\n"]
   #=> [12, "   age: 7\n"]
   #...
 
 --- lineno=(number)
-Á´°ú¿ô¥Õ¥¡¥¤¥ë¤ò°ì¤Ä¤Î¥Õ¥¡¥¤¥ë¤È¤ß¤Ê¤·¤¿¤È¤­¤Î¸½ºß¤Î¹ÔÈÖ¹æ¤ò number ¤Ë½ñ¤­´¹¤¨¤Þ¤¹¡£
+å…¨å¼•æ•°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸€ã¤ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨ã¿ãªã—ãŸã¨ãã®ç¾åœ¨ã®è¡Œç•ªå·ã‚’ number ã«æ›¸ãæ›ãˆã¾ã™ã€‚
 
-@param number ¹¹¿·¸å¤Î¹ÔÈÖ¹æ¤ò»ØÄê¤¹¤ë
+@param number æ›´æ–°å¾Œã®è¡Œç•ªå·ã‚’æŒ‡å®šã™ã‚‹
 
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
@@ -167,7 +167,7 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin¤òÊÖ¤·¤Þ¤¹¡£
     end
     p [ARGF.lineno, line]
   }
-  #=> Îã
+  #=> ä¾‹
   #=> [1, "cat:\n"]
   #=> [2, " - name: taro\n"]
   #=> [3, "   age: 7\n"]
@@ -177,25 +177,25 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin¤òÊÖ¤·¤Þ¤¹¡£
 
 --- skip -> self
 
-½èÍýÂÐ¾Ý¤Î¥Õ¥¡¥¤¥ë¤ò¥¯¥í¡¼¥º¤·¤Þ¤¹¡£
-¼¡²ó¤ÎÆÉ¤ß¹þ¤ß¤Ï¼¡¤Î°ú¿ô¤¬½èÍýÂÐ¾Ý¤Ë¤Ê¤ê¤Þ¤¹¡£
-self ¤òÊÖ¤·¤Þ¤¹¡£
+å‡¦ç†å¯¾è±¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ã¾ã™ã€‚
+æ¬¡å›žã®èª­ã¿è¾¼ã¿ã¯æ¬¡ã®å¼•æ•°ãŒå‡¦ç†å¯¾è±¡ã«ãªã‚Šã¾ã™ã€‚
+self ã‚’è¿”ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
   while line = ARGF.gets
     p [ARGF.filename, ARGV, ARGF.skip]
   end
-  #Îã
+  #ä¾‹
   #=> ["sample.yaml", ["test.rb", "test.rb~", "third.txt", "ugo.yaml"], ARGF]
   #=> ["test.rb", ["test.rb~", "third.txt", "ugo.yaml"], ARGF]
   #...
 
 
 --- binmode -> self
-[[m:IO#binmode]]¤ò»²¾È
+[[m:IO#binmode]]ã‚’å‚ç…§
 
   require 'md5'
 
@@ -209,21 +209,21 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
     printf("%s\t%s\n", md5, files[i])
   }
 
-  #Îã
+  #ä¾‹
   #=> fe413bf114e16b0cd596d869743e9d35        ruby-1.8.5-p35.tar.gz
   #=> 70ad729e965c9625d2dfb7fa0145b423        sample.yaml
   #=> d91e81b81673279e908a1c08e8582487        test.rb
   #=> 158c4a0a097379a08bd88abfca6a51c5        test.rb~
   #...
 
-#@# ruby-list:43420 ¤ò»²¹Í¤Ë¤·¤¿
+#@# ruby-list:43420 ã‚’å‚è€ƒã«ã—ãŸ
 
 @see [[m:IO#binmode]]
 
 --- close -> self
-½èÍýÂÐ¾Ý¤Î¥Õ¥¡¥¤¥ë¤ò¥¯¥í¡¼¥º¤·¤Þ¤¹¡£³«¤¯¥Õ¥¡¥¤¥ë¤¬»Ä¤Ã¤Æ¤¤¤ë¾ì¹ç¤Ï¼¡¤Î¥Õ¥¡¥¤¥ë¤ò¥ª¡¼¥×¥ó¤·¤Þ¤¹¡£
+å‡¦ç†å¯¾è±¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ã¾ã™ã€‚é–‹ããƒ•ã‚¡ã‚¤ãƒ«ãŒæ®‹ã£ã¦ã„ã‚‹å ´åˆã¯æ¬¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -242,7 +242,7 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
     p "ARGF is not closed"
   end
   
-  #Îã
+  #ä¾‹
   #=> ["cat:", "sample.yaml"]
   #=> "ARGF is not closed"
   #=> ["", "test.rb"]
@@ -252,9 +252,9 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
   #=> "ARGF had been closed."
 
 --- closed? -> bool
-ARGF¤¬close¤µ¤ì¤Æ¤¤¤ì¤Ðtrue¤òÊÖ¤·¤Þ¤¹¡£
+ARGFãŒcloseã•ã‚Œã¦ã„ã‚Œã°trueã‚’è¿”ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -273,7 +273,7 @@ ARGF¤¬close¤µ¤ì¤Æ¤¤¤ì¤Ðtrue¤òÊÖ¤·¤Þ¤¹¡£
     p "ARGF is not closed"
   end
   
-  #Îã
+  #ä¾‹
   #=> ["cat:", "sample.yaml"]
   #=> "ARGF is not closed"
   #=> ["", "test.rb"]
@@ -297,9 +297,9 @@ ARGF¤¬close¤µ¤ì¤Æ¤¤¤ì¤Ðtrue¤òÊÖ¤·¤Þ¤¹¡£
 --- each_line(rs = $/)  -> Enumerator
 #@end
 
-ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£
+ARGFã®ç¾åœ¨ä½ç½®ã‹ã‚‰ä¸€è¡Œãšã¤æ–‡å­—åˆ—ã¨ã—ã¦èª­ã¿è¾¼ã¿ã¾ã™ã€‚
 
-@param rs ¶èÀÚ¤êÊ¸»ú¤ò»ØÄê¤¹¤ë
+@param rs åŒºåˆ‡ã‚Šæ–‡å­—ã‚’æŒ‡å®šã™ã‚‹
 
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
@@ -308,7 +308,7 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£
     line.chomp!
     printf("'%s' in %s\n", line, ARGF.filename)
   }
-  #Îã
+  #ä¾‹
   #=> '--- !ruby/object:Dog ' in ugo.yaml
   #=> 'name: pochi' in ugo.yaml
   #=> '--- ' in ugo.yaml
@@ -331,16 +331,16 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£
 --- each_byte -> Enumerator
 #@end
 
-ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Þ¤¹¡£
+ARGF ã®ç¾åœ¨ä½ç½®ã‹ã‚‰ 1 ãƒã‚¤ãƒˆãšã¤èª­ã¿è¾¼ã¿ã€ãã‚Œã‚’æ•´æ•°ã¨ã—ã¦ä¸Žãˆã€ãƒ–ãƒ­ãƒƒã‚¯ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
   ARGF.each_byte {|b|
     printf("%4d <-> %4s\n", b, b.chr)
   }
-  #Îã
+  #ä¾‹
   #=>  45 <->    -
   #=>  32 <->
   #=>  83 <->    S
@@ -367,12 +367,12 @@ ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·
 --- chars                   -> Enumerator
 #@end
 
-¥ì¥·¡¼¥Ð¤Ë´Þ¤Þ¤ì¤ëÊ¸»ú¤ò°ìÊ¸»ú¤Ä¤Ä¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤ÆÉ¾²Á¤·¤Þ¤¹¡£
+ãƒ¬ã‚·ãƒ¼ãƒã«å«ã¾ã‚Œã‚‹æ–‡å­—ã‚’ä¸€æ–‡å­—ã¤ã¤ãƒ–ãƒ­ãƒƒã‚¯ã«æ¸¡ã—ã¦è©•ä¾¡ã—ã¾ã™ã€‚
 
-¥ì¥·¡¼¥Ð¤ÏÆÉ¤ß¹þ¤ß²ÄÇ½¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+ãƒ¬ã‚·ãƒ¼ãƒã¯èª­ã¿è¾¼ã¿å¯èƒ½ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
 #@until 1.9.1
-¤Þ¤¿¡¢¥Þ¥ë¥Á¥Ð¥¤¥ÈÊ¸»úÎó¤ò»ÈÍÑ¤¹¤ë¾ì¹ç¤Ï [[m:$KCODE]] ¤òÅ¬ÀÚ¤ËÀßÄê¤·¤Æ¤¯¤À¤µ¤¤¡£
+ã¾ãŸã€ãƒžãƒ«ãƒãƒã‚¤ãƒˆæ–‡å­—åˆ—ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã¯ [[m:$KCODE]] ã‚’é©åˆ‡ã«è¨­å®šã—ã¦ãã ã•ã„ã€‚
 #@end
 
 @see [[m:IO#each_char]], [[m:IO#chars]]
@@ -381,11 +381,11 @@ ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·
 
 --- eof -> bool
 --- eof? -> bool
-¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤¬eof¤ËÃ£¤·¤¿¤étrue¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ïfalse¤òÊÖ¤·¤Þ¤¹¡£
+ç¾åœ¨é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãŒeofã«é”ã—ãŸã‚‰trueã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã¯falseã‚’è¿”ã—ã¾ã™ã€‚
 
-@raise IOError ¥Õ¥¡¥¤¥ë¤¬open¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç
+@raise IOError ãƒ•ã‚¡ã‚¤ãƒ«ãŒopenã•ã‚Œã¦ã„ãªã„å ´åˆ
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -402,7 +402,7 @@ ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·
     print "IOError !!\n"
   end
 
-  #=> Îã
+  #=> ä¾‹
   #=> eof. sample.yaml has 13(13) line
   #=> eof. test.rb has 159(172) line
   #=> eof. test.rb~ has 159(331) line
@@ -414,9 +414,9 @@ ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·
 
 --- fileno -> Integer
 --- to_i -> Integer
-¸½ºß¥ª¡¼¥×¥ó¤·¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ëµ­½Ò»Ò¤òÉ½¤¹À°¿ô¤òÊÖ¤·¤Þ¤¹¡£
+ç¾åœ¨ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«è¨˜è¿°å­ã‚’è¡¨ã™æ•´æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -429,7 +429,7 @@ ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·
   rescue ArgumentError
     print "ArgumentError\n"
   end
-  #Îã
+  #ä¾‹
   #=> [3, "sample.yaml"]
   #=> [3, "test.rb"]
   #=> [3, "test.rb~"]
@@ -440,9 +440,9 @@ ARGF ¤Î¸½ºß°ÌÃÖ¤«¤é 1 ¥Ð¥¤¥È¤º¤ÄÆÉ¤ß¹þ¤ß¡¢¤½¤ì¤òÀ°¿ô¤È¤·¤ÆÍ¿¤¨¡¢¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·
 @raise ArgumentError
 
 --- getc -> Integer | nil
-ARGF¤«¤é 1 Ê¸»úÆÉ¤ß¹þ¤ó¤Ç¡¢¤½¤ÎÊ¸»ú¤ËÂÐ±þ¤¹¤ë Fixnum ¤òÊÖ¤·¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
+ARGFã‹ã‚‰ 1 æ–‡å­—èª­ã¿è¾¼ã‚“ã§ã€ãã®æ–‡å­—ã«å¯¾å¿œã™ã‚‹ Fixnum ã‚’è¿”ã—ã¾ã™ã€‚EOF ã«åˆ°é”ã—ãŸæ™‚ã«ã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -450,7 +450,7 @@ ARGF¤«¤é 1 Ê¸»úÆÉ¤ß¹þ¤ó¤Ç¡¢¤½¤ÎÊ¸»ú¤ËÂÐ±þ¤¹¤ë Fixnum ¤òÊÖ¤·¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»
   while c = ARGF.getc
     printf("%d,%c.\n", c, c)
   end
-  #Îã
+  #ä¾‹
   #=> 45,-.
   #=> 32, .
   #=> 67,C.
@@ -463,9 +463,9 @@ ARGF¤«¤é 1 Ê¸»úÆÉ¤ß¹þ¤ó¤Ç¡¢¤½¤ÎÊ¸»ú¤ËÂÐ±þ¤¹¤ë Fixnum ¤òÊÖ¤·¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»
   #...
 
 --- gets -> String | nil
-ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
+ARGFã®ç¾åœ¨ä½ç½®ã‹ã‚‰ä¸€è¡Œãšã¤æ–‡å­—åˆ—ã¨ã—ã¦èª­ã¿è¾¼ã¿ã¾ã™ã€‚EOF ã«åˆ°é”ã—ãŸæ™‚ã«ã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
@@ -479,7 +479,7 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤Ï nil ¤òÊ
 
 --- pos -> Integer
 --- tell -> Integer
-ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤Î¸½ºß¤Î°ÌÃÖ¤òÀ°¿ô¤ÇÊÖ¤·¤Þ¤¹¡£
+ARGFãŒç¾åœ¨é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã®ç¾åœ¨ã®ä½ç½®ã‚’æ•´æ•°ã§è¿”ã—ã¾ã™ã€‚
 
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
@@ -492,7 +492,7 @@ ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤Î¸½ºß¤Î°ÌÃÖ¤òÀ°¿ô¤ÇÊÖ¤·¤Þ¤¹¡£
     end
   end
 
-  # Îã
+  # ä¾‹
   #=> 1 'c' sample.yaml
   #=> 2 'a' sample.yaml
   #=> 3 't' sample.yaml
@@ -507,16 +507,16 @@ ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤Î¸½ºß¤Î°ÌÃÖ¤òÀ°¿ô¤ÇÊÖ¤·¤Þ¤¹¡£
 @see [[m:IO#pos]], [[m:IO#tell]]
 
 --- pos=(n)
-ARGF¤¬³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤ò»ØÄê°ÌÃÖ¤Ë°ÜÆ°¤·¤Þ¤¹¡£
+ARGFãŒé–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‚’æŒ‡å®šä½ç½®ã«ç§»å‹•ã—ã¾ã™ã€‚
 
-@param n ÀèÆ¬¤«¤é¤Î¥ª¥Õ¥»¥Ã¥È¤òÀ°¿ô¤Ç»ØÄê¤·¤Þ¤¹¡£
+@param n å…ˆé ­ã‹ã‚‰ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’æ•´æ•°ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
   print ARGF.readline
-  #Îã
+  #ä¾‹
   #=> #!/usr/bin/env ruby
   ARGF.pos = 2
   print ARGF.readline
@@ -528,14 +528,14 @@ ARGF¤¬³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤ò»ØÄê°ÌÃÖ¤Ë°ÜÆ°¤·¤Þ¤¹¡£
 @see [[m:IO#pos=]]
 
 --- read(length = nil, str = nil) -> String
-ARGV¤Ë»ØÄê¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¤òÀèÆ¬¤Î¥Õ¥¡¥¤¥ë¤«¤élength¥Ð¥¤¥ÈÆÉ¤ß¹þ¤ß¡¢
-¤½¤ÎÊ¸»úÎó¤òstr¤Ë½ÐÎÏ¤·¤Þ¤¹¡£ÆÉ¤ß¹þ¤ó¤ÀÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+ARGVã«æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’å…ˆé ­ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰lengthãƒã‚¤ãƒˆèª­ã¿è¾¼ã¿ã€
+ãã®æ–‡å­—åˆ—ã‚’strã«å‡ºåŠ›ã—ã¾ã™ã€‚èª­ã¿è¾¼ã‚“ã æ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param length ÆÉ¤ß¹þ¤à¥Ð¥¤¥È¿ô¤ò»ØÄê¤·¤Þ¤¹ nil¤Î¾ì¹ç¤ÏARGV¤Î¤¹¤Ù¤Æ¤Î¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹þ¤ß¤Þ¤¹¡£
+@param length èª­ã¿è¾¼ã‚€ãƒã‚¤ãƒˆæ•°ã‚’æŒ‡å®šã—ã¾ã™ nilã®å ´åˆã¯ARGVã®ã™ã¹ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã¾ã™ã€‚
 
-@param str ½ÐÎÏÀè¤ÎÊ¸»úÎó
+@param str å‡ºåŠ›å…ˆã®æ–‡å­—åˆ—
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
@@ -544,17 +544,17 @@ ARGV¤Ë»ØÄê¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¤òÀèÆ¬¤Î¥Õ¥¡¥¤¥ë¤«¤élength¥Ð¥¤¥ÈÆÉ¤ß¹þ¤ß¡¢
   ARGF.read(100, str)
   p str.size #=> 100
   p str 
-  # Îã
+  # ä¾‹
   #=> "cat:\n - name: taro\n   age: 7\n - name: jiro\n   age: 23\n---\ndog:\n shiba:\n- name: goro\n    age: 3\n  -"
 
 @see [[m:IO#read]]
 
 --- readchar -> Integer
-ARGF¤«¤é 1 Ê¸»úÆÉ¤ß¹þ¤ó¤Ç¡¢¤½¤ÎÊ¸»ú¤ËÂÐ±þ¤¹¤ë Fixnum ¤òÊÖ¤·¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤Ï EOFError¤òÈ¯À¸¤·¤Þ¤¹¡£
+ARGFã‹ã‚‰ 1 æ–‡å­—èª­ã¿è¾¼ã‚“ã§ã€ãã®æ–‡å­—ã«å¯¾å¿œã™ã‚‹ Fixnum ã‚’è¿”ã—ã¾ã™ã€‚EOF ã«åˆ°é”ã—ãŸæ™‚ã«ã¯ EOFErrorã‚’ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise EOFError EOF¤ËÃ£¤·¤¿»þÈ¯À¸¤¹¤ë
+@raise EOFError EOFã«é”ã—ãŸæ™‚ç™ºç”Ÿã™ã‚‹
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
@@ -567,7 +567,7 @@ ARGF¤«¤é 1 Ê¸»úÆÉ¤ß¹þ¤ó¤Ç¡¢¤½¤ÎÊ¸»ú¤ËÂÐ±þ¤¹¤ë Fixnum ¤òÊÖ¤·¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»
     break
   end while true
 
-  # Îã
+  # ä¾‹
   #...
   #=>    t is  116
   #=>    a is   97
@@ -580,11 +580,11 @@ ARGF¤«¤é 1 Ê¸»úÆÉ¤ß¹þ¤ó¤Ç¡¢¤½¤ÎÊ¸»ú¤ËÂÐ±þ¤¹¤ë Fixnum ¤òÊÖ¤·¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»
 @see [[m:ARGF.getc]]
 
 --- readline -> String
-ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤ÏEOFError¤òÈ¯À¸¤·¤Þ¤¹¡£
+ARGFã®ç¾åœ¨ä½ç½®ã‹ã‚‰ä¸€è¡Œãšã¤æ–‡å­—åˆ—ã¨ã—ã¦èª­ã¿è¾¼ã¿ã¾ã™ã€‚EOF ã«åˆ°é”ã—ãŸæ™‚ã«ã¯EOFErrorã‚’ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise EOFError EOF¤ËÃ£¤·¤¿¤éÈ¯À¸¤¹¤ë
+@raise EOFError EOFã«é”ã—ãŸã‚‰ç™ºç”Ÿã™ã‚‹
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
@@ -597,7 +597,7 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤ÏEOFError
     break
   end while true
 
-  #Îã
+  #ä¾‹
   #...
   #=> "- Saitama\n"
   #=> <EOFError: end of file reached>
@@ -606,17 +606,17 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤ÏEOFError
 
 --- readlines(rs = $/) -> [String]
 --- to_a(rs = $/) -> [String]
-ARGF¤Î³Æ¹Ô¤òÇÛÎó¤ËÆÉ¤ß¹þ¤ó¤ÇÊÖ¤·¤Þ¤¹¡£rs¤¬nil¤Î¾ì¹ç¤ÏÍ×ÁÇ¤Ë³Æ¥Õ¥¡¥¤¥ë¤ò¤¹¤Ù¤ÆÆÉ¤ß¹þ¤ó¤ÀÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+ARGFã®å„è¡Œã‚’é…åˆ—ã«èª­ã¿è¾¼ã‚“ã§è¿”ã—ã¾ã™ã€‚rsãŒnilã®å ´åˆã¯è¦ç´ ã«å„ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã™ã¹ã¦èª­ã¿è¾¼ã‚“ã é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param rs ¹Ô¶èÀÚ¤êÊ¸»ú
+@param rs è¡ŒåŒºåˆ‡ã‚Šæ–‡å­—
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
   aall = ARGF.readlines
   p aall[0, 3]
-  # Îã
+  # ä¾‹
   #=> ["cat:\n", " - name: taro\n", "   age: 7\n"] 
   p ARGF.closed? #=> true
 
@@ -632,14 +632,14 @@ ARGF¤Î³Æ¹Ô¤òÇÛÎó¤ËÆÉ¤ß¹þ¤ó¤ÇÊÖ¤·¤Þ¤¹¡£rs¤¬nil¤Î¾ì¹ç¤ÏÍ×ÁÇ¤Ë³Æ¥Õ¥¡¥¤¥ë¤ò¤¹¤Ù¤ÆÆÉ¤
 @see [[m:$/]] [[m:IO#readlines]]
 
 --- rewind -> 0
-ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤òÀèÆ¬¤ËÌá¤·¤Þ¤¹¡£
+ARGFãŒç¾åœ¨é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‚’å…ˆé ­ã«æˆ»ã—ã¾ã™ã€‚
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
 
-  #³Æ¥Õ¥¡¥¤¥ë¤ÎÀèÆ¬¤«¤é£³¹Ô¤ò£²²óÉ½¼¨¤¹¤ë
+  #å„ãƒ•ã‚¡ã‚¤ãƒ«ã®å…ˆé ­ã‹ã‚‰ï¼“è¡Œã‚’ï¼’å›žè¡¨ç¤ºã™ã‚‹
   until ARGF.closed?
     1.upto(2){|i|
       printf("filename:%s at %d\n", ARGF.filename, i)
@@ -654,12 +654,12 @@ ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤òÀèÆ¬¤ËÌá¤·¤Þ¤¹¡£
   end 
 
 --- seek(offset, whence = IO::SEEK_SET) -> 0
-ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤ò whence ¤Î°ÌÃÖ¤«¤é offset ¤À¤±°ÜÆ°¤µ¤»¤Þ¤¹¡£ offset °ÌÃÖ¤Ø¤Î°ÜÆ°¤¬À®¸ù¤¹¤ì¤Ð 0 ¤òÊÖ¤·¤Þ¤¹¡£
+ARGFãŒç¾åœ¨é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‚’ whence ã®ä½ç½®ã‹ã‚‰ offset ã ã‘ç§»å‹•ã•ã›ã¾ã™ã€‚ offset ä½ç½®ã¸ã®ç§»å‹•ãŒæˆåŠŸã™ã‚Œã° 0 ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param offset ¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤ò°ÜÆ°¤µ¤»¤ë¥ª¥Õ¥»¥Ã¥È¤òÀ°¿ô¤Ç»ØÄê¤·¤Þ¤¹¡£
-@param whence [[m:IO#seek]]¤ò»²¾È
+@param offset ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‚’ç§»å‹•ã•ã›ã‚‹ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’æ•´æ•°ã§æŒ‡å®šã—ã¾ã™ã€‚
+@param whence [[m:IO#seek]]ã‚’å‚ç…§
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
@@ -673,7 +673,7 @@ ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤ò whence ¤Î°ÌÃÖ¤«¤é offset ¤À¤±°Ü
     end
     ARGF.skip
   end
-  #Îã
+  #ä¾‹
   #=> (sample.yaml):d of sample
   #=> (test.rb):.skip
   #=> (test.rb~):.skip
@@ -683,26 +683,26 @@ ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ý¥¤¥ó¥¿¤ò whence ¤Î°ÌÃÖ¤«¤é offset ¤À¤±°Ü
 @see [[m:IO#seek]]
 
 --- to_io -> IO
-ARGF¤¬¸½ºß³«¤¤¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Î[[c:File]]¡¢¤Þ¤¿¤Ï[[c:IO]]¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹
+ARGFãŒç¾åœ¨é–‹ã„ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®[[c:File]]ã€ã¾ãŸã¯[[c:IO]]ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã—ã¾ã™
 
-  # ¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤«¤éÅ¬Åö¤Ë¥Õ¥¡¥¤¥ë¤òÁª¤Ö
+  # ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰é©å½“ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸ã¶
   ARGV.replace(
     Dir.glob("*").select{|name| FileTest.file?(name)}
   )
 
   until ARGF.closed?
-    printf("ºÇ½ª¹¹¿·»þ¹ï %s (%s)\n", ARGF.to_io.stat.mtime, ARGF.filename)
+    printf("æœ€çµ‚æ›´æ–°æ™‚åˆ» %s (%s)\n", ARGF.to_io.stat.mtime, ARGF.filename)
     ARGF.skip
   end 
-  #Îã
-  #=> ºÇ½ª¹¹¿·»þ¹ï Thu May 03 14:05:53 +0900 2007 (sample.yaml)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sat Aug 18 16:31:42 +0900 2007 (test.rb)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sat Aug 18 16:31:30 +0900 2007 (test.rb~)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sun Jun 24 13:08:12 +0900 2007 (third.txt)
-  #=> ºÇ½ª¹¹¿·»þ¹ï Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
+  #ä¾‹
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Thu May 03 14:05:53 +0900 2007 (sample.yaml)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sat Aug 18 16:31:42 +0900 2007 (test.rb)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sat Aug 18 16:31:30 +0900 2007 (test.rb~)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sun Jun 24 13:08:12 +0900 2007 (third.txt)
+  #=> æœ€çµ‚æ›´æ–°æ™‚åˆ» Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
   #...
 
-$stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin.to_io¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
+$stdinãŒIOã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãªã„å ´åˆã¯$stdin.to_ioã‚’å‘¼ã³å‡ºã—ã¾ã™ã€‚
 
   class MyIO
     def to_io
@@ -719,7 +719,7 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin.to_io¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
 
   __END__
   MyIO Test
-  ¤Ç¤¹¡£
+  ã§ã™ã€‚
 
 @see [[m:ARGF.file]]
 
@@ -730,11 +730,11 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin.to_io¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
 --- bytes    -> Enumerable::Enumerator
 #@end
 
-¼«¿È¤ò 1 ¥Ð¥¤¥È¤º¤ÄÀ°¿ô¤È¤·¤Æ¥¤¥Æ¥ì¡¼¥È¤¹¤ë¤è¤¦¤Ê
+è‡ªèº«ã‚’ 1 ãƒã‚¤ãƒˆãšã¤æ•´æ•°ã¨ã—ã¦ã‚¤ãƒ†ãƒ¬ãƒ¼ãƒˆã™ã‚‹ã‚ˆã†ãª
 #@since 1.8.8
-[[c:Enumerator]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+[[c:Enumerator]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 #@else
-[[c:Enumerable::Enumerator]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+[[c:Enumerable::Enumerator]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 #@end
 
    ARGF.bytes.to_a        #=> [104, 101, 108, 108, 111]
@@ -745,17 +745,17 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin.to_io¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
 --- lines(rs = $/)    -> Enumerable::Enumerator
 #@end
 
-¼«¿È¤ò 1 ¹Ô¤º¤Ä¥¤¥Æ¥ì¡¼¥È¤¹¤ë¤è¤¦¤Ê
+è‡ªèº«ã‚’ 1 è¡Œãšã¤ã‚¤ãƒ†ãƒ¬ãƒ¼ãƒˆã™ã‚‹ã‚ˆã†ãª
 #@since 1.8.8
-[[c:Enumerator]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+[[c:Enumerator]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 #@else
-[[c:Enumerable::Enumerator]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+[[c:Enumerable::Enumerator]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 #@end
 
-¥Æ¥­¥¹¥ÈÆÉ¤ß¹þ¤ß¥á¥½¥Ã¥É¤È¤·¤ÆÆ°ºî¤·¤Þ¤¹¡£
+ãƒ†ã‚­ã‚¹ãƒˆèª­ã¿è¾¼ã¿ãƒ¡ã‚½ãƒƒãƒ‰ã¨ã—ã¦å‹•ä½œã—ã¾ã™ã€‚
 
-@param rs ¹Ô¤Î¶èÀÚ¤ê¤òÊ¸»úÎó¤Ç»ØÄê¤·¤Þ¤¹¡£rs ¤Ë nil ¤ò»ØÄê¤¹¤ë¤È¹Ô¶èÀÚ¤ê¤Ê¤·¤È¤ß¤Ê¤·¤Þ¤¹¡£
-          ¶õÊ¸»úÎó "" ¤ò»ØÄê¤¹¤ë¤ÈÏ¢Â³¤¹¤ë²þ¹Ô¤ò¹Ô¤Î¶èÀÚ¤ê¤È¤ß¤Ê¤·¤Þ¤¹(¥Ñ¥é¥°¥é¥Õ¥â¡¼¥É)¡£
+@param rs è¡Œã®åŒºåˆ‡ã‚Šã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚rs ã« nil ã‚’æŒ‡å®šã™ã‚‹ã¨è¡ŒåŒºåˆ‡ã‚Šãªã—ã¨ã¿ãªã—ã¾ã™ã€‚
+          ç©ºæ–‡å­—åˆ— "" ã‚’æŒ‡å®šã™ã‚‹ã¨é€£ç¶šã™ã‚‹æ”¹è¡Œã‚’è¡Œã®åŒºåˆ‡ã‚Šã¨ã¿ãªã—ã¾ã™(ãƒ‘ãƒ©ã‚°ãƒ©ãƒ•ãƒ¢ãƒ¼ãƒ‰)ã€‚
 
    ARGF.lines.to_a   #=> ["foo\n", "bar\n"]
 
@@ -763,24 +763,24 @@ $stdin¤¬IO¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¾ì¹ç¤Ï$stdin.to_io¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
 
 --- getbyte   -> Integer | nil
 
-¼«¿È¤«¤é 1 ¥Ð¥¤¥È¤òÆÉ¤ß¹þ¤ßÀ°¿ô¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
-´û¤Ë EOF ¤ËÃ£¤·¤Æ¤¤¤ì¤Ð nil ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‹ã‚‰ 1 ãƒã‚¤ãƒˆã‚’èª­ã¿è¾¼ã¿æ•´æ•°ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
+æ—¢ã« EOF ã«é”ã—ã¦ã„ã‚Œã° nil ã‚’è¿”ã—ã¾ã™ã€‚
 
    ARGF.getbyte   #=> 84
    ARGF.getbyte   #=> 104
 
 --- readbyte   -> Integer
 
-¼«¿È¤«¤é 1 ¥Ð¥¤¥È¤òÆÉ¤ß¹þ¤ßÀ°¿ô¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
-´û¤Ë EOF ¤ËÃ£¤·¤Æ¤¤¤ì¤Ð EOFError ¤¬È¯À¸¤·¤Þ¤¹¡£
+è‡ªèº«ã‹ã‚‰ 1 ãƒã‚¤ãƒˆã‚’èª­ã¿è¾¼ã¿æ•´æ•°ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
+æ—¢ã« EOF ã«é”ã—ã¦ã„ã‚Œã° EOFError ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise EOFError ´û¤Ë EOF ¤ËÃ£¤·¤Æ¤¤¤ë¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise EOFError æ—¢ã« EOF ã«é”ã—ã¦ã„ã‚‹å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 #@end
 
 #@since 1.9.1
 --- readpartial(length, str = nil)
-[[m:IO#readpartial]]¤ò»²¾È
+[[m:IO#readpartial]]ã‚’å‚ç…§
 
 @see [[m:IO#readpartial]]
 

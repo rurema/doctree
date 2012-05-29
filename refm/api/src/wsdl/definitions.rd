@@ -46,14 +46,14 @@ require xsd/namedelements
 --- importedschema
 #@todo
 
-Â°À­
+å±æ€§
 
 #@end
 
 --- imports
 #@todo
 
-Â°À­
+å±æ€§
 
 --- inspect
 #@todo
@@ -76,7 +76,7 @@ require xsd/namedelements
 --- name
 #@todo
 
-Â°À­
+å±æ€§
 
 --- parse_attr(attr, name)
 #@todo
@@ -84,7 +84,7 @@ require xsd/namedelements
 --- parse_element(element)
 #@todo
 
-[[m:WSDL::Info#parse_element]]¤ò¸Æ¤Ó½Ğ¤½¤¦¤È¤¹¤ë¤¬¼ÂÁõ¤¬Ìµ¤¤
+[[m:WSDL::Info#parse_element]]ã‚’å‘¼ã³å‡ºãã†ã¨ã™ã‚‹ãŒå®Ÿè£…ãŒç„¡ã„
 
 --- porttype
 #@todo
@@ -112,6 +112,6 @@ require xsd/namedelements
 --- targetnamespace=(targetnamespace)
 #@todo
 
-Â°À­
+å±æ€§
 
 #@end

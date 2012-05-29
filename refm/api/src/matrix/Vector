@@ -2,25 +2,25 @@
 #@since 1.9.2
 include Enumerable
 #@end
-#@# [2002-04-03]  by [[unknown:����|URL:mailto:sugawah@attglobal.net]]
+#@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
-�� [[c:Numeric]] �����ǤȤ���٥��ȥ�򰷤����饹�Ǥ���
+数 [[c:Numeric]] を要素とするベクトルを扱うクラスです。
 
-#@# ((-Vector���饹�ˤϱѸ�Υɥ�����Ȥ��ۤȤ�ɤʤ��Τǡ��Ѹ��������äƤߤޤ������Ȥꤢ���������ˤ��Ƥ����ơ����Τ������Ѹ��Ǥ�ʬΥ���ޤ���-))
+#@# ((-Vectorクラスには英語のドキュメントがほとんどないので、英語の方も補ってみました。とりあえず対訳にしておいて、そのうち、英語版を分離します。-))
 
-#@#=== �Ȥ�����Usage
+#@#=== 使い方　Usage
 
-#@#Vector���饹��Ȥ�����ˤϡ�require 'matrix'����ɬ�פ�����ޤ���
+#@#Vectorクラスを使うためには、require 'matrix'する必要があります。
 
 #@#  require 'matrix'
 
-=== Complex���饹�Ȥ�ʻ�� Working with Complex class
+=== Complexクラスとの併用 Working with Complex class
 
-require 'complex' ���뤳�Ȥˤ�äơ�
-Vector ���֥������Ȥ����Ǥ� [[c:Complex]] ���饹�˳�ĥ����ޤ���
-¿���Υ᥽�åɤϡ����γ�ĥ���줿Vector���饹�Ǥ⡢�����̤��ư��ޤ���
+require 'complex' することによって、
+Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されます。
+多くのメソッドは、この拡張されたVectorクラスでも、期待通りに動作します。
 
-������ϡ������Ǥ���ʣ�ǿ����ִ�����᥽�å� (Vector#conjugate)�Ǥ���
+次の例は、各要素を共役複素数に置換するメソッド (Vector#conjugate)です。
 
   require 'matrix'
   require 'complex'
@@ -38,14 +38,14 @@ Vector ���֥������Ȥ����Ǥ� [[c:Complex]] ���饹�˳�ĥ����ޤ���
   p v3 #=> Vector[Complex(1,0),Complex(2,0),Complex(3,0)]
 
 
-��������Complex ���Ǥ˳�ĥ���줿 Vector ���饹�ǡ�
-�����̤��ư��ʤ��᥽�åɤ⤢��ޤ���
-�㤨�С��٥��ȥ�������ͤ���� [[m:Vector#r]] �᥽�åɤϡ�
-�����Ǥ�2���¤�ʿ���� [[m:Math.#sqrt]] ����ޤ�����
-���ΤȤ��㳰��ȯ���������ǽ��������ޤ���
+しかし、Complex 要素に拡張された Vector クラスで、
+期待通りに動作しないメソッドもあります。
+例えば、ベクトルの絶対値を求める [[m:Vector#r]] メソッドは、
+各要素の2乗和の平方根 [[m:Math.#sqrt]] を求めますが、
+このとき例外を発生させる可能性があります。
 
-ʣ�ǿ������ǤȤ���٥��ȥ�������ͤ���뤿��ˤϡ�
-�����Ǥ������ͤ�2���¤�Ȥ�ʤ��ƤϤʤ�ޤ���(������ Vector#abs�᥽�åɡˡ�
+複素数を要素とするベクトルの絶対値を求めるためには、
+各要素の絶対値の2乗和をとらなくてはなりません(次の例 Vector#absメソッド）。
 
   require 'matrix'
   require 'complex'
@@ -64,26 +64,26 @@ Vector ���֥������Ȥ����Ǥ� [[c:Complex]] ���饹�˳�ĥ����ޤ���
 
 #@#=== ChangeLog
 #@#
-#@#  *[2002-04-03] by [[unknown:����|URL:mailto:sugawah@attglobal.net]]
-#@#    * �Ȥ���������ɲ�
-#@#    * Working with Complex class������ɲ�
-#@#    * []=�᥽�åɤ��ɲ�
-#@#    * ���ƥ졼���ط���Ʊ����ˤޤȤ᤿ collect, map, each2, collect2, map2
-#@#    * �������������������ľ������ �Ȥ���each2, collect2, map2
-#@#    * ¾���饹�ؤΥ�󥯤��ɲ� Numeric, Matrix
-#@#  *[2002-04-02] ���� by [[unknown:����|URL:mailto:sugawah@attglobal.net]]
+#@#  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#@#    * 使い方の節を追加
+#@#    * Working with Complex classの節を追加
+#@#    * []=メソッドを追加
+#@#    * イテレータ関係を同じ節にまとめた collect, map, each2, collect2, map2
+#@#    * 誤りを訂正し、説明を直した。 とくにeach2, collect2, map2
+#@#    * 他クラスへのリンクを追加 Numeric, Matrix
+#@#  *[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 == Class Methods
 
 --- [](*a) -> Vector
 
-���Ѹİ��������ǤȤ���٥��ȥ���������ޤ���
+可変個引数を要素とするベクトルを生成します。
 
-Vector[a1, a2, a3, ... ]�Ȥ����Ȥ��� ����a1, a2, a3, ... �����ǤȤ���٥��ȥ���������ޤ���
+Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とするベクトルを生成します。
 
-@param a �٥��ȥ������
+@param a ベクトルの要素
 
-��:
+例:
 
   v1 = Vector[1, 3, 5, 7]
   v2 = Vector[5.25, 10.5]
@@ -92,13 +92,13 @@ Vector[a1, a2, a3, ... ]�Ȥ����Ȥ��� ����a1, a2, a3, ... �����ǤȤ���٥��ȥ���
 
 --- elements(a, copy = true) -> Vector
 
-���� a �����ǤȤ���٥��ȥ���������ޤ���
-�����������ץ������� copy ���� (false) �ʤ�С�ʣ����Ԥ��ޤ���
+配列 a を要素とするベクトルを生成します。
+ただし、オプション引数 copy が偽 (false) ならば、複製を行いません。
 
-@param a     [[c:Vector]]����������ݤ����Ǥ�����
-@param copy  ���������� a �Υ��ԡ��򤹤뤫�ɤ����Υե饰
+@param a     [[c:Vector]]を生成する際の要素の配列
+@param copy  引数の配列 a のコピーをするかどうかのフラグ
 
-��:
+例:
 
   a = [1, 2, 3, 4]
   v1 = Vector.elements(a, true)
@@ -116,33 +116,33 @@ Vector[a1, a2, a3, ... ]�Ȥ����Ȥ��� ����a1, a2, a3, ... �����ǤȤ���٥��ȥ���
 --- element(i) -> object | nil
 --- component(i) -> object | nil
 #@end
-i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
-���Ǥ�¸�ߤ��ʤ�����ǥå�������ꤷ�����ˤ� nil ���֤��ޤ���
+i 番目の要素を返します。インデックスは 0 から開始します。
+要素が存在しないインデックスを指定した時には nil を返します。
 
-@param i �����������ǤΥ���ǥå����������ͤǻ��ꤷ�ޤ���
-         ����ǥå����� 0 ����Ϥ�ޤ���
+@param i 取得する要素のインデックスを整数値で指定します。
+         インデックスは 0 から始めます。
 
 --- init_elements(array, copy) -> Array
-�٥��ȥ�����Ǥ���� array �ǽ�������ޤ���
+ベクトルの要素を引数 array で初期化します。
 
-@param array �٥��ȥ�Ȥ��ƽ�������� Array ����ꤷ�ޤ���
-@param copy  ����array ���Ϥ��줿����򥳥ԡ����뤫��true/false�ǻ��ꤷ�ޤ���
-             true �ξ��ϥ��ԡ����ޤ���
+@param array ベクトルとして初期化する Array を指定します。
+@param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
+             true の場合はコピーします。
 
-===== ����
+===== 注意
 
-�ܥ᥽�åɤ�[[c:Vector]]���饹�����ѤǤ���
+本メソッドは[[c:Vector]]クラス内部用です。
 
 --- size() -> Fixnum
 
-�٥��ȥ�����ǿ�(����)���֤��ޤ���
+ベクトルの要素数(次元)を返します。
 
 #@#--- []=(i, x)
 #@#
-#@#i ���ܤ����Ǥ� x ���ѹ����ޤ���
+#@#i 番目の要素を x に変更します。
 #@#
-#@#���Υ᥽�åɤϡ�matrix.rb ���������Ƥ��ޤ���
-#@#�ʲ��ˡ���������Ȼ�����򼨤��ޤ���
+#@#このメソッドは、matrix.rb に定義されていません。
+#@#以下に、その定義と使用例を示します。
 #@#
 #@#  require 'matrix'
 #@#  
@@ -159,24 +159,24 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 --- ==(v) -> bool
 --- eqn?(v) -> bool
 
-��ʬ���ȤȰ��� v ����Ӥ���true/false ���֤��ޤ���
+自分自身と引数 v を比較し、true/false を返します。
 
-@param v ����оݥ٥��ȥ�
+@param v 比較対象ベクトル
 
 --- compare_by(elements) -> bool
 
-��ʬ���ȤȰ��� elements ������Ȥ�����Ӥ��ޤ���
+自分自身と引数 elements を配列として比較します。
 
-@param elements ��Ӥ�������
-@return ��ӷ�̤�(����Ȥ���)Ʊ����Τ��ä��Ȥ��� true �򤽤�ʳ��� false ���֤��ޤ���
+@param elements 比較する配列。
+@return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
 
 --- *(a) -> Vector
 
-�� a ������Ǥ˾褸���٥��ȥ���֤��ޤ���
+数 a を各要素に乗じたベクトルを返します。
 
-@param a �軻��Ԥ���
+@param a 乗算を行う数
 
-��:
+例:
 
   a = [1, 2, 3.5, 100]
   v1 = Vector.elements(a)
@@ -185,15 +185,15 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 
 --- *(m) -> Matrix
 
-��ʬ���Ȥ���٥��ȥ�(����)���Ѵ����� (�ºݤˤ� [[m:Matrix.column_vector]](self) ��Ŭ��) ���顢���� m �򱦤���褸������ ([[c:Matrix]] ���饹) ���֤��ޤ���
+自分自身を列ベクトル(行列)に変換して (実際には [[m:Matrix.column_vector]](self) を適用) から、行列 m を右から乗じた行列 ([[c:Matrix]] クラス) を返します。
 
-@param m ������軻��Ԥ�����
+@param m 右から乗算を行う行列
 
-===== ����
+===== 注意
 
-�����ι��� m �ϼ�ʬ���Ȥ���٥��ȥ�Ȥ������˾軻������Ǥ������Ǥ���ɬ�פ�����ޤ���
+引数の行列 m は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
 
-��:
+例:
   require 'matrix'
 
   v = Vector[1, 2]
@@ -204,47 +204,47 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 
 --- +(v) -> Vector
 
-�٥��ȥ� v ��ä����٥��ȥ���֤��ޤ���
+ベクトル v を加えたベクトルを返します。
 
-��ʬ���ȤȰ��� v �����Ǥ򤽤줾��û��������η�̤�[[c:Vector]]���饹�Υ��֥������ȤȤ����֤��ޤ���
+自分自身と引数 v の要素をそれぞれ加算し、その結果を[[c:Vector]]クラスのオブジェクトとして返します。
 
-@param v �û��򤹤�٥��ȥ�
+@param v 加算をするベクトル
 
-@raise ExceptionForMatrix::ErrDimensionMismatch ��ʬ���ȤȰ����Υ٥���
-       ������Ǥο�(����)���ۤʤäƤ����Ȥ���ȯ�����ޤ���
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 --- -(v) -> Vector
 
-�٥��ȥ� v �򸺤����٥��ȥ���֤��ޤ���
+ベクトル v を減じたベクトルを返します。
 
-��ʬ���ȤȰ��� v �����Ǥ򤽤줾�츺���������η�̤�[[c:Vector]]���饹�Υ��֥������ȤȤ����֤��ޤ���
+自分自身と引数 v の要素をそれぞれ減算し、その結果を[[c:Vector]]クラスのオブジェクトとして返します。
 
-@param v ��������٥��ȥ�
+@param v 減算するベクトル
 
-@raise ExceptionForMatrix::ErrDimensionMismatch ��ʬ���ȤȰ����Υ٥���
-       ������Ǥο�(����)���ۤʤäƤ����Ȥ���ȯ�����ޤ���
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 --- inner_product(v) -> Float
 
-�٥��ȥ� v �Ȥ����Ѥ��֤��ޤ���
+ベクトル v との内積を返します。
 
-@param v ���Ѥ����٥��ȥ�
+@param v 内積を求めるベクトル
 
-@raise ExceptionForMatrix::ErrDimensionMismatch ��ʬ���ȤȰ����Υ٥���
-       ������Ǥο�(����)���ۤʤäƤ����Ȥ���ȯ�����ޤ���
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 --- r -> Float
 
-���Ȥ��礭���ʥΥ��ˤ��֤��ޤ���
+自身の大きさ（ノルム）を返します。
  
-�����������Ǥμ����¤�ʿ������Math.sqrt�ˤ�׻����Ƥ���Τǡ�
-���Ǥ�ʣ�ǿ��ξ��ϰ��̤��������͡����Ǥ������ͼ�����¤�ʿ������
-���֤��ޤ���
+ただし、要素の自乗和の平方根（Math.sqrt）を計算しているので、
+要素が複素数の場合は一般に正しい値（要素の絶対値自乗の和の平方根）
+を返しません。
 
  Vector[3, 4].r # => 5.0
- Vector[Complex(0, 1), 0].r # => Complex(0.0, 1.0)   �������� 1.0
+ Vector[Complex(0, 1), 0].r # => Complex(0.0, 1.0)   正しくは 1.0
 
-���Ǥ�ʣ�ǿ��ξ��ˤ��б������᥽�åɤϰʲ��Τ褦������Ǥ��ޤ���
+要素が複素数の場合にも対応したメソッドは以下のように定義できます。
 
   class Vector
     def norm
@@ -257,9 +257,9 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 --- collect {|x| ... } -> Vector
 --- map {|x| ... } -> Vector
 
-�٥��ȥ�γ����Ǥ��Ф��ƥ֥��å���ɾ��������̤����ǤȤ��ƻ��ĥ٥��ȥ���������ޤ���
+ベクトルの各要素に対してブロックを評価した結果を、要素として持つベクトルを生成します。
 
-��:
+例:
 
   a = [1, 2, 3.5, -10]
   v1 = Vector.elements(a)
@@ -272,23 +272,23 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 --- each2(v) {|x, y| ... }
 #@todo
 
-�٥��ȥ�γ����Ǥȡ�������б����륤��ǥå�������İ��� v �����ǤȤ��Ȥ��Ф��� (2������) �֥��å����֤�ɾ�����ޤ���`v' �� size �᥽�åɤ� [] �᥽�åɤ���ĥ��֥������ȤǤ���
-#@# size�᥽�åɤ�[]�᥽�åɤ���Ĥ��Ȥ��ä�Array���饹������Ȥ��Ƥ褤�ΤǤ��礦��?  ñ������󥯥饹�Ƚ񤱤�Ȥ��줷���Ǥ���
+ベクトルの各要素と、それに対応するインデックスを持つ引数 v の要素との組に対して (2引数の) ブロックを繰返し評価します。`v' は size メソッドと [] メソッドを持つオブジェクトです。
+#@# sizeメソッドと[]メソッドを持つことをもってArrayクラスの定義としてよいのでしょうか?  単純に配列クラスと書けるとうれしいです。
 
 --- collect2(v) {|x, y| ... } -> Array
 
-�٥��ȥ�γ����ǤȰ��� v �����ǤȤ��Ȥ��Ф��ƥ֥��å���ɾ���������η�̤����ǤȤ��ƻ���������֤��ޤ���
+ベクトルの各要素と引数 v の要素との組に対してブロックを評価し、その結果を要素として持つ配列を返します。
 
-�٥��ȥ�γ����Ǥȡ�������б����륤��ǥå�������İ��� v (�٥��ȥ� or ����)�����ǤȤ��Ȥ��Ф��� (2������) �֥��å���ɾ���������η�̤����ǤȤ��ƻ���������֤��ޤ���
+ベクトルの各要素と、それに対応するインデックスを持つ引数 v (ベクトル or 配列)の要素との組に対して (2引数の) ブロックを評価し、その結果を要素として持つ配列を返します。
 
-@param v �֥��å����ɾ�������(�٥��ȥ� or ����)
+@param v ブロック内で評価される(ベクトル or 配列)
 
-@raise ExceptionForMatrix::ErrDimensionMismatch ��ʬ���ȤȰ����Υ٥���
-       ������Ǥο�(����)���ۤʤäƤ����Ȥ���ȯ�����ޤ���
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
-������ϡ����ĤΥ٥��ȥ����������Ѥ����ǤȤ���������������ޤ���
+次の例は、２つのベクトルの要素毎の積を要素とする配列を生成します。
 
-��:
+例:
 
   require 'matrix'
   
@@ -299,23 +299,23 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
   z = v1.collect2(v2){|x, y| x * y }
   p z #=> [14, 27, 55]
 
-  z = v1.collect2(a) {|x, y| x * y } # Array�Ǥ�OK
+  z = v1.collect2(a) {|x, y| x * y } # ArrayでもOK
   p z #=> [14, 27, 55]
 
 --- map2(v) {|x, y| ... } -> Vector
 
-�٥��ȥ�γ����ǤȰ��� v �����ǤȤ��Ȥ��Ф��ƥ֥��å���ɾ���������η�̤����ǤȤ��ƻ��ĥ٥��ȥ���֤��ޤ���
+ベクトルの各要素と引数 v の要素との組に対してブロックを評価し、その結果を要素として持つベクトルを返します。
 
-�٥��ȥ�γ����Ǥȡ�������б����륤��ǥå�������İ��� (�٥��ȥ� or ����) �����ǤȤ��Ȥ��Ф��� (2������) �֥��å���ɾ��������̤����ǤȤ��ƻ��ĥ٥��ȥ���֤��ޤ���
+ベクトルの各要素と、それに対応するインデックスを持つ引数 (ベクトル or 配列) の要素との組に対して (2引数の) ブロックを評価した結果を、要素として持つベクトルを返します。
 
-@param v �֥��å����ɾ�������(�٥��ȥ� or ����)
+@param v ブロック内で評価される(ベクトル or 配列)
 
-@raise ExceptionForMatrix::ErrDimensionMismatch ��ʬ���ȤȰ����Υ٥���
-       ������Ǥο�(����)���ۤʤäƤ����Ȥ���ȯ�����ޤ���
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
-������ϡ����ĤΥ٥��ȥ����������Ѥ����ǤȤ��ƻ��ĥ٥��ȥ���������ޤ���
+次の例は、２つのベクトルの要素毎の積を要素として持つベクトルを生成します。
 
-��:
+例:
 
   require 'matrix'
   
@@ -326,16 +326,16 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
   z = v1.map2(v2) {|x, y| x * y }
   p z #=> Vector[14, 27, 55]
 
-  z = v1.map2(a) {|x, y| x * y } # Array�Ǥ�OK
+  z = v1.map2(a) {|x, y| x * y } # ArrayでもOK
   p z #=> Vector[14, 27, 55]
 
 --- covector -> Matrix
-[[c:Matrix]] ���֥������Ȥ��Ѵ����ޤ���
+[[c:Matrix]] オブジェクトへ変換します。
 
-��٥��ȥ� (����)�����ʤ����(n, 1) ���ι�����Ѵ����ޤ���
-�ºݤˤ� [[m:Matrix.row_vector]](self) ��Ŭ�Ѥ��ޤ���
+列ベクトル (行列)、すなわち、(n, 1) 型の行列に変換します。
+実際には [[m:Matrix.row_vector]](self) を適用します。
 
-��:
+例:
 
   require 'matrix'
 
@@ -346,9 +346,9 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 
 --- to_a -> Array
 
-�٥��ȥ�([[c:Vector]])�������� ([[c:Array]]) ���Ѵ����ޤ���
+ベクトル([[c:Vector]])から配列 ([[c:Array]]) に変換します。
 
-��:
+例:
 
   require 'matrix'
 
@@ -358,9 +358,9 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 
 --- to_s -> String
 
-�٥��ȥ�([[c:Vector]])����ʸ���� ([[c:String]]) ���Ѵ����ޤ���
+ベクトル([[c:Vector]])から文字列 ([[c:String]]) に変換します。
 
-��:
+例:
 
   require 'matrix'
 
@@ -370,9 +370,9 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 
 #@if (version >= "1.9.1")
 --- elements_to_f -> Vector
-�٥��ȥ�γ���ʬ��[[c:Float]]���Ѵ������٥��ȥ���֤��ޤ���
+ベクトルの各成分を[[c:Float]]に変換したベクトルを返します。
 
-��:
+例:
   require 'matrix'
 
   v = Vector.elements([2, 3, 5, 7, 9])
@@ -380,9 +380,9 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
   p vf #=> "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
 
 --- elements_to_i -> Vector
-�٥��ȥ�γ���ʬ��[[c:Integer]]���Ѵ������٥��ȥ���֤��ޤ���
+ベクトルの各成分を[[c:Integer]]に変換したベクトルを返します。
 
-��:
+例:
   require 'matrix'
 
   v = Vector.elements([2.5, 3.0, 5.01, 7])
@@ -390,9 +390,9 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
   p vi #=> "Vector[2, 3, 5, 7]"
 
 --- elements_to_r -> Vector
-�٥��ȥ�γ���ʬ��[[c:Rational]]���Ѵ������٥��ȥ���֤��ޤ���
+ベクトルの各成分を[[c:Rational]]に変換したベクトルを返します。
 
-��:
+例:
 
   require 'matrix'
 
@@ -404,18 +404,18 @@ i ���ܤ����Ǥ��֤��ޤ�������ǥå����� 0 ���鳫�Ϥ��ޤ���
 
 --- hash() -> Fixnum
 
-��ʬ���ȤΥϥå����ͤ��֤��ޤ���
+自分自身のハッシュ値を返します。
 
 --- clone() -> Vector
 
-��ʬ���Ȥ򥳥ԡ������٥��ȥ���֤��ޤ���
+自分自身をコピーしたベクトルを返します。
 
 --- coerce(other) -> Array
-self �� other ��Ʊ�����饹�ˤʤ�褦����ʬ���Ȥ� other ���Ѵ��� [other, self] �Ȥ�������ˤ����֤��ޤ���
+self と other が同じクラスになるよう、自分自身か other を変換し [other, self] という配列にして返します。
 
 --- inspect() -> String 
 
-���֥������Ȥ����Ƥ�ʸ���󲽤��ޤ���
+オブジェクトの内容を文字列化します。
 
 = class ExceptionForMatrix::ErrDimensionMismatch < StandardError
 = class ExceptionForMatrix::ErrNotRegular < StandardError

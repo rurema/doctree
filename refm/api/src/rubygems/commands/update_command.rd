@@ -6,21 +6,21 @@ require rubygems/spec_fetcher
 require rubygems/version_option
 require rubygems/commands/install_command
 
-¥í¡¼¥«¥ë¥ê¥İ¥¸¥È¥ê¤Ë¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¹¹¿·¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+ãƒ­ãƒ¼ã‚«ãƒ«ãƒªãƒã‚¸ãƒˆãƒªã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’æ›´æ–°ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Gem::Commands::UpdateCommand < Gem::Command
 include Gem::InstallUpdateOptions
 include Gem::LocalRemoteOptions
 include Gem::VersionOption
 
-¥í¡¼¥«¥ë¥ê¥İ¥¸¥È¥ê¤Ë¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ë Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¹¹¿·¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+ãƒ­ãƒ¼ã‚«ãƒ«ãƒªãƒã‚¸ãƒˆãƒªã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’æ›´æ–°ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Public Instance Methods
 --- do_rubygems_update(version)
 
-RubyGems ¼«ÂÎ¤ò¹¹¿·¤·¤Ş¤¹¡£
+RubyGems è‡ªä½“ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
 --- which_to_update(highest_installed_gems, gem_names) -> Array
 
-¹¹¿·¤¬É¬Í×¤Ê Gem ¤Î¥ê¥¹¥È¤òÊÖ¤·¤Ş¤¹¡£
+æ›´æ–°ãŒå¿…è¦ãª Gem ã®ãƒªã‚¹ãƒˆã‚’è¿”ã—ã¾ã™ã€‚
 

@@ -1,39 +1,39 @@
 = class WEBrick::HTTPUtils::FormData < String
 
-���饤����Ȥ��ե���������Ϥ����ͤ�ɽ�����饹�Ǥ���multipart/form-data �ʥǡ�����ɽ���Τˤ�
-�Ȥ��ޤ���
+クライアントがフォームへ入力した値を表すクラスです。multipart/form-data なデータを表すのにも
+使われます。
 
-[[m:WEBrick::HTTPRequest#query]] �ϥꥯ�����ȤΥ����꡼���뤤��
-���饤����Ȥ��ե���������Ϥ����ͤ��ݻ����� Hash ���֤��ޤ�����
-���� Hash �Υ������ͤΤ����ͤ� FormData ���饹�Υ��󥹥��󥹤ˤʤ�ޤ���
-Ʊ��̾���Υե�����ɤ�ʣ�������硢[[m:WEBrick::HTTPUtils::FormData#list]] ��
-[[m:WEBrick::HTTPUtils::FormData#each_data]] �ˤ�ꤽ�줾����ͤ���Ф����Ȥ��Ǥ��ޤ���
+[[m:WEBrick::HTTPRequest#query]] はリクエストのクエリーあるいは
+クライアントがフォームへ入力した値を保持した Hash を返しますが、
+その Hash のキーと値のうち値は FormData クラスのインスタンスになります。
+同じ名前のフィールドが複数ある場合、[[m:WEBrick::HTTPUtils::FormData#list]] や
+[[m:WEBrick::HTTPUtils::FormData#each_data]] によりそれぞれの値を取り出すことができます。
 
-�̾�Υե�����ǡ���(application/x-www-form-urlencoded)�� unescape ����Ƥ��ޤ���
-������ multipart/form-data �ʥե�����ǡ����ϥ桼���� content-transfer-encoding 
-�إå��򸫤�Ŭ�ڤ˽�������ɬ�פ�����ޤ���
+通常のフォームデータ(application/x-www-form-urlencoded)は unescape されています。
+ただし multipart/form-data なフォームデータはユーザが content-transfer-encoding 
+ヘッダを見て適切に処理する必要があります。
 
-=== ���
+=== リンク
 
  * [[rfc:1867]] Form-based File Upload in HTML.
- * [[rfc:2388]] multipart/form-data ��������
+ * [[rfc:2388]] multipart/form-data の説明。
 
 == Class Methods
 
 --- new(*args)   -> WEBrick::HTTPUtils::FormData
 
-WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���ޤ���
+WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッドを直接呼ぶことはありません。
 
 == Instance Methods
 
 --- name          -> String | nil
 --- name=(value)
 
-�ե�����ǡ����� name °����ʸ�����ɽ�����������Ǥ���
+フォームデータの name 属性を文字列で表すアクセサです。
 
-@param value �ե�����ǡ����� name °����ʸ����ǻ��ꤷ�ޤ���
+@param value フォームデータの name 属性を文字列で指定します。
 
-��:
+例:
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -46,11 +46,11 @@ WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���
 --- filename         -> String | nil
 --- filename=(value)
 
-�ե�����ǡ����� filename °����ʸ�����ɽ�����������Ǥ���
+フォームデータの filename 属性を文字列で表すアクセサです。
 
-@param value �ե�����ǡ����� filename °����ʸ����ǻ��ꤷ�ޤ���
+@param value フォームデータの filename 属性を文字列で指定します。
 
-��:
+例:
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -62,12 +62,12 @@ WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���
 
 --- [](header)    -> String | nil
 
-���Ȥ� multipart/form-data �ʥǡ����ξ��ˡ�header �ǻ��ꤵ�줿 
-�إå����ͤ�ʸ������֤��ޤ���̵����� nil ���֤��ޤ���
+自身が multipart/form-data なデータの場合に、header で指定された 
+ヘッダの値を文字列で返します。無ければ nil を返します。
 
-@param header �إå�̾��ʸ����ǻ��ꤷ�ޤ�����ʸ���Ⱦ�ʸ������̤��ޤ���
+@param header ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
-��:
+例:
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -79,17 +79,17 @@ WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���
 
 --- <<(str)    -> self
 
-WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���ޤ���
+WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッドを直接呼ぶことはありません。
 
 --- append_data(data)   -> self
 
-WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���ޤ���
+WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッドを直接呼ぶことはありません。
 
 --- each_data{|s| ... }
 
-���Ȥ�ɽ���ƥե�����ǡ���������Ȥ��ơ�Ϳ����줿�֥��å���¹Ԥ��ޤ���
+自身が表す各フォームデータを引数として、与えられたブロックを実行します。
 
-��:
+例:
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -107,9 +107,9 @@ WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���
 --- list      -> Array
 --- to_ary    -> Array
 
-���Ȥ�ɽ���ƥե�����ǡ������Ǽ������������������֤��ޤ���
+自身が表す各フォームデータを収納した配列を生成して返します。
 
-��:
+例:
 
  require "webrick/cgi"
  class MyCGI < WEBrick::CGI
@@ -121,4 +121,4 @@ WEBrick::HTTPUtils �������ǻȤ��ޤ����桼�������Υ᥽�åɤ�ľ�ܸƤ֤��ȤϤ���
 
 --- to_s      -> String
 
-���Ȥ�ɽ���ե�����ǡ����Τ����ΤҤȤĤ�ʸ����Ȥ����֤��ޤ���
+自身が表すフォームデータのうちのひとつを文字列として返します。

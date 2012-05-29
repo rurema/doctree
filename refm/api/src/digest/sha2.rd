@@ -1,8 +1,8 @@
 require digest
 
-FIPS PUB 180-2¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ëNIST (the US' National Institute of
-Standards and Technology) ¤Î°Ê²¼¤Î¥¢¥ë¥´¥ê¥º¥à¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤òÄó¶¡¤¹
-¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+FIPS PUB 180-2ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹NIST (the US' National Institute of
+Standards and Technology) ã®ä»¥ä¸‹ã®ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã™
+ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   * SHA-256 Secure Hash Algorithm
   * SHA-384 Secure Hash Algorithm
@@ -10,44 +10,44 @@ Standards and Technology) ¤Î°Ê²¼¤Î¥¢¥ë¥´¥ê¥º¥à¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤òÄó¶¡¤¹
 
 = class Digest::SHA256 < Digest::Base
 
-FIPS PUB 180-2¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ëNIST (the US' National Institute of
-Standards and Technology) ¤Î SHA-256 Secure Hash Algorithm¤ò
-¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+FIPS PUB 180-2ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹NIST (the US' National Institute of
+Standards and Technology) ã® SHA-256 Secure Hash Algorithmã‚’
+å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 
 = class Digest::SHA384 < Digest::Base
 
-FIPS PUB 180-2¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ëNIST (the US' National Institute of
-Standards and Technology) ¤Î SHA-384 Secure Hash Algorithm¤ò
-¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+FIPS PUB 180-2ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹NIST (the US' National Institute of
+Standards and Technology) ã® SHA-384 Secure Hash Algorithmã‚’
+å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 
 = class Digest::SHA512 < Digest::Base
 
-FIPS PUB 180-2¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ëNIST (the US' National Institute of
-Standards and Technology) ¤Î SHA-512 Secure Hash Algorithm¤ò
-¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+FIPS PUB 180-2ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹NIST (the US' National Institute of
+Standards and Technology) ã® SHA-512 Secure Hash Algorithmã‚’
+å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 #@since 1.8.6
 = class Digest::SHA2 < Digest::Class
 == Class Methods
 --- new(bitlen = 256) -> Digest::SHA2
 
-Í¿¤¨¤é¤ì¤¿ bitlen ¤ËÂĞ±ş¤¹¤ë SHA2 ¥Ï¥Ã¥·¥å¤òÀ¸À®¤¹¤ë¤¿¤á¤Î¥ª¥Ö¥¸¥§¥¯¥È
-¤òÆâÉô¤ÇÀßÄê¤·¤Æ¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+ä¸ãˆã‚‰ã‚ŒãŸ bitlen ã«å¯¾å¿œã™ã‚‹ SHA2 ãƒãƒƒã‚·ãƒ¥ã‚’ç”Ÿæˆã™ã‚‹ãŸã‚ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+ã‚’å†…éƒ¨ã§è¨­å®šã—ã¦è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
-@param bitlen ¥Ï¥Ã¥·¥å¤ÎÄ¹¤µ¤ò»ØÄê¤·¤Ş¤¹¡£256, 384, 512 ¤¬»ØÄê²ÄÇ½¤Ç¤¹¡£
+@param bitlen ãƒãƒƒã‚·ãƒ¥ã®é•·ã•ã‚’æŒ‡å®šã—ã¾ã™ã€‚256, 384, 512 ãŒæŒ‡å®šå¯èƒ½ã§ã™ã€‚
 
-@raise ArgumentError bitlen ¤Ë 256, 384, 512 °Ê³°¤ÎÃÍ¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise ArgumentError bitlen ã« 256, 384, 512 ä»¥å¤–ã®å€¤ã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- block_length -> Integer
 
-¥À¥¤¥¸¥§¥¹¥È¤Î¥Ö¥í¥Ã¥¯Ä¹¤òÊÖ¤·¤Ş¤¹¡£
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã®ãƒ–ãƒ­ãƒƒã‚¯é•·ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- digest_length -> Integer
 
-¥À¥¤¥¸¥§¥¹¥È¤Î¥Ï¥Ã¥·¥åÃÍ¤Î¥Ğ¥¤¥ÈÄ¹¤òÊÖ¤·¤Ş¤¹¡£
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã®ãƒãƒƒã‚·ãƒ¥å€¤ã®ãƒã‚¤ãƒˆé•·ã‚’è¿”ã—ã¾ã™ã€‚
 
 #@end

@@ -1,7 +1,7 @@
-[[lib:yaml]] ¤Î¥Ğ¥Ã¥¯¥¨¥ó¥É¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£YAML ¥Ğ¡¼¥¸¥ç¥ó 1.0 ¤ò°·¤¦»ö¤¬¤Ç¤­¤Ş¤¹¡£
+[[lib:yaml]] ã®ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚YAML ãƒãƒ¼ã‚¸ãƒ§ãƒ³ 1.0 ã‚’æ‰±ã†äº‹ãŒã§ãã¾ã™ã€‚
 
 #@since 1.9.2
-¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ï obsolete ¤Ç¤¹¡£[[lib:psych]] ¤ò»ÈÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
+ã“ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã¯ obsolete ã§ã™ã€‚[[lib:psych]] ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ã€‚
 #@end
 
 #@since 1.9.2
@@ -10,7 +10,7 @@
 = module YAML::Syck
 #@end
 
-[[lib:yaml]] ¤Î¥Ğ¥Ã¥¯¥¨¥ó¥É¤Î¤¿¤á¤Î¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+[[lib:yaml]] ã®ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ã®ãŸã‚ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
 
 #@since 1.9.2
 #@include(yaml/YAML.inside)
@@ -21,7 +21,7 @@
 #@until 1.9.2
 --- VERSION -> String
 
-[[lib:syck]] ¤Î¥Ğ¡¼¥¸¥ç¥ó¤òÊÖ¤·¤Ş¤¹¡£
+[[lib:syck]] ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¿”ã—ã¾ã™ã€‚
 #@end
 
 --- DefaultResolver -> YAML::Syck::Resolver
@@ -48,7 +48,7 @@ Convert YAML to bytecode
 --- new -> YAML::Syck::Resolver
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -87,7 +87,7 @@ Convert YAML to bytecode
 --- new(options = {}) -> YAML::Syck::Parser
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -187,7 +187,7 @@ Cloning method for all node types
 --- new(type_id, val, style) -> YAML::Syck::Scalar
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -208,7 +208,7 @@ Cloning method for all node types
 --- new(type_id, val, style) -> YAML::Syck::Seq
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -232,7 +232,7 @@ Cloning method for all node types
 --- new(type_id, val, style) -> YAML::Syck::Map
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -256,7 +256,7 @@ Cloning method for all node types
 --- new(type_id, val) -> YAML::PrivateType
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -283,7 +283,7 @@ Cloning method for all node types
 --- new(domain, type_id, val) -> YAML::DomainType
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -316,7 +316,7 @@ Cloning method for all node types
 --- new(klass, ivars) -> YAML::Object
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -348,7 +348,7 @@ include Comparable
 --- new(name) -> YAML::Syck::BadAlias
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -360,7 +360,7 @@ include Comparable
 
 --- <=>(other) -> Integer | nil
 
-¼«¿È¤ÎÌ¾Á°¤òÈæ³Ó¤·¤Ş¤¹¡£
+è‡ªèº«ã®åå‰ã‚’æ¯”è¼ƒã—ã¾ã™ã€‚
 
 @see [[m:String#<=>]]
 
@@ -383,7 +383,7 @@ include Comparable
 --- new(emitter) -> YAML::Syck::Out
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 
@@ -413,7 +413,7 @@ include Comparable
 --- new(*options) -> YAML::Syck::Emitter
 #@todo
 
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 == Instance Methods
 

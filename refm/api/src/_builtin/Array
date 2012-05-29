@@ -1,25 +1,25 @@
 = class Array < Object
 include Enumerable
 
-���󥯥饹�Ǥ���
-�����Ǥ�դ� Ruby ���֥������Ȥ����ǤȤ��ƻ��Ĥ��Ȥ��Ǥ��ޤ���
+配列クラスです。
+配列は任意の Ruby オブジェクトを要素として持つことができます。
 
-����Ū�ˤ���������󼰤�Ȥä�
+一般的には配列は配列式を使って
 
   [1, 2, 3]
 
-�Τ褦���������ޤ���
+のように生成します。
 
 == Class Methods
 
 #@since 1.9.1
 --- try_convert(obj) -> Array | nil
-to_ary �᥽�åɤ��Ѥ��� obj ��������Ѵ����褦�Ȥ��ޤ���
+to_ary メソッドを用いて obj を配列に変換しようとします。
 
-���餫����ͳ���Ѵ��Ǥ��ʤ��Ȥ��ˤ� nil ���֤��ޤ���
-���Υ᥽�åɤϰ���������Ǥ��뤫�ɤ�����Ĵ�٤뤿��˻Ȥ��ޤ���
+何らかの理由で変換できないときには nil を返します。
+このメソッドは引数が配列であるかどうかを調べるために使えます。
 
-��:
+例:
 
    Array.try_convert([1])   # => [1]
    Array.try_convert("1")   # => nil
@@ -34,14 +34,14 @@ to_ary �᥽�åɤ��Ѥ��� obj ��������Ѵ����褦�Ȥ��ޤ���
 
 --- [](*item)    -> Array
 
-���� item �����ǤȤ��ƻ�����������������֤��ޤ���
+引数 item を要素として持つ配列を生成して返します。
 
-[[c:Array]] �Υ��֥��饹��������������Ȥ��ˡ����Υ��֥��饹�Υ��󥹥��󥹤����
-���䤹�����뤿����Ѱդ���Ƥ��롣
+[[c:Array]] のサブクラスを作成したしたときに、そのサブクラスのインスタンスを作成
+しやすくするために用意されている。
 
-@param item ��������Ǥ���ꤷ�ޤ���
+@param item 配列の要素を指定します。
 
-��:
+例:
 
   Array[1, 2, 3] #=> [1, 2, 3]
   
@@ -52,32 +52,32 @@ to_ary �᥽�åɤ��Ѥ��� obj ��������Ѵ����褦�Ȥ��ޤ���
 
 --- new(size = 0, val = nil)    -> Array
 
-Ĺ�� size ��������������������Ǥ� val �ǽ���������֤��ޤ���
+長さ size の配列を生成し、各要素を val で初期化して返します。
 
-������� val ��ʣ�������櫓�ǤϤʤ����Ȥ����դ��Ƥ���������
-�����Ǥ�Ʊ�����֥������� val �򻲾Ȥ��ޤ�[[trap:Array]]��
-��Ҥ���Ǥϡ�����γ����Ǥ�����Ʊ���ʸ�����ؤ��ޤ���
+要素毎に val が複製されるわけではないことに注意してください。
+全要素が同じオブジェクト val を参照します[[trap:Array]]。
+後述の例では、配列の各要素は全て同一の文字列を指します。
 
-@param size �����Ĺ������ͤǻ��ꤷ�ޤ���
+@param size 配列の長さを数値で指定します。
 
-@param val ��������Ǥ��ͤ���ꤷ�ޤ���
+@param val 配列の要素の値を指定します。
 
-��:
+例:
 
     ary = Array.new(3, "foo")
     p ary                     #=> ["foo", "foo", "foo"]
     ary[0].capitalize!
-    p ary                     #=> ["Foo", "Foo", "Foo"]  (�����Ǥ�Ʊ��Υ��֥������ȤǤ���)
+    p ary                     #=> ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
 
 #@since 1.8.0
 --- new(ary)    -> Array
 
-���ꤵ�줿���� ary ��ʣ�������֤��ޤ���
-[[m:Array#dup]] Ʊ�� ���Ǥ�ʣ�����ʤ�����ʣ���Ǥ���
+指定された配列 ary を複製して返します。
+[[m:Array#dup]] 同様 要素を複製しない浅い複製です。
 
-@param ary ʣ���������������ꤷ�ޤ���
+@param ary 複製したい配列を指定します。
 
-��:
+例:
 
     p Array.new([1,2,3]) # => [1,2,3]
 
@@ -85,41 +85,41 @@ to_ary �᥽�åɤ��Ѥ��� obj ��������Ѵ����褦�Ȥ��ޤ���
     b = Array.new(a)
     a.each{|s| s.capitalize! }
     p a                        #=> ["A", "B", "C"]
-    p b                        #=> ["A", "B", "C"]   (b �� a �����Ǥ�ͭ����)
+    p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
 
 #@end
 
 --- new(size) {|index| ... }    -> Array
 
-Ĺ�� size ��������������������ǤΥ���ǥå���������Ȥ��ƥ֥��å���¹Ԥ���
-�����Ǥ��ͤ�֥��å���ɾ����̤����ꤷ�ޤ���
+長さ size の配列を生成し、各要素のインデックスを引数としてブロックを実行し、
+各要素の値をブロックの評価結果に設定します。
 
-�֥��å���������˼¹Ԥ����Τǡ������Ǥ򤢤륪�֥������Ȥ�ʣ���ˤ��뤳�Ȥ��Ǥ��ޤ���
+ブロックは要素毎に実行されるので、全要素をあるオブジェクトの複製にすることができます。
 
-@param size �����Ĺ������ͤǻ��ꤷ�ޤ���
+@param size 配列の長さを数値で指定します。
 
-��:
+例:
     ary = Array.new(3){|index| "hoge#{index}"}
     p ary                      #=> ["hoge0", "hoge1", "hoge2"]
 
-��:
+例:
 
     ary = Array.new(3){ "foo" }
     p ary                      #=> ["foo", "foo", "foo"]
     ary[0].capitalize!
-    p ary                      #=> ["Foo", "foo", "foo"]  (�����Ǥϰ㤦���֥������ȤǤ���)
+    p ary                      #=> ["Foo", "foo", "foo"]  (各要素は違うオブジェクトである)
 
 == Instance Methods
 
 --- [](nth)    -> object | nil
 
-nth ���ܤ����Ǥ��֤��ޤ���nth ���ܤ����Ǥ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
+nth 番目の要素を返します。nth 番目の要素が存在しない時には nil を返します。
 
-@param nth ����ǥå����������ǻ��ꤷ�ޤ���
-       ��Ƭ�����Ǥ� 0 ���ܤˤʤ�ޤ���nth ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ�������
-       �����Ǥ� -1 ���ܤˤʤ�ޤ���
+@param nth インデックスを整数で指定します。
+       先頭の要素が 0 番目になります。nth の値が負の時には末尾からのインデックスと見倣します。末尾
+       の要素が -1 番目になります。
 
-��:
+例:
 
   a = [ "a", "b", "c", "d", "e" ]
   a[0]  #=> "a"
@@ -130,45 +130,45 @@ nth ���ܤ����Ǥ��֤��ޤ���nth ���ܤ����Ǥ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
 
 --- [](range)    -> Array | nil
 
-[[c:Range]] ���֥������� range ���ϰϤˤ������Ǥ���ʤ���ʬ������֤��ޤ���
-range �� first ���ͤ�������ϰϤ˼��ޤ�ʤ���� nil ���֤��ޤ���
-range �� first �� end ����ˤ�����ˤ϶���������֤��ޤ���
+[[c:Range]] オブジェクト range の範囲にある要素からなる部分配列を返します。
+range の first の値が配列の範囲に収まらない場合 nil を返します。
+range の first が end より後にある場合には空の配列を返します。
 
-@param range ������������ʬ������ϰϤ� [[c:Range]] ���֥������Ȥǻ��ꤷ�ޤ���
-             range �� first �� end ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ�������
-             �����Ǥ� -1 ���ܤˤʤ�ޤ���
-             end ���ͤ�������ϰϤ�ۤ�����ˤϡ��ۤ���ʬ��̵�뤵��ޤ���
+@param range 生成したい部分配列の範囲を [[c:Range]] オブジェクトで指定します。
+             range の first や end の値が負の時には末尾からのインデックスと見倣します。末尾
+             の要素が -1 番目になります。
+             end の値が配列の範囲を越える時には、越えた分は無視されます。
 
-��:
+例:
 
   a = [ "a", "b", "c", "d", "e" ]
   a[0..1]   #=> ["a", "b"]
   a[0...1]  #=> ["a"]
   a[0..-1]  #=> ["a", "b", "c", "d", "e"]
   a[-2..-1] #=> ["d", "e"]
-  a[-2..4]  #=> ["d", "e"]  (start ���������� -2 ���ܡ�end ����Ƭ���� (4+1) ���ܤȤʤ롣)
+  a[-2..4]  #=> ["d", "e"]  (start は末尾から -2 番目、end は先頭から (4+1) 番目となる。)
   a[0..10]  #=> ["a", "b", "c", "d", "e"]
   a[10..11] #=> nil
   a[2..1]   #=> []
   a[-1..-2] #=> []
   
-  # �ü�ʥ�������first �����Ȥ�Ĺ����Ʊ�����ˤϰʲ��Τ褦�ˤʤ�ޤ���
+  # 特殊なケース。first が自身の長さと同じ場合には以下のようになります。
   a[5]                   #=> nil  
   a[5, 1]                #=> []
   a[5..10]               #=> []
 
 --- [](start, length)    ->  Array | nil
 
-start ���ܤ��� length �Ĥ����Ǥ�ޤ���ʬ������֤��ޤ���
-length ����λ���start �����Ȥ��ϰϤ�ۤ������ˤ� nil ���֤��ޤ���
+start 番目から length 個の要素を含む部分配列を返します。
+length が負の時、start が自身の範囲を越えた時には nil を返します。
 
-@param start ������������ʬ�������Ƭ�Υ���ǥå����������ǻ��ꤷ�ޤ���
-             start ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ������������Ǥ� -1 ���ܤˤʤ�ޤ���
+@param start 生成したい部分配列の先頭のインデックスを整数で指定します。
+             start の値が負の時には末尾からのインデックスと見倣します。末尾の要素が -1 番目になります。
 
-@param length ������������ʬ�����Ĺ���������ǻ��ꤷ�ޤ���
-              length �� start ���ܤ���������Ĺ�����Ĺ�����ˤϡ��ۤ���ʬ��Ĺ����̵�뤵��ޤ���
+@param length 生成したい部分配列の長さを整数で指定します。
+              length が start 番目からの配列の長さより長い時には、越えた分の長さは無視されます。
 
-��:
+例:
 
   a = [ "a", "b", "c", "d", "e" ]
   a[0, 1]    #=> ["a"]
@@ -178,23 +178,23 @@ length ����λ���start �����Ȥ��ϰϤ�ۤ������ˤ� nil ���֤��ޤ���
   a[0, -1]   #=> nil
   a[10, 1]   #=> nil
  
-  # �ü�ʥ�������start �����Ȥ�Ĺ����Ʊ�����ˤϰʲ��Τ褦�ˤʤ�ޤ���
+  # 特殊なケース。start が自身の長さと同じ場合には以下のようになります。
   a[5]                   #=> nil  
   a[5, 1]                #=> []
   a[5..10]               #=> []
 
 --- []=(nth, val)
 
-nth ���ܤ����Ǥ� val �����ꤷ�ޤ���nth ��������ϰϤ�ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ����
-��ĥ�����ΰ�� nil �ǽ�������ޤ���
+nth 番目の要素を val に設定します。nth が配列の範囲を越える時には配列の長さを自動的に拡張し、
+拡張した領域を nil で初期化します。
 
-@param nth ����ǥå����������ǻ��ꤷ�ޤ���
+@param nth インデックスを整数で指定します。
 
-@param val ���ꤷ�������Ǥ��ͤ���ꤷ�ޤ���
+@param val 設定したい要素の値を指定します。
 
-@raise IndexError ���ꤵ�줿 nth �����Ȥλ�����������ؤ��Ƥ������ȯ�����ޤ���
+@raise IndexError 指定された nth が自身の始点よりも前を指している場合に発生します。
 
-��:
+例:
 
   a = [0, 1, 2, 3, 4, 5]
   a[0] = "a"
@@ -207,8 +207,8 @@ nth ���ܤ����Ǥ� val �����ꤷ�ޤ���nth ��������ϰϤ�ۤ�����ˤ������Ĺ�����
 
 --- []=(range, val)
 
-[[c:Range]] ���֥������� range ���ϰϤˤ������Ǥ����� val �����Ƥ��ִ����ޤ���
-range �� first �����Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ�� nil �ǽ�������ޤ���
+[[c:Range]] オブジェクト range の範囲にある要素を配列 val の内容に置換します。
+range の first が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 
     ary = [0, 1, 2, 3, 4, 5]
     ary[0..2] = ["a", "b"]
@@ -222,40 +222,40 @@ range �� first �����Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ
     ary[1..3] = "x"
     p ary  # => [0, "x", 4, 5]
 
-@param range ���ꤷ����������ϰϤ� [[c:Range]] ���֥������Ȥǻ��ꤷ�ޤ���
-             range �� first �� end ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ���
-             ���������Ǥ� -1 ���ܤˤʤ�ޤ���
-             range �� first �� end ����ˤ�����ˤ� first ��ľ���� val ���������ޤ���
+@param range 設定したい配列の範囲を [[c:Range]] オブジェクトで指定します。
+             range の first や end の値が負の時には末尾からのインデックスと見倣します。
+             末尾の要素が -1 番目になります。
+             range の first が end より後にある場合には first の直前に val を挿入します。
 //emlist{
     ary = [0, 1, 2, 3, 4, 5]
     ary[2..0] = ["a", "b", "c"]
     p ary   # => [0, 1, "a", "b", "c", 2, 3, 4, 5]
 //}
 
-@param val range ���ϰϤ����ꤷ�������Ǥ�����ǻ��ꤷ�ޤ���
-           val ������Ǥʤ��Ȥ��ˤ� val.to_ary �⤷���� [val] �����Ƥ��ִ����ޤ���
-           val �����Ǥο������� range ��Ĺ������礭�����ˤϡ���������Ǥ�����ޤ���
+@param val range の範囲に設定したい要素を配列で指定します。
+           val が配列でないときには val.to_ary もしくは [val] の内容で置換します。
+           val の要素の数の方が range の長さより大きい時には、後ろの要素がずれます。
 #@since 1.9.1
-           val ���������� [] �ʤ� start ���� end �ޤǤ����Ǥ��������ޤ���
+           val が空の配列 [] なら start から end までの要素が削除されます。
 #@else
-           val �� nil �� �������� [] �ʤ� start ���� end �ޤǤ����Ǥ��������ޤ���
+           val が nil か 空の配列 [] なら start から end までの要素が削除されます。
 #@end
 //emlist{
     ary = [0, 1, 2, 3, 4, 5]
     ary[2..4] = nil
     p ary   # => [0, 1, 5]
 //}
-@raise RangeError ���ꤵ�줿�ϰϤλ��������Ȥλ����������ˤ������ȯ�����ޤ���
+@raise RangeError 指定された範囲の始点が自身の始点よりも前にある場合に発生します。
 
-��:
+例:
 
   a = [0, 1, 2, 3, 4, 5]
   a[-10..10] = 1        #=> RangeError
 
 --- []=(start, length, val)
 
-����ǥå��� start ���� length �Ĥ����Ǥ����� val �����Ƥ��֤������ޤ���
-start �����Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ�� nil �ǽ�������ޤ���
+インデックス start から length 個の要素を配列 val の内容で置き換えます。
+start が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 
   ary = [0, 1, 2, 3]
   ary[1, 2] = ["a", "b", "c", "d"]
@@ -269,24 +269,24 @@ start �����Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ�� nil �
   ary[0, 10] = ["a"]
   p ary                        #=> ["a"]
 
-@param start �֤����������ϰϤ���Ƭ�Υ���ǥå�������ꤷ�ޤ���
-             start ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ������������Ǥ� -1 ���ܤˤʤ�ޤ���
+@param start 置き換えたい範囲の先頭のインデックスを指定します。
+             start の値が負の時には末尾からのインデックスと見倣します。末尾の要素が -1 番目になります。
 
-@param length �֤������������ǤθĿ�����ꤷ�ޤ���
-              length ���ͤ� 0 �ΤȤ��� start ��ľ���� val ���������ޤ���
+@param length 置き換えたい要素の個数を指定します。
+              length の値が 0 のときは start の直前に val を挿入します。
 //emlist{
     ary = [0, 1, 2, 3]
     ary[1, 0] = ["inserted"]
     p ary                        # => [0, "inserted", 1, 2, 3]
 //}
 
-@param val ���ꤷ�������Ǥ�����ǻ��ꤷ�ޤ���
-           val ������Ǥʤ��Ȥ��ˤ� val.to_ary �⤷���� [val] �����Ƥ��ִ����ޤ���
-           val ��Ĺ���� length ���������ʤ����ˤϡ�val ��Ĺ���˹�碌�����Ǥ�������줿�ꤺ�줿�ꤷ�ޤ���
+@param val 設定したい要素を配列で指定します。
+           val が配列でないときには val.to_ary もしくは [val] の内容で置換します。
+           val の長さが length と等しくない場合には、val の長さに合わせて要素が削除されたりずれたりします。
 #@since 1.9.1
-           val ���������� [] �ʤ� start ���� end �ޤǤ����Ǥ��������ޤ���
+           val が空の配列 [] なら start から end までの要素が削除されます。
 #@else
-           val �� nil �� �������� [] �ʤ� start ���� end �ޤǤ����Ǥ��������ޤ���
+           val が nil か 空の配列 [] なら start から end までの要素が削除されます。
 #@end
 //emlist{
     a = [0, 1, 2, 3, 4, 5]
@@ -294,37 +294,37 @@ start �����Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ�� nil �
     p a   # => [0, 1, 5]
 //}
 
-@raise IndexError ���ꤵ�줿 start �����Ȥλ�����������ؤ��Ƥ������ȯ�����ޤ���
+@raise IndexError 指定された start が自身の始点よりも前を指している場合に発生します。
 
 
 --- +(other)    -> Array
 
-���Ȥ� other �����Ƥ�Ҥ�����������������֤��ޤ���
+自身と other の内容を繋げた配列を生成して返します。
 
-@param other ���ȤȷҤ������������ꤷ�ޤ���other ������Ǥʤ���� other.to_ary ������ͤ��Ѥ��ޤ���
+@param other 自身と繋げたい配列を指定します。other が配列でなければ other.to_ary の戻り値を用います。
 
-@raise TypeError other ������Ǥʤ�������� other.to_ary ������ͤ��ޤ�����Ǥʤ��ä�����ȯ�����ޤ���
+@raise TypeError other が配列でなく、さらに other.to_ary の戻り値がまた配列でなかった場合に発生します。
 
     a = [1, 2]
     b = [8, 9]
     p a + b     #=> [1, 2, 8, 9]
-    p a         #=> [1, 2]        (�Ѳ��ʤ�)
-    p b         #=> [8, 9]        (��������Ѳ��ʤ�)
+    p a         #=> [1, 2]        (変化なし)
+    p b         #=> [8, 9]        (こちらも変化なし)
 
 --- *(times)    -> Array
 
-��������Ƥ� times �� �����֤��������������������֤��ޤ���
-�ͤϥ��ԡ�����ʤ����Ȥ����դ��Ƥ�������[[trap:Array]]��
+配列の内容を times 回 繰り返した新しい配列を作成し返します。
+値はコピーされないことに注意してください[[trap:Array]]。
 
-@param times �����֤���������������ǻ��ꤷ�ޤ���
+@param times 繰り返したい回数を整数で指定します。
 
     p [1, 2, 3] * 3  #=> [1, 2, 3, 1, 2, 3, 1, 2, 3]
 
 --- *(sep)    -> String
 
-���ꤵ�줿 sep ��֤ˤϤ����Ϣ�뤷��ʸ��������������֤��ޤ���[[m:Array#join]](sep) ��Ʊ��ư��򤷤ޤ���
+指定された sep を間にはさんで連結した文字列を生成して返します。[[m:Array#join]](sep) と同じ動作をします。
 
-@param sep ʸ�������ꤷ�ޤ���
+@param sep 文字列を指定します。
 
     p [1,2,3] * ","
     # => "1,2,3"
@@ -333,17 +333,17 @@ start �����Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ�� nil �
 
 --- -(other)    -> Array
 
-���Ȥ��� other �����Ǥ����������������������֤��ޤ���
+自身から other の要素を取り除いた配列を生成して返します。
 
 #@since 1.8.0
-���Ǥ�Ʊ������ [[m:Object#eql?]] �ˤ��ɾ������ޤ���
-self ��ǽ�ʣ���Ƥ��ơ�other���¸�ߤ��Ƥ��ʤ��ä����Ǥϡ����ν�ʣ���ݻ�����ޤ���
+要素の同一性は [[m:Object#eql?]] により評価されます。
+self 中で重複していて、other中に存在していなかった要素は、その重複が保持されます。
 #@else
-��ʣ�������Ǥϼ�������ޤ���
-���Ǥ�Ʊ������ [[m:Object#===]] ���Ȥ��ޤ���
+重複する要素は取り除かれます。
+要素の同一性は [[m:Object#===]] が使われます。
 #@end
 
-@param other ���Ȥ���������������Ǥ��������ꤷ�ޤ���other ������Ǥʤ���� to_ary �᥽�åɤˤ����ۤη��Ѵ����ߤޤ���
+@param other 自身から取り除きたい要素の配列を指定します。other が配列でなければ to_ary メソッドによる暗黙の型変換を試みます。
 
 #@since 1.8.0
     [1, 2, 1, 3, 1, 4, 1, 5] - [2, 3, 4, 5]       # => [1, 1, 1, 1]
@@ -353,73 +353,73 @@ self ��ǽ�ʣ���Ƥ��ơ�other���¸�ߤ��Ƥ��ʤ��ä����Ǥϡ����ν�ʣ���ݻ�����ޤ�
 
 --- &(other)    -> Array
 
-������ѱ黻�Ǥ���ξ��������˴ޤޤ�����Ǥ���ʤ뿷�����������
-���ޤ�����ʣ�������Ǥϼ�������ޤ���
+集合の積演算です。両方の配列に含まれる要素からなる新しい配列を返
+します。重複する要素は取り除かれます。
 
-���Ǥν�ʣȽ��ϡ�[[m:Object#eql?]] �ˤ��Ԥ��ޤ���
-�����ι�®���Τ���������� [[c:Hash]] ����Ѥ��Ƥ��뤿��Ǥ���
+要素の重複判定は、[[m:Object#eql?]] により行われます。
+処理の高速化のために内部で [[c:Hash]] を使用しているためです。
 
-@param other �������ꤷ�ޤ���other ������Ǥʤ���� to_ary �᥽�åɤˤ����ۤη��Ѵ����ߤޤ���
+@param other 配列を指定します。other が配列でなければ to_ary メソッドによる暗黙の型変換を試みます。
 
   [1, 1, 2, 3] & [1, 3, 4] #=> [1, 3]
 
 --- |(other)    -> Array
 
-������±黻�Ǥ���ξ��������ˤ����줫�˴ޤޤ�����Ǥ����ƴޤ࿷��
-��������֤��ޤ�����ʣ�������Ǥϼ�������ޤ���
+集合の和演算です。両方の配列にいずれかに含まれる要素を全て含む新し
+い配列を返します。重複する要素は取り除かれます。
 
-���Ǥν�ʣȽ��ϡ�[[m:Object#eql?]] �ˤ��Ԥ��ޤ���
+要素の重複判定は、[[m:Object#eql?]] により行われます。
 
-@param other �������ꤷ�ޤ���other ������Ǥʤ���� to_ary �᥽�åɤˤ����ۤη��Ѵ����ߤޤ���
+@param other 配列を指定します。other が配列でなければ to_ary メソッドによる暗黙の型変換を試みます。
 
   [1, 1, 4, 2, 3] | [4, 5, 5]  #=> [1, 4, 2, 3, 5]
 
 --- <<(obj)    -> self
 
-���ꤵ�줿 obj �򼫿Ȥ��������˲�Ū���ɲä��ޤ���[[m:Array#push]] ��Ʊ���Ǥ���
+指定された obj を自身の末尾に破壊的に追加します。[[m:Array#push]] と同じです。
 
   ary = [1]
   ary << 2
   p ary      # [1, 2]
 
-�ޤ����Υ᥽�åɤ� self ���֤��Τǡ��ʲ��Τ褦��Ϣ³����
-�񤯤��Ȥ��Ǥ��ޤ���
+またこのメソッドは self を返すので、以下のように連続して
+書くことができます。
 
   ary = [1]
   ary << 2 << 3 << 4
   p ary   #=> [1, 2, 3, 4]
 
-@param obj ���Ȥ˲ä��������֥������Ȥ���ꤷ�ޤ���
+@param obj 自身に加えたいオブジェクトを指定します。
 
 --- <=>(other)    -> -1 | 0 | 1
 #@since 1.9.2
 --- <=>(other)    -> -1 | 0 | 1 | nil
 #@end
 
-���Ȥ� other �γ����Ǥ򤽤줾���� <=> ����Ӥ��Ƥ�������̤� 0 �Ǥʤ��ä�����
-�����ͤ��֤��ޤ��������Ǥ��������������Ĺ�������������ˤ� 0 ���֤��ޤ���
-�����Ǥ��������ޤް������������������ã�����������Ȥ�����û����� -1 �򤽤��Ǥʤ���� 1 
-���֤��ޤ���
+自身と other の各要素をそれぞれ順に <=> で比較していき、結果が 0 でなかった場合に
+その値を返します。各要素が等しく、配列の長さも等しい場合には 0 を返します。
+各要素が等しいまま一方だけ配列の末尾に達した時、自身の方が短ければ -1 をそうでなければ 1 
+を返します。
 
-@param other ���Ȥ���Ӥ������������ꤷ�ޤ���
+@param other 自身と比較したい配列を指定します。
 
   [ 1, 2, 3 ] <=> [ 1, 3, 2 ]       #=> -1
   [ 1, 2, 3 ] <=> [ 1, 2 ]          #=> 1
 
 --- ==(other)    -> bool
 
-���Ȥ� other �γ����Ǥ򤽤줾���� == ����Ӥ�
-�ơ������Ǥ���������� true ���֤��ޤ��������Ǥʤ����ˤ� false ���֤��ޤ���
+自身と other の各要素をそれぞれ順に == で比較し
+て、全要素が等しければ true を返します。そうでない場合には false を返します。
 
-@param other ���Ȥ���Ӥ������������ꤷ�ޤ���
+@param other 自身と比較したい配列を指定します。
 
 --- assoc(key)    -> Array | nil
 
-���������򸡺����ơ����� 0 ���ܤ����Ǥ� key ���������ǽ��
-���Ǥ��֤��ޤ�����Ӥ� == �黻�Ҥ�ȤäƹԤ��ޤ���
-�����������Ǥ��ʤ���� nil ���֤��ޤ���
+配列の配列を検索して、その 0 番目の要素が key に等しい最初の
+要素を返します。比較は == 演算子を使って行われます。
+該当する要素がなければ nil を返します。
 
-@param key ���Ȥ����ǤǤ�������Ρ��ǽ�����Ǥ�Ʊ�����Υ��֥������Ȥ���ꤷ�ޤ���
+@param key 自身の要素である配列の、最初の要素と同じ型のオブジェクトを指定します。
 
     ary = [[1,15], [2,25], [3,35]]
     p ary.assoc(2)           # => [2, 25]
@@ -430,17 +430,17 @@ self ��ǽ�ʣ���Ƥ��ơ�other���¸�ߤ��Ƥ��ʤ��ä����Ǥϡ����ν�ʣ���ݻ�����ޤ�
 
 --- at(pos)    -> object
 
-����� pos �ΰ��֤ˤ������Ǥ��֤��ޤ���
-self[pos] ��Ʊ���Ǥ���
+配列の pos の位置にある要素を返します。
+self[pos] と同じです。
 
-@param pos ����ǥå����������ǻ��ꤷ�ޤ���
+@param pos インデックスを整数で指定します。
 
   a = [0, 1, 2, 3]
   p a.at(1)        #=> 1
 
 --- clear    -> self
 
-��������Ǥ򤹤٤ƺ�����ƶ��ˤ��ޤ���
+配列の要素をすべて削除して空にします。
 
     ary = [1, 2]
     ary.clear
@@ -449,12 +449,12 @@ self[pos] ��Ʊ���Ǥ���
 --- clone    -> Array
 --- dup      -> Array
 
-�쥷���Ф�Ʊ�����Ƥ���Ŀ�����������֤��ޤ���
+レシーバと同じ内容を持つ新しい配列を返します。
 
-clone �� frozen tainted singleton-class �ξ����ޤ�ƥ��ԡ����ޤ�����
-dup �����Ƥ����򥳥ԡ����ޤ���
-�ޤ��ɤ���Υ᥽�åɤ����Ǥ��켫�ΤΥ��ԡ��Ϥ��ޤ���
-�Ĥޤ������(shallow)�ץ��ԡ���Ԥ��ޤ���
+clone は frozen tainted singleton-class の情報も含めてコピーしますが、
+dup は内容だけをコピーします。
+またどちらのメソッドも要素それ自体のコピーはしません。
+つまり「浅い(shallow)」コピーを行います。
 
     ary = ['string']
     p ary             #=> ["string"]
@@ -477,19 +477,19 @@ dup �����Ƥ����򥳥ԡ����ޤ���
 #@end
 #@end
 
-�����Ǥ���֤˥֥��å����Ϥ���ɾ���������η�̤����Ǥ�
-�֤������ޤ���
+各要素を順番にブロックに渡して評価し、その結果で要素を
+置き換えます。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� map! ������������
+ブロックが与えられなかった場合は、自身と map! から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
-��:
+例:
 
     ary = [1, 2, 3]
     ary.map! {|i| i * 3 }
@@ -511,9 +511,9 @@ dup �����Ƥ����򥳥ԡ����ޤ���
 --- compact     -> Array
 --- compact!    -> self | nil
 
-compact �ϼ��Ȥ��� nil �����������������������֤��ޤ���
-compact! �ϼ��Ȥ����˲�Ū�� nil ����������ѹ���
-�Ԥ�줿���� self �򡢤����Ǥʤ���� nil ���֤��ޤ���
+compact は自身から nil を取り除いた配列を生成して返します。
+compact! は自身から破壊的に nil を取り除き、変更が
+行われた場合は self を、そうでなければ nil を返します。
 
     ary = [1, nil, 2, nil, 3, nil]
     p ary.compact   #=> [1, 2, 3]
@@ -524,35 +524,35 @@ compact! �ϼ��Ȥ����˲�Ū�� nil ����������ѹ���
 
 --- concat(other)    -> self
 
-���� other �򼫿Ȥ��������˲�Ū��Ϣ�뤷�ޤ���
+配列 other を自身の末尾に破壊的に連結します。
 
-@param other ���Ȥ�Ϣ�뤷�����������ꤷ�ޤ���
+@param other 自身と連結したい配列を指定します。
 
     array = [1, 2]
     a     = [3, 4]
     array.concat a
     p array          # => [1, 2, 3, 4]
-    p a              # => [3, 4]       # ��������Ѥ��ʤ�
+    p a              # => [3, 4]       # こちらは変わらない
 
 
 --- delete(val)           -> object | nil
 --- delete(val) { ... }   -> object
 
-���ꤵ�줿 val �� == �����������Ǥ򼫿Ȥ��餹�٤Ƽ������ޤ���
-val �����������Ǥ����Ĥ��ä����ϡ�val ���֤��ޤ���
-�����Ǥʤ����ˤ� nil ���֤��ޤ���
+指定された val と == で等しい要素を自身からすべて取り除きます。
+val と等しい要素が見つかった場合は、val を返します。
+そうでない場合には nil を返します。
 
-�֥��å������ꤵ�줿��硢val �����������Ǥ����Ĥ���ʤ��ä��Ȥ��˥֥��å���
-ɾ�����Ƥ��η�̤��֤��ޤ���
+ブロックが指定された場合、val と等しい要素が見つからなかったときにブロックを
+評価してその結果を返します。
 
-@param val ���Ȥ������������ͤ���ꤷ�ޤ���
+@param val 自身から削除したい値を指定します。
 
     array = [1, 2, 3, 2, 1]
     p array.delete(2)       #=> 2
     p array                 #=> [1, 3, 1]
 
-    # �֥��å��ʤ��ΰ����� nil ���Ϥ��Ȥ�������ͤ�������
-    # �Ԥ�줿���ɤ�����Ƚ��򤹤뤳�ȤϤǤ��ʤ�
+    # ブロックなしの引数に nil を渡すとその戻り値から削除が
+    # 行われたかどうかの判定をすることはできない
     ary = [nil,nil,nil]
     p ary.delete(nil)       #=> nil
     p ary                   #=> []
@@ -560,13 +560,13 @@ val �����������Ǥ����Ĥ��ä����ϡ�val ���֤��ޤ���
 
 --- delete_at(pos)    -> object | nil
 
-���ꤵ�줿���� pos �ˤ������Ǥ������������֤��ޤ���
-pos ���ϰϳ��Ǥ��ä��� nil ���֤��ޤ���
+指定された位置 pos にある要素を取り除きそれを返します。
+pos が範囲外であったら nil を返します。
 
-[[m:Array#at]] ��Ʊ�ͤ���Υ���ǥå���������������֤���ꤹ�뤳
-�Ȥ��Ǥ��ޤ���
+[[m:Array#at]] と同様に負のインデックスで末尾から位置を指定するこ
+とができます。
 
-@param pos ������������ǤΥ���ǥå����������ǻ��ꤷ�ޤ���
+@param pos 削除したい要素のインデックスを整数で指定します。
 
     array = [0, 1, 2, 3, 4]
     array.delete_at 2
@@ -584,22 +584,22 @@ pos ���ϰϳ��Ǥ��ä��� nil ���֤��ޤ���
 #@end
 #@end
 
-���Ǥ���֤˥֥��å����Ϥ���ɾ���������η�̤����ˤʤä����Ǥ򤹤٤ƺ�����ޤ���
-delete_if �Ͼ�� self ���֤��ޤ�����reject! �����Ǥ� 1 �İʾ��������� self ��
-1 �Ĥ�������ʤ���� nil ���֤��ޤ���
+要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
+delete_if は常に self を返しますが、reject! は要素が 1 つ以上削除されれば self を、
+1 つも削除されなければ nil を返します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� reject! ������������
+ブロックが与えられなかった場合は、自身と reject! から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
-�֤��줿 Enumerator ���֥������Ȥ� each �᥽�åɤˤϡ�
-��Ȥ�������Ф��������Ѥ����뤳�Ȥ����դ��Ƥ���������
+返された Enumerator オブジェクトの each メソッドには、
+もとの配列に対して副作用があることに注意してください。
 #@end
 
-��:
+例:
   a = [0, 1, 2, 3, 4, 5]
   a.delete_if{|x| x % 2 == 0}
   p a #=> [1, 3, 5]
@@ -608,7 +608,7 @@ delete_if �Ͼ�� self ���֤��ޤ�����reject! �����Ǥ� 1 �İʾ��������� self �
   a = [0, 1, 2, 3, 4, 5]
   e = a.reject!
   e.each{|i| i % 2 == 0}
-  p a                    #=> [1, 3, 5]  ��Ȥ����󤫤�������Ƥ��뤳�Ȥ����ա�
+  p a                    #=> [1, 3, 5]  もとの配列から削除されていることに注意。
 #@end
 
 --- each {|item| .... }    -> self
@@ -620,14 +620,14 @@ delete_if �Ͼ�� self ���֤��ޤ�����reject! �����Ǥ� 1 �İʾ��������� self �
 #@end
 #@end
 
-�����Ǥ��Ф��ƥ֥��å���ɾ�����ޤ���
+各要素に対してブロックを評価します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� each ������������
+ブロックが与えられなかった場合は、自身と each から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
@@ -639,9 +639,9 @@ delete_if �Ͼ�� self ���֤��ޤ�����reject! �����Ǥ� 1 �İʾ��������� self �
         3
 
 #@#
-#@#each �ˤ��(�ޤ���ɸ��Υ᥽�åɤ�)ʣ�����ͤ�������ʤ��鷫���֤�
-#@#���ȤϤǤ��ޤ��󡣸��ߤΤȤ����ʲ��Τ褦�ʥ᥽�åɤ��������ɬ�פ�
-#@#����ޤ���
+#@#each により(また、標準のメソッドで)複数の値を取得しながら繰り返す
+#@#ことはできません。現在のところ以下のようなメソッドを定義する必要が
+#@#あります。
 #@#
 #@#    class Array
 #@#      def every(&block)
@@ -681,39 +681,39 @@ delete_if �Ͼ�� self ���֤��ޤ�����reject! �����Ǥ� 1 �İʾ��������� self �
 #@end
 #@end
 
-�����ǤΥ���ǥå������Ф��ƥ֥��å���ɾ�����ޤ���
+各要素のインデックスに対してブロックを評価します。
 
-�ʲ���Ʊ���Ǥ���
+以下と同じです。
 
     (0 ... ary.size).each {|index| ....  }
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� each_index ������������
+ブロックが与えられなかった場合は、自身と each_index から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
 --- empty?    -> bool
 
-���Ȥ����Ǥο��� 0 �λ��˿����֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身の要素の数が 0 の時に真を返します。そうでない場合に false を返します。
 
   p [].empty?         #=> true
   p [1, 2, 3].empty?  #=> false
 
 --- eql?(other)    -> bool
 
-���Ȥ� other �γ����Ǥ򤽤줾����
-[[m:Object#eql?]] ����Ӥ��ơ������Ǥ���������п�����
-���ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身と other の各要素をそれぞれ順に
+[[m:Object#eql?]] で比較して、全要素が等しければ真を返
+します。そうでない場合に false を返します。
 
-@param other ���Ȥ���Ӥ������������ꤷ�ޤ���
+@param other 自身と比較したい配列を指定します。
 
   ["a", "b", "c"].eql? ["a", "b", "c"]      #=> true
   ["a", "b", "c"].eql? ["a", "c", "b"]      #=> false
-  ["a", "b", 1].eql?   ["a", "b", 1.0]      #=> false (1.eql?(1.0) �� false �ʤΤ�)
+  ["a", "b", 1].eql?   ["a", "b", 1.0]      #=> false (1.eql?(1.0) が false なので)
 
 @see [[m:Object#eql?]]
  
@@ -721,18 +721,18 @@ delete_if �Ͼ�� self ���֤��ޤ�����reject! �����Ǥ� 1 �İʾ��������� self �
 --- fetch(nth, ifnone)       -> object
 --- fetch(nth) {|nth| ... }  -> object
 
-nth ���ܤ����Ǥ��֤��ޤ���
+nth 番目の要素を返します。
 
-[[m:Array#[] ]](nth) �Ȥ� nth ���ܤ����Ǥ�¸�ߤ��ʤ����ο��񤤤���
-�ʤ�ޤ����ǽ�η����Ǥϡ��㳰 [[c:IndexError]] ��ȯ�����ޤ���
-�����ܤη����Ǥϡ����� ifnone ���֤��ޤ���
-�����ܤη����Ǥϡ��֥��å���ɾ��������̤��֤��ޤ���
+[[m:Array#[] ]](nth) とは nth 番目の要素が存在しない場合の振舞いが異
+なります。最初の形式では、例外 [[c:IndexError]] が発生します。
+二番目の形式では、引数 ifnone を返します。
+三番目の形式では、ブロックを評価した結果を返します。
 
-@param nth �������������ǤΥ���ǥå����������ǻ��ꤷ�ޤ���
+@param nth 取得したい要素のインデックスを整数で指定します。
 
-@param ifnone ���Ǥ�¸�ߤ��ʤ��ä������֤��٤��ͤ���ꤷ�ޤ���
+@param ifnone 要素が存在しなかった場合に返すべき値を指定します。
 
-��:
+例:
 
   a = [1, 2, 3, 4, 5]
   begin
@@ -744,7 +744,7 @@ nth ���ܤ����Ǥ��֤��ޤ���
   p a.fetch(10, 999) #=> 999
   
   result = a.fetch(10){|nth|
-    print "#{nth} �Ϥ���ޤ���\n"
+    print "#{nth} はありません。\n"
     999
   }
   p result #=> 999
@@ -754,13 +754,13 @@ nth ���ܤ����Ǥ��֤��ޤ���
 --- fill {|index| ... }  -> self
 #@end
 
-���٤Ƥ����Ǥ� val �򥻥åȤ��ޤ���
+すべての要素に val をセットします。
 
-���Υ᥽�åɤ� val �Υ��ԡ��Ǥʤ� val ���Ȥ򥻥åȤ���
-���Ȥ����դ��Ƥ�������([[trap:Array]])��
-val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ��ޤ���
+このメソッドが val のコピーでなく val 自身をセットする
+ことに注意してください([[trap:Array]])。
+val の代わりにブロックを指定するとブロックの評価結果を値とします。
 
-@param val ���Ȥ˥��åȤ��������֥������Ȥ���ꤷ�ޤ���
+@param val 自身にセットしたいオブジェクトを指定します。
 
   a = [0, 1, 2, 3, 4]
   a.fill(10)
@@ -779,20 +779,20 @@ val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ��ޤ���
 --- fill(range) {|index| ... }            -> self
 #@end
 
-����λ��ꤵ�줿�ϰϤ��٤Ƥ� val �򥻥åȤ��ޤ���
+配列の指定された範囲すべてに val をセットします。
 
-�ϰϤλ��������Ȥ�������ۤ�����ˤ������Ĺ����ưŪ�˳�ĥ������ĥ�����ΰ�� nil �ǽ�������ޤ���
-�ϰϤν��������Ȥ�������ۤ������Ĺ����ưŪ�˳�ĥ������ĥ������ʬ�� val �ǽ�������ޤ���
-���Υ᥽�åɤ� val �Υ��ԡ��Ǥʤ� val ���Ȥ򥻥åȤ��뤳�Ȥ����դ��Ƥ�������([[trap:Array]])��
+範囲の始点が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
+範囲の終点が自身の末尾を越える時は長さを自動的に拡張し、拡張した部分を val で初期化します。
+このメソッドが val のコピーでなく val 自身をセットすることに注意してください([[trap:Array]])。
   a = [0, 1, 2]
   a.fill("x", 5..10)
   p a #=> [0, 1, 2, nil, nil, "x", "x", "x", "x", "x", "x"]
 
 #@since 1.8.0
-val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ�
-�ޤ����֥��å���������˼¹Ԥ����Τǡ����åȤ����ͤΤ��줾���
-�륪�֥������Ȥ�ʣ���ˤ��뤳�Ȥ��Ǥ��ޤ���
-�֥��å��Υѥ�᡼���ˤ� start ����Υ���ǥå������Ϥ���ޤ���
+val の代わりにブロックを指定するとブロックの評価結果を値とし
+ます。ブロックは要素毎に実行されるので、セットする値のそれぞれをあ
+るオブジェクトの複製にすることができます。
+ブロックのパラメータには start からのインデックスが渡されます。
 
     ary = []
     p ary.fill(1..2) {|i| i}         # => [nil, 1, 2]
@@ -801,17 +801,17 @@ val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ�
     p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
 #@end
 
-@param val ���Ȥ����ꤷ�������֥������Ȥ���ꤷ�ޤ���
+@param val 自身に設定したいオブジェクトを指定します。
 
-@param start val �����ꤹ���ϰϤλ����Υ���ǥå����������ǻ��ꤷ�ޤ���start ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ������������Ǥ� -1 ���ܤˤʤ�ޤ���
+@param start val を設定する範囲の始点のインデックスを整数で指定します。start の値が負の時には末尾からのインデックスと見倣します。末尾の要素が -1 番目になります。
 
-@param length val �����ꤹ�����ǤθĿ�����ꤷ�ޤ���nil �����ꤵ�줿��������ν���ޤǤ�Ĺ�����̣���ޤ���
+@param length val を設定する要素の個数を指定します。nil が指定された時は配列の終りまでの長さを意味します。
 
-@param range val �����ꤹ���ϰϤ� [[c:Range]] ���֥������Ȥǻ��ꤷ�ޤ���
+@param range val を設定する範囲を [[c:Range]] オブジェクトで指定します。
 
 #@##@since 1.8.0
-#@#version 1.8.0 �ˤϡ��֥��å����Ϥ����ѥ�
-#@#�᡼�������ͤȰۤʤ��Զ�礬����ޤ�����
+#@#version 1.8.0 には、ブロックに渡されるパラ
+#@#メータが仕様と異なる不具合がありました。
 #@#
 #@#    ary = []
 #@#    p ary.fill(1..2) {|i| i}         # => [2, 4, 6]  <- bug
@@ -822,7 +822,7 @@ val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ�
 
 --- first       -> object | nil
 
-�������Ƭ�����Ǥ��֤��ޤ������Ǥ��ʤ���� nil ���֤��ޤ���
+配列の先頭の要素を返します。要素がなければ nil を返します。
 
     p [0, 1, 2].first   #=> 0
     p [].first          #=> nil
@@ -832,11 +832,11 @@ val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ�
 #@since 1.8.0
 --- first(n)    -> Array
 
-��Ƭ�� n ���Ǥ�������֤��ޤ���n �� 0 �ʾ�Ǥʤ���Фʤ�ޤ���
+先頭の n 要素を配列で返します。n は 0 以上でなければなりません。
 
-@param n �������������ǤθĿ��������ǻ��ꤷ�ޤ���
+@param n 取得したい要素の個数を整数で指定します。
 
-@raise ArgumentError n �����ͤξ��ȯ�����ޤ���
+@raise ArgumentError n が負値の場合発生します。
 
     ary =  [0, 1, 2]
     p ary.first(0)
@@ -861,42 +861,42 @@ val ������˥֥��å�����ꤹ��ȥ֥��å���ɾ����̤��ͤȤ�
 --- flatten!              -> self | nil
 #@end
 
-flatten �ϼ��Ȥ�Ƶ�Ū��ʿ�경������������������֤��ޤ���flatten! ��
-���Ȥ�Ƶ�Ū�����˲�Ū��ʿ�경����ʿ�경���Ԥ�줿���� self �򤽤��Ǥʤ�
-���� nil ���֤��ޤ���
+flatten は自身を再帰的に平滑化した配列を生成して返します。flatten! は
+自身を再帰的かつ破壊的に平滑化し、平滑化が行われた場合は self をそうでない
+場合は nil を返します。
 #@since 1.8.7
-lv �����ꤵ�줿��硢lv �ο����ޤǺƵ�Ū��ʿ�경���ޤ���
+lv が指定された場合、lv の深さまで再帰的に平滑化します。
 #@end
 
 #@since 1.8.7
-@param lv ʿ�경�κƵ��ο����������ǻ��ꤷ�ޤ���nil ����ꤷ����硢�Ƶ��ο���������̵����ʿ�경���ޤ���
+@param lv 平滑化の再帰の深さを整数で指定します。nil を指定した場合、再帰の深さの制限無しに平滑化します。
 #@end
 
-@raise ArgumentError �������Ǥ����Ȥ�ޤ�褦��̵�¤˥ͥ��Ȥ���������Ф��� flatten ��Ƥ������ȯ�����ޤ���
+@raise ArgumentError 配列要素が自身を含むような無限にネストした配列に対して flatten を呼んだ場合に発生します。
 
-    # ���Ȥ�Ƶ�Ū��ʿ�경�����㡣
+    # 自身を再帰的に平滑化する例。
     a = [1, [2, 3, [4], 5]]
     p a.flatten                     #=> [1, 2, 3, 4, 5]
     p a                             #=> [1, [2, 3, [4], 5]]
 
-    # ���Ȥ��˲�Ū��ʿ�경�����㡣
+    # 自身を破壊的に平滑化する例。
     a = [[[1, [2, 3]]]]
     p a.flatten!                    #=> [1, 2, 3]
     p a                             #=> [1, 2, 3]
 
-    # ʿ�경���Ԥ��ʤ����� nil ���֤���
+    # 平滑化が行われない場合は nil を返す。
     p [1, 2, 3].flatten!            #=> nil
  
 #@since 1.8.7
-    # ʿ�경�κƵ��ο�������ꤹ���㡣
+    # 平滑化の再帰の深さを指定する例。
     a = [ 1, 2, [3, [4, 5] ] ]
     a.flatten(1)              #=> [1, 2, 3, [4, 5]]
 #@end
 
 --- hash    -> Integer
 
-���ȤΥϥå����ͤ��������֤��ޤ����ϥå����ͤϼ��Ȥγ����ǤΥϥå����ͤ���
-�׻�����ޤ���[[m:Array#eql?]] ����Ӥ�������������Ʊ�Τ�Ʊ���ϥå����ͤ��֤��ޤ���
+自身のハッシュ値を整数で返します。ハッシュ値は自身の各要素のハッシュ値から
+計算されます。[[m:Array#eql?]] で比較して等しい配列同士は同じハッシュ値を返します。
 
   a = ["a", "b", 1]
   a.hash                #=>  321
@@ -908,9 +908,9 @@ lv �����ꤵ�줿��硢lv �ο����ޤǺƵ�Ū��ʿ�경���ޤ���
 
 --- include?(val)    -> bool
 
-���� val �� == �ˤ��������������Ǥ���Ļ��˿����֤��ޤ���
+配列が val と == において等しい要素を持つ時に真を返します。
 
-@param val ���֥������Ȥ���ꤷ�ޤ���
+@param val オブジェクトを指定します。
 
    a = [ "a", "b", "c" ]
    a.include?("b")       #=> true
@@ -921,15 +921,15 @@ lv �����ꤵ�줿��硢lv �ο����ޤǺƵ�Ū��ʿ�경���ޤ���
 --- index {|item| ...}   -> Integer | nil
 #@end
 
-���ꤵ�줿 val �� == ���������ǽ�����Ǥΰ��֤��֤��ޤ���
-���������Ǥ��ҤȤĤ�ʤ��ä����ˤ� nil ���֤��ޤ���
+指定された val と == で等しい最初の要素の位置を返します。
+等しい要素がひとつもなかった時には nil を返します。
 
 #@since 1.8.7
-�֥��å������ꤵ�줿���ϡ������Ǥ�����Ȥ��ƽ�˥֥��å���¹Ԥ���
-�֥��å��������֤����ǽ�����Ǥΰ��֤��֤��ޤ���
+ブロックが指定された場合は、各要素を引数として順にブロックを実行し、
+ブロックが真を返した最初の要素の位置を返します。
 #@end
 
-@param val ����ǥå������Τꤿ�����֥������Ȥ���ꤷ�ޤ���
+@param val インデックスを知りたいオブジェクトを指定します。
 
     p [1, 0, 0, 1, 0].index(1)   #=> 0
     p [1, 0, 0, 0, 0].index(1)   #=> 0
@@ -944,12 +944,12 @@ lv �����ꤵ�줿��硢lv �ο����ޤǺƵ�Ū��ʿ�경���ޤ���
 --- indexes(*index)     
 --- indices(*index)     
 
-���Υ᥽�å� obsolete �Ǥ���
-����� [[m:Array#values_at]] ����Ѥ��ޤ���
-���Ѥ���ȷٹ��å�������ɽ������ޤ���
+このメソッド obsolete です。
+代わりに [[m:Array#values_at]] を使用します。
+使用すると警告メッセージが表示されます。
 
-�ư������ͤ򥤥�ǥå����Ȥ������Ǥ�������֤��ޤ����ϰϳ���
-����ǥå���������Ф��Ƥ� nil ���б����ޤ���
+各引数の値をインデックスとする要素の配列を返します。範囲外の
+インデックス指定に対しては nil が対応します。
 
     ary = %w( a b c d e )
     p ary.indexes( 0, 2, 4 )          #=> ["a", "c", "e"]
@@ -962,12 +962,12 @@ lv �����ꤵ�줿��硢lv �ο����ޤǺƵ�Ū��ʿ�경���ޤ���
 #@since 1.8.0
 --- insert(nth, *val)    -> self
 
-����ǥå��� nth �����Ǥ�ľ��(nth ����ξ���ľ��)���� 2 �����ʹߤ��ͤ��������ޤ���
-���� val ���Ĥ���ꤷ�ʤ���в��⤷�ޤ���
+インデックス nth の要素の直前(nth が負の場合は直後)に第 2 引数以降の値を挿入します。
+引数 val を一つも指定しなければ何もしません。
 
-@param nth val ������������֤������ǻ��ꤷ�ޤ���
+@param nth val を挿入する位置を整数で指定します。
 
-@param val ���Ȥ��������륪�֥������Ȥ���ꤷ�ޤ���
+@param val 自身に挿入するオブジェクトを指定します。
 
     ary = [1, 2, 3]
     ary.insert(2, "a", "b")
@@ -979,17 +979,17 @@ lv �����ꤵ�줿��硢lv �ο����ޤǺƵ�Ū��ʿ�경���ޤ���
 
 --- join(sep = $,)    -> String
 
-��������Ǥ�ʸ���� sep ��֤˶����Ϣ�뤷��ʸ������֤��ޤ���
+配列の要素を文字列 sep を間に挟んで連結した文字列を返します。
 
 #@since 1.9.2
-ʸ����Ǥʤ����Ǥ��Ф��Ƥϡ�to_str ������� to_str���ʤ���� to_s ������̤�Ϣ�뤷�ޤ���
+文字列でない要素に対しては、to_str があれば to_str、なければ to_s した結果を連結します。
 #@else
-ʸ����Ǥʤ����Ǥ��Ф��Ƥ� to_s ������̤�Ϣ�뤷�ޤ���
+文字列でない要素に対しては to_s した結果を連結します。
 #@end
-���Ǥ��ޤ�����Ǥ���кƵ�Ū�� (Ʊ�� sep �����Ѥ���)
-join ����ʸ�����Ϣ�뤷�ޤ���
-���������������Ǥ����Ȥ�ޤ�褦��̵�¤˥ͥ��Ȥ���������Ф��Ƥϡ��ʲ�
-�Τ褦�ʷ�̤ˤʤ�ޤ���
+要素がまた配列であれば再帰的に (同じ sep を利用して)
+join した文字列を連結します。
+ただし、配列要素が自身を含むような無限にネストした配列に対しては、以下
+のような結果になります。
 
 #@since 1.9.2
     ary = [1,2,3]
@@ -1003,20 +1003,20 @@ join ����ʸ�����Ϣ�뤷�ޤ���
     p ary.join      # => "123123[...]"
 #@end
 
-@param sep �֤˶���ʸ�������ꤷ�ޤ���nil �ΤȤ��϶�ʸ�����Ȥ��ޤ���
+@param sep 間に挟む文字列を指定します。nil のときは空文字列を使います。
 
   [1, 2, 3].join('-') #=> "1-2-3"
 
 #@since 1.9.2
-@raise ArgumentError �������Ǥ����Ȥ�ޤ�褦��̵�¤˥ͥ��Ȥ����������
-                     ���� join ��Ƥ������ȯ�����ޤ���
+@raise ArgumentError 配列要素が自身を含むような無限にネストした配列に対
+                     して join を呼んだ場合に発生します。
 #@end
 
 @see [[m:Array#*]], [[m:$,]]
 
 --- last    -> object | nil
 
-��������������Ǥ��֤��ޤ������󤬶��ΤȤ��� nil ���֤��ޤ���
+配列の末尾の要素を返します。配列が空のときは nil を返します。
 
     p [0, 1, 2].last   #=> 2
     p [].last          #=> nil
@@ -1026,11 +1026,11 @@ join ����ʸ�����Ϣ�뤷�ޤ���
 #@since 1.8.0
 --- last(n)    -> Array
 
-������ n ���Ǥ�������֤��ޤ���n �� 0 �ʾ�Ǥʤ���Фʤ�ޤ���
+末尾の n 要素を配列で返します。n は 0 以上でなければなりません。
 
-@param n �������������ǤθĿ��������ǻ��ꤷ�ޤ���
+@param n 取得したい要素の個数を整数で指定します。
 
-@raise ArgumentError n �����ͤξ��ȯ�����ޤ���
+@raise ArgumentError n が負値の場合発生します。
 
     ary =  [0, 1, 2]
     p ary.last(0)
@@ -1050,7 +1050,7 @@ join ����ʸ�����Ϣ�뤷�ޤ���
 --- length    -> Integer
 --- size      -> Integer
 
-�����Ĺ�����֤��ޤ������󤬶��ΤȤ��� 0 ���֤��ޤ���
+配列の長さを返します。配列が空のときは 0 を返します。
 
   p [1, nil, 3, nil].size    #=> 4
 
@@ -1060,14 +1060,14 @@ join ����ʸ�����Ϣ�뤷�ޤ���
 --- nitems{|obj| ... } -> Integer
 #@end
 
-nil �Ǥʤ����Ǥο����֤��ޤ���
+nil でない要素の数を返します。
 
 #@since 1.8.7
-�֥��å���Ϳ����줿���ϡ������Ǥ�����Ȥ���ɾ���� nil �Ǥʤ��ͤ��֤���
-���Ǥο����֤��ޤ���
+ブロックが与えられた場合は、各要素を引数として評価し nil でない値を返した
+要素の数を返します。
 #@end
 
-��:
+例:
   p [1, nil, 3, nil].nitems              #=> 2
 #@since 1.8.7
   p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
@@ -1076,15 +1076,15 @@ nil �Ǥʤ����Ǥο����֤��ޤ���
 
 --- pack(template)    -> String
 
-��������Ƥ� template �ǻ��ꤵ�줿ʸ����ˤ������äơ�
-�Х��ʥ�Ȥ��ƥѥå�����ʸ������֤��ޤ���
+配列の内容を template で指定された文字列にしたがって、
+バイナリとしてパックした文字列を返します。
 
-�ƥ�ץ졼�Ȥ�
-������ʸ����Ȥ���Ĺ��(��ά����1)���¤٤���ΤǤ���Ĺ����
-���� * �����ꤵ�줿���ϡֻĤ�Υǡ������ơפ�Ĺ����
-ɽ���ޤ���������ʸ���ϰʲ��ǽҤ٤� pack �ƥ�ץ졼��ʸ������̤�Ǥ���
+テンプレートは
+型指定文字列とその長さ(省略時は1)を並べたものです。長さと
+して * が指定された時は「残りのデータ全て」の長さを
+表します。型指定文字は以下で述べる pack テンプレート文字列の通りです。
 
-@param template ���ȤΥХ��ʥ�Ȥ��ƥѥå����뤿��Υƥ�ץ졼�Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param template 自身のバイナリとしてパックするためのテンプレートを文字列で指定します。
 
 #@include(pack-template)
 
@@ -1095,24 +1095,24 @@ nil �Ǥʤ����Ǥο����֤��ޤ���
 #@end
 
 #@since 1.8.7
-���Ȥ�����������ꤵ�줿 n �Ĥ����Ǥ�������Ƥ�����֤��ޤ���
-n ����ꤷ�ʤ��ä��������Ǥ��Τ�Τ� nil ��n ����ꤷ�����ϡ�
-­���Х������� n ��������֤��ޤ���n ���⼫�ȤΥ�������
-���������ϼ��ȤΥ������ˤʤ�ޤ����֤��ͤˤĤ��ơ�����ϵ�ž���ޤ��� (��򻲾�) ��
+自身の末尾から指定された n 個の要素を取り除いてそれを返します。
+n を指定しなかった場合は要素そのものか nil を、n を指定した場合は、
+足りればサイズが n の配列を返します。n よりも自身のサイズが
+小さい時は自身のサイズになります。返す値について、順序は逆転しません (例を参照) 。
 
-�ޤ������Ȥ�������λ��� n �����ꤵ��Ƥ��ʤ����� nil ��
-n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
+また、自身が空配列の時は n が指定されていない場合は nil を、
+n が明示的に指定されている場合は (たとえ n = 1 でも) 空の配列を返します。
 
-�֤��ͤ������Ѥ�ξ�������Ѥ��ơ��Ŀ�����ꤷ������� 2 ʬ�����ñ����ˡ�Ȥ��ƻȤ��ޤ���
+返す値と副作用の両方を利用して、個数を指定して配列を 2 分する簡単な方法として使えます。
 
-@param n ���Ȥ���������������ǤθĿ��������ǻ��ꤷ�ޤ���
+@param n 自身から取り除きたい要素の個数を整数で指定します。
 
 #@else
-��������������Ǥ�������Ƥ�����֤��ޤ������Ȥ�������λ���
-nil ���֤��ޤ���
+配列の末尾の要素を取り除いてそれを返します。自身が空配列の時は
+nil を返します。
 #@end
 
-��:
+例:
       array = [1, [2, 3], 4]
       p array.pop      # => 4
       p array.pop      # => [2, 3]
@@ -1135,12 +1135,12 @@ nil ���֤��ޤ���
 --- push(obj, *rest)  -> self
 #@end
 
-���ꤵ�줿 obj ����֤�������������ɲä��ޤ���
+指定された obj を順番に配列の末尾に追加します。
 #@since 1.8.0
-��������ꤷ�ʤ���в��⤷�ޤ���
+引数を指定しなければ何もしません。
 #@end
 
-@param obj ���Ȥ��ɲä��������֥������Ȥ���ꤷ�ޤ���
+@param obj 自身に追加したいオブジェクトを指定します。
 
       array = [1, 2, 3]
       array.push 4
@@ -1152,13 +1152,13 @@ nil ���֤��ޤ���
 
 --- rassoc(obj)    -> Array | nil
 
-���Ȥ����������Ǥ���Ȳ��ꤷ�ơ����Ǥ�����ǥ���ǥå���
-1 �����Ǥ� obj ����������Τ򸡺������Ĥ��ä��ǽ�����Ǥ���
-���ޤ��������������Ǥ��ʤ���� nil ���֤��ޤ���
+自身が配列の配列であると仮定して、要素の配列でインデックス
+1 の要素が obj に等しいものを検索し見つかった最初の要素を返
+します。該当する要素がなければ nil を返します。
 
-��Ӥ� == �黻�Ҥ�ȤäƹԤ��ޤ���
+比較は == 演算子を使って行われます。
 
-@param obj ���֥������Ȥ���ꤷ�ޤ���
+@param obj オブジェクトを指定します。
 
     a = [[15,1], [25,2], [35,3]]
     p a.rassoc(2)    # => [25, 2]
@@ -1167,9 +1167,9 @@ nil ���֤��ޤ���
 
 --- replace(another)    -> self
 
-��������Ƥ����� another �����Ƥ��֤������ޤ���
+配列の内容を配列 another の内容で置き換えます。
 
-@param another �������ꤷ�ޤ���
+@param another 配列を指定します。
 
     a = [1, 2, 3]
     a.replace [4, 5, 6]
@@ -1180,15 +1180,15 @@ nil ���֤��ޤ���
 --- reverse!    -> self
 #@end
 
-reverse �ϼ��Ȥ����Ǥ�ս���¤٤���������������������֤��ޤ���
-reverse! �ϼ��Ȥ��˲�Ū���¤��ؤ��ޤ���
+reverse は自身の要素を逆順に並べた新しい配列を生成して返します。
+reverse! は自身を破壊的に並べ替えます。
 #@since 1.8.0
-reverse! �� self ���֤��ޤ���
+reverse! は self を返します。
 #@end
 
  a = ["a", 2, true]
  p a.reverse         #=> [true, 2, "a"]
- p a                 #=> ["a", 2, true] (�Ѳ��ʤ�)
+ p a                 #=> ["a", 2, true] (変化なし)
  
  a = ["a", 2, true]
  p a.reverse!        #=> [true, 2, "a"]
@@ -1203,14 +1203,14 @@ reverse! �� self ���֤��ޤ���
 #@end
 #@end
 
-�����Ǥ��Ф��Ƶս�˥֥��å���ɾ�����ޤ���
+各要素に対して逆順にブロックを評価します。
 
 #@since 1.8.7
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� reverse_each ������������
+ブロックが与えられなかった場合は、自身と reverse_each から生成した
 #@since 1.8.8
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerator]] オブジェクトを返します。
 #@else
-[[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 #@end
 
@@ -1219,15 +1219,15 @@ reverse! �� self ���֤��ޤ���
 --- rindex {|item| ... }  -> Integer | nil
 #@end
 
-���ꤵ�줿 val �� == ���������Ǹ�����Ǥΰ��֤��֤��ޤ���
-���������Ǥ��ҤȤĤ�ʤ��ä����ˤ� nil ���֤��ޤ���
+指定された val と == で等しい最後の要素の位置を返します。
+等しい要素がひとつもなかった時には nil を返します。
 
 #@since 1.8.7
-�֥��å���Ϳ����줿���ˤϡ��֥��å��������֤����Ǹ�����Ǥΰ��֤��֤�
-�ޤ����֥��å��ˤϡ����Ǥ�����Ϥ���ޤ���
+ブロックが与えられた時には、ブロックが真を返した最後の要素の位置を返し
+ます。ブロックには、要素が順に渡されます。
 #@end
 
-@param val ���֥������Ȥ���ꤷ�ޤ���
+@param val オブジェクトを指定します。
 
     p [1, 0, 0, 1, 0].rindex(1)   #=> 3
     p [1, 0, 0, 0, 0].rindex(1)   #=> 0
@@ -1245,24 +1245,24 @@ reverse! �� self ���֤��ޤ���
 #@end
 
 #@since 1.8.7
-���Ȥ���Ƭ������ꤵ�줿 n �Ĥ����Ǥ�������Ƥ�����֤��ޤ���
-n ����ꤷ�ʤ��ä��������Ǥ��Τ�Τ� nil ��n ����ꤷ�����ϡ�
-­���Х������� n ��������֤��ޤ���n ���⼫�ȤΥ�������
-���������ϼ��ȤΥ������ˤʤ�ޤ����Ĥ�����Ǥ����˵ͤ���ޤ���
+自身の先頭から指定された n 個の要素を取り除いてそれを返します。
+n を指定しなかった場合は要素そのものか nil を、n を指定した場合は、
+足りればサイズが n の配列を返します。n よりも自身のサイズが
+小さい時は自身のサイズになります。残りの要素は前に詰められます。
 
-�ޤ������Ȥ�������λ��� n �����ꤵ��Ƥ��ʤ����� nil ��
-n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
+また、自身が空配列の時は n が指定されていない場合は nil を、
+n が明示的に指定されている場合は (たとえ n = 1 でも) 空の配列を返します。
 
-�֤��ͤ������Ѥ�ξ�������Ѥ��ơ��Ŀ�����ꤷ������� 2 ʬ�����ñ����ˡ�Ȥ��ƻȤ��ޤ���
+返す値と副作用の両方を利用して、個数を指定して配列を 2 分する簡単な方法として使えます。
 
-@param n ���Ȥ���������������ǤθĿ������������ǻ��ꤷ�ޤ���
+@param n 自身から取り除きたい要素の個数を非負整数で指定します。
 
 #@else
-�������Ƭ�����Ǥ�������Ƥ�����֤��ޤ����Ĥ�����ǤϤҤȤĤ���
-���˵ͤ���ޤ������Ȥ�������λ��� nil ���֤��ޤ���
+配列の先頭の要素を取り除いてそれを返します。残りの要素はひとつずつ
+前に詰められます。自身が空配列の時は nil を返します。
 #@end
 
-��:
+例:
 
   a = [0, 1, 2, 3, 4]
   p a.shift            #=> 0
@@ -1277,11 +1277,11 @@ n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
 
 --- slice(nth)       -> object | nil
 
-���ꤵ�줿���Ȥ����Ǥ��֤��ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+指定された自身の要素を返します。[[m:Array#[] ]] と同じです。
 
-@param nth ���ǤΥ���ǥå����������ǻ��ꤷ�ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+@param nth 要素のインデックスを整数で指定します。[[m:Array#[] ]] と同じです。
 
-��:
+例:
 
   p [0, 1, 2].slice(1)    #=> 1
   p [0, 1, 2].slice(2)    #=> 2
@@ -1290,15 +1290,15 @@ n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
 --- slice(pos, len)  -> Array | nil
 --- slice(range)     -> Array | nil
 
-���ꤵ�줿���Ȥ���ʬ������֤��ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+指定された自身の部分配列を返します。[[m:Array#[] ]] と同じです。
 
-@param pos [[m:Array#[] ]] ��Ʊ���Ǥ���
+@param pos [[m:Array#[] ]] と同じです。
 
-@param len [[m:Array#[] ]] ��Ʊ���Ǥ���
+@param len [[m:Array#[] ]] と同じです。
 
-@param range [[m:Array#[] ]] ��Ʊ���Ǥ���
+@param range [[m:Array#[] ]] と同じです。
 
-��:
+例:
 
   p [0, 1, 2].slice(0, 2)    #=> [0, 1]
   p [0, 1, 2].slice(2..3)    #=> [2]
@@ -1306,12 +1306,12 @@ n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
 
 --- slice!(nth)       -> object | nil
 
-���ꤷ�����Ǥ򼫿Ȥ���������������������Ǥ��֤��ޤ������������Ǥ��ʤ���� nil
-���֤��ޤ���
+指定した要素を自身から取り除き、取り除いた要素を返します。取り除く要素がなければ nil
+を返します。
 
-@param nth ���������ǤΥ���ǥå����������ǻ��ꤷ�ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+@param nth 取り除く要素のインデックスを整数で指定します。[[m:Array#[] ]] と同じです。
 
-��:
+例:
 
    a = [ "a", "b", "c" ]
    a.slice!(1)     #=> "b"
@@ -1324,10 +1324,10 @@ n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
 --- slice!(start, len)  -> Array | nil
 --- slice!(range)     -> Array | nil
 
-���ꤷ����ʬ����򼫿Ȥ��������������������ʬ������֤��ޤ������������Ǥ��ʤ���� nil
-���֤��ޤ���
+指定した部分配列を自身から取り除き、取り除いた部分配列を返します。取り除く要素がなければ nil
+を返します。
 
-�ʲ��Υ����ɤ�Ʊ�ͤǤ���
+以下のコードと同値です。
 
      def slice!(*args)
         result = self[*args]
@@ -1335,21 +1335,21 @@ n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
         result
      end
 
-�Ǥ��Τǰʲ��Τ褦�������Ĺ������ĥ�������⤢�ꤨ�ޤ���
+ですので以下のように配列の長さが拡張される場合もありえます。
 
   a = [ "a", "b", "c" ]
   p a.slice!(5, 1)       #=> nil
   p a                    #=> ["a", "b", "c", nil, nil]
 
-@param start �����������ʬ�������Ƭ�Υ���ǥå����������ǻ��ꤷ�ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+@param start 削除したい部分配列の先頭のインデックスを整数で指定します。[[m:Array#[] ]] と同じです。
 
-@param len �����������ʬ�����Ĺ���������ǻ��ꤷ�ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+@param len 削除したい部分配列の長さを整数で指定します。[[m:Array#[] ]] と同じです。
 
-@param range ���������������ϰϤ� [[c:Range]] ���֥������Ȥǻ��ꤷ�ޤ���[[m:Array#[] ]] ��Ʊ���Ǥ���
+@param range 削除したい配列の範囲を [[c:Range]] オブジェクトで指定します。[[m:Array#[] ]] と同じです。
 
-@raise IndexError ���ꤵ�줿�ϰϤλ��������Ȥλ���������ˤ������ȯ�����ޤ���
+@raise IndexError 指定された範囲の始点が自身の始点より前にある場合に発生します。
 
-��:
+例:
 
    a = [ "a", "b", "c" ]
    a.slice!(1, 2)     #=> ["b", "c"]
@@ -1367,27 +1367,27 @@ n ������Ū�˻��ꤵ��Ƥ������ (���Ȥ� n = 1 �Ǥ�) ����������֤��ޤ���
 --- sort {|a, b| ... }  -> Array
 --- sort! {|a, b| ... } -> self
 
-��������Ƥ򥽡��Ȥ��ޤ�������Ʊ�Τ���Ӥ� <=> �黻�Ҥ�ȤäƹԤ��ޤ���sort �ϥ����Ȥ��줿��������������֤��ޤ���
+配列の内容をソートします。要素同士の比較は <=> 演算子を使って行います。sort はソートされた配列を生成して返します。
 #@since 1.8.0
-sort! �� self ���˲�Ū�˥����Ȥ���self ���֤��ޤ���
+sort! は self を破壊的にソートし、self を返します。
 #@else
-sort! �� self ���˲�Ū���ѹ�����self ���֤��ޤ��������������Ǥο��� 2 ��꾮�������ˤ� nil ���֤��ޤ���
+sort! は self を破壊的に変更し、self を返します。ただし、要素の数が 2 より小さい場合には nil を返します。
 #@end
 
-�֥��å��ȤȤ�˸ƤӽФ��줿���ˤϡ�����Ʊ�Τ���Ӥ�֥��å����Ѥ��ƹԤ��ޤ���
-�֥��å���2�Ĥ����Ǥ�����Ȥ���Ϳ����ɾ���������η�̤���Ӥ��ޤ���
-�֥��å��� <=> �黻�Ҥ�Ʊ�ͤ��������֤����Ȥ����Ԥ���Ƥ��ޤ����Ĥޤꡢ
-�֥��å�����1�������礭���ʤ�����������ξ�Ԥ��������ʤ�0����������1�����������������ʤ�
-����������֤��ʤ���Ф����ޤ���ξ�Ԥ���ӤǤ��ʤ����� nil ���֤��ޤ���
+ブロックとともに呼び出された時には、要素同士の比較をブロックを用いて行います。
+ブロックに2つの要素を引数として与えて評価し、その結果で比較します。
+ブロックは <=> 演算子と同様に整数を返すことが期待されています。つまり、
+ブロックは第1引数が大きいなら正の整数、両者が等しいなら0、そして第1引数の方が小さいなら
+負の整数を返さなければいけません。両者を比較できない時は nil を返します。
 
    a = [ "d", "a", "e", "c", "b" ]
    p a.sort                                #=> ["a", "b", "c", "d", "e"]
    
    b = ["9", "7", "10", "11", "8"]
-   p b.sort                                #=> ["10", "11", "7", "8", "9"] (ʸ����Ȥ��ƥ����Ȥ���Ȥ����ʤ�)
-   p b.sort{|x, y| x.to_i <=> y.to_i }     #=> ["7", "8", "9", "10", "11"] (�֥��å���Ȥäƿ����Ȥ��ƥ�����)
+   p b.sort                                #=> ["10", "11", "7", "8", "9"] (文字列としてソートするとこうなる)
+   p b.sort{|x, y| x.to_i <=> y.to_i }     #=> ["7", "8", "9", "10", "11"] (ブロックを使って数字としてソート)
 
-   # sort_by ��ȤäƤ��ɤ�
+   # sort_by を使っても良い
    p b.sort_by{|x| x.to_i }                #=> ["7", "8", "9", "10", "11"]
 
 @see [[m:Enumerable#sort_by]]
@@ -1395,28 +1395,28 @@ sort! �� self ���˲�Ū���ѹ�����self ���֤��ޤ��������������Ǥο��� 2 ��꾮����
 #@since 1.9.2
 --- sort_by!               -> Enumerator
 --- sort_by! {|item| ... } -> self
-sort_by ���˲�Ū�С������Ǥ���
+sort_by の破壊的バージョンです。
 
-�֥��å����ά���������֤��ͤˤ�ä�������˲�Ū��
-�����Ȥ��� [[c:Enumerator]] ���֤��ޤ���
+ブロックを省略した場合は返り値によって配列を破壊的に
+ソートする [[c:Enumerator]] を返します。
 
 @see [[m:Enumerable#sort_by]]
 #@end
 
 --- to_a       -> Array
 
-self ���֤��ޤ�����������Array �Υ��֥��饹�Υ��󥹥��󥹤��Ф��ƸƤФ줿���ϡ�
-���Ȥ� Array ���Ѵ�������Τ��֤��ޤ���
+self を返します。ただし、Array のサブクラスのインスタンスに対して呼ばれた時は、
+自身を Array に変換したものを返します。
 
 --- to_ary  -> self
 
-self �򤽤Τޤ��֤��ޤ���
+self をそのまま返します。
 
 #@since 1.9.1
 --- to_s    -> String
 --- inspect -> String
 
-���Ȥξ����ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+自身の情報を人間に読みやすい文字列にして返します。
 
   [1, 2, 3, 4].to_s    # => "[1, 2, 3, 4]"
   [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
@@ -1424,13 +1424,13 @@ self �򤽤Τޤ��֤��ޤ���
 #@else
 --- to_s    -> String
 
-[[m:Array#join]]([[m:$,]]) ��Ʊ���Ǥ���
+[[m:Array#join]]([[m:$,]]) と同じです。
 
   [1, 2, 3, 4].to_s    # => "1234"
 
 --- inspect -> String
 
-���Ȥξ����ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+自身の情報を人間に読みやすい文字列にして返します。
 
   [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
 #@end
@@ -1438,13 +1438,13 @@ self �򤽤Τޤ��֤��ޤ���
 #@since 1.8.0
 --- transpose    -> Array
 
-���Ȥ����ȸ�Ω�Ƥơ������ž��(�Ԥ�������촹��)��Ԥ���
-����ž�֤�����������������֤��ޤ�������������Ф��Ƥ϶����������
-�������֤��ޤ���
+自身を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
+す。転置した配列を生成して返します。空の配列に対しては空の配列を生
+成して返します。
 
-����ʳ��ΰ켡����������Ф��Ƥϡ��㳰
-[[c:TypeError]] ��ȯ�����ޤ��������ǤΥ���������·����������Ф���
-�ϡ��㳰 [[c:IndexError]] ��ȯ�����ޤ���
+それ以外の一次元の配列に対しては、例外
+[[c:TypeError]] が発生します。各要素のサイズが不揃いな配列に対して
+は、例外 [[c:IndexError]] が発生します。
 
     p [[1,2],
        [3,4],
@@ -1472,20 +1472,20 @@ self �򤽤Τޤ��֤��ޤ���
 --- uniq! {|item| ... } -> self | nil
 #@end
 
-uniq �����󤫤��ʣ�������Ǥ��������������������֤��ޤ���
-�������줿���Ǥ���ʬ�����˵ͤ���ޤ���uniq! �Ϻ�����˲�
-Ū�˹Ԥ���������Ԥ�줿���� self �򡢤����Ǥʤ����
-nil ���֤��ޤ���
+uniq は配列から重複した要素を取り除いた新しい配列を返します。
+取り除かれた要素の部分は前に詰められます。uniq! は削除を破壊
+的に行い、削除が行われた場合は self を、そうでなければ
+nil を返します。
 
-���Ǥν�ʣȽ��ϡ�[[m:Object#eql?]] �ˤ��Ԥ��ޤ���
+要素の重複判定は、[[m:Object#eql?]] により行われます。
 
     p [1, 1, 1].uniq         # => [1]
     p [1, 4, 1].uniq         # => [1, 4]
     p [1, 3, 2, 2, 3].uniq   # => [1, 3, 2]
 
 #@since 1.9.2
-�֥��å������ꤵ�줿��硢�֥��å����֤����ͤ���ʣ�������Ǥ��������
-������֤��ޤ���
+ブロックが指定された場合、ブロックが返した値が重複した要素を取り除いた
+配列を返します。
 
     p [1, 3, 2, "2", "3"].uniq                # => [1, 3, 2, "2", "3"]
     p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
@@ -1497,12 +1497,12 @@ nil ���֤��ޤ���
 --- unshift(obj, *rest)  -> self
 #@end
 
-���ꤵ�줿 obj ����֤��������Ƭ���������ޤ���
+指定された obj を順番に配列の先頭に挿入します。
 #@since 1.8.0
-��������ꤷ�ʤ���в��⤷�ޤ���
+引数を指定しなければ何もしません。
 #@end
 
-@param obj ���Ȥ��ɲä��������֥������Ȥ���ꤷ�ޤ���
+@param obj 自身に追加したいオブジェクトを指定します。
 
     arr = [1,2,3]
     arr.unshift 0
@@ -1517,13 +1517,13 @@ nil ���֤��ޤ���
 #@since 1.8.0
 --- values_at(*selectors)    -> Array | nil
 
-�����ǻ��ꤵ�줿����ǥå������б��������Ǥ�������֤��ޤ�������ǥ�
-�������б������ͤ��ʤ���� nil �����Ǥˤʤ�ޤ���
+引数で指定されたインデックスに対応する要素を配列で返します。インデッ
+クスに対応する値がなければ nil が要素になります。
 
-@param selectors ����ǥå����������⤷���������� [[c:Range]] �ǻ��ꤷ�ޤ���
-       [[c:Range]] �ξ��ϡ�[[m:Range#begin]] ������Υ�������ۤ������̵�뤵�졢
-       [[m:Range#end]] ������Υ�������ۤ���ޤ��б��������Ǥ����򤵤�ޤ���
-       ���礦������Υ�������ؤ����ϡ�nil �������ޤ���
+@param selectors インデックスを整数もしくは整数の [[c:Range]] で指定します。
+       [[c:Range]] の場合は、[[m:Range#begin]] が配列のサイズを越える場合は無視され、
+       [[m:Range#end]] が配列のサイズを越えるまで対応する要素が選択されます。
+       ちょうど配列のサイズを指す場合は、nil で埋められます。
 
     ary = %w( a b c d e )
     p ary.values_at( 0, 2, 4 )          #=> ["a", "c", "e"]
@@ -1535,7 +1535,7 @@ nil ���֤��ޤ���
     p ary.values_at( 6..7 )             #=> []
     p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
 
-#@# ([[m:Array#indexes]], [[m:Array#indices]] ��Ʊ���Ǥ�)
+#@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
 #@end
 
@@ -1543,22 +1543,22 @@ nil ���֤��ޤ���
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
 
-���ȤȰ������Ϥ�������γ����Ǥ���ʤ��������������������֤��ޤ���
-�����������������ǿ��� self �����ǿ���Ʊ���Ǥ���
+自身と引数に渡した配列の各要素からなる配列の配列を生成して返します。
+生成される配列の要素数は self の要素数と同じです。
 
-�֥��å��դ��ǸƤӽФ������ϡ�
-self �Ȱ������Ϥ�������γ����Ǥ���֤˥֥��å����Ϥ��ޤ���
+ブロック付きで呼び出した場合は、
+self と引数に渡した配列の各要素を順番にブロックに渡します。
 
 #@since 1.9.1
-@param lists �������ꤷ�ޤ�������Ǥʤ����� [[m:Enumerable#zip]]
-             �Ȱ㤤 to_ary �᥽�åɤˤ��������Ѵ����ޤ���
-             to_ary �᥽�åɤ�̵������ each ���ޤ���
+@param lists 配列を指定します。配列でない場合は [[m:Enumerable#zip]]
+             と違い to_ary メソッドにより配列に変換します。
+             to_ary メソッドが無い場合は each を試します。
 #@else
-@param lists �������ꤷ�ޤ�������Ǥʤ����� [[m:Enumerable#zip]]
-             �Ȱ㤤 to_ary �᥽�åɤˤ��������Ѵ����ޤ���
+@param lists 配列を指定します。配列でない場合は [[m:Enumerable#zip]]
+             と違い to_ary メソッドにより配列に変換します。
 #@end
 
-��:
+例:
     p [1,2,3].zip([4,5,6], [7,8,9])
         # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
@@ -1581,16 +1581,16 @@ self �Ȱ������Ϥ�������γ����Ǥ���֤˥֥��å����Ϥ��ޤ���
 #@if (version == "1.8.7")
 --- choice        -> object
 
-��������Ǥ�1�ĥ������������֤��ޤ���
+配列の要素を1個ランダムに選んで返します。
 
-���󤬶��ξ��� nil ���֤��ޤ���
+配列が空の場合は nil を返します。
 
-srand()��ͭ���Ǥ���
+srand()が有効です。
 
-���Υ᥽�åɤ� Ruby 1.8.7 �� Ruby 1.9.0 �ˤ���¸�ߤ��ʤ��᥽�åɤǤ���
-Ruby 1.8.8 �ʹߤǤ� Array#sample ��ȤäƤ���������
+このメソッドは Ruby 1.8.7 と Ruby 1.9.0 にしか存在しないメソッドです。
+Ruby 1.8.8 以降では Array#sample を使ってください。
 
-��:
+例:
 
   a = (1..10).to_a
   p a.choice        #=>  9
@@ -1603,13 +1603,13 @@ Ruby 1.8.8 �ʹߤǤ� Array#sample ��ȤäƤ���������
 --- sample        -> object
 --- sample(n)     -> Array
 
-��������Ǥ�1��(��������ꤷ������ n ��)�������������֤��ޤ���
+配列の要素を1個(引数を指定した場合は n 個)ランダムに選んで返します。
 
-���󤬶��ξ�硢̵�����ξ��� nil �򡢸Ŀ�����ꤷ�����϶�������֤��ޤ���
+配列が空の場合、無引数の場合は nil を、個数を指定した場合は空配列を返します。
 
-srand()��ͭ���Ǥ���
+srand()が有効です。
 
-��:
+例:
 
   a = (1..10).to_a
   p a.sample        #=>  9
@@ -1627,18 +1627,18 @@ srand()��ͭ���Ǥ���
 --- cycle(n=nil) -> Enumerable::Enumerator
 #@end
 
-����������Ǥ� n ��(nil�ξ���̵�¤�)�����֤��֥��å���ƤӤ����ޤ���
+配列の全要素を n 回(nilの場合は無限に)繰り返しブロックを呼びだします。
 
-�֥��å����ά�������ϡ��ʾ�Τ褦�ʷ����֤���Ԥ�
+ブロックを省略した場合は、以上のような繰り返しを行う
 #@until 1.9.1
 [[c:Enumerable::Enumerator]]
 #@else
 [[c:Enumerator]]
 #@end
-���֤��ޤ���
+を返します。
 
 
-��:
+例:
 
    a = ["a", "b", "c"]
    a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
@@ -1648,21 +1648,21 @@ srand()��ͭ���Ǥ���
 --- shuffle(random: rng) -> Array
 #@end
 
-��������Ǥ�����ॷ��åե뤷�ơ����η�̤�����Ȥ����֤��ޤ���
+配列の要素をランダムシャッフルして，その結果を配列として返します。
 
 #@since 1.9.3
-������ [[c:Random]] ���֥������Ȥ��Ϥ����ȤǤ��Υ��֥������Ȥ�
-�������뵿���������Ѥ��뤳�Ȥ��Ǥ��ޤ���
+引数に [[c:Random]] オブジェクトを渡すことでそのオブジェクトが
+生成する疑似乱数列を用いることができます。
 #@end
 
-��:
+例:
 
    a = [ 1, 2, 3 ]           #=> [1, 2, 3]
    a.shuffle                 #=> [2, 3, 1]
 #@since 1.9.3
    rng = Random.new
-   rng2 = rng.dup # RNG��ʣ��
-   # �ʲ���2�Ĥ�Ʊ����̤��֤�
+   rng2 = rng.dup # RNGを複製
+   # 以下の2つは同じ結果を返す
    [1,2,3].shuffle(random: rng)
    [1,2,3].shuffle(random: rng2)
 #@end
@@ -1673,14 +1673,14 @@ srand()��ͭ���Ǥ���
 --- shuffle!(random: rng) -> self
 #@end
 
-������˲�Ū�˥����ॷ��åե뤷�ޤ���
+配列を破壊的にランダムシャッフルします。
 
 #@since 1.9.3
-������ [[c:Random]] ���֥������Ȥ��Ϥ����ȤǤ��Υ��֥������Ȥ�
-�������뵿���������Ѥ��뤳�Ȥ��Ǥ��ޤ���
+引数に [[c:Random]] オブジェクトを渡すことでそのオブジェクトが
+生成する疑似乱数列を用いることができます。
 #@end
 
-��:
+例:
 
    a = [ 1, 2, 3 ]           #=> [1, 2, 3]
    a.shuffle!                #=> [2, 3, 1]
@@ -1695,18 +1695,18 @@ srand()��ͭ���Ǥ���
 --- combination(n)                 -> Enumerable::Enumerator
 #@end
 
-������ n ���Ȥ߹�碌�򤹤٤������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
+サイズ n の組み合わせをすべて生成し、それを引数としてブロックを実行します。
 
-�������Ȥ߹�碌�ν�����ݾڤ���ޤ��󡣥֥��å��ʤ��ǸƤӽФ����ȡ��Ȥ߹�碌
+得られる組み合わせの順序は保証されません。ブロックなしで呼び出されると、組み合わせ
 #@since 1.8.8
-���������� [[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+を生成する [[c:Enumerator]] オブジェクトを返します。
 #@else
-���������� [[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+を生成する [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 
-@param n �������������Υ�������
+@param n 生成される配列のサイズ。
 
-��:
+例:
 
     a = [1, 2, 3, 4]
     a.combination(1).to_a  #=> [[1],[2],[3],[4]]
@@ -1729,18 +1729,18 @@ srand()��ͭ���Ǥ���
 --- permutation(n)                     -> Enumerable::Enumerator
 #@end
 
-������ n �ν���򤹤٤������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
+サイズ n の順列をすべて生成し，それを引数としてブロックを実行します。
 
-���������ν�����ݾڤ���ޤ��󡣥֥��å��ʤ��ǸƤӽФ����ȡ� ����
+得られる順列の順序は保証されません。ブロックなしで呼び出されると， 順列
 #@since 1.8.8
-���������� [[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+を生成する [[c:Enumerator]] オブジェクトを返します。
 #@else
-���������� [[c:Enumerable::Enumerator]] ���֥������Ȥ��֤��ޤ���
+を生成する [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 
-@param n ������������Υ�����
+@param n 生成する配列のサイズ
 
-��:
+例:
 
     a = [1, 2, 3]
     a.permutation(1).to_a  #=> [[1],[2],[3]]
@@ -1760,16 +1760,16 @@ srand()��ͭ���Ǥ���
 --- product(*lists) { |e| ... }   -> self
 #@end
 
-�쥷���Ф�����Ȱ�����Ϳ����줿�����ʣ���ġˤΤ��줾�줫�����Ǥ�1
-�Ĥ��ĤȤä�����Ȥ��������Τ��٤Ƥ���������ǤȤ���������֤��ޤ���
+レシーバの配列と引数で与えられた配列（複数可）のそれぞれから要素を1
+個ずつとって配列とし，それらのすべての配列を要素とする配列を返します。
 
-�֤���������Ĺ���ϡ��쥷���ФȰ�����Ϳ����줿�����Ĺ���Τ��٤Ƥ��Ѥˤ�
-��ޤ���
+返される配列の長さは，レシーバと引数で与えられた配列の長さのすべての積にな
+ります。
 
 
-@param lists ����ʣ�������ǽ��
+@param lists 配列。複数指定可能。
 
-��:
+例:
 
    [1,2,3].product([4,5])     # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
    [1,2].product([1,2])       # => [[1,1],[1,2],[2,1],[2,2]]
@@ -1779,8 +1779,8 @@ srand()��ͭ���Ǥ���
    [1,2].product([])          # => []
 
 #@since 1.9.2
-�֥��å������ꤵ�줿��硢������������γ����Ǥ�����Ȥ��ƥ֥��å����
-�Ԥ��� self ���֤��ޤ���
+ブロックが指定された場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
 
    a = []
    [1,2,3].product([4,5]) {|e| a << e} # => [1,2,3]
@@ -1793,15 +1793,15 @@ srand()��ͭ���Ǥ���
 --- repeated_combination(n) { |c| ... } -> Array
 --- repeated_combination(n)             -> Enumerator
 
-������ n �ν�ʣ�Ȥ߹�碌�򤹤٤������������������Ȥ��ƥ֥��å���¹�
-���ޤ���
+サイズ n の重複組み合わせをすべて生成し、それを引数としてブロックを実行
+します。
 
-�������Ȥ߹�碌�ν�����ݾڤ���ޤ��󡣥֥��å��ʤ��ǸƤӽФ����ȡ�
-�Ȥ߹�碌���������� Enumerator ���֥������Ȥ��֤��ޤ���
+得られる組み合わせの順序は保証されません。ブロックなしで呼び出されると、
+組み合わせを生成する Enumerator オブジェクトを返します。
 
-@param n �������������Υ�������
+@param n 生成される配列のサイズ。
 
-��:
+例:
 
     a = [1, 2, 3]
     a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
@@ -1817,14 +1817,14 @@ srand()��ͭ���Ǥ���
 --- repeated_permutation(n) { |p| ... } -> Array
 --- repeated_permutation(n)             -> Enumerator
 
-������ n �ν�ʣ����򤹤٤������������������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
+サイズ n の重複順列をすべて生成し，それを引数としてブロックを実行します。
 
-���������ν�����ݾڤ���ޤ��󡣥֥��å��ʤ��ǸƤӽФ����ȡ� ����
-���������� Enumerator ���֥������Ȥ��֤��ޤ���
+得られる順列の順序は保証されません。ブロックなしで呼び出されると， 順列
+を生成する Enumerator オブジェクトを返します。
 
-@param n ������������Υ�������
+@param n 生成する配列のサイズ。
 
-��:
+例:
 
     a = [1, 2]
     a.repeated_permutation(1).to_a  #=> [[1], [2]]
@@ -1837,48 +1837,48 @@ srand()��ͭ���Ǥ���
 --- keep_if {|item| ... } -> self
 --- keep_if -> Enumerator
 
-�֥��å��� false ���֤������Ǥ������ޤ���
+ブロックが false を返した要素を削除します。
 
    a = %w{ a b c d e f }
    a.keep_if {|v| v =~ /[aeiou]/}   # => ["a", "e"]
    a # => ["a", "e"]
 
-[[m:Array#select!]] ��Ʊ�ͤ˼��Ȥ��񤭤��ޤ���������������Ǥ��ʤ���
-�����ˤϽ�����Ԥ��ޤ���
+[[m:Array#select!]] と同様に自身を上書きしますが、削除する要素がなかっ
+た場合には修正を行いません。
 
    a = %w{ a b c d e f }
    a.keep_if {|v| v =~ /[a-z]/ }   # => ["a", "b", "c", "d", "e", "f"]
    a # => ["a", "b", "c", "d", "e", "f"]
 
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� keep_if ������������
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+ブロックが与えられなかった場合は、自身と keep_if から生成した
+[[c:Enumerator]] オブジェクトを返します。
 
 @see [[m:Array#select!]]
 --- select! {|item| block } -> self | nil
 --- select! -> Enumerator
 
-�֥��å��� false ���֤������Ǥ򼫿Ȥ��������ޤ���
-�ѹ������ä����� self ��
-�ѹ����ʤ��ä����ˤ� nil ���֤��ޤ���
+ブロックが false を返した要素を自身から削除します。
+変更があった場合は self を、
+変更がなかった場合には nil を返します。
 
    a = %w{ a b c d e f }
    a.select! {|v| v =~ /[a-z]/ }   # => nil
    a # => ["a", "b", "c", "d", "e", "f"]
 
-�֥��å���Ϳ�����ʤ��ä����ϡ����Ȥ� select! ������������
-[[c:Enumerator]] ���֥������Ȥ��֤��ޤ���
+ブロックが与えられなかった場合は、自身と select! から生成した
+[[c:Enumerator]] オブジェクトを返します。
 
 @see [[m:Array#keep_if]]
 --- rotate(cnt = 1) -> Array
 
-cnt �ǻ��ꤷ������ǥå��������Ǥ���Ƭ�ˤʤ�����򿷤����������ޤ���
-cnt ����������Ǥ������˰�ư���ޤ���cnt ����ο�����ꤷ����硢�դ���
-���Ԥ��ޤ���
+cnt で指定したインデックスの要素が先頭になる配列を新しく作成します。
+cnt より前の要素は末尾に移動します。cnt に負の数を指定した場合、逆の操
+作を行います。
 
-@param cnt ��Ƭ�ˤ������ǤΥ���ǥå�������ꤷ�ޤ������ꤷ�ʤ��ä����
-           �� 1 �ˤʤ�ޤ���
+@param cnt 先頭にする要素のインデックスを指定します。指定しなかった場合
+           は 1 になります。
 
-��:
+例:
 
    a = [ "a", "b", "c", "d" ]
    a.rotate         # => ["b", "c", "d", "a"]
@@ -1890,14 +1890,14 @@ cnt ����������Ǥ������˰�ư���ޤ���cnt ����ο�����ꤷ����硢�դ���
 @see [[m:Array#rotate!]]
 --- rotate!(cnt = 1) -> self
 
-cnt �ǻ��ꤷ������ǥå��������Ǥ���Ƭ�ˤʤ�褦�˼��Ȥν��֤��ѹ�����
-����cnt ����������Ǥ������˰�ư���ޤ���cnt ����ο�����ꤷ����硢��
-������Ԥ��ޤ���
+cnt で指定したインデックスの要素が先頭になるように自身の順番を変更しま
+す。cnt より前の要素は末尾に移動します。cnt に負の数を指定した場合、逆
+の操作を行います。
 
-@param cnt ��Ƭ�ˤ������ǤΥ���ǥå�������ꤷ�ޤ������ꤷ�ʤ��ä����
-           �� 1 �ˤʤ�ޤ���
+@param cnt 先頭にする要素のインデックスを指定します。指定しなかった場合
+           は 1 になります。
 
-��:
+例:
 
    a = [ "a", "b", "c", "d" ]
    a.rotate!        #=> ["b", "c", "d", "a"]

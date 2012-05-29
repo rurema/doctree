@@ -1,9 +1,9 @@
-ÆüÉÕ¤ò¤¢¤Ä¤«¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+æ—¥ä»˜ã‚’ã‚ã¤ã‹ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-#@# ¤³¤ÎÊ¸½ñ¤Î¥ª¥ê¥¸¥Ê¥ë (¤Î html ÈÇ) ¤Ï¡¢
+#@# ã“ã®æ–‡æ›¸ã®ã‚ªãƒªã‚¸ãƒŠãƒ« (ã® html ç‰ˆ) ã¯ã€
 #@# [[url:http://www.funaba.org/date2/manual.html]],
 #@# [[url:http://www.funaba.org/en/date2/manual.html]]
-#@# ¤Ç¤¹¡£
+#@# ã§ã™ã€‚
 
 #@include(date/Date)
 #@include(date/DateTime)

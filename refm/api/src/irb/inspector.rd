@@ -1,6 +1,6 @@
 
-irb ���ޥ�ɤǼ¹Է�̤ν�������(inspect_mode)��������뤿��Υ��֥饤
-�֥��Ǥ���
+irb コマンドで実行結果の出力方式(inspect_mode)を定義するためのサブライ
+ブラリです。
 
 = reopen IRB
 
@@ -8,56 +8,56 @@ irb ���ޥ�ɤǼ¹Է�̤ν�������(inspect_mode)��������뤿��Υ��֥饤
 
 --- Inspector(inspect, init = nil) -> IRB::Inspector
 
-[[c:IRB::Inspector]] ���֥������Ȥ��������ޤ���
+[[c:IRB::Inspector]] オブジェクトを生成します。
 
-@param inspect �¹Է�̤ν��ϤΤ���μ�³�����֥������Ȥ���ꤷ�ޤ���
+@param inspect 実行結果の出力のための手続きオブジェクトを指定します。
 
-@param init inspect_mode �ν�����Τ���μ�³�����֥������Ȥ���ꤷ�ޤ���
-            ���餫���� require ��ɬ�פʾ��ʤɤˡ�proc { require "foo" }
-            �Ȥ��ä������Ԥ��ޤ���
+@param init inspect_mode の初期化のための手続きオブジェクトを指定します。
+            あらかじめ require が必要な場合などに、proc { require "foo" }
+            といった指定を行います。
 
 = class IRB::Inspector
 
-�¹Է�̤ν��Ϥ�Ԥ�����Υ��饹�Ǥ���
+実行結果の出力を行うためのクラスです。
 
 == Instance Methods
 
 --- init -> ()
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- inspect_value(v) -> ()
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 = object IRB::INSPECTORS
 
-������줿 inspect_mode ��������� [[c:Hash]] ���֥������ȤǤ���
+定義された inspect_mode を管理する [[c:Hash]] オブジェクトです。
 
 --- keys_with_inspector(inspector) -> Array
 
-�����ǻ��ꤷ�� [[c:IRB::Inspector]] ���б����� key ��������֤��ޤ���
+引数で指定した [[c:IRB::Inspector]] に対応する key の配列を返します。
 
-@param inspector [[c:IRB::Inspector]] ���֥������Ȥ���ꤷ�ޤ���
+@param inspector [[c:IRB::Inspector]] オブジェクトを指定します。
 
   IRB::INSPECTORS.keys_with_inspector(IRB::INSPECTORS[true])
   # => [true, :p, "p", :inspect, "inspect"]
 
 --- def_inspector(key, arg = nil) { |v| ... } -> object
 
-�������¹Է�̤ν���������������ޤ���
+新しい実行結果の出力方式を定義します。
 
-@param key conf.inspect_mode �� IRB.conf[:INSPECT_MODE] �˻��ꤹ�륭��
-           ���֥������Ȥ���ꤷ�ޤ����������ꤷ�������������������
-           �Ƥ��оݤˤʤ�ޤ���
+@param key conf.inspect_mode や IRB.conf[:INSPECT_MODE] に指定するキー
+           オブジェクトを指定します。配列を指定した場合は配列中の要素全
+           てが対象になります。
 
-@param arg �֥��å�����ꤹ����ˤϡ�inspect_mode �ν�����Τ���μ�³
-           �����֥������Ȥ���ꤷ�ޤ������餫���� require ��ɬ�פʾ��
-           �ʤɤˡ�proc { require "foo" } �Ȥ��ä������Ԥ��ޤ���
-           �֥��å�����ꤷ�ʤ����ˤϡ��¹Է�̤ν��ϤΤ���μ�³����
-           �֥������Ȥ���ꤷ�ޤ���
+@param arg ブロックを指定する場合には、inspect_mode の初期化のための手続
+           きオブジェクトを指定します。あらかじめ require が必要な場合
+           などに、proc { require "foo" } といった指定を行います。
+           ブロックを指定しない場合には、実行結果の出力のための手続きオ
+           ブジェクトを指定します。
 
-��.
+例.
 
   # .irbrc
   IRB::INSPECTORS.def_inspector([:test]){|v| v.to_s * 2 }

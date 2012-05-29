@@ -1,7 +1,7 @@
 = module Zlib
 
-zlib �饤�֥��˴ޤޤ�Ƥ��뻨¿�ʵ�ǽ���󶡤���⥸�塼�롣
-�ƥ⥸�塼��ؿ��ξܺ٤� zlib.h �򻲾Ȥ��Ʋ�������
+zlib ライブラリに含まれている雑多な機能を提供するモジュール。
+各モジュール関数の詳細は zlib.h を参照して下さい。
 
 @see [[man:zlib(3)]]
 
@@ -9,68 +9,68 @@ zlib �饤�֥��˴ޤޤ�Ƥ��뻨¿�ʵ�ǽ���󶡤���⥸�塼�롣
 
 --- zlib_version -> String
 
-zlib �饤�֥��ΥС�������ɽ��ʸ������֤��ޤ���
+zlib ライブラリのバージョンを表す文字列を返します。
 
 --- adler32(string = nil, adler = nil) -> Integer
 
-string �� Adler-32 �����å������׻�����adler ��
-���������ͤ��֤��ޤ���string ����ά���줿����
-Adler-32 �����å�����ν���ͤ��֤��ޤ���adler ��
-��ά���줿���� adler �˽���ͤ�Ϳ���餿��ΤȤ���
-�׻����ޤ���
+string の Adler-32 チェックサムを計算し、adler を
+更新した値を返します。string が省略された場合は
+Adler-32 チェックサムの初期値を返します。adler が
+省略された場合は adler に初期値が与えらたものとして
+計算します。
 
-@param string string �� Adler-32 �����å����ब�׻�����ޤ���
-@param adler  adler �������ǻ��ꤷ�ޤ���
+@param string string の Adler-32 チェックサムが計算されます。
+@param adler  adler を整数で指定します。
 
 --- crc32(string = nil, crc = nil) -> Integer
 
-string �� CRC �����å������׻�����crc ��
-���������ͤ��֤��ޤ���string ����ά���줿����
-CRC �����å�����ν���ͤ��֤��ޤ���crc ��
-��ά���줿���� crc �˽���ͤ�Ϳ���餿��ΤȤ���
-�׻����ޤ���
+string の CRC チェックサムを計算し、crc を
+更新した値を返します。string が省略された場合は
+CRC チェックサムの初期値を返します。crc が
+省略された場合は crc に初期値が与えらたものとして
+計算します。
 
-@param string string �� CRC �����å����ब�׻�����ޤ���
-@param crc  crc �������ǻ��ꤷ�ޤ���
+@param string string の CRC チェックサムが計算されます。
+@param crc  crc を整数で指定します。
 
 --- crc_table -> Array
 
-CRC �����å�����η׻����Ѥ���ơ��֥��������֤��ޤ���
+CRC チェックサムの計算に用いるテーブルを配列で返します。
 
 #@since 1.9.2
 --- adler32_combine(adler1, adler2, length) -> Integer
 
-Ϳ����줿��Ĥ� Adler-32 �����å�������ĤˤĤʤ��ޤ���
+与えられた二つの Adler-32 チェックサムを一つにつなげます。
 
-@param adler1 Adler-32 �����å��������ꤷ�ޤ���
+@param adler1 Adler-32 チェックサムを指定します。
 
-@param adler2 Adler-32 �����å��������ꤷ�ޤ���
+@param adler2 Adler-32 チェックサムを指定します。
 
-@param length adler2 ����������Τ˻��Ѥ���ʸ�����Ĺ������ꤷ�ޤ���
+@param length adler2 を生成するのに使用した文字列の長さを指定します。
 
 --- crc32_combine(crc1, crc2, length) -> Ingeter
 
-Ϳ����줿��Ĥ� CRC-32 �����å�������ĤˤĤʤ��ޤ���
+与えられた二つの CRC-32 チェックサムを一つにつなげます。
 
-@param crc1 CRC-32 �����å��������ꤷ�ޤ���
+@param crc1 CRC-32 チェックサムを指定します。
 
-@param crc2 CRC-32 �����å��������ꤷ�ޤ���
+@param crc2 CRC-32 チェックサムを指定します。
 
-@param length crc2 ����������Τ˻��Ѥ���ʸ�����Ĺ������ꤷ�ޤ���
+@param length crc2 を生成するのに使用した文字列の長さを指定します。
 #@end
 
 #@since 1.9.2
 --- deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
 #@todo
 
-string �򰵽̤��ޤ���
+string を圧縮します。
 
 @see [[m:Zlib::Deflate.deflate]]
 
 --- Inflate(string) -> String
 #@todo
 
-string ��Ÿ�����ޤ���
+string を展開します。
 
 @see [[m:Zlib::Inflate.inflate]]
 #@end
@@ -79,153 +79,153 @@ string ��Ÿ�����ޤ���
 
 --- VERSION -> String
 
-Ruby/zlib �ΥС�������ɽ��ʸ����Ǥ���
+Ruby/zlib のバージョンを表す文字列です。
 
 --- ZLIB_VERSION -> String
 
-zlib.h �ΥС�������ɽ��ʸ����Ǥ���
+zlib.h のバージョンを表す文字列です。
 
 --- BINARY -> Fixnum
 
-[[m:Zlib::ZStream#data_type]] ���֤����ǡ��������פ�ɽ�������Ǥ���
+[[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
 --- ASCII -> Fixnum
 
-[[m:Zlib::ZStream#data_type]] ���֤����ǡ��������פ�ɽ�������Ǥ���
+[[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
 --- UNKNOWN -> Fixnum
 
-[[m:Zlib::ZStream#data_type]] ���֤����ǡ��������פ�ɽ�������Ǥ���
+[[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
 --- NO_COMPRESSION -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#deflate]] �����Ϥ���
-���̥�٥��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
+圧縮レベルを表す整数です。
 
 --- BEST_SPEED -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#deflate]] �����Ϥ���
-���̥�٥��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
+圧縮レベルを表す整数です。
 
 --- BEST_COMPRESSION -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#deflate]] �����Ϥ���
-���̥�٥��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
+圧縮レベルを表す整数です。
 
 --- DEFAULT_COMPRESSION -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#deflate]] �����Ϥ���
-���̥�٥��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
+圧縮レベルを表す整数です。
 
 --- FILTERED -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#params]] ���Ϥ���
-������ˡ��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
+圧縮方法を表す整数です。
 
 --- HUFFMAN_ONLY -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#params]] ���Ϥ���
-������ˡ��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
+圧縮方法を表す整数です。
 
 --- DEFAULT_STRATEGY -> Fixnum
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Deflate#params]] ���Ϥ���
-������ˡ��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
+圧縮方法を表す整数です。
 
 --- DEF_MEM_LEVEL -> Fixnum
 
-[[m:Zlib::Deflate.new]] �����Ϥ���memory level ��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数です。
 
 --- MAX_MEM_LEVEL -> Fixnum
 
-[[m:Zlib::Deflate.new]] �����Ϥ���memory level ��ɽ�������Ǥ���
+[[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数です。
 
 --- MAX_WBITS
 
-[[m:Zlib::Deflate.new]] �� [[m:Zlib::Inflate.new]] �Ǥ�
-windowBits �Υǥե�����ͤǤ���
+[[m:Zlib::Deflate.new]] や [[m:Zlib::Inflate.new]] での
+windowBits のデフォルト値です。
 
 --- NO_FLUSH -> Fixnum
 
-[[m:Zlib::Deflate#deflate]] �����Ϥ������ȥ꡼��ν��Ϥ�
-���椹�뤿��������Ǥ���
+[[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
+制御するための整数です。
 
 --- SYNC_FLUSH -> Fixnum
 
-[[m:Zlib::Deflate#deflate]] �����Ϥ������ȥ꡼��ν��Ϥ�
-���椹�뤿��������Ǥ���
+[[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
+制御するための整数です。
 
 --- FULL_FLUSH -> Fixnum
 
-[[m:Zlib::Deflate#deflate]] �����Ϥ������ȥ꡼��ν��Ϥ�
-���椹�뤿��������Ǥ���
+[[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
+制御するための整数です。
 
 --- FINISH -> Fixnum
 
-[[m:Zlib::Deflate#deflate]] �����Ϥ������ȥ꡼��ν��Ϥ�
-���椹�뤿��������Ǥ���
+[[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
+制御するための整数です。
 
 --- OS_CODE -> Fixnum
 
-[[m:Zlib::GzipFile#os_code]] �᥽�åɤ��֤��ͤǤ���
+[[m:Zlib::GzipFile#os_code]] メソッドの返す値です。
 
 --- OS_MSDOS -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_AMIGA -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_VMS -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_UNIX -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_VMCMS -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_ATARI -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_OS2 -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_MACOS -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_ZSYSTEM -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_CPM -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_TOPS20 -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_WIN32 -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_QDOS -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_RISCOS -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 
 --- OS_UNKNOWN -> Fixnum
 
-OS �μ����ɽ������Ǥ���
+OS の種類を表す定数です。
 

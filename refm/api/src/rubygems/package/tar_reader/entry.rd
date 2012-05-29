@@ -1,69 +1,69 @@
-tar ������������Τ��줾��Υ���ȥ�򰷤�����Υ��饹���󶡤���饤��
-���Ǥ���
+tar アーカイブ中のそれぞれのエントリを扱うためのクラスを提供するライブ
+ラリです。
 
 = class Gem::Package::TarReader::Entry
 
-tar ������������Τ��줾��Υ���ȥ�򰷤�����Υ��饹�Ǥ���
+tar アーカイブ中のそれぞれのエントリを扱うためのクラスです。
 
 == Public Instance Methods
 
 --- bytes_read -> Integer
 
-���Ȥ����ɤ߹�����Х��ȿ����֤��ޤ���
+自身から読み込んだバイト数を返します。
 
 #@#--- check_closed
 #@# nodoc
 
 --- close -> true
 
-���Ȥ� close ���ޤ���
+自身を close します。
 
 --- closed? -> bool
 
-���Ȥ� close �ѤߤǤ����硢�����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身が close 済みである場合、真を返します。
+そうでない場合は、偽を返します。
 
 --- directory? -> bool
 
-���Ȥ��ǥ��쥯�ȥ�Ǥ���С������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身がディレクトリであれば、真を返します。
+そうでない場合は、偽を返します。
 
 --- eof? -> bool
 
-���Ȥ�Ǹ�ޤ��ɤ߹���Ǥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身を最後まで読み込んでいる場合は、真を返します。
+そうでない場合は、偽を返します。
 
 --- file? -> bool
 
-���Ȥ��ե�����Ǥ���С������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身がファイルであれば、真を返します。
+そうでない場合は、偽を返します。
 
 --- full_name -> String
 
-���Ȥδ�����̾�����֤��ޤ���
+自身の完全な名前を返します。
 
 --- getc -> String | nil
 
-���Ȥ��鳰�����󥳡��ǥ��󥰤˽��� 1 ʸ���ɤ߹�����֤��ޤ���
-EOF ����ã�������ˤ� nil ���֤��ޤ���
+自身から外部エンコーディングに従い 1 文字読み込んで返します。
+EOF に到達した時には nil を返します。
 
 --- header -> Gem::Package::TarHeader
 
-���ȤΥإå����֤��ޤ���
+自身のヘッダを返します。
 
 --- pos -> Integer
 
-���Ȥ����ɤ߹�����Х��ȿ����֤��ޤ���
+自身から読み込んだバイト数を返します。
 
 --- read(length = nil) -> String
 
-���Ȥ�����ꤵ�줿�Х��ȿ��ɤ߹��ߤޤ���
+自身から指定されたバイト数読み込みます。
 
-@param length �ɤ߹���Х��ȿ�����ꤷ�ޤ���
-              ��ά��������Ƥ��ɤ߹��ߤޤ���
+@param length 読み込むバイト数を指定します。
+              省略すると全てを読み込みます。
 
 --- rewind -> 0
 
-�ե�����ݥ��󥿤���Ƭ�˰�ư���ޤ���
+ファイルポインタを先頭に移動します。
 
-@raise Gem::Package::NonSeekableIO �������Ǥ��ʤ�����ȯ�����ޤ���
+@raise Gem::Package::NonSeekableIO シークできない場合に発生します。

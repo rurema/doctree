@@ -2,23 +2,23 @@
 
 require readline
 
-irb �� completion ��ǽ���󶡤���饤�֥��Ǥ���
+irb の completion 機能を提供するライブラリです。
 
-=== �Ȥ���
+=== 使い方
 
    $ irb -r irb/completion
 
-�Ȥ��뤫, ~/.irbrc ���
+とするか, ~/.irbrc 中に
 
    require "irb/completion"
 
-������Ƥ�������.
-irb�¹���� require "irb/completion" ���Ƥ�褤�Ǥ�.
+を入れてください.
+irb実行中に require "irb/completion" してもよいです.
 
-irb �¹���� [Tab] �򲡤��ȥ���ץ졼����󤷤ޤ�.
+irb 実行中に [Tab] を押すとコンプレーションします.
 
-�ȥåץ�٥�� [Tab] �򲡤��Ȥ��٤Ƥι�ʸ����, ���饹,
-�᥽�åɤθ��䤬�Ǥޤ�. ���䤬ͣ��ʤ�д������䴰���ޤ�.
+トップレベルで [Tab] を押すとすべての構文要素, クラス,
+メソッドの候補がでます. 候補が唯一ならば完全に補完します.
 
   irb(main):001:0> in    
   in                    inspect               instance_eval
@@ -29,7 +29,7 @@ irb �¹���� [Tab] �򲡤��ȥ���ץ졼����󤷤ޤ�.
   irb(main):002:0> foo = Object.new
   #<Object:0x4027146c>
 
-"�ѿ�̾." �θ�� [Tab] �򲡤���, ���Υ��֥������ȤΥ᥽�åɰ������Ǥޤ�.
+"変数名." の後に [Tab] を押すと, そのオブジェクトのメソッド一覧がでます.
 
   irb(main):003:0> foo.
   foo.==                  foo.frozen?             foo.protected_methods
@@ -48,6 +48,6 @@ irb �¹���� [Tab] �򲡤��ȥ���ץ졼����󤷤ޤ�.
 
 = module IRB::Completor
 
-irb �� completion ��ǽ���󶡤���⥸�塼��Ǥ���
-�桼�������Υ⥸�塼���ľ�ܻ��Ѥ��뤳�ȤϤ���ޤ���
+irb の completion 機能を提供するモジュールです。
+ユーザがこのモジュールを直接使用することはありません。
 

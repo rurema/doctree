@@ -1,17 +1,17 @@
 = class Zlib::Deflate < Zlib::ZStream
 
-���ϥǡ����򰵽̤��륹�ȥ꡼��Υ��饹�Ǥ���
+入力データを圧縮するストリームのクラスです。
 
 == Class Methods
 
 --- deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
 
-string �򰵽̤��ޤ���level ��ͭ�����ͤ�
+string を圧縮します。level の有効な値は
 [[m:Zlib::NO_COMPRESSION]], [[m:Zlib::BEST_SPEED]],
 [[m:Zlib::BEST_COMPRESSION]], [[m:Zlib::DEFAULT_COMPRESSION]]
-�ڤ� 0 ���� 9 �������Ǥ���
+及び 0 から 9 の整数です。
 
-���ʤߤˡ����Υ᥽�åɤϰʲ��Υ����ɤȤۤ�Ʊ���Ǥ�:
+ちなみに、このメソッドは以下のコードとほぼ同じです:
 
   def deflate(string, level)
     z = Zlib::Deflate.new(level)
@@ -20,12 +20,12 @@ string �򰵽̤��ޤ���level ��ͭ�����ͤ�
     dst
   end
 
-@param string ���̤���ʸ�������ꤷ�ޤ��� 
-@param level ���̤ο���ܺ٤˻��ꤷ�ޤ���
-             ͭ�����ͤ� Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
-             Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION �ڤ� 0 ���� 9 �������Ǥ���
+@param string 圧縮する文字列を指定します。 
+@param level 圧縮の水準を詳細に指定します。
+             有効な値は Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
+             Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION 及び 0 から 9 の整数です。
 
-������
+使用例
   require 'zlib'
 
   srand(1)
@@ -41,10 +41,10 @@ string �򰵽̤��ޤ���level ��ͭ�����ͤ�
     Zlib::DEFAULT_COMPRESSION ].each { |level|
     deflate_str = Zlib::Deflate.deflate(str, level)
     p deflate_str.size
-    # Ÿ��������ϡ�������¹Ԥ���
+    # 展開する場合は、下記を実行する
     #puts Zlib::Inflate.inflate(str)
   }
-  #������
+  #出力例
   #=> 511
   #=> 200
   #=> 194
@@ -52,13 +52,13 @@ string �򰵽̤��ޤ���level ��ͭ�����ͤ�
 
 --- new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
 
-���̥��ȥ꡼���������ޤ����ư����ξܺ٤� zlib.h ��
-���Ȥ��Ʋ�������nil �ξ��ϥǥե���Ȥ��ͤ���Ѥ��ޤ���
+圧縮ストリームを作成します。各引数の詳細は zlib.h を
+参照して下さい。nil の場合はデフォルトの値を使用します。
 
-@param level 0-9���ϰϤ�����, �ޤ���Zlib::DEFAULT_COMPRESSION����ꤷ�ޤ����ܺ٤�zlib.h�򻲾Ȥ��Ƥ���������
-@param windowBits ������ɤ��礭���������ǻ��ꤷ�ޤ����ܺ٤�zlib.h�򻲾Ȥ��Ƥ���������
-@param memlevel 0-9���ϰϤ������ǻ��ꤷ�ޤ����ܺ٤�zlib.h�򻲾Ȥ��Ƥ���������
-@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]�ʤɻ��ꤷ�ޤ����ܺ٤�zlib.h �򻲾Ȥ��Ƥ���������
+@param level 0-9の範囲の整数, またはZlib::DEFAULT_COMPRESSIONを指定します。詳細はzlib.hを参照してください。
+@param windowBits ウィンドの大きさを整数で指定します。詳細はzlib.hを参照してください。
+@param memlevel 0-9の範囲の整数で指定します。詳細はzlib.hを参照してください。
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。詳細はzlib.h を参照してください。
 
   require 'zlib'
 
@@ -76,35 +76,35 @@ string �򰵽̤��ޤ���level ��ͭ�����ͤ�
 #@until 1.8.3
 --- clone -> self
 
-���̥��ȥ꡼���ʣ�����ޤ���
+圧縮ストリームを複製します。
 
 #@end
 
 --- deflate(string, flush = Zlib::NO_FLUSH) -> String
 
-string �򰵽̥��ȥ꡼������Ϥ��ޤ��������塢���ȥ꡼�फ���
-���Ϥ��֤��ޤ������Υ᥽�åɤ�Ƥ֤Ƚ��ϥХåե��ڤ����ϥХåե���
-���ˤʤ�ޤ���string �� nil �ξ��ϥ��ȥ꡼��ؤ����Ϥ�
-��λ���ޤ���([[m:Zlib::ZStream#finish]] ��Ʊ��)��
-flush �ˤ� [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
-[[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] �Τ����줫����ꤷ�ޤ���
-�ܤ����� zlib.h �򻲾Ȥ��Ʋ�������
+string を圧縮ストリームに入力します。処理後、ストリームからの
+出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
+空になります。string が nil の場合はストリームへの入力を
+終了します。([[m:Zlib::ZStream#finish]] と同じ)。
+flush には [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
+[[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] のいずれかを指定します。
+詳しくは zlib.h を参照して下さい。
 
-@param string ���̤���ʸ�������ꤷ�ޤ���
+@param string 圧縮する文字列を指定します。
 @param flush [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
-             [[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] �Τ����줫����ꤷ�ޤ���
+             [[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] のいずれかを指定します。
 
   dez = Zlib::Deflate.new
   p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
 
 --- <<(string) -> self
 
-[[m:Zlib::Deflate#deflate]] ��Ʊ���褦�� string ��
-���̥��ȥ꡼������Ϥ��ޤ�����Zlib::Deflate ���֥�������
-���Τ�Τ��֤��ޤ������̥��ȥ꡼�फ��ν��Ϥϡ�
-���ϥХåե�����¸����ޤ���
+[[m:Zlib::Deflate#deflate]] と同じように string を
+圧縮ストリームに入力しますが、Zlib::Deflate オブジェクト
+そのものを返します。圧縮ストリームからの出力は、
+出力バッファに保存されます。
 
-@param string  ���̤���ʸ�������ꤷ�ޤ���
+@param string  圧縮する文字列を指定します。
 
   dez = Zlib::Deflate.new
   dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
@@ -113,11 +113,11 @@ flush �ˤ� [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
 
 --- flush(flush = Zlib::SYNC_FLUSH) -> String
 
-deflate('', flush) ��Ʊ���Ǥ���flush ��
-��ά���줿���� [[m:Zlib::SYNC_FLUSH]] �����Ѥ���ޤ���
-���Υ᥽�åɤϥ�����ץȤβ������Τ�����󶡤���Ƥ��ޤ���
+deflate('', flush) と同じです。flush が
+省略された時は [[m:Zlib::SYNC_FLUSH]] が使用されます。
+このメソッドはスクリプトの可読性のために提供されています。
 
-@param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] �ʤɤ���ꤷ�ޤ���
+@param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] などを指定します。
 
   require 'zlib'
 
@@ -152,7 +152,7 @@ deflate('', flush) ��Ʊ���Ǥ���flush ��
 
 --- finish -> String
 
-���̥��ȥ꡼���λ���ޤ���deflate('', Zlib::FINISH) ��Ʊ���Ǥ���
+圧縮ストリームを終了します。deflate('', Zlib::FINISH) と同じです。
 
   dez = Zlib::Deflate.new
   dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
@@ -161,14 +161,14 @@ deflate('', flush) ��Ʊ���Ǥ���flush ��
 
 --- params(level, strategy) -> nil
 
-���̥��ȥ꡼���������ѹ����ޤ����ܤ����� zlib.h ��
-���Ȥ��Ʋ�������������ѹ���ȼ�����ȥ꡼�फ��ν��Ϥ�
-���ϥХåե�����¸����ޤ���
+圧縮ストリームの設定を変更します。詳しくは zlib.h を
+参照して下さい。設定の変更に伴うストリームからの出力は
+出力バッファに保存されます。
 
-@param level 0-9���ϰϤ�����, �ޤ��� [[m:Zlib::DEFAULT_COMPRESSION]] ����ꤷ�ޤ���
-             �ܺ٤�zlib.h�򻲾Ȥ��Ƥ���������
+@param level 0-9の範囲の整数, または [[m:Zlib::DEFAULT_COMPRESSION]] を指定します。
+             詳細はzlib.hを参照してください。
 @param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]],
-                [[m:Zlib::DEFAULT_STRATEGY]] �ʤɻ��ꤷ�ޤ����ܺ٤� zlib.h �򻲾Ȥ��Ƥ���������
+                [[m:Zlib::DEFAULT_STRATEGY]] など指定します。詳細は zlib.h を参照してください。
 
   require 'zlib'
 
@@ -201,12 +201,12 @@ deflate('', flush) ��Ʊ���Ǥ���flush ��
 
 --- set_dictionary(string) -> String
 
-���̤��Ѥ��뼭�����ꤷ�ޤ���string ���֤��ޤ���
-���Υ᥽�åɤ� [[m:Zlib::Deflate.new]], [[m:Zlib::ZStream#reset]]
-��ƤӽФ���ľ��ˤΤ�ͭ���Ǥ����ܺ٤� zlib.h �򻲾Ȥ��Ʋ�������
+圧縮に用いる辞書を指定します。string を返します。
+このメソッドは [[m:Zlib::Deflate.new]], [[m:Zlib::ZStream#reset]]
+を呼び出した直後にのみ有効です。詳細は zlib.h を参照して下さい。
 
-@param string ������Ѥ���ʸ�������ꤷ�ޤ����ܤ����� zlib.h �򻲾Ȥ��Ƥ���������
-@return ������Ѥ���ʸ������֤��ޤ��� 
+@param string 辞書に用いる文字列を指定します。詳しくは zlib.h を参照してください。
+@return 辞書に用いる文字列を返します。 
 
   def case1(str)
     dez = Zlib::Deflate.new

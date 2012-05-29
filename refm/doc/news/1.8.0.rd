@@ -1,58 +1,58 @@
 ###nonref
 
-= 1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)
+= 1.6.8から1.8.0への変更点(まとめ)
 
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/���󥿥ץ꥿���ѹ�>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�ɲä��줿���饹���⥸�塼��>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�ɲä��줿�᥽�å�>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�ɲä��줿���>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/��ĥ���줿���饹���᥽�å�(�ߴ����Τ����ѹ�)>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�ѹ����줿���饹���᥽�å�(�ߴ����Τʤ��ѹ�)>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/ʸˡ���ѹ�>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/����ɽ��>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/Marshal>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/Windows �б�>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�ѻߤ��줿(�����ͽ���)��ǽ>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�饤�֥��>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/��ĥ�饤�֥��API>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/�Х�����>))
-* ((<1.6.8����1.8.0�ؤ��ѹ���(�ޤȤ�)/���ݡ��ȥץ�åȥե�������ɲ�>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/インタプリタの変更>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/追加されたクラス／モジュール>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/追加されたメソッド>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/追加された定数>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/拡張されたクラス／メソッド(互換性のある変更)>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/変更されたクラス／メソッド(互換性のない変更)>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/文法の変更>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/正規表現>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/Marshal>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/Windows 対応>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/廃止された(される予定の)機能>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/ライブラリ>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/拡張ライブラリAPI>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/バグ修正>))
+* ((<1.6.8から1.8.0への変更点(まとめ)/サポートプラットフォームの追加>))
 
-== ���󥿥ץ꥿���ѹ�
+== インタプリタの変更
 
-: ((<�Ȥ߹����ѿ�/$defout>)) [obsolete]
-: ((<�Ȥ߹����ѿ�/$deferr>)) [obsolete]
-: ((<�Ȥ߹����ѿ�/$stdout>)) [change]
-: ((<�Ȥ߹����ѿ�/$stderr>)) [change]
-: ((<�Ȥ߹����ѿ�/$stdin>))  [change]
+: ((<組み込み変数/$defout>)) [obsolete]
+: ((<組み込み変数/$deferr>)) [obsolete]
+: ((<組み込み変数/$stdout>)) [change]
+: ((<組み込み変数/$stderr>)) [change]
+: ((<組み込み変数/$stdin>))  [change]
 
-  $stdout, $stderr �ϡ�$defout, $deferr ����̾�ˤʤ�
-  $defout, $deferr �� ((<obsolete>)) �ˤʤ�ޤ���
+  $stdout, $stderr は、$defout, $deferr の別名になり
+  $defout, $deferr は ((<obsolete>)) になりました
 
-  $stdin �ϡ����̤Υ������Х��ѿ��Ȥʤ�ޤ���(STDIN�������쥯�Ȥ���
-  ư��Ϥʤ��ʤ�ޤ���)
+  $stdin は、普通のグローバル変数となりました(STDINをリダイレクトする
+  動作はなくなりました)
 
-  $defout �� $deferr ��������Ԥ��ȷٹ𤬤Ǥޤ���
-  (����1.6 �� $deferr �Ϥ���ޤ���)
+  $defout や $deferr に代入を行うと警告がでます。
+  (注：1.6 に $deferr はありません)
   ((<ruby-dev:20961>))
 
-  $stdin �˥��֥������Ȥ����������ɸ�����Ϥ�������ϥ᥽�å�(gets ��)
-  �Ϥ��Υ��֥������Ȥ˥᥽�åɤ��ꤲ�ޤ���
-  (������쥯�Ȥ��ʤ��ʤä���������С�1.6 �Ȥ���ۤɰ㤤�Ϥʤ��褦�Ǥ�)
+  $stdin にオブジェクトを代入すると標準入力からの入力メソッド(gets 等)
+  はそのオブジェクトにメソッドを投げます。
+  (リダイレクトしなくなった点を除けば、1.6 とそれほど違いはないようです)
 
-: ((<�Ȥ߹����ѿ�/$VERBOSE>))
+: ((<組み込み変数/$VERBOSE>))
 
-  ���ʳ��Υ�٥����Ĥ褦�ˤʤ�ޤ�����
-  * nil: �ٹ����Ϥ��ʤ�   (-W0 �������ٹ��٥�)
-  * false: ���פʷٹ�Τ߽���  (-W1 �ǥե����)
-  * true: ���٤Ƥηٹ����Ϥ��� (-W2 or -W or -v or -w or --verbose)
+  三段階のレベルを持つようになりました。
+  * nil: 警告を出力しない   (-W0 新しい警告レベル)
+  * false: 重要な警告のみ出力  (-W1 デフォルト)
+  * true: すべての警告を出力する (-W2 or -W or -v or -w or --verbose)
 
-  �ɲä��줿 -W ���ץ����� $VERBOSE = nil �λ���(-W0)���ǽ�ˤ��ޤ���
+  追加された -W オプションは $VERBOSE = nil の指定(-W0)を可能にします。
 
 : ruby interpreter [ruby] [change]
 
-  ���饹���ðۥ��饹���ðۥ��饹���ðۥ��饹���ȤǤ�����������ޤ���
-  ((<ruby-bugs-ja:313>))���ʤ�����褯�狼��ޤ���(^^;
+  クラスの特異クラスの特異クラスは特異クラス自身であると定義されました
+  ((<ruby-bugs-ja:313>))。なんだかよくわかりません(^^;
 
         class << Object
           p [self.id, self]
@@ -67,9 +67,9 @@
            [537771634, #<Class:Object>]
            [537771634, #<Class:Object>]
 
-  ����ˡ����֥������Ȥ��ðۥ��饹�Υ����ѡ����饹���ðۥ��饹��
-  ���֥������Ȥ��ðۥ��饹���ðۥ��饹�Υ����ѡ����饹��Ʊ���ʤΤ������Ǥ�
-  ((<ruby-bugs-ja:324>))�������äѤ�狼��ޤ���(^^;;
+  さらに、オブジェクトの特異クラスのスーパークラスの特異クラスと
+  オブジェクトの特異クラスの特異クラスのスーパークラスは同じなのだそうです
+  ((<ruby-bugs-ja:324>))。さあっぱりわかりません(^^;;
 
         class << Object.new
           class << self.superclass
@@ -86,18 +86,18 @@
            [537771634, #<Class:Object>]
            [537771634, #<Class:Object>]
 
-  ((<ruby-bugs-ja:336>)) �Τ�����Ǥޤ������Ѥ�ä����⤷��ޤ���
-  (2002-09-21 �� ChangeLog ���ȡ��ޤ���ˤ��ä�����Τ���줿�餷��
+  ((<ruby-bugs-ja:336>)) のあたりでまた少し変わったかもしれません
+  (2002-09-21 の ChangeLog 参照。まじめにおっかけるのに疲れたらしい
   ^^;;)
 
 : ((<Proc/Proc.new>)) [change]
-: ((<�Ȥ߹��ߴؿ�/lambda>))   [change]
-: ((<�Ȥ߹��ߴؿ�/proc>))     [change]
+: ((<組み込み関数/lambda>))   [change]
+: ((<組み込み関数/proc>))     [change]
 
-  �ʲ��Τ褦���ѹ�����ޤ�����((<ruby-dev:20358>))
+  以下のように変更されました。((<ruby-dev:20358>))
 
-      * Proc.new ����ӥ֥��å�������Ϳ������ Proc ��
-        ���������å�����뤤��break ���㳰�ˤʤ롣
+      * Proc.new およびブロック引数で与えられる Proc は
+        引数チェックがゆるい。break が例外になる。
 
             Proc.new {|a,b,c| p [a,b,c]}.call(1,2)
                 => -:1: wrong # of arguments (2 for 3) (ArgumentError)
@@ -115,8 +115,8 @@
                         from -:1
                    ruby 1.8.0 (2003-06-21) [i586-linux]
 
-      * lambda ����� proc ���֤� Proc �ϰ��������å�����������
-        break �ϼ¹Ԥ����Ǥ��롣
+      * lambda および proc が返す Proc は引数チェックが厳しい。
+        break は実行を中断する。
 
             lambda {|a,b,c| p [a,b,c]}.call(1,2)
                 => -:1: wrong # of arguments (2 for 3) (ArgumentError)
@@ -133,8 +133,8 @@
                 => ruby 1.8.0 (2003-06-21) [i586-linux]
 
 
-  �ʲ��Τ褦�˥��ƥ졼���֥��å��ȡ�Proc��֥��å��Ȥ��ư������Ϥ�����
-  ���ε�ư��Ʊ���ˤʤäƤ��ޤ���
+  以下のようにイテレータブロックと、Procをブロックとして引数で渡したと
+  きの挙動が同じになっています。
 
         def foo
           yield 1,2,3,4
@@ -155,109 +155,109 @@
            [1, 2, 3]
            [1, 2, 3]
 
-: ((<yield|�᥽�åɸƤӽФ�/yield>))
+: ((<yield|メソッド呼び出し/yield>))
 
-  �֥��å��ѥ�᡼���ο�����Ĥξ�硢�֥��å���ʣ�����ͤ��Ϥ��ȷٹ�
-  �Ф�褦�ˤʤ�ޤ�����
+  ブロックパラメータの数が一つの場合、ブロックに複数の値を渡すと警告が
+  出るようになりました。
 
-  ������ |var| �ϰ�Ĥΰ����������Ȥ��ȡ�ʣ���ΰ����������Ȥ���ξ
-  �������Ѥ���Ƥ��ޤ�����������ϡְ�Ĥΰ����������פ��Ȥ��̣����
-  �褦�ˤʤ�ޤ���((<ruby-dev:20358>))
+  以前は |var| は一つの引数を受けるときと、複数の引数を受けるときの両
+  方で利用されていましたが、将来は「一つの引数を受ける」ことを意味する
+  ようになります。((<ruby-dev:20358>))
 
 : defined? [compat]
 
-  °���������������Ǥؤ��������Ф��� "method" �Ǥʤ� "assignment" ����
-  ���褦�ˤʤ�ޤ�����
+  属性代入、配列要素への代入に対して "method" でなく "assignment" を返
+  すようになりました。
 
-: ((<��ƥ��/���ͥ�ƥ��>)) [compat]
+: ((<リテラル/数値リテラル>)) [compat]
 
-  10��((*����*))��ƥ��� prefix �Ȥ��� 0d ���ɲä���ޤ�����
-  8�ʥ�ƥ��� prefix �Ȥ��� 0 �ʳ��� 0o ���ɲä���ޤ�����
+  10進((*整数*))リテラルの prefix として 0d が追加されました。
+  8進リテラルの prefix として 0 以外に 0o が追加されました。
 
-  Integer(), String#to_i��String#oct �⤳�� prefix ��ǧ�����ޤ���
+  Integer(), String#to_i、String#oct もこの prefix を認識します。
 
-: ((<�᥽�åɰ����� & ����|�᥽�åɸƤӽФ�/���ƥ졼��>)) [compat]
+: ((<メソッド引数の & 修飾|メソッド呼び出し/イテレータ>)) [compat]
 : ((<Proc#to_proc|Proc/to_proc>)) [new]
 
-  �᥽�åɤ��Ϥ������� & �򽤾�������硢�Ϥ����֥������Ȥ� to_proc ��
-  ���äƤ���Ф����¹Ԥ������η�̤�֥��å��Ȥ����Ϥ��褦�ˤʤ�ޤ�
-  ���������ϡ�& �����Ǥ���Τ� Proc, Method ���֥������ȸ���Ǥ�����
-  �����ȼ�� Proc#to_proc ���ɲä���ޤ�����
+  メソッドに渡す引数に & を修飾した場合、渡すオブジェクトが to_proc を
+  持っていればそれを実行し、その結果をブロックとして渡すようになりまし
+  た。以前は、& 修飾できるのは Proc, Method オブジェクト限定でした。
+  これに伴い Proc#to_proc が追加されました。
 
-: ��λ���ơ����� [compat]
+: 終了ステータス [compat]
 
-  raise SystemExit �����Ȥ��˽�λ���ơ����� 1 �ǽ�λ����褦�ˤʤ�ޤ�����
+  raise SystemExit したときに終了ステータス 1 で終了するようになりました。
   ((<ruby-dev:16776>))
 
-: ((<"rescue/ensure on begin .. end while"|���湽¤/while ������>)) [compat]
+: ((<"rescue/ensure on begin .. end while"|制御構造/while 修飾子>)) [compat]
 
-  rescue/ensure ����� begin ���� while/until �����Ǥ���褦�ˤʤ�ޤ�
-  ����
+  rescue/ensure を持つ begin 式も while/until 修飾できるようになりまし
+  た。
 
-  �����ϡ�rescue/ensure ����� while/until �������ϡ��̾�� begin ����
-  while/until �������Ƥ���ȸ��ʤ������Τ�ɬ���ǽ�˼¹Ԥ����Ȥ�����
-  ��ޤ�(C �� do ... while ��ʸ��Ʊ��)�򤷤Ƥ��ޤ���Ǥ�����
+  以前は、rescue/ensure を持つ while/until 修飾式は、通常の begin 式に
+  while/until 修飾していると見なされ本体が必ず最初に実行されるという振
+  るまい(C の do ... while 構文と同じ)をしていませんでした。
   ((<ruby-list:34618>))
 
-: ((<"rescue/ensure on class/module"|���饹���᥽�åɤ����/���饹���>)) [compat]
+: ((<"rescue/ensure on class/module"|クラス／メソッドの定義/クラス定義>)) [compat]
 
-  �᥽�å�����Τۤ��ˤ⥯�饹�����⥸�塼������ˤ�rescue/ensure��
-  �Ĥ�����褦�ˤʤ�ޤ�����
+  メソッド定義のほかにもクラス定義やモジュール定義にもrescue/ensureを
+  つけられるようになりました。
 
 : [ruby] [compat]
 
-  �����Υϥå���ơ��֥����Ѥ��뤳�Ȥˤ��������Ȥ�®�٤�������������Ǥ���
-  (ChangeLog��
+  内部のハッシュテーブルを使用することにより定数参照の速度を改善したそうです。
+  (ChangeLogの
         Tue Jun  5 16:15:58 2001  Yukihiro Matsumoto  <matz@ruby-lang.org>
-  �˳�������褦�Ǥ�)
+  に該当するようです)
 
 : break and next        [compat]
 
-  break, next �ϡ���������ꤹ�뤳�Ȥǥ��ƥ졼���� yield ���ͤ��֤�
-  ���Ȥ��Ǥ���褦�ˤʤ�ޤ�����(���ε�ǽ�Ϥޤ��¸��Ǥ�)
+  break, next は、引数を指定することでイテレータや yield の値を返す
+  ことができるようになりました。(この機能はまだ実験です)
 
-  break [n] �ϥ��ƥ졼����λ������n �����Υ��ƥ졼��������ͤˤʤ�ޤ���
-  next [n] �ϥ֥��å���ȴ����n �� yield ������ͤˤʤ�ޤ���
+  break [n] はイテレータを終了させ、n がそのイテレータの戻り値になります。
+  next [n] はブロックを抜け、n が yield の戻り値になります。
 
 : to_str        [compat]
 
-  to_str ������������֥������ȤϤ�깭�ϰϤ�String�Ȥ��ƿ��񤦤褦��
-  �ʤ�ޤ�����
+  to_str を定義したオブジェクトはより広範囲にStringとして振舞うように
+  なりました。
 
-  ʸ���������˼��ۤȤ�ɤ��Ȥ߹��ߥ᥽�åɤϡ�to_str �ˤ����ۤ�
-  ���Ѵ����ߤޤ���
+  文字列を引数に取るほとんどの組み込みメソッドは、to_str による暗黙の
+  型変換を試みます。
 
-: �ϰϱ黻�Ҽ���Υ�ƥ�� [ruby] [change]
-  �ϰϱ黻�Ҽ����ñ�Ȥο��ͥ�ƥ�뤬 (({$.})) ����Ӥ����Τ�
-  -e ���ץ����ˤ��1�ԥ�����ץȤ�������ˤʤ�ޤ�����
+: 範囲演算子式中のリテラル [ruby] [change]
+  範囲演算子式中の単独の数値リテラルが (({$.})) と比較されるのは
+  -e オプションによる1行スクリプトの中だけになりました。
 
-: rescue ����㳰���饹��ȯ�������㳰���֥������Ȥ���� [ruby] [change]
+: rescue 節の例外クラスと発生した例外オブジェクトの比較 [ruby] [change]
 
-  ȯ�������㳰 $! �� rescue ����㳰���饹�Ȥ� ((<Module#===|Module/===>))
-  ��Ȥä���Ӥ���褦�ˤʤ�ޤ�����
+  発生した例外 $! と rescue 節の例外クラスとは ((<Module#===|Module/===>))
+  を使って比較するようになりました。
 
-  ������ kind_of? �ˤ����ӤʤΤǴ���Ū��ư����Ѥ��Ϥ���ޤ��󤬡�
-  SystemCallError.=== �����̤� errno �����פ����㳰��Ʊ���ȸ��ʤ��褦
-  �˺��������ޤ���������ˤ�ꡢ�㤨�� Errno::EWOULDBLOCK �� 
-  Errno::EAGAIN ��Ʊ����̣(Ʊ��errno)�ξ��ˤɤ������ꤷ�Ƥ� rescue 
-  �Ǥ���褦�ˤʤ�ޤ�����
+  以前は kind_of? による比較なので基本的な動作に変わりはありませんが、
+  SystemCallError.=== は特別に errno が一致する例外を同じと見なすよう
+  に再定義されました。これにより、例えば Errno::EWOULDBLOCK と 
+  Errno::EAGAIN が同じ意味(同じerrno)の場合にどちらを指定しても rescue 
+  できるようになりました。
 
-  ���θ塢errno �����פ��� Errno::XXX ���֥������Ȥ�Ʊ��Υ��֥�������
-  �ˤʤä��ΤǤ����ѹ��θ��̤Ϥʤ��ʤäƤޤ������ѹ����ΤϻĤäƤޤ���
-  (�桼�����㳰���饹���������Τ˻Ȥ��뤫�⤷��ޤ���)
+  その後、errno が一致する Errno::XXX オブジェクトは同一のオブジェクト
+  になったのでこの変更の効果はなくなってますが、変更自体は残ってます。
+  (ユーザで例外クラスを定義するのに使えるかもしれません)
   ((<ruby-dev:19589>))
 
-: while, until, class, module, def ����         [ruby] [change]
+: while, until, class, module, def の値         [ruby] [change]
 
-  while, until, class, module, def �����Ȥ����ͤ��֤��褦�ˤʤ�ޤ�����
+  while, until, class, module, def が式として値を返すようになりました。
 
-  class/module �ϺǸ��ɾ���������η�̤��֤��ޤ���def �� nil ���֤�
-  �ޤ���while/until �ϡ��̾� nil ���֤��ޤ�����break �ΰ����ˤ��Ǥ��
-  ���ͤ��֤����Ȥ��Ǥ��ޤ���
+  class/module は最後に評価した式の結果を返します。def は nil を返し
+  ます。while/until は、通常 nil を返しますが、break の引数により任意
+  の値を返すことができます。
 
-: ¿������ [change]
+: 多重代入 [change]
 
-  ¿�������ε�§��ľ���ޤ�����
+  多重代入の規則を見直しました。
 
 # # derived from sample/test.rb
 # a = *[]; p a                            # special case
@@ -452,10 +452,10 @@
 # def f;  yield *[*[1,2]]; end; f {|a,b,*c| p [a,b,c]}
 # def r; return *[*[1,2]]; end; a,b,*c = r(); p [a,b,c]
 
-: ����Ÿ�� [change]
+: 配列展開 [change]
 
-  �ʲ��ε�ư�������ޤ�����
-  ���ߤϡ�1���Ǥ�����������Ÿ������ޤ���
+  以下の挙動を修正しました。
+  現在は、1要素の配列も正常に展開されます。
 
     a = *[1]
     p a #=> [1]
@@ -465,94 +465,94 @@
     => ruby 1.7.1 (2001-06-05) [i586-linux]
        1
 
-== �ɲä��줿���饹���⥸�塼��
+== 追加されたクラス／モジュール
 : ((<Process::UID>))  [new]
 : ((<Process::GID>))  [new]
 : ((<Process::Sys>))  [new]
-: ((<Signal>)) �⥸�塼��       [new]
+: ((<Signal>)) モジュール       [new]
 : ((<Process::Status>))         [new]
 : ((<NoMethodError>))   [new]
 
-  ((<Process::Status>)) ���ɲäˤ�ꡢ(({$?})) ���ͤ��������餳�Υ���
-  ���Υ��󥹥��󥹤ˤʤ�ޤ�����
+  ((<Process::Status>)) の追加により、(({$?})) の値も整数からこのクラ
+  スのインスタンスになりました。
 
-=== ���饹����
+=== クラス階層
 
 : ((<File::Constants>))
 
-  File::Constants �ϡ�File ���饹�Ǥʤ� IO ���饹�� include ����褦��
-  �ʤ�ޤ�����((<ruby-dev:20964>))
+  File::Constants は、File クラスでなく IO クラスが include するように
+  なりました。((<ruby-dev:20964>))
 
 : ((<UnboundMethod>)) [compat]
 
-  UnboundMethod ���饹�� Method ���饹�Υ��֥��饹�ǤϤʤ��ʤ�ޤ�����
-  UnboundMethod#call, UnboundMethod#unbind �Ϥʤ��ʤ�ޤ�����
+  UnboundMethod クラスは Method クラスのサブクラスではなくなりました。
+  UnboundMethod#call, UnboundMethod#unbind はなくなりました。
   ((<ruby-core:00927>))
 
 
 : ((<NameError>)) & ((<NoMethodError>)) [change]
 
-  NameError �� StandardError �Υ��֥��饹���ᤷ�ޤ�����
-  ���饹���ؤϰʲ��Τ褦�ˤʤ�ޤ�����
+  NameError を StandardError のサブクラスに戻しました。
+  クラス階層は以下のようになりました。
 
     NoMethodError < NameError < StandardError.
 
 : ((<Interrupt>))                       [change]
-  Interrupt �ϡ�((<SignalException>))�Υ��֥��饹�ˤʤ�ޤ�����
-  (1.6������Exception�Υ��֥��饹)
+  Interrupt は、((<SignalException>))のサブクラスになりました。
+  (1.6以前はExceptionのサブクラス)
 
-== �ɲä��줿�᥽�å�
-=== �Ȥ߹��ߴؿ�
+== 追加されたメソッド
+=== 組み込み関数
 
-: ((<�Ȥ߹��ߴؿ�/warn>))  [new]
-: ((<�Ȥ߹����ѿ�/$deferr>)) [new]
+: ((<組み込み関数/warn>))  [new]
+: ((<組み込み変数/$deferr>)) [new]
 
-  �ɲ�
+  追加
 
-  �����ϡ�ruby ���󥿥ץ꥿�����Ϥ��� error/warning ��å������� STDERR
-  ����Ǥ�������$stderr ���ѹ�����ޤ�����($deferr �Ϥ����� obsolete ��
-  �ʤ�ޤ�����$stderr ��ȤäƤ�������)
+  以前は、ruby インタプリタが出力する error/warning メッセージは STDERR
+  固定でしたが、$stderr に変更されました。($deferr はすぐに obsolete に
+  なりました。$stderr を使ってください)
 
 === ARGF
 
 : ((<ARGF/ARGF.path>)) [new]
 
-  �ɲ� (ARGF.filename ����̾) ((<ruby-dev:20197>))
+  追加 (ARGF.filename の別名) ((<ruby-dev:20197>))
 
 === Array
 
 : ((<Array#transpose|Array/transpose>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<Array#zip|Enumerable/zip>)) [new]
 : ((<Enumerable#zip|Enumerable/zip>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<Array#fetch|Array/fetch>))     [new]
 
-  �ɲ�
+  追加
 
 : ((<Array#insert|Array/insert>))     [new]
 
-  �ɲ� ((<ruby-talk:14289>))
+  追加 ((<ruby-talk:14289>))
 
-  (({ary[n,0] = [other,...]})) ��Ʊ��(������ self ���֤�)
+  (({ary[n,0] = [other,...]})) と同じ(ただし self を返す)
 
 === Class
 
 : ((<Class#allocate|Class/allocate>))    [new]
 
-    allocate �� initialize ����ĤΥ᥽�åɤǥ��֥������Ȥ�
-    ��������褦�ˤʤ�ޤ�����((<ruby-dev:14847>))
-    rb_define_alloc_func() �⻲�ȡ�
+    allocate と initialize の二つのメソッドでオブジェクトを
+    生成するようになりました。((<ruby-dev:14847>))
+    rb_define_alloc_func() も参照。
 
 === Dir
 
 : ((<Dir#path|Dir/path>))       [new]
 
-  �ɲ�
+  追加
 
 === ENV
 
@@ -562,66 +562,66 @@
 : ((<ENV/ENV.replace>)) [new]
 : ((<ENV/ENV.update>)) [new]
 
-  ((<Hash>)) �Ȥθߴ����Τ�����������ޤ�����
+  ((<Hash>)) との互換性のために定義されました。
 
 === Enumerable
 
 : ((<Enumerable#partition|Enumerable/partition>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<Enumerable#sort_by|Enumerable/sort_by>))      [new]
 
-  �ɲá�((<ruby-dev:8986>))�ʹߤ���Ƥ��줿 Schwartzian transform
-  ��Ԥ������ sort �Ǥ���
+  追加。((<ruby-dev:8986>))以降で提案された Schwartzian transform
+  を行うための sort です。
 
 : ((<Enumerable#all?|Enumerable/all?>))         [new]
 : ((<Enumerable#any?|Enumerable/any?>))         [new]
 : ((<Enumerable#inject|Enumerable/inject>))       [new]
-  �ɲ�
+  追加
 
 === File
 
 : ((<File/File.extname>)) [new]
 
-  �ɲá��ե�����̾�γ�ĥ�Ҥ��֤��ޤ���((<ruby-talk:37617>))
+  追加。ファイル名の拡張子を返します。((<ruby-talk:37617>))
 
 : ((<File/File.fnmatch>))     [new]
 : ((<File/File.fnmatch?>))    [new]
-  �ɲ�
+  追加
 
-  ���Υ᥽�åɤǻ��Ѥ���ե饰 FNM_NOESCAPE, FNM_PATHNAME, FNM_PERIOD,
-  FNM_CASEFOLD ��((<File::Constants>)) �⥸�塼����������ޤ�����
+  このメソッドで使用するフラグ FNM_NOESCAPE, FNM_PATHNAME, FNM_PERIOD,
+  FNM_CASEFOLD も((<File::Constants>)) モジュールに定義されました。
 
 : ((<File/File.lchmod>))     [new]
 : ((<File/File.lchown>))     [new]
-  �ɲ�
+  追加
 
 === File::Stat
 
 : ((<File::Stat#rdev_major|File::Stat/rdev_major>)) [new]
 : ((<File::Stat#rdev_minor|File::Stat/rdev_minor>)) [new]
 
-  �ɲ�
+  追加
 
 === Float
 
 : ((<Numeric#to_int|Numeric/to_int>)) [new]
 : ((<Float#to_int|Numeric/to_int>)) [new]
 
-  �ɲá�
+  追加。
 
 === Hash
 
 : ((<Hash#merge|Hash/merge>)) [new]
 : ((<Hash#merge!|Hash/merge!>)) [new]
 
-  �ɲá�Hash#merge �ϡ�hash.dup.update ��Ʊ����
-  Hash#merge! �ϡ�Hash#update ����̾ ((<ruby-talk:59777>)), ((<ruby-dev:19463>))
+  追加。Hash#merge は、hash.dup.update と同じ。
+  Hash#merge! は、Hash#update の別名 ((<ruby-talk:59777>)), ((<ruby-dev:19463>))
 
 : ((<Hash#default_proc|Hash/default_proc>)) [new]
 
-  �ɲ� ((<ruby-dev:17966>))
+  追加 ((<ruby-dev:17966>))
 
 === IO
 
@@ -630,58 +630,58 @@
 : ((<TCPServer#sysaccept|TCPServer/sysaccept>)) [new]
 : ((<UNIXServer#sysaccept|UNIXServer/sysaccept>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<IO#sysseek|IO/sysseek>))  [new]
 
-  �ɲ� ((<ruby-talk:21612>)), ((<ruby-talk:36703>))
+  追加 ((<ruby-talk:21612>)), ((<ruby-talk:36703>))
 
 : ((<IO#fsync|IO/fsync>))     [new]
 
-  �ɲ�
+  追加
 
 : ((<IO/IO.open>))  [new]
 
-  �ɲ�
+  追加
 
 : ((<IO/IO.for_fd>))       [new]
-  �ɲ�
+  追加
 
 : ((<IO/IO.read>))         [new]
 
-  �ɲá�((<ruby-talk:9460>))�������˻�ä��аޤ��Ȼפ�
+  追加。((<ruby-talk:9460>))が実装に至った経緯だと思う
 
 === LocalJumpError
 
 : ((<LocalJumpError#exit_value|LocalJumpError/exit_value>)) [new]
 : ((<LocalJumpError#reason|LocalJumpError/reason>)) [new]
 
-  �ɲ�
+  追加
 
 === Marshal
 
 : ((<Marshal/Object#marshal_load>))  [new]
 : ((<Marshal/Object#marshal_dump>))  [new]
 
-  �ɲ� ((<ruby-dev:21016>))
+  追加 ((<ruby-dev:21016>))
 
 === MatchData
 
 : ((<MatchData#captures|MatchData/captures>)) [new]
 
-  �ɲá�((<RCR#139>))
+  追加。((<RCR#139>))
 
 : ((<MatchData#select|MatchData/select>)) [new]
 
-  ((<MatchData>)) �ϡ�Enumerable �ǤϤ���ޤ��󤬡�Enumerable#select
-  ��Ʊ���᥽�åɤ��������ޤ�����
+  ((<MatchData>)) は、Enumerable ではありませんが、Enumerable#select
+  と同じメソッドが定義されました。
 
 === Math
 
 : ((<Math/Math.erf>)) [new]
 : ((<Math/Math.erfc>)) [new]
 
-  �ɲ� ((<ruby-list:37753>))
+  追加 ((<ruby-list:37753>))
 
 : ((<Math/Math.acos>))          [new]
 : ((<Math/Math.asin>))          [new]
@@ -690,29 +690,29 @@
 : ((<Math/Math.sinh>))          [new]
 : ((<Math/Math.tanh>))          [new]
 : ((<Math/Math.hypot>))         [new]
-    �ɲ�
+    追加
 
 === Method
 
 : ((<Method#==|Method/==>)) [new]
 
-  �ɲ�
+  追加
 
 === Module
 
-: ((<�Ȥ߹��ߴؿ�/autoload>))  [change]
-: ((<�Ȥ߹��ߴؿ�/autoload?>))  [new]
+: ((<組み込み関数/autoload>))  [change]
+: ((<組み込み関数/autoload?>))  [new]
 : ((<Module#autoload|Module/autoload>))  [new]
 : ((<Module#autoload?|Module/autoload>))  [new]
 
-  �ͥ��Ȥ������饹/�⥸�塼����Ф��� autoload ���꤬��ǽ�ˤʤ�ޤ�����
+  ネストしたクラス/モジュールに対する autoload 指定が可能になりました。
   ((<ruby-dev:16159>)), ((<ruby-dev:16165>)) ((<ruby-dev:18103>)),
   ((<ruby-dev:19686>))
 
 : ((<Module#const_missing|Module/const_missing>))  [new]
 
-   �������Ƥ��ʤ��������Ѥ����Ȥ��� const_missing �Ȥ���̾�Υ᥽�åɤ�
-   �Ƥ֤褦�ˤʤ�ޤ������ǥե���ȤǤ� NameError �㳰��ȯ�������ޤ���
+   定義されていない定数を使用したときに const_missing という名のメソッドを
+   呼ぶようになりました。デフォルトでは NameError 例外を発生させます。
    ((<ruby-core:00441>))
 
 : ((<Module#private_method_defined?|Module/private_method_defined?>)) [new]
@@ -722,7 +722,7 @@
 : ((<Object#methods|Object/methods>)) [change]
 : ((<Module#instance_methods|Module/instance_methods>)) [change]
 
-  �ɲá��ѹ�(���ͤ�����)
+  追加。変更(仕様の統一)
 
 : ((<Module#include?|Module/include?>)) [new]
 
@@ -730,227 +730,227 @@
 
 : ((<Module#included|Module/included>))         [new]
 
-  �ɲá�Module#append_feature �θ�˸ƤФ��hook
+  追加。Module#append_feature の後に呼ばれるhook
 
 : ((<Module#method_removed|Module/method_removed>))   [new]
 : ((<Module#method_undefined|Module/method_undefined>)) [new]
 
-  �ɲ�
+  追加
 
 === NameError
 
 : ((<NameError#name|NameError/name>))                [new]
 
-  �ɲ�
+  追加
 
 === NilClass
 
 : ((<NilClass#to_f|NilClass/to_f>)) [new]
 
-  �ɲ�
+  追加
 
 === Numeric
 
 : ((<Numeric#div|Numeric/div>)) [new]
 : ((<Numeric#quo|Numeric/quo>)) [new]
 
-  �ɲ�  ((<ruby-dev:19423>))
+  追加  ((<ruby-dev:19423>))
 
   ((<ruby-dev:20962>))
 
-      * div    - ����(divmod���������)
-      * /      - ���ο����Ǥ�äȤ⼫���ʾ�(�����Ϥ������������)
-      * quo    - ��äȤ����Τ˶ᤤ��
-      * divmod - �����Ⱦ�;
+      * div    - 整除(divmodの第一要素)
+      * /      - その数型でもっとも自然な商(異論はあるだろうけど)
+      * quo    - もっとも正確に近い商
+      * divmod - 整除と剰余
 
 === NoMethodError
 
 : ((<NoMethodError#args|NoMethodError/args>))        [new]
 
-  �ɲ�
+  追加
 
 === Object
 
 : ((<Object#initialize_copy|Object/initialize_copy>)) [change]
 
-  �ɲ�
+  追加
 
-  ���Υ᥽�åɤ� initialize ��Ʊ�͡���ưŪ�� private method �ˤʤ�ޤ���
+  このメソッドは initialize と同様、自動的に private method になります。
 
 : ((<Object#instance_variable_get|Object/instance_variable_get>)) [new]
 : ((<Object#instance_variable_set|Object/instance_variable_set>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<Object#object_id|Object/object_id>)) [new]
 
-  �ɲ� (Object#id �ϡ�obsolete)
+  追加 (Object#id は、obsolete)
 
 : ((<Object#singleton_method_removed|Object/singleton_method_removed>)) [new]
 : ((<Object#singleton_method_undefined|Object/singleton_method_undefined>)) [new]
 
-  �ɲ�
+  追加
 
 === Proc
 
 : ((<Proc#binding|Proc/binding>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<Proc#to_proc|Proc/to_proc>)) [new]
 
-  �ɲ�
+  追加
 
 # : ((<Precision>)).included      [new]
 # 
-#   �ɲ�(((<Module#included|Module>)) �κ����)
+#   追加(((<Module#included|Module>)) の再定義)
 
 === Process
 
 : ((<Process/Process.initgroups>))  [new]
-  �ɲ�
+  追加
 
 : ((<Process/Process.groups>)) [new]
 : ((<Process/Process.groups=>)) [new]
 : ((<Process/Process.maxgroups>)) [new]
 : ((<Process/Process.maxgroups=>)) [new]
 
-  �ɲ�
+  追加
 : ((<Process/Process.detach>)) [new]
 
-  �ɲ�
+  追加
 
 : ((<Process/Process.abort>)) [new]
 : ((<Process/Process.exit>)) [new]
 
-  �ɲá��ؿ� abort, exit ��Ʊ����
+  追加。関数 abort, exit と同じ。
 
 : ((<Process/Process.waitall>))         [new]
-  �ɲ�
+  追加
 
 : ((<Process::Status#pid|Process::Status/pid>)) [new]
 
-  �ɲ�
+  追加
 
 === Range
 
 : ((<Range#step|Range/step>))     [new]
 
-  �ɲá�step ���Ȥ����ǤǷ����֤��ޤ���
+  追加。step ごとの要素で繰り返します。
 
 : ((<Range#include?|Range/include?>))          [new]
 : ((<Range#member?|Range/member?>))           [new]
-  �ɲ�
+  追加
 
 === Regexp
 
 : ((<Regexp#to_s|Regexp/to_s>)) [new]
 
-  �ɲá�((<ruby-dev:16909>))
+  追加。((<ruby-dev:16909>))
 
-  ����ˤ�ꡢ
+  これにより、
       re1 = /hogehoge/i
       re2 = /fugafuga/
       re3 = / #{re1} | #{re2} /x
-  �ʤɤ�����ɽ�����֥������Ȥ�����ɽ�����������褦�ˤʤ�ޤ�����
+  などと正規表現オブジェクトを正規表現に埋め込めるようになりました。
 
 : ((<Regexp#options|Regexp/options>))          [new]
-  �ɲ�
+  追加
 
 === Socket
 
 : ((<Socket/Socket.pack_sockaddr_in>))          [new]
 : ((<Socket/Socket.unpack_sockaddr_in>))        [new]
 
-  �ɲá������åȥ��ɥ쥹��¤��(INET domain)��pack/unpack��
+  追加。ソケットアドレス構造体(INET domain)のpack/unpack。
 
 : ((<Socket/Socket.pack_sockaddr_un>))      [new]
 : ((<Socket/Socket.unpack_sockaddr_un>))    [new]
 
-  �ɲá������åȥ��ɥ쥹��¤��(UNIX domain)��pack/unpack��
+  追加。ソケットアドレス構造体(UNIX domain)のpack/unpack。
 
 : ((<UNIXSocket/UNIXSocket.pair>))              [new]
 : ((<UNIXSocket/UNIXSocket.socketpair>))        [new]
 : ((<UNIXSocket#recv_io|UNIXSocket/recv_io>))   [new]
 : ((<UNIXSocket#send_io|UNIXSocket/send_io>))   [new]
 
-  �ɲ�
+  追加
 
 : ((<UNIXServer#listen|UNIXServer/listen>))     [new]
 : ((<TCPServer#listen|TCPServer/listen>))       [new]
 
-  �ɲá�Socket#((<Socket/listen>))��Ʊ����
+  追加。Socket#((<Socket/listen>))と同じ。
 
 === String
 
 : ((<String#match|String/match>))      [new]
 
-  �ɲ� re.match(str) ��Ʊ����
+  追加 re.match(str) と同じ。
 
 : ((<String#lstrip|String/lstrip>))     [new]
 : ((<String#rstrip|String/rstrip>))     [new]
 : ((<String#lstrip!|String/lstrip!>))     [new]
 : ((<String#rstrip!|String/rstrip!>))     [new]
 
-  �ɲá���ü���뤤�ϱ�ü�ζ������������ޤ���
-  rstrip �ϡ���¦�� "\0" ��������ޤ���
+  追加。左端あるいは右端の空白類を取り除きます。
+  rstrip は、右側の "\0" も取り除きます。
 
 : ((<String#casecmp|String/casecmp>))   [new]
 : ((<String#eql?|String/eql?>))         [change]
 
-  casecmp �ɲá�����ե��٥åȤ��羮��̵�뤷��ʸ������ӡ�
+  casecmp 追加。アルファベットの大小を無視した文字列比較。
 
-  eql? �ϡ�((<$=|�Ȥ߹����ѿ�>)) ���ͤ˴ؤ餺��˥���ե��٥åȤ��羮
-  ����̤���褦�ˤʤ�ޤ�����
+  eql? は、((<$=|組み込み変数>)) の値に関らず常にアルファベットの大小
+  を区別するようになりました。
 
 : ((<String#insert|String/insert>)) [new]
 
-  �ɲ�
+  追加
 
-  (({str[n, 0] = other})) ��Ʊ��(������ self ���֤�)
+  (({str[n, 0] = other})) と同じ(ただし self を返す)
 
 === Struct
 
 : ((<Struct/each_pair>)) [new]
 
-  �ɲá�
+  追加。
 
 === Symbol
 
 : ((<Symbol/Symbol.all_symbols>))      [new]
-  �ɲ� ((<ruby-dev:12921>))
+  追加 ((<ruby-dev:12921>))
 
 === SystemCallError
 
 : ((<SystemCallError/SystemCallError.===>))     [new]
 
-  �ɲ� (�嵭 ��rescue ���...�� �򻲾ȤΤ���)
+  追加 (上記 「rescue 節の...」 を参照のこと)
   ((<ruby-dev:12670>))
 
 : ((<SystemExit#status|SystemExit/status>))       [new]
-  �ɲ�
+  追加
 
 === Thread
 
 : ((<Thread#keys|Thread/keys>))     [new]
-  �ɲá�Thread��ͭ�ǡ����Υ�����������֤��ޤ���
+  追加。Thread固有データのキーの配列を返します。
 
 
 : ((<Thread#terminate|Thread/terminate>)) [new]
 
-  �ɲá�Thread#kill ��Ʊ����
+  追加。Thread#kill と同じ。
 
 : ((<Thread#group|Thread/group>)) [new]
-  �ɲ�
+  追加
 
 === ThreadGroup
 
 : ((<ThreadGroup#enclose|ThreadGroup/enclose>)) [new]
 : ((<ThreadGroup#enclosed?|ThreadGroup/enclosed?>)) [new]
 
-  �ɲ� ((<ruby-dev:20655>))
+  追加 ((<ruby-dev:20655>))
 
-  ThreadGroup �ؤ� Thread �ɲ�/�����(freeze ������)�ػߤ��ޤ���
+  ThreadGroup への Thread 追加/削除を(freeze せずに)禁止します。
 
 === Time
 
@@ -961,9 +961,9 @@
 : ((<Time#gmtoff|Time/gmtoff>))         [new]
 : ((<Time#utc_offset|Time/utc_offset>)) [new]
 
-  �ɲ�
+  追加
 
-=== ����¾
+=== その他
 
 : ((<Array#values_at|Array/values_at>)) [new]
 : ((<Hash#values_at|Hash/values_at>)) [new]
@@ -971,16 +971,16 @@
 : ((<MatchData#values_at|MatchData/values_at>)) [new]
 : ((<aStruct#values_at|Struct/values_at>)) [new]
 
-  ruby 1.6 �� ((<indexes|Array/indexes>)) �ϡ�values_at �Ȥ����᥽�å�
-  ̾�ˤʤ�ޤ���(ruby 1.7 �Ǥ� block �ʤ� ((<select|Array/select>)) ��
-  indexes ������Ǥ����������������Ѥ���ȷٹ𤬽Фޤ�)��
+  ruby 1.6 の ((<indexes|Array/indexes>)) は、values_at というメソッド
+  名になりました(ruby 1.7 では block なし ((<select|Array/select>)) が
+  indexes の代わりでしたが、こちらも使用すると警告が出ます)。
 
 : ((<Fixnum#to_sym|Fixnum/to_sym>)) [new]
 : ((<String#to_sym|String/to_sym>)) [new]
 
-  �ɲ�(Symbol#intern �Ϥʤ��ʤä�)
+  追加(Symbol#intern はなくなった)
 
-== �ɲä��줿���
+== 追加された定数
 
 : ((<Float::DIG|Float/DIG>)) [new]
 : ((<Float::EPSILON|Float/EPSILON>)) [new]
@@ -994,127 +994,127 @@
 : ((<Float::RADIX|Float/RADIX>)) [new]
 : ((<Float::ROUNDS|Float/ROUNDS>)) [new]
 
-  �ɲ� ((<ruby-math:0773>))
+  追加 ((<ruby-math:0773>))
 
 : ((<Marshal::MAJOR_VERSION|Marshal/MAJOR_VERSION>))          [new]
 : ((<Marshal::MINOR_VERSION|Marshal/MINOR_VERSION>))          [new]
-  �ɲá�Marshal �����Ϥ������ץե����ޥåȤΥС�������ֹ�Ǥ���
+  追加。Marshal が出力するダンプフォーマットのバージョン番号です。
   ((<ruby-dev:14172>))
 
-== ��ĥ���줿���饹���᥽�å�(�ߴ����Τ����ѹ�)
+== 拡張されたクラス／メソッド(互換性のある変更)
 
-=== �Ȥ߹��ߴؿ�
+=== 組み込み関数
 
-: ((<�Ȥ߹��ߴؿ�/sprintf>)) [new]
+: ((<組み込み関数/sprintf>)) [new]
 
-  "%p" ���ɲä���ޤ�����inspect �η�̤����Ѥ���ޤ���((<RCR#69>))
+  "%p" が追加されました。inspect の結果が利用されます。((<RCR#69>))
 
-: ((<�Ȥ߹��ߴؿ�/trap>)) [compat]
+: ((<組み込み関数/trap>)) [compat]
 
-  ���륷���ʥ���Ф��ơ�SIG_DFL �� SIG_IGN ��������Ƥ��Ƥ�����硢
-  ʸ���� "DEFAULT" �� "IGNORE" ���֤��褦�ˤʤ�ޤ���(�����ϡ�nil ����
-  ���Ƥ��ޤ���) ((<ruby-talk:67860>))
+  あるシグナルに対して、SIG_DFL や SIG_IGN が割り当てられていた場合、
+  文字列 "DEFAULT" や "IGNORE" を返すようになりました(以前は、nil を返
+  していました) ((<ruby-talk:67860>))
 
-: ((<�Ȥ߹��ߴؿ�/system>)) [compat]
-: ((<�Ȥ߹��ߴؿ�/exec>)) [compat]
+: ((<組み込み関数/system>)) [compat]
+: ((<組み込み関数/exec>)) [compat]
 
-  ������������ξ�硢���ΰ���ܤ����ǤΥե������Ķ��ѿ�PATH����
-  ��������褦�ˤʤ�ޤ�����
+  第一引数が配列の場合、その一つ目の要素のファイルを環境変数PATHから
+  検索するようになりました。
 
-  �ޤ���msdosdjgpp��mswin32��mingw32��bccwin32�Ǥ⡢¾�Υץ�åȥե������
-  Ʊ�ͤˡ������Ȥ�������Ϳ����줿���ϥ�������ͳ���ʤ��褦�ˤʤ�ޤ�����
-  �����Ͼ�˥�������ͳ���Ƥ��ޤ���(win32��port��2003-01-04���ѹ�)��
+  また、msdosdjgpp・mswin32・mingw32・bccwin32でも、他のプラットフォームと
+  同様に、引数として配列が与えられた場合はシェルを経由しないようになりました。
+  以前は常にシェルを経由していました(win32系portは2003-01-04に変更)。
   ((<ruby-dev:19107>))
 
-: ((<�Ȥ߹��ߴؿ�/rand>)) [compat]
+: ((<組み込み関数/rand>)) [compat]
 
-  ��������Υ��르�ꥺ���
+  乱数生成のアルゴリズムに
   ((<Mersenne Twister|URL:http://www.math.keio.ac.jp/~matumoto/mt.html>))
-  ����Ѥ���褦�ˤʤ�ޤ�����
+  を使用するようになりました。
 
-: ((<�Ȥ߹��ߴؿ�/sprintf>))('%u') [compat]
+: ((<組み込み関数/sprintf>))('%u') [compat]
 
-  sprintf �� '%u' �ǡ��Ǿ�̥ӥåȤη����֤��򤢤�魯 ".."  �ϡ��ղ�
-  ����ʤ��褦�ˤʤ�ޤ�����((<ruby-dev:16522>))
+  sprintf の '%u' で、最上位ビットの繰り返しをあらわす ".."  は、付加
+  されないようになりました。((<ruby-dev:16522>))
 
-: ((<�Ȥ߹��ߴؿ�/abort>)) [compat]
+: ((<組み込み関数/abort>)) [compat]
 
-  ��λ��å����������Ǥ���褦�ˤʤ�ޤ�����
+  終了メッセージを指定できるようになりました。
 
 === Array
 
 : ((<Array#first|Array/first>)) [compat]
 : ((<Array#last|Array/last>)) [compat]
 
-  ��ά��ǽ�ʰ������ɲ�
+  省略可能な引数を追加
 
 : ((<Array#push|Array/push>)) [compat]
 : ((<Array#unshift|Array/unshift>)) [compat]
 : ((<Array#insert|Array/insert>)) [compat]
 
-  ���������ꤵ��ʤ����ˡ�ArgumentError �㳰��ȯ�����ʤ��ʤ�ޤ�����
-  (���⤻���� self ���֤������Ǥ�)
+  引数が指定されない場合に、ArgumentError 例外が発生しなくなりました。
+  (何もせずに self を返すだけです)
 
 : ((<Array#[]|Array/[]>)) [compat]
 : ((<Array#[]=|Array/[]=>)) [compat]
 
-  ����Υ���ǥå����Ȥ��� Symbol ����ꤷ����硢Symbol#to_int ��Ƥ�
-  �����㳰 ((<TypeError>)) ��ȯ������褦�ˤʤ�ޤ�����
+  配列のインデックスとして Symbol を指定した場合、Symbol#to_int を呼ば
+  す、例外 ((<TypeError>)) が発生するようになりました。
   ((<ruby-list:37217>))
 
 : ((<Array/Array.new>))         [compat]
 : ((<Array#fill|Array/fill>))   [compat]
 
-  �֥��å���ɾ����̤� fill �����ͤȤ��ƻ���Ǥ���褦�ˤʤ�ޤ�������
-  ���å����������ɾ�������Τǡ����Τ褦����Ǥ� "val" �����������
-  ��ޤ���
+  ブロックの評価結果を fill する値として指定できるようになりました。ブ
+  ロックは要素毎に評価されるので、下のような例では "val" が毎回生成さ
+  れます。
 
 : ((<Array/Array.new>))       [compat]
 
-  Array.new �ΰ�����������Ϥ��Ȥ��Υ��ԡ�����������褦�ˤʤ�ޤ�����
+  Array.new の引数に配列を渡すとそのコピーを生成するようになりました。
 
 : ((<Array#pack|Array/pack>))         [compat]
 : ((<String#unpack|String/unpack>))   [compat]
 
-  pack/unpack �Υƥ�ץ졼�Ȥ˥����Ȥ򵭽ҤǤ���褦�ˤʤ�ޤ�����
+  pack/unpack のテンプレートにコメントを記述できるようになりました。
 
 : ((<Array#pack|Array/pack>))         [new]
 : ((<String#unpack|String/unpack>))   [new]
 
-  64 bit �����Υƥ�ץ졼��ʸ�� Q/q ���ɲä���ޤ���(Quad �ΰ�)��
-  Q �� unsigned��q �ϡ�signed �Ǥ���
+  64 bit 整数のテンプレート文字 Q/q が追加されました(Quad の意)。
+  Q は unsigned、q は、signed です。
 
 : ((<Array#pack|Array/pack>))      [change]
 : ((<String#unpack|String/unpack>))   [change]
 
-    Array#pack, String#unpack �Υƥ�ץ졼��ʸ�� "p", "P" �ϡ�nil ��
-    NULL�ݥ��󥿤�����Ѵ���Ԥ��褦�ˤʤ�ޤ���((<ruby-dev:13017>))��
+    Array#pack, String#unpack のテンプレート文字 "p", "P" は、nil と
+    NULLポインタの相互変換を行うようになりました((<ruby-dev:13017>))。
 
 === Class
 
 : ((<Class#inherited|Class/inherited>)) [change]
 
-  inherited �᥽�åɤϥ��饹������ν���˸ƤӽФ����褦�ˤʤ�ޤ�����
+  inherited メソッドはクラス定義式の終りに呼び出されるようになりました。
   ((<ruby-bugs-ja:342>))
 
 === Dir
 
 : ((<Dir/Dir.glob>)) [compat]
 
-  Dir.glob ����2����(�ޥå��ε�ư���ѹ�����ե饰)�����Ǥ���褦�ˤ�
-  ��ޤ�����Dir[] �ˤϤ��Υե饰�ϻ���Ǥ��ޤ���
+  Dir.glob に第2引数(マッチの挙動を変更するフラグ)を指定できるようにな
+  りました。Dir[] にはこのフラグは指定できません。
 
-  ��Ϣ������� File::FNM_DOTMATCH (FNM_PERIOD �εդΰ�̣)���ɲä����
-  ���ޤ���
+  関連して定数 File::FNM_DOTMATCH (FNM_PERIOD の逆の意味)が追加されて
+  います。
 
 : ((<Dir/Dir.chdir>))       [compat]
-  �֥��å������Ǥ���褦�ˤʤ�ޤ�����
+  ブロックを指定できるようになりました。
 
 === ENV
 
 : ((<ENV>)) [change]
 
-  ENV ����������ʸ����Ϥ��٤� ((<Object/freeze>)) �����褦�ˤʤ�ޤ�����
+  ENV が生成する文字列はすべて ((<Object/freeze>)) されるようになりました。
   ((<ruby-talk:72732>))
 
         ENV['environ'] = 'value'
@@ -1124,8 +1124,8 @@
         => ruby 1.6.8 (2002-12-24) [i586-linux]
            "value"
 
-  ������Τ褦�� sub! �Τ褦���˲�Ū�᥽�åɤθ��̤��ʤ����Ắ�𤹤��
-  �����Τ���ͳ�Ǥ�(ENV���֤�ʸ������ѹ����Ƥ�Ķ��ѿ����Τ˱ƶ����ʤ�)��
+  この例のように sub! のような破壊的メソッドの効果がないため混乱すると
+  いうのが理由です(ENVが返す文字列を変更しても環境変数自体に影響がない)。
 
         => -:2:in `sub!': can't modify frozen string (TypeError)
                 from -:2
@@ -1135,39 +1135,39 @@
 
 : ((<Hash#update|Hash/update>)) [compat]
 
-  �֥��å������Ǥ���褦�ˤʤ�ޤ�������ʣ�����������Ф��뿶�񤤤���
-  ��Ǥ��ޤ���
+  ブロックを指定できるようになりました。重複したキーに対する振舞いを制
+  御できます。
 
 : ((<Hash/Hash.new>))   [compat]
 
-  �ϥå���Υǥե�����ͤȤ��ƥ֥��å������Ǥ���褦�ˤʤ�
-  �ޤ������֥��å�����ꤹ��ȶ��Υϥå������Ǥλ��Ȥ��Ф���
-  �������٥֥��å���¹Ԥ������η�̤��֤��ޤ���
-  �֥��å��ˤϥϥå��弫�Ȥȡ��ϥå���򻲾Ȥ����Ȥ��Υ������Ϥ���ޤ�
+  ハッシュのデフォルト値としてブロックを指定できるようになり
+  ました。ブロックを指定すると空のハッシュ要素の参照に対して
+  その都度ブロックを実行し、その結果を返します。
+  ブロックにはハッシュ自身と、ハッシュを参照したときのキーが渡されます
 
 === IO
 
 : ((<IO/IO.new>)) [compat]
 
-  ((<File/File.open>)) ��Ʊ�ͤ� mode �����(�Ĥޤꡢ
-  ((<File::Constants>)) �����) �ǻ���Ǥ���褦�ˤʤ�ޤ�����
+  ((<File/File.open>)) と同様に mode を数値(つまり、
+  ((<File::Constants>)) の定数) で指定できるようになりました。
 
 : ((<IO#reopen|IO/reopen>)) [compat]
 
-  ����������ά�����Ȥ��쥷���ФΥ⡼�ɤ򤽤Τޤް����Ѥ��褦�ˤʤ��
-  �����������ϡ���������Υǥե�����ͤ� "r" ����Ǥ�����
+  第二引数を省略したときレシーバのモードをそのまま引き継ぐようになりま
+  した。以前は、第二引数のデフォルト値は "r" 固定でした。
 
 : ((<IO#read|IO/read>)) [compat]
 : ((<IO#sysread|IO/sysread>)) [compat]
 
-  IO#read, IO#sysread ����������ɲ�(���餫���������Ƥ��ɤ߹����ѥХ�
-  �ե��λ���)
+  IO#read, IO#sysread に第二引数追加(あらかじめ割り当てた読み込み用バッ
+  ファの指定)
 
 === Method
 
 : ((<Method#inspect|Method/inspect>))   [compat]
 
-  �ðۥ᥽�åɤ��Ф�����Ϸ���������̣�Τ����Τˤʤ�ޤ�����
+  特異メソッドに対する出力形式がより意味のあるものになりました。
   ((<ruby-bugs-ja:PR#193>))
 
 === Module
@@ -1175,49 +1175,49 @@
 : ((<Module#undef_method|Module/undef_method>)) [compat]
 : ((<Module#remove_method|Module/remove_method>)) [compat]
 
-  ���٤�ʣ���Υ᥽�åɤ����Ǥ���褦�ˤʤ�ޤ�����((<RCR#146>))
+  一度に複数のメソッドを指定できるようになりました。((<RCR#146>))
 
 : ((<Module#method_added|Module/method_added>)) [compat]
 : ((<Module#singleton_method_added|Module/singleton_method_added>)) [compat]
 
-  ��ĥ�饤�֥�꤫��᥽�åɤ�������줿�Ȥ���ƤФ��褦�ˤʤ�ޤ�����
+  拡張ライブラリからメソッドが定義されたときも呼ばれるようになりました。
   ((<ruby-talk:70471>))
 
 : ((<Module/Module.new>))       [compat]
 : ((<Class/Class.new>))         [compat]
 
-    Module.new, Class.new �ǥ֥��å���Ϳ����줿��硢��������
-    �⥸�塼��/���饹�Υ���ƥ����Ȥǥ֥��å���¹Ԥ���褦��
-    �ʤ�ޤ�����
+    Module.new, Class.new でブロックが与えられた場合、生成した
+    モジュール/クラスのコンテキストでブロックを実行するように
+    なりました。
 
 === Numeric
 
 : ((<Numeric#step|Numeric/step>)) [compat]
 
-  ((<Fixnum>)), ((<Integer>)) �����ư���ޤ�����
+  ((<Fixnum>)), ((<Integer>)) から移動しました。
 
 === Object
 
 : ((<Object#singleton_methods|Object/singleton_methods>))         [compat]
-  ��ά��ǽ�ʰ��� all ���ɲä���ޤ�����
+  省略可能な引数 all が追加されました。
 
 : ((<Object#methods|Object/methods>)) [compat]
 : ((<Object#public_methods|Object/public_methods>)) [compat]
 : ((<Object#private_methods|Object/private_methods>)) [compat]
 : ((<Object#protected_methods|Object/protected_methods>)) [compat]
 
-  �����ѡ����饹�Υ᥽�åɤ�õ�����뤫�ɤ���������ǻ���Ǥ���褦�ˤ�
-  ��ޤ�����((<Module#instance_methods|Module/instance_methods>)) �ʤ�
-  ��Ʊ���Ǥ��������Ȥθߴ����Τ�������Υǥե�����ͤ� Module �Τ��
-  �ȤϵդǤ���(Module#instance_methods �ʤɤΥǥե�����ͤϾ���(1.8.1)
-  �ѹ������ͽ��Τ褦�Ǥ�)
+  スーパークラスのメソッドも探索するかどうかを引数で指定できるようにな
+  りました。((<Module#instance_methods|Module/instance_methods>)) など
+  と同じですが、過去との互換性のため引数のデフォルト値が Module のもの
+  とは逆です。(Module#instance_methods などのデフォルト値は将来(1.8.1)
+  変更される予定のようです)
 
-  ((<Object#methods|Object/methods>)) �ϰ����� false �ξ��ˤ��Υ���
-  �������Ȥ��ðۥ᥽�åɤΥꥹ�Ȥ��֤��ޤ����Ĥޤꡢ
-  ((<Object#singleton_methods(false)|Object/singleton_methods>)) ��Ʊ
-  ���Ǥ���
+  ((<Object#methods|Object/methods>)) は引数が false の場合にそのオブ
+  ジェクトの特異メソッドのリストを返します。つまり、
+  ((<Object#singleton_methods(false)|Object/singleton_methods>)) と同
+  じです。
 
-  1.7 ���ѹ�����ޤ�ƻ��ͤ�ޤȤ���
+  1.7 の変更点も含めて仕様をまとめると
 
         Object#methods,           Module#instance_methods,
         Object#public_methods,    Module#public_instance_methods,
@@ -1225,49 +1225,49 @@
         Object#protected_methods, Module#protected_instance_methods
         Object#singleton_methods
 
-  * ������ true �ξ��ϡ��⥸�塼��䥹���ѡ����饹��õ�����롣
+  * 引数が true の場合は、モジュールやスーパークラスを探索する。
 
-  * public_xxx, private_xxx, protected_xxx �Ϥ��줾��public, private,
-    protected �᥽�åɤΤߤ��֤���public_, private_, protected_ ���Ĥ�
-    �ʤ���methods, instance_methods �ϡ�public �᥽�åɤ� protected
-    �᥽�åɤ��֤���
+  * public_xxx, private_xxx, protected_xxx はそれぞれpublic, private,
+    protected メソッドのみを返す。public_, private_, protected_ がつか
+    ない、methods, instance_methods は、public メソッドと protected
+    メソッドを返す。
 
-  * Object#methods(false) �� Object#singleton_methods(false) ��Ʊ����
+  * Object#methods(false) は Object#singleton_methods(false) と同じ。
 
-  * ���褳���Υ᥽�åɤΰ����Υǥե�����ͤ� true �ˤʤ�ͽ�������
-    Module#xxx_instance_methods �� Object#singleton_methods �ϸ����ǥե�
-    ����ͤ� false(���Ȥθߴ��Τ��ᡣ�ʤ�����ά�����ޤޤ��ȷٹ𤬽Ф�)��
-    �ǥե���Ȥ����ʤ��褦�ˤ���٤���1.6 �ǻ��Ѥ��Ƥ���������ץȤ�
-    �񤭴�������ϡ�false ������Ū�˻��ꤹ�롣
+  * 将来これらのメソッドの引数のデフォルト値は true になる予定だが、
+    Module#xxx_instance_methods と Object#singleton_methods は現状デフォ
+    ルト値が false(過去との互換のため。なお、省略したままだと警告が出る)。
+    デフォルトに頼らないようにするべき、1.6 で使用していたスクリプトを
+    書き換える場合は、false を明示的に指定する。
 
 === Proc
 
 : ((<Proc#to_s|Proc/to_s>)) [compat]
 
-  Proc#to_s �η�̤˥�����ץȤΥ������ե�����̾�ȹ��ֹ椬�ղä���ޤ�
-  ����((<ruby-dev:17968>))
+  Proc#to_s の結果にスクリプトのソースファイル名と行番号が付加されまし
+  た。((<ruby-dev:17968>))
 
 === Regexp
 
 : ((<Regexp#===|Regexp/===>)) [compat]
 
-  �����ͤ��֤��褦�ˤʤ�ޤ�����
+  真偽値を返すようになりました。
 
 : ((<Regexp/Regexp.last_match>))    [compat]
-  optional �ʰ������ɲä���ޤ�����
+  optional な引数が追加されました。
 
 === String
 
 : ((<String/String.new>))      [compat]
 
-  String.new �ΰ������ά�Ǥ���褦�ˤʤ�ޤ�����
+  String.new の引数を省略できるようになりました。
 
 : ((<String/strip>))     [compat]
 : ((<String/strip!>))    [compat]
 : ((<String/rstrip>))    [compat]
 : ((<String/rstrip!>))   [compat]
 
-  ����������Ǥʤ� "\0" �� strip ����褦�ˤʤ�ޤ�����((<ruby-talk:76659>))
+  空白類だけでなく "\0" も strip するようになりました。((<ruby-talk:76659>))
 
 : ((<String#scan|String/scan>)) [change]
 : ((<String#split|String/split>)) [change]
@@ -1275,70 +1275,70 @@
 : ((<String#gsub|String/gsub>)), ((<String#gsub!|String/gsub!>)) [change]
 : ((<String#~|String/~>)) [obsolete]
 : ((<String#=~|String/=~>)) [obsolete]
-: ((<�Ȥ߹����ѿ�/$;>))   [compat]
-: ((<�Ȥ߹����ѿ�/$-F>))  [compat]
-: ((<Ruby�ε�ư/-F((*regexp*))>))    [compat]
+: ((<組み込み変数/$;>))   [compat]
+: ((<組み込み変数/$-F>))  [compat]
+: ((<Rubyの起動/-F((*regexp*))>))    [compat]
 
-  pattern �Ȥ�������ɽ���Ǥʤ�ʸ�������ꤷ���Ȥ������������ɽ���˥�
-  ��ѥ��뤻��ʸ���󤽤Τ�Τ�ѥ�����Ȥ��ư����褦�ˤʤ�ޤ�����(��
-  �����Τˤϡ�Regexp.compile(arg) �Ǥʤ�
-  Regexp.compile(Regexp.quote(arg)) ����褦�ˤʤ�ޤ���)
+  pattern として正規表現でなく文字列を指定したとき、それを正規表現にコ
+  ンパイルせず文字列そのものをパターンとして扱うようになりました。(よ
+  り正確には、Regexp.compile(arg) でなく
+  Regexp.compile(Regexp.quote(arg)) するようになりました)
 
-  ((<String#~|String/~>)), ((<String#=~|String/=~>)) �ϡ�obsolete �ˤ�
-  ��ޤ�����(String#~ �Ϥ����ˤ������ѹ���ȿ�Ǥ��줿��� obsolete)
+  ((<String#~|String/~>)), ((<String#=~|String/=~>)) は、obsolete にな
+  りました。(String#~ はここにあげた変更が反映された上で obsolete)
 
-#   str =~ arg �����ϡ�arg ��ʸ����ΤȤ���
-#   Regexp.compile(Regexp.quote(arg)) =~ str �������� str.index(arg) ��
-#   �¹Ԥ���ޤ�(�������äơ�$~ �����ꤵ��ޤ���)��
+#   str =~ arg だけは、arg が文字列のとき、
+#   Regexp.compile(Regexp.quote(arg)) =~ str と等価な str.index(arg) が
+#   実行されます(したがって、$~ は設定されません)。
 
-  $; �λ��������ɽ�����������褦�ˤʤ�ޤ����������ȼ����ʸ�����
-  �������ꤷ�Ƥ��㳰 ((<TypeError>)) ��ȯ�����ʤ��褦�ˤʤ�ޤ�����
+  $; の指定に正規表現が許されるようになりました。これに伴い、文字列以
+  外を設定しても例外 ((<TypeError>)) は発生しないようになりました。
   ((<ruby-talk:77381>))
 
 : ((<String#center|String/center>)) [compat]
 : ((<String#ljust|String/ljust>)) [compat]
 : ((<String#rjust|String/rjust>)) [compat]
 
-  ���������˵ͤ����ʸ�������������ǻ���Ǥ���褦�ˤʤ�ޤ�����
+  空白の代わりに詰め込む文字列を第二引数で指定できるようになりました。
 
 : ((<String#[]|String/[]>))     [change]
 : ((<String#[]=|String/[]=>))   [change]
 
-  ������������ɽ�����Ϥ������ǡ����ץ������������ idx ���ɲä���ޤ�����
-  str[/re/, 0] �ϡ�str[/re/] ��Ʊ���Ǥ���
+  第一引数が正規表現を渡す形式で、オプションの第二引数 idx が追加されました。
+  str[/re/, 0] は、str[/re/] と同じです。
 
 === Struct
 
 : ((<Struct>)) [compat]
 
-   Struct ��Ŭ�ڤʥϥå����ͤ���Ĥ褦 Struct#hash, Struct#eql? �����
-   ����ޤ�����((<ruby-bugs:PR#758>))
+   Struct が適切なハッシュ値を持つよう Struct#hash, Struct#eql? が定義
+   されました。((<ruby-bugs:PR#758>))
 
 : ((<aStruct#inspect|Struct>)) [compat]
 
-  ���Ϸ��������������Ѥ��ޤ�����
+  出力形式が少しだけ変わりました。
 
 === Socket
 
 : ((<TCPSocket/TCPSocket.new>))   [compat]
 : ((<TCPSocket/TCPSocket.open>))  [compat]
-  ��������¦���ɥ쥹���ά��ǽ����3,4�����ǻ���Ǥ���褦�ˤʤ�ޤ�����
+  ローカル側アドレスを省略可能な第3,4引数で指定できるようになりました。
 
 === Thread
 
 : ((<Thread#join|Thread/join>))  [compat]
 
-  ����åɤ��Ԥ���碌����֤� limit �ǻ���Ǥ���褦�ˤʤ�ޤ�����
+  スレッドを待ち合わせる時間を limit で指定できるようになりました。
 
 : ((<Thread/Thread.list>)) [compat]
 : ((<ThreadGroup#list|ThreadGroup/list>)) [compat]
-  ��λ��(aborting)�Υ���åɤ�ꥹ�Ȥ˴ޤޤ��褦�ˤʤ�ޤ�����
+  終了中(aborting)のスレッドもリストに含まれるようになりました。
   ((<rubyist:1282>))
 
 === Time
 
 : ((<Time>))            [compat]
-  ��� time_t �򰷤���褦�ˤʤ�ޤ���(OS�����ݡ��Ȥ��Ƥ�����˸¤�)
+  負の time_t を扱えるようになりました(OSがサポートしている場合に限る)
     p Time.at(-1)
     => Thu Jan 01 08:59:59 JST 1970
 
@@ -1346,42 +1346,42 @@
 
 : ((<UnboundMethod#bind|UnboundMethod/bind>)) [compat]
 
-  UnboundMethod ���֥������Ȥ򤽤줬������줿���饹�Υ��֥��饹��
-  bind ���Ƥ��ɤ����Ȥˤʤ�ޤ�����
+  UnboundMethod オブジェクトをそれが定義されたクラスのサブクラスへ
+  bind しても良いことになりました。
 
-=== ����¾
+=== その他
 
 : ((<NameError/NameError.new>))(msg[, name])            [compat]
 : ((<NoMethodError/NoMethodError.new>))(msg, name, args)    [compat]
 : ((<SystemCallError/SystemCallError.new>))(msg, err)         [compat]
 : ((<Errno::EXXX>)).new(msg)                   [compat]
 
-  �����μ����ǥ��󥹥����ѿ����������Ƥ��ʤ��ä������ warning ��
-  �ФƤ����Τ������ޤ����������ơ�new �Υѥ�᡼���Ǥ����ͤ����Ǥ�
-  ��褦���ѹ�����ޤ�����
+  内部の実装でインスタンス変数を初期化していなかったために warning が
+  出ていたのを修正しました。そして、new のパラメータでその値を指定でき
+  るように変更されました。
 
 : ((<SystemExit#initialize|SystemExit/SystemExit.new>)) [compat]
 
-  �������ɲä���ޤ�����
+  引数が追加されました。
 
 : ((<String#to_i|String/to_i>)) [compat]
 : ((<Integer#to_s|Integer/to_s>)) [compat]
 
-  �����˴��(2,8,10,16)�����Ǥ���褦�ˤʤ�ޤ�����
-  (2002-01-26: ������ 0 �ΤȤ��� prefix �Ǵ����Ƚ�ꤹ��)
+  引数に基数(2,8,10,16)を指定できるようになりました。
+  (2002-01-26: 引数が 0 のときは prefix で基数を判定する)
 
-  ����Ѵ��ǡ�2, 8, 10, 16 �ʤ����Ǥʤ���2 .. 36�ʿ��ޤǤ�Ǥ�դδ����
-  ���Ѵ��򥵥ݡ��Ȥ��ޤ�����((<ruby-dev:20021>))
+  基数変換で、2, 8, 10, 16 進だけでなく、2 .. 36進数までの任意の基数へ
+  の変換をサポートしました。((<ruby-dev:20021>))
 
-# �̤˱ƶ��ʤ��ѹ��ʤΤǥ�����
+# 別に影響ない変更なのでコメント
 # : ((<Class/Class.inherited>)) [compat]
 # 
-#   (��: Class#inherited �ǤϤ���ޤ���)
+#   (注: Class#inherited ではありません)
 # 
-#   �����ϡ����饹�Υ��֥��饹�������ػߤ��뤿����������Ƥ��ޤ�������
-#   (((<TypeError>))�㳰��ȯ��������᥽�åɤȤ����������Ƥ��ޤ���) ��
-#   ������ Class.new ��ô�ݤ���褦�ˤʤ�ޤ��������Τ��ᡢ
-#   Class.inherited �᥽�åɤ�����Ϥʤ��ʤ�ޤ�����
+#   以前は、クラスのサブクラスの定義を禁止するために定義されていましたが、
+#   (((<TypeError>))例外を発生させるメソッドとして定義されていました) こ
+#   の役割は Class.new が担保するようになりました。そのため、
+#   Class.inherited メソッドの定義はなくなりました。
 # 
 #     class SubClass < Class
 #     end
@@ -1393,18 +1393,18 @@
 #     #=> -:1: can't make subclass of Class (TypeError)
 #         ruby 1.7.1 (2001-07-31) [i586-linux]
 
-== �ѹ����줿���饹���᥽�å�(�ߴ����Τʤ��ѹ�)
+== 変更されたクラス／メソッド(互換性のない変更)
 
-=== �Ȥ߹��ߴؿ�
+=== 組み込み関数
 
-: ((<�Ȥ߹��ߴؿ�/Integer>))() [change]
+: ((<組み込み関数/Integer>))() [change]
 
-  ���ͤ�ʸ����ʳ��Υ��֥������Ȥ��������Ѵ�����Ȥ��� to_i �ǤϤʤ� 
-  to_int ����Ѥ���褦�ˤʤ�ޤ�����
+  数値や文字列以外のオブジェクトを整数に変換するときに to_i ではなく 
+  to_int を使用するようになりました。
 
-: ((<�Ȥ߹��ߴؿ�/Float>))() [change]
+: ((<組み込み関数/Float>))() [change]
 
-  Float() �ϡ������� nil ������դ��ʤ��ʤ�ޤ�����
+  Float() は、引数に nil を受け付けなくなりました。
 
         p Float(nil)
 
@@ -1418,13 +1418,13 @@
 
 : ((<ARGF#to_s|ARGF/to_s>)) [change]
 
-  ��̤� "ARGF" ����ˤʤ�ޤ������ե�����̾�� ARGF.path �Ǽ������ޤ���
+  結果は "ARGF" 固定になりました。ファイル名は ARGF.path で取得します。
 
 === ARGV
 
-: ((<�Ȥ߹������/ARGV>)) [change]
+: ((<組み込み定数/ARGV>)) [change]
 
-  ARGV �γ����Ǥ� freeze �����褦�ˤʤ�ޤ�����
+  ARGV の各要素は freeze されるようになりました。
 
         ruby -v -e 'p ARGV.collect {|v| v.frozen?}' a b c
 
@@ -1437,44 +1437,44 @@
 
 : ((<Array#sort!|Array/sort!>))     [change]
 
-  ���self�֤��褦�ˤʤ�ޤ�����
+  常にself返すようになりました。
 
-  ����ˤ錄�äƤ��Τ��Ȥ��ݾڤ����櫓�ǤϤʤ������Ǥ� ((<ruby-dev:12506>))��
+  将来にわたってこのことが保証されるわけではないそうです ((<ruby-dev:12506>))。
 
 : ((<Array#reverse!|Array/reverse!>)) [change]
 
-  �������� 1 �ʲ���������Ф��ư����� nil ���֤��Ƥ��ޤ�������self ��
-  �֤��褦�ˤʤ�ޤ�����((<String#reverse!|String/reverse!>)) �ε�ư��
-  Ʊ���Ǥ���((<ruby-dev:20135>))
+  サイズが 1 以下の配列に対して以前は nil を返していましたが、self を
+  返すようになりました。((<String#reverse!|String/reverse!>)) の挙動と
+  同じです。((<ruby-dev:20135>))
 
 : ((<Array#-|Array/->)) [change]
 
-  �������Ȥ��˽�ʣ�����ͤϼ������ʤ��ʤ�ޤ�����
+  差を求めるときに重複した値は取り除かなくなりました。
 
 === Comparable
 
 : ((<Comparable>)) [change]
 
-  obj#<=> �� nil ���֤��褦�ʰ������Ф��ơ�>, >=, <, <= ���㳰
-  ((<ArgumentError>)) �򵯤����褦�ˤʤ�ޤ������ޤ���== �ϡ�nil ����
-  ���褦�ˤʤ�ޤ�����
+  obj#<=> が nil を返すような引数に対して、>, >=, <, <= が例外
+  ((<ArgumentError>)) を起こすようになりました。また、== は、nil を返
+  すようになりました。
 
 : ((<Module/Module#>>)) [change]
 : ((<Module/Module#<>)) [change]
 : ((<Module/Module#<=>)) [change]
 
-  �Ѿ��ط��ˤʤ����饹Ʊ�Τ���Ӥ� nil ���֤��褦�ˤʤ�ޤ�����
+  継承関係にないクラス同士の比較で nil を返すようになりました。
   ((<ruby-dev:20190>))
 
-#   ((<Module/Module#<=>)) �ϡ�1.7 �� nil ���֤��褦���ѹ�����Ƥ��ޤ���
-#   �������θ塢-1 �ˡ����θ���� nil �ˤ����ޤ�ޤ�����
+#   ((<Module/Module#<=>)) は、1.7 で nil を返すように変更されていました
+#   が、その後、-1 に、その後再度 nil におさまりました。
 
 : ((<String#<=>|String/<=>>)) [change]
 : ((<Comparable>)) [change]
 
-  string <=> other �ϡ�((|other|)) ��ʸ����Ǥʤ���硢
-  ((|other|)).to_str �� ((|other|)).<=> ���������Ƥ���� (({0 -
-  (other <=> string)})) �η�̤��֤��ޤ��������Ǥʤ���� nil ���֤��ޤ���
+  string <=> other は、((|other|)) が文字列でない場合、
+  ((|other|)).to_str と ((|other|)).<=> が定義されていれば (({0 -
+  (other <=> string)})) の結果を返します。そうでなければ nil を返します。
   ((<ruby-dev:19625>))
 
         class Foo
@@ -1497,34 +1497,34 @@
 : ((<String#==|String/==>))    [change]
 : ((<Numeric#==|Numeric/==>))  [change]
 
-  Comparable ���ѹ��ȹ�碌�� <=> �� nil ���֤��Ȥ� == �� nil ���֤���
-  ���ˤʤ�ޤ�����((<ruby-dev:20759>))
+  Comparable の変更と合わせて <=> が nil を返すとき == が nil を返すよ
+  うになりました。((<ruby-dev:20759>))
 
 === Dir
 
 : ((<Dir/Dir.open>))        [change]
-  �֥��å���ȼ�����((<File>)).open��Ʊ�ͤˡ��֥��å��η�̤��᥽�åɤ�
-  ����ͤˤʤ�ޤ�����(1.6������ (({nil})) ����)
+  ブロックを伴う場合((<File>)).openと同様に、ブロックの結果がメソッドの
+  戻り値になりました。(1.6以前は (({nil})) 固定)
 
 : ((<Dir/Dir.glob>))        [change]
-  ��Ԥ���Хå�����å���ˤ�ꡢ�磻��ɥ����ɤ򥨥�������
-  �Ǥ���褦�ˤʤ�ޤ�����
-  �ޤ�����������ü�ʰ�̣�Ϥʤ��ʤ�ޤ���('\0'�θ��̤ϻĤäƤ��ޤ�)��
+  先行するバックスラッシュにより、ワイルドカードをエスケープ
+  できるようになりました。
+  また、空白類に特殊な意味はなくなりました('\0'の効果は残っています)。
 
 === Enumerable
 
 : ((<Enumerable#find|Enumerable/find>)) [change]
 
-  ������ʸ��������Ǥ��ʤ��ʤ�ޤ�����
+  引数に文字列を指定できなくなりました。
 
-  �ޤ������Ǥ����Ĥ���ʤ��ä����ϡ�ifnone �η�̤��֤��褦�ˤʤ�ޤ�����
+  また、要素が見つからなかった場合は、ifnone の結果を返すようになりました。
 
 === File
 
 : ((<File/File.basename>)) [CHANGE]
 : ((<File/File.dirname>)) [CHANGE]
 
-  File.dirname �� File.basename ��ư� ((<SUSv3|URL:http://www.unix-systems.org/version3/online.html>)) �˽����褦�ˤʤ�ޤ�����
+  File.dirname と File.basename の動作が ((<SUSv3|URL:http://www.unix-systems.org/version3/online.html>)) に従うようになりました。
 
   ((<ruby-dev:19548>)) [PATCH] file.c for ((<ruby-bugs-ja:PR#389>))
   and ((<ruby-bugs-ja:PR#390>))
@@ -1551,41 +1551,41 @@
 
 : ((<Float#to_s|Float/to_s>)) [change]
 
-  ��������٤򼨤�����Υե����ޥåȤ� "%.10g" ���� "%.16g" ���Ѥ���
-  ������(2003-03-20: ���θ塢"%.15g" �ˤʤ�ޤ��� ((<ruby-bugs-ja:PR#406>)))
+  最大の精度を示すためのフォーマットが "%.10g" から "%.16g" に変わりま
+  した。(2003-03-20: その後、"%.15g" になりました ((<ruby-bugs-ja:PR#406>)))
 
 === Module
 
 : ((<Module#include|Module/include>)) [change]
 
-  �ȥåץ�٥�� include �ϡ���������� true ����ꤷ�� load �ǥ�����
-  ����륹����ץȤΤ�ȤǤϥ⥸�塼��ε�ǽ�� self �� 
-  ((<Object/extend>)) ����褦���ѹ�����ޤ�����
+  トップレベルの include は、第二引数に true を指定した load でロード
+  されるスクリプトのもとではモジュールの機能を self に 
+  ((<Object/extend>)) するように変更されました。
 
 : ((<Module#include|Module/include>)) [change], [experimental]
 
-  wrapper �⥸�塼���ɾ������� file (load(file, true)) ��ǡ��ȥå�
-  ��٥�� include ��Ԥä��Ȥ���Module �� include �����оݤ� Object ��
-  �ʤ���wrapper �⥸�塼��ˤʤ�ޤ�����
-  �Ĥޤꡢload(file, true) �ǡ�file ������ɤ����Ȥ��� file ���
-  include ��¹Ԥ��Ƥ��Ƥ�ƤӽФ����˱ƶ����ʤ��ʤ�ޤ�����
+  wrapper モジュールで評価される file (load(file, true)) 中で、トップ
+  レベルの include を行ったとき、Module を include する対象が Object で
+  なく、wrapper モジュールになりました。
+  つまり、load(file, true) で、file をロードしたときに file 中で
+  include を実行していても呼び出し元に影響しなくなりました。
 
-  ((*����ϼ¸�Ū���ѹ��Ǥ�*))
+  ((*これは実験的な変更です*))
 
 : ((<Module#include|Module/include>)) [change]
 : ((<Object#extend|Object/extend>))  [change]
 
-  ʣ���Υ⥸�塼����Ϥ����Ȥ��˥��󥯥롼�ɤ���������ѹ�����ޤ�����
+  複数のモジュールを渡したときにインクルードされる順序が変更されました。
   ((<ruby-dev:16035>))
-  extend ��Ʊ�ͤ������Ǥ���((<ruby-dev:16183>))
+  extend も同様だそうです。((<ruby-dev:16183>))
 
-  ��İ�� include �������Ȥϵս�ˤʤ�ޤ���
+  一つ一つ include した場合とは逆順になります。
 
 === Object
 
 : ((<Object#clone|Object/clone>)) [change]
 
-  Numeric �ʤ� immutable �ʥ��֥������Ȥ� clone �Ǥ��ʤ��ʤ�ޤ�����
+  Numeric など immutable なオブジェクトは clone できなくなりました。
   ((<ruby-bugs-ja:PR#94>)), ((<rubyist:0831>))
 
 === Range
@@ -1595,29 +1595,29 @@
 : ((<Range#include?|Range/include?>)) [change]
 : ((<Range#member?|Range/member?>)) [change]
 
-  Range#max, Range#min, Range#include? �� <=> �᥽�åɤˤ���ϰϱ黻��
-  ������褦�ˤʤ�ޤ�����((<ruby-list:35253>)), ((<ruby-dev:17228>))
-  (2003-03-18: min, max �ϸ������ޤ�����((<ruby-dev:19837>)))
+  Range#max, Range#min, Range#include? が <=> メソッドによる範囲演算で
+  求められるようになりました。((<ruby-list:35253>)), ((<ruby-dev:17228>))
+  (2003-03-18: min, max は元に戻りました。((<ruby-dev:19837>)))
 
-  Range#member? �� each �����Ѥ��������Ǥ򻲾Ȥ����ºݤ˥��Ф�¸�ߤ��뤫
-  ��ǧ���ޤ���(Enumerable#member? ��Ʊ��)
+  Range#member? は each を利用して全要素を参照し、実際にメンバが存在するか
+  確認します。(Enumerable#member? と同じ)
 
-  1.6 �ޤǤϡ�max, min, member? include? �ϡ�Enumerable �Υ᥽�åɤǡ�
-  === �ϡ�Range �Υ᥽�åɤǤ���1.7 �Ǥϡ�max, min, member?, include?,
-  === �Ϥ��٤� Range �Υ᥽�åɤǡ�include? �� === ����̾�ˤʤäƤ���
-  ����(1.8 �Ǥϡ�max, min �ϡ�Enumerable �Υ᥽�åɤ���äƤ��ޤ�)
+  1.6 までは、max, min, member? include? は、Enumerable のメソッドで、
+  === は、Range のメソッドです。1.7 では、max, min, member?, include?,
+  === はすべて Range のメソッドで、include? は === の別名になっていま
+  す。(1.8 では、max, min は、Enumerable のメソッドに戻っています)
 
 : ((<Range#each|Range/each>)) [change]
 
-  Range#each �ϳ����Ǥ� succ �᥽�åɤ���Ѥ��ƥ��ƥ졼����󤹤�褦
-  �ˤʤ�ޤ�����
+  Range#each は各要素の succ メソッドを使用してイテレーションするよう
+  になりました。
 
 === Regexp
 
 : ((<Regexp/Regexp.new>)) [change]
 
-  ������������ɽ����Ϳ�������˰����Υ��ץ�����̵�뤷�����Υ��ץ���
-  ����ݻ�����ʣ�����֤��褦�ˤʤ�ޤ�����
+  第一引数に正規表現を与えた時に引数のオプションを無視し、元のオプショ
+  ンを保持した複製を返すようになりました。
 
         p Regexp.new(//is, Regexp::EXTENDED, "e")
 
@@ -1631,55 +1631,55 @@
 
 : ((<String#chomp|String/chomp>))       [change]
 : ((<String#chomp!|String/chomp!>))     [change]
-: ((<�Ȥ߹��ߴؿ�/chomp>))              [change]
-: ((<�Ȥ߹��ߴؿ�/chomp!>))             [change]
+: ((<組み込み関数/chomp>))              [change]
+: ((<組み込み関数/chomp!>))             [change]
 
-  $/ �� "\n" (�ǥե����)�ΤȤ����ɤι�������("\r\n", "\r",
-  "\n" �Τ�����Ǥ�)�Ǥ⤽����������褦�ˤʤ�ޤ�����
+  $/ が "\n" (デフォルト)のとき、どの行末形式("\r\n", "\r",
+  "\n" のいずれでも)でもそれらを取り除くようになりました。
 
 === ThreadGroup
 
 : ((<ThreadGroup#freeze|ThreadGroup/freeze>)) [change]
 
-  freeze ���줿 ThreadGroup �� Thread ���ɲ�/����Ǥ��ʤ��ʤ�ޤ�����
+  freeze された ThreadGroup に Thread を追加/削除できなくなりました。
 
 === Time
 
 : ((<Process/Process.times>))           [change]
-  ((<Time/Time.times>)) �����ư���ޤ�����
-  (Time.times ��ĤäƤ��ޤ�����warning���Фޤ�)
+  ((<Time/Time.times>)) から移動しました。
+  (Time.times も残っていますが、warningが出ます)
 
 : ((<Time#to_a|Time/to_a>))       [change]
 : ((<Time#zone|Time/zone>))       [change]
-  gmtime �ʥ����ॾ������Ф���"UTC"���֤��褦�ˤʤ�ޤ���
-  (�����ϴĶ���¸������ξ��"GMT")
+  gmtime なタイムゾーンに対して"UTC"を返すようになりました
+  (以前は環境依存。大抵の場合"GMT")
 
-== ʸˡ���ѹ�
+== 文法の変更
 
 : parser [compat]
 
-  �����ǻϤޤ륰�����Х��ѿ����ü��ѿ� $1, $2, ... �ʳ��˵�����ʤ���
-  ��ޤ�����
+  数字で始まるグローバル変数は特殊変数 $1, $2, ... 以外に許されなくな
+  りました。
 
 : [parser], [change]
 
-  `*' �ˤ������Ÿ������¿�������α��դǹԤ�줿��硢to_ary �����Ǥ�
-  ����to_a ������Ÿ���Τ�������󲽤����Ѥ����褦�ˤʤ�ޤ���(��������
-  Object#to_a ���оݳ���Object#to_a �Ͼ����������ͽ��Ǥ�)��
+  `*' による配列展開が、多重代入の右辺で行われた場合、to_ary だけでな
+  く、to_a も配列展開のための配列化に利用されるようになりました(ただし、
+  Object#to_a は対象外。Object#to_a は将来削除される予定です)。
 
 : [parser]
 
-  �������ױ黻�� `::' ��ȼ���������������褦�ˤʤ�ޤ�����
+  スコープ演算子 `::' を伴う定数代入を許すようになりました。
         p Object::Foo = 1
-  �ޤ���"class Foo::Bar; end" �Ȥ���������ǽ�ˤʤ�ޤ�����
+  また、"class Foo::Bar; end" という定義も可能になりました。
 
 : [parser]
 
-  (({.<digit>}))��Float�Υ�ƥ��ǤϤʤ��ʤ�ޤ�����
+  (({.<digit>}))はFloatのリテラルではなくなりました。
 
 : [parser] [experimental]
 
-  �¸�Ū�ʽ����Τ褦�Ǥ���
+  実験的な修正のようです。
 
       a = 1
       p a / 5
@@ -1698,7 +1698,7 @@
 
 : [parser] [new]
 
-  ����ܥ�γ�ĥɽ��ˡ�����Ѥ���ޤ�����((<ruby-dev:18537>))
+  シンボルの拡張表記法が採用されました。((<ruby-dev:18537>))
 
         p :"foo#{"bar"}"
         p :'foo#{"bar"}'
@@ -1709,27 +1709,27 @@
            :"foo\#{\"bar\"}"
            :"foo\#{\"bar\"}"
 
-: rescue������ [parser] [change]
+: rescue修飾式 [parser] [change]
 
-  rescue ��������ͥ���٤��Ѥ��ޤ���������ϡ��¸�Ū�ʤ�ΤΤ褦�Ǥ���
-  (1.8 ��꡼���ǻĤäƤ���Τ��������ѤΤ褦�Ǥ�)
+  rescue 修飾式の優先度が変わりました。これは、実験的なもののようです。
+  (1.8 リリースで残っているので正式採用のようです)
 
         a = b rescue c
 
-  �ϡ�
+  は、
 
         (a = b) rescue c
 
-  �Ǥʤ�
+  でなく
 
         a = (b rescue c)
 
-  ��ɾ������ޤ���
+  と評価されます。
 
 : [parser] [compat]
 
-  �᥽�å�����γ��Ǥ� return �θƤӽФ��ϥ���ѥ�����Ǥʤ��¹Ի���
-  ���顼�ˤʤ�褦�ˤʤ�ޤ�����
+  メソッド定義の外での return の呼び出しはコンパイル時でなく実行時に
+  エラーになるようになりました。
 
         p :doing
         return
@@ -1741,85 +1741,85 @@
 
 : [parser] [compat]
 
-  �ͥ��Ȥ����᥽�å�������������褦�ˤʤ�ޤ�����
+  ネストしたメソッド定義が許されるようになりました。
 
-  �᥽�å������Ǥ� alias, undef ����Ĥ���ޤ�����
+  メソッド定義中での alias, undef も許可されました。
 
-  �᥽�å�����γ��Ǥ� super �θƤӽФ��ϥ���ѥ�����Ǥʤ��¹Ի���
-  ���顼�ˤʤ�褦�ˤʤ�ޤ�����
+  メソッド定義の外での super の呼び出しはコンパイル時でなく実行時に
+  エラーになるようになりました。
 
-  �����餯��((<ruby-dev:16969>)) �����꤬�ѹ�����ͳ�ʤΤǤϤʤ����Ȼ�
-  ���ޤ���((<ruby-dev:17882>))
+  おそらく、((<ruby-dev:16969>)) あたりが変更の理由なのではないかと思
+  います。((<ruby-dev:17882>))
 
-: ((<%W()|��ƥ��/%��ˡ>)) [parser]
+: ((<%W()|リテラル/%記法>)) [parser]
 
-  %W(...) �����ƥ�뤬�ɲä���ޤ�����%w() �Ȱۤʤ�Хå�����å���
-  ��ˡ�估Ÿ����ͭ���Ǥ���((<ruby-dev:15988>))
+  %W(...) 配列リテラルが追加されました。%w() と異なりバックスラッシュ
+  記法や式展開が有効です。((<ruby-dev:15988>))
 
-: ((<��ƥ��/��Ÿ��>)) [parser]
+: ((<リテラル/式展開>)) [parser]
 
-  #{ ... } �μ�Ÿ�����ʸ����Υǥ�ߥ���ޤ��Ǥ�դ� ruby �ץ������
-  �򤽤Τޤ޽񤱤�褦�ˤʤ�ޤ�����������Ʊ���Ǥ����������롼�뤬��
-  �ΤˤʤäƤ���褦�Ǥ����Ĥޤꡢ��Ÿ������⳰��Ʊ����§�ǡ�ruby ��
-  �������ϥѡ�������ޤ���((<ruby-dev:17422>))
+  #{ ... } の式展開中に文字列のデリミタを含めて任意の ruby プログラム
+  をそのまま書けるようになりました。以前も同じでしたが、よりルールが明
+  確になっているようです。つまり、式展開の中も外も同じ規則で、ruby プ
+  ログラムはパースされます。((<ruby-dev:17422>))
 
 : [parser] [compat]
 
-  ʸ�����ƥ����ι�Ƭ�� __END__ �ϡ�������ץȤν���Ȥߤʤ��ʤ���
-  ��ޤ�����((<ruby-dev:17513>))
+  文字列リテラル中の行頭の __END__ は、スクリプトの終りとみなさなくな
+  りました。((<ruby-dev:17513>))
 
         # p "
         #__END__
         #"
         p eval(%Q(p "\n__END__\n"))
 
-: ((<?<whitespace>|��ƥ��/���ͥ�ƥ��>)) [parser] [change]
+: ((<?<whitespace>|リテラル/数値リテラル>)) [parser] [change]
 
-  ?���ڡ�����?���ԡ�?TAB ���ϥ�ƥ��Ȥ���̵���ˤʤ�ޤ�����ɬ�פʤ� 
-  ?\s, ?\n, ?\t ������Ѥ��Ƥ���������(�ʲ���������Ԥ����֥륯������
-  ����Ѥ��Ƥ��뤳�Ȥ�����) ((<ruby-bugs-ja:PR#261>)), ((<ruby-dev:17446>))
+  ?スペース、?改行、?TAB 等はリテラルとして無効になりました。必要なら 
+  ?\s, ?\n, ?\t 等を使用してください。(以下の例は前者がダブルクォート
+  を使用していることに注意) ((<ruby-bugs-ja:PR#261>)), ((<ruby-dev:17446>))
 
 : [parser] [change]
 : ((<String#to_f|String/to_f>)) [change]
-: ((<�Ȥ߹��ߴؿ�/Float>))() [change]
+: ((<組み込み関数/Float>))() [change]
 
-  ʸ�������ư�����������Ѵ��������������ǡ��饤�֥��ؿ� strtod(3) 
-  �˰�¸���ʤ��ʤ�ޤ��������������饤�֥����ȼ���ĥ�ˤ��ư���
-  ��뤳�ȤϤʤ��ʤ�ޤ�����
+  文字列を浮動小数点数に変換する内部処理で、ライブラリ関数 strtod(3) 
+  に依存しなくなりました。ロケールやライブラリの独自拡張により動作が変
+  わることはなくなりました。
 
-: �᥽�åɸƤӽФ�      [parser] [change]
+: メソッド呼び出し      [parser] [change]
 
-  �᥽�å�̾�ȳ�̤δ֤˶��򤬤���Ȥ��γ�̤ϰ��������̤ǤϤʤ�
-  ���γ�̤Ȳ�᤹��褦�ˤʤ�ޤ�����
-  (��������p (1, 2) �Ȥ���ȶ��򤬤��äƤ���������̤ˤʤ롣
-  �Ĥޤꡢ(�����餯)�տ��̤��ư���)
+  メソッド名と括弧の間に空白があるとその括弧は引数を括る括弧ではなく
+  式の括弧と解釈するようになりました。
+  (ただし、p (1, 2) とすると空白があっても引数を括る括弧になる。
+  つまり、(おそらく)意図通りに動作する)
 
     p (1+2)*3
 
-: ��Ｐ�������ɽ����ƥ��    [parser] [change]
+: 条件式中の正規表現リテラル    [parser] [change]
 
-  ��Ｐ�������ɽ����ƥ��Ϸٹ𤬽Ф�褦�ˤʤ�ޤ�����
+  条件式中の正規表現リテラルは警告が出るようになりました。
 
-  $_ �Ȥ�����ɽ���ޥå��ϡ�����Ū�� ~/re/ (ñ��� ((<Regexp/~>)) �᥽��
-  ��)�ʤɤȤ��뤳�Ȥ��侩����ޤ���
+  $_ との正規表現マッチは、明示的に ~/re/ (単項の ((<Regexp/~>)) メソッ
+  ド)などとすることが推奨されます。
 
-== ����ɽ��
+== 正規表現
 
-: ((<����ɽ��>)) [regexp]
+: ((<正規表現>)) [regexp]
 
-  ����ɽ�� $ �����Ԥ��������Ǥʤ������ʸ����������ˤ�ޥå�����褦
-  �ˤʤ�ޤ���������ϡ�perl �� python ��Ʊ����ư�Ǥ���((<ruby-dev:20104>))
+  正規表現 $ が改行の前だけでなく、常に文字列の末尾にもマッチするよう
+  になりました。これは、perl や python と同じ挙動です。((<ruby-dev:20104>))
 
-: ((<����ɽ��>)) [regexp]
+: ((<正規表現>)) [regexp]
 
-  ((<ruby 1.8 feature/2003-05-01>)) �� $ ���ѹ���Ʊ�ͤˡ�����ɽ�� \Z
-  �����Ԥ��������Ǥʤ������ʸ����������ˤ�ޥå�����褦�ˤʤ�ޤ�����
-  ����ϡ�perl �� python ��Ʊ����ư�Ǥ���((<ruby-dev:20187>))
+  ((<ruby 1.8 feature/2003-05-01>)) の $ の変更と同様に、正規表現 \Z
+  が改行の前だけでなく、常に文字列の末尾にもマッチするようになりました。
+  これは、perl や python と同じ挙動です。((<ruby-dev:20187>))
 
-: ((<����ɽ��>)) [regexp]
+: ((<正規表現>)) [regexp]
 
-  ʸ�����饹 [] ��� [, ], - �򥨥������פʤ��ǻ��Ѥ���� warning ����
-  ��褦�ˤʤ�ޤ�����((<ruby-dev:19868>))
+  文字クラス [] 内の [, ], - をエスケープなしで使用すると warning が出
+  るようになりました。((<ruby-dev:19868>))
 
 == Marshal
 
@@ -1827,26 +1827,26 @@
 
 4.7->4.8
 : ((<Marshal>))         [marshal] [change]
-  ̵̾�⥸�塼��� include �������֥������Ȥ�����פǤ��ʤ��ʤ�ޤ�����
+  無名モジュールを include したオブジェクトがダンプできなくなりました。
   ((<ruby-dev:18186>))
 
-  ̾���դ��⥸�塼��� include �������֥������Ȥϥ���פǤ���include 
-  �����⥸�塼��ξ�������ץե����ޥåȤ��ݻ�����褦�ˤʤ�ޤ�����
+  名前付きモジュールを include したオブジェクトはダンプでき、include 
+  したモジュールの情報をダンプフォーマットに保持するようになりました。
 
-  ̾���դ��⥸�塼��� include �������֥������Ȥϥ���פǤ���include
-  �����⥸�塼��ξ�������ץե����ޥåȤ��ݻ�����褦�ˤʤ�ޤ�����
+  名前付きモジュールを include したオブジェクトはダンプでき、include
+  したモジュールの情報をダンプフォーマットに保持するようになりました。
 
 4.6->4.7
 : ((<Marshal>))         [marshal] [change]
 
-  Float �Υ���פ���sprintf(3) �˰�¸���ʤ��ʤ�ޤ������ե����ޥ�
-  �ȥС������ 4.6 ���� 4.7 �˾夬�äƤ��ޤ���
-  (���θ塢strtod(3) ���Ȥ߹��ߤˤ�ꡢ�ɤ߹��߻��⥷���ƥ�� strtod(3)
-  �˰�¸���ʤ��ʤäƤ��ޤ�)
+  Float のダンプが、sprintf(3) に依存しなくなりました。フォーマッ
+  トバージョンが 4.6 から 4.7 に上がっています。
+  (この後、strtod(3) の組み込みにより、読み込み時もシステムの strtod(3)
+  に依存しなくなっています)
 
 : ((<Marshal>))       [bug]
 
-  ��¤�Υ��饹�Υ��֥��饹�����פ�����Τ������ɤǤ��ޤ���Ǥ�����
+  構造体クラスのサブクラスをダンプしたものがロードできませんでした。
   ((<ruby-bugs-ja:PR#104>))
 
         S = Struct.new("S", :a)
@@ -1862,261 +1862,261 @@
         => ruby 1.7.1 (2001-10-19) [i586-linux]
            #<C a=nil>
 
-== Windows �б�
+== Windows 対応
 
 : ((<File/File.link>)) [new]
 
-  Win32(Win2k�ʹߤΤ�)��NTFS��ǤΥϡ��ɥ�󥯤κ���(CreateHardLink)��
-  �б����ޤ�����
+  Win32(Win2k以降のみ)でNTFS上でのハードリンクの作成(CreateHardLink)に
+  対応しました。
 
 : ((<File/File.utime>)) [new]
 
-  Win32(NT�ϤΤ�)�ǥǥ��쥯�ȥ���Ф���utime�������褦�ˤʤ�ޤ�����
+  Win32(NT系のみ)でディレクトリに対するutimeが出来るようになりました。
 
-* DOSISH�ʥץ�åȥե�����ǤΥɥ饤�֥쥿���б�����������ޤ�����
+* DOSISHなプラットフォームでのドライブレター対応が強化されました。
 * ((<Process/Process.pid>)) (win)
 
-  ((<mswin32>))�� ruby �� ((<MinGW>))�� ruby �ǳ�ĥ�饤�֥��ΥХ���
-  ��ߴ����ݤĤ褦�ˤʤ�ޤ�����Config::CONFIG['RUBY_SO_NAME'] ��
-  msvcrt-ruby((|XX|)) ��(DLL ̾�ˤʤ�ޤ�)��Config::CONFIG['sitearch'] (��ĥ
-  �饤�֥����֤����Υѥ�����)�� "i386-msvcrt" ���ѹ�����ޤ�����
+  ((<mswin32>))版 ruby と ((<MinGW>))版 ruby で拡張ライブラリのバイナ
+  リ互換を保つようになりました。Config::CONFIG['RUBY_SO_NAME'] が
+  msvcrt-ruby((|XX|)) に(DLL 名になります)、Config::CONFIG['sitearch'] (拡張
+  ライブラリの置き場所のパス要素)が "i386-msvcrt" に変更されました。
   ((<ruby-dev:17144>)), ((<ruby-dev:18047>))
 
-  Win32�Ѥ��������ѥ��ץ��ݡ��ȤΥѥå��������ޤ줿�Τ������Ǥ�
+  Win32用の双方向パイプサポートのパッチが取り込まれたのだそうです
   ((<ruby-win32:185>))
 
 : ((<Process/Process.kill>)) [compat]
 
-  ChangeLog �ˤ��� win32 �Ǥ⡢�����ʥ� 0 �����ݡ��Ȥ��줿�����Ǥ���
-  ¿���� Unix �ǡ������ʥ� 0 �������ϡ��ץ�������¸�ߥ����å��˻��Ѥ�
-  ���ޤ��Τǡ������Ʊ��ư��򤹤�Τ��Ȼפ��ޤ���
+  ChangeLog によると win32 でも、シグナル 0 がサポートされたそうです。
+  多くの Unix で、シグナル 0 の送信は、プロセスの存在チェックに使用で
+  きますので、それと同じ動作をするのだと思います。
 
 : ruby interpreter (win32, MinGW) [ruby] [change]
 
-  ((<mswin32>))�� ruby �� ((<MinGW>))�� ruby �ǳ�ĥ�饤�֥��ΥХ���
-  ��ߴ����ݤĤ褦�ˤʤ�ޤ�����Config::CONFIG['RUBY_SO_NAME'] �� 
-  msvcrt-ruby((|XX|)) ��(DLL ̾�ˤʤ�ޤ�)��Config::CONFIG['sitearch'] (��ĥ
-  �饤�֥����֤����Υѥ�����)�� "i386-msvcrt" ���ѹ�����ޤ�����
+  ((<mswin32>))版 ruby と ((<MinGW>))版 ruby で拡張ライブラリのバイナ
+  リ互換を保つようになりました。Config::CONFIG['RUBY_SO_NAME'] が 
+  msvcrt-ruby((|XX|)) に(DLL 名になります)、Config::CONFIG['sitearch'] (拡張
+  ライブラリの置き場所のパス要素)が "i386-msvcrt" に変更されました。
   ((<ruby-dev:17144>)), ((<ruby-dev:18047>))
 
-  sitearch �ϡ�����η�ǿ����ɲä���ޤ���(¾�δĶ��Ǥ� 
-  CONFIG['arch'] ��Ʊ��)
+  sitearch は、今回の件で新規追加されました(他の環境では 
+  CONFIG['arch'] と同じ)
 
-  ((<Win32�ͥ��ƥ�����>)) �ε����⻲��
+  ((<Win32ネイティブ版>)) の脚注も参照
 
 : ENV["PATH"]    [ruby], [bug?]
 
-  Windows �ʤɤΥץ�åȥե�����ǴĶ��ѿ�̾ PATH (�������ƥ�������
-  �����ʤɤ�Ƚ��)����ʸ���Ⱦ�ʸ������̤��ʤ��褦�ˤʤ�ޤ�����
+  Windows などのプラットフォームで環境変数名 PATH (セキュリティチェッ
+  ク時などに判断)の大文字と小文字を区別しないようになりました。
   ((<ruby-dev:20374>))
 
-: �������ѥ��� (win) [compat]
+: 双方向パイプ (win) [compat]
 
-  Win32�Ѥ��������ѥ��ץ��ݡ��ȤΥѥå��������ޤ줿�Τ������Ǥ� 
+  Win32用の双方向パイプサポートのパッチが取り込まれたのだそうです 
   ((<ruby-win32:185>))
 
 : ((<Process/Process.kill>))    [compat]
 
-  ((<mswin32>)), ((<mingw32>)) �Ǥ⡢Process.kill(9, pid) �ǥץ�������
-  ������λ(TerminateProcess) �Ǥ��ޤ���(Process.kill("KILL", pid) �Ȥ�
-  �Ǥ��ʤ��褦�Ǥ�������2002-08-28 ���θ� "KILL" �ǻ���Ǥ���褦�ˤʤ�
-  ���褦�Ǥ�)
+  ((<mswin32>)), ((<mingw32>)) でも、Process.kill(9, pid) でプロセスを
+  強制終了(TerminateProcess) できます。(Process.kill("KILL", pid) とは
+  できないようです・・・2002-08-28 その後 "KILL" で指定できるようになっ
+  たようです)
 
 : win32: map OS error to errno. [change]
 
 : cygwin
 
-  cygwin�ǤϾ�˥Х��ʥ�⡼�ɤˤʤ�ޤ���(((<ruby-dev:19583>)))
+  cygwinでは常にバイナリモードになりました(((<ruby-dev:19583>)))
 
 : ((<File/File.dirname>)) [CHANGE]
 : ((<File/File.expand_path>)) [CHANGE]
 : ((<File/File.join>)) [CHANGE]
 
-  DOSISH�ʥץ�åȥե�����ǤΥɥ饤�֥쥿���б�����������ޤ�����
-  ((<DOSISH �б�>))�򻲾ȡ�
+  DOSISHなプラットフォームでのドライブレター対応が強化されました。
+  ((<DOSISH 対応>))を参照。
 
 : ((<Process/Process.pid>)) (win) [change]
 
-  mswin32 �Ǥ� mingw32 �Ǥǡ�ruby �����ϥץ�����ID���������ͤ��Ѵ�����
-  �����褦�ˤʤ�ޤ�����
-  NT�Ϥ�OS�ǤϽ���Ȱ㤤�Ϥ���ޤ��󤬡�Win9x�Ϥ�OS�Ǥϡ�OS���ݻ�����
-  �ץ�����ID�����ͤʤΤǡ�����Ѵ����ư����褦�ˤʤ�ޤ���((<ruby-dev:18263>))
+  mswin32 版と mingw32 版で、ruby 内部はプロセスIDを常に正の値に変換して
+  扱うようになりました。
+  NT系のOSでは従来と違いはありませんが、Win9x系のOSでは、OSの保持する
+  プロセスIDが負値なので、符号変換して扱うようになります。((<ruby-dev:18263>))
 
-== �ѻߤ��줿(�����ͽ���)��ǽ
+== 廃止された(される予定の)機能
 
-: ((<�Ȥ߹����ѿ�/$defout>)) [obsolete]
-: ((<�Ȥ߹����ѿ�/$deferr>)) [obsolete]
+: ((<組み込み変数/$defout>)) [obsolete]
+: ((<組み込み変数/$deferr>)) [obsolete]
 
-  $stdout, $stderr ����Ѥ��Ƥ���������
+  $stdout, $stderr を使用してください。
 
 : ((<String#=~|String/=~>)) [obsolete]
 : ((<String#~|String/~>))  [obsolete]
-  string =~ string ���Ф��Ʒٹ𤬽Ф�褦�ˤʤ�ޤ���������Ū�� string
-  =~ regexp ���뤤�� regexp =~ string ��Ȥ����Ȥ��侩����ޤ���
-  (1.8.1 �ʹ߻��ѤǤ��ʤ��ʤ뤫�⤷��ޤ���) ((<ruby-list:37662>))
+  string =~ string に対して警告が出るようになりました。明示的に string
+  =~ regexp あるいは regexp =~ string を使うことが推奨されます。
+  (1.8.1 以降使用できなくなるかもしれません) ((<ruby-list:37662>))
 
-  String#=~ ���ѹ���Ʊ�ͤ�String#~ �Ƿٹ𤬽Ф�褦�ˤʤ�ޤ�����
-  (1.8.1 �ʹ߻��ѤǤ��ʤ��ʤ뤫�⤷��ޤ���)
+  String#=~ の変更と同様にString#~ で警告が出るようになりました。
+  (1.8.1 以降使用できなくなるかもしれません)
 
 : ((<Object#id|Object/id>))
 : ((<Object#type|Object/type>)) [obsolete]
 
-  �Ȥ��ȷٹ𤬽Ф�褦�ˤʤ�ޤ���������� Object#object_id,
-  Object#class ����Ѥ��Ƥ���������
+  使うと警告が出るようになりました。代わりに Object#object_id,
+  Object#class を使用してください。
 
 : ((<Object#to_a|Object/to_a>)) [obsolete]
 
-  �ٹ��å��������Ф�褦�ˤʤ�ޤ�����(((<obsolete>)) �ˤʤ�Τ������Ǥ�)
+  警告メッセージが出るようになりました。(((<obsolete>)) になるのだそうです)
 
 : ((<Range#size|Range/size>))     [obsolete]
 : ((<Range#length|Range/length>)) [obsolete]
 
-  ���Υ᥽�åɤϤʤ��ʤ�ޤ�����
+  このメソッドはなくなりました。
   ((<ruby-talk:64479>)), ((<ruby-talk:72133>))
 
-  Range �����ǿ�������ˤ�
+  Range の要素数を得るには
 
         p(("a".."z").to_a.size)
 
-  �ʤɤȤ���ɬ�פ�����ޤ���
+  などとする必要があります。
 
 : ((<Array/indexes>))
 : ((<Array/indicies>))
 
-  (((<Array>)), ((<Hash>)), ((<ENV>))) �Υ᥽�åɡ�indexes, indicies 
-  �� values_at �Ȥ���̾�����Ѥ��ޤ�����
+  (((<Array>)), ((<Hash>)), ((<ENV>))) のメソッド、indexes, indicies 
+  は values_at という名前に変わりました。
 
 : ((<Array#filter|Array/filter>))
 
-  �ʤ��ʤ�ޤ�����
+  なくなりました。
 
 : Time.times
 
-  ((<Process/Process.times>)) �˰�ư���ޤ�����
+  ((<Process/Process.times>)) に移動しました。
 
 : NotImplementError             [obsolete]
 
-  ��ΤϺ������ޤ�����((<NotImplementedError>))��ȤäƤ�������
+  旧称は削除されました。((<NotImplementedError>))を使ってください
 
 : ((<Proc#yield|Proc/yield>))
 
-  �ʤ��ʤ�ޤ�����((<ruby-dev:20180>))
+  なくなりました。((<ruby-dev:20180>))
 
-== �饤�֥��
+== ライブラリ
 
 : ((<tmpdir>)) [new]
 
-  �ƥ�ݥ��ǥ��쥯�ȥ��������뤿��Υ饤�֥�꤬�ɲä���ޤ�����
-  Windows �ʤɤ����Ѥ����饤�֥��ϡ�/tmp ��ϡ��ɥ����ɤ�����(��
-  �� �Ķ��ѿ� TEMP �ʤɤ򻲾Ȥ�����)���Υ饤�֥�����Ѥ���٤��Ǥ���
-  (tempfile �ʤɤ� tmpdir ����Ѥ���褦�ˤʤ�ޤ�����
-  ((*tmp*))dir �� ((*temp*))file �Ȥ����Τ��ޤ��ʤ�Ȥ⡦����)
+  テンポラリディレクトリを取得するためのライブラリが追加されました。
+  Windows などで利用されるライブラリは、/tmp をハードコードせずに(ま
+  た 環境変数 TEMP などを参照せずに)このライブラリを使用するべきです。
+  (tempfile などが tmpdir を使用するようになりました。
+  ((*tmp*))dir と ((*temp*))file というのがまたなんとも・・・)
 
 
 : ((<Timeout/Timeout.timeout>)) [lib] [new]
 : ((<Timeout::Error|Timeout/Error>)) [lib] [new]
 
-  timeout �� Timeout �⥸�塼�뤬�������ޤ�����((<RCR#121>))
+  timeout に Timeout モジュールが定義されました。((<RCR#121>))
 
-  �ؿ� ((<timeout/timeout>)) �ϡ��⥸�塼��ؿ� Timeout.timeout ����̾�ˡ�
-  �㳰 ((<TimeoutError>)) �� Timout::Error ����̾�ˤʤ�ޤ�����
+  関数 ((<timeout/timeout>)) は、モジュール関数 Timeout.timeout の別名に、
+  例外 ((<TimeoutError>)) は Timout::Error の別名になりました。
 
 : ((<erb>))           [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<"io/wait">))     [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<mkmf>)) [lib] [new]
 
-  ������Ƚ��᥽�å� have_type(), check_sizeof() ���ɲä���ޤ�����
+  新しい判定メソッド have_type(), check_sizeof() が追加されました。
 
 : ((<pathname>))        [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<resolv>))       [lib] [compat]
 
-  Win32 ���б����ޤ�����
+  Win32 に対応しました。
 
 : ((<webrick>))      [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<openssl>))      [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<win32ole|WIN32OLE>)) [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<un>)) [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<csv>)) [lib], [new]
 
-  �ɲá�
+  追加。
 
 : ((<tk|tk>)) [lib], [change]
 
-  Ruby/Tk ��¿���ν���������ޤ�����((<ruby-list:37798>))
+  Ruby/Tk に多数の修正が入りました。((<ruby-list:37798>))
 
 : ((<drb>)) [lib] [new]
 
-  dRuby �ɲá�((<ruby-dev:20363>))
+  dRuby 追加。((<ruby-dev:20363>))
 
 : ((<rexml>)) [lib],[new]
 
-  �ɲ�
+  追加
 
 : ((<yaml|YAML>)) [new]
 
-  �ɲá�YAML �ϡ�YAML Ain't Markup Language �������Ǥ���
+  追加。YAML は、YAML Ain't Markup Language だそうです。
   ((<URL:http://yaml4r.sourceforge.net/>))
   ((<URL:http://yaml.org/>))
 
 : ((<zlib>)) [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<bigdecimal>)) [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<"test/unit"|Test::Unit>)) [new]
 
-  Test::Unit �ɲ�
+  Test::Unit 追加
 
 : ((<"win32/registry">)) [new]
-  Win32�ǥ쥸���ȥ�˥����������뤿��Υ饤�֥�꤬�ɲä���ޤ�����
+  Win32でレジストリにアクセスするためのライブラリが追加されました。
 
 : ((<profiler>)) [lib] [new]
 
-  �ɲá�((<profile>)) �μ��ΤȤ���ʬΥ����ޤ�����
+  追加。((<profile>)) の実体として分離されました。
 
 : ((<open-uri>)) [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<set>)) [lib] [new]
 
-  �ɲ�
+  追加
 
 : ((<"net/ftp">)) [new]
 
-  �᥽�å� set_socket �ɲ�
+  メソッド set_socket 追加
 
 : ((<dl>)) [lib] [new]
 
-  �ɲ�
+  追加
 
-: ź�ե饤�֥�� [lib] [new]
+: 添付ライブラリ [lib] [new]
 
-  �ʲ��Υ饤�֥�꤬�������ɲä���ޤ�����
+  以下のライブラリが新たに追加されました。
   ((<iconv>)), ((<tsort>)), ((<StringIO>)), ((<strscan>)),
   ((<fileutils>)), racc/*
 
@@ -2132,87 +2132,87 @@
 : Complex#to_f          [lib] [obsolete]
 : Complex#to_r          [lib] [obsolete]
 
-  Complex#to_i, #to_f, #to_r �Ϥʤ��ʤ�ޤ�����
+  Complex#to_i, #to_f, #to_r はなくなりました。
   ((<ruby-bugs-ja:PR#102>)), ((<rubyist:0879>))
 
 : ((<gdbm>))    [lib] [change]
 : ((<dbm>))     [lib] [change]
 : ((<sdbm>))    [lib] [change]
 
-  ((*�ɥ������̤ȿ��*))
+  ((*ドキュメント未反映*))
   ((<ruby-dev:16126>))
 
 : ((<mkmf>)), extmk [lib] [compat]
 
-  extmk �� mkmf ��ޡ��������Ȥ����Ϥ���ޤ�����extmk �� 
-  mkmf �����Ѥ���褦�ˤʤ�ޤ�����mkmf �⤳���ȼ���ѹ����Ԥ��
-  �Ƥ��ޤ���((<ruby-dev:18109>))
+  extmk と mkmf をマージする作業が開始されました。extmk は 
+  mkmf を利用するようになりました。mkmf もこれに伴い変更が行われ
+  ています。((<ruby-dev:18109>))
 
 : ((<"net/ftp">)) [compat]
 
-  getbinaryfile() ���������(��������ե�����̾)����ά��ǽ�ˤʤ�ޤ�����
-  �᥽�å� get(), put(), binary(), binary = �ɲ�
+  getbinaryfile() の第二引数(ローカルファイル名)が省略可能になりました。
+  メソッド get(), put(), binary(), binary = 追加
 
 : ((<"net/http">)) [compat]
-  Net::HTTP �Υ��饹�᥽�åɤ� ((<URI>)) ���֥������Ȥ��Ȥ���褦�ˤʤä���
+  Net::HTTP のクラスメソッドで ((<URI>)) オブジェクトが使えるようになった。
 
       Net::HTTP.get_print(URI.parse('http://www.ruby-lang.org/ja/'))
 
-  ���󥹥��󥹥᥽�åɤǤϻȤ��ʤ��Τ����ա�
+  インスタンスメソッドでは使えないので注意。
 
 : ((<readline>))                [change]
 
-  Readline.readline �¹���� Ctrl-C �ˤ�����Ǥ�����Ǥ⡢ü�����֤�
-  ��������褦�ˤ��ޤ�����((<ruby-dev:14574>))
+  Readline.readline 実行中に Ctrl-C により中断した後でも、端末状態を
+  復帰するようにしました。((<ruby-dev:14574>))
 
-== ��ĥ�饤�֥��API
+== 拡張ライブラリAPI
 : rb_define_alloc_func() [api] [new]
 : rb_undef_alloc_func() [api] [new]
 
-  �ɲá�((<Class/allocate>)) �᥽�åɤ�����˻��Ѥ��ޤ���
+  追加。((<Class/allocate>)) メソッドの定義に使用します。
   ((<ruby-dev:19116>))
 
 : rb_enable_super() [api]
 : rb_disable_super() [api]
 
-  ChangeLog �ˤ��ȡ������δؿ���ɬ�פʤ��ʤä��褦�Ǥ���
+  ChangeLog によると、これらの関数は必要なくなったようです。
 
-  (rb_enable_super() ��Ƥ֤� warning ���Фޤ�)�������ϡ���ĥ�饤�֥�
-  ��Υ�٥�ǡ�rb_call_super() (Ruby �� super �ˤ�����) ��Ƥ֥᥽��
-  �ɤ� rb_enable_super() ���Ƥ����ʤ���Фʤ�ޤ���Ǥ�����
+  (rb_enable_super() を呼ぶと warning が出ます)。以前は、拡張ライブラ
+  リのレベルで、rb_call_super() (Ruby の super にあたる) を呼ぶメソッ
+  ドは rb_enable_super() しておかなければなりませんでした。
 
 : STR2CSTR() [api] [new]
 
-    ��ĥ�饤�֥��� API �Ǥ��� STR2CSTR() �ϡ�Ϳ����줿���֥�������
-    ��ʸ����Ǥʤ����� to_str �᥽�åɤ���ľ�硢������ to_str ��Ƥ�
-    �Ф��ư��ۤη��Ѵ���Ԥ��ޤ������ξ�硢�Ѵ���̤��ݻ�����ʸ�����
-    ���󥿤��֤��ޤ���������API�Ǥϰ��ۤη��Ѵ���̤Υ��֥������Ȥ���
-    ������⻲�Ȥ���ʤ����ᡢ���Ѵ���̤� GC ������ǽ��������ޤ���
+    拡張ライブラリの API である STR2CSTR() は、与えられたオブジェクト
+    が文字列でなくかつ to_str メソッドを持つ場合、内部で to_str を呼び
+    出して暗黙の型変換を行います。この場合、変換結果が保持する文字列ポ
+    インタを返しますが、このAPIでは暗黙の型変換結果のオブジェクトがど
+    こからも参照されないため、型変換結果が GC される可能性があります。
     ((<ruby-dev:12731>))
 
-    version 1.7 �ʹߤǤ������ StringValuePtr() ����Ѥ��ޤ���������
-    �ϡ������λ����褬���ۤη��Ѵ��η�̤��֤�����뤿���Ѵ���̤� GC 
-    ����ޤ���(version 1.7 �Ǥϡ�STR2CSTR() �ϡ�obsolete �Ǥ�)
+    version 1.7 以降では代わりに StringValuePtr() を使用します。こちら
+    は、引数の参照先が暗黙の型変換の結果に置き換わるため変換結果が GC 
+    されません。(version 1.7 では、STR2CSTR() は、obsolete です)
 
-    �⤦��Ŀ����� StringValue() �Ȥ��� API ���Ѱդ���Ƥ��ޤ���������
-    �ϡ������� to_str �ˤ����ۤη��Ѵ�����Ԥ�����˻��Ѥ��ޤ���
-    ������ʸ����ʤ鲿�⤷�ޤ���
-    ʸ�����������᥽�åɤκǽ�������ɤ�Ǥ����������Ǥ���
+    もう一つ新しく StringValue() という API が用意されています。こちら
+    は、引数が to_str による暗黙の型変換を期待する場合に使用します。
+    引数が文字列なら何もしません。
+    文字列を受け取るメソッドの最初の方で読んでおくと便利です。
 
-    �ʤ������ΤȤ��� str2cstr() (C�ݥ��󥿤�ʸ����Ĺ���֤�)�������
-    �ʤ������ API ���Ѱդ���Ƥ��ޤ���(((<ruby-dev:15644>))����Ƥ�
-    ����ޤ���)
+    なお、今のところ str2cstr() (Cポインタと文字列長を返す)の代わりに
+    なる安全な API は用意されていません。(((<ruby-dev:15644>))で提案は
+    ありました)
 
-== �Х�����
+== バグ修正
 
-: ((<�Ȥ߹��ߴؿ�/load>)) [bug]
+: ((<組み込み関数/load>)) [bug]
 
-  ((<�Ȥ߹��ߴؿ�/load>)) ������åɥ����դˤʤ�ޤ�����((<ruby-dev:20490>))
+  ((<組み込み関数/load>)) がスレッドセーフになりました。((<ruby-dev:20490>))
 
-: ((<�Ȥ߹��ߴؿ�/syscall>)) [bug]
+: ((<組み込み関数/syscall>)) [bug]
 
-  ��������ʹߤ�ʸ���� Fixnum ���������դ��ʤ�����ˡ�long ���ϰϤ�
-  ���ͤ���ꤹ�뤳�Ȥ��Ǥ��ޤ���Ǥ�����((<ruby-talk:72257>))
+  第二引数以降に文字列か Fixnum しか受け付けないために、long の範囲の
+  数値を指定することができませんでした。((<ruby-talk:72257>))
 
         syscall(1, 2**30)
 
@@ -2221,19 +2221,19 @@
            ruby 1.6.8 (2002-12-24) [i586-linux]
 
 
-: ((<�Ȥ߹��ߴؿ�/trap>))       [bug]
-: ((<�Ȥ߹��ߴؿ�/trace_var>))  [bug]
+: ((<組み込み関数/trap>))       [bug]
+: ((<組み込み関数/trace_var>))  [bug]
 
-  ��������˱������줿ʸ������Ϥ����㳰 ((<SecurityError>)) ��
-  ������褦�ˤʤ�ޤ�����1.6 �Ǥϡ��������줿ʸ����򥻡��ե�
-  �٥�4��ɾ������褦�ˤʤäƤ��ޤ�����
+  第二引数に汚染された文字列を渡すと例外 ((<SecurityError>)) が
+  起こるようになりました。1.6 では、汚染された文字列をセーフレ
+  ベル4で評価するようになっていました。
   ((<ruby-list:32215>))
 
 : ((<Array#collect|Array/collect>))   [bug]
 : ((<Array#map|Array/map>))       [bug]
 
-  Array#collect ���֥��å���ȼ��ʤ����� self.dup ���֤��Ƥ��ޤ�����
-  ���Τ��ᡢArray �ʳ����֤����Ȥ�����ޤ���((<ruby-list:30480>))��
+  Array#collect がブロックを伴わない場合に self.dup を返していました。
+  そのため、Array 以外を返すことがありました((<ruby-list:30480>))。
 
     Foo = Class.new Array
 
@@ -2251,7 +2251,7 @@
 
 : ((<Bignum>)) [bug]
 
-  -2147483648 ��꾮�������ͤ�2�ʡ�8�ʡ�16�ʤ�ɽ�������������ʤäƤ��ޤ���
+  -2147483648 より小さい数値の2進、8進、16進の表記がおかしくなっていました
   ((<ruby-list:34828>))
 
     p "%b" % -2147483648
@@ -2270,39 +2270,39 @@
 
 : ((<File/File.open>))       [bug]
 
-  ��2���������(File::RDONLY|File::CREAT�Ȥ�)�ǻ��ꤷ�����˸¤ꡢ��3
-  �������Ѥ��Ƥ��ޤ���������3������Ϳ������о��ͭ���ˤ���褦��
-  ���ޤ�����
+  第2引数を数値(File::RDONLY|File::CREATとか)で指定した場合に限り、第3
+  引数を用いていましたが、第3引数が与えられれば常に有効にするように
+  しました。
   ((<ruby-bugs-ja:PR#54>))
 
 : ((<IO>)) (win32) [bug]
 
-  mswin32��mingw32�ǡ������⡼��(w+,r+)�ǥ����ץ󤵤줿�ե�������Ф���
-  �ɤ߽񤭤��ڤ��ؤ������ޤ����äƤ��ʤ��ä����꤬��������ޤ�����
-  bccwin32�ˤ�Ʊ�ͤ����꤬����ޤ������������̤�����Ǥ���
+  mswin32・mingw32で、更新モード(w+,r+)でオープンされたファイルに対する
+  読み書きの切り替えがうまくいっていなかった問題が修正されました。
+  bccwin32にも同様の問題がありますが、こちらは未修正です。
   ((<ruby-dev:19299>))
 
 : ((<IO#putc|IO/putc>)) [bug]
 
-  ���ϥ᥽�åɤΤ��� putc ������ write �᥽�åɤ���Ѥ��Ƥ��ޤ���Ǥ�����
+  出力メソッドのうち putc だけが write メソッドを使用していませんでした。
   ((<ruby-dev:18038>))
 
 : IO#read, gets ..., etc. [bug]
 
-  File::NONBLOCK ����ꤷ�� IO ���ɤ߹��ߤ� EWOULDBLOCK ��ȯ������ȡ�
-  ����ޤ��ɤ���ǡ����������뤳�Ȥ�����ޤ�����
+  File::NONBLOCK を指定した IO の読み込みで EWOULDBLOCK が発生すると、
+  途中まで読んだデータが失われることがありました。
   ((<ruby-dev:17855>))
 
-  Thread ��Ȥä��ץ������ǡ��ե����뤫��ǡ������ɤ߹���ǥ����åȤ�
-  �񤭽Ф��Ƥ���ȡ��������� Socket#write �� Errno::EINTR �ˤʤäƤ��ޤ�
-  ���Ȥ�����ޤ�����((<ruby-dev:17878>)), ((<ruby-core:00444>))
+  Thread を使ったプログラムで、ファイルからデータを読み込んでソケットに
+  書き出していると、ごく稀に Socket#write が Errno::EINTR になってしまう
+  ことがありました。((<ruby-dev:17878>)), ((<ruby-core:00444>))
 
 
 : ((<Proc>)) [bug]
 
-  $SAFE ����1 or 2 �ΤȤ�
-  �������줿 Proc �ϡ��֥��å��ˤǤ��ʤ��ʤ�ޤ��� ((<ruby-dev:15682>))
-  ((-���餤 2003-08-06: �Ǥ��Ƥ롦������-))
+  $SAFE が、1 or 2 のとき
+  汚染された Proc は、ブロックにできなくなりました ((<ruby-dev:15682>))
+  ((-あらい 2003-08-06: できてる・・・？-))
 
         $SAFE = 1
         proc = proc {}
@@ -2322,7 +2322,7 @@
 
 : ((<String#split|String/split>))    [bug]
 
-  ��ʸ������Ф��� split ����ʸ��������Ǥ˻���������֤��Ƥ��ޤ�����
+  空文字列に対する split が空文字列を要素に持つ配列を返していました。
 
         p "".split(//)
         p "".split(//, 0)
@@ -2338,8 +2338,8 @@
 
 : ((<String#split|String/split>)) [bug]
 
-  �ʲ�����Τ褦�ˡ��������� ' ' (awk split)����ꤷ�Ƥ��ġ��������
-  ����ꤷ�����˺Ǹ�����Ǥ���Ƭ��;ʬ�ʶ��򤬻ĤäƤ��ޤ�����
+  以下の例のように、第一引数に ' ' (awk split)を指定してかつ、第二引数
+  を指定した場合に最後の要素の先頭に余分な空白が残っていました。
 
         p "a  b  c".split(' ',3)
         => ruby 1.6.8 (2002-12-24) [i586-linux]
@@ -2349,8 +2349,8 @@
 
 : ((<String#split|String/split>)) [bug]
 
-  String#split ����2������ -1 �ΤȤ�����ʸ������Ф��ƶ�ʸ��������Ǥ�
-  ����������֤��Х�����������ޤ�����((<ruby-bugs-ja:PR#426>))
+  String#split で第2引数が -1 のとき、空文字列に対して空文字列を要素と
+  する配列を返すバグが修正されました。((<ruby-bugs-ja:PR#426>))
 
         p "".split(//)
         p "".split(//, -1)
@@ -2364,7 +2364,7 @@
 
 : ((<String#rindex|String/rindex>)) [bug]
 
-  ʸ�������� \0 ��ʸ���������˥ޥå����Ƥ��ޤ�����
+  文字コード \0 が文字列末尾にマッチしていました。
 
         p "abc".rindex(0)
         p "abc".index(0)
@@ -2377,8 +2377,8 @@
 
 : ((<String#upto|String/upto>)) [bug]
 
-  String#upto ���ϰϥ����å����������ä��Х�����������ޤ�����
-  ���ߤϡ�((<String/succ>)) ��ư��Ȱ��פ��ޤ���
+  String#upto の範囲チェックが辞書順だったバグが修正されました。
+  現在は、((<String/succ>)) の動作と一致します。
 
         p(('a'..'aa').to_a)
         => ruby 1.6.8 (2002-12-24) [i586-linux]
@@ -2398,7 +2398,7 @@
            "z"
            "aa"
 
-  �����μ����Ǥϰʲ��� 'aa' ��ޤޤʤ��Ȥ�
+  以前の実装では以下が 'aa' を含まないとか
 
         'a'.upto('b') {|c| p c}
         => ruby 1.6.8 (2002-12-24) [i586-linux]
@@ -2408,7 +2408,7 @@
            "a"
            "b"
 
-  �ʲ��η�̤Ƚ���ط������פ��Ƥ��ޤ���Ǥ�����
+  以下の結果と順序関係が一致していませんでした。
 
         p(('a'..'zz').to_a)
         => ruby 1.6.8 (2002-12-24) [i586-linux]
@@ -2416,14 +2416,14 @@
         => ruby 1.8.0 (2003-07-03) [i586-linux]
            ["a", "b", "c", ..., "x", "y", "z", "aa", ..., "zx", "zy", "zz"]
 
-  �ʤ���<=> �ν���ϼ����Ǥ��뤳�Ȥ����դ���ɬ�פ�����ޤ���
+  なお、<=> の順序は辞書順であることに注意する必要があります。
         p 'a' < 'b'    # => true
         p 'aa' < 'b'   # => true
 
 : ((<Thread#wakeup|Thread/wakeup>)) [bug]
 : ((<Thread#run|Thread/run>)) [bug]
-  ��λ��(aborting)�Υ���åɤ��Ф��Ƽ¹Ԥ���ȥ���åɤ������֤�
-  �Х�����������ޤ�����
+  終了中(aborting)のスレッドに対して実行するとスレッドが生き返る
+  バグが修正されました。
   ((<rubyist:1282>))
 
 : [bug]
@@ -2444,9 +2444,9 @@
         => ruby 1.8.0 (2003-06-16) [i586-linux]
            0
 
-: ((<�������ƥ���ǥ�>)), ((<�Ȥ߹����ѿ�/$SAFE>)) [bug], [change]
+: ((<セキュリティモデル>)), ((<組み込み変数/$SAFE>)) [bug], [change]
 
-  ((<��λ����>))ľ���� $SAFE �� 0 �ˤʤ�褦���ѹ�����ޤ�����
+  ((<終了処理>))直前に $SAFE が 0 になるように変更されました。
   ((<ruby-core:01119>))
 
         $SAFE = 1
@@ -2458,9 +2458,9 @@
 
 : ruby interpreter [bug]
 
-  �ʲ��ΥХ�����������ޤ���((<ruby-list:37677>))
-  (���ƥ졼������� block ��¾�Υ᥽�åɤ� & ���Ϥ������Τ��Υ᥽�å�
-  �ΰ����Υ���ƥ����Ȥΰ�����)
+  以下のバグが修正されました((<ruby-list:37677>))
+  (イテレータの中で block を他のメソッドに & で渡した時のそのメソッド
+  の引数のコンテキストの扱い？)
 
         def foo
           p(block_given?)
@@ -2487,10 +2487,10 @@
            true
            nil
 
-: ((<"||="|�黻�Ҽ�>)) [bug]
+: ((<"||="|演算子式>)) [bug]
 
-  ̤������ѿ����Ф��� ||= ���ͤ����������Ȥ��ˡ��������Х��ѿ��Ƿٹ�
-  ���ФƤ��ޤ������ޤ������饹�ѿ��ϥ��顼�ˤʤäƤ��ޤ�����
+  未定義の変数に対して ||= で値を代入したときに、グローバル変数で警告
+  が出ていました。また、クラス変数はエラーになっていました。
   ((<ruby-dev:18278>))
 
         local ||= 1
@@ -2505,13 +2505,13 @@
 
 : large file [bug]
 
-  large file(�������� 4G bytes �ʾ�Υե�����)�������������褦�ˤʤ��
-  ����(��)
+  large file(サイズが 4G bytes 以上のファイル)を正しく扱うようになりま
+  した(？)
   ((<ruby-talk:35316>)), ((<ruby-talk:35470>))
 
 : alias         [bug]
 
-  �������Х��ѿ��Υ����ꥢ���������Ƥ��ޤ���Ǥ�����
+  グローバル変数のエイリアスが効いていませんでした。
   ((<ruby-dev:14922>))
 
         $g2 = 1
@@ -2527,17 +2527,17 @@
            [1, 1]
            [2, 2]
 
-=== ���ݡ��ȥץ�åȥե�������ɲ�
+=== サポートプラットフォームの追加
 
 : WindowsCE [platform]
 
-  ((<WindowsCE>)) �Υ��ݡ��ȥѥå��������ޤ�ޤ�����
+  ((<WindowsCE>)) のサポートパッチが取り込まれました。
 
-: Borland C++ ���ݡ��� [platform]
+: Borland C++ サポート [platform]
 
-  bcc �� ruby ���󥿥ץ꥿�򥳥�ѥ��뤹�뤿��Υѥå����ޡ�������ޤ�
-  ����
+  bcc で ruby インタプリタをコンパイルするためのパッチがマージされまし
+  た。
 
 : ((<VMS>)) support [platform]
 
-  ((<VMS>)) �Υ��ݡ��ȥѥå��������ޤ�ޤ�����
+  ((<VMS>)) のサポートパッチが取り込まれました。

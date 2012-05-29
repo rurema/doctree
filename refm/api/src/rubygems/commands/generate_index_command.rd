@@ -1,7 +1,7 @@
 require rubygems/command
 require rubygems/indexer
 
-¤¢¤ë Gem ¥µ¡¼¥Ğ¤ËÂĞ¤¹¤ë¥¤¥ó¥Ç¥Ã¥¯¥¹¤òºîÀ®¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+ã‚ã‚‹ Gem ã‚µãƒ¼ãƒã«å¯¾ã™ã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä½œæˆã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem generate_index [options]
     Options:
@@ -39,4 +39,4 @@ require rubygems/indexer
 
 = class Gem::Commands::GenerateIndexCommand < Gem::Command
 
-¤¢¤ë Gem ¥µ¡¼¥Ğ¤ËÂĞ¤¹¤ë¥¤¥ó¥Ç¥Ã¥¯¥¹¤òºîÀ®¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+ã‚ã‚‹ Gem ã‚µãƒ¼ãƒã«å¯¾ã™ã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä½œæˆã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚

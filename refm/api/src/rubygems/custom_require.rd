@@ -1,8 +1,8 @@
 require rubygems
 
-[[m:Kernel#require]] ���������뤿��Υ饤�֥��Ǥ���
+[[m:Kernel#require]] を再定義するためのライブラリです。
 
-Ruby1.9 �����ǻ��Ѥ��Ƥ��ޤ���
+Ruby1.9 以前で使用しています。
 
 = reopen Kernel
 
@@ -10,16 +10,16 @@ Ruby1.9 �����ǻ��Ѥ��Ƥ��ޤ���
 
 --- require(path) -> bool
 
-RubyGems �� require ����ȡ�[[m:Kernel#require]] �� Gem ��
-�׵ᤵ�줿�Ȥ��˥����ɤ���褦���֤������ޤ���
+RubyGems を require すると、[[m:Kernel#require]] が Gem を
+要求されたときにロードするように置き換えます。
 
-��������줿 [[m:Kernel#require]] ��ƤӽФ��Ȱʲ��λ���Ԥ��ޤ���
-Ruby �Υ����ɥѥ���¸�ߤ���饤�֥�����ꤷ�����Ϥ��Τޤޥ����ɤ��ޤ���
-�����ǤϤʤ������󥹥ȡ��뤵�줿 Gem �ե�������椫�鸫�Ĥ��ä����ϡ�
-���� Gem ������ɥѥ�����Ͽ���ޤ���
+再定義された [[m:Kernel#require]] を呼び出すと以下の事を行います。
+Ruby のロードパスに存在するライブラリを指定した場合はそのままロードします。
+そうではなく、インストールされた Gem ファイルの中から見つかった場合は、
+その Gem をロードパスに登録します。
 
-@param path �����ɤ������饤�֥���̾������ꤷ�ޤ���
+@param path ロードしたいライブラリの名前を指定します。
 
-@return ���˥����ɤ���Ƥ���饤�֥�����٥����ɤ��褦�Ȥ������� false ���֤��ޤ���
-        �����Ǥʤ����� true ���֤��ޤ���
+@return 既にロードされているライブラリを再度ロードしようとした場合は false を返します。
+        そうでない場合は true を返します。
 

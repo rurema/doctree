@@ -3,11 +3,11 @@ require rubygems/version
 require rubygems/requirement
 require rubygems/platform
 
-Gem �ѥå������Υ᥿�ǡ����򰷤�����Υ饤�֥��Ǥ���
+Gem パッケージのメタデータを扱うためのライブラリです。
 
-�̾� gemspec �ե������ Rakefile �ǥ᥿�ǡ�����������ޤ���
+通常 gemspec ファイルや Rakefile でメタデータを定義します。
 
-��:
+例:
 
    spec = Gem::Specification.new do |s|
      s.name = 'rfoo'
@@ -20,22 +20,22 @@ Gem �ѥå������Υ᥿�ǡ����򰷤�����Υ饤�֥��Ǥ���
 
 = class Gem::Specification
 
-Gem �ѥå������Υ᥿�ǡ����򰷤�����Υ��饹�Ǥ���
+Gem パッケージのメタデータを扱うためのクラスです。
 
 
 == Instance Methods
 
 --- _dump -> String
 
-���פʥ��󥹥����ѿ��Τߤ� [[m:Marshal.dump]] ���ޤ���
+重要なインスタンス変数のみを [[m:Marshal.dump]] します。
 
 @see [[m:Marshal.dump]]
 
 --- add_bindir(executables) -> Array | nil
 
-�¹ԥ��ޥ�ɤγ�Ǽ�����֤��ޤ���
+実行コマンドの格納場所を返します。
 
-@param executables �¹ԥ��ޥ��̾���Ǽ�����������ꤷ�ޤ���
+@param executables 実行コマンド名を格納した配列を指定します。
 
 --- add_dependency
 #@todo
@@ -44,58 +44,58 @@ Gem �ѥå������Υ᥿�ǡ����򰷤�����Υ��饹�Ǥ���
 --- add_runtime_dependency(gem, *requirements) -> Array
 #@todo
 
-���� Gem ��¹Ԥ��뤿��ΰ�¸�ط����ɲä��ޤ���
+この Gem を実行するための依存関係を追加します。
 
-��:
+例:
   spec.add_runtime_dependency('jabber4r', '> 0.1', '<= 0.5')
 
 
-@param gem ��¸���� Gem ��̾���� [[c:Gem::Dependency]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param gem 依存する Gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
 
-@param requirements �С�������ɬ�ܾ�����ꤷ�ޤ����ǥե���Ȥ� ">= 0" �Ǥ���
+@param requirements バージョンの必須条件を指定します。デフォルトは ">= 0" です。
 
 @see [[c:Gem::Dependency]]
 
 --- assign_defaults -> ()
 
-���Ƥ�°���˥ǥե�����ͤ򥻥åȤ��ޤ���
+全ての属性にデフォルト値をセットします。
 
-����ϥ��������᥽�åɤ���Ѥ��ƹԤ���Τǡ��֥��å����Ѥ������̤ʽ������
-������ȼ¹Ԥ���ޤ������åȤ�����ͤϥǥե�����ͤΥ��ԡ��Ǥ���
+これはアクセサメソッドを使用して行われるので、ブロックを用いた特別な初期化も
+きちんと実行されます。セットされる値はデフォルト値のコピーです。
 
 --- author -> String
 
-�����Ԥ�̾�����֤��ޤ���
+作成者の名前を返します。
 
 --- author=(name)
 
-�����Ԥ�̾���򥻥åȤ��ޤ���
+作成者の名前をセットします。
 
 --- authors -> Array
 
-�����Ԥ�̾����������֤��ޤ���
+作成者の名前の配列を返します。
 
 --- authors=(names)
 
-�����Ԥ�̾��������򥻥åȤ��ޤ���
+作成者の名前の配列をセットします。
 
 --- autorequire -> String
 
-��侩��°���Ǥ���
+非推奨の属性です。
 
 --- autorequire=(lib)
 
-��侩��°���Ǥ���
+非推奨の属性です。
 
 --- bindir -> String
 
-�¹ԥե�������Ǽ����ǥ��쥯�ȥ���֤��ޤ���
+実行ファイルを格納するディレクトリを返します。
 
 --- bindir=(dir)
 
-�¹ԥե�������Ǽ����ǥ��쥯�ȥ�򥻥åȤ��ޤ���
+実行ファイルを格納するディレクトリをセットします。
 
-@param dir �¹ԥե�������Ǽ����ǥ��쥯�ȥ����ꤷ�ޤ����ǥե���Ȥ� "bin" �Ǥ���
+@param dir 実行ファイルを格納するディレクトリを指定します。デフォルトは "bin" です。
 
 --- cert_chain -> Array
 #@todo
@@ -103,451 +103,451 @@ Gem �ѥå������Υ᥿�ǡ����򰷤�����Υ��饹�Ǥ���
 --- cert_chain=(arr)
 #@todo
 
-@param arr �ǥե���Ȥ϶�������Ǥ���
+@param arr デフォルトは空の配列です。
 
 --- date -> Time
 
-���դ��֤��ޤ���
+日付を返します。
 
 --- date=(date)
 
-@param date ���դ򥻥åȤ��ޤ����ǥե���ȤϺ����Ǥ���
+@param date 日付をセットします。デフォルトは今日です。
 
 --- default_executable -> String | nil
 
-Gem �ѥå�������� gem ���ޥ�ɷ�ͳ�Ǽ¹Ԥ���ե�������֤��ޤ���
+Gem パッケージ内で gem コマンド経由で実行するファイルを返します。
 
 --- default_executable=(executable)
 
-Gem �ѥå�������� gem ���ޥ�ɷ�ͳ�Ǽ¹Ԥ���ե�����򥻥åȤ��ޤ���
+Gem パッケージ内で gem コマンド経由で実行するファイルをセットします。
 
-@param executable �¹ԥե��������ꤷ�ޤ���
+@param executable 実行ファイルを指定します。
 
 --- dependencies -> Array
 
-��¸���Ƥ��� Gem �Υꥹ�Ȥ��֤��ޤ���
+依存している Gem のリストを返します。
 
 @see [[c:Gem::Dependency]]
 
 --- dependent_gems -> Array
 
-���� Gem �˰�¸���Ƥ������Ƥ� Gem �ξ���Υꥹ�Ȥ��֤��ޤ���
+この Gem に依存している全ての Gem の情報のリストを返します。
 
-���줾��Υ���ȥ������ˤʤäƤ��ꡢ�����Ǥϰʲ��Τ褦�ˤʤäƤ��ޤ���
+それぞれのエントリは配列になっており、各要素は以下のようになっています。
 
  (0) [[c:Gem::Specification]]
  (1) [[c:Gem::Dependency]]
- (2) [[c:Gem::Specification]] ������
+ (2) [[c:Gem::Specification]] の配列
 
 
 --- description -> String
 
-Gem �ѥå��������������֤��ޤ���
+Gem パッケージの説明を返します。
 
 --- description=(desc)
 
-Gem �ѥå������������򥻥åȤ��ޤ���
+Gem パッケージの説明をセットします。
 
-@param desc �ѥå������ξܺ٤���������ʸ�Ϥ���ꤷ�ޤ���
+@param desc パッケージの詳細を説明する文章を指定します。
 
 --- development_dependencies -> Array
 
-���� Gem ����¸���Ƥ��� Gem �Υꥹ�Ȥ��֤��ޤ���
+この Gem が依存している Gem のリストを返します。
 
 --- email -> String
 
-�᡼�륢�ɥ쥹���֤��ޤ���
+メールアドレスを返します。
 
 --- email=(email)
 
-�᡼�륢�ɥ쥹�򥻥åȤ��ޤ���
+メールアドレスをセットします。
 
-@param email �᡼�륢�ɥ쥹����ꤷ�ޤ���
+@param email メールアドレスを指定します。
 
 --- executable -> String
 
-�¹Բ�ǽ�ե�����̾���֤��ޤ���
+実行可能ファイル名を返します。
 
 --- executable=(executable)
 
-�¹Բ�ǽ�ե�����̾�򥻥åȤ��ޤ���
+実行可能ファイル名をセットします。
 
-@param executable �¹Բ�ǽ�ե�����̾����ꤷ�ޤ���
+@param executable 実行可能ファイル名を指定します。
 
 --- executables -> [String]
 
-�¹Բ�ǽ�ե�����̾�Υꥹ�Ȥ��֤��ޤ���
+実行可能ファイル名のリストを返します。
 
 --- executables=(executables)
 
-�¹Բ�ǽ�ե�����̾�Υꥹ�Ȥ򥻥åȤ��ޤ���
+実行可能ファイル名のリストをセットします。
 
-@param executables �¹Բ�ǽ�ե�����̾�Υꥹ�Ȥ���ꤷ�ޤ���
+@param executables 実行可能ファイル名のリストを指定します。
 
 --- extensions -> [String]
 
-��ĥ�饤�֥��򥳥�ѥ��뤹�뤿���ɬ�פ� extconf.rb �����Υե�����Υꥹ�Ȥ��֤��ޤ���
+拡張ライブラリをコンパイルするために必要な extconf.rb 形式のファイルのリストを返します。
 
 --- extensions=(paths)
 
-��ĥ�饤�֥��򥳥�ѥ��뤹�뤿���ɬ�פ� extconf.rb �����Υե�����Υꥹ�Ȥ򥻥åȤ��ޤ���
+拡張ライブラリをコンパイルするために必要な extconf.rb 形式のファイルのリストをセットします。
 
-@param paths ��ĥ�饤�֥��򥳥�ѥ��뤹�뤿���ɬ�פ� extconf.rb �����Υե�����Υꥹ�Ȥ���ꤷ�ޤ���
+@param paths 拡張ライブラリをコンパイルするために必要な extconf.rb 形式のファイルのリストを指定します。
 
 --- extra_rdoc_files -> [String]
 
-RDoc �ǥɥ�����Ȥ��������ݤ˻��Ѥ������̤ʥե�����Υꥹ�Ȥ��֤��ޤ���
+RDoc でドキュメントを作成する際に使用する特別なファイルのリストを返します。
 
 --- extra_rdoc_files=(paths)
 
-RDoc �ǥɥ�����Ȥ��������ݤ˻��Ѥ������̤ʥե�����Υꥹ�Ȥ򥻥åȤ��ޤ���
+RDoc でドキュメントを作成する際に使用する特別なファイルのリストをセットします。
 
-@param paths RDoc �ǥɥ�����Ȥ��������ݤ˻��Ѥ������̤ʥե�����Υꥹ�Ȥ���ꤷ�ޤ���
+@param paths RDoc でドキュメントを作成する際に使用する特別なファイルのリストを指定します。
 
 --- file_name -> String
 
-��������� Gem �ѥå�������̾�����֤��ޤ���
+生成される Gem パッケージの名前を返します。
 
 --- files -> [String]
 
-���� Gem �ѥå������˴ޤޤ��ե�����̾��������֤��ޤ���
+この Gem パッケージに含まれるファイル名の配列を返します。
 
 --- files=(files)
 
-���� Gem �ѥå������˴ޤޤ��ե�����̾������򥻥åȤ��ޤ���
+この Gem パッケージに含まれるファイル名の配列をセットします。
 
-@param files ���� Gem �ѥå������˴ޤޤ��ե�����̾���������ꤷ�ޤ���
+@param files この Gem パッケージに含まれるファイル名の配列を指定します。
 
 
 --- full_gem_path -> String
 
-���� Gem �ѥå������ؤΥե�ѥ����֤��ޤ���
+この Gem パッケージへのフルパスを返します。
 
 --- full_name -> String
 
-���� Gem �ѥå������ΥС�������ޤര����̾�� (name-version) ���֤��ޤ���
+この Gem パッケージのバージョンを含む完全な名前 (name-version) を返します。
 
-�ץ�åȥե�����ξ��󤬻��ꤵ��Ƥ�����ϡ������ޤߤޤ� (name-version-platform)��
+プラットフォームの情報が指定されている場合は、それも含みます (name-version-platform)。
 
 --- has_rdoc -> bool
 
-���ξ��� RDoc �����������󡣵��ξ��� RDoc ���������ޤ���
+真の場合は RDoc を生成しせん。偽の場合は RDoc を生成します。
 
 --- has_rdoc=(flag)
 
-RDoc ���������뤫�ɤ����򥻥åȤ��ޤ����ǥե���Ȥϵ��Ǥ���
+RDoc を生成するかどうかをセットします。デフォルトは偽です。
 
 --- has_rdoc? -> bool
 
-���ξ��� RDoc �����������󡣵��ξ��� RDoc ���������ޤ���
+真の場合は RDoc を生成しせん。偽の場合は RDoc を生成します。
 
 @see [[m:Gem::Specification#has_rdoc]]
 
 --- has_test_suite? -> bool
 
-���Υ᥽�åɤ���侩�Ǥ��� [[m:Gem::Specification#has_unit_tests?]] ����Ѥ��Ƥ���������
+このメソッドは非推奨です。 [[m:Gem::Specification#has_unit_tests?]] を使用してください。
 
 --- has_unit_tests? -> bool
 
-���� Gem �ѥå���������˥åȥƥ��Ȥ�ޤफ�ɤ����֤��ޤ���
+この Gem パッケージがユニットテストを含むかどうか返します。
 
-���ξ��ϥ�˥åȥƥ��Ȥ�ޤߤޤ��������Ǥʤ����ϵ����֤��ޤ���
+真の場合はユニットテストを含みます。そうでない場合は偽を返します。
 
 --- homepage -> String
 
-���� Gem �ѥå�������������Ƥ���ץ��������Ȥ������ԤΥ����֥����Ȥ� URI ���֤��ޤ���
+この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI を返します。
 
 --- homepage=(uri)
 
-���� Gem �ѥå�������������Ƥ���ץ��������Ȥ������ԤΥ����֥����Ȥ� URI �򥻥åȤ��ޤ���
+この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI をセットします。
 
-@param uri ���� Gem �ѥå�������������Ƥ���ץ��������Ȥ������ԤΥ����֥����Ȥ� URI ����ꤷ�ޤ���
+@param uri この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI を指定します。
 
 --- installation_path -> String
 
-���� Gem �ѥå������Υ��󥹥ȡ�����Υѥ����֤��ޤ���
+この Gem パッケージのインストール先のパスを返します。
 
 --- lib_files -> [String]
 
-���� Gem �ѥå������˴ޤޤ�Ƥ���ե�����Τ��� [[m:Gem::Specification#require_paths]]
-�ʲ��ˤ���ե�����Υꥹ�Ȥ��֤��ޤ���
+この Gem パッケージに含まれているファイルのうち [[m:Gem::Specification#require_paths]]
+以下にあるファイルのリストを返します。
 
 --- loaded=(flag)
 
-���� Gem �ѥå������� gemspec �����˥����ɤ���Ƥ��뤫�ɤ����򥻥åȤ��ޤ���
+この Gem パッケージの gemspec が既にロードされているかどうかをセットします。
 
-����°���ϱ�³�����ޤ���
+この属性は永続化しません。
 
-@param flag ���˥����ɤ���Ƥ�����Ͽ�����ꤷ�ޤ���
+@param flag 既にロードされている場合は真を指定します。
 
 --- loaded? -> bool
 
-���� Gem �ѥå������� gemspec �����˥����ɤ���Ƥ��뤫�ɤ������֤��ޤ���
+この Gem パッケージの gemspec が既にロードされているかどうかを返します。
 
-���˥����ɤ���Ƥ�����Ͽ����֤��ޤ��������Ǥʤ����ϵ����֤��ޤ���
+既にロードされている場合は真を返します。そうでない場合は偽を返します。
 
 --- loaded_from -> String
 
-���� Gem �ѥå������� gemspec ����������֤��ޤ���
+この Gem パッケージの gemspec がある場所を返します。
 
-����°���ϱ�³������ޤ���
+この属性は永続化されません。
 
 --- loaded_from=(path)
 
-���� Gem �ѥå������� gemspec ��������򥻥åȤ��ޤ���
+この Gem パッケージの gemspec がある場所をセットします。
 
-@param path ���� Gem �ѥå������� gemspec �����������ꤷ�ޤ���
+@param path この Gem パッケージの gemspec がある場所を指定します。
 
 --- mark_version -> String
 
-RubyGems �ΥС������������˥��åȤ��ޤ���
+RubyGems のバージョンを内部にセットします。
 
 --- name -> String
 
-���� Gem �ѥå�������̾�����֤��ޤ���
+この Gem パッケージの名前を返します。
 
 --- name=(name)
 
-���� Gem �ѥå�������̾���򥻥åȤ��ޤ���
+この Gem パッケージの名前をセットします。
 
-@param name ���� Gem �ѥå�������̾������ꤷ�ޤ���
+@param name この Gem パッケージの名前を指定します。
 
 --- normalize -> [String]
 
-���� Gem �ѥå������δޤޤ��ե�����ꥹ�Ȥ����ʣ��������ޤ���
+この Gem パッケージの含まれるファイルリストから重複を取り除きます。
 
 --- original_name -> String
 
-���Υ᥽�åɤϸ����ߴ����Τ���˻Ĥ���Ƥ��ޤ���
+このメソッドは後方互換性のために残されています。
 
 @see [[m:Gem::Specification#full_name]]
 
 --- original_platform -> String
 
-����°���ϸŤ��С������� Gem �ѥå������򥢥󥤥󥹥ȡ��뤹�뤿��˻Ĥ���Ƥ��ޤ���
+この属性は古いバージョンの Gem パッケージをアンインストールするために残されています。
 
 --- original_platform=(platform)
 
-����°���ϸŤ��С������� Gem �ѥå������򥢥󥤥󥹥ȡ��뤹�뤿��˻Ĥ���Ƥ��ޤ���
+この属性は古いバージョンの Gem パッケージをアンインストールするために残されています。
 
-@param platform �ץ�åȥե��������ꤷ�ޤ���
+@param platform プラットフォームを指定します。
 
 --- platform -> String
 
-���� Gem �ѥå���������ѤǤ���ץ�åȥե�������֤��ޤ���
+この Gem パッケージを使用できるプラットフォームを返します。
 
 --- platform=(platform)
 
-���� Gem �ѥå���������ѤǤ���ץ�åȥե�����򥻥åȤ��ޤ���
+この Gem パッケージを使用できるプラットフォームをセットします。
 
-@param platform ���� Gem �ѥå���������ѤǤ���ץ�åȥե��������ꤷ�ޤ���
-       �ǥե���Ȥ� [[m:Gem::Platform::RUBY]] �Ǥ���
+@param platform この Gem パッケージを使用できるプラットフォームを指定します。
+       デフォルトは [[m:Gem::Platform::RUBY]] です。
 
 @see [[m:Gem::Platform::RUBY]]
 
 --- post_install_message -> String
 
-���󥹥ȡ��봰λ���ɽ�������å��������֤��ޤ���
+インストール完了後に表示するメッセージを返します。
 
 --- post_install_message=(message)
 
-���󥹥ȡ��봰λ���ɽ�������å������򥻥åȤ��ޤ���
+インストール完了後に表示するメッセージをセットします。
 
-@param message ��å���������ꤷ�ޤ���
+@param message メッセージを指定します。
 
 --- rdoc_options -> [String]
 
-API �ɥ�����Ȥ���������Ȥ��� rdoc ���ޥ�ɤ�Ϳ���륪�ץ������֤��ޤ���
+API ドキュメントを生成するときに rdoc コマンドに与えるオプションを返します。
 
 --- rdoc_options=(options)
 
-API �ɥ�����Ȥ���������Ȥ��� rdoc ���ޥ�ɤ�Ϳ���륪�ץ����򥻥åȤ��ޤ���
+API ドキュメントを生成するときに rdoc コマンドに与えるオプションをセットします。
 
-@param options API �ɥ�����Ȥ���������Ȥ��� rdoc ���ޥ�ɤ�Ϳ���륪�ץ�������ꤷ�ޤ���
+@param options API ドキュメントを生成するときに rdoc コマンドに与えるオプションを指定します。
 
 --- require_path -> String
 
-[[m:Gem::Specification#require_paths]] ��ñ���С������Ǥ���
+[[m:Gem::Specification#require_paths]] の単数バージョンです。
 
 @see [[m:Gem::Specification#require_paths]]
 
 --- require_path=(path)
 
-[[m:Gem::Specification#require_paths=]] ��ñ���С������Ǥ���
+[[m:Gem::Specification#require_paths=]] の単数バージョンです。
 
-@param path ���� Gem �ѥå���������Ѥ����ݤ� require ����ե����뤬�֤���Ƥ���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param path この Gem パッケージを使用した際に require するファイルが置かれているディレクトリを指定します。
 
 @see [[m:Gem::Specification#require_paths=]]
 
 --- require_paths -> [String]
 
-���� Gem �ѥå���������Ѥ����ݤ� require ����ե����뤬�֤���Ƥ���ǥ��쥯�ȥ�
-�Υꥹ�Ȥ��֤��ޤ���
+この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
+のリストを返します。
 
 --- require_paths=(paths)
 
-���� Gem �ѥå���������Ѥ����ݤ� require ����ե����뤬�֤���Ƥ���ǥ��쥯�ȥ�
-�Υꥹ�Ȥ򥻥åȤ��ޤ���
+この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
+のリストをセットします。
 
-@param paths ���� Gem �ѥå���������Ѥ����ݤ� require ����ե����뤬�֤���Ƥ���ǥ��쥯�ȥ�
-             �Υꥹ�Ȥ���ꤷ�ޤ���
+@param paths この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
+             のリストを指定します。
 
 
 --- required_ruby_version -> Gem::Requirement
 
-���� Gem �ѥå�������ư�����Τ�ɬ�פ� Ruby �ΥС��������֤��ޤ���
+この Gem パッケージを動作させるのに必要な Ruby のバージョンを返します。
 
 --- required_ruby_version=(requirement)
 
-���� Gem �ѥå�������ư�����Τ�ɬ�פ� Ruby �ΥС������򥻥åȤ��ޤ���
+この Gem パッケージを動作させるのに必要な Ruby のバージョンをセットします。
 
-@param requirement [[m:Gem::Requirement.create]] �������դ�������Υ��֥������Ȥ���ꤷ�ޤ���
+@param requirement [[m:Gem::Requirement.create]] が受け付ける形式のオブジェクトを指定します。
 
 @see [[c:Gem::Requirement]]
 
 --- required_rubygems_version -> Gem::Requirement
 
-���� Gem �ѥå�������ư�����Τ�ɬ�פ� RubyGems �ΥС��������֤��ޤ���
+この Gem パッケージを動作させるのに必要な RubyGems のバージョンを返します。
 
 --- required_rubygems_version=(requirement)
 
-���� Gem �ѥå�������ư�����Τ�ɬ�פ� RubyGems �ΥС������򥻥åȤ��ޤ���
+この Gem パッケージを動作させるのに必要な RubyGems のバージョンをセットします。
 
-@param requirement [[m:Gem::Requirement.create]] �������դ�������Υ��֥������Ȥ���ꤷ�ޤ���
+@param requirement [[m:Gem::Requirement.create]] が受け付ける形式のオブジェクトを指定します。
 
 @see [[c:Gem::Requirement]]
 
 --- requirements -> Array
 
-���� Gem �ѥå�������ư�����Τ�ɬ�פʾ����֤��ޤ���
-����ϥ桼���Τ���Υ���ץ�ʾ���Ǥ���
+この Gem パッケージを動作させるのに必要な条件を返します。
+これはユーザのためのシンプルな情報です。
 
 --- requirements=(informations)
 
-���� Gem �ѥå�������ư�����Τ�ɬ�פʾ��򥻥åȤ��ޤ���
-����ϥ桼���Τ���Υ���ץ�ʾ���򥻥åȤ��ޤ���
+この Gem パッケージを動作させるのに必要な条件をセットします。
+これはユーザのためのシンプルな情報をセットします。
 
-@param informations �����ʸ���������ǻ��ꤷ�ޤ���
+@param informations 情報を文字列の配列で指定します。
 
 --- rubyforge_project -> String
 
-���� Gem �� RubyForge ��ǤΥץ���������̾���֤��ޤ���
+この Gem の RubyForge 上でのプロジェクト名を返します。
 
 --- rubyforge_project=(project_name)
 
-���� Gem �� RubyForge ��ǤΥץ���������̾�򥻥åȤ��ޤ���
+この Gem の RubyForge 上でのプロジェクト名をセットします。
 
-@param project_name RubyForge ��Υץ���������̾����ꤷ�ޤ���
+@param project_name RubyForge 上のプロジェクト名を指定します。
 
 --- rubygems_version -> String
 
-���� Gem �ѥå�������������� RubyGems �ΥС��������֤��ޤ���
+この Gem パッケージを作成した RubyGems のバージョンを返します。
 
 --- rubygems_version=(version)
 
-���� Gem �ѥå�������������� RubyGems �ΥС������򥻥åȤ��ޤ���
-����°���� Gem �ѥå��������������줿���˼�ưŪ�˥��åȤ���ޤ���
+この Gem パッケージを作成した RubyGems のバージョンをセットします。
+この属性は Gem パッケージが作成された時に自動的にセットされます。
 
-@param version RubyGems �ΥС���������ꤷ�ޤ���
+@param version RubyGems のバージョンを指定します。
 
 --- runtime_dependencies -> Array
 
-���� Gem �ѥå���������¸���Ƥ��� Gem �ѥå������Υꥹ�Ȥ��֤��ޤ���
+この Gem パッケージが依存している Gem パッケージのリストを返します。
 
 --- satisfies_requirement?(dependency) -> bool
 
-���� Gem �ѥå�������Ϳ����줿��¸�ط������������ɤ������֤��ޤ���
+この Gem パッケージが与えられた依存関係を満たすかどうかを返します。
 
-��¸�ط������������Ͽ����֤��ޤ��������Ǥʤ����ϵ����֤��ޤ���
+依存関係を満たす場合は真を返します。そうでない場合は偽を返します。
 
-@param dependency �����å���������¸�ط�����ꤷ�ޤ���
+@param dependency チェックしたい依存関係を指定します。
 
 @see [[c:Gem::Dependency]]
 
 --- signing_key -> String
 
-���� Gem �ѥå������ν�̾�˻��Ѥ��륭�����֤��ޤ���
+この Gem パッケージの署名に使用するキーを返します。
 
 --- signing_key=(key)
 
-���� Gem �ѥå������ν�̾�˻��Ѥ��륭���򥻥åȤ��ޤ���
+この Gem パッケージの署名に使用するキーをセットします。
 
-@param key ��̾�˻��Ѥ��륭������ꤷ�ޤ���
+@param key 署名に使用するキーを指定します。
 
 --- specification_version -> Integer
 
-���� Gem �ѥå��������Ѥ����Ƥ��� gemspec �ΥС��������֤��ޤ���
+この Gem パッケージに用いられている gemspec のバージョンを返します。
 
 --- specification_version=(version)
 
-���� Gem �ѥå��������Ѥ����Ƥ��� gemspec �ΥС������򥻥åȤ��ޤ���
+この Gem パッケージに用いられている gemspec のバージョンをセットします。
 
-@param version gemspec �ΥС���������ꤷ�ޤ���
+@param version gemspec のバージョンを指定します。
 
 @see [[m:Gem::Specification::SPECIFICATION_VERSION_HISTORY]]
 
 --- summary -> String
 
-���� Gem �ѥå�������û���������֤��ޤ���
+この Gem パッケージの短い説明を返します。
 
 --- summary=(summary)
 
-���� Gem �ѥå�������û�������򥻥åȤ��ޤ���
+この Gem パッケージの短い説明をセットします。
 
-@param summary û����������ꤷ�ޤ���
+@param summary 短い説明を指定します。
 
 --- test_file -> String
 
-[[m:Gem::Specification#test_files]] ��ñ���С������Ǥ���
+[[m:Gem::Specification#test_files]] の単数バージョンです。
 
 --- test_file=(file)
 
-[[m:Gem::Specification#test_files=]] ��ñ���С������Ǥ���
+[[m:Gem::Specification#test_files=]] の単数バージョンです。
 
 --- test_files -> [String]
 
-��˥åȥƥ��ȤΥե�����Υꥹ�Ȥ��֤��ޤ���
+ユニットテストのファイルのリストを返します。
 
 
 --- test_files=(files)
 
-��˥åȥƥ��ȤΥե�����Υꥹ�Ȥ򥻥åȤ��ޤ���
+ユニットテストのファイルのリストをセットします。
 
-@param files ��˥åȥƥ��ȤΥե�����Υꥹ�Ȥ���ꤷ�ޤ���
+@param files ユニットテストのファイルのリストを指定します。
 
 --- test_suite_file -> String
 
-����°������侩�Ǥ��� [[m:Gem::Specification#test_files]] ����Ѥ��Ƥ���������
+この属性は非推奨です。 [[m:Gem::Specification#test_files]] を使用してください。
 
 --- test_suite_file=(file)
 
-����°������侩�Ǥ��� [[m:Gem::Specification#test_files=]] ����Ѥ��Ƥ���������
+この属性は非推奨です。 [[m:Gem::Specification#test_files=]] を使用してください。
 
-@param file �ƥ��ȥ������ȤΥե��������ꤷ�ޤ���
+@param file テストスイートのファイルを指定します。
 
 --- to_ruby -> String
 
-���Ȥ�Ƹ����뤿��� Ruby ������ץȤ�ʸ������֤��ޤ���
+自身を再現するための Ruby スクリプトを文字列で返します。
 
-��ά����Ƥ����ͤϥǥե�����ͤ����Ѥ���ޤ���
+省略されている値はデフォルト値が使用されます。
 
 --- validate -> bool
 
-ɬ��°���Υ����å��ȼ��Ȥδ���Ū�������������å���Ԥ��ޤ���
+必須属性のチェックと自身の基本的な正当性チェックを行います。
 
-�����å��˥ѥ��������Ͼ�� true ���֤��ޤ��������Ǥʤ������㳰��ȯ�����ޤ���
+チェックにパスした場合は常に true を返します。そうでない場合は例外が発生します。
 
-@raise Gem::InvalidSpecificationException �����å��˥ѥ����ʤ��ä�����ȯ�����ޤ���
+@raise Gem::InvalidSpecificationException チェックにパスしなかった場合に発生します。
 
 --- version -> Gem::Version
 
-���� Gem �ѥå������ΥС��������֤��ޤ���
+この Gem パッケージのバージョンを返します。
 
 --- version=(version)
 
-���� Gem �ѥå������ΥС������򥻥åȤ��ޤ���
+この Gem パッケージのバージョンをセットします。
 
-@param version �С�������ʸ���� [[c:Gem::Version]] �Υ��󥹥��󥹤ǻ��ꤷ�ޤ���
+@param version バージョンを文字列か [[c:Gem::Version]] のインスタンスで指定します。
 
 --- yaml_initialize
 #@todo
@@ -556,145 +556,145 @@ API �ɥ�����Ȥ���������Ȥ��� rdoc ���ޥ�ɤ�Ϳ���륪�ץ����򥻥åȤ��ޤ���
 
 --- _load(str) -> Gem::Specification
 
-�ޡ�����뤵�줿�ǡ���������ɤ��뤿��Υ᥽�åɤǤ���
+マーシャルされたデータをロードするためのメソッドです。
 
-@param str �ޡ�����뤵�줿�ǡ�������ꤷ�ޤ���
+@param str マーシャルされたデータを指定します。
 
 --- array_attribute(name) -> ()
 
-[[m:Gem::Specification.attribute]] ��Ʊ���Ǥ������ͤ�����˳�Ǽ���륢����������ޤ���
+[[m:Gem::Specification.attribute]] と同じですが、値を配列に格納するアクセサを作ります。
 
-@param name °����̾������ꤷ�ޤ���
+@param name 属性の名前を指定します。
 
 @see [[m:Gem::Specification.attribute]]
 
 --- array_attributes -> Array
 
-@@array_attributes ��ʣ�����֤��ޤ���
+@@array_attributes の複製を返します。
 
 @see [[m:Object#dup]]
 
 --- attribute(name) -> ()
 
-�ǥե�����ͤ���ꤷ������������������뤿��˻��Ѥ��ޤ���
+デフォルト値を指定したアクセサを定義するために使用します。
 
-�ʲ��������Ѥ�����ޤ���
+以下の副作用があります。
 
- * ���饹�ѿ� @@attributes, @@default_value ���ѹ����ޤ���
- * �̾��°���񤭹��ߥ᥽�åɤ�������ޤ���
- * �ǥե�����ͤ����°���ɤ߼��᥽�åɤΤ褦�˿����񤦥᥽�åɤ�������ޤ���
+ * クラス変数 @@attributes, @@default_value を変更します。
+ * 通常の属性書き込みメソッドを定義します。
+ * デフォルト値を持つ属性読み取りメソッドのように振る舞うメソッドを定義します。
 
 --- attribute_alias_singular(singular, plural) -> ()
 
-����¸�ߤ���ʣ������°����ñ�����С�������������ޤ���
+既に存在する複数形の属性の単数形バージョンを定義します。
 
-�����ñ�˰�Ĥΰ����������ꤽ���������ɲä���褦�ʥإ�ѡ��᥽�åɤ��������Ȥ������ȤǤ���
+これは単に一つの引数を受け取りそれを配列に追加するようなヘルパーメソッドを定義するということです。
 
-��:
+例:
 
-  # ���Τ褦����������
+  # このように定義すると
   attribute_alias_singular :require_path, :require_paths
-  # �����񤯤�����
+  # こう書くかわりに
   s.require_paths = ['mylib']
-  # �����񤯤��Ȥ��Ǥ��ޤ���
+  # こう書くことができます。
   s.require_path = 'mylib'
 
-@param singular °��̾��ñ��������ꤷ�ޤ���
+@param singular 属性名の単数形を指定します。
 
-@param plural °��̾��ʣ��������ꤷ�ޤ���
+@param plural 属性名の複数形を指定します。
 
 --- attribute_defaults -> Array
 #@todo
 
-@@attributes ��ʣ�����֤��ޤ���
+@@attributes の複製を返します。
 
 --- attribute_names -> Array
 
-°��̾��������֤��ޤ���
+属性名の配列を返します。
 
 --- attributes(*args) -> ()
 
-ʣ����°������٤˺������뤿��˻��Ѥ��ޤ���
+複数の属性を一度に作成するために使用します。
 
-��°���Υǥե�����ͤ� nil �ˤʤ�ޤ���
+各属性のデフォルト値は nil になります。
 
-@param args °��̾���İʾ���ꤷ�ޤ���
+@param args 属性名を一つ以上指定します。
 
 --- default_value(name) -> object
 
-Ϳ����줿̾����°���Υǥե�����ͤ��֤��ޤ���
+与えられた名前の属性のデフォルト値を返します。
 
-@param name °��̾����ꤷ�ޤ���
+@param name 属性名を指定します。
 
 --- from_yaml(input) -> Gem::Specification
 
-YAML �ե����뤫�� gemspec ������ɤ��ޤ���
+YAML ファイルから gemspec をロードします。
 
-YAML �ե����뤫�� [[c:Gem::Specification]] ������ɤ���ȡ��̾�� Ruby ���֥������Ȥ�
-������롼���� (#initialize) ���̤�ޤ��󡣤��Υ᥽�åɤϽ�����롼����ΰ�����¹Ԥ���
-gemspec �ΥС����������å���Ԥ��ޤ���
+YAML ファイルから [[c:Gem::Specification]] をロードすると、通常の Ruby オブジェクトの
+初期化ルーチン (#initialize) を通りません。このメソッドは初期化ルーチンの一部を実行し、
+gemspec のバージョンチェックも行います。
 
-@param input ʸ���� [[c:IO]] ���֥������Ȥ���ꤷ�ޤ���
+@param input 文字列か [[c:IO]] オブジェクトを指定します。
 
 --- list -> Array
 
-�¹���� Ruby �Υ��󥹥��󥹤Ǻ������줿 [[c:Gem::Specification]] �Υ��󥹥��󥹤��֤��ޤ���
+実行中の Ruby のインスタンスで作成された [[c:Gem::Specification]] のインスタンスを返します。
 
 --- load(filename) -> Gem::Specification
 
-gemspec �ե����������ɤ��ޤ���
+gemspec ファイルをロードします。
 
-@param filename gemspec �Υե�����̾����ꤷ�ޤ���
+@param filename gemspec のファイル名を指定します。
 
-@raise StandardError gemspec �ե�������Ǥ��Υ᥽�åɤ�Ƥ�Ǥ������ȯ�����ޤ���
+@raise StandardError gemspec ファイル内でこのメソッドを呼んでいる場合に発生します。
 
 --- normalize_yaml_input(input) -> String
 
-YAML ������ gemspec ���������ե����ޥåȤ��ޤ���
+YAML 形式の gemspec を正しくフォーマットします。
 
-@param input ʸ���� [[c:IO]] ���֥������Ȥ���ꤷ�ޤ���
+@param input 文字列か [[c:IO]] オブジェクトを指定します。
 
 --- overwrite_accessor(name){ ... } -> ()
 
-�ƤӽФ��������̤�ư��򤹤�ɬ�פΤ���°��������ޤ���
-���Υ᥽�åɤϤ����������Ȥ��ǽ�ˤ��ޤ���
+呼び出し時に特別な動作をする必要のある属性があります。
+このメソッドはそういうことを可能にします。
 
-�֥��å��ѥ�᡼����Ǥ�դΤ�Τ���Ѥ��뤳�Ȥ��Ǥ��ޤ���
+ブロックパラメータは任意のものを使用することができます。
 
-@param name °��̾����ꤷ�ޤ���
+@param name 属性名を指定します。
 
 --- read_only(*names) -> ()
 
-Ϳ����줿°��̾���ɤ߼�����Ѥˤ��ޤ���
+与えられた属性名を読み取り専用にします。
 
-@param names °��̾���İʾ���ꤷ�ޤ���
+@param names 属性名を一つ以上指定します。
 
 --- required_attribute(name, default = nil) -> ()
 
-ɬ�ܤ�°����������ޤ���
+必須の属性を作成します。
 
-@param name °��̾����ꤷ�ޤ���
+@param name 属性名を指定します。
 
-@param default �ǥե�����ͤ���ꤷ�ޤ���
+@param default デフォルト値を指定します。
 
 @see [[m:Gem::Specification.attribute]]
 
 --- required_attribute?(name) -> bool
 
-ɬ��°���Ǥ���п����֤��ޤ���
+必須属性であれば真を返します。
 
-@param name °��̾����ꤷ�ޤ���
+@param name 属性名を指定します。
 
 --- required_attributes -> Array
 
-ɬ��°���Υꥹ�Ȥ��֤��ޤ���
+必須属性のリストを返します。
 
 
 == Constants
 
 --- CURRENT_SPECIFICATION_VERSION -> 2
 
-���ߤ� gemspec �ΥС�������ɽ������Ǥ���
+現在の gemspec のバージョンを表す定数です。
 
 
 --- MARSHAL_FIELDS -> Hash
@@ -703,14 +703,14 @@ YAML ������ gemspec ���������ե����ޥåȤ��ޤ���
 
 --- NONEXISTENT_SPECIFICATION_VERSION -> -1
 
-���Τ˻��ꤵ��Ƥ��ʤ����� gemspec �ΥС�������ɽ���ޤ���
+明確に指定されていない時の gemspec のバージョンを表します。
 
 --- SPECIFICATION_VERSION_HISTORY -> Hash
 
-gemspec �ե�����ΥС���������ˤ�ɽ������Ǥ���
+gemspec ファイルのバージョンの歴史を表す定数です。
 
 --- TODAY -> Time
 
-���������դ��֤��ޤ���
+本日の日付を返します。
 
 

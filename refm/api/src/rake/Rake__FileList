@@ -2,40 +2,40 @@
 alias FileList
 include Rake::Cloneable
 
-���Υ��饹�� [[c:Array]] �ȴ���Ū�ˤ�Ʊ���Ǥ���
+このクラスは [[c:Array]] と基本的には同じです。
 
-�ե����������ۤ�ξ�����������ñ�ˤ��뤿��Υإ�ѡ��᥽�åɤ������Ĥ��������Ƥ��ޤ���
+ファイルの操作をほんの少しだけ、簡単にするためのヘルパーメソッドがいくつか定義されています。
 
-[[c:Rake::FileList]] ��Ϳ����줿 glob �Υѥ������ȤäƤ����˥ե�����򸡺������ˡ�
-���ɾ�����뤿��ˤ������¸���Ƥ����ޤ���
+[[c:Rake::FileList]] は与えられた glob のパターンを使ってすぐにファイルを検索せずに、
+後で評価するためにそれを保存しておきます。
 
-���Τ��Ȥϡ�¿���Υե�����˥ޥå�����¿���� [[c:Rake::FileList]] ����ѤǤ��뤳�Ȥ��̣���ޤ���
-�ºݤ˻��Ѥ����� [[c:Rake::FileList]] ���ݻ�����ѥ�����ɾ������ޤ���
+このことは、多くのファイルにマッチする多くの [[c:Rake::FileList]] を使用できることを意味します。
+実際に使用されると [[c:Rake::FileList]] が保持するパターンが評価されます。
 
 == Public Instance Methods
 
 --- include(*filenames) -> self
 
-Ϳ����줿�ѥ�����򼫿Ȥ��ɲä��ޤ���
+与えられたパターンを自身に追加します。
 
-@param filenames �ɲä���ե�����̾�Υѥ��������ꤷ�ޤ���
+@param filenames 追加するファイル名のパターンを指定します。
 
-��:
+例:
    file_list.include("*.java", "*.cfg")
    file_list.include %w( math.c lib.h *.o )
 
 --- exclude(*patterns){|entry| ... } -> self
 
-���Ȥ���������٤��ե�����̾�Υѥ�����򼫿Ȥν����ꥹ�Ȥ���Ͽ���ޤ���
+自身から取り除くべきファイル名のパターンを自身の除外リストに登録します。
 
-�ѥ�����Ȥ�������ɽ���������֥ѥ�����ʸ���󤬻��Ѳ�ǽ�Ǥ���
-����˥֥��å���Ϳ����줿���ϡ��֥��å���ɾ�����ƿ��ˤʤä�����ȥ�������ޤ���
+パターンとして正規表現、グロブパターン、文字列が使用可能です。
+さらにブロックが与えられた場合は、ブロックを評価して真になったエントリを削除します。
 
-�����֥ѥ�����ϥե����륷���ƥ���Ф���Ÿ������ޤ���
-�⤷���ե����륷���ƥ��¸�ߤ��ʤ��ե����������Ū�˥ꥹ�Ȥ��ɲä�����硢
-�����֥ѥ�����ǤϤ��Υե������ꥹ�Ȥ��������ޤ���
+グロブパターンはファイルシステムに対して展開されます。
+もし、ファイルシステムに存在しないファイルを明示的にリストへ追加した場合、
+グロブパターンではそのファイルをリストから削除しません。
 
-��:
+例:
   FileList['a.c', 'b.c'].exclude("a.c") # => ['b.c']
   FileList['a.c', 'b.c'].exclude(/^a/)  # => ['b.c']
   
@@ -47,113 +47,113 @@ include Rake::Cloneable
 
 --- clear_exclude -> self
 
-��Ͽ����Ƥ�������ꥹ�Ȥ򥯥ꥢ���ޤ���
+登録されている除外リストをクリアします。
 
 --- ==(array) -> bool
 
-���Ȥ�������Ѵ����Ƥ���Ϳ����줿�������Ӥ��ޤ���
+自身を配列に変換してから与えられた配列と比較します。
 
-@param array ����оݤ��������ꤷ�ޤ���
+@param array 比較対象の配列を指定します。
 
 --- to_a -> Array
 --- to_ary -> Array
 
-����Ū��������֤��ޤ���
+内部的な配列を返します。
 
 --- is_a?(klass) -> bool
 --- kind_of?(klass) -> bool
 
-���Ȥ� [[c:Array]] �Υե�򤵤��ޤ���
+自身に [[c:Array]] のフリをさせます。
 
 --- *(other) -> Array | String
 
-[[m:Array#*]] ��ư����碌�뤿��˺�������Ƥ��ޤ���
+[[m:Array#*]] と動作を合わせるために再定義しています。
 
 @see [[m:Array#*]]
 
 --- resolve -> self
 
-�ɲåꥹ�ȤȽ����ꥹ�Ȥ�ɾ�����ޤ���
+追加リストと除外リストを評価します。
 
 --- calculate_exclude_regexp
 
-�����ꥹ�Ȥ˴ޤޤ��ѥ������Ŭ�ڤ��Ѵ����ޤ���
+除外リストに含まれるパターンを適切に変換します。
 
 --- sub(pattern, replace) -> Rake::FileList
 
-���Ȥ˴ޤޤ��ե�����ꥹ�ȤΤ��줾��Υ���ȥ���Ф��� [[m:String#sub]] ��¹Ԥ���
-��̤򿷤��� [[c:Rake::FileList]] �Ȥ����֤��ޤ���
+自身に含まれるファイルリストのそれぞれのエントリに対して [[m:String#sub]] を実行し、
+結果を新しい [[c:Rake::FileList]] として返します。
 
-��:
+例:
    FileList['a.c', 'b.c'].sub(/\.c$/, '.o')  => ['a.o', 'b.o']
 
 
 --- gsub(pattern, replace) -> Rake::FileList
 
-���Ȥ˴ޤޤ��ե�����ꥹ�ȤΤ��줾��Υ���ȥ���Ф��� [[m:String#gsub]] ��¹Ԥ���
-��̤򿷤��� [[c:Rake::FileList]] �Ȥ����֤��ޤ���
+自身に含まれるファイルリストのそれぞれのエントリに対して [[m:String#gsub]] を実行し、
+結果を新しい [[c:Rake::FileList]] として返します。
 
- ��:
+ 例:
    FileList['lib/test/file', 'x/y'].gsub(/\//, "\\") # => ['lib\\test\\file', 'x\\y']
 
 --- sub!(pattern, replace) -> self
 
-���Ȥ˴ޤޤ��ե�����ꥹ�ȤΤ��줾��Υ���ȥ���Ф��� [[m:String#sub]] ��¹Ԥ��ޤ���
-���Ȥ��˲�Ū���ѹ����ޤ���
+自身に含まれるファイルリストのそれぞれのエントリに対して [[m:String#sub]] を実行します。
+自身を破壊的に変更します。
 
 --- gsub!(pattern, replace) -> self
 
-���Ȥ˴ޤޤ��ե�����ꥹ�ȤΤ��줾��Υ���ȥ���Ф��� [[m:String#gsub]] ��¹Ԥ��ޤ���
-���Ȥ��˲�Ū���ѹ����ޤ���
+自身に含まれるファイルリストのそれぞれのエントリに対して [[m:String#gsub]] を実行します。
+自身を破壊的に変更します。
 
 --- pathmap(spec = nil) -> Rake::FileList
 
-�����Ǥ� [[m:String#pathmap]] ��Ŭ�Ѥ��������� [[c:Rake::FileList]] ���֤��ޤ���
+各要素に [[m:String#pathmap]] を適用した新しい [[c:Rake::FileList]] を返します。
 
 @see [[m:String#pathmap]]
 
 --- ext(newext = '') -> Rake::FileList
 
-�����Ǥ� [[m:String#ext]] ��Ŭ�Ѥ��������� [[c:Rake::FileList]] ���֤��ޤ���
+各要素に [[m:String#ext]] を適用した新しい [[c:Rake::FileList]] を返します。
 
 @see [[m:String#ext]]
 
 --- egrep(pattern){|filename, count, line| ... }
 
-Ϳ����줿�ѥ������ե�����ꥹ�Ȥ��� grep �Τ褦�˸������ޤ���
+与えられたパターンをファイルリストから grep のように検索します。
 
-�֥��å���Ϳ����줿���ϡ��ޥå������Ԥξ��� (�ե�����̾�����ֹ桢�ޥå�������) ��
-�֥��å����Ϥ���ƥ֥��å���ɾ������ޤ����֥��å���Ϳ�����ʤ��ä����ϡ�
-ɸ����Ϥˡ��ե�����̾:���ֹ�:�ޥå������Ԥ���Ϥ��ޤ���
+ブロックが与えられた場合は、マッチした行の情報 (ファイル名、行番号、マッチした行) が
+ブロックに渡されてブロックが評価されます。ブロックが与えられなかった場合は、
+標準出力に、ファイル名:行番号:マッチした行を出力します。
 
-@param pattern ����ɽ������ꤷ�ޤ���
+@param pattern 正規表現を指定します。
 
 --- existing -> Rake::FileList
 
-���Ȥ˴ޤޤ��ե�����Τ����ե����륷���ƥ��¸�ߤ���ե�����Τߤ�
-�ޤ� [[c:Rake::FileList]] ���֤��ޤ���
+自身に含まれるファイルのうちファイルシステムに存在するファイルのみを
+含む [[c:Rake::FileList]] を返します。
 
 --- existing! -> self
 
-���Ȥ˴ޤޤ��ե�����Τ����ե����륷���ƥ��¸�ߤ���ե�����Τߤ�
-�ޤ�褦�˼��Ȥ��ѹ������֤��ޤ���
+自身に含まれるファイルのうちファイルシステムに存在するファイルのみを
+含むように自身を変更して返します。
 
 --- to_s -> String
 
-���Ƥ����Ǥ򥹥ڡ�����Ϣ�뤷��ʸ������֤��ޤ���
+全ての要素をスペースで連結した文字列を返します。
 
 --- exclude?(file_name) -> bool
 
-Ϳ����줿�ե�����̾�������������ϡ������֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+与えられたファイル名が除外される場合は、真を返します。
+そうでない場合は偽を返します。
 
-@param file_name �ե�����̾����ꤷ�ޤ���
+@param file_name ファイル名を指定します。
 
 --- import(array) -> self
 
-Ϳ����줿����򼫿Ȥ˥���ݡ��Ȥ��ޤ���
+与えられた配列を自身にインポートします。
 
-@param array �ե�����̾�Υꥹ�Ȥ���ꤷ�ޤ���
+@param array ファイル名のリストを指定します。
 
 
 
@@ -161,13 +161,13 @@ include Rake::Cloneable
 
 --- new(*patterns){|self| ... }
 
-Ϳ����줿�ѥ�������Ȥˤ��Ƽ��Ȥ��������ޤ���
+与えられたパターンをもとにして自身を初期化します。
 
-�֥��å���Ϳ�����Ƥ�����ϡ����Ȥ�֥��å��ѥ�᡼���Ȥ��ƥ֥��å���ɾ�����ޤ���
+ブロックが与えられている場合は、自身をブロックパラメータとしてブロックを評価します。
 
-@param patterns �ѥ��������ꤷ�ޤ���
+@param patterns パターンを指定します。
 
-��:
+例:
    file_list = FileList.new('lib/**/*.rb', 'test/test*.rb')
    
    pkg_files = FileList.new('lib/**/*') do |fl|
@@ -177,40 +177,40 @@ include Rake::Cloneable
 
 --- [](*args) -> Rake::FileList
 
-Ϳ����줿�ѥ�������Ȥˤ��Ƽ��Ȥ��������ޤ���
+与えられたパターンをもとにして自身を初期化します。
 
-@param args �ѥ��������ꤷ�ޤ���
+@param args パターンを指定します。
 
 
 == Constants
 
 --- ARRAY_METHODS -> Array
 
-[[c:Array]] ���������Ƥ���᥽�åɤΥꥹ�ȤǤ���
+[[c:Array]] に定義されているメソッドのリストです。
 
 --- DEFAULT_IGNORE_PATTERNS -> Array
 
-�ǥե���Ȥǽ�������ѥ�����Υꥹ�ȤǤ���
+デフォルトで除外するパターンのリストです。
 
 --- DEFAULT_IGNORE_PROCS
 
-�ǥե���Ȥǽ��������³���Ǥ���
+デフォルトで除外する手続きです。
 
 --- DELEGATING_METHODS -> Array
 
-�Ѿ�����᥽�åɤΥꥹ�ȤǤ���
+委譲するメソッドのリストです。
 
 --- MUST_DEFINE -> Array
 
-ɬ���Ѿ����ʤ���Фʤ�ʤ��ղ�Ū�ʥ᥽�åɤΥꥹ�ȤǤ���
+必ず委譲しなければならない付加的なメソッドのリストです。
 
 
 --- MUST_NOT_DEFINE -> Array
 
-�Ѿ����ƤϤ����ʤ��᥽�åɤΥꥹ�ȤǤ���
+委譲してはいけないメソッドのリストです。
 
-���Υꥹ�Ȥ˴ޤޤ�Ƥ���᥽�åɤϤ��Υ��饹��������Ƥ��ޤ���
+このリストに含まれているメソッドはこのクラスで定義しています。
 
 --- SPECIAL_RETURN -> Array
 
-[[c:Array]] �Υ��󥹥��󥹤��֤��ΤǰѾ�������˥�åפ���ɬ�פ�����᥽�åɤΥꥹ�ȤǤ���
+[[c:Array]] のインスタンスを返すので委譲した後にラップする必要があるメソッドのリストです。

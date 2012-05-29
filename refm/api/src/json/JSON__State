@@ -1,160 +1,160 @@
 = class JSON::State < Object
 alias JSON::Ext::Generator::State
 
-Ruby ���֥������Ȥ��� JSON ������ʸ�������������֡�
-JSON ������ʸ������������뤿���������ݻ����Ƥ�������˻��Ѥ��륯�饹�Ǥ���
+Ruby オブジェクトから JSON 形式の文字列を生成する間、
+JSON 形式の文字列を生成するための設定を保持しておくために使用するクラスです。
 
 == Singleton Methods
 
 --- new(options = {}) -> JSON::State
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param options �ϥå������ꤷ�ޤ���
-       �����ǽ�ʥ��ץ����ϰʲ����̤�Ǥ���
+@param options ハッシュを指定します。
+       指定可能なオプションは以下の通りです。
 
 : :indent
-  ����ǥ�Ȥ˻��Ѥ���ʸ�������ꤷ�ޤ����ǥե���Ȥ϶�ʸ����Ǥ���
+  インデントに使用する文字列を指定します。デフォルトは空文字列です。
 : :space
-  JSON ������ʸ����Υȡ�����֤���������ʸ�������ꤷ�ޤ����ǥե���Ȥ϶�ʸ����Ǥ���
+  JSON 形式の文字列のトークン間に挿入する文字列を指定します。デフォルトは空文字列です。
 : :space_before
-  JSON ������ʸ������� JavaScript �Υ��֥������Ȥ�ɽ����ʬ�ˤ��� ':' ��
-  ������������ʸ����򥻥åȤ��ޤ����ǥե���Ȥ϶�ʸ����Ǥ���
+  JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+  前に挿入する文字列をセットします。デフォルトは空文字列です。
 : :object_nl
-  JSON ������ʸ������˸���� JavaScript �Υ��֥������Ȥι�������������ʸ�������ꤷ�ޤ���
-  �ǥե���Ȥ϶�ʸ����Ǥ���
+  JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を指定します。
+  デフォルトは空文字列です。
 : :array_nl
-  JSON ������ʸ������˸���� JavaScript ������ι�������������ʸ�������ꤷ�ޤ���
-  �ǥե���Ȥ϶�ʸ����Ǥ���
+  JSON 形式の文字列中に現れる JavaScript の配列の行末に挿入する文字列を指定します。
+  デフォルトは空文字列です。
 : :check_circular
-  ������ꤷ����硢�������륪�֥������Ȥν۴Ĥ�����å����ޤ���
-  ����ư��ǥե���ȤǤ���
+  真を指定した場合、生成するオブジェクトの循環をチェックします。
+  この動作がデフォルトです。
 : :allow_nan
-  ������ꤷ����硢[[m:JSON::NaN]], [[m:JSON::Infinity]],
-  [[m:JSON::MinusInfinity]] ���������뤳�Ȥ�����褦�ˤʤ�ޤ���
-  ������ꤷ����硢�������ͤ��������褦�Ȥ�����㳰��ȯ�����ޤ���
-  �ǥե���Ȥϵ��Ǥ���
+  真を指定した場合、[[m:JSON::NaN]], [[m:JSON::Infinity]],
+  [[m:JSON::MinusInfinity]] を生成することを許すようになります。
+  偽を指定した場合、これらの値を生成しようとすると例外が発生します。
+  デフォルトは偽です。
 
 
 --- from_state(options) -> JSON::State
 
-Ϳ����줿 options �ˤ�ä��������� [[c:JSON::State]] �Υ��󥹥��󥹤��֤��ޤ���
+与えられた options によって生成した [[c:JSON::State]] のインスタンスを返します。
 
-@param options [[c:JSON::State]] �Υ��󥹥��󥹤����ϥå������ꤷ�ޤ���
+@param options [[c:JSON::State]] のインスタンスか、ハッシュを指定します。
 
-@return options ���ϥå���Ǥ�����ϡ�����ˤ�äƽ�������� [[c:JSON::State]] ��
-        �֤��ޤ���options �� [[c:JSON::State]] �Υ��󥹥��󥹤Ǥ������ñ��
-        options ���֤��ޤ���������Ǥ�̵�����ϡ��������ꤵ��Ƥ��ʤ� [[c:JSON::State]] ��
-        ���󥹥��󥹤��֤��ޤ���
+@return options がハッシュである場合は、それによって初期化した [[c:JSON::State]] を
+        返します。options が [[c:JSON::State]] のインスタンスである場合は単に
+        options を返します。いずれでも無い場合は、何も設定されていない [[c:JSON::State]] の
+        インスタンスを返します。
 
 == Public Instance Methods
 
 --- allow_nan? -> bool
 
-NaN, Infinity, -Infinity �������Ǥ����硢�����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+NaN, Infinity, -Infinity を生成できる場合、真を返します。
+そうでない場合は偽を返します。
 
 @see [[rfc:4627]]
 
 --- array_nl -> String
 
-JSON ������θ�˽��Ϥ���ʸ������֤��ޤ���
+JSON の配列の後に出力する文字列を返します。
 
 --- array_nl=(str)
 
-JSON ������θ�˽��Ϥ���ʸ����򥻥åȤ��ޤ���
+JSON の配列の後に出力する文字列をセットします。
 
 --- check_circular? -> bool
 
-�۴Ļ��ȤΥ����å���Ԥ����ϡ������֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+循環参照のチェックを行う場合は、真を返します。
+そうでない場合は偽を返します。
 
 --- configure(options = {}) -> self
 
-Ϳ����줿�ϥå���Ǽ��Ȥ����ꤷ�ޤ���
+与えられたハッシュで自身を設定します。
 
-���ץ����ǻ��Ѥ���ϥå���Υ����ˤĤ��Ƥ� [[m:JSON::State.new]] �򻲾Ȥ��Ƥ���������
+オプションで使用するハッシュのキーについては [[m:JSON::State.new]] を参照してください。
 
-@param options ���Υ��֥������Ȥ�����򤹤뤿��Υϥå������ꤷ�ޤ���
+@param options このオブジェクトの設定をするためのハッシュを指定します。
 
 @see [[m:JSON::State.new]]
 
 --- forget(object) -> object
 
-[[m:JSON::State#remember]] �ǵ�Ͽ�������֥������Ȥ�Ͽ���������ޤ���
+[[m:JSON::State#remember]] で記録したオブジェクトを記録から削除します。
 
 --- indent -> String
 
-����ǥ�Ȥ˻��Ѥ���ʸ������֤��ޤ���
+インデントに使用する文字列を返します。
 
 --- indent=(string)
 
-����ǥ�Ȥ˻��Ѥ���ʸ����򥻥åȤ��ޤ���
+インデントに使用する文字列をセットします。
 
-@param string ����ǥ�Ȥ˻��Ѥ���ʸ�������ꤷ�ޤ���
+@param string インデントに使用する文字列を指定します。
 
 --- max_nesting -> Integer
 
-��������� JSON ������ʸ����Υͥ��Ȥο����κ����ͤ��֤��ޤ���
+生成される JSON 形式の文字列のネストの深さの最大値を返します。
 
-�����ͤ������Ǥ�����ϡ��ͥ��Ȥο����Υ����å���Ԥ��ޤ���
+この値がゼロである場合は、ネストの深さのチェックを行いません。
 
 --- max_nesting=(depth)
 
-��������� JSON ������ʸ����Υͥ��Ȥο����κ����ͤ򥻥åȤ��ޤ���
+生成される JSON 形式の文字列のネストの深さの最大値をセットします。
 
-�����ͤ˥����򥻥åȤ���ȡ��ͥ��Ȥο����Υ����å���Ԥ��ޤ���
+この値にゼロをセットすると、ネストの深さのチェックを行いません。
 
 --- object_nl -> String
 
-JSON ������ʸ������˸���� JavaScript �Υ��֥������Ȥι�������������ʸ������֤��ޤ���
+JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
 
 --- object_nl=(string)
 
-JSON ������ʸ������˸���� JavaScript �Υ��֥������Ȥι�������������ʸ����򥻥åȤ��ޤ���
+JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列をセットします。
 
-@param string JSON ������ʸ������˸���� JavaScript �Υ��֥������Ȥι�������������ʸ�������ꤷ�ޤ���
+@param string JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を指定します。
 
 --- remember(object) -> true
 
-Ϳ����줿���֥������ȤΥ��֥������� ID ��Ͽ���ޤ���
+与えられたオブジェクトのオブジェクト ID を記録します。
 
-�����ǵ�Ͽ�������֥������Ȥϥǡ�����¤�ν۴Ĥ�����å����뤿��˻��Ѥ��ޤ���
+ここで記録したオブジェクトはデータ構造の循環をチェックするために使用します。
 
-@param object Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
+@param object 任意のオブジェクトを指定します。
 
 --- seen?(object) -> bool
 
-Ϳ����줿���֥������Ȥ����������ѤߤǤ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+与えられたオブジェクトが既に生成済みである場合は真を返します。
+そうでない場合は偽を返します。
 
-���Υ᥽�åɤϥǡ�����¤�ν۴Ĥ�����å����뤿��˻��Ѥ��ޤ���
+このメソッドはデータ構造の循環をチェックするために使用します。
 
 --- space -> String
 
-JSON ������ʸ����Υȡ�����֤���������ʸ������֤��ޤ���
+JSON 形式の文字列のトークン間に挿入する文字列を返します。
 
 --- space=(string)
 
-JSON ������ʸ����Υȡ�����֤���������ʸ����򥻥åȤ��ޤ���
+JSON 形式の文字列のトークン間に挿入する文字列をセットします。
 
-@param string JSON ������ʸ����Υȡ�����֤���������ʸ�������ꤷ�ޤ���
+@param string JSON 形式の文字列のトークン間に挿入する文字列を指定します。
 
 --- space_before -> String
 
-JSON ������ʸ������� JavaScript �Υ��֥������Ȥ�ɽ����ʬ�ˤ��� ':' ��
-������������ʸ������֤��ޤ���
+JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+前に挿入する文字列を返します。
 
 --- space_before=(string)
 
-JSON ������ʸ������� JavaScript �Υ��֥������Ȥ�ɽ����ʬ�ˤ��� ':' ��
-������������ʸ����򥻥åȤ��ޤ���
+JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+前に挿入する文字列をセットします。
 
-@param string JSON ������ʸ������� JavaScript �Υ��֥������Ȥ�ɽ����ʬ�ˤ��� ':' ��
-              ������������ʸ����򥻥åȤ��ޤ���
+@param string JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+              前に挿入する文字列をセットします。
 
 
 --- to_h -> Hash
 
-���Ȥ�ϥå�����Ѵ����ޤ���
+自身をハッシュに変換します。
 

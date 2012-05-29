@@ -1,26 +1,26 @@
 #@since 1.8.0
 
 = class CSV::StringReader < CSV::Reader
-CSV������ʸ������ɤ߹��ߡʥѡ����˻��˻��Ѥ���륯�饹
+CSV形式の文字列の読み込み（パース）時に使用されるクラス
 
 == Class Methods
 
 --- new(string, fs = ',', rs = nil) -> CSV::StringReader
-CSV������ʸ��������ͤȤ���Ϳ���ƥ��󥹥��󥹤��������ޤ���
+CSV形式の文字列を初期値として与えてインスタンスを生成します。
 
-@param string ����ͤ�ʸ����
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param string 初期値の文字列
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 == Private Instance Methods
 
 --- get_row(row) -> Fixnum
-CSV ������ʸ���󤫤�1 ��(row)ʬ�Υǡ�����������Ѵ�����row �˽��Ϥ��롣
+CSV 形式の文字列から1 行(row)分のデータを配列に変換し、row に出力する。
 
-@param row ����ͤ�ʸ����
-@return �ѡ������ƽ��Ϥ���1��ʬ�Υǡ����� cell �ο�(�Ѵ���������Υ�����)
+@param row 初期値の文字列
+@return パースして出力した1行分のデータの cell の数(変換した配列のサイズ)
 
 #@end
 

@@ -1,7 +1,7 @@
 = module GC
 
-GC �� Ruby ���󥿥ץ꥿�Ρ֥��߽���(Garbage Collection)�פ�����
-����⥸�塼��Ǥ���
+GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
+するモジュールです。
 
 @see [[c:ObjectSpace]]
 
@@ -9,54 +9,54 @@ GC �� Ruby ���󥿥ץ꥿�Ρ֥��߽���(Garbage Collection)�פ�����
 
 --- disable -> bool
 
-�����١������쥯�Ȥ�ػߤ��ޤ���
+ガーベージコレクトを禁止します。
 
-����ζػ߾��֤��֤��ޤ�(�ػߤ���Ƥ����ʤ� true, GC ��ͭ���Ǥ��ä��ʤ顢
-false)��
+前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
+false)。
 
 @see [[m:GC.enable]]
 
 --- enable -> bool
 
-�����١������쥯�Ȥ���Ĥ��ޤ���
+ガーベージコレクトを許可します。
 
-����ζػ߾��֤��֤��ޤ�(�ػߤ���Ƥ����ʤ� true, GC ��ͭ���Ǥ��ä��ʤ顢
-false)��
+前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
+false)。
 
 @see [[m:GC.disable]]
 
 --- start -> nil
 
-�����١������쥯�Ȥ򳫻Ϥ��ޤ���
+ガーベージコレクトを開始します。
 
-[[m:GC#garbage_collect]] �� [[m:ObjectSpace.#garbage_collect]] ��Ʊ��Ư���򤷤ޤ���
-[[m:GC.disable]] �ˤ�� GC ���ػߤ���Ƥ�����ϲ��⤷�ޤ���
+[[m:GC#garbage_collect]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
+[[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
-nil ���֤��ޤ���
+nil を返します。
 
 #@since 1.8.7
 --- stress -> bool
 --- stress=(value)
 
-GC.stress ���������ꤵ��Ƥ���֤ϡ�GC ��Ԥ��뤹�٤Ƥε���� GC ��Ԥ��ޤ���
+GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
-@param value Ǥ�դΥ��֥������ȡ������ͤȤ��Ʋ�ᤵ��ޤ���
+@param value 任意のオブジェクト。真偽値として解釈されます。
 #@end
 
 #@since 1.9.1
 --- count -> Integer
 
-�ץ��������Ϥ��饬���١������쥯�Ȥ�¹Ԥ�������� [[c:Integer]] ���֤�
-�ޤ���
+プロセス開始からガーベージコレクトを実行した回数を [[c:Integer]] で返し
+ます。
 #@end
 
 == Instance Methods
 
 --- garbage_collect -> nil
 
-�����١������쥯�Ȥ򳫻Ϥ��ޤ���
+ガーベージコレクトを開始します。
 
-[[m:GC.start]] �� [[m:ObjectSpace.#garbage_collect]] ��Ʊ��Ư���򤷤ޤ���
-[[m:GC.disable]] �ˤ�� GC ���ػߤ���Ƥ�����ϲ��⤷�ޤ���
+[[m:GC.start]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
+[[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
-nil ���֤��ޤ���
+nil を返します。

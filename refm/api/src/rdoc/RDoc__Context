@@ -2,40 +2,40 @@
 
 include Comparable
 
-�⥸�塼�롢���饹���᥽�åɤʤɤΡ�[[lib:rdoc/code_objects]] �������
-�륯�饹��������륯�饹�Ǥ���
+モジュール、クラス、メソッドなどの、[[lib:rdoc/code_objects]] が定義す
+るクラスを管理するクラスです。
 
 #@since 1.9.2
 == Constants
 
 --- TYPES -> ["class", "instance"]
 
-�᥽�åɤμ����ʸ�����������֤��ޤ���
+メソッドの種類を文字列の配列で返します。
 
 --- VISIBILITIES -> [:public, :protected, :private]
 
-�᥽�åɤβĻ����� [[c:Symbol]] ��������֤��ޤ���
+メソッドの可視性を [[c:Symbol]] の配列で返します。
 #@end
 
 == Class Methods
 
 --- new -> RDoc::Context
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Instance Methods
 
 --- aliases -> [RDoc::Alias]
 
-�ɲä��줿 [[c:RDoc::Alias]] ��������֤��ޤ���
+追加された [[c:RDoc::Alias]] の配列を返します。
 
 --- attributes -> [RDoc::Attr]
 
-�ɲä��줿 [[c:RDoc::Attr]] ��������֤��ޤ���
+追加された [[c:RDoc::Attr]] の配列を返します。
 
 --- constants -> [RDoc::Constant]
 
-�ɲä��줿 [[c:RDoc::Constant]] ��������֤��ޤ���
+追加された [[c:RDoc::Constant]] の配列を返します。
 
 --- in_files
 
@@ -43,139 +43,139 @@ Files this context is found in
 
 --- includes -> [RDoc::Include]
 
-�ɲä��줿 [[c:RDoc::Include]] ��������֤��ޤ���
+追加された [[c:RDoc::Include]] の配列を返します。
 
 --- method_list -> [RDoc::AnyMethod]
 
-�ɲä��줿([[c:RDoc::AnyMethod]] �����Υ��֥��饹�Υ��֥�������)������
-���֤��ޤ���
+追加された([[c:RDoc::AnyMethod]] かそのサブクラスのオブジェクト)の配列
+を返します。
 
 --- name -> String
 
-���Ȥ�̾�����֤��ޤ���
+自身の名前を返します。
 
-���֥��饹�ˤ�äƤϡ��᥽�å�̾�䥯�饹̾���̣���ޤ���
+サブクラスによっては、メソッド名やクラス名を意味します。
 
 --- requires -> [RDoc::Require]
 
-�ɲä��줿 [[c:RDoc::Require]] ��������֤��ޤ���
+追加された [[c:RDoc::Require]] の配列を返します。
 
 --- sections -> RDoc::Context::Section
 
-�ɲä��줿 [[c:RDoc::Context::Section]] ��������֤��ޤ���
+追加された [[c:RDoc::Context::Section]] の配列を返します。
 
 --- visibility -> :public | :protected | :private
 
-���ȤβĻ����� [[c:Symbol]] ���֤��ޤ���
+自身の可視性を [[c:Symbol]] で返します。
 
 --- <=>(other) -> -1 | 0 | 1
 
 #@since 1.9.2
-���Ȥ� other �� full_name ����Ӥ�����̤��֤��ޤ���
+自身と other の full_name を比較した結果を返します。
 #@else
-���Ȥ� other �� name ����Ӥ�����̤��֤��ޤ���
+自身と other の name を比較した結果を返します。
 #@end
 
-�����ȤΤ���˻Ȥ��ޤ���
+ソートのために使われます。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
 --- add_alias(an_alias) -> RDoc::Alias
 
-�����ǻ��ꤷ�� [[c:RDoc::Alias]] ���֥������Ȥ��ɲä��ޤ���
+引数で指定した [[c:RDoc::Alias]] オブジェクトを追加します。
 
-@param an_alias [[c:RDoc::Alias]] ���֥������Ȥ���ꤷ�ޤ���
+@param an_alias [[c:RDoc::Alias]] オブジェクトを指定します。
 
 --- add_attribute(an_attribute) -> ()
 
-�����ǻ��ꤷ�� [[c:RDoc::Attr]] ���֥������Ȥ��ɲä��ޤ���
+引数で指定した [[c:RDoc::Attr]] オブジェクトを追加します。
 
-@param an_attribute [[c:RDoc::Attr]] ���֥������Ȥ���ꤷ�ޤ���
+@param an_attribute [[c:RDoc::Attr]] オブジェクトを指定します。
 
 --- add_class(class_type, name, superclass) -> RDoc::SingleClass | RDoc::NormalClass
 
-�����ǻ��ꤷ�����饹���ɲä��ޤ���
+引数で指定したクラスを追加します。
 
-@param class_type �ɲä��륯�饹���⥸�塼��� [[c:RDoc::NormalClass]]��
-                  [[c:RDoc::SingleClass]]��[[c:RDoc::NormalModule]] ��
-                  �֥������ȤΤ����줫�ǻ��ꤷ�ޤ���
+@param class_type 追加するクラス、モジュールを [[c:RDoc::NormalClass]]、
+                  [[c:RDoc::SingleClass]]、[[c:RDoc::NormalModule]] オ
+                  ブジェクトのいずれかで指定します。
 
-@param name ���饹̾��ʸ����ǻ��ꤷ�ޤ���
+@param name クラス名を文字列で指定します。
 
-@param superclass �ɲä��륯�饹�οƥ��饹�� [[c:RDoc::NormalClass]] ��
-                  �֥������Ȥǻ��ꤷ�ޤ���
+@param superclass 追加するクラスの親クラスを [[c:RDoc::NormalClass]] オ
+                  ブジェクトで指定します。
 
 --- add_class_or_module(collection, class_type, name, superclass = nil) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
 
-collection �� name �ǻ��ꤷ�����饹���⥸�塼����ɲä��ޤ���
+collection に name で指定したクラス、モジュールを追加します。
 
-@param collection ���饹���⥸�塼����ɲä������ [[c:Hash]] ���֥���
-                  ���Ȥǻ��ꤷ�ޤ���
+@param collection クラス、モジュールを追加する先を [[c:Hash]] オブジェ
+                  クトで指定します。
 
-@param class_type �ɲä��륯�饹���⥸�塼��� [[c:RDoc::NormalClass]]��
-                  [[c:RDoc::SingleClass]]��[[c:RDoc::NormalModule]] ��
-                  �֥������ȤΤ����줫�ǻ��ꤷ�ޤ���
+@param class_type 追加するクラス、モジュールを [[c:RDoc::NormalClass]]、
+                  [[c:RDoc::SingleClass]]、[[c:RDoc::NormalModule]] オ
+                  ブジェクトのいずれかで指定します。
 
-@param name ���饹̾��ʸ����ǻ��ꤷ�ޤ���
+@param name クラス名を文字列で指定します。
 
-@param superclass �ɲä��륯�饹�οƥ��饹�� [[c:RDoc::NormalClass]] ��
-                  �֥������Ȥǻ��ꤷ�ޤ���
+@param superclass 追加するクラスの親クラスを [[c:RDoc::NormalClass]] オ
+                  ブジェクトで指定します。
 
-������Ͽ�ѤߤǤ��ä����ϡ������ǻ��ꤷ����������Ƥ򹹿����ޤ�������
-����[[m:RDoc::CodeObject#done_documenting]] �� true ���֤���硢�����
-���ޤ���
+既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただ
+し、[[m:RDoc::CodeObject#done_documenting]] が true を返す場合、何も行
+われません。
 
 --- add_constant(const) -> ()
 
-�����ǻ��ꤷ�� [[c:RDoc::Constant]] ���֥������Ȥ��ɲä��ޤ���
+引数で指定した [[c:RDoc::Constant]] オブジェクトを追加します。
 
-@param const [[c:RDoc::Constant]] ���֥������Ȥ���ꤷ�ޤ���
+@param const [[c:RDoc::Constant]] オブジェクトを指定します。
 
 --- add_include(an_include) -> ()
 
-�����ǻ��ꤷ�� [[c:RDoc::Include]] ���֥������Ȥ��ɲä��ޤ���
+引数で指定した [[c:RDoc::Include]] オブジェクトを追加します。
 
-@param an_include [[c:RDoc::Include]] ���֥������Ȥ���ꤷ�ޤ���
+@param an_include [[c:RDoc::Include]] オブジェクトを指定します。
 
 --- add_method(a_method) -> ()
 
-�����ǻ��ꤷ�� [[c:RDoc::AnyMethod]] ���֥������Ȥ��ɲä��ޤ���
+引数で指定した [[c:RDoc::AnyMethod]] オブジェクトを追加します。
 
-@param a_method [[c:RDoc::AnyMethod]] ���֥������Ȥ����Υ��֥��饹�Υ�
-                �֥������Ȥ���ꤷ�ޤ���
+@param a_method [[c:RDoc::AnyMethod]] オブジェクトかそのサブクラスのオ
+                ブジェクトを指定します。
 
 --- add_module(class_type, name) -> RDoc::NormalModule | RDoc::SingleClass | RDoc::NormalClass
 
-�����ǻ��ꤷ���⥸�塼����ɲä��ޤ���
+引数で指定したモジュールを追加します。
 
-�����������饹�Ȥ��ƴ���Ʊ̾�Τ�Τ���Ͽ����Ƥ������ϡ����⤻���ˤ�
-�Υ��饹���֤��ޤ���
+ただし、クラスとして既に同名のものが登録されていた場合は、何もせずにそ
+のクラスを返します。
 
-@param class_type �ɲä��륯�饹���⥸�塼��� [[c:RDoc::NormalClass]]��
-                  [[c:RDoc::SingleClass]]��[[c:RDoc::NormalModule]] ��
-                  �֥������ȤΤ����줫�ǻ��ꤷ�ޤ���
+@param class_type 追加するクラス、モジュールを [[c:RDoc::NormalClass]]、
+                  [[c:RDoc::SingleClass]]、[[c:RDoc::NormalModule]] オ
+                  ブジェクトのいずれかで指定します。
 
-@param name ���饹̾��ʸ����ǻ��ꤷ�ޤ���
+@param name クラス名を文字列で指定します。
 
 @see [[m:RDoc::Context#add_class]]
 
 --- add_require(a_require) -> ()
 
-���Ȥ���°���� [[c:RDoc::TopLevel]] ���֥������Ȥ˰����ǻ��ꤷ��
-[[c:RDoc::Require]] ���ɲä��ޤ���
+自身が所属する [[c:RDoc::TopLevel]] オブジェクトに引数で指定した
+[[c:RDoc::Require]] を追加します。
 
-@param a_require [[c:RDoc::Require]] ���֥������Ȥ���ꤷ�ޤ���
+@param a_require [[c:RDoc::Require]] オブジェクトを指定します。
 
 --- add_to(array, thing) -> ()
 
-array �� thing ���ɲä��ޤ���
+array に thing を追加します。
 
-@param array �������ꤷ�ޤ���
+@param array 配列を指定します。
 
-@param thing �ɲä������Ǥ���ꤷ�ޤ���
+@param thing 追加する要素を指定します。
 
-[[m:RDoc::Context#add_alias]] �ʤɤǻȤ��Ƥ��ޤ����饤�֥�������ǻ�
-�Ѥ��ޤ���
+[[m:RDoc::Context#add_alias]] などで使われています。ライブラリ内部で使
+用します。
 
 @see [[m:RDoc::Context#add_alias]], [[m:RDoc::Context#add_attribute]],
      [[m:RDoc::Context#add_constant]], [[m:RDoc::Context#add_include]],
@@ -183,7 +183,7 @@ array �� thing ���ɲä��ޤ���
 
 --- classes -> [RDoc::SingleClass | RDoc::NormalClass]
 
-�ɲä��줿���饹��������֤��ޤ���
+追加されたクラスの配列を返します。
 
 --- defined_in?(file)
 
@@ -191,22 +191,22 @@ Return true if at least part of this thing was defined in file
 
 --- each_attribute {|a| ... } -> [RDoc::Attr]
 
-�ɲä��줿 [[c:RDoc::Attr]] ���Ф��ƥ֥��å���ɾ�����ޤ���
+追加された [[c:RDoc::Attr]] に対してブロックを評価します。
 
 --- each_classmodule {|m| ... } -> [RDoc::SingleClass | RDoc::NormalClass | RDoc::NormalModule]
 
-�ɲä��줿���饹���⥸�塼����Ф��ƥ֥��å���ɾ�����ޤ���
+追加されたクラス、モジュールに対してブロックを評価します。
 
 @see [[m:RDoc::Context#classes]], [[m:RDoc::Context#modules]]
 
 --- each_constant {|c| ... } -> [RDoc::Constant]
 
-�ɲä��줿 [[c:RDoc::Constant]] ���Ф��ƥ֥��å���ɾ�����ޤ���
+追加された [[c:RDoc::Constant]] に対してブロックを評価します。
 
 --- each_method {|m| ... } -> [RDoc::AnyMethod]
 
-�ɲä��줿�᥽�å�([[c:RDoc::AnyMethod]] �����Υ��֥��饹�Υ��֥�������)
-���Ф��ƥ֥��å���ɾ�����ޤ���
+追加されたメソッド([[c:RDoc::AnyMethod]] かそのサブクラスのオブジェクト)
+に対してブロックを評価します。
 
 --- find_enclosing_module_named(name) -> RDoc::NormalModule | nil
 
@@ -219,10 +219,10 @@ this context
 
 --- find_module_named(name) -> RDoc::NormalModule | nil
 
-�ɲä��줿 [[c:RDoc::NormalModule]] ��������ǻ��ꤷ��̾���Υ⥸�塼��
-�򸡺����ޤ������Ĥ���ʤ��ä����� nil ���֤��ޤ���
+追加された [[c:RDoc::NormalModule]] から引数で指定した名前のモジュール
+を検索します。見つからなかった場合は nil を返します。
 
-@param name �⥸�塼���̾����ʸ����ǻ��ꤷ�ޤ���
+@param name モジュールの名前を文字列で指定します。
 
 --- find_symbol(symbol, method=nil)
 
@@ -231,17 +231,17 @@ the symbol references a module that contains that method
 
 --- initialize_classes_and_modules -> ()
 
-�ɲä��줿���饹��⥸�塼��򥯥ꥢ���ޤ���
+追加されたクラスやモジュールをクリアします。
 
 --- initialize_methods_etc -> ()
 
-�ɲä��줿�᥽�åɡ�°����alias ���줿�᥽�å�(�᥽�å�̾���б�������
-���ʤ���Τ�ޤ�)��require ���줿�ե����롢include ���줿�ե����롢���
-�򥯥ꥢ���ޤ���
+追加されたメソッド、属性、alias されたメソッド(メソッド名の対応が取れて
+いないものを含む)、require されたファイル、include されたファイル、定数
+をクリアします。
 
 --- modules -> [RDoc::NormalModule]
 
-�ɲä��줿 [[c:RDoc::NormalModule]] ��������֤��ޤ���
+追加された [[c:RDoc::NormalModule]] の配列を返します。
 
 --- ongoing_visibility=(vis)
 
@@ -257,40 +257,40 @@ Handle sections
 
 --- set_visibility_for(methods, visibility, singleton = false) -> ()
 
-methods �ǻ��ꤷ�� [[c:RDoc::AnyMethod]]��[[c:RDoc::Attr]] ���⡢
-singleton �ǻ��ꤷ�����Ȱ��פ���᥽�åɤ��٤ƤβĻ����� visibility
-�����ꤷ�ޤ���
+methods で指定した [[c:RDoc::AnyMethod]]、[[c:RDoc::Attr]] の内、
+singleton で指定した条件と一致するメソッドすべての可視性を visibility
+に設定します。
 
-@param methods [[c:RDoc::AnyMethod]]��[[c:RDoc::Attr]] ���֥������Ȥ���
-               �����ꤷ�ޤ���
+@param methods [[c:RDoc::AnyMethod]]、[[c:RDoc::Attr]] オブジェクトの配
+               列を指定します。
 
-@param visibility �Ļ����� :public, :protected, :private ����Τ����줫
-                  �ǻ��ꤷ�ޤ���
+@param visibility 可視性を :public, :protected, :private の内のいずれか
+                  で指定します。
 
-@param singleton �ðۥ᥽�åɤβĻ������ѹ�������� true�������Ǥʤ�
-                 ���� false ����ꤷ�ޤ���
+@param singleton 特異メソッドの可視性を変更する場合は true、そうでない
+                 場合は false を指定します。
 
 --- toplevel -> RDoc::TopLevel
 
-���Ȥ���°���� [[c:RDoc::TopLevel]] ���֥������Ȥ��֤��ޤ���
+自身が所属する [[c:RDoc::TopLevel]] オブジェクトを返します。
 
 #@since 1.9.1
 --- current_section -> RDoc::Context::Section
 
-���ߤ� section ���֤��ޤ���
+現在の section を返します。
 #@end
 
 #@since 1.9.2
 --- unmatched_alias_lists -> {String => RDoc::Alias}
 
-�᥽�å�̾���б������Ƥ��ʤ� alias �ε�᥽�å�̾��������
-[[c:RDoc::Alias]] ���ͤ� [[c:Hash]] ���֤��ޤ���
+メソッド名の対応が取れていない alias の旧メソッド名がキー、
+[[c:RDoc::Alias]] が値の [[c:Hash]] を返します。
 
 --- unmatched_alias_lists=(val)
 
-�᥽�å�̾���б������Ƥ��ʤ� alias �ε�᥽�å�̾��������
-[[c:RDoc::Alias]] ���ͤ� [[c:Hash]] �����ꤷ�ޤ���
+メソッド名の対応が取れていない alias の旧メソッド名がキー、
+[[c:RDoc::Alias]] が値の [[c:Hash]] を設定します。
 
-@param val ��᥽�å�̾��������[[c:RDoc::Alias]] ���ͤ� [[c:Hash]] ���
-           �ꤷ�ޤ���
+@param val 旧メソッド名がキー、[[c:RDoc::Alias]] が値の [[c:Hash]] を指
+           定します。
 #@end

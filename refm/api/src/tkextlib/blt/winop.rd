@@ -61,9 +61,9 @@ extend TkCore
 
 --- lower(*wins)
 
-ежегеєе╔еждЄ║╟╟╪╠╠д╦░▄╞░д╖д▐д╣бг
+уВжуВгуГ│уГЙуВжуВТцЬАшГМщЭвуБлчз╗хЛХуБЧуБ╛уБЩуАВ
 
-@param wins ежегеєе╔ежд╬╟█╬є
+@param wins уВжуВгуГ│уГЙуВжуБощЕНхИЧ
 
 --- map(*wins)
 #@todo
@@ -87,9 +87,9 @@ extend TkCore
 
 --- raise(*wins)
 
-ежегеєе╔еждЄ║╟┴░╠╠д╦░▄╞░д╖д▐д╣бг
+уВжуВгуГ│уГЙуВжуВТцЬАхЙНщЭвуБлчз╗хЛХуБЧуБ╛уБЩуАВ
 
-@param wins ежегеєе╔ежд╬╟█╬є
+@param wins уВжуВгуГ│уГЙуВжуБощЕНхИЧ
 
 --- read_jpeg(file, photo)
 #@todo
@@ -103,10 +103,10 @@ extend TkCore
 
 --- snap(win, photo)
 
-е╣е╩е├е╫е╖ече├е╚дЄд╚дъд▐д╣бг
+уВ╣уГКуГГуГЧуВ╖уГзуГГуГИуВТуБиуВКуБ╛уБЩуАВ
 
-@param win ежегеєе╔еж
-@param photo ╩▌┬╕д╣ды Photo едесб╝е╕д╬╠╛┴░
+@param win уВжуВгуГ│уГЙуВж
+@param photo ф┐ЭхнШуБЩуВЛ Photo уВдуГбуГ╝уВ╕уБохРНхЙН
 
 --- subsample(src, dest, x, y, width, height, horiz_filter = None, vert_filter = None)
 #@todo

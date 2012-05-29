@@ -1,7 +1,7 @@
-= ÇÛÉÛ¾ò·ï
+= é…å¸ƒæ¡ä»¶
 
-¤³¤Î¥ê¥Õ¥¡¥ì¥ó¥¹¤Ï°Ê²¼¤Î¥é¥¤¥»¥ó¥¹¤Ë½¾¤Ã¤ÆÍøÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
+ã“ã®ãƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹ã¯ä»¥ä¸‹ã®ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã«å¾“ã£ã¦åˆ©ç”¨ã—ã¦ãã ã•ã„ã€‚
 
-: Creative Commons ¡½ Attribution 3.0 Unported
+: Creative Commons â€” Attribution 3.0 Unported
   [[url:http://creativecommons.org/licenses/by/3.0/]]
 

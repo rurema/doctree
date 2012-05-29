@@ -1,5 +1,5 @@
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤ÇÂÀ»ú¤ä¥¢¥ó¥À¡¼¥é¥¤¥ó¤Î¸ú
-²Ì¤ò»ý¤¿¤»¤ë¤è¤¦¤Ë¸«¤»¤ë¥µ¥Ö¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã§å¤ªå­—ã‚„ã‚¢ãƒ³ãƒ€ãƒ¼ãƒ©ã‚¤ãƒ³ã®åŠ¹
+æžœã‚’æŒãŸã›ã‚‹ã‚ˆã†ã«è¦‹ã›ã‚‹ã‚µãƒ–ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@until 1.9.3
   require 'rdoc/markup/formatter'
@@ -9,19 +9,19 @@ RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤ÇÂÀ»ú¤ä¥¢¥ó¥À¡¼¥é¥¤¥ó¤Î¸ú
   h = RDoc::Markup::ToBs.new
   puts h.convert(input_string)
 
-ÊÑ´¹¤·¤¿·ë²Ì¤ÏÊ¸»úÎó¤Ç¼èÆÀ¤Ç¤­¤Þ¤¹¡£¼ÂºÝ¤Ë¸ú²Ì¤ò³ÎÇ§¤¹¤ë¤¿¤á¤Ë¤Ï¥Ú¡¼¥¸¥ã
-¤Ê¤É¤Ç½ÐÎÏ¤ò³ÎÇ§¤·¤Þ¤¹¡£
+å¤‰æ›ã—ãŸçµæžœã¯æ–‡å­—åˆ—ã§å–å¾—ã§ãã¾ã™ã€‚å®Ÿéš›ã«åŠ¹æžœã‚’ç¢ºèªã™ã‚‹ãŸã‚ã«ã¯ãƒšãƒ¼ã‚¸ãƒ£
+ãªã©ã§å‡ºåŠ›ã‚’ç¢ºèªã—ã¾ã™ã€‚
 
-¥Æ¥­¥¹¥ÈÃæ¤Î°Ê²¼¤Î¥Þ¡¼¥¯¥¢¥Ã¥×µ­Ë¡¤ò¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤Î \b ¤ÈÁÈ¤ß¹ç
-¤ï¤»¤ë»ö¤Ë¤è¤Ã¤Æ¸«¤¿ÌÜ¤òÊÑ¹¹¤·¤Þ¤¹¡£
+ãƒ†ã‚­ã‚¹ãƒˆä¸­ã®ä»¥ä¸‹ã®ãƒžãƒ¼ã‚¯ã‚¢ãƒƒãƒ—è¨˜æ³•ã‚’ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã® \b ã¨çµ„ã¿åˆ
+ã‚ã›ã‚‹äº‹ã«ã‚ˆã£ã¦è¦‹ãŸç›®ã‚’å¤‰æ›´ã—ã¾ã™ã€‚
 
- * ¥¤¥¿¥ê¥Ã¥¯ÂÎ(_word_): word ¤Ë¥¢¥ó¥À¡¼¥é¥¤¥ó¤òÉÕ¤±¤ÆÉ½¼¨¤¹¤ë("w\b_o\b_r\b_d\b_" ¤ËÊÑ´¹¤µ¤ì¤Þ¤¹)
- * ¥Ü¡¼¥ë¥ÉÂÎ(*word*): word ¤òÂÀ»ú¤ÇÉ½¼¨¤¹¤ë("w\bwo\bor\brd\bd" ¤ËÊÑ´¹¤µ¤ì¤Þ¤¹)
+ * ã‚¤ã‚¿ãƒªãƒƒã‚¯ä½“(_word_): word ã«ã‚¢ãƒ³ãƒ€ãƒ¼ãƒ©ã‚¤ãƒ³ã‚’ä»˜ã‘ã¦è¡¨ç¤ºã™ã‚‹("w\b_o\b_r\b_d\b_" ã«å¤‰æ›ã•ã‚Œã¾ã™)
+ * ãƒœãƒ¼ãƒ«ãƒ‰ä½“(*word*): word ã‚’å¤ªå­—ã§è¡¨ç¤ºã™ã‚‹("w\bwo\bor\brd\bd" ã«å¤‰æ›ã•ã‚Œã¾ã™)
 
 = class RDoc::Markup::ToBs < RDoc::Markup::ToRdoc
 
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤ÇÂÀ»ú¤ä¥¢¥ó¥À¡¼¥é¥¤¥ó¤Î¸ú
-²Ì¤ò»ý¤¿¤»¤ë¤è¤¦¤Ë¸«¤»¤ë¥¯¥é¥¹¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã§å¤ªå­—ã‚„ã‚¢ãƒ³ãƒ€ãƒ¼ãƒ©ã‚¤ãƒ³ã®åŠ¹
+æžœã‚’æŒãŸã›ã‚‹ã‚ˆã†ã«è¦‹ã›ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 
@@ -31,9 +31,9 @@ RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤ÇÂÀ»ú¤ä¥¢¥ó¥À¡¼¥é¥¤¥ó¤Î¸ú
 --- new -> RDoc::Markup::ToBs
 #@end
 
-¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 #@since 1.9.3
-@param markup [[c:RDoc::Markup]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç
-              ¤Ï¿·¤·¤¯ºîÀ®¤·¤Þ¤¹¡£
+@param markup [[c:RDoc::Markup]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚çœç•¥ã—ãŸå ´åˆ
+              ã¯æ–°ã—ãä½œæˆã—ã¾ã™ã€‚
 #@end

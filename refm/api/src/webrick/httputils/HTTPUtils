@@ -1,28 +1,28 @@
 = module WEBrick::HTTPUtils
 
-HTTP �Τ���Υ桼�ƥ���ƥ��ؿ����󶡤��ޤ���
+HTTP のためのユーティリティ関数を提供します。
 
 == Module Functions
 
 --- load_mime_types(file)    -> Hash
 
-Apache �� mime.types �ե���������� file ���ɤ߹���
-��ĥ�Ҥ򥭡���MIME �����פ��ͤȤ���ϥå�����֤��ޤ����������ͤ�ʸ����Ǥ���
+Apache の mime.types ファイル形式の file を読み込み
+拡張子をキー、MIME タイプを値とするハッシュを返します。キーも値も文字列です。
 
-@param file Apache �� mime.types �ե���������Υե������̾����ʸ����ǻ��ꤷ�ޤ���
+@param file Apache の mime.types ファイル形式のファイルの名前を文字列で指定します。
 
   p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
   # => {"htm"=>"text/html", "rpm"=>"application/x-rpm", ... }
 
 --- mime_type(filename, mime_tab)    -> String
 
-�ե�����̾ filename �γ�ĥ�Ҥ��Ȥˤ��� MIME �����פ���ꤵ�줿 mime_tab 
-����õ����ʸ����Ȥ����֤��ޤ���MIME �����פ����Ĥ���ʤ����� "application/octet-stream"
-���֤��ޤ���
+ファイル名 filename の拡張子をもとにその MIME タイプを指定された mime_tab 
+から探して文字列として返します。MIME タイプが見つからない場合は "application/octet-stream"
+を返します。
 
-@param filename �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param filename ファイル名を文字列で指定します。
 
-@param mime_tab ��ĥ�Ҥ򥭡���MIME �����פ��ͤȤ���ϥå������ꤷ�ޤ���
+@param mime_tab 拡張子をキー、MIME タイプを値とするハッシュを指定します。
 
   include WEBrick::HTTPUtils
   p mime_type('index.html', DefaultMimeTypes)     #=> "text/html"
@@ -31,15 +31,15 @@ Apache �� mime.types �ե���������� file ���ɤ߹���
 
 --- parse_header(raw) -> Hash
 
-HTTP �إå���ѡ������Ʒ�̤�ϥå���˳�Ǽ�����֤��ޤ���
+HTTP ヘッダをパースして結果をハッシュに格納して返します。
 
-@param raw ���Υإå���ɽ��ʸ�������ꤷ�ޤ���
+@param raw 生のヘッダを表す文字列を指定します。
 
 --- split_header_value(str) -> Array
 
-HTTP �إå����ͤ�ʬ�䤷���֤��ޤ���
+HTTP ヘッダの値を分割して返します。
 
-@param str HTTP �إå����ͤ��֤��ޤ���
+@param str HTTP ヘッダの値を返します。
 
 --- parse_range_header(ranges_specifier)
 #@todo ???
@@ -48,24 +48,24 @@ HTTP �إå����ͤ�ʬ�䤷���֤��ޤ���
 
 --- dequote(str) -> String
 
-Ϳ����줿ʸ���󤫤���֥륯�����ȤȥХå�����å�����������֤��ޤ���
+与えられた文字列からダブルクオートとバックスラッシュを削除して返します。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- quote(str) -> String
 
-Ϳ����줿ʸ�������֥륯�����Ȥǥ������Ȥ��ޤ���
+与えられた文字列をダブルクオートでクオートします。
 
-Ϳ����줿ʸ����˴ޤޤ�Ƥ�����֥륯�����ȤϥХå�����å���ǥ�������
-�פ��ޤ���
+与えられた文字列に含まれているダブルクオートはバックスラッシュでエスケー
+プします。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- escape(str) -> String
 
-Ϳ����줿ʸ�������ͻ���ʸ������Ѵ����ޤ���
+与えられた文字列を数値参照文字列に変換します。
 
-�ʲ�������ɽ������Ѥ����Ѵ����ޤ���
+以下の正規表現を使用して変換します。
 
   control  = (0x0..0x1f).collect{|c| c.chr }.join + "\x7f"
   space    = " "
@@ -74,20 +74,20 @@ HTTP �إå����ͤ�ʬ�䤷���֤��ޤ���
   nonascii = (0x80..0xff).collect{|c| c.chr }.join
   /[#{Regexp.escape(control + space + delims + unwise + nonascii)}]/n
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- unescape(str) -> String
 
-Ϳ����줿ʸ�������ͻ���ʸ���󤫤鸵��ʸ������Ѵ����ޤ���
+与えられた文字列を数値参照文字列から元の文字列に変換します。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 #@since 1.8.3
 --- escape_path(str) -> String
 
-Ϳ����줿ʸ�������ͻ���ʸ������Ѵ����ޤ���
+与えられた文字列を数値参照文字列に変換します。
 
-�ʲ�������ɽ������Ѥ����Ѵ����ޤ���
+以下の正規表現を使用して変換します。
 
   num      = '0123456789'
   lowalpha = 'abcdefghijklmnopqrstuvwxyz'
@@ -96,15 +96,15 @@ HTTP �إå����ͤ�ʬ�䤷���֤��ޤ���
   unreserved = num + lowalpha + upalpha + mark
   /[^#{Regexp.escape(unreserved + ":@&=+$,")}]/n
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 #@end
 
 --- escape8bit(str) -> String
 
-Ϳ����줿ʸ�������ͻ���ʸ������Ѵ����ޤ���
+与えられた文字列を数値参照文字列に変換します。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 #@#--- normalize_path(path)
 #@#todo
@@ -144,4 +144,4 @@ HTTP �إå����ͤ�ʬ�䤷���֤��ޤ���
 
 --- DefaultMimeTypes -> Hash
 
-�ե�����γ�ĥ�Ҥ򥭡��� MIME Type ���ͤȤ������Ǥ���ĥϥå���Ǥ���
+ファイルの拡張子をキー、 MIME Type を値とする要素を持つハッシュです。

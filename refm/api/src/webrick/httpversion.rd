@@ -1,32 +1,32 @@
 = class WEBrick::HTTPVersion < Object
 include Comparable
 
-HTTP �ΥС������Τ���ξ����ʥ��饹�Ǥ���
-�С������Ʊ�Τ���ӤΤ���˻Ȥ��ޤ���
+HTTP のバージョンのための小さなクラスです。
+バージョン同士の比較のために使います。
 
 == Class Methods
 --- new(version)    -> WEBrick::HTTPVersion
 
-HTTPVersion ���֥������Ȥ��������ޤ���version ��ʸ���� HTTPVersion ���֥������ȤǤ���
+HTTPVersion オブジェクトを生成します。version は文字列か HTTPVersion オブジェクトです。
 
-@param version HTTP �ΥС������� WEBrick::HTTPVersion ���֥������Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param version HTTP のバージョンを WEBrick::HTTPVersion オブジェクトか文字列で指定します。
 
 --- convert(version)    -> WEBrick::HTTPVersion
 
-���ꤵ�줿 version �� HTTPVersion ���֥������Ȥ��Ѵ������֤��ޤ���
-version �� HTTPVersion ���֥������Ȥξ��Ϥ��Τޤ� version ���֤��ޤ���
+指定された version を HTTPVersion オブジェクトに変換して返します。
+version が HTTPVersion オブジェクトの場合はそのまま version を返します。
 
-@param version HTTP �ΥС������� WEBrick::HTTPVersion ���֥������Ȥ�ʸ����ǻ��ꤷ�ޤ���
+@param version HTTP のバージョンを WEBrick::HTTPVersion オブジェクトか文字列で指定します。
 
 == Instance Methods
 
 --- <=>(other)    -> -1 | 0 | 1 | nil
 
-���ȤȻ��ꤵ�줿 other �ΥС���������Ӥ��ޤ���
-���Ȥ� other ��꿷�����ʤ� 1��Ʊ���ʤ� 0���Ť��ʤ� -1 ���֤��ޤ���
-��ӤǤ��ʤ����� nil ���֤��ޤ���
+自身と指定された other のバージョンを比較します。
+自身が other より新しいなら 1、同じなら 0、古いなら -1 を返します。
+比較できない場合に nil を返します。
 
-@param other HTTP �ΥС�������ɽ�� WEBrick::HTTPVersion ���֥������Ȥ�ʸ�������ꤷ�ޤ���
+@param other HTTP のバージョンを表す WEBrick::HTTPVersion オブジェクトか文字列を指定します。
 
   require 'webrick'
   v = WEBrick::HTTPVersion.new('1.1')
@@ -35,20 +35,20 @@ version �� HTTPVersion ���֥������Ȥξ��Ϥ��Τޤ� version ���֤��ޤ���
 --- major      -> Integer
 --- major=(n)
 
-HTTP �С������Υ᥸�㡼��������ɽ�����������Ǥ���
+HTTP バージョンのメジャーを整数で表すアクセサです。
 
-@param n HTTP �С������Υ᥸�㡼�������ǻ��ꤷ�ޤ���
+@param n HTTP バージョンのメジャーを整数で指定します。
 
 --- minor      -> Integer
 --- minor=(n)
 
-HTTP �С������Υޥ��ʡ���������ɽ�����������Ǥ���
+HTTP バージョンのマイナーを整数で表すアクセサです。
 
-@param n HTTP �С������Υޥ��ʡ��������ǻ��ꤷ�ޤ���
+@param n HTTP バージョンのマイナーを整数で指定します。
 
 --- to_s    -> String
 
-���Ȥ�ʸ������Ѵ������֤��ޤ���
+自身を文字列に変換して返します。
 
   require 'webrick'
   v = WEBrick::HTTPVersion.new('1.1')

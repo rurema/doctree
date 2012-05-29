@@ -1,6 +1,6 @@
 = object TkCore::INTERP < TclTkIp
 
-INTERP ¤Ï [[c:TclTkIp]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¡£
+INTERP ã¯ [[c:TclTkIp]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã€‚
 
 --- __getip
 #@todo

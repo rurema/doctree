@@ -1,56 +1,56 @@
 = class WEBrick::GenericServer < Object
 
-�����Фΰ���Ū�ʵ�ǽ���󶡤��륯�饹�Ǥ���
-[[c:WEBrick::HTTPServer]] �Υ����ѡ����饹�Ǥ���
+サーバの一般的な機能を提供するクラスです。
+[[c:WEBrick::HTTPServer]] のスーパークラスです。
 
 == Class Methods
 
 --- new(config = {}, default = WEBrick::Config::General) -> WEBrick::GenericServer
 
-GenericServer ���֥������Ȥ����������֤��ޤ���
+GenericServer オブジェクトを生成して返します。
 
-@param config �����Ф��������¸�����ϥå������ꤷ�ޤ���ͭ���ʥ�����
-              �ͤϰʲ��ΤȤ���Ǥ���
+@param config サーバの設定を保存したハッシュを指定します。有効なキーと
+              値は以下のとおりです。
 
 : :ServerName
-  �����ФΥۥ���̾��ɽ��ʸ�������ꤷ�ޤ����ǥե���Ȥ� Utils.getservername �� /etc/hostname
-  �˽񤫤�Ƥ���ʸ����Ǥ���
+  サーバのホスト名を表す文字列を指定します。デフォルトの Utils.getservername は /etc/hostname
+  に書かれている文字列です。
 : :BindAddress
-  �����ФΥ��ɥ쥹����ꤷ�ޤ����ǥե���Ȥ� nil �� "0.0.0.0", "::" �ʤɤ���ꤷ��
-  ���ϻ��Ѳ�ǽ�ʤ��٤ƤΥͥåȥ�����󥿡��ե��������Ф��� listen �򳫻Ϥ��ޤ���
-  [[ref:lib:socket#host_format]] �򻲾Ȥ��Ʋ�������
+  サーバのアドレスを指定します。デフォルトの nil や "0.0.0.0", "::" などを指定した
+  場合は使用可能なすべてのネットワークインターフェースに対して listen を開始します。
+  [[ref:lib:socket#host_format]] を参照して下さい。
 : :Port
-  �����ФΥݡ��Ȥ���ꤷ�ޤ���[[ref:lib:socket#service_format]]�򻲾Ȥ򻲾Ȥ��Ʋ�������
+  サーバのポートを指定します。[[ref:lib:socket#service_format]]を参照を参照して下さい。
 : :MaxClients
-  ���饤����Ȥκ�����³����ɽ�������Ǥ���
+  クライアントの最大接続数を表す整数です。
 : :ServerType
-  �����ФΥ����פ�ɽ�����饹����ꤷ�ޤ������ꤹ�륯�饹�ϥ֥��å�����start�Ȥ���̾���Υ��饹�᥽�åɤ����ɬ�פ�����ޤ��������Фϡ�start�᥽�åɤ���ǥ��饤����Ȥ���α����Ԥ��Υ롼�׽�����¹Ԥ��ޤ���WEBrick�ϸƤФ줿����å���Ǽ¹Ԥ���[[c:WEBrick::SimpleServer]] �ȡ��ҥץ�������fork���ƥǡ����Ȥ��Ƽ¹Ԥ���[[c:WEBrick::Daemon]] ���󶡤��ޤ����ޤ���[[c:Thread]]����ꤹ��ȥ����Фϥ���å���Ǽ¹Ԥ���뤿��[[m:WEBrick::GenericServer#start]]�ϸƤӽФ�ľ��˸ƤӽФ�����������ᤷ�ޤ���
+  サーバのタイプを表すクラスを指定します。指定するクラスはブロックを取るstartという名前のクラスメソッドを持つ必要があります。サーバは、startメソッドの中でクライアントからの応答待ちのループ処理を実行します。WEBrickは呼ばれたスレッド内で実行する[[c:WEBrick::SimpleServer]] と、子プロセスをforkしてデーモンとして実行する[[c:WEBrick::Daemon]] を提供します。また、[[c:Thread]]を指定するとサーバはスレッド内で実行されるため[[m:WEBrick::GenericServer#start]]は呼び出し直後に呼び出し元に制御を戻します。
 : :Logger
-  ������Ȥ륪�֥�������(Logger ���֥�������)����ꤷ�ޤ����̾�� [[c:WEBrick::Log]] �Υ��󥹥��󥹤���ꤷ�ޤ���
-  WEBrick::Log.new(log_file, level) �Τ褦�˽�����ȥ�����٥�����ꤹ�뤳�Ȥ��Ǥ��ޤ���
-  Logger ���֥������Ȥ��������Ƥ���٤��᥽�åɤ˴ؤ��Ƥ� [[c:WEBrick::Log]] �򻲾Ȥ��Ʋ�������
+  ログをとるオブジェクト(Logger オブジェクト)を指定します。通常は [[c:WEBrick::Log]] のインスタンスを指定します。
+  WEBrick::Log.new(log_file, level) のように出力先とログレベルを設定することができます。
+  Logger オブジェクトに定義されているべきメソッドに関しては [[c:WEBrick::Log]] を参照して下さい。
 : :ServerSoftware
-  �����Х��եȥ�����̾��ʸ����ǻ��ꤷ�ޤ���[[c:WEBrick::HTTPServer]] �Ǥ� Server �إå��ˤ����ͤ����Ϥ���ޤ���
+  サーバソフトウェア名を文字列で指定します。[[c:WEBrick::HTTPServer]] では Server ヘッダにこの値が出力されます。
 : :DoNotListen
-  true �ξ�硢GenericServer ���֥������Ȥ��������������Ǥ� listen �򳫻Ϥ��ޤ���
+  true の場合、GenericServer オブジェクトを生成しただけでは listen を開始しません。
 : :StartCallback
-  start ���ϻ��˸ƤФ�� [[c:Proc]] ���֥������ȡ��ƤФ����˰�����
-  �ä�Ϳ�����ޤ���
+  start 開始時に呼ばれる [[c:Proc]] オブジェクト。呼ばれる時に引数は
+  特に与えられません。
 : :StopCallback
-  �����Ф� stop �������˸ƤФ�� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ����ƤФ����˰�����
-  �ä�Ϳ�����ޤ���
+  サーバを stop した時に呼ばれる [[c:Proc]] オブジェクトを指定します。呼ばれる時に引数は
+  特に与えられません。
 : :AcceptCallback
-  ���饤����Ȥ������³�� accept �����Ȥ��˸ƤФ�� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
-  ���饤����Ȥ���³���줿 [[c:TCPSocket]] ���֥������Ȥ�����Ȥ��ƸƤФ�ޤ���
+  クライアントからの接続を accept したときに呼ばれる [[c:Proc]] オブジェクトを指定します。
+  クライアントと接続された [[c:TCPSocket]] オブジェクトを引数として呼ばれます。
 #@since 1.9.1
 : :DoNotReverseLookup
-  true �ξ�硢�ۥ���̾�ؤεհ�����Ԥ�ʤ��ʤ�ޤ���
+  true の場合、ホスト名への逆引きを行わなくなります。
   [[m:BasicSocket#do_not_reverse_lookup]]
-  �⻲�Ȥ��Ʋ�������
+  も参照して下さい。
 #@end
 
-@param default �����ФΥǥե���Ȥ��������¸�����ϥå������ꤷ�ޤ������ꤵ�줿 config ��
-               ���꤬�ʤ��ä����ܤ˴ؤ��ƤϤ��� default ���ͤ��Ȥ��ޤ���
+@param default サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で
+               設定がなかった項目に関してはこの default の値が使われます。
 
 @see [[m:WEBrick::Config::General]]
 
@@ -58,70 +58,70 @@ GenericServer ���֥������Ȥ����������֤��ޤ���
 
 --- [](key)    -> object
 
-self.config[key] ��Ʊ���Ǥ���
+self.config[key] と同じです。
 
 --- config     -> Hash
 
-�����Ф��������¸�����ϥå�����֤��ޤ���
+サーバの設定を保存したハッシュを返します。
 
 --- listen(address, port) -> [TCPServer]
 
-Ϳ����줿���ɥ쥹�ȥݡ��Ȥ� [[c:TCPServer]] ���֥������Ȥ�������
-listener �Ȥ��ƴ������ޤ���
+与えられたアドレスとポートで [[c:TCPServer]] オブジェクトを生成し
+listener として管理します。
 
-@param address ���ɥ쥹��ʸ����ǻ��ꤷ�ޤ���
+@param address アドレスを文字列で指定します。
 
-@param port listen ����ݡ��Ȥ������ǻ��ꤷ�ޤ���
+@param port listen するポートを整数で指定します。
 
 @see [[m:WEBrick::GenericServer#listeners]], [[m:TCPServer#listen]]
 
 --- listeners    -> [TCPServer]
 
-listen ���Ƥ��� [[c:TCPServer]] ���֥������Ȥ�������֤��ޤ���
+listen している [[c:TCPServer]] オブジェクトの配列を返します。
 
 --- logger    -> WEBrick::Log
 
-����������˻��ꤵ�줿�����Ȥ�����󥰤��� [[c:WEBrick::Log]] �Υ���
-���󥹤��֤��ޤ���
+生成する時に指定された、自身をロギングする [[c:WEBrick::Log]] のインス
+タンスを返します。
 
 --- shutdown     -> ()
 
-[[m:WEBrick::GenericServer#stop]] ��Ƥӡ����Ƥ� listeners �� close ���ޤ���
+[[m:WEBrick::GenericServer#stop]] を呼び、全ての listeners を close します。
 
 --- start               -> ()
 --- start{|soc| ... }   -> ()
 
-�����Ф򥹥����Ȥ��ޤ���
+サーバをスタートします。
 
-�֥��å���Ϳ����줿��� [[m:WEBrick::GenericServer#run]] �᥽�åɤ�
-����˥֥��å����ºݤΥ��饤����ȤȤα�����ô���ޤ���
-�֥��å��� [[c:TCPSocket]] ���֥������Ȥ�����Ȥ��ƸƤФ�ޤ���
+ブロックが与えられた場合 [[m:WEBrick::GenericServer#run]] メソッドの
+代わりにブロックが実際のクライアントとの応答を担います。
+ブロックは [[c:TCPSocket]] オブジェクトを引数として呼ばれます。
 
 --- status    -> Symbol
 
-���ߤΥ����ФΥ��ơ������� [[c:Symbol]] ���֥������Ȥ��֤��ޤ���
-�ͤ� :Running(��ư��), :Shutdown(��λ������), :Stop(���������) �Τ����줫�Ǥ���
+現在のサーバのステータスを [[c:Symbol]] オブジェクトで返します。
+値は :Running(活動中), :Shutdown(終了処理中), :Stop(完全に停止) のいずれかです。
 
 --- stop    -> ()
 
-�����Ф���ߤ��ޤ���
+サーバを停止します。
 
-�ºݤˤϥ����Фξ��֤� :Shutdown �ˤ�������ǡ������Ф���������ߤ����
-�ϸ¤�ޤ���
+実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止すると
+は限りません。
 
 --- tokens    -> SizedQueue
 
-MaxClient ������Τ���˻Ȥ��� [[c:SizedQueue]] ���֥������Ȥ��֤���
-����[[c:SizedQueue]] ���֥������ȤΥ������ϸ��߼����դ��뤳�ȤΤǤ��륯
-�饤����Ȥο��Ǥ���
+MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返しま
+す。[[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるク
+ライアントの数です。
 
-MaxClient ���Τꤿ������ self.tokens.max �Ǥ���
-self.tokens.max - self.tokens.length �����ߤΥ��饤����Ȥ���³���Ǥ���
+MaxClient を知りたい場合は self.tokens.max です。
+self.tokens.max - self.tokens.length が現在のクライアントの接続数です。
 
 --- run(sock)    -> ()
 
-���饤����Ȥ���³���줿 TCPSocket ���֥������Ȥ�����Ȥ��ƸƤФ졢
-����Ū�ʽ�����Ԥ��ޤ���
-WEBrick::GenericServer �Υ��֥��饹�Ϥ��Υ᥽�åɤ�Ŭ�ڤ˺�������ʤ���Ф����ޤ���
+クライアントと接続された TCPSocket オブジェクトを引数として呼ばれ、
+具体的な処理を行います。
+WEBrick::GenericServer のサブクラスはこのメソッドを適切に再定義しなければいけません。
 
-@param sock ���饤����Ȥ���³���줿 TCPSocket ���֥������Ȥ���ꤷ�ޤ���
+@param sock クライアントと接続された TCPSocket オブジェクトを指定します。

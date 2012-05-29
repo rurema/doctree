@@ -11,156 +11,156 @@
 == Constants
 
 --- OP_ALL -> Integer
-SSL �̿��ǳƼ�ΥХ����򥳡��ɤ�ͭ���ˤ���ե饰�Ǥ���
+SSL 通信で各種のバグ回避コードを有効にするフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_CIPHER_SERVER_PREFERENCE -> Integer
-�Ź楹�����Ȥ�����ˤ����ƥ�����¦��ͥ���̤�ͥ�褹��ե饰�Ǥ���
+暗号スイートの選択においてサーバ側の優先順位を優先するフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
-���Υե饰��Ω�ƤƤ��ʤ����ϥ��饤�����¦��ͥ���̤�ͥ�褷�ޤ���
+このフラグを立てていない場合はクライアント側の優先順位を優先します。
 
 --- OP_EPHEMERAL_RSA -> Integer
-RSA ��Ȥ����˾�˰��Ū RSA ����Ȥ����Ȥ��̣����ե饰�Ǥ���
+RSA を使う場合に常に一時的 RSA 鍵を使うことを意味するフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NETSCAPE_CA_DN_BUG -> Integer
-Netscape �� CA �� DN �Υ��󥳡��ǥ��󥰥Х���
-���򤹤륳���ɤ�ͭ���ˤ��ޤ���
+Netscape の CA の DN のエンコーディングバグを
+回避するコードを有効にします。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG -> Integer
 #@todo
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION -> Integer
-���å����ƥͥ������������򤷤����˥�����¦��
-��˿��������å�������������ե饰�Ǥ���
+セッション再ネゴシエーションをした場合にサーバ側で
+常に新しいセッションを生成するフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NO_SSLv2 -> Integer
-SSL v2 �λ��Ѥ�ػߤ���ե饰�Ǥ���
+SSL v2 の使用を禁止するフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NO_SSLv3 -> Integer
-SSL v3 �λ��Ѥ�ػߤ���ե饰�Ǥ���
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+SSL v3 の使用を禁止するフラグです。
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NO_TLSv1 -> Integer
-TLS v1 �λ��Ѥ�ػߤ���ե饰�Ǥ���
+TLS v1 の使用を禁止するフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NO_TICKET -> Integer
-RFC4507bis �����åȤˤ�� stateless session resumption ��
-̵�������ޤ���
+RFC4507bis チケットによる stateless session resumption を
+無効化します。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_PKCS1_CHECK_1 -> Integer
 #@todo
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_PKCS1_CHECK_2 -> Integer
 #@todo
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_SINGLE_DH_USE -> Integer
-���Ū DH ����Ȥ��Ȥ���󸰤���������ե饰�Ǥ���
+一時的 DH 鍵を使うとき毎回鍵を生成するフラグです。
 
-���Υ��ץ����ϡְ����Ǥʤ����ǿ���Ȥä� DH �ѥ�᡼����
-���������Ȥ��ˡ�small subgroup attack�פ��ɤ������ɬ�פǤ���
-�ְ����ʡ��ǿ���Ȥä�����ɬ������ɬ�פʥ��ץ����Ǥ�
-����ޤ��󤬡����Υ��ץ�����Ȥ����ȤϿ侩����Ƥ��ޤ���
+このオプションは「安全でない」素数を使って DH パラメータを
+生成したときに「small subgroup attack」を防ぐために必要です。
+「安全な」素数を使った場合は必ずしも必要なオプションでは
+ありませんが、このオプションを使うことは推奨されています。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_SINGLE_ECDH_USE -> Integer
 #@todo
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_TLS_ROLLBACK_BUG -> Integer
-�С�����������Хå�����θ��Ф�̵���ˤ��ޤ���
+バージョンロールバック攻撃の検出を無効にします。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] �����Ѥ��ޤ���
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
-�̾�ϻȤ�ʤ��Ǥ���������
+通常は使わないでください。
 
-���򴹻��ˡ����饤����Ȥȥ����Ф����Ѳ�ǽ�ʥץ��ȥ���ΥС�������
-���Ȥꤷ�ޤ������饤����Ȥˤ�äƤϥ����Ф����ä�
-�С�������̵�뤷�ޤ������Τ褦�ʥ��饤����Ȥ��̿�����ɬ�פ�
-�����礳�Υ��ץ�����ͭ���ˤ��ޤ���
+鍵交換時に、クライアントとサーバで利用可能なプロトコルのバージョンを
+やりとりします。クライアントによってはサーバが送った
+バージョンを無視します。そのようなクライアントと通信する必要が
+ある場合このオプションを有効にします。
 
 --- VERIFY_CLIENT_ONCE -> Integer
-[[m:OpenSSL::SSL::SSLContext#verify_mode=]] �ǻ���Ǥ���ե饰�Ǥ���
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] で指定できるフラグです。
 
-�����С��⡼�ɤǤ��뤫���饤����ȥ⡼�ɤǤ��뤫�ˤ�äư�̣�����Ȥʤ�ޤ���
+サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
-�����С��⡼��: �ǽ�� TLS/SSL �ϥ�ɥ��������λ��������饤�����
-�˾�������׵ᤷ�ޤ������Υե饰�� VERIFY_PEER �ե饰�ȤȤ��
-�Ȥ��ʤ���Фʤ�ޤ���
+サーバーモード: 最初の TLS/SSL ハンドシェイクの時だけクライアント
+に証明書を要求します。このフラグは VERIFY_PEER フラグとともに
+使われなければなりません。
 
-���饤����ȥ⡼��: ̵�뤵��ޤ���
+クライアントモード: 無視されます。
 
 --- VERIFY_FAIL_IF_NO_PEER_CERT -> Integer
-[[m:OpenSSL::SSL::SSLContext#verify_mode=]] �ǻ���Ǥ���ե饰�Ǥ���
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] で指定できるフラグです。
 
-�����С��⡼�ɤǤ��뤫���饤����ȥ⡼�ɤǤ��뤫�ˤ�äư�̣�����Ȥʤ�ޤ���
+サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
-�����С��⡼��: ���饤����Ȥ���������֤��ʤ����� 
-TLS/SSL �ϥ�ɥ���������¨�¤˽�λ�����ޤ���
-���Υե饰�� VERIFY_PEER �ե饰�ȤȤ�˻Ȥ��ʤ���Фʤ�ޤ���
+サーバーモード: クライアントが証明書を返さない場合に 
+TLS/SSL ハンドシェイクを即座に終了させます。
+このフラグは VERIFY_PEER フラグとともに使われなければなりません。
 
-���饤����ȥ⡼��: ̵�뤵��ޤ���
+クライアントモード: 無視されます。
 
 --- VERIFY_NONE -> Integer
-[[m:OpenSSL::SSL::SSLContext#verify_mode=]] �ǻ���Ǥ���ե饰�Ǥ���
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] で指定できるフラグです。
 
-�����С��⡼�ɤǤ��뤫���饤����ȥ⡼�ɤǤ��뤫�ˤ�äư�̣�����Ȥʤ�ޤ���
+サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
-�����С��⡼��: ���饤����Ȥ˾�������׵᤻�������饤����ȤϾ������
-�����֤��ޤ���
+サーバーモード: クライアントに証明書を要求せず、クライアントは証明書を
+送り返しません。
 
-���饤����ȥ⡼��: �����Ф��������ä�������ϸ��ڤ���ޤ��������Ԥ��Ƥ�
-�ϥ�ɥ��������Ϸ�³���ޤ���
-�ϥ�ɥ��������η�̤� [[m:OpenSSL::SSL::SSLSocket#verify_result]] ��
-�����Ǥ��ޤ���
+クライアントモード: サーバから受け取った証明書は検証されますが、失敗しても
+ハンドシェイクは継続します。
+ハンドシェイクの結果は [[m:OpenSSL::SSL::SSLSocket#verify_result]] で
+取得できます。
 
-���Υե饰��ñ�Ȥ��Ѥ�����٤��Ǥ���
+このフラグは単独で用いられるべきです。
 
-#@# ���饤����ȥ⡼��: anonymous cipher ���Ѥ��ʤ����˥����С��Ͼ���������äƤ��ޤ���TLS/SSL �ϥ�ɥ��������η�̤� SSL_get_verify_result ��Ȥäƥ����å��Ǥ��ޤ���������θ��ڤη�̤ˤ�餺�ϥ�ɥ��������Ϸ�³���ޤ���
+#@# クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってきます。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできます。証明書の検証の結果によらずハンドシェイクは継続します。
 
 
 
 --- VERIFY_PEER -> Integer
-[[m:OpenSSL::SSL::SSLContext#verify_mode=]] �ǻ���Ǥ���ե饰�Ǥ���
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] で指定できるフラグです。
 
-�����С��⡼�ɤǤ��뤫���饤����ȥ⡼�ɤǤ��뤫�ˤ�äư�̣�����Ȥʤ�ޤ���
+サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
-�����С��⡼��: �����С��ϥ��饤����Ȥ˾�������׵ᤷ�ޤ���
-�����Ƥ���������ϸ��ڤ���ޤ������ڤ����Ԥ�����硢
-TLS/SSL �ϥ�ɥ���������¨�¤˽�λ�����ޤ���
-���饤����Ȥ��׵��̵�뤹�뤳�Ȥ��ǽ�Ǥ���
-[[m:OpenSSL::SSL::VERIFY_FAIL_IF_NO_PEER_CERT]] ��Ʊ���˻��ꤷ������
-���饤����Ȥ��׵��̵�뤷�����ˤϥϥ�ɥ���������¨�¤���ߤ��ޤ���
+サーバーモード: サーバーはクライアントに証明書を要求します。
+送られてきた証明書は検証されます。検証が失敗した場合、
+TLS/SSL ハンドシェイクを即座に終了させます。
+クライアントは要求を無視することも可能です。
+[[m:OpenSSL::SSL::VERIFY_FAIL_IF_NO_PEER_CERT]] と同時に指定した場合は
+クライアントが要求を無視した場合にはハンドシェイクを即座に停止します。
 
-���饤����ȥ⡼��: �����С��ξ�����򸡾ڤ��ޤ���
-���ڤ����Ԥ�����硢TLS/SSL �ϥ�ɥ���������¨�¤˽�λ�����ޤ���
-�����С�����������֤����ˡ�anonymous cipher ���Ѥ����硢
-VERIFY_PEER ��̵�뤵��ޤ�����������anonymous cipher �ϥǥե���ȤǤ�
-̵���ˤʤäƤ��ޤ���
+クライアントモード: サーバーの証明書を検証します。
+検証が失敗した場合、TLS/SSL ハンドシェイクを即座に終了させます。
+サーバーが証明書を返さずに、anonymous cipher を用いる場合、
+VERIFY_PEER は無視されます。ただし、anonymous cipher はデフォルトでは
+無効になっています。
 
-anonymous cipher ��ͭ���Ǥ��뤫�ɤ�����
-[[m:OpenSSL::SSLContext#cipher=]] ������Ǥ��ޤ���
+anonymous cipher が有効であるかどうかは
+[[m:OpenSSL::SSLContext#cipher=]] で設定できます。
 
 = class OpenSSL::SSL::SSLError < OpenSSL::OpenSSLError
-[[c:OpenSSL::SSL]] ��Ϣ�Υ��顼���������Ȥ���ȯ�������㳰�Ǥ���
+[[c:OpenSSL::SSL]] 関連のエラーが生じたときに発生する例外です。
 
 #@# internal 
 #@# = class OpenSSL::SSL::Nonblock

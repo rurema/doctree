@@ -1,24 +1,24 @@
-SDBM ¤ò Ruby ¥¹¥¯¥ê¥×¥È¤«¤é°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+SDBM ã‚’ Ruby ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‹ã‚‰æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-SDBM ¤Ï DBM ¤ÈÆ±¤¸¤è¤¦¤ËÆ¯¤¯¥Ï¥Ã¥·¥å¥Ç¡¼¥¿¥Ù¡¼¥¹¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+SDBM ã¯ DBM ã¨åŒã˜ã‚ˆã†ã«åƒããƒãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-[[lib:dbm]] ¤È¤Û¤ÜÆ±¤¸¤Ç¤¹¤¬¡¢³°Éô¤Î¥é¥¤¥Ö¥é¥ê¤Ë°ÍÂ¸¤·¤Ê¤¤¤Î¤Ç¤É¤Î´Ä¶­
-¤Ç¤â¼Â¹Ô¤Ç¤­¤ë¤È¤¤¤¦ÍøÅÀ¤¬¤¢¤ê¤Þ¤¹¡£
+[[lib:dbm]] ã¨ã»ã¼åŒã˜ã§ã™ãŒã€å¤–éƒ¨ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã«ä¾å­˜ã—ãªã„ã®ã§ã©ã®ç’°å¢ƒ
+ã§ã‚‚å®Ÿè¡Œã§ãã‚‹ã¨ã„ã†åˆ©ç‚¹ãŒã‚ã‚Šã¾ã™ã€‚
 
-¥­¡¼¤äÃÍ¤Ë»ÈÍÑ¤Ç¤­¤ë¥µ¥¤¥º¤Ë¤ÏÀ©¸Â¤¬¤¢¤ê¤Þ¤¹¡£
-°ì¤Ä¤ÎÍ×ÁÇ¤Î¥µ¥¤¥º¤¬¥­¡¼ + ÃÍ + ÆâÉô¾ðÊó(16¥Ð¥¤¥È)¤Î
-¹ç·×¤¬ 1024 ¥Ð¥¤¥È¤Þ¤Ç¤Ç¤¹¡£
+ã‚­ãƒ¼ã‚„å€¤ã«ä½¿ç”¨ã§ãã‚‹ã‚µã‚¤ã‚ºã«ã¯åˆ¶é™ãŒã‚ã‚Šã¾ã™ã€‚
+ä¸€ã¤ã®è¦ç´ ã®ã‚µã‚¤ã‚ºãŒã‚­ãƒ¼ + å€¤ + å†…éƒ¨æƒ…å ±(16ãƒã‚¤ãƒˆ)ã®
+åˆè¨ˆãŒ 1024 ãƒã‚¤ãƒˆã¾ã§ã§ã™ã€‚
 
 @see [[lib:dbm]], [[lib:gdbm]]
 
 = class SDBM < Object
 include Enumerable
 
-SDBM ¥Õ¥¡¥¤¥ë¤ò¥¢¥¯¥»¥¹¤¹¤ë¥¯¥é¥¹¡£
+SDBM ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
 
-¥­¡¼¡¢¥Ç¡¼¥¿¤È¤â¤ËÊ¸»úÎó¤Ç¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¤È¤¤¤¦À©¸Â¤È¡¢
-¥Ç¡¼¥¿¤¬¥Õ¥¡¥¤¥ë¤ËÊÝÂ¸¤µ¤ì¤ë¤È¤¤¤¦ÅÀ¤ò½ü¤¤¤Æ¤Ï [[c:Hash]] ¥¯¥é¥¹¤È
-Á´¤¯Æ±ÍÍ¤Ë°·¤¦¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+ã‚­ãƒ¼ã€ãƒ‡ãƒ¼ã‚¿ã¨ã‚‚ã«æ–‡å­—åˆ—ã§ãªã‘ã‚Œã°ãªã‚‰ãªã„ã¨ã„ã†åˆ¶é™ã¨ã€
+ãƒ‡ãƒ¼ã‚¿ãŒãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜ã•ã‚Œã‚‹ã¨ã„ã†ç‚¹ã‚’é™¤ã„ã¦ã¯ [[c:Hash]] ã‚¯ãƒ©ã‚¹ã¨
+å…¨ãåŒæ§˜ã«æ‰±ã†ã“ã¨ãŒã§ãã¾ã™ã€‚
 
 @see [[c:Hash]]
 
@@ -26,68 +26,68 @@ SDBM ¥Õ¥¡¥¤¥ë¤ò¥¢¥¯¥»¥¹¤¹¤ë¥¯¥é¥¹¡£
 
 --- new(dbname, mode = 0666) -> SDBM
 
-dbname ¤Ç»ØÄê¤·¤¿¥Ç¡¼¥¿¥Ù¡¼¥¹¤ò¥â¡¼¥É¤ò mode ¤ËÀßÄê¤·¤Æ¥ª¡¼¥×¥ó¤·¤Þ¤¹¡£
+dbname ã§æŒ‡å®šã—ãŸãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ãƒ¢ãƒ¼ãƒ‰ã‚’ mode ã«è¨­å®šã—ã¦ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚
 
-@param dbname ¥Ç¡¼¥¿¥Ù¡¼¥¹¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
+@param dbname ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®åå‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param mode ¾ÊÎ¬ÃÍ¤Ï 0666 ¤Ç¤¹¡£mode ¤È¤·¤Æ nil ¤ò»ØÄê¤¹¤ë¤È¥Ç¡¼¥¿¥Ù¡¼¥¹¤¬
-            Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï¿·¤¿¤Ê¥Ç¡¼¥¿¥Ù¡¼¥¹¤òºî¤é¤º nil ¤òÊÖ¤·¤Þ¤¹¡£
+@param mode çœç•¥å€¤ã¯ 0666 ã§ã™ã€‚mode ã¨ã—ã¦ nil ã‚’æŒ‡å®šã™ã‚‹ã¨ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒ
+            å­˜åœ¨ã—ãªã„æ™‚ã«ã¯æ–°ãŸãªãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ä½œã‚‰ãš nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- open(dbname, mode = 0666) -> SDBM
 --- open(dbname, mode = 0666) {|db| ... } -> object
 
-dbname ¤Ç»ØÄê¤·¤¿¥Ç¡¼¥¿¥Ù¡¼¥¹¤ò¥â¡¼¥É¤ò mode ¤ËÀßÄê¤·¤Æ¥ª¡¼¥×¥ó¤·¤Þ¤¹¡£
+dbname ã§æŒ‡å®šã—ãŸãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ãƒ¢ãƒ¼ãƒ‰ã‚’ mode ã«è¨­å®šã—ã¦ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚
 
-@param dbname ¥Ç¡¼¥¿¥Ù¡¼¥¹¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
+@param dbname ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®åå‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param mode ¾ÊÎ¬ÃÍ¤Ï 0666 ¤Ç¤¹¡£mode ¤È¤·¤Æ nil ¤ò»ØÄê¤¹¤ë¤È¥Ç¡¼¥¿¥Ù¡¼¥¹¤¬
-            Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï¿·¤¿¤Ê¥Ç¡¼¥¿¥Ù¡¼¥¹¤òºî¤é¤º nil ¤òÊÖ¤·¤Þ¤¹¡£
+@param mode çœç•¥å€¤ã¯ 0666 ã§ã™ã€‚mode ã¨ã—ã¦ nil ã‚’æŒ‡å®šã™ã‚‹ã¨ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒ
+            å­˜åœ¨ã—ãªã„æ™‚ã«ã¯æ–°ãŸãªãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ä½œã‚‰ãš nil ã‚’è¿”ã—ã¾ã™ã€‚
 
 
 == Instance Methods
 
 --- [](key) -> String
 
-key ¤ò¥­¡¼¤È¤¹¤ëÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+key ã‚’ã‚­ãƒ¼ã¨ã™ã‚‹å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param key ¥­¡¼¡£
+@param key ã‚­ãƒ¼ã€‚
 
 --- []=(key, value)
 
-key ¤ò¥­¡¼¤È¤·¤Æ¡¢value ¤ò³ÊÇ¼¤·¤Þ¤¹¡£
+key ã‚’ã‚­ãƒ¼ã¨ã—ã¦ã€value ã‚’æ ¼ç´ã—ã¾ã™ã€‚
 
-value ¤È¤·¤Æ nil ¤ò»ØÄê¤¹¤ë¤È¡¢key ¤ËÂÐ¤¹¤ë¹àÌÜ¤òºï½ü¤·¤Þ¤¹¡£
+value ã¨ã—ã¦ nil ã‚’æŒ‡å®šã™ã‚‹ã¨ã€key ã«å¯¾ã™ã‚‹é …ç›®ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 
-@param key ¥­¡¼¡£
-@param value ³ÊÇ¼¤¹¤ëÃÍ¡£
+@param key ã‚­ãƒ¼ã€‚
+@param value æ ¼ç´ã™ã‚‹å€¤ã€‚
 
 --- clear -> self
 
-DBM ¥Õ¥¡¥¤¥ë¤ò¶õ¤Ë¤·¤Þ¤¹¡£
+DBM ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç©ºã«ã—ã¾ã™ã€‚
 
 --- close -> nil
 
-DBM ¥Õ¥¡¥¤¥ë¤ò¥¯¥í¡¼¥º¤·¤Þ¤¹¡£
+DBM ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ã¾ã™ã€‚
 
-°Ê¸å¤ÎÁàºî¤ÏÎã³°¤òÈ¯À¸¤µ¤»¤Þ¤¹¡£
+ä»¥å¾Œã®æ“ä½œã¯ä¾‹å¤–ã‚’ç™ºç”Ÿã•ã›ã¾ã™ã€‚
 
 #@since 1.8.3
 --- closed? -> bool
 
-DBM ¥Õ¥¡¥¤¥ë¤¬´û¤ËÊÄ¤¸¤é¤ì¤Æ¤¤¤ë¤«¤É¤¦¤«¤òÊÖ¤·¤Þ¤¹¡£
+DBM ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ—¢ã«é–‰ã˜ã‚‰ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚
 
-´û¤ËÊÄ¤¸¤é¤ì¤Æ¤¤¤ì¤Ð true ¤òÊÖ¤·¤Þ¤¹¡£
-¤½¤¦¤Ç¤Ê¤±¤ì¤Ð false ¤òÊÖ¤·¤Þ¤¹¡£
+æ—¢ã«é–‰ã˜ã‚‰ã‚Œã¦ã„ã‚Œã° true ã‚’è¿”ã—ã¾ã™ã€‚
+ãã†ã§ãªã‘ã‚Œã° false ã‚’è¿”ã—ã¾ã™ã€‚
 
 #@end
 
 --- delete(key) -> String
 
-key ¤ò¥­¡¼¤È¤¹¤ë¹àÌÜ¤òºï½ü¤·¤Þ¤¹¡£
+key ã‚’ã‚­ãƒ¼ã¨ã™ã‚‹é …ç›®ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 
-@param key ¥­¡¼¡£
+@param key ã‚­ãƒ¼ã€‚
 
-@return ºï½ü¤·¤¿Í×ÁÇ¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+@return å‰Šé™¤ã—ãŸè¦ç´ ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -102,7 +102,7 @@ key ¤ò¥­¡¼¤È¤¹¤ë¹àÌÜ¤òºï½ü¤·¤Þ¤¹¡£
 --- reject! { |key, value|  ...  }   -> self
 --- delete_if { |key, value|  ...  } -> self
 
-¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤¿ÃÍ¤¬¿¿¤Ç¤¢¤ì¤Ð³ºÅö¤¹¤ë¹àÌÜ¤òºï½ü¤·¤Þ¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’è©•ä¾¡ã—ãŸå€¤ãŒçœŸã§ã‚ã‚Œã°è©²å½“ã™ã‚‹é …ç›®ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -117,56 +117,56 @@ key ¤ò¥­¡¼¤È¤¹¤ë¹àÌÜ¤òºï½ü¤·¤Þ¤¹¡£
 
 --- reject {|key, value| ... } -> Hash
 
-¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤¿ÃÍ¤¬¿¿¤Ç¤¢¤ì¤Ð³ºÅö¤¹¤ëÍ×ÁÇ¤òºï½ü¤·¤Þ¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’è©•ä¾¡ã—ãŸå€¤ãŒçœŸã§ã‚ã‚Œã°è©²å½“ã™ã‚‹è¦ç´ ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 
   self.to_hash.reject{|key, value| ... }
 
-¤ÈÆ±¤¸¤Ç¤¹¡£
+ã¨åŒã˜ã§ã™ã€‚
 
 @see [[m:Hash#reject]]
 
 --- each {|key, value|  ...  } -> self
 --- each_pair {|key, value|  ...  } -> self
 
-³ÆÍ×ÁÇ¤ËÂÐ¤¹¤ë¥¤¥Æ¥ì¡¼¥¿¡£
+å„è¦ç´ ã«å¯¾ã™ã‚‹ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã€‚
 
 --- each_key {|key|  ...  } -> self
 
-Á´¤Æ¤Î key ¤ËÂÐ¤·¤Æ·«¤êÊÖ¤¹¥¤¥Æ¥ì¡¼¥¿¡£
+å…¨ã¦ã® key ã«å¯¾ã—ã¦ç¹°ã‚Šè¿”ã™ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã€‚
 
 --- each_value {|value|  ...  } -> self
 
-Á´¤Æ¤Î value ¤ËÂÐ¤·¤Æ·«¤êÊÖ¤¹¥¤¥Æ¥ì¡¼¥¿¡£
+å…¨ã¦ã® value ã«å¯¾ã—ã¦ç¹°ã‚Šè¿”ã™ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã€‚
 
 --- empty? -> bool
 
-¥Ç¡¼¥¿¥Ù¡¼¥¹¤¬¶õ¤Î»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãŒç©ºã®æ™‚ã€çœŸã‚’è¿”ã—ã¾ã™ã€‚
 
 --- has_key?(key) -> bool
 --- key?(key) -> bool
 --- include?(key) -> bool
 --- member?(key) -> bool
 
-key ¤¬¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ë»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
+key ãŒãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸­ã«å­˜åœ¨ã™ã‚‹æ™‚ã€çœŸã‚’è¿”ã—ã¾ã™ã€‚
 
-@param key ¸¡º÷¤·¤¿¤¤¥­¡¼¡£
+@param key æ¤œç´¢ã—ãŸã„ã‚­ãƒ¼ã€‚
 
 --- has_value?(value) -> bool
 --- value?(value) -> bool
 
-value ¤òÃÍ¤È¤¹¤ëÁÈ¤¬¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ë»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
+value ã‚’å€¤ã¨ã™ã‚‹çµ„ãŒãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸­ã«å­˜åœ¨ã™ã‚‹æ™‚ã€çœŸã‚’è¿”ã—ã¾ã™ã€‚
 
-@param value ¸¡º÷¤·¤¿¤¤ÃÍ¡£
+@param value æ¤œç´¢ã—ãŸã„å€¤ã€‚
 
 #@until 1.9.1
 --- indexes(*keys) -> [[String]]
 --- indices(*keys) -> [[String]]
 
-³Æ°ú¿ô¤ÎÃÍ¤ò¥­¡¼¤È¤¹¤ëÍ×ÁÇ¤ò´Þ¤àÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+å„å¼•æ•°ã®å€¤ã‚’ã‚­ãƒ¼ã¨ã™ã‚‹è¦ç´ ã‚’å«ã‚€é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-¤³¤Î¥á¥½¥Ã¥É¤Ï obsolete ¤Ç¤¹¡£
+ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ obsolete ã§ã™ã€‚
 
-@param keys ¸¡º÷¤·¤¿¤¤¥­¡¼¤Ç¤¹¡£
+@param keys æ¤œç´¢ã—ãŸã„ã‚­ãƒ¼ã§ã™ã€‚
 
   require 'sdbm'
   
@@ -182,17 +182,17 @@ value ¤òÃÍ¤È¤¹¤ëÁÈ¤¬¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ë»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
 #@since 1.9.1
 --- key(value) -> String
 
-Í¿¤¨¤é¤ì¤¿ÃÍ¤ËÂÐ±þ¤¹¤ë¥­¡¼¤òÊÖ¤·¤Þ¤¹¡£
+ä¸Žãˆã‚‰ã‚ŒãŸå€¤ã«å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÃÍ¤ËÂÐ±þ¤¹¤ë¥­¡¼¤¬Ê£¿ô¤¢¤ë¾ì¹ç¤ÏºÇ½é¤Ë¸«¤Ä¤«¤Ã¤¿¥­¡¼¤òÊÖ¤·¤Þ¤¹¡£
+å€¤ã«å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãŒè¤‡æ•°ã‚ã‚‹å ´åˆã¯æœ€åˆã«è¦‹ã¤ã‹ã£ãŸã‚­ãƒ¼ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param value ¥­¡¼¤òÃµ¤·¤¿¤¤ÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
+@param value ã‚­ãƒ¼ã‚’æŽ¢ã—ãŸã„å€¤ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 #@end
 
 --- keys -> [String]
 
-¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ë¥­¡¼Á´¤Æ¤ò´Þ¤àÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸­ã«å­˜åœ¨ã™ã‚‹ã‚­ãƒ¼å…¨ã¦ã‚’å«ã‚€é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -205,15 +205,15 @@ value ¤òÃÍ¤È¤¹¤ëÁÈ¤¬¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ë»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
 --- length -> Integer
 --- size   -> Integer
 
-¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ÎÍ×ÁÇ¤Î¿ô¤òÊÖ¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸­ã®è¦ç´ ã®æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-===== Ãí°Õ
+===== æ³¨æ„
 
-¸½ºß¤Î¼Â¸½¤Ç¤ÏÍ×ÁÇ¿ô¤ò¿ô¤¨¤ë¤¿¤á¤Ë¥Ç¡¼¥¿¥Ù¡¼¥¹¤òÁ´Éô¸¡º÷¤·¤Þ¤¹¡£
+ç¾åœ¨ã®å®Ÿç¾ã§ã¯è¦ç´ æ•°ã‚’æ•°ãˆã‚‹ãŸã‚ã«ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’å…¨éƒ¨æ¤œç´¢ã—ã¾ã™ã€‚
 
 --- shift -> [String]
 
-¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ÎÍ×ÁÇ¤ò°ì¤Ä¼è¤ê½Ð¤·¡¢¥Ç¡¼¥¿¥Ù¡¼¥¹¤«¤éºï½ü¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸­ã®è¦ç´ ã‚’ä¸€ã¤å–ã‚Šå‡ºã—ã€ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‹ã‚‰å‰Šé™¤ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -225,13 +225,13 @@ value ¤òÃÍ¤È¤¹¤ëÁÈ¤¬¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ë»þ¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
 --- values -> [String]
 
-¥Ç¡¼¥¿¥Ù¡¼¥¹Ãæ¤ËÂ¸ºß¤¹¤ëÃÍÁ´¤Æ¤ò´Þ¤àÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸­ã«å­˜åœ¨ã™ã‚‹å€¤å…¨ã¦ã‚’å«ã‚€é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- replace(other) -> self
 
-self ¤ÎÆâÍÆ¤ò other ¤ÎÆâÍÆ¤ÇÃÖ¤­´¹¤¨¤Þ¤¹¡£
+self ã®å†…å®¹ã‚’ other ã®å†…å®¹ã§ç½®ãæ›ãˆã¾ã™ã€‚
 
-@param other each_pair ¥á¥½¥Ã¥É¤ò»ý¤Ä¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+@param other each_pair ãƒ¡ã‚½ãƒƒãƒ‰ã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
   require 'sdbm'
   
@@ -254,13 +254,13 @@ self ¤ÎÆâÍÆ¤ò other ¤ÎÆâÍÆ¤ÇÃÖ¤­´¹¤¨¤Þ¤¹¡£
 
 --- fetch(key, ifnone = nil){|key| ... } -> object
 
-¥Ç¡¼¥¿¥Ù¡¼¥¹¤«¤éÂÐ±þ¤¹¤ë¥­¡¼¤òÃµ¤·¤Æ¤½¤ÎÍ×ÁÇ¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‹ã‚‰å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ã‚’æŽ¢ã—ã¦ãã®è¦ç´ ã®å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param key     Ãµº÷¤¹¤ë¥­¡¼¡£
-@param ifnone  ÂÐ±þ¤¹¤ë¥­¡¼¤¬¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤ËÊÖ¤¹ÃÍ¡£
+@param key     æŽ¢ç´¢ã™ã‚‹ã‚­ãƒ¼ã€‚
+@param ifnone  å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã«è¿”ã™å€¤ã€‚
 
-@raise IndexError ifnone ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¤È¤­¤Ë¡¢ÂÐ±þ¤¹¤ë¥­¡¼¤¬
-                  ¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise IndexError ifnone ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã¨ãã«ã€å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãŒ
+                  è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -273,18 +273,18 @@ self ¤ÎÆâÍÆ¤ò other ¤ÎÆâÍÆ¤ÇÃÖ¤­´¹¤¨¤Þ¤¹¡£
   p db1.fetch('z', 'zzz')                      #=> "zzz"
   p db1.fetch('z'){|key| [:key, key] }         #=> [:key, "z"]
   p db1.fetch('z', 'zzz'){|key| [:key, key] }  #=> "zzz"
-  p db1.fetch('z')                             #=> IndexError È¯À¸
+  p db1.fetch('z')                             #=> IndexError ç™ºç”Ÿ
 
 
 --- store(key, val) -> [String]
 
-key ¤ËÂÐ¤·¤Æ val ¤ò³ÊÇ¼¤·¤Þ¤¹¡£
+key ã«å¯¾ã—ã¦ val ã‚’æ ¼ç´ã—ã¾ã™ã€‚
 
 @see [[m:SDBM#[]=]]
 
 --- select{|key, value| ... } -> [[String]]
 
-¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Æ¿¿¤Ë¤Ê¤Ã¤¿Í×ÁÇ¤Î¤ß¤òÇÛÎó¤Ë³ÊÇ¼¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’è©•ä¾¡ã—ã¦çœŸã«ãªã£ãŸè¦ç´ ã®ã¿ã‚’é…åˆ—ã«æ ¼ç´ã—ã¦è¿”ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -299,9 +299,9 @@ key ¤ËÂÐ¤·¤Æ val ¤ò³ÊÇ¼¤·¤Þ¤¹¡£
 
 --- values_at(*keys) -> [String]
 
-keys ¤ËÂÐ±þ¤¹¤ëÃÍ¤òÇÛÎó¤Ë³ÊÇ¼¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+keys ã«å¯¾å¿œã™ã‚‹å€¤ã‚’é…åˆ—ã«æ ¼ç´ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param keys ¥­¡¼¡£Ê£¿ô»ØÄê²ÄÇ½¤Ç¤¹¡£
+@param keys ã‚­ãƒ¼ã€‚è¤‡æ•°æŒ‡å®šå¯èƒ½ã§ã™ã€‚
 
   require 'sdbm'
   
@@ -314,7 +314,7 @@ keys ¤ËÂÐ±þ¤¹¤ëÃÍ¤òÇÛÎó¤Ë³ÊÇ¼¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- invert -> Hash
 
-ÃÍ¤«¤é¥­¡¼¤Ø¤Î¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
+å€¤ã‹ã‚‰ã‚­ãƒ¼ã¸ã®ãƒãƒƒã‚·ãƒ¥ã‚’è¿”ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -328,11 +328,11 @@ keys ¤ËÂÐ±þ¤¹¤ëÃÍ¤òÇÛÎó¤Ë³ÊÇ¼¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- update(other) -> self
 
-self ¤È other ¤ÎÆâÍÆ¤ò¥Þ¡¼¥¸¤·¤Þ¤¹¡£
+self ã¨ other ã®å†…å®¹ã‚’ãƒžãƒ¼ã‚¸ã—ã¾ã™ã€‚
 
-½ÅÊ£¤¹¤ë¥­¡¼¤ËÂÐ±þ¤¹¤ëÃÍ¤Ïother ¤ÎÆâÍÆ¤Ç¾å½ñ¤­¤µ¤ì¤Þ¤¹¡£
+é‡è¤‡ã™ã‚‹ã‚­ãƒ¼ã«å¯¾å¿œã™ã‚‹å€¤ã¯other ã®å†…å®¹ã§ä¸Šæ›¸ãã•ã‚Œã¾ã™ã€‚
 
-@param other each_pair ¥á¥½¥Ã¥É¤ò»ý¤Ä¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+@param other each_pair ãƒ¡ã‚½ãƒƒãƒ‰ã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
   require 'sdbm'
   
@@ -356,10 +356,10 @@ self ¤È other ¤ÎÆâÍÆ¤ò¥Þ¡¼¥¸¤·¤Þ¤¹¡£
 
 --- to_a -> [[String]]
 
-self ¤Î³ÆÍ×ÁÇ¤ò³ÊÇ¼¤·¤¿ÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+self ã®å„è¦ç´ ã‚’æ ¼ç´ã—ãŸé…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÊÖ¤µ¤ì¤ëÇÛÎó¤Î1¤Ä¤ÎÍ×ÁÇ¤Ï [key, value] ¤Ç¤¹¡£
-¤Ä¤Þ¤êÇÛÎó¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+è¿”ã•ã‚Œã‚‹é…åˆ—ã®1ã¤ã®è¦ç´ ã¯ [key, value] ã§ã™ã€‚
+ã¤ã¾ã‚Šé…åˆ—ã®é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -373,7 +373,7 @@ self ¤Î³ÆÍ×ÁÇ¤ò³ÊÇ¼¤·¤¿ÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- to_hash -> Hash
 
-self ¤Î³ÆÍ×ÁÇ¤ò³ÊÇ¼¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
+self ã®å„è¦ç´ ã‚’æ ¼ç´ã—ãŸãƒãƒƒã‚·ãƒ¥ã‚’è¿”ã—ã¾ã™ã€‚
 
   require 'sdbm'
   
@@ -388,15 +388,15 @@ self ¤Î³ÆÍ×ÁÇ¤ò³ÊÇ¼¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
 
 --- index(val) -> String
 
-ÃÍ val ¤ËÂÐ±þ¤¹¤ë¥­¡¼¤òÊÖ¤·¤Þ¤¹¡£
+å€¤ val ã«å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ã‚’è¿”ã—ã¾ã™ã€‚
 
-ÂÐ±þ¤¹¤ëÍ×ÁÇ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
-³ºÅö¤¹¤ë¥­¡¼¤¬Ê£¿ôÂ¸ºß¤¹¤ë¾ì¹ç¡¢¤É¤Î¥­¡¼¤òÊÖ¤¹¤«¤ÏÉÔÄê¤Ç¤¹¡£
+å¯¾å¿œã™ã‚‹è¦ç´ ãŒå­˜åœ¨ã—ãªã„æ™‚ã«ã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚
+è©²å½“ã™ã‚‹ã‚­ãƒ¼ãŒè¤‡æ•°å­˜åœ¨ã™ã‚‹å ´åˆã€ã©ã®ã‚­ãƒ¼ã‚’è¿”ã™ã‹ã¯ä¸å®šã§ã™ã€‚
 
 @see [[m:Hash#index]]
 
 = class SDBMError < StandardError
 
-SDBM ÆâÉô¤Ç»ÈÍÑ¤¹¤ëÎã³°¥¯¥é¥¹¤Ç¤¹¡£
+SDBM å†…éƒ¨ã§ä½¿ç”¨ã™ã‚‹ä¾‹å¤–ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 

@@ -1,31 +1,31 @@
 = ruby 1.8.5 feature
 
-ruby 1.8.4 ���� ruby 1.8.5 �ޤǤ��ѹ����Ǥ���
+ruby 1.8.4 から ruby 1.8.5 までの変更点です。
 
-�Ǻ�����
+掲載方針
 
-*�Х������αƶ���ޤ��ư��Ѥ���Τ��Ͽ���롣
-*ñ�˥Х���ľ���������Τ�Τϼ�Ͽ���ʤ���
-*�饤�֥��ؤ�ñ�ʤ�������ɲäϼ�Ͽ���ʤ���
+*バグ修正の影響も含めて動作が変わるものを収録する。
+*単にバグを直しただけのものは収録しない。
+*ライブラリへの単なる定数の追加は収録しない。
 
-�ʲ��ϳ��ѹ������դ���٤������Ǥ���
+以下は各変更点に付けるべきタグです。
 
-����ˤĤ���(�ä˽��פʤ�Τ���ʸ��(���))
+記号について(特に重要なものは大文字(主観))
 
-* ���ƥ���
-  * [ruby]: ruby ���󥿥ץ꥿���ѹ�
-  * [api]: ��ĥ�饤�֥�� API
-  * [lib]: �饤�֥��
-* ��٥�
-  * [bug]: �Х�����
-  * [new]: �ɲä��줿���饹���᥽�åɤʤ�
-  * [compat]: �ѹ����줿���饹���᥽�åɤʤ�
-    * �ߴ����Τ����ѹ�
+* カテゴリ
+  * [ruby]: ruby インタプリタの変更
+  * [api]: 拡張ライブラリ API
+  * [lib]: ライブラリ
+* レベル
+  * [bug]: バグ修正
+  * [new]: 追加されたクラス／メソッドなど
+  * [compat]: 変更されたクラス／メソッドなど
+    * 互換性のある変更
     * only backward-compatibility
-    * �ƶ����ϰϤ��������Ȼפ����ѹ��⤳����
-  * [change]: �ѹ����줿���饹���᥽�åɤʤ�(�ߴ����Τʤ��ѹ�)
-  * [obsolete]: �ѻߤ��줿(�����ͽ���)��ǽ
-  * [platform]: �б��ץ�åȥե�������ɲ�
+    * 影響の範囲が小さいと思われる変更もこちら
+  * [change]: 変更されたクラス／メソッドなど(互換性のない変更)
+  * [obsolete]: 廃止された(される予定の)機能
+  * [platform]: 対応プラットフォームの追加
 
 == 1.8.4 (2005-12-24) -> ((<stable-snapshot|URL:ftp://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.gz>))
 
@@ -34,47 +34,47 @@ ruby 1.8.4 ���� ruby 1.8.5 �ޤǤ��ѹ����Ǥ���
 : BasicSocket#recv_nonblock [new]
 : UDPSocket#recvfrom_nonblock [new]
 
-  �ɲ�
+  追加
 
 === 2006-06-17
 
 : Pathname(path) [new]
 
-  pathname ���ɲ�
+  pathname で追加
 
 : Kernel#pretty_inspect [new]
 
-  pp ���ɲ�
+  pp で追加
 
 : RSS::TaxonomyTopicModel [new]
 : RSS::TaxonomyTopicsModel [new]
 : RSS::Maker::TaxonomyTopicModel [new]
 : RSS::Maker::TaxonomyTopicsModel [new]
 
-   RSS Parser/RSS Maker��Taxonomy�⥸�塼��򥵥ݡ��Ȥ��ޤ�����
+   RSS Parser/RSS MakerがTaxonomyモジュールをサポートしました。
 
 : RSS::Maker xxx.new_yyy(&block) [compat]
 
-   maker.items.new_item�ʤɤ��֥��å���Ȥ��褦�ˤʤ�ޤ�����((<ruby-talk:197284>))
+   maker.items.new_itemなどがブロックをとれるようになりました。((<ruby-talk:197284>))
 
-   ���ޤ�
+   今まで
 
      item = maker.items.new_item
      item.xxx = yyy
      ...
 
-   �Ƚ񤤤Ƥ�����Τ�
+   と書いていたものが
 
      maker.items.new_item |item|
        item.xxx = yyy
        ...
      end
 
-   �Ƚ񤱤�褦�ˤʤ�ޤ�����
+   と書けるようになりました。
 
 : RSS::RootElementMixin#to_xml [new]
 
-  ��������ˤ���ȡ�RSS 1.0����RSS 2.0���Ѵ��Ǥ��ޤ���
+  こんな風にすると、RSS 1.0からRSS 2.0に変換できます。
 
     rss10 = RSS::Parser.parse(File.read("1.0.rdf"))
     File.open("2.0.rss", "w") {|f| f.print(rss10.to_xml("2.0"))}
@@ -83,7 +83,7 @@ ruby 1.8.4 ���� ruby 1.8.5 �ޤǤ��ѹ����Ǥ���
 
 : RSS::VERSION
 
-   "0.1.5"����"0.1.6"�ˤʤ�ޤ�����
+   "0.1.5"から"0.1.6"になりました。
 
 === 2006-06-14
 
@@ -105,20 +105,20 @@ ruby 1.8.4 ���� ruby 1.8.5 �ޤǤ��ѹ����Ǥ���
 : Process::RLIMIT_RSS
 : Process::RLIMIT_SBSIZE
 
-  �ɲ� ((<ruby-dev:28729>))
+  追加 ((<ruby-dev:28729>))
 
 === 2006-06-11
 
 : OptionParser#getopts [new]
 
-: tempfile ����������ƥ�ݥ��ե������̾���� <basename><pid>.<count> ���� <basename>.<pid>.<count> �ˤʤ�ޤ��� ((<ruby-talk:196272>))
+: tempfile の生成するテンポラリファイルの名前が <basename><pid>.<count> から <basename>.<pid>.<count> になりました ((<ruby-talk:196272>))
 
 === 2006-06-07
 
 : configure --with-winsock2 [new]
 
-  mswin32�Ǥ����mingw32�Ǥǡ������winsock1�����ä�winsock2�����Ѥ���
-  configure���ץ�����ɲä���ޤ�����
+  mswin32版およびmingw32版で、従来のwinsock1に代わってwinsock2を利用する
+  configureオプションが追加されました。
 
 === 2006-06-02
 
@@ -142,36 +142,36 @@ ruby 1.8.4 ���� ruby 1.8.5 �ޤǤ��ѹ����Ǥ���
 === 2006-02-21
 : File#link [bug]
 
-  mswin32�ǡ�mingw32�Ǥ�File#link��ư���ʤ��ʤäƤ����Զ�礬��������ޤ�����
+  mswin32版・mingw32版でFile#linkが動かなくなっていた不具合が修正されました。
 
 === 2006-02-20
 
 : RbConfig [new]
 
-  ((<rbconfig>)) �� Config �˲ä��� RbConfig ���������褦�ˤʤ�ޤ�����
+  ((<rbconfig>)) が Config に加えて RbConfig を定義するようになりました。
 
 === 2006-02-06
 
 : File#flock [bug]
 
-  cygwin�Ǥ�Ruby�Υ���åɤ�ʣ��������֤ǡ����å�������flock(File::LOCK_UN)�����
-  �ߤޤäƤ��ޤäƤ����Τ���������ޤ�����
+  cygwin版でRubyのスレッドが複数ある状態で、ロックせずにflock(File::LOCK_UN)すると
+  止まってしまっていたのが修正されました。
 
 === 2006-02-04
 
 : File#flock [bug]
 
-  mswin32�Ǥ�Ruby�Υ���åɤ�ʣ��������֤ǡ����å�������flock(File::LOCK_UN)�����
-  �ߤޤäƤ��ޤäƤ����Τ���������ޤ�����
+  mswin32版でRubyのスレッドが複数ある状態で、ロックせずにflock(File::LOCK_UN)すると
+  止まってしまっていたのが修正されました。
 
 === 2005-12-29
 
 : Thread [compat]
 
-  ¾��������ʤ��¤�ư���Ф��ʤ��ˤ⤫����餺¾���黲�Ȥ���Ƥ��ʤ� thread �� abort �����褦�ˤʤ�ޤ���
+  他から操作されない限り動き出さないにもかかわらず他から参照されていない thread は abort されるようになりました
   ((<ruby-dev:28154>))
 
-== ����
+== 参考
 
 * ((<Changes in Ruby 1.8.5|URL:http://eigenclass.org/hiki.rb?ruby+1.8.5+changelog>))
 

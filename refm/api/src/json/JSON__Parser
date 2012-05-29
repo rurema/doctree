@@ -5,36 +5,36 @@ alias JSON::Ext::Parser
 
 --- new(source, options => {})
 
-�ѡ������������ޤ���
+パーサを初期化します。
 
-��������Υϥå���ˤϰʲ��Υ�������ꤹ�뤳�Ȥ��Ǥ��ޤ���
+第二引数のハッシュには以下のキーを指定することができます。
 
 : :max_nesting
-  �ǡ�����¤�Υͥ��Ȥο����κ����ͤ���ꤷ�ޤ����ǥե���Ȥ� 19 �Ǥ���
-  �����å���̵���ˤ���ˤϥ����ޤ��ϵ�����ꤷ�Ƥ���������
+  データ構造のネストの深さの最大値を指定します。デフォルトは 19 です。
+  チェックを無効にするにはゼロまたは偽を指定してください。
 : :allow_nan
-  ������ꤹ��� [[rfc:4627]] ��̵�뤷�� NaN, Infinity, -Infinity ��ѡ������顼�ˤ��ޤ���
-  �ǥե���Ȥϵ��Ǥ���
+  真を指定すると [[rfc:4627]] を無視して NaN, Infinity, -Infinity をパースエラーにしません。
+  デフォルトは偽です。
 : :create_additions
-  ������ꤹ��ȥޥå����륯�饹�� ID �����äƤ��ղþ�����������ޤ��󡣥ǥե���ȤϿ��Ǥ���
+  偽を指定するとマッチするクラスや ID があっても付加情報を生成しません。デフォルトは真です。
 : :object_class
-  JSON �Υ��֥������Ȥ��Ѵ����륯�饹����ꤷ�ޤ����ǥե���Ȥ� [[c:Hash]] �Ǥ���
+  JSON のオブジェクトを変換するクラスを指定します。デフォルトは [[c:Hash]] です。
 : :array_class
-  JSON ��������Ѵ����륯�饹����ꤷ�ޤ����ǥե���Ȥ� [[c:Array]] �Ǥ���
+  JSON の配列を変換するクラスを指定します。デフォルトは [[c:Array]] です。
 
-@param source �ѡ����θ��Ȥʤ�ʸ�������ꤷ�ޤ���
+@param source パーサの元となる文字列を指定します。
 
-@param options ���ץ�������ꤹ�뤿��Υϥå���Ǥ���
+@param options オプションを指定するためのハッシュです。
 
 == Public Instance Methods
 
 --- parse -> object
 
-���ߤΥ�������ѡ������Ʒ�̤� Ruby �Υ��֥������ȤȤ����֤��ޤ���
+現在のソースをパースして結果を Ruby のオブジェクトとして返します。
 
 @see [[m:JSON::Parser#source]]
 
 --- source -> String
 
-���ߤΥ������Υ��ԡ����֤��ޤ���
+現在のソースのコピーを返します。
 

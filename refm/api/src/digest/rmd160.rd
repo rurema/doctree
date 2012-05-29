@@ -1,10 +1,10 @@
 require digest
 
-Hans Dobbertin, Antoon Bosselaers, Bart Preneel ¤Ë¤è¤Ã¤ÆÀß·×¤µ¤ì¤¿
-RIPEMD-160 ¥Ï¥Ã¥·¥å´Ø¿ô¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Hans Dobbertin, Antoon Bosselaers, Bart Preneel ã«ã‚ˆã£ã¦è¨­è¨ˆã•ã‚ŒãŸ
+RIPEMD-160 ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Digest::RMD160 < Digest::Base
 
-Hans Dobbertin, Antoon Bosselaers, Bart Preneel ¤Ë¤è¤Ã¤ÆÀß·×¤µ¤ì¤¿
-RIPEMD-160 ¥Ï¥Ã¥·¥å´Ø¿ô¤ò¼ÂÁõ¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+Hans Dobbertin, Antoon Bosselaers, Bart Preneel ã«ã‚ˆã£ã¦è¨­è¨ˆã•ã‚ŒãŸ
+RIPEMD-160 ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã‚’å®Ÿè£…ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 

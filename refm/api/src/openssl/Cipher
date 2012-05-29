@@ -1,10 +1,10 @@
 #@until 1.8.7
 = module OpenSSL::Cipher
-���̸��Ź�˴ؤ��뵡ǽ�򽸤᤿�⥸�塼��
+共通鍵暗号に関する機能を集めたモジュール
 
 == Module functions
 --- ciphers -> [String]
-���Ѳ�ǽ�ʰŹ�����̾��ʸ�����������֤��ޤ���
+利用可能な暗号方式名を文字列の配列で返します。
 
 = class OpenSSL::Cipher::Cipher < Object
 #@else
@@ -12,86 +12,86 @@
 = class OpenSSL::Cipher < Object
 #@end
 
-���̸��Ź�Τ������ݲ����줿���󥿡��ե��������󶡤��륯�饹�Ǥ���
+共通鍵暗号のために抽象化されたインターフェースを提供するクラスです。
 
-����Ū�ˤ��Υ��饹��ľ�ܻȤäƥǡ�����Ź沽���뤳�Ȥ�
-�򤱤Ƥ����������̾�Ϥ�����ʥ��󥿡��ե����������Ѳ�ǽ��
-�Ϥ��Ǥ���ɬ�פʤΤϰŹ楢�르�ꥺ�����ꤹ�뤿�� 
-[[m:OpenSSL::Cipher.new]] �ǰŹ楪�֥������Ȥ��������뤳�Ȥ����Ǥ��礦��
+基本的にこのクラスを直接使ってデータを暗号化することは
+避けてください。通常はより高水準なインターフェースが利用可能な
+はずです。必要なのは暗号アルゴリズムを指定するため 
+[[m:OpenSSL::Cipher.new]] で暗号オブジェクトを生成することだけでしょう。
 
-�⤷�����Υ��饹��ľ�����Ѥ��ưŹ沽������ϡ��Ź�θ���
-IV(Initialization Vector)�μ�갷���ˤĤ������������򤷤Ƥ����
-���Ƥ���������
+もし、このクラスを直接利用して暗号化する場合は、暗号の鍵や
+IV(Initialization Vector)の取り扱いについて正しく理解してからに
+してください。
 
 #@since 1.8.7
-�ʲ��μ������Ѥ��ޤ���
-  * [[m:OpenSSL::Cipher.new]] �� [[m:OpenSSL::Cipher::AES256.new]] 
-    �ʤɤǰŹ楪�֥������Ȥ���������
-  * [[m:OpenSSL::Cipher#encrypt]], [[m:OpenSSL::Cipher#decrypt]] ��
-    �Ź桢����Τ�����򤹤뤫�����ꤹ��
+以下の手順で利用します。
+  * [[m:OpenSSL::Cipher.new]] や [[m:OpenSSL::Cipher::AES256.new]] 
+    などで暗号オブジェクトを生成する
+  * [[m:OpenSSL::Cipher#encrypt]], [[m:OpenSSL::Cipher#decrypt]] で
+    暗号、復号のいずれをするかを設定する
   * [[m:OpenSSL::Cipher#key=]], [[m:OpenSSL::Cipher#iv=]], 
-    [[m:OpenSSL::Cipher#random_key]], [[m:OpenSSL::Cipher#random_iv]] �ʤɤ�
-    ���� IV(initialization vector) �����ꤹ��
-  * [[m:OpenSSL::Cipher#update]], [[m:OpenSSL::Cipher#final]] ��
-    �Ź沽/���沽�򤹤�
+    [[m:OpenSSL::Cipher#random_key]], [[m:OpenSSL::Cipher#random_iv]] などで
+    鍵と IV(initialization vector) を設定する
+  * [[m:OpenSSL::Cipher#update]], [[m:OpenSSL::Cipher#final]] で
+    暗号化/復号化をする
 #@end
 
 
 #@since 1.8.3
-ruby 1.8.3 ���� Cast5 �� Idea �� CAST5 �� IDEA �˲�̾����ޤ�����
+ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 #@end
 
-=== �֥��å��Ź�⡼��
-AES �Τ褦�ʥ֥��å��Ź�ǤϰŹ����������򤹤�ݤ�
-�⡼�ɤ���ꤹ��ɬ�פ�����ޤ������Υ饤�֥��Ǥ�
-�ʲ��Τ褦��ʸ����ǥ⡼�ɤ����Ǥ��ޤ���
+=== ブロック暗号モード
+AES のようなブロック暗号では暗号方式を選択する際に
+モードを指定する必要があります。このライブラリでは
+以下のような文字列でモードを指定できます。
   * "CBC"
   * "CFB"
   * "ECB"
   * "OFB"
-������ʸ����ΰ�̣��
-[[ref:lib:openssl#references]] �ʤɤ�Ĵ�٤Ƥ���������
-AES ���Ѥ����硢�̾�� CBC ���Ѥ�����ɤ��Ǥ��礦��
-�����ˤ�äƤϰ����������꤬����Τǵ���Ĥ��Ƥ���������
+これらの文字列の意味は
+[[ref:lib:openssl#references]] などで調べてください。
+AES を用いる場合、通常は CBC を用いれば良いでしょう。
+選択肢によっては安全性に問題があるので気をつけてください。
 
 
-=== ������
+=== 使用例
   require 'openssl'
   
-  # �Ź沽����ǡ���
+  # 暗号化するデータ
   data = "*secret data*"
-  # �ѥ����
+  # パスワード
   pass = "**secret password**"
   # salt
   salt = OpenSSL::Random.random_bytes(8)
   
-  # �Ź沽����������
+  # 暗号化器を作成する
   enc = OpenSSL::Cipher.new("AES-256-CBC")
   enc.encrypt
-  # ����IV(Initialize Vector)�� PKCS#5 �˽��äƥѥ���ɤ� salt ������������
+  # 鍵とIV(Initialize Vector)を PKCS#5 に従ってパスワードと salt から生成する
   key_iv = OpenSSL::PKCS5.pbkdf2_hmac_sha1(pass, salt, 2000, enc.key_len + enc.iv_len)
   key = key_iv[0, enc.key_len]
   iv = key_iv[enc.key_len, enc.iv_len]
-  # ����IV�����ꤹ��
+  # 鍵とIVを設定する
   enc.key = key
   enc.iv = iv
   
-  # �Ź沽����
+  # 暗号化する
   encrypted_data = ""
   encrypted_data << enc.update(data)
   encrypted_data << enc.final
   
   p encrypted_data
   
-  # ���沽����������
+  # 復号化器を作成する
   dec = OpenSSL::Cipher.new("AES-256-CBC")
   dec.decrypt
   
-  # ����IV�����ꤹ��
+  # 鍵とIVを設定する
   dec.key = key
   dec.iv = iv
   
-  # ���沽����
+  # 復号化する
   decrypted_data = ""
   decrypted_data << dec.update(encrypted_data)
   decrypted_data << dec.final
@@ -105,15 +105,15 @@ AES ���Ѥ����硢�̾�� CBC ���Ѥ�����ɤ��Ǥ��礦��
 --- new(name) -> OpenSSL::Cipher
 #@end
 
-���̸��Ź�Υ��르�ꥺ��̾���Ϥ����б�����Ź楪�֥������Ȥ��������ޤ���
+共通鍵暗号のアルゴリズム名を渡し、対応する暗号オブジェクトを生成します。
 
-���ѤǤ��륢�르�ꥺ��ϥ����ƥ�˥��󥹥ȡ��뤵��Ƥ��� openssl �˰�¸���ޤ���
-[[m:OpenSSL::Cipher.ciphers]] �����Ѳ�ǽ�ʰŹ�Υ��르�ꥺ��̾�������ޤ���
+利用できるアルゴリズムはシステムにインストールされている openssl に依存します。
+[[m:OpenSSL::Cipher.ciphers]] で利用可能な暗号のアルゴリズム名が得られます。
 
-���ޤ��ޤ�����������ޤ�����2006ǯ���� aes256 (aes-256-cbc) 
-���Ѥ���Τ��¿��Ǥ��礦��
+さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc) 
+を用いるのが安心でしょう。
 
-#@# ����: [[unknown:UNIX������ �������: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
+#@# 参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
 #@#  require 'openssl'
 #@#  include OpenSSL::Cipher
 #@#
@@ -138,13 +138,13 @@ AES ���Ѥ����硢�̾�� CBC ���Ѥ�����ɤ��Ǥ��礦��
 #@#  s2 = c2.decrypt.update(s1) + c2.final
 #@#  p(data == s2) #=> true
 
-@param name �Ź沽������̾��
-@raise RuntimeError ���Ѳ�ǽ�Ǥʤ��Ź沽����̾����ꤷ������ȯ�����ޤ�
-@raise OpenSSL::Cipher::CipherError ������˼��Ԥ�������ȯ�����ޤ�
+@param name 暗号化方式の名前
+@raise RuntimeError 利用可能でない暗号化方式名を指定した場合に発生します
+@raise OpenSSL::Cipher::CipherError 初期化に失敗した場合に発生します
 
 #@since 1.8.7
 --- ciphers -> [String]
-���Ѳ�ǽ�ʰŹ�����̾��ʸ�����������֤��ޤ���
+利用可能な暗号方式名を文字列の配列で返します。
 
   OpenSSL::Ciphers.ciphers 
   # => ["AES-128-CBC", "AES-128-CFB", "AES-128-CFB1", "AES-128-CFB8", "AES-128-ECB", "AES-128-OFB", "AES-192-CBC", ... ]
@@ -152,151 +152,151 @@ AES ���Ѥ����硢�̾�� CBC ���Ѥ�����ɤ��Ǥ��礦��
 
 == Instance Methods
 --- reset -> self
-�������֤�ꥻ�åȤ��ޤ���
+内部状態をリセットします。
 
-����IV���Ź沽/���沽�Ԥ��ǡ����ʤɤ����ꥢ����ޤ���
+鍵、IV、暗号化/復号化待ちデータなどがクリアされます。
 
 --- encrypt -> self
 --- encrypt(pass, iv = nil) -> self
 
-�Ź沽�ν����򤷤ޤ���
+暗号化の準備をします。
 
-�Ź楪�֥������Ȥ��������֤�Ź沽�Τ���˽�������ޤ���
+暗号オブジェクトの内部状態を暗号化のために初期化します。
 
-pass �� iv ���Ϥ��줿��硢�������Ѥ��Ƹ������������Ź楪�֥������Ȥ�
-���� IV �����ꤷ�ޤ������Τ�꤫������ɸ��Ū�Ǥ��뤿�����Ѥ��٤��ǤϤ���ޤ���
+pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
+鍵と IV を設定します。このやりかたは非標準的であるため利用すべきではありません。
 
-@param pass �ѥ����ʸ����
-@param iv IVʸ����
-@raise OpenSSL::Cipher::CipherError �����˼��Ԥ�������ȯ�����ޤ�
+@param pass パスワード文字列
+@param iv IV文字列
+@raise OpenSSL::Cipher::CipherError 準備に失敗した場合に発生します
 
 --- decrypt(pass, iv = nil) -> self
-���沽�ν����򤷤ޤ���
+復号化の準備をします。
 
-�Ź楪�֥������Ȥ��������֤����沽�Τ���˽�������ޤ���
+暗号オブジェクトの内部状態を復号化のために初期化します。
 
-pass �� iv ���Ϥ��줿��硢�������Ѥ��Ƹ������������Ź楪�֥������Ȥ�
-���� IV �����ꤷ�ޤ������Τ�꤫������ɸ��Ū�Ǥ��뤿�����Ѥ��٤��ǤϤ���ޤ���
+pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
+鍵と IV を設定します。このやりかたは非標準的であるため利用すべきではありません。
 
-@param pass �ѥ����ʸ����
-@param iv IVʸ����
-@raise OpenSSL::Cipher::CipherError �����˼��Ԥ�������ȯ�����ޤ�
+@param pass パスワード文字列
+@param iv IV文字列
+@raise OpenSSL::Cipher::CipherError 準備に失敗した場合に発生します
 
 --- update(data) -> String
 #@until 1.8.7
 --- <<(data) -> String
 #@end
 
-�Ϥ��줿ʸ�����Ź沽�⤷�������沽����ʸ����Ȥ����֤��ޤ���
+渡された文字列を暗号化もしくは復号化して文字列として返します。
 
-�ɤ��餬�ʤ���뤫��ľ���� [[m:OpenSSL::Cipher#encrypt]] �⤷���� 
-[[m:OpenSSL::Cipher#decrypt]] �Τ����줬�ƤӤ����줿����
-��äƷ�ޤ�ޤ���
+どちらがなされるかは直前に [[m:OpenSSL::Cipher#encrypt]] もしくは 
+[[m:OpenSSL::Cipher#decrypt]] のいずれが呼びだされたかに
+よって決まります。
 
-�֥��å��Ź�����Ѥ�����ϡ��Ź沽/���沽�ϥ֥��å��������ǵ��ꤵ�줿
-�Х��ȿ����Ȥ˹Ԥ��ޤ������Τ���;�ä��ǡ����ϰŹ楪�֥�������������
-��¸���졢����ʸ�����Ϥ��줿�Ȥ��˻Ȥ��ޤ���
+ブロック暗号を利用する場合は、暗号化/復号化はブロックサイズで規定された
+バイト数ごとに行われます。そのため余ったデータは暗号オブジェクト内部に
+保存され、次の文字列が渡されたときに使われます。
 
-�Ź沽/���沽���٤��ǡ������Ϥ���������ϡ�
+暗号化/復号化すべきデータを渡し終えた後は、
 [[m:OpenSSL::Cipher#final]] 
-��ƤӤ����ưŹ楪�֥������������˻Ĥ��줿�ǡ�����Ź沽/���沽
-����ɬ�פ�����ޤ���
+を呼びだして暗号オブジェクト内部に残されたデータを暗号化/復号化
+する必要があります。
 
 #@until 1.8.7
-<< �� deprecated �Ǥ����Ȥ�ʤ��Ǥ���������
+<< は deprecated です。使わないでください。
 #@end
 
-@param data �Ź沽/���沽����ʸ����
+@param data 暗号化/復号化する文字列
 
 --- final -> String
-�Ź楪�֥������������˻Ĥ��줿�ǡ�����Ź沽/���沽����ʸ�����
-�֤��ޤ���
+暗号オブジェクト内部に残されたデータを暗号化/復号化し、文字列で
+返します。
 
-�ѥǥ���([[m:OpenSSL::Cipher#padding=]])��ͭ���ˤ��Ƥ�����ϡ�
-�Ĥ��줿�ǡ����˥ѥǥ��󥰤��ղä�����ǰŹ沽���ޤ���
+パディング([[m:OpenSSL::Cipher#padding=]])を有効にしている場合は、
+残されたデータにパディングを付加した上で暗号化します。
 
 --- key=(key) 
-�Ź渰�����ꤷ�ޤ���
+暗号鍵を設定します。
 
-�ʤ��������Ǥ����ְŹ渰�פϳưŹ楢�르�ꥺ����Ϥ���븰�Ǥ��äơ�
-�֥ѥ���ɡפǤϤ���ޤ���
+なお、ここでいう「暗号鍵」は各暗号アルゴリズムに渡される鍵であって、
+「パスワード」ではありません。
 
 --- key_len -> Integer
-�Ź渰��Ĺ����Х��ȿ����֤��ޤ���
+暗号鍵の長さをバイト数で返します。
 
 --- key_len=(length)
-�Ź渰��Ĺ�����ѹ����ޤ���
+暗号鍵の長さを変更します。
 
-@param length ���������ꤹ��Ĺ��(�Х��ȿ�)
-@raise OpenSSL::Cipher::CipherError ���ꤷ��Ĺ������Ŭ�ڤǤ���(�Ź������ε��ʾ������Ƥ��ʤ��ͤǤ���)����ȯ�����ޤ�
+@param length 新しく設定する長さ(バイト数)
+@raise OpenSSL::Cipher::CipherError 指定した長さが不適切である(暗号方式の規格上許されていない値である)場合に発生します
 
 --- iv=(iv) 
-IV(Initialization Vector) �����ꤷ�ޤ���
+IV(Initialization Vector) を設定します。
 
-@param iv IVʸ����
+@param iv IV文字列
 
 --- iv_len -> Integer
-ɬ�פ� IV(Initialization Vector) ��Ĺ����Х��ȿ����֤��ޤ���
+必要な IV(Initialization Vector) の長さをバイト数で返します。
 
 --- block_size -> Integer
-�Ź沽�Υ֥��å��Υ�������Х��ȿ����֤��ޤ���
+暗号化のブロックのサイズをバイト数で返します。
 
 --- padding=(padding)
-�ѥǥ��󥰤����ꤷ�ޤ���
+パディングを設定します。
 
-1 �ǥХǥ��󥰤�ͭ���ˡ�0��̵���ˤ��ޤ���
+1 でバディングを有効に、0で無効にします。
 
-�ѥǥ��󥰤�̵�����������ˤϡ��Ź沽����ǡ����Υ������ϥ֥��å���������
-�ܿ��Ǥʤ���Фʤ�ޤ���
+パディングを無効化した場合には、暗号化するデータのサイズはブロックサイズの
+倍数でなければなりません。
 
-�Ź沽����¦�����沽����¦�ǥѥǥ��󥰤��������פ����Ƥ����ʤ���Фʤ�ޤ���
+暗号化する側と復号化する側でパディングの設定を一致させておかなければなりません。
 
-@param padding 1�ǥѥǥ��󥰤�ͭ����0��̵��
-@raise OpenSSL::Cipher::CipherError ����˼��Ԥ�������ȯ�����ޤ�
+@param padding 1でパディングを有効、0で無効
+@raise OpenSSL::Cipher::CipherError 設定に失敗した場合に発生します
 
 --- pkcs5_keyivgen(pass, salt=nil, num=2048, digest="md5") -> nil
-pass �� salt ���鸰�� IV �����������Ź楪�֥������Ȥ����ꤷ�ޤ���
+pass と salt から鍵と IV を生成し、暗号オブジェクトに設定します。
 
-���Υ᥽�åɤ� PKCS#5 v1.5 ���������Ƥ�����ˡ��
-���äƸ��� IV ���������ޤ���PKCS#5 v1.5 ���������ߴ�����ˤ�
-digest �� md5 �� sha1 ��Ȥ����Ź楢�르�ꥺ���
-RC2, RC4-40, DES �Τ����줫��Ȥ�ʤ���Фʤ�ޤ���
+このメソッドは PKCS#5 v1.5 で定義されている方法に
+従って鍵と IV を生成します。PKCS#5 v1.5 と正しく互換するには
+digest は md5 か sha1 を使い、暗号アルゴリズムは
+RC2, RC4-40, DES のいずれかを使わなければなりません。
 
-���Υ᥽�åɤ����ѤϿ侩����ޤ��󡣤���ǤϤʤ�
-PKCS#5 v2.0 ���������Ƥ�����ˡ�Ǹ��� IV ���������٤��Ǥ���
+このメソッドの利用は推奨されません。これではなく
+PKCS#5 v2.0 に定義されている方法で鍵と IV を生成すべきです。
 
-salt �� nil �Ǥ�����ˤ� salt �ʤ��ȸ��ʤ��ޤ���
+salt が nil である場合には salt なしと見なします。
 
-num ��ɬ�פʥǡ����������ǥϥå���ؿ��򲿲󷫤��֤�Ŭ�Ѥ��뤫��
-���ꤷ�ޤ�������Ǥ�1000��Ȥ��٤��Ǥ���
+num は必要なデータの生成でハッシュ関数を何回繰り返し適用するかを
+指定します。最低でも1000を使うべきです。
 
-@param pass �ѥ����ʸ����
-@param salt ���� IV ���������뤿��� salt ʸ����Ĺ���� 8 byte �Ǥʤ���Фʤ�ʤ�
-@param num �ϥå���ؿ���Ŭ�Ѳ��
-@param digest �ϥå��奢�르�ꥺ�����ꤹ��ʸ����⤷���� [[c:OpenSSL::Digest]] �Υ��֥�������
-@raise OpenSSL::Cipher::CipherError salt��8 byte �Ǥʤ����䡢���� IV ������˼��Ԥ�������ȯ�����ޤ�
+@param pass パスワード文字列
+@param salt 鍵と IV を生成するための salt 文字列、長さは 8 byte でなければならない
+@param num ハッシュ関数の適用回数
+@param digest ハッシュアルゴリズムを指定する文字列もしくは [[c:OpenSSL::Digest]] のオブジェクト
+@raise OpenSSL::Cipher::CipherError saltが8 byte でない場合や、鍵と IV の設定に失敗した場合に発生します
 @see [[c:OpenSSL::PKCS5]]
 
 --- random_iv -> String
-IV ����������������Ź楪�֥������Ȥ����ꤷ�ޤ���
+IV を乱数で生成し、暗号オブジェクトに設定します。
 
-�������� IV ��ʸ������֤��ޤ���
+生成した IV を文字列で返します。
 
 --- random_key -> String
-������������������Ź楪�֥������Ȥ����ꤷ�ޤ���
+鍵を乱数で生成し、暗号オブジェクトに設定します。
 
-������������ʸ������֤��ޤ���
+生成した鍵を文字列で返します。
 
 
 --- name -> String
-�Ź沽���르�ꥺ���̾����ʸ������֤��ޤ���
+暗号化アルゴリズムの名前を文字列で返します。
 
 
 #@since 1.8.7
 = class OpenSSL::Cipher::Cipher < OpenSSL::Cipher
-���Υ��饹�ϸߴ����Τ����¸�ߤ��ޤ���
+このクラスは互換性のために存在します。
 
-[[c:OpenSSL::Cipher]] �򤫤������Ѥ��Ƥ���������
+[[c:OpenSSL::Cipher]] をかわりに利用してください。
 
 #@end
 
@@ -306,20 +306,20 @@ IV ����������������Ź楪�֥������Ȥ����ꤷ�ޤ���
 = class OpenSSL::Cipher::AES < OpenSSL::Cipher
 #@end
 
-AES �Ź��ɽ�����饹
+AES 暗号を表すクラス
 
 == Class Methods
 --- new(bit, mode) -> OpenSSL::Cipher::AES
-AES ���̸��Ź楪�֥������Ȥ����������֤��ޤ���
+AES 共通鍵暗号オブジェクトを生成し、返します。
 
-AES �θ�Ĺ�������⤷����ʸ����(256 or "256") bit �ǡ�
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+AES の鍵長を整数もしくは文字列(256 or "256") bit で、
+モードを文字列 mode で指定します。
 
-�����ǽ�ʸ����ȥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] ��
-�����Ǥ��ޤ���
+指定可能な鍵数とモードは [[m:OpenSSL::Cipher.ciphers]] で
+取得できます。
 
-@param bit ��Ĺ����/ʸ����
-@param mode �⡼��ʸ����
+@param bit 鍵長整数/文字列
+@param mode モード文字列
 
 #@since 1.8.5
 #@until 1.8.7
@@ -328,17 +328,17 @@ AES �θ�Ĺ�������⤷����ʸ����(256 or "256") bit �ǡ�
 = class OpenSSL::Cipher::AES128 < OpenSSL::Cipher
 #@end
 
-��Ĺ 128 �ӥåȤ� AES �Ź��ɽ�����饹
+鍵長 128 ビットの AES 暗号を表すクラス
 
 == Class Methods
 --- new(mode) -> OpenSSL::Cipher::AES128
-��Ĺ 128 �ӥå� AES �Ź楪�֥������Ȥ����������֤��ޤ���
+鍵長 128 ビット AES 暗号オブジェクトを生成し、返します。
 
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+モードを文字列 mode で指定します。
 
-�����ǽ�ʥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] �Ǽ����Ǥ��ޤ���
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
 
-@param mode �⡼��ʸ����
+@param mode モード文字列
 
 #@until 1.8.7
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher::Cipher
@@ -346,34 +346,34 @@ AES �θ�Ĺ�������⤷����ʸ����(256 or "256") bit �ǡ�
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher
 #@end
 
-��Ĺ 192 �ӥåȤ� AES �Ź��ɽ�����饹
+鍵長 192 ビットの AES 暗号を表すクラス
 
 == Class Methods
 --- new(mode) -> OpenSSL::Cipher::AES192
-��Ĺ 192 �ӥå� AES �Ź楪�֥������Ȥ����������֤��ޤ���
+鍵長 192 ビット AES 暗号オブジェクトを生成し、返します。
 
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+モードを文字列 mode で指定します。
 
-�����ǽ�ʥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] �Ǽ����Ǥ��ޤ���
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
 
-@param mode �⡼��ʸ����
+@param mode モード文字列
 
 #@until 1.8.7
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher
 #@end
-��Ĺ 256 �ӥåȤ� AES �Ź��ɽ�����饹
+鍵長 256 ビットの AES 暗号を表すクラス
 
 == Class Methods
 --- new(mode) -> OpenSSL::Cipher::AES256
-��Ĺ 256 �ӥå� AES �Ź楪�֥������Ȥ����������֤��ޤ���
+鍵長 256 ビット AES 暗号オブジェクトを生成し、返します。
 
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+モードを文字列 mode で指定します。
 
-�����ǽ�ʥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] �Ǽ����Ǥ��ޤ���
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
 
-@param mode �⡼��ʸ����
+@param mode モード文字列
 
 #@end
 
@@ -382,17 +382,17 @@ AES �θ�Ĺ�������⤷����ʸ����(256 or "256") bit �ǡ�
 #@else
 = class OpenSSL::Cipher::BF < OpenSSL::Cipher
 #@end
-BF(BlowFish)�Ź��ɽ�����饹
+BF(BlowFish)暗号を表すクラス
 
 == Class Methods
 --- new(mode) -> OpenSSL::Cipher::BF
-BF(BlowFish)�Ź楪�֥������Ȥ����������֤��ޤ���
+BF(BlowFish)暗号オブジェクトを生成し、返します。
 
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+モードを文字列 mode で指定します。
 
-�����ǽ�ʥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] �Ǽ����Ǥ��ޤ���
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
 
-@param mode �⡼��ʸ����
+@param mode モード文字列
 
 #@until 1.8.3
 = class OpenSSL::Cipher::Cast5 < OpenSSL::Cipher::Cipher
@@ -404,17 +404,17 @@ BF(BlowFish)�Ź楪�֥������Ȥ����������֤��ޤ���
 #@end
 #@end
 
-CAST5 �Ź��ɽ�����饹
+CAST5 暗号を表すクラス
 
 == Class Methods
 --- new(mode) -> OpenSSL::Cipher::CAST5
-CAST5 �Ź楪�֥������Ȥ����������֤��ޤ���
+CAST5 暗号オブジェクトを生成し、返します。
 
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+モードを文字列 mode で指定します。
 
-�����ǽ�ʥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] �Ǽ����Ǥ��ޤ���
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
 
-@param mode �⡼��ʸ����
+@param mode モード文字列
 
 
 #@until 1.8.7
@@ -422,17 +422,17 @@ CAST5 �Ź楪�֥������Ȥ����������֤��ޤ���
 #@else
 = class OpenSSL::Cipher::DES < OpenSSL::Cipher
 #@end
-DES �Ź��ɽ�����饹
+DES 暗号を表すクラス
 
 == Class Methods
 --- new(mode) -> OpenSSL::Cipher::DES
-DES �Ź楪�֥������Ȥ����������֤��ޤ���
+DES 暗号オブジェクトを生成し、返します。
 
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+モードを文字列 mode で指定します。
 
-�����ǽ�ʥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] �Ǽ����Ǥ��ޤ���
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
 
-@param mode �⡼��ʸ����
+@param mode モード文字列
 
 
 #@until 1.8.3
@@ -443,13 +443,13 @@ DES �Ź楪�֥������Ȥ����������֤��ޤ���
 #@else
 = class OpenSSL::Cipher::IDEA < OpenSSL::Cipher
 #@end
-IDEA �Ź��ɽ�����饹
+IDEA 暗号を表すクラス
 
 == Class Methods
 --- new(*args) -> OpenSSL::Cipher::IDEA
-IDEA �Ź楪�֥������Ȥ��������ޤ���
+IDEA 暗号オブジェクトを生成します。
 
-@param args �Ź�Υѥ�᡼��
+@param args 暗号のパラメータ
 #@end
 
 #@until 1.8.7
@@ -457,24 +457,24 @@ IDEA �Ź楪�֥������Ȥ��������ޤ���
 #@else
 = class OpenSSL::Cipher::RC2 < OpenSSL::Cipher
 #@end
-RC2 �Ź��ɽ�����饹
+RC2 暗号を表すクラス
 
 == Class Methods
 --- new(bit, mode) -> OpenSSL::Cipher::RC2
 --- new(mode) -> OpenSSL::Cipher::RC2
 
-RC2 �Ź楪�֥������Ȥ��������ޤ���
+RC2 暗号オブジェクトを生成します。
 
-��Ĺ�������⤷����ʸ����(40 or "40") bit �ǡ�
-�⡼�ɤ�ʸ���� mode �ǻ��ꤷ�ޤ���
+鍵長を整数もしくは文字列(40 or "40") bit で、
+モードを文字列 mode で指定します。
 
-��Ĺ�Ͼ�ά��ǽ�Ǥ���
+鍵長は省略可能です。
 
-�����ǽ�ʸ����ȥ⡼�ɤ� [[m:OpenSSL::Cipher.ciphers]] ��
-�����Ǥ��ޤ���
+指定可能な鍵数とモードは [[m:OpenSSL::Cipher.ciphers]] で
+取得できます。
 
-@param bit ��Ĺ����/ʸ����
-@param mode �⡼��ʸ����
+@param bit 鍵長整数/文字列
+@param mode モード文字列
 
 
 #@until 1.8.7
@@ -483,21 +483,21 @@ RC2 �Ź楪�֥������Ȥ��������ޤ���
 = class OpenSSL::Cipher::RC4 < OpenSSL::Cipher
 #@end
 
-RC4 �Ź��ɽ�����饹
+RC4 暗号を表すクラス
 
 == Class Methods
 --- new() -> OpenSSL::Cipher::RC4
 --- new(bit) -> OpenSSL::Cipher::RC4
-RC4 �Ź楪�֥������Ȥ����������֤��ޤ���
+RC4 暗号オブジェクトを生成し、返します。
 
-bit �Ǹ�Ĺ�����Ǥ��ޤ���
+bit で鍵長を指定できます。
 
-�����ǽ�ʸ����� [[m:OpenSSL::Cipher.ciphers]] ��
-�����Ǥ��ޤ���
+指定可能な鍵数は [[m:OpenSSL::Cipher.ciphers]] で
+取得できます。
 
-��Ĺ�Ͼ�ά��ǽ�Ǥ���
+鍵長は省略可能です。
 
-@param bit ��Ĺ�Υӥåȿ�(�����⤷����ʸ����)
+@param bit 鍵長のビット数(整数もしくは文字列)
 
 #@until 1.8.7
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher::Cipher
@@ -505,16 +505,16 @@ bit �Ǹ�Ĺ�����Ǥ��ޤ���
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher
 #@end
 
-RC5 �Ź��ɽ�����饹
+RC5 暗号を表すクラス
 
 == Class Methods
 --- new(*args) -> OpenSSL::Cipher::RC5
-RC5 �Ź楪�֥������Ȥ����������֤��ޤ���
+RC5 暗号オブジェクトを生成し、返します。
 
-@param args �Ź�Υѥ�᡼��
+@param args 暗号のパラメータ
 #@until 1.8.7
 = class OpenSSL::CipherError < OpenSSL::OpenSSLError
 #@else
 = class OpenSSL::Cipher::CipherError < OpenSSL::OpenSSLError
 #@end
-���̸��Ź��Ϣ�Υ��顼��ȯ�������㳰�Υ��饹��
+共通鍵暗号関連のエラーで発生する例外のクラス。

@@ -1,7 +1,7 @@
-= Widget�˴ؤ������
+= Widgetに関する質問
 
-== ruby-1.6.x �� font "Helvetica 18" ����ꤷ�����ܤ��Ƥ��ޤ��ޤ������ʤ��Ǥ�����
+== ruby-1.6.x で font "Helvetica 18" を指定したら怒られてしまいました。なぜですか？
 
 
-== TkCanvas#type(tag) ��¹Ԥ����� ... �ʤ��Ǥ�����
+== TkCanvas#type(tag) を実行したら ... なぜですか？
 

@@ -1,42 +1,42 @@
 
-irb ��ǥ��ޥ�ɤ��ĥ����ƥ饤�֥��Υ١����ˤʤ륯�饹�򰷤����֥�
-���֥��Ǥ���
+irb 中でコマンドを拡張する各ライブラリのベースになるクラスを扱うサブラ
+イブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ�
-��ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
 
 = class IRB::ExtendCommand::Nop
 
-irb ��ǥ��ޥ�ɤ��ĥ���륯�饹�Υ١����ˤʤ륯�饹�Ǥ������֥��饹��
-������ƥ��ޥ�ɤ��ĥ���ޤ���
+irb 中でコマンドを拡張するクラスのベースになるクラスです。サブクラスを
+定義してコマンドを拡張します。
 
 == Class Methods
 
 --- execute(conf, *opts) -> ()
 
-���ޥ�ɤ�¹Ԥ��ޤ����桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+コマンドを実行します。ユーザが直接使用するものではありません。
 
-@param conf [[c:IRB::Context]] ���֥������Ȥ���ꤷ�ޤ���
+@param conf [[c:IRB::Context]] オブジェクトを指定します。
 
-@param opts irb ��ǥ��ޥ�ɤ��Ϥ���������ꤷ�ޤ���
+@param opts irb 中でコマンドに渡す引数を指定します。
 
 --- new(conf) -> IRB::ExtendCommand::Nop
 
-���Ȥ��������ޤ����桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+自身を初期化します。ユーザが直接使用するものではありません。
 
-@param conf [[c:IRB::Context]] ���֥������Ȥ���ꤷ�ޤ���
+@param conf [[c:IRB::Context]] オブジェクトを指定します。
 
 == Instance Methods
 
 --- irb_context -> IRB::Context
 
-irb �θ��ߤ�����([[c:IRB::Context]])���֤��ޤ���
+irb の現在の設定([[c:IRB::Context]])を返します。
 
-#@# ���Ѥ���Ƥ��ʤ��褦�ʤΤǾ�ά���ޤ�����
+#@# 使用されていないようなので省略しました。
 #@# --- irb -> IRB::Irb
 
 --- execute(*opts) -> ()
 
-���⤷�ޤ��󡣥��֥��饹�ǥ����С��饤�ɤ��ƻ��Ѥ��ޤ���
+何もしません。サブクラスでオーバーライドして使用します。
 
-@param opts irb ��ǥ��ޥ�ɤ��Ϥ���������ꤷ�ޤ���
+@param opts irb 中でコマンドに渡す引数を指定します。

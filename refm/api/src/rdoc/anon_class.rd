@@ -1,3 +1,3 @@
-[[c:RDoc::AnonClass]] дЄ─ъ╡┴д╣дые╡е╓ещеде╓ещеъд╟д╣бг
+[[c:RDoc::AnonClass]] уВТхоЪч╛йуБЩуВЛуВ╡уГЦуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
 #@include(RDoc__AnonClass)

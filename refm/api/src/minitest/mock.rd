@@ -1,34 +1,34 @@
 
-����ץ�ʥ�å��饤�֥��Ǥ���
+シンプルなモックライブラリです。
 
 = class MiniTest::Mock
 
-����ץ�ʥ�å���¸����뤿��Υ��饹�Ǥ���
+シンプルなモックを実現するためのクラスです。
 
 == Class Methods
 
 --- new
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 == Public Instance Methods
 
 --- expect(name, retval, args = []) -> self
 
-��å����ۤ���᥽�åɤǤ���
+モックを構築するメソッドです。
 
-@param name �᥽�å�̾����ꤷ�ޤ���
+@param name メソッド名を指定します。
 
-@param retval �֤��ͤȤ��ƴ��Ԥ����ͤ���ꤷ�ޤ���
+@param retval 返り値として期待する値を指定します。
 
-@param args �����Ȥ��ƴ��Ԥ����ͤ�����ǻ��ꤷ�ޤ���
+@param args 引数として期待する値を配列で指定します。
 
 --- verify -> true
 
-��å��θ��ڤ�Ԥ��ޤ���
+モックの検証を行います。
 
-@raise MockExpectationError ��å��θ��ڤ˼��Ԥ�������ȯ�����ޤ���
+@raise MockExpectationError モックの検証に失敗した場合に発生します。
 
 = class MockExpectationError < StandardError
 
-��å��θ��ڤ˼��Ԥ�������ȯ�������㳰�Ǥ���
+モックの検証に失敗した場合に発生する例外です。

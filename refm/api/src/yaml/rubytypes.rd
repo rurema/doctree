@@ -1,7 +1,7 @@
 require date
 
-Ruby ���Ȥ߹��ߥ��饹�Τ����Ĥ��� YAML ���Ѵ����뤿��Υ��֥饤�֥���
-����
+Ruby の組み込みクラスのいくつかを YAML に変換するためのサブライブラリで
+す。
 
 = reopen Class
 
@@ -9,9 +9,9 @@ Ruby ���Ȥ߹��ߥ��饹�Τ����Ĥ��� YAML ���Ѵ����뤿��Υ��֥饤�֥���
 
 --- to_yaml(opts = {}) -> String
 
-�㳰��ȯ�����ޤ���
+例外を発生します。
 
-@param opts YAML�ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ����Ȥ��ޤ���
+@param opts YAMLドキュメント出力の際のオプションを指定しますが使われません。
 
 @raise TypeError
 
@@ -31,33 +31,33 @@ Ruby ���Ȥ߹��ߥ��饹�Τ����Ĥ��� YAML ���Ѵ����뤿��Υ��֥饤�֥���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   require 'yaml'
   
@@ -85,11 +85,11 @@ Ruby ���Ȥ߹��ߥ��饹�Τ����Ĥ��� YAML ���Ѵ����뤿��Υ��֥饤�֥���
 
 --- to_yaml_style -> nil
 
-nil���֤��ޤ���
+nilを返します。
 
-@return nil���֤��ޤ���
+@return nilを返します。
 
-��:
+例:
 
   require 'yaml'
   
@@ -101,9 +101,9 @@ nil���֤��ޤ���
 
 --- to_yaml_properties -> [String]
 
-���ȤΥ��󥹥����ѿ��ΰ�����ʸ�����������֤��ޤ���
+自身のインスタンス変数の一覧を文字列の配列で返します。
 
-@return ���ȤΥ��󥹥����ѿ�̾������
+@return 自身のインスタンス変数名の配列
 
   require 'yaml'
   
@@ -130,33 +130,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print({"foo" => "bar"}.to_yaml)
   # => ---
@@ -164,7 +164,7 @@ nil���֤��ޤ���
 
 --- yaml_initialize(tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 = reopen Struct
 
@@ -172,13 +172,13 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_class_name -> String
 
-���ȤΥ��饹̾���� Struct:: ��Τ�����ʸ������֤��ޤ���
+自身のクラス名から Struct:: をのぞいた文字列を返します。
 
-@return ���ȤΥ��饹̾���� Struct::��Τ�����ʸ����
+@return 自身のクラス名から Struct::をのぞいた文字列
 
   require 'yaml'
   
@@ -188,17 +188,17 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_read_class(name) -> String
 
-���� name �� Struct:: ��ä���ʸ������֤��ޤ���
+引数 name に Struct:: を加えた文字列を返します。
 
-@param name ��¤�Τ�̾������ꤷ�ޤ���
+@param name 構造体の名前を指定します。
 
-@return ���� name �� Struct:: ��ä���ʸ����
+@return 引数 name に Struct:: を加えた文字列。
 
   require 'yaml'
   
@@ -210,25 +210,25 @@ nil���֤��ޤ���
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   Foo = Struct.new(:bar, :baz)
   print Foo.new("bar", "baz").to_yaml
@@ -242,33 +242,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print [1, 2, 3].to_yaml
   # => ---
@@ -278,7 +278,7 @@ nil���֤��ޤ���
 
 --- yaml_initialize(tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 = reopen Exception
 
@@ -286,37 +286,37 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
 = reopen String
 
@@ -324,22 +324,22 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- is_complex_yaml? -> Integer | nil
 
-���Ȥ�ʣ���Ԥˤʤ륭����ޤ�褦�� YAML �Ǥ�����˿��ˤʤ��ͤ��֤���
-����
+自身が複数行になるキーを含むような YAML である場合に真になる値を返しま
+す。
 
-��: ["Detroit Tigers", "Chicago cubs"] �򥭡��Ȥ�����
+例: ["Detroit Tigers", "Chicago cubs"] をキーとする場合
 
   require 'yaml'
   s = <<EOS
@@ -354,36 +354,36 @@ nil���֤��ޤ���
 
 --- is_binary_data? -> true | nil
 
-���Ȥ� ASCII ʸ���ʳ���ʸ�����ޤ���� true ���֤��ޤ���
+自身が ASCII 文字以外の文字列を含む場合に true を返します。
 
-�����ͤ� true �ˤʤ��硢self.to_yaml ������̡�"!binary ..." �Ȥ�����
-����ʸ������֤��ޤ���
+この値が true になる場合、self.to_yaml した結果、"!binary ..." というよ
+うな文字列を返します。
 
-  print "�ƥ���".to_yaml
+  print "テスト".to_yaml
   # => --- !binary |
   44OG44K544OI
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print "foo".to_yaml # => --- foo
 
@@ -393,37 +393,37 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print :foo.to_yaml # => --- :foo
 
@@ -433,37 +433,37 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print (1..10).to_yaml
   # => --- !ruby/range
@@ -477,37 +477,37 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
 
@@ -517,37 +517,37 @@ nil���֤��ޤ���
 
 --- yaml_new(klass, tag, val)
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
 
@@ -557,33 +557,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print Date.today.to_yaml # => --- 2011-12-31
 
@@ -593,33 +593,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print 1.to_yaml # => --- 1
   print -1.to_yaml # => --- -1
@@ -630,33 +630,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print 1.0.to_yaml        # => --- 1.0
   print -1.0.to_yaml       # => --- -1.0
@@ -670,33 +670,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print true.to_yaml # => --- true
 
@@ -706,33 +706,33 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print false.to_yaml # => --- false
 
@@ -742,32 +742,32 @@ nil���֤��ޤ���
 
 --- yaml_tag_subclasses? -> true
 
-��� true ���֤��ޤ���
+常に true を返します。
 
-�饤�֥�������ǻ��Ѥ��ޤ���
+ライブラリ内部で使用します。
 
 == Instance Methods
 
 --- taguri -> String
 
-���ȤΥ��� URI ���֤��ޤ���
+自身のタグ URI を返します。
 
 --- taguri=(val)
 
-���ȤΥ��� URI �� val �����ꤷ�ޤ���
+自身のタグ URI を val に設定します。
 
-@param val ���� URI ��ʸ����ǻ��ꤷ�ޤ���
+@param val タグ URI を文字列で指定します。
 
 --- to_yaml(opts = {})
 
-���Ȥ� YAML �ɥ�����Ȥ��Ѵ����ޤ���
+自身を YAML ドキュメントに変換します。
 
-@param opts YAML �ɥ�����Ƚ��ϤκݤΥ��ץ�������ꤷ�ޤ���
+@param opts YAML ドキュメント出力の際のオプションを指定します。
 #@since 1.9.2
-            ���ץ����ξܺ٤� [[m:Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:Syck::Emitter#reset]] を参照し
 #@else
-            ���ץ����ξܺ٤� [[m:YAML::Syck::Emitter#reset]] �򻲾Ȥ�
+            オプションの詳細は [[m:YAML::Syck::Emitter#reset]] を参照し
 #@end
-            �Ƥ���������
+            てください。
 
   print nil.to_yaml # => ---

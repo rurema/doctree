@@ -1,6 +1,6 @@
 = class URI::LDAP < URI::Generic
 
-LDAP URI ��ɽ�����饹�Ǥ���[[RFC:2255]] (Obsoleted by [[RFC:4510]], [[RFC:4516]])��
+LDAP URI を表すクラスです。[[RFC:2255]] (Obsoleted by [[RFC:4510]], [[RFC:4516]])。
 
   ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 
@@ -9,102 +9,102 @@ LDAP URI ��ɽ�����饹�Ǥ���[[RFC:2255]] (Obsoleted by [[RFC:4510]], [[RFC:4516]]
 --- build(ary)   -> URI::LDAP
 --- build(hash)  -> URI::LDAP
 
-������Ϳ����줿 URI �������Ǥ��� URI::LDAP ���֥������Ȥ��������ޤ���
-�������������򸡺����ޤ���
+引数で与えられた URI 構成要素から URI::LDAP オブジェクトを生成します。
+引数の正当性を検査します。
 
-@param ary �������Ǥ�ɽ�������Ϳ���ޤ������Ǥϼ��ν�Ǥ���
+@param ary 構成要素を表す配列を与えます。要素は次の順です。
 //emlist{
       [:host, :port, :dn, :attributes, :scope, :filter, :extensions]
 //}
-@param hash �������Ǥ�ɽ���ϥå����Ϳ���ޤ����ϥå���Υ����� 
+@param hash 構成要素を表すハッシュを与えます。ハッシュのキーは 
 //emlist{
             :host, :port, :dn, :attributes, :scope, :filter, :extensions 
 //}
-            �Τ����줫�Ǥ���
+            のいずれかです。
 
-@raise URI::InvalidComponentError �����Ǥ�Ŭ�礷�ʤ�����ȯ�����ޤ���
+@raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
-��:
+例:
   p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]).to_s   
   #=> "ldap://example.com:1/a?b?c?d?e=f"
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP
 
-����Ū�ʹ������Ǥ��� URI::LDAP ���֥������Ȥ��������ޤ���
-build �Ȱۤʤꡢ�ǥե���ȤǤϰ������������򸡺����ޤ���
+汎用的な構成要素から URI::LDAP オブジェクトを生成します。
+build と異なり、デフォルトでは引数の正当性を検査しません。
 
-@param scheme �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param scheme 構成要素を表す文字列を与えます。
 
-@param userinfo �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param userinfo 構成要素を表す文字列を与えます。
 
-@param host �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param host 構成要素を表す文字列を与えます。
 
-@param port �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param port 構成要素を表す文字列を与えます。
 
-@param registry nil ��Ϳ���ޤ���
+@param registry nil を与えます。
 
-@param path �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param path 構成要素を表す文字列を与えます。
 
-@param opaque �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param opaque 構成要素を表す文字列を与えます。
 
-@param query �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param query 構成要素を表す文字列を与えます。
 
-@param fragment �������Ǥ�ɽ��ʸ�����Ϳ���ޤ���
+@param fragment 構成要素を表す文字列を与えます。
 
-@param arg_check ����Ϳ����줿���ϡ��ư��������絬§��Ŭ�礷�Ƥ��뤫�ݤ��򸡺����ޤ���Ŭ�礷�ʤ������㳰 URI::InvalidComponentError ������ޤ���
+@param arg_check 真が与えられた場合は、各引数が字句規則に適合しているか否かを検査します。適合しない場合は例外 URI::InvalidComponentError が起ります。
 
-@raise URI::InvalidURIError use_registry �����ΤȤ���registry ��Ϳ�������ȯ�����ޤ���
+@raise URI::InvalidURIError use_registry が偽のとき、registry が与えられると発生します。
 
-@raise URI::InvalidComponentError �����Ǥ�Ŭ�礷�ʤ�����ȯ�����ޤ���
+@raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
 == Instance Methods
 
 --- dn    -> String
 
-���Ȥ� Distinguished Name ��ʸ������֤��ޤ���
+自身の Distinguished Name を文字列で返します。
 
 --- dn=(s)
 
-���Ȥ� Distinguished Name ��ʸ��������ꤷ�ޤ���
+自身の Distinguished Name を文字列で設定します。
 
-@param s ���Ȥ� Distinguished Name ��ʸ����ǻ��ꤷ�ޤ���
+@param s 自身の Distinguished Name を文字列で指定します。
 
 --- attributes    -> String
 
-���Ȥ� Attribute ��ʸ������֤��ޤ���
+自身の Attribute を文字列で返します。
 
 --- attributes=(s)
 
-���Ȥ� Attribute ��ʸ��������ꤷ�ޤ���
+自身の Attribute を文字列で設定します。
 
-@param s ���Ȥ� Attribute ��ʸ��������ꤷ�ޤ���
+@param s 自身の Attribute を文字列で設定します。
 
 --- scope    -> String
 
-���Ȥ� Scope ��ʸ������֤��ޤ���
+自身の Scope を文字列で返します。
 
 --- scope=(s)
 
-���Ȥ� Scope ��ʸ��������ꤷ�ޤ���
+自身の Scope を文字列で設定します。
 
-@param s ���Ȥ� Scope ��ʸ��������ꤷ�ޤ���
+@param s 自身の Scope を文字列で設定します。
 
 --- filter    -> String
 
-���Ȥ� filter ��ʸ������֤��ޤ���
+自身の filter を文字列で返します。
 
 --- filter=(s)
 
-���Ȥ� filter ��ʸ��������ꤷ�ޤ���
+自身の filter を文字列で設定します。
 
-@param s ���Ȥ� filter ��ʸ��������ꤷ�ޤ���
+@param s 自身の filter を文字列で設定します。
 
 --- extensions    -> String
 
-���Ȥ� extensions ��ʸ������֤��ޤ���
+自身の extensions を文字列で返します。
 
 --- extensions=(s)
 
-���Ȥ� extensions ��ʸ��������ꤷ�ޤ���
+自身の extensions を文字列で設定します。
 
-@param s ���Ȥ� extensions ��ʸ��������ꤷ�ޤ���
+@param s 自身の extensions を文字列で設定します。

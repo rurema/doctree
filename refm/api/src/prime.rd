@@ -1,11 +1,11 @@
 #@since 1.9.1
 
-�ǿ����ǰ���ʬ��򰷤��饤�֥��Ǥ���
+素数や素因数分解を扱うライブラリです。
 
-�饤�֥����濴�ˤ���Τ� [[c:Prime]] ���饹�ǡ�������ǿ����Τ�ɽ�����󥰥�ȥ�Ǥ����ޤ����ǿ������ǰ���ʬ��˴ؤ���᥽�åɤ� [[c:Integer]] ���ɲä��ޤ���
-����ˡ� Prime ���饹�ε�ǽ��¸����뤿�������Υ��饹����Ĥ��󶡤���Ƥ��ޤ���
+ライブラリの中心にあるのは [[c:Prime]] クラスで、これは素数全体を表すシングルトンです。また、素数性と素因数分解に関するメソッドを [[c:Integer]] に追加します。
+さらに、 Prime クラスの機能を実現するための低水準のクラスも幾つか提供されています。
 
-=== ��
+=== 例
 
   Prime.each(100) do |prime|
     p prime #=> 2, 3, 5, 7, 11, ..., 97
@@ -14,55 +14,55 @@
   2.prime? #=> true
   4.prime? #=> false
 
-=== ������
+=== 生成器
 
-[[c:Prime]] �Υ᥽�åɤ�����������ε����ǿ����������Ѥ��ޤ���
-������ϵ����ǿ��������ˡ�μ������󶡤��ޤ����ޤ������֤����ξ峦�򵭲����뵡ǽ�⤢��ޤ���
-���ˡ� [[c:Enumerator]] �ȸߴ����Τ��볰�����ƥ졼���Ǥ⤢��ޤ���
+[[c:Prime]] のメソッドは内部で低水準の疑似素数生成器を使用します。
+生成器は擬似素数の列挙方法の実装を提供します。また列挙状態や列挙の上界を記憶する機能もあります。
+更に、 [[c:Enumerator]] と互換性のある外部イテレータでもあります。
 
-�����˱�����Ŭ�ڤʵ����ǿ��������르�ꥺ��ϰۤʤ�Τǡ������Ĥ���������μ������Ѱդ���Ƥ��ޤ��� 
-[[c:Prime::PseudoPrimeGenerator]] ��������δ���Ȥʤ륯�饹�Ǥ���
+状況に応じて適切な疑似素数生成アルゴリズムは異なるので、いくつかの生成器の実装が用意されています。 
+[[c:Prime::PseudoPrimeGenerator]] は生成器の基底となるクラスです。
 
 : [[c:Prime::EratosthenesGenerator]]
-  ����ȥ��ƥͥ�����������Ѥ��ޤ���
+  エラトステネスの篩いを使用します。
 : [[c:Prime::TrialDivisionGenerator]]
-  ��Խ���ˡ����Ѥ��ޤ���
+  試行除算法を使用します。
 : [[c:Prime::Generator23]]
-  2 �� 3 �ǳ���ڤ�ʤ����Ƥ������������������ޤ���
-  ���ο�����ǿ��ο���Ȥ��ƤϻȤ�ʪ�ˤʤ�ޤ��󡣤�������¾����������®����
-  ����λ����̤⾯�ʤ��Ȥ�����ħ������ޤ������Τ��ᡢ����ۤ��礭���ʤ��ơ�
-  �ǿ������Ǥ�¿�����������ΰ���ʬ��˸����Ƥ��ޤ���
+  2 と 3 で割り切れない全ての正の整数を生成します。
+  この数列は素数の数列としては使い物になりません。しかし、他の生成器より速く、
+  メモリの使用量も少ないという特徴があります。そのため、それほど大きくなくて、
+  素数の要素を多く持つ整数の因数分解に向いています。
 
-Prime ���饹�γƥ᥽�åɤϡ�����Ū�����Ӥ����ꤷ��Ŭ�ڤ����������Ѥ��ޤ���
-�桼������ɬ�פ˱�����������������������Ѥ���褦�˥��ץ������������ꤹ�뤳�Ȥ�Ǥ��ޤ����ޤ����桼�������ȼ����������������뤳�Ȥ�Ǥ��ޤ���
+Prime クラスの各メソッドは、一般的な用途を想定して適切な生成器を使用します。
+ユーザーは必要に応じて特定の生成器実装を使用するようにオプション引数を設定することもできます。また、ユーザーは独自の生成器を実装することもできます。
 
 = class Prime < Object
 include Enumerable
 
-�ǿ����Τ�ɽ���ޤ���
+素数全体を表します。
 
-=== ���󥹥��󥹤����������ˡ
+=== インスタンスを取得する方法
 
-Prime ���饹�ϥ��󥰥�ȥ�Ǥ���ȹͤ��Ƥ���������Prime ���饹�ϥǥե���ȤΥ��󥹥��󥹤���äƤ��ꡢ�桼�����Ϥ��Υ��󥹥��󥹤����Ѥ��٤��Ǥ��� [[m:Prime.instance]] �ˤ�äƤ��Υ��󥹥��󥹤�����Ǥ��ޤ���
+Prime クラスはシングルトンであると考えてください。Prime クラスはデフォルトのインスタンスを持っており、ユーザーはそのインスタンスを利用すべきです。 [[m:Prime.instance]] によってそのインスタンスを取得できます。
 
-���Ȥθߴ����Τ���� [[m:Prime.new]] ��ĤäƤ��ޤ������Υ᥽�åɤ���侩�Ǥ��Τǡ��������ץ������Ǥ����Ѥ��ʤ��Ǥ���������
+過去との互換性のために [[m:Prime.new]] も残っています。このメソッドは非推奨ですので、新しいプログラムでは利用しないでください。
 
-�ʤ����������Τ���˥ǥե���ȥ��󥹥��󥹤Υ᥽�åɤ򥯥饹�᥽�åɤȤ��Ƥ����ѤǤ��ޤ���
+なお、利便性のためにデフォルトインスタンスのメソッドをクラスメソッドとしても利用できます。
 
-��:
+例:
   Prime.instance.prime?(2)  #=> true
   Prime.prime?(2)           #=> true
 
 
 == Class Methods
 --- new -> Prime
-���Ȥθߴ����Τ���Υ᥽�åɤǤ����������ץ������Ǥ� [[m:Prime.instance]] �䥯�饹�᥽�åɤ����Ѥ��Ƥ���������
+過去との互換性のためのメソッドです。新しいプログラムでは [[m:Prime.instance]] やクラスメソッドを利用してください。
 
-���Υ᥽�åɤ��֤����󥹥��󥹤ϡ��ǥե���ȤΥ��󥹥��󥹤Ȥϰ�ä�[[c:Prime::OldCompatibility]] �ǳ�ĥ����Ƥ��ޤ���
+このメソッドが返すインスタンスは、デフォルトのインスタンスとは違って[[c:Prime::OldCompatibility]] で拡張されています。
 
 --- instance -> Prime
 
-[[c:Prime]] �Υǥե���ȤΥ��󥹥��󥹤��֤��ޤ���
+[[c:Prime]] のデフォルトのインスタンスを返します。
 
 
 == Instance Methods
@@ -70,30 +70,30 @@ Prime ���饹�ϥ��󥰥�ȥ�Ǥ���ȹͤ��Ƥ���������Prime ���饹�ϥǥե���ȤΥ���
 --- each(upper_bound = nil, generator = EratosthenesGenerator.new){|prime| ... } -> object
 --- each(upper_bound = nil, generator = EratosthenesGenerator.new)               -> Enumerator
 
-���Ƥ��ǿ�����֤�Ϳ����줿�֥��å����Ϥ���ɾ�����ޤ���
+全ての素数を順番に与えられたブロックに渡して評価します。
 
-@param upper_bound Ǥ�դ�������������ꤷ�ޤ������ξ峦�Ǥ���
-                   nil ��Ϳ����줿����̵�¤����³���ޤ���
+@param upper_bound 任意の正の整数を指定します。列挙の上界です。
+                   nil が与えられた場合は無限に列挙し続けます。
 
-@param generator �ǿ�������Υ��󥹥��󥹤���ꤷ�ޤ���
+@param generator 素数生成器のインスタンスを指定します。
 
-@return �֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å���Ϳ�����ʤ��ä����ϡ�[[c:Enumerator]] �ȸߴ����Τ��볰�����ƥ졼�����֤��ޤ���
+@return ブロックの最後に評価された値を返します。
+        ブロックが与えられなかった場合は、[[c:Enumerator]] と互換性のある外部イテレータを返します。
 
-=== ��:
+=== 例:
   Prime.each(6).each{|prime| prime }  # => 5
   Prime.each(7).each{|prime| prime }  # => 7
   Prime.each(10).each{|prime| prime } # => 7
   Prime.each(11).each{|prime| prime } # => 11
 
-=== ��: 30�ʲ����л��ǿ�
+=== 例: 30以下の双子素数
   Prime.each(30).each_cons(2).select{|p,r| r-p == 2} 
     #=> [[3, 5], [5, 7], [11, 13], [17, 19]]
 
-=== ��
-���Υ᥽�åɤˡ������ǿ���Ǥʤ������ǿ���Ϳ����٤��ǤϤ���ޤ���
+=== 注
+このメソッドに、真の素数列でない疑似素数を与えるべきではありません。
 
-���Υ᥽�åɤϡ��ǿ���γ������ƥ졼�����������ƥ졼�����Ѵ�����Ruby�餷���ץ�����ߥ󥰤��󶡤��뤳�Ȥ���̳�Ǥ����ȼ����ǿ������ݾ㤹��Τϥ᥽�åɤ���̳�ǤϤ���ޤ��󡣽��äơ����Τ褦�����٤��㤤�ǿ��������Ϳ����ȡ������ǿ��Ȥϸ¤�ʤ�����ȯ�����ޤ���
+このメソッドは、素数列の外部イテレータを内部イテレータに変換してRubyらしいプログラミングを提供することが責務です。独自に素数性の保障するのはメソッドの責務ではありません。従って、次のように精度の低い素数生成器を与えると、真に素数とは限らない数列が発生します。
  Prime.each(50, Prime::Generator23.new) do |n|
    p n #=> [2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49]
  end
@@ -102,42 +102,42 @@ Prime ���饹�ϥ��󥰥�ȥ�Ǥ���ȹͤ��Ƥ���������Prime ���饹�ϥǥե���ȤΥ���
 
 --- int_from_prime_division(pd) -> Integer
 
-�ǰ���ʬ�򤵤줿��̤򸵤ο��ͤ��ᤷ�ޤ���
+素因数分解された結果を元の数値に戻します。
 
-������ [[p_1, e_1], [p_2, e_2], ...., [p_n, e_n]] �Τ褦�Ǥ���Ȥ���
-��̤�  p_1**e_1 * p_2**e_2 * .... * p_n**e_n �Ȥʤ�ޤ���
+引数が [[p_1, e_1], [p_2, e_2], ...., [p_n, e_n]] のようであるとき、
+結果は  p_1**e_1 * p_2**e_2 * .... * p_n**e_n となります。
 
-@param pd �����Υڥ����������ꤷ�ޤ����ޤޤ�Ƥ���ڥ���������Ǥ��ǰ�����
-          �������ǤϤ����ǰ����λؿ��򤢤�路�ޤ���
+@param pd 整数のペアの配列を指定します。含まれているペアの第一要素は素因数を、
+          第二要素はその素因数の指数をあらわします。
 
-��:
+例:
   Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
   Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 
 --- prime?(value, generator = Prime::Generator23.new) -> bool
 
-Ϳ����줿�������ǿ��Ǥ�����ϡ������֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+与えられた整数が素数である場合は、真を返します。
+そうでない場合は偽を返します。
 
-@param value �ǿ����ɤ��������å�����Ǥ�դ���������ꤷ�ޤ���
+@param value 素数かどうかチェックする任意の整数を指定します。
 
-@param generator �ǿ�������Υ��󥹥��󥹤���ꤷ�ޤ���
+@param generator 素数生成器のインスタンスを指定します。
 
 @see [[c:Prime::EratosthenesGenerator]], [[c:Prime::TrialDivisionGenerator]], [[c:Prime::Generator23]]
 
 --- prime_division(value, generator= Prime::Generator23.new) -> [[Integer, Integer]]
 
-Ϳ����줿�������ǰ���ʬ�򤷤ޤ���
+与えられた整数を素因数分解します。
 
-@param value �ǰ���ʬ�򤹤�Ǥ�դ���������ꤷ�ޤ���
+@param value 素因数分解する任意の整数を指定します。
 
-@param generator �ǿ�������Υ��󥹥��󥹤���ꤷ�ޤ���
+@param generator 素数生成器のインスタンスを指定します。
 
-@return �ǰ����Ȥ��λؿ���������ڥ������ǤȤ�������Ǥ����Ĥޤꡢ����ͤγ����Ǥ�2���Ǥ����� [n,e] �Ǥ��ꡢ���줾��������������1���� n �� value ���ǰ�������2���Ǥ� n**e �� value �����ڤ����μ����� e �Ǥ���
+@return 素因数とその指数から成るペアを要素とする配列です。つまり、戻り値の各要素は2要素の配列 [n,e] であり、それぞれの内部配列の第1要素 n は value の素因数、第2要素は n**e が value を割り切る最大の自然数 e です。
 
-@raise ZeroDivisionError Ϳ����줿���ͤ������Ǥ������ȯ�����ޤ���
+@raise ZeroDivisionError 与えられた数値がゼロである場合に発生します。
 
-��:
+例:
     Prime.prime_division(12) #=> [[2,2], [3,1]]
     Prime.prime_division(10) #=> [[2,1], [5,1]]
 
@@ -146,68 +146,68 @@ Prime ���饹�ϥ��󥰥�ȥ�Ǥ���ȹͤ��Ƥ���������Prime ���饹�ϥǥե���ȤΥ���
 = class Prime::PseudoPrimeGenerator < Object
 include Enumerable
 
-�����ǿ�������ҤΤ������ݥ��饹�Ǥ���
+擬似素数列の列挙子のための抽象クラスです。
 
-[[c:Prime]] �γƥ᥽�åɤ����Ѥ�������ε����ǿ����Ҥϡ� Prime::PseudoPrimeGenerator �Υ��󥹥��󥹤Ǥ��뤳�Ȥ����Ԥ���Ƥ��ޤ���
-���Υ��饹��Ѿ������ݥ��饹�� succ, next, rewind �򥪡��С��饤�ɤ��ʤ���Фʤ�ޤ���
+[[c:Prime]] の各メソッドが使用する低水準の疑似素数列挙子は、 Prime::PseudoPrimeGenerator のインスタンスであることが期待されています。
+このクラスを継承する具象クラスは succ, next, rewind をオーバーライドしなければなりません。
 
-�ȼ����ǿ���󥢥르�ꥺ���������褦�Ȥ����������ơ��桼���������Υ��饹�����Ѥ���ɬ�פϤ���ޤ��󡣹���� [[c:Prime]] ���饹�����Ѥ��Ƥ���������
+独自の素数列挙アルゴリズムを実装しようとする場合を除いて、ユーザーがこのクラスを利用する必要はありません。高水準の [[c:Prime]] クラスを利用してください。
 
 == Class Methods
 
 --- new(upper_bound = nil)
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param upper_bound ��󤹤��ǿ��ξ峦����ꤷ�ޤ���
+@param upper_bound 列挙する素数の上界を指定します。
 
 == Instance Methods
 
 --- each {|prime| ... } -> object
 --- each -> self
 
-�ǿ���Ϳ����줿�֥��å����Ϥ���ɾ�����ޤ���
+素数を与えられたブロックに渡して評価します。
 
 --- next -> ()
 --- succ -> ()
 
-���ε����ǿ����֤��ޤ���
-�ޤ�����Ū�ʰ��֤�ʤ�ޤ���
+次の擬似素数を返します。
+また内部的な位置を進めます。
 
-���֥��饹�Ǽ������Ƥ���������
+サブクラスで実装してください。
 
-@raise NotImplementedError ɬ��ȯ�����ޤ���
+@raise NotImplementedError 必ず発生します。
 
 --- rewind -> ()
 
-�����֤򴬤��ᤷ�ޤ���
+列挙状態を巻き戻します。
 
-���֥��饹�Ǽ������Ƥ���������
+サブクラスで実装してください。
 
-@raise NotImplementedError ɬ��ȯ�����ޤ���
+@raise NotImplementedError 必ず発生します。
 
 @see [[m:Enumerator#rewind]]
 
 --- upper_bound -> Integer | nil
 
-���ߤ����峦���֤��ޤ��� nil �Ͼ峦���ʤ�̵�¤��ǿ�����󤹤٤��Ǥ��뤳�Ȥ��̣���ޤ���
+現在の列挙上界を返します。 nil は上界がなく無限に素数を列挙すべきであることを意味します。
 
 --- upper_bound=(upper_bound)
 
-���������峦�򥻥åȤ��ޤ���
+新しい列挙上界をセットします。
 
-@param upper_bound �������峦�������ޤ��� nil �ǻ��ꤷ�ޤ��� nil �Ͼ峦���ʤ�̵�¤��ǿ�����󤹤٤��Ǥ��뤳�Ȥ��̣���ޤ���
+@param upper_bound 新しい上界を整数または nil で指定します。 nil は上界がなく無限に素数を列挙すべきであることを意味します。
 
 --- with_index{|prime, index| ... }      -> self
 --- each_with_index{|prime, index| ... } -> self
 --- with_index      -> Enumerator
 --- each_with_index -> Enumerator
 
-Ϳ����줿�֥��å����Ф��ơ��ǿ���0������Ϣ�֤��Ϥ���ɾ�����ޤ���
+与えられたブロックに対して、素数を0起点の連番を渡して評価します。
 
-@return �֥��å���Ϳ����줿���� self ���֤��ޤ��� �֥��å���Ϳ�����ʤ��ä����� Enumerator ���֤��ޤ���
+@return ブロックを与えられた場合は self を返します。 ブロックを与えられなかった場合は Enumerator を返します。
 
-��:
+例:
   Prime::EratosthenesGenerator.new(10).each_with_index do |prime, index|
     p [prime, index]
   end
@@ -221,29 +221,29 @@ include Enumerable
 --- with_object(obj){|prime, obj| ... } -> object
 --- with_object(obj) -> Enumerator
 
-Ϳ����줿Ǥ�դΥ��֥������Ȥ����Ǥ�֥��å����Ϥ���ɾ�����ޤ���
+与えられた任意のオブジェクトと要素をブロックに渡して評価します。
 
-@param obj Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
-@return �ǽ��Ϳ����줿���֥������Ȥ��֤��ޤ���
-@return �֥��å���Ϳ����줿���� obj ���֤��ޤ����֥��å���Ϳ�����ʤ��ä����� Enumerator ���֤��ޤ���
+@param obj 任意のオブジェクトを指定します。
+@return 最初に与えられたオブジェクトを返します。
+@return ブロックを与えられた場合は obj を返します。ブロックを与えられなかった場合は Enumerator を返します。
 
 @see [[m:Enumerator#with_object]]
 
 = class Prime::EratosthenesGenerator < Prime::PseudoPrimeGenerator
 
-[[c:Prime::PseudoPrimeGenerator]] �ζ�ݥ��饹�Ǥ���
-�ǿ��������˥���ȥ��ƥͥ��Τդ뤤����Ѥ��Ƥ��ޤ���
+[[c:Prime::PseudoPrimeGenerator]] の具象クラスです。
+素数の生成にエラトステネスのふるいを使用しています。
 
 == Instance Methods
 
 --- next -> Integer
 --- succ -> Integer
 
-����(����)�ǿ����֤��ޤ����ʤ������μ����ˤ����Ƥϵ����ǿ��Ͽ����ǿ��Ǥ���
+次の(疑似)素数を返します。なお、この実装においては疑似素数は真に素数です。
 
-�ޤ�����Ū�������֤�ʤ�ޤ���
+また内部的な列挙位置を進めます。
 
-��:
+例:
  generator = Prime::EratosthenesGenerator.new
  p generator.next #=> 2
  p generator.next #=> 3
@@ -253,9 +253,9 @@ include Enumerable
 
 --- rewind -> nil
 
-�����֤򴬤��ᤷ�ޤ���
+列挙状態を巻き戻します。
 
-��:
+例:
  generator = Prime::EratosthenesGenerator.new
  p generator.next #=> 2
  p generator.next #=> 3
@@ -268,42 +268,42 @@ include Enumerable
 
 = class Prime::TrialDivisionGenerator < Prime::PseudoPrimeGenerator
 
-[[c:Prime::PseudoPrimeGenerator]] �ζ�ݥ��饹�Ǥ���
-�ǿ��������˻�Խ���ˡ����Ѥ��Ƥ��ޤ���
+[[c:Prime::PseudoPrimeGenerator]] の具象クラスです。
+素数の生成に試行除算法を使用しています。
 
 == Instance Methods
 
 --- next -> Integer
 --- succ -> Integer
 
-����(����)�ǿ����֤��ޤ����ʤ������μ����ˤ����Ƥϵ����ǿ��Ͽ����ǿ��Ǥ���
+次の(疑似)素数を返します。なお、この実装においては疑似素数は真に素数です。
 
-�ޤ�����Ū�������֤�ʤ�ޤ���
+また内部的な列挙位置を進めます。
 
 --- rewind -> nil
 
-�����֤򴬤��ᤷ�ޤ���
+列挙状態を巻き戻します。
 
 = class Prime::Generator23 < Prime::PseudoPrimeGenerator
 
-2��3�ȡ�3 ����礭���� 2 �Ǥ� 3 �Ǥ����ڤ�ʤ����Ƥ��������������ޤ���
+2と3と、3 より大きくて 2 でも 3 でも割り切れない全ての整数を生成します。
 
-�����������ǿ����򵿻��ǿ��ˤ�����ǥ����å������硢���Τ褦�������٤�����®�ǥ������񤷤ʤ������ǿ������郎Ŭ���Ƥ��ޤ���
+ある整数の素数性を疑似素数による試し割りでチェックする場合、このように低精度だが高速でメモリを消費しない疑似素数生成器が適しています。
 
-������ [[m:Prime#each]] �Τ褦���ǿ��������������Ū�ˤϤޤä������Ω���ޤ���
+一方、 [[m:Prime#each]] のように素数列を生成する目的にはまったく役に立ちません。
 
 == Instance Methods
 
 --- next -> Integer
 --- succ -> Integer
 
-���ε����ǿ����֤��ޤ���
+次の疑似素数を返します。
 
-�ޤ�����Ū�������֤�ʤ�ޤ���
+また内部的な列挙位置を進めます。
 
 --- rewind -> nil
 
-�����֤򴬤��ᤷ�ޤ���
+列挙状態を巻き戻します。
 
 
 #@# = class Prime::EratosthenesSieve < Object
@@ -315,32 +315,32 @@ include Enumerable
 
 = module Prime::OldCompatibility
 
-Ruby1.8 �Ȥθߴ����Τ���Υ⥸�塼��Ǥ��� 
-[[c:Prime]] ���֥������Ȥ�Ruby 1.8�ߴ��ε�ǽ��Ϳ���ޤ���
+Ruby1.8 との互換性のためのモジュールです。 
+[[c:Prime]] オブジェクトにRuby 1.8互換の機能を与えます。
 
-[[m:Prime.new]] ���֤����󥹥��󥹤Ϥ��Υ⥸�塼��� [[m:Object#extend]] ����Ƥ��ޤ��������� [[m:Prime.instance]] ���֤����󥹥��󥹤� extend ����Ƥ��ޤ���
+[[m:Prime.new]] が返すインスタンスはこのモジュールで [[m:Object#extend]] されています。一方、 [[m:Prime.instance]] が返すインスタンスは extend されていません。
 
 == Instance Methods
 
 --- next -> Integer
 --- succ -> Integer
 
-[[m:Prime#next]] ���������ޤ���
+[[m:Prime#next]] を再定義します。
 
-�����ǿ����֤��ޤ���
+次の素数を返します。
 
 --- each{|prime| ... } -> object
 --- each               -> object
 
-[[m:Prime#each]] ���������ޤ���
+[[m:Prime#each]] を再定義します。
 
-���Ƥ��ǿ�����󤷡����줾����ǿ���֥��å����Ϥ���ɾ�����ޤ���
-̵�¥롼�פˤʤ�Τ�ɬ�� break ������Ƥ���������
+全ての素数を列挙し、それぞれの素数をブロックに渡して評価します。
+無限ループになるので必ず break を入れてください。
 
-break ��˺��ٸƤӽФ��ȡ��ǽ餫��ǤϤʤ����󥹥�����������¸����Ƥ������ǰ��֤�������Ƴ����ޤ���
+break 後に再度呼び出すと、最初からではなくインスタンス内部に保存されている中断位置から列挙を再開します。
 
-@return �֥��å��դ��ǸƤӽФ��줿���� break �ΰ������֤��ͤˤʤ�ޤ���
-        �֥��å�̵���ǸƤӽФ��줿���� [[c:Prime::EratosthenesGenerator]] �Υ��󥹥��󥹤��֤��ޤ���
+@return ブロック付きで呼び出された場合は break の引数が返り値になります。
+        ブロック無しで呼び出された場合は [[c:Prime::EratosthenesGenerator]] のインスタンスを返します。
 
 
 = reopen Integer
@@ -349,14 +349,14 @@ break ��˺��ٸƤӽФ��ȡ��ǽ餫��ǤϤʤ����󥹥�����������¸����Ƥ������ǰ�
 
 --- from_prime_division(pd) -> Integer
 
-�ǰ���ʬ�򤵤줿��̤򸵤ο��ͤ��ᤷ�ޤ���
+素因数分解された結果を元の数値に戻します。
 
-@param pd �����Υڥ����������ꤷ�ޤ����ޤޤ�Ƥ���ڥ���������Ǥ��ǰ�����
-          �������ǤϤ����ǰ����λؿ��򤢤�路�ޤ���
+@param pd 整数のペアの配列を指定します。含まれているペアの第一要素は素因数を、
+          第二要素はその素因数の指数をあらわします。
 
 @see [[m:Prime#int_from_prime_division]]
 
-��:
+例:
   Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
   Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 
@@ -364,12 +364,12 @@ break ��˺��ٸƤӽФ��ȡ��ǽ餫��ǤϤʤ����󥹥�����������¸����Ƥ������ǰ�
 --- each_prime(upper_bound){|prime| ... } -> object
 --- each_prime(upper_bound) -> Enumerator
 
-���Ƥ��ǿ�����󤷡����줾����ǿ���֥��å����Ϥ���ɾ�����ޤ���
+全ての素数を列挙し、それぞれの素数をブロックに渡して評価します。
 
-@param upper_bound Ǥ�դ�������������ꤷ�ޤ������ξ峦�Ǥ���
-                   nil ��Ϳ����줿����̵�¤����³���ޤ���
-@return �֥��å��κǸ��ɾ�����줿�ͤ��֤��ޤ���
-        �֥��å���Ϳ�����ʤ��ä����ϡ�[[c:Enumerator]] �ȸߴ����Τ��볰�����ƥ졼�����֤��ޤ���
+@param upper_bound 任意の正の整数を指定します。列挙の上界です。
+                   nil が与えられた場合は無限に列挙し続けます。
+@return ブロックの最後に評価された値を返します。
+        ブロックが与えられなかった場合は、[[c:Enumerator]] と互換性のある外部イテレータを返します。
 
 @see [[m:Prime#each]]
 
@@ -377,26 +377,26 @@ break ��˺��ٸƤӽФ��ȡ��ǽ餫��ǤϤʤ����󥹥�����������¸����Ƥ������ǰ�
 
 --- prime_division(generator = Prime::Generator23.new) -> [[Integer, Integer]]
 
-���Ȥ��ǰ���ʬ�򤷤���̤��֤��ޤ���
+自身を素因数分解した結果を返します。
 
-@param generator �ǿ�������Υ��󥹥��󥹤���ꤷ�ޤ���
+@param generator 素数生成器のインスタンスを指定します。
 
-@return �ǰ����Ȥ��λؿ���������ڥ������ǤȤ�������Ǥ����Ĥޤꡢ����ͤγ����Ǥ�2���Ǥ����� [n,e] �Ǥ��ꡢ���줾��������������1���� n �� self ���ǰ�������2���Ǥ� n**e �� self �����ڤ����μ����� e �Ǥ���
+@return 素因数とその指数から成るペアを要素とする配列です。つまり、戻り値の各要素は2要素の配列 [n,e] であり、それぞれの内部配列の第1要素 n は self の素因数、第2要素は n**e が self を割り切る最大の自然数 e です。
 
-@raise ZeroDivisionError self �������Ǥ������ȯ�����ޤ���
+@raise ZeroDivisionError self がゼロである場合に発生します。
 
 @see [[m:Prime#prime_division]]
 
-��:
+例:
     12.prime_division #=> [[2,2], [3,1]]
     10.prime_division #=> [[2,1], [5,1]]
 
 --- prime? -> bool
 
-���Ȥ��ǿ��Ǥ����硢�����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身が素数である場合、真を返します。
+そうでない場合は偽を返します。
 
-��:
+例:
 
   1.prime? # => false
   2.prime? # => true

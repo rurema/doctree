@@ -1,104 +1,104 @@
 = class URI::MailTo < URI::Generic
 
-mailto URI ¤òÉ½¤¹¥¯¥é¥¹¤Ç¤¹¡£[[RFC:2368]]¡£
+mailto URI ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚[[RFC:2368]]ã€‚
 
 == Class Methods
 
 --- build(ary)     -> URI::MailTo 
 --- build(hash)    -> URI::MailTo 
 
-°ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿ URI ¹½À®Í×ÁÇ¤«¤é URI::MailTo ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
-°ú¿ô¤ÎÀµÅöÀ­¤ò¥Á¥§¥Ã¥¯¤·¤Ş¤¹¡£
+å¼•æ•°ã§ä¸ãˆã‚‰ã‚ŒãŸ URI æ§‹æˆè¦ç´ ã‹ã‚‰ URI::MailTo ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+å¼•æ•°ã®æ­£å½“æ€§ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¾ã™ã€‚
 
-@param ary ¹½À®Í×ÁÇ¤ò
+@param ary æ§‹æˆè¦ç´ ã‚’
       [to, headers]
-¤È¤¤¤¦Ê¸»úÎó¤ÎÇÛÎó¤ÇÍ¿¤¨¤Ş¤¹¡£headers ¤Ï¡¢°Ê²¼¤Î¤è¤¦¤ÊÊ¸»úÎó¤«ÇÛÎó¤Ç
-Í¿¤¨¤Ş¤¹¡£
+ã¨ã„ã†æ–‡å­—åˆ—ã®é…åˆ—ã§ä¸ãˆã¾ã™ã€‚headers ã¯ã€ä»¥ä¸‹ã®ã‚ˆã†ãªæ–‡å­—åˆ—ã‹é…åˆ—ã§
+ä¸ãˆã¾ã™ã€‚
   "subject=subscribe&cc=addr"
   
   [["subject", "subscribe"], ["cc", "addr"]]
 
-@param hash ¹½À®Í×ÁÇ¤ò¥Ï¥Ã¥·¥å¤ÇÍ¿¤¨¤Ş¤¹¡£¥Ï¥Ã¥·¥å¤Î¥­¡¼¤Ï :to, :headers ¤Ç¤¹¡£¥Ï¥Ã¥·¥å¤ÎÃÍ¤Ï ary ¤ÈÆ±ÍÍ¤Ç¤¹¡£
+@param hash æ§‹æˆè¦ç´ ã‚’ãƒãƒƒã‚·ãƒ¥ã§ä¸ãˆã¾ã™ã€‚ãƒãƒƒã‚·ãƒ¥ã®ã‚­ãƒ¼ã¯ :to, :headers ã§ã™ã€‚ãƒãƒƒã‚·ãƒ¥ã®å€¤ã¯ ary ã¨åŒæ§˜ã§ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•°ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::MailTo
 
-ÈÆÍÑÅª¤Ê¹½À®Í×ÁÇ¤«¤é URI::MailTo ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Ş¤¹¡£
-build ¤È°Û¤Ê¤ê¡¢¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï°ú¿ô¤ÎÀµÅöÀ­¤ò¸¡ºº¤·¤Ş¤»¤ó¡£
+æ±ç”¨çš„ãªæ§‹æˆè¦ç´ ã‹ã‚‰ URI::MailTo ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+build ã¨ç•°ãªã‚Šã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯å¼•æ•°ã®æ­£å½“æ€§ã‚’æ¤œæŸ»ã—ã¾ã›ã‚“ã€‚
 
-@param scheme ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param scheme æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param userinfo ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param userinfo æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param host ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param host æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param port ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param port æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param registry nil ¤òÍ¿¤¨¤Ş¤¹¡£
+@param registry nil ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param path ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param path æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param opaque ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param opaque æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param query ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param query æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param fragment ¹½À®Í×ÁÇ¤òÉ½¤¹Ê¸»úÎó¤òÍ¿¤¨¤Ş¤¹¡£
+@param fragment æ§‹æˆè¦ç´ ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’ä¸ãˆã¾ã™ã€‚
 
-@param arg_check ¿¿¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¤Ï¡¢³Æ°ú¿ô¤¬»ú¶çµ¬Â§¤ËÅ¬¹ç¤·¤Æ¤¤¤ë¤«Èİ¤«¤ò¸¡ºº¤·¤Ş¤¹¡£Å¬¹ç¤·¤Ê¤¤¾ì¹ç¤ÏÎã³° URI::InvalidComponentError ¤¬µ¯¤ê¤Ş¤¹¡£
+@param arg_check çœŸãŒä¸ãˆã‚‰ã‚ŒãŸå ´åˆã¯ã€å„å¼•æ•°ãŒå­—å¥è¦å‰‡ã«é©åˆã—ã¦ã„ã‚‹ã‹å¦ã‹ã‚’æ¤œæŸ»ã—ã¾ã™ã€‚é©åˆã—ãªã„å ´åˆã¯ä¾‹å¤– URI::InvalidComponentError ãŒèµ·ã‚Šã¾ã™ã€‚
 
-@raise URI::InvalidURIError use_registry ¤¬µ¶¤Î¤È¤­¡¢registry ¤¬Í¿¤¨¤é¤ì¤ë¤ÈÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidURIError use_registry ãŒå½ã®ã¨ãã€registry ãŒä¸ãˆã‚‰ã‚Œã‚‹ã¨ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ³ÆÍ×ÁÇ¤¬Å¬¹ç¤·¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError å„è¦ç´ ãŒé©åˆã—ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
 == Instance Methods
 
 --- to         -> String
 
-¼«¿È¤Î e-mail ¥¢¥É¥ì¥¹¤òÊ¸»úÎó¤ÇÊÖ¤·¤Ş¤¹¡£
+è‡ªèº«ã® e-mail ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   p URI.parse("mailto:nospam@example.com").to     #=> "nospam@example.com"
 
 --- to=(s) 
 
-¼«¿È¤Î e-mail ¥¢¥É¥ì¥¹¤òÊ¸»úÎó¤ÇÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã® e-mail ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ–‡å­—åˆ—ã§è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¼«¿È¤Î e-mail ¥¢¥É¥ì¥¹¤òÊ¸»úÎó¤Ç»ØÄê¤·¤Ş¤¹¡£
+@param s è‡ªèº«ã® e-mail ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ–‡å­—åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
   m = URI.parse("mailto:nospam@example.com")
   m.to = "nospaaaam@example.com"
   p m                                        #=> #<URI::MailTo:0xb7bf0614 URL:mailto:nospaaaam@example.com>
 
 --- headers        -> [[String]]
 
-¼«¿È¤Î¥Ø¥Ã¥À¡¼¤òÊ¸»úÎó¤ÎÇÛÎó¤ÎÇÛÎó¤È¤·¤ÆÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã®ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’æ–‡å­—åˆ—ã®é…åˆ—ã®é…åˆ—ã¨ã—ã¦è¨­å®šã—ã¾ã™ã€‚
 
-Îã: 
+ä¾‹: 
  m = URI.parse("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
  p m.headers #=> [["subject", "subscribe"], ["cc", "myaddr"]]
 
 --- headers=(s)
 
-¼«¿È¤Î¥Ø¥Ã¥À¡¼¤òÊ¸»úÎó¤ÇÀßÄê¤·¤Ş¤¹¡£
+è‡ªèº«ã®ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’æ–‡å­—åˆ—ã§è¨­å®šã—ã¾ã™ã€‚
 
-@param s ¥Ø¥Ã¥À¡¼¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+@param s ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’è¡¨ã™æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@raise URI::InvalidComponentError ÉÔÀµ¤Ê°ú¿ô s ¤ËÂĞ¤·¤ÆÈ¯À¸¤·¤Ş¤¹¡£
+@raise URI::InvalidComponentError ä¸æ­£ãªå¼•æ•° s ã«å¯¾ã—ã¦ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã: 
+ä¾‹: 
   m = URI.parse("mailto:nospam@example.com")
   m.headers =  URI.escape("subject=hello hello")
 
 --- to_mailtext      -> String
 --- to_rfc822text    -> String
 
-URI ¥ª¥Ö¥¸¥§¥¯¥È¤«¤é¥á¡¼¥ë¥Æ¥­¥¹¥ÈÊ¸»úÎó¤òÀ¸À®¤·¤Ş¤¹¡£
+URI ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ¡ãƒ¼ãƒ«ãƒ†ã‚­ã‚¹ãƒˆæ–‡å­—åˆ—ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-Îã: 
+ä¾‹: 
   require 'uri'
   p mailto = URI.parse("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
   print mailto.to_mailtext

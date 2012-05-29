@@ -1,27 +1,27 @@
 require rake
 require rake/tasklib
 
-�ɥ�����Ȥ�������뤿��Υ�������������ޤ���
+ドキュメントを作成するためのタスクを定義します。
 
-�ʲ��Υ�������������ޤ���
+以下のタスクを定義します。
 
 : rdoc
-  RDoc ��������ޤ���
+  RDoc を作成します。
 : clobber_rdoc
-  �������줿 RDoc �Υե�����������ޤ���
-  ���Υ������� clobber �������ˤ��ɲä���ޤ���
+  生成された RDoc のファイルを削除します。
+  このタスクは clobber タスクにも追加されます。
 : rerdoc
-  ����¸�ߤ��� RDoc ���Ť��ʤ��Ƥ� RDoc ��������ޤ���
+  既に存在する RDoc が古くなくても RDoc を作成します。
 
 
-��:
+例:
    Rake::RDocTask.new do |rd|
      rd.main = "README.rdoc"
      rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
    end
 
-��:
-   # RDoc ���������̤�̾�����դ�����
+例:
+   # RDoc タスクに別の名前を付ける例
    Rake::RDocTask.new(:rdoc_dev) do |rd|
      rd.main = "README.doc"
      rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
@@ -34,112 +34,112 @@ require rake/tasklib
 
 --- define -> self
 
-��������������ޤ���
+タスクを定義します。
 
 --- external -> bool
 
-�����ͤ����ξ��ϳ����Υ������ͳ�� rdoc ���ޥ�ɤ�¹Ԥ��ޤ���
-�ǥե���Ȥϵ��Ǥ���
+この値が真の場合は外部のシェル経由で rdoc コマンドを実行します。
+デフォルトは偽です。
 
 --- external=(flag)
 
-�����Υ������ͳ�� rdoc ���ޥ�ɤ�¹Ԥ��뤫�ɤ������åȤ��ޤ���
+外部のシェル経由で rdoc コマンドを実行するかどうかセットします。
 
-@param flag ���ޤ��ϵ�����ꤷ�ޤ���
+@param flag 真または偽を指定します。
 
 --- main -> String
 
-�ᥤ��Ȥ��ƻ��Ѥ����ե�����̾���֤��ޤ���
+メインとして使用されるファイル名を返します。
 
 --- main=(filename)
 
-�ᥤ��Ȥ��ƻ��Ѥ����ե�����̾�򥻥åȤ��ޤ���
+メインとして使用されるファイル名をセットします。
 
 --- name -> String
 
-��������̾�����֤��ޤ����ǥե���Ȥ� rdoc �Ǥ���
+タスクの名前を返します。デフォルトは rdoc です。
 
 --- name=(name)
 
-��������̾���򥻥åȤ��ޤ���
+タスクの名前をセットします。
 
-@param name ��������̾������ꤷ�ޤ���
+@param name タスクの名前を指定します。
 
 --- option_list -> Array
 
-rdoc ���ޥ�ɤ��Ϥ����ץ����Υꥹ�Ȥ��֤��ޤ���
+rdoc コマンドに渡すオプションのリストを返します。
 
 --- option_string -> String
 
-rdoc ���ޥ�ɤ��Ϥ����ץ�����ʸ����Ȥ����֤��ޤ���
+rdoc コマンドに渡すオプションを文字列として返します。
 
 --- options -> Array
 
-rdoc ���ޥ�ɤ��Ϥ����ץ����Υꥹ�Ȥ��֤��ޤ���
+rdoc コマンドに渡すオプションのリストを返します。
 
-����Ǥ��륪�ץ����� -o, --main, --title, -T �ʳ��Ǥ���
+指定できるオプションは -o, --main, --title, -T 以外です。
 
 --- options=(options)
 
-rdoc ���ޥ�ɤ��Ϥ����ץ����Υꥹ�Ȥ򥻥åȤ��ޤ���
+rdoc コマンドに渡すオプションのリストをセットします。
 
-@param options rdoc ���ޥ�ɤ��Ϥ���륪�ץ�������ꤷ�ޤ���
+@param options rdoc コマンドに渡されるオプションを指定します。
 
 --- quote(str) -> String
 
-[[m:Rake::RDocTask#external]] �����ξ���Ϳ����줿ʸ����򥯥����Ȥ��ޤ���
+[[m:Rake::RDocTask#external]] が真の場合は与えられた文字列をクオートします。
 
-@param str �������Ȥ���ʸ�������ꤷ�ޤ���
+@param str クオートする文字列を指定します。
 
 --- rdoc_dir -> String
 
-�������� HTML �ե��������¸����ǥ��쥯�ȥ�̾���֤��ޤ���
-�ǥե���Ȥ� html �Ǥ���
+作成した HTML ファイルを保存するディレクトリ名を返します。
+デフォルトは html です。
 
 --- rdoc_dir=(dir)
 
-�������� HTML �ե��������¸����ǥ��쥯�ȥ�̾�򥻥åȤ��ޤ���
+作成した HTML ファイルを保存するディレクトリ名をセットします。
 
 --- rdoc_files -> Rake::FileList
 
-RDoc �������˻��Ѥ���ե�����ꥹ�Ȥ��֤��ޤ���
-�ǥե���Ȥ϶��Ǥ���
+RDoc の生成に使用するファイルリストを返します。
+デフォルトは空です。
 
 --- rdoc_files=(filelist)
 
-RDoc �������˻��Ѥ���ե�����ꥹ�Ȥ򥻥åȤ��ޤ���
+RDoc の生成に使用するファイルリストをセットします。
 
-@param filelist �ե�����ꥹ�Ȥ���ꤷ�ޤ���
+@param filelist ファイルリストを指定します。
 
 --- template -> String
 
-���Ѥ���ƥ�ץ졼�Ȥ��֤��ޤ���
-�ǥե���Ȥ� RDoc �Υǥե���ȤǤ���
+使用するテンプレートを返します。
+デフォルトは RDoc のデフォルトです。
 
 --- template=(template)
 
-���Ѥ���ƥ�ץ졼�Ȥ򥻥åȤ��ޤ���
+使用するテンプレートをセットします。
 
-@param template ���Ѥ���ƥ�ץ졼�Ȥ���ꤷ�ޤ���
+@param template 使用するテンプレートを指定します。
 
 --- title -> String
 
-RDoc �Υ����ȥ���֤��ޤ���
-�ǥե�����ͤϤ���ޤ���
+RDoc のタイトルを返します。
+デフォルト値はありません。
 
 --- title=(title)
 
-RDoc �Υ����ȥ�򥻥åȤ��ޤ���
+RDoc のタイトルをセットします。
 
-@param title �����ȥ����ꤷ�ޤ���
+@param title タイトルを指定します。
 
 == Singleton Methods
 
 --- new(name = :rdoc){|pkg| ... } -> Rake::RDocTask
 
-���Ȥ��������� RDoc ��������������ޤ���
+自身を初期化して RDoc タスクを定義します。
 
-�֥��å���Ϳ����줿���ϡ����Ȥ�֥��å��ѥ�᡼���Ȥ���
-�֥��å���ɾ�����ޤ���
+ブロックが与えられた場合は、自身をブロックパラメータとして
+ブロックを評価します。
 
-@param name ��������̾������ꤷ�ޤ���
+@param name タスクの名前を指定します。

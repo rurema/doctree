@@ -3,7 +3,7 @@
 =begin
 = TkTreatMenuEntryFont
 
-== �᥽�å�:
+== メソッド:
 
 --- TkTreatMenuEntryFont#tagfont_configinfo(index)
 --- TkTreatMenuEntryFont#tagfont_configure(index, slot)

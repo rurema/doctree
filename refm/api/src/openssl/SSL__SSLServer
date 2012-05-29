@@ -2,16 +2,16 @@
 = class OpenSSL::SSL::SSLServer < Object
 include OpenSSL::SSL::SocketForwarder 
 
-SSL �����С��Τ���Υ��饹��
+SSL サーバーのためのクラス。
 
-[[c:TCPServer]] ���åפ��륯�饹�ǡ�TCPServer ����³����
-�����åȤ� [[c:OpenSSL::SSL::SSLSocket]] �ǥ�åפ��뵡ǽ������ޤ���
-�����褽 TCPServer ��Ʊ�ͤΥ᥽�åɤ�����ޤ���
+[[c:TCPServer]] をラップするクラスで、TCPServer で接続した
+ソケットを [[c:OpenSSL::SSL::SSLSocket]] でラップする機能を持ちます。
+おおよそ TCPServer と同様のメソッドを持ちます。
 
-����Ū�ˤ� SSL �����Ф��ñ�˼������뤿��Υ��饹�Ǥ��ꡢ
-��������Ѥ����Ȥ� SSL �����Ф�������뤳�Ȥϲ�ǽ�Ǥ���
+基本的には SSL サーバを簡単に実装するためのクラスであり、
+これを利用せずとも SSL サーバを実装することは可能です。
 
-�ʲ��ϥ��饤����Ȥ�������Ϥ�ɸ����Ϥ˽��Ϥ�������Υ����ФǤ���
+以下はクライアントからの入力を標準出力に出力するだけのサーバです。
 
   require 'socket'
   require 'openssl'
@@ -33,74 +33,74 @@ SSL �����С��Τ���Υ��饹��
 == Class Methods
 
 --- new(svr, ctx) -> OpenSSL::SSL::SSLServer
-[[c:TCPServer]] ���֥������Ȥ��åפ��� SSLServer ���֥������Ȥ��������ޤ���
+[[c:TCPServer]] オブジェクトをラップする SSLServer オブジェクトを生成します。
 
-svr �ˤϥ�åפ���[[c:TCPServer]] ���֥������Ȥ�
-ctx �ˤ� SSL �����Ф��Ѥ���  [[c:OpenSSL::SSL::SSLContext]]
-���֥������Ȥ��������ޤ���
+svr にはラップする[[c:TCPServer]] オブジェクトを、
+ctx には SSL サーバが用いる  [[c:OpenSSL::SSL::SSLContext]]
+オブジェクトを生成します。
 
-[[m:OpenSSL::SSL::SSLServer#listen]] �� [[m:OpenSSL::SSL::SSLServer#accept]]
-�������� svr ���Ϥ��줿���֥������Ȥ�
-[[m:TCPServer#listen]] �� [[m:TCPServer#accept]] ��ƤӽФ��ޤ���
+[[m:OpenSSL::SSL::SSLServer#listen]] や [[m:OpenSSL::SSL::SSLServer#accept]]
+は内部で svr で渡されたオブジェクトの
+[[m:TCPServer#listen]] や [[m:TCPServer#accept]] を呼び出します。
 
-@param svr ���Ѥ��� [[c:TCPServer]] ���֥�������
-@param ctx SSL �����ФȤ����Ѥ��� [[c:OpenSSL::SSL::SSLContext]] ���֥�������
+@param svr 利用する [[c:TCPServer]] オブジェクト
+@param ctx SSL サーバとして用いる [[c:OpenSSL::SSL::SSLContext]] オブジェクト
 
-#@# ctx �� session_id_context �����ꤵ��Ƥ��ʤ����� $0 ����
-#@# ���ꤹ��
+#@# ctx に session_id_context が設定されていない場合は $0 から
+#@# 設定する
 
 == Instance Methods
 
 --- to_io -> TCPServer
-��åפ��Ƥ��� [[c:TCPServer]] ���֥������Ȥ��֤��ޤ���
+ラップしている [[c:TCPServer]] オブジェクトを返します。
 
 --- accept -> OpenSSL::SSL::SSLSocket
-���饤����Ȥ������³������դ�����³����
-SSLSocket ���֥������Ȥ��֤��ޤ���
+クライアントからの接続を受け付け、接続した
+SSLSocket オブジェクトを返します。
 
-[[m:OpenSSL::SSL::SSLServer#start_immediately]] �����ʤ�С�
-SSLSocket#accept ��Ƥ� TLS/SSL �ϥ�ɥ���������¹Ԥ��Ƥ���
-SSLSocket ���֥������Ȥ��֤��ޤ���
+[[m:OpenSSL::SSL::SSLServer#start_immediately]] が真ならば、
+SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから
+SSLSocket オブジェクトを返します。
 
 --- close -> nil
-�����Υ����Х����åȤ��Ĥ��ޤ���
+内部のサーバソケットを閉じます。
 
 --- listen(backlog=5) -> 0
-��åפ��Ƥ��� [[c:TCPServer]] �� [[m:TCPServer#listen]] 
-��ƤӤ����ޤ���
+ラップしている [[c:TCPServer]] の [[m:TCPServer#listen]] 
+を呼びだします。
 
-�̾�� TCPServer �ν�������� listen ���ƤӤ�����뤿��
-�Ƥ�ɬ�פϤʤ��Ϥ��Ǥ���
+通常は TCPServer の初期化時に listen が呼びだされるため
+呼ぶ必要はないはずです。
 
-@param backlog ���饤����Ȥ������³�׵����α�Ǥ����
-@raise Errno::EXXX [[man:listen(2)]] �����Ԥ���� �㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+@param backlog クライアントからの接続要求を保留できる数
+@raise Errno::EXXX [[man:listen(2)]] が失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 
 --- start_immediately -> bool
-[[m:OpenSSL::SSL::SSLServer#accept]] ��
-accept �����餹���� TLS/SSL �ϥ�ɥ���������¹Ԥ��뤫�ɤ������֤��ޤ���
+[[m:OpenSSL::SSL::SSLServer#accept]] で
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを返します。
 
 @see [[m:OpenSSL::SSL::SSLServer#start_immediately=]]
 
 --- start_immediately=(bool)
-[[m:OpenSSL::SSL::SSLServer#accept]] ��
-accept �����餹���� TLS/SSL �ϥ�ɥ���������¹Ԥ��뤫�ɤ��������ꤷ�ޤ���
+[[m:OpenSSL::SSL::SSLServer#accept]] で
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。
 
-����򿿤����ꤷ�����ϡ�[[m:OpenSSL::SSL::SSLServer#accept]] ��
-��³���������åȤ��Ф� [[m:OpenSSL::SSL::SSLSocket#accept]] ��
-�Ƥӡ��ϥ�ɥ���������¹Ԥ��ޤ���
+これを真に設定した場合は、[[m:OpenSSL::SSL::SSLServer#accept]] で
+接続したソケットに対し [[m:OpenSSL::SSL::SSLSocket#accept]] を
+呼び、ハンドシェイクを実行します。
 
-�ǥե���ȤǤ� true �Ǥ���
+デフォルトでは true です。
 
-@param bool ���ꤹ�뿿���͡�
+@param bool 設定する真偽値。
 @see [[m:OpenSSL::SSL::SSLServer#start_immediately]]
 
 --- shutdown(how=Socket::SHUT_RDWR) -> 0
-�����åȤΰʹߤ���³��λ�����ޤ���
+ソケットの以降の接続を終了させます。
 
-�ܤ����� [[m:BasicSocket#shutdown]] �򻲾Ȥ��Ƥ���������
+詳しくは [[m:BasicSocket#shutdown]] を参照してください。
 
-@param how ��³�ν�λ�λ����� Socket::SHUT_RD, Socket::SHUT_WR, 
-           Socket::SHUT_RDWR �ʤɤǻ��ꤷ�ޤ���
+@param how 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, 
+           Socket::SHUT_RDWR などで指定します。
 
 #@end
 

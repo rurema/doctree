@@ -2,18 +2,18 @@ require rubygems
 require rubygems/remote_fetcher
 require rubygems/user_interaction
 
-��⡼�ȥ�ݥ��ȥ꤫�� Gem �Υ᥿�ǡ�����������ƹ������뤿��Υ饤�֥��Ǥ���
+リモートリポジトリから Gem のメタデータを取得して更新するためのライブラリです。
 
 = class Gem::SpecFetcher
 include Gem::UserInteraction
 
-��⡼�ȥ�ݥ��ȥ꤫�� Gem �Υ᥿�ǡ�����������ƹ������뤿��Υ��饹�Ǥ���
+リモートリポジトリから Gem のメタデータを取得して更新するためのクラスです。
 
 == Singleton Methods
 
 --- fetcher -> Gem::SpecFetcher
 
-���Υ��饹��ͣ��Υ��󥹥��󥹤��֤��ޤ���
+このクラスの唯一のインスタンスを返します。
 
 #@# singleton ?
 
@@ -24,21 +24,21 @@ include Gem::UserInteraction
 
 --- cache_dir(uri) -> String
 
-uri �����Ƥ�񤭹����������Υǥ��쥯�ȥ�̾���֤��ޤ���
+uri の内容を書き込むローカルのディレクトリ名を返します。
 
 @param uri 
 
 --- dir -> String
 
-���Υ��饹�����Ѥ��륭��å����ѥǥ��쥯�ȥ��̾�����֤��ޤ���
+このクラスが使用するキャッシュ用ディレクトリの名前を返します。
 
 --- fetch(dependency, all = false, matching_platform = true) -> Array
 
-��¸�ط��������� gemspec ��������֤��ޤ���
+依存関係を満たす gemspec の配列を返します。
 
-@param dependency ��¸�ط�����ꤷ�ޤ���
-@param all ������ꤹ��ȥޥå��������ƤΥС������ξ�����֤��ޤ���
-@param matching_platform ������ꤹ������ƤΥץ�åȥե�����ξ�����֤��ޤ���
+@param dependency 依存関係を指定します。
+@param all 真を指定するとマッチする全てのバージョンの情報を返します。
+@param matching_platform 偽を指定すると全てのプラットフォームの情報を返します。
 
 @see [[c:Gem::Dependency]]
 
@@ -50,52 +50,52 @@ uri �����Ƥ�񤭹����������Υǥ��쥯�ȥ�̾���֤��ޤ���
 
 --- find_matching(dependency, all = false, matching_platform = true) -> Array
 
-��¸�ط��������� gemspec ��̾����������֤��ޤ���
+依存関係を満たす gemspec の名前の配列を返します。
 
-@param dependency ��¸�ط�����ꤷ�ޤ���
-@param all ������ꤹ��ȥޥå��������ƤΥС������ξ�����֤��ޤ���
-@param matching_platform ������ꤹ������ƤΥץ�åȥե�����ξ�����֤��ޤ���
+@param dependency 依存関係を指定します。
+@param all 真を指定するとマッチする全てのバージョンの情報を返します。
+@param matching_platform 偽を指定すると全てのプラットフォームの情報を返します。
 
 @see [[c:Gem::Dependency]]
 
 --- latest_specs -> Hash
 
-����å��夵��Ƥ���ǿ��� gemspec ���֤��ޤ���
+キャッシュされている最新の gemspec を返します。
 
 --- legacy_repos -> Array
 
-RubyGems 1.2 ̤���Ǻ������줿��ݥ��ȥ��������֤��ޤ���
+RubyGems 1.2 未満で作成されたリポジトリの配列を返します。
 
 --- list(all = false) -> Array
 
-[[m:Gem::sources]] �˳�Ǽ����Ƥ���ƥ������������Ѳ�ǽ�� Gem �Υꥹ�Ȥ���������֤��ޤ���
+[[m:Gem::sources]] に格納されている各ソースから利用可能な Gem のリストを取得して返します。
 
-@param list ������ꤹ������ƤΥС������ξ�����֤��ޤ���
+@param list 真を指定すると全てのバージョンの情報を返します。
 
 --- load_specs(source_uri, file) -> object
 
-���ꤵ�줿 source_uri, file ���� gemspec ������ɤ��ޤ���
+指定された source_uri, file から gemspec をロードします。
 
-�ޤ��������Ǥϥ���å���ι�����ԤäƤ��ޤ���
+また、内部ではキャッシュの更新も行っています。
 
-@param source_uri gemspec ���֤��Ƥ��� URI ����ꤷ�ޤ���
+@param source_uri gemspec の置いてある URI を指定します。
 
-@param file gemspec �Υե�����̾����ꤷ�ޤ���
+@param file gemspec のファイル名を指定します。
 
 --- specs -> Hash
 
-����å��夵��Ƥ������Ƥ� gemspec ���֤��ޤ���
+キャッシュされている全ての gemspec を返します。
 
 
 --- warn_legacy(exception){ ... } -> bool
 
-[[m:Gem::SpecFetcher#fetch]] ���㳰��ȯ���������˸ƤӽФ���ޤ���
+[[m:Gem::SpecFetcher#fetch]] で例外が発生した場合に呼び出されます。
 
-RubyGems 1.2 ̤���Ǻ���������ݥ��ȥ�˥����������������������㳰��ȯ���������ˤ�
-�ٹ�ɽ������ޤ����ޤ����ξ�硢�֥��å���Ϳ���Ƥ���Х֥��å���ɾ������ޤ���
+RubyGems 1.2 未満で作成したリポジトリにアクセスした事が原因で例外が発生した場合には
+警告が表示されます。またこの場合、ブロックを与えていればブロックは評価されます。
 
-����ʳ��θ������㳰��ȯ���������ϵ����֤��ޤ���
+それ以外の原因で例外が発生した場合は偽を返します。
 
-@param exception �㳰���֥������Ȥ���ꤷ�ޤ���
+@param exception 例外オブジェクトを指定します。
 
 @see [[m:Gem::SpecFetcher#fetch]]

@@ -3,29 +3,29 @@ require rational
 require matrix
 #@if (version > "1.9.0")
 require prime
-[[c:Rational]] �� [[c:Complex]] ���ꥷ����쥹�����ѤǤ���褦�ˤ���饤�֥��Ǥ������ͥ饤�֥��ε�ư�򥰥����Х���ѹ����ޤ���
+[[c:Rational]] と [[c:Complex]] をよりシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
 #@else
-[[lib:rational]] �� [[lib:complex]] �򥷡���쥹�����ѤǤ���褦�ˤ���饤�֥��Ǥ������ͥ饤�֥��ε�ư�򥰥����Х���ѹ����ޤ���
+[[lib:rational]] と [[lib:complex]] をシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
 #@end
 
- * �����ν���������ڤ�ʤ���硢 [[c:Rational]] ���֥������Ȥ��֤��褦�ˤʤ�ޤ���
- * ʣ�ǿ���ͭ�����α黻��̤��¿��������˼��ޤ��硢 [[c:Float]] ���֥������Ȥ� [[c:Integer]] ���֥������Ȥ��֤��ޤ���
- * [[c:Math]] �⥸�塼��ο��شؿ��������Ƚ���򡢼¿��Τߤ���ʣ�ǿ��ؤȳ��礷�ޤ���
+ * 整数の除算が割り切れない場合、 [[c:Rational]] オブジェクトを返すようになります。
+ * 複素数や有理数の演算結果が実数や整数に収まる場合、 [[c:Float]] オブジェクトや [[c:Integer]] オブジェクトを返します。
+ * [[c:Math]] モジュールの数学関数の定義域と終域を、実数のみから複素数へと拡大します。
 
-=== ���Ѷ���
+=== 利用局面
 
-Integer �� Float ����� Rational �ϸ���̵����ɽ���Ǥ����ϰϤ��礭�����ᡢ
-���ͤα黻�ˤ����� Rational �򥷡���쥹�����Ѥ��������Ȥ�����ޤ���
-������ mathn �饤�֥��ϡ��ƿ��ͥ��饹�δ֤δط���
-���礦�� Bignum �� Fixnum �ȤΤ褦�ʼ�ưŪ���Ѵ������ط��ˤ��ޤ���
+Integer や Float に比べ Rational は誤差無しで表現できる範囲が大きいため、
+数値の演算において Rational をシームレスに利用したいことがあります。
+そこで mathn ライブラリは、各数値クラスの間の関係を
+ちょうど Bignum と Fixnum とのような自動的に変換される関係にします。
 
-==== ������ͭ����������Ѵ�
+==== 整数と有理数の相互変換
 
-����Ū�ˤϡ�Rational �Υ��󥹥��󥹤������ʤ�С�����ϼ�ưŪ�� Integer
-(Fixnum �ޤ��� Bignum)�Ȥʤꡢ�ޤ�������/�����η�̡�
-����ڤ�ʤ����� Rational ���֤�褦�ˤʤ�ޤ�����Ԥϡ������Υ᥽�åɡ�/�פ�����(.div)�Ǥʤ�����(.quo)���֤��褦�ˤʤ롢�Ȥ������Ȥ��̣���ޤ���
+具体的には、Rational のインスタンスが整数ならば、それは自動的に Integer
+(Fixnum または Bignum)となり、また、整数/整数の結果、
+割り切れない時は Rational が返るようになります。後者は、整数のメソッド「/」が整商(.div)でなく、商(.quo)を返すようになる、ということを意味します。
 
-��:
+例:
   1/2                #=> 0
   2 * Rational(1,2)  #=> Rational(1,1)
 
@@ -33,13 +33,13 @@ Integer �� Float ����� Rational �ϸ���̵����ɽ���Ǥ����ϰϤ��礭�����ᡢ
   1/2                #=> Rational(1,2)  
   2 * Rational(1,2)  #=> 1 (Fixnum)
 
-==== �¿���ʣ�ǿ�������Ѵ�
+==== 実数と複素数の相互変換
 
-Ʊ�ͤˤ��� Complex �Υ��󥹥��󥹤ε����� 0 �ʤ�С������Ȥ��ƴޤޤ�Ƥ��� Rational, Float, �ޤ��� Integer ���֥������Ȥ��Ѵ�����ޤ���
+同様にして Complex のインスタンスの虚部が 0 ならば、実部として含まれていた Rational, Float, または Integer オブジェクトに変換されます。
 
-���������ر黻������衦�����ʣ�ǿ��˳��礹��Τǡ� mathn �����Ѥ��ʤ����ˤ��ϰϥ��顼�㳰��ȯ�����Ƥ����褦�ʱ黻�� Complex ���֥������Ȥ��֤����⤢��ޤ���
+一方、数学演算の定義域・終域を複素数に拡大するので、 mathn を利用しない場合には範囲エラー例外を発生していたような演算が Complex オブジェクトを返す場合もあります。
 
-��:
+例:
  Complex(0,-1)**2  #=> Complex(-1,0)
 #@since 1.8.5
  Math.sqrt(-1)     #=> NaN
@@ -52,23 +52,23 @@ Integer �� Float ����� Rational �ϸ���̵����ɽ���Ǥ����ϰϤ��礭�����ᡢ
  Math.sqrt(-1)     #=> Complex(0,1)
  
 
-=== ���Ѿ������
-�ʤ������ε�ư�ϡ��������Х�˱ƶ���Ϳ���ޤ���
-�Ĥޤꡢ(Ruby �ǽ񤫤줿)���ѥ饤�֥��� require ���Ƥ�����硢
-�饤�֥�����ư��⡢��Τ褦���ѹ�����뤳�Ȥˤʤ�ޤ���
-¾�ͤν񤤤��饤�֥���Ȥ����ϡ������ղ�����
+=== 使用上の注意
+なお、この挙動は、グローバルに影響を与えます。
+つまり、(Ruby で書かれた)汎用ライブラリを require していた場合、
+ライブラリ中の動作も、上のように変更されることになります。
+他人の書いたライブラリを使う時は、ご注意下さい
 
-�դˡ����ѥ饤�֥��κ�Ԥ������ϡ����� [[lib:mathn]] �� require
-������ǽ����α�դ��ƽ񤤤Ʋ�����п��ڤ��Ȼפ��ޤ���
-����Ʊ�Τ�������տޤ���ʤ�� / �᥽�å� �ǤϤʤ� div �᥽�å� ���Ѥ�����ɤ��Ǥ��礦��
+逆に、汎用ライブラリの作者の方々は、この [[lib:mathn]] が require
+される可能性を留意して書いて下されば親切だと思います。
+整数同士で整除を意図するならば / メソッド ではなく div メソッド を用いると良いでしょう。
 
   * [[ruby-list:1174]]
 
 #@since 1.9
 === Prime
 
-���饹 [[c:Prime]] ��Ruby 1.8�ޤǤ� [[lib:mathn]] ���������Ƥ��ޤ�����
-���ߤϥ饤�֥�� [[lib:prime]] �˰�ư���Ƥ��ޤ����ߴ����Τ��� mathn ���ɤ߹���ȼ�ưŪ�� prime �� [[m:Kernel.#require]] ����ޤ���
+クラス [[c:Prime]] はRuby 1.8までは [[lib:mathn]] で定義されていました。
+現在はライブラリ [[lib:prime]] に移動しています。互換性のため mathn を読み込むと自動的に prime も [[m:Kernel.#require]] されます。
 
 #@end
 
@@ -78,10 +78,10 @@ Integer �� Float ����� Rational �ϸ���̵����ɽ���Ǥ����ϰϤ��礭�����ᡢ
 == Class Methods
 
 --- from_prime_division(pd) -> Integer
-�ǰ���ʬ������� pd ���������ޤ���
-pd �� [�ǰ���, �ؿ�] �Ȥ�����Ǥ���
+素因数分解の配列 pd から数を求めます。
+pd は [素因数, 指数] 組の配列です。
 
-��:
+例:
 
   Integer.from_prime_division [[2,3],[3,2]]
   # => 72 == 2**3 * 3**2
@@ -91,7 +91,7 @@ pd �� [�ǰ���, �ؿ�] �Ȥ�����Ǥ���
 --- gcd2(int)
 #@todo
 
-��:
+例:
 
   12.gcd2 8
   # => 4
@@ -99,9 +99,9 @@ pd �� [�ǰ���, �ؿ�] �Ȥ�����Ǥ���
 --- prime_division
 #@todo
 
-���ǰ��ҤˤĤ����ǰ��ҤȻؿ����Ȥ��¤٤�������֤��ޤ���
+各素因子について素因子と指数の組を並べた配列を返します。
 
-��:
+例:
 
   72.prime_division
   # => [[2, 3], [3, 2]]
@@ -114,10 +114,10 @@ pd �� [�ǰ���, �ؿ�] �Ȥ�����Ǥ���
 --- /(other)
 #@todo
 
-Fixnum#quo ��Ʊ��Ư���򤷤ޤ�(ͭ�����ޤ����������֤��ޤ�)��
+Fixnum#quo と同じ働きをします(有理数または整数を返します)。
 
-#@#* Fixnum#divmod�ξ����������ʲ��ޤǵ�ޤ�褦�ˤʤ롣
-#@#* ��Ȥ�Ȥ�Fixnum#divmod��Fixnum#divmod!�Ȥʤ롣
+#@#* Fixnum#divmodの商が小数点以下まで求まるようになる。
+#@#* もともとのFixnum#divmodはFixnum#divmod!となる。
 
 = redefine Bignum
 
@@ -126,9 +126,9 @@ Fixnum#quo ��Ʊ��Ư���򤷤ޤ�(ͭ�����ޤ����������֤��ޤ�)��
 --- /(other)
 #@todo
 
-Bignum#quo ��Ʊ��Ư���򤷤ޤ�(ͭ�����ޤ����������֤��ޤ�)��
+Bignum#quo と同じ働きをします(有理数または整数を返します)。
 
-#@#* ��Ȥ�Ȥ�Bignum#divmod��Bignum#divmod!�Ȥʤ롣
+#@#* もともとのBignum#divmodはBignum#divmod!となる。
 
 = redefine Rational
 
@@ -137,16 +137,16 @@ Bignum#quo ��Ʊ��Ư���򤷤ޤ�(ͭ�����ޤ����������֤��ޤ�)��
 --- **(rhs) -> Numeric
 #@todo
 
-self �Τ٤�����֤��ޤ��� Rational �ˤʤ�褦�Ǥ���� Rational ���֤��ޤ���
+self のべき乗を返します。 Rational になるようであれば Rational で返します。
 
 #@until 1.9.1
 --- power2
 #@todo
 
 --- inspect
-ͭ�����ͤ�ʹ֤��ɤߤ䤹������ʸ����ɽ���ˤ����֤��ޤ���
+有理数値を人間が読みやすい形の文字列表現にして返します。
 
-���ߤΥС������Ǥ� "3/5", "-17/7" �Τ褦��10�ʿ��δ���ʬ��ɽ�����֤��ޤ���
+現在のバージョンでは "3/5", "-17/7" のように10進数の既約分数表記を返します。
 #@end
 = redefine Math
 
@@ -155,19 +155,19 @@ self �Τ٤�����֤��ޤ��� Rational �ˤʤ�褦�Ǥ���� Rational ���֤��ޤ���
 --- sqrt(a) -> Numeric
 #@todo
 
-a ������ʿ�������֤��ޤ���
-a �� Complex �λ��ϡ�Complex ���֤��ޤ���
-a ����λ��ϡ�a �����ˤ��ơ�����ʿ������ Complex �ε�������������֤��ޤ���
-����ʳ��ϡ�Math.rsqrt �η�̤��֤��ޤ���
+a の正の平方根を返します。
+a が Complex の時は、Complex を返します。
+a が負の時は、a を正にして、その平方根を Complex の虚数部に入れて返します。
+それ以外は、Math.rsqrt の結果を返します。
 
 --- rsqrt(a) -> Numeric
 #@todo
 
-ʣ�ǿ����θ���ʤ��Τǡ���ο��� Complex �򤢤����ʤ��Ǥ���������
+複素数を考慮しないので、負の数や Complex をあたえないでください。
 
-a �� Float �λ��ϡ�Float ���֤��ޤ���
-����ʳ��λ���ʿ������ͭ�����Ǥ���С�Rational �ޤ��� Integer ���֤��ޤ���
-̵�����Ǥ���С�Float ���֤��ޤ���
+a が Float の時は、Float を返します。
+それ以外の時、平方根が有理数であれば、Rational または Integer を返します。
+無理数であれば、Float を返します。
 
 #@until 1.9.1
 = class Prime < Object
@@ -177,9 +177,9 @@ include Enumerable
 == Class Methods
 
 --- new
-�ǿ�����󤹤륪�֥������Ȥ���ޤ���
+素数を列挙するオブジェクトを作ります。
 
-��:
+例:
   q = Prime.new
   q.class    #=> Prime
 
@@ -188,9 +188,9 @@ include Enumerable
 --- succ
 --- next
 
-�����ǿ����֤��ޤ���
+次の素数を返します。
 
-��:
+例:
 
   q = Prime.new
   q.succ # => 2
@@ -198,10 +198,10 @@ include Enumerable
   q.succ # => 5
 
 --- each {...} -> object
-�ǿ��ˤĤ��Ʒ����֤����ƥ졼���Ǥ���
-�����̵�¥롼�פˤʤ�Τ�ɬ�� break ������Ƥ���������
+素数について繰り返すイテレータです。
+これは無限ループになるので必ず break を入れてください。
 
-��:
+例:
 
   > q=Prime.new; i = 0; q.each  {|x| break if i > 5; puts x; i+=1;}
   2
@@ -214,14 +214,14 @@ include Enumerable
 = reopen Rational
 == Constants
 --- Unify
-�������������Ѥ��Ƥ��ޤ��������Ϲͤ��ʤ��Ǥ����������桼�����ץ������Ǥ����Ѥ��ʤ��Ǥ���������
+内部実装で利用しています。深くは考えないでください。ユーザープログラムでは利用しないでください。
 
-���������Ruby 1.9.1�ʹߤǤϺ������ޤ���
+この定数はRuby 1.9.1以降では削除されます。
 
 = reopen Complex
 == Constants
 --- Unify
-�������������Ѥ��Ƥ��ޤ��������Ϲͤ��ʤ��Ǥ����������桼�����ץ������Ǥ����Ѥ��ʤ��Ǥ���������
+内部実装で利用しています。深くは考えないでください。ユーザープログラムでは利用しないでください。
 
-���������Ruby 1.9.1�ʹߤǤϺ������ޤ���
+この定数はRuby 1.9.1以降では削除されます。
 #@end

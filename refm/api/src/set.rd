@@ -1,45 +1,45 @@
-�����ɽ�� Set ���饹�ȡ����Ф�������ݾڤ��� SortedSet ���饹����
-���ޤ���
+集合を表す Set クラスと、取り出し順序を保証した SortedSet クラスを提供
+します。
 
-����ȤϽ�ʣ�Τʤ����֥������Ȥν��ޤ�Ǥ���
-[[c:Array]] �λ��ı黻��ǽ�� [[c:Hash]] �ι�®�ʸ�����ǽ���碌�����ޤ���
+集合とは重複のないオブジェクトの集まりです。
+[[c:Array]] の持つ演算機能と [[c:Hash]] の高速な検索機能を合わせ持ちます。
 
-Set ����� SortedSet �����������Ȥ��� [[c:Hash]] ��Ȥ����ᡢ�������Ǥ�
-�������� [[m:Object#eql?]] �� [[m:Object#hash]] ���Ѥ���Ƚ�Ǥ���ޤ���
-�������äơ�����γ����Ǥˤϡ������Υ᥽�åɤ�Ŭ�ڤ��������Ƥ���
-ɬ�פ�����ޤ���
+Set および SortedSet は内部記憶として [[c:Hash]] を使うため、集合要素の
+等価性は [[m:Object#eql?]] と [[m:Object#hash]] を用いて判断されます。
+したがって、集合の各要素には、これらのメソッドが適切に定義されている
+必要があります。
 
-Set ���饹�Ǥϡ��������Ǥ���Ф��ݤν�����ݾڤ���ޤ���
-������SortedSort �Ǥϡ��������Ǥϥ����Ȥ��줿����Ǽ��Ф���ޤ���
+Set クラスでは、集合要素を取り出す際の順序は保証されません。
+一方、SortedSort では、集合要素はソートされた順序で取り出されます。
 
-�ޤ���set �饤�֥��� require ����� [[c:Enumerable]] �⥸�塼�뤬
-��ĥ���졢[[m:Enumerable#to_set]] �η��ǽ��祪�֥������Ȥ������Ǥ���
-�褦�ˤʤ�ޤ���
+また、set ライブラリを require すると [[c:Enumerable]] モジュールが
+拡張され、[[m:Enumerable#to_set]] の形で集合オブジェクトを生成できる
+ようになります。
 
-=== ���ջ���
+=== 注意事項
 
 #@if (version < "1.9.1")
-Ruby 1.8 �Ǥϡ����祪�֥������Ȥ��Ф��� taint, untaint, freeze �γ�
-�᥽�åɤϡ����������Ȥ����ݻ�����ϥå���ˤϱƶ����ޤ���
-���Τ��ᡢ���祪�֥������Ȥ���뤪��ӱ����ޡ����Υ��åȤϼ¼�Ū��
-���̤�����ޤ���
-�㤨�С�set.freeze ��³���� set.add ��ƤӽФ��Ƥ⡢���顼��ȯ��
-���ޤ���
+Ruby 1.8 では、集合オブジェクトに対する taint, untaint, freeze の各
+メソッドは、内部記憶として保持するハッシュには影響しません。
+このため、集合オブジェクトの凍結および汚染マークのセットは実質的な
+効果を持ちません。
+例えば、set.freeze に続いて set.add を呼び出しても、エラーは発生
+しません。
 #@else
-Ruby 1.9 �Ǥϡ����祪�֥������Ȥ��Ф��� taint, untaint, freeze �γ�
-�᥽�åɤθ��̤ϡ����������Ȥ����ݻ�����ϥå���ˤ�Ŭ�Ѥ���ޤ���
+Ruby 1.9 では、集合オブジェクトに対する taint, untaint, freeze の各
+メソッドの効果は、内部記憶として保持するハッシュにも適用されます。
 
-���祪�֥������Ȥ���Ӥ������������˥��åȤ��줿 taint ����ϡ�
-dup����� clone �᥽�åɤˤ�ä�ʣ�����줿���祪�֥������Ȥˤ⥳�ԡ�
-����ޤ���
+集合オブジェクトおよびその内部記憶にセットされた taint 情報は、
+dupおよび clone メソッドによって複製された集合オブジェクトにもコピー
+されます。
 
-��������freeze ���줿����� clone ������硢ʣ�����줿�������������
-�ˤ� freeze ���󤬰����Ѥ���ޤ���
-�������äơ��������줿������Ф������Ǥ��ѹ��ϥ��顼�ˤʤ�ޤ���
+ただし、freeze された集合を clone した場合、複製された集合の内部記憶
+には freeze 情報が引き継がれません。
+したがって、生成された集合に対する要素の変更はエラーになりません。
 #@end
 
 
-=== ��
+=== 例
   require 'set'
   
   set1 = Set.new ["foo", "bar", "baz", "foo"]
@@ -56,32 +56,32 @@ dup����� clone �᥽�åɤˤ�ä�ʣ�����줿���祪�֥������Ȥˤ⥳�ԡ�
 
 include Enumerable
 
-�����ɽ�����饹�Ǥ������Ǥδ֤˽���ط��Ϥ���ޤ���
+集合を表すクラスです。要素の間に順序関係はありません。
 
 == Class Methods
 --- new(enum = nil) -> Set
 --- new(enum = nil) {|o| ... } -> Set
 
-���� enum ��Ϳ����줿���Ǥ򸵤ˡ��������������ޤ���
+引数 enum で与えられた要素を元に、新しい集合を作ります。
 
-��������ꤷ�ʤ���硢�ޤ��ϰ����� nil �Ǥ�����ˤϡ����ν����
-���ޤ���
+引数を指定しない場合、または引数が nil である場合には、空の集合を
+作ります。
 
-������Ϳ���ƥ֥��å���Ϳ���ʤ���硢enum �γ����Ǥ���ʤ뽸���
-���ޤ���
+引数を与えてブロックを与えない場合、enum の各要素からなる集合を
+作ります。
 
-�����ȥ֥��å���ξ����Ϳ������硢enum �γ����ǤˤĤ��ƥ֥��å���
-ɾ���������η�̤򿷤�����������ǤȤ��ޤ���
+引数とブロックの両方を与えた場合、enum の各要素についてブロックを
+評価し、その結果を新しい集合の要素とします。
 
 #@if (version >= "1.9.1")
-@param enum �������Ǥ��Ǽ���륪�֥������Ȥ���ꤷ�ޤ���
-       enum �ˤ� each �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
-@raise NoMethodError ���� enum ��Ϳ�����ơ����� enum �� each �᥽�åɤ�
-       �������Ƥ��ʤ�����ȯ�����ޤ���
+@param enum 集合要素を格納するオブジェクトを指定します。
+       enum には each メソッドが定義されている必要があります。
+@raise NoMethodError 引数 enum が与えられて、かつ enum に each メソッドが
+       定義されていない場合に発生します。
 #@else
-@param enum Enumerable ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError Enumerable ���֥������ȤǤʤ�������Ϳ����줿����
-       ȯ�����ޤ���
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError Enumerable オブジェクトでない引数が与えられた場合に
+       発生します。
 #@end
 
   p Set.new                      #=> #<Set: {}>
@@ -90,9 +90,9 @@ include Enumerable
 
 --- [](*ary) -> Set
 
-Ϳ����줿���֥������Ȥ����ǤȤ��뿷�����������ޤ���
+与えられたオブジェクトを要素とする新しい集合を作ります。
 
-@param ary ��������������Ǥ���ꤷ�ޤ���
+@param ary 新しい集合の要素を指定します。
 
   p Set[1, 2] #=> #<Set: {1, 2}>
 
@@ -101,23 +101,23 @@ include Enumerable
 --- clone -> Set
 --- dup -> Set
 
-�����ʣ�������֤��ޤ���
+集合を複製して返します。
 
-dup �ϡ���������Ƥ� taint ����Τߥ��ԡ����ޤ���
-clone �ϡ�����˲ä��ơ�freeze ������ðۥ᥽�åɤ򥳥ԡ����ޤ���
-������ⶦ�̤��ơ����������Ȥ����ݻ�����ϥå���⥳�ԡ����ޤ�����
-��������Ǥ��Τ�Τϥ��ԡ����ޤ���
+dup は、集合の内容と taint 情報のみコピーします。
+clone は、それに加えて、freeze 情報と特異メソッドをコピーします。
+いずれも共通して、内部記憶として保持するハッシュもコピーしますが、
+集合の要素そのものはコピーしません。
 
 #@if (version < "1.9.1")
-��������Ruby 1.8 �� Set ���饹�Ǥϡ����������Ȥ����Ѥ���ϥå���ˤ�
-taint ���󤪤�� freeze �����ղä���ʤ��Τǡ�taint ���󤪤��
-freeze ����Υ��ԡ��ϼ¼�Ū�ʸ��̤�����ޤ���
+ただし、Ruby 1.8 の Set クラスでは、内部記憶として用いるハッシュには
+taint 情報および freeze 情報が付加されないので、taint 情報および
+freeze 情報のコピーは実質的な効果を持ちません。
 #@else
-Ruby 1.9 �� Set ���饹�Ǥϡ�dup �� clone �˶��̤��ơ����������Ȥ���
-�Ѥ���ϥå����ޤ�� taint ����򥳥ԡ����ޤ���
-��������clone �Ǥ����������� freeze ����ϥ��ԡ�����ޤ���
-���Τ��ᡢfreeze ���줿����� clone ������硢�������줿��������Ǥ�
-�ѹ���ǽ�Ǥ����������դ��Ƥ���������
+Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶として
+用いるハッシュも含めて taint 情報をコピーします。
+ただし、clone では内部記憶の freeze 情報はコピーされません。
+このため、freeze された集合を clone した場合、生成された集合の要素は
+変更可能である点に注意してください。
 #@end
 
   s1 = Set[10, 20]
@@ -132,20 +132,20 @@ Ruby 1.9 �� Set ���饹�Ǥϡ�dup �� clone �˶��̤��ơ����������Ȥ���
 --- size -> Integer
 --- length -> Integer
 
-��������ǿ����֤��ޤ���
+集合の要素数を返します。
 
   p Set[10, 20, 30, 10].size #=> 3
 
 --- empty? -> bool
 
-���礬���Ǥ� 1 �Ĥ�����ʤ��Ȥ��� true ���֤��ޤ���
+集合が要素を 1 つも持たないときに true を返します。
 
   p Set[10, 20].empty? #=> false
   p Set[].empty?       #=> true
 
 --- clear -> self
 
-��������Ǥ򤹤٤ƺ���������ˤ������ self ���֤��ޤ���
+集合の要素をすべて削除し、空にした後の self を返します。
 
   p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
   s.clear
@@ -153,18 +153,18 @@ Ruby 1.9 �� Set ���饹�Ǥϡ�dup �� clone �˶��̤��ơ����������Ȥ���
 
 --- replace(enum) -> self
 
-��������Ǥ򤹤٤ƺ������enum ��Ϳ����줿���Ǥ��֤������ޤ���
+集合の要素をすべて削除し、enum で与えられた要素に置き換えます。
 
 #@if (version >= "1.9.1")
-���� enum �ˤ� each �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
+引数 enum には each メソッドが定義されている必要があります。
 
-@param enum �֤�������ν������Ǥ��Ǽ���륪�֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum 置き換え後の集合要素を格納するオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum �֤�������ν������Ǥ��Ǽ���� Enumerable ���֥������Ȥ�
-            ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum 置き換え後の集合要素を格納する Enumerable オブジェクトを
+            指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
@@ -174,15 +174,15 @@ Ruby 1.9 �� Set ���饹�Ǥϡ�dup �� clone �˶��̤��ơ����������Ȥ���
 --- flatten -> Set
 --- flatten! -> self | nil
 
-�����Ƶ�Ū��ʿ�경���ޤ���
+集合を再帰的に平滑化します。
 
-flatten �ϡ�ʿ�경��������򿷤�����������������֤��ޤ���
+flatten は、平滑化した集合を新しく作成し、それを返します。
 
-flatten! �ϡ����ν�����˲�Ū��ʿ�경���ޤ�����������Ǥ��ѹ���
-ȯ���������ˤ� self �򡢤����Ǥʤ����ˤ� nil ���֤��ޤ���
+flatten! は、元の集合を破壊的に平滑化します。集合の要素に変更が
+発生した場合には self を、そうでない場合には nil を返します。
 
-@raise ArgumentError ��������ǤȤ��Ƽ��Ȥ��Ƶ�Ū�˸��줿����ȯ��
-                     ���ޤ���
+@raise ArgumentError 集合の要素として自身が再帰的に現れた場合に発生
+                     します。
 
   s = Set[Set[1,2], 3]
   p s.flatten #=> #<Set: {1, 2, 3}>
@@ -194,7 +194,7 @@ flatten! �ϡ����ν�����˲�Ū��ʿ�경���ޤ�����������Ǥ��ѹ���
 
 
 --- to_a -> Array
-���Ȥ�������Ѵ����ޤ������Ǥν��������Ǥ���
+自身を配列に変換します。要素の順序は不定です。
 
   set = Set['hello', 'world']
   p set.to_a
@@ -203,9 +203,9 @@ flatten! �ϡ����ν�����˲�Ū��ʿ�경���ޤ�����������Ǥ��ѹ���
 --- include?(o) -> bool
 --- member?(o) -> bool
 
-���֥������� o �����ν����°������� true ���֤��ޤ���
+オブジェクト o がその集合に属する場合に true を返します。
 
-@param o ���֥������Ȥ���ꤷ�ޤ���
+@param o オブジェクトを指定します。
 
   set = Set['hello', 'world']
   p set.include?('world') #=> true
@@ -214,15 +214,15 @@ flatten! �ϡ����ν�����˲�Ū��ʿ�경���ޤ�����������Ǥ��ѹ���
 --- superset?(set) -> bool
 --- proper_superset?(set) -> bool
 
-���Ȥ����� set �ξ�̽��� (�����ѡ����å�) �Ǥ������ true ��
-�֤��ޤ���
+自身が集合 set の上位集合 (スーパーセット) である場合に true を
+返します。
 
-superset? �ϡ�2 �Ĥν��礬���������ˤ� true �Ȥʤ�ޤ���
+superset? は、2 つの集合が等しい場合にも true となります。
 
-proper_superset? �ϡ�2 �Ĥν��礬���������ˤ� false ���֤��ޤ���
+proper_superset? は、2 つの集合が等しい場合には false を返します。
 
-@param set ����оݤ� Set ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Set ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param set 比較対象の Set オブジェクトを指定します。
+@raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
   s = Set[1, 2, 3]
   p s1.superset?(Set[1, 2]) #=> true
@@ -237,14 +237,14 @@ proper_superset? �ϡ�2 �Ĥν��礬���������ˤ� false ���֤��ޤ���
 --- subset?(set) -> bool
 --- proper_subset?(set) -> bool
 
-���Ȥ����� set ����ʬ����Ǥ������ true ���֤��ޤ���
+自身が集合 set の部分集合である場合に true を返します。
 
-subset? �ϡ�2 �Ĥν��礬���������ˤ� true �Ȥʤ�ޤ���
+subset? は、2 つの集合が等しい場合にも true となります。
 
-proper_subset? �ϡ�2 �Ĥν��礬���������ˤ� false ���֤��ޤ���
+proper_subset? は、2 つの集合が等しい場合には false を返します。
 
-@param set ����оݤ� Set ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Set ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param set 比較対象の Set オブジェクトを指定します。
+@raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
   s = Set[1, 2]
   p s.subset?(Set[1, 2, 3]) #=> true
@@ -258,7 +258,7 @@ proper_subset? �ϡ�2 �Ĥν��礬���������ˤ� false ���֤��ޤ���
 
 --- each {|o| ... } -> self
 
-����γ����ǤˤĤ��ƥ֥��å���¹Ԥ��ޤ���
+集合の各要素についてブロックを実行します。
 
   s = Set[10, 20]
   ary = []
@@ -268,7 +268,7 @@ proper_subset? �ϡ�2 �Ĥν��礬���������ˤ� false ���֤��ޤ���
 --- collect! {|o| ...} -> self
 --- map! {|o| ...} -> self
 
-����γ����ǤˤĤ��ƥ֥��å���ɾ���������η�̤Ǹ��ν�����֤������ޤ���
+集合の各要素についてブロックを評価し、その結果で元の集合を置き換えます。
 
   set = Set['hello', 'world']
   set.map! {|str| str.capitalize}
@@ -280,14 +280,14 @@ proper_subset? �ϡ�2 �Ĥν��礬���������ˤ� false ���֤��ޤ���
 --- <<(o) -> self
 --- add?(o) -> self | nil
 
-����˥��֥������� o ��ä��ޤ���
+集合にオブジェクト o を加えます。
 
-add �Ͼ�� self ���֤��ޤ���<< �� add ����̾�Ǥ���
+add は常に self を返します。<< は add の別名です。
 
-add? �ϡ���������Ǥ��ɲä��줿���ˤ� self ���Ѳ����ʤ��ä����ˤ�
-nil ���֤��ޤ���
+add? は、集合に要素が追加された場合には self を、変化がなかった場合には
+nil を返します。
 
-@param o �ɲ��оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param o 追加対象のオブジェクトを指定します。
 
   s = Set[1, 2]
   s << 10
@@ -299,14 +299,14 @@ nil ���֤��ޤ���
 --- delete(o) -> self
 --- delete?(o) -> self | nil
 
-���礫�饪�֥������� o �������ޤ���
+集合からオブジェクト o を削除します。
 
-delete �Ͼ�� self ���֤��ޤ���
+delete は常に self を返します。
 
-delete? �ϡ���������Ǥ�������줿���ˤ� self ���Ѳ����ʤ��ä����
-�ˤ� nil ���֤��ޤ���
+delete? は、集合の要素が削除された場合には self を、変化がなかった場合
+には nil を返します。
 
-@param o ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param o 削除対象のオブジェクトを指定します。
 
   s = Set[10, 20, 30]
   s.delete(10)
@@ -317,13 +317,13 @@ delete? �ϡ���������Ǥ�������줿���ˤ� self ���Ѳ����ʤ��ä����
 --- delete_if {|o| ... } -> self
 --- reject! {|o| ... } -> self | nil
 
-����γ����Ǥ��Ф��ƥ֥��å���¹Ԥ������η�̤����Ǥ���褦�ʤ��٤Ƥ�
-���Ǥ������ޤ���
+集合の各要素に対してブロックを実行し、その結果が真であるようなすべての
+要素を削除します。
 
-delete_if �Ͼ�� self ���֤��ޤ���
+delete_if は常に self を返します。
 
-reject! �ϡ����Ǥ� 1 �İʾ��������� self ��1 �Ĥ�������ʤ����
-nil ���֤��ޤ���
+reject! は、要素が 1 つ以上削除されれば self を、1 つも削除されなければ
+nil を返します。
 
   s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
   s1.delete_if {|str| str =~ /\.bak$/}
@@ -337,17 +337,17 @@ nil ���֤��ޤ���
 
 --- merge(enum) -> self
 
-���ν���� enum ��Ϳ����줿���Ǥ��ɲä��ޤ���
+元の集合に enum で与えられた要素を追加します。
 
 #@if (version >= "1.9.1")
-���� enum �ˤ� each �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
+引数 enum には each メソッドが定義されている必要があります。
 
-@param enum �ɲ��оݤ����Ǥ��Ǽ�������֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum 追加対象の要素を格納したオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum �ɲ��оݤ����Ǥ��Ǽ���� Enumerate ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum 追加対象の要素を格納した Enumerate オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   set = Set[10, 20]
@@ -356,17 +356,17 @@ nil ���֤��ޤ���
 
 --- subtract(enum) -> self
 
-���ν��礫�顢enum ��Ϳ����줿���Ǥ������ޤ���
+元の集合から、enum で与えられた要素を削除します。
 
 #@if (version >= "1.9.1")
-���� enum �ˤ� each �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
+引数 enum には each メソッドが定義されている必要があります。
 
-@param enum ����оݤ����Ǥ��Ǽ�������֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum 削除対象の要素を格納したオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum ����оݤ����Ǥ��Ǽ���� Enumerate ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum 削除対象の要素を格納した Enumerate オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   set = Set[10, 20, 40]
@@ -377,16 +377,16 @@ nil ���֤��ޤ���
 --- +(enum) -> Set
 --- |(enum) -> Set
 
-�½��硢���ʤ����2 �Ĥν���ξ��ʤ��Ȥ�ɤ��餫������°���뤹�٤Ƥ�
-���Ǥ���ʤ뿷�����������ޤ���
+和集合、すなわち、2 つの集合の少なくともどちらか一方に属するすべての
+要素からなる新しい集合を作ります。
 
 #@if (version >= "1.9.1")
-@param enum each �᥽�åɤ�������줿���֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum Enumerable ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   p Set[10, 20, 30] + Set[10, 20, 40]
@@ -395,16 +395,16 @@ nil ���֤��ޤ���
 --- difference(enum) -> Set
 --- -(enum) -> Set
 
-�����硢���ʤ�������ν�������ǤΤ������� enum �˴ޤޤ�����Ǥ��������
-�������������ޤ���
+差集合、すなわち、元の集合の要素のうち引数 enum に含まれる要素を取り除いた
+新しい集合を作ります。
 
 #@if (version >= "1.9.1")
-@param enum each �᥽�åɤ�������줿���֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum Enumerable ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   p Set[10, 20, 30] - Set[10, 20, 40]
@@ -413,16 +413,16 @@ nil ���֤��ޤ���
 --- intersection(enum) -> Set
 --- &(enum) -> Set
 
-������ʬ�����ʤ����2�Ĥν���Τ�����ˤ�°���뤹�٤Ƥ����Ǥ���ʤ�
-�������������ޤ���
+共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる
+新しい集合を作ります。
 
 #@if (version >= "1.9.1")
-@param enum each �᥽�åɤ�������줿���֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum Enumerable ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   s1 = Set[10, 20, 30]
@@ -431,16 +431,16 @@ nil ���֤��ޤ���
 
 --- ^(enum) -> Set
 
-�оκ������ʤ����2 �Ĥν���Τ����줫�����ˤ���°���뤹�٤Ƥ����Ǥ���ʤ�
-�������������ޤ���
+対称差、すなわち、2 つの集合のいずれか一方にだけ属するすべての要素からなる
+新しい集合を作ります。
 
 #@if (version >= "1.9.1")
-@param enum each �᥽�åɤ�������줿���֥������Ȥ���ꤷ�ޤ���
-@raise NoMethodError ���� enum �� each �᥽�åɤ��������Ƥ��ʤ�����
-       ȯ�����ޤ���
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
 #@else
-@param enum Enumerable ���֥������Ȥ���ꤷ�ޤ���
-@raise ArgumentError ������ Enumerable ���֥������ȤǤʤ�����ȯ�����ޤ���
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
   s1 = Set[10, 20, 30]
@@ -449,14 +449,14 @@ nil ���֤��ޤ���
 
 --- ==(set) -> bool
 
-2 �Ĥν��礬�������Ȥ��� true ���֤��ޤ���
+2 つの集合が等しいときに true を返します。
 
-��긷̩�ˤϡ����� set �� Set ���֥������ȤǤ��ꡢ���Ȥ� set ��Ʊ����
-���Ǥ���������Ĥ��������Ǥ����٤����������� true �Ȥʤ�ޤ���
-����ʳ��ξ��ˤϡ�false ���֤��ޤ���
-���Ǥ��������� [[m:Object#eql?]] �ˤ��Ƚ�ꤵ��ޤ���
+より厳密には、引数 set が Set オブジェクトであり、自身と set が同数の
+要素を持ち、かつそれらの要素がすべて等しい場合に true となります。
+それ以外の場合には、false を返します。
+要素の等しさは [[m:Object#eql?]] により判定されます。
 
-@param set ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param set 比較対象のオブジェクトを指定します。
 
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 40]
@@ -466,13 +466,13 @@ nil ���֤��ޤ���
 
 --- classify {|o| ... } -> Hash
 
-�����֥��å����ͤˤ�ä�ʬ�ष����̤�ϥå���Ȥ����֤��ޤ���
+集合をブロックの値によって分類し、結果をハッシュとして返します。
 
-�֥��å��Ͻ���γ����ǤˤĤ��Ƽ¹Ԥ��졢���� o �ˤϤ������Ǥ�
-�Ϥ���ޤ���
+ブロックは集合の各要素について実行され、引数 o にはその要素が
+渡されます。
 
-���������ϥå���Υ����ϥ֥��å��μ¹Է�̡��ͤ�ʬ�व�줿�����
-�ʤ�ޤ���
+生成されるハッシュのキーはブロックの実行結果、値は分類された集合と
+なります。
 
   numbers = Set[10, 4.5, 20, 30, 31.2]
   p numbers.classify {|o| o.class}
@@ -481,23 +481,23 @@ nil ���֤��ޤ���
 --- divide {|o| ... } -> Set
 --- divide {|o1, o2| ... } -> Set
 
-���ν����֥��å�����������ط���ʬ�䤷�����η�̤򽸹�Ȥ����֤��ޤ���
+元の集合をブロックで定義される関係で分割し、その結果を集合として返します。
 
-�֥��å��ѥ�᡼���� 1 �Ĥξ�硢block.call(o1) == block.call(o2) ����
-�ʤ�С�o1 �� o2 ��Ʊ��ʬ���°���ޤ���
+ブロックパラメータが 1 個の場合、block.call(o1) == block.call(o2) が真
+ならば、o1 と o2 は同じ分割に属します。
 
-�֥��å��ѥ�᡼���� 2 �Ĥξ�硢block.call(o1, o2) �����ʤ�С�
-o1 �� o2 ��Ʊ��ʬ���°���ޤ���
-���ξ�硢block.call(o1, o2) == block.call(o2, o1)
-����Ω���ʤ��֥��å���Ϳ����ȴ����̤�η�̤������ޤ���
+ブロックパラメータが 2 個の場合、block.call(o1, o2) が真ならば、
+o1 と o2 は同じ分割に属します。
+この場合、block.call(o1, o2) == block.call(o2, o1)
+が成立しないブロックを与えると期待通りの結果が得られません。
 
-==== ��1
+==== 例1
   numbers = Set.new(1..6)
   set = numbers.divide {|i| i % 3}
   p set
   #=> #<Set: {#<Set: {5, 2}>, #<Set: {1, 4}>, #<Set: {6, 3}>}>
 
-==== ��2
+==== 例2
   numbers = Set[1, 3, 4, 6, 9, 10, 11]
   set = numbers.divide {|i, j| (i - j).abs == 1}
   p set     #=> #<Set: {#<Set: {1}>,
@@ -505,8 +505,8 @@ o1 �� o2 ��Ʊ��ʬ���°���ޤ���
             #           #<Set: {3, 4}>,
             #           #<Set: {6}>}>
 
-==== ������
-8x2 �Υ������׾�ǡ��ʥ��Ȥ���ã�Ǥ�����֤˴ؤ���ʬ���������ޤ���
+==== 応用例
+8x2 のチェス盤上で、ナイトが到達できる位置に関する分類を作成します。
 
   require 'set'
 
@@ -528,7 +528,7 @@ o1 �� o2 ��Ʊ��ʬ���°���ޤ���
 
 --- inspect -> String
 
-�ʹ֤��ɤߤ䤹������ɽ������ʸ������֤��ޤ���
+人間の読みやすい形に表現した文字列を返します。
 
   puts Set.new(['element1', 'element2']).inspect
   #=> #<Set: {"element1", "element2"}>
@@ -536,12 +536,12 @@ o1 �� o2 ��Ʊ��ʬ���°���ޤ���
 
 = class SortedSet < Set
 
-�����Ǥ򥽡��Ȥ��줿���ǰ������祯�饹�Ǥ���
+各要素をソートされた形で扱う集合クラスです。
 
-�ƥ᥽�åɤλ�����ˡ�ˤĤ��Ƥϡ�[[c:Set]] �򻲾Ȥ��Ƥ���������
+各メソッドの使用方法については、[[c:Set]] を参照してください。
 
-RBTree �饤�֥�� ([[url:http://raa.ruby-lang.org/project/ruby-rbtree]])
-�����Ѳ�ǽ�Ǥ����硢���������Ȥ��ƥϥå��������� RBTree����Ѥ��ޤ���
+RBTree ライブラリ ([[url:http://raa.ruby-lang.org/project/ruby-rbtree]])
+が利用可能である場合、内部記憶としてハッシュの代わりに RBTreeを使用します。
 
 = reopen Enumerable
 
@@ -550,20 +550,20 @@ RBTree �饤�֥�� ([[url:http://raa.ruby-lang.org/project/ruby-rbtree]])
 --- to_set(klass = Set, *args) -> Set
 --- to_set(klass = Set, *args) {|o| ... } -> Set
 
-Enumerable ���֥������Ȥ����Ǥ��顢���������祪�֥������Ȥ���ޤ���
+Enumerable オブジェクトの要素から、新しい集合オブジェクトを作ります。
 
-���� klass ��Ϳ������硢Set ���饹������ˡ����ꤷ�����祯�饹��
-���󥹥��󥹤���ޤ���
-���ΰ�������ꤹ�뤳�Ȥǡ�SortedSet ���뤤�Ϥ���¾�Υ桼�������
-���祯�饹�Υ��󥹥��󥹤��뤳�Ȥ��Ǥ��ޤ���
+引数 klass を与えた場合、Set クラスの代わりに、指定した集合クラスの
+インスタンスを作ります。
+この引数を指定することで、SortedSet あるいはその他のユーザ定義の
+集合クラスのインスタンスを作ることができます。
 
-���� args ����ӥ֥��å��ϡ����祪�֥������Ȥ��������뤿��� new 
-�᥽�åɤ��Ϥ���ޤ���
+引数 args およびブロックは、集合オブジェクトを生成するための new 
+メソッドに渡されます。
 
-@param klass �������뽸�祯�饹����ꤷ�ޤ���
-@param args ���祯�饹�Υ��֥������Ƚ�����᥽�åɤ��Ϥ���������ꤷ�ޤ���
-@param block ���祯�饹�Υ��֥������Ƚ�����᥽�åɤ��Ϥ��֥��å�����ꤷ�ޤ���
-@return �������줿���祪�֥������Ȥ��֤��ޤ���
+@param klass 生成する集合クラスを指定します。
+@param args 集合クラスのオブジェクト初期化メソッドに渡す引数を指定します。
+@param block 集合クラスのオブジェクト初期化メソッドに渡すブロックを指定します。
+@return 生成された集合オブジェクトを返します。
 
   p [10, 20, 30].to_set 
   #=> #<Set: {30, 20, 10}>

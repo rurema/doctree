@@ -1,6 +1,6 @@
-= ����
+= 引数
 
-* �᥽�åɸƤӽФ��� �����Ÿ�������ѿ�����Ϥ�
+* メソッド呼び出しで 配列を展開した変数列を渡す
 
     def sum(a,b,c)
       print a+b+c,"\n"
@@ -9,7 +9,7 @@
     a = [1,2,3]
     sum(*a) # -> sum(1,2,3) -> 6
 
-* Ʊ�ͤ�Proc��֥��å��Ȥ����Ϥ��롣
+* 同様にProcをブロックとして渡せる。
 
     def foo
       yield(2)
@@ -19,7 +19,7 @@
     foo(&pr) #=> 4
 
 
-* �դ˲������ǤޤȤ�Ƽ�����ä���Proc�Ȥ��Ƽ�����ä���Ǥ��롣
+* 逆に仮引数でまとめて受け取ったりProcとして受け取ったりできる。
 
     def foo(*arg, &block)
       block.call arg[1]
@@ -30,14 +30,14 @@
     end
 
     def test(*a)
-      @b = [a]  #�������ϡ�@b = a
+      @b = [a]  #正しくは、@b = a
     end
 
-    def a = (b)  #�������ϡ�a=(b)
+    def a = (b)  #正しくは、a=(b)
       @a = b
     end
 
-* super��super(...)�ΰ㤤��
+* superとsuper(...)の違い。
     class Foo
       def initialize
       end
@@ -53,9 +53,9 @@
 
     => -:8:in `initialize': wrong # of arguments(1 for 0) (ArgumentError)
 
-  ��ΤϥХ���ޤ��������ʤ��� super �Ͼ����Ǥ� super(a) �ȸ��ʤ���
-  �뤫��Ǥ����ƤӽФ����᥽�åɤȰۤʤ�����ǸƤӽФ��ˤϰ�����������
-  �ޤ���
+  上のはバグります。引数なしの super は上の例では super(a) と見なされ
+  るからです。呼び出したメソッドと異なる引数で呼び出すには引数を明示し
+  ます。
 
     class Foo
       def initialize
@@ -64,16 +64,16 @@
 
     class Bar < Foo
       def initialize(a)
-        super()    # <- 0�� �ΰ����Ǥ��뤳�Ȥ��������Ƥ���
+        super()    # <- 0個 の引数であることを明示している
       end
     end
 
     obj = Bar.new(1)
 
-* ���ޤ���Ʊ�� signature �Υ᥽�åɤ��äƤ�ȡ����֥������ȤΥ��饹�㤤�˵����Ĥ�����
-  �塹�Ȥ�Ǥ�ʤ��Ȥ������㳰���������礬����ޤ���
-  (��:PStore#abort��abort)
+* たまたま同じ signature のメソッドをもってると、オブジェクトのクラス違いに気がつかず、
+  後々とんでもないところで例外が起こる場合があります。
+  (例:PStore#abortとabort)
 
-* ARGV�ǰ����������ä��塢gets�ʤɤ�ɸ�����Ϥ�Ȥ���硢ARGV.shift�ʤɤ�
-  ARGV����ˤ��Ƥ����ʤ���ARGV�˻ĤäƤ���ե�����̾�Υե����뤫���ɤ߹��⤦��
-  ���Ƥ��ޤ��ޤ���
+* ARGVで引数を受け取った後、getsなどで標準入力を使う場合、ARGV.shiftなどで
+  ARGVを空にしておかないとARGVに残っているファイル名のファイルから読み込もうと
+  してしまいます。

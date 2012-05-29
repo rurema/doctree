@@ -1,28 +1,28 @@
 #@# = monitor
 
-����åɤ�Ʊ�������Ȥ��ƤΥ�˥�����ǽ���󶡤��륯�饹�Ǥ���
-�ޤ�Ʊ������åɤ��鲿�٤� lock �Ǥ��� Mutex �Ȥ��Ƥε�ǽ���󶡤��ޤ���
+スレッドの同期機構としてのモニター機能を提供するクラスです。
+また同じスレッドから何度も lock できる Mutex としての機能も提供します。
 
-��˥����Ȥϡ���Ĥ� Mutex �Ȥ���˴�Ϣ�դ���줿ʣ����
-����ѿ����鹽�����줿������åɤ�Ʊ�������Ǥ���
-Mutex �� ����ѿ��ˤ�ä�Ʊ���ε�ǽ��¸����뤳�Ȥ�
-��ǽ�Ǥ�������˥��������ϥ饤�֥�꤬���δ�Ϣ���ݾ�
-���Ƥ��뤳�ȤǤ���
+モニターとは、一つの Mutex とそれに関連付けられた複数の
+条件変数から構成された、スレッドの同期機構です。
+Mutex と 条件変数によって同等の機能を実現することは
+可能ですが、モニタの利点はライブラリがその関連を保証
+していることです。
 
-monitor �ϰʲ��Τ褦�� [[c:Mutex]] �Ȥ��Ƥε�ǽ���󶡤��ޤ���
-  * lock �λ����礬����åɤǤ��� Mutex / ���٤� lock �Ǥ��� Mutex
-    * lock ��������åɤ� Mutex ¦���Ф��Ƥ���
-    * ���Υ���åɤ��⤦���� lock ���褦�Ȥ��Ƥ�֥��å����ʤ�
-    * synchronize �� lock ���Ƥ��ʤ��ä����̾�ɤ��ꡢ
-      ��ʬ�� lock ���Ƥ����� ���� yield ������� (lock/unlock�⤷�ʤ�)
-    * unlock �Ϥ��Υ���åɤ������Ǥ���
+monitor は以下のような [[c:Mutex]] としての機能も提供します。
+  * lock の持ち主がスレッドである Mutex / 何度も lock できる Mutex
+    * lock したスレッドを Mutex 側が覚えていて
+    * そのスレッドがもう一度 lock しようとしてもブロックしない
+    * synchronize は lock していなかったら通常どおり、
+      自分が lock していたら ただ yield するだけ (lock/unlockもしない)
+    * unlock はそのスレッドだけができる
 
-[[ruby-list:30447]] ��ꡣ
+[[ruby-list:30447]] より。
 
-���ץ�ߥƥ��֤�Ʊ�������Ȥ��ơ�
-[[c:Mutex]]��[[c:ConditionVariable]] �⻲�Ȥ��Ƥ���������
+よりプリミティブな同期機構として、
+[[c:Mutex]]、[[c:ConditionVariable]] も参照してください。
 
-=== ����
+=== 参照
 
   * [[ruby-list:6829]]
   * [[ruby-list:30447]]

@@ -1,6 +1,6 @@
-DBM �� Ruby ������ץȤ��鰷����褦�ˤ���饤�֥��Ǥ���
+DBM を Ruby スクリプトから扱えるようにするライブラリです。
 
-�����륭�����ͤΥ������ϥ�󥯤��Ƥ���饤�֥��˰�¸���ޤ���
+扱えるキーや値のサイズはリンクしているライブラリに依存します。
 
 @see [[lib:gdbm]], [[lib:sdbm]], [[man:dbm(3)]]
 
@@ -8,140 +8,140 @@ DBM �� Ruby ������ץȤ��鰷����褦�ˤ���饤�֥��Ǥ���
 
 include Enumerable
 
-NDBM �ե�����򥢥��������륯�饹��
+NDBM ファイルをアクセスするクラス。
 
-�������ǡ����Ȥ��ʸ����Ǥʤ���Фʤ�ʤ��Ȥ������¤ȡ��ǡ������ե������
-��¸�����Ȥ�����������Ƥ� [[c:Hash]] ���饹������Ʊ�ͤ˰������Ȥ��Ǥ��ޤ���
+キー、データともに文字列でなければならないという制限と、データがファイルに
+保存されるという点を除いては [[c:Hash]] クラスと全く同様に扱うことができます。
 
 == Class Methods
 
 --- new(dbname, mode = 0666, flags = nil) -> DBM
 
-dbname �ǻ��ꤷ���ǡ����١�����⡼�ɤ� mode �����ꤷ�ƥ����ץ󤷤ޤ���
+dbname で指定したデータベースをモードを mode に設定してオープンします。
 
 --- open(dbname, mode = 0666, flags = nil) -> DBM
 --- open(dbname, mode = 0666, flags = nil) {|db| ... } -> ()
 
-dbname �ǻ��ꤷ���ǡ����١�����⡼�ɤ� mode �����ꤷ�ƥ����ץ󤷤ޤ���
+dbname で指定したデータベースをモードを mode に設定してオープンします。
 
-mode �ξ�ά�ͤ� 0666 �Ǥ���mode �Ȥ��� nil ����ꤹ���
-�ǡ����١�����¸�ߤ��ʤ����ˤϿ����ʥǡ����١������餺 nil ���֤��ޤ���
+mode の省略値は 0666 です。mode として nil を指定すると
+データベースが存在しない時には新たなデータベースを作らず nil を返します。
 
-@param dbname �ǡ����١���̾
-@param mode   �ǡ����١����Υ����ץ�⡼��
+@param dbname データベース名
+@param mode   データベースのオープンモード
 #@if (version >= "1.8.2")
-@param flags  �ʲ��Τ����줫����ꤷ�ޤ���
+@param flags  以下のいずれかを指定します。
 : DBM::READER
-  �ǡ����١������ɤ߹��ߤΤߤ�Ԥ�
+  データベースの読み込みのみを行う
 : DBM::WRITER
-  �ǡ����١����ο��������Ϥ����ɤ߽񤭤���
+  データベースの新規作成はせず読み書きする
 : DBM::WRCREAT
-  �ǡ����١�����¸�ߤ��ʤ���п������������ɤ߽񤭤���
+  データベースが存在しなければ新規作成して読み書きする
 : DBM::NEWDB
-  �ǡ����١������˿����������ƴ�¸�Υǡ������˴�����
+  データベースを常に新規作成して既存のデータは破棄する
 #@end
 
 == Instance Methods
 
 --- [](key) -> String
 
-key �򥭡��Ȥ����ͤ��֤��ޤ���
+key をキーとする値を返します。
 
-@param key ������
+@param key キー。
 
 --- []=(key, value)
 
-key �򥭡��Ȥ��ơ�value ���Ǽ���ޤ���
-value �Ȥ��� nil ����ꤹ��ȡ�key ���Ф������Ǥ������ޤ���
+key をキーとして、value を格納します。
+value として nil を指定すると、key に対する要素を削除します。
 
-@param key   ������
-@param value �͡�
+@param key   キー。
+@param value 値。
 
 --- clear -> self
 
-DBM �ե��������ˤ��ޤ���
+DBM ファイルを空にします。
 
 --- close -> nil
 
-DBM �ե�����򥯥��������ޤ����ʸ�������㳰��ȯ�������ޤ���
+DBM ファイルをクローズします。以後の操作は例外を発生させます。
 
 #@since 1.8.3
 --- closed? -> bool
 
-DBM �ե����뤬�����Ĥ����Ƥ��뤫Ĵ�٤ޤ���
+DBM ファイルが既に閉じられているか調べます。
 
-�����Ĥ����Ƥ���� true ���֤��ޤ��������Ǥʤ���� false ���֤��ޤ���
+既に閉じられていれば true を返します。そうでなければ false を返します。
 
 #@end
 
 --- delete(key) -> String
 
-key �򥭡��Ȥ������Ǥ������ޤ���
+key をキーとする要素を削除します。
 
-@return ����������Ǥ��ͤ��֤��ޤ���
+@return 削除した要素の値を返します。
 
-@raise DBMError ���Ǥκ���˼��Ԥ�������ȯ�����ޤ���
+@raise DBMError 要素の削除に失敗した場合に発生します。
 
 --- reject! { |key, value|  ...  } -> self
 --- delete_if { |key, value|  ...  } -> self
 
-�֥��å���ɾ�������ͤ����Ǥ���г����������Ǥ������ޤ���
+ブロックを評価した値が真であれば該当する要素を削除します。
 
-���Υ᥽�åɤ� self ���˲�Ū���ѹ����ޤ���
+このメソッドは self を破壊的に変更します。
 
 
 --- reject{ |key, value| ... } -> Hash
 
-�֥��å���ɾ�������ͤ����Ǥ���г����������Ǥ������ޤ���
+ブロックを評価した値が真であれば該当する要素を削除します。
 
   self.to_hash.reject{|key, value| ... }
 
-��Ʊ���Ǥ���
+と同じです。
 
 @see [[m:Hash#reject]]
 
 --- each {|key, value|  ...  } -> self
 --- each_pair {|key, value|  ...  } -> self
 
-�����Ǥ��Ф��륤�ƥ졼����
+各要素に対するイテレータ。
 
 --- each_key {|key|  ...  } -> self
 
-���Ƥ� key ���Ф��Ʒ����֤����ƥ졼����
+全ての key に対して繰り返すイテレータ。
 
 --- each_value {|value|  ...  } -> self
 
-���Ƥ� value ���Ф��Ʒ����֤����ƥ졼����
+全ての value に対して繰り返すイテレータ。
 
 --- empty?() -> bool
 
-�ǡ����١��������λ��������֤��ޤ���
+データベースが空の時、真を返します。
 
 --- has_key?(key) -> bool
 --- key?(key) -> bool
 --- include?(key) -> bool
 --- member?(key) -> bool
 
-key ���ǡ����١������¸�ߤ�����������֤��ޤ���
+key がデータベース中に存在する時、真を返します。
 
-@param key ������
+@param key キー。
 
 --- has_value?(value) -> bool
 --- value?(value) -> bool
 
-value ���ͤȤ����Ȥ��ǡ����١������¸�ߤ�����������֤��ޤ���
+value を値とする組がデータベース中に存在する時、真を返します。
 
-@param value �����������͡�
+@param value 検索したい値。
 
 #@until 1.9.1
 --- indexes(*keys) -> [String]
 --- indices(*keys) -> [String]
 
-�ư������ͤ򥭡��Ȥ������Ǥ��ͤ�ޤ�������֤��ޤ���
+各引数の値をキーとする要素の値を含む配列を返します。
 
-���Υ᥽�åɤ� obsolete �Ǥ���
+このメソッドは obsolete です。
 
-@param keys ����������������ʣ�������ǽ��
+@param keys 検索したいキー。複数指定可能。
 
   require 'dbm'
   
@@ -155,38 +155,38 @@ value ���ͤȤ����Ȥ��ǡ����١������¸�ߤ�����������֤��ޤ���
 #@since 1.9.1
 --- key(value) -> String
 
-Ϳ����줿�ͤ��б����륭�����֤��ޤ���
+与えられた値に対応するキーを返します。
 
-�ͤ��б����륭����ʣ��������Ϻǽ�˸��Ĥ��ä��������֤��ޤ���
+値に対応するキーが複数ある場合は最初に見つかったキーを返します。
 
-@param value ������õ�������ͤ���ꤷ�ޤ���
+@param value キーを探したい値を指定します。
 
 #@end
 
 --- keys -> [String]
 
-�ǡ����١������¸�ߤ��륭�����Ƥ�ޤ�������֤��ޤ���
+データベース中に存在するキー全てを含む配列を返します。
 
 --- length -> Integer
 --- size -> Integer
 
-�ǡ����١���������Ǥο����֤��ޤ���
+データベース中の要素の数を返します。
 
-���ߤμ����Ǥ����ǿ�������뤿��˥ǡ����١����������������ޤ���
+現在の実装では要素数を数えるためにデータベースを全部検索します。
 
 --- shift -> String
 
-�ǡ����١���������Ǥ��ļ��Ф����ǡ����١������������ޤ���
+データベース中の要素を一つ取り出し、データベースから削除します。
 
 --- values -> [String]
 
-�ǡ����١������¸�ߤ��������Ƥ�ޤ�������֤��ޤ���
+データベース中に存在する値全てを含む配列を返します。
 
 --- replace(other) -> self
 
-self �����Ƥ� other �����Ƥ��֤������ޤ���
+self の内容を other の内容で置き換えます。
 
-@param other each_pair �᥽�åɤ���ĥ��֥������ȤǤʤ���Фʤ�ޤ���
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
   require 'dbm'
   
@@ -210,12 +210,12 @@ self �����Ƥ� other �����Ƥ��֤������ޤ���
 
 --- fetch(key, ifnone = nil) -> String
 
-�ǡ����١������饭����õ�����б��������Ǥ��ͤ��֤��ޤ���
+データベースからキーを探して対応する要素の値を返します。
 
-@param key    ������
-@param ifnone ���������Ĥ���ʤ��ä������֤��͡�
+@param key    キー。
+@param ifnone キーが見つからなかった場合に返す値。
 
-@raise IndexError ifnone ����ꤷ�Ƥ��ʤ��Ȥ������������Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise IndexError ifnone を指定していないとき、キーが見つからなかった場合に発生します。
 
   require 'dbm'
   
@@ -225,16 +225,16 @@ self �����Ƥ� other �����Ƥ��֤������ޤ���
   p db1.fetch('a')                     #=> 'aaa'
   p db1.fetch('z', 'zzz')              #=> 'zzz'
   p db1.fetch('z'){|key| [:key, key] } #=> [:key, 'z']
-  p db1.fetch('z')                     #=> IndexError ȯ��
+  p db1.fetch('z')                     #=> IndexError 発生
 
 @see [[m:Hash#fetch]]
 
 --- store(key, value) -> String
 
-key ���Ф��� value ���Ǽ���ޤ���
+key に対して value を格納します。
 
-@param key   ������
-@param value �͡�
+@param key   キー。
+@param value 値。
 
 @see [[m:DBM#[]=]]
 
@@ -246,7 +246,7 @@ key ���Ф��� value ���Ǽ���ޤ���
 
 --- select{|key, value| ... } -> [Array]
 
-�֥��å���ɾ�����ƿ��ˤʤä����ǤΤߤ�����˳�Ǽ�����֤��ޤ���
+ブロックを評価して真になった要素のみを配列に格納して返します。
 
   require 'dbm'
   
@@ -259,9 +259,9 @@ key ���Ф��� value ���Ǽ���ޤ���
 
 --- values_at(*keys) -> [String]
 
-keys ���б������ͤ�����˳�Ǽ�����֤��ޤ���
+keys に対応する値を配列に格納して返します。
 
-@param keys ������ʣ�������ǽ�Ǥ���
+@param keys キー。複数指定可能です。
 
   require 'dbm'
   
@@ -274,7 +274,7 @@ keys ���б������ͤ�����˳�Ǽ�����֤��ޤ���
 
 --- invert -> Hash
 
-�ͤ��饭���ؤΥϥå�����֤��ޤ���
+値からキーへのハッシュを返します。
 
   require 'dbm'
   
@@ -286,11 +286,11 @@ keys ���б������ͤ�����˳�Ǽ�����֤��ޤ���
 
 --- update(other){|key, value| ... } -> self
 
-self �� other �����Ƥ�ޡ������ޤ���
+self と other の内容をマージします。
 
-��ʣ���륭�����б������ͤ�other �����ƤǾ�񤭤���ޤ���
+重複するキーに対応する値はother の内容で上書きされます。
 
-@param other each_pair �᥽�åɤ���ĥ��֥������ȤǤʤ���Фʤ�ޤ���
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
 
   require 'dbm'
@@ -307,7 +307,7 @@ self �� other �����Ƥ�ޡ������ޤ���
 
 --- to_a -> [Array]
 
-�������ͤΥڥ���������Ѵ������֤��ޤ���
+キーと値のペアを配列に変換して返します。
 
   require 'dbm'
   
@@ -320,7 +320,7 @@ self �� other �����Ƥ�ޡ������ޤ���
 
 --- to_hash -> Hash
 
-self ��ϥå�����Ѵ������֤��ޤ���
+self をハッシュに変換して返します。
 
   require 'dbm'
   
@@ -331,36 +331,36 @@ self ��ϥå�����Ѵ������֤��ޤ���
 
 --- index(value) -> String | nil
 
-value ��������ǤΥ������֤��ޤ���
+value を持つ要素のキーを返します。
 
-���Ĥ���ʤ��ä����� nil ���֤��ޤ���
+見つからなかった場合は nil を返します。
 
-@param value �����������͡�
+@param value 検索したい値。
 
 == Constants
 
 #@since 1.8.2
 --- READER -> Fixnum
 
-�ɤ߹��ߥ⡼�ɤǥ����ץ󤷤ޤ���
+読み込みモードでオープンします．
 
 @see [[m:DBM.open]]
 
 --- WRITER -> Fixnum
 
-�񤭹��ߥ⡼�ɤǥ����ץ󤷤ޤ���
+書き込みモードでオープンします．
 
 @see [[m:DBM.open]]
 
 --- WRCREAT -> Fixnum
 
-�񤭹��ߥ⡼�ɤǡ����Ǥ˥ե����뤬¸�ߤ��ʤ��ä�����ޤ���
+書き込みモードで、すでにファイルが存在しなかったら作ります．
 
 @see [[m:DBM.open]]
 
 --- NEWDB -> Fixnum
 
-�񤭹��ߥ⡼�ɤǡ����Ǥ˥ե����뤬¸�ߤ����������ƺ��ľ���ޤ���
+書き込みモードで、すでにファイルが存在したら削除して作り直します．
 
 @see [[m:DBM.open]]
 
@@ -368,20 +368,20 @@ value ��������ǤΥ������֤��ޤ���
 
 --- VERSION -> String
 
-libdbm �ΥС�������ɽ��ʸ����Ǥ���
+libdbm のバージョンを表す文字列です。
 
 #@if (version < "1.8.7")
-DB_VERSION_STRING �Ȥ�������� C �����٥���������Ƥ��ʤ�����
-�ȥåץ�٥�� VERSION �����Ȥ���뤿��ٹ�ɽ������ޤ���
+DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
+トップレベルの VERSION が参照されるため警告が表示されます。
 #@end
 #@since 1.9.1
-DB_VERSION_STRING �Ȥ�������� C �����٥���������Ƥ��ʤ�����
-"unknown" �ˤʤ�ޤ���
+DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
+"unknown" になります。
 #@end
 
 
 = class DBMError < StandardError
 
-DBM �����ǻ��Ѥ����㳰���饹�Ǥ���
+DBM 内部で使用する例外クラスです。
 
 

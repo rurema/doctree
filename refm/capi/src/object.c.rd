@@ -1,8 +1,8 @@
 --- static VALUE boot_defclass(char *name, VALUE super)
 
-(¤Ş¤À) ¥á¥¿¥¯¥é¥¹¤ò»ı¤¿¤Ê¤¤¥¯¥é¥¹¤òºîÀ®¤·¤Ş¤¹¡£
-»°¤Ä¤Î¥á¥¿¥ª¥Ö¥¸¥§¥¯¥È Object, Module, Class ¤ò
-ºîÀ®¤¹¤ë¤Î¤Ë»È¤¤¤Ş¤¹¡£
+(ã¾ã ) ãƒ¡ã‚¿ã‚¯ãƒ©ã‚¹ã‚’æŒãŸãªã„ã‚¯ãƒ©ã‚¹ã‚’ä½œæˆã—ã¾ã™ã€‚
+ä¸‰ã¤ã®ãƒ¡ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ Object, Module, Class ã‚’
+ä½œæˆã™ã‚‹ã®ã«ä½¿ã„ã¾ã™ã€‚
 
 --- static VALUE convert_type(VALUE val, const char *tname, const char *method, int raise)
 
@@ -38,44 +38,44 @@
 
 --- VALUE rb_Array(VALUE obj)
 
-obj ¤¬ Array ¤Ç¤Ê¤¤¾ì¹ç¤Ï to_a ¤ò»È¤Ã¤Æ
-Array ¤ËÊÑ´¹¤·¤Ş¤¹¡£
+obj ãŒ Array ã§ãªã„å ´åˆã¯ to_a ã‚’ä½¿ã£ã¦
+Array ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- VALUE rb_check_convert_type(VALUE val, int type, const char *tname, const char *method)
 
-val.method ¤ò¼Â¹Ô¤·¤Æ¥¯¥é¥¹ tname ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÊÖ¤·¤Ş¤¹¡£
-val ¤¬¥á¥½¥Ã¥É method ¤ò»ı¤¿¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤·¤Ş¤¹¡£
+val.method ã‚’å®Ÿè¡Œã—ã¦ã‚¯ãƒ©ã‚¹ tname ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
+val ãŒãƒ¡ã‚½ãƒƒãƒ‰ method ã‚’æŒãŸãªã‘ã‚Œã° nil ã‚’è¿”ã—ã¾ã™ã€‚
 
-type ¤Ï¡¢T_ARRAY, T_STRING ¤Ê¤É¤Î¹½Â¤ÂÎ¤òÉ½¤¹ ID ¤Ç¤¹¡£
-method ¤Î·ë²Ì¤Î·¿¤¬ type ¤Ç¤Ê¤±¤ì¤ĞÎã³° TypeError ¤¬È¯À¸¤·¤Ş¤¹¡£
+type ã¯ã€T_ARRAY, T_STRING ãªã©ã®æ§‹é€ ä½“ã‚’è¡¨ã™ ID ã§ã™ã€‚
+method ã®çµæœã®å‹ãŒ type ã§ãªã‘ã‚Œã°ä¾‹å¤– TypeError ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
 --- static VALUE rb_class_allocate_instance(VALUE klass)
 
-[[m:Class#allocate]] ¤Î¼ÂÂÎ¡£
+[[m:Class#allocate]] ã®å®Ÿä½“ã€‚
 
 --- static VALUE rb_class_initialize(int argc, VALUE *argv, VALUE klass)
 
-[[m:Class#initialize]] ¤Î¼ÂÂÎ¡£
+[[m:Class#initialize]] ã®å®Ÿä½“ã€‚
 
 --- VALUE rb_class_new_instance(int argc, VALUE *argv, VALUE klass)
 
-[[m:Class#new]] ¤Î¼ÂÂÎ¡£
+[[m:Class#new]] ã®å®Ÿä½“ã€‚
 
 --- VALUE rb_class_real(VALUE cl)
 
-ÆÃ°Û¥¯¥é¥¹¤ä²½¿È¥¯¥é¥¹ (T_ICLASS) ¤òÈô¤Ğ¤·¤Æ cl ¤Î
-¥¹¡¼¥Ñ¡¼¥¯¥é¥¹¤òÃ©¤ê¡¢Ruby ¥ì¥Ù¥ë¤ËÏª½Ğ¤·¤Æ¤â¤è¤¤¥¯¥é¥¹¤òÊÖ¤·¤Ş¤¹¡£
+ç‰¹ç•°ã‚¯ãƒ©ã‚¹ã‚„åŒ–èº«ã‚¯ãƒ©ã‚¹ (T_ICLASS) ã‚’é£›ã°ã—ã¦ cl ã®
+ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã‚’è¾¿ã‚Šã€Ruby ãƒ¬ãƒ™ãƒ«ã«éœ²å‡ºã—ã¦ã‚‚ã‚ˆã„ã‚¯ãƒ©ã‚¹ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
    rb_class_real(RBASIC(klass)->super)
 
-rb_obj_class(obj) ¤Ï¡¢obj ¤Î¥¯¥é¥¹¤òÊÖ¤¹ÈÆÍÑ¤Î´Ø¿ô(Object#type ¤È
-Æ±¤¸)¤À¤¬¡¢obj ¤¬ Qtrue ¤Ê¤É¤Ç¤Ê¤¤ RBasic ¹½Â¤¤Î¤â¤Î¤Ç¤¢¤ë¤³¤È¤¬
-¤ï¤«¤Ã¤Æ¤¤¤ë¤Ê¤é
+rb_obj_class(obj) ã¯ã€obj ã®ã‚¯ãƒ©ã‚¹ã‚’è¿”ã™æ±ç”¨ã®é–¢æ•°(Object#type ã¨
+åŒã˜)ã ãŒã€obj ãŒ Qtrue ãªã©ã§ãªã„ RBasic æ§‹é€ ã®ã‚‚ã®ã§ã‚ã‚‹ã“ã¨ãŒ
+ã‚ã‹ã£ã¦ã„ã‚‹ãªã‚‰
 
     rb_class_real(RBASIC(obj)->klass)
 
-¤Ç¤âÎÉ¤¤¡£(¤¬¡¢¤ä¤Ï¤ê rb_obj_class(obj) ¤ò»È¤¦Êı¤¬ÌµÆñ¤À¤í¤¦)
+ã§ã‚‚è‰¯ã„ã€‚(ãŒã€ã‚„ã¯ã‚Š rb_obj_class(obj) ã‚’ä½¿ã†æ–¹ãŒç„¡é›£ã ã‚ã†)
 
 --- static VALUE rb_class_s_new(int argc, VALUE *argv)
 
@@ -83,23 +83,23 @@ rb_obj_class(obj) ¤Ï¡¢obj ¤Î¥¯¥é¥¹¤òÊÖ¤¹ÈÆÍÑ¤Î´Ø¿ô(Object#type ¤È
 
 --- VALUE rb_convert_type(VALUE val, int type, const char *tname, const char *method)
 
-¥ª¥Ö¥¸¥§¥¯¥È val ¤ò¥¯¥é¥¹ type ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ËÊÑ´¹¤·¤Ş¤¹¡£
-ÊÑ´¹¤Ë¤Ï¡¢val.method ¤ÎÌá¤êÃÍ¤¬»È¤ï¤ì¤Ş¤¹¡£
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ val ã‚’ã‚¯ãƒ©ã‚¹ type ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«å¤‰æ›ã—ã¾ã™ã€‚
+å¤‰æ›ã«ã¯ã€val.method ã®æˆ»ã‚Šå€¤ãŒä½¿ã‚ã‚Œã¾ã™ã€‚
 
-val ¤¬¤â¤È¤â¤È type ¥¯¥é¥¹¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ê¤é val ¤ò
-¤½¤Î¤Ş¤ŞÊÖ¤·¤Ş¤¹¡£
+val ãŒã‚‚ã¨ã‚‚ã¨ type ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãªã‚‰ val ã‚’
+ãã®ã¾ã¾è¿”ã—ã¾ã™ã€‚
 
 --- double rb_cstr_to_dbl(const char *p, int badcheck)
 
 --- VALUE rb_eql(VALUE obj1, VALUE obj2)
 
-obj1.equal?(obj2) ¤Ê¤é¤Ğ Qtrue¡¢
-¤½¤¦¤Ç¤Ê¤¤¤Ê¤é¤Ğ Qfalse¡£
+obj1.equal?(obj2) ãªã‚‰ã° Qtrueã€
+ãã†ã§ãªã„ãªã‚‰ã° Qfalseã€‚
 
 --- VALUE rb_equal(VALUE obj1, VALUE obj2)
 
-obj1 == obj2 ¤Ê¤é¤Ğ Qtrue¡¢
-¤½¤¦¤Ç¤Ê¤¤¤Ê¤é¤Ğ Qfalse¡£
+obj1 == obj2 ãªã‚‰ã° Qtrueã€
+ãã†ã§ãªã„ãªã‚‰ã° Qfalseã€‚
 
 --- static VALUE rb_f_array(VALUE obj, VALUE arg)
 
@@ -115,12 +115,12 @@ obj1 == obj2 ¤Ê¤é¤Ğ Qtrue¡¢
 
 --- VALUE rb_inspect(VALUE obj)
 
-obj.inspect ¤Î¼ÂÂÎ¡£
+obj.inspect ã®å®Ÿä½“ã€‚
 
 --- VALUE rb_Integer(VALUE obj)
 
-obj ¤¬ Ruby ¤ÎÀ°¿ô¤Ç¤Ê¤¤¾ì¹ç¤Ï to_i ¤ò»È¤Ã¤Æ
-Integer ¤ËÊÑ´¹¤·¤Ş¤¹¡£
+obj ãŒ Ruby ã®æ•´æ•°ã§ãªã„å ´åˆã¯ to_i ã‚’ä½¿ã£ã¦
+Integer ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- static VALUE rb_mod_attr(int argc, VALUE *argv, VALUE klass)
 
@@ -156,29 +156,29 @@ Integer ¤ËÊÑ´¹¤·¤Ş¤¹¡£
 
 --- double rb_num2dbl(VALUE val)
 
-Ç¤°Õ¤Î Numeric ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ò double ¤ËÊÑ´¹¤·¤Ş¤¹¡£
+ä»»æ„ã® Numeric ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ double ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- VALUE rb_obj_alloc(VALUE klass)
 
-klass ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òºîÀ®¤¹¤ë¡£
+klass ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹ã€‚
 
 --- VALUE rb_obj_class(VALUE obj)
 
-[[m:Object#class]] ¤Î¼ÂÂÎ¤Ç¤¹¡£
+[[m:Object#class]] ã®å®Ÿä½“ã§ã™ã€‚
 
 --- VALUE rb_obj_clone(VALUE obj)
 
-[[m:Object#clone]] ¤Î¼ÂÂÎ¤Ç¤¹¡£
+[[m:Object#clone]] ã®å®Ÿä½“ã§ã™ã€‚
 
 --- static VALUE rb_obj_dummy(void)
 
 --- VALUE rb_obj_dup(VALUE obj)
 
-[[m:Object#dup]] ¤Î¼ÂÂÎ¤Ç¤¹¡£
+[[m:Object#dup]] ã®å®Ÿä½“ã§ã™ã€‚
 
 --- static VALUE rb_obj_equal(VALUE obj1, VALUE obj2)
 
-obj1 ¤È obj2 ¤¬Æ±°ì¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ê¤é¿¿¡£
+obj1 ã¨ obj2 ãŒåŒä¸€ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãªã‚‰çœŸã€‚
 
 --- VALUE rb_obj_freeze(VALUE obj)
 
@@ -190,32 +190,32 @@ obj1 ¤È obj2 ¤¬Æ±°ì¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ê¤é¿¿¡£
 
 --- VALUE rb_obj_id(VALUE obj)
 
-[[m:Object#id]] ¤Î¼ÂÂÎ¡£
+[[m:Object#id]] ã®å®Ÿä½“ã€‚
 
 --- static VALUE rb_obj_inspect(VALUE obj)
 
-[[m:Object#inspect]] ¤Î¼ÂÂÎ¡£
+[[m:Object#inspect]] ã®å®Ÿä½“ã€‚
 
 --- VALUE rb_obj_is_instance_of(VALUE obj, VALUE klass)
 
-obj ¤¬¥¯¥é¥¹ klass ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ê¤é¤Ğ¿¿¡£
+obj ãŒã‚¯ãƒ©ã‚¹ klass ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãªã‚‰ã°çœŸã€‚
 
 --- VALUE rb_obj_is_kind_of(VALUE obj, VALUE klass)
 
-obj ¤¬¥¯¥é¥¹ klass ¤ª¤è¤Ó¤½¤Î¥µ¥Ö¥¯¥é¥¹¤Î
-¥¤¥ó¥¹¥¿¥ó¥¹¤Î¤È¤­¿¿¡£
+obj ãŒã‚¯ãƒ©ã‚¹ klass ãŠã‚ˆã³ãã®ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã®
+ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ã¨ãçœŸã€‚
 
 --- static VALUE rb_obj_methods(VALUE obj)
 
-[[m:Object#methods]] ¤Î¼ÂÂÎ¡£
+[[m:Object#methods]] ã®å®Ÿä½“ã€‚
 
 --- static VALUE rb_obj_private_methods(VALUE obj)
 
-[[m:Object#private_methods]] ¤Î¼ÂÂÎ¡£
+[[m:Object#private_methods]] ã®å®Ÿä½“ã€‚
 
 --- static VALUE rb_obj_protected_methods(VALUE obj)
 
-[[m:Object#protected_methods]] ¤Î¼ÂÂÎ¡£
+[[m:Object#protected_methods]] ã®å®Ÿä½“ã€‚
 
 --- VALUE rb_obj_taint(VALUE obj)
 
@@ -231,30 +231,30 @@ obj ¤¬¥¯¥é¥¹ klass ¤ª¤è¤Ó¤½¤Î¥µ¥Ö¥¯¥é¥¹¤Î
 
 --- char *rb_str2cstr(VALUE str, int *len)
 
-strl ¤ò C ¤ÎÊ¸»úÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£ÂèÆó°ú¿ô¤âÍ¿¤¨¤ë¤È
-*len ¤Ë¥Ğ¥¤¥ÈÄ¹¤ò½ñ¤­¹ş¤ß¤Ş¤¹¡£str ¤¬ String
-¤Ç¤Ê¤¤¾ì¹ç¤Ï to_str ¤Ç¤ÎÊÑ´¹¤ò»î¤ß¤Ş¤¹¡£
+strl ã‚’ C ã®æ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚ç¬¬äºŒå¼•æ•°ã‚‚ä¸ãˆã‚‹ã¨
+*len ã«ãƒã‚¤ãƒˆé•·ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚str ãŒ String
+ã§ãªã„å ´åˆã¯ to_str ã§ã®å¤‰æ›ã‚’è©¦ã¿ã¾ã™ã€‚
 
 --- double rb_str_to_dbl(VALUE str, int badcheck)
 
 --- VALUE rb_String(VALUE val)
 
-[[m:Kernel.#String]] ¤Î¼ÂÂÎ¡£
-val ¤òÊ¸»úÎó¤ËÊÑ´¹¤·¤Ş¤¹¡£
+[[m:Kernel.#String]] ã®å®Ÿä½“ã€‚
+val ã‚’æ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- VALUE rb_to_id(VALUE name)
 
-String¡¦Fixnum¡¦Symbol ¤ò ID ¤ËÊÑ´¹¤·¤Ş¤¹¡£
+Stringãƒ»Fixnumãƒ»Symbol ã‚’ ID ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- VALUE rb_to_int(VALUE val)
 
-val ¤ò to_int ¥á¥½¥Ã¥É¤ò»È¤Ã¤Æ Ruby ¤ÎÀ°¿ô¤ËÊÑ´¹¤·¤Ş¤¹¡£
+val ã‚’ to_int ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã£ã¦ Ruby ã®æ•´æ•°ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 --- static VALUE rb_to_integer(VALUE val, char *method)
 
 --- static VALUE rb_true(VALUE obj)
 
-Qtrue ¤òÊÖ¤·¤Ş¤¹¡£
+Qtrue ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- static VALUE sym_inspect(VALUE sym)
 

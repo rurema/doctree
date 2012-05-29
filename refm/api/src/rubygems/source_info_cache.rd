@@ -2,200 +2,200 @@ require rubygems
 require rubygems/source_info_cache_entry
 require rubygems/user_interaction
 
-�ġ��� Gem �ѥå������Υ���ǥå�������Υ��ԡ�����¸���뤿��Υ饤�֥��Ǥ���
+個々の Gem パッケージのインデックス情報のコピーを保存するためのライブラリです。
 
 = class Gem::SourceInfoCache
 include Gem::UserInteraction
 
-�ġ��� Gem �ѥå������Υ���ǥå�������Υ��ԡ�����¸���뤿��Υ��饹�Ǥ���
+個々の Gem パッケージのインデックス情報のコピーを保存するためのクラスです。
 
-����å������¸���Ȥ��ưʲ�����Ĥ�¸�ߤ��ޤ���
+キャッシュの保存場所として以下の二つが存在します。
 
-: �����ƥ७��å���
-  �ե�������Ф���񤭹��߸��¤�������¤�������Ϥ��������Ѥ��ޤ���
-: �桼��������å���
-  �����ƥ७��å��夬���ѤǤ��ʤ����˻��Ѥ��ޤ���
+: システムキャッシュ
+  ファイルに対する書き込み権限や作成権限がある場合はこちらを使用します。
+: ユーザーキャッシュ
+  システムキャッシュが使用できない場合に使用します。
 
-���Ѥ��륭��å�������򤹤�ȡ����Ƥ��������򤵤줿����å������Ѥ��ޤ���
-�ޤ������Υ��饹��ưŪ�˥���å���μ�����ڤ��ؤ��ޤ���
+使用するキャッシュを選択すると、全ての操作で選択されたキャッシュを使用します。
+また、このクラスは動的にキャッシュの種類を切り替えません。
 
-����å���ǡ����ϥ������������� URI ���ͤ� [[c:Gem::SourceInfoCacheEntry]] �Υ��󥹥��󥹤Ǥ���ϥå���Ǥ���
+キャッシュデータはキーが取得元の URI で値が [[c:Gem::SourceInfoCacheEntry]] のインスタンスであるハッシュです。
 
 == Public Instance Methods
 
 --- cache_data -> Hash
 
-�ǿ��Υ���å���ǡ������֤��ޤ���
+最新のキャッシュデータを返します。
 
 --- cache_file -> String
 
-���Ѳ�ǽ�ʥ���å���ե�����̾���֤��ޤ���
+使用可能なキャッシュファイル名を返します。
 
-�����ƥ७��å��夬���Ѳ�ǽ�ʾ��ϥ����ƥ७��å���Υե�����̾���֤��ޤ���
-�����Ǥʤ����ϥ桼��������å���Υե�����̾���֤��ޤ���
+システムキャッシュが使用可能な場合はシステムキャッシュのファイル名を返します。
+そうでない場合はユーザーキャッシュのファイル名を返します。
 
 --- flush -> false
 
-����å�����������ե�����˽񤭹��ߤޤ���
+キャッシュをローカルファイルに書き込みます。
 
 --- latest_cache_data -> Hash
 
-�ǿ��Υ���å���ǡ������֤��ޤ���
+最新のキャッシュデータを返します。
 
 --- latest_cache_file -> String
 
-���Ѳ�ǽ�ʺǿ��Υ���å���ե�����̾���֤��ޤ���
+使用可能な最新のキャッシュファイル名を返します。
 
-�����ƥ७��å��夬���Ѳ�ǽ�ʾ��ϥ����ƥ७��å���Υե�����̾���֤��ޤ���
-�����Ǥʤ����ϥ桼��������å���Υե�����̾���֤��ޤ���
+システムキャッシュが使用可能な場合はシステムキャッシュのファイル名を返します。
+そうでない場合はユーザーキャッシュのファイル名を返します。
 
 @see [[m:Gem::SourceInfoCache#cache_file]]
 
 --- latest_system_cache_file -> String
 
-�ǿ��Υ����ƥ७��å���Υե�����̾���֤��ޤ���
+最新のシステムキャッシュのファイル名を返します。
 
 --- latest_user_cache_file -> String
 
-�ǿ��Υ桼��������å���Υե�����̾���֤��ޤ���
+最新のユーザーキャッシュのファイル名を返します。
 
 --- read_all_cache_data -> ()
 
-���Ȥ˴����ʥ���å���ե���������Ƥ�ޡ������ޤ���
+自身に完全なキャッシュファイルの内容をマージします。
 
 --- read_cache_data(file) -> Hash
 
-Ϳ����줿�ե�����̾����ǡ������ɤ߹���ǥ���å���ǡ������֤��ޤ���
+与えられたファイル名からデータを読み込んでキャッシュデータを返します。
 
-@param file ����å���Υե�����̾����ꤷ�ޤ���
+@param file キャッシュのファイル名を指定します。
 
-@return �������㳰��ȯ���������ϡ����Υϥå�����֤��ޤ���
+@return 内部で例外が発生した場合は、空のハッシュを返します。
 
 --- refresh(all) -> false
 
-���������Ȥ˥���å���ǡ����򹹿����ޤ���
+取得元ごとにキャッシュデータを更新します。
 
-@param all ������ꤹ������ƤΥ���å���򹹿����ޤ��������Ǥʤ����ϡ�
-           �ǿ��� Gem �ѥå������ξ���Τ߹������ޤ���
+@param all 真を指定すると全てのキャッシュを更新します。そうでない場合は、
+           最新の Gem パッケージの情報のみ更新します。
 
 --- reset_cache_data -> true
 
-����å���ǡ�����ꥻ�åȤ��ޤ���
+キャッシュデータをリセットします。
 
 --- reset_cache_file -> nil
 
-����Ū�˥���å���ե�����̾��ꥻ�åȤ��ޤ���
+強制的にキャッシュファイル名をリセットします。
 
-RubyGems �饤�֥��η��ƥ��Ȥ򤹤�Τ������Ǥ���
+RubyGems ライブラリの結合テストをするのに便利です。
 
 --- reset_cache_for(url, cache_data) -> Hash
 
-���ꤵ�줿 URL ���б����륭��å���ǡ����򹹿����ޤ���
+指定された URL に対応するキャッシュデータを更新します。
 
-@param url ������ URL ����ꤷ�ޤ���
+@param url 取得元 URL を指定します。
 
-@param cache_data ����å���ǡ�������ꤷ�ޤ�����
+@param cache_data キャッシュデータを指定します。　
 
 --- search(pattern, platform_only = false, all = false) -> [Gem::Specification]
 
-Ϳ����줿���������� [[c:Gem::Specification]] �Υꥹ�Ȥ��֤��ޤ���
+与えられた条件を満たす [[c:Gem::Specification]] のリストを返します。
 
-@param pattern ���������� Gem ��ɽ�� [[c:Gem::Dependency]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param pattern 検索したい Gem を表す [[c:Gem::Dependency]] のインスタンスを指定します。
 
-@param platform_only ������ꤹ��ȥץ�åȥե����ब���פ����ΤΤߤ��֤��ޤ����ǥե���Ȥϵ��Ǥ���
+@param platform_only 真を指定するとプラットフォームが一致するもののみを返します。デフォルトは偽です。
 
-@param all ������ꤹ��ȥ���å���򹹿����Ƥ��鸡����¹Ԥ��ޤ���
+@param all 真を指定するとキャッシュを更新してから検索を実行します。
 
 @see [[m:Gem::SourceIndex#search]]
 
 --- search_with_source(pattern, only_platform = false, all = false) -> Array
 
-Ϳ����줿���������� [[c:Gem::Specification]] �� URL �Υꥹ�Ȥ��֤��ޤ���
+与えられた条件を満たす [[c:Gem::Specification]] と URL のリストを返します。
 
-@param pattern ���������� Gem ��ɽ�� [[c:Gem::Dependency]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param pattern 検索したい Gem を表す [[c:Gem::Dependency]] のインスタンスを指定します。
 
-@param only_platform ������ꤹ��ȥץ�åȥե����ब���פ����ΤΤߤ��֤��ޤ����ǥե���Ȥϵ��Ǥ���
+@param only_platform 真を指定するとプラットフォームが一致するもののみを返します。デフォルトは偽です。
 
-@param all ������ꤹ��ȥ���å���򹹿����Ƥ��鸡����¹Ԥ��ޤ���
+@param all 真を指定するとキャッシュを更新してから検索を実行します。
 
-@return ������Ǥ� [[c:Gem::Specification]]���������Ǥ�������� URL �Ȥ�����������ǤȤ���������֤��ޤ���
+@return 第一要素を [[c:Gem::Specification]]、第二要素を取得元の URL とする配列を要素とする配列を返します。
 
 
 --- set_cache_data(hash) -> true
 
-ľ�ܥ���å���ǡ����򥻥åȤ��ޤ���
+直接キャッシュデータをセットします。
 
-���Υ᥽�åɤϼ�˥�˥åȥƥ��Ȥǻ��Ѥ��ޤ���
+このメソッドは主にユニットテストで使用します。
 
-@param hash ����å���ǡ����Ȥ��ƻ��Ѥ���ϥå������ꤷ�ޤ���
+@param hash キャッシュデータとして使用するハッシュを指定します。
 
 --- system_cache_file -> String
 
-�����ƥ७��å���ե������̾�����֤��ޤ���
+システムキャッシュファイルの名前を返します。
 
 --- try_file(path) -> String | nil
 
-Ϳ����줿�ѥ�������å���ե�����Ȥ������Ѳ�ǽ�ʾ�硢���Υѥ����֤��ޤ���
-�����Ǥʤ����� nil ���֤��ޤ���
+与えられたパスがキャッシュファイルとして利用可能な場合、そのパスを返します。
+そうでない場合は nil を返します。
 
-@param path ����å���ե�����θ���Ȥʤ�ѥ�����ꤷ�ޤ���
+@param path キャッシュファイルの候補となるパスを指定します。
 
 --- update -> true
 
-����å��夬�������줿���Ȥ�ޡ������ޤ����������ΤϹԤ��ޤ���
+キャッシュが更新されたことをマークします。更新自体は行いません。
 
 --- user_cache_file -> String
 
-�桼��������å���Υե�����̾���֤��ޤ���
+ユーザーキャッシュのファイル名を返します。
 
 --- write_cache -> nil
 
-Ŭ�ڤʥ���å���ե�����˥���å���ǡ�����񤭹��ߤޤ���
+適切なキャッシュファイルにキャッシュデータを書き込みます。
 
 == Singleton Methods
 
 --- cache(all = false) -> Gem::SourceInfoCache
 
-���ȤΥ��󥹥��󥹤��������뤿��Υ᥽�åɤǤ���
+自身のインスタンスを生成するためのメソッドです。
 
-@param all ������ꤹ��ȡ����󥹥��������������ƤΥ���å����ƺ������ޤ���
+@param all 真を指定すると、インスタンス生成時に全てのキャッシュを再作成します。
 
 --- cache_data -> Hash
 
-����å��夷�Ƥ���ǡ������֤��ޤ���
+キャッシュしているデータを返します。
 
 --- latest_system_cache_file -> String
 
-�ǿ��Υ����ƥ७��å���Υե�����̾���֤��ޤ���
+最新のシステムキャッシュのファイル名を返します。
 
 --- latest_user_cache_file -> String
 
-�ǿ��Υ桼��������å���Υե�����̾���֤��ޤ���
+最新のユーザーキャッシュのファイル名を返します。
 
 --- reset -> nil
 
-���Ȥ����Ƥ򥯥ꥢ���ޤ���
+自身の内容をクリアします。
 
 --- search(*args) -> [Gem::Specification]
 
-Ϳ����줿���������� [[c:Gem::Specification]] �Υꥹ�Ȥ��֤��ޤ���
+与えられた条件を満たす [[c:Gem::Specification]] のリストを返します。
 
-@param args ����������ꤷ�ޤ���[[m:Gem::SourceInfoCache#search]] �Ȱ������碌�Ƥ���������
+@param args 検索条件を指定します。[[m:Gem::SourceInfoCache#search]] と引数を合わせてください。
 
 @see [[m:Gem::SourceInfoCache#search]]
 
 --- search_with_source(*args) -> Array
 
-Ϳ����줿���������� [[c:Gem::Specification]] �� URL �Υꥹ�Ȥ��֤��ޤ���
+与えられた条件を満たす [[c:Gem::Specification]] と URL のリストを返します。
 
-@param args ����������ꤷ�ޤ���[[m:Gem::SourceInfoCache#search_with_source]] �Ȱ������碌�Ƥ���������
+@param args 検索条件を指定します。[[m:Gem::SourceInfoCache#search_with_source]] と引数を合わせてください。
 
 @see [[m:Gem::SourceInfoCache#search_with_source]]
 
 --- system_cache_file -> String
 
-�����ƥ७��å���Υե�����̾���֤��ޤ���
+システムキャッシュのファイル名を返します。
 
 --- user_cache_file -> String
 
-�桼��������å���Υե�����̾���֤��ޤ���
+ユーザーキャッシュのファイル名を返します。

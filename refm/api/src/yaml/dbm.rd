@@ -3,186 +3,186 @@
 require yaml
 require dbm
 
-[[c:DBM]] ���ͤ�ʸ����ʳ����Ǽ�Ǥ���褦�˳�ĥ���뤿��Υ��֥饤�֥�
-��Ǥ���
+[[c:DBM]] の値に文字列以外も格納できるように拡張するためのサブライブラ
+リです。
 
-[[c:DBM]] �ϥ������ͤΤɤ����ʸ����Ǥ���ɬ�פ�����ޤ�����
-[[c:YAML::DBM]] �� YAML �������Ѵ��Ǥ��륪�֥������ȤǤ�����ͤȤ��Ƴ�
-Ǽ��������Ǥ��ޤ�����������������ʸ����Ǥ���ɬ�פ�����ޤ���
+[[c:DBM]] はキー、値のどちらも文字列である必要がありますが、
+[[c:YAML::DBM]] は YAML 形式に変換できるオブジェクトであれば値として格
+納する事ができます。ただし、キーは文字列である必要があります。
 
-�Ȥ����� [[c:DBM]] ��Ʊ���Ǥ���[[c:DBM]] �� [[c:YAML]] ��ʻ���ƻ��Ȥ���
-����������
+使い方は [[c:DBM]] と同じです。[[c:DBM]] と [[c:YAML]] も併せて参照して
+ください。
 
 = class YAML::DBM < DBM
 
-[[c:DBM]] ���ͤ�ʸ����ʳ����Ǽ�Ǥ���褦�˳�ĥ�������饹�Ǥ���
+[[c:DBM]] の値に文字列以外も格納できるように拡張したクラスです。
 
 == Constants
 
 --- VERSION -> "0.1"
 
-[[lib:yaml/dbm]] �ΥС�������ʸ������֤��ޤ���
+[[lib:yaml/dbm]] のバージョンを文字列で返します。
 
 == Instance Methods
 
 --- [](key) -> object | nil
 
-�ǡ����١������饭����õ�����б��������Ǥ��ͤ��֤��ޤ���
+データベースからキーを探して対応する要素の値を返します。
 
-�б������ͤ����Ĥ���ʤ��ä����� nil ���֤��ޤ���[[m:DBM#[] ]] �Ȥϰ�
-�ʤꡢ[[c:IndexError]] ��ȯ�����ޤ���
+対応する値が見つからなかった場合は nil を返します。[[m:DBM#[] ]] とは異
+なり、[[c:IndexError]] は発生しません。
 
-@param key ������ʸ����ǻ��ꤷ�ޤ���
+@param key キーを文字列で指定します。
 
 @see [[m:YAML::DBM#fetch]]
 
 --- []=(key, value) -> object
 --- store(key, value) -> object
 
-key ���Ф��� value ���Ǽ���ޤ���
+key に対して value を格納します。
 
-val �ǻ��ꤷ�����֥������Ȥ��֤��ޤ���
+val で指定したオブジェクトを返します。
 
-@param key ������ʸ����ǻ��ꤷ�ޤ���
+@param key キーを文字列で指定します。
 
-@param value �ͤ���ꤷ�ޤ���YAML �������Ѵ��Ǥ��륪�֥������Ȥ������
-             ���ޤ���
+@param value 値を指定します。YAML 形式に変換できるオブジェクトが指定で
+             きます。
 
-@raise DBMError ���Ǥγ�Ǽ�˼��Ԥ�������ȯ�����ޤ���
+@raise DBMError 要素の格納に失敗した場合に発生します。
 
 --- delete(key) -> object | nil
 
-key �򥭡��Ȥ������Ǥ������ޤ���
+key をキーとする要素を削除します。
 
-����������Ǥ��֤��ޤ���key ���б������ͤ����Ĥ���ʤ��ä����� nil ��
-�֤��ޤ���
+削除した要素を返します。key に対応する値が見つからなかった場合は nil を
+返します。
 
-@param key ������ʸ����ǻ��ꤷ�ޤ���
+@param key キーを文字列で指定します。
 
-@raise DBMError ���Ǥκ���˼��Ԥ�������ȯ�����ޤ���
+@raise DBMError 要素の削除に失敗した場合に発生します。
 
 --- delete_if {|key, val| ... } -> YAML::DBM
 
-�֥��å���ɾ�������ͤ����Ǥ���г����������Ǥ������ޤ���
+ブロックを評価した値が真であれば該当する要素を削除します。
 
-���Ȥ��֤��ޤ������Υ᥽�åɤ� self ���˲�Ū���ѹ����ޤ���
+自身を返します。このメソッドは self を破壊的に変更します。
 
-@raise DBMError ���Ǥκ���˼��Ԥ�������ȯ�����ޤ���
+@raise DBMError 要素の削除に失敗した場合に発生します。
 
 --- each                        -> YAML::DBM
 --- each_pair {|key, val| ... } -> YAML::DBM
 
-���ȤΥ������ͤ�����Ȥ��ƥ֥��å���ɾ�����ޤ���
+自身のキーと値を引数としてブロックを評価します。
 
-���Ȥ��֤��ޤ���
+自身を返します。
 
 --- each_value {|val| ... } -> YAML::DBM
 
-�ͤ�����Ȥ��ƥ֥��å���ɾ�����ޤ���
+値を引数としてブロックを評価します。
 
-���Ȥ��֤��ޤ���
+自身を返します。
 
 --- fetch(key, ifnone = nil) -> object
 
-�ǡ����١������饭����õ�����б��������Ǥ��ͤ��֤��ޤ���
+データベースからキーを探して対応する要素の値を返します。
 
-�б������ͤ����Ĥ���ʤ��ä����� ifnone �ǻ��ꤷ���ͤ��֤��ޤ���
+対応する値が見つからなかった場合は ifnone で指定した値を返します。
 
-@param key ������ʸ����ǻ��ꤷ�ޤ���
+@param key キーを文字列で指定します。
 
 @see [[m:YAML::DBM#[] ]]
 
 --- has_value?(value) -> bool
 
-value ���ͤȤ����Ȥ��ǡ����١������¸�ߤ�����������֤��ޤ���
+value を値とする組がデータベース中に存在する時、真を返します。
 
-@param value �����������ͤ���ꤷ�ޤ���YAML �������Ѵ��Ǥ��륪�֥�����
-             �Ȥ�����Ǥ��ޤ���
+@param value 検索したい値を指定します。YAML 形式に変換できるオブジェク
+             トが指定できます。
 
 --- shift -> [String, object]
 
-�ǡ����١�����Υ������ͤ��ļ��Ф����ǡ����١������������ޤ���
+データベース中のキー、値を一つ取り出し、データベースから削除します。
 
-[����, ��]���֤��ޤ���������������Ǥν��֤��ݾڤ���ޤ���
+[キー, 値]を返します。取得される要素の順番は保証されません。
 
 --- index(value) -> String | nil
 
-value ��������ǤΥ������֤��ޤ���
+value を持つ要素のキーを返します。
 
-�б����륭�������Ĥ���ʤ��ä����� nil ���֤��ޤ���
+対応するキーが見つからなかった場合は nil を返します。
 
-@param value �����������ͤ���ꤷ�ޤ���YAML �������Ѵ��Ǥ��륪�֥�����
-             �Ȥ�����Ǥ��ޤ���
+@param value 検索したい値を指定します。YAML 形式に変換できるオブジェク
+             トが指定できます。
 
 #@since 1.9.1
-[����] ��侩�Υ᥽�åɤǤ�������� #key ����Ѥ��Ƥ���������
+[注意] 非推奨のメソッドです。代わりに #key を使用してください。
 #@end
 
 --- invert -> {object => String}
 
-�ͤ��饭���ؤΥϥå�����֤��ޤ���
+値からキーへのハッシュを返します。
 
-�ۤʤ륭�����Ф����������ͤ���Ͽ����Ƥ�����η�̤�����Ǥ��뤳�Ȥ�
-���դ��Ƥ������������Τ褦�ʾ��ˤ��Υ᥽�åɤ����Ѥ��뤳�Ȥϰտޤ���
-�Ƥ��ޤ���
+異なるキーに対して等しい値が登録されている場合の結果は不定であることに
+注意してください、そのような場合にこのメソッドを利用することは意図され
+ていません。
 
 --- reject {|key, val| ... } -> {String => object}
 
-�֥��å���ɾ�������ͤ����Ǥ���г����������Ǥ������ޤ���
+ブロックを評価した値が真であれば該当する要素を削除します。
 
-������ [[c:Hash]] ���֥������Ȥ���������֤��ޤ���
+新しく [[c:Hash]] オブジェクトを作成して返します。
 
 --- replace(other) -> YAML::DBM
 
-self �����Ƥ� other �����Ƥ��֤������ޤ���
+self の内容を other の内容で置き換えます。
 
-@param other [[c:Hash]]��[[c:DBM]] ���֥������Ȥ���ꤷ�ޤ���
+@param other [[c:Hash]]、[[c:DBM]] オブジェクトを指定します。
 
-@raise DBMError �����˼��Ԥ�������ȯ�����ޤ���
+@raise DBMError 更新に失敗した場合に発生します。
 
-���Ȥ��֤��ޤ���
+自身を返します。
 
 --- select(*keys) -> [object]
 --- select { ... } -> [[String, object]]
 
-�֥��å���ɾ�����ƿ��ˤʤä����ǤΤߤ� [����, ��] ���鹽������������
-��Ǽ�����֤��ޤ����֥��å���Ϳ�����ʤ��ä����ϡ�keys ���б������ͤ�
-����˳�Ǽ�����֤��ޤ���
+ブロックを評価して真になった要素のみを [キー, 値] から構成される配列に
+格納して返します。ブロックが与えられなかった場合は、keys に対応する値を
+配列に格納して返します。
 
-@param keys ������ʸ����ǻ��ꤷ�ޤ���ʣ�����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+@param keys キーを文字列で指定します。複数指定することができます。
 
-�֥��å���Ϳ���뤫�ɤ���������ͤ��ۤʤ�������դ��Ƥ���������
+ブロックを与えるかどうかで戻り値が異なる事に注意してください。
 
 @see [[m:YAML::DBM#values_at]]
 
 --- update(other) -> self
 
-���Ȥ� other �����Ƥ�ޡ���(����)���ޤ���
+自身と other の内容をマージ(統合)します。
 
-��ʣ���륭�����б������ͤ� other �����ƤǾ�񤭤���ޤ���
+重複するキーに対応する値は other の内容で上書きされます。
 
-@param other [[c:Hash]]��[[c:DBM]] ���֥������Ȥ���ꤷ�ޤ���
+@param other [[c:Hash]]、[[c:DBM]] オブジェクトを指定します。
 
-@raise DBMError �����˼��Ԥ�������ȯ�����ޤ���
+@raise DBMError 更新に失敗した場合に発生します。
 
 --- to_a -> [[String, object]]
 
-�������ͤΥڥ���������Ѵ������֤��ޤ���
+キーと値のペアを配列に変換して返します。
 
 --- to_hash -> Hash
 
-���ȤΥ������ͤ�ϥå���ˤ�����Τ��֤��ޤ���
+自身のキー、値をハッシュにしたものを返します。
 
 --- values -> object
 
-�ǡ����١������¸�ߤ��������Ƥ�ޤ�������֤��ޤ���
+データベース中に存在する値全てを含む配列を返します。
 
 --- values_at(*keys) -> [object]
 
-keys ���б������ͤ�����˳�Ǽ�����֤��ޤ���
+keys に対応する値を配列に格納して返します。
 
-�б����륭�������Ĥ���ʤ��ä����Ǥˤ� nil ����Ǽ����ޤ���
+対応するキーが見つからなかった要素には nil が格納されます。
 
-@param keys ������ʸ����ǻ��ꤷ�ޤ���ʣ�����ꤹ�뤳�Ȥ��Ǥ��ޤ���
+@param keys キーを文字列で指定します。複数指定することができます。
 
 #@end

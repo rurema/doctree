@@ -1,110 +1,110 @@
 = class RDoc::TopLevel < RDoc::Context
 
-�Ǿ�̤Υ���ƥ�����(�������ե�����)��ɽ�����륯�饹�Ǥ���
+最上位のコンテキスト(ソースファイル)を表現するクラスです。
 
 == Class Methods
 
 --- all_classes_and_modules -> [RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule]
 
-RDoc �������������饹���⥸�塼���������֤��ޤ���
+RDoc が収集したクラス、モジュールを配列で返します。
 
 --- find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
 
-RDoc �������������饹���⡢name �ǻ��ꤷ��̾���Υ��饹���֤��ޤ�������
-����ʤ��ä����� nil ���֤��ޤ���
+RDoc が収集したクラスの内、name で指定した名前のクラスを返します。見つ
+からなかった場合は nil を返します。
 
-@param name ���饹̾��ʸ����ǻ��ꤷ�ޤ���
+@param name クラス名を文字列で指定します。
 
 --- new(file_name) -> RDoc::TopLevel
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
 --- reset -> ()
 
-RDoc ���������� [[c:RDoc::TopLevel]] �ξ���(���饹���⥸�塼�롢�ե���
-��)�򥯥ꥢ���ޤ���
+RDoc が収集した [[c:RDoc::TopLevel]] の情報(クラス、モジュール、ファイ
+ル)をクリアします。
 
 == Instance Methods
 
 --- add_class_or_module(collection, class_type, name, superclass) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
 
-collection �� name �ǻ��ꤷ�����饹���⥸�塼����ɲä��ޤ���
+collection に name で指定したクラス、モジュールを追加します。
 
-@param collection ���饹���⥸�塼����ɲä������ [[c:Hash]] ���֥���
-                  ���Ȥǻ��ꤷ�ޤ���
+@param collection クラス、モジュールを追加する先を [[c:Hash]] オブジェ
+                  クトで指定します。
 
-@param class_type �ɲä��륯�饹���⥸�塼��� [[c:RDoc::NormalClass]]��
-                  [[c:RDoc::SingleClass]]��[[c:RDoc::NormalModule]] ��
-                  �֥������ȤΤ����줫�ǻ��ꤷ�ޤ���
+@param class_type 追加するクラス、モジュールを [[c:RDoc::NormalClass]]、
+                  [[c:RDoc::SingleClass]]、[[c:RDoc::NormalModule]] オ
+                  ブジェクトのいずれかで指定します。
 
-@param name ���饹̾��ʸ����ǻ��ꤷ�ޤ���
+@param name クラス名を文字列で指定します。
 
-@param superclass �ɲä��륯�饹�οƥ��饹�� [[c:RDoc::NormalClass]] ��
-                  �֥������Ȥǻ��ꤷ�ޤ���
+@param superclass 追加するクラスの親クラスを [[c:RDoc::NormalClass]] オ
+                  ブジェクトで指定します。
 
-������Ͽ�ѤߤǤ��ä����ϡ������ǻ��ꤷ����������Ƥ򹹿����ޤ�������
-����[[m:RDoc::CodeObject#done_documenting]] �� true ���֤���硢�����
-���ޤ���
+既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただ
+し、[[m:RDoc::CodeObject#done_documenting]] が true を返す場合、何も行
+われません。
 
 #@until 1.9.2
 --- find_class_or_module_named(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
 
-RDoc �������������饹���⥸�塼����⡢name �ǻ��ꤷ��̾���Τ�Τ��֤�
-�ޤ������Ĥ���ʤ��ä����� nil ���֤��ޤ���
+RDoc が収集したクラス、モジュールの内、name で指定した名前のものを返し
+ます。見つからなかった場合は nil を返します。
 
-@param name ���饹̾���⥸�塼��̾��ʸ����ǻ��ꤷ�ޤ���
+@param name クラス名かモジュール名を文字列で指定します。
 #@end
 
 --- find_local_symbol(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule | RDoc::AnyMethod | RDoc::Alias | RDoc::Attr | RDoc::Constant
 
-���饹���⥸�塼�롢�᥽�åɡ������°����alias���ե����뤫�� name �ǻ��ꤷ����Τ��֤��ޤ������Ĥ���ʤ��ä����� nil ���֤��ޤ���
+クラス、モジュール、メソッド、定数、属性、alias、ファイルから name で指定したものを返します。見つからなかった場合は nil を返します。
 
 --- find_module_named(name) -> RDoc::NormalModule
 
-RDoc �������������饹���⡢name �ǻ��ꤷ��̾���Υ⥸�塼����֤��ޤ���
-���Ĥ���ʤ��ä����� nil ���֤��ޤ���
+RDoc が収集したクラスの内、name で指定した名前のモジュールを返します。
+見つからなかった場合は nil を返します。
 
-@param name �⥸�塼��̾��ʸ����ǻ��ꤷ�ޤ���
+@param name モジュール名を文字列で指定します。
 
 #@since 1.9.2
 --- full_name -> String
 
-���Ȥ���������ե������̾�����֤��ޤ���
+自身が管理するファイルの名前を返します。
 #@else
 --- full_name -> nil
 
-��� nil ���֤��ޤ���
+常に nil を返します。
 #@end
 
 --- file_stat -> File::Stat
 
-���Ȥ���������ե�����˴ؤ��� [[c:File::Stat]] ���֥������Ȥ��֤��ޤ���
+自身が管理するファイルに関する [[c:File::Stat]] オブジェクトを返します。
 
 --- file_stat=(val)
 
-���Ȥ���������ե�����˴ؤ��� [[c:File::Stat]] ���֥������Ȥ����ꤷ��
-����
+自身が管理するファイルに関する [[c:File::Stat]] オブジェクトを設定しま
+す。
 
-@param val [[c:File::Stat]] ���֥������Ȥ���ꤷ�ޤ���
+@param val [[c:File::Stat]] オブジェクトを指定します。
 
 --- file_relative_name -> String
 
-���Ȥ���������ե�����˴ؤ������Хѥ���ʸ������֤��ޤ���
+自身が管理するファイルに関する相対パスを文字列で返します。
 
 --- file_relative_name=(val)
 
-���Ȥ���������ե�����˴ؤ������Хѥ���ʸ��������ꤷ�ޤ���
+自身が管理するファイルに関する相対パスを文字列で設定します。
 
-@param val �ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param val パスを文字列で指定します。
 
 --- file_absolute_name -> String
 
-���Ȥ���������ե�����˴ؤ������Хѥ���ʸ������֤��ޤ���
+自身が管理するファイルに関する絶対パスを文字列で返します。
 
 --- file_absolute_name=(val)
 
-���Ȥ���������ե�����˴ؤ������Хѥ���ʸ��������ꤷ�ޤ���
+自身が管理するファイルに関する絶対パスを文字列で設定します。
 
-@param val �ѥ���ʸ����ǻ��ꤷ�ޤ���
+@param val パスを文字列で指定します。

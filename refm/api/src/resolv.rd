@@ -1,11 +1,11 @@
-DNS�ˤ��̾������Ԥ��饤�֥��Ǥ��� Ruby �ǽ񤫤�Ƥ��뤿�� thread-aware �Ǥ��ꡢ�����¿���Υۥ���̾���褹�뤳�Ȥ��Ǥ��ޤ���
+DNSによる名前解決を行うライブラリです。 Ruby で書かれているため thread-aware であり、並列に多くのホスト名を解決することができます。
 
-DNS �⥸�塼���Ȥ����Ȥǡ����ޤ��ޤʥ꥽������ľ�ܥ�å����åפǤ��ޤ���
+DNS モジュールを使うことで、さまざまなリソースを直接ルックアップできます。
 
-�ʤ���ñ�˥ۥ���̾���� IP ���ɥ쥹�������������Ǥ���С�
-[[lib:socket]] �饤�֥��� [[m:IPSocket.getaddress]] �ʤɤ����ѤǤ��ޤ���
+なお、単にホスト名から IP アドレスを得たいだけであれば、
+[[lib:socket]] ライブラリの [[m:IPSocket.getaddress]] などが使用できます。
 
-=== ��:
+=== 例:
   Resolv.getaddress("www.ruby-lang.org")
   Resolv.getname("210.251.121.214").to_s
   Resolv::DNS.new.getresources("www.ruby-lang.org", Resolv::DNS::Resource::IN::A).collect {|r| r.address}
@@ -14,230 +14,230 @@ DNS �⥸�塼���Ȥ����Ȥǡ����ޤ��ޤʥ꥽������ľ�ܥ�å����åפǤ��ޤ���
 
 === Bugs
 #@#NIS is not supported.
-NIS �ϥ��ݡ��Ȥ���Ƥ��ޤ���
+NIS はサポートされていません。
 
 
 = class Resolv < Object
-�꥾��Ф�ɽ�����饹�Ǥ���
-���Υ��饹���Τϼºݤˤ�̾�����򤻤���
-[[m:Resolv.new]] ��Ϳ����줿�꥾��Ф˽��
-��礻�뤳�Ȥ������ޤ���
+リゾルバを表すクラスです。
+このクラス自体は実際には名前解決をせず、
+[[m:Resolv.new]] で与えられたリゾルバに順に
+問合せることしかしません。
 
-���Υ��饹�Υ��饹�᥽�åɤ�̾�����򤷤����ˤϡ�
-������ /etc/hosts, DNS �ν����礻�ޤ���
+このクラスのクラスメソッドで名前解決をした場合には、
+内部で /etc/hosts, DNS の順に問合せます。
 
-�����礻������ǡ�����꥾��Ф�1�İʾ��
-��̤��֤�����硢����ʹߤΥ꥾��Фˤ�
-�䤤��碌�򤷤ޤ���
+順に問合せる過程で、あるリゾルバが1個以上の
+結果を返した場合、それ以降のリゾルバには
+問い合わせをしません。
 
 == Class Methods
 --- new(resolvers = [Hosts.new, DNS.new]) -> Resolv
-resolvers ��Ϳ�����꥾��Ф��������Ƭ������
-̾�������褦�ʡ��������꥽��Х��֥������Ȥ��֤��ޤ���
+resolvers に与えたリゾルバの配列を先頭から順に
+名前解決を試すような、新しいリソルバオブジェクトを返します。
 
-resolvers �γ����Ǥ� each_address �� each_name �Ȥ���
-�᥽�åɤ���äƤ��ʤ���Фʤ�ޤ���
+resolvers の各要素は each_address と each_name という
+メソッドを持っていなければなりません。
 
-@param resolvers �꥾��Ф�����
+@param resolvers リゾルバの配列
 
 --- getaddress(name) -> String
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤κǽ�Υ��ɥ쥹���֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
 
   Resolv.getaddress("localhost") #=> "127.0.0.1"
   Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param name ホスト名を文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getaddresses(name) -> [String]
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤Υ��ɥ쥹�ꥹ�Ȥ��֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
-��å����åפ˼��Ԥ������϶��������֤���ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
+ルックアップに失敗した場合は空の配列が返されます。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
+@param name ホスト名を文字列で与えます。
 
 --- each_address(name) {|address| ...} -> ()
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-�ƥ�å����å׷�̤Υ��ɥ쥹���Ф��ƥ֥��å���ɾ�����ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
+@param name ホスト名を文字列で与えます。
 
 --- getname(address) -> String
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤κǽ�Υۥ���̾��ʸ������֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を文字列で返します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
 
   Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param address IPアドレスを文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getnames(address) -> [String]
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤Υۥ���̾�ꥹ�Ȥ��֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
+@param address IPアドレスを文字列で与えます。
 
 --- each_name(address) {|name| ...} -> ()
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-�ƥ�å����å׷�̤Υۥ���̾���Ф��ƥ֥��å���ɾ�����ޤ���
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
+@param address IPアドレスを文字列で与えます。
 
 == Instance Methods
 
 --- getaddress(name) -> String
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤κǽ�Υ��ɥ쥹���֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param name ホスト名を文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getaddresses(name) -> [String]
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤Υ��ɥ쥹�ꥹ�Ȥ��֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
-��å����åפ˼��Ԥ������϶��������֤���ޤ���
+ルックアップに失敗した場合は空の配列が返されます。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
+@param name ホスト名を文字列で与えます。
 
 --- each_address(name) {|name| ...} -> ()
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-�ƥ�å����å׷�̤Υ��ɥ쥹���Ф��ƥ֥��å���ɾ�����ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
+@param name ホスト名を文字列で与えます。
 
 --- getname(address) -> String
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤κǽ�Υۥ���̾��ʸ������֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を文字列で返します。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param address IPアドレスを文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getnames(address) -> [String]
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤Υۥ���̾�ꥹ�Ȥ��֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
+@param address IPアドレスを文字列で与えます。
 
 --- each_name(address) {|name| ...} -> ()
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-�ƥ�å����å׷�̤Υۥ���̾���Ф��ƥ֥��å���ɾ�����ޤ���
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
+@param address IPアドレスを文字列で与えます。
 
 == Constants
 
 --- DefaultResolver -> Resolv
-[[c:Resolv]] �γƥ��饹�᥽�åɤ�ƤӤ������Ȥ���
-���Ѥ����꥾��ФǤ���
+[[c:Resolv]] の各クラスメソッドを呼びだしたときに
+利用されるリゾルバです。
 
 --- AddressRegex -> Regexp
-IP���ɥ쥹�˥ޥå���������ɽ���Ǥ���
+IPアドレスにマッチする正規表現です。
 
 = class Resolv::ResolvError < StandardError
-̾�����˼��Ԥ����Ȥ���ȯ�������㳰�Υ��饹�Ǥ���
+名前解決に失敗したときに発生する例外のクラスです。
 
 #@# = class Resolv::ResolvTimeout < TimeoutError
-#@# ̾����褬�����ॢ���Ȥ����Ȥ���ȯ�������㳰�Υ��饹�Ǥ���
+#@# 名前解決がタイムアウトしたときに発生する例外のクラスです。
 #@# 
-#@# �����㳰�ϥ饤�֥�������� rescue �����
-#@# Resolv::ResolvError ���Ѵ������Τǡ��桼����
-#@# ���Ѥ��ʤ��Ϥ��Ǥ���
+#@# この例外はライブラリ内部で rescue されて
+#@# Resolv::ResolvError に変換されるので、ユーザは
+#@# 利用しないはずです。
 
 = class Resolv::Hosts < Object
 
-/etc/hosts (Windows �Ǥ���� 
-%SystemRoot%\System32\drivers\etc\hosts �ʤ�)
-����Ѥ���ۥ���̾�꥾��ФǤ���
+/etc/hosts (Windows であれば 
+%SystemRoot%\System32\drivers\etc\hosts など)
+を使用するホスト名リゾルバです。
 
 == Class Methods
 
 --- new(hosts = DefaultFileName) -> Resolv::Hosts
-hosts �Ȥ����ե�����̾�Υե��������󸻤Ȥ���
-�꥾��Ф����������֤��ޤ���
+hosts というファイル名のファイルを情報源とする
+リゾルバを生成し、返します。
 
-@param hosts �ۥ��Ⱦ��󤬽񤫤줿�ե������̾����ʸ�����Ϳ���ޤ���
+@param hosts ホスト情報が書かれたファイルの名前を文字列で与えます。
 
 == Instance Methods
 
 --- getaddress(name) -> String
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤κǽ�Υ��ɥ쥹���֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param name ホスト名を文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getaddresses(name) -> [String]
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤Υ��ɥ쥹�ꥹ�Ȥ��֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
-��å����åפ˼��Ԥ������϶��������֤���ޤ���
+ルックアップに失敗した場合は空の配列が返されます。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
+@param name ホスト名を文字列で与えます。
 
 --- each_address(name) {|name| ...} -> ()
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-�ƥ�å����å׷�̤Υ��ɥ쥹���Ф��ƥ֥��å���ɾ�����ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
 
-@param name �ۥ���̾��ʸ�����Ϳ���ޤ���
+@param name ホスト名を文字列で与えます。
 
 --- getname(address) -> String
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤κǽ�Υۥ���̾��ʸ������֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を文字列で返します。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param address IPアドレスを文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getnames(address) -> [String]
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤Υۥ���̾�ꥹ�Ȥ��֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
+@param address IPアドレスを文字列で与えます。
 
 --- each_name(address) {|name| ...} -> ()
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-�ƥ�å����å׷�̤Υۥ���̾���Ф��ƥ֥��å���ɾ�����ޤ���
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
 
-��å����åפ� /etc/hosts, DNS �ν�ǹԤ��ޤ���
+ルックアップは /etc/hosts, DNS の順で行います。
 
-@param address IP���ɥ쥹��ʸ�����Ϳ���ޤ���
+@param address IPアドレスを文字列で与えます。
 
 #@# --- lazy_initialize -> Resolv::Hosts
 
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
-#@# [[m:Resolv::Hosts.new]] �ǻ��ꤷ���ե�������ɤߤ��ߡ�
-#@# ��å����åץơ��֥���������ޤ���
+#@# [[m:Resolv::Hosts.new]] で指定したファイルを読みこみ、
+#@# ルックアップテーブルを生成します。
 
 == Constants
 
 --- DefaultFileName -> String
 
-�����ƥ�ɸ��Ρ�
-�ۥ��Ⱦ��󤬽񤫤줿�ե������̾���Ǥ���
+システム標準の、
+ホスト情報が書かれたファイルの名前です。
 
 
 = class Resolv::DNS < Object
 
-���Υ��饹�� DNS �����Ѥ���̾�����򤹤�꥾��Ф�
-ɽ���ޤ���
+このクラスは DNS を利用した名前解決をするリゾルバを
+表します。
 
-���Υ��饹�ϼºݤˤϲ��̤Υ��饹�˽�������ꤷ�ޤ���
+このクラスは実際には下位のクラスに処理を依頼します。
 
-DNS�ˤĤ��Ƥϰʲ��򻲾Ȥ��Ƥ���������
+DNSについては以下を参照してください。
   * STD0013
   * [[RFC:1035]]
   * [[url:ftp://ftp.isi.edu/in-notes/iana/assignments/dns-parameters]]
@@ -251,17 +251,17 @@ DNS�ˤĤ��Ƥϰʲ��򻲾Ȥ��Ƥ���������
 --- new(resolv_conf = nil) -> Resolv::DNS
 #@end
 
-������ DNS �꥾��Ф��������ޤ���
+新しい DNS リゾルバを生成します。
 
 #@since 1.8.2
-resolv_conf �� nil �ξ���
-/etc/resolv.conf �⤷���ϥץ�åȥե������ͭ��
-DNS��������Ѥ��ޤ���
-resolv_conf ��ʸ����ξ��� /etc/resolv.conf ��
-Ʊ���ե����ޥåȤΥե��������������Ѥ��ޤ���
-resolv_conf ���ϥå���ξ��ϡ�:nameserver, :search, :ndots
-�Ȥ������������Ѳ�ǽ�Ǥ���
-���줾��ΰ�̣�� [[man:resolv.conf(5)]] �򻲾Ȥ��Ƥ���������
+resolv_conf が nil の場合は
+/etc/resolv.conf もしくはプラットフォーム固有の
+DNS設定を利用します。
+resolv_conf が文字列の場合は /etc/resolv.conf と
+同じフォーマットのファイルを設定に利用します。
+resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
+というキーが利用可能です。
+それぞれの意味は [[man:resolv.conf(5)]] を参照してください。
 
    Resolv::DNS.new(:nameserver => ['210.251.121.21'],
                    :search => ['ruby-lang.org'],
@@ -269,77 +269,77 @@ resolv_conf ���ϥå���ξ��ϡ�:nameserver, :search, :ndots
 #@end
 
 #@if (version <= "1.8.1")
-@param resolv_conf DNS������ե�����̾��ʸ�����Ϳ���ޤ�
+@param resolv_conf DNSの設定ファイル名を文字列で与えます
 #@else
-@param resolv_conf DNS�������Ϳ���ޤ���
+@param resolv_conf DNSの設定を与えます。
 #@end
 
 --- open(*args) -> Resolv::DNS
 --- open(*args){|dns| ...} -> object
 
-������ DNS �꥾��Ф��������ޤ���
-�֥��å���Ϳ�����������������꥾��Фǥ֥��å���ƤӤ�����
-�֥��å���λ���˥꥾��Ф��Ĥ��ޤ���
+新しい DNS リゾルバを生成します。
+ブロックを与えた場合は生成したリゾルバでブロックを呼びだし、
+ブロック終了時にリゾルバを閉じます。
 
-�֥��å���Ϳ���ʤ��ä����� [[m:Resolv::DNS.new]] ��
-Ʊ���Ǥ���
+ブロックを与えなかった場合は [[m:Resolv::DNS.new]] と
+同じです。
 
-@param args DNS�������Ϳ���ޤ�����̣�� [[m:Resolv::DNS.new]] 
-            �ΰ�����Ʊ���Ǥ���
-@return �֥��å���Ϳ�������ϥ֥��å����֤��ͤ��֤���
-        Ϳ���ʤ��ä��������������꥾��Ф��֤��ޤ���
+@param args DNSの設定を与えます。意味は [[m:Resolv::DNS.new]] 
+            の引数と同じです。
+@return ブロックを与えた場合はブロックの返す値を返し、
+        与えなかった場合は生成したリゾルバを返します。
 
 == Instance Methods
 
 --- getaddress(name) -> Resolv::IPv4 | Resolv::IPv6
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤κǽ�Υ��ɥ쥹���֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-@param name �ۥ���̾��ʸ����⤷����[[c:Resolv::DNS::Name]]�Υ��󥹥��󥹤�Ϳ���ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@param name ホスト名を文字列もしくは[[c:Resolv::DNS::Name]]のインスタンスで与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getaddresses(name) -> [Resolv::IPv4 | Resolv::IPv6]
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-��å����å׷�̤Υ��ɥ쥹�ꥹ�Ȥ��֤��ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
-��å����åפ˼��Ԥ������϶��������֤���ޤ���
+ルックアップに失敗した場合は空の配列が返されます。
 
-@param name �ۥ���̾��ʸ����⤷����[[c:Resolv::DNS::Name]]�Υ��󥹥��󥹤�Ϳ���ޤ���
+@param name ホスト名を文字列もしくは[[c:Resolv::DNS::Name]]のインスタンスで与えます。
 
 --- each_address(name) {|name| ...} -> ()
-�ۥ���̾ name �� IP ���ɥ쥹���å����åפ���
-�ƥ�å����å׷�̤Υ��ɥ쥹���Ф��ƥ֥��å���ɾ�����ޤ���
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
 
-@param name �ۥ���̾��ʸ����⤷����[[c:Resolv::DNS::Name]]�Υ��󥹥��󥹤�Ϳ���ޤ���
+@param name ホスト名を文字列もしくは[[c:Resolv::DNS::Name]]のインスタンスで与えます。
 
 --- getname(address) -> Resolv::DNS::Name
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤κǽ�Υۥ���̾���֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を返します。
 
-@param address IP���ɥ쥹��ʸ���� Resolv::IPv4 �Υ��󥹥��󥹡�
-               Resolv::IPv6 �Υ��󥹥��󥹡��Τ����줫Ϳ���ޤ���
+@param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
+               Resolv::IPv6 のインスタンス、のいずれか与えます。
                
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ����Ȥ���ȯ�����ޤ���
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
 --- getnames(address) -> [Resolv::DNS::Name]
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-��å����å׷�̤Υۥ���̾�ꥹ�Ȥ��֤��ޤ���
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
 
-@param address IP���ɥ쥹��ʸ���� Resolv::IPv4 �Υ��󥹥��󥹡�
-               Resolv::IPv6 �Υ��󥹥��󥹡��Τ����줫Ϳ���ޤ���
+@param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
+               Resolv::IPv6 のインスタンス、のいずれか与えます。
 
 --- each_name(address) {|name| ...} -> ()
-IP ���ɥ쥹 address �Υۥ���̾���å����åפ���
-�ƥ�å����å׷�̤Υۥ���̾���Ф��ƥ֥��å���ɾ�����ޤ���
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
 
-@param address IP���ɥ쥹��ʸ���� Resolv::IPv4 �Υ��󥹥��󥹡�
-               Resolv::IPv6 �Υ��󥹥��󥹡��Τ����줫Ϳ���ޤ���
+@param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
+               Resolv::IPv6 のインスタンス、のいずれか与えます。
 
 --- getresource(name, typeclass) -> Resolv::DNS::Resource
-name���б�����DNS�꥽�����쥳���ɤ�������ޤ���
-�ǽ�˸��Ĥ��ä��꥽�������֤��ޤ���
+nameに対応するDNSリソースレコードを取得します。
+最初に見つかったリソースを返します。
 
-typeclass �ϰʲ��Τ����줫�Ǥ���
+typeclass は以下のいずれかです。
   * [[c:Resolv::DNS::Resource::IN::ANY]]
   * [[c:Resolv::DNS::Resource::IN::NS]]
   * [[c:Resolv::DNS::Resource::IN::CNAME]]
@@ -354,19 +354,19 @@ typeclass �ϰʲ��Τ����줫�Ǥ���
   * [[c:Resolv::DNS::Resource::IN::AAAA]]
   * [[c:Resolv::DNS::Resource::IN::SRV]]
 
-��å����å׷�̤� Resolv::DNS::Resource �ʤΥ��֥��饹�ˤΥ��󥹥��󥹤Ȥʤ�ޤ���
-typeclass �� Resolv::DNS::Resource::IN::ANY �ʳ�����ꤷ�����ˤ�
-���Υ��饹�Υ��󥹥��󥹤��֤��ޤ���
+ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
+そのクラスのインスタンスを返します。
 
-@param name ��å����å��оݤȤʤ�̾���� [[c:Resolv::DNS::Name]] �ޤ��� String �ǻ��ꤷ�ޤ���
-@param typeclass �쥳���ɼ��̤���ꤷ�ޤ���
-@raise Resolv::ResolvError ��å����åפ˼��Ԥ�������ȯ�����ޤ���
+@param name ルックアップ対象となる名前を [[c:Resolv::DNS::Name]] または String で指定します。
+@param typeclass レコード種別を指定します。
+@raise Resolv::ResolvError ルックアップに失敗した場合に発生します。
 
 --- getresources(name, typeclass) -> [Resolv::DNS::Resource]
-name���б�����DNS�꥽�����쥳���ɤ�������ޤ���
-���Ĥ��ä��꥽�������Ƥ�����ˤ����֤��ޤ���
+nameに対応するDNSリソースレコードを取得します。
+見つかったリソース全てを配列にして返します。
 
-typeclass �ϰʲ��Τ����줫�Ǥ���
+typeclass は以下のいずれかです。
   * [[c:Resolv::DNS::Resource::IN::ANY]]
   * [[c:Resolv::DNS::Resource::IN::NS]]
   * [[c:Resolv::DNS::Resource::IN::CNAME]]
@@ -381,19 +381,19 @@ typeclass �ϰʲ��Τ����줫�Ǥ���
   * [[c:Resolv::DNS::Resource::IN::AAAA]]
   * [[c:Resolv::DNS::Resource::IN::SRV]]
 
-��å����å׷�̤� Resolv::DNS::Resource �ʤΥ��֥��饹�ˤΥ��󥹥��󥹤Ȥʤ�ޤ���
-typeclass �� Resolv::DNS::Resource::IN::ANY �ʳ�����ꤷ�����ˤ�
-���Υ��饹�Υ��󥹥��󥹤��֤��ޤ���
+ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
+そのクラスのインスタンスを返します。
 
-@param name ��å����å��оݤȤʤ�̾���� [[c:Resolv::DNS::Name]] �ޤ��� String �ǻ��ꤷ�ޤ���
-@param typeclass �쥳���ɼ��̤���ꤷ�ޤ���
+@param name ルックアップ対象となる名前を [[c:Resolv::DNS::Name]] または String で指定します。
+@param typeclass レコード種別を指定します。
 
 --- each_resource(name, typeclass) {|resource| ...} -> ()
 
-name���б�����DNS�꥽�����쥳���ɤ�������ޤ���
-���Ĥ��ä��꥽������ҤȤĤ��ĥ֥��å����Ϥ��ޤ���
+nameに対応するDNSリソースレコードを取得します。
+見つかったリソースをひとつずつブロックに渡します。
 
-typeclass �ϰʲ��Τ����줫�Ǥ���
+typeclass は以下のいずれかです。
   * [[c:Resolv::DNS::Resource::IN::ANY]]
   * [[c:Resolv::DNS::Resource::IN::NS]]
   * [[c:Resolv::DNS::Resource::IN::CNAME]]
@@ -408,59 +408,59 @@ typeclass �ϰʲ��Τ����줫�Ǥ���
   * [[c:Resolv::DNS::Resource::IN::AAAA]]
   * [[c:Resolv::DNS::Resource::IN::SRV]]
 
-��å����å׷�̤� Resolv::DNS::Resource �ʤΥ��֥��饹�ˤΥ��󥹥��󥹤Ȥʤ�ޤ���
-typeclass �� Resolv::DNS::Resource::IN::ANY �ʳ�����ꤷ�����ˤ�
-���Υ��饹�Υ��󥹥��󥹤��֤��ޤ���
+ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
+そのクラスのインスタンスを返します。
 
-@param name ��å����å��оݤȤʤ�̾���� [[c:Resolv::DNS::Name]] �ޤ��� String �ǻ��ꤷ�ޤ���
-@param typeclass �쥳���ɼ��̤���ꤷ�ޤ���
+@param name ルックアップ対象となる名前を [[c:Resolv::DNS::Name]] または String で指定します。
+@param typeclass レコード種別を指定します。
 
 --- close -> ()
 
-DNS�꥾��Ф��Ĥ��ޤ���
+DNSリゾルバを閉じます。
 
 #@# --- extract_resources(msg, name, typeclass) {|resource| ...}
 
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
-#@# DNS�����Ф�������� msg �� name �� typeclass �ǥե��륿��󥰤���
-#@# ���η�̤�֥��å����Ϥ��ޤ���
+#@# DNSサーバからの返答 msg を name と typeclass でフィルタリングし、
+#@# その結果をブロックに渡します。
 
-#@# @param msg DNS�����Ф����������Ϳ���ޤ���[[c:Resolv::DNS::Message]] �Υ��󥹥��󥹤�Ϳ���뤳�Ȥ��Ǥ��ޤ���
-#@# @param name �ե��륿��󥰤���̾������ꤷ�ޤ���
-#@# @param typeclass �ե��륿��󥰤���DNS�쥳���ɼ��̤�ɽ���ޤ���[[m:Resolv::DNS#getresource]] �� typeclass ��Ʊ�����饹��Ϳ���ޤ���
+#@# @param msg DNSサーバからの返答を与えます。[[c:Resolv::DNS::Message]] のインスタンスを与えることができます。
+#@# @param name フィルタリングする名前を指定します。
+#@# @param typeclass フィルタリングするDNSレコード種別を表します。[[m:Resolv::DNS#getresource]] の typeclass と同じクラスを与えます。
 #@# --- lazy_initialize -> Resolv::DNS
 
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
-#@# [[m:Resolv::DNS.new]] ��Ϳ��������ǥ��󥹥��󥹤�ºݤ˽�������ޤ���
+#@# [[m:Resolv::DNS.new]] で与えた設定でインスタンスを実際に初期化します。
 
 == Constants
 
 #@# --- DNSThreadGroup
 
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 
 #@# #@until 1.8.5
-#@# Resolv::DNS���������Ѥ���� [[c:ThreadGroup]] �Ǥ���
+#@# Resolv::DNS内部で利用される [[c:ThreadGroup]] です。
 #@# #@else
-#@# ��������Ϥ�Ϥ����Ѥ���Ƥ��ޤ���
+#@# この定数はもはや利用されていません。
 #@# #@end
 
 --- Port -> Integer
 
-�ǥե���Ȥ� DNS �ݡ����ֹ�Ǥ���
+デフォルトの DNS ポート番号です。
 
 --- UDPSize -> Integer
 
-�ǥե���Ȥ� UDP �ѥ��åȥ������Ǥ���
+デフォルトの UDP パケットサイズです。
 
 #@# = class Resolv::DNS::Requester < Object
 
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
-#@# DNS�����Ф˥ꥯ�����Ȥ����륯�饹�Υ١������饹�Ȥʤ륯�饹�Ǥ���
-#@# �Ѿ��������Ѥ��ޤ���
+#@# DNSサーバにリクエストを送るクラスのベースクラスとなるクラスです。
+#@# 継承して利用します。
 
 #@# == Class Methods
 
@@ -474,7 +474,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 
 #@# = class Resolv::DNS::Requester::Sender
 
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Class Methods
 
@@ -491,7 +491,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 
 #@# = class Resolv::DNS::Requester::UnconnectedUDP < Resolv::DNS::Requester
 
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Class Methods
 
@@ -504,7 +504,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 #@# #@todo
 
 #@# = class Resolv::DNS::Requester::UnconnectedUDP::Sender < Resolv::DNS::Requester::Sender
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Class Methods
 
@@ -518,7 +518,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 
 #@# = class Resolv::DNS::Requester::ConnectedUDP < Resolv::DNS::Requester
 
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Class Methods
 
@@ -531,7 +531,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 #@# #@todo
 
 #@# = class Resolv::DNS::Requester::ConnectedUDP::Sender < Resolv::DNS::Requester::Sender
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Instance Methods
 
@@ -540,7 +540,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 
 #@# = class Resolv::DNS::Requester::TCP < Resolv::DNS::Requester
 
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Class Methods
 
@@ -554,7 +554,7 @@ DNS�꥾��Ф��Ĥ��ޤ���
 
 #@# = class Resolv::DNS::Requester::TCP::Sender < Resolv::DNS::Requester::Sender
 
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 
 #@# == Instance Methods
 
@@ -563,449 +563,449 @@ DNS�꥾��Ф��Ĥ��ޤ���
 
 = class Resolv::DNS::Requester::RequestError < StandardError
 
-DNS �����ФؤΥꥯ�����Ȥ˼��Ԥ�������ȯ�������㳰�Υ��饹�Ǥ���
+DNS サーバへのリクエストに失敗した場合に発生する例外のクラスです。
 
 = class Resolv::DNS::Resource::Generic < Resolv::DNS::Resource
-����DNS�꥽������ݥ��饹�Ǥ���
+汎用DNSリソース抽象クラスです。
 
 == Class Methods
 
 #@# --- new(data) -> Resolv::DNS::Resource::Generic
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
-#@# Resolv::DNS::Resource::Generic �Υ��󥹥��󥹤���������
-#@# �֤��ޤ���
+#@# Resolv::DNS::Resource::Generic のインスタンスを生成して
+#@# 返します。
 
 #@# --- create(type_value, class_value) -> object
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::Generic
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 
 == Instance Methods
 
 #@# --- data -> object
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
-#@# DNS �꥽�����Υǡ������֤��ޤ���
+#@# DNS リソースのデータを返します。
 
 #@# --- encode_rdata(msg) -> ()
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 = class Resolv::DNS::Resource::DomainName < Resolv::DNS::Resource
-DNS�꥽�����Υɥᥤ��̾��ɽ����ݥ��饹�Ǥ���
+DNSリソースのドメイン名を表す抽象クラスです。
 
 == Class Methods
 
 #@# --- new(name) -> Resolv::DNS::Resource::DomainName
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# #@todo
 
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::DomainName
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 == Instance Methods
 
 --- name -> Resolv::DNS::Name
-�ɥᥤ��̾���֤��ޤ���
+ドメイン名を返します。
 
 #@# --- encode_rdata(msg) -> ()
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 = class Resolv::DNS::Resource::NS < Resolv::DNS::Resource::DomainName
 
-DNS �꥽������ NS (������(authoritative)�͡��ॵ����) �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの NS (正式な(authoritative)ネームサーバ) レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� NS �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::NS]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で NS レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::NS]] を使うべきです。
 
 #@# == Constants
 #@#
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@#
-#@# DNS�Υ����꡼�����פ� NS ���б����������ͤǤ���
+#@# DNSのクエリータイプの NS に対応する整数値です。
 
 = class Resolv::DNS::Resource::CNAME < Resolv::DNS::Resource::DomainName
 
-DNS �꥽������ CNAME �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの CNAME レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� CNAME �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::CNAME]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で CNAME レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::CNAME]] を使うべきです。
 
 #@# == Constants
 #@#
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@#
-#@# DNS�Υ����꡼�����פ� CNAME ���б����������ͤǤ���
+#@# DNSのクエリータイプの CNAME に対応する整数値です。
 
 
 = class Resolv::DNS::Resource::SOA < Resolv::DNS::Resource
 
-DNS �꥽������ SOA (Start Of Authority) �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの SOA (Start Of Authority) レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� SOA �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::SOA]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で SOA レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::SOA]] を使うべきです。
 
 == Class Methods
 
 --- new(mname, rname, serial, refresh, retry_, expire, minimum)
-Resolv::DNS::Resource::SOA �Υ��󥹥��󥹤����������֤��ޤ���
+Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 
-@param mname �оݤΥ�����Υޥ�����������ե����뤬¸�ߤ���ۥ���̾
-@param rname �оݤΥɥᥤ��̾�δ�����̾
-@param serial ������ե�����ΥС������
-@param refresh �ץ饤�ޥꥵ���Ф���ι����򥻥�����ꥵ���Ф�
-               �����å���������(��ñ��)
-@param retry ��������ꥵ���Ф��ץ饤�ޥꥵ���Ф���ξ��󹹿�
-             �˼��Ԥ������Υ�ȥ饤������(��ñ��)
-@param expire �ץ饤�ޥꥵ���Ф�����������������ͭ������(��ñ��)
-@param minimum �꥽�����쥳���ɤκǾ� TTL (��ñ��)
+@param mname 対象のゾーンのマスターゾーンファイルが存在するホスト名
+@param rname 対象のドメイン名の管理者名
+@param serial ゾーンファイルのバージョン
+@param refresh プライマリサーバからの更新をセカンダリサーバが
+               チェックする頻度(秒単位)
+@param retry セカンダリサーバがプライマリサーバからの情報更新
+             に失敗した場合のリトライの頻度(秒単位)
+@param expire プライマリサーバから得たゾーン情報の有効期間(秒単位)
+@param minimum リソースレコードの最小 TTL (秒単位)
 
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::SOA
 #@# 
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 == Instance Methods
 
 --- mname -> Resolv::DNS::Name
-�оݤΥ�����Υޥ�����������ե����뤬¸�ߤ���ۥ���̾���֤��ޤ���
+対象のゾーンのマスターゾーンファイルが存在するホスト名を返します。
 
 --- rname -> Resolv::DNS::Name
-�оݤΥɥᥤ��̾�δ�����̾���֤��ޤ���
+対象のドメイン名の管理者名を返します。
 
 --- serial -> Integer
-������ե�����ΥС��������֤��ޤ���
+ゾーンファイルのバージョンを返します。
 
 --- refresh -> Integer
-�ץ饤�ޥꥵ���Ф���ι����򥻥�����ꥵ���Ф������å�����
-���٤���ñ�̤��֤��ޤ���
+プライマリサーバからの更新をセカンダリサーバがチェックする
+頻度を秒単位で返します。
 
 --- retry -> Integer
-��������ꥵ���Ф��ץ饤�ޥꥵ���Ф���ξ��󹹿��˼��Ԥ�������
-���ø�˥�ȥ饤���뤫���֤��ޤ���
+セカンダリサーバがプライマリサーバからの情報更新に失敗した場合に
+何秒後にリトライするかを返します。
 
 --- expire -> Integer
-�ץ饤�ޥꥵ���Ф����������������򥻥�����ꥵ���Ф�
-���ô�ͭ���ʤ�ΤȤ����ݻ����뤫���֤��ޤ���
+プライマリサーバから得たゾーン情報をセカンダリサーバが
+何秒間有効なものとして保持するかを返します。
 
 --- minimum -> Integer
-�꥽�����쥳���ɤ� TTL ���ͤȤ��ƻȤ���Ǿ����ÿ���
-�֤��ޤ���
+リソースレコードで TTL の値として使われる最小の秒数を
+返します。
 
 
 #@# --- encode_rdata(msg) -> ()
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# #@todo
 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ SOA ���б����������ͤǤ���
+#@# DNS のクエリータイプ SOA に対応する整数値です。
 
 = class Resolv::DNS::Resource::PTR < Resolv::DNS::Resource::DomainName
-DNS �꥽������ PTR �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの PTR レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� PTR �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::PTR]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で PTR レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::PTR]] を使うべきです。
 
 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ PTR ���б����������ͤǤ���
+#@# DNS のクエリータイプ PTR に対応する整数値です。
 
 = class Resolv::DNS::Resource::HINFO < Resolv::DNS::Resource
-DNS �꥽������ HINFO �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの HINFO レコード
+を表す抽象クラスです。
 
-���Υ쥳���ɤϥۥ��ȤΥϡ��ɥ������ȥ��եȥ������ξ����
-�ݻ����Ƥ��ޤ���
+このレコードはホストのハードウェアとソフトウェアの情報を
+保持しています。
 
-[[m:Resolv::DNS#getresource]] �� HINFO �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::HINFO]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で HINFO レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::HINFO]] を使うべきです。
 
 == Class Methods
 
 --- new(cpu, os) -> Resolv::DNS::Resource::HINFO
-Resolv::DNS::Resource::HINFO �Υ��󥹥��󥹤��������ޤ���
+Resolv::DNS::Resource::HINFO のインスタンスを生成します。
 
-@param cpu CPU ̾
-@param os OS ̾
+@param cpu CPU 名
+@param os OS 名
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::HINFO
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# #@todo
 
 == Instance Methods
 
 --- cpu -> String
-�ۥ��ȤǻȤ��� CPU ̾(�ϡ��ɥ�����̾)���֤��ޤ���
+ホストで使われる CPU 名(ハードウェア名)を返します。
 
 --- os -> String
-�ۥ��ȤǻȤ��� OS ̾���֤��ޤ���
+ホストで使われる OS 名を返します。
 
 #@# --- encode_rdata(msg) -> ()
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# #@todo
 #@# 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ HINFO ���б����������ͤǤ���
+#@# DNS のクエリータイプ HINFO に対応する整数値です。
 
 = class Resolv::DNS::Resource::MINFO < Resolv::DNS::Resource
 
-DNS �꥽������ MINFO �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの MINFO レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� MINFO �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::MINFO]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で MINFO レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::MINFO]] を使うべきです。
 
 == Class Methods
 
 --- new(rmailbx, emailbx) -> Resolv::DNS::Resource::MINFO
-Resolv::DNS::Resource::MINFO �Υ��󥹥��󥹤��������ޤ���
+Resolv::DNS::Resource::MINFO のインスタンスを生成します。
 
-@param rmailbx ���Υ᡼��ꥹ�ȥɥᥤ��̾
+@param rmailbx このメールリストドメイン名
 @param emailbx
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::MINFO
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 == Instance Methods
 
 --- rmailbx -> String
-�᡼��󥰥ꥹ�Ȥ⤷���ϥ᡼��ܥå�����
-��Ǥ�ԤΥɥᥤ��̾���֤��ޤ���
+メーリングリストもしくはメールボックスの
+責任者のドメイン名を返します。
 
 --- emailbx -> String
-�᡼��󥰥ꥹ�Ȥ⤷���ϥ᡼��ܥå�����
-���顼��������᡼��ܥå����Υɥᥤ��̾��
-�֤��ޤ���
+メーリングリストもしくはメールボックスの
+エラーを受け取るメールボックスのドメイン名を
+返します。
 
 #@# --- encode_rdata(msg) -> ()
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ MINFO ���б����������ͤǤ���
+#@# DNS のクエリータイプ MINFO に対応する整数値です。
 
 = class Resolv::DNS::Resource::MX < Resolv::DNS::Resource
 
-DNS �꥽������ MX �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの MX レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� MX �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::MX]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で MX レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::MX]] を使うべきです。
 
 == Class Methods
 
 --- new(preference, exchange) -> Resolv::DNS::Resource::MX
-Resolv::DNS::Resource::MX �Υ��󥹥��󥹤��֤��ޤ���
+Resolv::DNS::Resource::MX のインスタンスを返します。
 
-@param preference MX��ͥ����
-@param exchange MX�Υۥ���
+@param preference MXの優先度
+@param exchange MXのホスト
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::MX
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# #@todo 
 
 == Instance Methods
 
 --- preference -> Integer
-����MX�쥳���ɤ�ͥ���٤��֤��ޤ���
+このMXレコードの優先度を返します。
 
 --- exchange -> Resolv::DNS::Name
-MX�Υۥ���̾���֤��ޤ���
+MXのホスト名を返します。
 
 #@# --- encode_rdata(msg) -> ()
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# #@todo
 #@# 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ MX ���б����������ͤǤ���
+#@# DNS のクエリータイプ MX に対応する整数値です。
 
 = class Resolv::DNS::Resource::TXT < Resolv::DNS::Resource
-DNS �꥽������ TXT �쥳����
-��ɽ����ݥ��饹�Ǥ���
+DNS リソースの TXT レコード
+を表す抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �� TXT �쥳���ɤ�����������
-[[c:Resolv::DNS::Resource::IN::TXT]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] で TXT レコードを得たい場合は
+[[c:Resolv::DNS::Resource::IN::TXT]] を使うべきです。
 
 
 == Class Methods
 
 --- new(first_string, *rest_strings) -> Resolv::DNS::Resource::TXT
-Resolv::DNS::Resource::TXT�Υ��󥹥��󥹤��������ޤ���
+Resolv::DNS::Resource::TXTのインスタンスを生成します。
 
-@param first_string �쥳���ɤκǽ��ʸ����
-@param rest_strings �쥳���ɤλĤ��ʸ����
+@param first_string レコードの最初の文字列
+@param rest_strings レコードの残りの文字列
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::TXT
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 == Instance Methods
 
 #@# --- encode_rdata(msg) -> ()
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 --- data -> String
-TXT �쥳���ɤκǽ��ʸ������֤��ޤ���
+TXT レコードの最初の文字列を返します。
 
 --- strings -> [String]
-TXT �쥳���ɤ�ʸ�����������֤��ޤ���
+TXT レコードの文字列を配列で返します。
 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ MX ���б����������ͤǤ���
+#@# DNS のクエリータイプ MX に対応する整数値です。
 
 = class Resolv::DNS::Resource::ANY < Resolv::DNS::Query 
-DNS �Τ��٤ƤΥ��饹���Ф��륯���꡼��ɽ�魯
-��ݥ��饹�Ǥ���
+DNS のすべてのクラスに対するクエリーを表わす
+抽象クラスです。
 
-[[m:Resolv::DNS#getresource]] �Ǥ�
-[[c:Resolv::DNS::Resource::IN::ANY]] ��Ȥ��٤��Ǥ���
+[[m:Resolv::DNS#getresource]] では
+[[c:Resolv::DNS::Resource::IN::ANY]] を使うべきです。
 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ ANY ���б����������ͤǤ���
+#@# DNS のクエリータイプ ANY に対応する整数値です。
 
 = module Resolv::DNS::Resource::IN
-DNS �Υ��󥿡��ͥåȥ��饹�꥽������ɽ���⥸�塼��Ǥ���
+DNS のインターネットクラスリソースを表すモジュールです。
 
-���󥿡��ͥåȥ��饹�꥽���������Ѥ��� class ��
-mixin�������Ѥ��ޤ���
+インターネットクラスリソースを利用する class に
+mixinして利用します。
 
 #@# == Constants
 #@# 
 #@# --- ClassValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ��饹 IN ���б����������ͤǤ���
+#@# DNS のクラス IN に対応する整数値です。
 
 = class Resolv::DNS::Resource::IN::NS < Resolv::DNS::Resource::NS
-DNS �꥽�����Υ��饹 IN�������� NS ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ NS に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::CNAME < Resolv::DNS::Resource::CNAME
-DNS �꥽�����Υ��饹 IN�������� CNAME ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ CNAME に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::SOA < Resolv::DNS::Resource::SOA
-DNS �꥽�����Υ��饹 IN�������� SOA ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ SOA に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::HINFO < Resolv::DNS::Resource::HINFO
-DNS �꥽�����Υ��饹 IN�������� HINFO ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ HINFO に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::MINFO < Resolv::DNS::Resource::MINFO
-DNS �꥽�����Υ��饹 IN�������� MINFO ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ MINFO に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::MX < Resolv::DNS::Resource::MX
-DNS �꥽�����Υ��饹 IN�������� MX ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ MX に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::TXT < Resolv::DNS::Resource::TXT
-DNS �꥽�����Υ��饹 IN�������� TXT ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ TXT に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::ANY < Resolv::DNS::Resource::ANY
-DNS �����꡼�Υ��饹 IN�������� ANY ���б�����
-���饹�Ǥ���
+DNS クエリーのクラス IN、タイプ ANY に対応する
+クラスです。
 
 #@# == Constants
 #@# 
 #@# --- ClassValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ��饹 IN ���б����������ͤǤ���
+#@# DNS のクラス IN に対応する整数値です。
 
 = class Resolv::DNS::Resource::IN::A < Resolv::DNS::Resource
-DNS �꥽�����Υ��饹 IN�������� A ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ A に対応する
+クラスです。
 
-IPv4���ɥ쥹�꥽������ɽ���ޤ���
+IPv4アドレスリソースを表します。
 
 == Class Methods
 
 --- new(address) -> Resolv::DNS::Resource::IN::A
-Resolv::DNS::Resource::IN::A �Υ��󥹥��󥹤�
-�������ޤ���
+Resolv::DNS::Resource::IN::A のインスタンスを
+生成します。
 
-@param address IPv4���ɥ쥹
+@param address IPv4アドレス
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::IN::A
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 == Instance Methods
 
 --- address -> Resolv::IPv4
-IPv4���ɥ쥹���֤��ޤ���
+IPv4アドレスを返します。
 
 #@# --- encode_rdata(msg) -> ()
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# == Constants
 #@# 
 #@# --- TypeValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
-#@# DNS �Υ����꡼������ A ���б����������ͤǤ���
+#@# DNS のクエリータイプ A に対応する整数値です。
 
 
 = class Resolv::DNS::Resource::IN::WKS < Resolv::DNS::Resource
-DNS �꥽�����Υ��饹 IN�������� WKS ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ WKS に対応する
+クラスです。
 
 == Class Methods
 
 --- new(address, protocol, bitmap) -> Resolv::DNS::Resource::IN::WKS
-Resolv::DNS::Resource::IN::WKS �Υ��󥹥��󥹤��������ޤ���
+Resolv::DNS::Resource::IN::WKS のインスタンスを生成します。
 
-@param address IPv4���ɥ쥹
-@param protocol IP�ץ��ȥ����ֹ�
-@param bitmap �ӥåȥޥå�
+@param address IPv4アドレス
+@param protocol IPプロトコル番号
+@param bitmap ビットマップ
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::IN::WKS
 #@# #@todo
@@ -1013,24 +1013,24 @@ Resolv::DNS::Resource::IN::WKS �Υ��󥹥��󥹤��������ޤ���
 == Instance Methods
 
 --- address -> Resolv::IPv4
-IPv4���ɥ쥹���֤��ޤ���
+IPv4アドレスを返します。
 
 --- protocol -> Integer
-IP�ץ��ȥ����ֹ���֤��ޤ���
+IPプロトコル番号を返します。
 
-�㤨�� 6 �� TCP ���б����ޤ���
+例えば 6 は TCP に対応します。
 
 --- bitmap -> String
-���Υۥ��Ȥ����Ѳ�ǽ�ʥ����ӥ��Υӥåȥޥåפ��֤��ޤ���
+そのホストで利用可能なサービスのビットマップを返します。
 
-�㤨�� [[m:Resolv::DNS::Resource::IN::WKS#protocol]] �� 6 (TCP)
-�ξ�硢26���ܤΥӥåȤϥݡ���25�Υ����ӥ�(SMTP)���б����Ƥ��ޤ���
-���ΥӥåȤ�Ω�äƤ���ʤ�� SMTP �����Ѳ�ǽ�Ǥ��ꡢ
-�����Ǥʤ�������ѤǤ��ޤ���
+例えば [[m:Resolv::DNS::Resource::IN::WKS#protocol]] が 6 (TCP)
+の場合、26番目のビットはポート25のサービス(SMTP)に対応しています。
+このビットが立っているならば SMTP は利用可能であり、
+そうでなければ利用できません。
 
 #@# --- encode_rdata(msg) -> ()
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# == Constants
 #@# 
@@ -1038,35 +1038,35 @@ IP�ץ��ȥ����ֹ���֤��ޤ���
 #@# #@todo
 
 = class Resolv::DNS::Resource::IN::PTR < Resolv::DNS::Resource::PTR
-DNS �꥽�����Υ��饹 IN�������� PTR ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ PTR に対応する
+クラスです。
 
 = class Resolv::DNS::Resource::IN::AAAA < Resolv::DNS::Resource
-DNS �꥽�����Υ��饹 IN�������� AAAA ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ AAAA に対応する
+クラスです。
 
-IPv6���ɥ쥹�꥽������ɽ���ޤ���
+IPv6アドレスリソースを表します。
 
 == Class Methods
 
 --- new(address) -> Resolv::DNS::Resource::IN::AAAA
-Resolv::DNS::Resource::IN::AAAA �Υ��󥹥��󥹤�
-�������ޤ���
+Resolv::DNS::Resource::IN::AAAA のインスタンスを
+生成します。
 
-@param address IPv6���ɥ쥹
+@param address IPv6アドレス
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::IN::AAAA
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 == Instance Methods
 
 --- address -> Resolv::IPv6
-IPv6���ɥ쥹���֤��ޤ���
+IPv6アドレスを返します。
 
 #@# --- encode_rdata(msg) -> ()
 #@# #@todo
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# == Constants
 #@# 
@@ -1076,21 +1076,21 @@ IPv6���ɥ쥹���֤��ޤ���
 #@if (version >= "1.8.3")
 
 = class Resolv::DNS::Resource::IN::SRV < Resolv::DNS::Resource
-DNS �꥽�����Υ��饹 IN�������� SRV ���б�����
-���饹�Ǥ���
+DNS リソースのクラス IN、タイプ SRV に対応する
+クラスです。
 
-[[RFC:2782]] ���������Ƥ��ޤ���
-���Ѳ�ǽ�ʥ����ӥ��Υۥ���̾�ȥݡ����ֹ����ꤹ��쥳���ɤǤ���
+[[RFC:2782]] で定義されています。
+利用可能なサービスのホスト名とポート番号を指定するレコードです。
 
 == Class Methods
 
 --- new(priority, weight, port, target) -> Resolv::DNS::Resource::IN::SRV
-Resolv::DNS::Resource::IN::SRV �Υ��󥹥��󥹤��������ޤ���
+Resolv::DNS::Resource::IN::SRV のインスタンスを生成します。
 
-@param priority �ۥ��Ȥ�ͥ����
+@param priority ホストの優先順位
 @param weight
-@param port �ݡ����ֹ�
-@param target �ۥ���̾
+@param port ポート番号
+@param target ホスト名
 
 #@# --- decode_rdata(msg)
 #@# #@todo
@@ -1101,31 +1101,31 @@ Resolv::DNS::Resource::IN::SRV �Υ��󥹥��󥹤��������ޤ���
 #@# #@todo
 
 --- port -> Integer
-�оݤΥ����ӥ����оݤΥۥ��Ȥˤ�����ݡ����ֹ���֤��ޤ���
+対象のサービスの対象のホストにおけるポート番号を返します。
 
 --- priority -> Integer
-�ۥ��Ȥ�ͥ���̤��֤��ޤ���
+ホストの優先順位を返します。
 
-���饤����Ȥ����Ѳ�ǽ�ʥۥ��Ȥ���ǺǤ� priority ��
-���������ͤΥۥ��Ȥ����Ѥ��ʤ���Фʤ�ޤ���
+クライアントは利用可能なホストの中で最も priority が
+小さい数値のホストを利用しなければなりません。
 
-priority ��Ʊ���ʤ�� [[m:Resolv::DNS::Resource::IN::SRV#weight]]
-����������褦�˥ۥ��Ȥ����֤٤��Ǥ���
+priority が同じならば [[m:Resolv::DNS::Resource::IN::SRV#weight]]
+で定義されるようにホストを選ぶべきです。
 
-�֤��ͤ��ϰϤ� 0 ���� 65535 �ޤǤ������ͤǤ���
+返り値の範囲は 0 から 65535 までの整数値です。
 
 --- target -> Resolv::DNS::Name
-�оݤΥۥ��ȤΥۥ���̾���֤��ޤ���
+対象のホストのホスト名を返します。
 
 --- weight -> Integer
-�����Ф����򤹤뤿��ΡֽŤߡפǤ���
+サーバを選択するための「重み」です。
 
-[[m:Resolv::DNS::Resource::IN::SRV#priority]] ��Ʊ������
-���ι��ܤ����Ѥ���ޤ���
-�Ťߤ����㤷����Ψ�ǥۥ��Ȥ����򤹤٤��Ǥ���
-�֤��ͤ��ϰϤ� 0 ���� 65535 �ޤǤ������Ǥ���
-����褬��Ĥ����ʤ����Ĥޤ����򤹤�ɬ�פ��ʤ����ˤ�
-�����ͤϿʹ֤��ɤߤ䤹���褦 0 �ˤ��٤��Ǥ���
+[[m:Resolv::DNS::Resource::IN::SRV#priority]] が同じ場合に
+この項目が利用されます。
+重みに比例した確率でホストを選択すべきです。
+返り値の範囲は 0 から 65535 までの整数です。
+選択肢が一つしかない、つまり選択する必要がない場合には
+この値は人間が読みやすいよう 0 にすべきです。
 
 
 #@# == Constants
@@ -1136,7 +1136,7 @@ priority ��Ʊ���ʤ�� [[m:Resolv::DNS::Resource::IN::SRV#weight]]
 #@end
 
 #@# = module Resolv::DNS::OpCode
-#@# ���Υ⥸�塼��ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このモジュールはユーザが使うべきではありません。
 #@# == Constants
 #@# 
 #@# --- Query
@@ -1213,22 +1213,22 @@ priority ��Ʊ���ʤ�� [[m:Resolv::DNS::Resource::IN::SRV#weight]]
 #@# #@todo
 
 = class Resolv::DNS::DecodeError < StandardError
-DNS��å������Υǥ����ɤ˼��Ԥ����Ȥ���ȯ������
-�㳰�Υ��饹�Ǥ���
+DNSメッセージのデコードに失敗したときに発生する
+例外のクラスです。
 
-DNS�����Ф���α���������Ū���������ʤ����ʤɤ�
-ȯ�����ޤ���
+DNSサーバからの応答が規格的に正しくない場合などに
+発生します。
 
 = class Resolv::DNS::EncodeError < StandardError
-DNS��å������Υ��󥳡��ɤ˼��Ԥ����Ȥ���ȯ������
-�㳰�Υ��饹�Ǥ���
+DNSメッセージのエンコードに失敗したときに発生する
+例外のクラスです。
 
-�̾盧�Υ��顼��ȯ�����ޤ���
-�⤷ȯ�������ʤ�Х饤�֥��ΥХ��Ǥ����ǽ��������ޤ���
+通常このエラーは発生しません。
+もし発生したならばライブラリのバグである可能性があります。
 
 
 #@# = class Resolv::DNS::Config
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 #@# 
 #@# 
 #@# == Class Methods
@@ -1265,18 +1265,18 @@ DNS��å������Υ��󥳡��ɤ˼��Ԥ����Ȥ���ȯ������
 #@# #@todo
 
 #@# = class Resolv::DNS::Config::NXDomain < Resolv::ResolvError
-#@# ��礻���ɥᥤ��̾��¸�ߤ��ʤ����Ȥ򼨤��㳰��
+#@# 問合せたドメイン名が存在しないことを示す例外。
 #@# 
-#@# �饤�֥�������ǰ����٤�����桼���ϻȤ�ʤ��Ϥ���
+#@# ライブラリ内部で握り潰すためユーザは使わないはず。
 #@# 
 
 = class Resolv::DNS::Config::OtherResolvError < Resolv::ResolvError
-DNS �����Ф���α��������顼�Ǥ��ä�����ȯ�������㳰�Ǥ���
+DNS サーバからの応答がエラーであった場合に発生する例外です。
 
-Resolv::DNS�γƥ᥽�åɤ������㳰��ȯ���������ǽ��������ޤ���
+Resolv::DNSの各メソッドがこの例外を発生させる可能性があります。
 
 #@# = class Resolv::DNS::Message < Object
-#@# ���Υ��饹�ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このクラスはユーザが使うべきではありません。
 #@# == Class Method
 #@# 
 #@# --- new(id = ((@@identifier += 1) & 0xffff))
@@ -1388,43 +1388,43 @@ Resolv::DNS�γƥ᥽�åɤ������㳰��ȯ���������ǽ��������ޤ���
 
 = class Resolv::DNS::Query < Object
 
-DNS�������ɽ����ݥ��饹�Ǥ���
+DNSクエリを表す抽象クラスです。
 
 #@# == Class Methods
 #@# 
 #@# --- decode_rdata(msg)
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# == Instance Method
 #@# 
 #@# --- encode_rdata(msg)
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 #@# 
 #@# = module Resolv::DNS::Label
-#@# �桼�������Υ⥸�塼���Ȥ�ɬ�פϤʤ��Ǥ��礦��
+#@# ユーザがこのモジュールを使う必要はないでしょう。
 #@# 
-#@# �ɥᥤ��̾���갷������Υ桼�ƥ���ƥ��⥸�塼��Ǥ���
-#@# [[c:Resolv::DNS::Name]] ����Ȥ��ޤ���
+#@# ドメイン名を取り扱うためのユーティリティモジュールです。
+#@# [[c:Resolv::DNS::Name]] から使われます。
 #@# 
 #@# == Class Methods
 #@# 
 #@# --- split(name) -> [Resolv::DNS::Label::Str]
-#@# ʸ���� name ��ʬ�䤷�ơ� [[c:Resolv::DNS::Label::Str]] ��������֤��ޤ���
+#@# 文字列 name を分割して、 [[c:Resolv::DNS::Label::Str]] の配列を返します。
 #@# 
-#@# @paarm name �ɥᥤ��̾��ʸ����
+#@# @paarm name ドメイン名の文字列。
 #@# 
 #@# = class Resolv::DNS::Label::Str
-#@# �桼�������Υ��饹��Ȥ�ɬ�פϤʤ��Ǥ��礦��
+#@# ユーザがこのクラスを使う必要はないでしょう。
 #@# 
-#@# �ɥᥤ��̾��ɥåȤ�ʬ�䤷�������Ǥ�ɽ�����饹�Ǥ���
+#@# ドメイン名をドットで分割した各要素を表すクラスです。
 #@# 
-#@# ʸ���������ʸ���Ⱦ�ʸ����Ʊ��뤹�뤿���¸�ߤ��륯�饹�Ǥ���
+#@# 文字列中の大文字と小文字を同一視するために存在するクラスです。
 #@# 
 #@# == Class Methods
 #@# 
 #@# --- new(string) -> Resolv::DNS::Label::Str
-#@# ʸ���� string ���� [[c:Resolv::DNS::Label::Str]]�Υ��󥹥��󥹤��������ޤ���
+#@# 文字列 string から [[c:Resolv::DNS::Label::Str]]のインスタンスを生成します。
 #@# 
 #@# @param string 
 #@# 
@@ -1432,60 +1432,60 @@ DNS�������ɽ����ݥ��饹�Ǥ���
 #@# 
 #@# --- string -> String
 #@# --- to_s -> String
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
-#@# [[m:Resolv::DNS::Label::Str.new]] �ǰ�����Ϳ����ʸ������֤��ޤ���
+#@# [[m:Resolv::DNS::Label::Str.new]] で引数に与えた文字列を返します。
 #@# 
 #@# --- downcase -> String
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
-#@# [[m:Resolv::DNS::Label::Str.new]] �ǰ�����Ϳ����ʸ�����ʸ���ˤ����֤��ޤ���
+#@# [[m:Resolv::DNS::Label::Str.new]] で引数に与えた文字列を小文字にして返します。
 #@# 
 
 = class Resolv::DNS::Name < Object
-�ɥᥤ��̾��ɽ�����饹�Ǥ���
+ドメイン名を表すクラスです。
 
 == Class Methods
 
 --- create(name) -> Resolv::DNS::Name
-ʸ���� name ���� Resolv::DNS::Name �Υ��󥹥��󥹤��������ޤ���
+文字列 name から Resolv::DNS::Name のインスタンスを生成します。
 
-@param name �ɥᥤ��̾��ʸ���󡣺Ǹ��"."���֤������Хѥ������������Ǥʤ�������Хѥ������Ȥߤʤ���ޤ���
+@param name ドメイン名の文字列。最後に"."を置くと絶対パス形式、そうでなければ相対パス形式とみなされます。
 
 --- new(labels, absolute = true) -> Resolv::DNS::Name
-Resolv::DNS::Name�Υ��󥹥��󥹤��������ޤ���
-labels �� [[c:Resolv::DNS::Label::Str]] �������Ϳ���ޤ���
+Resolv::DNS::Nameのインスタンスを生成します。
+labels は [[c:Resolv::DNS::Label::Str]] の配列を与えます。
 
-@param labels �ɥᥤ��̾�� [[c:Resolv::DNS::Label::Str]] ������Ȥ���Ϳ���ޤ���
-@param absolute �ɥᥤ��̾�����Хѥ��Ǥ��뤫�ɤ����� �����ͤ�Ϳ���ޤ���
+@param labels ドメイン名を [[c:Resolv::DNS::Label::Str]] の配列として与えます。
+@param absolute ドメイン名が絶対パスであるかどうかを 真偽値で与えます。
 
 @see [[m:Resolv::DNS::Name.create]]
 
 == Instance Methods
 
 #@# --- to_a -> [Resolv::DNS::Label::Str]
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 
 --- to_s -> String
-�ɥᥤ��̾��ʸ����Ȥ����֤��ޤ���
+ドメイン名を文字列として返します。
 
-���Хѥ������Ǥ��äƤ��֤����ʸ����ˤϺǸ�ΥɥåȤϴޤޤ�ޤ���
+絶対パス形式であっても返される文字列には最後のドットは含まれません。
 
 #@# --- [](i) -> Resolv::DNS::Label::Str
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 #@# 
 
 --- absolute? -> bool
-���Хѥ������Ǥ��뤫�ɤ������֤��ޤ���
+絶対パス形式であるかどうかを返します。
 
 #@# --- length
-#@# ���Υ᥽�åɤϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# このメソッドはユーザが使うべきではありません。
 
 --- subdomain_of?(other) -> bool
-other �� self �Υ��֥ɥᥤ��Ǥ��뤫�ɤ������֤��ޤ���
+other が self のサブドメインであるかどうかを返します。
 
-=== ��
+=== 例
   domain = Resolv::DNS::Name.create("y.z")
   p Resolv::DNS::Name.create("w.x.y.z").subdomain_of?(domain) #=> true
   p Resolv::DNS::Name.create("x.y.z").subdomain_of?(domain) #=> true
@@ -1496,7 +1496,7 @@ other �� self �Υ��֥ɥᥤ��Ǥ��뤫�ɤ������֤��ޤ���
   
 
 = class Resolv::DNS::Resource < Resolv::DNS::Query
-DNS�꥽������ɽ����ݥ��饹�Ǥ���
+DNSリソースを表す抽象クラスです。
 
 #@# == Class Methods
 #@# 
@@ -1512,58 +1512,58 @@ DNS�꥽������ɽ����ݥ��饹�Ǥ���
 #@# == Constants
 #@# 
 #@# --- ClassHash
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
 #@# --- ClassValue
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
 #@# --- ClassInsensitiveTypes
-#@# ��������ϥ桼�����Ȥ��٤��ǤϤ���ޤ���
+#@# この定数はユーザが使うべきではありません。
 #@# 
 
 = class Resolv::IPv4 < Object
-IPv4�Υ��ɥ쥹��ɽ�����饹�Ǥ���
+IPv4のアドレスを表すクラスです。
 
 == Class Methods
 
 --- create(address) -> Resolv::IPv4
 
-"192.168.0.1" �Τ褦�� "." �Ƕ��ڤ�줿 IPv4 ɽ����ʸ���� address ����
-Resolv::IPv4 �Υ��󥹥��󥹤��������ޤ���
+"192.168.0.1" のように "." で区切られた IPv4 表記の文字列 address から
+Resolv::IPv4 のインスタンスを生成します。
 
-@param address IPv4 ɽ����ʸ����
+@param address IPv4 表記の文字列
 
 --- new(address) -> Resolv::IPv4
 
-4 byte ��ʸ���� address ���� Resolv::IPv4 �Υ��󥹥��󥹤��������ޤ���
+4 byte の文字列 address から Resolv::IPv4 のインスタンスを生成します。
 
-@param address 4 byte �ΥХ��ʥ���� IPv4 �Υ��ɥ쥹
+@param address 4 byte のバイナリ列の IPv4 のアドレス
 @see [[m:Resolv::IPv4.create]] 
 
 
 == Instance Methods
 
 --- address -> String
-4byte �Х������ IPv4 ���ɥ쥹���֤��ޤ���
+4byte バイト列の IPv4 アドレスを返します。
 
 --- to_s -> String
-�ɥåȤǶ��ڤ�줿 IPv4 ���ɥ쥹ʸ������֤��ޤ���
+ドットで区切られた IPv4 アドレス文字列を返します。
 
 --- to_name -> Resolv::DNS::Name
-"x.y.z.w.in-addr.arpa." �Ȥ������Υɥᥤ��̾���֤��ޤ���
+"x.y.z.w.in-addr.arpa." という形のドメイン名を返します。
 
 == Constants
 
 --- Regex -> Regexp
-IPv4 �Υ��ɥ쥹������ɽ���Ǥ���
+IPv4 のアドレスの正規表現です。
 
 = class Resolv::IPv6 < Object
-IPv6 �Υ��ɥ쥹��ɽ�����饹�Ǥ���
+IPv6 のアドレスを表すクラスです。
 
 == Class Methods
 
 --- create(address)
-�ʲ��Τ����줫�η�����ʸ���� address ���� Resolv::IPv6 �Υ��󥹥��󥹤��������ޤ���
+以下のいずれかの形式の文字列 address から Resolv::IPv6 のインスタンスを生成します。
 
 
   * 8Hex
@@ -1571,43 +1571,43 @@ IPv6 �Υ��ɥ쥹��ɽ�����饹�Ǥ���
   * 6Hex4Dec
   * CompressedHex4Dec
 
-@param address human readable �� IPv6 ���ɥ쥹��ʸ����ɽ��
+@param address human readable な IPv6 アドレスの文字列表現
 
 --- new(address)
-16 byte ��ʸ���� address ���� Resolv::IPv6 �Υ��󥹥��󥹤��������ޤ���
+16 byte の文字列 address から Resolv::IPv6 のインスタンスを生成します。
 
-@param address IPv6���ɥ쥹��ɽ�� 16 byte ��ʸ����(�Х�����)
+@param address IPv6アドレスを表す 16 byte の文字列(バイト列)
 @see [[m:Resolv::IPv6.create]]
 
 == Instance Methods
 
 --- address -> String
-IPv6���ɥ쥹��ɽ�� 16 byte ��ʸ����(�Х�����)���֤��ޤ���
+IPv6アドレスを表す 16 byte の文字列(バイト列)を返します。
 
 --- to_s -> String
-IPv6 ���ɥ쥹��ʸ����ɽ�����֤��ޤ���
+IPv6 アドレスの文字列表現を返します。
 
 --- to_name -> Resolv::DNS::Name
-"h.g.f.e.d.c.b.a.ip6.arpa." �Ȥ��� DNS ̾���֤��ޤ���
+"h.g.f.e.d.c.b.a.ip6.arpa." という DNS 名を返します。
 
 
 == Constants
 
 --- Regex -> Regexp
-IPv6�Υ��ɥ쥹������ɽ���Ǥ���
+IPv6のアドレスの正規表現です。
 [[m:Resolv::IPv6::Regex_6Hex4Dec]],
 [[m:Resolv::IPv6::Regex_8Hex]],
 [[m:Resolv::IPv6::Regex_CompressedHex]],
 [[m:Resolv::IPv6::Regex_CompressedHex4Dec]],
-�Τ����줫�ȥޥå�����ʸ����ȥޥå����ޤ���
+のいずれかとマッチする文字列とマッチします。
 
 --- Regex_6Hex4Dec -> Regexp
 --- Regex_8Hex -> Regexp
 --- Regex_CompressedHex -> Regexp
 --- Regex_CompressedHex4Dec -> Regexp
-IPv6�γ�ʸ����ɽ���ȥޥå���������ɽ���Ǥ������
+IPv6の各文字列表記とマッチする正規表現です。順に
   * a:b:c:d:e:f:w.x.y.z
   * a:b:c:d:e:f:g:h
   * a::b
   * a::b:w.x.y.z
-�Ȥ���ʸ����ȥޥå����ޤ���
+という文字列とマッチします。

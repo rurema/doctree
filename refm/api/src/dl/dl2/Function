@@ -1,25 +1,25 @@
 = class DL::Function < Object
 
-[[c:DL::CFunc]] ¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
+[[c:DL::CFunc]] ã®ãƒ©ãƒƒãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 
 --- new(cfunc, argtypes)                  -> DL::Function
 --- new(cfunc, argtypes){|*arg| ... }     -> DL::Function
 
-»ØÄê¤µ¤ì¤¿ [[c:DL::CFunc]] ¥ª¥Ö¥¸¥§¥¯¥È cfunc ¤ò¥é¥Ã¥×¤¹¤ë
-DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸ [[c:DL::CFunc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ cfunc ã‚’ãƒ©ãƒƒãƒ—ã™ã‚‹
+DL::Function ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦è¿”ã—ã¾ã™ã€‚
 
-@param cfunc [[c:DL::CFunc]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Þ¤¹¡£
+@param cfunc [[c:DL::CFunc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param argtypes cfunc ¤Î°ú¿ô¤Î·¿¤ò[[c:DL]]¤ËÄêµÁ¤µ¤ì¤¿Äê¿ô¤ÎÇÛÎó¤Ç»ØÄê¤·¤Þ¤¹¡£
-                unsigned char ¤Ê¤É unsigned ¤ò»ØÄê¤·¤¿¤¤¾ì¹ç¤Ï - ¤òÉÕ¤±¤Æ
+@param argtypes cfunc ã®å¼•æ•°ã®åž‹ã‚’[[c:DL]]ã«å®šç¾©ã•ã‚ŒãŸå®šæ•°ã®é…åˆ—ã§æŒ‡å®šã—ã¾ã™ã€‚
+                unsigned char ãªã© unsigned ã‚’æŒ‡å®šã—ãŸã„å ´åˆã¯ - ã‚’ä»˜ã‘ã¦
 //emlist{
     - TYPE_CHAR
 //}
-                ¤ò»È¤¤¤Þ¤¹¡£
+                ã‚’ä½¿ã„ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
  require 'dl/import'
 
@@ -36,11 +36,11 @@ DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- bind{|*args| ... }
 
-¼«¿È¤Ë»ØÄê¤µ¤ì¤¿¥Ö¥í¥Ã¥¯¤ò¥Ð¥¤¥ó¥É¤·¤Þ¤¹¡£
-¼«¿È¤ËÂÐ¤·¤Æ call ¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤¿¤È¤­¡¢À¸À®»þ¤ËÍ¿¤¨¤é¤ì¤¿ [[c:DL::CFunc]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤Ê¤¯
-¤³¤Î¥Ö¥í¥Ã¥¯¤¬¸Æ¤Ð¤ì¤Þ¤¹¡£
+è‡ªèº«ã«æŒ‡å®šã•ã‚ŒãŸãƒ–ãƒ­ãƒƒã‚¯ã‚’ãƒã‚¤ãƒ³ãƒ‰ã—ã¾ã™ã€‚
+è‡ªèº«ã«å¯¾ã—ã¦ call ãƒ¡ã‚½ãƒƒãƒ‰ãŒå‘¼ã°ã‚ŒãŸã¨ãã€ç”Ÿæˆæ™‚ã«ä¸Žãˆã‚‰ã‚ŒãŸ [[c:DL::CFunc]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã¯ãªã
+ã“ã®ãƒ–ãƒ­ãƒƒã‚¯ãŒå‘¼ã°ã‚Œã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
  require 'dl/import'
 
@@ -53,22 +53,22 @@ DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 --- call(*arg)              -> DL::CPtr | Integer | Float | nil
 --- call(*arg){|*v| ... }   -> DL::CPtr | Integer | Float | nil
 
-¼«¿È¤¬É½¤¹´Ø¿ô¤ò¸Æ¤Ó¡¢ÊÖ¤êÃÍ¤ò Ruby ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒè¡¨ã™é–¢æ•°ã‚’å‘¼ã³ã€è¿”ã‚Šå€¤ã‚’ Ruby ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-¼«¿È¤ÎÊÖ¤êÃÍ¤Î·¿¤¬¥Ý¥¤¥ó¥¿¤Ç¤¢¤ë¾ì¹ç¡¢ÊÖ¤êÃÍ¤ò [[c:DL::CPtr]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
-ÊÖ¤êÃÍ¤Î·¿¤¬ double ¤« float ¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢ÊÖ¤êÃÍ¤ò Ruby ¤Î [[c:Float]] ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤·¤ÆÊÖ¤·¤Þ¤¹¡£
-ÊÖ¤êÃÍ¤Î·¿¤¬ void ¤Î¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£¤½¤ì°Ê³°¤Î¾ì¹ç¤ÏÀ°¿ô¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®è¿”ã‚Šå€¤ã®åž‹ãŒãƒã‚¤ãƒ³ã‚¿ã§ã‚ã‚‹å ´åˆã€è¿”ã‚Šå€¤ã‚’ [[c:DL::CPtr]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã—ã¦è¿”ã—ã¾ã™ã€‚
+è¿”ã‚Šå€¤ã®åž‹ãŒ double ã‹ float ã§ã‚ã‚‹å ´åˆã¯ã€è¿”ã‚Šå€¤ã‚’ Ruby ã® [[c:Float]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›ã—ã¦è¿”ã—ã¾ã™ã€‚
+è¿”ã‚Šå€¤ã®åž‹ãŒ void ã®å ´åˆã¯ nil ã‚’è¿”ã—ã¾ã™ã€‚ãã‚Œä»¥å¤–ã®å ´åˆã¯æ•´æ•°ã¨ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-¥Ö¥í¥Ã¥¯¤òÍ¿¤¨¤¿¾ì¹ç¡¢°ú¿ô¤ÎÃæ¤Ë¥Ð¥¤¥ó¥É¤µ¤ì¤Æ¤¤¤Ê¤¤ [[c:DL::Function]] ¥ª¥Ö¥¸¥§¥¯¥È¤¬
-¤â¤·¤¢¤ì¤ÐÍ¿¤¨¤é¤ì¤¿¥Ö¥í¥Ã¥¯¤ò¥Ð¥¤¥ó¥É¤·¡¢¤½¤Î¸å¾å¤ÈÆ±¤¸¤è¤¦¤Ë´Ø¿ô¤ò¸Æ¤Ó¤Þ¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã‚’ä¸ŽãˆãŸå ´åˆã€å¼•æ•°ã®ä¸­ã«ãƒã‚¤ãƒ³ãƒ‰ã•ã‚Œã¦ã„ãªã„ [[c:DL::Function]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒ
+ã‚‚ã—ã‚ã‚Œã°ä¸Žãˆã‚‰ã‚ŒãŸãƒ–ãƒ­ãƒƒã‚¯ã‚’ãƒã‚¤ãƒ³ãƒ‰ã—ã€ãã®å¾Œä¸Šã¨åŒã˜ã‚ˆã†ã«é–¢æ•°ã‚’å‘¼ã³ã¾ã™ã€‚
 
-@param arg ´Ø¿ô¤ËÍ¿¤¨¤ë°ú¿ô¤ò»ØÄê¤·¤Þ¤¹¡£°ú¿ô¤Î·¿¤¬¥Ý¥¤¥ó¥¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢
-           [[c:DL::CPtr]] ¥ª¥Ö¥¸¥§¥¯¥È¡¢[[c:DL::Function]] ¥ª¥Ö¥¸¥§¥¯¥È¡¢IO ¥ª¥Ö¥¸¥§¥¯¥È¡¢
-           À°¿ô¡¢Ê¸»úÎó¤Î¤¤¤º¤ì¤«¤ò»ØÄê¤·¤Þ¤¹¡£ÆÃ¤ËÊ¸»úÎó¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢
-           Ê¸»úÎó¤Ï¥Ý¥¤¥ó¥¿¤¬»Ø¤¹¥á¥â¥êÎÎ°è¤È¤·¤Æ°·¤ï¤ì¤Þ¤¹¡£ 
-           ¤½¤ì°Ê³°¤Î¾ì¹ç¤Ï¡¢Integer ¤« Float ¤òÍ¿¤¨¤Þ¤¹¡£
+@param arg é–¢æ•°ã«ä¸Žãˆã‚‹å¼•æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚å¼•æ•°ã®åž‹ãŒãƒã‚¤ãƒ³ã‚¿ã§ã‚ã‚‹å ´åˆã¯ã€
+           [[c:DL::CPtr]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€[[c:DL::Function]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€IO ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€
+           æ•´æ•°ã€æ–‡å­—åˆ—ã®ã„ãšã‚Œã‹ã‚’æŒ‡å®šã—ã¾ã™ã€‚ç‰¹ã«æ–‡å­—åˆ—ã‚’ä¸ŽãˆãŸå ´åˆã¯ã€
+           æ–‡å­—åˆ—ã¯ãƒã‚¤ãƒ³ã‚¿ãŒæŒ‡ã™ãƒ¡ãƒ¢ãƒªé ˜åŸŸã¨ã—ã¦æ‰±ã‚ã‚Œã¾ã™ã€‚ 
+           ãã‚Œä»¥å¤–ã®å ´åˆã¯ã€Integer ã‹ Float ã‚’ä¸Žãˆã¾ã™ã€‚
            
-Îã:
+ä¾‹:
  require 'dl/import' 
  
  h = DL::Handle.new
@@ -80,7 +80,7 @@ DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
  func.call(s, 4, 1, io)
  p s                    #=> "hoge    "
 
-Îã:
+ä¾‹:
  require 'dl/import' 
 
  h = DL::Handle.new
@@ -94,7 +94,7 @@ DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- name  -> String
 
-¼«¿È¤¬É½¤¹´Ø¿ô¤ÎÌ¾Á°¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒè¡¨ã™é–¢æ•°ã®åå‰ã‚’æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
  require 'dl/import'
 
@@ -108,7 +108,7 @@ DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- to_i  -> Integer
 
-¼«¿È¤¬É½¤¹´Ø¿ô¤Î¥¢¥É¥ì¥¹¤òÀ°¿ô¤ÇÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ãŒè¡¨ã™é–¢æ•°ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ•´æ•°ã§è¿”ã—ã¾ã™ã€‚
 
  require 'dl/import'
 
@@ -121,4 +121,4 @@ DL::Function ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- unbind    -> ()
 
-¼«¿È¤«¤é´Ø¿ô¤ò¥¢¥ó¥Ð¥¤¥ó¥É¤·¤Þ¤¹¡£
+è‡ªèº«ã‹ã‚‰é–¢æ•°ã‚’ã‚¢ãƒ³ãƒã‚¤ãƒ³ãƒ‰ã—ã¾ã™ã€‚

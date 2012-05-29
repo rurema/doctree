@@ -1,14 +1,14 @@
-�ץ�åȥե�����֤θߴ�������ݤ��뤿��Υ饤�֥��Ǥ���
+プラットフォーム間の互換性を確保するためのライブラリです。
 
 = class Errno::EPROTO < SystemCallError
 
-�ץ��ȥ��롦���顼 (POSIX.1)
+プロトコル・エラー (POSIX.1)
 
 = class Errno::ECONNRESET < SystemCallError
 
-��³���ꥻ�åȤ��줿 (POSIX.1)
+接続がリセットされた (POSIX.1)
 
 = class Errno::ECONNABORTED < SystemCallError
 
-��³����ߤ��줿 (POSIX.1)
+接続が中止された (POSIX.1)
 

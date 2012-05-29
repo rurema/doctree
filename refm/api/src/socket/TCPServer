@@ -1,10 +1,10 @@
 = class TCPServer < TCPSocket
 
-TCP/IP ���ȥ꡼�෿��³�Υ�����¦�Υ����åȤΥ��饹�Ǥ���
+TCP/IP ストリーム型接続のサーバ側のソケットのクラスです。
 
-���Υ��饹�ˤ�äƴ�ñ�˥����åȤ����Ѥ��������ФΥץ�����ߥ󥰤��Ǥ��ޤ���
+このクラスによって簡単にソケットを利用したサーバのプログラミングができます。
 
-�㤨�� echo �����Фϰʲ��Τ褦�ˤʤ�ޤ���
+例えば echo サーバは以下のようになります。
 
   require "socket"
   
@@ -34,7 +34,7 @@ TCP/IP ���ȥ꡼�෿��³�Υ�����¦�Υ����åȤΥ��饹�Ǥ���
     end
   end
 
-Thread ��Ȥ��Ф�ä�û���ʤ�ޤ���
+Thread を使えばもっと短くなります。
 
   require "socket"
   
@@ -59,28 +59,28 @@ Thread ��Ȥ��Ф�ä�û���ʤ�ޤ���
 --- new(host=nil, service) -> TCPServer
 --- open(host=nil, service) -> TCPServer
 
-�����������С���³�򥪡��ץ󤷤ޤ���service ��
-/etc/services (�ޤ��� NIS) ����Ͽ����Ƥ��륵����
-��̾���ݡ����ֹ�ǻ��ꤷ�ޤ���host ����ꤷ������
-���ꤷ���ۥ��Ȥ��Ф��Ƥ���³����������դ��ޤ�����ά�������ƤΥ�
-����(���󥿥ե�����)�ؤ���³�׵������դ��뤳�Ȥˤʤ�ޤ���
+新しいサーバー接続をオープンします。service は
+/etc/services (または NIS) に登録されているサービ
+ス名かポート番号で指定します。host を指定した時は
+指定したホストに対しての接続だけを受け付けます。省略時は全てのホ
+スト(インタフェース)への接続要求を受け付けることになります。
 
-host �˻���Ǥ��������[[ref:lib:socket#host_format]]�򸫤Ƥ���������
+host に指定できる形式は[[ref:lib:socket#host_format]]を見てください。
 
-@param host ��³�������ۥ��Ȥ���ꤷ�ޤ���
-            host �˻���Ǥ��������[[ref:lib:socket#host_format]]�򸫤Ƥ���������
+@param host 接続したいホストを指定します。
+            host に指定できる形式は[[ref:lib:socket#host_format]]を見てください。
 
-@param service /etc/services (�ޤ��� NIS) ����Ͽ����Ƥ��륵����
-               ��̾���ݡ����ֹ�ǻ��ꤷ�ޤ���
+@param service /etc/services (または NIS) に登録されているサービ
+               ス名かポート番号で指定します。
 
 == Instance Methods
 
 --- accept -> TCPSocket
 
-���饤����Ȥ������³�׵������դ�����³����
-[[c:TCPSocket]] �Υ��󥹥��󥹤��֤��ޤ���
+クライアントからの接続要求を受け付け、接続した
+[[c:TCPSocket]] のインスタンスを返します。
 
-��:
+例:
 
   TCPServer.open("", 0) {|serv|
     c = TCPSocket.new(*serv.addr.values_at(3,1))
@@ -92,36 +92,36 @@ host �˻���Ǥ��������[[ref:lib:socket#host_format]]�򸫤Ƥ���������
 #@if (version >= "1.8.5")
 --- accept_nonblock -> TCPSocket
 
-�����åȤ�Υ�֥��å��󥰥⡼�ɤ����ꤷ���塢
-[[man:accept(2)]] ��ƤӽФ��ޤ���
+ソケットをノンブロッキングモードに設定した後、
+[[man:accept(2)]] を呼び出します。
 
-�֤��ͤ� [[m:TCPServer#accept]] ��Ʊ���Ǥ���
+返り値は [[m:TCPServer#accept]] と同じです。
 
-[[man:accept(2)]] �����顼�ˤʤä���硢
-EAGAIN, EINTR ��ޤ��㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+[[man:accept(2)]] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
-@raise Errno::EXXX [[man:accept(2)]] �����顼�ˤʤä�����ȯ�����ޤ���
+@raise Errno::EXXX [[man:accept(2)]] がエラーになった場合に発生します。
 
 #@end
 
 #@if (version >= "1.8.0")
 --- listen(backlog) -> 0
 
-[[man:listen(2)]] ��¹Ԥ��ޤ���
-([[m:Socket#listen]]��Ʊ��)
+[[man:listen(2)]] を実行します。
+([[m:Socket#listen]]と同じ)
 
-backlog �ϡ����饤����Ȥ������³�׵����α�Ǥ�����Ǥ���
-TCPServer �Υ��󥹥��󥹤Ϻǽ�� backlog ���ͤ� 5 ����������ޤ���
+backlog は、クライアントからの接続要求を保留できる数です。
+TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
-[[man:listen(2)]] ����������� 0 ���֤��ޤ���
-���Ԥ���� �㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+[[man:listen(2)]] が成功すれば 0 を返します。
+失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 
-@param backlog backlog �ϡ����饤����Ȥ������³�׵����α�Ǥ�����Ǥ���
-               TCPServer �Υ��󥹥��󥹤Ϻǽ�� backlog ���ͤ� 5 ����������ޤ���
+@param backlog backlog は、クライアントからの接続要求を保留できる数です。
+               TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
-@raise Errno::EXXX [[man:listen(2)]] �����Ԥ���� �㳰 [[c:Errno::EXXX]] ��ȯ�����ޤ���
+@raise Errno::EXXX [[man:listen(2)]] が失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 
-@return [[man:listen(2)]] ����������� 0 ���֤��ޤ���
+@return [[man:listen(2)]] が成功すれば 0 を返します。
 
 
 #@end
@@ -129,10 +129,10 @@ TCPServer �Υ��󥹥��󥹤Ϻǽ�� backlog ���ͤ� 5 ����������ޤ���
 #@if (version >= "1.8.0")
 --- sysaccept -> Fixnum
 
-��³�������饤����ȤΥ����åȤ�ե����뵭�һҤ��֤����Ȥ������
-[[m:TCPServer#accept]] ��Ʊ���Ǥ���
+接続したクライアントのソケットをファイル記述子で返すことを除けば
+[[m:TCPServer#accept]] と同じです。
 
-��:
+例:
 
   TCPServer.open("", 0) {|serv|
     c = TCPSocket.new(*serv.addr.values_at(3,1))

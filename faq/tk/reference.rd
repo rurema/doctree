@@ -1,51 +1,51 @@
-= Ruby/Tk ���󥹥ȡ���
+= Ruby/Tk インストール
 
-== Ruby/Tk �򥽡������饤�󥹥ȡ��뤹��ˤϤɤ��������ɤ��Ǥ�����
+== Ruby/Tk をソースからインストールするにはどうしたら良いですか？
 
-�ޤ���Tcl/Tk �򥷥��ƥ�˥��󥹥ȡ��뤷�Ƥ������������ΤȤ���
-����ѥ����ɬ�פʥإå���饤�֥��⥤�󥹥ȡ��뤹��褦��
-���Ƥ�������(���Ѥ���Х��ʥ�ѥå������ˤ�äƤϥإå�����
-��ȯ�ѥå������Ȥ����̤˥��󥹥ȡ��뤹��ɬ�פ����뤫���Τ��
-����)
+まず、Tcl/Tk をシステムにインストールしてください。このとき、
+コンパイルに必要なヘッダやライブラリもインストールするように
+してください(使用するバイナリパッケージによってはヘッダ等は
+開発パッケージとして別にインストールする必要があるかも知れま
+せん)
 
-���դȤ��ơ����ߤ� Ruby/Tk �Ǥϡ���Ϥ� Tcl/Tk �ΥС������ 
-8.0 �������Τ�Τϥ��Ƥ��оݤˤʤäƤ��ʤ����Ȥ����դ���
-��������(ư�����⤷��ޤ��󤱤�)
+注意として、現在の Ruby/Tk では、もはや Tcl/Tk のバージョン 
+8.0 より以前のものはメンテの対象になっていないことに注意して
+ください(動くかもしれませんけど)
 
-ruby �� build ����Ȥ��� configure �Υ��ץ����˰ʲ���ޤ�
-�Ƥ�������(�����λ���Ϥ������ټ�ư���Ф���ޤ�����Tcl/Tk 
-�ΥС������䥤�󥹥ȡ�����֤��͡��ʤΤǡ����٤Ƥ��б��Ǥ�
-�Ƥ��ޤ���)
+ruby を build するときの configure のオプションに以下を含め
+てください(これらの指定はある程度自動検出されますが、Tcl/Tk 
+のバージョンやインストール形態は様々なので、すべてに対応でき
+ていません)
 
     ./configure --with-tcllib=tcl8.3 \
                 --with-tklib=tk8.3 \
                 --with-tcl-include=/usr/include/tcl8.3
                 --with-X11-include=/usr/X11R6/include
 
---with-tcllib=XXX �ˤϥ����ƥ��¸�ߤ��� libtclXXX.so �� 
-libtclXXX.a �� tclXXX ����ʬ��
+--with-tcllib=XXX にはシステムに存在する libtclXXX.so や 
+libtclXXX.a の tclXXX の部分を、
 
---with-tklib=XXX �ˤϥ����ƥ��¸�ߤ��� libtkXXX.so �� 
-libtkXXX.a �� tkXXX ����ʬ����ꤷ�ޤ���XXX ����ʬ�ˤϤ褯
-Tcl/Tk �ΥС������򼨤��ֹ椬�ղä���Ƥ��ޤ���
+--with-tklib=XXX にはシステムに存在する libtkXXX.so や 
+libtkXXX.a の tkXXX の部分を指定します。XXX の部分にはよく
+Tcl/Tk のバージョンを示す番号が付加されています。
 
---with-tcl-include=XXX �ˤϡ�tcl �Υإå��ե�����Τ���ѥ�
-����ꤷ�ޤ���ɸ��� /usr/include �����֤���Ƥ�����ˤ�ɬ
-�פ���ޤ��󡣤⤷��tk �Υإå��ե����뤬����Ȥ��̤ξ���
-����ʤ� --with-tk-include=XXX ���碌�ƻ��ꤹ��ɬ�פ�����
-�ޤ���
+--with-tcl-include=XXX には、tcl のヘッダファイルのあるパス
+を指定します。標準の /usr/include 等に置かれている場合には必
+要ありません。もし、tk のヘッダファイルがこれとは別の場所に
+あるなら --with-tk-include=XXX も合わせて指定する必要があり
+ます。
 
-tk �Υإå��� X Window System �Υإå��ե������(���Ȥ���MS
-Windows �Ķ��Ǥ��äƤ�)�ɤ⤦�Ȥ��ޤ������Υإå������Ĥ���
-�ʤ����ϡ�--with-X11-include=XXX �� XXX ��ʬ�� X �Υإå�
-�ե�����Τ���ǥ��쥯�ȥ����ꤷ�ޤ���
-(���Τ��ᡢCygwin �Ķ��� Ruby/Tk �򥳥�ѥ��뤹��ˤϡ�XFree86 �⥤��
-���ȡ��뤹��ɬ�פ�����ޤ�����������Ҥ��� bitWalk �� Tcl/Tk 
-�ѥå������ˤ� X �Υإå��ե����뤬�ޤޤ�Ƥ���ΤǤ���ɬ��
-�Ϥ���ޤ���)
+tk のヘッダは X Window System のヘッダファイルを(たとえ、MS
+Windows 環境であっても)読もうとします。このヘッダが見つから
+ない場合は、--with-X11-include=XXX の XXX 部分に X のヘッダ
+ファイルのあるディレクトリを指定します。
+(このため、Cygwin 環境で Ruby/Tk をコンパイルするには、XFree86 もイン
+ストールする必要があります。ただ、後述する bitWalk の Tcl/Tk 
+パッケージには X のヘッダファイルが含まれているのでこの必要
+はありません)
 
-Tcl/Tk �� Stub ��ǽ����ľ��(Tcl/Tk 8.1 �ʹ�)�嵭�������
-�ʲ��Τ褦�˻��ꤹ�뤳�Ȥ�侩���ޤ���
+Tcl/Tk が Stub 機能を持つ場合(Tcl/Tk 8.1 以降)上記の代わりに
+以下のように指定することを推奨します。
 
     ./configure --enable-tcltk_stubs \
                 --with-tcl-include=/usr/include/tcl8.3 \
@@ -53,93 +53,93 @@ Tcl/Tk �� Stub ��ǽ����ľ��(Tcl/Tk 8.1 �ʹ�)�嵭�������
                 --with-tklib=tkstub83 \
                 --with-X11-include=/usr/X11R6/include
 
---enable-tcltk_stubs �ˤ�ꡢStub ��Ȥ����Ȥ��������ޤ���
+--enable-tcltk_stubs により、Stub を使うことを明示します。
 
---with-tcllib=XXX �ˤϥ����ƥ��¸�ߤ��� libtclstubXXX.so �� 
-libtcstublXXX.a �� tclstubXXX ����ʬ��
+--with-tcllib=XXX にはシステムに存在する libtclstubXXX.so や 
+libtcstublXXX.a の tclstubXXX の部分を、
 
---with-tklib=XXX �ˤϥ����ƥ��¸�ߤ��� libtkstubXXX.so �� 
-libtkstubXXX.a �� tkstubXXX ����ʬ����ꤷ�ޤ���
+--with-tklib=XXX にはシステムに存在する libtkstubXXX.so や 
+libtkstubXXX.a の tkstubXXX の部分を指定します。
 
-��ϡ����Ĥ�Τ褦��
+後は、いつものように
   make
   make test
   make install
-���Ƥ���������
+してください。
 
-=== Cygwin �Ǥξ��
+=== Cygwin 版の場合
 
-cygwin �Υǥե���Ȥ����äƤ��뤫�⤷��ʤ� tcl8.0 �Ǥ� Stub ���Ȥ�����
-�ޤ����ܸ첽���ʤ���Ƥ��ޤ���
+cygwin のデフォルトで入っているかもしれない tcl8.0 では Stub が使えず、
+また日本語化がなされていません。
 
-�����ư�����ˤϡ�TCL_LIBRARY �Ķ��ѿ���Ŭ�ڤ����ꤹ��ɬ�פ������
-����((*���δĶ��ѿ��� Windows �����Υѥ�����ꤹ��ɬ�פ�����ޤ�*))
+これを動作させるには、TCL_LIBRARY 環境変数を適切に設定する必要がありま
+す。((*この環境変数は Windows 形式のパスを指定する必要があります*))
 
     $ export TCL_LIBRARY=`cygpath -w /usr/share/tcl8.0`
-    $ ruby -Ks -rtk -e 'TkButton.new(nil, "text"=>"�Ƥ���") {
-                command { puts "�Ƥ���" }
+    $ ruby -Ks -rtk -e 'TkButton.new(nil, "text"=>"てすと") {
+                command { puts "てすと" }
         }.pack' -e Tk.mainloop    
 
-�ʾ�Τ��Ȥ��顢Tcl/Tk 8.1 �ʹ�(��ݲ��б�����Ƥ��ޤ�)�ΥХ��ʥ�ѥå�����������
-���󥹥ȡ��뤹�뤳�Ȥ�侩���ޤ���
+以上のことから、Tcl/Tk 8.1 以降(国際化対応されています)のバイナリパッケージを別途
+インストールすることを推奨します。
 
-bitWalk�� Tcl/Tk����Ѥ��� ruby �� cygwin �Ķ��Ǻ�������ˤ�
-�ʲ��Τ褦�ˤ��ޤ���(����������Ƥ��Ruby/Tk �򥽡������饤�󥹥ȡ��뤹��ˤ�...��
-�⻲�Ȥ��Ƥ�������)
+bitWalkの Tcl/Tkを使用する ruby を cygwin 環境で作成するには
+以下のようにします。(上で説明してる「Ruby/Tk をソースからインストールするには...」
+も参照してください)
 
-    (bitWalk �� Tcl/Tk �ѥå������� d:\Tcl �˥��󥹥ȡ��뤷���Ȥ���)
+    (bitWalk の Tcl/Tk パッケージを d:\Tcl にインストールしたとする)
 
     $ cd ruby/ext/tcltklib
     $ ruby extconf.rb --with-{tcl,tk}-dir=/cygdrive/d/tcl \
                       --enable-tcltk_stubs \
                       --with-tcllib=tclstub83 \
                       --with-tklib=tkstub83
-    (configure ���˾嵭���ץ������ɲäǻ��ꤷ�Ƥ��ɤ�)
+    (configure 時に上記オプションを追加で指定しても良い)
 
     $ PATH=/cygdrive/d/Tcl/bin:$PATH
-    (�ޤ���)
+    (または)
       $ export RUBY_TCL_DLL=`cygpath -w /cygdrive/d/Tcl/bin/tcl83.dll`
       $ export RUBY_TK_DLL=`cygpath -w /cygdrive/d/Tcl/bin/tk83.dll`
 
-    $ ruby -Ks -rtk -e 'TkButton.new(nil, "text"=>"�Ƥ���") {
-                command { puts "�Ƥ���" }
+    $ ruby -Ks -rtk -e 'TkButton.new(nil, "text"=>"てすと") {
+                command { puts "てすと" }
         }.pack' -e Tk.mainloop    
 
-== Ruby/Tk �ΥХ��ʥ�Ϥ���ޤ�����
+== Ruby/Tk のバイナリはありますか？
 
-=== UNIX �� OS �ξ��
+=== UNIX 系 OS の場合
 
-((<Ruby ���󥹥ȡ��륬����|URL:http://www.ruby-lang.org/ja/install.html>))�򻲹ͤˤ��Ʋ�������
+((<Ruby インストールガイド|URL:http://www.ruby-lang.org/ja/install.html>))を参考にして下さい。
 
-=== Windows �ξ��
+=== Windows の場合
 
-�㤨�С��ʲ����ȹ礻�ξ��
+例えば、以下の組合せの場合
 * ((<URL:http://www.ruby-lang.org/~eban/ruby/binaries/cygwin/>))
 * ((<URL:http://members10.tsukaeru.net/bitwalk/download_win.html>))
 
-�ʲ��Τ褦�ˤ����ư��ޤ�
+以下のようにすれば動作します
 
-Cygwin �Ķ��� ruby ����Τ� Tcl ����Ѥ�����(ɬ�פʥ饤�֥�ꡢDLL�򥳥ԡ�)
+Cygwin 環境の ruby からのみ Tcl を使用する場合(必要なライブラリ、DLLをコピー)
 
-* c:/Program Files/Tcl/lib ��Υե������ǥ��쥯�ȥ�� c:/usr/local/lib �˥��ԡ�
-* c:/Program Files/Tcl/bin �� tcl83.dll, tk83.dll �� c:/windows/system �˥��ԡ�
-* ��ϡ����󥹥ȡ��뤷�� Tcl/Tk �򥢥󥤥󥹥ȡ��뤷�Ƥ�褤
+* c:/Program Files/Tcl/lib 内のファイルやディレクトリを c:/usr/local/lib にコピー
+* c:/Program Files/Tcl/bin の tcl83.dll, tk83.dll を c:/windows/system にコピー
+* 後は、インストールした Tcl/Tk をアンインストールしてもよい
 
-���̤� Tcl/Tk ��Ȥ��������
+普通に Tcl/Tk も使いたい場合
 
-* c:/Program Files/Tcl/bin ��PATH�˴ޤ��
+* c:/Program Files/Tcl/bin をPATHに含める
 
-���뤤�ϡ�
+あるいは、
 
-* �Ķ��ѿ� RUBY_TCL_DLL, RUBY_TK_DLL �� tcl83.dll, tk83.dll �Τ���ѥ�
-  �����ꤹ��(Windows �����Υѥ������ꤹ�뤳��)
+* 環境変数 RUBY_TCL_DLL, RUBY_TK_DLL を tcl83.dll, tk83.dll のあるパス
+  に設定する(Windows 形式のパスで設定すること)
 
-  Windows ����(autoexec.bat �����ꤹ��ʤ�)
+  Windows から(autoexec.bat に設定するなど)
 
     set RUBY_TCL_DLL=c:\Program Files\Tcl\bin\tcl83.dll
     set RUBY_TK_DLL=c:\Program Files\Tcl\bin\tk83.dll
 
-  Cygwin ����(~/.bashrc �����ꤹ��ʤ�)
+  Cygwin から(~/.bashrc に設定するなど)
 
     export RUBY_TCL_DLL=`cygpath -w /cygdrive/c/Program\ Files/Tcl/bin/tcl83.dll`
     export RUBY_TK_DLL=`cygpath -w /cygdrive/c/Program\ Files/Tcl/bin/tk83.dll`

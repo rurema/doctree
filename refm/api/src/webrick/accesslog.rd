@@ -1,91 +1,91 @@
-WEBrick::HTTPServer �Υ������������η�����������뤿��������ǻȤ���饤�֥��Ǥ���
+WEBrick::HTTPServer のアクセスログの形式を処理するために内部で使われるライブラリです。
 
 = module WEBrick::AccessLog
 
-[[c:WEBrick::HTTPServer]] �Υ������������η�����������뤿��������ǻȤ���⥸�塼��Ǥ���
+[[c:WEBrick::HTTPServer]] のアクセスログの形式を処理するために内部で使われるモジュールです。
 
-�������������η����� Apache �� mod_log_config �η����˽�򤷤ޤ�����HTTP ���ơ����������ɤ�
-���ꤹ�뤳�ȤϽ���ޤ��󡣺Ǹ�Υ��ơ�������ɽ�� %>s �� %s ��Ʊ���褦�˲�ᤵ��ޤ���
+アクセスログの形式は Apache の mod_log_config の形式に準拠しますが、HTTP ステータスコードを
+指定することは出来ません。最後のステータスを表す %>s は %s と同じように解釈されます。
 
  * [[url:http://httpd.apache.org/docs/mod/mod_log_config.html#formats]]
 
  "%h %l %u %t \"%r\" %s %b"
  "%{User-Agent}i"
 
-����Ǥ�������ϰʲ��ΤȤ���Ǥ���
+指定できる形式は以下のとおりです。
 
 : %a
-  ��⡼�� IP ���ɥ쥹
+  リモート IP アドレス
 : %b
-  �쥹�ݥ󥹤ΥХ��ȿ���HTTP �إå��Ͻ�����CLF �񼰡�
-  ���ʤ����1 �Х��Ȥ������ʤ��ä��Ȥ��� 0 �ǤϤʤ��� '-' �ˤʤ�
+  レスポンスのバイト数。HTTP ヘッダは除く。CLF 書式。
+  すなわち、1 バイトも送られなかったときは 0 ではなく、 '-' になる
 : %{FOOBAR}e
-  �Ķ��ѿ� FOOBAR ������
+  環境変数 FOOBAR の内容
 : %f
-  �ե�����̾
+  ファイル名
 : %h
-  ��⡼�ȥۥ���
+  リモートホスト
 : %{Foobar}i
-  �����Ф�����줿�ꥯ�����Ȥ� Foobar:  �إå�������
+  サーバに送られたリクエストの Foobar:  ヘッダの内容
 : %l
   "-"
 : %m
-  �ꥯ�����ȥ᥽�å�
+  リクエストメソッド
 : %{Foobar}n
   req.attributes
 : %{Foobar}o
-  ������ Foobar: �إå�������
+  応答の Foobar: ヘッダの内容
 : %p
-  �ꥯ�����Ȥ򰷤äƤ��륵���Ф������ʥݡ���
+  リクエストを扱っているサーバの正式なポート
 : %q
-  ������ʸ����
+  クエリ文字列
 : %r
-  �ꥯ�����Ȥκǽ�ι�
+  リクエストの最初の行
 : %s
-  ���ơ�������"%>s" �ϥ��ݡ��Ȥ��ޤ���
+  ステータス。"%>s" はサポートしません。
 : %t
-  �ꥯ�����Ȥ���դ������ CLF �λ���ν� (ɸ��αѸ�ν�)
+  リクエストを受付けた時刻。 CLF の時刻の書式 (標準の英語の書式)
 : %{format}t
-  format ��Ϳ����줿�񼰤ˤ����format �� [[m:Time#strftime]] �� �񼰤Ǥ���ɬ�פ����롣
+  format で与えられた書式による時刻。format は [[m:Time#strftime]] の 書式である必要がある。
 : %T
-  �ꥯ�����Ȥ򰷤��Τˤ����ä����֡���ñ��
+  リクエストを扱うのにかかった時間、秒単位
 : %u
-  ��⡼�ȥ桼��
+  リモートユーザ
 : %U
-  �ꥯ�����Ȥ��줿 URL �ѥ���������ʸ����ϴޤޤʤ�
+  リクエストされた URL パス。クエリ文字列は含まない
 : %v
-  �ꥯ�����Ȥ򰷤äƤ��륵���Ф������� ServerName
+  リクエストを扱っているサーバの正式な ServerName
 
 == Constants
 
 --- CLF_TIME_FORMAT -> String
 
-Apache �Υ�������������Ʊ������η�����ɽ���ʲ���ʸ����Ǥ���
+Apache のアクセスログと同じ時刻の形式を表す以下の文字列です。
 
   "[%d/%b/%Y:%H:%M:%S %Z]"
 
 --- COMMON_LOG_FORMAT -> String
 --- CLF -> String
 
-Apache �Υ������������ǰ���Ū�˻Ȥ��������ɽ���ʲ���ʸ����Ǥ���
+Apache のアクセスログで一般的に使われる形式を表す以下の文字列です。
 
   "%h %l %u %t \"%r\" %s %b"
 
 --- REFERER_LOG_FORMAT -> String
 
-Apache �Υ������������ǰ���Ū�˻Ȥ����ե���η�����ɽ���ʲ���ʸ����Ǥ���
+Apache のアクセスログで一般的に使われるリファラの形式を表す以下の文字列です。
 
   "%{Referer}i -> %U"
 
 --- AGENT_LOG_FORMAT -> String
 
-Apache �Υ������������ǰ���Ū�˻Ȥ��� User-Agent �η�����ɽ���ʲ���ʸ����Ǥ���
+Apache のアクセスログで一般的に使われる User-Agent の形式を表す以下の文字列です。
 
   "%{User-Agent}i"
 
 --- COMBINED_LOG_FORMAT -> String
 
-Apache �Υ������������ǰ���Ū�˻Ȥ��������ɽ���ʲ���ʸ����Ǥ���
+Apache のアクセスログで一般的に使われる形式を表す以下の文字列です。
 
   "%h %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-agent}i\""
 
@@ -93,28 +93,28 @@ Apache �Υ������������ǰ���Ū�˻Ȥ��������ɽ���ʲ���ʸ����Ǥ���
 
 --- escape(data) -> String
 
-Ϳ����줿ʸ���󤬱�������Ƥ����硢����ʸ����̵�������ޤ���
+与えられた文字列が汚染されている場合、制御文字を無効化します。
 
-@param data ���������פ���ʸ�������ꤷ�ޤ���
+@param data エスケープする文字列を指定します。
 
 --- format(format_string, params) -> String
 
-Ϳ����줿�ե����ޥå�ʸ����ȥѥ�᡼������Ѥ��ƥ������������ޤ���
+与えられたフォーマット文字列とパラメータを使用してログを整形します。
 
-@param format_string �ե����ޥå�ʸ�������ꤷ�ޤ���
+@param format_string フォーマット文字列を指定します。
 
-@param params �ѥ�᡼������ꤷ�ޤ���
+@param params パラメータを指定します。
 
 --- setup_params(config, request, response) -> Hash
 
-Ϳ����줿��������Ѥ��ƥ������Ϥ˻��Ѥ���ѥ�᡼������������֤��ޤ���
+与えられた引数を使用してログ出力に使用するパラメータを作成して返します。
 
-@param config �ϥå������ꤷ�ޤ���
+@param config ハッシュを指定します。
 
-@param request [[c:WEBrick::HTTPRequest]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
 
-@param response [[c:WEBrick::HTTPResponse]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
 = class WEBrick::AccessLog::AccessLogError < StandardError
 
-���ꤵ�줿�������������η������������ʤ�����ȯ�����ޤ���
+指定されたアクセスログの形式が正しくない場合に発生します。

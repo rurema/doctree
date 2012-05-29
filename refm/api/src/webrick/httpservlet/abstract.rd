@@ -4,17 +4,17 @@ require webrick/httpstatus
 
 = class WEBrick::HTTPServlet::HTTPServletError < StandardError
 
-�桼�����������������֥�å�����㳰��ȯ��������Ȥ��˻Ȥ����������⤷
-��ޤ���
+ユーザが作成したサーブレット内で例外を発生させるときに使うと便利かもし
+れません。
 
 
 = class WEBrick::HTTPServlet::AbstractServlet < Object
 
-�����֥�åȤ���ݥ��饹�Ǥ��������� AbstractServlet �Υ��֥��饹�ǹԤ��ޤ���
+サーブレットの抽象クラスです。実装は AbstractServlet のサブクラスで行います。
 
-�����֥�åȤϰʲ��Τ褦�˻Ȥ��ޤ���[[c:WEBrick::HTTPServlet::CGIHandler]] ��
-[[lib:webrick/httpservlet/cgihandler]] ���󶡤���Ƥ��륵���֥�åȤǤ���
-CGIHandler �� AbstractServlet �Υ��֥��饹�Ǥ���
+サーブレットは以下のように使われます。[[c:WEBrick::HTTPServlet::CGIHandler]] は
+[[lib:webrick/httpservlet/cgihandler]] で提供されているサーブレットです。
+CGIHandler は AbstractServlet のサブクラスです。
 
  require 'webrick'
  srv = WEBrick::HTTPServer.new({ :DocumentRoot => './',
@@ -24,59 +24,59 @@ CGIHandler �� AbstractServlet �Υ��֥��饹�Ǥ���
  trap("INT"){ srv.shutdown }
  srv.start
 
-��Υ�����ץȤǤϰʲ��Τ褦��ή��� view.rb �ϼ¹Ԥ���ޤ���
+上のスクリプトでは以下のような流れで view.rb は実行されます。
 
- (1) �����ФΥѥ� /view.cgi �� CGIHandler ���ޥ���Ȥˤ���ӤĤ����ޤ���
- (2) �ѥ� /view.cgi �˥������������뤿�Ӥ˥�����(WEBrick::HTTPServer ���֥�������)�� 'view.rb' 
-     ������Ȥ��� CGIHandler ���֥������Ȥ��������ޤ���
- (3) �����Фϥꥯ�����ȥ��֥������Ȥ�����Ȥ��� CGIHandler#service �᥽�åɤ�ƤӤޤ���
- (4) CGIHandler ���֥������Ȥ� view.rb �� CGI ������ץȤȤ��Ƽ¹Ԥ��ޤ���
+ (1) サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
+ (2) パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServer オブジェクト)は 'view.rb' 
+     を引数として CGIHandler オブジェクトを生成します。
+ (3) サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
+ (4) CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
 
-���Τ褦�� [[c:WEBrick]] �Ǥ� Web �����Фε�ǽ������ʬ�������֥�åȤη����󶡤���Ƥ��ޤ���
-�ޤ������֥�åȤ�������뤳�Ȥˤ�꿷���ʵ�ǽ�� Web �����Ф��ɲä��뤳�Ȥ�Ǥ��ޤ���
+このように [[c:WEBrick]] では Web サーバの機能の大部分がサーブレットの形で提供されています。
+またサーブレットを作成することにより新たな機能を Web サーバに追加することもできます。
 
 == Class Methods
 
 --- new(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
 
-�����֥�åȤ����������֤��ޤ���
-[[c:WEBrick::HTTPServer]] ���֥������Ȥ� server �˼��Ȥ���ꤷ�ƥ����֥�åȤ��������ޤ���
+サーブレットを生成して返します。
+[[c:WEBrick::HTTPServer]] オブジェクトは server に自身を指定してサーブレットを生成します。
 
-@param server �����֥�åȤ��������� WEBrick::HTTPServer ���֥������Ȥ���ꤷ�ޤ���
+@param server サーブレットを生成する WEBrick::HTTPServer オブジェクトを指定します。
 
-@param options [[m:WEBrick::HTTPServer#mount]] ��3�����ʹߤ˻��ꤵ�줿�ͤ����Τޤ�Ϳ�����ޤ���
+@param options [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
 
 --- get_instance(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
 
-new(server, *options) ��ƤӽФ��ƥ����֥�åȤ����������֤��ޤ���
-[[c:WEBrick::HTTPServer]] ���֥������ȤϼºݤˤϤ��� get_instance �᥽�åɤ�ƤӽФ���
-�����֥�åȤ��������ޤ���
+new(server, *options) を呼び出してサーブレットを生成して返します。
+[[c:WEBrick::HTTPServer]] オブジェクトは実際にはこの get_instance メソッドを呼び出して
+サーブレットを生成します。
 
-�ä���ͳ��̵���¤� AbstractServlet �Υ��֥��饹�����Υ᥽�åɤ���������ɬ�פϤ���ޤ���
+特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを再定義する必要はありません。
 
-@param server [[m:WEBrick::HTTPServer#mount]] ��3�����ʹߤ˻��ꤵ�줿�ͤ����Τޤ�Ϳ�����ޤ���
+@param server [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
 
-@param options [[m:WEBrick::HTTPServer#mount]] ��3�����ʹߤ˻��ꤵ�줿�ͤ����Τޤ�Ϳ�����ޤ���
+@param options [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
 
 == Instance Methods
 
 --- service(request, response)    -> ()
 
-���ꤵ�줿 [[c:WEBrick::HTTPRequest]] ���֥������� request �� [[m:WEBrick::HTTPRequest#request_method]] �˱����ơ�
-���Ȥ� do_GET, do_HEAD, do_POST, do_OPTIONS... �����줫�Υ᥽�åɤ� request �� response ������Ȥ��ƸƤӤޤ���
+指定された [[c:WEBrick::HTTPRequest]] オブジェクト request の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
+自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを request と response を引数として呼びます。
 
-[[c:WEBrick::HTTPServer]] ���֥������Ȥϥ��饤����Ȥ���Υꥯ�����Ȥ����뤿�Ӥ�
-�����֥�åȥ��֥������Ȥ������� service �᥽�åɤ�ƤӤޤ���
+[[c:WEBrick::HTTPServer]] オブジェクトはクライアントからのリクエストがあるたびに
+サーブレットオブジェクトを生成し service メソッドを呼びます。
 
-�ä���ͳ��̵���¤� AbstractServlet �Υ��֥��饹�����Υ᥽�åɤ��������ɬ�פϤ���ޤ���
+特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
 
-@param request ���饤����Ȥ���Υꥯ�����Ȥ�ɽ�� [[c:WEBrick::HTTPRequest]] ���֥������ȤǤ���
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param response ���饤����ȤؤΥ쥹�ݥ󥹤�ɽ�� [[c:WEBrick::HTTPResponse]] ���֥������ȤǤ���
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 @raise WEBrick::HTTPStatus::MethodNotAllowed 
-       ���ꤵ�줿 [[c:WEBrick::HTTPRequest]] ���֥�������  req �����Ȥ��������Ƥ��ʤ� 
-       HTTP �Υ᥽�åɤǤ��ä����ȯ�����ޤ���
+       指定された [[c:WEBrick::HTTPRequest]] オブジェクト  req が自身に定義されていない 
+       HTTP のメソッドであった場合発生します。
 
 
 --- do_GET(request, response)        -> ()
@@ -86,25 +86,25 @@ new(server, *options) ��ƤӽФ��ƥ����֥�åȤ����������֤��ޤ���
 --- do_DELETE(request, response)     -> ()
 --- do_OPTIONS(request, response)    -> ()
 
-���Ȥ� service �᥽�åɤ��� HTTP �Υꥯ�����Ȥ˱�����
-�ƤФ��᥽�åɤǤ���AbstractServlet �Υ��֥��饹�Ϥ����Υ᥽�åɤ�Ŭ�ڤ˼�����
-�ʤ���Ф����ޤ����֤��ͤ��ä˵��ꤵ��Ƥ��ޤ���
+自身の service メソッドから HTTP のリクエストに応じて
+呼ばれるメソッドです。AbstractServlet のサブクラスはこれらのメソッドを適切に実装し
+なければいけません。返り値は特に規定されていません。
 
-���饤����Ȥ��Ȥ���ǽ���Τ��� RFC ��������줿 HTTP �Υ᥽�åɤϤ��٤Ƽ�������ɬ�פ�����ޤ���
-���饤����Ȥ���Υꥯ�����Ȥ˻Ȥ��ʤ���ʬ���äƤ���᥽�åɤϼ������ʤ��Ƥ⤫�ޤ��ޤ���
-��������Ƥ��ʤ� HTTP �᥽�åɤǤ��ä���硢���Ȥ� service �᥽�åɤ�
-�㳰��ȯ�������ޤ���
+クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要があります。
+クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
+実装されていない HTTP メソッドであった場合、自身の service メソッドが
+例外を発生させます。
 
-���Υ᥽�åɤ��ƤФ줿�����Ǥϡ����饤����Ȥ���Υꥯ�����Ȥ˴ޤޤ�� Entity Body ���ɤ߹��ߤ�
-�ޤ��Ԥ��Ƥ��ޤ���[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] �ʤɤ�
-�᥽�åɤ��ɤФ줿�������ɤ߹��ߤ��Ԥ��ޤ������饤����Ȥ������ʥǡ����������Ƥ��뤳�Ȥ��θ����
-�桼���ϥץ�����ߥ󥰤�Ԥ��٤��Ǥ���
+このメソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
+まだ行われていません。[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] などの
+メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
+ユーザはプログラミングを行うべきです。
 
-@param request ���饤����Ȥ���Υꥯ�����Ȥ�ɽ�� [[c:WEBrick::HTTPRequest]] ���֥������ȤǤ���
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param response ���饤����ȤؤΥ쥹�ݥ󥹤�ɽ�� [[c:WEBrick::HTTPResponse]] ���֥������ȤǤ���
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
-��:
+例:
 
   require 'webrick'
   class HogeServlet < WEBrick::HTTPServlet::AbstractServlet 

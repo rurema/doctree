@@ -1,63 +1,63 @@
 
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ë¤ò½ñ¤­½Ğ¤¹ [[c:Gem::Package::TarWriter]] ¤Î¥é¥Ã
-¥Ñ¡¼¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãå‡ºã™ [[c:Gem::Package::TarWriter]] ã®ãƒ©ãƒƒ
+ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã‚’æä¾›ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Gem::Package::TarOutput
 
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ë¤ò½ñ¤­½Ğ¤¹ [[c:Gem::Package::TarWriter]] ¤Î¥é¥Ã
-¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãå‡ºã™ [[c:Gem::Package::TarWriter]] ã®ãƒ©ãƒƒ
+ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Public Instance Methods
 
 --- add_gem_contents{|data_tar_writer| ... } -> self
 
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ëÆâ¤Î data.tar.gz ¤Ë¥Õ¥¡¥¤¥ë¤òÄÉ²Ã¤¹¤ë¤¿¤á¤Î¥á
-¥½¥Ã¥É¤Ç¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«å†…ã® data.tar.gz ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¿½åŠ ã™ã‚‹ãŸã‚ã®ãƒ¡
+ã‚½ãƒƒãƒ‰ã§ã™ã€‚
 
-¥Ö¥í¥Ã¥¯¤Ë¤Ï data.tar.gz ¤ËÉ³ÉÕ¤¤¤¿ [[c:Gem::Package::TarWriter]] ¤Î¥¤
-¥ó¥¹¥¿¥ó¥¹¤¬ÅÏ¤µ¤ì¤Ş¤¹¡£¤³¤Î¥Ö¥í¥Ã¥¯¥Ñ¥é¥á¡¼¥¿¤Ë¤Ï
-[[c:Gem::Specification]] ¤òÄÉ²Ã¤¹¤ë¤¿¤á¤Î metadata, metadata= ¤È¤¤¤¦ÆÃ
-°Û¥á¥½¥Ã¥É¤¬ÄÉ²Ã¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
+ãƒ–ãƒ­ãƒƒã‚¯ã«ã¯ data.tar.gz ã«ç´ä»˜ã„ãŸ [[c:Gem::Package::TarWriter]] ã®ã‚¤
+ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒæ¸¡ã•ã‚Œã¾ã™ã€‚ã“ã®ãƒ–ãƒ­ãƒƒã‚¯ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«ã¯
+[[c:Gem::Specification]] ã‚’è¿½åŠ ã™ã‚‹ãŸã‚ã® metadata, metadata= ã¨ã„ã†ç‰¹
+ç•°ãƒ¡ã‚½ãƒƒãƒ‰ãŒè¿½åŠ ã•ã‚Œã¦ã„ã¾ã™ã€‚
 
 --- add_metadata
 #@# -> discard
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ë¤Ë metadata.gz ¤òÄÉ²Ã¤·¤Ş¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«ã« metadata.gz ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 
-Á°²ó¤Î [[m:Gem::Package::TarOutput#add_gem_contents]] ¤Î¸Æ¤Ó½Ğ¤·°Ê¹ß¤Ë
-ÊÑ¹¹¤·¤¿¥á¥¿¥Ç¡¼¥¿¤ò½ñ¤­¹ş¤ß¤Ş¤¹¡£
+å‰å›ã® [[m:Gem::Package::TarOutput#add_gem_contents]] ã®å‘¼ã³å‡ºã—ä»¥é™ã«
+å¤‰æ›´ã—ãŸãƒ¡ã‚¿ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã¿ã¾ã™ã€‚
 
 --- add_signatures
 #@# -> discard
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ë¤Ë data.tar.gz.sig, metadata.gz.sig ¤òÄÉ²Ã¤·¤Ş¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«ã« data.tar.gz.sig, metadata.gz.sig ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 
 @see [[c:Gem::Security::Signer]]
 
 --- close
 #@# -> discard
 
-¼«¿È¤Ë´ØÏ¢ÉÕ¤±¤é¤ì¤¿ IO ¤ò close ¤·¤Ş¤¹¡£
+è‡ªèº«ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸ IO ã‚’ close ã—ã¾ã™ã€‚
 
 == Singleton Methods
 
 --- open(io, signer = nil){|data_tar_writer| ... }
 #@# -> discard
 
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ëÆâ¤Î data.tar.gz ¤Ë¥Õ¥¡¥¤¥ë¤òÄÉ²Ã¤¹¤ë¤¿¤á¤Î¥á
-¥½¥Ã¥É¤Ç¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«å†…ã® data.tar.gz ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¿½åŠ ã™ã‚‹ãŸã‚ã®ãƒ¡
+ã‚½ãƒƒãƒ‰ã§ã™ã€‚
 
-@param io gem-format ¤Ê tar ¥Õ¥¡¥¤¥ë¤ò°·¤¦¤¿¤á¤Î IO ¤ò»ØÄê¤·¤Ş¤¹¡£
+@param io gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ‰±ã†ãŸã‚ã® IO ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param signer [[c:Gem::Security::Signer]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Ş¤¹¡£
+@param signer [[c:Gem::Security::Signer]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 @see [[m:Gem::Package::TarOutput#add_gem_contents]]
 
 --- new(io, signer) -> Gem::Package::TarOutput
 
-gem-format ¤Ê tar ¥Õ¥¡¥¤¥ëÆâ¤Î data.tar.gz ¤Ë¥Õ¥¡¥¤¥ë¤òÄÉ²Ã¤¹¤ë¤¿¤á¤Ë
-¼«¿È¤ò½é´ü²½¤·¤Ş¤¹¡£
+gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«å†…ã® data.tar.gz ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¿½åŠ ã™ã‚‹ãŸã‚ã«
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
-@param io gem-format ¤Ê tar ¥Õ¥¡¥¤¥ë¤ò°·¤¦¤¿¤á¤Î IO ¤ò»ØÄê¤·¤Ş¤¹¡£
+@param io gem-format ãª tar ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ‰±ã†ãŸã‚ã® IO ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param signer [[c:Gem::Security::Signer]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Ş¤¹¡£
+@param signer [[c:Gem::Security::Signer]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 @see [[c:Gem::Security::Signer]]

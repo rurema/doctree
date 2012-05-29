@@ -1,6 +1,6 @@
-¹ÔÎó¤È¿ô¥Ù¥¯¥È¥ë¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+è¡Œåˆ—ã¨æ•°ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-#@# [2002-04-02]  by [[unknown:¤¹¤¹|URL:mailto:sugawah@attglobal.net]]
+#@# [2002-04-02]  by [[unknown:ã™ã™|URL:mailto:sugawah@attglobal.net]]
 
 #@include(matrix/Vector)
 #@include(matrix/Matrix)

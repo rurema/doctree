@@ -2,91 +2,91 @@ require rubygems/format
 require rubygems/ext
 require rubygems/require_paths_builder
 
-RubyGems �� Gem �򥤥󥹥ȡ��뤹�뤿��Υ饤�֥��Ǥ���
+RubyGems の Gem をインストールするためのライブラリです。
 
 = class Gem::Installer
 include Gem::UserInteraction
 include Gem::RequirePathsBuilder
 
-[[c:Gem::Installer]] �� Gem ��Ÿ������  Gem �˴ޤޤ�Ƥ����ե������
-�ե����륷���ƥ������������֤����֤��ޤ���
+[[c:Gem::Installer]] は Gem を展開し、  Gem に含まれていたファイルを
+ファイルシステム上の正しい位置に配置します。
 
-�ޤ���gemspec �� specifications �ǥ��쥯�ȥ�ˡ�����å���� cache �ǥ��쥯�ȥ�ˡ�
-�¹ԥե�����䥷��ܥ�å���󥯤ʤɤ� bin �ǥ��쥯�ȥ�����֤��ޤ���
+また、gemspec を specifications ディレクトリに、キャッシュを cache ディレクトリに、
+実行ファイルやシンボリックリンクなどを bin ディレクトリに配置します。
 
 == Public Instance Methods
 
 --- app_script_text -> String
 
-���ץꥱ�������Τ���μ¹ԥե�����ο����Υƥ����Ȥ��֤��ޤ���
+アプリケーションのための実行ファイルの雛形のテキストを返します。
 
 --- bin_dir -> String
 
-�¹ԥե�����򥤥󥹥ȡ��뤹��ǥ��쥯�ȥ���֤��ޤ���
+実行ファイルをインストールするディレクトリを返します。
 
 --- build_extensions
 #@# -> discard
-��ĥ�饤�֥���ӥ�ɤ��ޤ���
+拡張ライブラリをビルドします。
 
-��ĥ�饤�֥���ӥ�ɤ��뤿��Υե����륿���פȤ���ͭ���Ǥ���Τϡ�
-extconf.rb, configure script, Rakefile, mkmf_files �Ǥ���
+拡張ライブラリをビルドするためのファイルタイプとして有効であるのは、
+extconf.rb, configure script, Rakefile, mkmf_files です。
 
 --- ensure_dependency(spec, dependency) -> true
 
-���󥹥ȡ��뤷�褦�Ȥ��Ƥ��� Gem ����¸�ط����������Ƥ�������ǧ���ޤ���
+インストールしようとしている Gem が依存関係を満たしている事を確認します。
 
-��¸�ط����������Ƥ��ʤ����ϡ��㳰 [[c:Gem::InstallError]] ��ȯ�����ޤ���
+依存関係を満たしていない場合は、例外 [[c:Gem::InstallError]] が発生します。
 
-@param spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
-@param dependency [[c:Gem::Dependency]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param dependency [[c:Gem::Dependency]] のインスタンスを指定します。
 
-@raise Gem::InstallError ��¸�ط����������Ƥ��ʤ�����ȯ�����ޤ���
+@raise Gem::InstallError 依存関係を満たしていない場合に発生します。
 
 --- extract_files
 #@# -> discard
-�ե�����Υ���ǥå������ɤ߼�äơ����줾��Υե������ Gem �Υǥ��쥯�ȥ��Ÿ�����ޤ���
+ファイルのインデックスを読み取って、それぞれのファイルを Gem のディレクトリに展開します。
 
-�ޤ����ե������ Gem �ǥ��쥯�ȥ�˥��󥹥ȡ��뤷�ʤ��褦�ˤ��ޤ���
+また、ファイルを Gem ディレクトリにインストールしないようにします。
 
-@raise ArgumentError ���Ȥ� [[c:Gem::Format]] �����åȤ���Ƥ��ʤ�����ȯ�����ޤ���
+@raise ArgumentError 自身に [[c:Gem::Format]] がセットされていない場合に発生します。
 
-@raise Gem::InstallError ���󥹥ȡ�����Υѥ��������ʾ���ȯ�����ޤ���
+@raise Gem::InstallError インストール先のパスが不正な場合に発生します。
 
 --- formatted_program_filename(filename) -> String
 
-Ruby �Υ��ޥ�ɤ�Ʊ���ץ�ե��å����ȥ��ե��å������դ����ե�����̾���֤��ޤ���
+Ruby のコマンドと同じプレフィックスとサフィックスを付けたファイル名を返します。
 
-@param filename �¹ԥե�����Υե�����̾����ꤷ�ޤ���
+@param filename 実行ファイルのファイル名を指定します。
 
 --- gem_home -> String
 
-Gem �Υ��󥹥ȡ�������֤��ޤ���
+Gem のインストール先を返します。
 
 --- generate_bin
 #@# -> discard
-Gem �ǥ��󥹥ȡ��뤵���¹ԥե������������ޤ���
+Gem でインストールされる実行ファイルを作成します。
 
-@raise Gem::FilePermissionError ���󥹥ȡ�����˽���߽���ʤ�����ȯ�����ޤ���
+@raise Gem::FilePermissionError インストール先に書込み出来ない場合に発生します。
 
 --- generate_bin_script(filename, bindir)
 #@# -> discard
-Gem �����äƤ��륢�ץꥱ��������¹Ԥ��뤿��Υ�����ץȤ�������ޤ���
+Gem に入っているアプリケーションを実行するためのスクリプトを作成します。
 
-@param filename �ե�����̾����ꤷ�ޤ���
+@param filename ファイル名を指定します。
 
-@param bindir �¹ԥե���������֤���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param bindir 実行ファイルを配置するディレクトリを指定します。
 
 --- generate_bin_symlink(filename, bindir)
 #@# -> discard
-Gem �����äƤ��륢�ץꥱ��������¹Ԥ��뤿��Υ���ܥ�å���󥯤�������ޤ���
+Gem に入っているアプリケーションを実行するためのシンボリックリンクを作成します。
 
-���ߥ��󥹥ȡ��뤵��Ƥ��� Gem ���⿷���� Gem �򥤥󥹥ȡ��뤹��Ȥ��ϡ�
-����ܥ�å���󥯤򹹿����ޤ���
+現在インストールされている Gem よりも新しい Gem をインストールするときは、
+シンボリックリンクを更新します。
 
-@param filename �ե�����̾����ꤷ�ޤ���
+@param filename ファイル名を指定します。
 
-@param bindir �¹ԥե���������֤���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param bindir 実行ファイルを配置するディレクトリを指定します。
 
 #@since 1.9.2
 --- generate_windows_script(filename, bindir)
@@ -94,133 +94,133 @@ Gem �����äƤ��륢�ץꥱ��������¹Ԥ��뤿��Υ���ܥ�å���󥯤�������ޤ���
 --- generate_windows_script(bindir, filename)
 #@end
 #@# -> discard
-���ޥ�ɤμ¹Ԥ��ưפˤ��뤿��� Windows �����ΥХå��ե������������ޤ���
+コマンドの実行を容易にするために Windows 向けのバッチファイルを作成します。
 
-@param bindir �¹ԥե���������֤���ǥ��쥯�ȥ����ꤷ�ޤ���
+@param bindir 実行ファイルを配置するディレクトリを指定します。
 
-@param filename �ե�����̾����ꤷ�ޤ���
+@param filename ファイル名を指定します。
 
 --- install -> Gem::Specification
 
-Gem �򥤥󥹥ȡ��뤷�ޤ���
+Gem をインストールします。
 
-�ʲ��Υǥ��쥯�ȥ깽¤�� Gem �򥤥󥹥ȡ��뤷�ޤ���
+以下のディレクトリ構造で Gem をインストールします。
 
    @gem_home/
-     cache/<gem-version>.gem              #=> ���󥹥ȡ��뤷�� Gem �Υ��ԡ�
-     gems/<gem-version>/...               #=> ���󥹥ȡ������Ÿ�������ե�����
-     specifications/<gem-version>.gemspec #=> gemspec �ե�����
+     cache/<gem-version>.gem              #=> インストールした Gem のコピー
+     gems/<gem-version>/...               #=> インストール時に展開したファイル
+     specifications/<gem-version>.gemspec #=> gemspec ファイル
 
-@return �����ɤ��줿 [[c:Gem::Specification]] �Υ��󥹥��󥹤��֤��ޤ���
+@return ロードされた [[c:Gem::Specification]] のインスタンスを返します。
 
-@raise Gem::InstallError �׵ᤵ�줿 Ruby �ΥС��������������Ƥ��ʤ�����ȯ�����ޤ���
+@raise Gem::InstallError 要求された Ruby のバージョンを満たしていない場合に発生します。
 
-@raise Gem::InstallError �׵ᤵ�줿 RubyGems �ΥС��������������Ƥ��ʤ�����ȯ�����ޤ���
+@raise Gem::InstallError 要求された RubyGems のバージョンを満たしていない場合に発生します。
 
-@raise Gem::InstallError [[c:Zlib::GzipFile::Error]] ��ȯ����������ȯ�����ޤ���
+@raise Gem::InstallError [[c:Zlib::GzipFile::Error]] が発生した場合に発生します。
 
 --- installation_satisfies_dependency?(dependency) -> bool
 
-��Ͽ����Ƥ��륽��������ǥå�����Ϳ����줿��¸�ط���
-���������Ȥ��Ǥ�����ϡ������֤��ޤ��������Ǥʤ����ϵ����֤��ޤ���
+登録されているソースインデックスが与えられた依存関係を
+満たすことができる場合は、真を返します。そうでない場合は偽を返します。
 
-@param dependency [[c:Gem::Dependency]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param dependency [[c:Gem::Dependency]] のインスタンスを指定します。
 
 --- shebang(bin_file_name) -> String
 
-�¹ԥե�������ǻ��Ѥ��� shebang line (#! line) ��ɽ��ʸ������֤��ޤ���
+実行ファイル内で使用する shebang line (#! line) を表す文字列を返します。
 
-@param bin_file_name �¹ԥե������̾������ꤷ�ޤ���
+@param bin_file_name 実行ファイルの名前を指定します。
 
 --- spec -> Gem::Specification
 
-���󥹥ȡ��뤷�褦�Ȥ��Ƥ��� Gem ���б����� [[c:Gem::Specification]] �Υ��󥹥��󥹤��֤��ޤ���
+インストールしようとしている Gem に対応する [[c:Gem::Specification]] のインスタンスを返します。
 
 --- unpack(directory)
 #@# -> discard
-Ϳ����줿�ǥ��쥯�ȥ�� Gem ��Ÿ�����ޤ���
+与えられたディレクトリに Gem を展開します。
 
-@param directory Gem ��Ÿ������ǥ��쥯�ȥ����ꤷ�ޤ���
+@param directory Gem を展開するディレクトリを指定します。
 
 --- windows_stub_script -> String
 
-���ޥ�ɤ�ư���뤿��˻��Ѥ��� Windows �ѤΥХå��ե���������Ƥ�
-ʸ����Ȥ����֤��ޤ���
+コマンドを起動するために使用する Windows 用のバッチファイルの内容を
+文字列として返します。
 
 --- write_spec
 #@# -> discard
-Ruby ������ץȷ����� .gemspec �ե������������ޤ���
+Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 == Singleton Methods
 
 --- new(gem, options = {}) -> Gem::Installer
-#@todo �񤤤Ƥʤ����ץ���󤬤��äѤ�����
+#@todo 書いてないオプションがいっぱいある
 
-Ϳ����줿�����Ǽ��Ȥ��������ޤ���
+与えられた引数で自身を初期化します。
 
-@param gem ���󥹥ȡ����оݤ� Gem �Υѥ�����ꤷ�ޤ���
+@param gem インストール対象の Gem のパスを指定します。
 
-@param options ���󥹥ȡ��餬���Ѥ��륪�ץ�����ϥå���ǻ��ꤷ�ޤ���
-               ���ѤǤ��륭���ϰʲ����̤�Ǥ���
+@param options インストーラが使用するオプションをハッシュで指定します。
+               使用できるキーは以下の通りです。
 : :env_shebang
-  ���ޥ�ɤΥ�åѡ��� shebang line �� /usr/bin/env ����Ѥ��ޤ���
+  コマンドのラッパーで shebang line に /usr/bin/env を使用します。
 : :force
-  ��̾���줿 Gem �Τߤ򥤥󥹥ȡ��뤹��Ȥ����ݥꥷ���ʳ���
-  ���ƤΥС����������å��ȥ������ƥ��ݥꥷ���Υ����å���Ԥ�ʤ��褦�ˤ��ޤ���
+  署名された Gem のみをインストールするというポリシー以外、
+  全てのバージョンチェックとセキュリティポリシーのチェックを行わないようにします。
 : :ignore_dependencies
-  ��¸�ط����������Ƥ��ʤ����Ǥ��㳰��ȯ�������ޤ���
+  依存関係を満たしていない場合でも例外を発生させません。
 : :install_dir
-  Gem �򥤥󥹥ȡ��뤹��ǥ��쥯�ȥ����ꤷ�ޤ���
+  Gem をインストールするディレクトリを指定します。
 : :format_executable
-  �¹ԥե������̾���� ruby ��Ʊ���ե����ޥåȤˤ��뤫�ɤ������ꤷ�ޤ���
-  ���󥹥ȡ��뤵��Ƥ��� ruby �� ruby19 �Ȥ���̾���ξ�硢foo_exec �Ȥ���̾����
-  �¹ԥե������ foo_exec19 �Ȥ���̾���ǥ��󥹥ȡ��뤵��ޤ���
+  実行ファイルの名前を ruby と同じフォーマットにするかどうか指定します。
+  インストールされている ruby が ruby19 という名前の場合、foo_exec という名前の
+  実行ファイルは foo_exec19 という名前でインストールされます。
 : :security_policy
-  ����Υ������ƥ��ݥꥷ������Ѥ��ޤ����ܺ٤� [[c:Gem::Security]] �򻲾Ȥ��Ƥ���������
+  特定のセキュリティポリシーを使用します。詳細は [[c:Gem::Security]] を参照してください。
 : :wrappers
-  �����ͤ����ξ��ϡ���åѡ��򥤥󥹥ȡ��뤷�ޤ������ξ��ϡ�����ܥ�å���󥯤�������ޤ���
+  この値が真の場合は、ラッパーをインストールします。偽の場合は、シンボリックリンクを作成します。
 : :user_install
-  �����ͤ� false �ξ��ϡ��桼���Υۡ���ǥ��쥯�ȥ�� Gem �򥤥󥹥ȡ��뤷�ޤ���
-  �����ͤ� nil �ξ��ϡ��桼���Υۡ���ǥ��쥯�ȥ�� Gem �򥤥󥹥ȡ��뤷�ޤ������ٹ�ɽ������ޤ���
+  この値が false の場合は、ユーザのホームディレクトリに Gem をインストールしません。
+  この値が nil の場合は、ユーザのホームディレクトリに Gem をインストールしますが、警告が表示されます。
 
-@raise Gem::InstallError Gem �Υե����ޥåȤ������Ǥ������ȯ�����ޤ���
+@raise Gem::InstallError Gem のフォーマットが不正である場合に発生します。
 
-@raise Gem::FilePermissionError �񤭹�����Υǥ��쥯�ȥ�˽񤭹��߸��¤��ʤ�����ȯ�����ޤ���
+@raise Gem::FilePermissionError 書き込み先のディレクトリに書き込み権限がない場合に発生します。
 
 --- exec_format -> String
 
-�¹ԥե�����̾�Υե����ޥåȤ��֤��ޤ���
+実行ファイル名のフォーマットを返します。
 
-���ꤷ�ʤ����� ruby ���ޥ�ɤ�Ʊ���ե����ޥåȤ���Ѥ��ޤ���
+指定しない場合は ruby コマンドと同じフォーマットを使用します。
 
 --- exec_format=(format)
 
-�¹ԥե�����̾�Υե����ޥåȤ򥻥åȤ��ޤ���
+実行ファイル名のフォーマットをセットします。
 
-@param format �¹ԥե�����̾�Υե����ޥåȤ���ꤷ�ޤ���
+@param format 実行ファイル名のフォーマットを指定します。
 
 --- home_install_warning -> bool
 
-�����ͤ����ξ�硢�ۡ���ǥ��쥯�ȥ�� Gem �򥤥󥹥ȡ��뤷�褦�Ȥ���ȷٹ��ɽ�����ޤ���
+この値が真の場合、ホームディレクトリに Gem をインストールしようとすると警告を表示します。
 
 --- home_install_warning=(flag)
 
-�ۡ���ǥ��쥯�ȥ�� Gem �򥤥󥹥ȡ��뤷�褦�Ȥ���ȷٹ��ɽ�����뤫�ɤ������åȤ��ޤ���
+ホームディレクトリに Gem をインストールしようとすると警告を表示するかどうかセットします。
 
-@param flag ������ꤹ��ȥۡ���ǥ��쥯�ȥ�� Gem �򥤥󥹥ȡ��뤷�褦
-            �Ȥ���ȷٹ��ɽ������褦�ˤʤ�ޤ���
+@param flag 真を指定するとホームディレクトリに Gem をインストールしよう
+            とすると警告を表示するようになります。
 
 --- path_warning -> bool
 
-�����ͤ� ���ξ��� Gem.bindir �� PATH �˴ޤޤ�Ƥ��ʤ����˷ٹ��ɽ�����ޤ���
+この値が 真の場合は Gem.bindir が PATH に含まれていない場合に警告を表示します。
 
 --- path_warning=(flag)
 
-Gem.bindir �� PATH �˴ޤޤ�Ƥ��ʤ����˷ٹ��ɽ�����뤫�ɤ������åȤ��ޤ���
+Gem.bindir が PATH に含まれていない場合に警告を表示するかどうかセットします。
 
-@param flag ������ꤹ��ȡ�Gem.bindir �� PATH �˴ޤޤ�Ƥ��ʤ����˷�
-            ���ɽ������褦�ˤʤ�ޤ���
+@param flag 真を指定すると、Gem.bindir が PATH に含まれていない場合に警
+            告を表示するようになります。
 
 = class Gem::Installer::ExtensionBuildError < Gem::InstallError
 
-��ĥ�饤�֥���ӥ����˥��顼��ȯ����������ȯ�����ޤ���
+拡張ライブラリをビルド中にエラーが発生した場合に発生します。

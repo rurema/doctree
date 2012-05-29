@@ -1,17 +1,17 @@
 = class Net::HTTPResponse < Object
 include Net::HTTPHeader
 
-HTTP �쥹�ݥ󥹤�ɽ�����륯�饹�Ǥ���
-Net::HTTP ���饹�ϼºݤˤ� HTTPResponse �Υ��֥��饹���֤��ޤ���
+HTTP レスポンスを表現するクラスです。
+Net::HTTP クラスは実際には HTTPResponse のサブクラスを返します。
 
 == Class Methods
 
 #@# --- new(http_version, result_code, message) 
-#@# �饤�֥�������ѥ᥽�åɤǤ����Ȥ�ʤ��Ǥ���������
+#@# ライブラリ内部用メソッドです。使わないでください。
 
 --- body_permitted? -> bool
-����ƥ��ƥ��ܥǥ���ޤळ�Ȥ�������Ƥ���쥹�ݥ󥹥��饹
-�ʤ�п��򡢤����Ǥʤ���е����֤��ޤ���
+エンティティボディを含むことが許されているレスポンスクラス
+ならば真を、そうでなければ偽を返します。
 
 #@# --- exception_type
 #@# --- read_new 
@@ -21,328 +21,328 @@ Net::HTTP ���饹�ϼºݤˤ� HTTPResponse �Υ��֥��饹���֤��ޤ���
 
 --- code -> String
 
-HTTP �Υꥶ��ȥ����ɤǤ����㤨�� '302' �ʤɤǤ���
+HTTP のリザルトコードです。例えば '302' などです。
 
-�����ͤ򸫤뤳�Ȥǥ쥹�ݥ󥹤μ����Ƚ�̤Ǥ��ޤ�����
-�쥹�ݥ󥹥��֥������Ȥ��ɤΥ��饹�Υ��󥹥��󥹤���
-���뤳�ȤǤ�쥹�ݥ󥹤μ����Ƚ�̤Ǥ��ޤ���
+この値を見ることでレスポンスの種類を判別できますが、
+レスポンスオブジェクトがどのクラスのインスタンスかを
+見ることでもレスポンスの種類を判別できます。
 
 --- message -> String
 --- msg -> String
 
-HTTP �����Ф��ꥶ��ȥ����ɤ��ղä����֤���å������Ǥ���
-�㤨�� 'Not Found' �ʤɤǤ���
+HTTP サーバがリザルトコードに付加して返すメッセージです。
+例えば 'Not Found' などです。
 
-msg �� obsolete �Ǥ����Ȥ�ʤ��Ǥ���������
+msg は obsolete です。使わないでください。
 
 --- http_version -> String
 
-�����Ф����ݡ��Ȥ��Ƥ��� HTTP �ΥС�������ʸ������֤��ޤ���
+サーバがサポートしている HTTP のバージョンを文字列で返します。
 
 #@since 1.8.0
 --- to_ary -> [Net::HTTPResponse, String]
-���Υ᥽�åɤ� net/http.rb 1.1 �Ȥθߴ����Τ����¸�ߤ��ޤ���
+このメソッドは net/http.rb 1.1 との互換性のために存在します。
 
-[self, self.body] ���֤��ޤ���
+[self, self.body] を返します。
 #@end
 
 --- value -> nil
-�쥹�ݥ󥹤� 2xx(����)�Ǥʤ��ä����ˡ��б�����
-�㳰��ȯ�������ޤ���
+レスポンスが 2xx(成功)でなかった場合に、対応する
+例外を発生させます。
 
-@raise HTTPError �쥹�ݥ󥹤� 1xx �Ǥ��뤫�� net/http ���Τ�ʤ�
-                 ����Υ쥹�ݥ󥹤Ǥ������ȯ�����ޤ���
-@raise HTTPRetriableError �쥹�ݥ󥹤� 3xx �Ǥ������ȯ�����ޤ���
-@raise HTTPFatalError �쥹�ݥ󥹤� 4xx �Ǥ������ȯ�����ޤ���
-@raise HTTPServerError �쥹�ݥ󥹤� 5xx �Ǥ������ȯ�����ޤ���
+@raise HTTPError レスポンスが 1xx であるか、 net/http が知らない
+                 種類のレスポンスである場合に発生します。
+@raise HTTPRetriableError レスポンスが 3xx である場合に発生します。
+@raise HTTPFatalError レスポンスが 4xx である場合に発生します。
+@raise HTTPServerError レスポンスが 5xx である場合に発生します。
 
 
 --- response -> self
 --- header -> self
 --- reader_header -> self
 
-�ߴ������ݤĤ��������Ƴ�����줿�᥽�åɤǤ���
-�Ȥ�ʤ��Ǥ���������
+互換性を保つためだけに導入されたメソッドです。
+使わないでください。
 
-��ʬ���Ȥ��֤��ޤ���
+自分自身を返します。
 
 --- body -> String | () | nil
 --- entity -> String | () | nil
 
-����ƥ��ƥ��ܥǥ����֤��ޤ���
+エンティティボディを返します。
 
-�쥹�ݥ󥹤˥ܥǥ����ʤ����ˤ� nil ���֤��ޤ���
+レスポンスにボディがない場合には nil を返します。
 
-[[m:Net::HTTPResponse#read_body]] ��֥��å��դ��ǸƤ�����ˤ�
-���Υ᥽�åɤ�Net::ReadAdapter �Υ��󥹥��󥹤��֤��ޤ�����
-����ϻȤ�ʤ��Ǥ���������
+[[m:Net::HTTPResponse#read_body]] をブロック付きで呼んだ場合には
+このメソッドはNet::ReadAdapter のインスタンスを返しますが、
+これは使わないでください。
 
-entity �� obsolete �Ǥ���
+entity は obsolete です。
 
 --- read_body(dest=nil) -> String|nil
 --- read_body {|str| .... } -> ()
 
-�֥��å���Ϳ���ʤ��ä����ˤϥ���ƥ��ƥ��ܥǥ���
-ʸ������֤��ޤ���
-�֥��å���Ϳ�������ˤ�
-����ƥ��ƥ��ܥǥ��򾯤����ļ������ƽ缡�֥��å���
-ʸ�����Ϳ���ޤ���
+ブロックを与えなかった場合にはエンティティボディを
+文字列で返します。
+ブロックを与えた場合には
+エンティティボディを少しずつ取得して順次ブロックに
+文字列で与えます。
 
-�쥹�ݥ󥹤��ܥǥ�������ʤ����ˤ� nil ���֤��ޤ���
+レスポンスがボディを持たない場合には nil を返します。
 
-���٥֥��å���Ϳ�����ˤ��Υ᥽�åɤ�Ƥ�����ˤϡ�
-������Ϥ��Ǥ��ɤߤ������ܥǥ���ʸ����Ȥ���
-�֤��ޤ����ޤ����٥֥��å���Ϳ���Ƥ��Υ᥽�åɤ�Ƥ�����ˤϡ�
-������� Net::ReadAdapter �Υ��󥹥��󥹤��֤äƤ��ޤ�����
-���ξ��Ϥ��Υ��֥������ȤϻȤ�ʤ��Ǥ���������
+一度ブロックを与えずにこのメソッドを呼んだ場合には、
+次からはすでに読みだしたボディを文字列として
+返します。また一度ブロックを与えてこのメソッドを呼んだ場合には、
+次からは Net::ReadAdapter のインスタンスが返ってきますが、
+その場合はそのオブジェクトは使わないでください。
 
-dest �� obsolete �Ǥ����Ȥ�ʤ��Ǥ���������
-dest ����ꤷ�����ˤ�
-�ܥǥ��򾯤����ļ������ƽ缡
-��dest << �ܥǥ������ҡפ�¹Ԥ��ޤ���
+dest は obsolete です。使わないでください。
+dest を指定した場合には
+ボディを少しずつ取得して順次
+「dest << ボディの断片」を実行します。
 
-@param dest obsolete�ʰ����Ǥ������Ѥ��ʤ��Ǥ���������
+@param dest obsoleteな引数です。利用しないでください。
 #@# = Constants
 #@# --- CODE_CLASS_TO_OBJ
 #@# --- CODE_TO_OBJ
 
 = class Net::HTTPUnknownResponse < Net::HTTPResponse
-���Υ饤�֥�꤬�Τ�ʤ��쥹�ݥ󥹤�ɽ�����륯�饹�Ǥ���
+このライブラリが知らないレスポンスを表現するクラスです。
 
 = class Net::HTTPInformation < Net::HTTPResponse
-HTTP �쥹�ݥ� 1xx (Informational) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 1xx (Informational) を表現するクラスです。
 
-�ꥯ�����Ȥ�����˼�������������³���Ƥ��뤳�Ȥ�ɽ�路��
-���ޤ���
+リクエストが正常に受信し、処理を続けていることを表わして
+います。
 
 = class Net::HTTPSuccess < Net::HTTPResponse
-HTTP �쥹�ݥ� 2xx (Success) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 2xx (Success) を表現するクラスです。
 
-�ꥯ�����Ȥ�����˼������������줿���Ȥ�ɽ���Ƥ��ޤ���
+リクエストが正常に受信、処理されたことを表しています。
 
 = class Net::HTTPRedirection < Net::HTTPResponse
-HTTP �쥹�ݥ� 3xx (Redirection) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 3xx (Redirection) を表現するクラスです。
 
-�ꥯ�����Ȥ�����˼������ޤ�������������λ���뤿��ˤ�
-����ʤ�ư�ɬ�פʤ��Ȥ�ɽ���ޤ���
+リクエストが正常に受信しましたが、処理を完了するためには
+さらなる動作が必要なことを表します。
 
 = class Net::HTTPClientError < Net::HTTPResponse
-HTTP �쥹�ݥ� 4xx (Client Error) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 4xx (Client Error) を表現するクラスです。
 
-�ꥯ�����ȹ�ʸ���ְ�äƤ���ʤɡ����饤����Ȥ��ְ�ä�
-���뤳�Ȥ�ɽ���Ƥ��ޤ���
+リクエスト構文が間違っているなど、クライアントが間違って
+いることを表しています。
 
 = class Net::HTTPServerError < Net::HTTPResponse
-HTTP �쥹�ݥ� 2xx (Server Error) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 2xx (Server Error) を表現するクラスです。
 
-�����Ф����顼�򵯤����Ƥ���ʤɡ�������¦�ǽ���
-��λ���뤳�Ȥ��Ǥ��ʤ����Ȥ�ɽ���Ƥ��ޤ���
+サーバがエラーを起こしているなど、サーバ側で処理
+を完了することができないことを表しています。
 
 = class Net::HTTPContinue < Net::HTTPInformation
-HTTP �쥹�ݥ� 100 (Continue) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 100 (Continue) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPSwitchProtocol < Net::HTTPInformation
-HTTP �쥹�ݥ� 101 (Switching Protocols) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 101 (Switching Protocols) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPOK < Net::HTTPSuccess
-HTTP �쥹�ݥ� 200 (OK) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 200 (OK) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPCreated < Net::HTTPSuccess
-HTTP �쥹�ݥ� 201 (Created) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 201 (Created) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPAccepted < Net::HTTPSuccess
-HTTP �쥹�ݥ� 202 (Accepted) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 202 (Accepted) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPNonAuthoritativeInformation < Net::HTTPSuccess
-HTTP �쥹�ݥ� 203 (Non-Authoritative Information) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 203 (Non-Authoritative Information) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPNoContent < Net::HTTPSuccess
-HTTP �쥹�ݥ� 204 (No Content) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 204 (No Content) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPResetContent < Net::HTTPSuccess
-HTTP �쥹�ݥ� 205 (Reset Content) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 205 (Reset Content) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPPartialContent < Net::HTTPSuccess
-HTTP �쥹�ݥ� 206 (Partial Content) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 206 (Partial Content) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 
 = class Net::HTTPMultipleChoice < Net::HTTPRedirection
-HTTP �쥹�ݥ� 300 (Multiple Choices) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 300 (Multiple Choices) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPMovedPermanently < Net::HTTPRedirection
-HTTP �쥹�ݥ� 301 (Moved Permanently) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 301 (Moved Permanently) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPFound < Net::HTTPRedirection
 alias Net::HTTPMovedTemporarily
 
-HTTP �쥹�ݥ� 302 (Found) ��ɽ�����륯�饹�Ǥ���
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+HTTP レスポンス 302 (Found) を表現するクラスです。
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPSeeOther < Net::HTTPRedirection
-HTTP �쥹�ݥ� 303 (See Other) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 303 (See Other) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPNotModified < Net::HTTPRedirection
-HTTP �쥹�ݥ� 304 (Not Modified) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 304 (Not Modified) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPUseProxy < Net::HTTPRedirection
-HTTP �쥹�ݥ� 305 (Use Proxy) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 305 (Use Proxy) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 #@# 306 unused
 = class Net::HTTPTemporaryRedirect < Net::HTTPRedirection
-HTTP �쥹�ݥ� 307 (Temporary Redirect) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 307 (Temporary Redirect) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 
 = class Net::HTTPBadRequest < Net::HTTPClientError
-HTTP �쥹�ݥ� 400 (Bad Request) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 400 (Bad Request) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPUnauthorized < Net::HTTPClientError
-HTTP �쥹�ݥ� 401 (Unauthorized) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 401 (Unauthorized) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPPaymentRequired < Net::HTTPClientError
-HTTP �쥹�ݥ� 402 (Payment Required) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 402 (Payment Required) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPForbidden < Net::HTTPClientError
-HTTP �쥹�ݥ� 403 (Forbidden) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 403 (Forbidden) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPNotFound < Net::HTTPClientError
-HTTP �쥹�ݥ� 404 (Not Found) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 404 (Not Found) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPMethodNotAllowed < Net::HTTPClientError
-HTTP �쥹�ݥ� 405  (Method Not Allowed) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 405  (Method Not Allowed) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPNotAcceptable < Net::HTTPClientError
-HTTP �쥹�ݥ� 406 (Not Acceptable) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 406 (Not Acceptable) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPProxyAuthenticationRequired < Net::HTTPClientError
-HTTP �쥹�ݥ� 407 (Proxy Authentication Required) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 407 (Proxy Authentication Required) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPRequestTimeOut < Net::HTTPClientError
-HTTP �쥹�ݥ� 408 (Request Time-out) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 408 (Request Time-out) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPConflict < Net::HTTPClientError
-HTTP �쥹�ݥ� 409 (Conflict) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 409 (Conflict) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPGone < Net::HTTPClientError
-HTTP �쥹�ݥ� 410 (Gone) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 410 (Gone) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPLengthRequired < Net::HTTPClientError
-HTTP �쥹�ݥ� 411 (Length Required) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 411 (Length Required) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPPreconditionFailed < Net::HTTPClientError
-HTTP �쥹�ݥ� 412 (Precondition Failed) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 412 (Precondition Failed) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPRequestEntityTooLarge < Net::HTTPClientError
-HTTP �쥹�ݥ� 413 (Request Entity Too Large) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 413 (Request Entity Too Large) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPRequestURITooLong < Net::HTTPClientError
 alias Net::HTTPRequestURITooLarge
 
-HTTP �쥹�ݥ� 414 (Request-URI Too Large) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 414 (Request-URI Too Large) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPUnsupportedMediaType < Net::HTTPClientError
 
-HTTP �쥹�ݥ� 415 (Unsupported Media Type) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 415 (Unsupported Media Type) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPRequestedRangeNotSatisfiable < Net::HTTPClientError
-HTTP �쥹�ݥ� 416 (Requested range not satisfiable) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 416 (Requested range not satisfiable) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPExpectationFailed < Net::HTTPClientError
-HTTP �쥹�ݥ� 417 (Expectation Failed) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 417 (Expectation Failed) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 
 = class Net::HTTPInternalServerError < Net::HTTPServerError
-HTTP �쥹�ݥ� 500 (Internal Server Error) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 500 (Internal Server Error) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPNotImplemented < Net::HTTPServerError
-HTTP �쥹�ݥ� 501 (Not Implemented) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 501 (Not Implemented) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPBadGateway < Net::HTTPServerError
-HTTP �쥹�ݥ� 502 (Bad Gateway) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 502 (Bad Gateway) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPServiceUnavailable < Net::HTTPServerError
-HTTP �쥹�ݥ� 503 (Service Unavailable) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 503 (Service Unavailable) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPGatewayTimeOut < Net::HTTPServerError
-HTTP �쥹�ݥ� 504 (Gateway Time-out) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 504 (Gateway Time-out) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPVersionNotSupported < Net::HTTPServerError
-HTTP �쥹�ݥ� 505 (HTTP Version not supported) ��ɽ�����륯�饹�Ǥ���
+HTTP レスポンス 505 (HTTP Version not supported) を表現するクラスです。
 
-�ܤ����� [[RFC:2616]] �򸫤Ƥ���������
+詳しくは [[RFC:2616]] を見てください。
 

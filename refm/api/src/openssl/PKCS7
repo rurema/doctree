@@ -1,22 +1,22 @@
 
 = class OpenSSL::PKCS7 < Object
 
-PKCS #7 ���饹
+PKCS #7 クラス
 
-PKCS #7 �ϰŹ浻�ѤȤȤ���Ѥ�����ǡ����Υե����ޥåȤλ��ͤǤ���
-�ǡ����䤽����Ф����̾���������������ʤ�Ǥ�դ�°����ޤळ�Ȥ��Ǥ���
-S/MIME �ʤɤ˻��Ѥ���Ƥ��ޤ���
+PKCS #7 は暗号技術とともに用いられるデータのフォーマットの仕様です。
+データやそれに対する署名、証明した日時など任意の属性を含むことができ、
+S/MIME などに使用されています。
 
-[[RFC:2315]] �򻲾Ȥ��Ƥ���������
+[[RFC:2315]] を参照してください。
 
-#@# CRL ��Ϣ��ɤ��Ȥ��Ф褤�Τ��狼��ʤ�
+#@# CRL 関連をどう使えばよいのかわからない
 
-=== S/MIME ��å������μ���
-S/MIME �ˤϰʲ��μ���Υ�å�����������ޤ�
+=== S/MIME メッセージの種類
+S/MIME には以下の種類のメッセージがあります
   * enveloped-only 
   * signed-only 
-    * signedData �ե����ޥå�
-    * multipart/signed �ե����ޥå�
+    * signedData フォーマット
+    * multipart/signed フォーマット
   * Certificate-only
 
   
@@ -24,43 +24,43 @@ S/MIME �ˤϰʲ��μ���Υ�å�����������ޤ�
 
 --- new -> OpenSSL::PKCS7
 --- new(obj) -> OpenSSL::PKCS7
-PKCS7 ���֥������Ȥ��������ޤ���
+PKCS7 オブジェクトを生成します。
 
-�������Ϥ��ʤ��ä����϶��Υ��֥������Ȥ���ޤ���
+引数を渡さなかった場合は空のオブジェクトを作ります。
 
-�������Ϥ������ϡ�ʸ����⤷���� [[c:IO]] ���֥������Ȥ���
-PEM �����⤷���� DER ������ʸ������ɤ߹���
-PKCS7 ���֥������Ȥ��������ޤ���
+引数を渡した場合は、文字列もしくは [[c:IO]] オブジェクトから
+PEM 形式もしくは DER 形式の文字列を読み込み
+PKCS7 オブジェクトを生成します。
 
-@param obj �ǡ������ɤߤ���ʸ����⤷���� IO ���֥�������
+@param obj データを読みこむ文字列もしくは IO オブジェクト
 
 --- read_smime(obj) -> OpenSSL::PKCS7
-S/MIME �����Υǡ������ɤ߹��ߡ�PKCS7 ���֥������Ȥ��֤��ޤ���
+S/MIME 形式のデータを読み込み、PKCS7 オブジェクトを返します。
 
-���� obj ����ǡ������ɤ߹��ߤޤ���ʸ����⤷����
-[[c:IO]] ���֥������Ȥ����ɤ߽Ф����Ȥ��Ǥ��ޤ���
+引数 obj からデータを読み込みます。文字列もしくは
+[[c:IO]] オブジェクトから読み出すことができます。
 
 
-@param obj �ǡ������ɤ߽Ф����֥�������
-@raise OpenSSL::PKCS7::PKCS7Error �ɤ߹��ߤ˼��Ԥ�������ȯ�����ޤ�
+@param obj データを読み出すオブジェクト
+@raise OpenSSL::PKCS7::PKCS7Error 読み込みに失敗した場合に発生します
 
 --- write_smime(p7sig, data=nil, flags = 0) -> String
-PKCS7 ���֥������Ȥ��� S/MIME ������ʸ������֤��ޤ���
+PKCS7 オブジェクトから S/MIME 形式の文字列を返します。
 
-data �ˤϽ�̾�оݤΥǡ������Ϥ��ޤ���
-data �� nil ���Ϥ��� [[m:OpenSSL::PKCS7#data]] ��������
-ʸ������Ѥ��ޤ����̾�� nil ���Ϥ��Ƥ���������
+data には署名対象のデータを渡します。
+data に nil を渡すと [[m:OpenSSL::PKCS7#data]] で得られる
+文字列を用います。通常は nil を渡してください。
 
-flags �ˤϰʲ�������� or ���Ϥ��ޤ���
+flags には以下の定数の or を渡します。
   * [[m:OpenSSL::PKCS7::DETACHED]]
-      ���ꥢ��̾�򤷤ޤ�������� [[m:OpenSSL::PKCS7.sign]] ��
-      [[m:OpenSSL::PKCS7::DETACHED]] ���Ϥ������ˤΤ߰�̣������ޤ���
+      クリア署名をします。これは [[m:OpenSSL::PKCS7.sign]] で
+      [[m:OpenSSL::PKCS7::DETACHED]] を渡した場合にのみ意味を持ちます。
   * [[m:OpenSSL::PKCS7::TEXT]]
-      MIME �إå��� text/plain ���ղä��ޤ���
-      ����� [[m:OpenSSL::PKCS7.sign]] ��
-      [[m:OpenSSL::PKCS7::DETACHED]] ���Ϥ������ˤΤ߰�̣������ޤ���
+      MIME ヘッダに text/plain を付加します。
+      これは [[m:OpenSSL::PKCS7.sign]] で
+      [[m:OpenSSL::PKCS7::DETACHED]] を渡した場合にのみ意味を持ちます。
 
-��:
+例:
 
   data = "foobar"
   p7 = PKCS7.sign( X509::Certificate.new(File.read('cert.pem')),
@@ -68,80 +68,80 @@ flags �ˤϰʲ�������� or ���Ϥ��ޤ���
                    data)
   smime = PKCS7.write_smime(p7)
 
-@param p7sig PKCS#7 ���֥�������
-@param data ��̾���줿�ǡ���ʸ����
-@param flags �ե饰(������)
-@raise OpenSSL::PKCS::PKCS7Error S/MIME�����ؤ��Ѵ��˼��Ԥ�������ȯ�����ޤ�
+@param p7sig PKCS#7 オブジェクト
+@param data 署名されたデータ文字列
+@param flags フラグ(整数値)
+@raise OpenSSL::PKCS::PKCS7Error S/MIME形式への変換に失敗した場合に発生します
 
 --- sign(cert, key, data, certs = [], flags = 0) -> OpenSSL::PKCS7
-data �˾��������̩���ǽ�̾���ޤ���
+data に証明書と秘密鍵で署名します。
 
-cert �˽�̾�˻Ȥ��������key �ˤ��ξ�������б�������̩����
-�Ϥ��ޤ���certs �� [[c:OpenSSL::X509::Certificate]] ���֥������Ȥ����� ��
-�Ϥ��� [[c:OpenSSL::PKCS7]] ���֥������Ȥˤ����ξ������ɲä��ݻ�����ޤ���
-�㤨����� CA ������ʤɤ��Ϥ��ޤ���
-flags �ϰʲ����ͤ� OR ���Ϥ��ޤ���
+cert に署名に使う証明書を、key にその証明書に対応する秘密鍵を
+渡します。certs に [[c:OpenSSL::X509::Certificate]] オブジェクトの配列 を
+渡すと [[c:OpenSSL::PKCS7]] オブジェクトにそれらの証明書が追加で保持されます。
+例えば中間 CA 証明書などを渡します。
+flags は以下の値の OR を渡します。
   * [[m:OpenSSL::PKCS7::TEXT]] 
-      text/plain �Ѥ� MIME �إå���ǡ������դ��ä��롣
+      text/plain 用の MIME ヘッダをデータに付け加える。
   * [[m:OpenSSL::PKCS7::NOCERTS]]
-      ��̾�Ԥξ�������̾�˴ޤ�ޤ��������褬���Ǥ˾�������äƤ�����
-      �ʤɡ�¾����ˡ�Ǿ������������뤳�Ȥ��Ǥ������
-      �ǡ����̤򸺤餹������Ѥ��ޤ���
+      署名者の証明書を署名に含めません。送り先がすでに証明書をもっている場合
+      など、他の方法で証明書を手に入れることができる場合に
+      データ量を減らすために用います。
   * [[m:OpenSSL::PKCS7::DETACHED]]
-      ���ꥢ��̾(multipart/signed)�򤹤롣
+      クリア署名(multipart/signed)をする。
   * [[m:OpenSSL::PKCS7::BINARY]]
-      data �� MIME ��������ܤ��ʤ���
+      data に MIME 正規化を施さない。
   * [[m:OpenSSL::PKCS7::NOATTR]]
-      PKCS#7 autenticatedAttributes (��̾����ʤ�)�򥪥֥������Ȥ˴ޤ�ʤ���
+      PKCS#7 autenticatedAttributes (署名時刻など)をオブジェクトに含めない。
   * [[m:OpenSSL::PKCS7::NOSMIMECAP]]
-      ��̾�Ԥ����Ѳ�ǽ�ʰŹ楢�르�ꥺ��ξ���ʤ�(SMIMECapabilities)���ά���롣
+      署名者が使用可能な暗号アルゴリズムの情報など(SMIMECapabilities)を省略する。
 
 #@# * PARTSIGN
 #@# application/x-pkcs7-mime
 #@# application/x-pkcs7-signature
 
-�֤��ͤϽ�̾��̤�ޤ� [[c:OpenSSL::PKCS7]] ���֥������Ȥ��֤��ޤ���
+返り値は署名結果を含む [[c:OpenSSL::PKCS7]] オブジェクトを返します。
 
-@param cert ��̾���Ѥ��������([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@param key ��̾���Ѥ�����̩��([[c:OpenSSL::PKey::PKey]] �Υ��֥��饹�Υ��֥�������)
-@param data ��̾�оݤΥǡ���ʸ����
-@param certs ź�դ��������([[c:OpenSSL::X509::Certificate]] ���֥������Ȥ�����)
-@param flags �ե饰(������)
-@raise OpenSSL::PKCS7::PKCS7Error ��̾�˼��Ԥ�������ȯ�����ޤ�
+@param cert 署名に用いる証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param key 署名に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] のサブクラスのオブジェクト)
+@param data 署名対象のデータ文字列
+@param certs 添付する証明書群([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param flags フラグ(整数値)
+@raise OpenSSL::PKCS7::PKCS7Error 署名に失敗した場合に発生します
 
 --- encrypt(certs, data, cipher=nil, flags=0) -> OpenSSL::PKCS7
-data �������θ������ǰŹ沽���ޤ���
+data を証明書の公開鍵で暗号化します。
 
-�Ź沽��ʣ���θ��������Ѥ��Ƥ��뤳�Ȥ���ǽ�Ǥ������Τ���ˤ�
-ʣ���ξ������������Ϥ��ޤ���
+暗号化は複数の公開鍵を用いてすることが可能です。そのためには
+複数の証明書を配列で渡します。
 
-data �ˤ�Ǥ�դ�ʸ������Ϥ��ޤ���������Ū�ˤ� MIME ������ʸ������Ϥ��ޤ���
-��̾�ȰŹ沽��ξ���򤷤������ϡ�
-��̾([[m:OpenSSL::PKCS7.sign]])���줿 S/MIME ������ʸ�����
-�Ϥ����Ȥ�����Ū�Ǥ���
+data には任意の文字列を渡せますが、一般的には MIME 形式の文字列を渡します。
+署名と暗号化の両方をしたい場合は、
+署名([[m:OpenSSL::PKCS7.sign]])された S/MIME 形式の文字列を
+渡すことが一般的です。
 
-cipher �϶��̸��Ź�������� [[c:OpenSSL::Cipher]] ���֥������Ȥǻ��ꤷ�ޤ���
-nil ���Ϥ���Ŭ�������������Ф�ޤ����ߴ����򵤤ˤ���ΤǤ����
-triple DES ��Ȥ��Ȥ褤�Ǥ��礦��¿���Υ��饤����Ȥ����Ѳ�ǽ�ʤϤ��Ǥ���
+cipher は共通鍵暗号の方式を [[c:OpenSSL::Cipher]] オブジェクトで指定します。
+nil を渡すと適当な方式が選ばれます。互換性を気にするのであれば
+triple DES を使うとよいでしょう。多くのクライアントで利用可能なはずです。
 
-flags �ˤϰʲ��Υե饰���Ϥ����Ȥ��Ǥ��ޤ���
+flags には以下のフラグを渡すことができます。
   * [[c:OpenSSL::PKCS7::TEXT]]
-      �Ź沽����ǡ����� text/plain �����פ� MIME �إå����ɲä��ޤ���
-      MIME�����Υǡ������Ϥ��Ȥ��ˤϤ����ȤäƤϤ����ޤ���
+      暗号化するデータに text/plain タイプの MIME ヘッダを追加します。
+      MIME形式のデータを渡すときにはこれを使ってはいけません。
   * [[c:OpenSSL::PKCS7::BINARY]]
-      data �� MIME ��������ۤɤ����ޤ���
+      data に MIME 正規化をほどこしません。
 
-@param certs ��������ޤ������([[c:OpenSSL::X509::Certificate]] ���֥�������)������
-@param data �Ź沽�оݤ�ʸ����
-@param cipher ���̸��Ź������([[c:OpenSSL::Cipher]] ���֥�������)
-@param flags �ե饰
+@param certs 公開鍵を含む証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)の配列
+@param data 暗号化対象の文字列
+@param cipher 共通鍵暗号の方式([[c:OpenSSL::Cipher]] オブジェクト)
+@param flags フラグ
 
 == Instance Methods
 
 --- type -> Symbol
-PKCS7 ���֥������ȤΥ����פ� [[c:Symbol]] ���֥������Ȥ��֤��ޤ���
+PKCS7 オブジェクトのタイプを [[c:Symbol]] オブジェクトで返します。
 
-���Τ����Τ����줫���ͤ�Ȥ�ޤ���
+次のうちのいずれかの値をとります。
   * :signed
   * :encrypted
   * :enveloped
@@ -149,323 +149,323 @@ PKCS7 ���֥������ȤΥ����פ� [[c:Symbol]] ���֥������Ȥ��֤��ޤ���
   * :data
 
 --- type=(type)
-PKCS7 ���֥������ȤΥ����פ� [[c:Symbol]] ���֥������Ȥ����ꤷ�ޤ���
+PKCS7 オブジェクトのタイプを [[c:Symbol]] オブジェクトで設定します。
 
-���Υ᥽�åɤϻȤ�ʤ��Ǥ���������
-���Υ᥽�åɤ� PKCS#7 �����٥� API �Ǥ��ꡢ�������Ȥ��Τ�
-�񤷤��Ǥ��礦��
+このメソッドは使わないでください。
+このメソッドは PKCS#7 の低レベル API であり、正しく使うのは
+難しいでしょう。
 
-@param type ���ꤹ�륿����(����ܥ�)
+@param type 設定するタイプ(シンボル)
 
 --- detached=(b)
-ʿʸ�˽�̾���դ������(multipart/signed)���ɤ��������ꤷ�ޤ���
+平文に署名を付ける形式(multipart/signed)かどうかを設定します。
 
-���Υ᥽�åɤϻȤ�ʤ��Ǥ���������
-���Υ᥽�åɤ� PKCS#7 �����٥� API �Ǥ��ꡢ�������Ȥ��Τ�
-�񤷤��Ǥ��礦��
+このメソッドは使わないでください。
+このメソッドは PKCS#7 の低レベル API であり、正しく使うのは
+難しいでしょう。
 
-@param b ���ꤹ�뿿����
+@param b 設定する真偽値
 
 --- detached? -> bool
 --- detached -> bool
 
-ʿʸ�˽�̾���դ������(multipart/signed)���ɤ������֤��ޤ���
+平文に署名を付ける形式(multipart/signed)かどうかを返します。
 
-[[m:OpenSSL::PKCS7.sign]] �� flags �� [[m:OpenSSL::PKCS7::DETACHED]]
-���Ϥ������˿��ˤʤ�ޤ���
+[[m:OpenSSL::PKCS7.sign]] で flags に [[m:OpenSSL::PKCS7::DETACHED]]
+を渡した場合に真になります。
 
 --- cipher=(cipher)
-���Ѥ��붦�̸��Ź楢�르�ꥺ�����ꤷ�ޤ���
+使用する共通鍵暗号アルゴリズムを指定します。
 
-���Υ᥽�åɤϻȤ�ʤ��Ǥ���������
-���Υ᥽�åɤ� PKCS#7 �����٥� API �Ǥ��ꡢ�������Ȥ��Τ�
-�񤷤��Ǥ��礦��
+このメソッドは使わないでください。
+このメソッドは PKCS#7 の低レベル API であり、正しく使うのは
+難しいでしょう。
 
-@param cipher ���̸��Ź楢�르�ꥺ��([[c:OpenSSL::Cipher]] ���֥�������)
+@param cipher 共通鍵暗号アルゴリズム([[c:OpenSSL::Cipher]] オブジェクト)
 
 --- add_signer(singer) -> self
-��̾�Ԥ��ɲä��ޤ���
+署名者を追加します。
 
-���Υ᥽�åɤϻȤ�ʤ��Ǥ���������
-���Υ᥽�åɤ� PKCS#7 �����٥� API �Ǥ��ꡢ�������Ȥ��Τ�
-�񤷤��Ǥ��礦��
+このメソッドは使わないでください。
+このメソッドは PKCS#7 の低レベル API であり、正しく使うのは
+難しいでしょう。
 
-@param signer �ɲä����̾��([[c:OpenSSL::PKCS7::SignerInfo]] ���֥�������)
+@param signer 追加する署名者([[c:OpenSSL::PKCS7::SignerInfo]] オブジェクト)
 
 --- signers -> [OpenSSL::PKCS7::SignerInfo]
 
-��å������ν�̾�Ԥ�ɽ�� [[c:OpenSSL::PKCS7::SignerInfo]] ���֥������Ȥ�
-������֤��ޤ���
+メッセージの署名者を表す [[c:OpenSSL::PKCS7::SignerInfo]] オブジェクトの
+配列を返します。
 
-����ϥ�å��������̾�������ˤΤ߰�̣������ޤ���
+これはメッセージを署名した場合にのみ意味があります。
 
 --- add_recipient(recipient) -> self
-�����Ԥ��ɲä��ޤ���
+送信者を追加します。
 
-���Υ᥽�åɤϻȤ�ʤ��Ǥ���������
-���Υ᥽�åɤ� PKCS#7 �����٥� API �Ǥ��ꡢ�������Ȥ��Τ�
-�񤷤��Ǥ��礦��
+このメソッドは使わないでください。
+このメソッドは PKCS#7 の低レベル API であり、正しく使うのは
+難しいでしょう。
 
-@param recipient �ɲä���������([[c:OpenSSL::PKCS7::RecipientInfo]])
+@param recipient 追加する送信者([[c:OpenSSL::PKCS7::RecipientInfo]])
 
 --- add_certificate(cert) -> self
-��̾��ź�դ����������ɲä��ޤ���
+署名に添付する証明書を追加します。
 
-�̾�� [[c:OpenSSL::PKCS7.sign]] �ΰ�����ź�դ�����������ꤷ��
-�ۤ����褤�Ǥ��礦��
+通常は [[c:OpenSSL::PKCS7.sign]] の引数で添付する証明書を指定した
+ほうがよいでしょう。
 
-@param cert �ɲä��������([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@raise OpenSSL::PKCS7::PKCS7Error �ɲä˼��Ԥ�������ȯ�����ޤ���
+@param cert 追加する証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@raise OpenSSL::PKCS7::PKCS7Error 追加に失敗した場合に発生します。
 
 --- certificates -> [OpenSSL::X509::Certificate] | nil
-��̾��ź�դ����������������֤��ޤ���
+署名に添付される証明書を配列で返します。
 
 
 --- certificates=(certificates)
-��̾���դ�����������ꤷ�ޤ���
+署名に付ける証明書を指定します。
 
-PKCS7 ���֥������Ȥ˸����Ĥ����Ƥ���������ϥ��ꥢ����ޤ���
-�̾�� [[c:OpenSSL::PKCS7.sign]] �ΰ�����ź�դ�����������ꤷ��
-�ۤ����褤�Ǥ��礦��
+PKCS7 オブジェクトに元々つけられていた証明書はクリアされます。
+通常は [[c:OpenSSL::PKCS7.sign]] の引数で添付する証明書を指定した
+ほうがよいでしょう。
 
-@param certificates ������([[c:OpenSSL::X509::Certificate]] ���֥�������)������
-@raise OpenSSL::PKCS7::PKCS7Error �ѹ��˼��Ԥ�������ȯ�����ޤ���
+@param certificates 証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)の配列
+@raise OpenSSL::PKCS7::PKCS7Error 変更に失敗した場合に発生します。
 
 --- add_crl(crl) -> self
-��̾��ź�դ��� CRL ���ɲä��ޤ���
+署名に添付する CRL を追加します。
 
-@param crl �ɲä��� CLR ([[c:OpenSSL::X509::CRL]] ���֥�������)
-@raise OpenSSL::PKCS7::PKCS7Error �ɲä˼��Ԥ�������ȯ�����ޤ���
+@param crl 追加する CLR ([[c:OpenSSL::X509::CRL]] オブジェクト)
+@raise OpenSSL::PKCS7::PKCS7Error 追加に失敗した場合に発生します。
 
 --- crls -> [OpenSSL::X509::CRL]
-��̾��ź�դ���Ƥ��� CRL ��������֤��ޤ���
+署名に添付されている CRL を配列で返します。
 
 --- crls=(crls)
-��̾��ź�դ���� CRL ����������ꤷ�ޤ���
+署名に添付される CRL を配列で設定します。
 
-�����դ����Ƥ��� CRL �ϥ��ꥢ����ޤ���
+元々付けられていた CRL はクリアされます。
 
-@param crls �������� CRL([[c:OpenSSL::X509::CRL]] ���֥�������) ������
-@raise OpenSSL::PKCS7::PKCS7Error �ѹ��˼��Ԥ�������ȯ�����ޤ���
+@param crls 更新する CRL([[c:OpenSSL::X509::CRL]] オブジェクト) の配列
+@raise OpenSSL::PKCS7::PKCS7Error 変更に失敗した場合に発生します。
 
 --- data -> String
-��̾�оݤΥǡ�����ʸ������֤��ޤ���
+署名対象のデータを文字列で返します。
 
 --- data=(data)
 --- add_data(data) -> data
 
-��̾�оݤΥǡ��������ꤷ�ޤ���
+署名対象のデータを設定します。
 
-���Υ᥽�åɤϻȤ�ʤ��Ǥ���������
-���Υ᥽�åɤ� PKCS#7 �����٥� API �Ǥ��ꡢ�������Ȥ��Τ�
-�񤷤��Ǥ��礦��
+このメソッドは使わないでください。
+このメソッドは PKCS#7 の低レベル API であり、正しく使うのは
+難しいでしょう。
 
-@param data ʸ����
+@param data 文字列
 
 --- verify(certs, store, indata = nil, flags = 0) -> bool
-��̾�򸡾ڤ��ޤ���
+署名を検証します。
 
-���ڤ������������Ͽ��򡢼��Ԥ������ϵ����֤��ޤ���
+検証に成功した場合は真を、失敗した場合は偽を返します。
 
-certs �ˤϽ�̾�Ԥξ������ޤ�������Ϥ��ޤ���
-�̾� S/MIME ��̾�ˤϾ����Ԥξ����񤬴ޤޤ�Ƥ��ޤ�����
-[[m:OpenSSL::PKCS7.sign]] �� [[m:OpenSSL::PKCS7::NOCERTS]] ���Ϥ���
-���ˤϴޤޤ�Ƥ��ʤ��Τǡ�����Ū���Ϥ�ɬ�פ�����ޤ���
-���Υ᥽�åɤ����󤫤�Ŭ�ڤʾ������ưŪ�����򤷤ޤ���
+certs には署名者の証明書を含む配列を渡します。
+通常 S/MIME 署名には証明者の証明書が含まれていますが、
+[[m:OpenSSL::PKCS7.sign]] で [[m:OpenSSL::PKCS7::NOCERTS]] を渡した
+場合には含まれていないので、明示的に渡す必要があります。
+このメソッドは配列から適切な証明書を自動的に選択します。
 
-store �ˤϸ��ڤ��Ѥ�������񥹥ȥ����Ϥ��ޤ���
-���ڤ�ɬ�פʿ���Ǥ��� CA ������򤢤餫��������񥹥ȥ��˴ޤ�Ƥ���
-ɬ�פ�����ޤ���
+store には検証に用いる証明書ストアを渡します。
+検証に必要な信頼できる CA 証明書をあらかじめ証明書ストアに含めておく
+必要があります。
 
-indata �Ͻ�̾���оݤȤʤä�ʸ������Ϥ��ޤ���
-nil ���Ϥ��� [[m:OpenSSL::PKCS7#data]] ��������ʸ����
-���Ѥ��ޤ����̾�� nil ���Ϥ��٤��Ǥ���
+indata は署名の対象となった文字列を渡します。
+nil を渡すと [[m:OpenSSL::PKCS7#data]] で得られる文字列
+を用います。通常は nil を渡すべきです。
 
-flags �ˤϰʲ����ͤ� OR ���Ϥ��ޤ���
+flags には以下の値の OR を渡します。
   * [[m:OpenSSL::PKCS7::NOINTERN]]
-      ��å�������ź�դ��줿�������õ�����ޤ���
-      �������ꤷ�����ϡ�ɬ�פʾ�����򤹤٤� certs �����Ϥ�ɬ�פ�
-      ����ޤ�����������ξ�����ˤ���̾�Τߤ򸡾ڤ��������ʤɤ�
-      �Ѥ��ޤ���
+      メッセージに添付された証明書を探索しません。
+      これを指定した場合は、必要な証明書をすべて certs から渡す必要が
+      あります。ある特定の証明書による署名のみを検証したい場合などに
+      用います。
   * [[m:OpenSSL::PKCS7::TEXT]]
-      ��̾�оݤΥǡ����˴ޤޤ�� text/plain �����פ� MIME �إå���������ޤ���
-      �⤷�إå����ʤ����ϥ��顼�Ȥʤ�ޤ���
+      署名対象のデータに含まれる text/plain タイプの MIME ヘッダを取り除きます。
+      もしヘッダがない場合はエラーとなります。
   * [[m:OpenSSL::PKCS7::NOVERIFY]]
-      ��̾�Ԥξ�����򸡾ڤ��ޤ���
+      署名者の証明書を検証しません。
   * [[m:OpenSSL::PKCS7::NOCHAIN]]
-      ��å������˴ޤޤ����������� CA �Ȥ������Ѥ��ޤ���
+      メッセージに含まれる証明書を中間 CA として利用しません。
   * [[m:OpenSSL::PKCS7::NOSIGS]]
-      ��̾�򸡾ڤ��ޤ���
+      署名を検証しません。
 
-�̾�����Υե饰���Ϥ��ʤ��ä���硢
-  * (�⤷¸�ߤ���ʤ��)��å������˴ޤޤ����� CA ������θ��ڤ�Ԥ�
-  * ������� CA ��������Ѥ��ơ���̾�Ԥξ�����θ��ڤ�Ԥ�
-  * ��̾�Ԥξ�������Ѥ��ƽ�̾�θ��ڤ�Ԥ�
-�Ȥ�����Ǹ��ڤ��Ԥ��ޤ���
+通常、これらのフラグを渡さなかった場合、
+  * (もし存在するならば)メッセージに含まれる中間 CA 証明書の検証を行う
+  * その中間 CA 証明書を用いて、署名者の証明書の検証を行う
+  * 署名者の証明書を用いて署名の検証を行う
+という順で検証が行われます。
 
-���θ��ڤϽ�̾�Ծ�����λ����礬��̾�����Ȥ������¤Τߤ򸡾ڤ��ޤ���
-��̾�Ծ�����λ����礬�����˰տޤ������Ǥ��뤫�ɤ������ݾڤ���ޤ���
-����������Ƥ���(�桼���˳�ǧ����ʤ�)Ŭ�ڤ�Ƚ�Ǥ���ɬ�פ�����ޤ���
+この検証は署名者証明書の持ち主が署名したという事実のみを検証します。
+署名者証明書の持ち主が本当に意図した相手であるかどうかは保証されません。
+証明書の内容から(ユーザに確認を取るなど)適切に判断する必要があります。
 
-���ڤ˼��Ԥ������� [[m:OpenSSL::PKCS7#error_string]] ��
-���Ԥ�����ͳ��ɽ��ʸ���󤬥��åȤ���ޤ���
+検証に失敗した場合は [[m:OpenSSL::PKCS7#error_string]] に
+失敗した理由を表す文字列がセットされます。
 
-@param certs ������([[c:OpenSSL::X509::Certificate]] ���֥�������)������
-@param store �����񥹥ȥ�([[c:OpenSSL::X509::Store]] ���֥�������)
-@param indata ��̾�оݤ�ʸ����
-@param flags �ե饰
-@raise OpenSSL::PKCS7::PKCS7Error ���ڤ˼��Ԥ�������ȯ�����ޤ�
+@param certs 証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)の配列
+@param store 証明書ストア([[c:OpenSSL::X509::Store]] オブジェクト)
+@param indata 署名対象の文字列
+@param flags フラグ
+@raise OpenSSL::PKCS7::PKCS7Error 検証に失敗した場合に発生します
 
 --- decrypt(pkey, cert, flags = 0) -> String
-�Ź沽���줿�ǡ��������沽�������沽���줿�ǡ������֤��ޤ���
+暗号化されたデータを復号化し、復号化されたデータを返します。
 
-����ˤϰŹ沽�˻Ȥä����������б�������̩���ȡ����θ�������
-�ޤ������ɬ�פǤ���
+復号には暗号化に使った公開鍵に対応する秘密鍵と、その公開鍵を
+含む証明書が必要です。
 
-flags �ˤϰʲ��Τ����줫�����Ǥ��ޤ���
+flags には以下のいずれかを指定できます。
   * [[m:OpenSSL::PKCS7::TEXT]]
-      �Ź沽���줿�ǡ������դ���줿 text/plain �����פ� MIME �إå�
-      ��������ޤ����⤷�إå����ʤ���Х��顼�Ȥʤ�ޤ���
+      暗号化されたデータに付けられた text/plain タイプの MIME ヘッダ
+      を取り除きます。もしヘッダがなければエラーとなります。
 
-@param pkey ���沽�˻Ȥ���̩��([[c:OpenSSL::PKey::PKey]] ���֥�������)
-@param cert �б����������([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@param flags �ե饰
-@raise OpenSSL::PKCS7::PKCS7Error ����˼��Ԥ�������ȯ�����ޤ�
+@param pkey 復号化に使う秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param cert 対応する証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param flags フラグ
+@raise OpenSSL::PKCS7::PKCS7Error 復号に失敗した場合に発生します
 
 --- to_pem -> String
 --- to_s -> String
 
-PEM ������ʸ������Ѵ����ޤ���
+PEM 形式の文字列に変換します。
 
 #@since 1.8.1
 --- to_der -> String
-DER �����ΥХ��ʥ�����Ѵ����ޤ���
+DER 形式のバイナリ列に変換します。
 
 #@end
 
 --- error_string -> String | nil
-���ڥ��顼����ͳ��ɽ��ʸ������֤��ޤ���
+検証エラーの理由を表す文字列を返します。
 
-[[m:OpenSSL::PKCS7#verify]] �Ǹ��ڤ�
-�������Τ߹�������ޤ���
+[[m:OpenSSL::PKCS7#verify]] で検証を
+した場合のみ更新されます。
 
-[[m:OpenSSL::PKCS7#verify]] �Ǹ��ڤ򤹤����� nil ���֤��ޤ���
+[[m:OpenSSL::PKCS7#verify]] で検証をする前は nil を返します。
 
-���ڤ������������� nil ���֤��ޤ���
+検証に成功した場合は nil を返します。
 
 @see [[m:OpenSSL::PKCS7#error_string=]]
 
 --- error_string=(str)
-���ڥ��顼����ͳ��ɽ��ʸ��������ꤷ�ޤ���
+検証エラーの理由を表す文字列を設定します。
 
-@param str ���ꤹ�륨�顼ʸ����
+@param str 設定するエラー文字列
 @see [[m:OpenSSL::PKCS7#error_string]]
 
 #@since 1.8.3
 --- recipients -> [OpenSSL::PKCS7::RecipientInfo]
-��å�������������ξ����������֤��ޤ���
+メッセージの送信先の情報を配列で返します。
 
-����ϰŹ沽�������Τ߰�̣������ޤ���
+これは暗号化した場合のみ意味があります。
 
 #@end
 
 == Constants
 
 --- DETACHED -> Integer
-ʿʸ�˽�̾���դ������ (multipart/signed) �ǹԤ��ޤ��� 
+平文に署名を付ける形式 (multipart/signed) で行います。 
 
-[[m:OpenSSL::PKCS7.sign]]��[[m:OpenSSL::PKCS7.write_smime]]
-�����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7.sign]]、[[m:OpenSSL::PKCS7.write_smime]]
+で利用可能なフラグです。
 
 --- TEXT  -> Integer
-text/plain �����פ� MIME �إå������갷���ޤ���
+text/plain タイプの MIME ヘッダーを取り扱います。
 
 [[m:OpenSSL::PKCS7.sign]], [[m:OpenSSL::PKCS7.write_smime]], 
 [[m:OpenSSL::PKCS7#verify]], 
 [[m:OpenSSL::PKCS7.encrypt]], [[m:OpenSSL::PKCS7#decrypt]]
-�����Ѳ�ǽ�ʥե饰�Ǥ���
+で利用可能なフラグです。
   
 --- BINARY -> Integer
-MIME canonical format �ؤ��Ѵ���Ԥ��ޤ���
+MIME canonical format への変換を行いません。
 
-[[m:OpenSSL::PKCS7.sign]]��[[m:OpenSSL::PKCS7.encrypt]]
-�����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7.sign]]、[[m:OpenSSL::PKCS7.encrypt]]
+で利用可能なフラグです。
 
 --- NOATTR -> Integer
-PKCS#7 autenticatedAttributes(��̾�������֤ʤɤξ���)
-���ά���ޤ���
+PKCS#7 autenticatedAttributes(署名した時間などの情報)
+を省略します。
 
-[[m:OpenSSL::PKCS7.sign]] �����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7.sign]] で利用可能なフラグです。
 
 --- NOCERTS  -> Integer
-��̾�Ԥξ�������̾�˴ޤ�ޤ��������褬���Ǥ˾�������äƤ�����
-�ʤɡ�¾����ˡ�Ǿ������������뤳�Ȥ��Ǥ������
-�ǡ����̤򸺤餹������Ѥ��ޤ���
+署名者の証明書を署名に含めません。送り先がすでに証明書をもっている場合
+など、他の方法で証明書を手に入れることができる場合に
+データ量を減らすために用います。
 
-[[m:OpenSSL::PKCS7.sign]] �����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7.sign]] で利用可能なフラグです。
 
 --- NOCHAIN  -> Integer
-��̾���ڻ��ˡ���å������˴ޤޤ����������� CA �Ȥ������Ѥ��ޤ���
+署名検証時に、メッセージに含まれる証明書を中間 CA として利用しません。
 
-[[m:OpenSSL::PKCS7#verify]] �����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7#verify]] で利用可能なフラグです。
 
 --- NOINTERN -> Integer
-��̾���ڻ��ˡ���̾�Ԥξ�������å�������ź�դ��줿�����񤫤�õ�����ޤ���
+署名検証時に、署名者の証明書をメッセージに添付された証明書から探索しません。
 
-[[m:OpenSSL::PKCS7#verify]] �ǤΤ����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7#verify]] でのみ利用可能なフラグです。
 
 --- NOSIGS -> Integer
-��̾�θ��ڤ�Ԥ��ޤ���
+署名の検証を行いません。
 
-[[m:OpenSSL::PKCS7#verify]] �����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7#verify]] で利用可能なフラグです。
 
 --- NOSMIMECAP -> Integer
-��̾�Ԥ����Ѳ�ǽ�ʰŹ楢�르�ꥺ��ξ���ʤ�(SMIMECapabilities)���ά���ޤ���
+署名者が使用可能な暗号アルゴリズムの情報など(SMIMECapabilities)を省略します。
 
-[[m:OpenSSL::PKCS7.sign]] �����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7.sign]] で利用可能なフラグです。
 
 --- NOVERIFY -> Integer
-��̾���ڻ��˽�̾�Ԥξ�����θ��ڤ�Ԥ��ޤ���
+署名検証時に署名者の証明書の検証を行いません。
 
-[[m:OpenSSL::PKCS7#verify]] �����Ѳ�ǽ�ʥե饰�Ǥ���
+[[m:OpenSSL::PKCS7#verify]] で利用可能なフラグです。
 
 = class OpenSSL::PKCS7::PKCS7 < OpenSSL::PKCS7
-���Υ��饹�� 1.8.6 �����Ȥθߴ����Τ����¸�ߤ��ޤ���
+このクラスは 1.8.6 以前との互換性のために存在します。
 
 
 #@since 1.8.3
 = class OpenSSL::PKCS7::RecipientInfo < Object
-PKCS7 ���������ɽ�����饹�Ǥ���
+PKCS7 の送信先を表すクラスです。
 
-S/MIME �Ź沽������˻��ꤷ����������̣���ޤ���
+S/MIME 暗号化する場合に指定した送信先を意味します。
 
 == Class Methods
 --- new(cert) -> RecipientInfo
-�����襪�֥������Ȥ�����񤫤��������ޤ���
+送信先オブジェクトを証明書から生成します。
 
-@param cert ������([[c:OpenSSL::X509::Certificate]] ���֥�������)
+@param cert 証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
 
 == Instance Methods
 
 --- enc_key -> String
-������θ������ǰŹ沽���줿���̸����֤��ޤ���
+送信先の公開鍵で暗号化された共通鍵を返します。
 
-�ܤ����� [[RFC:2315]] �� 10.2��10.3 �򻲾Ȥ��Ƥ���������
+詳しくは [[RFC:2315]] の 10.2、10.3 を参照してください。
 
-�̾�� [[m:OpenSSL::PKCS7#decrypt]] �����沽����Τ�
-���ޤ�Ȥ�ʤ��Ǥ��礦��
+通常は [[m:OpenSSL::PKCS7#decrypt]] で復号化するので
+あまり使わないでしょう。
 
 --- issuer -> OpenSSL::X509::Name
-������ξ������ȯ�ԼԤ�̾��(DN)���֤��ޤ���
+送信先の証明書の発行者の名前(DN)を返します。
 
-����� [[m:OpenSSL::PKCS7::RecipientInfo#serial]] ��
-��������դ˼��̤��ޤ���
+これと [[m:OpenSSL::PKCS7::RecipientInfo#serial]] で
+送信先を一意に識別します。
 
 --- serial -> Integer
-������ξ�����μ����ֹ���֤��ޤ���
+送信先の証明書の識別番号を返します。
 
-����� [[m:OpenSSL::PKCS7::RecipientInfo#issuer]] ��
-��������դ˼��̤��ޤ���
+これと [[m:OpenSSL::PKCS7::RecipientInfo#issuer]] で
+送信先を一意に識別します。
 
 #@end
 
@@ -475,18 +475,18 @@ S/MIME �Ź沽������˻��ꤷ����������̣���ޤ���
 = class OpenSSL::PKCS7::SignerInfo < Object
 alias OpenSSL::PKCS7::Signer
 #@end
-��̾�Ԥξ����ɽ�����饹�Ǥ���
+署名者の情報を表すクラスです。
 
 
 == Class Methods
 --- new(cert, key, digest) -> OpenSSL::PKCS7::SignerInfo
-��̾�ԥ��֥������Ȥ��������̩�������������������������������ޤ���
+署名者オブジェクトを証明書、秘密鍵、ダイジェスト方式から生成します。
 
-��������̩���������������������Ͻ�̾�򤹤뤿������Ѥ��ޤ���
+証明書、秘密鍵、ダイジェスト方式は署名をするために利用します。
 
-@param cert ������([[c:OpenSSL::X509::Certificate]] ���֥�������)
-@param key ��̩��([[c:OpenSSL::PKey::PKey]] ���֥�������)
-@param digest ��å���������������������(ʸ����⤷���� [[c:OpenSSL::Digest]] ���֥�������)
+@param cert 証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param key 秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param digest メッセージダイジェスト方式(文字列もしくは [[c:OpenSSL::Digest]] オブジェクト)
 
 == Instance Methods
 
@@ -495,20 +495,20 @@ alias OpenSSL::PKCS7::Signer
 #@end
 --- name -> OpenSSL::X509::Name
 
-��̾�Ԥξ������ȯ�ԼԤ�̾��(DN)���֤��ޤ���
+署名者の証明書の発行者の名前(DN)を返します。
 
-����� [[m:OpenSSL::PKCS7::SignerInfo#serial]] ��
-��̾�Ԥ��դ˼��̤��ޤ���
+これと [[m:OpenSSL::PKCS7::SignerInfo#serial]] で
+署名者を一意に識別します。
 
 --- serial -> Integer
-��̾�Ԥξ�����μ����ֹ���֤��ޤ���
+署名者の証明書の識別番号を返します。
 
-����� [[m:OpenSSL::PKCS7::SignerInfo#issuer]] ��
-��̾�Ԥ��դ˼��̤��ޤ���
+これと [[m:OpenSSL::PKCS7::SignerInfo#issuer]] で
+署名者を一意に識別します。
 
 --- signed_time -> Time
-���ν�̾�Ԥ���̾����������֤��ޤ���
+その署名者が署名した時刻を返します。
 
 = class OpenSSL::PKCS7::PKCS7Error < OpenSSL::OpenSSLError
-PKCS7 ��Ϣ�Υ��顼������������ȯ�������㳰�Ǥ���
+PKCS7 関連のエラーが生じた場合に発生する例外です。
 

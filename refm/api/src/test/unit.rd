@@ -3,23 +3,23 @@ require test/unit/testcase
 require test/unit/autorunner
 #@end
 
-��˥åȥƥ��Ȥ�Ԥ�����Υ饤�֥��Ǥ���
+ユニットテストを行うためのライブラリです。
 
 #@since 1.9.1
-test/unit �� [[lib:minitest/unit]] ��ȤäƺƼ�������ޤ������������ʸ�
-�������������ǤϤ���ޤ���1.9 �Ϥ� test/unit ��Ȥ��������ϡ��ʲ���
-test-unit �� RubyGems �ǥ��󥹥ȡ��뤷�Ƥ���������(�ܥɥ�����ȤǤϡ�
-1.9 �ϤˤĤ��Ƥ� [[lib:minitest/unit]] �ǺƼ������줿 test/unit �ˤĤ�
-�Ƶ��Ҥ��Ƥ��ޤ�)
+test/unit は [[lib:minitest/unit]] を使って再実装されましたが、完全な互
+換性がある訳ではありません。1.9 系で test/unit を使いたい場合は、以下の
+test-unit を RubyGems でインストールしてください。(本ドキュメントでは、
+1.9 系については [[lib:minitest/unit]] で再実装された test/unit につい
+て記述しています)
 
-  * Test::Unit - Ruby��ñ�Υƥ��ȥե졼����: [[url:http://test-unit.rubyforge.org/index.html.ja]]
+  * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.rubyforge.org/index.html.ja]]
 #@end
 
-=== �Ȥ���
+=== 使い方
 
-Test::Unit �ϰʲ��Τ褦�˻Ȥ��ޤ���
+Test::Unit は以下のように使います。
 
-�ޤ��ƥ����оݤΥ�����(foo.rb)��ɬ�פǤ���
+まずテスト対象のソース(foo.rb)が必要です。
 
     class Foo
        def foo
@@ -30,9 +30,9 @@ Test::Unit �ϰʲ��Τ褦�˻Ȥ��ޤ���
        end
     end
 
-���˥�˥åȥƥ���(test_foo.rb)��񤭤ޤ����ƥ��Ȥ�¹Ԥ���᥽�å�(�ƥ��ȥ᥽�å�)��̾����
-���� test_ �ǻϤޤ�ɬ�פ�����ޤ����ƥ��ȥ᥽�åɤ��¹Ԥ�������ˤ� setup �᥽�åɤ�ɬ��
-�ƤФ�ޤ����¹Ԥ��줿���Ȥˤϡ�teardown �᥽�åɤ�ɬ���ƤФ�ޤ���
+次にユニットテスト(test_foo.rb)を書きます。テストを実行するメソッド(テストメソッド)の名前は
+全て test_ で始まる必要があります。テストメソッドが実行される前には setup メソッドが必ず
+呼ばれます。実行されたあとには、teardown メソッドが必ず呼ばれます。
 
     require 'test/unit'
     require 'foo'
@@ -53,8 +53,8 @@ Test::Unit �ϰʲ��Τ褦�˻Ȥ��ޤ���
       end
     end
 
-�ƥ��Ȥ�¹Ԥ���ˤϾ���Ѱդ��� test_foo.rb ��¹Ԥ��ޤ���
-�ǥե���ȤǤϤ��٤ƤΥƥ��Ȥ��¹Ԥ���ޤ���
+テストを実行するには上で用意した test_foo.rb を実行します。
+デフォルトではすべてのテストが実行されます。
 
 #@since 1.9.1
 
@@ -72,7 +72,7 @@ Test::Unit �ϰʲ��Τ褦�˻Ȥ��ޤ���
 
         2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
 
-test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
+test_bar だけテストしたい場合は以下のようなオプションを与えます。
 
         $ ruby test_foo.rb --name test_bar
 
@@ -88,7 +88,7 @@ test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
 
         1 tests, 1 assertions, 1 failures, 0 errors, 0 skips
 
---name=test_bar�Τ褦�ʻ���ϹԤ��ޤ���
+--name=test_barのような指定は行えません。
 
 #@else
 
@@ -106,7 +106,7 @@ test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
 
         2 tests, 2 assertions, 1 failures, 0 errors
 
-test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
+test_bar だけテストしたい場合は以下のようなオプションを与えます。
 
         $ ruby test_foo.rb --name=test_bar
 
@@ -122,21 +122,21 @@ test_bar �����ƥ��Ȥ��������ϰʲ��Τ褦�ʥ��ץ�����Ϳ���ޤ���
 
         1 tests, 1 assertions, 1 failures, 0 errors
 
-gtk ��Ȥä� testrunner
+gtk を使った testrunner
 
         $ ruby test_foo.rb --runner=gtk --name=test_bar
 
-fox ��Ȥ�
+fox を使う
 
         $ ruby test_foo.rb --runner=fox --name=test_bar
 
-console ��Ȥ� (default)
+console を使う (default)
 
         $ ruby test_foo.rb --runner=console --name=test_bar
 
 #@end
 
-�ʲ��Τ褦�ˤ���� help ��ɽ������ޤ���
+以下のようにすると help も表示されます。
 
 #@since 1.9.1
 
@@ -184,55 +184,55 @@ console ��Ȥ� (default)
 
 #@end
 
-ʣ���Υƥ��Ȥ���٤˹Ԥ���硢�ʲ��Τ褦�˽񤤤������Υե������¹Ԥ��ޤ���
+複数のテストを一度に行う場合、以下のように書いただけのファイルを実行します。
 
  require 'test/unit'
  require 'test_foo.rb'
  require 'test_bar.rb'
 
 #@until 1.9.1
-�⤦�������٤ʥƥ��Ȥμ¹���ˡ�˴ؤ��Ƥ� [[c:Test::Unit::AutoRunner]] ��
-���Ȥ��Ʋ�������
+もう少し高度なテストの実行方法に関しては [[c:Test::Unit::AutoRunner]] を
+参照して下さい。
 #@end
 
-=== ���ĥƥ��Ȥϼ¹Ԥ���뤫
+=== いつテストは実行されるか
 
-�����Ǥϡ��ƥ��ȥ��饹���������������פǡ��ƥ��Ȥ��¹Ԥ���Ƥ��ޤ���
+上の例では、テストクラスを「定義しただけ」で、テストが実行されています。
 #@since 1.9.1
-����ϡ�require 'test/unit'��������[[m:MiniTest::Unit.autorun]]��¹Ԥ�
-�Ƥ��뤿��Ǥ������η�̡���λ���θ�����Ȥ��Ƽ¹Ԥ����褦�ˤʤäƤ�
-�ޤ���
+これは、require 'test/unit'した時に[[m:MiniTest::Unit.autorun]]を実行し
+ているためです。その結果、終了時の後処理として実行されるようになってい
+ます。
 #@else
-����ϡ�[[m:Kernel.#at_exit]] �� [[m:ObjectSpace.#each_object]] ��Ȥä�
-��������Ƥ��ޤ����Ĥޤꡢ�����Ǥϥƥ��ȤϽ�λ���θ�����Ȥ��Ƽ¹Ԥ���ޤ���
+これは、[[m:Kernel.#at_exit]] と [[m:ObjectSpace.#each_object]] を使って
+実装されています。つまり、上の例ではテストは終了時の後処理として実行されます。
 
-����ξ��ϡ���������ꤢ��ޤ��󡣤��������Ǥʤ����ϡ�
-testrb ���ޥ�ɤ� [[c:Test::Unit::AutoRunner]] ���Ƽ� TestRunner ���饹��Ȥ����Ȥˤ�ꡢ
-����Ū�˥ƥ��Ȥ�¹Ԥ��뤳�Ȥ��Ǥ��ޤ���
+大抵の場合は、これで問題ありません。が、そうでない場合は、
+testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラスを使うことにより、
+明示的にテストを実行することができます。
 #@end
 
-=== Error �� Failure �ΰ㤤
+=== Error と Failure の違い
 
 : Error
-  �ƥ��ȥ᥽�åɼ¹�����㳰��ȯ��������
+  テストメソッド実行中に例外が発生した。
 
 : Failure
-  �����������˼��Ԥ�����
+  アサーションに失敗した。
 
 #@since 1.9.3
-=== ����¹�
+=== 並列実行
 
-1.9.3 ñ�Υƥ��Ȥι�®���Τ���ˡ�����¹Ԥ����ݡ��Ȥ���ޤ�����
+1.9.3 単体テストの高速化のために、並列実行がサポートされました。
 
-���󲽤λ��ȤߤˤĤ��Ƥϰʲ��ε�����������������
+並列化の仕組みについては以下の記事をご覧ください。
 
- * Rubyist Magazine 0033 �� �ܲ�! test-all ����: [[url:http://jp.rubyist.net/magazine/?0033-ParallelizeTestAll]]
+ * Rubyist Magazine 0033 号 詳解! test-all 並列化: [[url:http://jp.rubyist.net/magazine/?0033-ParallelizeTestAll]]
 
 #@end
 
 = module Test::Unit
 
-��˥åȥƥ��Ȥ�Ԥ�����Υ⥸�塼��Ǥ���
+ユニットテストを行うためのモジュールです。
 
 == Singleton Methods
 
@@ -240,19 +240,19 @@ testrb ���ޥ�ɤ� [[c:Test::Unit::AutoRunner]] ���Ƽ� TestRunner ���饹��Ȥ����
 #@until 1.9.1
 --- run?        -> bool
 
-��˥åȥƥ��Ȥ�¹Ԥ������ɤ������֤��ޤ���
-����ͤ� false ���ä����ϡ��ޤ���˥åȥƥ��Ȥ�¹Ԥ��Ƥ��ʤ����ˤʤ�ޤ���
+ユニットテストを実行したかどうかを返します。
+戻り値が false だった場合は、まだユニットテストを実行していない事になります。
 
-@return ��˥åȥƥ��Ȥ�¹Ԥ������ɤ���
+@return ユニットテストを実行したかどうか
 
 --- run=(flag)
 
-��˥åȥƥ��Ȥ�ư�¹Ԥ������ɤ�������ꤷ�ޤ���
+ユニットテストを自動実行したかどうかを指定します。
 
-@param flag ��˥åȥƥ��Ȥ�ư�¹Ԥ������ɤ���
+@param flag ユニットテストを自動実行したかどうか
 
-true�򥻥åȤ����[[c:Test::Unit]]�ϥ�˥åȥƥ��Ȥ�ư�¹�``���ʤ��ʤ�ޤ�''��
-run�ϲ��ʬ���run�Ǥ���true�ˤ���ȥƥ��Ȥ�¹Ԥ��������Ȥ�����̣�ˤʤ�ޤ���
+trueをセットすると[[c:Test::Unit]]はユニットテストを自動実行``しなくなります''。
+runは過去分詞のrunです。trueにするとテストを実行し終えたという意味になります。
 
 #@end
 #@end
@@ -260,79 +260,79 @@ run�ϲ��ʬ���run�Ǥ���true�ˤ���ȥƥ��Ȥ�¹Ԥ��������Ȥ�����̣�ˤʤ�ޤ���
 #@since 1.9.1
 --- setup_argv(original_argv = ARGV) { |files| ... } -> [String]
 
-original_argv�ǻ��ꤵ�줿���ץ�������Ϥ��ơ��ƥ����оݤˤʤ�ե�����
-��require���ޤ���
+original_argvで指定されたオプションを解析して、テスト対象になるファイル
+をrequireします。
 
-@param original_argv ���ץ�������ꤷ�ޤ�����ά���줿���ϡ�
-                     [[m:Kernel::ARGV]]�����Ѥ���ޤ���
+@param original_argv オプションを指定します。省略された場合は、
+                     [[m:Kernel::ARGV]]が使用されます。
 
-@raise ArgumentError ���ꤵ�줿�ե����뤬¸�ߤ��ʤ�����ȯ�����ޤ���
+@raise ArgumentError 指定されたファイルが存在しない場合に発生します。
 
-�֥��å������ꤵ�줿���ˤϥ֥��å���ɾ�����ơ����η�̤�require���о�
-�ˤ��ޤ���
+ブロックが指定された場合にはブロックを評価して、その結果をrequireの対象
+にします。
 
-�֥��å��ѥ�᡼���ˤϾ嵭��original_argv����-x�ǻ��ꤵ�줿��ΰʳ��Υ�
-�ץ����������Ϥ���ޤ����ե�����̾������˥ǥ��쥯�ȥ����ꤹ��
-�ȡ��ǥ��쥯�ȥ����ˤ���test_*.rb������require���ޤ���
+ブロックパラメータには上記のoriginal_argvから-xで指定されたもの以外のオ
+プションが配列で渡されます。ファイル名の代わりにディレクトリを指定する
+と、ディレクトリの中にあるtest_*.rbを全てrequireします。
 
-���Υ᥽�åɼ��Τϡ����ץ�������Ϥ���require��Ԥ��ʳ��ν����ϹԤ���
-���󤬡�test/unit.rb��require���ƸƤӽФ��᥽�åɤΤ��ᡢ���Ū�˥�˥�
-�ȥƥ��Ȥ��¹Ԥ���ޤ���testrb���ޥ�ɤΤ褦�ˡ���˥åȥƥ��Ȥ�¹Ԥ�
-��ץ����������������˻��Ѥ��ޤ���
+このメソッド自体は、オプションを解析してrequireを行う以外の処理は行いま
+せんが、test/unit.rbをrequireして呼び出すメソッドのため、結果的にユニッ
+トテストが実行されます。testrbコマンドのように、ユニットテストを実行す
+るプログラムを作成する場合に使用します。
 
-===== ���Ѳ�ǽ�ʥ��ץ����
+===== 使用可能なオプション
 
 : -v
-  �ܺ٤�ɽ�����ޤ���
+  詳細を表示します。
 
 : -n, --name
-  ���ꤵ�줿�ƥ��ȥ᥽�åɤ�¹Ԥ��ޤ����ƥ��ȥ᥽�åɤλ��������ɽ��
-  ��Ȥ��ޤ����ʤ���--name=test_foo�Τ褦�ʻ���ϹԤ��ޤ���--name test_foo
-  �Τ褦�˻��ꤷ�Ƥ���������
+  指定されたテストメソッドを実行します。テストメソッドの指定に正規表現
+  も使えます。なお、--name=test_fooのような指定は行えません。--name test_foo
+  のように指定してください。
 
 : -x
-  ���ꤵ�줿�ե������������ޤ����ե�����λ��������ɽ����Ȥ��ޤ���
+  指定されたファイルを除外します。ファイルの指定に正規表現も使えます。
 
 : -s, --seed
-  [[m:Kernel.#rand]] ������μ����ꤷ���ͤ����ꤷ�ޤ���
+  [[m:Kernel.#rand]] の乱数の種を指定した値に設定します。
 
 #@since 1.9.3
 : --jobs-status
 
-  �ƥ��Ȥ���ե�����ξ��֤�ɽ�����ޤ���--jobs �����ꤵ��ʤ��ä�����ͭ���ˤʤ�ޤ���
+  テストするファイルの状態を表示します。--jobs が指定されなかった場合は有効になりません。
 
 : -j, --jobs
 
-  ����¹Ԥ��������ꤷ�ޤ���
+  並列実行する数を指定します。
 
 : --no-retry
 
-  --jobs ���ץ�������ꤵ�줿���ˡ���ȥ饤��ǽ��̵�������ޤ���
+  --jobs オプションも指定された場合に、リトライ機能を無効化します。
 
 : --ruby
 
-  ruby ���ޥ�ɤΥѥ�����ꤷ�ޤ�����ά�������ϡ�[[m:RbConfig.ruby]] ���ͤ���Ѥ��ޤ���
+  ruby コマンドのパスを指定します。省略した場合は、[[m:RbConfig.ruby]] の値を使用します。
 
 : -q, --hide-skip
 
-  �����åפ����ƥ��Ȥ�ɽ�����ޤ���
+  スキップしたテストを表示しません。
 
 : -I
 
-  �饤�֥��Υ����ɥѥ��˻��ꤷ���ͤ��ɲä��ޤ���
+  ライブラリのロードパスに指定した値を追加します。
 
 : --gc-stress
 
-  [[m:GC.stress]] �� true �����ꤷ�ޤ���
+  [[m:GC.stress]] に true を設定します。
 
 : --no-gc-stress
 
-  [[m:GC.stress]] �� false �����ꤷ�ޤ���
+  [[m:GC.stress]] に false を設定します。
 #@end
 
-===== ����
+===== 注意
 
-Test::Unit.setup_argv��original_argv�λ���˴ؤ�餺��ARGV��files���֤�
-�����ޤ����֤�������줿ARGV��[[lib:minitest/unit]]�ˤ�äƤ⤦1�ٲ��Ϥ���ޤ���
+Test::Unit.setup_argvはoriginal_argvの指定に関わらず、ARGVをfilesで置き
+換えます。置き換えられたARGVは[[lib:minitest/unit]]によってもう1度解析されます。
 
 #@end

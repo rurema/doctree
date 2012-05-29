@@ -1,25 +1,25 @@
 require rubygems/ext/builder
 
-configure ¥¹¥¯¥ê¥×¥È¤ò¸µ¤Ë³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤ò¥Ó¥ë¥É¤¹¤ë¥¯¥é¥¹¤ò°·¤¦¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+configure ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å…ƒã«æ‹¡å¼µãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ãƒ“ãƒ«ãƒ‰ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚’æ‰±ã†ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = class Gem::Ext::ConfigureBuilder < Gem::Ext::Builder
 
-configure ¥¹¥¯¥ê¥×¥È¤ò¸µ¤Ë³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤ò¥Ó¥ë¥É¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+configure ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å…ƒã«æ‹¡å¼µãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ãƒ“ãƒ«ãƒ‰ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Singleton Methods
 
 --- build(extension, directory, dest_path, results) -> Array
 #@todo
 
-Makefile ¤¬Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ï¡¢configure ¥¹¥¯¥ê¥×¥È¤ò¼Â¹Ô¤·¤Æ
-Makefile ¤òºîÀ®¤·¤Æ¤«¤é make ¤ò¼Â¹Ô¤·¤Ş¤¹¡£
+Makefile ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ã€configure ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œã—ã¦
+Makefile ã‚’ä½œæˆã—ã¦ã‹ã‚‰ make ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
-@param extension ¤³¤Î¥á¥½¥Ã¥É¤Ç¤Ï»ÈÍÑ¤·¤Ş¤»¤ó¡£
+@param extension ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã§ã¯ä½¿ç”¨ã—ã¾ã›ã‚“ã€‚
 
 @param directory
 
 @param dest_path 
 
-@param results ¥³¥Ş¥ó¥É¤Î¼Â¹Ô·ë²Ì¤ò³ÊÇ¼¤·¤Ş¤¹¡£ÇË²õÅª¤ËÊÑ¹¹¤µ¤ì¤Ş¤¹¡£
+@param results ã‚³ãƒãƒ³ãƒ‰ã®å®Ÿè¡Œçµæœã‚’æ ¼ç´ã—ã¾ã™ã€‚ç ´å£Šçš„ã«å¤‰æ›´ã•ã‚Œã¾ã™ã€‚
 
 @see [[m:Gem::Ext::Builder.make]]

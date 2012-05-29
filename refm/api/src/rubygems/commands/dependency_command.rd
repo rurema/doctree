@@ -3,20 +3,20 @@ require rubygems/local_remote_options
 require rubygems/version_option
 require rubygems/source_info_cache
 
-���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������ΰ�¸�ط���ɽ�����뤿��Υ饤�֥��Ǥ���
+インストールされている Gem パッケージの依存関係を表示するためのライブラリです。
 
   Usage: gem dependency GEMNAME [options]
     Options:
-      -v, --version VERSION            ���ꤷ���С������ΰ�¸�ط���ɽ�����ޤ�
-          --platform PLATFORM          ���ꤷ���ץ�åȥե�����ΰ�¸�ط���ɽ�����ޤ�
-      -R, --[no-]reverse-dependencies  ���� Gem ����Ѥ��Ƥ��� Gem ��ɽ�����ޤ�
+      -v, --version VERSION            指定したバージョンの依存関係を表示します
+          --platform PLATFORM          指定したプラットフォームの依存関係を表示します
+      -R, --[no-]reverse-dependencies  この Gem を使用している Gem を表示します
       -p, --pipe                       Pipe Format (name --version ver)
 #@include(local_remote_options)
 #@include(common_options)
     Arguments:
-      GEMNAME       ��¸�ط���ɽ������ Gem ��̾������ꤷ�ޤ�
+      GEMNAME       依存関係を表示する Gem の名前を指定します
     Summary:
-      ���󥹥ȡ��뤵��Ƥ��� Gem �ΰ�¸�ط���ɽ�����ޤ�
+      インストールされている Gem の依存関係を表示します
     Defaults:
       --local --version '>= 0' --no-reverse-dependencies
 
@@ -25,43 +25,43 @@ require rubygems/source_info_cache
 include Gem::LocalRemoteOptions
 include Gem::VersionOption
 
-���󥹥ȡ��뤵��Ƥ��� Gem �ѥå������ΰ�¸�ط���ɽ�����뤿��Υ��饹�Ǥ���
+インストールされている Gem パッケージの依存関係を表示するためのクラスです。
 
 
 == Public Instance Methods
 
 --- usage -> String
 
-������ˡ��ɽ��ʸ������֤��ޤ���
+使用方法を表す文字列を返します。
 
 --- arguments -> String
 
-������������ɽ��ʸ������֤��ޤ���
+引数の説明を表す文字列を返します。
 
 --- execute -> ()
 
-���ޥ�ɤ�¹Ԥ��ޤ���
+コマンドを実行します。
 
 --- find_gems(name, source_index) -> Hash
 
-Ϳ����줿 Gem ��̾���򥤥�ǥå������鸡�����ޤ���
+与えられた Gem の名前をインデックスから検索します。
 
-@param name Gem ��̾������ꤷ�ޤ���
+@param name Gem の名前を指定します。
 
-@param source_index [[c:Gem::SourceIndex]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param source_index [[c:Gem::SourceIndex]] のインスタンスを指定します。
 
 @see [[m:Gem::SourceIndex#search]]
 
 --- find_reverse_dependencies(spec) -> Array
 
-Ϳ����줿 Gem ���ڥå��˰�¸���� Gem �Υꥹ�Ȥ��֤��ޤ���
+与えられた Gem スペックに依存する Gem のリストを返します。
 
-@param spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- print_dependencies(spec, level = 0) -> String
 
-��¸�ط���ɽ��ʸ������֤��ޤ���
+依存関係を表す文字列を返します。
 
-@param spec [[c:Gem::Specification]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
-@param level ��¸�ط��ο�������ꤷ�ޤ���
+@param level 依存関係の深さを指定します。

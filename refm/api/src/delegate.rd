@@ -1,21 +1,21 @@
 #@since 1.8.0
-�᥽�åɤΰѾ� (delegation) ��Ԥ�����Υ饤�֥��Ǥ���
+メソッドの委譲 (delegation) を行うためのライブラリです。
 
-[[c:Delegator]] ���饹�ϻ��ꤷ�����֥������Ȥ˥᥽�åɤμ¹Ԥ�Ѿ����ޤ���
-[[c:Delegator]] ���饹�����Ѥ�����Ϥ����Ѿ�����
-[[m:Delegator#__getobj__]] �᥽�åɤ��������ưѾ���Υ��֥������Ȥ���ꤷ�ޤ���
-
-
-[[c:SimpleDelegator]] �� [[c:Delegator]] ��������ΰ�ĤǤ��ꡢ
-���󥹥ȥ饯�����Ϥ��줿���֥������Ȥ˥᥽�åɤμ¹Ԥ�Ѿ����ޤ���
+[[c:Delegator]] クラスは指定したオブジェクトにメソッドの実行を委譲します。
+[[c:Delegator]] クラスを利用する場合はこれを継承して
+[[m:Delegator#__getobj__]] メソッドを再定義して委譲先のオブジェクトを指定します。
 
 
-[[m:Kernel#DelegateClass]] �� �������Ϥ��줿���饹�Υ��󥹥��󥹤�ҤȤĤȤꡢ
-���Υ��֥������Ȥ˥��󥹥��󥹥᥽�åɤ�Ѿ����륯�饹����������֤��ޤ���
+[[c:SimpleDelegator]] は [[c:Delegator]] の利用例の一つであり、
+コンストラクタに渡されたオブジェクトにメソッドの実行を委譲します。
 
-=== ����
 
-  * Rubyist Magazine - ɸ��ź�ե饤�֥��Ҳ���� 6 ��۰Ѿ� [[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
+[[m:Kernel#DelegateClass]] は 引数で渡されたクラスのインスタンスをひとつとり、
+そのオブジェクトにインスタンスメソッドを委譲するクラスを定義して返します。
+
+=== 参考
+
+  * Rubyist Magazine - 標準添付ライブラリ紹介【第 6 回】委譲 [[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
 
 
 = reopen Kernel
@@ -24,12 +24,12 @@
 
 --- DelegateClass(superclass) -> object
 
-���饹 superclass �Υ��󥹥��󥹤إ᥽�åɤ�Ѿ����륯�饹���������
-���Υ��饹���֤��ޤ���
+クラス superclass のインスタンスへメソッドを委譲するクラスを定義し、
+そのクラスを返します。
 
-@param superclass �Ѿ���Ȥʤ륯�饹
+@param superclass 委譲先となるクラス
 
-��:
+例:
 
 //emlist{
 require 'delegate'
@@ -54,11 +54,11 @@ include Delegator::MethodDelegation
 
 #@end
 
-���֥��饹�˥᥽�åɰѾ��λ��Ȥߤ��󶡤�����ݥ��饹��
+サブクラスにメソッド委譲の仕組みを提供する抽象クラス。
 
-�᥽�åɰѾ���Ԥ����ϡ��ܥ��饹��Ѿ���[[m:Delegator#__getobj__]]����������ɬ�פ�����ޤ���
+メソッド委譲を行う場合は、本クラスを継承し[[m:Delegator#__getobj__]]を再定義する必要があります。
 
-����Ū�ʻ�����ˤĤ��Ƥϡ�[[c:SimpleDelegator]]�򻲾Ȥ��Ƥ���������
+具体的な使用例については、[[c:SimpleDelegator]]を参照してください。
 
 == Class Methods
 
@@ -66,21 +66,21 @@ include Delegator::MethodDelegation
 
 --- new(obj) -> object
 
-�Ѿ���Ԥ��᥽�åɤ�������ޤ���
+委譲を行うメソッドを定義します。
 
-obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
-�����֥������Ȥ��������Ƥ��ʤ��᥽�åɤˤĤ��ơ�
-[[m:Delegator#__getobj__]] ���֤����֥������Ȥ�
-�᥽�åɰѾ���Ԥ����饹�᥽�åɤ�������ޤ���
+obj のもつインスタンスメソッドのうち、
+自オブジェクトに定義されていないメソッドについて、
+[[m:Delegator#__getobj__]] が返すオブジェクトへ
+メソッド委譲を行うクラスメソッドを定義します。
 
-@param obj �Ѿ���Ԥ��᥽�åɤ���ꤹ�뤿��˻��Ѥ��륪�֥�������
+@param obj 委譲を行うメソッドを決定するために使用するオブジェクト
 
 #@end
 
 #@since 1.9.1
 
 #@#--- delegation_block
-#@# ���Ĥ���ʤ�
+#@# 見つからない
 
 #@#--- public_api
 #@# nodoc
@@ -89,7 +89,7 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 #@since 1.9.2
 
 #@# --- const_missing
-#@# ���Ĥ���ʤ�
+#@# 見つからない
 
 #@end
 
@@ -98,10 +98,10 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 #@since 1.9.1
 --- ==(obj) -> bool
 
-���Ȥ�Ϳ����줿���֥������Ȥ����������ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身が与えられたオブジェクトと等しい場合は、真を返します。
+そうでない場合は、偽を返します。
 
-@param obj ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param obj 比較対象のオブジェクトを指定します。
 
 #@end
 
@@ -109,14 +109,14 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 
 --- !=(obj) -> bool
 
-���Ȥ�Ϳ����줿���֥������Ȥ��������ʤ����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身が与えられたオブジェクトと等しくない場合は、真を返します。
+そうでない場合は、偽を返します。
 
-@param obj ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param obj 比較対象のオブジェクトを指定します。
 
 --- ! -> bool
 
-���Ȥ����ꤷ�ޤ���
+自身を否定します。
 
 #@end
 
@@ -124,7 +124,7 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 --- clone -> object
 --- dup -> object
 
-���Ȥ�ʣ�����֤��ޤ���
+自身の複製を返します。
 
 @see [[m:Object#clone]], [[m:Object#dup]]
 
@@ -133,57 +133,57 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 #@since 1.8.0
 --- __getobj__ -> object
 
-�Ѿ���Υ��֥������Ȥ��֤��ޤ���
+委譲先のオブジェクトを返します。
 
-�ܥ᥽�åɤϡ����֥��饹�Ǻ��������ɬ�פ����ꡢ
-�ǥե���ȤǤ� [[c:NotImplementedError]] ��ȯ�����ޤ���
+本メソッドは、サブクラスで再定義する必要があり、
+デフォルトでは [[c:NotImplementedError]] が発生します。
 
-@raise NotImplementedError ���֥��饹�ˤ��ܥ᥽�åɤ����������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 #@end
 
 #@since 1.9.1
 --- __setobj__(obj)
 
-�Ѿ���Υ��֥������Ȥ򥻥åȤ��ޤ���
+委譲先のオブジェクトをセットします。
 
-@param obj �Ѿ���ΤΥ��֥������Ȥ���ꤷ�ޤ���
+@param obj 委譲先ののオブジェクトを指定します。
 
-@raise NotImplementedError ���֥��饹�ˤ��ܥ᥽�åɤ����������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 #@end
 
 #@since 1.8.1
 --- marshal_dump -> object
 
-���ꥢ�饤���������򥵥ݡ��Ȥ��뤿���[[m:Delegator#__getobj__]] ���֤����֥������Ȥ��֤��ޤ���
+シリアライゼーションをサポートするために[[m:Delegator#__getobj__]] が返すオブジェクトを返します。
 
 --- marshal_load(obj) -> object
 
-���ꥢ�饤�����줿���֥������Ȥ��顢[[m:Delegator#__getobj__]] ���֤����֥������Ȥ�Ƹ����ޤ���
+シリアライズされたオブジェクトから、[[m:Delegator#__getobj__]] が返すオブジェクトを再現します。
 
-@param obj [[m:Delegator#marshal_dump]]������ͤΥ��ԡ�
+@param obj [[m:Delegator#marshal_dump]]の戻り値のコピー
 
 #@end
 
 #@since 1.8.3
 --- method_missing(m, *args) -> object
 
-�Ϥ��줿�᥽�å�̾�Ȱ�����Ȥäơ�[[m:Delegator#__getobj__]] ���֤����֥������Ȥإ᥽�åɰѾ���Ԥ��ޤ���
+渡されたメソッド名と引数を使って、[[m:Delegator#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
 
-@param m �᥽�åɤ�̾���ʥ���ܥ��
+@param m メソッドの名前（シンボル）
 
-@param args �᥽�åɤ��Ϥ��줿����
+@param args メソッドに渡された引数
 
-@return �Ѿ���Υ᥽�åɤ�����֤���
+@return 委譲先のメソッドからの返り値
 
 @see [[m:Object#method_missing]]
 
 --- respond_to?(m) -> bool
 
-[[m:Delegator#__getobj__]] ���֤����֥������Ȥ� �᥽�å� m ����ĤȤ������֤��ޤ���
+[[m:Delegator#__getobj__]] が返すオブジェクトが メソッド m を持つとき真を返します。
 
-@param m �᥽�å�̾
+@param m メソッド名
 
 @see [[m:Object#respond_to?]]
 
@@ -192,38 +192,38 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 #@since 1.9.2
 --- freeze -> self
 
-���Ȥ���뤷�ޤ���
+自身を凍結します。
 
 @see [[m:Object#freeze]]
 
 --- methods -> [Symbol]
 
-���Υ��֥������Ȥ��Ф��ƸƤӽФ���᥽�å�̾�ΰ������֤��ޤ���
-���Υ᥽�åɤ� public �᥽�åɤ���� protected �᥽�åɤ�̾�����֤��ޤ���
+そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
+このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
 @see [[m:Object#methods]]
 
 --- protected_methods(all = true) -> [Symbol]
 
-���Υ��֥������Ȥ�����Ǥ��� protected �᥽�å�̾�ΰ������֤��ޤ���
+そのオブジェクトが理解できる protected メソッド名の一覧を返します。
 
-@param all ������ꤹ��� __getobj__ �Υ����ѡ����饹��������줿�᥽�åɤ�����ޤ���
+@param all 偽を指定すると __getobj__ のスーパークラスで定義されたメソッドを除きます。
 
 @see [[m:Object#protected_methods]]
 
 --- public_methods(all = true) -> [Symbol]
 
-���Υ��֥������Ȥ�����Ǥ��� public �᥽�å�̾�ΰ������֤��ޤ���
+そのオブジェクトが理解できる public メソッド名の一覧を返します。
 
-@param all ������ꤹ��� __getobj__ �Υ����ѡ����饹��������줿�᥽�åɤ�����ޤ���
+@param all 偽を指定すると __getobj__ のスーパークラスで定義されたメソッドを除きます。
 
 @see [[m:Object#public_methods]]
 
 --- respond_to_missing?(m, include_private) -> bool
 
-@param m �᥽�å�̾����ꤷ�ޤ���
+@param m メソッド名を指定します。
 
-@param include_private ������ꤹ��� private �᥽�åɤ�Ĵ�٤ޤ���
+@param include_private 真を指定すると private メソッドも調べます。
 
 #@end
 
@@ -233,7 +233,7 @@ obj �Τ�ĥ��󥹥��󥹥᥽�åɤΤ�����
 #@until 1.9.1
 --- IgnoreBacktracePat -> Regexp
 
-�Хå��ȥ졼����̵�뤹��ѥ�������֤��ޤ���
+バックトレースで無視するパターンを返します。
 #@end
 #@end
 

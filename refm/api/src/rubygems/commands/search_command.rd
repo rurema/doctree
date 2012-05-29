@@ -1,7 +1,7 @@
 require rubygems/command
 require rubygems/commands/query_command
 
-»ØÄê¤µ¤ì¤¿Ê¸»úÎó¤ò´Ş¤à Gem ¥Ñ¥Ã¥±¡¼¥¸¤òÁ´¤ÆÉ½¼¨¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’å«ã‚€ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’å…¨ã¦è¡¨ç¤ºã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
   Usage: gem search [STRING] [options]
     Options:
@@ -13,14 +13,14 @@ require rubygems/commands/query_command
 #@include(local_remote_options)
 #@include(common_options)
     Arguments:
-      STRING        ¸¡º÷¤·¤¿¤¤ Gem ¥Ñ¥Ã¥±¡¼¥¸Ì¾¤Î°ìÉô¤ò»ØÄê¤·¤Ş¤¹
+      STRING        æ¤œç´¢ã—ãŸã„ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸åã®ä¸€éƒ¨ã‚’æŒ‡å®šã—ã¾ã™
     Summary:
-      STRING ¤ò´Ş¤àÁ´¤Æ¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸Ì¾¤òÉ½¼¨¤·¤Ş¤¹
+      STRING ã‚’å«ã‚€å…¨ã¦ã® Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸åã‚’è¡¨ç¤ºã—ã¾ã™
     Defaults:
       --local --no-details
 
 
 = class Gem::Commands::SearchCommand < Gem::Commands::QueryCommand
 
-»ØÄê¤µ¤ì¤¿Ê¸»úÎó¤ò´Ş¤à Gem ¥Ñ¥Ã¥±¡¼¥¸¤òÁ´¤ÆÉ½¼¨¤¹¤ë¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’å«ã‚€ Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’å…¨ã¦è¡¨ç¤ºã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 

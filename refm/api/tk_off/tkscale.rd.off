@@ -3,8 +3,8 @@
 =begin
 = TkScale
 
-�������륦�������åȤΥ��饹�Ǥ���
-��������ϡ��������ʤɤο��̤򥹥饤���ΰ��֤ˤ��ɽ�����������åȤǤ���
+スケールウィジェットのクラスです。
+スケールは、サイズなどの数量をスライダの位置により表すウィジェットです。
 
   require "tk"
 
@@ -20,27 +20,27 @@
   }
   Tk.mainloop
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkWindow>))
 
-== �᥽�å�:
+== メソッド:
 
 --- TkScale#get
 --- TkScale#value
 #@todo
-    ����������ͤ�������ޤ���
+    スケールの値を取得します。
 
 --- TkScale#get(x, y)
 #@todo
-    ���������((|x|))�ޤ���((|y|))�ΰ��֤��ͤ�������ޤ���
-    �����ϡ����ץ����((|orient|))��(({"horizontal"}))�ʤ��((|x|))��
-    �ͤ�������(({"vertical"}))�ʤ��((|y|))���ͤ�������̣������ޤ���
+    スケールの((|x|))または((|y|))の位置の値を取得します。
+    引数は、オプション((|orient|))が(({"horizontal"}))ならば((|x|))の
+    値だけが、(({"vertical"}))ならば((|y|))の値だけが意味を持ちます。
 
 --- TkScale#set(val)
 --- TkScale#value=(val)
 #@todo
-    ����������ͤ�((|val|))�����ꤷ�ޤ���
+    スケールの値を((|val|))に設定します。
 
 --- TkScale#coords(val=None)
 #@todo
@@ -48,7 +48,7 @@
 --- TkScale#identify(x, y)
 #@todo
 
-== ɸ�४�ץ����:
+== 標準オプション:
 
 ((<TkObject#activebackground>))
 
@@ -78,7 +78,7 @@
 
 ((<TkObject#takefocus>))
 
-== ���ץ����:
+== オプション:
 
 --- TkScale#bigincrement
 #@todo
@@ -88,56 +88,56 @@
 
 --- TkScale#digits
 #@todo
-    ͭ�����
+    有効桁数
 
 --- TkScale#from(n)
 #@todo
-    ��ü(��ü)���ͤ�((|n|))�����ꤷ�ޤ���
+    上端(左端)の値を((|n|))に設定します。
 
 --- TkScale#label(text)
 #@todo
-    �������륦�������åȤΥ�٥��((|text|))�ˤ��ޤ���
+    スケールウィジェットのラベルを((|text|))にします。
 
 --- TkScale#length(len)
 #@todo
-    �������륦�������åȤ�Ĺ������ꤷ�ޤ���
+    スケールウィジェットの長さを指定します。
 
 --- TkScale#resolution(n)
 #@todo
-    ����������Ѳ��̤κǾ��ͤ���ꤷ�ޤ�������������ͤϤ����ͤ��ܿ��ˤʤ�
-    �ޤ���
+    スケールの変化量の最小値を指定します。スケールの値はこの値の倍数になり
+    ます。
 
 --- TkScale#showvalue(bool)
 #@todo
-    �ͤ�ɽ���򤹤�(((|bool|))="1")�����ʤ�(((|bool|))="0")�������ꤷ�ޤ���
+    値の表示をする(((|bool|))="1")かしない(((|bool|))="0")かを設定します。
 
 --- TkScale#sliderlength(len)
 #@todo
-    ���饤����Ĺ����((|len|))�ˤ��ޤ���
+    スライダの長さを((|len|))にします。
 
 --- TkScale#sliderrelief(s)
 #@todo
-    ���饤���η�������ꤷ�ޤ�������Ǥ����ͤϰʲ��β��줫�Ǥ���
+    スライダの形状を指定します。指定できる値は以下の何れかです。
 
     *"raised"
     *"sunken"
 
-    ((-�����ˤ��������-))
+    ((-本当にこれだけ？-))
 
 --- TkScale#state
 #@todo
 
 --- TkScale#tickinterval(n)
 #@todo
-    ������δֳ֤���ꤷ�ޤ���((|n|))��0�ξ����������ɽ������ޤ���
+    目盛りの間隔を指定します。((|n|))が0の場合は目盛りは表示されません。
 
 --- TkScale#to(n)
 #@todo
-    ��ü(��ü)���ͤ�((|n|))�����ꤷ�ޤ���
+    下端(右端)の値を((|n|))に設定します。
 
 --- TkScale#variable(v)
 #@todo
-    TkVariable���֥�������((|v|))�ȥ�������ξ��֤��Ϣ�դ��ޤ���
+    TkVariableオブジェクト((|v|))とスケールの状態を関連付けます。
 
 --- TkScale#width
 #@todo

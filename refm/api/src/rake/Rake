@@ -1,39 +1,39 @@
 = module Rake
 
-Rake �μ��פʥ⥸�塼��Ǥ���
+Rake の主要なモジュールです。
 
 == Singleton Methods
 
 --- application -> Rake::Application
 
-���ߤ� Rake ���ץꥱ���������֤��ޤ���
+現在の Rake アプリケーションを返します。
 
 --- application=(app)
 
-���ߤ� Rake ���ץꥱ�������򥻥åȤ��ޤ���
+現在の Rake アプリケーションをセットします。
 
-@param app [[c:Rake::Application]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param app [[c:Rake::Application]] のインスタンスを指定します。
 
 --- original_dir -> String
 
-Rake ���ץꥱ�������򳫻Ϥ����ǥ��쥯�ȥ���֤��ޤ���
+Rake アプリケーションを開始したディレクトリを返します。
 
 == Constants
 
 --- EARLY -> Rake::EarlyTime
 
-[[c:Rake::EarlyTime]] ��ͣ��Υ��󥹥��󥹤��֤��ޤ���
+[[c:Rake::EarlyTime]] の唯一のインスタンスを返します。
 
 --- EMPTY_TASK_ARGS -> Rake::TaskArguments
 
-���Υ��������Ϥ��ѥ�᡼���򤢤�魯����Ǥ���
+空のタスクに渡すパラメータをあらわす定数です。
 
 
 = class Rake::RuleRecursionOverflowError < StandardError
 
-�롼��Υͥ��Ȥ�¿���������ȯ�������㳰�Ǥ���
+ルールのネストが多すぎる場合に発生する例外です。
 
 = class Rake::TaskArgumentError < ArgumentError
 
-�ְ�ä��������������Ԥä�����ȯ�������㳰�Ǥ���
+間違ったタスクの定義を行った場合に発生する例外です。
 

@@ -1,74 +1,74 @@
 = module Marshal
 
-Ruby ���֥������Ȥ�ե�����(�ޤ���ʸ����)�˽񤭽Ф����ꡢ�ɤ��ᤷ����
-���뵡ǽ���󶡤���⥸�塼�롣
+Ruby オブジェクトをファイル(または文字列)に書き出したり、読み戻したり
+する機能を提供するモジュール。
 
-����ʬ�Υ��饹�Υ��󥹥��󥹤�񤭽Ф������Ǥ��ޤ������񤭽Ф����Բ�ǽ�ʥ��饹��¸�ߤ��ޤ�([[m:Marshal.#dump]] �򻲾�)��
+大部分のクラスのインスタンスを書き出す事ができますが、書き出しの不可能なクラスも存在します([[m:Marshal.#dump]] を参照)。
 
-�����ǡ֥ޡ������ǡ����פȸ����Ѹ�ϡ�[[m:Marshal.#dump]] �����Ϥ���ʸ����
-��ؤ���ΤȤ��ޤ���
+ここで「マーシャルデータ」と言う用語は、[[m:Marshal.#dump]] が出力する文字列
+を指すものとします。
 
 == Module Functions
 
 --- dump(obj, port, limit = -1) -> IO
 --- dump(obj, limit = -1) -> String
 
-obj ����ꤵ�줿������˺Ƶ�Ū�˽��Ϥ��ޤ���
+obj を指定された出力先に再帰的に出力します。
 
-�ե�����˽񤭽Ф��ʤ����֥������Ȥ�ե�����˽񤭽Ф����Ȥ����
-�㳰 [[c:TypeError]] ��ȯ�����ޤ���
-�ե�����˽񤭽Ф��ʤ����֥������Ȥϰʲ����̤�Ǥ���
+ファイルに書き出せないオブジェクトをファイルに書き出そうとすると
+例外 [[c:TypeError]] が発生します。
+ファイルに書き出せないオブジェクトは以下の通りです。
 
- * ̾���ΤĤ��Ƥʤ� [[c:Class]]/[[c:Module]] ���֥������ȡ�(���ξ�
-   ��ϡ��㳰 [[c:ArgumentError]] ��ȯ�����ޤ���̵̾���饹�ˤĤ���
-   �ϡ�[[m:Module.new]] �򻲾ȡ�)
- * �����ƥब���֥������Ȥξ��֤��ݻ������Ρ�����Ū�ˤϰʲ��Υ���
-   �����󥹡�[[c:Dir]], [[c:File::Stat]], [[c:IO]] �Ȥ��Υ��֥��饹
-   [[c:File]], [[c:Socket]] �ʤɡ�
+ * 名前のついてない [[c:Class]]/[[c:Module]] オブジェクト。(この場
+   合は、例外 [[c:ArgumentError]] が発生します。無名クラスについて
+   は、[[m:Module.new]] を参照。)
+ * システムがオブジェクトの状態を保持するもの。具体的には以下のイン
+   スタンス。[[c:Dir]], [[c:File::Stat]], [[c:IO]] とそのサブクラス
+   [[c:File]], [[c:Socket]] など。
  * [[c:MatchData]], [[c:Data]], [[c:Method]], [[c:UnboundMethod]],
    [[c:Proc]], [[c:Thread]], [[c:ThreadGroup]], [[c:Continuation]]
-   �Υ��󥹥��󥹡�
- * �ðۥ᥽�åɤ�����������֥�������
+   のインスタンス。
+ * 特異メソッドを定義したオブジェクト
 
-�ޤ��������Υ��֥������Ȥ����Ū�˻ؤ����֥������Ȥʤɤ�񤭽Ф�
-�ޤ����㤨�С��ǥե�����ͤ����֥��å�����ä� [[c:Hash]] ��
-[[c:Proc]] �����Ū�˻ؤ��Ƥ��뤳�Ȥˤʤ�ޤ���
+また、これらのオブジェクトを間接的に指すオブジェクトなども書き出せ
+ません。例えば、デフォルト値を求めるブロックを持った [[c:Hash]] は
+[[c:Proc]] を間接的に指していることになります。
 
   p Marshal.dump(Hash.new {})
   => -:1:in `dump': cannot dump hash with default proc (TypeError)
 
-�ޡ�������ư���Ǥ�դ�������뤳�Ȥ�Ǥ��ޤ���
+マーシャルの動作を任意に定義することもできます。
 
-@param obj ����פ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param obj ダンプする対象のオブジェクトを指定します。
 
-@param port [[c:IO]] �����Υ��֥��饹�Υ��󥹥��󥹤���ꤷ�ޤ���
+@param port [[c:IO]] かそのサブクラスのインスタンスを指定します。
 
-@param limit ���ꤷ����硢limit �ʰʾ忼����󥯤������֥������Ȥ�
-             ����פǤ��ޤ������ limit ����ꤹ��ȿ��������å���Ԥ��ޤ���
-             �ǥե���Ȥ� -1 �Ǥ���
+@param limit 指定した場合、limit 段以上深くリンクしたオブジェクトを
+             ダンプできません。負の limit を指定すると深さチェックを行いません。
+             デフォルトは -1 です。
 
-@return port ���ά����ȡ�obj �����פ��� [[c:String]] ���֤��ޤ���
-             port ����ꤹ��� port ���֤��ޤ���
+@return port を省略すると、obj をダンプした [[c:String]] を返します。
+             port を指定すると port を返します。
 
-@raise TypeError �ե�����˽񤭽Ф��ʤ����֥������Ȥ�ե������
-                 �񤭤������Ȥ�������ȯ�����ޤ���
+@raise TypeError ファイルに書き出せないオブジェクトをファイルに
+                 書きだそうとした場合に発生します。
 
-@raise ArgumentError ̾�����դ��Ƥ��ʤ� [[c:Class]] �� [[c:Module]]
-                     ���֥������Ȥ����פ��褦�Ȥ�������ȯ�����ޤ���
+@raise ArgumentError 名前の付いていない [[c:Class]] や [[c:Module]]
+                     オブジェクトをダンプしようとした場合に発生します。
 
-@raise ArgumentError limit �ʰʾ忼����󥯤������֥������Ȥ����פ��褦��
-                     ��������ȯ�����ޤ���
+@raise ArgumentError limit 段以上深くリンクしたオブジェクトをダンプしようと
+                     した場合に発生します。
 
 @see [[m:Object#marshal_dump]], [[m:Object#marshal_load]]
 
 --- load(port, proc = nil)      -> object
 --- restore(port, proc = nil)   -> object
 
-port ����ޡ������ǡ������ɤ߹���ǡ����Υ��֥������Ȥ�Ʊ
-�����֤��ĥ��֥������Ȥ��������ޤ���
+port からマーシャルデータを読み込んで、元のオブジェクトと同
+じ状態をもつオブジェクトを生成します。
 
-proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ˤ��ɤ߹����
-���֥������Ȥ�����ˤ��μ�³����ƤӽФ��ޤ���
+proc として手続きオブジェクトが与えられた場合には読み込んだ
+オブジェクトを引数にその手続きを呼び出します。
 
   str = Marshal.dump(["a", 1, 10 ** 10, 1.0, :foo])
   p Marshal.load(str, proc {|obj| p obj})
@@ -81,13 +81,13 @@ proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ˤ��ɤ߹����
      ["a", 1, 10000000000, 1.0, :foo]
      ["a", 1, 10000000000, 1.0, :foo]
 
-@param port [[c:String]] �� [[c:IO]] (�ޤ��Ϥ��Υ��֥��饹)��
-            ���󥹥��󥹤���ꤷ�ޤ���
+@param port [[c:String]] か [[c:IO]] (またはそのサブクラス)の
+            インスタンスを指定します。
 
-@param proc ��³�����֥������ȡ�[[c:Proc]]
+@param proc 手続きオブジェクト。[[c:Proc]]
 
-@raise TypeError �᥸�㡼�С�����󤬰ۤʤ뤫���С��������礭��
-                 �ޡ������ǡ������ɤ߹��������ȯ�����ޤ���
+@raise TypeError メジャーバージョンが異なるか、バージョンの大きな
+                 マーシャルデータを読み込んだ場合に発生します。
 
 #@since 1.8.0
 == Constants
@@ -95,16 +95,16 @@ proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ˤ��ɤ߹����
 --- MAJOR_VERSION -> Fixnum
 --- MINOR_VERSION -> Fixnum
 
-[[m:Marshal.#dump]] �����Ϥ���ǡ����ե����ޥåȤΥС�������ֹ�Ǥ���
+[[m:Marshal.#dump]] が出力するデータフォーマットのバージョン番号です。
 
-[[m:Marshal.#load]] �ϡ��᥸�㡼�С�����󤬰ۤʤ뤫���С��������礭��
-�ޡ������ǡ������ɤ߹�����Ȥ��㳰 [[c:TypeError]] ��ȯ�������ޤ���
+[[m:Marshal.#load]] は、メジャーバージョンが異なるか、バージョンの大きな
+マーシャルデータを読み込んだとき例外 [[c:TypeError]] を発生させます。
 
-�ޥ��ʡ��С�����󤬸Ť������Υե����ޥåȤ��ɤ߹��߲�ǽ�Ǥ�����
-[[m:$VERBOSE]] = true �ΤȤ��ˤϷٹ��å����������Ϥ���ޤ�
+マイナーバージョンが古いだけのフォーマットは読み込み可能ですが、
+[[m:$VERBOSE]] = true のときには警告メッセージが出力されます
 
-�ޡ�����뤵�줿�ǡ����ΥС�������ֹ�ϰʲ��Τ褦�ˤ��Ƽ������뤳
-�Ȥ��Ǥ��ޤ���
+マーシャルされたデータのバージョン番号は以下のようにして取得するこ
+とができます。
 
   obj = Object.new
   major, minor = Marshal.dump(obj).unpack("cc")

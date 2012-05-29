@@ -5,12 +5,12 @@
 
 --- rake_extension(method){ ... } -> ()
 
-Ϳ����줿�֥��å���Ǵ���¸�ߤ���᥽�åɤ��������褦�Ȥ�������
-�ٹ��ɽ�����ޤ������ξ�硢�֥��å���ɾ������ޤ���
+与えられたブロック内で既に存在するメソッドを再定義しようとした場合に
+警告を表示します。この場合、ブロックは評価されません。
 
-@param method �֥��å���Ǻ��������ͽ��Υ᥽�å�̾����ꤷ�ޤ���
+@param method ブロック内で再定義する予定のメソッド名を指定します。
 
-��:
+例:
    class String
      rake_extension("xyz") do
        def xyz
@@ -26,62 +26,62 @@
 
 --- ext(newext = '') -> String
 
-���Ȥγ�ĥ�Ҥ�Ϳ����줿��ĥ�Ҥ��֤������ޤ���
+自身の拡張子を与えられた拡張子で置き換えます。
 
-���Ȥ˳�ĥ�Ҥ�̵�����ϡ�Ϳ����줿��ĥ�Ҥ��ɲä��ޤ���
-Ϳ����줿��ĥ�Ҥ���ʸ����ξ��ϡ����Ȥγ�ĥ�Ҥ������ޤ���
+自身に拡張子が無い場合は、与えられた拡張子を追加します。
+与えられた拡張子が空文字列の場合は、自身の拡張子を削除します。
 
-@param newext ��������ĥ�Ҥ���ꤷ�ޤ���
+@param newext 新しい拡張子を指定します。
 
 --- pathmap(spec = nil){ ... } -> String
 
-Ϳ����줿�񼰻���ʸ����˱����ƥѥ�(����)���Ѵ����ޤ���
+与えられた書式指定文字列に応じてパス(自身)を変換します。
 
-Ϳ����줿�񼰻���ʸ������Ѵ��ξܺ٤����椷�ޤ���
-����Ǥ���񼰻���ʸ����ϰʲ����̤�Ǥ���
+与えられた書式指定文字列は変換の詳細を制御します。
+指定できる書式指定文字列は以下の通りです。
 
 : %p
-  �����ʥѥ���ɽ���ޤ���
+  完全なパスを表します。
 : %f
-  ��ĥ���դ��Υե�����̾��ɽ���ޤ����ǥ��쥯�ȥ�̾�ϴޤޤ�ޤ���
+  拡張子付きのファイル名を表します。ディレクトリ名は含まれません。
 : %n
-  ��ĥ�Ҥʤ��Υե�����̾��ɽ���ޤ���
+  拡張子なしのファイル名を表します。
 : %d
-  �ѥ��˴ޤޤ��ǥ��쥯�ȥ�Υꥹ�Ȥ�ɽ���ޤ���
+  パスに含まれるディレクトリのリストを表します。
 : %x
-  �ѥ��˴ޤޤ��ե�����γ�ĥ�Ҥ�ɽ���ޤ�����ĥ�Ҥ�̵�����϶�ʸ�����ɽ���ޤ���
+  パスに含まれるファイルの拡張子を表します。拡張子が無い場合は空文字列を表します。
 : %X
-  ��ĥ�Ұʳ����٤Ƥ�ɽ���ޤ���
+  拡張子以外すべてを表します。
 : %s
-  �������Ƥ���С����ؤΥե����륻�ѥ졼����ɽ���ޤ���
-  �������Ƥ�̵�����ϡ�ɸ��Υե����륻�ѥ졼����ɽ���ޤ���
+  定義されていれば、代替のファイルセパレータを表します。
+  定義されてい無い場合は、標準のファイルセパレータを表します。
 : %%
-  �ѡ�����ȼ��Ȥ�ɽ���ޤ���
+  パーセント自身を表します。
 
 
-%d �Ͽ��ͤΥץ�ե��������뤳�Ȥ��Ǥ��ޤ���
+%d は数値のプレフィクスを取ることができます。
 
-��:
+例:
    'a/b/c/d/file.txt'.pathmap("%2d")   => 'a/b'
    'a/b/c/d/file.txt'.pathmap("%-2d")  => 'c/d'
 
-�ޤ���%d, %p, %f, %n, %x, %X �ˤ�ñ���ʸ�����ִ���Ԥ������
-�ִ��ѥ������ɽ���ѥ�᡼������ꤹ�뤳�Ȥ�����ޤ���
-�ѥ�������ִ�ʸ����ϥ���ޤǶ��ڤ����Τ����̤Ǥ�����ޤ���
-�ִ�����ϡ�% �Ȼؼ��Ҥδ֤��֤��ޤ���(��: "%{old,new}d")
-ʣ�����ִ���Ԥ����ϥѥ�����򥻥ߥ�����Ƕ��ڤäƤ���������
-(��: "%{old,new;src,bin}d")
+また、%d, %p, %f, %n, %x, %X には単純な文字列置換を行うための
+置換パターンを表すパラメータを指定することが出来ます。
+パターンと置換文字列はコンマで区切り全体を中括弧でくくります。
+置換指定は、% と指示子の間に置きます。(例: "%{old,new}d")
+複数の置換を行う場合はパターンをセミコロンで区切ってください。
+(例: "%{old,new;src,bin}d")
 
-����ɽ����������Ȥ�ѥ�����Ȥ��ƻ��Ѥ��뤳�Ȥ����뤫�⤷��ޤ���
-���̡�����ޡ����ߥ�����ϥѥ�������ִ�ʸ����˻��Ѥ��ʤ��Ǥ���������
+正規表現や後方参照をパターンとして使用することがあるかもしれません。
+中括弧、コンマ、セミコロンはパターンと置換文字列に使用しないでください。
 
-��:
+例:
     "src/org/onestepback/proj/A.java".pathmap("%{^src,bin}X.class")
     #=> "bin/org/onestepback/proj/A.class"
 
-�ִ�ʸ����� '*' ����ꤷ�����ϡ��ִ�ʸ�����׻����뤿��˥֥��å���ɾ�����ޤ���
+置換文字列に '*' を指定した場合は、置換文字列を計算するためにブロックを評価します。
 
-��:
+例:
 
    "/path/to/file.TXT".pathmap("%X%{.*,*}x") { |ext| ext.downcase }
    #=> "/path/to/file.txt"
@@ -91,21 +91,21 @@
 
 --- pathmap_explode -> Array
 
-���Ȥ�ѥ���ɽ����ʬ���Ȥ�ʬ�򤷤�����ˤ����֤��ޤ���
+自身をパスを表す部分ごとに分解して配列にして返します。
 
 @see [[m:String#pathmap]]
 
 --- pathmap_partial(n) -> String
 
-���Ȥ���Ϳ����줿����ʬ�ѥ���ȴ�褷�ޤ���
+自身から与えられた階層分パスを抜粋します。
 
-Ϳ����줿���ͤ����Ǥ�����Ϻ����顢��Ǥ�����ϱ�����ȴ�褷�ޤ���
+与えられた数値が正である場合は左から、負である場合は右から抜粋します。
 
 --- pathmap_replace(patterns){ ... } -> String
 
-Ϳ����줿�ѥ�������ä��֤������ޤ���
+与えられたパスを前もって置き換えます。
 
-@param patterns 'pat1,rep1;pat2,rep2;...' �Τ褦�ʷ������ִ��ѥ��������ꤷ�ޤ���
+@param patterns 'pat1,rep1;pat2,rep2;...' のような形式で置換パターンを指定します。
 
 
 = reopen Kernel
@@ -115,11 +115,11 @@ include RakeFileUtils
 
 --- task(*args){ ... } -> Rake::Task
 
-Rake ��������������ޤ���
+Rake タスクを定義します。
 
-@param args ������̾�Ȱ�¸����������ꤷ�ޤ���
+@param args タスク名と依存タスクを指定します。
 
-��:
+例:
   task :clobber => [:clean] do
     rm_rf "html"
   end
@@ -129,11 +129,11 @@ Rake ��������������ޤ���
 
 --- file(*args){ ... } -> Rake::FileTask
 
-�ե����륿������������ޤ���
+ファイルタスクを定義します。
 
-@param args �ե�����̾�Ȱ�¸�ե�����̾����ꤷ�ޤ���
+@param args ファイル名と依存ファイル名を指定します。
 
-��:
+例:
    file "config.cfg" => ["config.template"] do
      open("config.cfg", "w") do |outfile|
        open("config.template") do |infile|
@@ -148,36 +148,36 @@ Rake ��������������ޤ���
 
 --- file_create(*args){ ... } -> Rake::FileCreationTask
 
-�ե������������륿������������ޤ���
+ファイルを作成するタスクを定義します。
 
-��� [[m:Kernel.#directory]] ��������뤿��˻��Ѥ��ޤ���
+主に [[m:Kernel.#directory]] を定義するために使用します。
 
 --- directory(dir) -> ()
 
-Ϳ����줿�ǥ��쥯�ȥ��������륿������������ޤ���
+与えられたディレクトリを作成するタスクを定義します。
 
-@param dir ��������ǥ��쥯�ȥ����ꤷ�ޤ���
+@param dir 作成するディレクトリを指定します。
 
-��:
+例:
   directory 'testdata/doc'
 
 
 --- multitask(args){ ... } -> Rake::MultiTask
 
-����������������¹Ԥ��륿������������ޤ���
+事前タスクを並列実行するタスクを定義します。
 
-Ϳ����줿������������¹Ԥ�����������Ǥ���
+与えられた事前タスクを実行する順序は不定です。
 
-��:
+例:
   multitask :deploy => [:deploy_gem, :deploy_rdoc]
 
 --- namespace(name = nil){ ... } -> Rake::NameSpace
 
-������̾�����֤�������ޤ���
+新しい名前空間を作成します。
 
-Ϳ����줿�֥��å���ɾ������֤ϡ�����̾�����֤���Ѥ��ޤ���
+与えられたブロックを評価する間は、その名前空間を使用します。
 
-��:
+例:
    ns = namespace "nested" do
      task :run
    end
@@ -187,22 +187,22 @@ Rake ��������������ޤ���
 
 --- rule(*args){|t| ... } -> Rake::Task
 
-��ưŪ�˺������륿�����Τ���Υ롼���������ޤ���
+自動的に作成するタスクのためのルールを定義します。
 
-@param args �롼���Ϳ����ѥ�᡼������ꤷ�ޤ���
+@param args ルールに与えるパラメータを指定します。
 
-��:
+例:
   rule '.o' => '.c' do |t|
     sh %{cc -o #{t.name} #{t.source}}
   end
 
 --- desc(description) -> String
 
-ľ��� Rake ����������������Ͽ���ޤ���
+直後の Rake タスクの説明を登録します。
 
-@param description ľ��Υ���������������ꤷ�ޤ���
+@param description 直後のタスクの説明を指定します。
 
-��:
+例:
    desc "Run the Unit Tests"
    task :test => [:build]
      runtests
@@ -210,18 +210,18 @@ Rake ��������������ޤ���
 
 --- import(*filenames)
 
-ʬ�䤵�줿 Rakefile �򥤥�ݡ��Ȥ��ޤ���
+分割された Rakefile をインポートします。
 
-����ݡ��Ȥ��줿�ե�����ϡ����ߤΥե����뤬�����˥����ɤ��줿��ǥ����ɤ���ޤ���
-���Υ᥽�åɤϥ���ݡ��Ȥ���ե�����Τɤ��ǸƤӽФ���Ƥ⤫�ޤ��ޤ���
-�ޤ�������ݡ��Ȥ����ե�������˸���륪�֥������Ȥϥ���ݡ��Ȥ���ե�����������
-����Ƥ��륪�֥������Ȥ˰�¸���Ƥ��Ƥ⤫�ޤ��ޤ���
+インポートされたファイルは、現在のファイルが完全にロードされた後でロードされます。
+このメソッドはインポートするファイルのどこで呼び出されてもかまいません。
+また、インポートされるファイル内に現れるオブジェクトはインポートするファイル内で定義
+されているオブジェクトに依存していてもかまいません。
 
-���Υ᥽�åɤϰ�¸�ط�����������ե�������ɤ߹���Τˤ褯�Ȥ��ޤ���
+このメソッドは依存関係を定義したファイルを読み込むのによく使われます。
 
-@param filenames ����ݡ��Ȥ��� Rakefile ����ꤷ�ޤ���
+@param filenames インポートする Rakefile を指定します。
 
-��:
+例:
    import ".depend", "my_rules"
 
 
@@ -231,14 +231,14 @@ Rake ��������������ޤ���
 
 --- sh(*cmd){|result, status| ... }
 
-Ϳ����줿���ޥ�ɤ�¹Ԥ��ޤ���
+与えられたコマンドを実行します。
 
-Ϳ����줿������ʣ���ξ�硢��������ͳ���ʤ��ǥ��ޥ�ɤ�¹Ԥ��ޤ���
+与えられた引数が複数の場合、シェルを経由しないでコマンドを実行します。
 
-@param cmd �����β��˴ؤ��Ƥ� [[m:Kernel.#exec]] �򻲾Ȥ��Ƥ���������
+@param cmd 引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
 
 
-��:
+例:
    sh %{ls -ltr}
    
    sh 'ls', 'file with spaces'
@@ -255,31 +255,31 @@ Rake ��������������ޤ���
 
 --- ruby(*args){|result, status| ... }
 
-Ϳ����줿������ Ruby ���󥿥ץ꥿��¹Ԥ��ޤ���
+与えられた引数で Ruby インタプリタを実行します。
 
-@param args Ruby ���󥿥ץ꥿��Ϳ�����������ꤷ�ޤ���
+@param args Ruby インタプリタに与える引数を指定します。
 
-��:
+例:
    ruby %{-pe '$_.upcase!' <README}
 
 @see [[m:Kernel.#sh]]
 
 --- safe_ln(*args)
 
-�����˥�󥯤�������ޤ���
+安全にリンクを作成します。
 
-��󥯤κ����˼��Ԥ������ϥե�����򥳥ԡ����ޤ���
+リンクの作成に失敗した場合はファイルをコピーします。
 
-@param args [[m:FileUtils.#cp]], [[m:FileUtils.#ln]] ���Ϥ���������ꤷ�ޤ���
+@param args [[m:FileUtils.#cp]], [[m:FileUtils.#ln]] に渡す引数を指定します。
 
 @see [[m:FileUtils.#cp]], [[m:FileUtils.#ln]]
 
 --- split_all(path) -> Array
 
-Ϳ����줿�ѥ���ǥ��쥯�ȥꤴ�Ȥ�ʬ�䤷�ޤ���
+与えられたパスをディレクトリごとに分割します。
 
-@param path ʬ�䤹��ѥ�����ꤷ�ޤ���
+@param path 分割するパスを指定します。
 
-��:
+例:
    split_all("a/b/c") =>  ['a', 'b', 'c']
 

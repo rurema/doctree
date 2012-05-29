@@ -1,25 +1,25 @@
 #@until 1.8.7
 = module OpenSSL::Digest
 
-¥Ï¥Ã¥·¥å´Ø¿ô´ØÏ¢¤ò½¸¤á¤¿¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+ãƒãƒƒã‚·ãƒ¥é–¢æ•°é–¢é€£ã‚’é›†ã‚ãŸãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
 
 #@else
 = class OpenSSL::Digest < Digest::Class
 
-¥Ï¥Ã¥·¥å´Ø¿ô¤Î¤¿¤á¤Î¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤òÄó¶¡¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
+ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®ãŸã‚ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’æä¾›ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-¤³¤Î¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤Ë¤Ï2ÄÌ¤ê¤ÎÍøÍÑË¡¤¬Â¸ºß¤·¤Þ¤¹¡£
-°ìÊý¤ÏÊ¸»úÎó¤«¤éÄ¾ÀÜ¥Ï¥Ã¥·¥å¤ò·×»»¤¹¤ë ([[m:OpenSSL::Digest.digest]],
-[[m:Digest::Instance#hexdigest]]) ÊýË¡¤Ç¤¹¡£Ã»¤¤Ê¸»úÎó¤Î
-¥À¥¤¥¸¥§¥¹¥È¤ò¼è¤ë¤È¤­¤Ë¤Ï¤³¤Á¤é¤ò»È¤¨¤Ð¤è¤¤¤Ç¤·¤ç¤¦¡£
+ã“ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã«ã¯2é€šã‚Šã®åˆ©ç”¨æ³•ãŒå­˜åœ¨ã—ã¾ã™ã€‚
+ä¸€æ–¹ã¯æ–‡å­—åˆ—ã‹ã‚‰ç›´æŽ¥ãƒãƒƒã‚·ãƒ¥ã‚’è¨ˆç®—ã™ã‚‹ ([[m:OpenSSL::Digest.digest]],
+[[m:Digest::Instance#hexdigest]]) æ–¹æ³•ã§ã™ã€‚çŸ­ã„æ–‡å­—åˆ—ã®
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’å–ã‚‹ã¨ãã«ã¯ã“ã¡ã‚‰ã‚’ä½¿ãˆã°ã‚ˆã„ã§ã—ã‚‡ã†ã€‚
 
-¤â¤¦°ì¤Ä¤Ï¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Æ¡¢Ê¸»úÎó¤ò½ç¼¡
-[[m:OpenSSL::Digest#update]] ¤ÇÅÏ¤¹¤³¤È¤Ç¥À¥¤¥¸¥§¥¹¥È¤ò·×»»
-¤·¤Þ¤¹¡£Âç¤­¤Ê¥Õ¥¡¥¤¥ë¤Î¥Ï¥Ã¥·¥åÃÍ¤ò·×»»¤¹¤ë¾ì¹ç¤Ê¤É¤Ë
-ÍøÍÑ¤·¤Þ¤¹¡£
+ã‚‚ã†ä¸€ã¤ã¯ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¦ã€æ–‡å­—åˆ—ã‚’é †æ¬¡
+[[m:OpenSSL::Digest#update]] ã§æ¸¡ã™ã“ã¨ã§ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—
+ã—ã¾ã™ã€‚å¤§ããªãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒãƒƒã‚·ãƒ¥å€¤ã‚’è¨ˆç®—ã™ã‚‹å ´åˆãªã©ã«
+åˆ©ç”¨ã—ã¾ã™ã€‚
 
 
-Îã:
+ä¾‹:
   require 'openssl'
   digest = OpenSSL::Digest.new("sha256")
 
@@ -30,88 +30,88 @@
   }
   puts digest.hexdigest
 
-[[lib:digest]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[lib:digest]] ã‚‚å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
 == Class Method
 --- new(name, data=nil) -> OpenSSL::Digest
-¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-name ¤Ç¥Ï¥Ã¥·¥å´Ø¿ô¤Î¼ïÎà¤òÁª¤Ó¤Þ¤¹¡£
+name ã§ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®ç¨®é¡žã‚’é¸ã³ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¡¢¤½¤ÎÊ¸»úÎó¤Ç¥ª¥Ö¥¸¥§¥¯¥È¤ÎÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ã€ãã®æ–‡å­—åˆ—ã§ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param name ¥Ï¥Ã¥·¥å´Ø¿ô¤Î¼ïÎà¤òÊ¸»úÎó("md5", "sha256" ¤Ê¤É)¤Ç»ØÄê
-@param data ÆþÎÏÊ¸»úÎó
-@raise RuntimeError ¥µ¥Ý¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤¤¥¢¥ë¥´¥ê¥º¥à¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+@param name ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®ç¨®é¡žã‚’æ–‡å­—åˆ—("md5", "sha256" ãªã©)ã§æŒ‡å®š
+@param data å…¥åŠ›æ–‡å­—åˆ—
+@raise RuntimeError ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ãªã„ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™
 
 --- digest(name, data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-name ¤Ç¥Ï¥Ã¥·¥å´Ø¿ô¤ò»ØÄê¤·¤Þ¤¹¡£
+name ã§ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param name ¥Ï¥Ã¥·¥å´Ø¿ô¤Î¼ïÎà¤òÊ¸»úÎó("md5", "sha256" ¤Ê¤É)¤Ç»ØÄê
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param name ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®ç¨®é¡žã‚’æ–‡å­—åˆ—("md5", "sha256" ãªã©)ã§æŒ‡å®š
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 == Instance Method
 --- reset -> self
-¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤ÎÆâÉô¾õÂÖ¤ò¥ê¥»¥Ã¥È¤·¤Þ¤¹¡£
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å†…éƒ¨çŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
 
 --- update(data) -> self
 --- <<(data) -> self
-data ¤Ç¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤ÎÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã§ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest_length -> Integer
-¥Ï¥Ã¥·¥åÃÍ¤ÎÄ¹¤µ(¥Ð¥¤¥È¿ô)¤òÊÖ¤·¤Þ¤¹¡£
+ãƒãƒƒã‚·ãƒ¥å€¤ã®é•·ã•(ãƒã‚¤ãƒˆæ•°)ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- block_length -> Integer
-¥Ï¥Ã¥·¥å´Ø¿ô¤Î¥Ö¥í¥Ã¥¯¥µ¥¤¥º¤òÊÖ¤·¤Þ¤¹¡£
+ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®ãƒ–ãƒ­ãƒƒã‚¯ã‚µã‚¤ã‚ºã‚’è¿”ã—ã¾ã™ã€‚
 
 --- name -> String
-¥Ï¥Ã¥·¥å´Ø¿ô¤ÎÌ¾Á°¤òÊÖ¤·¤Þ¤¹¡£
+ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®åå‰ã‚’è¿”ã—ã¾ã™ã€‚
 
 = class OpenSSL::Digest::DSS < OpenSSL::Digest
-¥Ï¥Ã¥·¥å´Ø¿ô DSS ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° DSS ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::DSS
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò DSS ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ DSS ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò DSS ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ DSS ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 = class OpenSSL::Digest::DSS1 < OpenSSL::Digest
-¥Ï¥Ã¥·¥å´Ø¿ô DSS1 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° DSS1 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::DSS1
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò DSS1 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ DSS1 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò DSS1 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ DSS1 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@end
 
@@ -120,25 +120,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò DSS1 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 #@else
 = class OpenSSL::Digest::MD2 < OpenSSL::Digest
 #@end
-¥Ï¥Ã¥·¥å´Ø¿ô MD2 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° MD2 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::MD2
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD2 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MD2 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD2 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MD2 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::MD4 < OpenSSL::Digest::Digest
@@ -146,25 +146,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD2 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::MD4 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô MD4 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° MD4 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::MD4
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD4 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MD4 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD4 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MD4 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::MD5 < OpenSSL::Digest::Digest
@@ -172,25 +172,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD4 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::MD5 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô MD5 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° MD5 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::MD5
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD5 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MD5 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD5 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MD5 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::MDC2 < OpenSSL::Digest::Digest
@@ -198,25 +198,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MD5 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::MDC2 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô MDC2 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° MDC2 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::MDC2
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MDC2 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MDC2 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MDC2 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ MDC2 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::RIPEMD160 < OpenSSL::Digest::Digest
@@ -224,25 +224,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò MDC2 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::RIPEMD160 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô RIPEMD160 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° RIPEMD160 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::RIPEMD160
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò RIPEMD160 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ RIPEMD160 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò RIPEMD160 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ RIPEMD160 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::SHA < OpenSSL::Digest::Digest
@@ -250,25 +250,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò RIPEMD160 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::SHA < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô SHA ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° SHA ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::SHA
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::SHA1 < OpenSSL::Digest::Digest
@@ -276,25 +276,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::SHA1 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô SHA1 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° SHA1 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::SHA1
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA1 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA1 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA1 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA1 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::SHA224 < OpenSSL::Digest::Digest
@@ -302,25 +302,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA1 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::SHA224 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô SHA224 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° SHA224 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::SHA224
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA224 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA224 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA224 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA224 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::SHA256 < OpenSSL::Digest::Digest
@@ -328,25 +328,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA224 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::SHA256 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô SHA256 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° SHA256 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::SHA256
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA256 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA256 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA256 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA256 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::SHA384 < OpenSSL::Digest::Digest
@@ -354,25 +354,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA256 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::SHA384 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô SHA384 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° SHA384 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::SHA384
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA384 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA384 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA384 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA384 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 #@until 1.8.7
 = class OpenSSL::Digest::SHA512 < OpenSSL::Digest::Digest
@@ -380,25 +380,25 @@ data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA384 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 = class OpenSSL::Digest::SHA512 < OpenSSL::Digest
 #@end
 
-¥Ï¥Ã¥·¥å´Ø¿ô SHA512 ¤òÉ½¤¹¥¯¥é¥¹
+ãƒãƒƒã‚·ãƒ¥é–¢æ•° SHA512 ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 
 == Class Method
 --- new(data=nil) -> OpenSSL::Digest::SHA512
-¿·¤·¤¤¥À¥¤¥¸¥§¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+æ–°ã—ã„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-data ¤ËÊ¸»úÎó¤òÅÏ¤¹¤È¤½¤ÎÆâÍÆ¤ÇÆâÉô¾õÂÖ¤ò¹¹¿·¤·¤Þ¤¹¡£
+data ã«æ–‡å­—åˆ—ã‚’æ¸¡ã™ã¨ãã®å†…å®¹ã§å†…éƒ¨çŠ¶æ…‹ã‚’æ›´æ–°ã—ã¾ã™ã€‚
 
-@param data ÆþÎÏÊ¸»úÎó
+@param data å…¥åŠ›æ–‡å­—åˆ—
 
 --- digest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA512 ¤Ç·×»»¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA512 ã§è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 --- hexdigest(data) -> String
-data ¤Î¥À¥¤¥¸¥§¥¹¥È¤ò SHA512 ¤Ç·×»»¤·¡¢16¿ÊÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+data ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’ SHA512 ã§è¨ˆç®—ã—ã€16é€²æ–‡å­—åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-@param data ¥À¥¤¥¸¥§¥¹¥È¤ò·×»»¤¹¤ëÊ¸»úÎó
+@param data ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹æ–‡å­—åˆ—
 
 = class OpenSSL::Digest::DigestError < OpenSSL::OpenSSLError
-OpenSSL ¤Î¥Ï¥Ã¥·¥å´Ø¿ô´ØÏ¢¤Î¥¨¥é¡¼¤¬µ¯¤­¤¿¤È¤­¤ËÈ¯À¸¤¹¤ëÎã³°¤Î¥¯¥é¥¹¤Ç¤¹¡£
+OpenSSL ã®ãƒãƒƒã‚·ãƒ¥é–¢æ•°é–¢é€£ã®ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã¨ãã«ç™ºç”Ÿã™ã‚‹ä¾‹å¤–ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚

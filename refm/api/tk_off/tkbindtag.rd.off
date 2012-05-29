@@ -3,9 +3,9 @@
 =begin
 = TkBindTag
 
-���Υ��饹�Υ��֥������Ȥ�((<�����ꥹ��>))������뤳�Ȥ�Ǥ�դΥ��롼��
-�˶��̤�((<���٥�ȥ�����Хå��ؿ�>))����Ͽ���뤳�Ȥ��Ǥ��ޤ���
-((<TkWindow#bindtags>))�⻲�Ȥ��Ƥ���������
+このクラスのオブジェクトを((<タグリスト>))に入れることで任意のグループ
+に共通の((<イベントコールバック関数>))を登録することができます。
+((<TkWindow#bindtags>))も参照してください。
 
   require "tk"
 
@@ -17,36 +17,36 @@
   TkButton.new {text 'C'}.pack
   Tk.mainloop
 
-������Ǥϡ��ܥ���A��B�����ϥ꥿���󥭡����Ф��륳����Хå��ؿ������
-�ޤ������ܥ���C �ˤϤ���ޤ���
+この例では、ボタンA、Bだけはリターンキーに対するコールバック関数を持ち
+ますが、ボタンC にはありません。
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<Object>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkBindCore>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkBindTag.id2obj(id)
 #@todo
-    ʸ����((|id|))���б�����(({TkBindTag}))�Υ��󥹥��󥹤��֤��ޤ���
-    ���������Ѥ���Ƥ��ޤ���
+    文字列((|id|))に対応する(({TkBindTag}))のインスタンスを返します。
+    内部で利用されています。
 
 --- TkBindTag.new
 --- TkBindTag.new(context, cmd=Proc.new, args=nil)
 #@todo
-    ������Хå��ؿ�����Ͽ���뤿��Υ������֥������Ȥ��������ޤ���
+    コールバック関数を登録するためのタグオブジェクトを生成します。
 
-    ��������ꤹ�뤳�Ȥ�������Ʊ���˥�����Хå��ؿ�����Ͽ��Ԥ����Ȥ����
-    �ޤ��������ΰ�̣��((<TkBindCore#bind>))��Ʊ���Ǥ������äơ�
+    引数を指定することで生成と同時にコールバック関数の登録を行うことも出来
+    ます。引数の意味は((<TkBindCore#bind>))と同じです。従って、
       tag = TkBindTag.new
       tag.bind('Return') {|e| p e.widget }
-    ��
+    を、
       tag = TkBindTag.new('Return', proc {|e| p e.widget })
-    �Ƚ񤯤��Ȥ�Ǥ��ޤ���((-���ƥ졼���η����ǽ񤯤��ȤϽ���ʤ�-))
+    と書くこともできます。((-イテレータの形式で書くことは出来ない-))
 
 =end
 # $Id$
@@ -54,11 +54,11 @@
 =begin
 = TkBindTagAll
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<TkBindTag>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkBindTagAll.new
 --- TkBindTagAll.new(context, cmd=Proc.new, args=nil)
@@ -70,15 +70,15 @@
 =begin
 = TkEntry::ValidateCmd
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<Object>))
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<TkComm>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkEntry::ValidateCmd.new(cmd = Proc.new, args=nil)
 #@todo
@@ -89,16 +89,16 @@
 =begin
 = TkEntry::ValidateCmd::ValidateArgs
 
-== �����ѡ����饹:
+== スーパークラス:
 
 ((<Object>))
 
-== ���饹�᥽�å�:
+== クラスメソッド:
 
 --- TkEntry::ValidateCmd::ValidateArgs.new(d,i,s,v,pp,ss,vv,ww)
 #@todo
 
-== �᥽�å�:
+== メソッド:
 
 --- TkEntry::ValidateCmd::ValidateArgs#action
 #@todo

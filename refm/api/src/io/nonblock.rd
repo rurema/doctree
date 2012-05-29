@@ -1,23 +1,23 @@
-IO �ΥΥ�֥��å��⡼�ɤ򰷤��饤�֥��Ǥ���
+IO のノンブロックモードを扱うライブラリです。
 
 = reopen IO
 
 == Instance Methods
 
 --- nonblock? -> bool
-self ���Υ�֥��å��⡼�ɤʤ�� true ��
-�֥��å��⡼�ɤʤ� false ���֤��ޤ���
+self がノンブロックモードならば true を、
+ブロックモードなら false を返します。
 
 --- nonblock=(bool)
-bool �����ʤ� self ��Υ�֥��å��⡼�ɤˡ����ʤ�֥��å��⡼
-�ɤˤ��ޤ���
+bool が真なら self をノンブロックモードに、偽ならブロックモー
+ドにします。
 
-@param bool ������ꤹ��ȼ��Ȥ�Υ�֥��å��⡼�ɤˤ��ޤ���������ꤹ��ȥ֥��å��⡼�ɤˤ��ޤ���
+@param bool 真を指定すると自身をノンブロックモードにします。偽を指定するとブロックモードにします。
 
 --- nonblock(bool = true) { ... } -> object
 
-�֥��å��¹��桢���Ū�� self �Υ֥��å��⡼�ɤ��ѹ����ޤ���
-bool �����ʤ�Υ�֥��å��⡼�ɡ����ʤ�֥��å��⡼�ɤˤʤ�ޤ���
+ブロック実行中、一時的に self のブロックモードを変更します。
+bool が真ならノンブロックモード、偽ならブロックモードになります。
 
-@param bool ������ꤹ��ȥΥ�֥��å��⡼�ɡ�������ꤹ��ȥ֥��å��⡼�ɤˤʤ�ޤ���
+@param bool 真を指定するとノンブロックモード、偽を指定するとブロックモードになります。
 

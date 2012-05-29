@@ -1,12 +1,12 @@
 = timeout
 
-* gethostbyname �� timeout �Ǥ��ʤ�
+* gethostbyname で timeout できない
 
-  timeout �� Thread �Ǽ¸�����Ƥ��뤿�ᡢC ��٥����ߤ��Ƥ��ޤ�
-  (Thread�����ؤ���ȯ�����ʤ�)�������Ф��Ƥϸ��̤�����ޤ���
+  timeout は Thread で実現されているため、C レベルで停止してしまう
+  (Threadの切替えが発生しない)処理に対しては効果がありません。
 
-  �ʲ�����Ǥϡ�gethostbyname(���褽0.6�ý����˻��֤������äƤ���) ����λ��
-  ��ľ��((A)�βս�)�� TimeoutError �㳰�������äƤ��ޤ���
+  以下の例では、gethostbyname(およそ0.6秒処理に時間がかかっている) が終了し
+  た直後((A)の箇所)で TimeoutError 例外があがっています。
 
       require 'timeout'
       require 'socket'
@@ -27,17 +27,17 @@
                 from -:6:in `timeout'
                 from -:6
 
-  Ruby�ǽ񤫤줿�꥾��Ф����Ѥ���Ȥ��������������ޤ���
-  (({require "resolv-replace"})) ����ȡ�(({resolv})) ��������줿��
-  �꥾��Ф����Ѥ����褦�ˤʤ�ޤ���
+  Rubyで書かれたリゾルバを利用するという回避策があります。
+  (({require "resolv-replace"})) すると、(({resolv})) で定義された、
+  リゾルバが利用されるようになります。
 
-* Windows�� Ruby �� timeout �Ǥ��ʤ�
+* Windows版 Ruby で timeout できない
 
-  Win32�� ruby (((<Cygwin>))��((<MinGW>))��((<mswin32>)),
-  ((<bccwin32>)))�Ǥϡ��ʲ��ξ��� Thread �����ؤ���������ʤ������ 
-  timeout �Ǥ��ޤ���
+  Win32版 ruby (((<Cygwin>))、((<MinGW>))、((<mswin32>)),
+  ((<bccwin32>)))では、以下の場合も Thread の切替えが起こらないために 
+  timeout できません。
 
-      # Win32�ͥ��ƥ�����(mingw, mswin32, bccwin32)
+      # Win32ネイティブ版(mingw, mswin32, bccwin32)
 
       require 'timeout'
 
@@ -49,7 +49,7 @@
         print "timeout\n"
       end
 
-      # Cygwin��
+      # Cygwin版
 
       i = 0
       begin
@@ -62,9 +62,9 @@
         print "timeout\n"
       end
 
-  ((<Win32�ͥ��ƥ�����>))�Ǥϡ�$stdin.gets ����((<Cygwin>))�� �Ǥϡ�
-  puts �� Thread �����ؤ���ȯ�������ʤ��褦�Ǥ���((-���Τˤ� cygwin��
-  �� ((<setitimer(2)|manual page>)) �˥Х�������(�餷��)���� 
-  Thread ���ڤ��ؤ��ʤ��褦�Ǥ���Cygwin�� ruby version 1.6.8 �� 
-  1.7.3 �κǿ��Ǥ� setitimer(2) ��Ȥ�ʤ��褦�ˤ��뤳�ȤǤ����Զ�礬
-  ��������ޤ���((<ruby-list:36058>)), ((<ruby 1.6 feature>))-))
+  ((<Win32ネイティブ版>))では、$stdin.gets が、((<Cygwin>))版 では、
+  puts が Thread の切替えを発生させないようです。((-正確には cygwinで
+  は ((<setitimer(2)|manual page>)) にバグがある(らしい)ため 
+  Thread が切り替わらないようです。Cygwin版 ruby version 1.6.8 と 
+  1.7.3 の最新では setitimer(2) を使わないようにすることでこの不具合が
+  修正されました((<ruby-list:36058>)), ((<ruby 1.6 feature>))-))

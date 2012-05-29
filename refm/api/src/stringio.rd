@@ -1,10 +1,10 @@
-ʸ����� [[c:IO]] ��Ʊ�����󥿥ե�������������뤿��Υ饤�֥��Ǥ���
+文字列に [[c:IO]] と同じインタフェースを持たせるためのライブラリです。
 
 = class StringIO < Data
 
-ʸ����� [[c:IO]] ��Ʊ�����󥿥ե�������������뤿��Υ��饹�Ǥ���
+文字列に [[c:IO]] と同じインタフェースを持たせるためのクラスです。
 
-��:
+例:
 
   require "stringio"
   sio = StringIO.new("hoge", 'r+')
@@ -15,9 +15,9 @@
   sio.rewind
   p sio.read                 #=> "hOGE"
 
-=== �㳰
-StringIO ���֥������Ȥ�����ξ�� IO ���֥������Ȥ�Ʊ���㳰��ȯ�������ޤ���
-�㤨�м�����Ǥ� write �� IOError ��ȯ�������ޤ���
+=== 例外
+StringIO オブジェクトは大抵の場合 IO オブジェクトと同じ例外を発生させます。
+例えば次の例では write は IOError を発生させます。
 
   require "stringio"
   sio = StringIO.new("hoge")
@@ -31,18 +31,18 @@ StringIO ���֥������Ȥ�����ξ�� IO ���֥������Ȥ�Ʊ���㳰��ȯ�������ޤ���
 --- open(string = '', mode = 'r+')                -> StringIO
 --- open(string = '', mode = 'r+') {|io| ... }    -> StringIO
 
-StringIO ���֥������Ȥ����������֤��ޤ���
+StringIO オブジェクトを生成して返します。
 
-Ϳ����줿 string ���ե꡼������Ƥ�����ˤϡ�mode �ϥǥե���ȤǤ��ɤ߼��Τߤ����ꤵ��ޤ���
-�֥��å���Ϳ���������������� StringIO ���֥������Ȥ�����Ȥ��ƥ֥��å���ɾ�����ޤ���
+与えられた string がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
+ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価します。
 
-@param string ��������� StringIO �Υǡ�����ʸ����ǻ��ꤷ�ޤ���
-              ����ʸ����ϥХåե��Ȥ��ƻȤ��ޤ���[[m:StringIO#write]] �ʤɤˤ�äơ�
-              string ���Ȥ�񤭴������ޤ���
+@param string 生成される StringIO のデータを文字列で指定します。
+              この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
+              string 自身も書き換えられます。
 
-@param mode [[m:Kernel.#open]] Ʊ��ʸ���������ǻ��ꤷ�ޤ���
+@param mode [[m:Kernel.#open]] 同様文字列か整数で指定します。
 
-@raise Errno::EACCES string ���ե꡼������Ƥ��ơ�mode ���񤭹��߲�ǽ�����ꤵ��Ƥ������ȯ�����ޤ���
+@raise Errno::EACCES string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
         require 'stringio'
          
@@ -65,12 +65,12 @@ StringIO ���֥������Ȥ����������֤��ޤ���
 
 --- string    -> String
 
-���Ȥ�ɽ��ʸ������֤��ޤ���
+自身が表す文字列を返します。
 
-�֤����Τ���������Ϳ����줿�Хåե��Ȥ��ƻȤ��Ƥ���ʸ����Ǥ���
-ʸ�����ʣ������ʤ����Ȥ����դ��Ʋ�������
+返されるのは生成時に与えられたバッファとして使われている文字列です。
+文字列は複製されないことに注意して下さい。
 
-��:
+例:
 
   sio = StringIO.new
   sio << "abc"
@@ -81,56 +81,56 @@ StringIO ���֥������Ȥ����������֤��ޤ���
 
 --- string=(buf)
 
-���Ȥ�ɽ��ʸ�������ꤵ�줿 buf ���ѹ����ޤ���
+自身が表す文字列を指定された buf に変更します。
 
-buf �ϥХåե��Ȥ��ƻȤ�졢�񤭹��ߥ᥽�åɤˤ�äƽ񤭴������ޤ���
-���Ȥ��ɤ߽�ξ�Ѥˤʤ�ޤ�����
-buf ���ե꡼������Ƥ�����ˤ��ɤ߼�����Ѥˤʤ�ޤ���
-pos �� lineno �� 0 �˥��åȤ���ޤ���
+buf はバッファとして使われ、書き込みメソッドによって書き換えられます。
+自身は読み書き両用になりますが、
+buf がフリーズされている場合には読み取り専用になります。
+pos と lineno は 0 にセットされます。
 
 #@if (version < "1.8.3")
-buf �� nil �ξ��ϡ�StringIO �ؤ��ɤ߽񤭤϶ػߤ���ޤ���
+buf が nil の場合は、StringIO への読み書きは禁止されます。
 #@end
 
-@param buf ���Ȥ�������ɽ��ʸ�������ꤷ�ޤ���
+@param buf 自身が新たに表す文字列を指定します。
 
 #@if (version >= "1.8.3")
-@raise TypeError buf �� nil �ξ���ȯ�����ޤ���
+@raise TypeError buf が nil の場合に発生します。
 #@end
 
 --- <<(obj)    -> self
 
-obj �� pos �ΰ��֤˽񤭹��ߤޤ��� ɬ�פʤ� obj.to_s ��Ƥ��
-ʸ������Ѵ����ޤ��� self ���֤��ޤ���
+obj を pos の位置に書き込みます。 必要なら obj.to_s を呼んで
+文字列に変換します。 self を返します。
 
-@param obj ���Ȥ˽񤭹��ߤ�����ʸ���� to_s ��������줿���֥������Ȥ���ꤷ�ޤ���
+@param obj 自身に書き込みたい、文字列か to_s が定義されたオブジェクトを指定します。
 
 --- binmode    -> self
 
-���⤻���� self ���֤��ޤ���
+何もせずに self を返します。
 
 --- close      -> nil
 
-���Ȥ� close ���ޤ����ʸ塢���Ȥ��Ф����ɤ߽񤭤��ػߤ���ޤ���
-close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
+自身を close します。以後、自身に対する読み書きが禁止されます。
+close された StringIO に読み書き等が行われると IOError が発生します。
 
-@raise IOError ���Ȥ����Ǥ� close ����Ƥ�������ȯ�����ޤ���
+@raise IOError 自身がすでに close されていた時に発生します。
 
 --- close_read    -> nil
 
-���Ȥ��Ф����ɤ߼���ػߤ��ޤ���
+自身に対する読み取りを禁止します。
 
-@raise IOError ���Ȥ����Ǥ��ɤߤȤ��ԲĤ��ä�����ȯ�����ޤ���
+@raise IOError 自身がすでに読みとり不可だった場合に発生します。
 
 --- close_write    -> nil
 
-���Ȥ��Ф���񤭹��ߤ�ػߤ��ޤ���
+自身に対する書き込みを禁止します。
 
-@raise IOError ���Ȥ����Ǥ˽񤭹����ԲĤ��ä�����ȯ�����ޤ���
+@raise IOError 自身がすでに書き込み不可だった場合に発生します。
 
 --- closed?    -> bool
 
-���Ȥ����� close ����Ƥ������� true ���֤��ޤ��������Ǥʤ����ϡ�false ���֤��ޤ���
+自身が既に close されていた場合に true を返します。そうでない場合は、false を返します。
 
       sio = StringIO.open("hoge")
       p sio.closed? # => false
@@ -141,11 +141,11 @@ close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
 
 --- closed_read?    -> bool
 
-���Ȥ��Ф����ɤ߼�꤬�ػߤ���Ƥ���ʤ� true ���֤��ޤ��������Ǥʤ����ϡ�false ���֤��ޤ���
+自身に対する読み取りが禁止されているなら true を返します。そうでない場合は、false を返します。
 
 --- closed_write?    -> bool
 
-���Ȥ��Ф���񤭹��ߤ��ػߤ���Ƥ���ʤ� true ���֤��ޤ��������Ǥʤ����ϡ�false ���֤��ޤ���
+自身に対する書き込みが禁止されているなら true を返します。そうでない場合は、false を返します。
 
 --- each(rs = $/){|line| ... }       -> self
 --- each_line(rs = $/){|line| ... }  -> self
@@ -162,11 +162,11 @@ close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
 #@end
 #@end
 
-���Ȥ��� 1 �Ԥ����ɤ߹��ߡ����������Ȥ���Ϳ����줿�֥��å���¹Ԥ��ޤ���
+自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ�����ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise IOError ���Ȥ��ɤ߼���ԲĤʤ�ȯ�����ޤ���
+@raise IOError 自身が読み取り不可なら発生します。
 
   a = StringIO.new("hoge\nfoo\n")
   a.each{|l| p l }
@@ -189,9 +189,9 @@ close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
 #@end
 #@end
 
-���Ȥ��� 1 �Х��Ȥ����ɤ߹��ߡ����� ch ���Ѵ��������������Ȥ���Ϳ����줿�֥��å���¹Ԥ��ޤ���
+自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
 
-@raise IOError ���Ȥ��ɤ߼���ԲĤʤ�ȯ�����ޤ���
+@raise IOError 自身が読み取り不可なら発生します。
 
   a = StringIO.new("hoge")
   a.each_byte{|ch| p ch }
@@ -205,33 +205,33 @@ close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
 --- eof    -> bool
 --- eof?   -> bool
 
-���Ȥ� pos ��ʸ����ν�ü�ˤ���� true ���֤��ޤ��������Ǥʤ��ʤ� false ���֤��ޤ���
+自身の pos が文字列の終端にあれば true を返します。そうでないなら false を返します。
 
 --- fcntl    -> ()
 
-�㳰 [[c:NotImplementedError]] �����ȯ�����ޤ���
+例外 [[c:NotImplementedError]] が常に発生します。
 
 --- fileno    -> nil
 
-���⤻�� nil ���֤��ޤ���
+何もせず nil を返します。
 
 --- flush    -> self
 
-���⤻���� self ���֤��ޤ���
+何もせずに self を返します。
 
 --- fsync    -> 0
 
-���⤻���� 0 ���֤��ޤ���
+何もせずに 0 を返します。
 
 --- getc    -> Integer | nil
 #@since 1.8.7
 --- getbyte -> Integer | nil
 #@end
 
-���Ȥ��� 1 ʸ���ɤ߹���ǡ�����ʸ�����б����� Fixnum ���֤��ޤ���
-ʸ����ν�ü����ã�������ˤ� nil ���֤��ޤ��� 
+自身から 1 文字読み込んで、その文字に対応する Fixnum を返します。
+文字列の終端に到達した時には nil を返します。 
 
-@raise IOError ���Ȥ��ɤ߼���ԲĤʤ�ȯ�����ޤ���
+@raise IOError 自身が読み取り不可なら発生します。
 
   a = StringIO.new("ho")
   a.getc                   #=> 104
@@ -240,12 +240,12 @@ close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
 
 --- gets(rs = $/)    -> String | nil
 
-���Ȥ��� 1 ���ɤ߹���ǡ�����ʸ������֤��ޤ���ʸ����ν�ü����ã�������ˤ� nil ���֤��ޤ���
-[[m:$_]] ���ɤ߹�����Ԥ����åȤ���ޤ���
+自身から 1 行読み込んで、その文字列を返します。文字列の終端に到達した時には nil を返します。
+[[m:$_]] に読み込んだ行がセットされます。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ�����ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
   a = StringIO.new("hoge")
   a.gets                  #=> "hoge"
@@ -257,40 +257,40 @@ close ���줿 StringIO ���ɤ߽������Ԥ���� IOError ��ȯ�����ޤ���
 
 --- isatty    -> false
 
-���⤻�� false ���֤��ޤ���
+何もせず false を返します。
 
 --- lineno    -> Integer
 
-���ߤι��ֹ���֤��ޤ�������� [[m:StringIO#gets]] ���ƤФ줿����Ǥ���
+現在の行番号を返します。これは [[m:StringIO#gets]] が呼ばれた回数です。
 
 --- lineno=(n)
 
-���ߤι��ֹ�� n �˥��åȤ��ޤ���
+現在の行番号を n にセットします。
 
-@param n ���ֹ�������ǻ��ꤷ�ޤ���
+@param n 行番号を整数で指定します。
 
 #@until 1.9.2
 --- path    -> nil
 
-StringIO �ˤ��б�����ѥ��Ϥʤ��Τ� nil ���֤��ޤ���
+StringIO には対応するパスはないので nil を返します。
 
 #@end
 --- pid    -> nil
 
-���⤻�� nil ���֤��ޤ���
+何もせず nil を返します。
 
 --- pos    -> Integer
 --- tell   -> Integer
 
-���Ȥθ��ߤΰ��֤��֤��ޤ���
+自身の現在の位置を返します。
 
 --- pos=(n)
 
-���Ȥΰ��֤� n �˰�ư���ޤ������Ȥ�ɽ��ʸ����Υ���������礭���Ƥ⹽���ޤ���
+自身の位置を n に移動します。自身が表す文字列のサイズより大きくても構いません。
 
-@param n ���Ȥΰ��֤������ǻ��ꤷ�ޤ���
+@param n 自身の位置を整数で指定します。
 
-@raise Errno::EINVAL n ���ޥ��ʥ��Ǥ������ȯ�����ޤ���
+@raise Errno::EINVAL n がマイナスである場合に発生します。
 
   a = StringIO.new("hoge", 'r+')
   a.pos = 10
@@ -300,12 +300,12 @@ StringIO �ˤ��б�����ѥ��Ϥʤ��Τ� nil ���֤��ޤ���
 --- print()        -> nil
 --- print(*obj)    -> nil
 
-���Ȥ˰������˽��Ϥ��ޤ����������ά�������ϡ�[[m:$_]] ����Ϥ��ޤ���
-�����ΰ����� [[m:Kernel.#print]] �򻲾Ȥ��Ʋ�������
+自身に引数を順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
+引数の扱いは [[m:Kernel.#print]] を参照して下さい。
 
-@param obj �񤭹��ߤ������֥������Ȥ���ꤷ�ޤ���
+@param obj 書き込みたいオブジェクトを指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
   a = StringIO.new("", 'r+')
   a.print("hoge", "bar", "foo")
@@ -313,13 +313,13 @@ StringIO �ˤ��б�����ѥ��Ϥʤ��Τ� nil ���֤��ޤ���
 
 --- printf(format, *obj)    -> nil
 
-���ꤵ�줿�ե����ޥåȤ˽����ư��� obj ��ʸ������Ѵ����ơ����Ȥ˽��Ϥ��ޤ���
+指定されたフォーマットに従い各引数 obj を文字列に変換して、自身に出力します。
 
-@param format ʸ����Υե����ޥåȤ���ꤷ�ޤ���[[m:Kernel.#format]] �򻲾Ȥ��Ʋ�������
+@param format 文字列のフォーマットを指定します。[[m:Kernel.#format]] を参照して下さい。
 
-@param obj �񤭹��ߤ������֥������Ȥ���ꤷ�ޤ���
+@param obj 書き込みたいオブジェクトを指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
   a = StringIO.new("", 'r+')
   a.printf("%c%c%c", 97, 98, 99)
@@ -327,21 +327,21 @@ StringIO �ˤ��б�����ѥ��Ϥʤ��Τ� nil ���֤��ޤ���
 
 --- putc(ch)    -> object
 
-ʸ�� ch �򼫿Ȥ˽񤭹��ߤޤ��� ch �������ʤ� 0 �� 255 ���ϰϤ��б�����ʸ���񤭹��ߤޤ��� 
-ch ��ʸ����ʤ顢������Ƭ��ʸ����񤭹��ߤޤ���ch ���֤��ޤ���
+文字 ch を自身に書き込みます。 ch が数字なら 0 〜 255 の範囲の対応する文字書き込みます。 
+ch が文字列なら、その先頭の文字を書き込みます。ch を返します。
 
-@param ch �񤭹��ߤ���ʸ����������ʸ����ǻ��ꤷ�ޤ���ch �� Float �� Rational �Ǥ��äƤ⡢�������Ѵ�����Ƥ���񤭹��ޤ�ޤ���
+@param ch 書き込みたい文字を、整数か文字列で指定します。ch が Float や Rational であっても、整数に変換されてから書き込まれます。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- puts(*obj)    -> nil
 
-obj �Ȳ��Ԥ���֤˼��Ȥ˽��Ϥ��ޤ����������ʤ���в��ԤΤߤ���Ϥ��ޤ���
-�ܤ������ͤ� [[m:Kernel.#puts]] �򻲾Ȥ��Ʋ�������
+obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
+詳しい仕様は [[m:Kernel.#puts]] を参照して下さい。
 
-@param obj �񤭹��ߤ������֥������Ȥ���ꤷ�ޤ���
+@param obj 書き込みたいオブジェクトを指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
   a = StringIO.new("", 'r+')
   a.puts("hoge", "bar", "foo")
@@ -351,60 +351,60 @@ obj �Ȳ��Ԥ���֤˼��Ȥ˽��Ϥ��ޤ����������ʤ���в��ԤΤߤ���Ϥ��ޤ���
 --- read(len)             -> String | nil
 --- read(len, outbuf)     -> String
 
-���Ȥ��� len �Х����ɤ߹��ߤ���֤��ޤ���len ����ά���줿���ϡ��Ǹ�ޤ��ɤ߹�����֤��ޤ���
-�ܤ������ͤ� [[m:IO#read]] �򻲾Ȥ��Ʋ�������
+自身から len バイト読み込みんで返します。len が省略された場合は、最後まで読み込んで返します。
+詳しい仕様は [[m:IO#read]] を参照して下さい。
 
-@param len �ɤ߹��ߤ���Ĺ���������ǻ��ꤷ�ޤ����ܤ������ͤ� [[m:IO#read]] �򻲾Ȥ��Ʋ�������
+@param len 読み込みたい長さを整数で指定します。詳しい仕様は [[m:IO#read]] を参照して下さい。
 
-@param outbuf �ɤ߹����ʸ�������Ϥ���Хåե���ʸ����ǻ��ꤷ�ޤ������ꤷ��ʸ���󥪥֥������Ȥ�
-              ���餫���� length Ĺ���ΰ�Ǥ���С�;�פʥ���γ����Ƥ��Ԥ��ޤ��󡣻��ꤷ��ʸ�����
-              Ĺ���� length �Ȱۤʤ��硢����ʸ����ϰ�ö length Ĺ�˳�ĥ(���뤤�Ͻ̾�)���줿���ȡ�
-              �ºݤ��ɤ߹�����ǡ����Υ������ˤʤ�ޤ���[[m:IO#read]] ��Ʊ���Ǥ���
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。指定した文字列オブジェクトが
+              あらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の
+              長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。[[m:IO#read]] と同じです。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- readchar    -> Integer
 #@since 1.8.7
 --- readbyte    -> Integer
 #@end
 
-���Ȥ��� 1 ʸ���ɤ߹���ǡ�����ʸ�����б������������֤��ޤ���
+自身から 1 文字読み込んで、その文字に対応する整数を返します。
 
-ʸ����ν�ü����ã�������ˤ��㳰 [[c:EOFError]] ��ȯ�������ޤ���
+文字列の終端に到達した時には例外 [[c:EOFError]] を発生させます。
 
  a = StringIO.new("hoge")
  a.readchar               #=> 104
 
-@raise EOFError ʸ����ν�ü����ã��������ȯ�����ޤ���
+@raise EOFError 文字列の終端に到達した時に発生します。
 
 --- readline(rs = $/)    -> String
 
-���Ȥ��� 1 ���ɤ߹���ǡ�����ʸ������֤��ޤ���
+自身から 1 行読み込んで、その文字列を返します。
 
-ʸ����ν�ü����ã�������ˤϡ��㳰 EOFError ��ȯ�������ޤ���
-[[m:IO#readline]] �Ȱ㤤�ɤ߹����ʸ������ѿ� [[m:$_]] �˥��åȤ��ޤ���
+文字列の終端に到達した時には、例外 EOFError を発生させます。
+[[m:IO#readline]] と違い読み込んだ文字列を変数 [[m:$_]] にセットしません。
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ�����ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise EOFError ʸ����ν�ü����ã��������ȯ�����ޤ���
+@raise EOFError 文字列の終端に到達した時に発生します。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
   a = StringIO.new("hoge\nfoo\nbar\n")
   a.readline                           #=> "hoge\n"
   a.readline(nil)                      #=> "foo\nbar\n"
-  a.readline                           #=> EOFError ��ȯ������
+  a.readline                           #=> EOFError が発生する
 
 @see [[m:$/]]
 
 --- readlines(rs = $/)    -> [String]
 
-���Ȥ���ǡ����������ɤ߹���ǡ����γƹԤ����ǤȤ��Ƥ��������֤��ޤ��� 
-����ʸ����ν�ü��ã���Ƥ���ж����� [] ���֤��ޤ��� 
+自身からデータを全て読み込んで、その各行を要素としてもつ配列を返します。 
+既に文字列の終端に達していれば空配列 [] を返します。 
 
-@param rs �Ԥζ��ڤ��ʸ����ǻ��ꤷ�ޤ���rs �� nil ����ꤹ��ȹԶ��ڤ�ʤ��Ȥߤʤ��ޤ�����ʸ���� "" ����ꤹ���Ϣ³������Ԥ�Ԥζ��ڤ�Ȥߤʤ��ޤ�(�ѥ饰��ե⡼��)��
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
   a = StringIO.new("hoge\nfoo\nbar\n")
   a.readlines                          #=> ["hoge\n", "foo\n", "bar\n"]
@@ -414,11 +414,11 @@ obj �Ȳ��Ԥ���֤˼��Ȥ˽��Ϥ��ޤ����������ʤ���в��ԤΤߤ���Ϥ��ޤ���
 
 --- reopen(sio)           -> StringIO
 
-���Ȥ�ɽ��ʸ���󤬻��ꤵ�줿 StringIO ��Ʊ����Τˤʤ�ޤ���
+自身が表す文字列が指定された StringIO と同じものになります。
 
-@param sio ���Ȥ�ɽ������ StringIO ����ꤷ�ޤ���
+@param sio 自身が表したい StringIO を指定します。
 
-��: 
+例: 
 
   require 'stringio'
   sio = StringIO.new("hoge", 'r+')
@@ -428,20 +428,20 @@ obj �Ȳ��Ԥ���֤˼��Ȥ˽��Ϥ��ޤ����������ʤ���в��ԤΤߤ���Ϥ��ޤ���
 
 --- reopen(str, mode = 'r+')     -> StringIO
 
-���Ȥ�ɽ��ʸ���󤬻��ꤵ�줿ʸ���� str �ˤʤ�ޤ���
+自身が表す文字列が指定された文字列 str になります。
 
-Ϳ����줿 str ���ե꡼������Ƥ�����ˤϡ�mode �ϥǥե���ȤǤ��ɤ߼��Τߤ����ꤵ��ޤ���
-�֥��å���Ϳ���������������� StringIO ���֥������Ȥ�����Ȥ��ƥ֥��å���ɾ�����ޤ���
+与えられた str がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
+ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価します。
 
-@param str ���Ȥ�ɽ������ʸ�������ꤷ�ޤ���
-           ����ʸ����ϥХåե��Ȥ��ƻȤ��ޤ���[[m:StringIO#write]] �ʤɤˤ�äơ�
-           str ���Ȥ�񤭴������ޤ���
+@param str 自身が表したい文字列を指定します。
+           この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
+           str 自身も書き換えられます。
 
-@param mode [[m:Kernel.#open]] Ʊ��ʸ���������Ǽ��ȤΥ⡼�ɤ���ꤷ�ޤ���
+@param mode [[m:Kernel.#open]] 同様文字列か整数で自身のモードを指定します。
 
-@raise Errno::EACCES str ���ե꡼������Ƥ��ơ�mode ���񤭹��߲�ǽ�����ꤵ��Ƥ������ȯ�����ޤ���
+@raise Errno::EACCES str がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
-��: 
+例: 
 
   require 'stringio'
   sio = StringIO.new("hoge", 'r+')
@@ -450,38 +450,38 @@ obj �Ȳ��Ԥ���֤˼��Ȥ˽��Ϥ��ޤ����������ʤ���в��ԤΤߤ���Ϥ��ޤ���
 
 --- rewind    -> 0
 
-���Ȥ� pos �� lineno �򤽤줾�� 0 �ˤ��ޤ���
+自身の pos と lineno をそれぞれ 0 にします。
 
 --- seek(offset, whence = IO::SEEK_SET)
 
-���Ȥ� pos �� whence �ΰ��֤��� offset �Х��Ȥ�����ư�����ޤ��� 
+自身の pos を whence の位置から offset バイトだけ移動させます。 
 
-@param offset ��ư���������Х��ȿ��������ǻ��ꤷ�ޤ���
+@param offset 移動させたいバイト数を整数で指定します。
 
-@param whence �ʲ��Τ����줫���������ꤷ�ޤ���
+@param whence 以下のいずれかの定数を指定します。
 
- * IO::SEEK_SET: �ե��������Ƭ���� (�ǥե����)
- * IO::SEEK_CUR: ���ߤΥե�����ݥ��󥿤���
- * IO::SEEK_END: �ե��������������
+ * IO::SEEK_SET: ファイルの先頭から (デフォルト)
+ * IO::SEEK_CUR: 現在のファイルポインタから
+ * IO::SEEK_END: ファイルの末尾から
 
-@raise Errno::EINVAL offset + whence ���ޥ��ʥ��Ǥ������ȯ�����ޤ���
+@raise Errno::EINVAL offset + whence がマイナスである場合に発生します。
 
-@raise ArgumentError whence ����� SEEK_SET, SEEK_CUR, SEEK_END �ʳ����ä�����ȯ�����ޤ���
+@raise ArgumentError whence が上の SEEK_SET, SEEK_CUR, SEEK_END 以外だった場合に発生します。
 
 --- size    -> Integer
 --- length  -> Integer
 
-ʸ�����Ĺ�����֤��ޤ���
+文字列の長さを返します。
 
 --- sync    -> true
 
-���⤻���� true ���֤��ޤ���
+何もせずに true を返します。
 
 --- sync=(bool)
 
-���⤻���� bool ���֤��ޤ���
+何もせずに bool を返します。
 
-@param bool true �� false ����ꤷ�ޤ���
+@param bool true か false を指定します。
 
 --- sysread                  -> String
 --- sysread(len)             -> String
@@ -495,40 +495,40 @@ obj �Ȳ��Ԥ���֤˼��Ȥ˽��Ϥ��ޤ����������ʤ���в��ԤΤߤ���Ϥ��ޤ���
 --- read_nonblock(maxlen, outbuf = "") -> String
 #@end
 
-���Ȥ��� len �Х����ɤ߹��ߤ���֤��ޤ���
-[[m:StringIO#read]] ��Ʊ���Ǥ�����������ʸ����ν�ü��ã������硢EOFError ���ꤲ�ޤ���
+自身から len バイト読み込みんで返します。
+[[m:StringIO#read]] と同じです。ただし、文字列の終端に達した場合、EOFError を投げます。
 
-@param len �ɤ߹��ߤ���Ĺ���������ǻ��ꤷ�ޤ���[[m:StringIO#read]] ��Ʊ���Ǥ���
+@param len 読み込みたい長さを整数で指定します。[[m:StringIO#read]] と同じです。
 
-@param outbuf �ɤ߹����ʸ�������Ϥ���Хåե���ʸ����ǻ��ꤷ�ޤ������ꤷ��ʸ���󥪥֥������Ȥ�
-              ���餫���� length Ĺ���ΰ�Ǥ���С�;�פʥ���γ����Ƥ��Ԥ��ޤ��󡣻��ꤷ��ʸ�����
-              Ĺ���� length �Ȱۤʤ��硢����ʸ����ϰ�ö length Ĺ�˳�ĥ(���뤤�Ͻ̾�)���줿���ȡ�
-              �ºݤ��ɤ߹�����ǡ����Υ������ˤʤ�ޤ���[[m:IO#read]] ��Ʊ���Ǥ���
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。指定した文字列オブジェクトが
+              あらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の
+              長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。[[m:IO#read]] と同じです。
 
-@raise EOFError ʸ����ν�ü��ã��������ȯ�����ޤ���
+@raise EOFError 文字列の終端に達した場合に発生します。
 
 --- syswrite(obj)    -> Integer
 #@since 1.9.2
 --- write_nonblock(obj) -> Integer
 #@end
 
-���Ȥ� obj ��񤭹��ߤޤ���[[m:StringIO#write]] ��Ʊ���Ǥ���
+自身に obj を書き込みます。[[m:StringIO#write]] と同じです。
 
-@param obj �񤭹��ߤ������֥������Ȥ���ꤷ�ޤ���
+@param obj 書き込みたいオブジェクトを指定します。
 
-@raise IOError ���Ȥ��񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ����ȯ�����ޤ���
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- truncate(len)    -> Integer
 
-���ȤΥ������� len �ˤʤ�褦�ˡ����Ȥ��ڤ�ͤᡢ�⤷���ϳ��礷�ޤ���
-���礷�����ϡ�������ʬ�� 0 �����ޤ���
-len ���֤��ޤ���
+自身のサイズが len になるように、自身を切り詰め、もしくは拡大します。
+拡大した場合は、その部分を 0 で埋めます。
+len を返します。
 
-@param len �ѹ��������������������ǻ��ꤷ�ޤ���
+@param len 変更したいサイズを整数で指定します。
 
-@raise IOError ���Ȥ��񤭹��߲�ǽ�Ǥʤ�����ȯ�����ޤ���
+@raise IOError 自身が書き込み可能でない時に発生します。
 
-@raise Errno::EINVAL len ���ޥ��ʥ��λ���ȯ�����ޤ���
+@raise Errno::EINVAL len がマイナスの時に発生します。
 
   a = StringIO.new("hoge", 'r+')
   a.truncate(2)
@@ -538,20 +538,20 @@ len ���֤��ޤ���
 
 --- tty?    -> false
 
-���⤻�� false ���֤��ޤ���
+何もせず false を返します。
 
 --- ungetc(ch)    -> nil
 
-�����ǻ��ꤵ�줿ʸ�� ch �򼫿Ȥ˽��ᤷ�ޤ���
-nil ���֤��ޤ���
+整数で指定された文字 ch を自身に書き戻します。
+nil を返します。
 
-����Ǥ���᤹���Ȥ���ǽ�Ǥ���
-���߰��֤����ȤΥ����������礭�����ϡ����Ȥ�ꥵ�������Ƥ��顢ch ����ᤷ�ޤ���
-�ޤ����߰��֤� 0 �Ǥ�����ϲ���Ԥ��ޤ���
+何回でも書き戻すことが可能です。
+現在位置が自身のサイズよりも大きい場合は、自身をリサイズしてから、ch を書き戻します。
+また現在位置が 0 である場合は何も行いません。
 
-@param ch ���ᤷ����ʸ���������ǻ��ꤷ�ޤ���
+@param ch 書き戻したい文字を整数で指定します。
 
-@raise IOError ���Ȥ��ɤ߹��߲�ǽ�Ǥʤ�����ȯ�����ޤ���
+@raise IOError 自身が読み込み可能でない時に発生します。
 
       s = StringIO.new("hoge")
       s.pos = 1
@@ -567,15 +567,15 @@ nil ���֤��ޤ���
 
 --- write(obj)    -> Integer
 
-���Ȥ� obj ��񤭹��ߤޤ���obj ��ʸ����Ǥʤ���� to_s �ˤ��ʸ���󲽤��ߤޤ���
-�񤭹��ޤ줿ʸ�����Ĺ�����֤��ޤ���
+自身に obj を書き込みます。obj が文字列でなければ to_s による文字列化を試みます。
+書き込まれた文字列の長さを返します。
 
-���Ƥν��ϥ᥽�åɤϡ��ǽ�Ū�ˡ�write�פȤ���̾�Υ᥽�åɤ�ƤӽФ��Τǡ�
-���Υ᥽�åɤ��֤������뤳�Ȥǽ��ϴؿ��ε�ư���ѹ����뤳�Ȥ��Ǥ��ޤ���
+全ての出力メソッドは、最終的に「write」という名のメソッドを呼び出すので、
+このメソッドを置き換えることで出力関数の挙動を変更することができます。
 
-@param obj �񤭹��ߤ������֥������Ȥ���ꤷ�ޤ���
+@param obj 書き込みたいオブジェクトを指定します。
 
-@raise IOError ���Ȥ��񤭹��߲�ǽ�Ǥʤ�����ȯ�����ޤ���
+@raise IOError 自身が書き込み可能でない時に発生します。
 
   a = StringIO.new("hoge", 'r+')
   a.write("aaa")                 #=> 3
@@ -592,15 +592,15 @@ nil ���֤��ޤ���
 --- each_char           -> Enumerable::Enumerator
 --- chars               -> Enumerable::Enumerator
 #@end
-���Ȥ˴ޤޤ��ʸ�����ʸ�����ĥ֥��å����Ϥ���ɾ�����ޤ���
+自身に含まれる文字を一文字ずつブロックに渡して評価します。
 
-���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ���Фʤ�ޤ���
+自身は読み込み用にオープンされていなければなりません。
 
 #@until 1.9.1
-�ޤ����ޥ���Х���ʸ�������Ѥ������ [[m:$KCODE]] ��Ŭ�ڤ����ꤷ�Ƥ���������
+また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
 #@end
 
-@raise IOError ���Ȥ��ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ�����ȯ�����ޤ���
+@raise IOError 自身が読み込み用にオープンされていない場合に発生します。
 
 @see [[m:IO#each_char]]
 
@@ -608,27 +608,27 @@ nil ���֤��ޤ���
 #@since 1.9.1
 --- ungetbyte(char) -> nil
 
-���ꤵ�줿 char ���ɤ��ᤷ�ޤ���
+指定された char を読み戻します。
 
-2�Х��Ȱʾ���ɤ��ᤷ���ݾڤ���ޤ���
+2バイト以上の読み戻しは保証されません。
 
-@param char �ɤ��ᤷ����1ʸ�������Υ����ɥݥ���Ȥ���ꤷ�ޤ���
+@param char 読み戻したい1文字かそのコードポイントを指定します。
 
 @see [[m:IO#ungetbyte]]
 
 --- set_encoding(encoding) -> self
 
-���ȤΥ��󥳡��ǥ��󥰤���ꤵ�줿���󥳡��ǥ��󥰤����ꤷ�ޤ���
+自身のエンコーディングを指定されたエンコーディングに設定します。
 
-@param encoding ���󥳡��ǥ��󥰤���ꤷ�ޤ���
+@param encoding エンコーディングを指定します。
 
 --- external_encoding -> Encoding
 
-���ߤγ������󥳡��ǥ��󥰤��֤��ޤ���
+現在の外部エンコーディングを返します。
 
 --- internal_encoding -> Encoding
 
-���ߤ��������󥳡��ǥ��󥰤��֤��ޤ���
+現在の内部エンコーディングを返します。
 
 #@since 1.9.2
 --- codepoints{|codepoint| ... } -> self
@@ -636,7 +636,7 @@ nil ���֤��ޤ���
 --- each_codepoint{|codepoint| ... } -> self
 --- each_codepoint -> Enumerator
 
-���Ȥγƥ����ɥݥ���Ȥ��Ф��Ʒ����֤��ޤ���
+自身の各コードポイントに対して繰り返します。
 
 @see [[m:IO#each_codepoint]]
 

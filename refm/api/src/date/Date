@@ -2,9 +2,9 @@
 
 include Comparable
 
-���դ����Ǥʤ�����ⰷ���� Date �Υ��֥��饹 [[c:DateTime]] �����ѤǤ��ޤ���
+日付だけでなく時刻も扱える Date のサブクラス [[c:DateTime]] も利用できます。
 
-=== ��ñ�ʤĤ�������
+=== 簡単なつかいかた
 
   require 'date'
 
@@ -18,77 +18,77 @@ include Comparable
 
   yesterday = Date.today - 1
 
-=== �Ѹ�����
+=== 用語の定義
 
-�����Ĥ��Ѹ������ϡ�[[ISO:8601]]������� [[JIS:X 0301]] �˴�Ť��ޤ���
+いくつか用語の定義は、[[ISO:8601]]、および [[JIS:X 0301]] に基づきます。
 
-==== ������
+==== 暦日付
 
-�����դϡ���ǯ���������������ν����ˤ�ä�
-���ꤵ���������������դǤ���
+暦日付は、暦年、暦月、および暦月の中の序数によって
+指定される特定の日の日付です。
 
-�Ĥޤꡢ��������������ǯ�����ˤ�����դǤ���
+つまり、ごく当たり前の年月日による日付です。
 
-==== ǯ���̻��� (ǯ����)
+==== 年間通算日 (年日付)
 
-ǯ���̻��� (ǯ����) �ϡ���ǯ���������ǯ����ν����ˤ�äƻ��ꤵ���
-������������դǤ���
+年間通算日 (年日付) は、暦年、および暦年の中の序数によって指定される
+特定の日の日付です。
 
-==== ������
+==== 暦週日付
 
-�����դϡ��񽵤���ǯ��ν����ˤ�����դǤ���
+暦週日付は、暦週と暦年中の序数による日付です。
 
-�񽵤ϡ���ǯ��ν����ˤ�äƻ��ꤵ��������7���δ��֤Ǥ��ꡢ���ˤ���
-�Ϥޤ�ޤ�������ǯ����1�񽵤ϡ��ǽ����������ޤཱུ�Ȥ��ޤ�������ϡ�
-1��4����ޤཱུ��Ʊ���Ǥ���
+暦週は、暦年中の序数によって指定される特定の7日の期間であり、月曜から
+始まります。その年の第1暦週は、最初の木曜日を含む週とします。これは、
+1月4日を含む週と同じです。
 
-==== ��ꥦ����
+==== ユリウス日
 
-��ꥦ�����ϵ�����4713ǯ1��1�� (��ꥦ����) ���� (����˥å�ʿ�ѻ�) ��
-�񸵤Ȥ������� (�в�����) �Ǥ���
+ユリウス日は紀元前4713年1月1日 (ユリウス暦) 正午 (グリニッジ平均時) を
+暦元とした通日 (経過日数) です。
 
-����ʸ��ǡ�ŷʸ��Ū�ʥ�ꥦ�����Ȥϡ�����Υ�ꥦ������Ʊ����ΤǤ���
-�ޤ���ǯ���Ū�ʥ�ꥦ�����Ȥϡ��������ˤ���������������λϤޤ�Ȥ���
-ή���Ǥ���
+この文書で、天文学的なユリウス日とは、本来のユリウス日と同じものです。
+また、年代学的なユリウス日とは、地方時における零時を一日の始まりとする
+流儀です。
 
-����ʸ��ǡ�ñ�ˡ֥�ꥦ�����פȤ��ä���硢���������Υ�ꥦ�����Ǥ�
-������ǯ���Ū�ʥ�ꥦ�����פ��̣���Ƥ��ޤ���
+この文書で、単に「ユリウス日」といった場合、それは本来のユリウス日でな
+く、「年代学的なユリウス日」を意味しています。
 
-==== ������ꥦ����
+==== 修正ユリウス日
 
-������ꥦ����������1858ǯ11��17�� (���쥴�ꥪ��) ����/���� (����������) ��
-�񸵤Ȥ������� (�в�����) �Ǥ���
+修正ユリウス日は西暦1858年11月17日 (グレゴリオ暦) 正子/零時 (協定世界時) を
+暦元とした通日 (経過日数) です。
 
-����ʸ��ǡ�ŷʸ��Ū�ʽ�����ꥦ�����Ȥϡ�����ν�����ꥦ������Ʊ����
-�ΤǤ����ޤ���ǯ���Ū�ʽ�����ꥦ�����Ȥϡ��������ˤ����������������
-�Ϥޤ�Ȥ���ή���Ǥ���
+この文書で、天文学的な修正ユリウス日とは、本来の修正ユリウス日と同じも
+のです。また、年代学的な修正ユリウス日とは、地方時における零時を一日の
+始まりとする流儀です。
 
-����ʸ��ǡ�ñ�ˡֽ�����ꥦ�����פȤ��ä���硢���������ν�����ꥦ
-�����Ǥʤ�����ǯ���Ū�ʽ�����ꥦ�����פ��̣���Ƥ��ޤ���
+この文書で、単に「修正ユリウス日」といった場合、それは本来の修正ユリウ
+ス日でなく、「年代学的な修正ユリウス日」を意味しています。
 
 == Constants
 
 --- ENGLAND
-�ѹ񤬥��쥴�ꥪ���Ĥ����Ϥ᤿�� (1752ǯ9��14��) �򤢤�魯��ꥦ�����Ǥ���
-���� "ENGLAND" ��̾���ϡ��줤 UNIX �� [[man:cal(1)]] �ε��Ҥ�ͳ�褷�ޤ���
+英国がグレゴリオ暦をつかい始めた日 (1752年9月14日) をあらわすユリウス日です。
+この "ENGLAND" の名前は、旧い UNIX の [[man:cal(1)]] の記述に由来します。
 
 @see [[url:http://www.cs.bell-labs.com/who/dmr/man61.pdf]]
 
-���ʤߤˡ��ܼ����Ǳѹ�β�������º�Ť���������ߤ���Τ�����������αƶ��Ǥ���
-���������ѹ�β�������º�Ť��Ƥ����Τϡ������餯 [[man:cal(1)]] �αƶ��Ǥ���
-��äȤ��ܼ����ǰ��֤�º�Ť���Ƥ���Τϡ��˹�β������Ǥ��ꡢ¿���ξ�硢
-�������δ����ͤ� [[m:Date::ITALY]] �Ǥ���
+ちなみに、本実装で英国の改暦日を尊重する姿勢がみられるのは前実装からの影響です。
+前実装が英国の改暦日を尊重していたのは、おそらく [[man:cal(1)]] の影響です。
+もっとも本実装で一番に尊重されているのは、伊国の改暦日であり、多くの場合、
+改暦日の既定値は [[m:Date::ITALY]] です。
 
 --- GREGORIAN
-��˥��쥴�ꥪ��Ǥ��뤳�Ȥ򼨤��ޤ���
-��������̵�¤β��ˤ���ȹͤ����ޤ���
+常にグレゴリオ暦であることを示します。
+改暦日は無限の過去にあると考えられます。
 
 --- ITALY
-�˹񤬥��쥴�ꥪ���Ĥ����Ϥ᤿�� (1582ǯ10��15��) �򤢤�魯��ꥦ�����Ǥ���
+伊国がグレゴリオ暦をつかい始めた日 (1582年10月15日) をあらわすユリウス日です。
 
 --- JULIAN
-��˥�ꥦ����Ǥ��뤳�Ȥ򼨤��ޤ���
-��������̵�¤�̤��ˤ���ȹͤ����ޤ���
+常にユリウス暦であることを示します。
+改暦日は無限の未来にあると考えられます。
 
 == Class Methods
 
@@ -98,27 +98,27 @@ include Comparable
 --- new3(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
 #@end
 --- new(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
-�����դ������������ե��֥������Ȥ��������ޤ���
+暦日付に相当する日付オブジェクトを生成します。
 
-���Υ��饹�Ǥϡ���������ǯ��ŷʸ�ؤ�ή���Ǵ��ꤷ�ޤ���
-1ǯ��������ǯ����ǯ������-1ǯ���Τ褦�ˤ��ޤ���
-�����ӷ�������顢
-�ޤ������ο��Ǥʤ���Фʤ�ޤ��� (��ΤȤ��ϺǸ夫��ν���)��
-���Ǥ��äƤϤʤ�ޤ���
+このクラスでは、紀元前の年を天文学の流儀で勘定します。
+1年の前は零年、零年の前は-1年、のようにします。
+月、および月の日は負、
+または正の数でなければなりません (負のときは最後からの序数)。
+零であってはなりません。
 
-�Ǹ�ΰ����ϡ����쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ�����Ǥ���
+最後の引数は、グレゴリオ暦をつかい始めた日をあらわすユリウス日です。
 #@if (version < "1.8.6")
-���쥴�ꥪ��λ���Ȥ��ƿ�����ꥦ����λ���Ȥ��Ƶ���Ϳ���뤳�Ȥ�Ǥ��ޤ���
+グレゴリオ暦の指定として真、ユリウス暦の指定として偽を与えることもできます。
 #@end
-��ά�������ϡ�[[m:Date::ITALY]] (1582ǯ10��15��) �ˤʤ�ޤ���
+省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
-[[m:Date.jd]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]] も参照してください。
 
-@param year ǯ
-@param mon ��
-@param mday ��
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ����դˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param year 年
+@param mon 月
+@param mday 日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@since 1.9.1
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
@@ -129,88 +129,88 @@ include Comparable
 --- neww(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY) -> Date
 #@end
 #@end
-�����դ������������ե��֥������Ȥ��������ޤ���
+暦週日付に相当する日付オブジェクトを生成します。
 
-��������ӽ����� (����) ���顢
-�ޤ������ο��Ǥʤ���Фʤ�ޤ���(��ΤȤ��ϺǸ夫��ν���)��
-���Ǥ��äƤϤʤ�ޤ���
+週、および週の日 (曜日) は負、
+または正の数でなければなりません(負のときは最後からの序数)。
+零であってはなりません。
 
-���Υ᥽�åɤ˲����������դ�Ϳ���뤳�ȤϤǤ��ޤ���
+このメソッドに改暦前の日付を与えることはできません。
 
-[[m:Date.jd]]������� [[m:Date.new]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
-@param cwyear ǯ
-@param cweek ��
-@param cwday ������ (����)
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ����դˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param cwyear 年
+@param cweek 週
+@param cwday 週の日 (曜日)
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 --- gregorian_leap? (year) -> bool
 --- leap? (year) -> bool
-���쥴�ꥪ��α�ǯ�ʤ鿿���֤��ޤ���
+グレゴリオ暦の閏年なら真を返します。
 
-@param year ǯ
+@param year 年
 
 #@since 1.9.1
 #@# exp
 --- _httpdate(str) -> Hash
-���Υ᥽�åɤ� [[m:Date.httpdate]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.httpdate]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.httpdate]] �⻲�Ȥ��Ƥ���������
+[[m:Date.httpdate]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
 --- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> Date
-[[RFC:2616]] ������줿�񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+[[RFC:2616]] で定められた書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:Date._httpdate]] �⻲�Ȥ��Ƥ���������
+[[m:Date._httpdate]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.9.1
 #@# exp
 --- _iso8601(str) -> Hash
-���Υ᥽�åɤ� [[m:Date.iso8601]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.iso8601]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.iso8601]] �⻲�Ȥ��Ƥ���������
+[[m:Date.iso8601]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
 --- iso8601(str = '-4712-01-01', start = Date::ITALY) -> Date
-�����Ĥ�����ɽŪ�� [[ISO:8601]] �񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+いくつかの代表的な [[ISO:8601]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
-[[m:Date._iso8601]] �⻲�Ȥ��Ƥ���������
+[[m:Date._iso8601]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.9.1
 #@# exp
 --- _jisx0301(str) -> Hash
-���Υ᥽�åɤ� [[m:Date.jisx0301]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.jisx0301]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.jisx0301]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jisx0301]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
 --- jisx0301(str = '-4712-01-01', start = Date::ITALY) -> Date
-�����Ĥ�����ɽŪ�� [[JIS:X 0301]] �񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+いくつかの代表的な [[JIS:X 0301]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:Date._jisx0301]] �⻲�Ȥ��Ƥ���������
+[[m:Date._jisx0301]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.8.6
@@ -218,41 +218,41 @@ include Comparable
 #@else
 --- new1(jd = 0, start = Date::ITALY) -> Date
 #@end
-��ꥦ�����������������ե��֥������Ȥ��������ޤ���
+ユリウス日に相当する日付オブジェクトを生成します。
 
-���Υ��饹�Τ����Ĥ��ν��פʥ᥽�åɤǡ�
-��Υ�ꥦ�������ݾڤ���ޤ���
+このクラスのいくつかの重要なメソッドで、
+負のユリウス日は保証されません。
 
-[[m:Date.new]] �⻲�Ȥ��Ƥ���������
+[[m:Date.new]] も参照してください。
 
-@param jd ��ꥦ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param jd ユリウス日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 --- julian_leap? (year) -> bool
-��ꥦ����α�ǯ�ʤ鿿���֤��ޤ���
+ユリウス暦の閏年なら真を返します。
 
-����4ǯ�Ͽ��ˤʤ�ޤ�����
-��������Ū�ˤ�����������ޤ���
+西暦4年は真になりますが、
+これは歴史的には正しくありません。
 
-@param year ǯ
+@param year 年
 
 #@since 1.8.0
 --- ordinal(year = -4712, yday = 1, start = Date::ITALY) -> Date
 #@else
 --- new2(year = -4712, yday = 1, start = Date::ITALY) -> Date
 #@end
-ǯ���̻��� (ǯ����) �������������ե��֥������Ȥ��������ޤ���
+年間通算日 (年日付) に相当する日付オブジェクトを生成します。
 
-ǯ�������顢
-�ޤ������ο��Ǥʤ���Фʤ�ޤ��� (��ΤȤ��ϺǸ夫��ν���)��
-���Ǥ��äƤϤʤ�ޤ���
+年の日は負、
+または正の数でなければなりません (負のときは最後からの序数)。
+零であってはなりません。
 
-[[m:Date.jd]]������� [[m:Date.new]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
-@param year ǯ
-@param yday ǯ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ����դˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param year 年
+@param yday 年の日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@since 1.8.0
 #@since 1.9.1
@@ -260,106 +260,106 @@ include Comparable
 #@else
 --- _parse(str, complete = false) -> Hash
 #@end
-���Υ᥽�åɤ� [[m:Date.parse]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.parse]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.parse]] �⻲�Ȥ��Ƥ���������
+[[m:Date.parse]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param complete ǯ���䴰���뤫
+@param str 日付をあらわす文字列
+@param complete 年を補完するか
 
 #@since 1.9.1
 --- parse(str = '-4712-01-01', complete = true, start = Date::ITALY) -> Date
 #@else
 --- parse(str = '-4712-01-01', complete = false, start = Date::ITALY) -> Date
 #@end
-Ϳ����줿����ɽ������Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+与えられた日付表現を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
 #@since 1.9.1
-ǯ�� "00" ���� "99" ���ϰϤǤ���С�
-ǯ�β�2��ɽ���Ǥ���Ȥߤʤ�������䤤�ޤ���
-���ο��񤤤��޻ߤ��������ϡ��ҥ�ȤȤ��ơ�complete �� false ��Ϳ���ޤ���
+年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
 #@else
-complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
-ǯ�β�2��ɽ���Ǥ���Ȥߤʤ�������䤤�ޤ���
-�ʤ�����ά�������ϡ����Ȥߤʤ��ޤ���
+complete が真で、年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+なお、省略した場合は、偽とみなします。
 #@end
 
-[[m:Date._parse]] �⻲�Ȥ��Ƥ���������
+[[m:Date._parse]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param complete ǯ���䴰���뤫
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ����դˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param str 日付をあらわす文字列
+@param complete 年を補完するか
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@since 1.9.1
 #@# exp
 --- _rfc2822(str) -> Hash
 --- _rfc822(str) -> Hash
-���Υ᥽�åɤ� [[m:Date.rfc2822]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.rfc2822]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.rfc2822]] �⻲�Ȥ��Ƥ���������
+[[m:Date.rfc2822]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
 --- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
 --- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
-[[RFC:2822]] ������줿�񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+[[RFC:2822]] で定められた書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:Date._rfc2822]] �⻲�Ȥ��Ƥ���������
+[[m:Date._rfc2822]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 #@since 1.9.1
 #@# exp
 --- _rfc3339(str) -> Hash
-���Υ᥽�åɤ� [[m:Date.rfc3339]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.rfc3339]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.rfc3339]] �⻲�Ȥ��Ƥ���������
+[[m:Date.rfc3339]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
 --- rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> Date
-[[RFC:3339]] �񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+[[RFC:3339]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:Date._rfc3339]] �⻲�Ȥ��Ƥ���������
+[[m:Date._rfc3339]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 --- _strptime(str, format = '%F') -> Hash
-���Υ᥽�åɤ� [[m:Date.strptime]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.strptime]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-@param str ���դ򤢤�魯ʸ����
-@param format ��
+@param str 日付をあらわす文字列
+@param format 書式
 
 --- strptime(str = '-4712-01-01', format = '%F', start = Date::ITALY) -> Date
-Ϳ����줿����������ɽ������Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+与えられた雛型で日付表現を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:Date._strptime]] �⻲�Ȥ��Ƥ���������
-�ޤ� [[man:strptime(3)]]������� [[m:Date#strftime]] �⻲�Ȥ��Ƥ���������
+[[m:Date._strptime]] も参照してください。
+また [[man:strptime(3)]]、および [[m:Date#strftime]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param format ��
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
-@raise ArgumentError �������ʤ����դˤʤ��Ȥ߹�碌�Ǥ������ȯ�����ޤ���
+@param str 日付をあらわす文字列
+@param format 書式
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@end
 
 --- today(start = Date::ITALY) -> Date
-���ߤ����դ������������ե��֥������Ȥ��������ޤ���
+現在の日付に相当する日付オブジェクトを生成します。
 
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.1
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
@@ -374,18 +374,18 @@ complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
 #@end
 #@end
 #@since 1.9.1
-�����������դǤ���п��������Ǥʤ��ʤ鵶���֤��ޤ���
+正しい暦日付であれば真、そうでないなら偽を返します。
 #@else
-�����������դǤ���С����������ꥦ�������֤��ޤ���
-�����Ǥʤ��ʤ顢�����֤��ޤ���
+正しい暦日付であれば、相当するユリウス日を返します。
+そうでないなら、偽を返します。
 #@end
 
-[[m:Date.jd]]������� [[m:Date.civil]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
 
-@param year ǯ
-@param mon ��
-@param mday ��
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param year 年
+@param mon 月
+@param mday 日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.1
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
@@ -397,18 +397,18 @@ complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
 #@end
 #@end
 #@since 1.9.1
-�����������դǤ���п��������Ǥʤ��ʤ鵶���֤��ޤ���
+正しい暦週日付であれば真、そうでないなら偽を返します。
 #@else
-�����������դǤ���С����������ꥦ�������֤��ޤ���
-�����Ǥʤ��ʤ顢�����֤��ޤ���
+正しい暦週日付であれば、相当するユリウス日を返します。
+そうでないなら、偽を返します。
 #@end
 
-[[m:Date.jd]]������� [[m:Date.commercial]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
 
-@param cwyear ǯ
-@param cweek ��
-@param cwday ������ (����)
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param cwyear 年
+@param cweek 週
+@param cwday 週の日 (曜日)
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.1
 --- valid_jd? (jd, start = Date::GREGORIAN) -> bool
@@ -420,17 +420,17 @@ complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
 #@end
 #@end
 #@since 1.9.1
-�����֤��ޤ���
+真を返します。
 #@else
-�ҤȤ��ܤΰ����򤽤Τޤ��֤��ޤ���
+ひとつ目の引数をそのまま返します。
 #@end
 
-�о����Τ����Ѱդ���Ƥ��ޤ������º�Ū�˰�̣�Ϥ���ޤ���
+対称性のため用意されていますが、実際的に意味はありません。
 
-[[m:Date.jd]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]] も参照してください。
 
-@param jd ��ꥦ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param jd ユリウス日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.1
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
@@ -442,205 +442,205 @@ complete �����ǡ�ǯ�� "00" ���� "99" ���ϰϤǤ���С�
 #@end
 #@end
 #@since 1.9.1
-������ǯ���̻��� (ǯ����) �Ǥ���п��������Ǥʤ��ʤ鵶���֤��ޤ���
+正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
 #@else
-������ǯ���̻��� (ǯ����) �Ǥ���С����������ꥦ�������֤��ޤ���
-�����Ǥʤ��ʤ顢�����֤��ޤ���
+正しい年間通算日 (年日付) であれば、相当するユリウス日を返します。
+そうでないなら、偽を返します。
 #@end
 
-[[m:Date.jd]]������� [[m:Date.ordinal]] �⻲�Ȥ��Ƥ���������
+[[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
-@param year ǯ
-@param yday ǯ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param year 年
+@param yday 年の日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.1
 #@# exp
 --- _xmlschema(str) -> Hash
-���Υ᥽�åɤ� [[m:Date.xmlschema]] �Ȼ��Ƥ��ޤ��������ե��֥������Ȥ����������ˡ�
-�������������Ǥ�ϥå�����֤��ޤ���
+このメソッドは [[m:Date.xmlschema]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
 
-[[m:Date.xmlschema]] �⻲�Ȥ��Ƥ���������
+[[m:Date.xmlschema]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
+@param str 日付をあらわす文字列
 
 --- xmlschema(str = '-4712-01-01', start = Date::ITALY) -> Date
-XML Schema �ˤ��񼰤����դ���Ϥ���
-���ξ���˴�Ť������ե��֥������Ȥ��������ޤ���
+XML Schema による書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
 
-[[m:Date._xmlschema]] �⻲�Ȥ��Ƥ���������
+[[m:Date._xmlschema]] も参照してください。
 
-@param str ���դ򤢤�魯ʸ����
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
 == Instance Methods
 
 --- + (n) -> Date
-self ���� n ��������ե��֥������Ȥ��֤��ޤ���
-n �Ͽ��ͤǤʤ���Фʤ�ޤ���
+self から n 日後の日付オブジェクトを返します。
+n は数値でなければなりません。
 
-@param n ����
-@raise TypeError n �����ͤǤʤ�����ȯ�����ޤ���
+@param n 日数
+@raise TypeError n が数値でない場合に発生します。
 
 --- - (x) -> Rational | Date
-x �����ե��֥������Ȥʤ顢�դ��Ĥκ����֤��ޤ���
-���뤤��
-x �����ͤʤ�С�self ��� x ���������դ��֤��ޤ���
+x が日付オブジェクトなら、ふたつの差を返します。
+あるいは
+x が数値ならば、self より x 日前の日付を返します。
 
-@param x ���������뤤�����ե��֥�������
-@raise TypeError x �����ͤǤ����ե��֥������ȤǤ�ʤ�����ȯ�����ޤ���
+@param x 日数、あるいは日付オブジェクト
+@raise TypeError x が数値でも日付オブジェクトでもない場合に発生します。
 
 --- << (n) -> Date
-self ��� n �����������ե��֥������Ȥ��֤��ޤ���
-n �Ͽ��ͤǤʤ���Фʤ�ޤ���
+self より n ヶ月前の日付オブジェクトを返します。
+n は数値でなければなりません。
 
 #@since 1.9.1
-[[m:Date#prev_month]] �⻲�Ȥ��Ƥ���������
+[[m:Date#prev_month]] も参照してください。
 #@end
 
-@param n ���
+@param n 月数
 
 --- <=> (other) -> Integer
-�դ��Ĥ���Ӥ���-1���������뤤�� 1 ���֤��ޤ���
-other �����ե��֥������Ȥ���
-ŷʸ��Ū�ʥ�ꥦ�����򤢤�魯���ͤǤʤ���Фʤ�ޤ���
+ふたつを比較し、-1、零、あるいは 1 を返します。
+other は日付オブジェクトか、
+天文学的なユリウス日をあらわす数値でなければなりません。
 
-@param other ���ե��֥�������
+@param other 日付オブジェクト
 
 --- === (other) -> bool
-Ʊ�����ʤ鿿���֤��ޤ���
+同じ日なら真を返します。
 
-@param other ���ե��֥�������
+@param other 日付オブジェクト
 
 --- >> (n) -> Date
-self ���� n ���������ե��֥������Ȥ��֤��ޤ���
-n �Ͽ��ͤǤʤ���Фʤ�ޤ���
+self から n ヶ月後の日付オブジェクトを返します。
+n は数値でなければなりません。
 
 #@since 1.9.1
-[[m:Date#next_month]] �⻲�Ȥ��Ƥ���������
+[[m:Date#next_month]] も参照してください。
 #@end
 
-@param n ���
+@param n 月数
 
 #@since 1.8.0
 --- ajd -> Rational
-���Υ᥽�åɤ� [[m:Date#jd]] �Ȼ��Ƥ��ޤ�����ŷʸ��Ū�ʥ�ꥦ�������֤��ޤ���
-�����ޤߤޤ���
+このメソッドは [[m:Date#jd]] と似ていますが、天文学的なユリウス日を返します。
+時刻を含みます。
 
 --- amjd -> Rational
-���Υ᥽�åɤ� [[m:Date#mjd]] �Ȼ��Ƥ��ޤ�����ŷʸ��Ū�ʽ�����ꥦ�������֤��ޤ���
-�����ޤߤޤ���
+このメソッドは [[m:Date#mjd]] と似ていますが、天文学的な修正ユリウス日を返します。
+時刻を含みます。
 #@end
 
 --- asctime -> String
 --- ctime -> String
-[[man:asctime(3)]] �񼰤�ʸ������֤��ޤ� (�������������� "\n\0" �Ͻ���)��
+[[man:asctime(3)]] 書式の文字列を返します (ただし、末尾の "\n\0" は除く)。
 
 --- cwday -> Integer
-�񽵤��� (����) ���֤��ޤ� (1-7�����ˤ�1)��
+暦週の日 (曜日) を返します (1-7、月曜は1)。
 
 --- cweek -> Integer
-�񽵤��֤��ޤ� (1-53)��
+暦週を返します (1-53)。
 
 --- cwyear -> Integer
-�񽵤ˤ�����ǯ���֤��ޤ���
+暦週における年を返します。
 
 --- downto(min){|date| ...} -> self
 #@since 1.9.1
 --- downto(min) -> Enumerator
 #@end
-���Υ᥽�åɤϡ�step(min, -1){|date| ...} �������Ǥ���
+このメソッドは、step(min, -1){|date| ...} と等価です。
 
-@param min ���ե��֥�������
+@param min 日付オブジェクト
 
 @see [[m:Date#step]], [[m:Date#upto]]
 
 --- england -> Date
-���Υ᥽�åɤϡ�new_start(Date::ENGLAND) �������Ǥ���
+このメソッドは、new_start(Date::ENGLAND) と等価です。
 
-[[m:Date#new_start]]������� [[m:Date::ENGLAND]] �򻲾Ȥ��Ƥ���������
+[[m:Date#new_start]]、および [[m:Date::ENGLAND]] を参照してください。
 
 #@since 1.9.1
 --- friday? -> bool
-�������ʤ鿿���֤��ޤ���
+金曜日なら真を返します。
 #@end
 
 --- gregorian -> Date
-���Υ᥽�åɤϡ�new_start(Date::GREGORIAN) �������Ǥ���
+このメソッドは、new_start(Date::GREGORIAN) と等価です。
 
-[[m:Date#new_start]]������� [[m:Date::GREGORIAN]] �򻲾Ȥ��Ƥ���������
+[[m:Date#new_start]]、および [[m:Date::GREGORIAN]] を参照してください。
 
 #@since 1.8.6
 --- gregorian? -> bool
 #@else
 --- ns? -> bool
 #@end
-���쥴�ꥪ��ʤ鿿���֤��ޤ���
+グレゴリオ暦なら真を返します。
 
 #@since 1.9.1
 #@# exp
 --- httpdate -> String
-[[RFC:2616]] ([[RFC:1123]]) ������줿�񼰤�ʸ������֤��ޤ���
+[[RFC:2616]] ([[RFC:1123]]) で定められた書式の文字列を返します。
 
 --- iso8601 -> String
 --- rfc3339 -> String
-[[ISO:8601]] �񼰤�ʸ������֤��ޤ� (����ɽ���ϤĤ����ޤ���)��
+[[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
 #@end
 
 --- italy -> Date
-���Υ᥽�åɤϡ�new_start(Date::ITALY) �������Ǥ���
+このメソッドは、new_start(Date::ITALY) と等価です。
 
-[[m:Date#new_start]]������� [[m:Date::ITALY]] �򻲾Ȥ��Ƥ���������
+[[m:Date#new_start]]、および [[m:Date::ITALY]] を参照してください。
 
 --- jd -> Integer
-��ꥦ�������֤��ޤ���
-�����ޤߤޤ���
+ユリウス日を返します。
+時刻を含みません。
 
-[[m:Date#ajd]] �⻲�Ȥ��Ƥ���������
+[[m:Date#ajd]] も参照してください。
 
 #@since 1.9.1
 --- jisx0301 -> String
-[[JIS:X 0301]] �񼰤�ʸ������֤��ޤ���
-�����������������ˤĤ��Ƥ� [[ISO:8601]] �񼰤ˤʤ�ޤ���
-�ʤ�������6ǯ�����ˤĤ��Ƥ��������������Ѥ��뤳�ȤϤ���ޤ���
+[[JIS:X 0301]] 書式の文字列を返します。
+ただし、明治以前については [[ISO:8601]] 書式になります。
+なお、明治6年以前についても太陰太陽暦を使用することはありません。
 #@end
 
 --- julian -> Date
-���Υ᥽�åɤϡ�new_start(Date::JULIAN) �������Ǥ���
+このメソッドは、new_start(Date::JULIAN) と等価です。
 
-[[m:Date#new_start]]������� [[m:Date::JULIAN]] �򻲾Ȥ��Ƥ���������
+[[m:Date#new_start]]、および [[m:Date::JULIAN]] を参照してください。
 
 #@since 1.8.6
 --- julian? -> bool
 #@else
 --- os? -> bool
 #@end
-��ꥦ����ʤ鿿���֤��ޤ���
+ユリウス暦なら真を返します。
 
 --- ld -> Integer
-��ꥦ�������֤��ޤ���
+リリウス日を返します。
 
 --- leap? -> bool
-��ǯ�ʤ鿿���֤��ޤ���
+閏年なら真を返します。
 
 --- mday -> Integer
 --- day -> Integer
-��������֤��ޤ� (1-31)��
+月の日を返します (1-31)。
 
 --- mjd -> Integer
-������ꥦ�������֤��ޤ���
-����ξ����ޤߤޤ���
+修正ユリウス日を返します。
+時刻の情報を含みません。
 
-[[m:Date#amjd]] �⻲�Ȥ��Ƥ���������
+[[m:Date#amjd]] も参照してください。
 
 --- mon -> Integer
 --- month -> Integer
-����֤��ޤ� (1-12)��
+月を返します (1-12)。
 
 #@since 1.9.1
 --- monday? -> bool
-�������ʤ鿿���֤��ޤ���
+月曜日なら真を返します。
 #@end
 
 #@since 1.8.0
@@ -648,60 +648,60 @@ n �Ͽ��ͤǤʤ���Фʤ�ޤ���
 #@else
 --- newsg(start = Date::ITALY) -> Date
 #@end
-self ��ʣ�����ơ����β����������ꤷ�ʤ����ޤ���
-�������ά�������ϡ�[[m:Date::ITALY]] (1582ǯ10��15��) �ˤʤ�ޤ���
+self を複製して、その改暦日を設定しなおします。
+引数を省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
-[[m:Date.new]] �⻲�Ȥ��Ƥ���������
+[[m:Date.new]] も参照してください。
 
-@param start ���쥴�ꥪ���Ĥ����Ϥ᤿���򤢤�魯��ꥦ����
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.1
 --- next_day(n = 1) -> Date
-n ������֤��ޤ���
+n 日後を返します。
 
-[[m:Date#succ]] �⻲�Ȥ��Ƥ���������
+[[m:Date#succ]] も参照してください。
 
-@param n ����
+@param n 日数
 
 --- next_month(n = 1) -> Date
-n �������֤��ޤ���
+n ヶ月後を返します。
 
-[[m:Date#>>]] �⻲�Ȥ��Ƥ���������
+[[m:Date#>>]] も参照してください。
 
-@param n ���
+@param n 月数
 
 --- next_year(n = 1) -> Date
-n ǯ����֤��ޤ���
+n 年後を返します。
 
-@param n ǯ��
+@param n 年数
 
 --- prev_day(n = 1) -> Date
-n �������֤��ޤ���
+n 日前を返します。
 
-@param n ����
+@param n 日数
 
 --- prev_month(n = 1) -> Date
-n ���������֤��ޤ���
+n ヶ月前を返します。
 
-[[m:Date#<<]] �⻲�Ȥ��Ƥ���������
+[[m:Date#<<]] も参照してください。
 
-@param n ���
+@param n 月数
 
 --- prev_year(n = 1) -> Date
-n ǯ�����֤��ޤ���
+n 年前を返します。
 #@end
 
-@param n ǯ��
+@param n 年数
 
 #@since 1.9.1
 --- rfc2822 -> String
 --- rfc822 -> String
-[[RFC:2822]] ������줿�񼰤�ʸ������֤��ޤ���
+[[RFC:2822]] で定められた書式の文字列を返します。
 #@end
 
 #@since 1.9.1
 --- saturday? -> bool
-�������ʤ鿿���֤��ޤ���
+土曜日なら真を返します。
 #@end
 
 #@since 1.8.0
@@ -709,104 +709,104 @@ n ǯ�����֤��ޤ���
 #@else
 --- sg -> Integer
 #@end
-�������򤢤�魯��ꥦ�������֤��ޤ���
+改暦日をあらわすユリウス日を返します。
 
-[[m:Date.new]] �⻲�Ȥ��Ƥ���������
+[[m:Date.new]] も参照してください。
 
 --- step(limit, step = 1){|date| ...} -> self
 #@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
 #@end
-�֥��å���ɾ���򷫤��֤��ޤ����֥��å������ե��֥������Ȥ�Ȥ�ޤ���
-limit �����ե��֥������ȤǤʤ���Фʤ�ޤ���
-�ޤ� step �������Ǥʤ���Фʤ�ޤ���
+ブロックの評価を繰り返します。ブロックは日付オブジェクトをとります。
+limit は日付オブジェクトでなければなりません、
+また step は非零でなければなりません。
 
-@param limit ���ե��֥�������
-@param step ����
+@param limit 日付オブジェクト
+@param step 歩幅
 
 @see [[m:Date#downto]], [[m:Date#upto]]
 
 #@since 1.9.1
 --- sunday? -> bool
-�������ʤ鿿���֤��ޤ���
+日曜日なら真を返します。
 #@end
 
 --- strftime(format = '%F') -> String
-Ϳ����줿���������դ�񼰤Ť��ޤ���
+与えられた雛型で日付を書式づけます。
 
-�Ĥ����Ѵ����ͤ򤢤Ĥ����ޤ�:
+つぎの変換仕様をあつかいます:
 
 %A, %a, %B, %b, %C, %c, %D, %d, %e, %F, %G, %g, %H, %h, %I, %j, %k, %l,
 %M, %m, %n, %P, %p, %R, %r, %S, %s, %T, %t, %U, %u, %V, %v, %W, %w, %X,
 %x, %Y, %y, %Z, %z, %%, %+
 
 #@since 1.8.6
-1.8.6 �ʹߤǤϡ�%L, %N, %Q ��Ĥ����ޤ���
-#@# %:{1,3}z ��?
-�ޤ���GNU �Ǥˤ���褦��������ʤɤ�Ǥ��ޤ���
+1.8.6 以降では、%L, %N, %Q もつかえます。
+#@# %:{1,3}z も?
+また、GNU 版にあるような幅指定などもできます。
 #@else
 #@# %[123]?
 #@end
 
-[[man:strftime(3)]]������� [[m:Date.strptime]] �⻲�Ȥ��Ƥ���������
+[[man:strftime(3)]]、および [[m:Date.strptime]] も参照してください。
 
-@param format ��
+@param format 書式
 
 --- succ -> Date
 --- next -> Date
-���������ե��֥������Ȥ��֤��ޤ���
+翌日の日付オブジェクトを返します。
 
 #@since 1.9.1
 --- thursday? -> bool
-�������ʤ鿿���֤��ޤ���
+木曜日なら真を返します。
 
 --- to_date -> Date
-�б����� [[c:Date]] ���֥������Ȥ��֤��ޤ���
+対応する [[c:Date]] オブジェクトを返します。
 
 --- to_datetime -> DateTime
-�б����� [[c:DateTime]] ���֥������Ȥ��֤��ޤ���
+対応する [[c:DateTime]] オブジェクトを返します。
 #@end
 
 --- to_s -> String
-[[ISO:8601]] �񼰤�ʸ������֤��ޤ� (����ɽ���ϤĤ����ޤ���)��
+[[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
 
 #@since 1.9.1
 --- to_time -> Time
-�б����� [[c:Time]] ���֥������Ȥ��֤��ޤ���
+対応する [[c:Time]] オブジェクトを返します。
 
 --- tuesday? -> bool
-�������ʤ鿿���֤��ޤ���
+火曜日なら真を返します。
 #@end
 
 --- upto(max){|date| ...} -> self
 #@since 1.9.1
 --- upto(max) -> Enumerator
 #@end
-���Υ᥽�åɤϡ�step(max, 1){|date| ...} �������Ǥ���
+このメソッドは、step(max, 1){|date| ...} と等価です。
 
-@param max ���ե��֥�������
+@param max 日付オブジェクト
 
 @see [[m:Date#step]], [[m:Date#downto]]
 
 --- wday -> Integer
-�������֤��ޤ� (0-6������������)��
+曜日を返します (0-6、日曜日は零)。
 
 #@since 1.9.1
 --- wednesday? -> bool
-�������ʤ鿿���֤��ޤ���
+水曜日なら真を返します。
 #@end
 
 #@since 1.9.1
 #@# exp
 --- xmlschema -> String
-XML Scheme (date) �ˤ��񼰤�ʸ������֤��ޤ���
+XML Scheme (date) による書式の文字列を返します。
 #@end
 
 --- yday -> Integer
-ǯ�������֤��ޤ� (1-366)��
+年の日を返します (1-366)。
 
 --- year -> Integer
-ǯ���֤��ޤ���
+年を返します。
 
 #@since 1.9.1
 = reopen Time
@@ -814,11 +814,11 @@ XML Scheme (date) �ˤ��񼰤�ʸ������֤��ޤ���
 == Instance Methods
 
 --- to_date -> Date
-�б����� [[c:Date]] ���֥������Ȥ��֤��ޤ���
+対応する [[c:Date]] オブジェクトを返します。
 
 --- to_datetime -> DateTime
-�б����� [[c:DateTime]] ���֥������Ȥ��֤��ޤ���
+対応する [[c:DateTime]] オブジェクトを返します。
 
 --- to_time -> Time
-�б����� [[c:Time]] ���֥������Ȥ��֤��ޤ���
+対応する [[c:Time]] オブジェクトを返します。
 #@end

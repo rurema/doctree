@@ -2,7 +2,7 @@
 = module JSON::Generator::GeneratorMethods::Array
 alias JSON::Ext::Generator::GeneratorMethods::Array
 
-[[c:Array]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:Array]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 #@since 1.9.3
@@ -11,40 +11,40 @@ alias JSON::Ext::Generator::GeneratorMethods::Array
 --- to_json(state = nil, depth = 0) -> String
 #@end
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
-@param state �������� JSON ������ʸ����򥫥����ޥ������뤿��� [[c:JSON::State]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
 
 #@until 1.9.3
-@param depth �ͥ��Ȥο����򸫤Ĥ��뤿��˻��Ѥ���ޤ���
+@param depth ネストの深さを見つけるために使用されます。
 #@end
 
 = module JSON::Generator::GeneratorMethods::FalseClass
 alias JSON::Ext::Generator::GeneratorMethods::FalseClass
 
-[[c:FalseClass]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:FalseClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
-"false" �Ȥ���ʸ������֤��ޤ���
+"false" という文字列を返します。
 
 = module JSON::Generator::GeneratorMethods::Float
 alias JSON::Ext::Generator::GeneratorMethods::Float
 
-[[c:Float]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:Float]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
 = module JSON::Generator::GeneratorMethods::Hash
 alias JSON::Ext::Generator::GeneratorMethods::Hash
 
-[[c:Hash]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:Hash]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 #@since 1.9.3
@@ -53,101 +53,101 @@ alias JSON::Ext::Generator::GeneratorMethods::Hash
 --- to_json(state = nil, depth = 0) -> String
 #@end
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
-@param state �������� JSON ������ʸ����򥫥����ޥ������뤿��� [[c:JSON::State]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
 
 #@until 1.9.3
-@param depth �ͥ��Ȥο����򸫤Ĥ��뤿��˻��Ѥ���ޤ���
+@param depth ネストの深さを見つけるために使用されます。
 #@end
 
 = module JSON::Generator::GeneratorMethods::Integer
 alias JSON::Ext::Generator::GeneratorMethods::Integer
 
-[[c:Integer]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:Integer]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
 = module JSON::Generator::GeneratorMethods::NilClass
 alias JSON::Ext::Generator::GeneratorMethods::NilClass
 
-[[c:NilClass]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:NilClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
-"null" �Ȥ���ʸ������֤��ޤ���
+"null" という文字列を返します。
 
 = module JSON::Generator::GeneratorMethods::Object
 alias JSON::Ext::Generator::GeneratorMethods::Object
 
-[[c:Object]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:Object]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ� to_s ��ʸ����ˤ�����̤� JSON ������ʸ������Ѵ������֤��ޤ���
+自身を to_s で文字列にした結果を JSON 形式の文字列に変換して返します。
 
-���Υ᥽�åɤϤ��륪�֥������Ȥ� to_json �᥽�åɤ��������Ƥ��ʤ����˻��Ѥ���
-�ե�����Хå��Τ���Υ᥽�åɤǤ���
+このメソッドはあるオブジェクトに to_json メソッドが定義されていない場合に使用する
+フォールバックのためのメソッドです。
 
 = module JSON::Generator::GeneratorMethods::String
 alias JSON::Ext::Generator::GeneratorMethods::String
 
-[[c:String]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:String]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
-���ȤΥ��󥳡��ɤ� UTF-8 �Ǥ���٤��Ǥ���
-"\u????" �Τ褦�� UTF-16 �ӥå�����ǥ�����ǥ��󥳡��ɤ��줿ʸ������֤����Ȥ�����ޤ���
+自身のエンコードは UTF-8 であるべきです。
+"\u????" のように UTF-16 ビッグエンディアンでエンコードされた文字列を返すことがあります。
 
 --- to_json_raw -> String
 
-���Ȥ��Ф��� [[m:String#to_json_raw_object]] ��ƤӽФ��� [[m:Hash#to_json]] ������̤��֤��ޤ���
+自身に対して [[m:String#to_json_raw_object]] を呼び出して [[m:Hash#to_json]] した結果を返します。
 
 @see [[m:String#to_json_raw_object]], [[m:Hash#to_json]]
 
 --- to_json_raw_object -> Hash
 
-����ʸ������Ǽ�����ϥå�����������ޤ���
+生の文字列を格納したハッシュを生成します。
 
-���Υ᥽�åɤ� UTF-8 ��ʸ����ǤϤʤ�����ʸ����� JSON ���Ѵ�������˻��Ѥ��Ƥ���������
+このメソッドは UTF-8 の文字列ではなく生の文字列を JSON に変換する場合に使用してください。
 
-  "�ˤۤ�".encode("euc-jp").to_json_raw_object
+  "にほんご".encode("euc-jp").to_json_raw_object
   # => {"json_class"=>"String", "raw"=>[164, 203, 164, 219, 164, 243, 164, 180]}
-  "�ˤۤ�".encode("euc-jp").to_json # source sequence is illegal/malformed (JSON::GeneratorError)
+  "にほんご".encode("euc-jp").to_json # source sequence is illegal/malformed (JSON::GeneratorError)
 
 = module JSON::Generator::GeneratorMethods::String::Extend
 alias JSON::Ext::Generator::GeneratorMethods::String::Extend
 
-[[c:String]] �� JSON �ǻ��Ѥ����ðۥ᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:String]] に JSON で使用する特異メソッドを追加するためのモジュールです。
 
 == Class Methods
 --- json_create(hash) -> String
 
-JSON �Υ��֥������Ȥ��� Ruby ��ʸ��������������֤��ޤ���
+JSON のオブジェクトから Ruby の文字列を生成して返します。
 
-@param hash �����Ȥ��� "raw" �Ȥ���ʸ���������������ͤȤ��ƿ��ͤ��������ĥϥå������ꤷ�ޤ���
+@param hash キーとして "raw" という文字列を持ち、その値として数値の配列を持つハッシュを指定します。
 
   String.json_create({"raw" => [0x41, 0x42, 0x43]}) # => "ABC"
 
 = module JSON::Generator::GeneratorMethods::TrueClass
 alias JSON::Ext::Generator::GeneratorMethods::TrueClass
 
-[[c:TrueClass]] �� JSON �ǻ��Ѥ��륤�󥹥��󥹥᥽�åɤ��ɲä��뤿��Υ⥸�塼��Ǥ���
+[[c:TrueClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
 
-���Ȥ����������� JSON ������ʸ������֤��ޤ���
+自身から生成した JSON 形式の文字列を返します。
 
-"true" �Ȥ���ʸ������֤��ޤ���
+"true" という文字列を返します。
 

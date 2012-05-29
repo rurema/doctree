@@ -25,5 +25,5 @@ require date
 --- object_maker(klass, hash)
 #@todo
 
-#@# Object#to_yaml_properties¡¢Psych::DEPRECATED¡¢
-#@# Psych::DeprecatedMethods¡¢Psych.quick_emit ¤Ë¤Ä¤¤¤Æ¤Ï¾ÊÎ¬¡£
+#@# Object#to_yaml_propertiesã€Psych::DEPRECATEDã€
+#@# Psych::DeprecatedMethodsã€Psych.quick_emit ã«ã¤ã„ã¦ã¯çœç•¥ã€‚

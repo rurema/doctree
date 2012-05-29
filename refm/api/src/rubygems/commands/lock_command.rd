@@ -1,17 +1,17 @@
 require rubygems/command
 
-���ꤵ�줿����ΥС������� Gem �ѥå������˰�¸���� Gem ����Ѥ��뤿���
-ɬ�פ� [[m:Kernel.#gem]] �᥽�åɤθƤӽФ���ˡ��ʸ����ǽ��Ϥ��ޤ���
+指定された特定のバージョンの Gem パッケージに依存する Gem を使用するために
+必要な [[m:Kernel.#gem]] メソッドの呼び出し方法を文字列で出力します。
 
   Usage: gem lock GEMNAME-VERSION [GEMNAME-VERSION ...] [options]
     Options:
-      -s, --[no-]strict                ��¸�ط����������ʤ����˼��Ԥ��ޤ�
+      -s, --[no-]strict                依存関係を満たせない場合に失敗します
 #@include(common_options)
     Arguments:
-      GEMNAME       ���å����� Gem �ѥå�������̾������ꤷ�ޤ�
-      VERSION       ���å����� Gem �ѥå������ΥС���������ꤷ�ޤ�
+      GEMNAME       ロックする Gem パッケージの名前を指定します
+      VERSION       ロックする Gem パッケージのバージョンを指定します
     Summary:
-      ����С������� Gem �ѥå���������Ѥ��뤿���ɬ�פʵ��Ҥ�ɽ�����ޤ�
+      特定バージョンの Gem パッケージを使用するために必要な記述を表示します
     Description:
       The lock command will generate a list of +gem+ statements that will lock
       down
@@ -48,23 +48,23 @@ require rubygems/command
 
 = class Gem::Commands::LockCommand < Gem::Command
 
-���ꤵ�줿����ΥС������� Gem �ѥå������˰�¸���� Gem ����Ѥ��뤿���
-ɬ�פ� [[m:Kernel.#gem]] �᥽�åɤθƤӽФ���ˡ��ʸ����ǽ��Ϥ��ޤ���
+指定された特定のバージョンの Gem パッケージに依存する Gem を使用するために
+必要な [[m:Kernel.#gem]] メソッドの呼び出し方法を文字列で出力します。
 
 == Public Instance Methods
 
 --- complain(message) -> ()
 
-���ꤵ�줿��å�������ɽ�����ޤ���--strict ��ͭ���ʾ����㳰��ȯ�����ޤ���
+指定されたメッセージを表示します。--strict が有効な場合は例外が発生します。
 
-@param message ɽ�������å���������ꤷ�ޤ���
+@param message 表示するメッセージを指定します。
 
-@raise Gem::Exception ���ޥ�ɥ饤�󥪥ץ����� --strict �����ꤵ��Ƥ������ȯ�����ޤ���
+@raise Gem::Exception コマンドラインオプションに --strict が指定されている場合に発生します。
 
 --- spec_path(gem_full_name) -> String
 
-���ꤵ�줿 Gem �ѥå������� gemspec �ե�����Υե�ѥ����֤��ޤ���
+指定された Gem パッケージの gemspec ファイルのフルパスを返します。
 
-@param gem_full_name Gem �ѥå�������̾������ꤷ�ޤ���
+@param gem_full_name Gem パッケージの名前を指定します。
 
 

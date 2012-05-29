@@ -1,23 +1,23 @@
-RDoc �������������줿�ץ쥤��ƥ����Ȥ��Ѵ����뤿��Υ��֥饤�֥��Ǥ���
+RDoc 形式に整形されたプレインテキストを変換するためのサブライブラリです。
 
 #@since 1.9.1
-[[c:RDoc::Markup]] �� RDoc �����Υɥ�����ȡ�Wiki ����ȥꡢWeb���
-FAQ �ʤɤ����ꤷ���ץ쥤��ƥ����Ȥ����͡��ʥե����ޥåȤؤ��Ѵ���Ԥ�
-�ġ��뷲�δ��äȤ��ƺ���Ƥ��ޤ���[[c:RDoc::Markup]] ���Ȥϲ��ν��Ϥ�
-�Ԥ��ޤ���
+[[c:RDoc::Markup]] は RDoc 形式のドキュメント、Wiki エントリ、Web上の
+FAQ などを想定したプレインテキストから様々なフォーマットへの変換を行う
+ツール群の基礎として作られています。[[c:RDoc::Markup]] 自身は何の出力も
+行いません。
 #@else
-[[c:SM::SimpleMarkup]] �� RDoc �����Υɥ�����ȡ�Wiki ����ȥꡢWeb
-��� FAQ �ʤɤ����ꤷ���ץ쥤��ƥ����Ȥ����͡��ʥե����ޥåȤؤ��Ѵ���
-�Ԥ��ġ��뷲�δ��äȤ��ƺ���Ƥ��ޤ���[[c:SM::SimpleMarkup]] ���Ȥϲ�
-�ν��Ϥ�Ԥ��ޤ���
+[[c:SM::SimpleMarkup]] は RDoc 形式のドキュメント、Wiki エントリ、Web
+上の FAQ などを想定したプレインテキストから様々なフォーマットへの変換を
+行うツール群の基礎として作られています。[[c:SM::SimpleMarkup]] 自身は何
+の出力も行いません。
 #@end
-������ [[ref:output_format]] �Ǹ�Ҥ��륯�饹���˰Ѥͤ��Ƥ��ޤ���
+それらは [[ref:output_format]] で後述するクラス群に委ねられています。
 
 === Markup
 
-����Ū�ˤϡ�[[ref:lib:rdoc#markup]] ��Ʊ���Ǥ�����������rdoc ���ޥ�ɤ�
-�ϰۤʤꡢRuby �Υ����������ɤΥ�������ʬ�ǤϤʤ����ץ쥤��ƥ����Ȥ�
-�Ѵ��оݤˤʤ�ޤ������Τ��ᡢ�ʲ��Τߤ��ե����ޥåȤ���ޤ���
+基本的には、[[ref:lib:rdoc#markup]] と同じです。ただし、rdoc コマンドと
+は異なり、Ruby のソースコードのコメント部分ではなく、プレインテキストが
+変換対象になります。そのため、以下のみがフォーマットされます。
 
  * [[ref:lib:rdoc#list]]
  * [[ref:lib:rdoc#labeled_list]]
@@ -26,29 +26,29 @@ FAQ �ʤɤ����ꤷ���ץ쥤��ƥ����Ȥ����͡��ʥե����ޥåȤؤ��Ѵ���Ԥ�
  * [[ref:lib:rdoc#italic_bold_typewriter]]
  * [[ref:lib:rdoc#escape]]
 
-#@# TODO: 1.9.3 �Ǥ� =begin rdoc ... �ʤɤ���ѤǤ�������ɵ����롣
+#@# TODO: 1.9.3 では =begin rdoc ... なども使用できる事を追記する。
 
-===[a:output_format] ���ϲ�ǽ�ʷ���
+===[a:output_format] 出力可能な形式
 
-�Ѵ���������Ȥ��ưʲ��Τ����줫������Ǥ��ޤ���
+変換する形式として以下のいずれかを選択できます。
 
 #@since 1.9.1
- * HTML ����: [[c:RDoc::Markup::ToHtml]]
- * HTML ����: [[c:RDoc::Markup::ToHtmlCrossref]]
+ * HTML 形式: [[c:RDoc::Markup::ToHtml]]
+ * HTML 形式: [[c:RDoc::Markup::ToHtmlCrossref]]
 #@until 1.9.2
- * LaTex ����: [[c:RDoc::Markup::ToLaTeX]]
- * TexInfo ����: [[c:RDoc::Markup::ToTexInfo]]
+ * LaTex 形式: [[c:RDoc::Markup::ToLaTeX]]
+ * TexInfo 形式: [[c:RDoc::Markup::ToTexInfo]]
 
-�ޤ�������ʳ��˥��ޥ�ɥ饤��ɽ���ʤɤ����̤ʥե����ޥåȤˤ��������
-�ˡ�[[c:RDoc::Markup::ToFlow]] ����ѤǤ��ޤ���(ri ���ޥ�ɤǻȤ��Ƥ�
-�ޤ�)
+また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
+に、[[c:RDoc::Markup::ToFlow]] を使用できます。(ri コマンドで使われてい
+ます)
 #@end
 #@else
- * HTML ����: [[c:SM::ToHtml]]
- * LaTex ����: [[c:SM::ToLaTeX]]
+ * HTML 形式: [[c:SM::ToHtml]]
+ * LaTex 形式: [[c:SM::ToLaTeX]]
 
-�ޤ�������ʳ��˥��ޥ�ɥ饤��ɽ���ʤɤ����̤ʥե����ޥåȤˤ��������
-�ˡ�[[c:SM::ToFlow]] ����ѤǤ��ޤ���(ri ���ޥ�ɤǻȤ��Ƥ��ޤ�)
+また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
+に、[[c:SM::ToFlow]] を使用できます。(ri コマンドで使われています)
 #@end
 
 #@since 1.9.1
@@ -57,56 +57,56 @@ FAQ �ʤɤ����ꤷ���ץ쥤��ƥ����Ȥ����͡��ʥե����ޥåȤؤ��Ѵ���Ԥ�
 = class SM::SimpleMarkup
 #@end
 
-RDoc �����Υɥ�����Ȥ���Ū�η������Ѵ����뤿��Υ��饹�Ǥ���
+RDoc 形式のドキュメントを目的の形式に変換するためのクラスです。
 
 #@since 1.9.1
-��:
+例:
 
   require 'rdoc/markup/to_html'
 
   h = RDoc::Markup::ToHtml.new
   puts h.convert(input_string)
 
-�ȼ��Υե����ޥåȤ�Ԥ��褦�˥ѡ������ĥ�������Ǥ��ޤ���
+独自のフォーマットを行うようにパーサを拡張する事もできます。
 
 #@until 1.9.3
-[����] 1.9.3 ������ 1.9 �Ϥ� rdoc �Ǥ� [[c:RDoc::Markup::Formatter]] ��
-�Х������뤿�ᡢ��������Τ褦�ʳ�ĥ���Ԥ��ޤ���1.9.3 �ʲ��Ǥ��Τ褦
-�ʳ�ĥ��Ԥ��������� rdoc 3.7 �ʹߤ� RubyGems �ǥ��󥹥ȡ��뤷�Ƥ���
-������
+[注意] 1.9.3 以前の 1.9 系の rdoc では [[c:RDoc::Markup::Formatter]] に
+バグがあるため、下記の例のような拡張が行えません。1.9.3 以下でこのよう
+な拡張を行いたい場合は rdoc 3.7 以降を RubyGems でインストールしてくだ
+さい。
 #@end
 
-��:
+例:
 
   require 'rdoc/markup'
   require 'rdoc/markup/to_html'
 
   class WikiHtml < RDoc::Markup::ToHtml
-    # WikiWord �Υե���Ȥ��֤�ɽ����
+    # WikiWord のフォントを赤く表示。
     def handle_special_WIKIWORD(special)
       "<font color=red>" + special.text + "</font>"
     end
   end
 
   m = RDoc::Markup.new
-  # { �� } �ޤǤ� :STRIKE �ǥե����ޥåȤ��롣
+  # { 〜 } までを :STRIKE でフォーマットする。
   m.add_word_pair("{", "}", :STRIKE)
-  # <no> �� </no> �ޤǤ� :STRIKE �ǥե����ޥåȤ��롣
+  # <no> 〜 </no> までを :STRIKE でフォーマットする。
   m.add_html("no", :STRIKE)
 
-  # WikiWord ���ɲá�
+  # WikiWord を追加。
   m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
 
   wh = WikiHtml.new(m)
-  # :STRIKE �Υե����ޥåȤ� <strike> �� </strike> �˻��ꡣ
+  # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
   wh.add_tag(:STRIKE, "<strike>", "</strike>")
 
   puts "<body>#{wh.convert ARGF.read}</body>"
 
-�Ѵ�����������ѹ������硢�ե����ޥå�(��. [[c:RDoc::Markup::ToHtml]])
-���ѹ�����ĥ����ɬ�פ�����ޤ���
+変換する形式を変更する場合、フォーマッタ(例. [[c:RDoc::Markup::ToHtml]])
+を変更、拡張する必要があります。
 #@else
-��:
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -116,54 +116,54 @@ RDoc �����Υɥ�����Ȥ���Ū�η������Ѵ����뤿��Υ��饹�Ǥ���
 
   puts m.convert(input_string, h)
 
-�ȼ��Υե����ޥåȤ�Ԥ��褦�˥ѡ������ĥ�������Ǥ��ޤ���
+独自のフォーマットを行うようにパーサを拡張する事もできます。
 
-��:
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
 
   class WikiHtml < SM::ToHtml
-    # WikiWord �Υե���Ȥ��֤�ɽ����
+    # WikiWord のフォントを赤く表示。
     def handle_special_WIKIWORD(special)
       "<font color=red>" + special.text + "</font>"
     end
   end
 
   m = SM::SimpleMarkup.new
-  # { �� } �ޤǤ� :STRIKE �ǥե����ޥåȤ��롣
+  # { 〜 } までを :STRIKE でフォーマットする。
   m.add_word_pair("{", "}", :STRIKE)
-  # <no> �� </no> �ޤǤ� :STRIKE �ǥե����ޥåȤ��롣
+  # <no> 〜 </no> までを :STRIKE でフォーマットする。
   m.add_html("no", :STRIKE)
 
-  # WikiWord ���ɲá�
+  # WikiWord を追加。
   m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
 
   h = WikiHtml.new
-  # :STRIKE �Υե����ޥåȤ� <strike> �� </strike> �˻��ꡣ
+  # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
   h.add_tag(:STRIKE, "<strike>", "</strike>")
 
   puts "<body>" + m.convert(ARGF.read, h) + "</body>"
 
-�Ѵ�����������ѹ������硢�ե����ޥå�(��. [[c:SM::ToHtml]]) ���ѹ���
-��ĥ����ɬ�פ�����ޤ���
+変換する形式を変更する場合、フォーマッタ(例. [[c:SM::ToHtml]]) を変更、
+拡張する必要があります。
 #@end
 
 == Constants
 
 --- SPACE -> ?\s
 
-����ʸ���Ǥ���?\s ���֤��ޤ����饤�֥��������ǻ��Ѥ��ޤ���
+空白文字です。?\s を返します。ライブラリの内部で使用します。
 
 --- SIMPLE_LIST_RE -> Regexp
 
-�ꥹ�Ȥ˥ޥå���������ɽ���Ǥ����饤�֥��������ǻ��Ѥ��ޤ���
+リストにマッチする正規表現です。ライブラリの内部で使用します。
 
-��٥��̵ͭ����鷺�ޥå����ޤ���
+ラベルの有無を問わずマッチします。
 
 --- LABEL_LIST_RE -> Regexp
 
-��٥��դ��ꥹ�Ȥ˥ޥå���������ɽ���Ǥ����饤�֥��������ǻ��Ѥ��ޤ���
+ラベル付きリストにマッチする正規表現です。ライブラリの内部で使用します。
 
 == Class Methods
 
@@ -177,31 +177,31 @@ RDoc �����Υɥ�����Ȥ���Ū�η������Ѵ����뤿��Υ��饹�Ǥ���
 --- new -> SM:SimpleMarkup
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
 #@since 1.9.3
-@param attribute_manager [[c:Rdoc::AttributeManager]] ���֥������Ȥ��
-                         �ꤷ�ޤ���
+@param attribute_manager [[c:Rdoc::AttributeManager]] オブジェクトを指
+                         定します。
 #@end
 
 == Instance Methods
 
 --- add_word_pair(start, stop, name) -> ()
 
-start �� stop �ǤϤ��ޤ��ʸ����(��. *bold*)��ե����ޥåȤ��оݤˤ���
-����
+start と stop ではさまれる文字列(例. *bold*)をフォーマットの対象にしま
+す。
 
-@param start ���ϤȤʤ�ʸ�������ꤷ�ޤ���
+@param start 開始となる文字列を指定します。
 
-@param stop ��λ�Ȥʤ�ʸ�������ꤷ�ޤ���start ��Ʊ��ʸ����ˤ������
-            ��ǽ�Ǥ���
+@param stop 終了となる文字列を指定します。start と同じ文字列にする事も
+            可能です。
 
-@param name [[c:SM::ToHtml]] �ʤɤΥե����ޥå��˼��̤��������̾����
-            [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
 
-@raise RuntimeError start �� "<" �ǻϤޤ�ʸ�������ꤷ������ȯ�����ޤ���
+@raise RuntimeError start に "<" で始まる文字列を指定した場合に発生します。
 
-��:
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -212,20 +212,20 @@ start �� stop �ǤϤ��ޤ��ʸ����(��. *bold*)��ե����ޥåȤ��оݤˤ���
   h.add_tag(:STRIKE, "<strike>", "</strike>")
   puts m.convert(input_string, h)
 
-�Ѵ����˼ºݤ˥ե����ޥåȤ�Ԥ��ˤ� [[m:SM::ToHtml#add_tag]] �Τ褦�ˡ�
-�ե����ޥå�¦�Ǥ�����Ԥ�ɬ�פ�����ޤ���
+変換時に実際にフォーマットを行うには [[m:SM::ToHtml#add_tag]] のように、
+フォーマッタ側でも操作を行う必要があります。
 
 --- add_html(tag, name) -> ()
 
-tag �ǻ��ꤷ��������ե����ޥåȤ��оݤˤ��ޤ���
+tag で指定したタグをフォーマットの対象にします。
 
-@param tag �ɲä��륿��̾��ʸ����ǻ��ꤷ�ޤ�����ʸ������ʸ���Τ�
-           �������ꤷ�Ƥ�Ʊ��Τ�ΤȤ��ư����ޤ���
+@param tag 追加するタグ名を文字列で指定します。大文字、小文字のど
+           ちらを指定しても同一のものとして扱われます。
 
-@param name [[c:SM::ToHtml]] �ʤɤΥե����ޥå��˼��̤��������̾����
-            [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
 
-��:
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -236,24 +236,24 @@ tag �ǻ��ꤷ��������ե����ޥåȤ��оݤˤ��ޤ���
   h.add_tag(:STRIKE, "<strike>", "</strike>")
   puts m.convert(input_string, h)
 
-�Ѵ����˼ºݤ˥ե����ޥåȤ�Ԥ��ˤ� [[m:SM::ToHtml#add_tag]] �Τ褦�ˡ�
-�ե����ޥå�¦�Ǥ�����Ԥ�ɬ�פ�����ޤ���
+変換時に実際にフォーマットを行うには [[m:SM::ToHtml#add_tag]] のように、
+フォーマッタ側でも操作を行う必要があります。
 
 --- add_special(pattern, name) -> ()
 
-pattern �ǻ��ꤷ������ɽ���˥ޥå�����ʸ�����ե����ޥåȤ��оݤˤ���
-����
+pattern で指定した正規表現にマッチする文字列をフォーマットの対象にしま
+す。
 
-�㤨�� WikiWord �Τ褦�ʡ�[[m:SM::SimpleMarkup#add_word_pair]]��
-[[m:SM::SimpleMarkup#add_html]] �ǥե����ޥåȤǤ��ʤ���Τ��Ф��ƻ���
-���ޤ���
+例えば WikiWord のような、[[m:SM::SimpleMarkup#add_word_pair]]、
+[[m:SM::SimpleMarkup#add_html]] でフォーマットできないものに対して使用
+します。
 
-@param pattern ����ɽ������ꤷ�ޤ���
+@param pattern 正規表現を指定します。
 
-@param name [[c:SM::ToHtml]] �ʤɤΥե����ޥå��˼��̤��������̾����
-            [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
 
-��:
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -270,43 +270,43 @@ pattern �ǻ��ꤷ������ɽ���˥ޥå�����ʸ�����ե����ޥåȤ��оݤˤ���
   h = WikiHtml.new
   puts m.convert(input_string, h)
 
-�Ѵ����˼ºݤ˥ե����ޥåȤ�Ԥ��ˤ� SM::ToHtml#accept_special_<name �ǻ��ꤷ��̾��>
-�Τ褦�ˡ��ե����ޥå�¦�Ǥ�����Ԥ�ɬ�פ�����ޤ���
+変換時に実際にフォーマットを行うには SM::ToHtml#accept_special_<name で指定した名前>
+のように、フォーマッタ側でも操作を行う必要があります。
 
 --- convert(str, formatter) -> object | ""
 
-str �ǻ��ꤵ�줿ʸ����� formatter ���Ѵ������ޤ���
+str で指定された文字列を formatter に変換させます。
 
-@param str �Ѵ�����ʸ�������ꤷ�ޤ���
+@param str 変換する文字列を指定します。
 
-@param formatter [[c:SM::ToHtml]]��[[c:SM::ToLaTeX]] �ʤɤΥ��󥹥���
-                 ����ꤷ�ޤ���
+@param formatter [[c:SM::ToHtml]]、[[c:SM::ToLaTeX]] などのインスタンス
+                 を指定します。
 
-�Ѵ���̤� formatter �ˤ�ä�ʸ�����������֤��ޤ���
+変換結果は formatter によって文字列や配列を返します。
 
 --- content -> String
 
-�Ѵ�����ʸ������֤��ޤ���
+変換する文字列を返します。
 
-rdoc �饤�֥��ΥǥХå����Ӥ˻��Ѥ��ޤ���
-[[m:SM::SimpleMarkup#convert]] �θ�˼¹Ԥ��ޤ���
+rdoc ライブラリのデバッグ用途に使用します。
+[[m:SM::SimpleMarkup#convert]] の後に実行します。
 
-�Ѵ��Τ���˲ù��������֥������Ȥ���Ԥ�Ϣ�뤷����Τ��֤����ᡢ�Ѵ���
-��ʸ����ȷ�̤��ۤʤ��������ޤ���
+変換のために加工したオブジェクトを改行で連結したものを返すため、変換前
+の文字列と結果が異なる事があります。
 
 @see [[m:SM::SimpleMarkup#convert]]
 
 --- get_line_types -> [Symbol]
 
-�Ѵ�����ʸ����γƹԤΥ����פ� [[c:Symbol]] ��������֤��ޤ���
+変換する文字列の各行のタイプを [[c:Symbol]] の配列で返します。
 
-rdoc �饤�֥��ΥǥХå����Ӥ˻��Ѥ��ޤ���
-[[m:SM::SimpleMarkup#convert]] �θ�˼¹Ԥ��ޤ���
+rdoc ライブラリのデバッグ用途に使用します。
+[[m:SM::SimpleMarkup#convert]] の後に実行します。
 
 @see [[m:SM::SimpleMarkup#convert]]
 
 #@since 1.9.3
 --- attribute_manager -> RDoc::AttributeManager
 
-���Ȥ� [[c:RDoc::AttributeManager]] ���֥������Ȥ��֤��ޤ���
+自身の [[c:RDoc::AttributeManager]] オブジェクトを返します。
 #@end

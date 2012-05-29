@@ -4,7 +4,7 @@ require syck/basenode
 require yaml/basenode
 #@end
 
-YAML �ΥΡ��ɤ�ɽ�����뤿��Υ��֥饤�֥��Ǥ���
+YAML のノードを表現するためのサブライブラリです。
 
 #@since 1.9.2
 = class Syck::YamlNode
@@ -14,7 +14,7 @@ include Syck::BaseNode
 include YAML::BaseNode
 #@end
 
-YAML �ΥΡ��ɤ�ɽ�����뤿��Υ��饹�Ǥ���
+YAML のノードを表現するためのクラスです。
 
 == class methods
 
@@ -24,54 +24,54 @@ YAML �ΥΡ��ɤ�ɽ�����뤿��Υ��饹�Ǥ���
 --- new(type, val) -> YAML::YamlNode
 #@end
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param type ������ʸ����ǻ��ꤷ�ޤ���
+@param type タグを文字列で指定します。
 
-@param val �ͤ�ʸ����ǻ��ꤷ�ޤ���
+@param val 値を文字列で指定します。
 
 == instance methods
 
 --- anchor -> object
 
-���Ѥ���Ƥ��ޤ���
+使用されていません。
 
 --- anchor=(val)
 
-���Ѥ���Ƥ��ޤ���
+使用されていません。
 
 --- kind -> "map" | "seq" | "scalar"
 
-�Ρ��ɤμ��̤�ʸ������֤��ޤ���
+ノードの種別を文字列で返します。
 
 --- kind=(val)
 
-�Ρ��ɤμ��̤�ʸ����ǻ��ꤷ�ޤ���
+ノードの種別を文字列で指定します。
 
-�桼����ľ�ܻ��Ѥ�����Ϥ���ޤ���
+ユーザが直接使用する事はありません。
 
 --- transform -> object
 
-���Ȥ�ɽ�����륪�֥������Ȥ� Ruby �Υ��֥������Ȥˤ����֤��ޤ���
+自身が表現するオブジェクトを Ruby のオブジェクトにして返します。
 
-[����] ư��ޤ���
+[注意] 動作しません。
 
 --- type_id -> String
 
-���ȤΥ�����ʸ������֤��ޤ���
+自身のタグを文字列で返します。
 
 --- type_id=(val)
 
-���ȤΥ�����ʸ����ǻ��ꤷ�ޤ���
+自身のタグを文字列で指定します。
 
-�桼����ľ�ܻ��Ѥ�����Ϥ���ޤ���
+ユーザが直接使用する事はありません。
 
 --- value -> String | Array | Hash
 
-�ͤ��֤��ޤ���
+値を返します。
 
 --- value=(val)
 
-���Ȥ��ͤ� val �����ꤷ�ޤ���
+自身の値に val を設定します。
 
-�桼����ľ�ܻ��Ѥ�����Ϥ���ޤ���
+ユーザが直接使用する事はありません。

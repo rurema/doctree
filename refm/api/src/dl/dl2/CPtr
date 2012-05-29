@@ -1,43 +1,43 @@
 = class DL::CPtr < Object
 
-�����ΰ��ɽ�����饹�Ǥ���C ����Υݥ��󥿤��������ޤ��� 
+メモリ領域を表すクラスです。C 言語のポインタに相当します。 
 
 == Singleton Methods
 
 --- new(addr, size = 0, free = nil)   -> DL::CPtr
 
-Ϳ����줿 addr ���ؤ������ΰ��ɽ�� CPtr ���֥������Ȥ����������֤��ޤ���
+与えられた addr が指すメモリ領域を表す CPtr オブジェクトを生成して返します。
 
-size ����ꤷ����硢���ɥ쥹 addr �˳��ݤ���Ƥ�������ΰ�Υ�������
-size �Ǥ���Ȳ��ꤵ��ޤ���GC �� free �ؿ�����Ѥ��ƥ����������ޤ���
+size を指定した場合、アドレス addr に確保されているメモリ領域のサイズは
+size であると仮定されます。GC は free 関数を使用してメモリを解放します。
 
-@param addr �������� CPtr ���֥������Ȥ��ؤ����ɥ쥹�������ǻ��ꤷ�ޤ���
+@param addr 生成する CPtr オブジェクトが指すアドレスを整数で指定します。
 
-@param size �������� CPtr ���֥������Ȥ��ؤ������ΰ�Υ������������ǻ��ꤷ�ޤ���
+@param size 生成する CPtr オブジェクトが指すメモリ領域のサイズを整数で指定します。
 
-@param free GC ���˸ƤФ�� free �ؿ��� [[c:DL::CFunc]] ���֥������Ȥ������ǻ��ꤷ�ޤ���
+@param free GC 時に呼ばれる free 関数を [[c:DL::CFunc]] オブジェクトか整数で指定します。
 
 --- malloc(size, free = nil)   -> DL::CPtr
 
-Ϳ����줿Ĺ�� size �Υ����ΰ����ݤ��������ɽ�� CPtr ���֥������Ȥ����������֤��ޤ���
+与えられた長さ size のメモリ領域を確保し、それを表す CPtr オブジェクトを生成して返します。
 
-@param size ���ݤ����������ΰ�Υ������������ǻ��ꤷ�ޤ���
+@param size 確保したいメモリ領域のサイズを整数で指定します。
 
-@param free GC ���˸Ƥ٤�� CPtr ���֥������Ȥ� free �ؿ��� [[c:DL::CFunc]] ���֥������Ȥ������ǻ��ꤷ�ޤ���
+@param free GC 時に呼べれる CPtr オブジェクトの free 関数を [[c:DL::CFunc]] オブジェクトか整数で指定します。
 
 --- [](val)       -> DL::CPtr
 --- to_ptr(val)   -> DL::CPtr
 
-Ϳ����줿 val ��ؤ� CPtr ���֥������Ȥ����������֤��ޤ���
+与えられた val を指す CPtr オブジェクトを生成して返します。
 
-val ��ʸ����ξ���ʸ���󤬳�Ǽ����Ƥ�������ΰ��ؤ� CPtr ���֥������Ȥ��֤��ޤ���
-IO ���֥������Ȥξ��� FILE �ݥ��󥿤�ɽ�� CPtr ���֥������Ȥ��֤��ޤ���
-val �� to_ptr �᥽�åɤ��������Ƥ�����ϡ�val.to_ptr ��ƤӤޤ���
-��ʳ��ξ��ϡ��������Ѵ�������򥢥ɥ쥹�Ȥ��� CPtr ���֥������Ȥ��֤��ޤ���
+val が文字列の場合は文字列が格納されているメモリ領域を指す CPtr オブジェクトを返します。
+IO オブジェクトの場合は FILE ポインタを表す CPtr オブジェクトを返します。
+val に to_ptr メソッドが定義されている場合は、val.to_ptr を呼びます。
+上以外の場合は、整数に変換しそれをアドレスとする CPtr オブジェクトを返します。
 
-@param val Ruby ���֥������Ȥ���ꤷ�ޤ���
+@param val Ruby オブジェクトを指定します。
 
-��:
+例:
 
  require 'dl'
  s = "abc"
@@ -48,13 +48,13 @@ val �� to_ptr �᥽�åɤ��������Ƥ�����ϡ�val.to_ptr ��ƤӤޤ���
 
 --- +(n)   -> DL::CPtr
 
-���ȤΥ��ɥ쥹�� n �Х��Ȥ�­���������� CPtr ���֥������Ȥ��֤��ޤ���
+自身のアドレスに n バイトを足した新しい CPtr オブジェクトを返します。
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
-@param n ���ɥ쥹����ʬ�������ǻ��ꤷ�ޤ���
+@param n アドレスの増分を整数で指定します。
 
-��:
+例:
  require 'dl'
  
  s = 'abc'
@@ -66,13 +66,13 @@ val �� to_ptr �᥽�åɤ��������Ƥ�����ϡ�val.to_ptr ��ƤӤޤ���
 --- ptr   -> DL::CPtr
 --- +@    -> DL::CPtr
 
-���Ȥλؤ��ͤ� CPtr �ˤ����֤��ޤ���
-���Ȥλؤ��ͤϥݥ��󥿤Ǥ���Ȳ��ꤷ�ޤ���
-C ����ˤ�����ݥ��󥿤Υݥ��󥿤��Ф�����ܻ��� *p ��Ʊ���Ǥ��� 
+自身の指す値を CPtr にして返します。
+自身の指す値はポインタであると仮定します。
+C 言語におけるポインタのポインタに対する間接参照 *p と同じです。 
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
-��:
+例:
 
  require 'dl/import'
  
@@ -85,13 +85,13 @@ C ����ˤ�����ݥ��󥿤Υݥ��󥿤��Ф�����ܻ��� *p ��Ʊ���Ǥ���
 
 --- -(n)   -> DL::CPtr
 
-���ȤΥ��ɥ쥹���� n �Х��Ȥ������������ CPtr ���֥������Ȥ��֤��ޤ���
+自身のアドレスから n バイトを引いた新しい CPtr オブジェクトを返します。
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
-@param n ���ɥ쥹�κ�ʬ�������ǻ��ꤷ�ޤ���
+@param n アドレスの差分を整数で指定します。
 
-��:
+例:
  require 'dl' 
  
  s = 'abc'
@@ -104,12 +104,12 @@ C ����ˤ�����ݥ��󥿤Υݥ��󥿤��Ф�����ܻ��� *p ��Ʊ���Ǥ���
 --- ref   -> DL::CPtr
 --- -@    -> DL::CPtr
 
-���Ȥ�ؤ� CPtr ���֥������Ȥ��֤��ޤ���
-C ����ˤ�����ݥ��󥿤ؤΥ��ɥ쥹�黻�Ҥ�Ŭ�� &p ��Ʊ���Ǥ���
+自身を指す CPtr オブジェクトを返します。
+C 言語におけるポインタへのアドレス演算子の適用 &p と同じです。
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
-��:
+例:
 
  require 'dl/import'
  
@@ -124,14 +124,14 @@ C ����ˤ�����ݥ��󥿤ؤΥ��ɥ쥹�黻�Ҥ�Ŭ�� &p ��Ʊ���Ǥ���
 --- <=>(other)    -> Integer
 #@todo 
 
-�ݥ��󥿤λؤ����ɥ쥹���羮����Ӥ��ޤ���
+ポインタの指すアドレスの大小を比較します。
 
 --- eql?(other)     -> bool
 --- ==(other)       -> bool
 
-�ݥ��󥿤λؤ����ɥ쥹��Ʊ�줫�ɤ�����Ƚ�ꤷ�ޤ���
+ポインタの指すアドレスが同一かどうかを判定します。
 
-��:
+例:
 
  require 'dl' 
  
@@ -145,10 +145,10 @@ C ����ˤ�����ݥ��󥿤ؤΥ��ɥ쥹�黻�Ҥ�Ŭ�� &p ��Ʊ���Ǥ���
 
 --- [](offset)            -> Integer
 
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ����Ƭ�������Ȥ����֤��ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域の先頭を整数として返します。
 
 
-��:
+例:
 
  require 'dl'
  
@@ -159,18 +159,18 @@ C ����ˤ�����ݥ��󥿤ؤΥ��ɥ쥹�黻�Ҥ�Ŭ�� &p ��Ʊ���Ǥ���
 
 --- [](offset, len)       -> String
 
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ����Ƭ len �Х��Ȥ�ʣ������
-ʸ����Ȥ����֤��ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域の先頭 len バイトを複製し、
+文字列として返します。
 
-(self + offset).to_s(len) ��Ʊ���Ǥ���
-offset + len �����ȤΥ�������꾮�������򸡾ڤ��ޤ���
+(self + offset).to_s(len) と同等です。
+offset + len が自身のサイズより小さいかを検証しません。
 
-@param offset �ͤ��������ΰ����Ƭ�Υ��ɥ쥹�ޤǤΥ��ե��åȤ�������Ϳ���ޤ���
+@param offset 値を得たい領域の先頭のアドレスまでのオフセットを整数で与えます。
 
-@param len �ͤ��������ΰ�Υ���������ꤷ�ޤ���
+@param len 値を得たい領域のサイズを指定します。
 
 
-��:
+例:
 
  require 'dl'
  
@@ -181,11 +181,11 @@ offset + len �����ȤΥ�������꾮�������򸡾ڤ��ޤ���
 
 --- []=(offset, n)
 
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ����ꤵ�줿 n �˽񤭴����ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域を指定された n に書き換えます。
 
-@param n ��������ꤷ�ޤ���
+@param n 整数を指定します。
 
-��:
+例:
 
  require 'dl'
 
@@ -197,20 +197,20 @@ offset + len �����ȤΥ�������꾮�������򸡾ڤ��ޤ���
 
 --- []=(offset, len, v) 
 
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ����Ƭ len �Х��Ȥ�
-ʸ���� str �򥳥ԡ����ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域の先頭 len バイトに
+文字列 str をコピーします。
 
-str �Υ������� len ��꾮�������ϡ��Ĥ���ΰ�� 0 �����ޤ���
-���ԡ�����ΰ褬 len ����礭�������ڤ��ޤ���
+str のサイズが len より小さい場合は、残りの領域を 0 で埋めます。
+コピー先の領域が len より大きいか検証しません。
 
-@param offset �񤭴������������ΰ�Υ��ե��åȤ�������Ϳ���ޤ���
+@param offset 書き換えたいメモリ領域のオフセットを整数で与えます。
 
-@param len �񤭴������������ΰ�Υ������������ǻ��ꤷ�ޤ���
+@param len 書き換えたいメモリ領域のサイズを整数で指定します。
 
-@param v �����ΰ�˥��åȤ������Х������ʸ����ǻ��ꤷ�ޤ���
+@param v メモリ領域にセットしたいバイト列を文字列で指定します。
 
 
-��:
+例:
 
  require 'dl'
  
@@ -222,61 +222,61 @@ str �Υ������� len ��꾮�������ϡ��Ĥ���ΰ�� 0 �����ޤ���
 
 --- free     -> DL::CFunc
 
-GC ��������������Τ˻��Ѥ��� [[c:DL::CFunc]] ���֥������Ȥ��֤��ޤ���
+GC がメモリを解放するのに使用する [[c:DL::CFunc]] オブジェクトを返します。
 
-��������� [[m:DL::CPtr#free=]] �� [[m:DL::CPtr.new]] �ˤ�ä����ꤵ��ޤ���
+これは普通 [[m:DL::CPtr#free=]] や [[m:DL::CPtr.new]] によって設定されます。
 
 --- free=(cfunc)
 
-GC �����Ȥ��������Τ˻Ȥ��ؿ��� [[c:DL::CFunc]] �ǻ��ꤷ�ޤ���
+GC が自身を解放するのに使う関数を [[c:DL::CFunc]] で指定します。
 
-@param cfunc ���Ȥ��������Τ˻Ȥ���ؿ��� [[c:DL::CFunc]] �������ǻ��ꤷ�ޤ���
+@param cfunc 自身を解放するのに使われる関数を [[c:DL::CFunc]] か整数で指定します。
 
 --- inspect
 #@todo 
 
 --- null?    -> bool
 
-���Ȥ� NULL �ʤ� true ���֤��ޤ��������Ǥʤ��ʤ� false ���֤��ޤ���
+自身が NULL なら true を返します。そうでないなら false を返します。
 
 --- size        -> Integer
 --- size=(s)
 
-���Ȥλؤ��ΰ�Υ�������ɽ�����������Ǥ���
+自身の指す領域のサイズを表すアクセサです。
 
-s ����ꤷ�Ƥ⼫�Ȥ��ؤ������ΰ�Υ������� s �ˤʤ�褦�˺Ƴ�����ƤϤ��ޤ���
+s を指定しても自身が指すメモリ領域のサイズが s になるように再割り当てはしません。
 
-@param s ���Ȥ��ؤ�����Υ������������ǻ��ꤷ�ޤ���
+@param s 自身が指すメモリのサイズを整数で指定します。
 
 --- to_i    -> Integer
 
-���Ȥ��ؤ����ɥ쥹���������֤��ޤ���
+自身が指すアドレスを整数で返します。
 
 --- to_s         -> String
 --- to_s(len)    -> String
 
-���Ȥ��ؤ��ΰ褫��Ĺ�� len ��ʸ�����ʣ�������֤��ޤ���
+自身が指す領域から長さ len の文字列を複製して返します。
 
-len ���ά�������ϡ�ʸ����ν���� '\0' �Ǥ���Ȳ��ꤷ�ơ�
-[[man:strlen(3)]] ��Ȥä�Ĺ���򻻽Ф��ޤ���
+len を省略した場合は、文字列の終りは '\0' であると仮定して、
+[[man:strlen(3)]] を使って長さを算出します。
 
-@param len ʸ�����Ĺ���������ǻ��ꤷ�ޤ���
+@param len 文字列の長さを整数で指定します。
 
 --- to_str         -> String
 --- to_str(len)    -> String
 
-���Ȥ��ؤ��ΰ褫��Ĺ�� len ��ʸ�����ʣ�������֤��ޤ���
+自身が指す領域から長さ len の文字列を複製して返します。
 
-len ���ά�������ϡ�self.size �򤽤�����˻Ȥ��ޤ���
+len を省略した場合は、self.size をその代わりに使います。
 
-@param len ʸ�����Ĺ���������ǻ��ꤷ�ޤ���
+@param len 文字列の長さを整数で指定します。
 
 --- to_value    -> object
 
-���Ȥϥҡ��פ˳��ݤ��줿 Ruby �Υ��֥������Ȥ�ؤ��ݥ��󥿤Ǥ���Ȳ��ꤷ�ơ�
-���Ȥ��ؤ����֥������Ȥ��֤��ޤ���
+自身はヒープに確保された Ruby のオブジェクトを指すポインタであると仮定して、
+自身が指すオブジェクトを返します。
 
-��:
+例:
 
  require 'dl'
  

@@ -1,9 +1,9 @@
-�����Ф�������뤿��Υ饤�֥��Ǥ���
+サーバを実装するためのライブラリです。
 
-��:
+例:
 
   #
-  # 1970ǯ����ηв���֤��ä��֤������Ф���Ǥ���
+  # 1970年からの経過時間を秒で返すサーバの例です。
   #
   class TimeServer < GServer
     def initialize(port=10001, *args)
@@ -14,187 +14,187 @@
     end
   end
   
-  # ������������ǥ����Ф򥹥����Ȥ��ޤ���
+  # ログを取る設定でサーバをスタートします。
   server = TimeServer.new
   server.audit = true                  # Turn logging on.
   server.start
   
-  # �ޤ������Ф�ư���Ƥ��뤫���ǧ���Ƥߤޤ��礦��
+  # まだサーバが動いているかを確認してみましょう。
   GServer.in_service?(10001)           # => true
   server.stopped?                      # => false
   
-  # �����Ф�ߤ�ޤ���
+  # サーバを止めます。
   server.shutdown
   
-  # �������ޥ����Ф�ߤ�뤳�Ȥ�Ǥ��ޤ���
+  # すぐさまサーバを止めることもできます。
   GServer.stop(10001)
-  # ������� server.stop �Ǥ��ǽ�Ǥ���
+  # もちろん server.stop でも可能です。
 
 = class GServer < Object
 
-�����Ф�������뤿��Υ��饹�Ǥ���[[c:GServer]] ��Ѿ��������������饹��������ƻȤ��ޤ���
-fork �ǤϤʤ�����åɤ�ȤäƤ��ޤ���
+サーバを実装するためのクラスです。[[c:GServer]] を継承した新しいクラスを定義して使います。
+fork ではなくスレッドを使っています。
 
 == Constants
 
 --- DEFAULT_HOST -> String
 
-"127.0.0.1" �Ǥ���
+"127.0.0.1" です。
 
 == Class Methods
 
 --- new(port, host = GServer::DEFAULT_HOST, maxConnections = 4, stdlog = $stderr, audit = false, debug = false)
 
-GServer ���֥������Ȥ��������ޤ���
+GServer オブジェクトを生成します。
 
-@param port �����Ф���å��󤹤�ݡ��Ȥ���ꤷ�ޤ���
+@param port サーバがリッスンするポートを指定します。
 
-@param host �ۥ��Ȥ���ꤷ�ޤ���
+@param host ホストを指定します。
 
-@param maxConnections ������³������ꤷ�ޤ����ǥե���Ȥ� 4 �Ǥ���
+@param maxConnections 最大接続数を指定します。デフォルトは 4 です。
 
-@param stdlog �����ν��������ꤷ�ޤ����ǥե���Ȥ�ɸ�२�顼���ϤǤ���
+@param stdlog ログの出力先を指定します。デフォルトは標準エラー出力です。
 
-@param audit ������ꤹ��ȥ����Фε�ư������³�������ǻ�����߻��˥�������Ϥ��ޤ���
+@param audit 真を指定するとサーバの起動時、接続時、切断時、停止時にログを出力します。
 
-@param debug ������ꤹ��ȥǥХå���������Ϥ��ޤ���
+@param debug 真を指定するとデバッグログを出力します。
 
 --- in_service?(port, host = GServer::DEFAULT_HOST) -> bool
 
-Ϳ����줿 host �� port �� GServer ���֥������Ȥ�Ʊ���ץ��������
-�����ӥ���ʤ鿿���֤��ޤ���
+与えられた host と port で GServer オブジェクトが同じプロセス内で
+サービス中なら真を返します。
 
-@param port �ݡ����ֹ����ꤷ�ޤ���
+@param port ポート番号を指定します。
 
-@param host �ۥ��Ȥ���ꤷ�ޤ���
+@param host ホストを指定します。
 
 --- stop(port, host = DEFAULT_HOST) -> ()
 
-Ϳ����줿 host �� port ���б����� GServer ���֥������Ȥ���ߤ��ޤ���
+与えられた host と port に対応する GServer オブジェクトを停止します。
 
-@param port �ݡ����ֹ����ꤷ�ޤ���
+@param port ポート番号を指定します。
 
-@param host �ۥ��Ȥ���ꤷ�ޤ���
+@param host ホストを指定します。
 
 == Instance Methods
 
 --- audit -> bool
-���Ǥ���С������Фε�ư������³�������ǻ�����߻��˥�������Ϥ��ޤ���
+真であれば、サーバの起動時、接続時、切断時、停止時にログを出力します。
 
 @see [[m:GServer#starting]], [[m:GServer#connecting]], [[m:GServer#disconnecting]], [[m:GServer#stopping]]
 
 --- audit=(bool)
 
-������ꤹ��ȡ������Фε�ư������³�������ǻ�����߻��˥�������Ϥ��ޤ���
+真を指定すると、サーバの起動時、接続時、切断時、停止時にログを出力します。
 
-@param bool �����ͤ���ꤷ�ޤ���
+@param bool 真偽値を指定します。
 
 @see [[m:GServer#starting]], [[m:GServer#connecting]], [[m:GServer#disconnecting]], [[m:GServer#stopping]]
 
 --- connections() -> Fixnum
 
-������³���Ƥ��륯�饤����Ȥο����֤��ޤ���
+現在接続しているクライアントの数を返します。
 
 --- debug -> bool
 
-�ǥХå��⡼�ɤʤ鿿�������Ǥʤ��ʤ鵶���֤��ޤ���
+デバッグモードなら真、そうでないなら偽を返します。
 
 --- debug=(bool)
 
-������ꤹ��ȥǥХå��⡼�ɤ�ͭ���ˤʤ�ޤ���
-������ꤹ��ȥǥХå��⡼�ɤ�̵���ˤʤ�ޤ���
+真を指定するとデバッグモードが有効になります。
+偽を指定するとデバッグモードが無効になります。
 
-@param bool �����ͤ���ꤷ�ޤ���
+@param bool 真偽値を指定します。
 
 --- host -> String
 
-�ۥ��Ȥ�ʸ������֤��ޤ���
+ホストを文字列で返します。
 
 --- join
 
-�����ФΥ����ӥ���¹Ԥ��Ƥ��륹��åɤ� [[m:Thread#join]] ���ޤ���
+サーバのサービスを実行しているスレッドを [[m:Thread#join]] します。
 
 @see [[m:Thread#join]]
 
 --- maxConnections -> Fixnum
 
-�����դ��������³�����֤��ޤ���
+受け付ける最大接続数を返します。
 
 --- port -> Fixnum
 
-�ݡ��Ȥ�����֤��ޤ���
+ポートを数で返します。
 
 --- serve(io) -> nil
 
-���⤷�ޤ��󡣥��֥��饹�ǥ����С��饤�ɤ��ޤ���
+何もしません。サブクラスでオーバーライドします。
 
-@param io ���饤����Ȥ���³���Ƥ��� [[c:TCPSocket]] ����ꤷ�ޤ���
+@param io クライアントと接続している [[c:TCPSocket]] を指定します。
 
 --- shutdown -> true
 
-���Ȥ���ߤ��ޤ���
+自身を停止します。
 
 --- start(maxConnections = -1) -> self
 
-���Ȥ�ư���ޤ���
+自身を起動します。
 
-@param maxConnections 0 ����礭�����ͤ���ꤹ��ȡ�������³���Ȥ������ꤵ��ޤ���
+@param maxConnections 0 より大きい数値を指定すると、最大接続数として設定されます。
 
 --- stdlog -> IO
 
-��������Ϥ������ [[c:IO]] ���֥������Ȥ��֤��ޤ����ǥե���Ȥ� [[m:$stderr]] �Ǥ���
+ログを出力する先の [[c:IO]] オブジェクトを返します。デフォルトは [[m:$stderr]] です。
 
 --- stdlog=(io)
 
-��������Ϥ������ [[c:IO]] ���֥������Ȥ����ꤷ�ޤ���
+ログを出力する先の [[c:IO]] オブジェクトを設定します。
 
-@param io ��������Ϥ������ [[c:IO]] ���֥������Ȥ����ꤷ�ޤ���
+@param io ログを出力する先の [[c:IO]] オブジェクトを設定します。
 
 --- stop -> ()
 
-���Ȥ򤹤�����ߤ��ޤ���
+自身をすぐに停止します。
 
 --- stopped? -> bool
 
-���Ȥ���ߤ��Ƥ���ʤ鿿���֤��ޤ���
+自身が停止しているなら真を返します。
 
 == Protected Instance Methods
 
 --- connecting(client) -> true
 
-[[m:GServer#audit]] �����ʤ�С����饤�������³���˸ƤФ�ޤ���
+[[m:GServer#audit]] が真ならば、クライアント接続時に呼ばれます。
 
-���֥��饹�ǥ����С��饤�ɤ��ޤ���
+サブクラスでオーバーライドします。
 
-@param client ���饤����Ȥ���³���Ƥ��� [[c:TCPSocket]] �Ǥ���
+@param client クライアントと接続している [[c:TCPSocket]] です。
 
 --- disconnecting(clientPort) -> ()
 
-[[m:GServer#audit]] �����ʤ�С����饤����ȤȤ���³��λ���˸ƤФ�ޤ���
+[[m:GServer#audit]] が真ならば、クライアントとの接続終了時に呼ばれます。
 
-���֥��饹�ǥ����С��饤�ɤ��ޤ���
+サブクラスでオーバーライドします。
 
-@param clientPort ��³���Ƥ������饤����ȤΥݡ��ȤǤ���
+@param clientPort 接続していたクライアントのポートです。
 
 --- starting -> ()
 
-[[m:GServer#audit]] �����ʤ�С������е�ư���˸ƤФ�ޤ���
-���֥��饹�ǥ����С��饤�ɤ��ޤ���
+[[m:GServer#audit]] が真ならば、サーバ起動時に呼ばれます。
+サブクラスでオーバーライドします。
 
 --- stopping -> ()
 
-[[m:GServer#audit]] �����ʤ�С���������߻��˸ƤФ�ޤ���
-���֥��饹�ǥ����С��饤�ɤ��ޤ���
+[[m:GServer#audit]] が真ならば、サーバ停止時に呼ばれます。
+サブクラスでオーバーライドします。
 
 --- error(detail) -> ()
 
-[[m:GServer#debug]] �����ξ�硢�㳰��ȯ������ȸƤФ�ޤ���
+[[m:GServer#debug]] が真の場合、例外が発生すると呼ばれます。
 
-@param detail �㳰���֥������ȤǤ���
+@param detail 例外オブジェクトです。
 
 --- log(msg) -> ()
 
-Ϳ����줿ʸ���������˵�Ͽ���ޤ���
+与えられた文字列をログに記録します。
 
-@param msg �����Ȥ��Ƶ�Ͽ����ʸ�������ꤷ�ޤ���
+@param msg ログとして記録する文字列を指定します。
 

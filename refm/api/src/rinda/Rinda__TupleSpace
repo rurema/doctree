@@ -3,15 +3,15 @@
 include MonitorMixin
 include DRb::DRbUndumped
 
-Tuple Space �Τ���Υ��饹�Ǥ���
-���̤� [[c:Rinda::TupleSpaceProxy]] ��𤷤ƻȤ��ޤ���
+Tuple Space のためのクラスです。
+普通は [[c:Rinda::TupleSpaceProxy]] を介して使います。
 
 == Class Methods
 
 --- new(period = 60)
 #@todo
 
-[[c:Rinda::TupleSpace]] ���֥������Ȥ��������ޤ���
+[[c:Rinda::TupleSpace]] オブジェクトを生成します。
 
 == Instance Methods
 
@@ -55,15 +55,15 @@ tuples.
 --- take(tuple, sec = nil) {|template| ... }
 #@todo
 
-tuple �˥ޥå����륿�ץ�򥿥ץ륹�ڡ���������Ф����֤��ޤ���
-�ޥå����륿�ץ뤬¸�ߤ��ʤ����ϡ��ޥå����륿�ץ뤬���ץ륹�ڡ�����
-���������ޤ��Ԥ��ޤ���
+tuple にマッチするタプルをタプルスペースから取り出して返します。
+マッチするタプルが存在しない場合は、マッチするタプルがタプルスペースに
+投入されるまで待ちます。
 
-�Ԥ����֤� sec �ä�᤮�����ˤ� take �򤢤����
-�㳰 [[c:Rinda::RequestExpiredError]] ���ꤲ�ޤ���
+待ち時間が sec 秒を過ぎた時には take をあきらめ
+例外 [[c:Rinda::RequestExpiredError]] を投げます。
 
 --- write(tuple, sec = nil)
 #@todo
 
-[[c:Rinda::Tuple]] ���֥������� tuple �򥿥ץ륹�ڡ����˲ä��ޤ���
-tuple ��������뤿��� [[c:Rinda::TupleEntry]] ���֥������Ȥ��֤��ޤ���
+[[c:Rinda::Tuple]] オブジェクト tuple をタプルスペースに加えます。
+tuple を管理するための [[c:Rinda::TupleEntry]] オブジェクトを返します。

@@ -1,92 +1,92 @@
 = class DL::PtrData < Object
 
-�����ΰ��ɽ�����饹�Ǥ���C ����Υݥ��󥿤��������ޤ���
+メモリ領域を表すクラスです。C 言語のポインタに相当します。
 
 == Class Methods
 
 --- new(addr, size = 0, free = nil)    -> DL::PtrData
 #@todo
 
-���ɥ쥹 addr ��ؤ��ݥ��󥿤��������� PtrData ���֥������Ȥ��֤��ޤ���
+アドレス addr を指すポインタに相当する PtrData オブジェクトを返します。
 
-size ����ꤷ����硢���ɥ쥹 addr �˳��ݤ���Ƥ�������ΰ�Υ�������
-size �Ǥ���Ȥ��ޤ���
-GC �� free �ؿ�����Ѥ��ƥ����������ޤ���
+size を指定した場合、アドレス addr に確保されているメモリ領域のサイズは
+size であるとします。
+GC は free 関数を使用してメモリを解放します。
 
-@param addr �������� PtrData ���֥������Ȥ��ؤ����ɥ쥹�������ǻ��ꤷ�ޤ���
+@param addr 生成する PtrData オブジェクトが指すアドレスを整数で指定します。
 
-@param size �������� PtrData ���֥������Ȥ��ؤ������ΰ�Υ������������ǻ��ꤷ�ޤ���
+@param size 生成する PtrData オブジェクトが指すメモリ領域のサイズを整数で指定します。
 
-@param free �������� PtrData ���֥������Ȥ� free �ؿ��� [[c:DL::Symbol]] �ǻ��ꤷ�ޤ���
+@param free 生成する PtrData オブジェクトの free 関数を [[c:DL::Symbol]] で指定します。
 
 --- malloc(size, free = nil)    -> DL::PtrData
 #@todo
 
-�������� size �Ǥ�������ΰ����ݤ��������ؤ� DL::PtrData ���֤��ޤ���
+サイズが size であるメモリ領域を確保し、それを指す DL::PtrData を返します。
 
-@param size ���ݤ����������ΰ�Υ���������ꤷ�ޤ���
+@param size 確保したいメモリ領域のサイズを指定します。
 
-@param free �֤��ͤ˥��åȤ���� free �ؿ��� [[c:DL::Symbol]] �ǻ��ꤷ�ޤ���
+@param free 返り値にセットされる free 関数を [[c:DL::Symbol]] で指定します。
 
 == Instance Methods
 
 --- free=(sym)    
 #@todo
 
-GC �����Ȥ��������Τ˻Ȥ��ؿ��� [[c:DL::Symbol]] �ǻ��ꤷ�ޤ���
+GC が自身を解放するのに使う関数を [[c:DL::Symbol]] で指定します。
 
-@param sym ���Ȥ��������Τ˻Ȥ���ؿ��� [[c:DL::Symbol]] �ǻ��ꤷ�ޤ���
+@param sym 自身を解放するのに使われる関数を [[c:DL::Symbol]] で指定します。
 
 --- free    -> DL::Symbol
 #@todo
 
-GC ��������������Τ˻��Ѥ��륷��ܥ륪�֥������� sym ���֤��ޤ���
-sym ������ PtrData#free= �� PtrData.new �ˤ�ä����ꤵ��ޤ���
+GC がメモリを解放するのに使用するシンボルオブジェクト sym を返します。
+sym は普通 PtrData#free= や PtrData.new によって設定されます。
 
 --- size        -> Integer
 --- size=(s)    
 #@todo
 
-���Ȥλؤ��ΰ�Υ��������֤��ޤ���
-s ����ꤷ�����ϡ����Ȥλؤ��ΰ�Υ������� s �Ǥ�������ꤷ�ޤ���
-�����������Ȥ��ؤ�����Υ������� s �ˤʤ�褦�˺Ƴ�����ƤϤ��ޤ���
+自身の指す領域のサイズを返します。
+s を指定した場合は、自身の指す領域のサイズは s であると設定します。
+ただし、自身が指すメモリのサイズが s になるように再割り当てはしません。
 
-@param s ���Ȥ��ؤ�����Υ���������ꤷ�ޤ���
+@param s 自身が指すメモリのサイズを指定します。
 
 --- null?    -> bool
 
-���Ȥ� NULL �ʤ� true ���֤��ޤ��������Ǥʤ��ʤ� false ���֤��ޤ���
+自身が NULL なら true を返します。そうでないなら false を返します。
 
 --- to_a(type)            -> [object]
 --- to_a(type, size)      -> [object]
 #@todo
 
-���Ȥ��ؤ��ΰ褫�� type �ǻ��ꤵ�줿���������ʣ�������֤��ޤ���
-type �� 'S','P','I','L','D' ������ 'F' �Τ����줫�Ǥ���
-size ����ꤷ�����ϡ����Ȥ��ؤ��ΰ褫�饵������ size �Ǥ��������
-ʣ�����ޤ���
+自身が指す領域から type で指定された型の配列を複製して返します。
+type は 'S','P','I','L','D' そして 'F' のいずれかです。
+size を指定した場合は、自身が指す領域からサイズが size である配列を
+複製します。
 
-size �����ȤΥ�������꾮�������򸡺����ޤ���
+size が自身のサイズより小さいかを検査しません。
 
-type ����ᤵ�줿������ҤǤʤ���硢����������֤��ޤ���
+type が定めされた型指定子でない場合、空の配列を返します。
 
-@param type ���Ȥ����Ǥη���Ĺ���� 1 ��ʸ����ǻ��ꤷ�ޤ���
+@param type 自身の要素の型を、長さが 1 の文字列で指定します。
 
-@param size ����������Υ������������ǻ��ꤷ�ޤ���
+@param size 得たい配列のサイズを整数で指定します。
 
 --- to_i    -> Integer
 
-���Ȥ��ؤ����ɥ쥹���������֤��ޤ���
+自身が指すアドレスを整数で返します。
 
 --- to_s         -> String
 --- to_s(len)    -> String
 
-���Ȥ��ؤ��ΰ褫��Ĺ�� len ��ʸ�����ʣ�������֤��ޤ���
+自身が指す領域から長さ len の文字列を複製して返します。
 
-len ���ά�������ϡ�ʸ����ν���� '\0' �Ǥ���Ȳ��ꤷ�ơ�
-[[man:strlen(3)]] ��Ȥä�Ĺ���򻻽Ф��ޤ���
+len を省略した場合は、文字列の終りは '\0' であると仮定して、
+[[man:strlen(3)]] を使って長さを算出します。
 
-@param len ʸ�����Ĺ���������ǻ��ꤷ�ޤ���
+@param len 文字列の長さを整数で指定します。
 
 --- to_str
 #@todo
@@ -94,11 +94,11 @@ len ���ά�������ϡ�ʸ����ν���� '\0' �Ǥ���Ȳ��ꤷ�ơ�
 --- ptr   -> DL::PtrData
 --- +@    -> DL::PtrData
 
-���Ȥλؤ��ͤ� PtrData �ˤ����֤��ޤ���
-���Ȥλؤ��ͤϥݥ��󥿤Ǥ���Ȳ��ꤷ�ޤ���
-C ����ˤ�����ݥ��󥿤Υݥ��󥿤��Ф�����ܻ��� *p ��Ʊ���Ǥ��� 
+自身の指す値を PtrData にして返します。
+自身の指す値はポインタであると仮定します。
+C 言語におけるポインタのポインタに対する間接参照 *p と同じです。 
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
  a = ['abc', 'def'].to_ptr
  p a.ptr.to_s #=> "abc"
@@ -106,123 +106,123 @@ C ����ˤ�����ݥ��󥿤Υݥ��󥿤��Ф�����ܻ��� *p ��Ʊ���Ǥ���
 --- ==(other)     -> bool
 --- eql?(other)   -> bool
 
-�ݥ��󥿤λؤ����ɥ쥹��Ʊ�줫�ɤ�����Ƚ�ꤷ�ޤ���
+ポインタの指すアドレスが同一かどうかを判定します。
 
 --- <=>(other)    -> Integer
 
-�ݥ��󥿤λؤ����ɥ쥹���羮����Ӥ��ޤ���
+ポインタの指すアドレスの大小を比較します。
 
 --- ref   -> DL::PtrData
 --- -@    -> DL::PtrData
 
-���Ȥ�ؤ� PtrData ���֥������Ȥ��֤��ޤ���
-C ����ˤ�����ݥ��󥿤ؤΥ��ɥ쥹�黻�Ҥ�Ŭ�� &p ��Ʊ���Ǥ���
+自身を指す PtrData オブジェクトを返します。
+C 言語におけるポインタへのアドレス演算子の適用 &p と同じです。
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
   s = "abc".to_ptr
   p s == s.ref.ptr #=> true
 
 --- +(n)   -> DL::PtrData
 
-���ȤΥ��ɥ쥹�� n �Х��Ȥ�­���������� PtrData ���֥������Ȥ��֤��ޤ���
+自身のアドレスに n バイトを足した新しい PtrData オブジェクトを返します。
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
-@param n ���ɥ쥹����ʬ�������ǻ��ꤷ�ޤ���
+@param n アドレスの増分を整数で指定します。
 
 --- -(n)   -> DL::PtrData
 
-���ȤΥ��ɥ쥹���� n �Х��Ȥ������������ PtrData ���֥������Ȥ��֤��ޤ���
+自身のアドレスから n バイトを引いた新しい PtrData オブジェクトを返します。
 
-�����֤��ͤˤϡ�free �ؿ������åȤ���Ƥ��ޤ���
+この返り値には、free 関数がセットされていません。
 
-@param n ���ɥ쥹�κ�ʬ�������ǻ��ꤷ�ޤ���
+@param n アドレスの差分を整数で指定します。
 
 --- struct!(type, *members)    -> nil
 #@todo
 
-��¤�ΤΥ��Ф˥᥽�å� [[m:DL::PtrData#[] ]] �ǥ��������Ǥ���褦�ˤ��ޤ���
-C ����ˤ����빽¤�ΤΥݥ��󥿤ؤΥ��㥹�Ȥ�Ʊ���Ǥ���
+構造体のメンバにメソッド [[m:DL::PtrData#[] ]] でアクセスできるようにします。
+C 言語における構造体のポインタへのキャストと同じです。
 
  ptr = DL.malloc(DL.sizeof('LL'))
  ptr.struct!('LL', :tv_sec, :tv_usec)
  ptr[:tv_sec] = 10
  p ptr[:tv_sec] #=> 10
 
-@param type ��¤�ΤΥ��Фη���ʸ����ǻ��ꤷ�ޤ���������Ҥ� [[c:DL]] �򻲾Ȥ��Ʋ�������
+@param type 構造体のメンバの型を文字列で指定します。型指定子は [[c:DL]] を参照して下さい。
 
-@param members ���Ф�̾����ʸ���󤫥���ܥ�ǻ��ꤷ�ޤ���
+@param members メンバの名前を文字列かシンボルで指定します。
 
 --- union!(type, *members)    -> nil
 #@todo
 
-�����ΤΥ��Ф˥᥽�å� [[m:DL::PtrData#[] ]] �ǥ��������Ǥ���褦�ˤ��ޤ���
-C ����ˤ����붦���ΤΥݥ��󥿤ؤΥ��㥹�Ȥ�Ʊ���Ǥ���
+共用体のメンバにメソッド [[m:DL::PtrData#[] ]] でアクセスできるようにします。
+C 言語における共用体のポインタへのキャストと同じです。
 
-@param type �����Τη���ʸ����ǻ��ꤷ�ޤ���������Ҥ� [[c:DL]] �򻲾Ȥ��Ʋ�������
+@param type 共用体の型を文字列で指定します。型指定子は [[c:DL]] を参照して下さい。
 
-@param members ���Ф�̾����ʸ���󤫥���ܥ�ǻ��ꤷ�ޤ���
+@param members メンバの名前を文字列かシンボルで指定します。
 
 --- [](key)             -> object
 #@todo
 
-��¤�Τޤ��϶����Υ��� key ���ͤ��֤��ޤ����֤��ͤ� [[m:DL::PtrData#struct!]] 
-�ޤ��� [[m:DL::PtrData#union!]] �ˤ�ä�������줿���ˤ�ꡢRuby �Υ��֥������Ȥ�
-�Ѵ����줿��ΤǤ���
+構造体または共用体メンバ key の値を返します。返り値は [[m:DL::PtrData#struct!]] 
+または [[m:DL::PtrData#union!]] によって定義された型により、Ruby のオブジェクトへ
+変換されたものです。
 
-@param key ������������¤�Τ������ΤΥ��Ф�̾���򡢥���ܥ뤫ʸ�������ꤷ�ޤ���
+@param key 取得したい構造体か共用体のメンバの名前を、シンボルか文字列を指定します。
 
 --- [](offset, len = 0)     -> String
 
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ����Ƭ len �Х��Ȥ�ʣ������
-ʸ����Ȥ����֤��ޤ���(self + offset).to_s(len) ��Ʊ���Ǥ���
-offset + len �����ȤΥ�������꾮�������򸡾ڤ��ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域の先頭 len バイトを複製し、
+文字列として返します。(self + offset).to_s(len) と同等です。
+offset + len が自身のサイズより小さいかを検証しません。
 
-@param offset �ͤ��������ΰ����Ƭ�Υ��ɥ쥹�ޤǤΥ��ե��åȤ�������Ϳ���ޤ���
+@param offset 値を得たい領域の先頭のアドレスまでのオフセットを整数で与えます。
 
-@param len �ͤ��������ΰ�Υ���������ꤷ�ޤ���
+@param len 値を得たい領域のサイズを指定します。
 
 --- []=(key, val)   
 #@todo
 
-��¤�Τޤ��϶����Υ��� key ���ͤ� val �ˤ��ޤ���
+構造体または共用体メンバ key の値を val にします。
 
-@param key ��¤�Τ������ΤΥ��Ф�̾����ʸ���󤫥���ܥ�ǻ��ꤷ�ޤ���
+@param key 構造体か共用体のメンバの名前を文字列かシンボルで指定します。
 
-@param val ���ȤΥ��Ф˥��åȤ������ͤ���ꤷ�ޤ���
+@param val 自身のメンバにセットしたい値を指定します。
 
 --- []=(offset, str) 
 #@todo
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ��
-ʸ���� str �򥳥ԡ����ޤ������ԡ�����ΰ褬 str �Υ���������礭�������ڤ��ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域に
+文字列 str をコピーします。コピー先の領域が str のサイズより大きいか検証しません。
 
-@param offset �񤭴������������ΰ�Υ��ե��åȤ�������Ϳ���ޤ���
+@param offset 書き換えたいメモリ領域のオフセットを整数で与えます。
 
-@param str �����ΰ�˥��åȤ������Х������ʸ����ǻ��ꤷ�ޤ���
+@param str メモリ領域にセットしたいバイト列を文字列で指定します。
 
 --- []=(offset, len, str) 
 #@todo
 
-���Ȥλؤ����ɥ쥹�� offset �Х��Ȥ�­���������ΰ����Ƭ len �Х��Ȥ�
-ʸ���� str �򥳥ԡ����ޤ���str �Υ������� len ��꾮�������ϡ��Ĥ���ΰ�� 0 �����ޤ���
-���ԡ�����ΰ褬 len ����礭�������ڤ��ޤ���
+自身の指すアドレスに offset バイトを足したメモリ領域の先頭 len バイトに
+文字列 str をコピーします。str のサイズが len より小さい場合は、残りの領域を 0 で埋めます。
+コピー先の領域が len より大きいか検証しません。
 
-@param offset �񤭴������������ΰ�Υ��ե��åȤ�������Ϳ���ޤ���
+@param offset 書き換えたいメモリ領域のオフセットを整数で与えます。
 
-@param len �񤭴������������ΰ�Υ������������ǻ��ꤷ�ޤ���
+@param len 書き換えたいメモリ領域のサイズを整数で指定します。
 
-@param str �����ΰ�˥��åȤ������Х������ʸ����ǻ��ꤷ�ޤ���
+@param str メモリ領域にセットしたいバイト列を文字列で指定します。
 
 --- data_type    -> [object]
 #@todo
 
-�ȤäƤϤ����ޤ���
+使ってはいけません。
 
 --- define_data_type    -> nil
 #@todo
 
-�ȤäƤϤ����ޤ���
+使ってはいけません。
 
 = module DL::MemorySpace
 

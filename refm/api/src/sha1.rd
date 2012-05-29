@@ -1,35 +1,35 @@
-���Υ饤�֥��� obsolete �Ǥ���[[lib:digest]] �饤�֥���ȤäƤ�������
+このライブラリは obsolete です。[[lib:digest]] ライブラリを使ってください
 
 #@since 1.8.6
-[[c:Digest::SHA1]] ��Ѿ����� SHA1 ���饹��������ޤ���
+[[c:Digest::SHA1]] を継承した SHA1 クラスを定義します。
 
 = class SHA1 < Digest::SHA1
 
-SHA1 �ϥå�����������뤿��Υ饤�֥��Ǥ���
-[[c:Digest::SHA1]] ��ȤäƤ���������
+SHA1 ハッシュを生成するためのライブラリです。
+[[c:Digest::SHA1]] を使ってください。
 #@else
-[[lib:digest/sha1]] ������ɤ���  SHA1 �� Digest::SHA1 ���֤������ޤ���
+[[lib:digest/sha1]] をロードして  SHA1 を Digest::SHA1 に置き換えます。
 
 = class SHA1
 
-[[c:Digest::SHA1]] �Υ����ꥢ���Ǥ���
-[[c:Digest::SHA1]] ��ȤäƤ���������
+[[c:Digest::SHA1]] のエイリアスです。
+[[c:Digest::SHA1]] を使ってください。
 #@end
 == Singleton Methods
 #@since 1.8.6
 --- new(str = nil) -> SHA1
 
-SHA1 �ϥå�����������ޤ���
+SHA1 ハッシュを生成します。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
 --- orig_new  -> SHA1
 
-SHA1 �ϥå�����������ޤ���
+SHA1 ハッシュを生成します。
 
 #@end
 
 --- sha1(arg)  -> SHA1
-SHA1 �ϥå�����������ޤ���
+SHA1 ハッシュを生成します。
 
-@param arg ʸ�������ꤷ�ޤ���
+@param arg 文字列を指定します。

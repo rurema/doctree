@@ -1,13 +1,13 @@
 = class OpenSSL::Config < Object
 include Enumerable
 
-OpenSSL ������ե������ɽ�����饹�Ǥ���
+OpenSSL の設定ファイルを表すクラスです。
 
-OpenSSL ������ե�����ϡ�������ʸ������б��դ���ñ��ʹ�¤�򤷤Ƥ��ޤ���
-�ޤ��������ϥ��������ˤ�äƥ��롼��ʬ������Ƥ��ޤ���
-�ɤΥ��������ˤ�°���ʤ��������Х�ʥ������뤳�Ȥ�Ǥ��ޤ���
+OpenSSL の設定ファイルは、キーと文字列を対応付けた単純な構造をしています。
+また、キーはセクションによってグループ分けされています。
+どのセクションにも属さないグローバルなキーを作ることもできます。
 
-�ǥե���Ȥ�����ե�������ɤ߹�����
+デフォルトの設定ファイルを読み込む例
   require 'openssl'
   conf = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
   p conf.sections # => ["req_distinguished_name", "req_attributes", "proxy_cert_ext", "policy_anything", "CA_default", ...]
@@ -18,93 +18,93 @@ OpenSSL ������ե�����ϡ�������ʸ������б��դ���ñ��ʹ�¤�򤷤Ƥ��ޤ���
 
 --- load(filename = nil) -> OpenSSL::Config
 --- new(filename = nil) -> OpenSSL::Config
-OpenSSL::Config ���֥������Ȥ��������ޤ���
+OpenSSL::Config オブジェクトを生成します。
 
-filename �ǻ��ꤷ���ե����뤫������ǡ������ɤߤ��ߤޤ���
+filename で指定したファイルから設定データを読みこみます。
 
-filename ���ά�������϶��Υ��֥������Ȥ���������ޤ���
+filename を省略した場合は空のオブジェクトが生成されます。
 
-@param filename �ե�����̾ʸ����
-@raise OpenSSL::ConfigError ����ե������ʸˡ���������ʤ�����ȯ�����ޤ�
+@param filename ファイル名文字列
+@raise OpenSSL::ConfigError 設定ファイルの文法が正しくない場合に発生します
 
 --- parse(str) -> OpenSSL::Config
-ʸ���󤫤� OpenSSL::Config ���֥������Ȥ��������ޤ���
+文字列から OpenSSL::Config オブジェクトを生成します。
 
-@param str ����ե�����ǡ���
+@param str 設定ファイルデータ
 
 == Instance Methods
 
 --- get_value(section, name) -> String | nil
-���֥������Ȥ����äƤ������������֤��ޤ���
+オブジェクトが持っている設定情報を返します。
 
-�������б�����������󤬤ʤ����� nil ���֤��ޤ���
+キーに対応する設定情報がない場合は nil を返します。
 
-@param section ����������ɽ��ʸ����"" ���Ϥ����Ȥǥ������Х�����������ɤळ�Ȥ��Ǥ��ޤ���
-@param name ������ɽ��ʸ����
+@param section セクションを表す文字列。"" を渡すことでグローバルな設定情報を読むことができます。
+@param name キーを表す文字列
 
 --- value(name) -> String | nil
 --- value(section, name) -> String | nil
-���Υ᥽�åɤ� obsolete �Ǥ���
+このメソッドは obsolete です。
 
-���֥������Ȥ����äƤ������������֤��ޤ���
+オブジェクトが持っている設定情報を返します。
 
-��������Ĥξ��ϥ������Х륻�������ξ�����֤���
-2�Ĥξ��� section �ǻ��ꤷ�����������ξ�����֤��ޤ���
+引数が一つの場合はグローバルセクションの情報を返し、
+2つの場合は section で指定したセクションの情報を返します。
 
-@param section ����������ɽ��ʸ����
-@param name ������ɽ��ʸ����
+@param section セクションを表す文字列
+@param name キーを表す文字列
 
 --- add_value(section, name, value) -> String
-section �ǻ��ꤷ�����������ˤ��� name �Ȥ���������
-����� value ���ѹ����ޤ���
+section で指定したセクションにある name というキーの
+情報を value に変更します。
 
-���ꤷ�� section ��¸�ߤ��ʤ����ˤϿ����ˤ��Υ��������
-���֥���������˺���ޤ���
-���ꤷ�� name ��¸�ߤ��ʤ�����Ʊ�ͤ˿������ΰ褬
-���Υ��֥���������˺���ޤ������ꤷ�� name ��¸�ߤ������ˤ�
-���󤬾�񤭤���ޤ���
+指定した section が存在しない場合には新たにそのセクションが
+オブジェクト内に作られます。
+指定した name が存在しない場合も同様に新たな領域が
+そのオブジェクト内に作られます。指定した name が存在した場合には
+情報が上書きされます。
 
-value ���֤��ޤ���
+value を返します。
 
-@param section ����������ɽ��ʸ����
-@param name ������ɽ��ʸ����
-@param value �ѹ�����ͤ�ʸ����
-@raise OpenSSL::ConfigError ����˼��Ԥ�������ȯ�����ޤ�
+@param section セクションを表す文字列
+@param name キーを表す文字列
+@param value 変更後の値の文字列
+@raise OpenSSL::ConfigError 設定に失敗した場合に発生します
 
 --- []=(sec, hashtbl)
-���ꤷ���������������������񤭤��ޤ���
+指定したセクションの設定情報を上書きします。
 
-sec ���ѹ����륻����������ꤷ��hashtbl �� {����ʸ���� => �ǡ���ʸ����}
-�Ȥ����ϥå�����ѹ����������Ϥ��ޤ���
+sec で変更するセクションを指定し、hashtbl は {キー文字列 => データ文字列}
+というハッシュで変更する情報を渡します。
 
-hashtbl �˴ޤޤ�Ƥ��ʤ��������б����������ѹ�����ޤ���
+hashtbl に含まれていないキーに対応する情報は変更されません。
 
-@param sec ����������ɽ��ʸ����
-@param hashtbl ���ꤹ�����Υϥå���
+@param sec セクションを表す文字列
+@param hashtbl 設定する情報のハッシュ
 
 --- [](sec) -> {String => String}
 --- section(sec) -> {String => String}
-���ꤷ��������������������ϥå�����֤��ޤ���
+指定したセクションの設定情報をハッシュで返します。
 
-�ϥå���Υ������������Υ������ϥå�����ͤ��б��������Ȥʤ�ޤ���
+ハッシュのキーが設定情報のキー、ハッシュの値が対応する情報となります。
 
-section �� obsolete �Ǥ���[] ��ȤäƤ���������
+section は obsolete です。[] を使ってください。
 
-@param sec ����������ɽ��ʸ����
+@param sec セクションを表す文字列
 
 --- sections -> [String]
-���֥������Ȥ˴ޤޤ�����ƤΥ��������̾��������֤��ޤ���
+オブジェクトに含まれる全てのセクション名の配列を返します。
 
 --- to_s -> String
-���֥������Ȥ˴ޤޤ���������� OpenSSL ������ե�����η�����
-���Ϥ��ޤ���
+オブジェクトに含まれる設定情報を OpenSSL の設定ファイルの形式で
+出力します。
 
 --- each {|section, key, value| ... } -> self
-���֥������Ȥ˴ޤޤ�����Ƥ����������˥֥��å����Ϥ�
-�ƤӽФ��ޤ���
+オブジェクトに含まれる全ての設定情報を順にブロックに渡し
+呼び出します。
 
-�Ϥ�����ͤϡ�����������ɽ��ʸ���󡢥�����ɽ��ʸ���󡢥�����
-������Ƥ�줿�ͤ�ʸ���󡢤�3�ĤǤ���
+渡される値は、セクションを表す文字列、キーを表す文字列、キーに
+割り当てられた値の文字列、の3つです。
 
   require 'openssl'
   conf = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
@@ -117,7 +117,7 @@ section �� obsolete �Ǥ���[] ��ȤäƤ���������
 == Constants
 
 --- DEFAULT_CONFIG_FILE -> String
-�ǥե���Ȥ�����ե�����̾���֤��ޤ���
+デフォルトの設定ファイル名を返します。
 
 = class OpenSSL::ConfigError <  OpenSSL::OpenSSLError
-����ե������Ϣ�Υ��顼������������ȯ�������㳰�Υ��饹��
+設定ファイル関連のエラーが生じた場合に発生する例外のクラス。

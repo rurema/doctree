@@ -1,26 +1,26 @@
 require rdoc/markup/to_html
 
-RDoc �����Υɥ�����Ȥ� HTML ���������뤿��Υ��֥饤�֥��Ǥ���
+RDoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
-[[c:RDoc::Markup::ToHtml]] ���ĥ���ơ��ɥ��������Υ᥽�å�̾�䥯��
-��̾��ưŪ�˥�󥯤ˤ��ޤ���
+[[c:RDoc::Markup::ToHtml]] を拡張して、ドキュメント内のメソッド名やクラ
+ス名を自動的にリンクにします。
 
 = class RDoc::Markup::ToHtmlCrossref < RDoc::Markup::ToHtml
 
-RDoc �����Υɥ�����Ȥ� HTML ���������륯�饹�Ǥ���
+RDoc 形式のドキュメントを HTML に整形するクラスです。
 
 == Class Methods
 
 --- new(path, context, show_hash) -> RDoc::Markup::ToHtmlCrossref
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param path ��������ե�����Υѥ���ʸ����ǻ��ꤷ�ޤ���
+@param path 生成するファイルのパスを文字列で指定します。
 
-@param context [[c:RDoc::Context]] ���֥������Ȥ����Υ��֥��饹�Υ��֥���
-               ���Ȥ���ꤷ�ޤ���
+@param context [[c:RDoc::Context]] オブジェクトかそのサブクラスのオブジェ
+               クトを指定します。
 
-@param show_hash true ����ꤷ����硢�᥽�å�̾�Υ�󥯤� # ��ɽ������
-                 ����false �ξ���ɽ�����ޤ���
+@param show_hash true を指定した場合、メソッド名のリンクに # を表示しま
+                 す。false の場合は表示しません。
 
-@raise ArgmentError path �� nil ����ꤷ������ȯ�����ޤ���
+@raise ArgmentError path に nil を指定した場合に発生します。

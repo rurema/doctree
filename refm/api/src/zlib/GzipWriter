@@ -1,8 +1,8 @@
 = class Zlib::GzipWriter < Zlib::GzipFile
 
-gzip �����ΰ��̥ե������񤭽Ф���åѡ����饹�Ǥ���
-IO ���饹�Υ��󥹥��� (���� IO ���饹�Υ��󥹥��󥹤�Ʊ���᥽�åɤ�
-���ĥ��֥�������) �ȴ�Ϣ�դ��ƻ��Ѥ��ޤ���
+gzip 形式の圧縮ファイルを書き出すラッパークラスです。
+IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
+持つオブジェクト) と関連付けて使用します。
 
   Zlib::GzipWriter.open('hoge.gz') {|gz|
     gz.write 'jugemu jugemu gokou no surikire...'
@@ -13,25 +13,25 @@ IO ���饹�Υ��󥹥��� (���� IO ���饹�Υ��󥹥��󥹤�Ʊ���᥽�åɤ�
   gz.write 'jugemu jugemu gokou no surikire...'
   gz.close
 
-�ʤ���Ruby �� finalizer ������Τ��ᡢGzipWriter ���֥������Ȥ�ɬ��
-[[m:Zlib::GzipWriter#close]] �����Ѥ��ƥ����������Ƥ���������
-�������ʤ���Хեå�����񤭽Ф����Ȥ��Ǥ��������줿 gzip �ե������
-�������Ƥ��ޤ���ǽ��������ޤ���
+なお、Ruby の finalizer の制約のため、GzipWriter オブジェクトは必ず
+[[m:Zlib::GzipWriter#close]] 等を用いてクローズしてください。
+そうしなければフッターを書き出すことができず、壊れた gzip ファイルを
+生成してしまう可能性があります。
 
 == Class Methods
 
 --- new(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 
-io �ȴ�Ϣ�դ���줿 GzipWriter ���֥������Ȥ�������ޤ���
-level, strategy �� [[m:Zlib::Deflate.new]] ��Ʊ���Ǥ���
-GzipWriter ���֥������Ȥ� io �� gzip �����Υǡ�����
-�༡�饤�Ȥ��ޤ���io �ˤϾ��ʤ��Ȥ⡢[[m:IO#write]] ��
-Ʊ��ư��򤹤� write �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
+io と関連付けられた GzipWriter オブジェクトを作成します。
+level, strategy は [[m:Zlib::Deflate.new]] と同じです。
+GzipWriter オブジェクトは io に gzip 形式のデータを
+逐次ライトします。io には少なくとも、[[m:IO#write]] と
+同じ動作をする write メソッドが定義されている必要があります。
 
-@param io  IO���֥������ȡ��⤷���Ͼ��ʤ��Ȥ⡢
-           [[m:IO#write]] �� Ʊ��ư��򤹤� write �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
-@param level  0-9���ϰϤ���������ꤷ�ޤ����ܺ٤�zlib.h�򻲾Ȥ��Ƥ��������� 
-@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]�ʤɻ��ꤷ�ޤ����ܺ٤�zlib.h ��>���Ȥ��Ƥ���������
+@param io  IOオブジェクト、もしくは少なくとも、
+           [[m:IO#write]] と 同じ動作をする write メソッドが定義されている必要があります。
+@param level  0-9の範囲の整数を指定します。詳細はzlib.hを参照してください。 
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。詳細はzlib.h を>参照してください。
 
   require 'zlib'
 
@@ -46,19 +46,19 @@ GzipWriter ���֥������Ȥ� io �� gzip �����Υǡ�����
 --- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 --- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
-io �ȴ�Ϣ�դ���줿 GzipWriter ���֥������Ȥ�������ޤ���
-�֥��å���Ϳ����줿��硢
-���������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-�֥��å��μ¹Ԥ���λ����ȡ�GzipWriter ���֥������Ȥϼ�ưŪ��
-������������ޤ�����Ϣ�դ����Ƥ��� IO ���֥������Ȥޤ�
-���������������ʤ����ϡ��֥��å���� [[m:Zlib::GzipFile#finish]]
-�᥽�åɤ�ƤӽФ��Ʋ�������
+io と関連付けられた GzipWriter オブジェクトを作成します。
+ブロックが与えられた場合、
+それを引数としてブロックを実行します。
+ブロックの実行が終了すると、GzipWriter オブジェクトは自動的に
+クローズされます。関連付けられている IO オブジェクトまで
+クローズしたくない時は、ブロック中で [[m:Zlib::GzipFile#finish]]
+メソッドを呼び出して下さい。
 
-@param io  IO���֥������ȡ��⤷���Ͼ��ʤ��Ȥ⡢
-           [[m:IO#write]] �� Ʊ��ư��򤹤� write �᥽�åɤ��������Ƥ���ɬ�פ�����ޤ���
-@param level  0-9���ϰϤ���������ꤷ�ޤ����ܺ٤�zlib.h�򻲾Ȥ��Ƥ��������� 
-@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]�ʤɻ��ꤷ�ޤ���
-                �ܺ٤�zlib.h �򻲾Ȥ��Ƥ���������
+@param io  IOオブジェクト、もしくは少なくとも、
+           [[m:IO#write]] と 同じ動作をする write メソッドが定義されている必要があります。
+@param level  0-9の範囲の整数を指定します。詳細はzlib.hを参照してください。 
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。
+                詳細はzlib.h を参照してください。
 
   require 'zlib'
   
@@ -90,17 +90,17 @@ io �ȴ�Ϣ�դ���줿 GzipWriter ���֥������Ȥ�������ޤ���
 --- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 --- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
-filename �ǻ��ꤵ���ե������ gzip ���̥ǡ�����
-�񤭽Ф��Ѥ˥����ץ󤷤ޤ���GzipWriter ���֥������Ȥ��֤��ޤ���
-����¾�ܺ٤� [[m:Zlib::GzipWriter.new]] �� [[m:Zlib::GzipWriter.wrap]] ��
-Ʊ���Ǥ���
+filename で指定されるファイルを gzip 圧縮データの
+書き出し用にオープンします。GzipWriter オブジェクトを返します。
+その他詳細は [[m:Zlib::GzipWriter.new]] や [[m:Zlib::GzipWriter.wrap]] と
+同じです。
 
-@param filename �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
-@param level 0-9���ϰϤ��������ޤ��� [[m:Zlib::NO_COMPRESSION]], [[m:Zlib::BEST_SPEED]], 
-             [[m:Zlib::BEST_COMPRESSION]], [[m:Zlib::DEFAULT_COMPRESSION]] ����ꤷ�ޤ���
-             �ܺ٤�zlib.h�򻲾Ȥ��Ƥ��������� 
-@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]�ʤɻ��ꤷ�ޤ���
-                �ܺ٤�zlib.h �򻲾Ȥ��Ƥ���������
+@param filename ファイル名を文字列で指定します。
+@param level 0-9の範囲の整数、または [[m:Zlib::NO_COMPRESSION]], [[m:Zlib::BEST_SPEED]], 
+             [[m:Zlib::BEST_COMPRESSION]], [[m:Zlib::DEFAULT_COMPRESSION]] を指定します。
+             詳細はzlib.hを参照してください。 
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。
+                詳細はzlib.h を参照してください。
 
   require 'zlib'
 
@@ -116,13 +116,13 @@ filename �ǻ��ꤵ���ե������ gzip ���̥ǡ�����
 --- close -> File
 --- finish -> File
 
-�եå�����񤭽Ф���GzipWriter ���֥������Ȥ򥯥��������ޤ���close ��
-finish �ΰ㤤�� [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] ��
-���Ȥ��Ʋ�������
+フッターを書き出し、GzipWriter オブジェクトをクローズします。close と
+finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
+参照して下さい。
 
-����: Ruby �� finalizer ������Τ��ᡢGzipWriter ���֥������Ȥ�
-ɬ�������������Ƥ����������������ʤ���Хեå�����񤭽Ф����Ȥ�
-�Ǥ��������줿 gzip �ե�������������Ƥ��ޤ���ǽ��������ޤ���
+注意: Ruby の finalizer の制約のため、GzipWriter オブジェクトは
+必ずクローズしてください。そうしなければフッターを書き出すことが
+できず、壊れた gzip ファイルを生成してしまう可能性があります。
 
   require 'zlib'
    
@@ -132,7 +132,7 @@ finish �ΰ㤤�� [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] ��
     gz.puts "hogehoge\n" * 100
     f = gz.finish
     p f.atime
-    # ��
+    # 例
     #=> Sun Jul 06 15:43:57 +0900 2008
   end
  
@@ -154,8 +154,8 @@ finish �ΰ㤤�� [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] ��
 --- pos -> Fixnum
 --- tell -> Fixnum
 
-���ߤޤǤ˰��̤����ǡ�����Ĺ���ι�פ��֤��ޤ���
-�ե�����ݥ��󥿤ΰ��֤ǤϤʤ����Ȥ����դ��Ʋ�������
+現在までに圧縮したデータの長さの合計を返します。
+ファイルポインタの位置ではないことに注意して下さい。
 
   require 'zlib'
 
@@ -174,10 +174,10 @@ finish �ΰ㤤�� [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] ��
 
 --- <<(str) -> self
 
-str ����Ϥ��ޤ���str ��ʸ����Ǥʤ����� to_s ���Ѥ���
-ʸ������Ѵ����ޤ���
+str を出力します。str が文字列でない場合は to_s を用いて
+文字列に変換します。
 
-@param str ���Ϥ��������֥������Ȥ�Ϳ���ޤ���
+@param str 出力したいオブジェクトを与えます。
 
   require 'zlib'
 
@@ -196,15 +196,15 @@ str ����Ϥ��ޤ���str ��ʸ����Ǥʤ����� to_s ���Ѥ���
 
 --- putc(ch) -> object
 
-ʸ�� ch �򼫿Ȥ˽��Ϥ��ޤ���
+文字 ch を自身に出力します。
 
-ch �����ͤʤ� 0 �� 255 ���ϰϤ��б�����ʸ������Ϥ��ޤ���
-ch ��ʸ����ʤ顢������Ƭ 1byte ����Ϥ��ޤ���
-�ɤ���Ǥ�ʤ����ϡ�ch.to_int ���������Ѵ����ߤޤ���
+ch が数値なら 0 〜 255 の範囲の対応する文字を出力します。
+ch が文字列なら、その先頭 1byte を出力します。
+どちらでもない場合は、ch.to_int で整数に変換を試みます。
 
-@param ch ���Ϥ���ʸ������ͤޤ���ʸ����ǻ��ꤷ�ޤ���
+@param ch 出力する文字を数値または文字列で指定します。
 
-@return ch ���֤��ޤ���
+@return ch を返します。
 
   require 'zlib'
 
@@ -225,9 +225,9 @@ ch ��ʸ����ʤ顢������Ƭ 1byte ����Ϥ��ޤ���
 
 --- puts(*str) -> nil
 
-�ư����򼫿Ȥ˽��Ϥ������줾��θ�˲��Ԥ���Ϥ��ޤ���
+各引数を自身に出力し、それぞれの後に改行を出力します。
 
-@param str ���Ϥ��������֥������Ȥ���ꤷ�ޤ���
+@param str 出力したいオブジェクトを指定します。
 
   require 'zlib'
 
@@ -246,9 +246,9 @@ ch ��ʸ����ʤ顢������Ƭ 1byte ����Ϥ��ޤ���
 
 --- print(*str) -> nil
 
-�����򼫿Ȥ˽�˽��Ϥ��ޤ����������ά�������ϡ�[[m:$_]] ����Ϥ��ޤ���
+引数を自身に順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
 
-@param str ���Ϥ��륪�֥������Ȥ���ꤷ�ޤ���
+@param str 出力するオブジェクトを指定します。
 
   require 'zlib'
 
@@ -267,12 +267,12 @@ ch ��ʸ����ʤ顢������Ƭ 1byte ����Ϥ��ޤ���
 
 --- printf(format, *args) -> nil
 
-C ����� printf ��Ʊ���褦�ˡ�format �˽�������
-��ʸ������Ѵ����ơ����Ȥ˽��Ϥ��ޤ���
+C 言語の printf と同じように、format に従い引数
+を文字列に変換して、自身に出力します。
 
-@param format �ե����ޥå�ʸ�������ꤷ�ޤ���[[d:print_format]] �򻲾Ȥ��Ƥ���������
+@param format フォーマット文字列を指定します。[[d:print_format]] を参照してください。
 
-@param args �ե����ޥåȤ���륪�֥������Ȥ���ꤷ�ޤ���
+@param args フォーマットされるオブジェクトを指定します。
 
   require 'zlib'
 
@@ -291,12 +291,12 @@ C ����� printf ��Ʊ���褦�ˡ�format �˽�������
 
 --- write(str) -> Integer
 
-���Ȥ� str ����Ϥ��ޤ���str ��ʸ����Ǥʤ�
-��� to_s �ˤ��ʸ���󲽤��ߤޤ���
+自身に str を出力します。str が文字列でなけ
+れば to_s による文字列化を試みます。
 
-@param str ���Ϥ���ʸ�������ꤷ�ޤ���ʸ����Ǥʤ����� to_s ��ʸ������Ѵ����ޤ���
+@param str 出力する文字列を指定します。文字列でない場合は to_s で文字列に変換します。
 
-@return �ºݤ˽��ϤǤ����Х��ȿ����֤��ޤ���
+@return 実際に出力できたバイト数を返します。
 
   require 'zlib'
 
@@ -315,13 +315,13 @@ C ����� printf ��Ʊ���褦�ˡ�format �˽�������
 
 --- flush(flush = Zlib::SYNC_FLUSH) -> self
 
-�ޤ��񤭽Ф���Ƥ��ʤ��ǡ�����ե�å��夷�ޤ���
+まだ書き出されていないデータをフラッシュします。
 
-flush �� [[m:Zlib::Deflate#deflate]] ��Ʊ���Ǥ���
-��ά���� [[m:Zlib::SYNC_FLUSH]] �����Ѥ���ޤ���
-flush �� [[m:Zlib::NO_FLUSH]] ����ꤹ�뤳�Ȥ�̵��̣�Ǥ���
+flush は [[m:Zlib::Deflate#deflate]] と同じです。
+省略時は [[m:Zlib::SYNC_FLUSH]] が使用されます。
+flush に [[m:Zlib::NO_FLUSH]] を指定することは無意味です。
 
-@param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] �ʤɤ���ꤷ�ޤ���
+@param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] などを指定します。
 
   require 'zlib'
  
@@ -355,14 +355,14 @@ flush �� [[m:Zlib::NO_FLUSH]] ����ꤹ�뤳�Ȥ�̵��̣�Ǥ���
 
 --- mtime=(time)
 
-gzip �ե�����Υإå����˵�Ͽ����ǽ��������֤���ꤷ�ޤ���
+gzip ファイルのヘッダーに記録する最終更新時間を指定します。
 
-[[m:Zlib::GzipWriter#write]] ���ν񤭹��߷ϥ᥽�åɤ�
-�Ƥ����ǻ��ꤷ�褦�Ȥ���� [[c:Zlib::GzipFile::Error]] �㳰��
-ȯ�����ޤ���
+[[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
+呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
+発生します。
 
-@param time gzip �ե�����Υإå����˵�Ͽ����ǽ��������֤������ǻ��ꤷ�ޤ���
-@return time ���֤��ޤ���
+@param time gzip ファイルのヘッダーに記録する最終更新時間を整数で指定します。
+@return time を返します。
 
   require 'zlib'
 
@@ -374,20 +374,20 @@ gzip �ե�����Υإå����˵�Ͽ����ǽ��������֤���ꤷ�ޤ���
   fr = File.open(filename)
   Zlib::GzipReader.wrap(fr){|gz|
     puts gz.mtime
-    # ��
+    # 例
     #=> Thu Jan 01 09:00:01 +0900 1970
   }
 
 --- orig_name=(filename)
 
-gzip �ե�����Υإå����˵�Ͽ���븵�ե�����̾����ꤷ�ޤ���
+gzip ファイルのヘッダーに記録する元ファイル名を指定します。
 
-[[m:Zlib::GzipWriter#write]] ���ν񤭹��߷ϥ᥽�åɤ�
-�Ƥ����ǻ��ꤷ�褦�Ȥ���� [[c:Zlib::GzipFile::Error]] �㳰��
-ȯ�����ޤ���
+[[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
+呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
+発生します。
 
-@param filename gzip �ե�����Υإå����˵�Ͽ���븵�ե�����̾��ʸ����ǻ��ꤷ�ޤ���
-@return filename ���֤��ޤ���
+@param filename gzip ファイルのヘッダーに記録する元ファイル名を文字列で指定します。
+@return filename を返します。
 
   require 'zlib'
 
@@ -404,14 +404,14 @@ gzip �ե�����Υإå����˵�Ͽ���븵�ե�����̾����ꤷ�ޤ���
 
 --- comment=(string)
 
-gzip �ե�����Υإå����˵�Ͽ���륳���Ȥ���ꤷ�ޤ���
+gzip ファイルのヘッダーに記録するコメントを指定します。
 
-[[m:Zlib::GzipWriter#write]] ���ν񤭹��߷ϥ᥽�åɤ�
-�Ƥ����ǻ��ꤷ�褦�Ȥ���� [[c:Zlib::GzipFile::Error]] �㳰��
-ȯ�����ޤ���
+[[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
+呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
+発生します。
 
-@param string gzip �ե�����Υإå����˵�Ͽ���륳���Ȥ�ʸ����ǻ��ꤷ�ޤ���
-@return string ���֤��ޤ���
+@param string gzip ファイルのヘッダーに記録するコメントを文字列で指定します。
+@return string を返します。
 
   require 'zlib'
 

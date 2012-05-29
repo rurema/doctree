@@ -1,5 +1,5 @@
 
-tsort �ϥȥݥ������륽���Ȥȶ�Ϣ����ʬ�˴ؤ���⥸�塼����󶡤��ޤ���
+tsort はトポロジカルソートと強連結成分に関するモジュールを提供します。
 
 === Example
 
@@ -19,9 +19,9 @@ tsort �ϥȥݥ������륽���Ȥȶ�Ϣ����ʬ�˴ؤ���⥸�塼����󶡤��ޤ���
   {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}.strongly_connected_components
   #=> [[4], [2, 3], [1]]
 
-=== ��긽��Ū����
+=== より現実的な例
 
-����ñ��� `make' �˻����ġ���ϰʲ��Τ褦�˼����Ǥ��ޤ���
+非常に単純な `make' に似たツールは以下のように実装できます。
 
   require 'tsort'
 
@@ -82,9 +82,9 @@ tsort �ϥȥݥ������륽���Ȥȶ�Ϣ����ʬ�˴ؤ���⥸�塼����󶡤��ޤ���
 
 === Bugs
 
-tsort �Ȥ���̾�������ΤǤϤ���ޤ��󡣤ʤ��ʤ�
-���Υ饤�֥��� Tarjan �ζ�Ϣ����ʬ�˴ؤ��륢�르�ꥺ���ȤäƤ��뤫��Ǥ���
-�ȤϤ��� strongly_connected_components �Ȥ������Τ�̾����Ĺ�᤮�ޤ���
+tsort という名前は正確ではありません。なぜなら
+このライブラリは Tarjan の強連結成分に関するアルゴリズムを使っているからです。
+とはいえ strongly_connected_components という正確な名前は長過ぎます。
 
 === References
 R. E. Tarjan,
@@ -109,31 +109,31 @@ SIAM Journal on Computing, Vol. 1, No. 2, pp. 146-160, June 1972.
 
 = module TSort
 
-TSort �϶�Ϣ����ʬ�˴ؤ��� Tarjan �Υ��르�ꥺ����Ѥ���
-�ȥݥ������륽���Ȥμ����Ǥ���
+TSort は強連結成分に関する Tarjan のアルゴリズムを用いた
+トポロジカルソートの実装です。
 
-TSort ��Ǥ�դΥ��֥������Ȥ�ͭ������դȤ��Ʋ��Ǥ���褦���߷פ���Ƥ��ޤ���
-TSort �����֥������Ȥ򥰥�դȤ��Ʋ�᤹��ˤ�2�ĤΥ᥽�åɤ��׵ᤷ�ޤ���
-���ʤ����tsort_each_node �� tsort_each_child �Ǥ���
+TSort は任意のオブジェクトを有向グラフとして解釈できるように設計されています。
+TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
+すなわち、tsort_each_node と tsort_each_child です。
 
- * tsort_each_node �ϥ���վ�Τ��٤Ƥ�ĺ�����󤹤�Τ��Ѥ����ޤ���
- * tsort_each_child ��Ϳ����줿ĺ���λҤ��󤹤�Τ��Ѥ����ޤ���
+ * tsort_each_node はグラフ上のすべての頂点を巡回するのに用いられます。
+ * tsort_each_child は与えられた頂点の子を巡回するのに用いられます。
 
-ĺ��Ʊ�Τ��������� eql? �� hash �ˤ�ä��������ޤ���
-����� TSort �������ǥϥå�����Ѥ��Ƥ��뤫��Ǥ���
+頂点同士の等価性は eql? と hash によって定義されます。
+これは TSort が内部でハッシュを用いているからです。
 
 == Instance Methods
 --- tsort -> Array
 
-ĺ����ȥݥ������륽���Ȥ���������������֤��ޤ���
-��������ϻҤ���Ƥ˸����äƥ����Ȥ���Ƥ��ޤ���
-���ʤ�����ǽ�����ǤϻҤ���������Ǹ�����ǤϿƤ�����ޤ���
+頂点をトポロジカルソートして得られる配列を返します。
+この配列は子から親に向かってソートされています。
+すなわち、最初の要素は子を持たず、最後の要素は親を持ちません。
 
-��ϩ��¸�ߤ���Ȥ����㳰[[c:TSort::Cyclic]]�򵯤����ޤ���
+閉路が存在するとき、例外[[c:TSort::Cyclic]]を起こします。
 
-@raise TSort::Cyclic ��ϩ��¸�ߤ���Ȥ���ȯ�����ޤ�.
+@raise TSort::Cyclic 閉路が存在するとき、発生します.
 
-������
+使用例
   require 'tsort'
 
   class Hash
@@ -150,17 +150,17 @@ TSort �����֥������Ȥ򥰥�դȤ��Ʋ�᤹��ˤ�2�ĤΥ᥽�åɤ��׵ᤷ�ޤ���
 
 --- tsort_each {|node| ...} -> nil
 
-tsort �᥽�åɤΥ��ƥ졼���ǤǤ���
-obj.tsort_each �� obj.tsort.each �Ȼ��Ƥ��ޤ�����
-�֥��å���ɾ����� obj ���ѹ����줿����ͽ�����ʤ���̤ˤʤ�
-���Ȥ�����ޤ���
+tsort メソッドのイテレータ版です。
+obj.tsort_each は obj.tsort.each と似ていますが、
+ブロックの評価中に obj が変更された場合は予期しない結果になる
+ことがあります。
 
-tsort_each �� nil ���֤��ޤ���
-��ϩ��¸�ߤ���Ȥ����㳰 [[c:TSort::Cyclic]] �򵯤����ޤ���
+tsort_each は nil を返します。
+閉路が存在するとき、例外 [[c:TSort::Cyclic]] を起こします。
 
-@raise TSort::Cyclic ��ϩ��¸�ߤ���Ȥ���ȯ�����ޤ�.
+@raise TSort::Cyclic 閉路が存在するとき、発生します.
 
-������
+使用例
   require 'tsort'
 
   class Hash
@@ -179,16 +179,16 @@ tsort_each �� nil ���֤��ޤ���
     }
   }
 
-  # ����
+  # 出力
   #=> 2 -> 3
   #=> 1 -> 2
   #=> 1 -> 3
 
 --- strongly_connected_components -> Array
 
-��Ϣ����ʬ�ν��ޤ�����������Ȥ����֤��ޤ���
-��������ϻҤ���Ƥ˸����äƥ����Ȥ���Ƥ��ޤ���
-�����Ǥ϶�Ϣ����ʬ��ɽ������Ǥ���
+強連結成分の集まりを配列の配列として返します。
+この配列は子から親に向かってソートされています。
+各要素は強連結成分を表す配列です。
 
   require 'tsort'
 
@@ -207,15 +207,15 @@ tsort_each �� nil ���֤��ޤ���
 
 --- each_strongly_connected_component {|nodes| ...} -> nil
 
-strongly_connected_components �᥽�åɤΥ��ƥ졼���ǤǤ���
-obj.each_strongly_connected_component ��
-obj.strongly_connected_components.each �˻��Ƥ��ޤ�����
-�֥��å���ɾ����� obj ���ѹ����줿����ͽ�����ʤ���̤ˤʤ�
-���Ȥ�����ޤ���
+strongly_connected_components メソッドのイテレータ版です。
+obj.each_strongly_connected_component は
+obj.strongly_connected_components.each に似ていますが、
+ブロックの評価中に obj が変更された場合は予期しない結果になる
+ことがあります。
 
-each_strongly_connected_component �� nil ���֤��ޤ���
+each_strongly_connected_component は nil を返します。
 
-������
+使用例
   require 'tsort'
 
   class Hash
@@ -232,23 +232,23 @@ each_strongly_connected_component �� nil ���֤��ޤ���
     p nodes
   }
 
-  #����
+  #出力
   #=> [4]
   #=> [2, 3]
   #=> [1]
 
 --- each_strongly_connected_component_from(node) {|nodes| ...} -> ()
 
-node ������ã��ǽ�ʶ�Ϣ����ʬ�ˤĤ��ƤΥ��ƥ졼���Ǥ���
+node から到達可能な強連結成分についてのイテレータです。
 
-�֤��ͤϵ��ꤵ��Ƥ��ޤ���
+返す値は規定されていません。
 
-each_strongly_connected_component_from ��
-tsort_each_node ��ƤӤޤ���
+each_strongly_connected_component_from は
+tsort_each_node を呼びません。
 
-@param node �Ρ��ɤ���ꤷ�ޤ���
+@param node ノードを指定します。
 
-  #�� ��ã��ǽ�ʥΡ��ɤ�ɽ������
+  #例 到達可能なノードを表示する
   require 'tsort'
 
   class Hash
@@ -270,7 +270,7 @@ tsort_each_node ��ƤӤޤ���
     }
   }
 
-  #����
+  #出力
   #=> [4]
   #=> 4 -> 4
   #=> [2, 3]
@@ -285,22 +285,22 @@ tsort_each_node ��ƤӤޤ���
 
 --- tsort_each_node {|node| ...} -> ()
 
-TSort �ǳ�ĥ����륯�饹���������Ƥ��ʤ���Фʤ�ʤ��᥽�åɤǤ���
+TSort で拡張されるクラスで定義されていなければならないメソッドです。
 
 tsort_each_node is used to iterate for all nodes over a graph.
 
-@raise NotImplementedError TSort �ǳ�ĥ����륯�饹���������Ƥ��ʤ����ȯ�����ޤ���
+@raise NotImplementedError TSort で拡張されるクラスで定義されていない場合発生します。
 
 --- tsort_each_child(node) {|child| ...} -> ()
 
-TSort �ǳ�ĥ����륯�饹���������Ƥ��ʤ���Фʤ�ʤ��᥽�åɤǤ���
+TSort で拡張されるクラスで定義されていなければならないメソッドです。
 
 tsort_each_child is used to iterate for child nodes of node.
 
-@param node �Ρ��ɤ���ꤷ�ޤ���
+@param node ノードを指定します。
 
-@raise NotImplementedError TSort �ǳ�ĥ����륯�饹���������Ƥ��ʤ����ȯ�����ޤ���
+@raise NotImplementedError TSort で拡張されるクラスで定義されていない場合発生します。
 
 = class TSort::Cyclic < StandardError
 
-��ϩ��¸�ߤ������ȯ�����ޤ���
+閉路が存在する時、発生します。

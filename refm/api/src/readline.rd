@@ -1,30 +1,30 @@
-GNU Readline �ˤ�륳�ޥ�ɥ饤�����ϥ��󥿥ե��������󶡤���饤�֥��Ǥ���
+GNU Readline によるコマンドライン入力インタフェースを提供するライブラリです。
 
 = module Readline
 
-GNU Readline �ˤ�륳�ޥ�ɥ饤�����ϥ��󥿥ե��������󶡤���⥸�塼��Ǥ���
+GNU Readline によるコマンドライン入力インタフェースを提供するモジュールです。
 
-GNU Readline �ߴ��饤�֥��ΤҤȤĤǤ��� Edit Line(libedit) �⥵�ݡ��Ȥ��Ƥ��ޤ���
+GNU Readline 互換ライブラリのひとつである Edit Line(libedit) もサポートしています。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
   * [[url:http://www.thrysoee.dk/editline/]]
 
-Readline.readline ����Ѥ��ƥ桼����������Ϥ�����Ǥ��ޤ���
-���ΤȤ��� GNU Readline �Τ褦�����Ϥ��䴰��
-Emacs �Τ褦�ʥ������ʤɤ��Ǥ��ޤ���
+Readline.readline を使用してユーザからの入力を取得できます。
+このとき、 GNU Readline のように入力の補完や
+Emacs のようなキー操作などができます。
 
-��: �ץ���ץ�"> "��ɽ�����ơ��桼����������Ϥ�������롣
+例: プロンプト"> "を表示して、ユーザからの入力を取得する。
 
   while buf = Readline.readline("> ", true)
     print("-> ", buf, "\n")
   end
 
-�桼�������Ϥ������Ƥ�����(�ʲ����ҥ��ȥ�)�Ȥ��Ƶ�Ͽ���뤳�Ȥ��Ǥ��ޤ���
-��� [[c:Readline::HISTORY]] ����Ѥ�����������˥��������Ǥ��ޤ���
-�㤨�С�[[c:Readline::HISTORY]].to_a �ˤ�ꡢ
-���Ƥ����Ϥ������Ƥ�ʸ���������Ȥ��Ƽ����Ǥ��ޤ���
+ユーザが入力した内容を履歴(以下、ヒストリ)として記録することができます。
+定数 [[c:Readline::HISTORY]] を使用して入力履歴にアクセスできます。
+例えば、[[c:Readline::HISTORY]].to_a により、
+全ての入力した内容を文字列の配列として取得できます。
 
-��: �ҥ��ȥ������Ȥ��Ƽ������롣
+例: ヒストリを配列として取得する。
 
   while buf = Readline.readline("> ", true)
     p Readline::HISTORY.to_a
@@ -35,66 +35,66 @@ Emacs �Τ褦�ʥ������ʤɤ��Ǥ��ޤ���
 
 --- readline(prompt = "", add_hist = false) -> String | nil
 
-prompt ����Ϥ����桼������Υ������Ϥ��Ԥ��ޤ���
-���󥿡������β����ʤɤǥ桼����ʸ��������Ϥ�������ȡ�
-���Ϥ���ʸ������֤��ޤ���
-���ΤȤ���add_hist �� true �Ǥ���С����Ϥ���ʸ���������������ɲä��ޤ���
-�������Ϥ��Ƥ��ʤ����֤� EOF(UNIX �Ǥ� ^D) �����Ϥ���ʤɤǡ�
-�桼����������Ϥ��ʤ����� nil ���֤��ޤ���
+prompt を出力し、ユーザからのキー入力を待ちます。
+エンターキーの押下などでユーザが文字列を入力し終えると、
+入力した文字列を返します。
+このとき、add_hist が true であれば、入力した文字列を入力履歴に追加します。
+何も入力していない状態で EOF(UNIX では ^D) を入力するなどで、
+ユーザからの入力がない場合は nil を返します。
 
-�ܥ᥽�åɤϥ���åɤ��б����Ƥ��ޤ���
-�����Ԥ����֤ΤȤ��ϥ���åɥ���ƥ����Ȥ����ؤ���ȯ�����ޤ���
+本メソッドはスレッドに対応しています。
+入力待ち状態のときはスレッドコンテキストの切替えが発生します。
 
-���ϻ��ˤϹ����Խ�����ǽ�ǡ�vi �⡼�ɤ� Emacs �⡼�ɤ��Ѱդ���Ƥ��ޤ���
-�ǥե���Ȥ� Emacs �⡼�ɤǤ���
+入力時には行内編集が可能で、vi モードと Emacs モードが用意されています。
+デフォルトは Emacs モードです。
 
-@param prompt �������������ɽ������ʸ�������ꤷ�ޤ����ǥե���Ȥ�""�Ǥ���
-@param add_hist ���ʤ�С����Ϥ���ʸ�����ҥ��ȥ�˵�Ͽ���ޤ����ǥե���Ȥϵ��Ǥ���
+@param prompt カーソルの前に表示する文字列を指定します。デフォルトは""です。
+@param add_hist 真ならば、入力した文字列をヒストリに記録します。デフォルトは偽です。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-@raise IOError ɸ�����Ϥ� tty �Ǥʤ������ġ�ɸ�����Ϥ򥯥��������Ƥ���
-               ([[man:isatty(2)]] �� errno �� EBADF �Ǥ��롣) ����ȯ�����ޤ���
+@raise IOError 標準入力が tty でない、かつ、標準入力をクローズしている
+               ([[man:isatty(2)]] の errno が EBADF である。) 場合に発生します。
 
-��: 
+例: 
 
   require "readline"
 
   input = Readline.readline
-  (�ץ���ץȤʤɤ�ɽ�������ˡ������Ԥ��ξ��֤ˤʤ�ޤ���
-   �����Ǥϡ�abc�פ����ϸ塢���󥿡������򲡤��������ꤷ�ޤ���)
+  (プロンプトなどは表示せずに、入力待ちの状態になります。
+   ここでは「abc」を入力後、エンターキーを押したと想定します。)
   abc
 
   p input # => "abc"
 
   input = Readline.readline("> ")
-  (">"��ɽ�����������Ԥ��ξ��֤ˤʤ�ޤ���
-   �����Ǥϡ�ls�פ����ϸ塢���󥿡������򲡤��������ꤷ�ޤ���)
+  (">"を表示し、入力待ちの状態になります。
+   ここでは「ls」を入力後、エンターキーを押したと想定します。)
   > ls
 
   p input # => "ls"
 
   input = Readline.readline("> ", true)
-  (">"��ɽ�����������Ԥ��ξ��֤ˤʤ�ޤ���
-   �����Ǥϡ�cd�פ����ϸ塢���󥿡������򲡤��������ꤷ�ޤ���)
+  (">"を表示し、入力待ちの状態になります。
+   ここでは「cd」を入力後、エンターキーを押したと想定します。)
   > cd
 
   p input # => "cd"
 
   input = Readline.readline("> ", true)
-  (">"��ɽ�����������Ԥ��ξ��֤ˤʤ�ޤ���
-   �����ǡ���������ξ奭�����ޤ��� ^P �򲡤��ȡ�
-   ��ۤ����Ϥ�����cd�פ�ɽ������ޤ���
-   �����ơ����󥿡������򲡤��������ꤷ�ޤ���)
+  (">"を表示し、入力待ちの状態になります。
+   ここで、カーソルの上キー、または ^P を押すと、
+   先ほど入力した「cd」が表示されます。
+   そして、エンターキーを押したと想定します。)
   > cd
 
   p input # => "cd"
 
-�ܥ᥽�åɤˤ����ջ��ब����ޤ���
-�����Ԥ��ξ��֤� ^C ����� ruby ���󥿥ץ꥿����λ����ü�����֤��������ޤ���
-�������򤹤뤿������2�ĵ󤲤ޤ���
+本メソッドには注意事項があります。
+入力待ちの状態で ^C すると ruby インタプリタが終了し、端末状態を復帰しません。
+これを回避するための例を2つ挙げます。
 
-��: ^C�ˤ��Interrupt�㳰����­���ơ�ü�����֤��������롣
+例: ^CによるInterrupt例外を補足して、端末状態を復帰する。
 
   stty_save = `stty -g`.chomp
   begin
@@ -108,7 +108,7 @@ prompt ����Ϥ����桼������Υ������Ϥ��Ԥ��ޤ���
     end
   end
 
-��: INT�����ʥ����­���ơ�ü�����֤��������롣
+例: INTシグナルを補足して、端末状態を復帰する。
 
   stty_save = `stty -g`.chomp
   trap("INT") { system "stty", stty_save; exit }
@@ -117,7 +117,7 @@ prompt ����Ϥ����桼������Υ������Ϥ��Ԥ��ޤ���
     p buf
   end
 
-�ޤ���ñ�� ^C ��̵�뤹����ˡ�⤢��ޤ���
+また、単に ^C を無視する方法もあります。
 
   trap("INT", "SIG_IGN")
 
@@ -125,9 +125,9 @@ prompt ����Ϥ����桼������Υ������Ϥ��Ԥ��ޤ���
     p buf
   end
 
-�������� Readline::HISTORY ����Ѥ��ơ����Τ褦�ʤ��Ȥ�Ǥ��ޤ���
+入力履歴 Readline::HISTORY を使用して、次のようなこともできます。
 
-��: ���Ԥ�ľ�������Ϥ�Ʊ�����Ƥ���������˻Ĥ��ʤ���
+例: 空行や直前の入力と同じ内容は入力履歴に残さない。
 
   while buf = Readline.readline("> ", true)
     # p Readline::HISTORY.to_a
@@ -144,7 +144,7 @@ prompt ����Ϥ����桼������Υ������Ϥ��Ԥ��ޤ���
     print "-> ", buf, "\n"
   end
 
-@see [[m:Readline.vi_editing_mode]]��[[m:Readline.emacs_editing_mode]]��
+@see [[m:Readline.vi_editing_mode]]、[[m:Readline.emacs_editing_mode]]、
      [[c:Readline::HISTORY]]
 
 == Singleton Methods
@@ -152,41 +152,41 @@ prompt ����Ϥ����桼������Υ������Ϥ��Ԥ��ޤ���
 #@since 1.9.1
 --- input=(input)
 
-readline �᥽�åɤǻ��Ѥ��������Ѥ� [[c:File]] ���֥������� input ����ꤷ�ޤ���
-����ͤϻ��ꤷ�� [[c:File]] ���֥������� input �Ǥ���
+readline メソッドで使用する入力用の [[c:File]] オブジェクト input を指定します。
+戻り値は指定した [[c:File]] オブジェクト input です。
 
-@param input [[c:File]] ���֥������Ȥ���ꤷ�ޤ���
+@param input [[c:File]] オブジェクトを指定します。
 
 --- output=(output)
     
-readline �᥽�åɤǻ��Ѥ�������Ѥ� [[c:File]] ���֥������� output ����ꤷ�ޤ���
-����ͤϻ��ꤷ�� [[c:File]] ���֥������� output �Ǥ���
+readline メソッドで使用する出力用の [[c:File]] オブジェクト output を指定します。
+戻り値は指定した [[c:File]] オブジェクト output です。
 
-@param output [[c:File]] ���֥������Ȥ���ꤷ�ޤ���
+@param output [[c:File]] オブジェクトを指定します。
 #@end
 
 --- completion_proc=(proc)
 
-�桼����������Ϥ��䴰������θ����������� [[c:Proc]] ���֥�������
-proc ����ꤷ�ޤ���
-proc �ϡ����Τ�Τ����ꤷ�Ƥ��ޤ���
-  (1) call�᥽�åɤ���ġ�call�᥽�åɤ�����ʤ���硢�㳰 ArgumentError ��ȯ�����ޤ���
-  (2) �����˥桼�����������ʸ������롣
-  (3) �����ʸ�����������֤���
+ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクト
+proc を指定します。
+proc は、次のものを想定しています。
+  (1) callメソッドを持つ。callメソッドを持たない場合、例外 ArgumentError を発生します。
+  (2) 引数にユーザからの入力文字列を取る。
+  (3) 候補の文字列の配列を返す。
 
 #@since 1.8.0
-��/var/lib /v�פθ���䴰��Ԥ��ȡ�
-�ǥե���ȤǤ� proc �ΰ����ˡ�/v�פ��Ϥ���ޤ���
-���Τ褦�ˡ��桼�������Ϥ���ʸ�����
-[[m:Readline.completer_word_break_characters]] �˴ޤޤ��ʸ���Ƕ��ڤä���Τ�ñ��Ȥ���ȡ�
-�������뤬����ñ��κǽ��ʸ�����鸽�ߤΥ���������֤ޤǤ�ʸ���� proc �ΰ������Ϥ���ޤ���
+「/var/lib /v」の後で補完を行うと、
+デフォルトでは proc の引数に「/v」が渡されます。
+このように、ユーザが入力した文字列を
+[[m:Readline.completer_word_break_characters]] に含まれる文字で区切ったものを単語とすると、
+カーソルがある単語の最初の文字から現在のカーソル位置までの文字列が proc の引数に渡されます。
 #@end
 
-@param proc �桼����������Ϥ��䴰������θ����������� [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
+@param proc ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクトを指定します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��: foo��foobar��foobaz���䴰���롣
+例: foo、foobar、foobazを補完する。
 
   require 'readline'
 
@@ -204,85 +204,85 @@ proc �ϡ����Τ�Τ����ꤷ�Ƥ��ޤ���
 
 --- completion_proc -> Proc
 
-�桼����������Ϥ��䴰������θ����������� [[c:Proc]] ���֥�������
-proc ��������ޤ���
+ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクト
+proc を取得します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_proc]]
 
 --- completion_case_fold=(bool)
 
-�桼�������Ϥ��䴰����ݡ���ʸ���Ⱦ�ʸ����Ʊ��뤹�롿���ʤ�����ꤷ�ޤ���
-bool �����ʤ��Ʊ��뤷�ޤ���bool �����ʤ��Ʊ��뤷�ޤ���
+ユーザの入力を補完する際、大文字と小文字を同一視する／しないを指定します。
+bool が真ならば同一視します。bool が偽ならば同一視しません。
 
-@param bool ��ʸ���Ⱦ�ʸ����Ʊ��뤹��(true)�����ʤ�(false)����ꤷ�ޤ���
+@param bool 大文字と小文字を同一視する(true)／しない(false)を指定します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_case_fold]]
 
 --- completion_case_fold -> bool
 
-�桼�������Ϥ��䴰����ݡ���ʸ���Ⱦ�ʸ����Ʊ��뤹�롿���ʤ���������ޤ���
-bool �����ʤ��Ʊ��뤷�ޤ���bool �����ʤ��Ʊ��뤷�ޤ���
+ユーザの入力を補完する際、大文字と小文字を同一視する／しないを取得します。
+bool が真ならば同一視します。bool が偽ならば同一視しません。
 
-�ʤ���Readline.completion_case_fold= �᥽�åɤǻ��ꤷ�����֥������Ȥ�
-���Τޤ޼�������Τǡ����Τ褦��ư��򤷤ޤ���
+なお、Readline.completion_case_fold= メソッドで指定したオブジェクトを
+そのまま取得するので、次のような動作をします。
 
   Readline.completion_case_fold = "This is a String."
   p Readline.completion_case_fold # => "This is a String."
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_case_fold=]]
 
 --- vi_editing_mode -> nil
 
-�Խ��⡼�ɤ� vi �⡼�ɤˤ��ޤ���
-vi �⡼�ɤξܺ٤ϡ�GNU Readline �Υޥ˥奢��򻲾Ȥ��Ƥ���������
+編集モードを vi モードにします。
+vi モードの詳細は、GNU Readline のマニュアルを参照してください。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 --- emacs_editing_mode -> nil
 
-�Խ��⡼�ɤ� Emacs �⡼�ɤˤ��ޤ����ǥե���Ȥ� Emacs �⡼�ɤǤ���
+編集モードを Emacs モードにします。デフォルトは Emacs モードです。
 
-Emacs �⡼�ɤξܺ٤ϡ� GNU Readline �Υޥ˥奢��򻲾Ȥ��Ƥ���������
+Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 --- completion_append_character=(string)
 
-�桼�������Ϥ��䴰����λ�������ˡ��Ǹ���ղä���ʸ�� string ����ꤷ�ޤ���
+ユーザの入力の補完が完了した場合に、最後に付加する文字 string を指定します。
 
-@param string 1ʸ������ꤷ�ޤ���
+@param string 1文字を指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-Ⱦ�ѥ��ڡ�����" "�פʤɤ�ñ�����ڤ�ʸ������ꤹ��С�
-Ϣ³�������Ϥ���ݤ������Ǥ���
+半角スペース「" "」などの単語を区切る文字を指定すれば、
+連続して入力する際に便利です。
 
   Readline.readline("> ", true)
   Readline.completion_append_character = " "
   > /var/li
-  �������䴰(TAB�����򲡤�)��Ԥ���
+  ここで補完(TABキーを押す)を行う。
   > /var/lib 
-  �Ǹ��" "���ɲä���Ƥ��뤿�ᡢ�����ˡ�/usr�פʤɤ����ϤǤ��롣
+  最後に" "が追加されているため、すぐに「/usr」などを入力できる。
   > /var/lib /usr
 
-�ʤ���1ʸ���������ꤹ�뤳�ȤϤǤ��ʤ����ᡢ
-�㤨�С�"string"����ꤷ�����Ϻǽ��ʸ���Ǥ���"s"��������Ѥ��ޤ���
+なお、1文字しか指定することはできないため、
+例えば、"string"を指定した場合は最初の文字である"s"だけを使用します。
 
   Readline.completion_append_character = "string"
   p Readline.completion_append_character # => "s"
@@ -291,148 +291,148 @@ Emacs �⡼�ɤξܺ٤ϡ� GNU Readline �Υޥ˥奢��򻲾Ȥ��Ƥ���������
 
 --- completion_append_character -> String
 
-�桼�������Ϥ��䴰����λ�������ˡ��Ǹ���ղä���ʸ����������ޤ���
+ユーザの入力の補完が完了した場合に、最後に付加する文字を取得します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_append_character=]]
 
 #@since 1.8.0
 --- basic_word_break_characters=(string)
 
-�桼�������Ϥ��䴰��Ԥ��ݡ�
-ñ��ζ��ڤ�򼨤�ʣ����ʸ���ǹ��������ʸ���� string ����ꤷ�ޤ���
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成される文字列 string を指定します。
 
-GNU Readline �Υǥե�����ͤϡ�Bash ���䴰�����ǻ��Ѥ��Ƥ���ʸ����
-" \t\n\"\\'`@$><=;|&{(" (���ڡ�����ޤ�) �ˤʤäƤ��ޤ���
+GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
+" \t\n\"\\'`@$><=;|&{(" (スペースを含む) になっています。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_word_break_characters]]
 
 --- basic_word_break_characters -> String
 
-�桼�������Ϥ��䴰��Ԥ��ݡ�
-ñ��ζ��ڤ�򼨤�ʣ����ʸ���ǹ��������ʸ�����������ޤ���
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成される文字列を取得します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_word_break_characters=]]
 
 --- completer_word_break_characters=(string)
 
-�桼�������Ϥ��䴰��Ԥ��ݡ�
-ñ��ζ��ڤ�򼨤�ʣ����ʸ���ǹ��������ʸ���� string ����ꤷ�ޤ���
-[[m:Readline.basic_word_break_characters=]] �Ȥΰ㤤�ϡ�
-GNU Readline �� rl_complete_internal �ؿ��ǻ��Ѥ���뤳�ȤǤ���
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成される文字列 string を指定します。
+[[m:Readline.basic_word_break_characters=]] との違いは、
+GNU Readline の rl_complete_internal 関数で使用されることです。
 
-GNU Readline �Υǥե���Ȥ��ͤϡ� 
-[[m:Readline.basic_word_break_characters]] ��Ʊ���Ǥ���
+GNU Readline のデフォルトの値は、 
+[[m:Readline.basic_word_break_characters]] と同じです。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_word_break_characters]]
 
 --- completer_word_break_characters -> String
 
-�桼�������Ϥ��䴰��Ԥ��ݡ�
-ñ��ζ��ڤ�򼨤�ʣ����ʸ���ǹ������줿ʸ�����������ޤ���
-[[m:Readline.basic_word_break_characters]] �Ȥΰ㤤�ϡ�
-GNU Readline �� rl_complete_internal �ؿ��ǻ��Ѥ���뤳�ȤǤ���
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成された文字列を取得します。
+[[m:Readline.basic_word_break_characters]] との違いは、
+GNU Readline の rl_complete_internal 関数で使用されることです。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_word_break_characters=]]
 
 --- basic_quote_characters=(string)
 
-���ڡ����ʤɤ�ñ��ζ��ڤ�򥯥����Ȥ��뤿���
-ʣ����ʸ���ǹ��������ʸ���� string ����ꤷ�ޤ���
+スペースなどの単語の区切りをクオートするための
+複数の文字で構成される文字列 string を指定します。
 
-GNU Readline �Υǥե�����ͤϡ���"'�פǤ���
+GNU Readline のデフォルト値は、「"'」です。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_quote_characters]]
 
 --- basic_quote_characters -> String
 
-���ڡ����ʤɤ�ñ��ζ��ڤ�򥯥����Ȥ��뤿���
-ʣ����ʸ���ǹ��������ʸ�����������ޤ���
+スペースなどの単語の区切りをクオートするための
+複数の文字で構成される文字列を取得します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_quote_characters=]]
 
 --- completer_quote_characters=(string)
 
-�桼�������Ϥ��䴰��Ԥ��ݡ����ڡ����ʤɤ�ñ��ζ��ڤ��
-�������Ȥ��뤿���ʣ����ʸ���ǹ��������ʸ���� string ����ꤷ�ޤ���
-���ꤷ��ʸ���δ֤Ǥϡ�[[m:Readline.completer_word_break_characters=]]
-�ǻ��ꤷ��ʸ����˴ޤޤ��ʸ���⡢���̤�ʸ����Ȥ��ư����ޤ���
+ユーザの入力の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列 string を指定します。
+指定した文字の間では、[[m:Readline.completer_word_break_characters=]]
+で指定した文字列に含まれる文字も、普通の文字列として扱われます。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_quote_characters]]
 
 --- completer_quote_characters -> String
 
-�桼�������Ϥ��䴰��Ԥ��ݡ����ڡ����ʤɤ�ñ��ζ��ڤ��
-�������Ȥ��뤿���ʣ����ʸ���ǹ��������ʸ�����������ޤ���
+ユーザの入力の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列を取得します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_quote_characters=]]
 
 --- filename_quote_characters=(string)
 
-�桼�������ϻ��˥ե�����̾���䴰��Ԥ��ݡ����ڡ����ʤɤ�ñ��ζ��ڤ��
-�������Ȥ��뤿���ʣ����ʸ���ǹ��������ʸ���� string ����ꤷ�ޤ���
+ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列 string を指定します。
 
-GNU Readline �Υǥե�����ͤ� nil(NULL) �Ǥ���
+GNU Readline のデフォルト値は nil(NULL) です。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.filename_quote_characters]]
 
 --- filename_quote_characters -> String
 
-�桼�������ϻ��˥ե�����̾���䴰��Ԥ��ݡ����ڡ����ʤɤ�ñ��ζ��ڤ��
-�������Ȥ��뤿���ʣ����ʸ���ǹ��������ʸ�����������ޤ���
+ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列を取得します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.filename_quote_characters=]]
 #@end
@@ -441,22 +441,22 @@ GNU Readline �Υǥե�����ͤ� nil(NULL) �Ǥ���
 
 --- VERSION -> String
 
-Readline�⥸�塼�뤬���Ѥ��Ƥ��� GNU Readline �� libedit �ΥС�������
-����ʸ����Ǥ���
+Readlineモジュールが使用している GNU Readline や libedit のバージョンを
+示す文字列です。
 
 --- FILENAME_COMPLETION_PROC -> Proc
 
-GNU Readline ���������Ƥ���ؿ�����Ѥ��ƥե�����̾���䴰��Ԥ������
-[[c:Proc]] ���֥������ȤǤ���
-[[m:Readline.completion_proc=]] �ǻ��Ѥ��ޤ���
+GNU Readline で定義されている関数を使用してファイル名の補完を行うための
+[[c:Proc]] オブジェクトです。
+[[m:Readline.completion_proc=]] で使用します。
 
 @see [[m:Readline.completion_proc=]]
 
 --- USERNAME_COMPLETION_PROC -> Proc
 
-GNU Readline ���������Ƥ���ؿ�����Ѥ��ƥ桼��̾���䴰��Ԥ������
-[[c:Proc]] ���֥������ȤǤ���
-[[m:Readline.completion_proc=]] �ǻ��Ѥ��ޤ���
+GNU Readline で定義されている関数を使用してユーザ名の補完を行うための
+[[c:Proc]] オブジェクトです。
+[[m:Readline.completion_proc=]] で使用します。
 
 @see [[m:Readline.completion_proc=]]
 
@@ -464,95 +464,95 @@ GNU Readline ���������Ƥ���ؿ�����Ѥ��ƥ桼��̾���䴰��Ԥ������
 
 extend Enumerable
 
-Readline::HISTORY ����Ѥ��ƥҥ��ȥ�˥��������Ǥ��ޤ���
-[[c:Enumerable]] �⥸�塼��� extend ���Ƥ��ꡢ
-[[c:Array]] ���饹�Τ褦�˿����񤦤��Ȥ��Ǥ��ޤ���
-�㤨�С�HISTORY[4] �ˤ�� 5 ���ܤ����Ϥ������Ƥ���Ф����Ȥ��Ǥ��ޤ���
+Readline::HISTORY を使用してヒストリにアクセスできます。
+[[c:Enumerable]] モジュールを extend しており、
+[[c:Array]] クラスのように振る舞うことができます。
+例えば、HISTORY[4] により 5 番目に入力した内容を取り出すことができます。
 
 --- to_s -> "HISTORY"
 
-ʸ����"HISTORY"���֤��ޤ���
+文字列"HISTORY"を返します。
 
-��:
+例:
 
   Readline::HISTORY.to_s #=> "HISTORY"
 
 --- [](index) -> String
 
-�ҥ��ȥ꤫�� index �ǻ��ꤷ������ǥå��������Ƥ�������ޤ���
-�㤨�� index �� 0 ����ꤹ��Ⱥǽ���������Ƥ������Ǥ��ޤ���
-�ޤ��� -1 �ϺǸ���������ƤȤ����褦�ˡ�index ������ͤ���ꤹ�뤳�Ȥǡ�
-�Ǹ夫���������Ƥ�������뤳�Ȥ�Ǥ��ޤ���
+ヒストリから index で指定したインデックスの内容を取得します。
+例えば index に 0 を指定すると最初の入力内容が取得できます。
+また、 -1 は最後の入力内容というように、index に負の値を指定することで、
+最後から入力内容を取得することもできます。
 
-@param index �����оݤΥҥ��ȥ�Υ���ǥå����������ǻ��ꤷ�ޤ���
-             ����ǥå����� [[c:Array]] �褦�� 0 ������ꤷ�ޤ���
-             �ޤ��� -1 �ϺǸ���������ƤȤ����褦�ˡ���ο�����ꤹ�뤳�Ȥ�Ǥ��ޤ���
+@param index 取得対象のヒストリのインデックスを整数で指定します。
+             インデックスは [[c:Array]] ように 0 から指定します。
+             また、 -1 は最後の入力内容というように、負の数を指定することもできます。
 
-@raise IndexError index �ǻ��ꤷ������ǥå����˳��������������Ƥ��ʤ�����ȯ�����ޤ���
+@raise IndexError index で指定したインデックスに該当する入力内容がない場合に発生します。
 
-@raise RangeError index �ǻ��ꤷ������ǥå����� int �������礭���ͤξ���ȯ�����ޤ���
+@raise RangeError index で指定したインデックスが int 型よりも大きな値の場合に発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��:
+例:
 
   require "readline"
 
-  Readline::HISTORY[0] #=> �ǽ����������
-  Readline::HISTORY[4] #=> 5���ܤ���������
-  Readline::HISTORY[-1] #=> �Ǹ����������
-  Readline::HISTORY[-5] #=> �Ǹ夫��5���ܤ���������
+  Readline::HISTORY[0] #=> 最初の入力内容
+  Readline::HISTORY[4] #=> 5番目の入力内容
+  Readline::HISTORY[-1] #=> 最後の入力内容
+  Readline::HISTORY[-5] #=> 最後から5番目の入力内容
 
-��: 1000000 ���ܤ��������Ƥ�¸�ߤ��ʤ���硢�㳰 IndexError ��ȯ�����ޤ���
+例: 1000000 番目の入力内容が存在しない場合、例外 IndexError が発生します。
 
-  Readline::HISTORY[1000000] #=> �㳰 IndexError ��ȯ�����ޤ���
+  Readline::HISTORY[1000000] #=> 例外 IndexError が発生します。
 
-��: 32 bit �Υ����ƥ�ξ�硢�㳰 RangeError ��ȯ�����ޤ���
+例: 32 bit のシステムの場合、例外 RangeError が発生します。
 
-  Readline::HISTORY[2 ** 32 + 1] #=> �㳰 RangeError ��ȯ�����ޤ���
+  Readline::HISTORY[2 ** 32 + 1] #=> 例外 RangeError が発生します。
 
-��: 64 bit �Υ����ƥ�ξ�硢�㳰 RangeError ��ȯ�����ޤ���
+例: 64 bit のシステムの場合、例外 RangeError が発生します。
 
-  Readline::HISTORY[2 ** 64 + 1] #=> �㳰 RangeError ��ȯ�����ޤ���
+  Readline::HISTORY[2 ** 64 + 1] #=> 例外 RangeError が発生します。
 
 --- []=(index, string)
 
-�ҥ��ȥ�� index �ǻ��ꤷ������ǥå��������Ƥ� string �ǻ��ꤷ��ʸ����ǽ񤭴����ޤ���
-�㤨�� index �� 0 ����ꤹ��Ⱥǽ���������Ƥ��񤭴����ޤ���
-�ޤ��� -1 �ϺǸ���������ƤȤ����褦�ˡ�index ������ͤ���ꤹ�뤳�Ȥǡ�
-�Ǹ夫���������Ƥ�������뤳�Ȥ�Ǥ��ޤ���
-���ꤷ�� string ���֤��ޤ���
+ヒストリの index で指定したインデックスの内容を string で指定した文字列で書き換えます。
+例えば index に 0 を指定すると最初の入力内容が書き換えます。
+また、 -1 は最後の入力内容というように、index に負の値を指定することで、
+最後から入力内容を取得することもできます。
+指定した string を返します。
 
-@param index �����оݤΥҥ��ȥ�Υ���ǥå����������ǻ��ꤷ�ޤ���
-             ����ǥå����� [[c:Array]] �褦�� 0 ������ꤷ�ޤ���
-             �ޤ��� -1 �ϺǸ���������ƤȤ����褦�ˡ���ο�����ꤹ�뤳�Ȥ�Ǥ��ޤ���
-@param string ʸ�������ꤷ�ޤ�������ʸ����ǥҥ��ȥ��񤭴����ޤ���
+@param index 取得対象のヒストリのインデックスを整数で指定します。
+             インデックスは [[c:Array]] ように 0 から指定します。
+             また、 -1 は最後の入力内容というように、負の数を指定することもできます。
+@param string 文字列を指定します。この文字列でヒストリを書き換えます。
 
-@raise IndexError index �ǻ��ꤷ������ǥå����˳��������������Ƥ��ʤ�����ȯ�����ޤ���
+@raise IndexError index で指定したインデックスに該当する入力内容がない場合に発生します。
 
-@raise RangeError index �ǻ��ꤷ������ǥå����� int �������礭���ͤξ���ȯ�����ޤ���
+@raise RangeError index で指定したインデックスが int 型よりも大きな値の場合に発生します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 --- <<(string) -> self
 
-�ҥ��ȥ�κǸ�� string �ǻ��ꤷ��ʸ������ɲä��ޤ���
-self ���֤��ޤ���
+ヒストリの最後に string で指定した文字列を追加します。
+self を返します。
 
-@param string ʸ�������ꤷ�ޤ���
+@param string 文字列を指定します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��: "foo"���ɲä��롣
+例: "foo"を追加する。
 
   require "readline"
 
   Readline::HISTORY << "foo"
   p Readline::HISTORY[-1] #=> "foo"
 
-��: "foo"��"bar"���ɲä��롣
+例: "foo"、"bar"を追加する。
 
   require "readline"
 
@@ -564,21 +564,21 @@ self ���֤��ޤ���
 
 --- push(*string) -> self
 
-�ҥ��ȥ�κǸ�� string �ǻ��ꤷ��ʸ������ɲä��ޤ���ʣ���� string �����Ǥ��ޤ���
-self ���֤��ޤ���
+ヒストリの最後に string で指定した文字列を追加します。複数の string を指定できます。
+self を返します。
 
-@param string ʸ�������ꤷ�ޤ���ʣ������Ǥ��ޤ���
+@param string 文字列を指定します。複数指定できます。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��: "foo"���ɲä��롣
+例: "foo"を追加する。
 
   require "readline"
 
   Readline::HISTORY.push("foo")
   p Readline::HISTORY[-1] #=> "foo"
 
-��: "foo"��"bar"���ɲä��롣
+例: "foo"、"bar"を追加する。
 
   require "readline"
 
@@ -590,14 +590,14 @@ self ���֤��ޤ���
 
 --- pop -> String
 
-�ҥ��ȥ�κǸ�����Ƥ���Ф��ޤ���
-�Ǹ�����Ƥϡ��ҥ��ȥ꤫���������ޤ���
+ヒストリの最後の内容を取り出します。
+最後の内容は、ヒストリから取り除かれます。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��:
+例:
 
   require "readline"
   
@@ -606,19 +606,19 @@ self ���֤��ޤ���
   p Readline::HISTORY.pop #=> "bar"
   p Readline::HISTORY.pop #=> "foo"
 
-@see [[m:Readline::HISTORY.push]]��[[m:Readline::HISTORY.shift]]��
+@see [[m:Readline::HISTORY.push]]、[[m:Readline::HISTORY.shift]]、
      [[m:Readline::HISTORY.delete_at]]
 
 --- shift -> String
 
-�ҥ��ȥ�κǽ�����Ƥ���Ф��ޤ���
-�ǽ�����Ƥϡ��ҥ��ȥ꤫���������ޤ���
+ヒストリの最初の内容を取り出します。
+最初の内容は、ヒストリから取り除かれます。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��:
+例:
 
   require "readline"
   
@@ -627,7 +627,7 @@ self ���֤��ޤ���
   p Readline::HISTORY.shift #=> "bar"
   p Readline::HISTORY.shift #=> "baz"
 
-@see [[m:Readline::HISTORY.push]]��[[m:Readline::HISTORY.pop]]��
+@see [[m:Readline::HISTORY.push]]、[[m:Readline::HISTORY.pop]]、
      [[m:Readline::HISTORY.delete_at]]
 
 #@since 1.9.1
@@ -635,12 +635,12 @@ self ���֤��ޤ���
 #@end
 --- each {|string| ... }
 
-�ҥ��ȥ�����Ƥ��Ф��ƥ֥��å���ɾ�����ޤ���
-�֥��å��ѥ�᡼���ˤϥҥ��ȥ�κǽ餫��Ǹ�ޤǤ����Ƥ���֤��Ϥ��ޤ���
+ヒストリの内容に対してブロックを評価します。
+ブロックパラメータにはヒストリの最初から最後までの内容を順番に渡します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��: �ҥ��ȥ�����Ƥ�ǽ餫����֤˽��Ϥ��롣
+例: ヒストリの内容を最初から順番に出力する。
 
   require "readline"
   
@@ -650,7 +650,7 @@ self ���֤��ޤ���
   end
 
 #@since 1.9.1
-��: [[c:Enumerator]] ���֥������Ȥ��֤���硣
+例: [[c:Enumerator]] オブジェクトを返す場合。
 
   require "readline"
   
@@ -663,11 +663,11 @@ self ���֤��ޤ���
 
 --- length -> Integer
 
-�ҥ��ȥ�˳�Ǽ���줿���Ƥο���������ޤ���
+ヒストリに格納された内容の数を取得します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��: �ҥ��ȥ�����Ƥ�ǽ餫����֤˽��Ϥ��롣
+例: ヒストリの内容を最初から順番に出力する。
 
   require "readline"
   
@@ -678,12 +678,12 @@ self ���֤��ޤ���
 
 --- empty? -> bool
 
-�ҥ��ȥ�˳�Ǽ���줿���Ƥο��� 0 �ξ��� true ��
-�����Ǥʤ����� false ���֤��ޤ���
+ヒストリに格納された内容の数が 0 の場合は true を、
+そうでない場合は false を返します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��:
+例:
 
   require "readline"
   
@@ -695,21 +695,21 @@ self ���֤��ޤ���
 
 --- delete_at(index) -> String | nil
 
-index �ǻ��ꤷ������ǥå��������Ƥ�ҥ��ȥ꤫���������������Ƥ��֤��ޤ���
-�������� index �����Ƥ��ҥ��ȥ�ˤʤ���С� nil ���֤��ޤ���
-index �� 0 ����ꤹ��� [[m:Readline::HISTORY.shift]] 
-��Ʊ�ͤ˺ǽ���������Ƥ������ޤ���
-�ޤ��� -1 �ϺǸ���������ƤȤ����褦�ˡ�index ������ͤ���ꤹ�뤳�Ȥǡ�
-�Ǹ夫���������Ƥ�������뤳�Ȥ�Ǥ��ޤ���
-index �� -1 �ξ��� [[m:Readline::HISTORY.pop]] ��Ʊ�ͤ�ư��ޤ���
+index で指定したインデックスの内容をヒストリから削除し、その内容を返します。
+該当する index の内容がヒストリになければ、 nil を返します。
+index に 0 を指定すると [[m:Readline::HISTORY.shift]] 
+と同様に最初の入力内容を削除します。
+また、 -1 は最後の入力内容というように、index に負の値を指定することで、
+最後から入力内容を取得することもできます。
+index が -1 の場合は [[m:Readline::HISTORY.pop]] と同様に動作します。
 
-@param index ����оݤΥҥ��ȥ�Υ���ǥå�������ꤷ�ޤ���
+@param index 削除対象のヒストリのインデックスを指定します。
 
-@raise NotImplementedError ���ݡ��Ȥ��Ƥ��ʤ��Ķ���ȯ�����ޤ���
+@raise NotImplementedError サポートしていない環境で発生します。
 
-@raise SecurityError �����ե�٥� ($SAFE) �� 4 �ξ���ȯ�����ޤ���
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-��:
+例:
 
   require "readline"
   

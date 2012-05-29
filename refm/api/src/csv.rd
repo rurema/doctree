@@ -1,62 +1,62 @@
 #@since 1.9.1
-CSV (Comma Separated Values) �򰷤��饤�֥��Ǥ���
+CSV (Comma Separated Values) を扱うライブラリです。
 
-#@# �����򵭽Ҥ���
-#@# ñ�ʤ������ǤϤʤ���Τ��
+#@# 説明を記述する
+#@# 単なる翻訳ではないものを書く
 
-���ΥС������� CSV �饤�֥��� FasterCSV ����Ϥޤ�ޤ�����
-FasterCSV �� Ruby1.8 ��ɸ��ź�դ���Ƥ��� CSV �饤�֥����֤������Ȥ��Ƴ�ȯ����ޤ�����
-���Υ饤�֥��ϥ桼���δؿ������褹�뤿��˥ǥ����󤵤�Ƥ��ޤ���
-��ʥ����뤬���Ĥ���ޤ���
+このバージョンの CSV ライブラリは FasterCSV から始まりました。
+FasterCSV は Ruby1.8 に標準添付されている CSV ライブラリの置き換えとして開発されました。
+このライブラリはユーザの関心事を解決するためにデザインされています。
+主なゴールが三つあります。
 
- (1) �ԥ奢 Ruby �ΤޤޤǸ��� CSV �饤�֥����⤫�ʤ�®�����뤳��
- (2) ���������ƥʥ󥹤��䤹�������ɥ١����Ǥ��뤳�� (FasterCSV �Ϥ��ʤ��礭��
-     ��ǽ˭���ˤʤ�ޤ�������ʸ������ʬ�Υ����ɤϤ��ʤ꾮�����ޤޤǤ�)
- (3) CSV �Υ��󥿡��ե�������������뤳��
+ (1) ピュア Ruby のままで元の CSV ライブラリよりもかなり速くすること
+ (2) 小さくメンテナンスしやすいコードベースであること (FasterCSV はかなり大きく
+     機能豊かになりました。構文解析部分のコードはかなり小さいままです)
+ (3) CSV のインターフェイスを改善すること
 
-���餫�˺Ǹ�Τ�Τϼ��Ū�Ǥ����ѹ�����������ʤ���ͳ��̵���¤ꡢ���ꥸ�ʥ��
-���󥿡��ե������˽����褦�ˤ����Τǡ������餯�� CSV �饤�֥��ȤϤ��ޤ�
-�礭�ʰ㤤��̵���Ǥ��礦��
+明らかに最後のものは主観的です。変更するやむを得ない理由が無い限り、オリジナルの
+インターフェイスに従うようにしたので、おそらく旧 CSV ライブラリとはあまり
+大きな違いは無いでしょう。
 
-=== �Ť� CSV �饤�֥��Ȥΰ㤤
+=== 古い CSV ライブラリとの違い
 
-�礭�ʰ㤤�ˤĤ��Ƹ��ڤ��ޤ���
+大きな違いについて言及します。
 
-==== CSV ��ʸ����
+==== CSV 構文解析
 
- * ���Υѡ����� m17n ���б����Ƥ��ޤ���[[c:CSV]] �⻲�Ȥ��Ƥ�������
- * ���Υ饤�֥��Ϥ�긷�����ѡ�������äƤ���Τǡ�����Τ���ǡ������Ф��� [[c:CSV::MalformedCSVError]] ���ꤲ�ޤ�
- * �� CSV �饤�֥���������˴ؤ��Ƥϴ��ƤǤϤ���ޤ��󡣤��ʤ��� :row_sep �Ȥ��ƥ��åȤ����ͤ�ˡ�Ǥ���
-   ����������ư���Ф����뤳�Ȥ�Ǥ��ޤ�
- * ��饤�֥��Ǥ϶��Ԥ��Ф��� [nil] ���֤��ޤ��������Υ饤�֥��϶���������֤��ޤ�
- * ���Υ饤�֥��Ϥ��ʤ�®���ѡ�������äƤ��ޤ�
+ * このパーサは m17n に対応しています。[[c:CSV]] も参照してください
+ * このライブラリはより厳しいパーサを持っているので、問題のあるデータに対して [[c:CSV::MalformedCSVError]] を投げます
+ * 旧 CSV ライブラリよりも行末に関しては寛容ではありません。あなたが :row_sep としてセットした値が法です。
+   しかし、自動検出させることもできます
+ * 旧ライブラリでは空行に対して [nil] を返しますが、このライブラリは空の配列を返します
+ * このライブラリはかなり速いパーサを持っています
 
-==== ���󥿡��ե�����
+==== インターフェイス
 
- * ���ץ����򥻥åȤ���Τ˥ϥå�������ΰ�����Ȥ��褦�ˤʤ�ޤ���
- * CSV#generate_row, CSV#parse_row �Ϥʤ��ʤ�ޤ���
- * �Ť� CSV::Reader, CSV::Writer ���饹�Ϥʤ��ʤ�ޤ���
- * [[m:CSV.open]] �Ϥ�� Ruby �餷���ʤ�ޤ���
- * [[c:CSV]] ���֥������Ȥ� [[c:IO]] ��¿���Υ᥽�åɤ򥵥ݡ��Ȥ���褦�ˤʤ�ޤ���
- * ʸ����� IO �Τ褦�ʥ��֥������Ȥ��ɤ߽񤭤��뤿��˥�åפ��� [[m:CSV.new]] �᥽�åɤ��ɲä���ޤ���
- * [[m:CSV.generate]] �ϸŤ���ΤȤϰۤʤ�ޤ�
- * ��ʬ�ɤ߽Ф��Ϥ⤦���ݡ��Ȥ��Ƥ��ޤ����ɤ߹��ߤϹ�ñ�̤ǹԤ��ޤ�
- * �ѥե����ޥ󥹤Τ��ᡢ���󥹥��󥹥᥽�åɤǥ��ѥ졼�����񤭽���ʤ��ʤ�ޤ�����
-   [[m:CSV.new]] �ǥ��åȤ���褦�ˤ��Ƥ���������
+ * オプションをセットするのにハッシュ形式の引数を使うようになりました
+ * CSV#generate_row, CSV#parse_row はなくなりました
+ * 古い CSV::Reader, CSV::Writer クラスはなくなりました
+ * [[m:CSV.open]] はより Ruby らしくなりました
+ * [[c:CSV]] オブジェクトは [[c:IO]] の多くのメソッドをサポートするようになりました
+ * 文字列や IO のようなオブジェクトを読み書きするためにラップする [[m:CSV.new]] メソッドが追加されました
+ * [[m:CSV.generate]] は古いものとは異なります
+ * 部分読み出しはもうサポートしていません。読み込みは行単位で行います
+ * パフォーマンスのため、インスタンスメソッドでセパレータを上書き出来なくなりました。
+   [[m:CSV.new]] でセットするようにしてください。
 
-=== CSV �Ȥ�
+=== CSV とは
 
-CSV �饤�֥��� [[RFC:4180]] ����ľ�ܤȤ�줿���ʤ긷���������ݻ����ޤ���
-���������������¤��뤳�ȤǤ��Υ饤�֥���Ȥ��䤹�����Ƥ��ޤ���[[c:CSV]] ��
-���٤Ƥ�ͭ���� CSV �ե������ѡ������ޤ���
+CSV ライブラリは [[RFC:4180]] から直接とられたかなり厳しい定義を維持します。
+一ヶ所だけ定義を緩和することでこのライブラリを使いやすくしています。[[c:CSV]] は
+すべての有効な CSV ファイルをパースします。
 
-������ CSV �ǡ�����Ϳ�������ʤ�������ե�����ɤ������Ǥ��뤳�Ȥ����ꤹ
-��Τϥե�����������ɤ߹������Ǥ��������¿���λ��֤��������
-�ޤ���
+不正な CSV データを与えたくない。あるフィールドが不正であることが確定す
+るのはファイルを全て読み込んだ後です。これは多くの時間やメモリを消費し
+ます。
 
-Ruby ���ȹ��ߥ᥽�åɤϤۤȤ�����Ƥ����Ǥ��ͥ��Ƥ��ޤ��������ɤ����
-������ CSV �ǡ�����Ϳ���Ƥ�ư���ޤ����㤨�С��������Ȥ���Ƥ��ʤ��ե���
-��ɤ�������� CSV �ǡ����ϼ��Τ褦�˴�ñ�˥ѡ����Ǥ��ޤ���
+Ruby の組込みメソッドはほとんど全ての点でより優れています。運が良ければ
+不正な CSV データを与えても動きます。例えば、クオートされていないフィー
+ルドだけを持つ CSV データは次のように簡単にパースできます。
 
   data.split(",")
 
@@ -64,56 +64,56 @@ Ruby ���ȹ��ߥ᥽�åɤϤۤȤ�����Ƥ����Ǥ��ͥ��Ƥ��ޤ��������ɤ����
 extend Forwardable
 include Enumerable
 
-#@# �����򵭽Ҥ���
+#@# 説明を記述する
 
-���Υ��饹�� CSV �ե������ǡ������Ф��봰���ʥ��󥿡��ե��������󶡤��ޤ���
+このクラスは CSV ファイルやデータに対する完全なインターフェイスを提供します。
 
-=== �ɤ߹���
+=== 読み込み
 
-  # �ե����뤫���Ԥ���
+  # ファイルから一行ずつ
   CSV.foreach("path/to/file.csv") do |row|
     # use row here...
   end
 
-  # �ե����뤫����٤�
+  # ファイルから一度に
   arr_of_arrs = CSV.read("path/to/file.csv")
 
-  # ʸ���󤫤��Ԥ���
+  # 文字列から一行ずつ
   CSV.parse("CSV,data,String") do |row|
     # use row here...
   end
 
-  # ʸ���󤫤��Ԥ���
+  # 文字列から一行ずつ
   arr_of_arrs = CSV.parse("CSV,data,String")
 
-=== �񤭹���
+=== 書き込み
 
-  # �ե�����ؽ񤭹���
+  # ファイルへ書き込み
   CSV.open("path/to/file.csv", "wb") do |csv|
     csv << ["row", "of", "CSV", "data"]
     csv << ["another", "row"]
     # ...
   end
 
-  # ʸ����ؽ񤭹���
+  # 文字列へ書き込み
   csv_string = CSV.generate do |csv|
     csv << ["row", "of", "CSV", "data"]
     csv << ["another", "row"]
     # ...
   end
 
-=== ����Ѵ�
+=== 一行変換
 
   csv_string = ["CSV", "data"].to_csv   # => "CSV,data"
   csv_array  = "CSV,String".parse_csv   # => ["CSV", "String"]
 
-=== ���硼�ȥ��å�
+=== ショートカット
 
   CSV             { |csv_out| csv_out << %w{my data here} }  # to $stdout
   CSV(csv = "")   { |csv_str| csv_str << %w{my data here} }  # to a String
   CSV($stderr)    { |csv_err| csv_err << %w{my data here} }  # to $stderr
 
-=== CSV ��ʸ�����󥳡��ǥ��� (M17n or Multilingualization)
+=== CSV と文字エンコーディング (M17n or Multilingualization)
 
 This new CSV parser is m17n savvy.  The parser works in the Encoding of the IO
 or String object being read from or written to.  Your data is never transcoded
@@ -151,74 +151,74 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 --- DateMatcher -> Regexp
 
-���� (Date) �����Υǡ�����ȯ���������Ѵ������ꤹ�뤿�������ɽ���Ǥ���
+日付 (Date) 形式のデータを発見したり変換したりするための正規表現です。
 
 --- DateTimeMatcher -> Regexp
 
-���� (DateTime) �����Υǡ�����ȯ���������Ѵ������ꤹ�뤿�������ɽ���Ǥ���
+日時 (DateTime) 形式のデータを発見したり変換したりするための正規表現です。
 
 --- ConverterEncoding -> Encoding
 
-���٤Ƥ��Ѵ���ǻ��Ѥ��륨�󥳡��ǥ��󥰤Ǥ���
+すべての変換器で使用するエンコーディングです。
 
 --- Converters -> Hash
 
-���Υϥå����̾���ǥ��������Ǥ����Ȥ߹��ߤ��Ѵ�����ݻ����Ƥ��ޤ���
+このハッシュは名前でアクセスできる組み込みの変換器を保持しています。
 
-[[m:CSV#convert]] �ǻ��Ѥ����Ѵ���Ȥ��ƻ��ѤǤ��ޤ���
-�ޤ� [[m:CSV.new]] �Υ��ץ����Ȥ��ƻ��Ѥ��뤳�Ȥ�Ǥ��ޤ���
+[[m:CSV#convert]] で使用する変換器として使用できます。
+また [[m:CSV.new]] のオプションとして使用することもできます。
 
 : :integer
-  [[m:Kernel.#Integer]] ����Ѥ��ƥե�����ɤ��Ѵ����ޤ���
+  [[m:Kernel.#Integer]] を使用してフィールドを変換します。
 : :float
-  [[m:Kernel.#Float]] ����Ѥ��ƥե�����ɤ��Ѵ����ޤ���
+  [[m:Kernel.#Float]] を使用してフィールドを変換します。
 : :numeric
-  :integer �� :float ���Ȥ߹�碌�Ǥ���
+  :integer と :float の組み合わせです。
 : :date
-  [[m:Date.parse]] ����Ѥ��ƥե�����ɤ��Ѵ����ޤ���
+  [[m:Date.parse]] を使用してフィールドを変換します。
 : :date_time
-  [[m:DateTime.parse]] ����Ѥ��ƥե�����ɤ��Ѵ����ޤ���
+  [[m:DateTime.parse]] を使用してフィールドを変換します。
 : :all
-  :date_time �� :numeric ���Ȥ߹�碌�Ǥ���
+  :date_time と :numeric の組み合わせです。
 
-���Ƥ��Ȥ߹��ߤ��Ѵ���ϡ��ºݤ��Ѵ��������˥ե�����ɤΥǡ�����
-ʸ�����󥳡��ǥ��󥰤� UTF-8 ���Ѵ����ޤ������Υǡ�����ʸ�����󥳡��ǥ���
-�� UTF-8 ���Ѵ�����ʤ��ä����ϡ��Ѵ��ˤϼ��Ԥ��ޤ������ǡ������ѹ�����ޤ���
+全ての組み込みの変換器は、実際に変換する前にフィールドのデータの
+文字エンコーディングを UTF-8 に変換します。そのデータの文字エンコーディング
+を UTF-8 に変換出来なかった場合は、変換には失敗しますが、データは変更されません。
 
-���Υϥå���� [[m:Object#freeze]] ����Ƥ��ʤ��Τǡ��桼���ϼ�ͳ���ͤ�
-�ɲä��뤳�Ȥ�����ޤ���
+このハッシュは [[m:Object#freeze]] されていないので、ユーザは自由に値を
+追加することが出来ます。
 
-ʣ�����Ѵ����������Ǥ��ɲä���Ȥ��ϡ��ͤ�̾�����������ꤹ��ɬ�פ�
-����ޤ����������Ǥ��ͤˤ�¾��ʣ�����Ѵ����������Ǥ�̾������ꤹ�뤳
-�Ȥ�Ǥ��ޤ���
+複数の変換器を持つ要素を追加するときは、値に名前の配列を指定する必要が
+あります。この要素の値には他の複数の変換器を持つ要素の名前を指定するこ
+ともできます。
 
 --- HeaderConverters -> Hash
 
-���Υϥå����̾���ǥ��������Ǥ����Ȥ߹��ߤΥإå����Ѵ������¸���Ƥ��ޤ���
+このハッシュは名前でアクセスできる組み込みのヘッダ用変換器を保存しています。
 
-[[m:CSV#header_convert]] �ǻ��Ѥ����Ѵ���Ȥ��ƻ��ѤǤ��ޤ���
-�ޤ� [[m:CSV.new]] �Υ��ץ����Ȥ��ƻ��Ѥ��뤳�Ȥ�Ǥ��ޤ���
+[[m:CSV#header_convert]] で使用する変換器として使用できます。
+また [[m:CSV.new]] のオプションとして使用することもできます。
 
 : :downcase
-  �إå���ʸ������Ф��� [[m:String#downcase]] ��ƤӽФ��ޤ���
+  ヘッダの文字列に対して [[m:String#downcase]] を呼び出します。
 : :symbol
-  �إå���ʸ�����ʸ�����Ѵ����Ƥ��顢����ʸ���� (\s) �򥢥������������
-  �ִ�������ѿ��� (\W) �������ޤ����Ǹ�� [[m:String#to_sym]] ��ƤӽФ��ޤ���
+  ヘッダの文字列を小文字に変換してから、空白文字列 (\s) をアンダースコアに
+  置換し、非英数字 (\W) を削除します。最後に [[m:String#to_sym]] を呼び出します。
 
-���Ƥ��Ȥ߹��ߤΥإå����Ѵ���ϡ��ºݤ��Ѵ��������˥إå��Υǡ�����
-ʸ�����󥳡��ǥ��󥰤� UTF-8 ���Ѵ����ޤ������Υإå���ʸ�����󥳡��ǥ���
-�� UTF-8 ���Ѵ��Ǥ��ʤ��ä����ϡ��Ѵ��ˤϼ��Ԥ��ޤ������ǡ������ѹ�����ޤ���
+全ての組み込みのヘッダ用変換器は、実際に変換する前にヘッダのデータの
+文字エンコーディングを UTF-8 に変換します。そのヘッダの文字エンコーディング
+を UTF-8 に変換できなかった場合は、変換には失敗しますが、データは変更されません。
 
-���Υϥå���� [[m:Object#freeze]] ����Ƥ��ʤ��Τǡ��桼���ϼ�ͳ���ͤ�
-�ɲä��뤳�Ȥ�����ޤ���
+このハッシュは [[m:Object#freeze]] されていないので、ユーザは自由に値を
+追加することが出来ます。
 
-ʣ�����Ѵ����������Ǥ��ɲä���Ȥ��ϡ��ͤ�̾�����������ꤹ��ɬ�פ�
-����ޤ����������Ǥ��ͤˤ�¾��ʣ�����Ѵ����������Ǥ�̾������ꤹ�뤳
-�Ȥ�Ǥ��ޤ���
+複数の変換器を持つ要素を追加するときは、値に名前の配列を指定する必要が
+あります。この要素の値には他の複数の変換器を持つ要素の名前を指定するこ
+ともできます。
 
 --- DEFAULT_OPTIONS -> Hash
 
-���Υ��ץ����ϸƤӽФ�¦�Ǿ�񤭤��ʤ��ä��Ȥ��˻��Ѥ��륪�ץ����Ǥ���
+このオプションは呼び出し側で上書きしなかったときに使用するオプションです。
 
 : :col_sep
   ","
@@ -245,7 +245,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 --- VERSION -> String
 
-�饤�֥��ΥС�������ɽ��ʸ����Ǥ���
+ライブラリのバージョンを表す文字列です。
 
 #@if (version == "1.9.1")
 2.4.5
@@ -258,28 +258,28 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 --- new(data, options = Hash.new) -> CSV
 
-���Υ᥽�åɤ� CSV �ե�������ɤ߹�����ꡢ�񤭽Ф����ꤹ�뤿���
-[[c:String]] �� [[c:IO]] �Υ��󥹥��󥹤��åפ��ޤ���
+このメソッドは CSV ファイルを読み込んだり、書き出したりするために
+[[c:String]] か [[c:IO]] のインスタンスをラップします。
 
-��åפ��줿ʸ�������Ƭ�����ɤ߹��ळ�Ȥˤʤ�ޤ���
-ʸ������ɵ����������� [[m:CSV.generate]] ����Ѥ��Ƥ���������
-¾�ΰ��֤���������������Ϥ��餫���᤽�Τ褦�����ꤷ�� [[c:StringIO]] ���Ϥ��Ƥ���������
+ラップされた文字列の先頭から読み込むことになります。
+文字列に追記したい場合は [[m:CSV.generate]] を使用してください。
+他の位置から処理したい場合はあらかじめそのように設定した [[c:StringIO]] を渡してください。
 
-@param data [[c:String]] �� [[c:IO]] �Υ��󥹥��󥹤���ꤷ�ޤ���
-            [[c:String]] �Υ��󥹥��󥹤���ꤷ����硢[[m:CSV#string]] ����Ѥ���
-            �夫��ǡ�������Ф����Ȥ�����ޤ���
+@param data [[c:String]] か [[c:IO]] のインスタンスを指定します。
+            [[c:String]] のインスタンスを指定した場合、[[m:CSV#string]] を使用して
+            後からデータを取り出すことが出来ます。
 
-@param options CSV ��ѡ������뤿��Υ��ץ�����ϥå���ǻ��ꤷ�ޤ���
-               �ѥե����ޥ󥹾����ͳ�ǥ��󥹥��󥹥᥽�åɤǤϥ��ץ������񤭤��뤳�Ȥ�
-               ����ʤ��Τǡ���񤭤���������ɬ�������Ǿ�񤭤���褦�ˤ��Ƥ���������
+@param options CSV をパースするためのオプションをハッシュで指定します。
+               パフォーマンス上の理由でインスタンスメソッドではオプションを上書きすることが
+               出来ないので、上書きしたい場合は必ずここで上書きするようにしてください。
 
 : :col_sep
-  �ե�����ɤζ��ڤ�ʸ�������ꤷ�ޤ�������ʸ����ϥѡ����������˥ǡ�����
-  ���󥳡��ǥ��󥰤��Ѵ�����ޤ���
+  フィールドの区切り文字列を指定します。この文字列はパースする前にデータの
+  エンコーディングに変換されます。
 : :row_sep
-  �Զ��ڤ��ʸ�������ꤷ�ޤ���:auto �Ȥ������̤��ͤ򥻥åȤ��뤳�Ȥ��Ǥ��ޤ���
-  :auto ����ꤷ�����ǡ������鼫ưŪ�˹Զ��ڤ��ʸ����򸫤Ĥ��Ф��ޤ������ΤȤ�
-  �ǡ�������Ƭ���鼡�� "\r\n", "\n", "\r" ���¤ӤޤǤ��ɤߤޤ���
+  行区切りの文字列を指定します。:auto という特別な値をセットすることができます。
+  :auto を指定した場合データから自動的に行区切りの文字列を見つけ出します。このとき
+  データの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
   A sequence will be selected even if it occurs in a quoted field, assuming that you
   would have the same line endings there.  If none of those sequences is
   found, +data+ is [[c:ARGF]], [[m:Kernel::STDIN]], [[m:Kernel::STDOUT]], or
@@ -291,12 +291,12 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   problems with resetting the document  position to where it was before the
   read ahead. This String will be  transcoded into the data's Encoding  before parsing.
 : :quote_char
-  �ե�����ɤ򥯥����Ȥ���ʸ������ꤷ�ޤ���Ĺ�� 1 ��ʸ����Ǥʤ���Фʤ�ޤ���
-  ���������֥륯�����ȤǤϤʤ��ְ�ä����󥰥륯�����Ȥ���Ѥ��Ƥ��륢�ץꥱ�������
-  �������Ǥ���
+  フィールドをクオートする文字を指定します。長さ 1 の文字列でなければなりません。
+  正しいダブルクオートではなく間違ったシングルクオートを使用しているアプリケーション
+  で便利です。
   CSV will always consider a double  sequence this character to be an
   escaped quote.
-  ����ʸ����ϥѡ����������˥ǡ����Υ��󥳡��ǥ��󥰤��Ѵ�����ޤ���
+  この文字列はパースする前にデータのエンコーディングに変換されます。
 : :field_size_limit
   This is a maximum size CSV will read  ahead looking for the closing quote
   for a field.  (In truth, it reads to  the first line ending beyond this
@@ -306,84 +306,84 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
   by default.
 : :converters
-  [[m:CSV::Converters]] ������Ф���̾��������Ǥ����Ѵ��郎��Ĥ���
-  �ξ�������˳�Ǽ����ɬ�פϤ���ޤ���
-  ���Ƥ��Ȥ߹��ߤ��Ѵ���ϡ��ͤ��Ѵ��������� UTF-8 �˥��󥳡��ǥ�����
-  �����ߤޤ������󥳡��ǥ����Ѵ��˼��Ԥ������ϥե�����ɤ��Ѵ���
-  ��ޤ���
+  [[m:CSV::Converters]] から取り出した名前の配列です。変換器が一つだけ
+  の場合は配列に格納する必要はありません。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
+  換を試みます。エンコーディング変換に失敗した場合はフィールドは変換さ
+  れません。
 : :unconverted_fields
-  ���򥻥åȤ���� [[m:CSV::Row#unconverted_fields]] �Ȥ����Ѵ����Υե���
-  ��ɤ��֤��᥽�åɤ����ƤιԤ��ɲä��ޤ���headers ���ץ����ˤ�ä�
-  �ɲä����إå��ϥե�����ɤǤϤʤ��Τ�
-  [[m:CSV::Row#unconverted_fields]] �϶���������֤��ޤ���
+  真をセットすると [[m:CSV::Row#unconverted_fields]] という変換前のフィー
+  ルドを返すメソッドを全ての行に追加します。headers オプションによって
+  追加したヘッダはフィールドではないので
+  [[m:CSV::Row#unconverted_fields]] は空の配列を返します。
 : :headers
-  :first_row �Ȥ�������ܥ뤫������ꤹ��ȡ�CSV �ե�����ΰ���ܤ�إå��Ȥ��ư����ޤ���
-  �������ꤹ��Ȥ����إå��Ȥ��ư����ޤ���ʸ�������ꤹ��� [[m:CSV.parse_line]] ��
-  ���Ѥ��ƥѡ���������̤�إå��Ȥ��ư����ޤ������ΤȤ���:col_sep, :row_sep, :quote_char
-  �Ϥ��Υ��󥹥��󥹤�Ʊ����Τ���Ѥ��ޤ������������ [[m:CSV#shift]]
-  ���֤��ͤ�����Τ����� [[c:CSV::Row]] �Υ��󥹥��󥹤��ѹ����ޤ���
-  [[m:CSV#read]] ���֤��ͤ����������Τ����� [[c:CSV::Table]] �Υ���
-  �����󥹤��ѹ����ޤ���
+  :first_row というシンボルか真を指定すると、CSV ファイルの一行目をヘッダとして扱います。
+  配列を指定するとそれをヘッダとして扱います。文字列を指定すると [[m:CSV.parse_line]] を
+  使用してパースした結果をヘッダとして扱います。このとき、:col_sep, :row_sep, :quote_char
+  はこのインスタンスと同じものを使用します。この設定は [[m:CSV#shift]]
+  の返り値を配列のかわりに [[c:CSV::Row]] のインスタンスに変更します。
+  [[m:CSV#read]] の返り値を配列の配列のかわりに [[c:CSV::Table]] のイン
+  スタンスに変更します。
 : :return_headers
-  ������ꤹ��ȡ��إå��Ԥ�̵�뤷�ޤ���������ꤹ��ȡ��إå��Ԥ�
-  �إå����ͤ�Ʊ��� [[c:CSV::Row]] �Υ��󥹥��󥹤Ȥ����֤��ޤ���
+  偽を指定すると、ヘッダ行を無視します。真を指定すると、ヘッダ行を
+  ヘッダと値が同一の [[c:CSV::Row]] のインスタンスとして返します。
 : :write_headers
-  ������ꤷ�� :headers �ˤ��ͤ򥻥åȤ���ȡ��إå�����Ϥ��ޤ���
+  真を指定して :headers にも値をセットすると、ヘッダを出力します。
 : :header_converters
-  :converters ���ץ����˻��Ƥ��ޤ������إå����Ѥ��Ѵ����������ޤ���
-  ���Ƥ��Ȥ߹��ߤ��Ѵ���ϡ��ͤ��Ѵ��������� UTF-8 �˥��󥳡��ǥ�����
-  �����ߤޤ������󥳡��ǥ����Ѵ��˼��Ԥ������ϥإå����Ѵ������
-  ����
+  :converters オプションに似ていますが、ヘッダ専用の変換器を定義します。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
+  換を試みます。エンコーディング変換に失敗した場合はヘッダは変換されま
+  せん。
 : :skip_blanks
-  ������ꤹ��ȡ����Ԥ��ɤ����Ф��ޤ���
+  真を指定すると、空行を読み飛ばします。
 : :force_quotes
-  ������ꤹ��ȡ����ƤΥե�����ɤ�������˥������Ȥ��ޤ���
+  真を指定すると、全てのフィールドを作成時にクオートします。
 
-@raise CSV::MalformedCSVError ������ CSV ��ѡ������褦�Ȥ����Ȥ���ȯ�����ޤ���
+@raise CSV::MalformedCSVError 不正な CSV をパースしようとしたときに発生します。
 
 @see [[m:CSV::DEFAULT_OPTIONS]], [[m:CSV.open]]
 
 --- dump(ary_of_objs, io = "", options = Hash.new) -> String | nil
 
-���Υ᥽�åɤ� Ruby ���֥������Ȥ������ʸ����� CSV �ե�����˥��ꥢ��
-�������뤳�Ȥ��Ǥ��ޤ���[[c:Marshal]] �� [[lib:yaml]] �������ؤǤ�����
-���ץ�åɥ����Ȥ�ǡ����١����ȤΤ��Ȥ�ˤ����Ω�ĤǤ��礦��
+このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアラ
+イズすることができます。[[c:Marshal]] や [[lib:yaml]] よりは不便ですが、
+スプレッドシートやデータベースとのやりとりには役に立つでしょう。
 
-���Υ᥽�åɤ�ñ��ʥ��֥������Ȥ乽¤�Τ򰷤����Ϥ��ޤ�ư�����Ȥ��
-�ޤ��Ƥ��ޤ���[[m:Struct#members]] ��Ȥäƥ��󥹥����ѿ��򥷥ꥢ�饤
-�����ޤ���
+このメソッドは単純なオブジェクトや構造体を扱う場合はうまく動くことを意
+図しています。[[m:Struct#members]] を使ってインスタンス変数をシリアライ
+ズします。
 
-��ä�ʣ���ʥ��ꥢ�饤���������ɬ�פʾ��ϡ�����פ��������饹�˥�
-���åɤ��ɲä�������椹�뤳�Ȥ��Ǥ��ޤ���
+もっと複雑なシリアライゼーションが必要な場合は、ダンプしたいクラスにメ
+ソッドを追加すると制御することができます。
 
-#@# �桼����������ʤ�������¸�ߤ��ʤ��᥽�åɤʤΤǥ�󥯤ˤϤ��ʤ�
+#@# ユーザが定義しないかぎり存在しないメソッドなのでリンクにはしない
 
-Object.csv_meta ���������ȡ�����פ���ǡ����ΰ���ܤ��ѹ����뤳�Ȥ�
-�Ǥ��ޤ������ιԤϼ��η����Υϥå���Τ褦�ʤ�ΤǤ���
+Object.csv_meta を定義すると、ダンプするデータの一行目を変更することが
+できます。この行は次の形式のハッシュのようなものです。
 
   key_1,value_1,key_2,value_2,...
 
-[[m:CSV.load]] �� "class" �Ȥ���������ʸ���󲽤������饹̾����Ԥ��Ƥ�
-�ޤ���Object.csv_meta ��������ʤ���� [[m:CSV.dump]] �Ϥ������������
-����ary_of_objs �κǽ�����Ǥ� Object.csv_meta �������ƤФ�ޤ���
+[[m:CSV.load]] は "class" というキーと文字列化したクラス名を期待してい
+ます。Object.csv_meta を定義しなければ [[m:CSV.dump]] はそれを生成しま
+す。ary_of_objs の最初の要素の Object.csv_meta だけが呼ばれます。
 
-���� Object#csv_headers ��������뤳�Ȥ��Ǥ��ޤ������Υ᥽�åɤϥ����
-����ǡ���������ܤ���Ϥ��ޤ�������ܤϤ��줾�����Υإå���Ϳ���뤿
-��˻Ȥ��ޤ����ǥե���ȤǤϡ�[[m:CSV.load]] �ϥإå��� "@" �ǻϤޤä�
-����Х��󥹥����ѿ����ͤ򥻥åȤ��������Ǥʤ���Хإå���̾����᥽��
-��̾���ե�����ɤ��ͤ�����Ȥ��� [[m:Object#send]] ��ƤӽФ��ޤ���
-ary_of_objs �κǽ�����Ǥ� Object#csv_headers �������ƤФ�ޤ���
+次に Object#csv_headers を定義することができます。このメソッドはダンプ
+するデータの二行目を出力します。二行目はそれぞれの列のヘッダを与えるた
+めに使います。デフォルトでは、[[m:CSV.load]] はヘッダが "@" で始まって
+いればインスタンス変数に値をセットし、そうでなければヘッダの名前をメソッ
+ド名、フィールドの値を引数として [[m:Object#send]] を呼び出します。
+ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 
-�Ǹ�ˡ�Object#csv_dump ��������뤳�Ȥ��Ǥ��ޤ���Object#csv_dump �ΰ�
-���ϥإå����֤��ͤϥե�����ɤ�����Ǥ������Υ᥽�åɤ� ary_of_objs ��
-���Ƥ����Ǥ��Ф��ư��٤��ĸƤФ�ޤ���
+最後に、Object#csv_dump を定義することができます。Object#csv_dump の引
+数はヘッダで返り値はフィールドの配列です。このメソッドは ary_of_objs の
+全ての要素に対して一度ずつ呼ばれます。
 
-@param ary_of_objs Ǥ�դ��������ꤷ�ޤ���
+@param ary_of_objs 任意の配列を指定します。
 
-@param io �ǡ����ν��������ꤷ�ޤ����ǥե���Ȥ�ʸ����Ǥ����ե�����
-          �˽��Ϥ��뤳�Ȥ�Ǥ��ޤ���
+@param io データの出力先を指定します。デフォルトは文字列です。ファイル
+          に出力することもできます。
 
-@param options ���ץ�������ꤷ�ޤ���[[m:CSV.new]] ��Ʊ���Ǥ���
+@param options オプションを指定します。[[m:CSV.new]] と同じです。
 
 @see [[m:CSV.new]]
 
@@ -392,112 +392,112 @@ ary_of_objs �κǽ�����Ǥ� Object#csv_headers �������ƤФ�ޤ���
 --- filter(input, output, options = Hash.new){|row| ... }
 #@# -> discard
 
-���Υ᥽�åɤ� CSV �ǡ������Ф��� Unix �Υġ��뷲�Τ褦�ʥե��륿����
-����Τ������Ǥ���
+このメソッドは CSV データに対して Unix のツール群のようなフィルタを構築
+するのに便利です。
 
-Ϳ����줿�֥��å��˰�Ԥ����Ϥ���ޤ����֥��å����Ϥ��줿�Ԥ�ɬ�פǤ�
-����ѹ����뤳�Ȥ��Ǥ��ޤ����֥��å���ɾ����˹Ԥ����� output �˽񤭹�
-�ߤޤ���
+与えられたブロックに一行ずつ渡されます。ブロックに渡された行は必要であ
+れば変更することができます。ブロックの評価後に行を全て output に書き込
+みます。
 
-@param input [[c:String]] �� [[c:IO]] �Υ��󥹥��󥹤���ꤷ�ޤ���
-             �ǥե���Ȥ� [[c:ARGF]] �Ǥ���
+@param input [[c:String]] か [[c:IO]] のインスタンスを指定します。
+             デフォルトは [[c:ARGF]] です。
 
-@param output [[c:String]] �� [[c:IO]] �Υ��󥹥��󥹤���ꤷ�ޤ���
-              �ǥե���Ȥ� [[m:$stdout]] �Ǥ���
+@param output [[c:String]] か [[c:IO]] のインスタンスを指定します。
+              デフォルトは [[m:$stdout]] です。
 
-@param options ":in_", ":input_" �ǻϤޤ륭���� input �ˤ���Ŭ�Ѥ���ޤ���
-               ":out_", ":output_" �ǻϤޤ륭���� output �ˤ���Ŭ�Ѥ���ޤ���
-               ����ʳ��Υ�����ξ����Ŭ�Ѥ���ޤ���
-               ":output_row_sep" �Υǥե�����ͤ� [[m:$/]] �Ǥ���
+@param options ":in_", ":input_" で始まるキーは input にだけ適用されます。
+               ":out_", ":output_" で始まるキーは output にだけ適用されます。
+               それ以外のキーは両方に適用されます。
+               ":output_row_sep" のデフォルト値は [[m:$/]] です。
 
 @see [[m:CSV.new]]
 
 --- foreach(path, options = Hash.new){|row| ... } -> nil
 
-���Υ᥽�åɤ� CSV �ե�������ɤि��μ��פʥ��󥿡��ե������Ǥ���
-�ƹԤ�Ϳ����줿�֥��å����Ϥ���ޤ���
+このメソッドは CSV ファイルを読むための主要なインターフェイスです。
+各行が与えられたブロックに渡されます。
 
-��:
+例:
 
-  # UTF-32BE �� CSV �ե�������ɤ߹���� UTF-8 �� row ��֥��å����Ϥ��ޤ�
+  # UTF-32BE な CSV ファイルを読み込んで UTF-8 な row をブロックに渡します
   CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 
-@param path CSV �ե�����Υѥ�����ꤷ�ޤ���
+@param path CSV ファイルのパスを指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
-               :encoding �Ȥ�����������Ѥ���������ϤΥ��󥳡��ǥ��󥰤���ꤹ�뤳�Ȥ��Ǥ��ޤ���
-               [[m:Encoding.default_external]] �Ȱۤʤ륨�󥳡��ǥ��󥰤�������Ϥ���Ѥ�����ϡ�
-               ɬ�����󥳡��ǥ��󥰤���ꤷ�Ƥ���������
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+               :encoding というキーを使用すると入出力のエンコーディングを指定することができます。
+               [[m:Encoding.default_external]] と異なるエンコーディングを持つ入力を使用する場合は、
+               必ずエンコーディングを指定してください。
 
 @see [[m:CSV.new]], [[m:File.open]]
 
 --- generate(str = "", options = Hash.new){|csv| ... } -> String
 
-���Υ᥽�åɤ�Ϳ����줿ʸ������åפ��� [[c:CSV]] �Υ��֥������ȤȤ��ƥ֥��å����Ϥ��ޤ���
-�֥��å���� [[c:CSV]] ���֥������Ȥ˹Ԥ��ɲä��뤳�Ȥ��Ǥ��ޤ���
-�֥��å���ɾ��������̤�ʸ������֤��ޤ���
+このメソッドは与えられた文字列をラップして [[c:CSV]] のオブジェクトとしてブロックに渡します。
+ブロック内で [[c:CSV]] オブジェクトに行を追加することができます。
+ブロックを評価した結果は文字列を返します。
 
-���Υ᥽�åɤ�Ϳ����줿ʸ������ѹ������Τǡ�������ʸ���󥪥֥������Ȥ�ɬ�פ�
-���� [[m:Object#dup]] ��ʣ�����Ƥ���������
+このメソッドに与えられた文字列は変更されるので、新しい文字列オブジェクトが必要な
+場合は [[m:Object#dup]] で複製してください。
 
-@param str ʸ�������ꤷ�ޤ����ǥե���Ȥ϶�ʸ����Ǥ���
+@param str 文字列を指定します。デフォルトは空文字列です。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
-               :encoding �Ȥ�����������Ѥ���Ƚ��ϤΥ��󥳡��ǥ��󥰤���ꤹ�뤳�Ȥ��Ǥ��ޤ���
-               ASCII �ȸߴ�����̵��ʸ�����󥳡��ǥ��󥰤����ʸ�������Ϥ�����ϡ����Υҥ�Ȥ�
-               ���ꤹ��ɬ�פ�����ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+               :encoding というキーを使用すると出力のエンコーディングを指定することができます。
+               ASCII と互換性の無い文字エンコーディングを持つ文字列を出力する場合は、このヒントを
+               指定する必要があります。
 
 @see [[m:CSV.new]]
 
 --- generate_line(row, options = Hash.new) -> String
 
-���Υ᥽�åɤϰ�Ĥ� [[c:Array]] ���֥������Ȥ� CSV ʸ������Ѵ����뤿��Υ��硼�ȥ��åȤǤ���
+このメソッドは一つの [[c:Array]] オブジェクトを CSV 文字列に変換するためのショートカットです。
 
-���Υ᥽�åɤϲ�ǽ�Ǥ���� row �˴ޤޤ��ǽ�� nil �Ǥʤ��ͤ��Ѥ��ƽ��Ϥ�
-���󥳡��ǥ��󥰤��¬���ޤ���
+このメソッドは可能であれば row に含まれる最初の nil でない値を用いて出力の
+エンコーディングを推測します。
 
-@param row ʸ������������ꤷ�ޤ���
+@param row 文字列の配列を指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
-               :encoding �Ȥ�����������Ѥ���Ƚ��ϤΥ��󥳡��ǥ��󥰤���ꤹ�뤳�Ȥ��Ǥ��ޤ���
-               :row_sep �Ȥ����������ͤˤ� [[m:$/]] �����åȤ���ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+               :encoding というキーを使用すると出力のエンコーディングを指定することができます。
+               :row_sep というキーの値には [[m:$/]] がセットされます。
 
 @see [[m:CSV.new]]
 
 --- instance(data = $stdout, options = Hash.new) -> CSV
 --- instance(data = $stdout, options = Hash.new){|csv| ... } -> object
 
-���Υ᥽�åɤ� [[m:CSV.new]] �Τ褦�� [[c:CSV]] �Υ��󥹥��󥹤��֤��ޤ���
-���������֤�����ͤ� [[m:Object#object_id]] ��Ϳ����줿���ץ�����
-�����Ȥ��ƥ���å��夵��ޤ���
+このメソッドは [[m:CSV.new]] のように [[c:CSV]] のインスタンスを返します。
+しかし、返される値は [[m:Object#object_id]] と与えられたオプションを
+キーとしてキャッシュされます。
 
-�֥��å���Ϳ����줿��硢�������줿���󥹥��󥹤�֥��å����Ϥ���ɾ������
-��̤��֤��ޤ���
+ブロックが与えられた場合、生成されたインスタンスをブロックに渡して評価した
+結果を返します。
 
-@param data [[c:String]] �� [[c:IO]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param data [[c:String]] か [[c:IO]] のインスタンスを指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 @see [[m:CSV.new]]
 
 --- load(io_or_str, options = Hash.new) -> Array
 
-���Υ᥽�åɤ� [[m:CSV.dump]] �ǽ��Ϥ��줿�ǡ������ɤ߹��ߤޤ���
+このメソッドは [[m:CSV.dump]] で出力されたデータを読み込みます。
 
-csv_load �Ȥ���̾���Υ��饹�᥽�åɤ��ɲä���ȡ��ǡ������ɤ߹�����ˡ��
-�������ޥ������뤳�Ȥ��Ǥ��ޤ���csv_load �᥽�åɤϥ᥿�ǡ������إå�����
-�λ��ĤΥѥ�᡼��������Ȥ�ޤ��������Ƥ����򸵤ˤ��������������֥������Ȥ�
-�֤��ޤ���
+csv_load という名前のクラスメソッドを追加すると、データを読み込む方法を
+カスタマイズすることができます。csv_load メソッドはメタデータ、ヘッダ、行
+の三つのパラメータを受けとります。そしてそれらを元にして復元したオブジェクトを
+返します。
 
 Remember that all fields will be Strings after this load.  If you need
 something else, use +options+ to setup converters or provide a custom
 csv_load() implementation.
 
-#@# �������ޥ������㤬ɬ��
+#@# カスタマイズの例が必要
 
-@param io_or_str [[c:IO]] �� [[c:String]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param io_or_str [[c:IO]] か [[c:String]] のインスタンスを指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 @see [[m:CSV.new]], [[m:CSV.dump]]
 
@@ -506,22 +506,22 @@ csv_load() implementation.
 --- open(filename, options = Hash.new){|csv| ... } -> nil
 --- open(filename, options = Hash.new) -> CSV
 
-���Υ᥽�åɤ� [[c:IO]] ���֥������Ȥ򥪡��ץ󤷤� [[c:CSV]] �ǥ�åפ��ޤ���
-����� CSV �ե������񤯤���μ��פʥ��󥿡��ե������Ȥ��ƻȤ����Ȥ�տޤ��Ƥ��ޤ���
+このメソッドは [[c:IO]] オブジェクトをオープンして [[c:CSV]] でラップします。
+これは CSV ファイルを書くための主要なインターフェイスとして使うことを意図しています。
 
-���Υ᥽�åɤ� [[m:IO.open]] ��Ʊ���褦��ư���ޤ����֥��å���Ϳ����줿����
-�֥��å��� [[c:CSV]] ���֥������Ȥ��Ϥ����֥��å���λ���ˤ���򥯥��������ޤ���
-�֥��å���Ϳ�����ʤ��ä����� [[c:CSV]] ���֥������Ȥ��֤��ޤ���
-���ε�ư�� Ruby1.8 �� CSV �饤�֥��Ȥϰ㤤�ޤ���Ruby1.8 �ǤϹԤ�֥��å����Ϥ��ޤ���
-Ruby1.9 �Ǥ� [[m:CSV.foreach]] ��Ȥ��ȥ֥��å��˹Ԥ��Ϥ��ޤ���
+このメソッドは [[m:IO.open]] と同じように動きます。ブロックが与えられた場合は
+ブロックに [[c:CSV]] オブジェクトを渡し、ブロック終了時にそれをクローズします。
+ブロックが与えられなかった場合は [[c:CSV]] オブジェクトを返します。
+この挙動は Ruby1.8 の CSV ライブラリとは違います。Ruby1.8 では行をブロックに渡します。
+Ruby1.9 では [[m:CSV.foreach]] を使うとブロックに行を渡します。
 
-�ǡ����� [[m:Encoding.default_external]] �Ȱۤʤ���ϡ�mode �˥��󥳡�
-�ǥ��󥰤���ꤹ��ʸ����������ޤʤ���Фʤ�ޤ��󡣥ǡ�����ɤΤ褦
-�˲��Ϥ��뤫���ꤹ�뤿��� CSV �饤�֥��ϥ桼���� mode �˻��ꤷ������
-�����ǥ��󥰤�����å����ޤ���"rb:UTF-32BE:UTF-8" �Τ褦�� mode �����
-����� UTF-32BE �Υǡ������ɤ߹����UTF-8 ���Ѵ����Ƥ�����Ϥ��ޤ���
+データが [[m:Encoding.default_external]] と異なる場合は、mode にエンコー
+ディングを指定する文字列を埋め込まなければなりません。データをどのよう
+に解析するか決定するために CSV ライブラリはユーザが mode に指定したエン
+コーディングをチェックします。"rb:UTF-32BE:UTF-8" のように mode を指定
+すると UTF-32BE のデータを読み込んでUTF-8 に変換してから解析します。
 
-CSV ���֥������Ȥ�¿���Υ᥽�åɤ� [[c:IO]] �� [[c:File]] �˰Ѿ����ޤ���
+CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委譲します。
 
   * [[m:IO#binmode]]
   * [[m:IO#binmode?]]
@@ -556,63 +556,63 @@ CSV ���֥������Ȥ�¿���Υ᥽�åɤ� [[c:IO]] �� [[c:File]] �˰Ѿ����ޤ���
   * [[m:File#truncate]]
   * [[m:IO#tty?]]
 
-@param filename �ե�����̾����ꤷ�ޤ���
+@param filename ファイル名を指定します。
 
-@param mode [[m:IO.open]] �˻���Ǥ����Τ�Ʊ����Τ����Ǥ��ޤ���
+@param mode [[m:IO.open]] に指定できるものと同じものを指定できます。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 @see [[m:CSV.new]], [[m:IO.open]]
 
 --- parse(str, options = Hash.new){|row| ... } -> nil
 --- parse(str, options = Hash.new) -> Array
 
-���Υ᥽�åɤ�ʸ������ñ�˥ѡ������뤳�Ȥ��Ǥ��ޤ���
-�֥��å���Ϳ�������ϡ��֥��å��ˤ��줾��ιԤ��Ϥ��ޤ���
-�֥��å����ά�������ϡ������������֤��ޤ���
+このメソッドは文字列を簡単にパースすることができます。
+ブロックを与えた場合は、ブロックにそれぞれの行を渡します。
+ブロックを省略した場合は、配列の配列を返します。
 
-@param str ʸ�������ꤷ�ޤ���
+@param str 文字列を指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 --- parse_line(line, options = Hash.new) -> Array
 
-���Υ᥽�åɤϰ�Ԥ� CSV ʸ�����������Ѵ����뤿��Υ��硼�ȥ��åȤǤ���
+このメソッドは一行の CSV 文字列を配列に変換するためのショートカットです。
 
-@param line ʸ�������ꤷ�ޤ���ʣ���Ԥ�ʸ�������ꤷ������ϡ�����ܰʳ���̵�뤷�ޤ���
+@param line 文字列を指定します。複数行の文字列を指定した場相は、一行目以外は無視します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 --- read(path, options = Hash.new) -> [Array]
 --- readlines(path, options = Hash.new) -> [Array]
 
-CSV �ե���������������ˤ��뤿��˻Ȥ��ޤ���
+CSV ファイルを配列の配列にするために使います。
 
-#@# ����ɲä���
+#@# 例を追加する
 
-@param path CSV �ե�����Υѥ�����ꤷ�ޤ���
+@param path CSV ファイルのパスを指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
-               :encoding �Ȥ�����������Ѥ�������ϤΥ��󥳡��ǥ��󥰤���ꤹ�뤳�Ȥ��Ǥ��ޤ���
-               ���ϤΥ��󥳡��ǥ��󥰤� [[m:Encoding.default_external]] �Ȱۤʤ����
-               ɬ�����ꤷ�ʤ���Фʤ�ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+               :encoding というキーを使用すると入力のエンコーディングを指定することができます。
+               入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
+               必ず指定しなければなりません。
 
 @see [[m:CSV.new]]
 
 --- table(path, options = Hash.new) -> Array
 
-�ʲ������Ʊ���Τ��Ȥ�Ԥ��᥽�åɤǤ���
-���ܸ�� CSV �ե�����򰷤����Ϥ��ޤ�Ȥ��ޤ���
+以下の例と同等のことを行うメソッドです。
+日本語の CSV ファイルを扱う場合はあまり使いません。
 
-��:
+例:
 
   CSV.read( path, { headers:           true,
                     converters:        :numeric,
                     header_converters: :symbol }.merge(options) )
 
-@param path �ե�����̾����ꤷ�ޤ���
+@param path ファイル名を指定します。
 
-@param options [[m:CSV.new]] �Υ��ץ�����Ʊ�����ץ��������Ǥ��ޤ���
+@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 == Instance Methods
 
@@ -620,41 +620,41 @@ CSV �ե���������������ˤ��뤿��˻Ȥ��ޤ���
 --- add_row(row) -> self
 --- puts(row)    -> self
 
-���Ȥ� row ���ɲä��ޤ���
+自身に row を追加します。
 
-�ǡ����������Ͻ񤭹����Ѥ˥����ץ󤵤�Ƥ��ʤ���Фʤ�ޤ���
+データソースは書き込み用にオープンされていなければなりません。
 
-@param row ���� [[c:CSV::Row]] �Υ��󥹥��󥹤���ꤷ�ޤ���
-           [[c:CSV::Row]] �Υ��󥹥��󥹤����ꤵ�줿���ϡ�[[m:CSV::Row#fields]] ����
-           �Τߤ��ɲä���ޤ���
+@param row 配列か [[c:CSV::Row]] のインスタンスを指定します。
+           [[c:CSV::Row]] のインスタンスが指定された場合は、[[m:CSV::Row#fields]] の値
+           のみが追加されます。
 
 --- binmode -> self
 
-[[m:IO#binmode]] �˰Ѿ����ޤ���
+[[m:IO#binmode]] に委譲します。
 
 --- binmode? -> bool
 
-[[m:IO#binmode?]] �˰Ѿ����ޤ���
+[[m:IO#binmode?]] に委譲します。
 
 --- close -> nil
 
-[[m:IO#close]] �˰Ѿ����ޤ���
+[[m:IO#close]] に委譲します。
 
 --- close_read -> nil
 
-[[m:IO#close_read]] �˰Ѿ����ޤ���
+[[m:IO#close_read]] に委譲します。
 
 --- close_write -> nil
 
-[[m:IO#close_write]] �˰Ѿ����ޤ���
+[[m:IO#close_write]] に委譲します。
 
 --- closed? -> bool
 
-[[m:IO#closed?]] �˰Ѿ����ޤ���
+[[m:IO#closed?]] に委譲します。
 
 --- col_sep -> String
 
-�������ڤ�ʸ����Ȥ��ƻ��Ѥ���ʸ������֤��ޤ���
+カラム区切り文字列として使用する文字列を返します。
 
 @see [[m:CSV.new]]
 
@@ -663,381 +663,381 @@ CSV �ե���������������ˤ��뤿��˻Ȥ��ޤ���
 --- convert{|field, field_info| ... }
 #@# discard
 
-�Ȥ߹��ߤ� [[m:CSV::Converters]] ���Ѵ���Ȥ������Ѥ��뤿��˻Ȥ��ޤ���
-�ޤ����ȼ����Ѵ�����ɲä��뤳�Ȥ�Ǥ��ޤ���
+組み込みの [[m:CSV::Converters]] を変換器として利用するために使います。
+また、独自の変換器を追加することもできます。
 
-�֥��å��ѥ�᡼�����ļ������֥��å���Ϳ�������ϡ����Υ֥��å���
-�ե�����ɤ�������ޤ����֥��å��ѥ�᡼������ļ������֥��å���Ϳ
-�������ϡ����Υ֥��å��ϡ��ե�����ɤ� [[c:CSV::FieldInfo]] �Υ���
-���󥹤�������ޤ����֥��å����Ѵ�����ͤ��ե�����ɤ��Τ�Τ��֤���
-����Фʤ�ޤ���
+ブロックパラメータを一つ受け取るブロックを与えた場合は、そのブロックは
+フィールドを受け取ります。ブロックパラメータを二つ受け取るブロックを与
+えた場合は、そのブロックは、フィールドと [[c:CSV::FieldInfo]] のインス
+タンスを受け取ります。ブロックは変換後の値かフィールドそのものを返さな
+ければなりません。
 
-@param name �Ѵ����̾������ꤷ�ޤ���
+@param name 変換器の名前を指定します。
 
 --- converters -> Array
 
-���ߤ��Ѵ���Υꥹ�Ȥ��֤��ޤ���
+現在の変換器のリストを返します。
 
 @see [[m:CSV::Converters]]
 
 --- each{|row| ... } -> nil
 
-�ƹԤ��Ф��ƥ֥��å���ɾ�����ޤ���
+各行に対してブロックを評価します。
 
-�ǡ������������ɤ߹����Ѥ˥����ץ󤵤�Ƥ��ʤ���Фʤ�ޤ���
+データソースは読み込み用にオープンされていなければなりません。
 
 --- encoding -> Encoding
 
-�ɤ߽񤭤���Ȥ��˻��Ѥ��륨�󥳡��ǥ��󥰤��֤��ޤ���
+読み書きするときに使用するエンコーディングを返します。
 
 --- eof -> bool
 --- eof? -> bool
 
-[[m:IO#eof]], [[m:IO#eof?]] �˰Ѿ����ޤ���
+[[m:IO#eof]], [[m:IO#eof?]] に委譲します。
 
 --- external_encoding -> Encoding | nil
 
-[[m:IO#external_encoding]] �˰Ѿ����ޤ���
+[[m:IO#external_encoding]] に委譲します。
 
 --- fcntl(cmd, arg = 0)    -> Integer
 
-[[m:IO#fcntl]] �˰Ѿ����ޤ���
+[[m:IO#fcntl]] に委譲します。
 
 --- field_size_limit -> Fixnum
 
-�ե�����ɥ������κ����ͤ��֤��ޤ���
+フィールドサイズの最大値を返します。
 
 @see [[m:CSV.new]]
 
 --- fileno -> Integer
 --- to_i   -> Integer
 
-[[m:IO#fileno]], [[m:IO#to_i]] �˰Ѿ����ޤ���
+[[m:IO#fileno]], [[m:IO#to_i]] に委譲します。
 
 --- flock(operation)    -> 0 | false
 
-[[m:File#flock]] �˰Ѿ����ޤ���
+[[m:File#flock]] に委譲します。
 
 --- flush    -> self
 
-[[m:IO#flush]] �˰Ѿ����ޤ���
+[[m:IO#flush]] に委譲します。
 
 --- force_quotes? -> bool
 
-���Ϥ����ե�����ɤ��������Ȥ������ϡ������֤��ޤ���
+出力されるフィールドがクオートされる場合は、真を返します。
 
 @see [[m:CSV.new]]
 
 --- fsync -> 0 | nil
 
-[[m:IO#fsync]] �˰Ѿ����ޤ���
+[[m:IO#fsync]] に委譲します。
 
 --- header_convert(name)
 --- header_convert{|field| ... }
 --- header_convert{|field, field_info| ... }
 
-[[m:CSV#convert]] �˻��Ƥ��ޤ������إå����ѤΥ᥽�åɤǤ���
+[[m:CSV#convert]] に似ていますが、ヘッダ行用のメソッドです。
 
-���Υ᥽�åɤϥإå��Ԥ��ɤ߹������˸ƤӽФ��ʤ���Фʤ�ޤ���
+このメソッドはヘッダ行を読み込む前に呼び出さなければなりません。
 
-@param name �Ѵ����̾������ꤷ�ޤ���
+@param name 変換器の名前を指定します。
 
 @see [[m:CSV#convert]]
 
 --- header_converters -> Array
 
-����ͭ���ʥإå����Ѵ���Υꥹ�Ȥ��֤��ޤ���
+現在有効なヘッダ用変換器のリストを返します。
 
-�ȹ��ߤ��Ѵ����̾�����֤��ޤ�������ʳ��ϡ����֥������Ȥ��֤��ޤ���
+組込みの変換器は名前を返します。それ以外は、オブジェクトを返します。
 
 @see [[m:CSV.new]]
 
 --- header_row? -> bool
 
-�����ɤ߹��ޤ��Ԥ����إå��Ǥ�����˿����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+次に読み込まれる行が、ヘッダである場合に真を返します。
+そうでない場合は、偽を返します。
 
 --- headers -> Array | true | nil
 
-nil ���֤������ϡ��إå��ϻ��Ѥ���ޤ���
-�����֤������ϡ��إå�����Ѥ��뤬���ޤ��ɤ߹��ޤ�Ƥ��ޤ���
-������֤������ϡ��إå��ϴ����ɤ߹��ޤ�Ƥ��ޤ���
+nil を返した場合は、ヘッダは使用されません。
+真を返した場合は、ヘッダを使用するが、まだ読み込まれていません。
+配列を返した場合は、ヘッダは既に読み込まれています。
 
 @see [[m:CSV.new]]
 
 --- inspect -> String
 
-ASCII �ߴ�ʸ����Ǽ��Ȥξ����ɽ������Τ��֤��ޤ���
+ASCII 互換文字列で自身の情報を表したものを返します。
 
 --- internal_encoding   -> Encoding | nil
 
-[[m:IO#internal_encoding]] �˰Ѿ����ޤ���
+[[m:IO#internal_encoding]] に委譲します。
 
 --- ioctl(cmd, arg = 0)    -> Integer
 
-[[m:IO#ioctl]] �˰Ѿ����ޤ���
+[[m:IO#ioctl]] に委譲します。
 
 --- isatty    -> bool
 --- tty?      -> bool
 
-[[m:IO#isatty]], [[m:IO#tty?]] �˰Ѿ����ޤ���
+[[m:IO#isatty]], [[m:IO#tty?]] に委譲します。
 
 --- lineno -> Fixnum
 
-���Υե����뤫���ɤ߹�����ǽ��Ԥι��ֹ���֤��ޤ���
-�ե�����ɤ˴ޤޤ����ԤϤ����ͤˤϱƶ����ޤ���
+このファイルから読み込んだ最終行の行番号を返します。
+フィールドに含まれる改行はこの値には影響しません。
 
 --- path    -> String
 
-[[m:IO#path]] �˰Ѿ����ޤ���
+[[m:IO#path]] に委譲します。
 
 --- pid    -> Integer | nil
 
-[[m:IO#pid]] �˰Ѿ����ޤ���
+[[m:IO#pid]] に委譲します。
 
 --- pos    -> Integer
 --- tell   -> Integer
 
-[[m:IO#pos]], [[m:IO#tell]] �˰Ѿ����ޤ���
+[[m:IO#pos]], [[m:IO#tell]] に委譲します。
 
 --- pos=(n)
 
-[[m:IO#pos=]] �˰Ѿ����ޤ���
+[[m:IO#pos=]] に委譲します。
 
 --- quote_char -> String
 
-�ե�����ɤ򥯥����Ȥ���Τ˻��Ѥ���ʸ������֤��ޤ���
+フィールドをクオートするのに使用する文字列を返します。
 
 @see [[m:CSV.new]]
 
 --- read -> [Array]
 --- readlines -> [Array]
 
-�Ĥ�ιԤ��ɤ߹���������������֤��ޤ���
+残りの行を読み込んで配列の配列を返します。
 
-�ǡ������������ɤ߹����Ѥ˥����ץ󤵤�Ƥ���ɬ�פ�����ޤ���
+データソースは読み込み用にオープンされている必要があります。
 
 --- reopen(io) -> self
 
-[[m:IO#reopen]] �˰Ѿ����ޤ���
+[[m:IO#reopen]] に委譲します。
 
 --- return_headers? -> bool
 
-�إå����֤����ϡ������֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+ヘッダを返す場合は、真を返します。
+そうでない場合は、偽を返します。
 
 @see [[m:CSV.new]]
 
 --- rewind -> 0
 
-[[m:IO#rewind]] �˻��Ƥ��ޤ���[[m:CSV#lineno]] �� 0 �ˤ��ޤ���
+[[m:IO#rewind]] に似ています。[[m:CSV#lineno]] を 0 にします。
 
 @see [[m:IO#rewind]]
 
 --- row_sep -> String
 
-�Զ��ڤ�ʸ����Ȥ��ƻ��Ѥ���ʸ������֤��ޤ���
+行区切り文字列として使用する文字列を返します。
 
 @see [[m:CSV.new]]
 
 --- seek(offset, whence = IO::SEEK_SET)    -> 0
 
-[[m:IO#seek]] �˰Ѿ����ޤ���
+[[m:IO#seek]] に委譲します。
 
 --- shift    -> Array | CSV::Row
 --- gets     -> Array | CSV::Row
 --- readline -> Array | CSV::Row
 
-[[c:String]] �� [[c:IO]] ���åפ����ǡ��������������Ԥ����ɤ߹����
-�ե�����ɤ����� [[c:CSV::Row]] �Υ��󥹥��󥹤��֤��ޤ���
+[[c:String]] や [[c:IO]] をラップしたデータソースから一行だけ読み込んで
+フィールドの配列か [[c:CSV::Row]] のインスタンスを返します。
 
-�ǡ������������ɤ߹����Ѥ˥����ץ󤵤�Ƥ���ɬ�פ�����ޤ���
+データソースは読み込み用にオープンされている必要があります。
 
-@return �إå�����Ѥ��ʤ�����������֤��ޤ���
-        �إå�����Ѥ������ [[c:CSV::Row]] ���֤��ޤ���
+@return ヘッダを使用しない場合は配列を返します。
+        ヘッダを使用する場合は [[c:CSV::Row]] を返します。
 
 --- skip_blanks? -> bool
 
-���Ǥ�����ϡ����Ԥ��ɤ����Ф��ޤ���
+真である場合は、空行を読み飛ばします。
 
 @see [[m:CSV.new]]
 
 --- stat    -> File::Stat
 
-[[m:IO#stat]] �˰Ѿ����ޤ���
+[[m:IO#stat]] に委譲します。
 
 --- string -> String
 
-[[m:StringIO#string]] �˰Ѿ����ޤ���
+[[m:StringIO#string]] に委譲します。
 
 --- sync -> bool
 
-[[m:IO#sync]] �˰Ѿ����ޤ���
+[[m:IO#sync]] に委譲します。
 
 --- sync=(newstate)
 
-[[m:IO#sync=]] �˰Ѿ����ޤ���
+[[m:IO#sync=]] に委譲します。
 
 --- to_io -> self
 
-[[m:IO#to_io]] �˰Ѿ����ޤ���
+[[m:IO#to_io]] に委譲します。
 
 --- truncate(path, length)    -> 0
 
-[[m:File#truncate]] �˰Ѿ����ޤ���
+[[m:File#truncate]] に委譲します。
 
 --- unconverted_fields? -> bool
 
-�ѡ���������̤� unconverted_fields �Ȥ����᥽�åɤ���ľ��˿����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+パースした結果が unconverted_fields というメソッドを持つ場合に真を返します。
+そうでない場合は、偽を返します。
 
-#@# Array, CSV::Row ��ưŪ���ɲä����
+#@# Array, CSV::Row に動的に追加される
 
 @see [[m:CSV.new]]
 
 --- write_headers? -> bool
 
-�إå��������˽񤭹�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+ヘッダを出力先に書き込む場合は真を返します。
+そうでない場合は偽を返します。
 
 @see [[m:CSV.new]]
 
 
 = class CSV::FieldInfo < Struct
 
-�Ԥ��ɤ߹��ޤ줿�ǡ�����������ǤΥե�����ɤΰ��֤ξ�����Ǽ���뤿���
-��¤�ΤǤ���
+行が読み込まれたデータソース内でのフィールドの位置の情報を格納するための
+構造体です。
 
-[[c:CSV]] ���饹�ǤϤ��ι�¤�ΤϤ����Ĥ��Υ᥽�åɤΥ֥��å����Ϥ���ޤ���
+[[c:CSV]] クラスではこの構造体はいくつかのメソッドのブロックに渡されます。
 
 == Instance Methods
 
 --- index -> Fixnum
 
-����ǲ����ܤΥե�����ɤ��狼�를���١����Υ���ǥå������֤��ޤ���
+行内で何番目のフィールドかわかるゼロベースのインデックスを返します。
 
 --- index=(val)
 
-����ǥå������ͤ򥻥åȤ��ޤ���
+インデックスの値をセットします。
 
-@param val ����ǥå������ͤ���ꤷ�ޤ���
+@param val インデックスの値を指定します。
 
 --- line -> Fixnum
 
-���ֹ���֤��ޤ���
+行番号を返します。
 
 --- line=(val)
 
-���ֹ�򥻥åȤ��ޤ���
+行番号をセットします。
 
-@param val ���ֹ����ꤷ�ޤ���
+@param val 行番号を指定します。
 
 --- header -> Array
 
-���Ѳ�ǽ�ʾ��ϥإå���ɽ��������֤��ޤ���
+利用可能な場合はヘッダを表す配列を返します。
 
 
 --- header=(val)
 
-�إå���ɽ������򥻥åȤ��ޤ���
+ヘッダを表す配列をセットします。
 
-@param val �إå���ɽ���������ꤷ�ޤ���
+@param val ヘッダを表す配列を指定します。
 
 = class CSV::MalformedCSVError < RuntimeError
 
-������ CSV ��ѡ������褦�Ȥ����Ȥ���ȯ�������㳰�Ǥ���
+不正な CSV をパースしようとしたときに発生する例外です。
 
 #@include(csv/CSV__Row)
 #@include(csv/CSV__Table)
 #@else
-CSV (Comma Separated Values) �򰷤��饤�֥��Ǥ���
+CSV (Comma Separated Values) を扱うライブラリです。
 
 = class CSV < Object
 
-CSV (Comma Separated Values) �򰷤����饹�Ǥ���
+CSV (Comma Separated Values) を扱うクラスです。
 
-�ƥ᥽�åɤζ��̥ѥ�᥿
+各メソッドの共通パラメタ
 
   mode
-     'r', 'w', 'rb', 'wb' ��������ǽ�Ǥ���
+     'r', 'w', 'rb', 'wb' から指定可能です。
 
-     - 'r' �ɤ߹���
-     - 'w' �񤭹���
-     - 'b' �Х��ʥ�⡼��
+     - 'r' 読み込み
+     - 'w' 書き込み
+     - 'b' バイナリモード
   fs
-     �ե�����ɤζ��ڤ�ʸ��
-     �ǥե���Ȥ� ','
+     フィールドの区切り文字
+     デフォルトは ','
   rs
-     �Զ��ڤ�ʸ����nil (�ǥե����) �� CrLf / Lf��
-     Cr �Ƕ��ڤꤿ������ ?\r ���Ϥ��ޤ���
+     行区切り文字。nil (デフォルト) で CrLf / Lf。
+     Cr で区切りたい場合は ?\r を渡します。
 
 == Class Methods
 
 --- open(path, mode, fs = nil, rs = nil) {|row| ... } -> nil
 --- open(path, mode, fs = nil, rs = nil) -> CSV::Reader | CSV::Writer
 
-CSV�ե�������ɤ߹���ǥѡ������ޤ���
+CSVファイルを読み込んでパースします。
 
-�ɤ߹��ߥ⡼�ɻ��ˤ� path �ˤ���ե�����򳫤��ƹԤ�����Ȥ���
-�֥��å����Ϥ��ޤ���
+読み込みモード時には path にあるファイルを開き各行を配列として
+ブロックに渡します。
 
-@param path �ѡ�������ե�����Υե�����̾
-@param mode �����⡼�ɤλ���
-            'r', 'w', 'rb', 'wb' ��������ǽ�Ǥ���
-            - 'r' �ɤ߹���
-            - 'w' �񤭹���
-            - 'b' �Х��ʥ�⡼��
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CRLF / LF��
-          CR ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param path パースするファイルのファイル名
+@param mode 処理モードの指定
+            'r', 'w', 'rb', 'wb' から指定可能です。
+            - 'r' 読み込み
+            - 'w' 書き込み
+            - 'b' バイナリモード
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CRLF / LF。
+          CR を行区切りとしたい場合は ?\r を渡します。
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�(nil)����̤��ޤ���
-�㤨�С��ɤ߹��ߥ⡼�ɻ���a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なし(nil)を区別します。
+例えば、読み込みモード時にa, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
-��:
+例:
 
   CSV.open("/temp/test.csv", 'r') do |row|
     puts row.join("<>")
   end
 
-tsv(Tab Separated Values)�ե�����ʤɤΥ��ѥ졼���򥫥�ްʳ��ǻ���
+tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外で指定
 
   CSV.open("/temp/test.tsv", 'r', "\t") do |row|
     puts row.join("<>")
   end
 
-�֥��å����Ϥ��ʤ��ä���� CSV::Reader ���֤��ޤ���
+ブロックを渡さなかった場合 CSV::Reader を返します。
 
-�񤭹��ߥ⡼�ɻ��ˤ� path �ˤ���ե�����򳫤� CSV::Writer ��֥��å����Ϥ��ޤ���
+書き込みモード時には path にあるファイルを開き CSV::Writer をブロックに渡します。
 
-��:
+例:
 
   CSV.open("/temp/test.csv", 'w') do |writer|
     writer << ["ruby", "perl", "python"]
     writer << ["java", "C", "C++"]
   end
 
-�֥��å�̤����ξ�� CSV::Writer ���֤��ޤ���
+ブロック未指定の場合 CSV::Writer を返します。
 
 #@since 1.8.2
 
 --- foreach(path, rs = nil) {|row| ... } -> nil
 
-�ɤ߹��ߥ⡼�ɤǥե�����򳫤����ƹԤ�����ǥ֥��å����Ϥ��ޤ���
+読み込みモードでファイルを開き、各行を配列でブロックに渡します。
 
-@param path �ѡ�������ե�����Υե�����̾
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param path パースするファイルのファイル名
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�����̤��ޤ���
-�㤨�С�a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なしを区別します。
+例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
-��:
+例:
 
   CSV.foreach('test.csv'){|row|
     puts row.join(':')
@@ -1045,50 +1045,50 @@ tsv(Tab Separated Values)�ե�����ʤɤΥ��ѥ졼���򥫥�ްʳ��ǻ���
 
 --- read(path, length = nil, offset = nil) -> Array
 
-path �ǻ��ꤵ�줿 CSV �ե�������ɤ߹��ߡ����������ǥǡ������֤��ޤ���
+path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
-@param path �ѡ�������ե�����Υե�����̾
-@param length �оݥե�������ɤ߹��ߥ�����
-@param offset �ɤ߹��߳��ϰ���
+@param path パースするファイルのファイル名
+@param length 対象ファイルの読み込みサイズ
+@param offset 読み込み開始位置
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�����̤��ޤ���
-�㤨�С�a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なしを区別します。
+例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
 --- readlines(path, rs = nil) -> Array
 
-path �ǻ��ꤵ�줿 CSV �ե�������ɤ߹��ߡ����������ǥǡ������֤��ޤ���
+path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
-@param path �ѡ�������ե�����Υե�����̾
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param path パースするファイルのファイル名
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�����̤��ޤ���
-�㤨�С�a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なしを区別します。
+例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
 #@end
 
 --- generate(path, fs = nil, rs = nil) -> CSV::BasicWriter
 --- generate(path, fs = nil, rs = nil) {|writer| ... } -> nil
 
-path �ǻ��ꤵ�줿�ե������񤭹��ߥ⡼�ɤǳ������֥��å����Ϥ��ޤ���
-�֥��å�̤����ξ��� [[c:CSV::BasicWriter]] ���֤��ޤ���
+path で指定されたファイルを書き込みモードで開き、ブロックに渡します。
+ブロック未指定の場合は [[c:CSV::BasicWriter]] を返します。
 
-@param path �񤭹��ߥ⡼�ɤ�open����ե�����Υե�����̾
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param path 書き込みモードでopenするファイルのファイル名
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-===== ����
+===== 注意
 
-�ե�����񤭹��߻���""(��ʸ��)���ͤʤ�(nil)����̤��ޤ���
-�㤨�С�["a", "", nil, "b"] ��������Ϥ������� a, "", , b �Ȥ����Ԥ�ե�����˽񤭹��ߤޤ���
+ファイル書き込み時に""(空文字)と値なし(nil)を区別します。
+例えば、["a", "", nil, "b"] の配列を渡した場合に a, "", , b という行をファイルに書き込みます。
 
-��:
+例:
   a = ["1","ABC","abc"]
   b = ["2","DEF","def"]
   c = ["3","GHI","ghi"]
@@ -1103,16 +1103,16 @@ path �ǻ��ꤵ�줿�ե������񤭹��ߥ⡼�ɤǳ������֥��å����Ϥ��ޤ���
 --- parse(str_or_readable, fs = nil, rs = nil) -> Array
 --- parse(str_or_readable, fs = nil, rs = nil){|rows| ... } -> nil
 
-str_or_readable �ǻ��ꤵ�줿ʸ�����ѡ����������������Ѵ����֥��å����Ϥ��ޤ���
-�֥��å�̤����ξ����Ѵ����줿�����������֤��ޤ���
+str_or_readable で指定された文字列をパースし配列の配列に変換、ブロックに渡します。
+ブロック未指定の場合は変換された配列の配列を返します。
 
-@param str_or_readable �ѡ�������ʸ����
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param str_or_readable パースする文字列
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-��:
+例:
   CSV.parse("A,B,C\nd,e,f\nG,H,I"){|rows|
     p rows
   }
@@ -1120,48 +1120,48 @@ str_or_readable �ǻ��ꤵ�줿ʸ�����ѡ����������������Ѵ����֥��å����Ϥ��ޤ�
 --- generate_line(row, fs = nil, rs = nil) -> String
 --- generate_line(row, fs = nil, rs = nil){|s| ... } -> nil
 
-row �ǻ��ꤵ�줿�����ѡ�������fs �ǻ��ꤵ�줿ʸ����ե�����ɥ��ѥ졼���Ȥ���
-1��ʬ��ʸ�����֥��å����Ϥ��ޤ���
-�֥��å�̤����ξ����Ѵ����줿ʸ������֤��ޤ���
+row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
+1行分の文字列をブロックに渡します。
+ブロック未指定の場合は変換された文字列を返します。
 
-@param row �ѡ�����������
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param row パースする配列
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 --- parse_line(src, fs = nil, rs = nil) -> Array
 --- parse_line(src, fs = nil, rs = nil){|row| ... } -> nil
 
-src �ǻ��ꤵ�줿ʸ�����1��ʬ�Ȥ��ƥѡ�����������Ѵ����֥��å����Ϥ��ޤ���
-�֥��å�̤����ξ����Ѵ����줿������֤��ޤ���
+src で指定された文字列を1行分としてパースし配列に変換、ブロックに渡します。
+ブロック未指定の場合は変換された配列を返します。
 
-@param src �ѡ�������ʸ����
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param src パースする文字列
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 #@until 1.9.1
 --- generate_row(src, cells, out_dev, fs = nil, rs = nil) -> Fixnum
 
-src �ǻ��ꤵ�줿�����ѡ������� csv������ʸ����Ȥ���(�Զ��ڤ�ʸ����ޤ��) out_dev �˽��Ϥ��ޤ���
-�֤��ͤȤ��� fs �Ƕ��ڤä��ե������(cell)�ο����֤��ޤ���
+src で指定された配列をパースして csv形式の文字列として(行区切り文字も含めて) out_dev に出力します。
+返り値として fs で区切ったフィールド(cell)の数を返します。
 
-@param src �ѡ�����������
-@param cells �ѡ�������ե�����ɿ���
-@param out_dev csv������ʸ����ν����衣
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param src パースする配列
+@param cells パースするフィールド数。
+@param out_dev csv形式の文字列の出力先。
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-===== ����
+===== 注意
 
-����Υѡ�������""(��ʸ��)���ͤʤ�(nil)����̤��ޤ���
-�㤨�С�["a", "", nil, "b"] ��������Ϥ������� a,"", , b �Ȥ���ʸ������������ޤ���
+配列のパース時に""(空文字)と値なし(nil)を区別します。
+例えば、["a", "", nil, "b"] の配列を渡した場合に a,"", , b という文字列を生成します。
 
-��:
+例:
   row1 = ['a', 'b', 'c']
   row2 = ['1', '2', '3']
   row3 = ['A', 'B', 'C']
@@ -1175,27 +1175,27 @@ src �ǻ��ꤵ�줿�����ѡ������� csv������ʸ����Ȥ���(�Զ��ڤ�ʸ����ޤ��) out
 
 --- parse_row(src, index, out_dev, fs = nil, rs = nil) -> Array
 
-CSV������ʸ�����ѡ�������CSV1��(row)ʬ�Υǡ�����������Ѵ��� out_dev �˽��Ϥ��ޤ���
+CSV形式の文字列をパースしてCSV1行(row)分のデータを配列に変換し out_dev に出力します。
 
-@param src �ѡ�������ʸ����(CSV����)
-@param index �ѡ������ϰ���
-@param out_dev �Ѵ������ǡ����ν����衣
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
-@return  �Ѵ�����Array�Υ��������Ѵ��򤷤�ʸ����ΰ��֤�Array�Ȥ����֤��ޤ���
+@param src パースする文字列(CSV形式)
+@param index パース開始位置
+@param out_dev 変換したデータの出力先。
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
+@return  変換したArrayのサイズと変換をした文字列の位置をArrayとして返します。
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�����̤��ޤ���
-�㤨�С�a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なしを区別します。
+例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
-��:
+例:
    src = "a,b,c\n1,2\nA,B,C,D"
    i = 0
 
-   x = [] #��̤��Ǽ��������
+   x = [] #結果を格納する配列
    begin
      parsed = []
      parsed_cells, i = CSV.parse_row(src, i, parsed)
@@ -1209,7 +1209,7 @@ CSV������ʸ�����ѡ�������CSV1��(row)ʬ�Υǡ�����������Ѵ��� out_dev �˽��Ϥ��
      }
    }
 
-�¹Է��:
+実行結果:
   a
   b
   c

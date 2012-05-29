@@ -1,11 +1,11 @@
 
-ü����������Ϥ����椹�뤿��ε�ǽ�� [[c:IO]] ���ɲä��뤿��Υ饤�֥�
-��Ǥ���
+端末上の入出力を制御するための機能を [[c:IO]] に追加するためのライブラ
+リです。
 
-�㤨�С�[[m:IO#noecho]] ��Ȥäƥѥ�������Ϥ�ü�����ɽ�����ʤ��Ȥ���
-�������Ǥ��ޤ���Ʊ�ͤλ��� [[lib:curses]] �饤�֥���[[lib:readline]]
-�饤�֥��Ǥ�¸��Ǥ��ޤ����������ޤǤ�ɬ�פϤʤ����ɡ�[[m:IO#gets]]
-�� [[m:IO#getc]] �Ǥϵ�ǽ��­�Ȥ��ä����������Ǥ���
+例えば、[[m:IO#noecho]] を使ってパスワード入力を端末上に表示しないといっ
+た事ができます。同様の事が [[lib:curses]] ライブラリや[[lib:readline]]
+ライブラリでも実現できますが、そこまでは必要はないけど、[[m:IO#gets]]
+や [[m:IO#getc]] では機能不足といった場合に便利です。
 
 #@# ruby-dev:40897
 
@@ -15,93 +15,93 @@
 
 --- noecho {|io| ... } -> object
 
-ʸ�����ϻ��Υ������Хå���̵�������ꤷ�ƥ֥��å���ɾ�����ޤ���
+文字入力時のエコーバックを無効に設定してブロックを評価します。
 
-�֥��å������ˤ� self ���Ϥ���ޤ����֥��å���ɾ��������̤��֤��ޤ���
+ブロック引数には self が渡されます。ブロックを評価した結果を返します。
 
-�ʲ�����Ǥϡ�ɸ�����Ϥ��饨�����Хå��ʤ���ʸ��������ɤ߹��ߤޤ���
+以下の例では、標準入力からエコーバックなしで文字列を一行読み込みます。
 
   require "io/console"
   STDIN.noecho(&:gets)
 
-@raise LocalJumpError �֥��å�����ꤷ�ʤ��ä�����ȯ�����ޤ���
+@raise LocalJumpError ブロックを指定しなかった場合に発生します。
 
 --- echo=(flag)
 
-ʸ�����ϻ��Υ������Хå���ͭ�����ɤ��������ꤷ�ޤ���
+文字入力時のエコーバックが有効かどうかを設定します。
 
-@param flag true ����ꤷ����硢ʸ�����ϻ��Υ������Хå���ͭ�������ꤵ
-            ��ޤ���
+@param flag true を指定した場合、文字入力時のエコーバックが有効に設定さ
+            れます。
 
 --- echo? -> bool
 
-ʸ�����ϻ��Υ������Хå���ͭ�����ɤ������֤��ޤ���
+文字入力時のエコーバックが有効かどうかを返します。
 
 --- raw {|io| ... } -> object
 
-raw �⡼�ɡ����Խ���̵���ˤ��ƻ��ꤵ�줿�֥��å���ɾ�����ޤ���
+raw モード、行編集を無効にして指定されたブロックを評価します。
 
-�֥��å������ˤ� self ���Ϥ���ޤ����֥��å���ɾ��������̤��֤��ޤ���
+ブロック引数には self が渡されます。ブロックを評価した結果を返します。
 
-@raise LocalJumpError �֥��å�����ꤷ�ʤ��ä�����ȯ�����ޤ���
+@raise LocalJumpError ブロックを指定しなかった場合に発生します。
 
-�ʲ�����Ǥϡ�ɸ�����Ϥ��饨�����Хå��ʤ���ʸ��������ɤ߹��ߤޤ���
+以下の例では、標準入力からエコーバックなしで文字列を一行読み込みます。
 
   require "io/console"
   STDIN.raw(&:gets)
 
 --- raw! -> self
 
-raw �⡼�ɤ�ͭ���ˤ��ޤ���ü���Υ⡼�ɤ��Ǹ����᤹ɬ�פ��������
-[[m:IO#raw]] ����Ѥ��Ƥ���������
+raw モードを有効にします。端末のモードを後で元に戻す必要がある場合は
+[[m:IO#raw]] を使用してください。
 
-@return ���Ȥ��֤��ޤ���
+@return 自身を返します。
 
 @see [[m:IO#raw]]
 
 --- getch -> String
 
-raw �⡼�ɤǰ�ʸ���ɤ߹������̤��֤��ޤ���
+raw モードで一文字読み込んだ結果を返します。
 
 --- winsize -> [Integer, Integer]
 
-ü���Υ������� [rows, columns] ���֤��ޤ���
+端末のサイズを [rows, columns] で返します。
 
 --- winsize=(size)
 
-ü���Υ����������ꤷ�ޤ���
+端末のサイズを設定します。
 
-@param size [rows, columns] ����ͤ�����ǻ��ꤷ�ޤ���
+@param size [rows, columns] を数値の配列で指定します。
 
-���̤ϥץ�åȥե������Ķ��˰�¸���ޤ���
+効果はプラットフォームや環境に依存します。
 
 --- iflush -> self
 
-�����ͥ�����ϥХåե���ե�å��夷�ޤ���
+カーネルの入力バッファをフラッシュします。
 
-@return ���Ȥ��֤��ޤ���
+@return 自身を返します。
 
 --- oflush -> self
 
-�����ͥ�ν��ϥХåե���ե�å��夷�ޤ���
+カーネルの出力バッファをフラッシュします。
 
-@return ���Ȥ��֤��ޤ���
+@return 自身を返します。
 
 --- ioflush -> self
 
-�����ͥ�������ϥХåե���ե�å��夷�ޤ���
+カーネルの入出力バッファをフラッシュします。
 
-@return ���Ȥ��֤��ޤ���
+@return 自身を返します。
 
 == Singleton Methods
 
 --- console -> File | nil
 
-ü���� [[c:File]] ���֥������Ȥ��֤��ޤ���
+端末を [[c:File]] オブジェクトで返します。
 
   require "io/console"
   IO.console # => #<File:/dev/tty>
 
-�ץ�������ü�������ڤ�Υ���줿���֤Ǽ¹Ԥ���� nil ���֤��ޤ���
+プロセスが端末から切り離された状態で実行すると nil を返します。
 
-����ͤϥץ�åȥե������Ķ��˰�¸���ޤ���
+戻り値はプラットフォームや環境に依存します。

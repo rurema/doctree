@@ -1,12 +1,12 @@
 = class MiniTest::Unit::TestCase
 include MiniTest::Assertions
 
-�ƥ��Ȥδ���ñ��(���뤤�ϡ֥ƥ������Ρ�)��ɽ�����饹�Ǥ���
+テストの基本単位(あるいは「テスト本体」)を表すクラスです。
 
-�ƥ��Ȥ�Ԥ��᥽�å� (�ƥ��ȥ᥽�å�) �� TestCase �Υ��֥��饹��
-���󥹥��󥹥᥽�åɤȤ����������ޤ���
-�ƥ��ȥ᥽�åɤ�̾���� "test" �ǻϤޤäƤ��ʤ���Фʤ�ޤ���
-�դˡ�"test" �ǻϤޤäƤ���᥽�åɤ����ƥƥ��ȥ᥽�åɤȸ��ʤ���ޤ���
+テストを行うメソッド (テストメソッド) は TestCase のサブクラスの
+インスタンスメソッドとして定義されます。
+テストメソッドの名前は "test" で始まっていなければなりません。
+逆に、"test" で始まっているメソッドは全てテストメソッドと見なされます。
 
 == Public Instance Methods
 
@@ -16,77 +16,77 @@ include MiniTest::Assertions
 --- name -> String
 #@end
 
-���Ȥ�̾�����֤��ޤ���
+自身の名前を返します。
 
 --- passed? -> bool
 
-���Ȥμ¹Ԥ������������Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身の実行に成功した場合は真を返します。
+そうでない場合は偽を返します。
 
 --- run(runner) -> String
 
-���Ȥ˴�Ϣ�դ����Ƥ���ƥ��Ȥ�¹Ԥ��ޤ���
+自身に関連付けられているテストを実行します。
 
-[[m:MiniTest::Unit::TestCase#setup]] �����֥��饹�Ǻ��������Ƥ�����Ϥ�����¹Ԥ��ޤ���
+[[m:MiniTest::Unit::TestCase#setup]] がサブクラスで再定義されている場合はそれらも実行します。
 
-@param runner �ƥ��Ȥμ¹Է�̤�������륪�֥������Ȥ���ꤷ�ޤ���
+@param runner テストの実行結果を管理するオブジェクトを指定します。
 
 --- setup
 
-�ƥƥ��ȥ������μ¹����˼¹Ԥ���᥽�åɤǤ���
+各テストケースの実行前に実行するメソッドです。
 
-���֥��饹�Ǻ�������ޤ���
+サブクラスで再定義します。
 
 --- teardown
 
-�ƥƥ��ȥ������μ¹Ը�˼¹Ԥ���᥽�åɤǤ���
+各テストケースの実行後に実行するメソッドです。
 
-���֥��饹�Ǻ�������ޤ���
+サブクラスで再定義します。
 
 == Singleton Methods
 
 --- new(name)
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param name ���Ȥ�̾������ꤷ�ޤ���
+@param name 自身の名前を指定します。
 
 --- inherited(klass)
 
-�ƥ��ȥ��饹̾��ƥ��ȥ���������Ͽ���ޤ���
+テストクラス名をテストスイート登録します。
 
 --- reset
 
-�ƥ��ȥ������Ȥ򥯥ꥢ���ޤ���
+テストスイートをクリアします。
 
 --- test_methods -> Array
 
-�ƥ��ȥ᥽�åɤΥꥹ�Ȥ��֤��ޤ���
+テストメソッドのリストを返します。
 
-[[m:MiniTest::Unit::TestCase.test_order]] ���ͤ� :random �Ǥ������
-�֤����᥽�åɥꥹ�Ȥν��֤ϥ�����Ǥ���
-�����Ǥʤ����ϡ�ʸ�������ɽ�˥����Ȥ���ޤ���
+[[m:MiniTest::Unit::TestCase.test_order]] の値が :random である場合は
+返されるメソッドリストの順番はランダムです。
+そうでない場合は、文字コード順にソートされます。
 
 --- test_order -> Symbol
 
-�ƥ��Ȥμ¹Խ�����֤��ޤ���
+テストの実行順序を返します。
 
-�ǥե���Ȥϥ�����Ǥ���
+デフォルトはランダムです。
 
 --- test_suites -> Array
 
-�ƥ��ȥ��饹̾�Υꥹ�Ȥ��֤��ޤ���
+テストクラス名のリストを返します。
 
 
 == Constants
 #@since 1.9.2
 --- PASSTHROUGH_EXCEPTIONS -> [Class]
 
-�����ƥ��Ϣ���㳰�Υꥹ�ȤǤ��������ǻ��Ѥ��ޤ���
+システム関連の例外のリストです。内部で使用します。
 
 --- SUPPORTS_INFO_SIGNAL -> Fixnum | nil
 
-[[c:Signal]] �� INFO �Ȥ��������ʥ�򥵥ݡ��Ȥ��Ƥ��뤫�ɤ�����
-Ĵ�٤뤿�������Ǥ��������ǻ��Ѥ��ޤ���
+[[c:Signal]] が INFO というシグナルをサポートしているかどうかを
+調べるための定数です。内部で使用します。
 
 #@end

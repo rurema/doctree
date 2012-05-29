@@ -1,43 +1,43 @@
-net/ftp �� TLS ��ĥ���������饤�֥��Ǥ���
+net/ftp に TLS 拡張を実装するライブラリです。
 
-[[RFC:4217]] ���������Ƥ��� FTP over SSL/TLS (FTPS) ��������Ƥ��ޤ���
-����ȥ����륳�ͥ������� SSL/TLS �ǰŹ沽���ޤ���
+[[RFC:4217]] で定義されている FTP over SSL/TLS (FTPS) を実装しています。
+コントロールコネクションを SSL/TLS で暗号化します。
 
-RFC�Ǥϥǡ������ͥ������� TLS �ǰŹ沽���뵡ǽ���������Ƥ��ޤ�����
-���Υ饤�֥��Ǥϼ�������Ƥ��ޤ���
+RFCではデータコネクションを TLS で暗号化する機能が定義されていますが、
+このライブラリでは実装されていません。
 
-�ޤ���SSL/TLS ��³�γƥѥ�᡼�����ѹ�������ˡ�Ϥ���ޤ���
+また、SSL/TLS 接続の各パラメータを変更する方法はありません。
 
-�嵭������ʤɤ�ꡢ���Υ饤�֥��� 1.9.1 �ʹ��ѻߤ���ޤ���
+上記の問題などより、このライブラリは 1.9.1 以降廃止されます。
 
 = class Net::FTPTLS < Net::FTP
-FTP over SSL/TLS ������������饹�Ǥ���
+FTP over SSL/TLS を実装したクラスです。
 
-[[c:Net::FTP]] ��Ѿ����Ƥ��뤿�ᡢFTP ���饹�Υ᥽�åɤ����ѤǤ��ޤ���
+[[c:Net::FTP]] を継承しているため、FTP クラスのメソッドが利用できます。
 
 == Instance Methods
 
 #@since 1.8.6
 --- connect(host, port=Net::FTP::FTP_PORT) -> ()
-host �ǻ��ꤵ�줿�ۥ��Ȥ���³���ޤ���
+host で指定されたホストに接続します。
 
-[[m:Net::FTP#connect]] �Ȥϡ�ȯ�������㳰��ޤ�ۤ�Ʊ���Ǥ���
+[[m:Net::FTP#connect]] とは、発生する例外も含めほぼ同じです。
 
-@param host ��³����ۥ���̾�Ǥ���
-@param port ��³����ݡ����ֹ�Ǥ���
+@param host 接続するホスト名です。
+@param port 接続するポート番号です。
 @see [[m:Net::FTP#connect]]
 
 #@end
 
 --- login(user = "anonymous", passwd = nil, acct = nil) -> ()
-�ۥ��ȤؤΥ������������Ԥʤ��ޤ���
+ホストへのログイン処理を行ないます。
 
-������������� SSL/TLS �ǰŹ沽�̿��򳫻Ϥ��ޤ�������¾��
-[[m:Net::FTP#login]] ��Ʊ�ͤǤ���
+ログインの前に SSL/TLS で暗号化通信を開始します。その他は
+[[m:Net::FTP#login]] と同様です。
 
-@param user ��������˻Ȥ��桼��̾����ꤷ�ޤ���
-@param passwd ��������˻Ȥ��ѥ���ɤ���ꤷ�ޤ���
-@param acct �������������� ACCT ���ޥ�ɤΥѥ�᡼������ꤷ�ޤ���
+@param user ログインに使うユーザ名を指定します。
+@param passwd ログインに使うパスワードを指定します。
+@param acct ログイン後に送る ACCT コマンドのパラメータを指定します。
 @see [[m:Net::FTP#login]]
 
 

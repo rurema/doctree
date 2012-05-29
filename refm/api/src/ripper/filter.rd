@@ -1,13 +1,13 @@
-���٥�ȥɥ�֥󥹥������ Ruby �ץ�������ù����뤿��Υ饤�֥��Ǥ���
+イベントドリブンスタイルで Ruby プログラムを加工するためのライブラリです。
 
 = class Ripper::Filter
 
-���٥�ȥɥ�֥󥹥������ Ruby �ץ�������ù����뤿��Υ��饹�Ǥ���
+イベントドリブンスタイルで Ruby プログラムを加工するためのクラスです。
 
-���Υ��饹��Ѿ����ơ�ɬ�פʥ��٥�Ȥ��б�����᥽�åɤ�������ƻ��Ѥ�
-�ޤ���
+このクラスを継承して、必要なイベントに対応するメソッドを定義して使用し
+ます。
 
-=== ������
+=== 使用例
 
   require 'ripper'
   require 'cgi'
@@ -32,54 +32,54 @@
   
   Ruby2HTML.new(ARGF).parse('')
 
-Ruby �ץ���������Ϥ��ơ�[[m:Ripper::SCANNER_EVENTS]] �ˤ��륹�����
-���٥�Ȥ�¹Ԥ��ޤ������٥�Ȥϥץ������˽񤤤����֤Ǽ¹Ԥ���ޤ���
+Ruby プログラムを解析して、[[m:Ripper::SCANNER_EVENTS]] にあるスキャナ
+イベントを実行します。イベントはプログラムに書いた順番で実行されます。
 
-�嵭����Ǥϡ�parse �᥽�åɤ��Ϥ�����ʸ��������ͤȤ��ơ����٥�ȥ�
-��ɥ餬 ARGF ���Ϥ��줿 Ruby �ץ������� HTML �ˤ����֤��ޤ���
+上記の例では、parse メソッドに渡した空文字列を初期値として、イベントハ
+ンドラが ARGF で渡された Ruby プログラムを HTML にして返します。
 
 == Class Methods
 
 --- new(src, filename = '-', lineno = 1) -> Ripper::Filter
 
-Ripper::Filter ���֥������Ȥ�������ޤ���
+Ripper::Filter オブジェクトを作成します。
 
-@param src Ruby �ץ�������ʸ���� IO ���֥������Ȥǻ��ꤷ�ޤ���
+@param src Ruby プログラムを文字列か IO オブジェクトで指定します。
 
-@param filename src �Υե�����̾��ʸ����ǻ��ꤷ�ޤ�����ά����� "-" �ˤʤ�ޤ���
+@param filename src のファイル名を文字列で指定します。省略すると "-" になります。
 
-@param lineno src �γ��Ϲ��ֹ����ꤷ�ޤ�����ά����� 1 �ˤʤ�ޤ���
+@param lineno src の開始行番号を指定します。省略すると 1 になります。
 
 == Instance Methods
 
 --- filename -> String
 
-Ruby �ץ������Υե�����̾��ʸ������֤��ޤ���
+Ruby プログラムのファイル名を文字列で返します。
 
 --- lineno -> Integer | nil
 
-���ߤΥȡ�����ι��ֹ�� 1 ����Ϥޤ���ͤ��֤��ޤ���
+現在のトークンの行番号を 1 から始まる数値で返します。
 
-���Υ᥽�åɤϥ��٥�ȥϥ�ɥ����ǤΤ߰�̣�Τ����ͤ��֤��ޤ������٥�
-�ȥϥ�ɥ����� self.lineno ��¹Ԥ��Ƥ���������
+このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベン
+トハンドラの中で self.lineno を実行してください。
 
 --- column -> Integer | nil
 
-���ߤΥȡ�����η��ֹ�� 0 ����Ϥޤ���ͤ��֤��ޤ���
+現在のトークンの桁番号を 0 から始まる数値で返します。
 
-���Υ᥽�åɤϥ��٥�ȥϥ�ɥ����ǤΤ߰�̣�Τ����ͤ��֤��ޤ������٥�
-�ȥϥ�ɥ����� self.column ��¹Ԥ��Ƥ���������
+このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベン
+トハンドラの中で self.column を実行してください。
 
 --- parse(init = nil) -> object
 
-���Ȥλ��� Ruby �ץ������β��Ϥ򳫻Ϥ��ޤ����Ƽ磻�٥�ȥϥ�ɥ�ǽ�
-����Ԥä���̤��֤��ޤ���
+自身の持つ Ruby プログラムの解析を開始します。各種イベントハンドラで処
+理を行った結果を返します。
 
-@param init Ǥ�դ��ͤ����Ǥ��ޤ��������ͤ����٥�ȥϥ�ɥ���Ϥ���Ƥ����ޤ���
+@param init 任意の値を指定できます。この値がイベントハンドラに渡されていきます。
 
-���� init �����ͤȤ��ƥ��٥�ȥϥ�ɥ���Ϥ���Ƥ����ޤ����Ƽ磻�٥�
-�ȥϥ�ɥ������ͤϼ��Υ��٥�ȥϥ�ɥ���Ϥ���ޤ���
-[[m:Enumerable#inject]] �Τ褦�ˡ��ǽ�Ū�ʷ�̤�����ͤȤ����֤��ޤ���
+引数 init を初期値としてイベントハンドラに渡されていきます。各種イベン
+トハンドラの戻り値は次のイベントハンドラに渡されます。
+[[m:Enumerable#inject]] のように、最終的な結果を戻り値として返します。
 
 @see [[m:Ripper::Filter#on_default]], [[m:Ripper::Filter#on_XXX]]
 
@@ -87,35 +87,35 @@ Ruby �ץ������Υե�����̾��ʸ������֤��ޤ���
 
 --- on_default(event, token, data) -> object
 
-���٥�ȥϥ�ɥ餬̤����Υ��٥�Ȥ��¹Ԥ��줿���˼¹Ԥ���륤�٥��
-�ϥ�ɥ�Ǥ���
+イベントハンドラが未定義のイベントが実行された場合に実行されるイベント
+ハンドラです。
 
-@param event �¹Ԥ��줿���٥�Ȥ� :on_XXX �����Υ���ܥ�ǻ��ꤵ��ޤ���
+@param event 実行されたイベントを :on_XXX 形式のシンボルで指定されます。
 
-@param token ���ߤΥȡ����󤬻��ꤵ��ޤ���
+@param token 現在のトークンが指定されます。
 
-@param data ���Υ��٥�ȥϥ�ɥ������ͤǤ����ǽ�Υ��٥�Ȥξ���
-            [[m:Ripper::Filter#parse]] �ΰ����ˤʤ�ޤ���
+@param data 前のイベントハンドラの戻り値です。最初のイベントの場合は
+            [[m:Ripper::Filter#parse]] の引数になります。
 
-���Υ᥽�åɤ�����ͤϼ��Υ��٥�ȥϥ�ɥ�� data �������Ϥ���ޤ���
-on_default �򥪡��Х饤�ɤ��ʤ��ä����� data �����򤽤Τޤ��֤��ޤ���
+このメソッドの戻り値は次のイベントハンドラの data 引数に渡されます。
+on_default をオーバライドしなかった場合は data 引数をそのまま返します。
 
 @see [[m:Ripper::Filter#parse]], [[m:Ripper::Filter#on_XXX]]
 
 --- on_XXX(token, data) -> object
 
-�Ƽ凉����ʥ��٥�Ȥ�¹Ԥ��ޤ���
+各種スキャナイベントを実行します。
 
-�ºݤˤ� on_XXX �Ȥ����᥽�åɤ�¸�ߤ��ޤ��󡣡�XXX�פ���ʬ��
-[[m:Ripper::SCANNER_EVENTS]] �ˤ��륹����ʥ��٥�Ȥ��ɤ��ؤ��Ƥ���������
+実際には on_XXX というメソッドは存在しません。「XXX」の部分を
+[[m:Ripper::SCANNER_EVENTS]] にあるスキャナイベントに読み替えてください。
 
-@param token ���ߤΥȡ����󤬻��ꤵ��ޤ���
+@param token 現在のトークンが指定されます。
 
-@param data ���Υ��٥�ȥϥ�ɥ������ͤǤ����ǽ�Υ��٥�Ȥξ���
-            [[m:Ripper::Filter#parse]] �ΰ����ˤʤ�ޤ���
+@param data 前のイベントハンドラの戻り値です。最初のイベントの場合は
+            [[m:Ripper::Filter#parse]] の引数になります。
 
-�����Х饤�ɤ��ʤ��ä����� on_default ���¹Ԥ���ޤ���
+オーバライドしなかった場合は on_default が実行されます。
 
-���Υ᥽�åɤ�����ͤϼ��Υ��٥�ȥϥ�ɥ�� data �������Ϥ���ޤ���
+このメソッドの戻り値は次のイベントハンドラの data 引数に渡されます。
 
 @see [[m:Ripper::Filter#parse]], [[m:Ripper::Filter#on_default]], [[m:Ripper::SCANNER_EVENTS]]

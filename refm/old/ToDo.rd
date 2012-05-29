@@ -1,30 +1,30 @@
-= ��뤳��(��뤫�⤷��ʤ�����)
+= やること(やるかもしれないこと)
 
-�����β�������ˤˤĤ��Ƥ� rubyist ML �ǵ�������Ƥ��ޤ�(���������
-�ʤ����⤢��ޤ�:-p)��
+これらの課題や方針については rubyist ML で議論されています(議論されて
+ない場合もあります:-p)。
 
-* 2002-04-19: Method ���ɤ������ �� ((<rubyist:1343>)) ��
+* 2002-04-19: Method の良い実例を → ((<rubyist:1343>)) ？
 
-* 2002-04-16: ((<shim>)) ((<ruby-dev:16790>)), ((<ruby-dev:16926>)) �ξҲ�
+* 2002-04-16: ((<shim>)) ((<ruby-dev:16790>)), ((<ruby-dev:16926>)) の紹介。
 
-* 2002-03-04: getopts���ѹ�(((<ruby-dev:16193>)))�ؤ��ɿ�(commit�Ԥ�)��
-  -> �ʤ���ä����Τ��񤤤��Ȼפ���((<getopts>)) �Ρ֤����餯1.6.8��
-  �Ȥ��������Ҥ�ľ���ʤ���͡�
+* 2002-03-04: getoptsの変更(((<ruby-dev:16193>)))への追随(commit待ち)。
+  -> なんだっけ？確か書いたと思う。((<getopts>)) の「おそらく1.6.8」
+  とかいう記述は直さなきゃね。
 
-* �ɲä��줿ź�ե饤�֥��ˤĤ��ƤΥڡ�����(�ޤ��ʤ����)�Ѱդ��롣
+* 追加された添付ライブラリについてのページを(まだなければ)用意する。
 
-* ��new �� initialize ��Ƥ֡������Ǥʤ����󥹥ȥ饯��(open�Ȥ�)��
-  initialize��ƤФʤ��פ��Ȥ���������
+* 「new は initialize を呼ぶ。そうでないコンストラクタ(openとか)は
+  initializeを呼ばない」ことを明記する
 
-  �����å��� -> Proc
+  チェック完 -> Proc
 
-  Thread ���񤷤��Τ���α
+  Thread は難しいので保留
 
-* �᥽�åɤ�����ͤ�����
+* メソッドの戻り値の明記
 
-  ENV �� ARGF ���ޤ�����줿�襤��
+  ENV と ARGF がまだ。疲れたわい。
 
-  �����å��� -> Thread, Proc, �Ȥ߹��ߴؿ�
+  チェック完 -> Thread, Proc, 組み込み関数
   Object, Array, Binding, Continuation, Data, Exception, Dir,
   FalseClass, File::Stat, Hash, IO, File, MatchData, Method,
   UnboundMethod, Module, Class, Numeric, Integer, Bignum, Fixnum,
@@ -32,46 +32,46 @@
   String, Struct, Symbol, Thread, ThreadGroup, Time, TrueClass, NilClass,
   Comparable, Enumerable, Errno, File::Constants, FileTest, GC,
   Kernel, Marshal, Math, ObjectSpace, Precision, Process, Signal,
-  ���㳰���饹
+  全例外クラス
 
-* 2001-05-09: Marshal �����¤ˤĤ��ƽ�(((<rubyist:0537>)))
-* footnote ������(�ޤ�����äȻĤäƤ뢪���θ塢�ޤ��񤤤���ä�
-  footnote ��pending���ܤȤ��Ƥ�ȤäƤ���)
-* ���ۤη��Ѵ��ˤĤ��ƽ�(�����˽񤯡��������ʤ��ʤä�)
-* ʸ�񥹥�����γ�Ω
-* RAA�ξҲ�ڡ����ʤ󤫤��ߤ����ʤȤ����äƤߤ�
-* �黻�Ҥ�����(����Ū����ˡ ruby�α黻�ҤϺ������ǽ�ʤΤǢ�������)
-* self ������(����ƥ����Ȥ�����)
-* ���饹�⥪�֥������ȤǤ��뤳�Ȥ˸��ڤ��롣
-  * object.c �οޤ�ܤ��롩
-  * ���饹���ؤˤĤ��ƾܺ٤�(include �ϥ��饹���ؤؤ�����)
-  * ((<ruby-list:14141>))�οޤ�ܤ���
-* �Ǥ���������٤ƤΥ᥽�åɤ˴ʷ�ʼ����Ĥ���褦�ˤ��롣
+* 2001-05-09: Marshal の制限について書く(((<rubyist:0537>)))
+* footnote の整理(まだちょっと残ってる→その後、また書いちゃった
+  footnote はpending項目としても使っている)
+* 暗黙の型変換について書く(本当に書く？元気がなくなった)
+* 文書スタイルの確立
+* RAAの紹介ページなんかも欲しいなとか言ってみる
+* 演算子の説明(一般的な用法 rubyの演算子は再定義可能なので→うーん)
+* self の説明(コンテキストの説明)
+* クラスもオブジェクトであることに言及する。
+  * object.c の図を載せる？
+  * クラス階層について詳細を(include はクラス階層への挿入)
+  * ((<ruby-list:14141>))の図を載せる
+* できるだけすべてのメソッドに簡潔な実例をつけるようにする。
 
-= (�ɤʤ�����)��ä�����
+= (どなたかが)やったこと
 
-* allocation framework (1.7 feature) �Τ��Ȥ��
-  -> 2002-04-10: ��ñ�˽񤤤�
+* allocation framework (1.7 feature) のことも書く
+  -> 2002-04-10: 簡単に書いた
 
-* �����¹�ʸ�Ǥ��뤳�Ȥˤդ�롣(class �� module ʸ��)
-  * ľ�ܤǤϤʤ����ɡ�������ˡ�((<���饹���᥽�åɤ����/���饹���>))�פǽ񤤤�
-* �����ڡ����ι���(�黻�ҷ�����������˺ܤ�褦��)
-  * ((<method>))�ڡ����ǲ�衩->���
-* MethodList ��
-  * 2002-01-14: ���饹���⥸�塼������ʤ�ΤϤϴ�λ�����ȤϤܤ��ܤ���롣
-* ���Υޥ˥奢������۾������(��)
-  * 2001-12-25: ((<���۾��>))
-* 2001-04-28: Ruby�ν�λ�����ˤĤ��ƽ�(((<rubyist:0526>)))
-  * 2001-05-11: ((<��λ����>))
-* ��Ruby��ʸˡ�׺ƹ�����ȼ�������Τε��Ҥθ�ľ����(('((<Ruby��ʸˡ>))'))
-  �Ȼ��Ȥ��Ƥ���ս��������
-  * 2001-05-11: ��ä���
-* ((<manual page>)) �λ��Ȥλ����Υڡ���
-  * �ڡ���������ä�
-  * ((<Process>))�Ǥ���äȻȤäƤߤ�
-  * ��λ�����Ĥ��
-* Ruby FAQ�򤳤��˼�����
-  * ��λ�����ߤ���
-* ��Ruby��ʸˡ�פκ�����(��Ƥ��)
-  * 2001-02-26 ��ä����ɤ��� - ���餤
-* ��ĥ�饤�֥���ե���󥹥ޥ˥奢��(�񤯿ͤ��롩)
+* 定義も実行文であることにふれる。(class や module 文で)
+  * 直接ではないけど、一応前に「((<クラス／メソッドの定義/クラス定義>))」で書いた
+* 索引ページの更新(演算子形式等も索引に載るように)
+  * ((<method>))ページで解決？->解決
+* MethodList 化
+  * 2002-01-14: クラス、モジュール等主なものはは完了。あとはぼちぼちやる。
+* このマニュアルの配布条件を決める(？)
+  * 2001-12-25: ((<配布条件>))
+* 2001-04-28: Rubyの終了処理について書く(((<rubyist:0526>)))
+  * 2001-05-11: ((<終了処理>))
+* 「Rubyの文法」再構成に伴い、全体の記述の見直しと(('((<Rubyの文法>))'))
+  と参照している箇所を修正する
+  * 2001-05-11: やった。
+* ((<manual page>)) の参照の仕方のページ
+  * ページだけ作った
+  * ((<Process>))でちょっと使ってみた
+  * 完了したつもり
+* Ruby FAQをここに取り込む
+  * 完了したみたい
+* 「Rubyの文法」の再編成(検討中)
+  * 2001-02-26 やった。どう？ - あらい
+* 拡張ライブラリリファレンスマニュアル(書く人いる？)

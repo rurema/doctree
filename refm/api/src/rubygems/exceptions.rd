@@ -1,81 +1,81 @@
 
-RubyGems �ǻ��Ѥ����㳰���饹����������饤�֥��Ǥ���
+RubyGems で使用する例外クラスを定義したライブラリです。
 
 = class Gem::Exception < RuntimeError
 
-RubyGems �ǰ������Ƥ��㳰�Υ����ѡ����饹�Ǥ���
+RubyGems で扱う全ての例外のスーパークラスです。
 
 = class Gem::CommandLineError < Gem::Exception
 
-���ޥ�ɥ饤����㳰�Ǥ���
+コマンドラインの例外です。
 
 = class Gem::DependencyError < Gem::Exception
 
-��¸�ط����㳰�Ǥ���
+依存関係の例外です。
 
 = class Gem::DependencyRemovalException < Gem::Exception
 
-Gem ��������ʤ��ä����˻��Ѥ����㳰�Ǥ���
+Gem を削除出来なかった場合に使用する例外です。
 
 = class Gem::GemNotInHomeException < Gem::Exception
 
-Gem ��Ŭ�ڤʥǥ��쥯�ȥ�˥��󥹥ȡ��뤵��Ƥ��ʤ����˻��Ѥ����㳰�Ǥ���
+Gem が適切なディレクトリにインストールされていない場合に使用する例外です。
 
 = class Gem::DocumentError < Gem::Exception
 
-�����ƥ�� RDoc �����󥹥ȡ��뤵��Ƥ��ʤ����˻��Ѥ����㳰�Ǥ���
+システムに RDoc がインストールされていない場合に使用する例外です。
 
 = class Gem::EndOfYAMLException < Gem::Exception
 
-YAML �ǡ����������Ǥ�����˻��Ѥ����㳰�Ǥ���
+YAML データが不正である場合に使用する例外です。
 
 = class Gem::FilePermissionError < Gem::Exception
 
-�ե�����θ��¤˴ؤ����㳰�Ǥ���
+ファイルの権限に関する例外です。
 
 = class Gem::FormatException < Gem::Exception
 
-�ե����ޥåȤ˴ؤ����㳰�Ǥ���
+フォーマットに関する例外です。
 
 = class Gem::GemNotFoundException < Gem::Exception
 
-Gem �����Ĥ���ʤ��ä������㳰�Ǥ���
+Gem が見つからなかった場合の例外です。
 
 = class Gem::InstallError < Gem::Exception
 
-���餫����ͳ�� Gem �򥤥󥹥ȡ������ʤ��ä����˻��Ѥ����㳰�Ǥ���
+何らかの理由で Gem をインストール出来なかった場合に使用する例外です。
 
 = class Gem::InvalidSpecificationException < Gem::Exception
 
-������ gemspec �˴ؤ����㳰�Ǥ���
+不正な gemspec に関する例外です。
 
 = class Gem::OperationNotSupportedError < Gem::Exception
 
-���ݡ��Ȥ���Ƥ��ʤ�����Ԥä����˻��Ѥ����㳰�Ǥ���
+サポートされていない操作を行った場合に使用する例外です。
 
 = class Gem::RemoteError < Gem::Exception
-#@# ���߻��Ѥ���Ƥ��ʤ�
+#@# 現在使用されていない
 
-��⡼�Ȥ����꤬ȯ���������˻��Ѥ����㳰�Ǥ���
+リモートで問題が発生した場合に使用する例外です。
 
 = class Gem::RemoteInstallationCancelled < Gem::Exception
-#@# ���߻��Ѥ���Ƥ��ʤ�
+#@# 現在使用されていない
 
 ???
 
 = class Gem::RemoteInstallationSkipped < Gem::Exception
-#@# ���߻��Ѥ���Ƥ��ʤ�
+#@# 現在使用されていない
 
 ???
 
 = class Gem::RemoteSourceException < Gem::Exception
 
-HTTP ��ͳ�ǥͥåȥ���˥�����������ʤ����˻��Ѥ����㳰�Ǥ���
+HTTP 経由でネットワークにアクセス出来ない場合に使用する例外です。
 
 = class Gem::VerificationError < Gem::Exception
 
-Gem �θ��ڤǥ��顼�ˤʤä����˻��Ѥ����㳰�Ǥ���
+Gem の検証でエラーになった場合に使用する例外です。
 
 = class Gem::SystemExitException < SystemExit
 
-���餫����ͳ�ǥ��ޥ�ɤ�¹Խ���ʤ����˻��Ѥ����㳰�Ǥ���
+何らかの理由でコマンドを実行出来ない場合に使用する例外です。

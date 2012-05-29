@@ -1,20 +1,20 @@
-Ê£¿ô¥¹¥ì¥Ã¥É¤Î½ªÎ»¤òÂÔ¤Äµ¡Ç½¤òÄó¶¡¤·¤Ş¤¹¡£
+è¤‡æ•°ã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 
 = class ThreadsWait < Object
 alias ThWait
 extend Exception2MessageMapper
 
-Ê£¿ô¥¹¥ì¥Ã¥É¤Î½ªÎ»¤òÂÔ¤Äµ¡Ç½¤òÄó¶¡¤·¤Ş¤¹¡£
+è¤‡æ•°ã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 
 == Class Methods
 
 --- all_waits(*threads) -> ()
 --- all_waits(*threads){|thread| ...} -> ()
 
-»ØÄê¤µ¤ì¤¿¥¹¥ì¥Ã¥É¤¹¤Ù¤Æ¤¬½ªÎ»¤¹¤ë¤Ş¤ÇÂÔ¤Á¤Ş¤¹¡£
-¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¡¢¥¹¥ì¥Ã¥É½ªÎ»»ş¤Ë¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Ş¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ¬ãƒƒãƒ‰ã™ã¹ã¦ãŒçµ‚äº†ã™ã‚‹ã¾ã§å¾…ã¡ã¾ã™ã€‚
+ãƒ–ãƒ­ãƒƒã‚¯ãŒä¸ãˆã‚‰ã‚ŒãŸå ´åˆã€ã‚¹ãƒ¬ãƒƒãƒ‰çµ‚äº†æ™‚ã«ãƒ–ãƒ­ãƒƒã‚¯ã‚’è©•ä¾¡ã—ã¾ã™ã€‚
 
-@param threads ½ªÎ»¤¹¤ë¤Ş¤Ç¤Ş¤Ä¥¹¥ì¥Ã¥É¤ò°ì¤Ä¤â¤·¤¯¤ÏÊ£¿ô»ØÄê¤·¤Ş¤¹¡£
+@param threads çµ‚äº†ã™ã‚‹ã¾ã§ã¾ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ä¸€ã¤ã‚‚ã—ãã¯è¤‡æ•°æŒ‡å®šã—ã¾ã™ã€‚
 
   require 'thwait'
 
@@ -24,7 +24,7 @@ extend Exception2MessageMapper
   }
   ThreadsWait.all_waits(*threads) {|th| printf("end %s\n", th.inspect) }
 
-  # ½ĞÎÏÎã
+  # å‡ºåŠ›ä¾‹
   #=> #<Thread:0x21584 run>
   #=> #<Thread:0x21610 run>
   #=> #<Thread:0x2169c run>
@@ -38,11 +38,11 @@ extend Exception2MessageMapper
 
 --- new(*threads) -> ThreadsWait
 
-»ØÄê¤µ¤ì¤¿¥¹¥ì¥Ã¥É¤Î½ªÎ»¤ò¤Ş¤Ä¤¿¤á¤Î¡¢¥¹¥ì¥Ã¥ÉÆ±´ü¥ª¥Ö¥¸¥§¥¯¥È¤ò¤Ä¤¯¤ê¤Ş¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’ã¾ã¤ãŸã‚ã®ã€ã‚¹ãƒ¬ãƒƒãƒ‰åŒæœŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã¤ãã‚Šã¾ã™ã€‚
 
-@param threads ½ªÎ»¤òÂÔ¤Ä¥¹¥ì¥Ã¥É¤ò°ì¤Ä¤â¤·¤¯¤ÏÊ£¿ô»ØÄê¤·¤Ş¤¹¡£
+@param threads çµ‚äº†ã‚’å¾…ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ä¸€ã¤ã‚‚ã—ãã¯è¤‡æ•°æŒ‡å®šã—ã¾ã™ã€‚
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
   require 'thwait'
 
   threads = []
@@ -55,7 +55,7 @@ extend Exception2MessageMapper
     printf("end %s\n", th.inspect)
   }
   
-  # ½ĞÎÏÎã
+  # å‡ºåŠ›ä¾‹
   #=> #<Thread:0x214bc run>
   #=> #<Thread:0x21548 run>
   #=> #<Thread:0x215d4 run>
@@ -72,9 +72,9 @@ extend Exception2MessageMapper
 
 --- threads -> Array
 
-Æ±´ü¤µ¤ì¤ë¥¹¥ì¥Ã¥É¤Î°ìÍ÷¤òÇÛÎó¤ÇÊÖ¤·¤Ş¤¹¡£
+åŒæœŸã•ã‚Œã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰ã®ä¸€è¦§ã‚’é…åˆ—ã§è¿”ã—ã¾ã™ã€‚
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
   require 'thwait'
 
   threads = []
@@ -88,9 +88,9 @@ extend Exception2MessageMapper
 
 --- empty? -> bool
 
-Æ±´ü¤µ¤ì¤ë¥¹¥ì¥Ã¥É¤¬Â¸ºß¤¹¤ë¤Ê¤é¤Ğ true ¤ò¤«¤¨¤·¤Ş¤¹¡£
+åŒæœŸã•ã‚Œã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰ã° true ã‚’ã‹ãˆã—ã¾ã™ã€‚
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
   require 'thwait'
 
   threads = []
@@ -105,9 +105,9 @@ extend Exception2MessageMapper
 
 --- finished? -> bool
 
-¤¹¤Ç¤Ë½ªÎ»¤·¤¿¥¹¥ì¥Ã¥É¤¬Â¸ºß¤¹¤ì¤Ğ true ¤òÊÖ¤·¤Ş¤¹¡£
+ã™ã§ã«çµ‚äº†ã—ãŸã‚¹ãƒ¬ãƒƒãƒ‰ãŒå­˜åœ¨ã™ã‚Œã° true ã‚’è¿”ã—ã¾ã™ã€‚
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
   require 'thwait'
 
   threads = []
@@ -122,9 +122,9 @@ extend Exception2MessageMapper
 
 --- join(*threads) -> ()
 
-½ªÎ»¤òÂÔ¤Ä¥¹¥ì¥Ã¥É¤ÎÂĞ¾İ¤È¤·¤Æ¡¢threads ¤Ç»ØÄê¤µ¤ì¤¿¥¹¥ì¥Ã¥É¤ò»ØÄê¤·¤Ş¤¹¡£
+çµ‚äº†ã‚’å¾…ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ã®å¯¾è±¡ã¨ã—ã¦ã€threads ã§æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ¬ãƒƒãƒ‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param threads Ê£¿ô¥¹¥ì¥Ã¥É¤Î½ªÎ»¤òÂÔ¤Ä¥¹¥ì¥Ã¥É¤Ë»ØÄê¤µ¤ì¤¿threads¤ò²Ã¤¨¤Ş¤¹¡£
+@param threads è¤‡æ•°ã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ã«æŒ‡å®šã•ã‚ŒãŸthreadsã‚’åŠ ãˆã¾ã™ã€‚
 
   require 'thwait'
 
@@ -141,10 +141,10 @@ extend Exception2MessageMapper
 
 --- join_nowait(*threads) -> ()
 
-½ªÎ»¤òÂÔ¤Ä¥¹¥ì¥Ã¥É¤ÎÂĞ¾İ¤È¤·¤Æ¡¢threads ¤Ç»ØÄê¤µ¤ì¤¿¥¹¥ì¥Ã¥É¤ò»ØÄê¤·¤Ş¤¹¡£
-¤·¤«¤·¡¢¼Âºİ¤Ë¤Ï½ªÎ»¤ò¤Ş¤Á¤Ş¤»¤ó¡£
+çµ‚äº†ã‚’å¾…ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ã®å¯¾è±¡ã¨ã—ã¦ã€threads ã§æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ¬ãƒƒãƒ‰ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+ã—ã‹ã—ã€å®Ÿéš›ã«ã¯çµ‚äº†ã‚’ã¾ã¡ã¾ã›ã‚“ã€‚
 
-@param threads Ê£¿ô¥¹¥ì¥Ã¥É¤Î½ªÎ»¤òÂÔ¤Ä¥¹¥ì¥Ã¥É¤Ë»ØÄê¤µ¤ì¤¿threads¤ò²Ã¤¨¤Ş¤¹¡£
+@param threads è¤‡æ•°ã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ã«æŒ‡å®šã•ã‚ŒãŸthreadsã‚’åŠ ãˆã¾ã™ã€‚
 
   require 'thwait'
 
@@ -157,19 +157,19 @@ extend Exception2MessageMapper
   p thall.threads #=> []
   thall.join_nowait(*threads)
   p thall.threads #=> [#<Thread:0x21638 sleep>, #<Thread:0x215ac sleep>, #<Thread:0x21520 sleep>, #<Thread:0x21494 sleep>, #<Thread:0x21408 sleep>]
-  # ¼Âºİ¤Ë¤Ï½ªÎ»¤òÂÔ¤Ã¤Æ¤¤¤Ê¤¤¡£sleep ¤·¤Æ¤¤¤ë¡£
+  # å®Ÿéš›ã«ã¯çµ‚äº†ã‚’å¾…ã£ã¦ã„ãªã„ã€‚sleep ã—ã¦ã„ã‚‹ã€‚
 
 --- next_wait(nonblock = nil) -> Thread
 
-»ØÄê¤·¤¿¥¹¥ì¥Ã¥É¤Î¤É¤ì¤«¤¬½ªÎ»¤¹¤ë¤Ş¤ÇÂÔ¤Á¤Ş¤¹¡£
+æŒ‡å®šã—ãŸã‚¹ãƒ¬ãƒƒãƒ‰ã®ã©ã‚Œã‹ãŒçµ‚äº†ã™ã‚‹ã¾ã§å¾…ã¡ã¾ã™ã€‚
 
-@param nonblock true ¤òÍ¿¤¨¤ë¤È¡¢¥­¥å¡¼¤¬¶õ¤Î»ş¡¢Îã³° [[c:ThreadsWait::ErrNoFinishedThread]] ¤¬È¯À¸¤·¤Ş¤¹¡£
+@param nonblock true ã‚’ä¸ãˆã‚‹ã¨ã€ã‚­ãƒ¥ãƒ¼ãŒç©ºã®æ™‚ã€ä¾‹å¤– [[c:ThreadsWait::ErrNoFinishedThread]] ãŒç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise ErrNoWaitingThread ½ªÎ»¤ò¤Ş¤Ä¥¹¥ì¥Ã¥É¤¬Â¸ºß¤·¤Ê¤¤»ş¡¢È¯À¸¤·¤Ş¤¹¡£
+@raise ErrNoWaitingThread çµ‚äº†ã‚’ã¾ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ãŒå­˜åœ¨ã—ãªã„æ™‚ã€ç™ºç”Ÿã—ã¾ã™ã€‚
 
-@raise ErrNoFinishedThread nonblock ¤¬true ¤Ç¤«¤Ä¡¢¥­¥å¡¼¤¬¶õ¤Î»ş¡¢È¯À¸¤·¤Ş¤¹¡£
+@raise ErrNoFinishedThread nonblock ãŒtrue ã§ã‹ã¤ã€ã‚­ãƒ¥ãƒ¼ãŒç©ºã®æ™‚ã€ç™ºç”Ÿã—ã¾ã™ã€‚
 
-  #»ÈÍÑÎã
+  #ä½¿ç”¨ä¾‹
   require 'thwait'
 
   threads = []
@@ -188,10 +188,10 @@ extend Exception2MessageMapper
 
 --- all_waits -> ()
 
-»ØÄê¤µ¤ì¤¿¥¹¥ì¥Ã¥É¤¹¤Ù¤Æ¤¬½ªÎ»¤¹¤ë¤Ş¤ÇÂÔ¤Á¤Ş¤¹¡£
-¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¡¢¥¹¥ì¥Ã¥É½ªÎ»»ş¤Ë¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Ş¤¹¡£
+æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ¬ãƒƒãƒ‰ã™ã¹ã¦ãŒçµ‚äº†ã™ã‚‹ã¾ã§å¾…ã¡ã¾ã™ã€‚
+ãƒ–ãƒ­ãƒƒã‚¯ãŒä¸ãˆã‚‰ã‚ŒãŸå ´åˆã€ã‚¹ãƒ¬ãƒƒãƒ‰çµ‚äº†æ™‚ã«ãƒ–ãƒ­ãƒƒã‚¯ã‚’è©•ä¾¡ã—ã¾ã™ã€‚
 
-»ÈÍÑÎã
+ä½¿ç”¨ä¾‹
   require 'thwait'
 
   threads = []
@@ -204,7 +204,7 @@ extend Exception2MessageMapper
     printf("end %s\n", th.inspect)
   }
   
-  # ½ĞÎÏÎã
+  # å‡ºåŠ›ä¾‹
   #=> #<Thread:0x214bc run>
   #=> #<Thread:0x21548 run>
   #=> #<Thread:0x215d4 run>
@@ -218,12 +218,12 @@ extend Exception2MessageMapper
 
 = class ThreadsWait::ErrNoFinishedThread < StandardError
 
-nonblock ¤¬true ¤Ç¤«¤Ä¡¢¥­¥å¡¼¤¬¶õ¤Î»ş¡¢È¯À¸¤·¤Ş¤¹¡£
+nonblock ãŒtrue ã§ã‹ã¤ã€ã‚­ãƒ¥ãƒ¼ãŒç©ºã®æ™‚ã€ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:ThreadsWait#next_wait]]
 
 = class ThreadsWait::ErrNoWaitingThread < StandardError
 
-½ªÎ»¤òÂÔ¤Ä¥¹¥ì¥Ã¥É¤¬Â¸ºß¤·¤Ê¤¤»ş¡¢È¯À¸¤·¤Ş¤¹¡£
+çµ‚äº†ã‚’å¾…ã¤ã‚¹ãƒ¬ãƒƒãƒ‰ãŒå­˜åœ¨ã—ãªã„æ™‚ã€ç™ºç”Ÿã—ã¾ã™ã€‚
 
 @see [[m:ThreadsWait#next_wait]]

@@ -1,7 +1,7 @@
 require rubygems
 require rubygems/requirement
 
-Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Ğ¡¼¥¸¥ç¥ó¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+Gem ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’æ‰±ã†ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@include(version/Gem__Version)
 

@@ -1,54 +1,54 @@
 = module JSON
 
-JSON (JavaScript Object Notation) �򰷤�����Υ⥸�塼��Ǥ���
+JSON (JavaScript Object Notation) を扱うためのモジュールです。
 
 == Singleton Methods
 
 --- [](object, options) -> object
 
-ʸ����Τ褦�˰�����ǡ����������ä����� Ruby �Υ��֥������Ȥ��Ѵ������֤��ޤ���
-�����Ǥʤ����� JSON ���Ѵ������֤��ޤ���
+文字列のように扱えるデータを受け取った場合は Ruby のオブジェクトに変換して返します。
+そうでない場合は JSON に変換して返します。
 
-@param object Ǥ�դΥ��֥������Ȼ����ǽ�Ǥ���
+@param object 任意のオブジェクト指定可能です。
 
-@param options [[m:JSON.#parse]], [[m:JSON.#generate]] �������򻲾Ȥ��Ƥ���������
+@param options [[m:JSON.#parse]], [[m:JSON.#generate]] の説明を参照してください。
 
 @see [[m:JSON.#parse]], [[m:JSON.#generate]]
 
 --- create_id -> String
 
-json_create �᥽�åɤǻ��Ѥ��륯�饹����ꤹ�뤿��˻��Ѥ����ͤ��֤��ޤ���
+json_create メソッドで使用するクラスを決定するために使用する値を返します。
 
-�ǥե���Ȥ� "json_class" �Ǥ���
+デフォルトは "json_class" です。
 
 --- create_id=(identifier)
 
-json_create �᥽�åɤǻ��Ѥ��륯�饹����ꤹ�뤿��˻��Ѥ����ͤ򥻥åȤ��ޤ���
+json_create メソッドで使用するクラスを決定するために使用する値をセットします。
 
-@param identifier ���̻Ҥ���ꤷ�ޤ���
+@param identifier 識別子を指定します。
 
 #@# nodoc
 #@# --- deep_const_get
 
 --- generator -> JSON::Ext::Generator
 
-JSON �饤�֥�꤬�����ͥ졼���Ȥ��ƻ��Ѥ���⥸�塼����֤��ޤ���
+JSON ライブラリがジェネレータとして使用するモジュールを返します。
 
 #@# nodoc
 #@# --- generator=(generator)
 
 --- parser -> JSON::Ext::Parser
 
-JSON �饤�֥�꤬�ѡ����Ȥ��ƻ��Ѥ��륯�饹���֤��ޤ���
+JSON ライブラリがパーサとして使用するクラスを返します。
 
 #@# nodoc
 #@# --- parser=(parser)
 
 --- state -> JSON::Ext::Generator::State
 
-JSON �饤�֥�꤬�����ͥ졼���ξ��֤�ɽ�����饹�Ȥ��ƻ��Ѥ��륯�饹���֤��ޤ���
+JSON ライブラリがジェネレータの状態を表すクラスとして使用するクラスを返します。
 
-#@# ¾�Υ᥽�åɤ���ͤ���� nodoc �ΤϤ���
+#@# 他のメソッドから考えると nodoc のはず。
 #@# --- state=(state)
 
 
@@ -56,52 +56,52 @@ JSON �饤�֥�꤬�����ͥ졼���ξ��֤�ɽ�����饹�Ȥ��ƻ��Ѥ��륯�饹���֤��ޤ���
 
 --- dump(object, io = nil, limit = nil) -> String | IO
 
-Ϳ����줿���֥������Ȥ� JSON ������ʸ������Ѵ����ƥ���פ��ޤ���
+与えられたオブジェクトを JSON 形式の文字列に変換してダンプします。
 
-Ϳ����줿���֥������Ȥ�����Ȥ��� [[m:JSON.#generate]] ��ƤӽФ��ޤ���
+与えられたオブジェクトを引数として [[m:JSON.#generate]] を呼び出します。
 
 
-@param object ����פ��륪�֥������Ȥ���ꤷ�ޤ���
+@param object ダンプするオブジェクトを指定します。
 
-@param io  [[c:IO]] �Τ褦�� write �᥽�åɤ�������Ƥ��륪�֥������Ȥ���ꤷ�ޤ���
+@param io  [[c:IO]] のように write メソッドを実装しているオブジェクトを指定します。
 
-@param limit ���ꤷ����硢limit �ʰʾ忼����󥯤������֥������Ȥ����פǤ��ޤ���
+@param limit 指定した場合、limit 段以上深くリンクしたオブジェクトをダンプできません。
 
-@raise ArgumentError ���֥������ȤΥͥ��Ȥο����� limit ��ۤ�������ȯ�����ޤ���
+@raise ArgumentError オブジェクトのネストの深さが limit を越えた場合に発生します。
 
 @see [[c:Marshal]], [[m:Marshal.#dump]]
 
 --- fast_generate(object) -> String
 --- fast_unparse(object) -> String
 
-Ϳ����줿���֥������Ȥ��Ԥ� JSON ������ʸ������Ѵ������֤��ޤ���
+与えられたオブジェクトを一行の JSON 形式の文字列に変換して返します。
 
-���Υ᥽�åɤϽ۴Ļ��ȤΥ����å���̵���ˤ��Ƥ��ޤ����ޤ���
-[[m:JSON::NaN]], [[m:JSON::Infinity]], [[m:JSON::MinusInfinity]] ���������뤳�Ȥ�����ޤ���
-���Τ����ưפ�̵�¥롼�פ�ȯ�������뤳�Ȥ��Ǥ���Τǡ�����Ĥ��Ƥ���������
+このメソッドは循環参照のチェックを無効にしています。また、
+[[m:JSON::NaN]], [[m:JSON::Infinity]], [[m:JSON::MinusInfinity]] を生成することがあります。
+このため容易に無限ループを発生させることができるので、気をつけてください。
 
-fast_unparse �Ͼ����������ͽ��Ǥ���
+fast_unparse は将来削除される予定です。
 
-@param object JSON ������ʸ������Ѵ����륪�֥������Ȥ���ꤷ�ޤ���
+@param object JSON 形式の文字列に変換するオブジェクトを指定します。
 
 --- generate(object, state = nil) -> String
 --- unparse(object, state = nil) -> String
 
-Ϳ����줿���֥������Ȥ��Ԥ� JSON ������ʸ������Ѵ������֤��ޤ���
+与えられたオブジェクトを一行の JSON 形式の文字列に変換して返します。
 
-�ǥե���ȤǤϡ����������Ǿ��Ȥʤ� JSON ������ʸ������������ޤ���
-�ޤ����۴Ļ��ȤΥ����å���Ԥ��ޤ���[[m:JSON::NaN]], [[m:JSON::Infinity]],
-[[m:JSON::MinusInfinity]] ���������뤳�Ȥ⤢��ޤ���
+デフォルトでは、サイズが最小となる JSON 形式の文字列を生成します。
+また、循環参照のチェックを行います。[[m:JSON::NaN]], [[m:JSON::Infinity]],
+[[m:JSON::MinusInfinity]] を生成することもありません。
 
-unparse �Ͼ����������ͽ��Ǥ���
+unparse は将来削除される予定です。
 
-@param object JSON ������ʸ������Ѵ����륪�֥������Ȥ���ꤷ�ޤ���
+@param object JSON 形式の文字列に変換するオブジェクトを指定します。
 
-@param state [[c:JSON::State]] �ޤ��ϡ�to_hash �� to_h �᥽�åɤǥϥå�����Ѵ���ǽ�ʥ��֥������Ȥ����Ǥ��ޤ���
-       �ϥå������Ѥ���������ǽ�ʥ��ץ����ϰʲ����̤�Ǥ���
+@param state [[c:JSON::State]] または、to_hash や to_h メソッドでハッシュに変換可能なオブジェクトを指定できます。
+       ハッシュを使用する場合指定可能なオプションは以下の通りです。
 
 : :indent
-  ����ǥ�Ȥ˻��Ѥ���ʸ�������ꤷ�ޤ����ǥե���Ȥ϶�ʸ����Ǥ���
+  インデントに使用する文字列を指定します。デフォルトは空文字列です。
 : :space
   a string that is put after, a : or , delimiter (default: '')
 : :space_before
@@ -111,31 +111,31 @@ unparse �Ͼ����������ͽ��Ǥ���
 : :array_nl
   a string that is put at the end of a JSON array (default: '')
 : :check_circular
-  ������ꤷ����硢�������륪�֥������Ȥν۴Ĥ�����å����ޤ���
-  ����ư��ǥե���ȤǤ���
+  真を指定した場合、生成するオブジェクトの循環をチェックします。
+  この動作がデフォルトです。
 : :allow_nan
-  ������ꤷ����硢[[m:JSON::NaN]], [[m:JSON::Infinity]],
-  [[m:JSON::MinusInfinity]] ���������뤳�Ȥ�����褦�ˤʤ�ޤ���
-  ������ꤷ����硢�������ͤ��������褦�Ȥ�����㳰��ȯ�����ޤ���
-  �ǥե���Ȥϵ��Ǥ���
+  真を指定した場合、[[m:JSON::NaN]], [[m:JSON::Infinity]],
+  [[m:JSON::MinusInfinity]] を生成することを許すようになります。
+  偽を指定した場合、これらの値を生成しようとすると例外が発生します。
+  デフォルトは偽です。
 : :max_nesting
-  ����ҤˤʤäƤ���ǡ����κ���ο�������ꤷ�ޤ���
-  ������ꤹ��ȿ����Υ����å���Ԥ��ޤ��󡣥ǥե���Ȥ� 19 �Ǥ���
+  入れ子になっているデータの最大の深さを指定します。
+  偽を指定すると深さのチェックを行いません。デフォルトは 19 です。
 
 @raise JSON::GeneratorError [[m:JSON::NaN]], [[m:JSON::Infinity]],[[m:JSON::MinusInfinity]]
-       ���������褦�Ȥ�������ȯ�����ޤ���
+       を生成しようとした場合に発生します。
 
-@raise JSON::CircularDatastructure Ϳ����줿���֥������Ȥ��۴Ļ��Ȥ���ľ���ȯ�����ޤ���
+@raise JSON::CircularDatastructure 与えられたオブジェクトが循環参照を持つ場合に発生します。
 
 @see [[c:JSON::State]], [[m:JSON.#pretty_generate]]
 
 --- load(source, proc = nil) -> object
 --- restore(source, proc = nil) -> object
 
-Ϳ����줿 JSON ������ʸ����� Ruby ���֥������ȤȤ��ƥ����ɤ����֤��ޤ���
+与えられた JSON 形式の文字列を Ruby オブジェクトとしてロードして返します。
 
-proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ϡ��ɤ߹�������֥������Ȥ�
-�����ˤ��μ�³����ƤӽФ��ޤ���
+proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを
+引数にその手続きを呼び出します。
 
 
   require 'json'
@@ -146,7 +146,7 @@ proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ϡ��ɤ߹�������֥������Ȥ�
   
   JSON.load(str) # => [1,2,3]
   JSON.load(str, proc{|v| p v }) # => [1,2,3]
-  # �ʲ���ɽ�������
+  # 以下が表示される
   # 1
   # 2
   # 3
@@ -158,7 +158,7 @@ proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ϡ��ɤ߹�������֥������Ȥ�
   
   JSON.load(str) # => {"a"=>1, "b"=>2, "c"=>3}
   JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
-  # �ʲ���ɽ�������
+  # 以下が表示される
   # "a"
   # 1
   # "b"
@@ -167,69 +167,69 @@ proc �Ȥ��Ƽ�³�����֥������Ȥ�Ϳ����줿���ϡ��ɤ߹�������֥������Ȥ�
   # 3
   # {"a"=>1, "b"=>2, "c"=>3}
 
-@param source JSON ������ʸ�������ꤷ�ޤ���¾�ˤϡ�to_str, to_io, read �᥽�åɤ���ĥ��֥������Ȥ�����ǽ�Ǥ���
+@param source JSON 形式の文字列を指定します。他には、to_str, to_io, read メソッドを持つオブジェクトも指定可能です。
 
-@param proc [[c:Proc]] ���֥������Ȥ���ꤷ�ޤ���
+@param proc [[c:Proc]] オブジェクトを指定します。
 
 --- parse(source, options = {}) -> object
 
-Ϳ����줿 JSON ������ʸ����� Ruby ���֥������Ȥ��Ѵ������֤��ޤ���
+与えられた JSON 形式の文字列を Ruby オブジェクトに変換して返します。
 
-@param source JSON ������ʸ�������ꤷ�ޤ���
+@param source JSON 形式の文字列を指定します。
 
-@param options ���ץ�����ϥå���ǻ��ꤷ�ޤ���
-       �����ǽ�ʥ��ץ����ϰʲ����̤�Ǥ���
+@param options オプションをハッシュで指定します。
+       指定可能なオプションは以下の通りです。
 
 : :max_nesting
-  ����ҤˤʤäƤ���ǡ����κ���ο�������ꤷ�ޤ���
-  ������ꤹ��ȿ����Υ����å���Ԥ��ޤ��󡣥ǥե���Ȥ� 19 �Ǥ���
+  入れ子になっているデータの最大の深さを指定します。
+  偽を指定すると深さのチェックを行いません。デフォルトは 19 です。
 : :allow_nan
-  ������ꤹ��� [[rfc:4627]] ��̵�뤷�ƥѡ������� [[m:JSON::NaN]], [[m:JSON::Infinity]],
-  [[m:JSON::MinusInfinity]] ����Ĥ���褦�ˤʤ�ޤ����ǥե���Ȥϵ��Ǥ���
+  真を指定すると [[rfc:4627]] を無視してパース時に [[m:JSON::NaN]], [[m:JSON::Infinity]],
+  [[m:JSON::MinusInfinity]] を許可するようになります。デフォルトは偽です。
 : :create_additions
-  ������ꤹ��ȥޥå����륯�饹�� [[m:JSON.create_id]] �����Ĥ��äƤ��ղþ�����������ޤ���
-  �ǥե���ȤϿ��Ǥ���
+  偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
+  デフォルトは真です。
 
 @see [[m:JSON::Parser#parse]]
 
 --- parse!(source, options = {}) -> object
 
-Ϳ����줿 JSON ������ʸ����� Ruby ���֥������Ȥ��Ѵ������֤��ޤ���
+与えられた JSON 形式の文字列を Ruby オブジェクトに変換して返します。
 
-[[m:JSON.#parse]] ��������ʥǥե�����ͤ����ꤵ��Ƥ���Τ�
-����Ǥ���ʸ����Τߤ����ϤȤ��ƻ��Ѥ���褦�ˤ��Ƥ���������
+[[m:JSON.#parse]] よりも危険なデフォルト値が指定されているので
+信頼できる文字列のみを入力として使用するようにしてください。
 
-@param source JSON ������ʸ�������ꤷ�ޤ���
+@param source JSON 形式の文字列を指定します。
 
-@param options ���ץ�����ϥå���ǻ��ꤷ�ޤ���
-       �����ǽ�ʥ��ץ����ϰʲ����̤�Ǥ���
+@param options オプションをハッシュで指定します。
+       指定可能なオプションは以下の通りです。
 
 : :max_nesting
-  ����ҤˤʤäƤ���ǡ����κ���ο�������ꤷ�ޤ���
-  ���ͤ���ꤹ��ȿ����Υ����å���Ԥ��ޤ���������ꤹ��ȿ����Υ����å���Ԥ��ޤ���
-  �ǥե���Ȥϵ��Ǥ���
+  入れ子になっているデータの最大の深さを指定します。
+  数値を指定すると深さのチェックを行います。偽を指定すると深さのチェックを行いません。
+  デフォルトは偽です。
 : :allow_nan
-  ������ꤹ��� [[rfc:4627]] ��̵�뤷�ƥѡ������� [[m:JSON::NaN]], [[m:JSON::Infinity]],
-  [[m:JSON::MinusInfinity]] ����Ĥ���褦�ˤʤ�ޤ����ǥե���ȤϿ��Ǥ���
+  真を指定すると [[rfc:4627]] を無視してパース時に [[m:JSON::NaN]], [[m:JSON::Infinity]],
+  [[m:JSON::MinusInfinity]] を許可するようになります。デフォルトは真です。
 : :create_additions
-  ������ꤹ��ȥޥå����륯�饹�� [[m:JSON.create_id]] �����Ĥ��äƤ��ղþ�����������ޤ���
-  �ǥե���ȤϿ��Ǥ���
+  偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
+  デフォルトは真です。
 
 @see [[m:JSON::Parser#parse]]
 
 --- pretty_generate(object, options = nil) -> String
 --- pretty_unparse(object, options = nil) -> String
 
-Ruby �Υ��֥������Ȥ� JSON ������ʸ������Ѵ������֤��ޤ���
+Ruby のオブジェクトを JSON 形式の文字列に変換して返します。
 
-���Υ᥽�åɤ� [[m:JSON.#generate]] ����ʹ֤��ɤߤ䤹��ʸ������֤��ޤ���
+このメソッドは [[m:JSON.#generate]] よりも人間に読みやすい文字列を返します。
 
-pretty_unparse �Ͼ����������ͽ��Ǥ���
+pretty_unparse は将来削除される予定です。
 
-@param object JSON ������ʸ������Ѵ����륪�֥������Ȥ���ꤷ�ޤ���
+@param object JSON 形式の文字列に変換するオブジェクトを指定します。
 
-@param options [[c:JSON::State]] �ޤ��ϡ�to_hash �� to_h �᥽�åɤǥϥå�����Ѵ���ǽ�ʥ��֥������Ȥ����Ǥ��ޤ���
-       �ϥå������Ѥ���������ǽ�ʥ��ץ����� [[m:JSON.#generate]] �򻲾Ȥ��Ƥ���������
+@param options [[c:JSON::State]] または、to_hash や to_h メソッドでハッシュに変換可能なオブジェクトを指定できます。
+       ハッシュを使用する場合指定可能なオプションは [[m:JSON.#generate]] を参照してください。
 
 @see [[m:JSON.#generate]]
 
@@ -241,12 +241,12 @@ pretty_unparse �Ͼ����������ͽ��Ǥ���
 
 --- VARIANT_BINARY -> bool
 
-��ĥ�饤�֥���Ǥ���Ѥ��Ƥ�����˿����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+拡張ライブラリ版を使用している場合に真を返します。
+そうでない場合は偽を返します。
 
 --- JSON::VERSION -> String
 
-���Υ饤�֥��ΥС�������ɽ��ʸ����Ǥ���
+このライブラリのバージョンを表す文字列です。
 
 #@# nodoc
 #@# --- JSON::VERSION_ARRAY -> Array
@@ -260,53 +260,53 @@ pretty_unparse �Ͼ����������ͽ��Ǥ���
 
 --- Infinity -> Float
 
-����̵�����ɽ���ޤ���
+正の無限大を表します。
 
 @see [[c:Float]]
 
 --- MinusInfinity -> Float
 
-���̵�����ɽ���ޤ���
+負の無限大を表します。
 
 @see [[c:Float]]
 
 --- NaN -> Float
 
-NaN (Not a Number) ��ɽ���ޤ���
+NaN (Not a Number) を表します。
 
 @see [[c:Float]]
 
 --- JSON_LOADED -> bool
 
-JSON �饤�֥�꤬�����ɺѤߤǤ�����˿����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+JSON ライブラリがロード済みである場合に真を返します。
+そうでない場合は偽を返します。
 
 
 = class JSON::JSONError < StandardError
 
-JSON �Υ��顼�Τ���δ��쥯�饹�Ǥ���
+JSON のエラーのための基底クラスです。
 
 = class JSON::ParserError < JSON::JSONError
 
-JSON �Υѡ������顼�����Τ����㳰�Ǥ���
+JSON のパースエラーを通知する例外です。
 
 = class JSON::GeneratorError < JSON::JSONError
 alias JSON::UnparserError
 
-JSON ������ʸ�������������Ȥ���ȯ���������顼�����Τ����㳰�Ǥ���
+JSON 形式の文字列を生成するときに発生したエラーを通知する例外です。
 
 = class JSON::CircularDatastructure < JSON::GeneratorError
 
-JSON ������ʸ�������������Ȥ��˽۴Ĥ���ǡ�����¤������Ȥ���ȯ�������㳰�Ǥ���
+JSON 形式の文字列を生成するときに循環するデータ構造があるときに発生する例外です。
 
 = class JSON::MissingUnicodeSupport < JSON::JSONError
 
-�׵ᤵ�줿��˥����ɥ��ݡ��Ȥ������ƥ�˥��󥹥ȡ��뤵��Ƥ��ʤ�����ȯ�������㳰�Ǥ���
-�̾����� [[lib:iconv]] �����󥹥ȡ��뤵��Ƥ��ʤ����Ȥ��̣���ޤ���
+要求されたユニコードサポートがシステムにインストールされていない場合に発生する例外です。
+通常、これは [[lib:iconv]] がインストールされていないことを意味します。
 
 = class JSON::NestingError < JSON::ParserError
 
-�ѡ������褦�Ȥ��Ƥ���ǡ�����¤�Υͥ��Ȥ������������ȯ�������㳰�Ǥ���
+パースしようとしているデータ構造のネストが深すぎる場合に発生する例外です。
 
 
 

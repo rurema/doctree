@@ -1,46 +1,46 @@
 = class MatchData < Object
 
-����ɽ���Υޥå��˴ؤ������򰷤�����Υ��饹��
+正規表現のマッチに関する情報を扱うためのクラス。
 
-���Υ��饹�Υ��󥹥��󥹤ϡ�
+このクラスのインスタンスは、
  * [[m:Regexp.last_match]]
  * [[m:Regexp#match]], [[m:String#match]]
  * [[m:$~]]
-�ʤɤˤ�������ޤ���
+などにより得られます。
 
 == Instance Methods
 
 --- [](n) -> String | nil
 
-n ���ܤ���ʬʸ������֤��ޤ���
+n 番目の部分文字列を返します。
 
-0 �ϥޥå����Τ��̣���ޤ���
-n ���ͤ���λ��ˤ���������Υ���ǥå����ȸ��路�ޤ�(������
-���Ǥ� -1 ����)��n ���ܤ����Ǥ�¸�ߤ��ʤ����ˤ� nil ���֤��ޤ���
+0 はマッチ全体を意味します。
+n の値が負の時には末尾からのインデックスと見倣します(末尾の
+要素が -1 番目)。n 番目の要素が存在しない時には nil を返します。
 
-@param n �֤���ʬʸ����Υ���ǥå�������ꤷ�ޤ���
+@param n 返す部分文字列のインデックスを指定します。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.to_a       # => ["foobar", "foo", "bar", nil]
   p $~[0]         # => "foobar"
   p $~[1]         # => "foo"
   p $~[2]         # => "bar"
-  p $~[3]         # => nil        (�ޥå����Ƥ��ʤ�)
-  p $~[4]         # => nil        (�ϰϳ�)
+  p $~[3]         # => nil        (マッチしていない)
+  p $~[4]         # => nil        (範囲外)
   p $~[-2]        # => "bar"
 
 --- [](range) -> [String]
 
-[[c:Range]] ���֥������� range ���ϰϤˤ������Ǥ���ʤ���ʬ������֤��ޤ���
+[[c:Range]] オブジェクト range の範囲にある要素からなる部分配列を返します。
 
-@param range start..end �ϰϼ���
+@param range start..end 範囲式。
 
   /(foo)(bar)/ =~ "foobarbaz"
   p $~[0..2]      # => ["foobar", "foo", "bar"]
 
 --- [](start, length) -> [String]
 
-start ���ܤ��� length �Ĥ����Ǥ�ޤ���ʬ������֤��ޤ���
+start 番目から length 個の要素を含む部分配列を返します。
 
   /(foo)(bar)/ =~ "foobarbaz"
   p $~[0, 3]      # => ["foobar", "foo", "bar"]
@@ -49,14 +49,14 @@ start ���ܤ��� length �Ĥ����Ǥ�ޤ���ʬ������֤��ޤ���
 
 --- begin(n) -> Fixnum | nil
 
-n ���ܤ���ʬʸ������Ƭ�Υ��ե��åȤ��֤��ޤ���
+n 番目の部分文字列先頭のオフセットを返します。
 
-0 �ϥޥå����Τ��̣���ޤ���
-n ���ܤ���ʬʸ���󤬥ޥå����Ƥ��ʤ���� nil���֤��ޤ���
+0 はマッチ全体を意味します。
+n 番目の部分文字列がマッチしていなければ nilを返します。
 
-@param n ��ʬʸ�������ꤹ����͡�
+@param n 部分文字列を指定する数値。
 
-@raise IndexError �ϰϳ��� n ����ꤷ������ȯ�����ޤ���
+@raise IndexError 範囲外の n を指定した場合に発生します。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.begin(0)   # => 0
@@ -69,14 +69,14 @@ n ���ܤ���ʬʸ���󤬥ޥå����Ƥ��ʤ���� nil���֤��ޤ���
 
 --- end(n) -> Fixnum | nil
 
-n ���ܤ���ʬʸ����ü�Υ��ե��åȤ��֤��ޤ���
+n 番目の部分文字列終端のオフセットを返します。
 
-0 �ϥޥå����Τ��̣���ޤ���
-n ���ܤ���ʬʸ���󤬥ޥå����Ƥ��ʤ���� nil ���֤��ޤ���
+0 はマッチ全体を意味します。
+n 番目の部分文字列がマッチしていなければ nil を返します。
 
-@param n ��ʬʸ�������ꤹ����͡�
+@param n 部分文字列を指定する数値。
 
-@raise IndexError �ϰϳ��� n ����ꤷ������ȯ�����ޤ���
+@raise IndexError 範囲外の n を指定した場合に発生します。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.end(0)   # => 6
@@ -89,10 +89,10 @@ n ���ܤ���ʬʸ���󤬥ޥå����Ƥ��ʤ���� nil ���֤��ޤ���
 
 --- captures -> [String]
 
-[[m:$1]], [[m:$2]], ... ���Ǽ����������֤��ޤ���
+[[m:$1]], [[m:$2]], ... を格納した配列を返します。
 
-[[m:MatchData#to_a]] �Ȱۤʤ� [[m:$&]] �����Ǥ˴ޤߤޤ���
-���롼�פ˥ޥå�������ʬʸ���󤬤ʤ�����б��������Ǥ� nil �ˤʤ�ޤ���
+[[m:MatchData#to_a]] と異なり [[m:$&]] を要素に含みません。
+グループにマッチした部分文字列がなければ対応する要素は nil になります。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.to_a       # => ["foobar", "foo", "bar", nil]
@@ -103,37 +103,37 @@ n ���ܤ���ʬʸ���󤬥ޥå����Ƥ��ʤ���� nil ���֤��ޤ���
 --- length -> Fixnum
 --- size -> Fixnum
 
-��ʬʸ����ο����֤��ޤ�(self.to_a.size ��Ʊ���Ǥ�)��
+部分文字列の数を返します(self.to_a.size と同じです)。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.size       # => 4
 
 --- offset(n) -> [Fixnum]
 
-n ���ܤ���ʬʸ����Υ��ե��åȤ����� [start, end] ����
-���ޤ���
+n 番目の部分文字列のオフセットの配列 [start, end] を返
+します。
 
   [ self.begin(n), self.end(n) ]
 
-��Ʊ���Ǥ���n���ܤ���ʬʸ���󤬥ޥå����Ƥ��ʤ����
-[nil, nil] ���֤��ޤ���
+と同じです。n番目の部分文字列がマッチしていなければ
+[nil, nil] を返します。
 
-@param n ��ʬʸ�������ꤹ�����
+@param n 部分文字列を指定する数値
 
-@raise IndexError �ϰϳ��� n ����ꤷ������ȯ�����ޤ���
+@raise IndexError 範囲外の n を指定した場合に発生します。
 
 @see [[m:MatchData#begin]], [[m:MatchData#end]]
 
 --- post_match -> String
 
-�ޥå�������ʬ�������ʸ������֤��ޤ�([[m:$']]��Ʊ��)��
+マッチした部分より後ろの文字列を返します([[m:$']]と同じ)。
 
   /(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.post_match # => "baz"
 
 --- pre_match -> String
 
-�ޥå�������ʬ�������ʸ������֤��ޤ�([[m:$`]]��Ʊ��)��
+マッチした部分より前の文字列を返します([[m:$`]]と同じ)。
 
   /(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.pre_match  # => "foo"
@@ -145,19 +145,19 @@ n ���ܤ���ʬʸ����Υ��ե��åȤ����� [start, end] ����
 #@end
 --- select {|s| ... } -> [String]
 #@until 1.8.1
-���������ꤵ�줿���ϡ�����ɽ����� n ���ܤγ�̤˥ޥå�������ʬʸ�����������֤��ޤ���
+引数が指定された場合は、正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
 
-�֥��å���Ϳ����줿���ϡ�
-�����Ǥ��Ф��ƥ֥��å���ɾ�������ͤ����Ǥ��ä����Ǥ����ƴޤ������
-�֤��ޤ������ˤʤ����Ǥ��ҤȤĤ�ʤ��ä����϶���������֤��ޤ���
+ブロックを与えられた場合は、
+各要素に対してブロックを評価した値が真であった要素を全て含む配列を
+返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
-@param index ����ǥå����������� 0 �İʾ���ꤷ�ޤ���
+@param index インデックスを整数で 0 個以上指定します。
 
 #@else
-�����Ǥ��Ф��ƥ֥��å���ɾ�������ͤ����Ǥ��ä����Ǥ����ƴޤ������
-�֤��ޤ������ˤʤ����Ǥ��ҤȤĤ�ʤ��ä����϶���������֤��ޤ���
+各要素に対してブロックを評価した値が真であった要素を全て含む配列を
+返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
-self.to_a.select { ... } ��Ʊ���Ǥ���
+self.to_a.select { ... } と同じです。
 
    m = /(.)(.)(\d+)(\d)/.match("THX1138: The Movie")
    p m.select{|x| /X/ =~ x}   #=> ["HX1138", "X"]
@@ -168,13 +168,13 @@ self.to_a.select { ... } ��Ʊ���Ǥ���
 
 --- string -> String
 
-�ޥå��оݤˤʤä�ʸ�����ʣ�����֤��ޤ���
+マッチ対象になった文字列の複製を返します。
 
-�֤�ʸ����ϥե꡼��([[m:Object#freeze]])����Ƥ��ޤ���
+返す文字列はフリーズ([[m:Object#freeze]])されています。
 
 --- to_a -> [String]
 
-[[m:$&]], [[m:$1]], [[m:$2]],... ���Ǽ����������֤��ޤ���
+[[m:$&]], [[m:$1]], [[m:$2]],... を格納した配列を返します。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.to_a       # => ["foobar", "foo", "bar", nil]
@@ -183,7 +183,7 @@ self.to_a.select { ... } ��Ʊ���Ǥ���
 
 --- to_s -> String
 
-�ޥå�����ʸ�������Τ��֤��ޤ���
+マッチした文字列全体を返します。
 
   /bar/ =~ "foobarbaz"
   p $~            # => #<MatchData:0x401b1be4>
@@ -192,11 +192,11 @@ self.to_a.select { ... } ��Ʊ���Ǥ���
 #@since 1.8.0
 --- values_at(*index) -> [String]
 
-����ɽ����� n ���ܤγ�̤˥ޥå�������ʬʸ�����������֤��ޤ���
+正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
 
-0 ���ܤ� [[m:$&]] �Τ褦�˥ޥå�����ʸ�������Τ�ɽ���ޤ���
+0 番目は [[m:$&]] のようにマッチした文字列全体を表します。
 
-@param index ����ǥå����������� 0 �İʾ���ꤷ�ޤ���
+@param index インデックスを整数で 0 個以上指定します。
 
   m = /(foo)(bar)(baz)/.match("foobarbaz")
   # same as m.to_a.values_at(...)
@@ -209,9 +209,9 @@ self.to_a.select { ... } ��Ʊ���Ǥ���
 #@since 1.9.1
 --- names -> [Array]
 
-̾���դ�����ץ����̾����ʸ����������֤��ޤ���
+名前付きキャプチャの名前を文字列配列で返します。
 
-self.regexp.names ��Ʊ���Ǥ���
+self.regexp.names と同じです。
 
     /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
     #=> ["foo", "bar", "baz"]
@@ -220,7 +220,7 @@ self.regexp.names ��Ʊ���Ǥ���
     m.names                          #=> ["x", "y"]
 
 --- regexp -> Regexp
-���Ȥθ��ˤʤä�����ɽ�����֥������Ȥ��֤��ޤ���
+自身の元になった正規表現オブジェクトを返します。
 
     m = /a.*b/.match("abc")
     m.regexp #=> /a.*b/

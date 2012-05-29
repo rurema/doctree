@@ -3,7 +3,7 @@
 =begin
 = TkBgError
 
-���顼���ϤΤ���Υ⥸�塼��Ǥ���
+エラー出力のためのモジュールです。
 
   require "tk"
 
@@ -13,28 +13,28 @@
   }
   Tk.mainloop
 
-((-Tcl/Tk�Ǥ�bgerror�ץ�����������������뤳�Ȥǡ�������Хå��ؿ���
-���顼��ȯ�������Ȥ��ν�����桼����Ǥ���뤳�Ȥ�����롣Ruby/Tk�Ǥϡ�-))
+((-Tcl/Tkではbgerrorプロシージャを再定義することで、コールバック関数で
+エラーが発生したときの処理をユーザに任せることが出来る。Ruby/Tkでは？-))
 
-== extend���Ƥ���⥸�塼��:
+== extendしているモジュール:
 
 ((<Tk>))
 
-== �⥸�塼��᥽�å�:
+== モジュールメソッド:
 
 --- TkBgError.bgerror(message)
 --- TkBgError.tkerror(message)
 --- TkBgError.show(message)
 #@todo
-    ���顼����𤹤������������ɽ�����ޤ���
+    エラーを報告するダイアログを表示します。
 
-    �����������ˤϡ�3�ĤΥܥ��󤬤���ޤ���
+    ダイアログには、3つのボタンがあります。
 
-     *��OK��
-      ���顼������������ɽ����λ���ޤ���
-     *��Skip Messages��
-      ���Υ��顼��(�����)ɽ�����ޤ�((-??����??-))
-     *��Stack Trace��
-      ���顼�������ä��Ȥ��Υ����å��ȥ졼����ɽ�����ޤ���
+     *「OK」
+      エラーダイアログの表示を終了します。
+     *「Skip Messages」
+      次のエラーを(あれば)表示します((-??本当??-))
+     *「Stack Trace」
+      エラーが起こったときのスタックトレースを表示します。
 
 =end

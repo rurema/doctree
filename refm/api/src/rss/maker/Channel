@@ -1,20 +1,20 @@
 = class RSS::Maker::ChannelBase < Object
 
-channelÍ×ÁÇ¤ÎÃÍ¤òÀßÄê¤·¤Þ¤¹¡¥
+channelè¦ç´ ã®å€¤ã‚’è¨­å®šã—ã¾ã™ï¼Ž
 
-RSS 1.0¤òÀ¸À®¤¹¤ë¾ì¹ç¤Ïabout¡¤title¡¤link¡¤
-description¤òÀßÄê¤·¤Ê¤±¤ì¤Ð¤¤¤±¤Þ¤»¤ó¡¥
+RSS 1.0ã‚’ç”Ÿæˆã™ã‚‹å ´åˆã¯aboutï¼Œtitleï¼Œlinkï¼Œ
+descriptionã‚’è¨­å®šã—ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ï¼Ž
 
-RSS 0.91¤òÀ¸À®¤¹¤ë¾ì¹ç¤Ïtitle¡¤link¡¤
-description¡¤language¤òÀßÄê¤·¤Ê¤±¤ì¤Ð¤¤¤±¤Þ¤»¤ó¡¥
+RSS 0.91ã‚’ç”Ÿæˆã™ã‚‹å ´åˆã¯titleï¼Œlinkï¼Œ
+descriptionï¼Œlanguageã‚’è¨­å®šã—ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ï¼Ž
 
-RSS 2.0¤òÀ¸À®¤¹¤ë¾ì¹ç¤Ïtitle¡¤link¡¤
-description¤òÀßÄê¤·¤Ê¤±¤ì¤Ð¤¤¤±¤Þ¤»¤ó¡¥
+RSS 2.0ã‚’ç”Ÿæˆã™ã‚‹å ´åˆã¯titleï¼Œlinkï¼Œ
+descriptionã‚’è¨­å®šã—ãªã‘ã‚Œã°ã„ã‘ã¾ã›ã‚“ï¼Ž
 
-maker.channel¤Ë¤Ê¤ó¤é¤«¤ÎÃÍ¤òÀßÄê¤·¤Æ¤ª¤­¤Ê¤¬¤é¡¤¾åµ­
-¤Îmaker.channel¤¬Í×µá¤¹¤ëÃÍ¤òÀßÄê¤·¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï
-RSS::NotSetErrorÎã³°¤¬È¯À¸¤·¤Þ¤¹¡¥¤É¤ÎÃÍ¤âÀßÄê¤·¤Æ¤¤¤Ê
-¤¤¾ì¹ç¤ÏÎã³°¤ÏÈ¯À¸¤·¤Þ¤»¤ó¡¥
+maker.channelã«ãªã‚“ã‚‰ã‹ã®å€¤ã‚’è¨­å®šã—ã¦ãŠããªãŒã‚‰ï¼Œä¸Šè¨˜
+ã®maker.channelãŒè¦æ±‚ã™ã‚‹å€¤ã‚’è¨­å®šã—ã¦ã„ãªã„å ´åˆã¯
+RSS::NotSetErrorä¾‹å¤–ãŒç™ºç”Ÿã—ã¾ã™ï¼Žã©ã®å€¤ã‚‚è¨­å®šã—ã¦ã„ãª
+ã„å ´åˆã¯ä¾‹å¤–ã¯ç™ºç”Ÿã—ã¾ã›ã‚“ï¼Ž
 
 == Instance Methods
 
@@ -64,11 +64,11 @@ RSS::NotSetErrorÎã³°¤¬È¯À¸¤·¤Þ¤¹¡¥¤É¤ÎÃÍ¤âÀßÄê¤·¤Æ¤¤¤Ê
 
 --- pubDate
 #@todo
-maker.channel.date¤ÎÊÌÌ¾¤Ç¤¹¡¥
+maker.channel.dateã®åˆ¥åã§ã™ï¼Ž
 
 --- pubDate=()
 #@todo
-maker.channel.date=¤ÎÊÌÌ¾¤Ç¤¹¡¥
+maker.channel.date=ã®åˆ¥åã§ã™ï¼Ž
 
 --- lastBuildDate
 --- lastBuildDate=()
@@ -84,19 +84,19 @@ maker.channel.date=¤ÎÊÌÌ¾¤Ç¤¹¡¥
 
 --- categories
 #@todo
-categories¤òÊÖ¤·¤Þ¤¹¡¥
+categoriesã‚’è¿”ã—ã¾ã™ï¼Ž
 
 --- cloud
 #@todo
-cloud¤òÊÖ¤·¤Þ¤¹¡¥
+cloudã‚’è¿”ã—ã¾ã™ï¼Ž
 
 --- skipDays
 #@todo
-skipDays¤òÊÖ¤·¤Þ¤¹¡¥
+skipDaysã‚’è¿”ã—ã¾ã™ï¼Ž
 
 --- skipHours
 #@todo
-skipHours¤òÊÖ¤·¤Þ¤¹¡¥
+skipHoursã‚’è¿”ã—ã¾ã™ï¼Ž
 
 = class RSS::Maker::RSS09::Channel < RSS::Maker::ChannelBase
 

@@ -2,29 +2,29 @@
 
 --- $_ -> String | nil
 
-�Ǹ�� [[m:Kernel.#gets]] �ޤ��� [[m:Kernel.#readline]] ���ɤ߹����ʸ����Ǥ���
-EOF ��ã�������ˤϡ� nil �ˤʤ�ޤ���
-(�Ф���: Perl��Ʊ��)
+最後に [[m:Kernel.#gets]] または [[m:Kernel.#readline]] で読み込んだ文字列です。
+EOF に達した場合には、 nil になります。
+(覚え方: Perlと同じ)
 
-[[m:Kernel.#print]] �Τ褦�� Perl ͳ��δ��Ĥ��Υ᥽�åɤϡ��������ά���������� $_ �����Ѥ��ޤ���
+[[m:Kernel.#print]] のような Perl 由来の幾つかのメソッドは、引数を省略すると代わりに $_ を利用します。
 
-�����ѿ��ϥ������륹�����פ��ĥ���åɥ�������Ǥ���
-Ruby��ư���ν���ͤ� nil �Ǥ���
+この変数はローカルスコープかつスレッドローカルです。
+Ruby起動時の初期値は nil です。
 
 @see [[m:Kernel.#print]], [[m:Kernel.#gets]], [[m:Kernel.#readline]], [[m:Kernel::ARGF]]
 
-=== ��
+=== 例
 example.txt:
  foo
  bar
  baz
 
-���ΤȤ������ޥ�� ruby -e 'print while gets' example.txt �ϼ�����Ϥ��ޤ�
+このとき、コマンド ruby -e 'print while gets' example.txt は次を出力します
  foo
  bar
  baz
 
-�����������Υץ������ϼ��Τ褦�˽��������RubyŪ�Ǥ���
+ただし、このプログラムは次のように書く方がよりRuby的です。
  ARGF.each do |line|
    print line
  end
@@ -32,15 +32,15 @@ example.txt:
 
 --- $& -> String | nil
 
-���ߤΥ������פǺǸ��������������ɽ���Υѥ�����ޥå��ǥޥå�����ʸ����Ǥ���
-�Ǹ�Υޥå������Ԥ��Ƥ������ˤ� nil �Ȥʤ�ޤ���
+現在のスコープで最後に成功した正規表現のパターンマッチでマッチした文字列です。
+最後のマッチが失敗していた場合には nil となります。
 
-[[m:Regexp.last_match]][0] ��Ʊ���Ǥ���
+[[m:Regexp.last_match]][0] と同じです。
 
-�����ѿ��ϥ������륹�����פ��ĥ���åɥ������롢�ɤ߼�����ѤǤ���
-Ruby��ư���ν���ͤ� nil �Ǥ���
+この変数はローカルスコープかつスレッドローカル、読み取り専用です。
+Ruby起動時の初期値は nil です。
 
-=== ��
+=== 例
  str = '<p><a href="http://example.com">example.com</a></p>'
  if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $& 
@@ -50,18 +50,18 @@ Ruby��ư���ν���ͤ� nil �Ǥ���
 
 --- $~ -> MatchData | nil
 
-���ߤΥ������פǺǸ�����������ޥå��˴ؤ��� [[c:MatchData]]���֥������ȤǤ���
-[[m:Regexp.last_match]] ����̾�Ǥ���
+現在のスコープで最後に成功したマッチに関する [[c:MatchData]]オブジェクトです。
+[[m:Regexp.last_match]] の別名です。
 
-���Υǡ������� n ���ܤΥޥå� ($n) ����Ф�����ˤ� $~[n] ��Ȥ��ޤ���
+このデータから n 番目のマッチ ($n) を取り出すためには $~[n] を使います。
 
-�����ͤ���������� Regexp.last_match �䡢 [[m:$&]], [[m:$1]], [[m:$2]], ... �ʤɤδ�Ϣ�����Ȥ߹����ѿ����ͤ��Ѳ����ޤ���
-MatchData ���֥������ȤǤ� nil �Ǥ�ʤ��ͤ��������褦�Ȥ���� [[c:TypeError]] ��ȯ�����ޤ���
+この値に代入すると Regexp.last_match や、 [[m:$&]], [[m:$1]], [[m:$2]], ... などの関連する組み込み変数の値が変化します。
+MatchData オブジェクトでも nil でもない値を代入しようとすると [[c:TypeError]] が発生します。
 
-�����ѿ��ϥ������륹�����פ��ĥ���åɥ�������Ǥ���
-Ruby��ư���ν���ͤ� nil �Ǥ���
+この変数はローカルスコープかつスレッドローカルです。
+Ruby起動時の初期値は nil です。
 
-=== ��
+=== 例
  str = '<p><a href="http://example.com">example.com</a></p>'
  if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $~[1]
@@ -71,16 +71,16 @@ Ruby��ư���ν���ͤ� nil �Ǥ���
 
 --- $` -> String | nil
 
-���ߤΥ������פǺǸ��������������ɽ���Υѥ�����ޥå��ǥޥå�����
-��ʬ�������ʸ����Ǥ���
-�Ǹ�Υޥå������Ԥ��Ƥ������ˤ� nil �Ȥʤ�ޤ���
+現在のスコープで最後に成功した正規表現のパターンマッチでマッチした
+部分より前の文字列です。
+最後のマッチが失敗していた場合には nil となります。
 
-[[m:Regexp.last_match]].pre_match ��Ʊ���Ǥ���
+[[m:Regexp.last_match]].pre_match と同じです。
 
-�����ѿ��ϥ������륹�����פ��ĥ���åɥ������롢�ɤ߼�����ѤǤ���
-Ruby��ư���ν���ͤ� nil �Ǥ���
+この変数はローカルスコープかつスレッドローカル、読み取り専用です。
+Ruby起動時の初期値は nil です。
 
-=== ��
+=== 例
  str = '<p><a href="http://example.com">example.com</a></p>'
  if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $`
@@ -90,16 +90,16 @@ Ruby��ư���ν���ͤ� nil �Ǥ���
 
 --- $' -> String | nil
 
-���ߤΥ������פǺǸ��������������ɽ���Υѥ�����ޥå��ǥޥå�����
-��ʬ�������ʸ����Ǥ���
-�Ǹ�Υޥå������Ԥ��Ƥ������ˤ� nil �Ȥʤ�ޤ���
+現在のスコープで最後に成功した正規表現のパターンマッチでマッチした
+部分より後ろの文字列です。
+最後のマッチが失敗していた場合には nil となります。
 
-[[m:Regexp.last_match]].post_match ��Ʊ���Ǥ���
+[[m:Regexp.last_match]].post_match と同じです。
 
-�����ѿ��ϥ������륹�����פ��ĥ���åɥ������롢�ɤ߼�����ѤǤ���
-Ruby��ư���ν���ͤ� nil �Ǥ���
+この変数はローカルスコープかつスレッドローカル、読み取り専用です。
+Ruby起動時の初期値は nil です。
 
-=== ��
+=== 例
  str = '<p><a href="http://example.com">example.com</a></p>'
  if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $'
@@ -109,13 +109,13 @@ Ruby��ư���ν���ͤ� nil �Ǥ���
 
 --- $+ -> String | nil
 
-���ߤΥ������פǺǸ��������������ɽ���Υѥ�����ޥå���
-�ޥå�������ǺǸ�γ�̤��б�������ʬʸ����Ǥ���
+現在のスコープで最後に成功した正規表現のパターンマッチで
+マッチした中で最後の括弧に対応する部分文字列です。
 
-�Ǹ�Υޥå������Ԥ��Ƥ������ˤ� nil��
-�����Ĥ��������򷿤Υѥ�����Τɤ줬�ޥå������Τ�ʬ����ʤ����������Ǥ���
+最後のマッチが失敗していた場合には nil。
+いくつかある選択型のパターンのどれがマッチしたのか分からない時に便利です。
 
-�����ѿ��ϥ������륹�����פ��ĥ���åɥ�������Ǥ���
+この変数はローカルスコープかつスレッドローカルです。
 
 
 --- $1 -> String | nil
@@ -130,17 +130,17 @@ Ruby��ư���ν���ͤ� nil �Ǥ���
 --- $10 -> String | nil
 --- $11 -> String | nil
 
-�Ǹ�����������ѥ�����ޥå��� n ���ܤγ�̤˥ޥå������ͤ���Ǽ����ޤ���
-���������̤��ʤ���� nil �����äƤ��ޤ���(�Ф���: \���� �Τ褦�ʤ��)
+最後に成功したパターンマッチで n 番目の括弧にマッチした値が格納されます。
+該当する括弧がなければ nil が入っています。(覚え方: \数字 のようなもの)
 
-�ֹ� n �Ϥ�����Ǥ��礭�������������ѤǤ��ޤ���
+番号 n はいくらでも大きな正整数を利用できます。
 
 [[m:Regexp.last_match]][1],
-[[m:Regexp.last_match]][2], ... ��Ʊ����
+[[m:Regexp.last_match]][2], ... と同じ。
 
-�������ѿ��ϥ������륹�����פ��ĥ���åɥ������롢�ɤ߼�����ѤǤ���
+これらの変数はローカルスコープかつスレッドローカル、読み取り専用です。
 
-=== ��
+=== 例
  str = '<p><a href="http://example.com">example.com</a></p>'
  if %r[<a href="(.*?)">(.*?)</a>] =~ str
    print $1
@@ -152,241 +152,241 @@ Ruby��ư���ν���ͤ� nil �Ǥ���
 
 --- $? -> Process::Status | nil
 
-���Υ���åɤǺǸ�˽�λ�����ҥץ������Υ��ơ������Ǥ���
+このスレッドで最後に終了した子プロセスのステータスです。
 
 #@if (version >= "1.8.0")
-[[c:Process::Status]] ���֥������Ȥ����äƤ��ޤ���
-�ҥץ������ν�λ�����ơ������� [[m:Process::Status#exitstatus]] �������ޤ���
+[[c:Process::Status]] オブジェクトが入っています。
+子プロセスの終了時ステータスは [[m:Process::Status#exitstatus]] で得られます。
 #@else
-���������äƤ��ޤ��������ͤ� wait() �����ƥॳ������������ͤ��Τ�ΤʤΤǡ�
-�ҥץ������ν�λ�����ơ�����������ˤ� 8 �ӥåȱ����եȤ���ɬ�פ�����ޤ� ($? >> 8)��
+整数が入っています。この値は wait() システムコールで得られる値そのものなので、
+子プロセスの終了時ステータスを得るには 8 ビット右シフトする必要があります ($? >> 8)。
 #@end
 
-�����ѿ��ϥ���åɥ���������ɤ߼�����ѤǤ���
+この変数はスレッドローカルで読み取り専用です。
 
 @see [[m:Process.#wait]]
 
 
 --- $! -> Exception | nil
 
-�Ǹ���㳰��ȯ�������Ȥ��� [[c:Exception]] ���֥������ȤǤ���
-���������㳰���ʤ��Ȥ��� nil �Ǥ���
+最後に例外が発生したときの [[c:Exception]] オブジェクトです。
+該当する例外がないときは nil です。
 
-[[m:Kernel.#raise]] �ˤ�ä����ꤵ��ޤ���
+[[m:Kernel.#raise]] によって設定されます。
 
 #@since 1.9.1
-�����ѿ��ϥ���åɥ������롢�ɤ߼�����ѤǤ���
+この変数はスレッドローカル、読み取り専用です。
 #@else
-�����ѿ��ϥ���åɥ�������Ǥ���
+この変数はスレッドローカルです。
 #@end
 
 
 --- $@ -> [String] | nil
 
-�Ǹ���㳰��ȯ���������ΥХå��ȥ졼����ɽ������Ǥ���
-[[m:Kernel.#raise]] �ˤ�ä����ꤵ��ޤ���
+最後に例外が発生した時のバックトレースを表す配列です。
+[[m:Kernel.#raise]] によって設定されます。
 
-����γ����Ǥϥ᥽�åɤθƤӽФ����֤򼨤�ʸ����Ƿ�����
+配列の各要素はメソッドの呼び出し位置を示す文字列で形式は
 
   "filename:line"
 
-�ޤ���
+または
 
   "filename:line:in `methodname'"
 
-�Ǥ�������� [[m:Kernel.#caller]] ���֤��ͤ�Ʊ�������Ǥ���
+です。これは [[m:Kernel.#caller]] が返す値と同じ形式です。
 
-$@ ���ͤ���������Ȥ��ϡ�[[m:$!]] �� nil �Ǥ��äƤϤ����ޤ���
-$@ ���ͤϡ�[[m:$!]].backtrace ���ͤ�Ʊ���Ǥ���
-�ޤ���$@ �ؤ������� [[m:$!]].set_backtrace �ƤӽФ���Ʊ���Ǥ���
+$@ へ値を代入するときは、[[m:$!]] が nil であってはいけません。
+$@ の値は、[[m:$!]].backtrace の値と同じです。
+また、$@ への代入は [[m:$!]].set_backtrace 呼び出しと同じです。
 
-ʸ���������Ǥ� nil �Ǥ�ʤ��ͤ��������褦�Ȥ���ȡ� [[c:TypeError]] �㳰��ȯ�����ޤ���
+文字列の配列でも nil でもない値を代入しようとすると、 [[c:TypeError]] 例外が発生します。
 
-�����ѿ��ϥ���åɥ�������Ǥ���
+この変数はスレッドローカルです。
 
 --- $SAFE -> Fixnum
 
-�����ȥ���åɤΥ����ե�٥��ɽ�������Ǥ��������ե�٥�ˤĤ��Ƥ�
-[[d:spec/safelevel]] �򻲾Ȥ��Ƥ���������
+カレントスレッドのセーフレベルを表す整数です。セーフレベルについては
+[[d:spec/safelevel]] を参照してください。
 
-Thread.current.safe_level ��Ʊ���Ǥ���
-���������������褦�Ȥ���� [[c:TypeError]] ��ȯ�����ޤ���
+Thread.current.safe_level と同じです。
+非整数を代入しようとすると [[c:TypeError]] が発生します。
 
-�����ѿ��ϥ���åɥ�������Ǥ���
-Ruby��ư���ν���ͤ� 0 �Ǥ���
+この変数はスレッドローカルです。
+Ruby起動時の初期値は 0 です。
 
 --- $= -> bool
 
 #@since 1.9.1
-���Ȥθߴ����Τ���˻Ĥ���Ƥ��ޤ�������Ϥ䲿�ΰ�̣�⤢��ޤ���
+過去との互換性のために残されていますが、もはや何の意味もありません。
 
-�ͤϾ�� false �Ǥ����������Ƥ�̵�뤵��ޤ���
+値は常に false です。代入しても無視されます。
 
 #@else
-��侩(obsolete): �����ѿ��Ͼ���ΥС������Ǻ�������ͽ��Ǥ���
+非推奨(obsolete): この変数は将来のバージョンで削除される予定です。
 
-�ѥ�����ޥå���ʸ�������Ӥǥ���ե��٥åȤ���ʸ����ʸ����
-���̤��뤫�ɤ����Υե饰�Ǥ���
+パターンマッチや文字列の比較でアルファベットの大文字小文字を
+区別するかどうかのフラグです。
 
-���Ȥθߴ����Τ���˻Ĥ���Ƥ��ޤ���Ruby 1.9 �ʹߤǤϰ�̣������ʤ��ʤ�ޤ����ޤ�������ΥС������Ǥ�ʸˡ���顼�ˤʤ��ǽ���⤢��ޤ��������˺�������ץ������Ǥ����Ѥ��٤��Ǥ���ޤ��� 
+過去との互換性のために残されています。Ruby 1.9 以降では意味を持たなくなります。また、将来のバージョンでは文法エラーになる可能性もあります。新規に作成するプログラムでは利用すべきでありません。 
 #@end
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $/  -> String | nil
 --- $-0 -> String | nil
 
-���ϥ쥳���ɶ��ڤ��ɽ��ʸ����Ǥ���
-awk �� RS �ѿ��Τ褦��Ư���ޤ���
+入力レコード区切りを表す文字列です。
+awk の RS 変数のように働きます。
 
-[[m:Kernel.#gets]] �Τ褦�ʡֹԡ�ñ�̤��ɤ߹��ߥ᥽�åɤ��ֹԡפζ��ڤ�Ȥ��ƻ��Ѥ��ޤ���
-Ruby�����ޥ�ɥ��ץ���� -0 �դ��ǵ�ư���줿�Ȥ��ˤ� -0 �ǻ��ꤵ�줿�ͤ������ͤȤʤ�ޤ��������Ǥʤ��Ȥ��������ͤ� "\n" �Ǥ���
+[[m:Kernel.#gets]] のような「行」単位の読み込みメソッドが「行」の区切りとして使用します。
+Rubyがコマンドオプション -0 付きで起動されたときには -0 で指定された値が規定値となります。そうでないとき、規定値は "\n" です。
 
-�����ѿ��� nil �����ꤹ����ɤ߹��ߥ᥽�åɤϥե��������Τ���٤��ɤ߹��ߤޤ���
-��ʸ���� "" �����ꤹ��ȥѥ饰��ե⡼�ɤȤߤʤ��졢
-2 �İʾ�Ϣ³�������Ԥ��ֹԡפζ��ڤ�ˤʤ�ޤ���
+この変数に nil を設定すると読み込みメソッドはファイル全体を一度に読み込みます。
+空文字列 "" を設定するとパラグラフモードとみなされ、
+2 つ以上連続した改行が「行」の区切りになります。
 
-$/ �ˤ�����ɽ���ϻȤ��ޤ���
+$/ には正規表現は使えません。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 --- $\ -> String | nil
 
-���ϥ쥳���ɶ��ڤ��ɽ��ʸ����Ǥ���
-[[m:Kernel.#print]] ���Ǹ�ˤ���ʸ�������Ϥ��ޤ���
+出力レコード区切りを表す文字列です。
+[[m:Kernel.#print]] が最後にこの文字列を出力します。
 
-�ǥե���Ȥ� nil �ǡ�������Ϥ��ޤ���
+デフォルトは nil で、何も出力しません。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $, -> String | nil
 
-�ǥե���Ȥν��ϥե�����ɶ��ڤ�ʸ����Ǥ���
-[[m:Array#join]] �ǰ������ά�������ȡ�
-[[m:Kernel.#print]] �γư����δ֤ǽ��Ϥ���ޤ���
+デフォルトの出力フィールド区切り文字列です。
+[[m:Array#join]] で引数を省略した場合と、
+[[m:Kernel.#print]] の各引数の間で出力されます。
 
-�ǥե�����ͤ� nil �ǡ���ʸ�����Ʊ����̤ˤʤ�ޤ���
+デフォルト値は nil で、空文字列と同じ結果になります。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $;  -> Regexp | String | nil
 --- $-F -> Regexp | String | nil
 
-[[m:String#split]] �ǰ������ά�������ζ��ڤ�ʸ���Ǥ���
+[[m:String#split]] で引数を省略した場合の区切り文字です。
 
-nil�����ꤹ����ü��ʬ���Ԥ��ޤ���
-�ܺ٤� [[m:String#split]] �򻲾Ȥ��Ƥ���������
+nilを設定すると特殊な分割を行います。
+詳細は [[m:String#split]] を参照してください。
 
-���ޥ�ɥ饤�󥪥ץ���� -F ����ꤷ�� Ruby ��ư������硢
-����ͤ� -F �ǻ��ꤷ���ͤǤ���
-����ʳ��λ��ˤϽ���ͤ� nil �Ǥ���
+コマンドラインオプション -F を指定して Ruby を起動した場合、
+初期値は -F で指定した値です。
+それ以外の時には初期値は nil です。
 
 #@if (version >= "1.8.0")
-Ruby 1.6 �Ǥ� $; �ˤ�ʸ���󤷤������Ǥ��ޤ��󤬡�
-Ruby 1.8 �ʹߤ�Ǥ�դΥ��֥������Ȥ������Ǥ��ޤ���
-��������[[m:String#split]] �λ����ѹ����θ�����
-�������ɽ������ꤹ�٤��Ǥ���
+Ruby 1.6 では $; には文字列しか代入できませんが、
+Ruby 1.8 以降は任意のオブジェクトを代入できます。
+ただし、[[m:String#split]] の仕様変更を考慮すると
+常に正規表現を指定すべきです。
 #@end
 
-Ruby �ΥС������ˤ�餺ư���ץ�������񤯤Ȥ���
-$; �����ʤ������ɤ�񤯤٤��Ǥ���
+Ruby のバージョンによらず動作するプログラムを書くときは
+$; に頼らないコードを書くべきです。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 --- $. -> Fixnum
 
-�����줫�� [[c:IO]] ���֥������Ȥ��Ǹ���ɤ���Ԥι��ֹ�Ǥ���
-[[m:Kernel::ARGF]] �ʤɤ� IO �ߴ��Υ��֥������Ȥ� $. �򹹿����ޤ���
+いずれかの [[c:IO]] オブジェクトが最後に読んだ行の行番号です。
+[[m:Kernel::ARGF]] などの IO 互換のオブジェクトも $. を更新します。
 
-IO ������ɤ߹��ߤ������륿���ߥ󥰤�ͽ¬��ǽ�Ǥ���褦��ʣ���ʥץ������Ǥϻ��Ѥ��٤��ǤϤ���ޤ����äˡ��ޥ������åɥץ������Ǥϥ���åɴ֤Ƕ���򵯤�����ǽ��������ޤ���
-���Τ褦�ʾ��ˤϡ� [[m:IO#lineno]] ����Ѥ��Ƥ���������
+IO からの読み込みが起きるタイミングが予測不能であるような複雑なプログラムでは使用すべきではありません。特に、マルチスレッドプログラムではスレッド間で競合を起こす可能性があります。
+そのような場合には、 [[m:IO#lineno]] を使用してください。
 
-�����ѿ��ϥ������Х륹�����פǤ���
-Ruby��ư���ν���ͤ� 0 �Ǥ���
+この変数はグローバルスコープです。
+Ruby起動時の初期値は 0 です。
 
 --- $< -> IO
 
-���٤Ƥΰ����ޤ���ɸ�����Ϥǹ�������벾�ۥե�����Ǥ���
-��� [[m:Kernel::ARGF]] ����̾�Ǥ���
+すべての引数または標準入力で構成される仮想ファイルです。
+定数 [[m:Kernel::ARGF]] の別名です。
 
-�����ѿ��ϥ������Х륹�����ס��ɤ߼�����ѤǤ���
+この変数はグローバルスコープ、読み取り専用です。
 
 --- $0 -> String
 #@since 1.8.2
 --- $PROGRAM_NAME -> String
 #@end
 
-���߼¹���� Ruby ������ץȤ�̾����ɽ��ʸ����Ǥ���
+現在実行中の Ruby スクリプトの名前を表す文字列です。
 
-OS �� Ruby �ΥС������ˤ�äƤϡ������ѿ������������ [[man:ps(1)]] �ν��Ϥ��Ѳ����ޤ���
-���ε�ǽ�ϥץ������θ��ߤξ��֤�ɽ������Τ������Ǥ���
+OS と Ruby のバージョンによっては、この変数に代入すると [[man:ps(1)]] の出力が変化します。
+この機能はプログラムの現在の状態を表示するのに便利です。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $* -> [String]
 
-Ruby������ץȤ�Ϳ����줿������ɽ������Ǥ���
-�Ȥ߹������ [[m:Kernel::ARGV]] ����̾�Ǥ���
+Rubyスクリプトに与えられた引数を表す配列です。
+組み込み定数 [[m:Kernel::ARGV]] の別名です。
 
-Ruby ���Ȥ��Ф�������ϼ�������Ƥ��ޤ���
+Ruby 自身に対する引数は取り除かれています。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $$ -> Fixnum
-���߼¹���� Ruby �ץ������Υץ����� ID �Ǥ���
-[[m:Process.#pid]] ��Ʊ���Ǥ���
+現在実行中の Ruby プロセスのプロセス ID です。
+[[m:Process.#pid]] と同じです。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $:         -> [String]
 --- $LOAD_PATH -> [String]
 --- $-I        -> [String]
-Ruby�饤�֥�������ɤ���Ȥ��θ����ѥ��Ǥ���
+Rubyライブラリをロードするときの検索パスです。
 
-[[m:Kernel.#load]] �� [[m:Kernel.#require]]
-���ե����������ɤ�����˸�������ǥ��쥯�ȥ�Υꥹ�Ȥ�ޤ�����Ǥ���
+[[m:Kernel.#load]] や [[m:Kernel.#require]]
+がファイルをロードする時に検索するディレクトリのリストを含む配列です。
 
-��ư���ˤϥ��ޥ�ɥ饤�󥪥ץ���� -I �ǻ��ꤷ���ǥ��쥯�ȥꡢ
-�Ķ��ѿ� RUBYLIB ���͡�
-����ѥ�����˻��ꤷ���ǥե�����͡�
-"." (�����ȥǥ��쥯�ȥ�) �򤳤ν��֤Ǵޤߤޤ���
+起動時にはコマンドラインオプション -I で指定したディレクトリ、
+環境変数 RUBYLIB の値、
+コンパイル時に指定したデフォルト値、
+"." (カレントディレクトリ) をこの順番で含みます。
 
-#@# 1.6.5 ����ʲ��Τ褦���ѹ�����Ƥ���
-#@# 1.6.4 �������ͤϽ񤫤ʤ��Ƥ�����͡ġ�
-�ʲ���ŵ��Ū�� UNIX �����ƥ��ǤΥ����ɥѥ��򼨤��ޤ���
+#@# 1.6.5 から以下のように変更されている
+#@# 1.6.4 以前の値は書かなくていいよね……
+以下に典型的な UNIX システム上でのロードパスを示します。
 
-  -I �ǻ��ꤷ���ѥ�
-  �Ķ��ѿ� RUBYLIB ����
-  /usr/local/lib/ruby/site_ruby/VERSION        �����ȸ�ͭ���С�������¸�Υ饤�֥��
-  /usr/local/lib/ruby/site_ruby/VERSION/ARCH   �����ȸ�ͭ�������ƥ��¸����ĥ�饤�֥��
-  /usr/local/lib/ruby/site_ruby                �����ȸ�ͭ�饤�֥��
-  /usr/local/lib/ruby/VERSION                  ɸ��饤�֥��
-  /usr/local/lib/ruby/VERSION/ARCH             ɸ�ࡢ�����ƥ��¸����ĥ�饤�֥��
-  .                                            �����ȥǥ��쥯�ȥ�
+  -I で指定したパス
+  環境変数 RUBYLIB の値
+  /usr/local/lib/ruby/site_ruby/VERSION        サイト固有、バージョン依存のライブラリ
+  /usr/local/lib/ruby/site_ruby/VERSION/ARCH   サイト固有、システム依存、拡張ライブラリ
+  /usr/local/lib/ruby/site_ruby                サイト固有ライブラリ
+  /usr/local/lib/ruby/VERSION                  標準ライブラリ
+  /usr/local/lib/ruby/VERSION/ARCH             標準、システム依存、拡張ライブラリ
+  .                                            カレントディレクトリ
 
-#@#((-�ǥե���Ȥν���� 1.6.5 �����ѹ�����ޤ���-))
-�嵭ɽ��� VERSION �� Ruby �ΥС�������ɽ��ʸ����ǡ�
-��1.6�פ��1.8�פǤ���
-ARCH �ϥϡ��ɥ������� OS ��ɽ��ʸ����ǡ�
-��i686-linux�פ��alpha-osf5.1�פʤɤǤ���
-ARCH ���ͤ� Config::CONFIG['arch'] �������ޤ���
+#@#((-デフォルトの順序は 1.6.5 から変更されました-))
+上記表中の VERSION は Ruby のバージョンを表す文字列で、
+「1.6」や「1.8」です。
+ARCH はハードウェアと OS を表す文字列で、
+「i686-linux」や「alpha-osf5.1」などです。
+ARCH の値は Config::CONFIG['arch'] で得られます。
 
-����ѥ�����Υǥե���ȥѥ���
-¿���� UNIX �����ƥ�Ǥ� "/usr/local/lib/ruby" �Ǥ���
-[[d:platform/mswin32]]��[[d:platform/mingw32]]��[[d:platform/Cygwin]]��
-[[d:platform/bccwin32]]��[[d:platform/mswince]] �Ķ��Ǥ�
-ruby.dll �ΰ��֤�������ФǷ�ޤ�ޤ���
-[[d:platform/DJGPP]] �� [[d:platform/emx]] (OS/2) �Ǥ�
-ruby.exe �ΰ��֤�������ФǷ�ޤ�ޤ���
+コンパイル時のデフォルトパスは
+多くの UNIX システムでは "/usr/local/lib/ruby" です。
+[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]、
+[[d:platform/bccwin32]]、[[d:platform/mswince]] 環境では
+ruby.dll の位置からの相対で決まります。
+[[d:platform/DJGPP]] と [[d:platform/emx]] (OS/2) では
+ruby.exe の位置からの相対で決まります。
 
--T ���ץ����ǵ�ư���� [[m:$SAFE]] �� 1 �ʾ��
-���ꤷ���Ȥ��� "." (�����ȥǥ��쥯�ȥ�) �ϥ����ɥѥ�������ޤ���
+-T オプションで起動時に [[m:$SAFE]] を 1 以上に
+設定したときは "." (カレントディレクトリ) はロードパスに入りません。
 
-require 'foo' ��¹Ԥ���ȡ�
-�ʲ��Τ褦�� foo.rb �� foo.so ����ߤ�õ������ޤ���
+require 'foo' を実行すると、
+以下のように foo.rb と foo.so が交互に探索されます。
 
   /usr/local/lib/ruby/site_ruby/VERSION/foo.rb
   /usr/local/lib/ruby/site_ruby/VERSION/foo.so
@@ -395,18 +395,18 @@ require 'foo' ��¹Ԥ���ȡ�
     :
     :
 
-�ʤ�����ͭ�饤�֥��γ�ĥ�Ҥ� .so �Ǥʤ������ƥ�Ǥ�
-��.so�פ�Ŭ�ڤʳ�ĥ�Ҥ��ѹ�����ޤ���
-�㤨�� HP-UX �Ǥ� require 'foo.so' �Ȥ���� foo.sl �򸡺����ޤ���
-�������ä� Ruby �ǵ��Ҥ��줿�����ɤǤϾ�� .so ��Ȥ��٤��Ǥ���
+なお、共有ライブラリの拡張子が .so でないシステムでは
+「.so」が適切な拡張子に変更されます。
+例えば HP-UX では require 'foo.so' とすると foo.sl を検索します。
+したがって Ruby で記述されたコードでは常に .so を使うべきです。
 
-�ʤ��������ɥѥ��򥳥ޥ�ɥ饤�󤫤�Ĵ�٤�ˤ�
+なお、ロードパスをコマンドラインから調べるには
 
   $ ruby -e 'puts $:'
 
-�Ȥ��ޤ���
+とします。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]], [[d:spec/envvars]]
 
@@ -415,67 +415,67 @@ require 'foo' ��¹Ԥ���ȡ�
 --- $LOADED_FEATURES -> [String]
 #@end
 
-[[m:Kernel.#require]] �ǥ����ɤ��줿�ե�����̾��ޤ�����Ǥ���
+[[m:Kernel.#require]] でロードされたファイル名を含む配列です。
 
-[[m:Kernel.#require]] ��Ʊ���ե������
-ʣ��������ɤ��ʤ��褦�ˤ��뤿��Υ��å��Ȥ��ƻȤ��ޤ���
+[[m:Kernel.#require]] で同じファイルを
+複数回ロードしないようにするためのロックとして使われます。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $DEBUG -> bool
 --- $-d    -> bool
 
-�����ͤ����ΤȤ��ϥ��󥿥ץ꥿���ǥХå��⡼�ɤˤʤ�ޤ���
+この値が真のときはインタプリタがデバッグモードになります。
 
-���ޥ�ɥ饤�󥪥ץ���� -d �ǥ��åȤ���ޤ���
-������ץȤ����������뤳�Ȥ�Ǥ��ޤ���
+コマンドラインオプション -d でセットされます。
+スクリプトから代入することもできます。
 
-�ǥХå��⡼�ɤǤϡ��̾�⡼�ɤ���٤ưʲ��ΰ㤤������ޤ���
+デバッグモードでは、通常モードに比べて以下の違いがあります。
 
- * �̾���Ϥ����줫�Υ���åɤ��㳰�ˤ�äƽ�λ���Ƥ�
-   ¾�Υ���åɤϼ¹Ԥ�³���ޤ������ǥХå��⡼�ɤǤ�
-   �����줫�Υ���åɤ��㳰�ˤ�äƽ�λ��������
-   ���󥿥ץ꥿���Τ����Ǥ����褦�ˤʤ�ޤ���
-   [[m:Thread.abort_on_exception]] ��
-   true �˥��åȤ���Τ�Ʊ�����̤Ǥ���
- * Thread.abort_on_exception= �θ��̤��ʤ��ʤ�ޤ���
- * �㳰����ª���Ƥ��뤫�ɤ����˴ط��ʤ���
-   �㳰��ȯ������������ [[m:$stderr]] �ˤ��줬���Ϥ���ޤ���
-   ������ץȤν�����³�Ԥ���ޤ���
+ * 通常時はいずれかのスレッドが例外によって終了しても
+   他のスレッドは実行を続けますが、デバッグモードでは
+   いずれかのスレッドが例外によって終了した時に
+   インタプリタ全体が中断されるようになります。
+   [[m:Thread.abort_on_exception]] を
+   true にセットするのと同じ効果です。
+ * Thread.abort_on_exception= の効果がなくなります。
+ * 例外を捕捉しているかどうかに関係なく、
+   例外が発生した時点で [[m:$stderr]] にそれが出力されます。
+   スクリプトの処理は続行されます。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 --- $FILENAME -> String
 
-���ۥե����� [[m:Kernel::ARGF]] �Ǹ����ɤ߹�����Υե�����̾�Ǥ���
-[[m:ARGF.filename]] ��Ʊ���Ǥ���
+仮想ファイル [[m:Kernel::ARGF]] で現在読み込み中のファイル名です。
+[[m:ARGF.filename]] と同じです。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 --- $stdin -> object
-ɸ�����ϤǤ���
+標準入力です。
 
-���ץ�������ɸ�����Ϥ������쥯�Ȥ������Ȥ���
-$stdin ����������н�ʬ�Ǥ���
+自プロセスの標準入力をリダイレクトしたいときは
+$stdin に代入すれば十分です。
 
-    # ɸ�����Ϥ����ϸ� /tmp/foo ���ѹ�
+    # 標準入力の入力元 /tmp/foo に変更
     $stdin = File.open("/tmp/foo", "w")
-    gets               # ���Ϥ���
-    $stdin = STDIN     # �����᤹
+    gets               # 入力する
+    $stdin = STDIN     # 元に戻す
 
-��������[[m:Kernel.#gets]] �ʤɡ�������Ȥ߹��ߥ᥽�åɤ�
-$stdin ���֥������Ȥ˥᥽�åɤ�ž�����Ƽ�������Ƥ��ޤ���
-���äơ�[[m:Kernel.#gets]] �ʤɤ�������ư���ˤϡ�
-$stdin ���֥������Ȥ������������֥������Ȥ��ʲ��Υ᥽�åɤ�
-�������������Ƥ��ʤ���Ф����ޤ���
+ただし、[[m:Kernel.#gets]] など、特定の組み込みメソッドは
+$stdin オブジェクトにメソッドを転送して実装されています。
+従って、[[m:Kernel.#gets]] などが正しく動作するには、
+$stdin オブジェクトに代入したオブジェクトが以下のメソッドを
+正しく実装していなければいけません。
 
     gets, readline, readlines, getc, readchar, tell, seek,
     pos=, rewind, fileno, to_io, eof, each_line, each_byte,
     binmode, closed?
 
-��:
+例:
 
     $stdin = Object.new
     def $stdin.gets
@@ -483,20 +483,20 @@ $stdin ���֥������Ȥ������������֥������Ȥ��ʲ��Υ᥽�åɤ�
     end
     p gets()  # => "foo"
 
-���ץ����������Ǥʤ����ҥץ�������ɸ�����Ϥ������쥯�Ȥ������Ȥ���
-�ʲ��Τ褦�� [[m:IO#reopen]] ��Ȥ��ޤ���
+自プロセスだけでなく、子プロセスの標準入力もリダイレクトしたいときは
+以下のように [[m:IO#reopen]] を使います。
 
     $stdin.reopen("/tmp/foo")
 
-�ޤ���������쥯�Ȥ�������
-�������ޤ������ᤷ�������ϰʲ��Τ褦�ˤ��ޤ���
+また、リダイレクトしたあと
+出力先をまた元に戻したい場合は以下のようにします。
 
-    stdin_old = $stdin.dup       # ���� $stdin ����¸����
-    $stdout.reopen("/tmp/foo")   # $stdin �� /tmp/foo �˥�����쥯�Ȥ���
-    gets                         # /tmp/foo ��������
-    $stdin.reopen stdin_old      # �����᤹
+    stdin_old = $stdin.dup       # 元の $stdin を保存する
+    $stdout.reopen("/tmp/foo")   # $stdin を /tmp/foo にリダイレクトする
+    gets                         # /tmp/foo から入力
+    $stdin.reopen stdin_old      # 元に戻す
 
-$stdin �ϥ������Х륹�����פǤ���
+$stdin はグローバルスコープです。
 
 --- $>      -> object
 --- $stdout -> object
@@ -504,46 +504,46 @@ $stdin �ϥ������Х륹�����פǤ���
 --- $defout  -> object
 #@end
 
-ɸ����ϤǤ���
+標準出力です。
 
-�Ȥ߹��ߴؿ� [[m:Kernel.#print]]��[[m:Kernel.#puts]] ��
-[[m:Kernel.#p]] �ʤɤΥǥե���Ȥν�����Ȥʤ�ޤ���
-����ͤ� [[m:Kernel::STDOUT]] �Ǥ���
-���ޥ�ɥ饤�󥪥ץ���󥪥ץ���� -i ����ꤷ�����ˤ�
-�ɤ߹��߸���Ʊ��̾���Υե������ɽ���ޤ���
+組み込み関数 [[m:Kernel.#print]]、[[m:Kernel.#puts]] や
+[[m:Kernel.#p]] などのデフォルトの出力先となります。
+初期値は [[m:Kernel::STDOUT]] です。
+コマンドラインオプションオプション -i を指定した場合には
+読み込み元と同じ名前のファイルを表します。
 
 #@until 1.9.1
-$stdout �ˤ� $defout �Ȥ�����̾������ޤ�����
-$defout ����侩(obsolete)�ˤʤä��Τǡ�
-�����������ɤǤϾ�� $stdout ��ȤäƤ���������
+$stdout には $defout という別名がありますが、
+$defout は非推奨(obsolete)になったので、
+新しいコードでは常に $stdout を使ってください。
 #@end
 
-$stdout ���������륪�֥������Ȥˤ�
-write �Ȥ���̾���Υ᥽�åɤ��������Ƥ��ʤ���Ф����ޤ���
+$stdout に代入するオブジェクトには
+write という名前のメソッドが定義されていなければいけません。
 
-���ץ�������ɸ����Ϥ������쥯�Ȥ������Ȥ��ˤϡ�
-�ʲ��Τ褦�� $stdout ����������н�ʬ�Ǥ���
+自プロセスの標準出力をリダイレクトしたいときには、
+以下のように $stdout に代入すれば十分です。
 
-    # ɸ����Ϥν������ /tmp/foo ���ѹ�
+    # 標準出力の出力先を /tmp/foo に変更
     $stdout = File.open("/tmp/foo", "w")
-    puts "foo"         # ���Ϥ���
-    $stdout = STDOUT   # �����᤹
+    puts "foo"         # 出力する
+    $stdout = STDOUT   # 元に戻す
 
-���ץ����������Ǥʤ����ҥץ�������ɸ����Ϥ������쥯�Ȥ������Ȥ���
-�ʲ��Τ褦�� [[m:IO#reopen]] ��Ȥ��ޤ���
+自プロセスだけでなく、子プロセスの標準出力もリダイレクトしたいときは
+以下のように [[m:IO#reopen]] を使います。
 
     STDOUT.reopen("/tmp/foo", "w")
 
-�ޤ���������쥯�Ȥ�������
-�������ޤ������ᤷ�������ϰʲ��Τ褦�ˤ��ޤ���
+また、リダイレクトしたあと
+出力先をまた元に戻したい場合は以下のようにします。
 
-    stdout_old = $stdout.dup        # ���� $stdout ����¸����
-    $stdout.reopen("/tmp/foo")      # $stdout �� /tmp/foo �˥�����쥯�Ȥ���
-    puts "foo"                      # /tmp/foo �˽���
-    $stdout.flush                   # ǰ�Τ���ե�å��夹��
-    $stdout.reopen stdout_old       # �����᤹
+    stdout_old = $stdout.dup        # 元の $stdout を保存する
+    $stdout.reopen("/tmp/foo")      # $stdout を /tmp/foo にリダイレクトする
+    puts "foo"                      # /tmp/foo に出力
+    $stdout.flush                   # 念のためフラッシュする
+    $stdout.reopen stdout_old       # 元に戻す
 
-$stdout �ϥ������Х륹�����פǤ���
+$stdout はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
@@ -552,74 +552,74 @@ $stdout �ϥ������Х륹�����פǤ���
 --- $deferr -> object
 #@end
 
-ɸ�२�顼���ϤǤ���
+標準エラー出力です。
 
-Ruby ���󥿥ץ꥿�����Ϥ��륨�顼��å�������
-�ٹ��å�������[[m:Kernel.#warn]] �ν�����Ȥʤ�ޤ���
-����ͤ� [[m:Kernel::STDERR]] �Ǥ���
+Ruby インタプリタが出力するエラーメッセージや
+警告メッセージ、[[m:Kernel.#warn]] の出力先となります。
+初期値は [[m:Kernel::STDERR]] です。
 
 #@until 1.9.1
-$stderr �ˤ� $deferr �Ȥ�����̾������ޤ�����
-$deferr ����侩(obsolete)�ˤʤä��Τǡ�
-�����������ɤǤϾ�� $stderr ��ȤäƤ���������
+$stderr には $deferr という別名がありますが、
+$deferr は非推奨(obsolete)になったので、
+新しいコードでは常に $stderr を使ってください。
 #@end
 
-$stderr ���������륪�֥������Ȥˤ�
-write �Ȥ���̾���Υ᥽�åɤ��������Ƥ��ʤ���Ф����ޤ���
+$stderr に代入するオブジェクトには
+write という名前のメソッドが定義されていなければいけません。
 
-���ץ�������ɸ�२�顼���Ϥ������쥯�Ȥ������Ȥ��ˤϡ�
-$stderr ����������н�ʬ�Ǥ���
+自プロセスの標準エラー出力をリダイレクトしたいときには、
+$stderr に代入すれば十分です。
 
-    # ɸ�२�顼���Ϥν������ /tmp/foo ���ѹ�
+    # 標準エラー出力の出力先を /tmp/foo に変更
     $stderr = File.open("/tmp/foo", "w")
-    puts "foo"         # ���Ϥ���
-    $stderr = STDERR   # �����᤹
+    puts "foo"         # 出力する
+    $stderr = STDERR   # 元に戻す
 
-���ץ����������Ǥʤ����ҥץ�������ɸ�२�顼���Ϥ�
-������쥯�Ȥ������Ȥ��ϰʲ��Τ褦�� [[m:IO#reopen]] ��Ȥ��ޤ���
+自プロセスだけでなく、子プロセスの標準エラー出力も
+リダイレクトしたいときは以下のように [[m:IO#reopen]] を使います。
 
     $stderr.reopen("/tmp/foo", "w")
 
-�ޤ���������쥯�Ȥ�������
-�������ޤ������ᤷ�������ϰʲ��Τ褦�ˤ��ޤ���
+また、リダイレクトしたあと
+出力先をまた元に戻したい場合は以下のようにします。
 
-    stderr_old = $stderr.dup        # ���� $stderr ����¸����
-    $stderr.reopen("/tmp/foo")      # $stderr �� /tmp/foo �˥�����쥯�Ȥ���
-    puts "foo"                      # /tmp/foo �˽���
-    $stderr.flush                   # ǰ�Τ���ե�å��夹��
-    $stderr.reopen stderr_old       # �����᤹
+    stderr_old = $stderr.dup        # 元の $stderr を保存する
+    $stderr.reopen("/tmp/foo")      # $stderr を /tmp/foo にリダイレクトする
+    puts "foo"                      # /tmp/foo に出力
+    $stderr.flush                   # 念のためフラッシュする
+    $stderr.reopen stderr_old       # 元に戻す
 
-$stderr �ϥ������Х륹�����פǤ���
+$stderr はグローバルスコープです。
 
 --- $VERBOSE -> bool | nil
 --- $-v      -> bool | nil
 --- $-w      -> bool | nil
-��Ĺ��å������ե饰�Ǥ���Ruby���󥿥ץ꥿�ؤ�
-���ޥ�ɥ饤�󥪥ץ���� -v �ǥ��åȤ���ޤ���
+冗長メッセージフラグです。Rubyインタプリタへの
+コマンドラインオプション -v でセットされます。
 
 #@if (version >= "1.8.0")
-�ٹ��٥�ϻ��ʳ����ꡢ���줾��ʲ����̤�Ǥ���
+警告レベルは三段階あり、それぞれ以下の通りです。
 
 : nil
-    �ٹ����Ϥ��ʤ�
+    警告を出力しない
 : false
-    ���פʷٹ�Τ߽��� (�ǥե����)
+    重要な警告のみ出力 (デフォルト)
 : true
-    ���٤Ƥηٹ����Ϥ���
+    すべての警告を出力する
 
-$VERBOSE �� nil, false �ʳ�������������ͤ� true �ˤʤ�ޤ���
+$VERBOSE に nil, false 以外を代入すると値は true になります。
 
-$VERBOSE ���ͤϥ��ޥ�ɥ饤�󥪥ץ����
--W �Ǥ�����Ǥ��ޤ���
--W0 ���ץ����� nil��
--W1 ���ץ����� false��
--W2, -W ���ץ����� true �����ꤵ��ޤ���
--v ���ץ�����
--w ���ץ�������ꤷ������
-true �����ꤵ��ޤ���
+$VERBOSE の値はコマンドラインオプション
+-W でも設定できます。
+-W0 オプションで nil、
+-W1 オプションで false、
+-W2, -W オプションで true が設定されます。
+-v オプションや
+-w オプションを指定した場合は
+true が設定されます。
 #@end
 
-$VERBOSE �ϥ������Х륹�����פǤ���
+$VERBOSE はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
@@ -627,9 +627,9 @@ $VERBOSE �ϥ������Х륹�����פǤ���
 --- $KCODE -> nil
 --- $-K    -> nil
 
-�����ü��ѿ��ϲ��αƶ�������ʤ��ʤ�ޤ�����
+この特殊変数は何の影響も持たなくなりました。
 
-�ͤ��������Ƥ�̵�뤵�졢���Ȥ���Ⱦ�� nil �Ǥ���
+値を代入しても無視され、参照すると常に nil です。
 
   >> $KCODE = true
   (irb):1: warning: variable $KCODE is no longer effective; ignored
@@ -644,29 +644,29 @@ $VERBOSE �ϥ������Х륹�����פǤ���
 --- $KCODE -> String
 --- $-K    -> String
 
-Ruby ��ǧ������ޥ���Х���ʸ���󥨥󥳡��ǥ��󥰤Ǥ���
-�ѿ����ͤ� "EUC" "SJIS" "UTF8" "NONE" �Τ����줫��ʸ����Ǥ���
+Ruby の認識するマルチバイト文字列エンコーディングです。
+変数の値は "EUC" "SJIS" "UTF8" "NONE" のいずれかの文字列です。
 
 
-$KCODE ���ͤ� "EUC" �ΤȤ���ʸ���������ɽ����
-���󥳡��ǥ��󥰤� EUC-JP �Ǥ���Ȳ��ꤷ�ޤ���
-Ʊ�ͤ� "SJIS" �ΤȤ��� Shift JIS ���ꤷ�ޤ���
-"UTF8" �ΤȤ��� UTF-8 ���ꤷ�ޤ���
-"NONE" �ΤȤ��ϥޥ���Х���ʸ�����ǧ�����ޤ���
+$KCODE の値が "EUC" のときは文字列や正規表現の
+エンコーディングが EUC-JP であると仮定します。
+同様に "SJIS" のときは Shift JIS を仮定します。
+"UTF8" のときは UTF-8 を仮定します。
+"NONE" のときはマルチバイト文字列を認識しません。
 
-��������Ȥ��ˤ��ͤκǽ�� 1 �Х��Ȥ�����̣���ʤ���
-�ޤ���ʸ����ʸ���ΰ㤤��̵�뤵��ޤ������ʤ����
-"e" "E" �� "EUC"��"s" "S" �� "SJIS"��
-"u" "U" �� "UTF8"��"n" "N" �� "NONE" ��Ÿ������ޤ���
+代入するときには値の最初の 1 バイトしか意味がなく、
+また大文字小文字の違いも無視されます。すなわち、
+"e" "E" は "EUC"、"s" "S" は "SJIS"、
+"u" "U" は "UTF8"、"n" "N" は "NONE" に展開されます。
 
-�ǥե�����ͤ� "NONE" �Ǥ���
+デフォルト値は "NONE" です。
 
-[����]
+[参考]
 
-���ߤμ����Ǥ� $KCODE �� Ruby �ΰʲ���ư��˱ƶ����ޤ���
+現在の実装では $KCODE は Ruby の以下の動作に影響します。
 
-  * ���󥿥ץ꥿�λ�����ϴ�
-  * [[c:Regexp]] �Υ��󥳡��ǥ��󥰥ե饰�Υǥե������
+  * インタプリタの字句解析器
+  * [[c:Regexp]] のエンコーディングフラグのデフォルト値
   * [[ref:d:spec/literal#regexp]]
   * [[m:Regexp.new]]
   * [[m:String#upcase]]
@@ -678,71 +678,71 @@ $KCODE ���ͤ� "EUC" �ΤȤ���ʸ���������ɽ����
   * [[m:String#gsub]]
   * [[m:String#scan]]
 
-$KCODE �ϥ������Х륹�����פǤ���
+$KCODE はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 #@end
 
 --- $-a -> bool
-��ư split �⡼�ɤ�ɽ���ե饰�Ǥ���
+自動 split モードを表すフラグです。
 
-���ޥ�ɥ饤�󥪥ץ���� -a ��Ȥä��Ȥ� true �����ꤵ��ޤ���
-�����ѿ��ˤ������Ǥ��ޤ���
+コマンドラインオプション -a を使ったとき true に設定されます。
+この変数には代入できません。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 --- $-i -> bool
-in-place �ִ��⡼�ɤ��Ѥ����ޤ���
+in-place 置換モードで用いられます。
 
-���ޥ�ɥ饤�󥪥ץ���� -i ����ꤷ���Ȥ�����ʸ����ˤʤ�ޤ���
--i ���ץ����˳�ĥ�Ҥ��Ϥ������ˤϤ��γ�ĥ�Ҥ�ʸ����Ȥ��Ƴ�Ǽ����ޤ���
+コマンドラインオプション -i を指定したとき、空文字列になります。
+-i オプションに拡張子を渡した場合にはその拡張子が文字列として格納されます。
 
--i ���ץ���󤬻��ꤵ��Ƥ��ʤ������ͤ� nil �Ǥ���
+-i オプションが指定されていない時の値は nil です。
 
-������ץ���� $-i ���������뤳�Ȥ�Ǥ���
-���ξ��� [[m:Kernel::ARGV]] �μ���
-�ե�������ɤ߹��߻Ϥ�륿���ߥ󥰤� in-place �ִ��򳫻Ϥ��ޤ���
+スクリプト内で $-i に代入することもでき、
+その場合は [[m:Kernel::ARGV]] の次の
+ファイルを読み込み始めるタイミングで in-place 置換を開始します。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 --- $-l -> bool
 
-���ޥ�ɥ饤�󥪥ץ���� -l ����ꤷ���Ȥ� true �����ꤵ��ޤ���
-�����ѿ��ˤ������Ǥ��ޤ���
+コマンドラインオプション -l を指定したとき true に設定されます。
+この変数には代入できません。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
 --- $-p -> bool
 
-���ޥ�ɥ饤�󥪥ץ���� -p ����ꤷ���Ȥ� true �����ꤵ��ޤ���
-�����ѿ��ˤ������Ǥ��ޤ���
+コマンドラインオプション -p を指定したとき true に設定されます。
+この変数には代入できません。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 #@since 1.9.1
 --- $-W -> 0 | 1 | 2
-���ޥ�ɥ饤�󥪥ץ���� -W ����ꤷ���Ȥ���
-���Υ��ޥ�ɥ饤��������ͤ����ꤵ��ޤ���
+コマンドラインオプション -W を指定したとき、
+そのコマンドライン引数の値が設定されます。
 
-�Ĥޤꡢ[[m:$VERBOSE]] ���ͤˤ�äưʲ����ͤ��֤��ޤ���
+つまり、[[m:$VERBOSE]] の値によって以下の値を返します。
 
 : nil
-    0���ٹ����Ϥ��ʤ���
+    0。警告を出力しない。
 : false
-    1�����פʷٹ�Τ߽��Ϥ��롣(�ǥե����)
+    1。重要な警告のみ出力する。(デフォルト)
 : true
-    2�����٤Ƥηٹ����Ϥ��롣
+    2。すべての警告を出力する。
 
-�����ѿ��ˤ������Ǥ��ޤ���
+この変数には代入できません。
 
-�����ѿ��ϥ������Х륹�����פǤ���
+この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 

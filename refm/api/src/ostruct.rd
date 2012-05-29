@@ -1,13 +1,13 @@
-���Ǥ�ưŪ���ɲá�����Ǥ����ڤʹ�¤�Τ��󶡤���饤�֥��Ǥ���
+要素を動的に追加・削除できる手軽な構造体を提供するライブラリです。
 
 = class OpenStruct < Object
 
-���Ǥ�ưŪ���ɲá�����Ǥ����ڤʹ�¤�Τ��󶡤��륯�饹�Ǥ���
+要素を動的に追加・削除できる手軽な構造体を提供するクラスです。
 
-OpenStruct �Υ��󥹥��󥹤��Ф���̤����ʥ᥽�å� x= ��Ƥ֤ȡ�
-OpenStruct ���饹�� [[m:Object#method_missing]] ����ª���졢���Υ��󥹥��󥹤�
-���󥹥��󥹥᥽�å� x, x= ���������ޤ���
-���ε�ư�ˤ�ä����Ǥ�ưŪ���ѹ��Ǥ��빽¤�ΤȤ���Ư���ޤ���
+OpenStruct のインスタンスに対して未定義なメソッド x= を呼ぶと、
+OpenStruct クラスの [[m:Object#method_missing]] で捕捉され、そのインスタンスに
+インスタンスメソッド x, x= が定義されます。
+この挙動によって要素を動的に変更できる構造体として働きます。
 
   require 'ostruct'
   ab = OpenStruct.new
@@ -20,7 +20,7 @@ OpenStruct ���饹�� [[m:Object#method_missing]] ����ª���졢���Υ��󥹥��󥹤�
   p ab.foo          # => nil
   p ab              # => <OpenStruct bar=2>
 
-������˥ϥå������Ѥ��뤳�Ȥ�Ǥ��ޤ���
+初期化にハッシュを使用することもできます。
 
   son = OpenStruct.new({ :name => "Thomas", :age => 3 })
   p son.name        # => "Thomas"
@@ -31,30 +31,30 @@ OpenStruct ���饹�� [[m:Object#method_missing]] ����ª���졢���Υ��󥹥��󥹤�
   p son.items       # => ["candy","toy"]
   p son             # => #<OpenStruct name="Thomas", age=4, items=["candy", "toy"]>
 
-=== �ե꡼������Ƥ��� OpenStruct �ˤĤ���
+=== フリーズされている OpenStruct について
 
-Ruby �ΥС�����󤴤Ȥ˵�ư���ۤʤ�Τ����դ��Ƥ���������
-�ʲ��Υ����ɤ�¹Ԥ������ϡ�ɽ�Τ褦�ˤʤ�ޤ���
+Ruby のバージョンごとに挙動が異なるので注意してください。
+以下のコードを実行した場合は、表のようになります。
 
   require 'ostruct'
   a = OpenStruct.new
   a.x = :a
   a.freeze
-  a.x = :b # ������ʬ�ε�ư���ۤʤ�
+  a.x = :b # この部分の挙動が異なる
 
-  1.8.0 ��������ǽ
+  1.8.0 再代入可能
   1.8.1 TypeError
-  1.8.2 ��������ǽ
-  1.8.3 ��������ǽ
-  1.8.4 ��������ǽ
-  1.8.5 ��������ǽ
-  1.8.6 ��������ǽ
-  1.8.7 ��������ǽ
+  1.8.2 再代入可能
+  1.8.3 再代入可能
+  1.8.4 再代入可能
+  1.8.5 再代入可能
+  1.8.6 再代入可能
+  1.8.7 再代入可能
   1.8.8 TypeError
-  1.9.1 ��������ǽ
+  1.9.1 再代入可能
   1.9.2 TypeError
 
-Ʊ�ͤ˰ʲ��Υ����ɤ�¹Ԥ����������ƤΥС��������㳰��ȯ�����ޤ���
+同様に以下のコードを実行した場合は全てのバージョンで例外が発生します。
 
   require 'ostruct'
   a = OpenStruct.new
@@ -65,13 +65,13 @@ Ruby �ΥС�����󤴤Ȥ˵�ư���ۤʤ�Τ����դ��Ƥ���������
 == Class Methods
 --- new(hash = nil) -> OpenStruct
 
-OpenStruct ���֥������Ȥ��������ޤ���
+OpenStruct オブジェクトを生成します。
 
-�ϥå��夬Ϳ����줿�Ȥ������줾��Υ����������������֥������Ȥ����Ǥˤ����ͤ򥻥åȤ��ޤ���
+ハッシュが与えられたとき、それぞれのキーを生成したオブジェクトの要素にし、値をセットします。
 
-@param hash ���ꤹ�����ǤȤ����ͤ���ꤷ�ޤ���
-       hash �ˤ� [[c:Hash]] ���饹�Υ��󥹥��󥹡��ޤ��������������Ѥ��뤳�Ȥ��Ǥ��ޤ���
-@raise NoMethodError hash �Υ����� to_sym �᥽�åɤ�����ʤ��Ȥ���ȯ�����ޤ���
+@param hash 設定する要素とその値を指定します。
+       hash には [[c:Hash]] クラスのインスタンス、または配列の配列を用いることができます。
+@raise NoMethodError hash のキーが to_sym メソッドを持たないときに発生します。
 
   require 'ostruct'
   some1 = OpenStruct.new({:a =>"a",:b =>"b"}) # => #<OpenStruct b="b", a="a">
@@ -82,19 +82,19 @@ OpenStruct ���֥������Ȥ��������ޤ���
 #@since 1.8.1
 --- ==(other) -> bool
 
-���Ȥ�����оݤΥ��֥������Ȥ����������˿����֤��ޤ���
-�����Ǥʤ����ϡ������֤��ޤ���
+自身と比較対象のオブジェクトが等しい場合に真を返します。
+そうでない場合は、偽を返します。
 
-@param other ����оݤΥ��֥������Ȥ���ꤷ�ޤ���
+@param other 比較対象のオブジェクトを指定します。
 
 #@end
 
 #@since 1.8.2
 --- new_ostruct_member(name) -> Symbol
 
-Ϳ����줿̾���Υ��������᥽�åɤ򼫿Ȥ�������ޤ���
+与えられた名前のアクセサメソッドを自身に定義します。
 
-@param name ʸ���󤫥���ܥ��������륢��������̾������ꤷ�ޤ���
+@param name 文字列かシンボルで定義するアクセサの名前を指定します。
 
 #@end
 
@@ -103,18 +103,18 @@ OpenStruct ���֥������Ȥ��������ޤ���
 --- to_s -> String
 #@end
 
-���֥������Ȥ�ʹ֤��ɤ��������Ѵ�����ʸ������֤��ޤ���
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
 @see [[m:Object#inspect]]
 
 --- delete_field(name) -> object
 
-name�ǻ��ꤵ�줿���Ǥ������ޤ���
+nameで指定された要素を削除します。
 
-���θ夽�����Ǥ򻲾Ȥ����� nil ���֤�ޤ���
+その後その要素を参照したら nil が返ります。
 
-@param name ����������Ǥ�ʸ���󤫥���ܥ�ǻ��ꤷ�ޤ���
-@return ����������Ǥ��ͤ��֤��ޤ���
+@param name 削除する要素を文字列かシンボルで指定します。
+@return 削除前の要素の値を返します。
 
 == Protected Instance Methods
 
@@ -122,11 +122,11 @@ name�ǻ��ꤵ�줿���Ǥ������ޤ���
 #@if (version != "1.9.1")
 --- modifiable -> Hash
 
-���Υ᥽�åɤ�����Ū�˻��Ѥ���ޤ���
+このメソッドは内部的に使用されます。
 
-���Ȥ� [[m:Object#freeze]] ����Ƥ�����ˤ��Υ᥽�åɤ�ƤӽФ����㳰��ȯ�����ޤ���
+自身が [[m:Object#freeze]] されている場合にこのメソッドを呼び出すと例外が発生します。
 
-@raise TypeError ���Ȥ� [[m:Object#freeze]] ����Ƥ������ȯ�����ޤ���
+@raise TypeError 自身が [[m:Object#freeze]] されている場合に発生します。
 
 #@end
 #@end
@@ -137,5 +137,5 @@ name�ǻ��ꤵ�줿���Ǥ������ޤ���
 #@since 1.8.3
 --- InspectKey
 
-����Ū�˻��Ѥ�������Ǥ���
+内部的に使用する定数です。
 #@end

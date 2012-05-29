@@ -2,17 +2,17 @@ require rubygems/command_manager
 require rubygems/config_file
 require rubygems/doc_manager
 
-gem ���ޥ�ɤ�¹Ԥ��뤿��Υ饤�֥��Ǥ���
+gem コマンドを実行するためのライブラリです。
 
 = class Gem::GemRunner
 
-gem ���ޥ�ɤ�¹Ԥ��뤿��Υ��饹�Ǥ���
+gem コマンドを実行するためのクラスです。
 
 == Public Instance Methods
 
 --- run(args) -> ()
 #@todo
 
-Ϳ����줿�����򸵤ˤ��� gem �Υ��ޥ�ɤ�¹Ԥ��ޤ���
+与えられた引数を元にして gem のコマンドを実行します。
 
-@param args ���ޥ�ɥ饤�󤫤�Ϳ����줿��������ꤷ�ޤ���
+@param args コマンドラインから与えられた引数を指定します。

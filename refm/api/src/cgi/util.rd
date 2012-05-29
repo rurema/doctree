@@ -1,5 +1,5 @@
 #@since 1.9.1
-CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+CGI ã§åˆ©ç”¨ã™ã‚‹ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®šç¾©ã—ãŸãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 = reopen CGI
 
@@ -7,11 +7,11 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 #@end
 --- escape(string) -> String
 
-Í¿¤¨¤é¤ì¤¿Ê¸»úÎó¤ò URL ¥¨¥ó¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+ä¸Žãˆã‚‰ã‚ŒãŸæ–‡å­—åˆ—ã‚’ URL ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸæ–‡å­—åˆ—ã‚’æ–°ã—ãä½œæˆã—è¿”ã—ã¾ã™ã€‚
 
-@param string URL ¥¨¥ó¥³¡¼¥É¤·¤¿¤¤Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string URL ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã—ãŸã„æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
         require "cgi"
 
         p CGI.escape('@##')   #=> "%40%23%23"
@@ -23,9 +23,9 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 --- unescape(string) -> String
 
-Í¿¤¨¤é¤ì¤¿Ê¸»úÎó¤ò URL ¥Ç¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+ä¸Žãˆã‚‰ã‚ŒãŸæ–‡å­—åˆ—ã‚’ URL ãƒ‡ã‚³ãƒ¼ãƒ‰ã—ãŸæ–‡å­—åˆ—ã‚’æ–°ã—ãä½œæˆã—è¿”ã—ã¾ã™ã€‚
 
-@param string URL ¥¨¥ó¥³¡¼¥É¤µ¤ì¤Æ¤¤¤ëÊ¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string URL ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã•ã‚Œã¦ã„ã‚‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
         require "cgi"
 
@@ -39,27 +39,27 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 --- escape_html(string) -> String
 #@end
 
-Í¿¤¨¤é¤ì¤¿Ê¸»úÎóÃæ¤Î &"<> ¤ò¼ÂÂÎ»²¾È¤ËÃÖ´¹¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+ä¸Žãˆã‚‰ã‚ŒãŸæ–‡å­—åˆ—ä¸­ã® &"<> ã‚’å®Ÿä½“å‚ç…§ã«ç½®æ›ã—ãŸæ–‡å­—åˆ—ã‚’æ–°ã—ãä½œæˆã—è¿”ã—ã¾ã™ã€‚
 
-@param string Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
         require "cgi"
 
         p CGI.escapeHTML("3 > 1")   #=> "3 &gt; 1"
 
-        print('<script type="text/javascript">alert("·Ù¹ð")</script>')
+        print('<script type="text/javascript">alert("è­¦å‘Š")</script>')
 
-        p CGI.escapeHTML('<script type="text/javascript">alert("·Ù¹ð")</script>')
-        #=> "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;·Ù¹ð&quot;)&lt;/script&gt;"
+        p CGI.escapeHTML('<script type="text/javascript">alert("è­¦å‘Š")</script>')
+        #=> "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;è­¦å‘Š&quot;)&lt;/script&gt;"
 
 --- unescapeHTML(string) -> String
 #@since 1.9.1
 --- unescape_html(string) -> String
 #@end
-Í¿¤¨¤é¤ì¤¿Ê¸»úÎóÃæ¤Î¼ÂÂÎ»²¾È¤Î¤¦¤Á¡¢&amp; &gt; &lt; &quot;
-¤È¿ôÃÍ»ØÄê¤¬¤µ¤ì¤Æ¤¤¤ë¤â¤Î (&#0ffff ¤Ê¤É) ¤ò¸µ¤ÎÊ¸»úÎó¤ËÃÖ´¹¤·¤Þ¤¹¡£
+ä¸Žãˆã‚‰ã‚ŒãŸæ–‡å­—åˆ—ä¸­ã®å®Ÿä½“å‚ç…§ã®ã†ã¡ã€&amp; &gt; &lt; &quot;
+ã¨æ•°å€¤æŒ‡å®šãŒã•ã‚Œã¦ã„ã‚‹ã‚‚ã® (&#0ffff ãªã©) ã‚’å…ƒã®æ–‡å­—åˆ—ã«ç½®æ›ã—ã¾ã™ã€‚
 
-@param string Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
         require "cgi"
 
@@ -69,13 +69,13 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 #@since 1.9.1
 --- escape_element(string, *elements) -> String
 #@end
-ÂèÆó°ú¿ô°Ê¹ß¤Ë»ØÄê¤·¤¿¥¨¥ì¥á¥ó¥È¤Î¥¿¥°¤À¤±¤ò¼ÂÂÎ»²¾È¤ËÃÖ´¹¤·¤Þ¤¹¡£
+ç¬¬äºŒå¼•æ•°ä»¥é™ã«æŒ‡å®šã—ãŸã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã®ã‚¿ã‚°ã ã‘ã‚’å®Ÿä½“å‚ç…§ã«ç½®æ›ã—ã¾ã™ã€‚
 
-@param string Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param elements HTML ¥¿¥°¤ÎÌ¾Á°¤ò°ì¤Ä°Ê¾å»ØÄê¤·¤Þ¤¹¡£Ê¸»úÎó¤ÎÇÛÎó¤Ç»ØÄê¤¹¤ë¤³¤È¤â½ÐÍè¤Þ¤¹¡£
+@param elements HTML ã‚¿ã‚°ã®åå‰ã‚’ä¸€ã¤ä»¥ä¸ŠæŒ‡å®šã—ã¾ã™ã€‚æ–‡å­—åˆ—ã®é…åˆ—ã§æŒ‡å®šã™ã‚‹ã“ã¨ã‚‚å‡ºæ¥ã¾ã™ã€‚
 
-Îã¡§
+ä¾‹ï¼š
         require "cgi"
 
         p CGI.escapeElement('<BR><A HREF="url"></A>', "A", "IMG")
@@ -89,13 +89,13 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 --- unescape_element(string, *elements) -> String
 #@end
 
-ÆÃÄê¤ÎÍ×ÁÇ¤À¤±¤òHTML¥¨¥¹¥±¡¼¥×¤«¤éÌá¤¹¡£
+ç‰¹å®šã®è¦ç´ ã ã‘ã‚’HTMLã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‹ã‚‰æˆ»ã™ã€‚
 
-@param string Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param elements HTML ¥¿¥°¤ÎÌ¾Á°¤ò°ì¤Ä°Ê¾å»ØÄê¤·¤Þ¤¹¡£Ê¸»úÎó¤ÎÇÛÎó¤Ç»ØÄê¤¹¤ë¤³¤È¤â½ÐÍè¤Þ¤¹¡£
+@param elements HTML ã‚¿ã‚°ã®åå‰ã‚’ä¸€ã¤ä»¥ä¸ŠæŒ‡å®šã—ã¾ã™ã€‚æ–‡å­—åˆ—ã®é…åˆ—ã§æŒ‡å®šã™ã‚‹ã“ã¨ã‚‚å‡ºæ¥ã¾ã™ã€‚
 
-Îã¡§
+ä¾‹ï¼š
         require "cgi"
 
         print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', "A", "IMG")
@@ -106,11 +106,11 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 --- rfc1123_date(time) -> String
 
-Í¿¤¨¤é¤ì¤¿»þ¹ï¤ò [[RFC:1123]] ¥Õ¥©¡¼¥Þ¥Ã¥È¤Ë½àµò¤·¤¿Ê¸»úÎó¤ËÊÑ´¹¤·¤Þ¤¹¡£
+ä¸Žãˆã‚‰ã‚ŒãŸæ™‚åˆ»ã‚’ [[RFC:1123]] ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã«æº–æ‹ ã—ãŸæ–‡å­—åˆ—ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@param time [[c:Time]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+@param time [[c:Time]] ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-Îã¡§
+ä¾‹ï¼š
         require "cgi"
 
         CGI.rfc1123_date(Time.now)
@@ -118,13 +118,13 @@ CGI ¤ÇÍøÍÑ¤¹¤ë¥æ¡¼¥Æ¥£¥ê¥Æ¥£¥á¥½¥Ã¥É¤òÄêµÁ¤·¤¿¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 --- pretty(string, shift = "  ") -> String
 
-HTML ¤ò¿Í´Ö¤Ë¸«¤ä¤¹¤¯À°·Á¤·¤·¤¿Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+HTML ã‚’äººé–“ã«è¦‹ã‚„ã™ãæ•´å½¢ã—ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param string HTML ¤ò»ØÄê¤·¤Þ¤¹¡£
+@param string HTML ã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
-@param shift ¥¤¥ó¥Ç¥ó¥È¤Ë»ÈÍÑ¤¹¤ëÊ¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤ÏÈ¾³Ñ¶õÇòÆó¤Ä¤Ç¤¹¡£
+@param shift ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã«ä½¿ç”¨ã™ã‚‹æ–‡å­—åˆ—ã‚’æŒ‡å®šã—ã¾ã™ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯åŠè§’ç©ºç™½äºŒã¤ã§ã™ã€‚
 
-Îã¡§
+ä¾‹ï¼š
         require "cgi"
 
         print CGI.pretty("<HTML><BODY></BODY></HTML>")
@@ -144,7 +144,7 @@ HTML ¤ò¿Í´Ö¤Ë¸«¤ä¤¹¤¯À°·Á¤·¤·¤¿Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- TABLE_FOR_ESCAPE_HTML__ -> Hash
 
-HTML ¾å¤Ç¥¨¥¹¥±¡¼¥×¤¹¤ëÊ¸»úÎó¤ÎÊÑ´¹¥Æ¡¼¥Ö¥ë¤òÊÖ¤·¤Þ¤¹¡£
+HTML ä¸Šã§ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã™ã‚‹æ–‡å­—åˆ—ã®å¤‰æ›ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’è¿”ã—ã¾ã™ã€‚
 
     '&' => '&amp;',
     '"' => '&quot;',
@@ -153,13 +153,13 @@ HTML ¾å¤Ç¥¨¥¹¥±¡¼¥×¤¹¤ëÊ¸»úÎó¤ÎÊÑ´¹¥Æ¡¼¥Ö¥ë¤òÊÖ¤·¤Þ¤¹¡£
 
 --- RFC822_DAYS -> [String]
 
-[[rfc:822]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤ëÍËÆü¤ÎÎ¬¾Î¤òÊÖ¤·¤Þ¤¹¡£
+[[rfc:822]] ã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹æ›œæ—¥ã®ç•¥ç§°ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[rfc:822]]
 
 --- RFC822_MONTHS -> [String]
 
-[[rfc:822]] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤ë·îÌ¾¤ÎÎ¬¾Î¤òÊÖ¤·¤Þ¤¹¡£
+[[rfc:822]] ã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹æœˆåã®ç•¥ç§°ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[rfc:822]]
 

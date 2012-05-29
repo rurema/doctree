@@ -1,18 +1,18 @@
 = trap::CGI
-* ((<CGI#out|cgi/out>)) ╓ои╦╫Ю╫пно╓ь╓н╫пно╓Р╧т╓╓╓ч╓╧╓╛║╒ ((<CGI#header|cgi/header>)) ╓г╓о
-  ╫пно╓Р╧т╓╓╓ч╓╩╓С║ё╓©╓юй╦╩ЗнС╓Рйж╓╧╓ю╓╠╓г╓╧║ё
+* ((<CGI#out|cgi/out>)) Ц│╞Ф╗≥Ф╨√Е┤╨Е┼⌡Ц│╦Ц│╝Е┤╨Е┼⌡Ц┌▓Х║▄Ц│└Ц│╬Ц│≥Ц│▄Ц─│ ((<CGI#header|cgi/header>)) Ц│╖Ц│╞
+  Е┤╨Е┼⌡Ц┌▓Х║▄Ц│└Ц│╬Ц│⌡Ц┌⌠Ц─┌Ц│÷Ц│═Ф√┤Е╜≈Е┬≈Ц┌▓Х©■Ц│≥Ц│═Ц│▒Ц│╖Ц│≥Ц─┌
   
-  ╓╫╓н╓©╓А
+  Ц│²Ц│╝Ц│÷Ц┌│
   
     cgi = CGI.new
     cgi.out({"charset" => "shift_jis"}){
       "<html><head><title>TITLE</title></head><body>BODY</body></html>\r\n"
     }
   
-  ╓ою╣╓╥╓╓нЦ╓г╓╧╓╛
+  Ц│╞Ф╜ёЦ│≈Ц│└Д╬▀Ц│╖Ц│≥Ц│▄
   
     cgi = CGI.new
     cgi.header({"charset" => "shift_jis"})
     print "<html><head><title>TITLE</title></head><body>BODY</body></html>\r\n"
 
-  ╓о╢ж╟Ц╓ц╓©нЦ╓г╓╧║ё
+  Ц│╞И√⌠И│∙Ц│ёЦ│÷Д╬▀Ц│╖Ц│≥Ц─┌

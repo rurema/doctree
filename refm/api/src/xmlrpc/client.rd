@@ -1,6 +1,6 @@
 require xmlrpc/datetime
 
-XML-RPC епещедевеєе╚д╬д┐дсд╬ещеде╓ещеъд╟д╣бг
+XML-RPC уВпуГйуВдуВвуГ│уГИуБоуБЯуВБуБоуГйуВдуГЦуГйуГкуБзуБЩуАВ
 
   require "xmlrpc/client"
   

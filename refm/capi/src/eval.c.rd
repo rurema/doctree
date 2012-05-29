@@ -2,8 +2,8 @@
 
 --- static void assign(VALUE self, NODE *lhs, VALUE val, int pcall)
 
-���դ�ɽ����ʸ�� lhs ���Ф������դ��� val ���������ޤ���
-Proc ���֥������Ȥ�ư������� pcall ���󥼥��Ȥ��ޤ���
+左辺を表す構文木 lhs に対し、右辺の値 val を代入します。
+Proc オブジェクトを起動する場合は pcall を非ゼロとします。
 
 --- static VALUE avalue_to_svalue(VALUE v)
 
@@ -21,12 +21,12 @@ Proc ���֥������Ȥ�ư������� pcall ���󥼥��Ȥ��ޤ���
 
 --- static int blk_orphan(struct BLOCK *data)
 
-data ���������줿 SCOPE ���ޤ��Ϥ��λҤǤϤʤ�
-SCOPE ��ɾ�����Ƥ���Ȥ�����
+data が作成された SCOPE かまたはその子ではない
+SCOPE を評価しているとき真。
 
 --- static VALUE block_pass(VALUE self, NODE *node)
 
-node ��ɾ������ Proc ���֥������Ȥ�����������Ѥߤޤ���
+node を評価して Proc オブジェクトを得、それを積みます。
 
 --- static void bm_mark(struct METHOD *data)
 
@@ -34,16 +34,16 @@ node ��ɾ������ Proc ���֥������Ȥ�����������Ѥߤޤ���
 
 --- static VALUE call_cfunc(VALUE (*func)(), VALUE recv, int len, int argc, VALUE *argv)
 
-C ��������줿�᥽�åɤε�ư�˺ݤ������Τδؿ� func ��ƤӽФ��ޤ���
+C で定義されたメソッドの起動に際し、実体の関数 func を呼び出します。
 
 --- static void call_end_proc(VALUE data)
 
-ɾ����ץ���������λ����Ȥ���
-END ʸ����Ͽ���줿 Proc ���֥������� data ��ư���ޤ���
+評価器プロセスが終了するとき、
+END 文で登録された Proc オブジェクト data を起動します。
 
 --- static void call_trace_func(char *event, NODE *pos, VALUE self, ID id, VALUE klass)
 
-ɾ�����ư���եå������³�� trace_func ��ɾ�����ޤ���
+評価器の動作をフックする手続き trace_func を評価します。
 
 --- static VALUE catch_i(ID tag)
 
@@ -51,40 +51,40 @@ END ʸ����Ͽ���줿 Proc ���֥������� data ��ư���ޤ���
 
 --- static NODE *compile(VALUE src, char *file, int line)
 
-Ruby ��ʸ����ޤ��� IO ���֥������� src ��
-��ʸ�ڤ˥���ѥ��뤷���֤��ޤ������ΤȤ���src ��
-�ե����� file �� line ���ܤ���ϤޤäƤ���Ȳ��ꤷ�ޤ���
+Ruby の文字列または IO オブジェクト src を
+構文木にコンパイルし、返します。そのとき、src が
+ファイル file の line 行目から始まっていると仮定します。
 
 --- static void compile_error(const char *at)
 
 --- static void copy_fds(fd_set *dst, fd_set *src, int max)
 
-fd_set src �� dst �˥��ԡ����ޤ���
-max �� select(2) ����������Ʊ����̣�Ǥ���
+fd_set src を dst にコピーします。
+max は select(2) の第一引数と同じ意味です。
 
 --- static NODE *copy_node_scope(NODE *node, VALUE rval)
 
-node ����Ƭ�ˤĤ��Ƥ���Ϥ��Ρ�
-���������ѿ��������פ��Ѥि��ξ�����Ǽ�����Ρ��� NODE_SCOPE ��
-���ԡ������֤��ޤ������ΤȤ� nd_rval �� rval ���Ǽ���ޤ���
+node の先頭についているはずの、
+ローカル変数スコープを積むための情報を格納したノード NODE_SCOPE を
+コピーして返します。そのとき nd_rval に rval を格納します。
 
 --- static VALUE cvar_cbase(void)
 
-���ߤΥ���ƥ����Ȥǡ����饹�ѿ���õ���ε����Ȥʤ�⥸�塼����֤��ޤ���
+現在のコンテキストで、クラス変数の探索の起点となるモジュールを返します。
 
 --- static inline void dvar_asgn(ID id, VALUE value)
 
-���ߤΥ��������ѿ������������¸�ߤ���Ϥ���
-�֥��å����������ѿ� id �� value ���������ޤ���
+現在のローカル変数スコープ中に存在するはずの
+ブロックローカル変数 id に value を代入します。
 
 --- static inline void dvar_asgn_curr(ID id, VALUE value)
 
-���ߤΥ֥��å����������ѿ��������פ�¸�ߤ���Ϥ���
-�֥��å����������ѿ� id �� value ���������ޤ���
+現在のブロックローカル変数スコープに存在するはずの
+ブロックローカル変数 id に value を代入します。
 
 --- static void dvar_asgn_internal(ID id, VALUE value, int curr)
 
-dvar_asgn �� dvar_asgn_curr ������ؿ��Ǥ���
+dvar_asgn と dvar_asgn_curr の補助関数です。
 
 --- static VALUE errat_getter(ID id)
 
@@ -100,22 +100,22 @@ dvar_asgn �� dvar_asgn_curr ������ؿ��Ǥ���
 
 --- static VALUE ev_const_defined(NODE *cref, ID id, VALUE self)
 
-���Υ��饹�� cref �� self �� self �ΤȤ���
-��� id ���������Ƥ����鿿��
+外のクラスが cref で self が self のとき、
+定数 id が定義されていたら真。
 
 --- static VALUE ev_const_get(NODE *cref, ID id, VALUE self)
 
-���Υ��饹�� cref �� self �� self �Ȥ���
-��� id �򻲾Ȥ��ޤ���
+外のクラスが cref で self が self として
+定数 id を参照します。
 
 --- static VALUE eval(VALUE self, VALUE src, VALUE scope, char *file, int line)
 
-eval �μ��Ρ�ʸ���� src ��ɾ�����ޤ���
-���ΤȤ��軰���� scope �� nil �Ǥʤ����
-���Υ���ƥ����Ȥθ���ɾ�����ޤ���
+eval の実体。文字列 src を評価します。
+そのとき第三引数 scope が nil でなければ
+そのコンテキストの元で評価します。
 
-�ޤ� src �򥳥�ѥ��뤹��Ȥ���
-�ե����� file �� line ���ܤ����֤���Ƥ���Ȳ��ꤷ�ޤ���
+また src をコンパイルするとき、
+ファイル file の line 行目に配置されていると仮定します。
 
 --- static VALUE eval_node(VALUE self, NODE *node)
 
@@ -129,7 +129,7 @@ eval �μ��Ρ�ʸ���� src ��ɾ�����ޤ���
 
 --- static void frame_dup(struct FRAME *frame)
 
-frame �Ȥ��ο� FRAME ���Ƥ򥹥��å�����ҡ��פ˳�����Ƥʤ����ޤ���
+frame とその親 FRAME 全てをスタックからヒープに割り当てなおします。
 
 --- static VALUE get_backtrace(VALUE info)
 
@@ -147,8 +147,8 @@ frame �Ȥ��ο� FRAME ���Ƥ򥹥��å�����ҡ��פ˳�����Ƥʤ����ޤ���
 
 --- static char *is_defined(VALUE self, NODE *node, char *buf)
 
-node �� self = self ��ɾ�������Ȥ��ͤ�����줽����
-���Ǥ���С�node �μ��̤�ɽ��ʸ������֤��ޤ���
+node を self = self で評価したとき値が得られそうな
+式であれば、node の種別を表す文字列を返します。
 
 --- static void jump_tag_but_local_jump(int state)
 
@@ -180,7 +180,7 @@ node �� self = self ��ɾ�������Ȥ��ͤ�����줽����
 
 --- static VALUE module_setup(VALUE module, NODE *n)
 
-module ���������⥸�塼��ʸ������ n ��ɾ�����ޤ���
+module を定義するモジュール文の本体 n を評価します。
 
 --- static VALUE mproc(void)
 
@@ -192,8 +192,8 @@ module ���������⥸�塼��ʸ������ n ��ɾ�����ޤ���
 
 --- static void print_undef(VALUE klass, ID id)
 
-���饹 klass �˥᥽�å� id �����դ���ʤ� (undefined) ���Ȥ�
-�Ф��륨�顼��å������� stderr �˽��Ϥ��ޤ���
+クラス klass にメソッド id が見付からない (undefined) ことに
+対するエラーメッセージを stderr に出力します。
 
 --- static VALUE proc_arity(VALUE proc)
 
@@ -207,17 +207,17 @@ module ���������⥸�塼��ʸ������ n ��ɾ�����ޤ���
 
 --- static VALUE proc_invoke(VALUE proc, VALUE args, int pcall, VALUE self)
 
-Proc ���֥������� proc ��ư���ޤ������ΤȤ�
-������ args �Ȥ���self �� self �ˤ��ޤ���
+Proc オブジェクト proc を起動します。そのとき
+引数を args とし、self を self にします。
 
 --- static VALUE proc_new(VALUE klass)
 
-ɾ����Τ��λ����ǤΥ��ʥåץ���åȤ���¸����
-Proc ���֥������Ȥ��������ޤ������饹�� klass �ˤ��ޤ���
+評価器のその時点でのスナップショットを保存する
+Proc オブジェクトを生成します。クラスを klass にします。
 
 --- static VALUE proc_s_new(int argc, VALUE *argv, VALUE klass)
 
-Proc.new �μ��Ρ�
+Proc.new の実体。
 
 --- static void proc_save_safe_level(VALUE data)
 
@@ -229,22 +229,22 @@ Proc.new �μ��Ρ�
 
 --- static VALUE proc_yield(VALUE proc, VALUE args)
 
-Proc.yield �μ��Ρ�
+Proc.yield の実体。
 
 --- void rb_add_method(VALUE klass, ID mid, NODE *node, int noex)
 
-���饹 klass �� mid �Ȥ���̾���Υ᥽�åɤ�������롣
-�������Τ� node �Ǥ��ꡢnoex �Ǽ������Ļ�������ġ�
+クラス klass に mid という名前のメソッドを定義する。
+その本体は node であり、noex で示される可視性を持つ。
 
 --- void rb_alias(VALUE klass, ID name, ID def)
 
-���饹 klass ��������줿�᥽�å� name ��
-���Τ���ΤȤ��뿷�����᥽�å� def ��������ޤ���
+クラス klass に定義されたメソッド name の
+本体を実体とする新しいメソッド def を定義します。
 
 --- VALUE rb_apply(VALUE recv, ID mid, VALUE args)
 
-���֥������� recv �Υ᥽�å� mid ��
-���� args �ȤȤ�˸ƤӽФ��ޤ���
+オブジェクト recv のメソッド mid を
+引数 args とともに呼び出します。
 
 --- void rb_attr(VALUE klass, ID id, int read, int write, int ex)
 
@@ -252,48 +252,48 @@ Proc.yield �μ��Ρ�
 
 --- int rb_block_given_p(void)
 
-�᥽�åɤ��֥��å��դ��ǸƤФ�Ƥ���� Qtrue ���֤��ޤ���
+メソッドがブロック付きで呼ばれていれば Qtrue を返します。
 
 --- static VALUE rb_call(VALUE klass, VALUE recv, ID mid, int argc, const VALUE *argv, int scope)
 
-���饹 klass ��������줿�᥽�å� mid ��ƤӽФ��ޤ���
-�쥷���Ф� recv �ǡ�������Ĺ�� argc ������ argv ���Ϥ��ޤ���
+クラス klass に定義されたメソッド mid を呼び出します。
+レシーバは recv で、引数は長さ argc の配列 argv で渡します。
 
-scope �ϰʲ��Τ褦�˸ƤӽФ��η����򼨤��ޤ���
+scope は以下のように呼び出しの形式を示します。
 
 : 0
-    obj.method()   (private/protected �᥽�åɤ�Ƥ٤ʤ�)
+    obj.method()   (private/protected メソッドを呼べない)
 : 1
-    method()       (private/protected �᥽�åɤ�Ƥ٤�)
+    method()       (private/protected メソッドも呼べる)
 : 2
-    method_or_lvar (1�Ȥϥ��顼��å��������Ѥ��)
+    method_or_lvar (1とはエラーメッセージが変わる)
 : 3
     super
 
 --- static VALUE rb_call0(VALUE klass, VALUE recv, ID id, int argc, VALUE *argv, NODE *body, int nosuper)
 
-���饹 klass ��������줿�᥽�åɤΥ����� body ��ư���ޤ���
-�쥷���Ф� recv �ǡ�������Ĺ�� argc ������ argv ���Ϥ��ޤ���
-nosuper ���󥼥��ΤȤ��ϡ����θƤӽФ���� super �����顼�ˤʤ�ޤ���
+クラス klass に定義されたメソッドのコード body を起動します。
+レシーバは recv で、引数は長さ argc の配列 argv で渡します。
+nosuper が非ゼロのときは、この呼び出し中の super がエラーになります。
 
 --- VALUE rb_call_super(int argc, const VALUE *argv)
 
-Ruby��٥�Ǥ� super �Ǥ���
-����ɾ����Υ᥽�åɤΥ����ѡ����饹�Υ᥽�åɤ�ƤӽФ��ޤ���
+Rubyレベルでの super です。
+現在評価中のメソッドのスーパークラスのメソッドを呼び出します。
 
 --- static VALUE rb_callcc(VALUE self)
 
-Continuation ���֥������Ȥ��������ޤ���
+Continuation オブジェクトを生成します。
 
 --- VALUE rb_catch(const char *tag, VALUE (*proc)(), VALUE data)
 
-catch ��Ʊ����ư���¹Ԥ��ޤ���
+catch と同等の動作を実行します。
 
-�ޤ� proc �ˡ�yield ���줿�ͤ� data ���Ϥ��Ƽ¹Ԥ��ޤ���
-��������� tag �� throw ���줿�� rb_catch ���Τ�λ���ޤ���
+まず proc に、yield された値と data を渡して実行します。
+その途中で tag が throw されたら rb_catch 全体を終了します。
 
-throw ��ȯ���������Ϥ����ͤ��֤��ޤ���
-throw ��ȯ�����ʤ��ä��Ȥ��� proc ���֤��ͤ��֤��ޤ���
+throw が発生した場合はその値を返します。
+throw が発生しなかったときは proc の返り値を返します。
 
   static VALUE
   foo_yield(VALUE a, VALUE b)
@@ -323,38 +323,38 @@ throw ��ȯ�����ʤ��ä��Ȥ��� proc ���֤��ͤ��֤��ޤ���
 
 --- void rb_check_safe_str(VALUE x)
 
-�ޥ��� Check_SafeStr �����ΤǤ���
+マクロ Check_SafeStr の本体です。
 
-���� API �� obsolete �Ǥ���
-SafeStringValue() ��ȤäƤ���������
+この API は obsolete です。
+SafeStringValue() を使ってください。
 
 --- void rb_clear_cache(void)
 
-�᥽�åɥ���å���򤹤٤ƾõ�ޤ���
+メソッドキャッシュをすべて消去します。
 
 --- static void rb_clear_cache_by_class(VALUE klass)
 
-�᥽�åɥ��㥷�夫�� klass ���饹�Υ᥽�åɤ�
-����å��奨��ȥ��õ�ޤ���
+メソッドキャシュから klass クラスのメソッドの
+キャッシュエントリを消去します。
 
 --- static void rb_clear_cache_by_id(ID id)
 
-�᥽�åɥ��㥷�夫�� id �Ȥ���̾���Υ᥽�åɤ�
-����å��奨��ȥ�����ƾõ�ޤ���
+メソッドキャシュから id という名前のメソッドの
+キャッシュエントリを全て消去します。
 
 --- static VALUE rb_cont_call(int argc, VALUE *argv, VALUE cont)
 
-Continuation#call �μ��Ρ�
+Continuation#call の実体。
 
 --- void rb_disable_super(VALUE klass, const char *name)
 
-���饹 klass �Υ᥽�å� name ����� super ��ػߤ��ޤ���
-klass �Ȥ��Υ����ѡ����饹�� name �Ȥ����᥽�åɤ����
-����Ƥ��ʤ��Ȥ����㳰 NameError ��ȯ�����ޤ���
+クラス klass のメソッド name からの super を禁止します。
+klass とそのスーパークラスで name というメソッドが定義
+されていないときは例外 NameError を発生します。
 
 --- VALUE rb_dvar_curr(ID id)
 
-���ߤΥ֥��å����������ѿ��������פ� id �򻲾Ȥ��ޤ���
+現在のブロックローカル変数スコープで id を参照します。
 
 --- VALUE rb_dvar_defined(ID id)
 
@@ -362,60 +362,60 @@ klass �Ȥ��Υ����ѡ����饹�� name �Ȥ����᥽�åɤ����
 
 --- VALUE rb_dvar_ref(ID id)
 
-���ߤΥ��������ѿ��������פ� id �򻲾Ȥ��ޤ���
+現在のローカル変数スコープで id を参照します。
 
 --- void rb_enable_super(VALUE klass, const char *name)
 
-���饹 klass �Υ᥽�å� name ����� super ����Ĥ��ޤ���
-klass �Ȥ��Υ����ѡ����饹�� name �Ȥ����᥽�åɤ����
-����Ƥ��ʤ��Ȥ����㳰 NameError ��ȯ�����ޤ���
+クラス klass のメソッド name からの super を許可します。
+klass とそのスーパークラスで name というメソッドが定義
+されていないときは例外 NameError を発生します。
 
 --- VALUE rb_ensure(VALUE (*body)(), VALUE data1, VALUE (*ensure)(), VALUE data2)
 
-ensure �� C �ǤǤ����ޤ� body(data1) ��¹Ԥ������������
-�㳰�� exit ���������Ȥ��Ƥ� ensure(data2) ���μ¤�
-�¹Ԥ���ޤ� ( body() �����ｪλ���Ƥ�¹Ԥ���ޤ�)��
+ensure の C 版です。まず body(data1) を実行し、その途中で
+例外や exit が起きたとしても ensure(data2) が確実に
+実行されます ( body() が正常終了しても実行されます)。
 
 --- static VALUE rb_eval(VALUE self, NODE *n)
 
-��ʸ�� n �� self = self �Τ�Ȥ�ɾ�����ޤ���
+構文木 n を self = self のもとで評価します。
 
 --- VALUE rb_eval_cmd(VALUE cmd, VALUE arg, int tcheck)
 
 --- VALUE rb_eval_string(const char *str)
 
-str �� Ruby �ץ������Ȥ��ƥ���ѥ��롦ɾ������
-�����ͤ��֤��ޤ���
+str を Ruby プログラムとしてコンパイル・評価し、
+その値を返します。
 
 --- VALUE rb_eval_string_protect(const char *str, int *state)
 
-str �� Ruby �ץ������Ȥ��ƥ���ѥ��롦ɾ������
-�����ͤ��֤��ޤ���
+str を Ruby プログラムとしてコンパイル・評価し、
+その値を返します。
 
-����ѥ�����ޤ���ɾ������㳰��ޤ����æ�Ф�ȯ���������ϡ�
-state �� NULL �Ǥʤ���Ф�����ͤ��������� Qnil ���֤��ޤ���
+コンパイル中または評価中に例外を含む大域脱出が発生した場合は、
+state が NULL でなければそれに値が代入され Qnil を返します。
 
 --- VALUE rb_eval_string_wrap(const char *str, int *state)
 
-[[f:rb_eval_string_protect]] ��Ʊ���Ǥ�����������ץȤ�ɾ����
-̵̾�Υ⥸�塼��Τ�ȤǹԤ��ޤ���
+[[f:rb_eval_string_protect]] と同じですが，スクリプトの評価を
+無名のモジュールのもとで行います。
 
 --- void rb_exc_fatal(VALUE err)
 
-�㳰���֥������� err �� fatal �Ȥ����ꤲ�ޤ���
+例外オブジェクト err を fatal として投げます。
 
 --- void rb_exc_raise(VALUE err)
 
-�㳰���֥������� err ���ꤲ�ޤ���
+例外オブジェクト err を投げます。
 
 --- void rb_exec_end_proc(void)
 
-END �֥��å������ Kernel#at_exit ����Ͽ���� Proc ���֥������Ȥ�
-�¹Ԥ��ޤ���
+END ブロックおよび Kernel#at_exit で登録した Proc オブジェクトを
+実行します。
 
 --- void rb_exit(int status)
 
-���ơ����� status �ǥ��󥿥ץ꥿��λ�����ޤ���
+ステータス status でインタプリタを終了させます。
 
 --- static void rb_export_method(VALUE klass, ID name, ID noex)
 
@@ -429,9 +429,9 @@ END �֥��å������ Kernel#at_exit ����Ͽ���� Proc ���֥������Ȥ�
 
 --- static VALUE rb_f_block_given_p(void)
 
-block_given? �μ��Ρ�
-����ɾ����� (Ruby �Ǽ������줿) �᥽�åɤ��Ф���
-�֥��å���Ϳ�����Ƥ����鿿��
+block_given? の実体。
+現在評価中の (Ruby で実装された) メソッドに対して
+ブロックが与えられていたら真。
 
 --- static VALUE rb_f_caller(int argc, VALUE *argv)
 
@@ -445,17 +445,17 @@ block_given? �μ��Ρ�
 
 --- VALUE rb_f_lambda(void)
 
-ruby_block ��ü�� BLOCK ���� Proc ���֥������Ȥ���������֤��ޤ���
+ruby_block 先端の BLOCK から Proc オブジェクトを作成し、返します。
 
 --- static VALUE rb_f_load(int argc, VALUE *argv)
 
-load �μ��Ρ�
+load の実体。
 
 --- static VALUE rb_f_local_variables(void)
 
 --- static VALUE rb_f_loop(void)
 
-loop �μ��Ρ��ʱ�� yield �򷫤��֤��ޤ���
+loop の実体。永遠に yield を繰り返します。
 
 --- static VALUE rb_f_missing(int argc, VALUE *argv, VALUE obj)
 
@@ -463,8 +463,8 @@ loop �μ��Ρ��ʱ�� yield �򷫤��֤��ޤ���
 
 --- VALUE rb_f_require(VALUE obj, VALUE fname)
 
-require �μ��Ρ�
-self == obj �Ȥ��� fname �� require ���ޤ���
+require の実体。
+self == obj として fname を require します。
 
 --- static VALUE rb_f_send(int argc, VALUE *argv, VALUE recv)
 
@@ -474,101 +474,101 @@ self == obj �Ȥ��� fname �� require ���ޤ���
 
 --- ID rb_frame_last_func(void)
 
-���߸ƤӽФ���� (Ruby�Ǽ������줿) �᥽�åɤθƤӽФ�̾���֤��ޤ���
+現在呼び出し中の (Rubyで実装された) メソッドの呼び出し名を返します。
 
 --- void rb_frozen_class_p(VALUE klass)
 
 --- VALUE rb_funcall(VALUE recv, ID name, int nargs, ...)
 
-recv ���Ф��ƥ᥽�å� name ��ƤӤ�����
-�᥽�åɤ��֤��ͤ��֤��ޤ����ץ饤�١��ȥ᥽�åɤ�
-�ƤӤ����ޤ���
+recv に対してメソッド name を呼びだし、
+メソッドの返り値を返します。プライベートメソッドも
+呼びだせます。
 
-�᥽�åɤؤΰ�������Ͱ����ʹߤˤ����������ο��� nargs
-�˻��ꤷ�ޤ������������Ϥ��٤� VALUE �Ǥʤ����
-�����ޤ���
+メソッドへの引数は第四引数以降にあたえ、その数を nargs
+に指定します。それら引数はすべて VALUE でなければ
+いけません。
 
 --- VALUE rb_funcall2(VALUE recv, ID name, int nargs, VALUE *args)
 
-recv ���Ф��ƥ᥽�å� name ��ƤӤ�����
-�᥽�åɤ��֤��ͤ��֤��ޤ����ץ饤�١��ȥ᥽�åɤ�
-�ƤӤ����ޤ���
+recv に対してメソッド name を呼びだし、
+メソッドの返り値を返します。プライベートメソッドも
+呼びだせます。
 
-�᥽�åɤؤΰ����� VALUE ������Ȥ�����Ͱ����ˤ�������
-����Ĺ���� nargs �˻��ꤷ�ޤ���
+メソッドへの引数は VALUE の配列として第四引数にあたえ、
+その長さを nargs に指定します。
 
 --- VALUE rb_funcall3(VALUE recv, ID mid, int argc, const VALUE *argv)
 
-recv ���Ф��ƥ᥽�å� name ��ƤӤ�����
-�᥽�åɤ��֤��ͤ��֤��ޤ���
+recv に対してメソッド name を呼びだし、
+メソッドの返り値を返します。
 
-�᥽�åɤؤΰ����� VALUE ������Ȥ�����Ͱ����ˤ�������
-����Ĺ���� nargs �˻��ꤷ�ޤ���
+メソッドへの引数は VALUE の配列として第四引数にあたえ、
+その長さを nargs に指定します。
 
-rb_funcall2 �Ȥΰ㤤�ϡ��ץ饤�١��ȥ᥽�åɤ�ƤӽФ��ʤ����ȤǤ���
+rb_funcall2 との違いは、プライベートメソッドを呼び出せないことです。
 
 --- void rb_gc_mark_threads(void)
 
-¸�ߤ��륹��å����Ƥ�ޡ������ޤ���
+存在するスレッド全てをマークします。
 
 --- static NODE *rb_get_method_body(VALUE *klassp, ID *idp, int *noexp)
 
-���饹 klass ���� id �Ȥ���̾���Υ᥽�åɥ���ȥ�򸡺����롣
-���դ��ä��餽�����ΤǤ��빽ʸ�ڤ��֤������դ���ʤ����
-NULL ���֤���
+クラス klass から id という名前のメソッドエントリを検索する。
+見付かったらその本体である構文木を返す。見付からなければ
+NULL を返す。
 
-������̤򥭥�å��夹�롣
+検索結果をキャッシュする。
 
 --- void rb_interrupt(void)
 
 --- void rb_iter_break(void)
 
-break �� C �ѥ��󥿡��ե������Ǥ���
-����ɾ����Υ֥��å�����ȴ���ޤ���
+break の C 用インターフェイスです。
+現在評価中のブロックから抜けます。
 
-��ɽŪ�ˤϡ�rb_iterate �� block_proc ��ǻȤ��ޤ���
+代表的には、rb_iterate の block_proc 中で使います。
 
 --- VALUE rb_iterate(VALUE (*call_proc)(), VALUE date1, VALUE (*block_proc)(), date2)
 
-�֥��å��դ��᥽�å�(���ƥ졼��)�ƤӽФ���Ԥ��ؿ��Ǥ���
+ブロック付きメソッド(イテレータ)呼び出しを行う関数です．
 
-�ޤ� call_proc(data1) ��¹Ԥ��ޤ��������Ƥ��δؿ���
-����ľ���Υ᥽�åɤ� yield ��ȯ������Ȱʲ����¹Ԥ���ޤ���
+まず call_proc(data1) を実行します。そしてその関数か
+その直下のメソッドで yield が発生すると以下が実行されます。
 
     block_proc(VALUE block_arg, VALUE data2, VALUE self)
 
-block_arg �ϥ֥��å�����(ʣ���ʤ���������äƤ���)��
-data2 �� rb_iterate() ���Ϥ�����Ρ�
-self �� block_proc �ƤӽФ������Ǥ� self �Ǥ���
+block_arg はブロック引数(複数なら配列に入っている)、
+data2 は rb_iterate() に渡したもの、
+self は block_proc 呼び出し時点での self です。
 
 --- int rb_iterator_p()
 
-���δؿ���obsolete�Ǥ���[[f:rb_block_given_p]] ����Ѥ��Ƥ���������
+この関数はobsoleteです。[[f:rb_block_given_p]] を使用してください。
 
 --- void rb_jump_tag(int tag)
 
-���: [[ruby-dev:4064]]
+初出: [[ruby-dev:4064]]
 
 [[f:rb_load_protect]],[[f:rb_eval_string_protect]],[[f:rb_protect]]
-�ʤɤ���ª�������æ�Ф���������ޤ���
+などで捕捉した大域脱出を再生成します。
 
-tag�ˤϾ嵭�ؿ��ΰ����Ǽ�����ä�state����ꤷ�ޤ���
+tagには上記関数の引数で受け取ったstateを指定します。
 
 --- void rb_load(VALUE fname, int wrap)
 
-����: [[ruby-list:21651]]
+参考: [[ruby-list:21651]]
 
-((<load|�ȹ��ߴؿ�>))�����٥륤�󥿥ե������Ǥ���Ruby�������
-�Ȥ���Ǽ���줿�ե�����fname ������ɤ��ޤ���
+((<load|組込み関数>))の低レベルインタフェースです。Rubyスクリプ
+トが格納されたファイルfname をロードします。
 
-����wrap����non-zero�ʤ�̵̾�Υ⥸�塼����������ơ�����
-�ɤ������Ƥ򤽤Υ⥸�塼����Ĥ�����ޤ����Ĥ������Τ�
+引数wrapが、non-zeroなら無名のモジュールを生成して、ロー
+ドした内容をそのモジュールに閉じ込めます。閉じ込めるのは
 
-  * ���
-  * ���饹���⥸�塼��
-  * �ȥåץ�٥�᥽�å�
+  * 定数
+  * クラス、モジュール
+  * トップレベルメソッド
 
-�Ǥ����������Х��ѿ����ѹ��ʤɤ��Ĥ�������ޤ���
+です。グローバル変数の変更などは閉じ込められません。
 
 --- void rb_load_protect(VALUE fname, int wrap, int *state)
 
@@ -596,7 +596,7 @@ tag�ˤϾ嵭�ؿ��ΰ����Ǽ�����ä�state����ꤷ�ޤ���
 
 --- VALUE rb_mod_module_eval(int argc, VALUE *argv, VALUE mod)
 
-Module#module_eval �μ��ΤǤ���
+Module#module_eval の実体です。
 
 --- static VALUE rb_mod_nesting(void)
 
@@ -612,11 +612,11 @@ Module#module_eval �μ��ΤǤ���
 
 --- static VALUE rb_mod_remove_method(VALUE mod, VALUE name)
 
-Module#remove_method �μ��Ρ�
+Module#remove_method の実体。
 
-�⥸�塼�� mod ���� name �Ȥ���̾���Υ᥽�åɤ�
-������������ȥ�������ޤ������դ���ʤ��ä��Ȥ���
-�㳰 [[c:NameError]] ��ȯ�����ޤ���
+モジュール mod から name という名前のメソッドを
+検索し、エントリを削除します。見付からなかったときは
+例外 [[c:NameError]] が発生します。
 
 --- static VALUE rb_mod_s_constants(void)
 
@@ -624,9 +624,9 @@ Module#remove_method �μ��Ρ�
 
 --- void rb_obj_call_init(VALUE obj, int argc, VALUE *argv)
 
-���֥������� obj ���Ф��� initialize ��ƤӽФ��ޤ���
-������Ĺ�� argc ������ argv ��ɽ���졢
-�֥��å����Ѥ�Ǥ�����Ϥ���⼫ưŪ���Ϥ���ޤ���
+オブジェクト obj に対して initialize を呼び出します。
+引数は長さ argc の配列 argv で表され、
+ブロックが積んである場合はそれも自動的に渡されます。
 
 --- static VALUE rb_obj_extend(int argc, VALUE *argv, VALUE obj)
 
@@ -634,11 +634,11 @@ Module#remove_method �μ��Ρ�
 
 --- static VALUE rb_obj_is_block(VALUE block)
 
-proc �� Proc �ޤ��� Binding �Υ��󥹥��󥹤Ǥ���п���
+proc が Proc または Binding のインスタンスであれば真。
 
 --- static VALUE rb_obj_is_proc(VALUE proc)
 
-proc �� Proc �Υ��󥹥��󥹤Ǥ���п���
+proc が Proc のインスタンスであれば真。
 
 --- static VALUE rb_obj_method(VALUE obj, VALUE vid)
 
@@ -651,19 +651,19 @@ VALUE val;
 
 --- VALUE rb_protect(VALUE (*proc)(), VALUE data, int *state)
 
-���: [[ruby-dev:4064]]
+初出: [[ruby-dev:4064]]
 
-proc(data) ��ɾ����Τ��������æ��(�㳰��ޤ�)����ª���ޤ���
+proc(data) を評価中のあらゆる大域脱出(例外を含む)を捕捉します。
 
   val = rb_protect(func, arg, &status);
   if (status != 0) {
-      puts("���æ�Ф�������");
+      puts("大域脱出が起きた");
       rb_jump_tag(status);
   }
 
 --- void rb_provide(const char *feature)
 
-�饤�֥�� feature ������ɤ�����ΤȤ��ƥ��å��򤫤��ޤ���
+ライブラリ feature をロードしたものとしてロックをかけます。
 
 --- static void rb_provide_feature(VALUE feature)
 
@@ -671,48 +671,48 @@ proc(data) ��ɾ����Τ��������æ��(�㳰��ޤ�)����ª���ޤ���
 
 --- void rb_remove_method(VALUE klass, const char *name)
 
-���饹 klass ���Τ���Ͽ����Ƥ��� name �Ȥ���̾���Υ᥽�åɤ�
-������������ȥ�������ޤ���
-���դ���ʤ��ä��Ȥ����㳰 NameError ��ȯ�����ޤ���
+クラス klass 自体に登録されている name という名前のメソッドを
+検索し、エントリを削除します。
+見付からなかったときは例外 NameError を発生します。
 
 --- VALUE rb_require(const char *fname)
 
-require �� C �ǤǤ���feature��fname�פ�����ɤ��ޤ���
+require の C 版です。feature「fname」をロードします。
 
 --- VALUE rb_rescue(VALUE (*b_proc)(), VALUE data1, VALUE (*r_proc)(), VALUE data2)
 
-�ޤ� b_proc(data1) ��¹Ԥ�������������㳰��ȯ�������� r_proc(data2) ��¹Ԥ��ޤ���
-��ª�����㳰�� [[c:StandardError]] �Υ��֥��饹�����Ǥ���
+まず b_proc(data1) を実行し、その途中で例外が発生したら r_proc(data2) を実行します。
+捕捉する例外は [[c:StandardError]] のサブクラスだけです。
 
 --- VALUE rb_rescue2(VALUE (*b_proc)(), VALUE data1, VALUE (*r_proc)(), VALUE data2, ...)
 
-�ޤ� b_proc(data1) ��¹Ԥ�������������㳰��ȯ�������� r_proc(data2) ��¹Ԥ��ޤ���
-��ް����ʹߤβ���Ĺ��������ª�������㳰���饹�Υꥹ�Ȥ���ꤷ�ޤ���
-�����κǸ�� NULL �ǽ���ʤ���Фʤ�ޤ���
+まず b_proc(data1) を実行し、その途中で例外が発生したら r_proc(data2) を実行します。
+第五引数以降の可変長引数に捕捉したい例外クラスのリストを指定します。
+引数の最後は NULL で終らなければなりません。
 
 --- int rb_respond_to(VALUE obj, ID id)
 
-obj �˥᥽�å� id ���������Ƥ���Ȥ�����
-�ץ饤�١��ȥ᥽�åɤ��Ф��Ƥ⿿���֤��ޤ���
+obj にメソッド id が定義されているとき真。
+プライベートメソッドに対しても真を返します。
 
 --- void rb_secure(int level)
 
-���ߤΥ����ե�٥뤬 level �ʾ�ΤȤ���
-�㳰 SecurityError ��ȯ�����ޤ���
+現在のセーフレベルが level 以上のとき、
+例外 SecurityError を発生します。
 
 --- void rb_set_end_proc(void (*func)(VALUE), VALUE data)
 
 --- void rb_set_safe_level(int level)
 
-�����ե�٥�� level �˾夲�ޤ���
-level �����ߤΥ����ե�٥����㤤����
-�㳰 SecurityError ��ȯ�����ޤ���
+セーフレベルを level に上げます。
+level が現在のセーフレベルより低い場合は
+例外 SecurityError が発生します。
 
 --- VALUE *rb_svar(int cnt)
 
-���ߤ� SCOPE �ǥ��������ѿ�ID�� cnt �Ǥ����ѿ���
-�ΰ�ؤΥݥ��󥿤��֤��ޤ������ [[m:$_]] (cnt=0) �� [[m:$~]] (cnt=1) ��
-�����������뤿��˻Ȥ��ޤ���
+現在の SCOPE でローカル変数IDが cnt である変数の
+領域へのポインタを返します。主に [[m:$_]] (cnt=0) と [[m:$~]] (cnt=1) に
+アクセスするために使われます。
 
 --- static VALUE rb_thread_abort_exc(VALUE thread)
 
@@ -724,7 +724,7 @@ level �����ߤΥ����ե�٥����㤤����
 
 --- int rb_thread_alone(void)
 
-ɾ����˥���åɤ���Ĥ���¸�ߤ��ʤ��Ȥ�����
+評価器にスレッドが一つしか存在しないとき真。
 
 --- static VALUE rb_thread_aref(VALUE thread, VALUE id)
 
@@ -747,7 +747,7 @@ void *arg;
 
 --- VALUE rb_thread_current(void)
 
-���߼¹���Υ���åɤ��֤��ޤ���
+現在実行中のスレッドを返します。
 
 --- static int rb_thread_dead(rb_thread_t th)
 
@@ -783,11 +783,11 @@ void *arg;
 
 --- VALUE rb_thread_main(void)
 
-�ᥤ�󥹥�å� (�ץ������ΰ��ֺǽ��¸�ߤ��륹��å�) ���֤��ޤ���
+メインスレッド (プロセスの一番最初に存在するスレッド) を返します。
 
 --- static VALUE rb_thread_pass(void)
 
-Thread#pass �μ��Ρ�
+Thread#pass の実体。
 
 --- void rb_thread_polling(void)
 
@@ -805,12 +805,12 @@ Thread#pass �μ��Ρ�
 
 --- static void rb_thread_restore_context(rb_thread_t th, int exit)
 
-����åɤ��ڤ��ؤ���ˤ����äơ��ڤ��ؤ���Υ���å� th ��
-����ƥ����Ȥ�ɾ������������ޤ���
+スレッドを切り替えるにあたって、切り替え先のスレッド th の
+コンテキストを評価器に復帰します。
 
 --- VALUE rb_thread_run(VALUE thread)
 
-����å� thread �˼¹Ը����Ϥ��ޤ���
+スレッド thread に実行権を渡します。
 
 --- static VALUE rb_thread_s_abort_exc(void)
 
@@ -824,22 +824,22 @@ Thread#pass �μ��Ρ�
 
 --- static void rb_thread_save_context(rb_thread_t th)
 
-����åɤ��ڤ��ؤ���ˤ����äơ����߼¹���Υ���å� th ��
-����ƥ����Ȥ�ɾ���狼�� th �����򤷤ޤ���
+スレッドを切り替えるにあたって、現在実行中のスレッド th の
+コンテキストを評価器から th に退避します。
 
 --- void rb_thread_schedule(void)
 
-¾�Υ���åɤ˼¹Ը����Ϥ��ޤ���
-�оݤ�����ϤǤ��ޤ���
+他のスレッドに実行権を渡します。
+対象の特定はできません。
 
 see also: [[f:rb_thread_wait_fd]], [[f:rb_thread_wait_for]]
 
 --- int rb_thread_select(int max, fd_set *read, fd_set *write, fd_set *except, struct timeval *timeout)
 
-Ruby �Υ���åɤϼ����Τ���������� select(2) ��ȤäƤ��뤿�ᡢ
-��ĥ�饤�֥������ȼ��� select(2) ��Ȥä�����ư����ݾڤ���ޤ���
-����ˤ��δؿ� rb_thread_select ��ȤäƤ���������
-�����ΰ�̣�� select(2) ��Ʊ���Ǥ���
+Ruby のスレッドは実装のために内部で select(2) を使っているため、
+拡張ライブラリ内で独自に select(2) を使った場合の動作は保証されません。
+代わりにこの関数 rb_thread_select を使ってください。
+引数の意味は select(2) と同じです。
 
 --- void rb_thread_signal_raise(char *sig)
 
@@ -853,27 +853,27 @@ Ruby �Υ���åɤϼ����Τ���������� select(2) ��ȤäƤ��뤿�ᡢ
 
 --- void rb_thread_start_timer(void)
 
-setitimer(2) ��¸�ߤ�����Τ��������ޤ���
+setitimer(2) が存在する場合のみ定義されます。
 
-Ruby �Υ���åɥ������塼��󥰤˻��Ѥ��Ƥ���
-���󥿡��Х륿���ޡ��򳫻Ϥ��ޤ���
+Ruby のスレッドスケジューリングに使用している
+インターバルタイマーを開始します。
 
 --- static VALUE rb_thread_status(VALUE thread)
 
 --- VALUE rb_thread_stop(void)
 
-���߼¹���Υ���åɤ���ߤ��ޤ���
-¾�Υ���åɤ��� rb_thread_wakeup ��ƤФ��ȺƳ����ޤ���
+現在実行中のスレッドを停止します。
+他のスレッドから rb_thread_wakeup を呼ばれると再開します。
 
 --- static VALUE rb_thread_stop_p(VALUE thread)
 
 --- void rb_thread_stop_timer(void)
 
-setitimer(2) ��¸�ߤ�����Τ��������ޤ���
+setitimer(2) が存在する場合のみ定義されます。
 
-Ruby �Υ���åɥ������塼��󥰤˻��Ѥ��Ƥ��륤�󥿡��Х륿���ޡ���
-��ߤ��ޤ������Υ����ޡ����ߤޤ�� Ruby �Υ���åɵ����ϴ���Ū�����
-���ޤ��Τ����դ��Ƥ���������
+Ruby のスレッドスケジューリングに使用しているインターバルタイマーを
+停止します。このタイマーが止まると Ruby のスレッド機構は基本的に停止
+しますので注意してください。
 
 --- void rb_thread_trap_eval(VALUE cmd, int sig)
 
@@ -881,33 +881,33 @@ Ruby �Υ���åɥ������塼��󥰤˻��Ѥ��Ƥ��륤�󥿡��Х륿���ޡ���
 
 --- void rb_thread_wait_fd(int fd)
 
-�ե�����ǥ�������ץ� fd ���ɤ߹����褦�ˤʤ�ޤ�
-�����ȥ���åɤ���ߤ��ޤ���
+ファイルディスクリプタ fd を読み込めるようになるまで
+カレントスレッドを停止します。
 
 --- void rb_thread_wait_for(struct timeval time)
 
-time ��Ĺ���λ��֤��в᤹��ޤǥ����ȥ���åɤ���ߤ��ޤ���
+time の長さの時間が経過するまでカレントスレッドを停止します。
 
 --- static void rb_thread_wait_other_threads(void)
 
 --- VALUE rb_thread_wakeup(VALUE thread)
 
-�����Υ���å� thread ��Ƴ������ޤ���
+停止中のスレッド thread を再開させます。
 
 --- static VALUE rb_thread_yield(VALUE arg, rb_thread_t th)
 
 --- void rb_throw(const char *tag, VALUE val)
 
-throw �μ��Ρ��֤��ͤ� val �Ȥ��ơ�
-tag �� catch �����Ȥ����ޤǥ����פ��ޤ���
+throw の実体。返り値を val として、
+tag を catch したところまでジャンプします。
 
-rb_catch �⻲�Ȥ��Ƥ���������
+rb_catch も参照してください。
 
 --- static VALUE rb_trap_eval(VALUE cmd, int sig)
 
 --- void rb_undef(VALUE klass, ID id)
 
-���饹 klass �Υ᥽�å� id �� undef ���ޤ���
+クラス klass のメソッド id を undef します。
 
 --- static VALUE rb_undefined(VALUE obj, ID id, int argc, VALUE *argv, int call_status)
 
@@ -915,45 +915,45 @@ rb_catch �⻲�Ȥ��Ƥ���������
 
 --- VALUE rb_yield(VALUE val)
 
-yield �� C �ǤǤ���val ������˥֥��å���¹Ԥ��ޤ���
-ʣ���ΰ�����Ϳ�������Ȥ�������˳�Ǽ�����Ϥ��ޤ���
+yield の C 版です．val を引数にブロックを実行します．
+複数の引数を与えたいときは配列に格納して渡します。
 
-���δؿ���ƤӽФ����᥽�åɤ��֥��å���ȼ��ʤ����ϡ��㳰
-[[c:LocalJumpError]] ��ȯ�����ޤ���
+この関数を呼び出したメソッドがブロックを伴わない場合は，例外
+[[c:LocalJumpError]] が発生します．
 
 --- static VALUE rb_yield_0(VALUE val, VALUE self, VALUE klass, int pcall)
 
-�����ȥ֥��å��� val ���Ϥ��ƽ�����ܤ���
-���Τ��� self �ȥ��饹�� self �� klass ���ڤ��ؤ��롣
-Proc �θƤӽФ��ΤȤ��� pcall=�󥼥� �ˤ��ʤ���Фʤ�ʤ���
+カレントブロックに val を渡して処理を移す。
+そのさい self とクラスを self と klass に切り替える。
+Proc の呼び出しのときは pcall=非ゼロ にしなければならない。
 
 --- static void remove_method(VALUE klass, ID mid)
 
-���饹 klass ���Τ���Ͽ����Ƥ��� mid �Ȥ���̾���Υ᥽�åɤ�
-������������ȥ�������ޤ������դ���ʤ��ä��Ȥ����㳰 [[c:NameError]]
-��ȯ�����ޤ���
+クラス klass 自体に登録されている mid という名前のメソッドを
+検索し、エントリを削除します。見付からなかったときは例外 [[c:NameError]]
+を発生します。
 
 --- void ruby_finalize(void)
 
-ɾ����ץ������ν�λ������Ԥ��ޤ���
+評価器プロセスの終了処理を行います。
 
 --- void ruby_init(void)
 
-ɾ������������ޤ���Ruby C API ��Ƥ֥ץ������Ǥ�
-����ä�ɬ�����δؿ���ƤФʤ���Фʤ�ޤ���
+評価器を初期化します。Ruby C API を呼ぶプロセスでは
+前もって必ずこの関数を呼ばなければなりません。
 
 --- void ruby_options(int argc, char **argv)
 
-argc �� argv �� ruby �ؤ�
-���ޥ�ɥ饤�󥪥ץ����Ȥ��ƽ������ޤ���
+argc と argv を ruby への
+コマンドラインオプションとして処理します。
 
 --- void ruby_run(void)
 
-ruby_eval_tree ��ɾ���򳫻Ϥ��ޤ���
+ruby_eval_tree の評価を開始します。
 
 --- void ruby_stop(int ex)
 
-ɾ����ץ���������ߤ��ޤ���
+評価器プロセスを停止します。
 
 --- static VALUE safe_getter(void)
 
@@ -961,16 +961,16 @@ ruby_eval_tree ��ɾ���򳫻Ϥ��ޤ���
 
 --- static void scope_dup(struct SCOPE *scope)
 
-scope �Ȥ��οƤ� SCOPE ���Ƥ� local_vars ��
-�����å�����ҡ��פ˳������ľ���ޤ���
+scope とその親の SCOPE 全ての local_vars を
+スタックからヒープに割り当て直します。
 
 --- static NODE *search_method(VALUE klass, ID id, VALUE *origin)
 
-���饹 klass ���� id �Ȥ���̾���Υ᥽�åɥ���ȥ�򸡺�����
-�֤��ޤ������դ���ʤ���� NULL ���֤��ޤ���
+クラス klass から id という名前のメソッドエントリを検索し、
+返します。見付からなければ NULL を返します。
 
-���Υ᥽�åɤ� undef ���θ���ޤ��󡣤Ĥޤ� m_tbl ��
-����ȥ꤬����ʤ餽�����Ƥ˴ؤ餺õ�����������ޤ���
+このメソッドは undef を考慮しません。つまり m_tbl に
+エントリがあるならその内容に関らず探索は成功します。
 
 --- static void secure_visibility(VALUE self)
 
@@ -980,12 +980,12 @@ scope �Ȥ��οƤ� SCOPE ���Ƥ� local_vars ��
 
 --- static VALUE set_trace_func(VALUE obj, VALUE trace)
 
-Kernel#set_trace_func �μ��Ρ�
-ɾ������Ф���եå���³������Ͽ���ޤ���
+Kernel#set_trace_func の実体。
+評価器に対するフック手続きを登録します。
 
 --- static VALUE specific_eval(int argc, VALUE *argv, VALUE klass, VALUE self)
 
-rb_obj_instance_eval �� rb_mod_module_eval ���̲����뤿�������ؿ��Ǥ���
+rb_obj_instance_eval と rb_mod_module_eval を共通化するための補助関数です。
 
 --- static void stack_check(void)
 
@@ -993,8 +993,8 @@ rb_obj_instance_eval �� rb_mod_module_eval ���̲����뤿�������ؿ��Ǥ���
 
 --- static VALUE superclass(VALUE self, NODE *node)
 
-���饹ʸ�Υ����ѡ����饹��ɽ���Ρ��� node ��
-ɾ�����ƥ��饹�����ޤ���
+クラス文のスーパークラスを表すノード node を
+評価してクラスを得ます。
 
 --- static VALUE svalue_to_avalue(VALUE v)
 
@@ -1030,7 +1030,7 @@ rb_obj_instance_eval �� rb_mod_module_eval ���̲����뤿�������ؿ��Ǥ���
 
 --- static VALUE umethod_bind(VALUE method, VALUE recv)
 
-UnboundMethod method �� recv ��«�����ޤ���
+UnboundMethod method を recv に束縛します。
 
 --- static VALUE umethod_call(int argc, VALUE *argv, VALUE method)
 
@@ -1040,9 +1040,9 @@ UnboundMethod method �� recv ��«�����ޤ���
 
 --- static VALUE yield_under(VALUE under, VALUE self)
 
-�⥸�塼�� under �θ��Υ���ƥ����Ȥ�
-ruby_block ��ɾ�����ޤ���
+モジュール under の元のコンテキストで
+ruby_block を評価します。
 
 --- static VALUE yield_under_i(VALUE self)
 
-yield_under ������ؿ��Ǥ���
+yield_under の補助関数です。

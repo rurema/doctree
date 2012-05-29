@@ -1,18 +1,18 @@
 require dl
 
-dl �饤�֥��Τ���ι��٥륤�󥿡��ե��������󶡤���饤�֥��Ǥ���
+dl ライブラリのための高レベルインターフェースを提供するライブラリです。
 
-�̾�� dl �饤�֥���Ȥ鷺���� dl/import �饤�֥���Ȥ��ޤ���
+通常は dl ライブラリを使わずこの dl/import ライブラリを使います。
 
-��ʻȤ����� [[lib:dl]] �⻲�Ȥ��Ƥ���������
+主な使い方は [[lib:dl]] も参照してください。
 
-=== ���٤ʻ���ˡ
+=== 高度な使用法
 
-==== �����������ؿ����Ϥ�����
+==== ○○の配列を関数に渡したい
 
-�㤨��Ϳ����줿Ĺ�� len �� double ��������¤�׻�����ؿ�
+例えば与えられた長さ len の double の配列の和を計算する関数
   double sum(double *arry, int len);
-�����ä��Ȥ��ޤ��������ƤӽФ��������ϰʲ��Τ褦�� [[m:Array#pack]] ����Ѥ��ޤ���
+があったとします。これを呼び出したい場合は以下のように [[m:Array#pack]] を使用します。
 
  require 'dl/import'
  module M
@@ -22,9 +22,9 @@ dl �饤�֥��Τ���ι��٥륤�󥿡��ե��������󶡤���饤�֥��Ǥ���
  end
  p M.sum([2.0, 3.0, 4.0].pack('d*'), 3)   #=> 9.0
 
-�ޤ�Ϳ����줿ʸ��������� s (Ĺ��len)�γ����Ǥκǽ��ʸ���� buf �˥��ԡ�����ؿ�
+また与えられた文字列の配列 s (長さlen)の各要素の最初の文字を buf にコピーする関数
   void first_char(char **s, char *buf, int len)
-�����ä��Ȥ��ޤ��������ƤӽФ��ˤ�ʲ��Τ褦�� [[m:Array#pack]] ����Ѥ��ޤ���
+があったとします。これを呼び出すにも以下のように [[m:Array#pack]] を使用します。
 
  require 'dl/import'
  module M
@@ -36,12 +36,12 @@ dl �饤�֥��Τ���ι��٥륤�󥿡��ե��������󶡤���饤�֥��Ǥ���
  M.first_char(['Abc', 'Def', 'Ghi'].pack('p*'), buf, 3) 
  p buf  #=> 'ADG'
 
-==== Ruby �Υ��֥������Ȥ򥳡���Хå����Ϥ�����
+==== Ruby のオブジェクトをコールバックに渡したい
 
-Ǥ�դΥ��饹�� Ruby ���֥������Ȥ򥳡���Хå����Ϥ��������� [[m:DL.#dlwrap]] ��Ȥä�
-�ݥ���(����)���Ѵ����Ƥ���ؿ����Ϥ���������Хå������Ǹ����ᤷ�ޤ���
+任意のクラスの Ruby オブジェクトをコールバックへ渡したい場合は [[m:DL.#dlwrap]] を使って
+ポインタ(整数)へ変換してから関数に渡し、コールバックの方で元に戻します。
 
-�㤨�� libc �� qsort ��Ȥä� Ruby �� Time ������򥽡��Ȥ���ˤϰʲ��Τ褦�ˤ��ޤ���
+例えば libc の qsort を使って Ruby の Time の配列をソートするには以下のようにします。
 
   require 'dl/import'
   module M 
@@ -60,7 +60,7 @@ dl �饤�֥��Τ���ι��٥륤�󥿡��ե��������󶡤���饤�֥��Ǥ���
   M.qsort(a, buff.size, DL::SIZEOF_VOIDP, M::QsortCallback)
   p a.unpack('l!*').map{|t| DL.dlunwrap(t).to_i }             #=> [1, 10, 100, 1241603848]
 
-==== ʣ���ʹ�¤�Τ����������
+==== 複雑な構造体を定義したい
 
-��¤�Τ���ФȤ��ƻ��Ĺ�¤�Τ� [[m:DL::Importer#struct]] ��Ȥä�������뤳�Ȥϻ�ǰ�ʤ���Ǥ��ޤ���
-���Ϥǥ��Ф�Ÿ�����Ƥ��� [[m:DL::Importer#struct]] ��ȤäƤ���������
+構造体をメンバとして持つ構造体を [[m:DL::Importer#struct]] を使って定義することは残念ながらできません。
+自力でメンバを展開してから [[m:DL::Importer#struct]] を使ってください。

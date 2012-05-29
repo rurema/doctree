@@ -1,21 +1,21 @@
 = class Method < Object
 
-[[m:Object#method]] �ˤ�ꥪ�֥������Ȳ�����
-���᥽�åɥ��֥������ȤΥ��饹�Ǥ���
+[[m:Object#method]] によりオブジェクト化され
+たメソッドオブジェクトのクラスです。
 
-�᥽�åɤμ��Ρ�̾���Ǥʤ��ˤȥ쥷���Ф��Ȥ��������ޤ���
-[[c:Proc]] ���֥������ȤȰ�äƥ���ƥ����Ȥ��ݻ����ޤ���
+メソッドの実体（名前でなく）とレシーバの組を封入します。
+[[c:Proc]] オブジェクトと違ってコンテキストを保持しません。
 
-=== Proc �Ȥκ�
+=== Proc との差
 
-[[c:Method]] �ϼ��Ф����оݤǤ���᥽�åɤ�
-�ʤ���к��ޤ��󤬡�[[c:Proc]] �Ͻ����ʤ��˺��ޤ�������������
-[[c:Proc]] �ϻȤ��ΤƤ˸�����[[c:Method]] �ϲ��٤ⷫ���֤���������
-���˸����ȸ����ޤ����ޤ����񤹤륳���ɤ��礭���Ȥ������Ǥ�
-[[c:Proc]] �Ͼ����ϡ�[[c:Method]] ���絬�ϥ����ɤ˸����ȸ����ޤ���
+[[c:Method]] は取り出しの対象であるメソッドが
+なければ作れませんが、[[c:Proc]] は準備なしに作れます。その点から
+[[c:Proc]] は使い捨てに向き、[[c:Method]] は何度も繰り返し生成する
+場合に向くと言えます。また内包するコードの大きさという点では
+[[c:Proc]] は小規模、[[c:Method]] は大規模コードに向くと言えます。
 
 
-��¸�Υ᥽�åɤ� [[c:Method]] ���֥������Ȳ����롣
+既存のメソッドを [[c:Method]] オブジェクト化する。
 
   class Foo
     def foo(arg)
@@ -28,7 +28,7 @@
   p m             # => #<Method: Foo#foo>
   p m.call(1)     # => "foo called with arg 1"
 
-̾���Τʤ��᥽�å�(������)��ɬ�פʤ� [[c:Proc]] ��Ȥ����ɤ���
+名前のないメソッド(の代わり)が必要なら [[c:Proc]] を使うと良い。
 
   pr = Proc.new {|arg|
     "proc called with arg #{arg}"
@@ -37,7 +37,7 @@
   p pr            # => #<Proc:0x401b1fcc>
   p pr.call(1)    # => "proc called with arg 1"
 
-[[c:Method]] ���֥������Ȥ�ͭ�ѤʤΤϰʲ��Τ褦�ʾ�硣
+[[c:Method]] オブジェクトが有用なのは以下のような場合。
 
   class Foo
     def foo() "foo" end
@@ -47,18 +47,18 @@
 
   obj = Foo.new
 
-  # Ǥ�դΥ����ȥ᥽�åɤδط���ϥå�����ݻ����Ƥ���
+  # 任意のキーとメソッドの関係をハッシュに保持しておく
   methods = {1 => obj.method(:foo),
              2 => obj.method(:bar),
              3 => obj.method(:baz)}
 
-  # ������Ȥäƴ�Ϣ����᥽�åɤ�ƤӽФ�
+  # キーを使って関連するメソッドを呼び出す
   p methods[1].call       # => "foo"
   p methods[2].call       # => "bar"
   p methods[3].call       # => "baz"
 
-���������쥷���Ф���ꤵ����(Method ���֥������Ȥϥ쥷���Ф��ݻ�����)ɬ
-�פ��ʤ��ʤ� [[m:Object#send]]��Ȥ���ˡ��ͭ�ѡ�
+しかし、レシーバを固定させる(Method オブジェクトはレシーバを保持する)必
+要がないなら [[m:Object#send]]を使う方法も有用。
 
   class Foo
     def foo() "foo" end
@@ -66,14 +66,14 @@
     def baz() "baz" end
   end
 
-  # Ǥ�դΥ����ȥ᥽�å�(��̾��)�δط���ϥå�����ݻ����Ƥ���
-  # �쥷���Фξ��󤬤����ˤϤʤ����Ȥ�����
+  # 任意のキーとメソッド(の名前)の関係をハッシュに保持しておく
+  # レシーバの情報がここにはないことに注意
   methods = {1 => :foo,
              2 => :bar,
              3 => :baz}
 
-  # ������Ȥäƴ�Ϣ����᥽�åɤ�ƤӽФ�
-  # �쥷���Ф�Ǥ��(Foo ���饹�Υ��󥹥��󥹤Ǥ���ɬ�פ�ʤ�)
+  # キーを使って関連するメソッドを呼び出す
+  # レシーバは任意(Foo クラスのインスタンスである必要もない)
   p Foo.new.send(methods[1])      # => "foo"
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
@@ -86,33 +86,33 @@
 --- call(*args) -> object
 --- call(*args) { ... } -> object
 
-�᥽�åɥ��֥������Ȥ���������Ƥ���᥽�åɤ�ư���ޤ���
+メソッドオブジェクトに封入されているメソッドを起動します。
 
-������֥��å��Ϥ��Τޤޥ᥽�åɤ��Ϥ���ޤ���
+引数やブロックはそのままメソッドに渡されます。
 
-self[] �η��θƤӽФ����̾�Υ᥽�åɸƤӽФ��˸����ܤ�
-���դ��뤿��������Ѱդ��줿��Τǡ�Array#[]�Τ褦��
-¾�� [] �᥽�åɤȤΰ�̣Ū�ʴ�Ϣ���Ϥ���ޤ���
+self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
+近付けるためだけに用意されたもので、Array#[]のような
+他の [] メソッドとの意味的な関連性はありません。
 
-�᥽�åɥ��֥������Ȥ���������Ƥ����硢���Υ᥽�åɤϡ������ե�٥� 4 �Ǽ¹Ԥ���ޤ�
+メソッドオブジェクトが汚染されている場合、そのメソッドは、セーフレベル 4 で実行されます
 
-@param args self ���Ϥ���������
+@param args self に渡される引数。
 
 @see [[d:spec/safelevel]]
-#@# �����ե�٥�˴ؤ��뤽��¾�ξܺ�
+#@# セーフレベルに関するその他の詳細
 
 --- arity -> Fixnum
 
-�᥽�åɤ������դ�������ο����֤��ޤ���
+メソッドが受け付ける引数の数を返します。
 
-���������᥽�åɤ�����Ĺ����������դ����硢�������
+ただし、メソッドが可変長引数を受け付ける場合、負の整数
 
-  -(ɬ�פȤ��������ο� + 1)
+  -(必要とされる引数の数 + 1)
 
-���֤��ޤ���C �����٥�Ǽ������줿�᥽�åɤ�����Ĺ������
-�����դ����硢-1 ���֤��ޤ���
+を返します。C 言語レベルで実装されたメソッドが可変長引数を
+受け付ける場合、-1 を返します。
   
-��:
+例:
 
   class C
     def u;               end
@@ -139,18 +139,18 @@ self[] �η��θƤӽФ����̾�Υ᥽�åɸƤӽФ��˸����ܤ�
 
 --- inspect -> String
 
-self ���ɤߤ䤹��ʸ����Ȥ����֤��ޤ���
+self を読みやすい文字列として返します。
 
-�ʲ��η�����ʸ������֤��ޤ���
+以下の形式の文字列を返します。
 
-  #<Method: klass1(klass2)#method>                (����1)
+  #<Method: klass1(klass2)#method>                (形式1)
 
-klass1 �ϡ�[[m:Method#inspect]] �Ǥϡ��쥷���ФΥ��饹̾��
-[[m:UnboundMethod#inspect]] �Ǥϡ�[[c:UnboundMethod]] ���֥������Ȥ�����
-���Ȥʤä����饹���⥸�塼��̾�Ǥ���
+klass1 は、[[m:Method#inspect]] では、レシーバのクラス名、
+[[m:UnboundMethod#inspect]] では、[[c:UnboundMethod]] オブジェクトの生成
+元となったクラス／モジュール名です。
 
-klass2 �ϡ��ºݤˤ��Υ᥽�åɤ�������Ƥ��륯�饹���⥸�塼��̾��
-method �ϡ��᥽�å�̾��ɽ���ޤ���
+klass2 は、実際にそのメソッドを定義しているクラス／モジュール名、
+method は、メソッド名を表します。
 
   module Foo
     def foo
@@ -167,16 +167,16 @@ method �ϡ��᥽�å�̾��ɽ���ޤ���
   p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
 
 #@since 1.8.0
-klass1 �� klass2 ��Ʊ�����ϰʲ��η����ˤʤ�ޤ���
-  #<Method: klass1#method>                        (����2)
+klass1 と klass2 が同じ場合は以下の形式になります。
+  #<Method: klass1#method>                        (形式2)
 
-�ðۥ᥽�åɤ��Ф��Ƥϡ�
-  #<Method: obj.method>                           (����3)
-  #<Method: klass1(klass2).method>                (����4)
-�Ȥ���������ʸ������֤��ޤ��������ܤη����Ǥ� klass1 �ϥ쥷���С�
-klass2 �ϼºݤˤ��Υ᥽�åɤ�������Ƥ��륪�֥������Ȥˤʤ�ޤ���
+特異メソッドに対しては、
+  #<Method: obj.method>                           (形式3)
+  #<Method: klass1(klass2).method>                (形式4)
+という形式の文字列を返します。二番目の形式では klass1 はレシーバ、
+klass2 は実際にそのメソッドを定義しているオブジェクトになります。
 
-  # ���֥������Ȥ��ðۥ᥽�å�
+  # オブジェクトの特異メソッド
   obj = ""
   class <<obj
     def foo
@@ -184,19 +184,19 @@ klass2 �ϼºݤˤ��Υ᥽�åɤ�������Ƥ��륪�֥������Ȥˤʤ�ޤ���
   end
   p obj.method(:foo)      # => #<Method: "".foo>
 
-  # ���饹�᥽�å�(���饹���ðۥ᥽�å�)
+  # クラスメソッド(クラスの特異メソッド)
   class Foo
     def Foo.foo
     end
   end
   p Foo.method(:foo)      # => #<Method: Foo.foo>
 
-  # �����ѡ����饹�Υ��饹�᥽�å�
+  # スーパークラスのクラスメソッド
   class Bar < Foo
   end
   p Bar.method(:foo)      # => #<Method: Bar(Foo).foo>
 
-  # �ʲ���(����1)�ν��Ϥˤʤ�
+  # 以下は(形式1)の出力になる
   module Baz
     def baz
     end
@@ -212,20 +212,20 @@ klass2 �ϼºݤˤ��Υ᥽�åɤ�������Ƥ��륪�֥������Ȥˤʤ�ޤ���
 
 --- to_proc -> Proc
 
-self �� call ���� [[c:Proc]] ���֥������Ȥ����������֤��ޤ���
+self を call する [[c:Proc]] オブジェクトを生成して返します。
 
 --- unbind -> UnboundMethod
 
-self �Υ쥷���ФȤδ�Ϣ��������� [[c:UnboundMethod]] ����
-�������Ȥ����������֤��ޤ���
+self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
+ジェクトを生成して返します。
 
 --- ==(other)     -> bool
 --- ===(other)    -> bool
 
-���Ȥ� other ��Ʊ�����󥹥��󥹤�Ʊ���᥽�åɤ�ɽ������
-true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
+自身と other が同じインスタンスの同じメソッドを表す場合に
+true を返します。そうでない場合に false を返します。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
   s = "bar"
   a = s.method(:size)
@@ -237,11 +237,11 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 --- eql?(other)     -> bool
 --- equal?(other)   -> bool
 
-���ꤵ�줿 other �� self ���ȤǤ�����Τ߿����֤��ޤ���
-����� [[c:Object]] ���饹��������줿�ǥե���Ȥ�ư���
-����
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
 
-@param other ���Ȥ���Ӥ��������֥������Ȥ���ꤷ�ޤ���
+@param other 自身と比較したいオブジェクトを指定します。
 
   s = "bar"
   a = s.method(:size)
@@ -253,8 +253,8 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 
 --- hash    -> Integer
 
-���Ȥ� [[m:Object#object_id]] ���֤��ޤ���
-����� [[c:Object]] ���饹��������줿�ǥե���Ȥ�ư��Ǥ���
+自身の [[m:Object#object_id]] を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作です。
 
 #@since 1.8.7
 #@since 1.9.1
@@ -263,47 +263,47 @@ true ���֤��ޤ��������Ǥʤ����� false ���֤��ޤ���
 --- name    -> String
 #@end
 
-���Υ᥽�åɤ�̾�����֤��ޤ���
+このメソッドの名前を返します。
 
 --- owner    -> Class | Module
 
-���Υ᥽�åɤ��������Ƥ��� class �� module ���֤��ޤ���
+このメソッドが定義されている class か module を返します。
 
 
 --- receiver    -> object
 
-���Υ᥽�åɥ��֥������ȤΥ쥷���Ф��֤��ޤ���
+このメソッドオブジェクトのレシーバを返します。
 
 #@end
 
 #@since 1.9.1
 --- source_location -> [String, Fixnum] | nil
-�����������ɤΥե�����̾�ȹ��ֹ��������֤��ޤ���
+ソースコードのファイル名と行番号を配列で返します。
 
-���μ�³���֥������Ȥ� ruby ���������Ƥ��ʤ�(�Ĥޤ�ͥ��ƥ���
-�Ǥ���)���� nil ���֤��ޤ���
+その手続オブジェクトが ruby で定義されていない(つまりネイティブ
+である)場合は nil を返します。
 
 @see [[m:Proc#source_location]]
 #@end
 
 #@since 1.9.2
 --- parameters -> [object]
-Method ���֥������Ȥΰ����ξ�����֤��ޤ���
+Method オブジェクトの引数の情報を返します。
 
-Method ���֥������Ȥ���������ʤ���ж���������֤��ޤ�������������ϡ������������֤���
-����������Ǥϰ����μ���˱������ʲ��Τ褦�� Symbol �ȡ���������̾����ɽ�� Symbol �� 2 ���ǤǤ���
-�Ȥ߹��ߤΥ᥽�åɤǤϡ���������̾�������ޤ���
+Method オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
+各配列の要素は引数の種類に応じた以下のような Symbol と、仮引数の名前を表す Symbol の 2 要素です。
+組み込みのメソッドでは、仮引数の名前が取れません。
 
 : :req
- ɬ�ܤΰ���
+ 必須の引数
 : :opt
- �ǥե�����ͤ����ꤵ�줿���ץ���ʥ�ʰ���
+ デフォルト値が指定されたオプショナルな引数
 : :rest
- * �ǻ��ꤵ�줿�Ĥꤹ�٤Ƥΰ���
+ * で指定された残りすべての引数
 : :block
- & �ǻ��ꤵ�줿�֥��å�����
+ & で指定されたブロック引数
 
-��:
+例:
   m = Class.new{define_method(:m){|x, y=42, *other, &b|}}.instance_method(:m)
   m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
   File.method(:symlink).parameters #=> [[:req], [:req]]

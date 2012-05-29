@@ -1,38 +1,38 @@
 #@since 1.8.7
-UNIX Bourne �������ñ��ʬ�䵬§�˽��ä�ʸ����䵡ǽ��ʸ���󥨥�������
-��ǽ���󶡤��ޤ���
+UNIX Bourne シェルの単語分割規則に従った文字列割機能と文字列エスケープ
+機能を提供します。
 
-Shellwords �⥸�塼��ϡ�������ڤ��ñ��ʬ���Ԥ� shellsplit��
-ʸ����򥨥������פ��� shellescape��ʸ���󥨥������פ�ʸ����ꥹ�Ȥ�
-�Ф���Ŭ�Ѥ��� shelljoin ��3�ĤΥ⥸�塼��ؿ����󶡤��ޤ���
+Shellwords モジュールは、空白区切りの単語分割を行う shellsplit、
+文字列をエスケープする shellescape、文字列エスケープを文字列リストに
+対して適用する shelljoin の3つのモジュール関数を提供します。
 
-�ޤ���shellwords �饤�֥��� require ����ȡ��Ȥ߹��ߥ��饹 String
-�� Array ����ĥ���졢�����Υ⥸�塼��ؿ���Ʊ����ǽ��
-String#shellsplit, String#shellescape, Array#shelljoin �Ȥ��ƻȤ���
-�褦�ˤʤ�ޤ���
+また、shellwords ライブラリを require すると、組み込みクラス String
+と Array が拡張され、これらのモジュール関数と同じ機能が
+String#shellsplit, String#shellescape, Array#shelljoin として使える
+ようになります。
 
 #@else
-UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ�
-�饤�֥��Ǥ���
+UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行う
+ライブラリです。
 #@end
 
 = module Shellwords
 
 #@since 1.8.7
-UNIX Bourne �������ñ��ʬ�䵬§�˽��ä�ʸ����ʬ���ʸ���󥨥�������
-��Ԥ��⥸�塼��Ǥ���
+UNIX Bourne シェルの単語分割規則に従った文字列分割と文字列エスケープ
+を行うモジュールです。
 
-Shellwords �⥸�塼��ϡ�������ڤ��ñ��ʬ���Ԥ� shellsplit��ʸ�����
-���������פ��� shellescape��ʸ���󥨥������פ�ʸ����ꥹ�Ȥ��Ф���Ŭ��
-���� shelljoin ��3�ĤΥ⥸�塼��ؿ����󶡤��ޤ���
+Shellwords モジュールは、空白区切りの単語分割を行う shellsplit、文字列を
+エスケープする shellescape、文字列エスケープを文字列リストに対して適用
+する shelljoin の3つのモジュール関数を提供します。
 
-�����Υ᥽�åɤ���̾�Ȥ��ơ�Shellwords.split, Shellwords.escape,
-Shellwords.join ����Ѳ�ǽ�Ǥ���
-��������������û�̷����Υ᥽�åɤϥ��饹�᥽�åɤȤ��ƤΤ���������
-���ᡢ�ؿ������θƤӽФ��ϤǤ��ޤ���
+これらのメソッドの別名として、Shellwords.split, Shellwords.escape,
+Shellwords.join も使用可能です。
+ただし、これらの短縮形式のメソッドはクラスメソッドとしてのみ定義される
+ため、関数形式の呼び出しはできません。
 
 #@else
-UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ��⥸�塼��Ǥ���
+UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行うモジュールです。
 #@end
 
 == Module Functions
@@ -43,27 +43,27 @@ UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ��⥸�塼��Ǥ���
 --- shellwords(line) -> [String]
 
 #@since 1.8.7
-Bourne �������ñ��ʬ�䵬§�˽��ä�������ڤ��ñ��ʬ���Ԥ���
-ñ�� (ʸ����) ��������֤��ޤ���
+Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
+単語 (文字列) の配列を返します。
 #@else
-UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ���
-ñ�� (ʸ����) ��������֤��ޤ���
+UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行い、
+単語 (文字列) の配列を返します。
 #@end
 
-���򡢥��󥰥륯������ (')�����֥륯������ (")���Хå�����å��� (\)
-���ᤷ�ޤ���
+空白、シングルクォート (')、ダブルクォート (")、バックスラッシュ (\)
+を解釈します。
 
-@param line ʬ����оݤȤʤ�ʸ�������ꤷ�ޤ���
-@return ʬ���̤γ�ʸ��������ǤȤ���������֤��ޤ���
+@param line 分割の対象となる文字列を指定します。
+@return 分割結果の各文字列を要素とする配列を返します。
 #@since 1.8.7
-@raise ArgumentError ����������ФǤʤ����󥰥륯�����Ȥޤ��ϥ��֥�
-       �������Ȥ����줿����ȯ�����ޤ���
+@raise ArgumentError 引数の中に対でないシングルクォートまたはダブル
+       クォートが現れた場合に発生します。
 #@else
-@raise ArgumentError ������ʸ����Ǥʤ���礫������������ФǤʤ�
-       ���󥰥륯�����Ȥޤ��ϥ��֥륯�����Ȥ����줿����ȯ�����ޤ���
+@raise ArgumentError 引数が文字列でない場合か、引数の中に対でない
+       シングルクォートまたはダブルクォートが現れた場合に発生します。
 #@end
 
-��:
+例:
     require 'shellwords'
     
     p Shellwords.shellwords(%q{  foo bar "foo bar"\ baz 'foo bar'  })
@@ -75,12 +75,12 @@ UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ���
 #@since 1.8.7
 --- shellescape(str) -> String
 
-ʸ����� Bourne ������Υ��ޥ�ɥ饤����ǰ����˻Ȥ���褦�˥��������פ��ޤ���
+文字列を Bourne シェルのコマンドライン中で安全に使えるようにエスケープします。
 
-@param str ���������פ��оݤȤʤ�ʸ�������ꤷ�ޤ���
-@return ���������פ��줿ʸ������֤��ޤ���
+@param str エスケープの対象となる文字列を指定します。
+@return エスケープされた文字列を返します。
 
-��:
+例:
     require 'shellwords'
     
     pattern = 'Jan 15'
@@ -89,17 +89,17 @@ UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ���
 
 --- shelljoin(array) -> String
 
-����γ����ǤǤ���ʸ������Ф��ơ�Bourne ������Υ��ޥ�ɥ饤����ǰ�����
-�Ȥ��뤿��Υ��������פ�Ŭ�Ѥ�������ʸ����𤷤Ƥ�����Ϣ�뤷�����ޥ��
-�饤��ʸ������������ޤ���
+配列の各要素である文字列に対して、Bourne シェルのコマンドライン中で安全に
+使えるためのエスケープを適用し、空白文字を介してそれらを連結したコマンド
+ライン文字列を生成します。
 
-�ġ����������Ǥ��Ф��륨�������פˤϡ�[[m:Shellwords.#shellescape]] ��
-Ʊ����§��Ŭ�Ѥ���ޤ���
+個々の配列要素に対するエスケープには、[[m:Shellwords.#shellescape]] と
+同じ規則が適用されます。
 
-@param array �����������оݤ�ʸ��������ǤȤ����������ꤷ�ޤ���
-@return ���������׷�̤�Ϣ�뤷��ʸ������֤��ޤ���
+@param array エスケープ対象の文字列を要素とする配列を指定します。
+@return エスケープ結果を連結した文字列を返します。
 
-��:
+例:
     require 'shellwords'
     
     pattern = 'Jan 15'
@@ -112,33 +112,33 @@ UNIX ������Υ��ޥ�ɥ饤����Ϥ˻���������ڤ��ñ��ʬ���Ԥ���
 == Singleton Methods
 
 --- split(line) -> [String]
-Bourne �������ñ��ʬ�䵬§�˽��ä�������ڤ��ñ��ʬ���Ԥ���
-ñ�� (ʸ����) ��������֤��ޤ���
+Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
+単語 (文字列) の配列を返します。
 
-���Υ᥽�åɤϡ�[[m:Shellwords.#shellsplit]] ����̾�Ǥ���
+このメソッドは、[[m:Shellwords.#shellsplit]] の別名です。
 
-@param line ʬ����оݤȤʤ�ʸ�������ꤷ�ޤ���
-@return ʬ���̤γ�ʸ��������ǤȤ���������֤��ޤ���
-@raise ArgumentError ����������ФǤʤ����󥰥륯�����Ȥޤ��ϥ��֥�
-       �������Ȥ����줿����ȯ�����ޤ���
+@param line 分割の対象となる文字列を指定します。
+@return 分割結果の各文字列を要素とする配列を返します。
+@raise ArgumentError 引数の中に対でないシングルクォートまたはダブル
+       クォートが現れた場合に発生します。
 
 --- escape(str) -> String
-ʸ����� Bourne ������Υ��ޥ�ɥ饤����ǰ����˻Ȥ���褦�˥��������פ��ޤ���
+文字列を Bourne シェルのコマンドライン中で安全に使えるようにエスケープします。
 
-���Υ᥽�åɤϡ�[[m:Shellwords.#shellescape]] ����̾�Ǥ���
+このメソッドは、[[m:Shellwords.#shellescape]] の別名です。
 
-@param str ���������פ��оݤȤʤ�ʸ�������ꤷ�ޤ���
-@return ���������פ��줿ʸ������֤��ޤ���
+@param str エスケープの対象となる文字列を指定します。
+@return エスケープされた文字列を返します。
 
 --- join(array) -> String
-����γ����ǤǤ���ʸ������Ф��ơ�Bourne ������Υ��ޥ�ɥ饤����ǰ�����
-�Ȥ��뤿��Υ��������פ�Ŭ�Ѥ�������ʸ����𤷤Ƥ�����Ϣ�뤷�����ޥ��
-�饤��ʸ������������ޤ���
+配列の各要素である文字列に対して、Bourne シェルのコマンドライン中で安全に
+使えるためのエスケープを適用し、空白文字を介してそれらを連結したコマンド
+ライン文字列を生成します。
 
-���Υ᥽�åɤϡ�[[m:Shellwords.#shelljoin]] ����̾�Ǥ���
+このメソッドは、[[m:Shellwords.#shelljoin]] の別名です。
 
-@param array �����������оݤ�ʸ��������ǤȤ����������ꤷ�ޤ���
-@return ���������׷�̤�Ϣ�뤷��ʸ������֤��ޤ���
+@param array エスケープ対象の文字列を要素とする配列を指定します。
+@return エスケープ結果を連結した文字列を返します。
 #@end
 
 #@since 1.8.7
@@ -147,22 +147,22 @@ Bourne �������ñ��ʬ�䵬§�˽��ä�������ڤ��ñ��ʬ���Ԥ���
 == Instance Methods
 
 --- shellsplit -> [String]
-Bourne �������ñ��ʬ�䵬§�˽��ä�������ڤ��ñ��ʬ���Ԥ���
-ñ�� (ʸ����) ��������֤��ޤ���
+Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
+単語 (文字列) の配列を返します。
 
-string.shellsplit �ϡ�Shellwords.shellsplit(string) �������Ǥ���
+string.shellsplit は、Shellwords.shellsplit(string) と等価です。
 
-@return ʬ���̤γ�ʸ��������ǤȤ���������֤��ޤ���
-@raise ArgumentError ����������ФǤʤ����󥰥륯�����Ȥޤ��ϥ��֥�
-       �������Ȥ����줿����ȯ�����ޤ���
+@return 分割結果の各文字列を要素とする配列を返します。
+@raise ArgumentError 引数の中に対でないシングルクォートまたはダブル
+       クォートが現れた場合に発生します。
 @see [[m:Shellwords.#shellsplit]]
 
 --- shellescape -> String
-ʸ����� Bourne ������Υ��ޥ�ɥ饤����ǰ����˻Ȥ���褦�˥��������פ��ޤ���
+文字列を Bourne シェルのコマンドライン中で安全に使えるようにエスケープします。
 
-string.shellescape �ϡ�Shellwords.escape(string) �������Ǥ���
+string.shellescape は、Shellwords.escape(string) と等価です。
 
-@return ���������פ��줿ʸ������֤��ޤ���
+@return エスケープされた文字列を返します。
 @see [[m:Shellwords.#shellescape]]
 
 = reopen Array
@@ -170,12 +170,12 @@ string.shellescape �ϡ�Shellwords.escape(string) �������Ǥ���
 == Instance Methods
 
 --- shelljoin -> String
-����γ����ǤǤ���ʸ������Ф��ơ�Bourne ������Υ��ޥ�ɥ饤����ǰ�����
-�Ȥ��뤿��Υ��������פ�Ŭ�Ѥ�������ʸ����𤷤Ƥ�����Ϣ�뤷�����ޥ��
-�饤��ʸ������������ޤ���
+配列の各要素である文字列に対して、Bourne シェルのコマンドライン中で安全に
+使えるためのエスケープを適用し、空白文字を介してそれらを連結したコマンド
+ライン文字列を生成します。
 
-array.shelljoin �ϡ�Shellwords.shelljoin(array) �������Ǥ���
+array.shelljoin は、Shellwords.shelljoin(array) と等価です。
 
-@return ���������׷�̤�Ϣ�뤷��ʸ������֤��ޤ���
+@return エスケープ結果を連結した文字列を返します。
 @see [[m:Shellwords.#shelljoin]]
 #@end

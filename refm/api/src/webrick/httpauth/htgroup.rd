@@ -1,44 +1,44 @@
-Apache �Ǿ�ǧ�˻��Ѥ���桼�����롼�פΰ�������Ǽ����Ƥ���ƥ����ȥե������
-�ɤ߽񤭤��뵡ǽ���󶡤���饤�֥��Ǥ���
+Apache で証認に使用するユーザグループの一覧が格納されているテキストファイルを
+読み書きする機能を提供するライブラリです。
 
  * [[url:http://httpd.apache.org/docs/2.2/mod/mod_authz_groupfile.html#authgroupfile]]
 
 = class WEBrick::HTTPAuth::Htgroup < Object
 
-Apache �Ǿ�ǧ�˻��Ѥ���桼�����롼�פΰ�������Ǽ����Ƥ���ƥ����ȥե�������ɤ߽񤭤��뤿��Υ��饹�Ǥ���
+Apache で証認に使用するユーザグループの一覧が格納されているテキストファイルを読み書きするためのクラスです。
 
 == Class Methods
 
 --- new(path) -> WEBrick::HTTPAuth::Htgroup
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-@param path �ե�����̾����ꤷ�ޤ���
+@param path ファイル名を指定します。
 
 == Instance Methods
 
 --- reload
 #@# -> discard
-�ե����뤫������ɤ߹��ߤޤ���
+ファイルから再度読み込みます。
 
 --- flush(path = nil) -> ()
 
-�ե�����˽񤭹��ߤޤ���
+ファイルに書き込みます。
 
-@param path �ե�����̾����ꤷ�ޤ���
+@param path ファイル名を指定します。
 
 --- members(group) -> [String]
 
-[[m:WEBrick::HTTPAuth::Htgroup#reload]] ��Ƥ�Ǥ���Ϳ����줿���롼�פ˽�°������ФΥꥹ�Ȥ��֤��ޤ���
+[[m:WEBrick::HTTPAuth::Htgroup#reload]] を呼んでから与えられたグループに所属するメンバのリストを返します。
 
-@param group ���롼��̾����ꤷ�ޤ���
+@param group グループ名を指定します。
 
 --- add(group, members)
 #@# -> discard
 
-Ϳ����줿���롼�פ˥��Ф��ɲä��ޤ���
+与えられたグループにメンバを追加します。
 
-@param group ���Ф��ɲä��륰�롼�פ���ꤷ�ޤ���
+@param group メンバを追加するグループを指定します。
 
-@param members �ɲä�����Ф�����ǻ��ꤷ�ޤ���
+@param members 追加するメンバを配列で指定します。
 

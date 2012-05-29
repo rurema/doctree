@@ -1,12 +1,12 @@
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥Þ¡¼¥¯¥¢¥Ã¥×µ­Ë¡¤òÊÝ»ý¤·¤¿¤Þ¤Þ½ÐÎÏ¤µ¤»¤ë¤¿¤á¤Î
-¥µ¥Ö¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ãƒžãƒ¼ã‚¯ã‚¢ãƒƒãƒ—è¨˜æ³•ã‚’ä¿æŒã—ãŸã¾ã¾å‡ºåŠ›ã•ã›ã‚‹ãŸã‚ã®
+ã‚µãƒ–ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
-¥µ¥Ö¥¯¥é¥¹([[c:RDoc::Markup::ToAnsi]] ¤Ê¤É)¤òºîÀ®¤·¤Æ»È¤¤¤Þ¤¹¡£
+ã‚µãƒ–ã‚¯ãƒ©ã‚¹([[c:RDoc::Markup::ToAnsi]] ãªã©)ã‚’ä½œæˆã—ã¦ä½¿ã„ã¾ã™ã€‚
 
 = class RDoc::Markup::ToRdoc < RDoc::Markup::Formatter
 
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥Þ¡¼¥¯¥¢¥Ã¥×µ­Ë¡¤òÊÝ»ý¤·¤¿¤Þ¤Þ½ÐÎÏ¤µ¤»¤ë¤¿¤á¤Î
-¥¯¥é¥¹¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ãƒžãƒ¼ã‚¯ã‚¢ãƒƒãƒ—è¨˜æ³•ã‚’ä¿æŒã—ãŸã¾ã¾å‡ºåŠ›ã•ã›ã‚‹ãŸã‚ã®
+ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
 == Class Methods
 
@@ -16,9 +16,9 @@ RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò¥Þ¡¼¥¯¥¢¥Ã¥×µ­Ë¡¤òÊÝ»ý¤·¤¿¤Þ¤Þ½ÐÎÏ¤µ¤»¤ë¤¿¤á¤Î
 --- new -> RDoc::Markup::ToRdoc
 #@end
 
-¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 #@since 1.9.3
-@param markup [[c:RDoc::Markup]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç
-              ¤Ï¿·¤·¤¯ºîÀ®¤·¤Þ¤¹¡£
+@param markup [[c:RDoc::Markup]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚çœç•¥ã—ãŸå ´åˆ
+              ã¯æ–°ã—ãä½œæˆã—ã¾ã™ã€‚
 #@end

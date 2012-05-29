@@ -1,54 +1,54 @@
 --- void rb_p(VALUE obj)
 
-p �μ��Ρ�obj �򸫤䤹�����Ϥ��ޤ���
+p の実体。obj を見やすく出力します。
 
 --- int rb_io_mode_flags(const char *mode)
 
-[[man:fopen(3)]] �Τ褦�ʥ⡼�ɻ���mode��ruby�����Υ⡼�ɥե饰��
-�Ѵ����ޤ���
+[[man:fopen(3)]] のようなモード指定modeをruby内部のモードフラグに
+変換します。
 
-mode�ϡ�[rwa][b][+] �Ȥ���ʸ����Ǥ� (��: "rb+").
-����ͤϡ�
+modeは、[rwa][b][+] という文字列です (例: "rb+").
+戻り値は、
 FMODE_READABLE,
 FMODE_WRITABLE,
 FMODE_BINMODE,
 FMODE_READWRITE
-�������¤Ǥ���FMODE_READWRITE�ϡ�FMODE_READABLE��
-FMODE_WRITEABLE�������¤Ǥ���
+の論理和です。FMODE_READWRITEは、FMODE_READABLEと
+FMODE_WRITEABLEの論理和です。
 
 --- static int rb_io_mode_flags2(int mode)
 
-[[man:open(2)]] �Τ褦�ʥ⡼�ɻ���mode��ruby�����Υ⡼�ɥե饰���Ѵ����ޤ���
+[[man:open(2)]] のようなモード指定modeをruby内部のモードフラグに変換します。
 
-mode�ϡ�O_RDONLY, O_WRONLY, O_RDWR�Τ����줫��
-�б�����ʲ����ͤΤ����줫���֤��ޤ���
+modeは、O_RDONLY, O_WRONLY, O_RDWRのいずれかで
+対応する以下の値のいずれかを返します。
 
   * FMODE_READABLE,
   * FMODE_WRITABLE,
   * FMODE_READWRITE
 
-FMODE_READWRITE�ϡ�FMODE_READABLE��
-FMODE_WRITEABLE�������¤Ǥ���
+FMODE_READWRITEは、FMODE_READABLEと
+FMODE_WRITEABLEの論理和です。
 
-Microsoft Windows �ʤɥե�����˥Х��ʥ꡿�ƥ�����°���ζ��̤�����ץ��
-�ȥۡ���Ǥϡ�mode��O_BINARY�������¤����ꤵ��Ƥ�
-��С�����ͤˤ�FMODE_BINMODE�������¤����ꤵ��ޤ���
+Microsoft Windows などファイルにバイナリ／テキスト属性の区別があるプラッ
+トホームでは、modeにO_BINARYの論理和が指定されてい
+れば、戻り値にはFMODE_BINMODEの論理和が指定されます。
 
 --- static VALUE pipe_open(char *pname, char *mode)
 
-[[man:popen(3)]] ��¹Ԥ��ޤ�������pname��mode�� [[man:popen(3)]] ��
-�������б����ޤ���
+[[man:popen(3)]] を実行します。引数pname、modeは [[man:popen(3)]] の
+引数に対応します。
 
-pname�ϡ��¹Ԥ���ץ������� "-" �ʤ�С����Ȥ� [[man:fork(2)]] ���ޤ���
+pnameは、実行するプロセスで "-" ならば、自身を [[man:fork(2)]] します。
 
-[[c:IO]] ���֥������Ȥ���������mode �� "r" �ΤȤ���
-�ҥץ�������ɸ����Ϥ��������� IO �����ϤˤĤʤ��ޤ���
+[[c:IO]] オブジェクトを生成し、mode が "r" のとき、
+子プロセスの標準出力を生成した IO の入力につなぎます。
 
-mode �� "w" �ΤȤ���
-�ҥץ�������ɸ�����Ϥ��������� IO �ν��ϤˤĤʤ��ޤ���
+mode が "w" のとき、
+子プロセスの標準入力を生成した IO の出力につなぎます。
 
-mode �� "+" ���ޤޤ��С��ҥץ�������ɸ�������Ϥ�
-�������� IO �������ϤˤĤʤ��ޤ���
+mode に "+" が含まれれば、子プロセスの標準入出力を
+生成した IO の入出力につなぎます。
 
-�������� IO ���֥������Ȥ��֤��ޤ���
-pname�� "-" �Ǥ���С��ҥץ������ˤϡ�nil ���֤��ޤ�
+生成した IO オブジェクトを返します。
+pnameが "-" であれば、子プロセスには、nil を返します

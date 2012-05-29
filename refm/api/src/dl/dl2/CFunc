@@ -1,22 +1,22 @@
 = class DL::CFunc < Object
 
-�����ʥߥå��饤�֥��δؿ���ɽ�����饹�Ǥ����̾���Υ��饹��ľ�ܻȤ鷺��
-��åѡ����饹�Ǥ��� [[c:DL::Function]] ��Ȥ��ޤ���
+ダイナミックライブラリの関数を表すクラスです。通常、このクラスを直接使わずに
+ラッパークラスである [[c:DL::Function]] を使います。
 
 == Class Methods
 
 --- new(addr, type = DL::TYPE_VOID, name = '', calltype = :cdecl)
 
-���ꤵ�줿 addr ���ؤ��饤�֥��ؿ���ɽ�� CFunc ���֥������Ȥ����������֤��ޤ���
+指定された addr が指すライブラリ関数を表す CFunc オブジェクトを生成して返します。
 
-@param addr [[m:DL::Handle#sym]] ���֤�����������ꤷ�ޤ���
+@param addr [[m:DL::Handle#sym]] が返した整数を指定します。
 
-@param type �ؿ����֤��ͤη��� [[c:DL]] ��������줿����ǻ��ꤷ�ޤ���
+@param type 関数の返り値の型を [[c:DL]] で定義された定数で指定します。
 
-@param name �ؿ���̾����ʸ����ǻ��ꤷ�ޤ���
+@param name 関数の名前を文字列で指定します。
 
-@param calltype �ؿ��θƽе���� Symbol ���֥������Ȥǻ��ꤷ�ޤ������ݡ��Ȥ���Ƥ���
-                ����� :cdecl �� :stdcall �Ǥ���
+@param calltype 関数の呼出規約を Symbol オブジェクトで指定します。サポートされている
+                規約は :cdecl と :stdcall です。
 
 @see [[url:http://ja.wikipedia.org/wiki/%E5%91%BC%E5%87%BA%E8%A6%8F%E7%B4%84]]
 
@@ -26,8 +26,8 @@
 --- last_error    -> Integer
 #@todo 
 
-�Ǹ�˴ؿ����ƤӽФ��줿�Ȥ��� errno ���������֤��ޤ���
-�����ͤϥ���åɥ�������Ǥ���
+最後に関数が呼び出されたときの errno を整数で返します。
+この値はスレッドローカルです。
 
 @see [[man:errno(3)]]
 
@@ -37,51 +37,51 @@
 --- call(arry)    -> Integer | Float | nil
 #@todo 
 
-���Ȥ�ɽ���饤�֥��ؿ���ƤӽФ��ޤ���
+自身が表すライブラリ関数を呼び出します。
 
-���Ȥ��֤��ͤη�([[m:DL::CFunc#ctype]])�� double �� float �Ǥ�����ϡ��֤��ͤ�
-Ruby �� [[c:Float]] ���֥������Ȥ��Ѵ������֤��ޤ���
-�֤��ͤη��� void �ξ��� nil ���֤��ޤ�������ʳ��ξ��������Ȥ����֤��ޤ���
+自身の返り値の型([[m:DL::CFunc#ctype]])が double か float である場合は、返り値を
+Ruby の [[c:Float]] オブジェクトに変換して返します。
+返り値の型が void の場合は nil を返します。それ以外の場合は整数として返します。
 
-@param arry �ؿ��ΰ���������������ǻ��ꤷ�ޤ���
+@param arry 関数の引数を整数の配列で指定します。
 
 @see [[m:Array#pack]], [[m:String#unpack]]
 
 --- calltype         -> Symbol
 --- calltype=(sym)
 
-���Ȥθƽе����ɽ�����������Ǥ���
-���ݡ��Ȥ���Ƥ��뵬��� :cdecl �� :stdcall �Ǥ���
+自身の呼出規約を表すアクセサです。
+サポートされている規約は :cdecl と :stdcall です。
 
-@param sym ���Ȥθƽе���� Symbol ���֥������Ȥǻ��ꤷ�ޤ���
+@param sym 自身の呼出規約を Symbol オブジェクトで指定します。
 
 @see [[url:http://ja.wikipedia.org/wiki/%E5%91%BC%E5%87%BA%E8%A6%8F%E7%B4%84]]
 
 --- ctype     -> Integer
 --- ctype=(type)
 
-���Ȥ��֤��ͤη���ɽ�����������Ǥ���
+自身の返り値の型を表すアクセサです。
 
-@param type ���Ȥ��֤��ͤη��� DL ��������줿����ǻ��ꤷ�ޤ���
+@param type 自身の返り値の型を DL に定義された定数で指定します。
 
 --- name   -> String
 
-���Ȥ�̾����ʸ������֤��ޤ���
+自身の名前を文字列で返します。
 
 --- ptr         -> Integer
 --- ptr=(addr)
 
-���Ȥ�ɽ���饤�֥��ؿ��Υ��ɥ쥹��ɽ�����������Ǥ���
+自身が表すライブラリ関数のアドレスを表すアクセサです。
 
-@param addr �饤�֥��ؿ��Υ��ɥ쥹�������ǻ��ꤷ�ޤ���
+@param addr ライブラリ関数のアドレスを整数で指定します。
 
 --- to_i    -> Integer
 
-���Ȥ�ɽ���饤�֥��ؿ��Υ��ɥ쥹���֤��ޤ���
-[[m:DL::CFunc#ptr]] ��Ʊ���Ǥ���
+自身が表すライブラリ関数のアドレスを返します。
+[[m:DL::CFunc#ptr]] と同じです。
 
 
 --- inspect   -> String
 --- to_s      -> String
 
-���Ȥξ����ʹ֤��ɤߤ䤹��ʸ����ˤ����֤��ޤ���
+自身の情報を人間に読みやすい文字列にして返します。

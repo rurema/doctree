@@ -1,10 +1,10 @@
 = class Complex < Numeric
 
-Ê£ÁÇ¿ô¤ò°·¤¦¥¯¥é¥¹¤Ç¤¹¡£
+è¤‡ç´ æ•°ã‚’æ‰±ã†ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 
-[[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤¹¤ë¤Ë¤Ï¡¢[[m:Kernel.#Complex]]¡¢
-[[m:Complex.rect]]¡¢[[m:Complex.polar]]¡¢[[m:Numeric#to_c]]¡¢
-[[m:String#to_c]] ¤Î¤¤¤º¤ì¤«¤ò»ÈÍÑ¤·¤Þ¤¹¡£
+[[c:Complex]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹ã«ã¯ã€[[m:Kernel.#Complex]]ã€
+[[m:Complex.rect]]ã€[[m:Complex.polar]]ã€[[m:Numeric#to_c]]ã€
+[[m:String#to_c]] ã®ã„ãšã‚Œã‹ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚
 
   Complex(1)           # => (1+0i)
   Complex(2, 3)        # => (2+3i)
@@ -19,7 +19,7 @@
   '2/3+3/4i'.to_c      # => ((2/3)+(3/4)*i)
   '1@2'.to_c           # => (-0.4161468365471424+0.9092974268256817i)
 
-[[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÏÍ­Íý¿ô¤Î·Á¼°¤â¼Â¿ô¤Î·Á¼°¤â°·¤¦»ö¤¬¤Ç¤­¤Þ¤¹¡£
+[[c:Complex]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯æœ‰ç†æ•°ã®å½¢å¼ã‚‚å®Ÿæ•°ã®å½¢å¼ã‚‚æ‰±ã†äº‹ãŒã§ãã¾ã™ã€‚
 
   Complex(1, 1) / 2    # => ((1/2)+(1/2)*i)
   Complex(1, 1) / 2.0  # => (0.5+0.5i)
@@ -28,11 +28,11 @@
 
 --- *(other) -> Complex
 
-ÀÑ¤ò·×»»¤·¤Þ¤¹¡£
+ç©ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤Ë³Ý¤±¤ë¿ô
+@param other è‡ªèº«ã«æŽ›ã‘ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Complex(1, 2) * 2              # => (2+4i)
   Complex(1, 2) * Complex(2, 3)  # => (-4+4i)
@@ -40,39 +40,39 @@
 
 --- **(other) -> Complex
 
-ÑÑ(¤Ù¤­)¾è¤ò·×»»¤·¤Þ¤¹¡£
+å†ª(ã¹ã)ä¹—ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò other ¾è¤¹¤ë¿ô
+@param other è‡ªèº«ã‚’ other ä¹—ã™ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Complex('i') ** 2             # => (-1+0i)
 
 --- +(other) -> Complex
 
-ÏÂ¤ò·×»»¤·¤Þ¤¹¡£
+å’Œã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ËÂ­¤¹¿ô
+@param other è‡ªèº«ã«è¶³ã™æ•°
 
-Îã:
+ä¾‹:
 
   Complex(1, 2) + Complex(2, 3) # => (3+5i)
 
 --- -(other) -> Complex
 
-º¹¤ò·×»»¤·¤Þ¤¹¡£
+å·®ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤«¤é°ú¤¯¿ô
+@param other è‡ªèº«ã‹ã‚‰å¼•ãæ•°
 
-Îã:
+ä¾‹:
 
   Complex(1, 2) - Complex(2, 3) # => (-1-1i)
 
 --- -@ -> Complex
 
-¼«¿È¤ÎÉä¹æ¤òÈ¿Å¾¤µ¤»¤¿¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®ç¬¦å·ã‚’åè»¢ã•ã›ãŸã‚‚ã®ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   -Complex(1)     # => (-1+0i)
   -Complex(-1, 1) # => (1-1i)
@@ -80,22 +80,22 @@
 --- /(other)   -> Complex
 --- quo(other) -> Complex
 
-¾¦¤ò·×»»¤·¤Þ¤¹¡£
+å•†ã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
   Complex(10)   / 3  # => ((10/3)+(0/1)*i)
 
 --- ==(other) -> bool
 
-¿ôÃÍ¤È¤·¤ÆÅù¤·¤¤¤«È½Äê¤·¤Þ¤¹¡£
+æ•°å€¤ã¨ã—ã¦ç­‰ã—ã„ã‹åˆ¤å®šã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ÈÈæ³Ó¤¹¤ë¿ôÃÍ
+@param other è‡ªèº«ã¨æ¯”è¼ƒã™ã‚‹æ•°å€¤
 
-Îã:
+ä¾‹:
 
   Complex(2, 1) == Complex(1) # => false
   Complex(1, 0) == Complex(1) # => true
@@ -104,13 +104,13 @@
 --- abs       -> Float
 --- magnitude -> Float
 
-¼«¿È¤ÎÀäÂÐÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®çµ¶å¯¾å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
-°Ê²¼¤Î·×»»¤Î·ë²Ì¤ò [[c:Float]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤·¤Þ¤¹¡£
+ä»¥ä¸‹ã®è¨ˆç®—ã®çµæžœã‚’ [[c:Float]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§è¿”ã—ã¾ã™ã€‚
 
   sqrt(self.real ** 2 + self.imag **2)
 
-Îã:
+ä¾‹:
 
   Complex(1, 2).abs         # => 2.23606797749979
   Complex(3, 4).abs         # => 5.0
@@ -120,13 +120,13 @@
 
 --- abs2 -> Numeric
 
-¼«¿È¤ÎÀäÂÐÃÍ¤Î 2 ¾è¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®çµ¶å¯¾å€¤ã® 2 ä¹—ã‚’è¿”ã—ã¾ã™ã€‚
 
-°Ê²¼¤Î·×»»¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
+ä»¥ä¸‹ã®è¨ˆç®—ã®çµæžœã‚’è¿”ã—ã¾ã™ã€‚
 
   self.real ** 2 + self.imag **2
 
-Îã:
+ä¾‹:
 
   Complex(1, 1).abs2         # => 2
   Complex(1.0, 1.0).abs2     # => 2.0
@@ -138,14 +138,14 @@
 --- angle -> Float
 --- phase -> Float
 
-¼«¿È¤ÎÊÐ³Ñ¤ò[-¦Ð,¦Ð]¤ÎÈÏ°Ï¤ÇÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®åè§’ã‚’[-Ï€,Ï€]ã®ç¯„å›²ã§è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966
 
-ÈóÀµ¤Î¼Â¼´ÉÕ¶á¤Ç¤ÎµóÆ°¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£°Ê²¼¤ÎÎã¤Î¤è¤¦¤ËµõÉô¤¬ 0.0 ¤È
--0.0 ¤Ç¤ÏÃÍ¤¬ÊÑ¤ï¤ê¤Þ¤¹¡£
+éžæ­£ã®å®Ÿè»¸ä»˜è¿‘ã§ã®æŒ™å‹•ã«æ³¨æ„ã—ã¦ãã ã•ã„ã€‚ä»¥ä¸‹ã®ä¾‹ã®ã‚ˆã†ã«è™šéƒ¨ãŒ 0.0 ã¨
+-0.0 ã§ã¯å€¤ãŒå¤‰ã‚ã‚Šã¾ã™ã€‚
 
   Complex(-1, 0).arg              #=>  3.141592653589793
   Complex(-1, -0).arg             #=>  3.141592653589793
@@ -157,40 +157,40 @@
   Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 
 #@until 1.9.3
-[Ãí°Õ] 1.9.2 °Ê²¼¤Ç¤Ï 0+0i ¤ËÂÐ¤·¤Æ¸Æ¤Ó½Ð¤¹¤ÈÎã³°
-([[c:Math::DomainError]])¤¬È¯À¸¤¹¤ë¥Ð¥°¤¬¤¢¤ê¤Þ¤¹¡£
+[æ³¨æ„] 1.9.2 ä»¥ä¸‹ã§ã¯ 0+0i ã«å¯¾ã—ã¦å‘¼ã³å‡ºã™ã¨ä¾‹å¤–
+([[c:Math::DomainError]])ãŒç™ºç”Ÿã™ã‚‹ãƒã‚°ãŒã‚ã‚Šã¾ã™ã€‚
 #@end
 
 --- coerce(other) -> [Complex, Complex]
 
-other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+other ã‚’ [[c:Complex]] ã«å¤‰æ›ã—ã¦ [self, å¤‰æ›å¾Œã® other] ã®é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
-@raise TypeError ÊÑ´¹¤Ç¤­¤Ê¤¤¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise TypeError å¤‰æ›ã§ããªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ãŸå ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(1).coerce(2) # => [(2+0i), (1+0i)]
 
 --- conjugate -> Complex
 --- conj      -> Complex
 
-¼«¿È¤Î¶¦ÌòÊ£ÁÇ¿ô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®å…±å½¹è¤‡ç´ æ•°ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(1, 2).conj # => (1-2i)
 
 --- denominator -> Integer
 
-Ê¬Êì¤òÊÖ¤·¤Þ¤¹¡£
+åˆ†æ¯ã‚’è¿”ã—ã¾ã™ã€‚
 
-°Ê²¼¤Î¤è¤¦¤Ë¡¢¼ÂÉô¤ÈµõÉô¤ÎÊ¬Êì¤ÎºÇ¾®¸øÇÜ¿ô¤òÀ°¿ô¤ÇÊÖ¤·¤Þ¤¹¡£
+ä»¥ä¸‹ã®ã‚ˆã†ã«ã€å®Ÿéƒ¨ã¨è™šéƒ¨ã®åˆ†æ¯ã®æœ€å°å…¬å€æ•°ã‚’æ•´æ•°ã§è¿”ã—ã¾ã™ã€‚
 
-  1   2       3+4i  <-  numerator(Ê¬»Ò)
+  1   2       3+4i  <-  numerator(åˆ†å­)
   - + -i  ->  ----
-  2   3        6    <-  denominator(Ê¬Êì)
+  2   3        6    <-  denominator(åˆ†æ¯)
 
-Îã:
+ä¾‹:
 
   Complex('1/2+2/3i').denominator # => 6
   Complex(3).numerator            # => 1
@@ -199,18 +199,18 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- eql?(other) -> bool
 
-¼«¿È¤È other ¤Î¼ÂÉô¤ÈµõÉô¤Î¥¯¥é¥¹¤¬Åù¤·¤¯¡¢¤½¤ì¤¾¤ì¤¬¿ôÃÍ¤È¤·¤ÆÅù¤·¤¤¾ì
-¹ç¤Ë true ¤òÊÖ¤·¤Þ¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã¨ other ã®å®Ÿéƒ¨ã¨è™šéƒ¨ã®ã‚¯ãƒ©ã‚¹ãŒç­‰ã—ãã€ãã‚Œãžã‚ŒãŒæ•°å€¤ã¨ã—ã¦ç­‰ã—ã„å ´
+åˆã« true ã‚’è¿”ã—ã¾ã™ã€‚ãã†ã§ãªã„å ´åˆã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ÈÈæ³Ó¤¹¤ë¿ôÃÍ
+@param other è‡ªèº«ã¨æ¯”è¼ƒã™ã‚‹æ•°å€¤
 
 --- fdiv(other) -> Complex
 
-¼«¿È¤Î¼ÂÉô¤ÈµõÉô¤ò¤½¤ì¤¾¤ì¼Â¿ô¤È¤·¤Æ other ¤Ç³ä¤Ã¤¿¾¦¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®å®Ÿéƒ¨ã¨è™šéƒ¨ã‚’ãã‚Œãžã‚Œå®Ÿæ•°ã¨ã—ã¦ other ã§å‰²ã£ãŸå•†ã‚’è¿”ã—ã¾ã™ã€‚
 
-@param other ¼«¿È¤ò³ä¤ë¿ô
+@param other è‡ªèº«ã‚’å‰²ã‚‹æ•°
 
-Îã:
+ä¾‹:
 
   Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
   Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
@@ -219,41 +219,41 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- hash -> Integer
 
-¼«¿È¤Î¥Ï¥Ã¥·¥åÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®ãƒãƒƒã‚·ãƒ¥å€¤ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- imag      -> Numeric
 --- imaginary -> Numeric
 
-¼«¿È¤ÎµõÉô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®è™šéƒ¨ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(3, 2).imag # => 2
 
 --- inspect -> String
 
-¼«¿È¤ò¿Í´Ö¤¬ÆÉ¤ß¤ä¤¹¤¤·Á¤ÎÊ¸»úÎóÉ½¸½¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’äººé–“ãŒèª­ã¿ã‚„ã™ã„å½¢ã®æ–‡å­—åˆ—è¡¨ç¾ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-"(1+1i)", "(1-1i)" ¤Î¤è¤¦¤ÊÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+"(1+1i)", "(1-1i)" ã®ã‚ˆã†ãªæ–‡å­—åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
 --- marshal_dump -> Array
 
-[[m:Complex#marshal_load]] ¤ÇÉü¸µ²ÄÇ½¤ÊÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+[[m:Complex#marshal_load]] ã§å¾©å…ƒå¯èƒ½ãªé…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Complex#marshal_load]]
 
 --- marshal_load -> Complex
 
-[[m:Complex#marshal_dump]] ¤ÇÆÀ¤é¤ì¤¿ÇÛÎó¤ò´ð¤Ë¡¢[[c:Complex]] ¥ª¥Ö¥¸¥§
-¥¯¥È¤òÉü¸µ¤·¤Þ¤¹¡£
+[[m:Complex#marshal_dump]] ã§å¾—ã‚‰ã‚ŒãŸé…åˆ—ã‚’åŸºã«ã€[[c:Complex]] ã‚ªãƒ–ã‚¸ã‚§
+ã‚¯ãƒˆã‚’å¾©å…ƒã—ã¾ã™ã€‚
 
 @see [[m:Complex#marshal_dump]]
 
 --- numerator -> Complex
 
-Ê¬»Ò¤òÊÖ¤·¤Þ¤¹¡£
+åˆ†å­ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex('1/2+2/3i').numerator # => (3+4i)
   Complex(3).numerator          # => (3+0i)
@@ -262,32 +262,32 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- polar -> [Numeric, Numeric]
 
-¼«¿È¤ÎÀäÂÐÃÍ¤ÈÊÐ³Ñ¤òÇÛÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®çµ¶å¯¾å€¤ã¨åè§’ã‚’é…åˆ—ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex.polar(1, 2).polar # => [1, 2]
 
 --- real -> Numeric
 
-¼«¿È¤Î¼ÂÉô¤òÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã®å®Ÿéƒ¨ã‚’è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(3, 2).real # => 3
 
 --- real? -> false
 
-¾ï¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
+å¸¸ã« false ã‚’è¿”ã—ã¾ã™ã€‚
 
 @see [[m:Numeric#real?]]
 
 --- rect        -> [Numeric, Numeric]
 --- rectangular -> [Numeric, Numeric]
 
-¼ÂÉô¤ÈµõÉô¤òÇÛÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+å®Ÿéƒ¨ã¨è™šéƒ¨ã‚’é…åˆ—ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(3).rect    # => [3, 0]
   Complex(3.5).rect  # => [3.5, 0]
@@ -295,11 +295,11 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- to_f -> Float
 
-¼«¿È¤ò [[c:Float]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Float]] ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@raise RangeError µõÉô¤¬ 0 ¤Ç¤Ï¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise RangeError è™šéƒ¨ãŒ 0 ã§ã¯ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(3).to_f    # => 3.0
   Complex(3.5).to_f  # => 3.5
@@ -307,11 +307,11 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- to_i -> Integer
 
-¼«¿È¤òÀ°¿ô¤ËÊÑ´¹¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’æ•´æ•°ã«å¤‰æ›ã—ã¾ã™ã€‚
 
-@raise RangeError µõÉô¤¬ 0 ¤Ç¤Ï¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise RangeError è™šéƒ¨ãŒ 0 ã§ã¯ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(3).to_i    # => 3
   Complex(3).to_i    # => 3
@@ -324,38 +324,38 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 --- rationalize(eps) -> Rational
 #@end
 
-¼«¿È¤ò [[c:Rational]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ [[c:Rational]] ã«å¤‰æ›ã—ã¾ã™ã€‚
 
 #@since 1.9.2
-@param eps µöÍÆ¤¹¤ë¸íº¹¡£¾ï¤ËÌµ»ë¤µ¤ì¤Þ¤¹¡£
+@param eps è¨±å®¹ã™ã‚‹èª¤å·®ã€‚å¸¸ã«ç„¡è¦–ã•ã‚Œã¾ã™ã€‚
 #@end
 
-@raise RangeError µõÉô¤¬ 0 ¤Ç¤Ï¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise RangeError è™šéƒ¨ãŒ 0 ã§ã¯ãªã„å ´åˆã«ç™ºç”Ÿã—ã¾ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex(3).to_r    # => (3/1)
   Complex(3, 2).to_r # => RangeError
 
-#@# rationalize ¥á¥½¥Ã¥É¤Î°ú¿ô eps ¤Ï¾ï¤ËÌµ»ë¤µ¤ì¤ë¤¿¤á¡¢to_r ¥á¥½¥Ã¥É
-#@# ¤ÈÆ±¤¸¥¨¥ó¥È¥ê¤È¤·¤Þ¤·¤¿(sho-h)¡£
+#@# rationalize ãƒ¡ã‚½ãƒƒãƒ‰ã®å¼•æ•° eps ã¯å¸¸ã«ç„¡è¦–ã•ã‚Œã‚‹ãŸã‚ã€to_r ãƒ¡ã‚½ãƒƒãƒ‰
+#@# ã¨åŒã˜ã‚¨ãƒ³ãƒˆãƒªã¨ã—ã¾ã—ãŸ(sho-h)ã€‚
 
 --- to_s -> String
 
-¼«¿È¤ò "¼ÂÉô + µõÉôi" ·Á¼°¤ÎÊ¸»úÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’ "å®Ÿéƒ¨ + è™šéƒ¨i" å½¢å¼ã®æ–‡å­—åˆ—ã«ã—ã¦è¿”ã—ã¾ã™ã€‚
 
 == Class Methods
 
 --- rect(r, i = 0)        -> Complex
 --- rectangular(r, i = 0) -> Complex
 
-¼ÂÉô¤¬ r¡¢µõÉô¤¬ i ¤Ç¤¢¤ë [[c:Complex]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+å®Ÿéƒ¨ãŒ rã€è™šéƒ¨ãŒ i ã§ã‚ã‚‹ [[c:Complex]] ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-@param r À¸À®¤¹¤ëÊ£ÁÇ¿ô¤Î¼ÂÉô¡£
+@param r ç”Ÿæˆã™ã‚‹è¤‡ç´ æ•°ã®å®Ÿéƒ¨ã€‚
 
-@param i À¸À®¤¹¤ëÊ£ÁÇ¿ô¤ÎµõÉô¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï 0 ¤Ç¤¹¡£
+@param i ç”Ÿæˆã™ã‚‹è¤‡ç´ æ•°ã®è™šéƒ¨ã€‚çœç•¥ã—ãŸå ´åˆã¯ 0 ã§ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex.rect(1)           # => (1+0i)
   Complex.rect(1, 2)        # => (1+2i)
@@ -365,13 +365,13 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- polar(r, theta = 0) -> Complex
 
-ÀäÂÐÃÍ¤¬ r¡¢ÊÐ³Ñ¤¬ theta ¤Ç¤¢¤ë [[c:Complex]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+çµ¶å¯¾å€¤ãŒ rã€åè§’ãŒ theta ã§ã‚ã‚‹ [[c:Complex]] ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ã€‚
 
-@param r À¸À®¤¹¤ëÊ£ÁÇ¿ô¤ÎÀäÂÐÃÍ¡£
+@param r ç”Ÿæˆã™ã‚‹è¤‡ç´ æ•°ã®çµ¶å¯¾å€¤ã€‚
 
-@param theta À¸À®¤¹¤ëÊ£ÁÇ¿ô¤ÎÊÐ³Ñ¡£Ã±°Ì¤Ï¥é¥¸¥¢¥ó¤Ç¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï 0 ¤Ç¤¹¡£
+@param theta ç”Ÿæˆã™ã‚‹è¤‡ç´ æ•°ã®åè§’ã€‚å˜ä½ã¯ãƒ©ã‚¸ã‚¢ãƒ³ã§ã™ã€‚çœç•¥ã—ãŸå ´åˆã¯ 0 ã§ã™ã€‚
 
-Îã:
+ä¾‹:
 
   Complex.polar(2.0)            # => (2.0+0.0i)
   Complex.polar(2.0, 0)         # => (2.0+0.0i)
@@ -381,4 +381,4 @@ other ¤ò [[c:Complex]] ¤ËÊÑ´¹¤·¤Æ [self, ÊÑ´¹¸å¤Î other] ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- I -> Complex
 
-µõ¿ôÃ±°Ì¤Ç¤¹¡£(0+1i) ¤òÊÖ¤·¤Þ¤¹¡£
+è™šæ•°å˜ä½ã§ã™ã€‚(0+1i) ã‚’è¿”ã—ã¾ã™ã€‚

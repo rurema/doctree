@@ -1,38 +1,38 @@
-����å�Ʊ�������Ǥ��� Mutex �Υ⥸�塼���Ǥ��󶡤���饤�֥��Ǥ���
+スレッド同期機構である Mutex のモジュール版を提供するライブラリです。
 
 = module Mutex_m
 
-����å�Ʊ�������Ǥ��� [[c:Mutex]] �Υ⥸�塼���ǤǤ������饹��
-[[m:Module#include]] ���뤳�ȤǤ��Υ��饹�� Mutex ��ǽ��������뤳�Ȥ��Ǥ��ޤ���
-�ޤ������̤Υ��֥������Ȥ� [[m:Object#extend]] �ˤ�� Mutex �ˤ�������Ǥ��ޤ���
+スレッド同期機構である [[c:Mutex]] のモジュール版です。クラスに
+[[m:Module#include]] することでそのクラスに Mutex 機能を持たせることができます。
+また、普通のオブジェクトを [[m:Object#extend]] により Mutex にする事ができます。
 
-���Υ⥸�塼��ˤ����å��Ϻ����Բ�ǽ�Ǥ���������ǽ��Ʊ���ʤ�ɬ�פʾ���
-[[c:Sync_m]] �����Ѥ�ͤ��Ƥ���������
+このモジュールによるロックは再入不可能です。再入可能な同等品が必要な場合は
+[[c:Sync_m]] の利用を考えてください。
 
-��mu_�פ��դ��ʤ��᥽�å�([[m:Mutex_m#lock]], [[m:Mutex_m#synchronize]], 
+「mu_」の付かないメソッド([[m:Mutex_m#lock]], [[m:Mutex_m#synchronize]], 
 [[m:Mutex_m#locked?]], [[m:Mutex_m#try_lock]], [[m:Mutex_m#unlock]])
-�ϥ⥸�塼���include�������ˤ��������ޤ���
+はモジュールにincludeした場合には定義されません。
 
 [[ruby-list:1991]]
 
-=== ��
-���饹�� [[m:Module#include]] ������
+=== 例
+クラスに [[m:Module#include]] する例
   class Foo
     include Mutex_m
     ...
   end
   obj = Foo.new
   obj.synchronize do 
-    # �����ΰ�(critical section)
+    # 危険領域(critical section)
     ...
   end
 
-���֥������Ȥ� [[m:Object#extend]] ������
+オブジェクトに [[m:Object#extend]] する例
   require "mutex_m"
   obj = Object.new
   obj.extend(Mutex_m)
   obj.lock
-  # �����ΰ�(critical section)  
+  # 危険領域(critical section)  
   ... 
   obj.unlock
 
@@ -40,17 +40,17 @@
 
 --- append_features(klass) -> Class | nil
 
-�桼����ľ�ܡ��Ȥ����ȤϤ���ޤ���
+ユーザが直接、使うことはありません。
 
 @see [[m:Module#append_features]]
 
 --- define_aliases(klass) -> Class
 
-�桼����ľ�ܡ��Ȥ����ȤϤ���ޤ���
+ユーザが直接、使うことはありません。
 
 --- extend_object(module) -> Module
 
-�桼����ľ�ܡ��Ȥ����ȤϤ���ޤ���
+ユーザが直接、使うことはありません。
 
 @see [[m:Module#extend_object]]
 
@@ -58,15 +58,15 @@
 
 --- mu_extended -> Mutex
 
-[[m:Mutex_m.extend_object]] ����ƤӽФ���ޤ���
-�桼����ľ�ܻȤ����ȤϤ���ޤ���
+[[m:Mutex_m.extend_object]] から呼び出されます。
+ユーザが直接使うことはありません。
 
 --- mu_synchronize{ ... } -> object
 --- synchronize{ ... } -> object
 
-self �Υ��å�����������֥��å���¹Ԥ��ޤ����¹Ը��ɬ�����å���������ޤ���
+self のロックを取得し、ブロックを実行します。実行後に必ずロックを解放します。
 
-�֥��å��ǺǸ��ɾ�������ͤ��֤��ޤ���
+ブロックで最後に評価した値を返します。
 
 #@until 1.9.1
 --- mu_lock -> self
@@ -75,23 +75,23 @@ self �Υ��å�����������֥��å���¹Ԥ��ޤ����¹Ը��ɬ�����å���������ޤ���
 --- mu_lock -> ()
 --- lock -> ()
 #@end
-self ����å����ޤ������٤ˤҤȤĤΥ���åɤ������å��Ǥ��ޤ���
-���˥��å�����Ƥ��� mutex ���Ф��ƥ��å���Ԥ����Ȥ�������åɤ�
-���å������������ޤǡ��¹Ԥ���ߤ���ޤ���
+self をロックします。一度にひとつのスレッドしかロックできません。
+既にロックされている mutex に対してロックを行おうとしたスレッドは
+ロックが解放されるまで、実行が停止されます。
 
 #@until 1.9.1
-self ���֤��ޤ���
+self を返します。
 #@end
 
 --- mu_locked? -> bool
 --- locked? -> bool
-self �����å�����Ƥ�����������֤��ޤ���
+self がロックされている時、真を返します。
 
 --- mu_try_lock -> bool
 --- try_lock -> bool
-self ����å����褦�Ȥ��ơ�����������硢�����֤������å������ޤ���
+self をロックしようとして、成功した場合、真を返し、ロックを得ます。
 
-���å��Ǥ��ʤ��ä����ˤϥ֥��å����������֤��ޤ���
+ロックできなかった場合にはブロックせず偽を返します。
 
 #@until 1.9.1
 --- mu_unlock -> self | nil
@@ -100,11 +100,11 @@ self ����å����褦�Ȥ��ơ�����������硢�����֤������å������ޤ���
 --- mu_unlock -> ()
 --- unlock -> ()
 #@end
-���å���������ޤ������å��Ԥ��ˤʤäƤ�������åɤμ¹ԤϺƳ�����ޤ���
+ロックを解放します。ロック待ちになっていたスレッドの実行は再開されます。
 
 #@until 1.9.1
-self �����å�����Ƥ��ʤ���� nil ���֤��ޤ��������Ǥʤ����self ���֤��ޤ���
+self がロックされていなければ nil を返します。そうでなければself を返します。
 #@else
-@raise ThreadError ���å�����Ƥ��ʤ����� unlock ��Ƥ֤�ȯ�����ޤ�
+@raise ThreadError ロックされていない場合に unlock を呼ぶと発生します
 #@end
 

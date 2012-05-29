@@ -1,27 +1,27 @@
 = Regexp
-* \w�����ܸ�ʸ����ޤޤ�뤬��$KCODE��Ŭ�ڤ����ꤹ�뤫��
-  ���̤˻��ꤹ��ɬ�פ����롣
-  (\b��\w��\W��ɽ����0������ɽ����)
+* \wに日本語文字も含まれるが、$KCODEを適切に設定するか、
+  個別に指定する必要がある。
+  (\bは\wと\Wを表す幅0の正規表現。)
 
-    # euc-jp�δĶ��ξ��
-    /a\b/ === '��a��'  #=> 2
-    /\ba/ === '��a��'  #=> nil
-    /\ba/e === '��a��' #=> nil
-    /\ba/e === '��a��' #=> nil
+    # euc-jpの環境の場合
+    /a\b/ === 'あaあ'  #=> 2
+    /\ba/ === 'あaあ'  #=> nil
+    /\ba/e === 'あaあ' #=> nil
+    /\ba/e === 'あaあ' #=> nil
 
-    # Shift_JIS�δĶ��ξ��
-    /a\b/ === '��a��'  #=> 3
-    /\ba/ === '��a��'  #=> nil
-    /\ba/s === '��a��' #=> nil
-    /\ba/s === '��a��' #=> nil
+    # Shift_JISの環境の場合
+    /a\b/ === 'あaあ'  #=> 3
+    /\ba/ === 'あaあ'  #=> nil
+    /\ba/s === 'あaあ' #=> nil
+    /\ba/s === 'あaあ' #=> nil
 
-* Regexp#eql?��Regexp#hash���������Ƥ��ʤ�
-  (Object#eql?��Object#hash���Ȥ���)�Τǡ�
-  Hash�Υ����ˤϸ����Ƥ��ޤ���
+* Regexp#eql?とRegexp#hashは定義されていない
+  (Object#eql?とObject#hashが使われる)ので、
+  Hashのキーには向いていません。
 
     //.eql? // #=> false
 
-    2003-05-07: ���ߤ��������Ƥ��ޤ���
+    2003-05-07: 現在は定義されています。
 
     p(//.eql?(//))
     => ruby 1.6.8 (2002-12-24) [i586-linux]
@@ -31,24 +31,24 @@
     => ruby 1.8.0 (2002-12-31) [i586-linux]
        true
 
-* ����ʸ�����ޤ�����ɽ��������ˤ�
-  ((<Regexp#quote|Regexp/quote>))����ɬ�פ�����ޤ���
-  ((-�������ƥ��ۡ���ˤʤ��ǽ���⤢��Τǽ�ʬ���դ��Ƥ���������-))
+* ある文字列を含む正規表現を作る場合には
+  ((<Regexp#quote|Regexp/quote>))する必要があります。
+  ((-セキュリティホールになる可能性もあるので十分注意してください。-))
 
     a = 'a.c'
-    /^#{a}$/ === 'abc'              #=> 0   (�ޥå�����)
-    /^#{Regexp.quote a}$/ === 'abc' #=> nil (�ޥå����ʤ�)
+    /^#{a}$/ === 'abc'              #=> 0   (マッチした)
+    /^#{Regexp.quote a}$/ === 'abc' #=> nil (マッチしない)
 
-* Perl�Ǥ�����ɽ�� $ �˥ޥå��Ǥ���ս꤬ʸ���������� "\n" �����2����
-  ����ޤ�����Ruby�Ǥ�1���ꤷ������ޤ���(����ruby 1.8 �� Perl ��
-  �����褦�ˤʤ�ޤ�����((<ruby-dev:20125>)))
+* Perlでは正規表現 $ にマッチできる箇所が文字列末尾の "\n" の中に2カ所
+  ありますが、Rubyでは1カ所しかありません。(が、ruby 1.8 で Perl に
+  従うようになりました。((<ruby-dev:20125>)))
 
-      # Perl �Ǥ� $ �ϲ��Ԥ�����ʸ���������˥ޥå�����
+      # Perl では $ は改行の前と文字列末尾にマッチする
       % perl -e '$s = "\n"; $s =~ s/$/o/g;   print "[$s]\n";'
       [o
       o]
 
-      # Ruby �Ǥ� $ �ϲ��Ԥ����ˤ����ޥå����ʤ�
+      # Ruby では $ は改行の前にしかマッチしない
       % ruby -e '$s = "\n"; $s.gsub!(/$/, "o"); print "[#$s]\n"'
       [o
       ]

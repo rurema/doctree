@@ -8,36 +8,36 @@ require rdoc/parser/simple
 require rdoc/parsers/parse_simple
 #@end
 
-rdoc �ǲ��ϤǤ���ե�����μ�����ɲä��뤿��Υ��֥饤�֥��Ǥ���
+rdoc で解析できるファイルの種類を追加するためのサブライブラリです。
 
-�ʲ��Υ᥽�åɤ�����������饹�����������ǡ��������ѡ������饹�����
-��������Ǥ��ޤ���
+以下のメソッドを定義したクラスを作成する事で、新しいパーサクラスを作成
+する事ができます。
 
  * #initialize(top_level, file_name, body, options, stats)
  * #scan
 
-initialize �᥽�åɤϰʲ��ΰ�����������ޤ���
+initialize メソッドは以下の引数を受け取ります。
 
- * top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
- * file_name: file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
- * body: �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+ * top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
+ * file_name: file_name ファイル名を文字列で指定します。
+ * body: ソースコードの内容を文字列で指定します。
 #@since 1.9.1
- * options: [[c:RDoc::Options]] ���֥������Ȥ���ꤷ�ޤ���
+ * options: [[c:RDoc::Options]] オブジェクトを指定します。
 #@else
- * options: [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+ * options: [[c:Options]] オブジェクトを指定します。
 #@end
- * stats: [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+ * stats: [[c:RDoc::Stats]] オブジェクトを指定します。
 
-scan �᥽�åɤϰ�����������ޤ��󡣽����θ��ɬ��
-[[c:RDoc::TopLevel]] ���֥������Ȥ��֤�ɬ�פ�����ޤ���
+scan メソッドは引数を受け取りません。処理の後は必ず
+[[c:RDoc::TopLevel]] オブジェクトを返す必要があります。
 
 #@since 1.9.1
-�ޤ���[[c:RDoc::Parser]] �ϥե�����̾����ѡ������饹���������Τˤ��
-���ޤ������Τ���ˡ���������������ѡ������饹�Ǥ� [[c:RDoc::Parser]]
-��Ѿ�����parse_files_matching �᥽�åɤǼ��Ȥ����ϤǤ���ե�����̾�Υ�
-���������Ͽ���Ƥ���ɬ�פ�����ޤ���
+また、[[c:RDoc::Parser]] はファイル名からパーサクラスを取得するのにも使
+われます。このために、新しく作成するパーサクラスでは [[c:RDoc::Parser]]
+を継承し、parse_files_matching メソッドで自身が解析できるファイル名のパ
+ターンを登録しておく必要があります。
 
-��:
+例:
 
   require "rdoc/parser"
   
@@ -54,12 +54,12 @@ scan �᥽�åɤϰ�����������ޤ��󡣽����θ��ɬ��
   end
 
 #@else
-�ޤ���[[c:RDoc::ParserFactory]] �ϥե�����̾����ѡ������饹���������
-�Τˤ�Ȥ��ޤ������Τ���ˡ���������������ѡ������饹�Ǥ�
-[[c:RDoc::ParserFactory]] �� extend ����parse_files_matching �᥽�åɤ�
-���Ȥ����ϤǤ���ե�����̾�Υѥ��������Ͽ���Ƥ���ɬ�פ�����ޤ���
+また、[[c:RDoc::ParserFactory]] はファイル名からパーサクラスを取得する
+のにも使われます。このために、新しく作成するパーサクラスでは
+[[c:RDoc::ParserFactory]] を extend し、parse_files_matching メソッドで
+自身が解析できるファイル名のパターンを登録しておく必要があります。
 
-��:
+例:
 
    require "rdoc/parsers/parserfactory"
    
@@ -84,20 +84,20 @@ scan �᥽�åɤϰ�����������ޤ��󡣽����θ��ɬ��
 #@since 1.9.1
 = class RDoc::Parser
 
-�����������ɤ���Ϥ���ѡ������������뤿��δ��ܥ��饹�Ǥ���
+ソースコードを解析するパーサを生成するための基本クラスです。
 
-�������ѡ��������������ˤϷѾ����ƻ��Ѥ��ޤ���
+新しいパーサを作成する場合には継承して使用します。
 #@else
 = module RDoc::ParserFactory
 
-�����������ɤ���Ϥ���ѡ������������뤿��Υե����ȥꥯ�饹�Ǥ���
+ソースコードを解析するパーサを生成するためのファクトリクラスです。
 
-�������ѡ��������������ˤ� extend ���ƻ��Ѥ��ޤ���
+新しいパーサを作成する場合には extend して使用します。
 
-[����] 1.9 �ϤǤϡ�require ��䥯�饹̾���ʲ��Τ褦���ѹ��ˤʤ�ޤ�����
+[注意] 1.9 系では、require 先やクラス名が以下のように変更になりました。
 
- * require ��: rdoc/parser
- * ���饹̾: RDoc::Parser
+ * require 先: rdoc/parser
+ * クラス名: RDoc::Parser
 #@end
 
 == class Methods
@@ -108,23 +108,23 @@ scan �᥽�åɤϰ�����������ޤ��󡣽����θ��ɬ��
 --- can_parse(file_name) -> RDoc::C_Parser | RDoc::RubyParser | RDoc::Fortran95parser | nil
 #@end
 
-file_name ����ϤǤ���ѡ������饹���֤��ޤ������Ĥ���ʤ��ä�����
-nil ���֤��ޤ���
+file_name を解析できるパーサクラスを返します。見つからなかった場合は
+nil を返します。
 
-@param file_name ���Ϥ���ե������̾������ꤷ�ޤ���
+@param file_name 解析するファイルの名前を指定します。
 
 --- alias_extension(old_ext, new_ext) -> bool
 
-old_ext ����Ͽ���줿�ѡ����� new_ext �Ǥ���ϤǤ���褦�˥����ꥢ������
-Ͽ���ޤ���
+old_ext に登録されたパーサを new_ext でも解析できるようにエイリアスを登
+録します。
 
-@param old_ext ��ĥ�Ҥ�ʸ����ǻ��ꤷ�ޤ���
+@param old_ext 拡張子を文字列で指定します。
 
-@param new_ext ��ĥ�Ҥ�ʸ����ǻ��ꤷ�ޤ���
+@param new_ext 拡張子を文字列で指定します。
 
-@return �����ꥢ������Ͽ���줿���� true ���֤��ޤ���old_ext �˥ѡ���
-        ����Ͽ����Ƥ��ʤ���硢�����ꥢ������Ͽ���줺�� false ���֤���
-        ����
+@return エイリアスが登録された場合は true を返します。old_ext にパーサ
+        が登録されていない場合、エイリアスが登録されずに false を返しま
+        す。
 
 #@since 1.9.1
 --- parser_for(top_level, file_name, body, options, stats) -> RDoc::Parser
@@ -132,46 +132,46 @@ old_ext ����Ͽ���줿�ѡ����� new_ext �Ǥ���ϤǤ���褦�˥����ꥢ������
 --- parser_for(top_level, file_name, body, options, stats) -> RDoc::C_Parser | RDoc::RubyParser | RDoc::Fortran95parser | RDoc::SimpleParser
 #@end
 
-file_name ����ϤǤ���ѡ����Υ��󥹥��󥹤��֤��ޤ���
+file_name を解析できるパーサのインスタンスを返します。
 #@since 1.9.1
-���Ĥ���ʤ��ä����� [[c:RDoc::Parser::Simple]] �Υ��󥹥��󥹤��֤��ޤ���
+見つからなかった場合は [[c:RDoc::Parser::Simple]] のインスタンスを返します。
 #@else
-���Ĥ���ʤ��ä����� [[c:RDoc::SimpleParser]] �Υ��󥹥��󥹤��֤��ޤ���
+見つからなかった場合は [[c:RDoc::SimpleParser]] のインスタンスを返します。
 #@end
 
-@param top_level [[c:RDoc::TopLevel]] ���֥������Ȥ���ꤷ�ޤ���
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
 
-@param file_name �ե�����̾��ʸ����ǻ��ꤷ�ޤ���
+@param file_name ファイル名を文字列で指定します。
 
-@param body �����������ɤ����Ƥ�ʸ����ǻ��ꤷ�ޤ���
+@param body ソースコードの内容を文字列で指定します。
 
 #@since 1.9.1
-@param options [[c:RDoc::Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:RDoc::Options]] オブジェクトを指定します。
 #@else
-@param options [[c:Options]] ���֥������Ȥ���ꤷ�ޤ���
+@param options [[c:Options]] オブジェクトを指定します。
 #@end
 
-@param stats [[c:RDoc::Stats]] ���֥������Ȥ���ꤷ�ޤ���
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 
 #@since 1.9.1
 --- parsers -> [[Regexp, RDoc::Parser]]
 
-[[m:RDoc::Parser#parse_files_matching]] ����Ͽ��������ɽ���ȥѡ�������
-���������������֤��ޤ���
+[[m:RDoc::Parser#parse_files_matching]] で登録した正規表現とパーサクラ
+スの配列の配列を返します。
 #@end
 
 == Instance Methods
 
 --- parse_files_matching(regexp) -> ()
 
-regexp �ǻ��ꤷ������ɽ���˥ޥå�����ե��������ϤǤ���ѡ����Ȥ��ơ�
-���Ȥ���Ͽ���ޤ���
+regexp で指定した正規表現にマッチするファイルを解析できるパーサとして、
+自身を登録します。
 
-@param regexp ����ɽ������ꤷ�ޤ���
+@param regexp 正規表現を指定します。
 
-�������ѡ��������������˻��Ѥ��ޤ���
+新しいパーサを作成する時に使用します。
 
-��:
+例:
 
 #@since 1.9.1
   class RDoc::Parser::Xyz < RDoc::Parser

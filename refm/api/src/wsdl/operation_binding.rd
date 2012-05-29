@@ -12,7 +12,7 @@ require wsdl/info
 --- fault
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- find_operation
 #@todo
@@ -20,17 +20,17 @@ require wsdl/info
 --- input
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- output
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo
@@ -52,7 +52,7 @@ require wsdl/info
 --- soapoperation
 #@todo
 
-Â°À­
+å±žæ€§
 
 #@since 1.8.3
 --- soapoperation_name

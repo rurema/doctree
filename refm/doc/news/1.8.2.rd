@@ -1,59 +1,59 @@
 = ruby 1.8.2 feature
 
-ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
+ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 
-�Ǻ�����
+掲載方針
 
-*�Х������αƶ���ޤ��ư��Ѥ���Τ��Ͽ���롣
-*ñ�˥Х���ľ���������Τ�Τϼ�Ͽ���ʤ���
-*�饤�֥��ؤ�ñ�ʤ�������ɲäϼ�Ͽ���ʤ���
+*バグ修正の影響も含めて動作が変わるものを収録する。
+*単にバグを直しただけのものは収録しない。
+*ライブラリへの単なる定数の追加は収録しない。
 
-�ʲ��ϳ��ѹ������դ���٤������Ǥ���
+以下は各変更点に付けるべきタグです。
 
-*���ƥ���
-  * [ruby]: ruby ���󥿥ץ꥿���ѹ�
-  * [api]: ��ĥ�饤�֥�� API
-  * [lib]: �饤�֥��
-*��٥�
-  * [bug]: �Х�����
-  * [new]: �ɲä��줿���饹���᥽�åɤʤ�
-  * [compat]: �ѹ����줿���饹���᥽�åɤʤ�
-    * �ߴ����Τ����ѹ�
+*カテゴリ
+  * [ruby]: ruby インタプリタの変更
+  * [api]: 拡張ライブラリ API
+  * [lib]: ライブラリ
+*レベル
+  * [bug]: バグ修正
+  * [new]: 追加されたクラス／メソッドなど
+  * [compat]: 変更されたクラス／メソッドなど
+    * 互換性のある変更
     * only backward-compatibility
-    * �ƶ����ϰϤ��������Ȼפ����ѹ�
-  * [change]: �ѹ����줿���饹���᥽�åɤʤ�(�ߴ����Τʤ��ѹ�)
-  * [experimental]: �ѹ�����Ǥ��ä˼¸�Ū�ʤ��(����ƹͤ����ߤ�����Ρ�)
-  * [obsolete]: �ѻߤ��줿(�����ͽ���)��ǽ
-  * [platform]: �б��ץ�åȥե�������ɲ�
+    * 影響の範囲が小さいと思われる変更
+  * [change]: 変更されたクラス／メソッドなど(互換性のない変更)
+  * [experimental]: 変更の中でも特に実験的なもの(将来再考して欲しいもの？)
+  * [obsolete]: 廃止された(される予定の)機能
+  * [platform]: 対応プラットフォームの追加
 
 == 1.8.1 (2003-12-25) -> 1.8.2 (2004-12-25) 
 
-* cgi/session �ˤ����ƥ��饤����Ȥ��饻�å���� ID �����Ǥ��Ƥ��ޤ��Х���
-  ��������ޤ�����
-* cgi/session �ˤ����ƥ��å����������¸����ե�����̾�˥��å���� ID ��
-  �Ȥ���Х�����������ޤ�����
-* cgi ��̵�¥롼�פ˴٤��ǽ���Τ���Х�����������ޤ�����
+* cgi/session においてクライアントからセッション ID を指定できてしまうバグが
+  修正されました。
+* cgi/session においてセッション情報を保存するファイル名にセッション ID が
+  使われるバグが修正されました。
+* cgi の無限ループに陥る可能性のあるバグが修正されました。
   ((<URL:http://www.debian.org/security/2004/dsa-586>))
-* ��Ϣ�� core dumps �Х�����������ޤ�����
+* 一連の core dumps バグが修正されました。
   ((<URL:http://jp.rubyist.net/magazine/?0002-RubyCore>))
-* tk ���ѹ����� 
+* tk の変更点は 
   ((<URL:http://jp.rubyist.net/magazine/?0003-RubyTkMovement>)) 
-  �򻲾Ȥ��Ʋ�������
-* soap, wsdl ���ѹ�����
+  を参照して下さい。
+* soap, wsdl の変更点は
   ((<URL:http://rrr.jin.gr.jp/projects/soap4r/wiki/Changes-ruby181_ruby182>))
-  �򻲾Ȥ��Ʋ�������
-* rss, rdoc, yaml ���ѹ����ϼ�Ͽ���Ƥ��ޤ���
+  を参照して下さい。
+* rss, rdoc, yaml の変更点は収録していません。
 
 
-=== ����̤��
+=== 日時未詳
 : CGI#server_port [lib] [bug]
-  ��� 0 ���֤��Х�����������ޤ�����
+  常に 0 を返すバグが修正されました。
 
 === 2004-12-19
 
 : OpenSSL::X509::Store#time=           [lib] [new]
 : OpenSSL::X509::StoreContext#time=    [lib] [new]
-  �ɲá�
+  追加。
 
 : OpenSSL::X509::Name::RFC2253DN       [lib] [new]
   module for RFC2253 DN format.
@@ -64,33 +64,33 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 === 2004-12-18
 
 : Object#id [ruby] [obsolete]
-  ��˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����Object#object_id ��ȤäƲ�������
+  常に警告がでるようになりました。Object#object_id を使って下さい。
 
 === 2004-12-17
 : CGI::Session#initialize [lib] [compat]
-  'no_hidden' ���ץ��������Ǥ���褦�ˤʤ�ޤ�����((<ruby-talk:123850>))
+  'no_hidden' オプションを指定できるようになりました。((<ruby-talk:123850>))
 
 === 2004-12-16
 
 : Hash#eql? [ruby] [obsolete]
 : Hash#hash [ruby] [obsolete]
 
-  ���
+  削除
   ((<ruby-dev:25206>))?
 
 === 2004-12-14
 : CGI::Session.initialize [lib] [change]
-  ¸�ߤ��ʤ����å���� ID �����饤����Ȥ��������Ƥ������
-  �㳰���ꤲ���˿��������å������������褦�ˤʤ�ޤ�����
+  存在しないセッション ID がクライアントから送られてきた場合
+  例外を投げずに新しいセッションを作成するようになりました。
   ((<ruby-list:40368>))
 
 === 2004-12-09
 : eval('Foo #@ bar'.inspect) [ruby] [bug]
-  ���󥿥å������顼�ˤʤ�ʤ��褦�˽������ޤ�����
+  シンタックスエラーにならないように修正しました。
   ((<ruby-core:03922>))
 
 : String#inspect [ruby] [bug]
-  ��Ÿ���ˤʤ� '#'�����������פ����褦�ˤʤ�ޤ����� 
+  式展開になる '#'がエスケープされるようになりました。 
   ((<ruby-core:03922>))
     $ ruby1.8.1 -e "puts '# #{}'.inspect"
     "# #{}"
@@ -99,7 +99,7 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
     "# \#{}"
 
 : String#dump [ruby] [bug]
-  ��Ÿ���ˤʤ�ʤ� '#'�����������פ���ʤ��褦�ˤʤ�ޤ����� 
+  式展開にならない '#'がエスケープされないようになりました。 
   ((<ruby-core:03922>))
     $ ruby1.8.1 -e "puts '# #{}'.dump"
     "\# \#{}"
@@ -114,11 +114,11 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 === 2004-12-06 
 : Hash#hash [ruby] [new]
 
-  �ɲ�
+  追加
 
   ((<ruby-talk:122482>))
 
-  Hash#hash �� 2004-12-16 �˺������ޤ�����
+  Hash#hash は 2004-12-16 に削除されました。
   ((<ruby-dev:25206>))?
 
 : OpenSSL::PKey::RSA.public_encrypt   [lib] [compat]
@@ -126,7 +126,7 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 : OpenSSL::PKey::RSA.private_encrypt  [lib] [compat]
 : OpenSSL::PKey::RSA.private_decrypt  [lib] [compat]
 
-  �ѥǥ��󥰤��������褦�ˤʤ�ޤ�����((<ruby-talk:122539>))��PKCS1_PADDING, SSLV23_PADDING, NO_PADDING and PKCS1_OAEP_PADDING under OpenSSL::PKey::RSA.
+  パディングを指定出来るようになりました。((<ruby-talk:122539>))。PKCS1_PADDING, SSLV23_PADDING, NO_PADDING and PKCS1_OAEP_PADDING under OpenSSL::PKey::RSA.
 
 === 2004-12-05
 : OptionParser::Completion#complete [lib] [compat]
@@ -137,12 +137,12 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2004-12-04
 : NKF.guess [lib] [compat]
-  NKF.guess �� NKF.guess2 �� alias �ˤʤ�ޤ����� ����Τ�Τ�Ȥ���������
-  NKF.guess1 ��ȤäƲ�������
+  NKF.guess は NKF.guess2 の alias になりました。 従来のものを使いたい場合は
+  NKF.guess1 を使って下さい。
 
 === 2004-11-20
 : ext/nkf/nkf-utf8/  [lib] [new]
-  utf8 �б� nkf (nkf 2.x) ���ɲá�
+  utf8 対応 nkf (nkf 2.x) の追加。
 
 : kconv [lib] [new]
 : Kconv.guess_old(str)
@@ -156,7 +156,7 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2004-11-18
 : StringIO.new   [lib] [compat]
-  StringIO.new�����������IO.new��Ʊ�͡�Fixnum �����Ǥ���褦�ˤʤ�ޤ�����
+  StringIO.newの第二引数にIO.newと同様、Fixnum も指定できるようになりました。
   ((<ruby-dev:24896>))
 
 === 2004-11-16
@@ -164,11 +164,11 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
   add new option --exclude (-x). ((<ruby-dev:24865>))
 
 : CGI::Session.initialize [lib] [compat]
-  'sufix' ���ץ���������Ǥ���褦�ˤʤ�ޤ�����
+  'sufix' オプションを設定できるようになりました。
 
 === 2004-11-10
 : Array#pack [ruby] [change]
-  P ����Ұʳ��Ǥ� nil �� 0 ���Ѵ����ʤ��ʤ�ޤ�����
+  P 指定子以外では nil を 0 に変換しなくなりました。
 
     $ ruby-1.8.1 -e 'p [nil].pack("L")'
     "\000\000\000\000"
@@ -182,32 +182,32 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2004-10-27
 : CGI [lib] [bug]
-  ̵�¥롼�פ˴٤��ǽ���Τ���Х��������ޤ�����
+  無限ループに陥る可能性のあるバグを修正しました。
   ((<URL:http://www.debian.org/security/2004/dsa-586>))
 
 === 2004-10-21
 : PStore#transaction  [lib] [compat]
-  PStore.new �˻��ꤷ���ե����뤬�ޤ�¸�ߤ��ʤ����ˡ�PStore#transaction(true) ���
-  �ӽФ��Ƥ��㳰 Errno::ENOENT ��ȯ�����ʤ��ʤ�ޤ�����((<ruby-dev:24561>))
+  PStore.new に指定したファイルがまだ存在しない場合に、PStore#transaction(true) を呼
+  び出しても例外 Errno::ENOENT が発生しなくなりました。((<ruby-dev:24561>))
 
 === 2004-10-20
 
 : Proc#dup [new]
 
-  �ɲ� ((<ruby-talk:116915>))
+  追加 ((<ruby-talk:116915>))
 
 === 2004-10-19
 
 : ARGF [change]
 
-  ���ޥ�ɥ饤�������Ϳ�����ե�������ɤ����ˤ�ɸ�����Ϥ��ɤޤʤ��ʤ�ޤ�����
+  コマンドライン引数に与えたファイルを読んだ後には標準入力を読まなくなりました。
   ((<ruby-dev:24452>))
 
 : IO#gets [ruby] [bug]
-  "\377" ������˼�����äƤ�Ŭ�ڤ˿��񤦤褦�ˤʤ�ޤ�����((<ruby-dev:24460>))
+  "\377" を引数に受け取っても適切に振舞うようになりました。((<ruby-dev:24460>))
 
 : Dir.glob [change]
-  �֥��å����Ϥ����Ȥ���false �ǤϤʤ� nil ���֤��褦�ˤʤ�ޤ������ޤ���readdir ���ʤ���֥��å���Ƥ֤ΤǤϤʤ������������������Ƥ��� each ����褦�ˤʤ�ޤ�����((<ruby-dev:24528>))
+  ブロックを渡したとき、false ではなく nil を返すようになりました。また、readdir しながらブロックを呼ぶのではなく、全部を配列に貯めてから each するようになりました。((<ruby-dev:24528>))
 
 === 2004-10-18
 
@@ -224,11 +224,11 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2004-09-03
 : Struct.new  [ruby] [bug]
-  Ʊ��̾����������������Ȥ��ΥХ��������ޤ�����((<ruby-dev:24210>))
+  同じ名前で二度定義したときのバグを修正しました。((<ruby-dev:24210>))
 
 === 2004-08-24
 : CGI::Session::FileStore#initialize [lib] [bug]
-  ���å�������¸����ե�����̾�˥��å���� ID ���Ȥ���Х��������ޤ�����
+  セッションを保存するファイル名にセッション ID が使われるバグを修正しました。
 
 === 2004-08-23
 : OpenSSL::SSL#pending [lib] [new]
@@ -236,31 +236,31 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 === 2004-08-14
 : FileUtils.copy_entry [lib] [new]
 : FileUtils::DryRun [lib] [new]
-  �ɲá�
+  追加。
 : FileUtils.mv [lib] [compat]
-  mv �� :force ���ץ���������դ���褦�ˤʤ�ޤ�����
+  mv が :force オプションを受け付けるようになりました。
 
 === 2004-08-07
 : Zlib::GzipReader#read(0) [lib] [compat]
-  Zlib::GzipReader#read(0) �� nil �ǤϤʤ� "" ���֤��褦�ˤʤ�ޤ�����
+  Zlib::GzipReader#read(0) が nil ではなく "" を返すようになりました。
 
 === 2004-07-28
 : CGI::CGI_PARAMS [lib] [obsolete]
 : CGI::CGI_COOKIES [lib] [obsolete]
-  ��˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����
+  常に警告がでるようになりました。
 
 === 2004-07-23
 : Net::IMAP#disconnected? [lib] [new]
 
 : CGI::Session::FileStore#update [lib] [compat]
-  ���å�������¸����ե������ mode ��ǥե���Ȥ� 0600 ��
-  ���åȤ���褦�ˤʤ�ޤ�����
+  セッションを保存するファイルの mode をデフォルトで 0600 に
+  セットするようになりました。
 
 === 2004-07-16
 
 : ((<SystemExit#success?|SystemExit/success?>)) [ruby] [new]
 
-  �ɲá�((<ruby-dev:23912>))
+  追加。((<ruby-dev:23912>))
 
 : File::Stat#dev_major [ruby] [new]
 : File::Stat#dev_minor [ruby] [new]
@@ -270,7 +270,7 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 : Kernel#URI    [lib] [new]
 
-  uri ���ɲá�((<ruby-dev:23784>))
+  uri で追加。((<ruby-dev:23784>))
 
 === 2004-07-01
 : OpenSSL::Cipher::Cipher#pkcs5_keyivgen  [lib] [new]
@@ -283,13 +283,13 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2004-07-01
 : PStore [lib] [change]
-  �ǡ����١����ι���������������Хå����åץե������Ĥ����������褦�ˤʤ�ޤ�����
-  �ե�����̾�� "~" ���դ����Хå����åץե�����ϻĤ���ޤ���((<ruby-list:39102>))
+  データベースの更新が成功したらバックアップファイルを残さず削除するようになりました。
+  ファイル名に "~" が付いたバックアップファイルは残されません。((<ruby-list:39102>))
 
 === 2004-06-29
 
 : misc
-  $SAFE����¸����ʤ�����������ޤ�����((<ruby-dev:23829>))
+  $SAFEが保存されない問題を修正しました。((<ruby-dev:23829>))
 
 === 2004-06-23
 : net/imap [lib] [new]
@@ -298,8 +298,8 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 === 2004-06-16
 
 : object.c     [ruby] [bug]
-  �ðۥ��饹���ðۥ��֥������ȤΥ��饹��Ѿ����Ƥ���ȸ��ʤ����
-  ����Х��������ޤ�����((<ruby-dev:23690>))
+  特異クラスが特異オブジェクトのクラスを継承していると見なされて
+  いるバグを修正しました。((<ruby-dev:23690>))
 
     $ ruby1.8.1 -e 'class X;end; x=X.new; class << x;p self < X; end' 
     true
@@ -310,34 +310,34 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 === 2004-06-04
 
 : IO#gets, $_ [ruby] [change]
-  gets ���֤��ͤ� nil �Ǥ⡢$_ �� nil �����åȤ����褦�ˤʤ�ޤ�����
+  gets の返り値が nil でも、$_ に nil がセットされるようになりました。
   ((<ruby-dev:23663>))
 
 === 2004-05-27
 
 : CSV.parse  [lib] [change]
-  �����Ȥ��ƥե�����̾������դ��ʤ��ʤ�ޤ�����
-  ʸ�����Ϥ����ȡ������ѡ������٤�ʸ������Ȳ�ᤷ�ޤ���
+  引数としてファイル名を受け付けなくなりました。
+  文字列が渡されると、それをパースすべき文字列だと解釈します。
 
     CSV.parse("1,2\n3,r") #=> [['1', '2'], ['3', 'r']]
   
 : CSV::Row   [lib] [obsolete]
 : CSV::Cell  [lib] [obsolete]
-  CSV::Row �� CSV::Cell �� deprecated �ˤʤ�ޤ�����
+  CSV::Row と CSV::Cell が deprecated になりました。
 
 : CSV.open, CSV.parse, and CSV,generate 
-  ɬ�פʤ�Х桼���� binmode �򥻥åȤ��ʤ���Фʤ�ʤ��ʤ�ޤ�����
+  必要ならばユーザが binmode をセットしなければならなくなりました。
 
 : CSV.read      [lib] [new]
 : CSV.readlines [lib] [new]
-  �ɲá�
+  追加。
 
 : Marshal.dump [ruby] [bug]
-  �ðۥ᥽�åɤ��������Ƥ��ʤ����֥������Ȥ� dump �Ǥ��ʤ���礬���ä��Τ�
-  �������ޤ����� ((<ruby-dev:22631>))
+  特異メソッドを定義されていないオブジェクトを dump できない場合があったのを
+  修正しました。 ((<ruby-dev:22631>))
 
 : Marshal.dump [ruby] [bug]
-  �ðۥ��饹��Υ��饹�� dump ����ȥ��顼�ˤʤ�褦�ˤʤ�ޤ�����
+  特異クラス内のクラスを dump するとエラーになるようになりました。
   ((<ruby-dev:22588>))
 
 === 2004-05-16
@@ -348,18 +348,18 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 : DBM::WRCREAT          [lib] [new]
 : DBM::NEWDB            [lib] [new]
 
-  DBM.open ����3�������ɲä���DBM::READER,
-  DBM::WRITER, DBM::WRCREAT, DBM::NEWDB �����Ǥ���褦�ˤʤ�ޤ�����  
+  DBM.open に第3引数を追加し、DBM::READER,
+  DBM::WRITER, DBM::WRCREAT, DBM::NEWDB を指定できるようになりました。  
   ((<ruby-dev:23520>))
 
 === 2004-05-13
 
 : Net::Telnet#login    [lib] [compat]
-  "options" �ǥ�������ץ���ץȤȥѥ���ɥץ���ץȤΤ��������ɽ����
-  ����Ǥ���褦�ˤʤ�ޤ�����
+  "options" でログインプロンプトとパスワードプロンプトのための正規表現を
+  指定できるようになりました。
 
 : String#unpack [ruby] [change]
-  Z* ���ǽ�� null �ޤǤ����ޥå����ʤ��褦�ˤʤ�ޤ�����((<ruby-talk:98281>))
+  Z* が最初の null までしかマッチしないようになりました。((<ruby-talk:98281>))
 
     $ ruby1.8.1 -e 'p "abc\000def\000".unpack("Z*Z*")' 
     ["abc\000def", ""]
@@ -369,7 +369,7 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2004-05-10
 : superclass mismatch [ruby] [change]
-  �ƥ��饹�ΰ㤦Ʊ��̾���Υ��饹������������  TypeError ���ꤲ��褦�ˤʤ�ޤ�����
+  親クラスの違う同じ名前のクラスを再定義した時  TypeError を投げるようになりました。
   ((<ruby-list:39567>))
 
     $ ruby-1.8.2 -e '
@@ -388,8 +388,8 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 : Hash#==   [change]
 : Hash#eql? [new]
 
-  Hash#== �����Ƥ����פ��Ƥ���п��ˡ�Hash#eql? �ϡ������ 
-  �ϥå���Υǥե�����ͤ�Ʊ��(==)�ʤ鿿�ˤʤ�褦�������ޤ�����
+  Hash#== は内容が一致していれば真に、Hash#eql? は、さらに 
+  ハッシュのデフォルト値が同じ(==)なら真になるよう定義されました。
 
         h1 = Hash.new("a")
         h2 = Hash.new("a")
@@ -419,12 +419,12 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
   ((<ruby-talk:97559>))
 
-  Hash#eql? �� 2004-12-16 �˺������ޤ�����
+  Hash#eql? は 2004-12-16 に削除されました。
   ((<ruby-dev:25206>))?
 
 === 2004-04-16
 : String#== [lib] [change]
-  nil ���֤�������� false �� true ���֤��褦�ˤʤ�ޤ�����((<ruby-dev:23404>))
+  nil を返さず、常に false か true を返すようになりました。((<ruby-dev:23404>))
 
     $ ruby1.8.1 -e 'p "a" == :a'
     nil
@@ -439,7 +439,7 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 : GDBM::WRCREAT         [lib] [new]
 : GDBM::NEWDB           [lib] [new]
 
-  GDBM �� read only �ʤɤ� access �Ǥ���褦�ˤʤ�ޤ�����((<ruby-dev:23381>))
+  GDBM に read only などで access できるようになりました。((<ruby-dev:23381>))
 
 : Process::Status#success? [ruby][new]
   ((<ruby-dev:23385>))
@@ -448,38 +448,38 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 : ruby.c    [ruby] [bug]
 
-  ���ץ���� --with-static-linked-ext �դ��ǥ���ѥ��뤷�����Ρ�
-  -r ���ץ����Υ��顼��å�����������((<ruby-dev:23357>))
+  オプション --with-static-linked-ext 付きでコンパイルした時の、
+  -r オプションのエラーメッセージを修正。((<ruby-dev:23357>))
 
 === 2004-03-8
 : WEBrick::Config::HTTP [lib] [change]
-  ���ץ���� :RequestHander �� :RequestCallback ��̾�����Ѥ��ޤ�����
-  ���ץ���� :ServerAlias ���ɲä���ޤ�����
+  オプション :RequestHander は :RequestCallback に名前が変わりました。
+  オプション :ServerAlias が追加されました。
 
 === 2004-02-24
 : OpenSSL::Config#each [lib] [new]
 
 : Dir.glob [ruby] [change]
-  File::FNM_DOTMATCH �����åȤ���ʤ��¤� Dir.glob('test/**/') �� 'test/.test/' �ʤɤ�
-  �ޥå����ʤ��ʤ�ޤ�����((<ruby-dev:23014>))
+  File::FNM_DOTMATCH がセットされない限り Dir.glob('test/**/') は 'test/.test/' などに
+  マッチしなくなりました。((<ruby-dev:23014>))
 
 === 2004-02-20
 : irb [lib] [new]
-  -I ���ץ���󤬻Ȥ���褦�ˤʤ�ޤ�����((<ruby-list:39243>))
+  -I オプションが使えるようになりました。((<ruby-list:39243>))
 
 === 2004-02-18
 : StringScanner#peep [lib] [obsolete]
-  $VERVOSE �����ꤵ��Ƥ�����˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����use #peek.
+  $VERVOSE が設定されている時に警告がでるようになりました。use #peek.
 : StringScanner#empty? [lib] [obsolete]
-  $VERVOSE �����ꤵ��Ƥ�����˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����use #eos?.
+  $VERVOSE が設定されている時に警告がでるようになりました。use #eos?.
 : StringScanner#clear [lib] [obsolete] 
-  $VERVOSE �����ꤵ��Ƥ�����˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����use #terminate.
+  $VERVOSE が設定されている時に警告がでるようになりました。use #terminate.
 : StringScanner#getbyte [lib] [obsolete] 
-  $VERVOSE �����ꤵ��Ƥ�����˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����use #get_byte.
+  $VERVOSE が設定されている時に警告がでるようになりました。use #get_byte.
 : StringScanner#restsize [lib] [obsolete]
-  $VERVOSE �����ꤵ��Ƥ�����˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����use #rest_size.
+  $VERVOSE が設定されている時に警告がでるようになりました。use #rest_size.
 : StringScanner#matchedsize [lib] [obsolete]
-  $VERVOSE �����ꤵ��Ƥ�����˷ٹ𤬤Ǥ�褦�ˤʤ�ޤ�����use #matched_size.
+  $VERVOSE が設定されている時に警告がでるようになりました。use #matched_size.
 : ScanError  [lib] [obsolete]
   use StringScanner::Error.
 
@@ -488,14 +488,14 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 : ((<String#~|String/~>))  [obsolete]
 : ((<String#=~|String/=~>)) [obsolete]
 
-  String#~ �Ϻ������ޤ������ޤ���str =~ str ��¹Ԥ�����㳰
-  ��ȯ������褦�ˤʤ�ޤ�����
-  ((<ruby 1.8 feature/2003-07-19>)), ((<ruby 1.8 feature/2003-05-26>))��
+  String#~ は削除されました。また、str =~ str を実行すると例外
+  が発生するようになりました。
+  ((<ruby 1.8 feature/2003-07-19>)), ((<ruby 1.8 feature/2003-05-26>))、
   ((<ruby-dev:22851>))
 
 === 2004-02-09
 : File.fnmatch  [ruby] [bug]
-  Ŭ�ڤ˥ޥå����ʤ��Х��������ޤ�����
+  適切にマッチしないバグを修正しました。
   ((<ruby-dev:22815>)) ((<ruby-dev:22819>))
 
 === 2004-02-06
@@ -510,9 +510,9 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 === 2004-01-26
 : Regexp.new [ruby] [obsolete]
 
-  ��{,m}��ɽ���ξ��ȡ�{n,m}�פ� n,m �������Ǥʤ����˷ٹ����Ϥ���褦�ˤʤ�ޤ�����((<ruby-dev:22626>))
+  「{,m}」表記の場合と「{n,m}」の n,m が数字でない場合に警告を出力するようになりました。((<ruby-dev:22626>))
 
-  ʸ����}�פ����������פ���Ƥ��ʤ����˷ٹ����Ϥ���褦�ˤʤ�ޤ����� ((<ruby-dev:22627>))
+  文字「}」がエスケープされていない場合に警告を出力するようになりました。 ((<ruby-dev:22627>))
 
 === 2004-01-08
 : OpenSSL::PKey::DH#to_der [lib] [new]
@@ -522,13 +522,13 @@ ruby 1.8.2 �Ǥ� ruby 1.8.1 ������ѹ����Ǥ���
 
 === 2003-12-31
 : ARGF.each_byte [ruby] [compat]
-  nil �ǤϤʤ� ARGF ���֤��褦�ˤʤ�ޤ�����((<ruby-dev:22465>))
+  nil ではなく ARGF を返すようになりました。((<ruby-dev:22465>))
 
 === 2003-12-27
 : ruby -i.bak [ruby] [compat]
-  inplace edit mode ��ɸ�����Ϥ����ɤ߹��������˷ٹ��
-  ���Ϥ���褦�ˤʤ�ޤ�����
+  inplace edit mode で標準入力から読み込んだ時常に警告を
+  出力するようになりました。
 
 === 2003-12-26
 : ARGF.read(nil)
-  ������ nil ������褦�ˤʤ�ޤ�����((<ruby-dev:22433>))
+  引数に nil を許すようになりました。((<ruby-dev:22433>))

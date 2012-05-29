@@ -1,4 +1,4 @@
-= ���饹���᥽�åɤ����
+= クラス／メソッドの定義
 
   * [[ref:class]]
   * [[ref:singleton_class]]
@@ -11,14 +11,14 @@
   * [[ref:class_method]]
   * [[ref:limit]]
 
-����˴ؤ������:
+定義に関する操作:
   * [[ref:alias]]
   * [[ref:undef]]
   * [[ref:defined]]
 
-===[a:class] ���饹���
+===[a:class] クラス定義
 
-��:
+例:
 
           class Foo < Super
             def test
@@ -27,65 +27,65 @@
                :
           end
 
-ʸˡ:
+文法:
 
-          class ���̻� [`<' superclass ]
-            ��..
+          class 識別子 [`<' superclass ]
+            式..
           end
 
 #@since 1.8.0
-ʸˡ:
+文法:
 
-          class ���̻� [`<' superclass ]
-            ��..
+          class 識別子 [`<' superclass ]
+            式..
           [rescue [error_type,..] [=> evar] [then]
-            ��..]..
+            式..]..
           [else
-            ��..]
+            式..]
           [ensure
-            ��..]
+            式..]
           end
 #@end
 
-���饹��������ޤ������饹̾�ϥ���ե��٥åȤ���ʸ���ǻϤޤ뼱�̻ҤǤ���
+クラスを定義します。クラス名はアルファベットの大文字で始まる識別子です。
 #@since 1.8.0
-rescue/ensure ������Ǥ��ޤ���
+rescue/ensure 節を指定できます。
 #@end
 
-���饹����ϡ����̻Ҥǻ��ꤷ������ؤΥ��饹�������ˤʤ�ޤ�
-(Ruby �Ǥϡ����饹�⥪�֥������Ȥΰ�Ĥ� [[c:Class]]���饹��
-���󥹥��󥹤Ǥ�)��
+クラス定義は、識別子で指定した定数へのクラスの代入になります
+(Ruby では、クラスもオブジェクトの一つで [[c:Class]]クラスの
+インスタンスです)。
 
-���饹�������������Ƥ���Ȥ��������Ʊ�����饹̾�ǥ��饹�����񤯤ȥ�
-�饹��������ɲäˤʤ�ޤ��������������Υ��饹�Ȱۤʤ륹���ѡ����饹��
-����Ū�˻��ꤷ���������ȡ����Υ��饹�Ȥϰۤʤ뿷���ʥ��饹��Ʊ̾����
-�����뤳�Ȥˤʤ�ޤ������ΤȤ������饹̾��������񤭤��뤳�Ȥˤʤ��
-�Ƿٹ��å��������Фޤ���
+クラスが既に定義されているとき、さらに同じクラス名でクラス定義を書くとク
+ラスの定義の追加になります。ただし、元のクラスと異なるスーパークラスを
+明示的に指定して定義すると、元のクラスとは異なる新たなクラスを同名で定
+義することになります。このとき、クラス名の定数を上書きすることになるの
+で警告メッセージが出ます。
 
         class Foo < Array
           def foo
           end
         end
 
-        # ������ɲ�(�����ѡ����饹 Array ������Ū�˻��ꤷ�Ƥ�Ʊ��)
+        # 定義を追加(スーパークラス Array を明示的に指定しても同じ)
         class Foo
           def bar
           end
         end
 
-        # �̤Υ��饹�����(�����ѡ����饹���ۤʤ�Τ�)
+        # 別のクラスを定義(スーパークラスが異なるので)
         class Foo < String
         end
         # => warning: already initialized constant Foo
 
-���饹���������� self �����Υ��饹�Ǥ��뤳�Ȥȡ�
-[[ref:limit]]�Υǥե���Ȥ��ۤʤ뤳�Ȱʳ�
-�˥ȥåץ�٥�Ȥΰ㤤�Ϥ���ޤ��󡣥��饹�������ˤ�Ǥ�դμ���񤯤�
-�Ȥ��Ǥ����饹����κݤ˼¹Ԥ���ޤ���
+クラス定義式の中は self がそのクラスであることと、
+[[ref:limit]]のデフォルトが異なること以外
+にトップレベルとの違いはありません。クラス定義式中には任意の式を書くこ
+とができクラス定義の際に実行されます。
 
-���饹����ϥͥ���(�����)�ˤ�������Ǥ��ޤ����ʲ����������Ҥγ�¦��
-���饹 Foo ����¦�Υ��饹 Bar �δ֤ˤϡ���� Bar �� Foo ��������
-Foo::Bar �Ǥ��뤳�Ȱʳ����Ѿ��ط��ʤɤε�ǽŪ�ʴ�Ϣ�Ϥޤä�������ޤ���
+クラス定義はネスト(入れ子)にして定義できます。以下の例で入れ子の外側の
+クラス Foo と内側のクラス Bar の間には、定数 Bar が Foo の中の定数
+Foo::Bar であること以外、継承関係などの機能的な関連はまったくありません。
 
         class Foo
           class Bar
@@ -93,7 +93,7 @@ Foo::Bar �Ǥ��뤳�Ȱʳ����Ѿ��ط��ʤɤε�ǽŪ�ʴ�Ϣ�Ϥޤä�������ޤ���
         end
 
 #@since 1.8.0
-���饹 Foo �������������Ƥ���С��ʲ��ν�����Ǥ��ޤ���
+クラス Foo が既に定義されていれば、以下の書き方もできます。
 
         class Foo
         end
@@ -102,12 +102,12 @@ Foo::Bar �Ǥ��뤳�Ȱʳ����Ѿ��ط��ʤɤε�ǽŪ�ʴ�Ϣ�Ϥޤä�������ޤ���
         end
 #@end
 
-���饹�Υͥ��Ȥϡ���̣Ū�˴�Ϣ���륯�饹��¦�Υ��饹���⥸�塼��Ǥ�
-�ȤޤȤޤ�ˤ����ꡢ��޴ط���ɽ������˻��Ѥ���ޤ���
+クラスのネストは、意味的に関連するクラスを外側のクラス／モジュールでひ
+とまとまりにしたり、包含関係を表すために使用されます。
 
-        # ��Ϣ���륯�饹�� Net �Ȥ������ƥ���ˤޤȤ��
-        # ���Τ褦�ʾ��ϳ�¦�����̥⥸�塼�뤬���Ѥ����
-        # (Net �Υ��󥹥��󥹤��ʤ���Net �� include �Ǥ���ʤɤΤ���)
+        # 関連するクラスを Net というカテゴリにまとめる
+        # このような場合は外側は普通モジュールが利用される
+        # (Net のインスタンスがない。Net を include できるなどのため)
         module Net
           class HTTP
           end
@@ -117,14 +117,14 @@ Foo::Bar �Ǥ��뤳�Ȱʳ����Ѿ��ط��ʤɤε�ǽŪ�ʴ�Ϣ�Ϥޤä�������ޤ���
 
         obj = Net::HTTP.new
 
-        # ���뤤��
+        # あるいは
 
         include Net
         obj = HTTP.new
 
-        # �ʲ��Τ褦�ʻȤ������Ȥ߹��ߤΥ��饹�ˤ⸫����
-        # ���ѼԤ� File::Constants �� include ���뤳�Ȥǡ�
-        # File::RDONLY �ʤɤȽ񤫤���ľ�� RDONLY �Ƚ񤯤��Ȥ��Ǥ��롣
+        # 以下のような使い方は組み込みのクラスにも見られる
+        # 利用者は File::Constants を include することで、
+        # File::RDONLY などと書かずに直接 RDONLY と書くことができる。
         class File
           module Constants
              RDONLY = 0
@@ -135,26 +135,26 @@ Foo::Bar �Ǥ��뤳�Ȱʳ����Ѿ��ط��ʤɤε�ǽŪ�ʴ�Ϣ�Ϥޤä�������ޤ���
 
         File.open("foo", File::RDONLY)
 
-        # ���뤤��
+        # あるいは
 
         include File::Constants
         File.open("foo", RDONLY)
 
-        # �嵭�Ϥ����ޤǤ���Ǥ��롣�ºݤ� File.open �ǤϤ����ؤ�
-        # File.open("foo", "r") �Ȥ����������Ȥ���
+        # 上記はあくまでも例である。実際の File.open ではより簡便な
+        # File.open("foo", "r") という形式が使われる
 
 #@since 1.8.0
-���饹������ϡ��Ǹ��ɾ���������η�̤��֤��ޤ����Ǹ��ɾ��������
-���ͤ��֤��ʤ����� nil ���֤��ޤ���
+クラス定義式は、最後に評価した式の結果を返します。最後に評価した式
+が値を返さない場合は nil を返します。
 #@else
-���饹��������ͤ��֤��ޤ���
+クラス定義式は値を返しません。
 #@end
 
-===[a:singleton_class] �ðۥ��饹���
+===[a:singleton_class] 特異クラス定義
 
-��:
+例:
 
-          obj = Object.new # obj = nil �Ǥ��
+          obj = Object.new # obj = nil でも可
           class << obj
             def test
                :
@@ -162,42 +162,42 @@ Foo::Bar �Ǥ��뤳�Ȱʳ����Ѿ��ط��ʤɤε�ǽŪ�ʴ�Ϣ�Ϥޤä�������ޤ���
                :
           end
 
-ʸˡ:
+文法:
 
           class `<<' expr
-            ��..
+            式..
           end
 
 #@since 1.8.0
-ʸˡ:
+文法:
 
           class `<<' expr
-            ��..
+            式..
           [rescue [error_type,..] [=> evar] [then]
-            ��..]..
+            式..]..
           [else
-            ��..]
+            式..]
           [ensure
-            ��..]
+            式..]
           end
 #@end
 
-���饹�����Ʊ����ʸ������Υ��֥������Ȥ˥᥽�åɤ䥤�󥹥����ѿ���
-���/�ɲä��ޤ������ι�ʸ����������������᥽�åɤ�����ϻ��ꤷ��
-���֥������Ȥ��Ф��Ƥ���ͭ���ˤʤ�ޤ���
-Object#clone �������������֥������Ȥˤϰ����Ѥ���ޤ�����
-Object#dup �������������֥������Ȥˤϰ����Ѥ���ޤ���
+クラス定義と同じ構文で特定のオブジェクトにメソッドやインスタンス変数を
+定義/追加します。この構文の内部で定義したメソッドや定数は指定した
+オブジェクトに対してだけ有効になります。
+Object#clone で生成したオブジェクトには引き継がれますが，
+Object#dup で生成したオブジェクトには引き継がれません．
 
 #@since 1.8.0
-rescue/ensure ������Ǥ��ޤ���
+rescue/ensure 節を指定できます。
 #@end
 
-�ðۥ��饹������ϡ��Ǹ��ɾ���������η�̤��֤��ޤ����Ǹ��ɾ��������
-���ͤ��֤��ʤ����� nil ���֤��ޤ���
+特異クラス定義式は、最後に評価した式の結果を返します。最後に評価した式
+が値を返さない場合は nil を返します。
 
-===[a:module] �⥸�塼�����
+===[a:module] モジュール定義
 
-��:
+例:
 
           module Foo
             def test
@@ -206,47 +206,47 @@ rescue/ensure ������Ǥ��ޤ���
                :
           end
 
-ʸˡ:
+文法:
 
-          module ���̻�
-            ��..
+          module 識別子
+            式..
           end
 
 #@since 1.8.0
-ʸˡ:
+文法:
 
-          module ���̻�
-            ��..
+          module 識別子
+            式..
           [rescue [error_type,..] [=> evar] [then]
-            ��..]..
+            式..]..
           [else
-            ��..]
+            式..]
           [ensure
-            ��..]
+            式..]
           end
 #@end
 
-�⥸�塼���������ޤ����⥸�塼��̾�ϥ���ե��٥åȤ���ʸ��
-�ǻϤޤ뼱�̻ҤǤ���
+モジュールを定義します。モジュール名はアルファベットの大文字
+で始まる識別子です。
 #@since 1.8.0
-rescue/ensure ������Ǥ��ޤ���
+rescue/ensure 節を指定できます。
 #@end
 
-�⥸�塼������ϡ����̻Ҥǻ��ꤷ������ؤΥ⥸�塼��������ˤʤ�ޤ���
-Ruby �Ǥϡ��⥸�塼��⥪�֥������Ȥΰ�Ĥ� [[c:Module]] ���饹�Υ��󥹥��󥹤Ǥ���
-�⥸�塼�뤬����������줤��Ȥ��������Ʊ���⥸�塼��̾�ǥ⥸�塼����
-����񤯤ȥ⥸�塼���������ɲäˤʤ�ޤ���
+モジュール定義は、識別子で指定した定数へのモジュールの代入になります。
+Ruby では、モジュールもオブジェクトの一つで [[c:Module]] クラスのインスタンスです。
+モジュールが既に定義されいるとき、さらに同じモジュール名でモジュール定
+義を書くとモジュールの定義の追加になります。
 
 #@since 1.8.0
-�⥸�塼��������ϡ��Ǹ��ɾ���������η�̤��֤��ޤ����Ǹ��ɾ��������
-���ͤ��֤��ʤ����� nil ���֤��ޤ���
+モジュール定義式は、最後に評価した式の結果を返します。最後に評価した式
+が値を返さない場合は nil を返します。
 #@else
-�⥸�塼����������ͤ��֤��ޤ���
+モジュール定義式は値を返しません。
 #@end
 
-===[a:method] �᥽�å����
+===[a:method] メソッド定義
 
-��:
+例:
 
           def fact(n)
             if n == 1 then
@@ -256,48 +256,48 @@ Ruby �Ǥϡ��⥸�塼��⥪�֥������Ȥΰ�Ĥ� [[c:Module]] ���饹�Υ��󥹥��󥹤Ǥ
             end
           end
 
-ʸˡ:
+文法:
 
 #@since 1.9.1
-          def �᥽�å�̾ [`(' [arg0 ['=' default0]] ... [`,' `*' rest_args [, post ...]] [',' '&' block_arg]`)']
+          def メソッド名 [`(' [arg0 ['=' default0]] ... [`,' `*' rest_args [, post ...]] [',' '&' block_arg]`)']
 #@else
-          def �᥽�å�̾ [`(' [arg0 ['=' default0]] ... [`,' `*' rest_args] [',' '&' block_arg]`)']
+          def メソッド名 [`(' [arg0 ['=' default0]] ... [`,' `*' rest_args] [',' '&' block_arg]`)']
 #@end
-            ��.. (body)
+            式.. (body)
           [rescue [error_type,..] [=> evar] [then]
-            ��..]..
+            式..]..
           [else
-            ��..]
+            式..]
           [ensure
-            ��..]
+            式..]
           end
 
-��������Τ�����˥᥽�åɤ�������ޤ������ʤ�������饹/�⥸�塼��
-�����ʤ�Ф��Υ��饹/�⥸�塼��Υ᥽�åɤ�������ޤ����ȥåץ�٥�
-�ʤ�Фɤ�����Ǥ�Ƥ٤�᥽�åɤ�������ޤ������Τ褦�ʥ᥽�åɤϷ��
-�Ȥ���¾�θ���ˤ�����ִؿ��פΤ褦�˻Ȥ��ޤ���
+この定義のある場所にメソッドを定義します。すなわち、クラス/モジュール
+定義中ならばそのクラス/モジュールのメソッドを定義します。トップレベル
+ならばどこからでも呼べるメソッドを定義します。このようなメソッドは結果
+として他の言語における「関数」のように使えます。
 
-��:
+例:
 
-          def hello    # �����Τʤ��᥽�åɡ�
+          def hello    # 引数のないメソッド。
             puts "Hello, world!"
           end
 
-          def foo(a, b)    # �����Τ���᥽�åɡ���̤�ʤ���def foo a, b�Ȥ�
+          def foo(a, b)    # 引数のあるメソッド。括弧を省いてdef foo a, bとも
             a + 3 * b
           end
 
-�᥽�å�̾�Ȥ��Ƥ��̾�μ��̻Ҥ�¾�ˡ��������ǽ�ʱ黻��(��: ==, +, -
-�ʤ� [[d:spec/operator]] �򻲾�)�����Ǥ��ޤ�([[ref:operator]]����)��
+メソッド名としては通常の識別子の他に、再定義可能な演算子(例: ==, +, -
+など [[d:spec/operator]] を参照)も指定できます([[ref:operator]]参照)。
 
-��:
+例:
 
           class Vector2D
-            attr_accessor :x, :y   # ���󥹥����ѿ�@x, @y���б����륲�å��ȥ��å������
-            def initialize(x, y)   # ���󥹥ȥ饯��
-              @x = x; @y = y   # @���Ĥ��Τ����󥹥����ѿ��ʥ����ѿ���
+            attr_accessor :x, :y   # インスタンス変数@x, @yに対応するゲッタとセッタを定義
+            def initialize(x, y)   # コンストラクタ
+              @x = x; @y = y   # @がつくのがインスタンス変数（メンバ変数）
             end
-            def ==(other_vec)   # ������黻�ҥ����С��饤��
+            def ==(other_vec)   # いわゆる演算子オーバーライド
               other_vec.x == @x && other_vec.y == @y
             end
             def +(other_vec)
@@ -308,15 +308,15 @@ Ruby �Ǥϡ��⥸�塼��⥪�֥������Ȥΰ�Ĥ� [[c:Module]] ���饹�Υ��󥹥��󥹤Ǥ
           vec0 = Vector2D.new(10, 20); vec1 = Vector2D.new(20, 30)
           p vec0 + vec1 == Vector2D.new(30, 50) #=> true
 
-�������˥ǥե���ȼ���Ϳ����줿��硢�᥽�åɸƤӽФ��Ǽ°������ά��
-���Ȥ��Υǥե�����ͤˤʤ�ޤ���
-�������°����Ȥ��б����뤿�ᡢi���ܤΰ����˥ǥե�����ͤ���ꤷ���ʤ�С�
-i+1���ܰʹߤǤ����ƥǥե�����ͤ���ꤹ�뤫������Ĺ���������Ѥ��ʤ���Фʤ�ޤ���ʾܺ٤ϸ�ҡˡ�
-�ǥե���ȼ���ɾ���ϸƤӽФ����˥᥽�å������Υ���ƥ����ȤǹԤ��ޤ���
+仮引数にデフォルト式が与えられた場合、メソッド呼び出しで実引数を省略し
+たときのデフォルト値になります。
+ただし実引数との対応を取るため、i番目の引数にデフォルト値を指定したならば、
+i+1番目以降でも全てデフォルト値を指定するか、可変長引数を利用しなければなりません（詳細は後述）。
+デフォルト式の評価は呼び出し時にメソッド定義内のコンテキストで行われます。
 
-��:
+例:
 
-          def foo(x, y = 1)    # 2���ܤΰ���y�˥ǥե�����ͤ����
+          def foo(x, y = 1)    # 2番目の引数yにデフォルト値を指定
             10 * x + y
           end
           p foo(1, 5)  #=> 15
@@ -324,31 +324,31 @@ i+1���ܰʹߤǤ����ƥǥե�����ͤ���ꤹ�뤫������Ĺ���������Ѥ��ʤ���Фʤ�ޤ��
           p foo        #=> ArgumentError (wrong number of arguments)
 
           $gvar = 3
-          def bar(x, y = $gvar)  # �Τ���������ˤ�$gvar == 3����
+          def bar(x, y = $gvar)  # 確かに定義時には$gvar == 3だが
             10 * x + y
           end
           $gvar = 7
-          # �ƤӽФ�����$gvar���ͤ��Ȥ���
+          # 呼び出し時の$gvarの値が使われる
           p bar(5)   #=> 57 (!= 53)
 
-��������ľ���� * ��������ˤϻĤ�μ°���
+仮引数の直前に * がある場合には残りの実引数
 #@since 1.9.1
-(��Ҥ� post ���������)
+(後述の post 引数を除く)
 #@end
-�Ϥߤ�����Ȥ� �Ƥ��ΰ����˳�Ǽ����ޤ���
-����Ĺ������rest �����ʤɤȸƤФ�뵡ǽ�Ǥ���
-���Τ褦�ʰ����� 1 �Ĥ������ޤ���
+はみな配列とし てこの引数に格納されます。
+可変長引数、rest 引数などと呼ばれる機能です。
+このような引数は 1 つしか作れません。
 
-��:
+例:
 
          def foo(x, *xs)
-           puts "#{x} : #{xs.inspect}"   # Object#inspect �� p �Τ褦�ʾܺ٤�����ɽ��
+           puts "#{x} : #{xs.inspect}"   # Object#inspect は p のような詳細な内部表示
          end
          foo(1)        #=> 1 : []
          foo(1, 2)     #=> 1 : [2]
          foo(1, 2, 3)  #=> 1 : [2, 3]
 
-         def bar(x, *) # �Ĥ�ΰ�����ñ��̵�뤷�����Ȥ�
+         def bar(x, *) # 残りの引数を単に無視したいとき
            puts "#{x}"   
          end
          bar(1)        #=> 1 
@@ -356,124 +356,124 @@ i+1���ܰʹߤǤ����ƥǥե�����ͤ���ꤹ�뤫������Ĺ���������Ѥ��ʤ���Фʤ�ޤ��
          bar(1, 2, 3)  #=> 1
 
 #@since 1.9.1
-Ruby 1.9 �Ǥϲ���Ĺ���������ˤޤ��̾�ΰ������֤����Ȥ��Ǥ��ޤ���
+Ruby 1.9 では可変長引数よりも後にまだ通常の引数を置くことができます。
 #@end
 
-�Ǹ�β�������ľ���� & ������Ȥ��Υ᥽�åɤ�Ϳ�����Ƥ���֥���
-������³�����֥�������([[c:Proc]])�Ȥ��Ƥ��ΰ����˳�Ǽ����ޤ�������ϡ�
-���ƥ졼�������������ˡ�ΰ�ĤǤ������ƥ졼�������������ɽŪ����ˡ�� 
-yield ��ƤӽФ����ȤǤ���
-¾�� [[m:Proc.new]]/[[m:Kernel.#proc]] ��Ȥ���ˡ�ʤɤ⤢��ޤ���
-�֥��å���Ϳ�����ʤ��ä����Υ֥��å��������ͤ�nil�Ǥ���
+最後の仮引数の直前に & があるとこのメソッドに与えられているブロッ
+クが手続きオブジェクト([[c:Proc]])としてこの引数に格納されます。これは、
+イテレータを定義する方法の一つです。イテレータを定義する代表的な方法は 
+yield を呼び出すことです。
+他に [[m:Proc.new]]/[[m:Kernel.#proc]] を使う方法などもあります。
+ブロックが与えられなかった場合のブロック引数の値はnilです。
 
-��:
+例:
 
           def foo(cnt, &block_arg)
-            cnt.times { block_arg.call } # �֥��å��˼��ޤä�Proc���֥������Ȥ�call�Ǽ¹�
+            cnt.times { block_arg.call } # ブロックに収まったProcオブジェクトはcallで実行
           end
           foo(3) { print "Ruby! " } #=> Ruby! Ruby! Ruby!
 
-�᥽�å�����ˤ����ơ��������Ϥ��μ�����˰ʲ��ν���Ǥ������ꤹ�뤳��
-�ϤǤ��ޤ��󡣤�������ά���뤳�Ȥϲ�ǽ�Ǥ���
+メソッド定義において、仮引数はその種類毎に以下の順序でしか指定すること
+はできません。いずれも省略することは可能です。
 
-    * �ǥե���ȼ��Τʤ�����(ʣ�������)
-    * �ǥե���ȼ��Τ������(ʣ�������)
-    * * ��ȼ������(1�Ĥ��������)
-    * & ��ȼ������(1�Ĥ��������)
+    * デフォルト式のない引数(複数指定可)
+    * デフォルト式のある引数(複数指定可)
+    * * を伴う引数(1つだけ指定可)
+    * & を伴う引数(1つだけ指定可)
 
-��:
+例:
 
-          # ���٤ƻ���
+          # すべて持つ
           def foo(arg0, arg1, arg2 = 10, *rest, &block)
             block.call if block
             puts "#{arg0}: #{arg1}: #{arg2}?: #{rest.inspect}"
           end
           foo(1, 2, 3, 4, 5) { print "Args are " }  #=> Args are 1: 2: 3?: [4, 5]
 
-��: ���ƥ졼�������
+例: イテレータの定義
 
-          # yield ��Ȥ�
+          # yield を使う
           def foo
-          # block_given? �ϡ��᥽�åɤ��֥��å����Ϥ����
-          # �ƤФ줿���ɤ�����Ƚ�ꤹ���Ȥ߹��ߴؿ�
+          # block_given? は、メソッドがブロックを渡されて
+          # 呼ばれたかどうかを判定する組み込み関数
             if block_given?
               yield(1,2)
             end
           end
 
-          # Proc.new ��Ȥ�
+          # Proc.new を使う
           def bar
             if block_given?
-              Proc.new.call(1,2)    # proc.call(1,2) �Ǥ�Ʊ��(proc ���Ȥ߹��ߴؿ�)
+              Proc.new.call(1,2)    # proc.call(1,2) でも同じ(proc は組み込み関数)
             end
           end
 
-          # ����: �����Ȥ��� Proc ���֥������Ȥȥ֥��å���
-          # ξ��������դ��륤�ƥ졼�������������
+          # 応用: 引数として Proc オブジェクトとブロックの
+          # 両方を受け付けるイテレータを定義する例
           def foo(block = Proc.new)
             block.call(1,2)
           end
           foo(proc {|a,b| p [a,b]})
           foo {|a,b| p [a,b]}
 
-          # �֥��å�������Ȥ�
+          # ブロック引数を使う
           def baz(&block)
             if block
               block.call(1,2)
             end
           end
 
-�ޤ��᥽�åɼ¹Ի����㳰����ª���뤿��� begin ����Ʊ��
-��rescue, else, ensure ������Ǥ��ޤ���
+またメソッド実行時の例外を捕捉するために begin 式と同様
+のrescue, else, ensure 節を指定できます。
 
 #@since 1.8.0
-�᥽�å�������ϡ�nil ���֤��ޤ���
+メソッド定義式は、nil を返します。
 #@else
-�᥽�å���������ͤ��֤��ޤ���
+メソッド定義式は値を返しません。
 #@end
 
-====[a:operator] �黻�Ҽ������
+====[a:operator] 演算子式の定義
 
-[[d:spec/operator]]�ˤ����ơ��ֺ������ǽ�ʱ黻�ҡפ�ʬ�व�줿�黻�Ҥμ���
-�ϥ᥽�åɤʤΤǡ�������뤳�Ȥ���ǽ�Ǥ���
+[[d:spec/operator]]において、「再定義可能な演算子」に分類された演算子の実装
+はメソッドなので、定義することが可能です。
 
-�����α黻�Ҽ�������������ʲ��˵󤲤ޤ���
+これらの演算子式を定義する例を以下に挙げます。
 
-          # ���黻��
+          # 二項演算子
           def +(other)                # obj + other
           def -(other)                # obj - other
 
-          # ñ��ץ饹/�ޥ��ʥ�
+          # 単項プラス/マイナス
           def +@                      # +obj
           def -@                      # -obj
 
-          # ��������
+          # 要素代入
           def foo=(value)             # obj.foo = value
 
-          # [] �� []=
+          # [] と []=
           def [](key)                 # obj[key]
           def []=(key, value)         # obj[key] = value
           def []=(key, key2, value)   # obj[key, key2] = value
 
-          # �Хå��������ȵ�ˡ
-          def `(arg)                  # `arg` �ޤ��� %x(arg)
+          # バッククォート記法
+          def `(arg)                  # `arg` または %x(arg)
 
-�Хå��������ȵ�ˡ�μ����ϥ᥽�åɤʤΤǤ��Τ褦�˺��������ǽ�Ǥ�����
-�̤Ϥ��Υ᥽�åɤ���������٤��ǤϤ���ޤ��󤬡��ޤ��OS(������)�Υ�
-�ޥ�ɼ¹Ԥε�ư���Զ�礬������ʤɤ����ѤǤ��ޤ���
-#@#((- �ºݤα����㤬[[unknown:ruby-talk:10006]],[[unknown:ruby-dev:12829]]�ˤ���ޤ�-))
+バッククォート記法の実装はメソッドなのでこのように再定義が可能です。普
+通はこのメソッドを再定義するべきではありませんが、まれにOS(シェル)のコ
+マンド実行の挙動に不具合がある場合などに利用できます。
+#@#((- 実際の応用例が[[unknown:ruby-talk:10006]],[[unknown:ruby-dev:12829]]にあります-))
 
-====[a:nest_method] �᥽�å�����Υͥ���
+====[a:nest_method] メソッド定義のネスト
 
 #@since 1.8.0
-�ͥ��Ȳ�ǽ�Ǥ����ͥ��Ȥ��줿������ϡ�
-�������������᥽�åɤ��¹Ԥ��줿�����������ޤ������Τ��Ȥ�����С�
-���̤Υ᥽�å��������Ʊ���Ǥ����ʲ�����򻲾Ȥ��Ƥ���������
+ネスト可能です。ネストされた定義式は、
+それを定義したメソッドが実行された時に定義されます。このことを除けば、
+普通のメソッド定義式と同じです。以下の例を参照してください。
 #@else
-[[ref:singleton_method]]������᥽�å�������ϥͥ��ȤǤ��ޤ���
+[[ref:singleton_method]]を除くメソッド定義式はネストできません。
 #@end
-#@#version 1.8.0 �ˤϡ��ͥ��Ȥ�����������᥽�åɤ� Object �Υ��󥹥���
-#@#�᥽�åɤˤʤ�Ȥ����Х�������ޤ���-))
+#@#version 1.8.0 には、ネストして定義したメソッドが Object のインスタンス
+#@#メソッドになるというバグがありました-))
 
 #@since 1.8.0
         class Foo
@@ -491,11 +491,11 @@ yield ��ƤӽФ����ȤǤ���
         obj.bar rescue nil # => undefined method `bar' for #<Foo:0x4019eda4>
         obj.foo            # => method "bar" was added
         obj.foo            # => warning: method redefined; discarding old bar
-        Foo.new.bar        # => :bar  (¾�Υ��󥹥��󥹤Ǥ�����Ѥ�)
+        Foo.new.bar        # => :bar  (他のインスタンスでも定義済み)
 
 #@else
-version 1.6 �����ϡ�Ʊ�����Ȥ�Ԥ��Τ� [[m:Object#instance_eval]] ���
-��ɬ�פ�����ޤ���(���ξ���ðۥ᥽�åɤ���������ΤǾ����ۤʤ�ޤ�)��
+version 1.6 以前は、同じことを行うのに [[m:Object#instance_eval]] を使
+う必要がありました(この場合特異メソッドが定義されるので少し異なります)。
 
         class Foo
           def foo
@@ -519,9 +519,9 @@ version 1.6 �����ϡ�Ʊ�����Ȥ�Ԥ��Τ� [[m:Object#instance_eval]] ���
                            # => singleton method "bar" was added
         Foo.new.bar        # => undefined method `bar' for #<Foo:0x4019eda4>
 
-�ޤ��ϡ��ʲ��Τ褦�˽񤯤��Ȥ�Ǥ��ޤ���
-#@#1.6 �����ϡ�def ����� def ����
-#@#parser �ǵ�����ʤ��ä��ΤǤ��Τ褦�˽񤯤��ȤϤǤ��ޤ���Ǥ���
+または、以下のように書くこともできます。
+#@#1.6 以前は、def 式内の def 式が
+#@#parser で許されなかったのでこのように書くことはできませんでした
 
        class Foo
           def foo
@@ -534,100 +534,100 @@ version 1.6 �����ϡ�Ʊ�����Ȥ�Ԥ��Τ� [[m:Object#instance_eval]] ���
         end
 #@end
 
-====[a:eval_method] �᥽�åɤ�ɾ��
+====[a:eval_method] メソッドの評価
 
-�᥽�åɤ��ƤӽФ����ȡ��ʲ��ν�Ǽ���ɾ������ޤ���
+メソッドが呼び出されると、以下の順で式が評価されます。
 
- * ���ꤵ��Ƥ���а����Υǥե���ȼ�
- * �᥽�åɤ����� body
- * ���ꤵ��Ƥ�����㳰��ȯ����̵ͭ�ˤ��᥽�å�������� rescue
-   ��ޤ��� else ��
- * ���ꤵ��Ƥ���� ensure ��
+ * 指定されていれば引数のデフォルト式
+ * メソッドの本体 body
+ * 指定されていれば例外の発生の有無によりメソッド定義式の rescue
+   節または else 節
+ * 指定されていれば ensure 節
 
-�����Υǥե���ȼ���ޤᡢ���٤Ƥ��Υ᥽�åɤΥ���ƥ����Ȥ�ɾ������ޤ���
+引数のデフォルト式も含め、すべてそのメソッドのコンテキストで評価されます。
 
-�᥽�åɤ�����ͤ� return ���Ϥ����ͤǤ���return ���ƤӽФ���ʤ��ä����ϡ�
-body �κǸ�μ����ͤ��֤��ޤ���
-body �κǸ�μ����ͤ��֤��ʤ����ξ��� nil ���֤��ޤ���
+メソッドの戻り値は return に渡した値です。return が呼び出されなかった場合は、
+body の最後の式の値を返します。
+body の最後の式が値を返さない式の場合は nil を返します。
 
-�ޤ��᥽�åɤ�����������˸ƤӽФ����ȤϤǤ��ޤ����㤨��
+またメソッドは定義する前に呼び出すことはできません。例えば
 
-          foo          # <- foo ��̤���
+          foo          # <- foo は未定義
           def foo
             print "foo\n"
           end
 
-��̤����᥽�åɤθƤӽФ����㳰 [[c:NameError]] ��ȯ�������ޤ���
+は未定義メソッドの呼び出しで例外 [[c:NameError]] を発生させます。
 
-===[a:singleton_method] �ðۥ᥽�å����
+===[a:singleton_method] 特異メソッド定義
 
-��:
+例:
 
           def foo.test
             print "this is foo\n"
           end
 
-ʸˡ:
+文法:
 
-          def �� `.' ���̻� [`(' [���� [`=' default]] ... [`,' `*' ���� ]`)']
-            ��..
+          def 式 `.' 識別子 [`(' [引数 [`=' default]] ... [`,' `*' 引数 ]`)']
+            式..
           [rescue [error_type,..] [=> evar] [then]
-            ��..]..
+            式..]..
           [else
-            ��..]
+            式..]
           [ensure
-            ��..]
+            式..]
           end
 
-�ðۥ᥽�åɤȤϥ��饹�ǤϤʤ���������Υ��֥������Ȥ˸�ͭ��
-�᥽�åɤǤ����ðۥ᥽�åɤ�����ϥͥ��ȤǤ��ޤ���
+特異メソッドとはクラスではなくある特定のオブジェクトに固有の
+メソッドです。特異メソッドの定義はネストできます。
 
-���饹���ðۥ᥽�åɤϤ��Υ��֥��饹�ˤ�Ѿ�����ޤ���������
-����Х��饹���ðۥ᥽�åɤ�¾�Υ��֥������Ȼظ������ƥ�ˤ�
-���륯�饹�᥽�åɤ�Ư���򤹤뤳�Ȥˤʤ�ޤ���
+クラスの特異メソッドはそのサブクラスにも継承されます。言い替
+えればクラスの特異メソッドは他のオブジェクト指向システムにお
+けるクラスメソッドの働きをすることになります。
 
 #@since 1.8.0
-�ðۥ᥽�å�������ϡ�nil ���֤��ޤ���
+特異メソッド定義式は、nil を返します。
 #@else
-�ðۥ᥽�å���������ͤ��֤��ޤ���
+特異メソッド定義式は値を返しません。
 #@end
 
-===[a:class_method] ���饹�᥽�åɤ����
+===[a:class_method] クラスメソッドの定義
 
-Ruby �ˤ����륯�饹�᥽�åɤȤϥ��饹���ðۥ᥽�åɤΤ��ȤǤ���Ruby ��
-�ϡ����饹�⥪�֥������ȤʤΤǡ����̤Υ��֥������Ȥ�Ʊ�ͤ��ðۥ᥽�å�
-������Ǥ��ޤ���
+Ruby におけるクラスメソッドとはクラスの特異メソッドのことです。Ruby で
+は、クラスもオブジェクトなので、普通のオブジェクトと同様に特異メソッド
+を定義できます。
 
-�������äơ����餫����ˡ�ǥ��饹���֥������Ȥ˥᥽�åɤ��������С���
-�줬���饹�᥽�åɤȤʤ�ޤ�������Ū�ˤϰʲ��Τ褦�ˤ���������뤳�Ȥ�
-����ޤ�(�⥸�塼���Ʊ�ͤǤ�)��
+したがって、何らかの方法でクラスオブジェクトにメソッドを定義すれば、そ
+れがクラスメソッドとなります。具体的には以下のようにして定義することが
+出来ます(モジュールも同様です)。
 
-        # �ðۥ᥽�å�������
+        # 特異メソッド方式。
         class Hoge
           def Hoge.foo
           end
         end
 
-        # ���饹����γ��Ǥ��ɤ�
+        # クラス定義の外でも良い
         def Hoge.bar
         end
 
-        # �ʲ��Τ褦�ˤ���Х��饹̾���Ѥ�äƤ�᥽�å������ѹ�������
+        # 以下のようにすればクラス名が変わってもメソッド部の変更が不要
         class Hoge
           def self.baz
             'To infinity and beyond!'
           end
         end
 
-        # �ðۥ��饹������ʣ���Υ᥽�åɤ���٤��������Ȥ�����
+        # 特異クラス方式。複数のメソッドを一度に定義するとき向き
         class << Hoge
           def bar
             'bar'
           end
         end
 
-        # �⥸�塼��򥯥饹�� extend ����С��⥸�塼��Υ��󥹥���
-        # �᥽�åɤ����饹�᥽�åɤˤʤ�
+        # モジュールをクラスに extend すれば、モジュールのインスタンス
+        # メソッドがクラスメソッドになる
         module Foo
           def foo
           end
@@ -636,21 +636,21 @@ Ruby �ˤ����륯�饹�᥽�åɤȤϥ��饹���ðۥ᥽�åɤΤ��ȤǤ���Ruby ��
           extend Foo
         end
 
-extend �ˤĤ��Ƥϡ�[[m:Object#extend]] �򻲾Ȥ���
-����������
+extend については、[[m:Object#extend]] を参照して
+ください。
 
-===[a:limit] �ƤӽФ�����
+===[a:limit] 呼び出し制限
 
-�᥽�åɤ� public��private��protected �λ��̤��
-�ƤӽФ����¤�����ޤ���
+メソッドは public、private、protected の三通りの
+呼び出し制限を持ちます。
 
- * public �����ꤵ�줿�᥽�åɤ����¤ʤ��˸ƤӽФ��ޤ���
- * private �����ꤵ�줿�᥽�åɤϴؿ������Ǥ����ƤӽФ��ޤ���
- * protected �����ꤵ�줿�᥽�åɤϡ����Υ᥽�åɤ���ĥ��֥������Ȥ�
-   self�Ǥ��륳��ƥ�����(�᥽�å��������instance_eval)�ǤΤ߸ƤӽФ�
-   �ޤ���
+ * public に設定されたメソッドは制限なしに呼び出せます。
+ * private に設定されたメソッドは関数形式でしか呼び出せません。
+ * protected に設定されたメソッドは、そのメソッドを持つオブジェクトが
+   selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せ
+   ます。
 
-��: protected �βĻ���
+例: protected の可視性
 
         class Foo
           def foo
@@ -661,20 +661,20 @@ extend �ˤĤ��Ƥϡ�[[m:Object#extend]] �򻲾Ȥ���
 
         obj = Foo.new
 
-        # ���ΤޤޤǤϸƤ٤ʤ�
+        # そのままでは呼べない
         obj.foo rescue nil    # => -:11 - private method `foo' called for #<Foo:0x401a1860> (NameError)
 
-        # ���饹�����Ǥ�Ƥ٤ʤ�
+        # クラス定義内でも呼べない
         class Foo
           Foo.new.foo rescue nil # => -:15 - protected method `foo' called for #<Foo:0x4019eea8>
-          # �᥽�å��������ǸƤ٤�
+          # メソッド定義式内で呼べる
           def bar
             self.foo
           end
         end
         Foo.new.bar             # => ["-:21"]
 
-        # �ðۥ᥽�å��������Ǥ�Ƥ٤�
+        # 特異メソッド定義式内でも呼べる
         def obj.bar
           self.foo rescue nil
         end
@@ -697,36 +697,36 @@ extend �ˤĤ��Ƥϡ�[[m:Object#extend]] �򻲾Ȥ���
 #@#         end
 #@#         Foo.new.baz             # => ["-:44"]
 
-�ǥե���ȤǤ� def �������饹����γ�(�ȥåץ�٥�)�ˤ���� private��
-���饹�������ˤ���� public ��������ޤ�������� [[m:Module#public]]��[[m:Module#private]]��
-[[m:Module#protected]] ���Ѥ����ѹ��Ǥ��ޤ��������� [[m:Object#initialize]] �Ȥ���̾���Υ᥽�åɤ�
+デフォルトでは def 式がクラス定義の外(トップレベル)にあれば private、
+クラス定義の中にあれば public に定義します。これは [[m:Module#public]]、[[m:Module#private]]、
+[[m:Module#protected]] を用いて変更できます。ただし [[m:Object#initialize]] という名前のメソッドと
 #@since 1.8.0
-[[m:Object#initialize_copy]] �Ȥ���̾���Υ᥽�å�
+[[m:Object#initialize_copy]] という名前のメソッド
 #@end
-�����������˴ط��ʤ���� private �ˤʤ�ޤ���
+は定義する場所に関係なく常に private になります。
 
-��:
-          def foo           # �ǥե���Ȥ� private
+例:
+          def foo           # デフォルトは private
           end
 
           class C
-            def bar         # �ǥե���Ȥ� public
+            def bar         # デフォルトは public
             end
 
-            def ok          # �ǥե���Ȥ� public
+            def ok          # デフォルトは public
             end
-            private :ok     # �Ĥ����������� private ���Ѥ��
+            private :ok     # …だが、ここで private に変わる
 
-            def initialize  # initialize �� private
+            def initialize  # initialize は private
             end
           end
 
-private �� protected ��Ʊ����Ū(���Υ᥽�åɤ򱣤��������
-�٤ʤ��褦�ˤ���)�ǻ��Ѥ���ޤ������ʲ��Τ褦����Ǥϡ�private
-�ϻȤ�����protected �����Ѥ���ɬ�פ�����ޤ���
-���Τˤϡ�private �ˤϴؿ������������Ū�����뤬���Ƥ�
-�Ф����¤���Ū�Ǥ�(�����˵󤲤����¤�����ˤ⤫����餺)
-protected ���� private ���Ȥ��뤳�Ȥ�����¿���褦�Ǥ���
+private と protected は同じ目的(そのメソッドを隠し外から呼
+べないようにする)で使用されますが、以下のような例では、private
+は使えず、protected を利用する必要があります。
+正確には、private には関数を定義する目的があるが、呼び
+出し制限の目的でも(ここに挙げた制限があるにもかかわらず)
+protected よりは private が使われることの方が多いようです。
 
         class Foo
           def _val
@@ -736,70 +736,70 @@ protected ���� private ���Ȥ��뤳�Ȥ�����¿���褦�Ǥ���
 
           def op(other)
 
-            # other �� Foo �Υ��󥹥��󥹤�����
-            # _val �� private ���ȴؿ������Ǥ����Ƥ٤ʤ�����
-            # ���Τ褦�����ѤǤ��ʤ�
+            # other も Foo のインスタンスを想定
+            # _val が private だと関数形式でしか呼べないため
+            # このように利用できない
 
             self._val + other._val
           end
         end
 
-=== ����˴ؤ������
+=== 定義に関する操作
 
 ====[a:alias] alias
 
-��:
+例:
 
           alias foo bar
           alias :foo :bar
           alias $MATCH $&
 
-ʸˡ:
+文法:
 
-          alias ���᥽�å�̾ ��᥽�å�̾
-          alias ���������Х��ѿ�̾ �쥰�����Х��ѿ�̾
+          alias 新メソッド名 旧メソッド名
+          alias 新グローバル変数名 旧グローバル変数名
 
-�᥽�åɤ��뤤�ϥ������Х��ѿ�����̾��Ĥ��ޤ����᥽�å�̾��
-�ϼ��̻Ҥ��Τ�Τ� [[c:Symbol]] ����ꤷ�ޤ�(obj.method �Τ�
-���ʼ���񤯤��ȤϤǤ��ޤ���)��alias �ΰ����ϥ᥽�å�
-�ƤӽФ����ΰ��ڤ�ɾ���ϹԤ��ޤ���
+メソッドあるいはグローバル変数に別名をつけます。メソッド名に
+は識別子そのものか [[c:Symbol]] を指定します(obj.method のよ
+うな式を書くことはできません)。alias の引数はメソッド
+呼び出し等の一切の評価は行われません。
 
-�᥽�åɤ���������̾���դ���ˤ�[[c:Module]]���饹�Υ᥽�å�
-[[m:Module#alias_method]] �����Ѥ��Ʋ�������
+メソッドの定義内で別名を付けるには[[c:Module]]クラスのメソッド
+[[m:Module#alias_method]] を利用して下さい。
 
-��̾���դ���줿�᥽�åɤϡ����λ����ǤΥ᥽�å�����������
-�������Υ᥽�åɤ����������Ƥ⡢��������θŤ��᥽�åɤ�Ʊ
-��Ư���򤷤ޤ�������᥽�åɤ�ư����Ѥ������������᥽�å�
-�Ǹ��Υ᥽�åɤη�̤����Ѥ������Ȥ��ʤɤ����Ѥ���ޤ���
+別名を付けられたメソッドは、その時点でのメソッド定義を引き継
+ぎ、元のメソッドが再定義されても、再定義前の古いメソッドと同
+じ働きをします。あるメソッドの動作を変え、再定義するメソッド
+で元のメソッドの結果を利用したいときなどに利用されます。
 
-    # �᥽�å� foo �����
+    # メソッド foo を定義
     def foo
       "foo"
     end
 
-    # ��̾������(�᥽�å����������)
+    # 別名を設定(メソッド定義の待避)
     alias :_orig_foo :foo
 
-    # foo ������(�������������)
+    # foo を再定義(元の定義を利用)
     def foo
       _orig_foo * 2
     end
 
     p foo  # => "foofoo"
 
-�������Х��ѿ��� alias �����ꤹ��Ȥޤä���Ʊ���ѿ����������ޤ�����
-�Τ��Ȥϰ������ѿ��ؤ�������¾�����ѿ��ˤ�ȿ�Ǥ����褦�ˤʤ뤳�Ȥ��
-̣���ޤ���
+グローバル変数の alias を設定するとまったく同じ変数が定義されます。こ
+のことは一方の変数への代入は他方の変数にも反映されるようになることを意
+味します。
 #@until 1.9.1
-ź�ե饤�֥��� [[lib:importenv]] �Ϥ��Τ��Ȥ����Ѥ����Ȥ߹����ѿ�
-([[ref:d:spec/variables#builtin]] �򻲾�)�˱Ѹ�̾��Ĥ��ޤ���
+添付ライブラリの [[lib:importenv]] はこのことを利用して組み込み変数
+([[ref:d:spec/variables#builtin]] を参照)に英語名をつけます。
 #@end
 
 #@until 1.8.0
-�������Х��ѿ�����̾�Ť���������Ȥ߹����ѿ��������оݤǤ���
+グローバル変数の別名づけは特定の組み込み変数だけが対象です。
 #@end
 
-    # �ü���ѿ��Υ����ꥢ���ϰ������ѹ���¾����ȿ�Ǥ����
+    # 特殊な変数のエイリアスは一方の変更が他方に反映される
     $_ = 1
     alias $foo $_
     $_ = 2
@@ -811,54 +811,54 @@ protected ���� private ���Ȥ��뤳�Ȥ�����¿���褦�Ǥ���
     $bar = 4
     p [$foo, $bar] # => [4, 4]
 #@else
-    # ��������̾���ѿ��Υ����ꥢ���������ΰ�̣�Ǥ�
-    # �����ꥢ���ˤϤʤ�ʤ�������ϡ�version 1.6 ��
-    # �Ǥ�����
+    # こちらは通常の変数のエイリアスで本当の意味での
+    # エイリアスにはならない。これは、version 1.6 ま
+    # での制限
     $bar = 3
     alias $foo $bar
     $bar = 4
     p [$foo, $bar] # => [3, 4]
 #@end
 
-������������ɽ������ʬʸ������б������ѿ� $1,$2, ... �ˤ���̾���դ��뤳�Ȥ��Ǥ��ޤ���
-�ޤ������󥿥ץ꥿���Ф��ƽ��פʰ�̣�Τ��륰�����Х��ѿ�
-([[ref:d:spec/variables#builtin_variable]] �򻲾�)�����������ư���
-�پ���褹��礬����ޤ���
+ただし、正規表現の部分文字列に対応する変数 $1,$2, ... には別名を付けることができません。
+また、インタプリタに対して重要な意味のあるグローバル変数
+([[ref:d:spec/variables#builtin_variable]] を参照)を再定義すると動作に
+支障を来す場合があります。
 
-alias ���� nil ���֤��ޤ���
+alias 式は nil を返します。
 
 ====[a:undef] undef
 
-��:
+例:
 
           undef bar
 
-ʸˡ:
+文法:
 
-          undef �᥽�å�̾[, �᥽�å�̾[, ...]]
+          undef メソッド名[, メソッド名[, ...]]
 
-�᥽�åɤ��������ä��ޤ����᥽�å�̾�ˤϼ��̻Ҥ��Τ��
-�� [[c:Symbol]] ����ꤷ�ޤ�(obj.method �Τ褦�ʼ���񤯤��ȤϤǤ��ޤ���)��
-undef �ΰ����ϥ᥽�åɸƤӽФ����ΰ��ڤ�ɾ���ϹԤ��ޤ���
+メソッドの定義を取り消します。メソッド名には識別子そのもの
+か [[c:Symbol]] を指定します(obj.method のような式を書くことはできません)。
+undef の引数はメソッド呼び出し等の一切の評価は行われません。
 
-�᥽�åɤ��������������ä��ˤ�[[c:Module]]���饹�Υ᥽��
-�� [[m:Module#undef_method]] �����Ѥ��Ʋ�
-������
+メソッドの定義内で定義を取り消すには[[c:Module]]クラスのメソッ
+ド [[m:Module#undef_method]] を利用して下
+さい。
 
-undef �Τ�����Τ�ư��ϡ��᥽�å�̾�ȥ᥽�å�����Ȥδط����������
-���Υ᥽�å�̾���ü������ȴ�Ϣ�Ť��ޤ������ξ��֤Υ᥽�åɤθƤӽФ���
-�㤨�����ѡ����饹��Ʊ̾�Υ᥽�åɤ����äƤ��㳰 [[c:NameError]] ��ȯ�������ޤ���
-(�������᥽�å� [[m:Module#remove_method]] �ϡ��ط�������������Ǥ������ΰ㤤�Ͻ��פǤ�)��
+undef のより正確な動作は、メソッド名とメソッド定義との関係を取り除き、
+そのメソッド名を特殊な定義と関連づけます。この状態のメソッドの呼び出しは
+例えスーパークラスに同名のメソッドがあっても例外 [[c:NameError]] を発生させます。
+(一方、メソッド [[m:Module#remove_method]] は、関係を取り除くだけです。この違いは重要です)。
 
-alias �ˤ����̾����� undef �ˤ��������ä��ˤ�äƥ��饹�Υ��󥿥ե�������
-�����ѡ����饹����Ω���ѹ����뤳�Ȥ��Ǥ��ޤ������������᥽�åɤ� self �˥�å�������
-���äƤ�����⤢��Τǡ��褯���դ��ʤ��ȴ�¸�Υ᥽�åɤ�ư��ʤ��ʤ��ǽ��������ޤ���
+alias による別名定義と undef による定義取り消しによってクラスのインタフェースを
+スーパークラスと独立に変更することができます。ただし、メソッドが self にメッセージを
+送っている場合もあるので、よく注意しないと既存のメソッドが動作しなくなる可能性があります。
 
-undef ���� nil ���֤��ޤ���
+undef 式は nil を返します。
 
 ====[a:defined] defined?
 
-��:
+例:
 
           defined? print
           defined? File.print
@@ -867,32 +867,32 @@ undef ���� nil ���֤��ޤ���
           defined?(@foobar)
           defined?(Foobar)
 
-ʸˡ:
+文法:
 
-          defined? ��
+          defined? 式
 
-�����������Ƥ��ʤ���С������֤��ޤ����������Ƥ���м��μ���
-��ɽ��ʸ������֤��ޤ���
+式が定義されていなければ、偽を返します。定義されていれば式の種別
+を表す文字列を返します。
 
-�������Ƥ��ʤ��᥽�åɡ�undef ���줿�᥽�åɡ�[[m:Module#remove_method]] 
-�ˤ�������줿�᥽�åɤΤ�������Ф��Ƥ� defined? �ϵ����֤��ޤ���
+定義されていないメソッド、undef されたメソッド、[[m:Module#remove_method]] 
+により削除されたメソッドのいずれに対しても defined? は偽を返します。
 
-���̤���ˡ�Ȥ��ưʲ�������ޤ���
+特別な用法として以下があります。
 
    defined? yield
 
-yield �θƤӽФ�����ǽ�ʤ鿿(ʸ���� "yield")���֤��ޤ���
-[[m:Kernel.#block_given?]] ��Ʊ�ͤ˥᥽�åɤ��֥��å��դ��ǸƤФ줿��
-��Ƚ�Ǥ�����ˡ�ˤʤ�ޤ���
+yield の呼び出しが可能なら真(文字列 "yield")を返します。
+[[m:Kernel.#block_given?]] と同様にメソッドがブロック付きで呼ばれたか
+を判断する方法になります。
 
    defined? super
 
-super �μ¹Ԥ���ǽ�ʤ鿿(ʸ���� "super")���֤��ޤ���
+super の実行が可能なら真(文字列 "super")を返します。
 
    defined? a = 1
    p a # => nil
 
-"assignment" ���֤��ޤ����ºݤ������ϹԤ��ޤ��󤬥��������ѿ����������ޤ���
+"assignment" を返します。実際に代入は行いませんがローカル変数は定義されます。
 
 #@since 1.9.1
   /(.)/ =~ "foo"
@@ -906,7 +906,7 @@ super �μ¹Ԥ���ǽ�ʤ鿿(ʸ���� "super")���֤��ޤ���
   defined? $2  # => nil
 #@end
 
-$&, $1, $2, �ʤɤ�ľ���Υޥå��η���ͤ����ꤵ�줿�����������֤��ޤ���
+$&, $1, $2, などは直前のマッチの結果値が設定された場合だけ真を返します。
 
    def Foo(a,b)
    end
@@ -915,10 +915,10 @@ $&, $1, $2, �ʤɤ�ľ���Υޥå��η���ͤ����ꤵ�줿�����������֤��ޤ���
    Foo = 1
    p defined? Foo       # => "constant"
 
-��ʸ���ǻϤޤ�᥽�å�̾���Ф��Ƥ� () ���������ʤ���������Ƚ��
-��ԤäƤ��ޤ��ޤ���
+大文字で始まるメソッド名に対しては () を明示しなければ定数の判定
+を行ってしまいます。
 
-�ʲ��ϡ�defined? ���֤��ͤΰ����Ǥ���
+以下は、defined? が返す値の一覧です。
 
  * "super"
  * "method"

@@ -1,17 +1,17 @@
-���������ȯ����Τ���Υ��󥿡��ե��������󶡤���饤�֥��Ǥ���
-HTTP �Υ��å���󥭡��ʤɤ�Ŭ���Ƥ��ޤ���
+安全な乱数発生器のためのインターフェースを提供するライブラリです。
+HTTP のセッションキーなどに適しています。
 
 = module SecureRandom
 
-���������ȯ����Τ���Υ��󥿡��ե��������󶡤���⥸�塼��Ǥ���
-HTTP �Υ��å���󥭡��ʤɤ�Ŭ���Ƥ��ޤ���
+安全な乱数発生器のためのインターフェースを提供するモジュールです。
+HTTP のセッションキーなどに適しています。
 
-�ʲ������ȯ����򥵥ݡ��Ȥ��Ƥ��ޤ���
+以下の乱数発生器をサポートしています。
 
   * openssl
   * /dev/urandom
 
-��ΰ��������ȯ���郎���ѤǤ��ʤ���硢�ƥ᥽�åɤ� NotImplementedError ��ȯ�����ޤ���
+上の安全な乱数発生器が使用できない場合、各メソッドは NotImplementedError を発生します。
   
   # random hexadecimal string. 
   p SecureRandom.hex(10) #=> "52750b30ffbc7de3b362" 
@@ -36,31 +36,31 @@ HTTP �Υ��å���󥭡��ʤɤ�Ŭ���Ƥ��ޤ���
 
 --- base64(n = nil)    -> String
 
-������� base64 ʸ��������������֤��ޤ���
+ランダムな base64 文字列を生成して返します。
 
-@param n ʸ����������˻Ȥ��������ͥ��Υ������������ǻ��ꤷ�ޤ���
-         ���������ʸ����Υ������ǤϤʤ����Ȥ����դ��Ʋ����������������ʸ����Υ�������
-         n ���� 4/3 �ܤˤʤ�ޤ���nil ����ꤷ����� n �Ȥ��� 16 ���Ȥ��ޤ���
+@param n 文字列の生成に使われるランダムネスのサイズを整数で指定します。
+         生成される文字列のサイズではないことに注意して下さい。生成される文字列のサイズは
+         n の約 4/3 倍になります。nil を指定した場合 n として 16 が使われます。
 
-@raise NotImplementedError ���������ȯ���郎�Ȥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
-  p SecureRandom.base64(3)    #=> "4pYO"  (ʸ����Υ������� 3 �Ǥʤ�)
+  p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
 
 @see [[rfc:3548]]
 
 #@since 1.9.2
 --- urlsafe_base64(n = nil, padding = false)  -> String
 
-������� URL-safe �� base64 ʸ��������������֤��ޤ���
+ランダムで URL-safe な base64 文字列を生成して返します。
 
-@param n ʸ����������˻Ȥ��������ͥ��Υ������������ǻ��ꤷ�ޤ���
-         ���������ʸ����Υ�������n ���� 4/3 �ܤˤʤ�ޤ���
-         nil ����ꤷ����� n �Ȥ��� 16 ���Ȥ��ޤ���
+@param n 文字列の生成に使われるランダムネスのサイズを整数で指定します。
+         生成される文字列のサイズはn の約 4/3 倍になります。
+         nil を指定した場合 n として 16 が使われます。
 
-@param padding ������ꤹ��� '=' �ǥѥǥ��󥰤�Ԥ��ޤ���
-               ������ꤹ��ȥѥǥ��󥰤�Ԥ��ޤ��󡣥ǥե���Ȥϵ��Ǥ���
+@param padding 真を指定すると '=' でパディングを行います。
+               偽を指定するとパディングを行いません。デフォルトは偽です。
 
-@raise NotImplementedError  ���������ȯ���郎�Ȥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError  安全な乱数発生器が使えない場合に発生します。
 
    p SecureRandom.urlsafe_base64 #=> "b4GOKm4pOYU_-BOXcrUGDg"
    p SecureRandom.urlsafe_base64 #=> "UZLdOkzop70Ddx-IJR0ABg"
@@ -71,37 +71,37 @@ HTTP �Υ��å���󥭡��ʤɤ�Ŭ���Ƥ��ޤ���
 #@end
 --- hex(n = nil)    -> String
 
-������� hex ʸ��������������֤��ޤ���
+ランダムな hex 文字列を生成して返します。
 
-@param n ʸ����������˻Ȥ��������ͥ��Υ������������ǻ��ꤷ�ޤ���
-         ���������ʸ����Υ������ǤϤʤ����Ȥ����դ��Ʋ����������������ʸ����Υ�������
-         n ���� 2 �ܤˤʤ�ޤ���nil ����ꤷ����� n �Ȥ��� 16 ���Ȥ��ޤ���
+@param n 文字列の生成に使われるランダムネスのサイズを整数で指定します。
+         生成される文字列のサイズではないことに注意して下さい。生成される文字列のサイズは
+         n の約 2 倍になります。nil を指定した場合 n として 16 が使われます。
 
-@raise NotImplementedError ���������ȯ���郎�Ȥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
-  p SecureRandom.hex(3)    #=> "f72233"   (ʸ����Υ������� 3 �Ǥʤ�)
+  p SecureRandom.hex(3)    #=> "f72233"   (文字列のサイズは 3 でない)
 
 
 --- random_bytes(n = nil)    -> String
 
-������ʥХ���������������֤��ޤ���
+ランダムなバイト列を生成して返します。
 
-@param n ���������ʸ����Υ������������ǻ��ꤷ�ޤ���
-         nil ����ꤷ����� n �Ȥ��� 16 ���Ȥ��ޤ���
+@param n 生成される文字列のサイズを整数で指定します。
+         nil を指定した場合 n として 16 が使われます。
 
-@raise NotImplementedError ���������ȯ���郎�Ȥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
   p SecureRandom.random_bytes(3)    #=> "\321\020\203"
 
 --- random_number(n = 0)     -> Integer | Float
 
-������ʿ��ͤ����������֤��ޤ���
-n �� 1 �ʾ�������ξ�硢0 �ʾ� n ̤�����������֤��ޤ���
-n �� 0 �ξ�硢0.0 �ʾ� 1.0 ̤���μ¿����֤��ޤ���
+ランダムな数値を生成して返します。
+n が 1 以上の整数の場合、0 以上 n 未満の整数を返します。
+n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
 
-@param n ������ʿ��ͤξ�¤���ͤǻ��ꤷ�ޤ���
+@param n ランダムな数値の上限を数値で指定します。
 
-@raise NotImplementedError ���������ȯ���郎�Ȥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
   p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
 
@@ -109,12 +109,12 @@ n �� 0 �ξ�硢0.0 �ʾ� 1.0 ̤���μ¿����֤��ޤ���
 #@if (version != "1.9.1")
 --- uuid   -> String
 
-�С������ 4 �� UUID (Universally Unique IDentifier) �����������֤��ޤ���
+バージョン 4 の UUID (Universally Unique IDentifier) を生成して返します。
 
-version 4 �� UUID ������������Ǥ� (�С������������)��
-���� UUID �� MAC ���ɥ쥹�����ʤɤΤ褦�ʰ�̣�Τ�������ޤߤޤ���
+version 4 の UUID は全くランダムです (バージョンを除いて)。
+この UUID は MAC アドレスや時刻などのような意味のある情報を含みません。
 
-@raise NotImplementedError ���������ȯ���郎�Ȥ��ʤ�����ȯ�����ޤ���
+@raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
    p SecureRandom.uuid #=> "2d931510-d99f-494a-8c67-87feb05e1594"
    p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"

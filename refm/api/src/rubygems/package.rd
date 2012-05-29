@@ -10,21 +10,21 @@ require rubygems/package/tar_reader
 require rubygems/package/tar_reader/entry
 require rubygems/package/tar_writer
 
-���Υ饤�֥��� Gem �ѥå������򰷤�����Υ饤�֥��Ǥ���
+このライブラリは Gem パッケージを扱うためのライブラリです。
 
 = class Gem::FileOperations
 
-���Υ��饹�� [[c:FileUtils]] �Υ�åѡ��Ǥ���
+このクラスは [[c:FileUtils]] のラッパーです。
 
-�����󥰤ε�ǽ���ɲä��Ƥ��ޤ���
+ロギングの機能を追加しています。
 
 == Singleton Methods
 
 --- new(logger = nil) -> Gem::FileOperations
 
-���Υ��饹���������ޤ���
+このクラスを初期化します。
 
-@param logger ����������ꤷ�ޤ����������� log �Ȥ���̾���Υ᥽�åɤ���äƤ���ɬ�פ�����ޤ���
+@param logger ロガーを指定します。ロガーは log という名前のメソッドを持っている必要があります。
 
 = module Gem::Package
 
@@ -34,11 +34,11 @@ require rubygems/package/tar_writer
 --- open(io, mode = 'r', signer = nil){|tar_io| ... }
 #@todo ???
 
-io �򳫤���Ϳ����줿�֥��å����Ϥ��ƥ֥��å���ɾ�����ޤ���
+io を開いて与えられたブロックに渡してブロックを評価します。
 
-@param io IO ���֥������Ȥ���ꤷ�ޤ������̤� Gem �ѥå������򳫤����ե����륪�֥������Ȥ���ꤷ�ޤ���
+@param io IO オブジェクトを指定します。普通は Gem パッケージを開いたファイルオブジェクトを指定します。
 
-@param mode �⡼�ɤ�ʸ����ǻ��ꤷ�ޤ�������Ǥ���⡼�ɤ��ɤ߹��� (r) �Ƚ񤭹��� (w) �Ǥ���
+@param mode モードを文字列で指定します。指定できるモードは読み込み (r) と書き込み (w) です。
 
 @param signer ???
 
@@ -56,24 +56,24 @@ io �򳫤���Ϳ����줿�֥��å����Ϥ��ƥ֥��å���ɾ�����ޤ���
 
 = class Gem::Package::Error < StandardError
 
-[[c:Gem::Package]] �Ǥδ���Ū���㳰�Ǥ���
+[[c:Gem::Package]] での基本的な例外です。
 
 = class Gem::Package::NonSeekableIO < Gem::Package::Error
 
-�������Ǥ��ʤ� IO ���Ф��ƥ��������ѤȤ�������ȯ�������㳰�Ǥ���
+シークできない IO に対してシーク使用とした場合に発生する例外です。
 
 = class Gem::Package::ClosedIO < Gem::Package::Error
 
-�����Ĥ��Ƥ��� IO ����������ȯ�������㳰�Ǥ���
+既に閉じている IO を操作した場合に発生する例外です。
 
 = class Gem::Package::BadCheckSum < Gem::Package::Error
 
-�����å����ब���פ��ʤ�����ȯ�������㳰�Ǥ���
+チェックサムが一致しない場合に発生する例外です。
 
 = class Gem::Package::TooLongFileName < Gem::Package::Error
 
-�ե�����̾��Ĺ���������ȯ�������㳰�Ǥ���
+ファイル名が長すぎる場合に発生する例外です。
 
 = class Gem::Package::FormatError < Gem::Package::Error
 
-�ե����ޥåȤ˴ؤ����㳰�Ǥ���
+フォーマットに関する例外です。

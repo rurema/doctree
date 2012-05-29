@@ -2,15 +2,15 @@
 
 = GNU
 
-FSF (Free Software Foundation) ��Ĺ���֤������ۤ��夲���褿 OS��GNU �桼
-�ƥ���ƥ���դ����˻Ȥä�ͭ̾�ˤʤ�Ȥ��Υ֥���̾���Ĥ����Ȥ����롣
+FSF (Free Software Foundation) が長い間かけて築き上げて来た OS。GNU ユー
+ティリティをふんだんに使って有名になるとこのブランド名がつくことがある。
 
-GNU is Not Unix �ʤΤǡ��ɰդ�ɽ���� ((<Unix>)) �γ�꤫��Ф����Ȥˤ�
-����((-����ʤ��ȸ��ä��� Linux ��Ȥ�����줽�����Ǥ�񤯤��Ȥʤ����
-��Ρ���������ư����-))�����Ǥϡ�GNU Hurd (�����ͥ��̾��)��ư�� Ruby 
-�ˤĤ��Ƽ�˿���롣
+GNU is Not Unix なので、敬意を表して ((<Unix>)) の括りから出すことにし
+た。((-そんなこと言ったら Linux もとか言われそう。でも書くことないんだ
+もの。当り前に動くし-))ここでは、GNU Hurd (カーネルの名前)で動く Ruby 
+について主に触れる。
 
-õ���Ƥߤ��顢((<ruby-dev:6712>)), ((<ruby-dev:14603>)) �˥ѥå������
-�����롣���äȺ��Ǥ�ư���˰㤤�ʤ��������ࡣ
+探してみたら、((<ruby-dev:6712>)), ((<ruby-dev:14603>)) にパッチの投稿
+がある。きっと今でも動くに違いない。情報求む。
 
-((<URL:http://www.gnu.org/>)) ����
+((<URL:http://www.gnu.org/>)) 参照

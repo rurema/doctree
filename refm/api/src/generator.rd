@@ -1,16 +1,16 @@
-�������ƥ졼���򰷤�����Υ饤�֥��Ǥ���
+外部イテレータを扱うためのライブラリです。
 
 #@since 1.8.1
 = class Generator < Object
 
 include Enumerable
 
-�������ƥ졼���������ƥ졼�����Ѥ��뤿��Υ��饹�Ǥ���
-������ callcc ��ȤäƤ���Τ��٤��Ǥ���
+内部イテレータを外部イテレータに変えるためのクラスです。
+実装に callcc を使っているので遅いです。
 
  * [[c:SyncEnumerator]]
 
-��:
+例:
 
   require 'generator'
   
@@ -40,12 +40,12 @@ include Enumerable
 --- new(enum = nil) -> Generator
 --- new(enum = nil) {|g|  ... } -> Generator
 
-[[c:Enumerable]] ���֥������Ȥ��֥��å����� Generator ���֥������Ȥ��������ޤ���
+[[c:Enumerable]] オブジェクトかブロックから Generator オブジェクトを生成します。
 
-�֥��å����������� Generator ���֥������Ȥ�֥��å������Ȥ��ƸƤФ�ޤ���
+ブロックは生成した Generator オブジェクトをブロック引数として呼ばれます。
 
-@param enum [[c:Enumerable]] �򥤥󥯥롼�ɤ������֥������Ȥ�Ϳ���ޤ���
-            enum �ȥ֥��å���Ʊ����Ϳ�������ϡ��֥��å���̵�뤵��ޤ���
+@param enum [[c:Enumerable]] をインクルードしたオブジェクトを与えます。
+            enum とブロックを同時に与えた場合は、ブロックは無視されます。
 
 
 
@@ -53,9 +53,9 @@ include Enumerable
 
 --- current -> object
 
-���ߤΰ��֤ˤ������Ǥ��֤��ޤ���next �Ȱ㤤���֤ϰ�ư���ޤ���
+現在の位置にある要素を返します。next と違い位置は移動しません。
 
-��:
+例:
 
   g = Generator.new(['A', 'B', 'C', 'Z'])
   p g.current # => 'A'
@@ -63,18 +63,18 @@ include Enumerable
 
 --- each {|e| ... } -> self
 
-�����ͥ졼�������Ǥ�����Ȥ��ƥ֥��å���ɾ�����ޤ���self ���֤��ޤ���
+ジェネレータの要素を引数としてブロックを評価します。self を返します。
 
 --- end? -> bool
 
-�������Ǥ��ʤ��������ͥ졼����������ã���Ƥ���ʤ鿿���֤��ޤ���
+次の要素がなく、ジェネレータが終わりに達しているなら真を返します。
 
 --- index -> Integer
 --- pos   -> Integer
 
-���ߤΰ��֤��֤��ޤ���
+現在の位置を返します。
 
-��:
+例:
 
   g = Generator.new(['A', 'B', 'C', 'Z'])
   p g.pos     # => 0
@@ -83,11 +83,11 @@ include Enumerable
 
 --- next -> object
 
-���ߤΰ��֤ˤ������Ǥ��֤������֤�1�Ŀʤ�ޤ���
+現在の位置にある要素を返し、位置を1つ進めます。
 
-@raise EOFError �������Ǥ�̵������ȯ�����ޤ���
+@raise EOFError 次の要素が無い場合に発生します。
 
-��:
+例:
 
   g = Generator.new() do |g|
         ['A', 'B', 'C', 'Z'].each{|s|
@@ -99,13 +99,13 @@ include Enumerable
 
 --- next? -> bool
 
-�������Ǥ�¸�ߤ���ʤ鿿���֤��ޤ���
+次の要素が存在するなら真を返します。
 
 --- rewind -> self
 
-�����ͥ졼����ǽ�˴����ᤷ�ޤ���self ���֤��ޤ���
+ジェネレータを最初に巻き戻します。self を返します。
 
-��:
+例:
 
   g = Generator.new() do |g|
         ['A', 'B', 'C', 'Z'].each{|s|
@@ -119,11 +119,11 @@ include Enumerable
 
 --- yield(val) -> self
 
-val �򥸥��ͥ졼�����Ϥ��ޤ���
-Generator.new() {|g|  ... } �Υ֥��å�����Ǥ����Ƥ֤��Ȥ��Ǥ��ޤ���
-�����ͥ졼�����Ϥ��줿 val �� next �ʤɤǼ��Ф����Ȥ��Ǥ��ޤ���
+val をジェネレータに渡します。
+Generator.new() {|g|  ... } のブロックの中でしか呼ぶことができません。
+ジェネレータに渡された val は next などで取り出すことができます。
 
-��:
+例:
 
   g = Generator.new() do |g|
         n = 0
@@ -141,9 +141,9 @@ Generator.new() {|g|  ... } �Υ֥��å�����Ǥ����Ƥ֤��Ȥ��Ǥ��ޤ���
 = class SyncEnumerator < Object
 include Enumerable
 
-ʣ���� [[c:Enumerable]] ���֥������Ȥ��¹Ԥ��� yield ���뤿��Υ��饹�Ǥ���
+複数の [[c:Enumerable]] オブジェクトを並行して yield するためのクラスです。
 
-��:
+例:
 
   require 'generator'
   
@@ -156,43 +156,43 @@ include Enumerable
 
 --- new(*enums) -> SyncEnumerator
 
-SyncEnumerator ���֥������Ȥ��������ޤ���
+SyncEnumerator オブジェクトを生成します。
 
-ʣ���� [[c:Enumerable]] ���֥������Ȥ�Ϳ���ޤ���
-Enumerable ���֥������ȤΥ������ϰۤʤäƤ��Ƥ⹽���ޤ���
+複数の [[c:Enumerable]] オブジェクトを与えます。
+Enumerable オブジェクトのサイズは異なっていても構いません。
 
 == Instance Methods
 
 --- each {|elem| ... } -> self
 
-Ϳ����줿 Enumerable ���֥������ȤΤ��줾������Ǥ����������Ȥ���
-�֥��å���ɾ�����ޤ���self ���֤��ޤ���
+与えられた Enumerable オブジェクトのそれぞれの要素の配列を引数として
+ブロックを評価します。self を返します。
 
-���Ǥ����� Enumerable ���֥������Ȥ��ҤȤĤǤ⤢��С�ɾ����³���ޤ���
-���ǤΤʤ��ʤä� Enumerable ���֥������Ȥ������ nil ����������ǤȤ��ޤ���
-���Ƥ� Enumerable ���֥������Ȥ����Ǥ��ʤ��ʤ�Ȥ����ǡ��֥��å���ɾ����ߤ�ޤ���
+要素がある Enumerable オブジェクトがひとつでもあれば、評価を続けます。
+要素のなくなった Enumerable オブジェクトの代わりに nil を配列の要素とします。
+全ての Enumerable オブジェクトの要素がなくなるとそこで、ブロックの評価を止めます。
 
-��:
+例:
 
   s = SyncEnumerator.new([1, 2, 3], ['a', 'b'], ['X'])
   s.each{|arry| p arry}
   
-  # => ���
+  # => 結果
   # [1, "a", "X"]
   # [2, "b", nil]
   # [3, nil, nil]
 
 --- end?(i = nil) -> bool
 
-SyncEnumerator ��������ã���Ƥ�����Ͽ����֤��ޤ���
+SyncEnumerator が終わりに達している場合は真を返します。
 
-i ��Ϳ�������ϡ�i ���ܤ� Enumerable ���֥������Ȥ�������
-ã���Ƥ����硢�����֤��ޤ���
+i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
+達している場合、真を返します。
 
 --- length -> Integer
 --- size   -> Integer
 
-Ϳ����줿 Enumerable ���֥������Ȥο����֤��ޤ���
+与えられた Enumerable オブジェクトの数を返します。
 #@end
 
 #@since 1.8.4
@@ -205,16 +205,16 @@ i ��Ϳ�������ϡ�i ���ܤ� Enumerable ���֥������Ȥ�������
 == Instance Methods
 --- next -> object
 
-���ߤΰ��֤ˤ������Ǥ��֤������֤��Ŀʤ�ޤ���
+現在の位置にある要素を返し、位置を一つ進めます。
 
-@raise EOFError �������Ǥ�̵������ȯ�����ޤ���
+@raise EOFError 次の要素が無い場合に発生します。
 
 @see [[m:Generator#next]]
 
 
 --- rewind -> self
 
-�������ݻ����Ƥ��른���ͥ졼����ǽ�ޤǴ����ᤷ�ޤ���
+内部で保持しているジェネレータを最初まで巻き戻します。
 
 @see [[m:Generator#rewind]]
 #@end

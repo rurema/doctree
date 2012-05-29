@@ -3,7 +3,7 @@
 =begin
 = TkTreatFont
 
-== �᥽�å�:
+== メソッド:
 
 --- TkTreatFont#font_configinfo
 --- TkTreatFont#fontobj

@@ -3,33 +3,33 @@
 =begin
 = TkSelection
 
-((<���쥯�����>))�����뤿��Υ⥸�塼��Ǥ���
+((<セレクション>))を操作するためのモジュールです。
 
-== ���󥯥롼�ɤ��Ƥ���⥸�塼��:
-
-((<Tk>))
-
-== extend���Ƥ���⥸�塼��:
+== インクルードしているモジュール:
 
 ((<Tk>))
 
-== ���饹�᥽�å�:
+== extendしているモジュール:
+
+((<Tk>))
+
+== クラスメソッド:
 
 --- TkSelection.handle(win, func, type=None, format=None)
 #@todo
-    ���������å�((|win|))������((<���쥯�����>))����Ф��Ȥ��¹Ԥ�
-    �������((|func|))�ǻ��ꤷ�ޤ���((|type|))�ϡ����Ф��Ȥ��˻��ꤹ
-    �뷿(((<TkSelection.get>))����)���б����ޤ�(�ǥե���Ȥ�"STRING"��
-    ��)��
+    ウィジェット((|win|))が持つ((<セレクション>))を取り出すとき実行す
+    る処理を((|func|))で指定します。((|type|))は、取り出すときに指定す
+    る型(((<TkSelection.get>))参照)に対応します(デフォルトは"STRING"で
+    す)。
 
 --- TkSelection.own(win=None, func=None)
 #@todo
-    ��������ꤷ�ʤ���硢((<���쥯�����>))���ͭ���륦�������åȥ��֥�����
-    �Ȥ��֤��ޤ�(�����������쥯�����¸�ߤ��ʤ����(({nil}))���֤��ޤ�)��
+    引数を指定しない場合、((<セレクション>))を所有するウィジェットオブジェク
+    トを返します(ただし、セレクションが存在しなければ(({nil}))を返します)。
 
-    ((-��������ꤷ�����ϡ�-))
+    ((-引数を指定した場合は？-))
 
-== �᥽�å�:
+== メソッド:
 
 --- TkSelection#handle(func, type=None, format=None)
 #@todo
@@ -37,31 +37,31 @@
 --- TkSelection#own(func=None)
 #@todo
 
-== �⥸�塼��ؿ�:
+== モジュール関数:
 
 --- TkSelection.clear(win=Tk.root)
 #@todo
-    ((<���쥯�����>))����ä��ޤ���((|win|))����ꤷ����硢���ꤷ
-    ��������ɥ������륹���꡼���оݤȤʤ�ޤ�����ʸ������֤��ޤ���
+    ((<セレクション>))を取り消します。((|win|))を指定した場合、指定し
+    たウィンドウがあるスクリーンが対象となります。空文字列を返します。
 
 --- TkSelection.get(type=None)
 #@todo
-    ((<���쥯�����>))���ͤ��֤��ޤ����ͤη��Ȥ��ư���((|type|))�˰ʲ�
-    �β��줫����ꤷ�ޤ���
+    ((<セレクション>))の値を返します。値の型として引数((|type|))に以下
+    の何れかを指定します。
 
     *"STRING"
     *"FILE_NAME"
     *...
-    *"COMPUND_TEXT"  (���ܸ�Tcl/Tk�ξ��)
+    *"COMPUND_TEXT"  (日本語Tcl/Tkの場合)
 
-    ����((|type|))���ά�����(({"STRING"}))����ꤷ�����Ȥˤʤ�ޤ���
+    引数((|type|))を省略すると(({"STRING"}))を指定したことになります。
 
 =end
 # Module TkSystemMenu is defined in tk.rb
 =begin
 = TkSystemMenu
 
-== private�᥽�å�:
+== privateメソッド:
 
 --- TkSystemMenu#initialize(parent, keys=nil)
 #@todo

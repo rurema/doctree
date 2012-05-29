@@ -1,75 +1,75 @@
 = class OpenSSL::HMAC < Object
-HMAC ��ɽ�����饹��
+HMAC を表すクラス。
 
-HMAC �Ȥ� MAC(message authentication code, �ϥå���ؿ�(MD5��SHA�ʤ�)
-�ȸ���ʸ�����ѥ�᡼���Ȥ���ϥå���ؿ�)�ΰ��Ǥ���
+HMAC とは MAC(message authentication code, ハッシュ関数(MD5やSHAなど)
+と鍵の文字列をパラメータとするハッシュ関数)の一種です。
 
-��å�������ǧ�ڤ����Ѥ���ޤ���
+メッセージの認証に利用されます。
 
-[[c:OpenSSL::Digest]] �Τ褦�ˤ���Ϳ����줿ʸ�����
-�ϥå����ͤ�ľ�ܷ׻����륤�󥿡��ե�������
-���󥹥��󥹤�������������ʸ�����缡Ϳ���ƥϥå����ͤ�
-�׻����륤�󥿡��ե�������2�Ĥ�����ޤ���
+[[c:OpenSSL::Digest]] のようにある与えられた文字列の
+ハッシュ値を直接計算するインターフェースと
+インスタンスを生成して入力文字列を順次与えてハッシュ値を
+計算するインターフェースの2つがあります。
 
-HMAC ��[[RFC:2104]] ���������Ƥ��ޤ���
+HMAC は[[RFC:2104]] で定義されています。
 
 == Class Methods
 
 --- digest(digest, key, data) -> String
-�Ϥ��줿 digest �� key ���Ѥ��� data �� HMAC ��׻�����
-�����ͤ�Х��ʥ�ʸ����Ȥ����֤��ޤ���
+渡された digest と key を用いて data の HMAC を計算し、
+その値をバイナリ文字列として返します。
 
-digest �ˤ����Ѥ���ϥå���ؿ���ɽ��ʸ����("md5", "sha256" �ʤ�)
-���Ϥ��ޤ���
+digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
+を渡します。
 
-@param digest ���Ѥ���ϥå���ؿ�
-@param key ���Ѥ��븰��ʸ����
-@param data HMAC ��׻�����ʸ����
+@param digest 利用するハッシュ関数
+@param key 利用する鍵の文字列
+@param data HMAC を計算する文字列
 
 --- hexdigest(digest, key, data) -> String
-�Ϥ��줿 digest �� key ���Ѥ��� data �� HMAC ��׻�����
-�����ͤ�16��ʸ������֤��ޤ���
+渡された digest と key を用いて data の HMAC を計算し、
+その値を16進文字列で返します。
 
-digest �ˤ����Ѥ���ϥå���ؿ���ɽ��ʸ����("md5", "sha256" �ʤ�)
-���Ϥ��ޤ���
+digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
+を渡します。
 
-@param digest ���Ѥ���ϥå���ؿ�
-@param key ���Ѥ��븰��ʸ����
-@param data HMAC ��׻�����ʸ����
+@param digest 利用するハッシュ関数
+@param key 利用する鍵の文字列
+@param data HMAC を計算する文字列
 
 --- new(key, digest) -> OpenSSL::HMAC
-HMAC ��׻����뤿��Υ��֥������Ȥ��������ޤ���
+HMAC を計算するためのオブジェクトを生成します。
 
-�������줿���֥������Ȥ��������֤����Ϥʤ��ξ��֤˥ꥻ�åȤ���ޤ���
+生成されたオブジェクトの内部状態は入力なしの状態にリセットされます。
 
-digest �ˤ����Ѥ���ϥå���ؿ���ɽ��ʸ����("md5", "sha256" �ʤ�)
-���Ϥ��ޤ���
+digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
+を渡します。
 
-@param key ���Ѥ��븰��ʸ����
-@param digest ���Ѥ���ϥå���ؿ�
+@param key 利用する鍵の文字列
+@param digest 利用するハッシュ関数
 
 == Instance Methods
 
 --- <<(data) -> self
 --- update(data) -> self
-����ʸ������ɲä����������֤򹹿����ޤ���
+入力文字列を追加し、内部状態を更新します。
 
-@param data ����ʸ����
+@param data 入力文字列
 
 --- digest -> String
-���֥������Ȥ��������֤��黻�Ф��줿 HMAC ��
-�Х��ʥ�ʸ������֤��ޤ���
+オブジェクトの内部状態から算出された HMAC を
+バイナリ文字列で返します。
 
 --- hexdigest -> String
 --- to_s -> String
 --- inspect -> String
-���֥������Ȥ��������֤��黻�Ф��줿 HMAC ��
-16�ʤ�ʸ������֤��ޤ���
+オブジェクトの内部状態から算出された HMAC を
+16進の文字列で返します。
 
 
 --- reset -> self
-�������֤�ꥻ�åȤ��ޤ���
+内部状態をリセットします。
 
 = class OpenSSL::HMACError < OpenSSL::OpenSSLError
-OpenSSL �� HMAC ��Ϣ�Υ��顼������������ȯ�������㳰
+OpenSSL の HMAC 関連のエラーが起きた場合に発生する例外
 

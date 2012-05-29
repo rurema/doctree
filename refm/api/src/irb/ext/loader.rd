@@ -1,6 +1,6 @@
-load �ޤ��� require ���� irb �Υե������ɤ߹��ߵ�ǽ(irb_load��
-irb_require)��������륵�֥饤�֥��Ǥ���
+load または require 時の irb のファイル読み込み機能(irb_load、
+irb_require)を定義するサブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ�
-��ޤ���[[lib:irb/cmd/load]] �� [[lib:irb/ext/use-loader]] ����Ƥӽ�
-����ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。[[lib:irb/cmd/load]] や [[lib:irb/ext/use-loader]] から呼び出
+されます。

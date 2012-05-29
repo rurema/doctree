@@ -3,16 +3,16 @@
 
 = module Base64
 
-Base64 ���󥳡��� / �ǥ����ɤ��뤿��Υ᥽�åɤ���������⥸�塼��Ǥ���
+Base64 エンコード / デコードするためのメソッドを定義したモジュールです。
 
 == Module Functions
 
 --- decode64(str) -> String
-Ϳ����줿ʸ����� Base64 �ǥ����ɤ����ǡ������֤��ޤ���
+与えられた文字列を Base64 デコードしたデータを返します。
 
-���Υ᥽�åɤ� [[RFC:2045]] ���б����Ƥ��ޤ���
+このメソッドは [[RFC:2045]] に対応しています。
 
-@param str Base64 �ǥ����ɤ���ʸ�������ꤷ�ޤ���
+@param str Base64 デコードする文字列を指定します。
 
    require 'base64'
    str = 'VGhpcyBpcyBsaW5lIG9uZQpUaGlzIG' +
@@ -27,12 +27,12 @@ Base64 ���󥳡��� / �ǥ����ɤ��뤿��Υ᥽�åɤ���������⥸�塼��Ǥ���
 
 
 --- encode64(bin) -> String
-Ϳ����줿�ǡ����� Base64 ���󥳡��ɤ���ʸ������֤��ޤ���
+与えられたデータを Base64 エンコードした文字列を返します。
 
-���Υ᥽�åɤ� [[RFC:2045]] ���б����Ƥ��ޤ���
-���󥳡��ɸ��ʸ���� 60 ʸ�����Ȥ˲��Ԥ��ɲä��ޤ���
+このメソッドは [[RFC:2045]] に対応しています。
+エンコード後の文字で 60 文字ごとに改行を追加します。
 
-@param bin Base64 ���󥳡��ɤ���ǡ�������ꤷ�ޤ���
+@param bin Base64 エンコードするデータを指定します。
 
 
     require 'base64'
@@ -43,92 +43,92 @@ Base64 ���󥳡��� / �ǥ����ɤ��뤿��Υ᥽�åɤ���������⥸�塼��Ǥ���
 
 
 --- strict_decode64(str) -> String
-Ϳ����줿ʸ����� Base64 �ǥ����ɤ����ǡ������֤��ޤ���
+与えられた文字列を Base64 デコードしたデータを返します。
 
-���Υ᥽�åɤ� [[RFC:4648]] ���б����Ƥ��ޤ���
+このメソッドは [[RFC:4648]] に対応しています。
 
 
-@param str Base64 �ǥ����ɤ���ʸ�������ꤷ�ޤ���
+@param str Base64 デコードする文字列を指定します。
 
-@raise ArgumentError Ϳ����줿������ Base64 ���󥳡��ɤ��줿�ǡ����Ȥ��������������ǤϤʤ�����ȯ�����ޤ���
-       �㤨�С�����ե��٥åȤǤʤ�ʸ����� CR, LF �ʤɤ��ޤޤ�Ƥ�����ˤ����㳰��ȯ�����ޤ���
+@raise ArgumentError 与えられた引数が Base64 エンコードされたデータとして正しい形式ではない場合に発生します。
+       例えば、アルファベットでない文字列や CR, LF などが含まれている場合にこの例外は発生します。
 
 --- strict_encode64(bin) -> String
-Ϳ����줿�ǡ����� Base64 ���󥳡��ɤ���ʸ������֤��ޤ���
+与えられたデータを Base64 エンコードした文字列を返します。
 
-���Υ᥽�åɤ� [[RFC:4648]] ���б����Ƥ��ޤ���
-���ԥ����ɤ��ɲä��뤳�ȤϤ���ޤ���
+このメソッドは [[RFC:4648]] に対応しています。
+改行コードを追加することはありません。
 
-@param bin Base64 ���󥳡��ɤ���ǡ�������ꤷ�ޤ���
+@param bin Base64 エンコードするデータを指定します。
 
 --- urlsafe_decode64(str) -> String
-Ϳ����줿ʸ����� Base64 �ǥ����ɤ����ǡ������֤��ޤ���
+与えられた文字列を Base64 デコードしたデータを返します。
 
-���Υ᥽�åɤ� [[RFC:4648]] �� "Base 64 Encoding with URL and Filename Safe Alphabet" ���б����Ƥ��ޤ���
-"+" �� "-" �� "/" �� "_" ���֤������ޤ���
+このメソッドは [[RFC:4648]] の "Base 64 Encoding with URL and Filename Safe Alphabet" に対応しています。
+"+" を "-" に "/" を "_" に置き換えます。
 
-@param str Base64 �ǥ����ɤ���ʸ�������ꤷ�ޤ���
+@param str Base64 デコードする文字列を指定します。
 
-@raise ArgumentError Ϳ����줿������ Base64 ���󥳡��ɤ��줿�ǡ����Ȥ��������������ǤϤʤ�����ȯ�����ޤ���
-       �㤨�С�����ե��٥åȤǤʤ�ʸ����� CR, LF �ʤɤ��ޤޤ�Ƥ�����ˤ����㳰��ȯ�����ޤ���
+@raise ArgumentError 与えられた引数が Base64 エンコードされたデータとして正しい形式ではない場合に発生します。
+       例えば、アルファベットでない文字列や CR, LF などが含まれている場合にこの例外は発生します。
 
 --- urlsafe_encode64(bin) -> String
-Ϳ����줿�ǡ����� Base64 ���󥳡��ɤ���ʸ������֤��ޤ���
+与えられたデータを Base64 エンコードした文字列を返します。
 
-���Υ᥽�åɤ� [[RFC:4648]] �� "Base 64 Encoding with URL and Filename Safe Alphabet" ���б����Ƥ��ޤ���
-"+" �� "-" �� "/" �� "_" ���֤������ޤ���
+このメソッドは [[RFC:4648]] の "Base 64 Encoding with URL and Filename Safe Alphabet" に対応しています。
+"+" を "-" に "/" を "_" に置き換えます。
 
-@param bin Base64 ���󥳡��ɤ���ǡ�������ꤷ�ޤ���
+@param bin Base64 エンコードするデータを指定します。
 
 
 #@else
 = module Base64
 
-Base64 ���󥳡��� / �ǥ����ɤ��뤿��Υ᥽�åɤ���������⥸�塼��Ǥ���
+Base64 エンコード / デコードするためのメソッドを定義したモジュールです。
 
 == Module Functions
 
 --- decode64(str) -> String
 
-Base64���󥳡��ɤ��줿ʸ����str��ǥ����ɤ��ޤ���
+Base64エンコードされた文字列strをデコードします。
 
-@param str �ǥ����ɤ�����ʸ����Ǥ���
+@param str デコードしたい文字列です。
 
 --- encode64(str) -> String
 
-ʸ����str��Base64���󥳡��ɤ��ޤ���
+文字列strをBase64エンコードします。
 
-@param str ���󥳡��ɤ�����ʸ����Ǥ���
+@param str エンコードしたい文字列です。
 
 --- decode_b(str) -> String
 
-[[RFC:2047]] ���������Ƥ��� encoded-word ��ޤ�
-ʸ���� str ��ǥ����ɤ��ޤ���
+[[RFC:2047]] で定義されている encoded-word を含む
+文字列 str をデコードします。
 
-encoded-word �ϡ�
+encoded-word は、
 
   "=?" + charset + "?" + encoding + "?" + encoded-text + "?="
 
-�Ȥ���������ʸ����ǡ��᡼��إå��˻��Ѥ���ޤ���
+という形式の文字列で、メールヘッダに使用されます。
 
-���δؿ��� charset �Ȥ��� "iso-2022-jp" �� "shift_jis" ��
-encoding �Ȥ��� "B" encoding (Base64) �����򥵥ݡ��Ȥ��Ƥ��ޤ���
+この関数は charset として "iso-2022-jp" と "shift_jis" を、
+encoding として "B" encoding (Base64) だけをサポートしています。
 
-�Х�:
+バグ:
 
-�ºݤϡ������� [[m:Kconv.#toeuc]] ��Ƥ�Ǥ��뤿�ᡢ [[lib:kconv]] ����
-��Ū�����Ѥ��� [[lib:nkf]] �饤�֥�꤬����˥ǥ����ɤ�ԤäƤ��ޤ��ޤ���
-�������äơ����δؿ��Ϥ��ޤ��̣���ʤ��ʤäƤ��ޤäƤ��ޤ�(�Τ� Kconv
-�μ����� NKF ����Ѥ��ʤ��ä����ᤳ�Τ褦�ʤ��ȤˤʤäƤ���Τ��Ȼפ��
-�ޤ�)��
+実際は、内部で [[m:Kconv.#toeuc]] を呼んでいるため、 [[lib:kconv]] が内
+部的に利用する [[lib:nkf]] ライブラリが勝手にデコードを行ってしまいます。
+したがって、この関数はあまり意味がなくなってしまっています(昔の Kconv
+の実装は NKF を使用しなかったためこのようなことになっているのだと思われ
+ます)。
 
-@param str �ǥ����ɤ�����ʸ����Ǥ���
+@param str デコードしたい文字列です。
 
 --- b64encode(bin, len = 60) -> ()
 
-ʸ���� bin �򥨥󥳡��ɤ���len ��Ĺ�����ޤ��֤���ɽ�����ޤ���
+文字列 bin をエンコードし、len の長さで折り返し、表示します。
 
-ɽ���ޤǤ��Ƥ��ޤ��Τϥ���ץ������Ǥ���
+表示までしてしまうのはサンプルだからです。
 
 #@include(Base64__Deprecated)
 
@@ -138,23 +138,23 @@ encoding �Ȥ��� "B" encoding (Base64) �����򥵥ݡ��Ȥ��Ƥ��ޤ���
 
 --- decode64(str) -> String
 
-[[m:Base64.#decode64]] ��Ʊ���Ǥ������Υ᥽�åɤϾ���Ū���ѻߤ�����ǽ
-�������ꡢ���ߤ� Base64 �⥸�塼���Ȥ����Ȥ��侩����Ƥ��ޤ���
+[[m:Base64.#decode64]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 --- encode64(str) -> String
 
-[[m:Base64.#encode64]] ��Ʊ���Ǥ������Υ᥽�åɤϾ���Ū���ѻߤ�����ǽ
-�������ꡢ���ߤ� Base64 �⥸�塼���Ȥ����Ȥ��侩����Ƥ��ޤ���
+[[m:Base64.#encode64]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 --- decode_b(str) -> String
 
-[[m:Base64.#decode_b]] ��Ʊ���Ǥ������Υ᥽�åɤϾ���Ū���ѻߤ�����ǽ
-�������ꡢ���ߤ� Base64 �⥸�塼���Ȥ����Ȥ��侩����Ƥ��ޤ���
+[[m:Base64.#decode_b]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 --- b64encode(bin, len = 60) -> ()
 
-[[m:Base64.#b64encode]] ��Ʊ���Ǥ������Υ᥽�åɤϾ���Ū���ѻߤ�����ǽ
-�������ꡢ���ߤ� Base64 �⥸�塼���Ȥ����Ȥ��侩����Ƥ��ޤ���
+[[m:Base64.#b64encode]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 #@end
 
@@ -165,45 +165,45 @@ encoding �Ȥ��� "B" encoding (Base64) �����򥵥ݡ��Ȥ��Ƥ��ޤ���
 
 --- decode64(str) -> String
 
-ʸ����str��Base64���󥳡��ɤ��ޤ���
+文字列strをBase64エンコードします。
 
-@param str ���󥳡��ɤ�����ʸ����Ǥ���
+@param str エンコードしたい文字列です。
 
 --- encode64(str) -> String
 
-ʸ����str��Base64���󥳡��ɤ��ޤ���
+文字列strをBase64エンコードします。
 
-@param str ���󥳡��ɤ�����ʸ����Ǥ���
+@param str エンコードしたい文字列です。
 
 --- decode_b(str) -> String
 
-[[RFC:2047]] ���������Ƥ��� encoded-word ��ޤ�
-ʸ���� str ��ǥ����ɤ��ޤ���
+[[RFC:2047]] で定義されている encoded-word を含む
+文字列 str をデコードします。
 
-encoded-word �ϡ�
+encoded-word は、
 
   "=?" + charset + "?" + encoding + "?" + encoded-text + "?="
 
-�Ȥ���������ʸ����ǡ��᡼��إå��˻��Ѥ���ޤ���
+という形式の文字列で、メールヘッダに使用されます。
 
-���δؿ��� charset �Ȥ��� "iso-2022-jp" �� "shift_jis" ��
-encoding �Ȥ��� "B" encoding (Base64) �����򥵥ݡ��Ȥ��Ƥ��ޤ���
+この関数は charset として "iso-2022-jp" と "shift_jis" を、
+encoding として "B" encoding (Base64) だけをサポートしています。
 
-�Х�:
+バグ:
 
-�ºݤϡ������� [[m:Kconv.#toeuc]] ��Ƥ�Ǥ��뤿�ᡢ [[lib:Kconv]] ����
-��Ū�����Ѥ��� [[lib:nkf]] �饤�֥�꤬����˥ǥ����ɤ�ԤäƤ��ޤ��ޤ���
-�������äơ����δؿ��Ϥ��ޤ��̣���ʤ��ʤäƤ��ޤäƤ��ޤ�(�Τ� Kconv
-�μ����� NKF ����Ѥ��ʤ��ä����ᤳ�Τ褦�ʤ��ȤˤʤäƤ���Τ��Ȼפ��
-�ޤ�)��
+実際は、内部で [[m:Kconv.#toeuc]] を呼んでいるため、 [[lib:Kconv]] が内
+部的に利用する [[lib:nkf]] ライブラリが勝手にデコードを行ってしまいます。
+したがって、この関数はあまり意味がなくなってしまっています(昔の Kconv
+の実装は NKF を使用しなかったためこのようなことになっているのだと思われ
+ます)。
 
-@param str �ǥ����ɤ�����ʸ����Ǥ���
+@param str デコードしたい文字列です。
 
 --- b64encode(bin, len = 60) -> ()
 
-ʸ���� bin �򥨥󥳡��ɤ���len ��Ĺ�����ޤ��֤���ɽ�����ޤ���
+文字列 bin をエンコードし、len の長さで折り返し、表示します。
 
-ɽ���ޤǤ��Ƥ��ޤ��Τϥ���ץ������Ǥ���
+表示までしてしまうのはサンプルだからです。
 
 #@end
 #@end

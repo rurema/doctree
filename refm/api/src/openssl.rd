@@ -1,39 +1,39 @@
 OpenSSL([[url:http://www.openssl.org]])
-�� Ruby ���鰷������Υ饤�֥��Ǥ���
+を Ruby から扱うためのライブラリです。
 
-���Υɥ�����ȤǤ� SSL/TLS �ΰ���Ū����ˤĤ��Ƥ�
-����򤷤ޤ������ѼԤϡ�SSL/TLS�γƳ�ǰ���㤨��
-�ʲ��λ���ˤĤ������򤷤Ƥ���ɬ�פ�����ޤ���
-  * �Ź��ǧ�ڤ˴ؤ������Ū��ǰ
-  * �������ƥ����Ф��빶��ˡ
-  * �������Ź����̩���Ź�
-  * ��̾����䡢��̾����ˡ�Ȥ��θ���
-  * ����������(PKI, Public Key Infrastructure)
-  * X.509 ������
-  * �Ź������ˤĤ���
-#@# ���ɲ�
-SSL�Τ褦�ʥ������ƥ����Ѥϡ��������ѼԤ�̵���˰�������
-�󶡤��뤳�ȤϤǤ��ޤ������Ѽԡ��Ȥ���SSL�ǥ��եȥ��������������
-�ץ�����ޤϡ� SSL/TLS �ε��ѡ����줬��Ť��Ƥ��복ǰ�����򤷡�
-�饤�֥���Ŭ�ڤ����Ѥ���ɬ�פ�����ޤ���
+このドキュメントでは SSL/TLS の一般的事項については
+解説をしません。利用者は、SSL/TLSの各概念、例えば
+以下の事項について理解している必要があります。
+  * 暗号と認証に関する一般的概念
+  * セキュリティに対する攻撃法
+  * 公開鍵暗号と秘密鍵暗号
+  * 署名の役割、署名の方法とその検証
+  * 公開鍵基盤(PKI, Public Key Infrastructure)
+  * X.509 証明書
+  * 暗号と乱数について
+#@# 要追加
+SSLのようなセキュリティ技術は、その利用者に無条件に安全性を
+提供することはできません。利用者、とくにSSLでソフトウェアを実装する
+プログラマは、 SSL/TLS の技術、それが基づいている概念を理解し、
+ライブラリを適切に利用する必要があります。
 
-����ʸ�Ϥ����Ƥ�̵�ݾڤǤ�������ʸ�Ϥ����Ƥ򸡾ڤ��ƽ񤫤��
-���ޤ������ְ�äƤ����ǽ���⤢��ޤ������Υ饤�֥���
-�������ƥ�Ū�˽�������Ӥ��Ѥ���ΤǤ���С�
-��ʬ���ȤǤ��Υɥ�����Ȥ����Ƥ򸡾ڤ��Ƥ���������
+この文章の内容は無保証です。この文章は内容を検証して書かれて
+いますが、間違っている可能性もあります。このライブラリを
+セキュリティ的に重大な用途に用いるのであれば、
+自分自身でこのドキュメントの内容を検証してください。
 
-OpenSSL �� SSL/TLS �ˤ���̿����󶡤������ʥ��󥿡��ե�������
-������Ū�ʵ�ǽ���󶡤�������ʥ��󥿡��ե�����������ޤ���
-����Ū�ˤϹ���ʥ��󥿡��ե������Τߤ����Ѥ��٤��Ǥ���
+OpenSSL は SSL/TLS による通信を提供する高水準なインターフェースと
+より基本的な機能を提供する低水準なインターフェースがあります。
+基本的には高水準なインターフェースのみを利用すべきです。
 
-����ʥ��󥿡��ե����������Ѥ�����ˤϡ����Ѥ�������ǽ��
-�ؤ��뽽ʬ���μ������տ�����ɬ�פȤʤ�ޤ���
-#@# �ɤ줬���।�󥿡��ե������Ǥɤ줬���फ��
-#@# �ꥹ�Ȥ�ɬ��
+低水準なインターフェースを利用する場合には、利用したい機能に
+関する十分な知識と注意深さが必要となります。
+#@# どれが高水準インターフェースでどれが低水準かの
+#@# リストが必要
 
-=== ��
+=== 例
 
-���ʽ�̾������κ�������Ǥ�����ʬ����̩���Ǽ�ʬ�θ������˽�̾���Ƥ��뤫�鼫�ʽ�̾�Ǥ���
+自己署名証明書の作成の例です。自分の秘密鍵で自分の公開鍵に署名しているから自己署名です。
 
   require 'openssl'
   
@@ -48,65 +48,65 @@ OpenSSL �� SSL/TLS �ˤ���̿����󶡤������ʥ��󥿡��ե�������
   cer = OpenSSL::X509::Certificate.new()
   cer.not_before = Time.at(0)
   cer.not_after = Time.at(0)
-  cer.public_key = key  # <= ��̾�����оݤȤʤ������
+  cer.public_key = key  # <= 署名する対象となる公開鍵
   cer.serial = 1
   cer.issuer = issu
   cer.subject = sub
   
-  cer.sign(key, digest) # <= ��̾����Τ˻Ȥ���̩���ȥϥå���ؿ�
+  cer.sign(key, digest) # <= 署名するのに使う秘密鍵とハッシュ関数
   print cer.to_text
 
-===[a:references] ����ʸ��
+===[a:references] 参考文献
   * [[RFC:5246]]
   * Eric Rescorla. SSL and TLS : Designing and Building Secure Systems.
-    ˮ��, Eric Rescorla �� �ƣ��ƻ����Ƭ��Ƿ���ſ������.
-    �ޥ������TCP/IP SSL/TLS��
+    邦訳, Eric Rescorla 著 齋藤孝道・鬼頭利之・古森貞監訳.
+    マスタリングTCP/IP SSL/TLS編
   * John Viega, Matt Messier and Pravir Chandra. Network Security with OpenSSL:
     Cryptography for Secure Communications. 
-    ˮ��, John Viega, Matt Messier and Pravir Chandra �� �ƣ��ƻ����.
-    OpenSSL -�Ź桦PKI��SSL/TLS�饤�֥��ξܺ�-
+    邦訳, John Viega, Matt Messier and Pravir Chandra 著 齋藤孝道監訳.
+    OpenSSL -暗号・PKI・SSL/TLSライブラリの詳細-
 
 = module OpenSSL
-OpenSSL �Τ��٤ƤΥ��饹���⥸�塼�롢�᥽�åɡ������
-�ݻ����Ƥ���⥸�塼��Ǥ���
+OpenSSL のすべてのクラス、モジュール、メソッド、定数を
+保持しているモジュールです。
 
 == Module functions
 --- debug -> bool
-�ǥХå��⡼�ɤ� on �ʤ�� true ���֤��ޤ���
+デバッグモードが on ならば true を返します。
 
 @see [[m:OpenSSL.#debug=]]
 
 --- debug=(b)
-�ǥХå��⡼�ɤ� on/off ���ޤ���
+デバッグモードを on/off します。
 
 @see [[m:OpenSSL.#debug]]
 
 --- errors -> [String]
-OpenSSL �Υ��顼���塼�˻ĤäƤ��륨�顼ʸ������֤��ޤ���
+OpenSSL のエラーキューに残っているエラー文字列を返します。
 
-�̾���顼���塼�Ϥ��γ�ĥ�饤�֥�꤬���ˤ��뤿�ᡢ
-����϶���������֤��ޤ����⤷�����Ǥʤ��ʤ��
-���Υ饤�֥��ΥХ��Ǥ���
+通常、エラーキューはこの拡張ライブラリが空にするため、
+これは空の配列を返します。もしそうでないならば
+このライブラリのバグです。
 
 == Constants
 
 --- VERSION -> String
 
-Ruby/OpenSSL �ΥС������Ǥ���
+Ruby/OpenSSL のバージョンです。
 
 --- OPENSSL_VERSION -> String
 
-�����ƥ�˥��󥹥ȡ��뤵��Ƥ��� OpenSSL ���ΤΥС�������ɽ����ʸ����Ǥ���
+システムにインストールされている OpenSSL 本体のバージョンを表した文字列です。
 
 --- OPENSSL_VERSION_NUMBER -> Integer
 
-�����ƥ�˥��󥹥ȡ��뤵��Ƥ��� OpenSSL ���ΤΥС�������ɽ�������Ǥ���
+システムにインストールされている OpenSSL 本体のバージョンを表した数です。
 [[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
-�⻲�Ȥ��Ƥ���������
+も参照してください。
 
 #@# = module OpenSSL::SSL::SocketForwarder
 = class OpenSSL::OpenSSLError < StandardError
-���٤Ƥ� OpenSSL ��Ϣ���㳰���饹�Υ١����Ȥʤ��㳰���饹�Ǥ���
+すべての OpenSSL 関連の例外クラスのベースとなる例外クラスです。
 
 #@include(openssl/ASN1)
 #@include(openssl/ASN1__ASN1Data)

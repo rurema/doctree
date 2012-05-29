@@ -1,6 +1,6 @@
 = class Module < Object
 
-�⥸�塼��Υ��饹�Ǥ���
+モジュールのクラスです。
 
 == Class Methods
 
@@ -10,25 +10,25 @@
 --- constants -> [String]
 #@end
 
-���Υ᥽�åɤ�ƤӽФ��������ǻ��Ȳ�ǽ�����̾��������֤��ޤ���
+このメソッドを呼び出した時点で参照可能な定数名の配列を返します。
 
   class C
     FOO = 1
   end
 #@since 1.9.1
   p Module.constants   # => [:RUBY_PLATFORM, :STDIN, ..., :C, ...]
-                       # ������� :FOO �ϸ����ʤ�
+                       # 出力中に :FOO は現われない
 #@else
   p Module.constants   # => ["RUBY_PLATFORM", "STDIN", ..., "C", ...]
-                       # ������� "FOO" �ϸ����ʤ�
+                       # 出力中に "FOO" は現われない
 #@end
 
 @see [[m:Module#constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#class_variables]]
 
 --- nesting -> [Class, Module]
 
-���Υ᥽�åɤ�ƤӽФ��������ǤΥ��饹/�⥸�塼��Υͥ��Ⱦ�
-��������������֤��ޤ���
+このメソッドを呼び出した時点でのクラス/モジュールのネスト情
+報を配列に入れて返します。
 
   module Foo
     module Bar
@@ -43,66 +43,66 @@
 --- new {|mod| ... } -> Module
 #@end
 
-̾�����դ��Ƥ��ʤ��⥸�塼��򿷤������������֤��ޤ���
+名前の付いていないモジュールを新しく生成して返します。
 
 #@since 1.8.0
-�֥��å���Ϳ����������������⥸�塼���֥��å����Ϥ���
-�⥸�塼��Υ���ƥ����Ȥǥ֥��å���¹Ԥ��ޤ���
+ブロックが与えられると生成したモジュールをブロックに渡し、
+モジュールのコンテキストでブロックを実行します。
 
   mod = Module.new
   mod.module_eval {|m| ... }
   mod
 
-��Ʊ���Ǥ���
-�֥��å��μ¹Ԥ� Module#initialize ���Ԥ��ޤ���
+と同じです。
+ブロックの実行は Module#initialize が行います。
 
-�֥��å���Ϳ�����������������⥸�塼����֤��ޤ���
+ブロックを与えた場合も生成したモジュールを返します。
 #@end
 
-���Υ᥽�åɤ��������줿�⥸�塼��ϡ�
-�ǽ��̾����ɬ�פˤʤä��Ȥ���̾�������ꤷ�ޤ���
-�⥸�塼���̾���ϡ�
-���Υ⥸�塼�뤬��������Ƥ������̾�Τ����줫�Ǥ���
+このメソッドで生成されたモジュールは、
+最初に名前が必要になったときに名前が決定します。
+モジュールの名前は、
+そのモジュールが代入されている定数名のいずれかです。
 
   m = Module.new
   p m               # => #<Module 0lx40198a54>
 #@since 1.9.1
-  p m.name          # => nil   # �ޤ�̾����̤��
+  p m.name          # => nil   # まだ名前は未定
 #@else
-  p m.name          # => ""    # �ޤ�̾����̤��
+  p m.name          # => ""    # まだ名前は未定
 #@end
   Foo = m
-  # m.name          # ������ m.name ��Ƥ٤� m ��̾���� "Foo" �˳��ꤹ��
+  # m.name          # ここで m.name を呼べば m の名前は "Foo" に確定する
   Bar = m
-  m.name            # "Foo" �� "Bar" �Τɤ��餫�˷�ޤ�
+  m.name            # "Foo" か "Bar" のどちらかに決まる
 
 == Instance Methods
 
 --- <=>(other) -> Integer | nil
 
-self �� other �ηѾ��ط�����Ӥ��ޤ���
+self と other の継承関係を比較します。
 
-self �� other ����Ӥ��ơ�
-self �� other �λ�¹�Ǥ���Ȥ� -1��
-Ʊ��Υ��饹���⥸�塼��ΤȤ� 0��
-self �� other �����ĤǤ���Ȥ� 1
-���֤��ޤ���
+self と other を比較して、
+self が other の子孫であるとき -1、
+同一のクラス／モジュールのとき 0、
+self が other の先祖であるとき 1
+を返します。
 
-�Ѿ��ط��ˤʤ����饹Ʊ�Τ���ӤǤ�
+継承関係にないクラス同士の比較では
 #@since 1.8.0
-nil ���֤��ޤ���
+nil を返します。
 #@else
-����ư�������Ǥ���
+その動作は不定です。
 #@end
 
-other �����饹��⥸�塼��Ǥʤ����
+other がクラスやモジュールでなければ
 #@since 1.8.0
-nil ���֤��ޤ���
+nil を返します。
 #@else
-�㳰 [[c:TypeError]] ��ȯ�����ޤ���
+例外 [[c:TypeError]] が発生します。
 #@end
 
-@param other ����оݤΥ��饹��⥸�塼��
+@param other 比較対象のクラスやモジュール
 
   module Foo
   end
@@ -132,20 +132,20 @@ nil ���֤��ޤ���
 
 --- <(other)  -> bool | nil
 
-��ӱ黻�ҡ�self �� other �λ�¹�Ǥ����硢 true ���֤��ޤ���
-self �� other �����Ĥ�Ʊ��Υ��饹���⥸�塼��Ǥ����硢false ���֤��ޤ���
-#@# self < other ����Ω���ޤ���
+比較演算子。self が other の子孫である場合、 true を返します。
+self が other の先祖か同一のクラス／モジュールである場合、false を返します。
+#@# self < other が成立します。
 
-�Ѿ��ط��ˤʤ����饹Ʊ�Τ���ӤǤ�
+継承関係にないクラス同士の比較では
 #@since 1.8.0
-nil ���֤��ޤ���
+nil を返します。
 #@else
-false ���֤��ޤ���
+false を返します。
 #@end
 
-@param other ����оݤΥ⥸�塼��䥯�饹
+@param other 比較対象のモジュールやクラス
 
-@raise TypeError other �����饹��⥸�塼��ǤϤʤ�����ȯ�����ޤ���
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
   module Foo
   end
@@ -171,84 +171,84 @@ false ���֤��ޤ���
 
 --- <=(other) -> bool | nil
 
-��ӱ黻�ҡ�self �� other �λ�¹�Ǥ��뤫��self �� other ��
-Ʊ�쥯�饹�Ǥ����硢 true ���֤��ޤ���
-self �� other �����ĤǤ����硢false ���֤��ޤ���
+比較演算子。self が other の子孫であるか、self と other が
+同一クラスである場合、 true を返します。
+self が other の先祖である場合、false を返します。
 
-�Ѿ��ط��ˤʤ����饹Ʊ�Τ���ӤǤ�
+継承関係にないクラス同士の比較では
 #@since 1.8.0
-nil ���֤��ޤ���
+nil を返します。
 #@else
-false ���֤��ޤ���
+false を返します。
 #@end
 
-@param other ����оݤΥ⥸�塼��䥯�饹
+@param other 比較対象のモジュールやクラス
 
-@raise TypeError other �����饹��⥸�塼��ǤϤʤ�����ȯ�����ޤ���
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
 
 --- >(other)  -> bool | nil
 
-��ӱ黻�ҡ� self �� other �����ĤǤ����硢true ���֤��ޤ���
-self �� other �λ�¹��Ʊ�쥯�饹�Ǥ����硢false ���֤��ޤ���
+比較演算子。 self が other の先祖である場合、true を返します。
+self が other の子孫か同一クラスである場合、false を返します。
 
-�Ѿ��ط��ˤʤ����饹Ʊ�Τ���ӤǤ�
+継承関係にないクラス同士の比較では
 #@since 1.8.0
-nil ���֤��ޤ���
+nil を返します。
 #@else
-false ���֤��ޤ���
+false を返します。
 #@end
 
-@param other ����оݤΥ⥸�塼��䥯�饹
+@param other 比較対象のモジュールやクラス
 
-@raise TypeError other �����饹��⥸�塼��ǤϤʤ�����ȯ�����ޤ���
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
 
 --- >=(other) -> bool | nil
 
-��ӱ黻�ҡ�self �� other �����Ĥ�Ʊ�쥯�饹�Ǥ����硢 true ���֤��ޤ���
-self �� other �λ�¹�Ǥ����硢false ���֤��ޤ���
+比較演算子。self が other の先祖か同一クラスである場合、 true を返します。
+self が other の子孫である場合、false を返します。
 
-�Ѿ��ط��ˤʤ����饹Ʊ�Τ���ӤǤ�
+継承関係にないクラス同士の比較では
 #@since 1.8.0
-nil ���֤��ޤ���
+nil を返します。
 #@else
-false ���֤��ޤ���
+false を返します。
 #@end
 
-@param other ����оݤΥ⥸�塼��䥯�饹
+@param other 比較対象のモジュールやクラス
 
-@raise TypeError other �����饹��⥸�塼��ǤϤʤ�����ȯ�����ޤ���
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
 
 --- ===(obj) -> bool
 
-���ꤵ�줿 obj �����Ȥ����Υ��֥��饹�Υ��󥹥��󥹤Ǥ���Ȥ������֤��ޤ���
-�ޤ���obj �����Ȥ򥤥󥯥롼�ɤ������饹�����Υ��֥��饹�Υ��󥹥��󥹤Ǥ�����ˤ�
-�����֤��ޤ����嵭�Τ�����Ǥ�ʤ����� false ���֤��ޤ���
+指定された obj が自身かそのサブクラスのインスタンスであるとき真を返します。
+また、obj が自身をインクルードしたクラスかそのサブクラスのインスタンスである場合にも
+真を返します。上記のいずれでもない場合に false を返します。
 
-�����ؤ���� obj.kind_of?(self) �� true �ξ�硢 true ���֤��ޤ���
+言い替えると obj.kind_of?(self) が true の場合、 true を返します。
 
-���Υ᥽�åɤϼ�� case ʸ�Ǥ���Ӥ��Ѥ����ޤ���
-case �Ǥϥ��饹���⥸�塼��ν�°�ط�������å����뤳�Ȥˤʤ�ޤ���
+このメソッドは主に case 文での比較に用いられます。
+case ではクラス、モジュールの所属関係をチェックすることになります。
 
   str = String.new
   case str
-  when String     # String === str ��ɾ������
+  when String     # String === str を評価する
     p true        # => true
   end
 
-@param obj Ǥ�դΥ��֥�������
+@param obj 任意のオブジェクト
 
 @see [[m:Object#kind_of?]], [[m:Object#instance_of?]], [[ref:d:spec/control#case]]
 
 --- ancestors -> [Class, Module]
 
-���饹���⥸�塼��Υ����ѡ����饹�ȥ��󥯥롼�ɤ��Ƥ���⥸�塼��
-��ͥ���̽������˳�Ǽ�����֤��ޤ���
+クラス、モジュールのスーパークラスとインクルードしているモジュール
+を優先順位順に配列に格納して返します。
 
   module Foo
   end
@@ -269,22 +269,22 @@ case �Ǥϥ��饹���⥸�塼��ν�°�ط�������å����뤳�Ȥˤʤ�ޤ���
 #@since 1.8.0
 --- autoload(const_name, feature) -> nil
 
-��� const_name ��ǽ�˻��Ȥ������� feature �� [[m:Kernel.#require]] ����褦�����ꤷ�ޤ���
+定数 const_name を最初に参照した時に feature を [[m:Kernel.#require]] するように設定します。
 
-@param const_name [[c:String]] �ޤ��� [[c:Symbol]] �ǻ��ꤷ�ޤ���
-       �ʤ���const_name �ˤϡ�"::" �黻�Ҥ�ޤ�뤳�ȤϤǤ��ޤ���
-       �Ĥޤꡢ�ȥåץ�٥�������������Ǥ��ޤ���
+@param const_name [[c:String]] または [[c:Symbol]] で指定します。
+       なお、const_name には、"::" 演算子を含めることはできません。
+       つまり、トップレベルの定数しか指定できません。
 
-@param feature [[m:Kernel.#require]] ��Ʊ�ͤ���ˡ�� autoload �����оݤ���ꤹ�롣
+@param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
 @see [[m:Kernel.#autoload]]
 #@end
 
 --- autoload?(const_name) -> String | nil
-autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ���
-�ޤ��������ɺѤߤʤ� nil ���֤��ޤ���
+autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します。
+また、ロード済みなら nil を返します。
 
-@param const_name [[c:String]] �ޤ��� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param const_name [[c:String]] または [[c:Symbol]] で指定します。
 
 @see [[m:Kernel.#autoload?]]
 
@@ -294,36 +294,36 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
 --- class_variables -> [String]
 #@end
 
-���饹���⥸�塼����������Ƥ��륯�饹�ѿ���̾����������֤��ޤ���
+クラス／モジュールに定義されているクラス変数の名前の配列を返します。
 
-�����ѡ����饹�䥤�󥯥롼�ɤ��Ƥ���⥸�塼��Υ��饹�ѿ���ޤߤޤ���
+スーパークラスやインクルードしているモジュールのクラス変数も含みます。
 
 @see [[m:Module.constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#constants]]
 
 #@since 1.9.1
 --- const_defined?(name, inherit = true) -> bool
 
-�⥸�塼��� name �ǻ��ꤵ���̾����������������Ƥ������
-���֤��ޤ���
+モジュールに name で指定される名前の定数が定義されている時真
+を返します。
 
-�����ѡ����饹�� include �����⥸�塼���������줿����򸡺��о�
-�ˤ��뤫�ɤ�����������������椹�뤳�Ȥ��Ǥ��ޤ���
+スーパークラスや include したモジュールで定義された定数を検索対象
+にするかどうかは第二引数で制御することができます。
 
-@param name [[c:String]], [[c:Symbol]] �ǻ��ꤵ������̾��
+@param name [[c:String]], [[c:Symbol]] で指定される定数名。
 
-@param inherit false ����ꤹ��ȥ����ѡ����饹�� include �����⥸�塼���
-       ������줿������оݤˤϤʤ�ޤ���
+@param inherit false を指定するとスーパークラスや include したモジュールで
+       定義された定数は対象にはなりません。
 
 #@else
 --- const_defined?(name) -> bool
 
-�⥸�塼��� name �ǻ��ꤵ���̾����������������Ƥ������
-���֤��ޤ���
+モジュールに name で指定される名前の定数が定義されている時真
+を返します。
 
-�����ѡ����饹�� include �����⥸�塼���������줿������оݤˤ�
-�ʤ�ޤ���(��������[[c:Object]] �������㳰)
+スーパークラスや include したモジュールで定義された定数は対象には
+なりません。(ただし、[[c:Object]] だけは例外)
 
-@param name [[c:String]], [[c:Symbol]] �ǻ��ꤵ������̾��
+@param name [[c:String]], [[c:Symbol]] で指定される定数名。
 
 #@end
 
@@ -331,8 +331,8 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
     FOO = 1
   end
 
-  # Object �� include �����⥸�塼���������Ф��Ƥ�
-  # true ���֤�
+  # Object は include したモジュールの定数に対しても
+  # true を返す
   p Object.const_defined?(:FOO)   # => true
 
   module Bar
@@ -341,21 +341,21 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
   class Object
     include Bar
   end
-  # �桼������Υ⥸�塼����Ф��Ƥ�Ʊ��
+  # ユーザ定義のモジュールに対しても同様
   p Object.const_defined?(:BAR)   # => true
 
   class Baz
     include Bar
   end
 #@since 1.9.1
-  # Object �ʳ��Ǥ�Ʊ�ͤˤʤä�
-  # ��������Υǥե�����ͤ� true �Ǥ��뤿��
+  # Object 以外でも同様になった
+  # 第二引数のデフォルト値が true であるため
   p Baz.const_defined?(:BAR)      # => true
 
-  # ��������� false �ˤ������
+  # 第二引数を false にした場合
   p Baz.const_defined?(:BAR, false)   # => false
 #@else
-  # Object �ʳ��Ǥϼ��Ȥ���������������å��о�
+  # Object 以外では自身の定数だけがチェック対象
   p Baz.const_defined?(:BAR)      # => false
 #@end
 
@@ -365,19 +365,19 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
 --- const_get(name) -> object
 #@end
 
-�⥸�塼����������Ƥ��� name �ǻ��ꤵ���̾����������ͤ�
-���Ф��ޤ���
+モジュールに定義されている name で指定される名前の定数の値を
+取り出します。
 
-[[m:Module#const_defined?]] �Ȱ�ä� [[c:Object]] �����̰������뤳�ȤϤ���ޤ���
+[[m:Module#const_defined?]] と違って [[c:Object]] を特別扱いすることはありません。
 
-@param name ���̾��[[c:String]] �� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name 定数名。[[c:String]] か [[c:Symbol]] で指定します。
 
 #@since 1.9.1
-@param inherit false ����ꤹ��ȥ����ѡ����饹�� include �����⥸�塼���
-       ������줿������оݤˤϤʤ�ޤ���
+@param inherit false を指定するとスーパークラスや include したモジュールで
+       定義された定数は対象にはなりません。
 #@end
 
-@raise NameError ������������Ƥ��ʤ��Ȥ���ȯ�����ޤ���
+@raise NameError 定数が定義されていないときに発生します。
 
   module Bar
     BAR = 1
@@ -385,29 +385,29 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
   class Object
     include Bar
   end
-  # Object �Ǥ� include ���줿�⥸�塼���������줿������դ���
+  # Object では include されたモジュールに定義された定数を見付ける
   p Object.const_get(:BAR)   # => 1
 
   class Baz
     include Bar
   end
-  # Object�ʳ��Ǥ�Ʊ��
+  # Object以外でも同様
   p Baz.const_get(:BAR)      # => 1
-  # �������Ƥ��ʤ����
+  # 定義されていない定数
   p Baz.const_get(:NOT_DEFINED) #=> raise NameError
 #@since 1.9.1
-  # ��������� false ����ꤹ��ȼ�ʬ���Ȥ�������줿�������õ��
+  # 第二引数に false を指定すると自分自身に定義された定数から探す
   p Baz.const_get(:BAR, false) #=> raise NameError
 #@end
 
 #@since 1.8.0
 --- const_missing(name)
-�������Ƥ��ʤ�����򻲾Ȥ����Ȥ��� Ruby ���󥿥ץ꥿��
-���Υ᥽�åɤ�ƤӤޤ���
+定義されていない定数を参照したときに Ruby インタプリタが
+このメソッドを呼びます。
 
-@param name ���Ȥ������̾�� [[c:Symbol]]
+@param name 参照した定数名の [[c:Symbol]]
 
-@raise NameError ���Υ᥽�åɤ�ƤӽФ�����硢�ǥե���Ȥ�ȯ�������㳰
+@raise NameError このメソッドを呼び出した場合、デフォルトで発生する例外
 
 
   class Foo
@@ -425,14 +425,14 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
 
 --- const_set(name, value) -> object
 
-�⥸�塼��� name �ǻ��ꤵ�줿̾��������� value �Ȥ�
-���ͤȤ����������value ���֤��ޤ���
+モジュールに name で指定された名前の定数を value とい
+う値として定義し、value を返します。
 
-���Υ⥸�塼��ˤ����Ƥ��Ǥˤ���̾����������������Ƥ����硢��
-���å����������Ϥ���ޤ���
+そのモジュールにおいてすでにその名前の定数が定義されている場合、警
+告メッセージが出力されます。
 
-@param name  [[c:Symbol]],[[c:String]] �������̾������ꤷ�ޤ���
-@param value ���åȤ������ͤ���ꤷ�ޤ���
+@param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
+@param value セットしたい値を指定します。
 
 #@since 1.9.1
 --- constants(inherit = true) -> [Symbol]
@@ -440,21 +440,21 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
 --- constants -> [String]
 #@end
 
-���Υ⥸�塼��(�ޤ��ϥ��饹)���������Ƥ������̾��������֤��ޤ���
+そのモジュール(またはクラス)で定義されている定数名の配列を返します。
 #@until 1.9.1
-�����ѡ����饹�䥤�󥯥롼�ɤ��Ƥ���⥸�塼��������ޤߤޤ���
+スーパークラスやインクルードしているモジュールの定数も含みます。
 #@end
 
 #@since 1.9.1
-@param inherit true ����ꤹ��ȥ����ѡ����饹�� include �����⥸�塼���
-       ������줿������оݤˤϤʤ�ޤ���false ����ꤷ����� �оݤˤϤʤ�ޤ���
+@param inherit true を指定するとスーパークラスや include したモジュールで
+       定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
 #@end
 
 @see [[m:Module.constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#class_variables]]
 
- Module.constants �� Module#constants �ΰ㤤
+ Module.constants と Module#constants の違い
 
-  # ���Ϥδ�ά���Τ��ᵯư�������������������Ƹ�Ǻ�������
+  # 出力の簡略化のため起動時の定数一覧を取得して後で差し引く
   $clist = Module.constants
 
   class Foo
@@ -464,31 +464,31 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
     BAR = 1
 
 #@since 1.9.1
-    # Bar �� BAR ��ޤ�
+    # Bar は BAR を含む
     p constants - $clist                # => [:BAR]
-    # ���Ϥ� FOO �ϴޤޤ�ʤ�
+    # 出力に FOO は含まれない
     p Module.constants - $clist         # => [:BAR, :Bar, :Foo]
     class Baz
-      # Baz �������ޤޤʤ�
+      # Baz は定数を含まない
       p constants - $clist              # => []
 
-      # �ͥ��Ȥ������饹�Ǥϡ���¦�Υ��饹��������������
-      # ���Ȳ�ǽ�ʤΤǡ�BAR �ϡ�Module.constants �ˤϴޤޤ��
-      # (���饹 Baz �� Bar ������ʤΤ�Ʊ��)
+      # ネストしたクラスでは、外側のクラスで定義した定数は
+      # 参照可能なので、BAR は、Module.constants には含まれる
+      # (クラス Baz も Bar の定数なので同様)
       p Module.constants - $clist       # => [:BAR, :Baz, :Foo, :Bar]
     end
 #@else
-    # Bar �� BAR ��ޤ�
+    # Bar は BAR を含む
     p constants - $clist                # => ["BAR"]
-    # ���Ϥ� FOO �ϴޤޤ�ʤ�
+    # 出力に FOO は含まれない
     p Module.constants - $clist         # => ["BAR", "Bar", "Foo"]
     class Baz
-      # Baz �������ޤޤʤ�
+      # Baz は定数を含まない
       p constants - $clist              # => []
 
-      # �ͥ��Ȥ������饹�Ǥϡ���¦�Υ��饹��������������
-      # ���Ȳ�ǽ�ʤΤǡ�BAR �ϡ�Module.constants �ˤϴޤޤ��
-      # (���饹 Baz �� Bar ������ʤΤ�Ʊ��)
+      # ネストしたクラスでは、外側のクラスで定義した定数は
+      # 参照可能なので、BAR は、Module.constants には含まれる
+      # (クラス Baz も Bar の定数なので同様)
       p Module.constants - $clist       # => ["BAR", "Baz", "Bar", "Foo"]
     end
 #@end
@@ -497,10 +497,10 @@ autoload ������ޤ��������Ƥʤ�(�����ɤ���Ƥ��ʤ�) �Ȥ��ˤ��Υѥ�̾���֤��ޤ�
 #@since 1.8.0
 --- include?(mod) -> bool
 
-self �����οƥ��饹 / �ƥ⥸�塼�뤬�⥸�塼�� mod ��
-���󥯥롼�ɤ��Ƥ���� true ���֤��ޤ���
+self かその親クラス / 親モジュールがモジュール mod を
+インクルードしていれば true を返します。
 
-@param mod [[c:Module]] ����ꤷ�ޤ���
+@param mod [[c:Module]] を指定します。
 
   module M
   end
@@ -516,26 +516,26 @@ self �����οƥ��饹 / �ƥ⥸�塼�뤬�⥸�塼�� mod ��
 
 --- included_modules -> [Module]
 
-���󥯥롼�ɤ���Ƥ���⥸�塼���������֤��ޤ���
+インクルードされているモジュールの配列を返します。
 
 @see [[m:Module#ancestors]]
 
 --- instance_method(name) -> UnboundMethod
 
-self �Υ��󥹥��󥹥᥽�åɤ򥪥֥������Ȳ����� [[c:UnboundMethod]] ���֤��ޤ���
+self のインスタンスメソッドをオブジェクト化した [[c:UnboundMethod]] を返します。
 
-@param name [[c:Symbol]] �� [[c:String]] �Ǥ���
+@param name [[c:Symbol]] か [[c:String]] です。
 
-@raise NameError self ��¸�ߤ��ʤ��᥽�åɤ���ꤷ������ȯ�����ޤ���
+@raise NameError self に存在しないメソッドを指定した場合に発生します。
 
 @see [[m:Object#method]]
 
 --- method_defined?(name) -> bool
 
-�⥸�塼��˥��󥹥��󥹥᥽�å� name ���������Ƥ���Ȥ�
-true ���֤��ޤ���
+モジュールにインスタンスメソッド name が定義されているとき
+true を返します。
 
-@param name [[c:Symbol]] �� [[c:String]] ����ꤷ�ޤ���
+@param name [[c:Symbol]] か [[c:String]] を指定します。
 
 @see [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
 
@@ -544,38 +544,38 @@ true ���֤��ޤ���
 --- class_eval(expr, fname = "(eval)", lineno = 1)  -> object
 --- class_eval{|mod| ... }                          -> object
 
-�⥸�塼��Υ���ƥ����Ȥ�ʸ���� expr �ޤ��ϥ⥸�塼�뼫�Ȥ�֥��å��ѥ�᡼���Ȥ���֥��å���
-ɾ�����Ƥ��η�̤��֤��ޤ���
+モジュールのコンテキストで文字列 expr またはモジュール自身をブロックパラメータとするブロックを
+評価してその結果を返します。
 
-�⥸�塼��Υ���ƥ����Ȥ�ɾ������Ȥϡ��¹��椽�Υ⥸�塼�뤬 self �ˤʤ�Ȥ������ȤǤ���
-�Ĥޤꡢ���Υ⥸�塼������������ˤ��뤫�Τ褦�˼¹Ԥ���ޤ���
+モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
+つまり、そのモジュールの定義式の中にあるかのように実行されます。
 
-�����������������ѿ��� module_eval/class_eval �γ�¦�Υ������פȶ�ͭ���ޤ���
-ʸ����Ϳ�������ˤϡ�����ȥ��饹�ѿ��Υ������פϼ��ȤΥ⥸�塼����������Ʊ���������פˤʤ�ޤ���
-�֥��å���Ϳ����줿���ˤϡ�����ȥ��饹�ѿ��Υ������פϥ֥��å��γ�¦�Υ������פˤʤ�ޤ���
+ただし、ローカル変数は module_eval/class_eval の外側のスコープと共有します。
+文字列が与えられ場合には、定数とクラス変数のスコープは自身のモジュール定義式内と同じスコープになります。
+ブロックが与えられた場合には、定数とクラス変数のスコープはブロックの外側のスコープになります。
 
 #@until 1.8.0
-==== ����
-module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
-[[m:Object#instance_eval]] ��Ʊ�ͤ����¤�����ޤ���
-�ܺ٤Ϥ�����������򻲾Ȥ��Ƥ���������
+==== 注意
+module_eval のブロック中でメソッドを定義する場合、
+[[m:Object#instance_eval]] と同様の制限があります。
+詳細はそちらの説明を参照してください。
 #@end
 
-@param expr ɾ�������ʸ����
+@param expr 評価される文字列。
 
-@param fname ʸ�������ꤷ�ޤ����ե����� fname ��ʸ���� expr ���񤫤�Ƥ��뤫�Τ褦�˼¹Ԥ���ޤ���
-             �����å��ȥ졼����ɽ���ʤɤ򺹤��ؤ��뤳�Ȥ��Ǥ��ޤ���
+@param fname 文字列を指定します。ファイル fname に文字列 expr が書かれているかのように実行されます。
+             スタックトレースの表示などを差し替えることができます。
 
-@param lineno ʸ�������ꤷ�ޤ������ֹ� lineno ����ʸ���� expr ���񤫤�Ƥ��뤫�Τ褦�˼¹Ԥ���ޤ���
-              �����å��ȥ졼����ɽ���ʤɤ򺹤��ؤ��뤳�Ȥ��Ǥ��ޤ���
+@param lineno 文字列を指定します。行番号 lineno から文字列 expr が書かれているかのように実行されます。
+              スタックトレースの表示などを差し替えることができます。
 
-��:
+例:
 
  class C
  end
  a = 1
  C.class_eval %Q{     
-   def m                   # �᥽�åɤ�ưŪ������Ǥ��롣
+   def m                   # メソッドを動的に定義できる。
      return :m, #{a}
    end
  }
@@ -587,18 +587,18 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
 --- name -> String
 --- to_s -> String
 
-�⥸�塼��䥯�饹��̾����ʸ������֤��ޤ���
+モジュールやクラスの名前を文字列で返します。
 
-���Υ᥽�åɤ��֤��֥⥸�塼�� / ���饹��̾���פȤϡ�
-������Τˤϡ֥��饹�ѥ��פ�ؤ��ޤ���
-���饹�ѥ��Ȥϡ��ͥ��Ȥ��Ƥ���⥸�塼�뤹�٤Ƥ�
-��::�פ�Ȥä�ɽ������̾���Τ��ȤǤ���
-���饹�ѥ�����Ȥ��Ƥϡ�CGI::Session�ס�Net::HTTP�פ��󤲤��ޤ���
+このメソッドが返す「モジュール / クラスの名前」とは、
+より正確には「クラスパス」を指します。
+クラスパスとは、ネストしているモジュールすべてを
+「::」を使って表示した名前のことです。
+クラスパスの例としては「CGI::Session」「Net::HTTP」が挙げられます。
 
 #@since 1.9.1
-@return ̾���Τʤ��⥸�塼�� / ���饹���Ф��Ƥ� nil ���֤��ޤ���
+@return 名前のないモジュール / クラスに対しては nil を返します。
 #@else
-@return ̾���Τʤ��⥸�塼�� / ���饹���Ф��Ƥ϶�ʸ������֤��ޤ���
+@return 名前のないモジュール / クラスに対しては空文字列を返します。
 #@end
 
   module A
@@ -615,7 +615,7 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
   p A::B.name #=> "A::B"
   p A::C.name #=> "A::C"
 
-  # ̾���Τʤ��⥸�塼�� / ���饹
+  # 名前のないモジュール / クラス
 #@since 1.9.1
   p Module.new.name   #=> nil
   p Class.new.name    #=> nil
@@ -630,14 +630,14 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
 --- instance_methods(inherited_too = true) -> [String]
 #@end
 
-���Υ⥸�塼����������Ƥ��� public ����� protected �᥽�å�̾
-�ΰ�����������֤��ޤ���
+そのモジュールで定義されている public および protected メソッド名
+の一覧を配列で返します。
 
-@param inherited_too false ����ꤹ��Ȥ��Υ⥸�塼����������Ƥ���᥽�åɤΤ��֤��ޤ���
+@param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
 @see [[m:Object#methods]]
 
-��1:
+例1:
 
   class Foo
     private;   def private_foo()   end
@@ -645,7 +645,7 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
     public;    def public_foo()    end
   end
 
-  # ���륯�饹�Υ��󥹥��󥹥᥽�åɤΰ���������
+  # あるクラスのインスタンスメソッドの一覧を得る
   p Foo.instance_methods(false)
   p Foo.public_instance_methods(false)
   p Foo.private_instance_methods(false)
@@ -654,7 +654,7 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
   class Bar < Foo
   end
 
-�¹Է��
+実行結果
 
 #@since 1.9.1
      [:protected_foo, :public_foo]
@@ -672,7 +672,7 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
      ["protected_foo"]
 #@end
 
-��2:
+例2:
 
   class Bar
     private;   def private_foo()   end
@@ -680,15 +680,15 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
     public;    def public_foo()    end
   end
 
-  # ���륯�饹�Υ��󥹥��󥹥᥽�åɤΰ��������롣
-  # �ƤΥ��饹�Υ��󥹥��󥹥᥽�åɤ�ޤ�뤿�� true ����ꤷ��
-  # ���뤬��Object �Υ��󥹥��󥹥᥽�åɤϰ��������ӽ����Ƥ��롣
+  # あるクラスのインスタンスメソッドの一覧を得る。
+  # 親のクラスのインスタンスメソッドも含めるため true を指定して
+  # いるが、Object のインスタンスメソッドは一覧から排除している。
   p Bar.instance_methods(true)           - Object.instance_methods(true)
   p Bar.public_instance_methods(true)    - Object.public_instance_methods(true)
   p Bar.private_instance_methods(true)   - Object.private_instance_methods(true)
   p Bar.protected_instance_methods(true) - Object.protected_instance_methods(true)
 
-�¹Է��
+実行結果
 
 #@since 1.9.1
      [:protected_foo, :public_foo]
@@ -712,10 +712,10 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
 --- public_instance_methods(inherited_too = true) -> [String]
 #@end
 
-���Υ⥸�塼����������Ƥ��� public �᥽�å�̾
-�ΰ�����������֤��ޤ���
+そのモジュールで定義されている public メソッド名
+の一覧を配列で返します。
 
-@param inherited_too false ����ꤹ��Ȥ��Υ⥸�塼����������Ƥ���᥽�åɤΤ��֤��ޤ���
+@param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
 @see [[m:Object#public_methods]], [[m:Module#instance_methods]]
 
@@ -725,10 +725,10 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
 --- private_instance_methods(inherited_too = true) -> [String]
 #@end
 
-���Υ⥸�塼����������Ƥ��� private �᥽�å�̾
-�ΰ�����������֤��ޤ���
+そのモジュールで定義されている private メソッド名
+の一覧を配列で返します。
 
-@param inherited_too false ����ꤹ��Ȥ��Υ⥸�塼����������Ƥ���᥽�åɤΤ��֤��ޤ���
+@param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
 @see [[m:Object#private_methods]], [[m:Module#instance_methods]]
 
@@ -738,55 +738,55 @@ module_eval �Υ֥��å���ǥ᥽�åɤ���������硢
 --- protected_instance_methods(inherited_too = true) -> [String]
 #@end
 
-���Υ⥸�塼����������Ƥ��� protected �᥽�å�̾
-�ΰ�����������֤��ޤ���
+そのモジュールで定義されている protected メソッド名
+の一覧を配列で返します。
 
-@param inherited_too false ����ꤹ��Ȥ��Υ⥸�塼����������Ƥ���᥽�åɤΤ��֤��ޤ���
+@param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
 @see [[m:Object#protected_methods]], [[m:Module#instance_methods]]
 
 --- private_class_method(*name) -> self
 
-name �ǻ��ꤷ�����饹�᥽�å� (���饹���ðۥ᥽�å�) ��
-�Ļ����� private ���ѹ����ޤ���
+name で指定したクラスメソッド (クラスの特異メソッド) の
+可視性を private に変更します。
 
-@param name 0 �İʾ�� [[c:String]] �� [[c:Symbol]] ����ꤷ�ޤ���
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 --- public_class_method(*name) -> self
 
-name �ǻ��ꤷ�����饹�᥽�å� (���饹���ðۥ᥽�å�) ��
-�Ļ����� public ���ѹ����ޤ���
+name で指定したクラスメソッド (クラスの特異メソッド) の
+可視性を public に変更します。
 
-@param name 0 �İʾ�� [[c:String]] �� [[c:Symbol]] ����ꤷ�ޤ���
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 #@since 1.8.0
 --- private_method_defined?(name) -> bool
 
-���󥹥��󥹥᥽�å� name ���⥸�塼����������Ƥ��ꡢ
-�����⤽�βĻ����� private �Ǥ���Ȥ��� true ���֤��ޤ���
-�����Ǥʤ���� false ���֤��ޤ���
+インスタンスメソッド name がモジュールに定義されており、
+しかもその可視性が private であるときに true を返します。
+そうでなければ false を返します。
 
-@param name [[c:Symbol]] �� [[c:String]] ����ꤷ�ޤ���
+@param name [[c:Symbol]] か [[c:String]] を指定します。
 
 @see [[m:Module#method_defined?]]
 
 --- protected_method_defined?(name) -> bool
 
-���󥹥��󥹥᥽�å� name ���⥸�塼����������Ƥ��ꡢ
-�����⤽�βĻ����� protected �Ǥ���Ȥ��� true ���֤��ޤ���
-�����Ǥʤ���� false ���֤��ޤ���
+インスタンスメソッド name がモジュールに定義されており、
+しかもその可視性が protected であるときに true を返します。
+そうでなければ false を返します。
 
-@param name [[c:Symbol]] �� [[c:String]] ����ꤷ�ޤ���
+@param name [[c:Symbol]] か [[c:String]] を指定します。
 
 @see [[m:Module#method_defined?]]
 
 --- public_method_defined?(name) -> bool
 
-���󥹥��󥹥᥽�å� name ���⥸�塼����������Ƥ��ꡢ
-�����⤽�βĻ����� public �Ǥ���Ȥ��� true ���֤��ޤ���
-�����Ǥʤ���� false ���֤��ޤ���
+インスタンスメソッド name がモジュールに定義されており、
+しかもその可視性が public であるときに true を返します。
+そうでなければ false を返します。
 
-@param name [[c:Symbol]] �� [[c:String]] ����ꤷ�ޤ���
+@param name [[c:Symbol]] か [[c:String]] を指定します。
 
 @see [[m:Module#method_defined?]]
 
@@ -795,11 +795,11 @@ name �ǻ��ꤷ�����饹�᥽�å� (���饹���ðۥ᥽�å�) ��
 #@since 1.8.6
 --- class_variable_defined?(name) -> bool
 
-name ��Ϳ����줿̾���Υ��饹�ѿ����⥸�塼���¸�ߤ����� true ��
-�֤��ޤ���
+name で与えられた名前のクラス変数がモジュールに存在する場合 true を
+返します。
 #@# Returns true if the given class variable is defined in obj.
 
-@param name [[c:Symbol]] �� [[c:String]] ����ꤷ�ޤ���
+@param name [[c:Symbol]] か [[c:String]] を指定します。
 
    class Fred
      @@foo = 99
@@ -815,32 +815,32 @@ name ��Ϳ����줿̾���Υ��饹�ѿ����⥸�塼���¸�ߤ����� true ��
 
 --- alias_method(new, original) -> self
 
-�᥽�åɤ���̾��������ޤ���
+メソッドの別名を定義します。
 
-alias �Ȥΰ㤤�ϰʲ����̤�Ǥ���
+alias との違いは以下の通りです。
 
-  * �᥽�å�̾�� [[c:String]] �ޤ��� [[c:Symbol]] �ǻ��ꤷ�ޤ�
-  * �������Х��ѿ�����̾��Ĥ��뤳�ȤϤǤ��ޤ���
+  * メソッド名は [[c:String]] または [[c:Symbol]] で指定します
+  * グローバル変数の別名をつけることはできません
 
-�ޤ������饹�᥽�åɤ��Ф��ƻ��Ѥ��뤳�ȤϤǤ��ޤ���
+また、クラスメソッドに対して使用することはできません。
 
-@param new �������᥽�å�̾��[[c:String]] �ޤ��� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param new 新しいメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
 
-@param original ���Υ᥽�å�̾��[[c:String]] �ޤ��� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
 
 @see [[ref:d:spec/def#alias]]
 
 --- append_features(module_or_class) -> self
 
-�⥸�塼��(���뤤�ϥ��饹)�� self �ε�ǽ���ɲä��ޤ���
+モジュール(あるいはクラス)に self の機能を追加します。
 
-���Υ᥽�åɤ� [[m:Module#include]] �μ��ΤǤ��ꡢ
-include �� Ruby �ǽ񤯤Ȱʲ��Τ褦������Ǥ��ޤ���
+このメソッドは [[m:Module#include]] の実体であり、
+include を Ruby で書くと以下のように定義できます。
 
   def include(*modules)
     modules.each {|mod|
-      # append_features �ϥץ饤�١��ȥ᥽�åɤʤΤ�
-      # ľ�� mod.append_features(self) �ȤϽ񤱤ʤ�
+      # append_features はプライベートメソッドなので
+      # 直接 mod.append_features(self) とは書けない
       mod.__send__(:append_features, self)
 #@since 1.8.0
       mod.__send__(:included, self)
@@ -850,32 +850,32 @@ include �� Ruby �ǽ񤯤Ȱʲ��Τ褦������Ǥ��ޤ���
 
 --- attr(name, assignable = false) -> nil
 
-���󥹥����ѿ��ɤ߼��Τ���Υ��󥹥��󥹥᥽�å� name ��������ޤ���
+インスタンス変数読み取りのためのインスタンスメソッド name を定義します。
 
-���Υ᥽�åɤ��������륢�������᥽�åɤ�����ϼ����̤�Ǥ���
+このメソッドで定義されるアクセスメソッドの定義は次の通りです。
 
   def name
     @name
   end
 
-��ά��ǽ���� 2 ���� assignable �����ꤵ�줽���ͤ����Ǥ���
-���ˤϡ�°���ν񤭹����ѥ᥽�å� name= ��Ʊ�����������ޤ���
-��������ϼ����̤�Ǥ���
+省略可能な第 2 引数 assignable が指定されその値が真である
+場合には、属性の書き込み用メソッド name= も同時に定義されます。
+その定義は次の通りです。
 
   def name=(val)
     @name = val
   end
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �ǻ��ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] で指定します。
 
-@param assignable true ����ꤹ��ȥ��󥹥����ѿ��񤭹����ѤΥ��󥹥��󥹥᥽�åɤ�������ޤ���
+@param assignable true を指定するとインスタンス変数書き込み用のインスタンスメソッドも定義します。
 
 --- attr_accessor(*name) -> nil
 
-���󥹥����ѿ� name ���Ф����ɤ߼��᥽�åɤȽ񤭹��ߥ᥽�åɤ�ξ����
-������ޤ���
+インスタンス変数 name に対する読み取りメソッドと書き込みメソッドの両方を
+定義します。
 
-���Υ᥽�åɤ���������᥽�åɤ�����ϰʲ����̤�Ǥ���
+このメソッドで定義されるメソッドの定義は以下の通りです。
 
   def name
     @name
@@ -884,40 +884,40 @@ include �� Ruby �ǽ񤯤Ȱʲ��Τ褦������Ǥ��ޤ���
     @name = val
   end
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 1 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
 
 --- attr_reader(*name) -> nil
 
-���󥹥����ѿ� name ���ɤ߼��᥽�åɤ�������ޤ���
+インスタンス変数 name の読み取りメソッドを定義します。
 
-���Υ᥽�åɤ���������᥽�åɤ�����ϰʲ����̤�Ǥ���
+このメソッドで定義されるメソッドの定義は以下の通りです。
 
   def name
     @name
   end
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 1 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
 
 --- attr_writer(*name) -> nil
 
-���󥹥����ѿ� name �ؤν񤭹��ߥ᥽�å� (name=) ��������ޤ���
+インスタンス変数 name への書き込みメソッド (name=) を定義します。
 
-���Υ᥽�åɤ���������᥽�åɤ�����ϰʲ����̤�Ǥ���
+このメソッドで定義されるメソッドの定義は以下の通りです。
 
   def name=(val)
     @name = val
   end
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 1 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
 
 #@since 1.8.3
 --- class_variable_get(name) -> object
 
-���饹���⥸�塼����������Ƥ��륯�饹�ѿ� name ���ͤ��֤��ޤ���
+クラス／モジュールに定義されているクラス変数 name の値を返します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ����ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を指定します。
 
-@raise NameError ���饹�ѿ� name ���������Ƥ��ʤ���硢ȯ�����ޤ���
+@raise NameError クラス変数 name が定義されていない場合、発生します。
 
   class Fred
     @@foo = 99
@@ -934,10 +934,10 @@ include �� Ruby �ǽ񤯤Ȱʲ��Τ褦������Ǥ��ޤ���
 #@since 1.8.3
 --- class_variable_set(name, val) -> object
 
-���饹���⥸�塼��˥��饹�ѿ� name ��������ơ������ͤȤ���
-val �򥻥åȤ��ޤ���val ���֤��ޤ���
+クラス／モジュールにクラス変数 name を定義して、その値として
+val をセットします。val を返します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ����ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を指定します。
 
   class Fred
     @@foo = 99
@@ -957,19 +957,19 @@ val �򥻥åȤ��ޤ���val ���֤��ޤ���
 --- define_method(name, method) -> Proc | Method | UnboundMethod
 --- define_method(name) { ... } -> Proc
 
-���󥹥��󥹥᥽�å� name ��������ޤ���
+インスタンスメソッド name を定義します。
 
-�֥��å���Ϳ������硢��������᥽�åɤμ¹Ի��˥֥��å���
-�쥷���Х��饹�Υ��󥹥��󥹤ξ�� [[m:Object#instance_eval]] ����ޤ���
+ブロックを与えた場合、定義したメソッドの実行時にブロックが
+レシーバクラスのインスタンスの上で [[m:Object#instance_eval]] されます。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ����ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を指定します。
 
-@param method [[c:Proc]]��[[c:Method]] ���뤤�� [[c:UnboundMethod]] ��
-       �����줫�Υ��󥹥��󥹤���ꤷ�ޤ���
+@param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
+       いずれかのインスタンスを指定します。
 
-@return ���� method ��Ϳ�����Ȥ��Ϥ���򡢥֥��å��դ���
-        �ƤӤ������Ȥ��ϥ֥��å��� [[c:Proc]] ���������֥������Ȥ�
-        ���줾���֤��ޤ���
+@return 引数 method を与えたときはそれを、ブロック付きで
+        呼びだしたときはブロックを [[c:Proc]] 化したオブジェクトを、
+        それぞれ返します。
 
   class Foo
     def foo() p :foo end
@@ -979,28 +979,28 @@ val �򥻥åȤ��ޤ���val ���֤��ޤ���
 
 --- extend_object(module) -> Module
 
-[[m:Object#extend]] �μ��ΤǤ������֥������Ȥ˥⥸�塼��ε�ǽ���ɲä��ޤ���
+[[m:Object#extend]] の実体です。オブジェクトにモジュールの機能を追加します。
 
-[[m:Object#extend]] �ϡ�Ruby �ǽ񤯤Ȱʲ��Τ褦������Ǥ��ޤ���
+[[m:Object#extend]] は、Ruby で書くと以下のように定義できます。
 
   def extend(*modules)
     modules.each {|mod| mod.__send__ :extend_object, self }
   end
 
-extend_object �Υǥե���Ȥμ����Ǥϡ�self ����������
-����᥽�åɤ� object ���ðۥ᥽�åɤȤ����ɲä��ޤ���
+extend_object のデフォルトの実装では、self に定義されて
+いるメソッドを object の特異メソッドとして追加します。
 
-@param module [[c:Enumerable]] �ʤ� [[c:Module]] ���饹�Υ��󥹥��󥹤���ꤷ�ޤ���
+@param module [[c:Enumerable]] など [[c:Module]] クラスのインスタンスを指定します。
 
-@return module �ǻ��ꤵ�줿�⥸�塼����֤��ޤ���
+@return module で指定されたモジュールを返します。
 
 #@since 1.8.0
 --- extended(class_or_module) -> ()
 
-self ��¾�Υ��֥������� �� [[m:Object#extend]] ���줿�Ȥ���
-�ƤФ�ޤ��������ˤ� extend ��Ԥä����֥������Ȥ��Ϥ���ޤ���
+self が他のオブジェクト に [[m:Object#extend]] されたときに
+呼ばれます。引数には extend を行ったオブジェクトが渡されます。
 
-@param class_or_module [[m:Object#extend]] ��Ԥä����֥�������
+@param class_or_module [[m:Object#extend]] を行ったオブジェクト
 
   module Foo
     def self.extended(mod)
@@ -1015,11 +1015,11 @@ self ��¾�Υ��֥������� �� [[m:Object#extend]] ���줿�Ȥ���
 
 --- include(*mod) -> self
 
-�⥸�塼�� mod �򥤥󥯥롼�ɤ��ޤ���
+モジュール mod をインクルードします。
 
-@param mod [[c:Module]] �Υ��󥹥���( [[c:Enumerable]] �ʤ�)����ꤷ�ޤ���
+@param mod [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
-@raise ArgumentError �Ѿ��ط����۴Ĥ��Ƥ��ޤ��褦�� include ��Ԥä�����ȯ�����ޤ���
+@raise ArgumentError 継承関係が循環してしまうような include を行った場合に発生します。
 
   module M
   end
@@ -1030,20 +1030,20 @@ self ��¾�Υ��֥������� �� [[m:Object#extend]] ���줿�Ȥ���
     include M2
   end
 
-�¹Է��:
+実行結果:
 
   -:3:in `append_features': cyclic include detected (ArgumentError)
           from -:3:in `include'
           from -:3
 
 
-���󥯥롼�ɤȤϡ����ꤵ�줿�⥸�塼������
+インクルードとは、指定されたモジュールの定義
 #@since 1.9.1
-(�᥽�åɡ����) ������Ѥ����ȤǤ���
+(メソッド、定数) を引き継ぐことです。
 #@else
-(�᥽�åɡ���������饹�ѿ�) ������Ѥ����ȤǤ���
+(メソッド、定数、クラス変数) を引き継ぐことです。
 #@end
-���󥯥롼�ɤ�¿�ŷѾ���������Ѥ����Ƥ��ꡢ mix-in �Ȥ�ƤӤޤ���
+インクルードは多重継承の代わりに用いられており、 mix-in とも呼びます。
 
   class C
     include FileTest
@@ -1054,13 +1054,13 @@ self ��¾�Υ��֥������� �� [[m:Object#extend]] ���줿�Ȥ���
 
   # => [C, Math, FileTest, Object, Kernel]
 
-�⥸�塼��ε�ǽ�ɲäϡ����饹�ηѾ��ط��δ֤ˤ��Υ⥸�塼�뤬����
-����뤳�ȤǼ¸�����Ƥ��ޤ������äơ��᥽�åɤ�õ���ʤɤ�
-�����ѡ����饹���⥤�󥯥롼�ɤ��줿�⥸�塼��Τۤ���
-��˹Ԥ��ޤ�
-(������ [[m:Module#ancestors]] �η�̤��᥽�å�õ���ν���Ǥ�)��
+モジュールの機能追加は、クラスの継承関係の間にそのモジュールが挿入
+されることで実現されています。従って、メソッドの探索などは
+スーパークラスよりもインクルードされたモジュールのほうが
+先に行われます
+(上の例の [[m:Module#ancestors]] の結果がメソッド探索の順序です)。
 
-Ʊ���⥸�塼������ʾ� include ���������ܰʹߤ�̵�뤵��ޤ���
+同じモジュールを二回以上 include すると二回目以降は無視されます。
 
   module M
   end
@@ -1068,23 +1068,23 @@ self ��¾�Υ��֥������� �� [[m:Object#extend]] ���줿�Ȥ���
     include M
   end
   class C2 < C1
-    include M   # ���� include ��̵�뤵���
+    include M   # この include は無視される
   end
 
   p C2.ancestors  # => [C2, C1, M, Object, Kernel]
 
 #@since 1.8.0
-������ʣ���Υ⥸�塼�����ꤷ����硢
-�Ǹ�ΰ��������˥��󥯥롼�ɤ��ޤ���
+引数に複数のモジュールを指定した場合、
+最後の引数から順にインクルードします。
 #@end
 
 #@since 1.8.0
 --- included(class_or_module) -> ()
 
-self �� [[m:Module#include]] ���줿�Ȥ����оݤΥ��饹�ޤ��ϥ⥸�塼
-�������ˤ��ƥ��󥿥ץ꥿�����Υ᥽�åɤ�ƤӽФ��ޤ���
+self が [[m:Module#include]] されたときに対象のクラスまたはモジュー
+ルを引数にしてインタプリタがこのメソッドを呼び出します。
 
-@param class_or_module [[m:Module#include]] ��¹Ԥ������֥�������
+@param class_or_module [[m:Module#include]] を実行したオブジェクト
 
   module Foo
     def self.included(mod)
@@ -1099,13 +1099,13 @@ self �� [[m:Module#include]] ���줿�Ȥ����оݤΥ��饹�ޤ��ϥ⥸�塼
 
 --- method_added(name) -> ()
 
-�᥽�å� name ���ɲä��줿���˥��󥿥ץ꥿�����Υ᥽�åɤ�ƤӽФ��ޤ���
+メソッド name が追加された時にインタプリタがこのメソッドを呼び出します。
 
-�ðۥ᥽�åɤ��ɲä��Ф���եå��ˤ�
+特異メソッドの追加に対するフックには
 [[m:Object#singleton_method_added]]
-��Ȥ��ޤ���
+を使います。
 
-@param name �ɲä��줿�᥽�åɤ�̾���� [[c:Symbol]] ���Ϥ���ޤ���
+@param name 追加されたメソッドの名前が [[c:Symbol]] で渡されます。
 
   class Foo
     def Foo.method_added(name)
@@ -1123,14 +1123,14 @@ self �� [[m:Module#include]] ���줿�Ȥ����оݤΥ��饹�ޤ��ϥ⥸�塼
 #@since 1.8.0
 --- method_removed(name) -> ()
 
-�᥽�åɤ� [[m:Module#remove_method]] �ˤ����
-���줿���˥��󥿥ץ꥿�����Υ᥽�åɤ�ƤӽФ��ޤ���
+メソッドが [[m:Module#remove_method]] により削除
+された時にインタプリタがこのメソッドを呼び出します。
 
-�ðۥ᥽�åɤκ�����Ф���եå��ˤ�
+特異メソッドの削除に対するフックには
 [[m:Object#singleton_method_removed]]
-��Ȥ��ޤ���
+を使います。
 
-@param name ������줿�᥽�å�̾�� [[c:Symbol]] ���Ϥ���ޤ���
+@param name 削除されたメソッド名が [[c:Symbol]] で渡されます。
 
   class Foo
     def Foo.method_removed(name)
@@ -1149,15 +1149,15 @@ self �� [[m:Module#include]] ���줿�Ȥ����оݤΥ��饹�ޤ��ϥ⥸�塼
 #@since 1.8.0
 --- method_undefined(name) -> ()
 
-���Υ⥸�塼��Υ��󥹥��󥹥᥽�å� name ��
-[[m:Module#undef_method]] �ˤ�äƺ������뤫��
-undef ʸ�ˤ��̤����ˤ����ȡ����󥿥ץ꥿�����Υ᥽�åɤ�ƤӽФ��ޤ���
+このモジュールのインスタンスメソッド name が
+[[m:Module#undef_method]] によって削除されるか、
+undef 文により未定義にされると、インタプリタがこのメソッドを呼び出します。
 
-�ðۥ᥽�åɤκ����եå�����ˤ�
+特異メソッドの削除をフックするには
 [[m:Object#singleton_method_undefined]]
-��Ȥ��ޤ���
+を使います。
 
-@param name ���/̤����ˤ��줿�᥽�å�̾�� [[c:Symbol]] ���Ϥ���ޤ���
+@param name 削除/未定義にされたメソッド名が [[c:Symbol]] で渡されます。
 
   class C
     def C.method_undefined(name)
@@ -1173,7 +1173,7 @@ undef ʸ�ˤ��̤����ˤ����ȡ����󥿥ץ꥿�����Υ᥽�åɤ�ƤӽФ��ޤ���
     undef bar
   end
 
-�¹Է��:
+実行結果:
 
   method C#foo was undefined
   method C#bar was undefined
@@ -1182,26 +1182,26 @@ undef ʸ�ˤ��̤����ˤ����ȡ����󥿥ץ꥿�����Υ᥽�åɤ�ƤӽФ��ޤ���
 
 --- module_function(*name) -> self
 
-�᥽�åɤ�⥸�塼��ؿ��ˤ��ޤ���
+メソッドをモジュール関数にします。
 
-������Ϳ����줿���ˤϡ�
-�����ǻ��ꤵ�줿�᥽�åɤ�⥸�塼��ؿ��ˤ��ޤ���
-�����ʤ��ΤȤ��Ϻ��夳�Υ⥸�塼�����ʸ���
-��������������᥽�åɤ򤹤٤ƥ⥸�塼��ؿ��ˤ��ޤ���
+引数が与えられた時には、
+引数で指定されたメソッドをモジュール関数にします。
+引数なしのときは今後このモジュール定義文内で
+新しく定義されるメソッドをすべてモジュール関数にします。
 
-�⥸�塼��ؿ��Ȥϡ��ץ饤�١��ȥ᥽�åɤǤ����Ʊ����
-�⥸�塼����ðۥ᥽�åɤǤ⤢��褦�ʥ᥽�åɤǤ���
-�㤨�� [[c:Math]] �⥸�塼��Υ᥽�åɤϤ��٤ƥ⥸�塼��ؿ��Ǥ���
+モジュール関数とは、プライベートメソッドであると同時に
+モジュールの特異メソッドでもあるようなメソッドです。
+例えば [[c:Math]] モジュールのメソッドはすべてモジュール関数です。
 
-self ���֤��ޤ���
+self を返します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 0 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
-=== ����
-module_function �ϥ᥽�åɤˡ֥⥸�塼��ؿ��פȤ���°����Ĥ����
-���åɤǤϤʤ����ץ饤�١��ȥ᥽�åɤȥ⥸�塼����ðۥ᥽�åɤ� 2
-�Ĥ�Ʊ�����������᥽�åɤǤ���
-���Τ��ᡢ�ʲ��Τ褦�˽񤤤Ƥ�⥸�塼��ؿ�����̾������Ǥ��ޤ���
+=== 注意
+module_function はメソッドに「モジュール関数」という属性をつけるメ
+ソッドではなく、プライベートメソッドとモジュールの特異メソッドの 2
+つを同時に定義するメソッドです。
+そのため、以下のように書いてもモジュール関数の別名は定義できません。
 
   module M
     def foo
@@ -1214,12 +1214,12 @@ module_function �ϥ᥽�åɤˡ֥⥸�塼��ؿ��פȤ���°����Ĥ����
   M.foo   # => "foo"
   M.bar   # => undefined method `bar' for Foo:Module (NoMethodError)
 
-���Υ����ɤǤϡ��⥸�塼��ؿ� foo ��
-�ץ饤�١��ȥ��󥹥��󥹥᥽�å� bar ��������Ƥ��ޤ��ޤ���
+このコードでは、モジュール関数 foo と
+プライベートインスタンスメソッド bar を定義してしまいます。
 
-�������⥸�塼��ؿ�����̾���դ���ˤϡ�
-�ʲ��Τ褦�ˡ������̾��������Ƥ���
-���줾���⥸�塼��ؿ��ˤ��ʤ���Ф����ޤ���
+正しくモジュール関数に別名を付けるには、
+以下のように、先に別名を定義してから
+それぞれをモジュール関数にしなければいけません。
 
   module M
     def foo
@@ -1235,22 +1235,22 @@ module_function �ϥ᥽�åɤˡ֥⥸�塼��ؿ��פȤ���°����Ĥ����
 
 --- private(*name) -> self
 
-�᥽�åɤ� private �����ꤷ�ޤ���
+メソッドを private に設定します。
 
-�����ʤ��ΤȤ��Ϻ��夳�Υ��饹�ޤ��ϥ⥸�塼�������ǿ����������
-���᥽�åɤ�ؿ������Ǥ����ƤӽФ���褦��(private)���ꤷ�ޤ���
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
-������Ϳ����줿���ˤϰ����ˤ�äƻ��ꤵ�줿�᥽�åɤ� private ��
-���ꤷ�ޤ���
+引数が与えられた時には引数によって指定されたメソッドを private に
+設定します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 0 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
-@raise NameError ¸�ߤ��ʤ��᥽�å�̾����ꤷ������ȯ�����ޤ���
+@raise NameError 存在しないメソッド名を指定した場合に発生します。
 
   class Foo
-    def foo1() 1 end      # �ǥե���ȤǤ� public
-    private               # �Ļ����� private ���ѹ�
-    def foo2() 2 end      # foo2 �� private �᥽�å�
+    def foo1() 1 end      # デフォルトでは public
+    private               # 可視性を private に変更
+    def foo2() 2 end      # foo2 は private メソッド
   end
 
   foo = Foo.new
@@ -1259,31 +1259,31 @@ module_function �ϥ᥽�åɤˡ֥⥸�塼��ؿ��פȤ���°����Ĥ����
 
 --- protected(*name) -> self
 
-�᥽�åɤ� protected �����ꤷ�ޤ���
+メソッドを protected に設定します。
 
-�����ʤ��ΤȤ��Ϻ��夳�Υ��饹�ޤ��ϥ⥸�塼�������ǿ����������
-���᥽�åɤ� protected �����ꤷ�ޤ���
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドを protected に設定します。
 
-������Ϳ����줿���ˤϰ����ˤ�äƻ��ꤵ�줿�᥽�åɤ� protected
-�����ꤷ�ޤ���
+引数が与えられた時には引数によって指定されたメソッドを protected
+に設定します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 0 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
-@raise NameError ¸�ߤ��ʤ��᥽�å�̾����ꤷ������ȯ�����ޤ���
+@raise NameError 存在しないメソッド名を指定した場合に発生します。
 
 --- public(*name) -> self
 
-�᥽�åɤ� public �����ꤷ�ޤ���
+メソッドを public に設定します。
 
-�����ʤ��ΤȤ��Ϻ��夳�Υ��饹�ޤ��ϥ⥸�塼�������ǿ����������
-���᥽�åɤ�ɤ�ʷ����Ǥ�ƤӽФ���褦��(public)���ꤷ�ޤ���
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドをどんな形式でも呼び出せるように(public)設定します。
 
-������Ϳ����줿���ˤϰ����ˤ�äƻ��ꤵ�줿�᥽�åɤ� public ����
-�ꤷ�ޤ���
+引数が与えられた時には引数によって指定されたメソッドを public に設
+定します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] �� 0 �İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
-@raise NameError ¸�ߤ��ʤ��᥽�å�̾����ꤷ������ȯ�����ޤ���
+@raise NameError 存在しないメソッド名を指定した場合に発生します。
 
   def foo() 1 end
   p foo             # => 1
@@ -1297,14 +1297,14 @@ module_function �ϥ᥽�åɤˡ֥⥸�塼��ؿ��פȤ���°����Ĥ����
 
 --- remove_class_variable(name) -> object
 
-�����ǻ��ꤷ�����饹�ѿ�������������Υ��饹�ѿ������ꤵ
-��Ƥ����ͤ��֤��ޤ���
+引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
+れていた値を返します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ����ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を指定します。
 
-@return �����ǻ��ꤵ�줿���饹�ѿ������ꤵ��Ƥ����ͤ��֤��ޤ���
+@return 引数で指定されたクラス変数に設定されていた値を返します。
 
-@raise NameError �����ǻ��ꤵ�줿���饹�ѿ������Υ⥸�塼��䥯�饹���������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NameError 引数で指定されたクラス変数がそのモジュールやクラスに定義されていない場合に発生します。
 
   class Foo
     @@foo = 1
@@ -1317,14 +1317,14 @@ module_function �ϥ᥽�åɤˡ֥⥸�塼��ؿ��פȤ���°����Ĥ����
 
 --- remove_const(name) -> object
 
-name �ǻ��ꤷ��������������������������ꤵ��Ƥ����ͤ�
-�֤��ޤ���
+name で指定した定数を取り除き、その定数に設定されていた値を
+返します。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ����ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を指定します。
 
-@return �����ǻ��ꤵ�줿��������ꤵ��Ƥ����ͤ��֤��ޤ���
+@return 引数で指定された定数に設定されていた値を返します。
 
-@raise NameError �����ǻ��ꤵ�줿��������Υ⥸�塼��䥯�饹���������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NameError 引数で指定された定数がそのモジュールやクラスに定義されていない場合に発生します。
 
   class Foo
     FOO = 1
@@ -1332,9 +1332,9 @@ name �ǻ��ꤷ��������������������������ꤵ��Ƥ����ͤ�
     p FOO     # => uninitialized constant FOO at Foo (NameError)
   end
 
-���ߤΤȤ����Ȥ߹��ߥ��饹/�⥸�塼������ꤷ�Ƥ��������
-[[m:Kernel.#autoload]] ����ꤷ��(�ޤ������ɤ��Ƥʤ�)�������
-�Ǥ��ʤ��Ȥ������󤬤���ޤ���
+現在のところ組み込みクラス/モジュールを設定している定数や
+[[m:Kernel.#autoload]] を指定した(まだロードしてない)定数を削除
+できないという制約があります。
 
   class Object
     remove_const :Array
@@ -1347,22 +1347,22 @@ name �ǻ��ꤷ��������������������������ꤵ��Ƥ����ͤ�
 --- remove_method(*name) -> self
 #@end
 
-���󥹥��󥹥᥽�å� name ��⥸�塼�뤫�������ޤ���
+インスタンスメソッド name をモジュールから削除します。
 
 #@since 1.8.0
-Ruby 1.8.0 �ʹߤ�ʣ���Υ᥽�å�̾����ꤷ�ư��٤˺���Ǥ��ޤ���
+Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 #@end
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ���İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を一つ以上指定します。
 
-@raise NameError ���ꤷ���᥽�åɤ��������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NameError 指定したメソッドが定義されていない場合に発生します。
 
   class C
     def foo
     end
 
     remove_method :foo
-    remove_method :no_such_method   # �㳰 NameError ��ȯ��
+    remove_method :no_such_method   # 例外 NameError が発生
   end
 
 @see [[m:Module#undef_method]]
@@ -1370,18 +1370,18 @@ Ruby 1.8.0 �ʹߤ�ʣ���Υ᥽�å�̾����ꤷ�ư��٤˺���Ǥ��ޤ���
 #@since 1.8.0
 --- undef_method(*name) -> self
 
-���Υ⥸�塼��Υ��󥹥��󥹥᥽�å� name ��̤����ˤ��ޤ���
+このモジュールのインスタンスメソッド name を未定義にします。
 
-@param name [[c:String]] �ޤ��� [[c:Symbol]] ���İʾ���ꤷ�ޤ���
+@param name [[c:String]] または [[c:Symbol]] を一つ以上指定します。
 
-@raise NameError ���ꤷ�����󥹥��󥹥᥽�åɤ��������Ƥ��ʤ�����ȯ�����ޤ���
+@raise NameError 指定したインスタンスメソッドが定義されていない場合に発生します。
 
-=== ��̤����ˤ���פȤ�
-���Υ⥸�塼��Υ��󥹥��󥹤��Ф��� name �Ȥ���
-�᥽�åɤ�ƤӽФ����Ȥ�ػߤ���Ȥ������ȤǤ���
-�����ѡ����饹��������Ѿ�����뤫�ɤ����Ȥ������ˤ����ơ�
-��̤����פϡ֥᥽�åɤκ���פȤ϶��̤���ޤ���
-�ʲ��Υ�������򻲾Ȥ��Ƥ���������
+=== 「未定義にする」とは
+このモジュールのインスタンスに対して name という
+メソッドを呼び出すことを禁止するということです。
+スーパークラスの定義が継承されるかどうかという点において、
+「未定義」は「メソッドの削除」とは区別されます。
+以下のコード例を参照してください。
 
   class A
     def ok
@@ -1396,23 +1396,23 @@ Ruby 1.8.0 �ʹߤ�ʣ���Υ᥽�å�̾����ꤷ�ư��٤˺���Ǥ��ޤ���
 
   B.new.ok   # => B
 
-  # undef_method �ξ��ϥ����ѡ����饹��Ʊ̾�Υ᥽�åɤ����äƤ�
-  # ���θƤӽФ��ϥ��顼�ˤʤ�
+  # undef_method の場合はスーパークラスに同名のメソッドがあっても
+  # その呼び出しはエラーになる
   class B
     undef_method :ok
   end
   B.new.ok   # => NameError
 
-  # remove_method �ξ��ϥ����ѡ����饹��Ʊ̾�Υ᥽�åɤ������
-  # ���줬�ƤФ��
+  # remove_method の場合はスーパークラスに同名のメソッドがあると
+  # それが呼ばれる
   class B
     remove_method :ok
   end
   B.new.ok   # => A
 
 #@#see [ruby-dev:17894]
-�ޤ���undef ʸ�� undef_method �ΰ㤤�ϡ�
-�᥽�å�̾�� [[c:String]] �ޤ��� [[c:Symbol]] ��Ϳ�����뤳�ȤǤ���
+また、undef 文と undef_method の違いは、
+メソッド名を [[c:String]] または [[c:Symbol]] で与えられることです。
 
   module M1
     def foo
@@ -1441,19 +1441,19 @@ Ruby 1.8.0 �ʹߤ�ʣ���Υ᥽�å�̾����ꤷ�ư��٤˺���Ǥ��ޤ���
 --- module_exec(*args) {|*vars| ... }       -> object
 --- class_exec(*args) {|*vars| ... }        -> object
 
-Ϳ����줿�֥��å�����ꤵ�줿 args ������Ȥ��ƥ⥸�塼��Υ���ƥ����Ȥ�ɾ�����ޤ���
+与えられたブロックを指定された args を引数としてモジュールのコンテキストで評価します。
 
-�⥸�塼��Υ���ƥ����Ȥ�ɾ������Ȥϡ��¹��椽�Υ⥸�塼�뤬 self �ˤʤ�Ȥ������ȤǤ���
-�Ĥޤꡢ���Υ⥸�塼������������ˤ��뤫�Τ褦�˼¹Ԥ���ޤ���
+モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
+つまり、そのモジュールの定義式の中にあるかのように実行されます。
 
 #@until 1.9.1
-���������ѿ�������ȥ��饹�ѿ��Υ������פϥ֥��å��γ�¦�Υ������פˤʤ�ޤ���
+ローカル変数、定数とクラス変数のスコープはブロックの外側のスコープになります。
 #@else
-�����������������ѿ������ϳ�¦�Υ������פȶ�ͭ���ޤ���
-����ȥ��饹�ѿ��Υ������פϡ����ȤΥ⥸�塼����������Ʊ���������פˤʤ�ޤ���
+ただし、ローカル変数だけは外側のスコープと共有します。
+定数とクラス変数のスコープは、自身のモジュール定義式内と同じスコープになります。
 #@end
 
-@param args �֥��å����Ϥ���������ꤷ�ޤ���
+@param args ブロックに渡す引数を指定します。
 
 
    class Thing
@@ -1465,7 +1465,7 @@ Ruby 1.8.0 �ʹߤ�ʣ���Υ᥽�å�̾����ꤷ�ư��٤˺���Ǥ��ޤ���
        "Hello there!" 
      end
 
-     define_method(:foo) do   # ���������ѿ����֥��å��γ�¦�򻲾Ȥ��Ƥ���
+     define_method(:foo) do   # ローカル変数がブロックの外側を参照している
        c
      end
    }
@@ -1481,31 +1481,31 @@ Ruby 1.8.0 �ʹߤ�ʣ���Υ᥽�å�̾����ꤷ�ư��٤˺���Ǥ��ޤ���
 #@since 1.9.3
 --- private_constant(*name) -> Module
 
-name �ǻ��ꤷ������βĻ����� private ���ѹ����ޤ���
+name で指定した定数の可視性を private に変更します。
 
-@param name 0 �İʾ�� [[c:String]] �� [[c:Symbol]] ����ꤷ�ޤ���
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
-@raise NameError ¸�ߤ��ʤ��������ꤷ������ȯ�����ޤ���
+@raise NameError 存在しない定数を指定した場合に発生します。
 
-@raise SecurityError �����ե�٥�([[m:$SAFE]])�� 4 �ʾ�Ǽ��Ȥ�
-       untrust �ʥ��֥������ȤǤϤʤ�����ȯ�����ޤ���
+@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+       untrust なオブジェクトではない場合に発生します。
 
-@return ���Ȥ��֤��ޤ���
+@return 自身を返します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
 
 --- public_constant(*name) -> Module
 
-name �ǻ��ꤷ������βĻ����� public ���ѹ����ޤ���
+name で指定した定数の可視性を public に変更します。
 
-@param name 0 �İʾ�� [[c:String]] �� [[c:Symbol]] ����ꤷ�ޤ���
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
-@raise NameError ¸�ߤ��ʤ��������ꤷ������ȯ�����ޤ���
+@raise NameError 存在しない定数を指定した場合に発生します。
 
-@raise SecurityError �����ե�٥�([[m:$SAFE]])�� 4 �ʾ�Ǽ��Ȥ�
-       untrust �ʥ��֥������ȤǤϤʤ�����ȯ�����ޤ���
+@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+       untrust なオブジェクトではない場合に発生します。
 
-@return ���Ȥ��֤��ޤ���
+@return 自身を返します。
 
 @see [[m:Module#private_constant]], [[m:Object#untrusted?]]
 

@@ -1,10 +1,10 @@
-�ե��������Τ���Υ饤�֥��Ǥ���
+ファイル操作のためのライブラリです。
 
-=== ����
-1.8 �ʹߤǤϡ�ftools �����ѤϿ侩���ޤ��󡣥ե��������򤹤�ˤ� [[lib:fileutils]] ��ȤäƤ���������
+=== 注意
+1.8 以降では、ftools の利用は推奨しません。ファイル操作をするには [[lib:fileutils]] を使ってください。
 
-=== ����
-require 'ftools' �Ȥ���ȡ��ե�����Υ��ԡ������ʤɤΥ᥽�åɤ��ɲä���ޤ���
+=== 概要
+require 'ftools' とすると、ファイルのコピーや削除などのメソッドが追加されます。
 
 = reopen File
 
@@ -13,21 +13,21 @@ require 'ftools' �Ȥ���ȡ��ե�����Υ��ԡ������ʤɤΥ᥽�åɤ��ɲä���ޤ���
 --- copy(from, to, verbose = false) -> bool
 --- cp(from, to, verbose = false)  -> bool
 
-�ե�����򥳥ԡ����ޤ���
+ファイルをコピーします。
 
-������Τˤ� from ���ɤ�� to �˽񤭡��⡼�ɤ��ѹ����ޤ���
-�ե�����ι�������ϥ��ԡ���������˹�������ޤ���
+より正確には from を読んで to に書き、モードを変更します。
+ファイルの更新時刻はコピーした時刻に更新されます。
 
-@param from ���ԡ����Υե����롣
+@param from コピー元のファイル。
 
-@param to ���ԡ���Υե����롣
+@param to コピー先のファイル。
 
-@param verbose ���򥻥åȤ���Ⱦܺ٤�ɽ�����ޤ���
+@param verbose 真をセットすると詳細を表示します。
 
-@return ���ԡ������������ʤ� true�����Ԥ����ʤ� false ���֤��ޤ���
+@return コピーに成功したなら true、失敗したなら false を返します。
 
-��:
-  # ����������ݻ����������
+例:
+  # 更新時刻を保持したい場合
   File.copy(from, to)
   stat = File.stat(from)
   File.utime(stat.atime, stat.mtime, to)
@@ -36,28 +36,28 @@ require 'ftools' �Ȥ���ȡ��ե�����Υ��ԡ������ʤɤΥ᥽�åɤ��ɲä���ޤ���
 --- move(from, to, verbose = false) -> bool
 --- mv(from, to, verbose = false)   -> bool
 
-�ե�������ư���ޤ���
+ファイルを移動します。
 
-[[m:File.rename]] �Ȱۤʤ�ѡ��ƥ�������ޤ������ư��Ǥ��ޤ���
+[[m:File.rename]] と異なりパーティションをまたがる移動もできます。
 
-@param from ��ư���Υե����롣
+@param from 移動元のファイル。
 
-@param to ��ư��Υե����롣
+@param to 移動先のファイル。
 
-@param verbose ���򥻥åȤ���Ⱦܺ٤�ɽ�����ޤ���
+@param verbose 真をセットすると詳細を表示します。
 
-@return ��ư�����������ʤ� true�����Ԥ����ʤ� false ���֤��ޤ���
+@return 移動に成功したなら true、失敗したなら false を返します。
 
 --- compare(from, to, verbose = false) -> bool
 --- cmp(from, to, verbose = false)     -> bool
 
-2�ĤΥե��������Ӥ��ޤ���
+2つのファイルを比較します。
 
-@param from ��ĤΥե����롣
+@param from 一つのファイル。
 
-@param to �⤦��ĤΥե����롣
+@param to もう一つのファイル。
 
-@return Ʊ���ʤ� true���ۤʤ�ʤ� false ���֤��ޤ���
+@return 同じなら true、異なるなら false を返します。
 
 #@since 1.8.3
 --- safe_unlink(*files) -> Array
@@ -67,75 +67,75 @@ require 'ftools' �Ȥ���ȡ��ե�����Υ��ԡ������ʤɤΥ᥽�åɤ��ɲä���ޤ���
 --- rm_f(*files)        -> Integer
 #@end
 
-(ʣ����)�ե�������ǽ�ʸ¤������ޤ���
+(複数の)ファイルを可能な限り削除します。
 
-rm -f([[man:rm(1)]]) ���������ޤ���
+rm -f([[man:rm(1)]]) に相当します。
 
-@param files �������ե��������ꤷ�ޤ���
-             �Ǹ�ΰ�����ʸ����Ǥʤ����ޤ��Ͽ��ξ�硢�ܺ٤���Ϥ��ޤ���
+@param files 削除するファイルを指定します。
+             最後の引数が文字列でない場合または真の場合、詳細を出力します。
 
 #@since 1.8.3
-@return files ���֤��ޤ���
-        �Ǹ�ΰ�����ʸ����Ǥʤ����ϡ��Ǹ�ΰ����ϼ�������ޤ���
+@return files を返します。
+        最後の引数が文字列でない場合は、最後の引数は取り除かれます。
 #@else
-@return ����Ǥ����ե���������֤��ޤ���
+@return 削除できたファイル数を返します。
 #@end
 
 --- makedirs(*dirs) -> Array
 --- mkpath(*dirs)   -> Array
 
-(ʣ����)�ǥ��쥯�ȥ��������ޤ���
+(複数の)ディレクトリを作成します。
 
-¿���ؤΥѥ�����٤˺������뤳�Ȥ��ǽ�Ǥ���
-�ǥ��쥯�ȥ꤬���ˤ���в��⤷�ޤ���
-mkdir -p([[man:mkdir(1)]])���������ޤ���
+多階層のパスを一度に作成することも可能です。
+ディレクトリが既にあれば何もしません。
+mkdir -p([[man:mkdir(1)]])に相当します。
 
-@param dirs ��������ǥ��쥯�ȥ����ꤷ�ޤ���
-             �Ǹ�ΰ�����ʸ����Ǥʤ����ޤ��Ͽ��ξ�硢�ܺ٤���Ϥ��ޤ���
+@param dirs 作成するディレクトリを指定します。
+             最後の引数が文字列でない場合または真の場合、詳細を出力します。
 
 
 --- install(from, to, mode = nil, verbose = false) -> ()
 
-�ե�����򥳥ԡ������⡼�ɤ����ꤷ�ޤ���
+ファイルをコピーし、モードを設定します。
 
-���ԡ��褬¸�ߤ�����ϰ�ö�������ޤ��Τǡ����ԡ���Υե����뤬
-¾�Υե�����˥ϡ��ɥ�󥯤���Ƥ���С����Υ�󥯤��ڤ�ޤ���
-install ([[man:install(1)]])���ޥ�ɤ��������ޤ���
+コピー先が存在する場合は一旦削除されますので、コピー先のファイルが
+他のファイルにハードリンクされていれば、そのリンクは切れます。
+install ([[man:install(1)]])コマンドに相当します。
 
-@param from ���ԡ����Υե����롣
+@param from コピー元のファイル。
 
-@param to ���ԡ���Υե����롣
+@param to コピー先のファイル。
 
-@param mode �ե�����Υ��������⡼�ɡ�8�ʿ��ǻ��ꤷ�ޤ���
+@param mode ファイルのアクセスモード。8進数で指定します。
 
-@param verbose ������ꤹ��Ⱦܺ٤�ɽ�����ޤ���
+@param verbose 真を指定すると詳細を表示します。
 
 --- catname(from, to) -> String
 
-from, to ���鿷���� to ����������֤��ޤ���
+from, to から新しい to を作成して返します。
 
-to ��ͭ���ʥǥ��쥯�ȥ�ξ�硢to �θ���� from ���ɲä��ޤ���
-�ޤ�ɬ�פǤ���С��Хå�����å���򥨥������פ�������å�����ɲä��ޤ���
-to ���ǥ��쥯�ȥ�Ǥʤ����ϡ� to �򤽤Τޤ��֤��ޤ���
+to が有効なディレクトリの場合、to の後ろに from を追加します。
+また必要であれば、バックスラッシュをエスケープし、スラッシュを追加します。
+to がディレクトリでない場合は、 to をそのまま返します。
 
 --- syscopy(from, to) -> bool
 
-from ���� to �إե�����򥳥ԡ����ޤ���
+from から to へファイルをコピーします。
 
-to ���ǥ��쥯�ȥ�ξ��ϡ� to/from �إ��ԡ����ޤ���
+to がディレクトリの場合は、 to/from へコピーします。
 
 = redefine File
 == Class Methods
 
 --- chmod(mode, *files) -> Integer
 
-(ʣ����)�ե������°�����Ѥ��ޤ���
+(複数の)ファイルの属性を変えます。
 
-���ꥸ�ʥ�� [[m:File.chmod]] �� verbose �λ��꤬
-�ɲä��������Ǥ���
+オリジナルの [[m:File.chmod]] に verbose の指定が
+追加されるだけです。
 
 @param mode
 
-@param files �ե��������ꤷ�ޤ���
-             �Ǹ�ΰ�����ʸ����Ǥʤ����ޤ��Ͽ��ξ�硢�ܺ٤���Ϥ��ޤ���
+@param files ファイルを指定します。
+             最後の引数が文字列でない場合または真の場合、詳細を出力します。
 

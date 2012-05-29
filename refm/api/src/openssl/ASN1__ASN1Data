@@ -1,67 +1,67 @@
 = class OpenSSL::ASN1::ASN1Data < Object
 
-ASN.1 �ǡ�������ɽ�����饹��
+ASN.1 データ型を表すクラス。
 
-UNIVERSAL �ʥ�������� ASN.1 �ͤϤ��Υ��饹��2�ĤΥ��֥��饹��
-[[c:OpenSSL::ASN1::Primitive]] �⤷���� [[c:OpenSSL::ASN1::Constructive]]
-�Υ��󥹥��󥹤Ȥ���ɽ������ޤ���
+UNIVERSAL なタグを持つ ASN.1 値はこのクラスの2つのサブクラス、
+[[c:OpenSSL::ASN1::Primitive]] もしくは [[c:OpenSSL::ASN1::Constructive]]
+のインスタンスとして表現されます。
 
-����ʳ����ͤϤ��Υ��饹�Υ��󥹥��󥹤Ȥ���ɽ������ޤ���
+それ以外の値はこのクラスのインスタンスとして表現されます。
 
 == Class Methods
 --- new(value, tag, tag_class) -> OpenSSL::ASN1::ASN1Data
-ASN.1 �ͤ�ɽ������ [[c:OpenSSL::ASN1::ASN1Data]] ���֥������Ȥ�
-�������ޤ���
+ASN.1 値を表現する [[c:OpenSSL::ASN1::ASN1Data]] オブジェクトを
+生成します。
 
-�̾� UNIVERSAL �ʥ������饹����� ASN.1 �ͤϤ��Υ��饹�Υ��֥��饹��
-ɽ������뤿�ᡢtag_class �Ϥ���ʳ�(:CONTEXT_SPECIFIC��:APPLICATION��
-:PRIVATE �Τ����줫)����ꤷ�ޤ���
+通常 UNIVERSAL なタグクラスを持つ ASN.1 値はこのクラスのサブクラスで
+表現されるため、tag_class はそれ以外(:CONTEXT_SPECIFIC、:APPLICATION、
+:PRIVATE のいずれか)を指定します。
 
-value �Ȥ��Ƥϡ��̾��ʸ����(IMPLICIT tagging ����)
-�⤷���� OpenSSL::ASN1::ASN1Data ������(IMPLICIT tagging����)
-����ꤷ�ޤ���
+value としては、通常は文字列(IMPLICIT tagging 相当)
+もしくは OpenSSL::ASN1::ASN1Data の配列(IMPLICIT tagging相当)
+を指定します。
 
-@param value ���Υ��֥������Ȥ�ɽ��������
-@param tag ����
-@param tag_class �������饹
+@param value そのオブジェクトが表現する値
+@param tag タグ
+@param tag_class タグクラス
 == Instance Methods
 
 --- value -> object
-ASN.1 �ͤ��б�����Ruby�Υ��֥������Ȥ��֤��ޤ���
+ASN.1 値に対応するRubyのオブジェクトを返します。
 
 @see [[m:OpenSSL::ASN1::ASN1Data#value=]]
 
 --- value=(value)
-ASN.1 �ͤ��б�����Ruby�Υ��֥������Ȥ��ѹ����ޤ���
+ASN.1 値に対応するRubyのオブジェクトを変更します。
 
-@param value ���ꤹ�륪�֥�������
+@param value 設定するオブジェクト
 @see [[m:OpenSSL::ASN1::ASN1Data#value]]
 --- tag -> Integer
-�����ֹ���֤��ޤ���
+タグ番号を返します。
 
-�����ֹ�Ǥ���Universal ���ξ��� BOOLEAN = 1 ���� BMPSTRING = 30 
-�Τ����줫���ͤ�Ȥ�ޤ���
+タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 
+のいずれかの値をとります。
 
 @see [[m:OpenSSL::ASN1::ASN1Data#tag=]]
 --- tag=(tag)
-�����ֹ�����ꤷ�ޤ���
+タグ番号を設定します。
 
-@param tag ���ꤹ�륿���ֹ�
+@param tag 設定するタグ番号
 @see [[m:OpenSSL::ASN1::ASN1Data#tag]]
 
 --- tag_class -> Symbol
-�������饹���֤��ޤ���
+タグクラスを返します。
 
-:UNIVERSAL��:CONTEXT_SPECIFIC��:APPLICATION, :PRIVATE �Τ����줫���֤��ޤ���
+:UNIVERSAL、:CONTEXT_SPECIFIC、:APPLICATION, :PRIVATE のいずれかを返します。
 
 @see [[m:OpenSSL::ASN1::ASN1Data#tag_class=]]
 --- tag_class=(tag_class)
-�������饹�����ꤷ�ޤ���
+タグクラスを設定します。
 
-@param tag_class ���ꤹ�륿�����饹��:UNIVERSAL��:ONTEXT_SPECIFIC��:APPLICATION��:PRIVATE �Τ����줫
+@param tag_class 設定するタグクラス。:UNIVERSAL、:ONTEXT_SPECIFIC、:APPLICATION、:PRIVATE のいずれか
 @see [[m:OpenSSL::ASN1::ASN1Data#tag_class]]
 
 --- to_der -> String
-ASN.1 �ͤ� DER ɽ�����֤��ޤ���
+ASN.1 値の DER 表現を返します。
 
 @see [[m:OpenSSL::ASN1.decode]]

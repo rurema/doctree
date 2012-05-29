@@ -1,6 +1,6 @@
-YAML ��Ϣ�Υ��顼�򰷤�����Υ��֥饤�֥��Ǥ���
+YAML 関連のエラーを扱うためのサブライブラリです。
 
-#@# YAML::ERROR_NO_HEADER_NODE �ʤɤϻ��Ѥ���Ƥ��ʤ����ᡢ��ά������
+#@# YAML::ERROR_NO_HEADER_NODE などは使用されていないため、省略した。
 
 #@since 1.9.2
 = class Syck::Error < StandardError
@@ -8,7 +8,7 @@ YAML ��Ϣ�Υ��顼�򰷤�����Υ��֥饤�֥��Ǥ���
 = class YAML::Error < StandardError
 #@end
 
-�տޤ��ʤ����Ϥ��᥽�åɤ�Ϳ����줿���ʤɤ�ȯ�����ޤ���
+意図しない入力がメソッドに与えられた時などに発生します。
 
 #@since 1.9.2
 = class Syck::ParseError < Syck::Error
@@ -16,7 +16,7 @@ YAML ��Ϣ�Υ��顼�򰷤�����Υ��֥饤�֥��Ǥ���
 = class YAML::ParseError < YAML::Error
 #@end
 
-����Τ����ͽ�󤵤�Ƥ��ޤ������ߤ�ȯ�����ޤ���
+将来のために予約されています。現在は発生しません。
 
 #@since 1.9.2
 = class Syck::TypeError < StandardError
@@ -24,4 +24,4 @@ YAML ��Ϣ�Υ��顼�򰷤�����Υ��֥饤�֥��Ǥ���
 = class YAML::TypeError < StandardError
 #@end
 
-�տޤ��ʤ����Ϥ��᥽�åɤ�Ϳ����줿���ʤɤ�ȯ�����ޤ���
+意図しない入力がメソッドに与えられた時などに発生します。

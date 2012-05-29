@@ -1,10 +1,10 @@
 require irb/cmd/load
 require irb/ext/loader
 
-load �ޤ��� require ���� irb �Υե������ɤ߹��ߵ�ǽ(irb_load��
-irb_require)��Ȥ��褦�����ꤹ�뵡ǽ���󶡤��륵�֥饤�֥��Ǥ���
+load または require 時に irb のファイル読み込み機能(irb_load、
+irb_require)を使うように設定する機能を提供するサブライブラリです。
 
-���Υ饤�֥����������Ƥ���᥽�åɤϥ桼����ľ�ܻ��Ѥ����ΤǤϤ���ޤ���
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
 = reopen IRB::ExtendCommandBundle
 
@@ -12,15 +12,15 @@ irb_require)��Ȥ��褦�����ꤹ�뵡ǽ���󶡤��륵�֥饤�֥��Ǥ���
 
 --- irb_load(*opts, &b) -> nil
 
-���ߤ� irb �˴ؤ��� [[c:IRB::Context]] ���Ф��� irb_load ���ޥ�ɤ�¹�
-���ޤ���
+現在の irb に関する [[c:IRB::Context]] に対して irb_load コマンドを実行
+します。
 
 @see [[m:IRB::ExtendCommand::Load#execute]]
 
 --- irb_require(*opts, &b) -> bool
 
-���ߤ� irb �˴ؤ��� [[c:IRB::Context]] ���Ф��� irb_require ���ޥ�ɤ�
-�¹Ԥ��ޤ���
+現在の irb に関する [[c:IRB::Context]] に対して irb_require コマンドを
+実行します。
 
 @see [[m:IRB::ExtendCommand::Require#execute]]
 
@@ -31,24 +31,24 @@ irb_require)��Ȥ��褦�����ꤹ�뵡ǽ���󶡤��륵�֥饤�֥��Ǥ���
 --- use_loader  -> bool
 --- use_loader? -> bool
 
-load �ޤ��� require ���� irb �Υե������ɤ߹��ߵ�ǽ(irb_load��
-irb_require)��Ȥ����ɤ������֤��ޤ���
+load または require 時に irb のファイル読み込み機能(irb_load、
+irb_require)を使うかどうかを返します。
 
-#@# �ʲ����ɤ�⤽���ʤΤǾ�ά������ irb �ޤǤ�ȿ�Ǥ���ʤ��ä���
-#@# use_loader ���ͤ� irb ���Τ�ȿ�Ǥ���ޤ���
+#@# 以下、どれもそうなので省略。サブ irb までは反映されなかった。
+#@# use_loader の値は irb 全体に反映されます。
 
 @see [[m:IRB::Context#use_loader=]]
 
 --- use_loader=(opt)
 
-load �ޤ��� require ���� irb �Υե������ɤ߹��ߵ�ǽ(irb_load��
-irb_require)��Ȥ����ɤ��������ꤷ�ޤ���
+load または require 時に irb のファイル読み込み機能(irb_load、
+irb_require)を使うかどうかを設定します。
 
-.irbrc �ե�������� IRB.conf[:USE_LOADER] �����ꤹ����Ǥ�Ʊ�ͤλ�����
-���ޤ���
+.irbrc ファイル中で IRB.conf[:USE_LOADER] を設定する事でも同様の事が行
+えます。
 
-#@# use_loader ���ͤ� irb ���Τ�ȿ�Ǥ���ޤ���
+#@# use_loader の値は irb 全体に反映されます。
 
-�ǥե�����ͤ� false �Ǥ���
+デフォルト値は false です。
 
 @see [[m:IRB::Context#use_loader?]]

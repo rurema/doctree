@@ -1,25 +1,25 @@
-= �Ķ��ѿ�
+= 環境変数
 
-Ruby���󥿥ץ꥿�ϰʲ��δĶ��ѿ��򻲾Ȥ��ޤ���
+Rubyインタプリタは以下の環境変数を参照します。
 
 
 : RUBYOPT
- Ruby���󥿥ץ꥿�˥ǥե���Ȥ��Ϥ����ץ�������ꤷ�ޤ���
+ Rubyインタプリタにデフォルトで渡すオプションを指定します。
 
- sh��
+ sh系
 
 //emlist{
       RUBYOPT='-Ke -rkconv'
       export RUBYOPT
 //}
 
- csh��
+ csh系
 
 //emlist{
       setenv RUBYOPT '-Ke -rkconv'
 //}
 
- MS-DOS��
+ MS-DOS系
 
 //emlist{
       set RUBYOPT=-Ke -rkconv
@@ -27,25 +27,25 @@ Ruby���󥿥ץ꥿�ϰʲ��δĶ��ѿ��򻲾Ȥ��ޤ���
 
 : RUBYPATH
 
-  -S ���ץ���������ˡ��Ķ��ѿ� PATH �ˤ��
-  Ruby ������ץȤ�õ���˲ä��ơ����δĶ��ѿ��ǻ��ꤷ���ǥ��쥯�ȥ��
-  õ���оݤˤʤ�ޤ���(PATH ���ͤ���ͥ�褷�ޤ�)��
-  ��ư���ץ����ξܺ٤˴ؤ��Ƥ�[[d:spec/rubycmd]] �򻲾Ȥ��Ƥ���������
+  -S オプション指定時に、環境変数 PATH による
+  Ruby スクリプトの探索に加えて、この環境変数で指定したディレクトリも
+  探索対象になります。(PATH の値よりも優先します)。
+  起動オプションの詳細に関しては[[d:spec/rubycmd]] を参照してください。
 
-  sh��
+  sh系
 
 //emlist{
       RUBYPATH=$HOME/ruby:/opt/ruby
       export RUBYPATH
 //}
 
-  csh��
+  csh系
 
 //emlist{
       setenv RUBYPATH $HOME/ruby:/opt/ruby
 //}
 
-  MS-DOS��
+  MS-DOS系
 
 //emlist{
       set RUBYPATH=%HOME%\ruby:\opt\ruby
@@ -53,23 +53,23 @@ Ruby���󥿥ץ꥿�ϰʲ��δĶ��ѿ��򻲾Ȥ��ޤ���
 
 : RUBYLIB
 
-  Ruby�饤�֥���õ���ѥ�[[m:$:]]�Υǥե���
-  ���ͤ����ˤ��δĶ��ѿ����ͤ��դ�­���ޤ���
+  Rubyライブラリの探索パス[[m:$:]]のデフォル
+  ト値の前にこの環境変数の値を付け足します。
 
-  sh��
+  sh系
 
 //emlist{
       RUBYLIB=$HOME/ruby/lib:/opt/ruby/lib
       export RUBYLIB
 //}
 
-  csh��
+  csh系
 
 //emlist{
       setenv RUBYLIB $HOME/ruby/lib:/opt/ruby/lib
 //}
 
-  MS-DOS��
+  MS-DOS系
 
 //emlist{
       set RUBYLIB=%HOME%\ruby\lib:\opt\ruby\lib
@@ -78,20 +78,20 @@ Ruby���󥿥ץ꥿�ϰʲ��δĶ��ѿ��򻲾Ȥ��ޤ���
 : RUBYLIB_PREFIX
 
 #@since 1.9.1
-  ���δĶ��ѿ��� [[d:platform/Cygwin]]�ǡ�[[d:platform/mswin32]]�ǡ�
-  [[d:platform/mingw32]]�Ǥ�ruby�ǤΤ�ͭ���Ǥ���
+  この環境変数は [[d:platform/Cygwin]]版、[[d:platform/mswin32]]版、
+  [[d:platform/mingw32]]版のrubyでのみ有効です。
 #@else
-  ���δĶ��ѿ��� [[d:platform/DJGPP]]�ǡ�[[d:platform/Cygwin]]�ǡ�[[d:platform/mswin32]]�ǡ�
-  [[d:platform/mingw32]]�Ǥ�ruby�ǤΤ�ͭ���Ǥ���
+  この環境変数は [[d:platform/DJGPP]]版、[[d:platform/Cygwin]]版、[[d:platform/mswin32]]版、
+  [[d:platform/mingw32]]版のrubyでのみ有効です。
 #@end
 
-  ���δĶ��ѿ����ͤϡ�path1;path2 ���뤤�� path1 path2 �Ȥ��������ǡ�
-  Ruby�饤�֥���õ���ѥ�[[m:$:]]����Ƭ��ʬ
-  ��path1�˥ޥå��������ˡ������path2���֤������ޤ���
-  ((-���ߤμ����Ǥϥ饤�֥��Υѥ��� prefix �� ruby.exe �� ruby.dll �Τ�����֤���
-  ����Ū�˵���ΤǤ��δĶ��ѿ���ɬ�����Ϥʤ��ʤäƤ��ޤ�-))
+  この環境変数の値は、path1;path2 あるいは path1 path2 という形式で、
+  Rubyライブラリの探索パス[[m:$:]]の先頭部分
+  がpath1にマッチした場合に、これをpath2に置き換えます。
+  ((-現在の実装ではライブラリのパスの prefix を ruby.exe や ruby.dll のある位置から
+  相対的に求めるのでこの環境変数の必要性はなくなっています-))
 
-  MS-DOS��
+  MS-DOS系
 
 //emlist{
       set RUBYLIB_PREFIX=/usr/local/lib/ruby;d:/ruby
@@ -100,20 +100,20 @@ Ruby���󥿥ץ꥿�ϰʲ��δĶ��ѿ��򻲾Ȥ��ޤ���
 : RUBYSHELL
 
 #@since 1.9.1
-  ���δĶ��ѿ��� [[d:platform/mswin32]]�ǡ�[[d:platform/mingw32]]�Ǥ�ruby��
-  �Τ�ͭ���Ǥ���
+  この環境変数は [[d:platform/mswin32]]版、[[d:platform/mingw32]]版のrubyで
+  のみ有効です。
 #@else
-  ���δĶ��ѿ��� [[d:platform/OS2]]�ǡ�[[d:platform/mswin32]]�ǡ�[[d:platform/mingw32]]�Ǥ�ruby��
-  �Τ�ͭ���Ǥ���
+  この環境変数は [[d:platform/OS2]]版、[[d:platform/mswin32]]版、[[d:platform/mingw32]]版のrubyで
+  のみ有効です。
 #@end
 
-  [[m:Kernel.#system]] �ǥ��ޥ�ɤ�¹Ԥ���Ȥ��˻��Ѥ��륷����
-  ����ꤷ�ޤ������δĶ��ѿ�����ά����Ƥ����COMSPEC���ͤ�
-  ���Ѥ��ޤ���
+  [[m:Kernel.#system]] でコマンドを実行するときに使用するシェル
+  を指定します。この環境変数が省略されていればCOMSPECの値を
+  使用します。
 
 : PATH
 
-  [[m:Kernel.#system]]�ʤɤǥ��ޥ�ɤ�¹Ԥ���Ȥ��˸�������ѥ��Ǥ���
-  ���ꤵ��Ƥ��ʤ��Ȥ�(nil�ΤȤ�)��
+  [[m:Kernel.#system]]などでコマンドを実行するときに検索するパスです。
+  設定されていないとき(nilのとき)は
   "/usr/local/bin:/usr/ucb:/usr/bin:/bin:."
-  �Ǹ�������ޤ���
+  で検索されます。

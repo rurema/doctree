@@ -4,70 +4,70 @@
 
 include Enumerable
 
-CSV���ɤ߹��߻��Υ١����Ȥʤ륯�饹
+CSVの読み込み時のベースとなるクラス
 
 == Class Methods
 
 --- parse(str_or_readable, fs = ',', rs = nil) -> CSV::StringReader
 --- parse(str_or_readable, fs = ',', rs = nil) {|row| ... } -> nil
 
-CSV�ǡ�������Ϥ��ơ�[[c:CSV::StringReader]]���֤��ޤ���
-�֥��å����Ϥ��줿���ϥѡ���������̤�1�󤺤�Array�Ȥ����Ϥ��ޤ���
+CSVデータを解析して、[[c:CSV::StringReader]]を返します。
+ブロックに渡された場合はパースした結果を1列ずつArrayとして渡します。
 
-@param str_or_readable �ѡ��������оݤ�ʸ����
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param str_or_readable パースする対象の文字列
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�����̤��ޤ���
-�㤨�С�a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なしを区別します。
+例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
-��:
+例:
   CSV::Reader.parse("1,2,3\nA,B,C\n"){|row|
     p row
   }
 
 --- create(str_or_readable, fs = ',', rs = nil) -> CSV::StringReader
 
-CSV�ǡ�������Ϥ��ơ����Ϸ�̤��Ǽ����[[c:CSV::StringReader]]���֤��ޤ���
+CSVデータを解析して、解析結果を格納した[[c:CSV::StringReader]]を返します。
 
-@param str_or_readable �ѡ��������оݤ�ʸ����
-@param fs �ե�����ɥ��ѥ졼���λ��ꡣ
-          nil (�ǥե����) �� ',' �򥻥ѥ졼���Ȥ��ޤ���
-@param rs �Զ��ڤ�ʸ���λ��ꡣnil (�ǥե����) �� CrLf / Lf��
-          Cr ��Զ��ڤ�Ȥ��������� ?\r ���Ϥ��ޤ���
+@param str_or_readable パースする対象の文字列
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 == Instance Methods
 
 --- each {|row| ... } -> nil
-���Ȥ��� 1 �Ԥ����ɤ߹��ߡ����������Ȥ���Ϳ����줿�֥��å���¹Ԥ��ޤ���
+自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
 
 --- shift -> Array
-CSV��ѡ���������̤���1��ʬ�����������������1�Ԥ�����Ȥ����֤��ޤ���
-shift���˲�Ū�᥽�åɤǤ���
+CSVをパースした結果から1行分を取り除き、取り除いた1行を配列として返します。
+shiftは破壊的メソッドです。
 
-===== ����
+===== 注意
 
-�ѡ�������""(��ʸ��)���ͤʤ�����̤��ޤ���
-�㤨�С�a, "", , b �ιԤ�ѡ����������ˤ� ["a", "", nil, "b"] ��������֤��ޤ���
+パース時に""(空文字)と値なしを区別します。
+例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
 --- close -> nil
-����Ū��terminate�᥽�åɤ�ƤӽФ��ޤ���
+内部的にterminateメソッドを呼び出します。
 
 == Private Instance Methods
 
 --- initialize(dev) -> ()
-�ܥ᥽�åɤϺ���� or ���֥��饹���������뤳�Ȥ����ꤵ��Ƥ��ޤ���
-����������˸ƤӽФ��������㳰RuntimeError��ȯ�����ޤ���
+本メソッドは再定義 or サブクラスで定義されることを想定されています。
+再定義せずに呼び出した場合は例外RuntimeErrorが発生します。
 
 --- get_row(row) -> ()
-�ܥ᥽�åɤϺ���� or ���֥��饹���������뤳�Ȥ����ꤵ��Ƥ��ޤ���
-����������˸ƤӽФ��������㳰NotImplementedError��ȯ�����ޤ���
+本メソッドは再定義 or サブクラスで定義されることを想定されています。
+再定義せずに呼び出した場合は例外NotImplementedErrorが発生します。
 
 --- terminate -> ()
-��λ��������Ԥ����˺�������Ƥ���������
+終了時処理を行う場合に再定義してください。
 
 #@end

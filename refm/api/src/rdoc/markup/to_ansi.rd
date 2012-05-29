@@ -1,5 +1,5 @@
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò ANSI ¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤Ç¿§ÉÕ¤±¤¹¤ë¥µ¥Ö¥é¥¤
-¥Ö¥é¥ê¤Ç¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ ANSI ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã§è‰²ä»˜ã‘ã™ã‚‹ã‚µãƒ–ãƒ©ã‚¤
+ãƒ–ãƒ©ãƒªã§ã™ã€‚
 
 #@until 1.9.3
   require 'rdoc/markup/formatter'
@@ -9,12 +9,12 @@ RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò ANSI ¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤Ç¿§ÉÕ¤±¤¹¤ë¥µ¥Ö¥é¥¤
   h = RDoc::Markup::ToAnsi.new
   puts h.convert(input_string)
 
-ÊÑ´¹¤·¤¿·ë²Ì¤ÏÊ¸»úÎó¤Ç¼èÆÀ¤Ç¤­¤Þ¤¹¡£
+å¤‰æ›ã—ãŸçµæžœã¯æ–‡å­—åˆ—ã§å–å¾—ã§ãã¾ã™ã€‚
 
 = class RDoc::Markup::ToAnsi < RDoc::Markup::ToRdoc
 
-RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò ANSI ¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤Ç¿§ÉÕ¤±¤¹¤ë¥¯¥é¥¹¤Ç
-¤¹¡£
+RDoc å½¢å¼ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ ANSI ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã§è‰²ä»˜ã‘ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§
+ã™ã€‚
 
 == Class Methods
 
@@ -24,9 +24,9 @@ RDoc ·Á¼°¤Î¥É¥­¥å¥á¥ó¥È¤ò ANSI ¥¨¥¹¥±¡¼¥×¥·¡¼¥±¥ó¥¹¤Ç¿§ÉÕ¤±¤¹¤ë¥¯¥é¥¹¤Ç
 --- new -> RDoc::Markup::ToAnsi
 #@end
 
-¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
+è‡ªèº«ã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
 
 #@since 1.9.3
-@param markup [[c:RDoc::Markup]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç
-              ¤Ï¿·¤·¤¯ºîÀ®¤·¤Þ¤¹¡£
+@param markup [[c:RDoc::Markup]] ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã—ã¾ã™ã€‚çœç•¥ã—ãŸå ´åˆ
+              ã¯æ–°ã—ãä½œæˆã—ã¾ã™ã€‚
 #@end

@@ -1,21 +1,21 @@
 = class DL::Handle < Object
 
-�����ץ󤵤줿�����ʥߥå��饤�֥���ɽ�����饹�Ǥ���
-[[man:dlopen(3)]] ���֤��ϥ�ɥ顼�Υ�åѡ��Ǥ���
+オープンされたダイナミックライブラリを表すクラスです。
+[[man:dlopen(3)]] が返すハンドラーのラッパーです。
 
 == Class Methods
 
 --- new(lib)                    -> DL::Handle
 --- new(lib) {|handle| ... }    -> DL::Handle
 
-�饤�֥�� lib �򥪡��ץ󤷡�Handle ���֥������ȤȤ����֤��ޤ���
+ライブラリ lib をオープンし、Handle オブジェクトとして返します。
 
-�֥��å�����ꤹ��С��������� Handle ������Ȥ��ƥ֥��å���¹Ԥ��ޤ���
-Handle �ϥ֥��å��ν���Ǽ�ưŪ�˥�����������ޤ���
+ブロックを指定すれば、生成した Handle を引数としてブロックを実行します。
+Handle はブロックの終りで自動的にクローズされます。
 
-@param lib �饤�֥���ʸ����ǻ��ꤷ�ޤ���
+@param lib ライブラリを文字列で指定します。
 
-��:
+例:
 
  require 'dl'
 
@@ -28,24 +28,24 @@ Handle �ϥ֥��å��ν���Ǽ�ưŪ�˥�����������ޤ���
 
 --- close    -> Integer
 
-���Ȥ򥯥��������ޤ��������������� 0 ���֤��ޤ��������Ǥʤ����ϡ�
-0 �ʳ����������֤��ޤ���
+自身をクローズします。成功した場合は 0 を返します。そうでない場合は、
+0 以外の整数を返します。
 
 --- enable_close     -> nil
 --- disable_close    -> nil
 
-GC �ˤ�륪�֥������Ȥβ�����˼��Ȥ򥯥��������뤫�ɤ�������ꤷ�ޤ���
+GC によるオブジェクトの回収時に自身をクローズするかどうかを指定します。
 
 --- sym(func) -> Integer
 --- [](func)  -> Integer
 
-�ؿ��䥰�����Х��ѿ� func �ؤΥݥ��󥿤�������������Ȥ����֤��ޤ���
+関数やグローバル変数 func へのポインタを取得し、整数として返します。
 
-@param func ����������ܥ��̾����ʸ�����Ϳ���ޤ���
+@param func 得たいシンボルの名前を文字列で与えます。
 
-@raise RuntimeError ����ܥ뤬���Ĥ���ʤ��ä�����ȯ�����ޤ���
+@raise RuntimeError シンボルが見つからなかった時に発生します。
 
-��:
+例:
 
  require 'dl'
 
@@ -57,4 +57,4 @@ GC �ˤ�륪�֥������Ȥβ�����˼��Ȥ򥯥��������뤫�ɤ�������ꤷ�ޤ���
 
 --- to_i    -> Integer
 
-���Ȥ�ɽ���ϥ�ɥ�([[man:dlopen(3)]] ���֤������)�Υ��ɥ쥹���֤��ޤ���
+自身が表すハンドル([[man:dlopen(3)]] が返したもの)のアドレスを返します。

@@ -12,17 +12,17 @@ require wsdl/info
 --- op_name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- optype_name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parts
 #@todo
 
-Â°À­
+å±žæ€§
 
 = class WSDL::Operation < WSDL::Info
 
@@ -36,12 +36,12 @@ require wsdl/info
 --- fault
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- input
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- input_info
 #@todo
@@ -59,12 +59,12 @@ require wsdl/info
 --- name
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- output
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- output_info
 #@todo
@@ -81,7 +81,7 @@ require wsdl/info
 --- parameter_order
 #@todo
 
-Â°À­
+å±žæ€§
 
 --- parse_attr(attr, value)
 #@todo
@@ -98,7 +98,7 @@ require wsdl/info
 --- type
 #@todo
 
-Â°À­
+å±žæ€§
 
 == Private Instance Methods
 

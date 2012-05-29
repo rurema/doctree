@@ -1,16 +1,16 @@
-HTML �Τ���Υ桼�ƥ���ƥ��ؿ����󶡤��ޤ���
+HTML のためのユーティリティ関数を提供します。
 
 = module WEBrick::HTMLUtils
 
-HTML �Τ���Υ桼�ƥ���ƥ��ؿ����󶡤��ޤ���
+HTML のためのユーティリティ関数を提供します。
 
 == Module Functions
 
 --- escape(string)    -> String
 
-���ꤵ�줿ʸ����˴ޤޤ�� ", &, <, > ��ʸ�����λ��Ȥ��Ѵ�����ʸ�����
-���������֤��ޤ���
+指定された文字列に含まれる ", &, <, > を文字実体参照に変換した文字列を
+生成して返します。
 
-@param string ���������פ�����ʸ�������ꤷ�ޤ���
+@param string エスケープしたい文字列を指定します。
 
   p WEBrick::HTMLUtils.escape('/?q=foo&hl=<ja>')    #=> "/?q=foo&amp;hl=&lt;ja&gt;"

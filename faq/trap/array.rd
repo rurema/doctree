@@ -2,9 +2,9 @@
 
 * Array.new([size[, val]])
 
-  ����� ((|val|)) �ϡ����Υ��ԡ��ǽ��������櫓�ǤϤʤ����Ȥ���
-  �դ��Ƥ����������ʲ��Τ褦�ˤ��٤Ƥ����Ǥ�Ʊ�����֥������Ȥ�ؤ�
-  �ޤ���
+  初期値 ((|val|)) は、そのコピーで初期化するわけではないことに注
+  意してください。以下のようにすべての要素は同じオブジェクトを指し
+  ます。
 
     ary = Array.new(3, "foo")
     p ary   # => ["foo", "foo", "foo"]
@@ -13,23 +13,23 @@
          537713734
          537713734
 
-  �������äơ����Τ褦����������ǤΤ���1�Ĥ��˲�Ū���ѹ�����С�
-  ���٤Ƥ����Ǥ��ѹ�����ޤ���
+  したがって、このような配列の要素のうち1つを破壊的に変更すれば、
+  すべての要素が変更されます。
 
     ary = Array.new(3, "foo")
     ary[0].replace "bar"
     p ary
     # => ["bar", "bar", "bar"]
 
-  ������򤱤�ˤ��㤨�аʲ��Τ褦�ˤ��ޤ���
+  これを避けるには例えば以下のようにします。
 
     ary = Array.new(3).collect { "foo" }
     ary[0].replace "bar"
     p ary
     # => ["bar", "foo", "foo"]
 
-  ((<ruby 1.7 feature>)): version 1.7 �Ǥϡ��֥��å�����ꤹ�뤳�ȤǤ�
-  ����򤱤뤳�Ȥ��Ǥ��ޤ���
+  ((<ruby 1.7 feature>)): version 1.7 では、ブロックを指定することでこ
+  れを避けることができます。
 
     ary = Array.new(3) { "foo" }
     p ary   # => ["foo", "foo", "foo"]
@@ -40,7 +40,7 @@
 
 * self * times
 
-  Array.new ��Ʊ�ͤǤ���
+  Array.new と同様です。
 
     ary = ["foo"] * 3
     ary[0].replace "bar"
@@ -49,15 +49,15 @@
 
 * Array#fill(val)
 
-  Array.new ��Ʊ�ͤǤ���
+  Array.new と同様です。
 
     ary = Array.new(3).fill("foo")
     ary[0].replace "bar"
     p ary
     # => ["bar", "bar", "bar"]
 
-  ((<ruby 1.7 feature>)): Array.new ��Ʊ�͡��֥��å��Ǥ�����򤱤뤳��
-  ���Ǥ��ޤ���
+  ((<ruby 1.7 feature>)): Array.new と同様、ブロックでこれを避けること
+  ができます。
 
     ary = Array.new(3).fill { "foo" }
     ary[0].replace "bar"
@@ -66,12 +66,12 @@
 
 * Array#<=>
 
-  Array��(({<=>}))�᥽�åɤ���äƤ��ޤ�����Comparable�ǤϤ���ޤ���
+  Arrayは(({<=>}))メソッドを持っていますが、Comparableではありません。
   (((<ruby-list:18470>)),((<ruby-dev:8261>)),((<ruby-dev:2173>)))
 
 * Array#uniq
 
-  ((<Object/hash>))�᥽�åɤ�((<Object/eql?>))���������Ƥ��ʤ����饹��
-  ���֥������Ȥ����ǤȤ��ƻ��ľ�硢�פä��ۤ����Ǥ�����ʤ����Ȥ�����ޤ���
+  ((<Object/hash>))メソッドと((<Object/eql?>))を再定義していないクラスの
+  オブジェクトを要素として持つ場合、思ったほど要素が減らないことがあります。
 
     [Hash.new, Hash.new].uniq #=> [{}, {}]

@@ -1,28 +1,28 @@
 = class Binding < Object
 
-���������ѿ��Υơ��֥�� self���⥸�塼��Υͥ��Ȥʤɤξ������
-�����륪�֥������ȤΥ��饹�Ǥ���
+ローカル変数のテーブルと self、モジュールのネストなどの情報を保
+持するオブジェクトのクラスです。
 
-�Ȥ߹��ߴؿ� [[m:Kernel.#binding]] �ˤ��
-�ƤΤ��������졢[[m:Kernel.#eval]] ���� 2 �����˻��Ѥ��ޤ���
-�ޤ��ȥåץ�٥�� Binding ���֥������ȤȤ����Ȥ߹������
-[[m:Kernel::TOPLEVEL_BINDING]] ���Ѱդ���Ƥ��ޤ���
+組み込み関数 [[m:Kernel.#binding]] によっ
+てのみ生成され、[[m:Kernel.#eval]] の第 2 引数に使用します。
+またトップレベルの Binding オブジェクトとして組み込み定数
+[[m:Kernel::TOPLEVEL_BINDING]] が用意されています。
 
 == Instance Methods
 
 #@since 1.8.7
 --- eval(expr, fname = __FILE__, lineno = 1)    -> object
 
-���Ȥ򥳥�ƥ����ȤȤ�ʸ���� expr �� 
-Ruby �ץ������Ȥ���ɾ�������η�̤��֤��ޤ���
-�Ȥ߹��ߴؿ� [[m:Kernel.#eval]] ��Ȥä�
-eval(expr, self, fname, lineno) �Ȥ���Τ�Ʊ���Ǥ���
+自身をコンテキストとし文字列 expr を 
+Ruby プログラムとして評価しその結果を返します。
+組み込み関数 [[m:Kernel.#eval]] を使って
+eval(expr, self, fname, lineno) とするのと同じです。
 
-@param expr  ɾ������������ʸ�����Ϳ���ޤ���
+@param expr  評価したい式を文字列で与えます。
 
-@param fname �ե�����̾��ʸ�����Ϳ���ޤ����� expr �� fname �Ȥ����ե�����̾�ˤ��뤫�Τ褦�˼¹Ԥ���ޤ���
+@param fname ファイル名を文字列で与えます。式 expr が fname というファイル名にあるかのように実行されます。
 
-@param lineno ���ֹ��������Ϳ���ޤ����� expr ����Ƭ�Ԥι��ֹ椬 lineno �Ǥ��뤫�Τ褦�˼¹Ԥ���ޤ���
+@param lineno 行番号を整数で与えます。式 expr の先頭行の行番号が lineno であるかのように実行されます。
 
  def getBinding(str)
    return binding

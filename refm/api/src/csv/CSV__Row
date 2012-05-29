@@ -3,14 +3,14 @@
 extend Forwardable
 include Enumerable
 
-[[c:CSV::Row]] �������ϥå���Τ褦�˻��Ƥ��ޤ���
+[[c:CSV::Row]] は配列やハッシュのように似ています。
 
-����Τ褦�˥ե�����ɤν�����ݻ����Ƥ��ơ�ʣ���������Ǥ��ޤ���
-�ޤ����ϥå���Τ褦��̾���ǥե�����ɤ˥��������������Ǥ��ޤ���
+配列のようにフィールドの順序を保持していて、複製する事もできます。
+また、ハッシュのように名前でフィールドにアクセスする事もできます。
 
-�إå��Ԥν�����ͭ���Ǥ������ [[c:CSV]] �����֤�������ƤιԤϤ��Υ��饹�Υ��󥹥��󥹤Ǥ���
+ヘッダ行の処理が有効である場合は [[c:CSV]] から返される全ての行はこのクラスのインスタンスです。
 
-�ʲ��Υ᥽�åɤ� [[c:Array]] �˰Ѿ����ޤ���
+以下のメソッドを [[c:Array]] に委譲します。
 
   * empty?()
   * length()
@@ -20,16 +20,16 @@ include Enumerable
 
 --- new(headers, fields, header_row = false) -> CSV::Row
 
-���Ȥ��������ޤ���
+自身を初期化します。
 
-����������¾�����������û����硢��­���Ƥ���Ȥ����� nil �ˤʤ�ޤ���
+一方の配列が他方の配列よりも短い場合、不足しているところは nil になります。
 
-@param headers �إå����������ꤷ�ޤ���
+@param headers ヘッダの配列を指定します。
 
-@param fields �ե�����ɤ��������ꤷ�ޤ���
+@param fields フィールドの配列を指定します。
 
-@param header_row �إå��ԤǤ�����Ͽ�����ꤷ�ޤ��������Ǥʤ����ϵ�����ꤷ�ޤ���
-                  �ǥե���Ȥϵ��Ǥ���
+@param header_row ヘッダ行である場合は真を指定します。そうでない場合は偽を指定します。
+                  デフォルトは偽です。
 
 @see [[m:CSV::Row#header_row?]], [[m:CSV::Row#field_row?]]
 
@@ -37,113 +37,113 @@ include Enumerable
 
 --- <<(arg) -> self
 
-���Ȥ�Ϳ����줿�ǡ������ɲä��ޤ���
+自身に与えられたデータを追加します。
 
-@param arg 2 ���Ǥ����� 1 ���ǤΥϥå��夫Ǥ�դΥ��֥������Ȥ���ꤷ�ޤ���
-           2 ���Ǥ������Ϳ�������ϡ��إå��ȥե�����ɤΥڥ����ɲä��ޤ���
-           1 ���ǤΥϥå����Ϳ�������ϡ�������إå����ͤ�ե�����ɤȤ����ɲä��ޤ���
-           ����ʳ��ξ��ϡ��إå��� nil ���ե�����ɤ�Ϳ����줿�ͤȤ����ɲä��ޤ���
+@param arg 2 要素の配列か 1 要素のハッシュか任意のオブジェクトを指定します。
+           2 要素の配列を与えた場合は、ヘッダとフィールドのペアを追加します。
+           1 要素のハッシュを与えた場合は、キーをヘッダ、値をフィールドとして追加します。
+           それ以外の場合は、ヘッダを nil 、フィールドを与えられた値として追加します。
 
-@return �᥽�åɥ�������Τ���˼��Ȥ��֤��ޤ���
+@return メソッドチェーンのために自身を返します。
 
 --- ==(other) -> bool
 
-���Ȥ� other ��Ʊ���إå���ե�����ɤ���ľ��˿����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身が other と同じヘッダやフィールドを持つ場合に真を返します。
+そうでない場合は偽を返します。
 
-@param other ����оݤ� [[c:CSV::Row]] �Υ��󥹥��󥹤���ꤷ�ޤ���
+@param other 比較対象の [[c:CSV::Row]] のインスタンスを指定します。
 
 --- field(header_or_index, minimum_index = 0) -> object | nil
 --- [](header_or_index, minimum_index = 0) -> object | nil
 
-�إå���̾��������ǥå������ͤ�������ޤ����ե�����ɤ����Ĥ���ʤ��ä����� nil ���֤��ޤ���
+ヘッダの名前かインデックスで値を取得します。フィールドが見つからなかった場合は nil を返します。
 
-@param header_or_index �إå���̾��������ǥå�������ꤷ�ޤ���
+@param header_or_index ヘッダの名前かインデックスを指定します。
 
-@param minimum_index ���Υ���ǥå�������ǡ��إå���̾����õ���ޤ���
-                     ��ʣ���Ƥ���إå���������������Ǥ���
+@param minimum_index このインデックスより後で、ヘッダの名前を探します。
+                     重複しているヘッダがある場合に便利です。
 
 --- []=(header_or_index, value)
 
-�إå���̾��������ǥå����ǥե�����ɤ�õ�����ͤ򥻥åȤ��ޤ���
+ヘッダの名前かインデックスでフィールドを探し、値をセットします。
 
-����������Υ���ǥå�������ꤹ��ȡ��إå���̾���� nil �ˤʤ�ޤ���
-¸�ߤ��ʤ��إå�����ꤹ��ȡ����������Ǥ��������ɲä��ޤ���
+末尾より後ろのインデックスを指定すると、ヘッダの名前は nil になります。
+存在しないヘッダを指定すると、新しい要素を末尾に追加します。
 
-@param header_or_index �إå���̾��������ǥå�������ꤷ�ޤ���
+@param header_or_index ヘッダの名前かインデックスを指定します。
 
-@param value �ͤ���ꤷ�ޤ���
+@param value 値を指定します。
 
 @see [[m:CSV::Row#field]]
 
 --- []=(header, offset, value)
 
-�إå���̾���ǥե�����ɤ�õ�����ͤ򥻥åȤ��ޤ���
+ヘッダの名前でフィールドを探し、値をセットします。
 
-@param header �إå���̾������ꤷ�ޤ���
+@param header ヘッダの名前を指定します。
 
-@param offset ���Υ���ǥå�������ǡ��إå���̾����õ���ޤ���
-              ��ʣ���Ƥ���إå���������������Ǥ���
+@param offset このインデックスより後で、ヘッダの名前を探します。
+              重複しているヘッダがある場合に便利です。
 
-@param value �ͤ���ꤷ�ޤ���
+@param value 値を指定します。
 
 @see [[m:CSV::Row#field]]
 
 --- delete(header_or_index, minimum_index = 0) -> [object, object] | nil
 
-�إå���̾��������ǥå����ǹԤ���ե�����ɤ������뤿��˻��Ѥ��ޤ���
+ヘッダの名前かインデックスで行からフィールドを削除するために使用します。
 
-@param header_or_index �إå���̾��������ǥå�������ꤷ�ޤ���
+@param header_or_index ヘッダの名前かインデックスを指定します。
 
-@param minimum_index ���Υ���ǥå�������ǡ��إå���̾����õ���ޤ���
-                     ��ʣ���Ƥ���إå���������������Ǥ���
+@param minimum_index このインデックスより後で、ヘッダの名前を探します。
+                     重複しているヘッダがある場合に便利です。
 
-@return ��������إå��ȥե�����ɤ��Ȥ��֤��ޤ�������оݤ����Ĥ���ʤ��ä����� nil ���֤��ޤ���
+@return 削除したヘッダとフィールドの組を返します。削除対象が見つからなかった場合は nil を返します。
 
 @see [[m:CSV::Row#field]]
 
 --- delete_if{|header, field| ... } -> self
 
-Ϳ����줿�֥��å��˥إå��ȥե�����ɤΥڥ����Ϥ���ɾ�����ޤ���
-ɾ��������̤����Ǥ�����ˡ������Ȥ򼫿Ȥ��������ޤ���
+与えられたブロックにヘッダとフィールドのペアを渡して評価します。
+評価した結果が真である場合に、その組を自身から削除します。
 
-@return �᥽�åɥ�������Τ���˼��Ȥ��֤��ޤ���
+@return メソッドチェーンのために自身を返します。
 
 --- each{|header, field| ... } -> self
 
-Ϳ����줿�֥��å��˥إå��ȥե�����ɤ��Ȥ��Ϥ���ɾ�����ޤ���
+与えられたブロックにヘッダとフィールドの組を渡して評価します。
 
-@return �᥽�åɥ�������Τ���˼��Ȥ��֤��ޤ���
+@return メソッドチェーンのために自身を返します。
 
 --- empty? -> bool
 
-�������ݻ����Ƥ��� @row �ذѾ����ޤ���
+内部で保持している @row へ委譲します。
 
 
 --- field?(data) -> bool
 
-���Ȥ�Ϳ����줿�ͤ��ޤޤ�Ƥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身に与えられた値が含まれている場合は真を返します。
+そうでない場合は偽を返します。
 
-@param data ���ιԤ˴ޤޤ�Ƥ��뤫�ɤ���Ĵ�٤����ͤ���ꤷ�ޤ���
+@param data この行に含まれているかどうか調べたい値を指定します。
 
 --- field_row? -> bool
-�ե�����ɹԤǤ���п����֤��ޤ��������Ǥʤ���е����֤��ޤ���
+フィールド行であれば真を返します。そうでなければ偽を返します。
 
 --- fields(*headers_and_or_indices) -> Array
 --- values_at(*headers_and_or_indices) -> Array
 
-Ϳ����줿�������б������ͤ�������֤��ޤ���
+与えられた引数に対応する値の配列を返します。
 
-���Ǥ�õ���� [[m:CSV::Row.field]] ����Ѥ��Ƥ��ޤ���
+要素の探索に [[m:CSV::Row.field]] を使用しています。
 
-@param headers_and_or_indices �إå���̾��������ǥå����� [[c:Range]]
-                              �Υ��󥹥��󥹤��� 1 ���Ǥ��إå���̾����
-                              �� 2 ���Ǥ����ե��åȤˤʤäƤ��� 2 ����
-                              ������򤤤��ĤǤ���ꤷ�ޤ������ߤ��뤳
-                              �Ȥ��Ǥ��ޤ���
+@param headers_and_or_indices ヘッダの名前かインデックスか [[c:Range]]
+                              のインスタンスか第 1 要素がヘッダの名前で
+                              第 2 要素がオフセットになっている 2 要素
+                              の配列をいくつでも指定します。混在するこ
+                              とができます。
 
-@return ������Ϳ���ʤ��ä��������Ƥ����Ǥ��֤��ޤ���
+@return 引数を与えなかった場合は全ての要素を返します。
 
   csv = CSV.new("a,b,c\n1,2,3", headers: true)
   table = csv.read
@@ -152,88 +152,88 @@ include Enumerable
 
 --- header?(name) -> bool
 --- include?(name) -> bool
-���ȤΥإå���Ϳ����줿�ͤ��ޤޤ�Ƥ�����Ͽ����֤��ޤ���
-�����Ǥʤ����ϵ����֤��ޤ���
+自身のヘッダに与えられた値が含まれている場合は真を返します。
+そうでない場合は偽を返します。
 
-@param name ���ιԤΥإå��˴ޤޤ�Ƥ��뤫�ɤ���Ĵ�٤����ͤ���ꤷ�ޤ���
+@param name この行のヘッダに含まれているかどうか調べたい値を指定します。
 
 --- header_row? -> bool
-�إå��ԤǤ���п����֤��ޤ��������Ǥʤ���е����֤��ޤ���
+ヘッダ行であれば真を返します。そうでなければ偽を返します。
 
 --- headers -> Array
-���ιԤΥإå��Υꥹ�Ȥ��֤��ޤ���
+この行のヘッダのリストを返します。
 
 --- index(header, minimum_index = 0) -> Fixnum
 
-Ϳ����줿�إå���̾�����б����륤��ǥå������֤��ޤ���
+与えられたヘッダの名前に対応するインデックスを返します。
 
-@param header �إå���̾������ꤷ�ޤ���
+@param header ヘッダの名前を指定します。
 
-@param minimum_index ���Υ���ǥå�������ǡ��إå���̾����õ���ޤ���
-                     ��ʣ���Ƥ���إå���������������Ǥ���
+@param minimum_index このインデックスより後で、ヘッダの名前を探します。
+                     重複しているヘッダがある場合に便利です。
 
 @see [[m:CSV::Row#field]]
 
 --- inspect -> String
-ASCII �ߴ��Ǥ��륨�󥳡��ǥ��󥰤�ʸ����Ǽ��Ȥξ�����֤��ޤ���
+ASCII 互換であるエンコーディングの文字列で自身の情報を返します。
 
 --- length -> Fixnum
 --- size -> Fixnum
 
-[[m:Array#length]], [[m:Array#size]] �˰Ѿ����ޤ���
+[[m:Array#length]], [[m:Array#size]] に委譲します。
 
 --- push(*args) -> self
-ʣ���Υե�����ɤ��ɲä��뤿��Υ��硼�ȥ��åȤǤ���
+複数のフィールドを追加するためのショートカットです。
 
-�ʲ��Ȥ��ʤ��Ǥ�:
+以下とおなじです:
   args.each { |arg| csv_row << arg }
 
-@return �᥽�åɥ�������Τ���˼��Ȥ��֤��ޤ���
+@return メソッドチェーンのために自身を返します。
 
 --- to_csv -> String
 --- to_s -> String
 
-���Ȥ� CSV ��ʸ����Ȥ����֤��ޤ����إå��ϻ��Ѥ��ޤ���
+自身を CSV な文字列として返します。ヘッダは使用しません。
 
 --- to_hash -> Hash
 
-���Ȥ򥷥�ץ�ʥϥå�����Ѵ����ޤ���
+自身をシンプルなハッシュに変換します。
 
-�ե�����ɤν����̵�뤵��ޤ���
-��ʣ�����ե�����ɤϺ������ޤ���
+フィールドの順序は無視されます。
+重複したフィールドは削除されます。
 
 == Protected Instance Methods
 
 --- row -> Array
 
-Ʊ��������Ӥ��뤿��˻��Ѥ�������Ū�ʥǡ����Ǥ���
+同値性を比較するために使用する内部的なデータです。
 
 #@else
 = class CSV::Row < Array
-CSV����1��ʬ�Υǡ�����Row�ˤ����뤿��Υ��饹��
-#@# 1.8.2 �ʹߤ� deprecated
+CSV形式1行分のデータ（Row）を操作するためのクラス。
+#@# 1.8.2 以降で deprecated
 
 == Instance Methods
 
 #@until 1.8.2
 
 --- match(rhs) -> bool
-��ʬ���ȤȰ���rhs����Ӥ�true/false���֤��ޤ���
+自分自身と引数rhsを比較しtrue/falseを返します。
 
-�����ˡ�Ȥ��Ƥϡ�[[c:CSV::Row]]���֥������Ȥγ�Cell�Υǡ�������̤�CSV::Cell#match����Ӥ�Ԥ����������Ƥ��֤��ͤ�true�λ��Τ�true���֤��ޤ���
+比較方法としては、[[c:CSV::Row]]オブジェクトの各Cellのデータを個別にCSV::Cell#matchで比較を行いそれらの全ての返り値がtrueの時のみtrueを返します。
 
-@param rhs ��Ӥ����[[c:CSV::Row]]���饹�Υ��֥�������
+@param rhs 比較される[[c:CSV::Row]]クラスのオブジェクト
 
-===== ����
+===== 注意
 
-���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+このメソッドはバージョン1.8.2で廃止されました。
 
 --- to_a -> Array
-��ʬ���Ȥ�[[c:Array]]���֥������ȤȤ����֤��ޤ���
+自分自身を[[c:Array]]オブジェクトとして返します。
 
-===== ����
+===== 注意
 
-���Υ᥽�åɤϥС������1.8.2���ѻߤ���ޤ�����
+このメソッドはバージョン1.8.2で廃止されました。
 
 
 #@end
