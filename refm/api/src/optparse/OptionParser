@@ -696,7 +696,6 @@ argv からオプションを取り除いたものを返します。
 #@since 1.8.5
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
-#@todo
 
 #@until 1.9.1
 [[lib:getopts]] 相当の機能を提供します。
