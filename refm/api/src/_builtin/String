@@ -274,10 +274,10 @@ args が配列であれば [[m:Kernel.#sprintf]](self, *args) と同じです。
 
 #@include(printf-format)
 
---- <=>(other) -> Integer | nil
+--- <=>(other) -> -1 | 0 | 1 | nil
 
 self と other を ASCII コード順で比較して、
-self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返します。
+self が大きい時には 1、等しい時には 0、小さい時には -1 を返します。
 このメソッドは Comparable モジュールのメソッドを実装するために使われます。
 
 変数 [[m:$=]] の値が真であるときは
