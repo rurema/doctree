@@ -1,431 +1,625 @@
 
 --- AF_APPLETALK -> Integer
+--- PF_APPLETALK -> Integer
+
+Apple talk。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(2linux)]], [[man:socket(2freebsd)]], [[man:ddp(7linux)]]
+
 --- AF_ATM -> Integer
+--- PF_ATM -> Integer
+
+ATM。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(2freebsd)]]
+
 --- AF_AX25 -> Integer
+--- PF_AX25 -> Integer
+
+ITU-T X.25 / ISO-8208。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(2linux)]]
+
 --- AF_CCITT -> Integer
+--- PF_CCITT -> Integer
+
+CCITT プロトコル。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_CHAOS -> Integer
+--- PF_CHAOS -> Integer
+
+MIT CHAOS プロトコル。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_CNT -> Integer
+--- PF_CNT -> Integer
+
+Computer Network Technology。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_COIP -> Integer
+--- PF_COIP -> Integer
+
+connection-oriented IP。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_DATAKIT -> Integer
+--- PF_DATAKIT -> Integer
+
+datakit protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_DEC -> Integer
+--- PF_DEC -> Integer
+
+DECnet protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_DLI -> Integer
+--- PF_DLI -> Integer
+
+DEC Direct data link interface。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_E164 -> Integer
+CCITT E.164 recommendation。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_ECMA -> Integer
+--- PF_ECMA -> Integer
+
+European computer manufacturers。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_HYLINK -> Integer
+--- PF_HYLINK -> Integer
+
+NSC Hyperchannel。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_IMPLINK -> Integer
+--- PF_IMPLINK -> Integer
+
+ARPANET IMP。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_INET -> Integer
+--- PF_INET -> Integer
+
+IPv4。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:socket(2freebsd)]], [[man:ip(7linux)]]
+
 --- AF_INET6 -> Integer
+--- PF_INET6 -> Integer
+
+IPv6。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:socket(2freebsd)]], [[man:ipv6(7linux)]]
+
 --- AF_IPX -> Integer
+--- PF_IPX -> Integer
+
+IPX(Novell Internet Packet eXchange protocol)。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(3linux)]]
+
 --- AF_ISDN -> Integer
+--- PF_ISDN -> Integer
+
+Integrated Services Digital Network。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_ISO -> Integer
---- AF_LAT -> Integer
---- AF_LINK -> Integer
---- AF_LOCAL -> Integer
---- AF_MAX -> Integer
---- AF_NATM -> Integer
---- AF_NDRV -> Integer
---- AF_NETBIOS -> Integer
---- AF_NETGRAPH -> Integer
---- AF_NS -> Integer
 --- AF_OSI -> Integer
+--- PF_ISO -> Integer
+--- PF_OSI -> Integer
+
+ISO Open Systems Interconnection protocols。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
+--- AF_LAT -> Integer
+--- PF_LAT -> Integer
+
+Local Area Transport protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
+--- AF_LINK -> Integer
+--- PF_LINK -> Integer
+
+Link layer interface。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
+--- AF_MAX -> Integer
+対象のプラットフォーム上でのアドレスファミリーの最大の数値。
+
+@see [[m:Socket::Constants::PF_MAX]]
+
+--- AF_NATM -> Integer
+--- PF_NATM -> Integer
+
+Native ATM access。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
+--- AF_NDRV -> Integer
+--- PF_NDRV -> Integer
+
+Network driver raw access。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
+--- AF_NETBIOS -> Integer
+--- PF_NETBIOS -> Integer
+
+NetBIOS。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
+--- AF_NETGRAPH -> Integer
+--- PF_NETGRAPH -> Integer
+
+Netgraph sockets。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(2freebsd)]]
+
+--- AF_NS -> Integer
+--- PF_NS -> Integer
+
+XEROX NS protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 #@since 1.9.1
 --- AF_PACKET -> Integer
+--- PF_PACKET -> Integer
+
+デバイスレベルインターフェース。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(2linux)]], [[man:packet(7linux)]]     
 #@end
 --- AF_PPP -> Integer
+--- PF_PPP -> Integer
+
+Point-to-Point Protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_PUP -> Integer
+--- PF_PUP -> Integer
+
+PUP(PARC Universal Packet)。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[m:socket(2freebsd)]]
+
 --- AF_ROUTE -> Integer
+--- PF_ROUTE -> Integer
+
+Internal Routing protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_SIP -> Integer
+--- PF_SIP -> Integer
+
+Simple Internet Protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_SNA -> Integer
+--- PF_SNA -> Integer
+
+IBM SNA protocol。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+#@todo
+
 --- AF_SYSTEM -> Integer
---- AF_UNIX -> Integer
---- AF_UNSPEC -> Integer
+--- PF_SYSTEM -> Integer
+
 #@todo
 
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-@see [[m:Socket.open]]
-
---- SOCK_DGRAM -> Integer
-
-[[m:Socket.open]] の第二引数 type に使用します。
-詳しくは [[man:socket(2)]] を見てください。
-
-@see [[m:Socket.open]]
-
---- SOCK_PACKET -> Integer
-#@todo
-
-[[m:Socket.open]] の第二引数 type に使用します。
-
-@see [[m:Socket.open]]
-
---- SOCK_RAW -> Integer
-#@todo
-
-[[m:Socket.open]] の第二引数 type に使用します。
-
-@see [[m:Socket.open]]
-
---- SOCK_RDM -> Integer
-#@todo
-
-[[m:Socket.open]] の第二引数 type に使用します。
-
-@see [[m:Socket.open]]
-
---- SOCK_SEQPACKET -> Integer
-
-[[m:Socket.open]] の第二引数 type に使用します。
-詳しくは [[man:socket(2)]] を見てください。
-
-@see [[m:Socket.open]]
-
---- SOCK_STREAM -> Integer
-
-[[m:Socket.open]] の第二引数 type に使用します。
-詳しくは [[man:socket(2)]] を見てください。
-
-@see [[m:Socket.open]]
-
---- PF_APPLETALK -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@since 1.8.3
---- PF_ATM -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@end
---- PF_AX25 -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@since 1.8.3
---- PF_CCITT -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_CHAOS -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_CNT -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_COIP -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_DATAKIT -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_DEC -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_DLI -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_ECMA -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_HYLINK -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@end
---- PF_IMPLINK -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_INET -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_INET6 -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_IPX -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@since 1.8.3
---- PF_ISDN -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_ISO -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_KEY -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_LAT -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_LINK -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
+--- AF_LOCAL -> Integer
+--- AF_UNIX -> Integer
 --- PF_LOCAL -> Integer
-#@todo
+--- PF_UNIX -> Integer
 
-[[m:Socket.open]] の第三引数 protocol に使用します。
+Unix domain socket。
+[[m:Socket.open]] の第一引数 domain に使用します。
 
-@see [[m:Socket.open]]
+@see [[man:sys/socket.h(header)]], [[man:unix(7linux)]]
+
+--- AF_UNSPEC -> Integer
+
+アドレスファミリー不定。
+
+@see [[m:Socket.open]], [[man:sys/socket.h(header)]]
+
 
 --- PF_MAX -> Integer
-#@todo
+プロトコルファミリーの最大数。
 
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_NATM -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_NDRV -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_NETBIOS -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_NETGRAPH -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_NS -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_OSI -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@since 1.9.2
---- PF_PACKET -> Integer
-#@todo
-#@end
+@see [[m:Socket::Constants::AF_MAX]]
 
 --- PF_PIP -> Integer
-#@todo
+Help Identify PIP packets。
+[[m:Socket.open]] の第一引数 domain に使用します。
 
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_PPP -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_PUP -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_ROUTE -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
+@see [[man:socket(2freebsd)]]
 
 --- PF_RTIP -> Integer
-#@todo
+Help Identify RTIP packets。
+[[m:Socket.open]] の第一引数 domain に使用します。
 
-[[m:Socket.open]] の第三引数 protocol に使用します。
+@see [[man:socket(2freebsd)]]
 
-@see [[m:Socket.open]]
-
---- PF_SIP -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_SNA -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_SYSTEM -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
-
-#@end
---- PF_UNIX -> Integer
-#@todo
-
-[[m:Socket.open]] の第三引数 protocol に使用します。
-
-@see [[m:Socket.open]]
 
 --- PF_UNSPEC -> Integer
-#@todo
+プロトコルファミリー不定。
 
-[[m:Socket.open]] の第三引数 protocol に使用します。
+@see [[m:Socket::Constants::AF_UNSPEC]], [[m:Socket.open]]
 
-@see [[m:Socket.open]]
 
 #@since 1.8.3
 --- PF_XTP -> Integer
-#@end
+eXpress Transfer Protocol。
+
 #@todo
 
-[[m:Socket.open]] の第三引数 protocol に使用します。
+#@end
 
-@see [[m:Socket.open]]
+
+--- SOCK_DGRAM -> Integer
+
+データグラム通信。
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[man:socket(2)]], [[m:Socket.open]]
+
+--- SOCK_PACKET -> Integer
+
+デバイスレベルインターフェース。Obsoleteであり使うべきではない。
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[man:packet(7linux)]], [[m:Socket.open]]
+
+--- SOCK_RAW -> Integer
+
+RAW ソケット。
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:socket(2linux)]], 
+     [[man:raw(7linux)]], [[m:Socket.open]]
+
+--- SOCK_RDM -> Integer
+
+信頼性のあるデータグラム通信。
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[man:socket(2linux)]], [[m:Socket.open]]
+
+--- SOCK_SEQPACKET -> Integer
+
+固定最大長を持つストリーム通信。
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]], [[man:socket(2)]], [[man:socket(2linux)]],
+     [[man:socket(2freebsd)]]
+
+--- SOCK_STREAM -> Integer
+
+ストリーム通信。
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]], [[man:socket(2)]], [[man:socket(2linux)]],
+     [[man:socket(2freebsd)]]
+
+--- PF_KEY -> Integer
+Internal key-management function。
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+@see [[man:socket(2freebsd)]]
+
 
 --- IPPORT_RESERVED -> Integer
+利用法が予約されているポート番号の最大値。
+
 --- IPPORT_USERRESERVED -> Integer
-#@todo
+ユーザが自由に利用して良いポート番号の最小値。
+
 
 #@since 1.9.1
 --- IPPROTO_AH -> Integer
+IPv6 auth header。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 --- IPPROTO_DSTOPTS -> Integer
+IPv6 destination option。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 --- IPPROTO_ESP -> Integer
+IPv6 Encapsulated Security Payload。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 --- IPPROTO_FRAGMENT -> Integer
+IPv6 fragmentation header。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 --- IPPROTO_HOPOPTS -> Integer
+IPv6 hop-by-hop options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 --- IPPROTO_ICMPV6 -> Integer
+Internet Control Message Protocol for IPv6。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:icmp6(4freebsd)]], [[rfc:2292]]
+     
+
 --- IPPROTO_IPV6 -> Integer
+Internet Protocol Version 6。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:netinet/in.h(header)]]
+     [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]]
+     [[rfc:2292]]
+
 --- IPPROTO_NONE -> Integer
+IP6 no next header。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 --- IPPROTO_ROUTING -> Integer
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[rfc:2292]]
+
 #@end
 --- IPPROTO_BIP -> Integer
+#@todo
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_EGP -> Integer
+#@todo
+Exterior Gateway Protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_EON -> Integer
+#@todo
+ISO cnlp。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_GGP -> Integer
+#@todo
+Gateway to Gateway Protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_HELLO -> Integer
+#@todo
+"hello" routing protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_ICMP -> Integer
+Control message protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:netinet/in.h(header)]]
+     [[man:icmp(4freebsd)]], [[man:icmp(7linux)]]
+
+
 --- IPPROTO_IDP -> Integer
+#@todo
+XNS IDP。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_IGMP -> Integer
+#@todo
+Group Management Protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_IP -> Integer
+Internet protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:netinet/in.h(header)]]
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IPPROTO_MAX -> Integer
+IPPROTO 定数の最大値。
+
 --- IPPROTO_ND -> Integer
+#@todo
+Sun net disk protocol
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_PUP -> Integer
+#@todo
+PARC Universal Packet protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_RAW -> Integer
+Raw IP packets protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:netinet/in.h(header)]]
+     [[man:ip(4freebsd)]], [[man:raw(7linux)]]
+
 --- IPPROTO_TCP -> Integer
+Transmission control protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:netinet/in.h(header)]]
+     [[man:tcp(4freebsd)]], [[man:tcp(7linux)]]
+
+
 --- IPPROTO_TP -> Integer
+#@todo
+ISO transport protocol class 4。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
 --- IPPROTO_UDP -> Integer
---- IPPROTO_XTP -> Integer
+User Datagram Protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
+
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
+
+@see [[man:netinet/in.h(header)]]
+     [[man:udp(4freebsd)]], [[man:udp(7linux)]]
+
 #@todo
 
-IPプロトコル:
-[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
-使用します。
+--- IPPROTO_XTP -> Integer
+#@todo
+Xpress Transport Protocol。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の 
+level 引数に使用します。
 
-また、[[m:Socket.open]] の
-第一引数 domain に AF_INET もしくは AF_INET6,
-第二引数 type に SOCK_RAW を指定した場合の、
-第三引数 protocol にも使用します。
+また、[[m:Socket.open]] の protocol 引数に渡す利用法もあります。
 
-なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
-その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
-AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
+
+
+#@# IPプロトコル:
+#@# [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
+#@# 使用します。
+#@# 
+#@# また、[[m:Socket.open]] の
+#@# 第一引数 domain に AF_INET もしくは AF_INET6,
+#@# 第二引数 type に SOCK_RAW を指定した場合の、
+#@# 第三引数 protocol にも使用します。
+#@# 
+#@# なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
+#@# その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
+#@# AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 
 --- AI_ADDRCONFIG -> Integer
 --- AI_ALL -> Integer
@@ -468,13 +662,45 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 [[man:getaddrinfo(3)]]も参照して下さい。
 
 --- INADDR_ALLHOSTS_GROUP -> Integer
+Multicast group for all systems on this subset。
+IPv4の 244.0.0.1 に対応する整数です。
+
+@see [[url:http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml]], [[RFC:5771]]
+
 --- INADDR_ANY -> Integer
+A socket bound to INADDR_ANY receives packets from 
+all interfaces and sends from the default IP address。
+IPv4アドレスの 0.0.0.0 に対応する整数です。
+
+@see [[man:netinet/in.h(header)]], [[man:ip(7linux)]], [[man:ip(4freebsd)]]
+
 --- INADDR_BROADCAST -> Integer
+The network broadcast address。
+IPv4のブロードキャストアドレス 255.255.255.255 に対応する整数です。
+
+@see [[man:netinet/in.h(header)]], [[man:ip(7linux)]], [[man:ip(4freebsd)]]
+
 --- INADDR_LOOPBACK -> Integer
+The loopback address。
+IPv4のループバックアドレス 127.0.0.1 に対応する整数です。
+
+@see [[man:ip(7linux)]], [[man:ip(4freebsd)]]
+
 --- INADDR_MAX_LOCAL_GROUP -> Integer
+The last local network multicast group。
+IPv4の 244.0.0.255 に対応する整数です。
+
+@see [[url:http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml]], [[RFC:5771]]
+
 --- INADDR_NONE -> Integer
+A bitmask for matching no valid IP address。
+エラーを表すアドレス値です。
+
 --- INADDR_UNSPEC_GROUP -> Integer
-#@todo
+The reserved multicast group。
+IPv4の 244.0.0.0 に対応する整数です。
+
+@see [[url:http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml]], [[RFC:5771]]
 
 #@since 1.9.1
 --- INET6_ADDRSTRLEN -> Integer
@@ -500,66 +726,412 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 [[man:getnameinfo(3)]]も参照して下さい。
 
 --- IP_ADD_MEMBERSHIP -> Integer
+Add a multicast group membership。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+     
 --- IP_DEFAULT_MULTICAST_LOOP -> Integer
+#@todo
+
 --- IP_DEFAULT_MULTICAST_TTL -> Integer
+#@todo
+
 --- IP_DROP_MEMBERSHIP -> Integer
+Drop a multicast group membership。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IP_HDRINCL -> Integer
+Header is included with data。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
 --- IP_MAX_MEMBERSHIPS -> Integer
+Maximum number multicast groups a socket can join。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
 --- IP_MULTICAST_IF -> Integer
+IP multicast interface。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IP_MULTICAST_LOOP -> Integer
+IP multicast loopback。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IP_MULTICAST_TTL -> Integer
+IP multicast TTL。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IP_OPTIONS -> Integer
+IP options to be included in packets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IP_RECVDSTADDR -> Integer
+Receive IP destination address with datagram。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
 --- IP_RECVOPTS -> Integer
+Receive IP destination address with datagram。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(7linux)]]
+
 --- IP_RECVRETOPTS -> Integer
+#@todo
+
 --- IP_RETOPTS -> Integer
+IP options to be included in datagrams。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(7linux)]]
+
 --- IP_TOS -> Integer
+IP type-of-service。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 --- IP_TTL -> Integer
+IP time-to-live。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]], [[man:ip(7linux)]]
+
 #@since 1.9.2
 --- IP_ADD_SOURCE_MEMBERSHIP -> Integer
---- IP_BLOCK_SOURCE -> Integer
---- IP_DONTFRAG -> Integer
+Add a multicast group membership。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
 --- IP_DROP_SOURCE_MEMBERSHIP -> Integer
---- IP_FREEBIND -> Integer
---- IP_IPSEC_POLICY -> Integer
---- IP_MINTTL -> Integer
---- IP_MSFILTER -> Integer
---- IP_MTU -> Integer
---- IP_MTU_DISCOVER -> Integer
---- IP_ONESBCAST -> Integer
---- IP_PASSSEC -> Integer
---- IP_PKTINFO -> Integer
---- IP_PKTOPTIONS -> Integer
---- IP_PMTUDISC_DO -> Integer
---- IP_PMTUDISC_DONT -> Integer
---- IP_PMTUDISC_WANT -> Integer
---- IP_PORTRANGE -> Integer
---- IP_RECVERR -> Integer
---- IP_RECVIF -> Integer
---- IP_RECVSLLA -> Integer
---- IP_RECVTOS -> Integer
---- IP_RECVTTL -> Integer
---- IP_ROUTER_ALERT -> Integer
---- IP_SENDSRCADDR -> Integer
+Drop a multicast group membership。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
+--- IP_BLOCK_SOURCE -> Integer
+Block IPv4 multicast packets with a give source address。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
 --- IP_UNBLOCK_SOURCE -> Integer
---- IP_XFRM_POLICY -> Integer
-#@end
+Unblock IPv4 multicast packets with a give source address。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
+--- IP_DONTFRAG -> Integer
+Don't fragment packets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], 
+     [[man:ip(4freebsd)]]
+
+--- IP_FREEBIND -> Integer
+Allow binding to nonexistent IP addresses。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_IPSEC_POLICY -> Integer
+IPsec security policy。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]],
+     [[url:http://netbsd.gw.com/cgi-bin/man-cgi?ip++NetBSD-current]]
+
+--- IP_MINTTL -> Integer
+Minimum TTL allowed for received packets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(4freebsd)]]
+
+--- IP_MSFILTER -> Integer
 #@todo
+
+--- IP_MTU -> Integer
+The Maximum Transmission Unit of the socket。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_MTU_DISCOVER -> Integer
+Path MTU discovery。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_ONESBCAST -> Integer
+Force outgoing broadcast datagrams to have the undirected broadcast address。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(4freebsd)]]
+
+--- IP_PASSSEC -> Integer
+#@todo
+
+--- IP_PKTINFO -> Integer
+Receive packet information with datagrams。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_PKTOPTIONS -> Integer
+#@todo
+
+--- IP_PMTUDISC_DO -> Integer
+Always send DF frames。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_PMTUDISC_DONT -> Integer
+Never send DF frames。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_PMTUDISC_WANT -> Integer
+Use per-route hints。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_PORTRANGE -> Integer
+Set the port range for sockets with unspecified port numbers。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(4freebsd)]]
+
+--- IP_RECVERR -> Integer
+Enable extended reliable error message passing。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(4freebsd)]]
+
+--- IP_RECVIF -> Integer
+Receive interface information with datagrams。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(4freebsd)]]
+
+--- IP_RECVSLLA -> Integer
+#@todo
+
+--- IP_RECVTOS -> Integer
+Receive TOS with incoming packets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_RECVTTL -> Integer
+Receive IP TTL with datagrams。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]], [[man:ip(4freebsd)]]
+
+--- IP_ROUTER_ALERT -> Integer
+Notify transit routers to more closely examine the contents of an IP packet。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(7linux)]]
+
+--- IP_SENDSRCADDR -> Integer
+ource address for outgoing UDP datagrams。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[man:ip(4freebsd)]]
+
+--- IP_XFRM_POLICY -> Integer
+#@todo
+
+#@end
+
 
 #@since 1.9.1
 --- IPV6_CHECKSUM -> Integer
+Byte offset into a packet where the checksum is located.
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:ip6(4freebsd)]],
+     [[RFC:3542]]
+
 --- IPV6_DONTFRAG -> Integer
+Don't fragment packets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_DSTOPTS -> Integer
+Destination options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3542]]
+
 --- IPV6_HOPLIMIT -> Integer
+Hop limit。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3542]]
+
 --- IPV6_HOPOPTS -> Integer
+Hop-by-hop options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3542]]
+
 --- IPV6_JOIN_GROUP -> Integer
+Join a multicast group。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 --- IPV6_LEAVE_GROUP -> Integer
+Leave a multicast group。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 --- IPV6_MULTICAST_HOPS -> Integer
+IPv6 multicast hop limit。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 --- IPV6_MULTICAST_IF -> Integer
+IP6 multicast interface。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 --- IPV6_MULTICAST_LOOP -> Integer
+IP6 multicast loopback。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 --- IPV6_NEXTHOP -> Integer
+Next hop address。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_PATHMTU -> Integer
+Retrieve current path MTU。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_PKTINFO -> Integer
+Receive packet information with datagram。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3542]]
+
 --- IPV6_RECVDSTOPTS -> Integer
 --- IPV6_RECVHOPLIMIT -> Integer
 --- IPV6_RECVHOPOPTS -> Integer
@@ -572,9 +1144,26 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 --- IPV6_RTHDR_TYPE_0 -> Integer
 --- IPV6_TCLASS -> Integer
 --- IPV6_UNICAST_HOPS -> Integer
+IPv6 unicast hop limit。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 --- IPV6_USE_MIN_MTU -> Integer
---- IPV6_V6ONLY -> Integer
 #@todo
+
+--- IPV6_V6ONLY -> Integer
+Only bind IPv6。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[man:netinet/in.h(header)]], [[man:ip6(4freebsd)]], [[man:ipv6(7linux)]],
+     [[RFC:3493]]
+
 #@end
 
 #@since 1.9.1
@@ -631,9 +1220,25 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 
 #@since 1.9.2
 --- LOCAL_CONNWAIT -> Integer
+Retrieve peer credentials。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:ip(4freebsd)]]
+
 --- LOCAL_CREDS -> Integer
+Pass credentials to receiver。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:ip(4freebsd)]]
 --- LOCAL_PEERCRED -> Integer
-#@todo
+Pass credentials to receiver。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:ip(4freebsd)]]
+
 #@end
 
 #@since 1.9.2
@@ -658,73 +1263,308 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 
 #@since 1.8.3
 --- SO_ACCEPTCONN -> Integer
+Socket has had listen() called on it。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_ACCEPTFILTER -> Integer
+set accept filter on listening socket。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 #@end
 --- SO_ATTACH_FILTER -> Integer
+Attach socket filter。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:socket(7linux)]], [[url:http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD]],
+     [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_BINDTODEVICE -> Integer
+Bind this socket to a particular device。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_BROADCAST -> Integer
+Permit sending of broadcast messages。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_DEBUG -> Integer
+Debug info recording。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_DETACH_FILTER -> Integer
+Detach socket filter。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:socket(7linux)]], [[url:http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD]],
+     [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_DONTROUTE -> Integer
+Send without using the routing tables。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 #@since 1.8.3
 --- SO_DONTTRUNC -> Integer
+#@todo
+
 #@end
 --- SO_ERROR -> Integer
+Get socket error status。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_KEEPALIVE -> Integer
+Keep connections alive。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_LINGER -> Integer
+Linger on close if data is present。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]],[[m:Socket::Constants#SOL_SOCKET]]
+
 #@since 1.8.3
 --- SO_NKE -> Integer
+#@todo
+#@# OS X socket option?
+
 --- SO_NOSIGPIPE -> Integer
+Don't SIGPIPE on EPIPE。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 #@end
 --- SO_NO_CHECK -> Integer
+#@todo
+
 #@since 1.8.3
 --- SO_NREAD -> Integer
+#@todo
+
 #@end
 --- SO_OOBINLINE -> Integer
+Leave received out-of-band data in-line。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_PASSCRED -> Integer
+Receive SCM_CREDENTIALS messages。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:socket(7linux)]], [[man:unix(7linux)]],
+     [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_PEERCRED -> Integer
+The credentials of the foreign process connected to this socket。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:socket(7linux)]], [[man:unix(7linux)]], [[man:socketpair(2linux)]],
+     [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_PEERNAME -> Integer
+#@todo
+
 --- SO_PRIORITY -> Integer
+The protocol-defined priority for all packets on this socket。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:socket(7linux)]], [[man:ip(7linux)]]
+
 --- SO_RCVBUF -> Integer
+Receive buffer size。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_RCVLOWAT -> Integer
+Receive low-water mark。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_RCVTIMEO -> Integer
+Receive timeout。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]]
+
 --- SO_REUSEADDR -> Integer
+Allow local address reuse。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[man:bind(2)]],
+     [[m:Socket::Constants#SOL_SOCKET]]
+
 #@since 1.8.3
 --- SO_REUSEPORT -> Integer
+Allow local address and port reuse。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+     
 #@end
 --- SO_SECURITY_AUTHENTICATION -> Integer
+#@todo
+
 --- SO_SECURITY_ENCRYPTION_NETWORK -> Integer
+#@todo
+
 --- SO_SECURITY_ENCRYPTION_TRANSPORT -> Integer
+#@todo
+
 --- SO_SNDBUF -> Integer
+Send buffer size。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_SNDLOWAT -> Integer
+Receive low-water mark。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_SNDTIMEO -> Integer
+Send timeout。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_TIMESTAMP -> Integer
+Receive timestamp with datagrams (timeval)。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 --- SO_TYPE -> Integer
+Get the socket type。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
+     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+
 #@since 1.8.3
 --- SO_USELOOPBACK -> Integer
+#@todo
+
 --- SO_WANTMORE -> Integer
+#@todo
+
 --- SO_WANTOOBFLAG -> Integer
+#@todo
+
 #@end
 #@since 1.9.2
 --- SO_ALLZONES -> Integer
---- SO_BINTIME -> Integer
---- SO_MAC_EXEMPT -> Integer
---- SO_RECVUCRED -> Integer
---- SO_TIMESTAMPNS -> Integer
-#@end
 #@todo
+#@# Solaris?
+
+--- SO_BINTIME -> Integer
+Timestamp (bintime)。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+
+--- SO_MAC_EXEMPT -> Integer
+#@todo
+
+--- SO_RECVUCRED -> Integer
+#@todo
+
+--- SO_TIMESTAMPNS -> Integer
+#@todo
+
+#@end
+
 
 #@since 1.9.2
 --- SOMAXCONN -> Integer
-#@todo
+[[m:Socket#listen]] の backlog の最大長。
+
+@see [[man:sys/socket.h(header)]], [[man:listen(2)]]
+
 #@end
 
 --- SOL_ATALK -> Integer
+#@todo
+
 --- SOL_AX25 -> Integer
+#@todo
+
 --- SOL_IP -> Integer
+#@todo
+
 --- SOL_IPX -> Integer
+#@todo
+
 --- SOL_SOCKET -> Integer
+Socket level options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
+
+@see [[man:getsockopt(2)]], [[man:setsockopt(2)]], [[man:socket(7linux)]]
+
 --- SOL_TCP -> Integer
+#@todo
+
 --- SOL_UDP -> Integer
 #@todo
 
@@ -734,22 +1574,119 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 #@todo
 
 --- TCP_MAXSEG -> Integer
+Set maximum segment size。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(4freebsd)]], [[man:tcp(7linux)]]
+
 --- TCP_NODELAY -> Integer
+Don't delay sending to coalesce packets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(4freebsd)]],
+     [[man:tcp(7linux)]], [[man:netinet/tcp.h(header)]]
+
 #@since 1.9.2
 --- TCP_CORK -> Integer
+Don't send partial frames。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_DEFER_ACCEPT -> Integer
+Don't notify a listening socket until data is ready。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_INFO -> Integer
+Retrieve information about this socket。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(4freebsd)]], [[man:tcp(7linux)]]
+
 --- TCP_KEEPCNT -> Integer
+Maximum number of keepalive probes allowed before dropping a connection。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_KEEPIDLE -> Integer
+Idle time before keepalive probes are sent。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_KEEPINTVL -> Integer
+Time between keepalive probes。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_LINGER2 -> Integer
+Lifetime of orphaned FIN_WAIT2 sockets。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_MD5SIG -> Integer
+Use MD5 digests (RFC2385)。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(4freebsd)]], [[RFC:2385]]
+
 --- TCP_NOOPT -> Integer
+Don't use TCP options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(4freebsd)]], [[man:tcp(7linux)]]
+
 --- TCP_NOPUSH -> Integer
+Don't push the last block of write。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(4freebsd)]], [[man:tcp(7linux)]]
+
 --- TCP_QUICKACK -> Integer
+Enable quickack mode。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_SYNCNT -> Integer
+Number of SYN retransmits before a connection is dropped。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- TCP_WINDOW_CLAMP -> Integer
+Clamp the size of the advertised window。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:tcp(7linux)]]
+
 --- UDP_CORK -> Integer
+Don't send partial frames
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[man:udp(7linux)]]
+
 #@end
-#@todo
+
 
