@@ -1247,7 +1247,9 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- cbreak -> nil
+#@since 1.9.2
 --- crmode -> nil
+#@end
 
 キーボード入力のバッファリングをやめ、ユーザの入力を即座に処理できるようにします。
 
@@ -1255,10 +1257,16 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
+#@since 1.9.2
 @see [[m:Curses.#nocbreak]]、[[m:Curses.#nocrmode]]
+#@else
+@see [[m:Curses.#nocbreak]]、[[m:Curses#nocrmode]]
+#@end
 
 --- nocbreak -> nil
+#@since 1.9.2
 --- nocrmode -> nil
+#@end
 
 通常の端末のように、キーボード入力のバッファリングを有効にします。
 ユーザの入力はエンターキーなどを押すまで処理できません。
@@ -1268,7 +1276,11 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
+#@since 1.9.2
 @see [[m:Curses.#cbreak]]、[[m:Curses.#crmode]]
+#@else
+@see [[m:Curses.#cbreak]]、[[m:Curses#crmode]]
+#@end
 
 --- raw -> nil
 
@@ -1744,6 +1756,31 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 @raise  NotImplementedError サポートしていない環境で発生します。
 
 @see [[man:default_colors(3X)]]
+
+#@else
+== Private Instance Methods
+
+--- crmode -> nil
+
+キーボード入力のバッファリングをやめ、ユーザの入力を即座に処理できるようにします。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Curses.#nocbreak]]、[[m:Curses#nocrmode]]
+
+--- nocrmode -> nil
+
+通常の端末のように、キーボード入力のバッファリングを有効にします。
+ユーザの入力はエンターキーなどを押すまで処理できません。
+この状態のことを「cooked」モードといいます。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Curses.#cbreak]]、[[m:Curses#crmode]]
 
 #@end
 
