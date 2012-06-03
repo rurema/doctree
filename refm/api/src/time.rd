@@ -221,12 +221,6 @@ XML Schema で定義されている dateTime として
 
 ただし TZD は Z または [+-]hh:mm です。
 
-If self is a UTC time, Z is used as TZD.
-[+-]hh:mm is used otherwise.
-
-fractional_seconds は小数点以下の秒を指定します。
-fractional_seconds のデフォルト値は 0 です。
-
 @param fractional_seconds 小数点以下の秒の桁数を整数で指定します。
                           省略した場合は0 となります。
 
