@@ -285,9 +285,10 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 --- ftype(filename)    -> String
 
-ファイルのタイプを表す文字列を返します。文字列は以下のうちのいずれ
-かです。File.lstat(filename).ftype と同じで
-す。シンボリックリンクに対して "link" を返します。
+ファイルのタイプを表す文字列を返します。
+
+文字列は以下のうちのいずれかです。File.lstat(filename).ftype と同じです。
+シンボリックリンクに対して "link" を返します。
 
  * "file"
  * "directory"
