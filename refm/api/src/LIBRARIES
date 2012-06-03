@@ -709,6 +709,31 @@ tkextlib/itk
 tkextlib/iwidgets
 tkextlib/pkg_checker
 tkextlib/tcllib
+tkextlib/tcllib/autoscroll
+tkextlib/tcllib/ctext
+tkextlib/tcllib/cursor
+tkextlib/tcllib/datefield
+tkextlib/tcllib/ico
+tkextlib/tcllib/ip_entry
+tkextlib/tcllib/plotchart
+tkextlib/tcllib/style
+tkextlib/tcllib/tkpiechart
+#@since 1.8.4
+tkextlib/tcllib/dialog
+tkextlib/tcllib/getstring
+tkextlib/tcllib/history
+tkextlib/tcllib/panelframe
+tkextlib/tcllib/ruler
+tkextlib/tcllib/screenruler
+tkextlib/tcllib/scrollwin
+tkextlib/tcllib/superframe
+tkextlib/tcllib/swaplist
+tkextlib/tcllib/tablelist
+tkextlib/tcllib/tablelist_core
+tkextlib/tcllib/tablelist_tile
+tkextlib/tcllib/tooltip
+tkextlib/tcllib/widget
+#@end
 tkextlib/tclx
 tkextlib/tile
 #@since 1.8.4
@@ -742,6 +767,7 @@ tkextlib/tktrans
 tkextlib/treectrl
 tkextlib/vu
 tkextlib/winico
+tkextlib/winico/winico
 #@end
 tkutil
 #@since 1.8.0
