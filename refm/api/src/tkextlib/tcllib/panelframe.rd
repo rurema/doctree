@@ -13,7 +13,8 @@ require tkextlib/tcllib
 #@todo
 
 == Instance Methods
--- add(what, *args)
+--- add(what, *args)
+#@todo
 
 --- set_widget(widget)
 #@todo
