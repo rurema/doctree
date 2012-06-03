@@ -50,6 +50,34 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェク�
 
 #@else
 
+= reopen Kernel
+
+== Module Functions
+
+--- Complex(r, i = 0) -> Complex
+
+実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
+
+@param r 生成する複素数の実部。
+
+@param i 生成する複素数の虚部。省略した場合は 0 です。
+
+  Complex(1)       # => Complex(1, 0)
+  Complex(1, 2)    # => Complex(1, 2)
+
+r にも i にも複素数と解釈されるオブジェクトを指定した場合には、
+Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを返しま
+す。
+
+  Complex(Complex(1, 1), Complex(2, 3))         # => Complex(-2, 3)
+  Complex(1, 1) + Complex(2, 3) * Complex(0, 1) # => Complex(-2, 3)
+
+[注意] 1.9 系とは異なり、Complex('1+1i') のように文字列を引数に渡す事は
+できません。
+
+  Complex('1+1i')  # => NoMethodError
+  Complex('10@10') # => NoMethodError
+
 #@#=== ChangeLog
 #@# *[2002-04-03] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 #@# *[2003-04-29] Complex#polarの記述を正しい配列リテラルの表記に修正 by [[unknown:pastor|URL:mailto:pastor@fmc.rikkyo.ne.jp]]
