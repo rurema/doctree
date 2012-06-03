@@ -177,14 +177,15 @@ date がISO 8601で定義されている形式に準拠していない、
 --- rfc2822 -> String
 --- rfc822 -> String
 
-[[RFC:2822]] で定義されている date-time として表現される
-以下の形式の文字列を返します:
+[[RFC:2822]] で定義されている date-time として表現される形式の文字列を
+返します。
 
- day-of-week, DD month-name CCYY hh:mm:ss zone
-
-ただし zone は [+-]hhmm です。
-
-self が UTC time の場合、zone は +0000 になります。
+@return 以下の形式の文字列を返します。
+//emlist{
+  day-of-week, DD month-name CCYY hh:mm:ss zone
+//}
+        ただし zone は [+-]hhmm です。
+        self が UTC time の場合、zone は +0000 になります。
 
 使用例
   require 'time'
@@ -195,12 +196,14 @@ self が UTC time の場合、zone は +0000 になります。
 
 --- httpdate -> String
 
-[[RFC:2616]]で定義されているHTTP-dateのrfc1123-dateとして
-表現される以下の形式の文字列を返します:
+[[RFC:2616]] で定義されている HTTP-date の rfc1123-date 形式の文字列を
+返します。
 
+@return 以下の形式の文字列を返します。
+//emlist{
   day-of-week, DD month-name CCYY hh:mm:ss GMT
-
-注意: 結果はいつも UTC (GMT) です。
+//}
+        注意: 結果はいつも UTC (GMT) です。
 
 使用例
   require 'time'
@@ -214,15 +217,17 @@ self が UTC time の場合、zone は +0000 になります。
 --- iso8601(fractional_seconds = 0) -> String
 
 XML Schema で定義されている dateTime として
-表現される以下の形式の文字列を返します:
-
-  CCYY-MM-DDThh:mm:ssTZD
-  CCYY-MM-DDThh:mm:ss.sssTZD
-
-ただし TZD は Z または [+-]hh:mm です。
+表現される形式の文字列を返します:
 
 @param fractional_seconds 小数点以下の秒の桁数を整数で指定します。
                           省略した場合は0 となります。
+
+@return 以下の形式の文字列を返します。
+//emlist{
+  CCYY-MM-DDThh:mm:ssTZD
+  CCYY-MM-DDThh:mm:ss.sssTZD
+//}
+        ただし TZD は Z または [+-]hh:mm です。
 
 使用例
   require 'time'
