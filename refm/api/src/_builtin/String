@@ -2458,6 +2458,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 --- sum(bits = 16) -> Integer
 
 文字列の bits ビットのチェックサムを計算します。
+
 以下と同じです。
 
    def sum(bits)

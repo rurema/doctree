@@ -781,7 +781,9 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 
 --- display(out = $stdout) -> nil
 
-オブジェクトを out に出力します。以下のように定義されています。
+オブジェクトを out に出力します。
+
+以下のように定義されています。
 
   class Object
     def display(out = $stdout)

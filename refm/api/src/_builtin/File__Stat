@@ -76,8 +76,9 @@ path に関する File::Stat オブジェクトを生成して返します。
   p File::Stat.new(fp1.path) <=> fp2.path #=> nil
 
 --- ftype -> String
-ファイルのタイプを表す文字列を返します。文字列は以下のうちの
-いずれかです。
+ファイルのタイプを表す文字列を返します。
+
+文字列は以下のうちのいずれかです。
 
   "file"
   "directory"
