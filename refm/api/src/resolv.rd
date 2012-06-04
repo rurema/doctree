@@ -1563,15 +1563,17 @@ IPv6 のアドレスを表すクラスです。
 == Class Methods
 
 --- create(address)
-以下のいずれかの形式の文字列 address から Resolv::IPv6 のインスタンスを生成します。
 
+引数 address で指定した文字列から Resolv::IPv6 のインスタンスを生成しま
+す。
+
+@param address human readable な IPv6 アドレスの文字列表現を以下のいず
+               れかの形式で指定します。
 
   * 8Hex
   * CompressedHex
   * 6Hex4Dec
   * CompressedHex4Dec
-
-@param address human readable な IPv6 アドレスの文字列表現
 
 --- new(address)
 16 byte の文字列 address から Resolv::IPv6 のインスタンスを生成します。
