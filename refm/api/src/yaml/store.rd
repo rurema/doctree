@@ -1,3 +1,6 @@
+require yaml
+require pstore
+
 RubyのオブジェクトをYAML形式の外部ファイルに格納するためのクラスです。
 
   require "yaml/store"
@@ -14,17 +17,23 @@ RubyのオブジェクトをYAML形式の外部ファイルに格納するため
 代わりに YAML 形式でファイルに保存します。
 
 使い方は [[c:PStore]] とほとんど同じです。
-インターフェースは [[c:Hash]] に似ています。 
+インターフェースは [[c:Hash]] に似ています。
 
 == Class Methods
 --- new(*options) -> YAML::Store
 
+自身を初期化します。
+
 YAML 形式のファイルを読み込ませたい場合は、最初の引数にファイル名を文字列で指定します。
-最後の引数がハッシュであった場合は、YAML のデフォルトの設定を変更します。
+最後の引数がハッシュであった場合は、YAML 出力時のオプションを変更します。
 
 @param options 読み込ませたいファイルや、オプションを与えます。
 
-@see [[m:YAML::DEFAULTS]]
+#@since 1.9.2
+@see [[m:Object#to_yaml]]
+#@else
+@see [[m:Object#to_yaml]], [[m:YAML::DEFAULTS]]
+#@end
 
 == Instance Methods
 #@since 1.8.2
@@ -66,15 +75,16 @@ YAML 形式の文字列からデータを読み込みます。
 #@until 1.8.2
 --- transaction(read_only = false) -> ()
 トランザクションに入ります。このブロックの中でのみデータベースの読み書きができます。
-読み込み専用のトランザクションが使用可能です。 
+読み込み専用のトランザクションが使用可能です。
 
-@param read_only 真を指定すると、読み込み専用のトランザクションになります。 
+@param read_only 真を指定すると、読み込み専用のトランザクションになります。
 
-@raise PStore::Error read_only を真にしたときに、データベースを変更しようした場合に発生します。 
+@raise PStore::Error read_only を真にしたときに、データベースを変更しよ
+                     うした場合に発生します。
 
   require 'yaml/store'
 
-p  db = YAML::Store.new("/tmp/store.yaml")
+  db = YAML::Store.new("/tmp/store.yaml")
   db.transaction {
     db["hoge"] = [ 1, 2, 3, 4]
   }
@@ -135,4 +145,3 @@ p  db = YAML::Store.new("/tmp/store.yaml")
 内部で使用します。
 
 #@end
-
