@@ -60,34 +60,49 @@ WEBrick::HTTPServer のアクセスログの形式を処理するために内部
 
 --- CLF_TIME_FORMAT -> String
 
-Apache のアクセスログと同じ時刻の形式を表す以下の文字列です。
+Apache のアクセスログと同じ時刻の形式を表す文字列です。
 
+@return 以下の文字列を返します。
+//emlist{{
   "[%d/%b/%Y:%H:%M:%S %Z]"
+//}}
 
 --- COMMON_LOG_FORMAT -> String
 --- CLF -> String
 
-Apache のアクセスログで一般的に使われる形式を表す以下の文字列です。
+Apache のアクセスログで一般的に使われる形式を表す文字列です。
 
+@return 以下の文字列を返します。
+//emlist{{
   "%h %l %u %t \"%r\" %s %b"
+//}}
 
 --- REFERER_LOG_FORMAT -> String
 
-Apache のアクセスログで一般的に使われるリファラの形式を表す以下の文字列です。
+Apache のアクセスログで一般的に使われるリファラの形式を表す文字列です。
 
+@return 以下の文字列を返します。
+//emlist{{
   "%{Referer}i -> %U"
+//}}
 
 --- AGENT_LOG_FORMAT -> String
 
-Apache のアクセスログで一般的に使われる User-Agent の形式を表す以下の文字列です。
+Apache のアクセスログで一般的に使われる User-Agent の形式を表す文字列です。
 
+@return 以下の文字列を返します。
+//emlist{{
   "%{User-Agent}i"
+//}}
 
 --- COMBINED_LOG_FORMAT -> String
 
-Apache のアクセスログで一般的に使われる形式を表す以下の文字列です。
+Apache のアクセスログで一般的に使われる形式を表す文字列です。
 
+@return 以下の文字列を返します。
+//emlist{{
   "%h %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-agent}i\""
+//}}
 
 == Module Functions
 
