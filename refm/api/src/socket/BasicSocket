@@ -295,6 +295,7 @@ intポインタを渡します。
 --- shutdown(how = Socket::SHUT_RDWR) -> 0
 
 ソケットの以降の接続を終了させます。
+
 how の値によって以下のように接続が終了します。
 
   * Socket::SHUT_RD: それ以降の受信が拒否されます
