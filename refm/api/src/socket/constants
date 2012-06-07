@@ -714,16 +714,66 @@ IPv4の 244.0.0.0 に対応する整数です。
 #@end
 
 --- NI_DGRAM -> Integer
---- NI_MAXHOST -> Integer
---- NI_MAXSERV -> Integer
---- NI_NAMEREQD -> Integer
---- NI_NOFQDN -> Integer
---- NI_NUMERICHOST -> Integer
---- NI_NUMERICSERV -> Integer
-#@todo
+The service specified is a datagram service (looks up UDP ports)。
 
-Socket.getnameinfoの第2引数 flags に与える定数です。
-[[man:getnameinfo(3)]]も参照して下さい。
+[[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
+定数です。
+
+  Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"], Socket::NI_DGRAM)
+  # => ["localhost", "syslog"]
+  Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"])
+  # => ["localhost", "shell"]
+
+@see [[man:getnameinfo(3)]]
+
+--- NI_MAXHOST -> Integer
+
+[[man:getnameinfo(3)]] で用いるホスト名文字列の最大長さ。
+
+--- NI_MAXSERV -> Integer
+
+[[man:getnameinfo(3)]] で用いるサービス名文字列の最大長さ。
+
+--- NI_NAMEREQD -> Integer
+
+A name is required。名前解決できなかった場合にエラーを返すことを意味します。
+
+[[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
+定数です。
+
+  # ここでは 192.0.2.18 は名前解決できないアドレス
+  Addrinfo.tcp("192.0.2.18", 514).getnameinfo()
+  # =>["192.0.2.18", "shell"] 
+  Addrinfo.tcp("192.0.2.18", 514).getnameinfo(Socket::NI_NAMEREQD)
+  # SocketError が発生する
+
+@see [[man:getnameinfo(3)]]
+
+--- NI_NOFQDN -> Integer
+
+An FQDN is not required for local hosts, return only the local part.
+
+[[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getnameinfo(3)]]
+
+--- NI_NUMERICHOST -> Integer
+
+Return a numeric address.
+
+[[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getnameinfo(3)]]
+
+--- NI_NUMERICSERV -> Integer
+Return the service name as a digit string.
+
+[[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getnameinfo(3)]]
 
 --- IP_ADD_MEMBERSHIP -> Integer
 Add a multicast group membership。
