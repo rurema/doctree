@@ -154,6 +154,8 @@ IP のバージョンに依存しないプログラムを書くための標準�
 
 @return 配列を返し、その要素はアドレスとポートを表す文字列です。
 
+@raise SocketError [[man:getnameinfo(3)]] がエラーを起こした場合に生じる例外
+
 #@since 1.9.1
 @see [[m:Addrinfo#getnameinfo]]
 #@end

@@ -349,6 +349,8 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
   #=> ["localhost", "80"]
 
 @param flags フラグ
+@raise SocketError [[man:getnameinfo(3)]] がエラーを起こした場合に生じる例外
+
 @see [[m:Socket.getnameinfo]]
 
 --- family_addrinfo(host, port) -> Addrinfo
