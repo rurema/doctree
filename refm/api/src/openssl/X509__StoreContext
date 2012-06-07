@@ -173,6 +173,7 @@ CRL に関するフラグを設定します。
 --- trust=(trust)
 
 #@todo
+
 以下のいずれかの定数の値を指定します。
 
  * [[m:OpenSSL::X509::TRUST_COMPAT]]
