@@ -47,7 +47,7 @@ Ruby の組み込みクラスのいくつかを YAML に変換するためのサ
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -146,7 +146,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -218,7 +218,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -258,7 +258,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -306,7 +306,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -373,7 +373,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -413,7 +413,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -453,7 +453,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -497,7 +497,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -537,7 +537,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -573,7 +573,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -609,7 +609,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -646,7 +646,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -686,7 +686,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -722,7 +722,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 
@@ -758,7 +758,7 @@ nilを返します。
 
 @param val タグ URI を文字列で指定します。
 
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 
 自身を YAML ドキュメントに変換します。
 

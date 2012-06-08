@@ -525,11 +525,13 @@ obj_classクラスのインスタンスを生成して返します。
 [注意] ブロックを指定しないと NoMethodError が発生する事に注意してください。
 
 #@since 1.8.2
---- parse_file(file_path)
-file_pathのファイルから一つのYAMLドキュメントをパースし、
 #@since 1.9.2
+--- parse_file(file_path) -> Syck::Node
+file_pathのファイルから一つのYAMLドキュメントをパースし、
 [[c:Syck::Node]]オブジェクトを返します。
 #@else
+--- parse_file(file_path) -> YAML::Syck::Node
+file_pathのファイルから一つのYAMLドキュメントをパースし、
 [[c:YAML::Syck::Node]]オブジェクトを返します。
 #@end
 
