@@ -1089,7 +1089,7 @@ nil でない要素の数を返します。
 #@include(pack-template)
 
 #@since 1.8.7
---- pop(n = 1)    -> Array | nil
+--- pop(n = 1)    -> object | Array | nil
 #@else
 --- pop    -> object | nil
 #@end
