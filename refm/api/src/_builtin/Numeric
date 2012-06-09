@@ -349,21 +349,6 @@ other が Numeric で比較できないオブジェクトの場合、
 
 @see [[m:Numeric#ceil]], [[m:Numeric#floor]], [[m:Numeric#round]]
 
---- clone
---- dup
-
-#@since 1.8.0
-このメソッドを呼び出すことはできません。呼び出すと例外が発生します。
-
-数値などの immutable なオブジェクトは clone や dup が禁止されています。
-  1.dup   # => in `clone': can't clone Fixnum (TypeError)
-
-@raise TypeError このメソッドを呼び出した場合に発生します
-
-#@else
-self を返します。
-#@end
-
 --- coerce(other)    -> [Numeric]
 
 自身と other が同じクラスになるよう、自身か other を変換し [other, self] という配列にして返します。
