@@ -1515,7 +1515,7 @@ nil を返します。
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
 
 #@since 1.8.0
---- values_at(*selectors)    -> Array | nil
+--- values_at(*selectors)    -> Array
 
 引数で指定されたインデックスに対応する要素を配列で返します。インデッ
 クスに対応する値がなければ nil が要素になります。
