@@ -6,8 +6,10 @@ ReFeについては
 
 === Gems版
 
-Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
+Gemsをお使いの方は、以下のコマンドを実行する事でインストールできます。
 ([[ruby-list:41478]])
+
+  $ gem install refe
 
 === Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
