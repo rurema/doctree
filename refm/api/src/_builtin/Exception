@@ -4,8 +4,8 @@
 
 == Class Methods
 
---- new(error_message = nil)
---- exception(error_message = nil)
+--- new(error_message = nil)       -> Exception
+--- exception(error_message = nil) -> Exception
 
 例外オブジェクトを生成して返します。
 

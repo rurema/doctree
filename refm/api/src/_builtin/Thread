@@ -471,7 +471,7 @@ nil を渡すとトレースを解除します。
 == Constants
 
 #@since 1.9.1
---- MUTEX_FOR_THREAD_EXCLUSIVE
+--- MUTEX_FOR_THREAD_EXCLUSIVE -> Mutex
 
 [[m:Thread.exclusive]]用の[[c:Mutex]]オブジェクトです。
 #@end

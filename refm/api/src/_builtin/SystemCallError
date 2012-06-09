@@ -303,7 +303,7 @@ other が SystemCallError のサブクラスのインスタンスで、
 
 == Constants
 
---- Errno
+--- Errno -> Fixnum
 
 Errno::EXXX の各クラスに対応するシステム依存のエラーコード値(整数)です。
 

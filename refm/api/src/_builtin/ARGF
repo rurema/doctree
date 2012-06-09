@@ -779,7 +779,7 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します
 #@end
 
 #@since 1.9.1
---- readpartial(length, str = nil)
+--- readpartial(length, str = nil) -> String
 [[m:IO#readpartial]]を参照
 
 @see [[m:IO#readpartial]]

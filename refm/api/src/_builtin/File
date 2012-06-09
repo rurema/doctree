@@ -171,7 +171,7 @@ path が相対パスであれば default_dir を基準にします。
 @param default_dir path が相対パスであれば default_dir を基準に展開されます。
 
 #@since 1.9.2
---- absolute_path(file_name, dir_string=nil)
+--- absolute_path(file_name, dir_string=nil) -> String
 
 file_name を絶対パスに変換した文字列を返します。
 
@@ -890,18 +890,18 @@ flock は false を返します。
 
 == Constants
 
---- ALT_SEPARATOR
+--- ALT_SEPARATOR -> "\\" | nil
 
 システムのファイルパスのセパレータが SEPARATOR と異なる場合
 に設定されます。MS-DOS などでは "\" です。UNIX や Cygwin などでは nil です。
 
---- PATH_SEPARATOR
+--- PATH_SEPARATOR -> ";" | "," | ":"
 
 PATH 環境変数の要素のセパレータです。UNIX では ":" MS-DOS な
 どでは ";" です。
 
---- SEPARATOR
---- Separator
+--- SEPARATOR -> "/"
+--- Separator -> "/"
 
 ファイルパスのセパレータです。ファイルを扱うメソッドにパス名を渡す
 場合などスクリプト内のパス名は環境によらずこのセパレータで統一され

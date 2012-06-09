@@ -669,122 +669,122 @@ nil を返します。
 
 == Constants
 
---- PRIO_PROCESS
+--- PRIO_PROCESS -> Fixnum
 
 対象とするプライオリティがプロセスプライオリティであることを表す定数です。
 
 [[m:Process.#getpriority]] または [[m:Process.#setpriority]] で使われます。
 
---- PRIO_PGRP
+--- PRIO_PGRP -> Fixnum
 
 対象とするプライオリティがプロセスグループプライオリティであることを表す定数です。
 
 [[m:Process.#getpriority]] または [[m:Process.#setpriority]] で使われます。
 
---- PRIO_USER
+--- PRIO_USER -> Fixnum
 
 対象とするプライオリティがユーザプライオリティであることを表す定数です。
 
 [[m:Process.#getpriority]] または [[m:Process.#setpriority]] で使われます。
 
---- RLIMIT_AS
+--- RLIMIT_AS -> Fixnum
 
 リソースの種類がプロセスの仮想メモリサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_CORE
+--- RLIMIT_CORE -> Fixnum
 
 リソースの種類が core ファイルのサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_CPU
+--- RLIMIT_CPU -> Fixnum
 
 リソースの種類がプロセスの CPU 時間であることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_DATA
+--- RLIMIT_DATA -> Fixnum
 
 リソースの種類がプロセスのデータ領域のサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_FSIZE
+--- RLIMIT_FSIZE -> Fixnum
 
 リソースの種類がプロセスが生成するファイルのサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_MEMLOCK
+--- RLIMIT_MEMLOCK -> Fixnum
 
 リソースの種類が [[man:mlock(2)]] でロックできるトータルのサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_NOFILE
+--- RLIMIT_NOFILE -> Fixnum
 
 リソースの種類がプロセスがオープンできるファイルの数であることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_NPROC
+--- RLIMIT_NPROC -> Fixnum
 
 リソースの種類がユーザのプロセスの最大数であることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_RSS
+--- RLIMIT_RSS -> Fixnum
 
 リソースの種類が使用できる実メモリの最大サイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_SBSIZE
+--- RLIMIT_SBSIZE -> Fixnum
 
 リソースの種類がソケットバッファのサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIMIT_STACK
+--- RLIMIT_STACK -> Fixnum
 
 リソースの種類がプロセスのスタック領域のサイズであることを示す定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 システムによっては定義されていません。
 
---- RLIM_INFINITY
+--- RLIM_INFINITY -> Integer
 
 リソースに制限がないことを意味する定数です。
 
 [[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われます。
 
 
---- RLIM_SAVED_CUR
+--- RLIM_SAVED_CUR -> Integer
 
 [[m:Process.#getrlimit]], [[m:Process.#setrlimit]] で使われます。詳しくは [[man:setrlimit(2)]] を参照して下さい。
 
---- RLIM_SAVED_MAX
+--- RLIM_SAVED_MAX -> Integer
 
 [[m:Process.#getrlimit]], [[m:Process.#setrlimit]] で使われます。詳しくは [[man:setrlimit(2)]] を参照して下さい。
 
---- WNOHANG
+--- WNOHANG -> Fixnum
 
 [[m:Process.#waitpid]] の第二引数に指定するフラグです。
 終了した子プロセスがない時でも waitpid がブロックしません。
 
---- WUNTRACED
+--- WUNTRACED -> Fixnum
 
 [[m:Process.#waitpid]] の第二引数に指定するフラグです。
 このフラグが指定された場合、waitpid は停止しているだけで
