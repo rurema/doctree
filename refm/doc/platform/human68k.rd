@@ -10,7 +10,7 @@ RubyにおけるHuman68kのサポートは1998年4月17日から開始された(
 
 == Rubyのバイナリ
 
-* [[url:http://moonrock.jp/~don/software/]]: Ruby 1.6.4のコンパイル済みバイナリ。
+ * [[url:http://moonrock.jp/~don/software/]]: Ruby 1.6.4のコンパイル済みバイナリ。
 
 == 参照
 
