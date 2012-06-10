@@ -6,4 +6,6 @@
 
 ファイルディスクリプタとソケットディスクリプタの統合がされるまえに Be 社が倒産してしまったため、現在の ruby ではソケットとスレッドが使えない。（Yellow TAB の出した Zeta だと動くのだろうか？あまり評判がよくないようだが）
 
-インストール方法は((<こちら|URL:http://www.ruby-lang.org/ja/install.cgi?cmd=view;name=BeOS>))
+インストール方法は以下を参照。
+
+ * [[url:http://www.ruby-lang.org/ja/install.cgi?cmd=view;name=BeOS]]

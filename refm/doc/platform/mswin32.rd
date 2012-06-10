@@ -2,4 +2,4 @@
 
 VC++ で作られた ruby を mswin32版 と呼んでいる。
 
-→((<Win32ネイティブ版>))
+→[[d:platform/Win32-native]]
