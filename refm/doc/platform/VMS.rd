@@ -12,12 +12,12 @@ VAX や Alpha のOS。今は OpenVMS と呼ぶらしい。ruby のソースで�
 た。まともに対応されつつあるようです)
 
 1.8.1からバイナリが公開されています。
-((<URL:http://www.geocities.jp/vmsruby/>)) を参照。
+[[url:http://www.geocities.jp/vmsruby/]] を参照。
 
-((<URL:http://www.openvms.compaq.com/>)) を参照。
+[[url:http://www.openvms.compaq.com/]] を参照。
 
 以下も参照
 
-((<URL:http://www.levitte.org/~ava/index.htmlx>))
+[[url:http://www.levitte.org/~ava/index.htmlx]]
 
-((<URL:http://www.montagar.com/hobbyist/>))
+[[url:http://www.montagar.com/hobbyist/]]

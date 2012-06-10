@@ -1,3 +1,3 @@
 = mingw32
 
---> ((<MinGW>))
+--> [[d:platform/MinGW]]

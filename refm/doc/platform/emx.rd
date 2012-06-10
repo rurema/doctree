@@ -1,3 +1,3 @@
 = emx
 
---> ((<OS2>))
+--> [[d:platform/OS2]]

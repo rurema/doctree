@@ -6,4 +6,4 @@
 う奴とそのコンパイル環境(という説明でいいのかな？)。かなり古い環境だが、
 今も利用者はいるらしい。
 
-((<URL:http://www.delorie.com/djgpp/>)) 参照。
+[[url:http://www.delorie.com/djgpp/]] 参照。

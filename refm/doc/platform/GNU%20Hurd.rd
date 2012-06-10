@@ -2,4 +2,4 @@
 
 = GNU Hurd
 
---> ((<GNU>))
+--> [[d:platform/GNU]]

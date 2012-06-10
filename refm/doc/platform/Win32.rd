@@ -3,15 +3,15 @@
 32 ビットアーキテクチャ上で動作する
 Windows 95/98/Me/NT/2000/XP などを総称して Win32 システムと呼びます。
 16 ビットアーキクチャの Windows 3.1
-および MS-DOS では ((<DJGPP>)) 版 Ruby が動作します。
+および MS-DOS では [[d:platform/DJGPP]] 版 Ruby が動作します。
 
 なお現在は Win64 システム (Alpha と IA64) も存在しますが、
 Ruby の動作報告はまだありません。
 
 Win32 用の Ruby は大きく分けると
 
-  * ((<Cygwin>)) 版
-  * ((<Win32ネイティブ版>)) Ruby
+  * [[d:platform/Cygwin]] 版
+  * [[d:platform/Win32-native]] Ruby
 
 の二種類があります。
 

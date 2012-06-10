@@ -10,11 +10,11 @@ Win32 版 Ruby を Cygwin 版と比較すると以下の利点があります。
 
   * Unix 版との互換性が非常に低い (ある意味、当然)
 
-この点については ((<Win32ネイティブ版Rubyの互換性問題>)) も参照してください。
+この点については [[d:platform/mswin32-compat]] も参照してください。
 
 現在 Win32 ネイティブな Ruby で広く配布されているものには、
-Visual C++ で構築した ((<mswin32>)) 版と
-gcc でコンパイルした ((<MinGW>)) 版の 2 種類があります。
+Visual C++ で構築した [[d:platform/mswin32]] 版と
+gcc でコンパイルした [[d:platform/MinGW]] 版の 2 種類があります。
 また ruby 1.7 からは Borland C++ (bcc) もサポートされました。
 これを bccwin32 版と言います。
 

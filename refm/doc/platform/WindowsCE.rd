@@ -1,3 +1,3 @@
 = WindowsCE
 
---> ((<mswince>))
+--> [[d:platform/mswince]]
