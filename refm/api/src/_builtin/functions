@@ -2196,7 +2196,7 @@ $_.scan と同じです。
 
 --- trap(signal, command) -> object
 --- trap(signal) { ... } -> object
-#@since 1.8.0
+
 signal で指定された割り込みにたいするハンドラとして
 command を登録します。[[m:Signal.#trap]]と同じです。
 
@@ -2206,59 +2206,6 @@ command を登録します。[[m:Signal.#trap]]と同じです。
 @param command [[m:Signal.#trap]] 参照
 
 @see [[m:Signal.#trap]],[[c:Signal]]
-#@else
-signal で指定された割り込みにたいするハンドラとして
-command を登録します。signal はシグナル名の
-文字列か [[c:Symbol]]、またはシグナル番号で指定します。
-
-command は文字列またはブロックで指定します。
-nil、空文字列""、"SIG_IGN" または
-"IGNORE" を指定した時は、そのシグナルを無視します
-(可能ならば)。
-"SIG_DFL" または "DEFAULT" を指定した時は、
-デフォルトの動作を行なうようになります。
-"EXIT"を指定した時は、シグナルを受け取ると終了処理を
-行ったあとステータス 0 で終了します。
-
-また signal の特別な値として 0 または "EXIT"
-を指定できます。これは「プログラムの終了時」を表します。
-
-いくつかのシグナルに対して、Ruby インタプリタは例外 [[c:Interrupt]] や
-[[c:SignalException]] を発生させます。このようなシグナルは例外処理によっ
-て捕捉することもできます。
-
-    begin
-      Process.kill :QUIT, $$   # 自身にSIGQUITを送信
-    rescue SignalException
-      puts "rescue #$!"
-    end
-    #=> rescue SIGQUIT
-
-trap() により捕捉されたシグナルは例外を発生させません。
-
-trap は既にシグナルに対応する command が登録されて
-いれば、それを返します(ブロックは [[c:Proc]] オブジェク
-トとして返されます。"IGNORE" や "DEFAULT" に対しては
-nil を返します)。何も登録されていなければ
-nil を返します。
-
-#@##@since 1.8.0
-trap 実行前に"IGNORE" や "DEFAULT" が登録されていたなら、
-"IGNORE"、"DEFAULT" を返します。ruby インタプリタが知り得ない
-シグナルハンドラが登録されていた場合((-ちょっとウソ-))は nil を返します。
-
-    p trap(:INT, "p true")     #=> nil
-    p trap(:INT) { }           #=> "p true"
-    p trap(:INT, "SIG_IGN")    #=> #<Proc:0x401b1328>
-    p trap(:INT, "DEFAULT")    #=> nil
-    p trap(:INT, "EXIT")       #=> nil
-    p trap(:INT, nil)          #=> "EXIT"
-#@##@end
-
-存在しないシグナルを指定した場合は、例外 [[c:ArgumentError]] が発
-生します。なお、Windows (mswin32, mingw32)では、INT
-ILL FPE SEGV TERM BREAK ABRT そして EXIT しか指定できません。
-#@end
 
 --- trace_var(varname, hook) -> nil
 --- trace_var(varname){|new_val| .... } -> nil
