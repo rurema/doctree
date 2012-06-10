@@ -2194,8 +2194,8 @@ $_.scan と同じです。
 
 #@end
 
---- trap(signal, command) -> object
---- trap(signal) { ... } -> object
+--- trap(signal, command) -> String | Proc | nil
+--- trap(signal) { ... }  -> String | Proc | nil
 
 signal で指定された割り込みにたいするハンドラとして
 command を登録します。[[m:Signal.#trap]]と同じです。
