@@ -506,9 +506,10 @@ rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]]
 します。
 #@else
 rescue 節やイテレータブロック、for 文以外で retry が用いられた場合には
-例外 [[c:LocalJumpError]] が発生します。
-((-あるいは、突然エラーになってインタプリタが終了します。
-retry #=> -:1: retry outside of rescue clause-))
+例外 [[c:LocalJumpError]] が発生します。また、トップレベルで用いられた
+場合には、警告を表示してインタプリタが終了します。
+
+  retry #=> -:1: retry outside of rescue clause
 #@end
 
 イテレータ呼び出しにおける break, next, redo,
@@ -549,8 +550,9 @@ retry をまとめると以下のようになります。
         iter { p "(b)"; next  }     # => (a) .. (b)(c) .. (d)
         iter { p "(b)"; break }     # => (a)..(b)(d)
 
-((-あらい 2002-01-13: ensure は大域脱出を捕まえるので retry が (d)
-に飛んでいるあまり良い例じゃないか-))
+#@until 1.9.1
+[注意] ensure は大域脱出を補足するため、retry の例では (d) も表示されます。
+#@end
 
 === 例外処理
 
