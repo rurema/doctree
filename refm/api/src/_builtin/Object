@@ -1611,6 +1611,7 @@ Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなく
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
 #@since 1.8.7
+#@until 1.9.1
 --- instance_exec(*args) {|*vars| ... } -> object
 
 与えられたブロックをレシーバのコンテキストで実行します。
@@ -1631,6 +1632,7 @@ Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなく
 
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:Object#instance_eval]]
 
+#@end
 #@end
 
 #@since 1.9.1
