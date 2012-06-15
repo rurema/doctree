@@ -147,6 +147,7 @@ socktype なしでは曖昧な指定となるためです。
 @param protocol プロトコル(整数、もしくは nil)
 @param flags フラグ(整数)
 
+@raise SocketError [[man:getaddrinfo(3)]]がエラーを返したときに発生する例外です
 @see [[m:Addrinfo.foreach]], [[m:Socket.getaddrinfo]]
 
 == Instance methods
