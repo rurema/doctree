@@ -622,22 +622,81 @@ level 引数に使用します。
 #@# AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 
 --- AI_ADDRCONFIG -> Integer
+Accept only if any address is assigned。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
 --- AI_ALL -> Integer
+Allow all addresses。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
 --- AI_CANONNAME -> Integer
+Fill in the canonical name。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
 --- AI_DEFAULT -> Integer
+Default flags for getaddrinfo。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getipnodebyname(3freebsd)]]
+
 --- AI_MASK -> Integer
---- AI_NUMERICHOST -> Integer
-#@since 1.9.1
---- AI_NUMERICSERV -> Integer
-#@end
---- AI_PASSIVE -> Integer
---- AI_V4MAPPED -> Integer
---- AI_V4MAPPED_CFG -> Integer
 #@todo
 
-フラグ:
-[[m:Socket.getaddrinfo]] の flags 引数に使用します。
-[[man:getaddrinfo(3)]]も参照して下さい。
+--- AI_NUMERICHOST -> Integer
+Prevent host name resolution。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
+#@since 1.9.1
+--- AI_NUMERICSERV -> Integer
+Prevent server name resolution。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
+#@end
+--- AI_PASSIVE -> Integer
+Get address to use with bind。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
+--- AI_V4MAPPED -> Integer
+Accept IPv4-mapped IPv6 addresses。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getaddrinfo(3)]]
+
+--- AI_V4MAPPED_CFG -> Integer
+Accept IPv4 mapped addresses if the kernel supports it。
+
+[[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] の引数 flags に渡す
+定数です。
+
+@see [[man:getipnodebyname(3freebsd)]]
 
 --- EAI_ADDRFAMILY -> Integer
 --- EAI_AGAIN -> Integer
@@ -704,13 +763,26 @@ IPv4の 244.0.0.0 に対応する整数です。
 
 #@since 1.9.1
 --- INET6_ADDRSTRLEN -> Integer
+IPv6アドレス文字列の最大長。
+
+@see [[man:netinet/in.h(header)]]
+
 --- INET_ADDRSTRLEN -> Integer
+IPv4アドレス文字列の最大長。
+
+@see [[man:netinet/in.h(header)]]
+
 #@end
 #@since 1.9.2
 --- IFNAMSIZ -> Integer
-#@end
 #@since 1.9.3
 --- IF_NAMESIZE -> Integer
+#@end
+
+インターフェース名文字列の最大長さ。
+
+@see [[man:net/if.h(header)]]
+
 #@end
 
 --- NI_DGRAM -> Integer
@@ -730,9 +802,13 @@ The service specified is a datagram service (looks up UDP ports)。
 
 [[man:getnameinfo(3)]] で用いるホスト名文字列の最大長さ。
 
+@see [[man:getnameinfo(3linux)]]
+
 --- NI_MAXSERV -> Integer
 
 [[man:getnameinfo(3)]] で用いるサービス名文字列の最大長さ。
+
+@see [[man:getnameinfo(3linux)]]
 
 --- NI_NAMEREQD -> Integer
 
