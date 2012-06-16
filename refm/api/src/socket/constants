@@ -2157,32 +2157,65 @@ Timestamp (bintime)。
 
 --- SOL_ATALK -> Integer
 #@todo
+AppleTalk socket options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
 
 --- SOL_AX25 -> Integer
 #@todo
+AX.25 socket options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
 
 --- SOL_IP -> Integer
-#@todo
+IP socket options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
+
+SOL_IP はポータブルではありません。 IPPROTO_IP のほうがよりポータブルです。
+
+@see [[man:getsockopt(2)]], [[man:setsockopt(2)]], [[man:ip(7linux)]]
+     [[m:Socket::Constants::IPPROTO_IP]]
 
 --- SOL_IPX -> Integer
 #@todo
+IPX socket options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
 
 --- SOL_SOCKET -> Integer
 Socket level options。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第一引数(level)に使用します。
 
-@see [[man:getsockopt(2)]], [[man:setsockopt(2)]], [[man:socket(7linux)]]
+@see [[man:getsockopt(2)]], [[man:setsockopt(2)]], 
+     [[man:sys/socket.h(header)]], [[man:socket(7linux)]]
+     [[man:getsockopt(2freebsd)]]
 
 --- SOL_TCP -> Integer
-#@todo
+TCP socket options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_TCP]]
 
 --- SOL_UDP -> Integer
-#@todo
+UDP socket options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第一引数(level)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_UDP]]
 
 --- SOPRI_BACKGROUND -> Integer
+Background socket priority
+#@todo
+
 --- SOPRI_INTERACTIVE -> Integer
+#@todo
+Interactive socket priority
+
 --- SOPRI_NORMAL -> Integer
+Normal socket priority
 #@todo
 
 --- TCP_MAXSEG -> Integer
