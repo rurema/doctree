@@ -1809,11 +1809,57 @@ Pass credentials to receiver。
 
 #@since 1.9.2
 --- SCM_BINTIME -> Integer
+Timestamp (bintime).
+
+[[c:Socket::AncillaryData]] の type として利用します。
+
+@see [[c:Socket::AncillaryData]], [[m:Socket::AncillaryData#timestamp]]
+     [[m:BasicSocket#sendmsg]], [[m:BasicSocket#recvmsg]]
+
 --- SCM_CREDENTIALS -> Integer
+The sender's credentials
+
+[[c:Socket::AncillaryData]] の type として利用します。
+
+@see [[c:Socket::AncillaryData]], 
+     [[m:BasicSocket#sendmsg]], [[m:BasicSocket#recvmsg]],
+     [[man:unix(7linux)]]
+
 --- SCM_CREDS -> Integer
+Process credentials
+
+[[c:Socket::AncillaryData]] の type として利用します。
+
+@see [[c:Socket::AncillaryData]], 
+     [[m:BasicSocket#sendmsg]], [[m:BasicSocket#recvmsg]],
+     [[man:unix(4freebsd)]]
+
 --- SCM_RIGHTS -> Integer
+Access rights.
+
+[[c:Socket::AncillaryData]] の type として利用します。
+
+@see [[c:Socket::AncillaryData]], [[m:Socket::AncillaryData#unix_rights]]
+     [[m:BasicSocket#sendmsg]], [[m:BasicSocket#recvmsg]],
+     [[man:unix(7linux)]], [[man:unix(4freebsd)]],
+     [[man:sys/socket.h(header)]]
+
 --- SCM_TIMESTAMP -> Integer
+Timestamp (timeval).
+
+[[c:Socket::AncillaryData]] の type として利用します。
+
+@see [[c:Socket::AncillaryData]], [[m:Socket::AncillaryData#timestamp]]
+     [[m:BasicSocket#sendmsg]], [[m:BasicSocket#recvmsg]]
+
 --- SCM_TIMESTAMPNS -> Integer
+Timestamp (timespec).
+
+[[c:Socket::AncillaryData]] の type として利用します。
+
+@see [[c:Socket::AncillaryData]], [[m:Socket::AncillaryData#timestamp]]
+     [[m:BasicSocket#sendmsg]], [[m:BasicSocket#recvmsg]]
+
 --- SCM_UCRED -> Integer
 #@todo
 #@end

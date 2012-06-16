@@ -77,6 +77,8 @@ ios で指定したファイルのファイルデスクリプタを
   #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
 
 @param ios IO オブジェクトの配列
+@see [[m:Socket::AncillaryData#unix_rights]],
+     [[m:Socket::Constants::SCM_RIGHTS]]
 
 --- ip_pktinfo(addr, ifindex, spec_dst=addr) -> Socket::AncillaryData
 
@@ -94,7 +96,8 @@ IP_PKTINFO は非標準的拡張であり、システムによっては使えな
 @param ifindex インターフェースのインデックス(整数)
 @param spec_dst パケットのローカルアドレス(文字列もしくは [[c:Addrinfo]])
 
-@see [[m:Socket::AncillaryData#ip_pktinfo]]
+@see [[m:Socket::AncillaryData#ip_pktinfo]],
+     [[m:Socket::Constants::IP_PKTINFO]]
 
 --- ipv6_pktinfo(addr, ifindex) -> Socket::AncillaryData
 
@@ -110,7 +113,8 @@ IPV6_PKTINFO は [[RFC:3542]] で定義されています。
 @param addr アドレス(文字列もしくは [[c:Addrinfo]])
 @param ifindex インターフェースのインデックス(整数)
 
-@see [[m:Socket::AncillaryData#ipv6_pktinfo]]
+@see [[m:Socket::AncillaryData#ipv6_pktinfo]],
+     [[m:Socket::Constants::IPV6_PKTINFO]]
 
 == Instance Methods
 --- family -> Integer
@@ -204,6 +208,7 @@ SCM_RIGHTS な 制御メッセージを受け取ったときに配列が作ら�
 
 @raise TypeError family/level/type が AF_UNIX/SOL_SOCKET/SCM_RIGHTS でない場合
        に発生します。
+@see [[m:Socket::Constants::SCM_RIGHTS]]
 
 --- timestamp -> Time
 
@@ -229,6 +234,9 @@ SCM_RIGHTS な 制御メッセージを受け取ったときに配列が作ら�
     }
   }
 
+@see [[m:Socket::Constants::SCM_TIMESTAMP]],
+     [[m:Socket::Constants::SCM_TIMESTAMPNS]],
+     [[m:Socket::Constants::SCM_BINTIME]]
 
 --- ip_pktinfo -> [Addrinfo, Integer, Addrinfo]
 自身の type が IP_PKTINFO である場合、保持しているデータ
@@ -246,7 +254,8 @@ IP_PKTINFO は非標準的拡張であり、システムによっては使えな
 
 @raise TypeError level, type が IPPROTO_IP, IP_PKTINFO でない場合に
        発生します。
-@see [[m:Socket::AncillaryData.ip_pktinfo]]
+@see [[m:Socket::AncillaryData.ip_pktinfo]],
+     [[m:Socket::Constants::IP_PKTINFO]]
 
 --- ipv6_pktinfo -> [Addrinfo, Integer]
 自身の type が IPV6_PKTINFO である場合、保持しているデータ
@@ -262,7 +271,8 @@ IPV6_PKTINFO については [[RFC:3542]] を参照してください。
 
 @see [[m:Socket::AncillaryData.ipv6_pktinfo]], 
      [[m:Socket::AncillaryData#ipv6_pktinfo_addr]], 
-     [[m:Socket::AncillaryData#ipv6_pktinfo_ifindex]]
+     [[m:Socket::AncillaryData#ipv6_pktinfo_ifindex]],
+     [[m:Socket::Constants::IPV6_PKTINFO]]
 
 --- ipv6_pktinfo_addr -> Addrinfo
 自身の type が IPV6_PKTINFO である場合、保持しているデータ
@@ -276,7 +286,8 @@ IPV6_PKTINFO については [[RFC:3542]] を参照してください。
 
 @see [[m:Socket::AncillaryData.ipv6_pktinfo]], 
      [[m:Socket::AncillaryData#ipv6_pktinfo]], 
-     [[m:Socket::AncillaryData#ipv6_pktinfo_ifindex]]
+     [[m:Socket::AncillaryData#ipv6_pktinfo_ifindex]],
+     [[m:Socket::Constants::IPV6_PKTINFO]]
 
 --- ipv6_pktinfo_ifindex -> Integer
 自身の type が IPV6_PKTINFO である場合、保持しているデータ
@@ -290,4 +301,5 @@ IPV6_PKTINFO については [[RFC:3542]] を参照してください。
 
 @see [[m:Socket::AncillaryData.ipv6_pktinfo]], 
      [[m:Socket::AncillaryData#ipv6_pktinfo]], 
-     [[m:Socket::AncillaryData#ipv6_pktinfo_addr]]
+     [[m:Socket::AncillaryData#ipv6_pktinfo_addr]],
+     [[m:Socket::Constants::IPV6_PKTINFO]]
