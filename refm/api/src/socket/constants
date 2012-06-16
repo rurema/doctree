@@ -699,26 +699,153 @@ Accept IPv4 mapped addresses if the kernel supports it。
 @see [[man:getipnodebyname(3freebsd)]]
 
 --- EAI_ADDRFAMILY -> Integer
+Address family for hostname not supported
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 --- EAI_AGAIN -> Integer
+Temporary failure in name resolution
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 --- EAI_BADFLAGS -> Integer
+Invalid flags
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 --- EAI_BADHINTS -> Integer
+Invalid value for hints
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+#@# 非標準的定数、KAMEで使われているらしい
+
 --- EAI_FAIL -> Integer
+Non-recoverable failure in name resolution
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 --- EAI_FAMILY -> Integer
+Address family not supported
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 --- EAI_MAX -> Integer
+
+EAI_* 定数の最大値。
+
 --- EAI_MEMORY -> Integer
+Memory allocation failure
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 --- EAI_NODATA -> Integer
+No address associated with hostname
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]]
+
 --- EAI_NONAME -> Integer
+Hostname nor servname, or not known
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
 #@since 1.9.1
 --- EAI_OVERFLOW -> Integer
-#@end
---- EAI_PROTOCOL -> Integer
---- EAI_SERVICE -> Integer
---- EAI_SOCKTYPE -> Integer
---- EAI_SYSTEM -> Integer
-#@todo
+Argument buffer overflow
 
-[[m:Socket.getaddrinfo]]が失敗したときに返すエラーコードです。
-[[man:getaddrinfo(3)]]も参照して下さい。
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
+#@end
+
+--- EAI_PROTOCOL -> Integer
+Resolved protocol is unknown
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
+--- EAI_SERVICE -> Integer
+Servname not supported for socket type
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
+--- EAI_SOCKTYPE -> Integer
+Socket type not supported
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを [[c:SocketError]] に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
+--- EAI_SYSTEM -> Integer
+System error returned in errno
+
+[[man:getaddrinfo(3)]], [[man:getnameinfo(3)]] などの
+エラーコードです。
+対応する [[m:Socket.getaddrinfo]], [[m:Addrinfo.getaddrinfo]] などは
+エラーを適当な例外に変換するため、この定数は直接は利用しません。
+
+@see [[man:getaddrinfo(3linux)]], [[man:gai_strerror(3freebsd)]]
+
+
 
 --- INADDR_ALLHOSTS_GROUP -> Integer
 Multicast group for all systems on this subset。
@@ -844,7 +971,7 @@ Return a numeric address.
 @see [[man:getnameinfo(3)]]
 
 --- NI_NUMERICSERV -> Integer
-Return the service name as a digit string.
+Return the service name as a digit string
 
 [[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
 定数です。
@@ -852,7 +979,8 @@ Return the service name as a digit string.
 @see [[man:getnameinfo(3)]]
 
 --- IP_ADD_MEMBERSHIP -> Integer
-Add a multicast group membership。
+Add a multicast group membership
+
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第2引数(optname)に使用します。
 
@@ -861,9 +989,13 @@ Add a multicast group membership。
      
 --- IP_DEFAULT_MULTICAST_LOOP -> Integer
 #@todo
+Default multicast loopback
+
 
 --- IP_DEFAULT_MULTICAST_TTL -> Integer
 #@todo
+Default multicast TTL
+
 
 --- IP_DROP_MEMBERSHIP -> Integer
 Drop a multicast group membership。
@@ -939,6 +1071,7 @@ Receive IP destination address with datagram。
 
 --- IP_RECVRETOPTS -> Integer
 #@todo
+Receive all IP options for response
 
 --- IP_RETOPTS -> Integer
 IP options to be included in datagrams。
@@ -1029,6 +1162,7 @@ Minimum TTL allowed for received packets。
 
 --- IP_MSFILTER -> Integer
 #@todo
+Multicast source filtering
 
 --- IP_MTU -> Integer
 The Maximum Transmission Unit of the socket。
@@ -1063,6 +1197,7 @@ Receive packet information with datagrams。
 
 --- IP_PKTOPTIONS -> Integer
 #@todo
+Receive packet options with datagrams
 
 --- IP_PMTUDISC_DO -> Integer
 Always send DF frames。
@@ -1108,6 +1243,7 @@ Receive interface information with datagrams。
 
 --- IP_RECVSLLA -> Integer
 #@todo
+Receive link-layer address with datagrams
 
 --- IP_RECVTOS -> Integer
 Receive TOS with incoming packets。
@@ -1259,16 +1395,93 @@ Receive packet information with datagram。
      [[RFC:3542]]
 
 --- IPV6_RECVDSTOPTS -> Integer
+Receive all IP6 options for response。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RECVHOPLIMIT -> Integer
+Receive hop limit with datagram。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RECVHOPOPTS -> Integer
+Receive hop-by-hop options。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RECVPATHMTU -> Integer
+Receive current path MTU with datagram。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RECVPKTINFO -> Integer
+Receive destination IP address and incoming interface。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RECVRTHDR -> Integer
+Receive routing header。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RECVTCLASS -> Integer
+Receive traffic class。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RTHDR -> Integer
+Allows removal of sticky routing headers。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RTHDRDSTOPTS -> Integer
+Allows removal of sticky destination options header。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_RTHDR_TYPE_0 -> Integer
+ Routing header type 0。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_TCLASS -> Integer
+Specify the traffic class。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
+
 --- IPV6_UNICAST_HOPS -> Integer
 IPv6 unicast hop limit。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
@@ -1279,7 +1492,12 @@ IPv6 unicast hop limit。
      [[RFC:3493]]
 
 --- IPV6_USE_MIN_MTU -> Integer
-#@todo
+Use the minimum MTU size。
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3542]]
 
 --- IPV6_V6ONLY -> Integer
 Only bind IPv6。
@@ -1294,54 +1512,276 @@ Only bind IPv6。
 
 #@since 1.9.1
 --- IPX_TYPE -> Integer
+#@todo
+
 #@end
 
 #@since 1.8.3
 --- MSG_COMPAT -> Integer
+#@todo
+End of record
+
 #@end
 --- MSG_CTRUNC -> Integer
+Control data lost before delivery。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:send(2linux)]], [[man:recv(2linux)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+
 --- MSG_DONTROUTE -> Integer
+Send without using the routing tables。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]] の
+flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:send(2linux)]]
+     [[man:send(2freebsd)]]
+
 --- MSG_DONTWAIT -> Integer
+This message should be non-blocking。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:send(2linux)]], [[man:recv(2linux)]],
+     [[man:recv(2freebsd)]],
+
+
 #@since 1.8.3
 --- MSG_EOF -> Integer
+Data completes connection。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:send(2freebsd)]]
+
 #@end
 --- MSG_EOR -> Integer
+Data completes record。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:send(2)]], [[man:sendto(2)]], [[man:sendmsg(2)]],
+     [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
+     [[man:send(2linux)]], [[man:recv(2linux)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+
 #@since 1.8.3
 --- MSG_FLUSH -> Integer
+#@todo
+Start of a hold sequence.  Dumps to so_temp
+
+
 --- MSG_HAVEMORE -> Integer
+#@todo
+Data ready to be read
+
+
 --- MSG_HOLD -> Integer
+#@todo
+Hold fragment in so_temp
+
+--- MSG_RCVMORE -> Integer
+#@todo
+Data remains in the current packet
+
+--- MSG_SEND -> Integer
+#@todo
+Send the packet in so_temp
+
 #@end
 --- MSG_OOB -> Integer
+Process out-of-band data。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:send(2)]], [[man:sendto(2)]], [[man:sendmsg(2)]],
+     [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
+     [[man:send(2linux)]], [[man:recv(2linux)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+
 --- MSG_PEEK -> Integer
-#@since 1.8.3
---- MSG_RCVMORE -> Integer
---- MSG_SEND -> Integer
-#@end
+Peek at incoming message。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:send(2)]], [[man:sendto(2)]], [[man:sendmsg(2)]],
+     [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
+     [[man:send(2linux)]], [[man:recv(2linux)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+
+
 --- MSG_TRUNC -> Integer
+Data discarded before delivery。
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]],
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]]
+の flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:send(2linux)]], [[man:recv(2linux)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+
 --- MSG_WAITALL -> Integer
+Wait for full request or error
+
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:sys/socket.h(header)]],
+     [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
+     [[man:recv(2linux)]],
+     [[man:recv(2freebsd)]],
+
 #@since 1.9.2
 --- MSG_CONFIRM -> Integer
+Confirm path validity
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]]
+の flags 引数に用います。
+
+@see [[man:send(2linux)]]
+
 --- MSG_ERRQUEUE -> Integer
+Fetch message from error queue
+
+[[m:BasicSocket#recv]], [[m:BasicSocket#recvmsg]] の
+flags 引数に用います。
+
+@see [[man:recv(2linux)]]
+
 --- MSG_FIN -> Integer
---- MSG_MORE -> Integer
---- MSG_NOSIGNAL -> Integer
---- MSG_PROXY -> Integer
---- MSG_RST -> Integer
---- MSG_SYN -> Integer
-#@end
 #@todo
+
+--- MSG_MORE -> Integer
+Sender will send more
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]] の
+flags 引数に用います。
+
+@see [[man:send(2linux)]]
+
+--- MSG_NOSIGNAL -> Integer
+Do not generate SIGPIPE
+
+[[m:BasicSocket#send]], [[m:BasicSocket#sendmsg]] の
+flags 引数に用います。
+
+@see [[man:send(2linux)]], [[man:send(2freebsd)]]
+
+--- MSG_PROXY -> Integer
+#@todo
+Wait for full request
+
+--- MSG_RST -> Integer
+#@todo
+
+--- MSG_SYN -> Integer
+#@todo
+
+#@end
 
 #@since 1.9.2
 --- MCAST_BLOCK_SOURCE -> Integer
+Block multicast packets from this source
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_EXCLUDE -> Integer
+Exclusive multicast source filter
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_INCLUDE -> Integer
+Inclusive multicast source filter
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_JOIN_GROUP -> Integer
+Join a multicast group
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_JOIN_SOURCE_GROUP -> Integer
+Join a multicast source group
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_LEAVE_GROUP -> Integer
+Leave a multicast group
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_LEAVE_SOURCE_GROUP -> Integer
+Leave a multicast source group
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 --- MCAST_MSFILTER -> Integer
---- MCAST_UNBLOCK_SOURCE -> Integer
 #@todo
+Multicast source filtering
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
+--- MCAST_UNBLOCK_SOURCE -> Integer
+Unblock multicast packets from this source
+
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
+の第2引数(optname)に使用します。
+
+@see [[m:Socket::Constants::IPPROTO_IP]], [[m:Socket::Constants::IPPROTO_IPV6]],
+     [[RFC:3678]]
+
 #@end
 
 #@since 1.9.2
