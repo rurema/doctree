@@ -1,7 +1,7 @@
 = class Socket::AncillaryData
 
 [[m:BasicSocket#sendmsg]] や [[m:BasicSocket#recvmsg]]
- で用いる ancillary data (補助データ、制御情報)
+で用いる ancillary data (補助データ、制御情報)
 を表すクラスです。
 
 [[m:Socket::AncillaryData#family]](socket family), 
