@@ -692,7 +692,11 @@ hash を再定義する場合は、一様に分布する任意の整数を返す
   p :ruby.hash #=> 103538
   p :ruby.hash #=> 103538
 
+#@since 1.9.3
+@see [[m:Object#eql?]],[[m:BasicObject#__id__]]
+#@else
 @see [[m:Object#eql?]],[[m:Object#__id__]]
+#@end
 
 --- ===(other) -> bool
 
