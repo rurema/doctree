@@ -17,7 +17,7 @@ require する事で数値計算の結果を [[c:Rational]] オブジェクト�
 
 = reopen Kernel
 == Module Functions
---- Rational(num, den = 1) -> Rational
+--- Rational(num, den = 1) -> Rational | Integer
 
 [[c:Rational]] オブジェクトを生成します。
 
@@ -46,11 +46,18 @@ num と den には整数を指定します。den が 1 の時に限り、num に
   Rational("1/3")             # => NoMethodError
   Rational(nil)               # => NoMethodError
 
+[[lib:mathn]] を require 済みの場合は約分して整数になる値を指定すると
+[[c:Integer]] を返します。
+
+  Rational(4, 2)              # => Rational(2, 1)
+  require "mathn"
+  Rational(4, 2)              # => 2
+
 約分していない [[c:Rational]] オブジェクトを作成する場合は
 [[m:Rational.new!]] を使用します。ただし、1.9系では使用できない事に注意
 してください。
 
-@see [[m:Rational.new!]], [[m:Rational.reduce]]
+@see [[m:Rational.new!]], [[m:Rational.reduce]], [[lib:mathn]]
 
 = redefine Integer
 
