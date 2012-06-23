@@ -5,7 +5,11 @@
 要素を動的に追加・削除できる手軽な構造体を提供するクラスです。
 
 OpenStruct のインスタンスに対して未定義なメソッド x= を呼ぶと、
+#@since 1.9.1
+OpenStruct クラスの [[m:BasicObject#method_missing]] で捕捉され、そのインスタンスに
+#@else
 OpenStruct クラスの [[m:Object#method_missing]] で捕捉され、そのインスタンスに
+#@end
 インスタンスメソッド x, x= が定義されます。
 この挙動によって要素を動的に変更できる構造体として働きます。
 

@@ -179,7 +179,11 @@ obj のもつインスタンスメソッドのうち、
 
 @return 委譲先のメソッドからの返り値
 
+#@since 1.9.1
+@see [[m:BasicObject#method_missing]]
+#@else
 @see [[m:Object#method_missing]]
+#@end
 
 --- respond_to?(m) -> bool
 

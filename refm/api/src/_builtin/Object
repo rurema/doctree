@@ -1343,14 +1343,14 @@ include_private が真のときは private メソッドに対しても真を返�
 #@since 1.9.2
 --- respond_to_missing?(symbol, include_private) -> bool
 
-自身が symbol で表されるメソッドに対し [[m:Object#method_missing]] で
-反応するつもりならば真を返します。
+自身が symbol で表されるメソッドに対し
+[[m:BasicObject#method_missing]] で反応するつもりならば真を返します。
 
 [[m:Object#respond_to?]] はメソッドが定義されていない場合、
 デフォルトでこのメソッドを呼びだし問合せます。
 
-[[m:Object#method_missing]] を override した場合に
-このメソッドも override されるべきです。
+[[m:BasicObject#method_missing]] を override した場合にこのメソッドも
+override されるべきです。
 
 false を返します。
 
@@ -1359,6 +1359,8 @@ false を返します。
 
 @see [[m:Object#respond_to?]]
 #@end
+
+#@until 1.9.1
 --- method_missing(name, *args) -> object
 
 呼びだされたメソッドが定義されていなかった時、Rubyインタプリタがこのメソッド
@@ -1396,7 +1398,7 @@ false を返します。
   
   dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
   dic.find_2_in :Esperanto #=> "du"
-
+#@end
 
 --- instance_of?(klass) -> bool
 

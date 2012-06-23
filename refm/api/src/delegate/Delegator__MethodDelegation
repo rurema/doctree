@@ -82,7 +82,7 @@
 
 @return 委譲先のメソッドからの返り値
 
-@see [[m:Object#method_missing]]
+@see [[m:BasicObject#method_missing]]
 
 
 --- respond_to?(m) -> bool
