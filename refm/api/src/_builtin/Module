@@ -1102,7 +1102,11 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 メソッド name が追加された時にインタプリタがこのメソッドを呼び出します。
 
 特異メソッドの追加に対するフックには
+#@since 1.9.1
+[[m:BasicObject#singleton_method_added]]
+#@else
 [[m:Object#singleton_method_added]]
+#@end
 を使います。
 
 @param name 追加されたメソッドの名前が [[c:Symbol]] で渡されます。
@@ -1127,7 +1131,11 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 された時にインタプリタがこのメソッドを呼び出します。
 
 特異メソッドの削除に対するフックには
+#@since 1.9.1
+[[m:BasicObject#singleton_method_removed]]
+#@else
 [[m:Object#singleton_method_removed]]
+#@end
 を使います。
 
 @param name 削除されたメソッド名が [[c:Symbol]] で渡されます。
@@ -1154,7 +1162,11 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 undef 文により未定義にされると、インタプリタがこのメソッドを呼び出します。
 
 特異メソッドの削除をフックするには
+#@since 1.9.1
+[[m:BasicObject#singleton_method_undefined]]
+#@else
 [[m:Object#singleton_method_undefined]]
+#@end
 を使います。
 
 @param name 削除/未定義にされたメソッド名が [[c:Symbol]] で渡されます。

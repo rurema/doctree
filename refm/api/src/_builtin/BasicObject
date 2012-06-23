@@ -239,4 +239,8 @@ Object クラスに定義済みのメソッドはプロクシできないとい�
 
 @see [[m:Object#object_id]], [[ruby-dev:42840]]
 #@end
+
+== Private Instance Methods
+
+#@include(BasicObject.private_methods_from_Object)
 #@end
