@@ -581,8 +581,12 @@ module_eval のブロック中でメソッドを定義する場合、
  }
  
  p C.new.m        #=> [:m, 1]
- 
+
+#@since 1.9.1
+@see [[m:BasicObject#instance_eval]], [[m:Module.new]]
+#@else
 @see [[m:Object#instance_eval]], [[m:Module.new]]
+#@end
 
 --- name -> String
 --- to_s -> String
@@ -960,7 +964,11 @@ val をセットします。val を返します。
 インスタンスメソッド name を定義します。
 
 ブロックを与えた場合、定義したメソッドの実行時にブロックが
+#@since 1.9.1
+レシーバクラスのインスタンスの上で [[m:BasicObject#instance_eval]] されます。
+#@else
 レシーバクラスのインスタンスの上で [[m:Object#instance_eval]] されます。
+#@end
 
 @param name [[c:String]] または [[c:Symbol]] を指定します。
 
