@@ -411,7 +411,7 @@ TCP のような connection-oriented socket の場合は
 3番目の要素は受け取ったメッセージに付加されているフラグで、
 Socket::MSG_* 定数の bitwise OR で表現されています。
 
-残りの要素は補助データ([[c:AncillaryData]] オブジェクト)です。
+残りの要素は補助データ([[c:Socket::AncillaryData]] オブジェクト)です。
 
   # UnixSocket#recv_io を recvmsg で実装する例
   mesg, sender_sockaddr, rflags, *controls = sock.recvmsg(:scm_rights=>true)
