@@ -2407,9 +2407,13 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 --- eval(expr, bind, fname = __FILE__, lineno = 1) -> object
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
-す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
-クトを与えた場合、そのオブジェクトを生成したコンテキストで文字列を
-評価します。
+す。第2引数に 
+#@until 1.9.1
+[[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトを与えた場合、
+#@else
+[[c:Binding]] オブジェクトを与えた場合、
+#@end
+そのオブジェクトを生成したコンテキストで文字列を評価します。
 
 expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval 
 実行前に補足されていた変数は eval 実行後にブロック外に持ち出せます。
@@ -2423,7 +2427,7 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 場合、 [[m:Module#module_eval]], [[m:Object#instance_eval]] が使えます。
 
 @param expr  評価する文字列です。
-@param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトです。
+@param bind  評価コンテキストです。
 @param fname スタックトレースに表示するファイル名です。
 @param lineno 文字列 expr が書かれていると想定する先頭の行番号を整数で指定します。
 
