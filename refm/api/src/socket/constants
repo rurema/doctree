@@ -25,89 +25,79 @@ ITU-T X.25 / ISO-8208。
 
 --- AF_CCITT -> Integer
 --- PF_CCITT -> Integer
-
+#@todo
 CCITT プロトコル。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_CHAOS -> Integer
 --- PF_CHAOS -> Integer
-
+#@todo
 MIT CHAOS プロトコル。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_CNT -> Integer
 --- PF_CNT -> Integer
-
+#@todo
 Computer Network Technology。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_COIP -> Integer
 --- PF_COIP -> Integer
-
+#@todo
 connection-oriented IP。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_DATAKIT -> Integer
 --- PF_DATAKIT -> Integer
-
+#@todo
 datakit protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_DEC -> Integer
 --- PF_DEC -> Integer
-
+#@todo
 DECnet protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_DLI -> Integer
 --- PF_DLI -> Integer
-
+#@todo
 DEC Direct data link interface。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_E164 -> Integer
+#@todo
 CCITT E.164 recommendation。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_ECMA -> Integer
 --- PF_ECMA -> Integer
-
+#@todo
 European computer manufacturers。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_HYLINK -> Integer
 --- PF_HYLINK -> Integer
-
+#@todo
 NSC Hyperchannel。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_IMPLINK -> Integer
 --- PF_IMPLINK -> Integer
-
+#@todo
 ARPANET IMP。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_INET -> Integer
 --- PF_INET -> Integer
@@ -135,37 +125,32 @@ IPX(Novell Internet Packet eXchange protocol)。
 
 --- AF_ISDN -> Integer
 --- PF_ISDN -> Integer
-
+#@todo
 Integrated Services Digital Network。
 [[m:Socket.open]] の第一引数 domain に使用します。
-
-#@todo
 
 --- AF_ISO -> Integer
 --- AF_OSI -> Integer
 --- PF_ISO -> Integer
 --- PF_OSI -> Integer
-
+#@todo
 ISO Open Systems Interconnection protocols。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_LAT -> Integer
 --- PF_LAT -> Integer
-
+#@todo
 Local Area Transport protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_LINK -> Integer
 --- PF_LINK -> Integer
-
+#@todo
 Link layer interface。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_MAX -> Integer
 対象のプラットフォーム上でのアドレスファミリーの最大の数値。
@@ -174,27 +159,24 @@ Link layer interface。
 
 --- AF_NATM -> Integer
 --- PF_NATM -> Integer
-
+#@todo
 Native ATM access。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_NDRV -> Integer
 --- PF_NDRV -> Integer
-
+#@todo
 Network driver raw access。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_NETBIOS -> Integer
 --- PF_NETBIOS -> Integer
-
+#@todo
 NetBIOS。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_NETGRAPH -> Integer
 --- PF_NETGRAPH -> Integer
@@ -206,11 +188,10 @@ Netgraph sockets。
 
 --- AF_NS -> Integer
 --- PF_NS -> Integer
-
+#@todo
 XEROX NS protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 #@since 1.9.1
 --- AF_PACKET -> Integer
@@ -223,11 +204,10 @@ XEROX NS protocol。
 #@end
 --- AF_PPP -> Integer
 --- PF_PPP -> Integer
-
+#@todo
 Point-to-Point Protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_PUP -> Integer
 --- PF_PUP -> Integer
@@ -239,7 +219,7 @@ PUP(PARC Universal Packet)。
 
 --- AF_ROUTE -> Integer
 --- PF_ROUTE -> Integer
-
+#@todo
 Internal Routing protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
@@ -247,19 +227,16 @@ Internal Routing protocol。
 
 --- AF_SIP -> Integer
 --- PF_SIP -> Integer
-
+#@todo
 Simple Internet Protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
 
-#@todo
 
 --- AF_SNA -> Integer
 --- PF_SNA -> Integer
-
+#@todo
 IBM SNA protocol。
 [[m:Socket.open]] の第一引数 domain に使用します。
-
-#@todo
 
 --- AF_SYSTEM -> Integer
 --- PF_SYSTEM -> Integer
@@ -311,9 +288,9 @@ Help Identify RTIP packets。
 
 #@since 1.8.3
 --- PF_XTP -> Integer
+#@todo
 eXpress Transfer Protocol。
 
-#@todo
 
 #@end
 
@@ -595,8 +572,6 @@ level 引数に使用します。
 
 @see [[man:netinet/in.h(header)]]
      [[man:udp(4freebsd)]], [[man:udp(7linux)]]
-
-#@todo
 
 --- IPPROTO_XTP -> Integer
 #@todo
@@ -1187,6 +1162,8 @@ Force outgoing broadcast datagrams to have the undirected broadcast address。
 
 --- IP_PASSSEC -> Integer
 #@todo
+Retrieve security context with datagram。
+
 
 --- IP_PKTINFO -> Integer
 Receive packet information with datagrams。
@@ -1862,6 +1839,8 @@ Timestamp (timespec).
 
 --- SCM_UCRED -> Integer
 #@todo
+User credentials。
+
 #@end
 
 --- SHUT_RD -> Integer
@@ -1940,6 +1919,7 @@ Send without using the routing tables。
 #@since 1.8.3
 --- SO_DONTTRUNC -> Integer
 #@todo
+Retain unread data
 
 #@end
 --- SO_ERROR -> Integer
@@ -1969,6 +1949,7 @@ Linger on close if data is present。
 #@since 1.8.3
 --- SO_NKE -> Integer
 #@todo
+socket-level Network Kernel Extension。
 #@# OS X socket option?
 
 --- SO_NOSIGPIPE -> Integer
@@ -1981,10 +1962,12 @@ Don't SIGPIPE on EPIPE。
 #@end
 --- SO_NO_CHECK -> Integer
 #@todo
+Disable checksums。
 
 #@since 1.8.3
 --- SO_NREAD -> Integer
 #@todo
+Get first packet byte count。
 
 #@end
 --- SO_OOBINLINE -> Integer
@@ -2013,6 +1996,7 @@ The credentials of the foreign process connected to this socket。
 
 --- SO_PEERNAME -> Integer
 #@todo
+Name of the connecting user。
 
 --- SO_PRIORITY -> Integer
 The protocol-defined priority for all packets on this socket。
@@ -2103,6 +2087,7 @@ Receive timestamp with datagrams (timeval)。
 
 @see [[man:getsockopt(2freebsd)]],
      [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::AncillaryData#timestamp]]
 
 --- SO_TYPE -> Integer
 Get the socket type。
@@ -2115,17 +2100,21 @@ Get the socket type。
 #@since 1.8.3
 --- SO_USELOOPBACK -> Integer
 #@todo
+Bypass hardware when possible。
 
 --- SO_WANTMORE -> Integer
 #@todo
+Give a hint when more data is ready。
 
 --- SO_WANTOOBFLAG -> Integer
 #@todo
+OOB data is wanted in MSG_FLAG on receive。
 
 #@end
 #@since 1.9.2
 --- SO_ALLZONES -> Integer
 #@todo
+Bypass zone boundaries。
 #@# Solaris?
 
 --- SO_BINTIME -> Integer
@@ -2134,15 +2123,23 @@ Timestamp (bintime)。
 の第2引数(optname)に使用します。
 
 @see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::Constants::SO_TIMESTAMP]],
+     [[m:Socket::AncillaryData#timestamp]]
 
 --- SO_MAC_EXEMPT -> Integer
 #@todo
+Mandatory Access Control exemption for unlabeled peers。
 
 --- SO_RECVUCRED -> Integer
 #@todo
+Receive user credentials with datagram。
 
 --- SO_TIMESTAMPNS -> Integer
 #@todo
+Receive nanosecond timestamp with datagrams (timespec)。
+
+@see [[m:Socket::Constants::SO_TIMESTAMP]],
+     [[m:Socket::AncillaryData#timestamp]]
 
 #@end
 
@@ -2207,8 +2204,8 @@ UDP socket options。
 @see [[m:Socket::Constants::IPPROTO_UDP]]
 
 --- SOPRI_BACKGROUND -> Integer
-Background socket priority
 #@todo
+Background socket priority
 
 --- SOPRI_INTERACTIVE -> Integer
 #@todo

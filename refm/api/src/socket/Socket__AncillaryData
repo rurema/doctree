@@ -236,7 +236,10 @@ SCM_RIGHTS な 制御メッセージを受け取ったときに配列が作ら�
 
 @see [[m:Socket::Constants::SCM_TIMESTAMP]],
      [[m:Socket::Constants::SCM_TIMESTAMPNS]],
-     [[m:Socket::Constants::SCM_BINTIME]]
+     [[m:Socket::Constants::SCM_BINTIME]],
+     [[m:Socket::Constants::SO_TIMESTAMP]],
+     [[m:Socket::Constants::SO_TIMESTAMPNS]],
+     [[m:Socket::Constants::SO_BINTIME]]
 
 --- ip_pktinfo -> [Addrinfo, Integer, Addrinfo]
 自身の type が IP_PKTINFO である場合、保持しているデータ
