@@ -1441,6 +1441,7 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 @see [[m:Object#instance_of?]],[[m:Module#===]],[[m:Object#class]]
 
+#@until 1.9.1
 --- instance_eval(expr, filename = "(eval)", lineno = 1) -> object
 --- instance_eval {|obj| ... }                           -> object
 
@@ -1535,6 +1536,7 @@ Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなく
     foo
     p bar
     # => "bar"
+#@end
 #@end
 
 --- nil? -> bool
