@@ -1,3 +1,5 @@
+category Windows
+
 Win32 API を呼び出すためのライブラリです。
 
 = class Win32API < Object

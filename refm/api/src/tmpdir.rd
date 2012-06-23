@@ -1,3 +1,5 @@
+category File
+
 テンポラリディレクトリのためのライブラリです。
 
 = reopen Dir

@@ -1,3 +1,5 @@
+category Thread
+
 スレッド間キューや状態変数 (condition variable) を提供するライブラリです。
 
 このライブラリは [[c:Thread]] を拡張します。rubyインタプリタを

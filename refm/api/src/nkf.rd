@@ -1,3 +1,5 @@
+category CharacterEncoding
+
 nkf を Ruby から使うためのライブラリです。
 
 = module NKF

@@ -1,3 +1,5 @@
+category Development
+
 プロファイラの実装です。
 現在、[[lib:profile]] ライブラリは profiler ライブラリを
 利用して実装されています。

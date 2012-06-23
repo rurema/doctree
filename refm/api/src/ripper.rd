@@ -1,3 +1,5 @@
+category Text
+
 require ripper/filter
 require ripper/lexer
 require ripper/sexp

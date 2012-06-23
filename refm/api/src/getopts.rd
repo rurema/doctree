@@ -1,6 +1,10 @@
 #@since 1.8.2
+category Obsolete
+
 このライブラリは obsolete です。
 [[lib:optparse]] を使ってください。
+#@else
+category CommandLine
 #@end
 
 オプションを解析するためのライブラリです。

@@ -1,3 +1,5 @@
+category Network
+
 FTP プロトコルを扱うライブラリです。
 
 基本的には  unix の ftp コマンドのような

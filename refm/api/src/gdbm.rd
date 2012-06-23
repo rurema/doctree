@@ -1,3 +1,5 @@
+category Database
+
 GDBM(GNU データベース・マネージャ) を Ruby スクリプトから扱うためのライブラリです。
 
 GDBM は dbm および ndbm 互換機能を含んでいます。

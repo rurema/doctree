@@ -1,3 +1,5 @@
+category DesignPattern
+
 Singleton パターンを扱うためのライブラリです。
 
 = module Singleton

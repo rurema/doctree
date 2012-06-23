@@ -1,5 +1,7 @@
 #@since 1.9.1
 
+category Math
+
 複素数演算をサポートするライブラリです。
 
 = module CMath

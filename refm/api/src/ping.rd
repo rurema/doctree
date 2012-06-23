@@ -1,3 +1,5 @@
+category Network
+
 サーバが稼働しているかどうか調べるための単純なメソッドを提供します。
 
 = module Ping

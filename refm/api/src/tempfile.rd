@@ -1,3 +1,5 @@
+category File
+
 require tmpdir
 
 テンポラリファイルを操作するためのクラスです

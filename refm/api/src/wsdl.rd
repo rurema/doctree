@@ -1,3 +1,5 @@
+category Network
+
 #@# dummy
 #@since 1.8.1
 WSDL を扱うためのライブラリです。

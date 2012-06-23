@@ -1,3 +1,5 @@
+category Math
+
 有理数を扱うためのライブラリです。
 
 #@since 1.9.1

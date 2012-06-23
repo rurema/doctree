@@ -1,3 +1,5 @@
+category Network
+
 #@since 1.8.0
 XML-RPC を扱うためのライブラリです。
 

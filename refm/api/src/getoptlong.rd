@@ -1,3 +1,5 @@
+category CommandLine
+
 getoptlong は、GNU の getopt_long() とまったく同じ方式でコマンド
 行オプションの解析を行う Ruby のライブラリです。
 

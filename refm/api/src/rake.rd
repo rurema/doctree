@@ -1,3 +1,4 @@
+category Development
 
 Rake というコマンドラインツールを扱うライブラリです。
 

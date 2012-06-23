@@ -1,3 +1,5 @@
+category Network
+
 メールを送信するためのプロトコル SMTP (Simple Mail Transfer Protocol)
 を扱うライブラリです。
 

@@ -1,4 +1,6 @@
 #@until 1.9.0
+category Date/Time
+
 日付を解析します。
 
 = module ParseDate

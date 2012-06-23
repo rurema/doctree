@@ -1,3 +1,5 @@
+category Math
+
 集合を表す Set クラスと、取り出し順序を保証した SortedSet クラスを提供
 します。
 

@@ -1,5 +1,7 @@
 #@since 1.8.0
 
+category CUI
+
 Ruby の curses ライブラリ(以下、Ruby curses)は、C のプログラムから端末
 の画面を制御するための curses ライブラリ(以下、C curses)を利用して、端
 末に依存しない形式でテキストユーザインタフェースを構築するためのライブ

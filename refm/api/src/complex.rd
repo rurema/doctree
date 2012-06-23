@@ -1,3 +1,5 @@
+category Math
+
 #@since 1.9.1
 require cmath
 #@end

@@ -1,3 +1,5 @@
+category Text
+
 eRuby スクリプトを扱うためのライブラリです。
 
 = class ERB < Object

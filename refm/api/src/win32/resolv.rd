@@ -1,4 +1,5 @@
 #@since 1.8.0
+category Windows
 
 require win32/registry
 

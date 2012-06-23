@@ -1,3 +1,5 @@
+category Text
+
 #@since 1.8.0
 strscan は 文字列を高速にスキャンするためのライブラリです。
 

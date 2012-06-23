@@ -1,3 +1,5 @@
+category Network
+
 このライブラリは、POP3 (Post Office Protocol version 3) を
 用いてPOPサーバからメールを受信する機能を提供するライブラリです。
 

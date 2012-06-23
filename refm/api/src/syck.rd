@@ -1,3 +1,5 @@
+category FileFormat
+
 [[lib:yaml]] のバックエンドライブラリです。YAML バージョン 1.0 を扱う事ができます。
 
 #@since 1.9.2

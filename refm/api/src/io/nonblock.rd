@@ -1,3 +1,5 @@
+category I/O
+
 IO のノンブロックモードを扱うライブラリです。
 
 = reopen IO

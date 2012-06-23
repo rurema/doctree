@@ -1,3 +1,5 @@
+category Thread
+
 複数スレッドの終了を待つ機能を提供します。
 
 = class ThreadsWait < Object

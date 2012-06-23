@@ -1,4 +1,6 @@
 #@if (version >= "1.6.6")
+category Unix
+
 Unix系OS の syslog を扱うライブラリです。
 
 = module Syslog

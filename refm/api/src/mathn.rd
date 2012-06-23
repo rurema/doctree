@@ -1,3 +1,5 @@
+category Math
+
 require complex
 require rational
 require matrix

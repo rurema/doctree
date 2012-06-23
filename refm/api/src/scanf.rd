@@ -1,3 +1,5 @@
+category I/O
+
 [[m:String#scan]] のフォーマット指定版といえるメソッド [[m:String#scanf]]
 を定義します。
 

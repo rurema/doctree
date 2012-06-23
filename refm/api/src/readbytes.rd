@@ -1,3 +1,5 @@
+category I/O
+
 [[m:IO#readbytes]] を提供するライブラリです。
 
 = reopen IO

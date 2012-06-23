@@ -1,3 +1,5 @@
+category Database
+
 Rubyのオブジェクトを外部ファイルに格納するためのライブラリです。
 
 = class PStore < Object

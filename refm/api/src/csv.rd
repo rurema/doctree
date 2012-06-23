@@ -1,3 +1,5 @@
+category FileFormat
+
 #@since 1.9.1
 CSV (Comma Separated Values) を扱うライブラリです。
 

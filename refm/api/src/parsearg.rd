@@ -1,6 +1,10 @@
 #@since 1.8.1
+category Obsolete
+
 このライブラリは obsolete です。
 代わりに [[lib:optparse]] か [[lib:getoptlong]] を使ってください。
+#@else
+category CommandLine
 #@end
 
 [[lib:getopts]] ライブラリを拡張して

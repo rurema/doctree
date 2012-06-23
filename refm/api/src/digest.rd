@@ -1,3 +1,5 @@
+category Text
+
 #@since 1.8.6
 require digest/md5
 require digest/rmd160

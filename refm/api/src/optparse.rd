@@ -1,3 +1,5 @@
+category CommandLine
+
 コマンドラインのオプションを取り扱うためのライブラリです。
 
 #@include(optparse/optparse-tut)

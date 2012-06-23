@@ -1,3 +1,5 @@
+category Development
+
 sublibrary minitest/autorun
 
 ユニットテストを行うためのライブラリです。

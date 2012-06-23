@@ -1,3 +1,5 @@
+category GUI
+
 require tcltklib
 require tkutil
 require tk/autoload

@@ -1,3 +1,5 @@
+category CUI
+
 require shell/error
 require shell/command-processor
 require shell/process-controller

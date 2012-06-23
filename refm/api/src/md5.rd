@@ -1,3 +1,5 @@
+category Obsolete
+
 このライブラリは obsolete です。[[lib:digest]] ライブラリを使ってください。
 
 #@since 1.8.6

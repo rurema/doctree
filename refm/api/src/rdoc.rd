@@ -1,3 +1,5 @@
+category FileFormat
+
 RDoc は Ruby のドキュメント生成を行うためのライブラリです。rdoc という
 ドキュメント生成のためのコマンドも含んでいます。
 

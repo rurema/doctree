@@ -1,3 +1,5 @@
+category FileFormat
+
 Pure Ruby の XML パーサです。
 DOM スタイルと SAX スタイルの両方をカバーしています。
 

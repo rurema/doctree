@@ -1,4 +1,6 @@
 #@since 1.8.0
+category Windows
+
 win32/registry は Win32 プラットフォームでレジストリをアクセスするための
 ライブラリです。Win32 API の呼び出しに [[c:Win32API]] を使います。
 

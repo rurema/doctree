@@ -1,3 +1,5 @@
+category Network
+
 URI (Uniform Resource Identifier) のためのライブラリです。
 
 === 関連 RFC

@@ -1,5 +1,7 @@
 #@# Author: Keiju ISHITSUKA
 
+category Development
+
 require e2mmap
 require irb/init
 require irb/context

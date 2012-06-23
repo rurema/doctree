@@ -1,3 +1,5 @@
+category Network
+
 require webrick/compat
 require webrick/config
 require webrick/log

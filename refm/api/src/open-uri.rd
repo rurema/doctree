@@ -1,3 +1,5 @@
+category Network
+
 #@# = open-uri
 
 http/ftp に簡単にアクセスするためのクラスです。

@@ -1,3 +1,5 @@
+category Database
+
 SDBM を Ruby スクリプトから扱うためのライブラリです。
 
 SDBM は DBM と同じように働くハッシュデータベースのライブラリです。

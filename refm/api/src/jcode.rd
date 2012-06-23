@@ -1,4 +1,6 @@
 #@until 1.9.1
+category CharacterEncoding
+
 [[c:String]]クラスのメソッドを追加、再定義し、
 日本語を意識した文字列処理を提供します。
 

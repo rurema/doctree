@@ -1,3 +1,5 @@
+category Network
+
 [[lib:net/http]] に SSL/TLS 拡張を実装するライブラリです。
 
 [[c:Net::HTTP]] を再オープンし、SSL/TLS 拡張を追加します。

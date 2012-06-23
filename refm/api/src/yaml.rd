@@ -1,3 +1,5 @@
+category FileFormat
+
 #@since 1.8.0
 
 #@until 1.9.2

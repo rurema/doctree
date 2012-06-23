@@ -1,3 +1,5 @@
+category Thread
+
 タイムアウトを行うライブラリです。
 
 = reopen Kernel

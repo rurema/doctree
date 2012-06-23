@@ -1,3 +1,5 @@
+category FileFormat
+
 Unix mbox 形式のメールファイルを解析するライブラリです。
 
 = class Mail < Object 

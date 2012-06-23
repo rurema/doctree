@@ -1,4 +1,5 @@
 #@since 1.8.0
+category Development
 
 ベンチマークを取るためのクラスです。
 

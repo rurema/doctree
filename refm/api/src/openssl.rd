@@ -1,3 +1,5 @@
+category Network
+
 OpenSSL([[url:http://www.openssl.org]])
 を Ruby から扱うためのライブラリです。
 

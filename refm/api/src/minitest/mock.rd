@@ -1,3 +1,4 @@
+category Development
 
 シンプルなモックライブラリです。
 

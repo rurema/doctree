@@ -1,3 +1,5 @@
+category Text
+
 文字列に [[c:IO]] と同じインタフェースを持たせるためのライブラリです。
 
 = class StringIO < Data

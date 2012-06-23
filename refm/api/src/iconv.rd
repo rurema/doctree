@@ -1,3 +1,5 @@
+category CharacterEncoding
+
 Iconv は UNIX 95 の iconv() 関数のラッパーで、
 さまざまな文字コード体系間で文字列の変換を行ないます。
 

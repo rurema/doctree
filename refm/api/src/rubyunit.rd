@@ -1,3 +1,5 @@
+category Development
+
 require runit/testcase
 
 sublibrary runit/testcase

@@ -1,3 +1,5 @@
+category Development
+
 require test/unit/testcase
 #@until 1.9.1
 require test/unit/autorunner

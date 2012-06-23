@@ -1,4 +1,5 @@
 #@since 1.8.0
+category Windows
 
 Microsoft Windows で COM や ActiveX を扱うためのライブラリです。
 

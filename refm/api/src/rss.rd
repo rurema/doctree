@@ -1,4 +1,6 @@
 #@if (version >= "1.8.2")
+category FileFormat
+
 #@# = rss
 
 RSS を扱うためのライブラリです。

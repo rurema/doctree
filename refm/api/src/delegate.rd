@@ -1,4 +1,6 @@
 #@since 1.8.0
+category DesignPattern
+
 メソッドの委譲 (delegation) を行うためのライブラリです。
 
 [[c:Delegator]] クラスは指定したオブジェクトにメソッドの実行を委譲します。

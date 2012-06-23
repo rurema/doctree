@@ -1,3 +1,5 @@
+category Network
+
 #@since 1.8.1
 SOAP を扱うためのライブラリです。
 

@@ -1,3 +1,5 @@
+category DesignPattern
+
 Observer パターンを扱うためのライブラリです。
 
 = module Observable

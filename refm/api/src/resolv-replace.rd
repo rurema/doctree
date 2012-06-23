@@ -1,3 +1,5 @@
+category Network
+
 名前解決に resolv を使用するためのライブラリです。
 
 = redefine IPSocket

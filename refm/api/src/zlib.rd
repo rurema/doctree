@@ -1,3 +1,5 @@
+category FileFormat
+
 zlib を Ruby から使うための拡張ライブラリです。
 gzip ファイルの読み書きもサポートします。
 

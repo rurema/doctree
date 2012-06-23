@@ -1,3 +1,5 @@
+category FileFormat
+
 require psych/nodes
 require psych/streaming
 require psych/visitors

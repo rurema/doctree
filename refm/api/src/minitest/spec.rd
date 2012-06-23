@@ -1,3 +1,4 @@
+category Development
 
 BDD 風にテストを書くためのクラスやメソッドを定義するためのライブラリです。
 

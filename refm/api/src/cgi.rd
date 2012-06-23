@@ -1,3 +1,5 @@
+category Network
+
 #@since 1.9.1
 require cgi/core
 require cgi/cookie

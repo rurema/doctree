@@ -1,3 +1,5 @@
+category Network
+
 Telnet プロトコルをクライアント側で扱うライブラリです。
 
 === 参考文献

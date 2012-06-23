@@ -1,3 +1,5 @@
+category Network
+
 このライブラリは Internet Message Access Protocol (IMAP) の
 クライアントライブラリです。[[RFC:2060]] を元に
 実装されています。
