@@ -41,12 +41,12 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 == Constants
 
 #@since 1.8.5
---- SEPARATOR_PAT
+--- SEPARATOR_PAT -> Regexp
 パス名のなかのディレクトリを区切る部分にマッチする正規表現です。
 
 この値は環境依存です。
 
---- TO_PATH
+--- TO_PATH -> Symbol
 内部的に使っている定数です。利用者が使うことはありません。
 
 #@end

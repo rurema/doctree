@@ -271,52 +271,52 @@ priorityまでのすべての優先度のマスクを作成します。
 
 
 == Constants
---- LOG_PID
---- LOG_CONS
---- LOG_ODELAY
---- LOG_NDELAY
---- LOG_NOWAIT
---- LOG_PERROR
+--- LOG_PID      -> Fixnum
+--- LOG_CONS     -> Fixnum
+--- LOG_ODELAY   -> Fixnum
+--- LOG_NDELAY   -> Fixnum
+--- LOG_NOWAIT   -> Fixnum
+--- LOG_PERROR   -> Fixnum
 
 オプション(options)を示す定数。
 定数の詳細については [[man:syslog(3)]] を参照してください。
 
---- LOG_AUTH
---- LOG_AUTHPRIV
---- LOG_CONSOLE
---- LOG_CRON
---- LOG_DAEMON
---- LOG_FTP
---- LOG_KERN
---- LOG_LPR
---- LOG_MAIL
---- LOG_NEWS
---- LOG_NTP
---- LOG_SECURITY
---- LOG_SYSLOG
---- LOG_USER
---- LOG_UUCP
---- LOG_LOCAL0
---- LOG_LOCAL1
---- LOG_LOCAL2
---- LOG_LOCAL3
---- LOG_LOCAL4
---- LOG_LOCAL5
---- LOG_LOCAL6
---- LOG_LOCAL7
+--- LOG_AUTH     -> Fixnum
+--- LOG_AUTHPRIV -> Fixnum
+--- LOG_CONSOLE  -> Fixnum
+--- LOG_CRON     -> Fixnum
+--- LOG_DAEMON   -> Fixnum
+--- LOG_FTP      -> Fixnum
+--- LOG_KERN     -> Fixnum
+--- LOG_LPR      -> Fixnum
+--- LOG_MAIL     -> Fixnum
+--- LOG_NEWS     -> Fixnum
+--- LOG_NTP      -> Fixnum
+--- LOG_SECURITY -> Fixnum
+--- LOG_SYSLOG   -> Fixnum
+--- LOG_USER     -> Fixnum
+--- LOG_UUCP     -> Fixnum
+--- LOG_LOCAL0   -> Fixnum
+--- LOG_LOCAL1   -> Fixnum
+--- LOG_LOCAL2   -> Fixnum
+--- LOG_LOCAL3   -> Fixnum
+--- LOG_LOCAL4   -> Fixnum
+--- LOG_LOCAL5   -> Fixnum
+--- LOG_LOCAL6   -> Fixnum
+--- LOG_LOCAL7   -> Fixnum
 
 機能(facilities)を示す定数。
 
 定数 の詳細については [[man:syslog(3)]] を参照してください。
 
---- LOG_EMERG
---- LOG_ALERT
---- LOG_CRIT
---- LOG_ERR
---- LOG_WARNING
---- LOG_NOTICE
---- LOG_INFO
---- LOG_DEBUG
+--- LOG_EMERG    -> Fixnum
+--- LOG_ALERT    -> Fixnum
+--- LOG_CRIT     -> Fixnum
+--- LOG_ERR      -> Fixnum
+--- LOG_WARNING  -> Fixnum
+--- LOG_NOTICE   -> Fixnum
+--- LOG_INFO     -> Fixnum
+--- LOG_DEBUG    -> Fixnum
 
 優先度(priorities)を示す定数。
 定数 の詳細については [[man:syslog(3)]] を参照してください。

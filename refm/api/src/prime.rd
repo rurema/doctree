@@ -157,7 +157,7 @@ include Enumerable
 
 == Class Methods
 
---- new(upper_bound = nil)
+--- new(upper_bound = nil) -> Prime::PseudoPrimeGenerator
 
 自身を初期化します。
 

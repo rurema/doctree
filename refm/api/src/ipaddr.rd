@@ -51,7 +51,7 @@ IP アドレスを扱うのためのクラスです。
   require 'ipaddr'
   p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.255.255>
 
---- ntop(addr)
+--- ntop(addr) -> String
 
 ネットワークバイトオーダーのバイト列で表現された IP アドレスを人間の読める形式に変換します。
 
@@ -299,19 +299,19 @@ self の IP アドレスとサブネットマスクで取得できる IP アド�
 
 == Constants
 
---- IN4MASK
+--- IN4MASK -> Integer
 
 IPv4 アドレスの場合に使用するマスク値。
 
   0xffffffff
 
---- IN6MASK
+--- IN6MASK -> Integer
 
 IPv6 アドレスの場合に使用するマスク値。
 
   0xffffffffffffffffffffffffffffffff
 
---- IN6FORMAT
+--- IN6FORMAT -> String
 
 IPv6 アドレスをわかりやすく表示するためのフォーマット文字列。
 

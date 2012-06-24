@@ -68,7 +68,7 @@ include Comparable
 
 == Constants
 
---- ENGLAND
+--- ENGLAND -> Integer
 英国がグレゴリオ暦をつかい始めた日 (1752年9月14日) をあらわすユリウス日です。
 この "ENGLAND" の名前は、旧い UNIX の [[man:cal(1)]] の記述に由来します。
 
@@ -79,14 +79,14 @@ include Comparable
 もっとも本実装で一番に尊重されているのは、伊国の改暦日であり、多くの場合、
 改暦日の既定値は [[m:Date::ITALY]] です。
 
---- GREGORIAN
+--- GREGORIAN -> Date::Infinity
 常にグレゴリオ暦であることを示します。
 改暦日は無限の過去にあると考えられます。
 
---- ITALY
+--- ITALY -> Integer
 伊国がグレゴリオ暦をつかい始めた日 (1582年10月15日) をあらわすユリウス日です。
 
---- JULIAN
+--- JULIAN -> Date::Infinity
 常にユリウス暦であることを示します。
 改暦日は無限の未来にあると考えられます。
 
