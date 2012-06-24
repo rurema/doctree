@@ -142,7 +142,7 @@ CRL に関するフラグを設定します。
 @param flags 設定するフラグ(整数値)
 @see [[m:OpenSSL::X509::Store#flags=]]
 
---- purpose=
+--- purpose=(purpose)
 証明書の使用目的を設定します。
 
 以下の定数値のうちいずれか1つを渡します。
@@ -160,7 +160,7 @@ CRL に関するフラグを設定します。
 @see [[m:OpenSSL::X509::Store#purpose=]]
 
 #@since 1.8.2
---- time=
+--- time=(time)
 証明書の有効期限の検証に使う日時を設定します。
 
 デフォルトでは現在時刻が使われます。
