@@ -494,7 +494,7 @@ otherが [[c:Complex]] のオブジェクトではないときは [[c:Complex]] 
 
 == Constants
 
---- I
+--- I -> Complex
 虚数単位です。
 
 [注意] Complex::I は Complex.new(0, 1) で生成されるオブジェクトと同じものです。

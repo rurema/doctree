@@ -18,7 +18,7 @@ Unix mbox 形式のメールファイルを解析するライブラリです。
 
 == Class Methods
 
---- new(file)
+--- new(file) -> Mail
 
 メールを解析します。
 file にはファイル名か [[c:IO]] オブジェクトを渡します。

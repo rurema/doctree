@@ -3,7 +3,7 @@ alias JSON::Ext::Parser
 
 == Singleton Methods
 
---- new(source, options => {})
+--- new(source, options => {}) -> JSON::Parser
 
 パーサを初期化します。
 

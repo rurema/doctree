@@ -456,8 +456,8 @@ OptionParser.accept や OptionParser#accept によって、受け付け
   }
   # ruby command --charset=jis #=> "iso-2022-jp"
 
---- on_head(*arg, &block)
---- on_tail(*arg, &block)
+--- on_head(*arg, &block) -> self
+--- on_tail(*arg, &block) -> self
 
 [[m:OptionParser#on]]と同様、オプションを取り扱うためのブロックを自身に登録します。
 on メソッドと違う点は、OptionParser オブジェクトが保持している

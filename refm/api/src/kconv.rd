@@ -322,7 +322,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 #@end
 
 #@since 1.9.1
---- toutf32(str)
+--- toutf32(str) -> String
 
 文字列 str のエンコーディングを UTF-32 に変換して返します。
 
@@ -339,7 +339,7 @@ Kconv.kconv(str, Kconv::UTF32)と同じです。
 #@end
 
 #@since 1.9.1
---- tolocale(str)
+--- tolocale(str) -> String
 
 文字列 str のエンコーディングをロケールエンコーディングに変換して返します。
 
