@@ -272,7 +272,20 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 コマンドの標準入力に書き込む事も最後のコマンドの標準出力を受けとる事も
 できます。
 
-@param cmds 実行するコマンドのリストを指定します。
+@param cmds 実行するコマンドのリストを指定します。それぞれのコマンドは
+            以下のように [[c:String]] か [[c:Array]] で指定します。
+            commandline にはコマンド全体(例. "nroff -man")を表す
+            [[c:String]] を指定します。
+            options には [[c:Hash]] で指定します。
+            env には環境変数を [[c:Hash]] で指定します。
+            cmdname にはコマンド名を表す [[c:String]] を指定します。
+            1、2、3 は shell 経由で実行されます。
+
+ (1) commandline
+ (2) [commandline, options]
+ (3) [env, commandline, options]
+ (4) [env, cmdname, arg1, arg2, ..., options]
+ (5) [env, [cmdname, argv0], arg1, ..., options]
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力
@@ -296,9 +309,6 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
     p stdout.read   #=> "     1\tbar\n     2\tbaz\n     3\tfoo\n"
   }
 
-[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
-
 @see [[m:Open3.#popen3]]
 
 --- pipeline_r(*cmds) -> [IO, [Thread]]
@@ -307,7 +317,20 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
 コマンドの標準出力を受けとる事ができます。
 
-@param cmds 実行するコマンドのリストを指定します。
+@param cmds 実行するコマンドのリストを指定します。それぞれのコマンドは
+            以下のように [[c:String]] か [[c:Array]] で指定します。
+            commandline にはコマンド全体(例. "nroff -man")を表す
+            [[c:String]] を指定します。
+            options には [[c:Hash]] で指定します。
+            env には環境変数を [[c:Hash]] で指定します。
+            cmdname にはコマンド名を表す [[c:String]] を指定します。
+            1、2、3 は shell 経由で実行されます。
+
+ (1) commandline
+ (2) [commandline, options]
+ (3) [env, commandline, options]
+ (4) [env, cmdname, arg1, arg2, ..., options]
+ (5) [env, [cmdname, argv0], arg1, ..., options]
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最後に実行するコマンドの標準出力、
@@ -323,9 +346,6 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
     p ts[1].value #=> #<Process::Status: pid 24913 exit 0>
   }
 
-[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
-
 @see [[m:Open3.#popen3]]
 
 --- pipeline_w(*cmds) -> [IO, [Thread]]
@@ -334,7 +354,20 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
 コマンドの標準入力に書き込む事ができます。
 
-@param cmds 実行するコマンドのリストを指定します。
+@param cmds 実行するコマンドのリストを指定します。それぞれのコマンドは
+            以下のように [[c:String]] か [[c:Array]] で指定します。
+            commandline にはコマンド全体(例. "nroff -man")を表す
+            [[c:String]] を指定します。
+            options には [[c:Hash]] で指定します。
+            env には環境変数を [[c:Hash]] で指定します。
+            cmdname にはコマンド名を表す [[c:String]] を指定します。
+            1、2、3 は shell 経由で実行されます。
+
+ (1) commandline
+ (2) [commandline, options]
+ (3) [env, commandline, options]
+ (4) [env, cmdname, arg1, arg2, ..., options]
+ (5) [env, [cmdname, argv0], arg1, ..., options]
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力、
@@ -348,9 +381,6 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
     w.puts "hello"
   }
 
-[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
-
 @see [[m:Open3.#popen3]]
 
 --- pipeline_start(*cmds) -> [Thread]
@@ -358,7 +388,20 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 
 指定したコマンドのリストをパイプで繋いで順番に実行します。
 
-@param cmds 実行するコマンドのリストを指定します。
+@param cmds 実行するコマンドのリストを指定します。それぞれのコマンドは
+            以下のように [[c:String]] か [[c:Array]] で指定します。
+            commandline にはコマンド全体(例. "nroff -man")を表す
+            [[c:String]] を指定します。
+            options には [[c:Hash]] で指定します。
+            env には環境変数を [[c:Hash]] で指定します。
+            cmdname にはコマンド名を表す [[c:String]] を指定します。
+            1、2、3 は shell 経由で実行されます。
+
+ (1) commandline
+ (2) [commandline, options]
+ (3) [env, commandline, options]
+ (4) [env, cmdname, arg1, arg2, ..., options]
+ (5) [env, [cmdname, argv0], arg1, ..., options]
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は実行したプロセスを待つためのスレッ
@@ -376,20 +419,30 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
     p t.value #=> #<Process::Status: pid 911 SIGTERM (signal 15)>
   }
 
-[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
-
 @see [[m:Open3.#popen3]]
 
 --- pipeline(*cmds) -> [Process::Status]
 
 指定したコマンドのリストをパイプで繋いで順番に実行します。
 
-@param cmds 実行するコマンドのリストを指定します。
+@param cmds 実行するコマンドのリストを指定します。それぞれのコマンドは
+            以下のように [[c:String]] か [[c:Array]] で指定します。
+            commandline にはコマンド全体(例. "nroff -man")を表す
+            [[c:String]] を指定します。
+            options には [[c:Hash]] で指定します。
+            env には環境変数を [[c:Hash]] で指定します。
+            cmdname にはコマンド名を表す [[c:String]] を指定します。
+            1、2、3 は shell 経由で実行されます。
+
+ (1) commandline
+ (2) [commandline, options]
+ (3) [env, commandline, options]
+ (4) [env, cmdname, arg1, arg2, ..., options]
+ (5) [env, [cmdname, argv0], arg1, ..., options]
 
 @return 実行したコマンドの終了ステータスを配列で返します。
 
-例:
+例1:
 
   require "open3"
   
@@ -399,8 +452,11 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
   #    #<Process::Status: pid 11820 exit 0>,
   #    #<Process::Status: pid 11828 exit 0>]
 
-[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
+例2:
+
+  require "open3"
+
+  Open3.pipeline([{"LANG"=>"C"}, "env"], ["grep", "LANG"], "less")
 
 @see [[m:Open3.#popen3]]
 
