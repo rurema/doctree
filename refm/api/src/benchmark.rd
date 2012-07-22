@@ -154,7 +154,11 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 @param caption     レポートの一行目に表示する文字列を指定します。
 @param label_width ラベルの幅を指定します。
 @param fmtstr      フォーマット文字列を指定します。
-                   この引数を省略すると Benchmark::FMTSTR が使用されます。
+#@since 1.9.3
+                   この引数を省略すると [[m:Benchmark::FORMAT]] が使用されます。
+#@else
+                   この引数を省略すると [[m:Benchmark::FMTSTR]] が使用されます。
+#@end
 @param labels  ブロックが [[c:Benchmark::Tms]] オブジェクトの配列を返す場合に指定します。
 
 @return STDIN.sync の値を返すだけなので返り値に意味はありません。
@@ -223,7 +227,11 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 @see [[m:Benchmark::Tms::CAPTION]]
 
+#@since 1.9.3
+--- FORMAT -> String
+#@else
 --- FMTSTR -> String
+#@end
 
 [[m:Benchmark.#benchmark]] の第三引数のデフォルト値。
 
@@ -247,7 +255,11 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
   "%10.6u %10.6y %10.6t %10.6r\n"
 
+#@since 1.9.3
+@see [[m:Benchmark.#benchmark]], [[m:Benchmark::Tms::FORMAT]]
+#@else
 @see [[m:Benchmark.#benchmark]], [[m:Benchmark::Tms::FMTSTR]]
+#@end
 
 --- BENCHMARK_VERSION -> String
 
@@ -350,7 +362,12 @@ self を指定されたフォーマットで整形して返します。
 : %n
   ラベルで置き換えられます(Mnemonic: n of "*n*ame")。[[m:Benchmark::Tms#label]]
 
-@param fmtstr フォーマット文字列です。省略された場合は、[[m:Benchmark::Tms::FMTSTR]] が使用されます。
+@param fmtstr フォーマット文字列です。
+#@since 1.9.3
+              省略された場合は、[[m:Benchmark::Tms::FORMAT]] が使用されます。
+#@else
+              省略された場合は、[[m:Benchmark::Tms::FMTSTR]] が使用されます。
+#@end
 @param args  フォーマットされる引数です。
 
 --- to_a -> Array
@@ -419,7 +436,11 @@ System CPU time
 
 @see [[m:Benchmark::CAPTION]]
 
+#@since 1.9.3
+--- FORMAT -> String
+#@else
 --- FMTSTR -> String
+#@end
 
 [[m:Benchmark.#benchmark]] の第三引数のデフォルト値。
 
@@ -443,7 +464,11 @@ System CPU time
 
   "%10.6u %10.6y %10.6t %10.6r\n"
 
+#@since 1.9.3
+@see [[m:Benchmark.#benchmark]], [[m:Benchmark::FORMAT]]
+#@else
 @see [[m:Benchmark.#benchmark]], [[m:Benchmark::FMTSTR]]
+#@end
 
 
 = class Benchmark::Job < Object
