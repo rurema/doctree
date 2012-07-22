@@ -1,9 +1,11 @@
 #@since 1.8.0
 category Development
 
-ベンチマークを取るためのクラスです。
+ベンチマークを取るためのライブラリです。
 
 = module Benchmark
+
+ベンチマークを取るためのモジュールです。
 
 #@# == Class Methods
 #@# 
@@ -268,6 +270,8 @@ benchmark ライブラリのバージョンを表します。
 
 = class Benchmark::Tms < Object
 
+ベンチマークの計測に関連する各種時間を表現するクラスです。
+
 == Class Methods
 
 --- new(utime = 0.0, stime = 0.0, cutime = 0.0, cstime = 0.0, real = 0.0, label = nil) -> Benchmark::Tms
@@ -480,6 +484,12 @@ System CPU time
 == Class Methods
 
 --- new(width) -> Benchmark::Job
+
+[[c:Benchmark::Job]] のインスタンスを初期化して返します。
+
+通常このメソッドがユーザーによって直接呼び出されることはありません。
+
+@param width [[m:Benchmark::Job#list]] のサイズ。
 
 == Instance Methods
 
