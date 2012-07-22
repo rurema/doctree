@@ -543,3 +543,11 @@ System CPU time
 
 @see [[m:Benchmark::Tms#format]]
 
+#@since 1.9.3
+--- list -> [Benchmark::Tms]
+
+[[m:Benchmark::Report#item]] 実行時に作成された [[c:Benchmark::Tms]] オ
+ブジェクトの一覧を返します。
+
+@see [[m:Benchmark::Report#item]]
+#@end
