@@ -215,7 +215,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 == Constants
 
---- CAPTION
+--- CAPTION -> String
 
 [[m:Benchmark.#bm]] の内部などで使用されます。
 
@@ -223,7 +223,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 @see [[m:Benchmark::Tms::CAPTION]]
 
---- FMTSTR
+--- FMTSTR -> String
 
 [[m:Benchmark.#benchmark]] の第三引数のデフォルト値。
 
@@ -249,7 +249,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 @see [[m:Benchmark.#benchmark]], [[m:Benchmark::Tms::FMTSTR]]
 
---- BENCHMARK_VERSION
+--- BENCHMARK_VERSION -> String
 
 benchmark ライブラリのバージョンを表します。
 
@@ -328,7 +328,7 @@ self と x の除算を計算します。
 @see [[m:Benchmark.#measure]]
 
 
---- format(fmtstr = nil, *args)
+--- format(fmtstr = nil, *args) -> String
 
 self を指定されたフォーマットで整形して返します。
 
@@ -413,13 +413,13 @@ System CPU time
 
 == Constants
 
---- CAPTION
+--- CAPTION -> String
 
 [[m:Benchmark.#bm]] の内部などで使用されます。
 
 @see [[m:Benchmark::CAPTION]]
 
---- FMTSTR
+--- FMTSTR -> String
 
 [[m:Benchmark.#benchmark]] の第三引数のデフォルト値。
 
