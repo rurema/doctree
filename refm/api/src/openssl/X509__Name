@@ -162,4 +162,4 @@ template に指定されなかった属性はこの型であると仮定して�
 #@# internal use only
 #@# = module RFC2253DN
 = class OpenSSL::X509::NameError < OpenSSL::OpenSSLError
-OpenSSL::X509::Name固有のエラーの場合に発生する例外です。
+[[c:OpenSSL::X509::Name]] 固有のエラーの場合に発生する例外です。
