@@ -139,7 +139,7 @@ nameで指定された要素を削除します。
 == Constants
 
 #@since 1.8.3
---- InspectKey
+--- InspectKey -> :__inspect_key__
 
 内部的に使用する定数です。
 #@end

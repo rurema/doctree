@@ -454,7 +454,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 自身の pos と lineno をそれぞれ 0 にします。
 
---- seek(offset, whence = IO::SEEK_SET)
+--- seek(offset, whence = IO::SEEK_SET) -> 0
 
 自身の pos を whence の位置から offset バイトだけ移動させます。 
 

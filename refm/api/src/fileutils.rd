@@ -550,7 +550,7 @@ rm_r(list, {:force => true}) と同じです。
   FileUtils.rmdir('somedir', {:verbose => true, :noop => true})
 
 #@since 1.8.3
---- remove_entry(path, force = false)
+--- remove_entry(path, force = false) -> ()
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 

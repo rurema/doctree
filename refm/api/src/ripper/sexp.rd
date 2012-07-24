@@ -49,7 +49,7 @@ Ruby プログラム str を解析して S 式のツリーにして返します�
 
 @see [[m:Ripper.sexp_raw]]
 
---- Ripper.sexp_raw(src, filename = '-', lineno = 1)
+--- Ripper.sexp_raw(src, filename = '-', lineno = 1) -> object
 
 Ruby プログラム str を解析して S 式のツリーにして返します。
 

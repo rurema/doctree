@@ -438,7 +438,7 @@ Socket::MSG_* 定数の bitwise OR で表現されています。
 @param maxcontrollen 受け取る補助データの最大長
 @param opts ハッシュオプション
 
---- remote_address
+--- remote_address -> Addrinfo
 [[man:getpeername(2)]] で得られたリモートアドレス情報を
 [[c:Addrinfo]] オブジェクトとして返します。
 
