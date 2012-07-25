@@ -50,12 +50,6 @@ p a         # => [25]
 
 = class Delegator < Object
 
-#@since 1.9.1
-
-include Delegator::MethodDelegation
-
-#@end
-
 サブクラスにメソッド委譲の仕組みを提供する抽象クラス。
 
 メソッド委譲を行う場合は、本クラスを継承し[[m:Delegator#__getobj__]]を再定義する必要があります。
@@ -244,9 +238,5 @@ obj のもつインスタンスメソッドのうち、
 #@end
 
 #@include(delegate/SimpleDelegator)
-
-#@since 1.9.1
-#@include(delegate/Delegator__MethodDelegation)
-#@end
 
 #@end
