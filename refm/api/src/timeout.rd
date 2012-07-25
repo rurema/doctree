@@ -7,8 +7,8 @@ category Thread
 == Private Instance Methods
 
 #@since 1.8.0
---- timeout(sec) {|i| .... }
---- timeout(sec, exception_class = nil) {|i| .... }
+--- timeout(sec) {|i| .... }                        -> object
+--- timeout(sec, exception_class = nil) {|i| .... } -> object
 
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
@@ -44,7 +44,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 
 == Module Functions
 
---- timeout(sec, exception_class = nil) {|i| ... }
+--- timeout(sec, exception_class = nil) {|i| ... }  -> object
 
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外

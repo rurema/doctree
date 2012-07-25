@@ -661,7 +661,7 @@ DNS リソースの SOA (Start Of Authority) レコード
 
 == Class Methods
 
---- new(mname, rname, serial, refresh, retry_, expire, minimum)
+--- new(mname, rname, serial, refresh, retry_, expire, minimum) -> Resolv::DNS::Resource::SOA
 Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 
 @param mname 対象のゾーンのマスターゾーンファイルが存在するホスト名

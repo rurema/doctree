@@ -94,12 +94,12 @@ include Digest::Instance
 == Class Methods
 
 #@until 1.8.6
---- new(str = nil)
+--- new(str = nil) -> Digest::Base
 
 新しいダイジェストオブジェクトを生成します。文字列引数が与えられると
 それを追加します([[m:Digest::Base#update]] 参照)。
 #@else
---- new
+--- new            -> Digest::Base
 新しいダイジェストオブジェクトを生成します。
 #@end
 
@@ -133,8 +133,8 @@ new(str).hexdigest と等価です。
 
 == Instance Methods
 
---- dup
---- clone
+--- dup   -> Digest::Base
+--- clone -> Digest::Base
 
 ダイジェストオブジェクトの複製を作ります。
 
@@ -227,8 +227,8 @@ ASCIIコードを使って16進数の列を示す文字列にエンコードし�
 
 #@end
 
---- update(str)
---- <<(str)
+--- update(str) -> self
+--- <<(str)     -> self
 
 文字列を追加します。self を返します。
 複数回updateを呼ぶことは文字列を連結してupdateを呼ぶことと同じです。
@@ -254,7 +254,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         digest << "y"
         p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
 
---- ==(md)
+--- ==(md)  -> bool
 
 与えられたダイジェストオブジェクトと比較します。
 
@@ -269,7 +269,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         digest2.update("RUBY")
         p digest1 == digest2 # => false
 
---- ==(str)
+--- ==(str) -> bool
 
 #@if(version >= "1.8.6")
 与えられた文字列を hexdigest 値と見て、自身の hexdigest 値と比較します。
