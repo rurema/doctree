@@ -22,8 +22,7 @@ CGI プロトコルの詳細については以下の文書を参照してくだ�
   require "cgi"
   cgi = CGI.new
   values = cgi['field_name']   # <== 'field_name' の配列
-    # 'field_name' が指定されていなかったら、 []を返す。 (1.6)
-    # 'field_name' が指定されていなかったら、 ""を返す。(1.8)
+  # 'field_name' が指定されていなかったら、 ""を返す。
 #@#
   fields = cgi.keys            # <== field nameの配列
 

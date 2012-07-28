@@ -187,10 +187,9 @@ CGIやサーバの実装者に対し `&' の代わりに
 #@until 1.9.3
 === 新しい仕様への変更と移行措置について
 
-net/http 1.1 (Ruby 1.6に含まれています)の挙動を使いたい場合には
-[[m:Net::HTTP.version_1_1]] を呼んでください。
-その後 [[m:Net::HTTP.version_1_2]] を呼ぶと挙動が 1.2 に
-戻ります。
+net/http 1.1 の挙動を使いたい場合には[[m:Net::HTTP.version_1_1]] を呼ん
+でください。その後 [[m:Net::HTTP.version_1_2]] を呼ぶと挙動が 1.2 に戻
+ります。
 
   # example
   Net::HTTP.start {|http1| ...(http1 has 1.2 features)... }
@@ -636,10 +635,10 @@ dest を指定した場合には
 1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
 また、返り値が [レスポンスオブジェクト, そのボディ] となります。
 
-  # net/http version 1.1 (Ruby 1.6.x)
+  # net/http version 1.1
   response, body = http.get( '/index.html' )
   
-  # net/http version 1.2 (Ruby 1.8.x or later)
+  # net/http version 1.2
   response = http.get('/index.html')
   
   # compatible in both version
@@ -707,10 +706,10 @@ dest を指定した場合には
 また、返り値が [レスポンスオブジェクト, そのボディ] となります。
 
 例:
-  # net/http version 1.1 (Ruby 1.6.x)
+  # net/http version 1.1
   response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
-  # version 1.2 (Ruby 1.8.x or later)
+  # version 1.2
   response = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
   # using block
