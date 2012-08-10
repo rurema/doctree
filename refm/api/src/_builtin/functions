@@ -2404,7 +2404,7 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 @see [[m:Kernel.#eval]],[[m:Kernel::TOPLEVEL_BINDING]]
 
 --- eval(expr) -> object
---- eval(expr, bind, fname = __FILE__, lineno = 1) -> object
+--- eval(expr, bind, fname = "(eval)", lineno = 1) -> object
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
 す。第2引数に 
