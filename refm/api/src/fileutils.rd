@@ -398,9 +398,15 @@ ln_s(src, dest, :force => true) と同じです。
   FileUtils.mkdir(%w( tmp data ))
   FileUtils.mkdir('notexist', {:noop => true})  # does not create really
 
+#@until 1.9.1
 --- mkdir_p(list, options = {})  -> String | Array
 --- mkpath(list, options = {})   -> String | Array
 --- makedirs(list, options = {}) -> String | Array
+#@else
+--- mkdir_p(list, options = {})  -> Array
+--- mkpath(list, options = {})   -> Array
+--- makedirs(list, options = {}) -> Array
+#@end
 
 ディレクトリ dir とその親ディレクトリを全て作成します。
 
@@ -421,7 +427,10 @@ ln_s(src, dest, :force => true) と同じです。
 @param options :mode, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@return list を返します。
+@return ディレクトリ名文字列の配列を返します。
+#@until 1.9.1
+        指定したディレクトリが1つの場合はディレクトリ名文字列を返します。
+#@end
 
 --- mv(src, dest, options = {})   -> ()
 --- move(src, dest, options = {}) -> ()
