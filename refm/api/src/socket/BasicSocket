@@ -250,10 +250,14 @@ dest_sockaddr には「ソケットアドレス構造体を pack した文字列
 ソケットのオプションを設定します。[[man:setsockopt(2)]]
 を参照してください。
 
-#@since 1.9.2
+#@until 1.9.2
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+といった整数値を用います。
+#@else
 level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
 といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
 シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+#@end
 
 optval には文字列、整数、真偽値(true or false)を渡すことができます。
 文字列の場合には [[man:setsockopt(2)]] にはその文字列と
@@ -261,6 +265,7 @@ optval には文字列、整数、真偽値(true or false)を渡すことがで�
 true/falseの場合は0/1という整数と解釈され、そのメモリ領域の
 intポインタを渡します。
 
+#@since 1.9.2
 引数が1つの場合は [[c:Socket::Option]] で設定値を表現します。
 
   # 真偽値の場合
