@@ -27,9 +27,9 @@ Gem パッケージのメタデータを扱うためのクラスです。
 
 --- _dump -> String
 
-重要なインスタンス変数のみを [[m:Marshal.dump]] します。
+重要なインスタンス変数のみを [[m:Marshal.#dump]] します。
 
-@see [[m:Marshal.dump]]
+@see [[m:Marshal.#dump]]
 
 --- add_bindir(executables) -> Array | nil
 

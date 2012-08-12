@@ -56,7 +56,7 @@ URI 文字列をエンコードした文字列を返します。
 
 @param str 文字列を指定します。
 
-@see [[m:URI.#escape]]
+@see [[m:URI.escape]]
 
 --- unescape(str) -> String
 
@@ -64,7 +64,7 @@ URI 文字列をデコードした文字列を返します。
 
 @param str 文字列を指定します。
 
-@see [[m:URI.#unescape]]
+@see [[m:URI.unescape]]
 
 --- get_proxy_from_env -> URI | nil
 

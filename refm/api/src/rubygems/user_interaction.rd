@@ -33,7 +33,7 @@
 
 デフォルトの UI を返します。
 
-@see [[m:Gem::DefaultUserInteraction.#ui]]
+@see [[m:Gem::DefaultUserInteraction.ui]]
 
 --- ui=(new_ui)
 
@@ -41,7 +41,7 @@
 
 @param new_ui 新しい UI を指定します。
 
-@see [[m:Gem::DefaultUserInteraction.#ui=]]
+@see [[m:Gem::DefaultUserInteraction.ui=]]
 
 --- use_ui(new_ui){ ... }
 #@# -> discard
@@ -50,7 +50,7 @@
 
 @param new_ui 新しい UI を指定します。
 
-@see [[m:Gem::DefaultUserInteraction.#use_ui]]
+@see [[m:Gem::DefaultUserInteraction.use_ui]]
 
 = module Gem::UserInteraction
 include Gem::DefaultUserInteraction
