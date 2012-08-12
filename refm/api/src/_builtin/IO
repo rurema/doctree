@@ -34,7 +34,6 @@ IO の読み込みメソッドは2種類存在します。
 
  * [[m:IO.foreach]]
  * [[m:IO.readlines]]
- * [[m:IO#each]]
  * [[m:IO#each_line]]
  * [[m:IO#lines]]
  * [[m:IO#gets]]
@@ -196,7 +195,9 @@ IO.foreach(空ファイル)        何もしない
 //emlist{
 メソッド                      既にEOFだったら
 
+#@until 1.9.1
 IO#each                       何もしない
+#@end
 IO#each_byte                  何もしない
 IO#getc                       nil
 IO#gets                       nil
@@ -575,19 +576,36 @@ length を省略するとファイルの末尾まで読み込みます。
 @see [[m:IO.read]]
 #@end
 
+#@until 1.9.1
 --- readlines(path, rs = $/)    -> [String]
+#@else
+--- readlines(path, rs = $/, opts={})
+--- readlines(path, limit, opts={})
+--- readlines(path, rs, limit, opts={})
+#@end
 
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
+
 #@since 1.9.1
 テキスト読み込みメソッドとして動作します。
+
+limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中で
+切れないように余分に読み込む場合があります。
+
+opts でファイルを開くときのオプションを指定します。エンコーディングなど
+を指定できます。
+[[m:File.open]] と同様なのでそちらを参照してください。
 #@end
-既に EOF に達していれば空配列 [] を返します。
-[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
 @param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+#@since 1.9.1
+@param limit 最大の読み込みバイト数
+@param opts ファイルを開くときのオプション引数
+#@end
 
 @raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
 
@@ -764,18 +782,12 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 
 ポートがクローズされている時に真を返します。
 
+#@until 1.9.1
 --- each(rs = $/) {|line| ... }         -> self
-#@since 1.9.1
---- each(limit) {|line| ... }           -> self
---- each(rs, limit) {|line| ... }       -> self
 #@end
 #@since 1.8.7
 #@until 1.9.1
 --- each(rs = $/)                       -> Enumerable::Enumerator
-#@else
---- each(rs = $/)                       -> Enumerator
---- each(limit)                         -> Enumerator
---- each(rs, limit)                     -> Enumerator
 #@end
 #@end
 --- each_line(rs = $/) {|line| ... }    -> self
@@ -815,6 +827,10 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを�
 
 #@since 1.9.1
 テキスト読み込みメソッドとして動作します。
+
+limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中で
+切れないように余分に読み込む場合があります。
+
 #@end
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
@@ -963,7 +979,10 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fix
 #@end
 
 #@since 1.9.1
---- gets(rs = $/, limit)    -> String | nil
+--- gets(rs = $/)    -> String | nil
+--- gets(limit) -> String | nil
+--- gets(rs, limit) -> String | nil
+
 #@else
 --- gets(rs = $/)    -> String | nil
 #@end
@@ -1234,7 +1253,13 @@ EOF に到達した時には EOFError が発生します。
 
 @see [[m:IO#getc]]
 
+#@until 1.9.1
 --- readline(rs = $/)    -> String
+#@else
+--- readline(rs = $/) -> String
+--- readline(limit) -> String
+--- readline(rs, limit) -> String
+#@end
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には EOFError が発生します。
@@ -1244,7 +1269,15 @@ EOF に到達した時には EOFError が発生します。
 #@end
 読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#gets]] との違いは EOF での振る舞いのみです。
 
+#@since 1.9.1
+limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中で
+切れないように余分に読み込む場合があります。
+#@end
+
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+#@since 1.9.1
+@param limit 最大の読み込みバイト数
+#@end
 
 @raise EOFError EOF に到達した時に発生します。
 
@@ -1269,6 +1302,9 @@ EOF に到達した時には EOFError が発生します。
 
 #@since 1.9.1
 テキスト読み込みメソッドとして動作します。
+
+limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中で
+切れないように余分に読み込む場合があります。
 #@end
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
