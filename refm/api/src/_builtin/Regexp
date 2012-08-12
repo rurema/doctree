@@ -229,7 +229,6 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 == Instance Methods
 
 --- =~(string) -> Fixnum | nil
---- ===(string) -> bool
 
 文字列 string との正規表現マッチを行います。マッチした場合、
 マッチした位置のインデックスを返します(先頭は0)。マッチしなかった
@@ -242,19 +241,20 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 
 組み込み変数 [[m:$~]] もしくは [[m:Regexp.last_match]] にマッチに関する情報 [[c:MatchData]] が設定されます。
 
-string がnil でも [[c:String]] オブジェクトでもなけれ
-ば例外 [[c:TypeError]] が発生します。
-
-#@since 1.8.0
-Regexp#=== は、真偽値を返します。引数が文
-字列でないか、マッチしなければ false を、マッチすれば
-true を返します。
+#@since 1.9.1
+文字列のかわりに[[c:Symbol]]をマッチさせることができます。
 #@end
 
-@param string 文字列を指定します。
+@param string マッチ対象文字列
 
-@raise TypeError string がnil でも [[c:String]] オブジェクトでもない
+#@until 1.9.1
+@raise TypeError string が nil でも [[c:String]] オブジェクトでもない
                  場合発生します。
+#@else
+@raise TypeError string が nil でも [[c:String]] オブジェクト
+                 でも [[c:Symbol]] でもない場合発生します。
+                 
+#@end
 
   p /foo/ =~ "foo"        #=> 0
   p Regexp.last_match(0)  #=> "foo"
@@ -274,6 +274,18 @@ true を返します。
   rescue TypeError
     printf "! %s\t%s\n", $!, $@ #=> ! can't convert Array into String       r5.rb:15
   end
+
+--- ===(string) -> bool
+文字列 string との正規表現マッチを行います。
+マッチした場合は真を返します。
+
+#@until 1.9.1
+string が文字列でない場合には false を返します。
+#@else
+string が文字列でもシンボルでもない場合には false を返します。
+#@end
+
+@param string マッチ対象文字列
 
 --- ~ -> Fixnum | nil
 
