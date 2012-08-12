@@ -353,10 +353,10 @@ path が空ファイルの場合、何もせずに nil を返します。
 --- pipe(enc_str, opts={})           -> [IO]
 --- pipe(ext_enc, int_enc, opts={})  -> [IO]
 #@since 1.9.2
---- pipe{|read_iom write_io| ... } -> object
---- pipe(ext_enc){|read_iom write_io| ... } -> object
---- pipe(enc_str, opt={}){|read_iom write_io| ... }           -> object
---- pipe(ext_enc, int_enc, opt={}){|read_iom write_io| ... }  -> object
+--- pipe{|read_io, write_io| ... } -> object
+--- pipe(ext_enc){|read_io, write_io| ... } -> object
+--- pipe(enc_str, opt={}){|read_io, write_io| ... }           -> object
+--- pipe(ext_enc, int_enc, opt={}){|read_io, write_io| ... }  -> object
 #@end
 #@end
 
