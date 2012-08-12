@@ -1923,19 +1923,3 @@ posix_fadvise をサポートしていないプラットフォーム上では
 --- SEEK_SET -> Fixnum
 
 [[m:IO#seek]] を参照してください。
-
-#@since 1.9.2
-
-= module IO::WaitReadable
-例外が読み込み待ちで発生したことを意味します。
-
-例外オブジェクトに extend されます。詳しくは
-[[m:IO#read_nonblock]] を参照してください。
-
-= module IO::WaitWritable
-例外が書き込み待ちで発生したことを意味します。
-
-例外オブジェクトに extend されます。詳しくは
-[[m:IO#write_nonblock]] を参照してください。
-
-#@end

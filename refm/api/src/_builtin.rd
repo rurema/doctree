@@ -56,6 +56,10 @@ require を書かなくても使うことができます。
 #@include(_builtin/Hash)
 #@include(_builtin/IO)
 #@include(_builtin/IOError)
+#@since 1.9.2
+#@include(_builtin/IO__WaitReadable)
+#@include(_builtin/IO__WaitWritable)
+#@end
 #@include(_builtin/IndexError)
 #@include(_builtin/Integer)
 #@include(_builtin/Interrupt)
