@@ -1291,7 +1291,7 @@ EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告さ�
 
 #@since 1.9.2
 発生した例外 がErrno::EAGAIN、 Errno::EWOULDBLOCK である場合は、
-その例外オブジェクトに [[m:IO::WaitReadable]] が [[m:Object#extend]]
+その例外オブジェクトに [[c:IO::WaitReadable]] が [[m:Object#extend]]
 されます。
 #@end
 
@@ -1633,7 +1633,7 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告さ�
 
 #@since 1.9.2
 発生した例外 がErrno::EAGAIN、 Errno::EWOULDBLOCK である場合は、
-その例外オブジェクトに [[m:IO::WaitWritable]] が [[m:Object#extend]]
+その例外オブジェクトに [[c:IO::WaitWritable]] が [[m:Object#extend]]
 されます。よって IO::WaitWritable を write_nonblock のリトライが必要
 かの判定に用いることができます。
 #@end
