@@ -659,6 +659,11 @@ begin式全体の評価値は、本体／rescue節／else節のうち
 最後に評価された文の値です。また各節において文が存在しなかったときの値
 はnilです。いずれにしてもensure節の値は無視されます。
 
+[[ref:d:spec/def#class]]、[[ref:d:spec/def#module]]、[[ref:d:spec/def#method]]
+などの定義文では、それぞれ
+begin なしで rescue, ensure 節を定義でき、これにより例外を処理することが
+できます。
+
 ==== rescue修飾子
 
 例:
