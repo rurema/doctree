@@ -1859,14 +1859,14 @@ Socket has had listen() called on it。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_ACCEPTFILTER -> Integer
 set accept filter on listening socket。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第2引数(optname)に使用します。
 
-@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 #@end
 --- SO_ATTACH_FILTER -> Integer
@@ -1875,14 +1875,14 @@ Attach socket filter。
 の第2引数(optname)に使用します。
 
 @see [[man:socket(7linux)]], [[url:http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD]],
-     [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_BINDTODEVICE -> Integer
 Bind this socket to a particular device。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第2引数(optname)に使用します。
 
-@see [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+@see [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_BROADCAST -> Integer
 Permit sending of broadcast messages。
@@ -1890,7 +1890,7 @@ Permit sending of broadcast messages。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_DEBUG -> Integer
 Debug info recording。
@@ -1898,7 +1898,7 @@ Debug info recording。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_DETACH_FILTER -> Integer
 Detach socket filter。
@@ -1906,7 +1906,7 @@ Detach socket filter。
 の第2引数(optname)に使用します。
 
 @see [[man:socket(7linux)]], [[url:http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD]],
-     [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_DONTROUTE -> Integer
 Send without using the routing tables。
@@ -1914,7 +1914,7 @@ Send without using the routing tables。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 #@since 1.8.3
 --- SO_DONTTRUNC -> Integer
@@ -1928,7 +1928,7 @@ Get socket error status。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_KEEPALIVE -> Integer
 Keep connections alive。
@@ -1936,7 +1936,7 @@ Keep connections alive。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_LINGER -> Integer
 Linger on close if data is present。
@@ -1944,7 +1944,7 @@ Linger on close if data is present。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]],[[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]],[[m:Socket::Constants::SOL_SOCKET]]
 
 #@since 1.8.3
 --- SO_NKE -> Integer
@@ -1957,7 +1957,7 @@ Don't SIGPIPE on EPIPE。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第2引数(optname)に使用します。
 
-@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 #@end
 --- SO_NO_CHECK -> Integer
@@ -1976,7 +1976,7 @@ Leave received out-of-band data in-line。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_PASSCRED -> Integer
 Receive SCM_CREDENTIALS messages。
@@ -1984,7 +1984,7 @@ Receive SCM_CREDENTIALS messages。
 の第2引数(optname)に使用します。
 
 @see [[man:socket(7linux)]], [[man:unix(7linux)]],
-     [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_PEERCRED -> Integer
 The credentials of the foreign process connected to this socket。
@@ -1992,7 +1992,7 @@ The credentials of the foreign process connected to this socket。
 の第2引数(optname)に使用します。
 
 @see [[man:socket(7linux)]], [[man:unix(7linux)]], [[man:socketpair(2linux)]],
-     [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_PEERNAME -> Integer
 #@todo
@@ -2011,7 +2011,7 @@ Receive buffer size。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_RCVLOWAT -> Integer
 Receive low-water mark。
@@ -2019,7 +2019,7 @@ Receive low-water mark。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_RCVTIMEO -> Integer
 Receive timeout。
@@ -2036,7 +2036,7 @@ Allow local address reuse。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
      [[man:socket(7linux)]], [[man:bind(2)]],
-     [[m:Socket::Constants#SOL_SOCKET]]
+     [[m:Socket::Constants::SOL_SOCKET]]
 
 #@since 1.8.3
 --- SO_REUSEPORT -> Integer
@@ -2044,7 +2044,7 @@ Allow local address and port reuse。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第2引数(optname)に使用します。
 
-@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants::SOL_SOCKET]]
      
 #@end
 --- SO_SECURITY_AUTHENTICATION -> Integer
@@ -2062,7 +2062,7 @@ Send buffer size。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_SNDLOWAT -> Integer
 Receive low-water mark。
@@ -2070,7 +2070,7 @@ Receive low-water mark。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_SNDTIMEO -> Integer
 Send timeout。
@@ -2078,7 +2078,7 @@ Send timeout。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 --- SO_TIMESTAMP -> Integer
 Receive timestamp with datagrams (timeval)。
@@ -2086,7 +2086,7 @@ Receive timestamp with datagrams (timeval)。
 の第2引数(optname)に使用します。
 
 @see [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
      [[m:Socket::AncillaryData#timestamp]]
 
 --- SO_TYPE -> Integer
@@ -2095,7 +2095,7 @@ Get the socket type。
 の第2引数(optname)に使用します。
 
 @see [[man:sys/socket.h(header)]], [[man:getsockopt(2freebsd)]],
-     [[man:socket(7linux)]], [[m:Socket::Constants#SOL_SOCKET]]
+     [[man:socket(7linux)]], [[m:Socket::Constants::SOL_SOCKET]]
 
 #@since 1.8.3
 --- SO_USELOOPBACK -> Integer
@@ -2122,7 +2122,7 @@ Timestamp (bintime)。
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]]
 の第2引数(optname)に使用します。
 
-@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants#SOL_SOCKET]]
+@see [[man:getsockopt(2freebsd)]], [[m:Socket::Constants::SOL_SOCKET]]
      [[m:Socket::Constants::SO_TIMESTAMP]],
      [[m:Socket::AncillaryData#timestamp]]
 
