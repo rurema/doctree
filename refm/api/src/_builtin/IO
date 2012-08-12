@@ -1926,13 +1926,13 @@ posix_fadvise をサポートしていないプラットフォーム上では
 
 #@since 1.9.2
 
---- WaitReadable -> Module
+= module IO::WaitReadable
 例外が読み込み待ちで発生したことを意味します。
 
 例外オブジェクトに extend されます。詳しくは
 [[m:IO#read_nonblock]] を参照してください。
 
---- WaitWritable -> Module
+= module IO::WaitWritable
 例外が書き込み待ちで発生したことを意味します。
 
 例外オブジェクトに extend されます。詳しくは
