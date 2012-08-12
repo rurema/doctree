@@ -96,6 +96,7 @@ AF_INET なソケットにおいてホストを指定するには以下のいず
 
 また、[[lib:resolv]] ライブラリも使用できます。
 
+#@include(socket/SocketError)
 #@include(socket/BasicSocket)
 #@include(socket/IPSocket)
 #@include(socket/SOCKSSocket)
