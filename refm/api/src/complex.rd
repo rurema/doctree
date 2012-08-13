@@ -532,8 +532,8 @@ otherが [[c:Complex]] のオブジェクトではないときは [[c:Complex]] 
 
 --- conj -> self
 --- conjugate -> self
-複素数として見た場合の共役を返します。
-つまり、self が実数の場合はselfを返します。
+
+自身の共役複素数(実数の場合は常に自身)を返します。
 
 = redefine Math
 == Module Functions
