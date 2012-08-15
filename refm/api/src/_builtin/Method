@@ -220,7 +220,9 @@ self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
 ジェクトを生成して返します。
 
 --- ==(other)     -> bool
---- ===(other)    -> bool
+#@since 1.9.1
+--- eql?(other)   -> bool
+#@end
 
 自身と other が同じインスタンスの同じメソッドを表す場合に
 true を返します。そうでない場合に false を返します。
@@ -231,25 +233,6 @@ true を返します。そうでない場合に false を返します。
   a = s.method(:size)
   b = s.method(:size)
   p a == b                            #=> true
-
-@see [[m:Method#eql?]]
-
---- eql?(other)     -> bool
---- equal?(other)   -> bool
-
-指定された other が self 自身である場合のみ真を返します。
-これは [[c:Object]] クラスで定義されたデフォルトの動作で
-す。
-
-@param other 自身と比較したいオブジェクトを指定します。
-
-  s = "bar"
-  a = s.method(:size)
-  b = s.method(:size)
-  p a.eql?(b)          #=> false
-  p a.eql?(a)          #=> true
-
-@see [[m:Method#==]]
 
 --- hash    -> Integer
 
