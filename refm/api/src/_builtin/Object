@@ -1310,13 +1310,16 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
 --- respond_to?(name, include_private = false) -> bool
 
-オブジェクトが public メソッド name を持つとき真を返します。
-include_private が真のときは private メソッドに対しても真を返します。
+オブジェクトがメソッド name を持つとき真を返します。
 
 オブジェクトが メソッド name を持つというのは、
 オブジェクトが メソッド name に応答することができることをいいます。
 
 @param name [[c:Symbol]] または文字列で指定するメソッド名です。
+
+@param include_private private メソッドを確認の対象に含めるかを true か
+                       false で指定します。省略した場合は false(含めな
+                       い) を指定した事になります。
 
   class F
     def hello
