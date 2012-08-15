@@ -204,9 +204,11 @@ true を返します。そうでない場合に false を返します。
   c = Array.instance_method(:size)
   p a == c                            #=> false
 
+#@since 1.9.1
 --- hash    -> Integer
 
-自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
+自身のハッシュ値を返します。
+#@end
 
 #@since 1.8.7
 #@until 1.9.1
