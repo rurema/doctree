@@ -178,13 +178,18 @@ next メソッドによる外部列挙の状態は他のイテレータメソッ
       puts enum.next while true
     rescue StopIteration
       puts "iteration reached at end"
-      puts enum.next
     end
         # => 120
         #    121
         #    122
         #    iteration reached at end
-        #    120
+#@since 1.9.1
+    puts enum.next
+        #=> 再度 StopIteration 例外が発生
+#@else
+    puts enum.next
+        #=> 120
+#@end
 
 例3: [[m:Kernel.#loop]] は StopIteration を捕捉します。
     str = "xyz"
