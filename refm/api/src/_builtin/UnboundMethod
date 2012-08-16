@@ -53,25 +53,6 @@ alias や super を使います。
 
 == Instance Methods
 
-#@if (version < "1.8.0")
---- [](*args)            
---- call(*args)          
---- call(*args) { ... }  
-
-常に例外 [[c:TypeError]] が発生します。
-UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
-
-@raise TypeError 常に発生します。
-
-    class Foo
-      def foo
-      end
-    end
-    Foo.instance_method(:foo).call
-
-    # => -:5:in `call': you cannot call unbound method; bind first (TypeError)
-#@end
-
 --- bind(obj)    -> Method
 
 self を obj にバインドした [[c:Method]] オブジェクトを生成し返します。
@@ -143,18 +124,6 @@ self を obj にバインドした [[c:Method]] オブジェクトを生成し�
       end
     end
     p m.bind(obj)                   # => -:27:in `bind': method `foo' overridden (TypeError)
-
-#@if (version < "1.8.0")
---- to_proc    -> Proc
-
-self を call する [[c:Proc]] オブジェクトを生成して返します。
-#@end
-
-#@if (version < "1.8.0")
---- unbind    -> self
-
-self を返します。
-#@end
 
 --- arity    -> Integer
 
