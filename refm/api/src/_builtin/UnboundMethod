@@ -173,6 +173,19 @@ true を返します。そうでない場合に false を返します。
   c = Array.instance_method(:size)
   p a == c                            #=> false
 
+--- clone -> Method
+
+自身を複製した [[c:UnboundMethod]] オブジェクトを作成して返します。
+
+--- inspect -> String
+--- to_s    -> String
+
+self を読みやすい文字列として返します。
+
+詳しくは [[m:Method#inspect]] を参照してください。
+
+@see [[m:Method#inspect]]
+
 #@since 1.9.1
 --- hash    -> Integer
 
@@ -192,4 +205,22 @@ true を返します。そうでない場合に false を返します。
 
 このメソッドが定義されている class か module を返します。
 
+--- source_location -> [String, Fixnum] | nil
+
+ソースコードのファイル名と行番号を配列で返します。
+
+その手続オブジェクトが ruby で定義されていない(つまりネイティブ
+である)場合は nil を返します。
+
+@see [[m:Proc#source_location]], [[m:Method#source_location]]
+#@end
+
+#@since 1.9.2
+--- parameters -> [object]
+
+UnboundMethod オブジェクトの引数の情報を返します。
+
+詳しくは [[m:Method#parameters]] を参照してください。
+
+@see [[m:Proc#parameters]], [[m:Method#parameters]]
 #@end

@@ -82,6 +82,10 @@
 
 == Instance Methods
 
+--- clone -> Method
+
+自身を複製した [[c:Method]] オブジェクトを作成して返します。
+
 --- [](*args) -> object
 --- call(*args) -> object
 --- call(*args) { ... } -> object
@@ -138,6 +142,7 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
   s.method(:count).arity     #=> -1
 
 --- inspect -> String
+--- to_s    -> String
 
 self を読みやすい文字列として返します。
 

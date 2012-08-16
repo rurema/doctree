@@ -281,5 +281,5 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
   prc = lambda{|x, y=42, *other, &b|}
   prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
 
-@see [[m:Method#parameters]]
+@see [[m:Method#parameters]], [[m:UnboundMethod#parameters]]
 #@end
