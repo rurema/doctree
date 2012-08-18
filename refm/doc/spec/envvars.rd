@@ -2,7 +2,6 @@
 
 Rubyインタプリタは以下の環境変数を参照します。
 
-
 : RUBYOPT
  Rubyインタプリタにデフォルトで渡すオプションを指定します。
 
@@ -48,7 +47,7 @@ Rubyインタプリタは以下の環境変数を参照します。
   MS-DOS系
 
 //emlist{
-      set RUBYPATH=%HOME%\ruby;\opt\ruby
+      set RUBYPATH=%HOMEDRIVE%%HOMEPATH%\ruby;\opt\ruby
 //}
 
 : RUBYLIB
@@ -72,7 +71,7 @@ Rubyインタプリタは以下の環境変数を参照します。
   MS-DOS系
 
 //emlist{
-      set RUBYLIB=%HOME%\ruby\lib;\opt\ruby\lib
+      set RUBYLIB=%HOMEDRIVE%%HOMEPATH%\ruby\lib;\opt\ruby\lib
 //}
 
 : RUBYLIB_PREFIX
