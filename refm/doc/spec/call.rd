@@ -343,5 +343,5 @@ lambda でないブロックを呼び出したとき
  hoge{|a, b, c| p a} #=> [1,2,3]
 
 
-[[url:http://cvs.m17n.org/~akr/diary/2007-08.html#a2007_08_16_1]]
+[[url:http://www.a-k-r.org/d/2007-08.html#a2007_08_16_1]]
 #@end
