@@ -2344,7 +2344,11 @@ error_type として例外ではないクラスやオブジェクトを指定し
     end
   end
   
-  raise MyException.new rescue p $! #=> #<SecurityError: SecurityError>
+  begin
+    raise MyException.new
+  rescue SecurityError
+    p $! #=> #<SecurityError: SecurityError>
+  end
 
 @see [[m:Kernel.#caller]]
 
