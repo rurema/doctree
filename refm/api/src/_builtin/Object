@@ -1360,7 +1360,7 @@ false を返します。
 @param symbol メソッド名シンボル
 @param include_private private method も含めたい場合に true が渡されます
 
-@see [[m:Object#respond_to?]]
+@see [[m:Object#respond_to?]], [[m:BasicObject#method_missing]]
 #@end
 
 #@until 1.9.1
