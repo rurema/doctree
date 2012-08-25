@@ -19,6 +19,7 @@ fiddle
 mathn                           yugui
 matrix                          bornite
 psych
+racc/parser
 rexml/attlistdecl
 rexml/attribute
 rexml/cdata
