@@ -463,7 +463,7 @@ default_event_sourcesメソッドは、selfがCoClass（コンポーネントク
 @see [[m:WIN32OLE_TYPE.new]], [[m:WIN32OLE_TYPE#progid]],
      [[m:WIN32OLE_TYPE#ole_methods]], [[m:WIN32OLE_METHOD#name]],
      [[m:WIN32OLE_EVENT.new]], [[m:WIN32OLE_EVENT#handler=]],
-     [[m:WIN32OLE_EVENT.event_loop]]
+     [[m:WIN32OLE_EVENT.message_loop]]
 
 --- default_ole_types -> [WIN32OLE_TYPE]
 型が持つデフォルトのインターフェイスを取得します。
