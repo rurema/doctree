@@ -78,9 +78,9 @@ y / x の逆正接関数の値を返します。
   Math.atan2(-1,0)  #=> -1.5707963267949
 
 #@since 1.9.1
-@raise TypeError x に数値以外を指定した場合に発生します。
+@raise TypeError y, x に数値以外を指定した場合に発生します。
 
-@raise RangeError x に実数以外の数値を指定した場合に発生します。
+@raise RangeError y, x に実数以外の数値を指定した場合に発生します。
 #@end
 
 #@since 1.8.0
