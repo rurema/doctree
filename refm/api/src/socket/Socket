@@ -551,7 +551,7 @@ msg は受け取ったメッセージ文字列で、 msg_src は
 
 無限ループ構造になっています。
 
-@see sockets 通信を待ち受けるソケットの配列
+@param sockets 通信を待ち受けるソケットの配列
 @see [[m:Socket.udp_server_recv]], [[m:Socket.udp_server_loop]]
 
 --- udp_server_recv(sockets){|msg, msg_src| ... } -> ()
@@ -572,7 +572,7 @@ msg は受け取ったメッセージ文字列で、 msg_src は
     }
   }
 
-@see sockets 読み込むソケットの配列
+@param sockets 読み込むソケットの配列
 
 --- udp_server_sockets(port) -> [Sockets]
 --- udp_server_sockets(host, port) -> [Sockets]
