@@ -68,8 +68,7 @@ Openを実行します。
    ole_ary = WIN32OLE_VARIANT.array([3,4], WIN32OLE::VARIANT::VT_I4)
    ruby_ary = ole_ary.value # => [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
-@see [[m:WIN32OLE_VARIANT#value]]
-@see [[c:WIN32OLE::VARIANT]]
+@see [[m:WIN32OLE_VARIANT#value]], [[c:WIN32OLE::VARIANT]]
 
 --- new(val, vartype = nil) -> WIN32OLE_VARIANT
 指定したオブジェクトを値とするWIN32OLE_VARIANTオブジェクトを生成します。

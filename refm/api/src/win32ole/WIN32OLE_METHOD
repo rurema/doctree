@@ -20,13 +20,7 @@ WIN32OLE_METHODは、[[m:WIN32OLE#ole_methods]]などの呼び出しによって
    end
 
 
-@see [[m:WIN32OLE#ole_methods]]
-@see [[m:WIN32OLE#ole_function_methods]]
-@see [[m:WIN32OLE#ole_get_methods]]
-@see [[m:WIN32OLE#ole_put_methods]]
-@see [[m:WIN32OLE#ole_method]]
-@see [[m:WIN32OLE#ole_method_help]]
-@see [[c:WIN32OLE_PARAM]]
+@see [[m:WIN32OLE#ole_methods]], [[m:WIN32OLE#ole_function_methods]], [[m:WIN32OLE#ole_get_methods]], [[m:WIN32OLE#ole_put_methods]], [[m:WIN32OLE#ole_method]], [[m:WIN32OLE#ole_method_help]], [[c:WIN32OLE_PARAM]]
 
 == Class Methods
 
@@ -64,9 +58,8 @@ OLEオートメーションサーバの型情報とメソッド名からWIN32OLE
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.dispid # => 181
 
-@see [[m:WIN32OLE#_invoke]]
-@see [[m:WIN32OLE#_getproperty]]
-@see [[m:WIN32OLE#_setproperty]]
+@see [[m:WIN32OLE#_invoke]], [[m:WIN32OLE#_getproperty]],
+     [[m:WIN32OLE#_setproperty]]
 
 --- event? -> bool
 メソッドがイベントかどうかを取得します。

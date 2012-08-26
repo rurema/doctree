@@ -460,13 +460,10 @@ default_event_sourcesメソッドは、selfがCoClass（コンポーネントク
  2010-10-06 22:33:54 +0900: StatusTextChange was called
  ["ページが表示されました"]
 
-@see [[m:WIN32OLE_TYPE.new]]
-@see [[m:WIN32OLE_TYPE#progid]]
-@see [[m:WIN32OLE_TYPE#ole_methods]]
-@see [[m:WIN32OLE_METHOD#name]]
-@see [[m:WIN32OLE_EVENT.new]]
-@see [[m:WIN32OLE_EVENT#handler=]]
-@see [[m:WIN32OLE_EVENT.event_loop]]
+@see [[m:WIN32OLE_TYPE.new]], [[m:WIN32OLE_TYPE#progid]],
+     [[m:WIN32OLE_TYPE#ole_methods]], [[m:WIN32OLE_METHOD#name]],
+     [[m:WIN32OLE_EVENT.new]], [[m:WIN32OLE_EVENT#handler=]],
+     [[m:WIN32OLE_EVENT.event_loop]]
 
 --- default_ole_types -> [WIN32OLE_TYPE]
 型が持つデフォルトのインターフェイスを取得します。

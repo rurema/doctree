@@ -99,8 +99,7 @@ SystemCallError オブジェクトを生成して返します。
 
 システムコールのエラーに対応する例外を集めたモジュールです。
 
-@see [[c:SystemCallError]]
-@see [[c:Errno::EXXX]]
+@see [[c:SystemCallError]], [[c:Errno::EXXX]]
 
 
 = class Errno::EXXX < SystemCallError
