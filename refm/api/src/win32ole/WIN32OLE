@@ -870,7 +870,7 @@ ole_methodsメソッドは、OLEオートメーションサーバが提供する
    excel = WIN32OLE.new('Excel.Application')
    methods = excel.ole_methods
 
-@see [[m:WIN32OLE#ole_methods]], [[m:WIN32OLE#ole_function_methods]],
+@see [[m:WIN32OLE#ole_function_methods]],
      [[m:WIN32OLE#ole_put_methods]]
 
 --- ole_obj_help -> WIN32OLE_TYPE | nil
