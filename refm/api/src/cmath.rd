@@ -483,30 +483,30 @@ z の逆正接関数の値をラジアンで返します。
 @raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
---- atan2!(x, y) -> Float
+--- atan2!(y, x) -> Float
 
-実数 x / y の逆正接関数の値を返します。[[m:Math.#atan2]] のエイリアスで
+実数 y / x の逆正接関数の値を返します。[[m:Math.#atan2]] のエイリアスで
 す。
-
-@param x 実数。
 
 @param y 実数。
 
-@return 返される値の範囲は [-π/2, π/2] です。
+@param x 実数。
+
+@return 返される値の範囲は [-π, π] です。
 
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
-@raise RangeError x に実数以外の数値を指定した場合に発生します。
+@raise RangeError 引数のどちらかに数値以外を指定した場合に発生します。
 
 @see [[m:Math.#atan2]]
 
---- atan2(x, y) -> Float | Complex
+--- atan2(y, x) -> Float | Complex
 
-x / y の逆正接関数の値を返します。
-
-@param x 数値
+y / x の逆正接関数の値を返します。
 
 @param y 数値
+
+@param x 数値
 
 #@since 1.9.3
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
