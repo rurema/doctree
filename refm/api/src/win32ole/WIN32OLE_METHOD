@@ -20,7 +20,7 @@ WIN32OLE_METHODは、[[m:WIN32OLE#ole_methods]]などの呼び出しによって
    end
 
 
-@see [[m:WIN32OLE#ole_methods]], [[m:WIN32OLE#ole_function_methods]], [[m:WIN32OLE#ole_get_methods]], [[m:WIN32OLE#ole_put_methods]], [[m:WIN32OLE#ole_method]], [[m:WIN32OLE#ole_method_help]], [[c:WIN32OLE_PARAM]]
+@see [[m:WIN32OLE#ole_methods]], [[m:WIN32OLE#ole_func_methods]], [[m:WIN32OLE#ole_get_methods]], [[m:WIN32OLE#ole_put_methods]], [[m:WIN32OLE#ole_method]], [[m:WIN32OLE#ole_method_help]], [[c:WIN32OLE_PARAM]]
 
 == Class Methods
 
