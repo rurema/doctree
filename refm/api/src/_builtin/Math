@@ -64,12 +64,12 @@ x の逆正接関数の値をラジアンで返します。
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@end
 
---- atan2(x, y) -> Float
+--- atan2(y, x) -> Float
 
-x / y の逆正接関数の値を返します。
+y / x の逆正接関数の値を返します。
 
-@param x 実数
 @param y 実数
+@param x 実数
 
 @return 返される値の範囲は [-π, π] です。
 
