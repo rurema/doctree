@@ -886,7 +886,7 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数とし�
 
    r, w = IO.pipe
    Thread.new { sleep 10; w.puts "a" }
-   r.eof?  #=> 10秒ブロックしてから true を返す。
+   r.eof?  #=> 10秒ブロックしてから false を返す。
 
    r, w = IO.pipe
    r.eof?  # 永久にブロックします。
