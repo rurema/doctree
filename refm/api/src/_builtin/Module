@@ -1352,14 +1352,10 @@ name で指定した定数を取り除き、その定数に設定されていた
     p FOO     # => uninitialized constant FOO at Foo (NameError)
   end
 
-現在のところ組み込みクラス/モジュールを設定している定数や
-[[m:Kernel.#autoload]] を指定した(まだロードしてない)定数を削除
-できないという制約があります。
+組み込みクラス/モジュールを設定している定数や [[m:Kernel.#autoload]] を指定した(まだロードしてない)定数を含めて削除する事ができます。
 
-  class Object
-    remove_const :Array
-  end
-  => -:2:in `remove_const': cannot remove Object::Array (NameError)
+取り除かれた定数は参照できなくなりますが、消える訳ではないので注意して
+使用してください。
 
 @see [[m:Module#remove_class_variable]], [[m:Object#remove_instance_variable]]
 
