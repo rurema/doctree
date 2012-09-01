@@ -1602,6 +1602,10 @@ Ruby 1.8.8 以降では Array#sample を使ってください。
 #@if (version != "1.9.0")
 --- sample        -> object
 --- sample(n)     -> Array
+#@since 1.9.3
+--- sample(opts)    -> object
+--- sample(n, opts) -> Array
+#@end
 
 配列の要素を1個(引数を指定した場合は自身の要素数を越えない範囲で n 個)
 ランダムに選んで返します。
@@ -1616,6 +1620,15 @@ srand()が有効です。
 @param n 取得する要素の数を指定します。自身の要素数(self.length)以上の
          値を指定した場合は要素数と同じ数の配列を返します。
 
+#@since 1.9.3
+@param opts :random がキー、乱数生成器([[c:Random]] オブジェクトなど)が
+            値のハッシュを指定します。0 以上 1 未満の値を返す test メソッ
+            ドに応答するオブジェクトであれば値に指定する事ができます。
+            [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェクトを
+            指定した場合、[[m:Kernel.#srand]] の指定に影響されません。
+#@end
+
+@raise ArgumentError 引数 n に負の数を指定した場合に発生します。
 例:
 
   a = (1..10).to_a
