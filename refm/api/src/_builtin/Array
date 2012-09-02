@@ -1550,8 +1550,7 @@ nil を返します。
 self と引数に渡した配列の各要素を順番にブロックに渡します。
 
 #@since 1.9.1
-@param lists 配列を指定します。配列でない場合は [[m:Enumerable#zip]]
-             と違い to_ary メソッドにより配列に変換します。
+@param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
              to_ary メソッドが無い場合は each を試します。
 #@else
 @param lists 配列を指定します。配列でない場合は [[m:Enumerable#zip]]
