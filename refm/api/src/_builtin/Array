@@ -939,7 +939,7 @@ lv が指定された場合、lv の深さまで再帰的に平滑化します�
 --- indexes(*index)      -> Array
 --- indices(*index)      -> Array
 
-このメソッド obsolete です。
+このメソッドは obsolete です。
 代わりに [[m:Array#values_at]] を使用します。
 使用すると警告メッセージが表示されます。
 
