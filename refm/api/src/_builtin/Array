@@ -428,7 +428,7 @@ self 中で重複していて、other中に存在していなかった要素は�
 
 @see [[m:Array#rassoc]]
 
---- at(pos)    -> object
+--- at(pos)    -> object | nil
 
 配列の pos の位置にある要素を返します。
 self[pos] と同じです。
@@ -1582,7 +1582,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
 #@end
 
 #@if (version == "1.8.7")
---- choice        -> object
+--- choice        -> object | nil
 
 配列の要素を1個ランダムに選んで返します。
 
@@ -1603,10 +1603,10 @@ Ruby 1.8.8 以降では Array#sample を使ってください。
 
 #@since 1.8.8
 #@if (version != "1.9.0")
---- sample        -> object
+--- sample        -> object | nil
 --- sample(n)     -> Array
 #@since 1.9.3
---- sample(opts)    -> object
+--- sample(opts)    -> object | nil
 --- sample(n, opts) -> Array
 #@end
 
