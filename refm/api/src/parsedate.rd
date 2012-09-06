@@ -1,9 +1,27 @@
-#@until 1.9.0
+#@until 1.9.1
 category Date/Time
 
-日付を解析します。
+#@# TODO: date/format に対応した場合にコメントインする。
+#@# require 'date/format'
+
+日時を表す文字列を解析するライブラリです。
+
+[注意] このライブラリは obsolete です。1.9 以降では利用することが出来ま
+せん。代わりに[[m:Date.parse]] や [[m:Date._parse]] を利用してください。
 
 = module ParseDate
+
+日時を表す文字列を解析するためのモジュールです。
+
+解析した結果の各要素を配列 (年、月、日、時、分、秒、タイムゾーン、曜日)に
+して返す [[m:ParseDate.#parsedate]] を提供します。
+
+例:
+
+  require 'parsedate'
+
+  ParseDate.parsedate "Tuesday, July 6th, 2007, 18:35:20 UTC"
+  # => [2007, 7, 6, 18, 35, 20, "UTC", 2]
 
 == Module Functions
 
@@ -33,8 +51,6 @@ parsedate はいろいろな書式をあつかえます。
   Saturday, 28-Aug-99 21:45:09 GMT
   08/28/1999
   1999/08/28
-
-このライブラリは、1.9.0 以降利用することが出来ません。
 
 日付解析し直ちに [[c:Date]]、
 あるいは [[c:DateTime]] オブジェクトを生成するには、
