@@ -783,6 +783,18 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 
 @see [[m:String#=~]]
 
+#@since 1.9.1
+--- !~(other) -> bool
+
+自身が other とマッチしない事を判定します。
+
+self#=~(obj) を反転した結果と同じ結果を返します。
+
+@param other 判定するオブジェクトを指定します。
+
+@see [[m:Object#=~]]
+#@end
+
 --- display(out = $stdout) -> nil
 
 オブジェクトを out に出力します。
