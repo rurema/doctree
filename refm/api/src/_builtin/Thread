@@ -19,16 +19,10 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
-#@since 1.9.1
---- critical             -> nil
-#@else
+#@until 1.9.1
 --- critical             -> bool
-#@end
 --- critical=(newstate)
 
-#@since 1.9.1
-サポートされていません。警告を出力し、何もせずに nil を返します。
-#@else
 真である間、スレッドの切替えを行いません。
 
 カレントスレッドが停止状態になった場合や、シグナルに割り込まれた場合には、
@@ -185,6 +179,20 @@ VM グローバルの Mutex をロックし、ブロックを実行します。
 Thread.exclusive は VM グローバルの [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] の
 synchronize を呼び出しているだけで、Thread.exclusive していないスレッドは動きます。
 [[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
+
+--- DEBUG -> Integer
+
+スレッドのデバッグレベルを返します。
+
+使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
+あります。
+
+--- DEBUG=(val)
+
+スレッドのデバッグレベルを val に設定します。
+
+使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
+あります。
 
 #@end
 
@@ -440,6 +448,9 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
+--- inspect -> String
+
+自身を人間が読める形式に変換した文字列を返します。
 
 #@since 1.9.2
 --- add_trace_func(pr) -> Proc
