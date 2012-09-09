@@ -2,7 +2,8 @@
 
 = class Tk::Tile::TreeView < TkWindow
 include Tk::Tile::TileWidget
-include Scrollable
+#@# TODO: #7000 が解決したら適切に分岐を行う。
+include Tk::Scrollable
 include Tk::Tile::TreeviewConfig
 
 == Class Methods

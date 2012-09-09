@@ -2,7 +2,8 @@
 
 = class Tk::Tcllib::Tablelist < TkWindow
 include Tk::Tcllib::TablelistItemConfig
-include Scrollable
+#@# TODO: #7000 が解決したら適切に分岐を行う。
+include Tk::Scrollable
 
 == Class Methods
 --- package_name

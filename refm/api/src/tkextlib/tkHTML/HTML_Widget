@@ -1,7 +1,8 @@
 #@since 1.8.2
 
 = class Tk::HTML_Widget < TkWindow
-include Scrollable
+#@# TODO: #7000 が解決したら適切に分岐を行う。
+include Tk::Scrollable
 
 == Class Methods
 #@since 1.8.3

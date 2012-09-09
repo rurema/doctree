@@ -2,7 +2,8 @@
 
 = class Tk::TreeCtrl < TkWindow
 include Tk::TreeCtrl::ConfigMethod
-include Scrollable
+#@# TODO: #7000 が解決したら適切に分岐を行う。
+include Tk::Scrollable
 
 == Class Methods
 #@since 1.8.3

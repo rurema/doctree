@@ -1,7 +1,8 @@
 #@since 1.8.2
 
 = class Tk::TkTable < TkWindow
-include Scrollable
+#@# TODO: #7000 が解決したら適切に分岐を行う。
+include Tk::Scrollable
 include Tk::TkTable::ConfigMethod
 include Tk::ValidateConfigure
 
