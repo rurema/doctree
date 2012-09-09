@@ -29,6 +29,7 @@ require tkextlib/tile/dialog
 #@end
 
 #@include(tile/Tk__Tile)
+#@include(tile/Tk__Tile__ParseStyleLayout)
 #@include(tile/Tk__Tile__TileWidget)
 
 #@end
