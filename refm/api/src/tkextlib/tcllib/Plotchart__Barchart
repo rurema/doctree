@@ -1,7 +1,7 @@
 #@since 1.8.4
 
 = class Tk::Tcllib::Plotchart::Barchart < TkCanvas
-include ChartMethod
+include Tk::Tcllib::Plotchart::ChartMethod
 
 == Class Methods
 --- new(*args)
