@@ -57,73 +57,51 @@ alias や super を使います。
 
 self を obj にバインドした [[c:Method]] オブジェクトを生成し返します。
 
-@param obj 自身をバインドしたいオブジェクトを指定します。ただしバインドできるのは、
-           unbind したオブジェクトのクラスのインスタンスか、メソッド定義元のモジュールを
-           インクルードしたクラスのインスタンスだけです。
+#@until 1.9.1
+NOTE: Ruby 1.8.xでモジュールのインスタンスメソッドをbindすると不審な挙動を
+するので避けるべきである。
+#@end
 
-@raise TypeError obj のクラスが、unbind したオブジェクトのクラスのインスタンスか、
-                 メソッド定義元のモジュールをインクルードしたクラスでなければ、発生します。
+@param obj 自身をバインドしたいオブジェクトを指定します。ただしバインドできるのは、
+           生成元のクラスかそのサブクラスのインスタンスのみです。
+
+@raise TypeError objがbindできないオブジェクトである場合に発生します
 
     # クラスのインスタンスメソッドの UnboundMethod の場合
-
     class Foo
       def foo
         "foo"
       end
     end
-
+    
     # UnboundMethod `m' を生成
-    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
-
+    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo#foo>
+    
     # Foo のインスタンスをレシーバとする Method オブジェクトを生成
-    p m.bind(Foo.new)               # => #<Method: Foo(Foo)#foo>
-
+    p m.bind(Foo.new)               # => #<Method: Foo#foo>
+    
     # Foo のサブクラス Bar のインスタンスをレシーバとする Method
-#@if (version < "1.8.0")
-    # オブジェクトを生成(これは許されない)
-#@end
-    #@#  ruby 1.8 feature: 許されるようになりました
-
     class Bar < Foo
     end
-    # p m.bind(Bar.new)               # => -18:in `bind': bind argument must be an instance of Foo (TypeError)
+    p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 
-    # 同名の特異メソッドが定義されているとダメ
-    class << obj = Foo.new
-      def foo
-      end
-    end
-    p m.bind(obj)                   # => -:25:in `bind': method `foo' overridden (TypeError)
 
     # モジュールのインスタンスメソッドの UnboundMethod の場合
-
     module Foo
       def foo
         "foo"
       end
     end
-
+    
     # UnboundMethod `m' を生成
-    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
-
+    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo#foo>
+    
     # Foo をインクルードしたクラス Bar のインスタンスをレシーバと
     # する Method オブジェクトを生成
     class Bar
       include Foo
     end
     p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
-
-    # Bar のサブクラスは Foo をインクルードしているのと同等なのでよい
-    class Baz <Bar
-    end
-    p m.bind(Baz.new)               # => #<Method: Baz(Foo)#foo>
-
-    # 同名の特異メソッドが定義されているとダメ
-    class << obj = Baz.new
-      def foo
-      end
-    end
-    p m.bind(obj)                   # => -:27:in `bind': method `foo' overridden (TypeError)
 
 --- arity    -> Integer
 
@@ -204,7 +182,9 @@ self を読みやすい文字列として返します。
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
+#@end
 
+#@since 1.9.1
 --- source_location -> [String, Fixnum] | nil
 
 ソースコードのファイル名と行番号を配列で返します。
