@@ -457,11 +457,18 @@ OptionParser.accept や OptionParser#accept によって、受け付け
   # ruby command --charset=jis #=> "iso-2022-jp"
 
 --- on_head(*arg, &block) -> self
+
+オプションを取り扱うためのブロックを自身の持つリストの最初に登録します。
+
+@param arg [[m:OptionParser#on]] と同様です。
+
+@param block [[m:OptionParser#on]] と同様です。
+
+@see [[m:OptionParser#on]], [[m:OptionParser#on_tail]]
+
 --- on_tail(*arg, &block) -> self
 
-[[m:OptionParser#on]]と同様、オプションを取り扱うためのブロックを自身に登録します。
-on メソッドと違う点は、OptionParser オブジェクトが保持している
-リストの最初かあるいは最後にブロックを登録する点です。
+オプションを取り扱うためのブロックを自身の持つリストの最後に登録します。
 
 --version や --help の説明をサマリの最後に表示したい時に便利です。
 
@@ -480,6 +487,8 @@ on メソッドと違う点は、OptionParser オブジェクトが保持して�
     puts OptionParser::Version.join('.')
     exit
   end
+
+@see [[m:OptionParser#on]], [[m:OptionParser#on_head]]
 
 --- order(argv)                     -> [String]
 --- order(argv){|s| ...}            -> [String]
