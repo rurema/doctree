@@ -1494,16 +1494,10 @@ nil を返します。
     p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
 #@end
 
-#@since 1.8.0
 --- unshift(*obj)        -> self
-#@else
---- unshift(obj, *rest)  -> self
-#@end
 
 指定された obj を順番に配列の先頭に挿入します。
-#@since 1.8.0
 引数を指定しなければ何もしません。
-#@end
 
 @param obj 自身に追加したいオブジェクトを指定します。
 
