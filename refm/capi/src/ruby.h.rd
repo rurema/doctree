@@ -269,6 +269,12 @@ obj が Qnil のとき真。
 
 --- MACRO long NUM2LONG(VALUE x)
 
+x を long 型の整数に変換します。
+
+x が nil の場合は [[c:TypeError]] が発生します。
+
+x が long 型で表現できる値の範囲外であった場合は [[c:RangeError]] が発生します。
+
 --- MACRO unsigned int NUM2UINT(VALUE x)
 
 --- MACRO unsigned long NUM2ULONG(VLAUE x)
