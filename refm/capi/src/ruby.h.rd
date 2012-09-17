@@ -265,7 +265,18 @@ obj が Qnil のとき真。
 
 --- MACRO double NUM2DBL(VALUE x)
 
---- MACRO int NUM2INT(VALUE x)
+--- MACRO long NUM2INT(VALUE x)
+
+x を long 型の整数に変換します。
+
+x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれでもな
+い場合は x.to_int による暗黙の型変換を試みます。
+
+x が nil の場合か、暗黙の型変換が成功しなかった場合は [[c:TypeError]]
+が発生します。
+
+x が int 型で表現できる値の範囲外であった場合は [[c:RangeError]] が発
+生します。
 
 --- MACRO long NUM2LONG(VALUE x)
 
