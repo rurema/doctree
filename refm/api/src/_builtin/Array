@@ -159,7 +159,7 @@ range の first が end より後にある場合には空の配列を返しま�
   a[-1..-2] #=> []
   
   # 特殊なケース。first が自身の長さと同じ場合には以下のようになります。
-  a[5]                   #=> nil  
+  a[5]                   #=> nil
   a[5, 1]                #=> []
   a[5..10]               #=> []
 
@@ -194,7 +194,7 @@ length が負の時、start が自身の範囲を越えた時には nil を返�
   a[10, 1]   #=> nil
  
   # 特殊なケース。start が自身の長さと同じ場合には以下のようになります。
-  a[5]                   #=> nil  
+  a[5]                   #=> nil
   a[5, 1]                #=> []
   a[5..10]               #=> []
 
@@ -282,7 +282,7 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
   p ary                        #=> [0, "a", "b", "c", "d", 3]
   
   ary = [0, 1, 2]
-  ary[5, 1] = "Z" 
+  ary[5, 1] = "Z"
   p ary                        #=> [0, 1, 2, nil, nil, "Z"]
     
   ary = [0, 1, 2, 3]
@@ -459,7 +459,7 @@ self 中で重複していて、other中に存在していなかった要素は�
 
 自身と other の各要素をそれぞれ順に <=> で比較していき、結果が 0 でなかった場合に
 その値を返します。各要素が等しく、配列の長さも等しい場合には 0 を返します。
-各要素が等しいまま一方だけ配列の末尾に達した時、自身の方が短ければ -1 をそうでなければ 1 
+各要素が等しいまま一方だけ配列の末尾に達した時、自身の方が短ければ -1 をそうでなければ 1
 を返します。
 #@since 1.9.2
 other に配列以外のオブジェクトを指定した場合は nil を返します。
@@ -787,8 +787,8 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
   ["a", "b", 1].eql?   ["a", "b", 1.0]      #=> false (1.eql?(1.0) が false なので)
 
 @see [[m:Object#eql?]]
- 
---- fetch(nth)               -> object    
+
+--- fetch(nth)               -> object
 --- fetch(nth, ifnone)       -> object
 --- fetch(nth) {|nth| ... }  -> object
 
@@ -1116,7 +1116,7 @@ join した文字列を連結します。
     p [0, 1, 2].last   #=> 2
     p [].last          #=> nil
 
-@see [[m:Array#first]] 
+@see [[m:Array#first]]
 
 #@since 1.8.0
 --- last(n)    -> Array
@@ -1232,7 +1232,7 @@ nil を返します。
       p array          #=> [1]
 #@end
 
-@see [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]] 
+@see [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]]
 
 #@since 1.8.0
 --- push(*obj)        -> self
@@ -1253,7 +1253,7 @@ nil を返します。
       array.push 7, 8
       p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
 
-@see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]] 
+@see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]]
 
 --- rassoc(obj)    -> Array | nil
 
@@ -1268,7 +1268,7 @@ nil を返します。
     a = [[15,1], [25,2], [35,3]]
     p a.rassoc(2)    # => [25, 2]
 
-@see [[m:Array#assoc]] 
+@see [[m:Array#assoc]]
 
 --- replace(another)    -> self
 
@@ -1325,7 +1325,7 @@ reverse! は self を返します。
 #@end
 
 --- rindex(val)           -> Integer | nil
-#@since 1.8.7 
+#@since 1.8.7
 --- rindex {|item| ... }  -> Integer | nil
 #@end
 
