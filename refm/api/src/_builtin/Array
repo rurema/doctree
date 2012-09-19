@@ -1872,14 +1872,17 @@ srand()が有効です。
 @see [[m:Array#permutation]]
 #@end
 
---- permutation(n) { |p| block }       -> Array
+--- permutation(n = self.length) { |p| block }       -> Array
 #@since 1.8.8
---- permutation(n)                     -> Enumerator
+--- permutation(n = self.length)                     -> Enumerator
 #@else
---- permutation(n)                     -> Enumerable::Enumerator
+--- permutation(n = self.length)                     -> Enumerable::Enumerator
 #@end
 
 サイズ n の順列をすべて生成し，それを引数としてブロックを実行します。
+
+引数を省略した場合は配列の要素数と同じサイズの順列に対してブロックを実
+行します。
 
 得られる順列の順序は保証されません。ブロックなしで呼び出されると， 順列
 #@since 1.8.8
@@ -1898,6 +1901,7 @@ srand()が有効です。
 例:
 
     a = [1, 2, 3]
+    a.permutation.to_a     #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
     a.permutation(1).to_a  #=> [[1],[2],[3]]
     a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
     a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
