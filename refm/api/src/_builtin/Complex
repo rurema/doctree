@@ -297,7 +297,7 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 自身を [[c:Float]] に変換します。
 
-@raise RangeError 虚部が 0 ではない場合に発生します。
+@raise RangeError 虚部が実数か、0 ではない場合に発生します。
 
 例:
 
@@ -309,7 +309,7 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 自身を整数に変換します。
 
-@raise RangeError 虚部が 0 ではない場合に発生します。
+@raise RangeError 虚部が実数か、0 ではない場合に発生します。
 
 例:
 
@@ -329,7 +329,7 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 @param eps 許容する誤差。常に無視されます。
 #@end
 
-@raise RangeError 虚部が 0 ではない場合に発生します。
+@raise RangeError 虚部が実数か、0 ではない場合に発生します。
 
 例:
 
