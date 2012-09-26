@@ -314,7 +314,6 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 例:
 
   Complex(3).to_i    # => 3
-  Complex(3).to_i    # => 3
   Complex(3.5).to_i  # => 3
   Complex(3, 2).to_i # => RangeError
 
