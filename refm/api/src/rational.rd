@@ -210,7 +210,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 --- **(other) -> Integer | Float | Rational
 --- rpower (other) -> Integer | Float | Rational
 
-冪(べき)乗を計算します。other が 0 以下の場合、計算結果を
+冪(べき)乗を計算します。other が負の整数の場合、計算結果を
 [[c:Rational]] オブジェクトで返します。
 
 @param other 自身を other 乗する数
@@ -258,7 +258,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 --- **(other) -> Integer | Float | Rational
 --- rpower (other) -> Integer | Float | Rational
 
-冪(べき)乗を計算します。other が 0 以下の場合、計算結果を
+冪(べき)乗を計算します。other が負の整数の場合、計算結果を
 [[c:Rational]] オブジェクトで返します。
 
   (1<<32).rpower(2)           # => 18446744073709551616
