@@ -17,9 +17,9 @@ Ruby の Fixnum クラスは immutable です。
 
 例:
 
-  p 100000.class             # => Fixnum
-  p 100000 * 100000          # => 100000000
-  p (100000 * 100000).class  # => Bignum
+  100000.class             # => Fixnum
+  100000 * 100000          # => 100000000
+  (100000 * 100000).class  # => Bignum
 
 
 == Instance Methods
@@ -82,9 +82,9 @@ self の符号を反転させたものを返します。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
-  p 2 ** 3 # => 8
-  p 2 ** 0 # => 1
-  p 0 ** 0 # => 1
+  2 ** 3 # => 8
+  2 ** 0 # => 1
+  0 ** 0 # => 1
 
 --- <=>(other) -> Fixnum
 
