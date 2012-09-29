@@ -103,7 +103,7 @@ newtype で与えた型は extern や callback メソッド
 
 @raise RuntimeError ライブラリ内でシンボルが見つからない時に発生します。
 
---- [](func)    -> nil |  DL::Symbol | DL::PtrData
+--- [](func)    -> DL::Symbol | DL::PtrData | nil
 
 [[m:DL::Importable#extern]]、[[m:DL::Importable#import]] または
 [[m:DL::Importable#callback]] によって定義した、

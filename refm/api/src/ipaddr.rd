@@ -231,7 +231,7 @@ IPv4 の場合は例外を発生します。
 @see [[c:Socket]]
 
 #@since 1.8.7
---- <=>(other) -> nil | Integer
+--- <=>(other) -> Integer | nil
 
 self と other を比較します。
 

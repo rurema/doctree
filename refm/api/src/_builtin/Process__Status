@@ -120,7 +120,7 @@ to_i.to_s と同じです。
 プロセスが [[man:exit(2)]] などにより正常に終了した場合に、真を返します。
 そうでない場合に false を返します。
 
---- exitstatus    -> nil | Integer
+--- exitstatus    -> Integer | nil
 
 exited? が真の場合プロセスが返した終了ステータスの整数を、そ
 うでない場合は nil を返します。
@@ -146,7 +146,7 @@ exited? が真の場合プロセスが返した終了ステータスの整数を
 [[m:Process.#waitpid]] に [[m:Process::WUNTRACED]] フラグを設定した
 場合にだけ真になりえます。
 
---- stopsig    -> nil | Integer
+--- stopsig    -> Integer | nil
 
 stopped? が真の場合そのシグナルの番号を、そうでない場合は
 nil を返します。
@@ -156,7 +156,7 @@ nil を返します。
 プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
 を返します。
 
---- termsig    -> nil | Integer
+--- termsig    -> Integer | nil
 
 signaled? が真の場合プロセスを終了させたシグナル番号を、
 そうでない場合は nil を返します。

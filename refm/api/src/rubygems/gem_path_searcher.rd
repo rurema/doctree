@@ -8,7 +8,7 @@ Gem パッケージに含まれているファイルのうちロード可能な�
 
 == Public Instance Methods
 
---- find(path) -> nil | Gem::Specification
+--- find(path) -> Gem::Specification | nil
 
 与えられたパスにマッチする [[c:Gem::Specification]] を一つだけ返します。
 
