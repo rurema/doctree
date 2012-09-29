@@ -322,8 +322,7 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返し
   Rational(2, 3).floor  # => 0
   Rational(-3, 2).floor # => -2
 
-自身にもっとも近い整数を返す [[m:Rational#to_i]] とは違う結果を返す事に
-注意してください。
+[[m:Rational#to_i]] とは違う結果を返す事に注意してください。
 
 例:
 
@@ -488,7 +487,7 @@ precision を指定した場合は指定した桁数の数値と、上述の性�
 --- truncate                -> Integer
 #@end
 
-0 から 自身までの整数で、自身にもっとも近い整数を返します。
+小数点以下を切り捨てて値を整数に変換します。
 
 #@since 1.9.2
 @param precision 計算結果の精度
@@ -505,8 +504,8 @@ precision を指定した場合は指定した桁数の数値と、上述の性�
   Rational(-30, 2).to_i # => -15
 
 #@since 1.9.2
-precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
-数か [[c:Rational]] を返します。
+precision を指定した場合は指定した桁数で切り捨てた整数か
+[[c:Rational]] を返します。
 
 例:
 
