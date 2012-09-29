@@ -49,6 +49,11 @@ immutable であるためです。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
+--- -@    -> Fixnum
+
+単項演算子の - です。
+self の符号を反転させたものを返します。
+
 --- *(other) -> Fixnum | Bignum | Float
 
 算術演算子。積を計算します。
