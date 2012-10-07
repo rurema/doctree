@@ -441,9 +441,14 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 #@end
 
 そのモジュール(またはクラス)で定義されている定数名の配列を返します。
-#@until 1.9.1
-スーパークラスやインクルードしているモジュールの定数も含みます。
+
+#@since 1.9.1
+inherit に真を指定すると
 #@end
+スーパークラスやインクルードしているモジュールの定数も含みます。
+[[c:Object]] のサブクラスの場合、Objectやそのスーパークラスで定義されている
+定数は含まれません。 Object.constants とすると Object クラスで定義された
+定数の配列が得られます。
 
 #@since 1.9.1
 @param inherit true を指定するとスーパークラスや include したモジュールで
@@ -465,12 +470,12 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 
 #@since 1.9.1
     # Bar は BAR を含む
-    p constants - $clist                # => [:BAR]
+    p constants                         # => [:BAR]
     # 出力に FOO は含まれない
     p Module.constants - $clist         # => [:BAR, :Bar, :Foo]
     class Baz
       # Baz は定数を含まない
-      p constants - $clist              # => []
+      p constants                       # => []
 
       # ネストしたクラスでは、外側のクラスで定義した定数は
       # 参照可能なので、BAR は、Module.constants には含まれる
@@ -479,12 +484,12 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
     end
 #@else
     # Bar は BAR を含む
-    p constants - $clist                # => ["BAR"]
+    p constants                         # => ["BAR"]
     # 出力に FOO は含まれない
     p Module.constants - $clist         # => ["BAR", "Bar", "Foo"]
     class Baz
       # Baz は定数を含まない
-      p constants - $clist              # => []
+      p constants                       # => []
 
       # ネストしたクラスでは、外側のクラスで定義した定数は
       # 参照可能なので、BAR は、Module.constants には含まれる
