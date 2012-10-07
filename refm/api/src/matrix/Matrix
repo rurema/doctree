@@ -500,6 +500,12 @@ selfの行列の階数(rank)を返します。
 例:
   Matrix[[7,6], [3,9]].trace #=> 16
 
+trace は正方行列でのみ定義されます。
+
+#@since 1.9.2
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+#@end
+
 --- transpose -> Matrix
 --- t -> Matrix
 
@@ -587,7 +593,6 @@ selfのj列目を列ベクトルとして返します。
 
 @see [[m:Matrix.empty]]
 
-or the number of columns is 0.
 --- real? -> bool
 行列が実であれば真を返します。
 
@@ -750,21 +755,6 @@ or the number of columns is 0.
 
   p m.to_a #=> [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
 
-
-#@#--- to_f
-#@todo
-#@#
-#@#各要素を浮動小数点数 [[c:Float]] に変換する。
-
-#@#--- to_i
-#@todo
-#@#
-#@#各要素を整数 [[c:Integer]] に変換する。
-
-#@#--- to_r
-#@todo
-#@#
-#@#各要素を有理数 [[c:Rational]] に変換する。
 
 #@if (version >= "1.9.1")
 
