@@ -578,10 +578,17 @@ or the number of columns is 0.
 #@end
 --- regular? -> bool
 
-正則(regular)なら真(true)を返します。
+行列が正方で正則なら真を、特異なら偽を返します。
 
 行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することです。
 行列式が0でないことと同値です。
+
+#@until 1.9.1
+正方行列でない場合には偽を返します。
+#@else
+正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を
+発生させます。
+#@end
 
 例:
   a1 = [ 1,  2,  3]
@@ -601,18 +608,29 @@ or the number of columns is 0.
   a3 = [-1, -2, 1.5]
   a4 = [1, 1, 1]
   m = Matrix[a1, a2, a3, a4]
+#@until 1.9.1
   p m.regular? #=> false
+#@else
+  p m.regular? #=> raise ExceptionForMatrix::ErrDimensionMismatch
+#@end
 
-#@since 1.9.3
+#@since 1.9.2
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 #@end
 
 --- singular? -> bool
 
-特異(singular)なら真(true)を返します。
+行列が正方で特異なら真を/正則なら偽を返します。
 
 行列が特異(singular)であるとは、正則でないことです。
-行列式が0であるとと同値です。
+行列式が0であること同値です。
+
+#@until 1.9.1
+正方行列でない場合には真を返します。
+#@else
+正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を
+発生させます。
+#@end
 
 #@since 1.9.3
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
@@ -657,7 +675,7 @@ or the number of columns is 0.
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- symmetric? -> bool
-行列が対象ならば真を返します。
+行列が対称ならば真を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
