@@ -122,12 +122,13 @@ i 番目の要素を返します。インデックスは 0 から開始します
 @param i 取得する要素のインデックスを整数値で指定します。
          インデックスは 0 から始めます。
 
---- init_elements(array, copy) -> Array
-ベクトルの要素を引数 array で初期化します。
-
-@param array ベクトルとして初期化する Array を指定します。
-@param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
-             true の場合はコピーします。
+#@# for internal use
+#@# --- init_elements(array, copy) -> Array
+#@# ベクトルの要素を引数 array で初期化します。
+#@# 
+#@# @param array ベクトルとして初期化する Array を指定します。
+#@# @param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
+#@#              true の場合はコピーします。
 
 ===== 注意
 
@@ -163,12 +164,14 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 @param v 比較対象ベクトル
 
---- compare_by(elements) -> bool
 
-自分自身と引数 elements を配列として比較します。
-
-@param elements 比較する配列。
-@return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
+#@# for internal use
+#@# --- compare_by(elements) -> bool
+#@# 
+#@# 自分自身と引数 elements を配列として比較します。
+#@# 
+#@# @param elements 比較する配列。
+#@# @return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
 
 --- *(a) -> Vector
 
@@ -233,7 +236,21 @@ i 番目の要素を返します。インデックスは 0 から開始します
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
+#@since 1.9.2
+--- /(other)
+other が [[c:Numeric]] である場合、ベクトルの各要素を other で割ります。
+
+
+@param other 割る数
+@raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix 
+       の場合に発生します
+#@end
+
 --- r -> Float
+#@since 1.9.3
+--- magnitude -> Float
+--- norm -> Float
+#@end
 
 自身の大きさ（ノルム）を返します。
  
@@ -254,10 +271,26 @@ i 番目の要素を返します。インデックスは 0 から開始します
   
   Vector[Complex(0, 1), 0].norm # => 1.0
 
+#@since 1.9.3
+--- normalize -> Vector
+自身を [[m:Vector#norm]] で正規化したベクトルを返します。
+
+@raise Vector::ZeroVectorError ベクトルが0である場合に発生します。
+
+#@end
+
 --- collect {|x| ... } -> Vector
 --- map {|x| ... } -> Vector
+#@since 1.9.2
+--- collect -> Enumerator
+--- map -> Enumerator
+#@end
 
 ベクトルの各要素に対してブロックを評価した結果を、要素として持つベクトルを生成します。
+
+#@since 1.9.2
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
 
 例:
 
@@ -269,22 +302,56 @@ i 番目の要素を返します。インデックスは 0 から開始します
   }
   p v2 #=> Vector[-1, -2, -3.5, 10]
 
---- each2(v) {|x, y| ... }
-#@todo
+#@since 1.9.2
+--- each{|e| ... } -> self
+--- each -> Enumerator
+ベクトルの各要素をブロックの引数として順にブロックを呼び出します。
 
-ベクトルの各要素と、それに対応するインデックスを持つ引数 v の要素との組に対して (2引数の) ブロックを繰返し評価します。`v' は size メソッドと [] メソッドを持つオブジェクトです。
-#@# sizeメソッドと[]メソッドを持つことをもってArrayクラスの定義としてよいのでしょうか?  単純に配列クラスと書けるとうれしいです。
+このクラスは [[c:Enumerable]] を include しているため、
+このメソッドを経由して Enumerable の各メソッドを使うことができます。
+
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+
+#@end
+
+--- each2(v) {|x, y| ... } -> self
+#@since 1.9.2
+--- each2(v) -> Enumerator
+#@end
+
+ベクトルの各要素と、それに対応するインデックスを持つ引数 v の要素との組に対して (2引数の) ブロックを繰返し評価します。
+
+v は配列互換(size メソッドと [] メソッドを持つ)オブジェクトです。
+[[c:Vector]] も使えます。
+
+#@since 1.9.2
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
+
+@param v 各要素と組を取るためのオブジェクト
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
+@see [[m:Array#zip]]
 
 --- collect2(v) {|x, y| ... } -> Array
+#@since 1.9.2
+--- collect2(v) -> Enumerator
+#@end
 
 ベクトルの各要素と引数 v の要素との組に対してブロックを評価し、その結果を要素として持つ配列を返します。
 
 ベクトルの各要素と、それに対応するインデックスを持つ引数 v (ベクトル or 配列)の要素との組に対して (2引数の) ブロックを評価し、その結果を要素として持つ配列を返します。
 
+#@since 1.9.2
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
+
 @param v ブロック内で評価される(ベクトル or 配列)
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
+
+@see [[m:Vector#map2]]
 
 次の例は、２つのベクトルの要素毎の積を要素とする配列を生成します。
 
@@ -308,10 +375,16 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 ベクトルの各要素と、それに対応するインデックスを持つ引数 (ベクトル or 配列) の要素との組に対して (2引数の) ブロックを評価した結果を、要素として持つベクトルを返します。
 
+#@since 1.9.2
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
+
 @param v ブロック内で評価される(ベクトル or 配列)
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
+
+@see [[m:Vector#collect2]]
 
 次の例は、２つのベクトルの要素毎の積を要素として持つベクトルを生成します。
 
@@ -368,9 +441,13 @@ i 番目の要素を返します。インデックスは 0 から開始します
   s = v.to_s
   p s #=> "Vector[2, 3, 5, 7, 9]"
 
-#@if (version >= "1.9.1")
+#@since 1.9.1
 --- elements_to_f -> Vector
 ベクトルの各成分を[[c:Float]]に変換したベクトルを返します。
+
+#@since 1.9.2
+このメソッドは deprecated です。 map(&:to_f) を使ってください。
+#@end
 
 例:
   require 'matrix'
@@ -382,6 +459,10 @@ i 番目の要素を返します。インデックスは 0 から開始します
 --- elements_to_i -> Vector
 ベクトルの各成分を[[c:Integer]]に変換したベクトルを返します。
 
+#@since 1.9.2
+このメソッドは deprecated です。 map(&:to_i) を使ってください。
+#@end
+
 例:
   require 'matrix'
 
@@ -391,6 +472,10 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 --- elements_to_r -> Vector
 ベクトルの各成分を[[c:Rational]]に変換したベクトルを返します。
+
+#@since 1.9.2
+このメソッドは deprecated です。 map(&:to_r) を使ってください。
+#@end
 
 例:
 
@@ -421,3 +506,8 @@ self と other が同じクラスになるよう、自分自身か other を変�
 = class ExceptionForMatrix::ErrNotRegular < StandardError
 = class ExceptionForMatrix::ErrOperationNotDefined < StandardError
 
+#@since 1.9.3
+= class Vector::ZeroVectorError < StandardError
+ベクトルが 0 でエラーとなる([[m:Vector#normalize]] など)場合に
+発生する例外です。
+#@end

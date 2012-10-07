@@ -172,6 +172,24 @@ n次の零行列を生成します。
 
 @param n 生成する行列の次元
 
+#@since 1.9.2
+--- empty(row_size=0, column_size=0) -> Matrix
+要素を持たない行列を返します。
+
+「要素を持たない」とは、行数もしくは列数が0の行列のことです。
+
+  m = Matrix.empty(2, 0)
+  m == Matrix[ [], [] ]
+  # => true
+  n = Matrix.empty(0, 3)
+  n == Matrix.columns([ [], [], [] ])
+  # => true
+  m * n
+  # => Matrix[[0, 0, 0], [0, 0, 0]]
+
+
+#@end
+
 --- row_vector(row) -> Matrix
 
 要素がrowの(1,n)型の行列(行ベクトル)を生成します。
@@ -185,13 +203,14 @@ n次の零行列を生成します。
 @param column (n,1)型の行列として生成する[[c:Vector]] [[c:Array]] オブジェクト
 
 #@since 1.9.2
---- build(row_size, column_size) {|row, col| ... } -> Matrix
-#@todo
+--- build(row_size, column_size = row_size) {|row, col| ... } -> Matrix
+--- build(row_size, column_size = row_size) -> Enumerable
 
-Creates a matrix of size +row_size+ x +column_size+.
-It fills the values by calling the given block,
-passing the current row and column.
-Returns an enumerator if no block is given.
+row_size×column_sizeの行列をブロックの返り値から生成します。
+
+行列の各要素の位置がブロックに渡され、それの返り値が行列の要素となります。
+
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
   m = Matrix.build(2, 4) {|row, col| col - row }
     => Matrix[[0, 1, 2, 3], [-1, 0, 1, 2]]
@@ -234,22 +253,69 @@ Returns an enumerator if no block is given.
 
 列の大きさを返します。
 
+#@since 1.9.3
+--- index(value, selector = :all) -> [Integer, Integer] | nil
+--- index(selector = :all){|e| ... } -> [Integer, Integer] | nil
+--- index(selector = :all) -> Enumerator
+--- find_index(value, selector = :all) -> [Integer, Integer] | nil
+--- find_index(selector = :all){|e| ... } -> [Integer, Integer] | nil
+--- find_index(selector = :all) -> Enumerator
+
+指定した値と一致する要素の位置を [row, column] という配列で返します。
+ブロックを与えた場合は各要素を引数としてブロックを呼び出し、
+返り値が真であった要素の位置を返します。
+
+複数の位置で値が一致する/ブロックが真を返す、場合は最初
+に見つかった要素の位置を返します。
+
+selector で行列のどの部分を探すかを指定します。この引数の意味は
+[[m:Matrix#each]] を参照してください。
+
+  Matrix[ [1,2], [3,4] ].index(&:even?) # => [0, 1]
+  Matrix[ [1,1], [1,1] ].index(1, :strict_lower) # => [1, 0]
+
+value を指定せず、さらにブロックを省略した場合、
+[[c:Enumerator]] を返します。
+
+@param value 探索する値
+@param selector 探索範囲
+
+#@end
+
 #@since 1.9.2
---- each {|e| ... } -> self
-#@todo
+--- each(which = :all) {|e| ... } -> self
+--- each(which = :all) -> Enumerator
 
-Yields all elements of the matrix, starting with those of the first row,
-or returns an Enumerator is no block given
+行列の各要素を引数としてブロックを呼び出します。
 
-   Matrix[ [1,2], [3,4] ].each { |e| puts e }
-    # => prints the numbers 1 to 4
+0行目、1行目、…という順番で処理します。
+which に以下の [[c:Symbol]] を指定することで
+引数として使われる要素を限定することができます。
+  * :all - すべての要素(デフォルト)
+  * :diagonal - 対角要素
+  * :off_diagonal 対角要素以外
+  * :lower 対角成分とそれより下側の部分
+  * :upper対角成分とそれより上側の部分
+  * :strict_lower 対角成分の下側
+  * :strict_upper 対角成分の上側
 
---- each_with_index {|e, row, col| ... }  -> self
-#@todo
+ブロックを省略した場合、 [[c:Enumerator]] を返します。
 
-Yields all elements of the matrix, starting with those of the first row,
-along with the row index and column index,
-or returns an Enumerator is no block given
+  Matrix[ [1,2], [3,4] ].each { |e| puts e }
+  # => prints the numbers 1 to 4
+  Matrix[ [1,2], [3,4] ].each(:strict_lower).to_a # => [3]
+
+@see [[m:Matrix#each_with_index]]
+
+--- each_with_index(which = :all) {|e, row, col| ... }  -> self
+--- each_with_index(which = :all) -> Enumerator
+
+行列の各要素をその位置とともに引数としてブロックを呼び出します。
+
+which で処理する要素の範囲を指定することができます。
+[[m:Matrix#each]] と同じなのでそちらを参照してください。
+
+ブロックを省略した場合、 [[c:Enumerator]] を返します。
 
   Matrix[ [1,2], [3,4] ].each_with_index do |e, row, col|
     puts "#{e} at #{row}, #{col}"
@@ -346,10 +412,13 @@ self の n乗をした行列を返します。
 --- det -> Rational | Float
 #@end
 
-行列式 (determinant) を返します。
-
 行列式 (determinant) の値を返します。
+
+#@until 1.9.2
 self が正方行列ではない場合は0を返します。
+#@else
+@raise ExceptionForMatrix::ErrDimensionMismatch 正方行列でない場合に発生します
+#@end
 
 ===== 注意
 
@@ -381,20 +450,25 @@ self が正方行列ではない場合は0を返します。
 
 selfの行列の階数(rank)を返します。
 行列の成分が[[c:Float]]の場合は正しい値を返さない場合があります。
-#@if (version >= "1.9.1")
-その場合は行列成分に[[c:Rational]]を用いるか、[[m:Matrix#rank_e]]を使用してください。
-#@else
-その場合は行列成分に[[c:Rational]]を使用してください。
+その場合は行列成分に [[c:Rational]]
+#@since 1.9.2
+もしくは [[c:BigDecimal]]
 #@end
+を使用してください。
 
-#@if (version >= "1.9.1")
+#@since 1.9.1
 --- rank_e -> Fixnum
 
 階数 (rank) を返します。
 
+#@until 1.9.1
 ユークリッドアルゴリズムに基づいて階数(rank)を計算します。
 行列の全成分が整数([[c:Integer]])の場合は正しい値を返します。
 成分に[[c:Float]]があった場合には正しい値を返さないかもしれません。
+#@else
+このメソッドは obsolete です。[[m:Matrix#rank]] を代わりに
+使ってください。
+#@end
 
 #@end
 
@@ -489,20 +563,25 @@ selfのj列目を列ベクトルとして返します。
 
 #@since 1.9.2
 --- empty? -> bool
-#@todo
+行列が要素を持たないならば真を返します。
 
-Returns +true+ if this is an empty matrix, i.e. if the number of rows
+要素を持たないとは、行数か列数のいずれかが0であることを意味します。
+
+@see [[m:Matrix.empty]]
+
 or the number of columns is 0.
 --- real? -> bool
-#@todo
+行列が実であれば真を返します。
 
-Returns +true+ if all entries of the matrix are real.
+すなわちすべての要素が実であれば真を返します。
+
 #@end
 --- regular? -> bool
 
 正則(regular)なら真(true)を返します。
 
 行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することです。
+行列式が0でないことと同値です。
 
 例:
   a1 = [ 1,  2,  3]
@@ -524,11 +603,20 @@ Returns +true+ if all entries of the matrix are real.
   m = Matrix[a1, a2, a3, a4]
   p m.regular? #=> false
 
+#@since 1.9.3
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+#@end
+
 --- singular? -> bool
 
 特異(singular)なら真(true)を返します。
 
 行列が特異(singular)であるとは、正則でないことです。
+行列式が0であるとと同値です。
+
+#@since 1.9.3
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+#@end
 
 --- square? -> bool
 
@@ -538,6 +626,53 @@ Returns +true+ if all entries of the matrix are real.
 --- eql?(other) -> bool
 
 自分自身と other を比較し、同値であれば真(true)を返します。
+
+#@since 1.9.3
+--- diagonal? -> bool
+行列が対角行列ならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- hermitian? -> bool
+行列がエルミートならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- lower_triangular? -> bool
+行列が下三角行列ならば真を返します。
+
+--- normal? -> bool
+行列が正規行列ならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- orthogonal? -> bool
+行列が直交行列ならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- permutation? -> bool
+行列が置換行列ならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- symmetric? -> bool
+行列が対象ならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- unitary? -> bool
+行列がユニタリならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- upper_triangular? -> bool
+行列が上三角行列ならば真を返します。
+
+--- zero? -> bool
+行列が零行列ならば真を返します。
+
+#@end
 
 --- row_vectors -> Array
 
@@ -598,11 +733,23 @@ Returns +true+ if all entries of the matrix are real.
 --- elements_to_f -> Array
 各要素を浮動小数点数 [[c:Float]] に変換した行列を返します。
 
+#@since 1.9.2
+このメソッドは deprecated です。 map(&:to_f) を使ってください。
+#@end
+
 --- elements_to_i -> Array
 各要素を整数 [[c:Integer]] に変換した行列を返します。
 
+#@since 1.9.2
+このメソッドは deprecated です。 map(&:to_i) を使ってください。
+#@end
+
 --- elements_to_r -> Array
 各要素を有理数 [[c:Rational]] に変換した行列を返します。
+
+#@since 1.9.2
+このメソッドは deprecated です。 map(&:to_r) を使ってください。
+#@end
 
 #@end
 
@@ -613,12 +760,19 @@ Returns +true+ if all entries of the matrix are real.
 #@# and is of no use to general users.
 #@# bc-methods -r matrix Matrix で見つからなかった。okkez
 
+#@since 1.9.3
+--- round(ndigits = 0) -> Matrix
+行列の各要素を指定した桁数で丸めた行列を返します。
+
+@see [[m:Float#round]]
+
+#@end
+
 #@since 1.9.2
 --- conjugate -> Matrix
 --- conj -> Matrix
-#@todo
 
-Returns the conjugate of the matrix.
+複素共役を取った行列を返します。
 
   Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
     => 1+2i   i  0
@@ -629,36 +783,36 @@ Returns the conjugate of the matrix.
 
 --- imaginary -> Matrix
 --- imag -> Matrix
-#@todo
 
-Returns the imaginary part of the matrix.
+行列の虚部を返します。
 
   Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
-    => 1+2i  i  0
-          1  2  3
+  #  => 1+2i  i  0
+  #        1  2  3
   Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
-    =>   2i  i  0
-          0  0  0
+  #  =>   2i  i  0
+  #        0  0  0
 --- real -> Matrix
-#@todo
+
+行列の実部を返します。
 
 Returns the real part of the matrix.
 
   Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
-    => 1+2i  i  0
-          1  2  3
+  #  => 1+2i  i  0
+  #        1  2  3
   Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
-    =>    1  0  0
-          1  2  3
+  #  =>    1  0  0
+  #        1  2  3
 
 --- rectangular -> [Matrix, Matrix]
 --- rect -> [Matrix, Matrix]
-#@todo
+行列を実部と虚部に分解したものを返します。
 
-Returns an array containing matrices corresponding to the real and imaginary
-parts of the matrix
 
   m.rect == [m.real, m.imag]  # ==> true for all matrices m
+
+@see [[m:Matrix#imaginary]], [[m:Matrix#real]]
 
 #@end
 --- coerce(other) -> Array
@@ -693,30 +847,75 @@ parts of the matrix
 
 #@end
 #@# bc-rdoc: detected missing name: inverse_from
---- inverse_from(src) -> Matrix
+#@# このメソッドは 1.9.2 以降では public でないが、1.9.1以前でも
+#@# 見せないほうがよいか？
+#@# --- inverse_from(src) -> Matrix
+#@# 
+#@# 行列1次方程式の解(の行列)を返します。
+#@# 
+#@# 行列1次方程式の解(の行列)を返します。
+#@# 行列の関として src * X = self となるような行列Xを返します。
+#@# #@# srcが正則行列ではないでは場合には、ExceptionForMatrix::ErrNotRegularの例外が発生します。
+#@# 
+#@# ===== 注意
+#@# 
+#@# inverse_fromメソッドは破壊的なメソッドです。
+#@# 
+#@# 例:
+#@#   a1 = [1, 2]
+#@#   a2 = [3, 4.5]
+#@#   m = Matrix[a1, a2]
+#@# 
+#@#   b1 = [1, 0]
+#@#   b2 = [-1, 1]
+#@#   n = Matrix[b1, b2]
+#@# 
+#@#   p x = m.inverse_from(n) #=> Matrix[[1, 2.0], [4, 6.5]]
+#@#   p m #=> Matrix[[1, 2.0], [4, 6.5]]
+#@#   p n * x #=> Matrix[[1, 2.0], [3, 4.5]]
 
-行列1次方程式の解(の行列)を返します。
+#@since 1.9.3
+--- eigen -> Matrix::EigenvalueDecomposition
+--- eigensystem -> Matrix::EigenvalueDecomposition
+行列の固有値と左右の固有ベクトルを保持したオブジェクトを返します。
 
-行列1次方程式の解(の行列)を返します。
-行列の関として src * X = self となるような行列Xを返します。
-srcが正則行列ではないでは場合には、ExceptionForMatrix::ErrNotRegularの例外が発生します。
+[[c:Matrix::EigenvalueDecomposition]] は to_ary を定義しているため、
+多重代入によって3つの行列(右固有ベクトル、固有値行列、左固有ベクトル)
+を得ることができます。
+これを [V, D, W] と書くと、
+(元の行列が対角化可能ならば)、
+D は対角行列で、 self == V*D*W, V = W.inverse を満たします。
+D のそれぞれの対角成分が行列の固有値です。
 
-===== 注意
+  m = Matrix[[1, 2], [3, 4]]
+  v, d, v_inv = m.eigensystem
+  d.diagonal? # => true
+  v.inv == v_inv # => true
+  (v * d * v_inv).round(5) == m # => true
 
-inverse_fromメソッドは破壊的なメソッドです。
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+@see [[c:Matrix::EigenvalueDecomposition]]
 
-例:
-  a1 = [1, 2]
-  a2 = [3, 4.5]
-  m = Matrix[a1, a2]
+--- lup -> Matrix::LUPDecomposition
+--- lup_decomposition -> Matrix::LUPDecomposition
+行列の LUP 分解を保持したオブジェクトを返します。
 
-  b1 = [1, 0]
-  b2 = [-1, 1]
-  n = Matrix[b1, b2]
+[[c:Matrix::LUPDecomposition]] は to_ary を定義しているため、
+多重代入によって3つの行列(下三角行列、上三角行列、置換行列)
+を得ることができます。これを [L, U, P] と書くと、
+L*U = self*P を満たします。
 
-  p x = m.inverse_from(n) #=> Matrix[[1, 2.0], [4, 6.5]]
-  p m #=> Matrix[[1, 2.0], [4, 6.5]]
-  p n * x #=> Matrix[[1, 2.0], [3, 4.5]]
+  a = Matrix[[1, 2], [3, 4]]
+  l, u, p = a.lup
+  l.lower_triangular? # => true
+  u.upper_triangular? # => true
+  p.permutation?      # => true
+  l * u == a * p      # => true
+  a.lup.solve([2, 5]) # => Vector[(1/1), (1/2)]
+
+@see [[c:Matrix::LUPDecomposition]]
+
+#@end
 
 --- hash -> Fixnum
 行列のHash値を返します。
@@ -745,10 +944,76 @@ inverse_fromメソッドは破壊的なメソッドです。
 --- clone -> Matrix
 自分自身のコピーを返します。
 
+#@since 1.9.3
+= class Matrix::EigenvalueDecomposition
+行列の固有分解の情報を保持するクラスです。
+
+[[m:Matrix#eigensystem]] の返り値のクラスです。
+
+== Instance Methods
+--- eigenvector_matrix -> Matrix
+--- v  -> Matrix
+右固有ベクトルを横に並べた行列を返します。
+
+--- eigenvector_matrix_inv  -> Matrix
+--- v_inv  -> Matrix
+左固有ベクトルを縦に並べた行列を返します。
+
+これは [[m:Matrix::EigenvalueDecomposition#v]] の逆行列です
+
+--- eigenvalues -> [Float]
+固有値を配列で返します。
+
+--- eigenvectors -> [Vector]
+右固有ベクトルを配列で返します。
+
+--- eigenvalue_matrix -> Matrix
+--- d -> Matrix
+固有値を対角成分に並べた行列を返します。
+
+--- to_ary -> [Matrix, Matrix, Matrix]
+--- to_a -> [Matrix, Matrix, Matrix]
+
+[[m:Matrix::EigenvalueDecomposition#v]], 
+[[m:Matrix::EigenvalueDecomposition#d]],
+[[m:Matrix::EigenvalueDecomposition#v_inv]]
+をこの順に並べた配列を返します。
+
+
+= class Matrix::LUPDecomposition
+行列のLUP分解の情報を保持するクラスです。
+
+[[m:Matrix#lup_decomposition]] の返り値のクラスです。
+
+== Instance Methods
+--- l -> Matrix
+LUP分解の下半行列部分を返します。
+
+--- u -> Matrix
+LUP分解の上半行列部分を返します。
+
+--- p -> Matrix
+LUP分解の置換行列部分を返します。
+
+--- to_ary -> [Matrix, Matrix, Matrix]
+--- to_a -> [Matrix, Matrix, Matrix]
+分解した行列を [下半行列, 上半行列, 置換行列] という3要素の配列で
+返します。
+
+--- pivots -> [Integer]
+ピボッティングを表す配列を返します。
+
+
+#@end
 
 = class ExceptionForMatrix::ErrDimensionMismatch < StandardError
+行列/ベクトル計算時に次元が合わない場合に発生する例外です。
+
 = class ExceptionForMatrix::ErrNotRegular < StandardError
+逆行列計算時に行列が正則でない場合に発生する例外です。
+
 = class ExceptionForMatrix::ErrOperationNotDefined < StandardError
+演算時にクラスが適切でない場合に発生する例外です。
 
 #@#== ChangeLog
 #@#
