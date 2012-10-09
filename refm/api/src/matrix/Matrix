@@ -599,9 +599,16 @@ selfのj列目を列ベクトルとして返します。
 @see [[m:Matrix.empty]]
 
 --- real? -> bool
-行列が実であれば真を返します。
+行列の全要素が実([[m:Numeric#real?]])であれば真を返します。
 
-すなわちすべての要素が実であれば真を返します。
+Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返します。
+
+例:
+
+ Matrix[[1, 0], [0, 1]].real? #=> true
+ Matrix[[Complex(0, 1), 0], [0, 1]].real? #=> false
+ # 要素が実数であっても Complex オブジェクトなら偽を返す。
+ Matrix[[Complex(1, 0), 0], [0, 1]].real? #=> false
 
 #@end
 --- regular? -> bool
