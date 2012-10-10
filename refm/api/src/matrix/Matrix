@@ -729,7 +729,7 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 #@end
 
---- row_vectors -> Array
+--- row_vectors -> [Vector]
 
 自分自身を行ベクトルの配列として返します。
 
@@ -741,7 +741,7 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
   p m.row_vectors #=> [Vector[1, 2, 3], Vector[10, 15, 20], Vector[-1, -2, 1.5]]
 
---- column_vectors -> Array
+--- column_vectors -> [Vector]
 
 自分自身を列ベクトルの配列として返します。
 
@@ -770,21 +770,21 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 #@if (version >= "1.9.1")
 
---- elements_to_f -> Array
+--- elements_to_f -> Matrix
 各要素を浮動小数点数 [[c:Float]] に変換した行列を返します。
 
 #@since 1.9.2
 このメソッドは deprecated です。 map(&:to_f) を使ってください。
 #@end
 
---- elements_to_i -> Array
+--- elements_to_i -> Matrix
 各要素を整数 [[c:Integer]] に変換した行列を返します。
 
 #@since 1.9.2
 このメソッドは deprecated です。 map(&:to_i) を使ってください。
 #@end
 
---- elements_to_r -> Array
+--- elements_to_r -> Matrix
 各要素を有理数 [[c:Rational]] に変換した行列を返します。
 
 #@since 1.9.2
