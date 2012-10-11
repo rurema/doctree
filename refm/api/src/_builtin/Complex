@@ -161,6 +161,8 @@
 ([[c:Math::DomainError]])が発生するバグがあります。
 #@end
 
+@see [[m:Numeric#arg]]
+
 --- coerce(other) -> [Complex, Complex]
 
 other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
@@ -230,6 +232,8 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
   Complex(3, 2).imag # => 2
 
+@see [[m:Numeric#imag]]
+
 --- inspect -> String
 
 自身を人間が読みやすい形の文字列表現にして返します。
@@ -268,6 +272,8 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
   Complex.polar(1, 2).polar # => [1, 2]
 
+@see [[m:Numeric#polar]]
+
 --- real -> Numeric
 
 自身の実部を返します。
@@ -292,6 +298,8 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
   Complex(3).rect    # => [3, 0]
   Complex(3.5).rect  # => [3.5, 0]
   Complex(3, 2).rect # => [3, 2]
+
+@see [[m:Numeric#rect]]
 
 --- to_f -> Float
 

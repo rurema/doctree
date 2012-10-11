@@ -668,6 +668,8 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
+@see [[m:Complex#arg]]
+
 --- conj      -> Numeric
 --- conjugate -> Numeric
 
@@ -716,6 +718,8 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
+@see [[m:Complx#polar]]
+
 --- real     -> Numeric
 
 自身を返します。
@@ -744,6 +748,8 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
   -1.0.rect # => [-1.0, 0]
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+@see [[m:Complex#rect]]
 
 --- to_c -> Complex
 
