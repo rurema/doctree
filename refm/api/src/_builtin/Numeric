@@ -299,7 +299,10 @@ other が Numeric で比較できないオブジェクトの場合、
 
 #@end
 
---- abs    -> Numeric
+--- abs        -> Numeric
+#@since 1.9.1
+--- magnitude  -> Numeric
+#@end
 
 自身が 0 以上ならば self を、そうでない場合は -self を返します。
 

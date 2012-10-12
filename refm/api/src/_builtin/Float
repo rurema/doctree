@@ -257,7 +257,10 @@ self を返します。
   pi2.hash #=> 335364239
   pi3.hash #=> 420540030
 
---- abs    -> Float
+--- abs        -> Float
+#@since 1.9.1
+--- magnitude  -> Float
+#@end
 
 自身の絶対値を返します。
 
