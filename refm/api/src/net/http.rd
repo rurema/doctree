@@ -565,7 +565,7 @@ proxyport は時代遅れのメソッドです。
 
 この秒数たってもコネクションが
 開かなければ例外 [[c:TimeoutError]] を発生します。
-デフォルトは 30 (秒)です。
+デフォルトは nil(タイムアウトしない)です。
 
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
 
