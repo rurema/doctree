@@ -845,10 +845,13 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 --- each_byte {|ch| ... }    -> self
 #@since 1.8.7
+--- bytes {|ch| ... }        -> self
 #@since 1.8.8
 --- each_byte                -> Enumerator
+--- bytes                    -> Enumerator
 #@else
 --- each_byte                -> Enumerable::Enumerator
+--- bytes                    -> Enumerable::Enumerator
 #@end
 #@end
 
@@ -1683,20 +1686,6 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告さ�
 #@end
 
 #@since 1.8.7
-#@since 1.8.8
---- bytes    -> Enumerator
-#@else
---- bytes    -> Enumerable::Enumerator
-#@end
-自身を 1 バイトずつ整数としてイテレートするような
-#@since 1.8.8
-[[c:Enumerator]] オブジェクトを生成して返します。
-#@else
-[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
-#@end
-
-   "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
-
 #@until 1.9.1
 --- lines(rs = $/)    -> Enumerable::Enumerator
 
