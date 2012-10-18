@@ -1374,7 +1374,7 @@ name で指定した定数を取り除き、その定数に設定されていた
 Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 #@end
 
-@param name [[c:String]] または [[c:Symbol]] を一つ以上指定します。
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 指定したメソッドが定義されていない場合に発生します。
 
@@ -1393,7 +1393,7 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除でき
 
 このモジュールのインスタンスメソッド name を未定義にします。
 
-@param name [[c:String]] または [[c:Symbol]] を一つ以上指定します。
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 指定したインスタンスメソッドが定義されていない場合に発生します。
 
