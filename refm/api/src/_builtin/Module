@@ -1500,7 +1500,7 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除でき
 #@end
 
 #@since 1.9.3
---- private_constant(*name) -> Module
+--- private_constant(*name) -> self
 
 name で指定した定数の可視性を private に変更します。
 
@@ -1515,7 +1515,7 @@ name で指定した定数の可視性を private に変更します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
 
---- public_constant(*name) -> Module
+--- public_constant(*name) -> self
 
 name で指定した定数の可視性を public に変更します。
 
