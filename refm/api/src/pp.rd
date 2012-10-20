@@ -1,5 +1,7 @@
 category Development
 
+require prettyprint
+
 オブジェクトなどを見やすく出力するためのライブラリです。
 
 このライブラリを require すると [[m:Kernel.#pp]] が定義されます。
