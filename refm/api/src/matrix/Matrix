@@ -504,17 +504,17 @@ selfの行列の階数(rank)を返します。
 
 階数 (rank) を返します。
 
-#@until 1.9.1
+#@since 1.9.2
+このメソッドは obsolete です。[[m:Matrix#rank]] を代わりに
+使ってください。
+
+#@else
 ユークリッドアルゴリズムに基づいて階数(rank)を計算します。
 行列の全成分が整数([[c:Integer]])の場合は正しい値を返します。
 成分に[[c:Float]]があった場合には正しい値を返さないかもしれません。
-#@else
-このメソッドは obsolete です。[[m:Matrix#rank]] を代わりに
-使ってください。
-#@end
 
 #@end
-
+#@end
 --- trace -> Fixnum | Float | Rational
 --- tr -> Fixnum | Float | Rational
 
