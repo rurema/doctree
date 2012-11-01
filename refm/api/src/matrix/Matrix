@@ -469,16 +469,23 @@ self が正方行列ではない場合は0を返します。
  require 'mathn'
  p Matrix[[2, 1], [-1, 2]].det #=> 5
 
-#@if (version >= "1.9.1")
+#@since 1.9.1
 --- determinant_e -> Rational | Float
 --- det_e -> Rational | Float
 
+#@since 1.9.2
+不正な値を返します。
+[[m:Matrix#determinant]] を代わりに使ってください。
+#@# TODO: trunk では修正済み(Bug #7228)
+
+#@else
 行列式 (determinant) を返します。
 
 ユークリッドアルゴリズムに基づいて行列式を計算します。
 行列の全成分が整数([[c:Integer]])の場合は正しい値を返します。
 成分に[[c:Float]]があった場合には正しい値を返さないかもしれません。
 
+#@end
 #@end
 --- rank -> Fixnum
 
