@@ -6,6 +6,77 @@ category Math
 
 1.9系では [[c:Rational]] クラスは組み込みクラスになりました。
 
+= redefine Fixnum
+== Instance Methods
+
+--- quo(other) -> Rational
+
+商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+
+@param other 自身を割る数
+
+例:
+
+  1.quo(2)              # => Rational(1,2)
+
+--- **(other) -> Integer | Float | Rational
+--- rpower (other) -> Integer | Float | Rational
+
+冪(べき)乗を計算します。other が負の整数の場合、計算結果を
+[[c:Rational]] オブジェクトで返します。
+
+@param other 自身を other 乗する数
+
+  2.rpower(3)           # => 8
+  2.rpower(-3)          # => Rational(1, 8)
+
+= reopen Fixnum
+== Instance Methods
+--- power!(other) -> Integer | Float
+
+冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
+
+[[lib:rational]]で再定義される前の[[m:Fixnum#**]]の別名です。
+other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
+なら、浮動小数 (Float) を返します。
+
+= redefine Bignum
+== Instance Methods
+--- quo(other) -> Rational
+
+商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+
+@param other 自身を割る数
+
+例:
+
+  (1<<32).quo(2)              # => Rational(2147483648, 1)
+
+--- **(other) -> Integer | Float | Rational
+--- rpower (other) -> Integer | Float | Rational
+
+冪(べき)乗を計算します。other が負の整数の場合、計算結果を
+[[c:Rational]] オブジェクトで返します。
+
+  (1<<32).rpower(2)           # => 18446744073709551616
+  (1<<32).rpower(-2)          # => Rational(1, 18446744073709551616)
+
+@param other 自身を other 乗する数
+
+= reopen  Bignum
+== Instance Methods
+--- power!(other) -> Integer | Float
+
+冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
+
+[[lib:rational]]で再定義される前の[[m:Bignum#**]]の別名です。
+other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
+なら、浮動小数 (Float) を返します。
+
 #@else
 
 require する事で数値計算の結果を [[c:Rational]] オブジェクトで返すよう
@@ -192,8 +263,6 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 
 @see [[m:Integer#numerator]]
 
-#@end
-
 = redefine Fixnum
 == Instance Methods
 
@@ -230,19 +299,6 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 なら、浮動小数 (Float) を返します。
 
-#@since 1.8.8
-#@until 1.9.1
---- gcd(other) -> Integer
-
-自身と整数 other の最大公約数を返します。
-
-@param other 自身との最大公約数を計算する数
-
-@see [[m:Integer#gcd]]
-
-#@end
-#@end
-
 = redefine Bignum
 == Instance Methods
 --- quo(other) -> Rational
@@ -278,7 +334,6 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 なら、浮動小数 (Float) を返します。
 
-#@until 1.9.1
 = class Rational < Numeric
 
 有理数を扱うクラスです。
