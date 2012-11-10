@@ -2,9 +2,9 @@
 #---------------------------------------------------------
 Win32API
 bigdecimal                      sho-h
-bigdecimal/jacobian             sho-h
-bigdecimal/ludcmp               sho-h
-bigdecimal/newton               sho-h
+bigdecimal/jacobian             sho-h           done
+bigdecimal/ludcmp               sho-h           done
+bigdecimal/newton               sho-h           done
 complex                         bornite
 curses                          kouji
 dl                                                          
