@@ -6,16 +6,15 @@
 
   require "bigdecimal"
   require "bigdecimal/jacobian"
-#@until 1.9.3
+#@until 1.9.2
   include Jacobian
 #@end
 
   ...
 
 #@since 1.9.2
-  dfdx = jacobian(f,fx,x)
+  dfdx = Jacobian.jacobian(f,fx,x)
 #@else
-  include Jacobian
   dfdx = jacobian(f,fx,x)
 #@end
 

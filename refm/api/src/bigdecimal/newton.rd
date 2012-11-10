@@ -12,7 +12,7 @@ require bigdecimal/ludcmp
 
   require "bigdecimal"
   require "bigdecimal/newton"
-#@until 1.9.3
+#@until 1.9.2
   include Newton
 #@end
 
