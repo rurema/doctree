@@ -119,9 +119,6 @@ pd は [素因数, 指数] 組の配列です。
 
 Fixnum#quo と同じ働きをします(有理数または整数を返します)。
 
-#@#* Fixnum#divmodの商が小数点以下まで求まるようになる。
-#@#* もともとのFixnum#divmodはFixnum#divmod!となる。
-
 = redefine Bignum
 
 == Instance Methods
@@ -130,8 +127,6 @@ Fixnum#quo と同じ働きをします(有理数または整数を返します)�
 #@todo
 
 Bignum#quo と同じ働きをします(有理数または整数を返します)。
-
-#@#* もともとのBignum#divmodはBignum#divmod!となる。
 
 = redefine Rational
 
