@@ -128,10 +128,10 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で
 
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
-@since 1.9.3
+#@since 1.9.3
 ただし 0 以外の整数に等しい場合は [[c:Rational]] で返します。
 #@# r28844 と r28886
-@end
+#@end
 
 例:
 
