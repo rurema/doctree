@@ -1,12 +1,13 @@
 category Math
 
-require complex
-require rational
 require matrix
-#@if (version > "1.9.0")
+#@since 1.9.1
+require cmath
 require prime
 [[c:Rational]] と [[c:Complex]] をよりシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
 #@else
+require complex
+require rational
 [[lib:rational]] と [[lib:complex]] をシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
 #@end
 
