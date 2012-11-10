@@ -1,10 +1,10 @@
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 Win32API
-bigdecimal                      mrkn
-bigdecimal/jacobian             mrkn
-bigdecimal/ludcmp               mrkn
-bigdecimal/newton               mrkn
+bigdecimal                      sho-h
+bigdecimal/jacobian             sho-h
+bigdecimal/ludcmp               sho-h
+bigdecimal/newton               sho-h
 complex                         bornite
 curses                          kouji
 dl                                                          
