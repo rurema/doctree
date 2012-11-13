@@ -131,7 +131,7 @@ SSL_CTX_set_cipher_list の項を見てください。
 
 デフォルトは nil (証明書なし)です。
 
-@see [[m:OpenSSL::SSL::SSLContext#cert]]
+@see [[m:OpenSSL::SSL::SSLContext#cert=]]
 
 --- cert=(certificate)
 自分自身を証明するための証明書を設定します。
@@ -139,7 +139,7 @@ SSL_CTX_set_cipher_list の項を見てください。
 デフォルトは nil (証明書なし)です。
 
 @param certificate 設定する証明書([[c:OpenSSL::X509::Certificate]] のインスタンス)
-@see [[m:OpenSSL::SSL::SSLContext#cert=]]
+@see [[m:OpenSSL::SSL::SSLContext#cert]]
 
 --- cert_store -> OpenSSL::X509::Store | nil
 接続相手の証明書の検証のために使う、信頼している CA 証明書を
