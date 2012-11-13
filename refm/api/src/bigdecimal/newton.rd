@@ -98,4 +98,6 @@ include Jacobian
 
 @raise RuntimeError 解が収束しない場合に発生します。
 
+#@# TODO: #7321 が解決した後で引数 x について修正する。
+
 #@end
