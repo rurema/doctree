@@ -695,15 +695,13 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 行列が特異(singular)であるとは、正則でないことです。
 行列式が0であること同値です。
 
-#@until 1.9.1
-正方行列でない場合には真を返します。
-#@else
+#@since 1.9.2
 正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を
 発生させます。
-#@end
 
-#@since 1.9.3
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+#@else
+正方行列でない場合には真を返します。
 #@end
 
 --- square? -> bool
