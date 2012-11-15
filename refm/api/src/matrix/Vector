@@ -5,6 +5,7 @@ include Enumerable
 #@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 数 [[c:Numeric]] を要素とするベクトルを扱うクラスです。
+[[c:Vector]] オブジェクトは [[c:Matrix]] オブジェクトとの演算においては列ベクトルとして扱われます。
 
 #@# ((-Vectorクラスには英語のドキュメントがほとんどないので、英語の方も補ってみました。とりあえず対訳にしておいて、そのうち、英語版を分離します。-))
 
@@ -169,11 +170,11 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@# @param elements 比較する配列。
 #@# @return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
 
---- *(a) -> Vector
+--- *(other) -> Vector
 
-数 a を各要素に乗じたベクトルを返します。
+self の各要素に数 other を乗じたベクトルを返します。
 
-@param a 乗算を行う数
+@param other self の各要素に掛ける [[c:Numeric]] オブジェクトを指定します。
 
 例:
 
@@ -201,24 +202,26 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
   p v * m #=> Matrix[[4, 5, 6], [8, 10, 12]]
 
---- +(v) -> Vector
+--- +(v) -> Vector | Matrix
 
-ベクトル v を加えたベクトルを返します。
+self にベクトル v を加えたベクトルを返します。
 
-自分自身と引数 v の要素をそれぞれ加算し、その結果を[[c:Vector]]クラスのオブジェクトとして返します。
+v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できます。
+その場合は返り値も [[c:Matrix]] オブジェクトになります。
 
-@param v 加算をするベクトル
+@param v 加算するベクトル。加算可能な行列やベクトルを指定します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
---- -(v) -> Vector
+--- -(v) -> Vector | Matrix
 
-ベクトル v を減じたベクトルを返します。
+self からベクトル v を減じたベクトルを返します。
 
-自分自身と引数 v の要素をそれぞれ減算し、その結果を[[c:Vector]]クラスのオブジェクトとして返します。
+v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できます。
+その場合は返り値も [[c:Matrix]] オブジェクトになります。
 
-@param v 減算するベクトル
+@param v 減算するベクトル。減算可能な行列やベクトルを指定します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
@@ -234,10 +237,10 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 #@since 1.9.2
 --- /(other) -> Vector
-other が [[c:Numeric]] である場合、ベクトルの各要素を other で割ります。
 
+self の各要素を数 other で割った行列を返します。
 
-@param other 割る数
+@param other self の各要素を割る [[c:Numeric]] オブジェクトを指定します。
 @raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix 
        の場合に発生します
 #@end
