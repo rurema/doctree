@@ -56,6 +56,7 @@ self の符号を反転させたものを返します。
 @return 計算結果
 
 --- /(other) -> Fixnum | Bignum | Float
+--- div(other) -> Fixnum | Bignum | Float
 
 算術演算子。商を計算します。
 
@@ -63,11 +64,44 @@ self の符号を反転させたものを返します。
 @return 計算結果
 
 --- %(other) -> Fixnum | Bignum | Float
+--- modulo(other) -> Fixnum | Bignum | Float
 
 算術演算子。剰余を計算します。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
+
+--- remainder(other) -> Fixnum | Bignum | Float
+
+self を other で割った余り r を返します。
+
+r の符号は self と同じになります。
+
+@param other self を割る数。
+
+@see [[m:Bignum#divmod]], [[m:Bignum#modulo]], [[m:Numeric#modulo]]
+
+--- divmod(other) -> [Integer, Numeric]
+
+self を other で割った商 q と余り r を、 [q, r] という 2 要素の配列にし
+て返します。 商 q は常に整数ですが、余り r は整数であるとは限りません。
+
+@param other self を割る数。
+
+@see [[m:Numeric#divmod]]
+
+#@until 1.9.1
+--- quo(other) -> Float
+#@end
+#@since 1.8.7
+--- fdiv(other) -> Float
+#@end
+
+self を other で割った実数の商を返します。
+
+@param other self を割る数を指定します。
+
+@see [[m:Numeric#quo]]
 
 --- **(other) -> Fixnum | Bignum | Float
 
@@ -93,6 +127,9 @@ self と other を比較して、self が大きい時に正、
   2 <=> 1 #=> 1
 
 --- ==(other) -> bool
+#@since 1.9.1
+--- ===(other) -> bool
+#@end
 
 比較演算子。数値として等しいか判定します。
 
@@ -163,6 +200,37 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
     # => 4
          8
 
+--- eql?(other) -> bool
+
+self と other のクラスが等しくかつ同じ値である場合に true を返します。
+そうでない場合に false を返します。
+
+@param other self と比較したい数値。
+
+  (1 << 64) == (1 << 64).to_f    # => true
+  (1 << 64).eql?((1 << 64).to_f) # => false
+
+--- hash -> Integer
+
+self のハッシュ値を返します。
+
 --- to_f -> Float
 
 値を浮動小数点数([[c:Float]])に変換します。
+
+--- abs -> Fixnum | Bignum
+#@since 1.9.1
+--- magnitude -> Fixnum | Bignum
+#@end
+
+self の絶対値を返します。
+
+#@since 1.9.1
+--- odd? -> bool
+
+self が奇数の場合に true を返します。そうでない場合に false を返します。
+
+--- even? -> bool
+
+self が偶数の場合に true を返します。そうでない場合に false を返します。
+#@end
