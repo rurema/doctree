@@ -285,11 +285,11 @@ self が 0 の場合に true を返します。そうでない場合に false �
 
 --- odd? -> bool
 
-self が偶数の場合に true を返します。そうでない場合に false を返します。
+self が奇数の場合に true を返します。そうでない場合に false を返します。
 
 --- even? -> bool
 
-self が奇数の場合に true を返します。そうでない場合に false を返します。
+self が偶数の場合に true を返します。そうでない場合に false を返します。
 
 #@end
 
