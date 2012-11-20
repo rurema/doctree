@@ -6,76 +6,55 @@ category Math
 
 1.9系では [[c:Rational]] クラスは組み込みクラスになりました。
 
-= redefine Fixnum
-== Instance Methods
-
---- quo(other) -> Rational
-
-商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
-
-@param other 自身を割る数
-
-例:
-
-  1.quo(2)              # => Rational(1,2)
-
---- **(other) -> Integer | Float | Rational
---- rpower (other) -> Integer | Float | Rational
-
-冪(べき)乗を計算します。other が負の整数の場合、計算結果を
-[[c:Rational]] オブジェクトで返します。
-
-@param other 自身を other 乗する数
-
-  2.rpower(3)           # => 8
-  2.rpower(-3)          # => Rational(1, 8)
-
 = reopen Fixnum
 == Instance Methods
---- power!(other) -> Integer | Float
+
+--- power!(other) -> Numeric
+--- rpower(other) -> Numeric
 
 冪(べき)乗を計算します。
+[[m:Fixnum#**]] のエイリアスです。
 
-@param other 自身を other 乗する数
+@param other べき乗の指数
 
-[[lib:rational]]で再定義される前の[[m:Fixnum#**]]の別名です。
-other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
-なら、浮動小数 (Float) を返します。
+--- quof(other) -> Float | Complex
 
-= redefine Bignum
+self を other で割った商を返します。
+[[m:Fixnum#fdiv]] のエイリアスです。
+
+@param other 割る数
+
+--- rdiv(other) -> Rational | Float | Complex
+
+self を other で割った商を返します。
+[[m:Numeric#quo]] のエイリアスです。
+
+@param other 割る数
+
+= reopen Bignum
 == Instance Methods
---- quo(other) -> Rational
 
-商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
-
-@param other 自身を割る数
-
-例:
-
-  (1<<32).quo(2)              # => Rational(2147483648, 1)
-
---- **(other) -> Integer | Float | Rational
---- rpower (other) -> Integer | Float | Rational
-
-冪(べき)乗を計算します。other が負の整数の場合、計算結果を
-[[c:Rational]] オブジェクトで返します。
-
-  (1<<32).rpower(2)           # => 18446744073709551616
-  (1<<32).rpower(-2)          # => Rational(1, 18446744073709551616)
-
-@param other 自身を other 乗する数
-
-= reopen  Bignum
-== Instance Methods
---- power!(other) -> Integer | Float
+--- power!(other) -> Numeric
+--- rpower(other) -> Numeric
 
 冪(べき)乗を計算します。
+[[m:Bignum#**]] のエイリアスです。
 
-@param other 自身を other 乗する数
+@param other べき乗の指数
 
-[[lib:rational]]で再定義される前の[[m:Bignum#**]]の別名です。
-other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
-なら、浮動小数 (Float) を返します。
+--- quof(other) -> Float | Complex
+
+self を other で割った商を返します。
+[[m:Bignum#fdiv]] のエイリアスです。
+
+@param other 割る数
+
+--- rdiv(other) -> Rational | Float | Complex
+
+self を other で割った商を返します。
+[[m:Numeric#quo]] のエイリアスです。
+
+@param other 割る数
 
 #@else
 
