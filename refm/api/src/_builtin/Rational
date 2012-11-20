@@ -383,10 +383,14 @@ precision を指定した場合は指定した桁数の数値と、上述の性�
 
 @see [[m:Rational#marshal_load]]
 
---- marshal_load -> Rational
+--- marshal_load(ary) -> Rational
 
 [[m:Rational#marshal_dump]] で得られた配列を基に、[[c:Rational]] オブジェ
 クトを復元します。
+
+@param ary 2 要素の数値の配列を指定します。
+
+@raise ArgumentError 配列の要素数が 2 以外であった場合に発生します。
 
 @see [[m:Rational#marshal_dump]]
 

@@ -246,10 +246,14 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 @see [[m:Complex#marshal_load]]
 
---- marshal_load -> Complex
+--- marshal_load(ary) -> Complex
 
 [[m:Complex#marshal_dump]] で得られた配列を基に、[[c:Complex]] オブジェ
 クトを復元します。
+
+@param ary 2 要素の数値の配列を指定します。
+
+@raise ArgumentError 配列の要素数が 2 以外であった場合に発生します。
 
 @see [[m:Complex#marshal_dump]]
 
