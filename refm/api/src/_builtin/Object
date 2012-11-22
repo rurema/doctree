@@ -1096,7 +1096,7 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラ�
 います)
 
 #@since 1.8.0
-@see [[m:Object#marshal_dump]],[[m:Object#marshal_load]]
+@see [[m:Object#marshal_dump]], [[m:Object#marshal_load]], [[m:Class#_load]]
 #@end
 
 #@since 1.8.0
