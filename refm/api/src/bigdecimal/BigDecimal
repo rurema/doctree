@@ -1,34 +1,4 @@
 
-BigDecimal は可変長浮動小数点計算機能ライブラリです。
-
-#@# inner-file index here
-
-=== はじめに
-
-「有効桁数」とは BigDecimal が精度を保証する桁数です。ぴったりではありません、
-若干の余裕を持って計算されます。また、例えば32ビットのシステムでは10進で4桁毎に計算します。
-従って、現状では、内部の「有効桁数」は4の倍数となっています。
-
-以下のメソッド以外にも、(C ではない) Ruby ソースの形で提供されているものもあります。例えば、
-
-  require "bigdecimal/math.rb"
-
-とすることで、sin や cos といった関数が使用できるようになります。
-使用方法など、詳細は [[lib:bigdecimal/math]] を参照して下さい。 その他、Float との相互変換などの
-メソッドが [[lib:bigdecimal/util]] でサポートされています。利用するには
-
-  require "bigdecimal/util.rb"
-
-のようにします。詳細は [[lib:bigdecimal/util]] を参照して下さい。
-
-=== 例
-
-  require 'bigdecimal'
-  a = BigDecimal::new("0.123456789123456789")
-  b = BigDecimal("123456.78912345678",40)
-  c = a + b
-
-
 = reopen Kernel
 
 == Module Functions
