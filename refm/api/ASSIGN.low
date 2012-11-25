@@ -1,7 +1,7 @@
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 Win32API
-bigdecimal                      sho-h
+bigdecimal                      sho-h           done
 bigdecimal/jacobian             sho-h           done
 bigdecimal/ludcmp               sho-h           done
 bigdecimal/newton               sho-h           done
