@@ -9,7 +9,99 @@ bigdecimal は浮動小数点数演算ライブラリです。
   require 'bigdecimal'
   a = BigDecimal::new("0.123456789123456789")
   b = BigDecimal("123456.78912345678", 40)
-  c = a + b # => #<BigDecimal:f7494f88,'0.1234569125 8024590345 6789E6',28(40)>
+  print a + b # => 0.123456912580245903456789E6
+
+一般的な 10 進数の計算でも有用です。2 進数の浮動小数点演算には微小な誤
+差があるのに対し、[[c:BigDecimal]] では正確な値を得る事ができます。
+
+例1: 0.0001 を 10000 回足す場合。
+
+  sum = 0
+  for i in (1..10000)
+    sum = sum + 0.0001
+  end
+  print sum # => 0.9999999999999062
+
+例2: 0.0001 を 10000 回足す場合。(BigDecimal)
+
+  require 'bigdecimal'
+
+  sum = BigDecimal.new("0")
+  for i in (1..10000)
+    sum = sum + BigDecimal.new("0.0001")
+  end
+  print sum # => 0.1E1
+
+例3: 1.2 - 1.0 と 0.2 との比較
+
+  (BigDecimal.new("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
+
+  (1.2 - 1.0) == 0.2 # => false
+
+=== 特別な値
+
+正確な計算結果の提供のために、[[c:BigDecimal]] はいくつかの特別な値を持
+ちます。
+
+==== 無限大
+
+[[c:BigDecimal]] による演算の際には無限大を表す値を返す場合があります。
+
+例:
+
+  BigDecimal("1.0") / BigDecimal("0.0")  #=> infinity
+  BigDecimal("-1.0") / BigDecimal("0.0")  #=> -infinity
+
+無限大を表す [[c:BigDecimal]] オブジェクトを作成する場合、
+[[m:Kernel.#BigDecimal]] の引数に "Infinity" や "-Infinity" を指定して
+ください。(大文字小文字を区別します)
+
+  BigDecimal("Infinity")  # => #<BigDecimal:f74a2ebc,'Infinity',4(4)>
+  BigDecimal("+Infinity") # => #<BigDecimal:f74a2e6c,'Infinity',4(4)>
+  BigDecimal("-Infinity") # => #<BigDecimal:f74a2e1c,'-Infinity',4(4)>
+
+  BigDecimal("infinity")  # => #<BigDecimal:f74a2dcc,'0.0',4(4)>
+  BigDecimal("-infinity") # => #<BigDecimal:f74a2d7c,'-0.0',4(4)>
+
+==== 非数(Not a Number)
+
+0 / 0 のような未定義の計算を行った場合、非数(Not a Number)を表す値を返
+します。
+
+例:
+
+  BigDecimal("0.0") / BigDecimal("0.0") # => #<BigDecimal:f74490d8,'NaN',4(24)>
+
+NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
+[[m:Kernel.#BigDecimal]] の引数に "NaN" を指定してください。(大文字小文
+字を区別します)
+
+  BigDecimal("Infinity")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
+
+NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
+
+  BigDecimal('NaN') == 0.0               # => false
+  BigDecimal('NaN') == BigDecimal('NaN') # => false
+
+==== +ゼロと-ゼロ
+
+計算結果が現在の有効桁数に比べて小さい値である場合、0 を返します。
+
+負の非常に小さな [[c:BigDecimal]] の値は -0 を表す値になります。
+
+  BigDecimal.new("1.0") / BigDecimal.new("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
+
+正の非常に小さな [[c:BigDecimal]] の値は -0 を表す値になります。
+
+  BigDecimal.new("1.0") / BigDecimal.new("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
+
+精度については [[m:BigDecimal.mode]] も併せて参照してください。
+
+また、0.0 と -0.0 は比較した場合に同じ値であるとみなされます。
+
+  BigDecimal('0.0') == BigDecimal('-0.0') # => true
+
+これは数学的には特に意味がない事に注意してください。数学的な 0 は符号を持ちません。
 
 === 他の数値オブジェクトとの変換 (coerce)
 
@@ -45,35 +137,6 @@ BigDecimal オブジェクトが右にあるオブジェクトを
 必要性があるとは思いませんが、
 どうしてもと言う人は String オブジェクトを継承した新たなクラスを作成してから、
 そのクラスで coerce をサポートしてください。
-
-=== 無限、非数、ゼロの扱い
-
-「無限」とは表現できないくらい大きな数です。
-特別に扱うために +Infinity (正の無限大) や
--Infinity (負の無限大) と表記されます。
-無限は 1.0/0.0 のようにゼロで割るような計算をしたときに生成されます。
-
-「非数」は 0.0/0.0 や Infinity-Infinity 等の結果が定義できない計算をしたときに生成されます。非数は NaN(Not a Number)と表記されます。 NaN を含む計算は全て NaN になります。また NaN は自分も含めて、どんな数とも一致しません。
-
-ゼロは +0.0 と -0.0 が存在します。ただし、+0.0 == -0.0 は true です。
-
-Infinity、NaN、 +0.0 と -0.0 等を含んだ計算結果は組み合わせにより複雑です。興味のある人は、以下のプログラムを実行して結果を確認してください(結果について、疑問や間違いを発見された方はお知らせ願います)。
-
-  require "bigdecimal"
-  
-  aa  = %w(1 -1 +0.0 -0.0 +Infinity -Infinity NaN)
-  ba  = %w(1 -1 +0.0 -0.0 +Infinity -Infinity NaN)
-  opa = %w(+ - * / <=> > >=  < == != <=)
-  
-  for a in aa
-    for b in ba
-      for op in opa
-        x = BigDecimal::new(a)
-        y = BigDecimal::new(b)
-        eval("ans= x #{op} y;print a,' ',op,' ',b,' ==> ',ans.to_s,\"\n\"")
-      end
-    end
-  end
 
 ===[a:internal_structure] 内部構造
 
