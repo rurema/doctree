@@ -625,14 +625,11 @@ self の小数点以下を切り捨てて整数に変換します。
 @raise FloatDomainError self が無限大や NaN であった場合に発生します。
 
 --- to_f -> Float
-#@todo
 
 self の近似値を表す [[c:Float]] オブジェクトに変換します。
 
 仮数部や指数部の情報が必要な場合は、[[m:BigDecimal#split]] メソッドを利
 用してください。
-
-Normal accuracy limits and built-in errors of binary Float arithmetic apply.
 
 @see [[m:BigDecimal#split]]
 
@@ -895,23 +892,20 @@ self の符号を反転させたものを返します。
 @see [[m:BigDecimal._load]], [[m:Marshal.#dump]], [[m:Marshal.#load]]
 
 --- coerce(other) -> Array
-#@todo
 
 self と other が同じクラスになるよう、self か other を変換し [other,
 self] という配列にして返します。
 
 @param other 比較または変換するオブジェクト
 
-The coerce method provides support for Ruby type coercion. It is not
-enabled by default.
+[[m:BigDecimal#coerce]] は Ruby における強制型変換のための機能です。
+[[c:BigDecimal]] オブジェクトとその他のオブジェクト間の各種の計算は
+[[m:BigDecimal#coerce]] の結果を元に行われます。
 
-This means that binary operations like + * / or - can often be performed
-on a BigDecimal and an object of another type, if the other object can
-be coerced into a BigDecimal value.
+例:
 
-  e.g.
   a = BigDecimal.new("1.0")
-  b = a / 2.0  -> 0.5
+  b = a / 2.0 # => 0.5
 
 数値を表す文字列から [[c:BigDecimal]] オブジェクトに変換する機能はデフォ
 ルトでは無効になっています。必要な場合は ENABLE_NUMERIC_STRING を有効に
