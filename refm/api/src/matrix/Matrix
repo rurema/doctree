@@ -452,7 +452,7 @@ self の各成分を数 other で割った行列を返します。
 #@end
 --- **(n) -> Matrix
 
-self の n乗をした行列を返します。
+self の n 乗を返します。
 
 @param n べき数の指定
 
