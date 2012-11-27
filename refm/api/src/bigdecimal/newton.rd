@@ -19,9 +19,9 @@ require bigdecimal/ludcmp
   ...
 
 #@since 1.9.2
-  n = Newton.nsolve(f, x)
+  n = Newton.nlsolve(f, x)
 #@else
-  n = nsolve(f, x)
+  n = nlsolve(f, x)
 #@end
 
 引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
