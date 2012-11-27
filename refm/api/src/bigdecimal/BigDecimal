@@ -11,8 +11,9 @@
 詳しくは [[m:BigDecimal.new]] を参照してください。
 
 #@since 1.9.3
-@param s 数値を文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Rational]]、
-         [[c:BigDecimal]] オブジェクトのいずれかで指定します。
+@param s 数値を文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
+         [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
+         します。
 #@else
 @param s 数値を文字列で指定します。
 #@end
@@ -20,7 +21,7 @@
 @param n 有効桁数を整数で指定します。
 
 #@since 1.9.3
-@raise TypeError s に 文字列、[[c:Fixnum]]、[[c:Bignum]]、
+@raise TypeError s に 文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
                  [[c:Rational]]、[[c:BigDecimal]] 以外のオブジェクトを
                  指定した場合に発生します。
 #@else
@@ -30,6 +31,11 @@
 
 @raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
                  生します。
+
+#@since 1.9.3
+@raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
+                     [[m:Float::DIG]] 以上の値を指定した場合に発生します。
+#@end
 
 @see [[m:BigDecimal.new]]
 
@@ -197,8 +203,8 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 #@since 1.9.3
 @param s 数値を表現する初期値を文字列、[[c:Fixnum]]、[[c:Bignum]]、
-         [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
-         します。
+         [[c:Float]]、[[c:Rational]]、[[c:BigDecimal]] オブジェクトのい
+         ずれかで指定します。
 #@else
 @param s 数字を表現する初期値を文字列で指定します。
 #@end
@@ -218,7 +224,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
          ジョンで若干変更される可能性があります。
 
 #@since 1.9.3
-@raise TypeError s に 文字列、[[c:Fixnum]]、[[c:Bignum]]、
+@raise TypeError s に 文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
                  [[c:Rational]]、[[c:BigDecimal]] 以外のオブジェクトを
                  指定した場合に発生します。
 #@else
@@ -228,6 +234,11 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 @raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
                  生します。
+
+#@since 1.9.3
+@raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
+                     [[m:Float::DIG]] 以上の値を指定した場合に発生します。
+#@end
 
 @see [[m:Kernel.#BigDecimal]]
 
