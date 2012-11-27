@@ -4,7 +4,8 @@ category Math
 
 #@since 1.9.1
 
-1.9系では [[c:Rational]] クラスは組み込みクラスになりました。
+1.9系では [[c:Rational]] クラスは組み込みクラスになりました。rational ラ
+イブラリは互換性のために残されています。
 
 = reopen Fixnum
 == Instance Methods
