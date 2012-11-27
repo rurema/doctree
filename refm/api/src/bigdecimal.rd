@@ -80,8 +80,8 @@ NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
 
 NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
 
-  BigDecimal('NaN') == 0.0               # => false
-  BigDecimal('NaN') == BigDecimal('NaN') # => false
+  BigDecimal("NaN") == 0.0               # => false
+  BigDecimal("NaN") == BigDecimal("NaN") # => false
 
 ==== +ゼロと-ゼロ
 
@@ -99,7 +99,7 @@ NaN はどのような値と比較しても一致しません。(NaN 自身を�
 
 また、0.0 と -0.0 は比較した場合に同じ値であるとみなされます。
 
-  BigDecimal('0.0') == BigDecimal('-0.0') # => true
+  BigDecimal("0.0") == BigDecimal("-0.0") # => true
 
 これは数学的には特に意味がない事に注意してください。数学的な 0 は符号を持ちません。
 
