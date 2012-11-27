@@ -76,7 +76,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
 [[m:Kernel.#BigDecimal]] の引数に "NaN" を指定してください。(大文字小文
 字を区別します)
 
-  BigDecimal("Infinity")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
+  BigDecimal("NaN")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
 
 NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
 
