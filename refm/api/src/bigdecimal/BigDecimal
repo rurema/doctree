@@ -850,9 +850,9 @@ self が other より大きい場合に 1 を、等しい場合に 0 を、小�
 
 self と other が比較できない場合には nil を返します。
 
---- ==(other)  -> bool
---- ===(other) -> bool
---- eql?       -> bool
+--- ==(other)   -> bool
+--- ===(other)  -> bool
+--- eql?(other) -> bool
 
 self が other と等しい場合に true を、そうでない場合に false を返します。
 
