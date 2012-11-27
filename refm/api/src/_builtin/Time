@@ -545,6 +545,10 @@ self に 1 秒足した Time オブジェクトを生成して返します。
 タイムゾーンは地方時になります。
 #@end
 
+#@since 1.9.2
+このメソッドは obsolete です。 self + 1 を代わりに使用してください。
+#@end
+
   t = Time.now
   p t
   p t.succ
