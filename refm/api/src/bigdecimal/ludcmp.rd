@@ -6,9 +6,9 @@ require bigdecimal
 
 LU 分解を用いて、連立1次方程式 Ax = b の解 x を求める機能を提供します。
 
-Ruby のソースコード中の以下のパスからサンプルスクリプトを確認できます。
+Ruby のソースコード中の以下のサンプルスクリプトも併せて確認できます。
 
- * ext/bigdecimal/sample/linear.rb
+ * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/linear.rb?view=markup]]
 
 = module LUSolve
 

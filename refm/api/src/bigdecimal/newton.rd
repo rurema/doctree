@@ -59,10 +59,9 @@ require bigdecimal/ludcmp
 
 戻り値 n は計算した回数を整数で返します。
 
-実行例の詳細については、Ruby のソースコード中の以下のパスからサンプルス
-クリプトを参照してください。
+Ruby のソースコード中の以下のサンプルスクリプトも併せて確認できます。
 
- * ext/bigdecimal/sample/nlsolve.rb
+ * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/nlsolve.rb?view=markup]]
 
 = module Newton
 
