@@ -104,28 +104,28 @@
 [[c:BigDecimal]] の計算結果の丸め処理で数値の大きい方に繰り上げるかどう
 かを設定、確認する際の値を返します。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- ROUND_DOWN -> Fixnum
 
 [[c:BigDecimal]] の計算結果の丸め処理で全て切り捨てるかどうかを設定、確
 認する際の値を返します。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- ROUND_FLOOR -> Fixnum
 
 [[c:BigDecimal]] の計算結果の丸め処理で数値の小さい方に繰り下げるかどう
 かを設定、確認する際の値を返します。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- ROUND_HALF_DOWN -> Fixnum
 
 [[c:BigDecimal]] の計算結果の丸め処理で五捨六入するかどうかを設定、確認
 する際の値を返します。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- ROUND_HALF_EVEN -> Fixnum
 
@@ -133,14 +133,14 @@
 する際の値を返します。5の時は上位1桁が奇数の時のみ繰り上げます
 (Banker's rounding)。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- ROUND_HALF_UP -> Fixnum
 
 [[c:BigDecimal]] の計算結果の丸め処理で四捨五入するかどうかを設定、確認
 する際の値を返します。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- ROUND_MODE -> Fixnum
 
@@ -154,7 +154,7 @@
 [[c:BigDecimal]] の計算結果の丸め処理で全て切り上げするかどうかを設定、
 確認する際の値を返します。
 
-[[m:BigDecimal.mode]] の第 1 引数に指定します。
+[[m:BigDecimal.mode]] の第 2 引数に指定します。
 
 --- SIGN_NEGATIVE_FINITE -> Fixnum
 
@@ -250,7 +250,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 第2引数を省略、または nil を指定すると現状の設定値を返します。
 
 @param s 制御方法の設定、確認を行う項目を BigDecimal::EXCEPTION_*、
-         BigDecimal::_ROUND* のいずれかで指定します。
+         [[m:BigDecimal::ROUND_MODE]] のいずれかで指定します。
 
 @param v 引数 s が [[m:BigDecimal::ROUND_MODE]] の場合は
          [[m:BigDecimal::ROUND_MODE]] 以外の BigDecimal::_ROUND* のいず
@@ -260,6 +260,14 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
          は設定値が無効になります。
 
 @raise TypeError 引数 s に有効でない値を指定した場合に発生します。
+
+#@since 1.9.3
+@raise ArgumentError 引数 s に例外処理に関する値を指定し、引数 v に
+                     true、false 以外の値を指定した場合に発生します。
+#@else
+@raise TypeError 引数 s に例外処理に関する値を指定し、引数 v に true、
+                 false 以外の値を指定した場合に発生します。
+#@end
 
 以下の使用方法が定義されています。
 
