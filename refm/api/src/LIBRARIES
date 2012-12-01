@@ -578,6 +578,7 @@ stringio
 #@since 1.8.0
 strscan
 #@end
+#@until 2.0.0
 syck
 #@since 1.9.2
 syck/basenode
@@ -589,6 +590,7 @@ syck/stringio
 syck/tag
 syck/yamlnode
 syck/ypath
+#@end
 #@end
 sync
 syslog
