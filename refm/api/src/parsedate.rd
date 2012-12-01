@@ -7,7 +7,7 @@ category Date/Time
 日時を表す文字列を解析するライブラリです。
 
 [注意] このライブラリは obsolete です。1.9 以降では利用することが出来ま
-せん。代わりに[[m:Date.parse]] や [[m:Date._parse]] を利用してください。
+せん。代わりに [[m:Date.parse]] や [[m:Date._parse]] を利用してください。
 
 = module ParseDate
 
