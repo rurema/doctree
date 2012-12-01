@@ -11,6 +11,11 @@ Iconv は UNIX 95 の iconv() 関数のラッパーで、
   * [[man:iconv_close(3)]]
   * [[url:http://www.opengroup.org/onlinepubs/009695399/basedefs/iconv.h.html]]
 
+このライブラリは obsolete です。2.0 以降では利用することが出来ません。
+#@since 1.9.1
+代わりに [[m:String#encode]] を利用してください。
+#@end
+
 === 注意
 
 どの文字コード体系が利用できるかはプラットフォーム依存です。さらに文字コード体系をあらわす文字列もプラットフォーム依存です。日本語 EUC をあらわす文字列が EUC-JP, euc-jp, eucJP など異なる場合があります。このプラットフォームによる違いを吸収するために、
