@@ -1,0 +1,78 @@
+= class Enumerator::Lazy < Enumerator
+
+== Class Methods
+
+--- new
+#@todo
+
+@raise ArgumentError 引数を指定しなかった場合に発生します。
+
+== Instance Methods
+
+--- map {|item| ... }
+--- collect {|item| ... }
+#@todo
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+--- flat_map {|item| ... }
+--- collect_concat {|item| ... }
+#@todo
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+--- select {|item| ... }
+--- find_all {|item| ... }
+#@todo
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+--- size -> Integer | nil
+#@todo
+
+--- reject {|item| ... }
+#@todo
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+--- grep(pattern) {|item| ... }
+#@todo
+
+--- zip(*lists) {|v1, v2, ...| ... }
+#@todo
+
+--- take(n)
+#@todo
+
+@param n 要素数を指定します。
+
+@raise ArgumentError n に負の数を指定した場合に発生します。
+
+--- take_while
+--- take_while {|item| ... }
+#@todo
+
+--- drop(1)
+#@todo
+
+@param n 要素数を指定します。
+
+@raise ArgumentError n に負の数を指定した場合に発生します。
+
+--- drop_while
+--- drop_while {|item| ... }
+#@todo
+
+--- cycle(n = nil)
+--- cycle(n = nil) {|obj| ... }
+#@todo
+
+--- lazy -> self
+
+self を返します。
+
+--- force -> [object]
+
+全ての要素を含む配列を返します。
+
+[[m:Enumerable#to_a]] のエイリアスです。

@@ -31,6 +31,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Enumerable)
 #@since 1.8.8
 #@include(_builtin/Enumerator)
+#@since 2.0.0
+#@include(_builtin/Enumerator__Lazy)
+#@end
 #@end
 #@since 1.8.7
 #@until 1.9.1
