@@ -540,17 +540,28 @@ self の整数部分を新しい [[c:BigDecimal]] オブジェクトにして返
 
 self の小数部分を新しい [[c:BigDecimal]] オブジェクトにして返します。
 
+#@# see #2662
+#@since 1.9.2
+--- floor    -> Integer
+--- floor(n) -> BigDecimal
+#@else
 --- floor(n = 0) -> BigDecimal
+#@end
 
-self 以下の最大整数 (BigDecimal 値) を返します。
+self 以下の最大整数を返します。
 
 @param n 小数点以下の桁数を整数で指定します。
 
 @raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
                  生します。
 
-    c = BigDecimal("1.23456").floor      # => 1
-    c = BigDecimal("-1.23456").floor     # => -2
+#@since 1.9.2
+  BigDecimal("1.23456").floor   # => 1
+  BigDecimal("-1.23456").floor  # => -2
+#@else
+  BigDecimal("1.23456").floor   # => #<BigDecimal:1769e30,'0.1E1',9(36)>
+  BigDecimal("-1.23456").floor  # => #<BigDecimal:1769ca8,'-0.2E1',9(36)>
+#@end
 
 以下のように引数 n を与えることもできます。
 n >= 0 なら、小数点以下 n + 1 位の数字を操作します
@@ -558,21 +569,30 @@ n >= 0 なら、小数点以下 n + 1 位の数字を操作します
 n が負のときは小数点以上 n 桁目を操作します
 (小数点位置から左に少なくとも n 個の 0 が並びます)。
 
-    c = BigDecimal("1.23456").floor(4)   # => 1.2345
-    c = BigDecimal("15.23456").floor(-1) # => 10.0
+  BigDecimal("1.23456").floor(4).to_f   # => 1.2345
+  BigDecimal("15.23456").floor(-1).to_f # => 10.0
 
+#@since 1.9.2
+--- ceil    -> Integer
+--- ceil(n) -> BigDecimal
+#@else
 --- ceil(n = 0) -> BigDecimal
+#@end
 
-self 以上の整数のうち、最も小さい整数を計算し、
-その値 (BigDecimal 値)を返します。
+self 以上の整数のうち、最も小さい整数を計算し、その値を返します。
 
 @param n 小数点以下の桁数を整数で指定します。
 
 @raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
                  生します。
 
-    c = BigDecimal("1.23456").ceil   # => 2
-    c = BigDecimal("-1.23456").ceil  # => -1
+#@since 1.9.2
+  BigDecimal("1.23456").ceil   # => 2
+  BigDecimal("-1.23456").ceil  # => -1
+#@else
+  BigDecimal("1.23456").ceil   # => #<BigDecimal:113ae38,'0.2E1',9(36)>
+  BigDecimal("-1.23456").ceil  # => #<BigDecimal:113acb0,'-0.1E1',9(36)>
+#@end
 
 以下のように引数を与えて、小数点以下 n+1 位の数字を操作することもできます。
 n >= 0 なら、小数点以下 n + 1 位の数字を操作します
@@ -580,10 +600,14 @@ n >= 0 なら、小数点以下 n + 1 位の数字を操作します
 n が負のときは小数点以上 n 桁目を操作します
 (小数点位置から左に少なくとも n 個の 0 が並びます)。
 
-    c = BigDecimal("1.23456").ceil(4)    # => 1.2346
-    c = BigDecimal("15.23456").ceil(-1)  # => 20.0
+  BigDecimal("1.23456").ceil(4).to_f   # => 1.2346
+  BigDecimal("15.23456").ceil(-1).to_f # => 20.0
 
+#@since 1.9.2
+--- round(n) -> Integer
+#@else
 --- round(n) -> BigDecimal
+#@end
 --- round(n, b) -> BigDecimal
 
 クラスメソッド [[m:BigDecimal.mode]]([[m:BigDecimal::ROUND_MODE]],flag) で指定した
@@ -601,27 +625,41 @@ n が負のときは小数点以上 n 桁目を操作します
 かつ、引数を指定しない場合は
 「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
 
-    c = BigDecimal("1.23456").round   # => 1
-    c = BigDecimal("-1.23456").round  # => -1
+#@since 1.9.2
+  BigDecimal("1.23456").round   # => 1
+  BigDecimal("-1.23456").round  # => -1
+#@else
+  BigDecimal("1.23456").round   # => #<BigDecimal:2241e48,'0.1E1',9(36)>
+  BigDecimal("-1.23456").round  # => #<BigDecimal:2241cc0,'-0.1E1',9(36)>
+#@end
 
 以下のように引数を与えて、小数点以下 n+1 位の数字を操作することもできます。
 n が正の時は、小数点以下 n+1 位の数字を丸めます(小数点以下を、最大 n 桁にします)。
 n が負のときは小数点以上 n 桁目を丸めます(小数点位置から左に少なくとも n 個の 0 が並びます)。
 
-    c = BigDecimal("1.23456").round(4)    # => 1.2346
-    c = BigDecimal("15.23456").round(-1)  # => 20.0
+  BigDecimal("1.23456").round(4).to_f    # => 1.2346
+  BigDecimal("15.23456").round(-1).to_f  # => 20.0
 
 2番目の引数を指定すると、[[m:BigDecimal.mode]] の指定を無視して、指定さ
 れた方法で丸め操作を実行します。
 
-    c = BigDecimal("1.23456").round(3,BigDecimal::ROUND_HALF_EVEN)   # => 1.234
-    c = BigDecimal("1.23356").round(3,BigDecimal::ROUND_HALF_EVEN)   # => 1.234
+#@since 1.9.3
+  BigDecimal("1.23456").round(3,BigDecimal::ROUND_HALF_EVEN).to_f   # => 1.235
+#@else
+  BigDecimal("1.23456").round(3,BigDecimal::ROUND_HALF_EVEN).to_f   # => 1.234
+#@end
+  BigDecimal("1.23356").round(3,BigDecimal::ROUND_HALF_EVEN).to_f   # => 1.234
 
 @see [[m:BigDecimal.mode]]
 
+#@since 1.9.2
+--- truncate    -> Integer
+--- truncate(n) -> BigDecimal
+#@else
 --- truncate(n = 0) -> BigDecimal
+#@end
 
-小数点以下の数を切り捨てて整数 (BigDecimal 値)にします。
+小数点以下の数を切り捨てて整数にします。
 
 @param n 小数点以下の桁数を整数で指定します。
 
@@ -634,8 +672,8 @@ n が正の時は、小数点以下 n+1 位の数字を切り捨てます
 n が負のときは小数点以上 n 桁目を操作します
 (小数点位置から左に少なくとも n 個の 0 が並びます)。
 
-    BigDecimal("1.23456").truncate(4).to_f    # => 1.2345
-    BigDecimal("15.23456").truncate(-1).to_f  # => 10.0
+  BigDecimal("1.23456").truncate(4).to_f    # => 1.2345
+  BigDecimal("15.23456").truncate(-1).to_f  # => 10.0
 
 --- abs -> BigDecimal
 
