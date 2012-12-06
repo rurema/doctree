@@ -61,8 +61,8 @@ readline ライブラリがインストールされている時には
   -U                ruby -U と同じ
   -E enc            ruby -E と同じ
 #@end
-  --verbose         これから実行する行を表示する (デフォルト)
-  --noverbose       これから実行する行を表示しない
+  --verbose         これから実行する行を表示する
+  --noverbose       これから実行する行を表示しない (デフォルト)
   --echo            実行結果を表示する (デフォルト)
   --noecho          実行結果を表示しない
   --inspect         結果出力にinspectを用いる (bc モード以外ではデフォルト)
