@@ -84,8 +84,9 @@ readline ライブラリがインストールされている時には
   --back-trace-limit n
                     バックトレース表示をバックトレースの頭から n、
                     うしろから n だけ行なう。デフォルト値は 16。
-  --context-mode    新しいワークスペースを作成した時に関連する Binding
-                    オブジェクトの作成方法をで設定する。(IRB::Context 参照)
+  --context-mode n  新しいワークスペースを作成した時に関連する Binding
+                    オブジェクトの作成方法を 0 から 3 で設定する。
+                    (IRB::Context 参照)
   --single-irb      irb 中で self を実行して得られるオブジェクトをサブ irb と共
                     有する
   --irb_debug n     irb のデバッグレベルを n に設定する
