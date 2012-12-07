@@ -1015,6 +1015,11 @@ lv が指定された場合、lv の深さまで再帰的に平滑化します�
 --- index(val)           -> Integer | nil
 #@since 1.8.7
 --- index {|item| ...}   -> Integer | nil
+#@since 1.9.1
+--- index                -> Enumerator
+#@else
+--- index                -> Enumerable::Enumerator
+#@end
 #@end
 
 指定された val と == で等しい最初の要素の位置を返します。
@@ -1023,6 +1028,13 @@ lv が指定された場合、lv の深さまで再帰的に平滑化します�
 #@since 1.8.7
 ブロックが与えられた時には、各要素を引数として順にブロックを実行し、
 ブロックが真を返した最初の要素の位置を返します。
+
+引数、ブロックのどちらも与えられなかった時には、自身と index から生成した
+#@since 1.9.1
+[[c:Enumerator]] オブジェクトを返します。
+#@else
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 @param val インデックスを知りたいオブジェクトを指定します。
@@ -1336,6 +1348,11 @@ reverse! は self を返します。
 --- rindex(val)           -> Integer | nil
 #@since 1.8.7
 --- rindex {|item| ... }  -> Integer | nil
+#@since 1.9.1
+--- rindex                -> Enumerator
+#@else
+--- rindex                -> Enumerable::Enumerator
+#@end
 #@end
 
 指定された val と == で等しい最後の要素の位置を返します。
@@ -1344,6 +1361,13 @@ reverse! は self を返します。
 #@since 1.8.7
 ブロックが与えられた時には、各要素を引数として順にブロックを実行し、
 ブロックが真を返した最初の要素の位置を返します。
+
+引数、ブロックのどちらも与えられなかった時には、自身と rindex から生成した
+#@since 1.9.1
+[[c:Enumerator]] オブジェクトを返します。
+#@else
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 @param val オブジェクトを指定します。
