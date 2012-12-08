@@ -524,7 +524,7 @@ Errno::EACCES となった場合には無視して実行を続けます。
 #@end
 
 --- wait    -> Integer
---- wait2   -> Array
+--- wait2   -> [Integer, Process::Status]
 
 子プロセスのうちのひとつが終了するまで待ち、終了した子プロセスの pid を返します。
 #@since 1.8.0
@@ -553,7 +553,7 @@ wait2 は子プロセスの pid と終了ステータスを表す [[m:$?]] の�
 @see [[man:wait(2)]]
 
 #@since 1.8.0
---- waitall    -> Array
+--- waitall    -> [[Integer, Process::Status]]
 
 全ての子プロセスが終了するのを待ちます。
 終了した子プロセスの pid と終了ステータス
@@ -574,7 +574,7 @@ wait2 は子プロセスの pid と終了ステータスを表す [[m:$?]] の�
 #@end
 
 --- waitpid(pid, flags = 0)    -> Integer | nil
---- waitpid2(pid, flags = 0)   -> Array | nil
+--- waitpid2(pid, flags = 0)   -> [Integer, Process::Status] | nil
 
 pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
 終了した時に pid を返します。
