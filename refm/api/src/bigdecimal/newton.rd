@@ -59,7 +59,7 @@ require bigdecimal/ludcmp
 
 戻り値 n は計算した回数を整数で返します。
 
-Ruby のソースコード中の以下のサンプルスクリプトも併せて確認できます。
+Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
  * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/nlsolve.rb?view=markup]]
 
