@@ -118,6 +118,19 @@ value を持つ要素のキーを返します。
 [注意] 非推奨のメソッドです。代わりに #key を使用してください。
 #@end
 
+#@since 2.0.0
+@see [[m:YAML::DBM#key]]
+
+--- key(value) -> String | nil
+
+value を持つ要素のキーを返します。
+
+対応するキーが見つからなかった場合は nil を返します。
+
+@param value 検索したい値を指定します。YAML 形式に変換できるオブジェク
+             トが指定できます。
+#@end
+
 --- invert -> {object => String}
 
 値からキーへのハッシュを返します。
