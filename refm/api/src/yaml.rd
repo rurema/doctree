@@ -85,10 +85,13 @@ require yaml/constants
 
 [[lib:yaml]] ライブラリでは、以下のライブラリをバックエンドとして使用します。
 
+#@until 2.0.0
  * [[lib:syck]] ライブラリ: YAML バージョン 1.0 を扱う事ができます。
+#@end
 #@since 1.9.2
  * [[lib:psych]] ライブラリ: YAML バージョン 1.1 を扱う事ができます。
 
+#@until 2.0.0
 require "yaml" した場合、特に何もしなければ
 #@since 1.9.3
 [[lib:psych]] ライブラリを使用します。
@@ -120,6 +123,7 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
   YAML::ENGINE.yamler = "psych"
   YAML.load(...)
 
+#@end
 #@end
 
 === タグの指定
@@ -211,6 +215,7 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
   EOS
   # => #<Foo::Bar:0xf73907b8>
 
+#@until 2.0.0
 また、YAML 形式に変換する際のタグを変更したい場合、to_yaml_type メソッ
 ドをオーバライドしてください。
 #@since 1.9.2
@@ -229,6 +234,7 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
     end
   end
   p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
+#@end
 
 === 注意
 
@@ -243,9 +249,11 @@ Ruby 独自の拡張、制限があります。標準添付ライブラリ以外
 
  * ":foo" のような文字列はそのまま [[c:Symbol]] として扱える
  * "y" や "n" は真偽値として扱われない
+#@until 2.0.0
  * !!str のような短縮系のグローバルタグは扱われない
 #@since 1.9.2
    ([[lib:syck]] のみ)
+#@end
 #@end
  * !<tag:yaml.org,2002:str> "foo" のようにタグを扱えない。
    !tag:yaml.org,2002:str "foo" のように記述する必要がある
@@ -285,6 +293,17 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 YAML (YAML Ain't Markup Language) を扱うモジュールです。
 
 #@since 1.9.2
+#@since 2.0.0
+YAML オブジェクトは実際は [[c:Psych]] オブジェクトです。その他のオブジェ
+クトも同様に実体は別のオブジェクトです。もし確認したいメソッドの記述が
+見つからない場合は、[[lib:psych]] ライブラリを確認してください。
+
+  require "yaml"
+
+  p YAML::ENGINE.yamler # => "psych"
+  p YAML                # => Psych
+  p YAML::Stream        # => Psych::Stream
+#@else
 YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
 クトのどちらかです。その他のオブジェクトも同様に実体は別のオブジェクト
 です。もし確認したいメソッドの記述が見つからない場合は、それぞれのライ
@@ -301,6 +320,7 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] 
   YAML::ENGINE.yamler = "syck"
   p YAML         # => Syck
   p YAML::Stream # => Syck::Stream
+#@end
 
 == Constants
 
@@ -328,20 +348,27 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] 
 
 例:
 
+#@until 2.0.0
   require "psych"
+#@end
   require "yaml"
   p YAML::ENGINE.yamler # => "psych"
 
 --- yamler=(engine)
 
+#@since 2.0.0
+使用しません。
+#@else
 使用するバックエンドを設定します。
 
 また、engine がまだ require されていなかった場合は require します。
+#@end
 
 @param engine バックエンドを文字列で指定します。
 
 @raise ArgumentError 未対応のバックエンドを指定した場合に発生します。
 
+#@until 2.0.0
 例:
 
   require "psych"
@@ -350,9 +377,13 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] 
 
   YAML::ENGINE.yamler = "syck"
   p YAML # => Syck
+#@end
 
 --- syck? -> bool
 
+#@since 2.0.0
+常に false を返します。
+#@else
 [[lib:syck]] ライブラリを使用中の場合に true を返します。それ以外の場合
 は false を返します。
 
@@ -362,6 +393,7 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] 
 
   YAML::ENGINE.yamler = "syck"
   p YAML::ENGINE.syck? # => true
+#@end
 
 #@else
 #@include(yaml/YAML.inside)
