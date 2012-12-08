@@ -79,7 +79,7 @@ include Jacobian
 
 --- norm(fv, zero = 0.0) -> Float
 
-ノルム関数です。ライブラリ内部で使用します。
+ライブラリ内部で使用します。
 
 --- nlsolve(f, x) -> Integer
 
