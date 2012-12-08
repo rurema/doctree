@@ -879,8 +879,9 @@ self を n で割った余りを返します。
   ( x % -3).to_i # => -2
   (-x % -3).to_i # => -1
 
-[[m:BigDecimal#remainder]] とは異なる点に注意してください。詳細は
-[[m:Numeric#%]]、[[m:Numeric#remainder]] を参照して下さい。
+戻り値は n と同じ符号になります。これは [[m:BigDecimal#remainder]] とは
+異なる点に注意してください。詳細は [[m:Numeric#%]]、
+[[m:Numeric#remainder]] を参照して下さい。
 
 --- remainder(n) -> BigDecimal
 
@@ -894,8 +895,9 @@ self を n で割った余りを返します。
   x.remainder(-3).to_i    # => 1
   (-x).remainder(-3).to_i # => -1
 
-[[m:BigDecimal#%]] とは異なる点に注意してください。詳細は
-[[m:Numeric#%]]、[[m:Numeric#remainder]] を参照して下さい。
+戻り値は self と同じ符号になります。これは [[m:BigDecimal#%]] とは異な
+る点に注意してください。詳細は [[m:Numeric#%]]、
+[[m:Numeric#remainder]] を参照して下さい。
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
