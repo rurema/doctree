@@ -95,6 +95,9 @@ fcntl
 #@since 1.9.1
 fiber
 #@end
+#@since 1.9.1
+fiddle
+#@end
 #@since 1.8.0
 fileutils
 #@end
