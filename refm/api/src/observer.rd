@@ -36,7 +36,7 @@ Observable モジュールを include したクラスは
 
 == Instance Methods
 
---- add_observer(observer) -> Array
+--- add_observer(observer, func=:update) -> Array
 
 オブザーバを登録します。
 
@@ -47,8 +47,14 @@ Observable モジュールを include したクラスは
 observer が update メソッドを持たないときは
 例外 [[c:NoMethodError]] が発生します。
 
-@param observer 更新の通知を受けるオブザーバ
+#@since 1.9.1
+func を指定することで update 以外のメソッドを通知に用いることができます。
+#@end
 
+@param observer 更新の通知を受けるオブザーバ
+#@since 1.9.1
+@param func 更新の通知をするメソッド
+#@end
 @raise NoMethodError updateメソッドを持たないオブジェクトをオブザーバに指定した場合に発生します。
 
 --- delete_observer(observer) -> object | nil
