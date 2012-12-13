@@ -517,6 +517,13 @@ selfの行列の階数(rank)を返します。
 #@end
 を使用してください。
 
+#@until 1.9.1
+行列の成分が [[c:Integer]] の場合も正しく動作しない場合があります。
+  require 'matrix'
+  m=Matrix[[2, 6], [1, 3]]
+  m.rank # => 2
+#@end
+
 #@since 1.9.1
 --- rank_e -> Fixnum
 
