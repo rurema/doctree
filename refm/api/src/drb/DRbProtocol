@@ -1,82 +1,131 @@
 = module DRb::DRbProtocol
 
-Module managing the underlying network protocol(s) used by drb.
+drb で使われる通信プロトコルを取り扱うモジュールです。
 
-By default, drb uses the [[c:DRbTCPSocket protocol]]. Other protocols can be defined. 
+通常ユーザが使うことはないでしょうが、drb の
+ための新しい通信手段を定義したい場合には
+このモジュールを使う必要があります。
+通信手段を定義したクラスを [[m:DRb::DRbProtocol.#add_protocol]] で
+drb に登録することで、追加ができます。
 
-A new protocol is registered with the DRbProtocol module using the add_protocol method.
+デフォルトでは DRbTCPSocket クラスを用い、druby://... という
+URI を指定することで TCP/IP で通信します。
 
-For examples of other protocols, see [[c:DRb::DRbUNIXSocket]] in [[lib:drb/unix]], and HTTP0 in sample/http0.rb and sample/http0serv.rb in the full drb distribution.
+通信プロトコルを追加する例としては、
+例としては [[lib:drb/unix]] で定義している [[c:DRb::DRbUNIXSocket]] や
+サンプルの sample/drb/http0.rb、 sample/drb/http0serv.rb などを見てください。
 
-All of these methods should raise a [[c:DRb::DRbBadScheme]] error if
-the URI does not identify the protocol they support (e.g. "druby:" for
-the standard Ruby protocol). This is how the [[c:DRb::DRbProtocol]] module, given
-a URI, determines which protocol implementation serves that protocol.
+これらの例を見てわかるように、通信クラスでは取り扱えない URI が open 
+や open_server に渡された場合は例外 [[c:DRb::DRbBadScheme]] を
+raise することで、その URI が取り扱えないことを drb ライブラリに
+伝えます。
+
+=== 通信プロトコル定義クラスについて
+上で説明した通信プロトコル定義クラスは、以下のクラスメソッドを
+そなえている必要があります。
+
+: open(uri, config)
+  uri で指定したサーバへの接続を開く。
+  返り値として、プロトコルクラスのインスタンスで、開いた接続を保持した
+  オブジェクトを返さなければなりません。
+: open_server(uri, config)
+  サーバを起動し、 uri で指定した場所で接続を待ち受けます。
+  返り値として、プロトコルクラスのインスタンスで、接続を待ち受けている
+  オブジェクトを返さなければなりません。
+: uri_option(uri, config)
+  uri をパースして、そこに含まれるオプション("?param=val" など)を取り出します。
+  返り値として、[uri, option] という配列を返します。
+
+プロトコルクラスは [[m:DRb::DRbProtocol.#add_protocol]] で登録します。
+
+DRbProtocol module は登録された各プロトコルクラスに対して順に
+open/open_server を呼び出して、接続を確立しようとします。
+各プロトコルクラスはその URI が取り扱える場合は接続を確立/待受けし、その
+通信を取り扱うオブジェクトを返します。URI が取り扱えない場合は
+[[c:DRb::DRbBadScheme]] を発生させなければなりません。
+DRbProtocol module に登録されたクラスでは URI を取り扱えない
+場合は [[c:DRb::DRbBadURI]] が発生します。
+URI は妥当であるが、通信に問題が発生した場合は [[c:DRb::DRbConnError]] 
+を発生させる必要があります。
+
+==== open_server
+プロトコルクラスの open_server で返されるオブジェクトは以下のメソッドを
+持っている必要があります。
+
+: accept
+  接続を受け付けます。返り値としてクライアントとの通信ができるオブジェクト
+  (後で説明します)を返します。
+
+: close
+  接続の待受を終了します。
+
+: uri 
+  接続を待ち受けている uri を返します。
+
+==== open
+プロトコルクラスの open で返されるオブジェクトは以下のメソッドを
+持っている必要があります。
+
+: send_request (ref, msg_id, arg, b)
+  ref で指定されているオブジェクトの msg_id で指定されているメソッドを
+  arg という引数と b というブロック付きで呼び出す、というリクエストを
+  送ります。DRbMessage#send_request を呼び出して通信オブジェクトが
+  保持しているストリームにデータを送る、というのが最も簡単なこのメソッドの
+  実装法です。
+
+: recv_reply
+  サーバからリプライを受け取り、[success-boolean, reply-value] という配列を
+  返します。DRb.recv_reply を呼び出し、通信オブジェクトが
+  保持しているストリームからリプライを受け取る、というのが最も簡単な
+  このメソッドの実装法です。
+
+: alive?
+  接続が生きているならば真を返し、切れていれば偽を返します。
+
+: close
+  接続を閉じます。
+
+==== open_server().accept
+プロトコルクラスの open_server で返されるオブジェクト
+の accept メソッドで返されるオブジェクトは以下のメソッドを持っている必要
+があります。
+
+: recv_request
+  クライアントからのリクエストを受け取り 
+  [object, message, args, block] という配列を返します。
+  DRbMessage#recv_request を呼び出してストリームから
+  メッセージを読み取る、というのが最も簡単な
+  このメソッドの実装法です。
+
+: send_reply(succ, result)
+  クライアントにリプライを送る。 DRbMessage#send_reply を呼び出して
+  ストリームにメッセージを書き込む、というのが最も簡単な
+  このメソッドの実装法です。
+
+: close
+  接続を閉じる
 
 == Module Functions
 
---- add_protocol(prot)
-#@todo
+--- add_protocol(prot) -> ()
+新たなプロトコルを DRbProtocol モジュールに登録します。
 
-Add a new protocol to the DRbProtocol module. 
+@param prot プロトコル定義クラス
 
-A protocol must define the following class methods:
 
-: open(uri, config)
- Open a client connection to the server at uri, using configuration config.  Return a protocol instance for this connection.
-
-: open_server(uri, config)
- Open a server listening at uri, using configuration config.  Return a protocol instance for this listener.
-
-: uri_option(uri, config)
- Take a URI, possibly containing an option component (e.g. a trailing '?param=val'), and return a [uri, option] tuple.
-
-The DRbProtocol module asks each registered protocol in turn to try to open the URI. Each protocol signals that it does not handle that URI by raising a [[c:DRb::DRbBadScheme]] error. If no protocol recognises the URI, then a [[c:DRb::DRbBadURI]] error is raised. If a protocol accepts the URI, but an error occurs in opening it, a [[c:DRb::DRbConnError]] is raised.
-==== open_server
-The protocol instance returned by open_server must have the following methods:
-
-: accept
- Accept a new connection to the server. Returns a protocol instance capable of communicating with the client. 
-
-: close
- Close the server connection. 
-
-: uri
- Get the URI for this server. 
-
-==== open
-The protocol instance returned by open must have the following methods:
-
-: send_request (ref, msg_id, arg, b)
- Send a request to ref with the given message id and arguments. This is most easily implemented by calling DRbMessage.send_request, providing a stream that sits on top of the current protocol. 
-
-: recv_reply
- Receive a reply from the server and return it as a [success-boolean, reply-value] pair. This is most easily implemented by calling DRb.recv_reply, providing a stream that sits on top of the current protocol. 
-
-: alive?
- Is this connection still alive? 
-
-: close
- Close this connection. 
-
-==== open_server().accept()
-The protocol instance returned by open_server().accept() must have the following methods:
-
-: recv_request
- Receive a request from the client and return a [object, message, args, block] tuple. This is most easily implemented by calling DRbMessage.recv_request, providing a stream that sits on top of the current protocol. 
-
-: send_reply(succ, result)
- Send a reply to the client. This is most easily implemented by calling DRbMessage.send_reply, providing a stream that sits on top of the current protocol. 
-
-: close
- Close this connection. 
+#@# auto_load, open, open_server, uri_option is used internally
+#@# and users should not use these methods directly
 
 = class DRb::DRbConnError < DRb::DRbError
 
-Error raised when an error occurs on the underlying communication protocol.
+通信エラーが発生したことを意味する例外クラス。
 
 = class DRb::DRbBadScheme < DRb::DRbError 
-Error raised by a dRuby protocol when it doesn't support the scheme specified in a URI. See DRb::DRbProtocol.
+プロトコルクラスが受け取った URI の schema が
+そのクラスでサポートされていないことを、伝えるための例外。
+
+@see [[c:DRb::DRbProtocol]]
 
 = class DRb::DRbBadURI < DRb::DRbError 
-Error raised by the DRbProtocol module when it cannot find any protocol implementation support the scheme specified in a URI.
+URI に含まれている schema をサポートしているプロトコルが見付からない
+ことを意味する例外クラス。

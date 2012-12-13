@@ -1,157 +1,159 @@
 = class DRb::DRbServer < Object
 
-Class representing a drb server instance.
+dRuby サーバクラス。
 
-A DRbServer must be running in the local process before any incoming dRuby calls can be accepted, or any local objects can be passed as dRuby references to remote processes, even if those local objects are never actually called remotely. You do not need to start a DRbServer in the local process if you are only making outgoing dRuby calls passing marshalled parameters.
+dRuby サーバは
+  * リモートからのメソッド呼び出しを受け取る
+  * ローカルオブジェクトをリモートプロセスにリモートオブジェクトとして
+    渡す
+などを実現するために必要です。そのため、このような操作をする前に
+サーバを起動する必要があります。
+他のプロセスのリモートメソッドをマーシャリング可能な
+引数のみで呼び出すならばサーバは必要ありません。
 
-Unless multiple servers are being used, the local DRbServer is normally started by calling DRb.start_service.
+複数のサーバを起動することもできますが、通常は
+[[m:DRb.#start_service]] でサーバを起動します。
+
 
 == Class Methods
 
---- default_acl(acl)
-#@todo
+--- default_acl(acl) -> ()
 
-Set the default value for the :acl option.
-See new(). The initial default value is nil. 
+サーバ起動時の :acl オプションのデフォルト値を指定します。
 
---- default_argc_limit(argc)
-#@todo
+初期値は nil です。
 
-Set the default value for the :argc_limit option.
-See new(). The initial default value is 256.  
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]], [[c:ACL]]
 
---- default_id_conv(idconv)
-#@todo
+--- default_argc_limit(argc) -> ()
+サーバ起動時の :argc_limit オプションのデフォルト値を指定します。
 
-Set the default value for the :id_conv option.
-See #new(). The initial default value is a [[c:DRb::DRbIdConv]] instance.
+初期値は 256 です。
 
---- default_load_limit(sz)
-#@todo
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
-Set the default value for the :load_limit option.
-See new(). The initial default value is 25 MB. 
+--- default_id_conv(idconv) -> ()
+サーバ起動時の :id_conv オプションのデフォルト値を指定します。
 
---- default_safe_level(level)   
-#@todo
+初期値は [[c:DRb::DRbIdConv]] のインスタンスです。
 
---- new(uri=nil, front=nil, config_or_acl=nil)
-#@todo
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
-Create a new DRbServer instance.
+--- default_load_limit(sz) -> ()
+サーバ起動時の :load_limit オプションのデフォルト値を指定します。
 
-uri is the URI to bind to. This is normally of the form 
-‘druby://<hostname>:<port>’ where <hostname> is a hostname of the
-local machine. If nil, then the system’s default hostname will be
-bound to, on a port selected by the system; these value can be
-retrieved from the uri attribute. ‘druby:’ specifies the default
-dRuby transport protocol: another protocol, such as ‘drbunix:’, can
-be specified instead.
+初期値は25MBです。
 
-front is the front object for the server, that is, the object to which
-remote method calls on the server will be passed. If nil, then the
-server will not accept remote method calls.
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
-If config_or_acl is a hash, it is the configuration to use for this server. 
-The following options are recognised:
+--- default_safe_level(level) -> ()
+サーバ起動時の :safe_level オプションのデフォルト値を指定します。
 
-: idconv
+初期値は0です。
 
-an id-to-object conversion object. This defaults to an instance of the class DRb::DRbIdConv.
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
-: verbose
-if true, all unsuccessful remote calls on objects in the server will be logged to $stdout. false by default.
+--- new(uri=nil, front=nil, config_or_acl=nil) -> DRb::DRbServer
 
-: tcp_acl
-the access control list for this server. See the ACL class from the main dRuby distribution.
+dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
-: load_limit
-the maximum message size in bytes accepted by the server. Defaults to 25 MB (26214400).
+#@include(start-service)
 
-: argc_limit
-the maximum number of arguments to a remote method accepted by the server. Defaults to 256.
+プライマリサーバが存在しない場合は、これで起動したサーバがプライマリ
+サーバとなります。
 
-The default values of these options can be modified on a class-wide
-basis by the class methods default_argc_limit, default_load_limit,
-default_acl, default_id_conv, and verbose=
+@see [[m:DRb.#start_service]]
 
-If config_or_acl is not a hash, but is not nil, it is assumed to be
-the access control list for this server. See the :tcp_acl option for
-more details.
+--- verbose -> bool
+サーバ起動時の :verbose オプションのデフォルト値を返します。
 
-If no other server is currently set as the primary server, this will
-become the primary server.
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]], 
+     [[m:DRb::DRbServer.verbose=]]
 
-The server will immediately start running in its own thread.
+--- verbose=(on)
+サーバ起動時の :verbose オプションのデフォルト値を指定します。
 
---- verbose
---- verbose= 
-#@todo
-Get the default value of the :verbose option. 
-See new(). The initial default value is false.
+初期値は false です。
 
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
 == Instance Methods
 
---- alive?
-#@todo
+--- alive? -> bool
+サーバが生存しているならば真を返します。
 
-Is this server alive? 
+@see [[m:DRb::DRbServer#stop_service]]
 
---- check_insecure_method(obj, msg_id)
-#@todo
+#@# --- check_insecure_method(obj, msg_id)
+#@# #@todo
+#@# 
+#@# Check that a method is callable via dRuby.
+#@# obj is the object we want to invoke the method on. msg_id is the method name
+#@# as a Symbol.
+#@# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
 
-Check that a method is callable via dRuby.
-obj is the object we want to invoke the method on. msg_id is the method name, as a Symbol.
-If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
+--- stop_service -> ()
+サーバを停止します。
 
---- stop_service()
-#@todo
+@see [[m:DRb::DRbServer#alive?]]
 
-Stop this server. 
+#@# --- to_id(obj)
+#@# #@todo
+#@# 
+#@# Convert a local object to a dRuby reference. 
+#@# 
+#@# --- to_obj(ref)
+#@# #@todo
+#@# 
+#@# Convert a dRuby reference to the local object it refers to.
 
---- to_id(obj)
-#@todo
+--- verbose -> bool
+サーバが verbose mode ならば真を返します。
 
-Convert a local object to a dRuby reference. 
+@see [[m:DRb::DRbObject#verbose=]]
 
---- to_obj(ref)
-#@todo
+--- verbose=(on) 
+サーバの verbose mode を真偽値で設定します。
 
-Convert a dRuby reference to the local object it refers to.
+verbose mode が on の場合は失敗したメソッド呼出のログが標準出力に出力
+されます。
 
---- verbose
---- verbose=
-#@todo
+@param on 真を渡すと verbose mode が on になります
 
-Get whether the server is in verbose mode.
-In verbose mode, failed calls are logged to stdout.
+@see [[m:DRb::DRbObject#verbose]]
 
---- config 
-#@todo
-The configuration of this DRbServer
+--- config  -> Hash
+サーバの設定を返します。
 
---- front
-#@todo
-The front object of the DRbServer.
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
-This object receives remote method calls made on the server’s URI alone, with an object id.
---- safe_level
-#@todo
+--- front -> object
+サーバに設定されたフロントオブジェクトを返します。
 
---- thread
-#@todo
-The main thread of this DRbServer.
+@see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
-This is the thread that listens for and accepts connections from clients, not that handles each client’s request-response session.
+--- safe_level -> Integer
+サーバのセーフレベルを返します。
 
---- uri
-#@todo
-The URI of this DRbServer.
+
+--- thread -> Thread
+サーバのメインスレッドを返します。
+
+このスレッドはクライアントからの接続を受け付けるスレッドであって、
+クライアントへの応答をするスレッドではありません。
+
+--- uri -> String|nil
+サーバに紐付けけられた URI を返します。
+
+--- here?(uri) -> bool
+uri がサーバに紐付けられたものであれば真を返します。
+
+@param uri URI 文字列
+
 
 == Constants
 
---- INSECURE_METHOD
-#@todo
-List of insecure methods.
-These methods are not callable via dRuby. 
+--- INSECURE_METHOD -> [Symbol]
+セキュアでないメソッドのリスト。
+
+これに含まれるメソッドは dRuby 経由では呼び出せません。

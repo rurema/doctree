@@ -2,30 +2,41 @@
 
 alias DRbIdConv
 
-Class responsible for converting between an object and its id.
+オブジェクトと識別子を相互に変換するクラスです。
 
-This, the default implementation, uses an object's local ObjectSpace
-id as its id. This means that an object's identification over drb
-remains valid only while that object instance remains alive within the
-server runtime.
+リモートオブジェクトは、URIと識別子で区別されます。
+リモートメソッド呼び出しは、リモートプロセスに識別子を
+送り、それを受け取ったプロセスでオブジェクトに変換することで実現されます。
 
-For alternative mechanisms,
-see [[c:DRb::TimerIdConv]] in [[lib:drb/timeridconv]]
-and DRbNameIdConv in sample/name.rb in the full drb distribution.
+このクラスはdRubyでデフォルトとして使われる
+のオブジェクト-識別子間の変換クラスです。
+この変換には [[c:ObjectSpace]] の機構が使われます。特に
+[[m:ObjectSpace.#_id2ref]] が使われています。
+これはリモートオブジェクト
+が有効なのはリモートプロセス内の対応オブジェクトが GC で回収されるまで
+であることを意味します。一方 GC アルゴリズムでのオブジェクトの到達性
+判定はローカルプロセス内でのみ行なわれる、という事実に注意する必要があります。
+これはリモートプロセスで参照されているオブジェクトがローカルプロセス内では
+参照が切れてしまい、GC されてしまう可能性があるということを意味します。
+つまりリモートに送るオブジェクトは適切にローカルからも参照を保持する必要がある
+ということを意味します。一方リモート側から参照されなくなった場合には
+ローカル側できちんと GC されるためには、ローカル側で適切に参照を切る
+必要もあります。
+
+
+別の仕組みとして、[[lib:drb/timeridconv]] で提供されている
+[[c:DRb::TimerIdConv]] クラスがあります。これを使うと、リモートに
+オブジェクトの参照が送られてから一定時間の間は、ローカルプロセス側
+の DRb::TimerIdConv で参照を保持しておくので、参照管理の
+簡略化ができます。
 
 == Instance Methods
 
---- to_id(obj)
-#@todo
+--- to_id(obj) -> Integer
 
-Convert an object into a reference id.
-This implementation returns the object's id in the local object
-space.
+オブジェクトを識別子に変換します。
 
---- to_obj(ref)
-#@todo
+--- to_obj(ref) -> Object
 
-Convert an object reference id to an object.
-This implementation looks up the reference id in the local object
-space and returns the object it refers to.
+識別子をオブジェクトに変換します。
 

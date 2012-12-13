@@ -1,46 +1,74 @@
 = class DRb::DRbUnknown < Object
 
-Class wrapping a marshalled object whose type is unknown locally.
+リモートプロセスからマーシャリングされて送られてきたオブジェクトで、
+そのクラスがローカルプロセス内では不明であるようなものを
+表すクラス。
 
-If an object is returned by a method invoked over drb, but the class
-of the object is unknown in the client namespace, or the object is a
-constant unknown in the client namespace, then the still-marshalled
-object is returned wrapped in a DRbUnknown instance.
+このクラスのインスタンス内部ではマーシャリングされたバイト列を
+保持しています。DRB 経由で他のプロセスにこのオブジェクトを渡すと、
+DRbUnknown オブジェクトではなくそのマーシャリングされたデータを
+渡します。
 
-If this object is passed as an argument to a method invoked over drb,
-then the wrapped object is passed instead.
+クラス名/定数名は [[m:DRb::DRbUnknown#name]] で取得することができます。
+[[m:DRb::DRbUnknown#buf]] で保持しているマーシャリングされた
+バイト列を得ることができます。
 
-The class or constant name of the object can be read from the name
-attribute. The marshalled object is held in the buf attribute.
+このクラスのインスタンスの使い道としては、オブジェクトの中継が考えられます。
+A, B, C と3つのプロセスがあって、drb によって A <-> B <-> C と通信している
+とします。ここで A と C では定義されているが B では定義されていない
+クラスがあったとしましょう。A から B にマーシャリングされて
+オブジェクトが渡されると、B ではそのクラスの素性がわからないため
+DRbUnknown オブジェクトとして表現されます。
+それを C に送ると、マーシャリングされたバイト列が C に送られ、
+C ではそれを元のオブジェクトに復元することができます。
+このように、中継プロセス B では中継するオブジェクトのクラスについて
+知らなくとも正しく動作します。
+
 
 == Class Methods
 
---- new(err, buf)
-#@todo
-
-Create a new DRbUnknown object.
-
-buf is a string containing a marshalled object that could not be
-unmarshalled. err is the error message that was raised when the
-unmarshalling failed. It is used to determine the name of the
-unmarshalled object.
+#@# このクラスのインスタンスは通常drb内で変換に失敗した場合に作られる
+#@# ものなので、ユーザは new を使わないはず。
+#@# --- new(err, buf)
+#@# #@todo
+#@# 
+#@# Create a new DRbUnknown object.
+#@# 
+#@# buf is a string containing a marshalled object that could not be
+#@# unmarshalled. err is the error message that was raised when the
+#@# unmarshalling failed. It is used to determine the name of the
+#@# unmarshalled object.
 
 == Instance Methods
 
---- exception()
-#@todo
+--- exception -> DRb::DRbUnknownError
+マーシャリングされたオブジェクトが元のオブジェクトに変換できなかった、
+ということを意味する例外オブジェクトを返します。
 
-Create a DRbUnknownError exception containing this object. 
+この例外オブジェクトの [[m:DRb::DRbUnknownError#unknown]] を
+呼び出すと、 self が返されます。
 
---- reload()
-#@todo
+--- reload -> object
+保持しているマーシャリングされたオブジェクトをRubyのオブジェクトに
+変換しようと試みます。
 
-Attempt to load the wrapped marshalled object again.
+DRbUnknown オブジェクトを受け取った後に対応するクラスが定義された場合、
+このメソッドでそのクラスのオブジェクトに変換できます。
+変換を試みて失敗した場合は DRbUnknown オブジェクトを返します。
 
-If the class of the object is now known locally, the object will be
-unmarshalled and returned. Otherwise, a new but identical DRbUnknown
-object will be returned.
+--- name -> String
+保持しているマーシャリングされたオブジェクトのクラスの名前を返します。
+
+--- buf -> String
+保持しているマーシャリングされたバイト列を返します。
 
 = class DRb::DRbUnknownError < DRb::DRbError
 
-An exception wrapping a [[c:DRb::DRbUnknown]] object
+[[c:DRb::DRbUnknown]] をラップする例外クラスです。
+
+@see [[m:DRb::DRbUnknown#exception]]
+
+== Instance Methods
+
+--- unknwon -> DRb::DRbUnknown
+ラップしているオブジェクトを返します。
