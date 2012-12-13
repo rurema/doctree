@@ -465,7 +465,7 @@ self の各成分を数 other で割った行列を返します。
 self の n 乗を返します。
 
 @param n べき数の指定
-
+@raise ExceptionForMatrix::ErrNotRegular n が 0 以下で、行列が正則でない場合に発生します
 #@if (version < "1.9.1")
 --- determinant -> Fixnum | Float
 --- det -> Fixnum | Float
