@@ -477,6 +477,7 @@ self が正方行列ではない場合は0を返します。
 @raise ExceptionForMatrix::ErrDimensionMismatch 正方行列でない場合に発生します
 #@end
 
+#@until 1.9.1
 ===== 注意
 
 要素に整数を含む場合、正しい答を返さないかも知れません。
@@ -484,6 +485,7 @@ self が正方行列ではない場合は0を返します。
  p Matrix[[2, 1], [-1, 2]].det #=> 6
  
  p Matrix[[2.0, 1.0], [-1.0, 2.0]].det #=> 5.0
+#@end
 
 #@since 1.9.1
 --- determinant_e -> Rational | Float
