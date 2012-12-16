@@ -14,8 +14,8 @@ dl/struct
 dl/types                        
 dl/win32
 dl/dl2                          sheepman
-drb                             ohai
-fiddle                          ohai
+drb                             ohai            done
+fiddle                          ohai            done
 mathn                           yugui
 matrix                          bornite
 psych
