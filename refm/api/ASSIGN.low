@@ -18,7 +18,7 @@ drb                             ohai            done
 fiddle                          ohai            done
 mathn                           yugui
 matrix                          bornite
-psych
+psych                           ohai
 racc/parser
 rexml/attlistdecl
 rexml/attribute
