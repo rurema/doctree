@@ -20,80 +20,89 @@ require psych/stream
 
 #@# 上記、libyaml が更新される事があれば、記述の変更をお願いします。
 
-=== Overview
+=== 概要
 
-Psych is a YAML parser and emitter.  Psych leverages
-libyaml[http://libyaml.org] for it's YAML parsing and emitting capabilities.
-In addition to wrapping libyaml, Psych also knows how to serialize and
-de-serialize most Ruby objects to and from the YAML format.
+Psych を用いると YAML のパースと出力ができます。
+これらの機能は libyaml ([[url:http://pyyaml.org/wiki/LibYAML]] を用いて
+実装されています。さらに Ruby の大半のオブジェクトと YAML フォーマットの
+データの間を相互に変換することができます。
 
-=== I NEED TO PARSE OR EMIT YAML RIGHT NOW!
+=== 基本的な使いかた
 
-  # Parse some YAML
+  require 'psych'
+  # YAML のテキストをパースする
   Psych.load("--- foo") # => "foo"
 
-  # Emit some YAML
+  # YAML のデータを出力
   Psych.dump("foo")     # => "--- foo\n...\n"
   { :a => 'b'}.to_yaml  # => "---\n:a: b\n"
 
-Got more time on your hands?  Keep on reading!
+基本的な使い方はこれだけです。簡単な用事は
+[[m:Psych.load]]、[[m:Psych.dump]] で片付きます。
 
-==== YAML Parsing
 
-Psych provides a range of interfaces for parsing a YAML document ranging from
-low level to high level, depending on your parsing needs.  At the lowest
-level, is an event based parser.  Mid level is access to the raw YAML AST,
-and at the highest level is the ability to unmarshal YAML to ruby objects.
+==== YAML のパース
 
-===== Low level parsing
+Psych は YAML ドキュメントのパースができます。
+ユーザの必要に応じ、高水準な API から低水準な API まで用意されています。
+最も低水準なものは、イベントベースな API です。中程度の水準のものとして
+YAML の AST(Abstract Syntax Tree)にアクセスする APIがあります。
+高水準な API では、YAML のドキュメントを Ruby のオブジェクトに変換する
+ことができます。
 
-The lowest level parser should be used when the YAML input is already known,
-and the developer does not want to pay the price of building an AST or
-automatic detection and conversion to ruby objects.  See Psych::Parser for
-more information on using the event based parser.
+===== 低水準 パース API
 
-===== Mid level parsing
+低水準のパース API は利用者が入力となる YAML ドキュメントについて
+すでに良く知っていて、AST を構築したり Ruby のオブジェクトに変換する
+のが無駄である場合に使います。この API については
+[[c:Psych::Parser]] を参照してください。イベントベースの API です。
 
-Psych provides access to an AST produced from parsing a YAML document.  This
-tree is built using the Psych::Parser and Psych::TreeBuilder.  The AST can
-be examined and manipulated freely.  Please see Psych::parse_stream,
-Psych::Nodes, and Psych::Nodes::Node for more information on dealing with
-YAML syntax trees.
+===== 中水準 パース API
 
-===== High level parsing
+Psych には YAML ドキュメントの AST にアクセスする API があります。
+この AST は [[c:Psych::Parser]] と [[c:Psych::TreeBuilder]] で構築します。
+[[m:Psych.parse_stream]]、[[c:Psych::Nodes]]、[[c:Psych::Nodes::Node]]
+などを経由して AST を解析したり操作したりできます。
 
-The high level YAML parser provided by Psych simply takes YAML as input and
-returns a Ruby data structure.  For information on using the high level parser
-see Psych.load
+===== 高水準 パース API
 
-==== YAML Emitting
+YAML ドキュメントをパースして Ruby のオブジェクトに変換することができます。
+詳しくは [[m:Psych.load]] を見てください。
 
-Psych provides a range of interfaces ranging from low to high level for
-producing YAML documents.  Very similar to the YAML parsing interfaces, Psych
-provides at the lowest level, an event based system, mid-level is building
-a YAML AST, and the highest level is converting a Ruby object straight to
-a YAML document.
 
-===== Low level emitting
+==== YAML ドキュメントの出力
 
-The lowest level emitter is an event based system.  Events are sent to a
-Psych::Emitter object.  That object knows how to convert the events to a YAML
-document.  This interface should be used when document format is known in
-advance or speed is a concern.  See Psych::Emitter for more information.
+Psych は YAML ドキュメントを出力する機能があります。
+高・中・底の三つの水準の API があります。
+低水準 API はイベントベースの API で、中水準のものは AST を構築する API、
+高水準の API は Ruby のオブジェクトを直接 YAML ドキュメントに変換する API
+です。これはパースの高・中・底水準 API と対応しています。
 
-===== Mid level emitting
 
-At the mid level is building an AST.  This AST is exactly the same as the AST
-used when parsing a YAML document.  Users can build an AST by hand and the
-AST knows how to emit itself as a YAML document.  See Psych::Nodes,
-Psych::Nodes::Node, and Psych::TreeBuilder for more information on building
-a YAML AST.
+===== 低水準出力 API
 
-===== High level emitting
+低水準出力 API はイベントベースな仕組みです。
+各イベントは [[c:Psych::Emitter]] オブジェクトに送られます。
+このオブジェクトには、
+各イベントをどのように YAML ドキュメントに変換するかをセットしておきます。
+この API は出力フォーマットがあらかじめわかっている場合や性能が重要な
+場合に利用します。
 
-The high level emitter has the easiest interface.  Psych simply takes a Ruby
-data structure and converts it to a YAML document.  See Psych.dump for more
-information on dumping a Ruby data structure.
+詳しくは [[c:Psych::Emitter]] を見てください。
+
+=====  中水準出力 API 
+
+中水準 API では、利用者が AST を構築し YAML ドキュメントに変換します。
+この AST は YAML ドキュメントをパースして得られるものと同じものです。
+詳しくは
+[[c:Psych::Nodes]]、[[c:Psych::Nodes::Node]]、[[c:Psych::TreeBuilder]]
+を参照してください。
+
+===== 高水準出力 API
+
+高水準 API を使うと Ruby のデータ構造(オブジェクト)を YAML のドキュメントに
+変換できます。
+詳しくは [[m:Psych.dump]] を参照してください。
 
 = module Psych
 
