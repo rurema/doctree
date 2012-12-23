@@ -111,75 +111,123 @@ Psych は YAML ドキュメントを出力する機能があります。
 == Constants
 
 --- VERSION -> String
-#@todo
-
-The version is Psych you're using
+Psych のバージョン。
 
 --- LIBYAML_VERSION -> String
-#@todo
-
-The version of libyaml Psych is using
+libyaml のバージョン。
 
 == Class Methods
 
-#@# psych.so より。
---- libyaml_version
-#@todo
+--- libyaml_version -> [Integer, Integer, Integer]
+libyaml のバージョンを返します。
 
-Returns the version of libyaml being used
+[major, minor patch-level] という 3 つの整数からなる配列を返します。
 
---- load(yaml) -> object
-#@todo
+@see [[m:Psych::LIBYAML_VERSION]]
 
-Load +yaml+ in to a Ruby data structure.  If multiple documents are
-provided, the object contained in the first document will be returned.
+--- load(yaml, filename = nil) -> object
+YAML ドキュメントを Ruby のデータ構造(オブジェクト)に変換します。
 
-Example:
+入力に複数のドキュメントが含まれている場合は、先頭のものを変換して
+返します。
 
+filename はパース中に発生した例外のメッセージに用います。
+
+
+@param yaml YAML ドキュメント(文字列 or IO オブジェクト)
+@param filename 例外メッセージのためのファイル名
+@raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+@see [[m:Psych.parse]]
+
+==== 例
   Psych.load("--- a")           # => 'a'
   Psych.load("---\n - a\n - b") # => ['a', 'b']
 
---- parse(yaml) -> object
-#@todo
+  begin
+    Psych.load("--- `", "file.txt")
+  rescue Psych::SyntaxError => ex
+    p ex.file    # => 'file.txt'
+    p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
+  end
 
-Parse a YAML string in +yaml+.  Returns the first object of a YAML AST.
+--- parse(yaml) -> Psych::Nodes::Document
+YAML ドキュメントをパースし、YAML の AST を返します。
 
-Example:
+入力に複数のドキュメントが含まれている場合は、先頭のものを AST に変換して
+返します。
+
+filename はパース中に発生した例外のメッセージに用います。
+
+AST については [[c:Psych::Nodes]] を参照してください。
+
+@param yaml YAML ドキュメント(文字列 or IO オブジェクト)
+@param filename 例外メッセージのためのファイル名
+@raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+@see [[m:Psych.load]]
+
+==== 例
 
   Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Sequence:0x00>
 
-[[c:Psych::Nodes]] for more information about YAML AST.
+  begin
+    Psych.parse("--- `", "file.txt")
+  rescue Psych::SyntaxError => ex
+    p ex.file    # => 'file.txt'
+    p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
+  end
 
---- parse_file(filename) -> object
-#@todo
+--- parse_file(filename) -> Psych::Nodes::Document
+filename で指定したファイルをパースして YAML の AST を返します。
 
-Parse a file at +filename+. Returns the YAML AST.
+@param filename パースするファイルの名前
+@raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 
 --- parser -> Psych::Parser
-#@todo
+デフォルトで使われるのパーサを返します。
 
-Returns a default parser
 
---- parse_stream(yaml)
-#@todo
+--- parse_stream(yaml) -> Psych::Nodes::Stream
+--- parse_stream(yaml){|node| ... } -> ()
 
-Parse a YAML string in +yaml+.  Returns the full AST for the YAML document.
-This method can handle multiple YAML documents contained in +yaml+.
+YAML ドキュメントをパースします。
+yaml が 複数の YAML ドキュメントを含む場合を取り扱うことができます。
 
-Example:
+ブロックなしの場合は YAML の AST (すべての YAML ドキュメントを
+保持した [[c:Psych::Nodes::Stream]] オブジェクト)を返します。
 
+ブロック付きの場合は、そのブロックに最初の YAML ドキュメント
+の Psych::Nodes::Document オブジェクトが渡されます。
+この場合の返り値には意味がありません。
+
+
+@see [[c:Psych::Nodes]]
+
+==== 例
   Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
 
-See Psych::Nodes for more information about YAML AST.
+--- dump(o, options = {}) -> String
+--- dump(o, io, options = {}) -> ()
+Ruby のオブジェクト o を YAML ドキュメントに変換します。
 
---- dump(o, io = nil, options = {})
+io に IO オブジェクトを指定した場合は、変換されたドキュメントが
+その IO に書き込まれます。
+指定しなかった場合は変換されたドキュメントが文字列としてメソッドの返り値と
+なります。
+
+options で出力に関するオプションを以下の指定できます。
+
 #@todo
+: :version
+: :header
+: :indentation
+: :canonical
+: :line_width
 
-Dump Ruby object +o+ to a YAML string.  Optional +options+ may be passed in
-to control the output format.  If an IO object is passed in, the YAML will
-be dumped to that IO object.
+@param o 変換するオブジェクト
+@param io 出力先
+@param options 出力オプション
 
-Example:
+==== 例
 
   # Dump an array, get back a YAML string
   Psych.dump(['a', 'b'])  # => "---\n- a\n- b\n"
@@ -193,35 +241,68 @@ Example:
   # Dump an array to an IO with indentation set
   Psych.dump(['a', ['b']], StringIO.new, :indentation => 3)
 
---- dump_stream(*objects)
-#@todo
+--- dump_stream(*objects) -> String
+オブジェクト列を YAML ドキュメント列に変換します。
 
-Dump a list of objects as separate documents to a document stream.
+@param objects 変換対象のオブジェクト列
 
-Example:
-
+==== 例
   Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
 
 --- to_json(o) -> String
-#@todo
+Ruby のオブジェクト o を JSON の文字列に変換します。
 
-Dump Ruby object +o+ to a JSON string.
+@param 変換対象となるオブジェクト
 
---- load_stream(yaml)
-#@todo
+--- load_stream(yaml, filename=nil) -> [object]
+--- load_stream(yaml, filename=nil){|obj| ... } -> ()
+複数の YAML ドキュメントを含むデータを
+Ruby のオブジェクトに変換します。
 
-Load multiple documents given in +yaml+.  Returns the parsed documents
-as a list.  For example:
+ブロックなしの場合はオブジェクトの配列を返します。
 
   Psych.load_stream("--- foo\n...\n--- bar\n...") # => ['foo', 'bar']
 
---- load_file(filename)
-#@todo
+ブロックありの場合は各オブジェクト引数としてそのブロックを呼び出します。
+  list = []
+  Psych.load_stream("--- foo\n...\n--- bar\n...") do |ruby|
+    list << ruby
+  end
+  list # => ['foo', 'bar']
 
-Load the document contained in +filename+.  Returns the yaml contained in
-+filename+ as a ruby object
+filename はパース中に発生した例外のメッセージに用います。
 
-#@# 以下のメソッドについては、stopdoc が指定されているため、省略。
+@param yaml YAML ドキュメント(文字列 or IO オブジェクト)
+@param filename 例外メッセージのためのファイル名
+@raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+
+--- load_file(filename) -> object
+filename で指定したファイルを YAML ドキュメントとして
+Ruby のオブジェクトに変換します。
+
+@param filename ファイル名
+@raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+
+--- load_documents(yaml) ->[object]
+--- load_documents(yaml){|obj| ... } -> ()
+複数の YAML ドキュメントを含むデータを
+Ruby のオブジェクトに変換します。
+このメソッドは deprecated です。[[m:Psych.load_stream]] を代わりに
+使ってください。
+
+@param yaml YAML ドキュメント(文字列 or IO オブジェクト)
+@raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+
+#@# Deprecated methods, no documents in psych lib
+#@# --- quick_emit
+#@# --- detect_implicit
+#@# --- add_ruby_type
+#@# --- add_private_type
+#@# --- tagurize
+#@# --- read_type_class
+#@# --- object_maker
+
+#@# For internal use, :nodoc:
 #@# --- add_domain_type(domain, type_tag, &block)
 #@# --- add_builtin_type(type_tag, &block)
 #@# --- remove_type(type_tag)
@@ -234,6 +315,10 @@ Load the document contained in +filename+.  Returns the yaml contained in
 #@# --- domain_types=(val)
 
 = class Psych::Exception < RuntimeError
+Psych 関連のエラーを表す例外です。
+
+= class Psych::BadAlias < Psych::Exception
+YAML の alias が不正である(本体が見つからない)というエラーを表す例外です。
 
 #@# 以降、psych.so より。
 = class Psych::Parser
