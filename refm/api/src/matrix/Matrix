@@ -1001,14 +1001,14 @@ D のそれぞれの対角成分が行列の固有値です。
 [[c:Matrix::LUPDecomposition]] は to_ary を定義しているため、
 多重代入によって3つの行列(下三角行列、上三角行列、置換行列)
 を得ることができます。これを [L, U, P] と書くと、
-L*U = self*P を満たします。
+L*U = P*self を満たします。
 
   a = Matrix[[1, 2], [3, 4]]
   l, u, p = a.lup
   l.lower_triangular? # => true
   u.upper_triangular? # => true
   p.permutation?      # => true
-  l * u == a * p      # => true
+  l * u == p * a      # => true
   a.lup.solve([2, 5]) # => Vector[(1/1), (1/2)]
 
 @see [[c:Matrix::LUPDecomposition]]
