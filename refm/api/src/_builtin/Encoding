@@ -199,7 +199,9 @@ ISO 2022-JP エンコーディングです。
 
 --- Shift_JIS -> Encoding
 --- SHIFT_JIS -> Encoding
+#@until 1.9.3
 --- SJIS -> Encoding
+#@end
 IANA Character Sets にある Shift_JIS のことです。
 
 基本的にはJIS X 0208:1997の付属書1にある「シフト符号化表現」のことですが、
@@ -991,6 +993,7 @@ WINDOWS-1258 エンコーディング。
 --- WINDOWS_31J -> Encoding
 #@since 1.9.3
 --- PCK -> Encoding
+--- SJIS -> Encoding
 #@end
 
 Windows-31J、Windows で用いられる、シフトJIS亜種で、CP932とも言います。
