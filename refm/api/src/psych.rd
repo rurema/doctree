@@ -252,7 +252,7 @@ options で出力に関するオプションを以下の指定できます。
 --- to_json(o) -> String
 Ruby のオブジェクト o を JSON の文字列に変換します。
 
-@param 変換対象となるオブジェクト
+@param o 変換対象となるオブジェクト
 
 --- load_stream(yaml, filename=nil) -> [object]
 --- load_stream(yaml, filename=nil){|obj| ... } -> ()
