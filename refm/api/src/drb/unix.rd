@@ -7,7 +7,7 @@ DRb のプロトコルとして UNIX ドメインソケット経由で通信す�
 
 [[m:DRb::DRbServer.new]] や [[m:DRb.#start_service]] が 
 "drbunix" スキームを受け入れるようになります。
-また、[[m:DRb::DrbObject.new_with_uri]] でも drbunix スキームが使えるようになります。
+また、[[m:DRb::DRbObject.new_with_uri]] でも drbunix スキームが使えるようになります。
 
 サーバを起動するときは以下のオプションが追加で利用できます。
 

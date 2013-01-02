@@ -8,7 +8,7 @@ DRb のプロトコルとして SSL/TLS 上で通信する drbssl が使える�
 
 [[m:DRb::DRbServer.new]] や [[m:DRb.#start_service]] が 
 "drbssl" スキームを受け入れるようになります。
-また、[[m:DRb::DrbObject.new_with_uri]] でも drbunix スキームが使えるようになります。
+また、[[m:DRb::DRbObject.new_with_uri]] でも drbunix スキームが使えるようになります。
 
 サーバを起動するときは以下のオプションが追加で利用できます。
 詳しくは、対応するメソッドや
