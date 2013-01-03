@@ -23,7 +23,7 @@ n 要素ずつブロックに渡して繰り返します。
 
 nil を返します。
 
-@arg n   区切る要素数を示す整数です。
+@param n   区切る要素数を示す整数です。
 
 例:
 
@@ -42,7 +42,7 @@ nil を返します。
 
 nil を返します。
 
-@arg n   区切る要素数を示す整数です。
+@param n   区切る要素数を示す整数です。
 
 例:
 
@@ -58,7 +58,7 @@ nil を返します。
 n 要素ずつ繰り返す Enumerator を返します。
 Enumerable::Enumerator.new(self, :each_slice, n) と同じです。
 
-@arg n   区切る要素数を示す整数です。
+@param n   区切る要素数を示す整数です。
 @see [[m:Enumerable#each_cons]]
 
 --- enum_cons(n) -> Enumerable::Enumerator
@@ -67,7 +67,7 @@ Enumerable::Enumerator.new(self, :each_slice, n) と同じです。
 
 Enumerable::Enumerator.new(self, :each_cons, n) を返します。
 
-@arg n   区切る要素数を示す整数です。
+@param n   区切る要素数を示す整数です。
 @see [[m:Enumerable#each_slice]]
 
 --- enum_with_index -> Enumerable::Enumerator

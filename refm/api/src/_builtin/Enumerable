@@ -121,7 +121,7 @@ self を返します。
 #@end
 
 #@since 1.8.0
-@arg ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
+@param ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
 例:
     # 最初の 3 の倍数を探す
@@ -133,7 +133,7 @@ self を返します。
     p [1, 2, 3, 4, 5].find(ifnone) {|i| i % 7 == 0 }
         # ArgumentError: item not found
 #@else
-@arg ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
+@param ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
     [1, 2, 3].find("raise") {|v| v > 4 }
         # => -:1: unhandled exception
@@ -234,7 +234,7 @@ self の次の要素を引数に順次ブロックを実行します。
 
 val と == の関係にある要素を含むとき真を返します。
 
-@arg val   任意のオブジェクト
+@param val   任意のオブジェクト
 
 --- max -> object | nil
 
@@ -555,7 +555,7 @@ enum_slice は 1.9.1 以降ではなくなっています。
 n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 #@end
 
-@arg n   区切る要素数を示す整数です。
+@param n   区切る要素数を示す整数です。
 
 例:
 
