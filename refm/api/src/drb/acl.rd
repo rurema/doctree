@@ -15,8 +15,7 @@ ACLのエントリーは、以下の例に示すように、
      :
 という文字列配列で表現されます。
 
-@see [[m:DRb.#install_acl]], [[m:DRb.#start_service]],
-     [[m:DRb::DRbServer.default_acl]], [[m:DRb::DRbServer.new]]
+@see [[m:DRb.#install_acl]], [[m:DRb.#start_service]], [[m:DRb::DRbServer.default_acl]], [[m:DRb::DRbServer.new]]
 
 === 例
 ACL を単独で用いる例。
