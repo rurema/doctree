@@ -1,11 +1,3 @@
-require psych/nodes/node
-require psych/nodes/stream
-require psych/nodes/document
-require psych/nodes/sequence
-require psych/nodes/scalar
-require psych/nodes/mapping
-require psych/nodes/alias
-
 = module Psych::Nodes
 
 When using Psych.load to deserialize a YAML document, the document is
@@ -70,3 +62,42 @@ Psych::Nodes::Mapping nodes:
 
 Psych::Nodes::Scalar and Psych::Nodes::Alias are both terminal nodes and
 should not have any children.
+
+= class Psych::Nodes::Node
+
+= class Psych::Nodes::Stream < Psych::Nodes::Node
+
+= class Psych::Nodes::Document < Psych::Nodes::Node
+
+= class Psych::Nodes::Sequence < Psych::Nodes::Node
+
+= class Psych::Nodes::Mapping < Psych::Nodes::Node
+
+= class Psych::Nodes::Scalar < Psych::Nodes::Node
+
+= class Psych::Nodes::Alias < Psych::Nodes::Node
+
+This class represents a {YAML Alias}[http://yaml.org/spec/1.1/#alias].
+It points to an +anchor+.
+
+A Psych::Nodes::Alias is a terminal node and may have no children.
+
+== Class Methods
+
+--- new(anchor) -> Psych::Nodes::Alias
+#@todo
+
+自身を初期化します。
+
+== Instance Methods
+
+--- anchor
+#@todo
+
+The anchor this alias links to
+
+--- anchor=(val)
+#@todo
+
+The anchor this alias links to
+

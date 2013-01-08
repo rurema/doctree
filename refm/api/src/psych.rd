@@ -1,6 +1,5 @@
 category FileFormat
 
-require psych/nodes
 require psych/streaming
 require psych/visitors
 require psych/tree_builder
@@ -320,3 +319,4 @@ YAML の alias が不正である(本体が見つからない)というエラー
 
 #@include(psych/Psych__Parser)
 #@include(psych/Psych__Handler)
+#@include(psych/Psych__Nodes)
