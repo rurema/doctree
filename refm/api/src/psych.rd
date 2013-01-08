@@ -3,7 +3,6 @@ category FileFormat
 require psych/streaming
 require psych/visitors
 require psych/tree_builder
-require psych/parser
 require psych/omap
 require psych/set
 require psych/coder
