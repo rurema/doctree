@@ -1,5 +1,3 @@
-require psych/handler
-
 = class Psych::TreeBuilder < Psych::Handler
 
 This class works in conjunction with Psych::Parser to build an in-memory

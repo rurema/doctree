@@ -262,7 +262,6 @@ psych
 psych/coder
 psych/core_ext
 psych/deprecated
-psych/handler
 psych/json
 psych/json/stream
 psych/json/tree_builder
@@ -275,7 +274,6 @@ psych/nodes/scalar
 psych/nodes/sequence
 psych/nodes/stream
 psych/omap
-psych/parser
 psych/scalar_scanner
 psych/set
 psych/stream

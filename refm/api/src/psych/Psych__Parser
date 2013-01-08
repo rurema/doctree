@@ -1,0 +1,114 @@
+= class Psych::Parser
+
+YAML のパーサ。
+
+このクラスは YAML ドキュメントをパースし、コンストラクタに渡された
+ハンドラにイベントを通知(呼び出し)します。
+このイベントを使って YAML の AST を構築したり YAML ドキュメントを
+別のフォーマット変換したりします。
+[[c:Psych::Emitter]] を使うとパースしたドキュメントを元通りに出力
+することもできます。
+
+[[c:Psych::Parser]] が生成するイベントは [[c:Psych::Handler]] 
+を見てください。
+
+以下の例では YAML ドキュメント に含まれているスカラー値を表示します。
+
+  # Handler for detecting scalar values
+  class ScalarHandler < Psych::Handler
+    def scalar value, anchor, tag, plain, quoted, style
+      puts value
+    end
+  end
+
+  parser = Psych::Parser.new(ScalarHandler.new)
+  parser.parse(yaml_document)
+
+次の例は [[c:Psych::Emitter]] にパースの結果を戻しています。
+STDIN からの入力をパース→YAMLフォーマットで STDERR に出力
+という流れになっています。
+
+  parser = Psych::Parser.new(Psych::Emitter.new($stderr))
+  parser.parse($stdin)
+
+[[c:Psych::Parser]] と [[c:Psych::TreeBuilder]] を組み合わせると
+YAML の AST を構築することができます。
+
+== Constants
+
+#@# --- ANY -> Integer
+--- UTF8 -> Integer
+UTF-8 エンコーディングを表します。
+
+@see [[m:Psych::Handler#start_stream]]
+
+--- UTF16LE -> Integer
+UTF-16LE エンコーディングを表します。
+
+@see [[m:Psych::Handler#start_stream]]
+
+--- UTF16BE -> Integer
+UTF-16BE エンコーディングを表します。
+
+@see [[m:Psych::Handler#start_stream]]
+
+== Class Methods
+
+--- new(handler = Handler.new) -> Psych::Parser
+新たなパーサオブジェクトを生成して返します。
+
+handler で YAML のイベントを処理するハンドラを指定します。
+詳しくは [[c:Psych::Parser]] を参照してください。
+
+@param handler YAML のイベントを処理するハンドラ
+
+== Instance Methods
+
+--- parse(yaml) -> self
+
+YAML ドキュメントをパースし、イベントハンドラに
+イベントを逐次通知します。
+
+@see [[c:Psych::Parser.new]], [[c:Psych::Handler], [[m:Psych::Parser#handler]]
+
+--- mark -> Psych::Parser::Mark
+#@todo
+
+Returns a Psych::Parser::Mark object that contains line, column, and index
+information.
+
+#@# This function have no effect
+#@# --- external_encoding=(encoding)
+
+--- handler -> Psych::Handler
+セットされているイベントハンドラを返します。
+
+@see [[m:Psych::Parser#handler=]]
+
+--- handler=(val)
+イベントハンドラをセットします。
+
+@param val セットするハンドラ
+@see [[m:Psych::Parser#handler=]]
+
+= class Psych::Parser::Mark < Struct
+
+== Instance Methods
+
+--- index
+#@todo
+
+--- index=(val)
+#@todo
+
+--- line
+#@todo
+
+--- line=(val)
+#@todo
+
+--- column
+#@todo
+
+--- column=(val)
+#@todo
