@@ -9,7 +9,6 @@ require psych/omap
 require psych/set
 require psych/coder
 require psych/core_ext
-require psych/deprecated
 require psych/json
 #@# 以下は autoload である事に注意。
 require psych/stream

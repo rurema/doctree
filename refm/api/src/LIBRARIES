@@ -261,7 +261,6 @@ pstore
 psych
 psych/coder
 psych/core_ext
-psych/deprecated
 psych/json
 psych/json/stream
 psych/json/tree_builder
