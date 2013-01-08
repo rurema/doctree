@@ -163,7 +163,7 @@ AST については [[c:Psych::Nodes]] を参照してください。
 
 ==== 例
 
-  Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Sequence:0x00>
+  Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
 
   begin
     Psych.parse("--- `", "file.txt")
