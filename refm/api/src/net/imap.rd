@@ -194,8 +194,12 @@ IMAP 接続を表現するクラスです。
 
 == Class Methods
 
---- new(host, port = 143, usessl = false, certs = nil, verify = false) -> Net::IMAP
+#@since 1.9.1
+--- new(host, port = 143, usessl = false, certs = nil, verify = true) -> Net::IMAP
 --- new(host, options) -> Net::IMAP
+#@else
+--- new(host, port = 143, usessl = false, certs = nil, verify = false) -> Net::IMAP
+#@end
 
 新たな Net::IMAP オブジェクトを生成し、指定したホストの
 指定したポートに接続し、接続語の IMAP オブジェクトを返します。
@@ -209,6 +213,7 @@ verify は接続先を検証するかを真偽値で設定します。
 真が [[m:OpenSSL::SSL::VERIFY_PEER]] に、
 偽が [[m:OpenSSL::SSL::VERIFY_NONE]] に対応します。
 
+#@since 1.9.1
 パラメータは Hash で渡すこともできます。以下のキーを使うことができます。
   * :port ポート番号
     省略時は SSL/TLS 使用時→993 不使用時→143 となります。
@@ -224,13 +229,16 @@ verify は接続先を検証するかを真偽値で設定します。
   imap = Net::IMAP.new('imap.example.com', :port => 993,
                        :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
                                  :timeout => 600 } )
+#@end
 
 @param host 接続するホスト名の文字列
 @param port 接続するポート番号
 @param usessl 真でSSL/TLSを使う
 @param certs 証明書のファイル名/ディレクトリ名の文字列
 @param verify 真で接続先を検証する
+#@since 1.9.1
 @param options 各種接続パラメータのハッシュ
+#@end
 
 --- debug -> bool
 
