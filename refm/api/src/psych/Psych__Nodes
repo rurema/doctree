@@ -1,20 +1,21 @@
 = module Psych::Nodes
 
-When using Psych.load to deserialize a YAML document, the document is
-translated to an intermediary AST.  That intermediary AST is then
-translated in to a Ruby object graph.
+Psych が中間データとして利用している AST (Abstract Syntax Tree) に
+関するモジュール。
 
-In the opposite direction, when using Psych.dump, the Ruby object graph is
-translated to an intermediary AST which is then converted to a YAML
-document.
+[[m:Psych.load]] によって YAML ドキュメントを Ruby オブジェクトに変換
+するときには、一度中間的な AST に変換され、その AST が Ruby の
+オブジェクトに変換されます。
 
-Psych::Nodes contains all of the classes that make up the nodes of a YAML
-AST.  You can manually build an AST and use one of the visitors (see
-Psych::Visitors) to convert that AST to either a YAML document or to a
-Ruby object graph.
+逆向き、つまり [[m:Psych.dump]] で Ruby のオブジェクトを
+YAML ドキュメントに変換するときには、中間的な AST に変換してから
+それを YAML ドキュメントに変換します。
 
-Here is an example of building an AST that represents a list with one
-scalar:
+YAML AST の各ノードのクラスはすべて Psych::Nodes の下にあります。
+AST を手作業で構築して、visitor を使って AST を YAML ドキュメントや
+Ruby のオブジェクトに変換したりすることができます。
+
+以下の例ではスカラを1つ持つリストの AST を構築しています。
 
   # Create our nodes
   stream = Psych::Nodes::Stream.new
@@ -27,77 +28,712 @@ scalar:
   doc.children    << seq
   seq.children    << scalar
 
-The stream is the root of the tree.  We can then convert the tree to YAML:
+stream は AST のルートです。以下のようにして AST を YAML ドキュメントに
+変換できます。
 
   stream.to_yaml => "---\n- foo\n"
 
-Or convert it to Ruby:
+Ruby のオブジェクトに変換するためには以下のようにします。
 
   stream.to_ruby => [["foo"]]
 
-=== YAML AST Requirements
+=== YAML AST 仕様
+正しい YAML AST は [[c:Psych::Nodes::Stream]] ノードが
+木のルートでなければなりません。Psych::Nodes::Stream ノードは
+1つ以上の [[c:Psych::Nodes::Document]] ノードを子として
+持っていなければなりません。
 
-A valid YAML AST *must* have one Psych::Nodes::Stream at the root.  A
-Psych::Nodes::Stream node must have 1 or more Psych::Nodes::Document nodes
-as children.
+Psych::Nodes::Document は子ノードをちょうど1個持っていなければなりません。
+子ノードは以下のいずれかでなければなりません。
+ * [[c:Psych::Nodes::Sequence]]
+ * [[c:Psych::Nodes::Mapping]]
+ * [[c:Psych::Nodes::Scalar]]
 
-Psych::Nodes::Document nodes must have one and *only* one child.  That child
-may be one of:
+[[c:Psych::Nodes::Sequence]] と [[c:Psych::Nodes::Mapping]] は複数の
+子ノードを持つことができます。Psych::Nodes::Mapping の子ノード数は
+偶数でなければなりません。
 
- * Psych::Nodes::Sequence
- * Psych::Nodes::Mapping
- * Psych::Nodes::Scalar
+Psych::Nodes::Sequence と Psych::Nodes::Mapping の子ノードとして有効な
+ものは以下のいずれかです。
+ * [[c:Psych::Nodes::Sequence]]
+ * [[c:Psych::Nodes::Mapping]]
+ * [[c:Psych::Nodes::Scalar]]
+ * [[c:Psych::Nodes::Alias]]
 
-Psych::Nodes::Sequence and Psych::Nodes::Mapping nodes may have many
-children, but Psych::Nodes::Mapping nodes should have an even number of
-children.
-
-All of these are valid children for Psych::Nodes::Sequence and
-Psych::Nodes::Mapping nodes:
-
- * Psych::Nodes::Sequence
- * Psych::Nodes::Mapping
- * Psych::Nodes::Scalar
- * Psych::Nodes::Alias
-
-Psych::Nodes::Scalar and Psych::Nodes::Alias are both terminal nodes and
-should not have any children.
+[[c:Psych::Nodes::Scalar]] と [[c:Psych::Nodes::Alias]] は子ノードを持つ
+ことができません。
 
 = class Psych::Nodes::Node
+include Enumerable
+
+YAML AST のノードを表す抽象クラスです。
+
+このクラスをインスタンス化することは不適切です。
+すべてのノードのクラスはこのクラスの派生クラスです。
+
+== Instance Methods
+--- children -> [Psych::Nodes::Node]
+子ノードの集合を配列で返します。
+
+--- tag -> String | nil
+ノードに付加されたタグを返します。
+
+タグが付加されていない場合は nil を返します。
+
+  ast = Psych.parse(<<EOS)
+  ----
+  - !!str a
+  - b
+  EOS
+  
+  p ast.root.children[0].value  # => "a"
+  p ast.root.children[0].tag    # => "tag:yaml.org,2002:str"
+  
+  p ast.root.children[1].value  # => "b"
+  p ast.root.children[1].tag    # => nil
+
+--- each -> Enumerator
+--- each{|node| ... } -> ()
+
+self のノードをルートとする部分木の各ノードを引数として
+ブロックを呼び出します。
+
+ブロックを省略した場合は上のような繰り返しをする [[c:Enumerator]]
+オブジェクトを返します。
+
+--- to_ruby -> object
+--- transform -> object
+
+AST を ruby のオブジェクトに変換します。
+
+--- yaml(io=nil, options={}) -> String | IO
+--- to_yaml(io=nil, options={}) -> String | IO
+
+AST を YAML ドキュメントに変換します。
+
+io に [[c:IO]] オブジェクトを指定した場合は、その
+オブジェクトに変換後のドキュメントが書き込まれます。
+この場合は io を返り値として返します。
+
+io を省略した(nil を指定した)場合には変換後のドキュメントを
+文字列で返します。
+
+[[c:Psych::Nodes::Stream]] 以外を変換しようとすると、AST として不正で
+あるためエラーが発生します。
+
+options には以下が指定できます。
+  * :indentation - インデントのレベルを 1 から 9 までの整数で指定します
+  * :canonical - 出力の style が canonical であるかどうかを真偽値で指定します。
+  * :line_width - 「好ましい」行幅を整数値で指定します
+@param io 書き込み先の IO
+@param options オプション
 
 = class Psych::Nodes::Stream < Psych::Nodes::Node
 
+YAML stream を表すクラス。
+
+YAML の AST のルートノードとなるオブジェクトのクラス。
+このノードの子ノードは1個以上でなければならず、また
+[[c:Psych::Nodes::Document]] オブジェクトでなければなりません。
+
+== Class Methods
+--- new(encoding = Psych::Nodes::Stream::UTF8) -> Psych::Nodes::Stream
+
+Psych::Nodes::Stream オブジェクトを生成して返します。
+
+encoding には stream に使われるエンコーディングを指定します。
+以下のいずれかを指定します。
+  * [[c:Psych::Nodes::Node::UTF8]]
+  * [[c:Psych::Nodes::Node::UTF16BE]]
+  * [[c:Psych::Nodes::Node::UTF16LE]]
+
+@param encoding エンコーディング
+
+== Instance Methods
+--- encoding -> Integer
+stream に使われるエンコーディングを返します。
+
+@see [[m:Psych::Nodes::Stream#encoding=]]
+
+--- encoding=(enc)
+stream に使われるエンコーディングを指定します。
+
+以下のいずれかを指定します。
+  * [[c:Psych::Nodes::Node::UTF8]]
+  * [[c:Psych::Nodes::Node::UTF16BE]]
+  * [[c:Psych::Nodes::Node::UTF16LE]]
+
+@see [[m:Psych::Nodes::Stream#encoding]]
+
+== Constants
+--- ANY -> Integer
+任意のエンコーディングを表す値。
+
+[[m:Psych::Parser::ANY]] と同じ値です。
+
+--- UTF8 -> Integer
+UTF8 エンコーディングを表します。
+
+[[m:Psych::Parser::UTF8]] と同じ値です。
+
+@see [[m:Psych::Nodes::Stream.new]]
+
+--- UTF16LE -> Integer
+UTF16LE エンコーディングを表します。
+
+[[m:Psych::Parser::UTF16LE]] と同じ値です。
+
+@see [[m:Psych::Nodes::Stream.new]]
+
+--- UTF16BE -> Integer
+UTF16BE エンコーディングを表します。
+
+[[m:Psych::Parser::UTF16BE]] と同じ値です。
+
+@see [[m:Psych::Nodes::Stream.new]]
+
 = class Psych::Nodes::Document < Psych::Nodes::Node
 
+YAML ドキュメントを表すクラスです。
+
+このノードは [[c:Psych::Nodes::Stream]] の子ノードでなければ
+なりません。このノードは1個の子ノードを持たなければなりません。
+またこの子ノードは以下のいずれかである必要があります。
+  * [[c:Psych::Nodes::Sequence]]
+  * [[c:Psych::Nodes::Mapping]]
+  * [[c:Psych::Nodes::Scalar]]
+この唯一の子ノードは「ルート」とも呼ばれ、[[c:Psych::Nodes::Document#root]] で
+アクセスすることができます。
+
+== Class Methods
+--- new(version=[], tag_directives=[], implicit=false) -> Psych::Nodes::Document
+
+Document オブジェクトを生成します。
+
+version にはドキュメントのバージョンを指定します。
+[major, minor] という配列で指定します。
+
+tag_directives には tag directive の配列を指定します。
+それぞれの tag は [prefix, suffix] という文字列の配列で
+表現します。
+
+implicit にはドキュメントが implicit に始まっているかどうかを
+真偽値で指定します。
+
+@param version YAML ドキュメントのバージョン
+@param tag_directives tag directive の配列
+@param implicit ドキュメントが implicit に始まっているかどうか
+
+==== 例
+以下の例では、YAML 1.1  のドキュメントで、
+tag directive を1つ持ち、 implicit にドキュメントが開始
+している Document オブジェクトを生成しています。
+
+  Psych::Nodes::Document.new(
+    [1,1],
+    [["!", "tag:tenderlovemaking.com,2009:"]],
+    true)
+
+@see [[m:Psych::Handler#start_document]]
+
+== Instance Methods
+--- version -> [Integer]
+YAML ドキュメントのバージョンを返します。
+
+@see [[m:Psych::Nodes::Document#version=]],
+     [[m:Psych::Nodes::Document.new]]
+
+--- version=(ver) 
+YAML ドキュメントのバージョンを設定します。
+
+@see [[m:Psych::Nodes::Document#version]],
+     [[m:Psych::Nodes::Document.new]]
+
+--- tag_directives -> [[String, String]]
+tag directive の配列を返します。
+
+@see [[m:Psych::Nodes::Document#tag_directives=]],
+     [[m:Psych::Nodes::Document.new]]
+
+--- tag_directives=(tags)
+tag directive の配列を設定します。
+
+@see [[m:Psych::Nodes::Document#tag_directives]],
+     [[m:Psych::Nodes::Document.new]]
+
+--- implicit -> boolean
+ドキュメントが implicit に始まっているかどうかを返します。
+
+@see [[m:Psych::Nodes::Document#implicit=]],
+     [[m:Psych::Nodes::Document.new]]
+
+--- implicit=(bool)
+ドキュメントが implicit に始まっているかどうかを設定します。
+
+@see [[m:Psych::Nodes::Document#implicit]],
+     [[m:Psych::Nodes::Document.new]]
+
+--- implicit_end -> boolean
+ドキュメントが implicit に終わっているかどうかを返します。
+
+オブジェクト生成時のデフォルト値は true です。
+
+@see [[m:Psych::Nodes::Document#implicit_end=]]
+
+--- implicit_end=(bool)
+ドキュメントが implicit に終わっているかどうかを設定します。
+
+@see [[m:Psych::Nodes::Document#implicit_end]]
+
+
+--- root -> Psych::Nodes::Node
+ルートノードを返します。
+
 = class Psych::Nodes::Sequence < Psych::Nodes::Node
+YAML sequence [[url:http://yaml.org/spec/1.1/#sequence/syntax]] を表すクラスです。
+
+YAML sequence とは基本的にはリスト、配列です。以下のような例が考えられます。
+  %YAML 1.1
+  ---
+  - I am
+  - a Sequence
+
+YAML sequence には anchor を付加することができます。
+この例では [[m:Psych::Nodes::Sequence#anchor]] は "A" を返します。
+  %YAML 1.1
+  ---
+  &A [
+    "This sequence",
+    "has an anchor"
+  ]
+
+
+tag を付けることもできます。この例では
+[[m:Psych::Nodes::Sequence#tag]] は "tag:yaml.org,2002:seq" 
+(!seq はこの tag の別名)を返します。
+  %YAML 1.1
+  ---
+  !!seq [
+    "This sequence",
+    "has a tag"
+  ]
+
+Psych::Nodes::Sequence は 0 個以上の子ノードを持つことができます。
+子ノードは以下のいずれかクラスのインスタンスでなければなりません。
+  * [[c:Psych::Nodes::Sequence]]
+  * [[c:Psych::Nodes::Mapping]]
+  * [[c:Psych::Nodes::Scalar]]
+  * [[c:Psych::Nodes::Alias]]
+
+== Class Methods
+--- new(anchor=nil, tag=nil, implicit=true, style=BLOCK) -> Psych::Nodes::Sequence
+
+新たな sequence オブジェクトを生成します。
+
+anchor には sequence に付加されている anchor を文字列で指定します。
+anchor を付けない場合には nil を指定します。
+
+tag には sequence に付加されている tag を文字列で指定します。
+tag を付けない場合には nil を指定します。
+
+implicit には sequence が implicit に開始されたかどうかを
+真偽値で指定します。
+
+style には YAML ドキュメント上の style を整数で指定します。以下のいずれ
+かを指定できます。
+  * [[m:Psych::Nodes::Sequence::ANY]]
+  * [[m:Psych::Nodes::Sequence::BLOCK]]
+  * [[m:Psych::Nodes::Sequence::FLOW]]
+
+@param anchor sequence に付加された anchor
+@param tag sequence に付加された tag
+@param implicit sequence が implicit に開始されたかどうか
+@param style YAML ドキュメント上の style
+
+== Instance Methodsp
+--- anchor -> String|nil
+sequence に付加された anchor を返します。
+
+@see [[m:Psych::Nodes::Sequence#anchor=]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+--- anchor=(a)
+sequence に付加する anchor を設定します。
+
+@see [[m:Psych::Nodes::Sequence#anchor]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+@param a 設定する anchor
+--- tag -> String|nil
+sequence に付加された tag を返します。
+
+@see [[m:Psych::Nodes::Sequence#tag=]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+--- tag=(t)
+sequence に付加する tag を設定します。
+
+@param t 設定する tag
+@see [[m:Psych::Nodes::Sequence#anchor=]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+--- implicit -> bool
+sequence が implicit に開始されたかどうかを真偽値で返します。
+
+@see [[m:Psych::Nodes::Sequence#implicit=]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+--- implicit=(bool)
+sequence が implicit に開始されたかどうかを真偽値で設定します。
+
+@param bool 設定値
+
+@see [[m:Psych::Nodes::Sequence#implicit]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+--- style -> Integer
+sequence の style を返します。
+
+@see [[m:Psych::Nodes::Sequence#style=]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+--- style=(sty)
+sequence の style を設定します。
+
+@param sty 設定する style 
+
+@see [[m:Psych::Nodes::Sequence#style]],
+     [[m:Psych::Nodes::Sequence.new]]
+
+== Constants
+--- ANY -> Integer
+「任意」のスタイルを意味します。
+
+emitter が適当に style を決めます。
+
+@see [[m:Psych::Nodes::Sequence.new]],
+     [[m:Psych::Nodes::Sequence#style]],
+     [[m:Psych::Handler#start_sequence]]
+
+--- BLOCK -> Integer
+block style を表します。
+
+@see [[m:Psych::Nodes::Sequence.new]],
+     [[m:Psych::Nodes::Sequence#style]],
+     [[m:Psych::Handler#start_sequence]]
+
+--- FLOW -> Integer
+flow style を表します。
+
+@see [[m:Psych::Nodes::Sequence.new]],
+     [[m:Psych::Nodes::Sequence#style]],
 
 = class Psych::Nodes::Mapping < Psych::Nodes::Node
 
+YAML の mapping [[url:http://yaml.org/spec/1.1/#mapping]] を表すクラスです。
+
+Psych::Nodes::Mapping は 0 個以上の子ノードを持つことができます。
+子ノードの個数は偶数でなければなりません。
+子ノードは以下のいずれかクラスのインスタンスでなければなりません。
+  * [[c:Psych::Nodes::Sequence]]
+  * [[c:Psych::Nodes::Mapping]]
+  * [[c:Psych::Nodes::Scalar]]
+  * [[c:Psych::Nodes::Alias]]
+
+子ノードは mapping のキーと値が交互に並んでいます。
+  ast = Psych.parse(<<EOS)
+  %YAML 1.1
+  ---
+  x: y
+  u: v
+  EOS
+  
+  p ast.root.children.map{|v| v.value } # => ["x", "y", "u", "v"]
+
+== Class Methods
+--- new(anchor=nil, tag=nil, implicit=true, style=BLOCK) -> Psych::Nodes::Mapping
+
+新たな mapping オブジェクトを生成します。
+
+anchor には mapping に付加されている anchor を文字列で指定します。
+anchor を付けない場合には nil を指定します。
+
+tag には mapping に付加されている tag を文字列で指定します。
+tag を付けない場合には nil を指定します。
+
+implicit には mapping が implicit に開始されたかどうかを
+真偽値で指定します。
+
+style には YAML ドキュメント上の style を整数で指定します。以下のいずれ
+かを指定できます。
+  * [[m:Psych::Nodes::Mapping::ANY]]
+  * [[m:Psych::Nodes::Mapping::BLOCK]]
+  * [[m:Psych::Nodes::Mapping::FLOW]]
+
+@param anchor mapping に付加された anchor
+@param tag mapping に付加された tag
+@param implicit mapping が implicit に開始されたかどうか
+@param style YAML ドキュメント上の style
+
+== Instance Methods
+--- anchor -> String|nil
+mapping に付加された anchor を返します。
+
+@see [[m:Psych::Nodes::Mapping#anchor=]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+--- anchor=(a)
+mapping に付加する anchor を設定します。
+
+@see [[m:Psych::Nodes::Mapping#anchor]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+@param a 設定する anchor
+--- tag -> String|nil
+mapping に付加された tag を返します。
+
+@see [[m:Psych::Nodes::Mapping#tag=]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+--- tag=(t)
+mapping に付加する tag を設定します。
+
+@param t 設定する tag
+@see [[m:Psych::Nodes::Mapping#anchor=]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+--- implicit -> bool
+mapping が implicit に開始されたかどうかを真偽値で返します。
+
+@see [[m:Psych::Nodes::Mapping#implicit=]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+--- implicit=(bool)
+mapping が implicit に開始されたかどうかを真偽値で設定します。
+
+@param bool 設定値
+
+@see [[m:Psych::Nodes::Mapping#implicit]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+--- style -> Integer
+mapping の style を返します。
+
+@see [[m:Psych::Nodes::Mapping#style=]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+--- style=(sty)
+mapping の style を設定します。
+
+@param sty 設定する style 
+
+@see [[m:Psych::Nodes::Mapping#style]],
+     [[m:Psych::Nodes::Mapping.new]]
+
+== Constants
+--- ANY -> Integer
+「任意」のスタイルを意味します。
+
+emitter が適当に style を決めます。
+
+@see [[m:Psych::Nodes::Mapping.new]],
+     [[m:Psych::Nodes::Mapping#style]],
+     [[m:Psych::Handler#start_mapping]]
+
+--- BLOCK -> Integer
+block style を表します。
+
+@see [[m:Psych::Nodes::Mapping.new]],
+     [[m:Psych::Nodes::Mapping#style]],
+     [[m:Psych::Handler#start_mapping]]
+
+--- FLOW -> Integer
+flow style を表します。
+
+@see [[m:Psych::Nodes::Mapping.new]],
+     [[m:Psych::Nodes::Mapping#style]],
+     [[m:Psych::Handler#start_mapping]]
+
 = class Psych::Nodes::Scalar < Psych::Nodes::Node
+YAML の scalar [[url:http://yaml.org/spec/1.1/#id858081]] を表すクラスです。
+
+これは AST の葉にあたるノードであり、子ノードを持ちません。
+
+== Class Methods
+--- new(value, anchor=nil, tag=nil, plain=true, quoted=false, style=ANY) -> Psych::Nodes:Scalar
+
+Scalar オブジェクトを生成します。
+
+value は scalar の値を文字列で指定します。
+
+anchor には scalar に付加されている anchor を文字列で指定します。
+anchor を付けない場合には nil を指定します。
+
+tag には scalar に付加されている tag を文字列で指定します。
+tag を付けない場合には nil を指定します。
+
+plain は plain style であるかどうか、quoted は quoted style であるかどうか
+を指定します。style には node の style を整数値で渡します。
+style は次の値のいずれかです。
+  * [[m:Psych::Nodes::Scalar::ANY]]
+  * [[m:Psych::Nodes::Scalar::PLAIN]]
+  * [[m:Psych::Nodes::Scalar::SINGLE_QUOTED]]
+  * [[m:Psych::Nodes::Scalar::DOUBLE_QUOTED]]
+  * [[m:Psych::Nodes::Scalar::LITERAL]]
+  * [[m:Psych::Nodes::Scalar::FOLDED]]
+
+== Instance Methods
+--- value -> String
+scalar の値を返します。
+
+@see [[m:Psych::Nodes::Scalar#value=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- value=(v)
+scalar の値を設定します。
+
+@param v 設定する値
+@see [[m:Psych::Nodes::Scalar#value]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- anchor -> String|nil
+scalar に付加された anchor を返します。
+
+@see [[m:Psych::Nodes::Scalar#anchor=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- anchor=(a) 
+scalar に付加された anchor を変更します。
+
+@param a 設定する anchor
+@see [[m:Psych::Nodes::Scalar#anchor]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- tag -> String|nil
+scalar に付加された tag を返します。
+
+@see [[m:Psych::Nodes::Scalar#tag=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- tag=(t)
+scalar に付加された tag を変更します。
+
+@param t 設定する tag
+@see [[m:Psych::Nodes::Scalar#tag]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- plain -> bool
+scalar が plain style であるかどうかを返します。
+
+
+@see [[m:Psych::Nodes::Scalar#plain=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- plain=(bool)
+scalar が plain style であるかどうかを変更します。
+
+@param bool 設定する真偽値
+@see [[m:Psych::Nodes::Scalar#plain]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- quoted -> bool
+scalar が quoted であるかどうかを返します。
+
+@see [[m:Psych::Nodes::Scalar#quoted=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- quoted=(bool)
+scalar が quoted であるかどうかを変更します。
+
+@param bool 設定する真偽値
+@see [[m:Psych::Nodes::Scalar#quoted]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- style -> Integer
+scalar の style を返します。
+
+@see [[m:Psych::Nodes::Scalar#style=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+--- style=(sty)
+scalar の style を変更します。
+
+@param sty 設定する style
+@see [[m:Psych::Nodes::Scalar#style=]],
+     [[m:Psych::Nodes::Scalar.new]]
+
+== Constants
+--- ANY -> Integer
+「任意」のスタイルを意味します。
+
+emitter が適当に style を決めます。
+
+@see [[m:Psych::Nodes::Scalar.new]],
+     [[m:Psych::Nodes::Scalar#style]],
+
+--- PLAIN -> Integer
+plain scalar style を表します。
+
+@see [[m:Psych::Nodes::Scalar.new]],
+     [[m:Psych::Nodes::Scalar#style]],
+     [[m:Psych::Handler#scalar]]
+
+--- SINGLE_QUOTED -> Integer
+single quoted style を表します。
+
+@see [[m:Psych::Nodes::Scalar.new]],
+     [[m:Psych::Nodes::Scalar#style]],
+     [[m:Psych::Handler#scalar]]
+
+--- DOUBLE_QUOTED -> Integer
+double quoted style を表します。
+
+@see [[m:Psych::Nodes::Scalar.new]],
+     [[m:Psych::Nodes::Scalar#style]],
+     [[m:Psych::Handler#scalar]]
+
+--- LITERAL -> Integer
+literal style を表します。
+
+@see [[m:Psych::Nodes::Scalar.new]],
+     [[m:Psych::Nodes::Scalar#style]],
+     [[m:Psych::Handler#scalar]]
+
+--- FOLDED -> Integer
+folded style を表します。
+
+@see [[m:Psych::Nodes::Scalar.new]],
+     [[m:Psych::Nodes::Scalar#style]],
+     [[m:Psych::Handler#scalar]]
 
 = class Psych::Nodes::Alias < Psych::Nodes::Node
 
-This class represents a {YAML Alias}[http://yaml.org/spec/1.1/#alias].
-It points to an +anchor+.
+YAML の alias [[url:http://yaml.org/spec/1.1/#alias]] を表すクラス。
 
-A Psych::Nodes::Alias is a terminal node and may have no children.
+anchor で別の YAML の要素を指します。
+
+alias は YAML の AST の葉のノードであり、子ノードを持ちません。
 
 == Class Methods
 
 --- new(anchor) -> Psych::Nodes::Alias
-#@todo
+新たな Alias オブジェクトを生成します。
 
-自身を初期化します。
+anchor で指す先の anchor を指定します。
+
+@param anchor 指す先の anchor
 
 == Instance Methods
 
---- anchor
-#@todo
+--- anchor -> String
+alias が指す先の anchor を返します。
 
-The anchor this alias links to
-
+@see [[m:Psych::Nodes::Alias#anchor=]],
+     [[m:Psych::Nodes::Alias.new]],
 --- anchor=(val)
-#@todo
+alias が指す先の anchor を変更します。
 
-The anchor this alias links to
+@param val 設定する anchor 
+@see [[m:Psych::Nodes::Alias#anchor]],
+     [[m:Psych::Nodes::Alias.new]],
 
