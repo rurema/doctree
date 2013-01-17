@@ -19,7 +19,7 @@ require psych/stream
 === 概要
 
 Psych を用いると YAML のパースと出力ができます。
-これらの機能は libyaml ([[url:http://pyyaml.org/wiki/LibYAML]] を用いて
+これらの機能は libyaml [[url:http://pyyaml.org/wiki/LibYAML]] を用いて
 実装されています。さらに Ruby の大半のオブジェクトと YAML フォーマットの
 データの間を相互に変換することができます。
 

@@ -350,7 +350,7 @@ style には YAML ドキュメント上の style を整数で指定します。�
 @param implicit sequence が implicit に開始されたかどうか
 @param style YAML ドキュメント上の style
 
-== Instance Methodsp
+== Instance Methods
 --- anchor -> String|nil
 sequence に付加された anchor を返します。
 
