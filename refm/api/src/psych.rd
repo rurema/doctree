@@ -309,6 +309,12 @@ Psych 関連のエラーを表す例外です。
 = class Psych::BadAlias < Psych::Exception
 YAML の alias が不正である(本体が見つからない)というエラーを表す例外です。
 
+= class Psych::Set < Hash
+YAML の unordered set を表すクラスです。
+
+= class Psych::Omap < Hash
+YAML の ordered mapping を表すクラスです。
+
 #@include(psych/Psych__Parser)
 #@include(psych/Psych__Handler)
 #@include(psych/Psych__TreeBuilder)
