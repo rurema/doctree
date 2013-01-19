@@ -1,33 +1,77 @@
-[[c:Class]]、[[c:Module]]、[[c:Kernel]] といった基本的なクラスを拡張す
-るためのサブライブラリです。
-
-[注意] [[m:Object.psych_to_yaml]] などのメソッドは [[lib:syck]] が先に
-読み込まれていた場合のために定義されています。[[lib:syck]] の廃止と共に
-使用できなくなる予定ですので、psych_ のない方を利用してください。
 
 = reopen Object
 
 == Class Methods
+ 
+--- yaml_tag(tag) -> ()
+クラスと tag の間を関連付けます。
 
---- yaml_tag(url)
-#@todo
+これによって tag 付けされた YAML ドキュメントを Ruby のオブジェクトに
+変換したりその逆をしたりすることができます。
 
+@param tag 対象のクラスに関連付けるタグの文字列
+
+==== Example
+  require 'psych'
+  
+  class Foo
+    def initialize(x)
+      @x = x
+    end
+  
+    attr_reader :x
+  end
+  
+  p Psych.dump(Foo.new(3)) 
+  # =>
+  # --- !ruby/object:Foo
+  # x: 3
+  
+  Foo.yaml_as("tag:example.com,2013:foo")
+  Psych.dump(Foo.new(3), STDOUT)
+  # =>
+  # --- !<tag:example.com,2013:foo>
+  # x: 3 
+  p Psych.load(<<EOS)
+  --- !<tag:example.com,2012:foo>
+  x: 8
+  EOS
+  # => #<Foo:0x0000000130f48 @x=8>
+
+   
+ 
+== Instance Method
 --- to_yaml(options = {}) -> String
 --- psych_to_yaml(options = {}) -> String
-#@todo
+オブジェクトを YAML document に変換します。
 
-Convert an object to YAML.  See [[m:Psych.dump]] for more information
-on the available options.
+options でオプションを指定できます。
+[[m:Psych.dump]] と同じなので詳しくはそちらを参照してください。
 
+[[lib:syck]] に to_yaml メソッドがあるため、
+psych_to_yaml が別名として定義されています。将来的に
+syck が廃止された場合  psych_to_yaml は廃止
+される予定であるため、特別の事情がない限り to_yaml を用いてください。
+
+@param options 出力オプション
 @see [[m:Psych.dump]]
 
 = reopen Module
 
 == Instance Methods
 
---- yaml_as(url)
---- psych_yaml_as(url)
-#@todo
+--- yaml_as(tag) -> ()
+--- psych_yaml_as(tag) -> ()
+
+クラスと tag の間を関連付けます。
+
+これによって tag 付けされた YAML ドキュメントを Ruby のオブジェクトに
+変換したりその逆をしたりすることができます。
+
+この method は deprecated です。 [[m:Object.yaml_tag]] を
+かわりに使ってください。
+
+@param tag 対象のクラスに関連付けるタグの文字列
 
 = reopen Kernel
 
@@ -35,4 +79,14 @@ on the available options.
 
 --- y(*objects) -> String
 --- psych_y(*objects) -> String
-#@todo
+objects を YAML document に変換します。
+
+このメソッドは irb 上でのみ定義されます。
+
+[[lib:syck]] に y メソッドがあるため、
+psych_y が別名として定義されています。将来的に
+syck が廃止された場合  psych_y は廃止
+される予定であるため、特別の事情がない限り y を用いてください。
+
+@param objects YAML document に変換する Ruby のオブジェクト
+

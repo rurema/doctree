@@ -6,7 +6,6 @@ require psych/tree_builder
 require psych/omap
 require psych/set
 require psych/coder
-require psych/core_ext
 require psych/json
 #@# 以下は autoload である事に注意。
 require psych/stream
@@ -319,3 +318,4 @@ YAML の alias が不正である(本体が見つからない)というエラー
 #@include(psych/Psych__Parser)
 #@include(psych/Psych__Handler)
 #@include(psych/Psych__Nodes)
+#@include(psych/core_ext.rd)

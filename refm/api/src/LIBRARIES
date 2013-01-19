@@ -260,7 +260,6 @@ pstore
 #@since 1.9.2
 psych
 psych/coder
-psych/core_ext
 psych/json
 psych/json/stream
 psych/json/tree_builder
