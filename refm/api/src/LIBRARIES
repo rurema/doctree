@@ -268,7 +268,6 @@ psych/scalar_scanner
 psych/set
 psych/stream
 psych/streaming
-psych/tree_builder
 psych/visitors
 psych/visitors/depth_first
 psych/visitors/emitter

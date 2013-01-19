@@ -1,0 +1,23 @@
+= class Psych::TreeBuilder < Psych::Handler
+
+[[c:Psych::Parser]] に渡して YAML ドキュメントを YAML AST に変換する
+クラスです。
+
+=== Example
+
+  parser = Psych::Parser.new Psych::TreeBuilder.new
+  parser.parse('--- foo')
+  parser.handler.root # => #<Psych::Nodes::Stream:0x00000001400000 ... >
+  
+== Class Methods
+
+--- new -> Psych::TreeBuilder
+TreeBuilder オブジェクトをを生成します。
+
+== Instance Methods
+
+--- root -> Psych::Nodes::Stream
+
+AST の root を返します。
+
+@see [[c:Psych::Nodes::Stream]]
