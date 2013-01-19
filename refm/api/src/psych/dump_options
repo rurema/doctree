@@ -1,0 +1,11 @@
+: :version
+  YAML document に付加するバージョンを [major, minor] という配列、
+  もしくは文字列で指定します
+: :header
+  出力にヘッダを付けるかどうかを真偽値で指定します
+: :indentation
+  インデントのレベルを 1 から 9 までの整数で指定します
+: :canonical
+  出力の style が canonical であるかどうかを真偽値で指定します
+: :line_width
+  「好ましい」行幅を整数値で指定します

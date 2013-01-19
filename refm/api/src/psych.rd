@@ -210,12 +210,7 @@ io に IO オブジェクトを指定した場合は、変換されたドキュ�
 
 options で出力に関するオプションを以下の指定できます。
 
-#@todo
-: :version
-: :header
-: :indentation
-: :canonical
-: :line_width
+#@include(psych/dump_options)
 
 @param o 変換するオブジェクト
 @param io 出力先
