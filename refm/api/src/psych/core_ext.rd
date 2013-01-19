@@ -22,16 +22,21 @@
     attr_reader :x
   end
   
+  # Dumps Ruby object normally  
   p Psych.dump(Foo.new(3)) 
   # =>
   # --- !ruby/object:Foo
   # x: 3
   
+  # Registers tag with class Foo
   Foo.yaml_as("tag:example.com,2013:foo")
+  # ... and dumps the object of Foo class
   Psych.dump(Foo.new(3), STDOUT)
   # =>
   # --- !<tag:example.com,2013:foo>
   # x: 3 
+  
+  # Loads the object from the tagged YAML node
   p Psych.load(<<EOS)
   --- !<tag:example.com,2012:foo>
   x: 8
