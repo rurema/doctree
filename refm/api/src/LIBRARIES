@@ -266,13 +266,6 @@ psych/json/tree_builder
 psych/scalar_scanner
 psych/stream
 psych/streaming
-psych/visitors
-psych/visitors/depth_first
-psych/visitors/emitter
-psych/visitors/json_tree
-psych/visitors/to_ruby
-psych/visitors/visitor
-psych/visitors/yaml_tree
 #@end
 pty
 #@since 1.8.0

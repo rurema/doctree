@@ -1,7 +1,6 @@
 category FileFormat
 
 require psych/streaming
-require psych/visitors
 require psych/coder
 require psych/json
 #@# 以下は autoload である事に注意。
@@ -317,4 +316,5 @@ YAML の ordered mapping を表すクラスです。
 #@include(psych/Psych__Handler)
 #@include(psych/Psych__TreeBuilder)
 #@include(psych/Psych__Nodes)
+#@include(psych/Psych__Visitors)
 #@include(psych/core_ext.rd)
