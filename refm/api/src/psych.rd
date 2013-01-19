@@ -2,8 +2,6 @@ category FileFormat
 
 require psych/streaming
 require psych/visitors
-require psych/omap
-require psych/set
 require psych/coder
 require psych/json
 #@# 以下は autoload である事に注意。

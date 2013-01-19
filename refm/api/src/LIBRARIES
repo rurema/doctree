@@ -263,9 +263,7 @@ psych/coder
 psych/json
 psych/json/stream
 psych/json/tree_builder
-psych/omap
 psych/scalar_scanner
-psych/set
 psych/stream
 psych/streaming
 psych/visitors
