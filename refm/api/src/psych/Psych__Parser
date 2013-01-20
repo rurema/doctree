@@ -72,10 +72,9 @@ YAML ドキュメントをパースし、イベントハンドラに
 @see [[c:Psych::Parser.new]], [[c:Psych::Handler], [[m:Psych::Parser#handler]]
 
 --- mark -> Psych::Parser::Mark
-#@todo
 
-Returns a Psych::Parser::Mark object that contains line, column, and index
-information.
+パーサが現在読み込んでいる入力上の位置を [[c:Psych::Parser::Mark]] オブジェクト
+で返します。
 
 #@# This function have no effect
 #@# --- external_encoding=(encoding)
@@ -93,22 +92,15 @@ information.
 
 = class Psych::Parser::Mark < Struct
 
+YAML document の位置を表現するクラスです。
+
 == Instance Methods
 
---- index
-#@todo
+--- index -> Integer
+先頭からの文字数。
 
---- index=(val)
-#@todo
+--- line -> Integer
+先頭からの行数。
 
---- line
-#@todo
-
---- line=(val)
-#@todo
-
---- column
-#@todo
-
---- column=(val)
-#@todo
+--- column -> Integer
+行の先頭からの文字数。
