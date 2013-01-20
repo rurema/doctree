@@ -264,8 +264,6 @@ psych/json
 psych/json/stream
 psych/json/tree_builder
 psych/scalar_scanner
-psych/stream
-psych/streaming
 #@end
 pty
 #@since 1.8.0

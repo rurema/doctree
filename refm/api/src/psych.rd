@@ -1,10 +1,8 @@
 category FileFormat
 
-require psych/streaming
 require psych/coder
 require psych/json
 #@# 以下は autoload である事に注意。
-require psych/stream
 
 [[lib:yaml]] のバックエンドライブラリです。libyaml ベースで作成されてお
 り、YAML バージョン 1.1 を扱う事ができます。
@@ -317,4 +315,5 @@ YAML の ordered mapping を表すクラスです。
 #@include(psych/Psych__TreeBuilder)
 #@include(psych/Psych__Nodes)
 #@include(psych/Psych__Visitors)
+#@include(psych/Psych__Stream)
 #@include(psych/core_ext.rd)
