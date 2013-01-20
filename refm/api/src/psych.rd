@@ -316,4 +316,5 @@ YAML の ordered mapping を表すクラスです。
 #@include(psych/Psych__Nodes)
 #@include(psych/Psych__Visitors)
 #@include(psych/Psych__Stream)
+#@include(psych/Psych__ScalarScanner)
 #@include(psych/core_ext.rd)

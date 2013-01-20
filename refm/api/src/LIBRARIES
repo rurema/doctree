@@ -263,7 +263,6 @@ psych/coder
 psych/json
 psych/json/stream
 psych/json/tree_builder
-psych/scalar_scanner
 #@end
 pty
 #@since 1.8.0
