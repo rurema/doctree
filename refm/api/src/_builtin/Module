@@ -848,15 +848,15 @@ alias との違いは以下の通りです。
 include を Ruby で書くと以下のように定義できます。
 
   def include(*modules)
-    modules.each {|mod|
-      # append_features はプライベートメソッドなので
-      # 直接 mod.append_features(self) とは書けない
+    modules.reverse_each do |mod|
+      # append_features や included はプライベートメソッドなので
+      # 直接 mod.append_features(self) などとは書けない
       mod.__send__(:append_features, self)
-#@since 1.8.0
       mod.__send__(:included, self)
-#@end
-    }
+    end
   end
+
+@see [[m:Module#included]]
 
 --- attr(name, assignable = false) -> nil
 
@@ -991,30 +991,37 @@ val をセットします。val を返します。
   end
   Foo.new.bar    # => :foo
 
---- extend_object(module) -> Module
+--- extend_object(obj) -> object
 
 [[m:Object#extend]] の実体です。オブジェクトにモジュールの機能を追加します。
 
 [[m:Object#extend]] は、Ruby で書くと以下のように定義できます。
 
   def extend(*modules)
-    modules.each {|mod| mod.__send__ :extend_object, self }
+    modules.reverse_each do |mod|
+      # extend_object や extended はプライベートメソッドなので
+      # 直接 mod.extend_object(self) などとは書けない
+      mod.__send__(:extend_object, self)
+      mod.__send__(:extended, self)
+    end
   end
 
 extend_object のデフォルトの実装では、self に定義されて
-いるメソッドを object の特異メソッドとして追加します。
+いるインスタンスメソッドを obj の特異メソッドとして追加します。
 
-@param module [[c:Enumerable]] など [[c:Module]] クラスのインスタンスを指定します。
+@param obj self の機能を追加するオブジェクトを指定します。
 
-@return module で指定されたモジュールを返します。
+@return obj で指定されたオブジェクトを返します。
+
+@see [[m:Module#extended]]
 
 #@since 1.8.0
---- extended(class_or_module) -> ()
+--- extended(obj) -> ()
 
 self が他のオブジェクト に [[m:Object#extend]] されたときに
 呼ばれます。引数には extend を行ったオブジェクトが渡されます。
 
-@param class_or_module [[m:Object#extend]] を行ったオブジェクト
+@param obj [[m:Object#extend]] を行ったオブジェクト
 
   module Foo
     def self.extended(mod)
@@ -1025,6 +1032,9 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
   Object.new.extend Foo
 
   # => "#<Object:0x401cbc3c> extend Foo"
+
+@see [[m:Module#extend_object]]
+
 #@end
 
 --- include(*mod) -> self
@@ -1110,6 +1120,8 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
   end
   # => "Bar include Foo"
 #@end
+
+@see [[m:Module#append_features]]
 
 --- method_added(name) -> ()
 
