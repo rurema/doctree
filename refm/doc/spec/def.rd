@@ -57,10 +57,15 @@ rescue/ensure 節を指定し、例外処理ができます。
 インスタンスです)。
 
 クラスが既に定義されているとき、さらに同じクラス名でクラス定義を書くとク
-ラスの定義の追加になります。ただし、元のクラスと異なるスーパークラスを
+ラスの定義の追加になります。
+#@since 1.8.2
+ただし、元のクラスと異なるスーパークラスを指定すると TypeError が発生します。
+#@else
+ただし、元のクラスと異なるスーパークラスを
 明示的に指定して定義すると、元のクラスとは異なる新たなクラスを同名で定
 義することになります。このとき、クラス名の定数を上書きすることになるの
 で警告メッセージが出ます。
+#@end
 
         class Foo < Array
           def foo
@@ -73,10 +78,17 @@ rescue/ensure 節を指定し、例外処理ができます。
           end
         end
 
+#@since 1.8.2
+        # 間違ったスーパークラスを指定するとエラー
+        class Foo < String
+        end
+        # => superclass mismatch for class Foo (TypeError)
+#@else
         # 別のクラスを定義(スーパークラスが異なるので)
         class Foo < String
         end
         # => warning: already initialized constant Foo
+#@end
 
 クラス定義式の中は self がそのクラスであることと、
 [[ref:limit]]のデフォルトが異なること以外
