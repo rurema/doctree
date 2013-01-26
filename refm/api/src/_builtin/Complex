@@ -240,9 +240,12 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 "(1+1i)", "(1-1i)" のような文字列を返します。
 
+#@until 2.0.0
 --- marshal_dump -> Array
 
 [[m:Complex#marshal_load]] で復元可能な配列を返します。
+
+[注意] このメソッドは 2.0 で private メソッドに変更されました。
 
 @see [[m:Complex#marshal_load]]
 
@@ -255,7 +258,11 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 @raise ArgumentError 配列の要素数が 2 以外であった場合に発生します。
 
+[注意] このメソッドは 2.0 で Complex::compatible#marshal_load に移動さ
+れました。
+
 @see [[m:Complex#marshal_dump]]
+#@end
 
 --- numerator -> Complex
 
@@ -393,6 +400,22 @@ self を返します。
   Complex.polar(2.0)            # => (2.0+0.0i)
   Complex.polar(2.0, 0)         # => (2.0+0.0i)
   Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
+
+#@since 2.0.0
+== Private Instance Methods
+
+--- marshal_dump -> Array
+
+[[m:Marshal.#load]] のためのメソッドです。
+Complex::compatible#marshal_load で復元可能な配列を返します。
+
+2.0 以降では [[m:Marshal.#load]] で 1.8 系の [[c:Complex]] オブジェクト
+を保存した文字列も復元できます。
+
+[注意] Complex::compatible は通常の方法では参照する事ができません。
+
+#@# #6625 を参照。
+#@end
 
 == Constants
 

@@ -377,9 +377,12 @@ precision を指定した場合は指定した桁数の数値と、上述の性�
 
 @see [[m:Rational#to_s]]
 
+#@until 2.0.0
 --- marshal_dump -> Array
 
 [[m:Rational#marshal_load]] で復元可能な配列を返します。
+
+[注意] このメソッドは 2.0 で private メソッドに変更されました。
 
 @see [[m:Rational#marshal_load]]
 
@@ -392,7 +395,11 @@ precision を指定した場合は指定した桁数の数値と、上述の性�
 
 @raise ArgumentError 配列の要素数が 2 以外であった場合に発生します。
 
+[注意] このメソッドは 2.0 で Rational::compatible#marshal_load に移動さ
+れました。
+
 @see [[m:Rational#marshal_dump]]
+#@end
 
 --- numerator -> Integer
 
@@ -564,3 +571,17 @@ precision を指定した場合は指定した桁数で切り捨てた整数か
 [[m:Kernel.#Rational]] の本体です。
 
 @see [[m:Kernel.#Rational]]
+
+#@since 2.0.0
+--- marshal_dump -> Array
+
+[[m:Marshal.#load]] のためのメソッドです。
+Rational::compatible#marshal_load で復元可能な配列を返します。
+
+2.0 以降では [[m:Marshal.#load]] で 1.8 系の [[c:Rational]] オブジェク
+トを保存した文字列も復元できます。
+
+[注意] Rational::compatible は通常の方法では参照する事ができません。
+
+#@# #6625 を参照。
+#@end
