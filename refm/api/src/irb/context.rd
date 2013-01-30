@@ -191,18 +191,23 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 irb がデバッグモード([[m:IRB::Context#debug_level]] が 1 以上)で動作し
 ているかどうかを返します。
 
+#@since 2.0.0
+デフォルト値は false です。
+#@else
 デフォルト値は true です。
+#@end
 
 @see [[m:IRB::Context#debug_level]], [[m:IRB::Context#debug_level=]]
-
-#@# TODO: 2.0 以降のデフォルト値は false になると思われるため、対応後に
-#@# 分岐する。
 
 --- debug_level -> Integer
 
 irb のデバッグレベルを返します。
 
+#@since 2.0.0
+デフォルト値は 0 です。
+#@else
 デフォルト値は 1 です。
+#@end
 
 @see [[m:IRB::Context#debug_level=]], [[m:IRB::Context#debug?]]
 
@@ -210,10 +215,10 @@ irb のデバッグレベルを返します。
 
 irb のデバッグレベルを val に設定します。
 
-#@# TODO: #6301 の対応後、早ければ 2.0 から分岐を行う。
-#@# (IRB::Context#debug_level のデフォルト値も同様)
-#@# .irbrc ファイル中で IRB.conf[:DEBUG_LEVEL] を設定する事でも同様の操作
-#@# が行えます。
+#@since 2.0.0
+.irbrc ファイル中で IRB.conf[:DEBUG_LEVEL] を設定する事でも同様の操作
+が行えます。
+#@end
 
 @see [[m:IRB::Context#debug_level]], [[m:IRB::Context#debug?]]
 
