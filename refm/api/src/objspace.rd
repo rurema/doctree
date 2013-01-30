@@ -124,3 +124,45 @@ rb_data_type_struct に格納された名前が使用されます。
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
 本メソッドは C Ruby 以外では動作しません。
+
+#@since 2.0.0
+--- reachable_objects_from(obj) -> Array | nil
+
+obj から到達可能なすべてのオブジェクトを返します。マーク不能なオブジェ
+クトを指定した場合は nil を返します。本メソッドを使う事でメモリリークの
+調査が行えます。
+
+  # 配列クラス(Array)と 'a'、'b'、'c' に到達可能。
+  ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
+  # => [Array, 'a', 'b', 'c']
+
+obj が 2 つ以上の同じオブジェクト x への参照を持つ場合、戻り値に含まれ
+るオブジェクト x は 1 つだけです。
+
+  # 配列クラス(Array)と v に到達可能。
+  ObjectSpace.reachable_objects_from([v = 'a', v, v])
+  # => [Array, 'a']
+
+  # 配列クラス(Array)と 3 つの異なる 'a' オブジェクトに到達可能。
+  ObjectSpace.reachable_objects_from(['a', 'a', 'a'])
+  # => [Array, 'a', 'a', 'a']
+
+obj にマーク不能なオブジェクト(true、false、nil、[[c:Symbol]]、
+[[c:Fixnum]]、Flonum(即値の [[c:Float]] オブジェクト))を指定した場合は
+nil を返します。
+
+  # 1 はマーク不能
+  ObjectSpace.reachable_objects_from(1)
+  # => nil
+
+obj が内部でオブジェクトへの参照を持つ場合、
+ObjectSpace::InternalObjectWrapper オブジェクトが戻り値に含まれます。こ
+のオブジェクトは obj が内部で持っているオブジェクトを持ちます。内部のオ
+ブジェクトの型を確認する場合は ObjectSpace::InternalObjectWrapper#type
+を参照してください。:T_CLASS のような [[c:Symbol]] を返します。
+
+obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合、そ
+のオブジェクトから参照される全てのオブジェクトを返します。
+
+本メソッドは C Ruby 以外では動作しません。
+#@end
