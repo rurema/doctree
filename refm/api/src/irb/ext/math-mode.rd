@@ -19,7 +19,7 @@ conf.math_mode か IRB.conf[:MATH_MODE] に true を設定する事で使用で�
 
 math_mode が有効かどうかを返します。
 
-@see [[m:IRB::Context#inspect?]]
+@see [[m:IRB::Context#math_mode=]], [[m:IRB::Context#inspect?]]
 
 --- math_mode=(opt)
 
@@ -27,6 +27,9 @@ math_mode を有効にするかどうかを指定します。
 
 .irbrc ファイル中で IRB.conf[:MATH_MODE] を設定する事でも同様の事が行え
 ます。
+
+[[lib:mathn]] ライブラリを include するため、math_mode を有効にした後は
+無効にする事ができません。
 
 @param opt math_mode を有効にする場合に true を指定します。
 
@@ -37,6 +40,8 @@ math_mode を有効にするかどうかを指定します。
 @raise IRB::CantReturnToNormalMode 既に math_mode の状態で opt に
                                    false を指定した場合に発生します。
 #@end
+
+@see [[m:IRB::Context#math_mode]]
 
 --- inspect? -> bool
 
