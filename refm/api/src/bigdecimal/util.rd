@@ -97,13 +97,19 @@ BigDecimal オブジェクトに変換する機能を提供します。
 
 == Instance Methods
 
+#@since 2.0.0
+--- to_d(nFig)     -> BigDecimal
+#@else
 --- to_d(nFig = 0) -> BigDecimal
+#@end
 
 自身を [[c:BigDecimal]] に変換します。
 
 nFig 桁まで計算を行います。
 #@since 1.9.3
+#@until 2.0.0
 引数を省略したり 0 を指定する使い方は非推奨です。将来削除されます。
+#@end
 #@else
 引数を省略したり 0 以下を指定した場合は [[m:BigDecimal.double_fig]] *
 2 + 1 桁まで計算を行います。
@@ -114,7 +120,11 @@ nFig 桁まで計算を行います。
 @return [[c:BigDecimal]] に変換したオブジェクト
 
 #@since 1.9.3
+#@since 2.0.0
+@raise ArgumentError nFig に 0 以下を指定した場合に発生します。
+#@else
 @raise ArgumentError nFig に負の数を指定した場合に発生します。
+#@end
 #@end
 
 例:

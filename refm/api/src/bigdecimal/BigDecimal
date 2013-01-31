@@ -402,7 +402,6 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 == Instance Methods
 
 #@since 1.9.3
-#@# #+ だけが 1.9.3 から BigDecimal のみを返す理由は #7176 を参照。
 --- +(other) -> BigDecimal
 #@else
 --- +(other) -> BigDecimal | Float
@@ -418,35 +417,55 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 
 計算結果の精度については[[ref:lib:bigdecimal#precision]]を参照してください。
 
+#@since 1.9.3
+--- -(other) -> BigDecimal
+#@else
 --- -(other) -> BigDecimal | Float
+#@end
 
 差を計算します。
 
 @param other self から引く数を指定します。
+#@until 1.9.3
              [[c:Float]] オブジェクトを指定した場合、[[c:Float]] オブジェ
              クトを返します。
+#@end
 
 計算結果の精度については[[ref:lib:bigdecimal#precision]]を参照してください。
 
+#@since 1.9.3
+--- *(other) -> BigDecimal
+#@else
 --- *(other) -> BigDecimal | Float
+#@end
 
 積を計算します。
 
 @param other self に掛ける数を指定します。
+#@until 1.9.3
              [[c:Float]] オブジェクトを指定した場合、[[c:Float]] オブジェ
              クトを返します。
+#@end
 
 計算結果の精度については[[ref:lib:bigdecimal#precision]]を参照してください。
 
+#@since 1.9.3
+--- div(other) -> BigDecimal
+--- quo(other) -> BigDecimal
+--- /(other)   -> BigDecimal
+#@else
 --- div(other) -> BigDecimal | Float
 --- quo(other) -> BigDecimal | Float
 --- /(other)   -> BigDecimal | Float
+#@end
 
 商を計算します。
 
 @param other self を割る数を指定します。
+#@until 1.9.3
              [[c:Float]] オブジェクトを指定した場合、[[c:Float]] オブジェ
              クトを返します。
+#@end
 
 詳細は [[m:Float#quo]] を参照して下さい。
 
@@ -475,7 +494,11 @@ self + other を最大で n 桁まで計算します。計算結果の精度が 
 
 @see [[m:BigDecimal#+]]
 
+#@since 1.9.3
+--- sub(other, n) -> BigDecimal
+#@else
 --- sub(other, n) -> BigDecimal | Float
+#@end
 
 差を計算します。
 
@@ -494,7 +517,11 @@ self - other を最大で n 桁まで計算します。計算結果の精度が 
 
 @see [[m:BigDecimal#-]]
 
+#@since 1.9.3
+--- mult(other, n) -> BigDecimal
+#@else
 --- mult(other, n) -> BigDecimal | Float
+#@end
 
 積を計算します。
 
@@ -513,7 +540,11 @@ self * other を最大で n 桁まで計算します。計算結果の精度が 
 
 @see [[m:BigDecimal#*]]
 
+#@since 1.9.3
+--- div(other, n) -> BigDecimal
+#@else
 --- div(other, n) -> BigDecimal | Float
+#@end
 
 商を計算します。
 
