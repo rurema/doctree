@@ -284,7 +284,18 @@ ifnoneを省略した Hash.new は {} と同じです。
 
 self を返します。
 
+#@since 2.0.0
+@see [[m:Object#to_hash]], [[m:Hash#to_h]]
+#@else
 @see [[m:Object#to_hash]]
+#@end
+
+#@since 2.0.0
+--- to_h -> self | Hash
+
+self を返します。[[c:Hash]] クラスのサブクラスから呼び出した場合は
+self を [[c:Hash]] オブジェクトに変換します。
+#@end
 
 --- length -> Integer
 --- size -> Integer

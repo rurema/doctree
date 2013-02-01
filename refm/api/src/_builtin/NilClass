@@ -81,3 +81,9 @@ other が真なら true を, 偽なら false を返します。
   nil.rationalize(0.1) # => (0/1)
 
 #@end
+
+#@since 2.0.0
+--- to_h -> {}
+
+{} を返します。
+#@end

@@ -238,3 +238,12 @@ true を返します。そうでない場合に false を返します。
   dog.name = "john"
   p dog.hash                    #=> -38913223
 
+#@since 2.0.0
+--- to_h -> Hash
+
+self のメンバ名([[c:Symbol]])と値の組を [[c:Hash]] にして返します。
+
+  Customer = Struct.new(:name, :address, :zip)
+  Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
+  # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#@end
