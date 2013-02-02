@@ -106,4 +106,69 @@ GC のプロファイル情報をフォーマットし、文字列として返�
 --- total_time -> Float
 GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
 #@end
+
+#@since 2.0.0
+--- raw_data -> [Hash, ...] | nil
+
+GC のプロファイル情報を GC の発生ごとに [[c:Hash]] の配列
+(:GC_INVOKE_TIME が早いもの順)で返します。[[c:GC::Profiler]] が有効になっ
+ていない場合は nil を返します。
+
+例:
+
+  GC::Profiler.enable
+  GC.start
+  GC::Profiler.raw_data
+  # => [
+    {
+       :GC_TIME=>1.3000000000000858e-05,
+       :GC_INVOKE_TIME=>0.010634999999999999,
+       :HEAP_USE_SIZE=>289640,
+       :HEAP_TOTAL_SIZE=>588960,
+       :HEAP_TOTAL_OBJECTS=>14724,
+       :GC_IS_MARKED=>false
+    },
+    # ...
+  ]
+
+各項目の意味を以下に示します。
+
+: :GC_TIME
+
+  GC の処理時間(秒)
+
+: :GC_INVOKE_TIME
+
+  Ruby が起動してから GC が起動するまでに経過した時間(秒)
+
+: :HEAP_USE_SIZE
+
+  ヒープ内での使用サイズ(バイト)
+
+: :HEAP_TOTAL_SIZE
+
+  ヒープ全体のサイズ(バイト)
+
+: :HEAP_TOTAL_OBJECTS
+
+  ヒープ内に存在するオブジェクトの個数
+
+: :GC_IS_MARKED
+
+  GC がマークフェイズかどうか
+
+また、GC_PROFILE_MORE_DETAIL を有効にして Ruby をビルドした場合、以下の
+キーも参照できます。
+
+ * :GC_MARK_TIME
+ * :GC_SWEEP_TIME
+ * :ALLOCATE_INCREASE
+ * :ALLOCATE_LIMIT
+ * :HEAP_USE_SLOTS
+ * :HEAP_LIVE_OBJECTS
+ * :HEAP_FREE_OBJECTS
+ * :HAVE_FINALIZE
+
+@see [[m:GC::Profiler.report]], [[m:GC::Profiler.result]]
+#@end
 #@end
