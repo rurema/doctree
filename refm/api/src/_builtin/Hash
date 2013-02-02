@@ -648,6 +648,10 @@ Proc の場合([[m:Hash#default_proc]])でも上書きされます。
 引数には to_proc で [[c:Proc]] オブジェクトに変換できる
 オブジェクトも受け付けます。
 
+#@since 2.0.0
+nil を指定した場合は現在の [[m:Hash#default_proc]] をクリアします。
+#@end
+
 @param pr デフォルト値を返す手続きオブジェクト
 @see [[m:Hash#default_proc]], [[m:Hash#default]]
 
