@@ -160,6 +160,12 @@ case hold なファイルシステムの場合、FNM_CASEFOLD の値になり、
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 #@end
 
+#@since 2.0.0
+--- FNM_EXTGLOB -> Integer
+{} 内のコンマで区切られた文字列の組合せにマッチするようになります。
+[[m:File.fnmatch]] で使用します。
+#@end
+
 #@since 1.9.3
 --- NULL -> String
 NULLデバイスのファイル名です。

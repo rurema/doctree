@@ -216,8 +216,15 @@ dir_string を渡した場合はそのディレクトリを基準とします。
 ファイル名のパターンマッチ [[man:fnmatch(3)]] を行います。
 path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
 
-@param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
-               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
+#@since 2.0.0
+@param pattern パターンを文字列で指定します。ワイルドカードとして `*',
+               `?', `[]', `{}' が使用できます。
+               [[m:Dir.glob]] とは違って `**/' は使用できません。
+#@else
+@param pattern パターンを文字列で指定します。ワイルドカードとして `*',
+               `?', `[]' が使用できます。
+               [[m:Dir.glob]] とは違って`{}' や `**/' は使用できません。
+#@end
 //emlist{
     %w(foo foobar bar).each {|f|
       p File.fnmatch("foo*", f)
@@ -282,6 +289,20 @@ path が pattern にマッチすれば真を返します。そうでない場合
   p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
   p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
 //}
+
+#@since 2.0.0
+: FNM_EXTGLOB
+ {} 内のコンマで区切られた文字列の組合せにマッチするようになります。
+ 例えば、foo{a,b,c} は fooa, foob, fooc に展開されそれぞれに対してマッ
+ チ判定を行います。
+
+ 括弧は入れ子にすることができます。例えば、 {foo,bar{foo,bar}} は foo,
+ barfoo, barbar のそれぞれにマッチします。
+//emlist{
+  p File.fnmatch('foo{a,b,c}', 'fooa', File::FNM_EXTGLOB)           # => true
+  p File.fnmatch('{foo,bar{foo,bar}}', 'barfoo', File::FNM_EXTGLOB) # => true
+//}
+#@end
 
 --- ftype(filename)    -> String
 
