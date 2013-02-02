@@ -212,10 +212,10 @@ self の内容を人間に読みやすい文字列にして返します。
 
 --- ==(other)    -> bool
 
-自身と other のクラスが同じであり、各メンバが == メソッドで比較して等しい場合に
+self と other のクラスが同じであり、各メンバが == メソッドで比較して等しい場合に
 true を返します。そうでない場合に false を返します。
 
-@param other 自身と比較したいオブジェクトを指定します。
+@param other self と比較したいオブジェクトを指定します。
 
   Dog = Struct.new(:name, :age)
   dog1 = Dog.new("fred", 5)
@@ -229,10 +229,10 @@ true を返します。そうでない場合に false を返します。
 
 --- eql?(other)    -> bool
 
-自身と other のクラスが同じであり、各メンバが eql? メソッドで比較して等しい場合に
+self と other のクラスが同じであり、各メンバが eql? メソッドで比較して等しい場合に
 true を返します。そうでない場合に false を返します。
 
-@param other 自身と比較したいオブジェクトを指定します。
+@param other self と比較したいオブジェクトを指定します。
 
   Dog = Struct.new(:name, :age)
   dog1 = Dog.new("fred", 5)
@@ -254,8 +254,8 @@ true を返します。そうでない場合に false を返します。
 
 --- hash    -> Integer
 
-自身が保持するメンバのハッシュ値を元にして算出した整数を返します。
-自身が保持するメンバの値が変化すればこのメソッドが返す値も変化します。
+self が保持するメンバのハッシュ値を元にして算出した整数を返します。
+self が保持するメンバの値が変化すればこのメソッドが返す値も変化します。
 
   Dog = Struct.new(:name, :age)
   dog = Dog.new("fred", 5)
