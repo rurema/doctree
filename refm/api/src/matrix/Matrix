@@ -747,7 +747,13 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- hermitian? -> bool
+#@since 2.0.0
 行列がエルミートならば真を返します。
+#@else
+行列がエルミートならば真を返します。
+対角成分をチェックしないバグがあり、エルミートでないのに真を返す場合があります。
+2.0.0 で修正されました。
+#@end
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
