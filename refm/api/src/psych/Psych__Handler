@@ -254,6 +254,34 @@ YAML ドキュメントを再構築するようなハンドラです。
   parser = Psych::Parser.new(Psych::Emitter.new($stderr))
   parser.parse($stdin)
 
+また、以下のようにイベントを手動で発生させることで
+YAML ドキュメントを構築させることもできます。
+各メソッドの意味については [[c:Psych::Handler]] を参照してください。
+  require 'psych'
+  require 'stringio'
+  
+  output = StringIO.new
+  emitter = Psych::Emitter.new(output)
+  
+  emitter.start_stream(Psych::Parser::UTF8)
+  emitter.start_document([1, 1], [], false)
+  emitter.start_mapping(nil, nil, false, Psych::Nodes::Mapping::BLOCK)
+  emitter.scalar("a", nil, nil, true, false, Psych::Nodes::Scalar::PLAIN)
+  emitter.scalar("12", nil, nil, true, false, Psych::Nodes::Scalar::PLAIN)
+  emitter.scalar("xyz", nil, nil, true, false, Psych::Nodes::Scalar::PLAIN)
+  emitter.scalar("23", nil, nil, false, true, Psych::Nodes::Scalar::SINGLE_QUOTED)
+  emitter.end_mapping
+  emitter.end_document(false)
+  emitter.end_stream
+  
+  puts output.string
+  # =>
+  # %YAML 1.1
+  # ---
+  # a: 12
+  # xyz: '23'
+  # ...
+
 == Class Methods
 
 --- new(io) -> Psych::Emitter
