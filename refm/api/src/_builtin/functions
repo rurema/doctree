@@ -2611,3 +2611,40 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 @see [[c:Rational]]
 
 #@end
+
+#@since 2.0.0
+--- Hash(arg) -> Hash
+
+引数 arg で指定したオブジェクトを to_hash メソッドを呼び出す事で
+[[c:Hash]] オブジェクトに変換します。nil か [] を指定した場合は空の
+[[c:Hash]] オブジェクトを返します。
+
+@param arg 変換対象のオブジェクトを指定します。
+
+  Hash([])          # => {}
+  Hash(nil)         # => nil
+  Hash(key: :value) # => {:key => :value}
+  Hash([1, 2, 3])   # => TypeError
+
+@raise TypeError 変換できないオブジェクトを指定した場合に発生します。
+
+--- __dir__ -> String | nil
+
+現在のソースファイル(__FILE__)のあるディレクトリ名を正規化された絶対パ
+スで返します。シンボリックリンクも解決されます。また、__FILE__ が nil
+の場合は nil を返します。
+
+--- caller_locations(start = 1, length = nil) -> [Thread::Backtrace::Location] | nil
+--- caller_locations(range)                   -> [Thread::Backtrace::Location] | nil
+
+現在のスタックを [[c:Thread::Backtrace::Location]] の配列で返します。引
+数で指定した値が範囲外の場合は nil を返します。
+
+@param start 開始スタックの位置を数値で指定します。
+
+@param length 取得するスタックの個数を指定します。
+
+@param range  取得したいスタックの範囲を示す [[c:Range]] オブジェクトを指定します。
+
+@see [[c:Thread::Backtrace::Location]]
+#@end
