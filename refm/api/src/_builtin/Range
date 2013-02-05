@@ -333,7 +333,7 @@ find-any モードは [[man:bsearch(3)]] のように動作します。大小判
 
 @see [[m:Array#bsearch]]
 
---- size -> Integer | nil
+--- size -> Integer | Float::INFINITY | nil
 
 範囲内の要素数を返します。始端、終端のいずれかのオブジェクトが
 [[c:Numeric]] のサブクラスのオブジェクトではない場合には nil を返します。
