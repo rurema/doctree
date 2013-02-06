@@ -1210,18 +1210,32 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 
 @see [[m:Kernel.#caller]]
 
---- caller(level_num = 1) -> [String] | nil
+#@since 2.0.0
+--- caller(start = 1, length = nil) -> [String] | nil
+--- caller(range)                   -> [String] | nil
+#@else
+--- caller(start = 1) -> [String] | nil
+#@end
 
-level_num 段上の呼び出し元の情報を [[m:$@]]
+start 段上の呼び出し元の情報を [[m:$@]]
 の形式のバックトレース(文字列の配列)として返します。
 
 トップレベルでは空の配列を返します。caller の戻り値を [[m:$@]] に代入することで
 例外の発生位置を設定できます。
 
-指定した level_num 段上が存在しない場合は nil を返します。
+引数で指定した値が範囲外の場合は nil を返します。
 
-@param level_num long の範囲を超えない正の整数でスタックレベルを指定します。
+@param start long の範囲を超えない正の整数でスタックレベルを指定します。
+#@since 2.0.0
+@param length 取得するスタックの個数を指定します。
+
+@param range 取得したいスタックの範囲を示す [[c:Range]] オブジェクトを指定します。
+
+@see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]],
+     [[m:Kernel.#caller_locations]]
+#@else
 @see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]]
+#@end
 
     def foo
       p caller(0)
@@ -2654,5 +2668,5 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 @param range  取得したいスタックの範囲を示す [[c:Range]] オブジェクトを指定します。
 
-@see [[c:Thread::Backtrace::Location]]
+@see [[c:Thread::Backtrace::Location]], [[m:Kernel.#caller]]
 #@end
