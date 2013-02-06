@@ -1595,7 +1595,11 @@ to_s メソッドにより文字列に変換してから出力します。
 @see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
 #@since 1.8.0
+#@since 2.0.0
+--- warn(*message) -> nil
+#@else
 --- warn(message) -> nil
+#@end
 
 message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]] 
 フラグ が nil のときは何も出力しません。
@@ -1606,7 +1610,11 @@ to_s メソッドにより文字列に変換してから出力します。
 このメソッドは以下と同じです。
   $stderr.print message, "\n" unless $VERBOSE.nil?
 
-@param message 出力するオブジェクトです。
+#@since 2.0.0
+@param message 出力するオブジェクトを任意個指定します。
+#@else
+@param message 出力するオブジェクトを指定します。
+#@end
 @raise IOError 標準エラー出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
