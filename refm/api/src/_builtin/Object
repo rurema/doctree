@@ -1320,7 +1320,11 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
 @see [[m:Module#instance_method]],[[c:Method]],[[m:Object#__send__]],[[m:Kernel.#eval]]
 
+#@since 2.0.0
+--- respond_to?(name, include_all = false) -> bool
+#@else
 --- respond_to?(name, include_private = false) -> bool
+#@end
 
 オブジェクトがメソッド name を持つとき真を返します。
 
@@ -1329,9 +1333,15 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
 @param name [[c:Symbol]] または文字列で指定するメソッド名です。
 
+#@since 2.0.0
+@param include_all private メソッドと protected メソッドを確認の対象に
+                   含めるかを true か false で指定します。省略した場合
+                   は false(含めない) を指定した事になります。
+#@else
 @param include_private private メソッドを確認の対象に含めるかを true か
                        false で指定します。省略した場合は false(含めな
                        い) を指定した事になります。
+#@end
 
   class F
     def hello
