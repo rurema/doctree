@@ -585,10 +585,11 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
---- read(path, options = Hash.new) -> [Array]
---- readlines(path, options = Hash.new) -> [Array]
+--- read(path, options = Hash.new) -> [Array] | CSV::Table
+--- readlines(path, options = Hash.new) -> [Array] | CSV::Table
 
 CSV ファイルを配列の配列にするために使います。
+headers オプションに偽でない値を指定した場合は [[c:CSV::Table]] オブジェクトを返します。
 
 #@# 例を追加する
 
@@ -599,9 +600,9 @@ CSV ファイルを配列の配列にするために使います。
                入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
                必ず指定しなければなりません。
 
-@see [[m:CSV.new]]
+@see [[m:CSV.new]], [[m:CSV.table]]
 
---- table(path, options = Hash.new) -> Array
+--- table(path, options = Hash.new) -> CSV::Table | [Array]
 
 以下の例と同等のことを行うメソッドです。
 日本語の CSV ファイルを扱う場合はあまり使いません。
@@ -615,6 +616,8 @@ CSV ファイルを配列の配列にするために使います。
 @param path ファイル名を指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+
+@see [[m:CSV.read]]
 
 == Instance Methods
 
@@ -812,10 +815,11 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 @see [[m:CSV.new]]
 
---- read -> [Array]
---- readlines -> [Array]
+--- read -> [Array] | CSV::Table
+--- readlines -> [Array] | CSV::Table
 
 残りの行を読み込んで配列の配列を返します。
+self の生成時に headers オプションに偽でない値が指定されていた場合は [[c:CSV::Table]] オブジェクトを返します。
 
 データソースは読み込み用にオープンされている必要があります。
 
