@@ -568,8 +568,18 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@since 1.8.8
 --- to_enum(method = :each, *args) -> Enumerator
 --- enum_for(method = :each, *args) -> Enumerator
+#@since 2.0.0
+--- to_enum(method = :each, *args) {|*args| ... }  -> Enumerator
+--- enum_for(method = :each, *args) {|*args| ... } -> Enumerator
+#@end
 
 [[m:Enumerator.new]](self, method, *args) を返します。
+
+#@since 2.0.0
+ブロックを指定した場合は [[m:Enumerator#size]] がブロックの評価結果を返
+します。ブロックパラメータは引数 args です。
+#@end
+
 #@else
 --- to_enum(method = :each, *args) -> Enumerable::Enumerator
 --- enum_for(method = :each, *args) -> Enumerable::Enumerator
@@ -595,7 +605,38 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@end
 
 #@since 1.8.8
+#@since 2.0.0
+例(ブロックを指定する場合):
+
+  module Enumerable
+    def repeat(n)
+      raise ArgumentError, "#{n} is negative!" if n < 0
+      unless block_given?
+        # __method__ はここでは :repeat
+        return to_enum(__method__, n) do
+	  # size メソッドが nil でなければ size * n を返す。
+          sz = size
+          sz * n if sz
+        end
+      end
+      each do |*val|
+        n.times { yield *val }
+      end
+    end
+  end
+
+  %i[hello world].repeat(2) { |w| puts w }
+  # => 'hello', 'hello', 'world', 'world'
+  enum = (1..14).repeat(3)
+  # => #<Enumerator: 1..14:repeat(3)>
+  enum.first(4) # => [1, 1, 1, 2]
+  enum.size # => 42
+
+@see [[c:Enumerator]], [[m:Enumerator#size]]
+#@else
 @see [[c:Enumerator]]
+#@end
+
 #@else
 @see [[c:Enumerable::Enumerator]]
 #@end
