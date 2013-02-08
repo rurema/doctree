@@ -43,7 +43,6 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます
 [[m:Kernel.#gets]] など一部の組み込み関数は
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
-#@if (version >= "1.8.0")
 --- filename -> String
 --- path -> String
 
@@ -80,16 +79,6 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの�
   #=> ["test.rb", "ARGF", ["test.rb~", "third.txt", "ugo.yaml"]]
   #=> ["test.rb~", "ARGF", ["third.txt", "ugo.yaml"]]
   #...
-
-#@else
-
---- filename -> String
---- to_s -> String
-
-処理対象のファイル名を返します。
-標準入力に対しては - を返します。
-組み込み変数 [[m:$FILENAME]] と同じです。
-#@end
 
 --- file -> IO
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
