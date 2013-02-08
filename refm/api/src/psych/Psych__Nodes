@@ -589,6 +589,13 @@ style は次の値のいずれかです。
   * [[m:Psych::Nodes::Scalar::LITERAL]]
   * [[m:Psych::Nodes::Scalar::FOLDED]]
 
+@param value スカラー値
+@param anchor 関連付けられた anchor の名前
+@param tag タグ名
+@param plain plain style であるかどうか
+@param quoted quoted style であるかどうか
+@param style スカラーのスタイル
+
 == Instance Methods
 --- value -> String
 scalar の値を返します。
