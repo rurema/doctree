@@ -1,6 +1,5 @@
 category FileFormat
 
-require psych/coder
 require psych/json
 #@# 以下は autoload である事に注意。
 
