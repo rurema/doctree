@@ -163,6 +163,7 @@ stream に使われるエンコーディングを指定します。
   * [[m:Psych::Nodes::Node::UTF16BE]]
   * [[m:Psych::Nodes::Node::UTF16LE]]
 
+@param enc 設定するエンコーディング
 @see [[m:Psych::Nodes::Stream#encoding]]
 
 == Constants
@@ -246,6 +247,7 @@ YAML ドキュメントのバージョンを返します。
 --- version=(ver) 
 YAML ドキュメントのバージョンを設定します。
 
+@param ver 設定するバージョン
 @see [[m:Psych::Nodes::Document#version]],
      [[m:Psych::Nodes::Document.new]]
 
@@ -258,6 +260,7 @@ tag directive の配列を返します。
 --- tag_directives=(tags)
 tag directive の配列を設定します。
 
+@param tags 設定する tag directive の配列
 @see [[m:Psych::Nodes::Document#tag_directives]],
      [[m:Psych::Nodes::Document.new]]
 
@@ -270,6 +273,7 @@ tag directive の配列を設定します。
 --- implicit=(bool)
 ドキュメントが implicit に始まっているかどうかを設定します。
 
+@param bool ドキュメントが implicit に始まっているかどうかの設定値
 @see [[m:Psych::Nodes::Document#implicit]],
      [[m:Psych::Nodes::Document.new]]
 
@@ -283,6 +287,7 @@ tag directive の配列を設定します。
 --- implicit_end=(bool)
 ドキュメントが implicit に終わっているかどうかを設定します。
 
+@param bool ドキュメントが implicit に終わっているかどうかの設定値
 @see [[m:Psych::Nodes::Document#implicit_end]]
 
 
@@ -360,10 +365,11 @@ sequence に付加された anchor を返します。
 --- anchor=(a)
 sequence に付加する anchor を設定します。
 
+@param a 設定する anchor
 @see [[m:Psych::Nodes::Sequence#anchor]],
      [[m:Psych::Nodes::Sequence.new]]
 
-@param a 設定する anchor
+
 --- tag -> String|nil
 sequence に付加された tag を返します。
 
@@ -485,10 +491,11 @@ mapping に付加された anchor を返します。
 --- anchor=(a)
 mapping に付加する anchor を設定します。
 
+@param a 設定する anchor
 @see [[m:Psych::Nodes::Mapping#anchor]],
      [[m:Psych::Nodes::Mapping.new]]
 
-@param a 設定する anchor
+
 --- tag -> String|nil
 mapping に付加された tag を返します。
 
