@@ -42,7 +42,6 @@ emitter, ss は通常デフォルトのものから変える必要はないで�
 @param emitter AST の構築に使う [[c:Psych::TreeBuilder]] オブジェクト
 @param ss 文字列に quite が必要かどうかを判定するための [[c:Psych::ScalarScanner]] オブジェクト
 
-#@todo
 
 == Instance Methods
 --- started -> bool

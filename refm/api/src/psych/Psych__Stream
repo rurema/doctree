@@ -49,6 +49,8 @@ finish を呼び出すことで出力が完了します(finish を呼び出さ�
 (self) がブロックに渡され、ブロックが呼び出された後に finish を呼び出します。
 これによって finish を確実に呼び出すことができます。
 
+@param encoding 出力のエンコーディング
+
 --- finish -> ()
 YAML document への変換を完了し、io への出力を完了します。
 
