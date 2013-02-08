@@ -1,8 +1,5 @@
 category FileFormat
 
-require psych/json
-#@# 以下は autoload である事に注意。
-
 [[lib:yaml]] のバックエンドライブラリです。libyaml ベースで作成されてお
 り、YAML バージョン 1.1 を扱う事ができます。
 

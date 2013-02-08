@@ -259,9 +259,6 @@ profiler
 pstore
 #@since 1.9.2
 psych
-psych/json
-psych/json/stream
-psych/json/tree_builder
 #@end
 pty
 #@since 1.8.0
