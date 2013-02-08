@@ -36,7 +36,9 @@ YAML の AST を構築することができます。
 
 == Constants
 
-#@# --- ANY -> Integer
+--- ANY -> Integer
+「任意の」エンコーディングを意味します。
+
 --- UTF8 -> Integer
 UTF-8 エンコーディングを表します。
 
