@@ -21,6 +21,8 @@ encoding にはストリームのエンコーディング(以下のいずれか)
 
 必要に応じてこのメソッドを override してください。
 
+@param encoding ストリームのエンコーディング(整数値)
+
 --- start_document(version, tag_directives, implicit) ->()
 
 YAML ドキュメントの始まりで呼び出されます。
@@ -37,6 +39,10 @@ implicit にはドキュメントが implicit に始まっているかどうか�
 必要に応じてこのメソッドを override してください。
 
 #@# implicit というのは "---" がドキュメントの先頭にないこと
+
+@param version バージョン
+@param tag_directives tag directive の配列
+@param implicit ドキュメントが implicit に始まっているかどうか
 
 === 例
 
@@ -64,6 +70,8 @@ start_document に渡される引数は以下の通りです。
 
 必要に応じてこのメソッドを override してください。
 
+@param implicit ドキュメントが implicit に終わったかどうか
+
 === 例
 
 以下の YAML ドキュメントでは implicit は true です。
@@ -79,6 +87,8 @@ start_document に渡される引数は以下の通りです。
 anchor という名前の alias を見付けたときに呼び出されます。
 
 必要に応じてこのメソッドを override してください。
+
+@param anchor aliasのアンカー文字列
 
 === 例
 
@@ -112,6 +122,13 @@ style は次の値のいずれかです。
   * [[m:Psych::Nodes::Scalar::FOLDED]]
 
 必要に応じてこのメソッドを override してください。
+
+@param value スカラー値
+@param anchor 関連付けられた anchor の名前
+@param tag タグ名
+@param plain plain style であるかどうか
+@param quoted quoted style であるかどうか
+@param style スカラーのスタイル
 
 === 例
 
@@ -154,6 +171,11 @@ style には sequence の style が整数値で渡されます。以下のいず
   * [[m:Psych::Nodes::Sequence::FLOW]]
 
 必要に応じてこのメソッドを override してください。
+
+@param anchor 関連付けられた anchor の名前
+@param tag タグ名
+@param implicit sequence が implicit に開始されかどうか
+@param style sequence のスタイル
 
 === Example
 
@@ -199,6 +221,11 @@ style には sequence の style が整数値で渡されます。以下のいず
   * [[m:Psych::Nodes::Mapping::FLOW]]
 
 必要に応じてこのメソッドを override してください。
+
+@param anchor 関連付けられた anchor の名前
+@param tag タグ名
+@param implicit mapping が implicit に開始されかどうか
+@param style mapping のスタイル
 
 === 例
 
@@ -301,10 +328,12 @@ Emitter オブジェクトを生成して返します。
 
 出力の style が canonical である/ないを指定します。
 
+@param bool canonnicalであるかどうか
 @see [[m:Psych::Emitter#canonical]]
 
 --- indentation -> Integer
 インデントのレベルを返します。
+
 
 @see [[m:Psych::Emitter#indentation=]]
 
@@ -313,6 +342,7 @@ Emitter オブジェクトを生成して返します。
 
 1 から 9 までの整数で指定します。
 
+@param level インデントレベル
 @see [[m:Psych::Emitter#indentation]]
 
 --- line_width -> Integer
@@ -324,4 +354,5 @@ Emitter オブジェクトを生成して返します。
 
 「好ましい」行幅を整数値で設定します。
 
+@param width 好ましい行幅
 @see [[m:Psych::Emitter#line_width]]
