@@ -739,12 +739,26 @@ self を 1 バイトずつ整数としてブロックの引数に繰り返しブ
    ARGF.bytes.to_a        #=> [104, 101, 108, 108, 111]
 
 #@since 1.9.1
---- lines(rs = $/)    -> Enumerator
+--- lines(rs = $/) { |line| ... }   -> self
+--- lines(limit) { |line| ... }     -> self
+--- lines(rs, limit) { |line| ... } -> self
+--- lines(rs = $/)                  -> Enumerator
+--- lines(limit)                    -> Enumerator
+--- lines(rs, limit)                -> Enumerator
 #@else
---- lines(rs = $/)    -> Enumerable::Enumerator
+--- lines(rs = $/) { |line| ... }   -> self
+--- lines(rs = $/)                  -> Enumerable::Enumerator
 #@end
 
-自身を 1 行ずつイテレートするような
+このメソッドは obsolete です。
+代わりに [[m:ARGF.each_line]] を使用してください。
+#@since 2.0.0
+使用すると警告メッセージが表示されます。
+#@end
+
+現在位置から 1 行ずつ文字列として読み込み、それを引数として 与えられたブロックを実行します。
+
+ブロックが与えられなかった場合は、
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを生成して返します。
 #@else
@@ -753,12 +767,21 @@ self を 1 バイトずつ整数としてブロックの引数に繰り返しブ
 
 テキスト読み込みメソッドとして動作します。
 
+#@since 1.9.1
+limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中
+で 切れないように余分に読み込む場合があります。
+#@end
+
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
+#@since 1.9.1
+@param limit 最大の読み込みバイト数
+#@end
+
    ARGF.lines.to_a   #=> ["foo\n", "bar\n"]
 
-@see [[m:$/]]
+@see [[m:$/]], [[m:ARGF.each_line]]
 
 --- getbyte   -> Integer | nil
 
