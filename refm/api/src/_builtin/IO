@@ -314,7 +314,7 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- foreach(path, rs = $/)                  -> Enumerator
 #@else
 --- foreach(path, rs = $/)                  -> Enumerable::Enumerator
@@ -326,7 +326,7 @@ path のオープンに成功すれば nil を返します。
 
 #@since 1.8.7
 ブロックが与えられなかった場合は、path で指定されたファイルの各行を繰り返す
-#@since 1.8.8
+#@since 1.9.1
 [[c:Enumerator]] オブジェクトを生成して返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
@@ -818,7 +818,7 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを�
 
 #@since 1.8.7
 ブロックが与えられなかった場合は、自身から生成した
-#@since 1.8.8
+#@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
@@ -846,7 +846,7 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 --- each_byte {|ch| ... }    -> self
 #@since 1.8.7
 --- bytes {|ch| ... }        -> self
-#@since 1.8.8
+#@since 1.9.1
 --- each_byte                -> Enumerator
 --- bytes                    -> Enumerator
 #@else
@@ -859,7 +859,7 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数とし�
 
 #@since 1.8.7
 ブロックが与えられなかった場合は、自身から生成した
-#@since 1.8.8
+#@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
@@ -1722,7 +1722,7 @@ IO から1バイトを読み込み整数として返します。
 
 --- each_char{|c| ... }     -> self
 --- chars{|c| ... }         -> self
-#@since 1.8.8
+#@since 1.9.1
 --- each_char               -> Enumerator
 --- chars                   -> Enumerator
 #@else
@@ -1752,7 +1752,7 @@ self は読み込み用にオープンされていなければなりません。
 
 #@end
 
-#@since 1.8.8
+#@since 1.9.1
 --- ungetbyte(c) -> nil
 
 指定したバイト列を書き戻します。
