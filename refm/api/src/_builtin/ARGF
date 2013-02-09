@@ -772,4 +772,29 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します
 
 #@end
 
+#@since 2.0.0
+--- each_codepoint{ |c| ... }    -> self
+--- each_codepoint               -> Enumerator
 
+self の各コードポイントに対して繰り返しブロックを呼びだします。
+
+ブロックの引数にはコードポイントを表す整数が渡されます。
+
+ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
+#@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
+--- codepoints { |c| ... }       -> self
+--- codepoints                   -> Enumerator
+
+このメソッドは obsolete です。
+代わりに [[m:ARGF.each_codepoint]] を使用してください。
+使用すると警告メッセージが表示されます。
+
+self の各コードポイントに対して繰り返しブロックを呼びだします。
+
+ブロックの引数にはコードポイントを表す整数が渡されます。
+
+ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
+@see [[m:ARGF.each_codepoint]]
+#@end
