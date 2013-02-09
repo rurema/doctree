@@ -1750,13 +1750,10 @@ IO から1バイトを読み込み整数として返します。
 @raise EOFError 既に EOF に達している場合に発生します。
 
 --- each_char{|c| ... }     -> self
---- chars{|c| ... }         -> self
 #@since 1.9.1
 --- each_char               -> Enumerator
---- chars                   -> Enumerator
 #@else
 --- each_char               -> Enumerable::Enumerator
---- chars                   -> Enumerable::Enumerator
 #@end
 
 self に含まれる文字を一文字つつブロックに渡して評価します。
@@ -1779,6 +1776,37 @@ self は読み込み用にオープンされていなければなりません。
   f = File.new("testfile")
   f.each_char {|c| print c, ' ' }   #=> #<File:testfile>
 
+--- chars{|c| ... }         -> self
+#@since 1.9.1
+--- chars                   -> Enumerator
+#@else
+--- chars                   -> Enumerable::Enumerator
+#@end
+
+このメソッドは obsolete です。
+代わりに [[m:IO#each_char]] を使用してください。
+#@since 2.0.0
+使用すると警告メッセージが表示されます。
+#@end
+
+self に含まれる文字を一文字つつブロックに渡して評価します。
+
+self は読み込み用にオープンされていなければなりません。
+
+#@until 1.9.1
+また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
+#@end
+
+#@until 1.9.1
+ブロックを省略した場合は各文字について繰り返す [[c:Enumerable::Enumerator]] 
+を返します。
+#@else
+ブロックを省略した場合は各文字について繰り返す [[c:Enumerator]] を返します。
+#@end
+
+@raise IOError self が読み込み用にオープンされていない場合に発生します。
+
+@see [[m:IO#each_char]]
 #@end
 
 #@since 1.9.1
