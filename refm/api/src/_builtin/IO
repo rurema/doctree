@@ -1876,15 +1876,30 @@ auto-close フラグを返します。
 @see [[m:IO#autoclose=]]
 
 --- each_codepoint{|c| ... }     -> self
---- codepoints{|c| ... }         -> self
 --- each_codepoint               -> Enumerator
---- codepoints                   -> Enumerator
 
 IO の各コードポイントに対して繰り返しブロックを呼びだします。
 
 ブロックの引数にはコードポイントを表す整数が渡されます。
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
+--- codepoints{|c| ... }         -> self
+--- codepoints                   -> Enumerator
+
+このメソッドは obsolete です。
+代わりに [[m:IO#each_codepoint]] を使用してください。
+#@since 2.0.0
+使用すると警告メッセージが表示されます。
+#@end
+
+IO の各コードポイントに対して繰り返しブロックを呼びだします。
+
+ブロックの引数にはコードポイントを表す整数が渡されます。
+
+ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
+@see [[m:IO#each_codepoint]]
 
 --- fdatasync -> 0 | nil
 
