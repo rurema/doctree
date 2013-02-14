@@ -1211,7 +1211,8 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 @see [[m:Kernel.#caller]]
 
 #@since 2.0.0
---- caller(start = 1, length = nil) -> [String] | nil
+--- caller(start = 1)               -> [String] | nil
+--- caller(start, length)           -> [String] | nil
 --- caller(range)                   -> [String] | nil
 #@else
 --- caller(start = 1) -> [String] | nil
