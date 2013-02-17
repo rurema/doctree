@@ -454,7 +454,11 @@ require 'foo' を実行すると、
 --- $FILENAME -> String
 
 仮想ファイル [[m:Kernel::ARGF]] で現在読み込み中のファイル名です。
+#@since 1.9.1
+[[m:ARGF.class#filename]] と同じです。
+#@else
 [[m:ARGF.filename]] と同じです。
+#@end
 
 この変数はグローバルスコープです。
 

@@ -1,6 +1,10 @@
+#@since 1.9.1
+= object ARGF < ARGF.class
+#@else
 = object ARGF
 
 extend Enumerable
+#@end
 
 スクリプトに指定した引数
 ([[m:Kernel::ARGV]] を参照) をファイル名とみなして、
@@ -42,6 +46,19 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます
 
 [[m:Kernel.#gets]] など一部の組み込み関数は
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
+
+#@since 1.9.1
+また、ARGF は [[c:ARGF.class]] クラスのインスタンスです。
+各メソッドの詳細は [[c:ARGF.class]] を参照してください。
+
+= class ARGF.class
+
+extend Enumerable
+
+[[c:ARGF]] を表すクラスです。
+
+== Public Instance Methods
+#@end
 
 --- filename -> String
 --- path -> String
@@ -121,7 +138,11 @@ $stdinがIOオブジェクトでない場合は$stdinを返します。
   MyIO Test
   です。
 
+#@since 1.9.1
+@see [[m:ARGF.class#to_io]]
+#@else
 @see [[m:ARGF.to_io]]
+#@end
 
 --- lineno -> Integer
 
@@ -366,12 +387,15 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 --- chars{ |c| ... }        -> self
 #@since 1.9.1
 --- chars                   -> Enumerator
+
+このメソッドは obsolete です。
+代わりに [[m:ARGF.class#each_char]] を使用してください。
 #@else
 --- chars                   -> Enumerable::Enumerator
-#@end
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.each_char]] を使用してください。
+#@end
 #@since 2.0.0
 使用すると警告メッセージが表示されます。
 #@end
@@ -380,11 +404,13 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 レシーバは読み込み可能でなければなりません。
 
-#@until 1.9.1
+#@since 1.9.1
+@see [[m:ARGF.class#each_char]]
+#@else
 また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
-#@end
 
 @see [[m:ARGF.each_char]]
+#@end
 #@end
 
 --- eof -> bool
@@ -585,7 +611,11 @@ ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返�
   #=>  is   10
   #<EOFError: end of file reached>
 
+#@since 1.9.1
+@see [[m:ARGF.class#getc]]
+#@else
 @see [[m:ARGF.getc]]
+#@end
 
 --- readline -> String
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時にはEOFErrorを発生します。
@@ -610,7 +640,11 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
   #=> "- Saitama\n"
   #=> <EOFError: end of file reached>
 
+#@since 1.9.1
+@see [[m:Kernel.#readline]] [[m:ARGF.class#gets]]
+#@else
 @see [[m:Kernel.#readline]] [[m:ARGF.gets]]
+#@end
 
 --- readlines(rs = $/) -> [String]
 --- to_a(rs = $/) -> [String]
@@ -729,19 +763,26 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します
   MyIO Test
   です。
 
+#@since 1.9.1
+@see [[m:ARGF.class#file]]
+#@else
 @see [[m:ARGF.file]]
+#@end
 
 #@since 1.8.7
 #@since 1.9.1
 --- bytes { |char| ... } -> self
 --- bytes                -> Enumerator
+
+このメソッドは obsolete です。
+代わりに [[m:ARGF.class#each_byte]] を使用してください。
 #@else
 --- bytes { |char| ... } -> self
 --- bytes                -> Enumerable::Enumerator
-#@end
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.each_byte]] を使用してください。
+#@end
 #@since 2.0.0
 使用すると警告メッセージが表示されます。
 #@end
@@ -764,13 +805,16 @@ self を 1 バイトずつ整数としてブロックの引数に繰り返しブ
 --- lines(rs = $/)                  -> Enumerator
 --- lines(limit)                    -> Enumerator
 --- lines(rs, limit)                -> Enumerator
+
+このメソッドは obsolete です。
+代わりに [[m:ARGF.class#each_line]] を使用してください。
 #@else
 --- lines(rs = $/) { |line| ... }   -> self
 --- lines(rs = $/)                  -> Enumerable::Enumerator
-#@end
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.each_line]] を使用してください。
+#@end
 #@since 2.0.0
 使用すると警告メッセージが表示されます。
 #@end
@@ -800,7 +844,11 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
    ARGF.lines.to_a   #=> ["foo\n", "bar\n"]
 
+#@since 1.9.1
+@see [[m:$/]], [[m:ARGF.class#each_line]]
+#@else
 @see [[m:$/]], [[m:ARGF.each_line]]
+#@end
 
 --- getbyte   -> Integer | nil
 
@@ -842,7 +890,7 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 --- codepoints                   -> Enumerator
 
 このメソッドは obsolete です。
-代わりに [[m:ARGF.each_codepoint]] を使用してください。
+代わりに [[m:ARGF.class#each_codepoint]] を使用してください。
 使用すると警告メッセージが表示されます。
 
 self の各コードポイントに対して繰り返しブロックを呼びだします。
@@ -851,5 +899,5 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
 
-@see [[m:ARGF.each_codepoint]]
+@see [[m:ARGF.class#each_codepoint]]
 #@end
