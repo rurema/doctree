@@ -923,8 +923,35 @@ extend の機能は、「特異クラスに対する [[m:Module#include]]」
 組み込み関数 [[m:Kernel.#p]] は、このメソッドの結果を使用して
 オブジェクトを表示します。
 
-  puts Class.new.inspect #=> #<Class:0xbafd88>
-  puts Time.now.inspect #=> 2007-10-15 21:01:37 +0900
+  [ 1, 2, 3..4, 'five' ].inspect   # => "[1, 2, 3..4, \"five\"]"
+  Time.new.inspect                 # => "2008-03-08 19:43:39 +0900"
+
+inspect メソッドをオーバーライドしなかった場合、クラス名とインスタンス
+変数の名前、値の組を元にした文字列を返します。
+
+  class Foo
+  end
+  Foo.new.inspect                  # => "#<Foo:0x0300c868>"
+
+  class Bar
+    def initialize
+      @bar = 1
+    end
+  end
+  Bar.new.inspect                  # => "#<Bar:0x0300c868 @bar=1>"
+
+#@until 2.0.0
+また、to_s メソッドをオーバーライドしていた場合は to_s メソッドの実行結
+果を返します。(ただし、2.0 で to_s メソッドは実行されなくなった点に注意
+してください)
+
+  class Baz
+    def to_s
+      "baz"
+    end
+  end
+  Baz.new.inspect                  # => "baz"
+#@end
 
 @see [[m:Kernel.#p]]
 
