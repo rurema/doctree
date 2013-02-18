@@ -2578,7 +2578,9 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 #@since 1.8.7
 --- __method__ -> Symbol | nil
 #@since 1.9.1
+#@until 2.0.0
 --- __callee__ -> Symbol | nil
+#@end
 #@end
 
 現在のメソッド名を返します。
@@ -2587,9 +2589,33 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
   def foo
     p __method__
   end
+  alias :bar :foo
   foo #=> :foo
+  bar #=> :foo
   p __method__ #=> nil
 
+現在のメソッド名が alias されたメソッドの場合でも alias 元のメソッド名
+を返します。
+#@end
+
+#@since 2.0.0
+--- __callee__ -> Symbol | nil
+
+現在のメソッド名を返します。
+メソッドの外で呼ばれると nil を返します。
+
+  def foo
+    p __callee__
+  end
+  alias :bar :foo
+  foo # => :foo
+  bar # => :bar
+  p __callee__ # => nil
+
+[[m:Kernel.#__method__]] とは異なり、現在のメソッド名が alias されたメ
+ソッドの場合には alias 先のメソッド名を返します。
+
+@see [[m:Kernel.#__method__]]
 #@end
 
 #@since 1.9.1
