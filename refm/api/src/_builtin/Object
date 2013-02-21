@@ -491,12 +491,12 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
   class Foo
    def to_int
-     666
+     1
    end
   end
   
-  it = Foo.new
-  p(9**9 & it) #=> 8
+  n = 0b1101
+  p(n[Foo.new]) # => 1
 
 @see [[m:Kernel.#Integer]]
 --- to_proc -> Proc
