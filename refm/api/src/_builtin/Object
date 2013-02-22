@@ -495,8 +495,8 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
    end
   end
   
-  n = 0b1101
-  p(n[Foo.new]) # => 1
+  ary = [:a, :b, :c]
+  p(ary[Foo.new]) # => :b
 
 @see [[m:Kernel.#Integer]]
 --- to_proc -> Proc
