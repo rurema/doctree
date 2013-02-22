@@ -3288,3 +3288,9 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
   a.prepend("hello ") # => "hello world"
   a                   # => "hello world"
 #@end
+
+#@since 2.0.0
+--- b -> String
+
+self の文字エンコーディングを ASCII-8BIT にした文字列を返します。
+#@end
