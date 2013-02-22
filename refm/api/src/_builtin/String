@@ -1281,7 +1281,7 @@ str == eval(str.dump) となることが保証されています。
 --- each_line(rs = $/) {|line| ... } -> ()
 #@since 1.8.7
 --- lines(rs = $/)     {|line| ... } -> ()
-#@since 1.8.8
+#@since 1.9.1
 --- each_line(rs = $/)  -> Enumerator
 --- lines(rs = $/)      -> Enumerator
 #@else
@@ -1328,7 +1328,7 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 --- each_byte {|byte| ... } -> self
 --- bytes {|byte| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_byte -> Enumerator
 --- bytes     -> Enumerator
 #@else
@@ -1436,7 +1436,7 @@ replace に「\」自身を入れたいときは
 
 --- gsub(pattern) {|matched| .... } -> String
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- gsub(pattern) -> Enumerator
 #@else
 --- gsub(pattern) -> Enumerable::Enumerator
@@ -1523,7 +1523,7 @@ replace に「\」自身を入れたいときは
 
 --- gsub!(pattern) {|matched| .... } -> self | nil
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- gsub!(pattern) -> Enumerator
 #@else
 --- gsub!(pattern) -> Enumerable::Enumerator
@@ -2983,7 +2983,7 @@ self がセパレータを含まないときは、
 
 --- each_char {|cstr| block } -> self
 --- chars {|cstr| block }     -> self
-#@since 1.8.8
+#@since 1.9.1
 --- each_char -> Enumerator
 --- chars     -> Enumerator
 #@else
