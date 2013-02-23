@@ -1,4 +1,3 @@
-#@since 1.8.0
 = module Signal
 
 UNIX のシグナル関連の操作を行うモジュールです。
@@ -72,4 +71,3 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
   Signal.trap(:INT, nil)            # => "EXIT"
 
 @see [[d:spec/terminate]]
-#@end
