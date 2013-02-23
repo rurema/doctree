@@ -1,0 +1,24 @@
+= class ObjectSpace::WeakMap
+
+GC の対象になるオブジェクトへの weak reference を持つクラスです。主に
+[[c:WeakRef]] クラスの内部で使用されるため、[[lib:weakref]] ライブラリ
+経由で使用してください。
+
+== Public Instance Methods
+
+--- [](key) -> object | nil
+
+引数 key で指定されたオブジェクトが参照するオブジェクトを返します。
+
+参照先のオブジェクトが存在しない場合、GC されている場合、対象外のオブジェ
+クトを参照している場合に nil を返します。
+
+@param key 参照元のオブジェクトを指定します。
+
+--- []=(key, value)
+
+引数 key から引数 value への参照を作成します。
+
+@param key 参照元のオブジェクトを指定します。
+
+@param value 参照先のオブジェクトを指定します。

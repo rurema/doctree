@@ -86,6 +86,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Numeric)
 #@include(_builtin/Object)
 #@include(_builtin/ObjectSpace)
+#@since 2.0.0
+#@include(_builtin/ObjectSpace__WeakMap)
+#@end
 #@until 1.9.1
 #@include(_builtin/Precision)
 #@end
