@@ -47,9 +47,18 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
                文字列の代わりに [[c:Symbol]] で指定することも出来ます。
 #@end
 
-@raise ArgumentError システムに定義されていないシグナルを trap に指定した場合に
-                     発生します。例えばネイティブな Windows システム (mswin32, mingw など) で動く ruby では 
-                     INT ILL FPE SEGV TERM BREAK ABRT EXIT しか定義されていません。
+#@since 2.0.0
+@raise ArgumentError 引数 signalに SEGV BUS ILL FPE VTALRM を指定した場
+                     合に発生します。また、システムに定義されていないシ
+                     グナルを引数 signal に指定した場合に発生します。
+
+#@else
+@raise ArgumentError システムに定義されていないシグナルを trap に指定し
+                     た場合に発生します。
+#@end
+                     例えばネイティブな Windows システム (mswin32,
+                     mingw など) で動く ruby では INT ILL FPE SEGV
+                     TERM BREAK ABRT EXIT しか定義されていません。
 
 いくつかのシグナルに対して、Ruby インタプリタは例外 [[c:Interrupt]] や
 [[c:SignalException]] を発生させます。このようなシグナルは例外処理によっ
