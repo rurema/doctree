@@ -51,10 +51,9 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
 @raise ArgumentError 引数 signalに SEGV BUS ILL FPE VTALRM を指定した場
                      合に発生します。また、システムに定義されていないシ
                      グナルを引数 signal に指定した場合に発生します。
-
 #@else
-@raise ArgumentError システムに定義されていないシグナルを trap に指定し
-                     た場合に発生します。
+@raise ArgumentError システムに定義されていないシグナルを引数 signal に
+                     指定した場合に発生します。
 #@end
                      例えばネイティブな Windows システム (mswin32,
                      mingw など) で動く ruby では INT ILL FPE SEGV
