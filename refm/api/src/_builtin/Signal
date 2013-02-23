@@ -13,6 +13,10 @@ UNIX のシグナル関連の操作を行うモジュールです。
 
   p Signal.list   # => {"WINCH"=>28, "PROF"=>27, ...}
 
+#@since 2.0.0
+@see [[m:Signal.#signame]]
+#@end
+
 --- trap(signal, command)    -> String | Proc | nil
 --- trap(signal) { ... }     -> String | Proc | nil
 
@@ -71,3 +75,15 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
   Signal.trap(:INT, nil)            # => "EXIT"
 
 @see [[d:spec/terminate]]
+
+#@since 2.0.0
+--- signame(signo) -> String
+
+引数で指定されたシグナル番号をシグナル名に変換して返します。
+
+  Signal.trap("INT") { |signo| puts Signal.signame(signo) }
+  Process.kill("INT", 0)
+  # => INT
+
+@see [[m:Signal.#list]]
+#@end
