@@ -99,6 +99,18 @@ Proc.new は、Proc#initialize が定義されていれば
 
 @raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
 
+#@# 2.0 では削除されている事、実装に依存する内容である事から省略。
+#@# 参照: プログラミング言語 Ruby p203
+#@##until 2.0.0
+#@#--- ==(other)   -> bool
+#@##@since 1.9.1
+#@#--- eql?(other) -> bool
+#@##@end
+#@#
+#@# --- clone -> Proc
+#@# nodoc
+#@# --- dup -> Proc
+#@# nodoc
 
 --- arity -> Fixnum
 
@@ -141,7 +153,10 @@ Proc オブジェクトが保持するコンテキストを
 
 self を返します。
 
---- to_s -> String
+--- to_s    -> String
+#@since 2.0.0
+--- inspect -> String
+#@end
 
 self の文字列表現を返します。
 
@@ -259,6 +274,10 @@ Procをカリー化します
 である)場合は nil を返します。
 
 @see [[m:Method#source_location]]
+
+--- hash -> Integer
+
+self のハッシュ値を返します。
 
 #@end
 #@since 1.9.2
