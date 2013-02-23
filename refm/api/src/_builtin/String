@@ -1280,10 +1280,14 @@ str == eval(str.dump) となることが保証されています。
 #@end
 --- each_line(rs = $/) {|line| ... } -> ()
 #@since 1.8.7
+#@until 2.0.0
 --- lines(rs = $/)     {|line| ... } -> ()
+#@end
 #@since 1.9.1
 --- each_line(rs = $/)  -> Enumerator
+#@until 2.0.0
 --- lines(rs = $/)      -> Enumerator
+#@end
 #@else
 --- each(rs = $/)       -> Enumerable::Enumerator
 --- each_line(rs = $/)  -> Enumerable::Enumerator
@@ -1325,12 +1329,42 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
     p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
 #@end
 
+#@since 2.0.0
+@see [[m:String#lines]]
+
+--- lines(rs = $/)               -> [String]
+--- lines(rs = $/) {|line| ... } -> self
+
+文字列中の各行を文字列の配列で返します。(self.each_line.to_a と同じです)
+
+  "aa\nbb\ncc\n".lines # => ["aa\n", "bb\n", "cc\n"]
+
+行の区切りは rs に指定した文字列で、 そのデフォルト値は変数 $/ の値です。
+各 line には区切りの文字列も含みます。
+
+rs に nil を指定すると行区切りなしとみなします。 rs に空文字列 "" を指
+定すると「パラグラフモード」になり、 改行コードが 2 つ以上連続するとこ
+ろで文字列を分割します (つまり空行で分割します)。
+
+@param rs 行末を示す文字列
+
+ブロックが指定された場合は [[m:String#each_line]] と同じように動作しま
+す。ただし obsolete のため、ブロックを指定する場合は
+[[m:String#each_line]] を使用してください。
+
+@see [[m:String#each_line]]
+#@end
+
 --- each_byte {|byte| ... } -> self
+#@until 2.0.0
 --- bytes {|byte| ... } -> self
+#@end
 #@since 1.8.7
 #@since 1.9.1
 --- each_byte -> Enumerator
+#@until 2.0.0
 --- bytes     -> Enumerator
+#@end
 #@else
 --- each_byte -> Enumerable::Enumerator
 --- bytes     -> Enumerable::Enumerator
@@ -1351,7 +1385,26 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
         # => 116
         # => 114
 
+#@until 1.8.7
 @see [[m:String#unpack]]
+#@end
+
+#@since 2.0.0
+@see [[m:String#bytes]]
+
+--- bytes               -> [Integer]
+--- bytes {|byte| ... } -> self
+
+文字列の各バイトを数値の配列で返します。(self.each_byte.to_a と同じです)
+
+  "str".bytes # => [115, 116, 114]
+
+ブロックが指定された場合は [[m:String#each_byte]] と同じように動作しま
+す。ただし obsolete のため、ブロックを指定する場合は
+[[m:String#each_byte]] を使用してください。
+
+@see [[m:String#each_byte]]
+#@end
 
 --- empty? -> bool
 
@@ -2982,10 +3035,14 @@ self がセパレータを含まないときは、
 @see [[m:String#partition]], [[m:String#split]]
 
 --- each_char {|cstr| block } -> self
+#@until 2.0.0
 --- chars {|cstr| block }     -> self
+#@end
 #@since 1.9.1
 --- each_char -> Enumerator
+#@until 2.0.0
 --- chars     -> Enumerator
+#@end
 #@else
 --- each_char -> Enumerable::Enumerator
 --- chars     -> Enumerable::Enumerator
@@ -3001,17 +3058,57 @@ self がセパレータを含まないときは、
 は次のように出力されます。
   h e l l o 世 界
 
+#@since 2.0.0
+@see [[m:String#chars]]
+
+--- chars                 -> [String]
+--- chars {|cstr| block } -> self
+
+文字列の各文字を文字列の配列で返します。(self.each_char.to_a と同じです)
+
+  "hello世界".chars # => ["h", "e", "l", "l", "o", "世", "界"]
+
+ブロックが指定された場合は [[m:String#each_char]] と同じように動作しま
+す。ただし obsolete のため、ブロックを指定する場合は
+[[m:String#each_char]] を使用してください。
+
+@see [[m:String#each_char]]
+#@end
+
 #@since 1.9.1
 --- each_codepoint {|codepoint| block } -> self
+#@until 2.0.0
 --- codepoints {|codepoint| block }     -> self
+#@end
 --- each_codepoint -> Enumerator
+#@until 2.0.0
 --- codepoints     -> Enumerator
+#@end
 
 文字列の各コードポイントに対して繰り返します。
 
    #coding:UTF-8
-   "hello わーるど".codepoints.to_a
+   "hello わーるど".each_codepoint.to_a
    # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
+#@end
+
+#@since 2.0.0
+@see [[m:String#codepoints]]
+
+--- codepoints                      -> [Integer]
+--- codepoints {|codepoint| block } -> self
+
+文字列の各コードポイントの配列を返します。(self.each_codepoint.to_a と同じです)
+
+   #coding:UTF-8
+   "hello わーるど".codepoints
+   # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
+
+ブロックが指定された場合は [[m:String#each_codepoint]] と同じように動作
+します。ただし obsolete のため、ブロックを指定する場合は
+[[m:String#each_codepoint]] を使用してください。
+
+@see [[m:String#each_codepoint]]
 #@end
 
 --- bytesize -> Integer
