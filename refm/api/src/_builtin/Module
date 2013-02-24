@@ -1565,6 +1565,12 @@ name で指定した定数の可視性を public に変更します。
 
 引数 klass で指定したクラスに対してブロックで指定した機能を定義します。
 
+refinements 機能の詳細については以下を参照してください。
+
+#@# TODO: るびまへのリンク(記事があれば)も併せて追記
+ * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
+ * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
+
 定義した機能は using を実行した場合のみ有効になります。そのため、既存の
 機能を局所的に修正したい場合などに用いる事ができます。
 
@@ -1601,12 +1607,6 @@ using の有効範囲については以下を参照してください。
 
   x = C.new
   x.foo # => "C#foo in M"
-
-refinements 機能の詳細については以下を参照してください。
-
-#@# TODO: るびまへのリンク(記事があれば)も併せて追記
- * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
- * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
 
 #@# TODO: main.using を記述して @see でリンクを行う。その場合、using の
 #@# scope に関する記述も併せて移動する。
