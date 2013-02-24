@@ -365,12 +365,20 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 --- const_get(name) -> object
 #@end
 
+#@since 2.0.0
+name で指定される名前の定数の値を取り出します。
+#@else
 モジュールに定義されている name で指定される名前の定数の値を
 取り出します。
+#@end
 
 [[m:Module#const_defined?]] と違って [[c:Object]] を特別扱いすることはありません。
 
 @param name 定数名。[[c:String]] か [[c:Symbol]] で指定します。
+#@since 2.0.0
+            完全修飾名を指定しなかった場合はモジュールに定義されている
+            name で指定される名前の定数の値を取り出します。
+#@end
 
 #@since 1.9.1
 @param inherit false を指定するとスーパークラスや include したモジュールで
@@ -398,6 +406,10 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 #@since 1.9.1
   # 第二引数に false を指定すると自分自身に定義された定数から探す
   p Baz.const_get(:BAR, false) #=> raise NameError
+#@end
+#@since 2.0.0
+  # 完全修飾名を指定すると include や自分自身へ定義されていない場合でも参照できる
+  p Class.const_get("Bar::BAR") # => 1
 #@end
 
 #@since 1.8.0
@@ -984,6 +996,14 @@ val をセットします。val を返します。
 @return 引数 method を与えたときはそれを、ブロック付きで
         呼びだしたときはブロックを [[c:Proc]] 化したオブジェクトを、
         それぞれ返します。
+
+#@since 2.0.0
+@raise TypeError method に同じクラス、サブクラス、モジュール以外のメソッ
+                 ドを指定した場合に発生します。
+#@else
+@raise TypeError method に同じクラス、サブクラス以外のメソッドを指定し
+                 た場合に発生します。
+#@end
 
   class Foo
     def foo() p :foo end
