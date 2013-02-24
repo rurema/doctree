@@ -1563,7 +1563,10 @@ name で指定した定数の可視性を public に変更します。
 #@since 2.0.0
 --- refine(klass) { ... } -> Module
 
-引数 klass で指定したクラスに対してブロックで指定した機能を定義します。
+引数 klass で指定したクラスだけに対して、ブロックで指定した機能を提供で
+きるモジュールを定義します。定義した機能は Module#refine を使用せずに直
+接 klass に対して変更を行う場合と異なり、限られた範囲のみ有効にできます。
+そのため、既存の機能を局所的に修正したい場合などに用いる事ができます。
 
 refinements 機能の詳細については以下を参照してください。
 
@@ -1571,10 +1574,8 @@ refinements 機能の詳細については以下を参照してください。
  * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
  * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
 
-定義した機能は using を実行した場合のみ有効になります。そのため、既存の
-機能を局所的に修正したい場合などに用いる事ができます。
-
-using の有効範囲については以下を参照してください。
+定義した機能は using を実行した場合のみ有効になります。using の有効範囲
+については以下を参照してください。
 
  * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec#Scope-of-refinements]]
 
