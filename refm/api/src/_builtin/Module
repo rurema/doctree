@@ -1570,7 +1570,7 @@ name で指定した定数の可視性を public に変更します。
 
 refinements 機能の詳細については以下を参照してください。
 
-#@# TODO: るびまへのリンク(記事があれば)も併せて追記
+ * [[url:http://jp.rubyist.net/magazine/?0041-200Special-refinement]]
  * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
  * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
 
