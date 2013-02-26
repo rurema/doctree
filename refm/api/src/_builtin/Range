@@ -280,7 +280,7 @@ true を返します。そうでない場合に false を返します。
 #@end
 
 #@since 2.0.0
---- bsearch {|obj| ... } -> object
+--- bsearch {|obj| ... } -> object | nil
 
 ブロックの評価結果で範囲内の各要素の大小判定を行い、条件を満たす値を二
 分探索(計算量は O(log n))で検索します。要素が見つからない場合は nil を
