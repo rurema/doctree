@@ -596,8 +596,11 @@ MAILFROM が送られるため利用する必要はないはずです。
 
 @param from_addr 送信元メールアドレス
 
---- rcptto_list(to_addrs) -> Net::SMTP::Response
+--- rcptto_list(to_addrs){ ... } -> object
 RCPTTO コマンドを to_addrs のすべてのメールアドレスに対して送ります。
+
+コマンドを送った後、ブロックを呼び出します。
+このメソッドの返り値はブロックの返り値になります。
 
 通常は [[m:Net::SMTP#send_message]], [[m:Net::SMTP#open_message_stream]] で
 RCPTTO が送られるため利用する必要はないはずです。
