@@ -242,27 +242,21 @@ other が self 自身の時、真を返します。
 #@if (version == "1.8.0")
 --- singleton_methods(inherited_too = false) -> [String]
 #@end
-#@if (version < "1.8.0")
---- singleton_methods -> [String]
-
-そのオブジェクトに対して定義されている特異メソッド名
-(publicメソッドのみ) の一覧を返します。
-#@end
 #@end
 #@since 1.8.0
 そのオブジェクトに対して定義されている特異メソッド名
 (public あるいは protected メソッド) の一覧を返します。
 
-クラスメソッド([[c:Class]]のインスタンスの特異メソッド)に関しては
-引数が真のとき、スーパークラスのクラスメソッドも対象になります。
+inherited_too が真のときは継承した特異メソッドを含みます。
+継承した特異メソッドとは [[m:Object#extend]] によって追加された特異メソッドや、
+self がクラスの場合はスーパークラスのクラスメソッド([[c:Class]]のインスタンスの特異メソッド)などです。
 
 singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@end
 
 #@if (version > "1.8.0")
-#@#@param inherited_too 偽を表す値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
-@param inherited_too 引数が真のとき、スーパークラスのクラスメソッドも対象になります。これが意味を持つのは
-  self がクラスオブジェクトであるときだけです。
+@param inherited_too 継承した特異メソッドを含める場合は真を、
+                     そうでない場合は偽を指定します。
 
   #例1:
   
