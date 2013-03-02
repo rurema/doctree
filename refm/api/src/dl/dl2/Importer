@@ -1,30 +1,263 @@
 = module DL::Importer
+C の関数をモジュールにインポートするためのモジュールです。
+
+対象となるモジュールに [[m:Object#extend]] することで、
+そのモジュールにインポートできるようになります。
+
+使いかたは [[lib:dl]] や [[lib:dl/import]] を参照してください。
 
 == Instance Methods
 
---- []
-#@todo
+--- [](name) -> DL::Function|nil
+[[m:DL::Importer#extern]] でインポートした関数の [[c:DL::Function]] オブジェクト
+を返します。
 
---- bind
-#@todo
+name という名前の関数が存在しない場合は nil を返します。
 
---- dlload
-#@todo
+@param name 関数の名前の文字列
 
---- extern
-#@todo
+--- bind(signature, *opts){ ... } -> DL::Function
+Ruby のブロックを C の関数で wrap し、その関数をモジュールに
+インポートします。
 
---- sizeof
-#@todo
+これでインポートされた関数はモジュール関数として定義されます。
+また、[[m:DL::Importer#[]] で [[c:DL::Function]] オブジェクトとして
+取り出すことができます。
 
---- struct
-#@todo
+signature で関数の名前とシネグチャを指定します。例えば
+"int compare(void*, void*)" のように指定します。
 
---- typealias
-#@todo
+opts には :stdcall もしくは :cdecl を渡すことができ、
+呼出規約を明示することができます。
 
---- union
-#@todo
+@return インポートした関数を表す [[c:DL::Function]] オブジェクトを返します。
 
---- value
-#@todo
+@param signature 関数の名前とシネグチャ
+@param opts オプション
+
+例
+  require 'dl/import'
+  
+  module M
+    extend DL::Importer
+    dlload "libc.so.6"
+    typealias "size_t", "unsigned long"
+    extern "int qsort(void*, size_t, size_t, void*)"
+    
+    bind("int compare(void*, void*)"){|px, py|
+      x = px.to_s(DL::SIZEOF_INT).unpack("i!")
+      y = py.to_s(DL::SIZEOF_INT).unpack("i!")
+      x <=> y
+    }
+  end
+  
+  data = [32, 180001, -13, -1, 0, 49].pack("i!*")
+  M.qsort(DL::CPtr[data], 6, DL::SIZEOF_INT, M["compare"])
+  p data.unpack("i!*") # => [-13, -1, 0, 32, 49, 180001]
+
+
+--- dlload(*libs) -> ()
+
+C の動的ライブラリをモジュールにインポートします。
+
+これで取り込んだライブラリの関数は [[m:DL::Importer#extern]] で
+インポートできます。
+
+複数のライブラリを指定することができます。
+ファイル名文字列を指定することでそのライブラリをインポートします。
+[[c:DL::Handle]] を渡すとそのハンドルが指しているライブラリをインポート
+します。
+
+このメソッドは同じモジュールで2回呼ばないでください。
+
+#@# DL::Importer#handler の返り値を使えるように見えるがたぶん駄目
+
+@param libs インポートするライブラリ
+@raise DL::DLError ライブラリのインポートができなかった場合に発生します
+
+--- extern(signature, *opts) -> DL::Function
+
+[[m:DL::Importer#dlload]] で取り込んだライブラリから
+C の関数をインポートします。
+
+インポートした関数はそのモジュールにモジュール関数として定義されます。
+
+signature で関数の名前とシネグチャを指定します。例えば
+"int strcmp(char*, char*)" のように指定することができます。
+
+opts には :stdcall もしくは :cdecl を渡すことができ、
+呼出規約を明示することができます。
+
+@return インポートした関数を表す [[c:DL::Function]] オブジェクトを返します。
+
+@param signature 関数の名前とシネグチャ
+@param opts オプション
+
+例
+  require 'dl/import'
+  
+  module M
+    extern DL::Importer
+    dlload "libc.so.6"
+    extern "int strcmp(char*, char*)"
+  end
+   
+  M.strcmp("abc", "abc") # => 0
+  M.strcmp("abc", "abd") # => -1
+
+--- sizeof(t) -> Integer
+
+C における sizeof(t) の値を返します。
+
+t が文字列の場合、その文字列が表す C の型の size が返されます。
+例えば、sizeof("char") は 1 を返します。
+sizeof("char*") は環境によって 4 や 8 といった値を返します。
+
+[[m:DL::Importer#struct]] で定義した
+構造体クラスを渡すと、その構造体のサイズを返します。
+[[m:DL::Importer#union]] で定義した共用体クラスも同様です。
+
+t がクラスの場合、t が to_ptr というインスタンスメソッドを持っている
+ならば t.size を返します。
+
+それ以外の場合は CPtr[t].size を返します。
+
+@param t サイズを計算する対象
+@raise DL::DLError t として文字列を渡し、それが表している型を DL が知らなかった
+       場合に発生します
+
+例:
+
+  require 'dl/import'
+  
+  module A
+    extend DL::Importer
+    Timeval = struct(["long tv_sec", "long tv_usec"])
+    p sizeof("char") # => 1
+    p sizeof("void*") # => 8
+    p sizeof(Timeval) # => 16
+  end
+
+--- struct(signature) -> Class
+C の構造体型に対応する Ruby のクラスを構築して返します。
+
+構造体の各要素は C と似せた表記ができます。そしてそれを
+配列で signature に渡してデータを定義します。例えば C における
+  struct timeval {
+    long tv_sec;
+    long tv_usec;
+  };
+という構造体型に対応して
+  Timeval = struct(["long tv_sec", "long tv_usec"])
+として構造体に対応するクラスを生成します。
+
+このメソッドが返すクラスには以下のメソッドが定義されています
+  * クラスメソッド malloc
+  * initialize
+  * to_ptr
+  * to_i
+  * 構造体の各メンバへのアクセサ
+返されるクラスは [[c:DL::CStruct]] を継承しています。詳しくは
+そちらを参照してください。
+
+#@# これで定義したクラスについては DL::CStruct を参照せよ
+
+@param signature 構造体の各要素を文字列で表現したものの配列
+
+  require 'dl/import
+  
+  module M
+    extend DL::Importer
+    dlload "libc.so.6"
+    extern "int gettimeofday(void*, void*)"
+    Timeval = struct(["long tv_sec", "long tv_usec"])
+  end
+  
+  time = Timeval.malloc
+  M.gettimeofday(time, DL::NULL)
+  p time.tv_sec
+  p time.tv_usec
+
+--- typealias(new, orig) -> ()
+extern や struct で利用する型の別名を定義します。
+
+@param new 別名(文字列)
+@param orig 別名を付けたい型の名前(文字列)
+@see [[m:DL::Importer#extern]], [[m:DL::Importer#sizeof]], 
+     [[m:DL::Importer#struct]], [[m:DL::Importer#union]]
+
+--- union(signature) -> Class
+C の共用体型に対応する Ruby のクラスを構築して返します。
+
+共用体型を Ruby 上で定義する方法は [[m:DL::Importer#struct]] と
+ほぼ同様です。C における
+  typedef union epoll_data
+  {
+    void *ptr;
+    int fd;
+    uint32_t u32;
+    uint64_t u64;
+  } epoll_data_t;
+は、Ruby上では
+  require 'dl/import
+  
+  module M
+    extend DL::Importer
+    dlload "libc.so.6"
+    typealias("uint32_t", "unsigned int")
+    typealias("uint64_t", "unsigned long long")
+  
+    EPollData = union(["void *ptr",
+                       "int fd",
+                       "uint32_t u32",
+                       "uint64_t u64",
+                      ])
+  end
+となります。
+
+返されるクラスは [[c:DL::CUnion]] を継承しています。
+
+1.9.x ではこのメソッドで返されるクラスは正しく動作しません。
+2.0以降では修正されています。
+
+@param signature 共用体の各要素を文字列で表現したものの配列
+
+--- create_value(type, val = nil) -> DL::CStruct
+--- value(type, val = nil) -> DL::CStruct
+型が type で要素名が "value" であるような構造体を
+定義([[m:DL::Importer#struct]])し、
+その構造体のメモリを [[m:DL::CStruct#malloc]] で確保し、
+確保したメモリを保持しているオブジェクトを返します。
+
+type は "int", "void*" といった文字列で型を指定します。
+val に nil 以外を指定すると、確保された構造体に
+その値を代入します。
+
+@param type 型を表す文字列
+@param val 構造体に確保される初期値
+
+例
+  require 'dl/import'
+  
+  module M
+    extend DL::Importer
+  end
+  
+  v = M.value("int", 32)
+  p v.value # => 32
+  v.value = 48
+  p v.value # => 48
+
+--- import_symbol(name) -> DL::CPtr
+取り込んだライブラリからシンボルをインポートします。
+
+返り値はシンボルがロードされたメモリのアドレスを持つ [[c:DL::CPtr]] 
+オブジェクトを返します。
+
+@param name シンボル名(文字列)
+
+#@# For internal use from Importer#bind
+#@# --- bind_function(name, ctype, argtype, call_type){ ... } -> DL::Function
+
+#@# --- create_temp_function
+#@# --- create_carried_function
