@@ -3,6 +3,11 @@
 UNIX の [[man:dlopen(3)]] や Windows の LoadLibrary() 
 などのダイナミックリンカへの低レベルなインターフェースを提供するモジュールです。
 
+== Singleton Methods
+--- fiddle? -> bool
+DL 内部で [[lib:fiddle]] を利用するならば真を返します。
+
+
 == Module Functions
 
 --- dlopen(lib)                    -> DL::Handle
@@ -29,7 +34,16 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返
 @param size 必要なメモリ領域のサイズを整数で指定します。
 
 --- realloc(addr, size)   -> Integer
-#@todo
+
+addr で指定したメモリ領域を size バイトにリサイズし、その領域を指す整数
+を返します。
+
+addr には [[m:DL.malloc]] で確保したメモリ領域を渡します。
+また、リサイズの結果、返り値が addr と異なる場合があります。
+
+@param addr リサイズしたいメモリアドレス整数
+@param size リサイズ後のバイト数
+@see [[m:DL.malloc]]
 
 --- free(addr)      -> nil
 
@@ -74,62 +88,150 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返
 
 == Constants
 
---- CdeclCallbackProcs
+#@# Constants for internal use
+#@# --- CdeclCallbackProcs
+#@# 
+#@# --- CdeclCallbackAddrs
+#@# 
+#@# --- StdcallCallbackProcs
+#@# 
+#@# --- StdcallCallbackAddrs
 
---- CdeclCallbackAddrs
+--- ALIGN_CHAR -> Integer
+C の構造体における char のアライメントの値。
 
---- StdcallCallbackProcs
+--- ALIGN_DOUBLE -> Integer
+C の構造体における double のアライメントの値。
 
---- StdcallCallbackAddrs
+--- ALIGN_FLOAT -> Integer
+C の構造体における float のアライメントの値。
 
---- ALIGN_CHAR
---- ALIGN_DOUBLE
---- ALIGN_FLOAT
---- ALIGN_INT
---- ALIGN_LONG
---- ALIGN_LONG_LONG
---- ALIGN_SHORT
---- ALIGN_VOIDP
+--- ALIGN_INT -> Integer
+C の構造体における int のアライメントの値。
 
---- BUILD_RUBY_PLATFORM
---- BUILD_RUBY_VERSION
+--- ALIGN_LONG -> Integer
+C の構造体における long のアライメントの値。
 
---- DLSTACK_SIZE
+--- ALIGN_LONG_LONG -> Integer
+C の構造体における long long のアライメントの値。
 
---- MAX_CALLBACK
+--- ALIGN_SHORT -> Integer
+C の構造体における short のアライメントの値。
 
---- NULL
+--- ALIGN_VOIDP -> Integer
+C の構造体における void* のアライメントの値。
 
---- RTLD_GLOBAL
---- RTLD_LAZY
---- RTLD_NOW
---- RUBY_FREE
+--- BUILD_RUBY_PLATFORM -> String
+ビルドに用いた ruby のプラットフォームを表す文字列。
 
---- SIZEOF_CHAR
---- SIZEOF_DOUBLE
---- SIZEOF_FLOAT
---- SIZEOF_INT
---- SIZEOF_LONG
---- SIZEOF_LONG_LONG
---- SIZEOF_SHORT
---- SIZEOF_VOIDP
+通常、[[m:Kernel::RUBY_PLATFORM]] と同じ。
 
---- TYPE_CHAR
---- TYPE_DOUBLE
---- TYPE_FLOAT
---- TYPE_INT
---- TYPE_LONG
---- TYPE_LONG_LONG
---- TYPE_SHORT
---- TYPE_VOID
---- TYPE_VOIDP
+--- BUILD_RUBY_VERSION -> String
+ビルドに用いた ruby のバージョンを表す文字列。
 
-変数の型を表す定数です。unsigned char などを表したい場合は - を付けて
+通常、[[m:Kernel::RUBY_VERSION]] と同じ。
 
- - TYPE_CHAR
+#@# --- DLSTACK_SIZE
+#@# DL での C の関数での関数呼び出しで用意されるスタックのサイズ。
+#@# 
+#@# [[lib:fiddle]] を併用するときはこの値は利用されない
+#@# 
+#@# --- MAX_CALLBACK
+#@# 
+#@# たぶん使われていない
 
-などとします。
+
+--- NULL -> DL::CPtr
+C の NULL ポインタ
+
+--- RTLD_GLOBAL -> Integer
+dlopen のフラグ RTLD_GLOBAL を表す定数です。
+
+[[m:DL::Handle.new]] の flags として用います。
+
+詳しくは [[man:dlopen(3)]] を見てください。
+
+--- RTLD_LAZY -> Integer
+dlopen のフラグ RTLD_LAZY を表す定数です。
+
+[[m:DL::Handle.new]] の flags として用います。
+
+詳しくは [[man:dlopen(3)]] を見てください。
+
+--- RTLD_NOW -> Integer
+dlopen のフラグ RTLD_NOW を表す定数です。
+
+[[m:DL::Handle.new]] の flags として用います。
+
+詳しくは [[man:dlopen(3)]] を見てください。
+
+
+--- RUBY_FREE -> Integer
+ruby_xfree の関数ポインタのアドレスの値。
+
+--- SIZEOF_CHAR -> Integer
+Cでの sizeof(char) の値
+
+--- SIZEOF_DOUBLE -> Integer
+Cでの sizeof(double) の値
+
+--- SIZEOF_FLOAT -> Integer
+Cでの sizeof(float) の値
+
+--- SIZEOF_INT -> Integer
+Cでの sizeof(int) の値
+
+--- SIZEOF_LONG -> Integer
+Cでの sizeof(long) の値
+
+--- SIZEOF_LONG_LONG -> Integer
+Cでの sizeof(long long) の値
+
+--- SIZEOF_SHORT -> Integer
+Cでの sizeof(short) の値
+
+--- SIZEOF_VOIDP -> Integer
+Cでの sizeof(void*) の値
+
+--- TYPE_CHAR -> Integer
+C の char 型を表す定数。
+
+unsigned char を表すには符号を逆転させます。
+         
+--- TYPE_DOUBLE -> Integer
+C の double 型を表す定数。
+
+--- TYPE_FLOAT -> Integer
+C の float 型を表す定数。
+
+--- TYPE_INT -> Integer
+C の int 型を表す定数。
+
+unsigned int を表すには符号を逆転させます。
+
+--- TYPE_LONG -> Integer
+C の long 型を表す定数。
+
+unsigned long を表すには符号を逆転させます。
+
+--- TYPE_LONG_LONG -> Integer
+C の long long 型を表す定数。
+
+unsigned long long を表すには符号を逆転させます。
+
+--- TYPE_SHORT -> Integer
+C の short 型を表す定数。
+
+unsigned short を表すには符号を逆転させます。
+
+--- TYPE_VOID -> Integer
+C の void を表す定数。
+
+--- TYPE_VOIDP -> Integer
+C の void* 型を表す定数。
 
 = class DL::DLError < StandardError
+DL のエラー全般を表すクラス。
 
 = class DL::DLTypeError < StandardError
+DL の型変換エラーを表すクラス。
