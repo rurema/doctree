@@ -66,9 +66,9 @@ digest/sha2
 #@since 1.8.0
 dl
 dl/import
+dl/types
 #@until 1.9.1
 dl/struct
-dl/types
 dl/win32
 #@end
 #@end
