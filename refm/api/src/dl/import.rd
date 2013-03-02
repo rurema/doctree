@@ -4,4 +4,5 @@
 #@include(dl2/import.rd)
 #@include(dl2/Importer)
 #@include(dl2/Function)
+#@include(dl2/CStruct)
 #@end
