@@ -13,12 +13,12 @@ dl/import
 dl/struct                       
 dl/types                        
 dl/win32
-dl/dl2                          ohai
+dl/dl2                          ohai            done
 drb                             ohai            done
 fiddle                          ohai            done
 mathn                           yugui
 matrix                          bornite
-psych                           ohai
+psych                           ohai            done
 racc/parser
 rexml/attlistdecl
 rexml/attribute
