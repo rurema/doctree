@@ -533,7 +533,17 @@ self かその親クラス / 親モジュールがモジュール mod を
 
 --- included_modules -> [Module]
 
-インクルードされているモジュールの配列を返します。
+self にインクルードされているモジュールの配列を返します。
+
+  module Mixin
+  end
+
+  module Outer
+    include Mixin
+  end
+
+  Mixin.included_modules   #=> []
+  Outer.included_modules   #=> [Mixin]
 
 @see [[m:Module#ancestors]]
 
