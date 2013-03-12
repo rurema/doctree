@@ -148,6 +148,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で
 
 @raise ZeroDivisionError other が 0 の時に発生します。
 
+@see [[m:Numeric#quo]]
+
 #@since 1.9.2
 --- <=>(other) -> -1 | 0 | 1 | nil
 #@else
@@ -301,7 +303,8 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返し
 
 --- fdiv(other) -> Float
 
-自身を other で割った実数の商を返します。
+self を other で割った商を [[c:Float]] で返します。
+other に虚数を指定することは出来ません。
 
 @param other 自身を割る数
 
@@ -310,6 +313,9 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返し
   Rational(2, 3).fdiv(1)   # => 0.6666666666666666
   Rational(2, 3).fdiv(0.5) # => 1.3333333333333333
   Rational(2).fdiv(3)      # => 0.6666666666666666
+  
+  Rational(1).fdiv(Complex(1, 0))  # => 1.0
+  Rational(1).fdiv(Complex(0, 1))  # => RangeError
 
 #@since 1.9.2
 --- floor(precision = 0) -> Integer | Rational

@@ -286,22 +286,23 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェク�
 #@end
 
 --- quo(other) -> Complex
-複素数otherでの除算結果を返します。
 
-@param other 複素数
-@return self./(other) の結果においての実部と虚部をそれぞれ[[c:Rational]]オブジェクト化したものを実部・虚部とする[[c:Complex]]クラスのオブジェクトを返します。
-        
-===== 注意
+self を other で割った商を返します。
 
-[[m:Complex#/]] との違いは実部と虚部が全て整数だった場合に分数([[c:Rational]]クラスのオブジェクト)として計算されます。 
+[[lib:rational]] ライブラリを require している場合は、
+成分を有理数の範囲で計算できるなら実部・虚部が [[c:Rational]] の複素数で結果を返します。
 
-例:
+@param other self を割る数を指定します。
 
-  z1 = Complex.new(6, 4)
-  z2 = Complex.new(2, 2)
-
-  p z1.quo(2)   #=> Complex(Rational(3, 1), Rational(2, 1))
-  p z1.quo(z2)  #=> Complex(Rational(5, 2), Rational(-1, 2))
+  require 'complex'
+  z = Complex.new(1, 0)
+  
+  z.quo(2)    #=> Complex(0.5, 0.0)
+  z.quo(2.0)  #=> Complex(0.5, 0.0)
+  
+  require 'rational'
+  z.quo(2)    #=> Complex(Rational(1, 2), Rational(0, 1))
+  z.quo(2.0)  #=> Complex(0.5, 0.0)
 
 --- abs -> Float
 自分自身の絶対値を返します。

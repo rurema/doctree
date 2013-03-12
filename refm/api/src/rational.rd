@@ -248,13 +248,17 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 
 --- quo(other) -> Rational
 
-商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+self を other で割った商を返します。
+
+再定義前と違って計算結果が有理数の範囲に収まる場合は [[c:Rational]] オブジェクトを返します。
 
 @param other 自身を割る数
 
 例:
 
+  require 'rational'
   1.quo(2)              # => Rational(1,2)
+  1.quo(2.0)            # => 0.5
 
 --- **(other) -> Integer | Float | Rational
 --- rpower (other) -> Integer | Float | Rational
@@ -283,13 +287,17 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、�
 == Instance Methods
 --- quo(other) -> Rational
 
-商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+self を other で割った商を返します。
+
+再定義前と違って計算結果が有理数の範囲に収まる場合は [[c:Rational]] オブジェクトを返します。
 
 @param other 自身を割る数
 
 例:
 
+  require 'rational'
   (1<<32).quo(2)              # => Rational(2147483648, 1)
+  (1<<32).quo(2.0)            # => 2147483648.0
 
 --- **(other) -> Integer | Float | Rational
 --- rpower (other) -> Integer | Float | Rational

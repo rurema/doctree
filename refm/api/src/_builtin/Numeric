@@ -449,8 +449,10 @@ divmod が返す商は [[m:Numeric#div]] と同じです。
 --- quo(other)    -> Rational | Float | Complex
 
 self を other で割った商を返します。
+整商を得たい場合は [[Numeric#div]] を使ってください。
 
-結果をなるべく [[c:Rational]] で返します。
+[[Numeric#fdiv]] が結果を [[c:Float]] で返すメソッドなのに対して quo はなるべく正確な数値を返すことを意図しています。
+具体的には有理数の範囲に収まる計算では [[c:Rational]] の値を返します。
 [[c:Float]] や [[c:Complex]] が関わるときはそれらのクラスになります。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
@@ -475,8 +477,13 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 --- quo(other)    -> Float
 
 self を other で割った商を返します。
+整商を得たい場合は [[Numeric#div]] を使ってください。
 
-[[lib:rational]] ライブラリを require している場合はなるべく [[c:Rational]] を返します。
+#@since 1.8.7
+[[Numeric#fdiv]] が結果を [[c:Float]] で返すメソッドなのに対して quo はなるべく正確な数値を返すことを意図しています。
+#@end
+通常は [[c:Float]] の値を返しますが、
+[[lib:rational]] ライブラリを require している場合は有理数の範囲に収まるなら [[c:Rational]] の値を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 

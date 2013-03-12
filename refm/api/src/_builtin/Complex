@@ -89,6 +89,8 @@
   Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
   Complex(10)   / 3  # => ((10/3)+(0/1)*i)
 
+@see [[m:Numeric#quo]]
+
 --- ==(other) -> bool
 
 数値として等しいか判定します。
@@ -208,7 +210,8 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 --- fdiv(other) -> Complex
 
-自身の実部と虚部をそれぞれ実数として other で割った商を返します。
+self を other で割った商を返します。
+実部と虚部が共に [[c:Float]] の値になります。
 
 @param other 自身を割る数
 
