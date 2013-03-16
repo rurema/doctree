@@ -51,7 +51,7 @@ GC.stress が真に設定されている間は、GC を行えるすべての機�
 #@end
 
 #@since 1.9.3
---- stat(result_hash => {}) -> {Symbol => Integer}
+--- stat(result_hash = {}) -> {Symbol => Integer}
 
 GC 内部の統計情報を [[c:Hash]] で返します。
 
