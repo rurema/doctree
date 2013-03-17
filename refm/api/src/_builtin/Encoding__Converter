@@ -3,7 +3,11 @@
 文字エンコーディング(文字符号化方式)の変換器のクラスです。既存の変換器より一段細かな処理が可能となります。
 
 Encoding::Converter を用いて変換を行う場合は、[[m:Encoding::Converter#convert]] か、より細かな変換処理が可能な [[m:Encoding::Converter#primitive_convert]] が利用できます。
-エンコーディングを変換するメソッドはこの他に [[m:String#encode]], [[m:NKF.#nkf]], [[m:Iconv#conv]] などがあります。
+エンコーディングを変換するメソッドはこの他に [[m:String#encode]], [[m:NKF.#nkf]]
+#@until 2.0.0
+, [[m:Iconv#conv]]
+#@end
+などがあります。
 
 == Class Methods
 --- new(source_encoding, destination_encoding) -> Encoding::Converter
