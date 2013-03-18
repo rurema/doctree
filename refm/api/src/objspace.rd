@@ -56,7 +56,7 @@ obj が消費するメモリ使用量をバイト単位で返します。
 
   def memsize_of_all klass = false
     total = 0
-    ObjectSpace.each_objects{|e|
+    ObjectSpace.each_object{|e|
       total += ObjectSpace.memsize_of(e) if klass == false || e.kind_of?(klass)
     }
     total
