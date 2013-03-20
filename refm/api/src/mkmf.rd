@@ -174,7 +174,7 @@ extconf.rb が生成する Makefile には以下のターゲットが定義さ�
 @see [[m:Kernel.#system]]
 
 --- xpopen(command, *mode) -> IO
---- xpopen(command, *mode){ ... } -> opbject
+--- xpopen(command, *mode){ ... } -> object
 
 command を表示してから [[m:IO.popen]] の実行します。
 
