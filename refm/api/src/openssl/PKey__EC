@@ -166,19 +166,19 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 現在の仕様では [[m:OpenSSL::PKey::RSA#to_pem]] のように
 出力をパスフレーズで暗号化することはできません。
 
-@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+@raise OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
        公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 --- to_der -> String
 鍵を DER 形式の文字列に変換します。
 
-@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+@raise OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
        公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 --- to_text -> String
 鍵を人間が読める形式に変換します。
 
-@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+@raise OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
        公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 == Constants
