@@ -50,8 +50,8 @@ path で指定したパス名を用いて接続を受け付けるソケット
 発生します。
 
 #@since 1.9.1
-[[m:Errno::EWOULDBLOCK]], [[m:Errno::AGAIN]], 
-[[m:Errno::ECONNABORTED]], [[Errno::EPROTO]] のいずれかの例外が
+[[c:Errno::EWOULDBLOCK]], [[c:Errno::EAGAIN]], 
+[[c:Errno::ECONNABORTED]], [[c:Errno::EPROTO]] のいずれかの例外が
 発生した場合は、その例外には [[c:IO::WaitReadable]] が extend
 されます。それを利用してリトライ可能な例外を掴まえることができます。
 

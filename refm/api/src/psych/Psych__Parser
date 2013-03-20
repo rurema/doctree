@@ -71,7 +71,7 @@ handler で YAML のイベントを処理するハンドラを指定します。
 YAML ドキュメントをパースし、イベントハンドラに
 イベントを逐次通知します。
 
-@see [[c:Psych::Parser.new]], [[c:Psych::Handler], [[m:Psych::Parser#handler]]
+@see [[m:Psych::Parser.new]], [[c:Psych::Handler]], [[m:Psych::Parser#handler]]
 
 --- mark -> Psych::Parser::Mark
 

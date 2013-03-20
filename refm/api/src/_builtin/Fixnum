@@ -90,10 +90,10 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 --- quo(other) -> Float
 
 self を other で割った商を返します。
-整商を得たい場合は [[Fixnum#div]] を使ってください。
+整商を得たい場合は [[m:Fixnum#div]] を使ってください。
 
 #@since 1.8.7
-[[Fixnum#fdiv]] との違いについては [[m:Numeric#quo]] を参照してください。
+[[m:Fixnum#fdiv]] との違いについては [[m:Numeric#quo]] を参照してください。
 #@end
 
 @param other self を割る数を指定します。
