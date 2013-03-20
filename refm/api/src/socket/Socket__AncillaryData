@@ -64,7 +64,7 @@ Socket::AncillaryData オブジェクトを生成します。
 @param family ソケットファミリー
 @param cmsg_level プロトコル
 @param cmsg_type 補助データの種類
-@param cmsg_data データ内容
+@param integer データ内容
 
 @see [[m:Socket::AncillaryData.new]]
 
