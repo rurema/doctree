@@ -135,7 +135,7 @@ filename はパース中に発生した例外のメッセージに用います�
     p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
   end
 
---- parse(yaml) -> Psych::Nodes::Document
+--- parse(yaml, filename = nil) -> Psych::Nodes::Document
 YAML ドキュメントをパースし、YAML の AST を返します。
 
 入力に複数のドキュメントが含まれている場合は、先頭のものを AST に変換して
