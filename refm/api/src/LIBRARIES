@@ -97,6 +97,10 @@ fiber
 #@end
 #@since 1.9.1
 fiddle
+#@since 2.0.0
+fiddle/import
+fiddle/types
+#@end
 #@end
 #@since 1.8.0
 fileutils

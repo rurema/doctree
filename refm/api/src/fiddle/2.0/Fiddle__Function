@@ -1,0 +1,215 @@
+= class Fiddle::Function < Object
+C の関数を表すクラスです。
+
+== Class Methods
+--- new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT, name: nil) -> Fiddle::Function
+ptr (関数ポインタ)から Fiddle::Function オブジェクトを
+生成します。
+
+ptr には [[c:Fiddle::Handle]] から [[m:Fiddle::Handle#ptr]] などで取りだした
+関数ポインタ(を表す整数)、もしくは関数を指している 
+[[c:Fiddle::Pointer]] を渡します。
+
+args、ret_type で関数の引数と返り値の型を指定します。これには以下の
+定数が利用できます。「-TYPE_INT」 のように符号を反転させると unsigned を
+意味します。
+  * [[m:Fiddle::TYPE_VOID]]
+  * [[m:Fiddle::TYPE_VOIDP]]
+  * [[m:Fiddle::TYPE_CHAR]]
+  * [[m:Fiddle::TYPE_SHORT]]
+  * [[m:Fiddle::TYPE_INT]]
+  * [[m:Fiddle::TYPE_LONG]]
+  * [[m:Fiddle::TYPE_LONG_LONG]]
+  * [[m:Fiddle::TYPE_FLOAT]]
+  * [[m:Fiddle::TYPE_DOUBLE]]
+  * [[m:Fiddle::TYPE_INTPTR_T]]
+  * [[m:Fiddle::TYPE_UINTPTR_T]]
+  * [[m:Fiddle::TYPE_PTRDIFF_T]]
+  * [[m:Fiddle::TYPE_SIZE_T]]
+  * [[m:Fiddle::TYPE_SSIZE_T]]
+
+
+abi で呼出規約を指定します。
+  * [[m:Fiddle::Function::DEFAULT]]
+  * [[m:Fiddle::Function::STDCALL]]
+のどちらかを指定します。
+
+  require 'fiddle'
+  
+  h = Fiddle::Handle.new('libc.so.6')
+  func = Fiddle::Function.new(h.sym("strlen"), [Fiddle::TYPE_VOIDP], 
+                              Fiddle::TYPE_INT, name: "strlen")
+  p func.ptr == h.sym("strlen") # => true
+  p func.call("abc") # => 3
+  p func.name # => "strlen"
+
+@param ptr C の関数を指す [[c:Fiddle::Pointer]] オブジェクトもしくは
+       アドレスを表す整数
+@param args 引数の型を表す配列
+@param ret_type 返り値の型
+@param abi 呼出規約
+@param name 関数の名前(文字列)
+
+== Instance Methods
+--- call(*args) -> Integer|DL::CPtr|nil
+関数を呼び出します。
+
+[[m:Fiddle::Function.new]] で指定した引数と返り値の型に基いて
+Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、
+その返り値を Ruby のオブジェクトに変換して返します。
+
+引数の変換は以下の通りです。
+
+@include(callargs)
+
+@param args 関数の引数
+@see [[m:Fiddle::Function.new]]
+
+--- abi -> Integer
+呼出規約を返します。
+
+@see [[m:Fiddle::Function.new]]
+
+--- name -> nil | String
+関数の名前を返します。
+
+名前が定義されていない場合は nil を返します。
+
+@see [[m:Fiddle::Function.new]]
+
+--- ptr -> Integer | Fiddle::Function
+関数ポインタを返します。
+
+[[m:Fiddle::Function.new]] の第1引数として指定したものを返します。
+
+--- to_i -> Integer
+関数ポインタのアドレスを整数で返します。
+
+@see [[m:Fiddle::Function#ptr]]
+
+== Constants
+--- DEFAULT -> Integer
+デフォルトの呼出規約を表します。
+
+@see [[m:Fiddle::Function.new]]
+
+--- STDCALL -> Integer
+Windows の stdcall 呼出規約を表します。
+
+stdcall 呼出規約を持つ環境でのみ定義されます。
+
+@see [[m:Fiddle::Function.new]]
+
+= class Fiddle::Closure < Object
+コールバック関数を表すクラスです。
+
+Ruby のメソッド(call)を C の関数ポインタとして表現するためのクラスです。
+
+FFI の closure の wrapper です。
+
+利用法としては、このクラスのサブクラスを作って
+そのサブクラスに call メソッドを定義し、
+new でオブジェクトを生成することで利用します。
+  
+  require 'fiddle'
+  include Fiddle # TYPE_* を使うために include する
+  
+  class Compare < Fiddle::Closure
+    # qsort の比較関数は 型が int(*)(void*, void*) であるため、
+    # このメソッドには DL::CPtr オブジェクトが渡される。
+    # そのポインタが指す先は比較している文字なので、
+    # DL::CPtr#to_s で1文字の文字列に変換している
+    def call(x, y)
+      x.to_s(1) <=> y.to_s(1)
+    end
+  end
+  
+  libc = DL.dlopen("/lib/libc.so.6")
+  qs = Fiddle::Function.new(libc["qsort"],
+                            [TYPE_VOIDP, TYPE_INT, TYPE_INT, TYPE_VOIDP],
+                            TYPE_VOID)
+  s = "7x0cba(Uq)"
+  qs.call(s, s.size, 1, Compare.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]))
+  p s # =>  "()07Uabcqx"
+
+[[m:Class.new]] を使うことで、サブクラスを明示的に作ることなしに
+コールバックオブジェクトを作ることができます。
+  compare = Class.new(Fiddle::Closure){
+    def call(x, y)
+      x.to_s(1) <=> y
+    end
+  }.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP])
+
+単に Ruby のブロックを C の(コールバック)関数に変換したい場合は
+[[c:Fiddle::BlockClosure]] を使うほうが簡単です。
+
+== Class Methods
+--- new(ret, args, abi=Fiddle::Function::DEFAULT) -> Fiddle::Closure
+
+そのクラスの call メソッドを呼びだすような
+Fiddle::Closure オブジェクトを返します。
+
+args、ret で関数の引数と返り値の型を指定します。
+指定は [[m:Fiddle::Function.new]] と同様なので、そちら
+を参照してください。
+
+@param ret 返り値の型
+@param args 引数の型を表す配列
+@param abi 呼出規約
+
+== Instance Methods
+--- to_i -> Integer
+
+C の関数ポインタのアドレスを返します。
+
+--- ctype -> Integer 
+返り値の型を返します。
+
+--- args -> [Integer]
+引数の型を表す配列を返します。
+
+= class Fiddle::Closure::BlockCaller < Fiddle::Closure
+Ruby のブロックをラップしたコールバック関数を表すクラスです。
+
+Ruby のブロックを C の関数ポインタとして表現するためのクラスです。
+
+  require 'fiddle'
+  include Fiddle
+
+  libc = Fiddle.dlopen("/lib/libc.so.6")
+  qs = Fiddle::Function.new(libc["qsort"],
+                            [TYPE_VOIDP, TYPE_INT, TYPE_INT, TYPE_VOIDP],
+                            TYPE_VOID)
+  compare = Fiddle::Closure::BlockCaller.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]){|x, y|
+    # qsort の比較関数は 型が int(*)(void*, void*) であるため、
+    # このブロックには DL::CPtr オブジェクトが渡される。
+    # そのポインタが指す先は比較している文字なので、
+    # DL::CPtr#to_s で1文字の文字列に変換している
+    x.to_s(1) <=> y.to_s(1)
+  }
+  s = "7x0cba(Uq)"
+  qs.call(s, s.size, 1, compare)
+  p s # =>  "()07Uabcqx"
+
+== Class Methods
+--- new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::BlockClosure
+
+Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
+
+
+args、ret で関数の引数と返り値の型を指定します。
+指定は [[m:Fiddle::Function.new]] と同様なので、そちら
+を参照してください。
+
+@param ret 返り値の型
+@param args 引数の型を表す配列
+@param abi 呼出規約
+
+== Instance Methods
+--- call(*args) -> object
+
+wrap しているブロックを呼び出します。
+
+そのブロックの返り値がこのメソッドの返り値となります。
+
+@param args 引数
