@@ -20,39 +20,7 @@ mathn                           yugui
 matrix                          bornite
 psych                           ohai            done
 racc/parser
-rexml/attlistdecl
-rexml/attribute
-rexml/cdata
-rexml/child
-rexml/comment
-rexml/doctype
-rexml/document
-rexml/dtd
-rexml/element
-rexml/encoding
-rexml/encodings
-rexml/entity
-rexml/functions
-rexml/instruction
-rexml/light
-rexml/namespace
-rexml/node
-rexml/output
-rexml/parent
-rexml/parseexception
-rexml/parsers
-rexml/quickpath
-rexml/rexml
-rexml/sax2listener
-rexml/source
-rexml/streamlistener
-rexml/syncenumerator
-rexml/text
-rexml/validation
-rexml/xmldecl
-rexml/xmltokens
-rexml/xpath
-rexml/xpath_parser
+rexml                           ohai
 rinda/rinda                     
 rinda/tuplespace                
 rss
