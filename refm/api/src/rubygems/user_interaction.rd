@@ -339,12 +339,12 @@ WARNING レベルのアラートを表示します。
 
 @param message 表示するメッセージを指定します。
 
-= class ConsoleUI < Gem::StreamUI
+= class Gem::ConsoleUI < Gem::StreamUI
 
 [[c:Gem::StreamUI]] を標準入力、標準出力、標準エラー出力を使用して初期化します。
 
 @see [[m:Kernel::STDIN]], [[m:Kernel::STDOUT]], [[m:Kernel::STDERR]]
 
-= class SilentUI
+= class Gem::SilentUI
 
 完全に何もしない UI です。
