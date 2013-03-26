@@ -211,7 +211,7 @@ Ruby のバージョンは、major.minor.teeny という形式です。
 
 Ruby 1.8 までは、minor が奇数のバージョンは開発版、
 minor が偶数のバージョンは安定版です。
-RUby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
+Ruby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
 
 --- RUBY_RELEASE_DATE -> String
 
