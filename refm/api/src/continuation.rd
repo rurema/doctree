@@ -1,4 +1,4 @@
-Ruby 1.9で継続オブジェクトを扱うためのライブラリです。
+Ruby 1.9 以降で継続オブジェクトを扱うためのライブラリです。
 
 = reopen Kernel
 == Module functions

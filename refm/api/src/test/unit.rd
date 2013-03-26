@@ -9,10 +9,10 @@ require test/unit/autorunner
 
 #@since 1.9.1
 test/unit は [[lib:minitest/unit]] を使って再実装されましたが、完全な互
-換性がある訳ではありません。1.9 系で test/unit を使いたい場合は、以下の
-test-unit を RubyGems でインストールしてください。(本ドキュメントでは、
-1.9 系については [[lib:minitest/unit]] で再実装された test/unit につい
-て記述しています)
+換性がある訳ではありません。1.9 以降で test/unit を使いたい場合は、以下
+のtest-unit を RubyGems でインストールしてください。(本ドキュメントでは、
+1.9 以降については [[lib:minitest/unit]] で再実装された test/unit につ
+いて記述しています)
 
   * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.rubyforge.org/index.html.ja]]
 #@end

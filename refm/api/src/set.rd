@@ -28,7 +28,7 @@ Ruby 1.8 では、集合オブジェクトに対する taint, untaint, freeze �
 例えば、set.freeze に続いて set.add を呼び出しても、エラーは発生
 しません。
 #@else
-Ruby 1.9 では、集合オブジェクトに対する taint, untaint, freeze の各
+Ruby 1.9 以降では、集合オブジェクトに対する taint, untaint, freeze の各
 メソッドの効果は、内部記憶として保持するハッシュにも適用されます。
 
 集合オブジェクトおよびその内部記憶にセットされた taint 情報は、

@@ -8,8 +8,8 @@ require cmath
 
 #@since 1.9.1
 
-1.9系では [[c:Complex]] クラスは組み込みクラスになりました。complex ラ
-イブラリは互換性のために残されています。
+1.9 以降では [[c:Complex]] クラスは組み込みクラスになりました。complex
+ライブラリは互換性のために残されています。
 
 = reopen Numeric
 
@@ -74,8 +74,8 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
   Complex(Complex(1, 1), Complex(2, 3))         # => Complex(-2, 3)
   Complex(1, 1) + Complex(2, 3) * Complex(0, 1) # => Complex(-2, 3)
 
-[注意] 1.9 系とは異なり、Complex('1+1i') のように文字列を引数に渡す事は
-できません。
+[注意] 1.9 以降とは異なり、Complex('1+1i') のように文字列を引数に渡す事
+はできません。
 
   Complex('1+1i')  # => NoMethodError
   Complex('10@10') # => NoMethodError
