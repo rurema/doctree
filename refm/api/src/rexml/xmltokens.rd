@@ -1,24 +1,28 @@
 = module REXML::XMLTokens
 
-== Constants
+XML をパースするための正規表現を保持しているモジュールです。
 
---- NCNAME_STR
-#@todo
+ユーザがこのモジュールを必要とすることはないでしょう。
 
---- NAME_STR
-#@todo
-
---- NAMECHAR
-#@todo
-
---- NAME
-#@todo
-
---- NMTOKEN
-#@todo
-
---- NMTOKENS
-#@todo
-
---- REFERENCE
-#@todo
+#@# == Constants
+#@# 
+#@# --- NCNAME_STR
+#@# #@todo
+#@# 
+#@# --- NAME_STR
+#@# #@todo
+#@# 
+#@# --- NAMECHAR
+#@# #@todo
+#@# 
+#@# --- NAME
+#@# #@todo
+#@# 
+#@# --- NMTOKEN
+#@# #@todo
+#@# 
+#@# --- NMTOKENS
+#@# #@todo
+#@# 
+#@# --- REFERENCE
+#@# #@todo
