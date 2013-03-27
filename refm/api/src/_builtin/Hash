@@ -101,7 +101,6 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
 
 以下は配列からハッシュを生成する方法の例です。
 
-#@since 1.8.0
 #@until 1.9.1
 (1) [キー, 値, ...] の配列からハッシュへ
 
@@ -135,7 +134,6 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
     h[k] = v
   }
   p h  # => {1=>["a"], 2=>["b"], 3=>["c"]}
-#@end
 #@end
 #@end
 #@since 1.9.1
@@ -202,7 +200,6 @@ ifnoneを省略した Hash.new は {} と同じです。
   h[1] << 1
   # エラー `<<': can't modify frozen array (TypeError)
 
-#@since 1.8.0
 --- new {|hash, key| ... } -> Hash
 空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
 す。設定したデフォルト値は[[m:Hash#default_proc]]で参照できます。
@@ -247,7 +244,6 @@ ifnoneを省略した Hash.new は {} と同じです。
                }
   h[1]
   # エラー hash[1] has no value (IndexError)
-#@end
 
 @see [[m:Hash#default=]],[[m:Hash#default]],[[m:Hash#default_proc]]
 
@@ -325,7 +321,6 @@ self を [[c:Hash]] オブジェクトに変換します。
   h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
   p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
 
-#@since 1.8.0
 ==== 参考
 値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
 
@@ -340,8 +335,8 @@ self を [[c:Hash]] オブジェクトに変換します。
       #=> {1=>["a", "b"], 3=>["c"]}
   
   #転載：Rubyレシピブック No.120
-#@end
-#@since 1.8.8
+
+#@since 1.9.1
 @see [[m:Hash#key]]
 #@else
 @see [[m:Hash#index]]
@@ -500,11 +495,9 @@ shiftは破壊的メソッドです。selfは要素を取り除かれた残り�
   p h1                    #=> {}
   p h1.shift              #=> "default value"
   
-#@since 1.8.0
   h2 = Hash.new {|*arg| arg}
   p h2                    #=> {}
   p h2.shift              #=> [{}, nil]
-#@end
 
 
 @see [[m:Array#shift]]
@@ -566,12 +559,9 @@ key に関連づけられた値を返します。
 @see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
 
 --- default -> object | nil
-#@since 1.8.0
 --- default(key) -> object | nil
-#@end
 ハッシュのデフォルト値を返します。
 
-#@since 1.8.0
 ハッシュのデフォルト値がブロックで与えられている場合、 1 番目の形式だと
 返り値が nil になることに注意してください。この場合、ハッシュのデフォルト値に
 ついて調べるには 2 番目の形式か [[m:Hash#default_proc]] を使ってください。
@@ -595,10 +585,6 @@ self と引数 key をブロックに渡して評価し、その結果を返し�
   p h.default        #=> nil
   p h.default(:some) #=> nil
   p h                #=> {}
-#@else
-  h = Hash.new("default")
-  p h.default #=>"default"
-#@end
 
 @see [[m:Hash#default=]], [[m:Hash#default_proc]]
 
@@ -761,7 +747,7 @@ reject! は、要素を削除しなかった場合には nil を返し、
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each      -> Enumerator
 --- each_pair -> Enumerator
 #@else
@@ -779,7 +765,7 @@ reject! は、要素を削除しなかった場合には nil を返し、
 #@end
 #@since 1.8.7
 ブロック付きの場合 self を、
-#@since 1.8.8
+#@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 #@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
@@ -822,7 +808,7 @@ each_pair は each のエイリアスです。
   #=> [:a, 1]
       [:b, 2]
   
-#@since 1.8.8
+#@since 1.9.1
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
 #@else
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
@@ -833,7 +819,7 @@ each_pair は each のエイリアスです。
 
 --- each_key {|key| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_key -> Enumerator
 #@else
 --- each_key -> Enumerable::Enumerator
@@ -849,7 +835,7 @@ each_pair は each のエイリアスです。
 #@end
 #@since 1.8.7
 ブロック付きの場合selfを、
-#@since 1.8.8
+#@since 1.9.1
 無しで呼ばれた場合[[c:Enumerator]]を返します。
 #@else
 無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
@@ -863,7 +849,7 @@ self を返します。
       :b
        
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
 #@else
   p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
@@ -874,7 +860,7 @@ self を返します。
 
 --- each_value {|value| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_value -> Enumerator
 #@else
 --- each_value -> Enumerable::Enumerator
@@ -890,7 +876,7 @@ self を返します。
 #@end
 #@since 1.8.7
 ブロック付きの場合selfを、
-#@since 1.8.8
+#@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 #@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
@@ -904,7 +890,7 @@ self を返します。
       2
   
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
   p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
 #@else
   p({:a=>1, :b=>2}.each_value)  #=> #<Enumerable::Enumerator:0xbb19e4>
@@ -913,7 +899,7 @@ self を返します。
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
-#@if (version < "1.8.8")
+#@if (version < "1.9.1")
 --- index(val) -> object
 #@else
 --- key(val) -> object
@@ -925,20 +911,14 @@ nil を返します。
 
 該当するキーが複数存在する場合、どのキーを返すかは不定です。
 
-#@since 1.8.0
-
 #@if (version < "1.9.1")
-#@if (version >= "1.8.0")
 Hash#index は 次バージョンの1.9では((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
-#@end
 #@end
 
 #@if (version >= "1.9.1")
 Hash#index は 現バージョンの1.9では((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
-#@end
-
 #@end
 
 @param val 探索に用いる値を指定します。
@@ -959,7 +939,6 @@ Hash#index は 現バージョンの1.9では((<obsolete>)) です。
 
 @see [[m:Hash#invert]]
 
-#@since 1.8.0
 --- values_at(*keys) -> [object]
 
 引数で指定されたキーに対応する値の配列を返します。
@@ -977,7 +956,6 @@ Hash#index は 現バージョンの1.9では((<obsolete>)) です。
   # [h[1], h[3] ,h[4]] と同じ
 
 @see [[m:Hash#[] ]], [[m:Hash.new]], [[m:Hash#default]], [[m:Hash#default_proc]], [[m:Array#values_at]]
-#@end
 
 #@if (version < "1.9.1")
 --- indexes(*keys) -> [object]
@@ -985,26 +963,11 @@ Hash#index は 現バージョンの1.9では((<obsolete>)) です。
 
 引数で指定されたキーに対応する値の配列を返します。
 
-#@since 1.8.0
 このメソッドは ((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 代わりに [[m:Hash#values_at]] を使用してください。
-#@else
-[self[引数1], self[引数2], ...]と同じです。
-
-キーに対応する値がなければ デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]のブロックの値か、
-どちらもnilならばnil）が使用されます。
-#@end
 
 @param keys キーを任意個指定します。
-
-#@if (version < "1.8.0")
-
-  h = {1=>"a", 2=>"b", 3=>"c"}
-  
-  p h.indices(1,3,4)               #=> ["a", "c", nil]
-  # [h[1], h[3] ,h[4]] と同じ
-#@end
 
 @see [[m:Hash#values_at]],[[m:Hash#[] ]]
 #@end
@@ -1033,7 +996,6 @@ Hash#index は 現バージョンの1.9では((<obsolete>)) です。
 
 @see [[m:Object#hash]]
 
-#@since 1.8.0
 --- merge(other) -> Hash
 --- merge(other) {|key, self_val, other_val| ... } -> Hash
 --- merge!(other) -> self
@@ -1078,9 +1040,7 @@ otherがハッシュではない場合、otherのメソッドto_hashを使って
   p h #=> {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
 
 @see [[m:Hash#update]],[[m:Hash#replace]]
-#@end
 
-#@since 1.8.0
 --- update(other) -> self
 --- update(other) {|key, self_val, other_val| ... } -> self
 
@@ -1102,25 +1062,6 @@ otherがハッシュではない場合、otherのメソッドto_hashを使って
   p foo  #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 
 @see [[m:Hash#merge!]]
-
-#@else
---- update(other) -> self
-
-selfとotherのハッシュの内容をマージ(統合)します。重複するキーは常にotherで上書きします。
-
-デフォルト値はselfの設定のままです。
-otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
-
-@param other マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
-@return マージ後のselfを返します。
-
-  foo = {1 => 'a', 2 => 'b', 3 => 'c'}
-  bar = {2 => 'B', 3 => 'C', 4 => 'D'}
-  
-  p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-
-#@end
 
 --- ==(other) -> bool
 --- ===(other) -> bool
@@ -1246,7 +1187,7 @@ key が見つからなかった場合は、nil を返します。
 #@end
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- select                        -> Enumerator
 #@else
 --- select                        -> Enumerable::Enumerator
