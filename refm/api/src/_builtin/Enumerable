@@ -1173,17 +1173,23 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 #@since 2.0.0
 --- lazy -> Enumerator::Lazy
-#@todo
 
-Returns a lazy enumerator, whose methods map/collect,
-flat_map/collect_concat, select/find_all, reject, grep, zip, take,
-take_while, drop, drop_while, and cycle enumerate values only on an
-as-needed basis.  However, if a block is given to zip or cycle, values
-are enumerated immediately.
+自身を lazy な Enumerator に変換したものを返します。この Enumerator は、
+以下のメソッドが遅延評価を行う (つまり、配列ではなくEnumeratorを返す) 
+ように再定義されています。
 
-==== Example
+ * map/collect
+ * flat_map/collect_concat
+ * select/find_all
+ * reject
+ * grep
+ * take, take_while
+ * drop, drop_while
+ * zip (※一貫性のため、ブロックを渡さないケースのみlazy)
+ * cycle (※一貫性のため、ブロックを渡さないケースのみlazy)
 
-The following program finds pythagorean triples:
+以下はピタゴラス数 (a**2 + b**2 = c**2 を満たす自然数 a, b, c の組) を
+列挙するプログラムです。
 
   def pythagorean_triples
     (1..Float::INFINITY).lazy.flat_map {|z|
@@ -1196,10 +1202,10 @@ The following program finds pythagorean triples:
       }
     }
   end
-  # show first ten pythagorean triples
-  p pythagorean_triples.take(10).force # take is lazy, so force is needed
-  p pythagorean_triples.first(10)      # first is eager
-  # show pythagorean triples less than 100
+  # 最初の10個のピタゴラス数を表示する
+  p pythagorean_triples.take(10).force # takeはlazyなので、forceが必要です
+  p pythagorean_triples.first(10)      # firstはeagerです
+  # 100より小さいピタゴラス数を表示する
   p pythagorean_triples.take_while { |*, z| z < 100 }.force
 
 @see [[c:Enumerator::Lazy]]

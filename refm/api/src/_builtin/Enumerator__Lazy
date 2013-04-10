@@ -1,71 +1,188 @@
 = class Enumerator::Lazy < Enumerator
 
+map や select などのメソッドの遅延評価版を提供するためのクラス。
+動作は通常の Enumerator と同じですが、以下のメソッドが遅延評価を行う
+(つまり、配列ではなく Enumerator を返す) ように再定義されています。
+
+ * map/collect
+ * flat_map/collect_concat
+ * select/find_all
+ * reject
+ * grep
+ * take, take_while
+ * drop, drop_while
+ * zip (※互換性のため、ブロックを渡さないケースのみlazy)
+ * cycle (※互換性のため、ブロックを渡さないケースのみlazy)
+
+Lazyオブジェクトは、[[m:Enumerable#lazy]]メソッドによって生成されます。
+
+Lazyから値を取り出すには、[[m:Enumerator::Lazy#force]] または
+[[m:Enumerator::Lazy#first]] を呼びます。
+
+例:
+
+  # 二乗して偶数になるような整数を、小さい方から5個表示する
+  p (1..Float::INFINITY).lazy.select{|n| (n**2).even?}.first(5)
+  # LTSV (http://ltsv.org/) 形式のログファイルから検索を行う
+  # [[m:Enumerator::Lazy#map]] は配列ではなく Enumerator を返すため、
+  # 巨大な配列を確保しようとしてメモリを使い切ったりはしない
+  open("log.txt"){|f|
+    f.each_line.lazy.map{|line|
+      Hash[line.split(/\t/).map{|s| s.split(/:/, 2)}]
+    }.select{|hash|
+      hash["req"] =~ /GET/ && hash["status"] == "200"
+    }.each{|hash|
+      p hash
+    }
+  }
+
 == Class Methods
 
---- new
-#@todo
+--- new(obj, size=nil) {|yielder, *values| ... } -> Enumerator::Lazy
 
-@raise ArgumentError 引数を指定しなかった場合に発生します。
+Lazy Enumerator を作成します。[[m:Enumerator::Lazy#force]] メソッドなどに
+よって列挙が実行されたとき、objのeachメソッドが実行され、値が一つずつ
+ブロックに渡されます。ブロックは、yielder を使って最終的に yield される値を
+指定できます。
+
+Enumerable#filter_map と、その遅延評価版を定義する例:
+
+  module Enumerable
+    def filter_map(&block)
+      map(&block).compact
+    end
+  end
+
+  class Enumerator::Lazy
+    def filter_map
+      Lazy.new(self) do |yielder, *values|
+        result = yield *values
+        yielder << result if result
+      end
+    end
+  end
+
+  (1..Float::INFINITY).lazy.filter_map{|i| i*i if i.even?}.first(5)
+      # => [4, 16, 36, 64, 100]
+
+@raise ArgumentError 引数を指定しなかった場合、ブロックを指定しなかった場合に発生します。
+
+@see [[m:Enumerator.new]]
 
 == Instance Methods
 
---- map {|item| ... }
---- collect {|item| ... }
-#@todo
+--- map {|item| ... } -> Enumerator::Lazy
+--- collect {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#map]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
---- flat_map {|item| ... }
---- collect_concat {|item| ... }
-#@todo
+@see [[m:Enumerable#map]]
+
+--- flat_map {|item| ... } -> Enumerator::Lazy
+--- collect_concat {|item| ... } -> Enumerator::Lazy
+
+ブロックの実行結果をひとつに繋げたものに対してイテレートするような
+Enumerator::Lazy のインスタンスを返します。
+
+  ["foo", "bar"].lazy.flat_map {|i| i.each_char.lazy}.force
+  #=> ["f", "o", "o", "b", "a", "r"]
+
+ブロックの返した値 x は、以下の場合にのみ分解され、連結されます。
+
+ * x が配列であるか、to_ary メソッドを持つとき
+ * x が each および force メソッドを持つ (例：Enumerator::Lazy) とき
+
+それ以外のときは、x は分解されず、そのままの値として使われます。
+
+  [{a:1}, {b:2}].lazy.flat_map {|i| i}.force
+  #=> [{:a=>1}, {:b=>2}]
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
---- select {|item| ... }
---- find_all {|item| ... }
-#@todo
+@see [[m:Enumerable#flat_map]]
+
+--- select {|item| ... } -> Enumerator::Lazy
+--- find_all {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#select]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
---- size -> Integer | nil
-#@todo
+@see [[m:Enumerable#select]]
 
---- reject {|item| ... }
-#@todo
+--- reject {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#reject]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
---- grep(pattern) {|item| ... }
-#@todo
+@see [[m:Enumerable#reject]]
 
---- zip(*lists) {|v1, v2, ...| ... }
-#@todo
+--- grep(pattern) {|item| ... } -> Enumerator::Lazy
 
---- take(n)
-#@todo
+[[m:Enumerable#grep]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+@see [[m:Enumerable#grep]]
+
+--- zip(*lists)  -> Enumerator::Lazy
+--- zip(*lists) {|v1, v2, ...| ... } -> nil
+
+[[m:Enumerable#zip]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+ただし一貫性のため、ブロック付きで呼び出した場合は Enumerable#zip と
+同じ挙動になります。
+
+@see [[m:Enumerable#zip]]
+
+--- take(n) -> Enumerator::Lazy
+
+[[m:Enumerable#take]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+n が大きな数 (100000とか) の場合に備えて再定義されています。
+配列が必要な場合は [[m::Enumerator::Lazy#first]] を使って下さい。
 
 @param n 要素数を指定します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
---- take_while
---- take_while {|item| ... }
-#@todo
+@see [[m:Enumerable#take]]
+@see [[m:Enumerator::Lazy#first]]
 
---- drop(1)
-#@todo
+--- take_while -> Enumerator::Lazy
+--- take_while {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#take_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+@see [[m:Enumerable#take_while]]
+
+--- drop(n) -> Enumerator::Lazy
+
+[[m:Enumerable#drop]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 @param n 要素数を指定します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
---- drop_while
---- drop_while {|item| ... }
-#@todo
+@see [[m:Enumerable#drop]]
 
---- cycle(n = nil)
---- cycle(n = nil) {|obj| ... }
-#@todo
+--- drop_while -> Enumerator::Lazy
+--- drop_while {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#drop_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+@see [[m:Enumerable#drop_while]]
+
+--- cycle(n = nil) -> Enumerator::Lazy
+--- cycle(n = nil) {|obj| ... } -> object | nil
+
+各要素を n 回 or 無限回(n=nil)繰り返すようなEnumerator::Lazyを返します。
+
+ただしブロック付きで実行した場合は、[[m:Enumerable#cycle]]との互換性のため、
+ただちにループを行います。
+
+@see [[m:Enumerable#cycle]]
 
 --- lazy -> self
 
@@ -73,6 +190,47 @@ self を返します。
 
 --- force -> [object]
 
-全ての要素を含む配列を返します。
+全ての要素を含む配列を返します。Lazy から実際に値を取り出すのに使います。
 
 [[m:Enumerable#to_a]] のエイリアスです。
+
+--- to_enum(method = :each, *args)                 -> Enumerator::Lazy
+--- enum_for(method = :each, *args)                -> Enumerator::Lazy
+--- to_enum(method = :each, *args) {|*args| block} -> Enumerator::Lazy
+--- enum_for(method = :each, *args){|*args| block} -> Enumerator::Lazy
+
+[[m:Kernel#to_enum]] と同じですが、Enumerator::Lazy を返します。
+
+to_enum は「ブロック付きで呼ぶとループを実行し、ブロックを省略した場合は
+Enumerator を返す」ようなメソッドを定義するときによく使われます。
+このときに lazy 性が正しく引き継がれるように、Lazy#to_enum は
+素のEnumerator ではなく Enumerator::Lazy を返すようになってします。
+
+例:
+
+  module Enumerable
+    # 要素をn回ずつ繰り返すメソッド
+    # 例：[1,2,3].repeat(2)  #=> [1,1,2,2,3,3]
+    def repeat(n)
+      raise ArgumentError if n < 0
+      if block_given?
+        each do |*val|
+          n.times { yield *val }
+        end
+      else
+        to_enum(:repeat, n)
+      end
+    end
+  end
+
+  r = 1..10
+  p r.map{|n| n**2}.repeat(2).first(5)
+  #=> [1, 1, 4, 4, 9]
+
+  r = 1..Float::INFINITY
+  p r.lazy.map{|n| n**2}.repeat(2).first(5)
+  #=> [1, 1, 4, 4, 9]
+
+  # Lazy#to_enum のおかげで、repeat の返り値は
+  # もとが Enumerator のときは Enumerator に、
+  # もとが Lazy のときは Lazy になる
