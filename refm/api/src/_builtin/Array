@@ -442,7 +442,7 @@ self 中で重複していて、other中に存在していなかった要素は�
 
 --- <<(obj)    -> self
 
-指定された obj を自身の末尾に破壊的に追加します。[[m:Array#push]] と同じです。
+指定された obj を自身の末尾に破壊的に追加します。
 
   ary = [1]
   ary << 2
@@ -455,7 +455,9 @@ self 中で重複していて、other中に存在していなかった要素は�
   ary << 2 << 3 << 4
   p ary   #=> [1, 2, 3, 4]
 
-@param obj 自身に加えたいオブジェクトを指定します。
+@param obj 自身に加えたいオブジェクトを指定します。[[m:Array#push]] と違って引数は一つしか指定できません。
+
+@see [[m:Array#push]]
 
 #@since 1.9.2
 --- <=>(other)    -> -1 | 0 | 1 | nil
@@ -1274,7 +1276,7 @@ nil でない要素の数を返します。
       array.push 7, 8
       p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
 
-@see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]]
+@see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]], [[m:Array#<<]]
 
 --- rassoc(obj)    -> Array | nil
 
