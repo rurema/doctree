@@ -57,4 +57,20 @@ main では参照できない事に注意してください。トップレベル
                      合に発生します。
 
 @see [[m:Module#include]]
+
+--- using(module) -> self
+
+引数で指定したモジュールで定義された拡張を有効にします。
+
+有効にした拡張の有効範囲については以下を参照してください。
+
+ * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec#Scope-of-refinements]]
+
+@param module 有効にするモジュールを指定します。
+
+@see [[m:Module#refine]]
+
+[注意] refinements は 2.0 現在、実験的な機能として提供されています。以
+降のバージョンで仕様が変更になる可能性があります。使用すると必ず警告が
+表示されます。
 #@end

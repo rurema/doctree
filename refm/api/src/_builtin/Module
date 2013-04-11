@@ -1584,10 +1584,7 @@ refinements 機能の詳細については以下を参照してください。
  * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
  * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
 
-定義した機能は using を実行した場合のみ有効になります。using の有効範囲
-については以下を参照してください。
-
- * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec#Scope-of-refinements]]
+定義した機能は [[m:main.using]] を実行した場合のみ有効になります。
 
 @param klass 拡張する対象のクラスを指定します。
 
@@ -1619,6 +1616,5 @@ refinements 機能の詳細については以下を参照してください。
   x = C.new
   x.foo # => "C#foo in M"
 
-#@# TODO: main.using を記述して @see でリンクを行う。その場合、using の
-#@# scope に関する記述も併せて移動する。
+@see [[m:main.using]]
 #@end
