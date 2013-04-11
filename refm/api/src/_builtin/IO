@@ -782,26 +782,26 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 
 ポートがクローズされている時に真を返します。
 
-#@until 1.9.1
---- each(rs = $/) {|line| ... }         -> self
-#@end
-#@since 1.8.7
-#@until 1.9.1
---- each(rs = $/)                       -> Enumerable::Enumerator
-#@end
-#@end
---- each_line(rs = $/) {|line| ... }    -> self
 #@since 1.9.1
+--- each(rs = $/) {|line| ... }         -> self
+--- each(limit) {|line| ... }           -> self
+--- each(rs, limit) {|line| ... }       -> self
+--- each(rs = $/)                       -> Enumerator
+--- each(limit)                         -> Enumerator
+--- each(rs, limit)                     -> Enumerator
+--- each_line(rs = $/) {|line| ... }    -> self
 --- each_line(limit) {|line| ... }      -> self
 --- each_line(rs, limit) {|line| ... }  -> self
-#@end
-#@since 1.8.7
-#@until 1.9.1
---- each_line(rs = $/)                  -> Enumerable::Enumerator
-#@else
 --- each_line(rs = $/)                  -> Enumerator
 --- each_line(limit)                    -> Enumerator
 --- each_line(rs, limit)                -> Enumerator
+#@end
+#@until 1.9.1
+--- each(rs = $/) {|line| ... }         -> self
+--- each_line(rs = $/) {|line| ... }    -> self
+#@since 1.8.7
+--- each(rs = $/)                       -> Enumerable::Enumerator
+--- each_line(rs = $/)                  -> Enumerable::Enumerator
 #@end
 #@end
 
