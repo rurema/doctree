@@ -134,3 +134,4 @@ require を書かなくても使うことができます。
 #@include(_builtin/UnboundMethod)
 #@include(_builtin/ZeroDivisionError)
 #@include(_builtin/fatal)
+#@include(_builtin/main)

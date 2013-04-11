@@ -1,0 +1,60 @@
+= object main
+
+トップレベルでの self を表すオブジェクトです。
+
+main では参照できない事に注意してください。トップレベルで self から参照してください。
+
+トップレベルで定義したメソッドは main オブジェクトの private メソッドと
+して定義されます。
+
+--- public(*name) -> Object
+
+メソッドを public に設定します。
+
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドをどんな形式でも呼び出せるように(public)設定します。
+
+引数が与えられた時には引数によって指定されたメソッドを public に設
+定します。
+
+@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+
+@raise NameError 存在しないメソッド名を指定した場合に発生します。
+
+@see [[m:Module#public]]
+
+--- private(*name) -> Object
+
+メソッドを private に設定します。
+
+引数が与えられた時には引数によって指定されたメソッドを private に
+設定します。
+
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
+
+@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+
+@raise NameError 存在しないメソッド名を指定した場合に発生します。
+
+@see [[m:Module#private]]
+
+--- to_s    -> "main"
+#@since 2.0.0
+--- inspect -> "main"
+#@end
+
+"main" を返します。
+
+#@since 2.0.0
+--- include(*modules) -> self
+
+引数 modules で指定したモジュールを後ろから順番をインクルードします。
+
+@param mod [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
+
+@raise ArgumentError 継承関係が循環してしまうような include を行った場
+                     合に発生します。
+
+@see [[m:Module#include]]
+#@end
