@@ -60,14 +60,14 @@ self が親を持たない場合は単純に other を親ノードに設定し�
 
 [[m:REXML::Node#next_sibling_node]] の別名です。
 
-@see [[m::REXML::Child#next_sibling=]]
+@see [[m:REXML::Child#next_sibling=]]
 
 --- previous_sibling -> REXML::Node
 前の隣接ノードを返します。
 
 [[m:REXML::Node#previous_sibling_node]] の別名です。
 
-@see [[m::REXML::Child#previous_sibling=]]
+@see [[m:REXML::Child#previous_sibling=]]
 
 --- next_sibling=(other)
 other を self の次の隣接ノードとします。
