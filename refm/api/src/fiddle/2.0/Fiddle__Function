@@ -58,9 +58,7 @@ abi で呼出規約を指定します。
 Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、
 その返り値を Ruby のオブジェクトに変換して返します。
 
-引数の変換は以下の通りです。
-
-@include(callargs)
+#@include(callargs)
 
 @param args 関数の引数
 @see [[m:Fiddle::Function.new]]
