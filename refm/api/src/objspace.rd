@@ -165,4 +165,7 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 のオブジェクトから参照される全てのオブジェクトを返します。
 
 本メソッドは C Ruby 以外では動作しません。
+
+@see [[url:http://www.atdot.net/~ko1/diary/201212.html#d8]],
+     [[url:http://www.atdot.net/~ko1/diary/201212.html#d9]]
 #@end
