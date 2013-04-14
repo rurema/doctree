@@ -1,0 +1,311 @@
+= class TracePoint < Object
+
+[[m:Kernel.#set_trace_func]] と同様の機能をオブジェクト指向的な API で
+提供するクラスです。
+
+TracePoint を使う事で例外に関する具体的な情報を収集する事ができます。
+
+  trace = TracePoint.new(:raise) do |tp|
+      p [tp.lineno, tp.event, tp.raised_exception]
+  end
+  # => #<TracePoint:0x007f786a452448>
+
+  trace.enable
+  # => false
+
+  0 / 0
+  # => [5, :raise, #<ZeroDivisionError: divided by 0>]
+
+[[m:TracePoint.new]] または、[[m:TracePoint.trace]] で指定したブロック
+は、メソッドの引数(上記の例では :raise)に対応するイベントが発生した時に
+呼び出されます。
+
+発生するイベントの詳細については、[[m:TracePoint.new]] を参照してくださ
+い。
+
+=== 参考
+
+ * Ruby VM アドベントカレンダー 2012 #12 TracePoint の紹介 (1): [[url:http://www.atdot.net/~ko1/diary/201212.html#d12]]
+ * Ruby VM アドベントカレンダー 2012 #13 TracePoint の紹介 (2): [[url:http://www.atdot.net/~ko1/diary/201212.html#d13]]
+ * Ruby VM アドベントカレンダー 2012 #14 TracePoint の紹介 (3): [[url:http://www.atdot.net/~ko1/diary/201212.html#d14]]
+
+== Singleton Methods
+
+--- new(*events) {|obj| ... } -> TracePoint
+
+新しい [[c:TracePoint]] オブジェクトを作成して返します。トレースを有効
+にするには [[m:TracePoint#enable]] を実行してください。
+
+例:irb で実行した場合
+
+  trace = TracePoint.new(:call) do |tp|
+      p [tp.lineno, tp.defined_class, tp.method_id, tp.event]
+  end
+  # => #<TracePoint:0x007f17372cdb20>
+
+  trace.enable
+  # => false
+
+  puts "Hello, TracePoint!"
+  # ...
+  # [69, IRB::Notifier::AbstractNotifier, :printf, :call]
+  # ...
+
+トレースを無効にするには [[m:TracePoint#disable]] を実行してください。
+
+  trace.disable
+
+@param events トレースするイベントを [[c:String]] か [[c:Symbol]] で任
+              意の数指定します。
+
+: :line
+
+  式の評価。
+
+: :class
+
+  クラス定義、特異クラス定義、モジュール定義への突入。
+
+: :end
+
+   クラス定義、特異クラス定義、モジュール定義の終了。
+
+: :call
+
+  Ruby で記述されたメソッドの呼び出し。
+
+: :return
+
+  Ruby で記述されたメソッド呼び出しからのリターン。
+
+: :c_call
+
+  C で記述されたメソッドの呼び出し。
+
+: :c_return
+
+  C で記述されたメソッド呼び出しからのリターン。
+
+: :raise
+
+  例外の発生。
+
+: :b_call
+
+  ブロックの開始。
+
+: :b_return
+
+  ブロックの終了。
+
+: :thread_begin
+
+  スレッドの開始。
+
+: :thread_end
+
+  スレッドの終了。
+
+指定イベントに関連しない情報を取得するメソッドを実行した場合には
+[[c:RuntimeError]] が発生します。
+
+  TracePoint.trace(:line) do |tp|
+      p tp.raised_exception
+  end
+  # => RuntimeError: 'raised_exception' not supported by this event
+
+イベントフックの外側で、発生したイベントに関連する情報を取得するメソッ
+ドを実行した場合には [[c:RuntimeError]] が発生します。
+
+  TracePoint.trace(:line) do |tp|
+    $tp = tp
+  end
+  $tp.line # => access from outside (RuntimeError)
+
+他のスレッドから参照する事も禁じられています。
+
+@raise ThreadError ブロックを指定しなかった場合に発生します。
+
+--- trace(*events) {|obj| ... } -> TracePoint
+
+新しい [[c:TracePoint]] オブジェクトを作成して自動的にトレースを開始し
+ます。[[m:TracePoint.new]] のコンビニエンスメソッドです。
+
+  trace = TracePoint.trace(:call) { |tp| [tp.lineno, tp.event] }
+  # => #<TracePoint:0x007f786a452448>
+
+  trace.enabled? # => true
+
+== Instance Methods
+
+--- enable         -> bool
+--- enable { ... } -> object
+
+self のトレースを有効にします。
+
+実行前の [[m:TracePoint#enabled?]] を返します。(トレースが既に有効であっ
+た場合は true を返します。そうでなければ false を返します)
+
+  trace.enabled?  # => false
+  trace.enable    # => false (実行前の状態)
+
+  # トレースが有効
+
+  trace.enabled?  # => true
+  trace.enable    # => true (実行前の状態)
+
+  # 引き続きトレースが有効
+
+ブロックが与えられた場合、ブロック内でのみトレースが有効になります。
+
+  trace.enabled?   # => false
+
+  trace.enable do
+    trace.enabled? # => true
+  end
+
+  trace.enabled?   # => false
+
+[注意] イベントフックのためのメソッドにブロックの外側で参照した場合は
+[[c:RuntimeError]] が発生する事に注意してください。
+
+  trace.enable { p trace.lineno }
+  # => RuntimeError: access from outside
+
+@see [[m:TracePoint#disable]], [[m:TracePoint#enabled?]]
+
+--- disable         -> bool
+--- disable { ... } -> object
+
+self のトレースを無効にします。
+
+実行前の [[m:TracePoint#enabled?]] を返します。(トレースが既に有効であっ
+た場合は true を返します。そうでなければ false を返します)
+
+  trace.enabled? # => true
+  trace.disable  # => false (実行前の状態)
+  trace.enabled? # => false
+  trace.disable  # => false
+
+ブロックが与えられた場合、ブロック内でのみトレースが無効になります。
+
+  trace.enabled?   # => true
+
+  trace.disable do
+    trace.enabled? # => false
+  end
+
+  trace.enabled?   # => true
+
+[注意] イベントフックのためのメソッドに、ブロックの外側で参照した場合は
+[[c:RuntimeError]] が発生する事に注意してください。
+
+  trace.enable { p trace.lineno }
+  # => RuntimeError: access from outside
+
+@see [[m:TracePoint#enable]], [[m:TracePoint#enabled?]]
+
+--- enabled? -> bool
+
+self のトレースが有効な場合に true を、そうでない場合に false を返しま
+す。
+
+@see [[m:TracePoint#enable]], [[m:TracePoint#disable]]
+
+--- inspect -> String
+
+self の状態を人間に読みやすい文字列にして返します。
+
+--- event -> Symbol
+
+発生したイベントの種類を [[c:Symbol]] で返します。
+
+発生するイベントの詳細については、[[m:TracePoint.new]] を参照してくださ
+い。
+
+@raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+--- lineno -> Integer
+
+発生したイベントの行番号を返します。
+
+@raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+--- path -> String
+
+イベントが発生したファイルのパスを返します。
+
+@raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+--- method_id -> Symbol | nil
+
+イベントが発生したメソッド名を [[c:Symbol]] で返します。トップレベルで
+あった場合は nil を返します。
+
+@raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+--- defined_class -> Class | module
+
+メソッドを定義したクラスかモジュールを返します。
+
+  class C; def foo; end; end
+  trace = TracePoint.new(:call) do |tp|
+    p tp.defined_class # => C
+  end.enable do
+    C.new.foo
+  end
+
+メソッドがモジュールで定義されていた場合も(include に関係なく)モジュー
+ルを返します。
+
+  module M; def foo; end; end
+  class C; include M; end;
+  trace = TracePoint.new(:call) do |tp|
+    p tp.defined_class # => M
+  end.enable do
+    C.new.foo
+  end
+
+[注意] 特異メソッドを実行した場合は TracePoint#defined_class は特異クラ
+スを返します。また、[[m:Kernel.#set_trace_func]] の 6 番目のブロックパ
+ラメータは特異クラスではなく元のクラスを返します。
+
+  class C; def self.foo; end; end
+  trace = TracePoint.new(:call) do |tp|
+    p tp.defined_class # => #<Class:C>
+  end.enable do
+    C.foo
+  end
+
+[[m:Kernel.#set_trace_func]] と [[c:TracePoint]] の上記の差分に注意して
+ください。
+
+@see [[ruby-core:50864]]
+
+--- binding -> Binding
+
+発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
+
+--- self -> object
+
+イベントを発生させたオブジェクトを返します。
+
+以下のようにする事で同じ値を取得できます。
+
+  trace.binding.eval('self')
+
+@see [[m:TracePoint#binding]]
+
+--- return_value -> object
+
+メソッドやブロックの戻り値を返します。
+
+@raise RuntimeError :return、:c_return、:b_return イベントのためのイベ
+                    ントフックの外側で実行した場合に発生します。
+
+--- raised_exception -> Exception
+
+発生した例外を返します。
+
+@raise RuntimeError :raise イベントのためのイベントフックの外側で実行し
+                    た場合に発生します。

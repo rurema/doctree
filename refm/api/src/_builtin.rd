@@ -129,6 +129,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/ThreadError)
 #@include(_builtin/ThreadGroup)
 #@include(_builtin/Time)
+#@since 2.0.0
+#@include(_builtin/TracePoint)
+#@end
 #@include(_builtin/TrueClass)
 #@include(_builtin/TypeError)
 #@include(_builtin/UnboundMethod)
