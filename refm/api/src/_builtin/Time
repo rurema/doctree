@@ -285,6 +285,14 @@ true を返します。そうでない場合に false を返します。
 時刻を [[man:asctime(3)]] の形式の文字列に変換します。た
 だし、末尾の改行文字 "\n" は含まれません。
 
+#@since 1.9.1
+#@since 2.0.0
+戻り値の文字エンコーディングは [[m:Encoding::US_ASCII]] です。
+#@else
+戻り値の文字エンコーディングは [[m:Encoding::ASCII_8BIT]] です。
+#@end
+#@end
+
 --- gmt?    -> bool
 --- utc?    -> bool
 
@@ -636,6 +644,14 @@ yday は 1 から数えます。
 と同じです。
 
   p Time.now.to_s # => "Mon Oct 20 06:02:10 JST 2003"
+
+#@since 1.9.1
+#@since 2.0.0
+戻り値の文字エンコーディングは [[m:Encoding::US_ASCII]] です。
+#@else
+戻り値の文字エンコーディングは [[m:Encoding::ASCII_8BIT]] です。
+#@end
+#@end
 
 --- usec         -> Integer
 --- tv_usec      -> Integer
