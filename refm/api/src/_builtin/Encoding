@@ -149,7 +149,7 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 
 ダミーエンコーディングとは Ruby が名前を知っているものの実質的には対応していないエンコーディングのことです。例えば、ダミーエンコーディングで符号化された文字列の場合、 [[m:String#length]] はマルチバイト文字を考慮せずにバイト列の長さを返します。
 
-ダミーエンコーディングも [[c:IO]] の外部エンコーディングに指定できます。また 
+ダミーエンコーディングも [[c:IO]] の外部エンコーディングに指定できます。また
 Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも
 用います。
 
@@ -583,7 +583,7 @@ ISO-2022-JP の拡張版です。
 
 ISO-8859-1 エンコーディングです。
 
-多くの西欧言語を含むさまざまなラテン文字言語を表現するための 
+多くの西欧言語を含むさまざまなラテン文字言語を表現するための
 8bitエンコーディングです。
 
 Latin-1 とも呼ばれます。
@@ -948,7 +948,7 @@ ISO8859-8 の亜種です。
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1255.mspx]],
      [[url:http://en.wikipedia.org/wiki/Windows-1255]],
- 
+
 
 --- Windows_1256 -> Encoding
 --- CP1256 -> Encoding
@@ -1157,17 +1157,17 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 
 変換が多段階でなされ、その途中で例外が生じた場合は、
 例外オブジェクトが保持するエラー情報はその中間のものになります。
-  ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP") 
+  ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP")
   # ISO-8859-1 -> UTF-8 -> EUC-JP
   begin
-    ec.convert("\xa0") 
+    ec.convert("\xa0")
     # NO-BREAK SPACE, which is available in UTF-8 but not in EUC-JP.
   rescue Encoding::UndefinedConversionError
     p $!.source_encoding              #=> #<Encoding:UTF-8>
     p $!.destination_encoding         #=> #<Encoding:EUC-JP>
     p $!.source_encoding_name         #=> "UTF-8"
     p $!.destination_encoding_name    #=> "EUC-JP"
-    puts $!.error_char.dump   #=> "\u{a0}" 
+    puts $!.error_char.dump   #=> "\u{a0}"
     p $!.error_char.encoding  #=> #<Encoding:UTF-8>
   end
 
@@ -1189,7 +1189,7 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 
   ec = Encoding::Converter.new("UTF-8", "EUC-JP")
   begin
-    ec.convert("\u{a0}") 
+    ec.convert("\u{a0}")
   rescue Encoding::UndefinedConversionError
     puts $!.error_char.dump   #=> "\u{a0}"
   end
@@ -1252,7 +1252,7 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
   begin
     ec.convert("abc\xA1\xFFdef")
   rescue Encoding::InvalidByteSequenceError
-    p $!      
+    p $!
     #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
     puts $!.error_bytes.dump          #=> "\xA1"
     puts $!.readagain_bytes.dump      #=> "\xFF"

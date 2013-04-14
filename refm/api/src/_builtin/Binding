@@ -13,7 +13,7 @@
 #@since 1.8.7
 --- eval(expr, fname = __FILE__, lineno = 1)    -> object
 
-自身をコンテキストとし文字列 expr を 
+自身をコンテキストとし文字列 expr を
 Ruby プログラムとして評価しその結果を返します。
 組み込み関数 [[m:Kernel.#eval]] を使って
 eval(expr, self, fname, lineno) とするのと同じです。

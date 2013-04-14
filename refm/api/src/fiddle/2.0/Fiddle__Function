@@ -7,7 +7,7 @@ ptr (関数ポインタ)から Fiddle::Function オブジェクトを
 生成します。
 
 ptr には [[c:Fiddle::Handle]] から [[m:Fiddle::Handle#ptr]] などで取りだした
-関数ポインタ(を表す整数)、もしくは関数を指している 
+関数ポインタ(を表す整数)、もしくは関数を指している
 [[c:Fiddle::Pointer]] を渡します。
 
 args、ret_type で関数の引数と返り値の型を指定します。これには以下の
@@ -160,7 +160,7 @@ args、ret で関数の引数と返り値の型を指定します。
 
 C の関数ポインタのアドレスを返します。
 
---- ctype -> Integer 
+--- ctype -> Integer
 返り値の型を返します。
 
 --- args -> [Integer]

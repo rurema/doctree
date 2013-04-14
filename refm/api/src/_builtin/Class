@@ -56,7 +56,7 @@
 #@since 1.8.0
 例:
 
- k = Class.new{|c| 
+ k = Class.new{|c|
        def initialize
          p "in initialize"
        end

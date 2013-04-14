@@ -104,7 +104,7 @@ self が min と max の範囲内(min, max
 を含みます)にあるかを判断します。
 
 以下のコードと同じです。
-  self >= min and self <= max 
+  self >= min and self <= max
 #@end
 
 @param min 範囲の下端を表すオブジェクトを指定します。

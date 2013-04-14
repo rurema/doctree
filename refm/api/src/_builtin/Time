@@ -469,7 +469,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
 通常は0から59を返しますが、うるう秒の場合は60を返します。
 
-  ENV['TZ'] = 'right/UTC' 
+  ENV['TZ'] = 'right/UTC'
   Time.mktime(2005, 12, 31, 23, 59, 60).sec #=> 60
 
 --- min    -> Integer
@@ -494,17 +494,17 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
   p Time.local(2000, 1, 1).month #=> 1
 
---- year    -> Integer  
+--- year    -> Integer
 
 年を整数で返します。
 
   p Time.local(2000, 1, 1).year #=> 2000
 
---- wday    -> Integer  
+--- wday    -> Integer
 
 曜日を0(日曜日)から6(土曜日)の整数で返します。
 
---- yday    -> Integer  
+--- yday    -> Integer
 
 1月1日を1とした通算日(1から366まで)を整数で返します。
 

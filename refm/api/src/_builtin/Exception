@@ -64,8 +64,8 @@
 
 エラーメッセージをあらわす文字列を返します。
 
-  begin 
-    1 + nil 
+  begin
+    1 + nil
   rescue => e
     p e.message   #=>  "nil can't be coerced into Fixnum"
   end
