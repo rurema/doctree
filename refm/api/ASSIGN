@@ -86,7 +86,7 @@ _builtin/Thread                                 done
 _builtin/ThreadError                            done
 _builtin/ThreadGroup                            done
 _builtin/Time                                   done
-_builtin/TracePoint             sho-h
+_builtin/TracePoint             sho-h           done
 _builtin/TrueClass              yamane          done
 _builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod                          done
