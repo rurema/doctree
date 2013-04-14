@@ -131,10 +131,16 @@ TracePoint を使う事で例外に関する具体的な情報を収集する事
 新しい [[c:TracePoint]] オブジェクトを作成して自動的にトレースを開始し
 ます。[[m:TracePoint.new]] のコンビニエンスメソッドです。
 
+@param events トレースするイベントを [[c:String]] か [[c:Symbol]] で任
+              意の数指定します。指定できる値については
+              [[m:TracePoint.new]] を参照してください。
+
   trace = TracePoint.trace(:call) { |tp| [tp.lineno, tp.event] }
   # => #<TracePoint:0x007f786a452448>
 
   trace.enabled? # => true
+
+@raise ThreadError ブロックを指定しなかった場合に発生します。
 
 == Instance Methods
 
@@ -157,6 +163,7 @@ self のトレースを有効にします。
   # 引き続きトレースが有効
 
 ブロックが与えられた場合、ブロック内でのみトレースが有効になります。
+この場合はブロックの評価結果を返します。
 
   trace.enabled?   # => false
 
@@ -188,6 +195,7 @@ self のトレースを無効にします。
   trace.disable  # => false
 
 ブロックが与えられた場合、ブロック内でのみトレースが無効になります。
+この場合はブロックの評価結果を返します。
 
   trace.enabled?   # => true
 
