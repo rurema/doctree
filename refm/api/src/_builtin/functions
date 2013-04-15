@@ -2064,7 +2064,11 @@ range に含まれる数が無い場合は nil を返します。
   rand(1..0)      #=> nil
 #@end
 
+#@since 1.9.2
 @see [[m:Kernel.#srand]], [[m:Random#rand]], [[c:Random]]
+#@else
+@see [[m:Kernel.#srand]]
+#@end
 
 --- srand -> Integer
 --- srand(seed) -> Integer
