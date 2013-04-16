@@ -3,10 +3,10 @@
 [[m:Kernel.#set_trace_func]] と同様の機能をオブジェクト指向的な API で
 提供するクラスです。
 
-TracePoint を使う事で例外に関する具体的な情報を収集する事ができます。
+例:例外に関する情報を収集する
 
   trace = TracePoint.new(:raise) do |tp|
-      p [tp.lineno, tp.event, tp.raised_exception]
+    p [tp.lineno, tp.event, tp.raised_exception]
   end
   # => #<TracePoint:0x007f786a452448>
 
