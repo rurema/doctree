@@ -133,7 +133,7 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
   p c.method(:w).arity     #=> -1
   p c.method(:x).arity     #=> 2
   p c.method(:y).arity     #=> -3
-  p c.method(:x).arity     #=> -3
+  p c.method(:z).arity     #=> -3
 
   s = "xyz"
   s.method(:size).arity      #=> 0
