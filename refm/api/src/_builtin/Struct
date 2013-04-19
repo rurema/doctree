@@ -65,16 +65,13 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 #@since 1.9.1
 --- members -> [Symbol]
-#@else
---- members -> [String]
-#@end
-#@since 1.9.1
 構造体のメンバの名前([[c:Symbol]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.members      # => [:foo, :bar]
 
 #@else
+--- members -> [String]
 構造体のメンバの名前([[c:String]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
@@ -117,7 +114,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 --- each {|value| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each -> Enumerator
 #@else
 --- each -> Enumerable::Enumerator
@@ -125,10 +122,9 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 #@end
 構造体の各メンバに対して繰り返します。
 
-#@since 1.8.0
 --- each_pair {|member, value| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_pair -> Enumerator
 #@else
 --- each_pair -> Enumerable::Enumerator
@@ -140,7 +136,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
     Foo.new('FOO', 'BAR').each_pair {|m, v| p [m,v]}
     # => [:foo, "FOO"]
          [:bar, "BAR"]
-#@end
 
 --- length -> Fixnum
 --- size -> Fixnum
@@ -186,7 +181,6 @@ self の内容を人間に読みやすい文字列にして返します。
 
 @see [[m:Enumerable#select]]
 
-#@since 1.8.0
 --- values_at(*members) -> [object]
 引数で指定されたメンバの値の配列を返します。
 
@@ -197,8 +191,6 @@ self の内容を人間に読みやすい文字列にして返します。
     Foo = Struct.new(:foo, :bar, :baz)
     obj = Foo.new('FOO', 'BAR', 'BAZ')
     p obj.values_at(0, 1, 2)    # => ["FOO", "BAR", "BAZ"]
-
-#@end
 
 --- ==(other)    -> bool
 
