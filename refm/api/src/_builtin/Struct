@@ -51,7 +51,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 --- new(*args) -> Struct
 --- [](*args) -> Struct
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体オブジェクトを生成して返します。
 
 @param args 構造体の初期値を指定します。メンバの初期値は指定されなければ nil です。
@@ -69,7 +68,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 #@else
 --- members -> [String]
 #@end
-(このメソッドは Struct の下位クラスにのみ定義されています)
 #@since 1.9.1
 構造体のメンバの名前([[c:Symbol]])の配列を返します。
 
@@ -86,7 +84,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 == Instance Methods
 
 --- [](member) -> object
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの値を返します。
 
 @param member [[c:Fixnum]] でメンバのインデックスを指定します。
@@ -107,7 +104,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
     p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
 
 --- []=(member, value)
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体の member で指定されたメンバの値を value にして value を返します。
 
 @param member [[c:Fixnum]] でメンバのインデックスを指定します。
@@ -127,7 +123,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 --- each -> Enumerable::Enumerator
 #@end
 #@end
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体の各メンバに対して繰り返します。
 
 #@since 1.8.0
@@ -139,7 +134,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 --- each_pair -> Enumerable::Enumerator
 #@end
 #@end
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバ名([[c:Symbol]])と値の組を引数にブロックを繰り返し実行します。
 
     Foo = Struct.new(:foo, :bar)
@@ -150,11 +144,9 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 --- length -> Fixnum
 --- size -> Fixnum
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの数を返します。
 
 --- members -> [String]
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの名前(文字列)の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
@@ -162,7 +154,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 --- values -> [object]
 --- to_a -> [object]
-(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの値を配列にいれて返します。
 
 例えば以下のようにして passwd のエントリを出力できます。
@@ -197,7 +188,6 @@ self の内容を人間に読みやすい文字列にして返します。
 
 #@since 1.8.0
 --- values_at(*members) -> [object]
-(このメソッドは Struct の下位クラスにのみ定義されています)
 引数で指定されたメンバの値の配列を返します。
 
 @param members [[c:Fixnum]] か [[c:Range]] でメンバのインデックスを指定します。
