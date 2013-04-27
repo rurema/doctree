@@ -47,6 +47,10 @@ Ruby のフレームを表すクラスです。
   init.rb:8:in `new'
   init.rb:8:in `<main>'
 
+=== 参考
+
+ * Ruby VM アドベントカレンダー #4 vm_backtrace.c: [[url:http://www.atdot.net/~ko1/diary/201212.html#d4]]
+
 == Instance Methods
 
 --- lineno -> Integer
