@@ -126,6 +126,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/SystemExit)
 #@include(_builtin/SystemStackError)
 #@include(_builtin/Thread)
+#@since 2.0.0
+#@include(_builtin/Thread__Backtrace__Location)
+#@end
 #@include(_builtin/ThreadError)
 #@include(_builtin/ThreadGroup)
 #@include(_builtin/Time)
