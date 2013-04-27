@@ -51,6 +51,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 --- new(*args) -> Struct
 --- [](*args) -> Struct
+(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体オブジェクトを生成して返します。
 
 @param args 構造体の初期値を指定します。メンバの初期値は指定されなければ nil です。
@@ -65,6 +66,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 #@since 1.9.1
 --- members -> [Symbol]
+(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの名前([[c:Symbol]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
@@ -72,6 +74,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 #@else
 --- members -> [String]
+(このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの名前([[c:String]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
