@@ -108,6 +108,9 @@ require を書かなくても使うことができます。
 #@end
 #@include(_builtin/Regexp)
 #@include(_builtin/RegexpError)
+#@since 1.9.1
+#@include(_builtin/RubyVM)
+#@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
 #@include(_builtin/SecurityError)
