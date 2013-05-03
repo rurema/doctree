@@ -110,6 +110,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/RegexpError)
 #@since 1.9.1
 #@include(_builtin/RubyVM)
+#@include(_builtin/RubyVM__InstructionSequence)
 #@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)

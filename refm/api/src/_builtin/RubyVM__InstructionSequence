@@ -1,0 +1,458 @@
+= class RubyVM::InstructionSequence
+
+Ruby の Virtual Machine のコンパイル済みの命令シーケンスを表すクラスです。
+
+[[c:Method]]、[[c:Proc]] オブジェクトや Ruby のソースコードを表す文字列
+から VM の命令シーケンスを得る事ができます。また、
+RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを読みやす
+い文字列に変換する事もできます。Ruby の命令シーケンスの設定を扱う必要が
+ありますが、Ruby の VM がどのように働くかを知るのに有用です。
+
+VM の命令の一覧はRuby のソースコード中の insns.def から参照できます。
+
+ * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/insns.def?view=markup]]
+
+#@# The instruction sequence results will almost certainly change as Ruby
+#@# changes, so example output in this documentation may be different from what
+#@# you see.
+
+== Singleton Methods
+
+--- compile(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
+--- new(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
+
+引数 source で指定した Ruby のソースコードを元にコンパイル済みの
+[[c:RubyVM::InstructionSequence]] オブジェクトを作成して返します。
+
+@param source Ruby のソースコードを文字列で指定します。
+
+@param file ファイル名を文字列で指定します。
+
+@param path 引数 file の絶対パスファイル名を文字列で指定します。
+
+@param line 1 行目の行番号を指定します。
+
+@param options コンパイル時のオプションを true、false、[[c:Hash]] オブ
+               ジェクトのいずれかで指定します。詳細は
+               [[m:RubyVM::InstructionSequence.compile_option=]] を参照
+               してください。
+
+  RubyVM::InstructionSequence.compile("a = 1 + 2")
+  # => <RubyVM::InstructionSequence:<compiled>@<compiled>>
+
+@see [[m:RubyVM::InstructionSequence.compile_file]]
+
+--- compile_file(file, options => nil) -> RubyVM::InstructionSequence
+
+引数 file で指定した Ruby のソースコードを元にコンパイル済みの
+[[c:RubyVM::InstructionSequence]] オブジェクトを作成して返します。
+
+[[m:RubyVM::InstructionSequence.compile]] とは異なり、file、path などの
+メタデータは自動的に取得します。
+
+@param file ファイル名を文字列で指定します。
+
+@param options コンパイル時のオプションを true、false、[[c:Hash]] オブ
+               ジェクトのいずれかで指定します。詳細は
+               [[m:RubyVM::InstructionSequence.compile_option=]] を参照
+               してください。
+
+  # /tmp/hello.rb
+  puts "Hello, world!"
+
+  # irb
+  RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
+  # => <RubyVM::InstructionSequence:<main>@/tmp/hello.rb>
+
+@see [[m:RubyVM::InstructionSequence.compile]]
+
+--- compile_option -> Hash
+
+命令シーケンスのコンパイル時のデフォルトのオプションを Hash で返します。
+
+@see [[m:RubyVM::InstructionSequence.compile_option=]]
+
+--- compile_option=(options)
+
+命令シーケンスのコンパイル時のデフォルトの最適化オプションを引数
+options で指定します。
+
+@param options コンパイル時のオプションを true、false、nil、[[c:Hash]]
+               のいずれかで指定します。true を指定した場合は全てのオプ
+               ションを有効にします。false を指定した場合は全てのオプショ
+               ンを無効にします。nil を指定した場合はいずれのオプション
+               も変更しません。また、[[c:Hash]] を指定した場合は以下の
+               キーに対して、true か false を指定する事で個別に有効、無
+               効を指定します。
+//emlist{
+  * :inline_const_cache
+  * :instructions_unification
+  * :operands_unification
+  * :peephole_optimization
+  * :specialized_instruction
+  * :stack_caching
+  * :tailcall_optimization
+  * :trace_instruction
+//}
+               :debug_level をキーに指定した場合は値を数値で指定します。
+
+これらのオプションは .new、.compile、.compile_file メソッドの実行の際に
+option 引数を指定する事でも同様の操作が行えます。
+
+@see [[m:RubyVM::InstructionSequence.new]],
+     [[m:RubyVM::InstructionSequence.compile]],
+     [[m:RubyVM::InstructionSequence.compile_file]]
+
+--- disasm(body)      -> String
+--- disassemble(body) -> String
+
+引数 body で指定したオブジェクトから作成した
+[[c:RubyVM::InstructionSequence]] オブジェクトを人間が読める形式の文字
+列に変換して返します。
+
+@param body [[c:Proc]]、[[c:Method]] オブジェクトを指定します。
+
+例1:[[c:Method]] オブジェクトを指定した場合
+
+  # /tmp/method.rb
+  def hello
+    puts "hello, world"
+  end
+
+  puts RubyVM::InstructionSequence.disasm(method(:hello))
+
+出力:
+
+  == disasm: <RubyVM::InstructionSequence:hello@/tmp/method.rb>============
+  0000 trace            8                                               (   1)
+  0002 trace            1                                               (   2)
+  0004 putself
+  0005 putstring        "hello, world"
+  0007 send             :puts, 1, nil, 8, <ic:0>
+  0013 trace            16                                              (   3)
+  0015 leave                                                            (   2)
+
+例2:[[c:Method]] オブジェクトを指定した場合
+
+  # /tmp/proc.rb
+  p = proc { num = 1 + 2 }
+  puts RubyVM::InstructionSequence.disasm(p)
+
+出力:
+
+  == disasm: <RubyVM::InstructionSequence:block in <main>@/tmp/proc.rb>===
+  == catch table
+  | catch type: redo   st: 0000 ed: 0012 sp: 0000 cont: 0000
+  | catch type: next   st: 0000 ed: 0012 sp: 0000 cont: 0012
+  |------------------------------------------------------------------------
+  local table (size: 2, argc: 0 [opts: 0, rest: -1, post: 0, block: -1] s1)
+  [ 2] num
+  0000 trace            1                                               (   1)
+  0002 putobject        1
+  0004 putobject        2
+  0006 opt_plus         <ic:1>
+  0008 dup
+  0009 setlocal         num, 0
+  0012 leave
+
+@see [[m:RubyVM::InstructionSequence#disasm]]
+
+#@since 2.0.0
+--- of(body) -> RubyVM::InstructionSequence
+
+引数 body で指定した [[c:Proc]]、[[c:Method]] オブジェクトを元に
+[[c:RubyVM::InstructionSequence]] オブジェクトを作成して返します。
+
+@param body [[c:Proc]]、[[c:Method]] オブジェクトを指定します。
+
+例1:irb で実行した場合
+
+  # proc
+  > p = proc { num = 1 + 2 }
+  > RubyVM::InstructionSequence.of(p)
+  > # => <RubyVM::InstructionSequence:block in irb_binding@(irb)>
+
+  # method
+  > def foo(bar); puts bar; end
+  > RubyVM::InstructionSequence.of(method(:foo))
+  > # => <RubyVM::InstructionSequence:foo@(irb)>
+
+例2: [[m:RubyVM::InstructionSequence.compile_file]] を使用した場合
+
+  # /tmp/iseq_of.rb
+  def hello
+    puts "hello, world"
+  end
+
+  $a_global_proc = proc { str = 'a' + 'b' }
+
+  # irb
+  > require '/tmp/iseq_of.rb'
+
+  # hello メソッド
+  > RubyVM::InstructionSequence.of(method(:hello))
+  > # => #<RubyVM::InstructionSequence:0x007fb73d7cb1d0>
+
+  # グローバル proc
+  > RubyVM::InstructionSequence.of($a_global_proc)
+  > # => #<RubyVM::InstructionSequence:0x007fb73d7caf78>
+#@end
+
+== Instance Methods
+
+--- inspect -> String
+
+self の情報を #label と #path を含んだ人間に読みやすい文字列にして返し
+ます。
+
+@see [[m:RubyVM::InstructionSequence#label]],
+     [[m:RubyVM::InstructionSequence#path]]
+
+--- disasm      -> String
+--- disassemble -> String
+
+self が表す命令シーケンスを人間が読める形式の文字列に変換して返します。
+
+  puts RubyVM::InstructionSequence.compile('1 + 2').disasm
+
+出力:
+
+  == disasm: <RubyVM::InstructionSequence:<compiled>@<compiled>>==========
+  0000 trace            1                                               (   1)
+  0002 putobject        1
+  0004 putobject        2
+  0006 opt_plus         <ic:1>
+  0008 leave
+
+@see [[m:RubyVM::InstructionSequence.disasm]]
+
+--- to_a -> Array
+
+self の情報を 14 要素の配列にして返します。
+
+命令シーケンスを以下の情報で表します。
+
+: magic
+
+  データフォーマットを示す文字列。常に
+  "YARVInstructionSequence/SimpleDataFormat"。
+
+: major_version
+
+  命令シーケンスのメジャーバージョン。
+
+: minor_version
+
+  命令シーケンスのマイナーバージョン。
+
+: format_type
+
+  データフォーマットを示す数値。常に 1。
+
+: misc
+
+  以下の要素から構成される [[c:Hash]] オブジェクト。
+
+  :arg_size： メソッド、ブロックが取る引数の総数(1 つもない場合は 0)。
+
+  :local_size： ローカル変数の総数 + 1。
+
+  :stack_max： スタックの深さ。([[c:SystemStackError]] 発生時に使用)
+
+: #label
+
+  [[m:RubyVM::InstructionSequence#label]] と同様。
+
+: #path
+
+  [[m:RubyVM::InstructionSequence#path]] と同様。
+
+: #absolute_path
+
+  [[m:RubyVM::InstructionSequence#absolute_path]] と同様。
+
+: #first_lineno
+
+  [[m:RubyVM::InstructionSequence#first_lineno]] と同様。
+
+: type
+
+  命令シーケンスの種別。
+  :top、:method、:block、:class、:rescue、:ensure、:eval、:main、
+  :defined_guard のいずれか。
+
+: locals
+
+  全ての引数名、ローカル変数名からなる [[c:Symbol]] の配列。
+
+: args
+
+  引数の指定が必須のメソッド、ブロックの引数の個数。あるいは以下のよう
+  な配列。
+
+    [required_argc, [optional_arg_labels, ...],
+     splat_index, post_splat_argc, post_splat_index,
+     block_index, simple]
+
+  より詳細な情報については、vm_core.h を参照。
+
+: catch_table
+
+  例外や制御構造のオペレータ(rescue、next、redo、break など)の一覧。
+
+: bytecode
+
+  命令シーケンスを構成する命令とオペランドの配列の配列。
+
+--- eval -> object
+
+self の命令シーケンスを評価してその結果を返します。
+
+    RubyVM::InstructionSequence.compile("1 + 2").eval # => 3
+
+#@since 2.0.0
+--- path -> String
+
+self が表す命令シーケンスの相対パスを返します。
+
+self の作成時に指定した文字列を返します。self を文字列から作成していた
+場合は "<compiled>" を返します。
+
+例1:irb で実行した場合
+
+  iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+  # => <RubyVM::InstructionSequence:<compiled>@<compiled>>
+  iseq.path
+  # => "<compiled>"
+
+例2: [[m:RubyVM::InstructionSequence.compile_file]] を使用した場合
+
+  # /tmp/method.rb
+  def hello
+    puts "hello, world"
+  end
+
+  # irb
+  > iseq = RubyVM::InstructionSequence.compile_file('method.rb')
+  > iseq.path # => "method.rb"
+
+@see [[m:RubyVM::InstructionSequence#absolute_path]]
+
+--- absolute_path -> String
+
+self が表す命令シーケンスの絶対パスを返します。
+
+self を文字列から作成していた場合は "<compiled>" を返します。
+
+例1:irb で実行した場合
+
+  iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+  # => <RubyVM::InstructionSequence:<compiled>@<compiled>>
+  iseq.absolute_path
+  # => nil
+
+例2: [[m:RubyVM::InstructionSequence.compile_file]] を使用した場合
+
+  # /tmp/method.rb
+  def hello
+    puts "hello, world"
+  end
+
+  # irb
+  > iseq = RubyVM::InstructionSequence.compile_file('/tmp/method.rb')
+  > iseq.absolute_path # => "/tmp/method.rb"
+
+@see [[m:RubyVM::InstructionSequence#path]]
+
+--- label -> String
+
+self が表す命令シーケンスのラベルを返します。通常、メソッド名、クラス名、
+モジュール名などで構成されます。
+
+トップレベルでは "<main>" を返します。self を文字列から作成していた場合
+は "<compiled>" を返します。
+
+例1:irb で実行した場合
+
+  iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+  # => <RubyVM::InstructionSequence:<compiled>@<compiled>>
+  iseq.label
+  # => "<compiled>"
+
+例2: [[m:RubyVM::InstructionSequence.compile_file]] を使用した場合
+
+  # /tmp/method.rb
+  def hello
+    puts "hello, world"
+  end
+
+  # irb
+  > iseq = RubyVM::InstructionSequence.compile_file('/tmp/method.rb')
+  > iseq.label # => "<main>"
+
+例3:
+
+  # /tmp/method2.rb
+  def hello
+    puts "hello, world"
+  end
+
+  RubyVM::InstructionSequence.of(method(:hello)).label
+  # => "hello"
+
+@see [[m:RubyVM::InstructionSequence#base_label]]
+
+--- base_label -> String
+
+self が表す命令シーケンスの基本ラベルを返します。
+
+例1:irb で実行した場合
+
+  iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+  # => <RubyVM::InstructionSequence:<compiled>@<compiled>>
+  iseq.base_label
+  # => "<compiled>"
+
+例2: [[m:RubyVM::InstructionSequence.compile_file]] を使用した場合
+
+  # /tmp/method.rb
+  def hello
+    puts "hello, world"
+  end
+
+  # irb
+  > iseq = RubyVM::InstructionSequence.compile_file('/tmp/method.rb')
+  > iseq.base_label # => "<main>"
+
+例3:
+
+  # /tmp/method2.rb
+  def hello
+    puts "hello, world"
+  end
+
+  RubyVM::InstructionSequence.of(method(:hello)).base_label
+  # => "hello"
+
+@see [[m:RubyVM::InstructionSequence#label]]
+
+--- first_lineno -> Integer
+
+self が表す命令シーケンスの 1 行目の行番号を返します。
+
+例:irb で実行した場合
+
+  RubyVM::InstructionSequence.compile('num = 1 + 2').first_lineno
+  # => 1
+
+例2:
+
+  # /tmp/method.rb
+  require "foo-library"
+  def foo
+    p :foo
+  end
+
+  RubyVM::InstructionSequence.of(method(:foo)).first_lineno
+  # => 2
+#@end
