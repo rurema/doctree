@@ -202,11 +202,12 @@ option 引数を指定する事でも同様の操作が行えます。
 
 --- inspect -> String
 
-self の情報を #label と #path を含んだ人間に読みやすい文字列にして返し
-ます。
+self の情報をラベルとパスを含んだ人間に読みやすい文字列にして返します。
 
+#@since 2.0.0
 @see [[m:RubyVM::InstructionSequence#label]],
      [[m:RubyVM::InstructionSequence#path]]
+#@end
 
 --- disasm      -> String
 --- disassemble -> String
@@ -261,19 +262,21 @@ self の情報を 14 要素の配列にして返します。
 
 : #label
 
-  [[m:RubyVM::InstructionSequence#label]] と同様。
+  メソッド名、クラス名、モジュール名などで構成される命令シーケンスのラ
+  ベル。トップレベルでは "<main>"。文字列から作成していた場合は
+  "<compiled>"。
 
 : #path
 
-  [[m:RubyVM::InstructionSequence#path]] と同様。
+  命令シーケンスの相対パス。文字列から作成していた場合は "<compiled>"。
 
 : #absolute_path
 
-  [[m:RubyVM::InstructionSequence#absolute_path]] と同様。
+  命令シーケンスの絶対パス。文字列から作成していた場合は "<compiled>"。
 
 : #first_lineno
 
-  [[m:RubyVM::InstructionSequence#first_lineno]] と同様。
+  命令シーケンスの 1 行目の行番号。
 
 : type
 
