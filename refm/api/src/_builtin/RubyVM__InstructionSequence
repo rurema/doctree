@@ -258,7 +258,7 @@ self の情報を 14 要素の配列にして返します。
 
   :local_size： ローカル変数の総数 + 1。
 
-  :stack_max： スタックの深さ。([[c:SystemStackError]] 発生時に使用)
+  :stack_max： スタックの深さ。([[c:SystemStackError]] を検出するために使用)
 
 : #label
 
