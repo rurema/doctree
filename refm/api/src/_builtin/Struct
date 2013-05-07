@@ -103,6 +103,8 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
     p obj[-1]       # => "BAR"    # Array のように負のインデックスも指定できます。
     p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
 
+#@include(Struct.attention)
+
 --- []=(member, value)
 構造体の member で指定されたメンバの値を value にして value を返します。
 
@@ -115,6 +117,8 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
 @raise NameError member が [[c:String]], [[c:Symbol]] で存在しないメンバを指定した場合に発生します。
 
+#@include(Struct.attention)
+
 --- each {|value| ... } -> self
 #@since 1.8.7
 #@since 1.9.1
@@ -124,6 +128,8 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 #@end
 #@end
 構造体の各メンバに対して繰り返します。
+
+#@include(Struct.attention)
 
 --- each_pair {|member, value| ... } -> self
 #@since 1.8.7
@@ -140,15 +146,21 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
     # => [:foo, "FOO"]
          [:bar, "BAR"]
 
+#@include(Struct.attention)
+
 --- length -> Fixnum
 --- size -> Fixnum
 構造体のメンバの数を返します。
+
+#@include(Struct.attention)
 
 --- members -> [String]
 構造体のメンバの名前(文字列)の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.new.members  # => ["foo", "bar"]
+
+#@include(Struct.attention)
 
 --- values -> [object]
 --- to_a -> [object]
@@ -159,10 +171,14 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
   require 'etc'
   print Etc.getpwuid.values.join(":"), "\n"
 
+#@include(Struct.attention)
+
 --- inspect -> String
 --- to_s    -> String
 
 self の内容を人間に読みやすい文字列にして返します。
+
+#@include(Struct.attention)
 
 --- select {|i| ... } -> [object]
 #@since 1.9.1
@@ -182,6 +198,8 @@ self の内容を人間に読みやすい文字列にして返します。
    l = Lots.new(11, 22, 33, 44, 55, 66)
    l.select {|v| (v % 2).zero? }   #=> [22, 44, 66]
 
+#@include(Struct.attention)
+
 @see [[m:Enumerable#select]]
 
 --- values_at(*members) -> [object]
@@ -194,6 +212,8 @@ self の内容を人間に読みやすい文字列にして返します。
     Foo = Struct.new(:foo, :bar, :baz)
     obj = Foo.new('FOO', 'BAR', 'BAZ')
     p obj.values_at(0, 1, 2)    # => ["FOO", "BAR", "BAZ"]
+
+#@include(Struct.attention)
 
 --- ==(other)    -> bool
 
@@ -209,6 +229,8 @@ true を返します。そうでない場合に false を返します。
   p dog1 == dog2                #=> true
   p dog1.eql?(dog2)             #=> true
   p dog1.equal?(dog2)           #=> false
+
+#@include(Struct.attention)
 
 @see [[m:Struct#eql?]]
 
@@ -227,6 +249,8 @@ true を返します。そうでない場合に false を返します。
   p dog1.eql?(dog2)             #=> true
   p dog1.equal?(dog2)           #=> false
 
+#@include(Struct.attention)
+
 @see [[m:Struct#==]]
 
 --- equal?(other)   -> bool
@@ -234,6 +258,8 @@ true を返します。そうでない場合に false を返します。
 指定された other が self 自身である場合のみ真を返します。
 これは [[c:Object]] クラスで定義されたデフォルトの動作で
 す。
+
+#@include(Struct.attention)
 
 @see [[m:Struct#eql?]], [[m:Struct#==]]
 
@@ -248,6 +274,7 @@ self が保持するメンバの値が変化すればこのメソッドが返す
   dog.name = "john"
   p dog.hash                    #=> -38913223
 
+#@include(Struct.attention)
 #@since 2.0.0
 --- to_h -> Hash
 
@@ -256,4 +283,6 @@ self のメンバ名([[c:Symbol]])と値の組を [[c:Hash]] にして返しま�
   Customer = Struct.new(:name, :address, :zip)
   Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
   # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+
+#@include(Struct.attention)
 #@end
