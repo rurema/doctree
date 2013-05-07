@@ -1420,7 +1420,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
   end
   
   class D
-  private
+    private
     def hello
       "Guten Tag"
     end

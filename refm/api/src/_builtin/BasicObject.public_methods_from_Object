@@ -28,7 +28,7 @@
     def initialize data
       @key = data
     end
-  private
+    private
     def do_fuga
       p 'secret'
     end
