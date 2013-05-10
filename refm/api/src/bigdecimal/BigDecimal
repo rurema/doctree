@@ -635,10 +635,9 @@ n が負のときは小数点以上 n 桁目を操作します
   BigDecimal("15.23456").ceil(-1).to_f # => 20.0
 
 #@since 1.9.2
---- round(n) -> Integer
-#@else
---- round(n) -> BigDecimal
+--- round    -> Integer
 #@end
+--- round(n) -> BigDecimal
 --- round(n, b) -> BigDecimal
 
 クラスメソッド [[m:BigDecimal.mode]]([[m:BigDecimal::ROUND_MODE]],flag) で指定した
