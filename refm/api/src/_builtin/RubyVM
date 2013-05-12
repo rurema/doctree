@@ -37,7 +37,9 @@ Ruby の VM を表すクラスです。
 
 --- INSTRUCTION_NAMES -> [String]
 
-[[c:RubyVM]] の命令の一覧を返します。
+[[c:RubyVM]] の命令シーケンスの名前の一覧を返します。
+
+@see [[c:RubyVM::InstructionSequence]]
 
 #@# :nodoc: に関連する定数のため、コメントアウト。
 #@# --- USAGE_ANALYSIS_INSN
