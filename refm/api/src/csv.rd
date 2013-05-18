@@ -1125,11 +1125,9 @@ str_or_readable で指定された文字列をパースし配列の配列に変�
   }
 
 --- generate_line(row, fs = nil, rs = nil) -> String
---- generate_line(row, fs = nil, rs = nil){|s| ... } -> nil
 
 row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
-1行分の文字列をブロックに渡します。
-ブロック未指定の場合は変換された文字列を返します。
+1行分の文字列を返します。
 
 @param row パースする配列
 @param fs フィールドセパレータの指定。
@@ -1137,10 +1135,8 @@ row で指定された配列をパースし、fs で指定された文字をフ�
 @param rs 無視されます。
 
 --- parse_line(src, fs = nil, rs = nil) -> Array
---- parse_line(src, fs = nil, rs = nil){|row| ... } -> nil
 
-src で指定された文字列を1行分としてパースし配列に変換、ブロックに渡します。
-ブロック未指定の場合は変換された配列を返します。
+src で指定された文字列を1行分としてパースし配列に変換して返します。
 
 @param src パースする文字列
 @param fs フィールドセパレータの指定。
