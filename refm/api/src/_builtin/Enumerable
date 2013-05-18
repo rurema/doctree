@@ -62,11 +62,8 @@ obj.collect {|item| item } を実行します。
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_with_index                      -> Enumerator
-#@until 1.9.1
---- enum_with_index                      -> Enumerator
-#@end
 #@else
 --- each_with_index                      -> Enumerable::Enumerator
 --- enum_with_index                      -> Enumerable::Enumerator
@@ -99,7 +96,7 @@ self を返します。
 #@end
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- find(ifnone = nil)   -> Enumerator
 --- detect(ifnone = nil) -> Enumerator
 #@else
@@ -140,7 +137,7 @@ self を返します。
 #@end
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- find_all  -> Enumerator
 --- select    -> Enumerator
 #@else
@@ -257,7 +254,7 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- max_by              -> Enumerator
 #@else
 --- max_by              -> Enumerable::Enumerator
@@ -305,7 +302,7 @@ a < b のとき負の整数を、期待しています。
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- min_by               -> Enumerator
 #@else
 --- min_by               -> Enumerable::Enumerator
@@ -334,7 +331,7 @@ a < b のとき負の整数を、期待しています。
 #@end
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- partition               -> Enumerator
 #@else
 --- partition               -> Enumerable::Enumerator
@@ -359,7 +356,7 @@ a < b のとき負の整数を、期待しています。
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- reject               -> Enumerator
 #@else
 --- reject               -> Enumerable::Enumerator
@@ -408,7 +405,7 @@ Enumerable#sort は安定ではありません (unstable sort)。
 
 #@since 1.8.0
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- sort_by               -> Enumerator
 #@else
 --- sort_by               -> Enumerable::Enumerator
@@ -527,11 +524,8 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
 #@end
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_slice(n)               -> Enumerator
-#@until 1.9.1
---- enum_slice(n)               -> Enumerator
-#@end
 #@else
 --- each_slice(n)               -> Enumerable::Enumerator
 --- enum_slice(n)               -> Enumerable::Enumerator
@@ -567,11 +561,8 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 
 @see [[m:Enumerable#each_cons]]
 
-#@since 1.8.8
+#@since 1.9.1
 --- each_cons(n)               -> Enumerator
-#@until 1.9.1
---- enum_cons(n)               -> Enumerator
-#@end
 #@else
 --- each_cons(n)               -> Enumerable::Enumerator
 --- enum_cons(n)               -> Enumerable::Enumerator
@@ -641,7 +632,7 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
    ary.count{|x|x%2==0}  # => 3
 
 
-#@since 1.8.8
+#@since 1.9.1
 --- cycle(n=nil)       -> Enumerator
 #@else
 --- cycle(n=nil)       -> Enumerable::Enumerator
@@ -666,7 +657,7 @@ n に 0 もしくは負の値を渡した場合は何もしません。
 繰り返す [[c:Enumerator]] を返します。
 #@end
 
-#@since 1.8.8
+#@since 1.9.1
 @return ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
         レシーバが空の場合は nil を返します。
 #@else
@@ -684,7 +675,7 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
 
-#@since 1.8.8
+#@since 1.9.1
 --- drop_while                    -> Enumerator
 #@else
 --- drop_while                    -> Enumerable::Enumerator
@@ -694,7 +685,7 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
 ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
 残りの要素を配列として返します。
 
-#@since 1.8.8
+#@since 1.9.1
 ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
 #@else
 ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
@@ -704,7 +695,7 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
 
 
-#@since 1.8.8
+#@since 1.9.1
 --- find_index                    -> Enumerator
 #@else
 --- find_index                    -> Enumerable::Enumerator
@@ -717,7 +708,7 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 }   #=> nil
    (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 }   #=> 34
 
-#@since 1.8.8
+#@since 1.9.1
 ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
 #@else
 ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
@@ -740,7 +731,7 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式で
   e.first #=> nil
   e.first(2) #=> []
 
-#@since 1.8.8
+#@since 1.9.1
 --- group_by               -> Enumerator
 #@else
 --- group_by               -> Enumerable::Enumerator
@@ -776,7 +767,7 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要
 
 @see [[m:Enumerable#sort]]
 
-#@since 1.8.8
+#@since 1.9.1
 --- minmax_by                -> Enumerator
 #@else
 --- minmax_by                -> Enumerable::Enumerator
@@ -845,7 +836,7 @@ Enumerable オブジェクトの先頭から n 要素を配列として返しま
    a = [1, 2, 3, 4, 5, 0]
    a.take(3)             # => [1, 2, 3]
 
-#@since 1.8.8
+#@since 1.9.1
 --- take_while                    -> Enumerator
 #@else
 --- take_while                    -> Enumerable::Enumerator
@@ -863,7 +854,7 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 返します。
 #@end
 
-#@since 1.8.8
+#@since 1.9.1
 --- reverse_each -> Enumerator
 #@else
 --- reverse_each -> Enumerable::Enumerator
@@ -880,7 +871,7 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 #@end
 
 #@end
-#@since 1.8.8
+#@since 1.9.1
 --- each_with_object(obj) -> Enumerator
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object
 

@@ -196,7 +196,7 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わり�
 #@end
 
 #@since 1.8.4
-#@since 1.8.8
+#@since 1.9.1
 = reopen Enumerator
 #@else
 = reopen Enumerable::Enumerator

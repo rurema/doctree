@@ -567,7 +567,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- to_enum(method = :each, *args) -> Enumerator
 --- enum_for(method = :each, *args) -> Enumerator
 #@since 2.0.0
@@ -600,13 +600,13 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
   # protects an array from being modified
   a = [1, 2, 3]
-#@since 1.8.8
+#@since 1.9.1
   p(a.to_enum) #=> #<Enumerator: [1, 2, 3]:each>
 #@else
   p(a.to_enum) #=> #<Enumerable::Enumerator:0xbaf7ac>
 #@end
 
-#@since 1.8.8
+#@since 1.9.1
 #@since 2.0.0
 例(ブロックを指定する場合):
 

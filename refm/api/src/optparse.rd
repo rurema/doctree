@@ -69,7 +69,7 @@ opt で置き換えます。そうでない場合は先頭に opt を追加し�
 
 @return 文字列を返します。
 
-#@since 1.8.8
+#@since 1.9.1
 --- set_backtrace(array) -> [String]
 
 自身に array で指定したバックトレースを設定します。

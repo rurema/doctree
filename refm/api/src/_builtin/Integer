@@ -69,7 +69,7 @@ include している [[c:Precision]] モジュールの [[m:Precision.induced_fr
 
 --- downto(min) {|n| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- downto(min) -> Enumerator
 #@else
 --- downto(min) -> Enumerable::Enumerator
@@ -91,7 +91,7 @@ self の次の整数を返します。
 
 --- times {|n| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- times -> Enumerator
 #@else
 --- times -> Enumerable::Enumerator
@@ -139,7 +139,7 @@ self を返します。
 
 --- upto(max) {|n| ... } -> Fixnum | Bignum
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- upto(max) -> Enumerator
 #@else
 --- upto(max) -> Enumerable::Enumerator

@@ -52,11 +52,6 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 --- ===(obj) -> bool
 --- include?(obj) -> bool
 --- member?(obj) -> bool
-#@since 1.8.8
-#@until 1.9.1
---- cover?(obj) -> bool
-#@end
-#@end
 
 obj が範囲内に含まれている時に真を返します。
 
@@ -131,7 +126,7 @@ obj が範囲内に含まれている時に真を返します。
 
 --- each {|item|  ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each -> Enumerator
 #@else
 --- each -> Enumerable::Enumerator
@@ -179,7 +174,7 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 #@since 1.8.0
 --- step(s = 1) {|item| ... } -> self
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- step(s = 1) -> Enumerator
 #@else
 --- step(s = 1) -> Enumerable::Enumerator

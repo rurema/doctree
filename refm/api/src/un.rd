@@ -20,7 +20,7 @@ unがワイルドカード展開([[m:Dir.glob]]参照)します(Unix ではシ�
    ruby -run -e install -- [-pv -m mode] SOURCE DEST
    ruby -run -e chmod -- [-v] OCTAL-MODE FILE
    ruby -run -e touch -- [-v] FILE
-#@since 1.8.8
+#@since 1.9.1
    ruby -run -e wait_writable -- [OPTION] FILE
    ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
    ruby -run -e httpd -- [OPTION] DocumentRoot
@@ -123,7 +123,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
   ruby -run -e rmdir -- [OPTION] DIR
 
-#@since 1.8.8
+#@since 1.9.1
   -p          DIR で指定されたディレクトリとその上位ディレクトリを削除します
 #@end
   -v          詳細表示
@@ -143,7 +143,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
 #@# 内部的に使用するだけ
 #@# --- setup(options = "", * long_options) -> ()
-#@since 1.8.8
+#@since 1.9.1
 --- wait_writable -> ()
 ファイルが書き込み可能になるまで待ちます。
 

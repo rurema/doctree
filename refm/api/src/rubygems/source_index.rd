@@ -37,13 +37,7 @@ Gem パッケージのフルネームと それぞれの [[c:Gem::Specification]
 自身を [[m:Marshal.#dump]] します。
 
 --- each{|full_name, gem| ... } -> Hash
-#@since 1.8.7
-#@since 1.8.8
 --- each -> Enumerator
-#@else
---- each -> Enumerable::Enumerator
-#@end
-#@end
 
 自身に登録されているそれぞれの Gem についてブロックを評価します。
 

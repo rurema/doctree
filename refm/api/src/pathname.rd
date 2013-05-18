@@ -327,7 +327,7 @@ base_directory も絶対パスでなければなりません。
 #@since 1.8.1
 
 --- each_line(*args){|line| ... } -> nil
-#@since 1.8.8
+#@since 1.9.1
 --- each_line(*args) -> Enumerator
 #@else
 --- each_line(*args) -> Enumerable::Enumerator

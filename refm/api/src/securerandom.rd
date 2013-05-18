@@ -105,8 +105,7 @@ n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
 
   p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
 
-#@since 1.8.8
-#@if (version != "1.9.1")
+#@since 1.9.2
 --- uuid   -> String
 
 バージョン 4 の UUID (Universally Unique IDentifier) を生成して返します。
@@ -120,6 +119,5 @@ version 4 の UUID は全くランダムです (バージョンを除いて)。
    p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
 
 @see [[rfc:4122]]
-#@end
 #@end
 

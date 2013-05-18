@@ -2,8 +2,8 @@ each 以外のメソッドにも [[c:Enumerable]] の機能を提供するため
 #@since 1.8.7
 また、外部イテレータとしても使えます。
 #@end
-#@until 1.8.8
-Ruby 1.8.8 以降では Enumerable::Enumerator は Enumerator になっています。
+#@until 1.9.1
+Ruby 1.9 以降では Enumerable::Enumerator は Enumerator になっています。
 #@end
 
 [[c:Enumerable]] モジュールは、 [[m:Module#include]] 先のクラスが持つ
@@ -13,7 +13,7 @@ Enumerator を介することにより [[m:String#each_byte]] のような
 異なる名前のイテレータについても each と同様に Enumerable の機能を利用できます。
 
 Enumerator を生成するには
-#@since 1.8.8
+#@since 1.9.1
 [[m:Enumerator.new]]
 #@else
 [[m:Enumerable::Enumerator.new]]
@@ -42,7 +42,7 @@ enumerator を生成して返します。
 
 == Class Methods
 
-#@since 1.8.8
+#@since 1.9.1
 --- new(obj, method = :each, *args) -> Enumerator
 #@else
 --- new(obj, method = :each, *args) -> Enumerable::Enumerator
@@ -60,7 +60,7 @@ args を指定すると、 method の呼び出し時に渡されます。
 
   str = "xyz"
   
-#@since 1.8.8
+#@since 1.9.1
   enum = Enumerator.new(str, :each_byte)
 #@else
   enum = Enumerable::Enumerator.new(str, :each_byte)
@@ -68,7 +68,7 @@ args を指定すると、 method の呼び出し時に渡されます。
   p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
 
 
-#@since 1.8.8
+#@since 1.9.1
 --- new{|y| ... }                   -> Enumerator
 
 Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
@@ -117,7 +117,7 @@ new に渡されたブロックが終了した時点で each の繰り返しが�
 例:
   str = "Yet Another Ruby Hacker"
   
-#@since 1.8.8
+#@since 1.9.1
   enum = Enumerator.new(str, :scan, /\w+/)
 #@else
   enum = Enumerable::Enumerator.new(str, :scan, /\w+/)
@@ -153,7 +153,7 @@ next メソッドによる外部列挙の状態は他のイテレータメソッ
 伴っている場合には影響があり得ます。
 
 @raise StopIteration 列挙状態が既に最後へ到達しているとき
-#@since 1.8.8
+#@since 1.9.1
 @see [[m:Enumerator#rewind]]
 #@else
 @see [[m:Enumerable::Enumerator#rewind]]
@@ -353,7 +353,7 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します
 真を返すとき) は、その rewind メソッドを呼び出します。
 #@end
 
-#@since 1.8.8
+#@since 1.9.1
 @see [[m:Enumerator#next]]
 #@else
 @see [[m:Enumerable::Enumerator#next]]
@@ -388,7 +388,7 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します
 例:
     str = "xyz"
     
-#@since 1.8.8
+#@since 1.9.1
     enum = Enumerator.new(str, :each_byte)
 #@else
     enum = Enumerable::Enumerator.new(str, :each_byte)
@@ -414,7 +414,7 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します
 each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
 #@end
 
-#@since 1.8.8
+#@since 1.9.1
 --- with_object(obj) -> Enumerator
 --- with_object(obj) {|(*args), memo_obj| ... } -> object
 

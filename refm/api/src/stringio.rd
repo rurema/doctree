@@ -153,7 +153,7 @@ close された StringIO に読み書き等が行われると IOError が発生�
 --- each_line(rs = $/){|line| ... }  -> self
 #@since 1.8.7
 --- lines(rs = $/){|line| ... }      -> self
-#@since 1.8.8
+#@since 1.9.1
 --- each(rs = $/)       -> Enumerator
 --- each_line(rs = $/)  -> Enumerator
 --- lines(rs = $/)      -> Enumerator
@@ -182,7 +182,7 @@ close された StringIO に読み書き等が行われると IOError が発生�
 --- each_byte{|ch| ... }    -> self
 #@since 1.8.7
 --- bytes{|ch| ... }        -> self
-#@since 1.8.8
+#@since 1.9.1
 --- each_byte -> Enumerator
 --- bytes     -> Enumerator
 #@else
@@ -587,7 +587,7 @@ nil を返します。
 
 --- each_char{|c| ... } -> self
 --- chars{|c| ... }     -> self
-#@since 1.8.8
+#@since 1.9.1
 --- each_char           -> Enumerator
 --- chars               -> Enumerator
 #@else

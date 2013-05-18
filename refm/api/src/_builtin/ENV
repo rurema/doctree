@@ -65,7 +65,7 @@ nil を返します。
 @param key  環境変数名を指定します。 to_str で文字列化されます。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- reject                     -> Enumerator
 #@else
 --- reject                     -> Enumerable::Enumerator
@@ -80,7 +80,7 @@ nil を返します。
 --- delete_if {|key, value| ... } -> ENV
 --- reject! {|key, value| ... }   -> ENV | nil
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- delete_if  -> Enumerator
 --- reject!    -> Enumerator
 #@else
@@ -95,7 +95,7 @@ key と value を引数としてブロックを評価した値が真であ
 reject! は要素に変化がなければ nil を返します。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each                          -> Enumerator
 --- each_pair                     -> Enumerator
 #@else
@@ -108,7 +108,7 @@ reject! は要素に変化がなければ nil を返します。
 key と value を引数としてブロックを評価します。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_key              -> Enumerator
 #@else
 --- each_key              -> Enumerable::Enumerator
@@ -118,7 +118,7 @@ key と value を引数としてブロックを評価します。
 key を引数としてブロックを評価します。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- each_value                -> Enumerator
 #@else
 --- each_value                -> Enumerable::Enumerator
@@ -215,7 +215,7 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 @param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 
 #@since 1.8.7
-#@since 1.8.8
+#@since 1.9.1
 --- select                      -> Enumerator
 #@else
 --- select                      -> Enumerable::Enumerator

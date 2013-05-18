@@ -54,7 +54,6 @@ Ruby のバージョンごとに挙動が異なるので注意してください
   1.8.5 再代入可能
   1.8.6 再代入可能
   1.8.7 再代入可能
-  1.8.8 TypeError
   1.9.1 再代入可能
   1.9.2 TypeError
 
@@ -122,7 +121,7 @@ nameで指定された要素を削除します。
 
 == Protected Instance Methods
 
-#@since 1.8.8
+#@since 1.8.7
 #@if (version != "1.9.1")
 --- modifiable -> Hash
 

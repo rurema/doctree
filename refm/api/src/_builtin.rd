@@ -29,7 +29,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Encoding__Converter)
 #@end
 #@include(_builtin/Enumerable)
-#@since 1.8.8
+#@since 1.9.1
 #@include(_builtin/Enumerator)
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
