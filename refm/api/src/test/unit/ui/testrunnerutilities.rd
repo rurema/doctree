@@ -50,7 +50,7 @@ Unit テストを行いたいだけのユーザが、このライブラリを re
 
 --- start_command_line_test    -> Test::Unit::TestResult
 
-[[m:Kernel::ARGV]] を解析して、ARGV[0] で与えられたTestRunner を新しく
+[[m:Object::ARGV]] を解析して、ARGV[0] で与えられたTestRunner を新しく
 生成して、テストを実行します。
 
 ARGV が空だった場合、メッセージを出力してプログラムを終了します。

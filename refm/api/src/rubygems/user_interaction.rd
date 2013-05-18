@@ -343,7 +343,7 @@ WARNING レベルのアラートを表示します。
 
 [[c:Gem::StreamUI]] を標準入力、標準出力、標準エラー出力を使用して初期化します。
 
-@see [[m:Kernel::STDIN]], [[m:Kernel::STDOUT]], [[m:Kernel::STDERR]]
+@see [[m:Object::STDIN]], [[m:Object::STDOUT]], [[m:Object::STDERR]]
 
 = class Gem::SilentUI
 

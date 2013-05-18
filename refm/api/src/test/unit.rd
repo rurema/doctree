@@ -266,7 +266,7 @@ original_argvで指定されたオプションを解析して、テスト対象�
 をrequireします。
 
 @param original_argv オプションを指定します。省略された場合は、
-                     [[m:Kernel::ARGV]]が使用されます。
+                     [[m:Object::ARGV]]が使用されます。
 
 @raise ArgumentError 指定されたファイルが存在しない場合に発生します。
 

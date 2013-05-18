@@ -90,7 +90,7 @@ Ruby のソースコードとその実行結果を、行ごとに交互に表示
 @param bind [[c:Binding]] オブジェクトを指定します。省略した場合は、最
             後に実行した [[m:XMP#puts]]、[[m:Kernel#xmp]] の
             [[c:Binding]] を使用します。まだ何も実行していない場合は
-            [[m:Kernel::TOPLEVEL_BINDING]] を使用します。
+            [[m:Object::TOPLEVEL_BINDING]] を使用します。
 
 = class XMP
 
@@ -105,7 +105,7 @@ Ruby のソースコードとその実行結果を、行ごとに交互に表示
 @param bind [[c:Binding]] オブジェクトを指定します。省略した場合は、最
             後に実行した [[m:XMP#puts]]、[[m:Kernel#xmp]] の
             [[c:Binding]] を使用します。まだ何も実行していない場合は
-            [[m:Kernel::TOPLEVEL_BINDING]] を使用します。
+            [[m:Object::TOPLEVEL_BINDING]] を使用します。
 
 @see [[m:XMP#puts]]
 

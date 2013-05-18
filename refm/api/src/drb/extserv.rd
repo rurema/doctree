@@ -22,7 +22,7 @@ there で指定した
 URI の front オブジェクト(これは [[c:DRb::ExtServManager]] の
 インスタンスであるべきです)に name という名前でサービスを登録します。
 
-there, name は [[m:Kernel::ARGV]] の末尾2つを渡してください。
+there, name は [[m:Object::ARGV]] の末尾2つを渡してください。
 
 server には drb の通信に用いる [[c:DRb::DRbServer]] オブジェクトを指定します。
 省略した場合は [[m:DRb.#primary_server]] を用います。

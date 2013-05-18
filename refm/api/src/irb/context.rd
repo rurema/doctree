@@ -26,11 +26,11 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
   ワークスペースに関連する [[c:Binding]] オブジェクトの作成方法を
   [[c:Integer]] で設定します。
 
-  0 を指定した場合、[[m:Kernel::TOPLEVEL_BINDING]] の [[c:Proc]] 内の
+  0 を指定した場合、[[m:Object::TOPLEVEL_BINDING]] の [[c:Proc]] 内の
   [[c:Binding]] を使用します。1 を指定した場合、[[c:Tempfile]] 中の
   [[c:Binding]] を使用します。2 を指定した場合、[[c:Thread]] 内で読み込
   んだファイル中の [[c:Binding]] を使用します。3 を指定した場合、
-  [[m:Kernel::TOPLEVEL_BINDING]] の関数中の [[c:Binding]] を使用します。
+  [[m:Object::TOPLEVEL_BINDING]] の関数中の [[c:Binding]] を使用します。
 
   ただし、IRB.conf[:SINGLE_IRB] に true を設定していた場合は、現在のワー
   クスペースをそのまま使用します。

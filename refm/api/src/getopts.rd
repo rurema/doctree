@@ -40,7 +40,7 @@ $OPT_xxx に値を設定します。
 #@since 1.8.2
 このメソッドは obsolete です。
 [[lib:optparse]] ライブラリで提供されている
-ARGV.getopts を使ってください。[[m:Kernel::ARGV]], [[m:OptionParser::Arguable#getopts]] を参照。
+ARGV.getopts を使ってください。[[m:Object::ARGV]], [[m:OptionParser::Arguable#getopts]] を参照。
 #@end
 
 指定された short_opt や long_opt に応じて ARGV を解析し、

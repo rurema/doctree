@@ -284,8 +284,8 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   データの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
   A sequence will be selected even if it occurs in a quoted field, assuming that you
   would have the same line endings there.  If none of those sequences is
-  found, +data+ is [[c:ARGF]], [[m:Kernel::STDIN]], [[m:Kernel::STDOUT]], or
-  [[m:Kernel::STDERR]], or the stream is only  available for output, the default
+  found, +data+ is [[c:ARGF]], [[m:Object::STDIN]], [[m:Object::STDOUT]], or
+  [[m:Object::STDERR]], or the stream is only  available for output, the default
   [[m:$INPUT_RECORD_SEPARATOR]]  ([[m:$/]]) is used.  Obviously,
   discovery takes a little time.  Set  manually if speed is important.  Also
   note that IO objects should be opened  in binary mode on Windows if this

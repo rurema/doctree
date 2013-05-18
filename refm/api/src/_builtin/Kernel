@@ -8,5 +8,4 @@
 す。これはトップレベルでのメソッドの再定義に対応するためです。
 
 #@include(functions)
-#@include(constants)
 #@include(specialvars)

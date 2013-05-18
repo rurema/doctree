@@ -1362,7 +1362,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
   p gets #=> "hello\n"
   p gets(nil) #=> "it\ncommon\n"
   p gets("") #=> "ARGF\n\n"
-  p gets('、') #=> "スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と\nみなして、"
+  p gets('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
   p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
   p gets #=> nil
   p readline # end of file reached (EOFError)
@@ -1373,7 +1373,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
   --- c.txt ---
   ARGF
   
-  スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と
+  スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
   みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#readline]]
@@ -1399,7 +1399,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
   p readline #=> "hello\n"
   p readline(nil) #=> "it\ncommon\n"
   p readline("") #=> "ARGF\n\n"
-  p readline('、') #=> "スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と\nみなして、"
+  p readline('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
   p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
   p readline # end of file reached (EOFError)
   --- b.txt ---
@@ -1409,7 +1409,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
   --- c.txt ---
   ARGF
   
-  スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と
+  スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
   みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#gets]]
@@ -2496,7 +2496,7 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 
   eval("p a", foo)  #=> 1
 
-@see [[m:Kernel.#eval]],[[m:Kernel::TOPLEVEL_BINDING]]
+@see [[m:Kernel.#eval]],[[m:Object::TOPLEVEL_BINDING]]
 
 --- eval(expr) -> object
 --- eval(expr, bind, fname = "(eval)", lineno = 1) -> object

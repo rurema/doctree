@@ -163,7 +163,7 @@ C の構造体における uintptr_t のアライメントの値。
 --- BUILD_RUBY_PLATFORM -> String
 ビルドに用いた ruby のプラットフォームを表す文字列。
 
-通常、[[m:Kernel::RUBY_PLATFORM]] と同じ。
+通常、[[m:Object::RUBY_PLATFORM]] と同じ。
 
 --- NULL -> DL::CPtr
 C の NULL ポインタ

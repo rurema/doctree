@@ -6,7 +6,7 @@
 組み込み関数 [[m:Kernel.#binding]] によっ
 てのみ生成され、[[m:Kernel.#eval]] の第 2 引数に使用します。
 またトップレベルの Binding オブジェクトとして組み込み定数
-[[m:Kernel::TOPLEVEL_BINDING]] が用意されています。
+[[m:Object::TOPLEVEL_BINDING]] が用意されています。
 
 == Instance Methods
 

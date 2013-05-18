@@ -124,12 +124,12 @@ C の構造体における void* のアライメントの値。
 --- BUILD_RUBY_PLATFORM -> String
 ビルドに用いた ruby のプラットフォームを表す文字列。
 
-通常、[[m:Kernel::RUBY_PLATFORM]] と同じ。
+通常、[[m:Object::RUBY_PLATFORM]] と同じ。
 
 --- BUILD_RUBY_VERSION -> String
 ビルドに用いた ruby のバージョンを表す文字列。
 
-通常、[[m:Kernel::RUBY_VERSION]] と同じ。
+通常、[[m:Object::RUBY_VERSION]] と同じ。
 
 #@# --- DLSTACK_SIZE
 #@# DL での C の関数での関数呼び出しで用意されるスタックのサイズ。

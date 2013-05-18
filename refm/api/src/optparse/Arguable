@@ -1,6 +1,6 @@
 = module OptionParser::Arguable
 
-主に [[m:Kernel::ARGV]] を拡張するために用意されたモジュールです。
+主に [[m:Object::ARGV]] を拡張するために用意されたモジュールです。
 [[lib:optparse]] を require することにより、ARGV は
 OptionParser::Arguable を [[m:Object#extend]] します。
 

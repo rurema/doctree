@@ -258,19 +258,19 @@ Ruby処理系実装の種類を表す文字列。
 #@if (version < "1.9.1")
 --- VERSION -> String
 
-非推奨です。 [[m:Kernel::RUBY_VERSION]] の古い名前です。
+非推奨です。 [[m:Object::RUBY_VERSION]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_VERSION を使ってください。
 
 --- RELEASE_DATE -> String
 
-非推奨です。 [[m:Kernel::RUBY_RELEASE_DATE]] の古い名前です。
+非推奨です。 [[m:Object::RUBY_RELEASE_DATE]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_RELEASE_DATE を使ってください。
 
 --- PLATFORM -> String
 
-非推奨です。 [[m:Kernel::RUBY_PLATFORM]] の古い名前です。
+非推奨です。 [[m:Object::RUBY_PLATFORM]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_PLATFORM を使ってください。
 #@end
