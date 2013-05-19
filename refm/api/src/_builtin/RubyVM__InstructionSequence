@@ -5,10 +5,11 @@ Ruby の Virtual Machine のコンパイル済みの命令シーケンスを表�
 [[c:Method]]、[[c:Proc]] オブジェクトや Ruby のソースコードを表す文字列
 から VM の命令シーケンスを得る事ができます。また、
 RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを読みやす
-い文字列に変換する事もできます。Ruby の命令シーケンスの設定を扱う必要が
-ありますが、Ruby の VM がどのように働くかを知るのに有用です。
+い文字列に変換する事もできます。Ruby の命令シーケンスコンパイラの設定を
+扱う必要がありますが、Ruby の VM がどのように働くかを知るのに有用です。
 
-VM の命令の一覧はRuby のソースコード中の insns.def から参照できます。
+VM の命令シーケンスの一覧はRuby のソースコード中の insns.def から参照で
+きます。
 
  * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/insns.def?view=markup]]
 
@@ -30,7 +31,7 @@ VM の命令の一覧はRuby のソースコード中の insns.def から参照�
 
 @param path 引数 file の絶対パスファイル名を文字列で指定します。
 
-@param line 1 行目の行番号を指定します。
+@param line 引数 source の 1 行目の行番号を指定します。
 
 @param options コンパイル時のオプションを true、false、[[c:Hash]] オブ
                ジェクトのいずれかで指定します。詳細は
@@ -68,7 +69,8 @@ VM の命令の一覧はRuby のソースコード中の insns.def から参照�
 
 --- compile_option -> Hash
 
-命令シーケンスのコンパイル時のデフォルトのオプションを Hash で返します。
+命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
+します。
 
 @see [[m:RubyVM::InstructionSequence.compile_option=]]
 
@@ -77,13 +79,13 @@ VM の命令の一覧はRuby のソースコード中の insns.def から参照�
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを引数
 options で指定します。
 
-@param options コンパイル時のオプションを true、false、nil、[[c:Hash]]
-               のいずれかで指定します。true を指定した場合は全てのオプ
-               ションを有効にします。false を指定した場合は全てのオプショ
-               ンを無効にします。nil を指定した場合はいずれのオプション
-               も変更しません。また、[[c:Hash]] を指定した場合は以下の
-               キーに対して、true か false を指定する事で個別に有効、無
-               効を指定します。
+@param options コンパイル時の最適化オプションを true、false、nil、
+               [[c:Hash]] のいずれかで指定します。true を指定した場合は
+               全てのオプションを有効にします。false を指定した場合は全
+               てのオプションを無効にします。nil を指定した場合はいずれ
+               のオプションも変更しません。また、[[c:Hash]] を指定した
+               場合は以下のキーに対して、true か false を指定する事で個
+               別に有効、無効を指定します。
 //emlist{
   * :inline_const_cache
   * :instructions_unification
@@ -96,8 +98,8 @@ options で指定します。
 //}
                :debug_level をキーに指定した場合は値を数値で指定します。
 
-これらのオプションは .new、.compile、.compile_file メソッドの実行の際に
-option 引数を指定する事でも同様の操作が行えます。
+.new、.compile、.compile_file メソッドの実行の際に option 引数を指定し
+た場合はその実行のみ最適化オプションを変更する事もできます。
 
 @see [[m:RubyVM::InstructionSequence.new]],
      [[m:RubyVM::InstructionSequence.compile]],
@@ -341,11 +343,11 @@ self の作成時に指定した文字列を返します。self を文字列か�
 
 @see [[m:RubyVM::InstructionSequence#absolute_path]]
 
---- absolute_path -> String
+--- absolute_path -> String | nil
 
 self が表す命令シーケンスの絶対パスを返します。
 
-self を文字列から作成していた場合は "<compiled>" を返します。
+self を文字列から作成していた場合は nil を返します。
 
 例1:irb で実行した場合
 
