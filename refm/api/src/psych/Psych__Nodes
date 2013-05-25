@@ -264,7 +264,7 @@ tag directive の配列を設定します。
 @see [[m:Psych::Nodes::Document#tag_directives]],
      [[m:Psych::Nodes::Document.new]]
 
---- implicit -> boolean
+--- implicit -> bool
 ドキュメントが implicit に始まっているかどうかを返します。
 
 @see [[m:Psych::Nodes::Document#implicit=]],
@@ -277,7 +277,7 @@ tag directive の配列を設定します。
 @see [[m:Psych::Nodes::Document#implicit]],
      [[m:Psych::Nodes::Document.new]]
 
---- implicit_end -> boolean
+--- implicit_end -> bool
 ドキュメントが implicit に終わっているかどうかを返します。
 
 オブジェクト生成時のデフォルト値は true です。

@@ -263,7 +263,7 @@ YAML stream の終端を見付けたときに呼び出されます。
 
 必要に応じてこのメソッドを override してください。
 
---- streaming? -> boolean
+--- streaming? -> bool
 
 handler が streaming handler であるならば真を返すように
 override してください。
