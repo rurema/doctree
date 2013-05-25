@@ -479,6 +479,65 @@ nil を渡すとトレースを解除します。
 スレッドがすでに終了している場合は nil を返します。
 
 #@end
+
+#@since 2.0.0
+--- thread_variable_get(key) -> object | nil
+
+引数 key で指定した名前のスレッドローカル変数を返します。
+
+[注意]: [[m:Thread#[] ]] でセットしたローカル変数(Fiber ローカル変数)と
+異なり、Fiber を切り替えても同じ変数を返す事に注意してください。
+
+例:
+
+  Thread.new {
+    Thread.current.thread_variable_set("foo", "bar") # スレッドローカル
+    Thread.current["foo"] = "bar"                    # Fiber ローカル
+
+    Fiber.new {
+      Fiber.yield [
+        Thread.current.thread_variable_get("foo"), # スレッドローカル
+        Thread.current["foo"],                     # Fiber ローカル
+      ]
+    }.resume
+  }.join.value # => ['bar', nil]
+
+この例の "bar" は [[m:Thread#thread_variable_get]] により得られ
+た値で、nil は[[m:Thread#[] ]] により得られた値です。
+
+@see [[m:Thread#thread_variable_set]], [[m:Thread#[] ]]
+
+@see [[url:http://jp.rubyist.net/magazine/?0041-200Special-note#l16]]
+
+--- thread_variable_set(key, value)
+
+引数 key で指定した名前のスレッドローカル変数に引数 value をセットしま
+す。
+
+[注意]: [[m:Thread#[] ]] でセットしたローカル変数(Fiber ローカル変数)と
+異なり、セットした変数は Fiber を切り替えても共通で使える事に注意してく
+ださい。
+
+@see [[m:Thread#thread_variable_get]], [[m:Thread#[] ]]
+
+--- thread_variable?(key) -> bool
+
+引数 key で指定した名前のスレッドローカル変数が存在する場合に true、そ
+うでない場合に false を返します。
+
+@param key 変数名を [[c:String]] か [[c:Symbol]] で指定します。
+
+   me = Thread.current
+   me.thread_variable_set(:oliver, "a")
+   me.thread_variable?(:oliver)    # => true
+   me.thread_variable?(:stanley)   # => false
+
+[注意]: [[m:Thread#[] ]] でセットしたローカル変数(Fiber ローカル変数)が
+対象ではない事に注意してください。
+
+@see [[m:Thread#thread_variable_get]], [[m:Thread#[] ]]
+#@end
+
 == Constants
 
 #@since 1.9.1
