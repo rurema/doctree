@@ -3,3 +3,4 @@ rvm:
 notifications:
   recipients:
     - okkez000@gmail.com
+    - ruby-reference-manual-diff@ml.fdiary.net
