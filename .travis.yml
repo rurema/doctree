@@ -1,0 +1,6 @@
+rvm:
+  - 2.0.0
+script: bundle exec bitclust setup
+notifications:
+  recipients:
+    - okkez000@gmail.com
