@@ -2975,15 +2975,16 @@ self の最初の文字だけを含む文字列を返します。
 
 #@end
 #@since 1.8.7
---- start_with?(str) -> bool
+--- start_with?(*strs) -> bool
 
-self の先頭が str であるとき true を返します。
+self の先頭が strs のいずれかであるとき true を返します。
 
-@param str    パターンを表す文字列
+@param strs    パターンを表す文字列 (のリスト)
 
 例:
-    "string".start_with?("str")   # => true
-    "string".start_with?("ing")   # => false
+    "string".start_with?("str")          # => true
+    "string".start_with?("ing")          # => false
+    "string".start_with?("ing", "str")   # => true
 
 @see [[m:String#end_with?]]
 
