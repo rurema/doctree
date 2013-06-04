@@ -2988,15 +2988,16 @@ self の先頭が strs のいずれかであるとき true を返します。
 
 @see [[m:String#end_with?]]
 
---- end_with?(str) -> bool
+--- end_with?(*strs) -> bool
 
-self の末尾が str であるとき true を返します。
+self の末尾が strs のいずれかであるとき true を返します。
 
-@param str    パターンを表す文字列
+@param strs    パターンを表す文字列 (のリスト)
 
 例:
-    "string".end_with?("ing")   # => true
-    "string".end_with?("str")   # => false
+    "string".end_with?("ing")          # => true
+    "string".end_with?("str")          # => false
+    "string".end_with?("str", "ing")   # => true
 
 @see [[m:String#start_with?]]
 
