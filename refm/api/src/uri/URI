@@ -143,11 +143,11 @@ URI 文字列をエンコードした文字列を返します。
 このメソッドは obsolete です。
 
 代わりに
-[[m:ERB::Util.url_encode]],
+[[m:ERB::Util.#url_encode]],
 [[m:CGI.escape]],
 [[m:URI.encode_www_form_component]],
-[[m:WEBrick::HTTPUtils.escape_form]],
-[[m:WEBrick::HTTPUtils.escape]]
+[[m:WEBrick::HTTPUtils.#escape_form]],
+[[m:WEBrick::HTTPUtils.#escape]]
 などの使用を検討してください。
 詳細は [[ruby-core:29293]] からのスレッドを参照してください。
 #@end
