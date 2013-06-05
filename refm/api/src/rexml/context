@@ -1,0 +1,26 @@
+以下の [[c:Symbol]] をハッシュのキーとして使います。
+
+: :respect_whitespace
+  空白を考慮して欲しい要素の名前の集合を文字列の配列で指定します。
+  また、すべての要素で空白を考慮して欲しい場合には
+  :all を指定します。
+  デフォルト値は :all です。
+  [[m:REXML::Element#whitespace]] も参照してください。
+: :compress_whitespace
+  空白を無視して欲しい要素の名前の集合を文字列の配列で指定します。
+  この指定は :respect_whitespace での指定を上書きします。
+  すべての要素で空白を無視して欲しい場合には
+  :all を指定します。
+  [[m:REXML::Element#whitespace]] も参照してください。
+: :ignore_whitespace_nodes
+  空白のみからなるノードを無視して欲しい要素の名前の集合を
+  文字列の配列で指定します。
+  すべての要素で無視して欲しい場合は :all を指定します。
+  これが設定された場合、空白のみからなる text node は追加されません。
+  [[m:REXML::Element#ignore_whitespace_nodes]] も参照してください。
+: :raw
+  raw mode で取り扱いをして欲しい要素の名前の集合を
+  文字列の配列で指定します。
+  すべてのノードを raw mode で取り扱って欲しい場合は :all を指定します。
+  raw mode においては、text 中の特殊文字は一切変換されません。
+  [[m:REXML::Element#raw]] も参照してください。
