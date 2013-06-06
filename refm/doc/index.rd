@@ -1,9 +1,13 @@
 = オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル
 
  * Ruby オフィシャルサイト [[url:http://www.ruby-lang.org/ja/]]
-#@since 1.9.1
+#@since 2.0.0
+ * version 2.0 対応リファレンス
+#@end
+#@if("1.9.0" <= version and version < "2.0.0")
  * version 1.9 対応リファレンス
-#@else
+#@end
+#@until 1.9.0
  * version 1.8 対応リファレンス
 #@end
  * 原著：まつもとゆきひろ
