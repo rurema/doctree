@@ -30,7 +30,21 @@ XML 宣言を省略した場合の例。
   xml_decl = doc.xml_decl
   xml_decl.version # => "1.0"
   xml_decl.encoding # => "UTF-8"
-  xml_decl.standalone # => "yes"
+  xml_decl.standalone # => nil
+  xml_decl.writethis # => false
+
+XML 宣言が encoding 属性を持たない場合の例
+
+  require 'rexml/document'
+  doc = REXML::Document.new(<<EOS)
+  <?xml version=1.0 ?>
+  <e />
+  EOS
+  
+  xml_decl = doc.xml_decl
+  xml_decl.version # => "1.0"
+  xml_decl.encoding # => "UTF-8"
+  xml_decl.standalone # => nil
   xml_decl.writethis # => true
 
 == Class Methods
@@ -68,6 +82,8 @@ nil(省略)を返す場合もあります。
 
 --- standalone=(value)
 スタンドアロン文書であるかどうかを "yes" "no" で設定します。
+
+この属性を省略したい場合は nil を指定します。
 
 @param value 設定値(文字列)
 
@@ -108,6 +124,14 @@ self と other が同じであるならば真を返します。
 #@# --- old_enc=(enc)
 #@# #@todo
 
+--- encoding -> String | nil
+設定されているエンコーディングの名前を文字列で返します。
+
+エンコーディングが指定されていない(デフォルトの UTF-8 とみなされます)
+場合は nil を返します。
+
+#@# このメソッドは実際は REXML::Encoding にあります
+
 --- encoding=(enc)
 エンコーディングを enc に設定します。
 
@@ -116,7 +140,7 @@ enc に nil を渡すと XML 宣言では encoding が
 ことになります。
 
 @param enc エンコーディング(文字列 or nil)
-@see [[m:REXML::Encoding#encoding=]]
+@see [[m:REXML::XMLDecl#encoding=]]
 
 --- nowrite -> ()
 出力時([[m:REXML::Document#write]]) に XML 宣言を省略する
