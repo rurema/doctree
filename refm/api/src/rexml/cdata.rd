@@ -1,7 +1,7 @@
 #@#require rexml/text
 
 = class REXML::CData < REXML::Text
-XML の cdata テキストを表すクラス
+XML の cdata セクションを表すクラス
 
 cdata とは <![CDATA[ と ]]> で囲まれたテキストデータのことです。
 
@@ -44,6 +44,8 @@ self を複製して返します。
 --- value -> String
 
 テキスト文字列を返します。
+
+@see [[m:REXML::Text#value]], [[m:REXML::Text#to_s]]
 
 ==== 例
   require 'rexml/document'
