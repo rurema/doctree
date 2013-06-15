@@ -80,7 +80,8 @@ other と self が同じ 処理命令である場合に真を返します。
 
 同じとは、 [[m:REXML::Instruction#target]] と [[m:REXML::Instruction#content]]
 が一致することを意味します。
-#@todo
+
+@param other 比較対象
 
 --- node_type -> Symbol
 Symbol :processing_instruction を返します。
