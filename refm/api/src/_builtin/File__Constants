@@ -137,18 +137,9 @@ atime が更新されないのは確実ではないということに注意し�
 シェルのパターンマッチにはこのフラグが使用されています。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
-#@if (version >= "1.8.0")
 --- FNM_DOTMATCH -> Integer
 ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
-
-1.8.0以前では、FNM_DOTMATCHという名前でした。
-#@else
---- FNM_PERIOD -> Integer
-ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
-1.8.0以降では、FNM_DOTMATCH に置き換えられました。
-[[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
-#@end
 
 --- FNM_CASEFOLD -> Integer
 アルファベットの大小文字を区別せずにパターンマッチを行います。
