@@ -196,6 +196,175 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 #@end
 
+#@since 2.0.0
+#@# 参考: [[ruby-dev:45341]]
+--- pending_interrupt?(error = nil) -> boolean
+
+非同期割り込みのキューが空かどうかを返します。
+
+[[m:Thread.handle_interrupt]] は非同期割り込みの発生を延期させるのに使
+用しますが、本メソッドは任意の非同期割り込みが存在するかどうかを確認す
+るのに使用します。
+
+本メソッドが true を返した場合、[[m:Thread.handle_interrupt]] で例外の
+発生を延期するブロックを終了すると延期させられていた例外を発生させるこ
+とができます。
+
+@param error 対象の例外クラスを指定します。省略した場合は全ての例外を対
+             象に確認を行います。
+
+例: 延期させられていた例外をただちに発生させる。
+
+  def Thread.kick_interrupt_immediately
+    Thread.handle_interrupt(Object => :immediate) {
+      Thread.pass
+    }
+  end
+
+=== 使い方
+
+  th = Thread.new{
+    Thread.handle_interrupt(RuntimeError => :on_blocking){
+      while true
+        ...
+        # ここまでで割り込みが発生しても安全な状態になった。
+        if Thread.pending_interrupt?
+          Thread.handle_interrupt(Object => :immediate){}
+        end
+        ...
+      end
+    }
+  }
+  ...
+  th.raise # スレッド停止。
+
+この例は以下のように記述する事もできます。
+
+  flag = true
+  th = Thread.new{
+    Thread.handle_interrupt(RuntimeError => :on_blocking){
+      while true
+        ...
+        # ここまでで割り込みが発生しても安全な状態になった。
+        break if flag == false
+        ...
+      end
+    }
+  }
+  ...
+  flag = false # スレッド停止
+
+@see [[m:Thread#pending_interrupt?]], [[m:Thread.handle_interrupt]]
+
+--- handle_interrupt(hash) { ... } -> object
+
+スレッドの割り込みのタイミングを引数で指定した内容に変更してブロックを
+実行します。
+
+「割り込み」とは、非同期イベントや [[m:Thread#raise]] や
+[[m:Thread#kill]]、[[m:Signal.#trap]](未サポート)、メインスレッドの終了
+(メインスレッドが終了すると、他のスレッドも終了されます)を意味します。
+
+@param hash 例外クラスがキー、割り込みのタイミングを指定する
+            [[c:Symbol]] が値の [[c:Hash]] を指定します。
+            値の内容は以下のいずれかです。
+
+: :immediate
+
+  すぐに割り込みます。
+
+: :on_blocking
+
+  ブロッキング処理(後述)の間は割り込みが発生します。
+
+: :never
+
+  まったく割り込みません。
+
+「ブロッキング処理」とは、読み込み処理や書き込み処理のような呼び出し元
+のスレッドをブロックするような処理を意味します。CRuby の実装では、GVL
+を解放して実行する処理は全てブロッキング処理に含まれます。
+
+また、マスクされた非同期割り込みは再度有効にされるまで延期されます。本
+メソッドは [[man:sigprocmask(3)]] に似ています。
+
+@return ブロックの評価結果を返します。
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+=== 注意
+
+非同期割り込みの利用は難しいため、スレッド間での通信を実現する場合はま
+ずはキューのような他の方法を検討してください。それでも非同期割り込みを
+利用する場合は本メソッドをよく理解してから利用してください。
+
+=== 使い方
+
+例:[[c:Thread#raise]] 発生のタイミングを制御する例
+
+  th = Thread.new do
+    Thead.handle_interrupt(RuntimeError => :never) {
+      begin
+        # 安全にリソースの割り当てが可能
+        Thread.handle_interrupt(RuntimeError => :immediate) {
+          # ...
+        }
+      ensure
+        # 安全にリソースの解放が可能
+      end
+    }
+  end
+  Thread.pass
+  # ...
+  th.raise "stop"
+
+[[c:RuntimeError]] を無視(延期)している間はリソースの割り当てや ensure
+節でリソースの解放を安全に行う事ができます。
+
+==== TimeoutError 対策
+
+例:[[c:TimeoutError]] 発生のタイミングを制御する例
+
+  require 'timeout'
+  Thread.handle_interrupt(TimeoutError => :never) {
+    timeout(10){
+      # TimeoutError => :never の指定により、ここでは TimeoutError が発生しない。
+      Thread.handle_interrupt(TimeoutError => :on_blocking) {
+        # :on_blocking な処理は TimeoutError が発生し得る。
+      }
+      # TimeoutError => :never の指定により、ここでは TimeoutError が発生しない。
+    }
+  }
+
+この例を ensure 節での [[c:TimeoutError]] 発生に応用する事でリソースリー
+クに備える事ができます。[[m:Timeout.#timeout]] はスレッドを使って実装さ
+れているため、Thread.handle_interrupt による制御が有効です。
+
+==== Stack control settings
+
+It's possible to stack multiple levels of ::handle_interrupt blocks in order
+to control more than one ExceptionClass and TimingSymbol at a time.
+
+  Thread.handle_interrupt(FooError => :never) {
+    Thread.handle_interrupt(BarError => :never) {
+       # FooError and BarError are prohibited.
+    }
+  }
+
+==== 例外クラスの継承関係
+
+本メソッドでは引数 hash のキーに指定した例外クラスの全てのサブクラスが
+処理の対象になります。
+
+例:
+
+  Thread.handle_interrupt(Exception => :never) {
+    # Exception を継承する全ての例外クラスの例外の発生を延期。
+  }
+
+@see [[m:Thread.pending_interrupt?]], [[m:Thread#pending_interrupt?]]
+#@end
+
 == Instance Methods
 
 --- [](name)    -> object | nil
@@ -556,6 +725,14 @@ nil を渡すとトレースを解除します。
 対象ではない事に注意してください。
 
 @see [[m:Thread#thread_variable_get]], [[m:Thread#[] ]]
+
+--- pending_interrupt?(error = nil) -> bool
+
+self の非同期例外のキューが空かどうかを返します。
+
+@param error 対象の例外クラスを指定します。
+
+@see [[m:Thread.pending_interrupt?]]
 #@end
 
 == Constants
