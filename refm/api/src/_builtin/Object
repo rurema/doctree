@@ -616,7 +616,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
       unless block_given?
         # __method__ はここでは :repeat
         return to_enum(__method__, n) do
-	  # size メソッドが nil でなければ size * n を返す。
+          # size メソッドが nil でなければ size * n を返す。
           sz = size
           sz * n if sz
         end
