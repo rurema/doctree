@@ -63,7 +63,6 @@ DOM スタイルと SAX スタイルの両方をカバーしています。
 #@include(rexml/parsers/treeparser.rd)
 #@include(rexml/parsers/ultralightparser.rd)
 #@include(rexml/parsers/xpathparser.rd)
-#@include(rexml/quickpath.rd)
 #@include(rexml/rexml.rd)
 #@include(rexml/sax2listener.rd)
 #@include(rexml/source.rd)
