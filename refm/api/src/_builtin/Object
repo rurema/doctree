@@ -591,7 +591,6 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
 @param method メソッド名の文字列かシンボルです。
 @param args 呼び出すメソッドに渡される引数です。
-@raise NameError 存在しないメソッド名を指定すると発生します。
 
   str = "xyz"
 
