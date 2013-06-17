@@ -76,4 +76,3 @@ DOM スタイルと SAX スタイルの両方をカバーしています。
 #@include(rexml/xmldecl.rd)
 #@include(rexml/xmltokens.rd)
 #@include(rexml/xpath.rd)
-#@include(rexml/xpath_parser.rd)
