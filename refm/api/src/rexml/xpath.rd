@@ -80,6 +80,24 @@ XPathインジェクション攻撃を避けるため、適切な
 @param namespace 名前空間とURLの対応付け
 @param variables 変数名とその値の対応付け
 
+==== 例
+  require 'rexml/document'
+  doc = REXML::Document.new(<<EOS)
+  <root xmlns:x='1'>
+    <a>
+      <b>b1</b>
+      <x:c />
+      <b>b2</b>
+      <d />
+    </a>
+    <b> b3 </b>
+  </root>
+  EOS
+  
+  REXML::XPath.each(doc, "/root/a/b"){|e| p e.text }
+  # >> "b1"
+  # >> "b2"
+
 --- match(element, path = nil, namespaces = {}, variables = {}) -> [Node]
 element の path で指定した XPath 文字列にマッチするノードの配列を
 返します。
