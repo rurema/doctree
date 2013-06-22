@@ -62,7 +62,7 @@ reference でその実体宣言がパラメータ実体(parameter entity)かど�
 
 配列を使うほうは rexml のパーサが内部的に利用するため通常は利用しません。
 
-@paran name 実体参照の名前
+@param name 実体参照の名前
 @param value 参照の値
 @param parent 親ノード
 @param reference パラメータ実体であるかどうかの真偽値
