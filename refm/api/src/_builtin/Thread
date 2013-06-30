@@ -221,7 +221,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
     }
   end
 
-=== 使い方
+==== 使い方
 
   th = Thread.new{
     Thread.handle_interrupt(RuntimeError => :on_blocking){
@@ -292,13 +292,13 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
-=== 注意
+==== 注意
 
 非同期割り込みの利用は難しいため、スレッド間での通信を実現する場合はま
 ずはキューのような他の方法を検討してください。それでも非同期割り込みを
 利用する場合は本メソッドをよく理解してから利用してください。
 
-=== 使い方
+==== 使い方
 
 例:[[c:Thread#raise]] 発生のタイミングを制御する例
 
@@ -321,7 +321,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 [[c:RuntimeError]] を無視(延期)している間はリソースの割り当てや ensure
 節でリソースの解放を安全に行う事ができます。
 
-==== TimeoutError 対策
+===== TimeoutError 対策
 
 例:[[c:TimeoutError]] 発生のタイミングを制御する例
 
@@ -340,7 +340,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 クに備える事ができます。[[m:Timeout.#timeout]] はスレッドを使って実装さ
 れているため、Thread.handle_interrupt による制御が有効です。
 
-==== Stack control settings
+===== Stack control settings
 
 It's possible to stack multiple levels of ::handle_interrupt blocks in order
 to control more than one ExceptionClass and TimingSymbol at a time.
@@ -351,7 +351,7 @@ to control more than one ExceptionClass and TimingSymbol at a time.
     }
   }
 
-==== 例外クラスの継承関係
+===== 例外クラスの継承関係
 
 本メソッドでは引数 hash のキーに指定した例外クラスの全てのサブクラスが
 処理の対象になります。
