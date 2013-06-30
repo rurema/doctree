@@ -191,6 +191,22 @@ other が self 自身の時、真を返します。
 @see [[m:Module#instance_methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
+--- public_method(name) -> Method
+
+オブジェクトの public メソッド name をオブジェクト化した
+[[c:Method]] オブジェクトを返します。
+
+@param name メソッド名を [[c:Symbol]] または [[c:String]] で指定します。
+@raise NameError 定義されていないメソッド名や、
+       protected メソッド名、 private メソッド名を引数として与えると発生します。
+
+  1.public_method(:to_int) #=> #<Method: Fixnum(Integer)#to_int>
+  1.public_method(:p)      #   method `p' for class `Fixnum' is private (NameError)
+
+@see [[m:Object#method]],[[m:Object#public_send]]
+#@end
+
+#@since 1.9.1
 --- public_methods(include_inherited = true) -> [Symbol]
 #@else
 #@since 1.8.0
