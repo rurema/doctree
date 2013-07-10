@@ -365,7 +365,11 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
 #@end
   p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
   p h.fetch(:one)                          #=> nil
+#@since 1.9.1
   p h.fetch(:two)                          # エラー key not found (KeyError)
+#@else
+  p h.fetch(:two)                          # エラー key not found (IndexError)
+#@end
   p h.fetch(:two,"error")                  #=> "error"
   p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
   p h.fetch(:two, "error"){|key|           #=> "two not exist"
@@ -373,7 +377,11 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
     }                                      #  警告が表示される。
   
   h.default = "default"
+#@since 1.9.1
   p h.fetch(:two)                          # エラー key not found (KeyError)
+#@else
+  p h.fetch(:two)                          # エラー key not found (IndexError)
+#@end
 
 @see [[m:Hash#[] ]]
 
