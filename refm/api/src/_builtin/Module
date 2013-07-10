@@ -549,13 +549,13 @@ self にインクルードされているモジュールの配列を返します
 
 --- instance_method(name) -> UnboundMethod
 
-self のインスタンスメソッドをオブジェクト化した [[c:UnboundMethod]] を返します。
+self のインスタンスメソッド name をオブジェクト化した [[c:UnboundMethod]] を返します。
 
-@param name [[c:Symbol]] か [[c:String]] です。
+@param name メソッド名を [[c:Symbol]] または [[c:String]] で指定します。
 
 @raise NameError self に存在しないメソッドを指定した場合に発生します。
 
-@see [[m:Object#method]]
+@see [[m:Module#public_instance_method]], [[m:Object#method]]
 
 --- method_defined?(name) -> bool
 
