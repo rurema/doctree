@@ -739,6 +739,22 @@ module_eval のブロック中でメソッドを定義する場合、
 #@end
 
 #@since 1.9.1
+--- public_instance_method(name) -> UnboundMethod
+
+self の public インスタンスメソッド name をオブジェクト化した [[c:UnboundMethod]] を返します。
+
+@param name メソッド名を [[c:Symbol]] または [[c:String]] で指定します。
+
+@raise NameError 定義されていないメソッド名や、
+       protected メソッド名、 private メソッド名を引数として与えると発生します。
+
+  Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
+  Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is private (NameError)
+
+@see [[m:Module#instance_method]],[[m:Object#public_method]]
+#@end
+
+#@since 1.9.1
 --- public_instance_methods(inherited_too = true) -> [Symbol]
 #@else
 --- public_instance_methods(inherited_too = true) -> [String]
