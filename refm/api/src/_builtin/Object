@@ -203,7 +203,7 @@ other が self 自身の時、真を返します。
   1.public_method(:to_int) #=> #<Method: Fixnum(Integer)#to_int>
   1.public_method(:p)      #   method `p' for class `Fixnum' is private (NameError)
 
-@see [[m:Object#method]],[[m:Object#public_send]]
+@see [[m:Object#method]],[[m:Object#public_send]],[[m:Module#public_instance_method]]
 #@end
 
 #@since 1.9.1
