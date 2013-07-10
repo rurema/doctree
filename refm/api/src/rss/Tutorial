@@ -649,6 +649,6 @@ itemsにはdc_dateがnilではないものしか含まれていないは
     end
   end
 
-==== サンプル3 - 複数のRSSをブレンド
-
-TODO: sample/blend.rbを元にしたサンプルを書く．
+#@# ==== サンプル3 - 複数のRSSをブレンド
+#@#
+#@# TODO: sample/blend.rbを元にしたサンプルを書く．
