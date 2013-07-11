@@ -220,6 +220,12 @@ d, a, u の3つのオプションがあります。
   * \R 改行 (?>\x0D\x0A|[\x0A-\x0D\x{85}\x{2028}\x{2029}])
   * \X Unicode 結合文字シーケンス (eXtended grapheme cluster) (?>\P{M}\p{M}*)
 
+  # \u{0308} はウムトラム
+  /\X/.match("e\u{0308}") # => #<MatchData "ë">
+  $&.codepoints # => [101, 776]
+  /\w/.match("e\u{0308}") # => #<MatchData "e">
+  $&.codepoints # => [101]
+
 #@end
 
 
