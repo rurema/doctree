@@ -206,6 +206,13 @@ Unicode 系統以外のものは Onigmo の
 #@# 「クラス名」という言い方は妥当か？
 
 #@since 2.0.0
+==== オプション
+文字クラスの挙動は [[ref:option]] で変更することができます。
+d, a, u の3つのオプションがあります。
+#@end
+
+#@since 2.0.0
+
 ===  特別な文字列に対するマッチ
 文字列の中には、CR LF のように、複数の文字一続きで1つの意味を表す
 ようなものが存在します。そのような文字列にマッチするような
@@ -563,7 +570,7 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
   re.match("set y") # => nil
 
 #@end
-=== オプション
+===[a:option] オプション
 /pat/という正規表現の直後に以下のアルファベットを
 置くことで、正規表現にオプションを指定することができます。
   * /pat/i 大文字小文字を無視する
@@ -576,12 +583,35 @@ i, m, x のオプションは (?on:pat) もしくは (?on-off:pat) という記�
 局所的に無効化したいオプションを指定します。
   /a(?i:b)c/.match("aBc") # => #<MatchData "aBc">
   /a(?i:b)c/.match("abc") # => #<MatchData "abc">
+(?on) もしくは (?on-off) という形式を使うと、そこから後の
+部分正規表現のみオプションを有効化することができます。
+  /a(?i)bc/.match("aBc") # => #<MatchData "aBc">
+  /a(?i)bc/.match("aBC") # => #<MatchData "aBC">
+  # かっこの中で(?i)を指定すると、そのかっこの終わりまで有効
+  /a(?:(?i)bc)d/.match("aBCd") # => #<MatchData "aBCd">
+  /a(?:(?i)bc)d/.match("aBCD") # => nil
 
 オプションは [[m:Regexp.new]] の引数に指定することもできます。
   Regexp.new("abc", Regexp::IGNORECASE)                     # => /abc/i
   Regexp.new("abc", Regexp::MULTILINE)                      # => /abc/m
   Regexp.new("abc # Comment", Regexp::EXTENDED)             # => /abc # Comment/x
   Regexp.new("abc", Regexp::IGNORECASE | Regexp::MULTILINE) # => /abc/mi
+
+#@since 2.0.0
+2.0.0以降では、文字クラスの挙動を変更するための d,a,u というオプションを
+(?on:pat)もしくは(?on)の形で指定することができます。(?on-off:pat), (?on-off)
+という形式を用いる場合はonの部分にのみ用いることができます(offはできません)。
+  * d デフォルト(1.9.3互換) 
+    (\w, \d, \s は、非ASCII文字にマッチせず、
+    \b, \B, POSIXブラケットは、各エンコーディングのルールに従う)
+  * a ASCII
+    (\w, \d, \s, POSIXブラケットは、非ASCII文字に
+    マッチしない)
+  * u Unicode
+    (\w (\W), \d (\D), \s (\S), \b (\B), POSIXブラケット
+    は、各エンコーディングのルールに従う)
+d,a,u のオプションは正規表現直後に置く方式では指定ができません。
+#@end
 
 === エンコーディング
 通常、正規表現のエンコーディングはソースコードエンコーディングと
