@@ -258,7 +258,7 @@ Unicode 系統以外のものは Onigmo の
   %r{<b>.*</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>y<b>z</b>">
   %r{<b>.*?</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>">
 
-==== 絶対最大量指定子(possesive qualifier)
+==== 絶対最大量指定子(possessive qualifier)
 以下のメタ文字列は、最大量指定子のように最長のマッチをしますが、
 一度マッチすると、その後マッチに失敗してもバックトラックしません。
 つまりマッチ済みの文字列を手放さずにマッチに失敗します。
@@ -407,7 +407,7 @@ nameと名付けられた「部分正規表現」にマッチしようとしま�
   # 1. \A が文字列の先頭にマッチする
   # 2. 名前付きキャプチャの内側に入る
   # 3. 名前付きキャプチャ内の最初の括弧 \( に文字列の最初の ( マッチする
-  # 4. \g<paran> で名前付きキャプチャ <paren> にマッチしようとする
+  # 4. \g<paren> で名前付きキャプチャ <paren> にマッチしようとする
   # 5. 上の処理の結果(?<paren>pat)に再びマッチしようとする
   # 6. \( に前から二番目の ( にマッチする
   # 7. \g<paren> でさらに (?<paren>pat) にマッチしようとするが、
@@ -518,23 +518,27 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
 という正規表現を書くことができます。
 
 「ある位置から続く文字列(先読み、lookahead)/ある位置の手前までの文字列(後読み、lookbehind)」
-と「マッチする(肯定、positive)/マッチしない(否定、negativge)」
+と「マッチする(肯定、positive)/マッチしない(否定、negative)」
 の組み合わせで4つのパターンがあります。
   * (?=pat) 肯定先読み(positive lookahead)
   * (?!pat) 否定先読み(negative lookahead)
   * (?<=pat) 肯定後読み(positive lookbehind)
   * (?<!pat) 否定後読み(negative lookbehind)
+#@since 2.0.0
   * \K 後読みの別表記、このメタ文字列の手前までを後読みします。
     つまり /pat1\Kpat2/ は /(?<=pat1)pat2/ と同様の意味となります。
-    
+#@end
+
   # 以下の例では、後読みと先読みを使って <b> と
   # </b> に挟まれているという条件を正規表現中に記述しつつ
   # <b> </b> 自体にはマッチさせていない。
   /(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
   # => #<MatchData "bold">
+#@since 2.0.0
   # 以下は上の正規表現と同じものを表す
   /<b>\K\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
   # => #<MatchData "bold">
+#@end
 
 #@since 2.0.0
 === 条件分岐
@@ -627,7 +631,7 @@ i, m, x のオプションは (?on:pat) もしくは (?on-off:pat) という記�
 
 === フリーフォーマットモード
 上に説明している x オプションを使うと空白を無視するようになります。
-これをフリーフォマットモード(free format mode, free spaceing modeとも)
+これをフリーフォマットモード(free format mode, free spacing modeとも)
 と呼びます。
 
 フリーフォーマットモードでは # から行末まではコメント扱いされます。
@@ -672,20 +676,20 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   * * 0回以上 (greedy)
   * + 1回以上 (greedy)
   * ? 0回もしくは1回 (greedy)
-  * {n} ちょうとn回(nは数字) (greedy)
+  * {n} ちょうどn回(nは数字) (greedy)
   * {n,} n回以上(nは数字) (greedy)
   * {,m} m回以下(mは数字) (greedy)
   * {n,m} n回以上m回以下(n,mは数字) (greedy)
   * *? 0回以上 (reluctant)
   * +? 1回以上 (reluctant)
   * ?? 0回もしくは1回 (reluctant)
-  * {n}? ちょうとn回(nは数字) (reluctant)
+  * {n}? ちょうどn回(nは数字) (reluctant)
   * {n,}? n回以上(nは数字) (reluctant)
   * {,m}? m回以下(mは数字) (reluctant)
   * {n,m}? n回以上m回以下(n,mは数字) (reluctant)
-  * *+ 0回以上 (possesive)
-  * ++ 1回以上 (possesive)
-  * ?+ 0回もしくは1回 (possesive)
+  * *+ 0回以上 (possessive)
+  * ++ 1回以上 (possessive)
+  * ?+ 0回もしくは1回 (possessive)
 キャプチャ & グループ化
   * (pat) 通常のキャプチャ&グループ化
   * \1, \2, ... キャプチャを参照
@@ -737,7 +741,9 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   * (?!pat) 否定先読み
   * (<=pat) 肯定後読み
   * (?<!pat) 否定後読み
+#@since 2.0.0
   * \K 左側を肯定後読み
+#@end
 条件
   * (?(cond)pat) cond が成立している場合のみ pat
   * (?(cond)truepat|falsepat) condが成立している場合は truepat 、成立していない
@@ -750,15 +756,15 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
 
 === 特殊変数
 パターンマッチしたときに、以下の特殊変数にマッチの情報をセットします。
-  * [[m:$~]] 最後にマッチしたときの情報(
+  * [[m:$~]] 最後にマッチしたときの情報([[c:MatchData]] オブジェクト)
   * [[m:$&]] マッチしたテキスト全体
   * [[m:$`]] マッチしたテキストの手前の文字列
   * [[m:$']] マッチしたテキストの後ろの文字列
   * [[m:$1]], $2, ... キャプチャ文字列
-  * [[m:$+]] 最後(末尾)のキャプチャ
+  * [[m:$+]] 最後(末尾)のキャプチャ文字列
 これらの変数はスレッドローカルかつメソッドでローカルな変数です。
 
 === 参考文献
   * 詳説正規表現(Jeffrey E. F. Friedl) 
   * Onigmoのドキュメント
-  * Ruby の tarball に含まれている doc/re.rdoc
+  * Ruby の tarball に含まれている doc/re.rdoc or doc/regexp.rdoc
