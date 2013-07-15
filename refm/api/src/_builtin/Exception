@@ -80,7 +80,10 @@
 #@since 1.9.1
 --- ==(other)    -> bool
 
-自身と指定された other のクラスが同じであり、message と backtrace が == メソッドで比較して
+#@since 2.0.0
+自身と指定された other のクラスが同じであり、
+#@end
+message と backtrace が == メソッドで比較して
 等しい場合に true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
