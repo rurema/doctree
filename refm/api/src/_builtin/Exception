@@ -87,5 +87,9 @@ message と backtrace が == メソッドで比較して
 等しい場合に true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
+#@since 2.0.0
+             自身と異なるクラスのオブジェクトを指定した場合は
+             [[m:Exception#exception]] を実行して変換を試みます。
+#@end
 
 #@end
