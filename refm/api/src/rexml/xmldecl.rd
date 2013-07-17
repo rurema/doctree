@@ -10,7 +10,7 @@ XML 宣言を表すクラス。
 
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
-  <?xml version=1.0 encoding="UTF-8" standalone="yes" ?>
+  <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
   <e />
   EOS
   
@@ -37,7 +37,7 @@ XML 宣言が encoding 属性を持たない場合の例
 
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
-  <?xml version=1.0 ?>
+  <?xml version="1.0" ?>
   <e />
   EOS
   
