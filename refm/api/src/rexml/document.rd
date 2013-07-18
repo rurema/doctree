@@ -28,8 +28,19 @@ context で「コンテキスト」を指定します。テキストノードの
 @param source XML文書(文字列, IO)もしくは REXML::Document オブジェクト
 @param context コンテキスト
 
---- parse_stream(source, listener)
-#@todo
+--- parse_stream(source, listener) -> ()
+XML文書を source から読み込み、パースした結果を
+listener にコールバックで伝えます。
+
+このメソッドは 
+  Parsers::StreamParser.new( source, listener ).parse
+と同じ挙動をします。
+
+コールバックの詳しい仕組みなどについては [[c:REXML::Parsers::StreamParser]]
+および [[c:REXML::StreamListener]] を参照してください。
+
+@param source 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
+@param listner コールバックオブジェクト
 
 == Instance Methods
 
