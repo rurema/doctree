@@ -859,6 +859,28 @@ name で与えられた名前のクラス変数がモジュールに存在する
 
 #@end
 
+#@since 1.9.1
+--- remove_class_variable(name) -> object
+
+引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
+れていた値を返します。
+
+@param name [[c:String]] または [[c:Symbol]] を指定します。
+
+@return 引数で指定されたクラス変数に設定されていた値を返します。
+
+@raise NameError 引数で指定されたクラス変数がそのモジュールやクラスに定義されていない場合に発生します。
+
+  class Foo
+    @@foo = 1
+    remove_class_variable(:@@foo)   # => 1
+    p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
+  end
+
+@see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
+
+#@end
+
 == Private Instance Methods
 
 --- alias_method(new, original) -> self
@@ -1379,6 +1401,7 @@ module_function はメソッドに「モジュール関数」という属性を�
   p bar             # => 2
   p self.bar        # => 2
 
+#@until 1.9.1
 --- remove_class_variable(name) -> object
 
 引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
@@ -1398,6 +1421,7 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 @see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
 
+#@end
 
 --- remove_const(name) -> object
 
