@@ -58,6 +58,27 @@ main では参照できない事に注意してください。トップレベル
 @see [[m:Module#include]]
 
 #@since 2.0.0
+--- define_method(name, method)   -> Proc | Method | UnboundMethod
+--- define_method(name) { ... } -> Proc
+
+インスタンスメソッド name を [[c:Object]] に定義します。
+
+ブロックを与えた場合、定義したメソッドの実行時にブロックが
+[[c:Object]] インスタンスの上で [[m:BasicObject#instance_eval]] されます。
+
+@param name [[c:String]] または [[c:Symbol]] を指定します。
+
+@param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
+              いずれかのインスタンスを指定します。
+
+@return 引数 method を与えたときはそれを、ブロック付きで 呼びだしたとき
+        はブロックを [[c:Proc]] 化したオブジェクトを、それぞれ返します。
+
+@raise TypeError method に同じクラス、サブクラス以外のメソッドを指定し
+                 た場合に発生します。
+
+@see [[m:Module#define_method]]
+
 --- using(module) -> self
 
 引数で指定したモジュールで定義された拡張を有効にします。
