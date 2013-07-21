@@ -6,10 +6,6 @@
 
 #@# list child classes automatically
   * [[c:LoadError]]
-#@since 1.9.1
-  * [[c:NameError]]
-  * [[c:NoMethodError]]
-#@end
   * [[c:NotImplementedError]]
   * [[c:SyntaxError]]
 
