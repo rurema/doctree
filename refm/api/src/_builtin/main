@@ -46,7 +46,6 @@ main では参照できない事に注意してください。トップレベル
 
 "main" を返します。
 
-#@since 2.0.0
 --- include(*modules) -> self
 
 引数 modules で指定したモジュールを後ろから順番をインクルードします。
@@ -58,6 +57,7 @@ main では参照できない事に注意してください。トップレベル
 
 @see [[m:Module#include]]
 
+#@since 2.0.0
 --- using(module) -> self
 
 引数で指定したモジュールで定義された拡張を有効にします。
