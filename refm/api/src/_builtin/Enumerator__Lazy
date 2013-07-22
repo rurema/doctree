@@ -1,6 +1,7 @@
 = class Enumerator::Lazy < Enumerator
 
 map や select などのメソッドの遅延評価版を提供するためのクラス。
+
 動作は通常の Enumerator と同じですが、以下のメソッドが遅延評価を行う
 (つまり、配列ではなく Enumerator を返す) ように再定義されています。
 

@@ -1169,9 +1169,10 @@ nil、 :_separator はある要素を無視したい場合に用います。
 #@since 2.0.0
 --- lazy -> Enumerator::Lazy
 
-自身を lazy な Enumerator に変換したものを返します。この Enumerator は、
-以下のメソッドが遅延評価を行う (つまり、配列ではなくEnumeratorを返す) 
-ように再定義されています。
+自身を lazy な Enumerator に変換したものを返します。
+
+この Enumerator は、以下のメソッドが遅延評価を行う (つまり、配列ではな
+くEnumeratorを返す) ように再定義されています。
 
  * map/collect
  * flat_map/collect_concat
