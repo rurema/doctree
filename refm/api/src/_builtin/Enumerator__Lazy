@@ -18,7 +18,7 @@ map や select などのメソッドの遅延評価版を提供するための�
 Lazyオブジェクトは、[[m:Enumerable#lazy]]メソッドによって生成されます。
 
 Lazyから値を取り出すには、[[m:Enumerator::Lazy#force]] または
-[[m:Enumerator::Lazy#first]] を呼びます。
+Enumerator::Lazy#first を呼びます。
 
 例:
 
@@ -142,14 +142,13 @@ Enumerator::Lazy のインスタンスを返します。
 [[m:Enumerable#take]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 n が大きな数 (100000とか) の場合に備えて再定義されています。
-配列が必要な場合は [[m::Enumerator::Lazy#first]] を使って下さい。
+配列が必要な場合は Enumerator::Lazy#first を使って下さい。
 
 @param n 要素数を指定します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
 @see [[m:Enumerable#take]]
-@see [[m:Enumerator::Lazy#first]]
 
 --- take_while -> Enumerator::Lazy
 --- take_while {|item| ... } -> Enumerator::Lazy
@@ -200,7 +199,7 @@ self を返します。
 --- to_enum(method = :each, *args) {|*args| block} -> Enumerator::Lazy
 --- enum_for(method = :each, *args){|*args| block} -> Enumerator::Lazy
 
-[[m:Kernel#to_enum]] と同じですが、Enumerator::Lazy を返します。
+[[m:Object#to_enum]] と同じですが、Enumerator::Lazy を返します。
 
 to_enum は「ブロック付きで呼ぶとループを実行し、ブロックを省略した場合は
 Enumerator を返す」ようなメソッドを定義するときによく使われます。
