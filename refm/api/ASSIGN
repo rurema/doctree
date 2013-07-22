@@ -19,7 +19,7 @@ _builtin/EOFError               snoozer05       done
 _builtin/Encoding               ohai            done
 _builtin/Enumerable                             done
 _builtin/Enumerator             yugui           done
-_builtin/Enumerator__Lazy       yhara
+_builtin/Enumerator__Lazy       yhara           done
 _builtin/Exception                              done
 _builtin/FalseClass             yamane          done
 _builtin/Fiber                                  done
