@@ -51,7 +51,7 @@ start 番目から length 個の要素を含む部分配列を返します。
 
 name という名前付きグループにマッチした文字列を返します。
 
-@param 名前(シンボル)
+@param name 名前(シンボル)
 @raise IndexError 指定した名前が正規表現内に含まれていない場合に発生します
 
   /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
