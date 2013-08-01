@@ -68,6 +68,7 @@ DOM スタイルと SAX スタイルの両方をカバーしています。
 #@include(rexml/parsers/xpathparser.rd)
 #@include(rexml/rexml.rd)
 #@include(rexml/sax2listener.rd)
+#@include(rexml/security.rd)
 #@include(rexml/source.rd)
 #@include(rexml/streamlistener.rd)
 #@include(rexml/syncenumerator.rd)

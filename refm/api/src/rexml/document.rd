@@ -42,6 +42,86 @@ listener にコールバックで伝えます。
 @param source 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
 @param listner コールバックオブジェクト
 
+--- entity_expansion_limit -> Integer
+実体参照の展開回数の上限を返します。
+
+XML 文書([[c:REXML::Document]])ごとの展開回数がこの値を越えると
+例外を発生させ、処理を中断します。
+
+実体参照の展開処理を使った DoS 攻撃に対抗するための
+仕組みです。
+
+デフォルトは 10000 です。
+
+#@since 2.1.0
+このメソッドは deprecated です。
+[[m:REXML::Security.entity_expansion_limit]] を使ってください。
+#@end
+
+@see [[m:REXML::Document.entity_expansion_limit=]]
+
+--- entity_expansion_limit=(val)
+実体参照の展開回数の上限を指定します。
+
+XML 文書([[c:REXML::Document]])ごとの展開回数がこの値を越えると
+例外を発生させ、処理を中断します。
+
+デフォルトは 10000 です。
+
+#@since 2.1.0
+このメソッドは deprecated です。
+[[m:REXML::Security.entity_expansion_limit=]] を使ってください。
+#@end
+
+@param val 設定する上限値(整数)
+@see [[m:REXML::Document.entity_expansion_limit]]
+
+#@since 1.9.3
+
+--- entity_expansion_text_limit -> Integer
+実体参照の展開による文字列の増分(テキストのバイト数)の
+最大値を指定します。
+
+展開によって増分値がこの値を越えると
+例外を発生させ、処理を中断します。
+
+実体参照の展開処理を使った DoS 攻撃に対抗するための
+仕組みです。
+
+デフォルトは 10240 (byte) です。
+
+#@since 2.1.0
+このメソッドは deprecated です。
+[[m:REXML::Security.entity_expansion_text_limit]] を使ってください。
+#@end
+
+@see [[m:REXML::Document.entity_expansion_text_limit=]],
+     [[url:http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/]]
+
+
+
+--- entity_expansion_text_limit=(val)
+実体参照の展開による文字列の増分(テキストのバイト数)の
+最大値を指定します。
+
+展開によって増分値がこの値を越えると
+例外を発生させ、処理を中断します。
+
+実体参照の展開処理を使った DoS 攻撃に対抗するための
+仕組みです。
+
+デフォルトは 10240 (byte) です。
+
+#@since 2.1.0
+このメソッドは deprecated です。
+[[m:REXML::Security.entity_expansion_text_limit=]] を使ってください。
+#@end
+
+@see [[m:REXML::Document.entity_expansion_text_limit]]
+     [[url:http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/]]
+
+#@end
+
 == Instance Methods
 
 --- node_type -> Symbol
