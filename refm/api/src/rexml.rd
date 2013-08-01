@@ -71,7 +71,6 @@ DOM スタイルと SAX スタイルの両方をカバーしています。
 #@include(rexml/security.rd)
 #@include(rexml/source.rd)
 #@include(rexml/streamlistener.rd)
-#@include(rexml/syncenumerator.rd)
 #@include(rexml/text.rd)
 #@include(rexml/validation/relaxng.rd)
 #@include(rexml/validation/validation.rd)
