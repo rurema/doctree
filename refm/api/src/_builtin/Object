@@ -1042,7 +1042,7 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
     #=> ["@foo", "@bar"]
 #@end
 
-@see [[m:Object#instance_variable_get]],[[m:Kernel.#local_variables]],[[m:Kernel.#global_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
+@see [[m:Object#instance_variable_get]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Module.constants]], [[m:Module#constants]], [[m:Module#class_variables]]
 
 #@since 1.8.6
 --- instance_variable_defined?(var) -> bool
