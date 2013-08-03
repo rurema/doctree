@@ -476,10 +476,12 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 @see [[m:Enumerable#sort]]
 #@end
 
---- to_a    -> [object]
---- entries -> [object]
+--- to_a(*args)    -> [object]
+--- entries(*args) -> [object]
 
 全ての要素を含む配列を返します。
+
+@param args each の呼び出し時に引数として渡されます。
 
 #@since 1.8.0
 --- zip(*lists)  -> [[object]]
