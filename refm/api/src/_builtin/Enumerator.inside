@@ -85,6 +85,14 @@ each に渡されたブロックが繰り返されます。
 new に渡されたブロックが終了した時点で each の繰り返しが終わります。
 このときのブロックの返り値が each の返り値となります。
 
+#@since 2.0.0
+#@# http://d.hatena.ne.jp/nagachika/20121107/ruby_trunk_changes_37495_37541 参照
+@param size 生成する Enumerator オブジェクトの要素数を指定します。
+            [[c:Integer]]、[[m:Float::INFINITY]]、[[c:Proc]] オブジェク
+            ト、nil のいずれかを指定します。[[m:Enumerator#size]] の実
+            行時に参照されます。
+#@end
+
 例:
 
   enum = Enumerator.new{|y|
