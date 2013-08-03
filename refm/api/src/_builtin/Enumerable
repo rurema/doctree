@@ -701,23 +701,36 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
 
 
+--- find_index(val)               -> Integer | nil
+--- find_index {|obj| ... }       -> Integer | nil
 #@since 1.9.1
 --- find_index                    -> Enumerator
 #@else
 --- find_index                    -> Enumerable::Enumerator
 #@end
---- find_index{|obj| ... }  -> Integer | nil
 
-要素を先頭から順にブロックに渡して評価し、最初に真になった要素のインデックスを返します。
-一つも真にならなければ nil を返します。
+条件に一致する最初の要素の位置を返します。
+
+@param val 位置を知りたいオブジェクトを指定します。
+
+指定された val と == で等しい最初の要素の位置を返します。
+等しい要素がひとつもなかった場合は nil を返します。
+
+   (1..10).find_index(11)  #=> nil 
+   (1..10).find_index(2)   #=> 1
+
+ブロックが与えられた場合には、各要素を引数として先頭から順にブロックを実行し、
+ブロックが真を返した最初の要素の位置を返します。
+一つも真にならなかった場合は nil を返します。
 
    (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 }   #=> nil
    (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 }   #=> 34
 
+引数、ブロックのどちらも与えられなかった場合は、
 #@since 1.9.1
-ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
+[[c:Enumerator]] のインスタンスを返します。
 #@else
-ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
+[[c:Enumerable::Enumerator]] のインスタンスを返します。
 #@end
 
 --- first      -> object | nil
