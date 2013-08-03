@@ -459,6 +459,23 @@ obj には任意のオブジェクトを渡すことができます。
 #@end
 #@end
 
+#@since 2.0.0
+--- size -> Integer | Float::INFINITY | nil
+
+self の要素数を返します。
+
+要素数が無限の場合は [[m:Float::INFINITY]] を返します。
+[[m:Enumerator.new]] に [[c:Proc]] オブジェクトを指定していた場合はその
+実行結果を返します。呼び出した時に要素数が不明であった場合は nil を返し
+ます。
+
+  (1..100).to_a.permutation(4).size # => 94109400
+  loop.size # => Float::INFINITY
+  (1..100).drop_while.size # => nil
+
+@see [[m:Enumerator.new]]
+#@end
+
 #@# 以下のクラスはユーザが直接触れるべきではないのでドキュメントは
 #@# 書かない
 #@# = class Enumerator::Generator
