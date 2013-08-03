@@ -18,7 +18,7 @@ map や select などのメソッドの遅延評価版を提供するための�
 Lazyオブジェクトは、[[m:Enumerable#lazy]]メソッドによって生成されます。
 
 Lazyから値を取り出すには、[[m:Enumerator::Lazy#force]] または
-Enumerator::Lazy#first を呼びます。
+[[m:Enumerable#first]] を呼びます。
 
 例:
 
@@ -142,7 +142,7 @@ Enumerator::Lazy のインスタンスを返します。
 [[m:Enumerable#take]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 n が大きな数 (100000とか) の場合に備えて再定義されています。
-配列が必要な場合は Enumerator::Lazy#first を使って下さい。
+配列が必要な場合は [[m:Enumerable#first]] を使って下さい。
 
 @param n 要素数を指定します。
 
