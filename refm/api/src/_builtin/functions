@@ -1639,7 +1639,12 @@ message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBO
 to_s メソッドにより文字列に変換してから出力します。
 
 このメソッドは以下と同じです。
+#@since 2.0.0
+  $stderr.puts(*message) if !$VERBOSE.nil? && !message.empty?
+#@else
   $stderr.print message, "\n" unless $VERBOSE.nil?
+#@end
+  nil
 
 #@since 2.0.0
 @param message 出力するオブジェクトを任意個指定します。
