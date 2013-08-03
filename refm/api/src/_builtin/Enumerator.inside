@@ -69,7 +69,11 @@ args を指定すると、 method の呼び出し時に渡されます。
 
 
 #@since 1.9.1
+#@since 2.0.0
+--- new(size=nil){|y| ... }         -> Enumerator
+#@else
 --- new{|y| ... }                   -> Enumerator
+#@end
 
 Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
 引数として実行されます。
