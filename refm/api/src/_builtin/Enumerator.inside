@@ -69,7 +69,11 @@ args を指定すると、 method の呼び出し時に渡されます。
 
 
 #@since 1.9.1
+#@since 2.0.0
+--- new(size=nil){|y| ... }         -> Enumerator
+#@else
 --- new{|y| ... }                   -> Enumerator
+#@end
 
 Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
 引数として実行されます。
@@ -80,6 +84,14 @@ each に渡されたブロックが繰り返されます。
 
 new に渡されたブロックが終了した時点で each の繰り返しが終わります。
 このときのブロックの返り値が each の返り値となります。
+
+#@since 2.0.0
+#@# http://d.hatena.ne.jp/nagachika/20121107/ruby_trunk_changes_37495_37541 参照
+@param size 生成する Enumerator オブジェクトの要素数を指定します。
+            [[c:Integer]]、[[m:Float::INFINITY]]、[[c:Proc]] オブジェク
+            ト、nil のいずれかを指定します。[[m:Enumerator#size]] の実
+            行時に参照されます。
+#@end
 
 例:
 
@@ -445,6 +457,23 @@ obj には任意のオブジェクトを渡すことができます。
 @see [[m:Enumerable#each_with_object]]
 
 #@end
+#@end
+
+#@since 2.0.0
+--- size -> Integer | Float::INFINITY | nil
+
+self の要素数を返します。
+
+要素数が無限の場合は [[m:Float::INFINITY]] を返します。
+[[m:Enumerator.new]] に [[c:Proc]] オブジェクトを指定していた場合はその
+実行結果を返します。呼び出した時に要素数が不明であった場合は nil を返し
+ます。
+
+  (1..100).to_a.permutation(4).size # => 94109400
+  loop.size # => Float::INFINITY
+  (1..100).drop_while.size # => nil
+
+@see [[m:Enumerator.new]]
 #@end
 
 #@# 以下のクラスはユーザが直接触れるべきではないのでドキュメントは
