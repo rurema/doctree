@@ -5,7 +5,7 @@ bigdecimal                      sho-h           done
 bigdecimal/jacobian             sho-h           done
 bigdecimal/ludcmp               sho-h           done
 bigdecimal/newton               sho-h           done
-complex                         bornite
+complex                         bornite         done
 curses                          kouji
 dl                                                          
 dl/Symbol                       
