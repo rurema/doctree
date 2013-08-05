@@ -2739,7 +2739,7 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 @param arg 変換対象のオブジェクトを指定します。
 
   Hash([])          # => {}
-  Hash(nil)         # => nil
+  Hash(nil)         # => {}
   Hash(key: :value) # => {:key => :value}
   Hash([1, 2, 3])   # => TypeError
 
