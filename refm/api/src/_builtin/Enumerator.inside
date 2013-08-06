@@ -109,10 +109,23 @@ new に渡されたブロックが終了した時点で each の繰り返しが�
 
 == Methods
 
+#@since 2.0.0
+--- each(*args) {...} -> object
+--- each(*args) -> Enumerator
+#@end
 --- each {...} -> object
+--- each -> self
 
 生成時のパラメータに従ってブロックを繰り返します。
+#@since 2.0.0
+*args を渡した場合は、生成時のパラメータ内引数末尾へ *args を追加した状態で繰り返します。
+ブロック付きで呼び出された場合は、
+#@end
 生成時に指定したイテレータの戻り値をそのまま返します。
+
+#@since 2.0.0
+@param args 末尾へ追加する引数
+#@end
 
 例:
   str = "Yet Another Ruby Hacker"
