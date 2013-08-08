@@ -348,7 +348,7 @@ root だけがこのメソッドを呼ぶことができます。
 
 @see [[c:Process::UID]]
 
---- getpgid(pid = 0)   -> Integer
+--- getpgid(pid)   -> Integer
 
 プロセス ID が pid であるプロセスのプロセスグループ ID を整数で返します。
 
