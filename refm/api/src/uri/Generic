@@ -339,9 +339,9 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 @param rel 連結したいパスを文字列か URI オブジェクトで与えます。
 
 例:
-  u = URI.parse('http://www.ruby-lang.org/')
-  u.merge!('/en/raa.html')
-  p u.to_s                                   #=> http://www.ruby-lang.org/en/raa.html
+  u = URI.parse('http://example.com/')
+  u.merge!('/foo/bar.html')
+  p u.to_s                                   #=> http://example.com/foo/bar.html
 
 --- merge(rel)     -> URI::Generic
 --- +(rel)         -> URI::Generic
@@ -360,8 +360,8 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 
 例:
   require 'uri'
-  p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
-  #=> #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
+  p URI.parse('http://example.com/') + '/foo/bar.html'
+  #=> #<URI::HTTP:0x201001c0 URL:http://example.com/foo/bar.html>
 #@since 1.8.7
   URI('http://a/b/c/d;p?q').merge('?y')	           #=> #<URI::HTTP:0xb7ca2e2c URL:http://a/b/c/d;p?y>
   URI('http://a/b/c/d;p?q').merge('/./g')          #=> #<URI::HTTP:0xb7ca2738 URL:http://a/g>
@@ -387,8 +387,8 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 
 例:
   require 'uri'
-  p URI.parse('http://www.ruby-lang.org/en/raa.html') - 'http://www.ruby-lang.org/'
-  #=> #<URI::Generic:0x20100256 URL:en/raa.html>
+  p URI.parse('http://example.com/foo/bar.html') - 'http://example.com/'
+  #=> #<URI::Generic:0x20100256 URL:foo/bar.html>
 
 --- route_to(dst)     -> URI::Generic
 
@@ -398,9 +398,9 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 
 例:
   require 'uri'
-  p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
+  p URI.parse('http://example.com/').route_to('http://example.com/foo/bar.html')
   
-  #=> #<URI::Generic:0x20100198 URL:en/raa.html>
+  #=> #<URI::Generic:0x20100198 URL:foo/bar.html>
 
 --- normalize     -> URI::Generic
 --- normalize!    -> nil

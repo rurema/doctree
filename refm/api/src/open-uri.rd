@@ -34,7 +34,7 @@ http/ftp の URL を、普通のファイルのように開けます。
   }
 http_proxy や ftp_proxy などの環境変数は、デフォルトで有効になっています。
 プロキシを無効にするには :proxy => nil とします。
-  open("http://www.ruby-lang.org/en/raa.html",
+  open("http://www.ruby-lang.org/en/",
     :proxy => nil) {|f|
     ...
   }

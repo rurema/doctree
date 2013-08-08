@@ -206,9 +206,6 @@
 === R
 
 
-: RAA
-  Ruby Application Archive([[url:http://www.ruby-lang.org/en/raa.html]])
-
 : RCR
   Ruby Change Request
 
