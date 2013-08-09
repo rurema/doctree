@@ -973,7 +973,7 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
 @see [[m:Kernel.#p]]
 
 #@if (version >= "1.8.0")
---- instance_variable_get(var) -> object|nil
+--- instance_variable_get(var) -> object | nil
 
 オブジェクトのインスタンス変数の値を取得して返します。
 
