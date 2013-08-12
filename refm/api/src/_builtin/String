@@ -1745,11 +1745,12 @@ Ruby 1.9 以降では、シンボル文字列にナルキャラクタ("\0")、�
 
 #@if (version >= "1.8.0")
 #@since 1.9.1
---- match(regexp, pos = 0) -> MatchData
+--- match(regexp, pos = 0) -> MatchData | nil
+--- match(regexp, pos = 0) {|m| ... } -> object
 
 regexp.match(self, pos) と同じです。
 #@else
---- match(regexp) -> MatchData
+--- match(regexp) -> MatchData | nil
 
 regexp.match(self) と同じです。
 #@end
