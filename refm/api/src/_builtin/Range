@@ -224,18 +224,6 @@ true を返します。そうでない場合に false を返します。
   p (1..2).eql?(1...2)                #=> false
   p (1..2).eql?(Range.new(1.0, 2.0))  #=> false
 
---- equal?(other)    -> bool
-
-指定された other が self 自身である場合のみ真を返します。
-これは [[c:Object]] クラスで定義されたデフォルトの動作で
-す。
-
-@param other 自身と比較したいオブジェクトを指定します。
-
-  r = (1..2)
-  p r.equal?(1..2)      #=> false
-  p r.equal?(r)         #=> true
-
 --- hash    -> Integer
 
 始点と終点のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
