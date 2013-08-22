@@ -358,6 +358,7 @@ string が文字列でもシンボルでもない場合には false を返しま
 
 #@since 1.9.1
 --- match(str, pos = 0) -> MatchData | nil
+--- match(str, pos = 0) {|m| ... } -> object | nil
 #@else
 --- match(str) -> MatchData | nil
 #@end
@@ -382,6 +383,15 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 と
   re.match(str, pos)
 は異なります。
+
+
+ブロックを渡すと、マッチした場合に限り MatchData オブジェクトがブロック引数に渡されて実行されます。
+マッチした場合はブロックの値を返し、マッチしなかった場合は nil を返します。
+
+  results = []
+  /((.)\2)/.match("foo") {|m| results << m[0] } #=> ["oo"] 
+  /((.)\2)/.match("bar") {|m| results << m[0] } #=> nil
+  results #=> ["oo"]
 #@end
 
 @param str 文字列を指定します。str との正規表現マッチを行います。
