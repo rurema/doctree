@@ -751,6 +751,9 @@ Dir.open(self.to_s, &block) と同じです。
 
 @see [[m:Dir.open]]
 
+#@since 2.0.0
+--- find                  -> Enumerator
+#@end
 --- find {|pathname| ...} -> nil
 self 配下のすべてのファイルやディレクトリを
 一つずつ引数 pathname に渡してブロックを実行します。
@@ -759,6 +762,11 @@ self 配下のすべてのファイルやディレクトリを
   Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
 と同じです。
+
+#@since 2.0.0
+ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返
+します。
+#@end
 
 @see [[m:Find.#find]]
 
