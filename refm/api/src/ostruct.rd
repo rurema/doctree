@@ -73,7 +73,12 @@ OpenStruct オブジェクトを生成します。
 ハッシュが与えられたとき、それぞれのキーを生成したオブジェクトの要素にし、値をセットします。
 
 @param hash 設定する要素とその値を指定します。
+#@since 2.0.0
+       hash には [[c:Hash]] クラスのインスタンス、または each_pair メソッ
+       ドを持つオブジェクトを用いる事ができます。
+#@else
        hash には [[c:Hash]] クラスのインスタンス、または配列の配列を用いることができます。
+#@end
 @raise NoMethodError hash のキーが to_sym メソッドを持たないときに発生します。
 
   require 'ostruct'
@@ -92,6 +97,21 @@ OpenStruct オブジェクトを生成します。
 
 #@end
 
+#@since 2.0.0
+--- eql?(other) -> bool
+
+self と other が等しい場合に true を返します。そうでない場合は false を
+返します。
+
+具体的には other が [[c:OpenStruct]] オブジェクトかそのサブクラスでかつ、
+self の各要素を保持した内部の [[c:Hash]] が eql? で比較して等しい場合に
+true を返します。
+
+@param other 比較対象のオブジェクトを指定します。
+
+#@end
+
+#@until 2.0.0
 #@since 1.8.2
 --- new_ostruct_member(name) -> Symbol
 
@@ -99,6 +119,7 @@ OpenStruct オブジェクトを生成します。
 
 @param name 文字列かシンボルで定義するアクセサの名前を指定します。
 
+#@end
 #@end
 
 --- inspect -> String
@@ -119,6 +140,66 @@ nameで指定された要素を削除します。
 @param name 削除する要素を文字列かシンボルで指定します。
 @return 削除前の要素の値を返します。
 
+#@since 2.0.0
+--- to_h -> { Symbol => object }
+
+self を各要素の名前をキー([[c:Symbol]])、要素が値のハッシュに変換して返
+します。
+
+例:
+
+  require 'ostruct'
+  data = OpenStruct.new("country" => "Australia", :population => 20_000_000)
+  data.to_h   # => {:country => "Australia", :population => 20000000 }
+
+--- each_pair                  -> Enumerator
+--- each_pair { |key, value| } -> self
+
+self の各要素の名前をと要素を引数としてブロックを評価します。
+
+ブロックを指定した場合は self を返します。そうでない場合は
+[[c:Enumerator]] を返します。
+
+例:
+
+  require 'ostruct'
+  data = OpenStruct.new("country" => "Australia", :population => 20_000_000)
+  data.each_pair.to_a  # => [[:country, "Australia"], [:population, 20000000]]
+
+--- [](name) -> object
+
+引数 name で指定した要素に対応する値を返します。
+
+@param name 要素の名前を文字列か [[c:Symbol]] オブジェクトで指定します。
+
+例:
+
+  person = OpenStruct.new('name' => 'John Smith', 'age' => 70)
+  person[:age] # => 70, person.age と同じ
+
+--- []=(name, value)
+
+引数 name で指定した要素に対応する値に value をセットします。
+
+@param name 要素の名前を文字列か [[c:Symbol]] オブジェクトで指定します。
+
+@param value セットする値を指定します。
+
+例:
+
+  person = OpenStruct.new('name' => 'John Smith', 'age' => 70)
+  person[:age] = 42 # person.age = 42 と同じ
+  person.age # => 42
+
+--- hash -> Integer
+
+self のハッシュ値を返します。
+
+#@# Two hashes with the same content will have the same hash code
+#@# (and will be eql?).
+
+#@end
+
 == Protected Instance Methods
 
 #@since 1.8.7
@@ -134,6 +215,13 @@ nameで指定された要素を削除します。
 #@end
 #@end
 
+#@since 2.0.0
+--- new_ostruct_member(name) -> Symbol
+
+与えられた名前のアクセサメソッドを自身に定義します。
+
+@param name 文字列かシンボルで定義するアクセサの名前を指定します。
+#@end
 
 == Constants
 
