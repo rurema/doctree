@@ -77,6 +77,10 @@
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
+--- inspect -> String
+
+self のクラス名と message を文字列にして返します。
+
 #@since 1.9.1
 --- ==(other)    -> bool
 
@@ -91,5 +95,17 @@ message と backtrace が == メソッドで比較して
              自身と異なるクラスのオブジェクトを指定した場合は
              [[m:Exception#exception]] を実行して変換を試みます。
 #@end
+
+#@#: rdoc でも表示していないため省略。
+#@#: #@since 2.0.0
+#@#: --- respond_to? -> bool
+#@#:
+#@#: nodoc
+#@#:
+#@#: --- respond_to_missing? -> bool
+#@#:
+#@#: nodoc
+#@#:
+#@#: #@end
 
 #@end

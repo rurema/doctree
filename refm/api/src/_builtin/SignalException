@@ -18,3 +18,33 @@
 
 なお、SIGINT シグナルを受けた場合は SignalException の下位クラスである
 [[c:Interrupt]] が発生します。
+
+== Singleton Methods
+
+--- new(sig_name)             -> SignalException
+--- new(sig_number, sig_name) -> SignalException
+
+引数で指定したシグナルに関する SignalException オブジェクトを生成して返
+します。
+
+引数は [[m:Signal.#list]] に含まれるもののいずれかを指定する必要があり
+ます。
+
+@param sig_name シグナル名を [[c:Symbol]] オブジェクト、文字列のいずれ
+                かで指定します。
+
+@param sig_number シグナル番号を指定します。整数以外のオブジェクトを指
+                  定した場合は to_int メソッドによる暗黙の型変換を試み
+                  ます。
+
+@see [[m:Signal.#list]]
+
+== Instance Methods
+
+--- signo -> Integer
+
+self のシグナル番号を返します。
+
+--- signm -> String
+
+self.message のエイリアスです。
