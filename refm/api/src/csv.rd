@@ -345,6 +345,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 @see [[m:CSV::DEFAULT_OPTIONS]], [[m:CSV.open]]
 
+#@until 2.0.0
 --- dump(ary_of_objs, io = "", options = Hash.new) -> String | nil
 
 このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアラ
@@ -388,6 +389,7 @@ ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 @param options オプションを指定します。[[m:CSV.new]] と同じです。
 
 @see [[m:CSV.new]]
+#@end
 
 --- filter(options = Hash.new){|row| ... }
 --- filter(input, options = Hash.new){|row| ... }
@@ -482,6 +484,7 @@ ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 
 @see [[m:CSV.new]]
 
+#@until 2.0.0
 --- load(io_or_str, options = Hash.new) -> Array
 
 このメソッドは [[m:CSV.dump]] で出力されたデータを読み込みます。
@@ -502,6 +505,7 @@ csv_load() implementation.
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 @see [[m:CSV.new]], [[m:CSV.dump]]
+#@end
 
 --- open(filename, mode = "rb", options = Hash.new){|csv| ... } -> nil
 --- open(filename, mode = "rb", options = Hash.new) -> CSV
