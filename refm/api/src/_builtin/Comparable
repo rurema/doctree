@@ -17,7 +17,11 @@ self <=> other は
 
 == Instance Methods
 
+#@since 1.9.1
+--- ==(other)    -> bool
+#@else
 --- ==(other)    -> bool | nil
+#@end
 
 #@since 1.8.0
 比較演算子 <=> をもとにオブジェクト同士を比較します。
