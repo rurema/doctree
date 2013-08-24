@@ -67,5 +67,8 @@ other が真なら false を, 偽なら true を返します。
    p true.^(1 + 1)   #=> false
 
 --- to_s    -> String
+#@since 2.0.0
+--- inspect -> String
+#@end
 
 常に文字列 "true" を返します。

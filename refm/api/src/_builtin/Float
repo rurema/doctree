@@ -418,6 +418,9 @@ self を other で割った商 q と余り r を、
   0.0.zero?             #=> true
 
 --- to_s -> String
+#@since 2.0.0
+--- inspect -> String
+#@end
 
 自身を人間が読みやすい形の文字列表現にして返します。
 

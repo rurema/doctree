@@ -618,6 +618,9 @@ module_eval のブロック中でメソッドを定義する場合、
 
 --- name -> String
 --- to_s -> String
+#@since 2.0.0
+--- inspect -> String
+#@end
 
 モジュールやクラスの名前を文字列で返します。
 
