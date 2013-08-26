@@ -56,12 +56,13 @@ DTD が外部サブセットを用いている場合は "SYSTEM", "PUBLIC" の
 
 それ以外の場合は nil を返します。
 
-  document = REXML::Document.new(<<EOS).doctype
+  require 'rexml/document'
+  doctype = REXML::Document.new(<<EOS).doctype
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   EOS
-  p doctype.name # => "html"
-  p doctype.external_id  # => "PUBLIC"
+  doctype.name # => "html"
+  doctype.external_id  # => "PUBLIC"
   
   doctype = REXML::Document.new(<<EOS).doctype
   <!DOCTYPE books [
@@ -71,8 +72,8 @@ DTD が外部サブセットを用いている場合は "SYSTEM", "PUBLIC" の
     <!ELEMENT author (#PCDATA)>
   ]>
   EOS
-  p doctype.name # => books
-  p doctype.external_id # => nil
+  doctype.name # => "books"
+  doctype.external_id # => nil
 
 --- entities -> { String => REXML::Entity }
 DTD で宣言されている実体の集合を Hash で返します。
@@ -246,10 +247,38 @@ DTD の公開識別子を返します。
 
 DTD が公開識別子による外部サブセットを含んでいない場合は nil を返します。
 
+  require 'rexml/document'
+  doctype = REXML::Document.new(<<EOS).doctype
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  EOS
+  doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+  doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
+  
+  doctype = REXML::Document.new(<<EOS).doctype
+  <!DOCTYPE root SYSTEM "foobar">
+  EOS
+  doctype.system # => "foobar"
+  doctype.public  # => nil
+
 --- system -> String | nil
 DTD のシステム識別子を返します。
 
 DTD が外部サブセットを含んでいない場合は nil を返します。
+
+  require 'rexml/document'
+  doctype = REXML::Document.new(<<EOS).doctype
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  EOS
+  doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+  doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
+  
+  doctype = REXML::Document.new(<<EOS).doctype
+  <!DOCTYPE root SYSTEM "foobar">
+  EOS
+  doctype.system # => "foobar"
+  doctype.public  # => nil
 
 --- notations -> [REXML::NotationDecl]
 DTD に含まれている記法宣言 ([[c:REXML::NotationDecl]]) を
