@@ -865,8 +865,8 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
 #@end
 
-@see [[m:String#capitalize]], [[m:String#upcase]],
-     [[m:String#downcase]], [[m:String#swapcase]]
+@see [[m:String#capitalize]], [[m:String#upcase!]],
+     [[m:String#downcase!]], [[m:String#swapcase!]]
 
 --- casecmp(other) -> Integer | nil
 
@@ -1230,7 +1230,7 @@ str の形式は [[man:tr(1)]] と同じです。
     p "STRing?".downcase   # => "string?"
 #@end
 
-@see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
+@see [[m:String#downcase!]], [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
 --- downcase! -> self | nil
 
@@ -1264,7 +1264,7 @@ str の形式は [[man:tr(1)]] と同じです。
     p "STRing?".downcase   # => "string?"
 
 #@end
-@see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
+@see [[m:String#downcase]], [[m:String#upcase!]], [[m:String#swapcase!]], [[m:String#capitalize!]]
 
 --- dump -> String
 
@@ -2547,7 +2547,7 @@ replace に「\」自身を入れたいときは
     p "ABCxyz".swapcase   # => "abcXYZ"
     p "Access".swapcase   # => "aCCESS"
 #@end
-@see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
+@see [[m:String#swapcase!]], [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
 --- swapcase! -> self | nil
 
@@ -2580,7 +2580,7 @@ swapcase! は self を変更して返しますが、
     str.swapcase!
     p str   # => "abcXYZ"
 #@end
-@see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
+@see [[m:String#swapcase]], [[m:String#upcase!]], [[m:String#downcase!]], [[m:String#capitalize!]]
 
 --- to_f -> Float
 
