@@ -1986,11 +1986,11 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 ジャンプ先は同じメソッド内にあるとは限りません。
 もし ensure節 が存在するならジャンプ前に実行します。
 
-もし同じ tag で待っている catch が存在しない場合は [[c:NameError]] で
+同じ tag で待っている catch が存在しない場合は、例外で
 スレッドが終了します。
 
 #@since 1.9.1
-同じタグであるとは [[m:Object#object_id]] が同じであるという意味です。
+同じ tag であるとは [[m:Object#object_id]] が同じであるという意味です。
 #@end
 
 #@since 1.9.1
@@ -1999,7 +1999,11 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 @param tag シンボルまたは文字列です。
 #@end
 @param value catch の戻り値になります。
-@raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
+#@since 1.9.1
+@raise [[c:ArgumentError]] 同じ tag で待っている catch が存在しない場合に発生します。
+#@else
+@raise [[c:NameError]] 同じ tag で待っている catch が存在しない場合に発生します。
+#@end
 
   def foo
     throw :exit, 25
