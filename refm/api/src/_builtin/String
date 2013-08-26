@@ -385,7 +385,7 @@ other =~ self を行います。
 にマッチに関する情報が設定されます。
 
 @param other        正規表現もしくは =~ メソッドを持つオブジェクト
-@raise TypeError    other が文字列であった
+@raise TypeError    other が文字列の場合に発生します。
 
 例:
 
