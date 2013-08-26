@@ -48,6 +48,31 @@ SystemCallError オブジェクトを生成して返します。
   p SystemCallError.new(256)
       # => #<SystemCallError: Unknown error 256>
 
+--- ===(other) -> bool
+
+other が SystemCallError のサブクラスのインスタンスで、
+かつ、other.errno の値が self::Errno と同じ場合に真を返します。そうでない場合は偽を返します。
+
+従って、特に other が self.kind_of?(other) である場合には [[m:Module#===]] と同様に真を返します。
+その他に、 Errno::EXXX::Errno == Errno::EYYY::Errno である場合にも Errno::EXXX == Errno::EYYY.new は真を返します。
+
+エラー名は異なるがエラーコードは同じであるような Errno::EXXX 例外をまとめて捕捉するために [[m:Module#===]] を上書きしていました。
+しかし、Ruby 1.8 のリリース時点では同じ errno 値を持つクラスは一つしか作られないようになりました。そのため現在はこのメソッドは実質上 [[m:Module#===]] と同じ意味しかありません。
+
+@param other 任意のオブジェクト
+
+例
+    p Errno::EAGAIN::Errno
+    p Errno::EWOULDBLOCK::Errno
+    begin
+      raise Errno::EAGAIN, "pseudo error"
+    rescue Errno::EWOULDBLOCK
+      p $!
+    end
+    
+    # => 11
+         11
+         #<Errno::EAGAIN: pseudo error>
 #@end
 
 == Instance Methods
@@ -271,34 +296,6 @@ Errno::EXXX オブジェクトを生成して返します。
       # => #<Errno::ENOENT: No such file or directory>
   p Errno::ENOENT('message')
       # => #<Errno::ENOENT: No such file or directory - message>
-
-#@since 1.8.0
---- ===(other) -> bool
-
-other が SystemCallError のサブクラスのインスタンスで、
-かつ、other.errno の値が self::Errno と同じ場合に真を返します。そうでない場合は偽を返します。
-
-従って、特に other が self.kind_of?(other) である場合には [[m:Module#===]] と同様に真を返します。
-その他に、 Errno::EXXX::Errno == Errno::EYYY::Errno である場合にも Errno::EXXX == Errno::EYYY.new は真を返します。
-
-エラー名は異なるがエラーコードは同じであるような Errno::EXXX 例外をまとめて捕捉するために [[m:Module#===]] を上書きしていました。
-しかし、Ruby 1.8 のリリース時点では同じ errno 値を持つクラスは一つしか作られないようになりました。そのため現在はこのメソッドは実質上 [[m:Module#===]] と同じ意味しかありません。
-
-@param other 任意のオブジェクト
-
-例
-    p Errno::EAGAIN::Errno
-    p Errno::EWOULDBLOCK::Errno
-    begin
-      raise Errno::EAGAIN, "pseudo error"
-    rescue Errno::EWOULDBLOCK
-      p $!
-    end
-    
-    # => 11
-         11
-         #<Errno::EAGAIN: pseudo error>
-#@end
 
 == Constants
 
