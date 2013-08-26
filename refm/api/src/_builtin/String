@@ -1224,8 +1224,8 @@ str の形式は [[man:tr(1)]] と同じです。
 例:
     p "STRing?".downcase   # => "string?"
 
-    # -*- Coding: shift_jis -*-
-    $KCODE ='n'
+    # -*- encoding: shift_jis -*-
+    $KCODE = 'n'
     puts "帰".downcase   # => 蟻
 
 #@else
@@ -1255,16 +1255,22 @@ str の形式は [[man:tr(1)]] と同じです。
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 例:
-    p "STRing?".downcase   # => "string?"
+    str = "STRing?"
+    str.downcase!
+    p str   # => "string?"
 
-    # -*- Coding: shift_jis -*-
-    $KCODE ='n'
-    puts "帰".downcase   # => 蟻
+    # -*- encoding: shift_jis -*-
+    $KCODE = 'n'
+    str = "帰"
+    str.downcase!
+    puts str   # => 蟻
 #@else
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 例:
-    p "STRing?".downcase   # => "string?"
+    str = "STRing?"
+    str.downcase!
+    p str   # => "string?"
 
 #@end
 @see [[m:String#downcase]], [[m:String#upcase!]], [[m:String#swapcase!]], [[m:String#capitalize!]]
