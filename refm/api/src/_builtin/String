@@ -859,7 +859,9 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
   $KCODE = 'NONE'
   # 文字列は Shift JIS エンコーディングで記述されている
-  puts "帰".capitalize   # => 蟻
+  str = "帰"
+  str.capitalize!
+  puts str   # => 蟻
 
 また、$KCODE を設定しても、
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
