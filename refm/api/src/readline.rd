@@ -58,7 +58,7 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 @raise IOError 標準入力が tty でない、かつ、標準入力をクローズしている
                ([[man:isatty(2)]] の errno が EBADF である。) 場合に発生します。
 
-例: 
+例:
 
   require "readline"
 
@@ -137,7 +137,7 @@ prompt を出力し、ユーザからのキー入力を待ちます。
  
     begin
       if Readline::HISTORY[Readline::HISTORY.length-2] == buf
-        Readline::HISTORY.pop 
+        Readline::HISTORY.pop
       end
     rescue IndexError
     end
@@ -160,7 +160,7 @@ readline メソッドで使用する入力用の [[c:File]] オブジェクト i
 @param input [[c:File]] オブジェクトを指定します。
 
 --- output=(output)
-    
+
 readline メソッドで使用する出力用の [[c:File]] オブジェクト output を指定します。
 戻り値は指定した [[c:File]] オブジェクト output です。
 
@@ -279,7 +279,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
   Readline.completion_append_character = " "
   > /var/li
   ここで補完(TABキーを押す)を行う。
-  > /var/lib 
+  > /var/lib
   最後に" "が追加されているため、すぐに「/usr」などを入力できる。
   > /var/lib /usr
 
@@ -336,7 +336,7 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 [[m:Readline.basic_word_break_characters=]] との違いは、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
-GNU Readline のデフォルトの値は、 
+GNU Readline のデフォルトの値は、
 [[m:Readline.basic_word_break_characters]] と同じです。
 
 @param string 文字列を指定します。
@@ -700,7 +700,7 @@ self を返します。
 
 index で指定したインデックスの内容をヒストリから削除し、その内容を返します。
 該当する index の内容がヒストリになければ、 nil を返します。
-index に 0 を指定すると [[m:Readline::HISTORY.shift]] 
+index に 0 を指定すると [[m:Readline::HISTORY.shift]]
 と同様に最初の入力内容を削除します。
 また、 -1 は最後の入力内容というように、index に負の値を指定することで、
 最後から入力内容を取得することもできます。
