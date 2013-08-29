@@ -95,7 +95,7 @@ fcntl
 #@since 1.9.1
 fiber
 #@end
-#@since 1.9.1
+#@since 1.9.2
 fiddle
 #@since 2.0.0
 fiddle/import
