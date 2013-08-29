@@ -858,14 +858,16 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
   $KCODE = 'NONE'
   # 文字列は Shift JIS エンコーディングで記述されている
-  puts "帰".capitalize   # => 蟻
+  str = "帰"
+  str.capitalize!
+  puts str   # => 蟻
 
 また、$KCODE を設定しても、
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
 #@end
 
-@see [[m:String#capitalize]], [[m:String#upcase]],
-     [[m:String#downcase]], [[m:String#swapcase]]
+@see [[m:String#capitalize]], [[m:String#upcase!]],
+     [[m:String#downcase!]], [[m:String#swapcase!]]
 
 --- casecmp(other) -> Integer | nil
 
@@ -1209,7 +1211,10 @@ str の形式は [[man:tr(1)]] と同じです。
 アルファベット大文字をすべて小文字に置き換えた新しい文字列を生成し返します。
 アルファベット大文字以外の文字はすべてそのまま保存されます。
 
-このメソッドはマルチバイト文字を認識しません。
+このメソッドはマルチバイト文字列を認識しますが、
+それはあくまでも「1 文字を 1 文字として認識する」だけであって、
+いわゆる全角アルファベットの大文字小文字までは変換しません。
+
 #@until 1.9.1
 処理する文字列の文字コードが Shift JIS で、
 しかも [[m:$KCODE]] が適切に設定されていない場合、
@@ -1220,8 +1225,8 @@ str の形式は [[man:tr(1)]] と同じです。
 例:
     p "STRing?".downcase   # => "string?"
 
-    # -*- Coding: shift_jis -*-
-    $KCODE ='n'
+    # -*- encoding: shift_jis -*-
+    $KCODE = 'n'
     puts "帰".downcase   # => 蟻
 
 #@else
@@ -1229,7 +1234,7 @@ str の形式は [[man:tr(1)]] と同じです。
     p "STRing?".downcase   # => "string?"
 #@end
 
-@see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
+@see [[m:String#downcase!]], [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
 --- downcase! -> self | nil
 
@@ -1251,19 +1256,25 @@ str の形式は [[man:tr(1)]] と同じです。
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 例:
-    p "STRing?".downcase   # => "string?"
+    str = "STRing?"
+    str.downcase!
+    p str   # => "string?"
 
-    # -*- Coding: shift_jis -*-
-    $KCODE ='n'
-    puts "帰".downcase   # => 蟻
+    # -*- encoding: shift_jis -*-
+    $KCODE = 'n'
+    str = "帰"
+    str.downcase!
+    puts str   # => 蟻
 #@else
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 例:
-    p "STRing?".downcase   # => "string?"
+    str = "STRing?"
+    str.downcase!
+    p str   # => "string?"
 
 #@end
-@see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
+@see [[m:String#downcase]], [[m:String#upcase!]], [[m:String#swapcase!]], [[m:String#capitalize!]]
 
 --- dump -> String
 
@@ -2546,7 +2557,7 @@ replace に「\」自身を入れたいときは
     p "ABCxyz".swapcase   # => "abcXYZ"
     p "Access".swapcase   # => "aCCESS"
 #@end
-@see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
+@see [[m:String#swapcase!]], [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
 --- swapcase! -> self | nil
 
@@ -2579,7 +2590,7 @@ swapcase! は self を変更して返しますが、
     str.swapcase!
     p str   # => "abcXYZ"
 #@end
-@see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
+@see [[m:String#swapcase]], [[m:String#upcase!]], [[m:String#downcase!]], [[m:String#capitalize!]]
 
 --- to_f -> Float
 
