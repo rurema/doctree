@@ -3193,10 +3193,10 @@ self がセパレータを含まないときは、
 
 文字列の最初の文字の文字コードを整数で返します。
 
-self が空文字列のときは例外 TypeError を発生します。
+self が空文字列のときは例外を発生します。
 
-@return             文字コードを表す整数
-@raise TypeError    self の長さが 0 のとき発生
+@return                 文字コードを表す整数
+@raise ArgumentError    self の長さが 0 のとき発生
 
 例:
     p "a".ord   # => 97
