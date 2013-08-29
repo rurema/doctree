@@ -198,6 +198,22 @@ self.to_a.select { ... } と同じです。
   p $~            # => #<MatchData:0x401b1be4>
   p $~.to_s       # => "bar"
 
+--- inspect -> String
+
+self の内容を人間に読みやすい文字列にして返します。
+
+  puts /.$/.match("foo").inspect
+  # => #<MatchData "o">
+
+  puts /(.)(.)(.)/.match("foo").inspect
+  # => #<MatchData "foo" 1:"f" 2:"o" 3:"o">
+
+  puts /(.)(.)?(.)/.match("fo").inspect
+  # => #<MatchData "fo" 1:"f" 2:nil 3:"o">
+
+  puts /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").inspect
+  # => #<MatchData "hog" foo:"h" bar:"o" baz:"g">
+
 #@since 1.8.0
 --- values_at(*index) -> [String]
 
@@ -233,5 +249,21 @@ self.regexp.names と同じです。
 
     m = /a.*b/.match("abc")
     m.regexp #=> /a.*b/
+
+#@end
+#@since 1.9.2
+--- hash -> Integer
+
+self のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
+した位置を元にハッシュ値を計算して返します。
+
+--- eql?(other) -> bool
+--- ==(other)   -> bool
+
+self と other のマッチ対象になった文字列、元になった正規表現オブジェク
+ト、マッチした位置が等しければ true を返します。そうでない場合には
+false を返します。
+
+@param other 比較対象のオブジェクトを指定します。
 
 #@end
