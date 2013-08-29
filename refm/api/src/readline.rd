@@ -664,6 +664,7 @@ self を返します。
 #@end
 
 --- length -> Integer
+--- size -> Integer
 
 ヒストリに格納された内容の数を取得します。
 
@@ -718,3 +719,11 @@ index が -1 の場合は [[m:Readline::HISTORY.pop]] と同様に動作しま�
   Readline::HISTORY.push("foo", "bar", "baz")
   Readline::HISTORY.delete_at(1)
   p Readline::HISTORY.to_a #=> ["foo", "baz"]
+
+#@since 1.9.1
+--- clear -> self
+
+ヒストリの内容をすべて削除して空にします。
+
+@raise NotImplementedError サポートしていない環境で発生します。
+#@end
