@@ -99,10 +99,10 @@ n, N, v, V を用います。
 
 : Z
 
-  null終端文字列(aと同じ / 後続するnull文字を削除)
+  null終端文字列(長さが`*'の場合も含め、null文字を詰める/後続するnull文字を削除)
 //emlist{
     ["abc"].pack("Z")  # => "a"
-    ["abc"].pack("Z*") # => "abc"
+    ["abc"].pack("Z*") # => "abc\0"
     ["abc"].pack("Z4") # => "abc\0"
 
     "abc\0".unpack("Z4") # => ["abc"]
