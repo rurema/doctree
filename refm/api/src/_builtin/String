@@ -2964,7 +2964,7 @@ str が "string" という内容の文字列でありさえすれば常に true 
 
 #@until 1.9.1
 このメソッドの動作は組み込み変数 [[m:$=]] には影響されません。
-#end
+#@end
 
 @param other    任意のオブジェクト
 @return         true か false
