@@ -59,18 +59,26 @@ CRC チェックサムの計算に用いるテーブルを配列で返します�
 @param length crc2 を生成するのに使用した文字列の長さを指定します。
 #@end
 
-#@since 1.9.2
+#@since 1.9.3
 --- deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
-#@todo
 
-string を圧縮します。
+引数 string を圧縮します。[[m:Zlib::Deflate.deflate]] と同じです。
+
+@param string 圧縮する文字列を指定します。
+@param level 圧縮の水準を詳細に指定します。
+             有効な値は [[m:Zlib::NO_COMPRESSION]],
+             [[m:Zlib::BEST_SPEED]], [[m:Zlib::BEST_COMPRESSION]],
+             [[m:Zlib::DEFAULT_COMPRESSION]] 及び 0 から 9 の整数です。
 
 @see [[m:Zlib::Deflate.deflate]]
 
 --- inflate(string) -> String
-#@todo
 
-string を展開します。
+引数 string を展開します。[[m:Zlib::Inflate.inflate]] と同じです。
+
+@param string 展開する文字列を指定します。
+
+@raise Zlib::NeedDict 展開に辞書が必要な場合に発生します。
 
 @see [[m:Zlib::Inflate.inflate]]
 #@end
