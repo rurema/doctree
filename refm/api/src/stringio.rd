@@ -618,11 +618,27 @@ nil を返します。
 
 @see [[m:IO#ungetbyte]]
 
---- set_encoding(encoding) -> self
+#@since 1.9.3
+--- set_encoding(ext_enc)               -> self
+--- set_encoding(ext_enc, int_enc)      -> self
+--- set_encoding(ext_enc, int_enc, opt) -> self
+#@else
+--- set_encoding(ext_enc) -> self
+#@end
 
 自身のエンコーディングを指定されたエンコーディングに設定します。
 
-@param encoding エンコーディングを指定します。
+@param ext_enc エンコーディングを指定します。
+#@since 1.9.3
+               nil を指定した場合は [[m:Encoding.default_external]] が
+               使われます。
+
+@param int_enc 無視されます。[[c:IO]] クラスの API との互換性のために用
+               意されています。
+
+@param opt 無視されます。[[c:IO]] クラスの API との互換性のために用意さ
+           れています。
+#@end
 
 --- external_encoding -> Encoding
 
