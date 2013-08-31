@@ -64,7 +64,12 @@ category File
 
 ファイル list のパーミッションを mode に変更します。
 
+#@since 1.9.3
+@param mode パーミッションを8進数(absolute mode)か文字列(symbolic
+            mode)で指定します。
+#@else
 @param mode パーミッションを8進数で指定します。
+#@end
 
 @param list ファイルのリストを指定します。 対象のファイルが一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
@@ -76,16 +81,53 @@ category File
 
 例:
 
-  FileUtils.chmod(0644, ['my.rb', 'your.rb'])
+#@since 1.9.3
+  # Absolute mode
+#@end
+  FileUtils.chmod(0644, %w(my.rb your.rb his.rb her.rb)
   FileUtils.chmod(0755, 'somecommand')
-  FileUtils.chmod(0755, '/usr/bin/ruby', {:verbose => true})
+  FileUtils.chmod(0755, '/usr/bin/ruby', :verbose => true
+#@since 1.9.3
+  # Symbolic mode
+  FileUtils.chmod("u=wr,go=rr", %w(my.rb your.rb his.rb her.rb))
+  FileUtils.chmod("u=wrx,go=rx", 'somecommand')
+  FileUtils.chmod("u=wrx,go=rx", '/usr/bin/ruby', :verbose => true)
+
+symbolic mode では以下の指定を 操作対象 演算子 権限 の順番で指定します。
+
+操作対象(複数指定可。省略した場合は a)。
+
+ * "a": 全て(所有者、グループ、その他)のユーザを指定するマスク
+ * "u": 所有者を指定するマスク
+ * "g": グループ(ファイルと同じグループに属しているが所有者ではない)を指定するマスク
+ * "o": その他(所有者でもなく、そのファイルと同じグループにも属していない)を指定するマスク
+
+演算子。
+
+ * "+": 以降で指定した権限を追加
+ * "-" 以降で指定した権限を削除
+ * "=" 以降で指定した権限を指定
+
+権限(複数指定可)。
+
+ * "w": 書き込み権限
+ * "r": 読み込み権限
+ * "x": 実行権限
+ * "s": 実行時にユーザー、あるいはグループ ID を設定
+ * "t": sticky ビット
+#@end
 
 #@since 1.8.3
 --- chmod_R(mode, list, options = {}) -> Array
 
 ファイル list のパーミッションを再帰的に mode へ変更します。
 
+#@since 1.9.3
+@param mode パーミッションを8進数(absolute mode)か文字列(symbolic
+            mode)で指定します([[m:FileUtils.#chmod]] 参照)。
+#@else
 @param mode パーミッションを8進数で指定します。
+#@end
 
 @param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
