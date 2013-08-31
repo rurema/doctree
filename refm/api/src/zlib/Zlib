@@ -67,7 +67,7 @@ string を圧縮します。
 
 @see [[m:Zlib::Deflate.deflate]]
 
---- Inflate(string) -> String
+--- inflate(string) -> String
 #@todo
 
 string を展開します。
