@@ -859,13 +859,15 @@ self の n 乗を計算します。
 
 戻り値の有効桁数は self の有効桁数の n 倍以上になります。
 
+#@since 1.9.3
 @param n selfを other 乗する数を指定します。
 
-#@since 1.9.3
 @param prec 有効桁数を整数で指定します。
 
 @raise TypeError prec に [[c:Fixnum]] 以外のオブジェクトを指定した場合
                  に発生します。
+#@else
+@param n selfを other 乗する整数を指定します。
 #@end
 
 --- sqrt(n) -> BigDecimal
