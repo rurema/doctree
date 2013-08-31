@@ -1009,6 +1009,11 @@ self] という配列にして返します。
   a = BigDecimal.new("1.0")
   b = a / 2.0 # => 0.5
 
+#@since 1.9.3
+other に [[c:Rational]] オブジェクトを指定した場合は self の有効桁数を
+用いて変換を行います。
+#@end
+
 数値を表す文字列から [[c:BigDecimal]] オブジェクトに変換する機能はデフォ
 ルトでは無効になっています。必要な場合は ENABLE_NUMERIC_STRING を有効に
 して Ruby をコンパイルしてください。
