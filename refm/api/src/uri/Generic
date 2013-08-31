@@ -192,6 +192,10 @@ userinfo が「username:password」の形式である場合は、username 部を
 
 自身の host を文字列で返します。設定されていない場合は nil を返します。
 
+#@since 1.9.3
+@see [[m:URI::Generic#hostname]]
+#@end
+
 --- host=(s)
 
 自身の host を設定します。
@@ -201,6 +205,10 @@ userinfo が「username:password」の形式である場合は、username 部を
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError host と registry を同時に設定した場合に発生します。
+
+#@since 1.9.3
+@see [[m:URI::Generic#hostname=]]
+#@end
 
 --- port     -> String | nil
 
@@ -215,6 +223,40 @@ userinfo が「username:password」の形式である場合は、username 部を
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError port と registry を同時に設定した場合に発生します。
+
+#@since 1.9.3
+--- hostname -> String | nil
+
+自身の hostname を文字列で返します。また、[[m:URI::Generic#host]] が設
+定されていない場合は nil を返します。
+
+このメソッドは [[m:URI::Generic#host]] に IPv6 アドレスが設定されていた
+場合はブラケットを削除した文字列を返しますがそれ以外は同じ文字列を返し
+ます。
+
+  u = URI("http://[::1]/bar")
+  p u.hostname      # => "::1"
+  p u.host          # => "[::1]"
+
+--- hostname=(s)
+
+自身の hostname を設定します。
+
+このメソッドは引数に IPv6 アドレスを設定した場合は
+[[m:URI::Generic#host]] にブラケットを追加した文字列を設定しますがそれ
+以外は同じ処理を行います。
+
+  u = URI("http://foo/bar")
+  p u.to_s                  # => "http://foo/bar"
+  u.hostname = "::1"
+  p u.to_s                  # => "http://[::1]/bar"
+
+@param s 自身の hostname を表す文字列を指定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError host と registry を同時に設定した場合に発生します。
+#@end
 
 --- registry    -> String | nil
 
