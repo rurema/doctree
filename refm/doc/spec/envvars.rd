@@ -5,6 +5,20 @@ Rubyインタプリタは以下の環境変数を参照します。
 : RUBYOPT
  Rubyインタプリタにデフォルトで渡すオプションを指定します。
 
+ 指定できないオプションを指定した場合、例外が発生します。
+
+#@since 1.9.1
+//emlist{
+$ RUBYOPT=-y ruby -e ""
+ruby: invalid switch in RUBYOPT: -y (RuntimeError)
+//}
+#@else
+//emlist{
+$ RUBYOPT=-y ruby e ""
+ruby: illegal switch in RUBYOPT: -y (RuntimeError)
+//}
+#@end
+
  sh系
 
 //emlist{
