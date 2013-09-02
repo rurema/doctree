@@ -2181,9 +2181,91 @@ seed が省略された時には
 
 @see [[m:Kernel.#global_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
+#@since 1.9.1
+--- sub(pattern, replace)          -> String
+--- sub(pattern) {|matched| ... }  -> String
+
+$_.sub とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+#@until 1.9.3
+replace を指定しない場合ブロックを指定しても無視されて例外が発生します。[[ruby-core:47967]]
+#@end
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.sub を使ってください。
+
+@raise ArgumentError replace を指定しなかった場合に発生します。
+
+$_.sub とこのメソッド sub は以下の点で違いがあります。
+
+  * sub は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
+
+@param pattern    置き換える文字列のパターンを表す文字列か正規表現。
+                  文字列を指定した場合は全く同じ文字列にだけマッチする
+@param replace    pattern で指定した文字列と置き換える文字列
+
+@see [[m:String#sub]],[[m:$_]]
+
+--- gsub(pattern, replace)          -> String
+--- gsub(pattern) {|matched| ... }  -> String
+--- gsub(pattern)                   -> Enumerator
+
+$_.gsub とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+#@until 1.9.3
+replace を指定しない場合ブロックを指定しても無視されて Enumerator オブジェクトが返されます。[[ruby-core:47967]]
+#@end
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.gsub を使ってください。
+
+$_.gsub とこのメソッド gsub は以下の点で違いがあります。
+
+  * gsub は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
 
-#@until 1.9.1
+@param pattern    置き換える文字列のパターンを表す文字列か正規表現。
+                  文字列を指定した場合は全く同じ文字列にだけマッチする
+@param replace    pattern で指定した文字列と置き換える文字列
+
+@see [[m:String#gsub]],[[m:$_]]
+
+--- chop  -> String
+
+$_.chop とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chop を使ってください。
+
+$_.chopとこのメソッド chop は以下の点で違いがあります。
+
+  * chop は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
+
+@see [[m:String#chop]],[[m:$_]]
+
+--- chomp(rs = $/)  -> String
+
+$_.chomp とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chomp を使ってください。
+
+$_.chomp とこのメソッド chomp は以下の点で違いがあります。
+
+  * chomp は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
+
+@param rs 末尾から削除する改行コードを指定します。
+
+@see [[m:String#chomp]],[[m:$_]],[[m:$/]]
+#@else
 --- sub(pattern, replace)          -> String
 --- sub!(pattern, replace)         -> String
 --- sub(pattern) {|matched| ... }  -> String
