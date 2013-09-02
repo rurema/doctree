@@ -505,10 +505,8 @@ retry をまとめると以下のようになります。
 了です。
 
         def iter(var = p("(a)"))
-          p " : "
           yield
           p "(c)"
-          p " : "
         ensure
           p "(d)"
         end
