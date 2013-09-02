@@ -175,11 +175,11 @@ command を外部コマンドとして実行し、その標準出力を文字列
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 #@end
 
-#@until 1.9.1
---- system(command) -> bool
-#@else
+#@since 1.9.1
 --- system(command, options={}) -> bool | nil
 --- system(env, command, options={}) -> bool | nil
+#@else
+--- system(command) -> bool
 #@end
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
@@ -223,11 +223,11 @@ command を外部コマンドとして実行し、その標準出力を文字列
 @see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@end
 
-#@until 1.9.1
---- system(program, *args) -> bool
-#@else
+#@since 1.9.1
 --- system(program, *args, options={}) -> bool | nil
 --- system(env, program, *args, options={}) -> bool | nil
+#@else
+--- system(program, *args) -> bool
 #@end
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
@@ -545,11 +545,11 @@ io => io という形のオプションを指定します。
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 #@end
 
-#@until 1.9.1
---- exec(command) -> ()
-#@else 
+#@since 1.9.1
 --- exec(command, options={}) -> ()
 --- exec(env, command, options={}) -> ()
+#@else
+--- exec(command) -> ()
 #@end
 
 引数で指定されたコマンドを実行します。
@@ -585,11 +585,11 @@ io => io という形のオプションを指定します。
   実行中
   # '実行後' は表示されない
 
-#@until 1.9.1
---- exec(program, *args) -> ()
-#@else
+#@since 1.9.1
 --- exec(program, *args, options={}) -> ()
 --- exec(evn, program, *args, options={}) -> ()
+#@else
+--- exec(program, *args) -> ()
 #@end
 
 引数で指定されたコマンドを実行します。
@@ -2514,10 +2514,10 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
 す。第2引数に 
-#@until 1.9.1
-[[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトを与えた場合、
-#@else
+#@since 1.9.1
 [[c:Binding]] オブジェクトを与えた場合、
+#@else
+[[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトを与えた場合、
 #@end
 そのオブジェクトを生成したコンテキストで文字列を評価します。
 
