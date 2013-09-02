@@ -2202,8 +2202,9 @@ $_.sub とこのメソッド sub は以下の点で違いがあります。
   * sub は $_ の値をコピーして、コピーの方を更新し、
   $_ に再代入します。
 
-@param pattern [[m:String#sub]] 参照
-@param replace [[m:String#sub]] 参照
+@param pattern    置き換える文字列のパターンを表す文字列か正規表現。
+                  文字列を指定した場合は全く同じ文字列にだけマッチする
+@param replace    pattern で指定した文字列と置き換える文字列
 @see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace)          -> String
@@ -2224,8 +2225,9 @@ $_.gsub とこのメソッド gsub は以下の点で違いがあります。
   * gsub は $_ の値をコピーして、コピーの方を更新し、
   $_ に再代入します。
 
-@param pattern [[m:String#gsub]] 参照
-@param replace [[m:String#gsub]] 参照
+@param pattern    置き換える文字列のパターンを表す文字列か正規表現。
+                  文字列を指定した場合は全く同じ文字列にだけマッチする
+@param replace    pattern で指定した文字列と置き換える文字列
 @see [[m:String#gsub]],[[m:$_]]
 
 --- chop  -> String
@@ -2279,8 +2281,8 @@ $_.split と同じです。
 暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
 今後はより明示的な $_.split を使ってください。
 
-@param sep [[m:String#split]] 参照
-@param limit [[m:String#split]] 参照
+@param sep       文字列を分割するときのセパレータのパターン
+@param limit     分割する最大個数
 @see [[m:String#split]],[[m:$_]]
 
 --- scan(re)                  -> [String] | [[String]]
@@ -2291,7 +2293,8 @@ $_.scan と同じです。
 暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
 今後はより明示的な $_.scan を使ってください。
 
-@param re [[m:String#scan]] 参照
+@param pattern 探索する部分文字列または正規表現
+
 @see [[m:String#scan]],[[m:$_]]
 
 #@end
