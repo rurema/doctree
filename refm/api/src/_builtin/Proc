@@ -90,6 +90,19 @@ Proc.new は、Proc#initialize が定義されていれば
   p sign(-4) #=> -1
   p sign(0)  #=> 0
   p sign(7)  #=> 1
+
+また、以下のような syntactic sugar もあります。
+
+  fib = lambda{|n|
+    case n
+    when 0 then 0
+    when 1 then 1
+    else
+      fib.(n - 2) + fib.(n - 1)
+    end
+  }
+  fib.(10) # => 55
+
 #@else
 引数はブロックパラメータにそのまま(多重代入のルールに従い)代入されます。
 #@end
