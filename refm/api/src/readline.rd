@@ -205,7 +205,7 @@ proc は、次のものを想定しています。
     print "-> ", buf, "\n"
   end
 
-@see [[m:Readline.completion_proc=]]
+@see [[m:Readline.completion_proc]]
 
 --- completion_proc -> Proc
 
@@ -214,7 +214,7 @@ proc を取得します。
 
 @raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
-@see [[m:Readline.completion_proc]]
+@see [[m:Readline.completion_proc=]]
 
 --- completion_case_fold=(bool)
 
