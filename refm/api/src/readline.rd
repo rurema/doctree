@@ -185,6 +185,9 @@ proc は、次のものを想定しています。
 #@end
 
 @param proc ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクトを指定します。
+#@since 1.9.2
+            nil を指定した場合はデフォルトの動作になります。
+#@end
 
 @raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
@@ -437,6 +440,32 @@ GNU Readline のデフォルト値は nil(NULL) です。
 @raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.filename_quote_characters=]]
+#@end
+
+#@since 1.9.2
+--- Readline.set_screen_size(rows, columns) -> Readline
+
+端末のサイズを引数 row、columns に設定します。
+
+@param rows 行数を整数で指定します。
+
+@param columns 列数を整数で指定します。
+
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
+
+@see GNU Readline ライブラリの rl_set_screen_size 関数
+
+--- Readline.get_screen_size -> [Integer, Integer]
+
+端末のサイズを [rows, columns] で返します。
+
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
+
+@see GNU Readline ライブラリの rl_get_screen_size 関数
 #@end
 
 == Constants
