@@ -55,7 +55,7 @@ alias や super を使います。
 
 --- bind(obj)    -> Method
 
-self を obj にバインドした [[c:Method]] オブジェクトを生成し返します。
+self を obj にバインドした [[c:Method]] オブジェクトを生成して返します。
 
 #@until 1.9.1
 NOTE: Ruby 1.8.xでモジュールのインスタンスメソッドをbindすると不審な挙動を
