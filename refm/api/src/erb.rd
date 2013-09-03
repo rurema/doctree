@@ -128,6 +128,24 @@ trim_mode に指定できる値は次の通りです。
     *
   * 0
 
+#@since 1.9.1
+=== エンコーディング
+
+ERB は入力した文字列と同じエンコーディングの文字列を返すのがデフォルト
+の動作ですが、以下のようにマジックコメントを指定すると、ERB によって生
+成される文字列のエンコーディングを指定することができます。
+
+  # -*- coding: UTF-8 -*-
+  require 'erb'
+  
+  template = ERB.new <<EOF
+  <%#-*- coding: Big5 -*-%>
+    __ENCODING__ is <%= __ENCODING__ %>.
+  EOF
+  puts template.result # => __ENCODING__ is Big5
+
+#@end
+
 == Class Methods
 
 --- new(eruby_script, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
