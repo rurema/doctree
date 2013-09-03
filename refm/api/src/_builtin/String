@@ -1617,14 +1617,19 @@ replace に「\」自身を入れたいときは
 #@since 1.9.1
 --- gsub!(pattern, hash) -> self | nil
 
-文字列中の pattern にマッチした部分をキーにして hash を引いた値で置き換えます。
+文字列中の pattern にマッチした部分をキーにして hash を引いた値へ破壊的に置き換えます。
 
 @param pattern    置き換える文字列のパターン
 @param hash       置き換える文字列を与えるハッシュ
 
   hash = {'b'=>'B', 'c'=>'C'}
-  p "abcabc".gsub(/[bc]/){hash[$&]} #=> "aBCaBC"
-  p "abcabc".gsub(/[bc]/, hash)     #=> "aBCaBC"
+  str = "abcabc"
+  str.gsub!(/[bc]/){hash[$&]}
+  p str     #=> "aBCaBC"
+
+  str = "abcabc"
+  str.gsub!(/[bc]/, hash)
+  p str     #=> "aBCaBC"
 #@end
 
 --- hex -> Integer
