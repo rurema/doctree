@@ -168,6 +168,23 @@ self を読みやすい文字列として返します。
 --- hash    -> Integer
 
 自身のハッシュ値を返します。
+
+#@until 2.0.0
+eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] などが意図通り動作しないことがあります。
+この挙動はバグなので Ruby2.0.0 以降では修正済みです。[[ruby-core:42755]]
+#@end
+
+  a = method(:==).unbind
+  b = method(:eql?).unbind
+  p a.eql? b          # => true
+#@since 2.0.0
+  p a.hash == b.hash  # => true
+  p [a, b].uniq.size  # => 1
+#@else
+  p a.hash == b.hash  # => false
+  p [a, b].uniq.size  # => 2
+#@end
+
 #@end
 
 #@since 1.8.7
