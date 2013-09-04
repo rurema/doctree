@@ -327,8 +327,13 @@ service, protoに対応するポート番号を返
   => "\001\000/tmp/.X11-unix/X0\000...."
 #@end
 
+#@since 1.9.2
+--- pair(domain, type, protocol=0) -> Array
+--- socketpair(domain, type, protocol=0) -> Array
+#@else
 --- pair(domain, type, protocol) -> Array
 --- socketpair(domain, type, protocol) -> Array
+#@end
 
 相互に結合されたソケットのペアを含む2要素の配列を返します。
 引数の指定は [[m:Socket.open]] と同じです。
