@@ -212,7 +212,6 @@ locale がスクリプトエンコーディングになります。
 
 文字列リテラル、正規表現リテラルそしてシンボルリテラルから生成されるオブジェクトのエンコーディングは
 スクリプトエンコーディングになります。
-ただしそれらが 7bit クリーンである場合、エンコーディングは US-ASCII になります。
 
 #@# see parser_str_new at parse.y
 またスクリプトエンコーディングが US-ASCII である場合、7bit クリーンではないバックスラッシュ記法で
@@ -230,7 +229,7 @@ locale がスクリプトエンコーディングになります。
 
   # coding: euc-jp
   p __ENCODING__        #=> #<Encoding:EUC-JP>
-  p "abc".encoding      #=> #<Encoding:US-ASCII>  (7bit クリーンなので US-ASCII になる)
+  p "abc".encoding      #=> #<Encoding:EUC-JP>
   p "\x80".encoding     #=> #<Encoding:EUC-JP>
   p "\u3042".encoding   #=> #<Encoding:UTF-8>  (Unicode エスケープがあるので UTF-8 になる)
   p "\x80\u3042".encoding #=> エラー
