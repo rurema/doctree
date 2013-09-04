@@ -535,6 +535,12 @@ o1 と o2 は同じ分割に属します。
   puts Set.new(['element1', 'element2']).inspect
   #=> #<Set: {"element1", "element2"}>
 
+#@since 1.9.2
+--- keep_if {|o| ... } -> self
+
+集合の各要素に対してブロックを実行し、その結果が偽であるようなすべての要素を削除します。 
+
+#@end
 
 = class SortedSet < Set
 
