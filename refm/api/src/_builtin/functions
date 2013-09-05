@@ -1712,6 +1712,9 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Float("10e2")       #=> 1000.0
     p Float("1e-2")       #=> 0.01
     p Float(".1")         #=> 0.1
+#@since 1.9.2
+    p Float("0xa")        #=> 10.0
+#@end
 
     p Float("nan")        # invalid value (ArgumentError)
     p Float("INF")        # invalid value (ArgumentError)
