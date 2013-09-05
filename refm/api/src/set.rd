@@ -536,14 +536,17 @@ o1 と o2 は同じ分割に属します。
   #=> #<Set: {"element1", "element2"}>
 
 #@since 1.9.2
---- keep_if {|o| ... } -> self
---- select! {|o| ... } -> self | nil
-集合の各要素に対してブロックを実行し、その結果が偽であるようなすべての要素を削除します。 
+--- keep_if {|element| ... } -> self
 
-keep_if は常に self を返します。
+各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
 
-select! は、要素が 1 つ以上削除されれば self を、1 つも削除されなければ
-nil を返します。
+@return 常に self を返します。
+
+--- select! {|element| ... } -> self | nil
+
+各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
+
+@return 変更があった場合は self を、変更がなかった場合は nil を返します。
 #@end
 
 = class SortedSet < Set
