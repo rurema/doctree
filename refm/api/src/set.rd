@@ -537,9 +537,13 @@ o1 と o2 は同じ分割に属します。
 
 #@since 1.9.2
 --- keep_if {|o| ... } -> self
-
+--- select! {|o| ... } -> self | nil
 集合の各要素に対してブロックを実行し、その結果が偽であるようなすべての要素を削除します。 
 
+keep_if は常に self を返します。
+
+select! は、要素が 1 つ以上削除されれば self を、1 つも削除されなければ
+nil を返します。
 #@end
 
 = class SortedSet < Set
