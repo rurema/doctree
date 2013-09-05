@@ -34,7 +34,9 @@ date を [[m:Date._parse]] によって
             デフォルトは[[m:Time.now]]となります。
 
 #@since 1.9.2
-@raise ArgumentError date="" のときに発生します。
+@raise ArgumentError dateに空文字列を与えた場合、発生します。
+                     なお、1.9.2より前は例外は発生せず、現在時刻を表す
+                     Time のインスタンスを返していました。
 #@end
 
   # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
