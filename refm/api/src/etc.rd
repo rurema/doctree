@@ -175,6 +175,20 @@ alias Etc::Group
 
 この構造体の値を変更してもシステムには反映されません。
 
+#@since 1.9.2
+
+== Class Methods
+
+--- each {|entry| ... } -> Struct::Group
+--- each                -> Enumerator
+
+/etc/group に含まれるエントリを一つずつブロックに渡して評価します。
+ブロックを省略した場合は [[c:Enumerator]] のインスタンスを返します。
+
+@see [[m:Etc.#getpwent]]
+
+#@end
+
 == Instance Methods
 
 --- gid -> Integer
@@ -238,6 +252,20 @@ alias Etc::Passwd
   * class
   * comment
   * expire
+
+#@since 1.9.2
+
+== Class Methods
+
+--- each {|entry| ... } -> Struct::Passwd
+--- each                -> Enumerator
+
+/etc/passwd に含まれるエントリを一つずつブロックに渡して評価します。
+ブロックを省略した場合は [[c:Enumerator]] のインスタンスを返します。
+
+@see [[m:Etc.#getpwent]]
+
+#@end
 
 == Instance Methods
 
