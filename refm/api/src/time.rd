@@ -33,6 +33,10 @@ date を [[m:Date._parse]] によって
 @param now  現在時刻を[[c:Time]] オブジェクトで指定します。
             デフォルトは[[m:Time.now]]となります。
 
+#@since 1.9.2
+@raise ArgumentError date="" のときに発生します。
+#@end
+
   # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
   # タイムゾーンがGMTとすると:
   Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
