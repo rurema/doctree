@@ -553,8 +553,8 @@ FileUtils.rm(list, :force => true) と同じです。
 ==== 注意
 
 このメソッドにはローカル脆弱性が存在します。
-詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 この脆弱性を回避するには :secure オプションを使用してください。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 
 例:
 
@@ -579,8 +579,8 @@ rm_r(list, {:force => true}) と同じです。
 ==== 注意
 
 このメソッドにはローカル脆弱性が存在します。
-詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 この脆弱性を回避するには :secure オプションを使用してください。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 
 @see [[m:FileUtils.#rm]], [[m:FileUtils.#rm_r]], [[m:FileUtils.#remove_entry_secure]]
 
