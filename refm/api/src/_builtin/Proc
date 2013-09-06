@@ -286,6 +286,12 @@ Procをカリー化します
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
 である)場合は nil を返します。
 
+#@until 1.9.2
+[[m:Module.attr_reader]],
+[[m:Module.attr_writer]],
+[[m:Module.attr_accessor]] で定義されたメソッドには対応していません。
+#@end
+
 @see [[m:Method#source_location]]
 
 --- hash -> Integer
