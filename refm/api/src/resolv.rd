@@ -437,6 +437,23 @@ DNSリゾルバを閉じます。
 
 #@# [[m:Resolv::DNS.new]] で与えた設定でインスタンスを実際に初期化します。
 
+#@since 2.0.0
+--- timeouts=(values)
+
+DNSリゾルバのタイムアウト時間を設定します。
+
+例:
+
+  dns.timeouts = 3
+
+@param values タイムアウト時間(秒)を数値か数値の配列で指定します。配列
+              を指定した場合は応答を受信するまでの再試行時のタイムアウト
+              時間も含めて順に設定します。nil を指定した場合はデフォル
+              ト値
+              ([ 5, second = 5 * 2 / nameserver_count, 2 * second, 4 * second ])
+              を使用します。
+#@end
+
 == Constants
 
 #@# --- DNSThreadGroup
