@@ -120,8 +120,8 @@ def_delegator は def_instance_delegator の別名になります。
 メソッドの委譲先を設定します。
 
 @param hash 委譲先のメソッドがキー、委譲先のオブジェクトが値の
-            [[c:Hash]] を指定します。キーは [[c:Symbol]] か
-            [[c:String]] の配列で指定します。
+            [[c:Hash]] を指定します。キーは [[c:Symbol]]、
+            [[c:String]] かその配列で指定します。
 
 #@# ruby-core:05899 のパッチに付いてたテストコードより。
 
@@ -250,8 +250,8 @@ def_delegator は def_singleton_delegator の別名になります。
 メソッドの委譲先を設定します。
 
 @param hash 委譲先のメソッドがキー、委譲先のオブジェクトが値の
-            [[c:Hash]] を指定します。キーは [[c:Symbol]] か
-            [[c:String]] の配列で指定します。
+            [[c:Hash]] を指定します。キーは [[c:Symbol]]、
+            [[c:String]] かその配列で指定します。
 
 @see [[m:Forwardable#delegate]]
 #@end
