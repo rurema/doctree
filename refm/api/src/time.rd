@@ -127,6 +127,9 @@ date がISO 8601で定義されている形式に準拠していない、
 または [[c:Time]] クラスが指定された日時を表現できないときに
 [[c:ArgumentError]] が発生します。
 
+[[c:Time]] オブジェクトを ISO8601 形式の文字列にフォーマットする
+インスタンスメソッド [[m:Time#iso8601]], [[m:Time#xmlschema]] もあります。
+
 @param date XML Schema で定義されている dateTime として
             パースされる文字列を指定します。
 
@@ -147,6 +150,8 @@ date がISO 8601で定義されている形式に準拠していない、
   rescue ArgumentError => err
     puts err #=> invalid date: "2008-08-31A12:34:56+09:00"
   end
+
+@see [[m:Time#xmlschema]], [[m:Time#iso8601]]
 
 #@since 1.9.1
 --- strptime(date, format) -> Time
@@ -225,7 +230,11 @@ date がISO 8601で定義されている形式に準拠していない、
 --- iso8601(fractional_seconds = 0) -> String
 
 XML Schema で定義されている dateTime として
-表現される形式の文字列を返します:
+表現される形式の文字列を返します。
+
+XML Schema で定義されている dateTime として
+表現される形式の文字列をパースするためのクラスメソッド
+[[m:Time.iso8601]], [[m:Time.xmlschema]] もあります。
 
 @param fractional_seconds 小数点以下の秒の桁数を整数で指定します。
                           省略した場合は0 となります。
@@ -245,3 +254,4 @@ XML Schema で定義されている dateTime として
   p t.xmlschema    #=> "2008-08-31T03:34:56Z"
   p t.xmlschema(9) #=> "2008-08-31T03:34:56.000000000Z"
 
+@see [[m:Time.iso8601]], [[m:Time.xmlschema]]
