@@ -2005,9 +2005,9 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 #@end
 @param value catch の戻り値になります。
 #@since 1.9.1
-@raise [[c:ArgumentError]] 同じ tag で待っている catch が存在しない場合に発生します。
+@raise ArgumentError 同じ tag で待っている catch が存在しない場合に発生します。
 #@else
-@raise [[c:NameError]] 同じ tag で待っている catch が存在しない場合に発生します。
+@raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
 #@end
 
   def foo
