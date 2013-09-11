@@ -19,7 +19,7 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
 このオブジェクトの
 [[m:REXML::Parsers::PullEvent#event_type]] で「開始タグ」「終了タグ」
 といったイベントの種類を取得します。
-[[m:REXML::Parsers::PullEvent#[] ] でそのイベントのパラメータ
+[[m:REXML::Parsers::PullEvent#[] ]] でそのイベントのパラメータ
 (例えば開始タグなら要素名と属性)を得ることができます。
 
 
@@ -202,7 +202,7 @@ XMLをパースし、得られたイベント列を引数として順にブロ�
 --- event_type -> Symbol
 イベントの種類をシンボルで返します。
 
-詳しくは [[ref:event_type]] を参照してください。
+詳しくは [[ref:c:REXML::Parsers::PullParser#event_type]] を参照してください。
 
 --- start_element? -> bool
 XML要素の開始タグなら真を返します。
