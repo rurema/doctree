@@ -511,11 +511,11 @@ retry をまとめると以下のようになります。
           p "(d)"
         end
 #@until 1.9.0
-        iter { p "(b)"; retry }     # => (a) .. (b)(d)(a) .. (b)(d)(a) ...
+        iter { p "(b)"; retry }     # -> (a) .. (b)(d)(a) .. (b)(d)(a) ...
 #@end
-        iter { p "(b)"; redo  }     # => (a) .. (b)(b)(b)(b) ...
-        iter { p "(b)"; next  }     # => (a) .. (b)(c) .. (d)
-        iter { p "(b)"; break }     # => (a)..(b)(d)
+        iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
+        iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
+        iter { p "(b)"; break }     # -> (a)..(b)(d)
 
 #@until 1.9.1
 [注意] ensure は大域脱出を補足するため、retry の例では (d) も表示されます。
