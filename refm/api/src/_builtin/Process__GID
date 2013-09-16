@@ -89,7 +89,7 @@
 なら true を返します。そうでない場合に false を返します。
 
 --- rid    -> Integer
-        
+
 現在のプロセスの実グループ ID を返します。
 
    Process.rid   #=> 500
@@ -134,7 +134,7 @@
  include Process
  # (r, e, s) == (500, 505, 505)
  p [gid, egid]           #=> [500, 505]
- Process::GID.switch do 
+ Process::GID.switch do
    p [gid, egid]         #=> [500, 500]
  end
  p [gid, egid]           #=> [500, 505]

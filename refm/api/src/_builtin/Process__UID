@@ -44,7 +44,7 @@
    [Process.uid, Process.euid]          #=> [33, 33]
 
 --- grant_privilege(id)    -> Integer
---- eid=(id)              
+--- eid=(id)
 
 現在のプロセスの実効ユーザ ID を id に変更します。成功したら id を返します。
 
@@ -122,7 +122,7 @@
  include Process
  # (r, e, s) == (500, 505, 505)
  p [uid, euid]           #=> [500, 505]
- Process::UID.switch do 
+ Process::UID.switch do
    p [uid, euid]         #=> [500, 500]
  end
  p [uid, euid]           #=> [500, 505]
