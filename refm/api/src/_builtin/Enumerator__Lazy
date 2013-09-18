@@ -24,7 +24,7 @@ Lazyから値を取り出すには、[[m:Enumerator::Lazy#force]] または
   # 二乗して偶数になるような整数を、小さい方から5個表示する
   p (1..Float::INFINITY).lazy.select{|n| (n**2).even?}.first(5)
   # LTSV (http://ltsv.org/) 形式のログファイルから検索を行う
-  # [[m:Enumerator::Lazy#map]] は配列ではなく Enumerator を返すため、
+  # Enumerator::Lazy#map は配列ではなく Enumerator を返すため、
   # 巨大な配列を確保しようとしてメモリを使い切ったりはしない
   open("log.txt"){|f|
     f.each_line.lazy.map{|line|

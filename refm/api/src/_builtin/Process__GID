@@ -89,7 +89,7 @@
 なら true を返します。そうでない場合に false を返します。
 
 --- rid    -> Integer
-        
+
 現在のプロセスの実グループ ID を返します。
 
    Process.rid   #=> 500
@@ -134,9 +134,21 @@
  include Process
  # (r, e, s) == (500, 505, 505)
  p [gid, egid]           #=> [500, 505]
- Process::GID.switch do 
+ Process::GID.switch do
    p [gid, egid]         #=> [500, 500]
  end
  p [gid, egid]           #=> [500, 505]
 
+#@since 2.0.0
+--- from_name(name) -> Integer
+
+引数で指定した名前の実グループ ID を返します。
+
+  Process::GID.from_name("wheel") # => 0
+  Process::GID.from_name("nosuchgroup") # => can't find group for nosuchgroup (ArgumentError)
+
+@param name グループ名を指定します。
+
+@raise ArgumentError 引数で指定したグループが存在しない場合に発生します。
+#@end
 #@end
