@@ -345,6 +345,9 @@ File.expand_path("~") や File.expand_path("~root") と
 
 #@since 1.8.0
 --- path    -> String
+#@since 1.9.2
+--- to_path -> String
+#@end
 
 オープンしているディレクトリのパス名を文字列で返します。
 
@@ -407,3 +410,7 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
    d.read     #=> "."
    d.rewind   #=> #<Dir:0x401b3fb0>
    d.read     #=> "."
+
+--- inspect -> String
+
+self の情報を人間に読みやすい文字列にして返します。
