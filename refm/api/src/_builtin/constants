@@ -305,3 +305,8 @@ Ruby処理系実装の種類を表す文字列。
     #      "alias $POSTMATCH               $'\n",
     #      "alias $LAST_PAREN_MATCH        $+\n"]}
 
+#@since 1.9.1
+--- RUBY_REVISION -> Fixnum
+
+Ruby の Subversion でのリビジョン番号を表す [[c:Fixnum]] オブジェクトです。
+#@end
