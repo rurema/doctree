@@ -48,7 +48,7 @@ CRC チェックサムの計算に用いるテーブルを配列で返します�
 
 @param length adler2 を生成するのに使用した文字列の長さを指定します。
 
---- crc32_combine(crc1, crc2, length) -> Ingeter
+--- crc32_combine(crc1, crc2, length) -> Integer
 
 与えられた二つの CRC-32 チェックサムを一つにつなげます。
 

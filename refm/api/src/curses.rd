@@ -950,7 +950,7 @@ Open キーを表す定数です。
 
 --- KEY_OPTIONS -> Integer
 
-Opetions キーを表す定数です。
+Options キーを表す定数です。
 
 --- KEY_PPAGE -> Integer
 

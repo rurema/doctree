@@ -247,7 +247,7 @@ WIN32OLEオブジェクトを生成できます。
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    p tobj.progid   # => "Excel.Application.14"
 
-この例は、ExcleのApplicationクラスが「Excel.Application.14」という
+この例は、ExcelのApplicationクラスが「Excel.Application.14」という
 PROGIDを持つことを示します。
 
 @see [[m:WIN32OLE.new]]

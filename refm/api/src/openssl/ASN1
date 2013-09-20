@@ -47,7 +47,7 @@ IMPLICIT or EXPLICIT なタグ付けを実現することもできます。
   # APPLICATION タグクラスのタグ2番でタグ付けられたデータ
   z = OpenSSL::ASN1::ASN1Data.new([OpenSSL::ASN1::Boolean.new(false)], 
                                   2, :APPLICATION)
-  # 上と同様のデータを OpenSSL::ASN1::Booelan.new の2番目以降の
+  # 上と同様のデータを OpenSSL::ASN1::Boolean.new の2番目以降の
   # 引数で表現する
   z2 = OpenSSL::ASN1::Boolean.new(false, 2, :EXPLICIT, :APPLICATION)
   # IMPLICIT なタグ付けをする

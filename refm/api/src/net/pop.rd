@@ -542,7 +542,7 @@ f は << メソッドを持っているオブジェクトでなければなり�
   <- "QUIT\r\n"
   -> "+OK\r\n"
 
---- open_timeout -> Interger
+--- open_timeout -> Integer
 接続時に待つ最大秒数を返します。
 
 この秒数たってもコネクションが開かないときは
@@ -557,7 +557,7 @@ f は << メソッドを持っているオブジェクトでなければなり�
 
 @see [[m:Net::POP3#open_timeout]]
 
---- read_timeout -> Interger
+--- read_timeout -> Integer
 読み込みでブロックしてよい最大秒数を返します。
 
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
