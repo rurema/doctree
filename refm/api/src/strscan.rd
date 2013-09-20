@@ -544,6 +544,24 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\s+/) # => " "
       s.pos         # => 5
 
+#@since 2.0.0
+@see [[m:StringScanner#charpos]]
+
+--- charpos -> Fixnum
+
+現在のスキャンポインタのインデックスを文字単位で返します。
+
+使用例
+
+  s = StringScanner.new("abcädeföghi")
+  s.charpos           # => 0
+  s.scan_until(/ä/)   # => "abcä"
+  s.pos               # => 5
+  s.charpos           # => 4
+
+@see [[m:StringScanner#pos]]
+#@end
+
 --- pointer=(n)
 --- pos=(n)
 スキャンポインタのインデックスを n にセットします。
