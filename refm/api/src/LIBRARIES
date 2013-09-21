@@ -345,6 +345,12 @@ rdoc/parser/perl
 #@end
 rdoc/parser/ruby_tools
 #@end
+#@since 2.0.0
+rdoc/parser/changelog
+rdoc/parser/markdown
+rdoc/parser/rd
+rdoc/parser/text
+#@end
 rdoc/stats
 #@else
 rdoc/usage
