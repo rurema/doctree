@@ -6,6 +6,9 @@ require optparse
 require singleton
 require getoptlong
 #@end
+#@since 2.0.0
+require pathname
+#@end
 
 rdoc コマンドのオプションを解析するためのサブライブラリです。
 
@@ -25,6 +28,68 @@ rdoc コマンドのオプションを解析するためのクラスです。
 #@until 1.9.1
 [注意] クラス名は RDoc::Option ではない事に注意してください。(1.9 系で
 は RDoc::Option クラスとして使用できます。)
+#@end
+
+#@since 2.0.0
+=== オプションの保存
+
+.rdoc_options ファイルを gem に含める事で、rdoc のオプションを保存する
+事ができます。また、以下のように --write-options を指定するのが最も簡単
+です。
+
+  rdoc --markup tomdoc --write-options
+
+この場合、自動的に .rdoc_options ファイルが作成されて指定したオプション
+が保存されます。
+
+ただし、以下のオプションはユーザの指定するオプションや [[c:RDoc]] の通
+常の動作と干渉するため、保存する事ができません。
+
+ * --coverage-report
+ * --dry-run
+ * --encoding
+ * --force-update
+ * --format
+ * --pipe
+ * --quiet
+ * --template
+ * --verbose
+
+=== カスタムオプション
+
+[[c:RDoc]] のジェネレータでは、[[c:RDoc::Options]] をフックして独自の
+オプションを指定できます。
+
+[[m:Object::ARGV]] に --format が含まれていた場合、[[c:RDoc]] はジェネ
+レータ独自のオプションを解析するために setup_options メソッドを呼び出し
+ます。カスタムオプションを指定する場合は --format オプションは必ず指定
+する必要があります。rdoc --help を実行すると追加したオプションの一覧が
+確認できます。
+
+例:
+
+  class RDoc::Generator::Spellcheck
+    RDoc::RDoc.add_generator self
+
+    def self.setup_options rdoc_options
+      op = rdoc_options.option_parser
+
+      op.on('--spell-dictionary DICTIONARY',
+            RDoc::Options::Path) do |dictionary|
+        rdoc_options.spell_dictionary = dictionary
+      end
+    end
+  end
+
+#@# Path や Template などには Object.new したものが入っているため、全て
+#@# のオブジェクトが通るように見えるため除外。
+#@#
+#@# === オプションの検証
+#@#
+#@# OptionParser validators will validate and cast user input values.  In
+#@# addition to the validators that ship with OptionParser (String, Integer,
+#@# Float, TrueClass, FalseClass, Array, Regexp, Date, Time, URI, etc.),
+#@# RDoc::Options adds Path, PathArray and Template.
 #@end
 
 == Instance Methods
@@ -460,3 +525,112 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 #@# 1.8 系の Options::OptionList については、内部だけで使用しているため、
 #@# 記述しない。
+
+#@since 2.0.0
+--- markup -> String
+
+コマンドライン引数の --markup オプションで指定したフォーマットを返しま
+す。
+
+指定されていない場合は 'rdoc' を返します。
+
+--- markup=(val)
+
+コマンドライン引数の --markup オプションと同様の指定を行います。
+
+@param val フォーマットを文字列で指定します。
+
+--- page_dir -> Pathname | nil
+
+コマンドライン引数の --page-dir オプションで指定したディレクトリを返し
+ます。
+
+指定されていない場合は nil を返します。
+
+--- page_dir=(val)
+
+コマンドライン引数の --page-dir オプションと同様の指定を行います。
+
+@param val パスを文字列で指定します。
+
+--- root -> Pathname
+
+コマンドライン引数の --root オプションで指定したディレクトリを返します。
+
+指定されていない場合はカレントディレクトリを返します。
+
+--- root=(val)
+
+コマンドライン引数の --root オプションと同様の指定を行います。
+
+@param val パスを文字列で指定します。
+
+--- static_path -> [String]
+
+コマンドライン引数の --copy-files オプションで指定したパスの一覧を返し
+ます。
+
+--- static_path=(vals)
+
+コマンドライン引数の --copy-files オプションと同様の指定を行います。
+
+@param vals パスを文字列の配列で指定します。
+
+--- finish_page_dir
+
+ライブラリ内部で使用します。
+
+--- sanitize_path(path)
+
+ライブラリ内部で使用します。
+
+--- warn(message) -> nil
+
+--verbose オプションを指定していた場合に message を 標準エラー出力
+$stderr に出力します。
+
+--- write_options -> object
+
+カレントディレクトリの .rdoc_options ファイルに指定した設定を YAML 形式
+で保存します。
+#@end
+
+== Constants
+
+#@since 1.9.3
+--- DEPRECATED -> {String -> String}
+
+非推奨のオプションの一覧を返します。
+
+#@# #@since 2.0.0
+#@# --- Template -> Object
+#@# #@else
+#@# --- Template -> nil
+#@# #@end
+#@#
+#@# Option validator for OptionParser that matches a template directory for an
+#@# installed generator that lives in
+#@# <tt>"rdoc/generator/template/#{template_name}"</tt>
+
+#@end
+#@since 2.0.0
+--- SPECIAL -> [String]
+
+--write-options を指定した際に .rdoc_options ファイルに保存されないオプ
+ションの一覧を返します。
+
+#@# --- Directory -> Object
+#@#
+#@# Option validator for OptionParser that matches a directory that exists on
+#@# the filesystem.
+#@#
+#@# --- Path -> Object
+#@#
+#@# Option validator for OptionParser that matches a comma-separated list of
+#@# files or directories that exist on the filesystem.
+#@#
+#@# --- PathArray -> Object
+#@#
+#@# Option validator for OptionParser that matches a comma-separated list of
+#@# files or directories that exist on the filesystem.
+#@end
