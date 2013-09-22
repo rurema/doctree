@@ -357,6 +357,32 @@ options は以下が指定できます。
   を含んでいれば、そこがファイル名が置きかえられます。'\%s' を含んで
   いなければ、ファイル名を指定した URL の後に付けたものを使います。
 
+#@since 2.0.0
+===[a:saved_options] オプションの保存
+
+.rdoc_options ファイルを gem に含める事で、rdoc のオプションを保存する
+事ができます。また、以下のように --write-options を指定するのが最も簡単
+です。
+
+  rdoc --markup tomdoc --write-options
+
+この場合、自動的に .rdoc_options ファイルが作成されて指定したオプション
+が保存されます。
+
+ただし、以下のオプションはユーザの指定するオプションや [[c:RDoc]] の通
+常の動作と干渉するため、保存する事ができません。
+
+ * --coverage-report
+ * --dry-run
+ * --encoding
+ * --force-update
+ * --format
+ * --pipe
+ * --quiet
+ * --template
+ * --verbose
+#@end
+
 ===[a:markup] Markup
 
 コメント部はかなり自然に書くことができます。'#' で始まるコメントも使え
