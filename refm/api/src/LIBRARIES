@@ -350,6 +350,8 @@ rdoc/parser/changelog
 rdoc/parser/markdown
 rdoc/parser/rd
 rdoc/parser/text
+rdoc/markdown
+rdoc/markdown/entities
 #@end
 rdoc/stats
 #@else
