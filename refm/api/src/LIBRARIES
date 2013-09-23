@@ -317,6 +317,13 @@ rdoc/options
 rdoc/rdoc
 #@since 1.9.1
 rdoc/known_classes
+rdoc/generator
+rdoc/generator/darkfish
+#@since 2.0.0
+rdoc/generator/json_index
+#@end
+rdoc/generator/markup
+rdoc/generator/ri
 rdoc/markup
 rdoc/markup/formatter
 rdoc/markup/to_html

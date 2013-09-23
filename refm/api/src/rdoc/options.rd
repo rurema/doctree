@@ -31,7 +31,7 @@ rdoc コマンドのオプションを解析するためのクラスです。
 #@end
 
 #@since 2.0.0
-=== カスタムオプション
+===[a:custom_options] カスタムオプション
 
 [[c:RDoc]] のジェネレータでは、[[c:RDoc::Options]] をフックして独自の
 オプションを指定できます。
@@ -52,6 +52,7 @@ rdoc コマンドのオプションを解析するためのクラスです。
 
       op.on('--spell-dictionary DICTIONARY',
             RDoc::Options::Path) do |dictionary|
+        # [[c:RDoc::Options]] に spell_dictionary アクセサの定義が必要
         rdoc_options.spell_dictionary = dictionary
       end
     end
@@ -498,6 +499,18 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 @param val :public、:protected、:private のいずれかを指定します。
 #@end
+
+--- option_parser -> OptionParser | nil
+
+コマンドライン引数の解析のための [[c:OptionParser]] オブジェクトを返し
+ます。
+
+--- option_parser=(val)
+
+コマンドライン引数の解析のための [[c:OptionParser]] オブジェクトを設定
+します。
+
+@param val [[c:OptionParser]] オブジェクトを指定します。
 
 #@# 1.8 系の Options::OptionList については、内部だけで使用しているため、
 #@# 記述しない。
