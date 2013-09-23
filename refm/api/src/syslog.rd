@@ -42,10 +42,10 @@ syslog の詳細については [[man:syslog(3)]] を参照してください。
 @param options Syslog.open や Syslog.log の動作を制御するフラグを指定します。
                指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
                ます。使用できる値は[[c:Syslog::Constants]] を参照してください。
-               
+
 @param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
                 にしたがって出力先となるログファイルを決定します。 詳しくは、
-                [[man:syslog.conf(5)]], 
+                [[man:syslog.conf(5)]],
                 [[c:Syslog::Constants]] を参照してください。
 
 @raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生します。
@@ -83,7 +83,7 @@ options と facility に指定できる値については
 @param options Syslog.open や Syslog.log の動作を制御するフラグを指定します。
                指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
                ます。使用できる値は[[c:Syslog::Constants]] を参照してください。
-               
+
 @param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
                 にしたがって出力先となるログファイルを決定します。 詳しくは、
                 [[man:syslog.conf(5)]], [[c:Syslog::Constants]] を参照してく
@@ -99,7 +99,7 @@ options と facility に指定できる値については
     Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 200)
   rescue RuntimeError => err
     # RuntimeError は発生しない。
-    puts err 
+    puts err
   end
   File.foreach('/var/log/system.log'){|line|
     print line if line =~ /the sky is/
@@ -220,7 +220,7 @@ Syslog.openやSyslog.close
   Syslog.close
   File.foreach(log){|line|
     print line if line =~ /FTP/
-  } 
+  }
 
 --- close -> nil
 
