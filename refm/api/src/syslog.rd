@@ -1,4 +1,3 @@
-#@if (version >= "1.6.6")
 category Unix
 
 Unix系OS の syslog を扱うライブラリです。
@@ -321,4 +320,3 @@ priorityまでのすべての優先度のマスクを作成します。
 優先度(priorities)を示す定数。
 定数 の詳細については [[man:syslog(3)]] を参照してください。
 
-#@end
