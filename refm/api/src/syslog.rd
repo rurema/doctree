@@ -239,6 +239,18 @@ syslogを閉じます。
 
 selfを返します。(旧版との互換性のため)
 
+= module Syslog::Constants
+
+
+このモジュールにはシステムで使用可能なLOG_*定数、モジュール関数が定義さ
+れています。
+
+  例:
+    require 'syslog'
+    include Syslog::Constants
+
+== Module Functions
+
 --- LOG_MASK(priority) -> Fixnum
 
 1つの優先度に対するマスクを作成します。
@@ -258,16 +270,6 @@ priorityまでのすべての優先度のマスクを作成します。
 
 例:
          Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
-
-= module Syslog::Constants
-
-
-このモジュールにはシステムで使用可能なLOG_*定数が定義されています。
-
-  例:
-    require 'syslog'
-    include Syslog::Constants
-
 
 == Constants
 --- LOG_PID      -> Fixnum
