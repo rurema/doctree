@@ -241,6 +241,12 @@ selfを返します。(旧版との互換性のため)
 
 = module Syslog::Constants
 
+#@since 2.0.0
+include Syslog::Option
+include Syslog::Facility
+include Syslog::Level
+include Syslog::Macros
+#@end
 
 このモジュールにはシステムで使用可能なLOG_*定数、モジュール関数が定義さ
 れています。
@@ -249,6 +255,19 @@ selfを返します。(旧版との互換性のため)
     require 'syslog'
     include Syslog::Constants
 
+#@since 2.0.0
+それぞれの定数、モジュール関数は以下のモジュールに分けて定義されています。
+
+ * [[c:Syslog::Option]]
+ * [[c:Syslog::Facility]]
+ * [[c:Syslog::Level]]
+ * [[c:Syslog::Macros]]
+
+= module Syslog::Macros
+
+このモジュールには syslog のユーティリティ関数が定義されています。
+#@end
+
 == Module Functions
 
 --- LOG_MASK(priority) -> Fixnum
@@ -256,7 +275,11 @@ selfを返します。(旧版との互換性のため)
 1つの優先度に対するマスクを作成します。
 
 @param priority priority は優先度を示す定数を指定します。
+#@since 2.0.0
+                詳しくは、[[c:Syslog::Level]]を参照してください。
+#@else
                 詳しくは、[[c:Syslog::Constants]]を参照してください。
+#@end
 
 例:
          Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
@@ -266,12 +289,26 @@ selfを返します。(旧版との互換性のため)
 priorityまでのすべての優先度のマスクを作成します。
 
 @param priority priority は優先度を示す定数を指定します。
+#@since 2.0.0
+                詳しくは、[[c:Syslog::Level]]を参照してください。
+#@else
                 詳しくは、[[c:Syslog::Constants]]を参照してください。
+#@end
 
 例:
          Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 == Constants
+
+#@since 2.0.0
+= module Syslog::Option
+
+このモジュールには syslog のオプション(options)に関する定数が定義されて
+います。
+
+== Constants
+#@end
+
 --- LOG_PID      -> Fixnum
 --- LOG_CONS     -> Fixnum
 --- LOG_ODELAY   -> Fixnum
@@ -281,6 +318,15 @@ priorityまでのすべての優先度のマスクを作成します。
 
 オプション(options)を示す定数。
 定数の詳細については [[man:syslog(3)]] を参照してください。
+
+#@since 2.0.0
+= module Syslog::Facility
+
+このモジュールには syslog の機能(facilities)に関する定数が定義されてい
+ます。
+
+== Constants
+#@end
 
 --- LOG_AUTH     -> Fixnum
 --- LOG_AUTHPRIV -> Fixnum
@@ -309,6 +355,15 @@ priorityまでのすべての優先度のマスクを作成します。
 機能(facilities)を示す定数。
 
 定数 の詳細については [[man:syslog(3)]] を参照してください。
+
+#@since 2.0.0
+= module Syslog::Level
+
+このモジュールには syslog の優先度(priorities)に関する定数が定義されて
+います。
+
+== Constants
+#@end
 
 --- LOG_EMERG    -> Fixnum
 --- LOG_ALERT    -> Fixnum
