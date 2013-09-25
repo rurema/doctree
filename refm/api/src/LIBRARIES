@@ -587,6 +587,9 @@ syck/ypath
 #@end
 sync
 syslog
+#@since 2.0.0
+syslog/logger
+#@end
 tempfile
 #@since 1.8.0
 test/unit
