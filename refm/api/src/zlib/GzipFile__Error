@@ -3,6 +3,18 @@
 gzip ファイルを処理している間にエラーが生じた時に発生する全ての例外の
 スーパークラスです。
 
+== Instance Methods
+
+#@since 1.9.3
+--- input -> String | nil
+
+読み込んだ文字列(gzip 形式で圧縮されたもの)を返します。
+
+--- inspect -> String
+
+self の情報を人間に読みやすい文字列にして返します。
+#@end
+
 = class Zlib::GzipFile::NoFooter < Zlib::GzipFile::Error
 
 gzip ファイルにフッターが無い時に発生します。
