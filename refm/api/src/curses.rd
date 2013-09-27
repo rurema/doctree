@@ -22,7 +22,7 @@ Ruby curses を使ってテキストユーザインタフェース(以下、TUI)
   (3) [[m:Curses.#stdscr]] やそのサブウインドウを操作し、TUI を構築します。
   (4) [[m:Curses.#getch]] や [[m:Curses.#getstr]] により、
       ユーザからの入力を取得します。入力した情報に従って処理を行い、
-      そして、入力を待つということを繰り返します。
+      入力を待つということを繰り返します。
   (5) 最後に [[m:Curses.#close_screen]] で終了処理を行います。
 
 例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
@@ -950,7 +950,7 @@ Open キーを表す定数です。
 
 --- KEY_OPTIONS -> Integer
 
-Opetions キーを表す定数です。
+Options キーを表す定数です。
 
 --- KEY_PPAGE -> Integer
 

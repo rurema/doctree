@@ -37,3 +37,15 @@ argv で与えられた引数を元にドキュメントをフォーマットし
 指定できるオプションについては、[[ref:lib:rdoc#usage]] を参照してくださ
 い。出力ディレクトリが指定されなかった場合はカレントディレクトリ の
 doc 以下に出力します。
+
+== Class Methods
+
+#@since 1.9.2
+--- add_generator(klass) -> klass
+
+引数 klass で指定したクラスをジェネレータとして登録します。
+
+@param klass 登録するクラスを指定します。
+
+@see [[ref:c:RDoc::Options#custom_options]]
+#@end

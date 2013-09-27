@@ -166,6 +166,26 @@ name という名前のグループエントリを返します。
 
 全ての passwd エントリを順にアクセスするためのイテレータです。
 
+#@since 1.9.2
+--- sysconfdir -> String | nil
+
+システムの設定ディレクトリを返します。
+
+  require 'etc'
+  p Etc.sysconfdir # => "/etc"
+
+主に "/etc" を返しますが、Ruby をソースからビルドした場合は異なるディレ
+クトリを返す場合があります。例えば、Ruby を /usr/local にインストールし
+た場合は、"/usr/local/etc" を返します。
+
+--- systmpdir -> String | nil
+
+システムのテンポラリディレクトリを返します。
+
+  require 'etc'
+  p Etc.systmpdir # => "/tmp"
+
+#@end
 
 = class Struct::Group < Struct
 #@since 1.9.1

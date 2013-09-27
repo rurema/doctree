@@ -40,7 +40,10 @@ self が EOF に達していれば false を返します。
 判定不可能な場合は nil を返します。
 #@end
 
---- wait(timeout = nil) -> bool | self | nil
+--- wait(timeout = nil)          -> bool | self | nil
+#@since 2.0.0
+--- wait_readable(timeout = nil) -> bool | self | nil
+#@end
 
 self が読み込み可能になるまでブロックし、読み込み可能になったら
 真値を返します。タイムアウト、もしくはEOFで
@@ -68,3 +71,20 @@ self が EOF に達していれば false を返します。
 
 @param timeout タイムアウトまでの秒数を指定します。
 
+#@since 2.0.0
+
+@see [[m:IO#wait_writable]]
+
+--- wait_writable          -> self
+--- wait_writable(timeout) -> self | nil
+
+self が書き込み可能になるまでブロックし、書き込み可能になったら self を
+返します。
+
+timeout を指定した場合は、指定秒数経過するまでブロックし、タイムアウト
+した場合は nil を返します。
+
+@param timeout タイムアウトまでの秒数を指定します。
+
+@see [[m:IO#wait_readable]]
+#@end

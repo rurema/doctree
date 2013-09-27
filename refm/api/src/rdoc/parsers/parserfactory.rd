@@ -7,6 +7,13 @@ require rdoc/parser/simple
 #@else
 require rdoc/parsers/parse_simple
 #@end
+#@since 2.0.0
+require rdoc/parser/c
+require rdoc/parser/changelog
+require rdoc/parser/markdown
+require rdoc/parser/rd
+require rdoc/parser/ruby
+#@end
 
 rdoc で解析できるファイルの種類を追加するためのサブライブラリです。
 

@@ -271,7 +271,11 @@ options は以下が指定できます。
   出力の名前をnameにします(HTML を出力する場合には何の効果もありません)
 
 #@since 1.9.2
+#@since 2.0.0
+: --pipe, -p
+#@else
 : --pipe
+#@end
 
   標準入力を読み込んで HTML に変換し、標準出力に出力します。ファイルへ
   の出力は行わないため、--op などのオプションは無視されます。
@@ -341,6 +345,39 @@ options は以下が指定できます。
   指定しなかった場合は protected です。
 #@end
 
+#@since 2.0.0
+: --markup markup
+
+  マークアップのフォーマットを指定します。デフォルトは rdoc です。
+  markdown、rd、rdoc、tomdoc のいずれかから選択できます。
+
+: --root root
+
+  Root of the source tree documentation will be generated for.  Set this
+  when building documentation outside the source directory.  Default is
+  the current directory.
+
+: --page-dir dir
+
+  Directory where guides, your FAQ or other pages not associated with
+  a class live.  Set this when you don't store such files at your
+  project root. NOTE: Do not use the same file name in the page dir
+  and the root of your project
+
+: --copy-files path
+
+  path で指定したファイルかディレクトリを出力先のディレクトリにコピーし
+  ます。ディレクトリを指定した場合はディレクトリの内容全てをコピーしま
+  す。
+  このオプションは複数回指定する事ができます。
+
+: --write-options
+
+  カレントディレクトリの .rdoc_options ファイルに指定した設定を YAML 形
+  式で保存します。
+
+#@end
+
 #@since 1.9.1
 : --verbose
 
@@ -356,6 +393,32 @@ options は以下が指定できます。
   CVS のウェブフロントエンドへのリンクの URL を指定する。URL が '\%s'
   を含んでいれば、そこがファイル名が置きかえられます。'\%s' を含んで
   いなければ、ファイル名を指定した URL の後に付けたものを使います。
+
+#@since 2.0.0
+===[a:saved_options] オプションの保存
+
+.rdoc_options ファイルを gem に含める事で、rdoc のオプションを保存する
+事ができます。また、以下のように --write-options を指定するのが最も簡単
+です。
+
+  rdoc --markup tomdoc --write-options
+
+この場合、自動的に .rdoc_options ファイルが作成されて指定したオプション
+が保存されます。
+
+ただし、以下のオプションはユーザの指定するオプションや [[c:RDoc]] の通
+常の動作と干渉するため、保存する事ができません。
+
+ * --coverage-report
+ * --dry-run
+ * --encoding
+ * --force-update
+ * --format
+ * --pipe
+ * --quiet
+ * --template
+ * --verbose
+#@end
 
 ===[a:markup] Markup
 
@@ -691,6 +754,44 @@ label[url] の形式でもハイパーリンクが張れます。この場合は
   デフォルトではメソッドの引数や yield の引数をパースして出力しますが、
   これを指定した次の行から次の空行までをメソッド呼び出し列と解釈し、出
   力をそこに書かれたように変更します。
+
+#@since 2.0.0
+: :markup: type
+
+  現在のマークアップの指定を type で指定したフォーマットで上書きします。
+  ファイルの先頭で :markup: を記述した場合、ファイル全体に適用されます。
+
+//emlist{
+    # coding: UTF-8
+    # :markup: tomdoc
+
+    # tomdoc 形式のコメントを記述 ...
+    class MyClass
+      # ...
+//}
+
+  それ以外では適用が限定されます(以下の例では some_method のみ):
+
+//emlist{
+      # ...
+    end
+
+    # :markup: rdoc
+    #
+    # rdoc 形式のコメントを記述 ...
+    def some_method
+      # ...
+//}
+
+  ただし、異なるマークアップのフォーマット同士を変換するのでもない限
+  り、.rdoc_options ファイルでマークアップのフォーマットを指定してプロ
+  ジェクト全体を設定してください
+  ([[ref:lib:rdoc#saved_options]] 参照)。
+
+  マークアップの形式を追加したい場合は
+  [[url:http://docs.seattlerb.org/rdoc/DEVELOPERS_rdoc.html]] を参照し
+  てください。
+#@end
 
 #@since 1.9.1
 また、他にも Ruby スクリプト、Ruby から使用するために書かれた C 言語の
