@@ -88,7 +88,7 @@ IP のバージョンに依存しないプログラムを書くための標準�
 @raise SocketError [[man:getaddrinfo(3)]]がエラーを返したときに発生する例外です
 
 #@since 1.9.1
-@see [[m:Addrinfo#getaddrinfo]]
+@see [[m:Addrinfo.getaddrinfo]]
 #@end
 
 
