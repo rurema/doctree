@@ -1095,8 +1095,8 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
 @param obj [[m:Object#extend]] を行ったオブジェクト
 
   module Foo
-    def self.extended(mod)
-      p "#{mod} extend #{self}"
+    def self.extended(obj)
+      p "#{obj} extend #{self}"
     end
   end
 
