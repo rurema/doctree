@@ -6,6 +6,60 @@
 = class REXML::Validation::RelaxNG < Object
 include REXML::Validation::Validator
 
+RelaxNGに基づくXMLバリデータ。
+
+  require 'rexml/document'
+  require 'rexml/validation/relaxng'
+  
+  relaxng_schema = <<RELAXNG
+  <?xml version="1.0" encoding="UTF-8"?>
+  <element name="addressBook" xmlns="http://relaxng.org/ns/structure/1.0">
+    <zeroOrMore>
+      <element name="card">
+        <element name="name">
+          <text/>
+        </element>
+        <element name="email">
+          <text/>
+        </element>
+        <optional>
+          <element name="note">
+            <text/>
+          </element>
+        </optional>
+      </element>
+    </zeroOrMore>
+  <element>
+  RELAXNG
+  
+  xml = <<XML
+  <addressBook>
+    <card>
+      <name>John Smith</name>
+      <email>js@example.com</email>
+    </card>
+    <card>
+      <name>Fred Bloggs</name>
+      <email>fb@example.net</email>
+    </card>
+  </addressBook>
+  XML
+  
+  validator = REXML::Validation::RelaxNG.new(relaxng_schema)
+  parser = REXML::Parsers::TreeParser.new(xml)
+  parser.add_listener(validator)
+  parser.parse 
+  # ~> /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/validation.rb:22:in `validate': Validation error.  Expected: :start_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
+  # ~>    )
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/relaxng.rb:122:in `receive'
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:185:in `block (2 levels) in pull'
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in `each'
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in `block in pull'
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in `tap'
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in `pull'
+  # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/treeparser.rb:22:in `parse'
+  # ~> 	from -:41:in `<main>'
+
 == Class Methods
 
 --- new(source)
