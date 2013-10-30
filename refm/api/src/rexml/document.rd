@@ -27,6 +27,9 @@ context で「コンテキスト」を指定します。テキストノードの
 
 @param source XML文書(文字列, IO)もしくは REXML::Document オブジェクト
 @param context コンテキスト
+@raise REXML::ParseException XML文書のパースに失敗した場合に発生します
+@raise REXML::UndefinedNamespaceException XML文書のパース中に、定義されていない名前空間
+       が現れた場合に発生します
 
 --- parse_stream(source, listener) -> ()
 XML文書を source から読み込み、パースした結果を

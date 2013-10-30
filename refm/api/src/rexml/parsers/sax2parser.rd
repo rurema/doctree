@@ -268,6 +268,10 @@ start_prefix_mapping, end_prefix_mapping では、その名前空間が導入さ
 パースし、その結果によって [[m:REXML::Parsers::SAX2Parser#listen]] で
 指定したコールバックを呼び出します。
 
+@raise REXML::ParseException XML文書のパースに失敗した場合に発生します
+@raise REXML::UndefinedNamespaceException XML文書のパース中に、定義されていない名前空間
+       が現れた場合に発生します
+
 #@# #@since 1.8.6
 #@# --- source
 #@# #@todo

@@ -140,7 +140,6 @@ StreamParser で処理したときに、どのコールバックメソッドが�
 @param source 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
 @param listner コールバックオブジェクト
 
-
 == Instance Methods
 
 #@# #@since 1.8.2
@@ -152,3 +151,7 @@ StreamParser で処理したときに、どのコールバックメソッドが�
 入力をパースします。
 
 このメソッドの中からコールバックが呼び出されます。
+
+@raise REXML::ParseException XML文書のパースに失敗した場合に発生します
+@raise REXML::UndefinedNamespaceException XML文書のパース中に、定義されていない名前空間
+       が現れた場合に発生します
