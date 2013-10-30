@@ -1,4 +1,3 @@
-require forwardable
 #@#require rexml/parserexception
 #@#require rexml/parsers/baseparser
 #@#require rexml/xmltokens
