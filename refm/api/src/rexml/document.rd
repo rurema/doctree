@@ -1,4 +1,4 @@
-DOM スタイルの XML パーサ
+DOM スタイルの XML パーサ。
 
 [[m:REXML::Document.new]] で XML 文書から DOM ツリーを
 構築し、ツリーのノードの各メソッドで文書の内容にアクセスします。
@@ -30,14 +30,13 @@ DOM スタイルの XML パーサ
   </xbel>
   XML
   
-  bookmarks = []
-  REXML::XPath.each(doc, "/xbel/bookmark") do |bookmark|
+  bookmarks = REXML::XPath.match(doc, "/xbel/bookmark").map do |bookmark|
     href = bookmark.attribute("href").value
     title_element =  bookmark.elements["title"]
     title = title_element ? title_element.text : nil
     desc_element = bookmark.elements["desc"]
     desc = desc_element ? desc_element.text : nil
-    bookmarks << Bookmark.new(href, title, desc)
+    Bookmark.new(href, title, desc)
   end
   pp bookmarks    
   # >> [#<struct Bookmark

@@ -25,8 +25,8 @@ XML tree 上のノードを表すモジュール。
 
 @param indent このパラメータは deprecated で、無視されます
 
---- indent(to, ind)
-#@todo
+#@# --- indent(to, ind)
+#@# #@todo
 
 --- parent? -> bool
 子を持つノードであれば真を返します。

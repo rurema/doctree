@@ -7,7 +7,7 @@
 生成し、[[m:REXML::Parsers::UltraLightParser#parse]] でパースし
 その結果の木構造を返します。
 
-=== ノードの表現
+===[a:nodes] ノードの表現
 [[m:REXML::Parsers::UltraLightParser#parse]] が返す
 XML の各ノードは配列で表現されます。
 配列の最初の要素はシンボルでノードの種類を表わし、2番目以降の要素で
@@ -107,6 +107,9 @@ rewind してもう一度パースできる状態にします。
 
 --- parse -> Array
 XML 文書のパース結果を配列による木で返します。
+
+返される木構造配列については [[ref:lib:rexml/parsers/ultralightparser#nodes]] 
+を参照してください。
 
 @raise REXML::ParseException XML文書のパースに失敗した場合に発生します
 @raise REXML::UndefinedNamespaceException XML文書のパース中に、定義されていない名前空間

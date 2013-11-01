@@ -837,6 +837,7 @@ xpath を指定した場合には、その XPath 文字列に
 
 --- size -> Integer
 保持している要素の個数を返します。
+
   require 'rexml/document'
   doc = REXML::Document.new '<a>sean<b/>elliott<b/>russell<b/></a>'
   # doc.root は3つの要素と3つのテキストノードを持つため、6を返す
