@@ -1,14 +1,15 @@
-#@#require rexml/parsers/baseparaser
-#@#require rexml/parseexception
-#@#require rexml/namespace
-#@#require rexml/text
 
-= class REXML::Parsers::SAX2Parser < Object
+SAX2 と同等の API を持つストリーム式の XML パーサ。
 
-SAX2 と同等の API を持つストリーム式の XML パーサです。
+コールバックをパーサオブジェクトに [[m:REXML::Parsers::SAX2Parser#listen]] で
+設定してから [[m:REXML::Parsers::SAX2Parser#parse]] を呼び出すことで、
+パーサからコールバックが呼び出されます。
 
-[[c:REXML::Parsers::StreamParser]] のパーサよりは
-高機能です。
+コールバックには2種類あって、ブロックを使う方式と [[c:REXML::SAX2Listener]] 
+を include したクラスのオブジェクトを使う方式があります。詳しくは
+[[m:REXML::Parsers::SAX2Parser#listen]] を参照してください。
+
+[[c:REXML::Parsers::StreamParser]] のパーサよりは高機能です。
 
 ==== 例
 
@@ -142,6 +143,9 @@ SAX2 と同等の API を持つストリーム式の XML パーサです。
   # >> [:progress, 683]
   # >> [:end_document]
 
+= class REXML::Parsers::SAX2Parser < Object
+
+SAX2 と同等の API を持つストリーム式の XML パーサクラス。
 
 == Class Methods
 

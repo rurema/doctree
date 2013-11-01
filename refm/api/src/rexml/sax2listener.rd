@@ -1,4 +1,7 @@
 
+[[c:REXML::Parsers::SAX2Parser]] 
+で使われるコールバックオブジェクトのためのモジュール、
+[[c:REXML::SAX2Listener]] を定義しています。
 
 = module REXML::SAX2Listener
 

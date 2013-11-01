@@ -1,3 +1,8 @@
+
+[[c:REXML::Parsers::StreamParser]]  
+で使われるコールバックオブジェクトのためのモジュール、
+[[c:REXML::StreamListener]] を定義しています。
+
 = module REXML::StreamListener
 
 [[c:REXML::Parsers::StreamParser]]  

@@ -1,3 +1,62 @@
+DOM スタイルの XML パーサ
+
+[[m:REXML::Document.new]] で XML 文書から DOM ツリーを
+構築し、ツリーのノードの各メソッドで文書の内容にアクセスします。
+
+=== 例
+以下のプログラムではブックマークの XML からデータを取り出します。
+  require 'rexml/document'
+  require 'pp'
+  
+  Bookmark = Struct.new(:href, :title, :desc)
+  
+  doc = REXML::Document.new(<<XML)
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <xbel version="1.0">
+    <bookmark href="http://www.ruby-lang.org/ja/">
+      <title>オブジェクト指向スクリプト言語 Ruby</title>
+      <desc>Rubyの公式サイト</desc>
+    </bookmark>
+    <bookmark href="http://rurema.clear-code.com/">
+      <title>最速Rubyリファレンスマニュアル検索！ | るりまサーチ</title>
+      <desc>Rubyリファレンスマニュアルを全文検索できる。
+  とても便利。
+      </desc>
+    </bookmark>
+    <bookmark href="https://github.com/rurema/bitclust">
+      <title>rurema/bitclust · GitHub</title>
+    </bookmark>
+    <bookmark href="https://rubygems.org/gems/bitclust-core" />
+  </xbel>
+  XML
+  
+  bookmarks = []
+  REXML::XPath.each(doc, "/xbel/bookmark") do |bookmark|
+    href = bookmark.attribute("href").value
+    title_element =  bookmark.elements["title"]
+    title = title_element ? title_element.text : nil
+    desc_element = bookmark.elements["desc"]
+    desc = desc_element ? desc_element.text : nil
+    bookmarks << Bookmark.new(href, title, desc)
+  end
+  pp bookmarks    
+  # >> [#<struct Bookmark
+  # >>   href="http://www.ruby-lang.org/ja/",
+  # >>   title="オブジェクト指向スクリプト言語 Ruby",
+  # >>   desc="Rubyの公式サイト">,
+  # >>  #<struct Bookmark
+  # >>   href="http://rurema.clear-code.com/",
+  # >>   title="最速Rubyリファレンスマニュアル検索！ | るりまサーチ",
+  # >>   desc="Rubyリファレンスマニュアルを全文検索できる。\nとても便利。\n    ">,
+  # >>  #<struct Bookmark
+  # >>   href="https://github.com/rurema/bitclust",
+  # >>   title="rurema/bitclust · GitHub",
+  # >>   desc=nil>,
+  # >>  #<struct Bookmark
+  # >>   href="https://rubygems.org/gems/bitclust-core",
+  # >>   title=nil,
+  # >>   desc=nil>]
+
 = class REXML::Document < REXML::Element
 
 XMLの完全な文書(ドキュメント)を表すクラス。
@@ -250,5 +309,36 @@ REXML は明示しない限り(つまりXML宣言を [[m:REXML::Document#add]] �
 代わりに使ってください。
 
 デフォルトとして使えるXML宣言オブジェクト。
+
+
+#@include(attlistdecl.rd)
+#@include(attribute.rd)
+#@include(cdata.rd)
+#@include(child.rd)
+#@include(comment.rd)
+#@include(doctype.rd)
+#@include(element.rd)
+#@include(encoding.rd)
+#@include(entity.rd)
+#@include(formatters/default.rd)
+#@include(formatters/pretty.rd)
+#@include(formatters/transitive.rd)
+#@include(instruction.rd)
+#@include(namespace.rd)
+#@include(node.rd)
+#@include(parent.rd)
+#@include(parsers/baseparser.rd)
+#@include(parsers/treeparser.rd)
+#@include(security.rd)
+#@include(text.rd)
+#@include(xmldecl.rd)
+#@include(xpath.rd)
+
+#@# internal files
+#@include(functions.rd)
+#@include(output.rd)
+#@include(xmltokens.rd)
+#@include(parsers/xpathparser.rd)
+#@include(source.rd)
 
 

@@ -1,8 +1,11 @@
 #@#require rexml/parsers/streamparser
 #@#require rexml/parsers/baseparser
 
-= class REXML::Parsers::UltraLightParser < Object
-パース結果を配列で作られた木構造により返すパーサです。
+パース結果を配列で作られた木構造により返すパーサ。
+
+[[m:REXML::Parsers::UltraLightParser.new]] でパーサオブジェクトを
+生成し、[[m:REXML::Parsers::UltraLightParser#parse]] でパースし
+その結果の木構造を返します。
 
 === ノードの表現
 [[m:REXML::Parsers::UltraLightParser#parse]] が返す
@@ -80,6 +83,9 @@ Ruby 2.1.0 以前に添付されている rexml の UltraLightParser は
 doctype の処理にバグがあります。そのため doctype を持つ XML 文書には
 使わないでください。
 #@end
+
+= class REXML::Parsers::UltraLightParser < Object
+パース結果を配列で作られた木構造により返すパーサクラス。
 
 == Class Methods
 

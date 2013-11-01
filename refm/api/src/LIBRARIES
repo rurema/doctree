@@ -387,6 +387,13 @@ resolv-replace
 resolv
 #@since 1.8.0
 rexml
+rexml/document
+rexml/parsers/pullparser
+rexml/parsers/streamparser
+rexml/streamlistener
+rexml/parsers/sax2parser
+rexml/sax2listener
+rexml/parsers/ultralightparser
 #@end
 #@since 1.8.1
 rinda/rinda

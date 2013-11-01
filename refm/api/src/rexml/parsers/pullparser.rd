@@ -1,12 +1,5 @@
-#@#require rexml/parserexception
-#@#require rexml/parsers/baseparser
-#@#require rexml/xmltokens
 
-= class REXML::Parsers::PullParser < Object
-extend Forwardable
-include REXML::XMLTokens
-
-プル方式の XML パーサクラス。
+プル方式の XML パーサ。
 
 [[c:REXML::Parsers::StreamParser]] はパースした結果をコールバックによって
 受動的に受け取りますが、このパーサは [[m:REXML::Parsers::PullParser#pull]] 
@@ -112,6 +105,12 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
   # >> text: [" &bar;\n", " barbarbarbar\n"]
   # >> end_element: ["root"]
   # >> text: ["\n", "\n"]
+
+= class REXML::Parsers::PullParser < Object
+extend Forwardable
+include REXML::XMLTokens
+
+プル方式の XML パーサクラス。
     
 == Class Methods
 
