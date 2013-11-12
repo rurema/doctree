@@ -47,6 +47,39 @@ options では [[m:String#encode]] でのハッシュオプションに加えて
   Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
   Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
 
+--- search_convpath(source_encoding, destination_encoding, options) -> Array
+引数で指定した文字エンコーディングの変換の経路を配列にして返します。
+
+@param source_encoding 変換元の文字エンコーディングを [[c:Encoding]] オ
+                       ブジェクトか文字列で指定します。
+
+@param destination_encoding 変換先の文字エンコーディングを
+                            [[c:Encoding]] オブジェクトか文字列で指定し
+                            ます。
+
+@param options 変換の詳細を指定する定数やハッシュを指定します。
+               [[m:Encoding::Converter.new]] と同じオプションが指定でき
+               ます。
+
+  p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP")
+  # => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
+  #     [#<Encoding:UTF-8>, #<Encoding:EUC-JP>]]
+
+  p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP", universal_newline: true)
+  or
+  p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP", newline: :universal)
+  # => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
+  #     [#<Encoding:UTF-8>, #<Encoding:EUC-JP>],
+  #     "universal_newline"]
+
+  p Encoding::Converter.search_convpath("ISO-8859-1", "UTF-32BE", universal_newline: true)
+  or
+  p Encoding::Converter.search_convpath("ISO-8859-1", "UTF-32BE", newline: :universal)
+  # => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
+  #     "universal_newline",
+  #     [#<Encoding:UTF-8>, #<Encoding:UTF-32BE>]]
+
+@see [[m:Encoding::Converter#convpath]], [[m:Encoding::Converter.new]]
 
 == Instance Methods
 --- inspect -> String
@@ -74,6 +107,8 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
   #=> [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
   #    [#<Encoding:UTF-8>, #<Encoding:EUC-JP>],
   #    "crlf_newline"]
+
+@see [[m:Encoding::Converter.search_convpath]]
 
 --- replacement -> String
 変換器に設定されている置換文字を返します。
