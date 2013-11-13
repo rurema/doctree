@@ -351,17 +351,30 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 #@end
 
 #@since 1.8.0
---- getlocal     -> Time
+--- getlocal             -> Time
+#@since 1.9.2
+--- getlocal(utc_offset) -> Time
+#@end
 
 タイムゾーンを地方時に設定した Time オブジェクトを新しく生成
 して返します。
 
-  t = Time.gm(2000,1,1,20,15,1)   #=> Sat Jan 01 20:15:01 UTC 2000
-  t.gmt?                          #=> true
-  l = t.getlocal                  #=> Sat Jan 01 14:15:01 CST 2000
-  l.gmt?                          #=> false
-  t == l                          #=> true
+#@since 1.9.2
+@param utc_offset タイムゾーンを地方時に設定する代わりに協定世界時との
+                  時差を、秒を単位とする整数か、"+HH:MM" "-HH:MM" 形式
+                  の文字列で指定します。
+#@end
 
+  t = Time.utc(2000,1,1,20,15,1)  #=> Sat Jan 01 20:15:01 UTC 2000
+  t.utc?                          #=> true
+  l = t.getlocal                  #=> Sat Jan 01 14:15:01 CST 2000
+  l.utc?                          #=> false
+  t == l                          #=> true
+#@since 1.9.2
+  j = t.getlocal("+09:00")        #=> 2000-01-02 05:15:01 +0900
+  j.utc?                          #=> false
+  t == j                          #=> true
+#@end
 #@end
 
 --- gmtime    -> self
@@ -383,11 +396,20 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   t.gmtime       #=> Wed Apr 09 13:56:03 UTC 2003
   t.gmt?         #=> true
 
---- localtime     -> self
+--- localtime             -> self
+#@since 1.9.2
+--- localtime(utc_offset) -> self
+#@end
 
 タイムゾーンを地方時に設定します。
 
 このメソッドを呼び出した後は時刻変換を協定地方時として行ないます。
+
+#@since 1.9.2
+@param utc_offset タイムゾーンを地方時に設定する代わりに協定世界時との
+                  時差を、秒を単位とする整数か、"+HH:MM" "-HH:MM" 形式
+                  の文字列で指定します。
+#@end
 
 [[m:Time#localtime]], [[m:Time#gmtime]] の挙動はシステムの
 [[man:localtime(3)]] の挙動に依存します。Time クラ
@@ -396,10 +418,14 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 なる場合があります。システムを越えて Time オブジェクトを受け
 渡す場合には注意する必要があります。
 
-  t = Time.gm(2000, "jan", 1, 20, 15, 1)
-  t.gmt?        #=> true
-  t.localtime   #=> Sat Jan 01 14:15:01 CST 2000
-  t.gmt?        #=> false
+  t = Time.utc(2000, "jan", 1, 20, 15, 1)
+  t.utc?                #=> true
+  t.localtime           #=> 2000-01-01 14:15:01 -0600
+  t.utc?                #=> false
+#@since 1.9.2
+  t.localtime("+09:00") #=> 2000-01-02 05:15:01 +0900
+  t.utc?                #=> false
+#@end
 
 --- strftime(format)    -> String
 
