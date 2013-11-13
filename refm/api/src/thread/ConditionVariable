@@ -147,10 +147,21 @@
 @return 状態を待っているスレッドがあった場合は、そのスレッドを返します。
         そうでなければ nil を返します。
 
+#@since 1.9.2
+--- wait(mutex, timeout = nil) -> self
+#@else
 --- wait(mutex) -> self
+#@end
 
 mutex のロックを解放し、カレントスレッドを停止します。
 [[m:ConditionVariable#signal]]または、
 [[m:ConditionVariable#broadcast]]で送られたシグナルを
 受け取ると、mutexのロックを取得し、実行状態となります。
 
+@param mutex [[c:Mutex]] オブジェクトを指定します。
+
+#@since 1.9.2
+@param timeout スリープする秒数を指定します。この場合はシグナルを受け取
+               らなかった場合でも指定した秒数が経過するとスリープを終了
+               します。省略するとスリープし続けます。
+#@end
