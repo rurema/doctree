@@ -1416,6 +1416,14 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 オブジェクトが メソッド name を持つというのは、
 オブジェクトが メソッド name に応答することができることをいいます。
 
+#@since 1.9.2
+Windows での [[m:Process.fork]] や GNU/Linux での [[m:File.lchmod]] の
+ような [[c:NotImplementedError]] が発生する場合は false を返します。
+
+メソッドが定義されていない場合は、[[m:Object#respond_to_missing?]] を呼
+び出してその結果を返します。
+#@end
+
 @param name [[c:Symbol]] または文字列で指定するメソッド名です。
 
 #@since 2.0.0
