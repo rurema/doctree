@@ -1117,7 +1117,7 @@ join した文字列を連結します。
     ary = [1,2,3]
     ary.push ary
     p ary           # => [1, 2, 3, [...]]
-    p ary.join      # => ArgumentError
+    p ary.join      # => ArgumentError: recursive array join
 #@else
     ary = [1,2,3]
     ary.push ary
