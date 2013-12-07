@@ -252,7 +252,7 @@ Proc.yield の実体。
 
 --- int rb_block_given_p(void)
 
-メソッドがブロック付きで呼ばれていれば Qtrue を返します。
+メソッドがブロック付きで呼ばれていれば true を返します。
 
 --- static VALUE rb_call(VALUE klass, VALUE recv, ID mid, int argc, const VALUE *argv, int scope)
 
