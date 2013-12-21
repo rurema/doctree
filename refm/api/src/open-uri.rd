@@ -121,12 +121,20 @@ URI である文字列 name のリソースを取得して [[c:StringIO]] オブ
   OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
 
 options には [[c:Hash]] を与えます。理解するハッシュの
-キーは以下の4つのシンボル、
+キーは以下のシンボル、
  * :proxy
  * :progress_proc
  * :content_length_proc
  * :http_basic_authentication 
-です。HTTP でのみ意味があります。
+#@since 1.9.1
+ * :proxy_http_basic_authentication
+ * :read_timeout
+ * :ssl_ca_cert
+ * :ssl_verify_mode
+ * :ftp_active_mode
+ * :redirect
+#@end
+です。
 「:content_length_proc」と「:progress_proc」はプログレスバーに
 利用されることを想定しています。
 
@@ -136,11 +144,13 @@ options には [[c:Hash]] を与えます。理解するハッシュの
                            :http_basic_authentication => [usrname, password] })
 
 : :proxy
+ プロクシの設定をします。
  値には以下のいずれかを与えます。
 //emlist{
    文字列:           "http://proxy.foo.com:8000/" のようなプロクシの URI。
    URI オブジェクト: URI.parse("http://proxy.foo.com:8000/") のようなプロクシの URI オブジェクト。
-   true:             Proxy を環境変数などから見つけようとする。
+   true:             Proxy を環境変数などから見つけようとする。使う環境変数は schema に応じて
+                     http_proxy, https_proxy, ftp_proxy が使われる。
    false:            Proxy を用いない。
    nil:              Proxy を用いない。
 //}
@@ -158,6 +168,57 @@ options には [[c:Hash]] を与えます。理解するハッシュの
  値にはブロックを与えます。ブロックは対象となる URI からデータの
  断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
  利用されません。
+
+#@since 1.9.1
+: :proxy_http_basic_authentication
+ パスワード付きプロクシの設定を与えます。
+ 設定には3要素の配列を渡します。
+ 最初の要素はプロクシのURIで、文字列かURIオブジェクトを指定します。
+ 2番目にはプロクシのユーザ名、3番目にはプロクシのパスワードを指定します。
+
+ :proxy と :proxy_http_basic_authentication を同時に指定すると
+ [[c:ArgumentError]] が発生します。
+
+ 使い方:
+//emlist{
+   :proxy_http_basic_authentication =>
+     ["http://proxy.foo.com:8000/", "proxy-user", "proxy-password"]
+   :proxy_http_basic_authentication =>
+     [URI.parse("http://proxy.foo.com:8000/"), "proxy-user", "proxy-password"]
+//}
+
+: :read_timeout
+ http コネクションのタイムアウト秒数を指定します。nil でタイムアウトなしを
+ 指定できます。
+
+: :ssl_ca_cert
+ SSL の CA 証明書を指定します。これを指定した場合は OpenSSL がデフォルトで使う
+ CA 証明書は使われません。
+
+ 証明書のファイル名、証明書のディレクトリ名を指定できます。
+ 詳しくは
+ [[m:OpenSSL::X509::Store#add_file]]、
+ [[m:OpenSSL::X509::Store#add_path]]
+ を参照してください。デフォルトの証明書については
+ [[m:OpenSSL::X509::Store#set_default_paths]]
+ を参照してください。
+
+: :ssl_verify_mode
+ SSL の証明書の検証のモードを指定します。
+ 詳しくは [[m:OpenSSL::SSL::SSLContext#verify_mode=]] を参照してください。
+
+: :ftp_active_mode
+ ftp を active mode で使うかどうかを指定します。
+ デフォルトは false (passive mode) です。
+
+: :redirect
+ HTTP でサーバがリダイレクトを指示してきたとき、
+ 対応するかどうかを指定します。
+ デフォルトは true (リダイレクトする) です。
+
+ HTTP と FTP の間のリダイレクトもこれで指定します。
+
+#@end
 
 @param name オープンしたいリソースを文字列で与えます。
 
