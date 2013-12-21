@@ -388,7 +388,7 @@ nil を設定するとデフォルトのコールバック(単に第一引数を
 デフォルトは nil で、VERIFY_NONE を意味します。
 
 @param mode 設定するモード(整数値)
-@see [[m:OpenSSL::SSL::SSLContext#verify_mode=]]
+@see [[m:OpenSSL::SSL::SSLContext#verify_mode]]
 
 #@since 1.8.3
 --- tmp_dh_callback -> Proc | nil
