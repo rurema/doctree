@@ -21,8 +21,8 @@ matrix                          ohai            done
 psych                           ohai            done
 racc/parser
 rexml                           ohai            done
-rinda/rinda                     
-rinda/tuplespace                
+rinda/rinda                     ohai
+rinda/tuplespace                ohai
 rss
 syck
 win32/registry
