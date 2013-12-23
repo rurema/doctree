@@ -842,7 +842,7 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 そうでなければ偽を返します。
 
    %w{ant bear cat}.one? {|word| word.length == 4}   #=> true
-   %w{ant bear cat}.one? {|word| word.length >= 4}   #=> false
+   %w{ant bear cat}.one? {|word| word.length > 4}   #=> false
    [ nil, true, 99 ].one?                            #=> false
    [ nil, true, false ].one?                         #=> true
 
