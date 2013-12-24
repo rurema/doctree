@@ -34,3 +34,71 @@ eval(expr, self, fname, lineno) とするのと同じです。
 @see [[m:Kernel.#eval]]
 
 #@end
+
+#@since 2.1.0
+--- local_variable_get(symbol) -> object
+
+引数 symbol で指定した名前のローカル変数に設定された値を返します。
+
+@param symbol ローカル変数名を [[c:Symbol]] オブジェクトで指定します。
+
+@raise NameError 引数 symbol で指定したローカル変数が未定義の場合に発生します。
+
+    def foo
+      a = 1
+      binding.local_variable_get(:a) # => 1
+      binding.local_variable_get(:b) # => NameError
+    end
+
+このメソッドは以下のコードの短縮形です。
+
+    binding.eval("#{symbol}")
+
+@see [[m:Binding#local_variable_set]], [[m:Binding#local_variable_defined?]]
+
+--- local_variable_set(symbol, obj)
+
+引数 symbol で指定した名前のローカル変数に引数 obj を設定します。
+
+@param symbol ローカル変数名を [[c:Symbol]] オブジェクトで指定します。
+
+@param obj 引数 symbol で指定したローカル変数に設定するオブジェクトを指定します。
+
+    def foo
+      a = 1
+      b = binding
+      b.local_variable_set(:a, 2) # set existing local variable `a'
+      b.local_variable_set(:b, 3) # create new local variable `b'
+                                  # `b' exists only in binding.
+      b.local_variable_get(:a) # => 2
+      b.local_variable_get(:b) # => 3
+      p a # => 2
+      p b # => NameError
+    end
+
+このメソッドは以下のコード(ただし、obj が Ruby のコードで出力される場
+合)と同様の動作をします。
+
+  binding.eval("#{symbol} = #{obj}")
+
+@see [[m:Binding#local_variable_get]], [[m:Binding#local_variable_defined?]]
+
+--- local_variable_defined?(symbol) -> bool
+
+引数 symbol で指定した名前のローカル変数が定義されている場合に true を、
+そうでない場合に false を返します。
+
+@param symbol ローカル変数名を [[c:Symbol]] オブジェクトで指定します。
+
+    def foo
+      a = 1
+      binding.local_variable_defined?(:a) # => true
+      binding.local_variable_defined?(:b) # => false
+    end
+
+このメソッドは以下のコードの短縮形です。
+
+    binding.eval("defined?(#{symbol}) == 'local-variable'")
+
+@see [[m:Binding#local_variable_get]], [[m:Binding#local_variable_set]]
+#@end
