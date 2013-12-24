@@ -1595,6 +1595,16 @@ self をそのまま返します。
   [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
 #@end
 
+#@since 2.1.0
+--- to_h -> Hash
+
+self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
+返します。ペアにならない要素は無視されます。
+
+   [[:foo, :bar], [1, 2]].to_h
+     # => {:foo => :bar, 1 => 2}
+#@end
+
 #@since 1.8.0
 --- transpose    -> Array
 

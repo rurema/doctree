@@ -483,6 +483,18 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 
 @param args each の呼び出し時に引数として渡されます。
 
+#@since 2.1.0
+--- to_h(*args) -> Hash
+
+self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
+返します。ペアにならない要素は無視されます。
+
+@param args each の呼び出し時に引数として渡されます。
+
+   %i[hello world].each_with_index.to_h
+     # => {:hello => 0, :world => 1}
+#@end
+
 #@since 1.8.0
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
