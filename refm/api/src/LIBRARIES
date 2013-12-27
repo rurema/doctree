@@ -44,7 +44,9 @@ coverage
 #@since 1.8.0
 csv
 #@end
+#@until 2.1.0
 curses
+#@end
 date
 #@until 1.9.1
 date2
