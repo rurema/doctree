@@ -685,6 +685,35 @@ Errno::EXXX が発生せず -1 が返ってきます。
 
 #@end
 
+#@since 2.1.0
+--- argv0 -> String
+
+現在実行中の Ruby スクリプトの名前を表す文字列です。[[m:$0]] を更新して
+も本メソッドの戻り値への影響はありません。
+
+本メソッドは 2.1 以降でグローバル変数を用いないで現在実行中の Ruby スク
+リプトの名前を表す文字列を取得する手段として提供されました。
+
+@see [[m:Process.#setproctitle]], [[m:$0]]
+
+--- setproctitle(title) -> String
+
+[[man:ps(1)]] が出力する現在実行中の Ruby スクリプトの名前を引数 title
+で指定した文字列に変更します。
+
+OS によっては何も行われません。また、処理結果に関係なく例外は発生しませ
+ん。サポートされる OS ではない場合であっても [[c:NotImplementedError]]
+が発生する事はありません。本メソッドを実行しても [[m:$0]] への影響はあ
+りません。
+
+   Process.setproctitle('myapp: worker #%d' % worker_id)
+
+本メソッドは 2.1 以降でグローバル変数を用いないで現在実行中の Ruby スク
+リプトの名前を表す文字列を取得する手段として提供されました。
+
+@see [[m:Process.#argv0]], [[m:$0]]
+#@end
+
 == Constants
 
 --- PRIO_PROCESS -> Fixnum
