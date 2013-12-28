@@ -108,4 +108,12 @@ message と backtrace が == メソッドで比較して
 #@#:
 #@#: #@end
 
+#@since 2.1.0
+--- cause -> Exception | nil
+
+self の前の例外(self が rescue 節や ensure 節の中で発生した例外の場合、
+その前に発生していた元々の例外)を返します。存在しない場合は nil を返し
+ます。
+#@end
+
 #@end
