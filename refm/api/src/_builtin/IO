@@ -1502,7 +1502,7 @@ offset 位置への移動が成功すれば 0 を返します。
   * IO::SEEK_CUR: 現在のファイルポインタから
   * IO::SEEK_END: ファイルの末尾から
 #@since 2.1.0
-  * IO::SEEK_DATA: offset 以降の次にデータがある位置へ(leek の man ページ参照。Linux 3.1 以降のみ)
+  * IO::SEEK_DATA: offset 以降の次にデータがある位置へ(lseek の man ページ参照。Linux 3.1 以降のみ)
   * IO::SEEK_HOLE: offset 以降の次にホールがある位置へ(同上)
 #@end
 
@@ -1618,7 +1618,7 @@ outbuf は空文字列になります。
   * IO::SEEK_CUR: 現在のファイルポインタから
   * IO::SEEK_END: ファイルの末尾から
 #@since 2.1.0
-  * IO::SEEK_DATA: offset 以降の次にデータがある位置へ(leek の man ページ参照。Linux 3.1 以降のみ)
+  * IO::SEEK_DATA: offset 以降の次にデータがある位置へ(lseek の man ページ参照。Linux 3.1 以降のみ)
   * IO::SEEK_HOLE: offset 以降の次にホールがある位置へ(同上)
 #@end
 
