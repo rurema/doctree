@@ -487,7 +487,7 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 --- to_h(*args) -> Hash
 
 self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
-返します。ペアにならない要素は無視されます。
+返します。
 
 @param args each の呼び出し時に引数として渡されます。
 
