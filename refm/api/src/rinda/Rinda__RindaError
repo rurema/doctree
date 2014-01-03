@@ -1,5 +1,6 @@
 
 = class Rinda::RindaError < RuntimeError
 
-Rinda error base class
+rinda ライブラリの基底例外クラス
+
 
