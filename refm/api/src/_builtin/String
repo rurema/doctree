@@ -964,7 +964,7 @@ self の長さが width より長い時には元の文字列の複製を返し�
 
 @param width      返り値の文字列の最小の長さ
 #@since 1.8.0
-@param padding    長さが width になるまで self の右側に詰める文字
+@param padding    長さが width になるまで self の左側に詰める文字
 #@end
 
 例:
