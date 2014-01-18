@@ -3,67 +3,136 @@
 include MonitorMixin
 include DRb::DRbUndumped
 
-Tuple Space のためのクラスです。
-普通は [[c:Rinda::TupleSpaceProxy]] を介して使います。
+Tuple Space を表すクラスです。
+
+このクラスのインスタンスを
+[[lib:drb]] を経由して公開することで
+タプルスペースを他のプロセスからアクセスさせることができるようになります。
+
+タプルスペースを drb 経由で利用する側は 
+[[m:DRb::DRbObject.new_with_uri]] などでこのオブジェクトのリモートオブジェクトを
+取得し、[[c:Rinda::TupleSpaceProxy]] をかぶせることで利用します。
 
 == Class Methods
 
---- new(period = 60)
-#@todo
+--- new(period = 60) -> Rinda::TupleSpace
 
 [[c:Rinda::TupleSpace]] オブジェクトを生成します。
 
+period で掃除用スレッドが動く周期を指定します。
+このスレッドでは cancel されたタプルや expire(期限切れ、タイムアウト) された
+タプルをタプルスペース内から取り除きます。
+
+@param period cancel/expireされたタプルを取り除く周期を秒で指定します
+
 == Instance Methods
 
---- move(port, tuple, sec = nil)
-#@todo
+#@# --- move(port, tuple, sec = nil)
+#@# #@todo
+#@# 
+#@# Moves +tuple+ to +port+.
+#@# 
+#@# タプルを「安全に」移動させるメソッド、基本的に内部的にのみ使われる
 
-Moves +tuple+ to +port+.
+--- notify(event, pattern, sec = nil) -> Rinda::NotifyTemplateEntry
+event で指定した種類のイベントの監視を開始します。
 
---- notify(event, tuple, sec = nil)
-#@todo
+イベントを生じさせたタプルがpattern にマッチした場合にのみ報告されます。
 
-Registers for notifications of +event+. Returns a
-NotifyTemplateEntry. See NotifyTemplateEntry for examples of how to
-listen for notifications.
+イベントが生じた場合、
+このメソッドの返り値の [[c:Rinda::NotifyTemplateEntry]] を経由し、
+[[m:Rinda::NotifyTemplateEntry#each]] を用いて報告を受け取ります。
 
-+event+ can be:
+sec で監視期間を秒数で指定できます。 nil で無限に監視し続けます。
 
-'write':  A tuple was added
+event として以下の3つを指定できます。
+  * 'write' : タプルが追加された
+  * 'take' : タプルが take された
+  * 'delete' : タプルが有効期限切れや上書きされたなどでタプルスペースから削除された
+これで指定したイベントに加えて、
+有効期限切れによって監視が終了した場合には 'close' イベントが報告されます。
 
-'take':   A tuple was taken or moved
+pattern で指定できるパターンについては [[ref:lib:rinda/rinda#tuplepattern]] を
+参照してください。
 
-'delete': A tuple was lost after being overwritten or expiring
+@param event 監視対象のイベント(文字列)
+@param pattern 監視対象となるタプルのパターン
+@param sec 監視期間の長さ(秒数)
 
-The TupleSpace will also notify you of the 'close' event when the
-NotifyTemplateEntry has expired.
+--- read(tuple, sec=nil) -> [Array|Hash]
+#@# --- read(tuple, sec=nil){|template| ... } -> [Array|Hash]
+タプルスペース内の tuple にマッチするタプルを一つコピーして返します。
 
+このメソッド呼び出しが終了しても、タプルスペースからタプルは取り除かれません。
 
---- read(tuple, sec=nil)
-#@todo
+tuple で指定できるパターンについては [[ref:lib:rinda/rinda#tuplepattern]] を
+参照してください。
 
-Reads +tuple+, but does not remove it.
-
---- read_all(tuple)
-#@todo
-
-Returns all tuples matching +tuple+. Does not remove the found
-tuples.
-
-
---- take(tuple, sec = nil)
---- take(tuple, sec = nil) {|template| ... }
-#@todo
-
-tuple にマッチするタプルをタプルスペースから取り出して返します。
 マッチするタプルが存在しない場合は、マッチするタプルがタプルスペースに
 投入されるまで待ちます。
 
+sec でタイムアウト秒数を指定できます。
+待ち時間が sec 秒を過ぎた時には read をあきらめ
+例外 [[c:Rinda::RequestExpiredError]] を発生させます。
+sec に nil を指定するとタイムアウトせずに無限に待ち続けます。
+
+@param tuple タプルのパターン
+@param sec タイムアウト秒数
+@raise Rinda::RequestExpiredError read がタイムアウトした場合に発生します
+@raise Ridna::RequestCanceledError read が何らかの理由でキャンセルされた場合に発生します。
+
+--- read_all(tuple) -> [Array|Hash]
+タプルスペース内の tuple にマッチするタプルをすべてコピーして返します。
+
+このメソッド呼び出しが終了しても、タプルスペースからタプルは取り除かれません。
+
+tuple で指定できるパターンについては [[ref:lib:rinda/rinda#tuplepattern]] を
+参照してください。
+
+マッチするタプルが存在しない場合は、待たずに空の配列を返します。
+
+このメソッドは主にデバッグのための利用を想定しています。
+
+@param tuple タプルのパターン
+
+--- take(tuple, sec = nil) -> Array | Hash
+#@# --- take(tuple, sec = nil) {|template| ... } -> Array
+#@# ブロック版は普通使わない。デバッグ用？
+
+tuple にマッチするタプルをタプルスペースから取り出して返します。
+
+tuple で指定できるパターンについては [[ref:lib:rinda/rinda#tuplepattern]] を
+参照してください。
+
+マッチするタプルが存在しない場合は、マッチするタプルがタプルスペースに
+投入されるまで待ちます。
+
+sec でタイムアウト秒数を指定できます。
 待ち時間が sec 秒を過ぎた時には take をあきらめ
-例外 [[c:Rinda::RequestExpiredError]] を投げます。
+例外 [[c:Rinda::RequestExpiredError]] を発生させます。
+sec に nil を指定するとタイムアウトせずに無限に待ち続けます。
 
---- write(tuple, sec = nil)
-#@todo
+@param tuple タプルのパターン
+@param sec タイムアウト秒数
+@raise Rinda::RequestExpiredError take がタイムアウトした場合に発生します
+@raise Ridna::RequestCanceledError take が何らかの理由でキャンセルされた場合に発生します。
 
-[[c:Rinda::Tuple]] オブジェクト tuple をタプルスペースに加えます。
+--- write(tuple, sec = nil) -> Rinda::TupleEntry
+
+tuple をタプルスペースに加えます。
 tuple を管理するための [[c:Rinda::TupleEntry]] オブジェクトを返します。
+
+sec で追加したタプルの有効期限を指定できます。
+追加されてから sec 秒過ぎたタプルはタプルスペースから削除されます。
+nil は無限を意味し、この場合にはタプルは経過時間によっては削除されません。
+
+返り値の [[c:Rinda::TupleEntry]] オブジェクトを使ってタプルを明示的に
+キャンセルしたり有効期限を変更したりできます。ただし、利用にはGCなどに
+気を付ける必要があります。
+詳しくは[[c:Rinda::TupleEntry]] のエントリーを見てください。
+
+
+@param tuple 追加する tuple (配列かHash)
+@param sec 有効期限(秒数)
+
+@return tuple 管理用の [[c:Rinda::TupleEntry]] オブジェクト
