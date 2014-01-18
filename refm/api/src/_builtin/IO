@@ -1493,10 +1493,18 @@ offset 位置への移動が成功すれば 0 を返します。
 @param offset ファイルポインタを移動させるオフセットを整数で指定します。
 
 @param whence 値は以下のいずれかです。
+#@since 2.1.0
+              それぞれ代わりに :SET、:CUR、:END、:DATA、:HOLE を指定す
+              る事も可能です。
+#@end
 
   * IO::SEEK_SET: ファイルの先頭から (デフォルト)
   * IO::SEEK_CUR: 現在のファイルポインタから
   * IO::SEEK_END: ファイルの末尾から
+#@since 2.1.0
+  * IO::SEEK_DATA: offset 以降の次にデータがある位置へ(lseek の man ページ参照。Linux 3.1 以降のみ)
+  * IO::SEEK_HOLE: offset 以降の次にホールがある位置へ(同上)
+#@end
 
 @raise Errno::EXXX ファイルポインタの移動に失敗した場合に発生します。
 
@@ -1601,10 +1609,18 @@ outbuf は空文字列になります。
 @param offset ファイルポインタを移動させるオフセットを整数で指定します。
 
 @param whence 値は以下のいずれかです。
+#@since 2.1.0
+              それぞれ代わりに :SET、:CUR、:END、:DATA、:HOLE を指定す
+              る事も可能です。
+#@end
 
   * IO::SEEK_SET: ファイルの先頭から (デフォルト)
   * IO::SEEK_CUR: 現在のファイルポインタから
   * IO::SEEK_END: ファイルの末尾から
+#@since 2.1.0
+  * IO::SEEK_DATA: offset 以降の次にデータがある位置へ(lseek の man ページ参照。Linux 3.1 以降のみ)
+  * IO::SEEK_HOLE: offset 以降の次にホールがある位置へ(同上)
+#@end
 
 @raise IOError 読み込み用にバッファリングされた IO に対して実行すると発生します。
                既に close されていた場合にも発生します。 
@@ -2068,3 +2084,17 @@ posix_fadvise をサポートしていないプラットフォーム上では
 --- SEEK_SET -> Fixnum
 
 [[m:IO#seek]] を参照してください。
+
+#@since 2.1.0
+--- SEEK_DATA -> Fixnum
+
+[[m:IO#seek]] を参照してください。
+
+Linux 3.1 以降で利用可能です。
+
+--- SEEK_HOLE -> Fixnum
+
+[[m:IO#seek]] を参照してください。
+
+Linux 3.1 以降で利用可能です。
+#@end

@@ -70,6 +70,13 @@ Ruby curses の操作によっては、
 
 セーフレベル ($SAFE) が 4 の場合、いくつかの操作で例外 SecurityError を発生します。
 
+=== 注意
+
+このライブラリは 2.1.0 で gem ライブラリとして切り離されました。2.1.0
+以降ではそちらを利用してください。
+
+  * [[url:https://rubygems.org/gems/curses]]
+
 = module Curses
 
 Curses モジュールや [[c:Curses::Window]] クラスは、curses ライブラリを利用して、
