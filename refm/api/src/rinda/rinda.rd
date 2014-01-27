@@ -146,7 +146,7 @@ rindac.rb からのクエリを複数の rindas.rb が分散して処理しま�
     p [ans[2], ans[3]]
   end
 
-この例は ruby の配布物の sample/drb/rinda_{ts,s,c}.rb と同じものです。
+この例は ruby の配布物の sample/drb/rinda{_ts,s,c}.rb と同じものです。
 
 = module Rinda
 [[lib:rinda/rinda]] および [[lib:rinda/tuplespace]] の名前空間を提供する
