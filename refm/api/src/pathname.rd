@@ -678,6 +678,12 @@ IO.write(self.to_s, *args)と同じです。
 
 @see [[m:IO.write]]
 
+--- binwrite(string, offset=nil) -> Integer
+
+IO.binwrite(self.to_s, *args)と同じです。
+
+@see [[m:IO.binwrite]]
+
 #@end
 
 --- writable? -> bool
