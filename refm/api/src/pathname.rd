@@ -670,6 +670,16 @@ FileTest.world_writable?(self.to_s) と同じです。
 
 #@end
 
+#@since 2.1.0
+
+--- write(string, offset=nil, opt={}) -> Integer
+
+IO.write(self.to_s, *args)と同じです。
+
+@see [[m:IO.write]]
+
+#@end
+
 --- writable? -> bool
 FileTest.writable?(self.to_s) と同じです。
 
