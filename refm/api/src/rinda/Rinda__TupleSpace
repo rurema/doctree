@@ -59,6 +59,19 @@ pattern で指定できるパターンについては [[ref:lib:rinda/rinda#tupl
 @param pattern 監視対象となるタプルのパターン
 @param sec 監視期間の長さ(秒数)
 
+==== 例
+  requier 'rinda/tuplespace'
+  
+  tuplespace = Rinda::TupleSpace.new
+  observer = tuplespace.notify("write", ["xyz", nil, nil])
+  Therad.new do 
+    observer.each{|event, tuple| p event, tuple }
+  end
+  
+  tuplespace.write(["xyz", 0, 1]) 
+  tuplespace.write(["pqr", 0, 1])
+  tuplespace.write(["xyz", 4, 2])
+
 --- read(tuple, sec=nil) -> [Array|Hash]
 #@# --- read(tuple, sec=nil){|template| ... } -> [Array|Hash]
 タプルスペース内の tuple にマッチするタプルを一つコピーして返します。
