@@ -40,7 +40,7 @@
 あります。
 
 [[c:RDoc]] は出力を行う際にジェネレータの generate メソッドを呼び出しま
-う。[[c:RDoc::Store]] や [[c:RDoc::CodeObject]] のツリーのメソッドを使っ
+す。[[c:RDoc::Store]] や [[c:RDoc::CodeObject]] のツリーのメソッドを使っ
 て要求される形式のフォーマットを出力してください。
 #@end
 
