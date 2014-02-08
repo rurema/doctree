@@ -2331,4 +2331,236 @@ Don't send partial frames
 
 #@end
 
+#@since 2.1.0
+--- IFF_802_1Q_VLAN
 
+802.1Q VLAN device
+
+--- IFF_ALLMULTI
+
+receive all multicast packets
+
+--- IFF_ALTPHYS
+
+use alternate physical connection
+
+--- IFF_AUTOMEDIA
+
+auto media select active
+
+--- IFF_BONDING
+
+bonding master or slave
+
+--- IFF_BRIDGE_PORT
+
+device used as bridge port
+
+--- IFF_BROADCAST
+
+broadcast address valid
+
+--- IFF_CANTCONFIG
+
+unconfigurable using ioctl(2)
+
+--- IFF_DEBUG
+
+turn on debugging
+
+--- IFF_DISABLE_NETPOLL
+
+disable netpoll at run-time
+
+--- IFF_DONT_BRIDGE
+
+disallow bridging this ether dev
+
+--- IFF_DORMANT
+
+driver signals dormant
+
+--- IFF_DRV_OACTIVE
+
+tx hardware queue is full
+
+--- IFF_DRV_RUNNING
+
+resources allocated
+
+--- IFF_DYING
+
+interface is winding down
+
+--- IFF_DYNAMIC
+
+dialup device with changing addresses
+
+--- IFF_EBRIDGE
+
+ethernet bridging device
+
+--- IFF_ECHO
+
+echo sent packets
+
+--- IFF_ISATAP
+
+ISATAP interface (RFC4214)
+
+--- IFF_LINK0
+
+per link layer defined bit 0
+
+--- IFF_LINK1
+
+per link layer defined bit 1
+
+--- IFF_LINK2
+
+per link layer defined bit 2
+
+--- IFF_LIVE_ADDR_CHANGE
+
+hardware address change when it's running
+
+--- IFF_LOOPBACK
+
+loopback net
+
+--- IFF_LOWER_UP
+
+driver signals L1 up
+
+--- IFF_MACVLAN_PORT
+
+device used as macvlan port
+
+--- IFF_MASTER
+
+master of a load balancer
+
+--- IFF_MASTER_8023AD
+
+bonding master, 802.3ad.
+
+--- IFF_MASTER_ALB
+
+bonding master, balance-alb.
+
+--- IFF_MASTER_ARPMON
+
+bonding master, ARP mon in use
+
+--- IFF_MONITOR
+
+user-requested monitor mode
+
+--- IFF_MULTICAST
+
+supports multicast
+
+--- IFF_NOARP
+
+no address resolution protocol
+
+--- IFF_NOTRAILERS
+
+avoid use of trailers
+
+--- IFF_OACTIVE
+
+transmission in progress
+
+--- IFF_OVS_DATAPATH
+
+device used as Open vSwitch datapath port
+
+--- IFF_POINTOPOINT
+
+point-to-point link
+
+--- IFF_PORTSEL
+
+can set media type
+
+--- IFF_PPROMISC
+
+user-requested promisc mode
+
+--- IFF_PROMISC
+
+receive all packets
+
+--- IFF_RENAMING
+
+interface is being renamed
+
+--- IFF_ROUTE
+
+routing entry installed
+
+--- IFF_RUNNING
+
+resources allocated
+
+--- IFF_SIMPLEX
+
+can't hear own transmissions
+
+--- IFF_SLAVE
+
+slave of a load balancer
+
+--- IFF_SLAVE_INACTIVE
+
+bonding slave not the curr. active
+
+--- IFF_SLAVE_NEEDARP
+
+need ARPs for validation
+
+--- IFF_SMART
+
+interface manages own routes
+
+--- IFF_STATICARP
+
+static ARP
+
+--- IFF_SUPP_NOFCS
+
+sending custom FCS
+
+--- IFF_TEAM_PORT
+
+used as team port
+
+--- IFF_TX_SKB_SHARING
+
+sharing skbs on transmit
+
+--- IFF_UNICAST_FLT
+
+unicast filtering
+
+--- IFF_UP
+
+interface is up
+
+--- IFF_WAN_HDLC
+
+WAN HDLC device
+
+--- IFF_XMIT_DST_RELEASE
+
+dev_hard_start_xmit() is allowed to release skb->dst
+
+--- IFF_VOLATILE
+
+volatile flags
+
+--- IFF_CANTCHANGE
+
+flags not changeable
+#@end
