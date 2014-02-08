@@ -674,7 +674,7 @@ Unix サーバソケットを生成します。
 
 インターフェイスのアドレスを [[c:Socket::Ifaddr]] の配列で返します。
 
-本メソッドは multicast-enabled なインターフェイスに対しても使う事ができます。
+本メソッドはマルチキャスト通信が可能なインターフェイスを見つけるために使う事ができます。
 
   pp Socket.getifaddrs.reject {|ifaddr|
     !ifaddr.addr.ip? || (ifaddr.flags & Socket::IFF_MULTICAST == 0)
