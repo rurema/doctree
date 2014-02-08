@@ -1488,14 +1488,6 @@ reverse! は self を返します。
 指定した部分配列を自身から取り除き、取り除いた部分配列を返します。取り除く要素がなければ nil
 を返します。
 
-以下のコードと同値です。
-
-     def slice!(*args)
-        result = self[*args]
-        self[*args] = nil
-        result
-     end
-
 @param start 削除したい部分配列の先頭のインデックスを整数で指定します。[[m:Array#[] ]] と同じです。
 
 @param len 削除したい部分配列の長さを整数で指定します。[[m:Array#[] ]] と同じです。
