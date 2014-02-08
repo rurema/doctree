@@ -1504,9 +1504,6 @@ reverse! は self を返します。
    a = [ "a", "b", "c" ]
    a.slice!(1, 0)     #=> []
    a                  #=> [ "a", "b", "c" ]
- 
-   a = [ "a", "b", "c" ]
-   a.slice!(-10, 1)   #=> IndexError
 
 --- sort                -> Array
 --- sort!               -> self
