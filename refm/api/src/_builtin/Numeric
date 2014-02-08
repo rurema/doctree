@@ -612,12 +612,10 @@ self.to_i と同じです。
 
 #@since 1.8.0
 --- step(limit, step = 1) {|n| ... }    -> self
-#@since 1.8.7
 #@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
 #@else
 --- step(limit, step = 1) -> Enumerable::Enumerator
-#@end
 #@end
 
 self からはじめ step を足しながら limit を越える
