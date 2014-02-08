@@ -115,3 +115,6 @@ AF_INET なソケットにおいてホストを指定するには以下のいず
 #@include(socket/Socket__AncillaryData)
 #@include(socket/Socket__Option)
 #@end
+#@since 2.1.0
+#@include(socket/Socket__Ifaddr)
+#@end

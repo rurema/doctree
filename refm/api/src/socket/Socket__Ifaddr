@@ -1,0 +1,41 @@
+= class Socket::Ifaddr < Data
+
+[[man:getifaddrs(3)]] の結果を表すクラスです。
+
+== Instance Methods
+
+--- inspect -> String
+
+self の情報を人間に読みやすい文字列にして返します。
+
+--- name -> String
+
+self のインターフェイス名を返します。
+
+--- ifindex -> Integer
+
+self のインターフェイスのインデックスを返します。
+
+--- flags -> Integer
+
+self に指定された flags の値を返します。
+
+--- addr -> Addrinfo | nil
+
+self のアドレスを [[c:Addrinfo]] オブジェクトで返します。
+self が利用できない場合は nil を返します。
+
+--- netmask -> Addrinfo | nil
+
+self のネットマスクを [[c:Addrinfo]] オブジェクトで返します。
+self が利用できない場合は nil を返します。
+
+--- broadaddr -> Addrinfo | nil
+
+self のブロードキャストアドレスを [[c:Addrinfo]] オブジェクトで返します。
+self.flags で [[m:Socket::IFF_BROADCAST]] が有効ではない場合は nil を返します。
+
+--- dstaddr -> Addrinfo | nil
+
+self の宛先アドレスを [[c:Addrinfo]] オブジェクトで返します。
+self.flags で [[m:Socket::IFF_POINTOPOINT]] が有効ではない場合は nil を返します。
