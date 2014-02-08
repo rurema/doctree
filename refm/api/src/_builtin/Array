@@ -1495,8 +1495,6 @@ reverse! は self を返します。
 
 @param range 削除したい配列の範囲を [[c:Range]] オブジェクトで指定します。[[m:Array#[] ]] と同じです。
 
-@raise IndexError 指定された範囲の始点が自身の始点より前にある場合に発生します。
-
 例:
 
    a = [ "a", "b", "c" ]
@@ -1506,9 +1504,6 @@ reverse! は self を返します。
    a = [ "a", "b", "c" ]
    a.slice!(1, 0)     #=> []
    a                  #=> [ "a", "b", "c" ]
- 
-   a = [ "a", "b", "c" ]
-   a.slice!(-10, 1)   #=> IndexError
 
 --- sort                -> Array
 --- sort!               -> self
