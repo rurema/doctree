@@ -614,6 +614,10 @@ self.to_i と同じです。
 --- step(limit, step = 1) {|n| ... }    -> self
 #@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
+#@since 2.1.0
+--- step(by: step, to: limit) {|n| ... } -> self
+--- step(by: step, to: limit) -> Enumerator
+#@end
 #@else
 --- step(limit, step = 1) -> Enumerable::Enumerator
 #@end
