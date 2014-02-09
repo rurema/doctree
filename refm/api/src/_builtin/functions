@@ -2370,8 +2370,8 @@ $_.split と同じです。
 @param limit     分割する最大個数
 @see [[m:String#split]],[[m:$_]]
 
---- scan(re)                  -> [String] | [[String]]
---- scan(re) {|matched| ... } -> [String] | [[String]]
+--- scan(pattern)                  -> [String] | [[String]]
+--- scan(pattern) {|matched| ... } -> [String] | [[String]]
 
 $_.scan と同じです。
 
