@@ -3,7 +3,7 @@
 リモートの [[c:Rinda::TupleSpace]] オブジェクトを包む
 プロクシクラスです。
 
-[[m:Rinda#TupleSpace#take]] でタプルの受け渡し時にタプルが
+[[m:Rinda::TupleSpace#take]] でタプルの受け渡し時にタプルが
 消失する可能性を下げるためのプロクシクラスです。
 
 == Class Methods
