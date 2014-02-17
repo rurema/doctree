@@ -265,9 +265,9 @@ obj が Qnil のとき真。
 
 --- MACRO double NUM2DBL(VALUE x)
 
---- MACRO long NUM2INT(VALUE x)
+--- MACRO int NUM2INT(VALUE x)
 
-x を long 型の整数に変換します。
+x を int 型の整数に変換します。
 
 x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれでもな
 い場合は x.to_int による暗黙の型変換を試みます。
