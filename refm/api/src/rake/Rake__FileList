@@ -16,7 +16,8 @@ include Rake::Cloneable
 
 --- include(*filenames) -> self
 
-与えられたパターンを自身に追加します。
+ファイル名のパターンを追加リストに登録します。
+配列が与えられた場合、配列の各要素が追加されます。
 
 @param filenames 追加するファイル名のパターンを指定します。
 
@@ -38,10 +39,10 @@ include Rake::Cloneable
 例:
   FileList['a.c', 'b.c'].exclude("a.c") # => ['b.c']
   FileList['a.c', 'b.c'].exclude(/^a/)  # => ['b.c']
-  
+
   # If "a.c" is a file, then ...
   FileList['a.c', 'b.c'].exclude("a.*") # => ['b.c']
-  
+
   # If "a.c" is not a file, then ...
   FileList['a.c', 'b.c'].exclude("a.*") # => ['a.c', 'b.c']
 
@@ -74,10 +75,6 @@ include Rake::Cloneable
 --- resolve -> self
 
 追加リストと除外リストを評価します。
-
---- calculate_exclude_regexp
-
-除外リストに含まれるパターンを適切に変換します。
 
 --- sub(pattern, replace) -> Rake::FileList
 
@@ -142,7 +139,7 @@ include Rake::Cloneable
 
 全ての要素をスペースで連結した文字列を返します。
 
---- exclude?(file_name) -> bool
+--- exclude_from_list?(file_name) -> bool
 
 与えられたファイル名が除外される場合は、真を返します。
 そうでない場合は偽を返します。
@@ -169,7 +166,7 @@ include Rake::Cloneable
 
 例:
    file_list = FileList.new('lib/**/*.rb', 'test/test*.rb')
-   
+
    pkg_files = FileList.new('lib/**/*') do |fl|
      fl.exclude(/\bCVS\b/)
    end
