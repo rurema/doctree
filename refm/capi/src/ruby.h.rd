@@ -255,6 +255,8 @@ type 型のメモリ領域 p をゼロクリアする。 n は要素数。
 
 --- MACRO int NEGFIXABLE(long f)
 
+f が Fixnum の下限値以上ならば真。
+
 --- MACRO void NEWOBJ(obj, int typeflag)
 
 --- MACRO int NIL_P(VALUE obj)
