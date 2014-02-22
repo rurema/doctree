@@ -611,9 +611,9 @@ module_eval のブロック中でメソッドを定義する場合、
  p C.new.m        #=> [:m, 1]
 
 #@since 1.9.1
-@see [[m:BasicObject#instance_eval]], [[m:Module.new]]
+@see [[m:BasicObject#instance_eval]], [[m:Module.new]], [[m:Kernel.#eval]]
 #@else
-@see [[m:Object#instance_eval]], [[m:Module.new]]
+@see [[m:Object#instance_eval]], [[m:Module.new]], [[m:Kernel.#eval]]
 #@end
 
 --- name -> String
