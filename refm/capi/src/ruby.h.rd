@@ -158,17 +158,29 @@ Fixnum は常に unsigned long に収まります。
 
 f が Fixnum の範囲に収まっているなら真。
 
+@see [[f:FIXNUM_MIN]], [[f:FIXNUM_MAX]], [[f:FIXNUM_P]],
+     [[f:POSFIXABLE]], [[f:NEGFIXABLE]]
+
 --- MACRO long FIXNUM_MAX
 
 Fixnum にできる整数の上限値。
+
+@see [[f:FIXNUM_MIN]], [[f:FIXNUM_P]], [[f:FIXABLE]],
+     [[f:POSFIXABLE]], [[f:NEGFIXABLE]]
 
 --- MACRO long FIXNUM_MIN
 
 Fixnum にできる整数の下限値。
 
+@see [[f:FIXNUM_MAX]], [[f:FIXNUM_P]], [[f:FIXABLE]],
+     [[f:POSFIXABLE]], [[f:NEGFIXABLE]]
+
 --- MACRO int FIXNUM_P(VALUE obj)
 
 obj が Fixnum のインスタンスのとき真。
+
+@see [[f:FIXNUM_MIN]], [[f:FIXNUM_MAX]], [[f:FIXABLE]],
+     [[f:POSFIXABLE]], [[f:NEGFIXABLE]]
 
 --- MACRO int FL_ABLE(VALUE x)
 
@@ -257,6 +269,9 @@ type 型のメモリ領域 p をゼロクリアする。 n は要素数。
 
 f が Fixnum の下限値以上ならば真。
 
+@see [[f:FIXNUM_MIN]], [[f:FIXNUM_MAX]], [[f:FIXNUM_P]],
+     [[f:FIXABLE]], [[f:POSFIXABLE]]
+
 --- MACRO void NEWOBJ(obj, int typeflag)
 
 --- MACRO int NIL_P(VALUE obj)
@@ -321,6 +336,9 @@ $SAFE >= 3 のときは無条件で汚染する。
 --- MACRO int POSFIXABLE(long f)
 
 f が Fixnum の上限値以下ならば真。
+
+@see [[f:FIXNUM_MIN]], [[f:FIXNUM_MAX]], [[f:FIXNUM_P]],
+     [[f:FIXABLE]], [[f:NEGFIXABLE]]
 
 --- MACRO struct RArray *RARRAY(VALUE obj)
 
