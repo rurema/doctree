@@ -1792,7 +1792,8 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Integer("010")      #=> 8
     p Integer("0x10")     #=> 16
     p Integer("0b10")     #=> 2
-    p Integer(" \n10\t ") #=> 10 # 空白類は無視される
+    p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
+    p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
     p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
     p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
 #@end
