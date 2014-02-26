@@ -587,7 +587,7 @@ io => io という形のオプションを指定します。
 
 #@since 1.9.1
 --- exec(program, *args, options={}) -> ()
---- exec(evn, program, *args, options={}) -> ()
+--- exec(env, program, *args, options={}) -> ()
 #@else
 --- exec(program, *args) -> ()
 #@end
