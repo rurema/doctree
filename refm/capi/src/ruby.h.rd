@@ -229,6 +229,8 @@ Fixnum におさまることが自明な整数を Fixnum に変換します。
 
 --- MACRO int ISDIGIT(char c)
 
+cが'0'から'9'のとき真。それ以外は偽。
+
 --- MACRO int ISLOWER(char c)
 
 --- MACRO int ISPRINT(char c)
