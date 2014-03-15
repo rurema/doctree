@@ -1342,7 +1342,11 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 @see [[m:$/]], [[m:IO#gets]]
 
 #@since 1.8.5
+#@since 2.1.0
+--- read_nonblock(maxlen, outbuf = "", exception: false) -> String | Symbol | nil
+#@else
 --- read_nonblock(maxlen, outbuf = "")    -> String
+#@end
 
 IO をノンブロッキングモードに設定し、
 その後で [[man:read(2)]] システムコールにより
@@ -1370,6 +1374,14 @@ EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告さ�
 @param outbuf 文字列で指定します。IO#read_nonblock は読み込んだデータを outbuf に破壊的に格納し、
               返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、
               実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
+
+#@since 2.1.0
+@param exception 読み込み時に [[c:Errno::EAGAIN]]、
+                 [[c:Errno::EWOULDBLOCK]] が発生する代わりに
+                 :wait_readable を返すかどうかを指定します。また、true
+                 を指定した場合は既に EOF に達していれば
+                 [[c:EOFError]] の代わりに nil を返します。
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -1696,7 +1708,11 @@ IOポートに対して str を出力します。str が文字列でなけ
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 #@if (version >= "1.8.5")
+#@since 2.1.0
+--- write_nonblock(string, exception: false) -> String | Symbol
+#@else
 --- write_nonblock(string)    -> Integer
+#@end
 
 IO をノンブロッキングモードに設定し、string を [[man:write(2)]] システムコールで書き出します。
 
@@ -1716,6 +1732,11 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告さ�
 
 
 @param string 自身に書き込みたい文字列を指定します。
+
+#@since 2.1.0
+@param exception 読み込み時に [[c:Errno::EAGAIN]]、[[c:Errno::EWOULDBLOCK]] が発生
+                 する代わりに :wait_writable を返すかどうかを指定します。
+#@end
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
