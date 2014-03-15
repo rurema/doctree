@@ -1661,3 +1661,15 @@ refinements 機能の詳細については以下を参照してください。
 
 @see [[m:main.using]]
 #@end
+
+#@since 2.1.0
+--- singleton_class? -> bool
+
+self が特異クラスの場合に true を返します。そうでなければ false を返し
+ます。
+
+  class C
+  end
+  C.singleton_class?                  # => false
+  C.singleton_class.singleton_class?  # => true
+#@end
