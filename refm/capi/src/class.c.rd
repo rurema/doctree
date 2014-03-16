@@ -215,6 +215,9 @@ fmt のフォーマットは以下の通りです。
   * 必須引数の数 (省略可能な引数があるなら省略不可)
   * 省略可能な引数の数 (ゼロ個ならば省略可)
   * 残りの引数を Ruby の配列として受け取ることを示す '*' (省略可)
+#@since 1.9.3
+  * 最後の引数をオプションハッシュとして受け取る事を示す ':' (省略可)
+#@end
   * ブロックを Proc オブジェクト化して受け取ることを示す '&' (省略可)
 
 これらの指定文字はそれぞれ省略可能ですが、
@@ -237,6 +240,8 @@ fmt のフォーマットは以下の通りです。
 対応する Ruby プログラムでの宣言
 
       def some_method(a, *rest, &block)
+
+@see [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/README.EXT.ja?view=markup]]
 
 --- VALUE rb_singleton_class(VALUE obj)
 
