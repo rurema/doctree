@@ -193,7 +193,7 @@ self を返します。
 to_enum は「ブロック付きで呼ぶとループを実行し、ブロックを省略した場合は
 Enumerator を返す」ようなメソッドを定義するときによく使われます。
 このときに lazy 性が正しく引き継がれるように、Lazy#to_enum は
-素のEnumerator ではなく Enumerator::Lazy を返すようになってします。
+素のEnumerator ではなく Enumerator::Lazy を返すようになっています。
 
 例:
 

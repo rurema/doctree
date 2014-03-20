@@ -2153,6 +2153,8 @@ sep が正規表現で、かつその正規表現に括弧が含まれている�
     # limit が負の数の場合は制限なく分割
     p "a,b,c,,,".split(/,/, -1)    # => ["a", "b", "c", "", "", ""]
 
+@see [[m:String#partition]], [[m:String#rpartition]]
+
 --- squeeze(*chars) -> String
 
 chars に含まれる文字が複数並んでいたら 1 文字にまとめます。

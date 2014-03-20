@@ -1789,7 +1789,7 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告さ�
 @param string 自身に書き込みたい文字列を指定します。
 
 #@since 2.1.0
-@param exception 読み込み時に [[c:Errno::EAGAIN]]、[[c:Errno::EWOULDBLOCK]] が発生
+@param exception 書き込み時に [[c:Errno::EAGAIN]]、[[c:Errno::EWOULDBLOCK]] が発生
                  する代わりに :wait_writable を返すかどうかを指定します。
 #@end
 
