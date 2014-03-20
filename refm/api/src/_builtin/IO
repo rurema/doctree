@@ -404,13 +404,27 @@ close します(close されていてるオブジェクトはそのままです)
 --- popen(command, mode = "r", opt={})                -> IO
 --- popen(command, mode = "r", opt={}) {|io| ... }    -> object
 #@end
+#@since 2.0.0
+--- popen(env, command, mode = "r", opt={})            -> IO
+--- popen(env, command, mode = "r", opt={}){|io| ... } -> object
+#@end
 
 #@since 1.9.1
 command をサブプロセスとして実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。生成したパイプを [[c:IO]] オブジェクトとして返します。
 
 command が文字列の場合は、シェルを経由して子プロセスを実行します。
+
 command が配列の場合は、シェルを経由せずに子プロセスを実行します。
+#@since 1.9.2
+配列を渡す場合は以下のような引数指定が可能です
+  * [env, cmdname, arg1, ..., opt] arg1, ... を起動するプロセスの引数として渡す
+  * [env, [cmdname, arg0], arg1, ..., opt] cmdline を実際に起動するプログラム名、arg0 を「みせかけ」のプログラム名としてプロセスを起動する
+env には { 変数名 => その内容 } という [[c:Hash]] で設定する環境変数を
+指定できます。opts は popen の最後の引数と同じ意味となります。
+env と opts は省略可能です。
+#@end
+
 #@else
 command をサブプロセスとして実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。command はシェルを経由して実行されます。
@@ -434,6 +448,34 @@ command をサブプロセスとして実行し、そのプロセスの標準入
   # => "foo\n"
 
 #@since 1.9.1
+opt ではエンコーディングの設定やプロセス起動のためのオプションが指定できます。
+[[m:IO.new]] や [[m:Kernel.#spawn]] で指定できるものと共通なので
+詳しくはそちらを見てください。例えば以下のような指定が可能です。
+
+  # nkfプロセスから得られる文字列を EUC-JP と指定する
+  # IO.new などと共通のオプションが指定できる
+  IO.popen("nkf -e filename", external_encoding: "EUC-JP"){|nkf_io|
+    nkf_io.read 
+  }
+  
+  # 標準エラー出力を子プロセス側で標準出力にリダイレクトする
+  # 標準エラー出力と標準出力がマージされる
+  # Kernel.#spawn と共通のオプション
+  IO.popen(["ls", "/", :err=>[:child, :out]]) {|ls_io|
+    ls_result_with_error = ls_io.read
+  }
+  
+  # 上と同じ、配列の外側でもオプションが指定できる
+  IO.popen(["ls", "/"], :err=>[:child, :out]) {|ls_io|
+    ls_result_with_error = ls_io.read
+  }
+
+#@end
+
+#@since 2.0.0
+@param env 環境変数を { 変数名 => 内容 } という形式の [[c:Hash]] で渡します。
+#@end
+#@since 1.9.1
 @param command コマンド名を文字列か配列で指定します。配列が指定された場合には、
                シェルを経由せずに子プロセスを実行します。
 #@else
@@ -442,7 +484,7 @@ command をサブプロセスとして実行し、そのプロセスの標準入
 
 @param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 #@since 1.9.1
-@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
+@param opt エンコーディングなどを設定するオプション引数
 #@end
 
 @raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
@@ -453,6 +495,10 @@ command をサブプロセスとして実行し、そのプロセスの標準入
 #@else
 --- popen("-", mode = "r", opt={})                -> IO
 --- popen("-", mode = "r", opt={}) {|io| ... }    -> object
+#@end
+#@since 2.0.0
+--- popen(env, "-", mode = "r", opt={})            -> IO
+--- popen(env, "-", mode = "r", opt={}){|io| ... } -> object
 #@end
 
 第一引数に文字列 "-" が指定された時、[[man:fork(2)]] を
@@ -487,6 +533,15 @@ nil を返します。
   }
   # => "child output: foo\n"
 
+#@since 1.9.1
+opt ではエンコーディングの設定やプロセス起動のためのオプションが指定できます。
+[[m:IO.new]] や [[m:Kernel.#spawn]] で指定できるものと共通なので
+詳しくはそちらを見てください。
+#@end
+
+#@since 2.0.0
+@param env 環境変数を { 変数名 => 内容 } という形式の [[c:Hash]] で渡します。
+#@end
 @param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 #@since 1.9.1
 @param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
