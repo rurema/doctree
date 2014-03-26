@@ -397,47 +397,63 @@ close します(close されていてるオブジェクトはそのままです)
   end
   p r.gets           # => "foo\n"
 
-#@until 1.9.1
---- popen(command, mode = "r")                -> IO
---- popen(command, mode = "r") {|io| ... }    -> object
-#@else
---- popen(command, mode = "r", opt={})                -> IO
---- popen(command, mode = "r", opt={}) {|io| ... }    -> object
+#@if (version < "1.9.1")
+--- popen(command, mode = "r") -> IO
+--- popen(command, mode = "r"){|f| ... } -> object
 #@end
-#@since 2.0.0
---- popen(env, command, mode = "r", opt={})            -> IO
---- popen(env, command, mode = "r", opt={}){|io| ... } -> object
+#@if (version == "1.9.1")
+--- popen(command, mode = "r", opt={}) -> IO
+--- popen(command, mode = "r", opt={}){|f| ... } -> object
+--- popen([cmdname, *args], mode = "r", opt={}) -> IO
+--- popen([cmdname, *args], mode = "r", opt={}){|f| ... } -> object
+#@end
+#@if (version >= "1.9.2" and version <= "1.9.3")
+--- popen(command, mode = "r", opt={}) -> IO
+--- popen(command, mode = "r", opt={}){|f| ... } -> object
+--- popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
+--- popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+--- popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
+--- popen([env = {}, [cmdname, arg0], *args, .., execopt={}], mode = "r", opt={}){|f| ... } -> object
+#@end
+#@if (version >= "2.0.0")
+--- popen(env = {}, command, mode = "r", opt={}) -> IO
+--- popen(env = {}, command, mode = "r", opt={}){|f| ... } -> object
+--- popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
+--- popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+--- popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
+--- popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+--- popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
+--- popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+--- popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
+--- popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
 #@end
 
-#@since 1.9.1
-command をサブプロセスとして実行し、そのプロセスの標準入出力
+サブプロセスを実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。生成したパイプを [[c:IO]] オブジェクトとして返します。
 
-command が文字列の場合は、シェルを経由して子プロセスを実行します。
-
-command が配列の場合は、シェルを経由せずに子プロセスを実行します。
-#@since 1.9.2
-配列を渡す場合は以下のような引数指定が可能です
-  * [env, cmdname, arg1, ..., opt] arg1, ... を起動するプロセスの引数として渡す
-  * [env, [cmdname, arg0], arg1, ..., opt] cmdline を実際に起動するプログラム名、arg0 を「みせかけ」のプログラム名としてプロセスを起動する
-env には { 変数名 => その内容 } という [[c:Hash]] で設定する環境変数を
-指定できます。opts は popen の最後の引数と同じ意味となります。
-env と opts は省略可能です。
-#@end
-
-#@else
-command をサブプロセスとして実行し、そのプロセスの標準入出力
-との間にパイプラインを確立します。command はシェルを経由して実行されます。
-生成したパイプを [[c:IO]] オブジェクトとして返します。
-#@end
-
-  p io = IO.popen("cat", "r+")  # => #<IO:0x401b75c8>
+  p io = IO.popen("cat", "r+")  # => #<IO:fd 4>
   io.puts "foo"
   io.close_write
   p io.gets                     # => "foo\n"
 
+#@until 1.9.1
+command でサブプロセスを指定します。command はシェルを経由して実行されます。
+#@else
+サブプロセスを指定法は2通りあります。文字列を指定する場合と配列を指定する場合です。
+文字列の場合は、シェルを経由して子プロセスを実行し、
+配列の場合は、シェルを経由せずに子プロセスを実行します。
+
+シェルを経由しない場合(上のシグネチャで cmdname を含む場合)には *args
+がサブプロセスの引数として使われます。この場合には *args はシェルでの
+ワイルドカード展開などはなされません。
+#@end
+
+#@since 1.9.2
+配列内に配列を指定することで、arg0(みせかけのプログラム名)を指定することができます。
+#@end
+
 ブロックが与えられた場合は生成した IO オブジェクトを引数にブ
-ロックを実行し、その結果を返します。ブロックの実行後、生成したパイ
+ロックを実行し、ブロックの実行結果を返します。ブロックの実行後、生成したパイ
 プは自動的にクローズされます。
 
   p IO.popen("cat", "r+") {|io|
@@ -447,17 +463,26 @@ command をサブプロセスとして実行し、そのプロセスの標準入
   }
   # => "foo\n"
 
+
 #@since 1.9.1
-opt ではエンコーディングの設定やプロセス起動のためのオプションが指定できます。
-[[m:IO.new]] や [[m:Kernel.#spawn]] で指定できるものと共通なので
-詳しくはそちらを見てください。例えば以下のような指定が可能です。
+opt でプロセス起動のためのオプションや、パイプ IO オブジェクトの属性(エンコーディングや
+読み書き能力)を指定することができます。
+プロセス起動のためのオプションは [[m:Kernel.#spawn]] と、
+パイプオブジェクトの属性の指定のオプションは [[m:IO.new]] と共通です。
+つまり、 :external_encoding や :unsetenv_others が指定できます。
+オプションの詳しい意味は [[m:Kernel.#spawn]] や [[m:IO.new]] を参照してください。
 
   # nkfプロセスから得られる文字列を EUC-JP と指定する
   # IO.new などと共通のオプションが指定できる
   IO.popen("nkf -e filename", external_encoding: "EUC-JP"){|nkf_io|
     nkf_io.read 
   }
-  
+
+#@end
+#@since 1.9.2
+これに加えて、プロセス起動のためのオプションを execopt で指定することもできます。
+execopt ではエンコーディングなどは指定できません。
+
   # 標準エラー出力を子プロセス側で標準出力にリダイレクトする
   # 標準エラー出力と標準出力がマージされる
   # Kernel.#spawn と共通のオプション
@@ -469,22 +494,32 @@ opt ではエンコーディングの設定やプロセス起動のためのオ�
   IO.popen(["ls", "/"], :err=>[:child, :out]) {|ls_io|
     ls_result_with_error = ls_io.read
   }
-
 #@end
 
-#@since 2.0.0
+#@since 1.9.2
 @param env 環境変数を { 変数名 => 内容 } という形式の [[c:Hash]] で渡します。
 #@end
+@param command コマンド名を文字列で指定します。シェルを経由して実行されます。
+
 #@since 1.9.1
-@param command コマンド名を文字列か配列で指定します。配列が指定された場合には、
-               シェルを経由せずに子プロセスを実行します。
-#@else
-@param command コマンド名を文字列で指定します。
+@param cmdname コマンド名を文字列で指定します
+
+#@since 1.9.2
+@param arg0 みせかけのコマンド名を指定します
+#@end
+
+@param args コマンドのパラメータを文字列で指定します
+
+#@since 1.9.2
+@param execopt プロセス実行に関するオプションを Hash で指定します。
+#@end
+
 #@end
 
 @param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
+
 #@since 1.9.1
-@param opt エンコーディングなどを設定するオプション引数
+@param opt プロセス実行やパイプのIOのエンコーディングなどを設定するオプションを指定します
 #@end
 
 @raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
