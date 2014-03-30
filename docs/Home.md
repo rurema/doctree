@@ -34,6 +34,7 @@
 
 ## よく使うページへのショートカット
 
+  - [[DirectoryTree]]
   - [[ReferenceManualFormatDigest]]
     - [[ClassReferenceManualFormat]]
     - [[HowToWriteMethodEntry]]
