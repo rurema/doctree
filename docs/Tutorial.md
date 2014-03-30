@@ -190,7 +190,7 @@ $ firefox =(bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array
 <dt>カテゴリ</dt>
 <dd>普通の修正依頼の場合は、docを選べばOKです。リンク切れの報告の場合はdoc:brokenlinkにしてください。</dd>
 <dt>ruby_version</dt>
-<dd>Rubyの特定のバージョンに限る場合は、1.8.6, 1.8.7, 1.9.1, あるいは 1.8 や 1.9 などと書きます。分かる場合だけで構いません。</dd>
+<dd>Rubyの特定のバージョンに限る場合は、1.9.3, 2.0.0, 2.1.0, あるいは 1.9 や 2.0 などと書きます。分かる場合だけで構いません。</dd>
 <dt>ファイル</dt>
 <dd>ここにパッチファイルを添付します。</dd>
 </dl>
