@@ -13,7 +13,7 @@ ThirdPartyTools
 |[rurema_instant](https://github.com/sorah/rurema_instant)|るりまサーチを検索するためのSafari/Chrome向けのExtensionらしい。|
 |[rurema-search](https://github.com/clear-code/rurema-search)|るりまを全文検索するWebアプリケーション。doc.ruby-lang.org でも動かしてるけどるりまプロジェクトでメンテしているわけでなない。|
 |[ruri](https://github.com/jugyo/ruri)|るりまのシェル。|
-|[rubydoc-ja-docsets](http://labocho.github.io/rubydoc-ja-docsets/)|るりまを <a href="http://kapeli.com/dash">Dash</a> で簡単にひけるようにするらしい。|
+|[rubydoc-ja-docsets](http://labocho.github.io/rubydoc-ja-docsets/)|るりまを [Dash](http://kapeli.com/dash) で簡単にひけるようにするらしい。|
 |[RRSE](http://www.kmc.gr.jp/~ohai/rrse.html)|Emacsのミニバッファにメソッドのシネグチャを表示するツール。|
 |[Rbref](http://rbref.heroku.com/)|Rubyの組み込みクラスの全メソッドが一覧できる。|
 [rrmsc](https://github.com/succi0303/rrmsc)|コマンドラインから「るりまサーチ」の検索を実行するツール。|
