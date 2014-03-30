@@ -91,7 +91,7 @@ Switched to a new branch 'ブランチ名'
 
 ### 3.4 リファレンスを編集する
 
-リファレンスの体裁は、[リファレンスマニュアルの書式まとめ](http://bugs.ruby-lang.org/projects/rurema/wiki/ReferenceManualFormatDigest)を参考にしてください。
+リファレンスの体裁は、[[リファレンスマニュアルの書式まとめ|ReferenceManualFormatDigest]]を参考にしてください。
 
 以下のコマンドを実行することで、編集内容の確認ができます。
 
