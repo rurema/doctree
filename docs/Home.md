@@ -39,6 +39,7 @@
     - [[HowToWriteMethodEntry]]
   - [[BitClust]]
   - [[HowToInstallRubys]]
+    - [[HowToInstallRubysUnixRbenv]]
   - [[GitRepository]]
   - [[Tutorial]]
 
