@@ -19,7 +19,7 @@
 
 ### ビルド
 
-ソースコードからのビルド方法については [[HowToInstallRUbysWindows]] を参照してください。
+ソースコードからのビルド方法については [[HowToInstallRubysWindows]] を参照してください。
 
 ## Unix系
 
