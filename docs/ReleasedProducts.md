@@ -9,8 +9,8 @@
 
 * スナップショットリリース (月一回程度)
   * http://doc.okkez.net/archives/
-  * http://www.ruby-lang.org/ja/man/archive/
+  * http://www.ruby-lang.org/ja/man/archive/ (TODO: 修正)
   * 日付が新しいものが最新です。
 * Webからの閲覧:
   * http://doc.okkez.net/  (全バージョン一日一回更新)
-  * http://doc.ruby-lang.org/ja/
+  * http://docs.ruby-lang.org/ja/
