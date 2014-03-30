@@ -1184,15 +1184,15 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 //emlist{
     line
         最後に呼び出されたメソッドが属するクラスを表す
-        Class オブジェクト。トップレベルでは false。
+        Class オブジェクト。トップレベルでは nil。
     call/return/c-call/c-return
         呼び出された/リターンするメソッドが属するクラス
         を表す Class オブジェクト。
     class/end
-        false。
+        nil。
     raise
         最後に呼び出されたメソッドが属するクラスを表す
-        Class オブジェクト。トップレベルでは false。
+        Class オブジェクト。トップレベルでは nil。
 //}
 @param proc トレース用 [[c:Proc]] オブジェクトを指定します。nil を指定した場合、トレースをオフにします。
 
@@ -1207,15 +1207,20 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
   end
   43.to_s
   
-  #----結果----
-  #["line", "..", 4, nil, #<Binding:0x2b69584>, false]
-  #  ["c-call", "..", 4, :inherited, #<Binding:0x2b693b8>, Class]
-  #    ["c-return", "..", 4, :inherited, #<Binding:0x2b6937c>, Class]
-  #      ["class", "..", 4, nil, #<Binding:0x2b69098>, false]
-  #        ["end", "..", 4, nil, nil, false]
-  #        ["line", "..", 6, nil, #<Binding:0x2b68d78>, false]
-  #          ["c-call", "..", 6, :to_s, #<Binding:0x2b68c88>, Fixnum]
-  #            ["c-return", "..", 6, :to_s, #<Binding:0x2b68aa8>, Fixnum]
+  # ----結果----
+#@since 2.0.0
+  # ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
+#@else
+  # ["c-return", "..", 3, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
+#@end
+  # ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
+  # ["c-call", "..", 4, :inherited, #<Binding:0x10cba98>, Class]
+  # ["c-return", "..", 4, :inherited, #<Binding:0x10cb858>, Class]
+  # ["class", "..", 4, nil, #<Binding:0x10cb600>, nil]
+  # ["end", "..", 5, nil, #<Binding:0x10cb3f0>, nil]
+  # ["line", "..", 6, nil, #<Binding:0x10cb1e0>, nil]
+  # ["c-call", "..", 6, :to_s, #<Binding:0x10cafd0>, Fixnum]
+  # ["c-return", "..", 6, :to_s, #<Binding:0x10cad78>, Fixnum]
 
 @see [[m:Kernel.#caller]]
 
