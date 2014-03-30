@@ -37,7 +37,6 @@
   - [[ReferenceManualFormatDigest]]
     - [[ClassReferenceManualFormat]]
     - [[HowToWriteMethodEntry]]
-    - [[CapiReferenceManual]]
   - [[BitClust]]
   - [[HowToInstallRubys]]
     - [[HowToInstallRubysWindows]]
