@@ -57,13 +57,13 @@ x オブジェクトと nil で成功・失敗を表す場合は「x | nil」が
 === お問い合わせ
 
 間違いを見付けた場合は
- * [[url:http://bugs.ruby-lang.org/projects/show/rurema]]
+ * [[url:https://github.com/rurema]]
 へお願いします。
 
 それ以外の意見なども
- * [[url:http://bugs.ruby-lang.org/projects/show/rurema]]
+ * [[url:https://github.com/rurema]]
 へお願いします。
 
-Redmine の使い方は
- * [[url:http://bugs.ruby-lang.org/wiki/rurema/HowToReport]]
+GitHub の使い方は
+ * [[url:https://github.com/rurema/doctree/wiki/HowToReport]]
 を参照してください。
