@@ -42,7 +42,7 @@ $ gem install bitclust-core bitclust-dev refe2
 以下の「bitclust サブコマンド」の項も参照。
 </dd>
 <dt>refe</dt>
-<dd>[[BitClust]] データベースに対応した [[ReFe]] ([[ReFe2]])。</dd>
+<dd>[[BitClust]] データベースに対応した ReFe (ReFe2)。</dd>
 </dl>
 
 ## bitclust サブコマンド
