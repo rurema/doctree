@@ -1,17 +1,15 @@
 リファレンスマニュアル刷新計画 (通称るりま) のページへようこそ。
 
-このプロジェクトの目標は、 Ruby の安定板リリースをベースとした、 完全なリファレンスマニュアルをリリースすることです。
+このプロジェクトの目標は、Ruby の安定板リリースをベースとした完全なリファレンスマニュアルをリリースすることです。
 
 ## リリース
 
-<dl>
-<dt>[[ReleasedProducts]]</dt>
-<dd>ダウンロードはこちらからどうぞ。</dd>
-<dt><a href="http://doc.okkez.net/">doc.okkez.net</a></dt>
-<dd>最新のリファレンスをWebから見ることができます。一日一回更新。</dd>
-<dt><a href="http://docs.ruby-lang.org/ja">docs.ruby-lang.org</a></dt>
-<dd>一日一回更新。</dd>
-</dl>
+本プロジェクトの成果物は以下のページでRubyの公式リファレンスとして公開されています。<br/>
+内容は一日に一回、githubリポジトリの内容と同期されます。
+
+* http://docs.ruby-lang.org/ja/ 
+
+ダウンロード等は[[ReleasedProducts]]からどうぞ。
 
 ## プロジェクト全体に関して
 
