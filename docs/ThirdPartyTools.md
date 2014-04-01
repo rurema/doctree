@@ -1,6 +1,3 @@
-ThirdPartyTools
-===============
-
 |名前|概要|
 |---|---|
 |[prismdoc](https://github.com/yhara/prismdoc)|るりまとRDocを名寄せして、統一されたインターフェイスで見るためのウェブアプリ。翻訳機能もあるけど諸々未完成。|
