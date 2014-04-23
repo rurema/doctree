@@ -4,8 +4,6 @@
   * [rurema/doctree](https://github.com/rurema/doctree)
   * [rurema/bitclust](https://github.com/rurema/bitclust)
 
-Redmine のチケットと GitHub の Issues は併用します。また、Wiki をGitHubのWikiに移行する予定はありません。
-
 ## コミット
 
 push 権限のない人は Pull Request をしてください。詳しくは [[HowToContribute]] を参照してください。
