@@ -55,35 +55,24 @@
 Rubyのクラスやメソッドなどには以下のようにしてリンクを記述します。
 [[ClassReferenceManualFormat]] のハイパーリンクの項により完全なリストが有ります。
 
-<dl>
-<dt>クラス</dt>
-<dd>![[c:String]]、![[c:File::Stat]] など</dd>
-<dt>クラスメソッド</dt>
-<dd>![[m:String.new]]</dd>
-<dt>モジュール関数</dt>
-<dd>![[m:Math.#sin]] (「.#」なのに注意)</dd>
-<dt>インスタンスメソッド</dt>
-<dd>![[m:String#dump]]、![[m:String#[] ]]など ([]の場合のみ空白必須なのに注意)</dd>
-<dt>定数</dt>
-<dd>![[m:File::SEPARATOR]] など</dd>
-<dt>グローバル変数</dt>
-<dd>![[m:$~]] など</dd>
-</dl>
+|名前|説明(例)|
+|-----|-----|
+|クラス|\[\[c:String\]\]、\[\[c:File::Stat\]\] など|
+|クラスメソッド|\[\[m:String.new\]\]|
+|モジュール関数|\[\[m:Math.#sin\]\] (「.#」なのに注意)|
+|インスタンスメソッド|\[\[m:String#dump\]\]、\[\[m:String#[] \]\]など ([]の場合のみ空白必須なのに注意)|
+|定数|\[\[m:File::SEPARATOR\]\] など|
+|グローバル変数|\[\[m:$~\]\] など|
 
 上記以外のものには以下のようにしてリンクを記述します。
 
-<dl>
-<dt>ライブラリ</dt>
-<dd>![[lib:jcode]] など</dd>
-<dt>ruby-list</dt>
-<dd>![[ruby-list:12345]] など</dd>
-<dt>man</dt>
-<dd>![[man:tr(1)]] など</dd>
-<dt>RFC</dt>
-<dd>![[RFC:2822]] など</dd>
-<dt>URL</dt>
-<dd>![[url:http://i.loveruby.net]] など</dd>
-</dl>
+|名前|説明(例)|
+|-----|-----|
+|ライブラリ|\[\[lib:jcode\]\] など|
+|ruby-list|\[\[ruby-list:12345\]\] など|
+|man|\[\[man:tr(1)\]\] など|
+|RFC|\[\[RFC:2822\]\] など|
+|URL|\[\[url:[http://i.loveruby.net](http://i.loveruby.net)\]\] など|
 
 ## メソッド
 メソッドのドキュメントは以下の順序で書きます。「★」が付いているものは必ず書かなければいけません。
@@ -135,7 +124,7 @@ pattern が見付からなかったときは nil を返します。
         p "strstrstr".index(/str/, -2)   # => nil
         p "strstrstr".index(/str/, -3)   # => 6
 
-@see ![[m:String#rindex]]
+@see \[\[m:String#rindex]]
 ```
 
 ### 引数の書き方
@@ -164,32 +153,20 @@ pattern が見付からなかったときは nil を返します。
 ### 返り値の書き方
 返り値の型は以下のように書きます。
 
-<dl>
-<dt>(代入式の場合)</dt>
-<dd>省略する。</dd>
-<dt>特定の型</dt>
-<dd>-> String</dd>
-<dt>特定の型か、nil</dt>
-<dd>-> String | nil (必ずnilを後に書く)</dd>
-<dt>特定の型の配列</dt>
-<dd>-> [String]</dd>
-<dt>インデックスによって型が違う配列</dt>
-<dd>-> [Integer, String, String]</dd>
-<dt>ハッシュ</dt>
-<dd>-> {Integer => String}</dd>
-<dt>真偽値(trueまたはfalse)</dt>
-<dd>-> bool (「boolean」ではないので注意)</dd>
-<dt>true, false, nil</dt>
-<dd>-> true, -> false, -> nil</dd>
-<dt>self</dt>
-<dd>-> self</dd>
-<dt>どんな型でも返る可能性がある場合</dt>
-<dd>-> object</dd>
-<dt>返り値が決められていない場合</dt>
-<dd>-> () (例：Thread.exit等)</dd>
-<dt>複数の可能性がある場合</dt>
-<dd>複数のシグネチャに分ける(それで上手くいかない場合は、-> String | [String] のように「|」を使って記述)</dd>
-</dl>
+|名前|説明(例)|
+|-----|-----|
+|(代入式の場合)|省略する。|
+|特定の型|-> String|
+|特定の型か、nil|-> String | nil (必ずnilを後に書く)|
+|特定の型の配列|-> \[String\]|
+|インデックスによって型が違う配列|-> \[Integer, String, String\]|
+|ハッシュ|-> {Integer => String}|
+|真偽値(trueまたはfalse)|-> bool (「boolean」ではないので注意)|
+|true, false, nil|-> true, -> false, -> nil|
+|self|-> self|
+|どんな型でも返る可能性がある場合|-> object|
+|返り値が決められていない場合|-> () (例：Thread.exit等)|
+|複数の可能性がある場合|複数のシグネチャに分ける(それで上手くいかない場合は、-> String | \[String\] のように「|」を使って記述)|
 
 ### 特殊なメソッド
 * 既存のクラスにメソッドを追加している場合は、reopenブロックを使います。
