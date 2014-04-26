@@ -41,11 +41,11 @@
 
 優先度が「低」になっていないものを完成させましょう。
 
- * http://redmine.ruby-lang.org/projects/rurema/issues にレビュー依頼が上がっているものはレビューしてください。
+ * https://github.com/rurema/doctree/issues にレビュー依頼が上がっているものはレビューしてください。
 
 ### 組み込みライブラリの 1.9 対応 (first limit: 2009-04-28)
 
- * http://redmine.ruby-lang.org/projects/rurema/issues
+ * https://github.com/rurema/doctree/issues
 
 これらの作業は 2011-09-01 で完了しました。
 
