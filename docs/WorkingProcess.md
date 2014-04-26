@@ -12,8 +12,3 @@
    * リリースパッケージの作り方とリリース方法
  * [[DischargingProcess]]
    * 強制的に担当を交代する方法など
-
-## 関連
-
-* [[ToDo]]
-* [[PendingPatches]]
