@@ -26,9 +26,3 @@ Subversion レポジトリにコミットしてよいのはメンテナだけで
 ## See Also
 
 文章の品質については [[WritingRule]] を見てください。
-
-[[BitClust]] のパッチ管理システムについては
-[[BitClustPatchManagementSystem]] を参照してください。
-
-Subversion レポジトリについては
-[[SubversionRepository]] を参照してください。
