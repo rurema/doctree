@@ -1,6 +1,6 @@
 プロジェクトメンバー用の各種作業マニュアル
 
- * [[ReleaseProcess]]
+ * [[ReleaseProcess]](TODO)
    * リリース時の作業について
  * [[Phase3WorkingScheme]]
    * 現在進行中の第三段階の進めかたについて
