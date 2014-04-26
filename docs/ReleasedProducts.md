@@ -8,8 +8,7 @@
 ## ダウンロード
 
 * スナップショットリリース (月一回程度)
-  * http://doc.okkez.net/archives/
-  * http://www.ruby-lang.org/ja/man/archive/ (TODO: 修正)
+  * http://cache.ruby-lang.org/pub/ruby/doc/
   * 日付が新しいものが最新です。
 * Webからの閲覧:
   * http://doc.okkez.net/  (全バージョン一日一回更新)
