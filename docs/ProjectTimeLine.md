@@ -17,7 +17,7 @@
 とにかくエントリ数が揃えばよいので、
 ドキュメントを書く必要はありません。
 
-作業方法については [[Phase2WorkingScheme]](https://bugs.ruby-lang.org/projects/rurema/wiki/Phase2WorkingScheme) を見てください。
+作業方法については [Phase2WorkingScheme](https://bugs.ruby-lang.org/projects/rurema/wiki/Phase2WorkingScheme) を見てください。
 
 この作業は 2007-01-08 に完了しました。
 
