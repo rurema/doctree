@@ -29,7 +29,7 @@ $ gem install bitclust-core bitclust-dev refe2
 
 ## 使用方法
 
-[[Phase2WorkingScheme]] などが参考になります。
+[Phase2WorkingScheme](https://bugs.ruby-lang.org/projects/rurema/wiki/Phase2WorkingScheme) などが参考になります。
 
 また各コマンドに --help を付けて起動するとオプションの簡単な説明が表示されます。
 
