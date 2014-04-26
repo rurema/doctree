@@ -1,4 +1,4 @@
-* http://redmine.ruby-lang.org/projects/rurema/issues
+* https://github.com/rurema/doctree/issues
 
 上記でレビュー用のチケットを発行しているので以下の方法でレビューする。カテゴリを doc:review で絞り込むと良い。
 
