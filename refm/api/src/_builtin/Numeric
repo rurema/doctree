@@ -598,6 +598,13 @@ self を other で割った余り r を返します。
   require 'rational'
   p Rational(0, 2).nonzero?  #=> nil
 
+非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以
+下のように記述する事もできます。
+
+  a = %w( z Bb bB bb BB a aA Aa AA A )
+  b = a.sort {|a,b| (a.downcase <=> b.downcase).nonzero? || a <=> b }
+  b   #=> ["A", "a", "AA", "Aa", "aA", "BB", "Bb", "bB", "bb", "z"]
+
 --- to_int    -> Integer
 
 self.to_i と同じです。
