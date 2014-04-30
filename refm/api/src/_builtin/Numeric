@@ -605,6 +605,8 @@ self を other で割った余り r を返します。
   b = a.sort {|a,b| (a.downcase <=> b.downcase).nonzero? || a <=> b }
   b   #=> ["A", "a", "AA", "Aa", "aA", "BB", "Bb", "bB", "bb", "z"]
 
+@see [[m:Numeric#zero?]]
+
 --- to_int    -> Integer
 
 self.to_i と同じです。
@@ -616,6 +618,8 @@ self.to_i と同じです。
   p 10.zero?              #=> false
   p 0.zero?               #=> true
   p 0.0.zero?             #=> true
+
+@see [[m:Numeric#nonzero?]]
 
 #@since 1.8.0
 --- step(limit, step = 1) {|n| ... }    -> self
