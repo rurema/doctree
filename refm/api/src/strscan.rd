@@ -61,7 +61,7 @@ StringScanner オブジェクトはスキャンする文字列と「スキャン
 現在のスキャンポインタがさす地点以外でもマッチしたい場合は、[[m:StringScanner#scan_until]]など
 を使ってください。
 
-例: scan, scan_full の動作の違い
+例: scan, scan_until の動作の違い
 
   def case1
     s = StringScanner.new('test string')
