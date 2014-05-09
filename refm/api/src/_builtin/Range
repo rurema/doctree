@@ -231,6 +231,20 @@ true を返します。そうでない場合に false を返します。
   p (1..2).hash    #=> 5646
   p (1...2).hash   #=> 16782863
 
+--- to_s -> String
+
+self を文字列に変換します(始点と終点のオブジェクトは [[m:Range#to_s]]
+で文字列に変換されます)。
+
+@see [[m:Range#inspect]]
+
+--- inspect -> String
+
+self を文字列に変換します(始点と終点のオブジェクトは
+[[m:Range#inspect]] で文字列に変換されます)。
+
+@see [[m:Range#to_s]]
+
 #@since 1.9.1
 --- min               -> object | nil
 
