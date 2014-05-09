@@ -233,15 +233,15 @@ true を返します。そうでない場合に false を返します。
 
 --- to_s -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは [[m:Range#to_s]]
-で文字列に変換されます)。
+self を文字列に変換します(始点と終点のオブジェクトは #to_s メソッドで文
+字列に変換されます)。
 
 @see [[m:Range#inspect]]
 
 --- inspect -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは
-[[m:Range#inspect]] で文字列に変換されます)。
+self を文字列に変換します(始点と終点のオブジェクトは #inspect メソッド
+で文字列に変換されます)。
 
 @see [[m:Range#to_s]]
 
