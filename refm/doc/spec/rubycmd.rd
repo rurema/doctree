@@ -1,4 +1,4 @@
-= Rubyの起動
+=[a:ruby] Rubyの起動
 
   * [[ref:cmd_option]]
   * [[ref:shebang]]
