@@ -18,3 +18,4 @@
 |[Quickるりまサーチ(firefox)](https://addons.mozilla.org/ja/firefox/addon/quick-rurema-search/)|firefoxから右クリックで選択したテキストを検索語としてるりまサーチで検索した結果を新しいタブで表示するための拡張。|
 |[Quickるりまサーチ(Chrome)](https://chrome.google.com/webstore/detail/quick%E3%82%8B%E3%82%8A%E3%81%BE%E3%82%B5%E3%83%BC%E3%83%81/ioplpgjmfmcfkgbkmiicedbfdffmilnn)|chromeから右クリックで選択したテキストを検索語としてるりまサーチで検索した結果を新しいタブで表示するための拡張。|
 |[Ruby Reference Manual(ri/rurema)](http://www.callcc.net/ruby/ref/)| ブラウザからriとruremaを同時に参照できる。|
+|[wwwrefe.vim](https://github.com/basyura/wwwrefe.vim)| るりまをvimから参照するプラグイン。 |
