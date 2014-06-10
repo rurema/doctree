@@ -14,7 +14,7 @@ test/unit は [[lib:minitest/unit]] を使って再実装されましたが、�
 1.9 以降については [[lib:minitest/unit]] で再実装された test/unit につ
 いて記述しています)
 
-  * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.rubyforge.org/index.html.ja]]
+  * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.github.io/]]
 #@end
 
 === 使い方
