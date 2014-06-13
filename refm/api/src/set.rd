@@ -555,7 +555,7 @@ o1 と o2 は同じ分割に属します。
 
 各メソッドの使用方法については、[[c:Set]] を参照してください。
 
-RBTree ライブラリ ([[url:http://rbtree.rubyforge.org/]])
+RBTree ライブラリ ([[url:http://rubygems.org/gems/rbtree]])
 が利用可能である場合、内部記憶としてハッシュの代わりに RBTreeを使用します。
 
 = reopen Enumerable
