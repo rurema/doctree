@@ -132,10 +132,26 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 
 @param klass クラスかモジュールを指定します。
 
---- garbage_collect    -> nil
+#@since 2.1.0
+--- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
+#@else
+--- garbage_collect -> nil
+#@end
 
 どこからも参照されなくなったオブジェクトを回収します。
 [[m:GC.start]] と同じです。
+
+#@since 2.1.0
+@param full_mark マイナー GC を動作させる場合は false を、そうでない場
+                 合は true を指定します。
+
+@param immediate_sweep sweep を遅らせる(Lazy Sweep を行う)場合は false
+                       を、そうでない場合は true を指定します。
+
+注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
+す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
+トしていない場合はキーワード引数を指定しても無視される可能性があります。
+#@end
 
 --- undefine_finalizer(obj)    -> object
 
