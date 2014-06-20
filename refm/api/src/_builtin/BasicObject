@@ -26,7 +26,7 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 真に必要な場合にだけ BasicObject から派生してください。
 
 ==== 例
-例
+
  class Proxy < BasicObject
    def initialize(target)
      @target = target
