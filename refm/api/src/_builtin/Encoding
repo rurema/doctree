@@ -45,7 +45,7 @@
 --- find(name) -> Encoding
 指定された name という名前を持つ Encoding オブジェクトを返します。
 
-@param name エンコーディング名を表す [[c:String]] か [[c:Symbol]] を指定します。
+@param name エンコーディング名を表す [[c:String]] を指定します。
 @return 発見された Encoding オブジェクトを返します。
 @raise ArgumentError 指定した名前のエンコーディングが発見できないと発生します。
 
@@ -56,7 +56,6 @@
 #@end
 
 例:
- p Encoding.find(:Shift_JIS)    #=> #<Encoding:Shift_JIS>
  p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
 
 
