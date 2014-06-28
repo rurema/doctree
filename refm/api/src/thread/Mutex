@@ -66,10 +66,18 @@ mutex をロックし、ブロックを実行します。実行後に必ず mute
 mutex をロックしようとして、ロックが成功した場合、真を返します。
 ロックできなかった場合にはブロックせず偽を返します。
 
+#@since 1.9.1
+--- unlock     -> self
+#@else
 --- unlock     -> self | nil
+#@end
 mutex のロックを解放します。mutex のロック待ちになっていたスレッドの実行は再開されます。
 
+#@since 1.9.1
+@return self を返します。
+#@else
 @return self がロックされていなければ nil を返します。そうでなければself を返します。
+#@end
 
 例:
 
@@ -91,7 +99,8 @@ Mutex はロックしたスレッド以外からロックを開放すること�
    m.unlock # => ThreadError
  end.join
 
-@raise ThreadError 自身をロックしたスレッド以外から呼ばれた場合に発生します。
+@raise ThreadError self がロックされていない場合や self をロックしたス
+                   レッド以外から呼ばれた場合に発生します。
 #@since 2.0.0
                    また、[[m:Signal.#trap]] に指定したハンドラ内で実行
                    した場合に発生します。
