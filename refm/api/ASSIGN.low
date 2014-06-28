@@ -1,6 +1,6 @@
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-Win32API
+Win32API                                        deprecated in 1.9.1
 bigdecimal                      sho-h           done
 bigdecimal/jacobian             sho-h           done
 bigdecimal/ludcmp               sho-h           done
@@ -30,9 +30,9 @@ xmlrpc
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-soap
-wsdl
-xsd
+soap                                            deprecated in 1.9.1
+wsdl                                            deprecated in 1.9.1
+xsd                                             deprecated in 1.9.1
 tk
 tcltklib
 tkutil
