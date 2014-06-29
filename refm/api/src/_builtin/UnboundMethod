@@ -38,7 +38,7 @@ alias や super を使います。
   class Foo
     def foo
       p :foo
-      end
+    end
     @@orig_foo = instance_method :foo
     def foo
       p :bar
