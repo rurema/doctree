@@ -78,7 +78,7 @@ include Enumerable
 #@if (version >= "1.9.1")
 @param enum 集合要素を格納するオブジェクトを指定します。
        enum には each メソッドが定義されている必要があります。
-@raise NoMethodError 引数 enum が与えられて、かつ enum に each メソッドが
+@raise ArgumentError 引数 enum が与えられて、かつ enum に each メソッドが
        定義されていない場合に発生します。
 #@else
 @param enum Enumerable オブジェクトを指定します。
@@ -161,7 +161,7 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 引数 enum には each メソッドが定義されている必要があります。
 
 @param enum 置き換え後の集合要素を格納するオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum 置き換え後の集合要素を格納する Enumerable オブジェクトを
@@ -345,7 +345,7 @@ nil を返します。
 引数 enum には each メソッドが定義されている必要があります。
 
 @param enum 追加対象の要素を格納したオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum 追加対象の要素を格納した Enumerate オブジェクトを指定します。
@@ -364,7 +364,7 @@ nil を返します。
 引数 enum には each メソッドが定義されている必要があります。
 
 @param enum 削除対象の要素を格納したオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum 削除対象の要素を格納した Enumerate オブジェクトを指定します。
@@ -384,7 +384,7 @@ nil を返します。
 
 #@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum Enumerable オブジェクトを指定します。
@@ -402,7 +402,7 @@ nil を返します。
 
 #@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum Enumerable オブジェクトを指定します。
@@ -420,7 +420,7 @@ nil を返します。
 
 #@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum Enumerable オブジェクトを指定します。
@@ -438,7 +438,7 @@ nil を返します。
 
 #@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
-@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+@raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
 #@else
 @param enum Enumerable オブジェクトを指定します。
