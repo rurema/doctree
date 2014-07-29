@@ -34,7 +34,7 @@
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
-                     [[m:Float::DIG]] 以上の値を指定した場合に発生します。
+                     [[m:Float::DIG]] + 2 以上の値を指定した場合に発生します。
                      また、s に [[c:Float]]、[[c:Rational]] オブジェク
                      トを指定し、n を省略した場合に発生します。
 #@end
@@ -241,7 +241,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
-                     [[m:Float::DIG]] 以上の値を指定した場合に発生します。
+                     [[m:Float::DIG]] + 2 以上の値を指定した場合に発生します。
                      s に [[c:Float]]、[[c:Rational]] オブジェクトを指
                      定し、n を省略した場合に発生します。
 #@end
