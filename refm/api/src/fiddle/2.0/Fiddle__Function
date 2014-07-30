@@ -6,7 +6,7 @@ C の関数を表すクラスです。
 ptr (関数ポインタ)から Fiddle::Function オブジェクトを
 生成します。
 
-ptr には [[c:Fiddle::Handle]] から [[m:Fiddle::Handle#ptr]] などで取りだした
+ptr には [[c:Fiddle::Handle]] から [[m:Fiddle::Handle#sym]] などで取りだした
 関数ポインタ(を表す整数)、もしくは関数を指している
 [[c:Fiddle::Pointer]] を渡します。
 
