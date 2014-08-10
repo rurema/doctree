@@ -353,7 +353,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 --- read(len)             -> String | nil
 --- read(len, outbuf)     -> String
 
-自身から len バイト読み込みんで返します。len が省略された場合は、最後まで読み込んで返します。
+自身から len バイト読み込んで返します。len が省略された場合は、最後まで読み込んで返します。
 詳しい仕様は [[m:IO#read]] を参照して下さい。
 
 @param len 読み込みたい長さを整数で指定します。詳しい仕様は [[m:IO#read]] を参照して下さい。
@@ -497,7 +497,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 --- read_nonblock(maxlen, outbuf = "") -> String
 #@end
 
-自身から len バイト読み込みんで返します。
+自身から len バイト読み込んで返します。
 [[m:StringIO#read]] と同じです。ただし、文字列の終端に達した場合、EOFError を投げます。
 
 @param len 読み込みたい長さを整数で指定します。[[m:StringIO#read]] と同じです。
