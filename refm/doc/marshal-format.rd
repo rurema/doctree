@@ -613,7 +613,7 @@ p Marshal.dump(ary).unpack("x2 acac")
 : <= 1.6.1
     * Range が終端を含むかどうかのフラグがダンプ時に保存されない
 
-以下は、テストスクリプトです(要 [[c:RAA:RubyUnit]])
+以下は、テストスクリプトです(要 RubyUnit)
 
     # test for Marshal for ruby version 1.6
     require 'rubyunit'
