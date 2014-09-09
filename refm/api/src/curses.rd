@@ -1350,12 +1350,23 @@ CR (Ctrl-m) を返すようにします。
 画面を一瞬点滅させます。
 この機能がないところでは単に無視されます。
 
+#@since 1.9.1
+--- getch -> String | Integer | nil
+
+標準入力から 1 文字読み込みます。読み込んだ文字が印字可能な文字の場合は
+読み込んだ文字を返します。そうでなければ読み込んだ文字に対応する ASCII
+コードを表す整数を返します。読み込みにタイムアウトした場合は nil を返し
+ます。
+
+@see [[c:Curses::Key]], [[m:Curses.#timeout=]]
+#@else
 --- getch -> Integer
 
 標準入力から 1 バイト読み込みます。
 戻り値は ASCII コードを表す整数です。
 
 @see [[c:Curses::Key]]
+#@end
 
 --- getstr -> String
 

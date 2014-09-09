@@ -129,9 +129,20 @@
 
 @param str 文字列を指定します。
 
+#@since 1.9.1
+--- getch -> String | Integer | nil
+
+ウィンドウへの入力から 1 文字読みこみます。読み込んだ文字が印字可能な文
+字の場合は読み込んだ文字を返します。そうでなければ読み込んだ文字に対応
+する ASCII コードを表す整数を返します。読み込みにタイムアウトした場合は
+nil を返します。
+
+@see [[m:Curses::Window#timeout=]]
+#@else
 --- getch -> Integer
 
 ウィンドウへの入力から 1 バイト読みこみます。
+#@end
 
 --- getstr -> String
 
