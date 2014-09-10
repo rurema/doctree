@@ -188,27 +188,27 @@ include Comparable
     def roundup(d=0)
       x = 10**d
       if self > 0
-        (self * x).ceil.quo(x)
+        self.quo(x).ceil * x
       else
-        (self * x).floor.quo(x)
+        self.quo(x).floor * x
       end
     end
 
     def rounddown(d=0)
       x = 10**d
       if self < 0
-        (self * x).ceil.quo(x)
+        self.quo(x).ceil * x
       else
-        (self * x).floor.quo(x)
+        self.quo(x).floor * x
       end
     end
 
     def roundoff(d=0)
       x = 10**d
       if self < 0
-        (self * x - 0.5).ceil.quo(x)
+        (self.quo(x) - 0.5).ceil * x
       else
-        (self * x + 0.5).floor.quo(x)
+        (self.quo(x) + 0.5).floor * x
       end
     end
   end
