@@ -54,8 +54,6 @@ $ bitclust -d ./db-2.0.0 update --stdlibtree=src
 
 さて、では実際にリファレンスを編集してみましょう。
 
-TODO
-
 ### 3.1 GitHubでforkする
 
 まだGitHubのアカウントを持っていない方は、[GitHub](https://github.com)から登録をしてください。
