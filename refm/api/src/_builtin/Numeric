@@ -21,165 +21,128 @@ include Comparable
 
 ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、
 効率のためであったり上位抽象クラスで実装を定義することができなかったり
-するためです。実際にどのメソッドがどのクラスに定義されているかは以下の
-表を参照してください。
+するためです。以下の表は 2.1.2 での一覧です。実際にどのメソッドがどのク
+ラスに定義されているかはそれぞれのクラスを参照してください。
 
-#@#  cary = [Numeric, Integer, Fixnum, Bignum, Float]
+#@#  cary = [Numeric, Integer, Fixnum, Bignum, Float, Rational, Complex]
 #@#  mary = cary.collect {|c| c.instance_methods(false)}
 #@#  methods = mary.flatten.uniq.sort
 #@#  
 #@#  methods.each_with_index {|op, i|
 #@#  if i % 10 == 0
-#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
+#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s %10s %10s",
 #@#                "", *cary.collect {|klass| klass.name.center(10)})
 #@#    puts heading
 #@#    puts "-" * heading.size
 #@#  end
 #@#
-#@#  printf("%23s | %10s %10s %10s %10s %10s\n",
+#@#  printf("%23s | %10s %10s %10s %10s %10s %10s %10s\n",
 #@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
 #@#  }
 
-#@if(version < '1.8.0')
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-                  % |     -          -          o          o          o
-                  & |     -          -          o          o          -
-                  * |     -          -          o          o          o
-                 ** |     -          -          o          o          o
-                  + |     -          -          o          o          o
-                 +@ |     o          -          -          -          -
-                  - |     -          -          o          o          o
-                 -@ |     o          -          o          o          o
-                  / |     -          -          o          o          o
-                  < |     -          -          o          -          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-                 << |     -          -          o          o          -
-                 <= |     -          -          o          -          o
-                <=> |     o          -          o          o          o
-                 == |     -          -          o          o          o
-                === |     o          -          -          o          -
-                  > |     -          -          o          -          o
-                 >= |     -          -          o          -          o
-                 >> |     -          -          o          o          -
-                 [] |     -          -          o          o          -
-                  ^ |     -          -          o          o          -
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-                abs |     o          -          o          o          o
-               ceil |     o          o          -          -          o
-                chr |     -          o          -          -          -
-              clone |     o          -          -          -          -
-             coerce |     o          -          -          o          o
-                div |     -          -          -          o          -
-             divmod |     o          -          o          o          o
-             downto |     -          o          o          -          -
-               eql? |     o          -          -          o          o
-            finite? |     -          -          -          -          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-              floor |     o          o          -          -          o
-               hash |     -          -          -          o          o
-            id2name |     -          -          o          -          -
-          infinite? |     -          -          -          -          o
-           integer? |     o          o          -          -          -
-             modulo |     o          -          o          o          o
-               nan? |     -          -          -          -          o
-               next |     -          o          o          -          -
-           nonzero? |     o          -          -          -          -
-          remainder |     o          -          -          o          -
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-              round |     o          o          -          -          o
-               size |     -          -          o          o          -
-               step |     -          o          o          -          -
-               succ |     -          o          o          -          -
-              times |     -          o          o          -          -
-               to_f |     -          -          o          o          o
-               to_i |     -          o          -          -          o
-             to_int |     -          o          -          -          -
-               to_s |     -          -          o          o          o
-           truncate |     o          o          -          -          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-               type |     -          -          o          -          -
-               upto |     -          o          o          -          -
-              zero? |     o          -          o          o          o
-                  | |     -          -          o          o          -
-                  ~ |     -          -          o          o          -
-#@else
- => ruby 1.8.6 (2007-06-18 patchlevel 5000) [i686-linux]
-                           Numeric    Integer     Fixnum     Bignum     Float
-           ---------------------------------------------------------------------
-                      % |     -          -          o          o          o
-                      & |     -          -          o          o          -
-                      * |     -          -          o          o          o
-                     ** |     -          -          o          o          o
-                      + |     -          -          o          o          o
-                     +@ |     o          -          -          -          -
-                      - |     -          -          o          o          o
-                     -@ |     o          -          o          o          o
-                      / |     -          -          o          o          o
-                      < |     -          -          o          -          o
-                           Numeric    Integer     Fixnum     Bignum     Float
-           ---------------------------------------------------------------------
-                     << |     -          -          o          o          -
-                     <= |     -          -          o          -          o
-                    <=> |     o          -          o          o          o
-                     == |     -          -          o          o          o
-                      > |     -          -          o          -          o
-                     >= |     -          -          o          -          o
-                     >> |     -          -          o          o          -
-                     [] |     -          -          o          o          -
-                      ^ |     -          -          o          o          -
-                    abs |     o          -          o          o          o
-                           Numeric    Integer     Fixnum     Bignum     Float
-           ---------------------------------------------------------------------
-                   ceil |     o          o          -          -          o
-                    chr |     -          o          -          -          -
-                 coerce |     o          -          -          o          o
-                    div |     o          -          o          o          -
-                 divmod |     o          -          o          o          o
-                 downto |     -          o          -          -          -
-                   eql? |     o          -          -          o          o
-                   fdiv |     o          -          o          o          -
-                finite? |     -          -          -          -          o
-                  floor |     o          o          -          -          o
-                           Numeric    Integer     Fixnum     Bignum     Float
-           ---------------------------------------------------------------------
-                   hash |     -          -          -          o          o
-                id2name |     -          -          o          -          -
-              infinite? |     -          -          -          -          o
-               integer? |     o          o          -          -          -
-                 modulo |     o          -          o          o          o
-                   nan? |     -          -          -          -          o
-                   next |     -          o          -          -          -
-               nonzero? |     o          -          -          -          -
-                    quo |     o          -          o          o          -
-              remainder |     o          -          -          o          -
-                           Numeric    Integer     Fixnum     Bignum     Float
-           ---------------------------------------------------------------------
-                  round |     o          o          -          -          o
- singleton_method_added |     o          -          -          -          -
-                   size |     -          -          o          o          -
-                   step |     o          -          -          -          -
-                   succ |     -          o          -          -          -
-                  times |     -          o          -          -          -
-                   to_f |     -          -          o          o          o
-                   to_i |     -          o          -          -          o
-                 to_int |     o          o          -          -          o
-                   to_s |     -          -          o          o          o
-                           Numeric    Integer     Fixnum     Bignum     Float
-           ---------------------------------------------------------------------
-                 to_sym |     -          -          o          -          -
-               truncate |     o          o          -          -          o
-                   upto |     -          o          -          -          -
-                  zero? |     o          -          o          -          o
-                      | |     -          -          o          o          -
-                      ~ |     -          -          o          o          -       
-#@end
-#@# 1.9 以降は微妙に違う部分がある。Fixnum#succ など。
+ => ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                      % |     o          -          o          o          o          -          -
+                      & |     -          -          o          o          -          -          -
+                      * |     -          -          o          o          o          o          o
+                     ** |     -          -          o          o          o          o          o
+                      + |     -          -          o          o          o          o          o
+                     +@ |     o          -          -          -          -          -          -
+                      - |     -          -          o          o          o          o          o
+                     -@ |     o          -          o          o          o          -          o
+                      / |     -          -          o          o          o          o          o
+                      < |     -          -          o          o          o          -          -
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                     << |     -          -          o          o          -          -          -
+                     <= |     -          -          o          o          o          -          -
+                    <=> |     o          -          o          o          o          o          -
+                     == |     -          -          o          o          o          o          o
+                    === |     -          -          o          o          o          -          -
+                      > |     -          -          o          o          o          -          -
+                     >= |     -          -          o          o          o          -          -
+                     >> |     -          -          o          o          -          -          -
+                     [] |     -          -          o          o          -          -          -
+                      ^ |     -          -          o          o          -          -          -
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                    abs |     o          -          o          o          o          -          o
+                   abs2 |     o          -          -          -          -          -          o
+                  angle |     o          -          -          -          o          -          o
+                    arg |     o          -          -          -          o          -          o
+             bit_length |     -          -          o          o          -          -          -
+                   ceil |     o          o          -          -          o          o          -
+                    chr |     -          o          -          -          -          -          -
+                 coerce |     o          -          -          o          o          o          o
+                   conj |     o          -          -          -          -          -          o
+              conjugate |     o          -          -          -          -          -          o
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+            denominator |     o          o          -          -          o          o          o
+                    div |     o          -          o          o          -          -          -
+                 divmod |     o          -          o          o          o          -          -
+                 downto |     -          o          -          -          -          -          -
+                   eql? |     o          -          -          o          o          -          o
+                  even? |     -          o          o          o          -          -          -
+                   fdiv |     o          -          o          o          o          o          o
+                finite? |     -          -          -          -          o          -          -
+                  floor |     o          o          -          -          o          o          -
+                    gcd |     -          o          -          -          -          -          -
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                 gcdlcm |     -          o          -          -          -          -          -
+                   hash |     -          -          -          o          o          o          o
+                      i |     o          -          -          -          -          -          -
+                   imag |     o          -          -          -          -          -          o
+              imaginary |     o          -          -          -          -          -          o
+              infinite? |     -          -          -          -          o          -          -
+                inspect |     -          -          o          o          o          o          o
+               integer? |     o          o          -          -          -          -          -
+                    lcm |     -          o          -          -          -          -          -
+              magnitude |     o          -          o          o          o          -          o
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                 modulo |     o          -          o          o          o          -          -
+                   nan? |     -          -          -          -          o          -          -
+                   next |     -          o          -          -          -          -          -
+               nonzero? |     o          -          -          -          -          -          -
+              numerator |     o          o          -          -          o          o          o
+                   odd? |     -          o          o          o          -          -          -
+                    ord |     -          o          -          -          -          -          -
+                  phase |     o          -          -          -          o          -          o
+                  polar |     o          -          -          -          -          -          o
+                   pred |     -          o          -          -          -          -          -
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                    quo |     o          -          -          -          o          o          o
+            rationalize |     -          o          -          -          o          o          o
+                   real |     o          -          -          -          -          -          o
+                  real? |     o          -          -          -          -          -          o
+                   rect |     o          -          -          -          -          -          o
+            rectangular |     o          -          -          -          -          -          o
+              remainder |     o          -          -          o          -          -          -
+                  round |     o          o          -          -          o          o          -
+ singleton_method_added |     o          -          -          -          -          -          -
+                   size |     -          -          o          o          -          -          -
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                   step |     o          -          -          -          -          -          -
+                   succ |     -          o          o          -          -          -          -
+                  times |     -          o          -          -          -          -          -
+                   to_c |     o          -          -          -          -          -          o
+                   to_f |     -          -          o          o          o          o          o
+                   to_i |     -          o          -          -          o          o          o
+                 to_int |     o          o          -          -          o          -          -
+                   to_r |     -          o          -          -          o          o          o
+                   to_s |     -          -          o          o          o          o          o
+               truncate |     o          o          -          -          o          o          -
+                           Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+           -------------------------------------------------------------------------------------------
+                   upto |     -          o          -          -          -          -          -
+                  zero? |     o          -          o          -          o          -          -
+                      | |     -          -          o          o          -          -          -
+                      ~ |     -          -          o          o          -          -          -
 
 === 丸めメソッドの動作一覧
 
