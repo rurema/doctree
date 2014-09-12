@@ -97,7 +97,7 @@ Ruby の文法:
   * [[d:symref]]
 #@##@# 専門的
   * [[d:spec/bnf]]
-#@#  * [[c:Marshalフォーマット]]
+  * [[d:marshal_format]]
 #@##@# マニュアル
 #@#  * [[c:Rubyに関する書籍]]
 #@#  * [[d:ReFe]]
