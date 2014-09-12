@@ -68,7 +68,9 @@ Ruby curses の操作によっては、
 利用する C curses が提供していない機能を使うものがあります。
 そのような操作を行った場合、例外 NotImplementedError が発生します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、いくつかの操作で例外 SecurityError を発生します。
+#@end
 
 === 注意
 
@@ -126,7 +128,9 @@ C のプログラムから端末のディスプレイ画面を制御するため
 いくつかの操作において、サポートしていない環境では、
 例外 NotImplementedError が発生します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、ほとんどの操作で例外 SecurityError を発生します。
+#@end
 
 == Constants
 
@@ -1174,7 +1178,9 @@ curs_clear(3X) の clear 関数を参照ください。
 これにより、このメソッドを呼び出していない場合でも、
 いくつかの処理をできるようになっています。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 @see [[m:Curses.#close_screen]]
 
@@ -1207,7 +1213,9 @@ curses が終了しているかどうかを返します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 --- refresh -> nil
 
@@ -1217,7 +1225,9 @@ curses が終了しているかどうかを返します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 --- doupdate -> nil
 
@@ -1231,7 +1241,9 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 --- echo -> nil
 
@@ -1242,7 +1254,9 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 --- noecho
 
@@ -1253,7 +1267,9 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 --- cbreak -> nil
 #@since 1.9.2
@@ -1264,7 +1280,9 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 #@since 1.9.2
 @see [[m:Curses.#nocbreak]]、[[m:Curses.#nocrmode]]
@@ -1283,7 +1301,9 @@ doupdate 関数の代わりに、refresh 関数を呼び出します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 #@since 1.9.2
 @see [[m:Curses.#cbreak]]、[[m:Curses.#crmode]]
@@ -1786,7 +1806,9 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 @see [[m:Curses.#nocbreak]]、[[m:Curses#nocrmode]]
 
@@ -1798,7 +1820,9 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
+#@until 2.1.0
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+#@end
 
 @see [[m:Curses.#cbreak]]、[[m:Curses#crmode]]
 
