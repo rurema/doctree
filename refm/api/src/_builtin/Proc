@@ -217,7 +217,11 @@ Procをカリー化します
   p b.curry[1, 2][3, 4]        #=> 10
   p b.curry(5)[1][2][3][4][5]  #=> 15
   p b.curry(5)[1, 2][3, 4][5]  #=> 15
+#@since 2.0.0
+  p b.curry(1)                 #=> wrong number of arguments (1 for 3+)
+#@else
   p b.curry(1)                 #=> wrong number of arguments (1 for 3)
+#@end
 
   b = proc { :foo }
   p b.curry[]                  #=> :foo
