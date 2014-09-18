@@ -339,66 +339,66 @@ object ブロックではメソッドの種類が Public Singleton Method に固
 
 以下のようなハイパーリンク記法が使えます。
 
-<dt>![[c:String]]</dt>
+<dt>\[\[c:String\]\]</dt>
 <dd>クラス String にリンク</dd>
-<dt>![[c:File::Stat]]</dt>
+<dt>\[\[c:File::Stat\]\]</dt>
 <dd>クラス File::Stat にリンク</dd>
-<dt>![[m:String.new]]</dt>
+<dt>\[\[m:String.new\]\]</dt>
 <dd>メソッド String.new にリンク</dd>
-<dt>![[m:String#dump]]</dt>
+<dt>\[\[m:String#dump\]\]</dt>
 <dd>メソッド String#dump にリンク</dd>
-<dt>![[m:String#[] ]]</dt>
+<dt>\[\[m:String#[] \]\]</dt>
 <dd>メソッド String#[] にリンク ([]の場合のみ空白は必須)</dd>
-<dt>![[m:Math.#sin]]</dt>
+<dt>\[\[m:Math.#sin\]\]</dt>
 <dd>モジュール関数 Math.#sin にリンク (「.#」なのに注意)</dd>
-<dt>![[m:File::SEPARATOR]]</dt>
+<dt>\[\[m:File::SEPARATOR\]\]</dt>
 <dd>定数 File::SEPARATOR にリンク</dd>
-<dt>![[m:$~]]</dt>
+<dt>\[\[m:$~\]\]</dt>
 <dd>特殊変数 $~ にリンク</dd>
-<dt>![[lib:jcode]]</dt>
+<dt>\[\[lib:jcode\]\]</dt>
 <dd>ライブラリ jcode にリンク</dd>
-<dt>![[d:spec/intro]]</dt>
+<dt>\[\[d:spec/intro\]\]</dt>
 <dd>ドキュメント spec/intro.rd にリンク</dd>
-<dt>![[ref:class]]</dt>
+<dt>\[\[ref:class\]\]</dt>
 <dd>
 同一ページ内の class にリンク
 (同一ページ内に「===[a:class] クラス定義」のようなレベル3以上のブロックが必要)
 </dd>
-<dt>![[ref:d:spec/def#class]]</dt>
+<dt>\[\[ref:d:spec/def#class\]\]</dt>
 <dd>
 ドキュメント spec/def.rd 内の class にリンク
 (spec/def.rd 内に「===[a:class] クラス定義」のようなレベル3以上のブロックが必要)
 </dd>
-<dt>![[ref:lib:socket#pack_string]]</dt>
+<dt>\[\[ref:lib:socket#pack_string\]\]</dt>
 <dd>
 ライブラリ socket 内の pack_string にリンク
 (ライブラリ socket 内に「===[a:pack_string] ソケットアドレス構造体を pack した文字列」のようなレベル3以上のブロックが必要)
 </dd>
-<dt>![[ref:c:FileUtils#options]]</dt>
+<dt>\[\[ref:c:FileUtils#options\]\]</dt>
 <dd>
 クラス FileUtils 内の options にリンク
 (FileUtils のクラスの説明の中に「===[a:options] オプションの説明」のようなレベル3以上のブロックが必要。ただし、メソッドの説明中にはリンクできない)
 </dd>
-<dt>![[ref:m:String#scanf#format]]</dt>
+<dt>\[\[ref:m:String#scanf#format\]\]</dt>
 <dd>
 メソッド String#scanf 内の format にリンク
 (String#scanf のメソッドの説明の中に「===[a:format] scanfフォーマット文字列」のようなレベル3以上のブロックが必要。ただし、クラスの説明中にはリンクできない)
 </dd>
-<dt>![[ruby-list:12345]]</dt>
+<dt>\[\[ruby-list:12345\]\]</dt>
 <dd>ruby-list 12345 番にリンク</dd>
-<dt>![[ruby-dev:12345]]</dt>
+<dt>\[\[ruby-dev:12345\]\]</dt>
 <dd>ruby-dev 12345 番にリンク</dd>
-<dt>![[ruby-ext:12345]]</dt>
+<dt>\[\[ruby-ext:12345\]\]</dt>
 <dd>ruby-ext 12345 番にリンク</dd>
-<dt>![[ruby-talk:12345]]</dt>
+<dt>\[\[ruby-talk:12345\]\]</dt>
 <dd>ruby-talk 12345 番にリンク</dd>
-<dt>![[ruby-core:12345]]</dt>
+<dt>\[\[ruby-core:12345\]\]</dt>
 <dd>ruby-core 12345 番にリンク</dd>
-<dt>![[man:tr(1)]]</dt>
+<dt>\[\[man:tr(1)\]\]</dt>
 <dd>man ページ tr(1) にリンク</dd>
-<dt>![[RFC:2822]]</dt>
+<dt>\[\[RFC:2822\]\]</dt>
 <dd>RFC2822 にリンク</dd>
-<dt>![[url:http://i.loveruby.net]]</dt>
+<dt>\[\[url:http://i.loveruby.net]]</dt>
 <dd>URL「http://i.loveruby.net」にリンク</dd>
 
 ### 既存リファレンスから削除された機能
