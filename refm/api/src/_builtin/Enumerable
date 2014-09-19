@@ -1189,8 +1189,53 @@ nil、 :_separator はある要素を無視したい場合に用います。
   }
 
 @param initial_state 状態を保持するオブジェクト
-@see [[m:Enumerable#chunk]]
+#@end
 
+#@since 2.2.0
+@see [[m:Enumerable#chunk]], [[m:Enumerable#slice_after]]
+
+--- slice_after(pattern) -> Enumerator
+--- slice_after {|elt| bool } -> Enumerator
+
+パターンがマッチした要素、もしくはブロックが真を返した要素を末尾の要素
+としてチャンク化(グループ化)したものを繰り返す [[c:Enumerator]] を 返し
+ます。
+
+パターンを渡した場合は各要素に対し === が呼び出され、 それが真になった
+ところをチャンクの末尾と見なします。 ブロックを渡した場合は、各要素に対
+しブロックを適用し 返り値が真であった要素をチャンクの末尾と見なします。
+
+パターンもブロックも最初から最後の要素まで呼び出されます。
+
+各チャンクは配列として表現されます。そのため、以下のような呼び出しを行
+う事もできます。
+
+  enum.slice_after(pattern).each { |ary| ... }
+  enum.slice_after { |elt| bool }.each { |ary| ... }
+
+例:
+
+  # 偶数要素をチャンクの末尾と見なす
+  [0,2,4,1,2,4,5,3,1,4,2].slice_after(&:even?).to_a
+  # => [[0], [2], [4], [1, 2], [4], [5, 3, 1, 4], [2]]
+
+  # 奇数要素をチャンクの末尾と見なす
+  [0,2,4,1,2,4,5,3,1,4,2].slice_after(&:odd?).to_a
+  # => [[0, 2, 4, 1], [2, 4, 5], [3], [1], [4, 2]]
+
+  # バックスラッシュで終わる行を継続
+  lines = ["foo\n", "bar\\\n", "baz\n", "\n", "qux\n"]
+  e = lines.slice_after(/(?<!\\)\n\z/)
+  p e.to_a
+  #=> [["foo\n"], ["bar\\\n", "baz\n"], ["\n"], ["qux\n"]]
+  p e.map {|ll| ll[0...-1].map {|l| l.sub(/\\\n\z/, "") }.join + ll.last }
+  #=>["foo\n", "barbaz\n", "\n", "qux\n"]
+
+[[m:Enumerable#map]] のようなメソッドを使うこともできます。
+
+@see [[m:Enumerable#chunk]], [[m:Enumerable#slice_before]]
+#@else
+@see [[m:Enumerable#chunk]]
 #@end
 
 #@since 2.0.0
