@@ -414,3 +414,19 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 --- inspect -> String
 
 self の情報を人間に読みやすい文字列にして返します。
+
+#@since 2.2.0
+--- fileno -> Integer
+
+self に関連づけられたファイル記述子を表す整数を返します。
+
+  d = Dir.new("..")
+  d.fileno   #=> 8
+
+本メソッドでは POSIX 2008 で定義されている dirfd() 関数を使用します。
+
+@raise NotImplementedError Windows などの dirfd() 関数が存在しないプラッ
+                           トフォームで発生します。
+
+@see [[m:IO#fileno]]
+#@end
