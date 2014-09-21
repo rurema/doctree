@@ -1,5 +1,9 @@
 
 = class Rinda::InvalidHashTupleKey < Rinda::RindaError
 
-Raised when a hash-based tuple has an invalid key.
+[[c:Rinda::TupleSpace#write]] などで不正なハッシュテーブル(キーが
+文字列でないもの)をタプルスペースに書き込もうとすると発生すると発生する
+例外です。
+
+
 
