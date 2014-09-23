@@ -1739,6 +1739,16 @@ FalseClass を返します。
 #@include(BasicObject.public_methods_from_Object)
 #@end
 
+#@since 2.2.0
+#@# #6373 を参照。
+--- itself -> object
+
+self を返します。
+
+  string = 'my string' # => "my string"
+  string.itself.object_id == string.object_id # => true
+#@end
+
 == Private Instance Methods
 
 --- initialize(*args, &block) -> object
