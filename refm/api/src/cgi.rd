@@ -76,9 +76,9 @@ PStore を使うのが最も簡単です。
 
   require "cgi"
   cgi = CGI.new
-  value = cgi.params['field_name'][0]   # TempFile オブジェクト（Ruby 1.8では 10240バイト未満の場合は StringIOオブジェクト）
+  value = cgi.params['field_name'][0]   # TempFile オブジェクト（10240バイト未満の場合は StringIOオブジェクト）
   value.read                            # 本文（送られてきたファイルの中身）
-  value.local_path                      # ローカルファイルのパス（Ruby 1.8では存在しない）
+  value.local_path                      # ローカルファイルのパス
   value.original_filename               # 元の名前
   value.content_type                    # content_type
 
@@ -140,9 +140,6 @@ CGI クラスのメソッドで得ることもできます。
   * SERVER_SOFTWARE
 
 #content_length と #server_port
-#@if (version == "1.8.1")
-(1.8.1に添付のcgiには「CGI#server_portが常に0を返す」というバグがあります)
-#@end
 は整数を、その他のメソッドは文字列を返します。
 
 HTTP_COOKIE と HTTP_COOKIE2 には
