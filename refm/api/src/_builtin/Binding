@@ -102,3 +102,29 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @see [[m:Binding#local_variable_get]], [[m:Binding#local_variable_set]]
 #@end
+
+#@since 2.2.0
+--- local_variables -> [Symbol]
+
+ローカル変数の一覧を [[c:Symbol]] の配列で返します。
+
+    def foo
+      a = 1
+      2.times do |n|
+        binding.local_variables #=> [:a, :n]
+      end
+    end
+
+このメソッドは以下のコードと同様の動作をします。
+
+  binding.eval("local_variables")
+
+#@# #8779 を参照。
+--- receiver -> object
+
+保持するコンテキスト内での self を返します。
+
+このメソッドは以下のコードと同様の動作をします。
+
+  binding.eval("self")
+#@end
