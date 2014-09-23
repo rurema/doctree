@@ -260,6 +260,10 @@ self のパス名要素毎にブロックを実行します。
          "bar"
 
 --- +(other) -> Pathname
+#@since 2.2.0
+--- /(other) -> Pathname
+#@end
+
 パス名を連結します。つまり、other を self からの相対パスとした新しい
 Pathname オブジェクトを生成して返します。
 
