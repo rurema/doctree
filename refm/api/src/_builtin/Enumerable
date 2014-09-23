@@ -233,98 +233,180 @@ val と == の関係にある要素を含むとき真を返します。
 
 @param val   任意のオブジェクト
 
---- max -> object | nil
+--- max    -> object | nil
+#@since 2.2.0
+--- max(n) -> Array
 
+最大の要素、もしくは最大の n 要素を返します。
+#@else
 最大の要素を返します。
+#@end
 全要素が互いに <=> メソッドで比較できることを仮定しています。
 
+#@since 2.2.0
+引数を指定しない形式では要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 要素が存在しなければ nil を返します。
+#@end
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
---- max {|a, b| ... } -> object | nil
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
 
+--- max {|a, b| ... }    -> object | nil
+#@since 2.2.0
+--- max(n) {|a, b| ... } -> Array
+
+ブロックの評価結果で各要素の大小判定を行い、最大の要素、もしくは最小の
+n 要素を返します。
+引数を指定しない形式では要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 ブロックの評価結果で各要素の大小判定を行い、最大の要素を返します。
 要素が存在しなければ nil を返します。
+#@end
 
 ブロックの値は、a > b のとき正、
 a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
+
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
 #@since 1.9.1
---- max_by              -> Enumerator
+--- max_by                  -> Enumerator
 #@else
---- max_by              -> Enumerable::Enumerator
+--- max_by                  -> Enumerable::Enumerator
 #@end
---- max_by{|item| ... } -> object | nil
+#@since 2.2.0
+--- max_by(n)               -> Enumerator
+#@end
+--- max_by {|item| ... }    -> object | nil
+#@since 2.2.0
+--- max_by(n) {|item| ... } -> Array
+#@end
 
 各要素を順番にブロックに渡して実行し、
 その評価結果を <=> で比較して、
+#@since 2.2.0
+最大であった値に対応する元の要素、もしくは最大の n 要素を返します。
+
+引数を指定しない形式では要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 最大であった値に対応する元の要素を返します。
 
 要素が存在しないときは nil を返します。
+#@end
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
 [[m:Enumerable#max]] と [[m:Enumerable#max_by]] の
 違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
 
 #@since 1.9.1
-ブロックを省略した場合は、各要素を順番にブロックに渡して評価し、
-その結果が最小となる値に対応する要素を返す [[c:Enumerator]] を
-返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
+
+#@since 2.2.0
+@param n 取得する要素数。
 #@end
 
 @see [[m:Enumerable#sort_by]]
 
 #@end
 
---- min -> object | nil
+--- min    -> object | nil
+#@since 2.2.0
+--- min(n) -> Array
 
+最小の要素、もしくは最小の n 要素を返します。
+#@else
 最小の要素を返します。
+#@end
 全要素が互いに <=> メソッドで比較できることを仮定しています。
 
+#@since 2.2.0
+引数を指定しない形式では要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 要素が存在しなければ nil を返します。
+#@end
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
---- min {|a, b| ... } -> object | nil
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
 
+--- min {|a, b| ... }    -> object | nil
+#@since 2.2.0
+--- min(n) {|a, b| ... } -> Array
+
+ブロックの評価結果で各要素の大小判定を行い、最小の要素、もしくは最小の
+n 要素を返します。
+引数を指定しない形式では要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 ブロックの評価結果で各要素の大小判定を行い、最小の要素を返します。
 要素が存在しなければ nil を返します。
+#@end
 
 ブロックの値は、a > b のとき正、a == b のとき 0、
 a < b のとき負の整数を、期待しています。
 
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
+
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
 #@since 1.9.1
---- min_by               -> Enumerator
+--- min_by                  -> Enumerator
 #@else
---- min_by               -> Enumerable::Enumerator
+--- min_by                  -> Enumerable::Enumerator
 #@end
---- min_by {|item| ... } -> object | nil
+#@since 2.2.0
+--- min_by(n)               -> Enumerator
+#@end
+--- min_by {|item| ... }    -> object | nil
+#@since 2.2.0
+--- min_by(n) {|item| ... } -> Array
+#@end
 
 各要素を順番にブロックに渡して評価し、
 その評価結果を <=> で比較して、
+#@since 2.2.0
+最小であった値に対応する元の要素、もしくは最小の n 要素を返します。
+
+引数を指定しない形式では要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 最小であった値に対応する元の要素を返します。
 
 要素が存在しないときは nil を返します。
+#@end
 
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
 #@since 1.9.1
-ブロックを省略した場合は、各要素を順番にブロックに渡して評価し、
-その結果が最小となる値に対応する要素を返す [[c:Enumerator]] を
-返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 #@end
 
 [[m:Enumerable#min]] と [[m:Enumerable#min_by]] の
 違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
+
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
 
 @see [[m:Enumerable#sort_by]]
 
