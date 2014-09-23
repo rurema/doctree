@@ -396,6 +396,13 @@ File.mtime(self.to_s) を渡したものと同じです。
 
 @see [[m:File.mtime]]
 
+#@since 2.2.0
+--- birthtime -> Time
+File.birthtime(self.to_s) を渡したものと同じです。
+
+@see [[m:File.birthtime]]
+#@end
+
 --- chmod(mode) -> Integer
 File.chmod(mode, self.to_s) と同じです。
 

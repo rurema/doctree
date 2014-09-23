@@ -39,6 +39,20 @@ include File::Constants
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@since 2.2.0
+--- birthtime(filename) -> Time
+
+作成された時刻を返します。
+
+Windows のような birthtime のない環境では ctime の値を返します。
+
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+  File.birthtime("testfile")   #=> Wed Apr 09 08:53:13 CDT 2003
+#@end
+
 --- basename(filename, suffix = "")     -> String
 
 filename の一番後ろのスラッシュに続く要素を返します。もし、
@@ -696,7 +710,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@since 2.2.0
+@see [[m:File#lstat]], [[m:File#ctime]], [[m:File#mtime]], [[m:File#birthtime]]
+#@else
 @see [[m:File#lstat]], [[m:File#ctime]], [[m:File#mtime]]
+#@end
 
 --- ctime    -> Time
 
@@ -706,7 +724,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@since 2.2.0
+@see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]], [[m:File#birthtime]]
+#@else
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]]
+#@end
 
 --- mtime    -> Time
 
@@ -716,7 +738,27 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@since 2.2.0
+@see [[m:File#lstat]], [[m:File#atime]], [[m:File#ctime]], [[m:File#birthtime]]
+#@else
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#ctime]]
+#@end
+
+#@since 2.2.0
+--- birthtime -> Time
+
+作成された時刻を Time オブジェクトとして返します。
+
+Windows のような birthtime のない環境では ctime の値を返します。
+
+@raise IOError 自身が close されている場合に発生します。
+
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+  File.new("testfile").birthtime   #=> Wed Apr 09 08:53:14 CDT 2003
+
+@see [[m:File#lstat]], [[m:File#atime]], [[m:File#ctime]], [[m:File#mtime]]
+#@end
 
 #@since 1.9.2
 --- size     -> Integer
