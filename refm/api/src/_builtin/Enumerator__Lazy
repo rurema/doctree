@@ -177,6 +177,30 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 self を返します。
 
+--- chunk {|elt| ... } -> Enumerator::Lazy
+--- chunk(initial_state) {|elt, state| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#chunk]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+@see [[m:Enumerable#chunk]]
+
+--- slice_before(pattern) -> Enumerator::Lazy
+--- slice_before {|elt| bool } -> Enumerator::Lazy
+--- slice_before(initial_state) {|elt, state| bool } -> Enumerator::Lazy
+
+[[m:Enumerable#slice_before]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+@see [[m:Enumerable#slice_before]]
+
+#@since 2.2.0
+--- slice_after(pattern) -> Enumerator::Lazy
+--- slice_after {|elt| bool } -> Enumerator::Lazy
+
+[[m:Enumerable#slice_after]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+@see [[m:Enumerable#slice_after]]
+#@end
+
 --- force(*args) -> [object]
 
 全ての要素を含む配列を返します。Lazy から実際に値を取り出すのに使います。
