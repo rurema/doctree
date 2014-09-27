@@ -68,6 +68,9 @@ GC.stress が真に設定されている間は、GC を行えるすべての機�
 
 #@since 1.9.3
 --- stat(result_hash = {}) -> {Symbol => Integer}
+#@since 2.1.0
+--- stat(key) -> Numeric
+#@end
 
 GC 内部の統計情報を [[c:Hash]] で返します。
 
@@ -75,10 +78,73 @@ GC 内部の統計情報を [[c:Hash]] で返します。
                    しくハッシュを作成します。result_hash の内容は上書き
                    されます。
 
+#@since 2.1.0
+
+@param key 得られる統計情報から特定の情報を取得したい場合にキーを
+           [[c:Symbol]] で指定します。
+#@end
+
 @return GC 内部の統計情報を[[c:Hash]] で返します。
+#@since 2.1.0
+        引数 key を指定した場合は数値を返します。
+#@end
 
   GC.stat
   # =>
+#@since 2.2.0
+   {
+     :count=>0,
+     :heap_allocated_pages=>24,
+     :heap_sorted_length=>24,
+     :heap_allocatable_pages=>0,
+     :heap_available_slots=>9783,
+     :heap_live_slots=>7713,
+     :heap_free_slots=>2070,
+     :heap_final_slots=>0,
+     :heap_marked_slots=>0,
+     :heap_swept_slots=>0,
+     :heap_eden_pages=>24,
+     :heap_tomb_pages=>0,
+     :total_allocated_pages=>24,
+     :total_freed_pages=>0,
+     :total_allocated_objects=>7796,
+     :total_freed_objects=>83,
+     :malloc_increase_bytes=>2389312,
+     :malloc_increase_bytes_limit=>16777216,
+     :minor_gc_count=>0,
+     :major_gc_count=>0,
+     :remembered_wb_unprotected_objects=>0,
+     :remembered_wb_unprotected_objects_limit=>0,
+     :old_objects=>0,
+     :old_objects_limit=>0,
+     :oldmalloc_increase_bytes=>2389760,
+     :oldmalloc_increase_bytes_limit=>16777216
+   }
+#@else
+#@since 2.1.0
+  {
+    :count=>2,
+    :heap_used=>9,
+    :heap_length=>11,
+    :heap_increment=>2,
+    :heap_live_slot=>6836,
+    :heap_free_slot=>519,
+    :heap_final_slot=>0,
+    :heap_swept_slot=>818,
+    :total_allocated_object=>7674,
+    :total_freed_object=>838,
+    :malloc_increase=>181034,
+    :malloc_limit=>16777216,
+    :minor_gc_count=>2,
+    :major_gc_count=>0,
+    :remembered_shady_object=>55,
+    :remembered_shady_object_limit=>0,
+    :old_object=>2422,
+    :old_object_limit=>0,
+    :oldmalloc_increase=>277386,
+    :oldmalloc_limit=>16777216
+  }
+#@else
   {
     :count          => 18,
     :heap_used      => 77,
@@ -88,6 +154,8 @@ GC 内部の統計情報を [[c:Hash]] で返します。
     :heap_free_num  => 8115,
     :heap_final_num => 0,
   }
+#@end
+#@end
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
