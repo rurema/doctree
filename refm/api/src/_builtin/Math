@@ -81,6 +81,11 @@ y / x の逆正接関数の値を返します。
 @raise TypeError y, x に数値以外を指定した場合に発生します。
 
 @raise RangeError y, x に実数以外の数値を指定した場合に発生します。
+
+#@until 2.2.0
+@raise DomainError 引数 y, x の両方に [[m:Float::INFINITY]] を指定した
+                   場合に発生します。
+#@end
 #@end
 
 #@since 1.8.0
@@ -330,6 +335,12 @@ sqrt(x*x + y*y) を返します。
 
 x の対数を返します。
 
+#@since 2.2.0
+引数 x, b の両方に 0 を指定した場合は [[m:Float::NAN]] を返します。
+#@else
+引数 x, b の両方に 0 を指定した場合は -[[m:Float::INFINITY]] を返します。
+#@end
+
 @param x 正の実数を指定します。
 
 @param b 底を指定します。省略した場合は自然対数を計算します。
@@ -337,6 +348,12 @@ x の対数を返します。
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+
+#@since 2.2.0
+@raise DomainError 引数のどちらかに負の数を指定した場合に発生します。
+#@else
+@raise DomainError 引数 x に負の数を指定した場合に発生します。
+#@end
 #@else
 --- log(x) -> Float
 
