@@ -3,7 +3,7 @@ require digest
 キー付きハッシュアルゴリズム HMAC(Keyed-Hashing for Message Authentication code)
 の実装の一つを提供するライブラリです。
 
-このライブラリは実験的な実装なので [[lib:openssl]] に含まれている [[c:OpenSSL::HMAC]] を使ってください。
+このライブラリは 2.2.0 で削除されました。また、2.2.0 以前でも実験的な実装なので [[lib:openssl]] に含まれている [[c:OpenSSL::HMAC]] を使ってください。
 
 HMAC は [[RFC:2104]] で定義されています。
 
