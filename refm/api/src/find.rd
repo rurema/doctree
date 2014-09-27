@@ -36,6 +36,9 @@ category File
 
 == Module Functions
 
+#@since 1.9.1
+--- find(*dirs)              -> Enumerator
+#@end
 --- find(*dirs){|file| ... } -> nil
 
 [[man:find(1)]] のように dir 配下のすべてのファイルや
@@ -43,6 +46,11 @@ category File
 
 ディレクトリのシンボリックリンクは辿りません。
 また file に渡される順序は不定です。
+
+#@since 1.9.1
+ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返
+します。
+#@end
 
 @param dirs 探索するディレクトリを一つ以上指定します。
 
