@@ -172,6 +172,7 @@ obj を width カラムのテキストとして自身に追加します。
 
 バッファされたデータを出力します。
 
+#@until 2.2.0
 --- first?    -> bool
 
 #@since 1.8.2
@@ -190,6 +191,7 @@ obj を width カラムのテキストとして自身に追加します。
       ... pretty printing yyy ...
     }
   }
+#@end
 
 --- output    -> object
 
