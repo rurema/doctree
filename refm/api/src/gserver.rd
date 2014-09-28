@@ -32,6 +32,13 @@ category Network
   GServer.stop(10001)
   # もちろん server.stop でも可能です。
 
+=== 注意
+
+このライブラリは 2.2.0 で gem ライブラリとして切り離されました。2.2.0
+以降ではそちらを利用してください。
+
+  * [[url:https://rubygems.org/gems/gserver]]
+
 = class GServer < Object
 
 サーバを実装するためのクラスです。[[c:GServer]] を継承した新しいクラスを定義して使います。

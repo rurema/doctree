@@ -5,7 +5,8 @@ category Math
 #@since 1.9.1
 
 1.9 以降では [[c:Rational]] クラスは組み込みクラスになりました。
-rational ライブラリは互換性のために残されています。
+rational ライブラリは互換性のために残されていましたが、2.2.0 で削除され
+ました。
 
 = reopen Fixnum
 == Instance Methods

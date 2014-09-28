@@ -36,7 +36,9 @@ cgi/util
 #@since 1.9.1
 cmath
 #@end
+#@until 2.2.0
 complex
+#@end
 #@since 1.9.1
 continuation
 coverage
@@ -128,7 +130,9 @@ getoptlong
 getopts
 #@end
 #@since 1.8.0
+#@until 2.2.0
 gserver
+#@end
 #@until 2.0.0
 iconv
 #@end
@@ -285,7 +289,9 @@ rake/tasklib
 rake/testtask
 rake/loaders/makefile
 #@end
+#@until 2.2.0
 rational
+#@end
 rbconfig
 #@since 1.8.1
 rdoc
