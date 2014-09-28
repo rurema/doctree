@@ -300,7 +300,9 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクトです。そ�
 
   require "yaml"
 
+#@until 2.2.0
   p YAML::ENGINE.yamler # => "psych"
+#@end
   p YAML                # => Psych
   p YAML::Stream        # => Psych::Stream
 #@else
@@ -322,6 +324,7 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] 
   p YAML::Stream # => Syck::Stream
 #@end
 
+#@until 2.2.0
 == Constants
 
 --- ENGINE -> YAML::EngineManager
@@ -393,6 +396,7 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] 
 
   YAML::ENGINE.yamler = "syck"
   p YAML::ENGINE.syck? # => true
+#@end
 #@end
 
 #@else
