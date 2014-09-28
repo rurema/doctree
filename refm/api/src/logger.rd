@@ -358,6 +358,7 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 
 ログレベルのラベルを格納した配列。
 
+#@until 2.2.0
 = class Logger::Application < Object
 include Logger::Severity
 
@@ -387,6 +388,13 @@ include Logger::Severity
   end
   
   status = FooApp.new(....).start
+
+=== 注意
+
+このクラスは 2.2.0 で gem ライブラリとして切り離されました。2.2.0
+以降ではそちらを利用してください。
+
+  * [[url:https://rubygems.org/gems/logger-application]]
 
 == Class Methods
 
@@ -461,6 +469,7 @@ include Logger::Severity
 @return run メソッドの返値を返します。
 
 @raise RuntimeError サブクラスで run メソッドを定義していない場合に発生します。
+#@end
 
 #@since 1.8.3
 = class Logger::Formatter < Object
