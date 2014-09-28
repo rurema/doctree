@@ -778,10 +778,15 @@ Dir.open(self.to_s, &block) と同じです。
 
 @see [[m:Dir.open]]
 
+#@since 2.2.0
+--- find(ignore_error: true)                  -> Enumerator
+--- find(ignore_error: true) {|pathname| ...} -> nil
+#@else
 #@since 2.0.0
 --- find                  -> Enumerator
 #@end
 --- find {|pathname| ...} -> nil
+#@end
 self 配下のすべてのファイルやディレクトリを
 一つずつ引数 pathname に渡してブロックを実行します。
 
@@ -793,6 +798,10 @@ self 配下のすべてのファイルやディレクトリを
 #@since 2.0.0
 ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返
 します。
+#@end
+
+#@since 2.2.0
+@param ignore_error 探索中に発生した例外を無視するかどうかを指定します。
 #@end
 
 @see [[m:Find.#find]]

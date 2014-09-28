@@ -36,10 +36,15 @@ category File
 
 == Module Functions
 
+#@since 2.2.0
+--- find(*dirs, ignore_error: true)              -> Enumerator
+--- find(*dirs, ignore_error: true){|file| ... } -> nil
+#@else
 #@since 1.9.1
 --- find(*dirs)              -> Enumerator
 #@end
 --- find(*dirs){|file| ... } -> nil
+#@end
 
 [[man:find(1)]] のように dir 配下のすべてのファイルや
 ディレクトリを一つずつ引数 file に渡してブロックを実行します。
@@ -53,6 +58,10 @@ category File
 #@end
 
 @param dirs 探索するディレクトリを一つ以上指定します。
+
+#@since 2.2.0
+@param ignore_error 探索中に発生した例外を無視するかどうかを指定します。
+#@end
 
 例:
 
