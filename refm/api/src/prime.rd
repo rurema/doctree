@@ -125,6 +125,11 @@ Prime クラスはシングルトンであると考えてください。Prime �
 
 @param generator 素数生成器のインスタンスを指定します。
 
+@return 素数かどうかを返します。
+#@since 2.2.0
+        引数 value に負の数を指定した場合は常に false を返します。
+#@end
+
 @see [[c:Prime::EratosthenesGenerator]], [[c:Prime::TrialDivisionGenerator]], [[c:Prime::Generator23]]
 
 --- prime_division(value, generator= Prime::Generator23.new) -> [[Integer, Integer]]
