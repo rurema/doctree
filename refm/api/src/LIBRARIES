@@ -208,10 +208,12 @@ mailread
 mathn
 matrix
 #@since 1.9.1
+#@until 2.2.0
 minitest/autorun
 minitest/mock
 minitest/spec
 minitest/unit
+#@end
 #@end
 #@until 1.9.1
 md5
@@ -609,6 +611,7 @@ syslog/logger
 #@end
 tempfile
 #@since 1.8.0
+#@until 2.2.0
 test/unit
 test/unit/assertions
 test/unit/testcase
@@ -624,6 +627,7 @@ test/unit/ui/gtk/testrunner
 test/unit/ui/gtk2/testrunner
 test/unit/ui/tk/testrunner
 test/unit/util/observable
+#@end
 #@end
 #@end
 thread

@@ -15,6 +15,10 @@ test/unit は [[lib:minitest/unit]] を使って再実装されましたが、�
 いて記述しています)
 
   * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.github.io/]]
+
+また、このライブラリは 2.2.0 で削除されました。gem ライブラリでの代替も
+ありません。2.2.0 以降では上記の正統な test/unit を RubyGems でインストー
+ルして利用してください。.gem ファイルはソースコードにも同梱されています。
 #@end
 
 === 使い方

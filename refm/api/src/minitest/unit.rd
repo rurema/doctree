@@ -118,6 +118,14 @@ require 'test/unit' している場合は互換レイヤーが読み込まれ以
 そうではなくて require 'minitest/unit' する場合は、テストクラスの定義時に親クラスを
 [[c:MiniTest::Unit::TestCase]] にしなければなりません。
 
+=== 注意
+
+このライブラリは 2.2.0 で削除されました。2.2.0 以降では以下を RubyGems
+でインストールして利用してください。.gem ファイルはソースコードにも同梱
+されています。
+
+  * [[url:https://rubygems.org/gems/minitest]]
+
 = module MiniTest
 
 [[lib:minitest/unit]] で使用するクラスやモジュールを定義しているモジュールです。

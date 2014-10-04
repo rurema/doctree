@@ -2,6 +2,14 @@ category Development
 
 シンプルなモックライブラリです。
 
+=== 注意
+
+このライブラリは 2.2.0 で削除されました。2.2.0 以降では以下を RubyGems
+でインストールして利用してください。.gem ファイルはソースコードにも同梱
+されています。
+
+  * [[url:https://rubygems.org/gems/minitest]]
+
 = class MiniTest::Mock
 
 シンプルなモックを実現するためのクラスです。

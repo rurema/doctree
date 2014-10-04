@@ -8,6 +8,14 @@ BDD 風にテストを書くためのクラスやメソッドを定義するた�
 
 #@# message を指定するとおかしなことになる
 
+=== 注意
+
+このライブラリは 2.2.0 で削除されました。2.2.0 以降では以下を RubyGems
+でインストールして利用してください。.gem ファイルはソースコードにも同梱
+されています。
+
+  * [[url:https://rubygems.org/gems/minitest]]
+
 = reopen Module
 
 == Public Instance Methods
