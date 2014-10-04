@@ -237,6 +237,15 @@ name という名前のグループエントリを返します。
   Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
   Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
 
+--- nprocessors -> Integer
+
+有効な CPU コア数を返します。
+
+例:
+
+  require 'etc'
+  p Etc.nprocessors #=> 4
+
 == Constants
 
 --- SC_AIO_LISTIO_MAX -> Integer
