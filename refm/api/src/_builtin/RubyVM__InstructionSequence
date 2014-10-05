@@ -445,7 +445,7 @@ self が表す命令シーケンスの基本ラベルを返します。
 
 self が表す命令シーケンスの 1 行目の行番号を返します。
 
-例:irb で実行した場合
+例1:irb で実行した場合
 
   RubyVM::InstructionSequence.compile('num = 1 + 2').first_lineno
   # => 1
