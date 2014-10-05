@@ -114,27 +114,7 @@ options で指定します。
 
 @param body [[c:Proc]]、[[c:Method]] オブジェクトを指定します。
 
-例1:[[c:Method]] オブジェクトを指定した場合
-
-  # /tmp/method.rb
-  def hello
-    puts "hello, world"
-  end
-
-  puts RubyVM::InstructionSequence.disasm(method(:hello))
-
-出力:
-
-  == disasm: <RubyVM::InstructionSequence:hello@/tmp/method.rb>============
-  0000 trace            8                                               (   1)
-  0002 trace            1                                               (   2)
-  0004 putself
-  0005 putstring        "hello, world"
-  0007 send             :puts, 1, nil, 8, <ic:0>
-  0013 trace            16                                              (   3)
-  0015 leave                                                            (   2)
-
-例2:[[c:Method]] オブジェクトを指定した場合
+例1:[[c:Proc]] オブジェクトを指定した場合
 
   # /tmp/proc.rb
   p = proc { num = 1 + 2 }
@@ -156,6 +136,26 @@ options で指定します。
   0008 dup
   0009 setlocal         num, 0
   0012 leave
+
+例2:[[c:Method]] オブジェクトを指定した場合
+
+  # /tmp/method.rb
+  def hello
+    puts "hello, world"
+  end
+
+  puts RubyVM::InstructionSequence.disasm(method(:hello))
+
+出力:
+
+  == disasm: <RubyVM::InstructionSequence:hello@/tmp/method.rb>============
+  0000 trace            8                                               (   1)
+  0002 trace            1                                               (   2)
+  0004 putself
+  0005 putstring        "hello, world"
+  0007 send             :puts, 1, nil, 8, <ic:0>
+  0013 trace            16                                              (   3)
+  0015 leave                                                            (   2)
 
 @see [[m:RubyVM::InstructionSequence#disasm]]
 
