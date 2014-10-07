@@ -6,31 +6,9 @@
 
 --- static VALUE convert_type(VALUE val, const char *tname, const char *method, int raise)
 
---- static VALUE false_and(VALUE obj, VALUE obj2)
-
---- static VALUE false_or(VALUE obj, VALUE obj2)
-
---- static VALUE false_to_s(VALUE obj)
-
---- static VALUE false_xor(VALUE obj, VALUE obj2)
-
 --- static int inspect_i(ID id, VALUE value, VALUE str)
 
 --- static VALUE inspect_obj(VALUE obj, VALUE str)
-
---- static VALUE main_to_s(VALUE obj)
-
---- static VALUE nil_inspect(VALUE obj)
-
---- static VALUE nil_plus(VALUE x, VALUE y)
-
---- static VALUE nil_to_a(VALUE obj)
-
---- static VALUE nil_to_f(VALUE obj)
-
---- static VALUE nil_to_i(VALUE obj)
-
---- static VALUE nil_to_s(VALUE obj)
 
 --- static VALUE rb_any_to_a(VALUE obj)
 
@@ -256,19 +234,4 @@ val を to_int メソッドを使って Ruby の整数に変換します。
 
 Qtrue を返します。
 
---- static VALUE sym_inspect(VALUE sym)
-
---- static VALUE sym_intern(VALUE sym)
-
---- static VALUE sym_to_i(VALUE sym)
-
---- static VALUE sym_to_s(VALUE sym)
-
---- static VALUE true_and(VALUE obj, VALUE obj2)
-
---- static VALUE true_or(VALUE obj, VALUE obj2)
-
---- static VALUE true_to_s(VALUE obj)
-
---- static VALUE true_xor(VALUE obj, VALUE obj2)
-
+--- static VALUE rb_sym_interned_p(VALUE sym)
