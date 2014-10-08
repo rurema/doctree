@@ -1453,7 +1453,9 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 Windows での [[m:Process.fork]] や GNU/Linux での [[m:File.lchmod]] の
 ような [[c:NotImplementedError]] が発生する場合は false を返します。
 
-※ NotImplementedError が発生する場合に false を返すのはネイティブのメソッドのみです。
+※ NotImplementedError が発生する場合に false を返すのは
+Rubyの組み込みライブラリや標準ライブラリなど、C言語で実装されているメソッドのみです。
+Rubyで実装されたメソッドで NotImplementedError が発生する場合は true を返します。
 
 メソッドが定義されていない場合は、[[m:Object#respond_to_missing?]] を呼
 び出してその結果を返します。
@@ -1526,9 +1528,9 @@ Windows での [[m:Process.fork]] や GNU/Linux での [[m:File.lchmod]] の
   end
 
   puts ImplTemplateMethod.new.respond_to?(:template_method) # => true
-  # NotImplementedError を返却しているが、非ネイティブのため真を返却
+  # NotImplementedError が発生しているが、Rubyによる実装部のため true を返却
   puts NotImplTemplateMethod.new.respond_to?(:template_method) # => true
-  # GNU/Linux で実行
+  # GNU/Linux で実行。C言語による実装部のため false を返却
   puts File.respond_to?(:lchmod)         # => false
 
 @see [[m:Module#method_defined?]]
