@@ -1453,6 +1453,10 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 Windows での [[m:Process.fork]] や GNU/Linux での [[m:File.lchmod]] の
 ような [[c:NotImplementedError]] が発生する場合は false を返します。
 
+※ NotImplementedError が発生する場合に false を返すのは
+Rubyの組み込みライブラリや標準ライブラリなど、C言語で実装されているメソッドのみです。
+Rubyで実装されたメソッドで NotImplementedError が発生する場合は true を返します。
+
 メソッドが定義されていない場合は、[[m:Object#respond_to_missing?]] を呼
 び出してその結果を返します。
 #@end
@@ -1489,6 +1493,45 @@ Windows での [[m:Process.fork]] や GNU/Linux での [[m:File.lchmod]] の
   list.each{|it| it.instance_eval("puts hello if it.respond_to?(:hello, true)")}
   #=> Bonjour
   #   Guten Tag
+
+  module Template
+    def main
+      start
+      template_method
+      finish
+    end
+
+    def start
+      puts "start"
+    end
+
+    def template_method
+      raise NotImplementedError.new
+    end
+
+    def finish
+      puts "finish"
+    end
+  end
+
+  class ImplTemplateMethod
+    include Template
+    def template_method
+      "implement template_method"
+    end
+  end
+
+  class NotImplTemplateMethod
+    include Template
+
+    # not implement template_method
+  end
+
+  puts ImplTemplateMethod.new.respond_to?(:template_method) # => true
+  # NotImplementedError が発生しているが、Rubyによる実装部のため true を返却
+  puts NotImplTemplateMethod.new.respond_to?(:template_method) # => true
+  # GNU/Linux で実行。C言語による実装部のため false を返却
+  puts File.respond_to?(:lchmod)         # => false
 
 @see [[m:Module#method_defined?]]
 #@until 2.0.0
