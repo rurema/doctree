@@ -167,11 +167,20 @@ class に生成した特異クラスを設定し、そのフレーム上で定�
 
 メソッドにブロックを与える場合、そのブロックはメソッドを呼び出す側のブ
 ロックの self と class を継承します。Module#module_eval/class_eval、
-Object#instance_eval の三つだけが例外で、以下のように変更されます。
+#@since 1.9.1
+BasicObject#instance_eval
+#@else
+Object#instance_eval
+#@end
+の三つだけが例外で、以下のように変更されます。
 
-: Module#module_eval, class_eval
+: [[m:Module#module_eval]], [[m:Module#class_eval]]
     self、class ともそのレシーバ
-: Object.instance_eval
+#@since 1.9.1
+: [[m:BasicObject#instance_eval]]
+#@else
+: [[m:Object#instance_eval]]
+#@end
     self がそのレシーバ、class がそのレシーバの特異クラス
 
 ==== eval
