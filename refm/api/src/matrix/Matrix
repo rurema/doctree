@@ -935,11 +935,18 @@ Returns the real part of the matrix.
 
 #@until 1.9.2
 #@# bc-rdoc: detected missing name: compare_by_row_vectors
+#@since 1.9.1
+--- compare_by_row_vectors(rows, comparison = :==) -> bool
+#@else
 --- compare_by_row_vectors(rows) -> bool
+#@end
 
 自分自身([[c:Matrix]])を配列の配列([[c:Array]])とみなして引数rowsと比較します。
 
 @param rows 比較対象の配列の配列
+#@since 1.9.1
+@param comparison 比較のためのメソッドを表す [[c:Symbol]]
+#@end
 @return selfを配列の配列とみなしたときに引数rowと等しい時にtrue, それ以外にはfalseを返します。
 
 例:
