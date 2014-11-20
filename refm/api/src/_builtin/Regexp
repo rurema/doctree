@@ -285,6 +285,8 @@ string が文字列でない場合には false を返します。
 string が文字列でもシンボルでもない場合には false を返します。
 #@end
 
+このメソッドは主にcase文での比較に用いられます。
+
 @param string マッチ対象文字列
 
 --- ~ -> Fixnum | nil
