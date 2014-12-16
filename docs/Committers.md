@@ -1,1 +1,1 @@
-* [members](https://github.com/orgs/rurema/members) 参照
+* [people](https://github.com/orgs/rurema/people) 参照
