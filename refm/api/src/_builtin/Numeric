@@ -420,6 +420,10 @@ self を other で割った商を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
+#@if("1.9.3" <= version and version <= "2.0.0")
+なお、割る数が 0 以外の整数の場合の挙動はバグのため Ruby2.1.0 以降では修正されています。詳しくは[[url:https://bugs.ruby-lang.org/issues/5515]]を参照して下さい。
+#@end
+
 @param other 自身を割る数を指定します。
 
   1.quo(3)      #=> (1/3)
