@@ -14,6 +14,8 @@
 
 --- VALUE rb_any_to_s(VALUE obj)
 
+[[m:Object#to_s]] の実体です。
+
 --- VALUE rb_Array(VALUE obj)
 
 obj が Array でない場合は to_a を使って
