@@ -10,8 +10,6 @@
 
 --- static VALUE inspect_obj(VALUE obj, VALUE str)
 
---- static VALUE rb_any_to_a(VALUE obj)
-
 --- VALUE rb_any_to_s(VALUE obj)
 
 [[m:Object#to_s]] の実体です。
