@@ -31,15 +31,15 @@ method の結果の型が type でなければ例外 TypeError が発生しま�
 
 --- static VALUE rb_class_allocate_instance(VALUE klass)
 
-[[m:Class#allocate]] の実体。
+[[m:Class#allocate]] の実体です。
 
 --- static VALUE rb_class_initialize(int argc, VALUE *argv, VALUE klass)
 
-[[m:Class#initialize]] の実体。
+[[m:Class#initialize]] の実体です。
 
 --- VALUE rb_class_new_instance(int argc, VALUE *argv, VALUE klass)
 
-[[m:Class#new]] の実体。
+[[m:Class#new]] の実体です。
 
 --- VALUE rb_class_real(VALUE cl)
 
@@ -170,11 +170,11 @@ obj1 と obj2 が同一のオブジェクトなら真。
 
 --- VALUE rb_obj_id(VALUE obj)
 
-[[m:Object#id]] の実体。
+[[m:Object#id]] の実体です。
 
 --- static VALUE rb_obj_inspect(VALUE obj)
 
-[[m:Object#inspect]] の実体。
+[[m:Object#inspect]] の実体です。
 
 --- VALUE rb_obj_is_instance_of(VALUE obj, VALUE klass)
 
@@ -187,15 +187,15 @@ obj がクラス klass およびそのサブクラスの
 
 --- static VALUE rb_obj_methods(VALUE obj)
 
-[[m:Object#methods]] の実体。
+[[m:Object#methods]] の実体です。
 
 --- static VALUE rb_obj_private_methods(VALUE obj)
 
-[[m:Object#private_methods]] の実体。
+[[m:Object#private_methods]] の実体です。
 
 --- static VALUE rb_obj_protected_methods(VALUE obj)
 
-[[m:Object#protected_methods]] の実体。
+[[m:Object#protected_methods]] の実体です。
 
 --- VALUE rb_obj_taint(VALUE obj)
 
@@ -219,7 +219,7 @@ strl を C の文字列に変換します。第二引数も与えると
 
 --- VALUE rb_String(VALUE val)
 
-[[m:Kernel.#String]] の実体。
+[[m:Kernel.#String]] の実体です。
 val を文字列に変換します。
 
 --- VALUE rb_to_id(VALUE name)
