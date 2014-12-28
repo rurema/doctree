@@ -3499,3 +3499,69 @@ self が不正なバイト列を含む場合に別の文字列に置き換えま
 
 @see [[m:String#scrub]]
 #@end
+
+#@since 2.2.0
+--- unicode_normalize(form = :nfc) -> String
+
+self を NFC、NFD、NFKC、NFKD のいずれかの正規化形式で Unicode 正規化し
+た文字列を返します。
+
+@param form 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定しま
+            す。省略した場合は :nfc になります。
+
+@raise Encoding::CompatibilityError self が Unicode 文字列ではない場合
+                                    に発生します。
+
+このメソッドでの "Unicode 文字列" とは、UTF-8、UTF-16BE/LE、
+UTF-32BE/LE だけではなく GB18030、UCS_2BE、and UCS_4BE を含みます。
+
+また、self が UTF-8 以外のエンコーディングであった場合は一度 UTF-8 に変
+換してから正規化されるため、UTF-8 よりも遅くなっています。
+
+例:
+
+  "a\u0300".unicode_normalize        # => 'à' ("\u00E0" と同じ)
+  "a\u0300".unicode_normalize(:nfc)  # => 'à' ("\u00E0" と同じ)
+  "\u00E0".unicode_normalize(:nfd)   # => 'à' ("a\u0300" と同じ)
+  "\xE0".force_encoding('ISO-8859-1').unicode_normalize(:nfd)
+                                     # => Encoding::CompatibilityError raised
+
+@see [[m:String#unicode_normalize!]], [[m:String#unicode_normalized?]]
+
+--- unicode_normalize!(form = :nfc) -> self
+
+self を NFC、NFD、NFKC、NFKD のいずれかの正規化形式で Unicode 正規化し
+た文字列に置き換えます。
+
+(gsub!などと異なり)変換が行なわれなくても self を返します。
+
+@param form 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定しま
+            す。省略した場合は :nfc になります。
+
+@raise Encoding::CompatibilityError self が Unicode 文字列ではない場合
+                                    に発生します。
+
+@see [[m:String#unicode_normalize]], [[m:String#unicode_normalized?]]
+
+--- unicode_normalized?(form = :nfc) -> bool
+
+self が引数 form で指定された正規化形式で Unicode 正規化された文字列か
+どうかを返します。
+
+@param form 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定しま
+            す。省略した場合は :nfc になります。
+
+@raise Encoding::CompatibilityError self が Unicode 文字列ではない場合
+                                    に発生します。
+
+例:
+
+  "a\u0300".unicode_normalized?        # => false
+  "a\u0300".unicode_normalized?(:nfd)  # => true
+  "\u00E0".unicode_normalized?         # => true
+  "\u00E0".unicode_normalized?(:nfd)   # => false
+  "\xE0".force_encoding('ISO-8859-1').unicode_normalized?
+                                       # => Encoding::CompatibilityError raised
+
+@see [[m:String#unicode_normalize]], [[m:String#unicode_normalize!]]
+#@end
