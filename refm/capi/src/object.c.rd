@@ -81,13 +81,29 @@ obj1 == obj2 ならば Qtrue、
 
 --- static VALUE rb_f_array(VALUE obj, VALUE arg)
 
+[[m:Kernel.#Array]] の実体です。
+
 --- static VALUE rb_f_float(VALUE obj, VALUE arg)
+
+[[m:Kernel.#Float]] の実体です。
 
 --- static VALUE rb_f_integer(VALUE obj, VALUE arg)
 
+[[m:Kernel.#Integer]] の実体です。
+
 --- static VALUE rb_f_string(VALUE obj, VALUE arg)
 
+[[m:Kernel.#String]] の実体です。
+
+#@# #@since 2.0.0
+#@# --- static VALUE rb_f_hash(VALUE obj, VALUE arg)
+#@#
+#@# [[m:Kernel.#Hash]] の実体です。
+#@# #@end
+
 --- static VALUE rb_false(VALUE obj)
+
+[[m:Object#nil?]] の実体です。
 
 --- VALUE rb_Float(VALUE val)
 
