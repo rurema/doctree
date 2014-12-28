@@ -2019,10 +2019,14 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 @param tag シンボルまたは文字列です。
 #@end
 @param value catch の戻り値になります。
+#@since 2.2.0
+@raise UncaughtThrowError 同じ tag で待っている catch が存在しない場合に発生します。
+#@else
 #@since 1.9.1
 @raise ArgumentError 同じ tag で待っている catch が存在しない場合に発生します。
 #@else
 @raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
+#@end
 #@end
 
   def foo

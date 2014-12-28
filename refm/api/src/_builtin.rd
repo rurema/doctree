@@ -142,6 +142,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/TrueClass)
 #@include(_builtin/TypeError)
 #@include(_builtin/UnboundMethod)
+#@since 2.2.0
+#@include(_builtin/UncaughtThrowError)
+#@end
 #@include(_builtin/ZeroDivisionError)
 #@include(_builtin/fatal)
 #@include(_builtin/main)

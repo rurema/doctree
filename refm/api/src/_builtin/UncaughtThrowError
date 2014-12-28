@@ -1,0 +1,21 @@
+= class UncaughtThrowError < ArgumentError
+
+[[m:Kernel.#throw]] に指定した tag に対して一致する
+[[m:Kernel.#catch]] が存在しない場合に発生します。
+
+   throw "foo", "bar"
+   # => (例外発生) UncaughtThrowError: uncaught throw "foo"
+
+== Instance Methods
+
+--- tag -> object
+
+[[m:Kernel.#throw]] に指定した tag を返します。
+
+--- value -> object
+
+[[m:Kernel.#throw]] に指定した value を返します。
+
+--- to_s -> String
+
+self を tag を含む文字列表現にして返します。
