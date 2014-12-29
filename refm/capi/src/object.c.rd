@@ -184,7 +184,7 @@ obj1 と obj2 が同一のオブジェクトなら真。
 
 --- VALUE rb_obj_id(VALUE obj)
 
-[[m:Object#id]] の実体です。
+[[m:Object#object_id]] の実体です。
 
 --- static VALUE rb_obj_inspect(VALUE obj)
 
