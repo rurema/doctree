@@ -28,10 +28,10 @@
   ...
   ary = rb_ary_new2(len);
 
---- VALUE rb_ary_new3(long n, VALUE i0, i1, i2, ...)
+--- VALUE rb_ary_new3(long n, ...)
 
-長さ n で要素に i0 i1 i2 …を格納した
-Ruby の配列を作成し返します。
+可変長引数を要素とした
+長さ n の Ruby の配列を作成し返します。
 
 対応するRubyコード
 
