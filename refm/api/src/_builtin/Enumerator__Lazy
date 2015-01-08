@@ -199,6 +199,12 @@ self を返します。
 [[m:Enumerable#slice_after]] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
 @see [[m:Enumerable#slice_after]]
+
+--- slice_when {|elt_before, elt_after| bool } -> Enumerator::Lazy
+
+[[m:Enumerable#slice_when]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+@see [[m:Enumerable#slice_when]]
 #@end
 
 --- force(*args) -> [object]
