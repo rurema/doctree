@@ -31,12 +31,12 @@ StringIO オブジェクトは大抵の場合 IO オブジェクトと同じ例�
 
 --- new(string = '', mode = 'r+')                 -> StringIO
 --- open(string = '', mode = 'r+')                -> StringIO
---- open(string = '', mode = 'r+') {|io| ... }    -> StringIO
+--- open(string = '', mode = 'r+') {|io| ... }    -> object
 
 StringIO オブジェクトを生成して返します。
 
 与えられた string がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
-ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価します。
+ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価してその結果を返します。
 
 @param string 生成される StringIO のデータを文字列で指定します。
               この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
