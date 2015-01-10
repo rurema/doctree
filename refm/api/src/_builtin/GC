@@ -162,6 +162,20 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 本メソッドは C Ruby 以外では動作しません。
 #@end
 
+#@since 2.1.0
+--- latest_gc_info(result_hash = {}) -> Hash
+--- latest_gc_info(key)              -> object
+
+最新のGCの情報を返します。
+
+@param result_hash 戻り値のためのハッシュを指定します。省略した場合は新
+                   しくハッシュを作成します。result_hash の内容は上書き
+                   されます。
+
+@param key 得られる情報から特定の情報を取得したい場合にキーを
+           [[c:Symbol]] で指定します。
+#@end
+
 == Instance Methods
 
 --- garbage_collect -> nil
