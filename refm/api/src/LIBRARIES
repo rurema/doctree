@@ -69,6 +69,7 @@ digest/md5
 digest/rmd160
 digest/sha1
 digest/sha2
+#@until 2.2.0
 #@since 1.8.0
 dl
 dl/import
@@ -76,6 +77,7 @@ dl/types
 #@until 1.9.1
 dl/struct
 dl/win32
+#@end
 #@end
 #@end
 drb
