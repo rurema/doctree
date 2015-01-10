@@ -1117,7 +1117,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
 されて渡されます。
 #@# 例を追加したい
 
-@param initial_state 状態を保持するオブジェクト
+@param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
 @raise RuntimeError 予約されている値を用いた場合に発生します
 
 --- each_entry -> Enumerator
@@ -1270,7 +1270,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
     }
   }
 
-@param initial_state 状態を保持するオブジェクト
+@param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
 #@end
 
 #@since 2.2.0
