@@ -161,7 +161,7 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@raise Errno::EXXX filename が存在しない場合、あるいはシステムコールに失敗した場合に発生します。
+@raise Errno::EXXX file が存在しない場合、あるいはシステムコールに失敗した場合に発生します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
