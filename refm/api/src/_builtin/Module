@@ -1706,7 +1706,12 @@ refinements 機能の詳細については以下を参照してください。
  * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
  * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
 
+#@since 2.1.0
+定義した機能は [[m:main.using]], [[m:Module#using]] を実行した場合のみ
+有効になります。
+#@else
 定義した機能は [[m:main.using]] を実行した場合のみ有効になります。
+#@end
 
 @param klass 拡張する対象のクラスを指定します。
 
@@ -1785,4 +1790,17 @@ self が特異クラスの場合に true を返します。そうでなければ
   end
   C.singleton_class?                  # => false
   C.singleton_class.singleton_class?  # => true
+
+--- using(module) -> self
+
+引数で指定したモジュールで定義された拡張を現在のクラス、モジュールで有
+効にします。
+
+有効にした拡張の有効範囲については以下を参照してください。
+
+ * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec#Scope-of-refinements]]
+
+@param module 有効にするモジュールを指定します。
+
+@see [[m:Module#refine]], [[m:main.using]]
 #@end

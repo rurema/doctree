@@ -89,7 +89,11 @@ main では参照できない事に注意してください。トップレベル
 
 @param module 有効にするモジュールを指定します。
 
+#@since 2.1.0
+@see [[m:Module#refine]], [[m:Module#using]]
+#@else
 @see [[m:Module#refine]]
+#@end
 
 #@until 2.1.0
 [注意] refinements は 2.0 現在、実験的な機能として提供されています。以
