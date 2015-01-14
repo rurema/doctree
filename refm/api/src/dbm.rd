@@ -336,11 +336,15 @@ self をハッシュに変換して返します。
 
 --- index(value) -> String | nil
 
+#@since 1.9.1
+このメソッドは deprecated です。[[m:DBM#key]] を使用してください。
+#@else
 value を持つ要素のキーを返します。
 
 見つからなかった場合は nil を返します。
 
 @param value 検索したい値。
+#@end
 
 == Constants
 
