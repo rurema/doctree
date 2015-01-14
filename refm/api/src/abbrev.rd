@@ -38,7 +38,7 @@
       # => [["ruby", "ruby"]]
   
   # 空白が含まれていても適切に処理します。
-  pp Abbrev.abbrev(['ru by']).sort" 
+  pp Abbrev.abbrev(['ru by']).sort
       # => [["r", "ru by"],
       #     ["ru", "ru by"],
       #     ["ru ", "ru by"],
