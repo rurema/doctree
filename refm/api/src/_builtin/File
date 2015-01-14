@@ -560,11 +560,19 @@ umask を変更します。変更前の umask の値を返します。
 @param path パスを表す文字列を指定します。
 
 --- exist?(path)    -> bool
+#@until 2.1.0
 --- exists?(path)    -> bool
+#@end
 
 [[m:FileTest.#exist?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@since 2.1.0
+--- exists?(path)    -> bool
+
+このメソッドは deprecated です。[[m:File.exist?]] を使用してください。
+#@end
 
 --- file?(path)    -> bool
 
