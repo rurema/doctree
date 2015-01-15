@@ -1703,8 +1703,11 @@ name で指定した定数の可視性を public に変更します。
 refinements 機能の詳細については以下を参照してください。
 
  * [[url:http://jp.rubyist.net/magazine/?0041-200Special-refinement]]
- * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/doc/syntax/refinements.rdoc?view=markup]]
- * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec]]
+#@since 2.1.0
+ * [[url:http://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
+#@else
+ * [[url:http://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html]]
+#@end
 
 #@since 2.1.0
 定義した機能は [[m:main.using]], [[m:Module#using]] を実行した場合のみ
@@ -1798,7 +1801,7 @@ self が特異クラスの場合に true を返します。そうでなければ
 
 有効にした拡張の有効範囲については以下を参照してください。
 
- * [[url:http://bugs.ruby-lang.org/projects/ruby-trunk/wiki/RefinementsSpec#Scope-of-refinements]]
+ * [[url:http://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
 
 @param module 有効にするモジュールを指定します。
 
