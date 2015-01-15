@@ -387,15 +387,18 @@ self の各要素を格納したハッシュを返します。
   
   p db1.to_hash #=> {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
 
-
 --- index(val) -> String
 
+#@since 1.9.1
+このメソッドは deprecated です。[[m:SDBM#key]] を使用してください。
+#@else
 値 val に対応するキーを返します。
 
 対応する要素が存在しない時には nil を返します。
 該当するキーが複数存在する場合、どのキーを返すかは不定です。
 
 @see [[m:Hash#index]]
+#@end
 
 = class SDBMError < StandardError
 
