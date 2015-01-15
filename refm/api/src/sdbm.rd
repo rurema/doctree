@@ -182,10 +182,11 @@ value を値とする組がデータベース中に存在する時、真を返�
 #@end
 
 #@since 1.9.1
---- key(value) -> String
+--- key(value) -> String | nil
 
 与えられた値に対応するキーを返します。
 
+対応する要素が存在しない時には nil を返します。
 値に対応するキーが複数ある場合は最初に見つかったキーを返します。
 
 @param value キーを探したい値を指定します。
@@ -387,7 +388,7 @@ self の各要素を格納したハッシュを返します。
   
   p db1.to_hash #=> {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
 
---- index(val) -> String
+--- index(val) -> String | nil
 
 #@since 1.9.1
 このメソッドは deprecated です。[[m:SDBM#key]] を使用してください。
