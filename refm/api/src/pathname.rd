@@ -404,6 +404,8 @@ File.mtime(self.to_s) を渡したものと同じです。
 --- birthtime -> Time
 File.birthtime(self.to_s) を渡したものと同じです。
 
+@raise NotImplementedError  Windows のような birthtime のない環境で発生します。
+
 @see [[m:File.birthtime]]
 #@end
 
