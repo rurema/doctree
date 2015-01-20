@@ -44,11 +44,11 @@ include File::Constants
 
 作成された時刻を返します。
 
-Windows のような birthtime のない環境では ctime の値を返します。
-
 @param filename ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+@raise NotImplementedError  Windows のような birthtime のない環境で発生します。
 
   File.birthtime("testfile")   #=> Wed Apr 09 08:53:13 CDT 2003
 #@end
@@ -757,11 +757,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 作成された時刻を Time オブジェクトとして返します。
 
-Windows のような birthtime のない環境では ctime の値を返します。
-
 @raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+@raise NotImplementedError  Windows のような birthtime のない環境で発生します。
 
   File.new("testfile").birthtime   #=> Wed Apr 09 08:53:14 CDT 2003
 
