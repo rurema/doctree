@@ -262,7 +262,7 @@ rdev の minor 番号部を返します。
 
 作成された時刻を返します。
 
-Windows のような birthtime のない環境では ctime の値を返します。
+@raise NotImplementedError  Windows のような birthtime のない環境で発生します。
 
   File.write("testfile", "foo")
   sleep 10
