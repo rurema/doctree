@@ -14,7 +14,7 @@
 
 == Special Variables
 
---- $ERROR_INFO -> Exception
+--- $ERROR_INFO -> Exception  | nil
 
 [[m:$!]] の別名
 
