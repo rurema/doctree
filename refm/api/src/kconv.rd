@@ -1,5 +1,7 @@
 category CharacterEncoding
 
+require nkf
+
 日本語文字コードの変換を手軽に行うためのライブラリです。
 
 kconv を require すると [[c:String]] クラスに変換用のメソッドが定義されます。
