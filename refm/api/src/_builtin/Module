@@ -511,6 +511,14 @@ inherit に真を指定すると
 #@end
   end
 
+--- freeze -> self
+
+モジュールを凍結（内容の変更を禁止）します。
+
+@raise RuntimeError モジュールにメソッドの追加など何らかの変更を加えようとした場合に発生します。
+
+@see [[m:Object#freeze]]
+
 #@since 1.8.0
 --- include?(mod) -> bool
 
