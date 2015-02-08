@@ -8,7 +8,7 @@ gzip ファイルの読み書きもサポートします。
 : 標準添付ライブラリ紹介 【第 11 回】zlib 
   [[url:http://jp.rubyist.net/magazine/?0018-BundledLibraries]]
 
-@see [[man:zlib(3)]]
+@see [[url:http://zlib.net/]]
 
 #@include(zlib/Zlib)
 #@include(zlib/Error)
