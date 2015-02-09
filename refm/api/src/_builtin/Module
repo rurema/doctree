@@ -289,14 +289,46 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 @see [[m:Kernel.#autoload?]]
 
 #@since 1.9.1
+#@since 2.0.0
+--- class_variables(inherit = true) -> [Symbol]
+#@else
 --- class_variables -> [Symbol]
+#@end
 #@else
 --- class_variables -> [String]
 #@end
 
 クラス／モジュールに定義されているクラス変数の名前の配列を返します。
 
+#@since 1.9.1
+#@since 2.0.0
+@param inherit false を指定しない場合はスーパークラスやインクルードして
+       いるモジュールのクラス変数を含みます。
+
+  class One
+    @@var1 = 1
+  end
+  class Two < One
+    @@var2 = 2
+  end
+  One.class_variables          # => [:@@var1]
+  Two.class_variables          # => [:@@var2, :@@var1]
+  Two.class_variables(false)   # => [:@@var2]
+#@else
+スーパークラスやインクルードしているモジュールのクラス変数は含みません。
+
+  class One
+    @@var1 = 1
+  end
+  class Two < One
+    @@var2 = 2
+  end
+  One.class_variables   # => [:@@var1]
+  Two.class_variables   # => [:@@var2]
+#@end
+#@else
 スーパークラスやインクルードしているモジュールのクラス変数も含みます。
+#@end
 
 @see [[m:Module.constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#constants]]
 
