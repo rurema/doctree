@@ -199,7 +199,7 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 @param obj   変換する任意のオブジェクト
 @return      変換後の文字列または nil
 
-   String.try_convert("str")     # => str
+   String.try_convert("str")     # => "str"
    String.try_convert(/re/)      # => nil
 
 #@end
