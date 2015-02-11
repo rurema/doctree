@@ -543,6 +543,20 @@ inherit に真を指定すると
 #@end
   end
 
+--- freeze -> self
+
+モジュールを凍結（内容の変更を禁止）します。
+
+#@since 1.9.1
+凍結したモジュールにメソッドの追加など何らかの変更を加えようとした場合
+に [[c:RuntimeError]] が発生します。
+#@else
+凍結したモジュールにメソッドの追加など何らかの変更を加えようとした場合
+に [[c:TypeError]] が発生します。
+#@end
+
+@see [[m:Object#freeze]]
+
 #@since 1.8.0
 --- include?(mod) -> bool
 
