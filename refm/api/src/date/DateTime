@@ -211,7 +211,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 例:
 
   DateTime._strptime('2001-02-03T12:13:14Z')
-  # => {:sec=>14, :zone=>"Z", :year=>2001, :hour=>12, :mday=>3, :min=>13, :offset=>0, :mon=>2}
+  # => {:year=>2001, :mon=>2, :mday=>3, :hour=>12, :min=>13, :sec=>14, :zone=>"Z", :offset=>0}
 
 [[m:DateTime.strptime]] の内部で使用されています。
 
