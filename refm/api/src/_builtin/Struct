@@ -10,7 +10,8 @@ include Enumerable
 
 == Class Methods
 
---- new(*args) -> Class
+--- new(*args)                  -> Class
+--- new(*args) {|Class| block } -> Class
 
 [[c:Struct]] クラスに新しいサブクラスを作って、それを返します。
 
@@ -46,6 +47,23 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の�
 
     Foo = Struct.new(:foo, :bar)
     p Foo                             # => Foo
+
+==== ブロックを指定した場合
+
+Struct.new にブロックを指定した場合は定義した Struct をコンテキストにブ
+ロックを評価します。また、定義した Struct はブロックパラメータにも渡さ
+れます。
+
+  Customer = Struct.new(:name, :address) do
+    def greeting
+      "Hello #{name}!"
+    end
+  end
+  Customer.new("Dave", "123 Main").greeting # => "Hello Dave!"
+
+Structをカスタマイズする場合はこの方法が推奨されます。無名クラスのサブ
+クラスを作成する方法でカスタマイズする場合は無名クラスが使用されなくなっ
+てしまうことがあるためです。
 
 @see [[m:Class.new]]
 
