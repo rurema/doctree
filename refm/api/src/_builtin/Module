@@ -260,7 +260,11 @@ case ではクラス、モジュールの所属関係をチェックすること
     p included_modules
     p superclass
   end
+#@since 1.9.1
+  # => [Baz, Bar, Foo, Object, Kernel, BasicObject]
+#@else
   # => [Baz, Bar, Foo, Object, Kernel]
+#@end
   # => [Foo, Kernel]
   # => Bar
 
