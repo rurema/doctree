@@ -6,7 +6,11 @@
 
 --- _id2ref(id)    -> object
 
+#@since 1.9.3
+オブジェクト ID([[m:BasicObject#__id__]])からオブジェクトを得ます。
+#@else
 オブジェクト ID([[m:Object#__id__]])からオブジェクトを得ます。
+#@end
 
 @param id 取得したいオブジェクトの ID を整数で指定します。
 
