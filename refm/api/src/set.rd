@@ -545,6 +545,24 @@ self と set の共通要素がある場合に true を返します。
 
   p Set[1, 2, 3].intersect?(Set[3, 4])  #=> true
   p Set[1, 2, 3].intersect?(Set[4, 5])  #=> false
+
+@see [[m:Set#intersection]], [[m:Set#disjoint?]]
+
+--- disjoint?(set) -> bool
+
+self と set が互いに素な集合である場合に true を返します。
+
+逆に self と set の共通集合かを確認する場合には [[m:Set#intersect?]] を
+使用します。
+
+@param self Set オブジェクトを指定します。
+@raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
+
+  require 'set'
+  Set[1, 2, 3].disjoint? Set[3, 4] # => false
+  Set[1, 2, 3].disjoint? Set[4, 5] # => true
+
+@see [[m:Set#intersect?]]
 #@end
 
 #@since 1.9.2
