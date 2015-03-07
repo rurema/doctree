@@ -535,6 +535,18 @@ o1 と o2 は同じ分割に属します。
   puts Set.new(['element1', 'element2']).inspect
   #=> #<Set: {"element1", "element2"}>
 
+#@since 2.1.0
+--- intersect?(set) -> bool
+
+self と set の共通要素がある場合に true を返します。
+
+@param self Set オブジェクトを指定します。
+@raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
+
+  p Set[1, 2, 3].intersect?(Set[3, 4])  #=> true
+  p Set[1, 2, 3].intersect?(Set[4, 5])  #=> false
+#@end
+
 #@since 1.9.2
 --- keep_if {|element| ... } -> self
 
