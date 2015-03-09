@@ -183,7 +183,7 @@ flatten は、平滑化した集合を新しく作成し、それを返します
 flatten! は、元の集合を破壊的に平滑化します。集合の要素に変更が
 発生した場合には self を、そうでない場合には nil を返します。
 
-@raise ArgumentError 集合の要素として自身が再帰的に現れた場合に発生
+@raise ArgumentError 集合の要素として self が再帰的に現れた場合に発生
                      します。
 
   s = Set[Set[1,2], 3]
@@ -196,7 +196,7 @@ flatten! は、元の集合を破壊的に平滑化します。集合の要素�
 
 
 --- to_a -> Array
-自身を配列に変換します。要素の順序は不定です。
+self を配列に変換します。要素の順序は不定です。
 
   set = Set['hello', 'world']
   p set.to_a
@@ -216,7 +216,7 @@ flatten! は、元の集合を破壊的に平滑化します。集合の要素�
 --- superset?(set) -> bool
 --- proper_superset?(set) -> bool
 
-自身が集合 set の上位集合 (スーパーセット) である場合に true を
+self が集合 set の上位集合 (スーパーセット) である場合に true を
 返します。
 
 superset? は、2 つの集合が等しい場合にも true となります。
@@ -239,7 +239,7 @@ proper_superset? は、2 つの集合が等しい場合には false を返しま
 --- subset?(set) -> bool
 --- proper_subset?(set) -> bool
 
-自身が集合 set の部分集合である場合に true を返します。
+self が集合 set の部分集合である場合に true を返します。
 
 subset? は、2 つの集合が等しい場合にも true となります。
 
@@ -453,7 +453,7 @@ nil を返します。
 
 2 つの集合が等しいときに true を返します。
 
-より厳密には、引数 set が Set オブジェクトであり、自身と set が同数の
+より厳密には、引数 set が Set オブジェクトであり、selfと set が同数の
 要素を持ち、かつそれらの要素がすべて等しい場合に true となります。
 それ以外の場合には、false を返します。
 要素の等しさは [[m:Object#eql?]] により判定されます。
