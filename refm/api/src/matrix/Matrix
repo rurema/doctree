@@ -900,8 +900,6 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 行列の実部を返します。
 
-Returns the real part of the matrix.
-
   Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
   #  => 1+2i  i  0
   #        1  2  3
