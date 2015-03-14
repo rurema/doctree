@@ -373,11 +373,11 @@ x の自然対数を返します。
 
 @param x 正の実数
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+@raise RangeError xに実数以外の数値を指定した場合に発生します。
 #@end
 
 
@@ -388,11 +388,11 @@ x の常用対数を返します。
 @param x 正の実数
 
 #@since 1.9.1
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+@raise RangeError xに実数以外の数値を指定した場合に発生します。
 #@else
 @raise Errno::EDOM 引数が負の値である場合に発生します。
 @raise Errno::ERANGE 引数が 0 の場合に発生します。
@@ -405,11 +405,11 @@ x の平方根を返します。
 @param x 正の実数
 
 #@since 1.9.1
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
-@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+@raise RangeError xに実数以外の数値を指定した場合に発生します。
 #@else
 @raise Errno::EDOM  引数が負の値である場合に発生します。
 #@end
@@ -422,9 +422,9 @@ x の立方根を返します。
 @param x 実数
 
 #@since 1.9.1
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError xに数値以外を指定した場合に発生します。
 
-@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+@raise RangeError xに実数以外の数値を指定した場合に発生します。
 #@end
 
 --- gamma(x) -> Float
@@ -433,11 +433,11 @@ x のガンマ関数の値を返します。
 
 @param x 実数
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に負の整数、もしくは -∞ を渡した場合に発生します。
 
-@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+@raise RangeError xに実数以外の数値を指定した場合に発生します。
 
 --- lgamma(x) -> [Float, Integer]
 
@@ -447,11 +447,11 @@ log(|gamma(x)|) と、gamma(x) の符号を返します。
 
 @param x 実数
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に -∞ を渡した場合に発生します。
 
-@raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
+@raise RangeError xに実数以外の数値を指定した場合に発生します。
 
 @see [[m:Math.#gamma]]
 
