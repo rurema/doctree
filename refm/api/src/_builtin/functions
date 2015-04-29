@@ -1578,8 +1578,8 @@ to_s メソッドにより文字列に変換してから出力します。
   $\ = "<end>\n"
   print
   print "AA","BB"
-  #=> input<and><end>
-  #=> AA<and>BB<and><end>
+  #=> input<end>
+  #=> AA<and>BB<end>
 #@else
   print "Hello, world!"
   print "Regexp is",/ant/
