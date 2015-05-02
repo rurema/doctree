@@ -112,6 +112,25 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
   p v1        #=> Vector[1, 2, 3, 4]
   p v2        #=> Vector[-1, 2, 3, 4]
 
+#@since 2.2.0
+--- independent?(*vectors) -> bool
+
+ベクトルの列 vectors が線形独立であれば true を返します。
+
+@param vectors 線形独立性を判定するベクトル列
+
+--- basis(size:, index:) -> Vector
+
+size 次元ベクトル空間の index 番目の標準基底を返します。
+
+  require 'matrix'
+  Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
+  
+@param size ベクトルの次元
+@param index 標準基底の何番目か。0 origin
+
+#@end
+
 == Instance Methods
 
 --- [](i) -> object | nil
@@ -229,7 +248,21 @@ v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できま
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
+#@since 2.2.0
+--- +@ -> self
+
+単項演算子の + です。 self を返します。
+
+--- -@ -> self
+
+単項演算子の - です。 各要素の符号を反転したベクトルを返します。
+
+#@end
+
 --- inner_product(v) -> Float
+#@since 2.2.0
+--- dot(v) -> Float
+#@end
 
 ベクトル v との内積を返します。
 
@@ -282,6 +315,56 @@ self の各要素を数 other で割った行列を返します。
 [[m:Vector#norm]] を使うため複素ベクトルでは一般に正しい値を返しません。
 
 @raise Vector::ZeroVectorError ベクトルが0である場合に発生します。
+
+#@end
+
+#@since 2.2.0
+--- angle_with(v) -> Float
+
+v と self がなす角度を返します。
+
+  require 'matrix'
+  Vector[1,0].angle_with(Vector[0,1]) # => Math::PI/2
+
+@param v このベクトルと self とがなす角度を計算します
+@raise ZeroVectorError self もしくは v のどちらかが零ベクトルである場合に
+       発生します
+@raise ExceptionForMatrix::ErrDimensionMismatch v と self の
+       ベクトルの次元が異なる場合に発生します。
+
+--- independent?(*vectors) -> bool
+
+self とベクトルの列 vectors が線形独立であれば true を返します。
+
+  Vector.independent?(self, *vectors)
+
+と同じです。
+
+@param vectors 線形独立性を判定するベクトル列
+
+#@end
+
+#@since 2.1.0
+--- cross_product(*vs) -> Vector
+#@since 2.2.0
+--- cross(*vs) -> Vector
+#@end
+
+self とベクトル vs とのクロス積を返します。
+
+self が3次元ベクトル空間のときは
+普通のクロス積です。
+それ以外の場合は拡張されたクロス積で
+n-1個のn次元ベクトルが張る空間と
+直行するベクトルを返します。
+
+self の次元が n であるとき、 vs は n-2 個の
+n次元ベクトルでなければなりません。
+
+@param vs クロス積を取るベクトルの集合
+@raise ExceptionForMatrix::ErrOperationNotDefined
+       self の次元が1以下であるときに発生します。
+@raise ArgumentError vs のベクトルの個数が n-2 以外である場合に発生します。
 
 #@end
 
