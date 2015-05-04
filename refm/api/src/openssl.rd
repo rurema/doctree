@@ -97,6 +97,8 @@ FIPS モードを明示的に on/off します。
 @raise OpenSSL::OpenSSLError インストールされている OpenSSL が
        FIPS をサポートしていない場合に発生します。
 
+@see [[m:OpenSSL::OPENSSL_FIPS]]
+
 == Constants
 
 --- VERSION -> String
@@ -120,6 +122,8 @@ Ruby/OpenSSL のバージョンです。
 サポートしているならば true です。
 
 していなければ false です。
+
+@see [[m:OpenSSL.#fips_mode=]]
 
 #@end
 
