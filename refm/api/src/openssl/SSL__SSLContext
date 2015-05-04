@@ -28,6 +28,14 @@ ssl_method で利用するプロトコルの種類を文字列もしくは
   * 'TLSv1'         TLSv1サーバクライアント両用
   * 'TLSv1_server'  TLSv1サーバ用
   * 'TLSv1_client'  TLSv1クライアント用
+#@since 2.0.0
+  * 'TLSv1_1'
+  * 'TLSv1_1_server'
+  * 'TLSv1_1_client'
+  * 'TLSv1_2'
+  * 'TLSv1_2_server'
+  * 'TLSv1_2_client'
+#@end
   * 'SSLv2'         SSLv2サーバクライアント両用
   * 'SSLv2_server'  SSLv2サーバ用
   * 'SSLv2_client'  SSLv2クライアント用
@@ -37,7 +45,6 @@ ssl_method で利用するプロトコルの種類を文字列もしくは
   * 'SSLv23'        SSLv2,3/TLSv1サーバクライアント両用
   * 'SSLv23_server' SSLv2,3/TLSv1サーバ用
   * 'SSLv23_client' SSLv2,3/TLSv1クライアント用
-
 SSLv2 はプロトコル上の脆弱性が明らかにされているため使うべきではありません。
 
 SSLv2 は無効化して SSLv3 と TLSv1 の両方を有効化するためには
