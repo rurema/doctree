@@ -696,6 +696,44 @@ time に [[c:Time]] オブジェクトを渡すと、その
 #@# --- setup -> true
 #@# 内部的に利用されるメソッド
 
+#@since 2.0.0
+--- renegotiation_cb -> nil | Proc
+
+ハンドシェイク開始時に呼び出されるコールバックを得ます。
+
+@see [[m:OpenSSL::SSL::SSLContext#renegotiation_cb=]]
+
+--- renegotiation_cb=(cb)
+#@todo
+
+ハンドシェイク開始時に呼び出されるコールバックを設定します。
+
+コールバックには [[c:OpenSSL::SSL::SSLSocket]] オブジェクトが
+渡されます。
+
+このコールバック内で何らかの例外が生じた場合には
+以降のSSLの処理を停止します。
+
+再ネゴシエーションのたびにこのコールバックが呼び出されるため、
+何らかの理由で再ネゴシエーションを禁止したい場合などに利用できます。
+
+nil を渡すとコールバックは無効になります。
+
+
+以下の例は再ネゴシエーションを一切禁止します。
+  num_handshakes = 0
+  ctx.renegotiation_cb = lambda do |ssl|
+    num_handshakes += 1
+    raise RuntimeError.new("Client renegotiation disabled") if num_handshakes > 1
+  end
+
+
+
+@param cb コールバック(Proc, Method など)もしくは nil
+@see [[m:OpenSSL::SSL::SSLContext#renegotiation_cb]]
+
+#@end
+
 == Constants
 --- DEFAULT_CERT_STORE -> OpenSSL::X509::Store
 [[m:OpenSSL::SSL::SSLContext#set_params]] で信頼する CA 証明書
