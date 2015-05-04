@@ -14,7 +14,7 @@ OpenSSL内で利用される多倍長整数クラスです。
 base によって変換の基数を決めることができます。
 10, 16 が利用可能です。
 
-2を指定すると文字列を big-endian の符号無し整数のバイナリ列とみなして
+baseに2を指定すると文字列を big-endian の符号無し整数のバイナリ列とみなして
 変換します。
 
 また、base に 0 を指定すると、MPIのフォーマットから変換します。
@@ -28,9 +28,28 @@ base によって変換の基数を決めることができます。
   OpenSSL::BN.new("\xff\x81",2) # => 65409
   OpenSSL::BN.new("\x00\x00\x00\x02\x00\x81", 0) # => 129
   OpenSSL::BN.new("\x00\x00\x00\x02\x80\x81", 0) # => -129
+#@since 2.1.0
+  OpenSSL::BN.new(1209) # => 1209
+#@end
+
 @param str 整数を表す文字列
 @param base 文字列から整数に変換するときの基数
 @raise OpenSSL::BNError 変換に失敗した場合に発生します
+
+--- new(bn) -> OpenSSL::BN
+
+[[c:OpenSSL::BN]] を複製して返します。
+
+@param bn 複製する [[c:OpenSSL::BN]] オブジェクト
+
+#@since 2.1.0
+--- new(integer) -> OpenSSL::BN
+
+整数オブジェクト([[c:Integer]])から多倍長整数オブジェクト
+([[c:OpenSSL::BN]])を生成します。
+
+@param integer 整数オブジェクト
+#@end
 
 --- generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
 ランダム(疑似乱数的)な bits ビットの素数を返します。
