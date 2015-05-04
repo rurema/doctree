@@ -81,8 +81,13 @@ TLS v1 の使用を禁止するフラグです。
 
 #@since 2.0.0
 --- OP_NO_TLSv1_1 -> Integer
+TLS v1.1 の使用を禁止するフラグです。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
 --- OP_NO_TLSv1_2 -> Integer
-#@todo
+TLS v1.2 の使用を禁止するフラグです。
+
 [[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 #@end
@@ -94,8 +99,11 @@ RFC4507bis チケットによる stateless session resumption を
 [[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_NO_COMPRESSION
-#@todo
+OpenSSL による通信の圧縮を禁止します。
+
 [[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+@see [[url:https://bugs.ruby-lang.org/issues/5183]]
 
 --- OP_PKCS1_CHECK_1 -> Integer
 #@todo
