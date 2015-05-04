@@ -90,6 +90,13 @@ OpenSSL のエラーキューに残っているエラー文字列を返します
 これは空の配列を返します。もしそうでないならば
 このライブラリのバグです。
 
+--- fips_mode=(bool)
+
+FIPS モードを明示的に on/off します。
+
+@raise OpenSSL::OpenSSLError インストールされている OpenSSL が
+       FIPS をサポートしていない場合に発生します。
+
 == Constants
 
 --- VERSION -> String
@@ -105,6 +112,16 @@ Ruby/OpenSSL のバージョンです。
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
 [[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
 も参照してください。
+
+#@since 2.0.0
+--- OPENSSL_FIPS -> bool
+
+システムにインストールされている OpenSSL が FIPS を
+サポートしているならば true です。
+
+していなければ false です。
+
+#@end
 
 #@# = module OpenSSL::SSL::SocketForwarder
 = class OpenSSL::OpenSSLError < StandardError
