@@ -196,11 +196,7 @@ flatten! は、元の集合を破壊的に平滑化します。集合の要素�
 
 
 --- to_a -> Array
-#@since 1.9.1
-self を配列に変換します。要素の順序は追加順です。
-#@else
 self を配列に変換します。要素の順序は不定です。
-#@end
 
   set = Set['hello', 'world']
   p set.to_a
