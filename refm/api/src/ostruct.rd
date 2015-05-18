@@ -83,7 +83,9 @@ OpenStruct オブジェクトを生成します。
 
   require 'ostruct'
   some1 = OpenStruct.new({:a =>"a",:b =>"b"}) # => #<OpenStruct b="b", a="a">
+#@until 2.0.0
   some2 = OpenStruct.new([[:a,"a"],[:b,"b"]]) # => #<OpenStruct b="b", a="a">
+#@end
 
 == Instance Methods
 
