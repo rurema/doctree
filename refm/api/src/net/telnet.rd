@@ -356,7 +356,7 @@ opts がハッシュである場合には、送る文字列とオプションを
 @param mode 設定する値を真偽値で与えます
 @see [[m:Net::Telnet#new]]
 
---- binmode(mode=nil) -> bool|()
+--- binmode(mode=nil) -> bool
 引数を指定しない場合には"Binmode"の値を返します。
 引数を与えた場合は"Binmode"の値を変更します。
 
