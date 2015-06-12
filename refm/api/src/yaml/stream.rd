@@ -10,9 +10,9 @@ YAML ドキュメントを複数保持することができるストリームク
 
 === 参考
 
-Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
+Rubyist Magazine: [[url:http://magazine.rubyist.net/]]
 
- * プログラマーのための YAML 入門 (中級編): [[url:http://jp.rubyist.net/magazine/?0010-YAML]]
+ * プログラマーのための YAML 入門 (中級編): [[url:http://magazine.rubyist.net/?0010-YAML]]
 
 == class methods
 

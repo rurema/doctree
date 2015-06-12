@@ -66,9 +66,9 @@ Logger オブジェクトのログレベルを DEBUG に下げるなどという
 === 参考
 
 : Rubyist Magazine
-  [[url:http://jp.rubyist.net/magazine/]]
+  [[url:http://magazine.rubyist.net/]]
 : 標準添付ライブラリ紹介【第 2 回】
-  [[url:http://jp.rubyist.net/magazine/?0008-BundledLibraries]]
+  [[url:http://magazine.rubyist.net/?0008-BundledLibraries]]
 
 = class Logger < Object
 include Logger::Severity

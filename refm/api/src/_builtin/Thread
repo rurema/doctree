@@ -696,7 +696,7 @@ nil を渡すとトレースを解除します。
 
 @see [[m:Thread#thread_variable_set]], [[m:Thread#[] ]]
 
-@see [[url:http://jp.rubyist.net/magazine/?0041-200Special-note#l16]]
+@see [[url:http://magazine.rubyist.net/?0041-200Special-note#l16]]
 
 --- thread_variable_set(key, value)
 

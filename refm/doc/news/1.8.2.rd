@@ -35,9 +35,9 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 * cgi の無限ループに陥る可能性のあるバグが修正されました。
   ((<URL:http://www.debian.org/security/2004/dsa-586>))
 * 一連の core dumps バグが修正されました。
-  ((<URL:http://jp.rubyist.net/magazine/?0002-RubyCore>))
+  ((<URL:http://magazine.rubyist.net/?0002-RubyCore>))
 * tk の変更点は 
-  ((<URL:http://jp.rubyist.net/magazine/?0003-RubyTkMovement>)) 
+  ((<URL:http://magazine.rubyist.net/?0003-RubyTkMovement>)) 
   を参照して下さい。
 * soap, wsdl の変更点は
   ((<URL:http://rrr.jin.gr.jp/projects/soap4r/wiki/Changes-ruby181_ruby182>))

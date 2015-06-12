@@ -56,10 +56,10 @@ Rubyの特定カテゴリのプログラミングの解説です
 
 Rubyでプログラムの勉強をしようと考えている方はこちら。
 
-* [サイト] ((<Rubyist Magazine『Ruby ではじめるプログラミング』|URL:http://jp.rubyist.net/magazine/?0002-FirstProgramming>))
+* [サイト] ((<Rubyist Magazine『Ruby ではじめるプログラミング』|URL:http://magazine.rubyist.net/?0002-FirstProgramming>))
 
 == その他
 
-* [サイト] ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
+* [サイト] ((<Rubyist Magazine|URL:http://magazine.rubyist.net/>))
 * [サイト] ((<日本Rubyの会|URL:http://jp.rubyist.net/?RubyDocument>))
 * [書籍]((<『オブジェクト指向スクリプト言語Ruby』 まつもと ゆきひろ・石塚圭樹共著アスキー(ISBN4-7561-3254-5)|URL:http://www.ascii.co.jp/books/detail/4-7561/4-7561-3254-5.html>))

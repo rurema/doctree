@@ -1752,7 +1752,7 @@ name で指定した定数の可視性を public に変更します。
 
 refinements 機能の詳細については以下を参照してください。
 
- * [[url:http://jp.rubyist.net/magazine/?0041-200Special-refinement]]
+ * [[url:http://magazine.rubyist.net/?0041-200Special-refinement]]
 #@since 2.1.0
  * [[url:http://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
 #@else

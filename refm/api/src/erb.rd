@@ -9,7 +9,7 @@ eRuby スクリプトを処理するクラス。
 従来 ERbLight と呼ばれていたもので、
 標準出力への印字が文字列の挿入とならない点が eruby と異なります。
 
- * [[url:http://jp.rubyist.net/magazine/?0017-BundledLibraries]]
+ * [[url:http://magazine.rubyist.net/?0017-BundledLibraries]]
 
 
 === 使い方

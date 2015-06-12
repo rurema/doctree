@@ -113,6 +113,6 @@ You can change the XML-writer by calling method <i>set_writer</i>.
   * [[url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/index.html]]
   * [[url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/xmlrpc-howto-ruby.html]]
   * [XML-RPC] [[url:http://www.xmlrpc.com/spec]]
-  * [[url:http://jp.rubyist.net/magazine/?0007-BundledLibraries]]
+  * [[url:http://magazine.rubyist.net/?0007-BundledLibraries]]
 
 #@end

@@ -2216,5 +2216,5 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 
 @raise LocalJumpError ブロックを指定しなかった場合に発生します。
 
-@see [[m:Range#bsearch]], [[url:http://jp.rubyist.net/magazine/?0041-200Special-note#l15]]
+@see [[m:Range#bsearch]], [[url:http://magazine.rubyist.net/?0041-200Special-note#l15]]
 #@end

@@ -232,7 +232,7 @@ testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラ�
 
 並列化の仕組みについては以下の記事をご覧ください。
 
- * Rubyist Magazine 0033 号 詳解! test-all 並列化: [[url:http://jp.rubyist.net/magazine/?0033-ParallelizeTestAll]]
+ * Rubyist Magazine 0033 号 詳解! test-all 並列化: [[url:http://magazine.rubyist.net/?0033-ParallelizeTestAll]]
 
 #@end
 
