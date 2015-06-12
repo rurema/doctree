@@ -225,9 +225,9 @@ Proxy サーバ経由で Gem パッケージをインストールするには以
 
 === 参考
 : Rubyist Magazine - シリーズ パッケージマネジメント 【第 1 回】 RubyGems (1)
-  [[url:http://jp.rubyist.net/magazine/?0006-PackageManagement]]
+  [[url:http://magazine.rubyist.net/?0006-PackageManagement]]
 : Rubyist Magazine - シリーズ パッケージマネジメント 【第 2 回】 RubyGems (2)
-  [[url:http://jp.rubyist.net/magazine/?0010-PackageManagement]]
+  [[url:http://magazine.rubyist.net/?0010-PackageManagement]]
 
 
 = reopen Kernel

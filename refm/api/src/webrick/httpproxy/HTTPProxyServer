@@ -2,7 +2,7 @@
 
 プロクシの機能を提供するクラスです。CONNECT メソッドにも対応しています。
 
- * [[url:http://jp.rubyist.net/magazine/?0002-WEBrickProxy]]
+ * [[url:http://magazine.rubyist.net/?0002-WEBrickProxy]]
 
 以下は完全に動作するプロクシサーバの例です。
  

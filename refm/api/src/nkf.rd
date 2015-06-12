@@ -231,7 +231,7 @@ Ruby 1.8.3 以降にバージョンアップするか、
 
 === 参考
 
-  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:http://jp.rubyist.net/magazine/?0009-BundledLibraries#l15]]
+  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:http://magazine.rubyist.net/?0009-BundledLibraries#l15]]
 
 == Module Functions
 

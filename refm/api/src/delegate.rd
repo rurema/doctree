@@ -17,7 +17,7 @@ category DesignPattern
 
 === 参考
 
-  * Rubyist Magazine - 標準添付ライブラリ紹介【第 6 回】委譲 [[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
+  * Rubyist Magazine - 標準添付ライブラリ紹介【第 6 回】委譲 [[url:http://magazine.rubyist.net/?0012-BundledLibraries]]
 
 
 = reopen Kernel
