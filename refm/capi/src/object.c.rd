@@ -223,11 +223,13 @@ obj がクラス klass およびそのサブクラスの
 
 [[m:Object#untaint]]
 
+#@if (version <= "1.9.1")
 --- char *rb_str2cstr(VALUE str, int *len)
 
 strl を C の文字列に変換します。第二引数も与えると
 *len にバイト長を書き込みます。str が String
 でない場合は to_str での変換を試みます。
+#@end
 
 --- double rb_str_to_dbl(VALUE str, int badcheck)
 
