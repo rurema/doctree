@@ -53,8 +53,8 @@ msg は obsolete です。使わないでください。
 @raise HTTPError レスポンスが 1xx であるか、 net/http が知らない
                  種類のレスポンスである場合に発生します。
 @raise HTTPRetriableError レスポンスが 3xx である場合に発生します。
-@raise HTTPFatalError レスポンスが 4xx である場合に発生します。
-@raise HTTPServerError レスポンスが 5xx である場合に発生します。
+@raise HTTPServerException レスポンスが 4xx である場合に発生します。
+@raise HTTPFatalError レスポンスが 5xx である場合に発生します。
 
 
 --- response -> self
