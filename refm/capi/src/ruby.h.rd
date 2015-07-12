@@ -316,6 +316,34 @@ x が long 型で表現できる値の範囲外であった場合は [[c:RangeEr
 
 --- MACRO unsigned long NUM2ULONG(VLAUE x)
 
+#@since 2.0.0
+--- MACRO short NUM2SHORT(VALUE x)
+
+x を short 型の整数に変換します。
+
+x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれでもな
+い場合は x.to_int による暗黙の型変換を試みます。
+
+@raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
+                 発生します。
+
+@raise RangeError x が long 型で表現できる値の範囲外であった場合に発生
+                  します。
+
+--- MACRO unsigned short NUM2USHORT(VALUE x)
+
+x を unsigned short 型の整数に変換します。
+
+x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれでもな
+い場合は x.to_int による暗黙の型変換を試みます。
+
+@raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
+                 発生します。
+
+@raise RangeError x が long 型で表現できる値の範囲外であった場合に発生
+                  します。
+#@end
+
 --- MACRO void OBJ_FREEZE(VALUE x)
 
 --- MACRO int OBJ_FROZEN(VALUE x)
