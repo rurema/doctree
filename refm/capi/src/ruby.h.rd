@@ -314,7 +314,7 @@ x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれ�
 
 --- MACRO unsigned int NUM2UINT(VALUE x)
 
---- MACRO unsigned long NUM2ULONG(VLAUE x)
+--- MACRO unsigned long NUM2ULONG(VALUE x)
 
 #@since 2.0.0
 --- MACRO short NUM2SHORT(VALUE x)
