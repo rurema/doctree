@@ -95,11 +95,11 @@ obj1 == obj2 ならば Qtrue、
 
 [[m:Kernel.#String]] の実体です。
 
-#@# #@since 2.0.0
-#@# --- static VALUE rb_f_hash(VALUE obj, VALUE arg)
-#@#
-#@# [[m:Kernel.#Hash]] の実体です。
-#@# #@end
+#@since 2.0.0
+--- static VALUE rb_f_hash(VALUE obj, VALUE arg)
+
+[[m:Kernel.#Hash]] の実体です。
+#@end
 
 --- static VALUE rb_false(VALUE obj)
 
