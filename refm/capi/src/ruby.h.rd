@@ -296,8 +296,8 @@ x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれ�
 @raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
 
-@raise RangeError x が long 型で表現できる値の範囲外であった場合に発生
-                  します。
+@raise RangeError x が int 型で表現できる値の範囲外であった場合に発生し
+                  ます。
 
 --- MACRO long NUM2LONG(VALUE x)
 
@@ -349,7 +349,7 @@ x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれ�
 @raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
 
-@raise RangeError x が long 型で表現できる値の範囲外であった場合に発生
+@raise RangeError x が short 型で表現できる値の範囲外であった場合に発生
                   します。
 
 --- MACRO unsigned short NUM2USHORT(VALUE x)
@@ -362,8 +362,8 @@ x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれ�
 @raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
 
-@raise RangeError x が long 型で表現できる値の範囲外であった場合に発生
-                  します。
+@raise RangeError x が unsigned short 型で表現できる値の範囲外であった
+                  場合に発生します。
 #@end
 
 --- MACRO void OBJ_FREEZE(VALUE x)
