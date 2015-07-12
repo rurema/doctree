@@ -314,7 +314,29 @@ x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれ�
 
 --- MACRO unsigned int NUM2UINT(VALUE x)
 
+x を unsigned int 型の整数に変換します。
+
+x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれでもな
+い場合は x.to_int による暗黙の型変換を試みます。
+
+@raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
+                 発生します。
+
+@raise RangeError x が unsigned int 型で表現できる値の範囲外であった場
+                  合に発生します。
+
 --- MACRO unsigned long NUM2ULONG(VALUE x)
+
+x を unsigned long 型の整数に変換します。
+
+x が [[c:Fixnum]]、[[c:Float]]、[[c:Bignum]] オブジェクトのいずれでもな
+い場合は x.to_int による暗黙の型変換を試みます。
+
+@raise TypeError x が nil の場合か、暗黙の型変換が成功しなかった場合に
+                 発生します。
+
+@raise RangeError x が unsigned long 型で表現できる値の範囲外であった場
+                  合に発生します。
 
 #@since 2.0.0
 --- MACRO short NUM2SHORT(VALUE x)
