@@ -90,6 +90,51 @@ new にブロックを指定した場合は無視されます。
   system("cat #{path}")
 #@end
 
+#@since 2.1.0
+#@since 2.2.0
+--- create(basename, tmpdir=nil, mode: 0, **options) -> File
+--- create(basename, tmpdir=nil, mode: 0, **options){|fp| ...} -> object
+#@else
+--- create(basename, *rest) -> File
+--- create(basename, *rest){|fp| ...} -> object
+#@end
+
+テンポラリファイルを作成し、それを表す File オブジェクトを生成して返します(Tempfileではありません)。
+createはopenに似ていますが、finalizerによるファイルの自動unlinkを行いません。
+
+ブロックを指定しなかった場合、tmpdirにファイルを作り、Fileオブジェクトを返します。
+このファイルは自動的に削除されません。ファイルを削除する場合は明示的にunlinkすべきです。
+
+ブロックを指定して呼び出した場合、tmpdirにファイルを作り、
+Fileオブジェクトを引数としてブロックを呼び出します。
+ブロック終了時にファイルをクローズするのはopenと同じですが、
+createではファイルのunlinkも自動で行います。
+
+@param basename ファイル名のプレフィクスを文字列で指定します。
+               文字列の配列を指定した場合、先頭の要素がファイル名のプレフィックス、次の要素が
+               サフィックスとして使われます。
+#@since 2.2.0
+@param tempdir ファイルが作られるディレクトリです。
+               このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
+@param mode ファイルのモードを定数の論理和で指定します。
+@param options ファイルのオプション引数を指定します。
+#@else
+@param rest [[m:Tempfile.new]]の第二引数以降と同じように扱われます。
+#@end
+@see [[m:Tempfile.open]]
+
+例:
+  require "tempfile"
+  GC.disable
+  path = ""
+  Tempfile.create("foo") do |f|
+    path = f.path
+    p File.exist?(path) #=> true
+  end
+  p File.exist?(path) #=> false
+
+#@end
+
 
 == Instance Methods
 
