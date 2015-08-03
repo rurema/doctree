@@ -9,7 +9,11 @@ ReFeについては
 Gemsをお使いの方は、以下のコマンドを実行する事でインストールできます。
 ([[ruby-list:41478]])
 
-  $ gem install refe
+  $ gem install refe2
+  
+以下のコマンドでデータベースを構築します。
+
+  $ bitclust setup
 
 === Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
