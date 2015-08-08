@@ -4,7 +4,9 @@ Ruby インタプリタ作成時に設定された情報を格納したライブ
 
 #@since 1.9.1
 = module RbConfig
+#@until 2.2.0
 alias Config
+#@end
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 RbConfig モジュールを定義します。
