@@ -251,17 +251,6 @@ self の符号を反転させたものを返します。
 
 このメソッドは、二項演算子 - で 0 - self によって定義されています。
 
-#@if (version < "1.8.0")
---- ==(other)    -> bool
-
-self と other の値が等しいときに true、等しくないときに false を返します。
-other が Numeric で比較できないオブジェクトの場合、
-結合法則が成り立つことを仮定して other == self の結果を返します。
-
-@param other 自身と比較したい数値を指定します。
-
-#@end
-
 --- abs        -> Numeric
 #@since 1.9.1
 --- magnitude  -> Numeric
@@ -590,16 +579,12 @@ self.to_i と同じです。
 
 @see [[m:Numeric#nonzero?]]
 
-#@since 1.8.0
 --- step(limit, step = 1) {|n| ... }    -> self
 #@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
 #@since 2.1.0
 --- step(by: step, to: limit) {|n| ... } -> self
 --- step(by: step, to: limit) -> Enumerator
-#@end
-#@else
---- step(limit, step = 1) -> Enumerable::Enumerator
 #@end
 
 self からはじめ step を足しながら limit を越える
@@ -663,8 +648,6 @@ self からはじめ step を足しながら limit を越える
 
 #@end
 
-#@since 1.8.0
-
 --- <=>(other) -> -1 | 0 | 1 | nil
 
 自身が other より大きい場合に 1 を、等しい場合に 0 を、小さい場合には -1 をそれぞれ返します。
@@ -694,8 +677,6 @@ hash メソッドを適切に定義する必要があります。
   p 1 == 1.0     #=> true
 
 @see [[m:Object#equal?]], [[m:Object#eql?]], [[m:Object#==]], [[m:Object#===]]
-
-#@end
 
 #@since 1.9.1
 --- abs2 -> Numeric
