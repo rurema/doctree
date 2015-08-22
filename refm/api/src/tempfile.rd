@@ -1,6 +1,7 @@
 category File
 
 require tmpdir
+require delegate
 
 テンポラリファイルを操作するためのクラスです
 
@@ -22,12 +23,18 @@ require tmpdir
 
 == Class Methods
 
+#@since 2.2.0
+--- new(basename, tempdir = nil, mode: 0, **options) -> Tempfile
+--- open(basename, tempdir = nil, mode: 0, **options) -> Tempfile
+--- open(basename, tempdir = nil, mode: 0, **options){|fp| ...} -> object
+#@else
 --- new(basename, tempdir = Dir::tmpdir) -> Tempfile
 --- open(basename, tempdir = Dir::tmpdir) -> Tempfile
 #@since 1.9.1
 --- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> object
 #@else
 --- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> nil
+#@end
 #@end
 
 #@since 1.8.7
@@ -55,6 +62,14 @@ new にブロックを指定した場合は無視されます。
 @param tempdir テンポラリファイルが作られるディレクトリです。
                このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
 
+#@since 2.2.0
+@param mode ファイルのモードを定数の論理和で指定します。[[m:IO.open]]
+            と同じ([[m:Kernel.#open]]と同じ)ものが指定できます。
+
+@param options ファイルのオプション引数を指定します。[[m:IO.open]] と同
+               じものが指定できます。ただし、:permオプションは無視され
+               ます。
+#@end
 
 #@since 1.8.7
 例:
@@ -91,6 +106,8 @@ new にブロックを指定した場合は無視されます。
 #@end
 
 #@since 2.1.0
+@see [[m:Tempfile.create]]
+
 #@since 2.2.0
 --- create(basename, tmpdir=nil, mode: 0, **options) -> File
 --- create(basename, tmpdir=nil, mode: 0, **options){|fp| ...} -> object
@@ -102,7 +119,13 @@ new にブロックを指定した場合は無視されます。
 テンポラリファイルを作成し、それを表す File オブジェクトを生成して返します(Tempfileではありません)。
 createはopenに似ていますが、finalizerによるファイルの自動unlinkを行いません。
 
+#@since 2.2.0
 ブロックを指定しなかった場合、tmpdirにファイルを作り、Fileオブジェクトを返します。
+#@else
+ブロックを指定しなかった場合、tmpdir(第2引数で指定したディレクトリ。省
+略した場合は[[m:Dir.tmpdir]])にファイルを作り、Fileオブジェクトを返しま
+す。
+#@end
 このファイルは自動的に削除されません。ファイルを削除する場合は明示的にunlinkすべきです。
 
 ブロックを指定して呼び出した場合、tmpdirにファイルを作り、
@@ -114,10 +137,13 @@ createではファイルのunlinkも自動で行います。
                文字列の配列を指定した場合、先頭の要素がファイル名のプレフィックス、次の要素が
                サフィックスとして使われます。
 #@since 2.2.0
-@param tempdir ファイルが作られるディレクトリです。
-               このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
-@param mode ファイルのモードを定数の論理和で指定します。
-@param options ファイルのオプション引数を指定します。
+@param tmpdir ファイルが作られるディレクトリです。
+              このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
+@param mode ファイルのモードを定数の論理和で指定します。[[m:IO.open]]
+            と同じ([[m:Kernel.#open]]と同じ)ものが指定できます。
+@param options ファイルのオプション引数を指定します。[[m:IO.open]] と同
+               じものが指定できます。ただし、:permオプションは無視され
+               ます。
 #@else
 @param rest [[m:Tempfile.new]]の第二引数以降と同じように扱われます。
 #@end
