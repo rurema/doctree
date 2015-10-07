@@ -197,7 +197,7 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 も見てください。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/association-of-controls-and-forms.html#url-encoded-form-data]]
+[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
 にもとづいて実装されています。
 
 #@# HTML5の仕様はまだ更新中のためURLが変更されているようである。
@@ -227,7 +227,7 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 みなし、エンコーディングを付加します。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/association-of-controls-and-forms.html#url-encoded-form-data]]
+[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
 にもとづいて実装されています。
 
 #@# コンポーネントとは "X=Y&U=V&P=Q" という URL エンコード文字列における
@@ -272,7 +272,7 @@ UTF-8 に変換する場合など)。
 を使っています。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/association-of-controls-and-forms.html#url-encoded-form-data]]
+[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
 にもとづいて実装されています。
 
 @param enum エンコードするデータ列([key, value] という形のデータの列)
@@ -288,7 +288,7 @@ UTF-8 に変換する場合など)。
 空白は + に変換し、その他は %XX に、変換します。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/association-of-controls-and-forms.html#url-encoded-form-data]]
+[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
 にもとづいて実装されています。
 
 @param str エンコードする文字列
