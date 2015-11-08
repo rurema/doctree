@@ -84,13 +84,13 @@ new にブロックを指定した場合は無視されます。
 例：ブロックを与えた場合
   require 'tempfile'
 
-  path = Tempfile.open("temp"){|fp|
+  tf = Tempfile.open("temp"){|fp|
     fp.puts "hoge"
-    fp.path
+    fp
   }
   # テンポラリファイルへのパスを表示
-  p path 
-  p File.read(path) #=> "hoge\n"
+  p tf.path
+  p File.read(tf.path) #=> "hoge\n"
 
 #@else
 例：ブロックを与えた場合
