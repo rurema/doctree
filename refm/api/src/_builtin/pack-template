@@ -38,6 +38,13 @@ s!, S!, i!, I!, l!, L!, q!, Q! を用います。
 システムに依存しないデータを扱うときには
 n, N, v, V を用います。
 
+#@since 1.9.3
+強制的にエンディアンを指定したいときは、
+リトルエンディアンなら<
+ビッグエンディアンなら>
+を後ろにつけます。!と組み合わせることも可能です。
+#@end
+
 まとめると以下のようになります。
 
 : エンディアン非依存、整数サイズ非依存 (ネットワークプロトコルなどに適切)
@@ -67,6 +74,17 @@ n, N, v, V を用います。
   l: int32_t
   L: uint32_t
 //}
+
+#@since 1.9.3
+: エンディアンの強制指定(バイナリ解析などに適切)
+//emlist{
+  S>:  big endian unsigned 16bit(nと同じ)
+  s>:  big endian int16_t
+  s!>: big endian signed short
+  l<:  little endian int32_t
+  l!<: little endian signed long
+//}
+#@end
 
 ==== 各テンプレート文字の説明
 
