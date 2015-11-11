@@ -334,12 +334,15 @@ subkey の値を返します。
 
 == Constants
 
---- HKEY_CLASSES_ROOT
---- HKEY_CURRENT_USER
---- HKEY_LOCAL_MACHINE
---- HKEY_PERFORMANCE_DATA
---- HKEY_CURRENT_CONFIG
---- HKEY_DYN_DATA
+--- HKEY_CLASSES_ROOT        -> Win32::Registry
+--- HKEY_CURRENT_USER        -> Win32::Registry
+--- HKEY_LOCAL_MACHINE       -> Win32::Registry
+--- HKEY_USERS               -> Win32::Registry
+--- HKEY_PERFORMANCE_DATA    -> Win32::Registry
+--- HKEY_PERFORMANCE_TEXT    -> Win32::Registry
+--- HKEY_PERFORMANCE_NLSTEXT -> Win32::Registry
+--- HKEY_CURRENT_CONFIG      -> Win32::Registry
+--- HKEY_DYN_DATA            -> Win32::Registry
 #@todo
 
 それぞれの定義済キーを表す Win32::Registry オブジェクトです。
