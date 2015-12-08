@@ -32,7 +32,7 @@
 :  ?a 
 
 #@since 1.9.1
- [[ref:d:spec/literal#num]]。長さ 1 の文字列。
+ [[ref:d:spec/literal#string]]。長さ 1 の文字列。
 #@else
  [[ref:d:spec/literal#num]]。文字の ascii コードの数値。
 #@end
