@@ -10,12 +10,10 @@ URI (Uniform Resource Identifier) のためのライブラリです。
   * [[RFC:2255]] The LDAP URL Format                                   (Obsoleted by [[RFC:4510]], [[RFC:4516]])
   * [[RFC:2368]] The mailto URL scheme
   * [[RFC:2373]] IP Version 6 Addressing Architecture                  (Obsoleted by [[RFC:3513]])
-#@since 1.8.7
-  * [[rfc:3986]] Uniform Resource Identifier (URI): Generic Syntax
-#@else
   * [[RFC:2396]] Uniform Resource Identifiers (URI): Generic Syntax    (Obsoleted by [[rfc:3986]])
   * [[RFC:2732]] Format for Literal IPv6 Addresses in URL's            (Obsoleted by [[rfc:3986]])
-#@end
+  * [[rfc:3986]] Uniform Resource Identifier (URI): Generic Syntax
+  * [[rfc:3987]] Internationalized Resource Identifiers (IRIs)
 
 #@include(uri/URI)
 #@include(uri/Generic)
