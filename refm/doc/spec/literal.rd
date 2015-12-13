@@ -583,6 +583,12 @@ Symbol リテラルに指定できる演算子はメソッドとして再定義�
 シンボルは常に一意のオブジェクトで、(式展開を含んでいてもその結果が同
 じ文字列であれば)何度評価されても同じオブジェクトを返します。
 
+#@since 2.2.0
+ほとんどのシンボルはGC可能です。
+
+@see [[url:https://bugs.ruby-lang.org/issues/9634]]
+#@end
+
 ===[a:percent] %記法
 
 [[ref:string]]、[[ref:command]]、[[ref:regexp]]、[[ref:array]]、[[ref:symbol]]では、
