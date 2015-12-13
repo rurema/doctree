@@ -256,12 +256,21 @@ _ですが、組み込み変数の一部には
 
 : nil
   [[c:NilClass]]クラスの唯一のインスタンス
+#@since 2.2.0
+  [[m:Object#frozen?]] は true を返します。
+#@end
 
 : true
   [[c:TrueClass]]クラスの唯一のインスタンス。真の代表値
+#@since 2.2.0
+  [[m:Object#frozen?]] は true を返します。
+#@end
 
 : false
   [[c:FalseClass]]クラスの唯一のインスタンス。nilとfalseは偽を表します。
+#@since 2.2.0
+  [[m:Object#frozen?]] は true を返します。
+#@end
 
 : __FILE__
   現在のソースファイル名
