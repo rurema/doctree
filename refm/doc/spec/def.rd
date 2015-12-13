@@ -33,7 +33,6 @@
             式..
           end
 
-#@since 1.8.0
 文法:
 
           class 識別子 [`<' superclass ]
@@ -45,7 +44,6 @@
           [ensure
             式..]
           end
-#@end
 
 クラスを定義します。クラス名はアルファベットの大文字で始まる識別子です。
 
@@ -58,14 +56,7 @@ rescue/ensure 節を指定し、例外処理ができます。
 
 クラスが既に定義されているとき、さらに同じクラス名でクラス定義を書くとク
 ラスの定義の追加になります。
-#@since 1.8.2
 ただし、元のクラスと異なるスーパークラスを指定すると TypeError が発生します。
-#@else
-ただし、元のクラスと異なるスーパークラスを
-明示的に指定して定義すると、元のクラスとは異なる新たなクラスを同名で定
-義することになります。このとき、クラス名の定数を上書きすることになるの
-で警告メッセージが出ます。
-#@end
 
         class Foo < Array
           def foo
@@ -78,17 +69,10 @@ rescue/ensure 節を指定し、例外処理ができます。
           end
         end
 
-#@since 1.8.2
         # 間違ったスーパークラスを指定するとエラー
         class Foo < String
         end
         # => superclass mismatch for class Foo (TypeError)
-#@else
-        # 別のクラスを定義(スーパークラスが異なるので)
-        class Foo < String
-        end
-        # => warning: already initialized constant Foo
-#@end
 
 クラス定義式の中は self がそのクラスであることと、
 [[ref:limit]]のデフォルトが異なること以外
@@ -104,7 +88,6 @@ Foo::Bar であること以外、継承関係などの機能的な関連はま�
           end
         end
 
-#@since 1.8.0
 クラス Foo が既に定義されていれば、以下の書き方もできます。
 
         class Foo
@@ -112,7 +95,6 @@ Foo::Bar であること以外、継承関係などの機能的な関連はま�
 
         class Foo::Bar
         end
-#@end
 
 クラスのネストは、意味的に関連するクラスを外側のクラス／モジュールでひ
 とまとまりにしたり、包含関係を表すために使用されます。
@@ -155,12 +137,8 @@ Foo::Bar であること以外、継承関係などの機能的な関連はま�
         # 上記はあくまでも例である。実際の File.open ではより簡便な
         # File.open("foo", "r") という形式が使われる
 
-#@since 1.8.0
 クラス定義式は、最後に評価した式の結果を返します。最後に評価した式
 が値を返さない場合は nil を返します。
-#@else
-クラス定義式は値を返しません。
-#@end
 
 ===[a:singleton_class] 特異クラス定義
 
@@ -180,7 +158,6 @@ Foo::Bar であること以外、継承関係などの機能的な関連はま�
             式..
           end
 
-#@since 1.8.0
 文法:
 
           class `<<' expr
@@ -192,7 +169,6 @@ Foo::Bar であること以外、継承関係などの機能的な関連はま�
           [ensure
             式..]
           end
-#@end
 
 クラス定義と同じ構文で特定のオブジェクトにメソッドやインスタンス変数を
 定義/追加します。この構文の内部で定義したメソッドや定数は指定した
@@ -223,7 +199,6 @@ rescue/ensure 節を指定し、例外処理ができます。
             式..
           end
 
-#@since 1.8.0
 文法:
 
           module 識別子
@@ -235,7 +210,6 @@ rescue/ensure 節を指定し、例外処理ができます。
           [ensure
             式..]
           end
-#@end
 
 モジュールを定義します。モジュール名はアルファベットの大文字
 で始まる識別子です。
@@ -248,12 +222,8 @@ Ruby では、モジュールもオブジェクトの一つで [[c:Module]] ク�
 モジュールが既に定義されいるとき、さらに同じモジュール名でモジュール定
 義を書くとモジュールの定義の追加になります。
 
-#@since 1.8.0
 モジュール定義式は、最後に評価した式の結果を返します。最後に評価した式
 が値を返さない場合は nil を返します。
-#@else
-モジュール定義式は値を返しません。
-#@end
 
 ===[a:method] メソッド定義
 
@@ -503,17 +473,10 @@ yield を呼び出すことです。
 
 ====[a:nest_method] メソッド定義のネスト
 
-#@since 1.8.0
 ネスト可能です。ネストされた定義式は、
 それを定義したメソッドが実行された時に定義されます。このことを除けば、
 普通のメソッド定義式と同じです。以下の例を参照してください。
-#@else
-[[ref:singleton_method]]を除くメソッド定義式はネストできません。
-#@end
-#@#version 1.8.0 には、ネストして定義したメソッドが Object のインスタンス
-#@#メソッドになるというバグがありました-))
 
-#@since 1.8.0
         class Foo
           def foo
             def bar
@@ -530,47 +493,6 @@ yield を呼び出すことです。
         obj.foo            # => method "bar" was added
         obj.foo            # => warning: method redefined; discarding old bar
         Foo.new.bar        # => :bar  (他のインスタンスでも定義済み)
-
-#@else
-version 1.6 以前は、同じことを行うのに [[m:Object#instance_eval]] を使
-う必要がありました(この場合特異メソッドが定義されるので少し異なります)。
-
-        class Foo
-          def foo
-            instance_eval <<-END
-              def bar
-                p :bar
-              end
-            END
-          end
-        end
-
-        obj = Foo.new
-        def obj.singleton_method_added(name)
-            puts "singleton method \"#{name}\" was added"
-        end                # => singleton method "singleton_method_added" was added
-
-        obj.bar rescue nil # => undefined method `bar' for #<Foo:0x4019eda4>
-        obj.foo            # => singleton method "bar" was added
-
-        obj.foo            # => warning: method redefined; discarding old bar
-                           # => singleton method "bar" was added
-        Foo.new.bar        # => undefined method `bar' for #<Foo:0x4019eda4>
-
-または、以下のように書くこともできます。
-#@#1.6 以前は、def 式内の def 式が
-#@#parser で許されなかったのでこのように書くことはできませんでした
-
-       class Foo
-          def foo
-            instance_eval {
-              def bar
-                p :bar
-              end
-            }
-          end
-        end
-#@end
 
 ====[a:eval_method] メソッドの評価
 
@@ -718,29 +640,10 @@ extend については、[[m:Object#extend]] を参照して
         end
         obj.bar                 # => ["-:27"]
 
-#@#         class <<obj
-#@#           def baz
-#@#             self.foo rescue nil
-#@#           end
-#@#         end
-#@#         obj.baz                 # => ["-:34"]
-#@# 
-#@#         module Baz
-#@#           def baz
-#@#             self.foo
-#@#           end
-#@#         end
-#@#         class Foo
-#@#           include Baz
-#@#         end
-#@#         Foo.new.baz             # => ["-:44"]
-
 デフォルトでは def 式がクラス定義の外(トップレベル)にあれば private、
 クラス定義の中にあれば public に定義します。これは [[m:Module#public]]、[[m:Module#private]]、
 [[m:Module#protected]] を用いて変更できます。ただし [[m:Object#initialize]] という名前のメソッドと
-#@since 1.8.0
 [[m:Object#initialize_copy]] という名前のメソッド
-#@end
 は定義する場所に関係なく常に private になります。
 
 例:
@@ -828,14 +731,6 @@ protected よりは private が使われることの方が多いようです。
 グローバル変数の alias を設定するとまったく同じ変数が定義されます。こ
 のことは一方の変数への代入は他方の変数にも反映されるようになることを意
 味します。
-#@until 1.9.1
-添付ライブラリの [[lib:importenv]] はこのことを利用して組み込み変数
-([[ref:d:spec/variables#builtin]] を参照)に英語名をつけます。
-#@end
-
-#@until 1.8.0
-グローバル変数の別名づけは特定の組み込み変数だけが対象です。
-#@end
 
     # 特殊な変数のエイリアスは一方の変更が他方に反映される
     $_ = 1
@@ -843,20 +738,10 @@ protected よりは private が使われることの方が多いようです。
     $_ = 2
     p [$foo, $_]   # => [2, 2]
 
-#@since 1.8.0
     $bar = 3
     alias $foo $bar
     $bar = 4
     p [$foo, $bar] # => [4, 4]
-#@else
-    # こちらは通常の変数のエイリアスで本当の意味での
-    # エイリアスにはならない。これは、version 1.6 ま
-    # での制限
-    $bar = 3
-    alias $foo $bar
-    $bar = 4
-    p [$foo, $bar] # => [3, 4]
-#@end
 
 ただし、正規表現の部分文字列に対応する変数 $1,$2, ... には別名を付けることができません。
 また、インタプリタに対して重要な意味のあるグローバル変数
@@ -932,17 +817,10 @@ super の実行が可能なら真(文字列 "super")を返します。
 
 "assignment" を返します。実際に代入は行いませんがローカル変数は定義されます。
 
-#@since 1.9.1
   /(.)/ =~ "foo"
   defined? $&  # => "global-variable"
   defined? $1  # => "global-variable"
   defined? $2  # => nil
-#@else
-  /(.)/ =~ "foo"
-  defined? $&  # => "$&"
-  defined? $1  # => "$1"
-  defined? $2  # => nil
-#@end
 
 $&, $1, $2, などは直前のマッチの結果値が設定された場合だけ真を返します。
 
