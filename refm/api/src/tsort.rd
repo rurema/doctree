@@ -150,6 +150,9 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 
 
 --- tsort_each {|node| ...} -> nil
+#@since 2.2.0
+--- tsort_each -> Enumerator
+#@end
 
 tsort メソッドのイテレータ版です。
 obj.tsort_each は obj.tsort.each と似ていますが、
@@ -207,6 +210,9 @@ tsort_each は nil を返します。
   #=> [[4], [2, 3], [1]]
 
 --- each_strongly_connected_component {|nodes| ...} -> nil
+#@since 2.2.0
+--- each_strongly_connected_component -> Enumerator
+#@end
 
 strongly_connected_components メソッドのイテレータ版です。
 obj.each_strongly_connected_component は
@@ -239,6 +245,9 @@ each_strongly_connected_component は nil を返します。
   #=> [1]
 
 --- each_strongly_connected_component_from(node) {|nodes| ...} -> ()
+#@since 2.2.0
+--- each_strongly_connected_component_from(node) -> Enumerator
+#@end
 
 node から到達可能な強連結成分についてのイテレータです。
 
