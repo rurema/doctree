@@ -176,6 +176,26 @@ pattern === item が成立する要素を全て含んだ配列を返します。
   Array.instance_methods.grep(/gr/) # => ["group_by", "grep"]
 #@end
 
+#@since 2.3.0
+@see [[m:Enumerable#grep_v]]
+
+--- grep_v(pattern)                -> [object]
+--- grep_v(pattern) { |item| ... } -> [object]
+
+[[m:Enumerable#grep]] のマッチの条件を逆にして、pattern === item が成立
+しない要素を全て含んだ配列を返します。
+
+@param pattern 「===」メソッドを持つオブジェクトを指定します。
+
+例:
+
+  (1..10).grep_v 2..5   # => [1, 6, 7, 8, 9, 10]
+  res =(1..10).grep_v(2..5) { |v| v * 2 }
+  res                   # => [2, 12, 14, 16, 18, 20]
+
+@see [[m:Enumerable#grep]]
+#@end
+
 #@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> object
 #@since 1.8.7
