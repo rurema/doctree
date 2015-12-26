@@ -9,7 +9,11 @@ map や select などのメソッドの遅延評価版を提供するための�
  * flat_map/collect_concat
  * select/find_all
  * reject
+#@since 2.3.0
+ * grep, grep_v
+#@else
  * grep
+#@end
  * take, take_while
  * drop, drop_while
  * zip (※互換性のため、ブロックを渡さないケースのみlazy)
@@ -124,7 +128,17 @@ Enumerator::Lazy のインスタンスを返します。
 
 [[m:Enumerable#grep]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
+#@until 2.3.0
 @see [[m:Enumerable#grep]]
+#@else
+@see [[m:Enumerable#grep]], [[m:Enumerable#grep_v]], [[m:Enumerator::Lazy#grep_v]]
+
+--- grep_v(pattern) {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#grep_v]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+@see [[m:Enumerable#grep_v]], [[m:Enumerable#grep]], [[m:Enumerator::Lazy#grep]]
+#@end
 
 --- zip(*lists)  -> Enumerator::Lazy
 --- zip(*lists) {|v1, v2, ...| ... } -> nil
