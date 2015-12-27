@@ -416,6 +416,16 @@ GB 12345 エンコーディング。
 
 GB 2312 から派生したもので、繁体字中国語を取り扱うエンコーディングです。
 
+#@since 2.3.0
+--- IBM037       -> Encoding
+--- EBCDIC_CP_US -> Encoding
+
+IBM037 エンコーディング。
+
+ダミーエンコーディングです。
+
+@see [[url:https://en.wikipedia.org/wiki/EBCDIC_037]]
+#@end
 
 --- IBM437 -> Encoding
 --- CP437 -> Encoding
