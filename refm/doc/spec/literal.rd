@@ -344,6 +344,23 @@ _ は、0x などの prefix の直後に書くことはできません。また�
           #↑終端行をインデントできます。
         end
 
+#@since 2.3.0
+開始ラベルを `<<~識別子` のように `~` を付けて書くことで、以下のような
+ヒアドキュメントを書くことができます。
+
+//emlist{
+    expected_result = <<~SQUIGGLY_HEREDOC
+      This would contain specially formatted text.
+
+      That might span many lines
+    SQUIGGLY_HEREDOC
+//}
+
+最もインデントが少ない行を基準にして、全ての行の先頭からから空白を取り除きます。
+インデントの深さを決定するために主にタブやスペースで構成された行は無視されるので、注意してください。
+しかし、エスケープされたタブやスペースは、通常の文字と同じように扱われます。
+#@end
+
 一行に複数のヒアドキュメントを書くこともできます。
 
         print <<FIRST, <<SECOND
