@@ -219,7 +219,7 @@ d, a, u の3つのオプションがあります。
   * \R 改行 (?>\x0D\x0A|[\x0A-\x0D\x{85}\x{2028}\x{2029}])
   * \X Unicode 結合文字シーケンス (eXtended grapheme cluster) (?>\P{M}\p{M}*)
 
-  # \u{0308} はウムトラム
+  # \u{0308} はウムラウト
   /\X/.match("e\u{0308}") # => #<MatchData "ë">
   $&.codepoints # => [101, 776]
   /\w/.match("e\u{0308}") # => #<MatchData "e">
@@ -269,7 +269,7 @@ d, a, u の3つのオプションがあります。
   %r{<b>.*</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>y<b>z</b>">
   %r{<b>.*?</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>">
 
-==== 絶対最大量指定子(possessive qualifier)
+==== 絶対最大量指定子(possessive quantifier)
 以下のメタ文字列は、最大量指定子のように最長のマッチをしますが、
 一度マッチすると、その後マッチに失敗してもバックトラックしません。
 つまりマッチ済みの文字列を手放さずにマッチに失敗します。
