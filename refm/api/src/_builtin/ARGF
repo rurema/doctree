@@ -516,7 +516,7 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
     printf("%s\n", line)
   end
 
-@see [[m:Kernel.#gets]], [[m#IO#gets]]
+@see [[m:Kernel.#gets]], [[m:IO#gets]]
 
 --- pos -> Integer
 --- tell -> Integer
