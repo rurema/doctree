@@ -727,6 +727,19 @@ n, N, v, V を用います。
     "a\000\000b".unpack("C @3 C") # => [97, 98]
 //}
 
+#@since 2.3.0
+: j
+
+intptr_t
+#@#todo [[url:https://bugs.ruby-lang.org/issues/11215]]
+
+: J
+
+uintptr_t
+#@#todo [[url:https://bugs.ruby-lang.org/issues/11215]]
+
+#@end
+
 ==== 使用例
 
 以下、pack/unpack の使用例の一部です。
