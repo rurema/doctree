@@ -157,157 +157,162 @@
 
 === 組み込みクラスの互換性 (機能追加とバグ修正を除く)
 
-* Array
-  * Array#select!, Array#keep_if, Array#reject!, and Array#delete_if
-    no longer changes the receiver array instantly every time the
-    block is called.  [Feature #10714]
+  * [[c:Array]]
+    * [[m:Array#select!]], [[m:Array#keep_if]], [[m:Array#reject!]], [[m:Array#delete_if]]
+      ブロックが評価される度にレシーバーの配列をすぐに変更しないようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/10714]]
+    * [[m:Array#flatten]] と [[m:Array#flatten!]] は与えられたレベルを越えた要素には
+      `#to_ary`を呼ばないようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/10748]]
+    * [[m:Array#inspect]] はその要素の文字列が Encoding.default_external と
+      互換性のないエンコーディングであっても例外が発生しなくなりました。
+      [[url:https://bugs.ruby-lang.org/issues/11801]]
 
-  * Array#flatten and Array#flatten! no longer try to call #to_ary
-    method on elements beyond the given level.  [Bug #10748]
+  * [[c:Enumerable]]
+    * [[m:Enumerable#chunk]] と [[m:Enumerable#slice_before]] は初期状態を引数として受け取らなくなりました。
+      状態の管理にはローカル変数を使ってください。
+      [[url:https://bugs.ruby-lang.org/issues/10958]]
 
-  * Array#inspect doesn't raise error even if its content returns
-    a string which is not compatible with Encoding.default_external
-    as inspected result. [Feature #11801]
+  * [[c:File::Stat]]
+    * Windows では [[m:File::Stat#ino]] は常に 0 を返していましたが、
+      BY_HANDLE_FILE_INFORMATION.nFileIndexHigh/Low を返すようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/11216]]
 
-* Enumerable
-  * Enumerable#chunk and Enumerable#slice_before no longer takes the
-    initial_state argument.  [Feature #10958]
-    Use a local variable instead to maintain a state.
+  * [[c:Hash]]
+    * [[m:Hash#inspect]] はその要素の文字列が Encoding.default_external と
+      互換性のないエンコーディングであっても例外が発生しなくなりました。
+      [[url:https://bugs.ruby-lang.org/issues/11801]]
 
-* File::Stat
-  * On Windows File::Stat#ino always returned 0, but now returns
-    BY_HANDLE_FILE_INFORMATION.nFileIndexHigh/Low.  [Feature #11216]
+  * [[c:IO]]
+    * クローズ済みのIOオブジェクトに [[m:IO#close]] を呼んでも例外が発生しなくなりました。
+      [[url:https://bugs.ruby-lang.org/issues/10718]]
+    * [[m:IO#each_codepoint]] は、変換時、EOFの前に不完全な文字があると例外が発生するようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/11444]]
 
-* Hash
-  * Hash#inspect doesn't raise error even if its content returns
-    a string which is not compatible with Encoding.default_external
-    as inspected result. [Feature #11801]
+  * [[c:Module]]
+    * [[m:Module#define_method]] と [[m:Object.define_singleton_method]] は
+      メソッド本体(Procオブジェクト、Methodオブジェクト、またはブロック )が必須になりました。
+      ブロックが与えられない場合は ArgumentError が発生します。
+      [[url:https://bugs.ruby-lang.org/issues/11283]]]
 
-* IO
-  * IO#close doesn't raise when the IO object is closed.  [Feature #10718]
-  * IO#each_codepoint raises an exception at incomplete character
-    before EOF when conversion takes place.  [Bug #11444]
-
-* Module
-  * Module#define_method and Object.define_singleton_method now
-    require method body, Proc, Method, or a block, and raise
-    ArgumentError if no block is given directly.  [Bug #11283]
-
-* pack/unpack (Array/String)
-  * j and J directives for pointer width integer type.  [Feature #11215]
+  * pack/unpack (Array/String)
+    * `j`と`J`が追加されました。
+      [[url:https://bugs.ruby-lang.org/issues/11215]]
 
 
-=== Stdlib updates (outstanding ones only)
+=== 標準添付ライブラリの更新 (優れたもののみ)
 
-* Logger
+  * [[c:Logger]]
+    * [[m:Logger#level=]] はシンボルと文字列でログレベルを指定できるようになりました。(大文字・小文字を区別しません)
+      [[url:https://bugs.ruby-lang.org/issues/11695]]
+    * ログデバイスを開きなおすために [[m:Logger#reopen]] が追加されました。
+      [[url:https://bugs.ruby-lang.org/issues/11696]]
 
-  * Logger#level= now supports symbol and string levels such as :debug, :info,
-    :warn, :error, :fatal (case insensitive) [Feature #11695]
-  * Logger#reopen is added to reopen a log device. [Feature #11696]
+  * [[lib:io/wait]]
+    * [[m:IO#wait_readable]] は FIONREAD をチェックしなくなりました。
+      ソケットのようなバイトストリームではないIOで使われます。
 
-* io/wait
-  * IO#wait_readable no longer checks FIONREAD, it may be used for
-    non-bytestream IO such as listen sockets.
+  * [[c:Net::FTP]]
+    * [[m:Net::FTP#mlst]] を追加。
+    * [[m:Net::FTP#mlsd]] を追加。
 
-* Net::FTP
-  * Net::FTP#mlst is added.
-  * Net::FTP#mlsd is added.
+  * [[lib:nkf]]
+    * nkf 2.1.4 をマージしました。
 
-* nkf
-  * Merge nkf 2.1.4.
+  * [[c:ObjectSpace]] ([[lib:objspace]])
+    * [[m:ObjectSpace.count_symbols]] を追加。
+    * [[m:ObjectSpace.count_imemo_objects]] を追加。
+    * [[m:ObjectSpace.internal_class_of]] を追加。
+    * [[m:ObjectSpace.internal_super_of]] を追加。
 
-* ObjectSpace (objspace)
-  * ObjectSpace.count_symbols is added.
-  * ObjectSpace.count_imemo_objects is added.
-  * ObjectSpace.internal_class_of is added.
-  * ObjectSpace.internal_super_of is added.
+  * [[c:OpenSSL]]
+    * [[m:OpenSSL::SSL::SSLSocket#accept_nonblock]] と
+      [[m:OpenSSL::SSL::SSLSocket#connect_nonblock]] は `exception: false` オプションをサポートするようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/10532]]
 
-* OpenSSL
-  * OpenSSL::SSL::SSLSocket#accept_nonblock and
-    OpenSSL::SSL::SSLSocket#connect_nonblock supports `exception: false`.
-    [Feature #10532]
+  * [[c:Pathname]]
+    * [[m:Pathname#descend]] と [[m:Pathname#ascend]] はブロックなしでの呼び出しができるようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/11052]]
 
-* Pathname
-  * Pathname#descend and Pathname#ascend supported blockless form.
-    [Feature #11052]
+  * [[c:Socket]]
+    * [[m:Socket#connect_nonblock]], [[m:Socket#accept_nonblock]],
+      [[m:TCPServer#accept_nonblock]], [[m:UNIXServer#accept_nonblock]],
+      [[m:BasicSocket#recv_nonblock]], [[m:BasicSocket#recvmsg_nonblock]],
+      [[m:BasicSocket#sendmsg_nonblock]] に `exception: false` オプションを追加しました。
+      例外 [[c:IO::WaitReadable]] や [[c:IO::WaitWritable]] を発生させるかわりに :wait_readable, :wait_writable を返すためです。
+      [[url:https://bugs.ruby-lang.org/issues/10532]]
+      [[url:https://bugs.ruby-lang.org/issues/11229]]
+    * [[m:BasicSocket#recv]] と [[m:BasicSocket#recv_nonblock]] は GC のオーバーヘッドを減らすために
+      [[m:IO#read]] や [[m:IO#read_nonblock]] と同じように出力用の文字列を引数として受けとれるようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/11242]]
 
-* Socket
-  * Socket#connect_nonblock, Socket#accept_nonblock,
-    TCPServer#accept_nonblock, UNIXServer#accept_nonblock,
-    BasicSocket#recv_nonblock, BasicSocket#recvmsg_nonblock,
-    BasicSocket#sendmsg_nonblock all support `exception: false` to return
-    :wait_readable or :wait_writable symbols instead of raising
-    IO::WaitReadable or IO::WaitWritable exceptions
-    [Feature #10532] [Feature #11229]
-  * BasicSocket#recv and BasicSocket#recv_nonblock allow an output
-    String buffer argument like IO#read and IO#read_nonblock to reduce
-    GC overhead [Feature #11242]
+  * [[c:StringIO]]
+    * リードオンリーモードでは、[[m:StringIO#set_encoding]] はそのバッファ文字列にエンコーディングをセットしないようになりました。
+      [[m:StringIO#set_encoding]] を使わずに文字列のエンコーディングを設定すると予期しない動作の原因となるかもしれません。
+      [[url:https://bugs.ruby-lang.org/issues/11827]]
 
-* StringIO
-  * In read-only mode, StringIO#set_encoding no longer sets the encoding
-    of its buffer string.  Setting the encoding of the string directly
-    without StringIO#set_encoding may cause unpredictable behavior now.
-    [Bug #11827]
+  * [[lib:timeout]]
+    * [[m:Object#timeout]]は呼び出すと非推奨として警告されるようになりました。
 
-* timeout
-  * Object#timeout is now warned as deprecated when called.
+=== 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
-=== Stdlib compatibility issues (excluding feature bug fixes)
+  * ext/coverage/coverage.c
+    * [[m:Coverage.peek_result]] を追加。カバレッジツールを停止することなくカバレッジに関する情報を取得することができます。
+      [[url:https://bugs.ruby-lang.org/issues/10816]]
 
-* ext/coverage/coverage.c
-  * Coverage.peek_result: new method to allow coverage to be captured without
-    stopping the coverage tool.  [Feature #10816]
+  * [[c:Fiddle]]
+    * [[m:Fiddle::Function#call]] は GVL を解放するようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/11607]]
 
-* Fiddle
-  * Fiddle::Function#call releases the GVL.  [Feature #11607]
+  * [[lib:io/console]]
+    * io-console 0.4.5になりました。
+      ライセンスが BSD 2-clause "Simplified" License に変更されました。
 
-* io-console
-  * Update to io-console 0.4.5, and change the license to BSD 2-clause
-    "Simplified" License.
+  * [[lib:base64]]
+    * [[m:Base64.urlsafe_encode64]] に パディング文字("=")を抑制するために "padding" オプションが追加されました。
+      [[url:https://bugs.ruby-lang.org/issues/10740]]
+    * [[m:Base64.urlsafe_decode64]]: パディングされていない入力だけでなく正しくパディングされた入力も受け付けるようになりました。
+      [[url:https://bugs.ruby-lang.org/issues/10740]]
 
-* lib/base64.rb
-  * Base64.urlsafe_encode64: added a "padding" option to suppress
-    the padding character ("=").  [Feature #10740]
-  * Base64.urlsafe_decode64: now it accepts not only correctly-padded
-    input but also unpadded input.  [Feature #10740]
+  * [[lib:drb]]
+    * 使用していない引数を削除しました。
+      [[url:https://github.com/ruby/ruby/pull/515]]
 
-* lib/drb/drb.rb
-  * removed unused argument. https://github.com/ruby/ruby/pull/515
+  * [[lib:matrix]]
+    * [[m:Vector#round]]を追加。
+      [[url:https://github.com/ruby/ruby/pull/802]]
 
-* lib/matrix.rb
-  * Add Vector#round. https://github.com/ruby/ruby/pull/802
+  * [[lib:webrick/utils]]
+    * 使用していない引数を削除しました。
+      [[url:https://github.com/ruby/ruby/pull/356]]
 
-* lib/webrick/utils.rb
-  * removed unused argument. https://github.com/ruby/ruby/pull/356
+  * [[c:Net::FTP]]
+    * パッシブモードでの接続がデフォルトになりました。
+      [[m:Net::FTP.default_passive=]] で変更することができます。
+      [[url:https://bugs.ruby-lang.org/issues/11612]]
 
-* Net::FTP
-  * Connections are in passive mode per default now.  The default mode can
-    be changed by Net::FTP.default_passive=.  [Feature #11612]
+  * [[c:Net::HTTP]]
+    * [[m:Net::HTTP#open_timeout]] のデフォルト値が 60 になりました。(以前は nil でした)
 
-* Net::HTTP
-  * default value of Net::HTTP#open_timeout is now 60 (was nil).
+  * [[c:Net::Telnet]]
+    * [[c:Net::Telnet]] は net-telnet gem になりました。
+      [[url:https://bugs.ruby-lang.org/issues/11083]]
 
-* Net::Telnet
-  * Net::Telnet is extracted to net-telnet gem. It's unmaintain code.
-    [Feature #11083]
+  * [[lib:psych]]
+    * Psych 2.0.17 に更新しました。
 
-* Psych
-  * Updated to Psych 2.0.17
+  * Rake
+    * Rake は標準添付ライブラリから削除されて bundled gem になりました。
+      [[url:https://bugs.ruby-lang.org/issues/11025]]
 
-* Rake
-  * Rake is removed from stdlib.  [Feature #11025]
+  * RDoc
+    * RDoc 4.2.1 に更新しました。
+      * [[url:https://github.com/rdoc/rdoc/blob/master/History.rdoc#421--2015-12-22]]
 
-* RDoc
-  * Updated to RDoc 4.2.1.  For full release notes see:
-
-    https://github.com/rdoc/rdoc/blob/master/History.rdoc#421--2015-12-22
-
-* RubyGems
-  * Updated to RubyGems 2.5.1.  For full release notes see:
-
-    http://docs.seattlerb.org/rubygems/History_txt.html#label-2.5.0+-2F+2015-11-03
-    and
-    http://docs.seattlerb.org/rubygems/History_txt.html#label-2.5.1+-2F+2015-12-10
+  * RubyGems
+    * RubyGems 2.5.1 に更新しました。
+      * [[url:http://docs.seattlerb.org/rubygems/History_txt.html#label-2.5.0+-2F+2015-11-03]]
+      * [[url:http://docs.seattlerb.org/rubygems/History_txt.html#label-2.5.1+-2F+2015-12-10]]
 
 === Built-in global variables compatibility issues
 
