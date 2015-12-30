@@ -122,6 +122,8 @@ FTPの接続のグローバルなデフォルトモードが passive mode であ
 
 passive mode をFTPの接続のグローバルなデフォルトモードにするかどうかを設定します。
 
+デフォルト値は true です。
+
 @param on true ならばデフォルトを passive mode に、false ならばデフォルトを active mode にします
 
 #@end
