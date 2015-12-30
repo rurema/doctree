@@ -623,6 +623,28 @@ proxyport は時代遅れのメソッドです。
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
 
+#@since 2.0.0
+--- keep_alive_timeout -> Integer
+以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
+返します。
+
+デフォルトは2(秒)です。
+
+@see [[m:Net::HTTP#keep_alive_timeout=]]
+
+--- keep_alive_timeout=(seconds)
+以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
+設定します。
+
+この秒数以内に同じホストに次のリクエストを送った場合、
+ソケットを再利用します。
+
+デフォルトは2(秒)です。これは一般的にサーバ側の keep-alive の秒数
+が2秒である場合が多いからです。
+
+@see [[m:Net::HTTP#keep_alive_timeout]]
+
+#@end
 --- finish -> ()
 
 HTTP セッションを終了します。セッション開始前にこのメソッドが
