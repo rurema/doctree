@@ -1154,6 +1154,64 @@ otherがハッシュではない場合、otherのメソッドto_hashを使って
 
 @see [[m:Hash#==]]
 
+#@since 2.3.0
+--- <=(other) -> bool
+
+self が other のサブセットか同じである場合に真を返します。
+
+@param other 自身と比較したい Hash オブジェクトを指定します。
+
+  h1 = {a:1, b:2}
+  h2 = {a:1, b:2, c:3}
+  h1 <= h2   # => true
+  h2 <= h1   # => false
+  h1 <= h1   # => true
+
+@see [[m:Hash#<]], [[m:Hash#>=]], [[m:Hash#>]]
+
+--- <(other) -> bool
+
+self が other のサブセットである場合に真を返します。
+
+@param other 自身と比較したい Hash オブジェクトを指定します。
+
+  h1 = {a:1, b:2}
+  h2 = {a:1, b:2, c:3}
+  h1 < h2    # => true
+  h2 < h1    # => false
+  h1 < h1    # => false
+
+@see [[m:Hash#<=]], [[m:Hash#>=]], [[m:Hash#>]]
+
+--- >=(other) -> bool
+
+other が self のサブセットか同じである場合に真を返します。
+
+@param other 自身と比較したい Hash オブジェクトを指定します。
+
+  h1 = {a:1, b:2}
+  h2 = {a:1, b:2, c:3}
+  h1 >= h2   # => false
+  h2 >= h1   # => true
+  h1 >= h1   # => true
+
+@see [[m:Hash#<=]], [[m:Hash#<]], [[m:Hash#>]]
+
+--- >(other) -> bool
+
+other が self のサブセットである場合に真を返します。
+
+@param other 自身と比較したい Hash オブジェクトを指定します。
+
+  h1 = {a:1, b:2}
+  h2 = {a:1, b:2, c:3}
+  h1 > h2    # => false
+  h2 > h1    # => true
+  h1 > h1    # => false
+
+@see [[m:Hash#<=]], [[m:Hash#<]], [[m:Hash#>=]]
+#@end
+
 --- hash    -> Integer
 
 #@since 1.8.7
