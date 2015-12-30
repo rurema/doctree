@@ -1140,6 +1140,50 @@ nil、 :_separator はある要素を無視したい場合に用います。
 @param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
 @raise RuntimeError 予約されている値を用いた場合に発生します
 
+#@since 2.3.0
+--- chunk_while {|elt_before, elt_after| ... } -> Enumerator
+
+要素を前から順にブロックで評価し、その結果によって要素をチャンクに分け
+た(グループ化した)要素を持つ[[c:Enumerator]] を返します。
+
+隣り合う値をブロックパラメータ elt_before、elt_after に渡し、ブロックの
+評価値が偽になる所でチャンクを区切ります。
+
+ブロックは self の長さ - 1 回呼び出されます。
+
+@return チャンクごとの配列をブロックパラメータに渡す [[c:Enumerator]]
+        を返します。eachメソッドは以下のように呼び出します。
+//emlist{
+  enum.chunk_while { |elt_before, elt_after| bool }.each { |ary| ... }
+//}
+        to_a や map などのその他の [[c:Enumerable]] モジュールのメソッ
+        ドも有用です。
+
+例:
+
+  # 1ずつ増加する部分配列ごとに分ける。
+  a = [1,2,4,9,10,11,12,15,16,19,20,21]
+  b = a.chunk_while {|i, j| i+1 == j }
+  p b.to_a # => [[1, 2], [4], [9, 10, 11, 12], [15, 16], [19, 20, 21]]
+  c = b.map {|a| a.length < 3 ? a : "#{a.first}-#{a.last}" }
+  p c # => [[1, 2], [4], "9-12", [15, 16], "19-21"]
+  d = c.join(",")
+  p d # => "1,2,4,9-12,15,16,19-21"
+
+  # 増加のみの部分配列ごとに分ける。
+  a = [0, 9, 2, 2, 3, 2, 7, 5, 9, 5]
+  p a.chunk_while {|i, j| i <= j }.to_a
+  # => [[0, 9], [2, 2, 3], [2, 7], [5, 9], [5]]
+
+  # 隣り合う偶数同士、奇数同士の部分配列ごとに分ける。
+  # (Enumerable#chunk を使って実現する事も可能)
+  a = [7, 5, 9, 2, 0, 7, 9, 4, 2, 0]
+  p a.chunk_while {|i, j| i.even? == j.even? }.to_a
+  # => [[7, 5, 9], [2, 0], [7, 9], [4, 2, 0]]
+
+@see [[m:Enumerable#slice_when]], [[m:Enumerable#chunk]]
+#@end
+
 --- each_entry -> Enumerator
 --- each_entry {|obj| block} -> self
 
@@ -1392,7 +1436,11 @@ nil、 :_separator はある要素を無視したい場合に用います。
   p lines.slice_when {|l1, l2| /\A\s*\z/ =~ l1 && /\S/ =~ l2 }.to_a
   # => [["foo\n", "bar\n", "\n"], ["baz\n", "qux\n"]]
 
+#@since 2.3.0
+@see [[m:Enumerable#chunk_while]], [[m:Enumerable#chunk]]
+#@else
 @see [[m:Enumerable#chunk]]
+#@end
 #@end
 
 #@since 2.0.0
