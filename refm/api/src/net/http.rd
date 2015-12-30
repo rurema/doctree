@@ -560,7 +560,7 @@ proxyport は時代遅れのメソッドです。
 そうでないなら nil を返します。
 @see [[m:Net::HTTP.Proxy]]
 
---- open_timeout -> Integer
+--- open_timeout -> Integer|nil
 接続時に待つ最大秒数を返します。
 
 #@until 2.0.0
@@ -588,11 +588,12 @@ proxyport は時代遅れのメソッドです。
 この秒数たってもコネクションが
 開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
 #@end
+nilを設定するとタイムアウトしなくなります。
 
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout]]
 
---- read_timeout -> Integer
+--- read_timeout -> Integer|nil
 読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数
 を返します。
 
@@ -603,6 +604,9 @@ proxyport は時代遅れのメソッドです。
 この秒数たっても読みこめなければ例外 [[c:Net::ReadTimeout]]
 を発生します。
 #@end
+
+nilはタイムアウトしないことを意味します。
+
 デフォルトは 60 (秒)です。
 
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout=]]
@@ -619,6 +623,7 @@ proxyport は時代遅れのメソッドです。
 この秒数たっても読みこめなければ例外 [[c:Net::ReadTimeout]]
 を発生します。
 #@end
+nilを設定するとタイムアウトしなくなります。
 
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
