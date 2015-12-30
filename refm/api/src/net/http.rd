@@ -563,17 +563,31 @@ proxyport は時代遅れのメソッドです。
 --- open_timeout -> Integer
 接続時に待つ最大秒数を返します。
 
+#@until 2.0.0
 この秒数たってもコネクションが
 開かなければ例外 [[c:TimeoutError]] を発生します。
+#@else
+この秒数たってもコネクションが
+開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
+#@end
+#@until 2.3.0
 デフォルトは nil(タイムアウトしない)です。
+#@else
+デフォルトは60(秒)です。
+#@end
 
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
 
 --- open_timeout=(seconds)
 接続時に待つ最大秒数を設定します。
 
+#@until 2.0.0
 この秒数たってもコネクションが
 開かなければ例外 [[c:TimeoutError]] を発生します。
+#@else
+この秒数たってもコネクションが
+開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
+#@end
 
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout]]
@@ -582,8 +596,13 @@ proxyport は時代遅れのメソッドです。
 読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数
 を返します。
 
+#@until 2.0.0
 この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
 を発生します。
+#@else
+この秒数たっても読みこめなければ例外 [[c:Net::ReadTimeout]]
+を発生します。
+#@end
 デフォルトは 60 (秒)です。
 
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout=]]
@@ -593,8 +612,13 @@ proxyport は時代遅れのメソッドです。
 読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数を
 設定します。
 
+#@until 2.0.0
 この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
 を発生します。
+#@else
+この秒数たっても読みこめなければ例外 [[c:Net::ReadTimeout]]
+を発生します。
+#@end
 
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
