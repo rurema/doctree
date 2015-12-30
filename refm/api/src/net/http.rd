@@ -650,6 +650,28 @@ nilを設定するとタイムアウトしなくなります。
 @see [[m:Net::HTTP#keep_alive_timeout]]
 
 #@end
+
+--- continue_timeout -> Integer | nil
+「100 Continue」レスポンスを待つ秒数を返します。
+
+この秒数待ってもレスポンスが来ない場合は
+リクエストボディを送信します。
+
+デフォルトは nil (待たない)です。
+
+@see [[m:Net::HTTP#continue_timeout=]]
+
+--- continue_timeout=(seconds)
+「100 Continue」レスポンスを待つ秒数を指定します。
+
+この秒数待ってもレスポンスが来ない場合は
+リクエストボディを送信します。
+
+デフォルトは nil (待たない)です。
+
+@param seconds 秒数
+@see [[m:Net::HTTP#continue_timeout]]
+
 --- finish -> ()
 
 HTTP セッションを終了します。セッション開始前にこのメソッドが
