@@ -66,6 +66,7 @@ category Network
 
 ==== プロクシ経由のアクセス
 
+#@until 2.0.0
 [[m:Net::HTTP.Proxy]] はプロクシ経由での接続を行なうクラスを
 生成して返します。このクラスは [[c:Net::HTTP]] と同じ
 メソッドを持ち、同じように動作をします。ただし
@@ -96,9 +97,29 @@ Net::HTTP 自身を返すので
     # always connect to your.proxy.addr:8080 using specified username and password
           :
   }
+
 このライブラリは環境変数 HTTP_PROXY を一切考慮しないこと
 に注意してください。プロクシを使いたい場合は上の例のように
 明示的に取り扱わなければなりません。
+#@else
+Net::HTTP は http_proxy 環境変数が存在するならば自動的に
+その URI を利用してプロクシを利用します。http_proxyを利用したくないならば
+[[m:Net::HTTP.new]] や [[m:Net::HTTP.start]] の proxy_addr 引数に
+nil を渡してください。
+
+[[m:Net::HTTP.new]] や [[m:Net::HTTP.start]] の proxy_addr や proxy_port
+を指定することでプログラムからプロクシを指定することもできます。
+
+  proxy_addr = 'your.proxy.host'
+  proxy_port = 8080
+  
+  Net::HTTP.new('example.com', nil, proxy_addr, proxy_port).start { |http|
+    # always proxy via your.proxy.addr:8080
+  }
+
+プロクシの認証をユーザ名とパスワードですることもできます。
+詳しくは [[m:Net::HTTP.new]] を参照してください。
+#@end
 
 ==== リダイレクトに対応する
 以下の例の fetch はリダイレクトに対応しています。
@@ -215,26 +236,42 @@ HTTP のクライアントのためのクラスです。
 
 == Class Methods
 
+#@until 2.0.0
 --- new(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+#@else
+--- new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+#@end
 
 新しい [[c:Net::HTTP]] オブジェクトを生成します。
 
-proxy_addr を与えるとプロクシを介して接続するオブジェクトを
-生成します。このときに proxy_userを指定するとプロクシの認証が
-行われます
+#@since 2.0.0
+proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy からプロクシの URI を
+取り出し利用します。この場合環境変数 http_proxy が定義されていない場合には
+プロクシは利用せず直接接続します。
+#@end
+
+明示的にプロクシのホスト名とポート番号を指定してプロクシを利用することもできます。
+このときには proxy_addr にホスト名もしくは IP アドレスを渡します。
+このときに proxy_userを指定するとプロクシの認証が行われます
+
 
 このメソッドは TCP コネクションを張りません。
 
 @param address 接続するホスト名を文字列で指定します。
 @param port 接続するポート番号を指定します。
-@param proxy_addr プロクシのホスト名を指定します。省略した場合には直接接続します。
-@param proxy_port プロクシのホスト名を指定します。
+@param proxy_addr プロクシのホスト名もしくはアドレスを文字列で指定します。:ENV を指定すると環境変数 http_proxy を利用してプロクシの設定をします。省略した場合には直接接続します。
+@param proxy_port プロクシのポートを指定します。
 @param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 @param proxy_pass プロクシの認証のパスワードを指定します。
 
 
+#@until 2.0.0
 --- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 --- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
+#@else
+--- start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+--- start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
+#@end
 
 新しい [[c:Net::HTTP]] オブジェクトを生成し、
 TCP コネクション、 HTTP セッションを開始します。
@@ -246,16 +283,25 @@ TCP コネクション、 HTTP セッションを開始します。
 ブロックを与えなかった場合には生成したオブジェクトを渡します。
 利用後にはこのオブジェクトを [[m:Net::HTTP#finish]] してください。
 
+#@since 2.0.0
+proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシの URI を
+取り出し利用します。環境変数 http_proxy が定義されていない場合には
+プロクシは利用しません。
+#@end
+
 このメソッドは以下と同じです。
 
   Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).start(&block)
 
 @param address 接続するホスト名を文字列で指定します。
 @param port 接続するポート番号を指定します。
-@param proxy_addr プロクシのホスト名を指定します。省略した場合には直接接続します。
-@param proxy_port プロクシのホスト名を指定します。
+@param proxy_addr プロクシのホスト名もしくはアドレスを文字列で指定します。:ENV を指定すると環境変数 http_proxy を利用してプロクシの設定をします。省略した場合には直接接続します。
+@param proxy_port プロクシのポートを指定します。
 @param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 @param proxy_pass プロクシの認証のパスワードを指定します。
+#@since 2.0.0
+@raise Net::OpenTimeout 接続がタイムアウトしたときに発生します
+#@end
 @see [[m:Net::HTTP.new]], [[m:Net::HTTP#start]]
 
 --- get(uri) -> String
@@ -466,6 +512,9 @@ TCP コネクションを張り、HTTP セッションを開始します。
 利用後にはこのオブジェクトを [[m:Net::HTTP#finish]] してください。
 
 @raise IOError すでにセッションが開始していた場合に発生します。
+#@since 2.0.0
+@raise Net::OpenTimeout 接続がタイムアウトしたときに発生します
+#@end
 
 --- started? -> bool
 --- active? -> bool
@@ -601,25 +650,70 @@ nil の場合システムが適当にローカルポートを
 
 proxyaddr は時代遅れのメソッドです。
 
+#@until 2.0.0
 @see [[m:Net::HTTP.Proxy]]
+#@else
+@see [[m:Net::HTTP#proxy_address=]], [[m:Net::HTTP#proxy_port]], [[m:Net::HTTP.new]]
+#@end
+
+#@since 2.0.0
+--- proxy_address=(address)
+
+プロクシのアドレス(ホスト名、IPアドレス)を指定します。
+
+[[m:Net::HTTP#start]] で接続する前に設定する必要があります。
+
+@param address プロクシのホスト名、もしくはIPアドレスを表す文字列
+
+@see [[m:Net::HTTP#proxy_address=]], [[m:Net::HTTP#proxy_port]], [[m:Net::HTTP.new]]
+#@end
 
 --- proxy_port -> Integer|nil
 --- proxyport -> Integer|nil
 
-プロクシ経由で接続する HTTP オブジェクトならプロクシのポート番号
-を返します。
+プロクシのポート番号を返します。
 
-そうでないなら nil を返します。
+プロクシを使わない場合は nil を返します。
 
 proxyport は時代遅れのメソッドです。
+#@until 2.0.0
 @see [[m:Net::HTTP.Proxy]]
+#@else
+@see [[m:Net::HTTP#proxy_port=]], [[m:Net::HTTP#proxy_address]], [[m:Net::HTTP.new]]
+#@end
+
+#@since 2.0.0
+--- proxy_port=(port)
+
+プロクシのポート番号を設定します。
+
+[[m:Net::HTTP#start]] で接続する前に設定する必要があります。
+
+@param port ポート番号(整数、文字列)
+@see [[m:Net::HTTP#proxy_port]], [[m:Net::HTTP#proxy_address]], [[m:Net::HTTP.new]]
+#@end
+
 --- proxy_pass -> String|nil
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
 する HTTP オブジェクトなら認証のパスワードを
 を返します。
 
 そうでないなら nil を返します。
+#@until 2.0.0
 @see [[m:Net::HTTP.Proxy]]
+#@else
+@see [[m:Net::HTTP#proxy_pass=]], [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP.new]]
+#@end
+
+#@since 2.0.0
+--- proxy_pass=(pass)
+プロクシのユーザ認証のパスワードを設定します。
+
+[[m:Net::HTTP#start]] で接続する前に設定する必要があります。
+
+@param pass パスワード文字列
+@see [[m:Net::HTTP#proxy_pass]], [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP.new]]
+#@end
 
 --- proxy_user -> String|nil
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
@@ -627,7 +721,52 @@ proxyport は時代遅れのメソッドです。
 を返します。
 
 そうでないなら nil を返します。
+
+#@until 2.0.0
 @see [[m:Net::HTTP.Proxy]]
+#@else
+@see [[m:Net::HTTP#proxy_pass]], [[m:Net::HTTP#proxy_user=]], [[m:Net::HTTP.new]]
+#@end
+
+#@since 2.0.0
+--- proxy_user=(user)
+プロクシのユーザ認証のユーザ名を設定します。
+
+[[m:Net::HTTP#start]] で接続する前に設定する必要があります。
+
+@param user ユーザ名文字列
+@see [[m:Net::HTTP#proxy_pass]], [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP.new]]
+#@end
+
+#@since 2.0.0
+--- proxy_uri -> String|nil
+
+このメソッドは内部用なので使わないでください。
+
+環境変数 http_proxy から得られるプロクシの URI を返します。
+
+--- proxy_from_env? -> bool
+
+プロクシ情報を環境変数から得る場合に true を返します。
+
+基本的に [[m:Net::HTTP.new]] や [[m:Net::HTTP.start]] の proxy_address
+引数に :ENV を渡した場合に true になります。
+
+環境変数 http_proxy が定義されていなくともこの値は true を返します。
+その場合にはプロクシは利用されず直接サーバに接続します。
+
+@see [[m:Net::HTTP#proxy_from_env=]] 
+
+--- proxy_from_env=(boolean)
+
+プロクシ情報を環境変数から得るかどうかを指定します。
+
+[[m:Net::HTTP#start]] で接続する前に設定する必要があります。
+
+@param boolean プロクシ情報を環境変数から得るかどうかを指定する真偽値
+
+@see [[m:Net::HTTP#proxy_from_env?]] 
+#@end
 
 --- open_timeout -> Integer|nil
 接続時に待つ最大秒数を返します。
