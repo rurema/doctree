@@ -1,5 +1,9 @@
 category Thread
 
+#@since 2.3.0
+このライブラリで提供されていたクラスは 2.3.0 で組み込みクラスになりまし
+た。互換性のためだけに残されています。
+#@else
 スレッド間キューや状態変数 (condition variable) を提供するライブラリです。
 
 このライブラリは [[c:Thread]] を拡張します。rubyインタプリタを
@@ -22,3 +26,4 @@ category Thread
 #@end
 #@include(thread/Queue)
 #@include(thread/SizedQueue)
+#@end

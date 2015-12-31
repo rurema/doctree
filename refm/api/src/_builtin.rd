@@ -20,6 +20,9 @@ require を書かなくても使うことができます。
 #@since 1.9.1
 #@include(_builtin/Complex)
 #@end
+#@since 2.3.0
+#@include(thread/ConditionVariable)
+#@end
 #@until 1.9.1
 #@include(_builtin/Continuation)
 #@end
@@ -101,6 +104,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Process__Status)
 #@include(_builtin/Process__Sys)
 #@include(_builtin/Process__UID)
+#@since 2.3.0
+#@include(thread/Queue)
+#@end
 #@since 1.9.2
 #@include(_builtin/Random)
 #@end
@@ -120,6 +126,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/SecurityError)
 #@include(_builtin/Signal)
 #@include(_builtin/SignalException)
+#@since 2.3.0
+#@include(thread/SizedQueue)
+#@end
 #@include(_builtin/StandardError)
 #@since 1.8.7
 #@include(_builtin/StopIteration)
