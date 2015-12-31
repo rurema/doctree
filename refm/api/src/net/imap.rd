@@ -829,6 +829,39 @@ mailbox はコピー先のメールボックスです。
 @param mailbox コピー先のメールボックス(文字列)
 @see [[m:Net::IMAP#copy]]
 
+#@since 2.3.0
+--- move(set, mailbox) -> Net::IMAP::TaggedResponse
+MOVEコマンドを送り、set で指定したメッセージを mailbox の
+末尾に移動させます。
+
+set はmessage sequence number(整数)、
+message sequence numberの配列、もしくは [[c:Range]] で
+指定します。
+
+コピー元のメールボックスは
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したものを用います。
+
+@param set 移動するメッセージの message sequence number(整数、整数の配列、整数の Range)
+@param mailbox 移動先のメールボックス(文字列)
+@see [[m:Net::IMAP#uid_move]], [[RFC:6851]]
+
+--- uid_move(set, mailbox) -> Net::IMAP::TaggedResponse
+MOVEコマンドを送り、set でUIDで指定したメッセージを mailbox の
+末尾に移動させます。
+
+set には UID、UID の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
+
+コピー元のメールボックスは
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したものを用います。
+
+@param set 移動するメッセージのUID(整数、整数の配列、整数の Range)
+@param mailbox 移動先のメールボックス(文字列)
+@see [[m:Net::IMAP#move]], [[RFC:6851]]
+#@end
+
 --- sort(sort_keys, search_keys, charset) -> [Integer]
 --- uid_sort(sort_keys, search_keys, charset) -> [Integer]
 SORT コマンド送り、メールボックス内の
