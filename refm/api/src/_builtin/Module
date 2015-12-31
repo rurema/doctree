@@ -1742,6 +1742,22 @@ name で指定した定数の可視性を public に変更します。
 
 #@end
 
+#@since 2.3.0
+--- deprecate_constant(*name) -> self
+
+name で指定した定数を deprecate に設定します。
+deprecate に設定した定数を参照すると警告メッセージが表示されます。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+#@# @raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+#@#        untrust なオブジェクトではない場合に発生します。
+
+@return 自身を返します。
+#@end
+
 #@since 2.0.0
 --- refine(klass) { ... } -> Module
 
