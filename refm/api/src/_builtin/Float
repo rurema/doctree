@@ -417,6 +417,20 @@ self を other で割った商 q と余り r を、
   0.zero?               #=> true
   0.0.zero?             #=> true
 
+#@since 2.3.0
+--- positive? -> bool
+
+self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
+
+@see[[m:Float#negative?]]
+
+--- negative? -> bool
+
+self が 0 未満の場合に true を返します。そうでない場合に false を返します。
+
+@see[[m:Float#positive?]]
+#@end
+
 --- to_s -> String
 #@since 2.0.0
 --- inspect -> String

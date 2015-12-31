@@ -226,8 +226,8 @@ false を返します。
 
 --- ===(obj) -> bool
 
-指定された obj が自身かそのサブクラスのインスタンスであるとき真を返します。
-また、obj が自身をインクルードしたクラスかそのサブクラスのインスタンスである場合にも
+指定された obj が self かそのサブクラスのインスタンスであるとき真を返します。
+また、obj が self をインクルードしたクラスかそのサブクラスのインスタンスである場合にも
 真を返します。上記のいずれでもない場合に false を返します。
 
 言い替えると obj.kind_of?(self) が true の場合、 true を返します。
@@ -391,7 +391,7 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
   # 第二引数を false にした場合
   p Baz.const_defined?(:BAR, false)   # => false
 #@else
-  # Object 以外では自身の定数だけがチェック対象
+  # Object 以外では self の定数だけがチェック対象
   p Baz.const_defined?(:BAR)      # => false
 #@end
 
@@ -1715,11 +1715,11 @@ name で指定した定数の可視性を private に変更します。
 @raise NameError 存在しない定数を指定した場合に発生します。
 
 #@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
        untrust なオブジェクトではない場合に発生します。
 #@end
 
-@return 自身を返します。
+@return self を返します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
 
@@ -1732,14 +1732,30 @@ name で指定した定数の可視性を public に変更します。
 @raise NameError 存在しない定数を指定した場合に発生します。
 
 #@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
        untrust なオブジェクトではない場合に発生します。
 #@end
 
-@return 自身を返します。
+@return self を返します。
 
 @see [[m:Module#private_constant]], [[m:Object#untrusted?]]
 
+#@end
+
+#@since 2.3.0
+--- deprecate_constant(*name) -> self
+
+name で指定した定数を deprecate に設定します。
+deprecate に設定した定数を参照すると警告メッセージが表示されます。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+#@# @raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
+#@#        untrust なオブジェクトではない場合に発生します。
+
+@return self を返します。
 #@end
 
 #@since 2.0.0

@@ -44,7 +44,7 @@
       #    Did you mean?  start_with?
 //}
 
-  * インデントされたヒアドキュメン:
+  * インデントされたヒアドキュメント:
     * 新しい文字列リテラルとして <<~ で始まるヒアドキュメントが追加されました
       [[url:https://bugs.ruby-lang.org/issues/9098]]
 
@@ -65,7 +65,7 @@
       [[url:https://bugs.ruby-lang.org/issues/7688]]
 
   * [[c:Encoding]]
-    * Encoding::IBM037 (alias ebcdic-cp-us; dummy) を追加
+    * [[m:Encoding::IBM037]] (alias ebcdic-cp-us; dummy) を追加
 
   * [[c:Enumerable]]
     * [[m:Enumerable#grep_v]] を追加
