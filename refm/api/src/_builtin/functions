@@ -1869,33 +1869,43 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
 
 @see [[ref:d:spec/control#END]]
 
-#@since 1.8.0
---- loop { ... } -> object
+#@since 1.9.2
+--- loop         -> Enumerator
+#@end
+--- loop { ... } -> object | nil
 (中断されない限り)永遠にブロックの評価を繰り返します。
+#@since 1.9.2
+ブロックが指定されなければ、代わりに [[c:Enumerator]] を返します。
+#@end
 
-#@since 1.8.7
+  loop do
+    print "Input: "
+    line = gets
+    break if !line or line =~ /^qQ/
+    # ...
+  end
+
 与えられたブロック内で [[c:StopIteration]] を [[m:Kernel.#raise]] すると
+#@since 2.3.0
+ループを終了して [[c:Enumerator]] が最後に返した値を返します。
+ループを終了させる場合、通常は break を使用してください。
+
+  enum = Enumerator.new { |y|
+    y << "one"
+    y << "two"
+    :ok
+  }
+
+  result = loop {
+    puts enum.next
+  } # => :ok
+
+#@else
 ループを終了して nil を返します。
 ループを終了させる場合、通常は break を使用してください。
 #@end
 
 @return break の引数など、ループ脱出時の値を返します。
-#@else
---- loop { ... } -> nil
-(中断されない限り)永遠にブロックの評価を繰り返します。
-
-@return nil を返します。
-#@end
-
-  def try int
-    n = 0
-    loop do
-      n += 1
-      break(n) if rand(n) > int
-    end
-  end
-  
-  puts "end on #{try(400)}" #=> end on ???
 
 --- sleep -> Integer
 --- sleep(sec) -> Integer
