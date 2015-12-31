@@ -515,6 +515,75 @@ io に nil を指定するとデバッグ出力を止めます。
 
 接続するポート番号を返します。
 
+#@since 2.0.0
+--- local_host -> String | nil
+
+接続に用いるローカルホスト名を返します。
+
+nil の場合システムが適当にローカルホストを
+決めます。
+
+デフォルトは nil です。
+
+
+@see [[m:Net::HTTP#local_host=]], [[m:Net::HTTP#local_port]]
+
+--- local_host=(host)
+
+接続に用いるローカルホスト名を指定します。
+
+nil の場合システムが適当にローカルホストを
+決めます。
+
+デフォルトは nil です。
+
+@param host ホスト名、もしくはアドレスを示す文字列
+
+  require 'net/http'
+  
+  http = Net::HTTP.new("www.example.com")
+  http.local_host = "192.168.0.5"
+  http.local_port = "53043"
+  
+  http.start
+  p http.get("/").body
+
+
+@see [[m:Net::HTTP#local_host=]], [[m:Net::HTTP#local_port]]
+
+--- local_port -> nil | Integer | String
+接続に用いるローカルポートを返します。
+
+nil の場合システムが適当にローカルポートを
+決めます。
+
+デフォルトは nil です。
+
+@see [[m:Net::HTTP#local_port=]], [[m:Net::HTTP#local_host]]
+
+--- local_port=(port)
+接続に用いるローカルポートを設定します。
+
+nil の場合システムが適当にローカルポートを
+決めます。
+
+デフォルトは nil です。
+
+@param port ローカルポート(数値、もしくはサービス名文字列)
+
+  require 'net/http'
+  
+  http = Net::HTTP.new("www.example.com")
+  http.local_host = "192.168.0.5"
+  http.local_port = "53043"
+  
+  http.start
+  p http.get("/").body
+
+@see [[m:Net::HTTP#local_port=]], [[m:Net::HTTP#local_host]]
+
+#@end
+
 @see [[m:Net::HTTP.new]]
 --- proxy? -> bool
 
