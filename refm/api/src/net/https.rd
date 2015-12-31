@@ -1,5 +1,6 @@
 category Network
 
+#@until 1.9.2
 [[lib:net/http]] に SSL/TLS 拡張を実装するライブラリです。
 
 [[c:Net::HTTP]] を再オープンし、SSL/TLS 拡張を追加します。
@@ -279,5 +280,11 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 @param ciphers 利用可能にする共通鍵暗号の種類
 @see [[m:Net::HTTP#ciphers]]
+
+#@end
+
+#@else
+このライブラリは Ruby 1.9.2 で [[lib:net/http]] にマージされました。
+そちらを使ってください。
 
 #@end
