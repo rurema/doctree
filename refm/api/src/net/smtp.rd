@@ -565,6 +565,12 @@ CRAM-MD5 認証を行います。
 @param user 認証で使うアカウント名
 @param secret 認証で使うパスワード
 
+#@since 2.1.0
+--- rset -> Net::SMTP::Response
+RSET コマンドを送ります。
+
+#@end
+
 --- starttls -> Net::SMTP::Response
 STARTTLS コマンドを送ります。
 
