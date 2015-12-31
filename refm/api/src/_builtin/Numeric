@@ -518,6 +518,20 @@ modulo はメソッド % の呼び出しとして定義されています。
 
 @see [[m:Numeric#divmod]], [[m:Numeric#remainder]]
 
+#@since 2.3.0
+--- positive? -> bool
+
+self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
+
+@see[[m:Numeric#negative?]]
+
+--- negative? -> bool
+
+self が 0 未満の場合に true を返します。そうでない場合に false を返します。
+
+@see[[m:Numeric#positive?]]
+#@end
+
 --- remainder(other)    -> Numeric
 
 self を other で割った余り r を返します。
