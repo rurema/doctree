@@ -4,7 +4,6 @@
 
 == Class Methods
 
-#@since 1.8.0
 --- new(error_message = "", name = nil) -> NameError
 
 例外オブジェクトを生成して返します。
@@ -18,7 +17,6 @@
   err = NameError.new("message", "foo")
   p err       # => #<NameError: message>
   p err.name  # => "foo"
-#@end
 
 == Instance Methods
 
@@ -36,9 +34,7 @@
     p err.name  # => :foobar
   end
 
-#@since 1.8.1
 --- to_s -> String
 
 例外オブジェクトを文字列に変換して返します。
 
-#@end
