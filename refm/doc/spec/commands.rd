@@ -7,7 +7,9 @@ Ruby では以下のコマンドが提供されます。
  * [[lib:rdoc]]: RDoc
  * ri: RDoc で書かれた Ruby のドキュメントをコマンドラインから参照
  * [[ref:d:spec/rubycmd#ruby]]: Ruby 本体
+#@until 2.2.0
  * testrb: ユニットテスト実行ツール
+#@end
 
 これらのコマンドは以下で説明される環境変数を参照します。
 
