@@ -329,6 +329,24 @@ UTF-7 を修正したものです。
 @see [[m:Net::IMAP.max_flag_count]]
 #@end
 
+#@since 2.0.0
+--- default_port -> Integer
+--- default_imap_port -> Integer
+
+デフォルトの IMAP のポート番号(143)を返します。
+
+@see [[m:Net::IMAP.default_tls_port]]
+
+--- default_tls_port -> Integer
+--- default_imaps_port -> Integer
+--- default_ssl_port -> Integer
+
+デフォルトの IMAPS のポート番号(993)を返します。
+
+@see [[m:Net::IMAP.default_port]]
+
+#@end
+
 == Methods
 
 --- greeting -> Net::IMAP::UntaggedResponse
