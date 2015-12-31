@@ -659,6 +659,12 @@ proxyport は時代遅れのメソッドです。
 #@end
 nilを設定するとタイムアウトしなくなります。
 
+以下のコネクションを開くメソッドで有効です。
+
+  * [[m:Net::HTTP.open]]
+  * [[m:Net::HTTP#start]]
+
+
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout]]
 
@@ -693,6 +699,10 @@ nilはタイムアウトしないことを意味します。
 を発生します。
 #@end
 nilを設定するとタイムアウトしなくなります。
+
+このタイムアウト秒数はサーバとやりとりするメソッドで有効です。
+
+デフォルトは 60 (秒)です。
 
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
