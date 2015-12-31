@@ -708,6 +708,18 @@ path が全てのユーザから書き込めるならば、そのファイルの
    "%o" % m                               #=> "777"
 #@end
 
+#@since 2.3.0
+--- mkfifo(file_name, mode = 0666) -> 0
+
+引数 file_name で指定した名前の FIFO スペシャルファイルを作成します。
+
+@param file_name ファイル名を指定します。
+
+@param mode FIFO の許可モードを数値で指定します。指定したモードは通常の
+            ファイル作成と同様にプロセスの umask によって変更されます。
+            作成されたファイルの許可モードは (mode & ~umask) になります。
+#@end
+
 == Instance Methods
 
 --- atime    -> Time
