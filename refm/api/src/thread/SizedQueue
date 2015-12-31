@@ -66,3 +66,15 @@ SizedQueue オブジェクトを生成します。
 @param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
 
 @see [[m:Queue#pop]]
+
+#@since 2.3.0
+--- close -> self
+
+キューを close します。詳しくは [[m:Queue#close]] を参照してください。
+
+[[c:Queue]] とはキューにオブジェクトを追加するスレッドの動作が異なりま
+す。キューにオブジェクトを追加するスレッドを待機している場合は
+[[c:ClosedQueueError]] が発生して中断されます。
+
+@see [[m:Queue#close]]
+#@end

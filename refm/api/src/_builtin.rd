@@ -13,6 +13,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Bignum)
 #@include(_builtin/Binding)
 #@include(_builtin/Class)
+#@since 2.3.0
+#@include(_builtin/ClosedQueueError)
+#@end
 #@include(_builtin/Comparable)
 #@since 1.9.1
 #@include(_builtin/Complex)
