@@ -314,87 +314,82 @@
       * [[url:http://docs.seattlerb.org/rubygems/History_txt.html#label-2.5.0+-2F+2015-11-03]]
       * [[url:http://docs.seattlerb.org/rubygems/History_txt.html#label-2.5.1+-2F+2015-12-10]]
 
-=== Built-in global variables compatibility issues
+=== 組込みのグローバル変数の互換性に影響のある変更
 
-* $SAFE
-  * $SAFE=2 and $SAFE=3 are obsolete.  If $SAFE is set to 2 or larger,
-    an ArgumentError is raised.  [Feature #5455]
+  * $SAFE
+    * $SAFE=2 と $SAFE=3 廃止されました。$SAFE を2以上にすると ArgumentError が発生します。
+      [[url:https://bugs.ruby-lang.org/issues/5455]]
 
-=== C API updates
+=== C API の更新
 
-* rb_define_class_id_under() now raises a TypeError exception when the
-  class is already defined but its superclass does not match the given
-  superclass, as well as definitions in ruby level.
+  * rb_define_class_id_under() は既にクラスが定義済みなのに、
+    そのスーパークラスが与えられたスーパークラスと一致しないとき
+    Rubyレベルの定義と同じように TypeError を発生させるようになりました。
 
-* rb_timespec_now() is added to fetch current datetime as struct timespec.
-  [Feature #11558]
+  * 現在日時を timespec 構造体として取得する rb_timespec_now() が追加されました。
+    [[url:https://bugs.ruby-lang.org/issues/11558]]
 
-* rb_time_timespec_new() is added to create a time object with epoch,
-  nanosecond, and UTC/localtime/time offset arguments.  [Feature #11558]
+  * rb_time_timespec_new() is added to create a time object with epoch,
+    nanosecond, and UTC/localtime/time offset arguments.
+    [[url:https://bugs.ruby-lang.org/issues/11558]]
 
-* rb_autoload() deprecated, use rb_funcall() instead.  [Feature #11664]
+  * rb_autoload() は非推奨になりました。rb_funcall() を使ってください。
+    [[url:https://bugs.ruby-lang.org/issues/11664]]
 
-* rb_compile_error_with_enc(), rb_compile_error(), and rb_compile_bug()
-  deprecated.  these functions are exposed but only for internal use.
-  external libraries should not use them.
+  * rb_compile_error_with_enc(), rb_compile_error(), rb_compile_bug() が非推奨になりました。
+    これらの関数は公開されていますが、内部利用のためなので外部のライブラリでは使用するべきではありません。
 
-=== Supported platform changes
+=== サポートしているプラットフォームの変更
 
-* OS/2 is no longer supported
+  * OS/2 はもうサポートされていません。
+  * BeOS はもうサポートされていません。
+  * Borland-C はもうサポートされていません。
+  * Haiku は安定しています。ベストエフォートです。
 
-* BeOS is no longer supported
+=== 実装の改善
 
-* Borland-C is no longer supported
+  * [[m:Proc#call]] をメソッドフレームの構築を取り除いて最適化しました。
+    [[url:https://bugs.ruby-lang.org/issues/11569]]
 
-* Haiku now stable and best effort
+  * メソッドエントリのデータ構造を再考しました。
+    [[url:https://bugs.ruby-lang.org/issues/11278]]
 
-=== Implementation improvements
+  * メソッドテーブルなどに使用する新しいテーブルデータ構造を導入しました。
+    新しいテーブル構造は st_table よりもシンプルで速いです。
+    [[url:https://bugs.ruby-lang.org/issues/11420]]
 
-* Optimize Proc#call to eliminate method frame construction.
-  [Feature #11569]
+  * オブジェクトアロケーションとメソッド呼び出しのために機械語レベルのチューニングをしました。
+    r52099, r52254
 
-* Reconsidering method entry data structure.
-  [Bug #11278]
+  * 将来の改善のために RubyVM::InstructionSequence が拡張されました。
+    [[url:https://bugs.ruby-lang.org/issues/11788]]
 
-* Introducing new table data structure for ID keys tables used by
-  method table and so on. New table structure is simple and fast
-  than st_table. [Feature #11420]
+  * nil, true, false の case 式のディスパッチが最適化されました。
+    以前は文字列、シンボル、整数、浮動小数のみが最適化されていました。
+    [[url:https://bugs.ruby-lang.org/issues/11769]]
 
-* Machine code level tuning for object allocation and method calling
-  code. r52099, r52254
+  * ピュアRubyではないクラス(T_DATA, T_FILE など)上のインスタンス変数は以前よりも保存にコストがかからなくなりました。
+    [[url:https://bugs.ruby-lang.org/issues/11170]]
 
-* RubyVM::InstructionSequence is extended for future improvement.
-  [Feature #11788]
+  * 巨大な [[c:Struct]] のオブジェクトのメンバーへのアクセスが定数時間になりました。
+    以前は、最初の10要素を越えると線形にスキャンしていました。
+    [[url:https://bugs.ruby-lang.org/issues/10585]]
 
-* Case dispatch is now optimized for all special constant literals
-  including nil, true, and false.  Previously, only literal strings,
-  symbols, integers and floats compiled to optimized case dispatch.
-  [Feature #11769]
+  * [[c:Set]] の速度は向上しました。
+    [[url:https://bugs.ruby-lang.org/issues/10754]]
+    [r52591]
 
-* Instance variables on non-pure Ruby classes (T_DATA, T_FILE,
-  etc..) is less expensive to store than before. [Feature #11170]
+  * Socket と I/O関連の改善
+    * [[url:https://bugs.ruby-lang.org/issues/11229]] でI/Oのメソッドに導入された新しいキーワード引数によるオーバーヘッドは
+      [[url:https://bugs.ruby-lang.org/issues/11339]] でC APIでの非効率なキーワード引数のパースを避けることによって削減されました。
+    * 改善された例外なしのノンブロッキングI/Oによって標準添付ライブラリが更新されました。
+      [[url:https://bugs.ruby-lang.org/issues/11229]]
+      これによって、コストのかかる例外が減ったのでデバッグモード時のアウトプットが少なくなりました。
+      [[url:https://bugs.ruby-lang.org/issues/11044]]
+    * (Linuxのみ) 標準添付ライブラリ内で、一つのFDをselect(2)で待つ箇所がなくなりました。
+      大きい番号のFDで遅くなり辛くなりました。
+      [[url:https://bugs.ruby-lang.org/issues/11081]]
+      [[url:https://bugs.ruby-lang.org/issues/11377]]
 
-* All accesses to members of big Struct objects are performed in
-  constant-time.  Previously, Struct elements beyond the first 10
-  10 elements used a linear scan. [Feature #10585]
-
-* The Set class got several speed up.
-  [Misc #10754], [r52591]
-
-* Socket and I/O-related improvements
-
-  * Calling overhead of most of new keyword-using I/O methods in
-    [Feature #11229] is reduced by avoiding the inefficient C API
-    to parse keywords.  [Feature #11339]
-
-  * The standard library is updated to use the improved
-    exception-free non-blocking I/O from [Feature #11229].
-    This has the additional benefit of quieter $DEBUG output in
-    addition to reducing expensive exceptions. [Feature #11044]
-
-  * (Linux-only) waiting on a single FD anywhere in the stdlib no longer
-    uses select(2), making it immune to slowdowns with high-numbered FDs.
-    [Feature #11081] [Feature #11377]
-
-* CGI.escapeHTML is optimized with C extension.
-  https://github.com/ruby/ruby/pull/1164
+  * [[m:CGI.escapeHTML]] はC拡張で最適化されました。
+    [[url:https://github.com/ruby/ruby/pull/1164]]
