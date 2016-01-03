@@ -204,12 +204,23 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 
 #@end
 
---- new(string = "") -> String
+--- new(string = "")                -> String
+#@since 2.3.0
+--- new(string = "", encoding: enc) -> String
+#@end
 
 string と同じ内容の新しい文字列を作成して返します。
 引数を省略した場合は空文字列を生成して返します。
 
 @param string   文字列
+#@since 2.3.0
+@param encoding 作成する文字列のエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します(変換は行われま
+                せん)。省略した場合は引数 string のエンコーディングと同
+                じになります(ただし、string にエンコーディングが指定さ
+                れていなかった場合は [[m:Encoding::ASCII_8BIT]]になりま
+                す)。
+#@end
 @return         引数 string と同じ内容の文字列オブジェクト
 
 == Instance Methods
