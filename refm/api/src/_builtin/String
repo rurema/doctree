@@ -225,6 +225,18 @@ string と同じ内容の新しい文字列を作成して返します。
 
 == Instance Methods
 
+#@since 2.3.0
+--- +@ -> String | self
+
+self が freezeされている文字列の場合、元の文字列の複製を返します。
+freeze されていない場合は self を返します。
+
+--- -@ -> String | self
+
+self が freezeされている文字列の場合、元の文字列の複製を返します。
+freeze されていない場合は self を返します。
+#@end
+
 --- +(other) -> String
 
 文字列と other を連結した新しい文字列を返します。
