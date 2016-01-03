@@ -43,7 +43,11 @@ include MonitorMixin
      }
    }
 
+#@since 2.3.0
+[[c:Thread::Mutex]] ではデッドロックになります。
+#@else
 [[c:Mutex]] ではデッドロックになります。
+#@end
 
    require 'thread'
    mx = Mutex.new

@@ -311,27 +311,47 @@ true ならば冗長な出力の設定を行います。
 --- debug_output_lock -> Mutex
 #@todo
 
+#@since 2.3.0
+@see [[m:Thread::Mutex#lock]]
+#@else
 @see [[m:Mutex#lock]]
+#@end
 
 --- debug_output_locked? -> bool
 #@todo
 
+#@since 2.3.0
+@see [[m:Thread::Mutex#locked?]]
+#@else
 @see [[m:Mutex#locked?]]
+#@end
 
 --- debug_output_synchronize
 #@todo
 
+#@since 2.3.0
+@see [[m:Thread::Mutex#synchronize]]
+#@else
 @see [[m:Mutex#synchronize]]
+#@end
 
 --- debug_output_try_lock -> bool
 #@todo
 
+#@since 2.3.0
+@see [[m:Thread::Mutex#try_lock]]
+#@else
 @see [[m:Mutex#try_lock]]
+#@end
 
 --- debug_output_unlock -> Mutex | nil
 #@todo
 
+#@since 2.3.0
+@see [[m:Thread::Mutex#unlock]]
+#@else
 @see [[m:Mutex#unlock]]
+#@end
 
 #@end
 

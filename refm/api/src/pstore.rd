@@ -47,9 +47,13 @@ file のあるディレクトリは書き込み可能である必要がありま
 
 @param file データベースファイル名。
 
-#@since 1.9.1
-@param thread_safe 真を指定すると [[c:Mutex]] を用いてスレッドセーフになります。デフォルトは偽です。
+#@since 2.3.0
+@param thread_safe 真を指定すると [[c:Thread::Mutex]] を用いてスレッドセーフになります。
+#@else
+@param thread_safe 真を指定すると [[c:Mutex]] を用いてスレッドセーフになります。
 #@end
+                   デフォルトは偽です。
+
 == Instance Methods
 
 #@since 1.8.0

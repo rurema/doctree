@@ -1,10 +1,19 @@
+#@since 2.1.0
+= class Thread::Queue < Object
+alias Queue
+#@else
 = class Queue < Object
+#@end
 
 Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 レッドが空のキューを読み出そうとすると停止します。キューになんら
 かの情報が書き込まれると実行は再開されます。
 
+#@since 2.1.0
+最大サイズが指定できる Queue のサブクラス [[c:Thread::SizedQueue]] も提供されています。
+#@else
 最大サイズが指定できる Queue のサブクラス [[c:SizedQueue]] も提供されています。
+#@end
 
 === 例
 
@@ -33,7 +42,11 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 == Class Methods
 
+#@since 2.1.0
+--- new -> Thread::Queue
+#@else
 --- new -> Queue
+#@end
 
 新しいキューオブジェクトを生成します。
 
@@ -78,10 +91,10 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 close 後は以下のように動作します。
 
- * [[m:Queue#closed?]] は true を返します
- * [[m:Queue#close]] は無視されます
- * [[m:Queue#enq]]/push/<< は nil を返します
- * [[m:Queue#empty?]] が false を返す場合は [[m:Queue#deq]]/pop/shift は通常通りオブジェクトを返します
+ * [[m:Thread::Queue#closed?]] は true を返します
+ * [[m:Thread::Queue#close]] は無視されます
+ * [[m:Thread::Queue#enq]]/push/<< は nil を返します
+ * [[m:Thread::Queue#empty?]] が false を返す場合は [[m:Thread::Queue#deq]]/pop/shift は通常通りオブジェクトを返します
 
 また、[[c:ClosedQueueError]] は [[c:StopIteration]] を継承しているため、
 close する事でループから脱出する事もできます。

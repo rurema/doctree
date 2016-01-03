@@ -178,7 +178,11 @@ VM グローバルの Mutex をロックし、ブロックを実行します。
 このクラスメソッドの挙動は 1.8 以前とは違います。
 Thread.exclusive は VM グローバルの [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] の
 synchronize を呼び出しているだけで、Thread.exclusive していないスレッドは動きます。
+#@since 2.3.0
+[[c:Thread::Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
+#@else
 [[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
+#@end
 
 --- DEBUG -> Integer
 

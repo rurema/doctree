@@ -1,6 +1,13 @@
-= class SizedQueue < Queue
+#@since 2.1.0
+= class Thread::SizedQueue < Object
+alias SizedQueue
+
+サイズの最大値を指定できる [[c:Thread::Queue]] です。
+#@else
+= class SizedQueue < Object
 
 サイズの最大値を指定できる [[c:Queue]] です。
+#@end
 
 === 例
 
@@ -27,8 +34,13 @@ q = [] にすると入力と違った順序で行が出力されます。
 
 == Class Methods
 
+#@since 2.1.0
+--- new(max) -> Thread::SizedQueue
+Thread::SizedQueue オブジェクトを生成します。
+#@else
 --- new(max) -> SizedQueue
 SizedQueue オブジェクトを生成します。
+#@end
 
 @param max キューのサイズの最大値です。
 
@@ -48,6 +60,15 @@ SizedQueue オブジェクトを生成します。
 
 キューに与えられたオブジェクトを追加します。
 
+#@since 2.1.0
+キューのサイズが [[m:Thread::SizedQueue#max]] に達している場合は、
+キューのサイズが [[m:Thread::SizedQueue#max]] より小さくなるまで他のスレッドに実行を譲ります。
+その後、キューに与えられたオブジェクトを追加します。
+
+@param obj キューに追加したいオブジェクトを指定します。
+
+@see  [[m:Thread::Queue#push]]
+#@else
 キューのサイズが [[m:SizedQueue#max]] に達している場合は、
 キューのサイズが [[m:SizedQueue#max]] より小さくなるまで他のスレッドに実行を譲ります。
 その後、キューに与えられたオブジェクトを追加します。
@@ -55,6 +76,7 @@ SizedQueue オブジェクトを生成します。
 @param obj キューに追加したいオブジェクトを指定します。
 
 @see  [[m:Queue#push]]
+#@end
 
 --- pop(non_block = false)   -> object
 --- shift(non_block = false) -> object
@@ -65,16 +87,20 @@ SizedQueue オブジェクトを生成します。
 
 @param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
 
+#@since 2.1.0
+@see [[m:Thread::Queue#pop]]
+#@else
 @see [[m:Queue#pop]]
+#@end
 
 #@since 2.3.0
 --- close -> self
 
-キューを close します。詳しくは [[m:Queue#close]] を参照してください。
+キューを close します。詳しくは [[m:Thread::Queue#close]] を参照してください。
 
-[[c:Queue]] とはキューにオブジェクトを追加するスレッドの動作が異なりま
-す。キューにオブジェクトを追加するスレッドを待機している場合は
+[[c:Thread::Queue]] とはキューにオブジェクトを追加するスレッドの動作が
+異なります。キューにオブジェクトを追加するスレッドを待機している場合は
 [[c:ClosedQueueError]] が発生して中断されます。
 
-@see [[m:Queue#close]]
+@see [[m:Thread::Queue#close]]
 #@end

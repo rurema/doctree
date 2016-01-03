@@ -4,7 +4,11 @@ category Thread
 
 = module Mutex_m
 
+#@since 2.3.0
+スレッド同期機構である [[c:Thread::Mutex]] のモジュール版です。クラスに
+#@else
 スレッド同期機構である [[c:Mutex]] のモジュール版です。クラスに
+#@end
 [[m:Module#include]] することでそのクラスに Mutex 機能を持たせることができます。
 また、普通のオブジェクトを [[m:Object#extend]] により Mutex にする事ができます。
 

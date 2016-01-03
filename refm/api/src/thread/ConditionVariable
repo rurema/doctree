@@ -1,4 +1,9 @@
+#@since 2.1.0
+= class Thread::ConditionVariable < Object
+alias ConditionVariable
+#@else
 = class ConditionVariable < Object
+#@end
 
 スレッドの同期機構の一つである状態変数を実現するクラスです。
 
@@ -125,7 +130,11 @@
 
 == Class Methods
 
+#@since 2.1.0
+--- new -> Thread::ConditionVariable
+#@else
 --- new -> ConditionVariable
+#@end
 状態変数を生成して返します。
 
 == Instance Methods
@@ -133,7 +142,11 @@
 --- broadcast -> [Thread]
 
 状態変数を待っているスレッドをすべて再開します。再開された
+#@since 2.1.0
+スレッドは [[m:Thread::ConditionVariable#wait]]
+#@else
 スレッドは [[m:ConditionVariable#wait]]
+#@end
 で指定した mutex のロックを試みます。
 
 @return 実行待ちしていたスレッドの配列を返します。
@@ -141,7 +154,11 @@
 --- signal -> Thread | nil
 
 状態変数を待っているスレッドを1つ再開します。再開された
+#@since 2.1.0
+スレッドは [[m:Thread::ConditionVariable#wait]]
+#@else
 スレッドは [[m:ConditionVariable#wait]]
+#@end
 で指定した mutex のロックを試みます。
 
 @return 状態を待っているスレッドがあった場合は、そのスレッドを返します。
@@ -154,11 +171,20 @@
 #@end
 
 mutex のロックを解放し、カレントスレッドを停止します。
+#@since 2.1.0
+[[m:Thread::ConditionVariable#signal]]または、
+[[m:Thread::ConditionVariable#broadcast]]で送られたシグナルを
+#@else
 [[m:ConditionVariable#signal]]または、
 [[m:ConditionVariable#broadcast]]で送られたシグナルを
+#@end
 受け取ると、mutexのロックを取得し、実行状態となります。
 
+#@since 2.3.0
 @param mutex [[c:Mutex]] オブジェクトを指定します。
+#@else
+@param mutex [[c:Thread::Mutex]] オブジェクトを指定します。
+#@end
 
 #@since 1.9.2
 @param timeout スリープする秒数を指定します。この場合はシグナルを受け取

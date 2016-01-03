@@ -109,11 +109,19 @@ listen している [[c:TCPServer]] オブジェクトの配列を返します�
 実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止すると
 は限りません。
 
+#@since 2.1.0
+--- tokens    -> Thread::SizedQueue
+
+MaxClient の設定のために使われる [[c:Thread::SizedQueue]] オブジェクト
+を返します。[[c:Thread::SizedQueue]] オブジェクトのサイズは現在受け付け
+ることのできるクライアントの数です。
+#@else
 --- tokens    -> SizedQueue
 
 MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返しま
 す。[[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるク
 ライアントの数です。
+#@end
 
 MaxClient を知りたい場合は self.tokens.max です。
 self.tokens.max - self.tokens.length が現在のクライアントの接続数です。
