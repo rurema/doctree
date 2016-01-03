@@ -735,6 +735,21 @@ self の非同期例外のキューが空かどうかを返します。
 @see [[m:Thread.pending_interrupt?]]
 #@end
 
+#@since 2.3.0
+--- name -> String
+
+self の名前を返します。
+
+--- name=(name) -> String
+
+self の名前を name に設定します。
+
+プラットフォームによっては pthread やカーネルにも設定を行う場合があります。
+
+@raise ArgumentError 引数に ASCII 互換ではないエンコーディングのものを
+                     指定した場合に発生します。
+#@end
+
 == Constants
 
 #@since 1.9.1
