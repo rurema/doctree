@@ -1096,7 +1096,7 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
   a.dig(0, 0, 0)                 # => NoMethodError, undefined method `dig' for 1:Fixnum
   [42, {foo: :bar}].dig(1, :foo) # => :bar
 
-@see [[m:Hash#dig]]
+@see [[m:Hash#dig]], [[m:Struct#dig]]
 #@end
 
 #@since 1.8.0

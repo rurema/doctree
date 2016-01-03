@@ -233,6 +233,23 @@ self の内容を人間に読みやすい文字列にして返します。
 
 #@include(Struct.attention)
 
+#@since 2.3.0
+--- dig(key, ...) -> object | nil
+
+self 以下のネストしたオブジェクトを dig メソッドで再帰的に参照して返し
+ます。途中のオブジェクトが nil であった場合は nil を返します。
+
+@param key キーを任意個指定します。
+
+  klass = Struct.new(:a)
+  o = klass.new(klass.new({b: [1, 2, 3]}))
+
+  o.dig(:a, :a, :b, 0)              # => 1
+  o.dig(:b, 0)                      # => nil
+
+@see [[m:Array#dig]], [[m:Hash#dig]]
+#@end
+
 --- ==(other)    -> bool
 
 self と other のクラスが同じであり、各メンバが == メソッドで比較して等しい場合に
