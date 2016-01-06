@@ -17,7 +17,7 @@ YAML AST を構築するためのクラスです。
 == Class Methods
 
 --- new -> Psych::TreeBuilder
-TreeBuilder オブジェクトをを生成します。
+TreeBuilder オブジェクトを生成します。
 
 == Instance Methods
 

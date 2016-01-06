@@ -118,7 +118,7 @@ CGI で利用するユーティリティメソッドを定義したライブラ�
 
 --- pretty(string, shift = "  ") -> String
 
-HTML を人間に見やすく整形しした文字列を返します。
+HTML を人間に見やすく整形した文字列を返します。
 
 @param string HTML を指定します。
 
