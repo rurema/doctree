@@ -228,13 +228,13 @@ string と同じ内容の新しい文字列を作成して返します。
 #@since 2.3.0
 --- +@ -> String | self
 
-self が freezeされている文字列の場合、元の文字列の複製を返します。
+self が freeze されている文字列の場合、元の文字列の複製を返します。
 freeze されていない場合は self を返します。
 
 --- -@ -> String | self
 
-self が freezeされている文字列の場合、元の文字列の複製を返します。
-freeze されていない場合は self を返します。
+self が freeze されている文字列の場合、self を返します。
+freeze されていない場合は元の文字列の freeze された複製を返します。
 #@end
 
 --- +(other) -> String
