@@ -1442,9 +1442,9 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 #@since 1.8.5
 #@since 2.1.0
---- read_nonblock(maxlen, outbuf = "", exception: false) -> String | Symbol | nil
+--- read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
 #@else
---- read_nonblock(maxlen, outbuf = "")    -> String
+--- read_nonblock(maxlen, outbuf = nil)    -> String
 #@end
 
 IO をノンブロッキングモードに設定し、
@@ -1477,7 +1477,7 @@ EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告さ�
 #@since 2.1.0
 @param exception 読み込み時に [[c:Errno::EAGAIN]]、
                  [[c:Errno::EWOULDBLOCK]] が発生する代わりに
-                 :wait_readable を返すかどうかを指定します。また、true
+                 :wait_readable を返すかどうかを指定します。また、false
                  を指定した場合は既に EOF に達していれば
                  [[c:EOFError]] の代わりに nil を返します。
 #@end
