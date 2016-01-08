@@ -1684,6 +1684,69 @@ to_s メソッドにより文字列に変換してから出力します。
 @see [[m:$stderr]],[[m:$VERBOSE]]
 #@end
 
+--- method(name) -> Method
+
+オブジェクトのメソッド name をオブジェクト化した
+[[c:Method]] オブジェクトを返します。
+
+@param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
+@raise NameError 定義されていないメソッド名を引数として与えると発生します。
+
+  me = -365.method(:abs)
+  p me #=> #<Method: Fixnum#abs>
+  p me.call #=> 365
+
+#@since 2.1.0
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Kernel.#singleton_method]]
+#@else
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]]
+#@end
+
+#@since 1.9.1
+--- public_method(name) -> Method
+
+オブジェクトの public メソッド name をオブジェクト化した
+[[c:Method]] オブジェクトを返します。
+
+@param name メソッド名を [[c:Symbol]] または [[c:String]] で指定します。
+@raise NameError 定義されていないメソッド名や、
+       protected メソッド名、 private メソッド名を引数として与えると発生します。
+
+  1.public_method(:to_int) #=> #<Method: Fixnum(Integer)#to_int>
+  1.public_method(:p)      #   method `p' for class `Fixnum' is private (NameError)
+
+@see [[m:Kernel.#method]],[[m:Object#public_send]],[[m:Module#public_instance_method]]
+#@end
+
+#@since 2.1.0
+--- singleton_method(name) -> Method
+
+オブジェクトの特異メソッド name をオブジェクト化した [[c:Method]] オブ
+ジェクトを返します。
+
+@param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
+@raise NameError 定義されていないメソッド名を引数として与えると発生します。
+
+   class Demo
+     def initialize(n)
+       @iv = n
+     end
+     def hello()
+       "Hello, @iv = #{@iv}"
+     end
+   end
+
+   k = Demo.new(99)
+   def k.hi
+     "Hi, @iv = #{@iv}"
+   end
+   m = k.singleton_method(:hi)    # => #<Method: #<Demo:0xf8b0c3c4 @iv=99>.hi>
+   m.call   #=> "Hi, @iv = 99"
+   m = k.singleton_method(:hello) # => NameError
+
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Kernel.#method]]
+#@end
+
 --- Array(arg) -> Array
 
 引数を配列([[c:Array]])に変換した結果を返します。
@@ -2679,9 +2742,9 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
   #       from ..:9
 
 #@since 1.9.1
-@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:BasicObject#instance_eval]],[[m:Object#method]],[[m:Object#send]]
+@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:BasicObject#instance_eval]],[[m:Kernel.#method]],[[m:Object#send]]
 #@else
-@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Object#method]],[[m:Object#send]]
+@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Kernel.#method]],[[m:Object#send]]
 #@end
 
 #@#==== リフレクション

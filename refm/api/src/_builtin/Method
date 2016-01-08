@@ -1,6 +1,6 @@
 = class Method < Object
 
-[[m:Object#method]] によりオブジェクト化され
+[[m:Kernel.#method]] によりオブジェクト化され
 たメソッドオブジェクトのクラスです。
 
 メソッドの実体（名前でなく）とレシーバの組を封入します。
@@ -78,7 +78,7 @@
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]]
+@see [[m:Kernel.#method]]
 
 == Instance Methods
 
