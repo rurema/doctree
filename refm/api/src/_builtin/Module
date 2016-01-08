@@ -605,7 +605,7 @@ self のインスタンスメソッド name をオブジェクト化した [[c:U
 
 @raise NameError self に存在しないメソッドを指定した場合に発生します。
 
-@see [[m:Module#public_instance_method]], [[m:Object#method]]
+@see [[m:Module#public_instance_method]], [[m:Kernel.#method]]
 
 --- method_defined?(name) -> bool
 

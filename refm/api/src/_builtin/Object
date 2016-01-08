@@ -203,7 +203,7 @@ other が self 自身の時、真を返します。
   1.public_method(:to_int) #=> #<Method: Fixnum(Integer)#to_int>
   1.public_method(:p)      #   method `p' for class `Fixnum' is private (NameError)
 
-@see [[m:Object#method]],[[m:Object#public_send]],[[m:Module#public_instance_method]]
+@see [[m:Kernel.#method]],[[m:Object#public_send]],[[m:Module#public_instance_method]]
 #@end
 
 #@since 1.9.1
@@ -1107,7 +1107,7 @@ send, __send__ は、メソッドの呼び出し制限
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
+@see [[m:Kernel.#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
 #@since 1.9.1
 --- public_send(name, *args) -> object
@@ -1391,24 +1391,6 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
 @see [[m:Object#freeze]]
 
---- method(name) -> Method
-
-オブジェクトのメソッド name をオブジェクト化した
-[[c:Method]] オブジェクトを返します。
-
-@param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
-@raise NameError 定義されていないメソッド名を引数として与えると発生します。
-
-  me = -365.method(:abs)
-  p me #=> #<Method: Fixnum#abs>
-  p me.call #=> 365
-
-#@since 2.1.0
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#singleton_method]]
-#@else
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]]
-#@end
-
 #@since 2.1.0
 --- singleton_method(name) -> Method
 
@@ -1435,7 +1417,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
    m.call   #=> "Hi, @iv = 99"
    m = k.singleton_method(:hello) # => NameError
 
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#method]]
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Kernel.#method]]
 #@end
 
 #@since 2.0.0

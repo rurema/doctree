@@ -1684,6 +1684,24 @@ to_s メソッドにより文字列に変換してから出力します。
 @see [[m:$stderr]],[[m:$VERBOSE]]
 #@end
 
+--- method(name) -> Method
+
+オブジェクトのメソッド name をオブジェクト化した
+[[c:Method]] オブジェクトを返します。
+
+@param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
+@raise NameError 定義されていないメソッド名を引数として与えると発生します。
+
+  me = -365.method(:abs)
+  p me #=> #<Method: Fixnum#abs>
+  p me.call #=> 365
+
+#@since 2.1.0
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#singleton_method]]
+#@else
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]]
+#@end
+
 --- Array(arg) -> Array
 
 引数を配列([[c:Array]])に変換した結果を返します。
@@ -2679,9 +2697,9 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
   #       from ..:9
 
 #@since 1.9.1
-@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:BasicObject#instance_eval]],[[m:Object#method]],[[m:Object#send]]
+@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:BasicObject#instance_eval]],[[m:Kernel.#method]],[[m:Object#send]]
 #@else
-@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Object#method]],[[m:Object#send]]
+@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Kernel.#method]],[[m:Object#send]]
 #@end
 
 #@#==== リフレクション
