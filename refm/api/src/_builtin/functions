@@ -1697,9 +1697,38 @@ to_s メソッドにより文字列に変換してから出力します。
   p me.call #=> 365
 
 #@since 2.1.0
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#singleton_method]]
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Kernel.#singleton_method]]
 #@else
 @see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]]
+#@end
+
+#@since 2.1.0
+--- singleton_method(name) -> Method
+
+オブジェクトの特異メソッド name をオブジェクト化した [[c:Method]] オブ
+ジェクトを返します。
+
+@param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
+@raise NameError 定義されていないメソッド名を引数として与えると発生します。
+
+   class Demo
+     def initialize(n)
+       @iv = n
+     end
+     def hello()
+       "Hello, @iv = #{@iv}"
+     end
+   end
+
+   k = Demo.new(99)
+   def k.hi
+     "Hi, @iv = #{@iv}"
+   end
+   m = k.singleton_method(:hi)    # => #<Method: #<Demo:0xf8b0c3c4 @iv=99>.hi>
+   m.call   #=> "Hi, @iv = 99"
+   m = k.singleton_method(:hello) # => NameError
+
+@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Kernel.#method]]
 #@end
 
 --- Array(arg) -> Array
