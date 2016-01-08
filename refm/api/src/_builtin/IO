@@ -1808,7 +1808,7 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 #@if (version >= "1.8.5")
 #@since 2.1.0
---- write_nonblock(string, exception: false) -> String | Symbol
+--- write_nonblock(string, exception: true) -> String | Symbol
 #@else
 --- write_nonblock(string)    -> Integer
 #@end
@@ -1833,8 +1833,8 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告さ�
 @param string 自身に書き込みたい文字列を指定します。
 
 #@since 2.1.0
-@param exception 書き込み時に [[c:Errno::EAGAIN]]、[[c:Errno::EWOULDBLOCK]] が発生
-                 する代わりに :wait_writable を返すかどうかを指定します。
+@param exception false を指定すると、書き込み時に [[c:Errno::EAGAIN]]、[[c:Errno::EWOULDBLOCK]] が発生
+                 する代わりに :wait_writable を返します。
 #@end
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
