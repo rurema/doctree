@@ -244,6 +244,10 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   false
 : :force_quotes
   false
+#@since 2.0.0
+: :skip_lines
+  nil
+#@end
 
 --- VERSION -> String
 
@@ -340,6 +344,10 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   真を指定すると、空行を読み飛ばします。
 : :force_quotes
   真を指定すると、全てのフィールドを作成時にクオートします。
+#@since 2.0.0
+: :skip_lines
+  指定した正規表現にマッチしたそれぞれの行をコメントとして読み飛ばします。
+#@end
 
 @raise CSV::MalformedCSVError 不正な CSV をパースしようとしたときに発生します。
 
