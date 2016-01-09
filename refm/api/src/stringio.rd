@@ -510,7 +510,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 --- readpartial(len, outbuf)  -> String
 #@end
 #@since 1.9.2
---- read_nonblock(maxlen, outbuf = "") -> String
+--- read_nonblock(maxlen, outbuf = nil) -> String
 #@end
 
 自身から len バイト読み込んで返します。
