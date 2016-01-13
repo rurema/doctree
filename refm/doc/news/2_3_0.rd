@@ -316,7 +316,7 @@
 
 === 組込みのグローバル変数の互換性に影響のある変更
 
-  * $SAFE
+  * [[m:$SAFE]]
     * $SAFE=2 と $SAFE=3 廃止されました。$SAFE を2以上にすると ArgumentError が発生します。
       [[url:https://bugs.ruby-lang.org/issues/5455]]
 
