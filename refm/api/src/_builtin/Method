@@ -352,4 +352,6 @@ self を元にカリー化した [[c:Proc]] を返します。
 
 self 内で super を実行した際に実行されるメソッドを [[c:Method]] オブジェ
 クトにして返します。
+
+@see [[m:UnboundMethod#super_method]]
 #@end
