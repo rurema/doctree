@@ -221,3 +221,12 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 @see [[m:Proc#parameters]], [[m:Method#parameters]]
 #@end
+
+#@since 2.2.0
+--- super_method -> UnboundMethod | nil
+
+self 内で super を実行した際に実行されるメソッドを [[c:UnboundMethod]] オブジェ
+クトにして返します。
+
+@see [[m:Method#super_method]]
+#@end
