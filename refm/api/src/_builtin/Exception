@@ -56,6 +56,20 @@
  
  #=> ["filename.rb:2:in `methd'", "filename.rb:6"]
 
+#@since 2.1.0
+@see [[m:Exception#backtrace_locations]]
+
+--- backtrace_locations -> [Thread::Backtrace::Location]
+
+バックトレース情報を返します。[[m:Exception#backtrace]]に似ていますが、
+[[c:Thread::Backtrace::Location]] の配列を返す点が異なります。
+
+現状では [[m:Exception#set_backtrace]] によって戻り値が変化する事はあり
+ません。
+
+@see [[m:Exception#backtrace]]
+#@end
+
 --- message    -> String
 --- to_s       -> String
 #@until 1.9.1
