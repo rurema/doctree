@@ -302,11 +302,12 @@ true ならば冗長な出力の設定を行います。
 #@todo
 
 #@since 1.9.1
-
+#@until 2.4.0
 --- debug_output_exclusive_unlock{ ... } -> Mutex | nil
 #@todo
 
 @see [[m:Mutex#exclusive_unlock]]
+#@end
 
 --- debug_output_lock -> Mutex
 #@todo
