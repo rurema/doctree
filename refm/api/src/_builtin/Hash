@@ -1028,7 +1028,7 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
   g = { foo: [10, 11, 12] }
   g.dig(:foo, 1)               # => 11
 
-@see [[m:Array#dig]], [[m:Struct#dig]]
+@see [[m:Array#dig]], [[m:Struct#dig]], [[m:OpenStruct#dig]]
 #@end
 
 --- rehash -> self

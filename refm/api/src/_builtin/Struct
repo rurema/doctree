@@ -247,7 +247,7 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
   o.dig(:a, :a, :b, 0)              # => 1
   o.dig(:b, 0)                      # => nil
 
-@see [[m:Array#dig]], [[m:Hash#dig]]
+@see [[m:Array#dig]], [[m:Hash#dig]], [[m:OpenStruct#dig]]
 #@end
 
 --- ==(other)    -> bool

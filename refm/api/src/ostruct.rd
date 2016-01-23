@@ -163,6 +163,22 @@ self の各要素の名前をと要素を引数としてブロックを評価し
   person[:age] = 42 # person.age = 42 と同じ
   person.age # => 42
 
+#@since 2.3.0
+--- dig(key, ...) -> object | nil
+
+self 以下のネストしたオブジェクトを dig メソッドで再帰的に参照して返し
+ます。途中のオブジェクトが nil であった場合は nil を返します。
+
+@param key キーを任意個指定します。
+
+  address = OpenStruct.new('city' => "Anytown NC", 'zip' => 12345)
+  person = OpenStruct.new('name' => 'John Smith', 'address' => address)
+  person.dig(:address, 'zip')          # => 12345
+  person.dig(:business_address, 'zip') # => nil
+
+@see [[m:Array#dig]], [[m:Hash#dig]], [[m:Struct#dig]]
+#@end
+
 --- hash -> Integer
 
 self のハッシュ値を返します。
