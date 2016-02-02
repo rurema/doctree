@@ -671,7 +671,7 @@ protected よりは private が使われることの方が多いようです。
 
         class Foo
           def _val
-            @val
+            'val'
           end
           protected :_val
 
