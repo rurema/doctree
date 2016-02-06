@@ -195,7 +195,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 [[m:OpenSSL::SSL::VERIFY_NONE]] か [[m:OpenSSL::SSL::VERIFY_PEER]]
 のいずれかを用います。
 
-デフォルトは nil で、VERIFY_NONE を意味します。
+デフォルトは nil で、VERIFY_PEER を意味します。
 
 --- verify_callback -> Proc
 自身に設定されている検証をフィルタするコールバックを
