@@ -129,7 +129,6 @@ nFig 桁まで計算を行います。
 
 例:
 
-  require "rational"
   require "bigdecimal"
   require "bigdecimal/util"
   Rational(1, 3).to_d(3).to_s  # => "0.333E0"
