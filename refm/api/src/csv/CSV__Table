@@ -25,7 +25,7 @@ include Enumerable
   行単位でアクセスするか列単位でアクセスするか自動的に判断します。
 : :row
   ロウモード。テーブルに行単位でアクセスします。
-: column
+: :column
   カラムモード。テーブルに列単位でアクセスします。
 
 == Singleton Methods
