@@ -16,8 +16,8 @@ x の指数関数を prec で指定した精度で計算します。
 x に正の無限大を指定した場合は正の無限大を返します。負の無限大を指定し
 た場合には 0 を返します。NaN を指定した場合には NaNを返します。
 
-@param x 計算対象の数値を [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]
-         オブジェクトのいずれかで指定します。
+@param x 計算対象の数値を [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]、
+         [[c:Float]]、[[c:Rational]]オブジェクトのいずれかで指定します。
 #@else
 x に無限大や NaN を指定した場合には NaN を返します。
 
@@ -27,8 +27,9 @@ x に無限大や NaN を指定した場合には NaN を返します。
 @param prec 計算結果の精度を指定します。
 
 #@since 1.9.3
-@raise ArgumentError x に [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]
-                     以外のオブジェクトを指定した場合に発生します。
+@raise ArgumentError x に [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]、
+                     [[c:Float]]、[[c:Rational]]以外のオブジェクトを指
+                     定した場合に発生します。
 #@end
 
 @raise ArgumentError prec に 0 以下の数値が指定された場合に発生します。
