@@ -600,7 +600,7 @@ rm_r(list, {:force => true}) と同じです。
 
   FileUtils.rmdir('somedir')
   FileUtils.rmdir(%w(somedir anydir otherdir))
-  # does not remove directory really, outputing message.
+  # 実際にはディレクトリの削除は行わずにメッセージ出力のみ
   FileUtils.rmdir('somedir', {:verbose => true, :noop => true})
 
 #@since 1.8.3
