@@ -1055,7 +1055,7 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
   enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
 
 例として、整数列を連続する奇数/偶数に分ける例を見てみます。
-「n.even?」が変換するところで区切られているのがわかるでしょう。
+「n.even?」の値が切り替わるところで区切られているのがわかるでしょう。
   [3,1,4,1,5,9,2,6,5,3,5].chunk {|n|
     n.even?
   }.each {|even, ary|
