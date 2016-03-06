@@ -1088,7 +1088,7 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
   * ブロックの評価値 :_alone であった場合はその要素は
     単独のチャンクをなすものと解釈されます。
 
-それ意外のアンダースコアで始まるシンボルを指定した場合は例外が発生します。
+それ以外のアンダースコアで始まるシンボルを指定した場合は例外が発生します。
 
   items.chunk { |item| :_underscore }
   # => RuntimeError: symbols beginning with an underscore are reserved
