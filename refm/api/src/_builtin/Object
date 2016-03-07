@@ -1528,9 +1528,9 @@ Rubyで実装されたメソッドで NotImplementedError が発生する場合�
   end
 
   puts ImplTemplateMethod.new.respond_to?(:template_method) # => true
-  # NotImplementedError が発生しているが、Rubyによる実装部のため true を返却
+  # NotImplementedError が発生しているが、Rubyによる実装部のため true を返す
   puts NotImplTemplateMethod.new.respond_to?(:template_method) # => true
-  # GNU/Linux で実行。C言語による実装部のため false を返却
+  # GNU/Linux で実行。C言語による実装部のため false を返す
   puts File.respond_to?(:lchmod)         # => false
 
 @see [[m:Module#method_defined?]]

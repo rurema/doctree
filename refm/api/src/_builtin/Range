@@ -99,7 +99,7 @@ Range#cover? は連続値を扱います。
 
 @param obj 比較対象のオブジェクトを指定します。
 
-  # 数値は連続的に扱われているため、 include? / cover? が同じ結果を返却
+  # 数値は連続的に扱われているため、 include? / cover? が同じ結果を返す
   (1.1..2.3).include?(1.0)    # => false
   (1.1..2.3).include?(1.1)    # => true
   (1.1..2.3).include?(1.555)  # => true
