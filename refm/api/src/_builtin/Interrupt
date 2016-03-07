@@ -12,9 +12,9 @@ SIGINT 以外のシグナルを受信したときに発生する例外につい�
 使用例
 
   =begin
-  #SIGINTを補足したい場合
+  #SIGINTを捕捉したい場合
   Signal.trap('INT'){
-    print "\nINTを補足した。\n"
+    print "\nINTを捕捉した。\n"
     exit 1
   }
   =end
