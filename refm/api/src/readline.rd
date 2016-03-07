@@ -98,7 +98,7 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 入力待ちの状態で ^C すると ruby インタプリタが終了し、端末状態を復帰しません。
 これを回避するための例を2つ挙げます。
 
-例: ^CによるInterrupt例外を補足して、端末状態を復帰する。
+例: ^CによるInterrupt例外を捕捉して、端末状態を復帰する。
 
   stty_save = `stty -g`.chomp
   begin
@@ -112,7 +112,7 @@ prompt を出力し、ユーザからのキー入力を待ちます。
     end
   end
 
-例: INTシグナルを補足して、端末状態を復帰する。
+例: INTシグナルを捕捉して、端末状態を復帰する。
 
   stty_save = `stty -g`.chomp
   trap("INT") { system "stty", stty_save; exit }
