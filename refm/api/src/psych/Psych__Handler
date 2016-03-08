@@ -328,7 +328,7 @@ Emitter オブジェクトを生成して返します。
 
 出力の style が canonical である/ないを指定します。
 
-@param bool canonnicalであるかどうか
+@param bool canonicalであるかどうか
 @see [[m:Psych::Emitter#canonical]]
 
 --- indentation -> Integer
