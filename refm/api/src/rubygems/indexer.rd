@@ -17,7 +17,11 @@ Gem リポジトリのインデックスを作成するためのクラスです�
 
 @param spec [[c:Gem::Specification]] を指定します。
 
+#@since 2.3.0
 --- build_indices
+#@else
+--- build_indicies
+#@end
 #@# -> discard
 
 インデックスを構築します。
@@ -63,7 +67,11 @@ Gem のキャッシュディレクトリ内の *.gem ファイルから [[c:Gem:
 [[m:Zlib::GzipWriter.open]] へのラッパーです。
 与えられたファイル名を圧縮して保存します。
 
+#@since 2.3.0
+--- install_indices
+#@else
 --- install_indicies
+#@end
 #@# -> discard
 作成済みのインデックスを所定のディレクトリに保存します。
 
