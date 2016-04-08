@@ -1,7 +1,4 @@
 = class Integer < Numeric
-#@until 1.9.1
-include Precision
-#@end
 
 整数の抽象クラス。サブクラスとして [[c:Fixnum]] と [[c:Bignum]] があり
 ます。この 2 種類の整数は値の大きさに応じてお互いに自動的に変換されま

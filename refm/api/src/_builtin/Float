@@ -1,7 +1,4 @@
 = class Float < Numeric
-#@until 1.9.1
-include Precision
-#@end
 
 浮動小数点数のクラス。Float の実装は C 言語の double で、その精度は環
 境に依存します。
