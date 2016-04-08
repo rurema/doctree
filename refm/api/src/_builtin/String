@@ -1,8 +1,5 @@
 = class String < Object
 
-#@until 1.9.1
-include Enumerable
-#@end
 include Comparable
 
 文字列のクラスです。
@@ -84,7 +81,6 @@ String クラスのメソッドには破壊的なメソッドも非破壊的な�
 『!』が付いているほうが破壊的」というだけです。
 「『!』が付いているならば破壊的」は常に成立しますが、逆は必ずしも成立しません。
 
-#@since 1.9.1
 ===[a:m17n] 多言語化と文字列のエンコーディング
 
 String オブジェクトは自身のエンコーディング情報を持ちます。
@@ -166,30 +162,8 @@ ASCII 互換エンコーディングをもつ文字列にエンコーディン�
 文字列ではない単なるバイト列も String オブジェクトで表されます。
 その時のエンコーディングは ASCII-8BIT です。
 
-#@else
-===[a:multi] マルチバイト文字列の処理
-
-String クラスは自身を文字の列ではなくバイト列として扱います。
-例えば str[1] は str の内容やエンコーディングに関わらず
-2 バイトめの数値を返します。
-
-マルチバイト文字列を正しく処理するためには、
-原則としてインデックスよりも正規表現を使うメソッド、
-例えば [[m:String#sub]] や [[m:String#gsub]] を中心に用いるべきです。
-Ruby の正規表現エンジンはマルチバイト文字列に対応しているので、
-正規表現を使って位置を指定すればマルチバイト文字を正しく処理できます。
-なお、正規表現を正しく動作させるためには、組み込み変数 [[m:$KCODE]]
-を文字列のエンコーディングにあわせて設定する必要があります。
-
-また、[[lib:jcode]] ライブラリを利用すると
-String クラスのすべてのメソッドが文字単位で動作するようになります。
-しかし [[lib:jcode]] ライブラリはプロセス全体に影響するため、
-中程度以上の規模プログラムで用いることは推奨できません。
-#@end
-
 == Class Methods
 
-#@since 1.9.1
 --- try_convert(obj) -> String | nil
 
 obj を String に変換しようと試みます。変換には [[m:Object#to_str]] メソッ
@@ -201,8 +175,6 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 
    String.try_convert("str")     # => "str"
    String.try_convert(/re/)      # => nil
-
-#@end
 
 --- new(string = "")                -> String
 #@since 2.3.0
@@ -309,12 +281,10 @@ self が大きい時には 1、等しい時には 0、小さい時には -1 を�
 $= に頼るべきではありません。
 代わりに [[m:String#casecmp]] を使ってください。
 
-#@since 1.8.0
 other が文字列でない場合、
 other.to_str と other.<=> が定義されていれば
 0 - (other <=> self) の結果を返します。
 そうでなければ nil を返します。
-#@end
 
 @param other    文字列
 @return         比較結果の整数か nil
@@ -330,18 +300,9 @@ other.to_str と other.<=> が定義されていれば
     p "stringAA" <=> "string"  # => 1
 
 --- ==(other) -> bool
-#@since 1.9.1
 --- ===(other) -> bool
-#@end
 
 other が文字列の場合、[[m:String#eql?]] と同様に文字列の内容を比較します。
-
-#@until 1.9.1
-変数 [[m:$=]] の値が真であるときは
-アルファベットの大文字小文字を無視して比較します。
-ただし [[m:$=]] 変数はいずれ廃止されることが決まっているので
-[[m:$=]] に頼るべきではありません。
-#@end
 
 other が文字列でない場合、
 other.to_str が定義されていれば
@@ -415,22 +376,6 @@ other =~ self を行います。
     p "string" =~ /not/   # => nil
     p "abcfoo" =~ /foo/   # => 3
 
-
-#@if (version < "1.8.2")
---- ~ -> Integer
-
-self を正規表現にコンパイルして
-組み込み変数 [[m:$_]] に対してマッチを行い、
-マッチした位置のインデックスを返します。
-$_ =~ Regexp.compile(self) と同じです。
-
-$_ が文字列でなければ nil を返します。
-
-このメソッドは Ruby 1.8.2 以降は削除されます。
-代わりに [[m:Regexp#~]] などを使用してください。
-#@end
-
-#@since 1.9.1
 --- [](nth) -> String | nil
 --- slice(nth) -> String | nil
 
@@ -455,41 +400,11 @@ nth が範囲外を指す場合は nil を返します。
 このメソッドの仕様は 1.8.x 以前から大きく変更されていますので注意が必要
 です。
 
-#@else
---- [](nth) -> Integer | nil
---- slice(nth) -> Integer | nil
-
-nth 番目のバイトを整数 (文字コード) で返します。
-nth が負の場合は文字列の末尾から数えます。
-つまり、 self.size + nth 番目のバイトを返します。
-
-nth が範囲外を指す場合は nil を返します。
-
-@param nth      バイトインデックスを表す整数
-@return         文字コードを表す整数
-
-例:
-
-  p 'bar'[2]        # => 114
-  p 'bar'[2] == ?r  # => true
-  p 'bar'[-1]       # => 114
-
-  p 'bar'[3]        # => nil
-  p 'bar'[-4]       # => nil
-
-このメソッドの逆に文字コードから文字列を得るには
-[[m:Integer#chr]] を使ってください。
-#@end
-
 --- [](nth, len) -> String | nil
 --- slice(nth, len) -> String | nil
-#@since 1.9.1
+
 nth 文字目から長さ len 文字の部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。
-#@else
-nth バイト番目から長さ len バイトの部分文字列を新しく作って返します。
-nth が負の場合は文字列の末尾から数えます。
-#@end
 
 @param nth    取得したい文字列の開始インデックスを整数で指定します。
 @param len    取得したい文字列の長さを正の整数で指定します。
@@ -502,15 +417,8 @@ nth が負の場合は文字列の末尾から数えます。
   str0[2, 1]         #=> "r"
   str0[2, 0]         #=> ""
   str0[2, 100]       #=> "r"  (右側を超えても平気)
-#@until 1.9.0
-  str0[2, 1] == ?r   #=> false  (左辺は長さ1の文字列、右辺は整数の文字コード)
-#@end
   str0[-1, 1]        #=> "r"
-#@since 1.9.1  
-  str0[-1, 2]        #=> "r" (あくまでも「右に向かって len 文字」)
-#@else
-  str0[-1, 2]        #=> "r" (あくまでも「右に向かって len バイト」)
-#@end
+  str0[-1, 2]        #=> "r"  (右に向かって len 文字)
 
   str0[3, 1]         #=> ""
   str0[4, 1]         #=> nil
@@ -533,43 +441,25 @@ substr を含まなければ nil を返します。
     substr = "bar"
     result = "foobar"[substr]
     p result   # => "bar"
-#@since 1.8.0
     p substr.equal?(result)   # => false
-#@else
-    p substr.equal?(result)   # => true
-#@end
 
-#@since 1.8.0
 --- [](regexp, nth = 0) -> String
 --- slice(regexp, nth = 0) -> String
 
 正規表現 regexp の nth 番目の括弧にマッチする最初の部分文字列を返します。
 nth を省略したときや 0 の場合は正規表現がマッチした部分文字列全体を返します。
 正規表現が self にマッチしなかった場合や nth に対応する括弧がないときは nil を返します。
-#@else
---- [](regexp) -> String
---- slice(regexp) -> String
-
-self のうち regexp にマッチする最初の部分文字列を返します。
-self が regexp にマッチしない場合は nil を返します。
-#@end
 
 このメソッドを実行すると、
 マッチ結果に関する情報が組み込み変数 [[m:$~]] に設定されます。
 
 @param regexp    取得したい文字列のパターンを示す正規表現
-#@since 1.8.0
 @param nth       取得したい正規表現レジスタのインデックス。整数
-#@end
 
    p "foobar"[/bar/]  # => "bar"
    p $~.begin(0)      # => 3
-
-#@since 1.8.0
    p "def getcnt(line)"[ /def\s+(\w+)/, 1 ]   # => "getcnt"
-#@end
 
-#@since 1.9.2
 --- [](regexp, name) -> String
 --- slice(regexp, name) -> String
 
@@ -589,8 +479,6 @@ self が regexp にマッチしない場合は nil を返します。
   s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "foo"] # => "Foo"
   s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "bar"] # => "Bar"
   s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "baz"] # => IndexError
-
-#@end
 
 --- [](range) -> String
 --- slice(range) -> String
@@ -613,12 +501,7 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 range.last が文字列の長さ以上のときは
 (文字列の長さ - 1) を指定したものとみなされます。
 
-#@since "1.8.2"
 range.first が 0 より小さいか文字列の長さより大きいときは nil を
-#@else
-range.first が 0 より小さいか文字列の長さより大きいとき、
-および range.first > range.last + 1 であるときは nil を
-#@end
 返します。ただし range.first および range.last のどちらか
 または両方が負の数のときは一度だけ文字列の長さを足して
 再試行します。
@@ -636,11 +519,7 @@ range.first が 0 より小さいか文字列の長さより大きいとき、
   'abcd'[ 1 ..  2] # => "bc"
   'abcd'[ 2 ..  2] # => "c"
   'abcd'[ 3 ..  2] # => ""
-#@since "1.8.2"
   'abcd'[ 4 ..  2] # => ""
-#@else
-  'abcd'[ 4 ..  2] # => nil
-#@end
   'abcd'[ 5 ..  2] # => nil
 
   'abcd'[-3 ..  2] # => "bc"
@@ -661,12 +540,7 @@ range.first が 0 より小さいか文字列の長さより大きいとき、
 range.last が文字列の長さよりも大きいときは文字列の長さを
 指定したものとみなされます。
 
-#@since "1.8.2"
 range.first が 0 より小さいか文字列の長さより大きいときは nil を返します。
-#@else
-range.first が 0 より小さいか文字列の長さより大きいとき、
-および range.first > range.last であるときは nil を返します。
-#@end
 ただし range.first と range.last のどちらかまたは両方が負の数
 であるときは一度だけ文字列の長さを足して再試行します。
 
@@ -677,13 +551,8 @@ range.first が 0 より小さいか文字列の長さより大きいとき、
 
     'abcd'[ 1 ... 2] # => "b"
     'abcd'[ 2 ... 2] # => ""
-#@since "1.8.2"
     'abcd'[ 3 ... 2] # => ""
     'abcd'[ 4 ... 2] # => ""
-#@else
-    'abcd'[ 3 ... 2] # => nil
-    'abcd'[ 4 ... 2] # => nil
-#@end
     'abcd'[ 5 ... 2] # => nil
 
     'abcd'[-3 ... 2] # => "b"
@@ -691,21 +560,11 @@ range.first が 0 より小さいか文字列の長さより大きいとき、
     'abcd'[-5 ... 2] # => nil
 
 --- []=(nth, val)
-#@since 1.9.1
+
 nth 番目の文字を文字列 val で置き換えます。
 
 @param nth 置き換えたい文字の位置を指定します。
 @param val 置き換える文字列を指定します。
-
-#@else
-nth 番目のバイトを文字列 val で置き換えます。
-
-val が 0 から 255 の範囲の整数である場合、
-文字コードとみなしてその文字で置き換えます。
-
-@param nth    置き換えたいバイトのインデックス
-@param val    指定バイトと置き換える文字列もしくはバイト
-#@end
 
 @return val を返します。
 
@@ -716,11 +575,8 @@ val が 0 から 255 の範囲の整数である場合、
     p buf   # => "s!!ring"
 
 --- []=(nth, len, val)
-#@since 1.9.1
+
 nth 番目の文字から len 文字の部分文字列を文字列 val で置き換えます。
-#@else
-nth バイト番目から長さ len バイトの部分文字列を文字列 val で置き換えます。
-#@end
 
 len が0 の場合は、単にnthの位置から文字列の追加が行われます。
 nth が負の場合は文字列の末尾から数えます。
@@ -781,7 +637,6 @@ nth が 0 の場合は、マッチした部分文字列全体を val で置き�
     buf[/def\s+(\w+)/, 1] = "preprocess"
     p buf    # => "def preprocess(cmd)"
 
-#@since 1.9.2
 --- []=(regexp, name, val)
 
 正規表現 regexp の name で指定した名前付きキャプチャにマッチする最初の
@@ -801,8 +656,6 @@ nth が 0 の場合は、マッチした部分文字列全体を val で置き�
   s = "FooBar"
   s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "foo"] = "Baz"
   p s # => "BazBar"
-
-#@end
 
 --- []=(regexp, val)
 
@@ -840,19 +693,6 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
   p "fooBAR--".capitalize   # => "Foobar--"
   p "FOOBAR--".capitalize   # => "Foobar--"
 
-#@until 1.9.1
-[[m:$KCODE]] が適切に設定されていない場合は、
-マルチバイト文字の一部をあやまって変換してしまう場合があります。
-この問題は以下のように Shift JIS エンコーディングを使う場合に発生します。
-
-  $KCODE = 'NONE'
-  # 文字列は Shift JIS エンコーディングで記述されている
-  puts "帰".capitalize   # => 蟻
-
-また、$KCODE を設定しても、
-マルチバイト文字のいわゆる全角アルファベットは処理しません。
-#@end
-
 @see [[m:String#capitalize!]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
 
@@ -874,21 +714,6 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
   str.capitalize!
   p str   # => "Foobar"
 
-#@until 1.9.1
-[[m:$KCODE]] が適切に設定されていない場合は、
-マルチバイト文字の一部をあやまって変換してしまう場合があります。
-この問題は以下のように Shift JIS エンコーディングを使う場合に発生します。
-
-  $KCODE = 'NONE'
-  # 文字列は Shift JIS エンコーディングで記述されている
-  str = "帰"
-  str.capitalize!
-  puts str   # => 蟻
-
-また、$KCODE を設定しても、
-マルチバイト文字のいわゆる全角アルファベットは処理しません。
-#@end
-
 @see [[m:String#capitalize]], [[m:String#upcase!]],
      [[m:String#downcase!]], [[m:String#swapcase!]]
 
@@ -908,23 +733,15 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#<=>]]
 
-#@since 1.8.0
 --- center(width, padding = ' ') -> String
-#@else
---- center(width) -> String
-#@end
 
 長さ width の文字列に self を中央寄せした文字列を返します。
 self の長さが width より長い時には元の文字列の複製を返します。
-#@since 1.8.0
 また、第 2 引数 padding を指定したときは
 空白文字の代わりに padding を詰めます。
-#@end
 
 @param width      返り値の文字列の最小の長さ
-#@since 1.8.0
 @param padding    長さが width になるまで self の両側に詰める文字
-#@end
 
 例:
 
@@ -935,29 +752,19 @@ self の長さが width より長い時には元の文字列の複製を返し�
   p "foo".center(3)        # => "foo"
   p "foo".center(2)        # => "foo"
   p "foo".center(1)        # => "foo"
-#@since 1.8.0
   p "foo".center(10, "*")  # => "***foo****"
-#@end
 
 @see [[m:String#ljust]], [[m:String#rjust]]
 
-#@since 1.8.0
 --- ljust(width, padding = ' ') -> String
-#@else
---- ljust(width) -> String
-#@end
 
 長さ width の文字列に self を左詰めした文字列を返します。
 self の長さが width より長い時には元の文字列の複製を返します。
-#@since 1.8.0
 また、第 2 引数 padding を指定したときは
 空白文字の代わりに padding を詰めます。
-#@end
 
 @param width      返り値の文字列の最小の長さ
-#@since 1.8.0
 @param padding    長さが width になるまで self の右側に詰める文字
-#@end
 
 例:
 
@@ -966,29 +773,19 @@ self の長さが width より長い時には元の文字列の複製を返し�
   p "foo".ljust(8)         # => "foo     "
   p "foo".ljust(2)         # => "foo"
   p "foo".ljust(1)         # => "foo"
-#@since 1.8.0
   p "foo".ljust(10, "*")   # => "foo*******"
-#@end
 
 @see [[m:String#center]], [[m:String#rjust]]
 
-#@since 1.8.0
 --- rjust(width, padding = ' ') -> String
-#@else
---- rjust(width) -> String
-#@end
 
 長さ width の文字列に self を右詰めした文字列を返します。
 self の長さが width より長い時には元の文字列の複製を返します。
-#@since 1.8.0
 また、第 2 引数 padding を指定したときは
 空白文字の代わりに padding を詰めます。
-#@end
 
 @param width      返り値の文字列の最小の長さ
-#@since 1.8.0
 @param padding    長さが width になるまで self の左側に詰める文字
-#@end
 
 例:
 
@@ -997,19 +794,15 @@ self の長さが width より長い時には元の文字列の複製を返し�
   p "foo".rjust(8)         # => "     foo"
   p "foo".rjust(2)         # => "foo"
   p "foo".rjust(1)         # => "foo"
-#@since 1.8.0
   p "foo".rjust(10, "*")   # => "*******foo"
-#@end
 
 @see [[m:String#center]], [[m:String#ljust]]
 
 --- chomp(rs = $/) -> String
 
 self の末尾から rs で指定する改行コードを取り除いた文字列を生成して返します。
-#@since 1.8.0
 ただし、rs が "\n" ($/ のデフォルト値) のときは、
 実行環境によらず "\r", "\r\n", "\n" のすべてを改行コードとみなして取り除きます。
-#@end
 
 rs に nil を指定した場合、このメソッドは何もしません。
 
@@ -1023,21 +816,17 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」�
   p "foo\n".chomp("\n")       # => "foo"
   p "foo\r\n".chomp("\r\n")   # => "foo"
 
-#@since 1.8.0
   $/ = "\n"   # デフォルト値と同じ
   p "foo\r".chomp    # => "foo"
   p "foo\r\n".chomp  # => "foo"
   p "foo\n".chomp    # => "foo"
   p "foo\n\r".chomp  # => "foo\n"
-#@end
 
 --- chomp!(rs = $/) -> self | nil
 
 self の末尾から rs で指定する改行コードを取り除きます。
-#@since 1.8.0
 ただし rs が "\n" ($/ のデフォルト値) のときは、
 システムによらず "\r", "\r\n", "\n" のすべてを改行コードとみなして取り除きます。
-#@end
 
 rs に nil を指定した場合、このメソッドは何もしません。
 
@@ -1052,13 +841,11 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」�
   buf.chomp!
   p buf   # => "string"
 
-#@since 1.8.0
   $/ = "\n"   # デフォルトと同じ
   p "foo\r".chomp!    # => "foo"
   p "foo\r\n".chomp!  # => "foo"
   p "foo\n".chomp!    # => "foo"
   p "foo\n\r".chomp!  # => "foo\n"
-#@end
 
 --- chop -> String
 
@@ -1079,7 +866,6 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」�
 
 @return chop! は self を変更して返しますが、取り除く文字がなかった場合は nil を返します。
 
-#@since 1.9.1
 --- clear -> self
 
 文字列の内容を削除して空にします。
@@ -1093,7 +879,6 @@ self を返します。
     str = ""
     str.clear
     p str   # => ""
-#@end
 
 #@#--- clone
 #@#--- dup
@@ -1238,24 +1023,8 @@ str の形式は [[man:tr(1)]] と同じです。
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
-#@until 1.9.1
-処理する文字列の文字コードが Shift JIS で、
-しかも [[m:$KCODE]] が適切に設定されていない場合、
-このメソッドはマルチバイト文字の一部も変換してしまう場合があります。
-逆に、[[m:$KCODE]] を適切に設定しても
-マルチバイト文字のアルファベットは処理できません。
-
 例:
     p "STRing?".downcase   # => "string?"
-
-    # -*- encoding: shift_jis -*-
-    $KCODE = 'n'
-    puts "帰".downcase   # => 蟻
-
-#@else
-例:
-    p "STRing?".downcase   # => "string?"
-#@end
 
 @see [[m:String#downcase!]], [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
@@ -1269,13 +1038,6 @@ str の形式は [[man:tr(1)]] と同じです。
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
-#@until 1.9.1
-処理する文字列の文字コードが Shift JIS で、
-しかも [[m:$KCODE]] が適切に設定されていない場合、
-このメソッドはマルチバイト文字の一部も変換してしまう場合があります。
-逆に、[[m:$KCODE]] を適切に設定しても
-マルチバイト文字のアルファベットは処理できません。
-
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 例:
@@ -1283,20 +1045,6 @@ str の形式は [[man:tr(1)]] と同じです。
     str.downcase!
     p str   # => "string?"
 
-    # -*- encoding: shift_jis -*-
-    $KCODE = 'n'
-    str = "帰"
-    str.downcase!
-    puts str   # => 蟻
-#@else
-@return self を変更して返します。変更が無かった場合は nil を返します。
-
-例:
-    str = "STRing?"
-    str.downcase!
-    p str   # => "string?"
-
-#@end
 @see [[m:String#downcase]], [[m:String#upcase!]], [[m:String#swapcase!]], [[m:String#capitalize!]]
 
 --- dump -> String
@@ -1308,25 +1056,8 @@ str == eval(str.dump) となることが保証されています。
     # p だとさらにバックスラッシュが増えて見にくいので puts している
     puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 
-#@until 1.9.1
---- each(rs = $/)      {|line| ... } -> self
-#@end
 --- each_line(rs = $/) {|line| ... } -> self
-#@since 1.8.7
-#@until 2.0.0
---- lines(rs = $/)     {|line| ... } -> self
-#@end
-#@since 1.9.1
 --- each_line(rs = $/)  -> Enumerator
-#@until 2.0.0
---- lines(rs = $/)      -> Enumerator
-#@end
-#@else
---- each(rs = $/)       -> Enumerable::Enumerator
---- each_line(rs = $/)  -> Enumerable::Enumerator
---- lines(rs = $/)      -> Enumerable::Enumerator
-#@end
-#@end
 
 文字列中の各行に対して繰り返します。
 行の区切りは rs に指定した文字列で、
@@ -1352,7 +1083,6 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
         # => "bb\n"
         # => "cc\n"
     
-#@since 1.8.7
     p "aa\nbb\ncc\n".lines.to_a   # => ["aa\n", "bb\n", "cc\n"]
     p "aa\n".lines.to_a           # => ["aa\n"]
     p "".lines.to_a               # => []
@@ -1360,9 +1090,7 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
     s = "aa\nbb\ncc\n"
     p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
     p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
-#@end
 
-#@since 2.0.0
 @see [[m:String#lines]]
 
 --- lines(rs = $/)               -> [String]
@@ -1386,29 +1114,11 @@ rs に nil を指定すると行区切りなしとみなします。 rs に空�
 [[m:String#each_line]] を使用してください。
 
 @see [[m:String#each_line]]
-#@end
 
 --- each_byte {|byte| ... } -> self
-#@until 2.0.0
---- bytes {|byte| ... } -> self
-#@end
-#@since 1.8.7
-#@since 1.9.1
 --- each_byte -> Enumerator
-#@until 2.0.0
---- bytes     -> Enumerator
-#@end
-#@else
---- each_byte -> Enumerable::Enumerator
---- bytes     -> Enumerable::Enumerator
-#@end
-#@end
 
 文字列の各バイトに対して繰り返します。
-
-#@until 1.8.7
-なお、バイトごとに分割した配列を得たいときは、unpack('C*') を使ってください。
-#@end
 
 例:
     "str".each_byte do |byte|
@@ -1418,11 +1128,6 @@ rs に nil を指定すると行区切りなしとみなします。 rs に空�
         # => 116
         # => 114
 
-#@until 1.8.7
-@see [[m:String#unpack]]
-#@end
-
-#@since 2.0.0
 @see [[m:String#bytes]]
 
 --- bytes               -> [Integer]
@@ -1437,13 +1142,11 @@ rs に nil を指定すると行区切りなしとみなします。 rs に空�
 [[m:String#each_byte]] を使用してください。
 
 @see [[m:String#each_byte]]
-#@end
 
 --- empty? -> bool
 
 文字列が空 (つまり長さ 0) の時、真を返します。
 
-#@since 1.9.1
 --- getbyte(index) -> Integer | nil
 
 index バイト目のバイトを整数で返します。
@@ -1465,8 +1168,6 @@ index に負を指定すると末尾から数えた位置を変更します。
 @param index バイトをセットする位置
 @param b セットするバイト(0 から 255 までの整数)
 @raise IndexError 範囲外に値をセットしようとした場合に発生します。
-
-#@end
 
 --- gsub(pattern, replace) -> String
 
@@ -1521,13 +1222,7 @@ replace に「\」自身を入れたいときは
 @see [[m:String#sub]]
 
 --- gsub(pattern) {|matched| .... } -> String
-#@since 1.8.7
-#@since 1.9.1
 --- gsub(pattern) -> Enumerator
-#@else
---- gsub(pattern) -> Enumerable::Enumerator
-#@end
-#@end
 
 文字列中で pattern にマッチした部分を順番にブロックに渡し、
 その実行結果で置き換えた文字列を生成して返します。
@@ -1548,7 +1243,6 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#sub]], [[m:String#scan]]
 
-#@since 1.9.1
 --- gsub(pattern, hash) -> String
 
 文字列中の pattern にマッチした部分をキーにして hash を引いた値で置き換えます。
@@ -1559,7 +1253,6 @@ replace に「\」自身を入れたいときは
   hash = {'b'=>'B', 'c'=>'C'}
   p "abcabc".gsub(/[bc]/){hash[$&]} #=> "aBCaBC"
   p "abcabc".gsub(/[bc]/, hash)     #=> "aBCaBC"
-#@end
 
 --- gsub!(pattern, replace) -> self | nil
 
@@ -1611,13 +1304,7 @@ replace に「\」自身を入れたいときは
 @see [[m:String#sub]]
 
 --- gsub!(pattern) {|matched| .... } -> self | nil
-#@since 1.8.7
-#@since 1.9.1
 --- gsub!(pattern) -> Enumerator
-#@else
---- gsub!(pattern) -> Enumerable::Enumerator
-#@end
-#@end
 
 文字列中で pattern にマッチする部分全てを順番にブロックに渡し、
 その評価結果に置き換えます。
@@ -1640,7 +1327,6 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#sub]]
 
-#@since 1.9.1
 --- gsub!(pattern, hash) -> self | nil
 
 文字列中の pattern にマッチした部分をキーにして hash を引いた値へ破壊的に置き換えます。
@@ -1656,7 +1342,6 @@ replace に「\」自身を入れたいときは
   str = "abcabc"
   str.gsub!(/[bc]/, hash)
   p str     #=> "aBCaBC"
-#@end
 
 --- hex -> Integer
 
@@ -1690,14 +1375,7 @@ self が空文字列のときは 0 を返します。
 
 文字列中に部分文字列 substr が含まれていれば真を返します。
 
-#@until 1.9.1
-substr が 0 から 255 の範囲の [[c:Fixnum]] の場合、
-文字コードとみなして、その文字が含まれていれば真を返します。
-
-@param substr    検索する文字列もしくは文字コードを表す整数
-#@else
 @param substr    検索する文字列
-#@end
 
 --- index(pattern, pos = 0) -> Integer
 
@@ -1705,20 +1383,11 @@ substr が 0 から 255 の範囲の [[c:Fixnum]] の場合、
 最初に見つかった部分文字列の左端のインデックスを返します。
 見つからなければ nil を返します。
 
-#@since 1.9.1
 引数 pattern は探索する部分文字列または正規表現で指定します。
-#@else
-引数 pattern は探索する部分文字列、
-正規表現、文字コードを示す 0 から 255 の整数のいずれかで指定します。
-#@end
 
 pos が負の場合、文字列の末尾から数えた位置から探索します。
 
-#@since 1.9.1
 @param pattern    探索する部分文字列または正規表現
-#@else
-@param pattern    探索する部分文字列、正規表現、文字コードを示す 0 から 255 の整数のいずれか
-#@end
 @param pos        探索を開始するインデックス
 
 例:
@@ -1732,7 +1401,6 @@ pos が負の場合、文字列の末尾から数えた位置から探索しま�
 
 @see [[m:String#rindex]]
 
-#@since 1.8.0
 --- insert(pos, other) -> self
 
 pos 番目の文字の直前に文字列 other を挿入します。
@@ -1748,26 +1416,15 @@ self[pos, 0] = other と同じ操作です。
 
 @see [[m:String#[]=]]
 
-#@end
-
 --- intern -> Symbol
-#@since 1.8.0
 --- to_sym -> Symbol
-#@end
 
 文字列に対応するシンボル値 [[c:Symbol]] を返します。
 
 なお、このメソッドの逆にシンボルに対応する文字列を得るには
 [[m:Symbol#to_s]] または [[m:Symbol#id2name]] を使います。
 
-#@if (version >= "1.9.1")
-Ruby 1.9 以降では、シンボル文字列にナルキャラクタ("\0")、空の文字列が使用可能になりました。
-#@else
-ナルキャラクタ ("\0") を含む文字列、もしくは空の文字列をinternすると、
-例外 [[c:ArgumentError]] が発生します。
-
-@raise ArgumentError    self が ナルキャラクタ ("\0") を含む文字列、もしくは空の文字列の場合発生します。
-#@end
+シンボル文字列にナルキャラクタ("\0")、空の文字列が使用も可能です。
 
 例:
     p "foo".intern                 # => :foo
@@ -1776,28 +1433,16 @@ Ruby 1.9 以降では、シンボル文字列にナルキャラクタ("\0")、�
 --- length -> Integer
 --- size -> Integer
 
-#@since 1.9.1
 文字列の文字数を返します。バイト数を知りたいときは bytesize メソッドを使ってください。
 
 @see [[m:String#bytesize]]
-#@else
-文字列のバイト数を返します。
-#@end
 
-#@if (version >= "1.8.0")
-#@since 1.9.1
 --- match(regexp, pos = 0) -> MatchData | nil
 --- match(regexp, pos = 0) {|m| ... } -> object
 
 regexp.match(self, pos) と同じです。
-#@else
---- match(regexp) -> MatchData | nil
-
-regexp.match(self) と同じです。
-#@end
 regexp が文字列の場合は、正規表現にコンパイルします。
 詳しくは [[m:Regexp#match]] を参照してください。
-#@end
 
 --- succ -> String
 --- next -> String
@@ -1952,11 +1597,7 @@ self の内容を other の内容で置き換えます。
 
 --- reverse -> String
 
-#@since 1.9.1
 文字列を文字単位で左右逆転した文字列を返します。
-#@else
-文字列をバイト単位で左右逆転した文字列を返します。
-#@end
 
 例:
     p "foobar".reverse   # => "raboof"
@@ -1964,11 +1605,7 @@ self の内容を other の内容で置き換えます。
 
 --- reverse! -> self
 
-#@since 1.9.1
 文字列を文字単位で左右逆転します。
-#@else
-文字列をバイト単位で左右逆転します。
-#@end
 
 例:
     str = "foobar"
@@ -1981,12 +1618,7 @@ self の内容を other の内容で置き換えます。
 最初に見つかった部分文字列の左端のインデックスを返します。
 見つからなければ nil を返します。
 
-#@since 1.9.1
 引数 pattern は探索する部分文字列または正規表現で指定します。
-#@else
-引数 pattern は探索する部分文字列、
-正規表現、文字コードを示す 0 から 255 の整数のいずれかで指定します。
-#@end
 
 pos が負の場合は、文字列の末尾から数えた位置から探索します。
 
@@ -2002,25 +1634,13 @@ rindex と [[m:String#index]] とでは、探索方向だけが逆になりま�
       #  ing
       #   ing          # 右にずらしていってここで見つかる
 
-#@since 1.9.1
     # String#rindex の場合
     p "stringstring".rindex("ing", -1)  # => 9
       #           ing    # インデックス -1 の文字から探索を始める
       #          ing
       #         ing      # 左にずらしていってここで見つかる
-#@else
-    # String#rindex の場合
-    p "stringstring".rindex("ing", -1)  # => 9
-      #           ing    # インデックス -1 のバイトから探索を始める
-      #          ing
-      #         ing      # 左にずらしていってここで見つかる
-#@end
 
-#@since 1.9.1
 @param pattern    探索する部分文字列または正規表現
-#@else
-@param pattern    探索する部分文字列、正規表現、文字コードを示す 0 から 255 の整数のいずれか
-#@end
 @param pos       探索を始めるインデックス
 
 例:
@@ -2084,11 +1704,7 @@ pattern が正規表現で括弧を含む場合は、
 --- slice!(nth) -> Integer
 --- slice!(pos, len) -> String
 --- slice!(substr) -> String
-#@since 1.8.0
 --- slice!(regexp, nth = 0) -> String
-#@else
---- slice!(regexp) -> String
-#@end
 --- slice!(first..last) -> String
 --- slice!(first...last) -> String
 --- slice!(regexp, nth = 0) -> String
@@ -2235,19 +1851,15 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
 
 文字列先頭と末尾の空白文字を全て取り除いた文字列を生成して返します。
 空白文字の定義は " \t\r\n\f\v" です。
-#@since 1.8.0
 また、文字列右側からは "\0" も取り除きますが、
 左側の "\0" は取り除きません。
-#@end
 
 例:
     p "  abc  \r\n".strip    #=> "abc"
     p "abc\n".strip          #=> "abc"
     p "  abc".strip          #=> "abc"
     p "abc".strip            #=> "abc"
-#@since 1.8.0
     p "  \0  abc  \0".strip  # => "\000  abc"   # 右側のみ "\0" も取り除く
-#@end
 
     str = "\tabc\n"
     p str.strip              #=> "abc"
@@ -2260,10 +1872,8 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
 
 先頭と末尾の空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v" です。
-#@since 1.8.0
 また、文字列右側からは "\0" も取り除きますが、
 左側の "\0" は取り除きません。
-#@end
 
 strip! は、内容を変更した self を返します。
 ただし取り除く空白がなかったときは nil を返します。
@@ -2278,15 +1888,12 @@ strip! は、内容を変更した self を返します。
   p str.strip!     #=> nil
   p str            #=> "abc"
 
-#@since 1.8.0
   str = "  \0  abc  \0"
   str.strip!
   p str            # => "\000  abc"   # 右側の "\0" のみ取り除かれる
-#@end
 
 @see [[m:String#strip]], [[m:String#lstrip]]
 
-#@since 1.8.0
 --- lstrip -> String
 
 文字列の先頭にある空白文字を全て取り除いた新しい文字列を返します。
@@ -2300,9 +1907,6 @@ strip! は、内容を変更した self を返します。
 
 @see [[m:String#strip]], [[m:String#rstrip]]
 
-#@end
-
-#@since 1.8.0
 --- lstrip! -> self | nil
 
 文字列の先頭にある空白文字を全て破壊的に取り除きます。
@@ -2319,9 +1923,7 @@ lstrip! は self を変更して返します。
     str = "abc"
     p str.lstrip!   # => nil
     p str           # => "abc"
-#@end
 
-#@since 1.8.0
 --- rstrip -> String
 
 文字列の末尾にある空白文字を全て取り除いた新しい文字列を返します。
@@ -2331,21 +1933,14 @@ lstrip! は self を変更して返します。
     p "  abc\n".rstrip          #=> "  abc"
     p "  abc \t\r\n\0".rstrip   #=> "  abc"
     p "  abc".rstrip            #=> "  abc"
-#@since 1.9.1
     p "  abc\0 ".rstrip         #=> "  abc"
-#@else
-    p "  abc\0 ".rstrip         #=> "  abc\0"
-#@end
 
     str = "abc\n"
     p str.rstrip    #=> "abc"
     p str           #=> "abc\n"  (元の文字列は変化しない)
 
 @see [[m:String#lstrip]],[[m:String#strip]]
- 
-#@end
 
-#@since 1.8.0
 --- rstrip! -> self | nil
 
 文字列の末尾にある空白文字を全て破壊的に取り除きます。
@@ -2361,7 +1956,6 @@ lstrip! は self を変更して返します。
     p str           # => "  abc"
 
 @see [[m:String#rstrip]], [[m:String#lstrip]]
-#@end
 
 --- sub(pattern, replace) -> String
 
@@ -2431,7 +2025,6 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#gsub]]
 
-#@since 1.9.1
 --- sub(pattern, hash) -> String
 
 文字列中の pattern にマッチした部分をキーにして hash を引いた値で置き換えます。
@@ -2442,7 +2035,6 @@ replace に「\」自身を入れたいときは
   hash = {'b'=>'B', 'c'=>'C'}
   p "abcabc".sub(/[bc]/){hash[$&]} #=> "aBCabc"
   p "abcabc".sub(/[bc]/, hash)     #=> "aBCabc"
-#@end
 
 --- sub!(pattern, replace) -> self | nil
 
@@ -2516,7 +2108,6 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#gsub]]
 
-#@since 1.9.1
 --- sub!(pattern, hash) -> String
 
 文字列中の pattern にマッチした部分をキーにして hash を引いた値で破壊的に置き換えます。
@@ -2524,7 +2115,6 @@ replace に「\」自身を入れたいときは
 @param pattern    置き換える文字列のパターン
 @param hash       置き換える文字列を与えるハッシュ
 @return 置換した場合は self、置換しなかった場合は nil
-#@end
 
 --- sum(bits = 16) -> Integer
 
@@ -2560,25 +2150,10 @@ replace に「\」自身を入れたいときは
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
-#@until 1.9.1
-そのため、文字列が Shift JIS エンコーディングで、
-かつ [[m:$KCODE]] が適切に設定されていない場合、
-マルチバイト文字の一部も変換してしまう場合があります。
-逆に、[[m:$KCODE]] を設定しても
-マルチバイト文字のアルファベットは処理しません。
-
 例:
     p "ABCxyz".swapcase   # => "abcXYZ"
     p "Access".swapcase   # => "aCCESS"
 
-    # -*- Coding: shift_jis -*-
-    $KCODE = 'n'
-    puts "蟻".swapcase   # => 帰
-#@else
-例:
-    p "ABCxyz".swapcase   # => "abcXYZ"
-    p "Access".swapcase   # => "aCCESS"
-#@end
 @see [[m:String#swapcase!]], [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
 --- swapcase! -> self | nil
@@ -2590,28 +2165,12 @@ swapcase! は self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
 
 このメソッドはマルチバイト文字を認識しません。
-#@until 1.9.1
-そのため、文字列が Shift JIS エンコーディングで、
-かつ [[m:$KCODE]] が適切に設定されていない場合、
-マルチバイト文字の一部も変換してしまう場合があります。
-逆に、[[m:$KCODE]] を設定しても
-マルチバイト文字のアルファベットは処理しません。
 
 例:
     str = "ABCxyz"
     str.swapcase!
     p str   # => "abcXYZ"
 
-    # -*- Coding: shift_jis -*-
-    $KCODE ='n'
-    puts "蟻".swapcase   # => 帰
-#@else
-
-例:
-    str = "ABCxyz"
-    str.swapcase!
-    p str   # => "abcXYZ"
-#@end
 @see [[m:String#swapcase]], [[m:String#upcase!]], [[m:String#downcase!]], [[m:String#capitalize!]]
 
 --- to_f -> Float
@@ -2662,7 +2221,6 @@ swapcase! は self を変更して返しますが、
   p "0x11".to_i   # => 0
   p "".to_i       # => 0
 
-#@since 1.8.0
 基数を指定することでデフォルトの 10 進以外に 2 〜 36 進数表現へ変換できます。
 それぞれ Ruby の整数リテラルで使用可能なプリフィクスは無視されます。
 また、base に 0 を指定するとプリフィクスから基数を判断します。
@@ -2686,7 +2244,6 @@ swapcase! は self を変更して返しますが、
   p "010".to_i(0)   # => 8
   p "0d10".to_i(0)  # => 10
   p "0x10".to_i(0)  # => 16
-#@end
 
 @param base    進数を指定する整数。0 か、2〜36 の整数。
 @return        整数
@@ -2881,22 +2438,6 @@ tr_s! は置換された部分だけを squeeze! します。
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
-#@until 1.9.1
-また、マルチバイト文字列に対応するためには
-[[m:$KCODE]] を設定する必要があります。
-文字列が Shift JIS エンコーディングで
-[[m:$KCODE]] が適切に設定されていないときは
-以下のようにマルチバイト文字の一部も変換してしまいます。
-
-  #coding:Shift_JIS
-  $KCODE = "SJIS"
-  puts "蟻".upcase   # => 蟻   ($KCODE が適切なので正しく無視された)
-
-  $KCODE = "NONE"
-  puts "蟻".upcase   # => 帰   ($KCODE が不適切なので誤って処理された)
-
-#@end
-
 例:
     p "stRIng? STring.".upcase   # => "STRING? STRING."
 
@@ -2914,25 +2455,6 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
-#@until 1.9.1
-また、マルチバイト文字列に対応するためには
-[[m:$KCODE]] を設定する必要があります。
-文字列が Shift JIS エンコーディングで
-[[m:$KCODE]] が適切に設定されていないときは
-以下のようにマルチバイト文字の一部も変換してしまいます。
-
-  #coding:Shift_JIS
-  $KCODE = "SJIS"
-  str = "蟻"
-  str.upcase!
-  puts str   # => 蟻   ($KCODE が適切なので正しく無視された)
-  
-  $KCODE = "NONE"
-  str = "蟻"
-  str.upcase!
-  puts str   # => 帰   ($KCODE が不適切なので誤って処理された)
-
-#@end
 例:
     buf = "stRIng? STring."
     buf.upcase!
@@ -2941,11 +2463,7 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
 @see [[m:String#upcase]], [[m:String#downcase!]],
      [[m:String#swapcase!]], [[m:String#capitalize!]]
 
-#@since 1.8.7
 --- upto(max, exclusive = false) {|s| ... } -> self
-#@else
---- upto(max) {|s| ... } -> self
-#@end
 
 self から始めて max まで
 「次の文字列」を順番にブロックに与えて繰り返します。
@@ -2963,9 +2481,7 @@ self から始めて max まで
 
 @param max    繰り返しをやめる文字列
 
-#@since 1.8.7
 @param exclusive max を含むかどうか。false の場合は max を含む。
-#@end
 
 --- eql?(other) -> bool
 
@@ -2983,10 +2499,6 @@ str が "string" という内容の文字列でありさえすれば常に true 
 [[m:String#downcase]] で大文字小文字を揃えてから比較してください。
 
 [[c:Hash]] クラス内での比較に使われます。
-
-#@until 1.9.1
-このメソッドの動作は組み込み変数 [[m:$=]] には影響されません。
-#@end
 
 @param other    任意のオブジェクト
 @return         true か false
@@ -3021,12 +2533,6 @@ eql? で等しい文字列は、常にハッシュ値も等しくなります。
 現在の実装では、Ruby のリテラル形式を使って、
 文字列中の不可視文字をエスケープシーケンスに変換します。
 
-#@until 1.9.1
-$KCODE が設定されている場合は、
-そのエンコーディング内の適正なマルチバイト文字をそのまま出力します。
-それ以外の不可視文字はエスケープシーケンスを使って出力されます。
-#@end
-
 このメソッドは主にデバッグのために用意されています。
 永続化などの目的で文字列をダンプしたいときは、
 [[m:String#dump]] を使うべきです。
@@ -3039,15 +2545,12 @@ $KCODE が設定されている場合は、
 
 @see [[m:String#dump]]
 
-#@since 1.9.1
 --- chr -> String
 
 self の最初の文字だけを含む文字列を返します。
 
 @see [[m:String#ord]], [[m:Integer#chr]]
 
-#@end
-#@since 1.8.7
 --- start_with?(*strs) -> bool
 
 self の先頭が strs のいずれかであるとき true を返します。
@@ -3089,11 +2592,7 @@ self がセパレータを含まないときは、
 
   p "axaxa".partition("x")   # => ["a", "x", "axa"]
   p "aaaaa".partition("x")   # => ["aaaaa", "", ""]
-#@since 1.9.1
   p "aaaaa".partition("")    # => ["", "", "aaaaa"]
-#@else
-  p "aaaaa".partition("")    # => ["aaaaa", "", ""]
-#@end
 
 @see [[m:String#rpartition]], [[m:String#split]]
 
@@ -3116,30 +2615,15 @@ self がセパレータを含まないときは、
 @see [[m:String#partition]], [[m:String#split]]
 
 --- each_char {|cstr| block } -> self
-#@until 2.0.0
---- chars {|cstr| block }     -> self
-#@end
-#@since 1.9.1
 --- each_char -> Enumerator
-#@until 2.0.0
---- chars     -> Enumerator
-#@end
-#@else
---- each_char -> Enumerable::Enumerator
---- chars     -> Enumerable::Enumerator
-#@end
 
 文字列の各文字に対して繰り返します。
-#@until 1.9.1
-[[m:$KCODE]] が適切に設定されていれば、マルチバイト文字も正しく扱われます。
-#@end
 
 たとえば、
   "hello世界".each_char {|c| print c, ' ' }
 は次のように出力されます。
   h e l l o 世 界
 
-#@since 2.0.0
 @see [[m:String#chars]]
 
 --- chars                 -> [String]
@@ -3154,26 +2638,16 @@ self がセパレータを含まないときは、
 [[m:String#each_char]] を使用してください。
 
 @see [[m:String#each_char]]
-#@end
 
-#@since 1.9.1
 --- each_codepoint {|codepoint| block } -> self
-#@until 2.0.0
---- codepoints {|codepoint| block }     -> self
-#@end
 --- each_codepoint -> Enumerator
-#@until 2.0.0
---- codepoints     -> Enumerator
-#@end
 
 文字列の各コードポイントに対して繰り返します。
 
    #coding:UTF-8
    "hello わーるど".each_codepoint.to_a
    # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
-#@end
 
-#@since 2.0.0
 @see [[m:String#codepoints]]
 
 --- codepoints                      -> [Integer]
@@ -3190,7 +2664,6 @@ self がセパレータを含まないときは、
 [[m:String#each_codepoint]] を使用してください。
 
 @see [[m:String#each_codepoint]]
-#@end
 
 --- bytesize -> Integer
 
@@ -3200,17 +2673,11 @@ self がセパレータを含まないときは、
 
   #coding:UTF-8
   # 実行結果は文字コードによって異なります。
-#@since 1.9.1
   p "いろは".size     #=> 3
-#@else
-  p "いろは".size     #=> 6
-#@end
   p "いろは".bytesize #=> 9
 
 @see [[m:String#size]]
 
-#@end
-#@since 1.9.1
 --- ord -> Integer
 
 文字列の最初の文字の文字コードを整数で返します。
@@ -3404,8 +2871,6 @@ self のエンコーディングが使われます。変換後の self を返し
 
 @see [[m:Kernel.#Rational]]
 
-#@end
-#@since 1.9.3
 --- byteslice(nth)         -> String | nil
 
 nth バイト目の文字を返します。nth が負の場合は文字列の末尾から数えます。
@@ -3465,13 +2930,10 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
   a = "world"
   a.prepend("hello ") # => "hello world"
   a                   # => "hello world"
-#@end
 
-#@since 2.0.0
 --- b -> String
 
 self の文字エンコーディングを ASCII-8BIT にした文字列を返します。
-#@end
 
 #@since 2.1.0
 --- scrub               -> String
