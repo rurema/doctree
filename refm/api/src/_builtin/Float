@@ -17,26 +17,6 @@ Electronics Engineers: 米国電気電子技術者協会) 754 を参照してく
 [[m:Math::PI]] などの数学定数については [[c:Math]] を
 参照してください。
 
-== Class Methods
-
-#@until 1.9.1
---- induced_from(num) -> Float
-num を Float に変換した結果を返します。
-
-@param num 変換前の数値
-
-@raise TypeError [[c:Fixnum]], [[c:Bignum]], [[c:Float]]以外を入力した場合に発生します
-
-
-  p Float.induced_from(30) #=> 30.0
-  p Float.induced_from(Math::PI) #=> 3.14159265358979
-  begin
-    Float.induced_from("1.732")
-  rescue TypeError
-    p $! #=> #<TypeError: failed to convert String into Float>
-  end
-#@end
-
 == Instance Methods
 
 --- +(other) -> Float

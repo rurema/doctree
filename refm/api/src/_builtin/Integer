@@ -8,27 +8,6 @@ include Precision
 す。ビット操作において整数は無限の長さのビットストリングとみなすことが
 できます。
 
-== Class Methods
-
-#@until 1.9.1
---- induced_from(num) -> Integer
-
-num を Integer に変換した結果を返します。
-引数が数値の場合は小数部が切り捨てられ、そうでない場合はTypeErrorをraiseします。
-
-  Integer.induced_from 1.4  #=> 1
-  Integer.induced_from 1.9  #=> 1
-  Integer.induced_from -1.9 #=> -1
-  Integer.induced_from '1'  #=> TypeError
-
-
-include している [[c:Precision]] モジュールの [[m:Precision.induced_from]] を
-上書きしています。
-
-@param num   数値
-@return      数値
-#@end
-
 == Instance Methods
 
 #@until 1.9.1
