@@ -93,14 +93,22 @@ new に渡されたブロックが終了した時点で each の繰り返しが�
 
 == Methods
 
---- each {...} -> object
+--- each {...}        -> object
+--- each              -> self
+--- each(*args) {...} -> object
+--- each(*args)       -> Enumerator
 
 生成時のパラメータに従ってブロックを繰り返します。
+*args を渡した場合は、生成時のパラメータ内引数末尾へ *args を追加した状態で繰り返します。
+ブロック付きで呼び出された場合は、
 生成時に指定したイテレータの戻り値をそのまま返します。
 
-例:
+@param args 末尾へ追加する引数
+
+例1:
+
   str = "Yet Another Ruby Hacker"
-  
+
   enum = Enumerator.new(str, :scan, /\w+/)
   enum.each {|word| p word }              # => "Yet"
                                           #    "Another"
@@ -111,6 +119,31 @@ new に渡されたブロックが終了した時点で each の繰り返しが�
                                           #    "Another"
                                           #    "Ruby"
                                           #    "Hacker"
+
+例2:
+
+  "Hello, world!".scan(/\w+/)                     # => ["Hello", "world"]
+  "Hello, world!".to_enum(:scan, /\w+/).to_a      # => ["Hello", "world"]
+  "Hello, world!".to_enum(:scan).each(/\w+/).to_a # => ["Hello", "world"]
+
+  obj = Object.new
+
+  def obj.each_arg(a, b=:b, *rest)
+    yield a
+    yield b
+    yield rest
+    :method_returned
+  end
+
+  enum = obj.to_enum :each_arg, :a, :x
+
+  enum.each.to_a                  # => [:a, :x, []]
+  enum.each.equal?(enum)          # => true
+  enum.each { |elm| elm }         # => :method_returned
+
+  enum.each(:y, :z).to_a          # => [:a, :x, [:y, :z]]
+  enum.each(:y, :z).equal?(enum)  # => false
+  enum.each(:y, :z) { |elm| elm } # => :method_returned
 
 --- next -> object
 「次」のオブジェクトを返します。
