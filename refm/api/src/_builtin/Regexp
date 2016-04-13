@@ -129,7 +129,7 @@ string の中で正規表現において特別な意味を持つ文字の直前�
 
 正規表現全体がマッチしなかった場合、引数なしの
 Regexp.last_match はnil を返すため、
-last_match[1] の形式では例外 [[c:NameError]] が発生します。
+last_match[1] の形式では例外 [[c:NoMethodError]] が発生します。
 対して、last_match(1) は nil を返します。
 
   str = "This is Regexp"
