@@ -321,12 +321,14 @@ throw が発生しなかったときは proc の返り値を返します。
       rb_define_method(Foo, "abort", foo_abort, 0);
   }
 
+#@until 2.2.0
 --- void rb_check_safe_str(VALUE x)
 
 マクロ Check_SafeStr の本体です。
 
 この API は obsolete です。
 SafeStringValue() を使ってください。
+#@end
 
 --- void rb_clear_cache(void)
 
@@ -789,7 +791,11 @@ void *arg;
 
 Thread#pass の実体。
 
+#@until 2.2.0
 --- void rb_thread_polling(void)
+
+この関数は deprecated です。[[f:rb_thread_wait_for]] を使用してください。
+#@end
 
 --- static VALUE rb_thread_priority(VALUE thread)
 
@@ -834,12 +840,16 @@ Thread#pass の実体。
 
 see also: [[f:rb_thread_wait_fd]], [[f:rb_thread_wait_for]]
 
+#@until 2.2.0
 --- int rb_thread_select(int max, fd_set *read, fd_set *write, fd_set *except, struct timeval *timeout)
+
+この関数は deprecated です。[[f:rb_thread_fd_select]] を使用してください。
 
 Ruby のスレッドは実装のために内部で select(2) を使っているため、
 拡張ライブラリ内で独自に select(2) を使った場合の動作は保証されません。
 代わりにこの関数 rb_thread_select を使ってください。
 引数の意味は select(2) と同じです。
+#@end
 
 --- void rb_thread_signal_raise(char *sig)
 

@@ -16,9 +16,11 @@ type 型のメモリを n 個スタックフレームに割り当てる。
 obj の構造体型 ID を返します。
 [[f:SPECIAL_CONST_P]](obj) が真のオブジェクトに対して使うと落ちます。
 
+#@until 2.2.0
 --- void Check_SafeStr(VALUE v)
 
 古い API です。[[f:SafeStringValue]] を使ってください。
+#@end
 
 --- void Check_Type(VALUE val, int typeflag)
 
