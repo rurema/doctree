@@ -82,8 +82,22 @@ write が真のときは name= を定義します。
 
 --- VALUE rb_define_class_under(VALUE outer, const char *name, VALUE super)
 
-クラス super の下位クラス outer::name
-を作成し返します。
+superのサブクラスとして新しいRubyクラスを定義し，outerの定数として定義
+して返します。
+
+@param outer 定義するクラスが定数として所属するクラス
+
+@param name クラス名
+
+@param super 継承元のクラス。NULL を指定した場合は [[c:Object]] クラス
+
+@raise TypeError 引数 name と同じ名前の定数が既に存在し、それが
+                 [[c:Class]] オブジェクトではない場合に発生します。
+
+#@since 2.3.0
+@raise TypeError 定義済みのクラスと継承元のクラスが一致しない場合に発生
+                 します。
+#@end
 
 --- void rb_define_global_function(const char *name, VALUE (*func)(), int argc)
 
