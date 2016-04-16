@@ -107,6 +107,12 @@ GC を起動します。
 
 ポインタ addr が指す変数を GC の対象から外します。
 
+#@until 2.2.0
+-- void rb_gc_set_params(void)
+
+この関数は deprecated です。内部関数になりました。
+#@end
+
 --- void rb_global_variable(VALUE *var)
 
 [[f:rb_gc_register_address]] と同じです。

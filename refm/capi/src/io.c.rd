@@ -56,3 +56,9 @@ mode に "+" が含まれれば、子プロセスの標準入出力を
 
 生成した IO オブジェクトを返します。
 pnameが "-" であれば、子プロセスには、nil を返します
+
+#@until 2.2.0
+--- void rb_read_check(FILE *fp)
+
+この関数は deprecated です。
+#@end
