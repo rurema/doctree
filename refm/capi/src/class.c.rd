@@ -82,8 +82,8 @@ write が真のときは name= を定義します。
 
 --- VALUE rb_define_class_under(VALUE outer, const char *name, VALUE super)
 
-superのサブクラスとして新しいRubyクラスを定義し，outerの定数として定義
-して返します。
+super のサブクラスとして新しい Ruby クラスを、outer の定数として定義し
+て返します。
 
 @param outer 定義するクラスが定数として所属するクラス
 
