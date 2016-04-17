@@ -35,9 +35,7 @@ CGI で利用するユーティリティメソッドを定義したライブラ�
         #=> "http://www.example.com/index.rss"
 
 --- escapeHTML(string) -> String
-#@since 1.9.1
 --- escape_html(string) -> String
-#@end
 
 与えられた文字列中の &"<> を実体参照に置換した文字列を新しく作成し返します。
 
