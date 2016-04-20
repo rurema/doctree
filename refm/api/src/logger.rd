@@ -564,6 +564,7 @@ include Logger::Severity
 @see [[m:IO#write]]
 
 #@since 1.8.3
+#@until 2.3.0
 = class Logger::LogDevice::LogDeviceMutex < Object
 include MonitorMixin
 
@@ -571,6 +572,7 @@ include MonitorMixin
 
 @see [[c:MonitorMixin]]
 
+#@end
 #@end
 
 = module Logger::Severity
