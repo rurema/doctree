@@ -6,7 +6,7 @@ category FileFormat
 RSS を扱うためのライブラリです。
 
 === 参考
-  * [[url:http://www.cozmixng.org/~rwiki/?cmd=view;name=RSS+Parser]]
+
   * RSS 0.91 [[url:http://backend.userland.com/rss091]]
   * RSS 1.0  [[url:http://purl.org/rss/1.0/spec]]  
   * RSS 2.0  [[url:http://www.rssboard.org/rss-specification]]
