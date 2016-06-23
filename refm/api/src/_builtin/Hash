@@ -336,6 +336,21 @@ self に対応する [[c:Proc]] オブジェクトを返します。
   h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
   p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
 
+==== 参考
+値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
+
+  def safe_invert(orig_hash)
+    result = Hash.new{|h,key| h[key] = [] }
+    orig_hash.each{|key, value|
+      result[value] << key
+    }
+    result
+  end
+  p safe_invert({"a"=>1, "b"=>1, "c"=>3})
+      #=> {1=>["a", "b"], 3=>["c"]}
+  
+  #転載：Rubyレシピブック No.120
+
 #@since 1.9.1
 @see [[m:Hash#key]]
 #@else
