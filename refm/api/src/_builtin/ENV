@@ -293,7 +293,7 @@ self を返します。
 
 例:
 
-  ENV.update({'FOO','foo', 'BAR','bar'})
+  ENV.update({'FOO' => 'foo', 'BAR' => 'bar'})
   p ENV.values_at(*%w(FOO BAR BAZ))   # => ["foo", "bar", nil]
 
 @param key 環境変数名を指定します。文字列で指定します。文字列で指定しま
