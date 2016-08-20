@@ -88,6 +88,7 @@ ruby: illegal switch in RUBYOPT: -y (RuntimeError)
       set RUBYLIB=%HOMEDRIVE%%HOMEPATH%\ruby\lib;\opt\ruby\lib
 //}
 
+#@until 2.2.0
 : RUBYLIB_PREFIX
 
 #@since 1.9.1
@@ -109,6 +110,7 @@ ruby: illegal switch in RUBYOPT: -y (RuntimeError)
 //emlist{
       set RUBYLIB_PREFIX=/usr/local/lib/ruby;d:/ruby
 //}
+#@end
 
 : RUBYSHELL
 
