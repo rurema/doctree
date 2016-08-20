@@ -15,6 +15,7 @@
   * SIGQUIT
   * SIGUSR1
   * SIGUSR2
+  * SIGTERM
 
 なお、SIGINT シグナルを受けた場合は SignalException の下位クラスである
 [[c:Interrupt]] が発生します。
