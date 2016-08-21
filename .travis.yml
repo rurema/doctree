@@ -1,6 +1,6 @@
 sudo: false
 rvm:
-  - 2.2.2
+  - 2.3.1
 notifications:
   recipients:
     - okkez000@gmail.com
