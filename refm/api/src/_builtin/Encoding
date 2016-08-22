@@ -306,7 +306,7 @@ Big5-HKSCS エンコーディングです。
 香港で使われている Big5 の亜種です。
 
 @see [[url:http://www.iana.org/assignments/charset-reg/Big5-HKSCS]],
-     [[url:http://www.ogcio.gov.hk/ccli/eng/hkscs/mapping_table_2008.html]]
+     [[url:http://www.ogcio.gov.hk/en/business/tech_promotion/ccli/hkscs/]]
 
 
 --- CP951 -> Encoding
@@ -778,8 +778,8 @@ SJIS-DoCoMo エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 DoCoMo の携帯電話で使われる絵文字が含まれています。
 
-@see [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
-     [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
+@see [[url:https://www.nttdocomo.co.jp/english/service/developer/make/content/pictograph/basic/index.html]],
+     [[url:https://www.nttdocomo.co.jp/english/service/developer/make/content/pictograph/extention/index.html]]
 
 
 --- SJIS_KDDI -> Encoding
@@ -800,9 +800,7 @@ SJIS-SoftBank エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 SoftBank の携帯電話で使われる絵文字が含まれています。
 
-@see [[url:http://creation.mb.softbank.jp/web/web_pic_about.html]],
-     [[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
-
+@see [[url:http://creation.mb.softbank.jp/mc/tech/tech_pic/pic_index.html]]
 
 --- UTF8_DOCOMO -> Encoding
 --- UTF8_DoCoMo -> Encoding
@@ -812,9 +810,8 @@ UTF-8 の亜種です。
 DoCoMo の携帯電話で使われる絵文字が含まれています。
 
 
-@see [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
-     [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
-
+@see [[url:https://www.nttdocomo.co.jp/english/service/developer/make/content/pictograph/basic/index.html]],
+     [[url:https://www.nttdocomo.co.jp/english/service/developer/make/content/pictograph/extention/index.html]]
 
 --- UTF8_KDDI -> Encoding
 
@@ -822,7 +819,6 @@ UTF8-KDDI エンコーディングです。
 
 UTF8 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
-
 
 @see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
 
@@ -833,10 +829,7 @@ UTF8-SoftBank エンコーディングです。
 UTF-8 の亜種です。
 SoftBank の携帯電話で使われる絵文字が含まれています。
 
-
-@see [[url:http://creation.mb.softbank.jp/web/web_pic_about.html]],
-     [[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
-
+@see [[url:http://creation.mb.softbank.jp/mc/tech/tech_pic/pic_index.html]]
 
 #@end
 
@@ -1142,7 +1135,7 @@ Emacs-Mule エンコーディングです。
 
 Emacsの多言語化(Mule)で使われているステートレスのエンコーディングです。
 
-@see [[url:http://www.m17n.org/mule/pricai96/mule.en.html]]
+@see [[url:http://web.archive.org/web/20100714080650/http://www.m17n.org/mule/pricai96/mule.en.html]]
 
 
 = class EncodingError < StandardError
