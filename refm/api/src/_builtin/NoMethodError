@@ -6,14 +6,21 @@
 例:
 
   self.bar
-  => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
+  # => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
+
+プライベートなインスタンスメソッドを呼び出そうとした場合にも発生します。
+
+例:
+
+  "".puts
+  # => NoMethodError: private method `puts' called for "":String
 
 メソッド呼び出しの形式でなければ [[c:NameError]] 例外が発生します。
 
 例:
 
   bar
-  => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
+  # => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
 
 == Class Methods
 
