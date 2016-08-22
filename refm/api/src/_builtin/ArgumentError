@@ -1,6 +1,6 @@
 = class ArgumentError < StandardError
 
-引数の数があっていないときや、数は合っていて、期待される振る舞いを持ってはいるが、期待される値ではないときに発生します（cf. [[c:TypeError]] ）。
+引数の数があっていないときや、数は合っていて、期待される振る舞いを持ってはいるが、期待される値ではないときに発生します。
 
 例:
 
@@ -8,3 +8,5 @@
   Array.new(-1) # => negative array size (ArgumentError)
 
 など
+
+@see [[c:TypeError]]
