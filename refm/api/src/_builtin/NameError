@@ -2,6 +2,11 @@
 
 未定義のローカル変数や定数を使用したときに発生します。
 
+例:
+
+  bar
+  # => NameError: undefined local variable or method `bar' for main:Object
+
 == Class Methods
 
 --- new(error_message = "", name = nil) -> NameError
