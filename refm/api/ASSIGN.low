@@ -7,12 +7,12 @@ bigdecimal/ludcmp               sho-h           done
 bigdecimal/newton               sho-h           done
 complex                         bornite         done
 curses                          kouji           bundle gem in 2.1.0
-dl                                                          
-dl/Symbol                       
-dl/import                       
-dl/struct                       
-dl/types                        
-dl/win32
+dl                                              deprecated in 2.2.0
+dl/Symbol                                       deprecated in 2.2.0
+dl/import                                       deprecated in 2.2.0
+dl/struct                                       deprecated in 2.2.0
+dl/types                                        deprecated in 2.2.0
+dl/win32                                        deprecated in 2.2.0
 dl/dl2                          ohai            done
 drb                             ohai            done
 fiddle                          ohai            done
@@ -24,7 +24,7 @@ rexml                           ohai            done
 rinda/rinda                     ohai
 rinda/tuplespace                ohai
 rss
-syck
+syck                                            deprecated in 2.0.0
 win32/registry
 xmlrpc                                          bundle gem in 2.4.0
 
