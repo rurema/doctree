@@ -6,7 +6,7 @@ bigdecimal/jacobian             sho-h           done
 bigdecimal/ludcmp               sho-h           done
 bigdecimal/newton               sho-h           done
 complex                         bornite         done
-curses                          kouji
+curses                          kouji           bundle gem in 2.1.0
 dl                                                          
 dl/Symbol                       
 dl/import                       
@@ -26,193 +26,193 @@ rinda/tuplespace                ohai
 rss
 syck
 win32/registry
-xmlrpc                          
+xmlrpc                                          bundle gem in 2.4.0
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 soap                                            deprecated in 1.9.1
 wsdl                                            deprecated in 1.9.1
 xsd                                             deprecated in 1.9.1
-tk
-tcltklib
-tkutil
-multi-tk
-remote-tk
-tcltk
-tkafter
-tkconsole
-tkmacpkg
-tkscrollbox
-tkbgerror
-tkdialog
-tkmenubar
-tktext
-tkcanvas
-tkentry
-tkmngfocus
-tkvirtevent
-tkclass
-tkfont
-tkpalette
-tkwinpkg
-tk/composite
-tk/clock
-tk/optionobj
-tk/after
-tk/canvas
-tk/macpkg
-tk/optiondb
-tk/validation
-tk/message
-tk/canvastag
-tk/bgerror
-tk/itemfont
-tk/wm
-tk/autoload
-tk/scrollbar
-tk/menuspec
-tk/scrollbox
-tk/virtevent
-tk/scale
-tk/winpkg
-tk/root
-tk/spinbox
-tk/itemconfig
-tk/selection
-tk/checkbutton
-tk/listbox
-tk/texttag
-tk/textwindow
-tk/textmark
-tk/menubar
-tk/txtwin_abst
-tk/msgcat
-tk/kinput
-tk/clipboard
-tk/menu
-tk/text
-tk/console
-tk/dialog
-tk/button
-tk/panedwindow
-tk/labelframe
-tk/toplevel
-tk/font
-tk/encodedstr
-tk/namespace
-tk/textimage
-tk/frame
-tk/event
-tk/image
-tk/scrollable
-tk/palette
-tk/bindtag
-tk/entry
-tk/mngfocus
-tk/winfo
-tk/label
-tk/grid
-tk/tagfont
-tk/place
-tk/xim
-tk/pack
-tk/radiobutton
-tk/package
-tk/timer
-tk/variable
+tk                                              bundle gem in 2.4.0
+tcltklib                                        bundle gem in 2.4.0
+tkutil						bundle gem in 2.4.0
+multi-tk					bundle gem in 2.4.0
+remote-tk					bundle gem in 2.4.0
+tcltk						bundle gem in 2.4.0
+tkafter						bundle gem in 2.4.0
+tkconsole					bundle gem in 2.4.0
+tkmacpkg					bundle gem in 2.4.0
+tkscrollbox					bundle gem in 2.4.0
+tkbgerror					bundle gem in 2.4.0
+tkdialog					bundle gem in 2.4.0
+tkmenubar					bundle gem in 2.4.0
+tktext						bundle gem in 2.4.0
+tkcanvas					bundle gem in 2.4.0
+tkentry						bundle gem in 2.4.0
+tkmngfocus					bundle gem in 2.4.0
+tkvirtevent					bundle gem in 2.4.0
+tkclass						bundle gem in 2.4.0
+tkfont						bundle gem in 2.4.0
+tkpalette					bundle gem in 2.4.0
+tkwinpkg					bundle gem in 2.4.0
+tk/composite					bundle gem in 2.4.0
+tk/clock					bundle gem in 2.4.0
+tk/optionobj					bundle gem in 2.4.0
+tk/after					bundle gem in 2.4.0
+tk/canvas					bundle gem in 2.4.0
+tk/macpkg					bundle gem in 2.4.0
+tk/optiondb					bundle gem in 2.4.0
+tk/validation					bundle gem in 2.4.0
+tk/message					bundle gem in 2.4.0
+tk/canvastag					bundle gem in 2.4.0
+tk/bgerror					bundle gem in 2.4.0
+tk/itemfont					bundle gem in 2.4.0
+tk/wm						bundle gem in 2.4.0
+tk/autoload					bundle gem in 2.4.0
+tk/scrollbar					bundle gem in 2.4.0
+tk/menuspec					bundle gem in 2.4.0
+tk/scrollbox					bundle gem in 2.4.0
+tk/virtevent					bundle gem in 2.4.0
+tk/scale					bundle gem in 2.4.0
+tk/winpkg					bundle gem in 2.4.0
+tk/root						bundle gem in 2.4.0
+tk/spinbox					bundle gem in 2.4.0
+tk/itemconfig					bundle gem in 2.4.0
+tk/selection					bundle gem in 2.4.0
+tk/checkbutton					bundle gem in 2.4.0
+tk/listbox					bundle gem in 2.4.0
+tk/texttag					bundle gem in 2.4.0
+tk/textwindow					bundle gem in 2.4.0
+tk/textmark					bundle gem in 2.4.0
+tk/menubar					bundle gem in 2.4.0
+tk/txtwin_abst					bundle gem in 2.4.0
+tk/msgcat					bundle gem in 2.4.0
+tk/kinput					bundle gem in 2.4.0
+tk/clipboard					bundle gem in 2.4.0
+tk/menu						bundle gem in 2.4.0
+tk/text						bundle gem in 2.4.0
+tk/console					bundle gem in 2.4.0
+tk/dialog					bundle gem in 2.4.0
+tk/button					bundle gem in 2.4.0
+tk/panedwindow					bundle gem in 2.4.0
+tk/labelframe					bundle gem in 2.4.0
+tk/toplevel					bundle gem in 2.4.0
+tk/font						bundle gem in 2.4.0
+tk/encodedstr					bundle gem in 2.4.0
+tk/namespace					bundle gem in 2.4.0
+tk/textimage					bundle gem in 2.4.0
+tk/frame					bundle gem in 2.4.0
+tk/event					bundle gem in 2.4.0
+tk/image					bundle gem in 2.4.0
+tk/scrollable					bundle gem in 2.4.0
+tk/palette					bundle gem in 2.4.0
+tk/bindtag					bundle gem in 2.4.0
+tk/entry					bundle gem in 2.4.0
+tk/mngfocus					bundle gem in 2.4.0
+tk/winfo					bundle gem in 2.4.0
+tk/label					bundle gem in 2.4.0
+tk/grid						bundle gem in 2.4.0
+tk/tagfont					bundle gem in 2.4.0
+tk/place					bundle gem in 2.4.0
+tk/xim						bundle gem in 2.4.0
+tk/pack						bundle gem in 2.4.0
+tk/radiobutton					bundle gem in 2.4.0
+tk/package					bundle gem in 2.4.0
+tk/timer					bundle gem in 2.4.0
+tk/variable                                     bundle gem in 2.4.0
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-tkextlib/ICONS
-tkextlib/blt
-tkextlib/blt/barchart
-tkextlib/blt/bitmap
-tkextlib/blt/busy
-tkextlib/blt/component
-tkextlib/blt/container
-tkextlib/blt/cutbuffer
-tkextlib/blt/dragdrop
-tkextlib/blt/eps
-tkextlib/blt/graph
-tkextlib/blt/htext
-tkextlib/blt/setup
-tkextlib/blt/spline
-tkextlib/blt/stripchart
-tkextlib/blt/table
-tkextlib/blt/tabnotebook
-tkextlib/blt/tabset
-tkextlib/blt/ted
-tkextlib/blt/tile
-tkextlib/blt/tree
-tkextlib/blt/treeview
-tkextlib/blt/unix_dnd
-tkextlib/blt/vector
-tkextlib/blt/watch
-tkextlib/blt/win_printer
-tkextlib/blt/winop
-tkextlib/bwidget
-tkextlib/itcl
-tkextlib/itk
-tkextlib/iwidgets
-tkextlib/pkg_checker
-tkextlib/tcllib
-tkextlib/tcllib/autoscroll
-tkextlib/tcllib/ctext
-tkextlib/tcllib/cursor
-tkextlib/tcllib/datefield
-tkextlib/tcllib/dialog
-tkextlib/tcllib/getstring
-tkextlib/tcllib/history
-tkextlib/tcllib/ico
-tkextlib/tcllib/ip_entry
-tkextlib/tcllib/panelframe
-tkextlib/tcllib/plotchart
-tkextlib/tcllib/ruler
-tkextlib/tcllib/screenruler
-tkextlib/tcllib/scrollwin
-tkextlib/tcllib/setup
-tkextlib/tcllib/style
-tkextlib/tcllib/superframe
-tkextlib/tcllib/swaplist
-tkextlib/tcllib/tablelist
-tkextlib/tcllib/tablelist_core
-tkextlib/tcllib/tablelist_tile
-tkextlib/tcllib/tkpiechart
-tkextlib/tcllib/tooltip
-tkextlib/tcllib/widget
-tkextlib/tclx
-tkextlib/tile
-tkextlib/tile/dialog
-tkextlib/tile/setup
-tkextlib/tile/style
-tkextlib/tile/tbutton
-tkextlib/tile/tcheckbutton
-tkextlib/tile/tcombobox
-tkextlib/tile/tentry
-tkextlib/tile/tframe
-tkextlib/tile/tlabel
-tkextlib/tile/tlabelframe
-tkextlib/tile/tmenubutton
-tkextlib/tile/tnotebook
-tkextlib/tile/tpaned
-tkextlib/tile/tprogressbar
-tkextlib/tile/tradiobutton
-tkextlib/tile/treeview
-tkextlib/tile/tscale
-tkextlib/tile/tscrollbar
-tkextlib/tile/tseparator
-tkextlib/tile/tsquare
-tkextlib/tkDND
-tkextlib/tkHTML
-tkextlib/tkimg
-tkextlib/tktable
-tkextlib/tktrans
-tkextlib/treectrl
-tkextlib/vu
-tkextlib/vu/bargraph
-tkextlib/vu/charts
-tkextlib/vu/dial
-tkextlib/vu/pie
-tkextlib/vu/setup
-tkextlib/vu/spinbox
-tkextlib/winico
+tkextlib/ICONS                                  bundle gem in 2.4.0
+tkextlib/blt                                    bundle gem in 2.4.0
+tkextlib/blt/barchart				bundle gem in 2.4.0
+tkextlib/blt/bitmap				bundle gem in 2.4.0
+tkextlib/blt/busy				bundle gem in 2.4.0
+tkextlib/blt/component				bundle gem in 2.4.0
+tkextlib/blt/container				bundle gem in 2.4.0
+tkextlib/blt/cutbuffer				bundle gem in 2.4.0
+tkextlib/blt/dragdrop				bundle gem in 2.4.0
+tkextlib/blt/eps				bundle gem in 2.4.0
+tkextlib/blt/graph				bundle gem in 2.4.0
+tkextlib/blt/htext				bundle gem in 2.4.0
+tkextlib/blt/setup				bundle gem in 2.4.0
+tkextlib/blt/spline				bundle gem in 2.4.0
+tkextlib/blt/stripchart				bundle gem in 2.4.0
+tkextlib/blt/table				bundle gem in 2.4.0
+tkextlib/blt/tabnotebook			bundle gem in 2.4.0
+tkextlib/blt/tabset				bundle gem in 2.4.0
+tkextlib/blt/ted				bundle gem in 2.4.0
+tkextlib/blt/tile				bundle gem in 2.4.0
+tkextlib/blt/tree				bundle gem in 2.4.0
+tkextlib/blt/treeview				bundle gem in 2.4.0
+tkextlib/blt/unix_dnd				bundle gem in 2.4.0
+tkextlib/blt/vector				bundle gem in 2.4.0
+tkextlib/blt/watch				bundle gem in 2.4.0
+tkextlib/blt/win_printer			bundle gem in 2.4.0
+tkextlib/blt/winop				bundle gem in 2.4.0
+tkextlib/bwidget				bundle gem in 2.4.0
+tkextlib/itcl					bundle gem in 2.4.0
+tkextlib/itk					bundle gem in 2.4.0
+tkextlib/iwidgets				bundle gem in 2.4.0
+tkextlib/pkg_checker				bundle gem in 2.4.0
+tkextlib/tcllib					bundle gem in 2.4.0
+tkextlib/tcllib/autoscroll			bundle gem in 2.4.0
+tkextlib/tcllib/ctext				bundle gem in 2.4.0
+tkextlib/tcllib/cursor				bundle gem in 2.4.0
+tkextlib/tcllib/datefield			bundle gem in 2.4.0
+tkextlib/tcllib/dialog				bundle gem in 2.4.0
+tkextlib/tcllib/getstring			bundle gem in 2.4.0
+tkextlib/tcllib/history				bundle gem in 2.4.0
+tkextlib/tcllib/ico				bundle gem in 2.4.0
+tkextlib/tcllib/ip_entry			bundle gem in 2.4.0
+tkextlib/tcllib/panelframe			bundle gem in 2.4.0
+tkextlib/tcllib/plotchart			bundle gem in 2.4.0
+tkextlib/tcllib/ruler				bundle gem in 2.4.0
+tkextlib/tcllib/screenruler			bundle gem in 2.4.0
+tkextlib/tcllib/scrollwin			bundle gem in 2.4.0
+tkextlib/tcllib/setup				bundle gem in 2.4.0
+tkextlib/tcllib/style				bundle gem in 2.4.0
+tkextlib/tcllib/superframe			bundle gem in 2.4.0
+tkextlib/tcllib/swaplist			bundle gem in 2.4.0
+tkextlib/tcllib/tablelist			bundle gem in 2.4.0
+tkextlib/tcllib/tablelist_core			bundle gem in 2.4.0
+tkextlib/tcllib/tablelist_tile			bundle gem in 2.4.0
+tkextlib/tcllib/tkpiechart			bundle gem in 2.4.0
+tkextlib/tcllib/tooltip				bundle gem in 2.4.0
+tkextlib/tcllib/widget				bundle gem in 2.4.0
+tkextlib/tclx					bundle gem in 2.4.0
+tkextlib/tile					bundle gem in 2.4.0
+tkextlib/tile/dialog				bundle gem in 2.4.0
+tkextlib/tile/setup				bundle gem in 2.4.0
+tkextlib/tile/style				bundle gem in 2.4.0
+tkextlib/tile/tbutton				bundle gem in 2.4.0
+tkextlib/tile/tcheckbutton			bundle gem in 2.4.0
+tkextlib/tile/tcombobox				bundle gem in 2.4.0
+tkextlib/tile/tentry				bundle gem in 2.4.0
+tkextlib/tile/tframe				bundle gem in 2.4.0
+tkextlib/tile/tlabel				bundle gem in 2.4.0
+tkextlib/tile/tlabelframe			bundle gem in 2.4.0
+tkextlib/tile/tmenubutton			bundle gem in 2.4.0
+tkextlib/tile/tnotebook				bundle gem in 2.4.0
+tkextlib/tile/tpaned				bundle gem in 2.4.0
+tkextlib/tile/tprogressbar			bundle gem in 2.4.0
+tkextlib/tile/tradiobutton			bundle gem in 2.4.0
+tkextlib/tile/treeview				bundle gem in 2.4.0
+tkextlib/tile/tscale				bundle gem in 2.4.0
+tkextlib/tile/tscrollbar			bundle gem in 2.4.0
+tkextlib/tile/tseparator			bundle gem in 2.4.0
+tkextlib/tile/tsquare				bundle gem in 2.4.0
+tkextlib/tkDND					bundle gem in 2.4.0
+tkextlib/tkHTML					bundle gem in 2.4.0
+tkextlib/tkimg					bundle gem in 2.4.0
+tkextlib/tktable				bundle gem in 2.4.0
+tkextlib/tktrans				bundle gem in 2.4.0
+tkextlib/treectrl				bundle gem in 2.4.0
+tkextlib/vu					bundle gem in 2.4.0
+tkextlib/vu/bargraph				bundle gem in 2.4.0
+tkextlib/vu/charts				bundle gem in 2.4.0
+tkextlib/vu/dial				bundle gem in 2.4.0
+tkextlib/vu/pie					bundle gem in 2.4.0
+tkextlib/vu/setup				bundle gem in 2.4.0
+tkextlib/vu/spinbox				bundle gem in 2.4.0
+tkextlib/winico                                 bundle gem in 2.4.0
