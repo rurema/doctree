@@ -74,9 +74,7 @@ Ruby の文法:
   * [[f:/]]
 
 ==== その他
-#@#* [[c:Ruby変更履歴]]
-#@#  * ((<ruby 1.8.5 feature>))
-#@#  * ((<ruby 1.9 feature>))
+  * [[d:news/index]]
 #@#* 付録
 #@##@# 使い方
 #@#  * [[unknown:Ruby FAQ]]
