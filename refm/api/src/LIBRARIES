@@ -636,6 +636,7 @@ thread
 thwait
 time
 timeout
+#@until 2.4.0
 tk
 multi-tk
 #@since 1.8.2
@@ -793,6 +794,7 @@ tkextlib/winico
 tkextlib/winico/winico
 #@end
 tkutil
+#@end
 #@since 1.8.0
 tmpdir
 #@end

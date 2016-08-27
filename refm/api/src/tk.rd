@@ -60,7 +60,12 @@ tkを用いてGUIアプリケーションを作成するためのライブラリ
  * [[unknown:RubyTkFAQ]]
  * "Rubyist Magazine - 0003-Ruby/Tk の動向"[[url:http://magazine.rubyist.net/?0003-RubyTkMovement]]
 
+=== 注意
 
+このライブラリは 2.4.0 で gem ライブラリとして切り離されました。2.4.0
+以降ではそちらを利用してください。
+
+ * [[url:https://rubygems.org/gems/tk]]
 
 #@include(tk/TclTkIp)
 #@include(tk/TkComm)
