@@ -300,7 +300,7 @@
 === 実装の変更
 
   * GC
-    * [[m:String$to_sym]] や [[String#intern]] によって返されるほとんどのシンボルはGC可能になりました。[[feature:9634]]
+    * [[m:String$to_sym]] や [[m:String#intern]] によって返されるほとんどのシンボルはGC可能になりました。[[feature:9634]]
     * メジャーGCにインクリメンタルマーキングを導入しました。[[feature:10137]]
     * malloc によって起きた GC で lazy sweep を有効にしました。
 
