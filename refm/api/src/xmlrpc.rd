@@ -115,4 +115,10 @@ You can change the XML-writer by calling method <i>set_writer</i>.
   * [XML-RPC] [[url:http://www.xmlrpc.com/spec]]
   * [[url:http://magazine.rubyist.net/?0007-BundledLibraries]]
 
+=== 注意
+
+このライブラリは 2.4.0 で gem ライブラリとして切り離されました。2.4.0
+以降ではそちらを利用してください。
+
+  * [[url:https://rubygems.org/gems/xmlrpc]]
 #@end

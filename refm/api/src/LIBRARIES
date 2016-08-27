@@ -938,11 +938,13 @@ wsdl/soap/standaloneServerStubCreator
 wsdl/soap/wsdl2ruby
 #@end
 #@end
+#@until 2.4.0
 xmlrpc
 xmlrpc/client
 xmlrpc/config
 xmlrpc/datetime
 xmlrpc/server
+#@end
 #@if("1.8.2" <= version and version < "1.9.1")
 xsd/codegen
 #@end
