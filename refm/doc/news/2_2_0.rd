@@ -142,7 +142,7 @@
     * 追加: [[m:Matrix#hstack]], [[m:Matrix#vstack]]
     * 追加: [[m:Matrix#laplace_expansion]]
     * 追加: [[m:Vector.basis]]
-    * 追加: [[m:Vector#@-]], [[m:Vector#@+]], [[m:Matrix#@-]], [[m:Matrix#@+]]
+    * 追加: [[m:Vector#-@]], [[m:Vector#+@]], [[m:Matrix#-@]], [[m:Matrix#+@]]
     * 追加: [[m:Vector#cross_product]]
     * 追加: [[m:Vector#dot]]
     * 追加: [[m:Vector#angle_with]]
