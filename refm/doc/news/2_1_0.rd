@@ -109,12 +109,12 @@
     * 全てのシンボルは freeze されるようになりました
 
   * pack/unpack (Array/String)
-    * Q! and q! directives for long long type if platform has the type.
+    * プラットフォームが対応していれば Q! と q! は long long 型を表します
 
   * toplevel
     * main.using はもはや実験的な機能ではありません。
       The method activates refinements in the ancestors of the argument module to
-      support refinement inheritance by Module#include.
+      support refinement inheritance by [[m:Module#include]]
 
 === 組み込みクラスの互換性 (機能追加とバグ修正を除く)
 
@@ -144,7 +144,8 @@
       [[m:Object#tainted?]],[[m:Object#taint]],[[m:Object#untaint]] とそれぞれ同じ動作です。
 
   * [[m:Module#ancestors]]
-    * The ancestors of a singleton class now include singleton classes,
+    * 特異クラスの祖先はそれ自身を含みます。
+      The ancestors of a singleton class now include singleton classes,
       in particular itself.
 
   * [[m:Module#define_method]] [[m:Object#define_singleton_method]]
@@ -171,8 +172,7 @@
     * 全てのクラスメソッドをモジュールに移動しました
 
   * [[lib:digest]]
-    * extended methods:
-      * Digest::Class.file takes optional arguments for its constructor
+    * 拡張: [[m:Digest::Class.file]] コンストラクタのためにオプショナル引数を取れるようになりました
 
   * [[lib:matrix]]
     * 追加: [[m:Vector#cross_product]]
@@ -195,8 +195,7 @@
     * 追加: [[m:ObjectSpace.dump_all]]
 
   * OpenSSL::BN
-    * extended methods:
-      * OpenSSL::BN.new allows Fixnum/Bignum argument.
+    * 拡張: [[m:OpenSSL::BN.new]] Fixnum や Bignum を引数として取れるようになりました。
 
   * [[lib:open-uri]]
     * 複数フィールドに同じ名前を使うことをサポートしました (Set-Cookieのように)
@@ -210,49 +209,40 @@
       [[url:http://rake.rubyforge.org/doc/release_notes/rake-10_1_0_rdoc.html]]
       [[url:http://rake.rubyforge.org/doc/release_notes/rake-10_0_3_rdoc.html]]
 
-  * RbConfig
-    * New constants:
-      * RbConfig::SIZEOF is added to provide the size of C types.
+  * [[lib:rbconfig]]
+    * 追加: [[m:RbConfig::SIZEOF]] C の型のサイズを提供するために追加しました。
 
-  * RDoc
-    * Updated to 4.1.0.  Major enhancements include a modified default template
-    * and accessibility enhancements.
-   
-      For a list of minor enhancements and bug fixes see:
-      https://github.com/rdoc/rdoc/blob/v4.1.0.preview.1/History.rdoc
+  * [[lib:rdoc]]
+    * 4.1.0 に更新。主にデフォルトのテンプレートとアクセシビリティを改善しました。
+      [[url:https://github.com/rdoc/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
 
-  * Resolv
-    * New methods:
-      * Resolv::DNS.fetch_resource
+  * [[lib:resolv]]
+    * 追加: [[m:Resolv::DNS.fetch_resource]]
     * One-shot multicast DNS support
     * Support LOC resources
 
-  * REXML::Parsers::SAX2Parser
-    * Fixes wrong number of arguments of entitydecl event. Document of the event
-      says "an array of the entity declaration" but implementation passes two
-      or more arguments. It is an implementation bug but it breaks backward
-      compatibility.
+  * [[lib:rexml]]
+    * REXML::Parsers::SAX2Parser
+      * entitydecl イベントの引数が間違っている問題を修正しました。
+        ドキュメントにはエンティティ定義の配列を渡すと書いてあるのに、
+        実装は2つ以上の引数を渡すようになっていた。これは実装のバグだったが、
+        修正したことで後方互換性が壊れました。
+    * REXML::Parsers::StreamParser
+      * entityイベントをサポート
+    * REXML::Text
+      * [[m:REXML::Text#<<]] 'text << "XXX" << "YYY"' のようなメソッドチェインをサポート
+      * [[m:REXML::Text#<<]] "raw" でないモードをサポート
 
-  * REXML::Parsers::StreamParser
-    * Supports "entity" event.
+  * [[lib:rinda]]
+    * [[c:Rinda::RingServer]], [[c:Rinda::RingFinger]]
+      * マルチキャストソケットをサポート
 
-  * REXML::Text
-    * REXML::Text#<< supports method chain like 'text << "XXX" << "YYY"'.
-    * REXML::Text#<< supports not "raw" mode.
-
-  * Rinda::RingServer, Rinda::RingFinger
-    * Rinda now supports multicast sockets.  See Rinda::RingServer and
-      Rinda::RingFinger for details.
-
-  * RubyGems
-    * Updated to 2.2.0.  Notable new features include:
-   
+  * [[lib:rubygems]]
+    * 2.2.0 に更新。  Notable new features include:
       * Gemfile or gem.deps.rb support including Gem.file.lock (experimental)
       * Improved, iterative resolver (compared to RubyGems 2.1 and earlier)
       * Support for a sharing a GEM_HOME across ruby platforms and versions
-   
-      For a complete list of enhancements and bug fixes see:
-      https://github.com/rubygems/rubygems/tree/master/History.txt
+      * [[lib:https://github.com/rubygems/rubygems/tree/master/History.txt]]
 
   * [[lib:set]]
     * 追加: [[m:Set#intersect?]]
@@ -264,16 +254,14 @@
   * [[lib:strscan]]
     * [[m:StringScanner#[] ]] 名前付きキャプチャをサポートしました
 
-  * Syslog::Logger
-    * Added facility.
+  * [[lib:syslog/logger]]
+    * ファイリティを追加
 
   * [[lib:tempfile]]
     * 追加: [[m:Tempfile.create]]
 
-  * Timeout
-    * The exception to terminate the given block can no longer be rescued
-      inside the block, by default, unless the exception class is given
-      explicitly.
+  * [[lib:timeout]]
+    * 明示的に例外クラスを指定しない限り、ブロックを抜けるための例外はブロック内部で rescue されなくなりました。
 
   * [[lib:tsort]]
     * 追加: [[m:TSort.tsort]]
@@ -282,17 +270,14 @@
     * 追加: [[m:TSort.each_strongly_connected_component]]
     * 追加: [[m:TSort.each_strongly_connected_component_from]]
 
-  * WEBrick
-    * The body of a response may now be a StringIO or other IO-like that responds
-      to #readpartial and #read.
+  * [[lib:webrick]]
+    * レスポンスボディは readpartial や read をサポートする StringIO か他の IO のようなオブジェクトになりました。
 
-  * XMLRPC::Client
-    * New methods:
-      * XMLRPC::Client#http. It returns Net::HTTP for the client. Normally,
-        it is not needed. It is useful when you want to change minor HTTP client
-        options. You can change major HTTP client options by XMLRPC::Client
-        methods. You should use XMLRPC::Client methods for changing major
-        HTTP client options instead of XMLRPC::Client#http.
+  * [[lib:xmlrpc]]
+    * [[c:XMLRPC::Client]]
+      * 追加: [[m:XMLRPC::Client#http]] クライアントのために [[c:Net::HTTP]] のインスタンスを返します。
+        通常、それは必要ありません。HTTP クライアントのオプションを少し変更したいときに便利です。
+        HTTPクライアントの主要なオプションを変更するときは [[c:XMLRPC::Client]] のメソッドを使うべきです。
 
 === 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
@@ -326,9 +311,8 @@
 
   * 追加: rb_gc_latest_gc_info() [[m:GC.latest_gc_info]] にアクセスできます。
 
-  * 追加: rb_postponed_job_register()  Takes a function callback which is invoked
-    when the VM is in a consistent state, i.e. to perform work from a C signal
-    handler.
+  * 追加: rb_postponed_job_register()  VMが一貫性のある状態になったときに呼ぶコールバック関数を引数に取ります。
+    例えば、Cのシグナルハンドラから実行するために使います。
 
   * 追加: rb_profile_frames() コールスタックのプロファイルのために現在のRubyのスタックに
     低コストでアクセスする機能を提供します。
@@ -339,5 +323,5 @@
     * RUBY_INTERNAL_EVENT_GC_START
     * RUBY_INTERNAL_EVENT_GC_END_MARK
     * RUBY_INTERNAL_EVENT_GC_END_SWEEP
-    * Note that you *can not* specify "internal events" with normal events
-      (such as RUBY_EVENT_CALL, RUBY_EVENT_RETURN) simultaneously.
+    * 内部的なイベントを通常のイベントと同時に使うことはできません。
+      (例: RUBY_EVENT_CALL と RUBY_EVENT_RETURN)
