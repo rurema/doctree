@@ -50,7 +50,7 @@
     * 改善: メジャーGCにインクリメンタルマーキングを導入しました。 [[feature:10137]]
 
   * [[c:IO]]
-    * 改善: Windows上でパイプのための [[m:IO#nonblock_read]], [[m:IO#nonblock_write]] をサポートしました。
+    * 改善: Windows上でパイプのための [[m:IO#read_nonblock]], [[m:IO#write_nonblock]] をサポートしました。
 
   * [[c:Kernel]]
     * 追加: [[m:Kernel#itself]]
@@ -210,7 +210,7 @@
     * Logger::Application は logger-application という gem に切り出しました。メンテナンスしていないコードでした。
 
   * ObjectSpace (after requiring "objspace")
-    * [[m:ObjectSpace.memsize_of]](obj) は sizeof(RVALUE) を含むようになりました。
+    * [[m:ObjectSpace.#memsize_of]](obj) は sizeof(RVALUE) を含むようになりました。
       [[bug:8984]]
 
   * [[lib:prime]]
@@ -300,7 +300,7 @@
 === 実装の変更
 
   * GC
-    * [[m:String$to_sym]] や [[m:String#intern]] によって返されるほとんどのシンボルはGC可能になりました。[[feature:9634]]
+    * [[m:String#to_sym]] や [[m:String#intern]] によって返されるほとんどのシンボルはGC可能になりました。[[feature:9634]]
     * メジャーGCにインクリメンタルマーキングを導入しました。[[feature:10137]]
     * malloc によって起きた GC で lazy sweep を有効にしました。
 
