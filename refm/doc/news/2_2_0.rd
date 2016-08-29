@@ -18,7 +18,7 @@
   * デフォルト引数
     * オプショナル引数にデフォルト値のセマンティクスでアクセスできないという長年のバグを修正しました。 [[bug:9593]]
 
-=== Core classes updates (outstanding ones only)
+=== 組み込みクラスの更新
 
   * [[c:Binding]]
     * 追加: [[m:Binding#local_variables]]
