@@ -37,7 +37,7 @@ Integer や Float に比べ Rational は誤差無しで表現できる範囲が�
   2 * Rational(1,2)  #=> Rational(1,1)
 
   require 'mathn'
-  1/2                #=> Rational(1,2)  
+  1/2                #=> Rational(1,2)
   2 * Rational(1,2)  #=> 1 (Fixnum)
 
 ==== 実数と複素数の相互変換
@@ -57,7 +57,6 @@ Integer や Float に比べ Rational は誤差無しで表現できる範囲が�
  require 'mathn'
  Complex(0,-1)**2  #=> -1
  Math.sqrt(-1)     #=> Complex(0,1)
- 
 
 === 使用上の注意
 なお、この挙動は、グローバルに影響を与えます。
