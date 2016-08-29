@@ -1,15 +1,9 @@
 category Math
 
 require matrix
-#@since 1.9.1
 require cmath
 require prime
 [[c:Rational]] と [[c:Complex]] をよりシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
-#@else
-require complex
-require rational
-[[lib:rational]] と [[lib:complex]] をシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
-#@end
 
 #@since 2.2.0
 なお、このライブラリは非推奨(deprecated)です。
@@ -48,11 +42,7 @@ Integer や Float に比べ Rational は誤差無しで表現できる範囲が�
 
 例:
  Complex(0,-1)**2  #=> Complex(-1,0)
-#@since 1.8.5
  Math.sqrt(-1)     #=> NaN
-#@else
- Math.sqrt(-1)     #=> Errno::EDOM
-#@end
  
  require 'mathn'
  Complex(0,-1)**2  #=> -1
@@ -70,48 +60,10 @@ Integer や Float に比べ Rational は誤差無しで表現できる範囲が�
 
   * [[ruby-list:1174]]
 
-#@since 1.9
 === Prime
 
 クラス [[c:Prime]] はRuby 1.8までは [[lib:mathn]] で定義されていました。
 現在はライブラリ [[lib:prime]] に移動しています。互換性のため mathn を読み込むと自動的に prime も [[m:Kernel.#require]] されます。
-
-#@end
-
-#@until 1.9.1
-= reopen Integer
-
-== Class Methods
-
---- from_prime_division(pd) -> Integer
-素因数分解の配列 pd から数を求めます。
-pd は [素因数, 指数] 組の配列です。
-
-例:
-
-  Integer.from_prime_division [[2,3],[3,2]]
-  # => 72 == 2**3 * 3**2
-
-== Instance Methods
-
---- gcd2(int)
-#@todo
-
-例:
-
-  12.gcd2 8
-  # => 4
-
---- prime_division
-#@todo
-
-各素因子について素因子と指数の組を並べた配列を返します。
-
-例:
-
-  72.prime_division
-  # => [[2, 3], [3, 2]]
-#@end
 
 = redefine Fixnum
 
@@ -140,15 +92,6 @@ Bignum#quo と同じ働きをします(有理数または整数を返します)�
 
 self のべき乗を返します。 Rational になるようであれば Rational で返します。
 
-#@until 1.9.1
---- power2
-#@todo
-
---- inspect
-有理数値を人間が読みやすい形の文字列表現にして返します。
-
-現在のバージョンでは "3/5", "-17/7" のように10進数の既約分数表記を返します。
-#@end
 = redefine Math
 
 == Module Functions
@@ -169,60 +112,3 @@ a が負の時は、a を正にして、その平方根を Complex の虚数部�
 a が Float の時は、Float を返します。
 それ以外の時、平方根が有理数であれば、Rational または Integer を返します。
 無理数であれば、Float を返します。
-
-#@until 1.9.1
-= class Prime < Object
-
-include Enumerable
-
-== Class Methods
-
---- new
-素数を列挙するオブジェクトを作ります。
-
-例:
-  q = Prime.new
-  q.class    #=> Prime
-
-== Instance Methods
-
---- succ
---- next
-
-次の素数を返します。
-
-例:
-
-  q = Prime.new
-  q.succ # => 2
-  q.succ # => 3
-  q.succ # => 5
-
---- each {...} -> object
-素数について繰り返すイテレータです。
-これは無限ループになるので必ず break を入れてください。
-
-例:
-
-  > q=Prime.new; i = 0; q.each  {|x| break if i > 5; puts x; i+=1;}
-  2
-  3
-  5
-  7
-  11
-  13
-
-= reopen Rational
-== Constants
---- Unify
-内部実装で利用しています。深くは考えないでください。ユーザープログラムでは利用しないでください。
-
-この定数はRuby 1.9.1以降では削除されます。
-
-= reopen Complex
-== Constants
---- Unify
-内部実装で利用しています。深くは考えないでください。ユーザープログラムでは利用しないでください。
-
-この定数はRuby 1.9.1以降では削除されます。
-#@end
