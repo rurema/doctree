@@ -152,7 +152,7 @@
       [[feature:11688]]
 
   * [[c:Thread]]
-    * スレッッド名を扱うために [[m:Thread#name]], [[m:Thread#name=]] を追加
+    * スレッド名を扱うために [[m:Thread#name]], [[m:Thread#name=]] を追加
       [[feature:11251]]
 
 === 組み込みクラスの互換性 (機能追加とバグ修正を除く)
@@ -317,7 +317,7 @@
 === 組込みのグローバル変数の互換性に影響のある変更
 
   * [[m:$SAFE]]
-    * $SAFE=2 と $SAFE=3 廃止されました。$SAFE を2以上にすると ArgumentError が発生します。
+    * $SAFE=2 と $SAFE=3 が廃止されました。$SAFE を2以上にすると ArgumentError が発生します。
       [[feature:5455]]
 
 === C API の更新
