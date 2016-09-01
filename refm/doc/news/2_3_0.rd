@@ -329,8 +329,8 @@
   * 現在日時を timespec 構造体として取得する rb_timespec_now() が追加されました。
     [[feature:11558]]
 
-  * rb_time_timespec_new() is added to create a time object with epoch,
-    nanosecond, and UTC/localtime/time offset arguments.
+  * 起算時からの経過秒数、ナノ秒、UTCからの時差から [[c:Time]] オブジェクトを
+    生成する rb_time_timespec_new() が追加されました。
     [[feature:11558]]
 
   * rb_autoload() は非推奨になりました。rb_funcall() を使ってください。
