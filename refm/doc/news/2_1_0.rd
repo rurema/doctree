@@ -95,10 +95,10 @@
       by に 0 を指定すると無限に同じ数値を生成することができます。
 
   * [[c:Process]]
-    * 追加: [[m:Process.argv0]] オリジナルの $0 の値を返します。
-    * 追加: [[m:Process.setproctitle]] $0 に影響を与えずにプロセス名をセットできます。
-    * 追加: [[m:Process.clock_gettime]]
-    * 追加: [[m:Process.clock_getres]]
+    * 追加: [[m:Process.#argv0]] オリジナルの $0 の値を返します。
+    * 追加: [[m:Process.#setproctitle]] $0 に影響を与えずにプロセス名をセットできます。
+    * 追加: [[m:Process.#clock_gettime]]
+    * 追加: [[m:Process.#clock_getres]]
 
   * [[c:String]]
     * "literal".freeze は同じオブジェクトを返すように最適化されました。
@@ -126,7 +126,7 @@
   * [[c:IO]]
     * 非互換: [[m:IO.open]] は外部エンコーディングが ASCII-8BIT のとき内部エンコーディングを無視します。
 
-  * [[m:Kernel#eval]], [[m:Kernel#instance_eval]], [[m:Module#module_eval]]
+  * [[m:Kernel.#eval]], [[m:Kernel.#instance_eval]], [[m:Module#module_eval]]
     元の環境のスコープ情報をコピーするようになりました。これは、引数なしの
     private, protected, public, module_function を文字列として eval しても
     その外側には影響を与えないという意味です。
@@ -264,11 +264,11 @@
     * 明示的に例外クラスを指定しない限り、ブロックを抜けるための例外はブロック内部で rescue されなくなりました。
 
   * [[lib:tsort]]
-    * 追加: [[m:TSort.tsort]]
-    * 追加: [[m:TSort.tsort_each]]
-    * 追加: [[m:TSort.strongly_connected_components]]
-    * 追加: [[m:TSort.each_strongly_connected_component]]
-    * 追加: [[m:TSort.each_strongly_connected_component_from]]
+    * 追加: [[m:TSort#tsort]]
+    * 追加: [[m:TSort#tsort_each]]
+    * 追加: [[m:TSort#strongly_connected_components]]
+    * 追加: [[m:TSort#each_strongly_connected_component]]
+    * 追加: [[m:TSort#each_strongly_connected_component_from]]
 
   * [[lib:webrick]]
     * レスポンスボディは readpartial や read をサポートする StringIO か他の IO のようなオブジェクトになりました。

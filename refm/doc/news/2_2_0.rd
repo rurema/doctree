@@ -54,7 +54,7 @@
 
   * [[c:Kernel]]
     * 追加: [[m:Kernel#itself]]
-    * 改善: [[m:Kernel#throw]] は、対応する catch ブロックがないとき [[c:ArgumentError]] ではなく
+    * 改善: [[m:Kernel.#throw]] は、対応する catch ブロックがないとき [[c:ArgumentError]] ではなく
       [[c:ArgumentError]] のサブクラスである [[c:UncaughtThrowError]] を発生させるようになりました
 
 
@@ -116,7 +116,7 @@
     * callcc は廃止されました。[[c:Fiber]]を使ってください。
 
   * [[lib:digest]]
-    * [[m:Kernel#Digest]] はスレッドセーフになりました。
+    * [[m:Kernel.#Digest]] はスレッドセーフになりました。
       マルチスレッド環境でオンデマンドローディングに関して問題がある場合は、
       "digest/*" を事前にロードしておくか、Daigest::* なクラス参照するかわりにをこのメソッドを呼び出します。
     * 以前通知した通り [[c:Digest::HMAC]] を削除しました。
@@ -125,11 +125,11 @@
     * DL は標準添付ライブラリから削除されました。[[lib:fiddle]] を使ってください。
 
   * [[lib:etc]]
-    * 追加: [[m:Etc.uname]]
-    * 追加: [[m:Etc.sysconf]]
-    * 追加: [[m:Etc.confstr]]
+    * 追加: [[m:Etc.#uname]]
+    * 追加: [[m:Etc.#sysconf]]
+    * 追加: [[m:Etc.#confstr]]
     * 追加: [[m:IO#pathconf]]
-    * 追加: [[m:Etc.nprocessors]]
+    * 追加: [[m:Etc.#nprocessors]]
 
   * [[lib:find]], [[lib:pathname]]
     * 拡張: [[m:Find.#find]] は "ignore_error" というキーワード引数を受け付けるようになりました
@@ -161,8 +161,8 @@
       [[url:http://docs.seattlerb.org/rubygems/History_txt.html#label-2.4.2+%2F+2014-10-01]]
 
   * [[lib:tsort]]
-    * [[m:TSort.tsort_each]], [[m:TSort.each_strongly_connected_component]],
-      [[m:TSort.each_strongly_connected_component_from]] はブロックを省略すると [[c:Enumerator]] を返すようになりました。
+    * [[m:TSort#tsort_each]], [[m:TSort#each_strongly_connected_component]],
+      [[m:TSort#each_strongly_connected_component_from]] はブロックを省略すると [[c:Enumerator]] を返すようになりました。
 
   * [[lib:xmlrpc]]
     * LibXMLStreamParser という新しいパーサーを追加しました

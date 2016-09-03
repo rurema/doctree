@@ -104,7 +104,7 @@
       [[feature:11806]]
 
   * [[c:Kernel]]
-    * [[m:Kernel#loop]] は StopIteration で停止したときに nil ではなく最後に評価した要素を返します。
+    * [[m:Kernel.#loop]] は StopIteration で停止したときに nil ではなく最後に評価した要素を返します。
       [[feature:11498]]
 
   * [[c:Module]]
@@ -269,9 +269,9 @@
       ライセンスが BSD 2-clause "Simplified" License に変更されました。
 
   * [[lib:base64]]
-    * [[m:Base64.urlsafe_encode64]] に パディング文字("=")を抑制するために "padding" オプションが追加されました。
+    * [[m:Base64.#urlsafe_encode64]] に パディング文字("=")を抑制するために "padding" オプションが追加されました。
       [[feature:10740]]
-    * [[m:Base64.urlsafe_decode64]]: パディングされていない入力だけでなく正しくパディングされた入力も受け付けるようになりました。
+    * [[m:Base64.#urlsafe_decode64]]: パディングされていない入力だけでなく正しくパディングされた入力も受け付けるようになりました。
       [[feature:10740]]
 
   * [[lib:drb]]
