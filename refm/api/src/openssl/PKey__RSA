@@ -103,8 +103,10 @@ pass が指定された場合は、秘密鍵を pass を使って復号化しま
 
 == Instance Methods
 
---- public? -> bool
+--- public? -> true
 自身が公開鍵を持っているかどうか判定します。
+
+秘密鍵は公開鍵も持っているため、常に true を返します。
 
 --- private? -> bool
 自身が秘密鍵を持っているかどうか判定します。
