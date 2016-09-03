@@ -76,7 +76,7 @@
     * 拡張: [[m:IO#write_nonblock]] シンボルを返すためにキーワード引数 `exception: false` を受け付けるようになりました
 
   * [[c:Kernel]]
-    * 追加: [[m:Kernel#singleton_method]]
+    * 追加: Kernel#singleton_method([[m:Object#singleton_method]])
 
   * [[c:Module]]
     * 追加: [[m:Module#using]], which activates refinements of the specified module only

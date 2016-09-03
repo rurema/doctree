@@ -80,7 +80,7 @@
   * [[c:File]]
     * [[m:File.mkfifo]]
       [[feature:11536]]
-    * O_TMPFILE に対応する [[c:File::TMPFILE]] を追加
+    * O_TMPFILE に対応する File::TMPFILE([[m:File::Constants::TMPFILE]]) を追加
 
   * [[c:Hash]]
     * [[m:Hash#fetch_values]] を追加
@@ -93,7 +93,7 @@
       [[feature:11653]]
 
   * [[c:IO]]
-    * 新しいフラグ [[m:File::SHARE_DELETE]] が使用できます。
+    * 新しいフラグ File::SHARE_DELETE([[m:File::Constants::SHARE_DELETE]] が使用できます。
       Windows で開いているファイルを削除することを許可しますが、現在はファイルをバイナリモードで開いているときのみ効果があります。
       [[feature:11218]]
     * `flags` オプションの追加。
@@ -126,7 +126,7 @@
       [[feature:11569]]
 
   * [[c:Queue]] ([[c:Thread::Queue]])
-    * 終了を通知するために [[m:Queue#close]] を追加
+    * 終了を通知するために Queue#close([[m:Thread::Queue#close]]) を追加
       [[feature:10600]]
 
   * [[c:Regexp]]/[[c:String]]: Unicode のバージョンを 7.0.0 から 8.0.0 に更新
