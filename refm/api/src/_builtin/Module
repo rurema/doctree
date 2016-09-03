@@ -1087,34 +1087,23 @@ val をセットします。val を返します。
   p Fred.new.foo    # => 101
 #@end
 
---- define_method(name, method) -> Proc | Method | UnboundMethod
---- define_method(name) { ... } -> Proc
+--- define_method(name, method) -> Symbol
+--- define_method(name) { ... } -> Symbol
 
 インスタンスメソッド name を定義します。
 
 ブロックを与えた場合、定義したメソッドの実行時にブロックが
-#@since 1.9.1
 レシーバクラスのインスタンスの上で [[m:BasicObject#instance_eval]] されます。
-#@else
-レシーバクラスのインスタンスの上で [[m:Object#instance_eval]] されます。
-#@end
 
-@param name [[c:String]] または [[c:Symbol]] を指定します。
+@param name メソッド名を [[c:String]] または [[c:Symbol]] を指定します。
 
 @param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
        いずれかのインスタンスを指定します。
 
-@return 引数 method を与えたときはそれを、ブロック付きで
-        呼びだしたときはブロックを [[c:Proc]] 化したオブジェクトを、
-        それぞれ返します。
+@return メソッド名を表す [[c:Symbol]] を返します。
 
-#@since 2.0.0
 @raise TypeError method に同じクラス、サブクラス、モジュール以外のメソッ
                  ドを指定した場合に発生します。
-#@else
-@raise TypeError method に同じクラス、サブクラス以外のメソッドを指定し
-                 た場合に発生します。
-#@end
 
   class Foo
     def foo() p :foo end
