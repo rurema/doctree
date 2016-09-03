@@ -1438,6 +1438,34 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 @see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#method]]
 #@end
 
+--- define_singleton_method(symbol, method) -> Symbol
+--- define_singleton_method(symbol) { ... } -> Symbol
+
+特異メソッド name を定義します。
+
+@param symbol メソッド名を [[c:String]] または [[c:Symbol]] で指定します。
+
+@param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
+              いずれかのインスタンスを指定します。
+
+@return メソッド名を表す [[c:Symbol]] を返します。
+
+  class A
+    class << self
+      def class_name
+        to_s
+      end
+    end
+  end
+  A.define_singleton_method(:who_am_i) do
+    "I am: #{class_name}"
+  end
+  A.who_am_i   # ==> "I am: A"
+
+  guy = "Bob"
+  guy.define_singleton_method(:hello) { "#{self}: Hello there!" }
+  guy.hello    #=>  "Bob: Hello there!"
+
 #@since 2.0.0
 --- respond_to?(name, include_all = false) -> bool
 #@else
