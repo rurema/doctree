@@ -57,9 +57,8 @@ main では参照できない事に注意してください。トップレベル
 
 @see [[m:Module#include]]
 
-#@since 2.0.0
---- define_method(name, method)   -> Proc | Method | UnboundMethod
---- define_method(name) { ... } -> Proc
+--- define_method(name, method) -> Symbol
+--- define_method(name) { ... } -> Symbol
 
 インスタンスメソッド name を [[c:Object]] に定義します。
 
@@ -71,8 +70,7 @@ main では参照できない事に注意してください。トップレベル
 @param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
               いずれかのインスタンスを指定します。
 
-@return 引数 method を与えたときはそれを、ブロック付きで 呼びだしたとき
-        はブロックを [[c:Proc]] 化したオブジェクトを、それぞれ返します。
+@return メソッド名を表す [[c:Symbol]] を返します。
 
 @raise TypeError method に同じクラス、サブクラス以外のメソッドを指定し
                  た場合に発生します。
@@ -103,5 +101,4 @@ main では参照できない事に注意してください。トップレベル
 [注意] refinements は 2.0 現在、実験的な機能として提供されています。以
 降のバージョンで仕様が変更になる可能性があります。使用すると必ず警告が
 表示されます。
-#@end
 #@end
