@@ -1,3 +1,4 @@
+#@since 2.1.0
 = NEWS for Ruby 2.1.0
 
 このドキュメントは前回リリース以降のバグ修正を除くユーザーに影響のある機能の変更のリストです。
@@ -325,3 +326,4 @@
     * RUBY_INTERNAL_EVENT_GC_END_SWEEP
     * 内部的なイベントを通常のイベントと同時に使うことはできません。
       (例: RUBY_EVENT_CALL と RUBY_EVENT_RETURN)
+#@end

@@ -1,3 +1,4 @@
+#@since 2.3.0
 = NEWS for Ruby 2.3.0
 
 このドキュメントは前回リリース以降のバグ修正を除くユーザーに影響のある機能の変更のリストです。
@@ -393,3 +394,4 @@
 
   * [[m:CGI.escapeHTML]] はC拡張で最適化されました。
     [[url:https://github.com/ruby/ruby/pull/1164]]
+#@end
