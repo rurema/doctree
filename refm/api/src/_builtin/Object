@@ -1441,7 +1441,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 --- define_singleton_method(symbol, method) -> Symbol
 --- define_singleton_method(symbol) { ... } -> Symbol
 
-特異メソッド name を定義します。
+self に特異メソッド name を定義します。
 
 @param symbol メソッド名を [[c:String]] または [[c:Symbol]] で指定します。
 
