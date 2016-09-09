@@ -613,8 +613,8 @@ syslog/logger
 #@end
 tempfile
 #@since 1.8.0
-#@until 2.2.0
 test/unit
+#@until 2.2.0
 test/unit/assertions
 test/unit/testcase
 #@until 1.9.1

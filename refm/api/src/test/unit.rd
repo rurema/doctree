@@ -1,21 +1,20 @@
 category Development
 
+#@until 2.2.0
 require test/unit/testcase
+#@end
 
 ユニットテストを行うためのライブラリです。
 
-test/unit は [[lib:minitest/unit]] を使って再実装されましたが、完全な互
-換性がある訳ではありません。1.9 以降で test/unit を使いたい場合は、以下
-のtest-unit を RubyGems でインストールしてください。(本ドキュメントでは、
-1.9 以降については [[lib:minitest/unit]] で再実装された test/unit につ
-いて記述しています)
+このライブラリは 2.2.0 からbundled gem(gemファイルのみを同梱)になりまし
+た。詳しい内容は下記のプロジェクトページを参照してください。
 
   * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.github.io/]]
 
-また、このライブラリは 2.2.0 で削除されました。gem ライブラリでの代替も
-ありません。2.2.0 以降では上記の正統な test/unit を RubyGems でインストー
-ルして利用してください。.gem ファイルはソースコードにも同梱されています。
+なお、2.2.0以前のtest/unit は [[lib:minitest/unit]] を使って再実装され
+ていましたが、上記のtest/unitと完全な互換性がある訳ではありません。
 
+#@until 2.2.0
 === 使い方
 
 Test::Unit は以下のように使います。
@@ -217,3 +216,5 @@ original_argvで指定されたオプションを解析して、テスト対象�
 
 Test::Unit.setup_argvはoriginal_argvの指定に関わらず、ARGVをfilesで置き
 換えます。置き換えられたARGVは[[lib:minitest/unit]]によってもう1度解析されます。
+
+#@end
