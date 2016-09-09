@@ -1,13 +1,9 @@
 category Development
 
 require test/unit/testcase
-#@until 1.9.1
-require test/unit/autorunner
-#@end
 
 ユニットテストを行うためのライブラリです。
 
-#@since 1.9.1
 test/unit は [[lib:minitest/unit]] を使って再実装されましたが、完全な互
 換性がある訳ではありません。1.9 以降で test/unit を使いたい場合は、以下
 のtest-unit を RubyGems でインストールしてください。(本ドキュメントでは、
@@ -19,7 +15,6 @@ test/unit は [[lib:minitest/unit]] を使って再実装されましたが、�
 また、このライブラリは 2.2.0 で削除されました。gem ライブラリでの代替も
 ありません。2.2.0 以降では上記の正統な test/unit を RubyGems でインストー
 ルして利用してください。.gem ファイルはソースコードにも同梱されています。
-#@end
 
 === 使い方
 
@@ -62,8 +57,6 @@ Test::Unit は以下のように使います。
 テストを実行するには上で用意した test_foo.rb を実行します。
 デフォルトではすべてのテストが実行されます。
 
-#@since 1.9.1
-
         $ ruby test_foo.rb
 
         Loaded suite test_foo
@@ -96,55 +89,7 @@ test_bar だけテストしたい場合は以下のようなオプションを�
 
 --name=test_barのような指定は行えません。
 
-#@else
-
-        $ ruby test_foo.rb
-
-        Loaded suite test_foo
-        Started
-        F.
-        Finished in 0.022223 seconds.
-
-          1) Failure!!!
-        test_bar(TC_Foo) [test_foo.rb:16]:
-        <bar> expected but was
-        <foo>
-
-        2 tests, 2 assertions, 1 failures, 0 errors
-
-test_bar だけテストしたい場合は以下のようなオプションを与えます。
-
-        $ ruby test_foo.rb --name=test_bar
-
-        Loaded suite test_foo
-        Started
-        F
-        Finished in 0.019573 seconds.
-
-          1) Failure!!!
-        test_bar(TC_Foo) [test_foo.rb:16]:
-        <bar> expected but was
-        <foo>
-
-        1 tests, 1 assertions, 1 failures, 0 errors
-
-gtk を使った testrunner
-
-        $ ruby test_foo.rb --runner=gtk --name=test_bar
-
-fox を使う
-
-        $ ruby test_foo.rb --runner=fox --name=test_bar
-
-console を使う (default)
-
-        $ ruby test_foo.rb --runner=console --name=test_bar
-
-#@end
-
 以下のようにすると help も表示されます。
-
-#@since 1.9.1
 
   $ ruby test_foo.rb --help
   Usage: test_foo [options]
@@ -153,7 +98,6 @@ console を使う (default)
       -s, --seed SEED                  Sets random seed
       -v, --verbose                    Verbose. Show progress processing files.
       -n, --name PATTERN               Filter test names on pattern.
-#@since 1.9.3
           --jobs-status [TYPE]         Show status of jobs every file; Disabled when --jobs isn't specified.
       -j, --jobs N                     Allow run tests with N jobs at once
           --no-retry                   Don't retry running testcase when --jobs specified
@@ -163,32 +107,6 @@ console を使う (default)
       -x, --exclude PATTERN            Exclude test files on pattern.
       -Idirectory                      Add library load path
           --[no-]gc-stress             Set GC.stress as true
-#@end
-
-#@else
-
-  $ ruby test_foo.rb --help
-
-     Usage: test_foo.rb [options] [-- untouched arguments]
-     
-         -r, --runner=RUNNER              Use the given RUNNER.
-                                          (c[onsole], f[ox], g[tk], g[tk]2, t[k])
-#@since 1.8.6
-         -b, --basedir=DIR                Base directory of test suites.
-         -w, --workdir=DIR                Working directory to run tests.
-#@end
-         -n, --name=NAME                  Runs tests matching NAME.
-                                          (patterns may be used).
-         -t, --testcase=TESTCASE          Runs tests in TestCases matching TESTCASE.
-                                          (patterns may be used).
-         -v, --verbose=[LEVEL]            Set the output level (default is verbose).
-                                          (s[ilent], p[rogress], n[ormal], v[erbose])
-             --                           Stop processing options so that the
-                                          remaining options will be passed to the
-                                          test.
-         -h, --help                       Display this help.
-
-#@end
 
 複数のテストを一度に行う場合、以下のように書いただけのファイルを実行します。
 
@@ -196,26 +114,12 @@ console を使う (default)
  require 'test_foo.rb'
  require 'test_bar.rb'
 
-#@until 1.9.1
-もう少し高度なテストの実行方法に関しては [[c:Test::Unit::AutoRunner]] を
-参照して下さい。
-#@end
-
 === いつテストは実行されるか
 
 上の例では、テストクラスを「定義しただけ」で、テストが実行されています。
-#@since 1.9.1
 これは、require 'test/unit'した時に[[m:MiniTest::Unit.autorun]]を実行し
 ているためです。その結果、終了時の後処理として実行されるようになってい
 ます。
-#@else
-これは、[[m:Kernel.#at_exit]] と [[m:ObjectSpace.#each_object]] を使って
-実装されています。つまり、上の例ではテストは終了時の後処理として実行されます。
-
-大抵の場合は、これで問題ありません。が、そうでない場合は、
-testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラスを使うことにより、
-明示的にテストを実行することができます。
-#@end
 
 === Error と Failure の違い
 
@@ -225,7 +129,6 @@ testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラ�
 : Failure
   アサーションに失敗した。
 
-#@since 1.9.3
 === 並列実行
 
 1.9.3 から単体テストの高速化のために、並列実行がサポートされました。
@@ -234,36 +137,12 @@ testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラ�
 
  * Rubyist Magazine 0033 号 詳解! test-all 並列化: [[url:http://magazine.rubyist.net/?0033-ParallelizeTestAll]]
 
-#@end
-
 = module Test::Unit
 
 ユニットテストを行うためのモジュールです。
 
 == Singleton Methods
 
-#@since 1.8.1
-#@until 1.9.1
---- run?        -> bool
-
-ユニットテストを実行したかどうかを返します。
-戻り値が false だった場合は、まだユニットテストを実行していない事になります。
-
-@return ユニットテストを実行したかどうか
-
---- run=(flag)
-
-ユニットテストを自動実行したかどうかを指定します。
-
-@param flag ユニットテストを自動実行したかどうか
-
-trueをセットすると[[c:Test::Unit]]はユニットテストを自動実行``しなくなります''。
-runは過去分詞のrunです。trueにするとテストを実行し終えたという意味になります。
-
-#@end
-#@end
-
-#@since 1.9.1
 --- setup_argv(original_argv = ARGV) { |files| ... } -> [String]
 
 original_argvで指定されたオプションを解析して、テスト対象になるファイル
@@ -302,7 +181,6 @@ original_argvで指定されたオプションを解析して、テスト対象�
 : -s, --seed
   [[m:Kernel.#rand]] の乱数の種を指定した値に設定します。
 
-#@since 1.9.3
 : --jobs-status
 
   テストするファイルの状態を表示します。--jobs が指定されなかった場合は有効になりません。
@@ -334,11 +212,8 @@ original_argvで指定されたオプションを解析して、テスト対象�
 : --no-gc-stress
 
   [[m:GC.stress]] に false を設定します。
-#@end
 
 ===== 注意
 
 Test::Unit.setup_argvはoriginal_argvの指定に関わらず、ARGVをfilesで置き
 換えます。置き換えられたARGVは[[lib:minitest/unit]]によってもう1度解析されます。
-
-#@end
