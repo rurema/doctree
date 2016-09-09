@@ -970,7 +970,7 @@ flock は false を返します。
 システムのファイルパスのセパレータが SEPARATOR と異なる場合
 に設定されます。MS-DOS などでは "\\" です。UNIX や Cygwin などでは nil です。
 
---- PATH_SEPARATOR -> ";" | "," | ":"
+--- PATH_SEPARATOR -> ";" | ":"
 
 PATH 環境変数の要素のセパレータです。UNIX では ":" MS-DOS な
 どでは ";" です。
