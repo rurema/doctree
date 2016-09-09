@@ -72,9 +72,8 @@
     * 改善: [[m:String#to_sym]], [[m:String#intern]] によって返される多くのシンボルがGC可能になりました
 
   * [[c:Method]]
-    * New methods:
-      * 追加: [[m:Method#curry]]([arity]) はカリー化された [[c:Proc]] オブジェクトを返します
-      * 追加: [[m:Method#super_method]] はスーパクラスの同名のメソッドの [[c:Method]] オブジェクトを返します。
+    * 追加: [[m:Method#curry]]([arity]) はカリー化された [[c:Proc]] オブジェクトを返します
+    * 追加: [[m:Method#super_method]] はスーパクラスの同名のメソッドの [[c:Method]] オブジェクトを返します。
 
 === 組み込みクラスの互換性 (機能追加とバグ修正を除く)
 
@@ -136,7 +135,6 @@
     * 拡張: [[m:Find.#find]] は "ignore_error" というキーワード引数を受け付けるようになりました
 
   * Matrix
-    * New methods:
     * 追加: [[m:Matrix#first_minor]]
     * 追加: [[m:Matrix#cofactor]]
     * 追加: [[m:Matrix#adjugate]]
