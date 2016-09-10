@@ -9,9 +9,9 @@
 #@since 2.1.0
   * [[d:news/2_1_0]]
 #@end
-#@# #@since 2.0.0
-#@#   * [[d:news/2_0_0]]
-#@# #@end
+#@since 2.0.0
+  * [[d:news/2_0_0]]
+#@end
 #@# #@since 1.9.3
 #@#   * [[d:news/1_9_3]]
 #@# #@end
