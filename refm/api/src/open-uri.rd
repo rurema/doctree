@@ -141,7 +141,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
   require 'open-uri'
   sio = OpenURI.open_uri('http://www.example.com',
                          { :proxy => 'http://proxy.example.com:8000/',
-                           :http_basic_authentication => [usrname, password] })
+                           :http_basic_authentication => [username, password] })
 
 : :proxy
  プロクシの設定をします。
