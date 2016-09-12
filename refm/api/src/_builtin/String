@@ -2752,6 +2752,9 @@ self を指定したエンコーディングに変換した文字列を作成し
   変換先のエンコーディングにおいて文字が定義されていない場合に、未定義文字を置換文字で置き換えます。
 : :replace => string
   前述の :invalid => :replace や :undef => :replace で用いられる置換文字を指定します。デフォルトは Unicode 系のエンコーディングならば U+FFFD、それ以外では "?" です。
+: :fallback => Hash | Proc | Method
+  未定義の文字に対する置換文字を設定します。このオプションに与えられるオブジェクトは [[c:Hash]], [[c:Proc]], [[c:Method]] のいずれかまたは [] メソッドを持つオブジェクトです。
+  キーは現在のトランスコーダのソースエンコーディングで未定義の文字です。値は、変換先のエンコーディングでの変換後の文字です。
 : :xml => :text
   文字列を XML の CharData として適するように処理します。具体的には、'&'、'<'、'>'、をそれぞれ '&amp;'、'&lt;'、'&gt;' に変換し、未定義文字を文字参照 (大文字16進数) に置き換えます。この出力は HTML の #PCDATA として利用することもできます。
 : :xml => :attr
@@ -2771,6 +2774,12 @@ self を指定したエンコーディングに変換した文字列を作成し
   s = "いろは"
   s.encode("EUC-JP")
   s.encode(Encoding::UTF_8)
+
+  # U+00B7 MIDDLE DOT, U+2014 EM DASH は対応する文字が Windows-31J には
+  # 存在しないのでそのまま変換しようとすると Encoding::UndefinedConversionError が発生する
+  str = "\u00b7\u2014"
+  str.encode("Windows-31J", fallback: { "\u00b7" => "\xA5".force_encoding("Windows-31J"),
+                                        "\u2014" => "\x{815C}".force_encoding("Windows-31J") })
 
 @see [[m:String#encode!]]
 
