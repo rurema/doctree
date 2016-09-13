@@ -194,7 +194,7 @@
     * [[m:Module#define_method]] と [[m:Object.define_singleton_method]] は
       メソッド本体(Procオブジェクト、Methodオブジェクト、またはブロック )が必須になりました。
       ブロックが与えられない場合は ArgumentError が発生します。
-      [[bug:11283]]]
+      [[bug:11283]]
 
   * pack/unpack (Array/String)
     * `j`と`J`が追加されました。
