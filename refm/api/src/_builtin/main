@@ -84,9 +84,9 @@ main では参照できない事に注意してください。トップレベル
 有効にした拡張の有効範囲については以下を参照してください。
 
 #@since 2.1.0
- * [[url:http://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
 #@else
- * [[url:http://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]]
 #@end
 
 @param module 有効にするモジュールを指定します。
