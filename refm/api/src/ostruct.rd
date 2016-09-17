@@ -127,7 +127,7 @@ self を各要素の名前をキー([[c:Symbol]])、要素が値のハッシュ�
 --- each_pair                  -> Enumerator
 --- each_pair { |key, value| } -> self
 
-self の各要素の名前をと要素を引数としてブロックを評価します。
+self の各要素の名前と要素を引数としてブロックを評価します。
 
 ブロックを指定した場合は self を返します。そうでない場合は
 [[c:Enumerator]] を返します。
