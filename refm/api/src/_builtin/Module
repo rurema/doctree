@@ -1637,9 +1637,9 @@ refinements 機能の詳細については以下を参照してください。
 
  * [[url:http://magazine.rubyist.net/?0041-200Special-refinement]]
 #@since 2.1.0
- * [[url:http://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
+ * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
 #@else
- * [[url:http://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html]]
+ * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html]]
 #@end
 
 #@since 2.1.0
@@ -1734,7 +1734,7 @@ self が特異クラスの場合に true を返します。そうでなければ
 
 有効にした拡張の有効範囲については以下を参照してください。
 
- * [[url:http://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
 
 @param module 有効にするモジュールを指定します。
 
