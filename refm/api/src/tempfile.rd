@@ -23,6 +23,11 @@ require delegate
 
 == Class Methods
 
+#@since 2.3.0
+--- new(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
+--- open(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
+--- open(basename = '', tempdir = nil, mode: 0, **options){|fp| ...} -> object
+#@else
 #@since 2.2.0
 --- new(basename, tempdir = nil, mode: 0, **options) -> Tempfile
 --- open(basename, tempdir = nil, mode: 0, **options) -> Tempfile
@@ -34,6 +39,7 @@ require delegate
 --- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> object
 #@else
 --- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> nil
+#@end
 #@end
 #@end
 
