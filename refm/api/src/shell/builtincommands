@@ -619,7 +619,7 @@ command を実行する.
 
 @param to 文字列か [[c:IO]] を指定します。
 
-@param filter [[c:Shell::Filter]] のインスタンスをしています。
+@param filter [[c:Shell::Filter]] のインスタンスを指定します。
 
 --- tee(file) -> Shell::Filter
 
