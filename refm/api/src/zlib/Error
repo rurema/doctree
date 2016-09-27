@@ -19,7 +19,7 @@
 
 = class Zlib::NeedDict < Zlib::Error
 
-展開に用いる辞書がしていされていない場合に発生します。
+展開に用いる辞書が指定されていない場合に発生します。
 
 = class Zlib::DataError < Zlib::Error
 
