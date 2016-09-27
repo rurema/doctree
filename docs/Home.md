@@ -7,7 +7,7 @@
 本プロジェクトの成果物は以下のページでRubyの公式リファレンスとして公開されています。<br/>
 内容は一日に一回、githubリポジトリの内容と同期されます。
 
-* http://docs.ruby-lang.org/ja/ 
+* https://docs.ruby-lang.org/ja/ 
 
 ダウンロード等は[[ReleasedProducts]]からどうぞ。
 
