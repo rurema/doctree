@@ -66,19 +66,9 @@ include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
 
 @param obj 比較対象のオブジェクトを指定します。
 
-  p (0.1 .. 0.2).include?(0.15) # => true
-  # 1.8.1 以前
-  p (0.1 .. 0.2).member?(0.15)  # => cannot iterate from Float (TypeError)
-  # 1.8.2 以降
   p (0.1 .. 0.2).member?(0.15)  # => true
   
   # 文字列の場合、include? は辞書順の比較になる
-  p ("a" .. "c").include?("ba") # => true
-  # 1.8.1 以前
-  p ("a" .. "c").member?("ba")  # => false
-  # 1.8.2 以降
-  p ("a" .. "c").member?("ba")  # => true
-  # 1.9.1 以降
   p ("a" .. "c").include?("ba") # => false
   p ("a" .. "c").member?("ba")  # => false
 
