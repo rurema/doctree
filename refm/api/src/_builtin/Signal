@@ -85,9 +85,16 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
 @see [[d:spec/terminate]]
 
 #@since 2.0.0
+#@since 2.3.0
+--- signame(signo) -> String | nil
+#@else
 --- signame(signo) -> String
+#@end
 
 引数で指定されたシグナル番号をシグナル名に変換して返します。
+#@since 2.3.0
+対応するシグナル番号が存在しない場合は nil を返します。
+#@end
 
   Signal.trap("INT") { |signo| puts Signal.signame(signo) }
   Process.kill("INT", 0)
