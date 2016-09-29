@@ -54,18 +54,32 @@ SizedQueue オブジェクトを生成します。
 
 @param n キューの最大サイズを指定します。
 
+#@since 2.2.0
+--- push(obj, non_block = false) -> ()
+--- enq(obj, non_block = false)  -> ()
+--- <<(obj)                      -> ()
+#@else
 --- push(obj) -> ()
 --- <<(obj)   -> ()
 --- enq(obj)  -> ()
+#@end
 
 キューに与えられたオブジェクトを追加します。
 
 #@since 2.1.0
 キューのサイズが [[m:Thread::SizedQueue#max]] に達している場合は、
+#@since 2.2.0
+non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueue#max]]
+より小さくなるまで他のスレッドに実行を譲ります。
+#@else
 キューのサイズが [[m:Thread::SizedQueue#max]] より小さくなるまで他のスレッドに実行を譲ります。
+#@end
 その後、キューに与えられたオブジェクトを追加します。
 
 @param obj キューに追加したいオブジェクトを指定します。
+#@since 2.2.0
+@param non_block true を与えると、キューが一杯の時に例外 [[c:ThreadError]] が発生します。
+#@end
 
 @see  [[m:Thread::Queue#push]]
 #@else
