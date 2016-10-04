@@ -525,7 +525,7 @@ umask を変更します。変更前の umask の値を返します。
 
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+@param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
