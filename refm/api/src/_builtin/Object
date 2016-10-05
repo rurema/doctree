@@ -861,7 +861,7 @@ self#=~(obj) を反転した結果と同じ結果を返します。
 
   class Object
     def display(out = $stdout)
-      out.print self.to_s
+      out.write self
       nil
     end
   end
