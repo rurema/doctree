@@ -1093,7 +1093,11 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
   a.dig(0, 1, 1)                 # => 3
   a.dig(1, 2, 3)                 # => nil
+#@since 2.4.0
+  a.dig(0, 0, 0)                 # => TypeError: Integer does not have #dig method
+#@else
   a.dig(0, 0, 0)                 # => TypeError: Fixnum does not have #dig method
+#@end
   [42, {foo: :bar}].dig(1, :foo) # => :bar
 
 @see [[m:Hash#dig]], [[m:Struct#dig]], [[m:OpenStruct#dig]]
