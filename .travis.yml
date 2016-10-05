@@ -2,6 +2,14 @@ sudo: false
 rvm:
   - 2.3.1
 notifications:
-  recipients:
-    - okkez000@gmail.com
-    - ruby-reference-manual-diff@ml.fdiary.net
+  email:
+    recipients:
+      - okkez000@gmail.com
+      - zn@mbf.nifty.com
+  irc:
+    channels:
+      - "chat.freenode.net#ruby-ja"
+    on_success: change # [always|never|change] # default: always
+    on_failure: always # [always|never|change] # default: always
+    template:
+      - "%{message} by @%{author}: See %{build_url}"
