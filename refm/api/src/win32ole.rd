@@ -5,7 +5,7 @@ Microsoft Windows で COM や ActiveX を扱うためのライブラリです。
 
   * [[url:http://homepage1.nifty.com/markey/ruby/win32ole/index.html]]
   * [[url:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=Win32OLE]]
-  * [[url:http://www.morijp.com/masarl/homepage3.nifty.com/masarl/article/ruby-win32ole.html]]
+  * [[url:http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/ruby-win32ole.html]]
   * Rubyist Magazine [[url:http://magazine.rubyist.net/]]
     * Win32OLE 活用法【第 1 回】 Win32OLE ことはじめ [[url:http://magazine.rubyist.net/?0003-Win32OLE]]
     * Win32OLE 活用法【第 2 回】 Excel [[url:http://magazine.rubyist.net/?0004-Win32OLE]]
