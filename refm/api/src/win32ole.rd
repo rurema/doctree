@@ -3,7 +3,7 @@ category Windows
 
 Microsoft Windows で COM や ActiveX を扱うためのライブラリです。
 
-  * [[url:http://homepage1.nifty.com/markey/ruby/win32ole/index.html]]
+  * [[url:http://suke.my.coocan.jp/ruby/win32ole/index.html]]
   * [[url:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=Win32OLE]]
   * [[url:http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/ruby-win32ole.html]]
   * Rubyist Magazine [[url:http://magazine.rubyist.net/]]
