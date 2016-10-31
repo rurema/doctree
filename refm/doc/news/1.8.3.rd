@@ -343,7 +343,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
   オプションに -w を付けた時に出ます。((<ruby-dev:26201>))
 
 === 2005-05-22
-: OpenSSL::SSL::SSLServer#intialize(svr, ctx, session_id=nil)
+: OpenSSL::SSL::SSLServer#initialize(svr, ctx, session_id=nil)
   session_id を受け付けるようになりました。((<ruby-core:4663>))
 
 === 2005-05-19
