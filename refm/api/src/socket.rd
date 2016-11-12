@@ -38,6 +38,7 @@ AF_INET なソケットにおいてホストを指定するには以下のいず
   * ホスト名 (例: "localhost")
   * octet decimalによるIPアドレス(文字列) (例: "127.0.0.1")
   * 空文字列 (""), 文字列 "<any>" - INADDR_ANYに相当
+  * 文字列 "::" - IN6ADDR_ANY_INIT に相当
   * 文字列 "<broadcast>" - INADDR_BROADCASTに相当
   * IPアドレスを表す 32bit の整数 (例: 0x7f000001)
 
