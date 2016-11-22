@@ -141,7 +141,7 @@ passive mode をFTPの接続のグローバルなデフォルトモードにす�
 
 host で指定されたホストに接続します。
 
-環境変数 SOCK_SERVER が指定されている場合、SOCKS プロクシを
+環境変数 SOCKS_SERVER が指定されている場合、SOCKS プロクシを
 経由して接続します。
 
 #@since 1.9.2
