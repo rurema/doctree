@@ -120,8 +120,11 @@ BigDecimal オブジェクトが右にあるオブジェクトを
 単に変換を止めるだけでエラーにはなりません。
 "10XX"なら 10、"XXXX"は 0 と扱われます。
 
-   a = BigDecimal.E(20)
-   c = a * "0.123456789123456789123456789"   # 文字を BigDecimal に変換してから計算
+  require "bigdecimal"
+  require "bigdecimal/math"
+
+  a = BigMath.E(20)
+  c = a * "0.123456789123456789123456789"   # 文字を BigDecimal に変換してから計算
 
 無限大や非数を表す文字として、
 "Infinity"、"+Infinity"、"-Infinity"、"NaN" も使用できます
@@ -131,7 +134,7 @@ BigDecimal オブジェクトが右にあるオブジェクトを
 従って、BigDecimal オブジェクトが右にある場合も大抵は大丈夫です。
 ただ、現在の Ruby インタプリタの仕様上、文字列が左にあると計算できません。
 
-  a = BigDecimal.E(20)
+  a = BigMath.E(20)
   c = "0.123456789123456789123456789" * a   # エラー
 
 必要性があるとは思いませんが、
