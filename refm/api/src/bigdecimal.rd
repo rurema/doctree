@@ -91,7 +91,7 @@ NaN はどのような値と比較しても一致しません。(NaN 自身を�
 
   BigDecimal.new("1.0") / BigDecimal.new("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
 
-正の非常に小さな [[c:BigDecimal]] の値は -0 を表す値になります。
+正の非常に小さな [[c:BigDecimal]] の値は 0 を表す値になります。
 
   BigDecimal.new("1.0") / BigDecimal.new("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
 
