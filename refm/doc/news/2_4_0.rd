@@ -69,7 +69,7 @@
 
   * [[c:IO]]
     * [[m:IO#gets]], [[m:IO#readline]], [[m:IO#each_line]], [[m:IO#readlines]], [[m:IO.foreach]] は
-      chopm というキーワード引数を受け付けるようになりました。[[feature:12553]]
+      chomp というキーワード引数を受け付けるようになりました。[[feature:12553]]
 
   * [[c:Kernel]]
     * [[m:Kernel#clone]] は freeze というキーワード引数を受け付けるようになりました。
@@ -176,10 +176,10 @@
       OpenSSL は [[url:https://github.com/ruby/openssl]] に分離されましたが、デフォルトGemとして残っています。
 
   * [[lib:optparse]]
-    * [[m:OptionParser#parse]]や[[m:OptionParser#orser]]にキーワード引数 into を追加 [[feature:11191]]
+    * [[m:OptionParser#parse]]や[[m:OptionParser#order]]にキーワード引数 into を追加 [[feature:11191]]
 
   * [[lib:pathname]]
-    * [[m:Pthname#empty?]] を追加 [[feature:12596]]
+    * [[m:Pathname#empty?]] を追加 [[feature:12596]]
 
   * [[lib:readline]]
     * [[m:Readline.quoting_detection_proc]], [[m:Readline.quoting_detection_proc=]] を追加
