@@ -336,12 +336,11 @@ other == self の結果を返します。(ただし、 other.to_str は実行さ
 --- concat(other) -> self
 
 self に文字列 other を破壊的に連結します。
-other が 0 から 255 のまでの整数である場合は
-その 1 バイトを末尾に追加します (つまり、整数が示す ASCII コードの文字が追加されます)。
+other が 整数である場合は other.chr(self.encoding) 相当の文字を末尾に追加します。
 
 self を返します。
 
-@param other    文字列もしくは 0 から 255 までの範囲の整数
+@param other    文字列もしくは 0 以上の整数
 
 例:
 
