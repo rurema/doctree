@@ -60,7 +60,7 @@
 
   * [[c:Integer]]
     * Fixnum と Bignum は Integer に統合されました [[feature:12005]]
-    * [[m:Integer#ceil]], [[m:Integer#floor]], [[m:Integer#truncate]] はnow take an optional
+    * [[m:Integer#ceil]], [[m:Integer#floor]], [[m:Integer#truncate]] は
       [[m:Integer#round]] と同じように省略可能な桁を指定する引数を受け付けるようになりました [[feature:12245]]
     * [[m:Integer#digits]] を追加。 [[feature:12447]]
       位置記法のために各桁を展開するためのメソッドです。
@@ -87,160 +87,119 @@
     * [[m:Numeric#finite?]], [[m:Numeric#infinite?]] を追加 [[feature:12039]]
 
   * [[c:Process]]
-    * Support CLOCK_MONOTONIC_RAW_APPROX, CLOCK_UPTIME_RAW, and
-      CLOCK_UPTIME_RAW_APPROX which are introduced by macOS 10.12.
+    * macOS 10.12 から導入された CLOCK_MONOTONIC_RAW_APPROX, CLOCK_UPTIME_RAW,
+      CLOCK_UPTIME_RAW_APPROX をサポートしました
 
-* Rational
+  * [[c:Rational]]
+    * [[m:Rational#round]] は half というキーワード引数を受け付けるようになりました。[[bug:12548]] [[bug:12958]]
+      half には :even, :up, :down が指定可能です。[[feature:12953]]
 
-  * Rational#round now takes an optional keyword argument, half option, and
-    the default behavior is round-up now.  [Bug #12548] [Bug #12958]
-    half option can be one of :even, :up, and :down.  [Feature #12953]
+  * [[c:Regexp]]
+    * meta character \X matches Unicode 9.0 characters with some workarounds
+      for UTR #51 Unicode Emoji, Version 4.0 emoji zwj sequences.
+    * [[m:Regexp#match?]] を追加 [[feature:8110]]
+      true/false を返し、バックリファレンスを生成しません。
+    * Onigmo 6.0.0 に更新
 
-* Regexp
+  * [[c:Regexp]]/[[c:String]]: Unicodeのバージョンを8.0.0から9.0.0に更新しました [[feature:12513]]
 
-  * meta character \X matches Unicode 9.0 characters with some workarounds
-    for UTR #51 Unicode Emoji, Version 4.0 emoji zwj sequences.
+  * RubyVM::Env
+    * 削除しました
 
-  * Regexp#match? [Feature #8110]
-    This returns bool and doesn't save backref.
+  * [[c:String]]
+    * [[m:String#casecmp?]] を追加 [[feature:12786]]
+    * [[m:String#concat]], [[m:String#prepend]] 複数の引数を受け付けるようになりました [[feature:12333]]
+    * [[m:String#each_line]], [[m:String#lines]] 省略可能なキーワード引数 chomp を受け付けるようになりました [[feature:12553]]
+    * [[m:String#match?]] を追加 [[feature:12898]]
+    * [[m:String#unpack1]] を追加 [[feature:12752]]
+    * [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]], [[m:String#swapcase]],
+      [[m:String#upcase!]], [[m:String#downcase!]], [[m:String#capitalize!]], [[m:String#swapcase!]]
+      は全てのUnicodeに対して動作するようになりました。もはやASCIIのみに限定されていません。
+      UTF-8, UTF-16BE/LE, UTF-32BE/LE, ISO-8859-1~16 をサポートしています。
+      Variations are available with options. [[feature:10085]]
+    * String.new(capacity: size) [[feature:12024]]
 
-  * Update Onigmo 6.0.0.
+  * [[c:StringIO]]
+    * [[m:StringIO#gets]], [[m:StringIO#readline]], [[m:StringIO#each_line]], [[m:StringIO#readlines]]
+      省略可能なキーワード引数 chomp を受け付けるようになりました [[feature:12553]]
 
-* Regexp/String: Updated Unicode version from 8.0.0 to 9.0.0 [Feature #12513]
+  * [[c:Symbol]]
+    * [[m:Symbol#casecmp?]] を追加 [[feature:12786]]
+    * [[m:Symbol#match]] は [[c:MatchData]] を返すようになりました [[bug:11991]]
+    * [[m:Symbol#match?]] を追加 [[feature:12898]]
+    * [[m:Symbol#upcase]], [[m:Symbol#downcase]], [[m:Symbol#capitalize]], [[m:Symbol#swapcase]] は
+      全ての Unicode に対して動作するようになりました。[[feature:10085]]
 
-* RubyVM::Env
+  * [[c:Thread]]
+    * [[m:Thread#report_on_exception]], [[m:Thread.report_on_exception]] を追加 [[feature:6647]]
 
-  * RubyVM::Env was removed.
+  * [[c:TracePoint]]
+    * [[m:TracePoint#callee_id]] を追加 [[feature:12747]]
 
-* String
+  * [[c:Warning]]
+  * Warningとう名前のモジュールを導入しました。
+    デフォルトでは [[m:Warning.#warn]] という特異メソッドだけ定義されているモジュールです。
+    サードパーティのライブラリが警告を扱う方法を制御できるようになります。
+    [[feature:12299]]
 
-  * String#casecmp? [Feature #12786]
+=== 標準添付ライブラリの更新 (優れたもののみ)
 
-  * String#concat, String#prepend [Feature #12333]
-    Now takes multiple arguments.
+  * [[lib:cgi]]
+    * "," をクッキーの区切り文字として許可しなくなりました [[bug:12791]]
 
-  * String#each_line, String#lines now takes an optional keyword argument,
-    chomp flag.  [Feature #12553]
+  * [[lib:csv]]
+    * liberal_parsing オプションを追加 [[feature:11839]]
 
-  * String#match? [Feature #12898]
+  * [[lib:ipaddr]]
+    * [[m:IPAddr#==]], [[m:IPAddr#<=>]] で引数のオブジェクトを IPAddr に変換する処理に失敗しても例外が発生しなくなりました
+      [[bug:12799]]
 
-  * String#unpack1 [Feature #12752]
+  * [[lib:irb]]
+    * [[m:Binding#irb]] binding.pryと同じようにREPLのセッションを開始します。r56624.
 
-  * String#upcase, String#downcase, String#capitalize, String#swapcase and
-    their bang variants work for all of Unicode, and are no longer limited
-    to ASCII. Supported encodings are UTF-8, UTF-16BE/LE, UTF-32BE/LE, and
-    ISO-8859-1~16. Variations are available with options. See the documentation
-    of String#downcase for details. [Feature #10085]
+  * [[lib:logger]]
+    * [[m:Logger.new]] のキーワード引数に level, progname, datetime_format, formatter を追加し、
+      Loggerインスタンス生成時に属性をセットできるようにしました。 [[feature:12224]]
+    * [[m:Logger.new]] のキーワード引数に shift_period_suffix を追加 [[feature:10772]]
 
-  * String.new(capacity: size) [Feature #12024]
+  * [[lib:net/http]]
+    * [[m:Net::HTTP.post]] を追加 [[feature:12375]]
 
-* StringIO
+  * [[lib:net/ftp]]
+    * TLSをサポート [[rfc:4217]]
+    * [[m:Net::FTP.new]] の引数をキーワード引数に対応しました
+    * Add a new optional argument pathname to [[m:Net::FTP#status]] に省略可能なキーワード引数 pathname を追加
+      solebox による貢献。[[url:https://github.com/ruby/ruby/pull/1478]] [[feature:12965]]
 
-  * StringIO#gets, StringIO#readline, StringIO#each_line, StringIO#readlines now takes
-    an optional keyword argument, chomp flag.  [Feature #12553]
+  * [[lib:openssl]]
+    * Ruby/OpenSSL 2.0
+      OpenSSL は [[url:https://github.com/ruby/openssl]] に分離されましたが、デフォルトGemとして残っています。
 
-* Symbol
+  * [[lib:optparse]]
+    * [[m:OptionParser#parse]]や[[m:OptionParser#orser]]にキーワード引数 into を追加 [[feature:11191]]
 
-  * Symbol#casecmp? [Feature #12786]
+  * [[lib:pathname]]
+    * [[m:Pthname#empty?]] を追加 [[feature:12596]]
 
-  * Symbol#match now returns MatchData.  [Bug #11991]
+  * [[lib:readline]]
+    * [[m:Readline.quoting_detection_proc]], [[m:Readline.quoting_detection_proc=]] を追加
+      [[feature:12659]]
 
-  * Symbol#match? [Feature #12898]
+  * [[lib:rexml]]
+    * [[m:REXML::Element#[] ]]: If String or Symbol is specified, attribute
+      value is returned. Otherwise, Nth child is returned. This is
+      backward compatible change.
 
-  * Symbol#upcase, Symbol#downcase, Symbol#capitalize, and Symbol#swapcase now
-    work for all of Unicode. See the documentation of String#downcase
-    for details. [Feature #10085]
+  * [[lib:set]]
+    * [[m:Set#compare_by_identity]], [[m:Set#compare_by_identity?]] を追加
+      [[feature:12210]]
 
-* Thread
+  * [[lib:webrick]]
+    * "," をクッキーの区切り文字として許可しなくなりました [[bug:12791]]
 
-  * Thread#report_on_exception and Thread.report_on_exception
-    [Feature #6647]
+=== 互換性 (機能追加とバグ修正を除く)
 
-* TracePoint
-
-  * TracePoint#callee_id [Feature #12747]
-
-* Warning
-
-  * New module named Warning is introduced.  By default it has only
-    one singleton method, named warn.  This makes it possible for
-    3rd-party libraries to control the way warnings are handled.
-    [Feature #12299]
-
-=== Stdlib updates (outstanding ones only)
-
-* CGI
-
-  * Don't allow , as a separator [Bug #12791]
-
-* CSV
-
-  * Add a liberal_parsing option. [Feature #11839]
-
-* IPAddr
-
-  * IPAddr#== and IPAddr#<=> no longer raise an exception if coercion fails.
-    [Bug #12799]
-
-* IRB
-
-  * Binding#irb: Start a REPL session like `binding.pry` at r56624.
-
-* Logger
-
-  * Allow specifying logger parameters in constructor such
-    as level, progname, datetime_format, formatter. [Feature #12224]
-  * Add shift_period_suffix option. [Feature #10772]
-
-* Net::HTTP
-
-  * New method: Net::HTTP.post [Feature #12375]
-
-* Net::FTP
-
-  * Support TLS (RFC 4217).
-  * Support hash style options for Net::FTP.new.
-  * Add a new optional argument pathname to Net::FTP#status.
-    Contributed by soleboxy. [GH-1478] [Feature #12965]
-
-* OpenSSL
-
-  * Includes Ruby/OpenSSL 2.0. OpenSSL has been extracted as a Gem and is
-    maintained at a separate repository now: https://github.com/ruby/openssl.
-    It still remains as a 'default gem'.  [Feature #9612]
-    Refer to ext/openssl/History.md for the full release note.
-
-* optparse
-
-  * Add an into option. [Feature #11191]
-
-* pathname
-
-  * New method: Pathname#empty? [Feature #12596]
-
-* Readline
-
-  * Readline.quoting_detection_proc and Readline.quoting_detection_proc=
-    [Feature #12659]
-
-* REXML
-
-  * REXML::Element#[]: If String or Symbol is specified, attribute
-    value is returned. Otherwise, Nth child is returned. This is
-    backward compatible change.
-
-* set
-
-  * New methods: Set#compare_by_identity and Set#compare_by_identity?.
-    [Feature #12210]
-
-* WEBrick
-
-  * Don't allow , as a separator [Bug #12791]
-
-=== Compatibility issues (excluding feature bug fixes)
-
-* Array#sum and Enumerable#sum are implemented.  [Feature #12217]
+* [[m:Array#sum]] と [[m:Enumerable#sum]] を追加しました。 [[feature:12217]]
   Ruby itself has no compatibility problem because Ruby didn't have sum method
   for arrays before Ruby 2.4.
   However many third party gems, activesupport, facets, simple_stats, etc,
