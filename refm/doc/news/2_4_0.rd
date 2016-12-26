@@ -199,123 +199,114 @@
 
 === 互換性 (機能追加とバグ修正を除く)
 
-* [[m:Array#sum]] と [[m:Enumerable#sum]] を追加しました。 [[feature:12217]]
-  Ruby itself has no compatibility problem because Ruby didn't have sum method
-  for arrays before Ruby 2.4.
-  However many third party gems, activesupport, facets, simple_stats, etc,
-  defines sum method.  These implementations are mostly compatible but
-  there are subtle differences.
-  Ruby's sum method should be mostly compatible but it is impossible to
-  be perfectly compatible with all of them.
+  * [[m:Array#sum]] と [[m:Enumerable#sum]] を追加しました。 [[feature:12217]]
+    Ruby2.4以前ではArray#sumはなかったのでRuby自身には互換性の問題はありません。
+    しかし、多くのサードパーティ製のGem(activesupport, facets, simple_stats, etc)で
+    sumメソッドを定義しています。それらの実装はほとんど互換ですが、微妙な違いがあります。
+    Rubyのsumメソッドは概ね互換であるべきですが、全てのサードパーティ製の実装と完全に互換性を保つことは不可能です。
 
-* Fixnum and Bignum are unified into Integer  [Feature #12005]
-  Fixnum class and Bignum class is removed.
-  Integer class is changed from abstract class to concrete class.
-  For example, 0 is an instance of Integer: 0.class returns Integer.
-  The constants Fixnum and Bignum is bound to Integer.
-  So obj.kind_of?(Fixnum) works as obj.kind_of?(Integer).
-  At C-level, Fixnum object and Bignum object should be distinguished by
-  FIXNUM_P(obj) and RB_TYPE_P(obj, T_BIGNUM).
-  RUBY_INTEGER_UNIFICATION can be used to detect this feature at C-level.
-  0.class == Integer can be used to detect this feature at Ruby-level.
-  The C-level constants, rb_cFixnum and rb_cBignum, are removed.
-  They can cause compilation failure.
+  * FixnumとBignumはIntegerに統合されました。[[feature:12005]]
+    FixnumクラスとBignumクラスは削除されました。
+    Integerクラスは抽象クラスから具象クラスに変更されました。
+    例えば、0のクラスはIntegerです。
+//emlist{
+        0.class # => Integer
+        Fixnum  # => Integer
+        Bignum  # => Integer
+}
+    obj.kind_of?(Fixnum) は obj.kind_of?(Integer) と同じです。
+    Cレベルでは FIXNUM_P(obj) と RB_TYPE_P(obj, T_BIGNUM) を使用して区別するべきです。
+    RUBY_INTEGER_UNIFICATIONというC言語の定数でこの機能を検出することができます。
+    Rubyレベルでは以下のコードで検出することができます。
+//emlist{
+        0.class == Integer
+}
+    Cレベルの定数 rb_cFixnumとrb_cBignumは削除されました。これらを使用している場合、
+    コンパイルエラーになります。
 
-* String/Symbol#upcase/downcase/swapcase/capitalize(!) now work for all of
-  Unicode, not only for ASCII. [Feature #10085]
-  No change is needed if the data is in ASCII anyway or if the limitation
-  to ASCII was only tolerated while waiting for a more extensive implementation.
-  A change (using the :ascii option) is needed in cases where Unicode data
-  is processed, but the operation has to be limited to ASCII only.
-  A good example of this are internationalized domain names.
+  * String/Symbol#upcase/downcase/swapcase/capitalize(!) はASCIIだけでなく全てのUnicodeに対して動作するようになりました。[[feature:10085]]
+    No change is needed if the data is in ASCII anyway or if the limitation
+    to ASCII was only tolerated while waiting for a more extensive implementation.
+    :asciiオプションを使うようにする変更が必要なのは、Unicodeのデータを処理するときに、
+    ASCIIのみ変換したい場合です。国際化ドメイン名の処理はよい例です。
 
-* TRUE / FALSE / NIL
-  These constants are now obsoleted. [Feature #12574]
-  Use true / false / nil resp. instead.
+  * TRUE / FALSE / NIL
+    これらは廃止されました。[[feature:12574]]
+    true / false / nil を使用してください。
 
-=== Stdlib compatibility issues (excluding feature bug fixes)
+=== 標準添付ライブラリの互換性(機能追加とバグ修正を除く)
 
-* DateTime
+  * DateTime
+    * [[m:DateTime#to_time]] はタイムゾーンを保つようになりました [[bug:12189]]
 
-  * DateTime#to_time now preserves timezone.  [Bug #12189]
+  * PSych
+    * Psych 2.2.2 に更新
 
-* PSych
+  * RDoc
+    * RDoc 5.0.0 に更新
 
-  * Update Psych 2.2.2
+  * RubyGems
+    * RubyGems 2.6.8 に更新
 
-* RDoc
+  * shellwords
+    * [[m:Shellwords.shellwords]] (shellsplit) treats the backslash as escape
+      character only when followed by one of the following characters:
+      $ ` " \ <newline>
+      [[bug:10055]]
+      [[url:http://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html]]
 
-  * Update RDoc 5.0.0
+  * Time
+    * [[m:Time#to_time]] はタイムゾーンを保つようになりました [[bug:12271]]
 
-* RubyGems
+  * thread
+    * the extension library is removed.  Till 2.0 it was a pure ruby script
+      "thread.rb", which has precedence over "thread.so", and has been provided
+      in $LOADED_FEATURES since 2.1.
 
-  * Update RubyGems 2.6.8
+  * Tk
+    * 標準添付ライブラリから削除されました [[feature:8539]]
+      [[url:https://github.com/ruby/tk]] が新しいリポジトリです。
 
-* shellwords
+  * XMLRPC
+    * 標準添付ライブラリから削除されてbundled Gem になりました [[feature:12160]][[ruby-core:74239]]
+      [[url:https://github.com/ruby/xmlrpc]]が新しいリポジトリです。
 
-  * Shellwords.shellwords (shellsplit) treats the backslash as escape
-    character only when followed by one of the following characters:
-    $ ` " \ <newline>
-    [Bug #10055]
+  * Zlib
+    * [[m:Zlib.gzip]], [[m:Zlib.gunzip]] を追加 [[feature:13020]]
 
-* Time
+=== C API の更新
 
-  * Time#to_time now preserves timezone.  [Bug #12271]
+  * ruby_show_version() will no longer exits the process, if
+    RUBY_SHOW_COPYRIGHT_TO_DIE is set to 0.  This will be the default in
+    the future.
 
-* thread
+  * rb_gc_adjust_memory_usage() [Feature #12690]
 
-  * the extension library is removed.  Till 2.0 it was a pure ruby script
-    "thread.rb", which has precedence over "thread.so", and has been provided
-    in $LOADED_FEATURES since 2.1.
+=== サポートするプラットフォームの変更
 
-* Tk
+  * FreeBSD < 4 はもうサポートしていません
 
-  * Tk is removed from stdlib.  [Feature #8539]
-    https://github.com/ruby/tk is the new upstream.
+=== 実装の改善
 
-* XMLRPC
+  * いくつかの条件で [x,y].max と [x,y].min が一時的な配列を生成しないよう最適化されました。
+    Math.max(x, y) と書くようなほとんどのカジュアルで実際にありそうなユースケースで効果があります。
+    具体的な条件は実装の詳細ですが以下の通りです:
+    * 配列リテラルに splat が含まれないこと
+    * must have at least one expression but literal
+    * 配列の長さが0x100(256)以下であること
+    * Array#max や Array#min が再定義されていないこと
 
-  * XMLRPC is removed from stdlib, and bundled as gem. [Feature #12160][ruby-core:74239]
-    https://github.com/ruby/xmlrpc is the new upstream.
+  * スレッドのデッドロックを検知するとバックトレースと依存関係を出力します [[feature:8214]]
 
-* Zlib
+  * st_table (st.c) 内部のデータ構造が改善されました [[feature:12142]]
 
-  * Zlib.gzip and Zlib.gunzip [Feature #13020]
+  * Rational は大幅に最適化されました [[feature:12484]]
 
-=== C API updates
+=== その他の変更
 
-* ruby_show_version() will no longer exits the process, if
-  RUBY_SHOW_COPYRIGHT_TO_DIE is set to 0.  This will be the default in
-  the future.
-
-* rb_gc_adjust_memory_usage() [Feature #12690]
-
-=== Supported platform changes
-
-* FreeBSD < 4 is no longer supported
-
-=== Implementation improvements
-
-* In some condition, `[x, y].max` and `[x, y].min` are optimized
-  so that a temporal array is not created.  The concrete condition is
-  an implementation detail: currently, the array literal must have no
-  splat, must have at least one expression but literal, the length must
-  be <= 0x100, and Array#max and min must not be redefined.  It will work
-  in most casual and real-life use case where it is written with intent
-  to `Math.max(x, y)`.
-
-* Thread deadlock detection now shows their backtrace and dependency. [Feature #8214]
-
-* st_table (st.c) internal data structure is improved. [Feature #12142]
-
-* Rational is extensively optimized. [Feature #12484]
-
-=== Miscellaneous changes
-
-* ChangeLog is removed from the repository.
-  It is generated from commit messages in Subversion by `make dist`.
-  Also note that now people should follow Git style commit message.
-  The template is written at
-  [Short (50 chars or less) summary of changes](https://git-scm.com/book/ch5-2.html).
-  [Feature #12283]
+* ChangeLogファイルはリポジトリから削除されました。
+  Subversion にあるコミットメッセージから make dist によって生成されます。
+  人々はGitスタイルのコミットメッセージに従うべきです。
+  以下を参照してください。[[url:https://git-scm.com/book/ch5-2.html]]
+  [[feature:12283]]
 #@end
