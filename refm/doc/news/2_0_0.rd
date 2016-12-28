@@ -83,7 +83,7 @@
     * 拡張: [[m:Module#const_get]] 修飾された定数名の文字列を受け付けるようになりました。
 //emlist{
         Object.const_get("Foo::Bar::Baz")
-}
+//}
 
   * [[c:Mutex]]
     * 追加(実験的): [[m:Mutex#owned?]] mutex が現在のスレッドに所持されているかどうかを返します

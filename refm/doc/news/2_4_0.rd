@@ -213,14 +213,14 @@
         0.class # => Integer
         Fixnum  # => Integer
         Bignum  # => Integer
-}
+//}
     obj.kind_of?(Fixnum) は obj.kind_of?(Integer) と同じです。
     Cレベルでは FIXNUM_P(obj) と RB_TYPE_P(obj, T_BIGNUM) を使用して区別するべきです。
     RUBY_INTEGER_UNIFICATIONというC言語の定数でこの機能を検出することができます。
     Rubyレベルでは以下のコードで検出することができます。
 //emlist{
         0.class == Integer
-}
+//}
     Cレベルの定数 rb_cFixnumとrb_cBignumは削除されました。これらを使用している場合、
     コンパイルエラーになります。
 
