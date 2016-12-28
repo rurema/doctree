@@ -208,21 +208,28 @@
   * FixnumとBignumはIntegerに統合されました。[[feature:12005]]
     FixnumクラスとBignumクラスは削除されました。
     Integerクラスは抽象クラスから具象クラスに変更されました。
-    例えば、0のクラスはIntegerです。
+    Cレベルの定数 rb_cFixnumとrb_cBignumは削除されました。これらを使用している場合、
+    コンパイルエラーになります。
 //emlist{
+        # 0のクラスはInteger
         0.class # => Integer
         Fixnum  # => Integer
         Bignum  # => Integer
-//}
-    obj.kind_of?(Fixnum) は obj.kind_of?(Integer) と同じです。
-    Cレベルでは FIXNUM_P(obj) と RB_TYPE_P(obj, T_BIGNUM) を使用して区別するべきです。
-    RUBY_INTEGER_UNIFICATIONというC言語の定数でこの機能を検出することができます。
-    Rubyレベルでは以下のコードで検出することができます。
-//emlist{
+
+        # 以下の2つは同じ
+        obj.kind_of?(Fixnum)
+        obj.kind_of?(Integer)
+
+        /* Cレベルでは以下の2つを使ってFixnumとBignumを区別すべき */
+        FIXNUM_P(obj)
+        RB_TYPE_P(obj, T_BIGNUM)
+
+        /* Cレベルではこの機能を検出するために以下の定数を使います */
+        RUBY_INTEGER_UNIFICATION
+
+        # Rubyレベルでは以下のコードでこの機能を検出できます
         0.class == Integer
 //}
-    Cレベルの定数 rb_cFixnumとrb_cBignumは削除されました。これらを使用している場合、
-    コンパイルエラーになります。
 
   * String/Symbol#upcase/downcase/swapcase/capitalize(!) はASCIIだけでなく全てのUnicodeに対して動作するようになりました。[[feature:10085]]
     No change is needed if the data is in ASCII anyway or if the limitation
