@@ -304,9 +304,9 @@
 
 === その他の変更
 
-* ChangeLogファイルはリポジトリから削除されました。
-  Subversion にあるコミットメッセージから make dist によって生成されます。
-  人々はGitスタイルのコミットメッセージに従うべきです。
-  以下を参照してください。[[url:https://git-scm.com/book/ch5-2.html]]
-  [[feature:12283]]
+  * ChangeLogファイルはリポジトリから削除されました。
+    Subversion にあるコミットメッセージから make dist によって生成されます。
+    人々はGitスタイルのコミットメッセージに従うべきです。
+    以下を参照してください。[[url:https://git-scm.com/book/ch5-2.html]]
+    [[feature:12283]]
 #@end
