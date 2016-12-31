@@ -27,7 +27,11 @@ require webrick/log
     :StartCallback  => nil,
     :StopCallback   => nil,
     :AcceptCallback => nil,
+#@since 2.4.0
+    :DoNotReverseLookup => true,
+#@else
     :DoNotReverseLookup => nil,
+#@end
   }
 
 --- HTTP -> Hash
@@ -48,7 +52,11 @@ require webrick/log
     :StartCallback  => nil,
     :StopCallback   => nil,
     :AcceptCallback => nil,
+#@since 2.4.0
+    :DoNotReverseLookup => true,
+#@else
     :DoNotReverseLookup => nil,
+#@end
 
     :RequestTimeout => 30,
     :HTTPVersion    => HTTPVersion.new("1.1"),
