@@ -8,10 +8,8 @@ UDP/IPデータグラム型ソケットのクラス。
 --- new(address_family=Socket::AF_INET) -> UDPSocket
 新しい UDP ソケットを返します。
 
-#@since 1.9.1
 address_family には Socket::AF_INET のような整数、:INET のような
 シンボル、"INET" のような文字列を指定することができます。
-#@end
 
 @param address_family ソケットのアドレスファミリー
 == Instance Methods
@@ -57,13 +55,8 @@ host, port の対、もしくは sockaddr_to で送り先を指定します。
 
 実際に送ったデータの長さを返します。
 
-#@until 1.9.1
-sockaddr_to には[[ref:lib:socket#pack_string]]
-を指定します。
-#@else
 sockaddr_to には[[ref:lib:socket#pack_string]] もしくは
 [[c:Addrinfo]] オブジェクトを指定します。
-#@end
 
 host, port に関しては [[ref:lib:socket#host_format]]、
 [[ref:lib:socket#service_format]]を参照してください。
@@ -83,7 +76,6 @@ host, port に関しては [[ref:lib:socket#host_format]]、
 @param port 送り先のポート番号
 @param sockaddr_to 送り先のアドレス情報
 
-#@if (version >= "1.8.5")
 --- recvfrom_nonblock(maxlen, flags=0) -> [String, Array]
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] でソケットからデータを受け取ります。
@@ -98,13 +90,10 @@ flags はフラグで、Socket::MSG_* の bitwise OR を渡します。
 
 [[man:recvfrom(2)]] がエラーになった場合、
 Errno::EAGAIN, Errno::EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
-#@since 1.9.1
 Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
 可能であることを意味する例外には、[[c:IO::WaitReadable]] が extend
 されています。
-#@end
 
-#@since 1.9.1
   require 'socket'
   s1 = UDPSocket.new
   s1.bind("127.0.0.1", 0)
@@ -120,10 +109,7 @@ Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライする
     IO.select([s2])
     retry
   end
-#@end
 
 @param maxlen 受け取るデータの最大バイト数
 @param flags フラグ
 @see [[m:IPSocket#recvfrom]]
-
-#@end
