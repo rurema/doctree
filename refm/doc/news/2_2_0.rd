@@ -160,8 +160,8 @@
       [[url:http://docs.seattlerb.org/rubygems/History_txt.html#label-2.4.2+%2F+2014-10-01]]
 
   * [[lib:tsort]]
-    * [[m:TSort#tsort_each]], [[m:TSort#each_strongly_connected_component]],
-      [[m:TSort#each_strongly_connected_component_from]] はブロックを省略すると [[c:Enumerator]] を返すようになりました。
+    * [[m:TSort.tsort_each]], [[m:TSort.each_strongly_connected_component]],
+      [[m:TSort.each_strongly_connected_component_from]] はブロックを省略すると [[c:Enumerator]] を返すようになりました。
 
   * [[lib:xmlrpc]]
     * LibXMLStreamParser という新しいパーサーを追加しました
