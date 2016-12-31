@@ -58,6 +58,8 @@ Socket::AncillaryData オブジェクトを生成します。
 
 整数データのサイズおよびエンディアンは実行するホストによって異なります。
 
+  require 'socket'
+
   p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
   #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
 

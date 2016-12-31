@@ -11,6 +11,11 @@ UDP/IPデータグラム型ソケットのクラス。
 address_family には Socket::AF_INET のような整数、:INET のような
 シンボル、"INET" のような文字列を指定することができます。
 
+  require 'socket'
+
+  UDPSocket.new                   # => #<UDPSocket:fd 3>
+  UDPSocket.new(Socket::AF_INET6) # => #<UDPSocket:fd 4>
+
 @param address_family ソケットのアドレスファミリー
 == Instance Methods
 

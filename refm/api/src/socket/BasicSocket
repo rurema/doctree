@@ -57,6 +57,17 @@
 初期値はソケットを生成したときの
 [[m:BasicSocket.do_not_reverse_lookup]] の値になります。
 
+  require 'socket'
+
+  BasicSocket.do_not_reverse_lookup = false
+  TCPSocket.open("www.ruby-lang.org", 80) {|sock|
+    p sock.do_not_reverse_lookup      # => false
+  }
+  BasicSocket.do_not_reverse_lookup = true
+  TCPSocket.open("www.ruby-lang.org", 80) {|sock|
+    p sock.do_not_reverse_lookup      # => true
+  }
+
 @see [[m:BasicSocket#do_not_reverse_lookup=]]
 
 --- do_not_reverse_lookup=(bool)

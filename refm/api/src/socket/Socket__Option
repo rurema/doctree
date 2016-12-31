@@ -51,6 +51,14 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、
 @param optname オプションの名前
 @param boolean データ(真偽値)
 
+  require 'socket'
+
+  p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, true)
+  # => #<Socket::Option: INET SOCKET KEEPALIVE 1>
+
+  p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, false)
+  # => #<Socket::Option: AF_INET SOCKET KEEPALIVE 0>
+
 --- linger(onoff, secs) -> Socket::Option
 SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
 を新たに生成し返します。

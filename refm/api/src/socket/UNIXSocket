@@ -21,6 +21,11 @@ path で指定したパス名を用いてソケットを接続します。
 
 @param path 接続先のパス名文字列
 
+  require 'socket'
+
+  s = UNIXSocket.new("/tmp/sock")
+  s.send("hello", 0)
+
 --- pair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
 --- socketpair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
 

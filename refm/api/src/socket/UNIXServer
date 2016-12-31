@@ -20,6 +20,12 @@ path で指定したパス名を用いて接続を受け付けるソケット
 
 @param path 接続を受け付けるパス名文字列
 
+  require 'socket'
+
+  serv = UNIXServer.new("/tmp/sock")
+  s = serv.accept
+  p s.read
+
 == Instance Methods
 
 --- accept -> UnixSocket
