@@ -256,8 +256,9 @@
     * RubyGems 2.6.8 に更新
 
   * shellwords
-    * [[m:Shellwords.shellwords]] (shellsplit) treats the backslash as escape
-      character only when followed by one of the following characters:
+    * [[m:Shellwords.shellwords]] (shellsplit) はダブルクオートの中で
+      後続の文字が次の文字の時だけバックスラッシュをエスケープとして
+      扱います:
       $ ` " \ <newline>
       [[bug:10055]]
       [[url:http://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html]]
