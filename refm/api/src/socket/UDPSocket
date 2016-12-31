@@ -35,6 +35,8 @@ bind したポートから [[m:Socket#recv]] でデータを受け取ること�
 データを送ることができます(connect しなくとも送り先のアドレスを明示すれば
 データを送ることができます)。
 
+  require 'socket'
+
   u1 = UDPSocket.new
   u1.bind("127.0.0.1", 4913)
   u2 = UDPSocket.new

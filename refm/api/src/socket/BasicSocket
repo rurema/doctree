@@ -98,6 +98,8 @@
 
 例:
 
+  require 'socket'
+
   serv = TCPServer.open("", 0)
   p serv.getsockname        #=> "\002\000\236C\000\000\000\000\000\000\000\000\000\000\000\000"
   p Socket.unpack_sockaddr_in(serv.getsockname)     #=> [40515, "0.0.0.0"]
@@ -119,6 +121,8 @@ level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR
 @see [[m:BasicSocket#setsockopt]]
 
 例:
+
+  require 'socket'
 
   serv = Socket.tcp_server_sockets("", 0)[0]
   c = serv.local_address.connect
@@ -153,6 +157,8 @@ UDP では空のパケットを読み込んだことを意味します。
 @raise Errno::EXXX [[man:recvfrom(2)]] がエラーになった場合などに発生します。
 
 例:
+
+  require 'socket'
 
   s1, s2 = UNIXSocket.pair
   s1.write "a"
@@ -200,6 +206,8 @@ dest_sockaddr には「ソケットアドレス構造体を pack した文字列
 @raise Errno::EXXX データの送信に失敗した場合に発生します。
 
 例:
+
+  require 'socket'
 
   s = UDPSocket.new
   sockaddr = Socket.sockaddr_in("discard", "localhost")
@@ -284,6 +292,8 @@ how を省略すると Socket::SHUT_RDWR を指定したことになります。
 BasicSocket#local_address が接続先として不適なアドレスを返す場合は
 例外 [[c:SocketError]] が発生します。
 
+  require 'socket'
+
   Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
     p serv.connect_address #=> #<Addrinfo: 127.0.0.1:53660 TCP>
     serv.connect_address.connect {|c|
@@ -304,6 +314,9 @@ Unix ドメインソケットにおいて接続相手の euid と egid を
 
 ソケットが Unix ドメインソケットでない場合の返り値は
 不定です。
+
+  require 'socket'
+
   Socket.unix_server_loop("/tmp/sock") {|s|
     begin
       euid, egid = s.getpeereid
@@ -324,6 +337,8 @@ Unix ドメインソケットにおいて接続相手の euid と egid を
 
 返されたオブジェクトの [[m:Addrinfo#protocol]] は 0 を
 返すことに注意してください。
+
+  require 'socket'
 
   TCPSocket.open("www.ruby-lang.org", 80) {|s|
     p s.local_address #=> #<Addrinfo: 192.168.0.129:36873 TCP>
@@ -402,6 +417,8 @@ Socket::MSG_* 定数の bitwise OR で表現されています。
 返されたオブジェクトの [[m:Addrinfo#protocol]] は 0 を
 返すことに注意してください。
 
+  require 'socket'
+
   TCPSocket.open("www.ruby-lang.org", 80) {|s|
     p s.remote_address #=> #<Addrinfo: 221.186.184.68:80 TCP>
   }
@@ -432,6 +449,8 @@ controls には 補助データ(ancillary data)を渡します。
 
   # UnixSocket#send_io の実装例
   # use Socket::AncillaryData.
+  require 'socket'
+
   ancdata = Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, io.fileno)
   sock.sendmsg("a", 0, nil, ancdata)
   

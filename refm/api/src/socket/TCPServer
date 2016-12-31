@@ -88,6 +88,8 @@ host に指定できる形式は[[ref:lib:socket#host_format]]を見てくださ
 
 例:
 
+  require 'socket'
+
   TCPServer.open("", 0) {|serv|
     c = TCPSocket.new(*serv.addr.values_at(3,1))
     s = serv.accept
@@ -139,6 +141,8 @@ TCPServer のインスタンスは最初は backlog の値は 5 で生成され�
 [[m:TCPServer#accept]] と同じです。
 
 例:
+
+  require 'socket'
 
   TCPServer.open("", 0) {|serv|
     c = TCPSocket.new(*serv.addr.values_at(3,1))

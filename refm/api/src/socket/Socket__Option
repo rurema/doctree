@@ -22,6 +22,8 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、
 
 @see [[m:Socket::Option.int]], [[m:Socket::Option.bool]], [[m:Socket::Option.linger]]
 
+  require 'socket'
+
   sockopt = Socket::Option.new(:INET, :SOCKET, :KEEPALIVE, [1].pack("i"))
   p sockopt #=> #<Socket::Option: INET SOCKET KEEPALIVE 1>
 

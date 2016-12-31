@@ -139,6 +139,9 @@ IP のバージョンに依存しないプログラムを書くための標準�
 #@# Linuxではservnameにポート番号(0や21や"0"や"21"など)は
 #@# getaddrinfo: Servname not supported for ai_socktype (SocketError)に
 #@# なって使えないようです。
+
+  require 'socket'
+
   p Socket.getaddrinfo(Socket.gethostname, "ftp")
   #=> [["AF_INET", 21, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6]]
   
@@ -216,6 +219,8 @@ Socket::NI_DGRAM
 
 === 使用例
 
+  require 'socket'
+
   Socket.getnameinfo(Socket.sockaddr_in('21','127.0.0.1'))
   #=> ["localhost", "ftp"]
   
@@ -260,6 +265,8 @@ Socket.unpack_sockaddr_in で unpack できます。
 
 === 使用例
 
+  irb(main):009:0> require 'socket'
+
   irb(main):009:0> Socket.gethostbyname("210.251.121.214")
   ["helium.ruby-lang.org", ["helium"], 2, "\322\373y\326"]
   
@@ -275,6 +282,8 @@ Socket.unpack_sockaddr_in で unpack できます。
 ただし、これは不可能な場合もあります。
 
 例:
+
+  require 'socket'
 
   p Socket.gethostname   #=> "helium.ruby-lang.org"
 
@@ -388,6 +397,8 @@ unpack したソケットパス名を返します。
 @param protocol_name "tcp" や "udp" などのプロトコル名
 @return サービスの正式名
 
+   require 'socket'
+
    Socket.getservbyport(80)         #=> "www"
    Socket.getservbyport(514, "tcp") #=> "shell"
    Socket.getservbyport(514, "udp") #=> "syslog"
@@ -430,6 +441,8 @@ local_host や local_port を指定した場合、ソケットをそこにバイ
 @return ブロック付きで呼ばれた場合はブロックが返した値です。
         ブロックなしで呼ばれた場合はソケットオブジェクトを返します。
 
+  require 'socket'
+
   Socket.tcp("www.ruby-lang.org", 80) {|sock|
     sock.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
     sock.close_write
@@ -460,6 +473,8 @@ TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し�
 
   # 逐次的な echo サーバ
   # 一度に一つのクライアントした取り扱えない
+  require 'socket'
+
   Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
     begin
       IO.copy_stream(sock, sock)
@@ -471,6 +486,8 @@ TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し�
   # スレッドを使った echo サーバ
   # 同時に複数のクライアントを取り扱える
   # 以下の例だと接続制限がない(つまり接続過剰になりえる)ことに注意
+  require 'socket'
+
   Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
     Thread.new {
       begin
@@ -504,6 +521,8 @@ TCP/IP で host:port で待ち受けるサーバ側のソケットを
 
 port が 0 の場合は、実際のポート番号は動的に選ばれます。
 ただし返り値のソケットはすべて同じ番号を持ちます。
+
+  require 'socket'
 
   # tcp_server_sockets returns は2つのソケットを返す
   sockets = Socket.tcp_server_sockets(1296)
@@ -595,6 +614,8 @@ port が 0 の場合は、実際のポート番号は動的に選ばれます。
 ただし返り値のソケットはすべて同じ番号を持ちます。
 
   # UDP/IP echo server
+  require 'socket'
+
   Socket.udp_server_sockets(0) {|sockets|
     p sockets.first.local_address.ip_port     #=> 32963
     Socket.udp_server_loop_on(sockets) {|msg, msg_src|
@@ -656,6 +677,8 @@ Unix サーバソケットを生成します。
 ブロックの評価値となります。また、ブロックの終了後に
 ソケットを [[m:IO#close]] します。
 
+  require 'socket'
+
   socket = Socket.unix_server_socket("/tmp/s")
   p socket                  #=> #<Socket:fd 3>
   p socket.local_address    #=> #<Addrinfo: /tmp/s SOCK_STREAM>
@@ -676,6 +699,8 @@ Unix サーバソケットを生成します。
 
 本メソッドはマルチキャスト通信が可能なインターフェイスを見つけるために使う事ができます。
 
+  require 'socket'
+
   pp Socket.getifaddrs.reject {|ifaddr|
     !ifaddr.addr.ip? || (ifaddr.flags & Socket::IFF_MULTICAST == 0)
   }.map {|ifaddr| [ifaddr.name, ifaddr.ifindex, ifaddr.addr] }
@@ -683,6 +708,8 @@ Unix サーバソケットを生成します。
   #    ["eth0", 2, #<Addrinfo: fe80::216:3eff:fe95:88bb%eth0>]]
 
 例(GNU/Linux):
+
+  require 'socket'
 
   pp Socket.getifaddrs
   #=> [#<Socket::Ifaddr lo UP,LOOPBACK,RUNNING,0x10000 PACKET[protocol=0 lo hatype=772 HOST hwaddr=00:00:00:00:00:00]>,
@@ -694,6 +721,8 @@ Unix サーバソケットを生成します。
   #    #<Socket::Ifaddr eth0 UP,BROADCAST,RUNNING,MULTICAST,0x10000 fe80::216:3eff:fe95:88bb%eth0 netmask=ffff:ffff:ffff:ffff::>]
 
 例(FreeBSD):
+
+  require 'socket'
 
   pp Socket.getifaddrs
   #=> [#<Socket::Ifaddr usbus0 UP,0x10000 LINK[usbus0]>,
@@ -718,6 +747,8 @@ Unix サーバソケットを生成します。
 たとえば IPv4 の TCP サーバソケットを生成し、accept でクライアントからの接続を受け付けるには以下のようにします。
 
 例:
+
+  require 'socket'
 
   serv = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
   sockaddr = Socket.sockaddr_in(8080, "0.0.0.0")
@@ -770,6 +801,8 @@ server_sockaddr は、
 たとえば IPv4 の TCP ソケットを生成し、connect で www.ruby-lang.org:80 に接続するには以下のようにします。
 
 例:
+
+  require 'socket'
 
   s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
   sockaddr = Socket.sockaddr_in(80, "www.ruby-lang.org")
@@ -846,6 +879,8 @@ flags には Socket::MSG_* という定数の bitwise OR を渡します。
 @raise Errno::EXXX [[man:recvfrom(2)]] がエラーを報告した場合に発生します。詳しくは
        Errno と man を見てください。
 例:
+
+  require 'socket'
 
   s1 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
   s2 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)

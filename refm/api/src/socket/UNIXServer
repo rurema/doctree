@@ -35,6 +35,8 @@ path で指定したパス名を用いて接続を受け付けるソケット
 
 例:
 
+  require 'socket'
+
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")
     s = serv.accept
@@ -94,6 +96,8 @@ UNIXServer のインスタンスは最初は backlog の値は 5 で生成され
 [[m:UNIXServer#accept]] と同じです。
 
 例:
+
+  require 'socket'
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")

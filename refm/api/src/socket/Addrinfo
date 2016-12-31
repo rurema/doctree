@@ -62,6 +62,8 @@ IP アドレスに対する Addrinfo オブジェクトを返します。
 port, socktype, protocol は 0 で初期化されます。
 つまりこの返り値はソケットを生成するには不適です。
 
+  require 'socket'
+
   Addrinfo.ip("localhost") #=> #<Addrinfo: 127.0.0.1 (localhost)>
 
 @param host ホスト(IP アドレスもしくはホスト名)
@@ -70,6 +72,9 @@ port, socktype, protocol は 0 で初期化されます。
 --- tcp(host, port) -> Addrinfo
 
 TCP アドレスに対する Addrinfo オブジェクトを返します。
+
+  require 'socket'
+
   Addrinfo.tcp("localhost", "smtp") 
   #=> #<Addrinfo: 127.0.0.1:25 TCP (localhost:smtp)>
 
@@ -79,6 +84,9 @@ TCP アドレスに対する Addrinfo オブジェクトを返します。
 --- udp(host, port) -> Addrinfo
 
 UDP アドレスに対する Addrinfo オブジェクトを返します。
+
+  require 'socket'
+
   Addrinfo.udp("localhost", "daytime") 
   #=> #<Addrinfo: 127.0.0.1:13 UDP (localhost:daytime)>
 
@@ -90,6 +98,8 @@ UDP アドレスに対する Addrinfo オブジェクトを返します。
 Unix ソケットアドレスに対応する Addrinfo オブジェクトを返します。
 
 socktype でソケットタイプを指定します。
+
+  require 'socket'
 
   Addrinfo.unix("/tmp/sock")         #=> #<Addrinfo: /tmp/sock SOCK_STREAM>
   Addrinfo.unix("/tmp/sock", :DGRAM) #=> #<Addrinfo: /tmp/sock SOCK_DGRAM>
@@ -136,6 +146,9 @@ socktype を省略して service を整数で指定した場合にエラーが
 socktype なしでは曖昧な指定となるためです。
 
 例:
+
+  require 'socket'
+
   Addrinfo.getaddrinfo("www.kame.net", 80, nil, :STREAM)
   #=> [#<Addrinfo: 203.178.141.194:80 TCP (www.kame.net:80)>,
   #    #<Addrinfo: [2001:200:0:8002:203:47ff:fea5:3085]:80 TCP (www.kame.net:80)>]
@@ -154,11 +167,14 @@ socktype なしでは曖昧な指定となるためです。
 --- afamily -> Integer
 アドレスファミリーを整数で返します。
 
-  Addrinfo.tcp("localhost", 80).afamily == Socket::AF_INET #=> true
+  require 'socket'
 
+  Addrinfo.tcp("localhost", 80).afamily == Socket::AF_INET #=> true
 
 --- pfamily -> Integer
 プロトコルファミリーを整数で返します。
+
+  require 'socket'
 
   Addrinfo.tcp("localhost", 80).pfamily == Socket::PF_INET #=> true
 
@@ -166,11 +182,15 @@ socktype なしでは曖昧な指定となるためです。
 
 ソケットタイプを整数で返します。
 
+  require 'socket'
+
   Addrinfo.tcp("localhost", 80).socktype == Socket::SOCK_STREAM #=> true
 
 --- protocol -> Integer
 
 ソケットプロトコルを整数で返します。
+
+  require 'socket'
 
   Addrinfo.tcp("localhost", 80).protocol == Socket::IPPROTO_TCP #=> true
 
@@ -182,6 +202,8 @@ socktype なしでは曖昧な指定となるためです。
 カノニカル名は [[m:Addrinfo.getaddrinfo]] に [[m:Socket::AI_CANONINAME]]
 を指定した場合にセットされます。
 
+  require 'socket'
+
   list = Addrinfo.getaddrinfo("www.ruby-lang.org", 80, :INET, :STREAM, nil, Socket::AI_CANONNAME)
   p list[0] #=> #<Addrinfo: 221.186.184.68:80 TCP carbon.ruby-lang.org (www.ruby-lang.org:80)>
   p list[0].canonname #=> "carbon.ruby-lang.org"
@@ -191,12 +213,16 @@ socktype なしでは曖昧な指定となるためです。
 
 @see [[m:Addrinfo#ip?]], [[m:Addrinfo#ipv6?]]
 
+  require 'socket'
+
   Addrinfo.tcp("127.0.0.1", 80).ipv4? #=> true
   Addrinfo.tcp("::1", 80).ipv4?       #=> false
   Addrinfo.unix("/tmp/sock").ipv4?    #=> false
 
 --- ipv6? -> bool
 アドレスが IPv6 のものならば true を返します。
+
+  require 'socket'
 
   Addrinfo.tcp("127.0.0.1", 80).ipv6? #=> false
   Addrinfo.tcp("::1", 80).ipv6?       #=> true
@@ -207,6 +233,8 @@ socktype なしでは曖昧な指定となるためです。
 --- unix? -> bool
 アドレスが Unix domain socket のものならば true を返します。
 
+  require 'socket'
+
   Addrinfo.tcp("127.0.0.1", 80).unix? #=> false
   Addrinfo.tcp("::1", 80).unix?       #=> false
   Addrinfo.unix("/tmp/sock").unix?    #=> true
@@ -215,6 +243,8 @@ socktype なしでは曖昧な指定となるためです。
 
 --- ip? -> bool
 アドレスが IP (v4/v6) のものならば true を返します。
+
+  require 'socket'
 
   Addrinfo.tcp("127.0.0.1", 80).ip? #=> true
   Addrinfo.tcp("::1", 80).ip?       #=> true
@@ -225,6 +255,8 @@ socktype なしでは曖昧な指定となるためです。
 --- ip_unpack -> [String, Integer]
 IP アドレスとポート番号を 2 要素の配列で返します。
 
+  require 'socket'
+
   Addrinfo.tcp("127.0.0.1", 80).ip_unpack    #=> ["127.0.0.1", 80]
   Addrinfo.tcp("::1", 80).ip_unpack          #=> ["::1", 80]
 
@@ -233,6 +265,8 @@ IP アドレスとポート番号を 2 要素の配列で返します。
 --- ip_address -> String
 IP アドレスを文字列で返します。
 
+  require 'socket'
+
   Addrinfo.tcp("127.0.0.1", 80).ip_address    #=> "127.0.0.1"
   Addrinfo.tcp("::1", 80).ip_address          #=> "::1"
 
@@ -240,6 +274,8 @@ IP アドレスを文字列で返します。
 
 --- ip_port -> Integer
 ポート番号を整数で返します。
+
+  require 'socket'
 
   Addrinfo.tcp("127.0.0.1", 80).ip_port    #=> 80
   Addrinfo.tcp("::1", 80).ip_port          #=> 80
@@ -323,6 +359,9 @@ IPv6 のマルチキャスト(グローバルスコープ)
 IPv6 の v4 マップド/互換アドレスを v4 のアドレスに変換します。
 
 それ以外のアドレスの場合 nil を返します。
+
+  require 'socket'
+
   Addrinfo.ip("::192.0.2.3").ipv6_to_ipv4      #=> #<Addrinfo: 192.0.2.3>
   Addrinfo.ip("::ffff:192.0.2.3").ipv6_to_ipv4 #=> #<Addrinfo: 192.0.2.3>
   Addrinfo.ip("::1").ipv6_to_ipv4              #=> nil
@@ -331,6 +370,8 @@ IPv6 の v4 マップド/互換アドレスを v4 のアドレスに変換しま
 
 --- unix_path -> String
 Unix domain socket の path を文字列で返します。
+
+  require 'socket'
 
   Addrinfo.unix("/tmp/sock").unix_path       #=> "/tmp/sock"
 
@@ -341,6 +382,8 @@ Unix domain socket の path を文字列で返します。
 
 struct sockaddr をパックした形式の文字列に変換します。
 
+  require 'socket'
+
   Addrinfo.tcp("localhost", 80).to_sockaddr
   #=> "\x02\x00\x00P\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
 
@@ -348,6 +391,8 @@ struct sockaddr をパックした形式の文字列に変換します。
 ノード名とサービスを文字列の配列で返します。
 
 flags には Socket::NI_??? という名前の定数のビット OR を渡します。
+
+  require 'socket'
 
   Addrinfo.tcp("127.0.0.1", 80).getnameinfo
   #=> ["localhost", "www"]
@@ -366,6 +411,9 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
 
 「似た」の意味はプロトコルファミリ、ソケットタイプ、プロトコルが
 同じことを意味します。
+
+  require 'socket'
+
   Addrinfo.tcp("0.0.0.0", 4649).family_addrinfo("www.ruby-lang.org", 80)
   #=> #<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:80)>
   
@@ -393,6 +441,8 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
 オブジェクトが返されます。
 
 引数で指定したアドレスはソケット接続のローカル側のアドレスになります。
+
+  require 'socket'
 
   Addrinfo.tcp("www.ruby-lang.org", 80).connect_from("0.0.0.0", 4649) {|s|
     s.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
@@ -472,6 +522,8 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
 
 --- inspect_sockaddr -> String
 アドレスやポート番号などの情報を人間に読める形の文字列で返します。
+
+  require 'socket'
 
   Addrinfo.tcp("localhost", 80).inspect_sockaddr     #=> "127.0.0.1:80"
   Addrinfo.tcp("ip6-localhost", 80).inspect_sockaddr #=> "[::1]:80"

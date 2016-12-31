@@ -62,6 +62,8 @@ protocol には プロトコルを指定します。0 は Unix domain でのデ�
 クライアント側はパスを持たないため空文字列となります。
 例:
 
+  require 'socket'
+
   UNIXServer.open("/tmp/s") {|serv|
     p serv.addr     #=> ["AF_UNIX", "/tmp/s"]
   }
@@ -80,6 +82,8 @@ UNIX ソケットのパスを返します。
 
 例:
 
+  require 'socket'
+
   UNIXServer.open("/tmp/s") {|serv|
     p serv.path     #=> "/tmp/s"
   }
@@ -90,6 +94,8 @@ UNIX ソケットのパスを返します。
 素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
 
 例:
+
+  require 'socket'
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")
@@ -109,6 +115,8 @@ flags には Socket::MSG_* という名前の定数の bitwise OR を渡しま�
 戻り値は文字列と相手ソケットのパスのペアです。
 
 例:
+
+  require 'socket'
 
   UNIXServer.open("/tmp/s") {|serv|
     c = UNIXSocket.open("/tmp/s")
@@ -132,6 +140,8 @@ klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
 
 例:
 
+  require 'socket'
+
   s1, s2 = UNIXSocket.pair
   s1.send_io STDOUT
   io = s2.recv_io
@@ -141,6 +151,8 @@ klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
 @param mode for_fd に渡すファイルモード
 --- send_io(io) -> nil
 IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
+
+  require 'socket'
 
   s1, s2 = UNIXSocket.pair
   
