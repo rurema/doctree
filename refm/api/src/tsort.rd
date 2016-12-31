@@ -123,6 +123,164 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 頂点同士の等価性は eql? と hash によって定義されます。
 これは TSort が内部でハッシュを用いているからです。
 
+== Class Methods
+--- tsort(each_node, each_child) -> Array
+
+頂点をトポロジカルソートして得られる配列を返します。
+この配列は子から親に向かってソートされています。
+すなわち、最初の要素は子を持たず、最後の要素は親を持ちません。
+
+引数 each_node と each_child でグラフを表します。
+
+@param each_node グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
+                 ジェクトを指定します。
+
+@param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
+                  ドを持つオブジェクトを指定します。
+
+@raise TSort::Cyclic 閉路が存在するとき、発生します。
+
+使用例
+  require 'tsort'
+
+  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  p TSort.tsort(each_node, each_child) # => [4, 2, 3, 1]
+
+  g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  p TSort.tsort(each_node, each_child) # raises TSort::Cyclic
+
+@see [[m:TSort#tsort]]
+
+--- tsort_each(each_node, each_child) {|node| ...} -> nil
+#@since 2.2.0
+--- tsort_each(each_node, each_child) -> Enumerator
+#@end
+
+[[m:TSort.tsort]] メソッドのイテレータ版です。
+
+引数 each_node と each_child でグラフを表します。
+
+@param each_node グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
+                 ジェクトを指定します。
+
+@param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
+                  ドを持つオブジェクトを指定します。
+
+@raise TSort::Cyclic 閉路が存在するとき、発生します.
+
+使用例
+  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  TSort.tsort_each(each_node, each_child) {|n| p n }
+  # => 4
+  #    2
+  #    3
+  #    1
+
+@see [[m:TSort#tsort_each]]
+
+--- strongly_connected_components(each_node, each_child) -> Array
+
+強連結成分の集まりを配列の配列として返します。
+この配列は子から親に向かってソートされています。
+各要素は強連結成分を表す配列です。
+
+引数 each_node と each_child でグラフを表します。
+
+@param each_node グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
+                 ジェクトを指定します。
+
+@param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
+                  ドを持つオブジェクトを指定します。
+
+使用例
+  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  p TSort.strongly_connected_components(each_node, each_child)
+  # => [[4], [2], [3], [1]]
+
+  g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  p TSort.strongly_connected_components(each_node, each_child)
+  # => [[4], [2, 3], [1]]
+
+@see [[m:TSort#strongly_connected_components]]
+
+--- each_strongly_connected_component(each_node, each_child) {|nodes| ...} -> nil
+#@since 2.2.0
+--- each_strongly_connected_component(each_node, each_child) -> Enumerator
+#@end
+
+[[m:TSort.strongly_connected_components]] メソッドのイテレータ版です。
+
+引数 each_node と each_child でグラフを表します。
+
+@param each_node グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
+                 ジェクトを指定します。
+
+@param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
+                  ドを持つオブジェクトを指定します。
+
+使用例
+  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
+
+  # => [4]
+  #    [2]
+  #    [3]
+  #    [1]
+
+  g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+  each_node = lambda {|&b| g.each_key(&b) }
+  each_child = lambda {|n, &b| g[n].each(&b) }
+  TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
+
+  # => [4]
+  #    [2, 3]
+  #    [1]
+
+@see [[m:TSort#each_strongly_connected_component]]
+
+--- each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) {|nodes| ...} -> ()
+#@since 2.2.0
+--- each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) -> Enumerator
+#@end
+
+node から到達可能な強連結成分についてのイテレータです。
+
+引数 node と each_child でグラフを表します。
+
+返す値は規定されていません。
+
+TSort.each_strongly_connected_component_fromは[[c:TSort]]をincludeして
+グラフを表現する必要のないクラスメソッドです。
+
+@param node ノードを指定します。
+
+@param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
+                  ドを持つオブジェクトを指定します。
+
+使用例
+  graph = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+  each_child = lambda {|n, &b| graph[n].each(&b) }
+  TSort.each_strongly_connected_component_from(1, each_child) {|scc|
+    p scc
+  }
+  # => [4]
+  #    [2, 3]
+  #    [1]
+
+@see [[m:TSort#each_strongly_connected_component_from]]
+
 == Instance Methods
 --- tsort -> Array
 
@@ -130,9 +288,7 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 この配列は子から親に向かってソートされています。
 すなわち、最初の要素は子を持たず、最後の要素は親を持ちません。
 
-閉路が存在するとき、例外[[c:TSort::Cyclic]]を起こします。
-
-@raise TSort::Cyclic 閉路が存在するとき、発生します.
+@raise TSort::Cyclic 閉路が存在するとき、発生します。
 
 使用例
   require 'tsort'
@@ -148,13 +304,14 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
   sorted = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
   p sorted #=> [3, 2, 1, 4]
 
+@see [[m:TSort.tsort]]
 
 --- tsort_each {|node| ...} -> nil
 #@since 2.2.0
 --- tsort_each -> Enumerator
 #@end
 
-tsort メソッドのイテレータ版です。
+[[m:TSort#tsort]] メソッドのイテレータ版です。
 obj.tsort_each は obj.tsort.each と似ていますが、
 ブロックの評価中に obj が変更された場合は予期しない結果になる
 ことがあります。
@@ -188,12 +345,15 @@ tsort_each は nil を返します。
   #=> 1 -> 2
   #=> 1 -> 3
 
+@see [[m:TSort.tsort_each]]
+
 --- strongly_connected_components -> Array
 
 強連結成分の集まりを配列の配列として返します。
 この配列は子から親に向かってソートされています。
 各要素は強連結成分を表す配列です。
 
+使用例
   require 'tsort'
 
   class Hash
@@ -209,12 +369,14 @@ tsort_each は nil を返します。
   p non_sort.strongly_connected_components
   #=> [[4], [2, 3], [1]]
 
+@see [[m:TSort.strongly_connected_components]]
+
 --- each_strongly_connected_component {|nodes| ...} -> nil
 #@since 2.2.0
 --- each_strongly_connected_component -> Enumerator
 #@end
 
-strongly_connected_components メソッドのイテレータ版です。
+[[m:TSort#strongly_connected_components]] メソッドのイテレータ版です。
 obj.each_strongly_connected_component は
 obj.strongly_connected_components.each に似ていますが、
 ブロックの評価中に obj が変更された場合は予期しない結果になる
@@ -244,9 +406,11 @@ each_strongly_connected_component は nil を返します。
   #=> [2, 3]
   #=> [1]
 
---- each_strongly_connected_component_from(node) {|nodes| ...} -> ()
+@see [[m:TSort.each_strongly_connected_component]]
+
+--- each_strongly_connected_component_from(node, id_map={}, stack=[]) {|nodes| ...} -> ()
 #@since 2.2.0
---- each_strongly_connected_component_from(node) -> Enumerator
+--- each_strongly_connected_component_from(node, id_map={}, stack=[]) -> Enumerator
 #@end
 
 node から到達可能な強連結成分についてのイテレータです。
@@ -292,6 +456,8 @@ tsort_each_node を呼びません。
   #=> 1 -> 4
   #=> 1 -> 2,3
   #=> 1 -> 1
+
+@see [[m:TSort.each_strongly_connected_component_from]]
 
 --- tsort_each_node {|node| ...} -> ()
 
