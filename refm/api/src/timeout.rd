@@ -44,7 +44,12 @@ DNSの名前解決に時間がかかった場合割り込めません
 
 == Module Functions
 
+#@since 2.4.0
+--- timeout(sec, exception_class = nil)    {|i| ... }  -> object
+--- timeout(sec, exception_class, message) {|i| ... }  -> object
+#@else
 --- timeout(sec, exception_class = nil) {|i| ... }  -> object
+#@end
 
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
@@ -59,6 +64,10 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 
 @param sec タイムアウトする時間を秒数で指定します.
 @param exception_class タイムアウトした時、発生させる例外を指定します.
+#@since 2.4.0
+@param message エラーメッセージを指定します.省略した場合は
+               "execution expired" になります.
+#@end
 
 例 長い計算のタイムアウト
   require 'timeout'
