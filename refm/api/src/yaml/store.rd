@@ -30,39 +30,3 @@ YAML 形式のファイルを読み込ませたい場合は、最初の引数に
 @param options 読み込ませたいファイルや、オプションを与えます。
 
 @see [[m:Object#to_yaml]]
-
-== Instance Methods
-
---- dump(table) -> String
-
-YAML 形式の文字列を返します。
-
-@param table 使用されません。
-
---- load(content) -> object
-
-YAML 形式の文字列からデータを読み込みます。
-
-@param content YAML 形式の文字列を指定します。
-
---- empty_marshal_checksum -> String
-
-空のデータのチェックサムを返します。
-
---- empty_marshal_data -> String
-
-空のデータを返します。
-
---- marshal_dump_supports_canonical_option? -> false
-
-[[c:YAML::Store]] では [[m:Marshal.#dump]] を使用しないので常に偽を返します。
-
-== Constants
-
---- EMPTY_MARSHAL_CHECKSUM -> String
-
-内部で使用します。
-
---- EMPTY_MARSHAL_DATA -> String
-
-内部で使用します。
