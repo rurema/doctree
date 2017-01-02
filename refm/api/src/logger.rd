@@ -82,7 +82,7 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
 ==== loggerの作成
 
-以下のいずれかの方法でloggerを作成する事ができます。
+以下のいずれかの方法でloggerを作成する事ができます([[m:Logger.new]] も参照)。
 
 1. STDERR/STDOUTに出力するように指定
 
@@ -169,11 +169,13 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
    # :debug < :info < :warn < :error < :fatal < :unknown
 
+#@since 2.4.0
 4. コンストラクタ
 
    Logger.new(logdev, level: Logger::INFO)
    Logger.new(logdev, level: :info)
    Logger.new(logdev, level: 'INFO')
+#@end
 
 === フォーマット
 
@@ -194,9 +196,11 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
   logger.datetime_format = '%Y-%m-%d %H:%M:%S'
   # e.g. "2004-01-03 00:54:26"
 
+#@since 2.4.0
 コンストラクタでも同様にできます。
 
   Logger.new(logdev, datetime_format: '%Y-%m-%d %H:%M:%S')
+#@end
 
 [[m:Logger#formatter=]] を用いてフォーマットを変更することもできます。
 
@@ -205,11 +209,13 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
   end
   # => "2005-09-22 08:51:08 +0900: hello world"
 
+#@since 2.4.0
 コンストラクタでも同様にできます。
 
   Logger.new(logdev, formatter: proc {|severity, datetime, progname, msg|
     "#{datetime}: #{msg}\n"
   })
+#@end
 
 === 参考
 
