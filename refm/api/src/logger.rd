@@ -1,4 +1,3 @@
-#@since 1.8.1
 ログを記録するためのライブラリです。
 
 === 使い方
@@ -314,7 +313,6 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 
 ログに出力するプログラム名を設定します。
 
-#@since 1.8.3
 --- formatter -> String
 
 ログを出力する際に使用するフォーマッターを取得します。
@@ -334,25 +332,13 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
     "#{datetime}: #{message}\n"
   }
 
-#@end
-
 == Constants
-
-#@until 1.8.3
---- Format -> String
-
-ログ用のフォーマット文字列。
-
-#@end
 
 --- ProgName -> String
 ログファイル作成時に使うプログラム名。
 
-#@since 1.9.1
 --- VERSION -> String
 このライブラリのバージョンを表す文字列。
-
-#@end
 
 --- SEV_LABEL -> Array
 
@@ -440,13 +426,6 @@ include Logger::Severity
 
 @param logdev ログファイル名か IO オブジェクトを指定します。
 
-#@until 1.9.1
---- logdev -> ()
-
-このメソッドは使用されていません。
-
-#@end
-
 --- set_log(logdev, shift_age = 0, shift_size = 1024000) -> Integer
 
 内部で使用する [[c:Logger]] のオブジェクトを初期化します。
@@ -471,7 +450,6 @@ include Logger::Severity
 @raise RuntimeError サブクラスで run メソッドを定義していない場合に発生します。
 #@end
 
-#@since 1.8.3
 = class Logger::Formatter < Object
 
 ロガーのフォーマット文字列を扱うクラス。
@@ -512,8 +490,6 @@ include Logger::Severity
 --- Format -> String
 
 フォーマット文字列。
-
-#@end
 
 = class Logger::LogDevice < Object
 
@@ -563,7 +539,6 @@ include Logger::Severity
 
 @see [[m:IO#write]]
 
-#@since 1.8.3
 #@until 2.3.0
 = class Logger::LogDevice::LogDeviceMutex < Object
 include MonitorMixin
@@ -572,7 +547,6 @@ include MonitorMixin
 
 @see [[c:MonitorMixin]]
 
-#@end
 #@end
 
 = module Logger::Severity
@@ -605,5 +579,3 @@ include MonitorMixin
 = class Logger::ShiftingError < Logger::Error
 
 ログファイルの切り替えに失敗した場合に発生する例外です。
-
-#@end
