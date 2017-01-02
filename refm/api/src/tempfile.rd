@@ -83,12 +83,17 @@ new にブロックを指定した場合は無視されます。
 #@since 2.1.0
 @see [[m:Tempfile.create]]
 
+#@since 2.4.0
+--- create(basename="", tmpdir=nil, mode: 0, **options) -> File
+--- create(basename="", tmpdir=nil, mode: 0, **options){|fp| ...} -> object
+#@else
 #@since 2.2.0
 --- create(basename, tmpdir=nil, mode: 0, **options) -> File
 --- create(basename, tmpdir=nil, mode: 0, **options){|fp| ...} -> object
 #@else
 --- create(basename, *rest) -> File
 --- create(basename, *rest){|fp| ...} -> object
+#@end
 #@end
 
 テンポラリファイルを作成し、それを表す File オブジェクトを生成して返します(Tempfileではありません)。
