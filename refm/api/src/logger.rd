@@ -226,9 +226,15 @@ include Logger::Severity
 
 == Class Methods
 
+#@since 2.4.0
+--- new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, shift_period_suffix: '%Y%m%d') -> Logger
+--- new(logdev, shift_age = 'weekly', level: Logger::Severity::DEBUG, progname: nil, formatter: Logger::Formatter.new, datetime_format: nil, shift_period_suffix: '%Y%m%d') -> Logger
+#@else
 --- new(logdev, shift_age = 0, shift_size = 1048576) -> Logger
+--- new(logdev, shift_age = 'weekly')                -> Logger
+#@end
 
-Logger オブジェクトを生成する。
+Logger オブジェクトを生成します。
 
 @param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
 
@@ -239,6 +245,24 @@ Logger オブジェクトを生成する。
 @param shift_size shift_age を整数で指定した場合のみ有効です。
                   このサイズでログファイルを切り替えます。
 
+#@since 2.4.0
+@param level ログに記録する時のログレベルを指定します。省略した場合は
+             [[m:Logger::Severity::DEBUG]] です。
+
+@param progname ログに記録する時のプログラム名を指定します。省略した場合は nil です。
+
+@param formatter ログに記録する時のログのフォーマッタを指定します。
+                 省略した場合は [[c:Logger::Formatter]] インスタンスです。
+
+@param datetime_format ログに記録する時の日時のフォーマットを指定します。
+                       省略した場合は '%Y-%m-%d %H:%M:%S' です。
+
+@param shift_period_suffix daily、weekly、monthlyでログファイルの切り替
+                           えを行う時のログファイルの名の末尾に追加する
+                           文字列のフォーマットを指定します。
+                           省略した場合は '%Y%m%d' です。
+#@end
+
 例:
 
   logger = Logger.new(STDERR)
@@ -247,7 +271,12 @@ Logger オブジェクトを生成する。
   
   file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
   logger = Logger.new(file, 'daily')
-
+#@since 2.4.0
+  logger = Logger.new(file, level: :info)
+  logger = Logger.new(file, progname: 'progname')
+  logger = Logger.new(file, formatter: formatter)
+  logger = Logger.new(file, datetime_format: '%Y-%m-%d %H:%M:%S')
+#@end
 
 == Instance Methods
 
