@@ -224,7 +224,6 @@ userinfo が「username:password」の形式である場合は、username 部を
 
 @raise URI::InvalidURIError port と registry を同時に設定した場合に発生します。
 
-#@since 1.9.3
 --- hostname -> String | nil
 
 自身の hostname を文字列で返します。また、[[m:URI::Generic#host]] が設
@@ -256,7 +255,6 @@ userinfo が「username:password」の形式である場合は、username 部を
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError host と registry を同時に設定した場合に発生します。
-#@end
 
 --- registry    -> String | nil
 
@@ -279,13 +277,8 @@ userinfo が「username:password」の形式である場合は、username 部を
   p URI.parse('http://example.com/hoge').path       #=> "/hoge"
   p URI.parse('http://example.com').path            #=> ""
   p URI.parse('mailto:nospam@localhost').path       #=> nil
-#@since 1.8.7
   p URI('ftp://example.com/foo').path    #=> 'foo'
   p URI('ftp://example.com/%2Ffoo').path #=> '/foo'
-#@else
-  p URI('ftp://example.com/foo').path    #=> '/foo'
-  p URI('ftp://example.com/%2Ffoo').path #=> '/%2Ffoo'
-#@end
 
 --- path=(s)
 
@@ -390,11 +383,7 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 
 自身と与えられたパス rel を連結した新しい URI オブジェクトを生成して返します。
 
-#@since 1.8.7
 [[RFC:3986]] の Section 5.2 の仕様に従います。
-#@else
-[[RFC:2396]] の Section 5.2 の仕様に従います。
-#@end
 rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
 
 
@@ -404,21 +393,11 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
   require 'uri'
   p URI.parse('http://example.com/') + '/foo/bar.html'
   #=> #<URI::HTTP:0x201001c0 URL:http://example.com/foo/bar.html>
-#@since 1.8.7
   URI('http://a/b/c/d;p?q').merge('?y')	           #=> #<URI::HTTP:0xb7ca2e2c URL:http://a/b/c/d;p?y>
   URI('http://a/b/c/d;p?q').merge('/./g')          #=> #<URI::HTTP:0xb7ca2738 URL:http://a/g>
   URI('http://a/b/c/d;p?q').merge('/../g')         #=> #<URI::HTTP:0xb7ca2008 URL:http://a/g>
   URI('http://a/b/c/d;p?q').merge('../../../g')    #=> #<URI::HTTP:0xb7ca1888 URL:http://a/g>
   URI('http://a/b/c/d;p?q').merge('../../../../g') #=> #<URI::HTTP:0xb7ca10a4 URL:http://a/g>
-#@else
-  URI('http://a/b/c/d;p?q').merge('?y')	           #=> #<URI::HTTP:0xfdbe9c95a URL:http://a/b/c/?y>
-  URI('http://a/b/c/d;p?q').merge('/./g')          #=> #<URI::HTTP:0xfdbe89968 URL:http://a/./g>
-  URI('http://a/b/c/d;p?q').merge('/../g')         #=> #<URI::HTTP:0xfdbea2184 URL:http://a/../g>
-  URI('http://a/b/c/d;p?q').merge('../../../g')    #=> #<URI::HTTP:0xfdbea1ff4 URL:http://a/../g>
-  URI('http://a/b/c/d;p?q').merge('../../../../g') #=> #<URI::HTTP:0xfdbea1d2e URL:http://a/../../g>
-#@end
-
-
 
 --- route_from(src)    -> URI::Generic
 --- -(src)             -> URI::Generic
