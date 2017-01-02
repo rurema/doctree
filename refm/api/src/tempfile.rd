@@ -35,35 +35,20 @@ require delegate
 #@else
 --- new(basename, tempdir = Dir::tmpdir) -> Tempfile
 --- open(basename, tempdir = Dir::tmpdir) -> Tempfile
-#@since 1.9.1
 --- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> object
-#@else
---- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> nil
-#@end
 #@end
 #@end
 
-#@since 1.8.7
 テンポラリファイルを作成し、それを表す Tempfile オブジェクトを生成して返します。
 ファイル名のプレフィクスには指定された basename が使われます。
 ファイルは指定された tempdir に作られます。
-#@else
-"basename.pid.n" というファイル名で
-テンポラリファイルを作成し、インスタンスを返します。
-#@end
 open にブロックを指定して呼び出した場合は、Tempfile オブジェクトを引数として ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に クローズされ、
-#@since 1.9.1
 ブロックの値をかえします。
-#@else
-nilをかえします。
-#@end
 new にブロックを指定した場合は無視されます。
 
 @param basename ファイル名のプレフィクスを文字列で指定します。
-#@since 1.8.7
                 文字列の配列を指定した場合、先頭の要素がファイル名のプレフィックス、次の要素が
                 サフィックスとして使われます。
-#@end
 
 @param tempdir テンポラリファイルが作られるディレクトリです。
                このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
@@ -77,16 +62,13 @@ new にブロックを指定した場合は無視されます。
                ます。
 #@end
 
-#@since 1.8.7
 例:
    require "tempfile"
    t = Tempfile.open(['hoge', 'bar'])
    p t.path                            #=> "/tmp/hoge20080518-6961-5fnk19-0bar"
    t2 = Tempfile.open(['t', '.xml'])
    p t2.path                           #=> "/tmp/t20080518-6961-xy2wvx-0.xml"
-#@end
 
-#@since 1.9.1
 例：ブロックを与えた場合
   require 'tempfile'
 
@@ -97,19 +79,6 @@ new にブロックを指定した場合は無視されます。
   # テンポラリファイルへのパスを表示
   p tf.path
   p File.read(tf.path) #=> "hoge\n"
-
-#@else
-例：ブロックを与えた場合
-  require 'tempfile'
-
-  path = nil
-  Tempfile.open("temp"){|fp|
-    fp.puts "hoge"
-    path = fp.path
-  }
-
-  system("cat #{path}")
-#@end
 
 #@since 2.1.0
 @see [[m:Tempfile.create]]
@@ -195,27 +164,17 @@ real が偽ならば、テンポラリファイルはGCによって削除され�
   tf.open
   p tf.gets # => "foobar,hoge\n"
 
-#@since 1.8.7
 --- path -> String | nil
-#@else
---- path -> String
-#@end
 
 テンポラリファイルのパス名を返します。
 
-#@since 1.8.7
 Tempfile#close!を実行後だった場合にはnilを返します。
 
   tf = Tempfile.new("hoo")
   p tf.path # => "/tmp/hoo.10596.0" 
   tf.close!
   p tf.path # => nil
-#@else
-  tf = Tempfile.new("hoo")
-  p tf.path # => "/tmp/hoo.10596.0" 
-#@end
 
-#@since 1.6.8
 --- length -> Integer
 --- size -> Integer
 テンポラリファイルのサイズを返します。
@@ -225,13 +184,9 @@ Tempfile#close!を実行後だった場合にはnilを返します。
   p tf.size # => 7
   tf.close
   p tf.size # => 0
-#@end
 
-#@since 1.8.7
 --- close! -> nil
-#@else
---- close! -> self
-#@end
+
 テンポラリファイルをクローズし、すぐに削除します。
 
   require "tempfile"
