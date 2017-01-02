@@ -4,7 +4,7 @@ nkf を Ruby から使うためのライブラリです。
 
 = module NKF
 
-nkf(Network Kanji code conversion Filter, [[url:http://sourceforge.jp/projects/nkf/]]) を
+nkf(Network Kanji code conversion Filter, [[url:https://osdn.net/projects/nkf/]]) を
 Ruby から使うためのモジュールです。
 
 #@since 1.8.2

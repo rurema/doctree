@@ -173,7 +173,7 @@
 
 : matz
   Rubyの作者。まつもと ゆきひろとも言う。
-  [[url:http://cmail.sourceforge.jp/]]
+  [[url:http://cmail.osdn.jp/]]
   と4人の子供の父親でもある。
 
 : ミックスイン

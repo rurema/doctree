@@ -336,7 +336,7 @@ Windows で用いられる、日本語 EUC 亜種です。
 
 G0 が US-ASCII、G1 が JIS X 0201 片仮名図形文字集合、G2 が JIS X 0208 + Windows の機種依存文字となっており、G3 は未割り当てになっています。
 
-@see [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp51932]]
+@see [[url:http://legacy-encoding.osdn.jp/wiki/index.php?cp51932]]
 
 #@since 1.9.2
 --- CP50220 -> Encoding
@@ -346,7 +346,7 @@ Windows で用いられる ISO-2022-JP 亜種です。
 CP50221 とほぼ同様のエンコーディングですが、
 他のエンコーディングへの変換テーブルが少し異なります。
 
-@see [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50220]]
+@see [[url:http://legacy-encoding.osdn.jp/wiki/index.php?cp50220]]
 
 
 --- CP50221 -> Encoding
@@ -354,7 +354,7 @@ Windows で用いられる、ISO-2022-JP 亜種です。
 
 ISO-2022-JP に加え、ESC ( I でいわゆる半角カナを許し、Windows の機種依存文字を扱うことができます。
 
-@see [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50221]]
+@see [[url:http://legacy-encoding.osdn.jp/wiki/index.php?cp50221]]
 #@end
 
 
@@ -1003,7 +1003,7 @@ Windows-31J、Windows で用いられる、シフトJIS亜種で、CP932とも�
 7bit 部分が論理的には US-ASCIIであり、また Windows の機種依存文字を扱うことができます。
 
 @see [[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/index.html]],
-     [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp932]]
+     [[url:http://legacy-encoding.osdn.jp/wiki/index.php?cp932]]
 
 --- Windows_874 -> Encoding
 --- CP874 -> Encoding
@@ -1025,7 +1025,7 @@ eucJP-ms、Unix 系で用いられる、日本語 EUC 亜種です。
 
 EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 @see [[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/eucJP-ms.html]],
-     [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?eucJP-ms]],
+     [[url:http://legacy-encoding.osdn.jp/wiki/index.php?eucJP-ms]],
      [[url:http://blog.livedoor.jp/numa2666/archives/50980727.html]]
 
 --- MacCentEuro -> Encoding
