@@ -234,10 +234,8 @@ include Logger::Severity
 
 #@since 2.4.0
 --- new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, shift_period_suffix: '%Y%m%d') -> Logger
---- new(logdev, shift_age = 'weekly', level: Logger::Severity::DEBUG, progname: nil, formatter: Logger::Formatter.new, datetime_format: nil, shift_period_suffix: '%Y%m%d') -> Logger
 #@else
 --- new(logdev, shift_age = 0, shift_size = 1048576) -> Logger
---- new(logdev, shift_age = 'weekly')                -> Logger
 #@end
 
 Logger オブジェクトを生成します。
