@@ -1263,13 +1263,10 @@ clone はそれに加えて freeze, 特異メソッドなどの情報も含め�
 
 clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 
-@raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], 
-#@if (version >= "1.8.0")
-#@#Ruby 1.8 では、
-  [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部の
-  オブジェクトを複製しようとすると発生します。
+#@since 2.4.0
+[[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトは複製ではなくインスタンス自身を返します。
 #@else
-  [[c:Symbol]] クラスのインスタンスを複製しようとすると発生します。
+@raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトを複製しようとすると発生します。
 #@end
 
 
