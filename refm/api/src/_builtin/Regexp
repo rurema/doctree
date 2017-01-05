@@ -446,7 +446,9 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
 #@end
 
 #@since 2.4.0
---- match?(str, pos = 0) -> true | false
+@see [[m:Regexp#match?]]
+
+--- match?(str, pos = 0) -> bool
 
 指定された文字列 str に対して 位置 pos から自身が表す正規表現によるマッチングを行います。
 マッチした場合 true を返し、マッチしない場合には false を返します。
@@ -456,6 +458,8 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
   /R.../.match?("Ruby", 1) #=> false
   /P.../.match?("Ruby")    #=> false
   $&                       #=> nil
+
+@see [[m:Regexp#match]]
 #@end
 
 --- options -> Integer
