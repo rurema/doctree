@@ -75,7 +75,7 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
---- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::Generic
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, parser = URI::DEFAULT_PARSER, arg_check = false)    -> URI::Generic
 
 各引数を成分とする URI::Generic オブジェクトを生成して返します。
 
@@ -467,3 +467,61 @@ URI オブジェクトを正規化して返します。ホスト名を小文字�
   p uri.select(:userinfo, :host, :path)
   # => ["myuser:mypass", "my.example.com", "/test.rbx"]
 
+--- coerce(oth) -> [URI, URI]
+
+引数 oth をパースして [パース後の oth, self] の配列を返します。
+
+@param oth [[c:URI]] オブジェクトか文字列を指定します。
+
+例:
+
+  require 'uri'
+
+  uri = URI.parse("http://my.example.com")
+  uri.coerce("http://foo.com")
+  # => [#<URI::HTTP:0x00000000bcb028 URL:http://foo.com/>, #<URI::HTTP:0x00000000d92178 URL:http://my.example.com>]
+
+--- parser -> URI::Parser
+
+selfのパーサを返します。未定義であった場合は URI::DEFAULT_PARSER を返します。
+
+#@since 2.4.0
+--- find_proxy(env = ENV) -> URI | nil
+#@else
+--- find_proxy            -> URI | nil
+#@end
+
+プロキシ URI を返します。
+
+プロキシ URI は http_proxy, ftp_proxy, no_proxy などの環境変数から取得
+します。適切なプロキシが見つからない場合は nil を返します。
+
+環境変数は大文字にしたもの(HTTP_PROXY, FTP_PROXY, NO_PROXYなど)も調べら
+れる事に注意してください。
+
+ただし、CGI環境下では http_proxy と HTTP_PROXY は特別扱いされます。
+HTTP_PROXY はヘッダ Proxy: に設定されうるためです。そのため、
+HTTP_PROXY(環境変数が大文字小文字を区別しない場合は http_proxy も) は使
+われません。代わりに CGI_HTTP_PROXY が使われます。
+
+#@since 2.4.0
+@param env 環境変数 [[c:ENV]] の代わりに参照するオブジェクトを指定します。
+#@end
+
+@raise BadURIError selfが相対URIであった場合に発生します。
+
+@see [[c:ENV]]
+
+== Constants
+
+--- COMPONENT -> [Symbol]
+
+[[c:URI::Generic]] で利用可能なコンポーネントの一覧です。
+
+--- DEFAULT_PORT -> nil
+
+[[c:URI::Generic]] のデフォルトポート(nil)です。
+
+#@# --- USE_REGISTRY -> false
+#@#
+#@# 2.2.0からnodoc
