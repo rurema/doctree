@@ -22,9 +22,7 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成�
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
 
-#@since 1.8.0
 第一引数が正規表現であれば第一引数を複製して返します。第二、第三引数は警告の上無視されます。
-#@end
 
 @param string 正規表現を文字列として与えます。
 
@@ -35,18 +33,8 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成�
               、真(nil, false 以外)であれば
               [[m:Regexp::IGNORECASE]] の指定と同じになります。
 
-#@since 1.9.1
-#@since 1.9.2
 @param code "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
             それ以外の指定は警告を出力します。
-#@else
-@param code "n" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
-            それ以外の指定は警告を出力します。
-#@end
-#@else
-@param code この引数が与えられた場合は [[m:$KCODE]] の値にかかわらず、指定された文字コードでマッチを行います。
-            文字コードは [[m:$KCODE]] への代入と同様に文字列引数の最初の一文字で決定されます。
-#@end
 
 @raise  RegexpError 正規表現のコンパイルに失敗した場合発生します。
 
@@ -68,33 +56,13 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成�
   puts t2.match(str)[0]  #=> ふるいけや
                          #=> かわずと
 
-#@until 1.9.1
-@see [[m:$KCODE]]
-#@end
-
-#@since 1.9.1
 --- escape(string) -> String
 --- quote(string) -> String
-#@else
---- escape(string, kcode = $KCODE) -> String
---- quote(string, kcode = $KCODE) -> String
-#@end
 
 string の中で正規表現において特別な意味を持つ文字の直前にエ
 スケープ文字(バックスラッシュ)を挿入した文字列を返します。
 
-#@until 1.9.1
-省略可能な引数 kcode で文字列の文字コードを指定します
-(省略時は [[m:$KCODE]] の値が使用されます)。
-
-文字コードの指定は [[m:$KCODE]] と同様に行います。
-#@end
-
 @param string 正規表現において特別な意味をもつ文字をもつ文字列を指定します。
-
-#@until 1.9.1
-@param kcode 文字コードを文字列で指定します。文字コードの指定は [[m:$KCODE]] と同様に行います。
-#@end
 
   rp = Regexp.escape("$bc^")
   puts rp #=> \$bc\^
@@ -145,8 +113,6 @@ last_match[1] の形式では例外 [[c:NoMethodError]] が発生します。
 @param nth 整数を指定します。
 	整数 nth が 0 の場合、マッチした文字列を返します。それ以外では、nth 番目の括弧にマッチした部分文字列を返します。
 
-
-#@since 1.8.1
 --- union(*pattern) -> Regexp
 
 引数として与えた pattern を選択 | で連結し、Regexp として返します。
@@ -154,7 +120,6 @@ last_match[1] の形式では例外 [[c:NoMethodError]] が発生します。
 
   p Regexp.union(/a/, /b/, /c/) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 
-#@since 1.8.7
 引数を一つだけ与える場合は、[[c:Array]] を与えても Regexp を生成します。
 つまり、以下のように書くことができます。
 
@@ -162,8 +127,6 @@ last_match[1] の形式では例外 [[c:NoMethodError]] が発生します。
   p Regexp.union(arr)  #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
   # 1.8.7 より前は、以下のように書く必要があった
   p Regexp.union(*arr) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
-
-#@end
 
 pattern は Regexp または String で与えます。
 String で与えた場合、それ自身と等しい文字列にマッチするものと解釈され、
@@ -200,21 +163,13 @@ String で与えた場合、それ自身と等しい文字列にマッチする�
   # 文字列そのものにマッチする
   rep1 = [ "foo", "bar", "hoge"] 
   p Regexp.union(*rep1) #=> /foo|bar|hoge/
-#@since 1.8.7
   p Regexp.union(rep1)  #=> /foo|bar|hoge/
-#@end
 
   # 下記の場合オプションがつくのは最初だけ
   rep2 = [ /foo/x, "bar", "hoge"] 
   p Regexp.union(*rep2) #=> /(?x-mi:foo)|bar|hoge/
-#@since 1.8.7
   p Regexp.union(rep2)  #=> /(?x-mi:foo)|bar|hoge/
-#@end
 
-
-#@end
-
-#@since 1.9.1
 --- try_convert(obj) -> Regexp | nil
 
 obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
@@ -224,7 +179,6 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 
    Regexp.try_convert(/re/)      # => /re/
    Regexp.try_convert("re")      # => nil
-#@end
 
 == Instance Methods
 
@@ -241,20 +195,12 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 
 組み込み変数 [[m:$~]] もしくは [[m:Regexp.last_match]] にマッチに関する情報 [[c:MatchData]] が設定されます。
 
-#@since 1.9.1
 文字列のかわりに[[c:Symbol]]をマッチさせることができます。
-#@end
 
 @param string マッチ対象文字列
 
-#@until 1.9.1
-@raise TypeError string が nil でも [[c:String]] オブジェクトでもない
-                 場合発生します。
-#@else
 @raise TypeError string が nil でも [[c:String]] オブジェクト
                  でも [[c:Symbol]] でもない場合発生します。
-                 
-#@end
 
   p /foo/ =~ "foo"        #=> 0
   p Regexp.last_match(0)  #=> "foo"
@@ -262,11 +208,9 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
   p $~[0]                 #=> "foo"
   p /foo/ =~ "bar"        #=> nil
 
-#@since 1.8.0
   unless /foo/ === "bar"
     puts "not match " #=> not match
   end
-#@end
 
   str = []
   begin
@@ -279,11 +223,7 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 文字列 string との正規表現マッチを行います。
 マッチした場合は真を返します。
 
-#@until 1.9.1
-string が文字列でない場合には false を返します。
-#@else
 string が文字列でもシンボルでもない場合には false を返します。
-#@end
 
 このメソッドは主にcase文での比較に用いられます。
 
@@ -337,42 +277,18 @@ string が文字列でもシンボルでもない場合には false を返しま
   reg = Regexp.new("hogehoge")
   p reg.casefold? #=> false
 
-#@since 1.9.1
 --- fixed_encoding? -> bool
 
 正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。
-#@end
 
-#@until 1.9.1
---- kcode -> String | nil
-
-その正規表現が対応するようにコンパイルされている文字コードを
-[[m:$KCODE]] と同じ形式で返します。もし、正規表現が固定
-コードに対してコンパイルされていない(マッチ時点での [[m:$KCODE]]
-の値を用いる)場合には、nil を返します。
-
-  reg = Regexp.new("hogehoge", nil, "u")
-  p reg.kcode #=> "utf8"
-
-  reg = Regexp.new("hogehoge", nil)
-  p reg.kcode #=> "nil"
-#@end
-
-#@since 1.9.1
 --- match(str, pos = 0) -> MatchData | nil
 --- match(str, pos = 0) {|m| ... } -> object | nil
-#@else
---- match(str) -> MatchData | nil
-#@end
 
-指定された文字列 str に対して
-#@since 1.9.1
-位置 pos から
-#@end
-自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。
+指定された文字列 str に対して位置 pos から自身が表す正規表現によるマッ
+チングを行います。マッチした場合には結果を MatchData オブジェクトで返し
+ます。
 マッチしなかった場合 nil を返します。
 
-#@since 1.9.1
 省略可能な第二引数 pos を指定すると、マッチの開始位置を pos から行
 うよう制御できます(pos のデフォルト値は 0)。
 
@@ -394,13 +310,10 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
   /((.)\2)/.match("foo") {|m| results << m[0] } #=> ["oo"] 
   /((.)\2)/.match("bar") {|m| results << m[0] } #=> nil
   results #=> ["oo"]
-#@end
 
 @param str 文字列を指定します。str との正規表現マッチを行います。
 
-#@since 1.9.1
 @param pos 整数を指定します。マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
-#@end
 
 使用例
 
@@ -424,7 +337,6 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 
 のように使用できます。(to_a は、マッチに失敗した場合を考慮しています。)
 
-#@since 1.8.0
 多重代入の規則では右辺が配列でない一つのオブジェクトで to_a
 メソッドを持つ場合、右辺に * を付けることで to_a の結果を利用でき
 ます。つまり、上記は以下のように書くことができます。(ここでの
@@ -443,7 +355,6 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
   foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 
   # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
-#@end
 
 #@since 2.4.0
 @see [[m:Regexp#match?]]
@@ -467,20 +378,14 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
 正規表現の生成時に指定されたオプションを返します。戻り値は、
 [[m:Regexp::EXTENDED]], [[m:Regexp::IGNORECASE]],
 [[m:Regexp::MULTILINE]],
-#@since 1.9.2
 [[m:Regexp::FIXEDENCODING]],
-#@since 1.9.3
 [[m:Regexp::NOENCODING]],
-#@end
-#@end
 の論理和です。
 
-#@since 1.9.1
 これで得られるオプションには生成時に指定したもの以外の
 オプションを含んでいる場合があります。これらのビットは
 内部的に用いられているもので、[[m:Regexp.new]] にこれらを
 渡しても無視されます。
-#@end
 
   p Regexp::IGNORECASE # => 1
   p //i.options        # => 1
@@ -510,11 +415,7 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
   p /#{re}+/o     # => /(?i-mx:foo|bar|baz)+/
 
 ただし、後方参照を含む正規表現は意図通りにはならない場合があります。
-#@since 1.9.1
 この場合は名前付きキャプチャを使用すると影響を受けにくくなります。
-#@else
-これは現状、後方参照を番号でしか指定できないためです。
-#@end
 
   re = /(foo|bar)\1/      # \1 は、foo か bar
   p /(baz)#{re}/          # \1 は、baz
@@ -555,7 +456,6 @@ otherが同じパターン、オプション、文字コードの正規表現で
 
 @see [[m:Regexp#to_s]]
 
-#@since 1.9.1
 --- encoding   -> Encoding
 正規表現オブジェクトのエンコーディングを表す [[c:Encoding]] オブジェクト
 を返します。
@@ -590,8 +490,6 @@ Hash のキーは名前付きキャプチャの名前で、値は
   /(.)(.)/.names
   #=> []
 
-#@end
-
 == Constants
 
 --- EXTENDED -> Fixnum
@@ -611,15 +509,11 @@ Hash のキーは名前付きキャプチャの名前で、値は
 複数行モード。正規表現 "." が改行にマッチするようになります。
 正規表現リテラルの //m オプションと同じです。
 
-#@since 1.9.2
-
 --- FIXEDENCODING -> Fixnum
 
 正規表現が特定のエンコーディングの文字列にしかマッチしないことを意味します。
 
 @see [[m:Regexp#fixed_encoding?]]
-
-#@since 1.9.3
 
 --- NOENCODING -> Fixnum
 
@@ -627,7 +521,3 @@ Hash のキーは名前付きキャプチャの名前で、値は
 バイト列としてマッチすることを意味します。
 
 正規表現リテラルの n オプションに対応します。
-
-#@end
-
-#@end
