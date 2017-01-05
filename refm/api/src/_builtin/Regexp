@@ -445,6 +445,19 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
   # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
 #@end
 
+#@since 2.4.0
+--- match?(str, pos = 0) -> true | false
+
+指定された文字列 str に対して 位置 pos から自身が表す正規表現によるマッチングを行います。
+マッチした場合 true を返し、マッチしない場合には false を返します。
+また、[[m:$~]] などパターンマッチに関する組み込み変数の値は変更されません。
+
+  /R.../.match?("Ruby")    #=> true
+  /R.../.match?("Ruby", 1) #=> false
+  /P.../.match?("Ruby")    #=> false
+  $&                       #=> nil
+#@end
+
 --- options -> Integer
 
 正規表現の生成時に指定されたオプションを返します。戻り値は、
