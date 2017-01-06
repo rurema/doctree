@@ -1485,8 +1485,8 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
     p Float(9.88)         #=> 9.88
     
     p Float(Time.gm(1986)) #=> 504921600.0
-    p Float(Object.new)   # cannot convert Object into Float (TypeError)
-    p Float(nil)          # cannot convert nil into Float (TypeError)
+    p Float(Object.new)   # can't convert Object into Float (TypeError)
+    p Float(nil)          # can't convert nil into Float (TypeError)
     
     p Float("10")         #=> 10.0
     p Float("10e2")       #=> 1000.0
@@ -1494,14 +1494,14 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
     p Float(".1")         #=> 0.1
     p Float("0xa")        #=> 10.0
 
-    p Float("nan")        # invalid value (ArgumentError)
-    p Float("INF")        # invalid value (ArgumentError)
-    p Float("-Inf")       # invalid value (ArgumentError)
+    p Float("nan")        # invalid value for Float(): "nan" (ArgumentError)
+    p Float("INF")        # invalid value for Float(): "INF" (ArgumentError)
+    p Float("-Inf")       # invalid value for Float(): "-Inf" (ArgumentError)
     p Float(("10" * 1000)) #=> Infinity
-    p Float("0xa.a")      # invalid value (ArgumentError)
+    p Float("0xa.a")      # invalid value for Float(): "0xa.a" (ArgumentError)
     p Float(" \n10\s \t") #=> 10.0 # 先頭と末尾の空白類は無視される
-    p Float("1\n0")       # invalid value (ArgumentError)
-    p Float("")           # invalid value (ArgumentError)
+    p Float("1\n0")       # invalid value for Float(): "1\n0" (ArgumentError)
+    p Float("")           # invalid value for Float(): "" (ArgumentError)
 
 @see [[m:String#to_f]],[[c:Float]]
 
