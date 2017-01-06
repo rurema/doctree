@@ -1,19 +1,13 @@
 == Module Functions
 
-#@since 1.8.0
 --- exit(status = true) -> ()
-#@else
---- exit(status = 0) -> ()
-#@end
 
 Rubyプログラムの実行を終了します。status として整
 数が与えられた場合、その値を Ruby コマンドの終了ステータスとします。
 デフォルトの終了ステータスは 0(正常終了)です。
 
-#@since 1.8.0
 status が true の場合 0、 false の場合 1 を引数に指定したとみなされます。この値はCレベルの定数
 EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
-#@end
 
 exit は例外 [[c:SystemExit]] を発生させ
 ることによってプログラムの実行を終了させますので、
@@ -46,24 +40,14 @@ exit は例外 [[c:SystemExit]] を発生させ
 
 @see [[m:Kernel.#exit!]],[[m:Kernel.#abort]], [[ref:d:spec/control#begin]]
 
-#@since 1.8.0
 --- exit!(status = false) -> ()
-#@else
---- exit!(status = -1) -> ()
-#@end
 
 Rubyプログラムの実行を即座に終了します。
 status として整数が与えられた場合、その値を Ruby コマンドの終了ステータスとします。
-#@since 1.8.0
 デフォルトの終了ステータスは 1 です。
-#@else
-デフォルトの終了ステータスは -1 です。
-#@end
 
-#@since 1.8.0
 status が true の場合 0、 false の場合 1 を引数に指定したとみなされます。この値はCレベルの定数
 EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
-#@end
 
 exit! は exit とは違って、例外処理などは一切行ないませ
 ん。 [[m:Kernel.#fork]] の後、子プロセスを終了させる時などに用
@@ -83,35 +67,22 @@ exit! は exit とは違って、例外処理などは一切行ないませ
   
   #=> start
   #   start1...
-#@since 1.8.0
   #終了ステータス:1
-#@else
-  #終了ステータス:-1
-#@end
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#abort]]
 
-#@since 1.8.0
 --- abort(message = $!.message) -> ()
-#@else
---- abort -> ()
-#@end
 
 Ruby プログラムをエラーメッセージ付きで終了します。終了ステータスは 1 固定です。
 
 このメソッドと [[m:Kernel.#exit]] との違いは、プログラムの終了ステー
 タスが 1 (正確にはCレベルの定数 EXIT_FAILURE の値)固定であることと、
-#@since 1.8.0
-引数を省略した呼び出し時に 
-#@end
-[[m:$!]] が nil でなければその例外の
-メッセージを標準エラー出力 [[m:$stderr]] に出力することです。
+引数を省略した呼び出し時に [[m:$!]] が nil でなければその例外のメッセー
+ジを標準エラー出力 [[m:$stderr]] に出力することです。
 
-#@since 1.8.0
 引数 message を指定すると SystemExit クラスの
 [[m:Exception#message]] に message を設定し
 て標準エラー出力に出力します。
-#@end
 
 @param message エラーメッセージ文字列です。
 
@@ -162,46 +133,29 @@ command を外部コマンドとして実行し、その標準出力を文字列
 @param command コマンドとして実行する引数です。そのまま評価されるのではなく、
        ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
 @return コマンドの出力を文字列で返します。
-#@since 1.9.1
 @raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
-#@end
 
   puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
   puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
 
-#@since 1.9.1
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]],[[m:Kernel.#spawn]]
-#@else
-@see [[m:Kernel.#system]],[[m:Kernel.#exec]]
-#@end
 
-#@since 1.9.1
 --- system(command, options={}) -> bool | nil
 --- system(env, command, options={}) -> bool | nil
-#@else
---- system(command) -> bool
-#@end
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-#@since 1.9.1
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
-#@else
-それ以外の終了ステータスの場合
-(コマンドを実行できなかった場合も含む)は false を返します。
-#@end
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
-#@since 1.9.1
 コマンドを実行することができなかった場合、多くのシェルはステータス
 127 を返します。(したがって [[m:$?]] の数値は、0x7f00)、シェルを介
 さない場合は Ruby の子プロセスがステータス 127 で終了します。
 コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
 [[m:$?]] を参照することで判別可能です。
-#@end
 
 ==== 引数の解釈
 
@@ -213,45 +167,27 @@ command を外部コマンドとして実行し、その標準出力を文字列
 そうでなければインタプリタから直接実行されます。
 
 @param command command コマンドを文字列で指定します。
-#@since 1.9.1
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
-#@end
-#@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
-#@else
-@see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
-#@end
 
-#@since 1.9.1
 --- system(program, *args, options={}) -> bool | nil
 --- system(env, program, *args, options={}) -> bool | nil
-#@else
---- system(program, *args) -> bool
-#@end
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-#@since 1.9.1
 それ以外の終了ステータスの場合
 (コマンドを実行できなかった場合も含む)は false を返します。
-#@else
-それ以外の終了ステータスの場合は false を返します。
-コマンドを実行できなかった場合は nil を返します。
-#@end
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
-#@since 1.9.1
 コマンドを実行することができなかった場合、多くのシェルはステータス
 127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
 さない場合は Ruby の子プロセスがステータス 127 で終了します。
 コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
 $? を参照することで判別可能です。
-#@end
 
-#@since 1.9.1
 Hash を options として渡すことで、起動される子プロセスの
   * プロセスグループ
   * resource limit
@@ -260,7 +196,6 @@ Hash を options として渡すことで、起動される子プロセスの
   * 子プロセスでのリダイレクト
 などを変更できます。環境変数のクリアなども指定できます。
 詳しくは [[m:Kernel.#spawn]] を参照してください。
-#@end
 
 ==== 引数の解釈
 
@@ -269,25 +204,16 @@ Hash を options として渡すことで、起動される子プロセスの
 先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
 起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
 グラム名になります。
-#@since 1.8.0
 また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
-#@end
 
 @param program 文字列か2要素の配列です。
 @param args program に渡す引数を 0 個以上指定する
-#@since 1.9.1
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
-#@end
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 #@#例...
-#@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
-#@else
-@see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
-#@end
 
-#@since 1.9.1
 --- spawn(command, options={}) -> Integer
 --- spawn(env, command, options={}) -> Integer
 
@@ -550,14 +476,9 @@ io => io という形のオプションを指定します。
 @raise Errno::EXXX コマンドが実行できなかった場合に発生します。
 
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
-#@end
 
-#@since 1.9.1
 --- exec(command, options={}) -> ()
 --- exec(env, command, options={}) -> ()
-#@else
---- exec(command) -> ()
-#@end
 
 引数で指定されたコマンドを実行します。
 
@@ -574,10 +495,8 @@ io => io という形のオプションを指定します。
 そうでなければインタプリタから直接実行されます。
 
 @param command コマンドを文字列で指定します。
-#@since 1.9.1
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
-#@end
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
   # a.rb
@@ -592,12 +511,8 @@ io => io という形のオプションを指定します。
   実行中
   # '実行後' は表示されない
 
-#@since 1.9.1
 --- exec(program, *args, options={}) -> ()
 --- exec(env, program, *args, options={}) -> ()
-#@else
---- exec(program, *args) -> ()
-#@end
 
 引数で指定されたコマンドを実行します。
 
@@ -606,12 +521,10 @@ io => io という形のオプションを指定します。
 
 この形式では、常に shell を経由せずに実行されます。
 
-#@since 1.9.1
 [[man:exec(3)]] でコマンドを実行すると、
 元々のプログラムの環境をある程度(ファイルデスクリプタなど)引き継ぎます。
 Hash を options として渡すことで、この挙動を変更できます。
 詳しくは [[m:Kernel.#spawn]] を参照してください。
-#@end
 
 ==== 引数の解釈
 
@@ -620,16 +533,12 @@ Hash を options として渡すことで、この挙動を変更できます。
 先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
 起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
 グラム名になります。
-#@since 1.8.0
 また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
-#@end
 
 @param program 文字列か2要素の配列を指定します。
 @param args 渡される引数です。0 個以上の文字列を指定します。
-#@since 1.9.1
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
-#@end
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
@@ -653,11 +562,7 @@ Hash を options として渡すことで、この挙動を変更できます。
   xxxx    32754  0.0  0.0   2580   468 pts/3    S+   22:01   0:00 mysleep 600
   xxxx    32761  0.0  0.0   2824   792 pts/6    S+   22:01   0:00 grep sleep
 
-#@since 1.9.1
 @see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]],[[man:exec(3)]]
-#@else
-@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]],[[man:exec(3)]]
-#@end
 
 --- fork -> Integer | nil
 --- fork { ... } -> Integer | nil
@@ -667,9 +572,7 @@ Hash を options として渡すことで、この挙動を変更できます。
 nil を返します。ブロックを指定して呼び出した場合には、生成し
 た子プロセスでブロックを評価します。
 
-#@since 1.8.2
 fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
-#@end
 
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
 #@#例...
@@ -688,31 +591,18 @@ syscall(2) や
 が -1 を返す場合には例外 [[c:Errno::EXXX]] が発生します。
 それ以外では、返した値をそのまま数値で返します。
 
-#@since 2.0.0
 ライブラリ [[lib:fiddle]] を使えばより高レベルな操作ができます。
-#@else
-ライブラリ [[lib:dl]] を使えばより高レベルな操作ができます。
-#@end
 
 @param num システムコール番号です。
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
 @raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
 #@#例...
-#@since 2.0.0
 @see [[lib:fiddle]], [[man:syscall(2freebsd)]], [[man:syscall(2linux)]]
-#@else
-@see [[lib:dl]], [[man:syscall(2freebsd)]], [[man:syscall(2linux)]]
-#@end
 
 
-#@since 1.9.1
 --- open(file, mode_enc = "r", perm = 0666) -> IO
 --- open(file, mode_enc = "r", perm = 0666) {|io| ... } -> object
-#@else
---- open(file, mode = "r", perm = 0666) -> IO
---- open(file, mode = "r", perm = 0666) {|io| ... } -> object
-#@end
 
 file をオープンして、[[c:IO]]（[[c:File]]を含む）クラスのインスタンスを返します。
 
@@ -732,16 +622,9 @@ file をオープンして、[[c:IO]]（[[c:File]]を含む）クラスのイン
 Perlと異なりコマンドは常に `|' で始まります。
 
 @param file ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
-#@since 1.9.1
 @param mode_enc モード・エンコーディングを文字列か定数の論理和で指定します。後述。
-#@else
-@param mode モードを文字列か定数の論理和で指定します。後述。
-#@end
 @param perm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合の
   ファイルのパーミッションを整数で指定します。
-#@if (version < "1.8.0")
-  この引数は、第 2 引数が数値形式でなければ無視されます
-#@end
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。 
 
 #@#例...
@@ -791,7 +674,6 @@ mode は以下の三つのうちのいずれかです。
 します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
 合に限ります)
 
-#@since 1.9.1
 ==== Universal Newline
 改行をLFに揃えます。一言で言えばPEP:278 [[url:https://www.python.org/dev/peps/pep-0278/]]のことです。
 
@@ -815,15 +697,12 @@ ext_enc(外部エンコーディング)が指定されている場合、
 読み込まれた文字列にはこのエンコーディングが指定され、
 出力する文字列はそのエンコーディングに変換されます。
 
-#@since 1.9.2
 ext_encが'BOM|'で始まる場合、その入力に含まれるBOMはあらかじめ削られます。
 また、BOMがあった場合、入力された文字列にはそのBOMに対応するエンコーディングが設定されます。
   # BOMでUTF-16BEかLEかを判別する例
   File.open("utf16.txt", "rb:BOM|utf-16"){|file| .... }
-#@end
 
 int_encも指定されていた場合、入力された文字列をext_encでエンコーディングされた文字列とみなしてint_encへと変換し、その結果にint_encを設定して返します。
-#@end
 
 --- select(reads, writes = [], excepts = [], timeout = nil) -> [[IO]] | nil
 
@@ -1025,11 +904,7 @@ require_relative を呼出すと必ず失敗します。
 [[m:Kernel.#require]] するように設定します。
 
 const_name には、 "::" 演算子を含めることはできません
-#@since 1.8.0
 （ネストした定数を指定する方法は後述）。
-#@else
-。つまり、トップレベルの定数しか指定できません。
-#@end
 
 @param const_name 定数をString または Symbol で指定します。
 @param feature require と同様な方法で autoload する対象を指定します。
@@ -1043,7 +918,6 @@ const_name には、 "::" 演算子を含めることはできません
     autoload :Bar, '/tmp/foo'
     p Bar #=> Bar
 
-#@since 1.8.0
 ==== ネストした定義内の定数
 
 const_name には、 "::" 演算子を含めることはできないので、 Kernel.#autoload 
@@ -1099,11 +973,9 @@ const_name には、 "::" 演算子を含めることはできないので、 Ke
       p Foo::Bar
       #=> -:5: warning: toplevel constant Bar referenced by Foo::Bar
       #   Bar
-#@end
 
 @see [[m:Kernel.#autoload?]],[[m:Module#autoload]],[[m:Kernel.#require]]
 
-#@since 1.8.0
 --- autoload?(const_name) -> String | nil
 
 const_name が [[m:Kernel.#autoload]] 設定されているか調べます。
@@ -1131,7 +1003,6 @@ autoload 設定されていないか、ロード済みなら nil を返します
     p Foo.autoload?(:Bar)         #=> nil
 
 @see [[m:Kernel.#autoload]]
-#@end
 
 --- set_trace_func(proc) -> Proc
 
@@ -1217,11 +1088,7 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
   43.to_s
   
   # ----結果----
-#@since 2.0.0
   # ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
-#@else
-  # ["c-return", "..", 3, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
-#@end
   # ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
   # ["c-call", "..", 4, :inherited, #<Binding:0x10cba98>, Class]
   # ["c-return", "..", 4, :inherited, #<Binding:0x10cb858>, Class]
@@ -1233,13 +1100,9 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 
 @see [[m:Kernel.#caller]]
 
-#@since 2.0.0
 --- caller(start = 1)               -> [String] | nil
 --- caller(start, length)           -> [String] | nil
 --- caller(range)                   -> [String] | nil
-#@else
---- caller(start = 1) -> [String] | nil
-#@end
 
 start 段上の呼び出し元の情報を [[m:$@]]
 の形式のバックトレース(文字列の配列)として返します。
@@ -1250,16 +1113,12 @@ start 段上の呼び出し元の情報を [[m:$@]]
 引数で指定した値が範囲外の場合は nil を返します。
 
 @param start long の範囲を超えない正の整数でスタックレベルを指定します。
-#@since 2.0.0
 @param length 取得するスタックの個数を指定します。
 
 @param range 取得したいスタックの範囲を示す [[c:Range]] オブジェクトを指定します。
 
 @see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]],
      [[m:Kernel.#caller_locations]]
-#@else
-@see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]]
-#@end
 
     def foo
       p caller(0)
@@ -1275,27 +1134,11 @@ start 段上の呼び出し元の情報を [[m:$@]]
 
     bar
 
-#@if (version >= "1.9.2")
     #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
     #   ["-:10:in `bar'", "-:13:in `<main>'"]
     #   ["-:13:in `<main>'"]
     #   []
     #   nil
-#@end
-#@if (version == "1.9.1")
-    #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
-    #   ["-:10:in `bar'", "-:13:in `<main>'"]
-    #   ["-:13:in `<main>'"]
-    #   nil
-    #   nil
-#@end
-#@if (version < "1.9.1")
-    #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13"]
-    #   ["-:10:in `bar'", "-:13"]
-    #   ["-:13"]
-    #   []
-    #   nil
-#@end
 
 以下の関数は、caller の要素から [ファイル名, 行番号, メソッド名]
 を取り出して返します。
@@ -1321,15 +1164,9 @@ start 段上の呼び出し元の情報を [[m:$@]]
     bar
     p parse_caller(caller.first)
 
-#@since 1.8.0
     #=> ["-", 15, "bar"]
     #   ["-", 19, nil]
     #   nil
-#@else
-    #=> ["-", 15, "bar"]
-    #   ["-", 19, "<main>"]
-    #   nil
-#@end
 
 以下は、[[m:$DEBUG]] が真の場合に役に立つ debug 関数
 のサンプルです。
@@ -1342,13 +1179,8 @@ start 段上の呼び出し元の情報を [[m:$@]]
 
     debug "debug information"
 
-#@since 1.8.0
     #=> ["-:7", "debug information"]
-#@else
-    #=> ["-:7:in `<main>'", "debug information"]
-#@end
 
-#@since 2.0.0
 --- caller_locations(start = 1, length = nil) -> [Thread::Backtrace::Location] | nil
 --- caller_locations(range)                   -> [Thread::Backtrace::Location] | nil
 
@@ -1362,7 +1194,6 @@ start 段上の呼び出し元の情報を [[m:$@]]
 @param range  取得したいフレームの範囲を示す [[c:Range]] オブジェクトを指定します。
 
 @see [[c:Thread::Backtrace::Location]], [[m:Kernel.#caller]]
-#@end
 
 --- gets(rs = $/) -> String | nil
 
@@ -1470,14 +1301,6 @@ rs に nil を指定すると行区切りなしとみなします。
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]]
 
-#@if ("1.8.0" <= version and version < "1.9.1")
---- getc -> Fixnum | nil
-
-このメソッドは廃止予定です。代わりに STDIN.getc を使ってください。
-
-@see [[m:IO#getc]]
-#@end
-
 --- putc(ch) -> object
 
 文字 ch を 標準出力 [[m:$stdout]] に出力します。
@@ -1506,11 +1329,7 @@ ch が文字列なら、その先頭 1byte を出力します。
 
 @see [[m:IO#putc]]
 
-#@since 1.9.1
 --- p(*arg) -> object | Array
-#@else
---- p(*arg) -> nil
-#@end
 
 引数を人間に読みやすい形に整形して改行と順番に標準出力 [[m:$stdout]] に出力します。主にデバッグに使用します。
 
@@ -1527,11 +1346,7 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 #@#inspectが定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
-#@since 1.9.1
 @return 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
-#@else
-@return nil を返します。
-#@end
 
   puts "" #=> （空行）
   p "" #=> ""
@@ -1552,9 +1367,6 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 
 文字列以外のオブジェクトが引数として与えられた場合には、
 to_s メソッドにより文字列に変換してから出力します。
-#@if (version < "1.9.1")
-ただし、nil に対しては文字列 "nil" を出力します
-#@end
 
 変数 [[m:$,]] (出力フィールドセパレータ)に nil で
 ない値がセットされている時には、各引数の間にその文字列を出力します。
@@ -1566,7 +1378,6 @@ to_s メソッドにより文字列に変換してから出力します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-#@since 1.9.1
   print "Hello, world!"
   print "Regexp is",/ant/
   print nil
@@ -1580,21 +1391,7 @@ to_s メソッドにより文字列に変換してから出力します。
   print "AA","BB"
   #=> input<end>
   #=> AA<and>BB<end>
-#@else
-  print "Hello, world!"
-  print "Regexp is",/ant/
-  print nil
-  print "\n"
-  #=> Hello, world!Regexp is(?-mix:ant)nil
 
-  $_ = "input"
-  $, = "<and>"
-  $\ = "<end>\n"
-  print
-  print "AA","BB"
-  #=> input<end>
-  #=> AA<and>BB<end>
-#@end
 @see [[m:Kernel.#puts]],[[m:Kernel.#p]]
 
 --- puts(*arg) -> nil
@@ -1606,9 +1403,6 @@ to_s メソッドにより文字列に変換してから出力します。
 配列や文字列以外のオブジェクトが引数として与えられた場合には、
 当該オブジェクトを最初に to_ary により配列へ、
 次に to_s メソッドにより文字列へ変換を試みます。
-#@if (version < "1.9.1")
-ただし、nil に対しては文字列 "nil" を出力します
-#@end
 末尾が改行で終っている引数や配列の要素に対しては puts 自身
 は改行を出力しません。
 
@@ -1616,7 +1410,6 @@ to_s メソッドにより文字列に変換してから出力します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-#@since 1.9.1
     puts "foo", "bar\n", "baz"
     puts ""    # 改行のみ出力
     puts       # 改行のみ出力
@@ -1630,30 +1423,10 @@ to_s メソッドにより文字列に変換してから出力します。
     #
     #   oui
     #   non
-#@else
-    puts "foo", "bar\n", "baz"
-    puts ""    # 改行のみ出力
-    puts       # 改行のみ出力
-    puts nil
-    puts ["oui", "non"]
-    #=> foo
-    #   bar
-    #   baz
-    #
-    #
-    #   nil
-    #   oui
-    #   non
-#@end
 
 @see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
-#@since 1.8.0
-#@since 2.0.0
 --- warn(*message) -> nil
-#@else
---- warn(message) -> nil
-#@end
 
 message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]] 
 フラグ が nil のときは何も出力しません。
@@ -1662,18 +1435,10 @@ message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBO
 to_s メソッドにより文字列に変換してから出力します。
 
 このメソッドは以下と同じです。
-#@since 2.0.0
   $stderr.puts(*message) if !$VERBOSE.nil? && !message.empty?
-#@else
-  $stderr.print message, "\n" unless $VERBOSE.nil?
-#@end
   nil
 
-#@since 2.0.0
 @param message 出力するオブジェクトを任意個指定します。
-#@else
-@param message 出力するオブジェクトを指定します。
-#@end
 @raise IOError 標準エラー出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
@@ -1682,7 +1447,6 @@ to_s メソッドにより文字列に変換してから出力します。
   warn "caution!" # 何もしない
 
 @see [[m:$stderr]],[[m:$VERBOSE]]
-#@end
 
 --- Array(arg) -> Array
 
@@ -1690,13 +1454,8 @@ to_s メソッドにより文字列に変換してから出力します。
 
 arg.to_ary と arg.to_a をこの順に呼び出して、返ってきた配列を変換結果とします。
 
-#@if (version > "1.9.1")
 arg に to_ary, to_a のいずれのメソッドも定義されていない場合は
 一要素の配列 [arg] を返します。
-#@else
-arg に to_ary, to_a のいずれのメソッドもない場合は
-[[m:Object#to_a]]によって一要素の配列 [arg] を返します。
-#@end
 
 @param arg 変換対象のオブジェクトです。
 @raise TypeError to_ary, to_a の返り値が配列でなければ発生します
@@ -1733,9 +1492,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Float("10e2")       #=> 1000.0
     p Float("1e-2")       #=> 0.01
     p Float(".1")         #=> 0.1
-#@since 1.9.2
     p Float("0xa")        #=> 10.0
-#@end
 
     p Float("nan")        # invalid value (ArgumentError)
     p Float("INF")        # invalid value (ArgumentError)
@@ -1755,41 +1512,21 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 引数が数値の場合は直接変換し（小数点以下切り落とし）、
 文字列の場合は、進数を表す接頭辞を含む整数表現とみなせる文字列のみ
 変換します。
-#@if (version < "1.8.0")
-許される接頭辞は16 進(0x)、2 進(0b)、8 進数(0)です。
-#@end
 
-#@since 1.8.0
 数値と文字列以外のオブジェクトに対しては arg.to_int, arg.to_i を
 この順に使用して変換します。
-#@else
-数値、文字列以外のオブジェクトに対しては arg.to_i を
-使用します。
-#@end
 
 @param arg 変換対象のオブジェクトです。
 @raise ArgumentError 整数と見なせない文字列を引数に指定した場合に発生します。
-#@since 1.8.0
 @raise TypeError メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
   が整数([[c:Integer]]のサブクラス)を返さなかった場合に発生します。
-#@else
-@raise TypeError メソッド to_i を持たないオブジェクトを引数に指定したか、
-                 to_i が整数を返さなかった場合に発生します。
-#@end
-#@since 1.9.1
 @raise TypeError 引数に nil を指定した場合に発生します。
-#@end
 
-#@since 1.8.0
     p Integer(4)          #=> 4
     p Integer(4_000)      #=> 4000
     p Integer(9.88)       #=> 9
     
-#@since 1.9.1
     p Integer(nil)        # can't convert nil into Integer (TypeError)
-#@else
-    p Integer(nil)        #=> 0
-#@end
     p Integer(Object.new) # cannot convert Object into Integer (TypeError)
     
     p Integer("10")       #=> 10
@@ -1802,23 +1539,6 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
     p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
     p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
-#@else
-    p Integer(4)          #=> 4
-    p Integer(4_000)      #=> 4000
-    p Integer(9.88)       #=> 9
-    
-    p Integer(nil)        #=> 0
-    p Integer(Object.new) # cannot convert Object into Integer (TypeError)
-    
-    p Integer("10")       #=> 10
-    p Integer("010")      #=> 8
-    p Integer("0x10")     #=> 16
-    p Integer("0b10")     #=> 2
-    p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
-    p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
-    p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
-    p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
-#@end
 
 @see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]],[[c:Integer]]
 
@@ -1869,14 +1589,10 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
 
 @see [[ref:d:spec/control#END]]
 
-#@since 1.9.2
 --- loop         -> Enumerator
-#@end
 --- loop { ... } -> object | nil
 (中断されない限り)永遠にブロックの評価を繰り返します。
-#@since 1.9.2
 ブロックが指定されなければ、代わりに [[c:Enumerator]] を返します。
-#@end
 
   loop do
     print "Input: "
@@ -1956,39 +1672,22 @@ iterator? は （ブロックが必ずイテレートするとはいえないの
   check{} #=> Block is given.
   check #=> Block isn't given.
 
-#@until 1.9.1
---- callcc {|cont| .... } -> object
-
-継続を作成します。 [[c:Continuation]] を参照してください。
-#@end
-
-#@since 1.9.1
 --- catch {|tag| .... } -> object
-#@end
 --- catch(tag) {|tag| .... } -> object
 
 [[m:Kernel.#throw]]との組み合わせで大域脱出を行います。 catch はブロックを実行します。
 
-#@since 1.9.1
 ブロックの実行中に tag と同一のオブジェクトを引数とする [[m:Kernel.#throw]] が行われた
-#@else
-ブロックの実行中に tag と同じ名前の [[m:Kernel.#throw]] が行われた
-#@end
 場合は、その throw の第二引数を戻り値として、ブロックの実行を終了します。
 
 主にネストしたループから一気に脱出するのに使用します。
 
-#@since 1.9.1
 引数を省略した場合、タグとなるオブジェクトが内部で生成され、ブロックパラメータ tag に
 渡されます。
 
 @param tag タグとなる任意のオブジェクトです。
-#@else
-@param tag シンボルや文字列などシンボル化できるものです。
-#@end
 @return ブロックの返り値か、対応するthrowの第二引数を返り値として返します。
 
-#@since 1.9.1
   result = catch do |tag|
     for i in 1..2
       for j in 1..2
@@ -2000,19 +1699,6 @@ iterator? は （ブロックが必ずイテレートするとはいえないの
   end
   
   p result #=> 1
-#@else
-  result = catch(:tag) do
-    for i in 1..2
-      for j in 1..2
-        for k in 1..2
-          throw :tag, k
-        end
-      end
-    end
-  end
-  
-  p result #=> 1
-#@end
 
 @see [[m:Kernel.#throw]]
 
@@ -2028,24 +1714,14 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 同じ tag で待っている catch が存在しない場合は、例外で
 スレッドが終了します。
 
-#@since 1.9.1
 同じ tag であるとは [[m:Object#object_id]] が同じであるという意味です。
-#@end
 
-#@since 1.9.1
 @param tag catch の引数に対応する任意のオブジェクトです。
-#@else
-@param tag シンボルまたは文字列です。
-#@end
 @param value catch の戻り値になります。
 #@since 2.2.0
 @raise UncaughtThrowError 同じ tag で待っている catch が存在しない場合に発生します。
 #@else
-#@since 1.9.1
 @raise ArgumentError 同じ tag で待っている catch が存在しない場合に発生します。
-#@else
-@raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
-#@end
 #@end
 
   def foo
@@ -2068,38 +1744,28 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 @see [[m:Kernel.#catch]]
 
 --- rand(max = 0) -> Integer | Float
-#@since 1.9.3
 --- rand(range) -> Integer | Float | nil
-#@end
 
 擬似乱数を発生させます。
 
-#@since 1.9.3
 最初の形式では
-#@end
 max が 0 の場合は 0.0 以上 1.0 未満の実数を、正の整数の場合は 0 以上 max 未満の整数を返します。
 それ以外の値を指定した場合は max.to_int の絶対値が指定されたものとして扱います。
 
-#@since 1.9.3
 二番目の形式では range で指定された範囲の値を返します。
 range の始端と終端が共に整数の場合は整数を、少なくとも片方が実数の場合は実数を返します。
 range に含まれる数が無い場合は nil を返します。
-#@end
 
 まだ [[m:Kernel.#srand]] が呼ばれていなければ自動的に呼び出します。
 
-#@since 1.9.3
 擬似乱数生成器として [[m:Random::DEFAULT]] を使用します。
 これは [[m:Random.rand]] と共通です。
-#@end
 
 @param max   乱数値の上限を正の整数で指定します。
              max 自体は乱数値の範囲に含まれません。
              0 を指定すると実数値の乱数を返します。
-#@since 1.9.3
 @param range 発生させる乱数値の範囲を [[c:Range]] オブジェクトで指定します。
              range の境界は数値でなければなりません。
-#@end
 
   srand(1234)     # 乱数の種を設定する。
   rand            #=> 0.1915194503788923
@@ -2107,38 +1773,21 @@ range に含まれる数が無い場合は nil を返します。
   rand(10)        #=> 4
   rand(5.5)       #=> 0
                   # rand(5) と同じ。 5 が乱数値の範囲に含まれないことに注意。
-#@since 1.9.3
-  
+
   rand(1..6)      #=> 2                   (1 から 6 までの整数)
   rand(0...10)    #=> 1                   (0 から 9 までの整数。終端を含まない)
   rand(1.0..1.5)  #=> 1.1362963047752432  (1.0 以上 1.5 以下の実数)
   rand(1.0...1.5) #=> 1.1382321275715483  (1.0 以上 1.5 未満の実数)
   rand(1..0)      #=> nil
-#@end
 
-#@since 1.9.2
 @see [[m:Kernel.#srand]], [[m:Random#rand]], [[c:Random]]
-#@else
-@see [[m:Kernel.#srand]]
-#@end
 
 --- srand -> Integer
 --- srand(seed) -> Integer
 
-#@since 1.9.2
 [[m:Kernel.#rand]] や [[m:Random.rand]] で使用される擬似乱数生成器の種を設定し、古い種を返します。
-#@else
-[[m:Kernel.#rand]] の乱数の種を設定し、古い種を返します。
-#@end
-#@until 1.8.6
-#@#(ただし最初だけは 0 を返します)。
-#@end
 
-#@since 1.9.2
 seed に整数を指定するとその絶対値を乱数の種に設定します。
-#@else
-seed に整数を指定するとそれを乱数の種に設定します。
-#@end
 それ以外の値を指定した場合は seed.to_int が指定されたものとして扱います。
 seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 
@@ -2146,13 +1795,8 @@ seed が省略された時には
 現在の時刻やプロセス ID、srand を呼び出した回数、
 また可能なら /dev/urandom から読み出したデータなどを元に種を作ります。
 
-#@since 1.8.3
 @param seed 乱数の種となる整数を指定します。
             [[c:Bignum]] も指定可能です。
-#@else
-@param seed 乱数の種となる整数を指定します。
-            unsigned long よりも大きな値を与えることは出来ません。
-#@end
 
   num = 455675
   seeds = []
@@ -2182,56 +1826,31 @@ seed が省略された時には
   
   p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 
-#@since 1.9.3
 @see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
-#@else
-@see [[m:Kernel.#rand]]
-#@end
 
-#@since 1.9.1
 --- global_variables -> [Symbol]
-#@else
---- global_variables -> [String]
-#@end
 
 プログラム中で定義されているグローバル変数(`$'で始まる変数)名の
 配列を返します。
 
-#@since 1.9.1
   p global_variables #=> [:$;, :$-F, :$@, ... ]
-#@else
-  p global_variables #=> ["$-p", "$-I", "$-v" ... ]
-#@end
 
 @see [[m:Kernel.#local_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
-#@since 1.9.1
 --- local_variables -> [Symbol]
-#@else
---- local_variables -> [String]
-#@end
 
 現在のスコープで定義されているローカル変数名の配列を返します。
 
   yuyu = 0
-#@since 1.9.1
   p local_variables #=> [:yuyu]
-#@else
-  p local_variables #=> ["yuyu"]
-#@end
 
 @see [[m:Kernel.#global_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
-#@since 1.9.1
 --- sub(pattern, replace)          -> String
 --- sub(pattern) {|matched| ... }  -> String
 
 $_.sub とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
 コマンドラインオプションで -p または -n を指定した時のみ定義されます。
-
-#@until 1.9.3
-replace を指定しない場合ブロックを指定しても無視されて例外が発生します。[[ruby-core:47967]]
-#@end
 
 暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
 今後はより明示的な $_.sub を使ってください。
@@ -2255,10 +1874,6 @@ $_.sub とこのメソッド sub は以下の点で違いがあります。
 
 $_.gsub とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
 コマンドラインオプションで -p または -n を指定した時のみ定義されます。
-
-#@until 1.9.3
-replace を指定しない場合ブロックを指定しても無視されて Enumerator オブジェクトが返されます。[[ruby-core:47967]]
-#@end
 
 暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
 今後はより明示的な $_.gsub を使ってください。
@@ -2306,121 +1921,6 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
 @param rs 末尾から削除する改行コードを指定します。
 
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
-#@else
---- sub(pattern, replace)          -> String
---- sub!(pattern, replace)         -> String
---- sub(pattern) {|matched| ... }  -> String
---- sub!(pattern) {|matched| ... } -> String
-
-組み込み変数 [[m:$_]] の指す文字列内で pattern に
-マッチする最初の部分を replace に置き換えます。$_ を返します。
-
-$_.sub, $_.sub! とほぼ同じです。
-
-暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
-今後はより明示的な $_.sub, $_.sub! を使ってください。
-
-$_.sub とこのメソッド sub は以下の点で違いがあります。
-
-  * sub は $_ の値をコピーして、コピーの方を更新し、
-  $_ に再代入します。
-
-@param pattern    置き換える文字列のパターンを表す文字列か正規表現。
-                  文字列を指定した場合は全く同じ文字列にだけマッチする
-@param replace    pattern で指定した文字列と置き換える文字列
-@see [[m:String#sub]],[[m:$_]]
-
---- gsub(pattern, replace)          -> String
---- gsub!(pattern, replace)         -> String
---- gsub(pattern) {|matched| ... }  -> String
---- gsub!(pattern) {|matched| ... } -> String
-
-組み込み変数 [[m:$_]] の指す文字列内で pattern に
-マッチする部分を全て replace に置き換えます。$_ を返します。
-
-$_.gsub, $_.gsub! とほぼ同じです。
-
-暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
-今後はより明示的な $_.gsub, $_.gsub! を使ってください。
-
-$_.gsub とこのメソッド gsub は以下の点で違いがあります。
-
-  * gsub は $_ の値をコピーして、コピーの方を更新し、
-  $_ に再代入します。
-
-@param pattern    置き換える文字列のパターンを表す文字列か正規表現。
-                  文字列を指定した場合は全く同じ文字列にだけマッチする
-@param replace    pattern で指定した文字列と置き換える文字列
-@see [[m:String#gsub]],[[m:$_]]
-
---- chop  -> String
---- chop! -> String | nil
-
-組み込み変数 $_ を最後の文字を取り除いたものにし
-ます(終端が"\r\n"であれば2文字取り除きます)。
-
-chop! は文字列そのものを変更しその結果を返しますが、
-取り除く文字列がなければ nil を返します。
-
-$_.chop, $_.chop! とほぼ同じです。
-
-暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
-今後はより明示的な $_.chop, $_.chop! を使ってください。
-
-$_.chopとこのメソッド chop は以下の点で違いがあります。
-
-  * chop は $_ の値をコピーして、コピーの方を更新し、
-  $_ に再代入します。
-
-@see [[m:String#chop]],[[m:$_]]
-
---- chomp(rs = $/)  -> String
---- chomp!(rs = $/) -> String | nil
-
-組み込み変数 $_ を rs で指定される末尾
-の文字列を取り除いたものにします。
-
-chomp! は文字列そのものを変更しその結果を返しますが、
-取り除く文字列がなければ nil を返します。
-rs のデフォルト値は $/ です。
-
-$_.chomp, $_.chomp! とほぼ同じです。
-
-暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
-今後はより明示的な $_.chomp, $_.chomp!を使ってください。
-
-$_.chomp とこのメソッド chomp は以下の点で違いがあります。
-
-  * chomp は $_ の値をコピーして、コピーの方を更新し、
-  $_ に再代入します。
-
-@param rs [[m:String#chomp]] 参照
-@see [[m:String#chomp]],[[m:$_]],[[m:$/]]
-
---- split(sep = $/, limit = 0) -> [String]
-
-$_.split と同じです。
-
-暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
-今後はより明示的な $_.split を使ってください。
-
-@param sep       文字列を分割するときのセパレータのパターン
-@param limit     分割する最大個数
-@see [[m:String#split]],[[m:$_]]
-
---- scan(pattern)                  -> [String] | [[String]]
---- scan(pattern) {|matched| ... } -> [String] | [[String]]
-
-$_.scan と同じです。
-
-暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
-今後はより明示的な $_.scan を使ってください。
-
-@param pattern 探索する部分文字列または正規表現
-
-@see [[m:String#scan]],[[m:$_]]
-
-#@end
 
 --- trap(signal, command) -> String | Proc | nil
 --- trap(signal) { ... }  -> String | Proc | nil
@@ -2640,11 +2140,7 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
 す。第2引数に 
-#@since 1.9.1
 [[c:Binding]] オブジェクトを与えた場合、
-#@else
-[[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトを与えた場合、
-#@end
 そのオブジェクトを生成したコンテキストで文字列を評価します。
 
 expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval 
@@ -2656,11 +2152,7 @@ fname の行番号 lineno から文字列 expr が書かれているかのよう
 できます。
 
 bind によらずに特定のオブジェクトのコンテキストで expr を評価したい場合、
-#@since 1.9.1
 [[m:Module#module_eval]], [[m:BasicObject#instance_eval]] が使えます。
-#@else
-[[m:Module#module_eval]], [[m:Object#instance_eval]] が使えます。
-#@end
 
 @param expr  評価する文字列です。
 @param bind  評価コンテキストです。
@@ -2678,11 +2170,7 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
   #=> XXX.rb:4: RuntimeError (RuntimeError)
   #       from ..:9
 
-#@since 1.9.1
 @see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:BasicObject#instance_eval]],[[m:Object#method]],[[m:Object#send]]
-#@else
-@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Object#method]],[[m:Object#send]]
-#@end
 
 #@#==== リフレクション
 
@@ -2712,17 +2200,9 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 @see [[c:Proc]],[[m:Proc.new]]
 
-#@since 1.8.0
 #@include(lambda_proc)
-#@end
 
-#@since 1.8.7
 --- __method__ -> Symbol | nil
-#@since 1.9.1
-#@until 2.0.0
---- __callee__ -> Symbol | nil
-#@end
-#@end
 
 現在のメソッド名を返します。
 メソッドの外で呼ばれると nil を返します。
@@ -2737,9 +2217,7 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 現在のメソッド名が alias されたメソッドの場合でも alias 元のメソッド名
 を返します。
-#@end
 
-#@since 2.0.0
 --- __callee__ -> Symbol | nil
 
 現在のメソッド名を返します。
@@ -2757,9 +2235,7 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 ソッドの場合には alias 先のメソッド名を返します。
 
 @see [[m:Kernel.#__method__]]
-#@end
 
-#@since 1.9.1
 --- Complex(r, i = 0) -> Complex
 --- Complex(s)        -> Complex
 
@@ -2859,9 +2335,6 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 @see [[c:Rational]]
 
-#@end
-
-#@since 2.0.0
 --- Hash(arg) -> Hash
 
 引数 arg で指定したオブジェクトを to_hash メソッドを呼び出す事で
@@ -2882,4 +2355,3 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 現在のソースファイル(__FILE__)のあるディレクトリ名を正規化された絶対パ
 スで返します。シンボリックリンクも解決されます。また、__FILE__ が nil
 の場合は nil を返します。
-#@end
