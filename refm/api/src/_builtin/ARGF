@@ -51,6 +51,16 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの�
 また、ARGF は [[c:ARGF.class]] クラスのインスタンスです。
 各メソッドの詳細は [[c:ARGF.class]] を参照してください。
 
+===[a:inplace] インプレースエディットモード
+
+インプレースエディット (in-place edit) モードは Ruby のコマンドライン引数に指定されたファイルの内容を置き換えます。
+
+コマンドラインオプションで -i を指定すると Ruby はこのモードで動作します。
+また [[m:ARGF.class#inplace_mode=]] を使用して起動後にモードに入ることも出来ます。
+
+このモードで動作中は [[m:$stdout]] が処理対象への書き出しストリームで置き換えられます。
+実行例は [[ref:d:spec/rubycmd#cmd_option]] や [[m:ARGF.class#inplace_mode=]] を参照してください。
+
 = class ARGF.class
 
 extend Enumerable
@@ -231,7 +241,12 @@ self を返します。
 
 #@# ruby-list:43420 を参考にした
 
+#@since 1.9.1
+@see [[m:IO#binmode]], [[m:ARGF.class#binmode?]]
+#@else
 @see [[m:IO#binmode]]
+
+#@end
 
 --- close -> self
 処理対象のファイルをクローズします。開くファイルが残っている場合は次のファイルをオープンします。
@@ -771,7 +786,11 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します
   です。
 
 #@since 1.9.1
+#@since 1.9.3
+@see [[m:ARGF.class#file]], [[m:ARGF.class#to_write_io]]
+#@else
 @see [[m:ARGF.class#file]]
+#@end
 #@else
 @see [[m:ARGF.file]]
 #@end
@@ -875,11 +894,16 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 #@end
 
 #@since 1.9.1
---- readpartial(length, str = nil) -> String
+--- readpartial(maxlen, outbuf = nil) -> String
+
 [[m:IO#readpartial]]を参照
 
-@see [[m:IO#readpartial]]
+[[m:ARGF.class#read]] などとは違って複数ファイルを同時に読み込むことはありません。
 
+@param maxlen 読み込む長さの上限を整数で指定します。
+@param outbuf 読み込んだデータを格納する [[c:String]] オブジェクトを指定します。
+
+@see [[m:IO#readpartial]], [[m:ARGF.class#read_nonblock]]
 #@end
 
 #@since 2.0.0
@@ -908,3 +932,355 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 
 @see [[m:ARGF.class#each_codepoint]]
 #@end
+
+
+#@since 1.9.1
+--- argv -> Array
+
+[[m:Kernel::ARGV]] を返します。
+
+ARGF が ARGV をどう扱うかについては [[c:ARGF]] を参照してください。
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.argv  -> ARGV
+#@# *
+#@# *  Returns the +ARGV+ array, which contains the arguments passed to your
+#@# *  script, one per element.
+#@# *
+#@# *  For example:
+#@# *
+#@# *      $ ruby argf.rb -v glark.txt
+#@# *
+#@# *      ARGF.argv   #=> ["-v", "glark.txt"]
+#@# *
+#@# */
+
+
+--- binmode? -> bool
+
+ARGF の入力ストリームがバイナリモードなら true を返します。
+そうでない場合、false を返します。
+
+バイナリモードにするためには [[m:ARGF.class#binmode]] を使用します。
+
+  ARGF.binmode?  #=> false
+  ARGF.binmode
+  ARGF.binmode?  #=> true
+
+@see [[m:IO#binmode?]]
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.binmode? 
+#@# *
+#@# *  Returns true if +ARGF+ is being read in binary mode; false otherwise. (To
+#@# *  enable binary mode use +ARGF.binmode+.
+#@# *
+#@# * For example:
+#@# *
+#@# *     ARGF.binmode?  #=> false
+#@# *     ARGF.binmode
+#@# *     ARGF.binmode?  #=> true
+#@# */
+
+
+--- external_encoding -> Encoding
+
+ARGF が処理するファイルに対する外部エンコーディングを返します。
+デフォルトは [[m:Encoding.default_external]] です。
+
+[[m:ARGF.class#set_encoding]] で設定します。
+
+@see [[c:IO]], [[m:ARGF.class#internal_encoding]]
+
+  ARGF.external_encoding  #=>  #<Encoding:UTF-8>
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.external_encoding   -> encoding
+#@# *
+#@# *  Returns the external encoding for files read from +ARGF+ as an +Encoding+
+#@# *  object. The external encoding is the encoding of the text as stored in a
+#@# *  file. Contrast with +ARGF.internal_encoding+, which is the encoding used
+#@# *  to represent this text within Ruby.
+#@# *
+#@# *  To set the external encoding use +ARGF.set_encoding+.
+#@# *
+#@# * For example:
+#@# *
+#@# *     ARGF.external_encoding  #=>  #<Encoding:UTF-8>
+#@# *
+#@# */
+
+
+--- inplace_mode -> String | nil
+
+[[ref:c:ARGF#inplace]]で書き換えるファイルのバックアップに付加される拡張子を返します。
+拡張子が設定されていない場合は空文字列を返します。
+インプレースモードでない場合は nil を返します。
+
+Ruby 起動時の -i オプション や [[m:ARGF.class#inplace_mode=]] で設定します。
+
+@see [[ref:d:spec/rubycmd#cmd_option]]
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.inplace_mode  -> String
+#@# *
+#@# *  Returns the file extension appended to the names of modified files under
+#@# *  inplace-edit mode. This value can be set using +ARGF.inplace_mode=+ or
+#@# *  passing the +-i+ switch to the Ruby binary.
+#@# */
+
+
+--- inplace_mode=(ext)
+
+[[ref:c:ARGF#inplace]]時にバックアップファイルに付加する拡張子を設定します。
+ピリオドも含めて指定する必要があります。
+
+バックアップを残さない場合は空文字列を指定します。
+この機能は Windows では使用出来ません。
+
+設定が有効になるのは次のファイルの処理に移った時です。
+インプレースモードに入っていない場合はその時点でモードに入ります。
+
+Ruby 起動時の -i オプションで設定することも出来ます。
+
+@param ext インプレースモード時にバックアップファイルに付加する拡張子を
+           文字列で指定します。
+           ピリオドも含める必要があります。
+
+@see [[ref:d:spec/rubycmd#cmd_option]]
+
+  $ ruby argf.rb file.txt
+  
+  ---- argf.rb ----
+  # 引数のファイル中の各行の最初の "foo" を "bar" で置き換える
+  ARGF.inplace_mode = '.bak'
+  ARGF.lines do |line|
+    print line.sub("foo","bar")
+  end
+  
+  
+  ---- -i オプションを使う場合 ----
+  $ ruby -i.bak -p -e '$_.sub!("foo","bar")' file.txt
+  
+  ---- -i オプションを使う場合その２ ----
+  $ ruby -i.bak -n -e 'print $_.sub("foo","bar")' file.txt
+
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.inplace_mode = ext  -> ARGF
+#@# *
+#@# *  Sets the filename extension for inplace editing mode to the given String.
+#@# *  Each file being edited has this value appended to its filename. The
+#@# *  modified file is saved under this new name.
+#@# *
+#@# *  For example:
+#@# *
+#@# *      $ ruby argf.rb file.txt
+#@# *
+#@# *      ARGF.inplace_mode = '.bak'
+#@# *      ARGF.lines do |line|
+#@# *        print line.sub("foo","bar")
+#@# *      end
+#@# *
+#@# * Each line of _file.txt_ has the first occurrence of "foo" replaced with
+#@# * "bar", then the new line is written out to _file.txt.bak_.
+#@# */
+
+
+--- internal_encoding -> Encoding | nil
+
+ARGF から読み込んだ文字列の内部エンコーディングを返します。
+内部エンコーディングが指定されていない場合は nil を返します。
+
+まだ読み込み処理を始めていない場合は [[m:Encoding.default_external]] を返します。
+
+[[m:ARGF.class#set_encoding]] で設定します。
+
+@see [[c:IO]], [[m:ARGF.class#external_encoding]]
+
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.internal_encoding   -> encoding
+#@# *
+#@# *  Returns the internal encoding for strings read from +ARGF+ as an
+#@# *  +Encoding+ object.
+#@# *
+#@# *  If +ARGF.set_encoding+ has been called with two encoding names, the second
+#@# *  is returned. Otherwise, if +Encoding.default_external+ has been set, that
+#@# *  value is returned. Failing that, if a default external encoding was
+#@# *  specified on the command-line, that value is used. If the encoding is
+#@# *  unknown, nil is returned.
+#@# */
+
+
+--- set_encoding(ext_enc)                        -> self
+--- set_encoding(enc_str, options = {})          -> self
+--- set_encoding(ext_enc, int_enc, options = {}) -> self
+
+ARGF の外部／内部エンコーディングを設定します。
+次以降に処理するファイルにも同じ設定が適用されます。
+
+外部エンコーディングは ARGF を介して読み込むファイルの、
+内部エンコーディングは読み込んだ文字列のエンコーディングです。
+
+詳しくは [[m:IO#set_encoding]] を参照してください。
+
+@param enc_str 外部／内部エンコーディングを"A:B" のようにコロンで
+               区切って指定します。
+@param ext_enc 外部エンコーディングを表す文字列か
+               [[c:Encoding]] オブジェクトを指定します。
+@param int_enc 内部エンコーディングを表す文字列か
+               [[c:Encoding]] オブジェクトを指定します。
+@param options エンコーディング変換のオプション。
+               [[m:String#encode]] と同じものが指定できます。
+
+@see [[m:String#encode]]
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.set_encoding(ext_enc)                -> ARGF
+#@# *     ARGF.set_encoding("ext_enc:int_enc")      -> ARGF
+#@# *     ARGF.set_encoding(ext_enc, int_enc)       -> ARGF
+#@# *     ARGF.set_encoding("ext_enc:int_enc", opt) -> ARGF
+#@# *     ARGF.set_encoding(ext_enc, int_enc, opt)  -> ARGF
+#@# *
+#@# *  If single argument is specified, strings read from ARGF are tagged with
+#@# *  the encoding specified.
+#@# *
+#@# *  If two encoding names separated by a colon are given, e.g. "ascii:utf-8",
+#@# *  the read string is converted from the first encoding (external encoding)
+#@# *  to the second encoding (internal encoding), then tagged with the second
+#@# *  encoding.
+#@# *
+#@# *  If two arguments are specified, they must be encoding objects or encoding
+#@# *  names. Again, the first specifies the external encoding; the second
+#@# *  specifies the internal encoding.
+#@# *
+#@# *  If the external encoding and the internal encoding are specified, the
+#@# *  optional +Hash+ argument can be used to adjust the conversion process. The
+#@# *  structure of this hash is explained in the +String#encode+ documentation.
+#@# *
+#@# *  For example:
+#@# *
+#@# *      ARGF.set_encoding('ascii')         # Tag the input as US-ASCII text
+#@# *      ARGF.set_encoding(Encoding::UTF_8) # Tag the input as UTF-8 text
+#@# *      ARGF.set_encoding('utf-8','ascii') # Transcode the input from US-ASCII
+#@# *                                         # to UTF-8.
+#@# */
+
+#@end
+
+
+#@since 1.9.3
+--- print(*arg)  -> nil
+
+引数を順に処理対象のファイルに出力します。
+
+[[ref:c:ARGF#inplace]]時にのみ使用できます。
+また [[m:$stdout]] への代入の影響を受けません。
+それ以外は [[m:Kernel.#print]] と同じです。
+
+@param arg 出力するオブジェクトを任意個指定します。
+
+--- printf(format, *arg)  -> nil
+
+C 言語の printf と同じように、format に従い引数を
+文字列に変換して処理対象のファイルに出力します。
+
+[[ref:c:ARGF#inplace]]時にのみ使用できます。
+また [[m:$stdout]] への代入の影響を受けません。
+それ以外は出力先を指定しない形式の [[m:Kernel.#printf]] と同じです。
+
+@param format フォーマット文字列です。
+@param arg フォーマットされる引数です。
+
+
+--- putc(ch)  -> object
+
+文字 ch を処理対象のファイルに出力します。
+ch を返します。
+
+[[ref:c:ARGF#inplace]]時にのみ使用できます。
+また [[m:$stdout]] への代入の影響を受けません。
+それ以外は [[m:Kernel.#putc]] と同じです。
+
+@param ch 出力する文字を [[c:String]] オブジェクトで指定します。
+
+--- puts(*arg)  -> nil
+
+引数と改行を順番に処理対象のファイルに出力します。
+引数がなければ改行のみを出力します。
+
+[[ref:c:ARGF#inplace]]時にのみ使用できます。
+また [[m:$stdout]] への代入の影響を受けません。
+それ以外は [[m:Kernel.#puts]] と同じです。
+
+@param arg 出力するオブジェクトを任意個指定します。
+
+--- read_nonblock(maxlen)              -> String
+--- read_nonblock(maxlen, outbuf)      -> String
+#@# TODO: Windows では使えない？
+
+処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
+第二の形式では読み込んだデータを outbuf に破壊的に格納してそれを返します。
+詳しくは [[m:IO#read_nonblock]] を参照してください。
+
+[[m:ARGF.class#read]] などとは違って複数ファイルを同時に読み込むことはありません。
+
+@param maxlen 読み込む長さの上限を整数で指定します。
+@param outbuf 読み込んだデータを格納する [[c:String]] オブジェクトを指定します。
+
+@see [[m:ARGF.class#readpartial]]
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.read_nonblock(maxlen)              -> string
+#@# *     ARGF.read_nonblock(maxlen, outbuf)      -> outbuf
+#@# *
+#@# *  Reads at most _maxlen_ bytes from the ARGF stream in non-blocking mode.
+#@# */
+
+
+--- to_write_io  -> IO
+
+処理対象のファイルへの書き出し用 [[c:IO]] オブジェクトを返します。
+
+[[ref:c:ARGF#inplace]]時以外は読み込み用の IO オブジェクトを返します。
+このため [[m:ARGF.class#write]] などの書き出し用メソッドを呼ぶと [[c:IOError]] が発生します。
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.to_write_io  -> io
+#@# *
+#@# *  Returns IO instance tied to _ARGF_ for writing if inplace mode is
+#@# *  enabled.
+#@# */
+
+
+--- write(str)  -> Integer
+
+処理対象のファイルに対して str を出力します。
+str が文字列でなければ to_s による文字列化を試みます。
+実際に出力できたバイト数を返します。
+
+[[ref:c:ARGF#inplace]]時にのみ使用できます。
+
+@param str 出力する文字列を指定します。
+
+@see [[m:ARGF.class#to_write_io]]
+
+#@#/*
+#@# *  call-seq:
+#@# *     ARGF.write(string)   -> integer
+#@# *
+#@# *  Writes _string_ if inplace mode.
+#@# */
+
+#@end
+
