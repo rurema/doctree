@@ -203,6 +203,23 @@ self が大きい時には正の整数、等しい時には 0、小さい時に�
 
 @see [[m:String#casecmp]]
 
+#@since 2.4.0
+--- casecmp?(other) -> bool | nil
+
+大文字小文字の違いを無視しシンボルを比較します。
+シンボルが一致する場合には true を返し、一致しない場合には false を返します。
+
+@param other 比較対象のシンボルを指定します。
+
+  :abcdef.casecmp?(:abcde)     #=> false
+  :aBcDeF.casecmp?(:abcdef)    #=> true
+  :abcdef.casecmp?(:abcdefg)   #=> false
+  :abcdef.casecmp?(:ABCDEF)    #=> true
+  :"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+
+@see [[m:String#casecmp?]]
+#@end
+
 --- =~(other) -> Integer | nil
 --- match(other) -> Integer | nil
 

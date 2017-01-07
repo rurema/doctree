@@ -732,6 +732,25 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#<=>]]
 
+#@since 2.4.0
+--- casecmp?(other) -> bool | nil
+
+大文字小文字の違いを無視し文字列を比較します。
+文字列が一致する場合には true を返し、一致しない場合には false を返します。
+
+@param other    self と比較する文字列
+
+例:
+
+  "abcdef".casecmp?("abcde")     #=> false
+  "aBcDeF".casecmp?("abcdef")    #=> true
+  "abcdef".casecmp?("abcdefg")   #=> false
+  "abcdef".casecmp?("ABCDEF")    #=> true
+  "\u{e4 f6 fc}".casecmp?("\u{c4 d6 dc}") #=> true
+
+@see [[m:String#casecmp]]
+#@end
+
 --- center(width, padding = ' ') -> String
 
 長さ width の文字列に self を中央寄せした文字列を返します。
