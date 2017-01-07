@@ -1,10 +1,4 @@
-#@since 1.9.1
 = object ARGF < ARGF.class
-#@else
-= object ARGF
-
-extend Enumerable
-#@end
 
 スクリプトに指定した引数
 ([[m:Object::ARGV]] を参照) をファイル名とみなして、
@@ -47,7 +41,6 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます
 [[m:Kernel.#gets]] など一部の組み込み関数は
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
-#@since 1.9.1
 また、ARGF は [[c:ARGF.class]] クラスのインスタンスです。
 各メソッドの詳細は [[c:ARGF.class]] を参照してください。
 
@@ -68,7 +61,6 @@ extend Enumerable
 [[c:ARGF]] を表すクラスです。
 
 == Public Instance Methods
-#@end
 
 --- filename -> String
 --- path -> String
@@ -91,9 +83,8 @@ extend Enumerable
   #...
 
 --- to_s -> String
-#@since 2.0.0
 --- inspect -> String
-#@end
+
 常に文字列 "ARGF" を返します。
 
   # カレントディレクトリから適当にファイルを選ぶ
@@ -148,11 +139,7 @@ $stdinがIOオブジェクトでない場合は$stdinを返します。
   MyIO Test
   です。
 
-#@since 1.9.1
 @see [[m:ARGF.class#to_io]]
-#@else
-@see [[m:ARGF.to_io]]
-#@end
 
 --- lineno -> Integer
 
@@ -241,12 +228,7 @@ self を返します。
 
 #@# ruby-list:43420 を参考にした
 
-#@since 1.9.1
 @see [[m:IO#binmode]], [[m:ARGF.class#binmode?]]
-#@else
-@see [[m:IO#binmode]]
-
-#@end
 
 --- close -> self
 処理対象のファイルをクローズします。開くファイルが残っている場合は次のファイルをオープンします。
@@ -314,15 +296,8 @@ ARGFがcloseされていればtrueを返します。
 
 --- each(rs = $/) {|line| ... } -> self
 --- each_line(rs = $/) {|line| ... } -> self
-#@since 1.8.7
-#@since 1.9.1
 --- each(rs = $/)       -> Enumerator
 --- each_line(rs = $/)  -> Enumerator
-#@else
---- each(rs = $/)       -> Enumerable::Enumerator
---- each_line(rs = $/)  -> Enumerable::Enumerator
-#@end
-#@end
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。
 
@@ -349,13 +324,7 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。
 @see [[m:IO#each]], [[m:IO#each_line]], 
 
 --- each_byte{|char| ...} -> self
-#@since 1.8.7
-#@since 1.9.1
 --- each_byte -> Enumerator
-#@else
---- each_byte -> Enumerable::Enumerator
-#@end
-#@end
 
 ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
@@ -381,52 +350,27 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 @see [[m:IO#each_byte]]
 
-#@since 1.8.7
 --- each_char{|c| ... }     -> self
-#@since 1.9.1
 --- each_char               -> Enumerator
-#@else
---- each_char               -> Enumerable::Enumerator
-#@end
 
 レシーバに含まれる文字を一文字ずつブロックに渡して評価します。
 
 レシーバは読み込み可能でなければなりません。
-
-#@until 1.9.1
-また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
-#@end
 
 @see [[m:IO#each_char]], [[m:IO#chars]]
 
 --- chars{ |c| ... }        -> self
-#@since 1.9.1
 --- chars                   -> Enumerator
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_char]] を使用してください。
-#@else
---- chars                   -> Enumerable::Enumerator
-
-このメソッドは obsolete です。
-代わりに [[m:ARGF.each_char]] を使用してください。
-#@end
-#@since 2.0.0
 使用すると警告メッセージが表示されます。
-#@end
 
 レシーバに含まれる文字を一文字ずつブロックに渡して評価します。
 
 レシーバは読み込み可能でなければなりません。
 
-#@since 1.9.1
 @see [[m:ARGF.class#each_char]]
-#@else
-また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
-
-@see [[m:ARGF.each_char]]
-#@end
-#@end
 
 --- eof -> bool
 --- eof? -> bool
@@ -633,11 +577,7 @@ ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返�
   #=>  is   10
   #<EOFError: end of file reached>
 
-#@since 1.9.1
 @see [[m:ARGF.class#getc]]
-#@else
-@see [[m:ARGF.getc]]
-#@end
 
 --- readline -> String
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時にはEOFErrorを発生します。
@@ -662,11 +602,7 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
   #=> "- Saitama\n"
   #=> <EOFError: end of file reached>
 
-#@since 1.9.1
 @see [[m:Kernel.#readline]] [[m:ARGF.class#gets]]
-#@else
-@see [[m:Kernel.#readline]] [[m:ARGF.gets]]
-#@end
 
 --- readlines(rs = $/) -> [String]
 --- to_a(rs = $/) -> [String]
@@ -785,46 +721,22 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します
   MyIO Test
   です。
 
-#@since 1.9.1
-#@since 1.9.3
 @see [[m:ARGF.class#file]], [[m:ARGF.class#to_write_io]]
-#@else
-@see [[m:ARGF.class#file]]
-#@end
-#@else
-@see [[m:ARGF.file]]
-#@end
 
-#@since 1.8.7
-#@since 1.9.1
 --- bytes { |char| ... } -> self
 --- bytes                -> Enumerator
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_byte]] を使用してください。
-#@else
---- bytes { |char| ... } -> self
---- bytes                -> Enumerable::Enumerator
-
-このメソッドは obsolete です。
-代わりに [[m:ARGF.each_byte]] を使用してください。
-#@end
-#@since 2.0.0
 使用すると警告メッセージが表示されます。
-#@end
 
 self を 1 バイトずつ整数としてブロックの引数に繰り返しブロックを呼びだします。
 
 ブロックを省略した場合には、
-#@since 1.9.1
 [[c:Enumerator]] オブジェクトを生成して返します。
-#@else
-[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
-#@end
 
    ARGF.bytes.to_a        #=> [104, 101, 108, 108, 111]
 
-#@since 1.9.1
 --- lines(rs = $/) { |line| ... }   -> self
 --- lines(limit) { |line| ... }     -> self
 --- lines(rs, limit) { |line| ... } -> self
@@ -834,47 +746,26 @@ self を 1 バイトずつ整数としてブロックの引数に繰り返しブ
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_line]] を使用してください。
-#@else
---- lines(rs = $/) { |line| ... }   -> self
---- lines(rs = $/)                  -> Enumerable::Enumerator
-
-このメソッドは obsolete です。
-代わりに [[m:ARGF.each_line]] を使用してください。
-#@end
-#@since 2.0.0
 使用すると警告メッセージが表示されます。
-#@end
 
 現在位置から 1 行ずつ文字列として読み込み、それを引数として 与えられたブロックを実行します。
 
 ブロックが与えられなかった場合は、
-#@since 1.9.1
 [[c:Enumerator]] オブジェクトを生成して返します。
-#@else
-[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
-#@end
 
 テキスト読み込みメソッドとして動作します。
 
-#@since 1.9.1
 limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中
 で 切れないように余分に読み込む場合があります。
-#@end
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-#@since 1.9.1
 @param limit 最大の読み込みバイト数
-#@end
 
    ARGF.lines.to_a   #=> ["foo\n", "bar\n"]
 
-#@since 1.9.1
 @see [[m:$/]], [[m:ARGF.class#each_line]]
-#@else
-@see [[m:$/]], [[m:ARGF.each_line]]
-#@end
 
 --- getbyte   -> Integer | nil
 
@@ -891,9 +782,6 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 @raise EOFError 既に EOF に達している場合に発生します。
 
-#@end
-
-#@since 1.9.1
 --- readpartial(maxlen, outbuf = nil) -> String
 
 [[m:IO#readpartial]]を参照
@@ -904,9 +792,7 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 @param outbuf 読み込んだデータを格納する [[c:String]] オブジェクトを指定します。
 
 @see [[m:IO#readpartial]], [[m:ARGF.class#read_nonblock]]
-#@end
 
-#@since 2.0.0
 --- each_codepoint{ |c| ... }    -> self
 --- each_codepoint               -> Enumerator
 
@@ -931,10 +817,7 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
 
 @see [[m:ARGF.class#each_codepoint]]
-#@end
 
-
-#@since 1.9.1
 --- argv -> Array
 
 [[m:Kernel::ARGV]] を返します。
@@ -1174,10 +1057,6 @@ ARGF の外部／内部エンコーディングを設定します。
 #@# *                                         # to UTF-8.
 #@# */
 
-#@end
-
-
-#@since 1.9.3
 --- print(*arg)  -> nil
 
 引数を順に処理対象のファイルに出力します。
@@ -1281,6 +1160,3 @@ str が文字列でなければ to_s による文字列化を試みます。
 #@# *
 #@# *  Writes _string_ if inplace mode.
 #@# */
-
-#@end
-
