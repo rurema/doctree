@@ -187,6 +187,11 @@ ARGF の入力ストリームがバイナリモードなら true を返します
   ARGF.close
   ARGF.filename  # => "bar"
   ARGF.close
+#@until 2.3.0
+  ARGF.close     # => closed stream (IOError)
+
+@raise IOError 処理対象のファイルが既にクローズされていた場合に発生します。
+#@end
 
 @see [[m:ARGF.class#closed?]]
 
