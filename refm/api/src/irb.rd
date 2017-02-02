@@ -669,7 +669,7 @@ IRB.conf[:INSPECT_MODE] に以下のいずれかの値を設定する事で、�
   $ irb --inspect [raw|p|pp|yaml|marshal|...]
 
 上記以外にも独自の出力方式を追加する事ができます。詳しくは
-[[m:IRB::INSPECTORS.def_inspector]] を参照してください。
+[[m:IRB::Inspector.def_inspector]] を参照してください。
 #@end
 
 = module IRB

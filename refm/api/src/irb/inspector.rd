@@ -30,18 +30,7 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 
 ライブラリ内部で使用します。
 
-= object IRB::INSPECTORS
-
-定義された inspect_mode を管理する [[c:Hash]] オブジェクトです。
-
---- keys_with_inspector(inspector) -> Array
-
-引数で指定した [[c:IRB::Inspector]] に対応する key の配列を返します。
-
-@param inspector [[c:IRB::Inspector]] オブジェクトを指定します。
-
-  IRB::INSPECTORS.keys_with_inspector(IRB::INSPECTORS[true])
-  # => [true, :p, "p", :inspect, "inspect"]
+== Singleton Methods
 
 --- def_inspector(key, arg = nil) { |v| ... } -> object
 
@@ -60,9 +49,22 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 例.
 
   # .irbrc
-  IRB::INSPECTORS.def_inspector([:test]){|v| v.to_s * 2 }
+  IRB::Inspector::INSPECTORS.def_inspector([:test]){ |v| v.to_s * 2 }
 
   $ irb --inspect test
   irb(main):001:0> :abc # => abcabc
 
 @see [[ref:lib:irb#inspect_mode]]
+
+--- keys_with_inspector(inspector) -> Array
+
+引数で指定した [[c:IRB::Inspector]] に対応する key の配列を返します。
+
+@param inspector [[c:IRB::Inspector]] オブジェクトを指定します。
+
+  IRB::Inspector.keys_with_inspector(IRB::Inspector::INSPECTORS[true])
+  # => [true, :p, "p", :inspect, "inspect"]
+
+= object IRB::Inspector::INSPECTORS
+
+定義された inspect_mode を管理する [[c:Hash]] オブジェクトです。
