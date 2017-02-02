@@ -104,12 +104,10 @@ prompt を出力し、ユーザからのキー入力を待ちます。
   begin
     while buf = Readline.readline
         p buf
-        end
-      rescue Interrupt
-        system("stty", stty_save)
-        exit
-      end
     end
+  rescue Interrupt
+    system("stty", stty_save)
+    exit
   end
 
 例: INTシグナルを捕捉して、端末状態を復帰する。
