@@ -69,121 +69,57 @@ extend Enumerable
 標準入力に対しては - を返します。
 組み込み変数 [[m:$FILENAME]] と同じです。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each {|line|
-    p [ARGF.filename, ARGF.path, ARGV]
-    ARGF.skip
-  }
-  #例
-  #=> ["test.rb", "test.rb", ["test.rb~", "third.txt", "ugo.yaml"]]
-  #=> ["test.rb~", "test.rb~", ["third.txt", "ugo.yaml"]]
-  #...
+  $ echo "foo" > foo
+  $ echo "bar" > bar
+  $ echo "glark" > glark
+
+  $ ruby argf.rb foo bar glark
+
+  ARGF.filename # => "foo"
+  ARGF.read(5)  # => "foo\nb"
+  ARGF.filename # => "bar"
+  ARGF.skip
+  ARGF.filename # => "glark"
 
 --- to_s -> String
 --- inspect -> String
 
 常に文字列 "ARGF" を返します。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  while line = ARGF.gets
-    p [ARGF.filename, ARGF.to_s, ARGV]
-    ARGF.skip
-  end
-
-  #例
-  #=> ["test.rb", "ARGF", ["test.rb~", "third.txt", "ugo.yaml"]]
-  #=> ["test.rb~", "ARGF", ["third.txt", "ugo.yaml"]]
-  #...
-
 --- file -> IO
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
 返します。
 
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
+  $ echo "foo" > foo
+  $ echo "bar" > bar
 
-  until ARGF.closed?
-    printf("最終更新時刻 %s (%s)\n", ARGF.file.stat.mtime, ARGF.filename)
-    ARGF.skip
-  end 
-  #例
-  #=> 最終更新時刻 Thu May 03 14:05:53 +0900 2007 (sample.yaml)
-  #=> 最終更新時刻 Sun Aug 26 11:28:09 +0900 2007 (test.rb)
-  #=> 最終更新時刻 Sun Aug 26 11:27:58 +0900 2007 (test.rb~)
-  #=> 最終更新時刻 Sun Jun 24 13:08:12 +0900 2007 (third.txt)
-  #=> 最終更新時刻 Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
+  $ ruby argf.rb foo bar
 
+  ARGF.file      # => #<File:foo>
+  ARGF.read(5)   # => "foo\nb"
+  ARGF.file      # => #<File:bar>
 
-$stdinがIOオブジェクトでない場合は$stdinを返します。
-
-  class MyIO
-    def to_io
-      DATA
-    end
-  end
-
-  $stdin = MyIO.new
-  ARGV.push("-");
-
-  p ARGF.file                #=> #<MyIO:0x293e840>
-  p ARGF.file.to_io.readline #=> "MyIO Test\n"
-
-  __END__
-  MyIO Test
-  です。
-
-@see [[m:ARGF.class#to_io]]
+ARGFが現在開いている処理対象が標準入力の場合、$stdin を返します。
 
 --- lineno -> Integer
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
 個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each {|line|
-    if ARGF.lineno < 10
-      ARGF.lineno = 10
-    end
-    p [ ARGF.lineno, line]
-  }
-  #例
-  #=> [10, "cat:\n"]
-  #=> [11, " - name: taro\n"]
-  #=> [12, "   age: 7\n"]
-  #...
+  ARGF.lineno   # => 0
+  ARGF.readline # => "This is line 1\n"
+  ARGF.lineno   # => 1
 
 --- lineno=(number)
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を number に書き換えます。
 
 @param number 更新後の行番号を指定する
 
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-
-  ARGF.each {|line|
-    if ARGF.lineno == 4
-      ARGF.lineno = 5
-    end
-    p [ARGF.lineno, line]
-  }
-  #=> 例
-  #=> [1, "cat:\n"]
-  #=> [2, " - name: taro\n"]
-  #=> [3, "   age: 7\n"]
-  #=> [5, " - name: jiro\n"] 
-  #=> [6, "   age: 23\n"]
-  # ...
+  ARGF.lineno      # => 0
+  ARGF.readline    # => "This is line 1\n"
+  ARGF.lineno      # => 1
+  ARGF.lineno = 0  # => 0
+  ARGF.lineno      # => 0
 
 --- skip -> self
 
@@ -191,106 +127,32 @@ $stdinがIOオブジェクトでない場合は$stdinを返します。
 次回の読み込みは次の引数が処理対象になります。
 self を返します。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  while line = ARGF.gets
-    p [ARGF.filename, ARGV, ARGF.skip]
-  end
-  #例
-  #=> ["sample.yaml", ["test.rb", "test.rb~", "third.txt", "ugo.yaml"], ARGF]
-  #=> ["test.rb", ["test.rb~", "third.txt", "ugo.yaml"], ARGF]
-  #...
+  $ echo "foo" > foo
+  $ echo "bar" > bar
 
+  $ ruby argf.rb foo bar
+  ARGF.filename  # => "foo"
+  ARGF.skip
+  ARGF.filename  # => "bar"
 
 --- binmode -> self
 [[m:IO#binmode]]を参照
 
-  require 'md5'
-
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-  files = ARGV.dup
-  bm = ARGF.binmode.readlines(nil)
-  bm.each_with_index {|bl, i|
-    md5 = MD5.new(bl).hexdigest
-    printf("%s\t%s\n", md5, files[i])
-  }
-
-  #例
-  #=> fe413bf114e16b0cd596d869743e9d35        ruby-1.8.5-p35.tar.gz
-  #=> 70ad729e965c9625d2dfb7fa0145b423        sample.yaml
-  #=> d91e81b81673279e908a1c08e8582487        test.rb
-  #=> 158c4a0a097379a08bd88abfca6a51c5        test.rb~
-  #...
-
-#@# ruby-list:43420 を参考にした
-
-@see [[m:IO#binmode]], [[m:ARGF.class#binmode?]]
-
 --- close -> self
 処理対象のファイルをクローズします。開くファイルが残っている場合は次のファイルをオープンします。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each {|line|
-    p [ line.chomp, ARGF.filename ]
-    ARGF.close
-    if ARGF.closed?
-      p "ARGF is closed."
-    else
-      p "ARGF is not closed"
-    end
-  }
-  if ARGF.closed?
-    p "ARGF had been closed."
-  else
-    p "ARGF is not closed"
-  end
-  
-  #例
-  #=> ["cat:", "sample.yaml"]
-  #=> "ARGF is not closed"
-  #=> ["", "test.rb"]
-  #=> "ARGF is not closed"
-  #=> ["--- !ruby/object:Dog ", "ugo.yaml"]
-  #=> "ARGF is closed."
-  #=> "ARGF had been closed."
+  $ echo "foo" > foo
+  $ echo "bar" > bar
+
+  $ ruby argf.rb foo bar
+
+  ARGF.filename  # => "foo"
+  ARGF.close
+  ARGF.filename  # => "bar"
+  ARGF.close
 
 --- closed? -> bool
 ARGFがcloseされていればtrueを返します。
-
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each {|line|
-    p [ line.chomp, ARGF.filename ]
-    ARGF.close
-    if ARGF.closed?
-      p "ARGF is closed."
-    else
-      p "ARGF is not closed"
-    end
-  }
-  if ARGF.closed?
-    p "ARGF had been closed."
-  else
-    p "ARGF is not closed"
-  end
-  
-  #例
-  #=> ["cat:", "sample.yaml"]
-  #=> "ARGF is not closed"
-  #=> ["", "test.rb"]
-  #=> "ARGF is not closed"
-  #=> ["--- !ruby/object:Dog ", "ugo.yaml"]
-  #=> "ARGF is closed."
-  #=> "ARGF had been closed."
 
 @see [[m:IO#closed?]]
 
@@ -303,23 +165,12 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。
 
 @param rs 区切り文字を指定する
 
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each_line {|line|
-    line.chomp!
-    printf("'%s' in %s\n", line, ARGF.filename)
-  }
-  #例
-  #=> '--- !ruby/object:Dog ' in ugo.yaml
-  #=> 'name: pochi' in ugo.yaml
-  #=> '--- ' in ugo.yaml
-  #=> ':age: 17' in ugo.yaml
-  #=> ':color: white' in ugo.yaml
-  #=> '--- ' in ugo.yaml
-  #=> '- Chiba' in ugo.yaml
-  #=> '- Saitama' in ugo.yaml
+例: ARGFの各ファイル名(1度のみ)、行番号、内容を表示
 
+  ARGF.each_line do |line|
+    puts ARGF.filename if ARGF.lineno == 1
+    puts "#{ARGF.lineno}: #{line}"
+  end
 
 @see [[m:IO#each]], [[m:IO#each_line]], 
 
@@ -327,26 +178,6 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。
 --- each_byte -> Enumerator
 
 ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
-
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each_byte {|b|
-    printf("%4d <-> %4s\n", b, b.chr)
-  }
-  #例
-  #=>  45 <->    -
-  #=>  32 <->
-  #=>  83 <->    S
-  #=>  97 <->    a
-  #=> 105 <->    i
-  #=> 116 <->    t
-  #=>  97 <->    a
-  #=> 109 <->    m
-  #=>  97 <->    a
-  #=>  10 <->
-  #...
 
 @see [[m:IO#each_byte]]
 
@@ -378,30 +209,13 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 @raise IOError ファイルがopenされていない場合
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each_line {|line|
-    if ARGF.eof
-      printf("eof. %s has %d(%d) line\n", ARGF.filename, ARGF.file.lineno, ARGF.lineno)
-    end
-  }
-  begin
-    if ARGF.eof?
-      printf("%s is eof\n", ARGF.filename)
-    end
-  rescue IOError
-    print "IOError !!\n"
-  end
+  $ echo "eof" | ruby argf.rb
 
-  #=> 例
-  #=> eof. sample.yaml has 13(13) line
-  #=> eof. test.rb has 159(172) line
-  #=> eof. test.rb~ has 159(331) line
-  #=> eof. third.txt has 1(332) line
-  #=> eof. ugo.yaml has 8(340) line
-  #=> IOError !!
+  ARGF.eof?                 # => false
+  3.times { ARGF.readchar }
+  ARGF.eof?                 # => false
+  ARGF.readchar             # => "\n"
+  ARGF.eof?                 # => true
 
 @see [[m:IO#eof]], [[m:IO#eof?]]
 
@@ -409,51 +223,29 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 --- to_i -> Integer
 現在オープンしているファイルのファイル記述子を表す整数を返します。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-  ARGF.each_line {|line|
-    p [ ARGF.to_i, ARGF.filename ]
-    ARGF.skip
-  }
-  begin
-    p [ ARGF.to_i, ARGF.filename ]
-  rescue ArgumentError
-    print "ArgumentError\n"
-  end
-  #例
-  #=> [3, "sample.yaml"]
-  #=> [3, "test.rb"]
-  #=> [3, "test.rb~"]
-  #=> [3, "third.txt"]
-  #=> [3, "ugo.yaml"]
-  #=> ArgumentError
+  ARGF.fileno    # => 3
 
-@raise ArgumentError
+@raise ArgumentError 現在開いているファイルがない場合に発生します。
 
---- getc -> Integer | nil
-ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返します。EOF に到達した時には nil を返します。
+--- getc -> String | nil
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
+self から 1 文字読み込んで返します。EOF に到達した時には nil を返します。
 
-  while c = ARGF.getc
-    printf("%d,%c.\n", c, c)
-  end
-  #例
-  #=> 45,-.
-  #=> 32, .
-  #=> 67,C.
-  #=> 104,h.
-  #=> 105,i.
-  #=> 98,b.
-  #=> 97,a.
-  #=> 10,
-  #=> .
-  #...
+  $ echo "foo" > file1
+  $ echo "bar" > file2
+  $ ruby argf.rb file1 file2
+
+  ARGF.getc # => "f"
+  ARGF.getc # => "o"
+  ARGF.getc # => "o"
+  ARGF.getc # => "\n"
+  ARGF.getc # => "b"
+  ARGF.getc # => "a"
+  ARGF.getc # => "r"
+  ARGF.getc # => "\n"
+  ARGF.getc # => nil
+
+@see [[m:ARGF.class#getbyte]], [[m:ARGF.class#gets]]
 
 --- gets(rs = $/)    -> String | nil
 --- gets(limit) -> String | nil
@@ -465,44 +257,15 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-
-  while line = gets
-    line.chomp!
-    printf("%s\n", line)
-  end
-
 @see [[m:Kernel.#gets]], [[m:IO#gets]]
 
 --- pos -> Integer
 --- tell -> Integer
 ARGFが現在開いているファイルのファイルポインタの現在の位置を整数で返します。
 
-  ARGV.replace(
-    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
-  )
-
-  while c = ARGF.getc
-    printf("%d '%c' %s\n", ARGF.pos, c, ARGF.filename)
-    if ARGF.pos == 3
-      ARGF.skip
-    end
-  end
-
-  # 例
-  #=> 1 'c' sample.yaml
-  #=> 2 'a' sample.yaml
-  #=> 3 't' sample.yaml
-  #=> 1 '#' test.rb
-  #=> 2 '!' test.rb
-  #=> 3 '/' test.rb
-  #=> 1 'd' third.txt
-  #=> 2 'r' third.txt
-  #=> 3 'y' third.txt
-  #...
+  ARGF.pos    # => 0
+  ARGF.gets   # => "This is line one\n"
+  ARGF.pos    # => 17
 
 @see [[m:IO#pos]], [[m:IO#tell]]
 
@@ -511,19 +274,8 @@ ARGFが開いているファイルのファイルポインタを指定位置に�
 
 @param n 先頭からのオフセットを整数で指定します。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-  print ARGF.readline
-  #例
-  #=> #!/usr/bin/env ruby
-  ARGF.pos = 2
-  print ARGF.readline
-  #=> /usr/bin/env ruby
-  ARGF.pos = 4
-  print ARGF.readline
-  #=> sr/bin/env ruby
+  ARGF.pos = 17
+  ARGF.gets   # => "This is line two\n"
 
 @see [[m:IO#pos=]]
 
@@ -535,17 +287,14 @@ ARGVに指定されたファイルを先頭のファイルからlengthバイト�
 
 @param str 出力先の文字列
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
+  $ echo "small" > small.txt
+  $ echo "large" > large.txt
+  $ ./glark.rb small.txt large.txt
 
-  str = "efefefe"
-  ARGF.read(100, str)
-  p str.size #=> 100
-  p str 
-  # 例
-  #=> "cat:\n - name: taro\n   age: 7\n - name: jiro\n   age: 23\n---\ndog:\n shiba:\n- name: goro\n    age: 3\n  -"
+  ARGF.read      # => "small\nlarge"
+  ARGF.read(200) # => "small\nlarge"
+  ARGF.read(2)   # => "sm"
+  ARGF.read(0)   # => ""
 
 @see [[m:IO#read]]
 
@@ -554,28 +303,14 @@ ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返�
 
 @raise EOFError EOFに達した時発生する
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
+  $ echo "foo" > file
+  $ ruby argf.rb file
 
-  begin
-    c = ARGF.readchar
-    printf("%4c is %4d\n", c, c)
-  rescue EOFError
-    p $!
-    break
-  end while true
-
-  # 例
-  #...
-  #=>    t is  116
-  #=>    a is   97
-  #=>    m is  109
-  #=>    a is   97
-  #=> 
-  #=>  is   10
-  #<EOFError: end of file reached>
+  ARGF.readchar  # => "f"
+  ARGF.readchar  # => "o"
+  ARGF.readchar  # => "o"
+  ARGF.readchar  # => "\n"
+  ARGF.readchar  # => end of file reached (EOFError)
 
 @see [[m:ARGF.class#getc]]
 
@@ -583,24 +318,6 @@ ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返�
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時にはEOFErrorを発生します。
 
 @raise EOFError EOFに達したら発生する
-
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-
-  begin
-    line = ARGF.readline
-    p line
-  rescue EOFError
-    p $!
-    break
-  end while true
-
-  #例
-  #...
-  #=> "- Saitama\n"
-  #=> <EOFError: end of file reached>
 
 @see [[m:Kernel.#readline]] [[m:ARGF.class#gets]]
 
@@ -610,48 +327,18 @@ ARGFの各行を配列に読み込んで返します。rsがnilの場合は要�
 
 @param rs 行区切り文字
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-  aall = ARGF.readlines
-  p aall[0, 3]
-  # 例
-  #=> ["cat:\n", " - name: taro\n", "   age: 7\n"] 
-  p ARGF.closed? #=> true
-
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-
-  vsize = ARGV.size
-  aall = ARGF.readlines(nil)
-  p ARGF.closed? #=> true
-  p vsize == aall.size #=> true
+  lines = ARGF.readlines
+  lines[0]                # => "This is line one\n"
 
 @see [[m:$/]] [[m:IO#readlines]]
 
 --- rewind -> 0
 ARGFが現在開いているファイルのファイルポインタを先頭に戻します。
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-
-  #各ファイルの先頭から３行を２回表示する
-  until ARGF.closed?
-    1.upto(2){|i|
-      printf("filename:%s at %d\n", ARGF.filename, i)
-      1.upto(3){
-        line = ARGF.readline
-        p line
-        break if ARGF.eof?
-      }
-      ARGF.rewind
-    }
-    ARGF.skip
-  end 
+  ARGF.readline   # => "This is line one\n"
+  ARGF.rewind     # => 0
+  ARGF.lineno     # => 0
+  ARGF.readline   # => "This is line one\n"
 
 --- seek(offset, whence = IO::SEEK_SET) -> 0
 ARGFが現在開いているファイルのファイルポインタを whence の位置から offset だけ移動させます。 offset 位置への移動が成功すれば 0 を返します。
@@ -659,67 +346,13 @@ ARGFが現在開いているファイルのファイルポインタを whence �
 @param offset ファイルポインタを移動させるオフセットを整数で指定します。
 @param whence [[m:IO#seek]]を参照
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-
-  until ARGF.closed?
-    begin
-      ARGF.seek(-13, IO::SEEK_END)
-      printf "(%s):%s", ARGF.filename, ARGF.readline
-    rescue Errno::EINVAL
-      printf "Error %s (%s)\n", ARGF.filename, $!.to_s
-    end
-    ARGF.skip
-  end
-  #例
-  #=> (sample.yaml):d of sample
-  #=> (test.rb):.skip
-  #=> (test.rb~):.skip
-  #=> Error third.txt (Invalid argument - third.txt)
-  #=> (ugo.yaml):
-
 @see [[m:IO#seek]]
 
 --- to_io -> IO
 ARGFが現在開いているファイルの[[c:File]]、または[[c:IO]]オブジェクトを返します
 
-  # カレントディレクトリから適当にファイルを選ぶ
-  ARGV.replace(
-    Dir.glob("*").select{|name| FileTest.file?(name)}
-  )
-
-  until ARGF.closed?
-    printf("最終更新時刻 %s (%s)\n", ARGF.to_io.stat.mtime, ARGF.filename)
-    ARGF.skip
-  end 
-  #例
-  #=> 最終更新時刻 Thu May 03 14:05:53 +0900 2007 (sample.yaml)
-  #=> 最終更新時刻 Sat Aug 18 16:31:42 +0900 2007 (test.rb)
-  #=> 最終更新時刻 Sat Aug 18 16:31:30 +0900 2007 (test.rb~)
-  #=> 最終更新時刻 Sun Jun 24 13:08:12 +0900 2007 (third.txt)
-  #=> 最終更新時刻 Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
-  #...
-
-$stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します。
-
-  class MyIO
-    def to_io
-      DATA
-    end
-  end
-
-  $stdin = MyIO.new
-  ARGV.push("-")
-
-  myio = ARGF.to_io
-  p myio.readline #=> "MyIO Test\n"
-  p ARGF.file     #=> #<MyIO:0x293ea34>
-
-  __END__
-  MyIO Test
-  です。
+  ARGF.to_io    # => #<File:glark.txt>
+  ARGF.to_io    # => #<IO:<STDIN>>
 
 @see [[m:ARGF.class#file]], [[m:ARGF.class#to_write_io]]
 
@@ -772,8 +405,19 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 自身から 1 バイトを読み込み整数として返します。
 既に EOF に達していれば nil を返します。
 
-   ARGF.getbyte   #=> 84
-   ARGF.getbyte   #=> 104
+  $ echo "foo" > file1
+  $ echo "bar" > file2
+  $ ruby argf.rb file1 file2
+
+  ARGF.getbyte # => 102
+  ARGF.getbyte # => 111
+  ARGF.getbyte # => 111
+  ARGF.getbyte # => 10
+  ARGF.getbyte # => 98
+  ARGF.getbyte # => 97
+  ARGF.getbyte # => 114
+  ARGF.getbyte # => 10
+  ARGF.getbyte # => nil
 
 --- readbyte   -> Integer
 
