@@ -139,11 +139,11 @@ proc として手続きオブジェクトが与えられた場合は、読み込
 
 
   require 'json'
-
+  
   str=<<JSON
   [1,2,3]
   JSON
-
+  
   JSON.load(str) # => [1,2,3]
   JSON.load(str, proc{|v| p v }) # => [1,2,3]
   # 以下が表示される
@@ -151,11 +151,11 @@ proc として手続きオブジェクトが与えられた場合は、読み込
   # 2
   # 3
   # [1,2,3]
-
+  
   str=<<JSON
   { "a":1, "b":2, "c":3 }
   JSON
-
+  
   JSON.load(str) # => {"a"=>1, "b"=>2, "c"=>3}
   JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
   # 以下が表示される
@@ -275,11 +275,11 @@ pretty_unparse は将来削除される予定です。
 
 #@# nodoc
 #@# --- JSON::VERSION_ARRAY -> Array
-#@#
+#@# 
 #@# --- JSON::VERSION_BUILD -> Fixnum
-#@#
+#@# 
 #@# --- JSON::VERSION_MAJOR -> Fixnum
-#@#
+#@# 
 #@# --- JSON::VERSION_MINOR -> Fixnum
 #@#
 
@@ -332,3 +332,9 @@ JSON 形式の文字列を生成するときに循環するデータ構造があ
 = class JSON::NestingError < JSON::ParserError
 
 パースしようとしているデータ構造のネストが深すぎる場合に発生する例外です。
+
+
+
+
+
+
