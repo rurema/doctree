@@ -534,13 +534,13 @@ lambda{|a, b| p [a, b] }
 
  単項演算子 +X や -X を定義するときの表記法。
 //emlist{
-  class String
+  class Symbol
     def +@
       self.upcase
     end
   end
 
-  puts(+"joke") #=> JOKE
+  puts(+:joke) #=> JOKE
 //}
 
 ===[a:under] _
