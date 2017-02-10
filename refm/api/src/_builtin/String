@@ -716,7 +716,7 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 @see [[m:String#capitalize]], [[m:String#upcase!]],
      [[m:String#downcase!]], [[m:String#swapcase!]]
 
---- casecmp(other) -> Integer | nil
+--- casecmp(other) -> -1 | 0 | 1
 
 [[m:String#<=>]] と同様に文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
