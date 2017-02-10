@@ -54,7 +54,7 @@
     * 改善: Windows上でパイプのための [[m:IO#read_nonblock]], [[m:IO#write_nonblock]] をサポートしました。
 
   * [[c:Kernel]]
-    * 追加: [[m:Kernel#itself]]
+    * 追加: Kernel.#itself([[m:Object#itself]])
     * 改善: [[m:Kernel.#throw]] は、対応する catch ブロックがないとき [[c:ArgumentError]] ではなく
       [[c:ArgumentError]] のサブクラスである [[c:UncaughtThrowError]] を発生させるようになりました
 
