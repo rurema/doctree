@@ -13,6 +13,9 @@
 初めて instance_eval 内のメソッドが定義されます。これはメソッド定義のネストと同じです。
 [[ref:d:spec/def#nest_method]] を参照してください。
 
+BasicObject を継承して作ったクラス内で instance_eval する場合はトップレベルの定数や Kernel モジュールに定義されているメソッドは見えません。
+これは、トップレベルの定数が Object 以下に作成されるためです。
+
 @param expr  評価する文字列です。
 
 @param filename 文字列を指定します。ファイル filename に文字列 expr が
@@ -41,6 +44,21 @@
   some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
   messg = 'unknown'
   some.instance_eval 'raise messg','file.rb',999 # file.rb:999: unknown (RuntimeError)
+
+例:
+
+  class Bar < BasicObject
+    def call1
+      instance_eval("::ENV.class")
+    end
+    def call2
+      instance_eval("ENV.class")
+    end
+  end
+
+  bar = Bar.new
+  bar.call1 # => Object
+  bar.call2 # raise NameError
 
 @see [[m:Module#module_eval]], [[m:Kernel.#eval]]
 
