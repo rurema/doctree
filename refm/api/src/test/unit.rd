@@ -11,7 +11,7 @@ require test/unit/testcase
 
   * Test::Unit - Ruby用単体テストフレームワーク: [[url:http://test-unit.github.io/]]
 
-なお、2.2.0以前のtest/unit は [[lib:minitest/unit]] を使って再実装され
+なお、2.2.0より前のtest/unit は当時バンドルしていた minitest/unit を使って再実装し
 ていましたが、上記のtest/unitと完全な互換性がある訳ではありません。
 
 #@until 2.2.0
