@@ -14,6 +14,11 @@ require test/unit/testcase
 なお、2.2.0より前のtest/unit は当時バンドルしていた minitest/unit を使って再実装し
 ていましたが、上記のtest/unitと完全な互換性がある訳ではありません。
 
+Rubyのテスティングフレームワークの歴史については以下が詳しくまとまっています。
+
+  * Rubyのテスティングフレームワークの歴史（2014年版） [[url:http://www.clear-code.com/blog/2014/11/6.html]]
+  * RubyKaigi 2015：The history of testing framework in Ruby [[url:http://www.clear-code.com/blog/2015/12/12.html]]
+
 #@until 2.2.0
 === 使い方
 
