@@ -6,7 +6,7 @@ Ruby の拡張ライブラリのための Makefile を作成するライブラ�
 この extconf.rb を実行して Makefile を作成するのが慣習です。
 
 extconf.rb の書きかたについては、
-Ruby のアーカイブに含まれる README.EXT (日本語版は README.EXT.ja)
+Ruby のアーカイブに含まれる doc/extension.rdoc (日本語版は doc/extension.ja.rdoc)
 も参照してください。
 
 このライブラリでは extconf.rb を記述するのに有用なメソッドを定義しています。
