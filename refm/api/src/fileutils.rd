@@ -202,7 +202,7 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 --- compare_file(file_a, file_b) -> bool
 --- identical?(file_a, file_b)   -> bool
 
-ファイル a と b の内容が同じなら真を返します。
+ファイル file_a と file_b の内容が同じなら真を返します。
 
 @param file_a ファイル名。
 
@@ -210,8 +210,8 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 
 例:
 
-  FileUtils.cmp('somefile', 'somefile')  #=> true
-  FileUtils.cmp('/bin/cp', '/bin/mv')    #=> maybe false.
+  FileUtils.cmp('somefile', 'somefile')      #=> true
+  FileUtils.cmp('/dev/null', '/dev/urandom') #=> false
 
 --- compare_stream(io_a, io_b) -> bool
 
