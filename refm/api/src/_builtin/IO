@@ -763,6 +763,7 @@ path で指定されるファイルをオープンし、ファイル記述子を
 #@end
 
 #@since 1.9.3
+--- write(path, string, opt={}) -> Integer
 --- write(path, string, offset=nil, opt={}) -> Integer
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
