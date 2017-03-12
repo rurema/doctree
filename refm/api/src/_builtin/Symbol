@@ -198,8 +198,15 @@ self が大きい時には正の整数、等しい時には 0、小さい時に�
 
 @param other 比較対象のシンボルを指定します。
 
-  p :a <=> :A      # => 1
-  p :a.casecmp(:A) # => 0
+  :aBcDeF.casecmp(:abcde)     #=> 1
+  :aBcDeF.casecmp(:abcdef)    #=> 0
+  :aBcDeF.casecmp(:abcdefg)   #=> -1
+  :abcdef.casecmp(:ABCDEF)    #=> 0
+  :"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") #=> 1
+
+nil は文字列のエンコーディングが非互換の時に返されます。
+
+  "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}")   #=> nil
 
 @see [[m:String#casecmp]]
 
@@ -216,6 +223,10 @@ self が大きい時には正の整数、等しい時には 0、小さい時に�
   :abcdef.casecmp?(:abcdefg)   #=> false
   :abcdef.casecmp?(:ABCDEF)    #=> true
   :"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+
+nil は文字列のエンコーディングが非互換の時に返されます。
+
+  "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}")   #=> nil
 
 @see [[m:String#casecmp?]]
 #@end
