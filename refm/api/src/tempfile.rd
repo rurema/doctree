@@ -175,7 +175,7 @@ real が偽ならば、テンポラリファイルはGCによって削除され�
 
 テンポラリファイルのパス名を返します。
 
-Tempfile#close!を実行後だった場合にはnilを返します。
+[[m:Tempfile#close!]] を実行後だった場合にはnilを返します。
 
   require "tempfile"
   tf = Tempfile.new("hoo")
