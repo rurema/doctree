@@ -192,7 +192,7 @@ real が偽ならば、テンポラリファイルはGCによって削除され�
   tf.print("bar,ugo")
   p tf.size # => 7
   tf.close
-  p tf.size # => 0
+  p tf.size # => 7
 
 --- close! -> nil
 
