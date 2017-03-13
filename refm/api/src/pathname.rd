@@ -34,6 +34,8 @@ Pathname のインスタンスメソッドには、ディレクトリのパス�
 
 Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m:Kernel#Pathname]] も使えます。
 
+  require 'pathname'
+
   Pathname.new("foo/bar") # => #<Pathname:foo/bar>
   Pathname("foo/bar")     # => #<Pathname:foo/bar>
 
@@ -269,6 +271,8 @@ Pathname オブジェクトを生成して返します。
 
 other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
 れます。
+
+ require 'pathname'
 
  Pathname("foo/bar")+"baz" # => #<Pathname:foo/bar/baz>
  Pathname("foo/bar/")+"baz" # => #<Pathname:foo/bar/baz>
@@ -828,6 +832,8 @@ self が指すディレクトリあるいはファイルを削除します。
 self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
 ブジェクトとして生成し、ブロックへの引数として渡して実行します。
 
+  require 'pathname'
+
   Pathname.new('/path/to/some/file.rb').ascend {|v| p v}
      #<Pathname:/path/to/some/file.rb>
      #<Pathname:/path/to/some>
@@ -850,6 +856,8 @@ self のパス名から親方向に辿っていったときの各パス名を新
 self のパス名の親から子供へと辿っていったときの各パス名を新しい
 Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
 す。
+
+  require 'pathname'
 
   Pathname.new('/path/to/some/file.rb').descend {|v| p v}
      #<Pathname:/>
