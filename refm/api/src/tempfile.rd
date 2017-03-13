@@ -179,7 +179,7 @@ Tempfile#close!を実行後だった場合にはnilを返します。
 
   require "tempfile"
   tf = Tempfile.new("hoo")
-  p tf.path # => "/tmp/hoo.10596.0" 
+  p tf.path # => "/tmp/hoo.10596.0"
   tf.close!
   p tf.path # => nil
 

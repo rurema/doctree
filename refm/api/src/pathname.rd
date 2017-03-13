@@ -143,7 +143,7 @@ to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジ�
 #@end
 
     require 'pathname'
-    
+
     path = Pathname.new("/tmp/hogehoge")
     File.open(path)
 
@@ -171,7 +171,7 @@ cleanpath は、実際にファイルシステムを参照することなく、�
     File.symlink("../foo", "/tmp/bar/foo")
     path = Pathname.new("bar/././//foo/../bar")
     Dir.chdir("/tmp")
-    
+
     path.cleanpath       # => #<Pathname:bar/bar>
     path.cleanpath(true) # => #<Pathname:bar/foo/../bar>
 
@@ -865,7 +865,7 @@ Pathname オブジェクトとして生成し、ブロックへの引数とし�
      #<Pathname:/path/to>
      #<Pathname:/path/to/some>
      #<Pathname:/path/to/some/file.rb>
-  
+
   Pathname.new('path/to/some/file.rb').descend {|v| p v}
      #<Pathname:path>
      #<Pathname:path/to>
