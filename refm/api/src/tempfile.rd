@@ -152,6 +152,7 @@ real が偽ならば、テンポラリファイルはGCによって削除され�
 
 @param real false もしくはそれ以外を指定します。
 
+  require "tempfile"
   tf = Tempfile.open("bar")
   tf.close
   p FileTest.exist?(tf.path) # => true
@@ -162,6 +163,7 @@ real が偽ならば、テンポラリファイルはGCによって削除され�
 "r+" でオープンされるので、クローズ前の内容を再度読む
 ことができます。
 
+  require "tempfile"
   tf = Tempfile.new("foo")
   tf.print("foobar,hoge\n")
   tf.print("bar,ugo\n")
@@ -175,6 +177,7 @@ real が偽ならば、テンポラリファイルはGCによって削除され�
 
 Tempfile#close!を実行後だった場合にはnilを返します。
 
+  require "tempfile"
   tf = Tempfile.new("hoo")
   p tf.path # => "/tmp/hoo.10596.0" 
   tf.close!
@@ -184,6 +187,7 @@ Tempfile#close!を実行後だった場合にはnilを返します。
 --- size -> Integer
 テンポラリファイルのサイズを返します。
 
+  require "tempfile"
   tf = Tempfile.new("foo")
   tf.print("bar,ugo")
   p tf.size # => 7
@@ -214,6 +218,7 @@ UNIXライクなシステムでは、
 #@# it, because it leaves other programs zero chance to access the
 #@# file.
 
+  require "tempfile"
   tf = Tempfile.new("foo")
   tf.unlink
   p tf.path # => nil
