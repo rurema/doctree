@@ -52,7 +52,6 @@ HTTP のセッションキーなどに適しています。
 
 @see [[rfc:3548]]
 
-#@since 1.9.2
 --- urlsafe_base64(n = nil, padding = false)  -> String
 
 ランダムで URL-safe な base64 文字列を生成して返します。
@@ -73,7 +72,7 @@ HTTP のセッションキーなどに適しています。
    p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
 
 @see [[m:SecureRandom.base64]],  [[rfc:3548]]
-#@end
+
 --- hex(n = nil)    -> String
 
 ランダムな hex 文字列を生成して返します。
@@ -113,7 +112,6 @@ n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
   require 'securerandom'
   p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
 
-#@since 1.9.2
 --- uuid   -> String
 
 バージョン 4 の UUID (Universally Unique IDentifier) を生成して返します。
@@ -128,5 +126,3 @@ version 4 の UUID は全くランダムです (バージョンを除いて)。
    p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
 
 @see [[rfc:4122]]
-#@end
-
