@@ -716,21 +716,32 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 @see [[m:String#capitalize]], [[m:String#upcase!]],
      [[m:String#downcase!]], [[m:String#swapcase!]]
 
---- casecmp(other) -> -1 | 0 | 1
+--- casecmp(other) -> -1 | 0 | 1 | nil
 
 [[m:String#<=>]] と同様に文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
 
 このメソッドの動作は組み込み変数 [[m:$=]] には影響されません。
 
+#since 2.4.0
+[[m:String#casecmp?]] と違って大文字小文字の違いを無視するのは
+Unicode 全体ではなく、A-Z/a-z だけです。
+#@end
+
 @param other    self と比較する文字列
 
 例:
 
-  p 'a' <=> 'A'       # => 1
-  p 'a'.casecmp('A')  # => 0
+  "aBcDeF".casecmp("abcde")     #=> 1
+  "aBcDeF".casecmp("abcdef")    #=> 0
+  "aBcDeF".casecmp("abcdefg")   #=> -1
+  "abcdef".casecmp("ABCDEF")    #=> 0
 
-@see [[m:String#<=>]]
+nil は文字列のエンコーディングが非互換の時に返されます。
+
+  "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp("\u{c4 d6 dc}")   #=> nil
+
+@see [[m:String#<=>]], [[m:Encoding#compatible?]]
 
 #@since 2.4.0
 --- casecmp?(other) -> bool | nil
@@ -747,6 +758,10 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
   "abcdef".casecmp?("abcdefg")   #=> false
   "abcdef".casecmp?("ABCDEF")    #=> true
   "\u{e4 f6 fc}".casecmp?("\u{c4 d6 dc}") #=> true
+
+nil は文字列のエンコーディングが非互換の時に返されます。
+
+  "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp?("\u{c4 d6 dc}")   #=> nil
 
 @see [[m:String#casecmp]]
 #@end
