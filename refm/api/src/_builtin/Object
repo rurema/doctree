@@ -665,10 +665,10 @@ self を引数としてブロックを評価し、self を返します。
 メソッドチェインの途中で直ちに操作結果を表示するために
 メソッドチェインに "入り込む" ことが、このメソッドの主目的です。
 
-    (1..10)                    .tap {|x| puts "original: #{x.inspect}"}.
-       to_a                    .tap {|x| puts "array: #{x.inspect}"}.
-       select {|x| x % 2 == 0} .tap {|x| puts "evens: #{x.inspect}"}.
-       map { |x| x * x }       .tap {|x| puts "squares: #{x.inspect}"}
+    (1..10)                  .tap {|x| puts "original: #{x}" }
+      .to_a                  .tap {|x| puts "array:    #{x}" }
+      .select {|x| x.even? } .tap {|x| puts "evens:    #{x}" }
+      .map {|x| x*x }        .tap {|x| puts "squares:  #{x}" }
 
 #@end
 
