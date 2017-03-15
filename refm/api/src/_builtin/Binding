@@ -24,12 +24,12 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @param lineno 行番号を整数で与えます。式 expr の先頭行の行番号が lineno であるかのように実行されます。
 
- def getBinding(str)
-   return binding
+ def get_binding(str)
+   binding
  end
  str = "hello"
- p eval("str + ' Fred'")                     #=> "hello Fred"
- p getBinding("bye").eval("str + ' Fred'")   #=> "bye Fred"
+ p eval("str + ' Fred'")                      #=> "hello Fred"
+ p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
 
 @see [[m:Kernel.#eval]]
 
@@ -69,11 +69,11 @@ eval(expr, self, fname, lineno) とするのと同じです。
       bind = binding
       bind.local_variable_set(:a, 2) # set existing local variable `a'
       bind.local_variable_set(:b, 3) # create new local variable `b'
-                                     # `b' exists only in binding.
-      p bind.local_variable_get(:a) # => 2
-      p bind.local_variable_get(:b) # => 3
-      p a # => 2
-      p b # => NameError
+                                     # `b' exists only in binding
+      p bind.local_variable_get(:a)  # => 2
+      p bind.local_variable_get(:b)  # => 3
+      p a                            # => 2
+      p b                            # => NameError
     end
 
 このメソッドは以下のコード(ただし、obj が Ruby のコードで出力される場
