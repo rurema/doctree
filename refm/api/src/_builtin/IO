@@ -1281,7 +1281,7 @@ C 言語の printf と同じように、format に従い引数
      a
      test
      1
-     nil
+     
      3
 
 @see [[m:Kernel.#puts]]
