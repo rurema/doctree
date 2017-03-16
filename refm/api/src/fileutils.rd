@@ -772,7 +772,7 @@ mid というメソッドが opt というオプションを持つ場合、真�
 @param mid メソッド名を指定します。
 
   require 'fileutils'
-  FileUtils.options(:rm)  # => ["noop", "verbose", "force"]
+  FileUtils.options_of(:rm)  # => ["noop", "verbose", "force"]
 
 #@# --- private_module_function(name) -> self
 #@# nodoc
