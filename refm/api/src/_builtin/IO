@@ -1808,7 +1808,7 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 #@if (version >= "1.8.5")
 #@since 2.1.0
---- write_nonblock(string, exception: true) -> Integer
+--- write_nonblock(string, exception: true) -> Integer | :wait_writable
 #@else
 --- write_nonblock(string)    -> Integer
 #@end
