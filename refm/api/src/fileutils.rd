@@ -58,6 +58,7 @@ category File
 
 例:
 
+  require 'fileutils'
   FileUtils.cd('/', {:verbose => true})   # chdir and report it
 
 --- chmod(mode, list, options = {}) -> Array
@@ -84,11 +85,13 @@ category File
 #@since 1.9.3
   # Absolute mode
 #@end
+  require 'fileutils'
   FileUtils.chmod(0644, %w(my.rb your.rb his.rb her.rb)
   FileUtils.chmod(0755, 'somecommand')
   FileUtils.chmod(0755, '/usr/bin/ruby', :verbose => true
 #@since 1.9.3
   # Symbolic mode
+  require 'fileutils'
   FileUtils.chmod("u=wr,go=rr", %w(my.rb your.rb his.rb her.rb))
   FileUtils.chmod("u=wrx,go=rx", 'somecommand')
   FileUtils.chmod("u=wrx,go=rx", '/usr/bin/ruby', :verbose => true)
@@ -139,6 +142,7 @@ symbolic mode では以下の指定を 操作対象 演算子 権限 の順番�
 
 例:
 
+  require 'fileutils'
   FileUtils.chmod_R(0700, '/tmp/removing')
 
 #@end
@@ -165,6 +169,7 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 
 例:
 
+  require 'fileutils'
   FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
 #@end
@@ -191,9 +196,11 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 
 例:
 
+  require 'fileutils'
   FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
   
+  require 'fileutils'
   FileUtils.chown_R 'www', 'www', '/var/www/htdocs'
   FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', :verbose => true
 #@end
@@ -210,6 +217,7 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 
 例:
 
+  require 'fileutils'
   FileUtils.cmp('somefile', 'somefile')      #=> true
   FileUtils.cmp('/dev/null', '/dev/urandom') #=> false
 
@@ -297,6 +305,7 @@ file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
 
 例:
 
+  require 'fileutils'
   FileUtils.cp 'eval.c', 'eval.c.org'
   FileUtils.cp(['cgi.rb', 'complex.rb', 'date.rb'], '/usr/lib/ruby/1.8')
   FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', {:verbose => true})
@@ -317,9 +326,11 @@ src を dest にコピーします。src がディレクトリであったら再
 例:
 
   # installing ruby library "mylib" under the site_ruby
+  require 'fileutils'
   FileUtils.rm_r(site_ruby + '/mylib', {:force => true})
   FileUtils.cp_r('lib/', site_ruby + '/mylib')
   # other sample
+  require 'fileutils'
   FileUtils.cp_r(%w(mail.rb field.rb debug/), site_ruby + '/tmail')
   FileUtils.cp_r(Dir.glob('*.rb'), '/home/taro/lib/ruby',
                  {:noop => true, :verbose => true})
@@ -338,6 +349,7 @@ src と dest の内容が違うときだけ src を dest にコピーします�
 
 例:
 
+  require 'fileutils'
   FileUtils.install('ruby', '/usr/local/bin/ruby', {:mode => 0755, :verbose => true})
   FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', {:verbose => true})
 
@@ -369,6 +381,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 
 例:
 
+  require 'fileutils'
   FileUtils.ln('gcc', 'cc', {:verbose => true})
   FileUtils.ln('/usr/bin/emacs21', '/usr/bin/emacs')
   FileUtils.cd('/bin')
@@ -402,6 +415,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 
 例:
 
+  require 'fileutils'
   FileUtils.ln_s('/usr/bin/ruby', '/usr/local/bin/ruby')
   FileUtils.ln_s('verylongsourcefilename.c', 'c', {:force => true})
   FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
@@ -436,6 +450,7 @@ ln_s(src, dest, :force => true) と同じです。
 
 例:
 
+  require 'fileutils'
   FileUtils.mkdir('test')
   FileUtils.mkdir(%w( tmp data ))
   FileUtils.mkdir('notexist', {:noop => true})  # does not create really
@@ -454,6 +469,7 @@ ln_s(src, dest, :force => true) と同じです。
 
 例えば、
 
+  require 'fileutils'
   FileUtils.mkdir_p('/usr/local/lib/ruby')
 
 は以下の全ディレクトリを (なければ) 作成します。
@@ -498,6 +514,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 
 例:
 
+  require 'fileutils'
   FileUtils.mv('badname.rb', 'goodname.rb')
   FileUtils.mv('stuff.rb', 'lib/ruby', {:force => true})
   FileUtils.mv(['junk.txt', 'dust.txt'], "#{ENV['HOME']}/.trash")
@@ -521,6 +538,7 @@ list で指定された対象を消去します。
 
 例:
 
+  require 'fileutils'
   FileUtils.rm('junk.txt')
   FileUtils.rm(Dir.glob('*~'))
   FileUtils.rm('NotExistFile', {:force => true})    # never raises exception
@@ -558,6 +576,7 @@ FileUtils.rm(list, :force => true) と同じです。
 
 例:
 
+  require 'fileutils'
   FileUtils.rm_r(Dir.glob('/tmp/*'))
   FileUtils.rm_r(Dir.glob('/tmp/*'), :secure => true)
 
@@ -598,6 +617,7 @@ rm_r(list, {:force => true}) と同じです。
 
 例:
 
+  require 'fileutils'
   FileUtils.rmdir('somedir')
   FileUtils.rmdir(%w(somedir anydir otherdir))
   # 実際にはディレクトリの削除は行わずにメッセージ出力のみ
@@ -617,6 +637,7 @@ rm_r(list, {:force => true}) と同じです。
 
 例:
 
+  require 'fileutils'
   FileUtils.remove_entry '/tmp/ruby.tmp.08883'
 
 @see [[m:FileUtils.#remove_entry_secure]]
@@ -687,6 +708,7 @@ list で指定されたファイルが存在しない場合は空のファイル
 
 例:
 
+  require 'fileutils'
   FileUtils.touch('timestamp')
   FileUtils.touch('timestamp', :mtime => Time.now)
   FileUtils.touch(Dir.glob('*.c'))
@@ -706,6 +728,7 @@ newer が、older_list に含まれるすべてのファイルより新しいと
 
 例:
 
+  require 'fileutils'
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
 #@since 1.8.3
@@ -716,12 +739,14 @@ newer が、older_list に含まれるすべてのファイルより新しいと
 
 @param opt オプション名をシンボルで指定します。
 
+  require 'fileutils'
   FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
 
 --- commands -> Array
 
 何らかのオプションを持つメソッド名の配列を返します。
 
+  require 'fileutils'
   FileUtils.commands  # => ["chmod", "cp", "cp_r", "install", ...]
 
 --- have_option?(mid, opt) -> bool
@@ -737,6 +762,7 @@ mid というメソッドが opt というオプションを持つ場合、真�
 
 オプション名の配列を返します。
 
+  require 'fileutils'
   FileUtils.options  #=> ["noop", "force", "verbose", "preserve", "mode"]
 
 --- options_of(mid) -> Array
@@ -745,6 +771,7 @@ mid というメソッドが opt というオプションを持つ場合、真�
 
 @param mid メソッド名を指定します。
 
+  require 'fileutils'
   FileUtils.options(:rm)  # => ["noop", "verbose", "force"]
 
 #@# --- private_module_function(name) -> self
