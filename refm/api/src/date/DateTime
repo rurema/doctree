@@ -196,6 +196,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 例:
 
+  require 'date'
   DateTime.parse('2001-02-03T12:13:14Z').to_s
   # => "2001-02-03T12:13:14+00:00"
 
@@ -210,6 +211,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 例:
 
+  require 'date'
   DateTime._strptime('2001-02-03T12:13:14Z')
   # => {:year=>2001, :mon=>2, :mday=>3, :hour=>12, :min=>13, :sec=>14, :zone=>"Z", :offset=>0}
 
@@ -229,6 +231,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 例:
 
+  require 'date'
   DateTime.strptime('2001-02-03T12:13:14Z').to_s
   # => "2001-02-03T12:13:14+00:00"
 
