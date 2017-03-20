@@ -248,6 +248,8 @@ complete が真で、年が "00" から "99" の範囲であれば、
 --- xmlschema(n = 0) -> String
 [[ISO:8601]] 書式の文字列を返します (XML Schema の dateTime 相当)。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
+
+strftime('%FT%T%:z') と等価です。
 #@end
 
 @param n 小数点以下の桁数
