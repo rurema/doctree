@@ -1392,7 +1392,7 @@ to_s メソッドにより文字列に変換してから出力します。
   #=> input<end>
   #=> AA<and>BB<end>
 
-@see [[m:Kernel.#puts]],[[m:Kernel.#p]]
+@see [[m:Kernel.#puts]],[[m:Kernel.#p]],[[m:IO#print]]
 
 --- puts(*arg) -> nil
 

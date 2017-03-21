@@ -1230,6 +1230,8 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+@see [[m:Kernel.#print]]
+
 --- printf(format, *arg)    -> nil
 
 C 言語の printf と同じように、format に従い引数
