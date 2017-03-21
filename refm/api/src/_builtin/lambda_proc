@@ -76,7 +76,11 @@ Proc.new は引数を多重代入に近い扱い方をします。
     p a,b,c 
   }
   b2.call(2, 4)  
+#@since 2.3.0
+  #=> wrong number of arguments (given 2, expected 3)
+#@else
   #=> wrong number of arguments (2 for 3) (ArgumentError) 
+#@end
 
 [[ref:d:spec/call#block_arg]] も参照してください。
 
