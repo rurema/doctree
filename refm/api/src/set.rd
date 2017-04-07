@@ -327,12 +327,12 @@ reject! は、要素が 1 つ以上削除されれば self を、1 つも削除�
 nil を返します。
 
   s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
-  s1.delete_if {|str| str =~ /\.bak$/}
+  s1.delete_if {|str| str =~ /\.bak\z/}
   p s1 #=> #<Set: {"hello.rb", "test.rb"}>
   
   s2 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
-  p s2.reject! {|str| str =~ /\.bak$/} #=> #<Set: {"hello.rb", "test.rb"}>
-  p s2.reject! {|str| str =~ /\.o$/}   #=> nil
+  p s2.reject! {|str| str =~ /\.bak\z/} #=> #<Set: {"hello.rb", "test.rb"}>
+  p s2.reject! {|str| str =~ /\.o\z/}   #=> nil
 
 @see [[m:Enumerable#reject]]
 
