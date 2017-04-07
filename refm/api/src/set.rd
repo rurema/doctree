@@ -46,12 +46,12 @@ dupおよび clone メソッドによって複製された集合オブジェク�
   
   set1 = Set.new ["foo", "bar", "baz", "foo"]
 
-  p set1                  #=> #<Set: {"baz", "foo", "bar"}>
+  p set1                  #=> #<Set: {"foo", "bar", "baz"}>
   p set1.include?("bar")  #=> true
   
   set1.add("heh")
   set1.delete("foo")
-  p set1                  #=> #<Set: {"heh", "baz", "bar"}>
+  p set1                  #=> #<Set: {"bar", "baz", "heh"}>
 
 
 = class Set < Object
@@ -126,8 +126,8 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
   
   s2 = s1.dup
   s2 << 30
-  p s1 #=> #<Set: {20, 10}>
-  p s2 #=> #<Set: {30, 20, 10}>
+  p s1 #=> #<Set: {10, 20}>
+  p s2 #=> #<Set: {10, 20, 30}>
 
 @see [[m:Object#clone]]
 
@@ -149,7 +149,7 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 
 集合の要素をすべて削除し、空にした後の self を返します。
 
-  p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
+  p s = Set[10, 20, 30] #=> #<Set: {10, 20, 30}>
   s.clear
   p s #=> #<Set: {}>
 
@@ -169,9 +169,9 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
-  p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
+  p s = Set[10, 20, 30] #=> #<Set: {10, 20, 30}>
   s.replace([15, 25])
-  p s #=> #<Set: {25, 15}>
+  p s #=> #<Set: {15, 25}>
 
 --- flatten -> Set
 --- flatten! -> self | nil
@@ -199,12 +199,7 @@ flatten! は、元の集合を破壊的に平坦化します。集合の要素�
 self を配列に変換します。要素の順序は不定です。
 
   set = Set['hello', 'world']
-  p set.to_a
-#@since 1.9.1
-  #=> ["hello", "world"]
-#@else
-  #=> ["world", "hello"]
-#@end
+  p set.to_a #=> ["hello", "world"]
 
 --- include?(o) -> bool
 --- member?(o) -> bool
@@ -269,7 +264,7 @@ proper_subset? は、2 つの集合が等しい場合には false を返しま�
   s = Set[10, 20]
   ary = []
   s.each {|num| ary << num + 1}
-  p ary #=> [21, 11]
+  p ary #=> [11, 21]
 
 --- collect! {|o| ...} -> self
 --- map! {|o| ...} -> self
@@ -298,7 +293,7 @@ nil を返します。
   s = Set[1, 2]
   s << 10
   p s          #=> #<Set: {1, 2, 10}>
-  p s.add?(20) #=> #<Set: {1, 2, 20, 10}>
+  p s.add?(20) #=> #<Set: {1, 2, 10, 20}>
   p s.add?(2)  #=> nil
 
 
@@ -316,7 +311,7 @@ delete? は、集合の要素が削除された場合には self を、変化が
 
   s = Set[10, 20, 30]
   s.delete(10)
-  p s             #=> #<Set: {30, 20}>
+  p s             #=> #<Set: {20, 30}>
   p s.delete?(20) #=> #<Set: {30}>
   p s.delete?(10) #=> nil
 
@@ -333,10 +328,10 @@ nil を返します。
 
   s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
   s1.delete_if {|str| str =~ /\.bak$/}
-  p s1 #=> #<Set: {"test.rb", "hello.rb"}>
+  p s1 #=> #<Set: {"hello.rb", "test.rb"}>
   
   s2 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
-  p s2.reject! {|str| str =~ /\.bak$/} #=> #<Set: {"test.rb", "hello.rb"}>
+  p s2.reject! {|str| str =~ /\.bak$/} #=> #<Set: {"hello.rb", "test.rb"}>
   p s2.reject! {|str| str =~ /\.o$/}   #=> nil
 
 @see [[m:Enumerable#reject]]
@@ -358,7 +353,7 @@ nil を返します。
 
   set = Set[10, 20]
   set.merge([10, 30])
-  p set #=> #<Set: {30, 20, 10}>
+  p set #=> #<Set: {10, 20, 30}>
 
 --- subtract(enum) -> self
 
@@ -396,7 +391,7 @@ nil を返します。
 #@end
 
   p Set[10, 20, 30] + Set[10, 20, 40]
-  #=> #<Set: {40, 30, 20, 10}>
+  #=> #<Set: {10, 20, 30, 40}>
 
 --- difference(enum) -> Set
 --- -(enum) -> Set
@@ -433,7 +428,7 @@ nil を返します。
 
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 50]
-  p s1 & s2 #=> #<Set: {30, 10}>
+  p s1 & s2 #=> #<Set: {10, 30}>
 
 --- ^(enum) -> Set
 
@@ -505,15 +500,15 @@ o1 と o2 は同じ分割に属します。
   numbers = Set.new(1..6)
   set = numbers.divide {|i| i % 3}
   p set
-  #=> #<Set: {#<Set: {5, 2}>, #<Set: {1, 4}>, #<Set: {6, 3}>}>
+  #=> #<Set: {#<Set: {1, 4}>, #<Set: {2, 5}>, #<Set: {3, 6}>}>
 
 ==== 例2
   numbers = Set[1, 3, 4, 6, 9, 10, 11]
   set = numbers.divide {|i, j| (i - j).abs == 1}
   p set     #=> #<Set: {#<Set: {1}>,
-            #           #<Set: {11, 9, 10}>,
             #           #<Set: {3, 4}>,
-            #           #<Set: {6}>}>
+            #           #<Set: {6}>,
+            #           #<Set: {9, 10, 11}>}>
 
 ==== 応用例
 8x2 のチェス盤上で、ナイトが到達できる位置に関する分類を作成します。
@@ -531,10 +526,10 @@ o1 と o2 は同じ分割に属します。
   p board.divide { |i,j|
     Set[(i[0] - j[0]).abs, (i[1] - j[1]).abs] == knight_move
   }
-  #=> #<Set: {#<Set: {[6, 2], [4, 1], [2, 2], [8, 1]}>,
-  #            #<Set: {[2, 1], [8, 2], [6, 1], [4, 2]}>,
-  #            #<Set: {[1, 1], [3, 2], [5, 1], [7, 2]}>,
-  #            #<Set: {[1, 2], [5, 2], [3, 1], [7, 1]}>}>
+  #=> #<Set: {#<Set: {[1, 1], [3, 2], [5, 1], [7, 2]}>,
+              #<Set: {[1, 2], [3, 1], [5, 2], [7, 1]}>,
+              #<Set: {[2, 1], [4, 2], [6, 1], [8, 2]}>,
+              #<Set: {[2, 2], [4, 1], [6, 2], [8, 1]}>}>
 
 --- inspect -> String
 
@@ -620,11 +615,11 @@ Enumerable オブジェクトの要素から、新しい集合オブジェクト
 @param block 集合クラスのオブジェクト初期化メソッドに渡すブロックを指定します。
 @return 生成された集合オブジェクトを返します。
 
-  p [10, 20, 30].to_set 
-  #=> #<Set: {30, 20, 10}>
-  p [10, 20, 30].to_set(SortedSet)
+  p [30, 10, 20].to_set
+  #=> #<Set: {30, 10, 20}>
+  p [30, 10, 20].to_set(SortedSet)
   #=> #<SortedSet: {10, 20, 30}>
-  p [10, 20, 30].to_set {|num| num / 10}
-  #=> #<Set: {1, 2, 3}>
+  p [30, 10, 20].to_set {|num| num / 10}
+  #=> #<Set: {3, 1, 2}>
 
 @see [[m:Set.new]]
