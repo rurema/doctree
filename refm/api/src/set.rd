@@ -226,9 +226,9 @@ proper_superset? は、2 つの集合が等しい場合には false を返しま
 @raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
   s = Set[1, 2, 3]
-  p s1.superset?(Set[1, 2]) #=> true
-  p s1.superset?(Set[1, 4]) #=> false
-  p s1.superset?(Set[1, 2, 3]) #=> true
+  p s.superset?(Set[1, 2]) #=> true
+  p s.superset?(Set[1, 4]) #=> false
+  p s.superset?(Set[1, 2, 3]) #=> true
   p s.proper_superset?(Set[1, 2]) #=> true
   p s.proper_superset?(Set[1, 4]) #=> false
   p s.proper_superset?(Set[1, 2, 3]) #=> false
