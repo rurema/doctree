@@ -86,6 +86,7 @@ include Enumerable
        発生します。
 #@end
 
+  require 'set'
   p Set.new                      #=> #<Set: {}>
   p Set.new([1, 2])              #=> #<Set: {1, 2}>
   p Set.new([1, 2]) {|o| o * 2}  #=> #<Set: {2, 4}>
@@ -96,6 +97,7 @@ include Enumerable
 
 @param ary 新しい集合の要素を指定します。
 
+  require 'set'
   p Set[1, 2] #=> #<Set: {1, 2}>
 
 
@@ -122,8 +124,8 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 変更可能である点に注意してください。
 #@end
 
+  require 'set'
   s1 = Set[10, 20]
-  
   s2 = s1.dup
   s2 << 30
   p s1 #=> #<Set: {10, 20}>
@@ -136,12 +138,14 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 
 集合の要素数を返します。
 
+  require 'set'
   p Set[10, 20, 30, 10].size #=> 3
 
 --- empty? -> bool
 
 集合が要素を 1 つも持たないときに true を返します。
 
+  require 'set'
   p Set[10, 20].empty? #=> false
   p Set[].empty?       #=> true
 
@@ -149,6 +153,7 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 
 集合の要素をすべて削除し、空にした後の self を返します。
 
+  require 'set'
   p s = Set[10, 20, 30] #=> #<Set: {10, 20, 30}>
   s.clear
   p s #=> #<Set: {}>
@@ -169,6 +174,7 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶�
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   p s = Set[10, 20, 30] #=> #<Set: {10, 20, 30}>
   s.replace([15, 25])
   p s #=> #<Set: {15, 25}>
@@ -186,6 +192,7 @@ flatten! は、元の集合を破壊的に平坦化します。集合の要素�
 @raise ArgumentError 集合の要素として self が再帰的に現れた場合に発生
                      します。
 
+  require 'set'
   s = Set[Set[1,2], 3]
   p s.flatten #=> #<Set: {1, 2, 3}>
   p s         #=> #<Set: {#<Set: {1, 2}>, 3}>
@@ -198,6 +205,7 @@ flatten! は、元の集合を破壊的に平坦化します。集合の要素�
 --- to_a -> Array
 self を配列に変換します。要素の順序は不定です。
 
+  require 'set'
   set = Set['hello', 'world']
   p set.to_a #=> ["hello", "world"]
 
@@ -208,6 +216,7 @@ self を配列に変換します。要素の順序は不定です。
 
 @param o オブジェクトを指定します。
 
+  require 'set'
   set = Set['hello', 'world']
   p set.include?('world') #=> true
   p set.include?('bye') #=> false
@@ -225,6 +234,7 @@ proper_superset? は、2 つの集合が等しい場合には false を返しま
 @param set 比較対象の Set オブジェクトを指定します。
 @raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
+  require 'set'
   s = Set[1, 2, 3]
   p s.superset?(Set[1, 2]) #=> true
   p s.superset?(Set[1, 4]) #=> false
@@ -247,6 +257,7 @@ proper_subset? は、2 つの集合が等しい場合には false を返しま�
 @param set 比較対象の Set オブジェクトを指定します。
 @raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
+  require 'set'
   s = Set[1, 2]
   p s.subset?(Set[1, 2, 3]) #=> true
   p s.subset?(Set[1, 4]) #=> false
@@ -261,6 +272,7 @@ proper_subset? は、2 つの集合が等しい場合には false を返しま�
 
 集合の各要素についてブロックを実行します。
 
+  require 'set'
   s = Set[10, 20]
   ary = []
   s.each {|num| ary << num + 1}
@@ -271,6 +283,7 @@ proper_subset? は、2 つの集合が等しい場合には false を返しま�
 
 集合の各要素についてブロックを評価し、その結果で元の集合を置き換えます。
 
+  require 'set'
   set = Set['hello', 'world']
   set.map! {|str| str.capitalize}
   p set  #=> #<Set: {"Hello", "World"}>
@@ -290,6 +303,7 @@ nil を返します。
 
 @param o 追加対象のオブジェクトを指定します。
 
+  require 'set'
   s = Set[1, 2]
   s << 10
   p s          #=> #<Set: {1, 2, 10}>
@@ -309,6 +323,7 @@ delete? は、集合の要素が削除された場合には self を、変化が
 
 @param o 削除対象のオブジェクトを指定します。
 
+  require 'set'
   s = Set[10, 20, 30]
   s.delete(10)
   p s             #=> #<Set: {20, 30}>
@@ -326,6 +341,7 @@ delete_if は常に self を返します。
 reject! は、要素が 1 つ以上削除されれば self を、1 つも削除されなければ
 nil を返します。
 
+  require 'set'
   s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
   s1.delete_if {|str| str =~ /\.bak\z/}
   p s1 #=> #<Set: {"hello.rb", "test.rb"}>
@@ -351,6 +367,7 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   set = Set[10, 20]
   set.merge([10, 30])
   p set #=> #<Set: {10, 20, 30}>
@@ -370,6 +387,7 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   set = Set[10, 20, 40]
   set.subtract([10, 20, 30])
   p set #=> #<Set: {40}>
@@ -390,6 +408,7 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   p Set[10, 20, 30] + Set[10, 20, 40]
   #=> #<Set: {10, 20, 30, 40}>
 
@@ -408,6 +427,7 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   p Set[10, 20, 30] - Set[10, 20, 40]
   #=> #<Set: {30}>
 
@@ -426,6 +446,7 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 50]
   p s1 & s2 #=> #<Set: {10, 30}>
@@ -444,6 +465,7 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
+  require 'set'
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 50]
   p s1 ^ s2 #=> #<Set: {50, 20}>
@@ -459,6 +481,7 @@ nil を返します。
 
 @param set 比較対象のオブジェクトを指定します。
 
+  require 'set'
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 40]
   s3 = Set[30, 10, 30, 20]
@@ -475,6 +498,7 @@ nil を返します。
 生成されるハッシュのキーはブロックの実行結果、値は分類された集合と
 なります。
 
+  require 'set'
   numbers = Set[10, 4.5, 20, 30, 31.2]
   p numbers.classify {|o| o.class}
 #@since 2.4.0
@@ -497,12 +521,14 @@ o1 と o2 は同じ分割に属します。
 が成立しないブロックを与えると期待通りの結果が得られません。
 
 ==== 例1
+  require 'set'
   numbers = Set.new(1..6)
   set = numbers.divide {|i| i % 3}
   p set
   #=> #<Set: {#<Set: {1, 4}>, #<Set: {2, 5}>, #<Set: {3, 6}>}>
 
 ==== 例2
+  require 'set'
   numbers = Set[1, 3, 4, 6, 9, 10, 11]
   set = numbers.divide {|i, j| (i - j).abs == 1}
   p set     #=> #<Set: {#<Set: {1}>,
@@ -535,6 +561,7 @@ o1 と o2 は同じ分割に属します。
 
 人間の読みやすい形に表現した文字列を返します。
 
+  require 'set'
   puts Set.new(['element1', 'element2']).inspect
   #=> #<Set: {"element1", "element2"}>
 
@@ -563,8 +590,8 @@ self と set が互いに素な集合である場合に true を返します。
 @raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
   require 'set'
-  Set[1, 2, 3].disjoint? Set[3, 4] # => false
-  Set[1, 2, 3].disjoint? Set[4, 5] # => true
+  p Set[1, 2, 3].disjoint? Set[3, 4] # => false
+  p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 
 @see [[m:Set#intersect?]]
 #@end
@@ -615,6 +642,7 @@ Enumerable オブジェクトの要素から、新しい集合オブジェクト
 @param block 集合クラスのオブジェクト初期化メソッドに渡すブロックを指定します。
 @return 生成された集合オブジェクトを返します。
 
+  require 'set'
   p [30, 10, 20].to_set
   #=> #<Set: {30, 10, 20}>
   p [30, 10, 20].to_set(SortedSet)
