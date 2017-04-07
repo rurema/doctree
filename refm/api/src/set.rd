@@ -482,7 +482,11 @@ nil を返します。
 
   numbers = Set[10, 4.5, 20, 30, 31.2]
   p numbers.classify {|o| o.class}
-  #=> {Float=>#<Set: {4.5, 31.2}>, Fixnum=>#<Set: {30, 20, 10}>}
+#@since 2.4.0
+  #=> {Integer=>#<Set: {10, 20, 30}>, Float=>#<Set: {4.5, 31.2}>}
+#@else
+  #=> {Fixnum=>#<Set: {10, 20, 30}>, Float=>#<Set: {4.5, 31.2}>}
+#@end
 
 --- divide {|o| ... } -> Set
 --- divide {|o1, o2| ... } -> Set
