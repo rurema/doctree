@@ -424,7 +424,7 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
   #=> #<URI::Generic:0x20100198 URL:foo/bar.html>
 
 --- normalize     -> URI::Generic
---- normalize!    -> nil
+--- normalize!    -> String | nil
 
 URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
 構成要素がなければ '/' をセットします。
