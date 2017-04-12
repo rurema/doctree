@@ -1668,7 +1668,7 @@ key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
-     [[m:Net::HTTPHeader#add_field]],
+     [[m:Net::HTTPHeader#add_field]]
 
 #@end
 
