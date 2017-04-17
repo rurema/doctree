@@ -8,14 +8,14 @@ require delegate
 === 参考
 標準添付ライブラリ紹介 【第 15 回】 tmpdir, tempfile  [[url:http://magazine.rubyist.net/?0029-BundledLibraries]]
 
-= class Tempfile < File
+= class Tempfile < Delegator
 #@#= class Tempfile < DelegateClass(File)
 
 テンポラリファイルを操作するためのクラスです。
 
  * テンポラリファイルを作成します。
    ファイルは "w+" モードで "basename.pid.n" という名前になります。
- * Tempfile オブジェクトは[[c:File]]オブジェクトと同じように使うことができます。
+ * Tempfile オブジェクトは[[c:File]]クラスへのDelegatorとして定義されており、[[c:File]]クラスのオブジェクトと同じように使うことができます。
  * Tempfile#close(true) により、作成したテンポラリファイルは削除されます。
  * スクリプトが終了するときにも削除されます。
  * [[m:Tempfile#open]]により、テンポラリファイルを再オープンすることができます。
