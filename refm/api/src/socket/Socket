@@ -420,7 +420,7 @@ sockets でサーバソケットを受け取り、接続を待ち受け、
 
 @param sockets 待ち受けたいサーバソケットの配列
 
-@see [[m:Socket.tcp_server_loop]], [[m:Socket.unix_server_loop]],
+@see [[m:Socket.tcp_server_loop]], [[m:Socket.unix_server_loop]]
 
 --- ip_address_list -> [Addrinfo]
 ローカルの IP アドレスを配列で返します。

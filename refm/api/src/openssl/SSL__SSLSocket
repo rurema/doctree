@@ -651,7 +651,7 @@ hostname に nil を渡すと SNI 拡張を利用しません。
 @param hostname ホスト名文字列
 @see [[m:OpenSSL::SSL::SSLSocket#hostname]],
      [[m:OpenSSL::SSL::SSLContext#servername_cb]],
-     [[m:OpenSSL::SSL::SSLContext#servername_cb=]],
+     [[m:OpenSSL::SSL::SSLContext#servername_cb=]]
 
 
 --- session -> OpenSSL::SSL::Session

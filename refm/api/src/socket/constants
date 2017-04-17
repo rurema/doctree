@@ -1508,7 +1508,7 @@ flags 引数に用います。
 
 @see [[man:sys/socket.h(header)]],
      [[man:send(2linux)]], [[man:recv(2linux)]],
-     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]]
 
 --- MSG_DONTROUTE -> Integer
 Send without using the routing tables。
@@ -1528,7 +1528,7 @@ This message should be non-blocking。
 flags 引数に用います。
 
 @see [[man:send(2linux)]], [[man:recv(2linux)]],
-     [[man:recv(2freebsd)]],
+     [[man:recv(2freebsd)]]
 
 
 #@since 1.8.3
@@ -1553,7 +1553,7 @@ flags 引数に用います。
      [[man:send(2)]], [[man:sendto(2)]], [[man:sendmsg(2)]],
      [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
      [[man:send(2linux)]], [[man:recv(2linux)]],
-     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]]
 
 #@since 1.8.3
 --- MSG_FLUSH -> Integer
@@ -1590,7 +1590,7 @@ flags 引数に用います。
      [[man:send(2)]], [[man:sendto(2)]], [[man:sendmsg(2)]],
      [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
      [[man:send(2linux)]], [[man:recv(2linux)]],
-     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]]
 
 --- MSG_PEEK -> Integer
 Peek at incoming message。
@@ -1603,7 +1603,7 @@ flags 引数に用います。
      [[man:send(2)]], [[man:sendto(2)]], [[man:sendmsg(2)]],
      [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
      [[man:send(2linux)]], [[man:recv(2linux)]],
-     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]]
 
 
 --- MSG_TRUNC -> Integer
@@ -1615,7 +1615,7 @@ Data discarded before delivery。
 
 @see [[man:sys/socket.h(header)]],
      [[man:send(2linux)]], [[man:recv(2linux)]],
-     [[man:send(2freebsd)]], [[man:recv(2freebsd)]],
+     [[man:send(2freebsd)]], [[man:recv(2freebsd)]]
 
 --- MSG_WAITALL -> Integer
 Wait for full request or error
@@ -1626,7 +1626,7 @@ flags 引数に用います。
 @see [[man:sys/socket.h(header)]],
      [[man:recv(2)]], [[man:recvfrom(2)]], [[man:recvmsg(2)]],
      [[man:recv(2linux)]],
-     [[man:recv(2freebsd)]],
+     [[man:recv(2freebsd)]]
 
 #@since 1.9.2
 --- MSG_CONFIRM -> Integer

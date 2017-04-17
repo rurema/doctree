@@ -432,7 +432,7 @@ block style を表します。
 flow style を表します。
 
 @see [[m:Psych::Nodes::Sequence.new]],
-     [[m:Psych::Nodes::Sequence#style]],
+     [[m:Psych::Nodes::Sequence#style]]
 
 = class Psych::Nodes::Mapping < Psych::Nodes::Node
 
@@ -683,7 +683,7 @@ scalar の style を変更します。
 emitter が適当に style を決めます。
 
 @see [[m:Psych::Nodes::Scalar.new]],
-     [[m:Psych::Nodes::Scalar#style]],
+     [[m:Psych::Nodes::Scalar#style]]
 
 --- PLAIN -> Integer
 plain scalar style を表します。
@@ -743,11 +743,11 @@ anchor で指す先の anchor を指定します。
 alias が指す先の anchor を返します。
 
 @see [[m:Psych::Nodes::Alias#anchor=]],
-     [[m:Psych::Nodes::Alias.new]],
+     [[m:Psych::Nodes::Alias.new]]
 --- anchor=(val)
 alias が指す先の anchor を変更します。
 
 @param val 設定する anchor 
 @see [[m:Psych::Nodes::Alias#anchor]],
-     [[m:Psych::Nodes::Alias.new]],
+     [[m:Psych::Nodes::Alias.new]]
 
