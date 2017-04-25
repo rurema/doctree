@@ -107,7 +107,11 @@ Ruby/OpenSSL のバージョンです。
 
 --- OPENSSL_VERSION -> String
 
-システムにインストールされている OpenSSL 本体のバージョンを表した文字列です。
+ビルド時に使われた OpenSSL 本体のバージョンを表した文字列です。
+
+--- OPENSSL_LIBRARY_VERSION -> String
+
+実行時に使われている OpenSSL 本体のバージョンを表した文字列です。
 
 --- OPENSSL_VERSION_NUMBER -> Integer
 
