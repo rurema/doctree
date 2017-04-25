@@ -567,6 +567,52 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 
 ライブラリ内部で使用します。
 
+#@since 2.0
+--- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil) -> object
+
+安全に YAML YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+
+デフォルトでは以下のクラスのオブジェクトしか変換しません。
+
+* TrueClass
+* FalseClass
+* NilClass
+* Numeric
+* String
+* Array
+* Hash
+
+再帰的なデータ構造はデフォルトでは許可されていません。
+任意のクラスを許可するには whitelist_classes を指定すると、
+そのクラスが追加されます。例えば Date クラスを許可するには
+以下のように書いてください:
+
+  Psych.safe_load(yaml, [Date])
+
+すると上のクラス一覧に加えて Date クラスが読み込まれます。
+
+エイリアスは aliases パラメーターを変更することで明示的に許可できます。
+
+例:
+
+  x = []
+  x << x
+  yaml = Psych.dump x
+  Psych.safe_load yaml               # => 例外発生
+  Psych.safe_load yaml, [], [], true # => エイリアスが読み込まれる
+
+yaml にホワイトリストにないクラスが含まれていた場合は、
+Psych::DisallowedClass 例外が発生します。
+
+yaml がエイリアスを含んでいて aliases パラメーターが false の時、
+Psych::BadAlias 例外が発生します。
+
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト
+@param whitelist_classes 追加で読み込みを許可するクラスの配列
+@param whitelist_symbols
+@param aliases エイリアスの読み込みを許可するかどうか
+@param filename
+#@end
 #@since 1.8.3
 --- tagurize(val) -> String
 
