@@ -521,12 +521,12 @@ argv からオプションを取り除いたものを返します。
   opt.on('-a [VAL]') {|v| p :a }
   opt.on('-b') {|v| p :b }
 
-  opt.order!(ARGV)
+  opt.order(ARGV)
   p ARGV
 
   $ ruby opt2.rb -a foo somefile -b
   :a
-  ["somefile", "-b"]
+  ["-a", "foo", "somefile", "-b"]
 
 --- order!(argv = self.default_argv)             -> [String]
 --- order!(argv = self.default_argv) {|s| ...}   -> [String]
