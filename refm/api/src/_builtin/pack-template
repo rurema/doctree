@@ -33,7 +33,11 @@ i, I (int)のサイズは常にシステム依存であり、n, N, v, V
 
 つまり、[[m:IO#ioctl]] などで C の構造体を渡すときのように、
 システム依存のサイズとエンディアンに合わせる必要があるときには
+#@since 2.3.0
+s!, S!, i!, I!, l!, L!, q!, Q!, j!, J! を用います。
+#@else
 s!, S!, i!, I!, l!, L!, q!, Q! を用います。
+#@end
 また、ネットワークプロトコルやファイルフォーマットのように、
 システムに依存しないデータを扱うときには
 n, N, v, V を用います。
@@ -65,6 +69,10 @@ n, N, v, V を用います。
   L!: unsigned long
   q!: signed long long
   Q!: unsigned long long
+#@since 2.3.0
+  j,j!: intptr_t
+  J,J!: uintptr_t
+#@end
 //}
 
 : エンディアン依存、整数サイズ非依存 (C99 の stdint.h にある厳密な幅を持つ整数型に適切)
@@ -730,13 +738,13 @@ n, N, v, V を用います。
 #@since 2.3.0
 : j
 
-intptr_t
-#@#todo [[url:https://bugs.ruby-lang.org/issues/11215]]
+intptr_t (ポインタの幅の符号つき整数, エンディアンに依存)
+#@# [[url:https://bugs.ruby-lang.org/issues/11215]]
 
 : J
 
-uintptr_t
-#@#todo [[url:https://bugs.ruby-lang.org/issues/11215]]
+uintptr_t (ポインタの幅の符号なし整数, エンディアンに依存)
+#@# [[url:https://bugs.ruby-lang.org/issues/11215]]
 
 #@end
 
