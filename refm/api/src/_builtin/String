@@ -180,6 +180,9 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 #@since 2.3.0
 --- new(string = "", encoding: enc) -> String
 #@end
+#@since 2.4.0
+--- new(string = "", capacity: size) -> String
+#@end
 
 string と同じ内容の新しい文字列を作成して返します。
 引数を省略した場合は空文字列を生成して返します。
@@ -189,9 +192,14 @@ string と同じ内容の新しい文字列を作成して返します。
 @param encoding 作成する文字列のエンコーディングを文字列か
                 [[c:Encoding]] オブジェクトで指定します(変換は行われま
                 せん)。省略した場合は引数 string のエンコーディングと同
-                じになります(ただし、string にエンコーディングが指定さ
-                れていなかった場合は [[m:Encoding::ASCII_8BIT]]になりま
-                す)。
+                じになります(ただし、string が指定されていなかった場合は
+                [[m:Encoding::ASCII_8BIT]]になります)。
+#@end
+#@since 2.4.0
+@param capacity 内部バッファのサイズを指定します。
+                指定することで、なんども文字列連結する
+                (そしてreallocがなんども呼ばれる)ときの
+                パフォーマンスが改善されるかもしれません。
 #@end
 @return         引数 string と同じ内容の文字列オブジェクト
 
