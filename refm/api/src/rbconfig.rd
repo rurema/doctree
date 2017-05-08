@@ -95,9 +95,9 @@ Makefile 作成の際に利用されることを想定しています。
   require 'rbconfig'
   
   print <<-END_OF_MAKEFILE
-  prefix = #{Config::MAKEFILE_CONFIG['prefix']}
-  exec_prefix = #{Config::MAKEFILE_CONFIG['exec_prefix']}
-  bindir = #{Config::MAKEFILE_CONFIG['bindir']}
+  prefix = #{RbConfig::MAKEFILE_CONFIG['prefix']}
+  exec_prefix = #{RbConfig::MAKEFILE_CONFIG['exec_prefix']}
+  bindir = #{RbConfig::MAKEFILE_CONFIG['bindir']}
   END_OF_MAKEFILE
   
   => prefix = /usr/local
@@ -120,5 +120,5 @@ Makefile 作成の際に利用されることを想定しています。
 を使って生成されています)
 
   require 'rbconfig'
-  p Config.expand(Config::MAKEFILE_CONFIG["bindir"])
+  p Config.expand(RbConfig::MAKEFILE_CONFIG["bindir"])
   # => "/usr/local/bin"
