@@ -283,6 +283,21 @@ File.expand_path("~") や File.expand_path("~root") と
 
 @see [[m:File.expand_path]]
 
+#@since 2.4.0
+--- empty?(path_name)    -> bool
+
+path_name で与えられたディレクトリが空の場合に真を返します。
+ディレクトリでない場合や空でない場合に偽を返します。
+
+  Dir.empty?('.')      #=> false
+  Dir.empty?(IO::NULL) #=> false
+  require 'tmpdir'
+  Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
+
+@param path_name 確認したいディレクトリ名。
+
+#@end
+
 == Instance Methods
 
 --- close    -> nil

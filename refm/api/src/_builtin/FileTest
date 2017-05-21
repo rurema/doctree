@@ -213,6 +213,9 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 @param file ファイル名を表す文字列を指定します。
 
 --- zero?(file)    -> bool
+#@since 2.4.0
+--- empty?(file)   -> bool
+#@end
 
 ファイルが存在して、そのサイズが 0 である時に真を返します。
 そうでない場合、あるいはシステムコールに失敗した場合には false を返します。

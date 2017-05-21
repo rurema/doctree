@@ -714,6 +714,9 @@ FileTest.writable_real?(self.to_s) と同じです。
 @see [[m:FileTest.#writable_real?]]
 
 --- zero? -> bool
+#@since 2.4.0
+--- empty? -> bool
+#@end
 FileTest.zero?(self.to_s) と同じです。
 
 @see [[m:FileTest.#zero?]]
