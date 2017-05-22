@@ -237,7 +237,6 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 #@end
 
 --- =~(other) -> Integer | nil
---- match(other) -> Integer | nil
 
 正規表現 other とのマッチを行います。
 
@@ -251,7 +250,23 @@ nil は文字列のエンコーディングが非互換の時に返されます�
   p :foobar =~ /bar/ # => 3
   p :foo =~ /bar/    # => nil
 
-@see [[m:String#=~]], [[m:String#match]]
+@see [[m:String#=~]]
+
+--- match(other) -> MatchData | nil
+
+正規表現 other とのマッチを行います。
+
+(self.to_s.match(other) と同じです。)
+
+@param other 比較対象のシンボルを指定します。
+
+@return マッチが成功すれば MatchData オブジェクトを、そうでなければ nil を返します。
+
+  p :foo.match /foo/    # => #<MatchData "foo">
+  p :foobar.match /bar/ # => #<MatchData "bar">
+  p :foo.match /bar/    # => nil
+
+@see [[m:String#match]]
 
 #@since 2.4.0
 --- match?(regexp, pos = 0) -> bool
