@@ -673,6 +673,9 @@ umask を変更します。変更前の umask の値を返します。
 @param path パスを表す文字列を指定します。
 
 --- zero?(path)    -> bool
+#@since 2.4.0
+--- empty?(path)   -> bool
+#@end
 
 [[m:FileTest.#zero?]] と同じです。
 
