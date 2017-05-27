@@ -139,6 +139,7 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
  * !ruby/string: [[c:String]] オブジェクト
  * !ruby/struct: [[c:Struct]] オブジェクト
  * !ruby/sym(もしくは !ruby/symbol): [[c:Symbol]] オブジェクト
+ * !ruby/encoding: [[c:Encoding]] オブジェクト
  * !ruby/exception: 例外オブジェクト
  * !ruby/object:<クラス名>: 上記以外のオブジェクト
 
@@ -237,19 +238,6 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
 
  * ":foo" のような文字列はそのまま [[c:Symbol]] として扱える
  * "y" や "n" は真偽値として扱われない
-#@until 2.0.0
- * !!str のような短縮系のグローバルタグは扱われない
-#@since 1.9.2
-   ([[lib:syck]] のみ)
-#@end
-#@end
- * !<tag:yaml.org,2002:str> "foo" のようにタグを扱えない。
-   !tag:yaml.org,2002:str "foo" のように記述する必要がある
-
-#@# 最後のものは当初からの不具合だと思われます。psych ライブラリなどで
-#@# 対応される事があれば、分岐を追加する必要があります。
-#@# また、!str "foo" のようなローカルタグを元に型を指定する方法について
-#@# は触れない方が適切と考え、記述していません。
 
 === 参考
 
