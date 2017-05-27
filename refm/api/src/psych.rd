@@ -177,9 +177,11 @@ Psych::BadAlias 例外が発生します。
 
 @param io YAMLフォーマットの文書の読み込み先のIOオブジェクト。
 @param whitelist_classes 追加で読み込みを許可するクラスの配列。
-@param whitelist_symbols
+@param whitelist_symbols 引数 whitelist_classesに [[c:Symbol]] を含む場
+                         合に読み込みを許可する [[c:Symbol]] の配列。
+                         省略した場合は全ての [[c:Symbol]] を許可します。
 @param aliases エイリアスの読み込みを許可するかどうか。
-@param filename
+@param filename [[c:Psych::SyntaxError]] 発生時にファイル名として表示する文字列。
 #@end
 
 --- parse(yaml, filename = nil) -> Psych::Nodes::Document
