@@ -52,7 +52,7 @@ rdoc コマンドのオプションを解析するためのクラスです。
 
       op.on('--spell-dictionary DICTIONARY',
             RDoc::Options::Path) do |dictionary|
-        # [[c:RDoc::Options]] に spell_dictionary アクセサの定義が必要
+        # RDoc::Options に spell_dictionary アクセサの定義が必要
         rdoc_options.spell_dictionary = dictionary
       end
     end

@@ -97,7 +97,7 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
    file = File.open('foo.log', File::WRONLY | File::APPEND)
    # (古いファイルを削除する)新しいログファイルを作成する場合、以下のよ
-   # うに [[m:File::CREAT]] を指定。
+   # うに File::CREAT を指定。
    # file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
    logger = Logger.new(file)
 
