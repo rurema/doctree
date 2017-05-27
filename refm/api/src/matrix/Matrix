@@ -158,7 +158,7 @@ valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素と
 
   m = Matrix.scalar(3, 2.5)
   p m # => Matrix[[2.5, 0, 0], [0, 2.5, 0], [0, 0, 2.5]]
- 
+
 --- identity(n) -> Matrix
 --- unit(n) -> Matrix
 --- I(n) -> Matrix
@@ -172,7 +172,7 @@ n次の単位行列を生成します。
 --- zero(n) -> Matrix
 
 n × n の零行列（要素が全て 0 の行列）を生成して返します。
- 
+
 @param n 生成する正方零行列の次数
 
 #@since 1.9.2
@@ -687,7 +687,7 @@ j 番目の列が存在しない場合は Vector[nil] を返します。
 
   require 'matrix'
   Matrix[[7,6],[3,9]].adjugate # => Matrix[[9, -6], [-3, 7]]
-  
+
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方でない場合に発生します。
 @see [[m:Matrix#cofactor]]
 
