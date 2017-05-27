@@ -2,16 +2,6 @@ category FileFormat
 
 #@since 1.8.0
 
-#@until 1.9.2
-require stringio
-require yaml/error
-require yaml/tag
-require yaml/stream
-require yaml/constants
-
-#@# yaml/encoding は内部でしか使用しないため省略。
-#@end
-
 構造化されたデータを表現するフォーマットであるYAML (YAML Ain't Markup Language) を扱うためのライブラリです。
 
 例1: 構造化された配列
@@ -293,111 +283,14 @@ Rubyist Magazine: [[url:http://magazine.rubyist.net/]]
 YAML (YAML Ain't Markup Language) を扱うモジュールです。
 
 #@since 1.9.2
-#@since 2.0.0
 YAML オブジェクトは実際は [[c:Psych]] オブジェクトです。その他のオブジェ
 クトも同様に実体は別のオブジェクトです。もし確認したいメソッドの記述が
 見つからない場合は、[[lib:psych]] ライブラリを確認してください。
 
   require "yaml"
 
-#@until 2.2.0
-  p YAML::ENGINE.yamler # => "psych"
-#@end
   p YAML                # => Psych
   p YAML::Stream        # => Psych::Stream
-#@else
-YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
-クトのどちらかです。その他のオブジェクトも同様に実体は別のオブジェクト
-です。もし確認したいメソッドの記述が見つからない場合は、それぞれのライ
-ブラリを確認してください。
-
-  require "psych"
-  require "syck"
-  require "yaml"
-
-  YAML::ENGINE.yamler = "psych"
-  p YAML         # => Psych
-  p YAML::Stream # => Psych::Stream
-
-  YAML::ENGINE.yamler = "syck"
-  p YAML         # => Syck
-  p YAML::Stream # => Syck::Stream
-#@end
-
-#@until 2.2.0
-== Constants
-
---- ENGINE -> YAML::EngineManager
-
-[[c:YAML::EngineManager]] を返します。
-
-@see [[m:YAML::EngineManager#yamler]], [[m:YAML::EngineManager#yamler=]]
-
-= class YAML::EngineManager
-
-[[lib:yaml]] のバックエンドを管理するクラスです。
-
-== Class Methods
-
---- new -> YAML::EngineManager
-
-自身を初期化します。
-
-== Instance Methods
-
---- yamler -> String
-
-使用中のバックエンドを文字列で返します。
-
-例:
-
-#@until 2.0.0
-  require "psych"
-#@end
-  require "yaml"
-  p YAML::ENGINE.yamler # => "psych"
-
---- yamler=(engine)
-
-#@since 2.0.0
-使用しません。
-#@else
-使用するバックエンドを設定します。
-
-また、engine がまだ require されていなかった場合は require します。
-#@end
-
-@param engine バックエンドを文字列で指定します。
-
-@raise ArgumentError 未対応のバックエンドを指定した場合に発生します。
-
-#@until 2.0.0
-例:
-
-  require "psych"
-  require "yaml"
-  p YAML # => Psych
-
-  YAML::ENGINE.yamler = "syck"
-  p YAML # => Syck
-#@end
-
---- syck? -> bool
-
-#@since 2.0.0
-常に false を返します。
-#@else
-[[lib:syck]] ライブラリを使用中の場合に true を返します。それ以外の場合
-は false を返します。
-
-  require "psych"
-  require "yaml"
-  p YAML::ENGINE.syck? # => false
-
-  YAML::ENGINE.yamler = "syck"
-  p YAML::ENGINE.syck? # => true
-#@end
-#@end
 
 #@else
 #@include(yaml/YAML.inside)
