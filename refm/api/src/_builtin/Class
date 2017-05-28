@@ -38,7 +38,7 @@
 索し、見つかった定数名をクラス名とします。
 
   p foo = Class.new   # => #<Class:0x401b90f8>
-  p foo.name          # => ""
+  p foo.name          # => nil
   Foo = foo           # ここで p foo すれば "Foo" 固定
   Bar = foo
   p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
