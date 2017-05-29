@@ -434,6 +434,3 @@ include Comparable
 --- node_export(node)
 #@todo
 
-#@since 1.9.2
-#@include(yaml/Kernel)
-#@end
