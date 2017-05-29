@@ -56,6 +56,9 @@ date2
 dbm
 debug
 delegate
+#@since 2.3.0
+did_you_mean
+#@end
 digest
 #@since 1.8.6
 digest/bubblebabble
