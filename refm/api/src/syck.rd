@@ -15,10 +15,6 @@ category FileFormat
 
 [[lib:yaml]] のバックエンドのためのモジュールです。
 
-#@since 1.9.2
-#@include(yaml/YAML.inside)
-#@end
-
 == Constants
 
 #@until 1.9.2
