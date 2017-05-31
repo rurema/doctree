@@ -4,8 +4,6 @@ RewriteEngine on
 
 DirectoryIndex view.cgi/function/
 RewriteRule ^.*view(/.*$) view.cgi$1
-#DirectoryIndex view.fcgi/function/
-#RewriteRule ^.*view(/.*$) view.fcgi$1
 
 <Files config>
     deny from all
