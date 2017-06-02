@@ -1,7 +1,7 @@
 category Text
 
 #@since 1.8.7
-UNIX Bourne シェルの単語分割規則に従った文字列割機能と文字列エスケープ
+UNIX Bourne シェルの単語分割規則に従った文字列分割機能と文字列エスケープ
 機能を提供します。
 
 Shellwords モジュールは、空白区切りの単語分割を行う shellsplit、
