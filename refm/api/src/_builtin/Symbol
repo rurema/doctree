@@ -215,7 +215,7 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @see [[m:String#casecmp]]
 
-#@since 2.4.0
+#since 2.4.0
 --- casecmp?(other) -> bool | nil
 
 大文字小文字の違いを無視しシンボルを比較します。
