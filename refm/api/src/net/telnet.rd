@@ -8,6 +8,13 @@ Telnet に関する RFC は数多く存在します。
 [[RFC:859]], [[RFC:860]], [[RFC:861]], でプロトコルの
 基本が定義されています。
 
+=== 注意
+
+このライブラリは 2.3.0 で gem ライブラリとして切り離されました。2.3.0
+以降ではそちらを利用してください。
+
+ * [[url:https://rubygems.org/gems/net-telnet]]
+
 = class Net::Telnet < SimpleDelegator
 
 このクラスは telnet のクライアント機能を提供します。
