@@ -2377,10 +2377,11 @@ pattern の形式は [[man:tr(1)]] と同じです。
 指定文字以外が置換の対象になります。
 
 replace に対しても `-' による範囲指定が可能です。
-例えば、[[m:String#upcase]] を tr で書くと、
+例えば、[[m:String#upcase]] を tr! で書くと、
 
-  p "foo".tr('a-z', 'A-Z')
-  => "FOO"
+  str = "foo"
+  p str.tr!('a-z', 'A-Z') #=> "FOO"
+  p str                   #=> "FOO"
 
 となります。
 
