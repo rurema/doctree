@@ -111,6 +111,22 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 
   デフォルトの内部エンコーディングを指定します。
 
+: --enable feature
+
+  指定した feature を有効にします。以下のいずれかを指定できます。
+//emlist{
+    * gems            rubygems (default: enabled)
+    * rubyopt         RUBYOPT 環境変数 (default: enabled)
+#@since 2.3.0
+    * did_you_mean    did_you_mean (default: enabled)
+    * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
+#@end
+//}
+
+: --disable
+
+  指定した feature(--enable を参照)を無効にします。
+
 : -e script
 
   コマンドラインからスクリプトを指定します。-eオ
