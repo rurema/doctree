@@ -103,6 +103,14 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   のみを変更します。
 #@end
 
+: --external-encoding encoding
+
+  デフォルトの外部エンコーディングを指定します。
+
+: --internal-encoding encoding
+
+  デフォルトの内部エンコーディングを指定します。
+
 : -e script
 
   コマンドラインからスクリプトを指定します。-eオ
