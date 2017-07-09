@@ -305,12 +305,32 @@ Method オブジェクトが引数を取らなければ空の配列を返しま�
  デフォルト値が指定されたオプショナルな引数
 : :rest
  * で指定された残りすべての引数
+#@since 2.1.0
+: :keyreq
+ 必須のキーワード引数
+#@end
+#@since 2.0.0
+: :key
+ デフォルト値が指定されたオプショナルなキーワード引数
+: :keyrest
+ ** で指定された残りのキーワード引数
+#@end
 : :block
  & で指定されたブロック引数
 
 例:
+#@since 2.1.0
+  m = Class.new{define_method(:m){|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}}.instance_method(:m)
+  m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+#@else
+#@since 2.0.0
+  m = Class.new{define_method(:m){|x, y=42, *other, k_x: 42, **k_other, &b|}}.instance_method(:m)
+  m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
+#@else
   m = Class.new{define_method(:m){|x, y=42, *other, &b|}}.instance_method(:m)
   m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
+#@end
+#@end
   File.method(:symlink).parameters #=> [[:req], [:req]]
 
 @see [[m:Proc#parameters]]
