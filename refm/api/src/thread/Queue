@@ -93,7 +93,7 @@ close 後は以下のように動作します。
 
  * [[m:Thread::Queue#closed?]] は true を返します
  * [[m:Thread::Queue#close]] は無視されます
- * [[m:Thread::Queue#enq]]/push/<< は nil を返します
+ * [[m:Thread::Queue#enq]]/push/<< は [[c:ClosedQueueError]] を発生します
  * [[m:Thread::Queue#empty?]] が false を返す場合は [[m:Thread::Queue#deq]]/pop/shift は通常通りオブジェクトを返します
 
 また、[[c:ClosedQueueError]] は [[c:StopIteration]] を継承しているため、
