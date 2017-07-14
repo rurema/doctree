@@ -202,7 +202,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 #@since 2.0.0
 #@# 参考: [[ruby-dev:45341]]
---- pending_interrupt?(error = nil) -> boolean
+--- pending_interrupt?(error = nil) -> bool
 
 非同期割り込みのキューが空かどうかを返します。
 
