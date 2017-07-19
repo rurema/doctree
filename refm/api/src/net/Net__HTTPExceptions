@@ -6,7 +6,7 @@ HTTP 例外クラスです。
 
   * [[c:Net::HTTPError]]
   * [[c:Net::HTTPRetriableError]]
-  * [[c:Net::HTTPServerError]]
+  * [[c:Net::HTTPServerException]]
   * [[c:Net::HTTPFatalError]]
 
 また、例外を発生させるためには [[m:Net::HTTPResponse#value]] を
@@ -45,8 +45,8 @@ include Net::HTTPExceptions
 
 HTTP ステータスコード 5xx を受け取ったという例外です。
 
-クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
-れた(認証が必要、リソースが存在しないなどで)ことを示します。
+サーバがエラーを起こしているなど、サーバ側で処理を完了することがで
+きないことを表しています。
 
 = class Net::HTTPBadResponse < StandardError
 HTTP のレスポンスが不正であった場合に発生する例外です。
