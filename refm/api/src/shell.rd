@@ -13,6 +13,7 @@ sh/csh の制御文は Ruby の機能を用いて実現します。
 
 ==== Example 1:
 
+  require 'shell'
   sh = Shell.cd("/tmp")
   sh.mkdir "shell-test-1" unless sh.exists?("shell-test-1")
   sh.cd("shell-test-1")
@@ -30,6 +31,7 @@ sh/csh の制御文は Ruby の機能を用いて実現します。
 
 ==== Example 2:
 
+  require 'shell'
   sh = Shell.cd("/tmp")
   sh.transact do
     mkdir "shell-test-1" unless exists?("shell-test-1")
@@ -49,6 +51,8 @@ sh/csh の制御文は Ruby の機能を用いて実現します。
 
 ==== Example 3: Using Pipe
 
+  require 'shell'
+  sh = Shell.new
   sh.cat("/etc/printcap") | sh.tee("tee1") > "tee2"
   (sh.cat < "/etc/printcap") | sh.tee("tee11") > "tee12"
   sh.cat("/etc/printcap") | sh.tee("tee1") >> "tee2"
@@ -56,6 +60,8 @@ sh/csh の制御文は Ruby の機能を用いて実現します。
 
 ==== Example 4:
 
+  require 'shell'
+  sh = Shell.new
   print sh.cat("/etc/passwd").head.collect {|line| /keiju/ =~ line }
 
 
@@ -82,6 +88,7 @@ OS上のコマンドを実行するにはまず, Shellのメソッドとして�
             指定しない場合はcommand と同じになります。
 
 例)
+  require 'shell'
   Shell.def_system_command "ls"
   # ls を定義
 
@@ -106,6 +113,7 @@ commandを削除します.
 @param command 削除するコマンドの文字列を指定します。
 
 動作例：
+  require 'shell'
   Shell.def_system_command("ls")
   # ls を定義
   Shell.undef_system_command("ls")
@@ -135,6 +143,7 @@ commandを削除します.
 
 使用例: ls -la | sort -k 5 のような例。
 
+  require 'shell'
   Shell.def_system_command("ls")
   Shell.alias_command("lsla", "ls", "-a", "-l")
   Shell.def_system_command("sort")
@@ -154,6 +163,7 @@ commandのaliasを削除します.
 @raise NameError alias で指定したコマンドが無い場合に発生します。
 
 使用例: ls -la | sort -k 5 のような例。
+  require 'shell'
   Shell.def_system_command("ls")
   Shell.alias_command("lsla", "ls", "-a", "-l")
   Shell.def_system_command("sort")
@@ -179,6 +189,7 @@ system_path上にある全ての実行可能ファイルをShellに定義する.
 
 使用例: ls -l | head -n 5 のような例。
 
+  require 'shell'
   Shell.install_system_commands
   sh = Shell.new
   sh.verbose = false
@@ -208,6 +219,7 @@ system_path上にある全ての実行可能ファイルをShellに定義する.
 
 使用例：カレントディレクトリを表示
 
+  require 'shell'
   sh = Shell.new
   puts sh.pwd.to_s
 

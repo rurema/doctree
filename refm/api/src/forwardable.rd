@@ -23,6 +23,7 @@ category DesignPattern
 
 例:
 
+  require 'forwardable'
   class Foo
     extend Forwardable
     
@@ -96,6 +97,7 @@ def_delegator は def_instance_delegator の別名になります。
 
 例:
 
+  require 'forwardable'
   class MyQueue
     extend Forwardable
     attr_reader :queue
@@ -160,6 +162,7 @@ def_delegator は def_instance_delegator の別名になります。
 
 例:
 
+  require 'forwardable'
   g = Goo.new
   g.extend SingleForwardable
   g.def_delegator("@out", :puts)
@@ -167,6 +170,7 @@ def_delegator は def_instance_delegator の別名になります。
 
 また、[[c:SingleForwardable]] はクラスやモジュールに対して以下のようにする事もできます。
 
+  require 'forwardable'
   class Implementation
     def self.service
       puts "serviced!"

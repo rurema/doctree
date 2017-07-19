@@ -17,6 +17,7 @@ m17n 機能を使うほうがよいでしょう。MIMEのデコード等面倒�
 
 === 使用例
 
+  require 'kconv'
   newstring = Kconv.kconv(string, Kconv::JIS, Kconv::AUTO)
   newstring = Kconv.tojis(string)
   newstring = Kconv.toeuc(string)
@@ -25,6 +26,7 @@ m17n 機能を使うほうがよいでしょう。MIMEのデコード等面倒�
 
 または
 
+  require 'kconv'
   newstring = string.kconv(Kconv::JIS, Kconv::AUTO)
   newstring = string.tojis
   newstring = string.toeuc
