@@ -7,10 +7,6 @@ nkf を Ruby から使うためのライブラリです。
 nkf(Network Kanji code conversion Filter, [[url:https://osdn.net/projects/nkf/]]) を
 Ruby から使うためのモジュールです。
 
-#@since 1.8.2
-Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
-#@end
-
 === 使い方
 
 以下は、漢字コード変換コマンドの例です。
@@ -54,9 +50,6 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
   end
 
 === オプション文字列
-
-#@since 1.8.2
-==== Ruby 1.8.2 以降
 
   -b 入力がバッファリングされる(デフォルト)
   -u 入力がバッファリングされない
@@ -161,74 +154,6 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
 #@# -Z0 の挙動は JISX0208附属書4,5を参照しているようだが
 #@# 違いもある
 
-#@else
-==== Ruby 1.8.2 より前のバージョン
-
-NKF 1.7 相当です。
-#@# Ruby では無意味なオプションもあるかもしれません
-
-  -b   バッファリング出力を行う。(デフォルト)
-  -u   出力時に、バッファリングしない。
-  -t   何もしない。
-
-  -j   JISコードを出力する。(デフォルト)
-  -e   EUCコードを出力する。
-  -s   シフトJISコードを出力する。
-
-  -i?  JIS漢字を指示するシーケンスとして ESC-'$'-?を使用する。
-       (デフォルトは、ESC-'$'-'B')
-  -o?  1バイト英数文字セットを指示するシーケンスとして、ESC-
-       '('-?を使用する。(デフォルトは、ESC-'('-'B')
-
-  -r   ROT13/47の変換をする。
-  -v   バージョンを表示する。
-  -T   テキストモードで出力する。(MS-DOS上でのみ効力を持つ)
-
-  -m   MIME を解読する。(default on)
-       ISO-2022-JP(base64)とISO-8859-1(Q encode)のみを解読する。
-       ISO-8859-1 (Latin-1) を解読する時は、-lフラグも必要である。
-         -mB  MIME base64 stream を解読する。ヘッダなどは取り除くこと。
-         -mQ  MIME quoted stream を解読する。
-         -m0  MIME を解読しない。
-
-  -l   0x80-0xfeのコードをISO-8859-1 (Latin-1)として扱う。
-       JISコードアウトプットとの組合せみのみ有効。
-       -s, -e, -xとは両立しない。
-
-  -f?  一行?文字になるように簡単な整形をおこなう。デフォルトは60文字である。
-
-  -Z   X0208中の英数字と若干の記号をASCIIに変換する。
-         -Z1 はX0208間隔をASCII spaceに変換する。
-         -Z2 はX0208間隔をASCII space 二つに変換する。
-
-  -J -E -S -X -B
-       期待される入力コードの性質を指定する。
-         -J   ISO-2022-JPを仮定する。
-         -E   日本語EUC(AT&T)を仮定する。
-         -S   MS漢字を仮定する。X0201仮名も仮定される。
-         -X   MS漢字中にX0201仮名があると仮定する。
-         -B   壊れた(Broken)JISコード。ESCがなくなったと仮定する。
-         -B1  ESC-(, ESC-$ のあとのコードを問わない
-         -B2  改行のあとに強制的にASCIIに戻す
-
-  -x   通常おこなわれるX0201仮名->X0208の仮名変換をしないで、X0201仮名を保存する。
-       入力は、MS-Kanjiの1byte仮名、SO/SI、ESC-(-I, SSOを受け付ける。
-       出力は、日本語EUC中ではSSO、JISでは ESC-'('-I を使う。
-
-  -O   ファイル out_file に出力が保存されます。
-       ファイル名が指定されていない場合は、'nkf.out'又は'wnkf.out'に出力する。
-
-  -c   行末にCRコード(0D)を追加(拡張機能 -T と併用不可)
-  -d   行末からCRコード(0D)を削除(拡張機能 -T と併用不可)
-#@end
-
-=== BUGS
-
-Ruby 1.8.2 に添付されている NKF は
-Unicode 入力時の自動判定の精度が落ちています。
-Ruby 1.8.3 以降にバージョンアップするか、
-できるだけ明示的に文字コードを指定するようにしましょう。
-
 === 参考
 
   * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:http://magazine.rubyist.net/?0009-BundledLibraries#l15]]
@@ -252,179 +177,87 @@ NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 @param str 変換対象の文字列です。
 
 === 注意
+
 このメソッドは(nkf コマンドがそうであるように)、MIME Base64 の
 デコード処理がデフォルトでオンになっています。この動作を無効にしたけ
 れば opt に '-m0' を含めてください。
 
-#@until 1.9.1
---- guess(str) -> Integer
-#@else
 --- guess(str) -> Encoding
-#@end
 
 文字列 str の漢字コードを推測して返します。
 
 返される値は、NKF モジュールのモジュール定数です。
-#@until 1.9.1
-ruby 1.8.2 より前は現在の NKF.guess1 と同じものです。
-ruby 1.8.2 以降では NKF.guess2 と同じものです。
-#@end
 
 返される値(すなわち、推測可能なエンコーディング)は以下のいずれかです。
   * NKF::JIS
   * NKF::EUC
   * NKF::SJIS
   * NKF::UNKNOWN
-#@since 1.8.2
   * NKF::UTF8
   * NKF::UTF16
-#@since 1.9.1
   * Encoding::EUCJP_MS
   * Encoding::CP51932
   * Encoding::WINDOWS_31J
-#@end
-#@end
 
 @param str 推測対象の文字列です。
-
-#@until 1.9.1
-#@since 1.8.2
---- guess1(str) -> Integer
-
-ruby 1.8.1 以前の NKF.guess と同じものです。
-
-@param str 推測対象の文字列です。
-#@end
-
-#@since 1.8.2
---- guess2(str) -> Integer
-
-nkf2の漢字コード自動判定ルーチンを利用したものです。
-
-@param str 推測対象の文字列です。
-#@end
-#@end
 
 == Constants
 
-#@until 1.9.1
---- JIS -> Integer
-#@else
 --- JIS -> Encoding
-#@end
+
 JIS コードを表します。
 
-#@until 1.9.1
---- EUC -> Integer
-#@else
 --- EUC -> Encoding
-#@end
 
 EUC コードを表します。
 
-#@until 1.9.1
---- SJIS -> Integer
-#@else
 --- SJIS -> Encoding
-#@end
 
 SJIS コードを表します。
 
-#@until 1.9.1
---- BINARY -> Integer
-#@else
 --- BINARY -> Encoding
-#@end
 
 バイナリ列を表します。
 
-#@until 1.9.1
---- UNKNOWN -> Integer
-#@else
 --- UNKNOWN -> nil
-#@end
 
 コード判定に失敗したことを表します。
 
-#@since 1.8.2
-#@until 1.9.1
---- NOCONV -> Integer
-#@else
 --- NOCONV -> nil
-#@end
+
 コードを変換しないことを表します。
 
 NKFモジュール自体からは利用しません。
 
-#@end
-
-#@since 1.8.2
-#@until 1.9.1
---- AUTO -> Integer
-#@else
 --- AUTO -> nil
-#@end
-コードを自動判別することを表します。
 
 NKFモジュール自体からは利用しません。
 
-#@end
-
-#@since 1.8.2
-#@until 1.9.1
---- ASCII -> Integer
-#@else
 --- ASCII -> Encoding
-#@end
 
 ASCII コードを表します。
-#@end
 
-#@since 1.8.2
-#@until 1.9.1
---- UTF8 -> Integer
-#@else
 --- UTF8 -> Encoding
-#@end
 
 UTF-8 コードを表します。
-#@end
 
-#@since 1.8.2
-#@until 1.9.1
---- UTF16 -> Integer
-#@else
 --- UTF16 -> Encoding
-#@end
 
 UTF-16 (BigEndian) コードを表します。
-#@end
 
-#@since 1.8.2
-#@until 1.9.1
---- UTF32 -> Integer
-#@else
 --- UTF32 -> Encoding
-#@end
 
 UTF-32 (BigEndian) コードを表します。
-#@end
 
-
-#@since 1.8.2
 --- VERSION -> String
+
 "#{NKF::NKF_VERSION} (#{NKF_RELEASE_DATE})" と
 あらわされる文字列です。
 
 --- NKF_VERSION -> String
+
 nkf 自体のバージョンを表す文字列です。
 
 --- NKF_RELEASE_DATE -> String
+
 nkf のリリース日を表す文字列です。
-
-#@until 1.8.5
---- REVISION -> String
-この定数は使うべきではありません。
-
-#@end
-#@end
