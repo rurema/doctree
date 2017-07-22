@@ -362,6 +362,31 @@ self を返します。
     str << 65  # 文字AのASCIIコード
     p str    # => "stringXXXYYYA"
 
+#@since 2.4.0
+--- concat(*arguments) -> self
+
+self に複数の文字列を破壊的に連結します。
+
+引数の値が整数である場合は [[m:Integer#chr]] の結果に相当する文字を末尾に追加します。追加する文字のエンコーディングは self.encoding です。
+
+self を返します。
+
+@param arguments 複数の文字列もしくは 0 以上の整数
+
+例:
+
+    str = "foo"
+    str.concat
+    p str    # => "foo"
+
+    str = "foo"
+    str.concat "bar", "baz"
+    p str    # => "foobarbaz"
+
+    str = "foo"
+    str.concat("!", 33, 33)
+    p str    # => "foo!!!"
+#@end
 
 --- =~(other) -> Integer
 
@@ -3002,6 +3027,22 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
   a = "world"
   a.prepend("hello ") # => "hello world"
   a                   # => "hello world"
+
+#@since 2.4.0
+--- prepend(*arguments) -> String
+複数の文字列を先頭に破壊的に追加します。
+
+@param arguments 追加したい文字列を指定します。
+
+例:
+  a = "!!!"
+  a.prepend # => "!!!"
+  a         # => "!!!"
+
+  a = "!!!"
+  a.prepend "hello ", "world" # => "hello world!!!"
+  a                           # => "hello world!!!"
+#@end
 
 --- b -> String
 
