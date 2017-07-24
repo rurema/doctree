@@ -1,6 +1,6 @@
 category Network
 
-OpenSSL([[url:http://www.openssl.org]])
+OpenSSL([[url:https://www.openssl.org/]])
 を Ruby から扱うためのライブラリです。
 
 このドキュメントでは SSL/TLS の一般的事項については

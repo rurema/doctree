@@ -179,7 +179,7 @@ untagged な応答はコマンドの送信とは非同期的にサーバから�
     Myers, J., "IMAP4 ACL extension", RFC 2086, January 1997.
 
   * [OSSL]
-    [[url:http://www.openssl.org]]
+    [[url:https://www.openssl.org/]]
 
   * [RSSL]
     [[url:http://savannah.gnu.org/projects/rubypki]]
