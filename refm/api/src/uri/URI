@@ -177,6 +177,12 @@ URI 文字列をデコードした文字列を返します。
 
 #@since 1.9.2
 このメソッドは obsolete です。
+
+代わりに
+[[m:CGI.unescape]],
+[[m:URI.decode_www_form]],
+[[m:URI.decode_www_form_component]]
+などの使用を検討してください。
 #@end
 
 例:
