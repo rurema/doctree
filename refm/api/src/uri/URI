@@ -198,18 +198,10 @@ application/x-www-form-urlencoded 形式のデータをデコードし、
 enc で指定したエンコーディングの文字列が URL エンコードされたものと
 みなし、エンコーディングを付加します。
 
-「_charset_ hack」はサポートされていません。
-これで指定されたエンコーディングと Ruby のエンコーディングとの
-対応がはっきりしないからです。これに関しては
-[[url:http://www.w3.org/TR/html5/parsing.html#character-encodings-0]]
-も見てください。
-
 このメソッドは
-[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
+[[url:http://url.spec.whatwg.org/#concept-urlencoded-parser]]
 にもとづいて実装されています。
-
-#@# HTML5の仕様はまだ更新中のためURLが変更されているようである。
-#@# 今後も変更される可能性があることに注意。
+そのため「&」区切りのみに対応していて、「;」区切りには対応していません。
 
   ary = URI.decode_www_form("a=1&a=2&b=3")
   p ary                  #=> [['a', '1'], ['a', '2'], ['b', '3']]
