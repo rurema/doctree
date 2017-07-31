@@ -87,8 +87,6 @@ String オブジェクトは自身のエンコーディング情報を持ちま�
 インスタンスメソッドはエンコーディングに従い、1バイトではなく1文字を単位として動作します。
 エンコーディングの変換にはメソッド [[m:String#encode]] を使います。
 
-動作例:  (注)一行目にmagic commentが必要です。
-  # vim:set fileencoding=UTF-8:
   p "いろは".size      #=> 3 
   p "漢字"[0]          #=> "漢"
   p "山本山".reverse   #=> "山本山" (回文なので分からないですね)
@@ -114,8 +112,6 @@ String オブジェクトは自身のエンコーディング情報を持ちま�
 文字列の結合も同様です。異なるエンコーディング同士の文字列を結合する時は
 明示的にエンコーディングを変換する必要があります。
 
-動作例:  (注)一行目にmagic commentが必要です。
-  # vim:set fileencoding=UTF-8:
   s = "いろは"
   a = s.encode("EUC-JP")
   b = s.encode("UTF-8")
@@ -123,7 +119,7 @@ String オブジェクトは自身のエンコーディング情報を持ちま�
  
   s = "合".encode("EUC-JP")
   p s + "\u{4f53}".encode("EUC-JP")   #=> "合体"
-  p s + "\u{4f53}"                    #=> ArgumentError 
+  p s + "\u{4f53}"                    #=> Encoding::CompatibilityError
 
 [[m:String#eql?]] はハッシュのキーの比較に使われますので、
 ハッシュのキーに非 ASCII 文字列を使う場合には注意が必要です。
