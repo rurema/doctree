@@ -204,7 +204,7 @@ Rake タスクを定義します。
 
 例:
    desc "Run the Unit Tests"
-   task :test => [:build]
+   task :test => [:build] do
      runtests
    end
 
