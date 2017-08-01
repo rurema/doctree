@@ -281,5 +281,5 @@ Rake タスクを定義します。
 @param path 分割するパスを指定します。
 
 例:
-   split_all("a/b/c") =>  ['a', 'b', 'c']
+   split_all("a/b/c") # =>  ['a', 'b', 'c']
 
