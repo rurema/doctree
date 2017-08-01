@@ -488,9 +488,9 @@ select 要素を生成します。
     # <INPUT TYPE="radio" NAME="name" VALUE="bar">bar
     # <INPUT TYPE="radio" NAME="name" VALUE="baz">baz
   
-  radio_group("name", ["foo&quot;], ["bar", true], "baz")
+  radio_group("name", ["foo"], ["bar", true], "baz")
     # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
-    # <INPUT TYPE=&quot;radio" CHECKED NAME="name" VALUE="bar">bar
+    # <INPUT TYPE="radio" CHECKED NAME="name" VALUE="bar">bar
     # <INPUT TYPE="radio" NAME="name" VALUE="baz">baz
   
   radio_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
