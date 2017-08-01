@@ -268,7 +268,7 @@ opts がハッシュである場合には、"Name" と "Password" をキーと�
   # 1つめの引数が文字列の場合
   telnet.login("your name", "your password")
   # 1つめの引数がハッシュの場合
-  telnet.login("Name" => "your name", "Password" => your password")
+  telnet.login("Name" => "your name", "Password" => "your password")
 
 
 --- waitfor(opt) -> String|nil
