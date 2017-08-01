@@ -164,7 +164,7 @@ C の構造体型に対応する Ruby のクラスを構築して返します。
 
 @param signature 構造体の各要素を文字列で表現したものの配列
 
-  require 'dl/import
+  require 'dl/import'
   
   module M
     extend DL::Importer
@@ -199,7 +199,7 @@ C の共用体型に対応する Ruby のクラスを構築して返します。
     uint64_t u64;
   } epoll_data_t;
 は、Ruby上では
-  require 'dl/import
+  require 'dl/import'
   
   module M
     extend DL::Importer
