@@ -255,7 +255,7 @@ Procをカリー化します
   # 足りない引数には nil が渡される
   proc{|a,b| [a,b]}.call(1) # => [1, nil]
   # 配列1つだと展開される
-  proc{|a,b| [a,b]}.call([1,2]) => [1,2]
+  proc{|a,b| [a,b]}.call([1,2]) # => [1,2]
   # lambdaの場合これらはすべて ArgumentError となる
    
   # &が付いた仮引数で生成される Proc は lambda? が偽となる
