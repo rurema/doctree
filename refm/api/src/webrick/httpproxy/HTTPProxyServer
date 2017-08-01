@@ -51,8 +51,8 @@
   nil を指定した場合なにもしません。デフォルトは nil です。
 //emlist{
  handler = proc{|req, res|
-   res.body.gsub!(/です。/e, 'でんがな。')
-   res.body.gsub!(/ます。/e, 'まんがな。')
+   res.body.gsub!(/です。/, 'でんがな。')
+   res.body.gsub!(/ます。/, 'まんがな。')
  }
  s = WEBrick::HTTPProxyServer.new( { :ProxyContentHandler => handler } )
 //}
