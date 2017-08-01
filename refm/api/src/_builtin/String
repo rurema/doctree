@@ -2871,7 +2871,7 @@ self を指定したエンコーディングに変換した文字列を作成し
   # 存在しないのでそのまま変換しようとすると Encoding::UndefinedConversionError が発生する
   str = "\u00b7\u2014"
   str.encode("Windows-31J", fallback: { "\u00b7" => "\xA5".force_encoding("Windows-31J"),
-                                        "\u2014" => "\x{815C}".force_encoding("Windows-31J") })
+                                        "\u2014" => "\x81\x5C".force_encoding("Windows-31J") })
 
 @see [[m:String#encode!]]
 
