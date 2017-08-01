@@ -17,7 +17,7 @@ FTP URI を表すクラスです。
   #=> #<URI::FTP:0x201bd9cc URL:ftp://www.example.com/path;type=a>
 #@since 1.8.7
   
-  p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i').to_s
+  p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
   #=> 'ftp://example.com/%2Ffoo;type=i'
 #@end
 
