@@ -931,7 +931,7 @@ nameという属性名の属性がない場合は nil を返します。
   a = doc.get_elements("/root/a").first
   
   p a.attributes["att"] # => "<"
-  p a.attributes["bar:att"] " => "2"
+  p a.attributes["bar:att"] # => "2"
 
 
 #@since 1.8.2
