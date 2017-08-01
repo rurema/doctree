@@ -80,13 +80,13 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 
   class Baz
     def initialize
-      ObjectSpace.define_finalizer self, eval %q{
+      ObjectSpace.define_finalizer self, eval(%q{
         proc {
           raise "baz" rescue puts $!
           raise "baz2"
           puts "baz3"
         }
-      }, TOPLEVEL_BINDING
+      }, TOPLEVEL_BINDING)
     end
   end
   Baz.new
