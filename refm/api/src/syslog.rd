@@ -251,7 +251,7 @@ include Syslog::Macros
 このモジュールにはシステムで使用可能なLOG_*定数、モジュール関数が定義さ
 れています。
 
-  例:
+例:
     require 'syslog'
     include Syslog::Constants
 
