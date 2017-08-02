@@ -34,6 +34,8 @@ bigdecimal は浮動小数点数演算ライブラリです。
 
 例3: 1.2 - 1.0 と 0.2 との比較
 
+  require "bigdecimal"
+  
   (BigDecimal.new("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
 
   (1.2 - 1.0) == 0.2 # => false
@@ -49,6 +51,7 @@ bigdecimal は浮動小数点数演算ライブラリです。
 
 例:
 
+  require "bigdecimal"
   BigDecimal("1.0") / BigDecimal("0.0")  #=> infinity
   BigDecimal("-1.0") / BigDecimal("0.0")  #=> -infinity
 
@@ -56,6 +59,7 @@ bigdecimal は浮動小数点数演算ライブラリです。
 [[m:Kernel.#BigDecimal]] の引数に "Infinity" や "-Infinity" を指定して
 ください。(大文字小文字を区別します)
 
+  require "bigdecimal"
   BigDecimal("Infinity")  # => #<BigDecimal:f74a2ebc,'Infinity',4(4)>
   BigDecimal("+Infinity") # => #<BigDecimal:f74a2e6c,'Infinity',4(4)>
   BigDecimal("-Infinity") # => #<BigDecimal:f74a2e1c,'-Infinity',4(4)>
@@ -70,16 +74,19 @@ bigdecimal は浮動小数点数演算ライブラリです。
 
 例:
 
+  require "bigdecimal"
   BigDecimal("0.0") / BigDecimal("0.0") # => #<BigDecimal:f74490d8,'NaN',4(24)>
 
 NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
 [[m:Kernel.#BigDecimal]] の引数に "NaN" を指定してください。(大文字小文
 字を区別します)
 
+  require "bigdecimal"
   BigDecimal("NaN")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
 
 NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
 
+  require "bigdecimal"
   BigDecimal("NaN") == 0.0               # => false
   BigDecimal("NaN") == BigDecimal("NaN") # => false
 
@@ -89,16 +96,19 @@ NaN はどのような値と比較しても一致しません。(NaN 自身を�
 
 負の非常に小さな [[c:BigDecimal]] の値は -0 を表す値になります。
 
+  require "bigdecimal"
   BigDecimal.new("1.0") / BigDecimal.new("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
 
 正の非常に小さな [[c:BigDecimal]] の値は 0 を表す値になります。
 
+  require "bigdecimal"
   BigDecimal.new("1.0") / BigDecimal.new("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
 
 精度については [[m:BigDecimal.mode]] も併せて参照してください。
 
 また、0.0 と -0.0 は比較した場合に同じ値であるとみなされます。
 
+  require "bigdecimal"
   BigDecimal("0.0") == BigDecimal("-0.0") # => true
 
 これは数学的には特に意味がない事に注意してください。数学的な 0 は符号を持ちません。
@@ -134,6 +144,8 @@ BigDecimal オブジェクトが右にあるオブジェクトを
 従って、BigDecimal オブジェクトが右にある場合も大抵は大丈夫です。
 ただ、現在の Ruby インタプリタの仕様上、文字列が左にあると計算できません。
 
+  require "bigdecimal"
+  require "bigdecimal/math"
   a = BigMath.E(20)
   c = "0.123456789123456789123456789" * a   # エラー
 
@@ -207,6 +219,7 @@ frac[0]=1234、frac[1]=5678、frac[2]=4321、 exponent=1、sign=2
 例えば、以下のようなプログラムは全く誤差無しで計算することができます。
 以下の例は、一行に一つの数値が書いてあるファイル file の合計数値を求めるものです。
 
+   require "bigdecimal"
    file = File::open(....,"r")
    s = BigDecimal::new("0")
    while line = file.gets
