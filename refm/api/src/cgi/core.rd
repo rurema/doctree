@@ -129,7 +129,7 @@ status パラメータには以下の文字列が使えます。
                 "language"   => "ja",
                 "expires"    => Time.now + 30,
                 "cookie"     => [cookie1, cookie2],
-                "my_header1" => "my_value"
+                "my_header1" => "my_value",
                 "my_header2" => "my_value"})
 
 例：
