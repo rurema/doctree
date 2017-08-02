@@ -221,6 +221,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
          self の最大有効桁数は n より若干大きい値が採用されます。最大有
          効桁数は以下のような割り算を実行するとき等に意味を持ちます。
 //emlist{
+  require "bigdecimal"
   BigDecimal("1")    / BigDecimal("3")    # => 0.3333333333 33E0
   BigDecimal("1",10) / BigDecimal("3",10) # => 0.3333333333 3333333333 33333333E0
 //}
@@ -284,6 +285,8 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 計算結果が非数(NaN)やゼロによる除算になったときの処理を定義することができます。
 
 //emlist{
+require 'bigdecimal'
+flag = false # デフォルト値
 f = BigDecimal::mode(BigDecimal::EXCEPTION_NaN,flag)
 f = BigDecimal::mode(BigDecimal::EXCEPTION_INFINITY,flag)
 f = BigDecimal::mode(BigDecimal::EXCEPTION_UNDERFLOW,flag)
@@ -317,6 +320,8 @@ flag が false(デフォルト)なら、例外は発行されません。計算�
 
 計算途中の丸め操作の指定ができます。
 
+  require 'bigdecimal'
+  flag = BigDecimal::ROUND_HALF_UP # デフォルト値
   f = BigDecimal::mode(BigDecimal::ROUND_MODE,flag)
 
 の形式で指定します。
@@ -346,6 +351,8 @@ n を指定しない、または n が nil の場合は、現状の最大桁数�
 [[m:BigDecimal#add]]/ [[m:BigDecimal#sub]] / [[m:BigDecimal#mult]] /
 [[m:BigDecimal#div]]) の桁数制限は limit より優先されます。
 
+    require 'bigdecimal'
+    n = 0 # デフォルト値
     mf = BigDecimal::limit(n)
 
 @param n 新しい最大桁数を正の整数で指定します。
@@ -359,6 +366,7 @@ n を指定しない、または n が nil の場合は、現状の最大桁数�
 
 Ruby の [[c:Float]] クラスが保持できる有効数字の数を返します。
 
+    require 'bigdecimal'
     p BigDecimal::double_fig  # ==> 20 (depends on the CPU etc.)
 
 double_figは以下の C プログラムの結果と同じです。
@@ -587,9 +595,11 @@ self 以下の最大整数を返します。
                  生します。
 
 #@since 1.9.2
+  require "bigdecimal"
   BigDecimal("1.23456").floor   # => 1
   BigDecimal("-1.23456").floor  # => -2
 #@else
+  require "bigdecimal"
   BigDecimal("1.23456").floor   # => #<BigDecimal:1769e30,'0.1E1',9(36)>
   BigDecimal("-1.23456").floor  # => #<BigDecimal:1769ca8,'-0.2E1',9(36)>
 #@end
@@ -600,6 +610,7 @@ n >= 0 なら、小数点以下 n + 1 位の数字を操作します
 n が負のときは小数点以上 n 桁目を操作します
 (小数点位置から左に少なくとも n 個の 0 が並びます)。
 
+  require "bigdecimal"
   BigDecimal("1.23456").floor(4).to_f   # => 1.2345
   BigDecimal("15.23456").floor(-1).to_f # => 10.0
 
@@ -618,9 +629,11 @@ self 以上の整数のうち、最も小さい整数を計算し、その値を
                  生します。
 
 #@since 1.9.2
+  require "bigdecimal"
   BigDecimal("1.23456").ceil   # => 2
   BigDecimal("-1.23456").ceil  # => -1
 #@else
+  require "bigdecimal"
   BigDecimal("1.23456").ceil   # => #<BigDecimal:113ae38,'0.2E1',9(36)>
   BigDecimal("-1.23456").ceil  # => #<BigDecimal:113acb0,'-0.1E1',9(36)>
 #@end
@@ -631,6 +644,7 @@ n >= 0 なら、小数点以下 n + 1 位の数字を操作します
 n が負のときは小数点以上 n 桁目を操作します
 (小数点位置から左に少なくとも n 個の 0 が並びます)。
 
+  require "bigdecimal"
   BigDecimal("1.23456").ceil(4).to_f   # => 1.2346
   BigDecimal("15.23456").ceil(-1).to_f # => 20.0
 
@@ -656,9 +670,11 @@ n が負のときは小数点以上 n 桁目を操作します
 「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
 
 #@since 1.9.2
+  require "bigdecimal"
   BigDecimal("1.23456").round   # => 1
   BigDecimal("-1.23456").round  # => -1
 #@else
+  require "bigdecimal"
   BigDecimal("1.23456").round   # => #<BigDecimal:2241e48,'0.1E1',9(36)>
   BigDecimal("-1.23456").round  # => #<BigDecimal:2241cc0,'-0.1E1',9(36)>
 #@end
@@ -667,6 +683,7 @@ n が負のときは小数点以上 n 桁目を操作します
 n が正の時は、小数点以下 n+1 位の数字を丸めます(小数点以下を、最大 n 桁にします)。
 n が負のときは小数点以上 n 桁目を丸めます(小数点位置から左に少なくとも n 個の 0 が並びます)。
 
+  require "bigdecimal"
   BigDecimal("1.23456").round(4).to_f    # => 1.2346
   BigDecimal("15.23456").round(-1).to_f  # => 20.0
 
@@ -674,10 +691,13 @@ n が負のときは小数点以上 n 桁目を丸めます(小数点位置か�
 れた方法で丸め操作を実行します。
 
 #@since 1.9.3
+  require "bigdecimal"
   BigDecimal("1.23456").round(3,BigDecimal::ROUND_HALF_EVEN).to_f   # => 1.235
 #@else
+  require "bigdecimal"
   BigDecimal("1.23456").round(3,BigDecimal::ROUND_HALF_EVEN).to_f   # => 1.234
 #@end
+  require "bigdecimal"
   BigDecimal("1.23356").round(3,BigDecimal::ROUND_HALF_EVEN).to_f   # => 1.234
 
 @see [[m:BigDecimal.mode]]
@@ -702,6 +722,7 @@ n が正の時は、小数点以下 n+1 位の数字を切り捨てます
 n が負のときは小数点以上 n 桁目を操作します
 (小数点位置から左に少なくとも n 個の 0 が並びます)。
 
+  require "bigdecimal"
   BigDecimal("1.23456").truncate(4).to_f    # => 1.2345
   BigDecimal("15.23456").truncate(-1).to_f  # => 10.0
 
@@ -709,6 +730,7 @@ n が負のときは小数点以上 n 桁目を操作します
 
 self の絶対値を返します。
 
+  require 'bigdecimal'
   BigDecimal('5').abs.to_i  # => 5
   BigDecimal('-3').abs.to_i # => 3
 
@@ -741,20 +763,24 @@ self を文字列に変換します (デフォルトは "0.xxxxxEn" の形にな
 
 @param n 出力の形式を [[c:Fixnum]] または [[c:String]] で指定します。
 
+    require "bigdecimal"
     BigDecimal("1.23456").to_s  #  ==> "0.123456E1"
 
 引数 n に正の整数が指定されたときは、小数点で分けられる左右部分を、
 それぞれ n 桁毎に空白で区切ります。
 
+    require "bigdecimal"
     BigDecimal("0.1234567890123456789").to_s(10)   # => "0.1234567890 123456789E0"
 
 引数 n に正の整数を表す文字列を指定することもできます。
 
+    require "bigdecimal"
     BigDecimal("0.1234567890123456789").to_s("10") # => "0.1234567890 123456789E0"
 
 文字列の最初に '+' または ' ' を付けると、値が正の場合先頭に '+' または
 ' ' が付きます。負の場合は常に '-' が付きます。
 
+    require "bigdecimal"
     BigDecimal("0.123456").to_s(" 3") # => " 0.123 456E0"
     BigDecimal("0.123456").to_s("+3") # => "+0.123 456E0"
     BigDecimal("-0.123456").to_s("3") # => "-0.123 456E0"
@@ -762,6 +788,7 @@ self を文字列に変換します (デフォルトは "0.xxxxxEn" の形にな
 さらに文字列の最後に指数形式 ('E' または 'e') か指数を使わない形式
 ('F' または 'f') かを指定出来ます。デフォルトは指数形式です。
 
+    require "bigdecimal"
     BigDecimal("123.456").to_s("E")     # => "0.123456E3"
     BigDecimal("123.456").to_s("e")     # => "0.123456E3"
                                         # (小文字で指定しても出力は 'E' になる)
@@ -812,6 +839,7 @@ false を返します。
 
 self が 0 のときに true を返します。それ以外のときに false を返します。
 
+  require "bigdecimal"
   BigDecimal("0").zero? # => true
   BigDecimal("1").zero? # => false
 
@@ -819,6 +847,7 @@ self が 0 のときに true を返します。それ以外のときに false �
 
 self が 0 以外のときに self を返します。0 のときに nil を返します。
 
+  require "bigdecimal"
   BigDecimal("0").nonzero? # => nil
   BigDecimal("1").nonzero? # => #<BigDecimal:f7236228,'0.1E1',4(8)>
 
@@ -828,6 +857,7 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 符号 (NaNのときは 0、それ以外は+1か-1になります)、
 仮数部分の文字列("xxxxxxx")と、基数(10)、更に指数 n を配列で返します。
 
+    require "bigdecimal"
     a = BigDecimal::new("3.14159265")
     f, x, y, z = a.split
 
@@ -843,6 +873,7 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 
 [[c:BigDecimal]] オブジェクトを表す文字列を返します。
 
+  require "bigdecimal"
   BigDecimal.new("1234.5678").inspect
   # => "#<BigDecimal:b7ea1130,'0.12345678E4',8(12)>"
 
@@ -908,6 +939,7 @@ self を n で割った余りを返します。
 
 @param n self を割る数を指定します。
 
+  require 'bigdecimal'
   x = BigDecimal.new((2**100).to_s)
   ( x %  3).to_i # => 1
   (-x %  3).to_i # => 2
@@ -924,6 +956,7 @@ self を n で割った余りを返します。
 
 @param n self を割る数を指定します。
 
+  require 'bigdecimal'
   x = BigDecimal.new((2**100).to_s)
   x.remainder(3).to_i     # => 1
   (-x).remainder(3).to_i  # => -1
@@ -949,6 +982,7 @@ self が other と等しい場合に true を、そうでない場合に false �
 
 それぞれの値は [[m:BigDecimal#coerce]] で変換して比較される場合があります。
 
+  require 'bigdecimal'
   BigDecimal.new('1.0') == 1.0 # => true
 
 --- <(other) -> bool
@@ -984,6 +1018,7 @@ self の符号を反転させたものを返します。
 [[m:BigDecimal._load]] で復元可能な文字列を返します。
 [[m:Marshal.#dump]] から呼び出されます。
 
+  require 'bigdecimal'
   inf = BigDecimal.new('Infinity')
   # => #<BigDecimal:1e16fa8,'Infinity',9(9)>
   s = Marshal.dump(inf)
@@ -1006,6 +1041,7 @@ self] という配列にして返します。
 
 例:
 
+  require "bigdecimal"
   a = BigDecimal.new("1.0")
   b = a / 2.0 # => 0.5
 
