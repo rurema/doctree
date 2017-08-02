@@ -151,6 +151,7 @@ API を呼び出します。
 
 例えば、引数のバッファに書き込む関数を呼び出すには以下のようにします。
 
+  require 'Win32API'
   api = Win32API.new('foo.dll', 'foo', 'p', 'v')
   buf = "\0" * 256
   api.call(buf)
@@ -159,6 +160,7 @@ API を呼び出します。
 #@# あらい: 2001-03-23 まだ試してない。あってるかな？
 #@# バグ？: 2004-01-29 obj.call([args.pack("p3")].pack("P"))のような？
 
+  require 'Win32API'
   api = Win32API.new('foo.dll', 'foo', 'p', 'v')
   args = ["\0" * 256, "\0" * 256, "\0" * 256]
   api.call(args.pack("p3"))
