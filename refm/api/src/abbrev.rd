@@ -32,6 +32,8 @@
 
 @return 短縮形をキー、元の文字列を値とするハッシュを返します。
 
+  require 'abbrev'
+  
   # words に同じ文字列が含まれている場合は
   # 以下のようにその文字列しか返しません。
   pp Abbrev.abbrev(%w[ruby ruby]).sort
@@ -68,6 +70,7 @@ self が文字列の配列の場合、self から一意に決まる短縮形を�
 @param pattern [[c:Regexp]] か [[c:String]] を指定します。
 
 
+  require 'abbrev'
   p %w[ruby rubyist].abbrev
   #=> {"ruby"    => "ruby",
   #    "rubyi"   => "rubyist",
