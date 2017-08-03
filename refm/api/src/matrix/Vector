@@ -61,7 +61,7 @@ Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されま�
     end
   end
   
-  v = Vector[Complex(1,1),Complex(2,2),Complex(3,3)}
+  v = Vector[Complex(1,1),Complex(2,2),Complex(3,3)]
   p v.abs #=> 5.291502622 # Math.sqrt(28)
   p v.r   #=> 'sqrt': undefined method `Rational'
 
