@@ -62,8 +62,8 @@
 %d は数値のプレフィクスを取ることができます。
 
 例:
-   'a/b/c/d/file.txt'.pathmap("%2d")   => 'a/b'
-   'a/b/c/d/file.txt'.pathmap("%-2d")  => 'c/d'
+   'a/b/c/d/file.txt'.pathmap("%2d")  # => 'a/b'
+   'a/b/c/d/file.txt'.pathmap("%-2d") # => 'c/d'
 
 また、%d, %p, %f, %n, %x, %X には単純な文字列置換を行うための
 置換パターンを表すパラメータを指定することが出来ます。
@@ -204,7 +204,7 @@ Rake タスクを定義します。
 
 例:
    desc "Run the Unit Tests"
-   task :test => [:build]
+   task :test => [:build] do
      runtests
    end
 
@@ -281,5 +281,5 @@ Rake タスクを定義します。
 @param path 分割するパスを指定します。
 
 例:
-   split_all("a/b/c") =>  ['a', 'b', 'c']
+   split_all("a/b/c") # =>  ['a', 'b', 'c']
 
