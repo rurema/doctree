@@ -86,9 +86,9 @@ category File
   # Absolute mode
 #@end
   require 'fileutils'
-  FileUtils.chmod(0644, %w(my.rb your.rb his.rb her.rb)
+  FileUtils.chmod(0644, %w(my.rb your.rb his.rb her.rb))
   FileUtils.chmod(0755, 'somecommand')
-  FileUtils.chmod(0755, '/usr/bin/ruby', :verbose => true
+  FileUtils.chmod(0755, '/usr/bin/ruby', :verbose => true)
 #@since 1.9.3
   # Symbolic mode
   require 'fileutils'
