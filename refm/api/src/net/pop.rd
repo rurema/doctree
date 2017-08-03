@@ -150,7 +150,7 @@ Net::POP3 クラスのかわりに Net::APOP クラスを使うと、
   
   # use APOP authentication if $isapop == true
   pop = Net::POP3.APOP($isapop).new('apop.example.com', 110)
-  pop.start(YourAccount', 'YourPassword') {|pop|
+  pop.start('YourAccount', 'YourPassword') {|pop|
     # 残りのコードは同じ
   }
 
@@ -738,7 +738,7 @@ all と mail は obsolete です。
   require 'net/pop'
 
   Net::POP3.start('pop.example.com', 110,
-                  'YourAccount, 'YourPassword') {|pop|
+                  'YourAccount', 'YourPassword') {|pop|
     pop.mails.each do |m|
       puts m.pop
     end
