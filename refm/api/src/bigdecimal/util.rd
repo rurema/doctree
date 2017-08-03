@@ -42,6 +42,8 @@ BigDecimal オブジェクトに変換する機能を提供します。
 自身を一度 [[m:Float#to_s]] で文字列に変換してから
 [[m:Kernel.#BigDecimal]] で生成するので、精度に注意してください。
 
+  require 'bigdecimal'
+  require 'bigdecimal/util'
   1.0.to_d.to_s # => "0.1E1"
   (1.0/0).to_d.to_s # => "Infinity"
 
