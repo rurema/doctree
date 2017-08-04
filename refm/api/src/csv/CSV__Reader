@@ -26,6 +26,7 @@ CSVデータを解析して、[[c:CSV::StringReader]]を返します。
 例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
 例:
+  require 'csv'
   CSV::Reader.parse("1,2,3\nA,B,C\n"){|row|
     p row
   }

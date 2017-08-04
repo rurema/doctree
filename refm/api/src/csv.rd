@@ -72,6 +72,8 @@ include Enumerable
 
 === 読み込み
 
+  require 'csv'
+
   # ファイルから一行ずつ
   CSV.foreach("path/to/file.csv") do |row|
     # use row here...
@@ -90,6 +92,8 @@ include Enumerable
 
 === 書き込み
 
+  require 'csv'
+
   # ファイルへ書き込み
   CSV.open("path/to/file.csv", "wb") do |csv|
     csv << ["row", "of", "CSV", "data"]
@@ -106,10 +110,14 @@ include Enumerable
 
 === 一行変換
 
+  require 'csv'
+
   csv_string = ["CSV", "data"].to_csv   # => "CSV,data"
   csv_array  = "CSV,String".parse_csv   # => ["CSV", "String"]
 
 === ショートカット
+
+  require 'csv'
 
   CSV             { |csv_out| csv_out << %w{my data here} }  # to $stdout
   CSV(csv = "")   { |csv_str| csv_str << %w{my data here} }  # to a String
@@ -431,6 +439,8 @@ ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 
 例:
 
+  require 'csv'
+
   # UTF-32BE な CSV ファイルを読み込んで UTF-8 な row をブロックに渡します
   CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 
@@ -626,6 +636,8 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 例:
 
+  require 'csv'
+ 
   CSV.read( path, { headers:           true,
                     converters:        :numeric,
                     header_converters: :symbol }.merge(options) )
@@ -1023,12 +1035,14 @@ CSVファイルを読み込んでパースします。
 
 例:
 
+  require 'csv'
   CSV.open("/temp/test.csv", 'r') do |row|
     puts row.join("<>")
   end
 
 tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外で指定
 
+  require 'csv'
   CSV.open("/temp/test.tsv", 'r', "\t") do |row|
     puts row.join("<>")
   end
@@ -1039,6 +1053,7 @@ tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外�
 
 例:
 
+  require 'csv'
   CSV.open("/temp/test.csv", 'w') do |writer|
     writer << ["ruby", "perl", "python"]
     writer << ["java", "C", "C++"]
@@ -1063,6 +1078,7 @@ tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外�
 
 例:
 
+  require 'csv'
   CSV.foreach('test.csv'){|row|
     puts row.join(':')
   }
@@ -1113,6 +1129,7 @@ path で指定されたファイルを書き込みモードで開き、ブロッ
 例えば、["a", "", nil, "b"] の配列を渡した場合に a, "", , b という行をファイルに書き込みます。
 
 例:
+  require 'csv'
   a = ["1","ABC","abc"]
   b = ["2","DEF","def"]
   c = ["3","GHI","ghi"]
@@ -1137,6 +1154,7 @@ str_or_readable で指定された文字列をパースし配列の配列に変�
           Cr を行区切りとしたい場合は ?\r を渡します。
 
 例:
+  require 'csv'
   CSV.parse("A,B,C\nd,e,f\nG,H,I"){|rows|
     p rows
   }
@@ -1181,6 +1199,7 @@ src で指定された配列をパースして csv形式の文字列として(�
 例えば、["a", "", nil, "b"] の配列を渡した場合に a,"", , b という文字列を生成します。
 
 例:
+  require 'csv'
   row1 = ['a', 'b', 'c']
   row2 = ['1', '2', '3']
   row3 = ['A', 'B', 'C']
@@ -1211,6 +1230,7 @@ CSV形式の文字列をパースしてCSV1行(row)分のデータを配列に�
 例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
 例:
+   require 'csv'
    src = "a,b,c\n1,2\nA,B,C,D"
    i = 0
 

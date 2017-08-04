@@ -219,6 +219,7 @@ include Enumerable
 @param rows [[c:CSV::Rows]] のインスタンスか配列を指定します。
 
 以下と同じです。
+  require 'csv'
   csv = CSV.new("a,b,c\n,1,2,3", headers: true)
   table = csv.read
   rows = [[4, 5, 6], [7, 8, 9]]
@@ -241,6 +242,7 @@ CSV の文字列に変換して返します。
 false を指定するとヘッダを出力しません。
 
 例:
+  require 'csv'
   csv = CSV.new("a,b,c\n,1,2,3", headers: true)
   table = csv.read
   table.to_csv                       # => "a,b,c\n1,2,3\n"

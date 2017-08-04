@@ -16,6 +16,7 @@ str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスの�
           Cr を行区切りとしたい場合は ?\r を渡します。
 
 例:
+  require 'csv'
   s = "1,2,3,4\n"
   CSV::Writer.generate(s){|data|
     data << ['a', 'b', 'c']
@@ -46,6 +47,7 @@ str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスの�
 例えば、["a", "", nil, "b"] の配列を渡した場合に a, "", , b という行が追加されます。
 
 例:
+  require 'csv'
   csv_w = CSV::Writer.generate("")
   row = [1, 2, 3]
   csv_w.add_row(row)         #=> "1,2,3\n"
