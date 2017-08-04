@@ -55,6 +55,7 @@
 @param horizontal_char 横の線に使用する文字を指定します。
 
 例:
+  require "curses"
   win = Curses::Window.new(5,5,5,5)
   win.box(?|, ?-)
 
