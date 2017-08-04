@@ -158,6 +158,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print({"foo" => "bar"}.to_yaml)
   # => ---
   foo: bar
@@ -230,6 +231,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   Foo = Struct.new(:bar, :baz)
   print Foo.new("bar", "baz").to_yaml
   # => --- !ruby/struct:Foo
@@ -270,6 +272,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print [1, 2, 3].to_yaml
   # => ---
   - 1
@@ -359,6 +362,7 @@ nilを返します。
 この値が true になる場合、self.to_yaml した結果、"!binary ..." というよ
 うな文字列を返します。
 
+  require 'yaml'
   print "テスト".to_yaml
   # => --- !binary |
   44OG44K544OI
@@ -385,6 +389,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print "foo".to_yaml # => --- foo
 
 = reopen Symbol
@@ -425,6 +430,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print :foo.to_yaml # => --- :foo
 
 = reopen Range
@@ -465,6 +471,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print (1..10).to_yaml
   # => --- !ruby/range
   begin: 1
@@ -509,6 +516,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
 
 = reopen Time
@@ -549,6 +557,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
 
 = reopen Date
@@ -585,6 +594,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print Date.today.to_yaml # => --- 2011-12-31
 
 = reopen Integer
@@ -621,6 +631,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print 1.to_yaml # => --- 1
   print -1.to_yaml # => --- -1
 
@@ -658,6 +669,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print 1.0.to_yaml        # => --- 1.0
   print -1.0.to_yaml       # => --- -1.0
   print (1.0/0.0).to_yaml  # => --- .Inf
@@ -698,6 +710,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print true.to_yaml # => --- true
 
 = reopen FalseClass
@@ -734,6 +747,7 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print false.to_yaml # => --- false
 
 = reopen NilClass
@@ -770,4 +784,5 @@ nilを返します。
 #@end
             てください。
 
+  require 'yaml'
   print nil.to_yaml # => ---
