@@ -8,6 +8,7 @@ DNS モジュールを使うことで、さまざまなリソースを直接ル�
 [[lib:socket]] ライブラリの [[m:IPSocket.getaddress]] などが使用できます。
 
 === 例:
+  require "resolv"
   Resolv.getaddress("www.ruby-lang.org")
   Resolv.getname("210.251.121.214").to_s
   Resolv::DNS.new.getresources("www.ruby-lang.org", Resolv::DNS::Resource::IN::A).collect {|r| r.address}
@@ -48,6 +49,7 @@ resolvers の各要素は each_address と each_name という
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
+  require "resolv"
   Resolv.getaddress("localhost") #=> "127.0.0.1"
   Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
@@ -77,6 +79,7 @@ IP アドレス address のホスト名をルックアップし、
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
+  require "resolv"
   Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
 
 @param address IPアドレスを文字列で与えます。
@@ -265,6 +268,7 @@ resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
 というキーが利用可能です。
 それぞれの意味は [[man:resolv.conf(5)]] を参照してください。
 
+  require "resolv"
    Resolv::DNS.new(:nameserver => ['210.251.121.21'],
                    :search => ['ruby-lang.org'],
                    :ndots => 1)
@@ -1505,6 +1509,7 @@ labels は [[c:Resolv::DNS::Label::Str]] の配列を与えます。
 other が self のサブドメインであるかどうかを返します。
 
 === 例
+  require "resolv"
   domain = Resolv::DNS::Name.create("y.z")
   p Resolv::DNS::Name.create("w.x.y.z").subdomain_of?(domain) #=> true
   p Resolv::DNS::Name.create("x.y.z").subdomain_of?(domain) #=> true
