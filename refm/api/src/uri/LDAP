@@ -25,6 +25,7 @@ LDAP URI を表すクラスです。[[RFC:2255]] (Obsoleted by [[RFC:4510]], [[R
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
 例:
+  require 'uri'
   p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]).to_s   
   #=> "ldap://example.com:1/a?b?c?d?e=f"
 

@@ -19,6 +19,7 @@ HTTP URI を表すクラスです。
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
 例:
+  require 'uri'
   newuri = URI::HTTP.build({:host => 'www.example.com', :path => '/foo/bar'})  
   newuri = URI::HTTP.build([nil, "www.example.com", nil, "/path", "query", 'fragment'])
 

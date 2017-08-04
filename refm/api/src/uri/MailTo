@@ -58,6 +58,7 @@ build と異なり、デフォルトでは引数の正当性を検査しませ�
 自身の e-mail アドレスを文字列で返します。
 
 例:
+  require 'uri'
   p URI.parse("mailto:nospam@example.com").to     #=> "nospam@example.com"
 
 --- to=(s) 
@@ -69,6 +70,7 @@ build と異なり、デフォルトでは引数の正当性を検査しませ�
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 例:
+  require 'uri'
   m = URI.parse("mailto:nospam@example.com")
   m.to = "nospaaaam@example.com"
   p m                                        #=> #<URI::MailTo:0xb7bf0614 URL:mailto:nospaaaam@example.com>
@@ -78,6 +80,7 @@ build と異なり、デフォルトでは引数の正当性を検査しませ�
 自身のヘッダーを文字列の配列の配列として設定します。
 
 例: 
+ require 'uri'
  m = URI.parse("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
  p m.headers #=> [["subject", "subscribe"], ["cc", "myaddr"]]
 
@@ -90,6 +93,7 @@ build と異なり、デフォルトでは引数の正当性を検査しませ�
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 例: 
+  require 'uri'
   m = URI.parse("mailto:nospam@example.com")
   m.headers =  URI.escape("subject=hello hello")
 

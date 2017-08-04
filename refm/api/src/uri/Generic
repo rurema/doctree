@@ -233,6 +233,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 場合はブラケットを削除した文字列を返しますがそれ以外は同じ文字列を返し
 ます。
 
+  require 'uri'
   u = URI("http://[::1]/bar")
   p u.hostname      # => "::1"
   p u.host          # => "[::1]"
@@ -245,6 +246,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 [[m:URI::Generic#host]] にブラケットを追加した文字列を設定しますがそれ
 以外は同じ処理を行います。
 
+  require 'uri'
   u = URI("http://foo/bar")
   p u.to_s                  # => "http://foo/bar"
   u.hostname = "::1"
@@ -274,6 +276,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 
 自身の path を文字列で返します。設定されていない場合は nil を返します。
 
+  require 'uri'
   p URI.parse('http://example.com/hoge').path       #=> "/hoge"
   p URI.parse('http://example.com').path            #=> ""
   p URI.parse('mailto:nospam@localhost').path       #=> nil
@@ -295,6 +298,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 自身の query を文字列で返します。設定されていない場合は nil を返します。
 
 例:
+  require 'uri'
   p URI.parse('http://example.com/?hoge').query   #=> "hoge"
 
 --- query=(s)
@@ -312,6 +316,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 自身の opaque を文字列で返します。設定されていない場合は nil を返します。
 
 例:
+ require 'uri'
  p URI.parse('http://example.com/').opaque       #=> nil
  p URI.parse('mailto:nospam@localhost').opaque   #=> "nospam@localhost"
  p URI.parse('urn:ietf:rfc:1149').opaque         #=> "ietf:rfc:1149"
@@ -353,6 +358,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 自身に scheme が設定されているなら true を返します。そうでない場合は false を返します。
 
 例:
+  require 'uri'
   p URI.parse('http://example.com/').absolute?    #=> true
   p URI.parse('./').absolute?                     #=> false
 
@@ -361,6 +367,7 @@ userinfo が「username:password」の形式である場合は、username 部を
 自身に scheme が設定されていないなら true を返します。そうでない場合は false を返します。
 
 例:
+  require 'uri'
   p URI.parse('http://example.com/').relative?    #=> false
   p URI.parse('./').relative?                     #=> true
 
@@ -374,6 +381,7 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 @param rel 連結したいパスを文字列か URI オブジェクトで与えます。
 
 例:
+  require 'uri'
   u = URI.parse('http://example.com/')
   u.merge!('/foo/bar.html')
   p u.to_s                                   #=> http://example.com/foo/bar.html
@@ -430,6 +438,7 @@ URI オブジェクトを正規化して返します。ホスト名を小文字�
 構成要素がなければ '/' をセットします。
 
 例:
+  require 'uri'
   u = URI.parse('http://Example.Com')
   p u.to_s                            #=> "http://Example.Com"
   p u.normalize.to_s                  #=> "http://example.com/"
@@ -439,6 +448,7 @@ URI オブジェクトを正規化して返します。ホスト名を小文字�
 自身が表す URI を文字列として返します。
 
 例:
+ require 'uri'
  p URI.parse('http://example.com/').to_s #=> "http://example.com/"
 
 --- ==(uri)    -> bool
