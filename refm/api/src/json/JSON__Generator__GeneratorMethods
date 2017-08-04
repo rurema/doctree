@@ -121,6 +121,7 @@ alias JSON::Ext::Generator::GeneratorMethods::String
 
 このメソッドは UTF-8 の文字列ではなく生の文字列を JSON に変換する場合に使用してください。
 
+  require 'json'
   "にほんご".encode("euc-jp").to_json_raw_object
   # => {"json_class"=>"String", "raw"=>[164, 203, 164, 219, 164, 243, 164, 180]}
   "にほんご".encode("euc-jp").to_json # source sequence is illegal/malformed (JSON::GeneratorError)
@@ -137,6 +138,7 @@ JSON のオブジェクトから Ruby の文字列を生成して返します。
 
 @param hash キーとして "raw" という文字列を持ち、その値として数値の配列を持つハッシュを指定します。
 
+  require 'json'
   String.json_create({"raw" => [0x41, 0x42, 0x43]}) # => "ABC"
 
 = module JSON::Generator::GeneratorMethods::TrueClass
