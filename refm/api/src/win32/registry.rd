@@ -28,7 +28,7 @@ end
 
   wsh = WIN32OLE.new('WScript.Shell')
   value = wsh.RegRead 'HKLM\Software\Microsoft\Windows\...'
-  wsh.RegWrite 'HKCR\foofile\shell\open\command\', 'REG_SZ', '"C:\..." "%1"'
+  wsh.RegWrite 'HKCR\foofile\shell\open\command\\', 'REG_SZ', '"C:\..." "%1"'
 
 ただし，キーを列挙したり，自由なバイナリ値を読み書きすることができません。
 
