@@ -29,6 +29,7 @@ require 'ftools' とすると、ファイルのコピーや削除などのメソ
 @return コピーに成功したなら true、失敗したなら false を返します。
 
 例:
+  require "ftools"
   # 更新時刻を保持したい場合
   File.copy(from, to)
   stat = File.stat(from)
