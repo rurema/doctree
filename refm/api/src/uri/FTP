@@ -10,6 +10,7 @@ FTP URI を表すクラスです。
 引数の正当性を検査します。
 
 例:
+  require 'uri'
   p URI::FTP.build([nil, "www.example.com", 10020, "/path",  'a'])
   #=> #<URI::FTP:0x201c4f9c URL:ftp://www.example.com:10020/path;type=a>
   
