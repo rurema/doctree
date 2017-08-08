@@ -126,6 +126,7 @@ new(str).hexdigest と等価です。
 
 使用例(SHA256の場合)
 
+        require 'digest'
         digest = Digest::SHA256.file("X11R6.8.2-src.tar.bz2")
         digest.hexdigest
         # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
@@ -314,6 +315,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 
 例: Digest::MD、Digest::SHA1、Digest::SHA512のブロック長を順番に調べる。
 
+  require 'digest'
   ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().block_length } # => [64, 128, 128]
 
 --- digest_length -> Integer
@@ -328,6 +330,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 
 例: Digest::MD、Digest::SHA1、Digest::SHA512のハッシュ値のバイト長を順番に調べる。
 
+  require 'digest'
   ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().digest_length } # => [16, 20, 64]
 
 #@end
@@ -359,6 +362,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 
 例: Digest::MD、Digest::SHA1、Digest::SHA512のクラス名を順番に出力する。
 
+  require 'digest'
   for a in ["MD5", "SHA1", "SHA512"]
     p Digest(a) # => Digest::MD5, Digest::SHA1, Digest::SHA512
   end
