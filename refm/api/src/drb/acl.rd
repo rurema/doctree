@@ -19,6 +19,8 @@ ACLのエントリーは、以下の例に示すように、
 
 === 例
 ACL を単独で用いる例。
+  require "drb/acl"
+
   list = %w[
     deny all
     allow 192.168.1.1
@@ -48,6 +50,8 @@ order に [[c:ACL::DENY_ALLOW]] を指定するとデフォルトで
 すべてのアドレスを拒否します。[[c:ACL::ALLOW_DENY]] を指定すると
 デフォルトですべてのアドレスを許可します。
 
+  require "drb/acl"
+
   list = %w[
     deny all
     allow 192.168.1.1
@@ -75,6 +79,8 @@ addr が ACL で許可されているならば真を返します。
 --- install_list(list) -> ()
 ACL に list で指定したエントリーを追加します。
 
+  require "drb/acl"
+  acl = ACL.new
   acl.install_list(["deny", "192.168.1.45"])
 
 @param list 追加するエントリー
