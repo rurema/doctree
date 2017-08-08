@@ -1428,6 +1428,7 @@ stdscr のカーソルを座標 (x,y) に移動します。
 
 以下のコードと同じです。
 
+  require "curses"
   Curses:Window.attron(A_STANDOUT)
 
 @see [[m:Curses::Window.attrset]]
@@ -1438,6 +1439,7 @@ stdscr のカーソルを座標 (x,y) に移動します。
 
 以下のコードと同じです。
 
+  require "curses"
   Curses.attron(A_NORMAL)
 
 @see [[m:Curses::Window.attrset]]
@@ -1590,6 +1592,7 @@ Sets the color pair attributes to +attrs+.
 
 以下のコードと同じです。
 
+  require "curses"
   Curses.attrset(COLOR_PAIR(+attrs+))
 
 @param attr 
