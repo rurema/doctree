@@ -57,6 +57,7 @@ include Enumerable
 
 例:
 
+  require 'generator'
   g = Generator.new(['A', 'B', 'C', 'Z'])
   p g.current # => 'A'
   p g.current # => 'A'
@@ -76,6 +77,7 @@ include Enumerable
 
 例:
 
+  require 'generator'
   g = Generator.new(['A', 'B', 'C', 'Z'])
   p g.pos     # => 0
   p g.next    # => 'A'
@@ -89,6 +91,7 @@ include Enumerable
 
 例:
 
+  require 'generator'
   g = Generator.new() do |g|
         ['A', 'B', 'C', 'Z'].each{|s|
           g.yield s
@@ -107,6 +110,7 @@ include Enumerable
 
 例:
 
+  require 'generator'
   g = Generator.new() do |g|
         ['A', 'B', 'C', 'Z'].each{|s|
           g.yield s
@@ -125,6 +129,7 @@ Generator.new() {|g|  ... } のブロックの中でしか呼ぶことができ�
 
 例:
 
+  require 'generator'
   g = Generator.new() do |g|
         n = 0
         loop do
@@ -174,6 +179,7 @@ Enumerable オブジェクトのサイズは異なっていても構いません
 
 例:
 
+  require 'generator'
   s = SyncEnumerator.new([1, 2, 3], ['a', 'b'], ['X'])
   s.each{|arry| p arry}
   
