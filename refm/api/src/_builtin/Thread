@@ -622,6 +622,9 @@ safe_level は、[[m:$SAFE]] と同じです。
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
 --- inspect -> String
+#@since 2.5.0
+--- to_s -> String
+#@end
 
 自身を人間が読める形式に変換した文字列を返します。
 
