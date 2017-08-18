@@ -326,6 +326,9 @@ self を other で割った商 q と余り r を、
 
 #@since 1.9.1
 --- round(ndigits = 0)  -> Integer | Float
+#@since 2.4.0
+--- round(ndigits = 0, half: mode)  -> Integer | Float
+#@end
 
 自身ともっとも近い整数もしくは実数を返します。
 
@@ -336,6 +339,14 @@ self を other で割った商 q と余り r を、
        ndigitsが0ならば、小数点以下を四捨五入し、整数を返します。
        ndigitsが0より大きいならば、小数点以下の指定された位で四捨五入されます。
        ndigitsが0より小さいならば、小数点以上の指定された位で四捨五入されます。
+#@since 2.4.0
+@param mode half: キーワード引数が指定されている場合、ちょうど半分の値の丸め方は
+       mode に応じて決まります。サポートされている mode は以下の通りです。
+
+* :up or nil: 0から遠い方に丸められます。
+* :even: もっとも近い偶数に丸められます。
+* :down: 0に近い方に丸められます。
+#@end
 
 @return 指定された引数に応じて、整数もしくは実数を返します。
        ndigitsが0ならば、整数を返します。
@@ -362,6 +373,14 @@ self を other で割った商 q と余り r を、
   t.round(-3)    #=> 94000
   t.round(-100)  #=> 0
 
+#@since 2.4.0
+  2.5.round(half: :up)   #=> 3
+  2.5.round(half: :even) #=> 2
+  2.5.round(half: :down) #=> 2
+  3.5.round(half: :up)   #=> 4
+  3.5.round(half: :even) #=> 4
+  3.5.round(half: :down) #=> 3
+#@end
 
 @see [[m:Float#ceil]], [[m:Float#floor]], [[m:Float#truncate]]
 
