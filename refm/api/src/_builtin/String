@@ -2825,7 +2825,7 @@ true を返します。さもなくば false を返します。
 self を指定したエンコーディングに変換した文字列を作成して返します。引数
 を2つ与えた場合、第二引数は変換元のエンコーディングを意味します。さもな
 くば self のエンコーディングが使われます。
-無引数の場合は、[[m:Encoding.default_internal]] が nil でなければそれが変換先のエンコーディングになり、かつ :invalid => replace と :undef => replace が指定されたと見なされ、nil ならば変換は行われません。
+無引数の場合は、[[m:Encoding.default_internal]] が nil でなければそれが変換先のエンコーディングになり、かつ :invalid => :replace と :undef => :replace が指定されたと見なされ、nil ならば変換は行われません。
 
 @param encoding       変換先のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 @param from_encoding  変換元のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
