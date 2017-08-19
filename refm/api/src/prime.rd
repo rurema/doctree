@@ -9,6 +9,8 @@ category Math
 
 === 例
 
+  require 'prime'
+
   Prime.each(100) do |prime|
     p prime #=> 2, 3, 5, 7, 11, ..., 97
   end
@@ -52,6 +54,7 @@ Prime クラスはシングルトンであると考えてください。Prime �
 なお、利便性のためにデフォルトインスタンスのメソッドをクラスメソッドとしても利用できます。
 
 例:
+  require 'prime'
   Prime.instance.prime?(2)  #=> true
   Prime.prime?(2)           #=> true
 
@@ -83,12 +86,14 @@ Prime クラスはシングルトンであると考えてください。Prime �
         ブロックが与えられなかった場合は、[[c:Enumerator]] と互換性のある外部イテレータを返します。
 
 === 例:
+  require 'prime'
   Prime.each(6).each{|prime| prime }  # => 5
   Prime.each(7).each{|prime| prime }  # => 7
   Prime.each(10).each{|prime| prime } # => 7
   Prime.each(11).each{|prime| prime } # => 11
 
 === 例: 30以下の双子素数
+  require 'prime'
   Prime.each(30).each_cons(2).select{|p,r| r-p == 2} 
     #=> [[3, 5], [5, 7], [11, 13], [17, 19]]
 
@@ -96,6 +101,7 @@ Prime クラスはシングルトンであると考えてください。Prime �
 このメソッドに、真の素数列でない疑似素数を与えるべきではありません。
 
 このメソッドは、素数列の外部イテレータを内部イテレータに変換してRubyらしいプログラミングを提供することが責務です。独自に素数性の保障するのはメソッドの責務ではありません。従って、次のように精度の低い素数生成器を与えると、真に素数とは限らない数列が発生します。
+ require 'prime'
  Prime.each(50, Prime::Generator23.new) do |n|
    p n #=> [2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49]
  end
@@ -113,6 +119,7 @@ Prime クラスはシングルトンであると考えてください。Prime �
           第二要素はその素因数の指数をあらわします。
 
 例:
+  require 'prime'
   Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
   Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 
@@ -145,6 +152,7 @@ Prime クラスはシングルトンであると考えてください。Prime �
 @raise ZeroDivisionError 与えられた数値がゼロである場合に発生します。
 
 例:
+    require 'prime'
     Prime.prime_division(12) #=> [[2,2], [3,1]]
     Prime.prime_division(10) #=> [[2,1], [5,1]]
 
@@ -215,6 +223,7 @@ include Enumerable
 @return ブロックを与えられた場合は self を返します。 ブロックを与えられなかった場合は Enumerator を返します。
 
 例:
+  require 'prime'
   Prime::EratosthenesGenerator.new(10).each_with_index do |prime, index|
     p [prime, index]
   end
@@ -251,6 +260,7 @@ include Enumerable
 また内部的な列挙位置を進めます。
 
 例:
+ require 'prime'
  generator = Prime::EratosthenesGenerator.new
  p generator.next #=> 2
  p generator.next #=> 3
@@ -263,6 +273,7 @@ include Enumerable
 列挙状態を巻き戻します。
 
 例:
+ require 'prime'
  generator = Prime::EratosthenesGenerator.new
  p generator.next #=> 2
  p generator.next #=> 3
@@ -364,6 +375,7 @@ break 後に再度呼び出すと、最初からではなくインスタンス�
 @see [[m:Prime#int_from_prime_division]]
 
 例:
+  require 'prime'
   Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
   Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 
@@ -395,6 +407,7 @@ break 後に再度呼び出すと、最初からではなくインスタンス�
 @see [[m:Prime#prime_division]]
 
 例:
+    require 'prime'
     12.prime_division #=> [[2,2], [3,1]]
     10.prime_division #=> [[2,1], [5,1]]
 
@@ -405,6 +418,7 @@ break 後に再度呼び出すと、最初からではなくインスタンス�
 
 例:
 
+  require 'prime'
   1.prime? # => false
   2.prime? # => true
 
