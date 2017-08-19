@@ -503,6 +503,8 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
 ブロックを省略した場合は、生成された [[c:Socket]]
 オブジェクトが返されます。
 
+  require 'socket'
+
   Addrinfo.udp("0.0.0.0", 9981).bind {|s|
     s.local_address.connect {|s| s.send "hello", 0 }
     p s.recv(10) #=> "hello"

@@ -893,6 +893,8 @@ The service specified is a datagram service (looks up UDP ports)。
 [[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
 定数です。
 
+  require 'socket'
+  
   Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"], Socket::NI_DGRAM)
   # => ["localhost", "syslog"]
   Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"])
@@ -919,6 +921,8 @@ A name is required。名前解決できなかった場合にエラーを返す�
 [[m:Socket.getnameinfo]], [[m:Addrinfo#getnameinfo]] の引数 flags に渡す
 定数です。
 
+  require 'socket'
+  
   # ここでは 192.0.2.18 は名前解決できないアドレス
   Addrinfo.tcp("192.0.2.18", 514).getnameinfo()
   # =>["192.0.2.18", "shell"] 

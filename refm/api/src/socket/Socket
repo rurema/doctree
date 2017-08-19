@@ -54,6 +54,8 @@ Socket クラスの定数として定義されています。domain
 
 例えば、IPv4 の TCP ソケットは以下のように生成されます。
 
+  require 'socket'
+
   s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
 
 なお、[[man:socket(2)]] の domain 引数において AF_ と PF_ のどちらの定数を使用するかについては混乱がありますが、
@@ -589,6 +591,8 @@ msg は受け取ったメッセージ文字列で、 msg_src は
 [[m:Socket.udp_server_loop]] はこのメソッドの用いて以下のようにして
 実装できます。
 
+  require 'socket'
+
   udp_server_sockets(host, port) {|sockets|
     loop {
       readable, _, _ = IO.select(sockets)
@@ -636,6 +640,8 @@ Unix クライアントソケットを生成します。
 引数としてブロックを呼び出します。メソッドの返り値は
 ブロックの評価値となります。また、ブロックの終了後に
 ソケットを [[m:IO#close]] します。
+
+  require 'socket'
 
   # /tmp/sock と通信する
   Socket.unix("/tmp/sock") {|sock|
