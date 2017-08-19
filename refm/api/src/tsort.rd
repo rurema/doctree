@@ -173,6 +173,8 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 @raise TSort::Cyclic 閉路が存在するとき、発生します.
 
 使用例
+  require 'tsort'
+
   g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
   each_node = lambda {|&b| g.each_key(&b) }
   each_child = lambda {|n, &b| g[n].each(&b) }
@@ -199,6 +201,8 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
                   ドを持つオブジェクトを指定します。
 
 使用例
+  require 'tsort'
+
   g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
   each_node = lambda {|&b| g.each_key(&b) }
   each_child = lambda {|n, &b| g[n].each(&b) }
@@ -229,6 +233,8 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
                   ドを持つオブジェクトを指定します。
 
 使用例
+  require 'tsort'
+
   g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
   each_node = lambda {|&b| g.each_key(&b) }
   each_child = lambda {|n, &b| g[n].each(&b) }
@@ -270,6 +276,8 @@ TSort.each_strongly_connected_component_fromは[[c:TSort]]をincludeして
                   ドを持つオブジェクトを指定します。
 
 使用例
+  require 'tsort'
+
   graph = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
   each_child = lambda {|n, &b| graph[n].each(&b) }
   TSort.each_strongly_connected_component_from(1, each_child) {|scc|
