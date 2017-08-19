@@ -38,6 +38,7 @@ nroff プロセスの標準出力から処理結果を受け取る。
 出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の
 配列で返します。
 
+  require 'open3'
   stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
 
 @param cmd 実行するコマンドを指定します。
@@ -69,6 +70,7 @@ nroff プロセスの標準出力から処理結果を受け取る。
 標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返します。
 cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈されます。
 
+  require 'open3'
   stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
 
 @param cmd 実行するコマンドを指定します。
