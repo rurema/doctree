@@ -26,6 +26,7 @@ OpenStruct クラスの [[m:Object#method_missing]] で捕捉され、そのイ�
 
 初期化にハッシュを使用することもできます。
 
+  require 'ostruct'
   son = OpenStruct.new({ :name => "Thomas", :age => 3 })
   p son.name        # => "Thomas"
   p son.age         # => 3
@@ -146,6 +147,7 @@ self の各要素の名前と要素を引数としてブロックを評価しま
 
 例:
 
+  require 'ostruct'
   person = OpenStruct.new('name' => 'John Smith', 'age' => 70)
   person[:age] # => 70, person.age と同じ
 
@@ -159,6 +161,7 @@ self の各要素の名前と要素を引数としてブロックを評価しま
 
 例:
 
+  require 'ostruct'
   person = OpenStruct.new('name' => 'John Smith', 'age' => 70)
   person[:age] = 42 # person.age = 42 と同じ
   person.age # => 42
@@ -171,6 +174,7 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
 @param key キーを任意個指定します。
 
+  require 'ostruct'
   address = OpenStruct.new('city' => "Anytown NC", 'zip' => 12345)
   person = OpenStruct.new('name' => 'John Smith', 'address' => address)
   person.dig(:address, 'zip')          # => 12345
