@@ -8,6 +8,8 @@ strscan は 文字列を高速にスキャンするためのライブラリで�
 StringScanner は文字列スキャナクラスです。
 簡単に高速なスキャナを記述できます。
 
+    require 'strscan'
+
     s = StringScanner.new('This is an example string')
     s.eos?            #=> false
 
@@ -33,6 +35,8 @@ StringScanner オブジェクトはスキャンする文字列と「スキャン
 スキャンポインタとはスキャンしおわったところを示すインデックスのことです。
 オブジェクト作成直後にはスキャンポインタは文字列先頭にあり、
 その地点でのみマッチを試します。マッチしたらその後ろにポインタを進めます。
+
+    require 'strscan'
 
     ## a string and a scan pointer   ("_" = scan pointer)
 
@@ -62,6 +66,8 @@ StringScanner オブジェクトはスキャンする文字列と「スキャン
 を使ってください。
 
 例: scan, scan_until の動作の違い
+
+  require 'strscan'
 
   def case1
     s = StringScanner.new('test string')
@@ -115,6 +121,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 #@end
 
 使用例
+    require 'strscan'
+
     s = StringScanner.new('This is an example string')
     s.eos?            #=> false
 
@@ -136,6 +144,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 @param nth 前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
            返します。
 
+
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.scan(/\w(\w)(\w*)/) # => "test"
@@ -167,6 +177,8 @@ selfを返します。
 @param str 操作対象の文字列に対し str を破壊的に連結します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test') # => #<StringScanner 0/4 @ "test">
       s.match(/\w(\w*)/)            # => "test"
       s[0]                          # => "test"
@@ -178,6 +190,8 @@ selfを返します。
       s.match(/\w+/)                # => "string"
 
 この操作は StringScanner.new に渡した文字列にも影響することがあります。
+
+      require 'strscan'
 
       str = 'test'
       s = StringScanner.new(str) # => #<StringScanner 0/4 @ "test">
@@ -195,6 +209,8 @@ selfを返します。
 文字列末尾は必ずしも行頭ではありません。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new("test\nstring")
       s.bol?        # => true
       s.scan(/\w+/)
@@ -215,6 +231,8 @@ selfを返します。
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.check(/\w+/) # => "test"
       s.pos          # => 0
@@ -232,6 +250,8 @@ regexp が一致するまで文字列をスキャンします。
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.check_until(/str/) # => "test str"
       s.matched            # => "str"
@@ -244,6 +264,8 @@ regexp が一致するまで文字列をスキャンします。
 末尾以外を指しているなら false を返します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.eos?        # => false
       s.scan(/\w+/)
@@ -269,6 +291,8 @@ regexp が一致するまで文字列をスキャンします。
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.exist?(/s/) # => 3
       s.exist?(//)  # => 0
@@ -412,6 +436,8 @@ StringScannerオブジェクトを表す文字列を返します。
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
+        require 'strscan'
+
         s = StringScanner.new('test string')
         p s.match?(/\w+/)   #=> 4
         p s.match?(/\w+/)   #=> 4
@@ -422,6 +448,8 @@ StringScannerオブジェクトを表す文字列を返します。
 前回のマッチに失敗していると nil を返します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.matched     # => nil
       s.scan(/\w+/) # => "test"
@@ -436,6 +464,8 @@ StringScannerオブジェクトを表す文字列を返します。
 失敗していたら false を返します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.matched?    # => false
       s.scan(/\w+/) # => "test"
@@ -452,6 +482,8 @@ StringScannerオブジェクトを表す文字列を返します。
 マッチしたサイズは文字単位でなくバイト単位となります。
 
 #@since 1.9.1
+  require 'strscan'
+
   def run(encode)
     utf8 = "\u{308B 3073 3044}" # るびい
     s = StringScanner.new(utf8.encode(encode))
@@ -475,6 +507,8 @@ StringScannerオブジェクトを表す文字列を返します。
 #@end
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.matched_size # => nil
       s.scan(/\w+/)  # => "test"
@@ -535,6 +569,8 @@ StringScannerオブジェクトを表す文字列を返します。
 現在のスキャンポインタのインデックスを返します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.pos         # => 0
       s.scan(/\w+/) # => "test"
@@ -552,6 +588,8 @@ StringScannerオブジェクトを表す文字列を返します。
 現在のスキャンポインタのインデックスを文字単位で返します。
 
 使用例
+
+  require 'strscan'
 
   s = StringScanner.new("abcädeföghi")
   s.charpos           # => 0
@@ -599,6 +637,8 @@ StringScannerオブジェクトを表す文字列を返します。
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
 
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.post_match  # => nil
       s.scan(/\w+/) # => "test"
@@ -616,6 +656,8 @@ StringScannerオブジェクトを表す文字列を返します。
 前回マッチを行った文字列のうち、マッチしたところよりも前の
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
+
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.pre_match   # => nil
@@ -638,6 +680,8 @@ pos = 0と同じ動作です。
 
 @return self を返します。
 
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
       s.matched     # => "test"
@@ -653,6 +697,8 @@ pos = 0と同じ動作です。
 具体的には、スキャンポインタが指す位置からの文字列を返します。
 
 スキャンポインタが文字列の末尾を指していたら空文字列 ("") を返します。
+
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.rest         # => "test string"
@@ -673,6 +719,8 @@ pos = 0と同じ動作です。
 代わりに [[m:StringScanner#eos?]] を使ってください。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       p s.eos?        # => false
       p s.rest?       # => true
@@ -691,6 +739,8 @@ stringscanner.rest.size と同じです。
 代わりに[[m:StringScanner#rest_size]] を使ってください。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       p s.rest_size # => 11
       p s.rest.size # => 11
@@ -703,6 +753,8 @@ stringscanner.rest.size と同じです。
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
+        require 'strscan'
+
         s = StringScanner.new('test string')
         p s.scan(/\w+/)   #=> "test"
         p s.scan(/\w+/)   #=> nil
@@ -739,6 +791,8 @@ stringscanner.rest.size と同じです。
          false ならばマッチした部分文字列の長さを返します。
 
 使用例
+  require 'strscan'
+
   s = StringScanner.new('test string')
   p s.scan_full(/\w+/, true, true)     #=> "test"
   p s.scan_full(/\s+/, false, true)    #=> " "
@@ -757,6 +811,8 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => "test str"
       s.matched           # => "str"
@@ -793,6 +849,8 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
 
 使用例
 
+  require 'strscan'
+
   s = StringScanner.new('test string')   
   p s.search_full(/t/, true, true)       #=> "t"
   p s.search_full(/str/, false, true)    #=> "est str"
@@ -809,6 +867,8 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
 @param regexp マッチに使用する正規表現を指定します。
 
 使用例
+        require 'strscan'
+
         s = StringScanner.new('test string')
         p s.skip(/\w+/)   #=> 4
         p s.skip(/\w+/)   #=> nil
@@ -825,6 +885,8 @@ regexp が一致するまで文字列をスキャンします。
 @param regexp マッチに使用する正規表現を指定します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => 8
       s.matched           # => "str"
@@ -835,6 +897,8 @@ regexp が一致するまで文字列をスキャンします。
 スキャン対象にしている文字列を返します。
 
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.string # => "test string"
 
@@ -842,11 +906,15 @@ regexp が一致するまで文字列をスキャンします。
 #@#Ruby 1.8.0 では
 返り値は freeze されています。
 
+      require 'strscan'
+
       s = StringScanner.new('test string')
       s.string.frozen? # => true
 #@else
 #@#Ruby 1.8.1 以降では
 返り値は freeze されていません。
+
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.string.frozen? # => false
@@ -856,6 +924,8 @@ regexp が一致するまで文字列をスキャンします。
 文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。
 この仕様に依存したコードを書かないようにしましょう。
 
+      require 'strscan'
+
       str = 'test string'
       s = StringScanner.new(str)
       s.string == str    # => true
@@ -864,6 +934,8 @@ regexp が一致するまで文字列をスキャンします。
 また、返り値の文字列に対して破壊的な変更もできますが、
 この操作がスキャン対象の文字列を変更することも保証されません。
 この仕様に依存したコードを書かないでください。
+
+      require 'strscan'
 
       str = 'test string'
       s = StringScanner.new(str)
@@ -879,6 +951,8 @@ regexp が一致するまで文字列をスキャンします。
 @return str を返します。
 
 使用例
+      require 'strscan'
+
       str = '0123'
       s = StringScanner.new('test string')
       s.string = str     # => "0123"
@@ -891,6 +965,8 @@ regexp が一致するまで文字列をスキャンします。
 @return self を返します。
 
 pos = self.string.size と同じ動作です。
+
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -907,6 +983,8 @@ pos = self.string.size と同じ動作です。
 
 --- unscan -> self
 スキャンポインタを前回のマッチの前の位置に戻します。
+
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -936,6 +1014,8 @@ pos = self.string.size と同じ動作です。
                  前回のマッチが失敗していた時に発生します。
 #@end
 使用例
+      require 'strscan'
+
       s = StringScanner.new('test string')
       begin
         # マッチを一度も行っていないので、例外が発生する。
@@ -986,6 +1066,8 @@ pos = self.string.size と同じ動作です。
 --- Version -> String
 [[c:StringScanner]] クラスのバージョンを文字列で返します。
 この文字列は [[m:Object#freeze]] されています。
+
+      require 'strscan'
 
       StringScanner::Version           # => "0.7.0"
       StringScanner::Version.frozen?   # => true
