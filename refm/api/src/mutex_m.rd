@@ -23,6 +23,7 @@ category Thread
 
 === 例
 クラスに [[m:Module#include]] する例
+  require "mutex_m"
   class Foo
     include Mutex_m
     ...
