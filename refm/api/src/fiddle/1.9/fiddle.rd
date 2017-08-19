@@ -235,6 +235,8 @@ new でオブジェクトを生成することで利用します。
 
 [[m:Class.new]] を使うことで、サブクラスを明示的に作ることなしに
 コールバックオブジェクトを作ることができます。
+  require 'fiddle'
+  include Fiddle # TYPE_* を使うために include する
   compare = Class.new(Fiddle::Closure){
     def call(x, y)
       x.to_s(1) <=> y
