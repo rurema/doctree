@@ -199,6 +199,7 @@ fname はスクリプトを定義する際のファイル名です。主にエ�
 
 例:
 
+  require 'erb'
   erb = ERB.new(script)
   erb.def_method(MyClass, 'foo(bar)', 'foo.erb')
 
@@ -288,6 +289,7 @@ erb が文字列の時、そのファイルを読み込み ERB で変換した�
 
 例:
 
+  require 'erb'
   class Writer
     extend ERB::DefMethod
     def_erb_method('to_html', 'writer.erb')
