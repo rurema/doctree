@@ -32,6 +32,7 @@ setuid できないプラットフォームでは警告を表示し、何もし�
 
 プロセスが動いているマシンのホスト名を文字列で返します。
 
+  require 'webrick'
   p WEBrick::Utils.getservername   #=> "localhost"
 
 --- random_string(len)    -> String
@@ -40,6 +41,7 @@ A-Z, a-z, 0-9 からなる長さ len のランダムな文字列を返します�
 
 @param len 得たい文字列の長さを整数で指定します。単位はバイトです。
 
+ require 'webrick'
  p WEBrick::Utils.random_string(10)   #=> "xF0jwU4RJd"
 
 --- create_listeners(address, port, logger = nil) -> [TCPServer]

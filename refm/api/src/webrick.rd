@@ -66,6 +66,7 @@ view.rb がCGIスクリプトとして実行されます。http://127.0.0.1:2008
 
 WEBrick のバージョンを表す文字列です。
 
+ require 'webrick'
  p WEBrick::VERSION   #=> "1.3.1"
 
   

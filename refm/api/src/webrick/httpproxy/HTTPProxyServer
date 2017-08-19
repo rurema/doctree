@@ -34,6 +34,7 @@
   受け付けます。デフォルトは nil です。通常は [[c:WEBrick::HTTPAuth::ProxyBasicAuth]] か 
   [[c:WEBrick::HTTPAuth::ProxyDigestAuth]] を使用します。
 //emlist{
+ require 'webrick'
  auth_proc = proc{|req, res|
    unless c = req['proxy-authorization']
      res['Proxy-Authenticate'] = 'Basic realm="WEBrick Proxy"'
@@ -50,6 +51,7 @@
   [[c:WEBrick::HTTPRequest]] オブジェクトを引数として proc.call(req, res) のように呼ばれます。
   nil を指定した場合なにもしません。デフォルトは nil です。
 //emlist{
+ require 'webrick'
  handler = proc{|req, res|
    res.body.gsub!(/です。/, 'でんがな。')
    res.body.gsub!(/ます。/, 'まんがな。')

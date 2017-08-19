@@ -20,6 +20,7 @@ HTTPResponse オブジェクトを生成して返します。
 
 @param config 設定を保存したハッシュを指定します。:HTTPVersion は必須です。
 
+  require 'webrick'
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 
 == Instance Methods
@@ -165,6 +166,7 @@ Content-Type ヘッダの値をセットします。
 レスポンスの Set-Cookie ヘッダの値を表す [[c:WEBrick::Cookie]] オブジェクトの配列です。
 レスポンスに新たに Cookie を加えたい場合はこの配列に [[c:WEBrick::Cookie]] オブジェクトを加えます。
 
+  require 'webrick'
   res.cookies << WEBrick::Cookie.parse_set_cookie(k)
 
 --- each{|key, val| ... }
@@ -281,6 +283,7 @@ HTTP のレスポンスの最初の行の reason phrase をセットします。
 @param url URL を指定します。
 
 例:
+  require 'webrick'
   res.set_redirect WEBrick::HTTPStatus::TemporaryRedirect
 
 --- status           -> Integer

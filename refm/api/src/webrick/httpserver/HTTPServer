@@ -71,6 +71,7 @@ HTTPServer オブジェクトを生成して返します。
 
 @param options サーブレットのコンストラクタの引数を指定します。
 
+  require 'webrick'
   include WEBrick
   srv = HTTPServer.new( { :BindAddress => '127.0.0.1', :Port => 10080 } )
   srv.mount('/img', WEBrick::HTTPServlet::FileHandler, '/home/username/images')
@@ -105,6 +106,7 @@ HTTPServer オブジェクトを生成して返します。
 @param server バーチャルホストを表す WEBrick::HTTPServer オブジェクトを指定します。
 
 
+  require 'webrick'
   include WEBrick
   srv1 = HTTPServer.new( { :Port => 1080, :ServerName => 'hoge.example.com' } )
   srv2 = HTTPServer.new( { :Port => 1080, :ServerName => 'foo.example.com' } )
