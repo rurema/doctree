@@ -716,6 +716,14 @@ yday は 1 から数えます。
 #@end
 #@end
 
+--- hash -> Integer
+
+自身のハッシュ値を返します。
+
+@return ハッシュ値を返します。
+
+@see [[m:Object#hash]]
+
 --- usec         -> Integer
 --- tv_usec      -> Integer
 
