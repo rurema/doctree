@@ -68,6 +68,7 @@ options と facility に指定できる値については
 [[c:Syslog::Constants]] を参照してください。
 
 指定例:
+        require 'syslog'
         Syslog.open('ftpd', Syslog::LOG_PID | Syslog::LOG_NDELAY,
                     Syslog::LOG_FTP)
 
@@ -158,6 +159,7 @@ format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定しま�
 @raise ArgumentError 引数が２つ以上でない場合に発生します。
 
 例:
+  require 'syslog'
   Syslog.open("syslogtest") {|syslog|
     syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
   }
@@ -187,6 +189,7 @@ Syslog#log()のショートカットメソッド。
 @raise RuntimeError syslog がopen されていない場合発生します。
 
 例:
+  require 'syslog'
   Syslog.open("syslogtest") {|syslog|
     syslog.crit("the sky is falling in %d seconds!",5)
   }
@@ -282,6 +285,7 @@ include Syslog::Macros
 #@end
 
 例:
+         require 'syslog'
          Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
 
 --- LOG_UPTO(priority) -> Fixnum
@@ -296,6 +300,7 @@ priorityまでのすべての優先度のマスクを作成します。
 #@end
 
 例:
+         require 'syslog'
          Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 == Constants
