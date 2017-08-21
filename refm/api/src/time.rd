@@ -23,6 +23,7 @@ date を [[m:Date._parse]] によって
 
 ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
+  require 'time'
   Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 
 与えられた時刻に上位の要素がなかったり壊れていた場合、nowの
@@ -39,6 +40,8 @@ date を [[m:Date._parse]] によって
                      Time のインスタンスを返していました。
 #@end
 
+  require 'time'
+
   # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
   # タイムゾーンがGMTとすると:
   Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
@@ -51,6 +54,8 @@ date を [[m:Date._parse]] によって
 
 このメソッドは他のパース用メソッドのフェイルセーフとして
 以下のように使用できます:
+
+  require 'time'
 
   Time.rfc2822(date) rescue Time.parse(date)
   Time.httpdate(date) rescue Time.parse(date)
@@ -159,10 +164,12 @@ date がISO 8601で定義されている形式に準拠していない、
 文字列を [[m:Date._strptime]] を用いて [[c:Time]] オブジェクト
 に変換します。
 
+  require 'time'
   Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
   #=> 2001-02-03 06:05:06 +0900
 
 ブロックを渡すと年の部分をブロックによって変換できます。
+  require 'time'
   Time.strptime('91/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
     if y > 100 then y
     elsif y >= 69 then y + 1900
