@@ -107,6 +107,7 @@ MT19937に基づく疑似乱数生成器を提供するクラスです。
   r2 = Random.new(1)
   p r2.bytes(10) # => "%\xF4\xC1j\xEB\x80G\xFF\x8C/"
 
+#@until 2.0.0
 --- marshal_dump -> Array
 [[m:Random#marshal_load]] で復元可能な配列を返します。
 
@@ -139,7 +140,7 @@ MT19937に基づく疑似乱数生成器を提供するクラスです。
   p r1 == r3 # => true
 
 @see [[m:Random#marshal_dump]]
-
+#@end
 --- rand -> Float
 --- rand(max) -> Integer | Float
 --- rand(range) -> Integer | Float | nil
@@ -245,6 +246,41 @@ C言語レベルで定義されている構造体MTの状態を参照します�
 
 --- left -> Integer
 C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
+
+#@since 2.0.0
+--- marshal_dump -> Array
+[[m:Random#marshal_load]] で復元可能な配列を返します。
+
+動作例:
+  r1 = Random.new(1)
+  a1 = r1.marshal_dump
+  r2 = Random.new(3)
+  p r1 == r2 # => false
+  r3 = r2.marshal_load(a1)
+
+  p r1 == r2 # => true
+  p r1 == r3 # => true
+
+--- marshal_load(array) -> Random
+
+[[m:Random#marshal_dump]] で得られた配列を基に、Randomオブジェクトを復元します。
+
+@param array 三要素以下からなる配列を指定します。
+             何を指定するかは[[m:Random#marshal_dump]]を参考にしてください。
+
+@raise ArgumentError array が3より大きい場合に発生します。
+
+動作例:
+  r1 = Random.new(1)
+  a1 = r1.marshal_dump
+  r2 = Random.new(3)
+  r3 = r2.marshal_load(a1)
+
+  p r1 == r2 # => true
+  p r1 == r3 # => true
+
+@see [[m:Random#marshal_dump]]
+#@end
 
 == Private Singleton Methods
 
