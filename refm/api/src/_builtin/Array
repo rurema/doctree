@@ -609,6 +609,26 @@ compact! は自身から破壊的に nil を取り除き、変更が
     p array          # => [1, 2, 3, 4]
     p a              # => [3, 4]       # こちらは変わらない
 
+#@since 2.4.0
+--- concat(*other_arrays)    -> self
+
+other_arrays の要素を自身の末尾に破壊的に連結します。
+
+@param other_arrays 自身と連結したい配列を指定します。
+
+    [ "a", "b" ].concat( ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
+    [ "a" ].concat( ["b"], ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
+    [ "a" ].concat #=> [ "a" ]
+
+    a = [ 1, 2, 3 ]
+    a.concat( [ 4, 5 ] )
+    a                                 #=> [ 1, 2, 3, 4, 5 ]
+
+    a = [ 1, 2 ]
+    a.concat(a, a)                    #=> [1, 2, 1, 2, 1, 2]
+
+see [[m:Array#+]]
+#@end
 
 --- delete(val)           -> object | nil
 --- delete(val) { ... }   -> object
