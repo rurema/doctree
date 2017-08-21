@@ -24,6 +24,7 @@ include Enumerable
           nil ならば、[[m:Shell.record_separator]]の値が使用されます。
 
 使用例
+  require 'shell'
   sh = Shell.new
   sh.cat("/etc/passwd").each { |line|
     puts line
@@ -37,6 +38,7 @@ srcをフィルタの入力とする。 srcが, 文字列ならばファイル�
 @param src フィルタの入力を, 文字列もしくは,IO オブジェクトで指定します。
 
 使用例
+  require 'shell'
   Shell.def_system_command("head")
   sh = Shell.new
   sh.transact {
@@ -51,6 +53,7 @@ toをフィルタの出力とする。 toが, 文字列ならばファイルに,
 @param to 出力先を指定します。文字列ならばファイルに,IOオブジェクトならばそれに出力します。
 
 使用例
+  require 'shell'
   Shell.def_system_command("tail")
   sh = Shell.new
   sh.transact {
@@ -66,6 +69,7 @@ toをフィルタに追加する。 toが, 文字列ならばファイルに, IO
 @param to 出力先を指定します。文字列ならばファイルに、IOオブジェクトならばそれに出力します。
 
 使用例
+  require 'shell'
   Shell.def_system_command("tail")
   sh = Shell.new
   sh.transact {
@@ -82,6 +86,7 @@ toをフィルタに追加する。 toが, 文字列ならばファイルに, IO
 @return filter を返します。
 
 使用例
+  require 'shell'
   Shell.def_system_command("tail")
   Shell.def_system_command("head")
   Shell.def_system_command("wc")
@@ -102,6 +107,7 @@ filter1 + filter2 は filter1の出力の後, filter2の出力を行う。
 --- to_a -> [String]
 実行結果を文字列の配列で返します。
 
+  require 'shell'
   Shell.def_system_command("wc")
   sh = Shell.new
   puts sh.cat("/etc/passwd").to_a
@@ -109,6 +115,7 @@ filter1 + filter2 は filter1の出力の後, filter2の出力を行う。
 --- to_s -> String
 実行結果を文字列で返します。
 
+  require 'shell'
   Shell.def_system_command("wc")
   sh = Shell.new
 
