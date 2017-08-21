@@ -17,6 +17,7 @@ Emacs のようなキー操作などができます。
 
 例: プロンプト"> "を表示して、ユーザからの入力を取得する。
 
+  require 'readline'
   while buf = Readline.readline("> ", true)
     print("-> ", buf, "\n")
   end
@@ -28,6 +29,7 @@ Emacs のようなキー操作などができます。
 
 例: ヒストリを配列として取得する。
 
+  require 'readline'
   while buf = Readline.readline("> ", true)
     p Readline::HISTORY.to_a
     print("-> ", buf, "\n")
@@ -100,6 +102,8 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 
 例: ^CによるInterrupt例外を捕捉して、端末状態を復帰する。
 
+  require 'readline'
+
   stty_save = `stty -g`.chomp
   begin
     while buf = Readline.readline
@@ -112,6 +116,8 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 
 例: INTシグナルを捕捉して、端末状態を復帰する。
 
+  require 'readline'
+
   stty_save = `stty -g`.chomp
   trap("INT") { system "stty", stty_save; exit }
 
@@ -120,6 +126,8 @@ prompt を出力し、ユーザからのキー入力を待ちます。
   end
 
 また、単に ^C を無視する方法もあります。
+
+  require 'readline'
 
   trap("INT", "SIG_IGN")
 
@@ -130,6 +138,8 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 入力履歴 Readline::HISTORY を使用して、次のようなこともできます。
 
 例: 空行や直前の入力と同じ内容は入力履歴に残さない。
+
+  require 'readline'
 
   while buf = Readline.readline("> ", true)
     # p Readline::HISTORY.to_a
@@ -241,6 +251,7 @@ bool が真ならば同一視します。bool が偽ならば同一視しませ�
 なお、Readline.completion_case_fold= メソッドで指定したオブジェクトを
 そのまま取得するので、次のような動作をします。
 
+  require 'readline'
   Readline.completion_case_fold = "This is a String."
   p Readline.completion_case_fold # => "This is a String."
 
@@ -292,6 +303,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 半角スペース「" "」などの単語を区切る文字を指定すれば、
 連続して入力する際に便利です。
 
+  require 'readline'
   Readline.readline("> ", true)
   Readline.completion_append_character = " "
   > /var/li
@@ -303,6 +315,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 なお、1文字しか指定することはできないため、
 例えば、"string"を指定した場合は最初の文字である"s"だけを使用します。
 
+  require 'readline'
   Readline.completion_append_character = "string"
   p Readline.completion_append_character # => "s"
 
@@ -546,6 +559,7 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
 例:
 
+  require 'readline'
   Readline::HISTORY.to_s #=> "HISTORY"
 
 --- [](index) -> String
@@ -578,13 +592,19 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
 例: 1000000 番目の入力内容が存在しない場合、例外 IndexError が発生します。
 
+  require "readline"
+
   Readline::HISTORY[1000000] #=> 例外 IndexError が発生します。
 
 例: 32 bit のシステムの場合、例外 RangeError が発生します。
 
+  require "readline"
+
   Readline::HISTORY[2 ** 32 + 1] #=> 例外 RangeError が発生します。
 
 例: 64 bit のシステムの場合、例外 RangeError が発生します。
+
+  require "readline"
 
   Readline::HISTORY[2 ** 64 + 1] #=> 例外 RangeError が発生します。
 
