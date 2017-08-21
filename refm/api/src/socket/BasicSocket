@@ -39,6 +39,8 @@
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
 
 返り値のクラスはどのクラスの for_fd を呼びだしたかによって決まります。
+  require 'socket'
+  
   BasicSocket.for_fd(fd) # BasicSocket のインスタンスを返す
   TCPSocket.for_fd(fd) # TCPSocket のインスタンスを返す
 
@@ -82,6 +84,8 @@
 クした文字列を返します。[[man:getpeername(2)]] を参照してください。
 
 例:
+
+  require 'socket'
 
   serv = TCPServer.open("", 0)
   c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
@@ -231,6 +235,8 @@ intポインタを渡します。
 
 引数が1つの場合は [[c:Socket::Option]] で設定値を表現します。
 
+  require 'socket'
+  
   # 真偽値の場合
   #setsockopt could be called like this:
   sock.setsockopt(:SOCKET, :REUSEADDR, true)
@@ -385,6 +391,8 @@ Socket::MSG_* 定数の bitwise OR で表現されています。
 
 残りの要素は補助データ([[c:Socket::AncillaryData]] オブジェクト)です。
 
+  require 'socket'
+  
   # UnixSocket#recv_io を recvmsg で実装する例
   mesg, sender_sockaddr, rflags, *controls = sock.recvmsg(:scm_rights=>true)
   controls.each {|ancdata|

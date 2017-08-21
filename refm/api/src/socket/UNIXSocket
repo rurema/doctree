@@ -44,6 +44,8 @@ Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW などの
 protocol には プロトコルを指定します。0 は Unix domain でのデフォルト値が
 使われます。
 
+  require 'socket'
+
   s1, s2 = UNIXSocket.pair
   s1.send "a", 0
   s1.send "b", 0
