@@ -8,6 +8,8 @@ C の構造体を表すクラスです。
 構造体の各メンバへのアクセサが定義されています。
 このアクセサはシグネチャの型とメンバ名に従って定義されます。
 例えば 
+  require 'fiddle/import'
+  include Fiddle::Importer
   S = struct(["long foo", "void* bar"])
 とすると、 S#foo, S#foo= というアクセサが Integer とやりとり
 するように定義され、 S#bar, S#bar= というアクセサが Fiddle::Pointer

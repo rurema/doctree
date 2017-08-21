@@ -108,6 +108,7 @@ fiddle においては、文字列/整数/[[c:Fiddle::Pointer]]をポインタ�
 
 char * 以外の型のポインタを受け取る関数に対しても文字列を渡します。
 
+ require "fiddle/import"
  module M
    extend Fiddle::Importer
    dlload 'libm.so.6'
