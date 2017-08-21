@@ -11,6 +11,7 @@ Apache の mime.types ファイル形式の file を読み込み
 
 @param file Apache の mime.types ファイル形式のファイルの名前を文字列で指定します。
 
+  require 'webrick'
   p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
   # => {"htm"=>"text/html", "rpm"=>"application/x-rpm", ... }
 
@@ -24,6 +25,7 @@ Apache の mime.types ファイル形式の file を読み込み
 
 @param mime_tab 拡張子をキー、MIME タイプを値とするハッシュを指定します。
 
+  require 'webrick'
   include WEBrick::HTTPUtils
   p mime_type('index.html', DefaultMimeTypes)     #=> "text/html"
   p mime_type('index.html.ja', DefaultMimeTypes)  #=> "text/html"

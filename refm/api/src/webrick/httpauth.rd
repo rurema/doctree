@@ -28,6 +28,7 @@ Basic 認証を行うためのメソッドです。
 
 @raise WEBrick::HTTPStatus::Unauthorized 認証に失敗した場合に発生します。
 
+  require 'webrick'
   srv.mount_proc('/basic_auth') {|req, res|
     HTTPAuth.basic_auth(req, res, "WEBrick's realm") {|user, pass|
       user == 'webrick' && pass == 'supersecretpassword'

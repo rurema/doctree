@@ -13,4 +13,5 @@ HTML のためのユーティリティ関数を提供します。
 
 @param string エスケープしたい文字列を指定します。
 
+  require 'webrick'
   p WEBrick::HTMLUtils.escape('/?q=foo&hl=<ja>')    #=> "/?q=foo&amp;hl=&lt;ja&gt;"

@@ -13,6 +13,7 @@ require webrick/log
 
 [[c:WEBrick::GenericServer]] の設定のデフォルト値を保持したハッシュです。
 
+  require 'webrick'
   WEBrick::Config::General = {
     :ServerName     => Utils.getservername,
     :BindAddress    => nil,   # "0.0.0.0" or "::" or nil
@@ -38,6 +39,7 @@ require webrick/log
 
 [[c:WEBrick::HTTPServer]] の設定のデフォルト値を保持したハッシュです。
 
+  require 'webrick'
   WEBrick::Config::HTTP = {
     :ServerName     => Utils.getservername,
     :BindAddress    => nil,   # "0.0.0.0" or "::" or nil
@@ -78,6 +80,7 @@ require webrick/log
 
 [[c:WEBrick::HTTPServlet::FileHandler]] の設定のデフォルト値を保持したハッシュです。
 
+    require 'webrick'
     WEBrick::Config::FileHandler = {
       :NondisclosureName => [".ht*", "*~"],
       :FancyIndexing     => false,
@@ -130,6 +133,7 @@ falseならばエラー(403 Forbidden)となる。
 
 [[c:WEBrick::HTTPAuth::BasicAuth]] の設定のデフォルト値を保持したハッシュです。
 
+    require 'webrick'
     WEBrick::Config::BasicAuth = {
       :AutoReloadUserDB     => true,
     }
@@ -138,6 +142,7 @@ falseならばエラー(403 Forbidden)となる。
 
 [[c:WEBrick::HTTPAuth::DigestAuth]] の設定のデフォルト値を保持したハッシュです。
 
+    require 'webrick'
     WEBrick::Config::DigestAuth = {
       :Algorithm            => 'MD5-sess', # or 'MD5'
       :Domain               => nil,        # an array includes domain names.
