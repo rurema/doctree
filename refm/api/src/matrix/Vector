@@ -88,6 +88,7 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 
 例:
 
+  require 'matrix'
   v1 = Vector[1, 3, 5, 7]
   v2 = Vector[5.25, 10.5]
   p v1   #=> Vector[1, 3, 5, 7]
@@ -103,6 +104,7 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 
 例:
 
+  require 'matrix'
   a = [1, 2, 3, 4]
   v1 = Vector.elements(a, true)
   v2 = Vector.elements(a, false)
@@ -199,6 +201,7 @@ self の各要素に数 other を乗じたベクトルを返します。
 
 例:
 
+  require 'matrix'
   a = [1, 2, 3.5, 100]
   v1 = Vector.elements(a)
   p v1.*(2)     #=> Vector[2, 4, 7.0, 200]
@@ -293,11 +296,14 @@ self の各要素を数 other で割った行列を返します。
 複素ベクトルの場合は一般に正しい値（要素の絶対値自乗の和の平方根）
 を返しません。
 
+ require 'matrix'
  Vector[3, 4].r # => 5.0
  Vector[Complex(0, 1), 0].r # => Complex(0.0, 1.0)   正しくは 1.0
 
 要素が複素数の場合にも対応したメソッドは以下のように定義できます。
 
+  require 'matrix'
+  
   class Vector
     def norm
       Math.sqrt @elements.inject(0){|sum, z| sum+(z*z).abs}
@@ -336,6 +342,7 @@ v と self がなす角度を返します。
 
 self とベクトルの列 vectors が線形独立であれば true を返します。
 
+  require 'matrix'
   Vector.independent?(self, *vectors)
 
 と同じです。
@@ -383,6 +390,7 @@ n次元ベクトルでなければなりません。
 
 例:
 
+  require 'matrix'
   a = [1, 2, 3.5, -10]
   v1 = Vector.elements(a)
   p v1 #=> Vector[1, 2, 3.5, -10]
