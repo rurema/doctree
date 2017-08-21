@@ -86,15 +86,18 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
 1. STDERR/STDOUTに出力するように指定
 
+   require 'logger'
    logger = Logger.new(STDERR)
    logger = Logger.new(STDOUT)
 
 2. ログファイル名を指定
 
+   require 'logger'
    logger = Logger.new('logfile.log')
 
 3. [[c:File]] オブジェクトを指定
 
+   require 'logger'
    file = File.open('foo.log', File::WRONLY | File::APPEND)
    # (古いファイルを削除する)新しいログファイルを作成する場合、以下のよ
    # うに File::CREAT を指定。
@@ -103,11 +106,13 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
 4. 指定したファイルサイズに達したらログファイルの切り替えを行うように指定。
 
+   require 'logger'
    # 約1,024,000バイトの"古い"ログファイルを10個残す
    logger = Logger.new('foo.log', 10, 1024000)
 
 5. ログファイルの切り替えを daily/weekly/monthly に指定
 
+   require 'logger'
    logger = Logger.new('foo.log', 'daily')
    logger = Logger.new('foo.log', 'weekly')
    logger = Logger.new('foo.log', 'monthly')
@@ -172,6 +177,7 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 #@since 2.4.0
 4. コンストラクタ
 
+   require 'logger'
    Logger.new(logdev, level: Logger::INFO)
    Logger.new(logdev, level: :info)
    Logger.new(logdev, level: 'INFO')
@@ -199,6 +205,7 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 #@since 2.4.0
 コンストラクタでも同様にできます。
 
+  require 'logger'
   Logger.new(logdev, datetime_format: '%Y-%m-%d %H:%M:%S')
 #@end
 
@@ -212,6 +219,7 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 #@since 2.4.0
 コンストラクタでも同様にできます。
 
+  require 'logger'
   Logger.new(logdev, formatter: proc {|severity, datetime, progname, msg|
     "#{datetime}: #{msg}\n"
   })
@@ -269,6 +277,7 @@ Logger オブジェクトを生成します。
 
 例:
 
+  require 'logger'
   logger = Logger.new(STDERR)
   logger = Logger.new(STDOUT)
   logger = Logger.new('logfile.log')
@@ -509,6 +518,7 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 @param formatter 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを
                  持つオブジェクトを指定します。call メソッドの返り値は文字列にしてください。
 
+  require 'logger'
   logger = Logger.new
   logger.formatter = proc{|severity, datetime, progname, message|
     "#{datetime}: #{message}\n"
