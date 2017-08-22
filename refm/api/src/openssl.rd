@@ -116,7 +116,7 @@ Ruby/OpenSSL のバージョンです。
 --- OPENSSL_VERSION_NUMBER -> Integer
 
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
-[[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
+[[url:https://www.openssl.org/docs/manmaster/man3/OPENSSL_VERSION_NUMBER.html]]
 も参照してください。
 
 #@since 2.0.0
