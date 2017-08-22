@@ -485,6 +485,22 @@ key に対して value を関連づけます。value を返し
   p h #=> {}
   p h.default #=> "default value"
 
+#@since 2.4.0
+--- compact -> Hash
+--- compact! -> self | nil
+
+compact は自身から value が nil のもの取り除いた Hash を生成して返します。 compact! は自身から破壊的に value が nil のものを取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
+
+
+  hash = {a: 1, b: nil, c: 3}
+  p hash.compact  #=> {:a=>1, :c=>3}
+  p hash          #=> {:a=>1, :b=>nil, :c=>3}
+  hash.compact!
+  hash            #=> {:a=>1, :c=>3}
+  p hash.compact! #=>  nil
+
+#@end
+
 #@since 1.9.1
 --- compare_by_identity -> self
 
