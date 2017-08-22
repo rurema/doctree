@@ -11,6 +11,8 @@ string を展開します。
 
 ちなみに、このメソッドは以下のコードとほぼ同じです:
 
+  require 'zlib'
+
   def inflate(string)
     zstream = Zlib::Inflate.new
     buf = zstream.inflate(string)
@@ -36,6 +38,8 @@ string を展開します。
                    nil の場合はデフォルトの値を使用します。
                    詳細は zlib.h を参照してください。
 
+  require 'zlib'
+
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new(15)
   inz << cstr
@@ -58,6 +62,8 @@ string が nil の場合はストリームへの入力を
                       [[m:Zlib::Inflate#set_dictionary]] メソッドで辞書をセットした
                       後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
+  require 'zlib'
+
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
   p inz.inflate(cstr) #=> "hoge fuga end"
@@ -68,6 +74,8 @@ string が nil の場合はストリームへの入力を
 展開ストリームに入力しますが、Zlib::Inflate オブジェクト
 そのものを返します。展開ストリームからの出力は、
 出力バッファに保存されます。
+
+  require 'zlib'
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
@@ -91,6 +99,8 @@ string が nil の場合はストリームへの入力を
 ありませんが、このメソッドは圧縮データが正しく終了しているかを
 確認するのに便利です。
 
+  require 'zlib'
+
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
   inz << cstr
@@ -103,6 +113,8 @@ string が nil の場合はストリームへの入力を
 有効です。詳細は zlib.h を参照して下さい。
 
 @param string 展開に用いる辞書を文字列で指定します。
+
+  require 'zlib'
 
   def case2(str, dict)
     dez = Zlib::Deflate.new

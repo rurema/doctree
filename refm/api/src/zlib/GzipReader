@@ -38,6 +38,8 @@ GzipReader オブジェクトは io からデータを逐次リードして
 
 @raise Zlib::GzipFile::Error ヘッダーの解析に失敗した場合発生します。
 
+  require 'zlib'
+
   File.open('hoge.txt', "w") { |fp|
     fp.puts 'hoge'
   }
@@ -116,6 +118,8 @@ filename で指定されるファイルを gzip ファイルとして
 圧縮データの終端に達した場合真を返します。
 フッターが読み込まれていなくても真を返すことに注意して下さい。
 
+  require 'zlib'
+
   =begin
   # hoge.gz がない場合はこれで作成する。
   Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -137,6 +141,8 @@ filename で指定されるファイルを gzip ファイルとして
 
 現在までに展開したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
+
+  require 'zlib'
 
   Zlib::GzipWriter.open('hoge.gz') { |gz|
     gz.puts 'hoge'
@@ -190,6 +196,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
 
+  require 'zlib'
+
   =begin
   # hoge.gz がない場合は下記で作成できる。
   Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -236,6 +244,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -287,6 +297,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
 
+  require 'zlib'
+
   =begin
   # hoge.gz がない場合は下記で作成できる。
   Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -330,6 +342,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -379,6 +393,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -432,6 +448,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -488,6 +506,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
 
+  require 'zlib'
+
   =begin
   # hoge.gz がない場合は下記で作成できる。
   Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -531,6 +551,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -585,6 +607,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
 
+  require 'zlib'
+
   =begin
   # hoge.gz がない場合は下記で作成できる。
   Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -636,6 +660,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -696,6 +722,8 @@ Zlib::GzipFile::LengthError 例外を発生させます。
 @raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
 
+  require 'zlib'
+
   =begin
   # hoge.gz がない場合はこれで作成する。
   Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -728,6 +756,8 @@ Zlib::GzipFile::LengthError 例外を発生させます。
 ファイルポインタを [[m:Zlib::GzipReader.new]] を呼び出した直後の
 時点に戻します。関連付けられている IO オブジェクトに
 seek メソッドが定義されている必要があります。
+
+  require 'zlib'
 
   =begin
   # hoge.gz がない場合はこれで作成する。
