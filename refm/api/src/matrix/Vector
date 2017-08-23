@@ -133,6 +133,17 @@ size 次元ベクトル空間の index 番目の標準基底を返します。
 
 #@end
 
+#@since 2.5.0
+--- Vector.zero(size) -> Vector
+
+零ベクトルを返します。
+
+  require 'matrix'
+  Vector.zero(3) # => Vector[0, 0, 0]
+
+@param size ベクトルの次元
+#@end
+
 == Instance Methods
 
 --- [](i) -> object | nil
@@ -595,6 +606,12 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 --- inspect() -> String 
 
 オブジェクトの内容を文字列化します。
+
+#@since 2.5.0
+--- zero? -> bool
+
+すべての要素がゼロであれば true を返します。
+#@end
 
 = class ExceptionForMatrix::ErrDimensionMismatch < StandardError
 = class ExceptionForMatrix::ErrNotRegular < StandardError
