@@ -218,7 +218,7 @@ freeze されていない場合は self を返します。
 --- -@ -> String | self
 
 self が freeze されている文字列の場合、self を返します。
-freeze されていない場合は元の文字列の freeze された複製を返します。
+freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
 #@end
 
 --- +(other) -> String
