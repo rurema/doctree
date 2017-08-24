@@ -266,6 +266,9 @@ pathname
 #@until 1.9.1
 ping
 #@end
+#@since 2.2.0
+power_assert
+#@end
 #@since 1.8.0
 pp
 prettyprint
