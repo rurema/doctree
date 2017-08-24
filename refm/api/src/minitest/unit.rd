@@ -4,6 +4,15 @@ sublibrary minitest/autorun
 
 ユニットテストを行うためのライブラリです。
 
+#@since 2.2.0
+このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
+記のページを参照してください。
+
+  * rubygems.org: [[url:https://rubygems.org/gems/minitest]]
+  * プロジェクトページ: [[url:https://github.com/seattlerb/minitest]]
+  * リファレンス: [[url:http://www.rubydoc.info/gems/minitest]]
+
+#@else
 === 使い方
 
 [[lib:minitest/unit]] は以下のように使います。
@@ -120,11 +129,7 @@ require 'test/unit' している場合は互換レイヤーが読み込まれ以
 
 === 注意
 
-このライブラリは 2.2.0 で削除されました。2.2.0 以降では以下を RubyGems
-でインストールして利用してください。.gem ファイルはソースコードにも同梱
-されています。
-
-  * [[url:https://rubygems.org/gems/minitest]]
+このライブラリは 2.2.0 で bundled gem(gemファイルのみを同梱)になりました。
 
 = module MiniTest
 
@@ -156,4 +161,4 @@ require 'test/unit' している場合は互換レイヤーが読み込まれ以
 #@include(MiniTest__Unit)
 #@include(MiniTest__Unit__TestCase)
 #@include(MiniTest__Assertions)
-
+#@end

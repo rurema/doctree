@@ -2,13 +2,18 @@ category Development
 
 シンプルなモックライブラリです。
 
+#@since 2.2.0
+このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
+記のページを参照してください。
+
+  * rubygems.org: [[url:https://rubygems.org/gems/minitest]]
+  * プロジェクトページ: [[url:https://github.com/seattlerb/minitest]]
+  * リファレンス: [[url:http://www.rubydoc.info/gems/minitest]]
+
+#@else
 === 注意
 
-このライブラリは 2.2.0 で削除されました。2.2.0 以降では以下を RubyGems
-でインストールして利用してください。.gem ファイルはソースコードにも同梱
-されています。
-
-  * [[url:https://rubygems.org/gems/minitest]]
+このライブラリは 2.2.0 で bundled gem(gemファイルのみを同梱)になりました。
 
 = class MiniTest::Mock
 
@@ -41,3 +46,4 @@ category Development
 = class MockExpectationError < StandardError
 
 モックの検証に失敗した場合に発生する例外です。
+#@end

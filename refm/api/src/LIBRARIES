@@ -213,12 +213,10 @@ mailread
 mathn
 matrix
 #@since 1.9.1
-#@until 2.2.0
 minitest/autorun
 minitest/mock
 minitest/spec
 minitest/unit
-#@end
 #@end
 #@until 1.9.1
 md5

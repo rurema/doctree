@@ -2,6 +2,15 @@ category Development
 
 BDD 風にテストを書くためのクラスやメソッドを定義するためのライブラリです。
 
+#@since 2.2.0
+このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
+記のページを参照してください。
+
+  * rubygems.org: [[url:https://rubygems.org/gems/minitest]]
+  * プロジェクトページ: [[url:https://github.com/seattlerb/minitest]]
+  * リファレンス: [[url:http://www.rubydoc.info/gems/minitest]]
+
+#@else
 このライブラリは [[c:Object]] に BDD (Behavior Driven Development) 用の検査メソッドを追加します。
 追加されるメソッドは [[c:MiniTest::Assertions]] に定義されているメソッドへの
 薄いラッパーになっています。
@@ -10,11 +19,7 @@ BDD 風にテストを書くためのクラスやメソッドを定義するた�
 
 === 注意
 
-このライブラリは 2.2.0 で削除されました。2.2.0 以降では以下を RubyGems
-でインストールして利用してください。.gem ファイルはソースコードにも同梱
-されています。
-
-  * [[url:https://rubygems.org/gems/minitest]]
+このライブラリは 2.2.0 で bundled gem(gemファイルのみを同梱)になりました。
 
 = reopen Module
 
@@ -234,4 +239,4 @@ BDD 風にテストを書くための [[c:MiniTest::Unit::TestCase]] に対す�
 与えられたブロックが一つのテストケースに相当します。
 
 @param desc テストケースの説明を指定します。
-
+#@end
