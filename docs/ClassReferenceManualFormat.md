@@ -380,7 +380,7 @@ object ブロックではメソッドの種類が Public Singleton Method に固
 クラス FileUtils 内の options にリンク
 (FileUtils のクラスの説明の中に「===[a:options] オプションの説明」のようなレベル3以上のブロックが必要。ただし、メソッドの説明中にはリンクできない)
 </dd>
-<dt>[<!-- -->[ref:m:String#scanf#format]]</dt>
+<dt>[<!-- -->[ref:<!-- -->m:String#scanf#format]]</dt>
 <dd>
 メソッド String#scanf 内の format にリンク
 (String#scanf のメソッドの説明の中に「===[a:format] scanfフォーマット文字列」のようなレベル3以上のブロックが必要。ただし、クラスの説明中にはリンクできない)
