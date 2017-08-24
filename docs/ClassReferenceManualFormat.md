@@ -339,6 +339,7 @@ object ブロックではメソッドの種類が Public Singleton Method に固
 
 以下のようなハイパーリンク記法が使えます。
 
+<dl>
 <dt>\[\[c:String\]\]</dt>
 <dd>クラス String にリンク</dd>
 <dt>\[\[c:File::Stat\]\]</dt>
@@ -400,6 +401,7 @@ object ブロックではメソッドの種類が Public Singleton Method に固
 <dd>RFC2822 にリンク</dd>
 <dt>\[\[url:http://i.loveruby.net]]</dt>
 <dd>URL「http://i.loveruby.net」にリンク</dd>
+</dl>
 
 ### 既存リファレンスから削除された機能
 
