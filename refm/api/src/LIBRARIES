@@ -234,9 +234,7 @@ net/imap
 net/pop
 net/protocol
 net/smtp
-#@until 2.3.0
 net/telnet
-#@end
 #@until 1.9.1
 net/telnets
 #@end

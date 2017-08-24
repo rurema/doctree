@@ -2,6 +2,15 @@ category Network
 
 Telnet プロトコルをクライアント側で扱うライブラリです。
 
+#@since 2.3.0
+このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
+記のページを参照してください。
+
+  * rubygems.org: [[url:https://rubygems.org/gems/net-telnet]]
+  * プロジェクトページ: [[url:https://github.com/ruby/net-telnet]]
+  * リファレンス: [[url:http://www.rubydoc.info/gems/net-telnet]]
+
+#@else
 === 参考文献
 Telnet に関する RFC は数多く存在します。
 [[RFC:854]], [[RFC:855]], [[RFC:856]], [[RFC:857]], [[RFC:858]], 
@@ -10,10 +19,7 @@ Telnet に関する RFC は数多く存在します。
 
 === 注意
 
-このライブラリは 2.3.0 で gem ライブラリとして切り離されました。2.3.0
-以降ではそちらを利用してください。
-
- * [[url:https://rubygems.org/gems/net-telnet]]
+このライブラリは 2.3.0 で bundled gem(gemファイルのみを同梱)になりました。
 
 = class Net::Telnet < SimpleDelegator
 
@@ -504,5 +510,4 @@ Telnet オブジェクトのメソッドはこのオブジェクトに
 #@# --- EOL
 #@# SVNのリビジョン
 #@# --- REVISION
-
-
+#@end
