@@ -3052,6 +3052,9 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 
 self の文字エンコーディングを ASCII-8BIT にした文字列を返します。
 
+  'abc123'.encoding    # => #<Encoding:UTF-8>
+  'abc123'.b.encoding  # => #<Encoding:ASCII-8BIT>
+
 #@since 2.1.0
 --- scrub               -> String
 --- scrub(repl)         -> String
