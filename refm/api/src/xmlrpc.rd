@@ -1,8 +1,15 @@
 category Network
 
-#@since 1.8.0
 XML-RPC を扱うためのライブラリです。
 
+#@since 2.4.0
+このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
+記のページを参照してください。
+
+ * rubygems.org: [[url:https://rubygems.org/gems/xmlrpc]]
+ * プロジェクトページ: [[url:https://github.com/ruby/xmlrpc]]
+ * リファレンス: [[url:http://www.rubydoc.info/gems/xmlrpc]]
+#@else
 このページは xmlrpc ライブラリのまとめのページであり、require 'xmlrpc' を実行しても
 エラーになることに注意して下さい。
 
@@ -43,33 +50,33 @@ use the client and implement a server.
 
 === Features of XMLRPC for Ruby
 
-* Extensions
-  * Introspection
-  * multiCall
-  * optionally nil values and integers larger than 32 Bit
+  * Extensions
+    * Introspection
+    * multiCall
+    * optionally nil values and integers larger than 32 Bit
 
-* Server
-  * Standalone XML-RPC server
-  * CGI-based (works with FastCGI)
-  * Apache mod_ruby server
-  * WEBrick servlet
+  * Server
+    * Standalone XML-RPC server
+    * CGI-based (works with FastCGI)
+    * Apache mod_ruby server
+    * WEBrick servlet
 
-* Client
-  * synchronous/asynchronous calls
-  * Basic HTTP-401 Authentification
-  * HTTPS protocol (SSL)
+  * Client
+    * synchronous/asynchronous calls
+    * Basic HTTP-401 Authentification
+    * HTTPS protocol (SSL)
 
-* Parsers
-  * NQXML (NQXMLStreamParser, NQXMLTreeParser)
-  * Expat (XMLStreamParser, XMLTreeParser)
-  * REXML (REXMLStreamParser)
-  * xml-scan (XMLScanStreamParser)
-  * Fastest parser is Expat's XMLStreamParser!
+  * Parsers
+    * NQXML (NQXMLStreamParser, NQXMLTreeParser)
+    * Expat (XMLStreamParser, XMLTreeParser)
+    * REXML (REXMLStreamParser)
+    * xml-scan (XMLScanStreamParser)
+    * Fastest parser is Expat's XMLStreamParser!
  
-* General
-  * possible to choose between XMLParser module (Expat wrapper) and REXML/NQXML (pure Ruby) parsers
-  * Marshalling Ruby objects to Hashs and reconstruct them later from a Hash
-  * SandStorm component architecture Client interface
+  * General
+    * possible to choose between XMLParser module (Expat wrapper) and REXML/NQXML (pure Ruby) parsers
+    * Marshalling Ruby objects to Hashs and reconstruct them later from a Hash
+    * SandStorm component architecture Client interface
 
 === Choosing a different XML Parser or XML Writer
 
@@ -117,8 +124,5 @@ You can change the XML-writer by calling method <i>set_writer</i>.
 
 === 注意
 
-このライブラリは 2.4.0 で gem ライブラリとして切り離されました。2.4.0
-以降ではそちらを利用してください。
-
-  * [[url:https://rubygems.org/gems/xmlrpc]]
+このライブラリは 2.4.0 で bundled gem(gemファイルのみを同梱)になりました。
 #@end

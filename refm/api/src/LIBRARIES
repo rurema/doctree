@@ -945,8 +945,8 @@ wsdl/soap/standaloneServerStubCreator
 wsdl/soap/wsdl2ruby
 #@end
 #@end
-#@until 2.4.0
 xmlrpc
+#@until 2.4.0
 xmlrpc/client
 xmlrpc/config
 xmlrpc/datetime
