@@ -936,6 +936,16 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」�
 
 @return chop! は self を変更して返しますが、取り除く文字がなかった場合は nil を返します。
 
+  str = "string\r\n"
+  ret = str.chop
+  ret                  # => "string"
+  str                  # => "string\r\n"
+  ret = str.chop!
+  ret                  # => "string"
+  str                  # => "string"
+  str.chop!            # => "strin"
+  "".chop!             # => nil
+
 --- clear -> self
 
 文字列の内容を削除して空にします。
