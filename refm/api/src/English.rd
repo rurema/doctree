@@ -199,7 +199,7 @@
 
   require "English"
 
-  out = `wget http://www2.ruby-lang.org/ja/LICENSE.txt -O - 2>/dev/null`
+  out = `wget https://www.ruby-lang.org/en/about/license.txt -O - 2>/dev/null`
 
   if $CHILD_STATUS.to_i == 0
     print "wget success\n"
@@ -217,11 +217,11 @@
 
   require "English"
 
-  str = "<a href=http://www2.ruby-lang.org/ja/LICENSE.txt>license</a>"
+  str = "<a href=https://www.ruby-lang.org/en/about/license.txt>license</a>"
 
   if /<a href=(.+?)>/ =~ str
-    p $LAST_MATCH_INFO[0] #=> "<a href=http://www2.ruby-lang.org/ja/LICENSE.txt>"
-    p $LAST_MATCH_INFO[1] #=> "http://www2.ruby-lang.org/ja/LICENSE.txt"
+    p $LAST_MATCH_INFO[0] #=> "<a href=https://www.ruby-lang.org/en/about/license.txt>"
+    p $LAST_MATCH_INFO[1] #=> "https://www.ruby-lang.org/en/about/license.txt"
     p $LAST_MATCH_INFO[2] #=> nil
   end
 
