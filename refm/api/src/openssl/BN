@@ -22,6 +22,8 @@ baseに2を指定すると文字列を big-endian の符号無し整数のバイ
 列(big-endian)で数値を表す。最上位ビットが立っていると負数)。
 
 例:
+  require 'openssl'
+
   OpenSSL::BN.new("-241") # => -241
   OpenSSL::BN.new("ff00",16) # => 65280
   OpenSSL::BN.new("\x81",2) # => 129
@@ -207,8 +209,10 @@ odd が真なら、生成される整数は奇数のみとなります。
 自身の n ビット目が立っているなら真を返します。
 
 例:
-  BN.new("129").bit_set?(0) # => true
-  BN.new("129").bit_set?(1) # => false
+  require 'openssl'
+
+  OpenSSL::BN.new("129").bit_set?(0) # => true
+  OpenSSL::BN.new("129").bit_set?(1) # => false
 
 @param n 調べるビットの位置
 
@@ -216,7 +220,9 @@ odd が真なら、生成される整数は奇数のみとなります。
 自身の n ビット目を0にします。
 
 例:
-  a = BN.new("129")
+  require 'openssl'
+
+  a = OpenSSL::BN.new("129")
   a.clear_bit!(0)
   a # => 128
 
@@ -259,7 +265,9 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 (self + other) % m を返します。
 
 例:
-  BN.new("7").mod_add(BN.new("3"), BN.new("6")) # => 4
+  require 'openssl'
+
+  OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 4
 
 @param other 和を取る数
 @param m 剰余を取る数
@@ -269,7 +277,9 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 (self ** other) % m を返します。
 
 例:
-  BN.new("7").mod_exp(BN.new("3"), BN.new("6")) # => 1
+  require 'openssl'
+
+  OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 1
 
 @param other 指数
 @param m 剰余を取る数
@@ -288,7 +298,9 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 (self * other) % m を返します。
 
 例:
-  BN.new("7").mod_mul(BN.new("3"), BN.new("6")) # => 3
+  require 'openssl'
+
+  OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
 
 @param other 積を取る数
 @param m 剰余を取る数
@@ -304,7 +316,9 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 (self - other) % m を返します。
 
 例:
-  BN.new("27").mod_mul(BN.new("3"), BN.new("5")) # => 4
+  require 'openssl'
+
+  OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # => 4
 
 @param other 引く数
 @param m 剰余を取る数
@@ -317,6 +331,8 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 符号は無視されます。
 
 例:
+  require 'openssl'
+
   OpenSSL::BN.new("127").num_bits # => 7
   OpenSSL::BN.new("-127").num_bits # => 7
   OpenSSL::BN.new("128").num_bits # => 8
@@ -358,6 +374,8 @@ checksがnilである場合は OpenSSL が適切な
 回数を判断します。
 
 例:
+  require 'openssl'
+
   # 181 は 「小さな素数」である
   OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
   OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
@@ -371,7 +389,9 @@ checksがnilである場合は OpenSSL が適切な
 自身の n ビット目を1にします。
 
 例:
-  a = BN.new("128")
+  require 'openssl'
+
+  a = OpenSSL::BN.new("128")
   a.set_bit!(0)
   a # => 129
 

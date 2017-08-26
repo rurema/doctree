@@ -11,6 +11,8 @@ EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 組み込みの曲線の名前と、それに対する説明を文字列の配列ペアの配列で返します。
 
 例:
+  require 'openssl'
+
   OpenSSL::PKey::EC.builtin_curves
   # => [["secp112r1", "SECG/WTLS curve over a 112 bit prime field"],
   #     ["secp112r2", "SECG curve over a 112 bit prime field"], 

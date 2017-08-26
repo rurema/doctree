@@ -12,6 +12,8 @@ RSA についてよく理解し、必要な場合のみにすべきです。
 
 
 例:
+  require 'openssl'
+
   # initialize random seed
   OpenSSL::Random.seed(File.read("/dev/random", 16))
   # 鍵対を生成

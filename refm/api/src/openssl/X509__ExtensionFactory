@@ -5,6 +5,7 @@
 
 
 例
+  require 'openssl'
   # ca_cert: CA の証明書オブジェクト
   # req: CSR オブジェクト
   # newcert: 新たに生成する証明書のオブジェクト
@@ -152,6 +153,7 @@ ExtensionFactory オブジェクトを生成します。
 自身にコンフィグファイルオブジェクトを設定します。
 
 例
+  require 'openssl'
   factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 
 @param config 設定ファイル([[c:OpenSSL::Config]] オブジェクト)
