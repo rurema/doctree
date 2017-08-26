@@ -100,6 +100,7 @@ C 言語におけるポインタのポインタに対する間接参照 *p と�
 
 この返り値には、free 関数がセットされていません。
 
+ require 'dl'
  a = ['abc', 'def'].to_ptr
  p a.ptr.to_s #=> "abc"
 
@@ -120,6 +121,7 @@ C 言語におけるポインタへのアドレス演算子の適用 &p と同�
 
 この返り値には、free 関数がセットされていません。
 
+  require 'dl'
   s = "abc".to_ptr
   p s == s.ref.ptr #=> true
 
@@ -145,6 +147,7 @@ C 言語におけるポインタへのアドレス演算子の適用 &p と同�
 構造体のメンバにメソッド [[m:DL::PtrData#[] ]] でアクセスできるようにします。
 C 言語における構造体のポインタへのキャストと同じです。
 
+ require 'dl'
  ptr = DL.malloc(DL.sizeof('LL'))
  ptr.struct!('LL', :tv_sec, :tv_usec)
  ptr[:tv_sec] = 10

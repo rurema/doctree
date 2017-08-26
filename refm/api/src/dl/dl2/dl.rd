@@ -93,6 +93,8 @@ M::Timeval.malloc を使用していることに注意してください。
 
 char * 以外の型のポインタを受け取る関数に対しても文字列を渡します。
 
+ require 'dl/import'
+
  module M
    extend DL::Importer
    dlload 'libm.so.6'
