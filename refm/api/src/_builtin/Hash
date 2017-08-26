@@ -1286,6 +1286,27 @@ key が見つからなかった場合は、nil を返します。
 
 @see [[m:Array#flatten]]
 
+#@since 2.4.0
+--- compact     -> Hash
+--- compact!    -> self | nil
+
+compact は自身から nil となるキーと値のペアを取り除いたハッシュを生成して返します。
+compact! は自身から破壊的に nil となるキーと値のペアを取り除き、変更が行われた場合は
+self を、そうでなければ nil を返します。
+
+   h = { a: 1, b: false, c: nil }
+   h.compact  #=> { a: 1, b: false }
+   h          #=> { a: 1, b: false, c: nil }
+
+   h = { a: 1, b: false, c: nil }
+   h.compact! #=> { a: 1, b: false }
+   h          #=> { a: 1, b: false }
+   h.compact! #=> nil
+
+@see [[m:Array#compact]]
+
+#@end
+
 --- rassoc(value) -> Array | nil
 
 ハッシュ内を検索して，引数 obj と 一致する値を探します。
