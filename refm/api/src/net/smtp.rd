@@ -88,7 +88,8 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼�
 ください。もちろんそれ以外の時も HELO ドメインはちゃんと渡すのが
 よいでしょう。
 
-  Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com') {|smtp|
+  require 'net/smtp'
+  Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com')
 
 よくあるダイヤルアップホストの場合、HELO ドメインには ISP のメール
 サーバのドメインを使っておけばたいてい通ります。
@@ -102,6 +103,7 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼�
 の引数に追加の引数を渡してください。
 
   # 例
+  require 'net/smtp'
   Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com',
                   'your_account', 'your_password', :cram_md5)
 
@@ -121,6 +123,7 @@ TLSを用いることで、通信相手の認証、および通信経路の暗�
 送る人、受け取る人を認証する
 必要がある場合は別の方法を考える必要があるでしょう。
 
+  require 'net/smtp'
   # STARTTLSの例
   smtp = Net::SMTP.new('smtp.example.com', 25)
   # SSLのコンテキストを作成してSSLの設定をし、context に代入しておく
@@ -165,6 +168,7 @@ port は接続するポート番号です。
 
 以下と同じです。
 
+  require 'net/smtp'
   Net::SMTP.new(address, port).start(helo_domain, account, password, authtype)
 
 このメソッドにブロックを与えた場合には、新しく作られた [[c:Net::SMTP]] オブジェクト
