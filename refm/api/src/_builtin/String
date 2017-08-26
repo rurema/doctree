@@ -2788,6 +2788,13 @@ self が空文字列のときは例外を発生します。
 
 文字列のエンコーディング情報を表現した Encoding オブジェクトを返します。
 
+例:
+  # encoding: utf-8
+  utf8_str = "test"
+  euc_str = utf8_str.encode("EUC-JP")
+  utf8_str.encoding   # => #<Encoding:UTF-8>
+  euc_str.encoding    # => #<Encoding:EUC-JP>
+
 @see [[c:Encoding]]
 
 --- force_encoding(encoding)   -> self
