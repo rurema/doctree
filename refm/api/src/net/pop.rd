@@ -163,6 +163,8 @@ delete_all、auth_only なども APOP とともに使えます。
 利用しているPOP3サーバが UIDL 機能を提供している場合には、
 以下のようにして特定のメールだけを取り出すことができます。
 
+  require 'net/pop'
+
   def need_pop?(id)
     # 取り出したいメールの場合に真を返す
   end
@@ -229,6 +231,8 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 使います。
 
 以下のコードと同じ動作をします。
+  require 'net/pop'
+
   Net::POP3.new(address, port, isapop).start(account, password)
 
 使用例:
@@ -279,6 +283,8 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 使います。
 
 以下のコードと同様の処理をします。
+  require 'net/pop'
+
   Net::POP3.start(address, port, account, password, isapop=false) {|pop|
     pop.each_mail do |m|
       yield m
