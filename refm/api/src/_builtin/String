@@ -939,9 +939,6 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」�
 @return chop! は self を変更して返しますが、取り除く文字がなかった場合は nil を返します。
 
   str = "string\r\n"
-  ret = str.chop
-  ret                  # => "string"
-  str                  # => "string\r\n"
   ret = str.chop!
   ret                  # => "string"
   str                  # => "string"
