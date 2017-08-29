@@ -499,6 +499,8 @@ compact は自身から value が nil のもの取り除いた Hash を生成し
   hash            #=> {:a=>1, :c=>3}
   p hash.compact! #=>  nil
 
+@see [[m:Array#compact]]
+
 #@end
 
 #@since 1.9.1
