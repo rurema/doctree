@@ -219,6 +219,19 @@ freeze されていない場合は self を返します。
 
 self が freeze されている文字列の場合、self を返します。
 freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
+
+例:
+  foo = "test"
+  bar = -foo
+  foo.freeze
+  baz = -foo
+
+  foo == bar         # => true
+  foo.equal?(bar)    # => false
+
+  foo == baz         # => true
+  foo.equal?(baz)    # => true
+
 #@end
 
 --- +(other) -> String
