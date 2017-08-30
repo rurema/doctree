@@ -315,6 +315,7 @@ C プログラムのソースコード src をコンパイル、リンクしま�
 
 例：
 
+  require 'mkmf'
   if try_link("int main() { sin(0.0); }", '-lm')
     $stderr.puts "sin() exists"
   end
@@ -338,6 +339,7 @@ C プログラムのソースコード src をプリプロセスします。
 
 例：
 
+  require 'mkmf'
   if try_cpp("#include <stdio.h>")
     $stderr.puts "stdio.h exists"
   end
@@ -518,6 +520,7 @@ member というメンバを持つ構造体 type が存在しない場合は、�
 
 例えば
 
+  require 'mkmf'
   have_struct_member('struct foo', 'bar') # => true
 
 #@since 1.9.1
@@ -544,6 +547,7 @@ member というメンバを持つ構造体 type が存在しない場合は、�
 
 例えば、
 
+  require 'mkmf'
   have_type('foo') # => true
 
 である場合、HAVE_TYPE_FOO をというプリプロセッサマクロをコンパイラに渡します。
@@ -578,6 +582,7 @@ member というメンバを持つ構造体 type が存在しない場合は、�
 
 例えば、
 
+  require 'mkmf'
   have_var('foo') # => true
 
 である場合、HAVE_FOO というプリプロセッサマクロをコンパイラに渡します。
@@ -600,6 +605,7 @@ member というメンバを持つ構造体 type が存在しない場合は、�
 
 例えば、
 
+  require 'mkmf'
   have_framework('Ruby') # => true
 
 である場合、HAVE_FRAMEWORK_RUBY というプリプロセッサマクロをコンパイラに渡します。
@@ -619,6 +625,7 @@ member というメンバを持つ構造体 type が存在しない場合は、�
 
 例えば、
 
+  require 'mkmf'
   check_sizeof('mystruct') # => 12
 
 である場合、SIZEOF_MYSTRUCT=12 というプリプロセッサマクロをコンパイラに渡します。
@@ -713,6 +720,7 @@ configure のオプションに --with-<config> が指定された場合は真�
 @param default デフォルト値を返します。
 
 例
+  require 'mkmf'
   if with_config("debug")
      $defs.push("-DOSSL_DEBUG") unless $defs.include? "-DOSSL_DEBUG"
   end
@@ -733,6 +741,7 @@ configure のオプションに --enable-<config> が指定された場合は、
 @param default デフォルト値を返します。
 
 例
+  require 'mkmf'
   if enable_config("debug")
      $defs.push("-DOSSL_DEBUG") unless $defs.include? "-DOSSL_DEBUG"
   end
@@ -798,6 +807,7 @@ configure オプション
 @param ldefault システム標準ではないライブラリのディレクトリのデフォルト値を指定します。
 
 例
+  require 'mkmf'
   # xml2 の configure オプションを指定できるようにします。
   xml2_dirs = dir_config('xml2', '/opt/local/include/libxml2', '/opt/local/lib')
 
@@ -833,6 +843,7 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
 
 このようにします。
 
+   require 'mkmf'
    create_makefile('test/foo', 'test')
 
 このようにして作った Makefile で 'make install' すると拡張ライブラリは、
