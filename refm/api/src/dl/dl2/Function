@@ -147,6 +147,8 @@ DL::Function オブジェクトを生成して返します。
 --- bound? -> bool
 関数がバインドされているならば真を返します。
   
+  require 'dl/import'
+
   # 0 をアドレスとする DL::Function オブジェクトを作ると、それには関数が
   # バインドされていないとみなされる
   func = DL::Function.new(DL::CFunc.new(0, DL::TYPE_INT), [DL::TYPE_INT])
