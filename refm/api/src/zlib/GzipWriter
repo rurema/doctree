@@ -4,6 +4,8 @@ gzip 形式の圧縮ファイルを書き出すラッパークラスです。
 IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 持つオブジェクト) と関連付けて使用します。
 
+  require 'zlib'
+
   Zlib::GzipWriter.open('hoge.gz') {|gz|
     gz.write 'jugemu jugemu gokou no surikire...'
   }

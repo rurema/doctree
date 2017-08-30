@@ -13,6 +13,8 @@ string を圧縮します。level の有効な値は
 
 ちなみに、このメソッドは以下のコードとほぼ同じです:
 
+  require 'zlib'
+
   def deflate(string, level)
     z = Zlib::Deflate.new(level)
     dst = z.deflate(string, Zlib::FINISH)
@@ -94,6 +96,8 @@ flush には [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
 @param flush [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
              [[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] のいずれかを指定します。
 
+  require 'zlib'
+
   dez = Zlib::Deflate.new
   p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
 
@@ -105,6 +109,8 @@ flush には [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
 出力バッファに保存されます。
 
 @param string  圧縮する文字列を指定します。
+
+  require 'zlib'
 
   dez = Zlib::Deflate.new
   dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
@@ -153,6 +159,8 @@ deflate('', flush) と同じです。flush が
 --- finish -> String
 
 圧縮ストリームを終了します。deflate('', Zlib::FINISH) と同じです。
+
+  require 'zlib'
 
   dez = Zlib::Deflate.new
   dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
@@ -207,6 +215,8 @@ deflate('', flush) と同じです。flush が
 
 @param string 辞書に用いる文字列を指定します。詳しくは zlib.h を参照してください。
 @return 辞書に用いる文字列を返します。 
+
+  require 'zlib'
 
   def case1(str)
     dez = Zlib::Deflate.new
