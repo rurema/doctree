@@ -88,6 +88,7 @@ XMLRPC::BasicServer or by editing xmlrpc/config.rb.
 
 Client Example:
  
+  require 'xmlrpc/client'
   # ...
   server = XMLRPC::Client.new( "xmlrpc-c.sourceforge.net", "/api/sample.php")
   server.set_parser(XMLRPC::XMLParser::XMLParser.new)
@@ -95,6 +96,7 @@ Client Example:
 
 Server Example:
 
+  require 'xmlrpc/server'
   # ...
   s = XMLRPC::CGIServer.new
   s.set_parser(XMLRPC::XMLParser::XMLStreamParser.new)
@@ -102,6 +104,7 @@ Server Example:
   
 or:
 
+  require 'xmlrpc/server'
   # ...
   server = XMLRPC::Server.new(8080)
   server.set_parser(XMLRPC::XMLParser::NQXMLParser.new)

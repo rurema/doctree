@@ -41,6 +41,8 @@ A handler method or code-block can return the types listed at
 [[m:XMLRPC::Client#call]].
 When a method fails, it can tell it the client by throwing an
 XMLRPC::FaultException like in this example:
+    require "xmlrpc/server"
+
     s.add_handler("michael.div") do |a,b|
       if b == 0
         raise XMLRPC::FaultException.new(1, "division by zero")

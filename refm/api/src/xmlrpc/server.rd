@@ -39,6 +39,8 @@ can be mixed:
 
 To return a fault-structure you have to raise an FaultException e.g.:
 
+  require "xmlrpc/server"
+
   raise XMLRPC::FaultException.new(3, "division by Zero")
 
 ====== Security Note
@@ -62,6 +64,8 @@ From Brian Candler:
 From Michael:
 
 A solution is to undef insecure methods or to use XMLRPC::iPIMethods as shown below:
+
+  require "xmlrpc/server"
 
   class MyHandler
     def sumAndDifference(a, b)
@@ -103,9 +107,13 @@ Code sample from the book Ruby Developer's Guide:
 
 Same as CGI-based server, only that the line
 
+  require "xmlrpc/server"
+
   server = XMLRPC::CGIServer.new
 
 must be changed to
+
+  require "xmlrpc/server"
 
   server = XMLRPC::Server.new(8080)
 
