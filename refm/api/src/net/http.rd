@@ -110,6 +110,8 @@ nil を渡してください。
 [[m:Net::HTTP.new]] や [[m:Net::HTTP.start]] の proxy_addr や proxy_port
 を指定することでプログラムからプロクシを指定することもできます。
 
+  require 'net/http'
+
   proxy_addr = 'your.proxy.host'
   proxy_port = 8080
   
@@ -291,6 +293,7 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 
 このメソッドは以下と同じです。
 
+  require 'net/http'
   Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).start(&block)
 
 @param address 接続するホスト名を文字列で指定します。
@@ -333,8 +336,11 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 @see [[m:Net::HTTP.get]]
 
 === 例
+  require 'net/http'
+  require 'uri'
   Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
 もしくは
+  require 'net/http'
   Net::HTTP.get_print 'www.example.com', '/index.html'
 
 --- get_response(uri) -> Net::HTTPResponse
@@ -959,6 +965,8 @@ header が nil
 @param header リクエストの HTTP ヘッダをハッシュで指定します。
 
 1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
+
+  require 'net/http'
 
   response = nil
   Net::HTTP.start('some.www.server', 80) {|http|

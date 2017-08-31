@@ -49,6 +49,8 @@ IMAP を使わないメールアプリケーションがメールの順番を
 === 例
 
 デフォルトのメールボックス(INBOX)の送り元とサブジェクトを表示する。
+  require 'net/imap'
+
   imap = Net::IMAP.new('mail.example.com')
   imap.authenticate('LOGIN', 'joe_user', 'joes_password')
   imap.examine('INBOX')
@@ -58,6 +60,8 @@ IMAP を使わないメールアプリケーションがメールの順番を
   end
 
 2003年4月のメールをすべて Mail/sent-mail から "Mail/sent-apr03" へ移動させる
+
+  require 'net/imap'
 
   imap = Net::IMAP.new('mail.example.com')
   imap.authenticate('LOGIN', 'joe_user', 'joes_password')
@@ -73,6 +77,8 @@ IMAP を使わないメールアプリケーションがメールの順番を
 
 === スレッド安全性
 Net::IMAP は並列実行をサポートしています。例として、
+
+  require 'net/imap'
 
   imap = Net::IMAP.new("imap.foo.net", "imap2")
   imap.authenticate("cram-md5", "bar", "password")
@@ -226,6 +232,8 @@ verify は接続先を検証するかを真偽値で設定します。
 
 
 例
+  require 'net/imap'
+
   imap = Net::IMAP.new('imap.example.com', :port => 993,
                        :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
                                  :timeout => 600 } )
@@ -296,6 +304,8 @@ UTF-7 を修正したものです。
 --- format_date(time) -> String
 時刻オブジェクトを IMAP の日付フォーマットでの文字列に変換します。
 
+  require 'net/imap'
+
   Net::IMAP.format_date(Time.new(2011, 6, 20))
   # => "20-Jun-2011"
 
@@ -303,6 +313,8 @@ UTF-7 を修正したものです。
 
 --- format_datetime(time) -> String
 時刻オブジェクトを IMAP の日付時刻フォーマットでの文字列に変換します
+
+  require 'net/imap'
 
   Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
   # => "20-Jun-2011 13:20 +0900"
