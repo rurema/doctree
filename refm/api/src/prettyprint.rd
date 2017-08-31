@@ -13,6 +13,8 @@ pretty printing アルゴリズムは読みやすいインデントと改行を�
 
 同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。
 
+ require 'prettyprint'
+
  p2 = PrettyPrint.new('', 10)
  s = 'hello'
  p2.text(s)
@@ -83,6 +85,8 @@ PrettyPrint オブジェクトを生成し、それを引数としてブロッ�
 与えられた output を返します。
 
 以下と同じ働きをするもので簡便のために用意されています。
+
+  require 'prettyprint'
 
   begin
     pp = PrettyPrint.new(output, maxwidth, newline, &genspace)
