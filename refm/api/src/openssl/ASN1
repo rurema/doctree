@@ -39,6 +39,8 @@ UNIVERSAL以外のタグクラスを付けられた型は、
 IMPLICIT or EXPLICIT なタグ付けを実現することもできます。
 
 例:
+  require 'openssl'
+
   # 単純型のデータ
   x = OpenSSL::ASN1::UTF8String.new("foobar")
   # 構造型のデータ

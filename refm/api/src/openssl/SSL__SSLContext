@@ -224,6 +224,7 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれ�
 このメソッドはクライアント側でのみ意味を持ちます。
 
 例
+  require 'openssl'
   ctx = OpenSSL::SSL::SSLContext.new(ssl_method)
   ctx.client_cert_cb = proc{|sslsocket|
     # sslsocket からコネクションの情報を取り出し、

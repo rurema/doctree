@@ -89,6 +89,8 @@ StoreContext オブジェクトが渡されますが、このメソッドでエ�
 もその値に応じた文字列が返るようになります。
 
 例:
+  require 'openssl'
+
   store = OpenSSL::X509::Store.new
   store.set_default_paths
   cert = OpenSSL::X509::Certificate.new(...)

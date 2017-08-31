@@ -13,6 +13,8 @@ Diffie-Hellman はこのライブラリでは基本的には鍵共有にしか�
 === 例
 
 鍵共有の例。
+  require 'openssl'
+
   # パラメータの生成
   dh = OpenSSL::PKey::DH.generate(1024, 5)
   # パラメータのチェック
