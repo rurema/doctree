@@ -36,8 +36,9 @@
 例:
   require "rake"
 
-  "hoge".ext(".rb")      # => "hoge.rb"
-  "hoge.rb".ext(".erb")  # => "hoge.erb"
+  "hoge".ext(".rb")          # => "hoge.rb"
+  "hoge.rb".ext(".erb")      # => "hoge.erb"
+  "hoge.tar.gz".ext(".txt")  # => "hoge.tar.txt"
 
 --- pathmap(spec = nil){ ... } -> String
 
