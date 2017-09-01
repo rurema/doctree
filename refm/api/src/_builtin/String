@@ -216,16 +216,16 @@ self が freeze されている文字列の場合、元の文字列の複製を�
 freeze されていない場合は self を返します。
 
 例:
-  text = "test"
-  not_frozen = +text
-  text.freeze
-  frozen = +text
+  # frozen_string_literal: false
+  original_text = "text"
+  unfrozen_text = +original_text
+  original_text == unfrozen_text      # => true
+  original_text.equal?(unfrozen_text) # => true
 
-  text == not_frozen      # => true
-  text.equal?(not_frozen) # => true
-
-  text == frozen          # => true
-  text.equal?(frozen)     # => false
+  frozen_text = "text".freeze
+  unfrozen_text = +frozen_text
+  frozen_text == unfrozen_text        # => true
+  frozen_text.equal?(unfrozen_text)   # => false
 
 --- -@ -> String | self
 
