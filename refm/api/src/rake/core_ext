@@ -38,7 +38,7 @@
 
   "hoge".ext(".rb")          # => "hoge.rb"
   "hoge.rb".ext(".erb")      # => "hoge.erb"
-  "hoge.tar.gz".ext(".txt")  # => "hoge.tar.txt"
+  "hoge.tar.gz".ext(".bz2")  # => "hoge.tar.bz2"
 
 --- pathmap(spec = nil){ ... } -> String
 
