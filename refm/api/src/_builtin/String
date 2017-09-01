@@ -1522,6 +1522,12 @@ self[pos, 0] = other と同じ操作です。
 
 文字列の文字数を返します。バイト数を知りたいときは bytesize メソッドを使ってください。
 
+例:
+  "test".length   # => 4
+  "test".size     # => 4
+  "テスト".length   # => 3
+  "テスト".size     # => 3
+
 @see [[m:String#bytesize]]
 
 --- match(regexp, pos = 0) -> MatchData | nil
