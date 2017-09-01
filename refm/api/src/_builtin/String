@@ -221,16 +221,16 @@ self が freeze されている文字列の場合、self を返します。
 freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
 
 例:
-  foo = "test"
-  bar = -foo
-  foo.freeze
-  baz = -foo
+  # frozen_string_literal: false
+  original_text = "text"
+  unfrozen_text = -original_text
+  original_text == unfrozen_text      # => true
+  original_text.equal?(unfrozen_text) # => false
 
-  foo == bar         # => true
-  foo.equal?(bar)    # => false
-
-  foo == baz         # => true
-  foo.equal?(baz)    # => true
+  frozen_text = "text".freeze
+  unfrozen_text = -frozen_text
+  frozen_text == unfrozen_text        # => true
+  frozen_text.equal?(unfrozen_text)   # => true
 
 #@end
 
