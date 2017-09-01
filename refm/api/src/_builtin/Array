@@ -2279,3 +2279,41 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 @see [[m:Array#bsearch]]
 #@end
 #@end
+
+#@since 2.4.0
+--- sum(init=0)                    -> number
+--- sum(init=0) {|e| expr }        -> number
+
+要素の合計を返します。例えば [e1, e2, e3].sum は init + e1 + e2 + e3 を返します。
+
+ブロックが与えられた場合、加算する前に各要素にブロックが適用されます。
+
+配列が空の場合、initを返します。
+
+例:
+  [].sum                             #=> 0
+  [].sum(0.0)                        #=> 0.0
+  [1, 2, 3].sum                      #=> 6
+  [3, 5.5].sum                       #=> 8.5
+  [2.5, 3.0].sum(0.0) {|e| e * e }   #=> 15.25
+  [Object.new].sum                   #=> TypeError
+
+配列の平均値は以下のように求められます。
+
+例:
+  mean = ary.sum(0.0) / ary.length
+
+init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。
+
+例:
+  ["a", "b", "c"].sum("")            #=> "abc"
+  [[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
+
+しかし、文字列の配列や配列の配列の場合 Array#join や Array#flatten の方が Array#sum よりも高速です。
+
+例:
+  ["a", "b", "c"].join               #=> "abc"
+  [[1], [[2]], [3]].flatten(1)       #=> [1, [2], 3]
+
+"+" メソッドが再定義されている場合、Array#sum は再定義を無視することがあります(例えばInteger#+)。
+#@end
