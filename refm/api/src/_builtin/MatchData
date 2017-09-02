@@ -267,3 +267,23 @@ false を返します。
 @param other 比較対象のオブジェクトを指定します。
 
 #@end
+#@since 2.4.0
+--- named_captures -> Hash
+
+名前付きキャプチャをHashで返します。
+
+Hashのキーは名前付きキャプチャの名前です。Hashの値はキーの名前に対応した名前付きグループのうち最後にマッチした文字列です。
+
+例:
+  m = /(?<a>.)(?<b>.)/.match("01")
+  m.named_captures #=> {"a" => "0", "b" => "1"}
+
+  m = /(?<a>.)(?<b>.)?/.match("0")
+  m.named_captures #=> {"a" => "0", "b" => nil}
+
+  m = /(?<a>.)(?<a>.)/.match("01")
+  m.named_captures #=> {"a" => "1"}
+
+  m = /(?<a>x)|(?<a>y)/.match("x")
+  m.named_captures #=> {"a" => "x"}
+#@end
