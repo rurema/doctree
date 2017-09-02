@@ -1256,6 +1256,12 @@ index に負を指定すると末尾から数えた位置を変更します。
 @param b セットするバイト(0 から 255 までの整数)
 @raise IndexError 範囲外に値をセットしようとした場合に発生します。
 
+例:
+  s = "Sunday"
+  s.setbyte(0, 77)
+  s.setbyte(-5, 111)
+  s # => "Monday"
+
 --- gsub(pattern, replace) -> String
 
 文字列中で pattern にマッチする部分全てを
