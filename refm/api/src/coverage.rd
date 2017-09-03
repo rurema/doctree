@@ -61,3 +61,31 @@ Coverage.result["foo.rb"]から得られる配列は各行の実行回数にな�
                     発生します。
 
 #@end
+#@since 2.3.0
+@see [[m:Coverage.peek_result]]
+--- peek_result -> Hash
+
+測定途中結果をファイル名をキー、各行の実行回数を配列にした値のハッシュを返
+します。空行やコメントのみの行などの測定結果は nil になります。
+
+@return 測定途中結果を表すハッシュ
+
+@raise RuntimeError [[m:Coverage.start]] を実行する前に実行された場合に
+                    発生します。
+
+@see [[m:Coverage.result]]
+#@end
+#@since 2.5.0
+--- running? -> bool
+
+カバレッジ測定中かどうかを返します。
+
+  require 'coverage'
+  p Coverage.running?    #=> false
+  Coverage.start
+  p Coverage.running?    #=> true
+  p Coverage.peek_result #=> {}
+  p Coverage.running?    #=> true
+  p Coverage.result      #=> {}
+  p Coverage.running?    #=> false
+#@end
