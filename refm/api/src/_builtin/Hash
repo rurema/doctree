@@ -1401,3 +1401,40 @@ select! はオブジェクトが変更された場合に self を、
 
 @see [[m:Hash#select]], [[m:Hash#delete_if]],[[m:Hash#reject!]]
 #@end
+#@since 2.4.0
+--- transform_values {|value| ... } -> Hash
+--- transform_values                -> Enumerator
+
+すべての値に対してブロックを呼び出した結果で置き換えたハッシュを返します。
+キーは変化しません。
+
+@return 置き換えたハッシュを返します。
+        ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
+        返します。
+
+  h = { a: 1, b: 2, c: 3 }
+  h.transform_values {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
+  h.transform_values(&:to_s)           #=> { a: "1", b: "2", c: "3" }
+  h.transform_values.with_index {|v, i| "#{v}.#{i}" }
+                                       #=> { a: "1.0", b: "2.1", c: "3.2" }
+
+@see [[m:Hash#transform_values!]]
+--- transform_values! {|value| ... } -> self
+--- transform_values!                -> Enumerator
+
+すべての値に対してブロックを呼び出した結果でハッシュの値を変更します。
+キーは変化しません。
+
+
+@return transform_values! は常に self を返します。
+        ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
+        返します。
+
+  h = { a: 1, b: 2, c: 3 }
+  h.transform_values! {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
+  h.transform_values!(&:to_s)           #=> { a: "2", b: "5", c: "10" }
+  h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
+                                        #=> { a: "2.0", b: "5.1", c: "10.2" }
+
+@see [[m:Hash#transform_values]]
+#@end
