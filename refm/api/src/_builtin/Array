@@ -1401,6 +1401,10 @@ reverse! は self を返します。
 #@end
 #@end
 
+    a = [ "a", "b", "c" ]
+    a.reverse_each {|x| print x, " " }
+    # => c b a
+
 --- rindex(val)           -> Integer | nil
 #@since 1.8.7
 --- rindex {|item| ... }  -> Integer | nil
