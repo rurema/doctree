@@ -207,6 +207,14 @@ string と同じ内容の新しい文字列を作成して返します。
 #@end
 @return         引数 string と同じ内容の文字列オブジェクト
 
+例:
+  text = "hoge".encode("ASCII-8BIT")
+  no_option = String.new(text)                        # => "hoge"
+  no_option.encoding == Encoding::ASCII_8BIT          # => true
+  with_encoding = String.new(text, encoding: "UTF-8") # => "hoge"
+  with_encoding.encoding == Encoding::UTF_8           # => true
+  String.new("test", capacity: 100_000)               # => "test"
+
 == Instance Methods
 
 #@since 2.3.0
