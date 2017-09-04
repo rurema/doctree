@@ -215,6 +215,18 @@ string と同じ内容の新しい文字列を作成して返します。
 self が freeze されている文字列の場合、元の文字列の複製を返します。
 freeze されていない場合は self を返します。
 
+例:
+  # frozen_string_literal: false
+  original_text = "text"
+  unfrozen_text = +original_text
+  original_text == unfrozen_text      # => true
+  original_text.equal?(unfrozen_text) # => true
+
+  frozen_text = "text".freeze
+  unfrozen_text = +frozen_text
+  frozen_text == unfrozen_text        # => true
+  frozen_text.equal?(unfrozen_text)   # => false
+
 --- -@ -> String | self
 
 self が freeze されている文字列の場合、self を返します。
