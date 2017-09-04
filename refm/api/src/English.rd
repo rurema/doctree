@@ -211,7 +211,7 @@
   end
 
 
---- $LAST_MATCH_INFO -> MatchData
+--- $LAST_MATCH_INFO -> MatchData | nil
 
 [[m:$~]] の別名
 
