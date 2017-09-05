@@ -60,7 +60,7 @@ p Prime.take(5) # => [2, 3, 5, 7, 11]
 
 例:
 
-```
+```ruby
 str = "tXt"
 str = str*2      # => "tXttXt"
 p str.upcase     # => "TXTTXT"
@@ -73,7 +73,7 @@ p str.downcase   # => "txttxt"
 
 例:
 
-```
+```ruby
 str = "tXt"
 # 変数は不変
 p str.upcase     # => "TXT"
