@@ -2685,6 +2685,10 @@ eql? で等しい文字列は、常にハッシュ値も等しくなります。
 
 self の最初の文字だけを含む文字列を返します。
 
+例：
+  a = "abcde"
+  a.chr    #=> "a"
+
 @see [[m:String#ord]], [[m:Integer#chr]]
 
 --- start_with?(*strs) -> bool
