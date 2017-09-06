@@ -208,9 +208,13 @@ options で指定します。
 
 他者により提供されたバイナリデータはロードすべきではありません。自分が変換したバイナリデータを使うべきです。
 
+@see [[m:RubyVM::InstructionSequence#to_binary]]
+
 --- load_from_binary_extra_data(binary) -> String
 
 バイナリフォーマットの文字列から埋め込まれたextra_dataを取り出します。
+
+@see [[m:RubyVM::InstructionSequence#to_binary]]
 #@end
 
 == Instance Methods
@@ -484,4 +488,7 @@ self が表す命令シーケンスの 1 行目の行番号を返します。
 [[m:RubyVM::InstructionSequence.load_from_binary_extra_data]] メソッドでこの文字列にアクセス出来ます。
 
 注意: 変換後のバイナリデータはポータブルではありません。 to_binary で得たバイナリデータは他のマシンに移動できません。他のバージョンや他のアーキテクチャのRubyで作られたバイナリデータは使用できません。
+
+@see [[m:RubyVM::InstructionSequence.load_from_binary]]
+@see [[m:RubyVM::InstructionSequence.load_from_binary_extra_data]]
 #@end
