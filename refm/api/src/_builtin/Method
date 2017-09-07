@@ -375,3 +375,16 @@ self 内で super を実行した際に実行されるメソッドを [[c:Method
 
 @see [[m:UnboundMethod#super_method]]
 #@end
+
+#@since 2.1.0
+--- original_name -> Symbol
+
+オリジナルのメソッド名を返します。
+
+例:
+  class C
+    def foo; end
+    alias bar foo
+  end
+  C.new.method(:bar).original_name # => :foo
+#@end
