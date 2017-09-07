@@ -940,12 +940,24 @@ flock は false を返します。
 
 オープン時に使用したパスを文字列で返します。
 
+#@since 2.5.0
+パスは self に対応するファイルを指しているとは限りません。
+たとえば、ファイルが移動されていたり、削除されていたりする場合です。
+
+@raise IOError TMPFILE [[c:File::TMPFILE]]オプション付きで作成されている場合に発生します。
+#@else
 パスは self に対応するファイルを指しているとは限りません。
 たとえば、ファイルが移動されていたり、削除されていたり、
 [[c:File::TMPFILE]]オプション付きで作成されていたりする場合です。
+#@end
 
-   File.new("testfile").path               #=> "testfile"
-   File.new("/tmp/../tmp/xxx", "w").path   #=> "/tmp/../tmp/xxx"
+   File.open("testfile") {|f| f.path }                        #=> "testfile"
+   File.open("/tmp/../tmp/xxx", "w") {|f| f.path }            #=> "/tmp/../tmp/xxx"
+#@since 2.5.0
+   File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } # IOError: File is unnamed (TMPFILE?)
+#@else
+   File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } #=> "/tmp"
+#@end
 
 --- lstat    -> File::Stat
 
