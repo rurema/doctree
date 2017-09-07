@@ -1262,6 +1262,11 @@ rs に nil を指定すると行区切りなしとみなします。 rs に空�
 
 文字列が空 (つまり長さ 0) の時、真を返します。
 
+例:
+  "hello".empty?   #=> false
+  " ".empty?       #=> false
+  "".empty?        #=> true
+
 --- getbyte(index) -> Integer | nil
 
 index バイト目のバイトを整数で返します。
