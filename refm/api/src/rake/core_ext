@@ -93,18 +93,6 @@
 
 自身をパスを表す部分ごとに分解して配列にして返します。
 
-例:
-  require "rake"
-
-  class PathString < String
-    def path_ary
-      self.pathmap_explode
-    end
-  end
-
-  PathString.new("/path/to/file.txt").path_ary    # => ["/", "path", "to", "file.txt"]
-  PathString.new("/path/to/dir").path_ary         # => ["/", "path", "to", "dir"]
-
 @see [[m:String#pathmap]]
 
 --- pathmap_partial(n) -> String
