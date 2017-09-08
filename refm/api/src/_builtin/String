@@ -1500,6 +1500,11 @@ self が空文字列のときは 0 を返します。
 
 @param substr    検索する文字列
 
+例:
+  "hello".include? "lo"   #=> true
+  "hello".include? "ol"   #=> false
+  "hello".include? ?h     #=> true
+
 --- index(pattern, pos = 0) -> Integer
 
 文字列のインデックス pos から右に向かって pattern を検索し、
