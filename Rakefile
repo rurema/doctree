@@ -33,23 +33,27 @@ task :check_prev_commit_format do
   VERSIONS.each do |v|
     change_files.each do |path|
       if %r!\Arefm/api/!.match(path)
+        htmls = []
+        htmls << `bundle exec bitclust htmlfile --ruby=#{v} #{path}`
         File.read(path).scan(/^=[^=]\w+\s*(\S+)\s*(?:<\s*(\S+))?/).each do |k, pk|
           html = `bundle exec bitclust htmlfile --ruby=#{v} --target=#{k} #{path}`
-
-          a = html.lines.grep(/<span class="compileerror">/)
-          if !a.empty?
-            res.push("Found invalid format link: #{a.first.chomp} in #{v}:#{path}")
-          end
+          htmls << html
 
           a = html.lines.grep(/\[UNKNOWN_META_INFO\]/)
           if !a.empty?
             res.push("Found invalid meta info: #{a.first.chomp} in #{v}:#{path}")
           end
         end
+        htmls.each do |html|
+          a = html.lines.grep(/<span class="compileerror">/)
+          if !a.empty?
+            res.push("Found invalid format link: #{a.first.chomp} in #{v}:#{path}")
+          end
+        end
       end
     end
   end
   if res.size > 0
-    raise res.join("\n")
+    raise res.sort.uniq.join("\n")
   end
 end
