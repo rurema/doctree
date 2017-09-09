@@ -3206,3 +3206,14 @@ self が引数 form で指定された正規化形式で Unicode 正規化され
 
 @see [[m:String#unicode_normalize]], [[m:String#unicode_normalize!]]
 #@end
+#@since 2.4.0
+--- unpack1(format) -> object
+
+formatにしたがって文字列をデコードし、展開された1つ目の値を返します。
+
+例:
+  "ABC".unpack1("C*") # => 65
+
+@see [[m:String#unpack]]
+@see [[m:Array#pack]]
+#@end
