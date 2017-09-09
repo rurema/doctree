@@ -2868,6 +2868,11 @@ false を返します。
 文字列の内容が、現在のエンコーディングに照らしあわせて妥当であれば
 true を返します。さもなくば false を返します。
 
+例:
+  "\xc2\xa1".force_encoding("UTF-8").valid_encoding?  #=> true
+  "\xc2".force_encoding("UTF-8").valid_encoding?      #=> false
+  "\x80".force_encoding("UTF-8").valid_encoding?      #=> false
+
 --- encode(encoding, options = nil) -> String
 --- encode(encoding, from_encoding, options = nil) -> String
 --- encode(options = nil) -> String
