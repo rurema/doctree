@@ -165,6 +165,25 @@
 
 @see [[m:Numeric#arg]]
 
+#@since 2.4.0
+--- finite? -> bool
+
+自身の絶対値が有限値の場合に true を、そうでない場合に false を返します。
+
+@see [[m:Complex#infinite?]]
+
+--- infinite? -> nil | 1
+
+自身の絶対値が無限大の場合に1を、そうでない場合に nil を返します。
+
+例:
+
+  (1+1i).infinite?                   # => nil
+  (Float::INFINITY + 1i).infinite?   # => 1
+
+@see [[m:Complex#finite?]]
+#@end
+
 --- coerce(other) -> [Complex, Complex]
 
 other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
