@@ -201,13 +201,6 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
 
 @see [[m:Complex#numerator]]
 
---- eql?(other) -> bool
-
-自身と other の実部と虚部のクラスが等しく、それぞれが数値として等しい場
-合に true を返します。そうでない場合に false を返します。
-
-@param other 自身と比較する数値
-
 --- fdiv(other) -> Complex
 
 self を other で割った商を返します。
