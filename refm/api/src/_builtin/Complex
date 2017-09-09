@@ -241,7 +241,13 @@ self を other で割った商を返します。
 
 自身を人間が読みやすい形の文字列表現にして返します。
 
-"(1+1i)", "(1-1i)" のような文字列を返します。
+例:
+
+  Complex(2).inspect                       # => "(2+0i)"
+  Complex('-8/6').inspect                  # => "((-4/3)+0i)"
+  Complex('1/2i').inspect                  # => "(0+(1/2)*i)"
+  Complex(0, Float::INFINITY).inspect      # => "(0+Infinity*i)"
+  Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
 
 #@until 2.0.0
 --- marshal_dump -> Array
@@ -365,10 +371,23 @@ self を other で割った商を返します。
 
 自身を "実部 + 虚部i" 形式の文字列にして返します。
 
+例:
+
+  Complex(2).to_s                       # => "2+0i"
+  Complex('-8/6').to_s                  # => "-4/3+0i"
+  Complex('1/2i').to_s                  # => "0+1/2i"
+  Complex(0, Float::INFINITY).to_s      # => "0+Infinity*i"
+  Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
+
 #@since 2.0.0
 --- to_c -> self
 
 self を返します。
+
+例:
+
+  Complex(2).to_c      # => (2+0i)
+  Complex(-8, 6).to_c  # => (-8+6i)
 #@end
 
 == Class Methods
