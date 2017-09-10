@@ -751,8 +751,9 @@ yday は 1 から数えます。
 自身の表す時刻が日曜日である場合に true を返します。
 そうでない場合に false を返します。
 
-   t = Time.now   #=> Sun Oct 23 00:14:54 UTC 2005
-   t.sunday?      #=> true
+例:
+  t = Time.local(1990, 4, 1)       #=> 1990-04-01 00:00:00 -0600
+  t.sunday?                        #=> true
 
 --- thursday? -> bool
 
