@@ -34,6 +34,14 @@ category File
   真を指定するとファイルの削除に [[m:FileUtils.#remove_entry_secure]] を使用します。
 : :mtime
   時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+: :parents
+  真を指定すると指定したディレクトリの親ディレクトリも含めて削除します。
+#@since 2.4.0
+: :owner
+  ユーザー名か uid を指定すると所有ユーザを変更します。
+: :group
+  グループ名か gid を指定すると所有グループを指定します。
+#@end
 
 == Module Functions
 
@@ -344,7 +352,11 @@ src と dest の内容が違うときだけ src を dest にコピーします�
 
 @param dest コピー先のファイルかディレクトリです。
 
+#@since 2.4.0
+@param options :preserve, :noop, :verbose, :mode, :owner, :group が指定できます。
+#@else
 @param options :preserve, :noop, :verbose, :mode が指定できます。
+#@end
                [[ref:c:FileUtils#options]]
 
 例:
@@ -614,7 +626,7 @@ rm_r(list, {:force => true}) と同じです。
 @param dir 削除するディレクトリを指定します。一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
 
-@param options :noop, :verbose が指定できます。
+@param options parents:, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
 例:
@@ -765,7 +777,12 @@ mid というメソッドが opt というオプションを持つ場合、真�
 オプション名の配列を返します。
 
   require 'fileutils'
-  FileUtils.options  #=> ["noop", "force", "verbose", "preserve", "mode"]
+  FileUtils.options
+#@since 2.4.0
+  # => ["noop", "verbose", "force", "mode", "parents", "owner", "group", "preserve", "dereference_root", "remove_destination", "secure", "mtime", "nocreate"]
+#@else
+  # => ["verbose", "mode", "noop", "parents", "force", "preserve", "dereference_root", "remove_destination", "secure", "mtime", "nocreate"]
+#@end
 
 --- options_of(mid) -> Array
 
