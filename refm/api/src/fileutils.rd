@@ -615,8 +615,6 @@ rm_r(list, {:force => true}) と同じです。
 @param options :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
-@raise Errno::ENOTEMPTY 削除するディレクトリが空でない場合に発生します。
-
 例:
 
   require 'fileutils'
