@@ -199,6 +199,23 @@ options で指定します。
   > RubyVM::InstructionSequence.of($a_global_proc)
   > # => #<RubyVM::InstructionSequence:0x007fb73d7caf78>
 #@end
+#@since 2.3.0
+--- load_from_binary(binary) -> RubyVM::InstructionSequence
+
+[[m:RubyVM::InstructionSequence#to_binary]]により作られたバイナリフォーマットの文字列からiseqのオブジェクトをロードします。
+
+このローダーは検証機構をもっておらず、壊れたり改変されたバイナリを読み込むと深刻な問題を引き起こします。
+
+他者により提供されたバイナリデータはロードすべきではありません。自分が変換したバイナリデータを使うべきです。
+
+@see [[m:RubyVM::InstructionSequence#to_binary]]
+
+--- load_from_binary_extra_data(binary) -> String
+
+バイナリフォーマットの文字列から埋め込まれたextra_dataを取り出します。
+
+@see [[m:RubyVM::InstructionSequence#to_binary]]
+#@end
 
 == Instance Methods
 
@@ -460,4 +477,18 @@ self が表す命令シーケンスの 1 行目の行番号を返します。
 
   RubyVM::InstructionSequence.of(method(:foo)).first_lineno
   # => 2
+#@end
+#@since 2.3.0
+--- to_binary(extra_data = nil) -> String
+
+バイナリフォーマットでシリアライズされたiseqのデータを文字列として返します。
+[[m:RubyVM::InstructionSequence.load_from_binary]] メソッドでバイナリデータに対応するiseqオブジェクトを作れます。
+
+引数の extra_data はバイナリデータと共に保存されます。
+[[m:RubyVM::InstructionSequence.load_from_binary_extra_data]] メソッドでこの文字列にアクセス出来ます。
+
+注意: 変換後のバイナリデータはポータブルではありません。 to_binary で得たバイナリデータは他のマシンに移動できません。他のバージョンや他のアーキテクチャのRubyで作られたバイナリデータは使用できません。
+
+@see [[m:RubyVM::InstructionSequence.load_from_binary]]
+@see [[m:RubyVM::InstructionSequence.load_from_binary_extra_data]]
 #@end
