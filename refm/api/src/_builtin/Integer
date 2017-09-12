@@ -85,6 +85,13 @@ self < min であれば何もしません。
 
 self の次の整数を返します。
 
+例:
+
+  1.next      #=> 2
+  (-1).next   #=> 0
+  1.succ      #=> 2
+  (-1).succ   #=> 0
+
 --- times {|n| ... } -> self
 #@since 1.8.7
 #@since 1.9.1
