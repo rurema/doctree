@@ -2863,6 +2863,13 @@ self が空文字列のときは例外を発生します。
 文字列がASCII文字のみで構成されている場合に true を返します。さもなくば
 false を返します。
 
+例:
+
+  'abc123'.ascii_only?        # => true
+  ''.ascii_only?              # => true
+  '日本語'.ascii_only?        # => false
+  '日本語abc123'.ascii_only?  # => false
+
 --- valid_encoding?  -> bool
 
 文字列の内容が、現在のエンコーディングに照らしあわせて妥当であれば
