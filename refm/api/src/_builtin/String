@@ -186,6 +186,7 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 #@end
 #@since 2.4.0
 --- new(string = "", capacity: size) -> String
+--- new(string = "", encoding: enc, capacity: size) -> String
 #@end
 
 string と同じ内容の新しい文字列を作成して返します。
@@ -206,6 +207,18 @@ string と同じ内容の新しい文字列を作成して返します。
                 パフォーマンスが改善されるかもしれません。
 #@end
 @return         引数 string と同じ内容の文字列オブジェクト
+
+例:
+  text = "hoge".encode("EUC-JP")
+  no_option = String.new(text)                             # => "hoge"
+  no_option.encoding == Encoding::EUC_JP                   # => true
+#@since 2.3.0
+  with_encoding = String.new(text, encoding: "UTF-8")      # => "hoge"
+  with_encoding.encoding == Encoding::UTF_8                # => true
+#@end
+#@since 2.4.0
+  String.new("test", encoding: "UTF-8", capacity: 100_000) # => "test"
+#@end
 
 == Instance Methods
 
