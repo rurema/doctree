@@ -80,6 +80,20 @@
 
 自身のインスタンスを生成して返します。生成したオブジェクトは
 自身のインスタンスであること以外には何も特性を持ちません。
+
+例:
+  klass = Class.new do
+    def initialize(*args)
+      @initialized = true
+    end
+
+    def initialized?
+      @initialized || false
+    end
+  end
+
+  klass.allocate.initialized? #=> false
+
 #@end
 
 --- new(*args, &block)    -> object
