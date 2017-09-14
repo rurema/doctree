@@ -114,11 +114,18 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
 
 自身のスーパークラスを返します。
 
-#@since 1.9.1
+例:
+  File.superclass          #=> IO
+  IO.superclass            #=> Object
+  class Foo; end
+  class Bar < Foo; end
+  Bar.superclass           #=> Foo
+  Object.superclass        #=> BasicObject
+
 ただし [[c:BasicObject]].superclass は nil を返します。
-#@else
-ただし [[c:Object]].superclass は nil を返します。
-#@end
+
+例:
+  BasicObject.superclass   #=> nil
 
 --- _load(str)    -> Class
 
