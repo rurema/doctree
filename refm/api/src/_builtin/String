@@ -2709,6 +2709,19 @@ eql? で等しい文字列は、常にハッシュ値も等しくなります。
 
 self の最初の文字だけを含む文字列を返します。
 
+例：
+  a = "abcde"
+  a.chr    #=> "a"
+
+Ruby 1.9 で IO#getc の戻り値が Integer から String を返すように変更になりました。
+Ruby 1.8 以前と1.9以降の互換性を保つために  String#chr が存在します。
+
+例:
+  # ruby 1.8 系では STDIN.getc が 116 を返すため Integer#chr が呼び出される
+  $ echo test | ruby -e "p STDIN.getc.chr" # => "t"
+  # ruby 1.9 系以降では STDIN.getc が "t" を返すため String#chr が呼び出される
+  $ echo test | ruby -e "p STDIN.getc.chr" # => "t"
+
 @see [[m:String#ord]], [[m:Integer#chr]]
 
 --- start_with?(*strs) -> bool
