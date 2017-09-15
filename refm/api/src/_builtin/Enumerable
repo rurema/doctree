@@ -1187,6 +1187,9 @@ nil、 :_separator はある要素を無視したい場合に用います。
   p a.chunk_while {|i, j| i.even? == j.even? }.to_a
   # => [[7, 5, 9], [2, 0], [7, 9], [4, 2, 0]]
 
+[[m:Enumerable#slice_when]] はブロックの戻り値が真ではなく偽の時に要素
+を分ける事を除いて同じ処理を行います。
+
 @see [[m:Enumerable#slice_when]], [[m:Enumerable#chunk]]
 #@end
 
@@ -1230,7 +1233,8 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 各チャンクは配列として表現されます。
 
-[[m:Enumerable#map]] のようなメソッドを使うこともできます。
+[[m:Enumerable#to_a]] や [[m:Enumerable#map]] のようなメソッドを使うこ
+ともできます。
   
   # 偶数要素をチャンクの先頭と見なす 
   [0,2,4,1,2,4,5,3,1,4,2].slice_before(&:even?).to_a
@@ -1264,7 +1268,9 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 複数要素にわたる状態遷移が必要な場合は、ローカル変数でこれを実現する
 ことができます。例えば、連続に増える数値が3つ以上ある場合、これを
-まとめる処理をするためには以下のようにします。
+まとめる処理をするためには以下のようにします
+([[m:Enumerable#chunk_while]] のより簡単な例も参照)。
+
   a = [0,2,3,4,6,7,9]
   prev = a[0]
   p a.slice_before {|e|
@@ -1441,6 +1447,9 @@ nil、 :_separator はある要素を無視したい場合に用います。
   lines = ["foo\n", "bar\n", "\n", "baz\n", "qux\n"]
   p lines.slice_when {|l1, l2| /\A\s*\z/ =~ l1 && /\S/ =~ l2 }.to_a
   # => [["foo\n", "bar\n", "\n"], ["baz\n", "qux\n"]]
+
+[[m:Enumerable#chunk_while]] はブロックの戻り値が偽ではなく真の時に要
+素を分ける事を除いて同じ処理を行います。
 
 #@since 2.3.0
 @see [[m:Enumerable#chunk_while]], [[m:Enumerable#chunk]]
