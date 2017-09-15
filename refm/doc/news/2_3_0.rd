@@ -191,7 +191,7 @@
       [[bug:11444]]
 
   * [[c:Module]]
-    * [[m:Module#define_method]] と [[m:Object.define_singleton_method]] は
+    * [[m:Module#define_method]] と [[m:Object#define_singleton_method]] は
       メソッド本体(Procオブジェクト、Methodオブジェクト、またはブロック )が必須になりました。
       ブロックが与えられない場合は ArgumentError が発生します。
       [[bug:11283]]
