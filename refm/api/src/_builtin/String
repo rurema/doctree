@@ -2694,6 +2694,10 @@ str が "string" という内容の文字列でありさえすれば常に true 
 self のハッシュ値を返します。
 eql? で等しい文字列は、常にハッシュ値も等しくなります。
 
+例:
+  "test".hash                        # => 4038258770210371295
+  ("te" + "st").hash == "test".hash  # => true
+
 @see [[c:Hash]]
 
 --- inspect -> String
