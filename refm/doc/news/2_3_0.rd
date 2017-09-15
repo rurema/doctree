@@ -94,7 +94,7 @@
       [[feature:11653]]
 
   * [[c:IO]]
-    * 新しいフラグ File::SHARE_DELETE([[m:File::Constants::SHARE_DELETE]] が使用できます。
+    * 新しいフラグ File::SHARE_DELETE([[m:File::Constants::SHARE_DELETE]]) が使用できます。
       Windows で開いているファイルを削除することを許可しますが、現在はファイルをバイナリモードで開いているときのみ効果があります。
       [[feature:11218]]
     * `flags` オプションの追加。
