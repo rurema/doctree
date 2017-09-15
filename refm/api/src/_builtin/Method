@@ -387,4 +387,6 @@ self 内で super を実行した際に実行されるメソッドを [[c:Method
     alias bar foo
   end
   C.new.method(:bar).original_name # => :foo
+
+@see [[m:UnboundMethod#original_name]]
 #@end

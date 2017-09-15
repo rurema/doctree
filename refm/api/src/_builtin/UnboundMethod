@@ -242,4 +242,6 @@ self 内で super を実行した際に実行されるメソッドを [[c:Unboun
     alias bar foo
   end
   C.instance_method(:bar).original_name # => :foo
+
+@see [[m:Method#original_name]]
 #@end

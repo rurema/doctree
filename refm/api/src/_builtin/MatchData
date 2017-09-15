@@ -107,7 +107,11 @@ n 番目の部分文字列がマッチしていなければ nil を返します�
   p $~.to_a       # => ["foobar", "foo", "bar", nil]
   p $~.captures       # => ["foo", "bar", nil]
 
+#@since 2.4.0
+@see [[m:MatchData#to_a]], [[m:MatchData#named_captures]]
+#@else
 @see [[m:MatchData#to_a]]
+#@end
 
 --- length -> Fixnum
 --- size -> Fixnum
@@ -140,12 +144,16 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
   /(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.post_match # => "baz"
 
+@see [[m:MatchData#pre_match]]
+
 --- pre_match -> String
 
 マッチした部分より前の文字列を返します([[m:$`]]と同じ)。
 
   /(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.pre_match  # => "foo"
+
+@see [[m:MatchData#post_match]]
 
 #@since 1.8.0
 #@until 1.9.1
@@ -286,4 +294,6 @@ Hashのキーは名前付きキャプチャの名前です。Hashの値はキー
 
   m = /(?<a>x)|(?<a>y)/.match("x")
   m.named_captures #=> {"a" => "x"}
+
+@see [[m:MatchData#captures]]
 #@end
