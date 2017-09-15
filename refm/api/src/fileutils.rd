@@ -626,7 +626,7 @@ rm_r(list, {:force => true}) と同じです。
 @param dir 削除するディレクトリを指定します。一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
 
-@param options parents:, :noop, :verbose が指定できます。
+@param options :parents, :noop, :verbose が指定できます。
                [[ref:c:FileUtils#options]]
 
 例:
