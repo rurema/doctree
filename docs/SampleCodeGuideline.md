@@ -88,17 +88,92 @@ p str              # => "TXT"
 
 ## 体裁
 * 各サンプルの先頭に `例:` の文言を記載してください
-* 複数のサンプルを続けて記述する場合は、各サンプルごとに `例:` を記載してください
 * サンプルは半角スペース2個でインデントしてください
 * `# =>`の`#`と`=>`の間にスペースを一つ入れてください
 * 値を表示するための`p`はあってもなくても構いません
 
-例:
+例
 
 ```ruby
 例:
   "text"[1]  # => "e"
+```
 
+* 複数のサンプルを続けて記述する場合は、各サンプルごとに `例:` を記載してください
+
+悪い例
+
+2つの例の区切りがわかりにくい
+
+```
 例:
-  "text"[-1] # => "t"
+  require 'yaml'
+  data = [ "Taro san", "Jiro san", "Saburo san"]
+  str_r = YAML.dump(data)
+  str_l =<<EOT
+  --- 
+  - Taro san
+  - Jiro san
+  - Saburo san
+  EOT
+  p str_r == str_l #=> true
+
+  require 'yaml'
+  require 'date'
+  str_l =<<YAML_EOT
+  Tanaka Taro: { age: 35, birthday: 1970-01-01}
+  Suzuki Suneo: {
+    age: 13,
+    birthday: 1992-12-21
+  }
+  YAML_EOT
+  str_r = {}
+  str_r["Tanaka Taro"] = {
+    "age" => 35,
+    "birthday" => Date.new(1970, 1, 1)
+  }
+  str_r["Suzuki Suneo"] = {
+    "age" => 13,
+    "birthday" => Date.new(1992, 12, 21)
+  }
+  p str_r == YAML.load(str_l) #=> true
+```
+
+良い例
+
+2つの例の区切りが明確にわかる
+
+```
+例1: 構造化された配列
+  require 'yaml'
+  data = [ "Taro san", "Jiro san", "Saburo san"]
+  str_r = YAML.dump(data)
+  str_l =<<EOT
+  --- 
+  - Taro san
+  - Jiro san
+  - Saburo san
+  EOT
+  p str_r == str_l #=> true
+
+例2: 構造化されたハッシュ
+  require 'yaml'
+  require 'date'
+  str_l =<<YAML_EOT
+  Tanaka Taro: { age: 35, birthday: 1970-01-01}
+  Suzuki Suneo: {
+    age: 13,
+    birthday: 1992-12-21
+  }
+  YAML_EOT
+  str_r = {}
+  str_r["Tanaka Taro"] = {
+    "age" => 35,
+    "birthday" => Date.new(1970, 1, 1)
+  }
+  str_r["Suzuki Suneo"] = {
+    "age" => 13,
+    "birthday" => Date.new(1992, 12, 21)
+  }
+  p str_r == YAML.load(str_l) #=> true
 ```
