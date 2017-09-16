@@ -263,7 +263,13 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 範囲内の最小の値を返します。
 
-該当する要素が存在しなければ nil を返します。
+   (1..5).min # => 1
+
+始端が終端より大きい場合、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は nil を返します。
+
+   (2..1).min  # => nil
+   (1...1).min # => nil
 
 --- min {|a, b| ... } -> object | nil
 
@@ -275,13 +281,19 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 @raise TypeError ブロックが整数以外を返したときに発生します。
 
-@see [[m:Range#first]], [[m:Enumerable#min]]
+@see [[m:Range#first]], [[m:Range#max]], [[m:Enumerable#min]]
 
 --- max               -> object | nil
 
 範囲内の最大の値を返します。
 
-該当する要素が存在しなければ nil を返します。
+   (1..5).max  # => 5
+
+始端が終端より大きい場合、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は nil を返します。
+
+   (2..1).max  # => nil
+   (1...1).max # => nil
 
 --- max {|a, b| ... } -> object | nil
 
@@ -293,7 +305,7 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 @raise TypeError ブロックが整数以外を返したときに発生します。
 
-@see [[m:Range#last]], [[m:Enumerable#max]]
+@see [[m:Range#last]], [[m:Range#min]], [[m:Enumerable#max]]
 #@end
 
 #@since 2.0.0
