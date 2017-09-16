@@ -103,8 +103,8 @@
   Complex(1, 0) == Complex(1) # => true
   Complex(1, 0) == 1          # => true
 
---- abs       -> Float
---- magnitude -> Float
+--- abs       -> Numeric
+--- magnitude -> Numeric
 
 自身の絶対値を返します。
 
