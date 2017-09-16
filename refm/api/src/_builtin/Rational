@@ -202,7 +202,7 @@ self と other を比較して、self が大きい時に 1、等しい時に 0�
   Rational('1/3') == 0.33             # => false
   Rational('1/2') == '1/2'            # => false
 
-#@until 1.9.2
+#@since 2.4.0
 --- abs -> Rational
 
 自身の絶対値を返します。
