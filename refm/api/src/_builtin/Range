@@ -28,8 +28,8 @@ Ruby の Range クラスは immutable です。
 決して変更することはできません。
 
   range = 1..10
-  range.first     #=> 1
-  range.first = 1 #=> NoMethodError
+  range.first     # => 1
+  range.first = 1 # => NoMethodError
 
 == Class Methods
 
@@ -66,6 +66,8 @@ include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
 
 @param obj 比較対象のオブジェクトを指定します。
 
+例:
+
   p (0.1 .. 0.2).member?(0.15)  # => true
   
   # 文字列の場合、include? は辞書順の比較になる
@@ -88,6 +90,8 @@ Range#cover? は連続値を扱います。
 （数値については、例外として [[m:Range#include?]] も連続的に扱います。）
 
 @param obj 比較対象のオブジェクトを指定します。
+
+例:
 
   # 数値は連続的に扱われているため、 include? / cover? が同じ結果を返す
   (1.1..2.3).include?(1.0)    # => false
@@ -118,8 +122,12 @@ Range#cover? は連続値を扱います。
 始端の要素を返します。範囲オブジェクトが始端を含むかどうかは関係ありま
 せん。
 
+例:
+
   p (1..5).begin # => 1
   p (1..0).begin # => 1
+
+@see [[m:Range#end]]
 
 #@since 1.9.1
 --- first(n) -> [object]
@@ -134,7 +142,11 @@ Range#cover? は連続値を扱います。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
-@see [[ruby-core:12697]]
+例:
+
+  (10..20).first(3)  # => [10, 11, 12]
+
+@see [[m:Range#last]], [[ruby-core:12697]]
 #@end
 
 --- each {|item|  ... } -> self
@@ -155,14 +167,26 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 
 #@end
 
+例:
+
+  (10..15).each {|n| print n, ' ' }
+  # prints: 10 11 12 13 14 15
+
+  (2.5..5).each {|n| print n, ' ' }
+  # raises: TypeError: can't iterate from Float
+
 --- end -> object
 --- last -> object
 
 終端の要素を返します。範囲オブジェクトが終端を含むかどうかは関係ありま
 せん。
 
+例:
+
   (10..20).last      # => 20
   (10...20).last     # => 20
+
+@see [[m:Range#begin]]
 
 #@since 1.9.1
 --- last(n) -> [object]
@@ -181,8 +205,12 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 ([[m:Range#exclude_end?]] の戻り値)に関わらず終端の要素を返す事に注意し
 てください。
 
+例:
+
   (10..20).last(3)   # => [18, 19, 20]
   (10...20).last(3)  # => [17, 18, 19]
+
+@see [[m:Range#first]]
 
 #@# [[ruby-core:12697]]
 #@end
@@ -190,6 +218,11 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 --- exclude_end? -> bool
 
 範囲オブジェクトが終端を含まないとき真を返します。
+
+例:
+
+  (1..5).exclude_end?     # => false
+  (1...5).exclude_end?    # => true
 
 #@since 1.8.0
 --- step(s = 1) {|item| ... } -> self
@@ -207,6 +240,8 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 
 @raise ArgumentError s に 0 または負の数を指定した場合に発生します
 
+例:
+
   ("a" .. "f").step(2) {|v| p v}
   # => "a"
        "c"
@@ -221,9 +256,11 @@ true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-  p (1..2) == (1..2)               #=> true
-  p (1..2) == (1...2)              #=> false
-  p (1..2) == Range.new(1.0, 2.0)  #=> true
+例:
+
+  p (1..2) == (1..2)               # => true
+  p (1..2) == (1...2)              # => false
+  p (1..2) == Range.new(1.0, 2.0)  # => true
 
 --- eql?(other)   -> bool
 
@@ -233,16 +270,20 @@ true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-  p (1..2).eql?(1..2)                 #=> true
-  p (1..2).eql?(1...2)                #=> false
-  p (1..2).eql?(Range.new(1.0, 2.0))  #=> false
+例:
+
+  p (1..2).eql?(1..2)                 # => true
+  p (1..2).eql?(1...2)                # => false
+  p (1..2).eql?(Range.new(1.0, 2.0))  # => false
 
 --- hash    -> Integer
 
 始点と終点のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
 
-  p (1..2).hash    #=> 5646
-  p (1...2).hash   #=> 16782863
+例:
+
+  p (1..2).hash    # => 5646
+  p (1...2).hash   # => 16782863
 
 --- to_s -> String
 
@@ -263,10 +304,14 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 範囲内の最小の値を返します。
 
+例:
+
    (1..5).min # => 1
 
 始端が終端より大きい場合、終端を含まない範囲オブジェクトの始端が終端と
 等しい場合は nil を返します。
+
+例:
 
    (2..1).min  # => nil
    (1...1).min # => nil
@@ -287,10 +332,14 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 範囲内の最大の値を返します。
 
+例:
+
    (1..5).max  # => 5
 
 始端が終端より大きい場合、終端を含まない範囲オブジェクトの始端が終端と
 等しい場合は nil を返します。
+
+例:
 
    (2..1).max  # => nil
    (1...1).max # => nil
@@ -330,6 +379,8 @@ find-minimum モード(特に理由がない限りはこのモードを使う方
 
 ブロックの評価結果が true になる最初の要素を返すか、nil を返します。
 
+例:
+
    ary = [0, 4, 7, 10, 12]
    (0...ary.size).bsearch {|i| ary[i] >= 4 } # => 1
    (0...ary.size).bsearch {|i| ary[i] >= 6 } # => 2
@@ -347,6 +398,8 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
  * ブロックパラメータの値が求める値の範囲よりも大きい（y <= v）場合: 負の数を返す
 
 ブロックの評価結果が 0 になるいずれかの要素を返すか、nil を返します。
+
+例:
 
    ary = [0, 100, 100, 100, 200]
    (0..4).bsearch {|i| 100 - ary[i] } # => 1, 2 or 3
@@ -370,6 +423,9 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 範囲内の要素数を返します。始端、終端のいずれかのオブジェクトが
 [[c:Numeric]] のサブクラスのオブジェクトではない場合には nil を返します。
 
+例:
+
   (10..20).size    # => 11
   ("a".."z").size  # => nil
+  (-Float::INFINITY..Float::INFINITY).size # => Infinity
 #@end
