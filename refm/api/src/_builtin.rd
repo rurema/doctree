@@ -8,7 +8,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/ArgumentError)
 #@include(_builtin/Array)
 #@include(_builtin/BasicObject)
+#@until 2.4.0
 #@include(_builtin/Bignum)
+#@end
 #@include(_builtin/Binding)
 #@include(_builtin/Class)
 #@since 2.3.0
@@ -37,7 +39,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/FileTest)
 #@include(_builtin/File__Constants)
 #@include(_builtin/File__Stat)
+#@until 2.4.0
 #@include(_builtin/Fixnum)
+#@end
 #@include(_builtin/Float)
 #@include(_builtin/FloatDomainError)
 #@include(_builtin/GC)
