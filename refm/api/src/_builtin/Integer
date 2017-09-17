@@ -136,6 +136,10 @@ self を返します。
 #@since 1.8.0
 --- to_s(base) -> String
 #@end
+#@since 2.4.0
+--- inspect       -> String
+--- inspect(base) -> String
+#@end
 
 整数を 10 進文字列表現に変換します。
 
