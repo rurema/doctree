@@ -129,6 +129,10 @@ self が正の整数でない場合は何もしません。
 
 --- to_i   -> self
 --- to_int -> self
+--- floor  -> self
+--- ceil   -> self
+--- round  -> self
+--- truncate -> self
 
 self を返します。
 
