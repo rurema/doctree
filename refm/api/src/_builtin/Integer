@@ -1,9 +1,22 @@
 = class Integer < Numeric
 
-整数の抽象クラス。サブクラスとして [[c:Fixnum]] と [[c:Bignum]] があり
-ます。この 2 種類の整数は値の大きさに応じてお互いに自動的に変換されま
-す。ビット操作において整数は無限の長さのビットストリングとみなすことが
-できます。
+#@since 2.4.0
+alias Fixnum
+alias Bignum
+
+整数クラスです。
+
+整数オブジェクトに特異メソッドを追加する事はできません。追加した場合、
+[[c:TypeError]] が発生します。
+#@else
+整数の抽象クラスです。サブクラスとして [[c:Fixnum]] と [[c:Bignum]] が
+あります。この 2 種類の整数は値の大きさに応じてお互いに自動的に変換さ
+れます。ビット操作において整数は無限の長さのビットストリングとみなすこ
+とができます。
+#@end
+
+2.4.0 から [[c:Fixnum]], [[c:Bignum]] は Integerに統合されました。
+2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
 
 == Instance Methods
 
@@ -80,8 +93,13 @@ self < min であれば何もしません。
 
 @see [[m:Integer#upto]], [[m:Numeric#step]], [[m:Integer#times]]
 
+#@since 2.4.0
+--- next -> Integer
+--- succ -> Integer
+#@else
 --- next -> Fixnum | Bignum
 --- succ -> Fixnum | Bignum
+#@end
 
 self の次の整数を返します。
 
@@ -116,12 +134,96 @@ self が正の整数でない場合は何もしません。
 
 --- to_i   -> self
 --- to_int -> self
+#@until 2.4.0
+--- floor  -> self
+--- ceil   -> self
+--- round  -> self
+--- truncate -> self
+#@end
 
 self を返します。
+
+#@since 2.4.0
+--- floor(ndigits = 0) -> Integer | Float
+
+self と等しいかより小さな整数のうち最大のものを返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+  1.floor        # => 1
+  1.floor(2)     # => 1.0
+  15.floor(-1)   # => 10
+
+@see [[m:Numeric#floor]]
+
+--- ceil(ndigits = 0) -> Integer | Float
+
+self と等しいかより大きな整数のうち最小のものを返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+  1.ceil        # => 1
+  1.ceil(2)     # => 1.0
+  15.ceil(-1)   # => 20
+
+@see [[m:Numeric#ceil]]
+
+--- round(ndigits = 0) -> Integer | Float
+
+self ともっとも近い整数を返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+  1.round        # => 1
+  1.round(2)     # => 1.0
+  15.round(-1)   # => 20
+
+@see [[m:Numeric#round]]
+
+--- truncate(ndigits = 0) -> Integer | Float
+
+0 から self までの整数で、自身にもっとも近い整数を返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+     1.truncate        # => 1
+     1.truncate(2)     # => 1.0
+     15.truncate(-1)   # => 10
+
+@see [[m:Numeric#truncate]]
+#@end
 
 --- to_s -> String
 #@since 1.8.0
 --- to_s(base) -> String
+#@end
+#@since 2.4.0
+--- inspect       -> String
+--- inspect(base) -> String
 #@end
 
 整数を 10 進文字列表現に変換します。
@@ -142,7 +244,11 @@ self を返します。
 @raise ArgumentError base に 2 - 36 以外の数値を指定した場合に発生します。
 #@end
 
+#@since 2.4.0
+--- upto(max) {|n| ... } -> Integer
+#@else
 --- upto(max) {|n| ... } -> Fixnum | Bignum
+#@end
 #@since 1.8.7
 #@since 1.9.1
 --- upto(max) -> Enumerator
@@ -300,5 +406,270 @@ self から -1 した値を返します。
   2.rationalize      # => (2/1)
   2.rationalize(100) # => (2/1)
   2.rationalize(0.1) # => (2/1)
+
+#@end
+#@since 2.4.0
+--- to_f -> Float
+
+self を浮動小数点数([[c:Float]])に変換します。
+
+self が [[c:Float]] の範囲に収まらない場合、[[m:Float::INFINITY]] を返します。
+
+--- <=>(other) -> -1 | 0 | 1 | nil
+
+self と other を比較して、self が大きい時に1、等しい時に 0、小さい時
+に-1、比較できない時に nil を返します。
+
+@param other 比較対象の数値
+@return      -1 か 0 か 1 のいずれか
+
+例:
+
+  1 <=> 2 # => -1
+  1 <=> 1 # => 0
+  2 <=> 1 # => 1
+
+--- -@ -> Integer
+
+単項演算子の - です。
+self の符号を反転させたものを返します。
+
+--- +(other) -> Numeric
+
+算術演算子。和を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- -(other) -> Numeric
+
+算術演算子。差を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- *(other) -> Numeric
+
+算術演算子。積を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- /(other) -> Numeric
+--- div(other) -> Numeric
+
+算術演算子。商を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- %(other) -> Numeric
+--- modulo(other) -> Numeric
+
+算術演算子。剰余を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- remainder(other) -> Numeric
+
+self を other で割った余り r を返します。
+
+r の符号は self と同じになります。
+
+@param other self を割る数。
+
+@see [[m:Integer#divmod]], [[m:Integer#modulo]], [[m:Numeric#modulo]]
+
+--- divmod(other) -> [Integer, Numeric]
+
+self を other で割った商 q と余り r を、 [q, r] という 2 要素の配列にし
+て返します。 商 q は常に整数ですが、余り r は整数であるとは限りません。
+
+@param other self を割る数。
+
+@see [[m:Numeric#divmod]]
+
+--- fdiv(other) -> Numeric
+
+self を other で割った商を [[c:Float]] で返します。
+ただし [[c:Complex]] が関わる場合は例外です。
+その場合も成分は Float になります。
+
+@param other self を割る数を指定します。
+
+@see [[m:Numeric#quo]]
+
+--- **(other) -> Numeric
+
+算術演算子。冪(べき乗)を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+例:
+
+  2 ** 3 # => 8
+  2 ** 0 # => 1
+  0 ** 0 # => 1
+
+--- abs -> Integer
+--- magnitude -> Integer
+
+self の絶対値を返します。
+
+--- ==(other) -> bool
+--- ===(other) -> bool
+
+比較演算子。数値として等しいか判定します。
+
+@param other 比較対象の数値
+@return      self と other が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- <(other)  -> bool
+
+比較演算子。数値として小さいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other が大きい場合 true を返します。
+             そうでなければ false を返します。
+
+--- <=(other) -> bool
+
+比較演算子。数値として等しいまたは小さいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が大きい場合か、
+             両者が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- >(other)  -> bool
+
+比較演算子。数値として大きいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が小さい場合 true を返します。
+             そうでなければ false を返します。
+
+--- >=(other) -> bool
+
+比較演算子。数値として等しいまたは大きいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が小さい場合か、
+             両者が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- ~        -> Integer
+ビット演算子。否定を計算します。
+
+例:
+
+  ~1  # => -2
+  ~3  # => -4
+  ~-4 # => 3
+
+--- |(other) -> Integer
+ビット二項演算子。論理和を計算します。
+
+@param other 数値
+
+例:
+
+  1 | 1 # => 1
+  2 | 3 # => 3
+
+--- &(other) -> Integer
+ビット二項演算子。論理積を計算します。
+
+@param other 数値
+
+例:
+
+  1 & 1 # => 1
+  2 & 3 # => 2
+
+--- ^(other) -> Integer
+ビット二項演算子。排他的論理和を計算します。
+
+@param other 数値
+
+例:
+
+  1 ^ 1 # => 0
+  2 ^ 3 # => 1
+
+--- [](nth) -> Integer
+
+nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
+を、そうでなければ 0 を返します。
+
+@param nth  何ビット目を指すかの数値
+@return     1 か 0
+
+self[nth]=bit (つまりビットの修正) がないのは、Numeric 関連クラスが
+immutable であるためです。
+
+--- <<(bits) -> Integer
+
+シフト演算子。bits だけビットを左にシフトします。
+
+@param bits シフトさせるビット数
+
+例:
+
+    printf("%#b\n", 0b0101 << 1) # => 0b1010
+    p -1 << 1 # => -2
+
+--- >>(bits) -> Integer
+シフト演算子。bits だけビットを右にシフトします。
+
+右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
+bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
+
+@param bits シフトさせるビット数
+
+例:
+
+    printf("%#b\n", 0b0101 >> 1) # => 0b10
+    p -1 >> 1 # => -1
+
+--- size -> Integer
+
+整数の実装上のサイズをバイト数で返します。
+
+例:
+
+    p 1.size
+    p 0x1_0000_0000.size
+    # => 4
+         8
+
+--- bit_length -> Integer
+
+self を表すのに必要なビット数を返します。
+
+「必要なビット数」とは符号ビットを除く最上位ビットの位置の事を意味しま
+す。2**n の場合は n+1 になります。self にそのようなビットがない(0 や
+-1 である)場合は 0 を返します。
+
+例: ceil(log2(int < 0 ? -int : int+1)) と同じ結果
+
+   (-2**12-1).bit_length     # => 13
+   (-2**12).bit_length       # => 12
+   (-2**12+1).bit_length     # => 12
+   -0x101.bit_length         # => 9
+   -0x100.bit_length         # => 8
+   -0xff.bit_length          # => 8
+   -2.bit_length             # => 1
+   -1.bit_length             # => 0
+   0.bit_length              # => 0
+   1.bit_length              # => 1
+   0xff.bit_length           # => 8
+   0x100.bit_length          # => 9
+   (2**12-1).bit_length      # => 12
+   (2**12).bit_length        # => 13
+   (2**12+1).bit_length      # => 13
 
 #@end
