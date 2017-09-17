@@ -323,3 +323,268 @@ self から -1 した値を返します。
   2.rationalize(0.1) # => (2/1)
 
 #@end
+#@since 2.4.0
+--- to_f -> Float
+
+self を浮動小数点数([[c:Float]])に変換します。
+
+self が [[c:Float]] の範囲に収まらない場合、[[m:Float::INFINITY]] を返します。
+
+--- <=>(other) -> -1 | 0 | 1 | nil
+
+self と other を比較して、self が大きい時に1、等しい時に 0、小さい時
+に-1、比較できない時に nil を返します。
+
+@param other 比較対象の数値
+@return      -1 か 0 か 1 のいずれか
+
+例:
+
+  1 <=> 2 # => -1
+  1 <=> 1 # => 0
+  2 <=> 1 # => 1
+
+--- -@ -> Integer
+
+単項演算子の - です。
+self の符号を反転させたものを返します。
+
+--- +(other) -> Numeric
+
+算術演算子。和を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- -(other) -> Numeric
+
+算術演算子。差を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- *(other) -> Numeric
+
+算術演算子。積を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- /(other) -> Numeric
+--- div(other) -> Numeric
+
+算術演算子。商を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- %(other) -> Numeric
+--- modulo(other) -> Numeric
+
+算術演算子。剰余を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- remainder(other) -> Numeric
+
+self を other で割った余り r を返します。
+
+r の符号は self と同じになります。
+
+@param other self を割る数。
+
+@see [[m:Integer#divmod]], [[m:Integer#modulo]], [[m:Numeric#modulo]]
+
+--- divmod(other) -> [Integer, Numeric]
+
+self を other で割った商 q と余り r を、 [q, r] という 2 要素の配列にし
+て返します。 商 q は常に整数ですが、余り r は整数であるとは限りません。
+
+@param other self を割る数。
+
+@see [[m:Numeric#divmod]]
+
+--- fdiv(other) -> Numeric
+
+self を other で割った商を [[c:Float]] で返します。
+ただし [[c:Complex]] が関わる場合は例外です。
+その場合も成分は Float になります。
+
+@param other self を割る数を指定します。
+
+@see [[m:Numeric#quo]]
+
+--- **(other) -> Numeric
+
+算術演算子。冪(べき乗)を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+例:
+
+  2 ** 3 # => 8
+  2 ** 0 # => 1
+  0 ** 0 # => 1
+
+--- abs -> Integer
+--- magnitude -> Integer
+
+self の絶対値を返します。
+
+--- ==(other) -> bool
+--- ===(other) -> bool
+
+比較演算子。数値として等しいか判定します。
+
+@param other 比較対象の数値
+@return      self と other が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- <(other)  -> bool
+
+比較演算子。数値として小さいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other が大きい場合 true を返します。
+             そうでなければ false を返します。
+
+--- <=(other) -> bool
+
+比較演算子。数値として等しいまたは小さいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が大きい場合か、
+             両者が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- >(other)  -> bool
+
+比較演算子。数値として大きいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が小さい場合 true を返します。
+             そうでなければ false を返します。
+
+--- >=(other) -> bool
+
+比較演算子。数値として等しいまたは大きいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が小さい場合か、
+             両者が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- ~        -> Integer
+ビット演算子。否定を計算します。
+
+例:
+
+  ~1  # => -2
+  ~3  # => -4
+  ~-4 # => 3
+
+--- |(other) -> Integer
+ビット二項演算子。論理和を計算します。
+
+@param other 数値
+
+例:
+
+  1 | 1 # => 1
+  2 | 3 # => 3
+
+--- &(other) -> Integer
+ビット二項演算子。論理積を計算します。
+
+@param other 数値
+
+例:
+
+  1 & 1 # => 1
+  2 & 3 # => 2
+
+--- ^(other) -> Integer
+ビット二項演算子。排他的論理和を計算します。
+
+@param other 数値
+
+例:
+
+  1 ^ 1 # => 0
+  2 ^ 3 # => 1
+
+--- [](nth) -> Integer
+
+nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
+を、そうでなければ 0 を返します。
+
+@param nth  何ビット目を指すかの数値
+@return     1 か 0
+
+self[nth]=bit (つまりビットの修正) がないのは、Numeric 関連クラスが
+immutable であるためです。
+
+--- <<(bits) -> Integer
+
+シフト演算子。bits だけビットを左にシフトします。
+
+@param bits シフトさせるビット数
+
+例:
+
+    printf("%#b\n", 0b0101 << 1) # => 0b1010
+    p -1 << 1 # => -2
+
+--- >>(bits) -> Integer
+シフト演算子。bits だけビットを右にシフトします。
+
+右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
+bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
+
+@param bits シフトさせるビット数
+
+例:
+
+    printf("%#b\n", 0b0101 >> 1) # => 0b10
+    p -1 >> 1 # => -1
+
+--- size -> Integer
+
+整数の実装上のサイズをバイト数で返します。
+
+例:
+
+    p 1.size
+    p 0x1_0000_0000.size
+    # => 4
+         8
+
+--- bit_length -> Integer
+
+self を表すのに必要なビット数を返します。
+
+「必要なビット数」とは符号ビットを除く最上位ビットの位置の事を意味しま
+す。2**n の場合は n+1 になります。self にそのようなビットがない(0 や
+-1 である)場合は 0 を返します。
+
+例: ceil(log2(int < 0 ? -int : int+1)) と同じ結果
+
+   (-2**12-1).bit_length     # => 13
+   (-2**12).bit_length       # => 12
+   (-2**12+1).bit_length     # => 12
+   -0x101.bit_length         # => 9
+   -0x100.bit_length         # => 8
+   -0xff.bit_length          # => 8
+   -2.bit_length             # => 1
+   -1.bit_length             # => 0
+   0.bit_length              # => 0
+   1.bit_length              # => 1
+   0xff.bit_length           # => 8
+   0x100.bit_length          # => 9
+   (2**12-1).bit_length      # => 12
+   (2**12).bit_length        # => 13
+   (2**12+1).bit_length      # => 13
+
+#@end
