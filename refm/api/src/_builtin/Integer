@@ -134,12 +134,88 @@ self が正の整数でない場合は何もしません。
 
 --- to_i   -> self
 --- to_int -> self
+#@until 2.4.0
 --- floor  -> self
 --- ceil   -> self
 --- round  -> self
 --- truncate -> self
+#@end
 
 self を返します。
+
+#@since 2.4.0
+--- floor(ndigits = 0) -> Integer | Float
+
+self と等しいかより小さな整数のうち最大のものを返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+  1.floor        # => 1
+  1.floor(2)     # => 1.0
+  15.floor(-1)   # => 10
+
+@see [[m:Numeric#floor]]
+
+--- ceil(ndigits = 0) -> Integer | Float
+
+self と等しいかより大きな整数のうち最小のものを返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+  1.ceil        # => 1
+  1.ceil(2)     # => 1.0
+  15.ceil(-1)   # => 20
+
+@see [[m:Numeric#ceil]]
+
+--- round(ndigits = 0) -> Integer | Float
+
+self ともっとも近い整数を返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+  1.round        # => 1
+  1.round(2)     # => 1.0
+  15.round(-1)   # => 20
+
+@see [[m:Numeric#round]]
+
+--- truncate(ndigits = 0) -> Integer | Float
+
+0 から self までの整数で、自身にもっとも近い整数を返します。
+
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+
+例:
+
+     1.truncate        # => 1
+     1.truncate(2)     # => 1.0
+     15.truncate(-1)   # => 10
+
+@see [[m:Numeric#truncate]]
+#@end
 
 --- to_s -> String
 #@since 1.8.0
