@@ -150,6 +150,13 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で
 
 @see [[m:Numeric#quo]]
 
+#@since 2.4.0
+--- -@ -> Rational
+
+単項演算子の - です。
+self の符号を反転させたものを返します。
+#@end
+
 #@since 1.9.2
 --- <=>(other) -> -1 | 0 | 1 | nil
 #@else
@@ -203,7 +210,30 @@ self と other を比較して、self が大きい時に 1、等しい時に 0�
   Rational('1/2') == '1/2'            # => false
 
 #@since 2.4.0
---- abs -> Rational
+--- positive? -> bool
+
+self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
+
+例:
+
+  Rational(1, 2).positive?  # => true
+  Rational(-1, 2).positive? # => false
+
+@see [[m:Rational#negative?]]
+
+--- negative? -> bool
+
+self が 0 未満の場合に true を返します。そうでない場合に false を返します。
+
+例:
+
+  Rational(1, 2).negative?  # => false
+  Rational(-1, 2).negative? # => true
+
+@see [[m:Rational#positive?]]
+
+--- abs       -> Rational
+--- magnitude -> Rational
 
 自身の絶対値を返します。
 
