@@ -585,6 +585,20 @@ self を other で割った余り r を返します。
 
 @see [[m:Numeric#zero?]]
 
+#@since 2.4.0
+--- finite? -> bool
+
+self の絶対値が有限値の場合に true を、そうでない場合に false を返します。
+
+@see [[m:Numeric#infinite?]]
+
+--- infinite? -> -1 | 1 | nil
+
+self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
+
+@see [[m:Numeric#finite?]]
+#@end
+
 --- to_int    -> Integer
 
 self.to_i と同じです。
