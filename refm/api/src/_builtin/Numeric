@@ -1,8 +1,14 @@
 = class Numeric < Object
 include Comparable
 
-数値を表す抽象クラスです。[[c:Fixnum]] や [[c:Float]] などの数値クラスは Numeric のサブクラスとして
-実装されています。
+数値を表す抽象クラスです。
+#@since 2.4.0
+[[c:Integer]]
+#@else
+[[c:Fixnum]]
+#@end
+や [[c:Float]] などの数値クラスは Numeric のサブクラスとして実装されて
+います。
 
 演算や比較を行うメソッド(+, -, *, /, <=>)は Numeric のサブクラスで定義されま
 す。Numeric で定義されているメソッドは、サブクラスで提供されているメソッド
@@ -21,8 +27,14 @@ include Comparable
 
 ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、
 効率のためであったり上位抽象クラスで実装を定義することができなかったり
-するためです。以下の表は 2.1.2 での一覧です。実際にどのメソッドがどのク
-ラスに定義されているかはそれぞれのクラスを参照してください。
+するためです。以下の表は
+#@since 2.4.0
+2.4.2
+#@else
+2.1.2
+#@end
+での一覧です。実際にどのメソッドがどのクラスに定義されているかはそれぞ
+れのクラスを参照してください。
 
 #@#  cary = [Numeric, Integer, Float, Rational, Complex]
 #@#  mary = cary.collect {|c| c.instance_methods(false)}
