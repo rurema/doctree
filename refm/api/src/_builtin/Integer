@@ -78,6 +78,10 @@ self < min であれば何もしません。
 @param min   数値
 @return      self を返します。
 
+例:
+
+  5.downto(1) {|i| print i, " " } # => "5 4 3 2 1"
+
 @see [[m:Integer#upto]], [[m:Numeric#step]], [[m:Integer#times]]
 
 --- next -> Fixnum | Bignum
