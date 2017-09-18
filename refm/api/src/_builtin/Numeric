@@ -24,19 +24,19 @@ include Comparable
 するためです。以下の表は 2.1.2 での一覧です。実際にどのメソッドがどのク
 ラスに定義されているかはそれぞれのクラスを参照してください。
 
-#@#  cary = [Numeric, Integer, Fixnum, Bignum, Float, Rational, Complex]
+#@#  cary = [Numeric, Integer, Float, Rational, Complex]
 #@#  mary = cary.collect {|c| c.instance_methods(false)}
 #@#  methods = mary.flatten.uniq.sort
 #@#  
 #@#  methods.each_with_index {|op, i|
 #@#  if i % 10 == 0
-#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s %10s %10s",
+#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
 #@#                "", *cary.collect {|klass| klass.name.center(10)})
 #@#    puts heading
 #@#    puts "-" * heading.size
 #@#  end
 #@#
-#@#  printf("%23s | %10s %10s %10s %10s %10s %10s %10s\n",
+#@#  printf("%23s | %10s %10s %10s %10s %10s\n",
 #@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
 #@#  }
 
