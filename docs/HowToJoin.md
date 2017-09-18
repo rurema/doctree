@@ -46,6 +46,8 @@ Git レポジトリについては [[GitRepository]] を参照してください
    * まともに活動するなら必須
  * [ruby-reference-manual-diff ML](https://github.com/rurema/doctree/wiki/MailingList) 参加
    * 入っておくと便利だがどちらでも
+ * Gitter の[rurema/Lobby](https://gitter.im/rurema-dev/Lobby)
+   * チャット。Issueを立てるまでもない相談など
 
 ## 作業をはじめる
 
