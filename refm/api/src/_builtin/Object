@@ -1794,7 +1794,11 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 レシーバが nil か true か false なら、それぞれ NilClass, TrueClass,
 FalseClass を返します。
 
-@raise TypeError レシーバが Fixnum か Symbol の場合に発生します。
+#@since 2.4.0
+@raise TypeError レシーバが [[c:Integer]]、[[c:Float]]、[[c:Symbol]] の場合に発生します。
+#@else
+@raise TypeError レシーバが [[c:Fixnum]] か [[c:Symbol]] の場合に発生します。
+#@end
 
    Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
    String.singleton_class      #=> #<Class:String>
