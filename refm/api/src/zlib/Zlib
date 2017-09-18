@@ -93,58 +93,58 @@ Ruby/zlib のバージョンを表す文字列です。
 
 zlib.h のバージョンを表す文字列です。
 
---- BINARY -> Fixnum
+--- BINARY -> Integer
 
 [[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
---- ASCII -> Fixnum
+--- ASCII -> Integer
 
 [[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
---- UNKNOWN -> Fixnum
+--- UNKNOWN -> Integer
 
 [[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
---- NO_COMPRESSION -> Fixnum
+--- NO_COMPRESSION -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
 圧縮レベルを表す整数です。
 
---- BEST_SPEED -> Fixnum
+--- BEST_SPEED -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
 圧縮レベルを表す整数です。
 
---- BEST_COMPRESSION -> Fixnum
+--- BEST_COMPRESSION -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
 圧縮レベルを表す整数です。
 
---- DEFAULT_COMPRESSION -> Fixnum
+--- DEFAULT_COMPRESSION -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
 圧縮レベルを表す整数です。
 
---- FILTERED -> Fixnum
+--- FILTERED -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
 圧縮方法を表す整数です。
 
---- HUFFMAN_ONLY -> Fixnum
+--- HUFFMAN_ONLY -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
 圧縮方法を表す整数です。
 
---- DEFAULT_STRATEGY -> Fixnum
+--- DEFAULT_STRATEGY -> Integer
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
 圧縮方法を表す整数です。
 
---- DEF_MEM_LEVEL -> Fixnum
+--- DEF_MEM_LEVEL -> Integer
 
 [[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数です。
 
---- MAX_MEM_LEVEL -> Fixnum
+--- MAX_MEM_LEVEL -> Integer
 
 [[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数です。
 
@@ -153,87 +153,87 @@ zlib.h のバージョンを表す文字列です。
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Inflate.new]] での
 windowBits のデフォルト値です。
 
---- NO_FLUSH -> Fixnum
+--- NO_FLUSH -> Integer
 
 [[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
 制御するための整数です。
 
---- SYNC_FLUSH -> Fixnum
+--- SYNC_FLUSH -> Integer
 
 [[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
 制御するための整数です。
 
---- FULL_FLUSH -> Fixnum
+--- FULL_FLUSH -> Integer
 
 [[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
 制御するための整数です。
 
---- FINISH -> Fixnum
+--- FINISH -> Integer
 
 [[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
 制御するための整数です。
 
---- OS_CODE -> Fixnum
+--- OS_CODE -> Integer
 
 [[m:Zlib::GzipFile#os_code]] メソッドの返す値です。
 
---- OS_MSDOS -> Fixnum
+--- OS_MSDOS -> Integer
 
 OS の種類を表す定数です。
 
---- OS_AMIGA -> Fixnum
+--- OS_AMIGA -> Integer
 
 OS の種類を表す定数です。
 
---- OS_VMS -> Fixnum
+--- OS_VMS -> Integer
 
 OS の種類を表す定数です。
 
---- OS_UNIX -> Fixnum
+--- OS_UNIX -> Integer
 
 OS の種類を表す定数です。
 
---- OS_VMCMS -> Fixnum
+--- OS_VMCMS -> Integer
 
 OS の種類を表す定数です。
 
---- OS_ATARI -> Fixnum
+--- OS_ATARI -> Integer
 
 OS の種類を表す定数です。
 
---- OS_OS2 -> Fixnum
+--- OS_OS2 -> Integer
 
 OS の種類を表す定数です。
 
---- OS_MACOS -> Fixnum
+--- OS_MACOS -> Integer
 
 OS の種類を表す定数です。
 
---- OS_ZSYSTEM -> Fixnum
+--- OS_ZSYSTEM -> Integer
 
 OS の種類を表す定数です。
 
---- OS_CPM -> Fixnum
+--- OS_CPM -> Integer
 
 OS の種類を表す定数です。
 
---- OS_TOPS20 -> Fixnum
+--- OS_TOPS20 -> Integer
 
 OS の種類を表す定数です。
 
---- OS_WIN32 -> Fixnum
+--- OS_WIN32 -> Integer
 
 OS の種類を表す定数です。
 
---- OS_QDOS -> Fixnum
+--- OS_QDOS -> Integer
 
 OS の種類を表す定数です。
 
---- OS_RISCOS -> Fixnum
+--- OS_RISCOS -> Integer
 
 OS の種類を表す定数です。
 
---- OS_UNKNOWN -> Fixnum
+--- OS_UNKNOWN -> Integer
 
 OS の種類を表す定数です。
 

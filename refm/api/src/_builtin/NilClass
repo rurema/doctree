@@ -43,7 +43,7 @@ other が真なら true を, 偽なら false を返します。
 例:
   nil.to_f   #=> 0.0
 
---- to_i -> Fixnum
+--- to_i -> Integer
 
 0 を返します。
 

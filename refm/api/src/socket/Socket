@@ -289,7 +289,7 @@ Socket.unpack_sockaddr_in で unpack できます。
 
   p Socket.gethostname   #=> "helium.ruby-lang.org"
 
---- getservbyname(service, proto = "tcp") -> Fixnum
+--- getservbyname(service, proto = "tcp") -> Integer
 
 service, protoに対応するポート番号を返
 します。protoの省略値は"tcp"です。

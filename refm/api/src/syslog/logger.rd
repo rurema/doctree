@@ -258,7 +258,7 @@ call メソッドは文字列を返す必要があります。
 
 [[c:Syslog::Logger]] のバージョンを表す文字列です。
 
---- LEVEL_MAP -> {Fixnum => Fixnum}
+--- LEVEL_MAP -> {Integer => Integer}
 
 [[c:Logger]] のログレベルと [[man:syslog(3)]] のログレベルのマッピング
 を表す [[c:Hash]] オブジェクトです。

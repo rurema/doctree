@@ -432,7 +432,7 @@ keys に対応する値を配列に格納して返します。
 libgdbm のバージョン情報の文字列です。
 
 
---- FAST -> Fixnum
+--- FAST -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -441,7 +441,7 @@ libgdbm のバージョン情報の文字列です。
 メソッドを呼びます。libgdbm version 1.8.0 以降ではこのモードがデフォルト
 です。
 
---- SYNC -> Fixnum
+--- SYNC -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -450,7 +450,7 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 
 この定数は libgdbm version 1.8.0 以降より有効です。
 
---- NOLOCK -> Fixnum
+--- NOLOCK -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -462,26 +462,26 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 この定数は libgdbm version 1.8.0 以降より有効です。
 
 #@since 1.8.2
---- READER -> Fixnum
+--- READER -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 読み込みモードでオープンします。
 
---- WRITER -> Fixnum
+--- WRITER -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 書き込みモードでオープンします。
 
---- WRCREAT -> Fixnum
+--- WRCREAT -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 書き込みモードで、すでにファイルが存在しなかったら作ります。
 
 
---- NEWDB -> Fixnum
+--- NEWDB -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
 

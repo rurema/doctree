@@ -284,7 +284,7 @@ x の指数関数の値を返します。
 
 @see [[man:exp(3)]]
 
---- frexp(x) -> [Float, Fixnum]
+--- frexp(x) -> [Float, Integer]
 
 実数 x の仮数部と指数部の配列を返します。
 

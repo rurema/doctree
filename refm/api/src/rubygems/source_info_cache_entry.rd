@@ -18,7 +18,7 @@ require rubygems/remote_fetcher
 
 @param all 全てのインデックスを更新するかどうかを指定します。
 
---- size -> Fixnum
+--- size -> Integer
 
 ソースエントリのサイズです。
 

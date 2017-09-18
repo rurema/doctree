@@ -720,7 +720,7 @@ id は obsolete なので、object_id か __id__ を使用してください。
 
 @see [[m:Object#equal?]],[[c:Symbol]]
 
---- hash -> Fixnum
+--- hash -> Integer
 
 オブジェクトのハッシュ値を返します。[[c:Hash]] クラスでオブジェク
 トを格納するのに用いられています。
@@ -1397,7 +1397,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 @raise NameError 定義されていないメソッド名を引数として与えると発生します。
 
   me = -365.method(:abs)
-  p me #=> #<Method: Fixnum#abs>
+  p me #=> #<Method: Integer#abs>
   p me.call #=> 365
 
 #@since 2.1.0

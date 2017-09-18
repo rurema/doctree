@@ -77,7 +77,7 @@ other が SystemCallError のサブクラスのインスタンスで、
 
 == Instance Methods
 
---- errno -> Fixnum | nil
+--- errno -> Integer | nil
 
 レシーバに対応するシステム依存のエラーコードを返します。
 
@@ -299,7 +299,7 @@ Errno::EXXX オブジェクトを生成して返します。
 
 == Constants
 
---- Errno -> Fixnum
+--- Errno -> Integer
 
 Errno::EXXX の各クラスに対応するシステム依存のエラーコード値(整数)です。
 

@@ -41,7 +41,7 @@ Rake で使用するメインのクラスです。
 
 タスクとコメントを表示します。
 
---- dynamic_width -> Fixnum
+--- dynamic_width -> Integer
 
 ターミナルの幅を計算します。
 
@@ -158,7 +158,7 @@ Rake コマンドで使用する標準的なコマンドラインオプション
 
 環境変数 RAKE_SYSTEM で設定することができます。
 
---- terminal_width -> Fixnum
+--- terminal_width -> Integer
 
 ターミナルの幅を返します。
 

@@ -2196,26 +2196,26 @@ posix_fadvise をサポートしていないプラットフォーム上では
 
 == Constants
 
---- SEEK_CUR -> Fixnum
+--- SEEK_CUR -> Integer
 
 [[m:IO#seek]] を参照してください。
 
---- SEEK_END -> Fixnum
+--- SEEK_END -> Integer
 
 [[m:IO#seek]] を参照してください。
 
---- SEEK_SET -> Fixnum
+--- SEEK_SET -> Integer
 
 [[m:IO#seek]] を参照してください。
 
 #@since 2.1.0
---- SEEK_DATA -> Fixnum
+--- SEEK_DATA -> Integer
 
 [[m:IO#seek]] を参照してください。
 
 Linux 3.1 以降で利用可能です。
 
---- SEEK_HOLE -> Fixnum
+--- SEEK_HOLE -> Integer
 
 [[m:IO#seek]] を参照してください。
 

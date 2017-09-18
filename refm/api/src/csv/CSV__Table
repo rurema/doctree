@@ -203,8 +203,8 @@ include Enumerable
   table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
 
 
---- length -> Fixnum
---- size -> Fixnum
+--- length -> Integer
+--- size -> Integer
 
 [[m:Array#length]], [[m:Array#size]] に委譲します。
 

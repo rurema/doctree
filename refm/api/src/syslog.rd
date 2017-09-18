@@ -122,8 +122,8 @@ syslog をオープンしていれば真を返します。
 
 
 --- ident -> String | nil
---- options -> Fixnum | nil
---- facility -> Fixnum | nil
+--- options -> Integer | nil
+--- facility -> Integer | nil
 
 最後のopenで与えられた対応する引数を返します。
 
@@ -194,7 +194,7 @@ Syslog#log()のショートカットメソッド。
     syslog.crit("the sky is falling in %d seconds!",5)
   }
 
---- mask -> Fixnum | nil
+--- mask -> Integer | nil
 --- mask=(mask)
 
 ログの優先度のマスクを取得または設定します。
@@ -273,7 +273,7 @@ include Syslog::Macros
 
 == Module Functions
 
---- LOG_MASK(priority) -> Fixnum
+--- LOG_MASK(priority) -> Integer
 
 1つの優先度に対するマスクを作成します。
 
@@ -288,7 +288,7 @@ include Syslog::Macros
          require 'syslog'
          Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
 
---- LOG_UPTO(priority) -> Fixnum
+--- LOG_UPTO(priority) -> Integer
 
 priorityまでのすべての優先度のマスクを作成します。
 
@@ -314,12 +314,12 @@ priorityまでのすべての優先度のマスクを作成します。
 == Constants
 #@end
 
---- LOG_PID      -> Fixnum
---- LOG_CONS     -> Fixnum
---- LOG_ODELAY   -> Fixnum
---- LOG_NDELAY   -> Fixnum
---- LOG_NOWAIT   -> Fixnum
---- LOG_PERROR   -> Fixnum
+--- LOG_PID      -> Integer
+--- LOG_CONS     -> Integer
+--- LOG_ODELAY   -> Integer
+--- LOG_NDELAY   -> Integer
+--- LOG_NOWAIT   -> Integer
+--- LOG_PERROR   -> Integer
 
 オプション(options)を示す定数。
 定数の詳細については [[man:syslog(3)]] を参照してください。
@@ -333,29 +333,29 @@ priorityまでのすべての優先度のマスクを作成します。
 == Constants
 #@end
 
---- LOG_AUTH     -> Fixnum
---- LOG_AUTHPRIV -> Fixnum
---- LOG_CONSOLE  -> Fixnum
---- LOG_CRON     -> Fixnum
---- LOG_DAEMON   -> Fixnum
---- LOG_FTP      -> Fixnum
---- LOG_KERN     -> Fixnum
---- LOG_LPR      -> Fixnum
---- LOG_MAIL     -> Fixnum
---- LOG_NEWS     -> Fixnum
---- LOG_NTP      -> Fixnum
---- LOG_SECURITY -> Fixnum
---- LOG_SYSLOG   -> Fixnum
---- LOG_USER     -> Fixnum
---- LOG_UUCP     -> Fixnum
---- LOG_LOCAL0   -> Fixnum
---- LOG_LOCAL1   -> Fixnum
---- LOG_LOCAL2   -> Fixnum
---- LOG_LOCAL3   -> Fixnum
---- LOG_LOCAL4   -> Fixnum
---- LOG_LOCAL5   -> Fixnum
---- LOG_LOCAL6   -> Fixnum
---- LOG_LOCAL7   -> Fixnum
+--- LOG_AUTH     -> Integer
+--- LOG_AUTHPRIV -> Integer
+--- LOG_CONSOLE  -> Integer
+--- LOG_CRON     -> Integer
+--- LOG_DAEMON   -> Integer
+--- LOG_FTP      -> Integer
+--- LOG_KERN     -> Integer
+--- LOG_LPR      -> Integer
+--- LOG_MAIL     -> Integer
+--- LOG_NEWS     -> Integer
+--- LOG_NTP      -> Integer
+--- LOG_SECURITY -> Integer
+--- LOG_SYSLOG   -> Integer
+--- LOG_USER     -> Integer
+--- LOG_UUCP     -> Integer
+--- LOG_LOCAL0   -> Integer
+--- LOG_LOCAL1   -> Integer
+--- LOG_LOCAL2   -> Integer
+--- LOG_LOCAL3   -> Integer
+--- LOG_LOCAL4   -> Integer
+--- LOG_LOCAL5   -> Integer
+--- LOG_LOCAL6   -> Integer
+--- LOG_LOCAL7   -> Integer
 
 機能(facilities)を示す定数。
 
@@ -370,14 +370,14 @@ priorityまでのすべての優先度のマスクを作成します。
 == Constants
 #@end
 
---- LOG_EMERG    -> Fixnum
---- LOG_ALERT    -> Fixnum
---- LOG_CRIT     -> Fixnum
---- LOG_ERR      -> Fixnum
---- LOG_WARNING  -> Fixnum
---- LOG_NOTICE   -> Fixnum
---- LOG_INFO     -> Fixnum
---- LOG_DEBUG    -> Fixnum
+--- LOG_EMERG    -> Integer
+--- LOG_ALERT    -> Integer
+--- LOG_CRIT     -> Integer
+--- LOG_ERR      -> Integer
+--- LOG_WARNING  -> Integer
+--- LOG_NOTICE   -> Integer
+--- LOG_INFO     -> Integer
+--- LOG_DEBUG    -> Integer
 
 優先度(priorities)を示す定数。
 定数 の詳細については [[man:syslog(3)]] を参照してください。

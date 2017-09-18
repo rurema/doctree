@@ -28,7 +28,7 @@
 @param idx 取り出す部分文字列のスタート位置
 @param n 部分文字列のサイズ
 
---- drop(n) -> Fixnum
+--- drop(n) -> Integer
 ストリームからデータを削除します。
 
 引数で与えられたサイズのデータをストリームの先頭から削除します。
@@ -57,7 +57,7 @@ NotImplementedError例外を発生させます。
 
 == Private Instance Methods
 
---- buf_size(idx) -> Fixnum
+--- buf_size(idx) -> Integer
 idxで指定したバッファのデータサイズを取得します。
 
 @param idx サイズを取得するデータのインデックス

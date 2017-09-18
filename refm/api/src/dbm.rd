@@ -350,25 +350,25 @@ value を持つ要素のキーを返します。
 == Constants
 
 #@since 1.8.2
---- READER -> Fixnum
+--- READER -> Integer
 
 読み込みモードでオープンします．
 
 @see [[m:DBM.open]]
 
---- WRITER -> Fixnum
+--- WRITER -> Integer
 
 書き込みモードでオープンします．
 
 @see [[m:DBM.open]]
 
---- WRCREAT -> Fixnum
+--- WRCREAT -> Integer
 
 書き込みモードで、すでにファイルが存在しなかったら作ります．
 
 @see [[m:DBM.open]]
 
---- NEWDB -> Fixnum
+--- NEWDB -> Integer
 
 書き込みモードで、すでにファイルが存在したら削除して作り直します．
 

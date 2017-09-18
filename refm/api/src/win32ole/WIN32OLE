@@ -107,7 +107,7 @@ FFはGUIDの先頭からのバイト位置を示します。これはレジス�
 
    WIN32OLE.create_guid   # => "{????????-????-????-????-????????????}"
 
---- locale -> Fixnum
+--- locale -> Integer
 
 WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を取
 得します。
@@ -146,7 +146,7 @@ OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名
 
 #@end
 
---- codepage -> Fixnum
+--- codepage -> Integer
 
 WIN32OLEがOLEオートメーションのインターフェイスに利用するコードページを
 取得します。
@@ -1139,41 +1139,41 @@ Rubyのメソッド引数は値のみを取るため、そのままでは呼び�
   obj.GetInterface nil   # 引数の数を合わせるためダミー引数を指定
   WIN32OLE::ARGV.clear   # 通常は、後続のメソッド呼び出しによって消去される
 
---- CP_ACP -> Fixnum
+--- CP_ACP -> Integer
 
 Windows既定のANSIコードページ（0）を示します。
 
---- CP_MACCP -> Fixnum
+--- CP_MACCP -> Integer
 
 Macintoshコードページ（2）を示します。
 
---- CP_OEMCP -> Fixnum
+--- CP_OEMCP -> Integer
 
 OEMコードページ（1）を示します。
 
---- CP_SYMBOL -> Fixnum
+--- CP_SYMBOL -> Integer
 
 文字コードの変換にシンボルを利用することを示します（42）。
 
---- CP_THREAD_ACP -> Fixnum
+--- CP_THREAD_ACP -> Integer
 
 現在実行中のスレッドの既定のコードページ（3）を示します。
 
 Windowsのコードページはスレッド毎に異なる値を設定できます。
 
---- CP_UTF7 -> Fixnum
+--- CP_UTF7 -> Integer
 
 文字コードの変換にUTF-7を利用することを示します（65000）。
 
---- CP_UTF8 -> Fixnum
+--- CP_UTF8 -> Integer
 
 文字コードの変換にUTF-8を利用することを示します（65001）。
 
---- LOCALE_SYSTEM_DEFAULT  -> Fixnum
+--- LOCALE_SYSTEM_DEFAULT  -> Integer
 
 システム既定のロケールを示すLCID(0x0800)です。WIN32OLEがオートメーショ
 ンを利用する場合の既定値です。
 
---- LOCALE_USER_DEFAULT  -> Fixnum
+--- LOCALE_USER_DEFAULT  -> Integer
 
 ユーザ既定のロケールを示すLCID(0x0400)です。

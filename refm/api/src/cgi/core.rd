@@ -237,11 +237,11 @@ HTTP のステータスコードを表すハッシュです。
 @see [[rfc:822]]
 #@end
 #@since 1.9.1
---- MAX_MULTIPART_LENGTH -> Fixnum
+--- MAX_MULTIPART_LENGTH -> Integer
 
 Maximum content length of multipart data
 
---- MAX_MULTIPART_COUNT -> Fixnum
+--- MAX_MULTIPART_COUNT -> Integer
 
 Maximum number of request parameters when multipart
 
@@ -285,7 +285,7 @@ ENV['AUTH_TYPE'] を返します。
 
 ENV['HTTP_CACHE_CONTROL'] を返します。
 
---- content_length -> Fixnum
+--- content_length -> Integer
 
 ENV['CONTENT_LENGTH'] を返します。
 
@@ -419,7 +419,7 @@ ENV['SCRIPT_NAME'] を返します。
 
 ENV['SERVER_NAME'] を返します。
 
---- server_port -> Fixnum
+--- server_port -> Integer
 
 ENV['SERVER_PORT'] を返します。
 

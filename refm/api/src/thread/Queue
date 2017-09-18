@@ -60,12 +60,12 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 キューが空の時、真を返します。
 
---- length -> Fixnum
---- size -> Fixnum
+--- length -> Integer
+--- size -> Integer
 
 キューの長さを返します。
 
---- num_waiting -> Fixnum
+--- num_waiting -> Integer
 
 キューを待っているスレッドの数を返します。
 

@@ -231,7 +231,7 @@ ARGV に残っていないときは、optname, optarg ともに nil に
                     [[m:GetoptLong#each]], [[m:GetoptLong#each_option]] メソッドを
                     呼び出した後にこのメソッドを呼び出した場合に発生します。
 
---- ordering -> Fixnum
+--- ordering -> Integer
 現在の順序形式を返します。
 
 --- quiet=(flag)

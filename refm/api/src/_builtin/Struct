@@ -185,8 +185,8 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 
 #@include(Struct.attention)
 
---- length -> Fixnum
---- size -> Fixnum
+--- length -> Integer
+--- size -> Integer
 構造体のメンバの数を返します。
 
 #@include(Struct.attention)

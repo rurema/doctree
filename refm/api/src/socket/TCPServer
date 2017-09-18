@@ -135,7 +135,7 @@ TCPServer のインスタンスは最初は backlog の値は 5 で生成され�
 #@end
 
 #@if (version >= "1.8.0")
---- sysaccept -> Fixnum
+--- sysaccept -> Integer
 
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [[m:TCPServer#accept]] と同じです。

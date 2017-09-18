@@ -49,11 +49,11 @@
 
 == Constants
 
---- BASE -> Fixnum
+--- BASE -> Integer
 
 ライブラリ内部で使用します。
 
---- EXCEPTION_ALL -> Fixnum
+--- EXCEPTION_ALL -> Integer
 
 [[c:BigDecimal]] の計算において例外を発生させるかどうかを設定、確認する
 際の値を返します。
@@ -68,70 +68,70 @@
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。
 
---- EXCEPTION_INFINITY -> Fixnum
+--- EXCEPTION_INFINITY -> Integer
 
 [[c:BigDecimal]] の計算結果が無限大になった場合に例外を発生させるかどう
 かを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。
 
---- EXCEPTION_NaN -> Fixnum
+--- EXCEPTION_NaN -> Integer
 
 [[c:BigDecimal]] の計算結果が NaN になった場合に例外を発生させるかどう
 かを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。
 
---- EXCEPTION_OVERFLOW -> Fixnum
+--- EXCEPTION_OVERFLOW -> Integer
 
 [[c:BigDecimal]] の計算結果の指数部がオーバーフローした場合に例外を発生
 させるかどうかを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。
 
---- EXCEPTION_UNDERFLOW -> Fixnum
+--- EXCEPTION_UNDERFLOW -> Integer
 
 [[c:BigDecimal]] の計算結果の指数部がアンダーフローした場合に例外を発生
 させるかどうかを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。
 
---- EXCEPTION_ZERODIVIDE -> Fixnum
+--- EXCEPTION_ZERODIVIDE -> Integer
 
 [[c:BigDecimal]] に 0 による割り算を実行した場合に例外を発生させるかど
 うかを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。
 
---- ROUND_CEILING -> Fixnum
+--- ROUND_CEILING -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で数値の大きい方に繰り上げるかどう
 かを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- ROUND_DOWN -> Fixnum
+--- ROUND_DOWN -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で全て切り捨てるかどうかを設定、確
 認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- ROUND_FLOOR -> Fixnum
+--- ROUND_FLOOR -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で数値の小さい方に繰り下げるかどう
 かを設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- ROUND_HALF_DOWN -> Fixnum
+--- ROUND_HALF_DOWN -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で五捨六入するかどうかを設定、確認
 する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- ROUND_HALF_EVEN -> Fixnum
+--- ROUND_HALF_EVEN -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で四捨六入するかどうかを設定、確認
 する際の値を返します。5の時は上位1桁が奇数の時のみ繰り上げます
@@ -139,52 +139,52 @@
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- ROUND_HALF_UP -> Fixnum
+--- ROUND_HALF_UP -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で四捨五入するかどうかを設定、確認
 する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- ROUND_MODE -> Fixnum
+--- ROUND_MODE -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理を設定、確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 1 引数に指定します。詳細については
 [[m:BigDecimal.mode]] を参照してください。
 
---- ROUND_UP -> Fixnum
+--- ROUND_UP -> Integer
 
 [[c:BigDecimal]] の計算結果の丸め処理で全て切り上げするかどうかを設定、
 確認する際の値を返します。
 
 [[m:BigDecimal.mode]] の第 2 引数に指定します。
 
---- SIGN_NEGATIVE_FINITE -> Fixnum
+--- SIGN_NEGATIVE_FINITE -> Integer
 
 負の値に対応する [[m:BigDecimal#sign]] の値を返します。
 
---- SIGN_NEGATIVE_INFINITE -> Fixnum
+--- SIGN_NEGATIVE_INFINITE -> Integer
 
 負の無限大に対応する [[m:BigDecimal#sign]] の値を返します。
 
---- SIGN_NEGATIVE_ZERO -> Fixnum
+--- SIGN_NEGATIVE_ZERO -> Integer
 
 負の 0 に対応する [[m:BigDecimal#sign]] の値を返します。
 
---- SIGN_NaN -> Fixnum
+--- SIGN_NaN -> Integer
 
 NaN に対応する [[m:BigDecimal#sign]] の値を返します。
 
---- SIGN_POSITIVE_FINITE -> Fixnum
+--- SIGN_POSITIVE_FINITE -> Integer
 
 正の値に対応する [[m:BigDecimal#sign]] の値を返します。
 
---- SIGN_POSITIVE_INFINITE -> Fixnum
+--- SIGN_POSITIVE_INFINITE -> Integer
 
 正の無限大に対応する [[m:BigDecimal#sign]] の値を返します。
 
---- SIGN_POSITIVE_ZERO -> Fixnum
+--- SIGN_POSITIVE_ZERO -> Integer
 
 正の 0 に対応する [[m:BigDecimal#sign]] の値を返します。
 
@@ -251,8 +251,8 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 @see [[m:Kernel.#BigDecimal]]
 
---- mode(s)    -> Fixnum | nil
---- mode(s, v) -> Fixnum | nil
+--- mode(s)    -> Integer | nil
+--- mode(s, v) -> Integer | nil
 
 [[c:BigDecimal]] の計算処理の制御方法を設定、確認します。
 
@@ -362,7 +362,7 @@ n を指定しない、または n が nil の場合は、現状の最大桁数�
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
---- double_fig -> Fixnum
+--- double_fig -> Integer
 
 Ruby の [[c:Float]] クラスが保持できる有効数字の数を返します。
 
@@ -805,7 +805,7 @@ self の指数部を整数値で返します。
 self の有効数字と最大有効数字の配列を返します。
 #@end
 
---- sign -> Fixnum
+--- sign -> Integer
 
 値が正 (sign > 0)、負 (sign < 0)、その他 (sign == 0) であるかの情報を返します。
 

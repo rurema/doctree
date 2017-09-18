@@ -221,7 +221,7 @@ self を返します。
 
 @see [[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]]
 
---- hash -> Fixnum
+--- hash -> Integer
 ハッシュ値を返します。
 
 例:
@@ -325,7 +325,7 @@ self を other で割った商 q と余り r を、
   1.0.eql?(1.0) #=> true
 
 #@since 1.9.1
---- round(ndigits = 0)  -> Fixnum | Float
+--- round(ndigits = 0)  -> Integer | Float
 
 自身ともっとも近い整数もしくは実数を返します。
 
@@ -367,7 +367,7 @@ self を other で割った商 q と余り r を、
 
 
 #@else
---- round  -> Fixnum
+--- round  -> Integer
 
 自身ともっとも近い整数を返します。
 
@@ -592,7 +592,7 @@ eps を省略した場合は誤差が最も小さくなるような [[c:Rational
 
 == Constants
 
---- DIG -> Fixnum
+--- DIG -> Integer
 
 Float が表現できる最大の 10 進桁数
 
@@ -600,7 +600,7 @@ Float が表現できる最大の 10 進桁数
 
 1.0 + Float::EPSILON != 1.0 となる最小の値
 
---- MANT_DIG -> Fixnum
+--- MANT_DIG -> Integer
 
 仮数部の Float::RADIX 進法での桁数
 
@@ -611,27 +611,27 @@ Float が取り得る最大値
 
 Float が取り得る最小値
 
---- MAX_10_EXP -> Fixnum
+--- MAX_10_EXP -> Integer
 
 最大の 10 進の指数
 
---- MIN_10_EXP -> Fixnum
+--- MIN_10_EXP -> Integer
 
 最小の 10 進の指数
 
---- MAX_EXP -> Fixnum
+--- MAX_EXP -> Integer
 
 最大の Float::RADIX 進の指数
 
---- MIN_EXP -> Fixnum
+--- MIN_EXP -> Integer
 
 最小の Float::RADIX 進の指数
 
---- RADIX -> Fixnum
+--- RADIX -> Integer
 
 指数表現の基数
 
---- ROUNDS -> Fixnum
+--- ROUNDS -> Integer
 
 丸めモード (-1: 不定、0: 0.0 の方向に丸め、1: 四捨五入、2:正の無限
 大の方向に丸め、3:負の無限大の方向に丸め)

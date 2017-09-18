@@ -16,7 +16,7 @@ CSV形式の文字列を初期値として与えてインスタンスを生成�
 
 == Private Instance Methods
 
---- get_row(row) -> Fixnum
+--- get_row(row) -> Integer
 CSV 形式の文字列から1 行(row)分のデータを配列に変換し、row に出力する。
 
 @param row 初期値の文字列

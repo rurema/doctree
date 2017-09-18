@@ -182,7 +182,7 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 
 == Instance Methods
 
---- =~(string) -> Fixnum | nil
+--- =~(string) -> Integer | nil
 
 文字列 string との正規表現マッチを行います。マッチした場合、
 マッチした位置のインデックスを返します(先頭は0)。マッチしなかった
@@ -229,7 +229,7 @@ string が文字列でもシンボルでもない場合には false を返しま
 
 @param string マッチ対象文字列
 
---- ~ -> Fixnum | nil
+--- ~ -> Integer | nil
 
 変数 [[m:$_]] の値との間でのマッチをとります。
 
@@ -442,7 +442,7 @@ otherが同じパターン、オプション、文字コードの正規表現で
   p /^eee$/ == Regexp.new("^eee$") #=> true
   p /^eee$/.eql?(/^eee$/)          #=> true
 
---- hash -> Fixnum
+--- hash -> Integer
 正規表現のオプションやテキストに基づいたハッシュ値を返します。
 
   p /abc/i.hash #=> 4893115
@@ -492,30 +492,30 @@ Hash のキーは名前付きキャプチャの名前で、値は
 
 == Constants
 
---- EXTENDED -> Fixnum
+--- EXTENDED -> Integer
 
 バックスラッシュでエスケープされていない空白と # から改行までを無
 視します。正規表現リテラルの //x オプションと同じ
 です。(空白を入れる場合は\でエスケープして\ (<-空白)と
 指定します)
 
---- IGNORECASE -> Fixnum
+--- IGNORECASE -> Integer
 
 文字の大小の違いを無視します。
 正規表現リテラルの //i オプションと同じです。
 
---- MULTILINE -> Fixnum
+--- MULTILINE -> Integer
 
 複数行モード。正規表現 "." が改行にマッチするようになります。
 正規表現リテラルの //m オプションと同じです。
 
---- FIXEDENCODING -> Fixnum
+--- FIXEDENCODING -> Integer
 
 正規表現が特定のエンコーディングの文字列にしかマッチしないことを意味します。
 
 @see [[m:Regexp#fixed_encoding?]]
 
---- NOENCODING -> Fixnum
+--- NOENCODING -> Integer
 
 正規表現のマッチ時に文字列のエンコーディングを無視し、
 バイト列としてマッチすることを意味します。
