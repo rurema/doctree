@@ -159,6 +159,15 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 
 #@include(Struct.attention)
 
+例:
+  Customer = Struct.new(:name, :address, :zip)
+  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
+  joe.each {|x| puts(x) }
+
+  # => Joe Smith
+  #    123 Maple, Anytown NC
+  #    12345
+
 --- each_pair {|member, value| ... } -> self
 #@since 1.8.7
 #@since 1.9.1
