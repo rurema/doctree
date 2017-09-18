@@ -40,6 +40,116 @@ include Comparable
 #@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
 #@#  }
 
+#@since 2.4.0
+ => ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin15]
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                        % |     o          o          o          -          -
+                        & |     -          o          -          -          -
+                        * |     -          o          o          o          o
+                       ** |     -          o          o          o          o
+                        + |     -          o          o          o          o
+                       +@ |     o          -          -          -          -
+                        - |     -          o          o          o          o
+                       -@ |     o          o          o          o          o
+                        / |     -          o          o          o          o
+                        < |     -          o          o          -          -
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                       << |     -          o          -          -          -
+                       <= |     -          o          o          -          -
+                      <=> |     o          o          o          o          -
+                       == |     -          o          o          o          o
+                      === |     -          o          o          -          -
+                        > |     -          o          o          -          -
+                       >= |     -          o          o          -          -
+                       >> |     -          o          -          -          -
+                       [] |     -          o          -          -          -
+                        ^ |     -          o          -          -          -
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                      abs |     o          o          o          o          o
+                     abs2 |     o          -          -          -          o
+                    angle |     o          -          o          -          o
+                      arg |     o          -          o          -          o
+               bit_length |     -          o          -          -          -
+                     ceil |     o          o          o          o          -
+                      chr |     -          o          -          -          -
+                   coerce |     o          o          o          o          o
+                     conj |     o          -          -          -          o
+                conjugate |     o          -          -          -          o
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+              denominator |     o          o          o          o          o
+                   digits |     -          o          -          -          -
+                      div |     o          o          -          -          -
+                   divmod |     o          o          o          -          -
+                   downto |     -          o          -          -          -
+                     eql? |     o          -          o          -          o
+                    even? |     -          o          -          -          -
+                     fdiv |     o          o          o          o          o
+                  finite? |     o          -          o          -          o
+                    floor |     o          o          o          o          -
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                      gcd |     -          o          -          -          -
+                   gcdlcm |     -          o          -          -          -
+                     hash |     -          -          o          o          o
+                        i |     o          -          -          -          -
+                     imag |     o          -          -          -          o
+                imaginary |     o          -          -          -          o
+                infinite? |     o          -          o          -          o
+                  inspect |     -          o          o          o          o
+                 integer? |     o          o          -          -          -
+                      lcm |     -          o          -          -          -
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                magnitude |     o          o          o          o          o
+                   modulo |     o          o          o          -          -
+                     nan? |     -          -          o          -          -
+                negative? |     o          -          o          o          -
+                     next |     -          o          -          -          -
+               next_float |     -          -          o          -          -
+                 nonzero? |     o          -          -          -          -
+                numerator |     o          o          o          o          o
+                     odd? |     -          o          -          -          -
+                      ord |     -          o          -          -          -
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                    phase |     o          -          o          -          o
+                    polar |     o          -          -          -          o
+                positive? |     o          -          o          o          -
+                     pred |     -          o          -          -          -
+               prev_float |     -          -          o          -          -
+                      quo |     o          -          o          o          o
+              rationalize |     -          o          o          o          o
+                     real |     o          -          -          -          o
+                    real? |     o          -          -          -          o
+                     rect |     o          -          -          -          o
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+              rectangular |     o          -          -          -          o
+                remainder |     o          o          -          -          -
+                    round |     o          o          o          o          -
+   singleton_method_added |     o          -          -          -          -
+                     size |     -          o          -          -          -
+                     step |     o          -          -          -          -
+                     succ |     -          o          -          -          -
+                    times |     -          o          -          -          -
+                     to_c |     o          -          -          -          o
+                     to_f |     -          o          o          o          o
+                             Numeric    Integer     Float     Rational   Complex
+  --------------------------------------------------------------------------------
+                     to_i |     -          o          o          o          o
+                   to_int |     o          o          o          -          -
+                     to_r |     -          o          o          o          o
+                     to_s |     -          o          o          o          o
+                 truncate |     o          o          o          o          -
+                     upto |     -          o          -          -          -
+                    zero? |     o          -          o          -          -
+                        | |     -          o          -          -          -
+                        ~ |     -          o          -          -          -
+#@else
  => ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
                            Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
            -------------------------------------------------------------------------------------------
@@ -143,6 +253,7 @@ include Comparable
                   zero? |     o          -          o          -          o          -          -
                       | |     -          -          o          o          -          -          -
                       ~ |     -          -          o          o          -          -          -
+#@end
 
 === 丸めメソッドの動作一覧
 
