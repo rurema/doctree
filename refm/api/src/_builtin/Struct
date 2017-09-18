@@ -191,6 +191,11 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 
 #@include(Struct.attention)
 
+例:
+  Customer = Struct.new(:name, :address, :zip)
+  joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
+  joe.length   #=> 3
+
 --- members -> [String]
 構造体のメンバの名前(文字列)の配列を返します。
 
