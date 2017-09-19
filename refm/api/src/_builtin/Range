@@ -47,6 +47,48 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 @raise ArgumentError first <=> last が nil の場合に発生します
 
+例: 整数の範囲オブジェクトの場合
+
+  Range.new(1, 10)       # => 1..10
+  Range.new(1, 10, true) # => 1...10
+
+例: 日付オブジェクトの範囲オブジェクトの場合  
+
+  require 'date'
+  Range.new(Date.today, Date.today >> 1).each {|d| puts d }
+  # => 2017-09-16
+       2017-09-17
+       ...
+       2017-10-16
+  
+例: IPアドレスの範囲オブジェクトの場合
+
+  require 'ipaddr'
+  Range.new(IPAddr.new("192.0.2.1"), IPAddr.new("192.0.2.3")).each {|ip| puts ip}
+  # => 192.0.2.1
+       192.0.2.2
+       192.0.2.3
+
+例: 自作のオブジェクトの場合
+
+  MyInteger = Struct.new(:value) do
+    def succ
+      self.class.new(value + 1)
+    end
+
+    def <=>(other)
+      value <=> other.value
+    end
+
+    def to_s
+      value.to_s
+    end
+  end
+  Range.new(MyInteger.new(1), MyInteger.new(3)).each {|i| puts i }
+  # => 1
+       2
+       3
+
 == Instance Methods
 
 --- ===(obj) -> bool
