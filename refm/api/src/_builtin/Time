@@ -335,6 +335,11 @@ true を返します。そうでない場合に false を返します。
 
 self のタイムゾーンが協定世界時に設定されていれば真を返します。
 
+  t = Time.local(2017,9,19,15,0,0)   # => 2017-09-19 15:00:00 +0900
+  t.utc?                             # => false
+  utc_t = t.getutc                   # => 2017-09-19 06:00:00 UTC
+  utc_t.utc?                         # => true
+
 #@since 1.8.0
 --- getgm     -> Time
 --- getutc    -> Time
