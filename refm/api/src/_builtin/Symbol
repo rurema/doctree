@@ -310,6 +310,10 @@ self が substr を含む場合、一致した文字列を新しく作って返�
 
 (self.to_s[substr] と同じです。)
 
+例:
+  :foobar.slice("foo")   # => "foo"
+  :foobar.slice("baz")   # => nil
+
 --- [](regexp, nth = 0) -> String | nil
 --- slice(regexp, nth = 0) -> String | nil
 
