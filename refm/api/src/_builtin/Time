@@ -316,6 +316,10 @@ true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したい時刻を Time オブジェクトを指定します。
 
+例:
+  Time.local(2000, 1, 1).eql?(Time.local(2000, 1, 1))   # => true
+  Time.local(2000, 1, 1).eql?(Time.local(2000, 1, 2))   # => false
+
 --- asctime    -> String
 --- ctime      -> String
 
