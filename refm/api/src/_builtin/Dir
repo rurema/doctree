@@ -398,6 +398,10 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 self の情報を人間に読みやすい文字列にして返します。
 
+例:
+  d = Dir.new("/")
+  d.inspect   #=> "#<Dir:/>"
+
 #@since 2.2.0
 --- fileno -> Integer
 
