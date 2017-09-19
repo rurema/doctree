@@ -95,4 +95,7 @@ other が真なら true を, 偽なら false を返します。
 --- to_h -> {}
 
 {} を返します。
+
+例:
+  nil.to_h   #=> {}
 #@end
