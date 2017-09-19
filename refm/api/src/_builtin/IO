@@ -810,7 +810,11 @@ object を出力します。object が文字列でない時にはメソッ
 
 以下のような << の連鎖を使うことができます。
 
+#@since 2.4.0
+  STDOUT << 1 << " is a " << Integer << "\n"
+#@else
   STDOUT << 1 << " is a " << Fixnum << "\n"
+#@end
 
 @param object 出力したいオブジェクトを与えます。
 

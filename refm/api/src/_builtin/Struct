@@ -104,7 +104,7 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 --- [](member) -> object
 構造体のメンバの値を返します。
 
-@param member [[c:Fixnum]] でメンバのインデックスを指定します。
+@param member [[c:Integer]] でメンバのインデックスを指定します。
               [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
@@ -126,7 +126,7 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 --- []=(member, value)
 構造体の member で指定されたメンバの値を value にして value を返します。
 
-@param member [[c:Fixnum]] でメンバのインデックスを指定します。
+@param member [[c:Integer]] でメンバのインデックスを指定します。
               [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @param value メンバに設定する値を指定します。
@@ -252,7 +252,7 @@ self の内容を人間に読みやすい文字列にして返します。
 --- values_at(*members) -> [object]
 引数で指定されたメンバの値の配列を返します。
 
-@param members [[c:Fixnum]] か [[c:Range]] でメンバのインデックスを指定します。
+@param members [[c:Integer]] か [[c:Range]] でメンバのインデックスを指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 

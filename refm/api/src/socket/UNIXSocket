@@ -152,7 +152,7 @@ klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
 @param klass 受け取ったファイルディスクリプタを変換するためのクラス
 @param mode for_fd に渡すファイルモード
 --- send_io(io) -> nil
-IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
+引数 io に対応するファイルディスクリプタをソケットの接続先に送ります。
 
   require 'socket'
 

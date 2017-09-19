@@ -84,7 +84,7 @@ IP のバージョンに依存しないプログラムを書くための標準�
 
 @param protocol プロトコル。[[m:Socket::Constants::IPPROTO_IP]] など、IPPROTO_ で始まる定数を指定します。
 
-@param flags [[man:getaddrinfo(3)]] の第3引数に指定する addrinfo 構造体の ai_flags メンバに相当する Fixnum。 Socket::AI_PASSIVEなど。
+@param flags [[man:getaddrinfo(3)]] の第3引数に指定する addrinfo 構造体の ai_flags メンバに相当する整数。 Socket::AI_PASSIVEなど。
 
 @return 7つの要素からなるアドレス情報に関する配列を返します。
 @raise SocketError [[man:getaddrinfo(3)]]がエラーを返したときに発生する例外です
