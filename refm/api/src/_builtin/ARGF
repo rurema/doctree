@@ -157,6 +157,25 @@ self をバイナリモードにします。一度バイナリモードになっ
  * 文字エンコーディングの変換を停止する
  * 内容を ASCII-8BIT として扱う
 
+例:
+  # test1.png - 164B
+  # test2.png - 128B
+  # test1.png + test2.png = 292B
+
+  # $ ruby test.rb test1.png test2.png
+
+  ARGF.binmode
+  ARGF.read.size  # => 292
+
+例:
+  # test1.png - 164B
+  # test2.png - 128B
+  # test1.png + test2.png = 292B
+
+  # $ ruby test.rb test1.png test2.png
+
+  ARGF.read.size  # => 290
+
 @see [[m:IO#binmode]], [[m:ARGF.class#binmode?]]
 
 --- binmode? -> bool
