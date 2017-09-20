@@ -199,6 +199,20 @@ ARGF の入力ストリームがバイナリモードなら true を返します
 
 現在開いている処理対象のファイルがARGFがcloseされていればtrueを返します。
 
+例:
+  # $ echo "foo" > foo
+  # $ echo "bar" > bar
+  # $ ruby argf.rb foo bar
+
+  ARGF.filename  # => "foo"
+  ARGF.close
+  # 複数のファイルを開いているので1度のARGF.closeではまた全てのファイルを閉じていないのでfalseになる
+  ARGF.closed?   # => false
+  ARGF.filename  # => "bar"
+  ARGF.close
+  # 2つのファイルを開いていたので2度目のARGF.closeで全てのファイルを閉じたためtrueになる
+  ARGF.closed?   # => true
+
 @see [[m:IO#closed?]], [[m:ARGF.class#close]]
 
 --- each(rs = $/) { |line| ... }             -> self
