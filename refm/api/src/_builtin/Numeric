@@ -600,13 +600,16 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 --- integer?    -> bool
 
-self が整数の時、真を返します。そうでない場合に false を返します。
+自身が [[c:Integer]] かそのサブクラスのインスタンスの場合にtrue を返し
+ます。そうでない場合に false を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 例:
   (1.0).integer? #=> false
   (1).integer?   #=> true
+
+@see [[m:Numeric#real?]]
 
 --- modulo(other)    -> Numeric
 #@since 1.9.2
@@ -920,6 +923,8 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 true を返します。そうでない場合に false を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+@see [[m:Numeric#integer?]]
 
 --- rect        -> [Numeric, Numeric]
 --- rectangular -> [Numeric, Numeric]
