@@ -365,6 +365,10 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
+例:
+  require 'date'
+  Date.today  # => #<Date: 2017-09-20 ...>
+
 #@since 1.9.1
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
