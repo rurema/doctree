@@ -541,6 +541,11 @@ self の絶対値を返します。
 @return      self と other が等しい場合 true を返します。
              そうでなければ false を返します。
 
+例:
+
+  1 == 2      # => false
+  1 == 1.0    # => true
+
 --- <(other)  -> bool
 
 比較演算子。数値として小さいか判定します。
