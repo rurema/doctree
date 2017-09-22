@@ -296,6 +296,15 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
 
+例:
+  # $ echo "line1\n" > test1.txt
+  # $ echo "line2\n" > test2.txt
+  # $ ruby test.rb test1.txt test2.txt
+
+  # test.rb
+  ARGF.each_codepoint                  # => #<Enumerator: ARGF:each_codepoint>
+  ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,101,50,10,
+
 #@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
 --- codepoints { |c| ... }       -> self
 --- codepoints                   -> Enumerator
