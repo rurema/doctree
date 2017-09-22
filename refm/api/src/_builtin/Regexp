@@ -29,7 +29,7 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成�
 @param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],  
               [[m:Regexp::EXTENDED]] 
               の論理和を指定します。
-              [[c:Fixnum]] 以外であれば真偽値の指定として見なされ
+              [[c:Integer]] 以外であれば真偽値の指定として見なされ
               、真(nil, false 以外)であれば
               [[m:Regexp::IGNORECASE]] の指定と同じになります。
 

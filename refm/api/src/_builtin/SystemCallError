@@ -37,7 +37,6 @@ SystemCallError オブジェクトを生成して返します。
 @param error_message エラーメッセージを表す文字列
 @param errno システム依存のエラーコード
 @raise TypeError errno を整数に変換できないときに発生します。
-@raise RangeError errno が [[c:Fixnum]] で表せる範囲を超えるときに発生します。
 
 例:
 

@@ -11,7 +11,7 @@
 詳しくは [[m:BigDecimal.new]] を参照してください。
 
 #@since 1.9.3
-@param s 数値を文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
+@param s 数値を文字列、[[c:Integer]]、[[c:Float]]、
          [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
          します。
 #@else
@@ -19,18 +19,6 @@
 #@end
 
 @param n 有効桁数を整数で指定します。
-
-#@since 1.9.3
-@raise TypeError s に 文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
-                 [[c:Rational]]、[[c:BigDecimal]] 以外のオブジェクトを
-                 指定した場合に発生します。
-#@else
-@raise TypeError s に 文字列以外のオブジェクトを指定した場合に発生しま
-                 す。
-#@end
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
@@ -206,7 +194,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 新しい BigDecimal オブジェクトを生成します。
 
 #@since 1.9.3
-@param s 数値を表現する初期値を文字列、[[c:Fixnum]]、[[c:Bignum]]、
+@param s 数値を表現する初期値を文字列、[[c:Integer]]、
          [[c:Float]]、[[c:Rational]]、[[c:BigDecimal]] オブジェクトのい
          ずれかで指定します。
 #@else
@@ -227,18 +215,6 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 //}
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
-
-#@since 1.9.3
-@raise TypeError s に 文字列、[[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
-                 [[c:Rational]]、[[c:BigDecimal]] 以外のオブジェクトを
-                 指定した場合に発生します。
-#@else
-@raise TypeError s に 文字列以外のオブジェクトを指定した場合に発生しま
-                 す。
-#@end
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
@@ -356,9 +332,6 @@ n を指定しない、または n が nil の場合は、現状の最大桁数�
     mf = BigDecimal::limit(n)
 
 @param n 新しい最大桁数を正の整数で指定します。
-
-@raise TypeError n に [[c:Fixnum]]、nil 以外のオブジェクトを指定した場
-                 合に発生します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
@@ -495,9 +468,6 @@ self + other を最大で n 桁まで計算します。計算結果の精度が 
 @param n 有効桁数を整数で指定します。0 を指定した場合は
          [[m:BigDecimal#+]] と同じ値を返します。
 
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
-
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
 @see [[m:BigDecimal#+]]
@@ -517,9 +487,6 @@ self - other を最大で n 桁まで計算します。計算結果の精度が 
 
 @param n 有効桁数を整数で指定します。0 を指定した場合は
          [[m:BigDecimal#-]] と同じ値を返します。
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
@@ -541,9 +508,6 @@ self * other を最大で n 桁まで計算します。計算結果の精度が 
 @param n 有効桁数を整数で指定します。0 を指定した場合は
          [[m:BigDecimal#*]] と同じ値を返します。
 
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
-
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
 @see [[m:BigDecimal#*]]
@@ -563,9 +527,6 @@ self / other を最大で n 桁まで計算します。計算結果の精度が 
 
 @param n 有効桁数を整数で指定します。省略するか 0 を指定した場合は
          [[m:BigDecimal#/]] と同じ値を返します。
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
@@ -590,9 +551,6 @@ self の小数部分を新しい [[c:BigDecimal]] オブジェクトにして返
 self 以下の最大整数を返します。
 
 @param n 小数点以下の桁数を整数で指定します。
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 #@since 1.9.2
   require "bigdecimal"
@@ -624,9 +582,6 @@ n が負のときは小数点以上 n 桁目を操作します
 self 以上の整数のうち、最も小さい整数を計算し、その値を返します。
 
 @param n 小数点以下の桁数を整数で指定します。
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 #@since 1.9.2
   require "bigdecimal"
@@ -661,9 +616,6 @@ n が負のときは小数点以上 n 桁目を操作します
 
 @param b 丸め処理の方式として、[[m:BigDecimal.mode]] の第 1 引数と同じ
          値を指定します。
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 [[m:BigDecimal.mode]]([[m:BigDecimal::ROUND_MODE]],flag) で何も指定せず、
 かつ、引数を指定しない場合は
@@ -713,9 +665,6 @@ n が負のときは小数点以上 n 桁目を丸めます(小数点位置か�
 
 @param n 小数点以下の桁数を整数で指定します。
 
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
-
 以下のように引数を与えて、小数点以下 n+1 位の数字を操作することもできます。
 n が正の時は、小数点以下 n+1 位の数字を切り捨てます
 (小数点以下を、最大 n 桁にします)。
@@ -761,7 +710,7 @@ self を [[c:Rational]] オブジェクトに変換します。
 
 self を文字列に変換します (デフォルトは "0.xxxxxEn" の形になります)。
 
-@param n 出力の形式を [[c:Fixnum]] または [[c:String]] で指定します。
+@param n 出力の形式を [[c:Integer]] または [[c:String]] で指定します。
 
     require "bigdecimal"
     BigDecimal("1.23456").to_s  #  ==> "0.123456E1"
@@ -895,8 +844,6 @@ self の n 乗を計算します。
 
 @param prec 有効桁数を整数で指定します。
 
-@raise TypeError prec に [[c:Fixnum]] 以外のオブジェクトを指定した場合
-                 に発生します。
 #@else
 @param n selfを other 乗する整数を指定します。
 #@end
@@ -907,9 +854,6 @@ self の有効桁 n 桁の平方根 (n の平方根ではありません) をニ
 計算します。
 
 @param n 有効桁数を整数で指定します。
-
-@raise TypeError n に [[c:Fixnum]] 以外のオブジェクトを指定した場合に発
-                 生します。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
