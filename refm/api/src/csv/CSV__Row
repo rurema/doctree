@@ -164,7 +164,7 @@ include Enumerable
 --- headers -> Array
 この行のヘッダのリストを返します。
 
---- index(header, minimum_index = 0) -> Fixnum
+--- index(header, minimum_index = 0) -> Integer
 
 与えられたヘッダの名前に対応するインデックスを返します。
 
@@ -178,8 +178,8 @@ include Enumerable
 --- inspect -> String
 ASCII 互換であるエンコーディングの文字列で自身の情報を返します。
 
---- length -> Fixnum
---- size -> Fixnum
+--- length -> Integer
+--- size -> Integer
 
 [[m:Array#length]], [[m:Array#size]] に委譲します。
 

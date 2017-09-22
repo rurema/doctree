@@ -23,7 +23,7 @@ SystemExit オブジェクトを生成して返します。
 == Instance Methods
 
 #@since 1.8.0
---- status -> Fixnum
+--- status -> Integer
 
 例外オブジェクトに保存された終了ステータスを返します。
 

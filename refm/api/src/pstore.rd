@@ -296,13 +296,13 @@ transaction ブロックから抜けますが、データベースの変更は�
 
 == Constants
 #@since 1.8.6
---- RDWR_ACCESS -> Fixnum
+--- RDWR_ACCESS -> Integer
 内部で利用する定数です。
 
---- RD_ACCESS -> Fixnum
+--- RD_ACCESS -> Integer
 内部で利用する定数です。
 
---- WR_ACCESS -> Fixnum
+--- WR_ACCESS -> Integer
 内部で利用する定数です。
 #@end
 #@since 1.9.1

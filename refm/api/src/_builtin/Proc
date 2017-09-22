@@ -125,7 +125,7 @@ Proc.new は、Proc#initialize が定義されていれば
 #@# --- dup -> Proc
 #@# nodoc
 
---- arity -> Fixnum
+--- arity -> Integer
 
 Proc オブジェクトが受け付ける引数の数を返します。
 
@@ -294,7 +294,7 @@ Procをカリー化します
   C.new.e(1,2)       #=> ArgumentError
   C.new.method(:e).to_proc.lambda?   #=> true
 
---- source_location -> [String, Fixnum] | nil
+--- source_location -> [String, Integer] | nil
 ソースコードのファイル名と行番号を配列で返します。
 
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ

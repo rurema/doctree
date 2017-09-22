@@ -276,7 +276,7 @@ regexp が一致するまで文字列をスキャンします。
 [[m:StringScanner#empty?]] は将来のバージョンで削除される予定です。
 代わりに [[m:StringScanner#eos?]] を使ってください。
 
---- exist?(regexp) -> Fixnum | nil
+--- exist?(regexp) -> Integer | nil
 #@if (version <= "1.8.5")
 [注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
 #@else
@@ -407,7 +407,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.inspect                            # => "#<StringScanner fin>"
 
 
---- match?(regexp) -> Fixnum | nil
+--- match?(regexp) -> Integer | nil
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタは進めずにマッチした
 部分文字列の長さを返します。マッチしなかったら nil を
@@ -475,7 +475,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\s+/) # => " "
       s.matched?    # => true
 
---- matched_size -> Fixnum | nil
+--- matched_size -> Integer | nil
 前回マッチした部分文字列の長さを返します。
 前回マッチに失敗していたら nil を返します。
 
@@ -564,8 +564,8 @@ StringScannerオブジェクトを表す文字列を返します。
       p s.peek(4)     # => " str"
       p s.peek(4)     # => " str"
 
---- pointer -> Fixnum
---- pos -> Fixnum
+--- pointer -> Integer
+--- pos -> Integer
 現在のスキャンポインタのインデックスを返します。
 
 使用例
@@ -583,7 +583,7 @@ StringScannerオブジェクトを表す文字列を返します。
 #@since 2.0.0
 @see [[m:StringScanner#charpos]]
 
---- charpos -> Fixnum
+--- charpos -> Integer
 
 現在のスキャンポインタのインデックスを文字単位で返します。
 
@@ -730,8 +730,8 @@ pos = 0と同じ動作です。
       p s.eos?        # => true
       p s.rest?       # => false
 
---- rest_size -> Fixnum
---- restsize -> Fixnum
+--- rest_size -> Integer
+--- restsize -> Integer
 文字列の残りの長さを返します。
 stringscanner.rest.size と同じです。
 
@@ -859,7 +859,7 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
 
 @see [[m:StringScanner#scan_until]] [[m:StringScanner#skip_until]] [[m:StringScanner#check_until]] [[m:StringScanner#exist?]]
 
---- skip(regexp) -> Fixnum | nil
+--- skip(regexp) -> Integer | nil
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたらスキャンポインタを進めマッチした部分文字列の
 長さを返します。マッチしなかったら nil を返します。
@@ -876,7 +876,7 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
         p s.skip(/\w+/)   #=> 6
         p s.skip(/./)     #=> nil
 
---- skip_until(regexp) -> Fixnum | nil
+--- skip_until(regexp) -> Integer | nil
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
@@ -1052,7 +1052,7 @@ pos = self.string.size と同じ動作です。
 
 
 #@# bc-rdoc: detected missing name: matchedsize
---- matchedsize -> Fixnum | nil
+--- matchedsize -> Integer | nil
 
 [[m:StringScanner#matched_size]] と同じです。
 

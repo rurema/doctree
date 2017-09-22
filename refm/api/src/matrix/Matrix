@@ -296,16 +296,16 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
   p m[1, 2] #=> 20
   p m[1, 3] #=> nil
 
---- row_size -> Fixnum
+--- row_size -> Integer
 #@since 2.1.0
---- row_count -> Fixnum
+--- row_count -> Integer
 #@end
 
 行列の行数を返します。
 
---- column_size -> Fixnum
+--- column_size -> Integer
 #@since 2.1.0
---- column_count -> Fixnum
+--- column_count -> Integer
 #@end
 
 行列の列数を返します。
@@ -519,8 +519,8 @@ self の n 乗を返します。
 @param n べき数の指定
 @raise ExceptionForMatrix::ErrNotRegular n が 0 以下で、行列が正則でない場合に発生します
 #@if (version < "1.9.1")
---- determinant -> Fixnum | Float
---- det -> Fixnum | Float
+--- determinant -> Integer | Float
+--- det -> Integer | Float
 #@else
 --- determinant -> Rational | Float
 --- det -> Rational | Float
@@ -564,7 +564,7 @@ self が正方行列ではない場合は0を返します。
 
 #@end
 #@end
---- rank -> Fixnum
+--- rank -> Integer
 
 階数 (rank) を返します。
 
@@ -584,7 +584,7 @@ selfの行列の階数(rank)を返します。
 #@end
 
 #@since 1.9.1
---- rank_e -> Fixnum
+--- rank_e -> Integer
 
 階数 (rank) を返します。
 
@@ -599,8 +599,8 @@ selfの行列の階数(rank)を返します。
 
 #@end
 #@end
---- trace -> Fixnum | Float | Rational
---- tr -> Fixnum | Float | Rational
+--- trace -> Integer | Float | Rational
+--- tr -> Integer | Float | Rational
 
 トレース (trace) を返します。
 
@@ -1186,7 +1186,7 @@ L*U = P*self を満たします。
 
 #@end
 
---- hash -> Fixnum
+--- hash -> Integer
 行列のHash値を返します。
 
 --- to_s -> String

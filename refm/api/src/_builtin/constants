@@ -219,8 +219,8 @@ ruby -v で表示される内容が格納されています。
 
 #@end
 #@since 1.8.5
---- RUBY_PATCHLEVEL -> Fixnum
-Ruby のパッチレベルを表す [[c:Fixnum]] オブジェクトです。
+--- RUBY_PATCHLEVEL -> Integer
+Ruby のパッチレベルを表す [[c:Integer]] オブジェクトです。
 
 パッチレベルはRubyの各バージョンに対するバグ修正パッチの適用をカウントしています。
 teeny リリースのそれぞれについてパッチレベルは 0 から始まり、
@@ -293,7 +293,7 @@ Ruby処理系実装の種類を表す文字列。
     #      "alias $LAST_PAREN_MATCH        $+\n"]}
 
 #@since 1.9.1
---- RUBY_REVISION -> Fixnum
+--- RUBY_REVISION -> Integer
 
-Ruby の Subversion でのリビジョン番号を表す [[c:Fixnum]] オブジェクトです。
+Ruby の Subversion でのリビジョン番号を表す [[c:Integer]] オブジェクトです。
 #@end

@@ -56,7 +56,7 @@ name という名前付きグループにマッチした文字列を返します
 
   /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
   /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
---- begin(n) -> Fixnum | nil
+--- begin(n) -> Integer | nil
 
 n 番目の部分文字列先頭のオフセットを返します。
 
@@ -76,7 +76,7 @@ n 番目の部分文字列がマッチしていなければ nilを返します�
 
 @see [[m:MatchData#end]]
 
---- end(n) -> Fixnum | nil
+--- end(n) -> Integer | nil
 
 n 番目の部分文字列終端のオフセットを返します。
 
@@ -113,15 +113,15 @@ n 番目の部分文字列がマッチしていなければ nil を返します�
 @see [[m:MatchData#to_a]]
 #@end
 
---- length -> Fixnum
---- size -> Fixnum
+--- length -> Integer
+--- size -> Integer
 
 部分文字列の数を返します(self.to_a.size と同じです)。
 
   /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.size       # => 4
 
---- offset(n) -> [Fixnum]
+--- offset(n) -> [Integer]
 
 n 番目の部分文字列のオフセットの配列 [start, end] を返
 します。

@@ -128,7 +128,7 @@ other は Pathname オブジェクトでなければなりません。
        1
        -1
 
---- hash -> Fixnum
+--- hash -> Integer
 ハッシュ値を返します。
 
 --- to_s   -> String

@@ -189,7 +189,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
 @raise Errno::EXXX [[man:recvfrom(2)]] がエラーになった場合などに発生します。
 
---- send(mesg, flags, dest_sockaddr = nil) -> Fixnum
+--- send(mesg, flags, dest_sockaddr = nil) -> Integer
 
 ソケットを介してデータを送ります。flags に関しては
 [[man:send(2)]] を参照してください。connect していないソケット

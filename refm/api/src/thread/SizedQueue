@@ -46,7 +46,7 @@ SizedQueue オブジェクトを生成します。
 
 == Instance Methods
 
---- max -> Fixnum
+--- max -> Integer
 キューの最大サイズを返します。
 
 --- max=(n)

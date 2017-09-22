@@ -55,7 +55,7 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 == Instance Methods
 
---- <=>(o) -> Fixnum | nil
+--- <=>(o) -> Integer | nil
 
 ファイルの最終更新時刻を比較します。self が other よりも
 新しければ正の数を、等しければ 0 を古ければ負の数を返します。
@@ -468,7 +468,7 @@ stickyビットが立っている時に真を返します。
 
 #@since 1.9.1
 #@# bc-rdoc: detected missing name: world_readable?
---- world_readable? -> Fixnum | nil
+--- world_readable? -> Integer | nil
 
 If stat is readable by others, returns an integer representing
 the file permission bits of stat. Returns nil otherwise. The
@@ -479,7 +479,7 @@ stat(2).
    sprintf("%o", m)                              # => "644"
 
 #@# bc-rdoc: detected missing name: world_writable?
---- world_writable? -> Fixnum | nil
+--- world_writable? -> Integer | nil
 
 If stat is writable by others, returns an integer representing
 the file permission bits of stat. Returns nil otherwise. The

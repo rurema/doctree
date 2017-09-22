@@ -114,8 +114,8 @@
   fuge
   ugo
 
---- $INPUT_LINE_NUMBER -> Fixnum
---- $NR                -> Fixnum
+--- $INPUT_LINE_NUMBER -> Integer
+--- $NR                -> Integer
 
 [[m:$.]] の別名
 
@@ -184,8 +184,8 @@
   # => "hoge:x:500:501::/home/hoge:/bin/bash\n"
        ...
 
---- $PID        -> Fixnum
---- $PROCESS_ID -> Fixnum
+--- $PID        -> Integer
+--- $PROCESS_ID -> Integer
 
 [[m:$$]] の別名
  

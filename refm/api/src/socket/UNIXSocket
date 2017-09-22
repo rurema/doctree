@@ -130,11 +130,11 @@ flags には Socket::MSG_* という名前の定数の bitwise OR を渡しま�
 @param maxlen 受け取るメッセージの最大長
 @param flags フラグ
 
---- recv_io(klass=IO, mode=nil) -> Fixnum|IO|object
+--- recv_io(klass=IO, mode=nil) -> Integer|IO|object
 
 ソケットの接続先からファイルディスクリプタを受け取ります。
 
-klass が nil の場合、ファイルディスクリプタが Fixnum として
+klass が nil の場合、ファイルディスクリプタが Integer として
 返されます。
 
 klass が nil でない場合、
@@ -152,7 +152,7 @@ klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
 @param klass 受け取ったファイルディスクリプタを変換するためのクラス
 @param mode for_fd に渡すファイルモード
 --- send_io(io) -> nil
-IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
+引数 io に対応するファイルディスクリプタをソケットの接続先に送ります。
 
   require 'socket'
 

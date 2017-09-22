@@ -136,8 +136,8 @@ filename で指定されるファイルを gzip ファイルとして
     p gz.eof? #=> true
   }
 
---- pos -> Fixnum
---- tell -> Fixnum
+--- pos -> Integer
+--- tell -> Integer
 
 現在までに展開したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
@@ -315,7 +315,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
   #=> hoge
   #=> fuga
 
---- getc -> Fixnum | nil
+--- getc -> Integer | nil
 IO クラスの同名メソッド[[m:IO#getc]]と同じです。
 
 但し、gzip ファイル中に
@@ -366,7 +366,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 
 @see [[m:IO#getc]]
 
---- lineno -> Fixnum | Bignum
+--- lineno -> Integer
 IO クラスの同名メソッド[[m:IO#lineno]]と同じです。
 
 但し、gzip ファイル中に
@@ -523,7 +523,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 
 @see [[m:IO#read]]
 
---- readchar -> Fixnum
+--- readchar -> Integer
 IO クラスの同名メソッド[[m:IO#readchar]]と同じです。
 
 但し、gzip ファイル中に

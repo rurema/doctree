@@ -100,7 +100,7 @@ GServer オブジェクトを生成します。
 
 @see [[m:GServer#starting]], [[m:GServer#connecting]], [[m:GServer#disconnecting]], [[m:GServer#stopping]]
 
---- connections() -> Fixnum
+--- connections() -> Integer
 
 現在接続しているクライアントの数を返します。
 
@@ -125,11 +125,11 @@ GServer オブジェクトを生成します。
 
 @see [[m:Thread#join]]
 
---- maxConnections -> Fixnum
+--- maxConnections -> Integer
 
 受け付ける最大接続数を返します。
 
---- port -> Fixnum
+--- port -> Integer
 
 ポートを数で返します。
 

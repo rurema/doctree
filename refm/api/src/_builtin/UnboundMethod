@@ -202,7 +202,7 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 #@end
 
 #@since 1.9.1
---- source_location -> [String, Fixnum] | nil
+--- source_location -> [String, Integer] | nil
 
 ソースコードのファイル名と行番号を配列で返します。
 

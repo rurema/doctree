@@ -105,7 +105,7 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 @see [[d:spec/safelevel]]
 #@# セーフレベルに関するその他の詳細
 
---- arity -> Fixnum
+--- arity -> Integer
 
 メソッドが受け付ける引数の数を返します。
 
@@ -282,7 +282,7 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 #@end
 
 #@since 1.9.1
---- source_location -> [String, Fixnum] | nil
+--- source_location -> [String, Integer] | nil
 ソースコードのファイル名と行番号を配列で返します。
 
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ

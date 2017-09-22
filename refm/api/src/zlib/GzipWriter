@@ -153,8 +153,8 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
   case_finish
   case_close
 
---- pos -> Fixnum
---- tell -> Fixnum
+--- pos -> Integer
+--- tell -> Integer
 
 現在までに圧縮したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。

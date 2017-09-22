@@ -737,7 +737,7 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 [[m:IO#fcntl]] に委譲します。
 
---- field_size_limit -> Fixnum
+--- field_size_limit -> Integer
 
 フィールドサイズの最大値を返します。
 
@@ -816,7 +816,7 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 [[m:IO#isatty]], [[m:IO#tty?]] に委譲します。
 
---- lineno -> Fixnum
+--- lineno -> Integer
 
 このファイルから読み込んだ最終行の行番号を返します。
 フィールドに含まれる改行はこの値には影響しません。
@@ -947,7 +947,7 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 == Instance Methods
 
---- index -> Fixnum
+--- index -> Integer
 
 行内で何番目のフィールドかわかるゼロベースのインデックスを返します。
 
@@ -957,7 +957,7 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 @param val インデックスの値を指定します。
 
---- line -> Fixnum
+--- line -> Integer
 
 行番号を返します。
 

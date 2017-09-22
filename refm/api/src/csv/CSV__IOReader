@@ -23,7 +23,7 @@ CSVの読み込み処理を行うクラス
 
 == Private Instance Methods
 
---- get_row(row) -> Fixnum
+--- get_row(row) -> Integer
 CSVデータの1行分のデータを取得します。
 
 1行分のデータを取得し、パラメータrowに配列として出力します。
