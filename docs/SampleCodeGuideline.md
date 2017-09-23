@@ -85,7 +85,6 @@ p str.upcase!      # => "TXT"
 p str              # => "TXT"
 ```
 
-
 ## 体裁
 * 各サンプルの先頭に `例:` の文言を記載してください
 * サンプルは半角スペース2個でインデントしてください
@@ -176,4 +175,25 @@ p str              # => "TXT"
     "birthday" => Date.new(1992, 12, 21)
   }
   p str_r == YAML.load(str_l) #=> true
+```
+
+## サンプルをあえて書かないケース
+* サンプルを書く意義があまりないケース
+* 他のサンプルへの参照で十分なケース
+
+など、意図的にサンプルを書かない場合は `#@#noexample <サンプルを書かない理由>` を記載してください。
+
+例: https://docs.ruby-lang.org/ja/2.4.0/method/String/i/match.html の例
+
+```
+--- match(regexp, pos = 0) -> MatchData | nil
+--- match(regexp, pos = 0) {|m| ... } -> object
+
+regexp.match(self, pos) と同じです。
+regexp が文字列の場合は、正規表現にコンパイルします。
+詳しくは [[m:Regexp#match]] を参照してください。
+
+#@#noexample Regexp#match を参照
+
+@see [[m:Regexp#match]], [[m:Symbol#match]]
 ```
