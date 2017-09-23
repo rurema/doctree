@@ -589,6 +589,18 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 [[m:Thread#alive?]] が真を返すなら、このメソッドも真です。
 
+例:
+  a = Thread.new { raise("die now") }
+  b = Thread.new { Thread.stop }
+  c = Thread.new { Thread.exit }
+  d = Thread.new { sleep }
+  d.kill                  #=> #<Thread:0x401b3678 aborting>
+  a.status                #=> nil
+  b.status                #=> "sleep"
+  c.status                #=> false
+  d.status                #=> "aborting"
+  Thread.current.status   #=> "run"
+
 --- stop?    -> bool
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
