@@ -944,11 +944,11 @@ flock は false を返します。
 パスは self に対応するファイルを指しているとは限りません。
 たとえば、ファイルが移動されていたり、削除されていたりする場合です。
 
-@raise IOError TMPFILE [[c:File::TMPFILE]]オプション付きで作成されている場合に発生します。
+@raise IOError TMPFILE [[m:File::Constants::TMPFILE]]オプション付きで作成されている場合に発生します。
 #@else
 パスは self に対応するファイルを指しているとは限りません。
 たとえば、ファイルが移動されていたり、削除されていたり、
-[[c:File::TMPFILE]]オプション付きで作成されていたりする場合です。
+[[m:File::Constants::TMPFILE]]オプション付きで作成されていたりする場合です。
 #@end
 
    File.open("testfile") {|f| f.path }                        #=> "testfile"
