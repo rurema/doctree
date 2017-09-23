@@ -64,8 +64,8 @@
       * RUBY_HEAP_MIN_SLOTS (RUBY_GC_HEAP_INIT_SLOTS を代わりに使います)
 
   * [[c:Integer]]
-    * 追加: [[m:Fixnum#bit_length]]
-    * 追加: [[m:Bignum#bit_length]]
+    * 追加: Fixnum#bit_length
+    * 追加: Bignum#bit_length
     * [[c:Bignum]] の性能向上
       * GMP をいくつかの操作で使えるときは使います。
         乗算、除算、基数変換、GCD
@@ -275,10 +275,10 @@
     * レスポンスボディは readpartial や read をサポートする StringIO か他の IO のようなオブジェクトになりました。
 
   * [[lib:xmlrpc]]
-    * [[c:XMLRPC::Client]]
-      * 追加: [[m:XMLRPC::Client#http]] クライアントのために [[c:Net::HTTP]] のインスタンスを返します。
+    * XMLRPC::Client
+      * 追加: XMLRPC::Client#http クライアントのために [[c:Net::HTTP]] のインスタンスを返します。
         通常、それは必要ありません。HTTP クライアントのオプションを少し変更したいときに便利です。
-        HTTPクライアントの主要なオプションを変更するときは [[c:XMLRPC::Client]] のメソッドを使うべきです。
+        HTTPクライアントの主要なオプションを変更するときは XMLRPC::Client のメソッドを使うべきです。
 
 === 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
