@@ -126,6 +126,9 @@ require を書かなくても使うことができます。
 #@since 2.2.0
 #@include(_builtin/UncaughtThrowError)
 #@end
+#@since 2.4.0
+#@include(_builtin/Warning)
+#@end
 #@include(_builtin/ZeroDivisionError)
 #@include(_builtin/fatal)
 #@include(_builtin/main)
