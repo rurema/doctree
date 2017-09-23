@@ -186,3 +186,34 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
+
+#@since 2.1.0
+== Constants
+
+--- OPTS -> [String]
+
+コンパイル時に指定したGCのオプションです。
+
+可能性があるオプション文字列は以下の通りです。
+
+  * "GC_DEBUG"
+  * "USE_RGENGC"
+  * "RGENGC_DEBUG"
+  * "RGENGC_CHECK_MODE"
+  * "RGENGC_PROFILE"
+  * "RGENGC_ESTIMATE_OLDMALLOC"
+  * "GC_PROFILE_MORE_DETAIL"
+  * "GC_ENABLE_LAZY_SWEEP"
+  * "CALC_EXACT_MALLOC_SIZE"
+  * "MALLOC_ALLOCATED_SIZE"
+  * "MALLOC_ALLOCATED_SIZE_CHECK"
+  * "GC_PROFILE_DETAIL_MEMORY"
+
+--- INTERNAL_CONSTANTS -> {Symbol => Integer}
+
+GC用内部定数です。
+
+  GC::INTERNAL_CONSTANTS
+  # => {:RVALUE_SIZE=>40, :HEAP_PAGE_OBJ_LIMIT=>408, :HEAP_PAGE_BITMAP_SIZE=>56, :HEAP_PAGE_BITMAP_PLANES=>4}
+
+#@end
