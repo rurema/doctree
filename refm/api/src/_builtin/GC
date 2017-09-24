@@ -3,6 +3,103 @@
 GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 するモジュールです。
 
+#@since 2.1.0
+
+=== GCのチューニングについて
+
+Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されました。
+それにともない、以下の環境変数が導入され、これらを
+設定することでGCの動作をチューニングすることができます。
+これらの環境変数の効果はRubyの起動時のみ有効です(つまりrubyを動かしている
+途中で変更することはできません)。
+
+==== チューニングための環境変数
+ * RUBY_GC_HEAP_INIT_SLOTS (default: 10000) - 最初に確保されるスロット数。
+ * RUBY_GC_HEAP_FREE_SLOTS (default: 4096) - GC後、必ずこの数の空きスロット数が確保される。
+   つまりGC後に空きスロットが足りなければ新たなメモリを確保し、空きスロット数を増やす。
+ * RUBY_GC_HEAP_GROWTH_FACTOR (default: 1.8) - Rubyではスロットを増やすための
+   メモリ確保をするたびに確保するサイズをこの係数で大きくする。
+   つまりスロット数は指数的に増大する。これは動かしているRubyプログラムが
+   必要とするスロット数に速やかに到達するための仕組みである。
+ * RUBY_GC_HEAP_GROWTH_MAX_SLOTS (default: 0) -
+   RUBY_GC_HEAP_GROWTH_FACTORで説明したようにRubyではスロットのためのメモリ確保のサイズを
+   指数的に大きくしていくが、その上限を決める値。0は上限なしを意味する。
+   この値を指定すると、スロット数が特定の値を越えると指数的ではなく線形的に
+   スロット数が増大する。
+#@since 2.4.0
+ * RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO (2.4以降、default: 0.20) -
+   GC後の空きスロット割合の下限。
+   つまり空きスロット数の全スロット数に対する割合がこの値より小さいときは新たな
+   ページを確保する。
+ * RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO (2.4以降、
+   default: 0.40) - GC後の空きスロットの割合の目標。
+   RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIOの閾値にひっかかって新たなスロットを確保するときは
+   この割合が目標となる。
+   この値が 0.0 の場合は、RUBY_GC_HEAP_GROWTH_FACTORを直接使う。
+ * RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO (2.4以降、default: 0.65) -
+   GC後の空きスロットの割合の上限。
+   空きスロット数の全スロット数に対する割合がこの値より大きい場合は
+   積極的にページを解放する。
+#@end
+
+ * RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR (2.0) - RubyのフルGCを呼びだすための oldobject
+   数の上限の増加率。
+   RubyのフルGCはoldobjectの個数がある閾値を越えるごとに実行されるが、
+   そのたびに閾値がこの係数倍される。この値を調整することでフルGCの頻度を調整できる。
+
+ * RUBY_GC_MALLOC_LIMIT (default: 16*1024*1024 = 16MB) - malloc によるマイナーGC発動の
+   閾値の初期値
+ * RUBY_GC_MALLOC_LIMIT_MAX (default: 32*1024*1024 = 32MB) - malloc によるマイナーGC発動の
+   閾値の最大値
+ * RUBY_GC_MALLOC_LIMIT_GROWTH_FACTOR (default: 1.4) - malloc によるマイナーGC発動の
+   閾値の増加率
+
+ * RUBY_GC_OLDMALLOC_LIMIT (default: 16*1024*1024 = 16MB) - oldobject による malloc
+   によるフルGC発動の閾値の初期値
+ * RUBY_GC_OLDMALLOC_LIMIT_MAX (default: 128*1024*1024 = 128MB) oldobject による malloc
+   によるフルGC発動の閾値の最大値
+ * RUBY_GC_OLDMALLOC_LIMIT_GROWTH_FACTOR (default: 1.2) - oldobject による malloc
+   によるフルGC発動の閾値の増加率
+ 
+以下の2つの環境変数はobsoleteであり、新しいものを使うことが望ましい
+  * RUBY_FREE_MIN       -> RUBY_GC_HEAP_FREE_SLOTS
+  * RUBY_HEAP_MIN_SLOTS -> RUBY_GC_HEAP_INIT_SLOTS
+
+==== malloc閾値についての説明
+
+Rubyが利用するメモリはスロット以外にもあります。例えば
+長い文字列はmallocによってCのヒープ上に確保されます。GCはこのようなヒープ上の
+メモリを解放するためにも実行されます。
+そこで、rubyではmallocによるメモリ消費量を保持し、この消費量が
+ある閾値を越えるとGCが起動されます。また、GCが起動されるごとに
+この消費量カウントが0にリセットされます。
+
+
+==== この設定を理解するための用語集
+
+  * スロット - Ruby のオブジェクトを1つ保持するためのメモリ領域。
+    実際にはこの領域からのポインタがCのヒープ領域に確保したメモリを所持していることが多く、
+    メモリ上の実占有領域はスロット外にもあることがしばしばある。
+    RubyのGCのチューニングには重要な概念。
+  * フルGC (メジャーGC) - すべてのオブジェクトを対象としたGC。マイナーGCより遅いため、
+    フルGCの回数を減らすことはGC性能に重要な問題である。
+  * マイナーGC - 新しいオブジェクト(前回のGCの後に生成されたオブジェクト)
+    のみを対象としたGC。GCすべきオブジェクトの数が少ないので高速。
+    また、多くのオブジェクトは経験的に生成されてすぐ不要になるので
+    マイナーGCは効率的に動作する可能性が高い。新しいオブジェクトで
+    あって、マイナーGCでGCされなかったオブジェクトはoldobjectと呼ぶ。
+  * ページ - スロットのメモリ確保は効率性のため、
+    「すべて別々に確保する」「大きなメモリの塊で一気に確保する」
+    のどちらでもなく、ページと呼ばれる単位で数百個という単位で確保される。
+    x86_64上でのlinuxでは16kバイトがページのサイズと決められている。
+
+==== 参考資料
+
+  * [[url:http://www.atdot.net/~ko1/activities/2014_rubyconf_ph_pub.pdf]]
+  * [[url:http://tmm1.net/ruby21-rgengc/]]
+
+#@end
+
 @see [[c:ObjectSpace]]
 
 == Singleton Methods
