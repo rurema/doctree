@@ -41,7 +41,7 @@
     * 非互換: [[m:Fiber#resume]] は [[m:Fiber#transfer]] を呼び出したファイバーを再開できなくなりました
 
   * [[c:File]]
-    * 拡張: [[m:File.fnmatch?]] は[[m:File::FNM_EXTGLOB]] オプションが与えられていればブレースを展開します
+    * 拡張: [[m:File.fnmatch?]] は File::FNM_EXTGLOB([[m:File::Constants::FNM_EXTGLOB]]) オプションが与えられていればブレースを展開します
         
   * [[c:GC]]
     * 改良:
@@ -380,7 +380,7 @@
       システムで定義されている定数を簡単に検知するために導入しました。
 
   * [[lib:tmpdir]]
-    * 非互換: [[m:Dir.mktmpdir]] は [[m:FileUtils.remove_entry_secure]] ではなく [[m:FileUtils.remove_entry]] を使うようになりました。
+    * 非互換: [[m:Dir.mktmpdir]] は [[m:FileUtils.#remove_entry_secure]] ではなく [[m:FileUtils.#remove_entry]] を使うようになりました。
       This means that applications should not
       change the permission of the created temporary directory to make
       accessible from other users.

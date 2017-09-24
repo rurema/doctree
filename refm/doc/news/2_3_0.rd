@@ -295,8 +295,8 @@
   * [[c:Net::HTTP]]
     * [[m:Net::HTTP#open_timeout]] のデフォルト値が 60 になりました。(以前は nil でした)
 
-  * [[c:Net::Telnet]]
-    * [[c:Net::Telnet]] は net-telnet gem になりました。
+  * Net::Telnet
+    * Net::Telnet は net-telnet gem になりました。
       [[feature:11083]]
 
   * [[lib:psych]]
