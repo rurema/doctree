@@ -369,6 +369,35 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 
 @param limit 最大の読み込みバイト数
 
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets                  # => "line1\n"
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets(2)                  # => "li"
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets("e")                  # => "line"
+
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets("")                  # => "line1\nline2\nline3\n\n"
+
 @see [[m:Kernel.#gets]], [[m:IO#gets]], [[m:ARGF.class#getbyte]], [[m:ARGF.class#getc]]
 
 --- pos  -> Integer
