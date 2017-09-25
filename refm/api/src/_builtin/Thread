@@ -403,6 +403,12 @@ val を name に対応するスレッド固有のデータとして格納しま�
 
 スレッドが「生きている」時、true を返します。
 
+例:
+  thr = Thread.new { }
+  thr.join                #=> #<Thread:0x401b3fb0 dead>
+  Thread.current.alive?   #=> true
+  thr.alive?              #=> false
+
 [[m:Thread#status]] が真を返すなら、このメソッドも真です。
 
 --- exit         -> self
