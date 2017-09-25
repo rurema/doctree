@@ -93,7 +93,7 @@ self < min であれば何もしません。
 
 例:
 
-  5.downto(1) {|i| print i, " " } # => "5 4 3 2 1"
+  5.downto(1) {|i| print i, " " } # => 5 4 3 2 1 
 
 @see [[m:Integer#upto]], [[m:Numeric#step]], [[m:Integer#times]]
 
@@ -269,7 +269,7 @@ self > max であれば何もしません。
 
 例:
 
-  5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
+  5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10 
 
 @see [[m:Integer#downto]], [[m:Numeric#step]], [[m:Integer#times]]
 
