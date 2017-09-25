@@ -630,6 +630,25 @@ ARGF の外部／内部エンコーディングを設定します。
 
 Ruby 起動時の -i オプション や [[m:ARGF.class#inplace_mode=]] で設定します。
 
+例:
+  # $ echo "test" > test.txt
+  # $ ruby -i.bak test.rb test.txt
+  # $ cat test.txt # => "TEST"
+  # $ cat test.txt.bak # => "test"
+
+  # test.rb
+  ARGF.inplace_mode                   # => ".bak"
+  ARGF.each_line {|e|print e.upcase}  # => "TEST"
+
+例:
+  # $ echo "test" > test.txt
+  # $ ruby test.rb test.txt
+  # $ cat test.txt # => "test"
+
+  # test.rb
+  ARGF.inplace_mode                   # => nil
+  ARGF.each_line {|e|print e.upcase}  # => "TEST"
+
 @see [[ref:d:spec/rubycmd#cmd_option]], [[m:ARGF.class#inplace_mode=]]
 
 --- inplace_mode=(ext)
