@@ -805,7 +805,7 @@ tmpdir
 tracer
 #@since 1.8.0
 tsort
-#@since 1.9.1
+#@if("1.9.1" <= version and version < "2.5.0")
 ubygems
 #@end
 un
