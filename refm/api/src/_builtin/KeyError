@@ -1,8 +1,36 @@
-#@since 1.9.1
 = class KeyError < IndexError
 
 [[m:Hash#fetch]] などで key に対応する value がない場合に発生します。
 
 Ruby 1.8 以前では同様の場面で [[c:IndexError]] が発生していました。
 互換性のため、[[c:KeyError]] は [[c:IndexError]] のサブクラスになっています。
+
+#@since 2.5.0
+== Instance Methods
+
+--- receiver -> object
+
+KeyError の原因となったメソッド呼び出しのレシーバを返します。
+
+例:
+
+  h = Hash.new
+  begin
+    h.fetch('gumby'*20)
+  rescue KeyError
+    p h.equal?($!.receiver)  # => true
+  end
+
+--- key -> object
+
+KeyError の原因となったメソッド呼び出しのキーを返します。
+
+例:
+
+  h = Hash.new
+  begin
+    h.fetch('gumby'*20)
+  rescue KeyError
+    p 'gumby'*20 == $!.key  # => true
+  end
 #@end
