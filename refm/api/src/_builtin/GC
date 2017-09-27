@@ -131,6 +131,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
   * malloc_increase_bytes_limits
   * oldmalloc_increase_bytes
   * oldmalloc_increase_bytes_limits
+  * old_objects_limit
 
 ==== チューニングについて
 
