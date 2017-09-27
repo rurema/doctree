@@ -120,6 +120,10 @@ include Comparable
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
+例:
+  require 'date'
+  Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
+
 #@since 1.9.1
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
 #@else
@@ -360,6 +364,10 @@ complete が真で、年が "00" から "99" の範囲であれば、
 現在の日付に相当する日付オブジェクトを生成します。
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+
+例:
+  require 'date'
+  Date.today  # => #<Date: 2017-09-20 ...>
 
 #@since 1.9.1
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
