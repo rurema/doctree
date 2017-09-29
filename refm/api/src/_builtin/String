@@ -1887,6 +1887,14 @@ pattern が正規表現で括弧を含む場合は、
 
 引数が範囲外を指す場合は nil を返します。
 
+例:
+  string = "this is a string"
+  string.slice!(2)        #=> "i"
+  string.slice!(3..6)     #=> " is "
+  string.slice!(/s.*t/)   #=> "sa st"
+  string.slice!("r")      #=> "r"
+  string                  #=> "thing"
+
 --- split(sep = $;, limit = 0) -> [String] | [[String]]
 
 第 1 引数 sep で指定されたセパレータによって文字列を limit 個まで分割し、
