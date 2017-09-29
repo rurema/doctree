@@ -29,6 +29,9 @@ other が真なら true を, 偽なら false を返します。
 
 常に true を返します。
 
+例:
+  nil.nil?   # => true
+
 --- to_a -> Array
 
 空配列 [] を返します。
