@@ -1,14 +1,8 @@
 = class Numeric < Object
 include Comparable
 
-数値を表す抽象クラスです。
-#@since 2.4.0
-[[c:Integer]]
-#@else
-[[c:Fixnum]]
-#@end
-や [[c:Float]] などの数値クラスは Numeric のサブクラスとして実装されて
-います。
+数値を表す抽象クラスです。[[c:Integer]] や [[c:Float]] などの数値クラス
+は Numeric のサブクラスとして実装されています。
 
 演算や比較を行うメソッド(+, -, *, /, <=>)は Numeric のサブクラスで定義されま
 す。Numeric で定義されているメソッドは、サブクラスで提供されているメソッド
