@@ -1614,6 +1614,12 @@ regexp.match?(self, pos) と同じです。
 regexp が文字列の場合は、正規表現にコンパイルします。
 詳しくは [[m:Regexp#match?]] を参照してください。
 
+例:
+  "Ruby".match?(/R.../)    #=> true
+  "Ruby".match?(/R.../, 1) #=> false
+  "Ruby".match?(/P.../)    #=> false
+  $&                       #=> nil
+
 @see [[m:Regexp#match?]], [[m:Symbol#match?]]
 #@end
 
