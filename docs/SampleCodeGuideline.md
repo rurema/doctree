@@ -183,17 +183,18 @@ p str              # => "TXT"
 
 など、意図的にサンプルを書かない場合は `#@#noexample <サンプルを書かない理由>` を記載してください。
 
-例: https://docs.ruby-lang.org/ja/2.4.0/method/String/i/match.html の例
+例: https://docs.ruby-lang.org/ja/2.4.0/class/Struct.html#I_EQUAL--3F の例
 
 ```
---- match(regexp, pos = 0) -> MatchData | nil
---- match(regexp, pos = 0) {|m| ... } -> object
+--- equal?(other)   -> bool
 
-regexp.match(self, pos) と同じです。
-regexp が文字列の場合は、正規表現にコンパイルします。
-詳しくは [[m:Regexp#match]] を参照してください。
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
 
-#@#noexample Regexp#match を参照
+#@include(Struct.attention)
 
-@see [[m:Regexp#match]], [[m:Symbol#match]]
+#@#noexample Object#equal? のデフォルトの動作と変わらないため
+
+@see [[m:Struct#eql?]], [[m:Struct#==]]
 ```
