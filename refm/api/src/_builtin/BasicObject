@@ -52,6 +52,21 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @param other 比較対象となるオブジェクト
 @return other が self と同値であれば真、さもなくば偽
+
+例:
+  class Person < BasicObject
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  tanaka1 = Person.new("tanaka", 24)
+  tanaka2 = Person.new("tanaka", 24)
+
+  tanaka1 == tanaka1    #=> true
+  tanaka1 == tanaka2    #=> false
+
 @see [[m:BasicObject#equal?]], [[m:Object#==]], [[m:Object#equal?]],
      [[m:Object#eql?]]
 
