@@ -86,6 +86,21 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 例:
   Time.at(946684800, 123456.789).nsec  # => 123456789
 
+#@since 2.5.0
+--- at(seconds, xseconds, unit) -> Time
+
+unit に応じて seconds + xseconds ミリ秒などの時刻を表す Time オブジェクトを返します。
+
+@param seconds 起算時からの経過秒数を表わす値を[[c:Integer]]、 [[c:Float]]、 [[c:Rational]]、または他の[[c:Numeric]]で指定します。
+@param xseconds unit に対応するミリ秒かマイクロ秒かナノ秒を指定します。
+@param unit :millisecond, :usec, :microsecond, :nsec, :nanosecond のいずれかを指定します。
+
+例:
+  Time.at(946684800, 123.456789, :millisecond).nsec  # => 123456789
+  Time.at(946684800, 123456.789, :usec).nsec         # => 123456789
+  Time.at(946684800, 123456.789, :microsecond).nsec  # => 123456789
+  Time.at(946684800, 123456789, :nsec).nsec          # => 123456789
+#@end
 --- gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
 --- utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 
