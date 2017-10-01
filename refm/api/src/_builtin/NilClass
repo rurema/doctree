@@ -14,11 +14,10 @@ nil は false オブジェクトとともに偽を表し、
 @param other 論理積を行なう式です
 
 例:
-  obj = "a"
-  nil & obj   # => false
-  nil & nil   # => false
   nil & true  # => false
   nil & false # => false
+  nil & nil   # => false
+  nil & "a"   # => false
 
 --- |(other) -> bool
 
