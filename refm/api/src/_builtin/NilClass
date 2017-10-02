@@ -19,6 +19,12 @@ other が真なら true を, 偽なら false を返します。
 
 @param other 論理和を行なう式です
 
+例:
+  nil | true   # => true
+  nil | false  # => false
+  nil | nil    # => false
+  nil | "a"    # => true
+
 --- ^(other) -> bool
 
 other が真なら true を, 偽なら false を返します。
