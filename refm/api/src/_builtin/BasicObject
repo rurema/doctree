@@ -65,6 +65,17 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @param other 比較対象となるオブジェクト
 @return other が self 自身であれば真、さもなくば偽
+
+例:
+  original = "a"
+  copied = original.dup
+  substituted = original
+
+  original == copied          #=> true
+  original == substituted     #=> true
+  original.equal? copied      #=> false
+  original.equal? substituted #=> true
+
 @see [[m:Object#equal?]], [[m:Object#==]], [[m:Object#eql?]]
 
 --- ! -> bool
