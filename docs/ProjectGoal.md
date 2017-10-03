@@ -26,3 +26,21 @@ Ruby の安定版リリースをベースとした、
 * それ以前: 対応しない(outdatedな記述は消してもよい)
   * 例: 2.1がEOLになったとき、2.0.x で追加されたけど、2.1.x 以降で消えた機能については消してもよい。
 * あるバージョンがEOLになったらその時点でタグを打つ
+
+### 具体例
+
+例えば2017年9月時点では、
+
+* 最新安定版: 2.4 系列
+* 1つ前の安定版: 2.3 系列
+* 2つ前の安定版: 2.2 系列
+* セキュリティメンテナンス期間が終わってEOLになったもの: 2.1 以前
+
+となります。
+
+最新の状況については
+
+* https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
+* https://github.com/ruby/www.ruby-lang.org/blob/master/_data/branches.yml
+
+などを参照してください。
