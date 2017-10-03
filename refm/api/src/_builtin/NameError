@@ -43,6 +43,11 @@
 
 例外オブジェクトを文字列に変換して返します。
 
+例:
+
+  err = NameError.new("message", "foo")
+  p err.to_s  # => "message"
+
 #@since 2.3.0
 --- receiver -> object
 
