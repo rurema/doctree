@@ -277,6 +277,11 @@ self > max であれば何もしません。
 
 常に真を返します。
 
+例:
+
+  1.integer?     # => true
+  1.0.integer?   # => false
+
 #@since 1.8.7
 --- even? -> bool
 
