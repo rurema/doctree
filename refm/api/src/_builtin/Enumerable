@@ -158,6 +158,13 @@ self を返します。
 真になった値の配列を返すような [[c:Enumerator]] を返します。
 #@end
 
+例:
+  (1..10).find_all                        # => #<Enumerator: 1..10:find_all>
+  (1..10).find_all { |i| i % 3 == 0 }     # => [3, 6, 9]
+
+  [1,2,3,4,5].select                      # => #<Enumerator: [1, 2, 3, 4, 5]:select>
+  [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
+
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
 
