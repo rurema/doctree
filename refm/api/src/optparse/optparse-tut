@@ -106,6 +106,32 @@ optparse を使う場合、基本的には
         # => ["foo", "bar", "baz"]
              {:a=>true, :b=>true}
 
+#@since 2.4.0
+
+明示的にコンテナへ格納する以外に、parse（及びparse!）メソッドの引数に
+:into オプションを指定することでハッシュへ自動的に値を格納することができます。
+この時ハッシュのキーとして利用される名前はロングオプションが定義されていれば
+ロングオプションの値を、ショートオプションのみの場合はショートオプションの値から
+先頭の "-" を除いてシンボル化した値が使用されます。
+
+        require 'optparse'
+        opt = OptionParser.new
+
+        OPTS = {}
+
+        opt.on('-a') {|v| v }
+        opt.on('-b', '--bbb') {|v| v }
+
+        opt.parse!(ARGV, into: OPTS) # intoオプションにハッシュを渡す
+        p ARGV
+        p OPTS
+
+        ruby sample.rb -a foo bar -b baz
+        # => ["foo", "bar", "baz"]
+             {:a=>true, :bbb=>true}
+
+#@end
+
 ====[a:optionarg] オプションの引数
 
 [[m:OptionParser#on]] メソッドのオプション定義で末尾に何かを書くと、そ
