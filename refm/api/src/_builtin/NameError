@@ -45,8 +45,12 @@
 
 例:
 
-  err = NameError.new("message", "foo")
-  p err.to_s  # => "message"
+  begin
+    foobar
+  rescue NameError => err
+    p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
+    p err.to_s  # => "undefined local variable or method `foobar' for main:Object"
+  end
 
 #@since 2.3.0
 --- receiver -> object
