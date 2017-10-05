@@ -1605,6 +1605,20 @@ regexp.match(self, pos) と同じです。
 regexp が文字列の場合は、正規表現にコンパイルします。
 詳しくは [[m:Regexp#match]] を参照してください。
 
+例: regexp のみの場合
+  'hello'.match('(.)\1')      #=> #<MatchData "ll" 1:"l">
+  'hello'.match('(.)\1')[0]   #=> "ll"
+  'hello'.match(/(.)\1/)[0]   #=> "ll"
+  'hello'.match('xx')         #=> nil
+
+例: regexp, pos を指定した場合
+  'hoge hige hege bar'.match('h.ge', 0)     # #<MatchData "hoge">
+  'hoge hige hege bar'.match('h.ge', 1)     # #<MatchData "hige">
+
+例: ブロックを指定した場合
+  'hello'.match('(.)\1'){|e|"match #{$1}"}  # "match l"
+  'hello'.match('xx'){|e|"match #{$1}"}     # マッチしないためブロックは実行されない
+
 @see [[m:Regexp#match]], [[m:Symbol#match]]
 
 #@since 2.4.0
