@@ -302,15 +302,19 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 --- close    -> nil
 
-ディレクトリストリームをクローズします。以降のディレクトリに
-対する操作は例外 [[c:IOError]] を発生させます。
+ディレクトリストリームをクローズします。
+#@until 2.3.0
+以降のディレクトリに対する操作は例外 [[c:IOError]] を発生させます。
+#@end
 クローズに成功すれば nil を返します。
 
 例:
   d = Dir.new(".")
   d.close  # => nil
 
+#@until 2.3.0
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
+#@end
 
 --- each {|item| ... }    -> self
 --- each                  -> Enumerator
@@ -338,8 +342,6 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 --- to_path -> String
 
 オープンしているディレクトリのパス名を文字列で返します。
-
-@raise IOError 既に自身が close している場合に発生します。
 
 例:
   d = Dir.new("..")
@@ -423,6 +425,7 @@ self に関連づけられたファイル記述子を表す整数を返します
 
 @raise NotImplementedError Windows などの dirfd() 関数が存在しないプラッ
                            トフォームで発生します。
+@raise IOError 既に自身が close している場合に発生します。
 
 @see [[m:IO#fileno]]
 #@end
