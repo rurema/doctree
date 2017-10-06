@@ -324,6 +324,11 @@ self から -1 した値を返します。
 
 @return 分母を返します。
 
+例:
+
+  10.denominator    # => 1
+  -10.denominator   # => 1
+
 @see [[m:Integer#numerator]]
 
 --- gcd(n) -> Integer
