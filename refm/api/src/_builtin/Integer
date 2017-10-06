@@ -147,6 +147,10 @@ self が正の整数でない場合は何もしません。
 
 self を返します。
 
+例:
+
+  10.to_i   # => 10
+
 #@since 2.4.0
 --- floor(ndigits = 0) -> Integer | Float
 
