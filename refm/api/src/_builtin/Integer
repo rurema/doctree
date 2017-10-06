@@ -386,6 +386,11 @@ self から -1 した値を返します。
 
 @return 分子を返します。
 
+例:
+
+  10.numerator    # => 10
+  -10.numerator   # => -10
+
 @see [[m:Integer#denominator]]
 
 --- to_r -> Rational
