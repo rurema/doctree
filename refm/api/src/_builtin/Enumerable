@@ -340,6 +340,60 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.max_by                    # => #<Enumerator: ["albatross", "dog", "horse"]:max_by>
+  a.max_by { |x| x.length }   # => "albatross"
+
+#@since 2.2.0
+例:
+  a = %w[albatross dog horse]
+  a.max_by(2)                 # => #<Enumerator: ["albatross", "dog", "horse"]:max_by(2)>
+  a.max_by(2) {|x| x.length } # => ["albatross", "horse"]
+
+例: enum.max_by（n）は、重み付きランダムサンプリングを実装するために使用できます。次の実装例は、Enumerable#wsampleを使用します。
+  module Enumerable
+    # weighted random sampling.
+    #
+    # Pavlos S. Efraimidis, Paul G. Spirakis
+    # Weighted random sampling with a reservoir
+    # Information Processing Letters
+    # Volume 97, Issue 5 (16 March 2006)
+    def wsample(n)
+      self.max_by(n) {|v| rand ** (1.0/yield(v)) }
+    end
+  end
+  e = (-20..20).to_a*10000
+  a = e.wsample(20000) {|x|
+    Math.exp(-(x/5.0)**2) # normal distribution
+  }
+  # a is 20000 samples from e.
+  p a.length #=> 20000
+  h = a.group_by {|x| x }
+  -10.upto(10) {|x| puts "*" * (h[x].length/30.0).to_i if h[x] }
+  #=> *
+  #   ***
+  #   ******
+  #   ***********
+  #   ******************
+  #   *****************************
+  #   *****************************************
+  #   ****************************************************
+  #   ***************************************************************
+  #   ********************************************************************
+  #   ***********************************************************************
+  #   ***********************************************************************
+  #   **************************************************************
+  #   ****************************************************
+  #   ***************************************
+  #   ***************************
+  #   ******************
+  #   ***********
+  #   *******
+  #   ***
+  #   *
+#@end
+
 @see [[m:Enumerable#sort_by]]
 
 #@end
