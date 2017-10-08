@@ -366,6 +366,13 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.min                                # => "albatross"
+#@since 2.2.0
+  a.min(2)                             # => ["albatross", "dog"]
+#@end
+
 --- min {|a, b| ... }    -> object | nil
 #@since 2.2.0
 --- min(n) {|a, b| ... } -> Array
@@ -386,6 +393,38 @@ a < b のとき負の整数を、期待しています。
 
 #@since 2.2.0
 @param n 取得する要素数。
+#@end
+
+
+例:
+  class Person
+    attr_reader :name, :age
+
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  people = [
+    Person.new("sato", 55),
+    Person.new("sato", 33),
+    Person.new("sato", 11),
+    Person.new("suzuki", 55),
+    Person.new("suzuki", 33),
+    Person.new("suzuki", 11),
+    Person.new("tanaka", 55),
+    Person.new("tanaka", 33),
+    Person.new("tanaka", 11)
+  ]
+
+  # 年齢が最小、名前が最大
+  people.min { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => #<Person:0x007fd6f0824190 @name="tanaka", @age=11>
+
+#@since 2.2.0
+  people.min(2) { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => [#<Person:0x007fb5899ef4a8 @name="tanaka", @age=11>, #<Person:0x007fb5899ef728 @name="suzuki", @age=11>]
 #@end
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
