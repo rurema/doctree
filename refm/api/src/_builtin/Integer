@@ -468,6 +468,11 @@ self の符号を反転させたものを返します。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
+例:
+
+  # 積
+  2 * 3   # => 6
+
 --- /(other) -> Numeric
 --- div(other) -> Numeric
 
