@@ -57,6 +57,22 @@
 
 self が発生した時のレシーバオブジェクトを返します。
 
+例:
+
+  class Sample
+    def foo
+      return "foo"
+    end
+  end
+
+  bar = Sample.new
+  begin
+    bar.bar
+  rescue NameError => err
+    p err.receiver  # => #<Sample:0x007fd4d89b3110>
+    p err.receiver.foo  # => "foo"
+  end
+
 --- local_variables -> [Symbol]
 
 self が発生した時に定義されていたローカル変数名の一覧を返します。
