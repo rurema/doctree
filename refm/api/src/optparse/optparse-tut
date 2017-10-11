@@ -93,14 +93,14 @@ optparse を使う場合、基本的には
         require 'optparse'
         opt = OptionParser.new
 
-        OPTS = {}
+        opts = {}
 
-        opt.on('-a') {|v| OPTS[:a] = v }
-        opt.on('-b') {|v| OPTS[:b] = v }
+        opt.on('-a') {|v| opts[:a] = v }
+        opt.on('-b') {|v| opts[:b] = v }
 
         opt.parse!(ARGV)
         p ARGV
-        p OPTS
+        p opts
 
         ruby sample.rb -a foo bar -b baz
         # => ["foo", "bar", "baz"]
@@ -117,14 +117,14 @@ optparse を使う場合、基本的には
         require 'optparse'
         opt = OptionParser.new
 
-        OPTS = {}
+        opts = {}
 
         opt.on('-a') {|v| v }
         opt.on('-b', '--bbb') {|v| v }
 
-        opt.parse!(ARGV, into: OPTS) # intoオプションにハッシュを渡す
+        opt.parse!(ARGV, into: opts) # intoオプションにハッシュを渡す
         p ARGV
-        p OPTS
+        p opts
 
         ruby sample.rb -a foo bar -b baz
         # => ["foo", "bar", "baz"]
