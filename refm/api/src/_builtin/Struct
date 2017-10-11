@@ -325,6 +325,8 @@ true を返します。そうでない場合に false を返します。
 
 #@include(Struct.attention)
 
+#@#noexample Object#equal? のデフォルトの動作と変わらないため
+
 @see [[m:Struct#eql?]], [[m:Struct#==]]
 
 --- hash    -> Integer
