@@ -334,12 +334,20 @@ self を文字列に変換します(始点と終点のオブジェクトは #to_
 
 @see [[m:Range#inspect]]
 
+例:
+  (1..5).to_s      # => "1..5"
+  ("1".."5").to_s  # => "1..5"
+
 --- inspect -> String
 
 self を文字列に変換します(始点と終点のオブジェクトは #inspect メソッド
 で文字列に変換されます)。
 
 @see [[m:Range#to_s]]
+
+例:
+  (1..5).inspect      # => "1..5"
+  ("1".."5").inspect  # => "\"1\"..\"5\""
 
 #@since 1.9.1
 --- min               -> object | nil
@@ -370,6 +378,10 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 @see [[m:Range#first]], [[m:Range#max]], [[m:Enumerable#min]]
 
+例:
+  h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+  (1..3).min { |a, b| h[a].length <=> h[b].length }   # => 1
+
 --- max               -> object | nil
 
 範囲内の最大の値を返します。
@@ -398,6 +410,10 @@ self を文字列に変換します(始点と終点のオブジェクトは #ins
 
 @see [[m:Range#last]], [[m:Range#min]], [[m:Enumerable#max]]
 #@end
+
+例:
+  h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+  (1..3).max { |a, b| h[a].length <=> h[b].length }   # => 3
 
 #@since 2.0.0
 --- bsearch {|obj| ... } -> object | nil
