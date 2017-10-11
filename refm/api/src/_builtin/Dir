@@ -221,7 +221,6 @@ path を省略した場合、環境変数 HOME または LOGDIR
 @see [[m:Dir.entries]]
 #@since 2.5.0
 @see [[m:Dir.each_child]]
-#@end
 --- each_child(path) {|file| ...}                -> nil
 --- each_child(path, encoding: enc) {|file| ...} -> nil
 --- each_child(path)                             -> Enumerator
