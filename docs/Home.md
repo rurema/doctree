@@ -42,6 +42,7 @@
     - [[HowToInstallRubysUnixRbenv]]
   - [[GitRepository]]
   - [[Tutorial]]
+  - [[Communication-and-knowledge-sharing]]
 
 ## System Pages
 
