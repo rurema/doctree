@@ -615,7 +615,8 @@ self のインスタンスメソッド name をオブジェクト化した [[c:U
 
 --- method_defined?(name) -> bool
 
-モジュールにインスタンスメソッド name が定義されているとき
+モジュールにインスタンスメソッド name が定義されており、
+かつその可視性が public または protected であるときに
 true を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
