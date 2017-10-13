@@ -82,6 +82,13 @@ Enumerable#filter_map と、その遅延評価版を定義する例:
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
+例:
+  (1..Float::INFINITY).lazy.map{ |n| n % 3 == 0 }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: 1..Infinity>:map>
+
+  (1..Float::INFINITY).lazy.collect{ |n| n.succ }.take(10).force
+  # => [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
 @see [[m:Enumerable#map]]
 
 --- flat_map {|item| ... } -> Enumerator::Lazy
