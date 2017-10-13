@@ -399,6 +399,12 @@ self を other で割った商 q と余り r を、
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
 
+例:
+
+  0.1.positive?   # => true
+  0.0.positive?   # => false
+  -0.1.positive?   # => false
+
 @see [[m:Float#negative?]]
 
 --- negative? -> bool
