@@ -192,6 +192,13 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 [[m:Enumerable#drop_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
+例:
+  (1..Float::INFINITY).lazy.drop_while { |i| i < 42 }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: 1..Infinity>:drop_while>
+
+  (1..Float::INFINITY).lazy.drop_while { |i| i < 42 }.take(10).force
+  # => [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+
 @see [[m:Enumerable#drop_while]]
 
 --- lazy -> self
