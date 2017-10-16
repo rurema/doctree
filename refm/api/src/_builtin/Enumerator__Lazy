@@ -187,7 +187,6 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 @see [[m:Enumerable#drop]]
 
---- drop_while -> Enumerator::Lazy
 --- drop_while {|item| ... } -> Enumerator::Lazy
 
 [[m:Enumerable#drop_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
