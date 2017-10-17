@@ -154,6 +154,8 @@ self が min と max の範囲内(min, max
 #@since 2.4.0
 --- clamp(min, max)  -> object
 
+self を範囲内に収めます。
+
 self <=> min が0以下を返したときは min を、
 self <=> max が0以上を返したときは max を、
 それ以外の場合は self を返します。
