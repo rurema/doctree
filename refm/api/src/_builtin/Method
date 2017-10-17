@@ -105,6 +105,17 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 @see [[d:spec/safelevel]]
 #@# セーフレベルに関するその他の詳細
 
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m[1]      # => "foo called with arg 1"
+  m.call(2) # => "foo called with arg 2"
+
 --- arity -> Integer
 
 メソッドが受け付ける引数の数を返します。
