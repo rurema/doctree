@@ -234,6 +234,13 @@ self を返します。
 
 [[m:Enumerable#to_a]] のエイリアスです。
 
+例:
+  (1..Float::INFINITY).lazy.take(10).force
+  # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  (1..Float::INFINITY).lazy.take(10).to_a
+  # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 --- to_enum(method = :each, *args)                 -> Enumerator::Lazy
 --- enum_for(method = :each, *args)                -> Enumerator::Lazy
 --- to_enum(method = :each, *args) {|*args| block} -> Enumerator::Lazy
