@@ -1610,6 +1610,10 @@ self を返します。ただし、Array のサブクラスのインスタンス
 
 self をそのまま返します。
 
+例:
+
+  [1, 2, 3, 4].to_a  # => [1, 2, 3, 4]
+
 #@since 1.9.1
 --- to_s    -> String
 --- inspect -> String
