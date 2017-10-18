@@ -132,6 +132,10 @@ Ruby によって GC されます。すなわち、ある使わなくなった
 --- to_sym -> self
 self を返します。
 
+例:
+
+  :foo.intern   # => :foo
+
 @see [[m:String#intern]]
 
 --- id2name -> String
