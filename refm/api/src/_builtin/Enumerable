@@ -527,6 +527,10 @@ Enumerable#sort は安定ではありません (unstable sort)。
 ※ 比較結果が同じ要素は元の順序通りに並ぶソートを
 「安定なソート (stable sort)」と言います。
 
+例:
+  %w(rhea kea flea).sort           # => ["flea", "kea", "rhea"]
+  (1..10).sort { |a, b| b <=> a }  # => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
 @see [[m:Enumerable#sort_by]]
 
 #@since 1.8.0
