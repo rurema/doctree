@@ -1034,6 +1034,13 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 [[c:Enumerator]] を返します。
 #@end
 
+例:
+  (1..3).reverse_each # => #<Enumerator: 1..3:reverse_each>
+  (1..3).reverse_each { |v| p v }
+  # => 3
+  #    2
+  #    1
+
 #@end
 #@since 1.9.1
 --- each_with_object(obj) -> Enumerator
