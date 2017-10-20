@@ -443,6 +443,15 @@ a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.min_by                    # => #<Enumerator: ["albatross", "dog", "horse"]:min_by>
+  a.min_by { |x| x.length }   # => "dog"
+#@since 2.2.0
+  a.min_by(2)                 # => #<Enumerator: ["albatross", "dog", "horse"]:min_by(2)>
+  a.min_by(2) {|x| x.length } # => ["dog", "horse"]
+#@end
+
 @see [[m:Enumerable#sort_by]]
 
 #@end
