@@ -1826,8 +1826,8 @@ Ruby 1.9.1 以降では Array#sample を使ってください。
 --- sample        -> object | nil
 --- sample(n)     -> Array
 #@since 1.9.3
---- sample(random: rng)    -> object | nil
---- sample(n, random: rng) -> Array
+--- sample(random: Random)    -> object | nil
+--- sample(n, random: Random) -> Array
 #@end
 
 配列の要素を1個(引数を指定した場合は自身の要素数を越えない範囲で n 個)
@@ -1846,18 +1846,18 @@ srand()が有効です。
          黙の型変換を試みます。
 
 #@since 1.9.3
-@param rng 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
+@param random 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
 #@since 2.0.0
-           選択する要素のインデックスを返す rand メソッドに応答するオブ
-           ジェクトであれば指定する事ができます。rand メソッドの引数に
-           は [[m:Random#rand]](max) のように選択可能なインデックスの最
-           大値が指定されます。
+              選択する要素のインデックスを返す rand メソッドに応答する
+              オブジェクトであれば指定する事ができます。rand メソッド
+              の引数には [[m:Random#rand]](max) のように選択可能なイン
+              デックスの最大値が指定されます。
 #@else
-           0 以上 1 未満の値を返す rand メソッドに応答するオブジェクト
-           であれば指定する事ができます。
+              0 以上 1 未満の値を返す rand メソッドに応答するオブジェ
+              クトであれば指定する事ができます。
 #@end
-           [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェクトを
-           指定した場合、[[m:Kernel.#srand]]の指定に影響されません。
+              [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェク
+              トを指定した場合、[[m:Kernel.#srand]]の指定に影響されません。
 #@end
 
 @raise TypeError 引数 n に整数以外の(暗黙の型変換が行えない)オブジェク
@@ -1907,7 +1907,7 @@ srand()が有効です。
 
 --- shuffle -> Array
 #@since 1.9.3
---- shuffle(random: rng) -> Array
+--- shuffle(random: Random) -> Array
 #@end
 
 配列の要素をランダムシャッフルして，その結果を配列として返します。
@@ -1932,24 +1932,25 @@ srand()が有効です。
 @see [[m:Array#shuffle!]]
 --- shuffle!        -> self
 #@since 1.9.3
---- shuffle!(random: rng) -> self
+--- shuffle!(random: Random) -> self
 #@end
 
 配列を破壊的にランダムシャッフルします。
 
 #@since 1.9.3
-@param rng 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
+@param random 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
 #@since 2.0.0
-           選択する要素のインデックスを返す rand メソッドに応答するオブ
-           ジェクトであれば指定する事ができます。rand メソッドの引数に
-           は [[m:Random#rand]](max) のように選択可能なインデックスの最
-           大値が指定されます。
+              選択する要素のインデックスを返す rand メソッドに応答する
+              オブジェクトであれば指定する事ができます。rand メソッド
+              の引数には [[m:Random#rand]](max) のように選択可能なイン
+              デックスの最大値が指定されます。
 #@else
-           0 以上 1 未満の値を返す rand メソッドに応答するオブジェクト
-           であれば指定する事ができます。
+              0 以上 1 未満の値を返す rand メソッドに応答するオブジェ
+              クトであれば指定する事ができます。
 #@end
-           [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェクトを
-           指定した場合、[[m:Kernel.#srand]]の指定に影響されません。
+              [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェク
+              トを指定した場合、[[m:Kernel.#srand]]の指定に影響されま
+              せん。
 #@end
 
 例:

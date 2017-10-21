@@ -147,8 +147,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.delete("/tmp/hoge-jbrYBh.tmp")
 
---- entries(path)                -> [String]
---- entries(path, encoding: enc) -> [String]
+--- entries(path)                                        -> [String]
+--- entries(path, encoding: Encoding.find("filesystem")) -> [String]
 
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。
@@ -165,10 +165,10 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
---- foreach(path) {|file| ...}                -> nil
---- foreach(path, encoding: enc) {|file| ...} -> nil
---- foreach(path)                             -> Enumerator
---- foreach(path, encoding: enc)              -> Enumerator
+--- foreach(path) {|file| ...}                                        -> nil
+--- foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
+--- foreach(path)                                                     -> Enumerator
+--- foreach(path, encoding: Encoding.find("filesystem"))              -> Enumerator
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
 
@@ -227,12 +227,12 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になりま
 
 @see [[m:FileUtils.#makedirs]]
 
---- new(path)                              -> Dir
---- new(path, encoding: enc)               -> Dir
---- open(path)                             -> Dir
---- open(path, encoding: enc)              -> Dir
---- open(path) {|dir| ...}                 -> object
---- open(path, encoding: enc) {|dir| ...}  -> object
+--- new(path)                                                      -> Dir
+--- new(path, encoding: Encoding.find("filesystem"))               -> Dir
+--- open(path)                                                     -> Dir
+--- open(path, encoding: Encoding.find("filesystem"))              -> Dir
+--- open(path) {|dir| ...}                                         -> object
+--- open(path, encoding: Encoding.find("filesystem")) {|dir| ...}  -> object
 
 path に対するディレクトリストリームをオープンして返します。
 
