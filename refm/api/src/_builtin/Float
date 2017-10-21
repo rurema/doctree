@@ -605,8 +605,6 @@ eps を省略した場合は誤差が最も小さくなるような [[c:Rational
 @see [[m:Float#next_float]]
 #@end
 
-#@if (version >= "1.8.0")
-
 == Constants
 
 --- DIG -> Integer
@@ -686,7 +684,6 @@ Float が取り得る最小の有限の値は -[[m:Float::MAX]] です。
 丸めモード (-1: 不定、0: 0.0 の方向に丸め、1: 四捨五入、2:正の無限
 大の方向に丸め、3:負の無限大の方向に丸め)です。
 
-#@since 1.9.2
 --- INFINITY -> Float
 
 浮動小数点数における正の無限大です。
@@ -700,6 +697,3 @@ Float が取り得る最小の有限の値は -[[m:Float::MAX]] です。
 浮動小数点数における NaN(Not a number)です。
 
 @see [[m:Float#nan?]]
-
-#@end
-#@end
