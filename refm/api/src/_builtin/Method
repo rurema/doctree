@@ -86,6 +86,19 @@
 
 自身を複製した [[c:Method]] オブジェクトを作成して返します。
 
+例:
+  class Foo
+    def foo
+      "foo"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.call # => "foo"
+
+  m.clone # => #<Method: Foo#foo>
+  m.clone.call # => "foo"
+
 --- [](*args) -> object
 --- call(*args) -> object
 --- call(*args) { ... } -> object
