@@ -1226,6 +1226,10 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 
 --- lines(rs = $/)               -> [String]
 --- lines(rs = $/) {|line| ... } -> self
+#@since 2.4.0
+--- lines(rs = $/, chomp: boolean)               -> [String]
+--- lines(rs = $/, chomp: boolean) {|line| ... } -> self
+#@end
 
 文字列中の各行を文字列の配列で返します。(self.each_line.to_a と同じです)
 
@@ -1238,7 +1242,20 @@ rs に nil を指定すると行区切りなしとみなします。 rs に空�
 定すると「パラグラフモード」になり、 改行コードが 2 つ以上連続するとこ
 ろで文字列を分割します (つまり空行で分割します)。
 
+#@since 2.4.0
+chomp に true を指定すると、分割した各行に対して [[m:String#chomp]]
+を実行するのと同等の結果を得ることができます。
+
+  "hello\nworld\n".lines              # => ["hello\n", "world\n"]
+  "hello\nworld\n".lines(chomp: true) # => ["hello", "world"]
+#@end
+  
 @param rs 行末を示す文字列
+
+#@since 2.4.0
+@param chomp 分割した各行に対して [[m:String#chomp]] と同等の結果を得
+             るかを boolean で指定します。
+#@end
 
 ブロックが指定された場合は [[m:String#each_line]] と同じように動作しま
 す。ただし obsolete のため、ブロックを指定する場合は
