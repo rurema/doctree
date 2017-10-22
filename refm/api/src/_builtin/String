@@ -1224,11 +1224,12 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 
 @see [[m:String#lines]]
 
+#@since 2.4.0
+--- lines(rs = $/, chomp: false)               -> [String]
+--- lines(rs = $/, chomp: false) {|line| ... } -> self
+#@else
 --- lines(rs = $/)               -> [String]
 --- lines(rs = $/) {|line| ... } -> self
-#@since 2.4.0
---- lines(rs = $/, chomp: boolean)               -> [String]
---- lines(rs = $/, chomp: boolean) {|line| ... } -> self
 #@end
 
 文字列中の各行を文字列の配列で返します。(self.each_line.to_a と同じです)
