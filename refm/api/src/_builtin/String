@@ -1187,8 +1187,13 @@ str == eval(str.dump) となることが保証されています。
     # p だとさらにバックスラッシュが増えて見にくいので puts している
     puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 
+#@since 2.4.0
+--- each_line(rs = $/, chomp: false) {|line| ... } -> self
+--- each_line(rs = $/, chomp: false)  -> Enumerator
+#@else
 --- each_line(rs = $/) {|line| ... } -> self
 --- each_line(rs = $/)  -> Enumerator
+#@end
 
 文字列中の各行に対して繰り返します。
 行の区切りは rs に指定した文字列で、
@@ -1201,6 +1206,9 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 (つまり空行で分割します)。
 
 @param rs    行末を示す文字列
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 例:
 #@since 1.8.7

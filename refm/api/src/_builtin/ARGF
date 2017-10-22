@@ -401,9 +401,15 @@ ARGF はスクリプトに指定した引数([[m:Object::ARGV]] を参照) を�
 
 @see [[m:ARGF.class#getbyte]], [[m:ARGF.class#gets]]
 
+#@since 2.4.0
+--- gets(rs = $/, chomp: false)   -> String | nil
+--- gets(limit, chomp: false)     -> String | nil
+--- gets(rs, limit, chomp: false) -> String | nil
+#@else
 --- gets(rs = $/)   -> String | nil
 --- gets(limit)     -> String | nil
 --- gets(rs, limit) -> String | nil
+#@end
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時に
 は nil を返します。
@@ -413,6 +419,10 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
           の区切りとみなします(パラグラフモード)。
 
 @param limit 最大の読み込みバイト数
+
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 例:
   # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
