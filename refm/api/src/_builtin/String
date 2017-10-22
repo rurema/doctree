@@ -1211,11 +1211,7 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 #@end
 
 例:
-#@since 1.8.7
     "aa\nbb\ncc\n".each_line do |line|
-#@else
-    "aa\nbb\ncc\n".each do |line|
-#@end
       p line
     end
         # => "aa\n"
