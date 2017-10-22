@@ -1624,6 +1624,18 @@ deprecate に設定した定数を参照すると警告メッセージが表示�
 #@#        untrust なオブジェクトではない場合に発生します。
 
 @return self を返します。
+
+例:
+  FOO = 123
+  Object.deprecate_constant(:FOO) # => Object
+
+  FOO
+  # warning: constant ::FOO is deprecated
+  # => 123
+
+  Object.deprecate_constant(:BAR)
+  # NameError: constant Object::BAR not defined
+
 #@end
 
 #@since 2.0.0
