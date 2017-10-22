@@ -271,6 +271,16 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドの名前を返します。
 
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.name # => :foo
+
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
