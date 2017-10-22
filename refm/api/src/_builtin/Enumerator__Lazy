@@ -203,6 +203,13 @@ self を返します。
 
 [[m:Enumerable#chunk]] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
+例:
+  (1..Float::INFINITY).lazy.chunk{ |n| n % 3 == 0 }
+  # => #<Enumerator::Lazy: #<Enumerator: #<Enumerator::Generator:0x007f8bf18118f0>:each>>
+
+  (1..Float::INFINITY).lazy.chunk{ |n| n % 3 == 0 }.take(5).force
+  # => [[false, [1, 2]], [true, [3]], [false, [4, 5]], [true, [6]], [false, [7, 8]]]
+
 @see [[m:Enumerable#chunk]]
 
 --- slice_before(pattern) -> Enumerator::Lazy
