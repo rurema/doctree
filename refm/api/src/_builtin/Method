@@ -289,6 +289,17 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドオブジェクトのレシーバを返します。
 
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.receiver # => #<Foo:0x007fb39203eb78>
+  m.receiver.foo(1) # => "foo called with arg 1"
+
 #@end
 
 #@since 1.9.1
