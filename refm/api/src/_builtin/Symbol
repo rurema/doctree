@@ -165,6 +165,11 @@ other が同じシンボルの時に真を返します。
 
 @param other 比較対象のシンボルを指定します。
 
+例:
+
+  :aaa == :aaa    #=> true
+  :aaa == :xxx    #=> false
+
 --- succ -> Symbol
 --- next -> Symbol
 
