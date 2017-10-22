@@ -1664,11 +1664,11 @@ close します。
 そうでない場合に false を返します。
 
    f = open("/dev/null")
-   f.close_on_exec?                 #=> false
-   f.close_on_exec = true
    f.close_on_exec?                 #=> true
    f.close_on_exec = false
    f.close_on_exec?                 #=> false
+   f.close_on_exec = true
+   f.close_on_exec?                 #=> true
 
 @see [[m:IO#close_on_exec=]]
 
