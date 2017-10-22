@@ -482,6 +482,26 @@ name で指定される名前の定数の値を取り出します。
 @param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
 @param value セットしたい値を指定します。
 
+例:
+  module Foo; end
+
+  # Symbolを指定した場合
+  Foo.const_set(:FOO, 123)
+  Foo::FOO # => 123
+
+  # Stringを指定した場合
+  Foo.const_set('BAR', 'abc')
+  Foo::BAR # => "abc"
+
+  # 既に定義されている定数の名前を指定した場合
+  Foo.const_set('BAR', '123')
+  # warning: already initialized constant Foo::BAR
+  # warning: previous definition of BAR was here
+  # => "123"
+
+  # 不適切な定数名を指定した場合
+  Foo.const_set('foo', 1) # => NameError: wrong constant name foo
+
 #@since 1.9.1
 --- constants(inherit = true) -> [Symbol]
 #@else
