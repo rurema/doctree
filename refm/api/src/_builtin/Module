@@ -643,6 +643,18 @@ true を返します。
 
 @see [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
 
+例:
+  module Foo
+    def foo; end
+    protected def bar; end
+    private def baz; end
+  end
+
+  Foo.method_defined?(:foo) # => true
+  Foo.method_defined?(:bar) # => true
+  Foo.method_defined?(:baz) # => false
+  Foo.method_defined?(:qux) # => false
+
 --- module_eval(expr, fname = "(eval)", lineno = 1) -> object
 --- module_eval{|mod| ... }                         -> object
 --- class_eval(expr, fname = "(eval)", lineno = 1)  -> object
