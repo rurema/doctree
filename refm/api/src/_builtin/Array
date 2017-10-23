@@ -2325,9 +2325,9 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
   [].max {|a, b| a <=> b }    #=> nil
   [].max(1) {|a, b| a <=> b } #=> []
 
-  a = %w(albatross dog horse)
-  a.max {|a, b| a.length <=> b.length }    #=> "albatross"
-  a.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
+  ary = %w(albatross dog horse)
+  ary.max {|a, b| a.length <=> b.length }    #=> "albatross"
+  ary.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
 
 @param n 取得する要素数。
 
@@ -2369,9 +2369,9 @@ a < b のとき負の整数を、期待しています。
   [].min {|a, b| a <=> b }    #=> nil
   [].min(1) {|a, b| a <=> b } #=> []
 
-  a = %w(albatross dog horse)
-  a.min {|a, b| a.length <=> b.length }    #=> "dog"
-  a.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
+  ary = %w(albatross dog horse)
+  ary.min {|a, b| a.length <=> b.length }    #=> "dog"
+  ary.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
 
 @param n 取得する要素数。
 
