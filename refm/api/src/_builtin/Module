@@ -898,6 +898,26 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @see [[m:Module#method_defined?]]
 
+例:
+  module A
+    def method1()  end
+  end
+
+  class B
+    private
+    def method2()  end
+  end
+
+  class C < B
+    include A
+    def method3()  end
+  end
+
+  A.method_defined? :method1            # => true
+  C.private_method_defined? "method1"   # => false
+  C.private_method_defined? "method2"   # => true
+  C.method_defined? "method2"           # => false
+
 --- protected_method_defined?(name) -> bool
 
 インスタンスメソッド name がモジュールに定義されており、
