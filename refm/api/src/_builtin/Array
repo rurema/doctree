@@ -1845,14 +1845,10 @@ Ruby 1.9.1 以降では Array#sample を使ってください。
   p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 #@end
 
-#@since 1.9.1
-#@if (version != "1.9.0")
 --- sample        -> object | nil
 --- sample(n)     -> Array
-#@since 1.9.3
---- sample(random: rng)    -> object | nil
---- sample(n, random: rng) -> Array
-#@end
+--- sample(random: Random)    -> object | nil
+--- sample(n, random: Random) -> Array
 
 配列の要素を1個(引数を指定した場合は自身の要素数を越えない範囲で n 個)
 ランダムに選んで返します。
@@ -1869,20 +1865,13 @@ srand()が有効です。
          整数以外のオブジェクトを指定した場合は to_int メソッドによる暗
          黙の型変換を試みます。
 
-#@since 1.9.3
-@param rng 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
-#@since 2.0.0
-           選択する要素のインデックスを返す rand メソッドに応答するオブ
-           ジェクトであれば指定する事ができます。rand メソッドの引数に
-           は [[m:Random#rand]](max) のように選択可能なインデックスの最
-           大値が指定されます。
-#@else
-           0 以上 1 未満の値を返す rand メソッドに応答するオブジェクト
-           であれば指定する事ができます。
-#@end
-           [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェクトを
-           指定した場合、[[m:Kernel.#srand]]の指定に影響されません。
-#@end
+@param random 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
+              選択する要素のインデックスを返す rand メソッドに応答する
+              オブジェクトであれば指定する事ができます。rand メソッド
+              の引数には [[m:Random#rand]](max) のように選択可能なイン
+              デックスの最大値が指定されます。
+              [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェク
+              トを指定した場合、[[m:Kernel.#srand]]の指定に影響されません。
 
 @raise TypeError 引数 n に整数以外の(暗黙の型変換が行えない)オブジェク
                  トを指定した場合に発生します。
@@ -1896,8 +1885,6 @@ srand()が有効です。
   p a.sample        #=> 10
   p a.sample(3)     #=> [1, 9, 3]
   p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-#@end
-#@end
 
 #@since 1.8.7
 --- cycle(n=nil) {|obj| block } -> nil
@@ -1931,7 +1918,7 @@ srand()が有効です。
 
 --- shuffle -> Array
 #@since 1.9.3
---- shuffle(random: rng) -> Array
+--- shuffle(random: Random) -> Array
 #@end
 
 配列の要素をランダムシャッフルして，その結果を配列として返します。
@@ -1955,26 +1942,18 @@ srand()が有効です。
 
 @see [[m:Array#shuffle!]]
 --- shuffle!        -> self
-#@since 1.9.3
---- shuffle!(random: rng) -> self
-#@end
+--- shuffle!(random: Random) -> self
 
 配列を破壊的にランダムシャッフルします。
 
-#@since 1.9.3
-@param rng 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
-#@since 2.0.0
-           選択する要素のインデックスを返す rand メソッドに応答するオブ
-           ジェクトであれば指定する事ができます。rand メソッドの引数に
-           は [[m:Random#rand]](max) のように選択可能なインデックスの最
-           大値が指定されます。
-#@else
-           0 以上 1 未満の値を返す rand メソッドに応答するオブジェクト
-           であれば指定する事ができます。
-#@end
-           [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェクトを
-           指定した場合、[[m:Kernel.#srand]]の指定に影響されません。
-#@end
+@param random 乱数生成器(主に [[c:Random]] オブジェクト)を指定します。
+              選択する要素のインデックスを返す rand メソッドに応答する
+              オブジェクトであれば指定する事ができます。rand メソッド
+              の引数には [[m:Random#rand]](max) のように選択可能なイン
+              デックスの最大値が指定されます。
+              [[m:Kernel.#rand]]、[[c:Random]] を使用しないオブジェク
+              トを指定した場合、[[m:Kernel.#srand]]の指定に影響されま
+              せん。
 
 例:
 
