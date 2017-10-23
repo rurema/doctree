@@ -860,6 +860,22 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @see [[m:Object#private_methods]], [[m:Module#instance_methods]]
 
+例:
+  module Foo
+    def foo; end
+    private def bar; end
+  end
+
+  module Bar
+    include Foo
+
+    def baz; end
+    private def qux; end
+  end
+
+  Bar.private_instance_methods # => [:qux, :bar]
+  Bar.private_instance_methods(false) # => [:qux]
+
 #@since 1.9.1
 --- protected_instance_methods(inherited_too = true) -> [Symbol]
 #@else
