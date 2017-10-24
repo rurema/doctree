@@ -292,6 +292,14 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 
 @see [[m:Kernel.#autoload?]]
 
+例:
+  autoload :Date, 'date'
+
+  autoload?(:Date) # => "date"
+  Date
+  autoload?(:Date) # => nil
+  autoload?(:Foo) # => nil
+
 #@since 1.9.1
 #@since 2.0.0
 --- class_variables(inherit = true) -> [Symbol]
