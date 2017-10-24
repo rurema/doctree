@@ -583,6 +583,14 @@ inherit に真を指定すると
 
 @see [[m:Object#freeze]]
 
+例:
+  module Foo; end
+  Foo.freeze
+
+  module Foo
+    def foo; end
+  end # => RuntimeError: can't modify frozen module
+
 #@since 2.1.0
 #@include(Module.include)
 #@end
