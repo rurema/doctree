@@ -206,6 +206,17 @@ false を返します。
 
 @see [[m:Module#<]]
 
+例:
+  module Foo; end
+  module Bar
+    include Foo
+  end
+
+  Foo > Bar # => true
+  Bar > Foo # => false
+  Foo > Foo # => false
+  Foo > Object # => nil
+
 --- >=(other) -> bool | nil
 
 比較演算子。self が other の先祖か同一クラスである場合、 true を返します。
