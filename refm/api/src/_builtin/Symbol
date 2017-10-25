@@ -414,6 +414,13 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 シンボルに対応する文字列のエンコーディング情報を表現した [[c:Encoding]] オブ
 ジェクトを返します。
 
+例:
+
+  # encoding: utf-8
+
+  :foo.encoding        # => #<Encoding:US-ASCII>
+  :あかさたな.encoding   # => #<Encoding:UTF-8>
+
 @see [[m:String#encoding]]
 
 --- inspect    -> String
