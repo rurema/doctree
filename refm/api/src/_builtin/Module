@@ -1760,4 +1760,25 @@ self が特異クラスの場合に true を返します。そうでなければ
 @param module 有効にするモジュールを指定します。
 
 @see [[m:Module#refine]], [[m:main.using]]
+
+例:
+  module Foo
+    refine Integer do
+      def to_s
+        "foo"
+      end
+    end
+  end
+
+  module Bar
+    using Foo
+
+    def self.bar
+      1.to_s
+    end
+  end
+
+  Bar.bar # => "foo"
+  1.to_s # => "1"
+
 #@end
