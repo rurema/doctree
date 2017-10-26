@@ -149,6 +149,12 @@ Enumerator::Lazy のインスタンスを返します。
 
 [[m:Enumerable#grep]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
+例:
+  (100..Float::INFINITY).lazy.map(&:to_s).grep(/\A(\d)\1+\z/)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator::Lazy: 100..Infinity>:map>:grep(/\A(\d)\1+\z/)>
+  (100..Float::INFINITY).lazy.map(&:to_s).grep(/\A(\d)\1+\z/).take(10).force
+  # => ["111", "222", "333", "444", "555", "666", "777", "888", "999", "1111"]
+
 #@until 2.3.0
 @see [[m:Enumerable#grep]]
 #@else
