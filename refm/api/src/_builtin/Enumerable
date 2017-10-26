@@ -290,6 +290,13 @@ val と == の関係にある要素を含むとき真を返します。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.max                        # => "horse"
+#@since 2.2.0
+  a.max(2)                     # => ["horse", "dog"]
+#@end
+
 --- max {|a, b| ... }    -> object | nil
 #@since 2.2.0
 --- max(n) {|a, b| ... } -> Array
@@ -313,6 +320,36 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 #@end
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
+
+例:
+  class Person
+    attr_reader :name, :age
+
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  people = [
+    Person.new("sato", 55),
+    Person.new("sato", 33),
+    Person.new("sato", 11),
+    Person.new("suzuki", 55),
+    Person.new("suzuki", 33),
+    Person.new("suzuki", 11),
+    Person.new("tanaka", 55),
+    Person.new("tanaka", 33),
+    Person.new("tanaka", 11)
+  ]
+
+  # 年齢が最大、名前が最小
+  people.max { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => #<Person:0x007fc54b0240a0 @name="sato", @age=55>
+#@since 2.2.0
+  people.max(2) { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => [#<Person:0x007fc54b0240a0 @name="sato", @age=55>, #<Person:0x007fc54c033ea0 @name="suzuki", @age=55>]
+#@end
 
 #@since 1.8.7
 #@since 1.9.1
