@@ -246,6 +246,17 @@ self を call する [[c:Proc]] オブジェクトを生成して返します。
 self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
 ジェクトを生成して返します。
 
+例:
+  class Foo
+    def foo
+      "foo"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  unbound_method = m.unbind # => #<UnboundMethod: Foo#foo>
+  unbound_method.bind(Foo.new) # => #<Method: Foo#foo>
+
 --- ==(other)     -> bool
 #@since 1.9.1
 --- eql?(other)   -> bool
