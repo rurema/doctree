@@ -136,6 +136,13 @@ Enumerator::Lazy のインスタンスを返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
+例:
+  (1..Float::INFINITY).lazy.reject { |i| i.even? }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: 1..Infinity>:reject>
+
+  (1..Float::INFINITY).lazy.reject { |i| i.even? }.take(10).force
+  # => [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+
 @see [[m:Enumerable#reject]]
 
 --- grep(pattern) {|item| ... } -> Enumerator::Lazy
