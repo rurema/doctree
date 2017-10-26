@@ -25,7 +25,7 @@ rinda/rinda                     ohai
 rinda/tuplespace                ohai
 rss
 syck                                            deprecated in 2.0.0
-win32/registry
+win32/registry                                  sho-h
 xmlrpc                                          bundle gem in 2.4.0
 
 # LIBRARY_NAME                  OWNER           STATUS
