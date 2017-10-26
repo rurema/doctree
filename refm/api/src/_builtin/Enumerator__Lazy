@@ -199,6 +199,13 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
+例:
+  (1..Float::INFINITY).lazy.drop(3)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: 1..Infinity>:drop(3)>
+
+  (1..Float::INFINITY).lazy.drop(3).take(10).force
+  # => [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
 @see [[m:Enumerable#drop]]
 
 --- drop_while -> Enumerator::Lazy
