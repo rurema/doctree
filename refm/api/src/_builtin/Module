@@ -211,9 +211,18 @@ false を返します。
   module Bar
     include Foo
   end
+  module Baz
+    prepend Foo
+  end
 
+  Bar.ancestors # => [Bar, Foo]
   Foo > Bar # => true
   Bar > Foo # => false
+
+  Baz.ancestors # => [Foo, Baz]
+  Foo > Baz # => true
+  Baz > Foo # => nil
+
   Foo > Foo # => false
   Foo > Object # => nil
 
