@@ -928,6 +928,13 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
+例:
+
+  10.real               # => 10
+  -10.real              # => -10
+  0.1.real              # => 0.1
+  Rational(2, 3).real   # => (2/3)
+
 @see [[m:Numeric#imag]]、[[m:Complex#real]]
 
 --- real?    -> bool
