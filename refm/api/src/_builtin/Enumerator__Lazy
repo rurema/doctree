@@ -181,6 +181,13 @@ Enumerator::Lazy のインスタンスを返します。
 ただし一貫性のため、ブロック付きで呼び出した場合は Enumerable#zip と
 同じ挙動になります。
 
+例:
+  (1..Float::INFINITY).lazy.zip(('a'..'z').cycle)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: 1..Infinity>:zip(#<Enumerator: "a".."z":cycle>)>
+
+  (1..Float::INFINITY).lazy.zip(('a'..'z').cycle).take(30).force.last(6)
+  # => [[25, "y"], [26, "z"], [27, "a"], [28, "b"], [29, "c"], [30, "d"]]
+
 @see [[m:Enumerable#zip]]
 
 --- take(n) -> Enumerator::Lazy
