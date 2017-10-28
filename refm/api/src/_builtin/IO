@@ -705,25 +705,40 @@ dup は内容の等しいフリーズされていない IO を返します。
 self がパイプでプロセスにつながっていれば、そのプロセスの終
 了を待ち合わせます。
 
-@raise Errno::EXXX close に失敗した場合に発生します。
+#@since 2.3.0
+既に close されていた場合には単に無視されます。
+#@end
 
+@raise Errno::EXXX close に失敗した場合に発生します。
+#@until 2.3.0
 @raise IOError 既に close されていた場合に発生します。
+#@end
 
 --- close_read    -> nil
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
 た IO オブジェクトで使用します。
 
-@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+#@since 2.3.0
+既に close されていた場合には単に無視されます。
+#@end
 
+#@until 2.3.0
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+#@end
 @raise Errno::EXXX close に失敗した場合に発生します。
 
 --- close_write    -> nil
 
 書き込み用の IO を close します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ発生します。
+#@since 2.3.0
+既に close されていた場合には単に無視されます。
+#@end
 
+#@until 2.3.0
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
+#@end
 @raise Errno::EXXX close に失敗した場合に発生します。
 
 --- closed?    -> bool
