@@ -723,9 +723,8 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 既に close されていた場合には単に無視されます。
 #@end
 
-#@until 2.3.0
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
-#@end
+
 @raise Errno::EXXX close に失敗した場合に発生します。
 
 --- close_write    -> nil
@@ -736,9 +735,8 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 既に close されていた場合には単に無視されます。
 #@end
 
-#@until 2.3.0
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
-#@end
+
 @raise Errno::EXXX close に失敗した場合に発生します。
 
 --- closed?    -> bool
