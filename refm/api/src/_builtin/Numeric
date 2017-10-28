@@ -932,12 +932,18 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 --- real?    -> bool
 
-自身が [[c:Complex]] かそのサブクラスのインスタンスでない場合に
-true を返します。そうでない場合に false を返します。
+常に true を返します。([[c:Complex]] またはそのサブクラスではないことを意味します。)
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-@see [[m:Numeric#integer?]]
+例:
+
+  10.real?               # => true
+  -10.real?              # => true
+  0.1.real?              # => true
+  Rational(2, 3).real?   # => true
+
+@see [[m:Numeric#integer?]]、[[m:Complex#real?]]
 
 --- rect        -> [Numeric, Numeric]
 --- rectangular -> [Numeric, Numeric]
