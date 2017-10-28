@@ -840,6 +840,9 @@ ch を返します。
 
 --- read_nonblock(maxlen)              -> String
 --- read_nonblock(maxlen, outbuf)      -> String
+#@since 2.3.0
+--- read_nonblock(maxlen, outbuf, exception: true)      -> String
+#@end
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
@@ -850,6 +853,13 @@ ch を返します。
 
 @param maxlen 読み込む長さの上限を整数で指定します。
 @param outbuf 読み込んだデータを格納する [[c:String]] オブジェクトを指定します。
+#@since 2.3.0
+@param exception 読み込み時に [[c:Errno::EAGAIN]]、
+                 [[c:Errno::EWOULDBLOCK]] が発生する代わりに
+                 :wait_readable を返すかどうかを指定します。また、false
+                 を指定した場合は既に EOF に達していれば
+                 [[c:EOFError]] の代わりに nil を返します。
+#@end
 
 @see [[m:ARGF.class#readpartial]]
 
