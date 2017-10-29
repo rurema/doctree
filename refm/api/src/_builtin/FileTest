@@ -54,6 +54,12 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+例:
+  FileTest.exist?('/etc/passwd') # => true
+  FileTest.exist?('/etc') # => true
+  FileTest.exist?('/etc/no_such_file') # => false
+  FileTest.exist?('/etc/no_such_directory') # => false
+
 #@since 2.1.0
 --- exists?(file)    -> bool
 
