@@ -289,6 +289,12 @@ ifnoneを省略した Hash.new は {} と同じです。
 self を返します。
 
 #@since 2.0.0
+
+例:
+  hash = {}
+  p hash.to_hash         # => {}
+  p hash.to_hash == hash # => true
+
 @see [[m:Object#to_hash]], [[m:Hash#to_h]]
 #@else
 @see [[m:Object#to_hash]]
