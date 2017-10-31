@@ -1258,7 +1258,11 @@ marshal_dump/marshal_load を使うべきです。
 
 #@end
 
+#@since 2.4.0
+--- clone(freeze: true) -> object
+#@else
 --- clone -> object
+#@end
 --- dup -> object
 
 オブジェクトの複製を作成して返します。
@@ -1270,6 +1274,9 @@ clone や dup は浅い(shallow)コピーであることに注意してくださ
 
 #@since 2.4.0
 [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトは複製ではなくインスタンス自身を返します。
+
+@param freeze false を指定すると freeze されていないコピーを返します。
+@raise ArgumentError [[c:TrueClass]] などの常に freeze されているオブジェクトの freeze されていないコピーを作成しようとしたときに発生します。
 #@else
 @raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトを複製しようとすると発生します。
 #@end
