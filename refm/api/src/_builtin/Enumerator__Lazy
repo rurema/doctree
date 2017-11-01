@@ -194,6 +194,13 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
+例:
+  (1..Float::INFINITY).lazy.take(5)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: 1..Infinity>:take(5)>
+
+  (1..Float::INFINITY).lazy.take(5).force
+  # => [1, 2, 3, 4, 5]
+
 @see [[m:Enumerable#take]]
 
 --- take_while -> Enumerator::Lazy
