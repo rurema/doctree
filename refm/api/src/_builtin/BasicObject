@@ -182,6 +182,20 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @param name 呼び出すメソッドの名前。 [[c:Symbol]] または文字列で指定します。
 @param args メソッドに渡す任意個の引数
+
+例:
+  class Mail
+    def delete(*args)
+      "(Mail#delete) - delete " + args.join(',')
+    end
+    def send(name, *args)
+      "(Mail#send) - #{name} #{args.join(',')}"
+    end
+  end
+  mail = Mail.new
+  mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
+  mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
+
 @see [[m:Object#__send__]]
 
 #@since 1.9.3
