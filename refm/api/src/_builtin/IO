@@ -276,8 +276,13 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
+#@since 2.4.0
+--- foreach(path, rs = $/, chomp: false) {|line| ... }    -> nil
+--- foreach(path, rs = $/, chomp: false)                  -> Enumerator
+#@else
 --- foreach(path, rs = $/) {|line| ... }    -> nil
 --- foreach(path, rs = $/)                  -> Enumerator
+#@end
 
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
 path のオープンに成功すれば nil を返します。
@@ -294,6 +299,10 @@ path が空ファイルの場合、何もせずに nil を返します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 @raise Errno::EXXX path のオープンに失敗した場合、発生します。
 
@@ -533,9 +542,15 @@ length を省略するとファイルの末尾まで読み込みます。
 
 @see [[m:IO.read]]
 
+#@since 2.4.0
+--- readlines(path, rs = $/, chomp: false, opts={})    -> [String]
+--- readlines(path, limit, chomp: false, opts={})      -> [String]
+--- readlines(path, rs, limit, chomp: false, opts={})  -> [String]
+#@else
 --- readlines(path, rs = $/, opts={})    -> [String]
 --- readlines(path, limit, opts={})      -> [String]
 --- readlines(path, rs, limit, opts={})  -> [String]
+#@end
 
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
@@ -554,6 +569,9 @@ opts でファイルを開くときのオプションを指定します。エン
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 @param opts ファイルを開くときのオプション引数
 
 @raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
@@ -730,6 +748,20 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 
 ポートがクローズされている時に真を返します。
 
+#@since 2.4.0
+--- each(rs = $/, chomp: false) {|line| ... }         -> self
+--- each(limit, chomp: false) {|line| ... }           -> self
+--- each(rs, limit, chomp: false) {|line| ... }       -> self
+--- each(rs = $/, chomp: false)                       -> Enumerator
+--- each(limit, chomp: false)                         -> Enumerator
+--- each(rs, limit, chomp: false)                     -> Enumerator
+--- each_line(rs = $/, chomp: false) {|line| ... }    -> self
+--- each_line(limit, chomp: false) {|line| ... }      -> self
+--- each_line(rs, limit, chomp: false) {|line| ... }  -> self
+--- each_line(rs = $/, chomp: false)                  -> Enumerator
+--- each_line(limit, chomp: false)                    -> Enumerator
+--- each_line(rs, limit, chomp: false)                -> Enumerator
+#@else
 --- each(rs = $/) {|line| ... }         -> self
 --- each(limit) {|line| ... }           -> self
 --- each(rs, limit) {|line| ... }       -> self
@@ -742,6 +774,7 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 --- each_line(rs = $/)                  -> Enumerator
 --- each_line(limit)                    -> Enumerator
 --- each_line(rs, limit)                -> Enumerator
+#@end
 
 IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
 与えられたブロックを実行します。
@@ -757,6 +790,9 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -895,9 +931,15 @@ EOF に到達した時には nil を返します。
 
 @see [[m:IO#readchar]]
 
+#@since 2.4.0
+--- gets(rs = $/, chomp: false)    -> String | nil
+--- gets(limit, chomp: false)      -> String | nil
+--- gets(rs, limit, chomp: false)  -> String | nil
+#@else
 --- gets(rs = $/)    -> String | nil
---- gets(limit) -> String | nil
---- gets(rs, limit) -> String | nil
+--- gets(limit)      -> String | nil
+--- gets(rs, limit)  -> String | nil
+#@end
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には nil を返します。
@@ -915,6 +957,9 @@ limit で最大の読み込みバイト数を指定します。ただし
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -1130,9 +1175,15 @@ EOF に到達した時には EOFError が発生します。
 
 @see [[m:IO#getc]]
 
---- readline(rs = $/) -> String
---- readline(limit) -> String
+#@since 2.4.0
+--- readline(rs = $/, chomp: false)   -> String
+--- readline(limit, chomp: false)     -> String
+--- readline(rs, limit, chomp: false) -> String
+#@else
+--- readline(rs = $/)   -> String
+--- readline(limit)     -> String
 --- readline(rs, limit) -> String
+#@end
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には EOFError が発生します。
@@ -1146,6 +1197,9 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 @raise EOFError EOF に到達した時に発生します。
 
@@ -1159,9 +1213,15 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 @see [[m:$/]], [[m:IO#gets]]
 
+#@since 2.4.0
+--- readlines(rs = $/, chomp: false)    -> [String]
+--- readlines(limit, chomp: false)      -> [String]
+--- readlines(rs, limit, chomp: false)  -> [String]
+#@else
 --- readlines(rs = $/)    -> [String]
---- readlines(limit)    -> [String]
---- readlines(rs = $/, limit)    -> [String]
+--- readlines(limit)      -> [String]
+--- readlines(rs, limit)  -> [String]
+#@end
 
 データを全て読み込んで、その各行を要素としてもつ配列を返します。
 既に EOF に達していれば空配列 [] を返します。
@@ -1174,6 +1234,9 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
