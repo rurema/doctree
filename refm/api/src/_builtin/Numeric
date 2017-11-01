@@ -921,7 +921,9 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 @return 分子を返します。
 
-@see [[m:Numeric#denominator]]
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+@see [[m:Numeric#denominator]]、[[m:Integer#numerator]]、[[m:Float#numerator]]、[[m:Rational#numerator]]、[[m:Complex#numerator]]
 
 --- polar -> [Numeric, Numeric]
 
