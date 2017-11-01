@@ -67,6 +67,22 @@ p str.upcase     # => "TXTTXT"
 p str.downcase   # => "txttxt"
 ```
 
+## 意味のある命名
+リファレンスの読み手や、るりまのレビュアーへの配慮のため
+クラス名、変数名などは意味のある命名をすること。
+
+### 悪い例
+```ruby
+Hoge = Struct.new("Hoge", :foo, :bar)
+hoge = Hoge.new("aaaa", 5)
+```
+
+### 良い例
+```ruby
+Person = Struct.new("Person", :name, :age)
+tanaka = Person.new("tanaka", 32)
+```
+
 ## 補足説明
 サンプルコード中に補足説明があることで理解の助けになると考えられる場合は  
 `# 任意の説明コメント` のフォーマットで補足説明をしてください。
