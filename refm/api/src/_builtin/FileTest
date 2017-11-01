@@ -184,6 +184,9 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @see [[m:FileTest.#size?]], [[m:FileTest.#zero?]]
 
+例:
+  FileTest.size('/etc/passwd') # => 5925
+
 --- size?(file)    -> Integer | nil
 
 ファイルのサイズを返します。ファイルが存在しない時や
