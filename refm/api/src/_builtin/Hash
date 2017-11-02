@@ -710,15 +710,15 @@ nil を指定した場合は現在の [[m:Hash#default_proc]] をクリアしま
   h = {}
   h.default_proc = proc do |hash, key|
     hash[key] = case
-                       when (key % 15).zero?
-                         "FizzBuzz"
-                       when (key % 5).zero?
-                          "Buzz"
-                       when (key % 3).zero?
-                          "Fizz"
-                       else
-                          key
-                       end
+                when (key % 15).zero?
+                  "FizzBuzz"
+                when (key % 5).zero?
+                   "Buzz"
+                when (key % 3).zero?
+                   "Fizz"
+                else
+                   key
+                end
   end
   p h[1]  # => 1
   p h[2]  # => 2
