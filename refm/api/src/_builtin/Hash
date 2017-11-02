@@ -1428,20 +1428,15 @@ select! はオブジェクトが変更された場合に self を、
 例:
   h1 = {}
   c = ("a".."g")
-  c.each_with_index { |e, i|h1[i] = e }
+  c.each_with_index {|e, i| h1[i] = e }
 
   h2 = h1.dup
-  h1.select!
-  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
+  h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
 
-  h1.select! { |k, v| k % 3 == 0 }
-  # => {0=>"a", 3=>"d", 6=>"g"}
-  h1.select! { |k, v| true }
-  # => nil
-  h2.keep_if { |k, v| k % 3 == 0 }
-  # => {0=>"a", 3=>"d", 6=>"g"}
-  h2.keep_if { |k, v| true }
-  # => {0=>"a", 3=>"d", 6=>"g"}
+  h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+  h1.select! { |k, v| true }        # => nil
+  h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+  h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
 
 @see [[m:Hash#select]], [[m:Hash#delete_if]],[[m:Hash#reject!]]
 #@end
