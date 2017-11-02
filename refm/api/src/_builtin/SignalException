@@ -55,5 +55,5 @@ self.message のエイリアスです。
     Process.kill('HUP', Process.pid)
     sleep
   rescue SignalException => e
-    puts e.signm  #=> SIGHUP
+    puts e.signm  # => SIGHUP
   end
