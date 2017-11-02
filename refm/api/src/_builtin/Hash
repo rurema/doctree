@@ -299,6 +299,18 @@ self を返します。
 
 self を返します。[[c:Hash]] クラスのサブクラスから呼び出した場合は
 self を [[c:Hash]] オブジェクトに変換します。
+
+例:
+  hash = {}
+  p hash.to_h      # => {}
+  p hash.to_h == hash # => true
+
+  class MyHash < Hash;end
+  my_hash = MyHash.new
+  p my_hash.to_h        # => {}
+  p my_hash.class       # => MyHash
+  p my_hash.to_h.class  # => Hash
+
 #@end
 
 #@since 2.3.0
