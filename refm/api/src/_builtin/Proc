@@ -306,6 +306,13 @@ Procをカリー化します
 [[m:Module.attr_accessor]] で定義されたメソッドには対応していません。
 #@end
 
+例:
+  # /path/to/target.rb を実行
+  proc {}.source_location            # => ["/path/to/target.rb", 1]
+  proc {}.source_location            # => ["/path/to/target.rb", 2]
+  (eval "proc {}").source_location   # => ["(eval)", 1]
+  method(:p).to_proc.source_location # => nil
+
 @see [[m:Method#source_location]]
 
 --- hash -> Integer
