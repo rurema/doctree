@@ -166,6 +166,10 @@ Proc オブジェクトが保持するコンテキストを
 
 self を返します。
 
+例:
+  pr = proc {}
+  p pr == pr.to_proc # => true
+
 --- to_s    -> String
 #@since 2.0.0
 --- inspect -> String
