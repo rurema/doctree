@@ -229,6 +229,18 @@ string が文字列でもシンボルでもない場合には false を返しま
 
 @param string マッチ対象文字列
 
+例:
+  a = "HELLO"
+  case a
+  when /\A[a-z]*\z/; print "Lower case\n"
+  when /\A[A-Z]*\z/; print "Upper case\n"
+  else;            print "Mixed case\n"
+  end
+  # => "Upper case"
+
+  /\A[a-z]*\z/ === "HELLO" # => false
+  /\A[A-Z]*\z/ === "HELLO" # => true
+
 --- ~ -> Integer | nil
 
 変数 [[m:$_]] の値との間でのマッチをとります。
