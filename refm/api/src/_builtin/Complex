@@ -35,7 +35,7 @@
 例:
 
   Complex(1, 2) * 2              # => (2+4i)
-  Complex(1, 2) * Complex(2, 3)  # => (-4+4i)
+  Complex(1, 2) * Complex(2, 3)  # => (-4+7i)
   Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
 
 --- **(other) -> Complex
