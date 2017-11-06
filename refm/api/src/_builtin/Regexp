@@ -460,6 +460,10 @@ otherが同じパターン、オプション、文字コードの正規表現で
 正規表現オブジェクトのエンコーディングを表す [[c:Encoding]] オブジェクト
 を返します。
 
+#@#noexample 正規表現ページのエンコーディングを参照
+
+@see [[ref:d:spec/regexp#encoding]]
+
 --- named_captures -> { String => [Integer] }
 正規表現に含まれる名前付きキャプチャ(named capture)の情報を
 [[c:Hash]] で返します。
