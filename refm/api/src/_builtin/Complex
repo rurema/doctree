@@ -170,6 +170,11 @@
 
 自身の絶対値が有限値の場合に true を、そうでない場合に false を返します。
 
+例:
+
+  (1+1i).finite?                   # => true
+  (Float::INFINITY + 1i).finite?   # => false
+
 @see [[m:Complex#infinite?]]
 
 --- infinite? -> nil | 1
