@@ -215,6 +215,13 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 [[m:Enumerable#take_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
+例:
+  1.step.lazy.zip(('a'..'z').cycle).take_while { |e| e.first < 100_000 }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:zip(#<Enumerator: "a".."z":cycle>)>:take_while>
+
+  1.step.lazy.zip(('a'..'z').cycle).take_while { |e| e.first < 100_000 }.force.last(5)
+  # => [[99995, "y"], [99996, "z"], [99997, "a"], [99998, "b"], [99999, "c"]]
+
 @see [[m:Enumerable#take_while]]
 
 --- drop(n) -> Enumerator::Lazy
