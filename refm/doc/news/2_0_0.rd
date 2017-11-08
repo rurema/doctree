@@ -381,9 +381,7 @@
 
   * [[lib:tmpdir]]
     * 非互換: [[m:Dir.mktmpdir]] は [[m:FileUtils.#remove_entry_secure]] ではなく [[m:FileUtils.#remove_entry]] を使うようになりました。
-      This means that applications should not
-      change the permission of the created temporary directory to make
-      accessible from other users.
+      これはアプリケーションが作成された一時ディレクトリを全ユーザから書き込み可能に変更すべきではないことを意味します。
 
   * [[lib:yaml]]
     * Syck は削除しました。インストールされている libyaml に依存するようになりました。
