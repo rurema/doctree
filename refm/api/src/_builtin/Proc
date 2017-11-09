@@ -316,6 +316,8 @@ Procをカリー化します
 
 self のハッシュ値を返します。
 
+#@#noexample
+
 #@end
 #@since 1.9.2
 --- parameters -> [object]
