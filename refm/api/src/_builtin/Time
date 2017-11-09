@@ -347,6 +347,11 @@ true を返します。そうでない場合に false を返します。
 #@end
 #@end
 
+例:
+  Time.now.asctime            # => "Fri Nov 10 00:00:32 2017"
+  Time.now.asctime.encoding   # => #<Encoding:US-ASCII>
+  Time.now.ctime              # => "Fri Nov 10 00:00:32 2017"
+
 --- gmt?    -> bool
 --- utc?    -> bool
 
