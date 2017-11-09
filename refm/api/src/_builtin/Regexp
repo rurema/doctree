@@ -241,6 +241,8 @@ string が文字列でもシンボルでもない場合には false を返しま
   /\A[a-z]*\z/ === "HELLO" # => false
   /\A[A-Z]*\z/ === "HELLO" # => true
 
+@see [[m:Enumerable#grep]], [[m:Object#===]]
+
 --- ~ -> Integer | nil
 
 変数 [[m:$_]] の値との間でのマッチをとります。
