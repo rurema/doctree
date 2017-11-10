@@ -596,7 +596,7 @@ precision を指定した場合は指定した桁数で切り捨てた整数か
 例:
 
   Rational(3, 4).to_s  # => "3/4"
-  Rational(8).to_s     # => "8"
+  Rational(8).to_s     # => "8/1"
   Rational(-8, 6).to_s # => "-4/3"
   Rational(0.5).to_s   # => "1/2"
 
