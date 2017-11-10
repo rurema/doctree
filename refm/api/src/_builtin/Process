@@ -866,6 +866,149 @@ CLOCK_REALTIME よりも [[m:Time.now]] をおすすめします。
 
 == Constants
 
+#@since 2.1.0
+--- CLOCK_REALTIME -> Integer | Symbol
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては :GETTIMEOFDAY_BASED_CLOCK_REALTIME です。
+システムによっては定義されていません。
+
+--- CLOCK_MONOTONIC -> Integer | Symbol
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては :MACH_ABSOLUTE_TIME_BASED_CLOCK_MONOTONIC です。
+システムによっては定義されていません。
+
+--- CLOCK_PROCESS_CPUTIME_ID -> Integer | Symbol
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては :GETRUSAGE_BASED_CLOCK_PROCESS_CPUTIME_ID です。
+システムによっては定義されていません。
+
+--- CLOCK_THREAD_CPUTIME_ID -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_VIRTUAL -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_PROF -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_REALTIME_FAST -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_REALTIME_PRECISE -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_REALTIME_COARSE -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_REALTIME_ALARM -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_MONOTONIC_FAST -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_MONOTONIC_PRECISE -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_MONOTONIC_COARSE -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_MONOTONIC_RAW -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_MONOTONIC_RAW_APPROX -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_BOOTTIME -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_BOOTTIME_ALARM -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_UPTIME -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_UPTIME_FAST -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_UPTIME_RAW -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_UPTIME_RAW_APPROX -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_UPTIME_PRECISE -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+--- CLOCK_SECOND -> Integer
+
+[[m:Process.#clock_gettime]] で使われます。
+
+システムによっては定義されていません。
+
+#@end
 --- PRIO_PROCESS -> Integer
 
 対象とするプライオリティがプロセスプライオリティであることを表す定数です。
