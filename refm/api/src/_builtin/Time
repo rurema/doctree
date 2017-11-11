@@ -767,6 +767,8 @@ yday は 1 から数えます。
 
 @return ハッシュ値を返します。
 
+#@#noexample
+
 @see [[m:Object#hash]]
 
 --- usec         -> Integer
