@@ -46,6 +46,8 @@ main では参照できない事に注意してください。トップレベル
 
 "main" を返します。
 
+#@#noexample
+
 --- include(*modules) -> self
 
 引数 modules で指定したモジュールを後ろから順番をインクルードします。
