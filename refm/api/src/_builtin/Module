@@ -207,24 +207,24 @@ false を返します。
 @see [[m:Module#<]]
 
 例:
-  module Foo; end
-  module Bar
-    include Foo
+  module Awesome; end
+  module Included
+    include Awesome
   end
-  module Baz
-    prepend Foo
+  module Prepended
+    prepend Awesome
   end
 
-  Bar.ancestors # => [Bar, Foo]
-  Foo > Bar # => true
-  Bar > Foo # => false
+  Included.ancestors # => [Included, Awesome]
+  Awesome > Included # => true
+  Included > Awesome # => false
 
-  Baz.ancestors # => [Foo, Baz]
-  Foo > Baz # => true
-  Baz > Foo # => nil
+  Prepended.ancestors # => [Awesome, Prepended]
+  Awesome > Prepended # => true
+  Prepended > Awesome # => nil
 
-  Foo > Foo # => false
-  Foo > Object # => nil
+  Awesome > Awesome # => false
+  Awesome > Object # => nil
 
 --- >=(other) -> bool | nil
 
