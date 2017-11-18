@@ -7,7 +7,7 @@ bigdecimal は浮動小数点数演算ライブラリです。
 例:
 
   require 'bigdecimal'
-  a = BigDecimal::new("0.123456789123456789")
+  a = BigDecimal.new("0.123456789123456789")
   b = BigDecimal("123456.78912345678", 40)
   print a + b # => 0.123456912580245903456789E6
 
@@ -221,7 +221,7 @@ frac[0]=1234、frac[1]=5678、frac[2]=4321、 exponent=1、sign=2
 
    require "bigdecimal"
    file = File::open(....,"r")
-   s = BigDecimal::new("0")
+   s = BigDecimal.new("0")
    while line = file.gets
       s = s + line
    end
@@ -313,15 +313,15 @@ c が必要とするメモリー領域は大きくなることに注意して下
   #
   def big_pi(sig) # sig: Number of significant figures
     exp    = -sig
-    pi     = BigDecimal::new("0")
-    two    = BigDecimal::new("2")
-    m25    = BigDecimal::new("-0.04")
-    m57121 = BigDecimal::new("-57121")
+    pi     = BigDecimal.new("0")
+    two    = BigDecimal.new("2")
+    m25    = BigDecimal.new("-0.04")
+    m57121 = BigDecimal.new("-57121")
   
-    u = BigDecimal::new("1")
-    k = BigDecimal::new("1")
-    w = BigDecimal::new("1")
-    t = BigDecimal::new("-80")
+    u = BigDecimal.new("1")
+    k = BigDecimal.new("1")
+    w = BigDecimal.new("1")
+    t = BigDecimal.new("-80")
     while (u.nonzero? && u.exponent >= exp) 
       t   = t*m25
       u   = t.div(k,sig)
@@ -329,10 +329,10 @@ c が必要とするメモリー領域は大きくなることに注意して下
       k   = k+two
     end
   
-    u = BigDecimal::new("1")
-    k = BigDecimal::new("1")
-    w = BigDecimal::new("1")
-    t = BigDecimal::new("956")
+    u = BigDecimal.new("1")
+    k = BigDecimal.new("1")
+    w = BigDecimal.new("1")
+    t = BigDecimal.new("956")
     while (u.nonzero? && u.exponent >= exp )
       t   = t.div(m57121,sig)
       u   = t.div(k,sig)

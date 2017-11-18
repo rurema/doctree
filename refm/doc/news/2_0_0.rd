@@ -247,7 +247,7 @@
   * [[lib:net/http]]
     * 新機能
       * Proxies are now automatically detected from the http_proxy environment
-        variable.  See Net::HTTP::new for details.
+        variable.  See [[m:Net::HTTP.new]] for details.
       * gzip and deflate compression are now requested for all requests by
         default.  See Net::HTTP for details.
       * SSL sessions are now reused across connections for a single instance.
