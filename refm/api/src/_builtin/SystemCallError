@@ -161,7 +161,6 @@ Microsoft Windows システムにおいては [[url:http://msdn2.microsoft.com/j
 
 #@# defs/known_errors.def 参照。
 
-  * ERROR
   * EPERM
   * ENOENT
   * ESRCH
@@ -336,9 +335,6 @@ Errno::EXXX の各クラスに対応するシステム依存のエラーコー�
 
     p Errno::EAGAIN::Errno            # => 11
     p Errno::EWOULDBLOCK::Errno       # => 11
-
-= class Errno::ERROR < SystemCallError
-システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
 
 = class Errno::EPERM < SystemCallError
 システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
