@@ -83,3 +83,17 @@ trunk HEAD (いまなら 1.9.0) 以外の開発版のタグは保存しなくて
 しまってください。
 
 ついでに言えば、1.6.x のタグも必要ありません。
+
+### default gem と bundled gemはどう書く？
+
+default gemは組み込みクラスや標準ライブラリ同様内容まで記述してください。
+
+bundled gemは最低限以下を記述してください。詳細な内容については要望等によって記述するか決めます。
+
+* 概要
+* rubygems.org のページへのリンク
+    * https://rubygems.org/gems/<gem\>
+* github.com のプロジェクトページ(あれば)へのリンク
+    * https://github.com/<user\>/<gem\>
+* rubydoc.info のページへのリンク
+    * http://www.rubydoc.info/gems/<gem\>
