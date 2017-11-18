@@ -368,6 +368,10 @@ self の符号を反転させたものを返します。
 
 このメソッドは、二項演算子 - で 0 - self によって定義されています。
 
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+@see [[m:Integer#-@]]、[[m:Float#-@]]、[[m:Rational#-@]]、[[m:Complex#-@]]
+
 --- abs        -> Numeric
 #@since 1.9.1
 --- magnitude  -> Numeric
