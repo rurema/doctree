@@ -535,11 +535,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- chardev?(path)    -> bool
 
 [[m:FileTest.#chardev?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- directory?(path)    -> bool
 
@@ -547,17 +551,23 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- executable?(path)    -> bool
 
 [[m:FileTest.#executable?]] と同じです。
 
 @param path パスを表す文字列を指定します。
 
+#@#noexample
+
 --- executable_real?(path)    -> bool
 
 [[m:FileTest.#executable_real?]] と同じです。
 
 @param path パスを表す文字列を指定します。
+
+#@#noexample
 
 --- exist?(path)    -> bool
 #@until 2.1.0
@@ -568,10 +578,14 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 #@since 2.1.0
 --- exists?(path)    -> bool
 
 このメソッドは deprecated です。[[m:File.exist?]] を使用してください。
+
+#@#noexample
 #@end
 
 --- file?(path)    -> bool
@@ -580,17 +594,23 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- grpowned?(path)    -> bool
 
 [[m:FileTest.#grpowned?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- owned?(path)    -> bool
 
 [[m:FileTest.#owned?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- identical?(filename1, filename2)    -> bool
 
@@ -600,11 +620,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param filename2 パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- pipe?(path)    -> bool
 
 [[m:FileTest.#pipe?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- readable?(path)    -> bool
 
@@ -612,11 +636,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- readable_real?(path)    -> bool
 
 [[m:FileTest.#readable_real?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- setgid?(path)    -> bool
 
@@ -624,11 +652,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- setuid?(path)    -> bool
 
 [[m:FileTest.#setuid?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- size(path)    -> Integer
 
@@ -642,11 +674,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- socket?(path)    -> bool
 
 [[m:FileTest.#socket?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- sticky?(path)    -> bool
 
@@ -654,11 +690,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
+#@#noexample
+
 --- symlink?(path)    -> bool
 
 [[m:FileTest.#symlink?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 --- writable?(path)    -> bool
 
@@ -666,11 +706,15 @@ umask を変更します。変更前の umask の値を返します。
 
 @param path パスを表す文字列を指定します。
 
+#@#noexample
+
 --- writable_real?(path)    -> bool
 
 [[m:FileTest.#writable_real?]] と同じです。
 
 @param path パスを表す文字列を指定します。
+
+#@#noexample
 
 --- zero?(path)    -> bool
 #@since 2.4.0
@@ -680,6 +724,8 @@ umask を変更します。変更前の umask の値を返します。
 [[m:FileTest.#zero?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
+
+#@#noexample
 
 #@since 1.9.1
 --- world_readable?(path)    -> Integer | nil
