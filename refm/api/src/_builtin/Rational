@@ -137,12 +137,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で
 
   r = Rational(3, 4)
   r / 2                # => (3/8)
-#@since 1.9.3
-  r / 2.0              # => (3/8)
-  r / 0.5              # => 1.5
-#@else
   r / 2.0              # => 0.375
-#@end
+  r / 0.5              # => 1.5
   r / Rational(1, 2)   # => (3/2)
   r / 0                # => ZeroDivisionError
 
