@@ -261,6 +261,20 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 @see [[m:Matrix.hstack]], [[m:Matrix#vstack]]
 
 #@end
+#@since 2.5.0
+--- combine(*matrices) {|*elements| ... } -> Matrix
+
+要素ごとにブロックを呼び出した結果を組み合わせた Matrix を返します。
+
+  require 'matrix'
+  x = Matrix[[6, 6], [4, 4]]
+  y = Matrix[[1, 2], [3, 4]]
+  Matrix.combine(x, y) {|a, b| a - b} # => Matrix[[5, 4], [1, 0]]
+
+@param matrices 並べる行列。すべての行列の行数と列数が一致していなければならない
+@raise ExceptionForMatrix::ErrDimensionMismatch 行や列の要素数が一致しない時に発生します
+@see [[m:Matrix#combine]]
+#@end
 == Instance Methods
 --- [](i, j) -> ()
 #@if (version >= "1.9.1")
@@ -1306,6 +1320,26 @@ b には [[c:Vector]], [[c:Matrix]], 数値の配列を指定出来ます。
   lup.solve(Matrix[[1, 3], [-1, 0]])  #=> Matrix[[(1/1), (2/1)], [(-1/1), (-1/1)]]
 #@end
 
+#@since 2.5.0
+--- combine(*matrices) {|*elements| ... } -> Matrix
+
+要素ごとにブロックを呼び出した結果を組み合わせた Matrix を返します。
+
+Matrix.combine(self, *matrices) { ... } と同じです。
+
+@see [[m:Matrix.combine]]
+
+--- hadamard_product(m) -> Matrix
+--- entrywise_product(m) -> Matrix
+
+アダマール積(要素ごとの積)を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行や列の要素数が一致しない時に発生します。
+
+  require 'matrix'
+
+  Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4], [9, 8]]
+#@end
 = class ExceptionForMatrix::ErrDimensionMismatch < StandardError
 行列/ベクトル計算時に次元が合わない場合に発生する例外です。
 
