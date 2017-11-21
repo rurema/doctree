@@ -263,6 +263,7 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 #@end
 #@since 2.5.0
 --- combine(*matrices) {|*elements| ... } -> Matrix
+--- combine(*matrices) -> Enumerator
 
 要素ごとにブロックを呼び出した結果を組み合わせた Matrix を返します。
 
