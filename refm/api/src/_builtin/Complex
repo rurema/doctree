@@ -323,6 +323,11 @@ self を other で割った商を返します。
 
 常に false を返します。
 
+例:
+
+  (2+3i).real?   # => false
+  (2+0i).real?   # => false
+
 @see [[m:Numeric#real?]]
 
 --- rect        -> [Numeric, Numeric]
