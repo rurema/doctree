@@ -110,6 +110,33 @@ message と backtrace が == メソッドで比較して
              [[m:Exception#exception]] を実行して変換を試みます。
 #@end
 
+例:
+  require "date"
+  def check_long_month(month)
+    return if Date.new(2000, month, -1).day == 31
+    raise "#{month} is not long month"
+  end
+
+  def get_exception
+    return begin
+      yield
+    rescue => e
+      e
+    end
+  end
+
+  results = [2, 2, 4].map { |e | get_exception { check_long_month(e) } }
+  p results.map { |e| e.class }
+  # => [RuntimeError, RuntimeError, RuntimeError]
+  p results.map { |e| e.message }
+  # => ["2 is not long month", "2 is not long month", "4 is not long month"]
+
+  # class, message, backtrace が同一のため true になる
+  p results[0] == results[1]    # => true
+
+  # class, backtrace が同一だが、message がことなるため false になる
+  p results[0] == results[2]    # => false
+
 #@#: rdoc でも表示していないため省略。
 #@#: #@since 2.0.0
 #@#: --- respond_to? -> bool
