@@ -196,6 +196,11 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドの名前を返します。
 
+例:
+
+  a = String.instance_method(:size)
+  a.name   # => :size
+
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
