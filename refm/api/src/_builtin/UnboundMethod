@@ -199,6 +199,13 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
+
+例:
+
+  Integer.instance_method(:to_s).owner   # => Integer
+  Integer.instance_method(:to_c).owner   # => Numeric
+  Integer.instance_method(:hash).owner   # => Kernel
+
 #@end
 
 #@since 1.9.1
