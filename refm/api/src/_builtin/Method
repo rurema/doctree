@@ -454,6 +454,25 @@ self 内で super を実行した際に実行されるメソッドを [[c:Method
 クトにして返します。
 
 @see [[m:UnboundMethod#super_method]]
+
+例:
+  class Super
+    def foo
+      "superclass method"
+    end
+  end
+
+  class Sub < Super
+    def foo
+      "subclass method"
+    end
+  end
+
+  m = Sub.new.method(:foo) # => #<Method: Sub#foo>
+  m.call # => "subclass method"
+  m.super_method # => #<Method: Super#foo>
+  m.super_method.call # => "superclass method"
+
 #@end
 
 #@since 2.1.0
