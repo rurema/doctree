@@ -934,6 +934,20 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
+例:
+  class Foo
+    def self.foo
+      "foo"
+    end
+
+    private_class_method :foo
+  end
+
+  Foo.foo # NoMethodError: private method `foo' called for Foo:Class
+
+  Foo.public_class_method(:foo) # => Foo
+  Foo.foo # => "foo"
+
 #@since 1.8.0
 --- private_method_defined?(name) -> bool
 
