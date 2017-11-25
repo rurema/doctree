@@ -927,6 +927,15 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
+例:
+    module Foo
+      def self.foo; end
+    end
+
+    Foo.singleton_class.private_method_defined?(:foo) # => false
+    Foo.private_class_method(:foo) # => Foo
+    Foo.singleton_class.private_method_defined?(:foo) # => true
+
 --- public_class_method(*name) -> self
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
