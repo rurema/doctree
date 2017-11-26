@@ -281,6 +281,10 @@ Dir.home や Dir.home("root") は
 File.expand_path("~") や File.expand_path("~root") と
 ほぼ同じです。
 
+例:
+  Dir.home          # => "/home/vagrant"
+  Dir.home("root")  # => "/root"
+
 @see [[m:File.expand_path]]
 
 #@since 2.4.0
