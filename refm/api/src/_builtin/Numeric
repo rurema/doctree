@@ -737,6 +737,14 @@ self を other で割った余り r を返します。
 
 self の絶対値が有限値の場合に true を、そうでない場合に false を返します。
 
+例:
+
+  10.finite?                      # => true
+  Rational(3).finite?             # => true
+
+  Float::INFINITY.finite?         # => false
+  Float::INFINITY.is_a?(Numeric)  # => true
+
 @see [[m:Numeric#infinite?]]
 
 --- infinite? -> -1 | 1 | nil
