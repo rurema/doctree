@@ -12,6 +12,16 @@
 @param error_message エラーメッセージを表す文字列を指定します。このメッセージは
                      属性 [[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示されます。
 
+例:
+  e = Exception.new("some message")
+  p e         # => #<Exception: some message>
+  p e.message # => "some message"
+
+例:
+  e = Exception.exception("some message")
+  p e         # => #<Exception: some message>
+  p e.message # => "some message"
+
 == Instance Methods
 
 --- exception                   -> self
