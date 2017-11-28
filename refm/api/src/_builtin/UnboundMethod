@@ -155,6 +155,13 @@ true を返します。そうでない場合に false を返します。
 
 自身を複製した [[c:UnboundMethod]] オブジェクトを作成して返します。
 
+#@samplecode 例
+a = String.instance_method(:size)
+b = a.clone
+
+a == b       # => true
+#@end
+
 --- inspect -> String
 --- to_s    -> String
 
