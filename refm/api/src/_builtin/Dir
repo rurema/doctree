@@ -4,7 +4,7 @@ include Enumerable
 ディレクトリの操作を行うためのクラスです。
 
 == Class Methods
-           
+
 --- [](*pattern)                        -> [String]
 --- glob(pattern, flags = 0)                -> [String]
 --- glob(pattern, flags = 0) {|file| ...}   -> nil
@@ -69,7 +69,7 @@ include Enumerable
   p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
 
   Dir.glob("b*") {|f| p f }
- 
+
   #=> "bar"
       "baz"
 
@@ -348,9 +348,10 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 オープンしているディレクトリのパス名を文字列で返します。
 
 例:
-  d = Dir.new("..")
-  d.path      #=> ".."
-  d.to_path   #=> ".."
+  Dir.open("..") do |d|
+    d.path      # => ".."
+    d.to_path   # => ".."
+  end
 
 --- pos     -> Integer
 --- tell    -> Integer
@@ -380,12 +381,13 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 例:
 
-   d = Dir.new("testdir")   #=> #<Dir:0x401b3c40>
-   d.read                   #=> "."
-   i = d.tell               #=> 12
-   d.read                   #=> ".."
-   d.seek(i)                #=> #<Dir:0x401b3c40>
-   d.read                   #=> ".."
+   Dir.open("testdir") do |d|
+     d.read                   # => "."
+     i = d.tell               # => 12
+     d.read                   # => ".."
+     d.seek(i)                # => #<Dir:0x401b3c40>
+     d.read                   # => ".."
+   end
 
 --- read    -> String | nil
 
@@ -404,26 +406,25 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 例:
 
-   d = Dir.new("testdir")
-   d.read     #=> "."
-   d.rewind   #=> #<Dir:0x401b3fb0>
-   d.read     #=> "."
+   Dir.open("testdir") do |d|
+     d.read     # => "."
+     d.rewind   # => #<Dir:0x401b3fb0>
+     d.read     # => "."
+   end
 
 --- inspect -> String
 
 self の情報を人間に読みやすい文字列にして返します。
 
 例:
-  d = Dir.new("/")
-  d.inspect   #=> "#<Dir:/>"
+  Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
 
 #@since 2.2.0
 --- fileno -> Integer
 
 self に関連づけられたファイル記述子を表す整数を返します。
 
-  d = Dir.new("..")
-  d.fileno   #=> 8
+  Dir.open("..") { |d| d.fileno } # => 8
 
 本メソッドでは POSIX 2008 で定義されている dirfd() 関数を使用します。
 
