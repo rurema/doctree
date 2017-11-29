@@ -99,7 +99,9 @@
       for UTR #51 Unicode Emoji, Version 4.0 emoji zwj sequences.
     * [[m:Regexp#match?]] を追加 [[feature:8110]]
       true/false を返し、バックリファレンスを生成しません。
-    * Onigmo 6.0.0 に更新
+    * Onigmo 6.0.0 に更新 (Ruby 2.4.0)
+    * Onigmo 6.1.1 に更新 (Ruby 2.4.1)
+      * 非包含オペレータ(absence operator)をサポートしました [[url:https://github.com/k-takata/Onigmo/issues/82]]
 
   * [[c:Regexp]]/[[c:String]]: Unicodeのバージョンを8.0.0から9.0.0に更新しました [[feature:12513]]
 
