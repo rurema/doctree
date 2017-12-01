@@ -151,7 +151,7 @@ true を返します。そうでない場合に false を返します。
   c = Array.instance_method(:size)
   p a == c                            #=> false
 
---- clone -> Method
+--- clone -> UnboundMethod
 
 自身を複製した [[c:UnboundMethod]] オブジェクトを作成して返します。
 
