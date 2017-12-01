@@ -472,6 +472,11 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
+例:
+  # link.rb は t.rb のシンボリックリンク
+  File.lstat("link.rb") == File.stat("t.rb") # => false
+  File.stat("link.rb")  == File.stat("t.rb") # => true
+
 @see [[m:IO#stat]], [[m:File#lstat]]
 
 --- symlink(old, new)    -> 0
