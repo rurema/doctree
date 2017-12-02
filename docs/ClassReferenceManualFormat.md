@@ -468,6 +468,24 @@ bc-convert.rb を使うと自動的にすべて削除されます。
 いまのところ条件式の評価はテキトーなので、比較式 (>= とか == とか)
 しか使えません。他の式が使いたいときは ML で相談してください。
 
+### #@samplecode
+
+サンプルコードをシンタックスハイライトしたいときに使用します。
+
+```
+#@samplecode 例
+puts "Hello, world!"
+#@end
+
+#@samplecode 例:例の説明
+puts "Hello, world!"
+#@end
+
+#@samplecode
+puts "ラベルは省略可能"
+#@end
+```
+
 ### #@todo
 
 「#@todo」は、そのドキュメントが書きかけであることを示します。
