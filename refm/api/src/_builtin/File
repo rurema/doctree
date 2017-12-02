@@ -39,6 +39,9 @@ include File::Constants
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+例:
+  File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
+
 #@since 2.2.0
 --- birthtime(filename) -> Time
 
