@@ -140,6 +140,7 @@ pattern が見付からなかったときは nil を返します。
                  上記以外の引数を渡し、かつそのオブジェクトが
                  to_s メソッドを持たないときに発生します。
 
+#@samplecode 例
         p "strstrstr".index(/str/)       # => 0      ← 引数 pattern の例
         p "strstrstr".index("str")       # => 0
         p "strstrstr".index(?s)          # => 0
@@ -156,6 +157,7 @@ pattern が見付からなかったときは nil を返します。
         p "strstrstr".index(/str/, -1)   # => nil    ← 負の pos 引数の例
         p "strstrstr".index(/str/, -2)   # => nil
         p "strstrstr".index(/str/, -3)   # => 6
+#@end
 
 @see \[\[m:String#rindex]]
 ```
@@ -319,6 +321,24 @@ Ruby 1.8 以降では 〜〜
 
 #@if (version < "1.9.0")
 このメソッドは将来削除されるので 〜〜
+#@end
+```
+
+### #@samplecode
+
+サンプルコードをシンタックスハイライトしたいときに使用します。
+
+```
+#@samplecode 例
+puts "Hello, world!"
+#@end
+
+#@samplecode 例:例の説明
+puts "Hello, world!"
+#@end
+
+#@samplecode
+puts "ラベルは省略可能"
 #@end
 ```
 
