@@ -121,37 +121,38 @@ p str              # => "TXT"
 2つの例の区切りがわかりにくい
 
 ```
-例:
-  require 'yaml'
-  data = [ "Taro san", "Jiro san", "Saburo san"]
-  str_r = YAML.dump(data)
-  str_l =<<EOT
-  --- 
-  - Taro san
-  - Jiro san
-  - Saburo san
-  EOT
-  p str_r == str_l #=> true
+#samplecode 例
+require 'yaml'
+data = [ "Taro san", "Jiro san", "Saburo san"]
+str_r = YAML.dump(data)
+str_l =<<EOT
+--- 
+- Taro san
+- Jiro san
+- Saburo san
+EOT
+p str_r == str_l #=> true
 
-  require 'yaml'
-  require 'date'
-  str_l =<<YAML_EOT
-  Tanaka Taro: { age: 35, birthday: 1970-01-01}
-  Suzuki Suneo: {
-    age: 13,
-    birthday: 1992-12-21
-  }
-  YAML_EOT
-  str_r = {}
-  str_r["Tanaka Taro"] = {
-    "age" => 35,
-    "birthday" => Date.new(1970, 1, 1)
-  }
-  str_r["Suzuki Suneo"] = {
-    "age" => 13,
-    "birthday" => Date.new(1992, 12, 21)
-  }
-  p str_r == YAML.load(str_l) #=> true
+require 'yaml'
+require 'date'
+str_l =<<YAML_EOT
+Tanaka Taro: { age: 35, birthday: 1970-01-01}
+Suzuki Suneo: {
+  age: 13,
+  birthday: 1992-12-21
+}
+YAML_EOT
+str_r = {}
+str_r["Tanaka Taro"] = {
+  "age" => 35,
+  "birthday" => Date.new(1970, 1, 1)
+}
+str_r["Suzuki Suneo"] = {
+  "age" => 13,
+  "birthday" => Date.new(1992, 12, 21)
+}
+p str_r == YAML.load(str_l) #=> true
+#@end
 ```
 
 良い例
@@ -159,38 +160,40 @@ p str              # => "TXT"
 2つの例の区切りが明確にわかる
 
 ```
-例1: 構造化された配列
-  require 'yaml'
-  data = [ "Taro san", "Jiro san", "Saburo san"]
-  str_r = YAML.dump(data)
-  str_l =<<EOT
-  --- 
-  - Taro san
-  - Jiro san
-  - Saburo san
-  EOT
-  p str_r == str_l #=> true
+#@samplecode 例1: 構造化された配列
+require 'yaml'
+data = [ "Taro san", "Jiro san", "Saburo san"]
+str_r = YAML.dump(data)
+str_l =<<EOT
+--- 
+- Taro san
+- Jiro san
+- Saburo san
+EOT
+p str_r == str_l #=> true
+#@end
 
-例2: 構造化されたハッシュ
-  require 'yaml'
-  require 'date'
-  str_l =<<YAML_EOT
-  Tanaka Taro: { age: 35, birthday: 1970-01-01}
-  Suzuki Suneo: {
-    age: 13,
-    birthday: 1992-12-21
-  }
-  YAML_EOT
-  str_r = {}
-  str_r["Tanaka Taro"] = {
-    "age" => 35,
-    "birthday" => Date.new(1970, 1, 1)
-  }
-  str_r["Suzuki Suneo"] = {
-    "age" => 13,
-    "birthday" => Date.new(1992, 12, 21)
-  }
-  p str_r == YAML.load(str_l) #=> true
+#@samplecode 例2: 構造化されたハッシュ
+require 'yaml'
+require 'date'
+str_l =<<YAML_EOT
+Tanaka Taro: { age: 35, birthday: 1970-01-01}
+Suzuki Suneo: {
+  age: 13,
+  birthday: 1992-12-21
+}
+YAML_EOT
+str_r = {}
+str_r["Tanaka Taro"] = {
+  "age" => 35,
+  "birthday" => Date.new(1970, 1, 1)
+}
+str_r["Suzuki Suneo"] = {
+  "age" => 13,
+  "birthday" => Date.new(1992, 12, 21)
+}
+p str_r == YAML.load(str_l) #=> true
+#@end
 ```
 
 ## Time関連のタイムゾーンはJSTにする
