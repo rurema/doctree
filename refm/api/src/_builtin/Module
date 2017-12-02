@@ -281,6 +281,10 @@ case ではクラス、モジュールの所属関係をチェックすること
 
 @see [[m:Module#included_modules]]
 
+#@since 2.5.0
+#@include(Module.attr)
+#@end
+
 #@since 1.8.0
 --- autoload(const_name, feature) -> nil
 
@@ -1085,67 +1089,9 @@ include を Ruby で書くと以下のように定義できます。
 
 @see [[m:Module#included]]
 
---- attr(name, assignable = false) -> nil
-
-インスタンス変数読み取りのためのインスタンスメソッド name を定義します。
-
-このメソッドで定義されるアクセスメソッドの定義は次の通りです。
-
-  def name
-    @name
-  end
-
-省略可能な第 2 引数 assignable が指定されその値が真である
-場合には、属性の書き込み用メソッド name= も同時に定義されます。
-その定義は次の通りです。
-
-  def name=(val)
-    @name = val
-  end
-
-@param name [[c:String]] または [[c:Symbol]] で指定します。
-
-@param assignable true を指定するとインスタンス変数書き込み用のインスタンスメソッドも定義します。
-
---- attr_accessor(*name) -> nil
-
-インスタンス変数 name に対する読み取りメソッドと書き込みメソッドの両方を
-定義します。
-
-このメソッドで定義されるメソッドの定義は以下の通りです。
-
-  def name
-    @name
-  end
-  def name=(val)
-    @name = val
-  end
-
-@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
-
---- attr_reader(*name) -> nil
-
-インスタンス変数 name の読み取りメソッドを定義します。
-
-このメソッドで定義されるメソッドの定義は以下の通りです。
-
-  def name
-    @name
-  end
-
-@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
-
---- attr_writer(*name) -> nil
-
-インスタンス変数 name への書き込みメソッド (name=) を定義します。
-
-このメソッドで定義されるメソッドの定義は以下の通りです。
-
-  def name=(val)
-    @name = val
-  end
-
-@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
+#@until 2.5.0
+#@include(Module.attr)
+#@end
 
 #@since 1.8.3
 --- class_variable_get(name) -> object
