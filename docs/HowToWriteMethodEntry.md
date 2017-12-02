@@ -70,6 +70,7 @@ pattern が見付からなかったときは nil を返します。
                  to_s メソッドを持たないときに発生します。
                  ↑ メソッドの選択が悪かったのでかなり無理無理な条件になってしまった
 
+#@samplecode 例
         p "strstrstr".index(/str/)       # => 0      ← 引数 pattern の例
         p "strstrstr".index("str")       # => 0
         p "strstrstr".index(?s)          # => 0
@@ -86,6 +87,7 @@ pattern が見付からなかったときは nil を返します。
         p "strstrstr".index(/str/, -1)   # => nil    ← 負の pos 引数の例
         p "strstrstr".index(/str/, -2)   # => nil
         p "strstrstr".index(/str/, -3)   # => 6
+#@end
 
 @see ![[m:String#rindex]]
 ```
