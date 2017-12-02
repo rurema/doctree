@@ -1,0 +1,66 @@
+--- undef_method(*name) -> self
+
+このモジュールのインスタンスメソッド name を未定義にします。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 指定したインスタンスメソッドが定義されていない場合に発生します。
+
+=== 「未定義にする」とは
+このモジュールのインスタンスに対して name という
+メソッドを呼び出すことを禁止するということです。
+スーパークラスの定義が継承されるかどうかという点において、
+「未定義」は「メソッドの削除」とは区別されます。
+以下のコード例を参照してください。
+
+  class A
+    def ok
+      puts 'A'
+    end
+  end
+  class B < A
+    def ok
+      puts 'B'
+    end
+  end
+
+  B.new.ok   # => B
+
+  # undef_method の場合はスーパークラスに同名のメソッドがあっても
+  # その呼び出しはエラーになる
+  class B
+    undef_method :ok
+  end
+  B.new.ok   # => NameError
+
+  # remove_method の場合はスーパークラスに同名のメソッドがあると
+  # それが呼ばれる
+  class B
+    remove_method :ok
+  end
+  B.new.ok   # => A
+
+#@#see [ruby-dev:17894]
+また、undef 文と undef_method の違いは、
+メソッド名を [[c:String]] または [[c:Symbol]] で与えられることです。
+
+  module M1
+    def foo
+    end
+    def self.moo
+      undef foo
+    end
+  end
+  M1.instance_methods false #=> ["foo"]
+  M1.moo
+  M1.instance_methods false #=> []
+  module M2
+    def foo
+    end
+    def self.moo
+      undef_method :foo
+    end
+  end
+  M2.instance_methods false #=> ["foo"]
+  M2.moo
+  M2.instance_methods false #=> []

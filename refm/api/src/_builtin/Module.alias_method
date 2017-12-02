@@ -1,0 +1,16 @@
+--- alias_method(new, original) -> self
+
+メソッドの別名を定義します。
+
+alias との違いは以下の通りです。
+
+  * メソッド名は [[c:String]] または [[c:Symbol]] で指定します
+  * グローバル変数の別名をつけることはできません
+
+また、クラスメソッドに対して使用することはできません。
+
+@param new 新しいメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
+
+@param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
+
+@see [[ref:d:spec/def#alias]]

@@ -1048,24 +1048,18 @@ name で与えられた名前のクラス変数がモジュールに存在する
 #@include(Module.prepend)
 #@end
 
+#@since 2.5.0
+#@include(Module.alias_method)
+#@include(Module.define_method)
+#@include(Module.remove_method)
+#@include(Module.undef_method)
+#@end
+
 == Private Instance Methods
 
---- alias_method(new, original) -> self
-
-メソッドの別名を定義します。
-
-alias との違いは以下の通りです。
-
-  * メソッド名は [[c:String]] または [[c:Symbol]] で指定します
-  * グローバル変数の別名をつけることはできません
-
-また、クラスメソッドに対して使用することはできません。
-
-@param new 新しいメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
-
-@param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
-
-@see [[ref:d:spec/def#alias]]
+#@until 2.5.0
+#@include(Module.alias_method)
+#@end
 
 --- append_features(module_or_class) -> self
 
@@ -1191,30 +1185,9 @@ val をセットします。val を返します。
   p Fred.new.foo    # => 101
 #@end
 
---- define_method(name, method) -> Symbol
---- define_method(name) { ... } -> Symbol
-
-インスタンスメソッド name を定義します。
-
-ブロックを与えた場合、定義したメソッドの実行時にブロックが
-レシーバクラスのインスタンスの上で [[m:BasicObject#instance_eval]] されます。
-
-@param name メソッド名を [[c:String]] または [[c:Symbol]] を指定します。
-
-@param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
-       いずれかのインスタンスを指定します。
-
-@return メソッド名を表す [[c:Symbol]] を返します。
-
-@raise TypeError method に同じクラス、サブクラス、モジュール以外のメソッ
-                 ドを指定した場合に発生します。
-
-  class Foo
-    def foo() p :foo end
-    define_method(:bar, instance_method(:foo))
-  end
-  Foo.new.bar    # => :foo
-
+#@until 2.5.0
+#@include(Module.define_method)
+#@end
 --- extend_object(obj) -> object
 
 [[m:Object#extend]] の実体です。オブジェクトにモジュールの機能を追加します。
@@ -1546,98 +1519,10 @@ name で指定した定数を取り除き、その定数に設定されていた
 
 @see [[m:Module#remove_class_variable]], [[m:Object#remove_instance_variable]]
 
-#@since 1.8.0
---- remove_method(*name) -> self
-#@end
 
-インスタンスメソッド name をモジュールから削除します。
-
-#@since 1.8.0
-Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
-#@end
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 指定したメソッドが定義されていない場合に発生します。
-
-  class C
-    def foo
-    end
-
-    remove_method :foo
-    remove_method :no_such_method   # 例外 NameError が発生
-  end
-
-@see [[m:Module#undef_method]]
-
-#@since 1.8.0
---- undef_method(*name) -> self
-
-このモジュールのインスタンスメソッド name を未定義にします。
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 指定したインスタンスメソッドが定義されていない場合に発生します。
-
-=== 「未定義にする」とは
-このモジュールのインスタンスに対して name という
-メソッドを呼び出すことを禁止するということです。
-スーパークラスの定義が継承されるかどうかという点において、
-「未定義」は「メソッドの削除」とは区別されます。
-以下のコード例を参照してください。
-
-  class A
-    def ok
-      puts 'A'
-    end
-  end
-  class B < A
-    def ok
-      puts 'B'
-    end
-  end
-
-  B.new.ok   # => B
-
-  # undef_method の場合はスーパークラスに同名のメソッドがあっても
-  # その呼び出しはエラーになる
-  class B
-    undef_method :ok
-  end
-  B.new.ok   # => NameError
-
-  # remove_method の場合はスーパークラスに同名のメソッドがあると
-  # それが呼ばれる
-  class B
-    remove_method :ok
-  end
-  B.new.ok   # => A
-
-#@#see [ruby-dev:17894]
-また、undef 文と undef_method の違いは、
-メソッド名を [[c:String]] または [[c:Symbol]] で与えられることです。
-
-  module M1
-    def foo
-    end
-    def self.moo
-      undef foo
-    end
-  end
-  M1.instance_methods false #=> ["foo"]
-  M1.moo
-  M1.instance_methods false #=> []
-  module M2
-    def foo
-    end
-    def self.moo
-      undef_method :foo
-    end
-  end
-  M2.instance_methods false #=> ["foo"]
-  M2.moo
-  M2.instance_methods false #=> []
-
+#@until 2.5.0
+#@include(Module.remove_method)
+#@include(Module.undef_method)
 #@end
 
 #@since 1.8.7
