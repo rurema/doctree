@@ -14,3 +14,10 @@ alias との違いは以下の通りです。
 @param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
 
 @see [[ref:d:spec/def#alias]]
+
+例:
+  module Kernel
+    alias_method :foo, :puts
+  end
+
+  foo "bar" # bar
