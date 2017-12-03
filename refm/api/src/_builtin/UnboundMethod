@@ -231,6 +231,9 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 詳しくは [[m:Method#parameters]] を参照してください。
 
+#@#noexample Method#parametersを参照
+
+
 @see [[m:Proc#parameters]], [[m:Method#parameters]]
 #@end
 
