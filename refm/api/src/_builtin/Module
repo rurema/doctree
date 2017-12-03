@@ -1067,6 +1067,13 @@ alias との違いは以下の通りです。
 
 @see [[ref:d:spec/def#alias]]
 
+例:
+  module Kernel
+    alias_method :foo, :puts
+  end
+
+  foo "bar" # bar
+
 --- append_features(module_or_class) -> self
 
 モジュール(あるいはクラス)に self の機能を追加します。
