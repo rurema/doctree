@@ -537,6 +537,8 @@ umask を変更します。変更前の umask の値を返します。
 
 #@#noexample
 
+@see [[m:FileTest.#blockdev?]]
+
 --- chardev?(path)    -> bool
 
 [[m:FileTest.#chardev?]] と同じです。
