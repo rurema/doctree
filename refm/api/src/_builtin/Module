@@ -1061,6 +1061,13 @@ name で与えられた名前のクラス変数がモジュールに存在する
 #@include(Module.alias_method)
 #@end
 
+例:
+  module Kernel
+    alias_method :foo, :puts
+  end
+
+  foo "bar" # bar
+
 --- append_features(module_or_class) -> self
 
 モジュール(あるいはクラス)に self の機能を追加します。

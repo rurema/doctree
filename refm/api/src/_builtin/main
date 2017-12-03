@@ -77,6 +77,8 @@ main では参照できない事に注意してください。トップレベル
 @raise TypeError method に同じクラス、サブクラス以外のメソッドを指定し
                  た場合に発生します。
 
+#@#noexample Module#define_method を参照
+
 @see [[m:Module#define_method]]
 
 --- using(module) -> self
