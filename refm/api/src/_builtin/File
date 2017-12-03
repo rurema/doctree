@@ -517,18 +517,43 @@ umask を変更します。変更前の umask の値を返します。
 
 --- utime(atime, mtime, *filename)    -> Integer
 
-ファイルの最終アクセス時刻と更新時刻を変更します。変更したファイル
-の数を返します。変更に失敗した場合は例外 [[c:Errno::EXXX]] が発生
-します。
+ファイルの最終アクセス時刻と更新時刻を変更します。
+#@since 2.5.0
+シンボリックリンクに対しては [[m:File.lutime]]　と違って、
+シンボリックのリンク先を変更します。
+#@end
 
-@param filename ファイル名を表す文字列を指定します。 
+@param filename ファイル名を表す文字列を指定します。
 
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
+@return 変更したファイルの数を返します。
+
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
+#@since 2.5.0
+@see [[m:File.lutime]]
+
+--- lutime(atime, mtime, *filename)    -> Integer
+
+ファイルの最終アクセス時刻と更新時刻を変更します。
+シンボリックリンクに対しては [[m:File.utime]]　と違って、
+シンボリックそのものを変更します。
+
+@param filename ファイル名を表す文字列を指定します。
+
+@param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+
+@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+
+@return 変更したファイルの数を返します。
+
+@raise Errno::EXXX 変更に失敗した場合に発生します。
+
+@see [[m:File.utime]]
+#@end
 --- blockdev?(path)    -> bool
 
 [[m:FileTest.#blockdev?]] と同じです。
