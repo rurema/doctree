@@ -30,6 +30,10 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+例:
+  FileTest.chardev?("/dev/tty") # => true
+  FileTest.chardev?(__FILE__)   # => false
+
 --- executable?(file)    -> bool
 
 ファイルがカレントプロセスにより実行できる時に真を返しま
