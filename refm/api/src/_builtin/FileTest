@@ -22,6 +22,10 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+例:
+  File.blockdev?("/")           # => false
+  File.blockdev?('/dev/disk0')  # => true
+
 --- chardev?(file)    -> bool
 
 ファイルがキャラクタスペシャルファイルの時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
