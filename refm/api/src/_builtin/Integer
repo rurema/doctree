@@ -577,14 +577,14 @@ self を other で割った商を [[c:Float]] で返します。
 --- **(other) -> Numeric
 #@since 2.5.0
 --- pow(other) -> Numeric
---- pow(other, m) -> Integer
+--- pow(other, modulo) -> Integer
 #@end
 
 算術演算子。冪(べき乗)を計算します。
 
 @param other 二項演算の右側の引数(対象)
 #@since 2.5.0
-@param m 指定すると、計算途中に巨大な値を生成せずに (self**other) % m と同じ結果を返します。
+@param modulo 指定すると、計算途中に巨大な値を生成せずに (self**other) % modulo と同じ結果を返します。
 #@end
 @return 計算結果
 #@since 2.5.0
