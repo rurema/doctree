@@ -25,12 +25,12 @@ Logger オブジェクトのログレベルを DEBUG に下げるなどという
 ==== 例
 
   require 'logger'
-  log = Logger.new(STDOUT)
-  log.level = Logger::WARN
+  logger = Logger.new(STDOUT)
+  logger.level = Logger::WARN
 
-  log.debug("Created logger")
-  log.info("Program started")
-  log.warn("Nothing to do!")
+  logger.debug("Created logger")
+  logger.info("Program started")
+  logger.warn("Nothing to do!")
 
   path = "a_non_existent_file"
 
@@ -41,36 +41,23 @@ Logger オブジェクトのログレベルを DEBUG に下げるなどという
       end
     end
   rescue => err
-    logger.fatal("Caught exception; exiting")
+    logger.fatal("Caught exception; non-existent")
     logger.fatal(err)
   end
 
-上の例ではログには WARN のみが記録されます。下が出力例です。
+上の例ではログにはWARN、ERROR、FATALのみが記録されます。
+例外オブジェクトも記録するメッセージとして使えます。
+下が出力例です。
 
-  W, [2005-02-10T20:03:56.489954 #12469]  WARN -- : Nothing to do!
+  W, [2017-12-07T02:22:53.649000 #11601]  WARN -- : Nothing to do!
+  F, [2017-12-07T02:22:53.649172 #11601] FATAL -- : Caught exception; non-existent
+  F, [2017-12-07T02:22:53.649222 #11601] FATAL -- : No such file or directory @ rb_sysopen - a_non_existent_file (Errno::ENOENT)
+  logger_sample.rb:12:in `foreach'
+  logger_sample.rb:12:in `<main>'
 
 これは log.level が [[m:Logger::WARN]] になっているためです。WARN、
 ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログは無視されま
 す。
-
-例外オブジェクトも記録するメッセージとして使えます。
-
-例:
-
-  require 'logger'
-  log = Logger.new(STDOUT)
-  log.level = Logger::ERROR
-  
-  begin
-    File.each_line(path) do |line|
-      unless line =~ /^(\w+) = (.*)$/
-        log.error("Line in wrong format: #{line}")
-      end
-    end
-  rescue => err
-    log.fatal("Caught exception; exiting")
-    log.fatal(err)
-  end
 
 ==== 機能
 
