@@ -338,6 +338,11 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
+例:
+  File.ftype("testfile")            # => "file"
+  File.ftype("/dev/tty")            # => "characterSpecial"
+  File.ftype("/tmp/.X11-unix/X0")   # => "socket"
+
 --- join(*item)    -> String
 
 File::SEPARATORを間に入れて文字列を連結します。
