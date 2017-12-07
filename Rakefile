@@ -20,6 +20,24 @@ def generate_database(version)
   raise "Failed to update BitClust C API database" unless succeeded
 end
 
+def generate_statichtml(version)
+  puts version
+  db = "/tmp/db-#{version}"
+  outputdir = "/tmp/html/#{version}"
+  bitclust_gem_path = File.expand_path('../..', `bundle exec gem which bitclust`)
+  raise "bitclust gem not found" unless $?.success?
+  succeeded = system("bundle", "exec",
+                     "bitclust", "--database=#{db}",
+                     "statichtml", "--outputdir=#{outputdir}",
+                     "--templatedir=#{bitclust_gem_path}/data/bitclust/template.offline",
+                     "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
+                     "--fs-casesensitive",
+                     "--canonical-base-url=http://localhost:9292/latest/")
+  raise "Failed to generate static html" unless succeeded
+  require 'fileutils'
+  FileUtils.ln_sf(version, "/tmp/html/latest")
+end
+
 task :default => [:generate, :check_prev_commit_format]
 
 namespace :generate do
@@ -45,6 +63,30 @@ end
 
 desc "Generate document database"
 task :generate => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "generate:#{version}" }
+
+namespace :statichtml do
+  ALL_VERSIONS.each do |version|
+    desc "Generate static html of #{version}"
+    task version do
+      generate_statichtml(version)
+    end
+  end
+
+  desc "Generate static html of all versions"
+  task :all => ALL_VERSIONS
+
+  desc "Generate static html for old versions"
+  task :old => OLD_VERSIONS
+
+  desc "Generate static html for supported versions"
+  task :supported => SUPPORTED_VERSIONS
+
+  desc "Generate static html for unreleased versions"
+  task :unreleased => UNRELEASED_VERSIONS
+end
+
+desc "Generate static html"
+task :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statichtml:#{version}" }
 
 desc "Check previous commit format"
 task :check_prev_commit_format do
