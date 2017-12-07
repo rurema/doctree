@@ -747,11 +747,17 @@ self の絶対値が有限値の場合に true を、そうでない場合に fa
 
 @see [[m:Numeric#infinite?]]
 
---- infinite? -> -1 | 1 | nil
+--- infinite? -> nil
 
-self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
+常に nil を返します。
+自身が [[c:Float]] か[[c:Complex]]、もしくはそのサブクラスのインスタンスの場合は、self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
 
-@see [[m:Numeric#finite?]]
+例:
+
+  10.infinite?     # => nil
+  (3r).infinite?   # => nil
+
+@see [[m:Numeric#finite?]]、[[m:Float#infinite?]]、[[m:Complex#infinite?]]
 #@end
 
 --- to_int    -> Integer
