@@ -1,5 +1,8 @@
 
-VERSIONS = ["1.8.7", "1.9.3", "2.0.0", "2.1.0", "2.2.0", "2.3.0", "2.4.0"]
+OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0]
+SUPPORTED_VERSIONS = %w[2.2.0 2.3.0 2.4.0]
+UNRELEASED_VERSIONS = %w[2.5.0]
+ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 
 def generate_database(version)
   puts version
@@ -19,18 +22,35 @@ end
 
 task :default => [:generate, :check_prev_commit_format]
 
-desc "Generate document database"
-task :generate do
-  VERSIONS.each do |version|
-    generate_database(version)
+namespace :generate do
+  ALL_VERSIONS.each do |version|
+    desc "Generate document database of #{version}"
+    task version do
+      generate_database(version)
+    end
   end
+
+  desc "Generate document database of all versions"
+  task :all => ALL_VERSIONS
+
+  desc "Generate document database for old versions"
+  task :old => OLD_VERSIONS
+
+  desc "Generate document database for supported versions"
+  task :supported => SUPPORTED_VERSIONS
+
+  desc "Generate document database for unreleased versions"
+  task :unreleased => UNRELEASED_VERSIONS
 end
+
+desc "Generate document database"
+task :generate => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "generate:#{version}" }
 
 desc "Check previous commit format"
 task :check_prev_commit_format do
   change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
   res = []
-  VERSIONS.each do |v|
+  ALL_VERSIONS.each do |v|
     change_files.each do |path|
       if %r!\Arefm/api/!.match(path)
         htmls = []
