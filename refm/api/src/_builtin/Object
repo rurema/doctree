@@ -807,7 +807,7 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
   puts check("mash-up in Ruby on Rails") #=> instance of String class. But not hit...
   puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
-@see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Enumerable#grep]]
+@see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Regexp#===]], [[m:Enumerable#grep]]
 
 #@since 1.9.1
 --- =~(other) -> nil
