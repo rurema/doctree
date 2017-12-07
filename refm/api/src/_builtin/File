@@ -103,6 +103,15 @@ File.basename の動作は [[man:basename(3)]]
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "test")
+File.symlink("testfile", "testlink")
+File.lstat("testlink").ftype            # => "link"
+File.lchmod(0744, "testlink")
+File.stat("testlink").mode.to_s(8)      # => "100644"
+File.lstat("testlink").mode.to_s(8)     # => "120744"
+#@end
+
 --- chown(owner, group, *filename)    -> Integer
 
 ファイルのオーナーとグループを変更します。スーパーユーザだけがファ
