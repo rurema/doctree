@@ -604,8 +604,9 @@ self を other で割った商を [[c:Float]] で返します。
   -3.pow(3,  8) # => 5
   -3.pow(3, -8) # => -3
    5.pow(2, -8) # => -7
-#@end
 
+@see [[m:BigDecimal#power]]
+#@end
 --- abs -> Integer
 --- magnitude -> Integer
 
