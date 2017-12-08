@@ -5,7 +5,7 @@ UNRELEASED_VERSIONS = %w[2.5.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 
 def generate_database(version)
-  puts version
+  puts "generate database of #{version}"
   db = "/tmp/db-#{version}"
   succeeded = system("bundle", "exec",
                      "bitclust", "--database=#{db}",
@@ -21,7 +21,7 @@ def generate_database(version)
 end
 
 def generate_statichtml(version)
-  puts version
+  puts "generate static html of #{version}"
   db = "/tmp/db-#{version}"
   outputdir = "/tmp/html/#{version}"
   bitclust_gem_path = File.expand_path('../..', `bundle exec gem which bitclust`)
