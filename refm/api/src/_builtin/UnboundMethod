@@ -240,6 +240,8 @@ UnboundMethod オブジェクトの引数の情報を返します。
 self 内で super を実行した際に実行されるメソッドを [[c:UnboundMethod]] オブジェ
 クトにして返します。
 
+#@#noexample Method#super_methodを参照
+
 @see [[m:Method#super_method]]
 #@end
 
