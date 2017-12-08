@@ -34,8 +34,8 @@ def generate_statichtml(version)
                      "--fs-casesensitive",
                      "--canonical-base-url=http://localhost:9292/latest/")
   raise "Failed to generate static html" unless succeeded
-  require 'fileutils'
-  FileUtils.ln_sf(version, "/tmp/html/latest")
+  File.unlink("/tmp/html/latest") rescue nil
+  File.symlink(version, "/tmp/html/latest")
 end
 
 task :default => [:generate, :check_prev_commit_format]
