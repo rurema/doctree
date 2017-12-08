@@ -31,7 +31,7 @@ XML 宣言(文書先頭の <?xml version=... ?>)はXML処理命令ではあり�
 --- target -> String
 XML 処理命令のターゲットを返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <?xml version="1.0" encoding="utf-8" ?>
@@ -50,7 +50,7 @@ XML 処理命令のターゲットを value に変更します。
 --- content -> String | nil
 XML 処理命令の内容を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <?xml version="1.0" encoding="utf-8" ?>

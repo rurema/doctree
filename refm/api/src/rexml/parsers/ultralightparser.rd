@@ -78,7 +78,7 @@ XML宣言、DTD、ルート要素、テキストノードの配列です。例�
   # >>  [:text, "\n"]]
 
 #@until 2.1.0
-==== 注意
+=== 注意
 Ruby 2.1.0 以前に添付されている rexml の UltraLightParser は
 doctype の処理にバグがあります。そのため doctype を持つ XML 文書には
 使わないでください。

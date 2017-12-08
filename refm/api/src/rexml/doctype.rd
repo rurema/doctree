@@ -83,7 +83,7 @@ DTD で宣言されている実体の集合を Hash で返します。
 
 これには、XML のデフォルトの実体(gt, lt, quot, apos)も含まれています。
 
-==== 例
+=== 例
   doctype = REXML::Document.new(<<EOS).doctype
   <!DOCTYPE foo [
     <!ENTITY bar "barbarbarbar">
@@ -112,7 +112,7 @@ DTD 内の属性リスト宣言で、 element という名前の要素に対し�
 [[m:REXML::Attribute#name]] と
 [[m:REXML::Attribute#value]] で表現されます。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -142,7 +142,7 @@ elementという名前の要素にはattributeという名前の属性が宣言�
 @param element 要素名(文字列)
 @param attribute 属性名(文字列)
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -180,7 +180,7 @@ output に DTD を出力します。
 @param transitive 無視されます。指定しないでください。
 @param ie_hack 無視されます。指定しないでください。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -224,7 +224,7 @@ name という名前を持つ実体が存在しない場合には nil を返し�
 
 @param name 実体参照名(文字列)
 
-==== 例
+=== 例
   doctype = REXML::Document.new(<<EOS).doctype
   <!DOCTYPE foo [
     <!ENTITY bar "barbarbarbar">
@@ -354,7 +354,7 @@ DTD 内の宣言でパラメータ実体参照を使って宣言が
      "-//W3C//ENTITIES Symbols for XHTML//EN"
      "xhtml-symbol.ent">
   %HTMLsymbol;
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -395,7 +395,7 @@ output へ self を文字列化して出力します。
 DTD の記法宣言を表すクラスです。
 
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype

@@ -17,7 +17,7 @@ respect_whitespace に真を指定すると、text に含まれる空白文字�
 @param respect_whitespace 空白を保存するかどうかを決める真偽値
 @param parent 親ノード
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root />
@@ -47,7 +47,7 @@ self を複製して返します。
 
 @see [[m:REXML::Text#value]], [[m:REXML::Text#to_s]]
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root><![CDATA[foobar  baz]]></root>

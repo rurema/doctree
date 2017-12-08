@@ -11,7 +11,7 @@
 
 @param tag 対象のクラスに関連付けるタグの文字列
 
-==== Example
+=== Example
   require 'psych'
   
   class Foo

@@ -382,7 +382,7 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 
 @raise ArgumentError 登録されていないクラスが klass に指定された場合に発生します。
 
-==== デフォルトで利用可能な引数クラス
+=== デフォルトで利用可能な引数クラス
 
 : Object
  オプションの引数は変換されません。

@@ -520,14 +520,14 @@ o1 と o2 は同じ分割に属します。
 この場合、block.call(o1, o2) == block.call(o2, o1)
 が成立しないブロックを与えると期待通りの結果が得られません。
 
-==== 例1
+=== 例1
   require 'set'
   numbers = Set.new(1..6)
   set = numbers.divide {|i| i % 3}
   p set
   #=> #<Set: {#<Set: {1, 4}>, #<Set: {2, 5}>, #<Set: {3, 6}>}>
 
-==== 例2
+=== 例2
   require 'set'
   numbers = Set[1, 3, 4, 6, 9, 10, 11]
   set = numbers.divide {|i, j| (i - j).abs == 1}
@@ -536,7 +536,7 @@ o1 と o2 は同じ分割に属します。
             #           #<Set: {6}>,
             #           #<Set: {9, 10, 11}>}>
 
-==== 応用例
+=== 応用例
 8x2 のチェス盤上で、ナイトが到達できる位置に関する分類を作成します。
 
   require 'set'

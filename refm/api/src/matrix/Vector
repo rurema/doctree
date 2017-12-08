@@ -225,7 +225,7 @@ self の各要素に数 other を乗じたベクトルを返します。
 @param m 右から乗算を行う行列
 @raise ExceptionForMatrix::ErrDimensionMismatch 次元が合わない場合に発生します
 
-===== 注意
+=== 注意
 
 引数の行列 m は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
 

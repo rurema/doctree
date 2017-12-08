@@ -39,7 +39,7 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数と�
 
 @param proc ファイナライザとして [[c:Proc]] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
 
-==== 使い方の注意
+=== 使い方の注意
 
 以下は、define_finalizer の使い方の悪い例です。
 
