@@ -362,6 +362,11 @@ old を指す new という名前のハードリンクを
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  IO.write("testfile", "test")
+  File.link("testfile", "testlink")   # => 0
+  IO.read("testlink")                 # => "test"
+
 --- new(path, mode = "r", perm = 0666)                -> File 
 --- open(path, mode = "r", perm = 0666)               -> File 
 --- open(path, mode = "r", perm = 0666) {|file| ... } -> object
