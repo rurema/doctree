@@ -767,6 +767,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 @param mode FIFO の許可モードを数値で指定します。指定したモードは通常の
             ファイル作成と同様にプロセスの umask によって変更されます。
             作成されたファイルの許可モードは (mode & ~umask) になります。
+
+例:
+  File.mkfifo("testfile", 0666)
+  File.ftype("testfile")          # => "fifo"
+
 #@end
 
 == Instance Methods
