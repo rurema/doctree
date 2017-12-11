@@ -383,6 +383,20 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
+例: File.new による読み込みモードでのファイルオープン
+  f = File.new("testfile", "r")
+  f.class # => File
+  f.close
+
+例: File.open による読み込みモードでのファイルオープン
+  f = File.open("testfile", "r")
+  f.class # => File
+  f.close
+
+例: File.open による書き込みモードでのファイルオープン
+  File.open("testfile", "w", 0755) { |f| f.print "test" }
+  File.read("testfile")  # => "test"
+
 #@since 1.9.1
 --- path(filename)    -> String
 
