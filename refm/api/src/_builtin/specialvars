@@ -165,7 +165,9 @@ Ruby起動時の初期値は nil です。
 この変数はスレッドローカルで読み取り専用です。
 
 @see [[m:Process.#wait]]
-
+#@since 2.5.0
+@see [[m:Process.last_status]]
+#@end
 
 --- $! -> Exception | nil
 
