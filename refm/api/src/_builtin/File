@@ -117,6 +117,11 @@ File.basename の動作は [[man:basename(3)]]
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
+例:
+  IO.write("test.txt", "test")
+  File.chown(502, 12, "test.txt")
+  File.stat("test.txt").uid # => 502
+
 --- lchown(owner, group, *filename)    -> Integer
 
 [[m:File#chown]] と同様ですが、
