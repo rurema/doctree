@@ -394,6 +394,23 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 指定されたファイル名を文字列で返します。filename が文字列でない場合は、to_path メソッドを呼びます。
 
 @param filename ファイル名を表す文字列か to_path メソッドが定義されたオブジェクトを指定します。
+
+例:
+  require 'pathname'
+
+  class MyPath
+    def initialize(path)
+      @path = path
+    end
+    def to_path
+      File.absolute_path(@path)
+    end
+  end
+
+  File.path("/dev/null")          # => "/dev/null"
+  File.path(Pathname("/tmp"))     # => "/tmp"
+  File.path(MyPath.new("."))      # => "/Users/user/projects/txt"
+
 #@end
 
 --- readlink(path)    -> String
