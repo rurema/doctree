@@ -404,6 +404,12 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 
 @raise Errno::EXXX 指定された path がシンボリックリンクでない場合や、リンクの読み取りに失敗した場合に発生します。
 
+#@samplecode 例:
+IO.write("testfile", "test")
+File.symlink("testfile", "testlink")   # => 0
+File.readlink("testlink")              # => "testfile"
+#@end
+
 #@since 1.9.2
 --- realpath(pathname, basedir = nil) -> String
 
