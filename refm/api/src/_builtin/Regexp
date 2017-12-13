@@ -295,6 +295,38 @@ string が文字列でもシンボルでもない場合には false を返しま
 
 正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。
 
+例:
+  # -*- coding:utf-8 -*-
+
+  r = /a/
+  r.fixed_encoding?                               # => false
+  r.encoding                                      # => #<Encoding:US-ASCII>
+  r =~ "\u{6666} a"                               # => 2
+  r =~ "\xa1\xa2 a".force_encoding("euc-jp")      # => 2
+  r =~ "abc".force_encoding("euc-jp")             # => 0
+
+  r = /a/u
+  r.fixed_encoding?                               # => true
+  r.encoding                                      # => #<Encoding:UTF-8>
+  r =~ "\u{6666} a"                               # => 2
+  begin
+    r =~ "\xa1\xa2".force_encoding("euc-jp")
+  rescue => e
+    e.class                                       # => Encoding::CompatibilityError
+  end
+  r =~ "abc".force_encoding("euc-jp")             # => 0
+
+  r = /\u{6666}/
+  r.fixed_encoding?                               # => true
+  r.encoding                                      # => #<Encoding:UTF-8>
+  r =~ "\u{6666} a"                               # => 0
+  begin
+    r =~ "\xa1\xa2".force_encoding("euc-jp")
+  rescue => e
+    e.class                                       # => Encoding::CompatibilityError
+  end
+  r =~ "abc".force_encoding("euc-jp")             # => nil
+
 --- match(str, pos = 0) -> MatchData | nil
 --- match(str, pos = 0) {|m| ... } -> object | nil
 
