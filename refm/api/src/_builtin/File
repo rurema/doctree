@@ -417,6 +417,13 @@ pathname の全てのコンポーネントは存在しなければなりませ�
 
 @raise Errno::ENOENT ファイルが存在しない場合に発生します。
 
+例:
+  ENV["HOME"]                     # => "/home/matz"
+  File.symlink("testfile", "testlink")
+  File.realpath("testfile")       # => "/home/matz/testfile"
+  File.realpath("testlink")       # => "/home/matz/testfile"
+  File.realpath("..", "/tmp")     # => "/"
+
 --- realdirpath(pathname, basedir = nil) -> String
 
 与えられた pathname に対応する絶対パスを返します。
