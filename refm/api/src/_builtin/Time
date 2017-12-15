@@ -47,7 +47,7 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境
 
 [[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
 
-[[man:localtime(3)]] も参照しください。
+[[man:localtime(3)]] も参照してください。
 
 === C 言語との違いに注意
 
