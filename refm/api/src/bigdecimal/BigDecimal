@@ -6,30 +6,39 @@
 --- BigDecimal(s) -> BigDecimal
 --- BigDecimal(s, n) -> BigDecimal
 
-引数 s で指定した値を表す BigDecimal オブジェクトを生成します。
-
-詳しくは [[m:BigDecimal.new]] を参照してください。
+引数で指定した値を表す BigDecimal オブジェクトを生成します。
 
 #@since 1.9.3
-@param s 数値を文字列、[[c:Integer]]、[[c:Float]]、
-         [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
-         します。
+@param s 数値を表現する初期値を文字列、[[c:Integer]]、
+         [[c:Float]]、[[c:Rational]]、[[c:BigDecimal]] オブジェクトのい
+         ずれかで指定します。
 #@else
-@param s 数値を文字列で指定します。
+@param s 数字を表現する初期値を文字列で指定します。
 #@end
+         文字列中のスペースは無視されます。また、判断できない文字が出現
+         した時点で文字列は終了したものとみなされます。
 
-@param n 有効桁数を整数で指定します。
+@param n 必要な有効桁数(self の最大有効桁数)を整数で指定します。 n が
+         0 または省略されたときは、n の値は s の有効桁数とみなされます。
+         s の有効桁数より n が小さいときもn = 0 のときと同じです。
+         self の最大有効桁数は n より若干大きい値が採用されます。最大有
+         効桁数は以下のような割り算を実行するとき等に意味を持ちます。
+//emlist{
+  require "bigdecimal"
+  BigDecimal("1")    / BigDecimal("3")    # => 0.3333333333 33E0
+  BigDecimal("1",10) / BigDecimal("3",10) # => 0.3333333333 3333333333 33333333E0
+//}
+         ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
+         ジョンで若干変更される可能性があります。
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
                      [[m:Float::DIG]] + 2 以上の値を指定した場合に発生します。
-                     また、s に [[c:Float]]、[[c:Rational]] オブジェク
-                     トを指定し、n を省略した場合に発生します。
+                     s に [[c:Float]]、[[c:Rational]] オブジェクトを指
+                     定し、n を省略した場合に発生します。
 #@end
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
-
-@see [[m:BigDecimal.new]]
 
 = class BigDecimal < Numeric
 
@@ -195,39 +204,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 新しい BigDecimal オブジェクトを生成します。
 
-#@since 1.9.3
-@param s 数値を表現する初期値を文字列、[[c:Integer]]、
-         [[c:Float]]、[[c:Rational]]、[[c:BigDecimal]] オブジェクトのい
-         ずれかで指定します。
-#@else
-@param s 数字を表現する初期値を文字列で指定します。
-#@end
-         文字列中のスペースは無視されます。また、判断できない文字が出現
-         した時点で文字列は終了したものとみなされます。
-
-@param n 必要な有効桁数(self の最大有効桁数)を整数で指定します。 n が
-         0 または省略されたときは、n の値は s の有効桁数とみなされます。
-         s の有効桁数より n が小さいときもn = 0 のときと同じです。
-         self の最大有効桁数は n より若干大きい値が採用されます。最大有
-         効桁数は以下のような割り算を実行するとき等に意味を持ちます。
-//emlist{
-  require "bigdecimal"
-  BigDecimal("1")    / BigDecimal("3")    # => 0.3333333333 33E0
-  BigDecimal("1",10) / BigDecimal("3",10) # => 0.3333333333 3333333333 33333333E0
-//}
-         ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
-         ジョンで若干変更される可能性があります。
-
-#@since 1.9.3
-@raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
-                     [[m:Float::DIG]] + 2 以上の値を指定した場合に発生します。
-                     s に [[c:Float]]、[[c:Rational]] オブジェクトを指
-                     定し、n を省略した場合に発生します。
-#@end
-
-@raise ArgumentError n に負の数を指定した場合に発生します。
-
-@see [[m:Kernel.#BigDecimal]]
+詳しくは [[m:Kernel.#BigDecimal]] を参照してください。
 
 --- mode(s)    -> Integer | nil
 --- mode(s, v) -> Integer | nil
