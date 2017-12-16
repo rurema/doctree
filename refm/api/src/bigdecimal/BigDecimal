@@ -191,6 +191,8 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 --- new(s)    -> BigDecimal
 --- new(s, n) -> BigDecimal
 
+このメソッドは deprecated です。[[m:Kernel.#BigDecimal]] を使用してください。
+
 新しい BigDecimal オブジェクトを生成します。
 
 #@since 1.9.3
@@ -807,7 +809,7 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 仮数部分の文字列("xxxxxxx")と、基数(10)、更に指数 n を配列で返します。
 
     require "bigdecimal"
-    a = BigDecimal.new("3.14159265")
+    a = BigDecimal("3.14159265")
     f, x, y, z = a.split
 
 とすると、f =+ 1、x = "314159265"、y = 10、z = 1 になります。
@@ -823,7 +825,7 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 [[c:BigDecimal]] オブジェクトを表す文字列を返します。
 
   require "bigdecimal"
-  BigDecimal.new("1234.5678").inspect
+  BigDecimal("1234.5678").inspect
   # => "#<BigDecimal:b7ea1130,'0.12345678E4',8(12)>"
 
 最初の16進数はオブジェクトのアドレス、次の文字列 '0.12345678E4' は値、
@@ -870,8 +872,8 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 
   require 'bigdecimal'
 
-  a = BigDecimal.new("42")
-  b = BigDecimal.new("9")
+  a = BigDecimal("42")
+  b = BigDecimal("9")
 
   a.divmod(b)
   # => [#<BigDecimal:f74b3a14,'0.4E1',4(16)>, #<BigDecimal:f74b3a64,'0.6E1',4(12)>]
@@ -884,7 +886,7 @@ self を n で割った余りを返します。
 @param n self を割る数を指定します。
 
   require 'bigdecimal'
-  x = BigDecimal.new((2**100).to_s)
+  x = BigDecimal((2**100).to_s)
   ( x %  3).to_i # => 1
   (-x %  3).to_i # => 2
   ( x % -3).to_i # => -2
@@ -901,7 +903,7 @@ self を n で割った余りを返します。
 @param n self を割る数を指定します。
 
   require 'bigdecimal'
-  x = BigDecimal.new((2**100).to_s)
+  x = BigDecimal((2**100).to_s)
   x.remainder(3).to_i     # => 1
   (-x).remainder(3).to_i  # => -1
   x.remainder(-3).to_i    # => 1
@@ -927,7 +929,7 @@ self が other と等しい場合に true を、そうでない場合に false �
 それぞれの値は [[m:BigDecimal#coerce]] で変換して比較される場合があります。
 
   require 'bigdecimal'
-  BigDecimal.new('1.0') == 1.0 # => true
+  BigDecimal('1.0') == 1.0 # => true
 
 --- <(other) -> bool
 
@@ -963,7 +965,7 @@ self の符号を反転させたものを返します。
 [[m:Marshal.#dump]] から呼び出されます。
 
   require 'bigdecimal'
-  inf = BigDecimal.new('Infinity')
+  inf = BigDecimal('Infinity')
   # => #<BigDecimal:1e16fa8,'Infinity',9(9)>
   s = Marshal.dump(inf)
   # => "\x04\bu:\x0FBigDecimal\x0F4:Infinity"
@@ -986,7 +988,7 @@ self] という配列にして返します。
 例:
 
   require "bigdecimal"
-  a = BigDecimal.new("1.0")
+  a = BigDecimal("1.0")
   b = a / 2.0 # => 0.5
 
 #@since 1.9.3

@@ -40,7 +40,7 @@ x に無限大や NaN を指定した場合には NaN を返します。
 
   require "bigdecimal/math"
 
-  puts BigMath::exp(BigDecimal.new('1'), 10) #=> 0.2718281828E1
+  puts BigMath::exp(BigDecimal('1'), 10) #=> 0.2718281828E1
 
 #@else
 
@@ -48,7 +48,7 @@ x に無限大や NaN を指定した場合には NaN を返します。
   require "bigdecimal/math"
 
   include BigMath
-  puts exp(BigDecimal.new('1'), 10) #=> 0.271828182845904523536028752390026306410273E1
+  puts exp(BigDecimal('1'), 10) #=> 0.271828182845904523536028752390026306410273E1
 
 #@end
 
@@ -84,7 +84,7 @@ x に無限大を指定した場合は無限大を返します。NaN を指定�
 
   require "bigdecimal/math"
 
-  puts BigMath::log(BigDecimal.new('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
+  puts BigMath::log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
 
 #@else
 
@@ -92,6 +92,6 @@ x に無限大を指定した場合は無限大を返します。NaN を指定�
   require "bigdecimal/math"
 
   include BigMath
-  puts log(BigDecimal.new('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
+  puts log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
 
 #@end
