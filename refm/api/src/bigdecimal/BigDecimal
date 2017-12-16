@@ -1008,3 +1008,17 @@ self のハッシュ値を返します。
 
 ブロックの評価結果を返します。
 #@end
+
+#@since 2.5.0
+--- clone -> BigDecimal
+
+このメソッドは deprecated です。
+
+#@#noexample
+
+--- dup -> BigDecimal
+
+このメソッドは deprecated です。
+
+#@#noexample
+#@end
