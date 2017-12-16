@@ -195,6 +195,12 @@ NaN に対応する [[m:BigDecimal#sign]] の値を返します。
 NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 #@end
 
+#@since 2.5.0
+--- VERSION -> String
+
+[[lib:bigdecimal]] ライブラリのバージョンを文字列で返します。
+#@end
+
 == Class Methods
 
 --- new(s)    -> BigDecimal
@@ -351,13 +357,10 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 
 --- ver -> String
 
-[[lib:bigdecimal]] ライブラリのバージョンを文字列で返します。
-
-過去のバージョンはそれぞれ以下です。
-
- * 1.0.0: Ruby 1.8.0 まで
- * 1.0.1: Ruby 1.8.1 から 1.9.2
- * 1.1.0: Ruby 1.9.3
+このメソッドは deprecated です。
+#@since 2.5.0
+[[m:BigDecimal::VERSION]] を使用してください。
+#@end
 
 == Instance Methods
 
