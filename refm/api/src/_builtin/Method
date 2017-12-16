@@ -102,6 +102,9 @@
 --- [](*args) -> object
 --- call(*args) -> object
 --- call(*args) { ... } -> object
+#@since 2.5.0
+--- ===(*args) -> object
+#@end
 
 メソッドオブジェクトに封入されているメソッドを起動します。
 
