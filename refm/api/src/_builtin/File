@@ -509,6 +509,9 @@ old への new という名前のシンボリックリンクを生成します�
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  File.symlink("testfile", "testlink")   # => 0
+
 --- truncate(path, length)    -> 0
 
 path で指定されたファイルのサイズを最大 length バイト
