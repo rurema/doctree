@@ -7,7 +7,7 @@ bigdecimal は浮動小数点数演算ライブラリです。
 例:
 
   require 'bigdecimal'
-  a = BigDecimal.new("0.123456789123456789")
+  a = BigDecimal("0.123456789123456789")
   b = BigDecimal("123456.78912345678", 40)
   print a + b # => 0.123456912580245903456789E6
 
@@ -26,9 +26,9 @@ bigdecimal は浮動小数点数演算ライブラリです。
 
   require 'bigdecimal'
 
-  sum = BigDecimal.new("0")
+  sum = BigDecimal("0")
   for i in (1..10000)
-    sum = sum + BigDecimal.new("0.0001")
+    sum = sum + BigDecimal("0.0001")
   end
   print sum # => 0.1E1
 
@@ -36,7 +36,7 @@ bigdecimal は浮動小数点数演算ライブラリです。
 
   require "bigdecimal"
   
-  (BigDecimal.new("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
+  (BigDecimal("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
 
   (1.2 - 1.0) == 0.2 # => false
 
@@ -97,12 +97,12 @@ NaN はどのような値と比較しても一致しません。(NaN 自身を�
 負の非常に小さな [[c:BigDecimal]] の値は -0 を表す値になります。
 
   require "bigdecimal"
-  BigDecimal.new("1.0") / BigDecimal.new("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
+  BigDecimal("1.0") / BigDecimal("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
 
 正の非常に小さな [[c:BigDecimal]] の値は 0 を表す値になります。
 
   require "bigdecimal"
-  BigDecimal.new("1.0") / BigDecimal.new("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
+  BigDecimal("1.0") / BigDecimal("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
 
 精度については [[m:BigDecimal.mode]] も併せて参照してください。
 
@@ -221,7 +221,7 @@ frac[0]=1234、frac[1]=5678、frac[2]=4321、 exponent=1、sign=2
 
    require "bigdecimal"
    file = File::open(....,"r")
-   s = BigDecimal.new("0")
+   s = BigDecimal("0")
    while line = file.gets
       s = s + line
    end
@@ -313,15 +313,15 @@ c が必要とするメモリー領域は大きくなることに注意して下
   #
   def big_pi(sig) # sig: Number of significant figures
     exp    = -sig
-    pi     = BigDecimal.new("0")
-    two    = BigDecimal.new("2")
-    m25    = BigDecimal.new("-0.04")
-    m57121 = BigDecimal.new("-57121")
+    pi     = BigDecimal("0")
+    two    = BigDecimal("2")
+    m25    = BigDecimal("-0.04")
+    m57121 = BigDecimal("-57121")
   
-    u = BigDecimal.new("1")
-    k = BigDecimal.new("1")
-    w = BigDecimal.new("1")
-    t = BigDecimal.new("-80")
+    u = BigDecimal("1")
+    k = BigDecimal("1")
+    w = BigDecimal("1")
+    t = BigDecimal("-80")
     while (u.nonzero? && u.exponent >= exp) 
       t   = t*m25
       u   = t.div(k,sig)
@@ -329,10 +329,10 @@ c が必要とするメモリー領域は大きくなることに注意して下
       k   = k+two
     end
   
-    u = BigDecimal.new("1")
-    k = BigDecimal.new("1")
-    w = BigDecimal.new("1")
-    t = BigDecimal.new("956")
+    u = BigDecimal("1")
+    k = BigDecimal("1")
+    w = BigDecimal("1")
+    t = BigDecimal("956")
     while (u.nonzero? && u.exponent >= exp )
       t   = t.div(m57121,sig)
       u   = t.div(k,sig)
