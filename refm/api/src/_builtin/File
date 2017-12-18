@@ -523,6 +523,11 @@ path で指定されたファイルのサイズを最大 length バイト
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例
+  IO.write("testfile", "1234567890")
+  File.truncate("testfile", 5)   # => 0
+  File.size("testfile")          # => 5
+
 --- umask           -> Integer
 
 現在の umask の値を返します。
