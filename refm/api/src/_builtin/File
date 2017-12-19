@@ -535,6 +535,11 @@ umask を変更します。変更前の umask の値を返します。
 
 @param umask 設定したい umask の値を整数で指定します。
 
+#@samplecode 例
+File.umask(0006)   # => 18
+File.umask         # => 6
+#@end
+
 @see [[man:umask(2)]]
 
 --- utime(atime, mtime, *filename)    -> Integer
