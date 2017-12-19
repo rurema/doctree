@@ -41,7 +41,7 @@ Logger オブジェクトのログレベルを DEBUG に下げるなどという
       end
     end
   rescue => err
-    logger.fatal("Caught exception; non-existent")
+    logger.fatal("Caught exception; exiting")
     logger.fatal(err)
   end
 
@@ -50,7 +50,7 @@ Logger オブジェクトのログレベルを DEBUG に下げるなどという
 下が出力例です。
 
   W, [2017-12-07T02:22:53.649000 #11601]  WARN -- : Nothing to do!
-  F, [2017-12-07T02:22:53.649172 #11601] FATAL -- : Caught exception; non-existent
+  F, [2017-12-07T02:22:53.649172 #11601] FATAL -- : Caught exception; exiting
   F, [2017-12-07T02:22:53.649222 #11601] FATAL -- : No such file or directory @ rb_sysopen - a_non_existent_file (Errno::ENOENT)
   logger_sample.rb:12:in `foreach'
   logger_sample.rb:12:in `<main>'
