@@ -17,8 +17,9 @@ KeyError の原因となったメソッド呼び出しのレシーバを返し�
   h = Hash.new
   begin
     h.fetch('gumby'*20)
-  rescue KeyError
-    p h.equal?($!.receiver)  # => true
+  rescue KeyError => e
+    p e.message             # => "key not found: \"gumbygumbygumbygumbygumbygumbygumbygumbygumbygumbygumbygumbyg..."
+    p h.equal?(e.receiver)  # => true
   end
 
 --- key -> object
@@ -30,7 +31,8 @@ KeyError の原因となったメソッド呼び出しのキーを返します�
   h = Hash.new
   begin
     h.fetch('gumby'*20)
-  rescue KeyError
-    p 'gumby'*20 == $!.key  # => true
+  rescue KeyError => e
+    p e.message            # => "key not found: \"gumbygumbygumbygumbygumbygumbygumbygumbygumbygumbygumbygumbyg..."
+    p 'gumby'*20 == e.key  # => true
   end
 #@end
