@@ -828,6 +828,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@samplecode 例:
+IO.write("testfile", "test")
+File.open("testfile") { |f| f.atime } # => 2017-12-21 22:58:17 +0900
+#@end
+
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#ctime]], [[m:File#mtime]], [[m:File#birthtime]]
 #@else
