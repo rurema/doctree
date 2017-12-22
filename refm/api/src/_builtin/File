@@ -930,6 +930,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
+例:
+  File.open("testfile") { |f| f.chown(502, 1000) }  # => 0
+  File.stat("testfile").uid                         # => 502
+  File.stat("testfile").gid                         # => 1000
+
 --- flock(operation)    -> 0 | false
 
 ファイルをロックします。
