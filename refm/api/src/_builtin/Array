@@ -1341,6 +1341,9 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 
 #@since 1.8.0
 --- push(*obj)        -> self
+#@since 2.5.0
+--- append(*obj)      -> self
+#@end
 #@else
 --- push(obj, *rest)  -> self
 #@end
@@ -1752,6 +1755,9 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
 #@end
 
 --- unshift(*obj)        -> self
+#@since 2.5.0
+--- prepend(*obj)        -> self
+#@end
 
 指定された obj を引数の最後から順番に配列の先頭に挿入します。
 引数を指定しなければ何もしません。
