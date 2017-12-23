@@ -842,6 +842,9 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+例:
+  File.open(__FILE__) { |f| f.ctime } # => 2017-12-21 22:58:17 +0900
+
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]], [[m:File#birthtime]]
 #@else
