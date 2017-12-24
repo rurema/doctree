@@ -1064,6 +1064,13 @@ flock は false を返します。
 
 @raise IOError 自身が close されている場合に発生します。
 
+例:
+  # testlink は testfile のシンボリックリンク
+  File.open("testlink") do |f|
+      p f.lstat == File.stat("testfile")  # => false
+      p f.stat == File.stat("testfile")   # => true
+  end
+
 @see [[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]]
 
 --- truncate(length)    -> 0
