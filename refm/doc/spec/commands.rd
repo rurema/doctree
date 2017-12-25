@@ -6,7 +6,7 @@ Ruby では以下のコマンドが提供されます。
  * [[lib:irb]]: Ruby の対話インタフェース
  * [[lib:rdoc]]: RDoc
  * ri: RDoc で書かれた Ruby のドキュメントをコマンドラインから参照
- * [[ref:d:spec/rubycmd#ruby]]: Ruby 本体
+ * ruby: Ruby 本体。[[ref:d:spec/rubycmd#ruby]] を参照。
 #@until 2.2.0
  * testrb: ユニットテスト実行ツール
 #@end
