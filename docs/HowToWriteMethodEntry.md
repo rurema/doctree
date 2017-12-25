@@ -106,16 +106,17 @@ pattern が見付からなかったときは nil を返します。
 pos なら「意味」とは「検索を開始する位置」であり、制約条件は「整数」
 です。制約条件は「型」とほぼ同じです。
 
-また、1.9 以降の新しいハッシュリテラル表現を用いた Array#sample の
-ようなメソッドについては、@param では値のみ(rng のみ)を記述します。
+また、キーワード引数については、`@param キーワード引数の名前  説明` の形式で記述します。
 
 ```
 #@# [例]
---- sample(random: rng)    -> object | nil
+--- some_method(required_keyword:,  optional_keyword: "default_value",  **kw) -> ()
 
-...
+説明
 
-@param rng ...
+@param required_keyword 必須のキーワード引数の説明〜〜〜。
+@param optional_keyword デフォルト値のあるキーワド引数の説明〜〜〜。
+@param kw 組み込みライブラリや標準添付ライブラリだとあまりないかもしれない例。
 ```
 
 ## 返り値の型の記述方法
