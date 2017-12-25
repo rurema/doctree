@@ -783,8 +783,10 @@ self.to_i と同じです。
 #@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
 #@since 2.1.0
---- step(by: step, to: limit) {|n| ... } -> self
---- step(by: step, to: limit) -> Enumerator
+--- step(by: 1, to: Float::INFINITY) {|n| ... } -> self
+--- step(by: 1, to: Float::INFINITY) -> Enumerator
+--- step(by:, to: -Float::INFINITY) {|n| ... } -> self
+--- step(by:, to: -Float::INFINITY) -> Enumerator
 #@end
 
 self からはじめ step を足しながら limit を越える
@@ -795,6 +797,14 @@ self からはじめ step を足しながら limit を越える
        下限として解釈されます。
 
 @param step 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+
+#@since 2.1.0
+@param to 引数limitと同じですが、省略した場合はキーワード引数byが正の
+          数であれば [[m:Float::INFINITY]]、負の数であれば
+          -[[m:Float::INFINITY]]を指定したとみなされます。
+
+@param by 引数 step と同じです。
+#@end
 
 @raise ArgumentError step に 0 を指定した場合に発生します。
 
