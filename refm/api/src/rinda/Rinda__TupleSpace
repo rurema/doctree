@@ -82,7 +82,7 @@ pattern で指定できるパターンについては [[ref:lib:rinda/rinda#tupl
 @param pattern 監視対象となるタプルのパターン
 @param sec 監視期間の長さ(秒数)
 
-==== 例
+=== 例
   requier 'rinda/tuplespace'
   
   tuplespace = Rinda::TupleSpace.new

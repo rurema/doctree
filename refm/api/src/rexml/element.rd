@@ -85,7 +85,7 @@ self が属する文書のルートノードを返します。
 その要素が属する [[c:REXML::Document]] オブジェクトが存在しない
 場合は木構造上のルートノードが返されます。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root>
@@ -107,7 +107,7 @@ self が属する文書のルートノードを返します。
 --- root -> REXML::Element
 self が属する文書のルート要素を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root>
@@ -161,7 +161,7 @@ self の文脈で定義されている prefix を文字列の配列を返しま�
 
 対象の要素とその外側の要素で定義されている prefix を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new("<a xmlns:x='1' xmlns:y='2'><b/><c xmlns:z='3'/></a>")
   doc.elements['//b'].prefixes # => ["x", "y"]
@@ -204,7 +204,7 @@ prefix で指示される名前空間の宣言が存在しない場合は nil �
 @param prefix 名前空間の prefix
 @param uri 名前空間の uri
 
-==== 例
+=== 例
   require 'rexml/document'
   a = REXML::Element.new("a")
   a.add_namespace("xmlns:foo", "bar" )
@@ -224,7 +224,7 @@ prefix で指示される名前空間の宣言が存在しない場合は nil �
 
 @param namespace 削除する名前空間の prefix
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new "<a xmlns:foo='bar' xmlns='twiddle'/>"
   doc.root.delete_namespace
@@ -252,7 +252,7 @@ attrs に { String => String } という Hash を渡すと、
 @param element 追加する要素
 @param attrs 追加する要素に設定する属性
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new('<a/>')
   el = doc.root.add_element 'my-tag' # => <my-tag/>
@@ -297,7 +297,7 @@ REXML::Element を指定すると、その要素が削除されます。
 --- has_elements? -> bool
 self が一つでも子要素を持つならば true を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new("<a><b/><c>Text</c></a>")
   doc.root.has_elements?               # => true
@@ -323,7 +323,7 @@ max に 0 を指定すると、max の指定は無視されます(0個ではあ�
 @param max ブロック呼出の対象とする子要素の最大個数
 @param name xpath文字列
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new("<a><b id='1'/><c id='2'/><d id='1'/><e/></a>")
   doc.root.each_element_with_attribute('id'){|e| p e }
@@ -420,7 +420,7 @@ path を渡した場合は、その XPath 文字列で指定される
 @param path XPath文字列
 @see [[m:REXML::Element#get_text]]
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new "<p>some text <b>this is bold!</b> more text</p>"
   # doc.root (<p> ... </p>) は2つのテキストノード("some text " と " more text"
@@ -441,7 +441,7 @@ path を渡した場合は、その XPath 文字列で指定される
 @param path XPath文字列
 @see [[m:REXML::Element#text]]
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new "<p>some text <b>this is bold!</b> more text</p>"
   # doc.root (<p> ... </p>) は2つのテキストノード("some text " と " more text"
@@ -465,7 +465,7 @@ nil を指定すると最初のテキストノードが削除されます。
 
 @param text 置き換え後のテキスト(文字列、[[c:REXML::Text]], nil(削除))
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new('<a><b/></a>')
   doc.to_s # => "<a><b/></a>"
@@ -503,7 +503,7 @@ nil を指定すると最初のテキストノードが削除されます。
 --- xpath -> String
 文書上の対象の要素にのみマッチする xpath 文字列を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new('<a><b/><c/></a>')
   c = doc.root.elements[2] # <a> .. </a> の中の <c/> 要素
@@ -531,7 +531,7 @@ name という属性名を持つ属性を指定できます。
 
 @param name 属性名(文字列)
 @param namespace 名前空間のURI(文字列)
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<-EOS)
@@ -565,7 +565,7 @@ name という属性名を持つ属性を指定できます。
 @param value 属性値(文字列)
 @param attr 属性([[c:REXML::Attribute]] オブジェクト)
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new("<e/>")
   doc.root.add_attribute("a", "b"); doc.root # => <e a='b'/>
@@ -587,7 +587,7 @@ Hash の場合は、
 
 @param attrs 追加する属性の属性名と属性値の対の集合(Array or Hash)
 
-==== 例
+=== 例
   require 'rexml/document'
   e = REXML::Element.new("e")
   e.add_attributes({"a" => "b", "c" => "d"})
@@ -605,7 +605,7 @@ key という属性名の属性が存在しない場合は削除されずに、n
 
 @param key 削除する要素(文字列(属性名) or [[c:REXML::Attribute]]オブジェクト)
 
-==== 例
+=== 例
   require 'rexml/document'
   e = REXML::Element.new("E")
   e.add_attribute("x", "foo"); e # => <E x='foo'/>
@@ -700,7 +700,7 @@ name を指定した場合 name という名前を持つ子要素の中で index
 @param index 取り出したい要素の index (整数)もしくは xpath (文字列)
 @param name 子要素の名前(文字列)
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new '<a><b/><c id="1"/><c id="2"/><d/></a>'
   doc.root.elements[1]       # => <b/>
@@ -765,7 +765,7 @@ XPath で指定した場合、子要素ではない要素も取り除けるこ�
 
 @param element 削除する要素([[c:REXML::Element]], 整数, 文字列)
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new '<a><b/><c/><c id="1"/></a>'
   b = doc.root.elements[1]
@@ -782,7 +782,7 @@ XPath で指定した場合、子要素ではない要素も取り除けるこ�
 xpath で指定した XPath 文字列にマッチする要素をすべて取り除きます。
 
 @param xpath 取り除く要素を指し示す XPath 文字列
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new('<a><c/><c/><c/><c/></a>')
   doc.elements.delete_all("a/c") # => [<c/>, <c/>, <c/>, <c/>]
@@ -803,7 +803,7 @@ element を省略した場合は、空の要素が追加されます。
 
 @param element 追加する要素
 
-==== 例
+=== 例
   require 'rexml/document'
   a = REXML::Element.new('a')
   a.elements.add(REXML::Element.new('b'))  # => <b/>
@@ -822,7 +822,7 @@ xpath を指定した場合には、その XPath 文字列に
 
 @param xpath XPath文字列
 
-==== 例
+=== 例
   require 'rexml/document'
   require 'rexml/xpath'
   doc = REXML::Document.new '<a><b/><c/><d/>sean<b/><c/><d/></a>'
@@ -856,7 +856,7 @@ xpath を指定した場合は、その XPath 文字列に
 
 @param xpath XPath文字列
 
-==== 例
+=== 例
   require 'rexml/document'
   require 'rexml/xpath'
   doc = REXML::Document.new '<a>sean<b/>elliott<c/></a>'
@@ -917,7 +917,7 @@ nameという属性名の属性がない場合は nil を返します。
 
 @param name 属性名(文字列)
 
-==== 例
+=== 例
 
   require 'rexml/document'
   
@@ -939,7 +939,7 @@ nameという属性名の属性がない場合は nil を返します。
 
 属性の配列を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new("<a x='1' y='2' z='3' />")
   doc.root.attributes.to_a # => [x='1', y='2', z='3']
@@ -951,7 +951,7 @@ nameという属性名の属性がない場合は nil を返します。
 属性の個数を返します。
 
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<EOS)
@@ -969,7 +969,7 @@ nameという属性名の属性がない場合は nil を返します。
 
 個々の属性は [[c:REXML::Attribute]] オブジェクトで渡されます。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<EOS)
@@ -993,7 +993,7 @@ nameという属性名の属性がない場合は nil を返します。
 名前には expanded_name([[m:REXML::Namespace#exapnded_name]])が
 渡されます。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<EOS)
@@ -1020,7 +1020,7 @@ name という名前を持つ属性がない場合は nil を返します。
 @param name 属性名(文字列)
 @see [[m:REXML::Attributes#[] ]]
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<-EOS)
@@ -1043,7 +1043,7 @@ name で属性の名前を、value で値を更新します。
 既に同じ名前の属性がある場合は上書きされ、
 そうでない場合は属性が追加されます。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<-EOS)
@@ -1066,7 +1066,7 @@ self の中で宣言されている prefix の集合を
 
 self が属する要素より上位の要素で定義されているものは含みません。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<EOS)
@@ -1086,7 +1086,7 @@ self の中で宣言されている名前空間の集合を返します。
 返り値は名前空間の prefix をキーとし、URI を値とする
 [[c:Hash]] を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<EOS)
@@ -1113,7 +1113,7 @@ self が属する要素([[c:REXML::Element]])を返します。
 
 @param attribute 取り除く属性(文字列もしくは REXML::Attribute オブジェクト)
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<-EOS)
@@ -1149,7 +1149,7 @@ name という名前を持つ属性をすべて削除します。
 
 @param name 削除する属性の名前
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<-EOS)
@@ -1178,7 +1178,7 @@ XML プロセッサが prefix を置き換えてしまった場合でも、こ�
 @param namespace 名前空間(URI, 文字列)
 @param name 属性名(文字列)
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doc = REXML::Document.new(<<-EOS)

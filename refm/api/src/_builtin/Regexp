@@ -374,7 +374,7 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 
   p /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3) #=> ["foo", "bar", "baz"]
 
-==== 便利な使いかた
+=== 便利な使いかた
 正規表現にマッチした部分文字列だけが必要な場合に、
 
   bar = /foo(.*)baz/.match("foobarbaz").to_a[1]

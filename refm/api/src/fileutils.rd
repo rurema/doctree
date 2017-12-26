@@ -7,7 +7,7 @@ category File
 基本的なファイル操作を集めたモジュールです。
 
 
-====[a:options] オプションの説明
+===[a:options] オプションの説明
 
 引数 options で使用できるオプションの説明です。
 メソッドごとに使用できるオプションは決まっています。
@@ -582,7 +582,7 @@ FileUtils.rm(list, :force => true) と同じです。
 @param options :force, :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-==== 注意
+=== 注意
 
 このメソッドにはローカル脆弱性が存在します。
 この脆弱性を回避するには :secure オプションを使用してください。
@@ -609,7 +609,7 @@ rm_r(list, {:force => true}) と同じです。
 @param options :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-==== 注意
+=== 注意
 
 このメソッドにはローカル脆弱性が存在します。
 この脆弱性を回避するには :secure オプションを使用してください。
