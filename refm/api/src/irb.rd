@@ -44,7 +44,9 @@ readline ライブラリがインストールされている時には
   irb [options] file_name opts
   options:
   -f                ~/.irbrc を読み込まない
+#@until 2.5.0
   -m                bc モード (分数と行列の計算ができる)
+#@end
   -d                $DEBUG を true にする (ruby -d と同じ)
 #@since 1.9.2
   -w                ruby -w と同じ
@@ -65,7 +67,11 @@ readline ライブラリがインストールされている時には
   --noverbose       これから実行する行を表示しない (デフォルト)
   --echo            実行結果を表示する (デフォルト)
   --noecho          実行結果を表示しない
+#@since 2.5.0
+  --inspect         結果出力にinspectを用いる
+#@else
   --inspect         結果出力にinspectを用いる (bc モード以外ではデフォルト)
+#@end
   --noinspect       結果出力にinspectを用いない
   --readline        readlineライブラリを利用する
   --noreadline      readlineライブラリを利用しない。デフォルトでは
@@ -118,7 +124,9 @@ irb コマンドのオプションを指定したのと同じ効果が得られ�
   IRB.conf[:INSPECT_MODE] = nil
   IRB.conf[:IRB_NAME] = "irb"
   IRB.conf[:IRB_RC] = nil
+#@until 2.5.0
   IRB.conf[:MATH_MODE] = false
+#@end
   IRB.conf[:PROMPT] = {....}
   IRB.conf[:PROMPT_MODE] = :DEFAULT
   IRB.conf[:SINGLE_IRB] = false
