@@ -1342,10 +1342,10 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 オブジェクトを凍結（内容の変更を禁止）します。
 
 凍結されたオブジェクトの変更は
-#@since 1.9.1
-例外 [[c:RuntimeError]] を発生させます。
+#@since 2.5.0
+例外 [[c:FrozenError]] を発生させます。
 #@else
-例外 [[c:TypeError]] を発生させます。
+例外 [[c:RuntimeError]] を発生させます。
 #@end
 いったん凍結されたオブジェクトを元に戻す方法はありません。
 
@@ -1361,10 +1361,10 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
   p a1 #=> "bar"
   
   a2 = "foo".freeze
-#@since 1.9.1
-  a2.replace("bar")# can't modify frozen string (RuntimeError)
+#@since 2.5.0
+  a2.replace("bar") # can't modify frozen String (RuntimeError)
 #@else
-  a2.replace("bar")# can't modify frozen string (TypeError)
+  a2.replace("bar") # can't modify frozen String (FrozenError)
 #@end
 
 凍結を解除することはできませんが、[[m:Object#dup]] を使えばほぼ同じ内容の凍結されていない
@@ -1374,10 +1374,10 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
   p a.frozen?     #=> true
   
   a[0] = "foo"
-#@since 1.9.1
-  p a             # can't modify frozen array (RuntimeError)
+#@since 2.5.0
+  p a             # can't modify frozen Array (FrozenError)
 #@else
-  p a             # can't modify frozen array (TypeError)
+  p a             # can't modify frozen Array (RuntimeError)
 #@end
   
   b = a.dup

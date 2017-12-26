@@ -613,7 +613,11 @@ inherit に真を指定すると
 
   module Foo
     def foo; end
+#@since 2.5.0
+  end # => FrozenError: can't modify frozen module
+#@else
   end # => RuntimeError: can't modify frozen module
+#@end
 
 #@since 2.1.0
 #@include(Module.include)

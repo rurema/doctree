@@ -206,7 +206,11 @@ ifnoneを省略した Hash.new は {} と同じです。
   h = Hash.new([].freeze)
   h[0] += [0] #破壊的でないメソッドはOK
   h[1] << 1
-  # エラー `<<': can't modify frozen array (TypeError)
+#@since 2.5.0
+  # エラー: can't modify frozen Array (FrozenError)
+#@else
+  # エラー: can't modify frozen Array (RuntimeError)
+#@end
 
 --- new {|hash, key| ... } -> Hash
 空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
