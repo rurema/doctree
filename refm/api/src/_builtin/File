@@ -1077,6 +1077,14 @@ flock は false を返します。
 
 @raise Errno::EXXX サイズの変更に失敗した場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "1234567890")
+File.open("testfile", "a") do |f|
+  f.truncate(5) # => 0
+  f.size        # => 5
+end
+#@end
+
 == Constants
 
 --- ALT_SEPARATOR -> "\\" | nil
