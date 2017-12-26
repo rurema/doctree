@@ -1668,3 +1668,24 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 @see [[c:Enumerator::Lazy]]
 #@end
+#@since 2.4.0
+--- uniq                -> Array
+--- uniq { |item| ... } -> Array
+
+self から重複した値を取り除いた配列を返します。
+
+#@samplecode 例
+olympics = {
+  1896 => 'Athens',
+  1900 => 'Paris',
+  1904 => 'Chicago',
+  1906 => 'Athens',
+  1908 => 'Rome',
+}
+olympics.uniq{|k,v| v} # => [[1896, "Athens"], [1900, "Paris"], [1904, "Chicago"], [1908, "Rome"]]
+
+(1..100).uniq{|x| (x**2) % 10 } # => [1, 2, 3, 4, 5, 10]
+#@end
+
+@see [[m:Array#uniq]]
+#@end
