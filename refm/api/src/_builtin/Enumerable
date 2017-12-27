@@ -1669,8 +1669,8 @@ nil、 :_separator はある要素を無視したい場合に用います。
 @see [[c:Enumerator::Lazy]]
 #@end
 #@since 2.4.0
---- sum(init=0)                    -> number
---- sum(init=0) {|e| expr }        -> number
+--- sum(init=0)                    -> object
+--- sum(init=0) {|e| expr }        -> object
 
 要素の合計を返します。
 

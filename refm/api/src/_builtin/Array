@@ -2410,8 +2410,8 @@ a < b のとき負の整数を、期待しています。
 #@end
 
 #@since 2.4.0
---- sum(init=0)                    -> number
---- sum(init=0) {|e| expr }        -> number
+--- sum(init=0)                    -> object
+--- sum(init=0) {|e| expr }        -> object
 
 要素の合計を返します。例えば [e1, e2, e3].sum は init + e1 + e2 + e3 を返します。
 
