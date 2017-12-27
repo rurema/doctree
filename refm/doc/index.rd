@@ -1,6 +1,9 @@
 = オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル
 
  * Ruby オフィシャルサイト [[url:https://www.ruby-lang.org/ja/]]
+#@if("2.6.0" <= version and version < "2.7.0")
+ * version 2.6 対応リファレンス
+#@end
 #@if("2.5.0" <= version and version < "2.6.0")
  * version 2.5 対応リファレンス
 #@end
@@ -21,6 +24,10 @@
 
 === 使用上の注意
 
+#@if("2.6.0" <= version and version < "2.7.0")
+Ruby 2.6 の組込みクラスのリファレンスはほぼ揃っています。
+Ruby 2.6 の標準添付ライブラリのリファレンスは一部未完成です。
+#@end
 #@if("2.5.0" <= version and version < "2.6.0")
 Ruby 2.5 の組込みクラスのリファレンスはほぼ揃っています。
 Ruby 2.5 の標準添付ライブラリのリファレンスは一部未完成です。
