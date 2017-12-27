@@ -2323,6 +2323,22 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 身を返すか位置を返すかのみです。各モードのより詳細な違いについては
 [[m:Array#bsearch]] を参照してください。
 
+#@samplecode 例: find-minimum モード
+ary = [0, 4, 7, 10, 12]
+ary.bsearch_index { |x| x >=   4 } # => 1
+ary.bsearch_index { |x| x >=   6 } # => 2
+ary.bsearch_index { |x| x >=  -1 } # => 0
+ary.bsearch_index { |x| x >= 100 } # => nil
+#@end
+
+#@samplecode 例: find-any モード
+ary = [0, 4, 7, 10, 12]
+# 4 <= v < 8 になる要素の位置を検索
+ary.bsearch_index { |x| 1 - x / 4 } # => 2
+# 8 <= v < 10 になる要素の位置を検索
+ary.bsearch_index { |x| 4 - x / 2 } # => nil
+#@end
+
 @see [[m:Array#bsearch]]
 #@end
 #@end
