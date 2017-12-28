@@ -200,6 +200,7 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 #@end
 #@end
 #@since 2.4.0
+#@# 127 は STR_BUF_MIN_SIZE。string.c 参照。
 --- new(string = "", encoding: string.encoding, capacity: 127) -> String
 --- new(string = "", encoding: string.encoding, capacity: string.bytesize) -> String
 #@end
