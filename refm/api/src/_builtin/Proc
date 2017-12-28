@@ -162,6 +162,14 @@ Proc オブジェクトが受け付ける引数の数を返します。
 Proc オブジェクトが保持するコンテキストを 
 [[c:Binding]] オブジェクトで返します。
 
+例:
+  def fred(param)
+    proc {}
+  end
+
+  sample_proc = fred(99)
+  eval("param", sample_proc.binding)   # => 99
+
 --- to_proc -> self
 
 self を返します。
