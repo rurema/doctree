@@ -82,7 +82,7 @@
 
 * [[c:Kernel]]
   * [[m:Kernel.#yield_self]] を追加  [[feature:6721]]
-  * [[m:Kernel.#pp]] を追加  [[feature:14123]]
+  * [[m:Kernel.#pp]] をrequireなしで使えるようにしました  [[feature:14123]]
   * [[m:Kernel.#warn]] :uplevel というキーワード引数を追加しました  [[feature:12882]]
 
 * [[c:Method]]
