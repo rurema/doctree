@@ -368,7 +368,7 @@
   * [[m:Socket::Ifaddr#vhid]] を追加 [[feature:13803]]
 
 * [[c:ConditionVariable]], [[c:Queue]], [[c:SizedQueue]] を速度向上のため再実装しました。
-  これらのクラスはStructのサブクラスではなくなりました。[[feature:13553]]
+  これらのクラスはStructのサブクラスではなくなりました。[[feature:13552]]
 
 === 標準添付ライブラリの互換性(機能追加とバグ修正を除く)
 
