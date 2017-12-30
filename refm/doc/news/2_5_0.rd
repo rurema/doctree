@@ -267,7 +267,7 @@
 
 * [[lib:net/http]]
   * [[m:Net::HTTP.new]] が no_proxy パラメータをサポートしました [[feature:11195]]
-  * [[m:Net::HTTP#min_version]] [[m:Net::HTTP#max_version]] を追加 [[feature:9450]]]
+  * [[m:Net::HTTP#min_version]] [[m:Net::HTTP#max_version]] を追加 [[feature:9450]]
   * HTTP status を表わすクラスを追加
   * [[m:Net::HTTP::STATUS_CODES]] を追加。HTTP Status Code Repository [[misc:12935]]
   * [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP#proxy_pass]] は 環境変数 http_proxy を反映するようになりました。
