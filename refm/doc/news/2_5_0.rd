@@ -356,7 +356,7 @@
 
 * [[c:Socket]]
   * [[m:BasicSocket#read_nonblock]] と [[m:BasicSocket#write_nonblock]] で
-    サイドエフェクトとして O_NONBLOCK フラグをセットするのをやめました(Linux のみ)
+    副作用として O_NONBLOCK フラグをセットするのをやめました(Linux のみ)
     [[feature:13362]]
 
 * [[c:Random]]
