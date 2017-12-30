@@ -399,7 +399,6 @@
 * Net::HTTP
   * Net::HTTP#start の第3引数のデフォルト値を :ENV にしました。 [[bug:13351]]
     これを避けるには明示的に nil を与えてください。
-    To avoid this, pass nil explicitly.
 
 * mathn.rb
   * 標準添付ライブラリから削除しました [[feature:10169]]
