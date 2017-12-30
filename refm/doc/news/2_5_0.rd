@@ -62,7 +62,7 @@
   * [[m:Hash#slice]] を追加 [[feature:8499]]
 
 * [[c:IO]]
-  * [[m:IO#copy_stream]] で [[man:copy_file_range(2)]] を使った実装から他の実装へフォールバックするようにしました [[feature:13867]]
+  * [[m:IO#copy_stream]] は [[man:copy_file_range(2)]] を使うようになりました。また、その実装が使えない場合は他の実装へフォールバックするようにしました [[feature:13867]]
   * [[m:IO#pread]] を追加 [[feature:4532]]
   * [[m:IO#pwrite]] を追加 [[feature:4532]]
   * [[m:IO#write]] 複数の引数を受け取れるようになりました [[feature:9323]]
