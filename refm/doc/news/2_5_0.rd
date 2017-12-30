@@ -72,7 +72,7 @@
     このメッセージはユーザーにとってわかりやすいでしょう。 [[bug:13405]]
 
 * [[c:Integer]]
-  * [[m:Integer#step]] [[m:Integer#>]]で0と比較できない引数与えられたときcoerce内部で発生したエラーを無視しないようになりました。
+  * [[m:Integer#step]] [[m:Integer#>]]で0と比較できない引数が与えられたときcoerce内部で発生したエラーを無視しないようになりました。
     [[feature:7688]]
   * [[m:Integer#round]], [[m:Integer#floor]], [[m:Integer#ceil]], [[m:Integer#truncate]] は常に [[c:Integer]] を返すようになりました
     [[bug:13420]]
