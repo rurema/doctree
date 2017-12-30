@@ -30,7 +30,7 @@
 * [[c:Dir]]
 
   * [[m:Dir.glob]] :base というキーワード引数を追加しました [[feature:13056]]
-  * [[m:Dir.chdir]] (without block arg), [[m:Dir.open]], [[m:Dir.new]], [[m:Dir.mkdir]], [[m:Dir.rmdir]],
+  * [[m:Dir.chdir]] (ブロックなしで呼び出した場合), [[m:Dir.open]], [[m:Dir.new]], [[m:Dir.mkdir]], [[m:Dir.rmdir]],
     [[m:Dir.empty?]] はGVLを解放するようになりました
   * [[m:Dir.children]] を追加  [[feature:11302]]
   * [[m:Dir.each_child]] を追加 [[feature:11302]]
