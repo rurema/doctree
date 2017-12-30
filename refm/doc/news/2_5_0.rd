@@ -249,14 +249,12 @@
     Windowsで重複した改行を削除するようになりました。[[bug:5339]] [[bug:11464]]
 
 * [[lib:ipaddr]]
-
   * IPAddr は不正なアドレスマスクを受けいれないようになりました [[bug:13399]]
   * [[m:IPAddr#ipv4_compat]], [[m:IPAddr#ipv4_compat?]] は非推奨になりました [[bug:13769]]
   * [[m:IPAddr#prefix]] を追加
   * [[m:IPAddr#loopback?]] を追加
   * [[m:IPAddr#private?]] を追加 [[feature:11666]]
   * [[m:IPAddr#link_local?]] を追加 [[feature:10912]]
-
 
 * [[lib:irb]]
   * バックトレースとエラーメッセージを逆順で表示するようにしました [[feature:8661]] [実験的]
@@ -268,7 +266,6 @@
   * [[m:Matrix#hadamard_product]], [[m:Matrix#entrywise_product]] を追加
 
 * [[lib:net/http]]
-
   * [[m:Net::HTTP.new]] が no_proxy パラメータをサポートしました [[feature:11195]]
   * [[m:Net::HTTP#min_version]] [[m:Net::HTTP#max_version]] を追加 [[feature:9450]]]
   * HTTP status を表わすクラスを追加
