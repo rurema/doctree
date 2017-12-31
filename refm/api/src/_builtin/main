@@ -97,6 +97,22 @@ main では参照できない事に注意してください。トップレベル
 
 @param module 有効にするモジュールを指定します。
 
+#@samplecode 例:
+module Sloth
+  refine String do
+    def downcase
+      self
+    end
+  end
+end
+
+"ABC".downcase # => "abc"
+
+using Sloth
+
+"ABC".downcase # => "ABC"
+#@end
+
 #@since 2.1.0
 @see [[m:Module#refine]], [[m:Module#using]]
 #@else
