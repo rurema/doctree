@@ -2929,6 +2929,9 @@ self の先頭が strs のいずれかであるとき true を返します。
 #@end
 
 @see [[m:String#end_with?]]
+#@since 2.5.0
+@see [[m:String#delete_prefix]], [[m:String#delete_prefix!]]
+#@end
 
 --- end_with?(*strs) -> bool
 
@@ -2943,6 +2946,9 @@ self の末尾が strs のいずれかであるとき true を返します。
 #@end
 
 @see [[m:String#start_with?]]
+#@since 2.5.0
+@see [[m:String#delete_suffix]], [[m:String#delete_suffix!]]
+#@end
 
 --- partition(sep) -> [String, String, String]
 
@@ -3509,4 +3515,61 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 #@end
 
 @see [[m:String#unpack]], [[m:Array#pack]]
+#@end
+#@since 2.5.0
+--- delete_prefix(prefix) -> String
+文字列の先頭から prefix を削除した文字列のコピーを返します。
+
+@return 文字列の先頭から prefix を削除した文字列のコピー
+
+#@samplecode
+"hello".delete_prefix("hel") # => "lo"
+"hello".delete_prefix("llo") # => "hello"
+#@end
+
+@see [[m:String#delete_prefix!]]
+@see [[m:String#delete_suffix]]
+@see [[m:String#start_with?]]
+
+--- delete_prefix!(prefix) -> self | nil
+self の先頭から破壊的に prefix を削除します。
+
+@return 削除した場合は self、変化しなかった場合は nil
+
+#@samplecode
+"hello".delete_prefix!("hel") # => "lo"
+"hello".delete_prefix!("llo") # => nil
+#@end
+
+@see [[m:String#delete_prefix]]
+@see [[m:String#delete_suffix!]]
+@see [[m:String#start_with?]]
+
+--- delete_suffix(suffix) -> String
+文字列の末尾から suffix を削除した文字列のコピーを返します。
+
+@return 文字列の末尾から suffix を削除した文字列のコピー
+
+#@samplecode
+"hello".delete_suffix("llo") # => "he"
+"hello".delete_suffix("hel") # => "hello"
+#@end
+
+@see [[m:String#delete_prefix]]
+@see [[m:String#delete_suffix!]]
+@see [[m:String#end_with?]]
+
+--- delete_suffix!(suffix) -> self | nil
+self の末尾から破壊的に suffix を削除します。
+
+@return 削除した場合は self、変化しなかった場合は nil
+
+#@samplecode
+"hello".delete_suffix!("llo") # => "he"
+"hello".delete_suffix!("hel") # => nil
+#@end
+
+@see [[m:String#delete_prefix!]]
+@see [[m:String#delete_suffix]]
+@see [[m:String#end_with?]]
 #@end
