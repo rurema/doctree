@@ -164,7 +164,7 @@ self を読みやすい文字列として返します。
 
 #@samplecode 例
 String.instance_method(:count).inspect   # => "#<UnboundMethod: String#count>"
-#end
+#@end
 
 @see [[m:Method#inspect]]
 
