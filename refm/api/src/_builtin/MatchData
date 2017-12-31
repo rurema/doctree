@@ -239,6 +239,12 @@ self の内容を人間に読みやすい文字列にして返します。
   p m.values_at(0, 1, 2, 3, 4)      #=> ["foobarbaz", "foo", "bar", "baz", nil]
   p m.values_at(-1, -2, -3, -4, -5) #=> ["baz", "bar", "foo", nil, nil]
 
+#@since 2.4.0
+  m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
+  m.to_a               #=> ["1 + 2", "1", "+", "2"]
+  m.values_at(:a, :b, :op) #=> ["1", "2", "+"]
+#@end
+
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 
 #@end
