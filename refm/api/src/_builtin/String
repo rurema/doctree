@@ -2916,16 +2916,28 @@ Ruby 1.8 以前と1.9以降の互換性を保つために  String#chr が存在�
 
 @see [[m:String#ord]], [[m:Integer#chr]]
 
+#@since 2.5.0
+--- start_with?(*prefixes) -> bool
+
+self の先頭が prefixes のいずれかであるとき true を返します。
+
+@param prefixes パターンを表す文字列または正規表現 (のリスト)
+#@else
 --- start_with?(*strs) -> bool
 
 self の先頭が strs のいずれかであるとき true を返します。
 
 @param strs    パターンを表す文字列 (のリスト)
+#@end
 
 #@samplecode 例
 "string".start_with?("str")          # => true
 "string".start_with?("ing")          # => false
 "string".start_with?("ing", "str")   # => true
+#@since 2.5.0
+"string".start_with?(/\w/)           # => true
+"string".start_with?(/\d/)           # => false
+#@end
 #@end
 
 @see [[m:String#end_with?]]
