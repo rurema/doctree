@@ -504,6 +504,15 @@ pathname の最後のコンポーネントは存在していなくても例外�
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  begin
+    File.rename("testfile", "testfile.bak")   # => 0
+    File.rename("testfile", "testfile.bak")
+  rescue
+    # 2回目の rename 時にすでに testfile が存在しないため例外が発生する
+    $! # => #<Errno::ENOENT: No such file or directory @ rb_file_s_rename - (testfile, testfile.bak)>
+  end
+
 --- split(pathname)    -> [String]
 
 pathname を dirname とbasename に分割して、2 要
