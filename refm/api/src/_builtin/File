@@ -155,6 +155,17 @@ File.basename の動作は [[man:basename(3)]]
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  IO.write("test.txt", "test")
+  p File.exists?("test.txt")  # => true
+  p File.delete("test.txt")   # => 1
+  p File.exists?("test.txt")  # => false
+  begin
+    File.delete("test.txt")
+  rescue
+    p $!  # => #<Errno::ENOENT: No such file or directory @ unlink_internal - test.txt>
+  end
+
 --- dirname(filename)    -> String
 
 filename の一番後ろのスラッシュより前を文
