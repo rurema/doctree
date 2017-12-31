@@ -63,6 +63,14 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @param file ファイル名を表す文字列を指定します。
 
+#@samplecode 例
+IO.write("empty.txt", "")
+File.chmod(0744, "empty.txt")
+FileTest.executable_real?("empty.txt")      # => true
+File.chmod(0644, "empty.txt")
+FileTest.executable_real?("empty.txt")      # => false
+#@end
+
 --- exist?(file)    -> bool
 #@until 2.1.0
 --- exists?(file)    -> bool
