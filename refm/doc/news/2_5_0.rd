@@ -109,7 +109,7 @@
 
 * [[c:Regexp]]
   *  Onigmo 6.1.3-669ac9997619954c298da971fcfacccf36909d05 に更新
-    * 非包含オペレータ(absence operator)をサポート ((<URL:https://github.com/k-takata/Onigmo/issues/82>))
+    * 非包含オペレータ(absence operator)をサポート [[url:https://github.com/k-takata/Onigmo/issues/82]]
     * Support new 5 emoji-related Unicode character properties
 
 * [[c:RubyVM::InstructionSequence]]
@@ -286,17 +286,17 @@
 * Psych
   * Psych 3.0.2 に更新しました
     * Convert fallback option to a keyword argument
-      https://github.com/ruby/psych/pull/342
+      [[url:https://github.com/ruby/psych/pull/342]]
     * Add :symbolize_names option to Psych.load, Psych.safe_load like JSON.parse
-      https://github.com/ruby/psych/pull/333, https://github.com/ruby/psych/pull/337
+      [[url:https://github.com/ruby/psych/pull/333]], [[url:https://github.com/ruby/psych/pull/337]]
     * Add Psych::Handler#event_location
-      https://github.com/ruby/psych/pull/326
+      [[url:https://github.com/ruby/psych/pull/326]]
     * Make frozen string literal = true
-      https://github.com/ruby/psych/pull/320
+      [[url:https://github.com/ruby/psych/pull/320]]
     * Preserve time zone offset when deserializing times
-      https://github.com/ruby/psych/pull/316
+      [[url:https://github.com/ruby/psych/pull/316]]
     * Remove deprecated method aliases for syck gem
-      https://github.com/ruby/psych/pull/312
+      [[url:https://github.com/ruby/psych/pull/312]]
 
 * [[lib:rbconfig]]
   * [[m:RbConfig::LIMITS]] is added to provide the limits of C types.
@@ -309,7 +309,7 @@
 * [[lib:rdoc]]
   * RDoc 6.0.1 に更新
     * Replace IRB based lexer with Ripper.
-      * https://github.com/ruby/rdoc/pull/512
+      * [[url:https://github.com/ruby/rdoc/pull/512]]
       * This much improves the speed of generating documents.
       * It also facilitates supporting new syntax in the future.
     * Support many new syntaxes of Ruby from the past few years.
@@ -319,12 +319,12 @@
 
 * [[lib:rubygems]]
   * Rubygems 2.7.3 に更新
-    * http://blog.rubygems.org/2017/11/28/2.7.3-released.html
-    * http://blog.rubygems.org/2017/11/08/2.7.2-released.html
-    * http://blog.rubygems.org/2017/11/03/2.7.1-released.html
-    * http://blog.rubygems.org/2017/11/01/2.7.0-released.html
-    * http://blog.rubygems.org/2017/10/09/2.6.14-released.html
-    * http://blog.rubygems.org/2017/08/27/2.6.13-released.html
+    * [[url:http://blog.rubygems.org/2017/11/28/2.7.3-released.html]]
+    * [[url:http://blog.rubygems.org/2017/11/08/2.7.2-released.html]]
+    * [[url:http://blog.rubygems.org/2017/11/03/2.7.1-released.html]]
+    * [[url:http://blog.rubygems.org/2017/11/01/2.7.0-released.html]]
+    * [[url:http://blog.rubygems.org/2017/10/09/2.6.14-released.html]]
+    * [[url:http://blog.rubygems.org/2017/08/27/2.6.13-released.html]]
 
 * [[lib:securerandom]]
   * [[m:SecureRandom.alphanumeric]] を追加
@@ -411,7 +411,7 @@
 === Supported platform の変更
 
 * NaClサポートを削除しました
-  * ((<URL:https://bugs.chromium.org/p/chromium/issues/detail?id=239656#c160>))
+  * [[url:https://bugs.chromium.org/p/chromium/issues/detail?id=239656#c160]]
 
 === 実装の改善
 
