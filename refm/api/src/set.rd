@@ -211,6 +211,9 @@ self を配列に変換します。要素の順序は不定です。
 
 --- include?(o) -> bool
 --- member?(o) -> bool
+#@since 2.5.0
+--- ===(o) -> bool
+#@end
 
 オブジェクト o がその集合に属する場合に true を返します。
 
