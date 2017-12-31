@@ -194,10 +194,8 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 #@end
 
 --- new(string = "")                -> String
-#@since 2.3.0
-#@until 2.4.0
+#@if("2.3.0" <= version and version < "2.4.0")
 --- new(string = "", encoding: string.encoding) -> String
-#@end
 #@end
 #@since 2.4.0
 #@# 127 は STR_BUF_MIN_SIZE。string.c 参照。
