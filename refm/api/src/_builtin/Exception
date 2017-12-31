@@ -95,6 +95,13 @@
 
 self のクラス名と message を文字列にして返します。
 
+例:
+  begin
+    raise "exception"
+  rescue
+    p $!.inspect # => "#<RuntimeError: exception>"
+  end
+
 #@since 1.9.1
 --- ==(other)    -> bool
 
