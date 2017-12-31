@@ -22,6 +22,9 @@ include File::Constants
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+例:
+  File.atime(__FILE__) # => 2017-11-28 22:38:44 +0900
+
 --- ctime(filename)    -> Time
 
 状態が最後に変更された時刻を返します。
