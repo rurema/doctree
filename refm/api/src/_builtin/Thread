@@ -19,6 +19,43 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@since 2.4.0
+--- report_on_exception             -> bool
+--- report_on_exception=(newstate)
+
+真の時は、いずれかのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
+
+#@since 2.5.0
+デフォルトは true です。
+#@else
+デフォルトは false です。
+#@end
+
+  Thread.new { 1.times { raise } }
+
+は $stderr に以下のように出力します:
+
+  #<Thread:...> terminated with exception (report_on_exception is true):
+  Traceback (most recent call last):
+          2: from -e:1:in `block in <main>'
+          1: from -e:1:in `times'
+
+これによってスレッドのエラーを早期に捕捉できるようになります。
+いくつかのケースでは、この出力を望まないかもしれません。
+出力を抑制するには複数の方法があります:
+
+ * 例外が意図したものではない場合、原因を修正して例外が発生しないようにする方法が最善です。
+ * 例外が意図したものの場合、例外が発生する場所により近い場所で rescue して、
+   その例外でスレッドが終了しないようにするのがより良い方法です。
+ * [[m:Thread#join]] や [[m:Thread#value]] でそのスレッドの終了を待つことが保証できるなら、
+   スレッド開始時に Thread.current.report_on_exception = false でレポートを無効化しても
+   安全です。しかし、この場合、例外をハンドルするのが遅れたり、親スレッドがブロックされていて
+   終了を待つことができなかったりするかもしれません。
+
+スレッドごとに設定する方法は [[m:Thread#report_on_exception=]] を参照してください。
+
+@param newstate スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
+#@end
 #@until 1.9.1
 --- critical             -> bool
 --- critical=(newstate)
@@ -417,6 +454,19 @@ name に対応するスレッド固有データがない時には、引数 defau
 デフォルトは偽です。[[ref:c:Thread#exception]]を参照してください。
 
 @param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
+
+#@since 2.4.0
+--- report_on_exception               -> bool
+--- report_on_exception=(newstate)
+
+真の場合、そのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
+
+デフォルトはスレッド作成時の [[m:Thread.report_on_exception]] です。
+
+@param newstate スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
+
+@see [[m:Thread.report_on_exception]]
+#@end
 
 --- alive?     -> bool
 
