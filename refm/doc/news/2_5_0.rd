@@ -169,7 +169,7 @@
 #@samplecode
        Coverage.start(lines: true, branches: true, methods: true)
 #@end
-      Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverate.result]]を使って結果を取得することができます。
+    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverate.result]]を使って結果を取得することができます。
 #@samplecode
         Coverage.result
         #=> { "/path/to/file.rb"=>
@@ -186,35 +186,32 @@
         #     }
         #   }
 #@end
-      ラインカバレッジについての変更はありません。ラインカバレッジの結果はただの数値の配列です。
+    * ラインカバレッジについての変更はありません。ラインカバレッジの結果はただの数値の配列です。
       数値の入っている要素は実行された行を表し、その数値は実行回数を意味します。
       nilの入った要素はカバレッジに関係のない行を意味します。
-      ブランチカバレッジの結果はこのようになります:
+    * ブランチカバレッジの結果はこのようになります:
 //emlist{
         { (jump base) => { (jump target) => (counter) } }
 //}
-    jump base と jump target にはフォーマットがあります:
+    * jump base と jump target にはフォーマットがあります:
 //emlist{
         [type, unique-id, start lineno, start column, end lineno, end column]
 //}
-      例えば [:if, 0, 2, 1, 6, 4] は、if式が2行目の1桁目から6行目の4桁目まで、と読みます。
+    * 例えば [:if, 0, 2, 1, 6, 4] は、if式が2行目の1桁目から6行目の4桁目まで、と読みます。
       [:then, 1, 3, 2, 3, 8] は、then節が3行目の2桁目から3行目の8桁目まで、と読みます。
       なお、行番号は1から始まり、桁番号は0から始まります。
       よって、上記の例ではifから最初のthen節は実行されておらず、else節は2回実行されています。
-      
-      メソッドカバレッジの場合:
+    * メソッドカバレッジの場合:
 //emlist{
         { (method key) => (counter) }
 //}
-      メソッドキーにはフォーマットがあります:
+    * メソッドキーにはフォーマットがあります:
 //emlist{
         [class, method-name, start lineno, start column, end lineno, end column]
 //}
-
-      例えば [Object, :foo, 1, 0, 7, 3] は Object#foo は1行目の0桁目から7行目の3桁目までで定義されている、と読みます。
+    * 例えば [Object, :foo, 1, 0, 7, 3] は Object#foo は1行目の0桁目から7行目の3桁目までで定義されている、と読みます。
       上記の例では Object#foo は2回実行されています。
-      
-      Note: 互換性のため、Coverage.startにオプションを与えない場合は、ラインカバレッジのみを計測します。
+    * Note: 互換性のため、Coverage.startにオプションを与えない場合は、ラインカバレッジのみを計測します。
       また Coverage.result も旧フォーマットを返します。
 #@samplecode
         Coverage.result
