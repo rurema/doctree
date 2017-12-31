@@ -2416,8 +2416,8 @@ a < b のとき負の整数を、期待しています。
 #@end
 
 #@since 2.4.0
---- sum(init=0)                    -> number
---- sum(init=0) {|e| expr }        -> number
+--- sum(init=0)                    -> object
+--- sum(init=0) {|e| expr }        -> object
 
 要素の合計を返します。例えば [e1, e2, e3].sum は init + e1 + e2 + e3 を返します。
 
@@ -2451,4 +2451,6 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
   [[1], [[2]], [3]].flatten(1)       #=> [1, [2], 3]
 
 "+" メソッドが再定義されている場合、Array#sum は再定義を無視することがあります(例えばInteger#+)。
+
+@see [[m:Enumerable#sum]]
 #@end
