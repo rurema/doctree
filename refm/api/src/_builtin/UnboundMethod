@@ -162,6 +162,10 @@ self を読みやすい文字列として返します。
 
 詳しくは [[m:Method#inspect]] を参照してください。
 
+#@samplecode 例
+String.instance_method(:count).inspect   # => "#<UnboundMethod: String#count>"
+#@end
+
 @see [[m:Method#inspect]]
 
 #@since 1.9.1
