@@ -950,6 +950,12 @@ p "foo\n".chomp    # => "foo"
 p "foo\n\r".chomp  # => "foo\n"
 #@end
 
+@see [[m:String#chomp!]]
+@see [[m:String#chop]]
+#@since 2.5.0
+@see [[m:String#delete_suffix]]
+#@end
+
 --- chomp!(rs = $/) -> self | nil
 
 self の末尾から rs で指定する改行コードを取り除きます。
@@ -975,6 +981,12 @@ p "foo\n".chomp!    # => "foo"
 p "foo\n\r".chomp!  # => "foo\n"
 #@end
 
+@see [[m:String#chomp]]
+@see [[m:String#chop!]]
+#@since 2.5.0
+@see [[m:String#delete_suffix!]]
+#@end
+
 --- chop -> String
 
 文字列の最後の文字を取り除いた新しい文字列を生成して返します。
@@ -988,7 +1000,11 @@ p "strin".chop       # => "stri"
 p "".chop            # => ""
 #@end
 
+@see [[m:String#chomp]]
 @see [[m:String#chop!]]
+#@since 2.5.0
+@see [[m:String#delete_suffix]]
+#@end
 
 --- chop! -> self | nil
 
@@ -1006,7 +1022,11 @@ p "".chop            # => ""
   "".chop!             # => nil
 #@end
 
+@see [[m:String#chomp!]]
 @see [[m:String#chop]]
+#@since 2.5.0
+@see [[m:String#delete_suffix!]]
+#@end
 
 --- clear -> self
 
@@ -3555,6 +3575,8 @@ self の先頭から破壊的に prefix を削除します。
 "hello".delete_suffix("hel") # => "hello"
 #@end
 
+@see [[m:String#chomp]]
+@see [[m:String#chop]]
 @see [[m:String#delete_prefix]]
 @see [[m:String#delete_suffix!]]
 @see [[m:String#end_with?]]
@@ -3569,6 +3591,8 @@ self の末尾から破壊的に suffix を削除します。
 "hello".delete_suffix!("hel") # => nil
 #@end
 
+@see [[m:String#chomp!]]
+@see [[m:String#chop!]]
 @see [[m:String#delete_prefix!]]
 @see [[m:String#delete_suffix]]
 @see [[m:String#end_with?]]
