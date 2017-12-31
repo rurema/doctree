@@ -287,6 +287,9 @@ nil は文字列のエンコーディングが非互換の時に返されます�
   p :foo.match(/bar/)    # => nil
 
 @see [[m:String#match]]
+#@since 2.4.0
+@see [[m:Symbol#match?]]
+#@end
 
 #@since 2.4.0
 --- match?(regexp, pos = 0) -> bool
