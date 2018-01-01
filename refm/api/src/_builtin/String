@@ -1213,6 +1213,19 @@ str == eval(str.dump) となることが保証されています。
 puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 #@end
 
+#@since 2.5.0
+@see [[m:String#undump]]
+--- undump -> String
+self のエスケープを戻したものを返します。
+
+[[m:String#dump]] の逆変換にあたります。
+
+#@samplecode 例
+"\"hello \\n ''\"".undump #=> "hello \n ''"
+#@end
+
+@see [[m:String#dump]]
+#@end
 #@since 2.4.0
 --- each_line(rs = $/, chomp: false) {|line| ... } -> self
 --- each_line(rs = $/, chomp: false)  -> Enumerator
