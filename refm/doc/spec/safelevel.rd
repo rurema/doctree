@@ -36,30 +36,55 @@ Rubyではオブジェクトは「汚染されている」とみなされるこ�
 
 === セーフレベル
 
+#@since 2.6.0
+セーフレベルはグローバル変数 [[m:$SAFE]] で設定します。
+各スレッドで個別のセーフレベルを設定することはできません。
+セーフレベルが高くなるほど、行える操作は制限されます。
+#@else
 各スレッドは固有の「セーフレベル」を持っています。セーフレベルが高くなるほ
 ど、行える操作は制限されます。セーフレベルはスレッドローカル変数 [[m:$SAFE]] で
 設定します。
+#@end
 
 [[ruby-list:37415]]
 
 [[m:$SAFE]] に関するルール
 
   * プログラム開始時の$SAFEの値は0
-  * 各スレッドは作られた時点での親スレッドの$SAFEの値を引き継ぐ
+#@since 2.6.0
+  * 各スレッド固有ではなくなったので必要に応じて ensure で戻す
+#@samplecode
+      $SAFE = 0
+      th = Thread.new do
+        p $SAFE # => 0
+        $SAFE = 1
+      ensure
+        $SAFE = 0
+      end
+      th.join
+      p $SAFE # => 0
+#@end
+  * $SAFE の値を現在の値より小さく変更する事もできる
 //emlist{
-      $SAFE = 1
+      $ ruby -e '$SAFE = 1; $SAFE = 0'
+//}
+#@else
+  * 各スレッドは作られた時点での親スレッドの$SAFEの値を引き継ぐ
+#@samplecode
+      $SAFE = 0
       th = Thread.new{
-        p $SAFE #=> 1
-        $SAFE = 3
+        p $SAFE # => 0
+        $SAFE = 1
       }
       th.join
-      p $SAFE #=> 1
-//}
+      p $SAFE # => 0
+#@end
   * $SAFE の値を現在の値より小さく変更する事はできない
 //emlist{
       $ ruby -e '$SAFE = 1; $SAFE = 0'
       -e:1: tried to downgrade safe level from 1 to 0 (SecurityError)
 //}
+#@end
 原則として、各セキュリティレベルにはそれ以下のセキュリティレベルの制限も
 適用されます。たとえばレベル1で許されない操作はレベル2でも行えません。
 
@@ -207,18 +232,16 @@ CGI等でユーザからの入力を処理するのに適しています。
 
    * requireは$SAFE = 0で実行される
    * Level 1以上では起動時に以下の違いがある
-//emlist{
-      * 環境変数 RUBYLIB を $: に加えない
+   * 環境変数 RUBYLIB を $: に加えない
 #@until 1.9.2
-      * カレントディレクトリを $: に加えない
+   * カレントディレクトリを $: に加えない
 #@end
-      * 環境変数 RUBYOPT を処理しない
-      * 以下のスイッチを使用できない
-        -s -S -e -r -i -I -x
-        (スクリプトがsetgid, setuidされている時も同様)
-      * 標準入力からのプログラム読み込みを行わない
-        (スクリプトがsetgid, setuidされている時も同様)
-//}
+   * 環境変数 RUBYOPT を処理しない
+   * 以下のスイッチを使用できない
+     -s -S -e -r -i -I -x
+     (スクリプトがsetgid, setuidされている時も同様)
+   * 標準入力からのプログラム読み込みを行わない
+     (スクリプトがsetgid, setuidされている時も同様)
    * setuid, setgid されたスクリプトは $SAFE = 1 以上で実行される。
    * [[c:Proc]] はその時点でのセーフレベルを記憶する。
      その [[c:Proc]] オブジェクトが call されると、記憶していたセーフレベルで実行される。
@@ -234,29 +257,58 @@ CGI等でユーザからの入力を処理するのに適しています。
 #@until 2.1.0
    * レベル4以上では out of memory でも [[c:fatal]] にならない。
 #@end
+#@since 2.4.0
+   * 実装の都合上 [[c:Integer]], [[c:Float]], [[c:Symbol]], true, false, nil は汚染されない。
+#@else
    * 実装の都合上 [[c:Fixnum]], [[c:Symbol]], true, false, nil は汚染されない。
      なお [[c:Bignum]], [[c:Float]] は汚染されることは注意が必要。
+#@end
 
 === 使用例
+
+#@since 2.6.0
+$SAFE はスレッドローカルからグローバルになり、レベルを低く変更する事もできるようになったため、
+プログラムの一部だけを高いセーフレベルで実行するには、以下のように ensure でセーフレベルを
+戻す必要があります。
+
+#@samplecode 例
+def safe(level)
+  result = nil
+  Thread.start do
+    $SAFE = level
+    result = yield
+  ensure
+    $SAFE = 0
+  end.join
+  result
+end
+
+lib = "insecure_library".taint # 外部から受け取った文字列(仮)
+safe(1) { require lib }        # $SAFE が 1 なので例外
+require lib                    # 外側は影響を受けない
+#@end
+
+#@else
 
 一旦高くした$SAFEレベルを低く変更する事はできませんが、以下のようにスレッ
 ドを使うことで、プログラムの一部だけを高いセーフレベルで実行することが可
 能です。
 
-例:
+#@samplecode 例
+def safe(level)
+  result = nil
+  Thread.start {
+    $SAFE = level
+    result = yield
+  }.join
+  result
+end
 
-     def safe(level)
-       result = nil
-       Thread.start {
-         $SAFE = level
-         result = yield
-       }.join
-       result
-     end
-
-     lib = "insecure_library".taint # 外部から受け取った文字列(仮)
-     safe(1) { require lib }        # $SAFE が 1 なので例外
-     require lib                    # 外側は影響を受けない
+lib = "insecure_library".taint # 外部から受け取った文字列(仮)
+safe(1) { require lib }        # $SAFE が 1 なので例外
+require lib                    # 外側は影響を受けない
+#@end
+#@end
 
 === 拡張ライブラリでの扱い
 
