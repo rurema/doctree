@@ -68,8 +68,13 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
 
+#@since 2.5.0
+--- glob(pattern, flags=0, base: nil) -> [Pathname]
+--- glob(pattern, flags=0, base: nil) {|pathname| ...} -> nil
+#@else
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
+#@end
 
 ワイルドカードの展開を行なった結果を、
 Pathname オブジェクトの配列として返します。
@@ -83,6 +88,17 @@ Pathname オブジェクトの配列として返します。
 
 @param pattern ワイルドカードパターンです
 @param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
+#@since 2.5.0
+@param base    カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
+#@end
+
+#@samplecode
+require "pathname"
+Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb.rb>]
+#@end
+
+@see [[m:Dir.glob]]
+@see [[m:Pathname#glob]]
 
 == Instance Methods
 
@@ -939,4 +955,30 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 
 #@end
+#@since 2.5.0
+--- glob(pattern, flags=0) -> [Pathname]
+--- glob(pattern, flags=0) {|pathname| ...} -> nil
 
+ワイルドカードの展開を行なった結果を、
+Pathname オブジェクトの配列として返します。
+
+引数の意味は、[[m:Dir.glob]] と同じです。 flag の初期値である 0 は「何
+も指定しない」ことを意味します。
+
+ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェ
+クトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値と
+しては nil を返します。
+
+このメソッドは内部で [[m:Dir.glob]] の base キーワード引数を使っています。
+
+@param pattern ワイルドカードパターンです
+@param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
+
+#@samplecode
+require "pathname"
+Pathname("ruby-2.4.2").glob("R*.md") # => [#<Pathname:ruby-2.4.2/README.md>, #<Pathname:ruby-2.4.2/README.ja.md>]
+#@end
+
+@see [[m:Dir.glob]]
+@see [[m:Pathname.glob]]
+#@end
