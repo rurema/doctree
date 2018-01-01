@@ -1360,6 +1360,9 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 
 @see [[m:Object#inspect]],[[m:Kernel.#puts]],[[m:Kernel.#print]]
 
+#@since 2.5.0
+#@include(functions_pp)
+#@end
 --- print(*arg) -> nil
 
 引数を順に標準出力 [[m:$stdout]] に出力します。引数が与えられない時には変数
