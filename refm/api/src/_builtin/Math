@@ -414,6 +414,10 @@ x の平方根を返します。
 @raise Errno::EDOM  引数が負の値である場合に発生します。
 #@end
 
+#@since 2.5.0
+@see [[m:Integer.sqrt]]
+#@end
+
 #@since 1.9.1
 --- cbrt(x) -> Float
 
