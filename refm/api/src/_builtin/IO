@@ -1566,7 +1566,11 @@ self を返します。
   f.ungetc(c)                # => nil
   f.getc                     # => "い"
 
+#@since 2.5.0
+--- write(*str)     -> Integer
+#@else
 --- write(str)     -> Integer
+#@end
 
 IOポートに対して str を出力します。str が文字列でなけ
 れば to_s による文字列化を試みます。

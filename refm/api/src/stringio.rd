@@ -661,7 +661,11 @@ nil を返します。
       p s.pos        #=> 7
 #@end
 
+#@since 2.5.0
+--- write(*obj)    -> Integer
+#@else
 --- write(obj)    -> Integer
+#@end
 
 自身に obj を書き込みます。obj が文字列でなければ to_s による文字列化を試みます。
 書き込まれた文字列の長さを返します。
