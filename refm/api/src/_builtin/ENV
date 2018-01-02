@@ -39,6 +39,11 @@ key に対応する環境変数の値を返します。該当する環境変数�
            ジェクトを指定した場合は to_str メソッドによる暗黙の型変換
            を試みます。
 
+#@samplecode
+ENV['PATH']           # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
+ENV['NON_EXIST_KEY']  # => nil
+#@end
+
 --- []=(key, value)
 --- store(key, value) -> String
 
