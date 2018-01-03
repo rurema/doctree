@@ -575,18 +575,38 @@ self を other で割った商を [[c:Float]] で返します。
 @see [[m:Numeric#quo]]
 
 --- **(other) -> Numeric
+#@since 2.5.0
+--- pow(other) -> Numeric
+--- pow(other, modulo) -> Integer
+#@end
 
 算術演算子。冪(べき乗)を計算します。
 
 @param other 二項演算の右側の引数(対象)
+#@since 2.5.0
+@param modulo 指定すると、計算途中に巨大な値を生成せずに (self**other) % modulo と同じ結果を返します。
+#@end
 @return 計算結果
+#@since 2.5.0
+@raise TypeError 2引数 pow で Integer 以外を指定した場合に発生します。
+@raise RangeError 2引数 pow で other に負の数を指定した場合に発生します。
+#@end
 
 例:
 
   2 ** 3 # => 8
   2 ** 0 # => 1
   0 ** 0 # => 1
+#@since 2.5.0
+   3.pow(3,  8) # => 3
+   3.pow(3, -8) # => -5
+   3.pow(2, -2) # => -1
+  -3.pow(3,  8) # => 5
+  -3.pow(3, -8) # => -3
+   5.pow(2, -8) # => -7
 
+@see [[m:BigDecimal#power]]
+#@end
 --- abs -> Integer
 --- magnitude -> Integer
 

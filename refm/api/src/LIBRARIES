@@ -167,7 +167,9 @@ irb/extend-command
 irb/ext/change-ws
 irb/ext/history
 irb/ext/loader
+#@until 2.5.0
 irb/ext/math-mode
+#@end
 irb/ext/multi-irb
 irb/ext/save-history
 irb/ext/tracer
@@ -210,7 +212,9 @@ logger
 #@until 1.9.1
 mailread
 #@end
+#@until 2.5.0
 mathn
+#@end
 matrix
 #@since 1.9.1
 minitest/autorun

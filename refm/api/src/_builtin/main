@@ -21,6 +21,8 @@ main では参照できない事に注意してください。トップレベル
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
+#@#noexample Module#public を参照
+
 @see [[m:Module#public]]
 
 --- private(*name) -> Object
@@ -50,9 +52,9 @@ main では参照できない事に注意してください。トップレベル
 
 --- include(*modules) -> self
 
-引数 modules で指定したモジュールを後ろから順番をインクルードします。
+引数 modules で指定したモジュールを後ろから順番にインクルードします。
 
-@param mod [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
+@param moddules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
 @raise ArgumentError 継承関係が循環してしまうような include を行った場
                      合に発生します。
@@ -94,6 +96,22 @@ main では参照できない事に注意してください。トップレベル
 #@end
 
 @param module 有効にするモジュールを指定します。
+
+#@samplecode 例
+module Sloth
+  refine String do
+    def downcase
+      self
+    end
+  end
+end
+
+"ABC".downcase # => "abc"
+
+using Sloth
+
+"ABC".downcase # => "ABC"
+#@end
 
 #@since 2.1.0
 @see [[m:Module#refine]], [[m:Module#using]]

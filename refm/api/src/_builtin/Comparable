@@ -150,3 +150,21 @@ self が min と max の範囲内(min, max
   6.between?(1, 5)               #=> false
   'cat'.between?('ant', 'dog')   #=> true
   'gnu'.between?('ant', 'dog')   #=> false
+
+#@since 2.4.0
+--- clamp(min, max)  -> object
+
+self を範囲内に収めます。
+
+self <=> min が負数を返したときは min を、
+self <=> max が正数を返したときは max を、
+それ以外の場合は self を返します。
+
+例:
+  12.clamp(0, 100)         #=> 12
+  523.clamp(0, 100)        #=> 100
+  -3.123.clamp(0, 100)     #=> 0
+
+  'd'.clamp('a', 'f')      #=> 'd'
+  'z'.clamp('a', 'f')      #=> 'f'
+#@end

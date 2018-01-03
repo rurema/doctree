@@ -22,6 +22,9 @@ include File::Constants
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+例:
+  File.atime(__FILE__) # => 2017-11-28 22:38:44 +0900
+
 --- ctime(filename)    -> Time
 
 状態が最後に変更された時刻を返します。
@@ -38,6 +41,9 @@ include File::Constants
 @param filename ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+例:
+  File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
 
 #@since 2.2.0
 --- birthtime(filename) -> Time
@@ -148,6 +154,17 @@ File.basename の動作は [[man:basename(3)]]
 @param filename ファイル名を表す文字列を指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+  IO.write("test.txt", "test")
+  p File.exists?("test.txt")  # => true
+  p File.delete("test.txt")   # => 1
+  p File.exists?("test.txt")  # => false
+  begin
+    File.delete("test.txt")
+  rescue
+    p $!  # => #<Errno::ENOENT: No such file or directory @ unlink_internal - test.txt>
+  end
 
 --- dirname(filename)    -> String
 
@@ -343,6 +360,11 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
+例:
+  File.ftype("testfile")            # => "file"
+  File.ftype("/dev/tty")            # => "characterSpecial"
+  File.ftype("/tmp/.X11-unix/X0")   # => "socket"
+
 --- join(*item)    -> String
 
 File::SEPARATORを間に入れて文字列を連結します。
@@ -367,6 +389,11 @@ old を指す new という名前のハードリンクを
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  IO.write("testfile", "test")
+  File.link("testfile", "testlink")   # => 0
+  IO.read("testlink")                 # => "test"
+
 --- new(path, mode = "r", perm = 0666)                -> File 
 --- open(path, mode = "r", perm = 0666)               -> File 
 --- open(path, mode = "r", perm = 0666) {|file| ... } -> object
@@ -387,6 +414,20 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 @param perm ファイルを生成する場合のファイルのパーミッションを整数で指定します。[[m:Kernel.#open]] と同じです。
 
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
+
+例: File.new による読み込みモードでのファイルオープン
+  f = File.new("testfile", "r")
+  f.class # => File
+  f.close
+
+例: File.open による読み込みモードでのファイルオープン
+  f = File.open("testfile", "r")
+  f.class # => File
+  f.close
+
+例: File.open による書き込みモードでのファイルオープン
+  File.open("testfile", "w", 0755) { |f| f.print "test" }
+  File.read("testfile")  # => "test"
 
 #@since 1.9.1
 --- path(filename)    -> String
@@ -463,6 +504,15 @@ pathname の最後のコンポーネントは存在していなくても例外�
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  begin
+    File.rename("testfile", "testfile.bak")   # => 0
+    File.rename("testfile", "testfile.bak")
+  rescue
+    # 2回目の rename 時にすでに testfile が存在しないため例外が発生する
+    $! # => #<Errno::ENOENT: No such file or directory @ rb_file_s_rename - (testfile, testfile.bak)>
+  end
+
 --- split(pathname)    -> [String]
 
 pathname を dirname とbasename に分割して、2 要
@@ -493,6 +543,11 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 @param filename ファイル名を表す文字列を指定します。 
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
+
+例:
+  # link.rb は t.rb のシンボリックリンク
+  File.lstat("link.rb") == File.stat("t.rb") # => false
+  File.stat("link.rb")  == File.stat("t.rb") # => true
 
 @see [[m:IO#stat]], [[m:File#lstat]]
 
@@ -816,6 +871,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 @param mode FIFO の許可モードを数値で指定します。指定したモードは通常の
             ファイル作成と同様にプロセスの umask によって変更されます。
             作成されたファイルの許可モードは (mode & ~umask) になります。
+
+例:
+  File.mkfifo("testfile", 0666)
+  File.ftype("testfile")          # => "fifo"
+
 #@end
 
 == Instance Methods
@@ -841,6 +901,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 @raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+例:
+  File.ctime(__FILE__) # => 2017-11-30 22:40:49 +0900
+  File.chmod(0755, __FILE__)
+  File.ctime(__FILE__) # => 2017-11-30 22:42:12 +0900
 
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]], [[m:File#birthtime]]

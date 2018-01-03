@@ -677,6 +677,21 @@ self を引数としてブロックを評価し、self を返します。
 
 #@end
 
+#@since 2.5.0
+@see [[m:Object#yield_self]]
+
+--- yield_self{|x| ... } -> object
+
+self を引数としてブロックを評価し、ブロックの結果を返します。
+
+#@samplecode 例
+  "my string".yield_self {|s| s.upcase }   # => "MY STRING"
+  3.next.yield_self {|x| x**x }.to_s       # => "256"
+#@end
+
+@see [[m:Object#tap]]
+#@end
+
 #@until 1.9.3
 --- __id__ -> Integer
 #@end

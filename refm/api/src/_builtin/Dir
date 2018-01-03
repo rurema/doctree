@@ -398,6 +398,21 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 @raise IOError 既に自身が close している場合に発生します。
 
+例:
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    File.open("#{tmpdir}/test1.txt", "w") { |f| f.puts("test1") }
+    File.open("#{tmpdir}/test2.txt", "w") { |f| f.puts("test2") }
+    Dir.open(tmpdir) do |d|
+      p d.read   # => "."
+      p d.read   # => ".."
+      p d.read   # => "test1.txt"
+      p d.read   # => "test2.txt"
+      p d.read   # => nil
+    end
+  end
+
 --- rewind    -> self
 
 ディレクトリストリームの読み込み位置を先頭に移動させます。

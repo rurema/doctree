@@ -239,9 +239,10 @@ self を other で割った商を返します。
 
 @see [[m:Complex#quo]]
 
---- hash -> Integer
+#@# --- hash -> Integer
 
-自身のハッシュ値を返します。
+#@# 自身のハッシュ値を返します。
+#@# Complex#hashはnodocのため
 
 --- imag      -> Numeric
 --- imaginary -> Numeric

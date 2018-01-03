@@ -162,6 +162,10 @@ self を読みやすい文字列として返します。
 
 詳しくは [[m:Method#inspect]] を参照してください。
 
+#@samplecode 例
+String.instance_method(:count).inspect   # => "#<UnboundMethod: String#count>"
+#@end
+
 @see [[m:Method#inspect]]
 
 #@since 1.9.1
@@ -231,6 +235,9 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 詳しくは [[m:Method#parameters]] を参照してください。
 
+#@#noexample Method#parametersを参照
+
+
 @see [[m:Proc#parameters]], [[m:Method#parameters]]
 #@end
 
@@ -239,6 +246,8 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 self 内で super を実行した際に実行されるメソッドを [[c:UnboundMethod]] オブジェ
 クトにして返します。
+
+#@#noexample Method#super_methodを参照
 
 @see [[m:Method#super_method]]
 #@end
