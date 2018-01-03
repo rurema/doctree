@@ -138,8 +138,9 @@ version 4 の UUID は全くランダムです (バージョンを除いて)。
 
 @raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
-
-   require 'securerandom'
-  p SecureRandom.alphanumeric #=> "2BuBuLf3WfSKyQbR"
-  p SecureRandom.alphanumeric(10) #=> "i6K93NdqiH"
+#@samplecode
+require 'securerandom'
+p SecureRandom.alphanumeric #=> "2BuBuLf3WfSKyQbR"
+p SecureRandom.alphanumeric(10) #=> "i6K93NdqiH"
+#@end
 #@end
