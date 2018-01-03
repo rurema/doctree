@@ -778,7 +778,7 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- capitalize -> String
 
@@ -800,7 +800,7 @@ p "FOOBAR--".capitalize   # => "Foobar--"
 
 文字列先頭の文字を大文字に、残りを小文字に破壊的に変更します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- capitalize! -> self | nil
 
@@ -1189,7 +1189,7 @@ p str                         #=> "abc"
 全ての大文字を対応する小文字に置き換えた文字列を返します。
 どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
 
-オプションの意味は以下の通りです:
+@param options オプションの意味は以下の通りです。
 
 : オプションなし
   完全な Unicode ケースマッピングに対応し、ほとんどの言語に適しています。(例外は以下の :turkic,
@@ -1249,7 +1249,7 @@ p "STRing?".downcase   # => "string?"
 全ての大文字を対応する小文字に破壊的に置き換えます。
 どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- downcase! -> self | nil
 
@@ -2531,11 +2531,11 @@ sum %= 65536
 @param bits    チェックサムのビット数
 
 #@since 2.4.0
---- swapcase!(*options) -> String
+--- swapcase(*options) -> String
 
 大文字を小文字に、小文字を大文字に変更した文字列を返します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- swapcase -> String
 
@@ -2559,7 +2559,7 @@ p "Access".swapcase   # => "aCCESS"
 
 大文字を小文字に、小文字を大文字に破壊的に変更します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- swapcase! -> self | nil
 
@@ -2862,7 +2862,7 @@ p str   # => "f"
 全ての小文字を対応する大文字に置き換えた文字列を返します。
 どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- upcase -> String
 
@@ -2886,7 +2886,7 @@ p "stRIng? STring.".upcase   # => "STRING? STRING."
 全ての小文字を対応する大文字に破壊的に置き換えます。
 どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
 
-詳細は [[m:String#downcase]] を参照してください。
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
 #@else
 --- upcase! -> self | nil
 
