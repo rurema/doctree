@@ -185,6 +185,14 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @param file ファイル名を表す文字列を指定します。
 
+#@samplecode 例
+IO.write("testfile", "")
+File.chmod(0644, "testfile")
+FileTest.readable?("testfile")      # => true
+File.chmod(0200, "testfile")
+FileTest.readable?("testfile")      # => false
+#@end
+
 --- readable_real?(file)    -> bool
 
 ファイルがカレントプロセスの実ユーザか実グループによって読み込み可能な時に真を
