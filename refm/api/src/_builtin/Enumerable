@@ -1262,7 +1262,9 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
   [[1,2], [3,4]].flat_map{|i| i.map{|j| j*2}} # => [2,4,6,8]
 
 --- chunk {|elt| ... } -> Enumerator
+#@until 2.3.0
 --- chunk(initial_state) {|elt, state| ... } -> Enumerator
+#@end
 
 要素を前から順にブロックで評価し、その結果によって
 要素をチャンクに分けた(グループ化した)要素を持つ
@@ -1277,7 +1279,9 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 そのため、eachだと以下のようになります。
 
   enum.chunk {|elt| key }.each {|key, ary| ... }
+#@until 2.3.0
   enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
+#@end
 
 例として、整数列を連続する奇数/偶数に分ける例を見てみます。
 「n.even?」の値が切り替わるところで区切られているのがわかるでしょう。
@@ -1360,6 +1364,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
     }
   }
 
+#@until 2.3.0
 チャンク化に状態遷移が必要な場合は、
 オプション引数 initial_state に状態を保持するオブジェクトを渡します。
 この場合、ブロックの第2引数にはこのオブジェクトが dup で複製
@@ -1367,6 +1372,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
 #@# 例を追加したい
 
 @param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
+#@end
 @raise RuntimeError 予約されている値を用いた場合に発生します
 
 #@since 2.3.0
@@ -1439,7 +1445,9 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 --- slice_before(pattern) -> Enumerator
 --- slice_before {|elt| bool } -> Enumerator
+#@until 2.3.0
 --- slice_before(initial_state) {|elt, state| bool } -> Enumerator
+#@end
 
 パターンがマッチした要素、もしくはブロックが真を返した要素から
 次にマッチする手前までを
@@ -1504,6 +1512,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
   }.join(",")
   #=> "0,2-4,6,7,9"
 
+#@until 2.3.0
 しかし、ローカル変数を使うのが不適切な場合もあります。
 その場合、引数 initial_state に状態を保持するオブジェクトを
 渡すと、そのオブジェクトを [[m:Object#dup]] したオブジェクトを
@@ -1570,6 +1579,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
   }
 
 @param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
+#@end
 #@end
 
 #@since 2.2.0
