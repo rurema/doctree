@@ -192,6 +192,10 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @param file ファイル名を表す文字列を指定します。
 
+#@#noexample FileTest.#readable? を参照
+
+@see [[m:FileTest.#readable?]]
+
 --- setuid?(file)    -> bool
 
 ファイルが [[man:setuid(2)]] されている時に真を返
