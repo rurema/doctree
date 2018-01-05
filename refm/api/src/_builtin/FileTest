@@ -208,6 +208,15 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @param file ファイル名を表す文字列を指定します。
 
+#@samplecode 例
+require 'fileutils'
+IO.write("testfile", "")
+FileUtils.chmod("g+s", "testfile")
+FileTest.setgid?("testfile")      # => true
+FileUtils.chmod("g-s", "testfile")
+FileTest.setgid?("testfile")      # => false
+#@end
+
 --- size(file)    -> Integer
 
 ファイルのサイズを返します。
