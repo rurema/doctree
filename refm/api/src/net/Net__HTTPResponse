@@ -296,8 +296,13 @@ HTTP レスポンス 407 (Proxy Authentication Required) を表現するクラ�
 
 詳しくは [[RFC:7235]] Section 3.2 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPRequestTimeout < Net::HTTPClientError
+alias Net::HTTPRequestTimeOut
+#@else
 = class Net::HTTPRequestTimeOut < Net::HTTPClientError
-HTTP レスポンス 408 (Request Time-out) を表現するクラスです。
+#@end
+HTTP レスポンス 408 (Request Timeout) を表現するクラスです。
 
 詳しくは [[RFC:7231]] Section 6.5.7 を見てください。
 
@@ -321,15 +326,24 @@ HTTP レスポンス 412 (Precondition Failed) を表現するクラスです。
 
 詳しくは [[RFC:7232]] Section 4.2, [[RFC:8144]] Section 3.2 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPPayloadTooLarge < Net::HTTPClientError
+alias Net::HTTPRequestEntityTooLarge
+#@else
 = class Net::HTTPRequestEntityTooLarge < Net::HTTPClientError
-HTTP レスポンス 413 (Request Entity Too Large) を表現するクラスです。
+#@end
+HTTP レスポンス 413 (Payload Too Large) を表現するクラスです。
 
 詳しくは [[RFC:7231]] Section 6.5.11 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPURITooLong < Net::HTTPClientError
+alias Net::HTTPRequestURITooLong
+#@else
 = class Net::HTTPRequestURITooLong < Net::HTTPClientError
+#@end
 alias Net::HTTPRequestURITooLarge
-
-HTTP レスポンス 414 (Request-URI Too Large) を表現するクラスです。
+HTTP レスポンス 414 (URI Too Large) を表現するクラスです。
 
 詳しくは [[RFC:7231]] Section 6.5.12 を見てください。
 
@@ -339,8 +353,13 @@ HTTP レスポンス 415 (Unsupported Media Type) を表現するクラスです
 
 詳しくは [[RFC:7231]] Section 6.5.13, [[RFC:7694]] Section 3 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPRangeNotSatisfiable < Net::HTTPClientError
+alias Net::HTTPRequestedRangeNotSatisfiable
+#@else
 = class Net::HTTPRequestedRangeNotSatisfiable < Net::HTTPClientError
-HTTP レスポンス 416 (Requested range not satisfiable) を表現するクラスです。
+#@end
+HTTP レスポンス 416 (Range Not Satisfiable) を表現するクラスです。
 
 詳しくは [[RFC:7233]] Section 4.4 を見てください。
 
@@ -419,8 +438,13 @@ HTTP レスポンス 503 (Service Unavailable) を表現するクラスです。
 
 詳しくは [[RFC:7231]] Section 6.6.4 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPGatewayTimeout < Net::HTTPServerError
+alias Net::HTTPGatewayTimeOut
+#@else
 = class Net::HTTPGatewayTimeOut < Net::HTTPServerError
-HTTP レスポンス 504 (Gateway Time-out) を表現するクラスです。
+#@end
+HTTP レスポンス 504 (Gateway Timeout) を表現するクラスです。
 
 詳しくは [[RFC:7231]] Section 6.6.5 を見てください。
 
