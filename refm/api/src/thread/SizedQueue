@@ -118,3 +118,13 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 
 @see [[m:Thread::Queue#close]]
 #@end
+#@since 2.5.0
+--- empty? -> bool
+
+キューが空の時、真を返します。
+
+--- length -> Integer
+--- size -> Integer
+
+キューの長さを返します。
+#@end
