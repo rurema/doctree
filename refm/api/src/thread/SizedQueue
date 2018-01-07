@@ -1,10 +1,10 @@
 #@since 2.1.0
-= class Thread::SizedQueue < Object
+= class Thread::SizedQueue < Thread::Queue
 alias SizedQueue
 
 サイズの最大値を指定できる [[c:Thread::Queue]] です。
 #@else
-= class SizedQueue < Object
+= class SizedQueue < Queue
 
 サイズの最大値を指定できる [[c:Queue]] です。
 #@end
