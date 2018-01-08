@@ -902,11 +902,6 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-例:
-  File.ctime(__FILE__) # => 2017-11-30 22:40:49 +0900
-  File.chmod(0755, __FILE__)
-  File.ctime(__FILE__) # => 2017-11-30 22:42:12 +0900
-
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]], [[m:File#birthtime]]
 #@else
