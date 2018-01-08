@@ -305,6 +305,13 @@ FileTest.size?("testfile")      # => nil
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+#@samplecode 例:
+IO.write("zero.txt", "")
+FileTest.zero?("zero.txt")      # => true
+IO.write("nonzero.txt", "1")
+FileTest.zero?("nonzero.txt")  # => false
+#@end
+
 @see [[m:FileTest.#size]], [[m:FileTest.#size?]]
 
 #@since 1.9.1
