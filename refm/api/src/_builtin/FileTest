@@ -201,6 +201,15 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+#@samplecode 例
+require 'fileutils'
+IO.write("testfile", "")
+FileUtils.chmod("u+s", "testfile")
+FileTest.setuid?("testfile")      # => true
+FileUtils.chmod("u-s", "testfile")
+FileTest.setuid?("testfile")      # => false
+#@end
+
 --- setgid?(file)    -> bool
 
 ファイルが [[man:setgid(2)]] されている時に真を返
