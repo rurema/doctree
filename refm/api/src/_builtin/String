@@ -194,12 +194,13 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 #@end
 
 --- new(string = "")                -> String
-#@since 2.3.0
---- new(string = "", encoding: enc) -> String
+#@if("2.3.0" <= version and version < "2.4.0")
+--- new(string = "", encoding: string.encoding) -> String
 #@end
 #@since 2.4.0
---- new(string = "", capacity: size) -> String
---- new(string = "", encoding: enc, capacity: size) -> String
+#@# 127 は STR_BUF_MIN_SIZE。string.c 参照。
+--- new(string = "", encoding: string.encoding, capacity: 127) -> String
+--- new(string = "", encoding: string.encoding, capacity: string.bytesize) -> String
 #@end
 
 string と同じ内容の新しい文字列を作成して返します。
@@ -218,6 +219,8 @@ string と同じ内容の新しい文字列を作成して返します。
                 指定することで、なんども文字列連結する
                 (そしてreallocがなんども呼ばれる)ときの
                 パフォーマンスが改善されるかもしれません。
+                省略した場合、引数stringのバイト数が127未満であれば127、
+                それ以上であればstring.bytesizeになります。
 #@end
 @return         引数 string と同じ内容の文字列オブジェクト
 
@@ -1290,7 +1293,8 @@ chomp に true を指定すると、分割した各行に対して [[m:String#ch
 
 #@since 2.4.0
 @param chomp 分割した各行に対して [[m:String#chomp]] と同等の結果を得
-             るかを boolean で指定します。
+             る場合は true を、そうでない場合は false で指定します。
+             省略した場合は false を指定したとみなされます。
 #@end
 
 ブロックが指定された場合は [[m:String#each_line]] と同じように動作しま
