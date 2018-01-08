@@ -217,6 +217,15 @@ FileTest.setuid?("testfile")      # => false
 
 @param file ファイル名を表す文字列を指定します。
 
+#@samplecode 例
+require 'fileutils'
+IO.write("testfile", "")
+FileUtils.chmod("g+s", "testfile")
+FileTest.setgid?("testfile")      # => true
+FileUtils.chmod("g-s", "testfile")
+FileTest.setgid?("testfile")      # => false
+#@end
+
 --- size(file)    -> Integer
 
 ファイルのサイズを返します。
