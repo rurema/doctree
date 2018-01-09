@@ -12,7 +12,7 @@
 
   * トップレベルの定数参照を削除しました  [[feature:11547]]
   * do/end ブロック内部で rescue/else/ensure を書けるようになりました [[feature:12906]]
-  * 文字列の式展開内部にも refinements が影響するようになりました [[feature:13812]]
+  * 文字列の式展開内部の暗黙の to_s 呼び出しにも refinements が影響するようになりました [[feature:13812]]
 
 === 組み込みクラスの更新
 
