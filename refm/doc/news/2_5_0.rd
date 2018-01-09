@@ -141,7 +141,7 @@
       スレッドの終了時に捕捉していない例外の情報を $stderr に出力します。 [[feature:14143]]
 
   * [[c:Time]]
-    * [[m:Time#at]] receives 3rd argument which specifies the unit of 2nd argument.
+    * [[m:Time.at]] receives 3rd argument which specifies the unit of 2nd argument.
       [[feature:13919]]
 
   * [[c:KeyError]]
