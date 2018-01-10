@@ -3655,6 +3655,36 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 @see [[m:String#unpack]], [[m:Array#pack]]
 #@end
 #@since 2.5.0
+--- each_grapheme_cluster {|grapheme_cluster| block } -> self
+--- each_grapheme_cluster -> Enumerator
+
+文字列の書記素クラスタに対して繰り返します。
+
+[[m:String#each_char]] と違って、
+Unicode Standard Annex #29 ([[url:http://unicode.org/reports/tr29/]])
+で定義された書記素クラスタに対して繰り返します。
+
+#@samplecode 例
+"a\u0300".each_char.to_a.size # => 2
+"a\u0300".each_grapheme_cluster.to_a.size # => 1
+#@end
+
+@see [[m:String#grapheme_clusters]]
+
+--- grapheme_clusters                             -> [String]
+--- grapheme_clusters {|grapheme_cluster| block } -> self
+
+文字列の書記素クラスタの配列を返します。(self.each_grapheme_cluster.to_a と同じです)
+
+#@samplecode 例
+"a\u0300".grapheme_clusters # => ["à"]
+#@end
+
+ブロックが指定された場合は [[m:String#each_grapheme_cluster]] と同じように動作
+します。ただし deprecated のため、ブロックを指定する場合は
+[[m:String#each_grapheme_cluster]] を使用してください。
+
+@see [[m:String#each_grapheme_cluster]]
 --- delete_prefix(prefix) -> String
 文字列の先頭から prefix を削除した文字列のコピーを返します。
 
