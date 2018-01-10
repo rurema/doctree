@@ -169,7 +169,7 @@
 #@samplecode
        Coverage.start(lines: true, branches: true, methods: true)
 #@end
-    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverate.result]]を使って結果を取得することができます。
+    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverage.result]]を使って結果を取得することができます。
 #@samplecode
         Coverage.result
         #=> { "/path/to/file.rb"=>
