@@ -59,6 +59,12 @@ main では参照できない事に注意してください。トップレベル
 @raise ArgumentError 継承関係が循環してしまうような include を行った場
                      合に発生します。
 
+#@samplecode 例:
+include Math
+
+hypot(3, 4)  # => 5.0
+#@end
+
 @see [[m:Module#include]]
 
 --- define_method(name, method) -> Symbol
