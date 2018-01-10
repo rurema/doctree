@@ -34,6 +34,13 @@ include File::Constants
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@samplecode 例:
+IO.write("testfile", "test")
+File.ctime("testfile") # => 2017-11-30 22:40:49 +0900
+File.chmod(0755, "testfile")
+File.ctime("testfile") # => 2017-11-30 22:42:12 +0900
+#@end
+
 --- mtime(filename)    -> Time
 
 最終更新時刻を返します。
@@ -944,10 +951,10 @@ File.open("testfile") { |f| f.atime } # => 2017-12-21 22:58:17 +0900
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-例:
-  File.ctime(__FILE__) # => 2017-11-30 22:40:49 +0900
-  File.chmod(0755, __FILE__)
-  File.ctime(__FILE__) # => 2017-11-30 22:42:12 +0900
+#@samplecode 例:
+IO.write("testfile", "test")
+File.open("testfile") { |f| f.ctime } # => 2017-12-21 22:58:17 +0900
+#@end
 
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]], [[m:File#birthtime]]
