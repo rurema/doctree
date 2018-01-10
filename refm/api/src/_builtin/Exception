@@ -161,3 +161,26 @@ self の前の例外(self が rescue 節や ensure 節の中で発生した例�
 #@end
 
 #@end
+#@since 2.5.0
+--- full_message  -> String
+例外の整形された文字列を返します。
+
+返される文字列は Ruby が捕捉されなかった例外を標準エラー出力に出力するときと
+同じ形式です。
+そのため、$stderr が変更されておらず、$stderr.tty? が真の場合はエスケープシーケンスによる文字装飾がついています。
+
+[注意] このメソッドは実験的な機能として提供されています。仕様が変更にな
+る可能性があります。
+
+#@samplecode 例
+begin
+  raise "test"
+rescue => e
+  p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+  $stderr = $stdout
+  p e.full_message   # => "test.rb:2:in `<main>': test (RuntimeError)\n"
+  $stderr = STDERR
+  p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+end
+#@end
+#@end
