@@ -152,75 +152,143 @@ self を返します。
   10.to_i   # => 10
 
 #@since 2.4.0
+#@since 2.5.0
+--- floor(ndigits = 0) -> Integer
+#@else
 --- floor(ndigits = 0) -> Integer | Float
+#@end
 
 self と等しいかより小さな整数のうち最大のものを返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-  1.floor        # => 1
-  1.floor(2)     # => 1.0
-  15.floor(-1)   # => 10
+#@samplecode
+1.floor           # => 1
+#@since 2.5.0
+1.floor(2)        # => 1
+#@else
+1.floor(2)        # => 1.0
+#@end
+18.floor(-1)      # => 10
+(-18).floor(-1)   # => -20
+#@end
 
 @see [[m:Numeric#floor]]
 
+#@since 2.5.0
+--- ceil(ndigits = 0) -> Integer
+#@else
 --- ceil(ndigits = 0) -> Integer | Float
+#@end
 
 self と等しいかより大きな整数のうち最小のものを返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-  1.ceil        # => 1
-  1.ceil(2)     # => 1.0
-  15.ceil(-1)   # => 20
+#@samplecode
+1.ceil           # => 1
+#@since 2.5.0
+1.ceil(2)        # => 1
+#@else
+1.ceil(2)        # => 1.0
+#@end
+18.ceil(-1)      # => 20
+(-18).ceil(-1)   # => -10
+#@end
 
 @see [[m:Numeric#ceil]]
 
---- round(ndigits = 0) -> Integer | Float
+#@since 2.5.0
+--- round(ndigits = 0, half: :up) -> Integer
+#@else
+--- round(ndigits = 0, half: :up) -> Integer | Float
+#@end
 
 self ともっとも近い整数を返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+@param half ちょうど半分の値の丸め方を指定します。
+       サポートされている値は以下の通りです。
 
-例:
+ * :up or nil: 0から遠い方に丸められます。
+ * :even: もっとも近い偶数に丸められます。
+ * :down: 0に近い方に丸められます。
 
-  1.round        # => 1
-  1.round(2)     # => 1.0
-  15.round(-1)   # => 20
+#@samplecode
+1.round         # => 1
+#@since 2.5.0
+1.round(2)      # => 1
+#@else
+1.round(2)      # => 1.0
+#@end
+15.round(-1)    # => 20
+(-15).round(-1) #=> -20
+
+25.round(-1, half: :up)      # => 30
+25.round(-1, half: :down)    # => 20
+25.round(-1, half: :even)    # => 20
+35.round(-1, half: :up)      # => 40
+35.round(-1, half: :down)    # => 30
+35.round(-1, half: :even)    # => 40
+(-25).round(-1, half: :up)   # => -30
+(-25).round(-1, half: :down) # => -20
+(-25).round(-1, half: :even) # => -20
+#@end
 
 @see [[m:Numeric#round]]
 
+#@since 2.5.0
+--- truncate(ndigits = 0) -> Integer
+#@else
 --- truncate(ndigits = 0) -> Integer | Float
+#@end
 
 0 から self までの整数で、自身にもっとも近い整数を返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-     1.truncate        # => 1
-     1.truncate(2)     # => 1.0
-     15.truncate(-1)   # => 10
+#@samplecode
+1.truncate           # => 1
+#@since 2.5.0
+1.truncate(2)        # => 1
+#@else
+1.truncate(2)        # => 1.0
+#@end
+18.truncate(-1)      #=> 10
+(-18).truncate(-1)   #=> -10
+#@end
 
 @see [[m:Numeric#truncate]]
 #@end
