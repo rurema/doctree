@@ -151,9 +151,16 @@ true を返します。そうでない場合に false を返します。
   c = Array.instance_method(:size)
   p a == c                            #=> false
 
---- clone -> Method
+--- clone -> UnboundMethod
 
 自身を複製した [[c:UnboundMethod]] オブジェクトを作成して返します。
+
+#@samplecode 例
+a = String.instance_method(:size)
+b = a.clone
+
+a == b       # => true
+#@end
 
 --- inspect -> String
 --- to_s    -> String
@@ -161,6 +168,10 @@ true を返します。そうでない場合に false を返します。
 self を読みやすい文字列として返します。
 
 詳しくは [[m:Method#inspect]] を参照してください。
+
+#@samplecode 例
+String.instance_method(:count).inspect   # => "#<UnboundMethod: String#count>"
+#@end
 
 @see [[m:Method#inspect]]
 
@@ -231,6 +242,9 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 詳しくは [[m:Method#parameters]] を参照してください。
 
+#@#noexample Method#parametersを参照
+
+
 @see [[m:Proc#parameters]], [[m:Method#parameters]]
 #@end
 
@@ -239,6 +253,8 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 self 内で super を実行した際に実行されるメソッドを [[c:UnboundMethod]] オブジェ
 クトにして返します。
+
+#@#noexample Method#super_methodを参照
 
 @see [[m:Method#super_method]]
 #@end

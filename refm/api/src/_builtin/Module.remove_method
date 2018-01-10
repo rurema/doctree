@@ -1,0 +1,23 @@
+#@since 1.8.0
+--- remove_method(*name) -> self
+#@end
+
+インスタンスメソッド name をモジュールから削除します。
+
+#@since 1.8.0
+Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
+#@end
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 指定したメソッドが定義されていない場合に発生します。
+
+  class C
+    def foo
+    end
+
+    remove_method :foo
+    remove_method :no_such_method   # 例外 NameError が発生
+  end
+
+@see [[m:Module#undef_method]]

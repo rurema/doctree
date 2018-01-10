@@ -1,5 +1,11 @@
 = class Data < Object
 
+#@since 2.5.0
+このクラスは deprecated です。
+Fixnum や Bignum が Integer に統合されたように、将来 Object に統合されて
+Ruby スクリプトレベルでは見えなくなる予定です。
+#@end
+
 拡張ライブラリを書く時に new が定義されているとまずい場合が
 あるため、[[c:Object]] から new と allocate を undef したクラスです。
 Ruby スクリプトレベルでは気にする必要は全くありません。

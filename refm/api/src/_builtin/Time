@@ -68,6 +68,7 @@ time で指定した時刻の Time オブジェクトを返します。
 例:
   Time.at(0)                 # => 1970-01-01 09:00:00 +0900
   Time.at(Time.at(0))        # => 1970-01-01 09:00:00 +0900
+  Time.at(Time.at(0).getutc) # => 1970-01-01 00:00:00 UTC
   Time.at(946702800)         # => 2000-01-01 14:00:00 +0900
   Time.at(-284061600)        # => 1960-12-31 15:00:00 +0900
   Time.at(946684800.2).usec  # => 200000
@@ -375,6 +376,11 @@ true を返します。そうでない場合に false を返します。
 戻り値の文字エンコーディングは [[m:Encoding::ASCII_8BIT]] です。
 #@end
 #@end
+
+例:
+  Time.now.asctime            # => "Fri Nov 10 00:00:32 2017"
+  Time.now.asctime.encoding   # => #<Encoding:US-ASCII>
+  Time.now.ctime              # => "Fri Nov 10 00:00:32 2017"
 
 --- gmt?    -> bool
 --- utc?    -> bool

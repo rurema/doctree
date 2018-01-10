@@ -39,3 +39,12 @@ self.flags で [[m:Socket::IFF_BROADCAST]] が有効ではない場合は nil �
 
 self の宛先アドレスを [[c:Addrinfo]] オブジェクトで返します。
 self.flags で [[m:Socket::IFF_POINTOPOINT]] が有効ではない場合は nil を返します。
+
+#@since 2.5.0
+--- vhid -> Integer | nil
+
+self のバーチャルホストIDを返します。
+バーチャルホストIDがない場合は nil を返します。
+
+サポートされていない環境ではメソッド自体が定義されていません。
+#@end

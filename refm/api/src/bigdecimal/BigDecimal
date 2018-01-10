@@ -830,6 +830,9 @@ self の n 乗を計算します。
 @param n selfを other 乗する整数を指定します。
 #@end
 
+#@since 2.5.0
+@see [[m:Integer#pow]]
+#@end
 --- sqrt(n) -> BigDecimal
 
 self の有効桁 n 桁の平方根 (n の平方根ではありません) をニュートン法で
