@@ -77,6 +77,25 @@
 現状では [[m:Exception#set_backtrace]] によって戻り値が変化する事はあり
 ません。
 
+例: test.rb
+  require "date"
+  def check_long_month(month)
+    return if Date.new(2000, month, -1).day == 31
+    raise "#{month} is not long month"
+  end
+
+  def get_exception
+    return begin
+      yield
+    rescue => e
+      e
+    end
+  end
+
+  e = get_exception { check_long_month(2) }
+  p e.backtrace_locations
+  # => ["test.rb:4:in `check_long_month'", "test.rb:15:in `block in <main>'", "test.rb:9:in `get_exception'", "test.rb:15:in `<main>'"]
+
 @see [[m:Exception#backtrace]]
 #@end
 
