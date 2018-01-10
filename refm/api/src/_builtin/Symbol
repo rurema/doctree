@@ -395,7 +395,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#empty?]]
 
+#@since 2.4.0
+--- upcase(*options) -> Symbol
+#@else
 --- upcase -> Symbol
+#@end
 
 小文字を大文字に変換したシンボルを返します。
 
@@ -405,7 +409,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#upcase]]
 
+#@since 2.4.0
+--- downcase(*options) -> Symbol
+#@else
 --- downcase -> Symbol
+#@end
 
 大文字を小文字に変換したシンボルを返します。
 
@@ -415,7 +423,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#downcase]]
 
+#@since 2.4.0
+--- capitalize(*options) -> Symbol
+#@else
 --- capitalize -> Symbol
+#@end
 
 シンボルに対応する文字列の先頭の文字を大文字に、残りを小文字に変更した
 シンボルを返します。
@@ -429,7 +441,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#capitalize]]
 
+#@since 2.4.0
+--- swapcase(*options) -> Symbol
+#@else
 --- swapcase -> Symbol
+#@end
 
 'A' から 'Z' までのアルファベット大文字を小文字に、'a' から 'z' までの
 アルファベット小文字を大文字に変更したシンボルを返します。

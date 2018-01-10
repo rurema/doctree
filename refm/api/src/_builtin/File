@@ -462,6 +462,12 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 
 @raise Errno::EXXX 指定された path がシンボリックリンクでない場合や、リンクの読み取りに失敗した場合に発生します。
 
+#@samplecode 例:
+IO.write("testfile", "test")
+File.symlink("testfile", "testlink")   # => 0
+File.readlink("testlink")              # => "testfile"
+#@end
+
 #@since 1.9.2
 --- realpath(pathname, basedir = nil) -> String
 
@@ -474,6 +480,13 @@ pathname の全てのコンポーネントは存在しなければなりませ�
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリを使用します。
 
 @raise Errno::ENOENT ファイルが存在しない場合に発生します。
+
+例:
+  ENV["HOME"]                     # => "/home/matz"
+  File.symlink("testfile", "testlink")
+  File.realpath("testfile")       # => "/home/matz/testfile"
+  File.realpath("testlink")       # => "/home/matz/testfile"
+  File.realpath("..", "/tmp")     # => "/"
 
 --- realdirpath(pathname, basedir = nil) -> String
 
@@ -533,6 +546,10 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
+例:
+  File.stat("testfile").class   # => File::Stat
+  File.stat("testfile").mtime   # => 2017-12-10 01:13:56 +0900
+
 @see [[m:IO#stat]], [[m:File#lstat]]
 
 --- lstat(filename)   -> File::Stat
@@ -564,6 +581,9 @@ old への new という名前のシンボリックリンクを生成します�
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+  File.symlink("testfile", "testlink")   # => 0
+
 --- truncate(path, length)    -> 0
 
 path で指定されたファイルのサイズを最大 length バイト
@@ -577,6 +597,11 @@ path で指定されたファイルのサイズを最大 length バイト
 @param length 変更したいサイズを整数で与えます。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+例
+  IO.write("testfile", "1234567890")
+  File.truncate("testfile", 5)   # => 0
+  File.size("testfile")          # => 5
 
 --- umask           -> Integer
 
@@ -609,6 +634,18 @@ umask を変更します。変更前の umask の値を返します。
 @return 変更したファイルの数を返します。
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
+
+例: Time を指定
+  atime = Time.new(2018, 1, 2, 3, 4, 5)
+  mtime = Time.new(2018, 2, 3, 4, 5, 6)
+  File.utime(atime, mtime, "testfile")  # => 1
+  File.atime("testfile")                # => 2018-01-02 03:04:05 +0900
+  File.mtime("testfile")                # => 2018-02-03 04:05:06 +0900
+
+例: 経過秒数で指定
+  File.utime(1, 2, "testfile")  # => 1
+  File.atime("testfile")                # => 1970-01-01 09:00:01 +0900
+  File.mtime("testfile")                # => 1970-01-01 09:00:02 +0900
 
 #@since 2.5.0
 @see [[m:File.lutime]]
@@ -888,6 +925,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+#@samplecode 例:
+IO.write("testfile", "test")
+File.open("testfile") { |f| f.atime } # => 2017-12-21 22:58:17 +0900
+#@end
+
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#ctime]], [[m:File#mtime]], [[m:File#birthtime]]
 #@else
@@ -920,6 +962,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 @raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+#@samplecode 例:
+IO.write("testfile", "test")
+File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
+#@end
 
 #@since 2.2.0
 @see [[m:File#lstat]], [[m:File#atime]], [[m:File#ctime]], [[m:File#birthtime]]
@@ -994,6 +1041,11 @@ path が全てのユーザから書き込めるならば、そのファイルの
 @raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
+
+例:
+  File.open("testfile") { |f| f.chown(502, 1000) }  # => 0
+  File.stat("testfile").uid                         # => 502
+  File.stat("testfile").gid                         # => 1000
 
 --- flock(operation)    -> 0 | false
 
@@ -1129,6 +1181,13 @@ flock は false を返します。
 
 @raise IOError 自身が close されている場合に発生します。
 
+例:
+  # testlink は testfile のシンボリックリンク
+  File.open("testlink") do |f|
+      p f.lstat == File.stat("testfile")  # => false
+      p f.stat == File.stat("testfile")   # => true
+  end
+
 @see [[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]]
 
 --- truncate(length)    -> 0
@@ -1141,6 +1200,14 @@ flock は false を返します。
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX サイズの変更に失敗した場合に発生します。
+
+#@samplecode 例
+IO.write("testfile", "1234567890")
+File.open("testfile", "a") do |f|
+  f.truncate(5) # => 0
+  f.size        # => 5
+end
+#@end
 
 == Constants
 
