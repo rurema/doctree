@@ -39,6 +39,8 @@ main では参照できない事に注意してください。トップレベル
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
+#@#noexample 明示的に呼び出される機会がないため
+
 @see [[m:Module#private]]
 
 --- to_s    -> "main"
