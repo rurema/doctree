@@ -31,10 +31,10 @@ include Enumerable
 
 ただし、 更新不可 ([[m:Object#frozen?]] が true) では無い文字列をキーとして与えた場合は、文字列をコピーし、コピーを更新不可に設定 ([[m:Object#freeze]]) してキーとして
 使用します。この為、キーとして使われている文字列を更新しようとすると例外 
-#@since 1.9.1
-[[c:RuntimeError]] 
+#@since 2.5.0
+[[c:FrozenError]]
 #@else
-[[c:TypeError]] 
+[[c:RuntimeError]]
 #@end
 が発生するので rehash を呼ぶ必要性は生じません。
 
@@ -206,7 +206,11 @@ ifnoneを省略した Hash.new は {} と同じです。
   h = Hash.new([].freeze)
   h[0] += [0] #破壊的でないメソッドはOK
   h[1] << 1
-  # エラー `<<': can't modify frozen array (TypeError)
+#@since 2.5.0
+  # エラー: can't modify frozen Array (FrozenError)
+#@else
+  # エラー: can't modify frozen Array (RuntimeError)
+#@end
 
 --- new {|hash, key| ... } -> Hash
 空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
