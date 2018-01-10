@@ -165,6 +165,30 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
+@see [[m:Dir.foreach]]
+#@since 2.5.0
+@see [[m:Dir.children]]
+--- children(path)                -> [String]
+--- children(path, encoding: enc) -> [String]
+
+ディレクトリ path に含まれるファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@param encoding ディレクトリのエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+
+  Dir.children('.') #=> ["bar", "foo"]
+
+@see [[m:Dir.each_child]]
+@see [[m:Dir.entries]]
+#@end
 --- foreach(path) {|file| ...}                                        -> nil
 --- foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
 --- foreach(path)                                                     -> Enumerator
@@ -194,6 +218,40 @@ path を省略した場合、環境変数 HOME または LOGDIR
   "bar"
   "foo"
 
+@see [[m:Dir.entries]]
+#@since 2.5.0
+@see [[m:Dir.each_child]]
+--- each_child(path) {|file| ...}                -> nil
+--- each_child(path, encoding: enc) {|file| ...} -> nil
+--- each_child(path)                             -> Enumerator
+--- each_child(path, encoding: enc)              -> Enumerator
+
+ディレクトリ path の "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[[c:Enumerator]] オブジェクトを返します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@param encoding ディレクトリのエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+
+  Dir.each_child('.'){|f|
+    p f
+  }
+  #=>
+  "bar"
+  "foo"
+
+@see [[m:Dir.foreach]]
+@see [[m:Dir.children]]
+#@end
 --- getwd    -> String
 --- pwd      -> String
 
