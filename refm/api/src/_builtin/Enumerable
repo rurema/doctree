@@ -9,6 +9,9 @@
 #@since 1.8.0
 --- all?               -> bool
 --- all? {|item| ... } -> bool
+#@since 2.5.0
+--- all?(pattern)      -> bool
+#@end
 
 すべての要素が真である場合に true を返します。
 偽である要素があれば、ただちに false を返します。
@@ -17,16 +20,26 @@
 が真である場合に true を返します。ブロックが偽を返した時点で、
 ただちに false を返します。
 
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
 例:
     # すべて正の数か？
     p [5,  6, 7].all? {|v| v > 0 }   # => true
     p [5, -1, 7].all? {|v| v > 0 }   # => false
     p [].all? {|v| v > 0 }           # => true
+#@since 2.5.0
+    p %w[ant bear cat].all?(/t/)     # => false
+#@end
 #@end
 
 #@since 1.8.0
 --- any?               -> bool
 --- any? {|item| ... } -> bool
+#@since 2.5.0
+--- any?(pattern)      -> bool
+#@end
 
 すべての要素が偽である場合に false を返します。
 真である要素があれば、ただちに true を返します。
@@ -35,10 +48,20 @@
 が偽である場合に false を返します。ブロックが真を返した時点
 で、ただちに true を返します。
 
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
 例:
     p [1, 2, 3].any? {|v| v > 3 }   # => false
     p [1, 2, 3].any? {|v| v > 1 }   # => true
     p [].any? {|v| v > 0 }          # => false
+#@since 2.5.0
+    p %w[ant bear cat].any?(/d/)    # => false
+    p [nil, true, 99].any?(Integer) # => true
+    p [nil, true, 99].any?          # => true
+    p [].any?                       # => false
+#@end
 #@end
 
 #@since 1.9.1
@@ -158,6 +181,16 @@ self を返します。
 真になった値の配列を返すような [[c:Enumerator]] を返します。
 #@end
 
+例:
+  (1..10).find_all                        # => #<Enumerator: 1..10:find_all>
+  (1..10).find_all { |i| i % 3 == 0 }     # => [3, 6, 9]
+
+  [1,2,3,4,5].select                      # => #<Enumerator: [1, 2, 3, 4, 5]:select>
+  [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
+
+@see [[m:Enumerable#reject]]
+@see [[m:Enumerable#grep]]
+
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
 
@@ -178,6 +211,7 @@ pattern === item が成立する要素を全て含んだ配列を返します。
   Array.instance_methods.grep(/gr/) # => ["group_by", "grep"]
 #@end
 
+@see [[m:Enumerable#select]]
 #@since 2.3.0
 @see [[m:Enumerable#grep_v]]
 
@@ -196,6 +230,7 @@ pattern === item が成立する要素を全て含んだ配列を返します。
   res                   # => [2, 12, 14, 16, 18, 20]
 
 @see [[m:Enumerable#grep]]
+@see [[m:Enumerable#reject]]
 #@end
 
 #@since 1.8.0
@@ -255,6 +290,12 @@ val と == の関係にある要素を含むとき真を返します。
 
 @param val   任意のオブジェクト
 
+例:
+  IO.constants.include? :SEEK_SET          #=> true
+  IO.constants.include? :SEEK_NO_FURTHER   #=> false
+  IO.constants.member? :SEEK_SET           #=> true
+  IO.constants.member? :SEEK_NO_FURTHER    #=> false
+
 --- max    -> object | nil
 #@since 2.2.0
 --- max(n) -> Array
@@ -275,6 +316,13 @@ val と == の関係にある要素を含むとき真を返します。
 
 #@since 2.2.0
 @param n 取得する要素数。
+#@end
+
+例:
+  a = %w(albatross dog horse)
+  a.max                        # => "horse"
+#@since 2.2.0
+  a.max(2)                     # => ["horse", "dog"]
 #@end
 
 --- max {|a, b| ... }    -> object | nil
@@ -300,6 +348,36 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 #@end
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
+
+例:
+  class Person
+    attr_reader :name, :age
+
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  people = [
+    Person.new("sato", 55),
+    Person.new("sato", 33),
+    Person.new("sato", 11),
+    Person.new("suzuki", 55),
+    Person.new("suzuki", 33),
+    Person.new("suzuki", 11),
+    Person.new("tanaka", 55),
+    Person.new("tanaka", 33),
+    Person.new("tanaka", 11)
+  ]
+
+  # 年齢が最大、名前が最小
+  people.max { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => #<Person:0x007fc54b0240a0 @name="sato", @age=55>
+#@since 2.2.0
+  people.max(2) { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => [#<Person:0x007fc54b0240a0 @name="sato", @age=55>, #<Person:0x007fc54c033ea0 @name="suzuki", @age=55>]
+#@end
 
 #@since 1.8.7
 #@since 1.9.1
@@ -340,6 +418,60 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.max_by                    # => #<Enumerator: ["albatross", "dog", "horse"]:max_by>
+  a.max_by { |x| x.length }   # => "albatross"
+
+#@since 2.2.0
+例:
+  a = %w[albatross dog horse]
+  a.max_by(2)                 # => #<Enumerator: ["albatross", "dog", "horse"]:max_by(2)>
+  a.max_by(2) {|x| x.length } # => ["albatross", "horse"]
+
+例: enum.max_by（n）は、重み付きランダムサンプリングを実装するために使用できます。次の実装例は、Enumerable#wsampleを使用します。
+  module Enumerable
+    # weighted random sampling.
+    #
+    # Pavlos S. Efraimidis, Paul G. Spirakis
+    # Weighted random sampling with a reservoir
+    # Information Processing Letters
+    # Volume 97, Issue 5 (16 March 2006)
+    def wsample(n)
+      self.max_by(n) {|v| rand ** (1.0/yield(v)) }
+    end
+  end
+  e = (-20..20).to_a*10000
+  a = e.wsample(20000) {|x|
+    Math.exp(-(x/5.0)**2) # normal distribution
+  }
+  # a is 20000 samples from e.
+  p a.length #=> 20000
+  h = a.group_by {|x| x }
+  -10.upto(10) {|x| puts "*" * (h[x].length/30.0).to_i if h[x] }
+  #=> *
+  #   ***
+  #   ******
+  #   ***********
+  #   ******************
+  #   *****************************
+  #   *****************************************
+  #   ****************************************************
+  #   ***************************************************************
+  #   ********************************************************************
+  #   ***********************************************************************
+  #   ***********************************************************************
+  #   **************************************************************
+  #   ****************************************************
+  #   ***************************************
+  #   ***************************
+  #   ******************
+  #   ***********
+  #   *******
+  #   ***
+  #   *
+#@end
+
 @see [[m:Enumerable#sort_by]]
 
 #@end
@@ -366,6 +498,13 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.min                                # => "albatross"
+#@since 2.2.0
+  a.min(2)                             # => ["albatross", "dog"]
+#@end
+
 --- min {|a, b| ... }    -> object | nil
 #@since 2.2.0
 --- min(n) {|a, b| ... } -> Array
@@ -386,6 +525,38 @@ a < b のとき負の整数を、期待しています。
 
 #@since 2.2.0
 @param n 取得する要素数。
+#@end
+
+
+例:
+  class Person
+    attr_reader :name, :age
+
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  people = [
+    Person.new("sato", 55),
+    Person.new("sato", 33),
+    Person.new("sato", 11),
+    Person.new("suzuki", 55),
+    Person.new("suzuki", 33),
+    Person.new("suzuki", 11),
+    Person.new("tanaka", 55),
+    Person.new("tanaka", 33),
+    Person.new("tanaka", 11)
+  ]
+
+  # 年齢が最小、名前が最大
+  people.min { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => #<Person:0x007fd6f0824190 @name="tanaka", @age=11>
+
+#@since 2.2.0
+  people.min(2) { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => [#<Person:0x007fb5899ef4a8 @name="tanaka", @age=11>, #<Person:0x007fb5899ef728 @name="suzuki", @age=11>]
 #@end
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
@@ -428,6 +599,15 @@ a < b のとき負の整数を、期待しています。
 
 #@since 2.2.0
 @param n 取得する要素数。
+#@end
+
+例:
+  a = %w(albatross dog horse)
+  a.min_by                    # => #<Enumerator: ["albatross", "dog", "horse"]:min_by>
+  a.min_by { |x| x.length }   # => "dog"
+#@since 2.2.0
+  a.min_by(2)                 # => #<Enumerator: ["albatross", "dog", "horse"]:min_by(2)>
+  a.min_by(2) {|x| x.length } # => ["dog", "horse"]
 #@end
 
 @see [[m:Enumerable#sort_by]]
@@ -483,6 +663,9 @@ a < b のとき負の整数を、期待しています。
   [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
 
 @see [[m:Enumerable#select]]
+#@since 2.3.0
+@see [[m:Enumerable#grep_v]]
+#@end
 
 --- sort               -> [object]
 --- sort {|a, b| ... } -> [object]
@@ -504,6 +687,10 @@ Enumerable#sort は安定ではありません (unstable sort)。
 
 ※ 比較結果が同じ要素は元の順序通りに並ぶソートを
 「安定なソート (stable sort)」と言います。
+
+例:
+  %w(rhea kea flea).sort           # => ["flea", "kea", "rhea"]
+  (1..10).sort { |a, b| b <=> a }  # => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 @see [[m:Enumerable#sort_by]]
 
@@ -586,6 +773,13 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 全ての要素を含む配列を返します。
 
 @param args each の呼び出し時に引数として渡されます。
+
+例:
+  (1..7).to_a                       #=> [1, 2, 3, 4, 5, 6, 7]
+  { 'a'=>1, 'b'=>2, 'c'=>3 }.to_a   #=> [["a", 1], ["b", 2], ["c", 3]]
+
+  require 'prime'
+  Prime.entries 10                  #=> [2, 3, 5, 7]
 
 #@since 2.1.0
 --- to_h(*args) -> Hash
@@ -940,14 +1134,25 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 ブロックで評価した結果が、すべて偽であれば真を返します。
 そうでなければ偽を返します。
 
-   %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
-   %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
-   [].none?                                          #=> true
-   [nil].none?                                       #=> true
-   [nil,false].none?                                 #=> true
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
+   %w{ant bear cat}.none? {|word| word.length == 5}  # => true
+   %w{ant bear cat}.none? {|word| word.length >= 4}  # => false
+#@since 2.5.0
+   %w{ant bear cat}.none?(/d/)                       # => true
+#@end
+   [].none?                                          # => true
+   [nil].none?                                       # => true
+   [nil,false].none?                                 # => true
+   [nil, false, true].none?                          # => false
 
 --- one?                -> bool
 --- one?{|obj| ... }    -> bool
+#@since 2.5.0
+--- one?(pattern)       -> bool
+#@end
 
 ブロックを指定しない場合は、 Enumerable オブジェクトの要素のうち
 ちょうど一つだけが真であれば、真を返します。
@@ -957,10 +1162,21 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 ブロックで評価した結果、一つの要素だけが真であれば真を返します。
 そうでなければ偽を返します。
 
-   %w{ant bear cat}.one? {|word| word.length == 4}   #=> true
-   %w{ant bear cat}.one? {|word| word.length > 4}   #=> false
-   [ nil, true, 99 ].one?                            #=> false
-   [ nil, true, false ].one?                         #=> true
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
+   %w{ant bear cat}.one? {|word| word.length == 4}   # => true
+   %w{ant bear cat}.one? {|word| word.length > 4}    # => false
+#@since 2.5.0
+   %w{ant bear cat}.one?(/t/)                        # => false
+#@end
+   [ nil, true, 99 ].one?                            # => false
+   [ nil, true, false ].one?                         # => true
+#@since 2.5.0
+   [ nil, true, 99 ].one?(Integer)                   # => true
+#@end
+   [].one?                                           # => false
 
 --- take(n)               -> Array
 
@@ -1004,6 +1220,13 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 ブロックを省略した場合は、各要素を逆順に辿る
 [[c:Enumerator]] を返します。
 #@end
+
+例:
+  (1..3).reverse_each # => #<Enumerator: 1..3:reverse_each>
+  (1..3).reverse_each { |v| p v }
+  # => 3
+  #    2
+  #    1
 
 #@end
 #@since 1.9.1
@@ -1497,4 +1720,31 @@ nil、 :_separator はある要素を無視したい場合に用います。
   p pythagorean_triples.take_while { |*, z| z < 100 }.force
 
 @see [[c:Enumerator::Lazy]]
+#@end
+#@since 2.4.0
+--- sum(init=0)                    -> object
+--- sum(init=0) {|e| expr }        -> object
+
+要素の合計を返します。
+
+ブロックが与えられた場合、加算する前に各要素にブロックが適用されます。
+
+selfが空の場合、initを返します。
+
+例:
+  { 1 => 10, 2 => 20 }.sum {|k, v| k * v }  # => 50
+  (1..10).sum                               # => 55
+  (1..10).sum {|v| v * 2 }                  # => 110
+  [Object.new].each.sum                     # => TypeError
+
+init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。
+
+例:
+  { 1 => 10, 2 => 20 }.sum([])                   #=> [1, 10, 2, 20]
+  "a\nb\nc".each_line.lazy.map(&:chomp).sum("")  #=> "abc"
+  [[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
+
+"+" メソッドが再定義されている場合、Enumerable#sum は再定義を無視することがあります(例えばInteger#+)。
+
+@see [[m:Array#sum]]
 #@end

@@ -15,11 +15,11 @@ XML-RPC クライアントのためのライブラリです。
 
   puts "Sum: #{sum}, Difference: #{difference}"
 
-==== Client with XML-RPC fault-structure handling
+=== Client with XML-RPC fault-structure handling
 
 There are two possible ways, of handling a fault-structure:
 
-===== by catching a XMLRPC::FaultException exception 
+==== by catching a XMLRPC::FaultException exception
 
   require "xmlrpc/client"
 
@@ -41,7 +41,7 @@ There are two possible ways, of handling a fault-structure:
     puts e.faultString
   end
    
-===== by calling "call2" which returns a boolean
+==== by calling "call2" which returns a boolean
 
   require "xmlrpc/client"
 
@@ -62,7 +62,7 @@ There are two possible ways, of handling a fault-structure:
     puts result.faultString
   end
    
-==== Client using Proxy
+=== Client using Proxy
 
 You can create a +Proxy+ object onto which you can call methods. This way it
 looks nicer. Both forms, _call_ and _call2_ are supported through _proxy_ and

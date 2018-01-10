@@ -166,7 +166,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 @return STDIN.sync の値を返すだけなので返り値に意味はありません。
 
 
-===== フォーマット文字列
+=== フォーマット文字列
 
 フォーマット文字列として以下が使用できます。
 
@@ -185,7 +185,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 : %n
   ラベルで置き換えられます(Mnemonic: n of "*n*ame")。[[m:Benchmark::Tms#label]]
 
-===== 例
+=== 例
 
   require 'benchmark'
   

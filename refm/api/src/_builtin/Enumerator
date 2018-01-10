@@ -395,7 +395,7 @@ obj には任意のオブジェクトを渡すことができます。
 ブロックが渡されなかった場合は、上で説明した繰り返しを実行し、
 最後に obj を返す [[c:Enumerator]] を返します。
 
-==== 例
+=== 例
   # 0,1,2 と呼びだす enumeratorを作る
   to_three = Enumerator.new do |y|
     3.times do |x|

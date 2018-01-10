@@ -957,7 +957,7 @@ FTP の応答コード 5yz
 [[m:Net::FTP#mlsd]]、[[m:Net::FTP#mlst]] の結果を保持する
 クラスです。
 
-==== Notes
+=== Notes
 
 このクラスのオブジェクトが保持している permission の情報
 ([[m:Net::FTP::MLSxEntry#deletable?]] など)は

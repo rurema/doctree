@@ -43,14 +43,55 @@
 
 例外オブジェクトを文字列に変換して返します。
 
+例:
+
+  begin
+    foobar
+  rescue NameError => err
+    p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
+    p err.to_s  # => "undefined local variable or method `foobar' for main:Object"
+  end
+
 #@since 2.3.0
 --- receiver -> object
 
 self が発生した時のレシーバオブジェクトを返します。
+
+例:
+
+  class Sample
+    def foo
+      return "foo"
+    end
+  end
+
+  bar = Sample.new
+  begin
+    bar.bar
+  rescue NameError => err
+    p err.receiver  # => #<Sample:0x007fd4d89b3110>
+    p err.receiver.foo  # => "foo"
+  end
 
 --- local_variables -> [Symbol]
 
 self が発生した時に定義されていたローカル変数名の一覧を返します。
 
 内部での使用に限ります。
+
+例:
+
+  def foo
+    begin
+      b = "bar"
+      c = 123
+      d
+    rescue NameError => err
+      p err.local_variables #=> [:b, :c, :err]
+    end
+  end
+
+  a = "buz"
+  foo
+
 #@end

@@ -124,7 +124,7 @@ filename はパース中に発生した例外のメッセージに用います�
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.parse]]
 
-==== 例
+=== 例
   Psych.load("--- a")           # => 'a'
   Psych.load("---\n - a\n - b") # => ['a', 'b']
 
@@ -199,7 +199,7 @@ AST については [[c:Psych::Nodes]] を参照してください。
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.load]]
 
-==== 例
+=== 例
 
   Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
 
@@ -236,7 +236,7 @@ yaml が 複数の YAML ドキュメントを含む場合を取り扱うこと�
 
 @see [[c:Psych::Nodes]]
 
-==== 例
+=== 例
   Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
 
 --- dump(o, options = {}) -> String
@@ -256,7 +256,7 @@ options で出力に関するオプションを以下の指定できます。
 @param io 出力先
 @param options 出力オプション
 
-==== 例
+=== 例
 
   # Dump an array, get back a YAML string
   Psych.dump(['a', 'b'])  # => "---\n- a\n- b\n"
@@ -275,7 +275,7 @@ options で出力に関するオプションを以下の指定できます。
 
 @param objects 変換対象のオブジェクト列
 
-==== 例
+=== 例
   Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
 
 --- to_json(o) -> String

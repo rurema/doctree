@@ -42,6 +42,10 @@ self <=> other で例外が発生した場合は例外を無視して false を�
 
 @param other 自身と比較したいオブジェクトを指定します。
 
+例:
+  1 == 1   # => true
+  1 == 2   # => false
+
 --- >(other)    -> bool
 
 #@if (version < "1.8.0")
@@ -56,6 +60,10 @@ self が other より大きい時真を返します。
 #@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
+
+例:
+  1 > 0   # => true
+  1 > 1   # => false
 
 --- >=(other)    -> bool
 
@@ -72,6 +80,11 @@ self が other より大きいか等しい時真を返します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
+例:
+  1 >= 0   # => true
+  1 >= 1   # => true
+  1 >= 2   # => false
+
 --- <(other)    -> bool
 
 #@if (version < "1.8.0")
@@ -87,6 +100,10 @@ self が other より小さい時真を返します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
+例:
+  1 < 1   # => false
+  1 < 2   # => true
+
 --- <=(other)    -> bool
 
 #@if (version < "1.8.0")
@@ -101,6 +118,11 @@ self が other より小さいか等しい時真を返します。
 #@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
+
+例:
+  1 <= 0   # => false
+  1 <= 1   # => true
+  1 <= 2   # => true
 
 --- between?(min, max)    -> bool
 
@@ -128,3 +150,21 @@ self が min と max の範囲内(min, max
   6.between?(1, 5)               #=> false
   'cat'.between?('ant', 'dog')   #=> true
   'gnu'.between?('ant', 'dog')   #=> false
+
+#@since 2.4.0
+--- clamp(min, max)  -> object
+
+self を範囲内に収めます。
+
+self <=> min が負数を返したときは min を、
+self <=> max が正数を返したときは max を、
+それ以外の場合は self を返します。
+
+例:
+  12.clamp(0, 100)         #=> 12
+  523.clamp(0, 100)        #=> 100
+  -3.123.clamp(0, 100)     #=> 0
+
+  'd'.clamp('a', 'f')      #=> 'd'
+  'z'.clamp('a', 'f')      #=> 'f'
+#@end

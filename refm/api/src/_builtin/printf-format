@@ -1,4 +1,4 @@
-==== sprintf フォーマット
+=== sprintf フォーマット
 
 Ruby の sprintf フォーマットは基本的に C 言語の [[man:sprintf(3)]]
 のものと同じです。ただし、short や long などの C 特有の型に対する修飾子が
@@ -24,7 +24,7 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
 
 以下それぞれの要素に関して説明します。
 
-==== フラグ
+=== フラグ
 
 フラグには #, +, ' '(スペース), -, 0 の5種類があります。
 
@@ -38,7 +38,7 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
  C 言語とは異なり引数が 0 の場合にもプレフィックスが付加されます。
 #@end
 
-//emlist{
+#@samplecode
   p sprintf("%#b", 10) #=> "0b1010"
   p sprintf("%#B", 10) #=> "0B1010"
 #@since 1.9.1
@@ -49,23 +49,23 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
   p sprintf("%#o", 10) #=> "012"
   p sprintf("%#x", 10) #=> "0xa"
   p sprintf("%#X", 10) #=> "0XA"
-//}
+#@end
 
  浮動小数点数 (f, e, E, g, G) に対しては必ず出力に"."をつけます。
 
-//emlist{
+#@samplecode
   p sprintf("%.0f", 10) #=> "10"
   p sprintf("%#.0f", 10) #=> "10."
   p sprintf("%.0e", 10) #=> "1e+01"
   p sprintf("%#.0e", 10) #=> "1.e+01"
-//}
+#@end
 
  また g, G では上記に加えて末尾の余分な0が残ります。
 
-//emlist{
+#@samplecode
   p sprintf("%.05g", 10) #=> "10"
   p sprintf("%#.05g", 10) #=> "10.000"
-//}
+#@end
 
 : +
 
@@ -76,20 +76,20 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
  また、特に b, B, o, x, X, u に対しては、負数に対して "-"
  を付加することを示します。
 
-//emlist{
+#@samplecode
   p sprintf("%d", 1)   #=> "1"
   p sprintf("%+d", 1)  #=> "+1"
 
   p sprintf("%x", -1)  #=> "..f"  # ".." は無限に f が続くことを表している
   p sprintf("%+x", -1) #=> "-1"
-//}
+#@end
 
 : ' '(スペース)
 
  `+' と同じですが正の符号 `+' の代わりに空白を用います。数値の指示子
  (d, i, b, B, o, x, X, u, f, e, E, g, G)
  に対してだけ意味を持ちます。
-//emlist{
+#@samplecode
   p sprintf("%d", 1)   #=> "1"
   p sprintf("%+d", 1)  #=> "+1"
   p sprintf("% d", 1)  #=> " 1"
@@ -97,7 +97,7 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
   p sprintf("%x", -1)  #=> "..f"
   p sprintf("% x", 1)  #=> " 1"
   p sprintf("% x", -1) #=> "-1"
-//}
+#@end
 
 : -
 
@@ -110,33 +110,33 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
 
  数値の指示子の一部(d, i, b, B, o, x, X, u, f, g, G)に対し
  てだけ意味を持ちます(e, E には意味がない)
-//emlist{
+#@samplecode
   p sprintf("%010d", 10)   #=> "0000000010"
-//}
+#@end
  `#' と一緒に指定した場合の出力は以下のようになります。
-//emlist{
+#@samplecode
   p sprintf("%#010x", 10)  #=> "0x0000000a"
   p sprintf("%#010o", 10)  #=> "0000000012"
   p sprintf("%#010b", 10)  #=> "0b00001010"
-//}
+#@end
 
  これは、以下と同じです。
 
-//emlist{
+#@samplecode
   p sprintf("%#10.8x", 10) #=> "0x0000000a"
   p sprintf("%#10.9o", 10) #=> "0000000012"
   p sprintf("%#10.8b", 10) #=> "0b00001010"
-//}
+#@end
 
  通常は、以下のようになります。
 
-//emlist{
+#@samplecode
   p sprintf("%#10x", 10)   #=> "       0xa"
   p sprintf("%#10o", 10)   #=> "       012"
   p sprintf("%#10b", 10)   #=> "    0b1010"
-//}
+#@end
 
-==== 幅
+=== 幅
 
 0以外の数字で始まる数字列は幅指定になります。幅は生成文字列の長さを示
 します。後述の精度の値によらずこの幅分だ
@@ -145,61 +145,75 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
 幅の指定はフラグで付与される " ", "+",
 "-", "0b", "0B", "0", "0x", "0X" の長さも考慮されます。
 
+#@samplecode
   p sprintf("%+5d", 11)  #=> "  +11"
   p sprintf("%+-5d", 11) #=> "+11  "
   p sprintf("%+05d", 11) #=> "+0011"
+#@end
 
 幅は「最低限必要な幅」の指定になります。結果の文字列が指定した幅を超
 える場合は幅の指定は無効になります。
 
 幅として `*' を指定すると幅の値を引数から得ることになります。
 
+#@samplecode
   p sprintf("%#05x", 10)    #=> "0x00a"
   p sprintf("%#0*x", 5, 10) #=> "0x00a"
+#@end
 
-==== 精度
+=== 精度
 
 "." の後に続く数字列は精度を表します("." のみの場合 ".0" と同じです)。精度は
 整数の指示子
 (d, i, b, B, o, x, X, u)
 に対しては、数値列部分の長さを意味します。
 
+#@samplecode
   p sprintf("%10.5d", 1)  #=> "     00001"
   p sprintf("%#10.5x", 1) #=> "   0x00001"
   p sprintf("%+10.5x", 1) #=> "    +00001"
+#@end
 
 浮動小数点数の指示子
 (f)
 に対しては小数部の桁数を意味します。
 
+#@samplecode
   p sprintf("%10.5f", 1)   #=> "   1.00000"
   p sprintf("%10.5f", 10)  #=> "  10.00000"
+#@end
 
 浮動小数点数の指示子
 (e, E, g, G)
 に対しては有効桁数を意味します。
 
+#@samplecode
   p sprintf("%10.5e", 1)   #=> "1.00000e+00"
   p sprintf("%10.5e", 10)  #=> "1.00000e+01"
   p sprintf("%10.5g",  10)  #=> "        10"
   p sprintf("%#10.5G", 10)  #=> "    10.000"
+#@end
 
 文字列の指示子(s, p)
 に対しては引数の文字列のうち指定した数を超える分を切り捨てます。
 幅と精度を同じ値にすれば、どのような引数に対してもその
 長さだけの出力を行うことになります。
 
+#@samplecode
   p sprintf("%10.2s", "foo")  #=> "        fo"
 
   p sprintf("%5.5s", "foo")     #=> "  foo"
   p sprintf("%5.5s", "foobar")  #=> "fooba"
+#@end
 
 精度として `*' を指定すると精度の値を引数から得ることになります。
 
+#@samplecode
   p sprintf("%.5s", "foobar")    #=> "fooba"
   p sprintf("%.*s", 5, "foobar") #=> "fooba"
+#@end
 
-==== 指示子
+=== 指示子
 
 指示子は引数の型の解釈を示します。指示子を省略することはできません。
 指示子には大きく分けて
@@ -216,14 +230,14 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
  引数が数値以外のオブジェクトの場合 to_int メソッドによる変換を試みます。
 #@since 1.9.1
  引数として範囲内の一文字の文字列も受けつけます。文字そのものを出力します。
-//emlist{
+#@samplecode
   p sprintf("%c", 97)  #=> "a"
   p sprintf("%c", 'a') #=> "a"
-//}
+#@end
 #@else
-//emlist{
+#@samplecode
   p sprintf("%c", 97)  #=> "a"
-//}
+#@end
 #@end
 
  フラグ `-' と幅 の指定だけが意味を持ちます。
@@ -239,10 +253,10 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
 : p
 
  [[m:Object#inspect]] の結果を出力します。
-//emlist{
+#@samplecode
   p sprintf("%s", /e+/)  #=> "(?-mix:e+)"
   p sprintf("%p", /e+/)  #=> "/e+/"
-//}
+#@end
 
 #@end
 
@@ -254,16 +268,16 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
  引数が整数でなければ関数 [[m:Kernel.#Integer]] と同じ規則で整数に
  変換されます。
 
-//emlist{
+#@samplecode
   p sprintf("%d", -1) #=> "-1"
   p sprintf("%d", 3.1) #=> "3"
   p sprintf("%d", '0b1010') #=> "10"
-//}
+#@end
 
 : u
 
  引数の数値を符号なし整数とみなして10進表現の整数として出力します。
-//emlist{
+#@samplecode
 #@since 1.9.1
   p sprintf("%u", '0b1010') #=> "10"
   p sprintf("%u", -1) #=> "-1"
@@ -272,7 +286,7 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
   p sprintf("%u", -1) #=> "..4294967295" (warning)
 #@#は、p ".." + 0xffff_ffff.to_s を出力しています。
 #@end
-//}
+#@end
 
 #@#'%u' は、引数を固定長の整数とみなし、負の整数 n に対して
 #@#  printf("%u", n)
@@ -294,7 +308,7 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
  "0x" などの後)に付加されます。これは最上位桁の文字が無限に続くことを
  意味し、2の補数表現で負の数を表しています。
 
-//emlist{
+#@samplecode
    p sprintf("%#b", 10)    #=> "0b1010"
    p sprintf("%#B", 10)    #=> "0B1010"
    p sprintf("%#o", 10)    #=> "012"
@@ -316,7 +330,7 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
    # 「精度」を指定した場合、".." は付加されません 
    p sprintf("%.10x", -1)  #=> "ffffffffff" 
 #@end 
-//}
+#@end
 
 : f
 : e
@@ -339,16 +353,16 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
 #@since 1.9.2
  a, A は指数表現の16進数("-h.hhh±pd") で数値を出力します。ただし、[[m:Float::INFINITY]]、[[m:Float::NAN]] はそれぞれ 'Inf'、'NaN' になります。詳しくは [[ruby-dev:40650]] を参照してください。
 
-//emlist{
+#@samplecode
   p sprintf("%a", -0.0)            # => "-0x0p+0"
   p sprintf("%a", 729.0/10)        # => "0x1.239999999999ap+6"
   p sprintf("%a", Float::INFINITY) # => "Inf"
-//}
+#@end
 #@end
 
 
  大文字の指示子(E, G)は出力のアルファベットを大文字にします。
-//emlist{
+#@samplecode
   p sprintf("%f", 1.0) #=> "1.000000"
   p sprintf("%e", 1.0) #=> "1.000000e+00"
   p sprintf("%g", 1.0) #=> "1"
@@ -359,11 +373,11 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
   
   p sprintf("%g", 10 ** 6)  #=> "1e+06"
   p sprintf("%g", 10 ** -5) #=> "1e-05"
-//}
+#@end
  精度の省略値は 6 です。
 
  無限大、NaN(Not a Number) に対する出力は以下のとおりです。
-//emlist{
+#@samplecode
   p sprintf("%f",  1.0/0)  #=> "inf"
   p sprintf("%f", -1.0/0)  #=> "-inf"
   p sprintf("%f",  0.0/0)  #=> "nan"
@@ -371,26 +385,26 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
   p sprintf("%E",  1.0/0)  #=> "INF"
   p sprintf("%E", -1.0/0)  #=> "-INF"
   p sprintf("%E",  0.0/0)  #=> "NAN"
-//}
+#@end
  f, e, E, g, G に関しては [[man:sprintf(3)]] の結果を利用しています。従って出力結果は
  実際にはシステムに依存することになります。
 
-==== 引数指定
+=== 引数指定
 
 利用頻度が低いので最後に説明します。
 
 : nth$
 
  nth 番目の引数のフォーマットを行うことを示します。
-//emlist{
+#@samplecode
   p sprintf("%d, %x, %o", 1, 2, 3) #=> "1, 2, 3"
   p sprintf("%3$d, %2$x, %1$o", 1, 2, 3) #=> "3, 2, 1"
   
   p sprintf("%1$d, %1$x, %1$o", 10) #=> "10, a, 12"
-//}
+#@end
  状況によってフォーマットを変えたいが引数の順序を変えたくない場合に使
  用します。
-//emlist{
+#@samplecode
   case ENV['LC_TIME']
   when /^ja_JP/
     fmt = "%1$d年%2$d月%3$d日"
@@ -399,30 +413,30 @@ Ruby には整数の大きさに上限がないので、%b, %B, %o, %x, %X
   end
 
   p sprintf(fmt, 1, 4, 22) #=> "04/22/01"
-//}
+#@end
  "*" の後に指定することで幅や
  精度を引数で指定することもできます。
-//emlist{
+#@samplecode
   p sprintf("%5.2f", 1)              #=> " 1.00"
   p sprintf("%*.*f", 5, 2, 1)        #=> " 1.00"
   p sprintf("%1$*2$.*3$f", 1, 5, 2)  #=> " 1.00"
-//}
+#@end
 #@since 1.9.1
 
 : %<name>
 
  Symbol のインスタンス name をキーとする Hash を引数にした場合、
  対応する値をフォーマットして参照します。
-//emlist{
+#@samplecode
   p sprintf('%<foo>f : %<bar>+d', foo: 1, bar: 2) #=> "1.000000 : +2"
-//}
+#@end
 
 : %{name}
 
  Symbol のインスタンス name をキーとする Hash を引数にした場合、
  対応する値をフォーマットせずに参照します。
  幅や精度を指定するために使用することができます。
-//emlist{
+#@samplecode
   p sprintf('%{foo}f : %{bar}+d', foo: 1, bar: 2) #=> "1f : 2+d"
-//}
+#@end
 #@end

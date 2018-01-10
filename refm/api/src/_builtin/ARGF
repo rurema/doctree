@@ -157,6 +157,25 @@ self をバイナリモードにします。一度バイナリモードになっ
  * 文字エンコーディングの変換を停止する
  * 内容を ASCII-8BIT として扱う
 
+例:
+  # test1.png - 164B
+  # test2.png - 128B
+  # test1.png + test2.png = 292B
+
+  # $ ruby test.rb test1.png test2.png
+
+  ARGF.binmode
+  ARGF.read.size  # => 292
+
+例:
+  # test1.png - 164B
+  # test2.png - 128B
+  # test1.png + test2.png = 292B
+
+  # $ ruby test.rb test1.png test2.png
+
+  ARGF.read.size  # => 290
+
 @see [[m:IO#binmode]], [[m:ARGF.class#binmode?]]
 
 --- binmode? -> bool
@@ -198,6 +217,20 @@ ARGF の入力ストリームがバイナリモードなら true を返します
 --- closed? -> bool
 
 現在開いている処理対象のファイルがARGFがcloseされていればtrueを返します。
+
+例:
+  # $ echo "foo" > foo
+  # $ echo "bar" > bar
+  # $ ruby argf.rb foo bar
+
+  ARGF.filename  # => "foo"
+  ARGF.close
+  # 複数のファイルを開いているので1度のARGF.closeではまた全てのファイルを閉じていないのでfalseになる
+  ARGF.closed?   # => false
+  ARGF.filename  # => "bar"
+  ARGF.close
+  # 2つのファイルを開いていたので2度目のARGF.closeで全てのファイルを閉じたためtrueになる
+  ARGF.closed?   # => true
 
 @see [[m:IO#closed?]], [[m:ARGF.class#close]]
 
@@ -278,6 +311,28 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを生成し
 て返します。
 
+例:
+  # $ echo "line1\n" > test1.txt
+  # $ echo "line2\n" > test2.txt
+  # $ ruby test.rb test1.txt test2.txt
+
+  # test.rb
+  ARGF.each_char          # => #<Enumerator: ARGF:each_char>
+  ARGF.each_char{|e|p e}
+
+  # => "l"
+  #    "i"
+  #    "n"
+  #    "e"
+  #    "1"
+  #    "\n"
+  #    "l"
+  #    "i"
+  #    "n"
+  #    "e"
+  #    "2"
+  #    "\n"
+
 @see [[m:IO#each_char]], [[m:IO#chars]]
 
 --- chars { |c| ... } -> self
@@ -295,6 +350,15 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 ブロックの引数にはコードポイントを表す整数が渡されます。
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
+例:
+  # $ echo "line1\n" > test1.txt
+  # $ echo "line2\n" > test2.txt
+  # $ ruby test.rb test1.txt test2.txt
+
+  # test.rb
+  ARGF.each_codepoint                  # => #<Enumerator: ARGF:each_codepoint>
+  ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,101,50,10,
 
 #@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
 --- codepoints { |c| ... }       -> self
@@ -356,9 +420,15 @@ ARGF はスクリプトに指定した引数([[m:Object::ARGV]] を参照) を�
 
 @see [[m:ARGF.class#getbyte]], [[m:ARGF.class#gets]]
 
+#@since 2.4.0
+--- gets(rs = $/, chomp: false)   -> String | nil
+--- gets(limit, chomp: false)     -> String | nil
+--- gets(rs, limit, chomp: false) -> String | nil
+#@else
 --- gets(rs = $/)   -> String | nil
 --- gets(limit)     -> String | nil
 --- gets(rs, limit) -> String | nil
+#@end
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時に
 は nil を返します。
@@ -368,6 +438,39 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
           の区切りとみなします(パラグラフモード)。
 
 @param limit 最大の読み込みバイト数
+
+#@since 2.4.0
+@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+#@end
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets                  # => "line1\n"
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets(2)                  # => "li"
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets("e")                  # => "line"
+
+
+例:
+  # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
+  # $ ruby test.rb test.txt
+
+  # test.rb
+  ARGF.gets("")                  # => "line1\nline2\nline3\n\n"
 
 @see [[m:Kernel.#gets]], [[m:IO#gets]], [[m:ARGF.class#getbyte]], [[m:ARGF.class#getc]]
 
@@ -597,6 +700,19 @@ ARGF から読み込んだ文字列の内部エンコーディングを返しま
 
 [[m:ARGF.class#set_encoding]] で設定します。
 
+
+例:
+  # $ ruby -Eutf-8 test.rb
+
+  # test.rb
+  ARGF.internal_encoding            # => #<Encoding:UTF-8>
+  ARGF.set_encoding('utf-8','ascii')
+  ARGF.internal_encoding            # => #<Encoding:US-ASCII>
+
+例:
+  ARGF.binmode
+  ARGF.internal_encoding            # => nil
+
 @see [[c:IO]], [[m:ARGF.class#external_encoding]]
 
 --- set_encoding(ext_enc)                        -> self
@@ -629,6 +745,25 @@ ARGF の外部／内部エンコーディングを設定します。
 プレースモードでない場合は nil を返します。
 
 Ruby 起動時の -i オプション や [[m:ARGF.class#inplace_mode=]] で設定します。
+
+例:
+  # $ echo "test" > test.txt
+  # $ ruby -i.bak test.rb test.txt
+  # $ cat test.txt # => "TEST"
+  # $ cat test.txt.bak # => "test"
+
+  # test.rb
+  ARGF.inplace_mode                   # => ".bak"
+  ARGF.each_line {|e|print e.upcase}  # => "TEST"
+
+例:
+  # $ echo "test" > test.txt
+  # $ ruby test.rb test.txt
+  # $ cat test.txt # => "test"
+
+  # test.rb
+  ARGF.inplace_mode                   # => nil
+  ARGF.each_line {|e|print e.upcase}  # => "TEST"
 
 @see [[ref:d:spec/rubycmd#cmd_option]], [[m:ARGF.class#inplace_mode=]]
 
@@ -715,6 +850,9 @@ ch を返します。
 
 --- read_nonblock(maxlen)              -> String
 --- read_nonblock(maxlen, outbuf)      -> String
+#@since 2.3.0
+--- read_nonblock(maxlen, outbuf, exception: true)      -> String
+#@end
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
@@ -725,6 +863,13 @@ ch を返します。
 
 @param maxlen 読み込む長さの上限を整数で指定します。
 @param outbuf 読み込んだデータを格納する [[c:String]] オブジェクトを指定します。
+#@since 2.3.0
+@param exception 読み込み時に [[c:Errno::EAGAIN]]、
+                 [[c:Errno::EWOULDBLOCK]] が発生する代わりに
+                 :wait_readable を返すかどうかを指定します。また、false
+                 を指定した場合は既に EOF に達していれば
+                 [[c:EOFError]] の代わりに nil を返します。
+#@end
 
 @see [[m:ARGF.class#readpartial]]
 

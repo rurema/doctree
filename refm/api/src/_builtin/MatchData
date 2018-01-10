@@ -189,6 +189,9 @@ self.to_a.select { ... } と同じです。
 
 返す文字列はフリーズ([[m:Object#freeze]])されています。
 
+  m = /(.)(.)(\d+)(\d)/.match("THX1138.")
+  m.string   # => "THX1138."
+
 --- to_a -> [String]
 
 [[m:$&]], [[m:$1]], [[m:$2]],... を格納した配列を返します。
@@ -235,6 +238,12 @@ self の内容を人間に読みやすい文字列にして返します。
   # same as m.to_a.values_at(...)
   p m.values_at(0, 1, 2, 3, 4)      #=> ["foobarbaz", "foo", "bar", "baz", nil]
   p m.values_at(-1, -2, -3, -4, -5) #=> ["baz", "bar", "foo", nil, nil]
+
+#@since 2.4.0
+  m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
+  m.to_a               #=> ["1 + 2", "1", "+", "2"]
+  m.values_at(:a, :b, :op) #=> ["1", "2", "+"]
+#@end
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 

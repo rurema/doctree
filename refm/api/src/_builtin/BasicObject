@@ -3,7 +3,7 @@
 特殊な用途のために意図的にほとんど何も定義されていないクラスです。
 [[c:Object]]クラスの親にあたります。Ruby 1.9 以降で導入されました。
 
-==== 性質
+=== 性質
 BasicObject クラスは Object クラスからほとんどのメソッドを取り除いたクラスです。
 
 Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け継いだ関数的メソッド
@@ -11,7 +11,7 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 これに対して、 BasicObject クラスはオブジェクトの同一性を識別したりメソッドを呼んだりする
 最低限の機能の他は一切の機能を持っていません。
 
-==== 用途
+=== 用途
 基本的にはほぼすべてのクラスの親は [[c:Object]] と考えて差し支えありません。
 しかし、ある種のクラスを定義する際には Object クラスは持っているメソッドが多すぎる
 場合があります。
@@ -21,11 +21,11 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 問題が発生します。このような場合に Object ではなく BasicObject から派生
 して問題を解決できます。
 
-==== 注意
+=== 注意
 通常のクラスは Object またはその他の適切なクラスから派生すべきです。
 真に必要な場合にだけ BasicObject から派生してください。
 
-==== 例
+=== 例
 
  class Proxy < BasicObject
    def initialize(target)
@@ -52,6 +52,21 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @param other 比較対象となるオブジェクト
 @return other が self と同値であれば真、さもなくば偽
+
+例:
+  class Person < BasicObject
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  tanaka1 = Person.new("tanaka", 24)
+  tanaka2 = Person.new("tanaka", 24)
+
+  tanaka1 == tanaka1    #=> true
+  tanaka1 == tanaka2    #=> false
+
 @see [[m:BasicObject#equal?]], [[m:Object#==]], [[m:Object#equal?]],
      [[m:Object#eql?]]
 
@@ -65,6 +80,17 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @param other 比較対象となるオブジェクト
 @return other が self 自身であれば真、さもなくば偽
+
+例:
+  original = "a"
+  copied = original.dup
+  substituted = original
+
+  original == copied          #=> true
+  original == substituted     #=> true
+  original.equal? copied      #=> false
+  original.equal? substituted #=> true
+
 @see [[m:Object#equal?]], [[m:Object#==]], [[m:Object#eql?]]
 
 --- ! -> bool
@@ -156,6 +182,20 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @param name 呼び出すメソッドの名前。 [[c:Symbol]] または文字列で指定します。
 @param args メソッドに渡す任意個の引数
+
+例:
+  class Mail
+    def delete(*args)
+      "(Mail#delete) - delete " + args.join(',')
+    end
+    def send(name, *args)
+      "(Mail#send) - #{name} #{args.join(',')}"
+    end
+  end
+  mail = Mail.new
+  mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
+  mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
+
 @see [[m:Object#__send__]]
 
 #@since 1.9.3
@@ -166,6 +206,15 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 [[m:Object#object_id]] と同じですが、#object_id は [[c:BasicObject]] に
 はない事に注意してください。
+
+例:
+  # frozen_string_literal: false
+  obj = Object.new
+  obj.object_id == obj.__id__              # => true
+  Object.new.__id__  == Object.new.__id__  # => false
+  (21 * 2).__id__    == (21 * 2).__id__    # => true
+  "hello".__id__     == "hello".__id__     # => false
+  "hi".freeze.__id__ == "hi".freeze.__id__ # => true
 
 @see [[m:Object#object_id]], [[ruby-dev:42840]]
 #@end

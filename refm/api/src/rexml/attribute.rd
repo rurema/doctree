@@ -58,7 +58,7 @@ parent を省略した場合は nil が設定されます。
 --- prefix -> String
 属性の名前空間を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   e = REXML::Element.new( "elns:myelement" )
   e.add_attribute( "nsa:a", "aval" )
@@ -77,7 +77,7 @@ URI が定義されていない場合は nil を返します。
        の URI が返されます。
        通常は省略します。
 
-==== 例
+=== 例
   require 'rexml/document'
   e = REXML::Element.new("el")
   e.add_attribute("xmlns:ns", "http://www.example.com/ns")
@@ -96,7 +96,7 @@ URI が定義されていない場合は nil を返します。
 --- to_string -> String
 "name='value'" という形式の文字列を返します。
 
-==== 例
+=== 例
   require 'rexml/document'
   e = REXML::Element.new("el")
   e.add_attribute("ns:r", "rval")

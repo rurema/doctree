@@ -225,7 +225,7 @@ implicit にはドキュメントが implicit に始まっているかどうか�
 @param tag_directives tag directive の配列
 @param implicit ドキュメントが implicit に始まっているかどうか
 
-==== 例
+=== 例
 以下の例では、YAML 1.1  のドキュメントで、
 tag directive を1つ持ち、 implicit にドキュメントが開始
 している Document オブジェクトを生成しています。

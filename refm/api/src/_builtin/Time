@@ -47,7 +47,7 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境
 
 [[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
 
-[[man:localtime(3)]] も参照しください。
+[[man:localtime(3)]] も参照してください。
 
 === C 言語との違いに注意
 
@@ -68,6 +68,7 @@ time で指定した時刻の Time オブジェクトを返します。
 例:
   Time.at(0)                 # => 1970-01-01 09:00:00 +0900
   Time.at(Time.at(0))        # => 1970-01-01 09:00:00 +0900
+  Time.at(Time.at(0).getutc) # => 1970-01-01 00:00:00 UTC
   Time.at(946702800)         # => 2000-01-01 14:00:00 +0900
   Time.at(-284061600)        # => 1960-12-31 15:00:00 +0900
   Time.at(946684800.2).usec  # => 200000
@@ -86,6 +87,21 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 例:
   Time.at(946684800, 123456.789).nsec  # => 123456789
 
+#@since 2.5.0
+--- at(seconds, xseconds, unit) -> Time
+
+unit に応じて seconds + xseconds ミリ秒などの時刻を表す Time オブジェクトを返します。
+
+@param seconds 起算時からの経過秒数を表わす値を[[c:Integer]]、 [[c:Float]]、 [[c:Rational]]、または他の[[c:Numeric]]で指定します。
+@param xseconds unit に対応するミリ秒かマイクロ秒かナノ秒を指定します。
+@param unit :millisecond, :usec, :microsecond, :nsec, :nanosecond のいずれかを指定します。
+
+例:
+  Time.at(946684800, 123.456789, :millisecond).nsec  # => 123456789
+  Time.at(946684800, 123456.789, :usec).nsec         # => 123456789
+  Time.at(946684800, 123456.789, :microsecond).nsec  # => 123456789
+  Time.at(946684800, 123456789, :nsec).nsec          # => 123456789
+#@end
 --- gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
 --- utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 
@@ -321,6 +337,20 @@ self と other の時刻を比較します。self の方が大きい場合は 1 
 @param other 自身と比較したい時刻を Time オブジェクトか数値で指定します。
              数値の場合は起算時からの経過秒数とみなして比較します。
 #@end
+
+例:
+  t = Time.now       # => 2017-11-10 04:42:19 +0900
+  t2 = t + 2592000   # => 2017-12-10 04:42:19 +0900
+  t <=> t2           # => -1
+  t2 <=> t           # => 1
+
+  t = Time.now       # => 2017-11-10 04:42:19 +0900
+  t2 = t + 0.1       # => 2017-11-10 04:42:19 +0900
+  t.nsec             # => 98222999
+  t2.nsec            # => 198222999
+  t <=> t2           # => -1
+  t2 <=> t           # => 1
+  t <=> t            # => 0
 
 --- eql?(other)    -> bool
 
@@ -743,6 +773,11 @@ yday は 1 から数えます。
 
 起算時からの経過秒数を整数で返します。
 
+例:
+  t = Time.new(2017, 11, 12, 1, 2, 3)
+  p "%10.5f" % t.to_f   # => "1510416123.00000"
+  p t.to_i              # => 1510416123
+
 --- to_s     -> String
 
 時刻を [[man:date(1)]] のような形式の文字列に変換します。
@@ -766,6 +801,8 @@ yday は 1 から数えます。
 自身のハッシュ値を返します。
 
 @return ハッシュ値を返します。
+
+#@#noexample
 
 @see [[m:Object#hash]]
 

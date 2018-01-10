@@ -33,7 +33,7 @@ XPathインジェクション攻撃を避けるため、適切な
 @param namespace 名前空間とURLの対応付け
 @param variables 変数名とその値の対応付け
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root xmlns:x='1'>
@@ -80,7 +80,7 @@ XPathインジェクション攻撃を避けるため、適切な
 @param namespace 名前空間とURLの対応付け
 @param variables 変数名とその値の対応付け
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root xmlns:x='1'>
@@ -119,7 +119,7 @@ XPathインジェクション攻撃を避けるため、適切な
 @param namespace 名前空間とURLの対応付け
 @param variables 変数名とその値の対応付け
 
-==== 例
+=== 例
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <root xmlns:x='1'>

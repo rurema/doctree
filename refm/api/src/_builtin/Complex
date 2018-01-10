@@ -35,7 +35,7 @@
 例:
 
   Complex(1, 2) * 2              # => (2+4i)
-  Complex(1, 2) * Complex(2, 3)  # => (-4+4i)
+  Complex(1, 2) * Complex(2, 3)  # => (-4+7i)
   Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
 
 --- **(other) -> Complex
@@ -170,6 +170,11 @@
 
 自身の絶対値が有限値の場合に true を、そうでない場合に false を返します。
 
+例:
+
+  (1+1i).finite?                   # => true
+  (Float::INFINITY + 1i).finite?   # => false
+
 @see [[m:Complex#infinite?]]
 
 --- infinite? -> nil | 1
@@ -234,9 +239,10 @@ self を other で割った商を返します。
 
 @see [[m:Complex#quo]]
 
---- hash -> Integer
+#@# --- hash -> Integer
 
-自身のハッシュ値を返します。
+#@# 自身のハッシュ値を返します。
+#@# Complex#hashはnodocのため
 
 --- imag      -> Numeric
 --- imaginary -> Numeric
@@ -317,6 +323,11 @@ self を other で割った商を返します。
 --- real? -> false
 
 常に false を返します。
+
+例:
+
+  (2+3i).real?   # => false
+  (2+0i).real?   # => false
 
 @see [[m:Numeric#real?]]
 

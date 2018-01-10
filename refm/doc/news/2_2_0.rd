@@ -168,7 +168,11 @@
 
 === 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
+#@since 2.5.0
+  * mathn
+#@else
   * [[lib:mathn]]
+#@end
     * 非推奨の警告を表示するようになりました [[feature:10169]]
 
   * ext/date/lib/date/format.rb

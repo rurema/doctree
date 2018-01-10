@@ -86,9 +86,25 @@
 
 自身を複製した [[c:Method]] オブジェクトを作成して返します。
 
+例:
+  class Foo
+    def foo
+      "foo"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.call # => "foo"
+
+  m.clone # => #<Method: Foo#foo>
+  m.clone.call # => "foo"
+
 --- [](*args) -> object
 --- call(*args) -> object
 --- call(*args) { ... } -> object
+#@since 2.5.0
+--- ===(*args) -> object
+#@end
 
 メソッドオブジェクトに封入されているメソッドを起動します。
 
@@ -104,6 +120,17 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 
 @see [[d:spec/safelevel]]
 #@# セーフレベルに関するその他の詳細
+
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m[1]      # => "foo called with arg 1"
+  m.call(2) # => "foo called with arg 2"
 
 --- arity -> Integer
 
@@ -219,10 +246,32 @@ klass2 は実際にそのメソッドを定義しているオブジェクトに�
 
 self を call する [[c:Proc]] オブジェクトを生成して返します。
 
+例:
+  class Foo
+    def foo
+      "foo"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  pr = m.to_proc # => #<Proc:0x007f874d026008 (lambda)>
+  pr.call # => "foo"
+
 --- unbind -> UnboundMethod
 
 self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
 ジェクトを生成して返します。
+
+例:
+  class Foo
+    def foo
+      "foo"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  unbound_method = m.unbind # => #<UnboundMethod: Foo#foo>
+  unbound_method.bind(Foo.new) # => #<Method: Foo#foo>
 
 --- ==(other)     -> bool
 #@since 1.9.1
@@ -271,13 +320,47 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドの名前を返します。
 
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.name # => :foo
+
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
 
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.owner # => Foo
+
+  m = Foo.new.method(:puts) # => #<Method: Foo(Kernel)#puts>
+  m.owner # => Kernel
+
 --- receiver    -> object
 
 このメソッドオブジェクトのレシーバを返します。
+
+例:
+  class Foo
+    def foo(arg)
+      "foo called with arg #{arg}"
+    end
+  end
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.receiver # => #<Foo:0x007fb39203eb78>
+  m.receiver.foo(1) # => "foo called with arg 1"
 
 #@end
 
@@ -374,6 +457,25 @@ self 内で super を実行した際に実行されるメソッドを [[c:Method
 クトにして返します。
 
 @see [[m:UnboundMethod#super_method]]
+
+例:
+  class Super
+    def foo
+      "superclass method"
+    end
+  end
+
+  class Sub < Super
+    def foo
+      "subclass method"
+    end
+  end
+
+  m = Sub.new.method(:foo) # => #<Method: Sub#foo>
+  m.call # => "subclass method"
+  m.super_method # => #<Method: Super#foo>
+  m.super_method.call # => "superclass method"
+
 #@end
 
 #@since 2.1.0

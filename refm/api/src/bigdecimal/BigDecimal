@@ -6,30 +6,39 @@
 --- BigDecimal(s) -> BigDecimal
 --- BigDecimal(s, n) -> BigDecimal
 
-引数 s で指定した値を表す BigDecimal オブジェクトを生成します。
-
-詳しくは [[m:BigDecimal.new]] を参照してください。
+引数で指定した値を表す BigDecimal オブジェクトを生成します。
 
 #@since 1.9.3
-@param s 数値を文字列、[[c:Integer]]、[[c:Float]]、
-         [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
-         します。
+@param s 数値を表現する初期値を文字列、[[c:Integer]]、
+         [[c:Float]]、[[c:Rational]]、[[c:BigDecimal]] オブジェクトのい
+         ずれかで指定します。
 #@else
-@param s 数値を文字列で指定します。
+@param s 数字を表現する初期値を文字列で指定します。
 #@end
+         文字列中のスペースは無視されます。また、判断できない文字が出現
+         した時点で文字列は終了したものとみなされます。
 
-@param n 有効桁数を整数で指定します。
+@param n 必要な有効桁数(self の最大有効桁数)を整数で指定します。 n が
+         0 または省略されたときは、n の値は s の有効桁数とみなされます。
+         s の有効桁数より n が小さいときもn = 0 のときと同じです。
+         self の最大有効桁数は n より若干大きい値が採用されます。最大有
+         効桁数は以下のような割り算を実行するとき等に意味を持ちます。
+//emlist{
+  require "bigdecimal"
+  BigDecimal("1")    / BigDecimal("3")    # => 0.3333333333 33E0
+  BigDecimal("1",10) / BigDecimal("3",10) # => 0.3333333333 3333333333 33333333E0
+//}
+         ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
+         ジョンで若干変更される可能性があります。
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
                      [[m:Float::DIG]] + 2 以上の値を指定した場合に発生します。
-                     また、s に [[c:Float]]、[[c:Rational]] オブジェク
-                     トを指定し、n を省略した場合に発生します。
+                     s に [[c:Float]]、[[c:Rational]] オブジェクトを指
+                     定し、n を省略した場合に発生します。
 #@end
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
-
-@see [[m:BigDecimal.new]]
 
 = class BigDecimal < Numeric
 
@@ -186,46 +195,22 @@ NaN に対応する [[m:BigDecimal#sign]] の値を返します。
 NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 #@end
 
+#@since 2.5.0
+--- VERSION -> String
+
+[[lib:bigdecimal]] ライブラリのバージョンを文字列で返します。
+#@end
+
 == Class Methods
 
 --- new(s)    -> BigDecimal
 --- new(s, n) -> BigDecimal
 
+このメソッドは deprecated です。[[m:Kernel.#BigDecimal]] を使用してください。
+
 新しい BigDecimal オブジェクトを生成します。
 
-#@since 1.9.3
-@param s 数値を表現する初期値を文字列、[[c:Integer]]、
-         [[c:Float]]、[[c:Rational]]、[[c:BigDecimal]] オブジェクトのい
-         ずれかで指定します。
-#@else
-@param s 数字を表現する初期値を文字列で指定します。
-#@end
-         文字列中のスペースは無視されます。また、判断できない文字が出現
-         した時点で文字列は終了したものとみなされます。
-
-@param n 必要な有効桁数(self の最大有効桁数)を整数で指定します。 n が
-         0 または省略されたときは、n の値は s の有効桁数とみなされます。
-         s の有効桁数より n が小さいときもn = 0 のときと同じです。
-         self の最大有効桁数は n より若干大きい値が採用されます。最大有
-         効桁数は以下のような割り算を実行するとき等に意味を持ちます。
-//emlist{
-  require "bigdecimal"
-  BigDecimal("1")    / BigDecimal("3")    # => 0.3333333333 33E0
-  BigDecimal("1",10) / BigDecimal("3",10) # => 0.3333333333 3333333333 33333333E0
-//}
-         ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
-         ジョンで若干変更される可能性があります。
-
-#@since 1.9.3
-@raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
-                     [[m:Float::DIG]] + 2 以上の値を指定した場合に発生します。
-                     s に [[c:Float]]、[[c:Rational]] オブジェクトを指
-                     定し、n を省略した場合に発生します。
-#@end
-
-@raise ArgumentError n に負の数を指定した場合に発生します。
-
-@see [[m:Kernel.#BigDecimal]]
+詳しくは [[m:Kernel.#BigDecimal]] を参照してください。
 
 --- mode(s)    -> Integer | nil
 --- mode(s, v) -> Integer | nil
@@ -256,7 +241,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 以下の使用方法が定義されています。
 
-==== 例外処理
+=== 例外処理
 
 計算結果が非数(NaN)やゼロによる除算になったときの処理を定義することができます。
 
@@ -292,7 +277,7 @@ flag が false(デフォルト)なら、例外は発行されません。計算�
 戻り値は、設定後の値です。「値」の意味は、例えば [[m:BigDecimal::EXCEPTION_NaN]]
 と「値」の & が ゼロ以外ならば [[m:BigDecimal::EXCEPTION_NaN]]が設定されているという意味です。
 
-==== 丸め処理指定
+=== 丸め処理指定
 
 計算途中の丸め操作の指定ができます。
 
@@ -372,13 +357,10 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 
 --- ver -> String
 
-[[lib:bigdecimal]] ライブラリのバージョンを文字列で返します。
-
-過去のバージョンはそれぞれ以下です。
-
- * 1.0.0: Ruby 1.8.0 まで
- * 1.0.1: Ruby 1.8.1 から 1.9.2
- * 1.1.0: Ruby 1.9.3
+このメソッドは deprecated です。
+#@since 2.5.0
+[[m:BigDecimal::VERSION]] を使用してください。
+#@end
 
 == Instance Methods
 
@@ -807,7 +789,7 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 仮数部分の文字列("xxxxxxx")と、基数(10)、更に指数 n を配列で返します。
 
     require "bigdecimal"
-    a = BigDecimal::new("3.14159265")
+    a = BigDecimal("3.14159265")
     f, x, y, z = a.split
 
 とすると、f =+ 1、x = "314159265"、y = 10、z = 1 になります。
@@ -823,7 +805,7 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 [[c:BigDecimal]] オブジェクトを表す文字列を返します。
 
   require "bigdecimal"
-  BigDecimal.new("1234.5678").inspect
+  BigDecimal("1234.5678").inspect
   # => "#<BigDecimal:b7ea1130,'0.12345678E4',8(12)>"
 
 最初の16進数はオブジェクトのアドレス、次の文字列 '0.12345678E4' は値、
@@ -848,6 +830,9 @@ self の n 乗を計算します。
 @param n selfを other 乗する整数を指定します。
 #@end
 
+#@since 2.5.0
+@see [[m:Integer#pow]]
+#@end
 --- sqrt(n) -> BigDecimal
 
 self の有効桁 n 桁の平方根 (n の平方根ではありません) をニュートン法で
@@ -870,8 +855,8 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 
   require 'bigdecimal'
 
-  a = BigDecimal.new("42")
-  b = BigDecimal.new("9")
+  a = BigDecimal("42")
+  b = BigDecimal("9")
 
   a.divmod(b)
   # => [#<BigDecimal:f74b3a14,'0.4E1',4(16)>, #<BigDecimal:f74b3a64,'0.6E1',4(12)>]
@@ -884,7 +869,7 @@ self を n で割った余りを返します。
 @param n self を割る数を指定します。
 
   require 'bigdecimal'
-  x = BigDecimal.new((2**100).to_s)
+  x = BigDecimal((2**100).to_s)
   ( x %  3).to_i # => 1
   (-x %  3).to_i # => 2
   ( x % -3).to_i # => -2
@@ -901,7 +886,7 @@ self を n で割った余りを返します。
 @param n self を割る数を指定します。
 
   require 'bigdecimal'
-  x = BigDecimal.new((2**100).to_s)
+  x = BigDecimal((2**100).to_s)
   x.remainder(3).to_i     # => 1
   (-x).remainder(3).to_i  # => -1
   x.remainder(-3).to_i    # => 1
@@ -927,7 +912,7 @@ self が other と等しい場合に true を、そうでない場合に false �
 それぞれの値は [[m:BigDecimal#coerce]] で変換して比較される場合があります。
 
   require 'bigdecimal'
-  BigDecimal.new('1.0') == 1.0 # => true
+  BigDecimal('1.0') == 1.0 # => true
 
 --- <(other) -> bool
 
@@ -963,7 +948,7 @@ self の符号を反転させたものを返します。
 [[m:Marshal.#dump]] から呼び出されます。
 
   require 'bigdecimal'
-  inf = BigDecimal.new('Infinity')
+  inf = BigDecimal('Infinity')
   # => #<BigDecimal:1e16fa8,'Infinity',9(9)>
   s = Marshal.dump(inf)
   # => "\x04\bu:\x0FBigDecimal\x0F4:Infinity"
@@ -986,7 +971,7 @@ self] という配列にして返します。
 例:
 
   require "bigdecimal"
-  a = BigDecimal.new("1.0")
+  a = BigDecimal("1.0")
   b = a / 2.0 # => 0.5
 
 #@since 1.9.3
@@ -1025,4 +1010,18 @@ self のハッシュ値を返します。
 ロック中で変更した設定はブロックの評価後に復元されます。
 
 ブロックの評価結果を返します。
+#@end
+
+#@since 2.5.0
+--- clone -> BigDecimal
+
+このメソッドは deprecated です。
+
+#@#noexample
+
+--- dup -> BigDecimal
+
+このメソッドは deprecated です。
+
+#@#noexample
 #@end

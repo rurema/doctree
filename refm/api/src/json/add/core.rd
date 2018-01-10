@@ -17,11 +17,11 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
-@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
-@see [[m:Hash#to_json]]
+@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 = reopen Date
 == Singleton Methods
@@ -38,11 +38,11 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
-@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
-@see [[m:Hash#to_json]]
+@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
 = reopen DateTime
@@ -60,11 +60,11 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
-@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
-@see [[m:Hash#to_json]]
+@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
 = reopen Range
@@ -82,11 +82,11 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
-@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
-@see [[m:Hash#to_json]]
+@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
 = reopen Struct
@@ -104,11 +104,11 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
-@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
-@see [[m:Hash#to_json]]
+@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
 = reopen Exception
@@ -126,11 +126,11 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
-@param args 引数はそのまま [[m:Hash#to_json]] に渡されます。
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
-@see [[m:Hash#to_json]]
+@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
 = reopen Regexp
@@ -148,7 +148,7 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [[m:Hash#to_json]] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
 @param args 引数には何の意味もありません。
 

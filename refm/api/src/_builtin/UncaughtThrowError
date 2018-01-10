@@ -16,6 +16,30 @@
 
 [[m:Kernel.#throw]] に指定した value を返します。
 
+#@samplecode 例
+def do_complicated_things
+  throw :uncaught_label, "uncaught_value"
+end
+
+begin
+  do_complicated_things
+rescue UncaughtThrowError => ex
+  p ex.value # => "uncaught_value"
+end
+#@end
+
 --- to_s -> String
 
 self を tag を含む文字列表現にして返します。
+
+#@samplecode 例
+def do_complicated_things
+  throw :uncaught_label
+end
+
+begin
+  do_complicated_things
+rescue UncaughtThrowError => ex
+  p ex.to_s # => "uncaught throw :uncaught_label"
+end
+#@end

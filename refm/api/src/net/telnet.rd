@@ -113,10 +113,10 @@ POP サーバにメールが来ているかどうかを見る。リモートホ�
   # ポート番号は110(POPのwell-knownポート)、
   # "Telnetmode" は off (telnet用の特殊なバイト列を解釈しない)、
   # Prompt (コマンドの区切り) は POP の仕様により /^\+OK/n とする
-  pop = Net::Telnet::new("Host" => "foobar",
-                         "Port" => 110,
-                         "Telnetmode" => false,
-                         "Prompt" => /^\+OK/n)
+  pop = Net::Telnet.new("Host" => "foobar",
+                        "Port" => 110,
+                        "Telnetmode" => false,
+                        "Prompt" => /^\+OK/n)
   # 認証をする
   # Net::Telnet#login は使えない(ログインのコマンドが異なる)ので
   # Net::Telnet#cmd でユーザ名とパスワードを送る

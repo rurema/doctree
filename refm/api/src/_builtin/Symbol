@@ -132,6 +132,10 @@ Ruby によって GC されます。すなわち、ある使わなくなった
 --- to_sym -> self
 self を返します。
 
+例:
+
+  :foo.intern   # => :foo
+
 @see [[m:String#intern]]
 
 --- id2name -> String
@@ -164,6 +168,11 @@ other が同じシンボルの時に真を返します。
 そうでない場合は偽を返します。
 
 @param other 比較対象のシンボルを指定します。
+
+例:
+
+  :aaa == :aaa    #=> true
+  :aaa == :xxx    #=> false
 
 --- succ -> Symbol
 --- next -> Symbol
@@ -252,7 +261,11 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @see [[m:String#=~]]
 
+#@since 2.4.0
 --- match(other) -> MatchData | nil
+#@else
+--- match(other) -> Integer | nil
+#@end
 
 正規表現 other とのマッチを行います。
 
@@ -260,13 +273,23 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @param other 比較対象のシンボルを指定します。
 
+#@since 2.4.0
 @return マッチが成功すれば MatchData オブジェクトを、そうでなければ nil を返します。
 
-  p :foo.match /foo/    # => #<MatchData "foo">
-  p :foobar.match /bar/ # => #<MatchData "bar">
-  p :foo.match /bar/    # => nil
+  p :foo.match(/foo/)    # => #<MatchData "foo">
+  p :foobar.match(/bar/) # => #<MatchData "bar">
+#@else
+@return マッチが成功すればマッチした位置を、そうでなければ nil を返します。
+
+  p :foo.match(/foo/)    # => 0
+  p :foobar.match(/bar/) # => 3
+#@end
+  p :foo.match(/bar/)    # => nil
 
 @see [[m:String#match]]
+#@since 2.4.0
+@see [[m:Symbol#match?]]
+#@end
 
 #@since 2.4.0
 --- match?(regexp, pos = 0) -> bool
@@ -274,6 +297,15 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 regexp.match?(self, pos) と同じです。
 regexp が文字列の場合は、正規表現にコンパイルします。
 詳しくは [[m:Regexp#match?]] を参照してください。
+
+例:
+
+  :Ruby.match?(/R.../)    # => true
+  :Ruby.match?('Ruby')    # => true
+  :Ruby.match?('Ruby',1)  # => false
+  :Ruby.match?('uby',1)   # => true
+  :Ruby.match?(/P.../)    # => false
+  $&                      # => nil
 
 @see [[m:Regexp#match?]], [[m:String#match?]]
 #@end
@@ -413,6 +445,13 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 シンボルに対応する文字列のエンコーディング情報を表現した [[c:Encoding]] オブ
 ジェクトを返します。
+
+例:
+
+  # encoding: utf-8
+
+  :foo.encoding        # => #<Encoding:US-ASCII>
+  :あかさたな.encoding   # => #<Encoding:UTF-8>
 
 @see [[m:String#encoding]]
 

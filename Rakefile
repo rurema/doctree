@@ -1,8 +1,11 @@
 
-VERSIONS = ["1.8.7", "1.9.3", "2.0.0", "2.1.0", "2.2.0", "2.3.0", "2.4.0"]
+OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0]
+SUPPORTED_VERSIONS = %w[2.2.0 2.3.0 2.4.0 2.5.0]
+UNRELEASED_VERSIONS = %w[2.6.0]
+ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 
 def generate_database(version)
-  puts version
+  puts "generate database of #{version}"
   db = "/tmp/db-#{version}"
   succeeded = system("bundle", "exec",
                      "bitclust", "--database=#{db}",
@@ -17,20 +20,79 @@ def generate_database(version)
   raise "Failed to update BitClust C API database" unless succeeded
 end
 
+def generate_statichtml(version)
+  puts "generate static html of #{version}"
+  db = "/tmp/db-#{version}"
+  outputdir = "/tmp/html/#{version}"
+  bitclust_gem_path = File.expand_path('../..', `bundle exec gem which bitclust`)
+  raise "bitclust gem not found" unless $?.success?
+  succeeded = system("bundle", "exec",
+                     "bitclust", "--database=#{db}",
+                     "statichtml", "--outputdir=#{outputdir}",
+                     "--templatedir=#{bitclust_gem_path}/data/bitclust/template.offline",
+                     "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
+                     "--fs-casesensitive",
+                     "--canonical-base-url=http://localhost:9292/latest/")
+  raise "Failed to generate static html" unless succeeded
+  File.unlink("/tmp/html/latest") rescue nil
+  File.symlink(version, "/tmp/html/latest")
+end
+
 task :default => [:generate, :check_prev_commit_format]
 
-desc "Generate document database"
-task :generate do
-  VERSIONS.each do |version|
-    generate_database(version)
+namespace :generate do
+  ALL_VERSIONS.each do |version|
+    desc "Generate document database of #{version}"
+    task version do
+      generate_database(version)
+    end
   end
+
+  desc "Generate document database of all versions"
+  task :all => ALL_VERSIONS
+
+  desc "Generate document database for old versions"
+  task :old => OLD_VERSIONS
+
+  desc "Generate document database for supported versions"
+  task :supported => SUPPORTED_VERSIONS
+
+  desc "Generate document database for unreleased versions"
+  task :unreleased => UNRELEASED_VERSIONS
 end
+
+desc "Generate document database"
+task :generate => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "generate:#{version}" }
+
+namespace :statichtml do
+  ALL_VERSIONS.each do |version|
+    desc "Generate static html of #{version}"
+    task version do
+      generate_statichtml(version)
+    end
+  end
+
+  desc "Generate static html of all versions"
+  task :all => ALL_VERSIONS
+
+  desc "Generate static html for old versions"
+  task :old => OLD_VERSIONS
+
+  desc "Generate static html for supported versions"
+  task :supported => SUPPORTED_VERSIONS
+
+  desc "Generate static html for unreleased versions"
+  task :unreleased => UNRELEASED_VERSIONS
+end
+
+desc "Generate static html"
+task :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statichtml:#{version}" }
 
 desc "Check previous commit format"
 task :check_prev_commit_format do
-  change_files = `git diff HEAD^ HEAD --name-only`.split
+  change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
   res = []
-  VERSIONS.each do |v|
+  ALL_VERSIONS.each do |v|
     change_files.each do |path|
       if %r!\Arefm/api/!.match(path)
         htmls = []

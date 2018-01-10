@@ -289,6 +289,12 @@ ifnoneを省略した Hash.new は {} と同じです。
 self を返します。
 
 #@since 2.0.0
+
+例:
+  hash = {}
+  p hash.to_hash         # => {}
+  p hash.to_hash == hash # => true
+
 @see [[m:Object#to_hash]], [[m:Hash#to_h]]
 #@else
 @see [[m:Object#to_hash]]
@@ -299,6 +305,18 @@ self を返します。
 
 self を返します。[[c:Hash]] クラスのサブクラスから呼び出した場合は
 self を [[c:Hash]] オブジェクトに変換します。
+
+例:
+  hash = {}
+  p hash.to_h      # => {}
+  p hash.to_h == hash # => true
+
+  class MyHash < Hash;end
+  my_hash = MyHash.new
+  p my_hash.to_h        # => {}
+  p my_hash.class       # => MyHash
+  p my_hash.to_h.class  # => Hash
+
 #@end
 
 #@since 2.3.0
@@ -336,7 +354,7 @@ self に対応する [[c:Proc]] オブジェクトを返します。
   h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
   p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
 
-==== 参考
+=== 参考
 値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
 
   def safe_invert(orig_hash)
@@ -705,6 +723,32 @@ nil を指定した場合は現在の [[m:Hash#default_proc]] をクリアしま
 #@end
 
 @param pr デフォルト値を返す手続きオブジェクト
+
+例:
+  h = {}
+  h.default_proc = proc do |hash, key|
+    hash[key] = case
+                when (key % 15).zero?
+                  "FizzBuzz"
+                when (key % 5).zero?
+                   "Buzz"
+                when (key % 3).zero?
+                   "Fizz"
+                else
+                   key
+                end
+  end
+  p h[1]  # => 1
+  p h[2]  # => 2
+  p h[3]  # => "Fizz"
+  p h[5]  # => "Buzz"
+  p h[15] # => "FizzBuzz"
+
+  h.default_proc = nil
+  p h[16] # => nil
+  # default_proc が nil になったので `16=>16 が追加されていない`
+  p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
+
 @see [[m:Hash#default_proc]], [[m:Hash#default]]
 
 #@end
@@ -1399,6 +1443,19 @@ select! はオブジェクトが変更された場合に self を、
 ブロックが与えられなかった場合は、自身と keep_if から生成した
 [[c:Enumerator]] オブジェクトを返します。
 
+例:
+  h1 = {}
+  c = ("a".."g")
+  c.each_with_index {|e, i| h1[i] = e }
+
+  h2 = h1.dup
+  h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
+
+  h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+  h1.select! { |k, v| true }        # => nil
+  h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+  h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
+
 @see [[m:Hash#select]], [[m:Hash#delete_if]],[[m:Hash#reject!]]
 #@end
 #@since 2.4.0
@@ -1419,12 +1476,15 @@ select! はオブジェクトが変更された場合に self を、
                                        #=> { a: "1.0", b: "2.1", c: "3.2" }
 
 @see [[m:Hash#transform_values!]]
+#@since 2.5.0
+@see [[m:Hash#transform_keys]]
+@see [[m:Hash#transform_keys!]]
+#@end
 --- transform_values! {|value| ... } -> self
 --- transform_values!                -> Enumerator
 
 すべての値に対してブロックを呼び出した結果でハッシュの値を変更します。
 キーは変化しません。
-
 
 @return transform_values! は常に self を返します。
         ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
@@ -1437,4 +1497,58 @@ select! はオブジェクトが変更された場合に self を、
                                         #=> { a: "2.0", b: "5.1", c: "10.2" }
 
 @see [[m:Hash#transform_values]]
+#@end
+#@since 2.5.0
+@see [[m:Hash#transform_keys]]
+@see [[m:Hash#transform_keys!]]
+--- transform_keys {|key| ... } -> Hash
+--- transform_keys              -> Enumerator
+
+すべてのキーに対してブロックを呼び出した結果で置き換えたハッシュを返します。
+値は変化しません。
+
+#@samplecode 例
+  h = { a: 1, b: 2, c: 3 }
+  h.transform_keys {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+  h.transform_keys(&:to_s)        # => { "a" => 1, "b" => 2, "c" => 3 }
+  h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+                                  # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+#@end
+
+@see [[m:Hash#transform_keys!]]
+@see [[m:Hash#transform_values]]
+@see [[m:Hash#transform_values!]]
+
+--- transform_keys! {|key| ... } -> self
+--- transform_keys!                -> Enumerator
+
+すべての値に対してブロックを呼び出した結果でハッシュのキーを変更します。
+値は変化しません。
+
+@return transform_keys! は常に self を返します。
+        ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
+        返します。
+
+
+#@samplecode 例
+  h = { a: 1, b: 2, c: 3 }
+  h.transform_keys! {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+  h.transform_keys!(&:to_sym)      # => { a: 1, b: 2, c: 3 }
+  h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+                                   # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+#@end
+
+@see [[m:Hash#transform_keys]]
+@see [[m:Hash#transform_values]]
+@see [[m:Hash#transform_values!]]
+
+--- slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+#@samplecode 例
+  h = { a: 100, b: 200, c: 300 }
+  h.slice(:a)           # => {:a=>100}
+  h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
+#@end
 #@end

@@ -4,7 +4,7 @@ include Enumerable
 ディレクトリの操作を行うためのクラスです。
 
 == Class Methods
-           
+
 --- [](*pattern)                        -> [String]
 --- glob(pattern, flags = 0)                -> [String]
 --- glob(pattern, flags = 0) {|file| ...}   -> nil
@@ -69,7 +69,7 @@ include Enumerable
   p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
 
   Dir.glob("b*") {|f| p f }
- 
+
   #=> "bar"
       "baz"
 
@@ -147,8 +147,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.delete("/tmp/hoge-jbrYBh.tmp")
 
---- entries(path)                -> [String]
---- entries(path, encoding: enc) -> [String]
+--- entries(path)                                        -> [String]
+--- entries(path, encoding: Encoding.find("filesystem")) -> [String]
 
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。
@@ -189,10 +189,10 @@ path を省略した場合、環境変数 HOME または LOGDIR
 @see [[m:Dir.each_child]]
 @see [[m:Dir.entries]]
 #@end
---- foreach(path) {|file| ...}                -> nil
---- foreach(path, encoding: enc) {|file| ...} -> nil
---- foreach(path)                             -> Enumerator
---- foreach(path, encoding: enc)              -> Enumerator
+--- foreach(path) {|file| ...}                                        -> nil
+--- foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
+--- foreach(path)                                                     -> Enumerator
+--- foreach(path, encoding: Encoding.find("filesystem"))              -> Enumerator
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
 
@@ -285,12 +285,12 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になりま
 
 @see [[m:FileUtils.#makedirs]]
 
---- new(path)                              -> Dir
---- new(path, encoding: enc)               -> Dir
---- open(path)                             -> Dir
---- open(path, encoding: enc)              -> Dir
---- open(path) {|dir| ...}                 -> object
---- open(path, encoding: enc) {|dir| ...}  -> object
+--- new(path)                                                      -> Dir
+--- new(path, encoding: Encoding.find("filesystem"))               -> Dir
+--- open(path)                                                     -> Dir
+--- open(path, encoding: Encoding.find("filesystem"))              -> Dir
+--- open(path) {|dir| ...}                                         -> object
+--- open(path, encoding: Encoding.find("filesystem")) {|dir| ...}  -> object
 
 path に対するディレクトリストリームをオープンして返します。
 
@@ -339,6 +339,10 @@ Dir.home や Dir.home("root") は
 File.expand_path("~") や File.expand_path("~root") と
 ほぼ同じです。
 
+例:
+  Dir.home          # => "/home/vagrant"
+  Dir.home("root")  # => "/root"
+
 @see [[m:File.expand_path]]
 
 #@since 2.4.0
@@ -360,15 +364,19 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 --- close    -> nil
 
-ディレクトリストリームをクローズします。以降のディレクトリに
-対する操作は例外 [[c:IOError]] を発生させます。
+ディレクトリストリームをクローズします。
+#@until 2.3.0
+以降のディレクトリに対する操作は例外 [[c:IOError]] を発生させます。
+#@end
 クローズに成功すれば nil を返します。
 
 例:
   d = Dir.new(".")
   d.close  # => nil
 
+#@until 2.3.0
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
+#@end
 
 --- each {|item| ... }    -> self
 --- each                  -> Enumerator
@@ -397,12 +405,11 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 オープンしているディレクトリのパス名を文字列で返します。
 
-@raise IOError 既に自身が close している場合に発生します。
-
 例:
-  d = Dir.new("..")
-  d.path      #=> ".."
-  d.to_path   #=> ".."
+  Dir.open("..") do |d|
+    d.path      # => ".."
+    d.to_path   # => ".."
+  end
 
 --- pos     -> Integer
 --- tell    -> Integer
@@ -432,12 +439,13 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 例:
 
-   d = Dir.new("testdir")   #=> #<Dir:0x401b3c40>
-   d.read                   #=> "."
-   i = d.tell               #=> 12
-   d.read                   #=> ".."
-   d.seek(i)                #=> #<Dir:0x401b3c40>
-   d.read                   #=> ".."
+   Dir.open("testdir") do |d|
+     d.read                   # => "."
+     i = d.tell               # => 12
+     d.read                   # => ".."
+     d.seek(i)                # => #<Dir:0x401b3c40>
+     d.read                   # => ".."
+   end
 
 --- read    -> String | nil
 
@@ -448,6 +456,21 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 @raise IOError 既に自身が close している場合に発生します。
 
+例:
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    File.open("#{tmpdir}/test1.txt", "w") { |f| f.puts("test1") }
+    File.open("#{tmpdir}/test2.txt", "w") { |f| f.puts("test2") }
+    Dir.open(tmpdir) do |d|
+      p d.read   # => "."
+      p d.read   # => ".."
+      p d.read   # => "test1.txt"
+      p d.read   # => "test2.txt"
+      p d.read   # => nil
+    end
+  end
+
 --- rewind    -> self
 
 ディレクトリストリームの読み込み位置を先頭に移動させます。
@@ -456,31 +479,31 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 例:
 
-   d = Dir.new("testdir")
-   d.read     #=> "."
-   d.rewind   #=> #<Dir:0x401b3fb0>
-   d.read     #=> "."
+   Dir.open("testdir") do |d|
+     d.read     # => "."
+     d.rewind   # => #<Dir:0x401b3fb0>
+     d.read     # => "."
+   end
 
 --- inspect -> String
 
 self の情報を人間に読みやすい文字列にして返します。
 
 例:
-  d = Dir.new("/")
-  d.inspect   #=> "#<Dir:/>"
+  Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
 
 #@since 2.2.0
 --- fileno -> Integer
 
 self に関連づけられたファイル記述子を表す整数を返します。
 
-  d = Dir.new("..")
-  d.fileno   #=> 8
+  Dir.open("..") { |d| d.fileno } # => 8
 
 本メソッドでは POSIX 2008 で定義されている dirfd() 関数を使用します。
 
 @raise NotImplementedError Windows などの dirfd() 関数が存在しないプラッ
                            トフォームで発生します。
+@raise IOError 既に自身が close している場合に発生します。
 
 @see [[m:IO#fileno]]
 #@end

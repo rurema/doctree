@@ -11,7 +11,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
 
 [[c:REXML::Parsers::StreamParser]] のパーサよりは高機能です。
 
-==== 例
+=== 例
 
   require 'rexml/parsers/sax2parser'
   require 'rexml/sax2listener'
@@ -39,7 +39,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
   as # => [["a", {"n"=>"1"}], ["a", {"n"=>"3"}]]
   texts # => ["111", "333"]
 
-==== 仕様確認サンプル
+=== 仕様確認サンプル
   require 'rexml/parsers/sax2parser'
   require 'rexml/sax2listener'
   
@@ -230,7 +230,7 @@ start_prefix_mapping, end_prefix_mapping では、その名前空間が導入さ
 @param ary 要素名によるコールバック呼び出し条件の指定(文字列もしくは正規表現の配列)
 @param listener コールバックオブジェクト
 
-==== 例
+=== 例
   # CDATAセクションに出会った場合にブロックが呼び出される。
   parser.listen(:cdata){|data| ... }
 

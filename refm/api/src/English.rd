@@ -227,21 +227,17 @@
 
 --- $IGNORECASE -> bool
 
-非推奨(obsolete): この変数は将来のバージョンで削除される予定です。
+過去との互換性のために残されていますが、もはや何の意味もありません。
+
+値は常に false です。代入しても無視されます。
 
 [[m:$=]] の別名
 
   require "English"
 
-  $IGNORECASE=true
-
-  str_l = "FOOBAR"
-  str_s = "foobar"
-
-  if str_l == str_s
-    p "#{str_l} equal to #{str_s}" #=> "FOOBAR equal to foobar"
-  end
-
+  $IGNORECASE = true # => warning: variable $= is no longer effective; ignored
+  $IGNORECASE        # => warning: variable $= is no longer effective
+                     #    false
 
 --- $PROGRAM_NAME -> String
 

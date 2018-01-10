@@ -22,6 +22,14 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+例:
+  Dir.glob("/dev/*") { |file|
+    puts file if FileTest.blockdev?(file)
+  }
+  # /dev/disk0
+  # /dev/disk0s3
+  # ...
+
 --- chardev?(file)    -> bool
 
 ファイルがキャラクタスペシャルファイルの時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
@@ -30,12 +38,24 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+例:
+  Dir.glob("/dev/*") { |file|
+    puts file if FileTest.chardev?(file)
+  }
+  # /dev/console
+  # /dev/tty
+  # ...
+
 --- executable?(file)    -> bool
 
 ファイルがカレントプロセスにより実行できる時に真を返しま
 す。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
 @param file ファイル名を表す文字列を指定します。
+
+例:
+  FileTest.executable?('/bin') # => true
+  FileTest.executable?('/bin/bash') # => true
 
 --- executable_real?(file)    -> bool
 
@@ -53,6 +73,12 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
+
+例:
+  FileTest.exist?('/etc/passwd') # => true
+  FileTest.exist?('/etc') # => true
+  FileTest.exist?('/etc/no_such_file') # => false
+  FileTest.exist?('/etc/no_such_directory') # => false
 
 #@since 2.1.0
 --- exists?(file)    -> bool
@@ -77,6 +103,15 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+例:
+  FileTest.directory?('/etc') # => true
+  FileTest.directory?('/etc/passwd') # => false
+
+  f = File.open('/etc')
+  FileTest.directory?(f) # => true
+  f.close
+  FileTest.directory?(f) # => IOError: closed stream
+
 --- file?(file)    -> bool
 
 ファイルが通常ファイルである時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
@@ -84,6 +119,11 @@ FileTest で定義された各メソッドは、システムコールに失敗�
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
+
+例:
+  FileTest.file?('/bin/bash') # => true
+  FileTest.file?('/bin') # => false
+  FileTest.file?('/no_such_file') # => false
 
 #@since 1.8.4
 --- identical?(file1, file2)    -> bool
@@ -112,11 +152,16 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 #@end
 --- pipe?(file)    -> bool
 
-ファイルが名前つきパイプ(FIFO)である時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
+指定したファイルがパイプである時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
+
+例:
+  r, w = IO.pipe
+  FileTest.pipe?(r) # => true
+  FileTest.pipe?(w) # => true
 
 --- socket?(file)    -> bool
 
@@ -140,6 +185,14 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @param file ファイル名を表す文字列を指定します。
 
+#@samplecode 例
+IO.write("testfile", "")
+File.chmod(0644, "testfile")
+FileTest.readable?("testfile")      # => true
+File.chmod(0200, "testfile")
+FileTest.readable?("testfile")      # => false
+#@end
+
 --- readable_real?(file)    -> bool
 
 ファイルがカレントプロセスの実ユーザか実グループによって読み込み可能な時に真を
@@ -156,12 +209,30 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
+#@samplecode 例
+require 'fileutils'
+IO.write("testfile", "")
+FileUtils.chmod("u+s", "testfile")
+FileTest.setuid?("testfile")      # => true
+FileUtils.chmod("u-s", "testfile")
+FileTest.setuid?("testfile")      # => false
+#@end
+
 --- setgid?(file)    -> bool
 
 ファイルが [[man:setgid(2)]] されている時に真を返
 します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
 @param file ファイル名を表す文字列を指定します。
+
+#@samplecode 例
+require 'fileutils'
+IO.write("testfile", "")
+FileUtils.chmod("g+s", "testfile")
+FileTest.setgid?("testfile")      # => true
+FileUtils.chmod("g-s", "testfile")
+FileTest.setgid?("testfile")      # => false
+#@end
 
 --- size(file)    -> Integer
 
@@ -175,6 +246,9 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @see [[m:FileTest.#size?]], [[m:FileTest.#zero?]]
 
+例:
+  FileTest.size('/etc/passwd') # => 5925
+
 --- size?(file)    -> Integer | nil
 
 ファイルのサイズを返します。ファイルが存在しない時や
@@ -183,6 +257,13 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
+
+#@samplecode 例
+IO.write("testfile", "test")
+FileTest.size?("testfile")      # => 4
+File.delete("testfile")
+FileTest.size?("testfile")      # => nil
+#@end
 
 @see [[m:FileTest.#size]], [[m:FileTest.#zero?]] 
 
@@ -223,6 +304,13 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
+
+#@samplecode 例:
+IO.write("zero.txt", "")
+FileTest.zero?("zero.txt")      # => true
+IO.write("nonzero.txt", "1")
+FileTest.zero?("nonzero.txt")  # => false
+#@end
 
 @see [[m:FileTest.#size]], [[m:FileTest.#size?]]
 

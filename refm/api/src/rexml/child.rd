@@ -77,7 +77,7 @@ other を挿入します。
 
 @param other 挿入するノード
 
-==== 例
+=== 例
   require 'rexml/document'
   
   a = REXML::Element.new("a")
@@ -99,7 +99,7 @@ other を挿入します。
 
 @param other 挿入するノード
 
-==== 例
+=== 例
   require 'rexml/document'
   
   a = REXML::Element.new("a")

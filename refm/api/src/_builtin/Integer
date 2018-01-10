@@ -147,6 +147,10 @@ self が正の整数でない場合は何もしません。
 
 self を返します。
 
+例:
+
+  10.to_i   # => 10
+
 #@since 2.4.0
 --- floor(ndigits = 0) -> Integer | Float
 
@@ -277,12 +281,21 @@ self > max であれば何もしません。
 
 常に真を返します。
 
+例:
+
+  1.integer?     # => true
+  1.0.integer?   # => false
+
 #@since 1.8.7
 --- even? -> bool
 
 自身が偶数であれば真を返します。
 そうでない場合は偽を返します。
 
+例:
+
+  10.even?    # => true
+  5.even?     # => false
 
 --- odd? -> bool
 
@@ -323,6 +336,11 @@ self から -1 した値を返します。
 分母(常に1)を返します。
 
 @return 分母を返します。
+
+例:
+
+  10.denominator    # => 1
+  -10.denominator   # => 1
 
 @see [[m:Integer#numerator]]
 
@@ -386,6 +404,11 @@ self から -1 した値を返します。
 
 @return 分子を返します。
 
+例:
+
+  10.numerator    # => 10
+  -10.numerator   # => -10
+
 @see [[m:Integer#denominator]]
 
 --- to_r -> Rational
@@ -423,6 +446,11 @@ self を浮動小数点数([[c:Float]])に変換します。
 
 self が [[c:Float]] の範囲に収まらない場合、[[m:Float::INFINITY]] を返します。
 
+例:
+
+  1.to_f                       # => 1.0
+  (Float::MAX.to_i * 2).to_f   # => Infinity
+
 --- <=>(other) -> -1 | 0 | 1 | nil
 
 self と other を比較して、self が大きい時に1、等しい時に 0、小さい時
@@ -441,6 +469,11 @@ self と other を比較して、self が大きい時に1、等しい時に 0、
 
 単項演算子の - です。
 self の符号を反転させたものを返します。
+
+例:
+
+  - 10   # => -10
+  - -10  # => 10
 
 --- +(other) -> Numeric
 
@@ -461,12 +494,22 @@ self の符号を反転させたものを返します。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
+例:
+
+  # 差
+  4 - 1 #=> 3
+
 --- *(other) -> Numeric
 
 算術演算子。積を計算します。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
+
+例:
+
+  # 積
+  2 * 3   # => 6
 
 --- /(other) -> Numeric
 --- div(other) -> Numeric
@@ -480,6 +523,14 @@ self の符号を反転させたものを返します。
 --- modulo(other) -> Numeric
 
 算術演算子。剰余を計算します。
+
+例:
+
+  # 剰余
+  13 % 4    # => 1
+  13 % -4   # => -3
+  -13 % 4   # => 3
+  -13 % -4  # => -1
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
@@ -524,18 +575,38 @@ self を other で割った商を [[c:Float]] で返します。
 @see [[m:Numeric#quo]]
 
 --- **(other) -> Numeric
+#@since 2.5.0
+--- pow(other) -> Numeric
+--- pow(other, modulo) -> Integer
+#@end
 
 算術演算子。冪(べき乗)を計算します。
 
 @param other 二項演算の右側の引数(対象)
+#@since 2.5.0
+@param modulo 指定すると、計算途中に巨大な値を生成せずに (self**other) % modulo と同じ結果を返します。
+#@end
 @return 計算結果
+#@since 2.5.0
+@raise TypeError 2引数 pow で Integer 以外を指定した場合に発生します。
+@raise RangeError 2引数 pow で other に負の数を指定した場合に発生します。
+#@end
 
 例:
 
   2 ** 3 # => 8
   2 ** 0 # => 1
   0 ** 0 # => 1
+#@since 2.5.0
+   3.pow(3,  8) # => 3
+   3.pow(3, -8) # => -5
+   3.pow(2, -2) # => -1
+  -3.pow(3,  8) # => 5
+  -3.pow(3, -8) # => -3
+   5.pow(2, -8) # => -7
 
+@see [[m:BigDecimal#power]]
+#@end
 --- abs -> Integer
 --- magnitude -> Integer
 
@@ -569,6 +640,11 @@ self の絶対値を返します。
 @return      self よりも other が大きい場合 true を返します。
              そうでなければ false を返します。
 
+例:
+
+  1 < 1    # => false
+  1 < 2    # => true
+
 --- <=(other) -> bool
 
 比較演算子。数値として等しいまたは小さいか判定します。
@@ -578,6 +654,12 @@ self の絶対値を返します。
              両者が等しい場合 true を返します。
              そうでなければ false を返します。
 
+例:
+
+  1 <= 0    # => false
+  1 <= 1    # => true
+  1 <= 2    # => true
+
 --- >(other)  -> bool
 
 比較演算子。数値として大きいか判定します。
@@ -585,6 +667,11 @@ self の絶対値を返します。
 @param other 比較対象の数値
 @return      self よりも other の方が小さい場合 true を返します。
              そうでなければ false を返します。
+
+例:
+
+  1 > 0    # => true
+  1 > 1    # => false
 
 --- >=(other) -> bool
 
@@ -594,6 +681,12 @@ self の絶対値を返します。
 @return      self よりも other の方が小さい場合か、
              両者が等しい場合 true を返します。
              そうでなければ false を返します。
+
+例:
+
+  1 >= 0    # => true
+  1 >= 1    # => true
+  1 >= 2    # => false
 
 --- ~        -> Integer
 ビット演算子。否定を計算します。
