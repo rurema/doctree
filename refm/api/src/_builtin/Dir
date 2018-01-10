@@ -5,9 +5,15 @@ include Enumerable
 
 == Class Methods
 
---- [](*pattern)                        -> [String]
+#@since 2.5.0
+--- [](*pattern, base: nil)                            -> [String]
+--- glob(pattern, flags = 0, base: nil)                -> [String]
+--- glob(pattern, flags = 0, base: nil) {|file| ...}   -> nil
+#@else
+--- [](*pattern)                            -> [String]
 --- glob(pattern, flags = 0)                -> [String]
 --- glob(pattern, flags = 0) {|file| ...}   -> nil
+#@end
 
 ワイルドカードの展開を行い、
 パターンにマッチするファイル名を文字列の配列として返します。
@@ -28,6 +34,12 @@ include Enumerable
   Dir.glob("*")                      #=> ["bar", "foo"]
   Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 //}
+
+#@since 2.5.0
+@param base カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
+            指定した場合、結果の頭にはベースディレクトリはつかないので、
+            絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
+#@end
 
 ワイルドカードには以下のものがあります。これらはバックスラッシュに
 よりエスケープすることができます。ダブルクォートの文字列中では 2
@@ -84,6 +96,15 @@ include Enumerable
   Dir.glob("[^f]*")        #=> ["bar"]
   Dir.glob("{b,f}*")       #=> ["bar", "foo"]
 
+#@since 2.5.0
+  # ベースディレクトリの例
+  rbfiles = File.join("**", "*.rb")
+  Dir.glob(rbfiles)                   #=> ["main.rb",
+                                      #    "lib/song.rb",
+                                      #    "lib/song/karaoke.rb"]
+  Dir.glob(rbfiles, base: "lib")      #=> ["song.rb",
+                                      #    "song/karaoke.rb"]
+#@end
 
 --- chdir           -> 0
 --- chdir(path)     -> 0
