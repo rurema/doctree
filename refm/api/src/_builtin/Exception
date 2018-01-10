@@ -120,6 +120,20 @@
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
+#@samplecode 例:
+begin
+  begin
+    raise "inner"
+  rescue
+    raise "outer"
+  end
+rescue
+  $!.backtrace # => ["/path/to/test.rb:5:in `rescue in <main>'", "/path/to/test.rb:2:in `<main>'"]
+  $!.set_backtrace(["dummy1", "dummy2"])
+  $!.backtrace # => ["dummy1", "dummy2"]
+end
+#@end
+
 --- inspect -> String
 
 self のクラス名と message を文字列にして返します。
