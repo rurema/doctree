@@ -776,10 +776,18 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @return val を返します。
 
+#@since 2.4.0
+--- capitalize(*options) -> String
+
+文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- capitalize -> String
 
 文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
+#@end
 
 #@samplecode 例
 p "foobar--".capitalize   # => "Foobar--"
@@ -790,10 +798,18 @@ p "FOOBAR--".capitalize   # => "Foobar--"
 @see [[m:String#capitalize!]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
 
+#@since 2.4.0
+--- capitalize!(*options) -> self | nil
+
+文字列先頭の文字を大文字に、残りを小文字に破壊的に変更します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- capitalize! -> self | nil
 
 文字列先頭の文字を大文字に、残りを小文字に変更します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
+#@end
 
 @return capitalize! は self を変更して返しますが、
         変更が起こらなかった場合は nil を返します。
@@ -1170,6 +1186,50 @@ p str.delete!("2378")         #=> "nil"
 p str                         #=> "abc"
 #@end
 
+#@since 2.4.0
+--- downcase(*options) -> String
+
+全ての大文字を対応する小文字に置き換えた文字列を返します。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの意味は以下の通りです。
+
+: オプションなし
+  完全な Unicode ケースマッピングに対応し、ほとんどの言語に適しています。(例外は以下の :turkic,
+  :lithuanian オプションを参照)
+  Unicode 標準の表 3-14 で説明されている、コンテキスト依存のケースマッピングは、現在サポートされていません。
+
+: :ascii
+  ASCII の範囲内のみ (A-Z, a-z) が影響します。
+  このオプションは他のオプションと組み合わせることはできません。
+
+: :turkic
+  チュルク語族 (トルコ語、アゼルバイジャン語など) に適合した完全な Unicode ケースマッピングです。
+  これはたとえば大文字の I は小文字のドットなしの i (ı) にマッピングされることを意味します。
+
+: :lithuanian
+  現在は、ただの完全な Unicode ケースマッピングです。
+  将来、リトアニア語に対応した完全な Unicode ケースマッピングです。
+  (上にアクセントがあっても小文字の i のドットを維持します。)
+
+: :fold
+  downcase と downcase! のみで使えます。
+  Unicode ケースフォールディングは Unicode ケースマッピングより広範囲です。
+  このオプションは今の所、他のオプションと組み合わせることはできません。
+  (すなわち現在チュルク語族のバリアントはありません。)
+
+ASCII のみの大文字小文字変換で有効ないくつかの仮定は、より一般的なケース変換では
+成り立たないことに注意してください。例えば、結果の長さは入力の長さと同じとは
+限りません (文字数でもバイト数でも)。ラウンドトリップできるという仮定も
+成り立ちません (例えば str.downcase == str.upcase.downcase)。
+そして、Unicode 正規化 (すなわち [[m:String#unicode_normalize]]) はケース
+マッピング操作で必ずしも維持されるとは限りません。
+
+現在 ASCII 以外のケースマッピング/フォールディングは、UTF-8, UTF-16BE/LE,
+UTF-32BE/LE, ISO-8859-1~16 の String/Symbol でサポートされています。
+他のエンコーディングもサポートされる予定です。
+
+#@else
 --- downcase -> String
 
 'A' から 'Z' までの
@@ -1179,13 +1239,21 @@ p str                         #=> "abc"
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 p "STRing?".downcase   # => "string?"
 #@end
-
 @see [[m:String#downcase!]], [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
+#@since 2.4.0
+--- downcase!(*options) -> self | nil
+
+全ての大文字を対応する小文字に破壊的に置き換えます。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- downcase! -> self | nil
 
 文字列中の 'A' から 'Z' までの
@@ -1195,7 +1263,7 @@ p "STRing?".downcase   # => "string?"
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
-
+#@end
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 #@samplecode 例
@@ -2466,6 +2534,13 @@ sum %= 65536
 
 @param bits    チェックサムのビット数
 
+#@since 2.4.0
+--- swapcase(*options) -> String
+
+大文字を小文字に、小文字を大文字に変更した文字列を返します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- swapcase -> String
 
 'A' から 'Z' までのアルファベット大文字を小文字に、
@@ -2474,6 +2549,7 @@ sum %= 65536
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 p "ABCxyz".swapcase   # => "abcXYZ"
@@ -2482,10 +2558,18 @@ p "Access".swapcase   # => "aCCESS"
 
 @see [[m:String#swapcase!]], [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
+#@since 2.4.0
+--- swapcase!(*options) -> self | nil
+
+大文字を小文字に、小文字を大文字に破壊的に変更します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- swapcase! -> self | nil
 
 'A' から 'Z' までのアルファベット大文字を小文字に、
 'a' から 'z' までのアルファベット小文字を大文字に、破壊的に変更します。
+#@end
 
 swapcase! は self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
@@ -2776,6 +2860,14 @@ p str   # => "f"
 
 #@include(pack-template)
 
+#@since 2.4.0
+--- upcase(*options) -> String
+
+全ての小文字を対応する大文字に置き換えた文字列を返します。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- upcase -> String
 
 'a' から 'z' までのアルファベット小文字を大文字に変換した文字列を作成して返します。
@@ -2783,6 +2875,7 @@ p str   # => "f"
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 p "stRIng? STring.".upcase   # => "STRING? STRING."
@@ -2791,6 +2884,14 @@ p "stRIng? STring.".upcase   # => "STRING? STRING."
 @see [[m:String#upcase!]], [[m:String#downcase]],
      [[m:String#swapcase]], [[m:String#capitalize]]
 
+#@since 2.4.0
+--- upcase!(*options) -> self | nil
+
+全ての小文字を対応する大文字に破壊的に置き換えます。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- upcase! -> self | nil
 
 ASCII 文字列の範囲内で 'a' から 'z' までの
@@ -2801,6 +2902,7 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 buf = "stRIng? STring."
