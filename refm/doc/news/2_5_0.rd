@@ -48,7 +48,7 @@
     * [[m:File::Stat#atime]], [[m:File::Stat#mtime]], [[m:File::Stat#ctime]]
       Windows 8 以降でタイムスタンプの分数表現をサポートしました [[feature:13726]]
     * [[m:File::Stat#ino]], [[m:File.indentical?]]
-      Windows 8.1 以降で、ReFsの128bitのinoをサポートしました [[feature:13731]]
+      Windows 8.1 以降で、ReFSの128bitのinoをサポートしました [[feature:13731]]
     * [[m:File.readable?]], [[m:File.readable_real?]], [[m:File.writable?]], [[m:File.writable_real?]],
       [[m:File.executable?]], [[m:File.executable_real?]], [[m:File.mkfifo]], [[m:File.readlink]],
       [[m:File.truncate]], [[m:File#truncate]], [[m:File.chmod]], [[m:File.lchmod]], [[m:File.chown]],
@@ -115,9 +115,9 @@
     * [[m:RubyVM::InstructionSequence#trace_points]] を追加
 
   * [[c:String]]
-    * [[m:String#-@]] フリーズされていない文字列の重複を排除します。
+    * [[m:String#-@]] はフリーズされていない文字列の重複を排除します。
       互換性のため、既にフリーズされている文字列には何もしません。  [[feature:13077]]
-    * -"literal" (String#-@) は同じオブジェクトを返すように最適化しました。
+    * -"literal" ([[m:String#-@]]) は同じオブジェクトを返すように最適化しました。
       (Ruby 2.1以降の "literal".freeze と同じです) [[feature:13295]]
     * [[m:String#casecmp]], [[m:String#casecmp?]] に文字列でない引数を与えた場合、TypeErrorを発生させずにnilを返すようにしました
       [[bug:13312]]
@@ -141,7 +141,7 @@
       スレッドの終了時に捕捉していない例外の情報を $stderr に出力します。 [[feature:14143]]
 
   * [[c:Time]]
-    * [[m:Time.at]] 第2引数の精度を指定するための第3引数を指定できるようになりました
+    * [[m:Time.at]] は第2引数の精度を指定するための第3引数を指定できるようになりました
       [[feature:13919]]
 
   * [[c:KeyError]]
