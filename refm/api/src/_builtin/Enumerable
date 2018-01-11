@@ -1126,7 +1126,9 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 
 --- none?               -> bool
 --- none?{|obj| ... }   -> bool
-
+#@since 2.5.0
+--- none?(pattern)      -> bool
+#@end
 ブロックを指定しない場合は、 Enumerable オブジェクトのすべての
 要素が偽であれば真を返します。そうでなければ偽を返します。
 
