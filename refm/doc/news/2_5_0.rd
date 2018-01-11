@@ -48,7 +48,7 @@
     * [[m:File::Stat#atime]], [[m:File::Stat#mtime]], [[m:File::Stat#ctime]]
       Windows 8 以降でタイムスタンプの分数表現をサポートしました [[feature:13726]]
     * [[m:File::Stat#ino]], [[m:File.indentical?]]
-      Windows 8.1 以降で、ReFsの128bitのinoをサポートしました [[feature:13731]]
+      Windows 8.1 以降で、ReFSの128bitのinoをサポートしました [[feature:13731]]
     * [[m:File.readable?]], [[m:File.readable_real?]], [[m:File.writable?]], [[m:File.writable_real?]],
       [[m:File.executable?]], [[m:File.executable_real?]], [[m:File.mkfifo]], [[m:File.readlink]],
       [[m:File.truncate]], [[m:File#truncate]], [[m:File.chmod]], [[m:File.lchmod]], [[m:File.chown]],
@@ -61,7 +61,7 @@
     * [[m:Hash#slice]] を追加 [[feature:8499]]
 
   * [[c:IO]]
-    * [[m:IO#copy_stream]] は [[man:copy_file_range(2)]] を使うようになりました。また、その実装が使えない場合は他の実装へフォールバックするようにしました [[feature:13867]]
+    * [[m:IO.copy_stream]] は [[man:copy_file_range(2)]] を使うようになりました。また、その実装が使えない場合は他の実装へフォールバックするようにしました [[feature:13867]]
     * [[m:IO#pread]] を追加 [[feature:4532]]
     * [[m:IO#pwrite]] を追加 [[feature:4532]]
     * [[m:IO#write]] 複数の引数を受け取れるようになりました [[feature:9323]]
@@ -71,8 +71,6 @@
       このメッセージはユーザーにとってわかりやすいでしょう。 [[bug:13405]]
 
   * [[c:Integer]]
-    * [[m:Integer#step]] [[m:Integer#>]]で0と比較できない引数が与えられたときcoerce内部で発生したエラーを隠蔽しないようになりました。
-      [[feature:7688]]
     * [[m:Integer#round]], [[m:Integer#floor]], [[m:Integer#ceil]], [[m:Integer#truncate]] は常に [[c:Integer]] を返すようになりました
       [[bug:13420]]
     * [[m:Integer#pow]] を追加 [[feature:12508]] [[feature:11003]]
@@ -80,7 +78,7 @@
     * [[m:Integer.sqrt]] を追加 [[feature:13219]]
 
   * [[c:Kernel]]
-    * [[m:Kernel.#yield_self]] を追加  [[feature:6721]]
+    * [[m:Object#yield_self]] を追加  [[feature:6721]]
     * [[m:Kernel.#pp]] をrequireなしで使えるようにしました  [[feature:14123]]
     * [[m:Kernel.#warn]] :uplevel というキーワード引数を追加しました  [[feature:12882]]
 
@@ -92,15 +90,17 @@
     * [[m:Module#define_method]], [[m:Module#alias_method]], [[m:Module#undef_method]], [[m:Module#remove_method]] はパブリックメソッドになりました [[feature:14133]]
 
   * [[c:Numeric]]
+    * [[m:Numeric#step]] は > で0と比較できない引数が与えられたときcoerce内部で発生したエラーを隠蔽しないようになりました。
+      [[feature:7688]]
     * 数値の比較メソッド(<,<=,>=,>)は、coerceメソッドで発生した例外を隠蔽しなくなりました。
       coerceがnilを返す場合、変換は不可能です。[[feature:7688]]
 
   * [[c:Process]]
-    * [[man:getrusage(2)]] が存在する場合 [[m:Process.times]] の精度を改良しました [[feature:11952]]
+    * [[man:getrusage(2)]] が存在する場合 [[m:Process.#times]] の精度を改良しました [[feature:11952]]
     * [[m:Process.last_status]] を追加。[[m:$?]] と同じです [[feature:14043]]
 
   * [[c:Range]]
-    * [[m:Range#initialize]] no longer hides exceptions when comparing begin and
+    * [[m:Range.new]] no longer hides exceptions when comparing begin and
       end with #<=> and raise a "bad value for range" ArgumentError
       but instead lets the exception from the #<=> call go through.
       [[feature:7688]]
@@ -115,9 +115,9 @@
     * [[m:RubyVM::InstructionSequence#trace_points]] を追加
 
   * [[c:String]]
-    * [[m:String#-@]] フリーズされていない文字列の重複を排除します。
+    * [[m:String#-@]] はフリーズされていない文字列の重複を排除します。
       互換性のため、既にフリーズされている文字列には何もしません。  [[feature:13077]]
-    * -"literal" (String#-@) は同じオブジェクトを返すように最適化しました。
+    * -"literal" ([[m:String#-@]]) は同じオブジェクトを返すように最適化しました。
       (Ruby 2.1以降の "literal".freeze と同じです) [[feature:13295]]
     * [[m:String#casecmp]], [[m:String#casecmp?]] に文字列でない引数を与えた場合、TypeErrorを発生させずにnilを返すようにしました
       [[bug:13312]]
@@ -141,7 +141,7 @@
       スレッドの終了時に捕捉していない例外の情報を $stderr に出力します。 [[feature:14143]]
 
   * [[c:Time]]
-    * [[m:Time.at]] 第2引数の精度を指定するための第3引数を指定できるようになりました
+    * [[m:Time.at]] は第2引数の精度を指定するための第3引数を指定できるようになりました
       [[feature:13919]]
 
   * [[c:KeyError]]
@@ -341,7 +341,7 @@
       [[feature:13362]]
 
   * [[c:Random]]
-    * [[m:Random.raw_seed]] は [[m:Random.urandom]] に名前を変更しました。
+    * Random.raw_seed は [[m:Random.urandom]] に名前を変更しました。
       シードを必要としない用途で有用です。[[bug:9569]]
 
   * [[c:Socket]]

@@ -18,6 +18,36 @@ alias Bignum
 2.4.0 から [[c:Fixnum]], [[c:Bignum]] は Integerに統合されました。
 2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
 
+== Class Methods
+
+#@since 2.5.0
+--- sqrt(n) -> Integer
+
+非負整数 n の整数の平方根を返します。すなわち n の平方根以下の
+最大の非負整数を返します。
+
+@param n 非負整数。Integer ではない場合は、最初に Integer に変換されます。
+@raise Math::DomainError n が負の整数の時に発生します。
+
+#@samplecode
+Integer.sqrt(0)        # => 0
+Integer.sqrt(1)        # => 1
+Integer.sqrt(24)       # => 4
+Integer.sqrt(25)       # => 5
+Integer.sqrt(10**400) == 10**200 # => true
+#@end
+
+Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の制度の限界によって
+真の値とは違う結果になることがあります。
+
+#@samplecode
+Integer.sqrt(10**46)     #=> 100000000000000000000000
+Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
+#@end
+
+
+@see [[m:Math.sqrt]]
+#@end
 == Instance Methods
 
 #@until 1.9.1
@@ -929,30 +959,4 @@ self & mask == 0 と等価です。
 
 @see [[m:Integer#allbits?]]
 @see [[m:Integer#anybits?]]
---- sqrt(n) -> Integer
-
-非負整数 n の整数の平方根を返します。すなわち n の平方根以下の
-最大の非負整数を返します。
-
-@param n 非負整数。Integer ではない場合は、最初に Integer に変換されます。
-@raise Math::DomainError n が負の整数の時に発生します。
-
-#@samplecode
-Integer.sqrt(0)        # => 0
-Integer.sqrt(1)        # => 1
-Integer.sqrt(24)       # => 4
-Integer.sqrt(25)       # => 5
-Integer.sqrt(10**400) == 10**200 # => true
-#@end
-
-Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の制度の限界によって
-真の値とは違う結果になることがあります。
-
-#@samplecode
-Integer.sqrt(10**46)     #=> 100000000000000000000000
-Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
-#@end
-
-
-@see [[m:Math.sqrt]]
 #@end
