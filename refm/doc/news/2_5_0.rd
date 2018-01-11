@@ -61,7 +61,7 @@
     * [[m:Hash#slice]] を追加 [[feature:8499]]
 
   * [[c:IO]]
-    * [[m:IO#copy_stream]] は [[man:copy_file_range(2)]] を使うようになりました。また、その実装が使えない場合は他の実装へフォールバックするようにしました [[feature:13867]]
+    * [[m:IO.copy_stream]] は [[man:copy_file_range(2)]] を使うようになりました。また、その実装が使えない場合は他の実装へフォールバックするようにしました [[feature:13867]]
     * [[m:IO#pread]] を追加 [[feature:4532]]
     * [[m:IO#pwrite]] を追加 [[feature:4532]]
     * [[m:IO#write]] 複数の引数を受け取れるようになりました [[feature:9323]]
@@ -80,7 +80,7 @@
     * [[m:Integer.sqrt]] を追加 [[feature:13219]]
 
   * [[c:Kernel]]
-    * [[m:Kernel.#yield_self]] を追加  [[feature:6721]]
+    * [[m:Object#yield_self]] を追加  [[feature:6721]]
     * [[m:Kernel.#pp]] をrequireなしで使えるようにしました  [[feature:14123]]
     * [[m:Kernel.#warn]] :uplevel というキーワード引数を追加しました  [[feature:12882]]
 
@@ -96,11 +96,11 @@
       coerceがnilを返す場合、変換は不可能です。[[feature:7688]]
 
   * [[c:Process]]
-    * [[man:getrusage(2)]] が存在する場合 [[m:Process.times]] の精度を改良しました [[feature:11952]]
+    * [[man:getrusage(2)]] が存在する場合 [[m:Process.#times]] の精度を改良しました [[feature:11952]]
     * [[m:Process.last_status]] を追加。[[m:$?]] と同じです [[feature:14043]]
 
   * [[c:Range]]
-    * [[m:Range#initialize]] no longer hides exceptions when comparing begin and
+    * [[m:Range.new]] no longer hides exceptions when comparing begin and
       end with #<=> and raise a "bad value for range" ArgumentError
       but instead lets the exception from the #<=> call go through.
       [[feature:7688]]
@@ -341,7 +341,7 @@
       [[feature:13362]]
 
   * [[c:Random]]
-    * [[m:Random.raw_seed]] は [[m:Random.urandom]] に名前を変更しました。
+    * Random.raw_seed は [[m:Random.urandom]] に名前を変更しました。
       シードを必要としない用途で有用です。[[bug:9569]]
 
   * [[c:Socket]]
