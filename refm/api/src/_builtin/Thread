@@ -590,6 +590,13 @@ true を返します。
 
 @param name 文字列か [[c:Symbol]] で指定します。
 
+#@samplecode 例
+me = Thread.current
+me[:oliver] = "a"
+me.key?(:oliver)    # => true
+me.key?(:stanley)   # => false
+#@end
+
 --- keys    -> [Symbol]
 
 スレッド固有データに関連づけられたキーの配列を返します。キーは
