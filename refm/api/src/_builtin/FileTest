@@ -310,6 +310,14 @@ FileTest.size?("testfile")      # => nil
 
 @param file ファイル名を表す文字列を指定します。
 
+#@samplecode 例
+IO.write("testfile", "test")
+File.chmod(0600, "testfile")
+FileTest.writable?("testfile")      # => true
+File.chmod(0400, "testfile")
+FileTest.writable?("testfile")      # => false
+#@end
+
 --- writable_real?(file)    -> bool
 
 ファイルがカレントプロセスの実ユーザか実グループによって書き込み可能である時に真
