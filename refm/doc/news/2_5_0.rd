@@ -71,8 +71,6 @@
       このメッセージはユーザーにとってわかりやすいでしょう。 [[bug:13405]]
 
   * [[c:Integer]]
-    * [[m:Integer#step]] [[m:Integer#>]]で0と比較できない引数が与えられたときcoerce内部で発生したエラーを隠蔽しないようになりました。
-      [[feature:7688]]
     * [[m:Integer#round]], [[m:Integer#floor]], [[m:Integer#ceil]], [[m:Integer#truncate]] は常に [[c:Integer]] を返すようになりました
       [[bug:13420]]
     * [[m:Integer#pow]] を追加 [[feature:12508]] [[feature:11003]]
@@ -92,6 +90,8 @@
     * [[m:Module#define_method]], [[m:Module#alias_method]], [[m:Module#undef_method]], [[m:Module#remove_method]] はパブリックメソッドになりました [[feature:14133]]
 
   * [[c:Numeric]]
+    * [[m:Numeric#step]] は > で0と比較できない引数が与えられたときcoerce内部で発生したエラーを隠蔽しないようになりました。
+      [[feature:7688]]
     * 数値の比較メソッド(<,<=,>=,>)は、coerceメソッドで発生した例外を隠蔽しなくなりました。
       coerceがnilを返す場合、変換は不可能です。[[feature:7688]]
 
