@@ -696,6 +696,14 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
+#@samplecode 例
+c = Thread.new { Thread.stop; puts "hey!" }
+sleep 0.1 while c.status!='sleep'
+c.wakeup
+c.join
+# => "hey!"
+#@end
+
 --- inspect -> String
 #@since 2.5.0
 --- to_s -> String
