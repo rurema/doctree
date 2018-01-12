@@ -317,6 +317,10 @@ FileTest.size?("testfile")      # => nil
 
 @param file ファイル名を表す文字列を指定します。
 
+#@#noexample FileTest.#writable? を参照
+
+@see [[m:FileTest.#writable?]]
+
 --- zero?(file)    -> bool
 #@since 2.4.0
 --- empty?(file)   -> bool
