@@ -189,6 +189,11 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
 
+#@samplecode 例
+GC.disable   # => false
+GC.disable   # => true
+#@end
+
 @see [[m:GC.enable]]
 
 --- enable -> bool
