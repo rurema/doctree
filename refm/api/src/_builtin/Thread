@@ -718,6 +718,13 @@ c.join
 
 自身を人間が読める形式に変換した文字列を返します。
 
+#@samplecode 例
+a = Thread.current
+a.inspect   # => "#<Thread:0x00007fdbaf07ddb0 run>"
+b = Thread.new{}
+b.inspect   # => "#<Thread:0x00007fdbaf8f7d10@(irb):3 dead>"
+#@end
+
 #@since 1.9.2
 --- add_trace_func(pr) -> Proc
 
