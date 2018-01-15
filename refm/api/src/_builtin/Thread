@@ -681,6 +681,13 @@ thr.safe_level              # => 1
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
 
+#@samplecode 例
+a = Thread.new { Thread.stop }
+b = Thread.current
+a.stop?   # => true
+b.stop?   # => false
+#@end
+
 --- value    -> object 
 
 スレッド self が終了するまで待ち([[m:Thread#join]] と同じ)、
