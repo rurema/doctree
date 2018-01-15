@@ -661,6 +661,12 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 セーフレベルについては[[d:spec/safelevel]]を参照してください。
 
+#@samplecode 例
+thr = Thread.new { $SAFE = 1; sleep }
+Thread.current.safe_level   # => 0
+thr.safe_level              # => 1
+#@end
+
 --- status    -> String | false | nil
 
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
