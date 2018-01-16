@@ -654,6 +654,17 @@ priority を引き継ぎます。
 
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
+#@samplecode 例
+a = Thread.new { puts "a"; Thread.stop; puts "c" }
+sleep 0.1 while a.status!='sleep'
+puts "Got here"
+a.run
+a.join
+# => a
+# => Got here
+# => c
+#@end
+
 --- safe_level    -> Integer
 
 self のセーフレベルを返します。カレントスレッドの
