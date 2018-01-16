@@ -205,6 +205,12 @@ false)。
 
 @see [[m:GC.disable]]
 
+#@samplecode 例
+GC.disable   # => false
+GC.enable    # => true
+GC.enable    # => false
+#@end
+
 #@since 2.1.0
 --- start(full_mark: true, immediate_sweep: true) -> nil
 #@else
