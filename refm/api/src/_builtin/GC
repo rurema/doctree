@@ -243,6 +243,13 @@ nil を返します。
 GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
 @param value 任意のオブジェクト。真偽値として解釈されます。
+
+#@samplecode 例
+GC.stress # => false
+GC.stress = true
+GC.stress # => true
+#@end
+
 #@end
 
 #@since 1.9.1
