@@ -277,6 +277,30 @@ false を返します。
 
 @param other 比較対象のオブジェクトを指定します。
 
+    # 文字列
+    s = "abc"
+    m1 = s.match("a")
+    m2 = s.match("b")
+    m1.eql?(m2)  #=> false
+    m2 = s.match("a")
+    m1.eql?(m2)  #=> true
+
+    # 正規表現
+    r = Regexp.new(/abc/)
+    m1 = r.match("abc")  #=> #<MatchData "abc">
+    m2 = r.match("abcde")  #=> #<MatchData "abcde">
+    m1.eql?(m2)  #=> false
+    m2 = r.match("abc")  #=> #<MatchData "abc">
+    m1.eql?(m2)  #=> true
+
+    # 正規表現のマッチした位置
+    r = Regexp.new(/abcabc/)
+    m1 = r.match("abc")  #=> #<MatchData "abc">
+    m2 = r.match("abc", 3)  #=> #<MatchData "abc">
+    m1.eql?(m2)  #=> false
+    m2 = r.match("abc", 0)  #=> #<MatchData "abc">
+    m1.eql?(m2)  #=> true
+
 #@end
 #@since 2.4.0
 --- named_captures -> Hash
