@@ -216,6 +216,8 @@ a.join
 # => "abc"
 #@end
 
+@see [[m:Thread#run]], [[m:Thread#wakeup]]
+
 #@since 1.9.1
 --- exclusive { ... }  -> object
 #@# 1.8 以前は ../thread.rb にあります。
@@ -489,6 +491,8 @@ name に対応するスレッド固有データがない時には、引数 defau
 
 [[m:Thread#status]] が真を返すなら、このメソッドも真です。
 
+@see [[m:Thread#status]], [[m:Thread#stop?]]
+
 --- exit         -> self
 --- kill         -> self
 --- terminate    -> self
@@ -674,6 +678,8 @@ a.join
 # => c
 #@end
 
+@see [[m:Thread#wakeup]], [[m:Thread.stop]]
+
 --- safe_level    -> Integer
 
 self のセーフレベルを返します。カレントスレッドの
@@ -697,6 +703,8 @@ thr.safe_level              # => 1
 
 [[m:Thread#alive?]] が真を返すなら、このメソッドも真です。
 
+@see [[m:Thread#alive?]], [[m:Thread#stop?]]
+
 --- stop?    -> bool
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
@@ -707,6 +715,8 @@ b = Thread.current
 a.stop?   # => true
 b.stop?   # => false
 #@end
+
+@see [[m:Thread#alive?]], [[m:Thread#status]]
 
 --- value    -> object 
 
@@ -743,6 +753,8 @@ c.wakeup
 c.join
 # => "hey!"
 #@end
+
+@see [[m:Thread#run]], [[m:Thread.stop]]
 
 --- inspect -> String
 #@since 2.5.0
