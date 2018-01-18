@@ -622,6 +622,25 @@ priority を引き継ぎます。
 @param val スレッドの優先度を指定します。負の値も指定できます。
 #@end
 
+#@samplecode 例
+Thread.current.priority   # => 0
+
+count1 = count2 = 0
+a = Thread.new do
+      loop { count1 += 1 }
+    end
+a.priority = -1
+
+b = Thread.new do
+      loop { count2 += 1 }
+    end
+b.priority = -2
+count1 = count2 = 0 # reset
+sleep 1   # => 1
+count1    # => 13809431
+count2    # => 11571921
+#@end
+
 --- raise(error_type, message, traceback)     -> ()
 
 自身が表すスレッドで強制的に例外を発生させます。
