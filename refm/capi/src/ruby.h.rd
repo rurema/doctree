@@ -455,13 +455,13 @@ type 型のメモリ領域 var のサイズを n 個に変更する。
 
 --- MACRO char* RSTRING_PTR(RString str)
 
-引数 str の表す文字列ポインタの先頭を返します。
+引数 str の表す文字列のポインタの先頭を返します。
 
 @param str RString 構造体を指定します。
 
 --- MACRO char* RSTRING_END(RString str)
 
-引数 str の表す文字列ポインタの末尾を返します。
+引数 str の表す文字列のポインタの末尾を返します。
 
 @param str RString 構造体を指定します。
 
