@@ -207,6 +207,15 @@ new メソッドと違い initialize メソッドを呼びません。
 他のスレッドから [[m:Thread#run]] メソッドで再起動されるまで、カレ
 ントスレッドの実行を停止します。
 
+#@samplecode 例
+a = Thread.new { print "a"; Thread.stop; print "c" }
+sleep 0.1 while a.status!='sleep'
+print "b"
+a.run
+a.join
+# => "abc"
+#@end
+
 #@since 1.9.1
 --- exclusive { ... }  -> object
 #@# 1.8 以前は ../thread.rb にあります。
