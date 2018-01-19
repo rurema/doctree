@@ -378,6 +378,13 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 
 nil を返します。
 
+#@samplecode 例
+include GC
+GC.count  # => 3
+garbage_collect
+GC.count  # => 4
+#@end
+
 #@since 2.1.0
 == Constants
 
