@@ -236,14 +236,12 @@ nil を返します。
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
-#@since 1.8.7
 --- stress -> bool
 --- stress=(value)
 
 GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
 @param value 任意のオブジェクト。真偽値として解釈されます。
-#@end
 
 #@since 1.9.1
 --- count -> Integer
