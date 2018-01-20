@@ -387,7 +387,7 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 
 == Instance Methods
 
---- garbage_collect -> nil
+--- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
 
 ガーベージコレクトを開始します。
 
@@ -395,6 +395,17 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
+
+@param full_mark マイナー GC を動作させる場合は false を、そうでない場
+                 合は true を指定します。
+
+@param immediate_sweep sweep を遅らせる(Lazy Sweep を行う)場合は false
+                       を、そうでない場合は true を指定します。
+
+注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
+す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
+トしていない場合はキーワード引数を指定しても無視される可能性があります。
+
 
 #@since 2.1.0
 == Constants
