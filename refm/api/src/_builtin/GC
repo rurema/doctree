@@ -237,11 +237,20 @@ nil を返します。
 #@end
 
 --- stress -> bool
+
+GCがストレスモードかどうかを返します。
+
+真が設定されている場合は GC を行えるすべての機会に GC を行います。
+
+@see [[m:GC.stress=]]
+
 --- stress=(value)
 
 GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
 @param value 任意のオブジェクト。真偽値として解釈されます。
+
+@see [[m:GC.stress]]
 
 #@since 1.9.1
 --- count -> Integer
