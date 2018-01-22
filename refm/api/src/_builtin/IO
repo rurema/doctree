@@ -227,6 +227,14 @@ src のオフセット(src.pos)は変更されません。
 
 @param src_offset  コピーを始めるオフセットを数値で指定します。
 
+#@samplecode 例
+IO.write("filetest", "abcdefghij")
+IO.copy_stream("filetest", "filecopy", 2)     # => 2
+IO.read("filecopy")                           # => "ab"
+IO.copy_stream("filetest", "filecopy", 3, 4)  # => 3
+IO.read("filecopy")                           # => "efg"
+#@end
+
 --- try_convert(obj) -> IO | nil
 
 obj を to_io メソッドによって [[c:IO]] オブジェクトに変換します。
