@@ -1750,3 +1750,11 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 
 @see [[m:Array#sum]]
 #@end
+#@since 2.4.0
+--- uniq                -> Array
+--- uniq {|item| ... }  -> Array
+
+重複した要素を取り除いた配列を返します。
+
+@see [[m:Array#uniq]]
+#@end
