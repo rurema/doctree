@@ -583,6 +583,19 @@ opts でファイルを開くときのオプションを指定します。エン
 
 @raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.readlines("testfile")             # => ["line1\n", "line2,\n", "line3\n"]
+IO.readlines("testfile", ",")        # => ["line1\nline2,", "\nline3\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: 各行の末尾から "\n", "\r", または "\r\n" を取り除く（chomp = true）
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.readlines("testfile", chomp: true)  # => ["line1", "line2,", "line3"]
+#@end
+#@end
+
 --- select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
 
 [[man:select(2)]] を実行します。
