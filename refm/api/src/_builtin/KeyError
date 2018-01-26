@@ -12,6 +12,8 @@ Ruby 1.8 以前では同様の場面で [[c:IndexError]] が発生していま�
 
 KeyError の原因となったメソッド呼び出しのレシーバを返します。
 
+@raise ArgumentError レシーバが設定されていない時に発生します。
+
 例:
 
   h = Hash.new
@@ -25,6 +27,8 @@ KeyError の原因となったメソッド呼び出しのレシーバを返し�
 --- key -> object
 
 KeyError の原因となったメソッド呼び出しのキーを返します。
+
+@raise ArgumentError キーが設定されていない時に発生します。
 
 例:
 
