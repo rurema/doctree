@@ -5,6 +5,28 @@
 Ruby 1.8 以前では同様の場面で [[c:IndexError]] が発生していました。
 互換性のため、[[c:KeyError]] は [[c:IndexError]] のサブクラスになっています。
 
+#@since 2.6.0
+== Class Methods
+
+--- new(error_message = "")                   -> KeyError
+--- new(error_message = "", receiver:)        -> KeyError
+--- new(error_message = "", key:)             -> KeyError
+--- new(error_message = "", receiver:, key:)  -> KeyError
+
+例外オブジェクトを生成して返します。
+
+@param error_message エラーメッセージを表す文字列です
+
+@param receiver 原因となったメソッド呼び出しのレシーバ
+@param key      原因となったメソッド呼び出しのキー
+
+#@samplecode 例
+h = {foo: 1}
+err = KeyError.new("Message", receiver: h, key: :bar)
+p err.message  # => "Message"
+p err.receiver # => {:foo=>1}
+p err.key      # => :bar
+#@end
 #@since 2.5.0
 == Instance Methods
 
