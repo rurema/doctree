@@ -232,6 +232,10 @@ FileTest.readable?("testfile")      # => false
 
 @param file ファイル名を表す文字列を指定します。
 
+#@#noexample FileTest.#readable? を参照
+
+@see [[m:FileTest.#readable?]]
+
 --- setuid?(file)    -> bool
 
 ファイルが [[man:setuid(2)]] されている時に真を返
