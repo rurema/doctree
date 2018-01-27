@@ -397,6 +397,10 @@ precision を指定した場合は指定した桁数の数値と、上述の性�
 
 @return ハッシュ値を返します。
 
+#@#noexample
+
+@see [[m:Object#hash]]
+
 --- inspect -> String
 
 自身を人間が読みやすい形の文字列表現にして返します。
