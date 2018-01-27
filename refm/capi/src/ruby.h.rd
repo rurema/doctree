@@ -437,6 +437,42 @@ type 型のメモリ領域 var のサイズを n 個に変更する。
 
 --- MACRO struct RString *RSTRING(VALUE obj)
 
+引数 obj を RString 構造体にキャストして返します。
+
+@param obj Rubyの文字列オブジェクトを指定します。
+
+--- MACRO long RSTRING_LEN(RString str)
+
+引数 str の表す文字列のバイト数を返します。
+
+@param str RString 構造体を指定します。
+
+@see [[f:RSTRING_LENINT]]
+
+--- MACRO int RSTRING_LENINT(RString str)
+
+引数 str の表す文字列のバイト数をint型にキャストして返します。
+
+@param str RString 構造体を指定します。
+
+@see [[f:RSTRING_LEN]]
+
+--- MACRO char* RSTRING_PTR(RString str)
+
+引数 str の表す文字列のポインタの先頭を返します。
+
+@param str RString 構造体を指定します。
+
+@see [[f:RSTRING_END]]
+
+--- MACRO char* RSTRING_END(RString str)
+
+引数 str の表す文字列のポインタの末尾を返します。
+
+@param str RString 構造体を指定します。
+
+@see [[f:RSTRING_PTR]]
+
 --- MACRO struct RStruct *RSTRUCT(VALUE obj)
 
 --- MACRO int RTEST(VALUE obj)
