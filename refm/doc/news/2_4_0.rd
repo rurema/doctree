@@ -170,7 +170,7 @@
   * [[lib:net/ftp]]
     * TLSをサポート [[rfc:4217]]
     * [[m:Net::FTP.new]] の引数をキーワード引数に対応しました
-    * Add a new optional argument pathname to [[m:Net::FTP#status]] に省略可能なキーワード引数 pathname を追加
+    * [[m:Net::FTP#status]] に省略可能なキーワード引数 pathname を追加
       solebox による貢献。[[url:https://github.com/ruby/ruby/pull/1478]] [[feature:12965]]
 
   * [[lib:openssl]]
