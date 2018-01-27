@@ -124,7 +124,11 @@
 
 他のスレッドから参照する事も禁じられています。
 
+#@since 2.5.0
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+#@else
 @raise ThreadError ブロックを指定しなかった場合に発生します。
+#@end
 
 --- trace(*events) {|obj| ... } -> TracePoint
 
