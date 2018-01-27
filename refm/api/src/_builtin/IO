@@ -641,6 +641,10 @@ path で指定されるファイルをオープンし、ファイル記述子を
 
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
+#@samplecode 例
+IO.sysopen("testfile")   # => 3
+#@end
+
 @see [[m:Kernel.#open]]
 
 --- write(path, string, opt={}) -> Integer
