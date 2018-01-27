@@ -1,10 +1,10 @@
 #@since 2.1.0
-= class Thread::SizedQueue < Object
+= class Thread::SizedQueue < Thread::Queue
 alias SizedQueue
 
 サイズの最大値を指定できる [[c:Thread::Queue]] です。
 #@else
-= class SizedQueue < Object
+= class SizedQueue < Queue
 
 サイズの最大値を指定できる [[c:Queue]] です。
 #@end
@@ -117,4 +117,14 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 [[c:ClosedQueueError]] が発生して中断されます。
 
 @see [[m:Thread::Queue#close]]
+#@end
+#@since 2.5.0
+--- empty? -> bool
+
+キューが空の時、真を返します。
+
+--- length -> Integer
+--- size -> Integer
+
+キューの長さを返します。
 #@end
