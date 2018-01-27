@@ -1782,3 +1782,11 @@ olympics.uniq{|k,v| v} # => [[1896, "Athens"], [1900, "Paris"], [1904, "Chicago"
 
 @see [[m:Array#uniq]]
 #@end
+#@since 2.4.0
+--- uniq                -> Array
+--- uniq {|item| ... }  -> Array
+
+重複した要素を取り除いた配列を返します。
+
+@see [[m:Array#uniq]]
+#@end
