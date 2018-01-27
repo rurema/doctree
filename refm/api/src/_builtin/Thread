@@ -893,6 +893,8 @@ self の非同期例外のキューが空かどうかを返します。
 
 self の名前を返します。
 
+#@#noexample Thread#name=を参照
+
 @see [[m:Thread#name=]]
 
 --- name=(name) -> String
