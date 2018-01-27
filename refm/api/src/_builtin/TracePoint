@@ -120,7 +120,7 @@
   TracePoint.trace(:line) do |tp|
     $tp = tp
   end
-  $tp.line # => access from outside (RuntimeError)
+  $tp.lineno # => access from outside (RuntimeError)
 
 他のスレッドから参照する事も禁じられています。
 
