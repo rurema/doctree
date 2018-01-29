@@ -674,6 +674,16 @@ offset を指定しないと、書き込みの末尾でファイルを
 @param offset 書き込み開始位置
 @param opt ファイルを開くときのオプション引数
 
+#@samplecode 例
+text = "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
+IO.write("testfile", text)              # => 66
+IO.write("testfile", "0123456789", 20)  #=> 10
+IO.read("testfile")
+# => "This is line one\nTh0123456789 two\nThis is line three\nAnd so on...\n"
+IO.write("testfile", "0123456789")      #=> 10
+IO.read("testfile")                     # => "0123456789"
+#@end
+
 @see [[m:IO.binwrite]]
 
 --- binwrite(path, string, offset=nil) -> Integer
