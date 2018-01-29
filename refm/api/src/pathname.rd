@@ -68,13 +68,8 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
 
-#@since 2.5.0
---- glob(pattern, flags=0, base: nil) -> [Pathname]
---- glob(pattern, flags=0, base: nil) {|pathname| ...} -> nil
-#@else
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
-#@end
 
 ワイルドカードの展開を行なった結果を、
 Pathname オブジェクトの配列として返します。
@@ -88,9 +83,6 @@ Pathname オブジェクトの配列として返します。
 
 @param pattern ワイルドカードパターンです
 @param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
-#@since 2.5.0
-@param base    カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
-#@end
 
 #@samplecode
 require "pathname"
@@ -98,7 +90,9 @@ Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb.r
 #@end
 
 @see [[m:Dir.glob]]
+#@since 2.5.0
 @see [[m:Pathname#glob]]
+#@end
 
 == Instance Methods
 
