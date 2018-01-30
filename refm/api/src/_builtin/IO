@@ -679,7 +679,7 @@ text = "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
 IO.write("testfile", text)              # => 66
 IO.write("testfile", "0123456789", 20)  #=> 10
 IO.read("testfile")
-# => "This is line one\nTh0123456789 two\nThis is line three\nAnd so on...\n"
+# => "This is line one\nThi0123456789two\nThis is line three\nAnd so on...\n"
 IO.write("testfile", "0123456789")      #=> 10
 IO.read("testfile")                     # => "0123456789"
 #@end
