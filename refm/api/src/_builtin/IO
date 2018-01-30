@@ -729,6 +729,14 @@ object を出力します。object が文字列でない時にはメソッ
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
+#@samplecode 例
+IO.open(IO.sysopen("testfile", "w+")) do |io|
+  io.binmode? # => false
+  io.binmode  # => #<IO:fd 8>
+  io.binmode? # => true
+end
+#@end
+
 --- clone    -> IO
 --- dup      -> IO
 
