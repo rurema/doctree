@@ -1803,6 +1803,10 @@ self は読み込み用にオープンされていなければなりません。
 
 自身がバイナリモードなら true を返します。そうでない場合、false を返します。
 
+#@#noexample binmode を参照
+
+@see [[m:IO#binmode]]
+
 --- close_on_exec=(bool)
 自身に close-on-exec フラグを設定します。
 
