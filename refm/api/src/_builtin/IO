@@ -852,6 +852,17 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数とし�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+#@samplecode 例
+IO.write("testfile", "aあ")
+File.open("testfile") do |io|
+  io.each_byte { |x| p x }
+  # => 97
+  # 227
+  # 129
+  # 130
+end
+#@end
+
 --- bytes {|ch| ... }        -> self
 --- bytes                    -> Enumerator
 
