@@ -90,6 +90,11 @@ task :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statich
 
 desc "Check previous commit format"
 task :check_prev_commit_format do
+  require 'tempfile'
+  require 'bitclust/htmlutils'
+
+  include BitClust::HTMLUtils
+
   change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
   res = []
   ALL_VERSIONS.each do |v|
@@ -110,6 +115,19 @@ task :check_prev_commit_format do
           a = html.lines.grep(/<span class="compileerror">/)
           if !a.empty?
             res.push("Found invalid format link: #{a.first.chomp} in #{v}:#{path}")
+          end
+
+          # TODO: scan by bitclust
+          html.scan(/<pre class="highlight ruby">.*?<code>(.*?)<\/code><\/pre>/m).each do |s|
+            Tempfile.create('sample') do |f|
+              sample = unescape_html(s.first.gsub(/<span[^>]+>/, '').gsub(/<\/span>/, ''))
+              f.write(sample)
+              f.close
+              r = `ruby -c #{f.path}`
+              unless /Syntax OK/.match(r)
+                res.push("Found syntax error in sample: #{sample.lines.first.chomp}... in #{v}:#{path}")
+              end
+            end
           end
         end
       end
