@@ -741,6 +741,16 @@ dup は内容の等しいフリーズされていない IO を返します。
 
 @raise IOError 既に close されていた場合に発生します。 
 
+#@samplecode 例
+clone_io = nil
+IO.write("testfile", "test")
+File.open("testfile") do |io|
+  clone_io = io.clone
+end
+clone_io.read # => "test"
+clone_io.close
+#@end
+
 --- close    -> nil
 
 入出力ポートをクローズします。
