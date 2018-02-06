@@ -761,6 +761,14 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 @raise IOError 既に close されていた場合に発生します。
 #@end
 
+#@samplecode 例
+IO.write("testfile", "test")
+f = File.open("testfile")
+f.read   # => "test"
+f.close
+# f.read # => IOError (すでに close しているので read できない)
+#@end
+
 --- close_read    -> nil
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
