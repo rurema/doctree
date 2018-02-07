@@ -774,6 +774,13 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
+#@samplecode 例
+IO.popen("/bin/sh","r+") do |f|
+  f.close_read
+  # f.readlines # => IOError: not opened for reading
+end
+#@end
+
 --- close_write    -> nil
 
 書き込み用の IO を close します。
