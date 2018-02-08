@@ -1,0 +1,9 @@
+= module RubyVM::MJIT
+
+Ruby の MJIT 関連のモジュールです。
+
+== Singleton Methods
+
+--- enabled? -> bool
+
+MJIT が有効かどうかを返します。
