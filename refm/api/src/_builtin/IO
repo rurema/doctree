@@ -1913,6 +1913,18 @@ IO の各コードポイントに対して繰り返しブロックを呼びだ�
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
 
+#@samplecode 例
+IO.write("testfile", "abcde")
+File.open("testfile") do |f|
+  f.each_codepoint { |i| p i }
+end
+# => 97
+# 98
+# 99
+# 100
+# 101
+#@end
+
 --- codepoints{|c| ... }         -> self
 --- codepoints                   -> Enumerator
 
