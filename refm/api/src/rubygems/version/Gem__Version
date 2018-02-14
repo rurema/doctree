@@ -87,8 +87,9 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返しま�
 
 バージョン情報を文字列として返します。
 
---- to_yaml_properties -> [String]
-#@todo
+#@#--- to_yaml_properties -> [String]
+#@#
+#@# :nodoc:
 
 --- version -> String
 
@@ -98,11 +99,19 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返しま�
 
 self のバージョン情報を書き換えます。
 
---- yaml_initialize(tag, values) -> String
-#@todo
-
-
+#@#--- yaml_initialize(tag, values) -> String
+#@#
+#@# :nodoc:
 
 #@#--- Gem::Version::Requirement
 #@todo Gem::Requirement に書く
 
+== Constants
+
+#@#--- VERSION_PATTERN -> String
+#@#
+#@# :nodoc:
+#@#
+#@#--- ANCHORED_VERSION_PATTERN -> Regexp
+#@#
+#@# :nodoc:
