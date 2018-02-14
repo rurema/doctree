@@ -916,6 +916,18 @@ fcntl(2) が返した整数を返します。
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+require "fcntl"
+
+IO.write("testfile", "abcde")
+# ファイル状態フラグを読み出す
+File.open("testfile") do |f|
+  f.fcntl(Fcntl::F_GETFL, 0) # => 0
+  f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK) # => 0
+  f.fcntl(Fcntl::F_GETFL, 0) # => 4
+end
+#@end
+
 --- fsync    -> 0 | nil
 
 書き込み用の IO に対して、システムコール [[man:fsync(2)]]
