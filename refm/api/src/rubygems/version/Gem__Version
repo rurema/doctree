@@ -91,6 +91,30 @@ self のバージョン情報を書き換えます。
 #@#--- Gem::Version::Requirement
 #@todo Gem::Requirement に書く
 
+--- prerelease? -> bool
+
+self がプレリリースと思われる文字を含むバージョンかどうかを返します。
+
+#@samplecode 例
+Gem::Version.new('1.2.0a').prerelease? # => true
+Gem::Version.new('1.2.0').prerelease?  # => false
+#@end
+
+@see [[m:Gem::Version#release]]
+
+--- release -> Gem::Version
+
+self をリリースバージョンにした [[c:Gem::Version]] オブジェクトを返します。
+
+プレリリースではないバージョンであれば self を返します。
+
+#@samplecode 例
+Gem::Version.new('1.2.0a').release # => #<Gem::Version "1.2.0">
+Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
+#@end
+
+@see [[m:Gem::Version#prerelease?]]
+
 == Constants
 
 #@#--- VERSION_PATTERN -> String
