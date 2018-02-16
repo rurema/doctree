@@ -832,6 +832,13 @@ f.close
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
+#@samplecode 例
+f = IO.popen("/bin/sh","r+") do |f|
+  f.close_write
+  # f.print "nowhere" # => IOError: not opened for writing
+end
+#@end
+
 --- closed?    -> bool
 
 ポートがクローズされている時に真を返します。
