@@ -87,6 +87,8 @@ Thread を使うことで並行プログラミングが可能になります。
 
 カレントスレッドに対して [[m:Thread#exit]] を呼びます。
 
+#@#noexample Thread#exitを参照
+
 --- kill(thread)    -> Thread
 
 指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。終了したスレッドを返します。
