@@ -480,6 +480,20 @@ name に対応するスレッド固有データがない時には、引数 defau
 
 @param newstate スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
 
+#@samplecode 例
+a = Thread.new{ Thread.stop; raise }
+a.report_on_exception = true
+a.report_on_exception   # => true
+a.run
+# => #<Thread:0x00007fc3f48c7908@(irb):1 run> terminated with exception (report_on_exception is true):
+#    Traceback (most recent call last):
+#    (irb):1:in `block in irb_binding': unhandled exception
+#    #<Thread:0x00007fc3f48c7908@(irb):1 dead>
+b = Thread.new{ Thread.stop; raise }
+b.report_on_exception = false
+b.run   # => #<Thread:0x00007fc3f48aefc0@(irb):4 dead>
+#@end
+
 @see [[m:Thread.report_on_exception]]
 #@end
 
