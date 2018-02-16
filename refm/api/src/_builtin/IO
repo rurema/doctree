@@ -989,6 +989,12 @@ fcntl(2) が返した整数を返します。
 
 @raise IOError 既に close されている場合に発生します。
 
+
+#@samplecode 例
+$stdin.fileno    # => 0
+$stdout.fileno   # => 1
+#@end
+
 #@since 2.2.0
 @see [[m:Dir#fileno]]
 #@end
