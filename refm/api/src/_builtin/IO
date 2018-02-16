@@ -314,6 +314,31 @@ path が空ファイルの場合、何もせずに nil を返します。
 
 @raise Errno::EXXX path のオープンに失敗した場合、発生します。
 
+#@samplecode 例:rs 指定なし
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.foreach("testfile")  # => #<Enumerator: IO:foreach("testfile")>
+IO.foreach("testfile") { |x| print "GOT ", x }
+# => GOT line1
+# GOT line2,
+# GOT line3
+#@end
+
+#@samplecode 例:カンマを行の区切りに指定（ rs = "," ）
+IO.write("testfile", "line1,line2,line3")
+IO.foreach("testfile", ",") { |x| puts "GOT #{x}" }
+# => GOT line1,
+# GOT line2,
+# GOT line3
+#@end
+
+#@since 2.4.0
+#@samplecode 例: 各行の末尾から "\n", "\r", または "\r\n" を取り除く（chomp = true）
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.foreach("testfile", chomp: true) { |x| print "GOT ", x }
+# => GOT line1GOT line2,GOT line3
+#@end
+#@end
+
 @see [[m:$/]]
 
 --- pipe                    -> [IO]
