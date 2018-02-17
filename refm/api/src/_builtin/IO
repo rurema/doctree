@@ -1012,6 +1012,17 @@ IO ポートの内部バッファをフラッシュします。
 
 @raise Errno::EXXX [[man:fflush(3)]] が失敗した場合に発生します。
 
+#@samplecode 例
+require "tempfile"
+
+Tempfile.open("testtmpfile") do |f|
+  f.print "test"
+  File.read(f.path) # => ""
+  f.flush
+  File.read(f.path) # => "test"
+end
+#@end
+
 --- getc    -> String | nil
 
 IO ポートから外部エンコーディングに従い 1 文字読み込んで返します。
