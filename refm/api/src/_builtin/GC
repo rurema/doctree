@@ -236,6 +236,13 @@ nil を返します。
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
+#@samplecode 例
+GC.count  # => 3
+GC.start  # => nil
+GC.count  # => 4
+#@end
+
+#@since 1.8.7
 --- stress -> bool
 
 GCがストレスモードかどうかを返します。
