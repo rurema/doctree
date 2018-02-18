@@ -433,6 +433,21 @@ name に対応するスレッド固有データがなければ nil を返し
 
 @param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。
 
+#@samplecode 例
+[
+  Thread.new { Thread.current["name"] = "A" },
+  Thread.new { Thread.current[:name]  = "B" },
+  Thread.new { Thread.current["name"] = "C" }
+].each do |th|
+  th.join
+  puts "#{th.inspect}: #{th[:name]}"
+end
+
+# => #<Thread:0x00000002a54220 dead>: A
+# => #<Thread:0x00000002a541a8 dead>: B
+# => #<Thread:0x00000002a54130 dead>: C
+#@end
+
 #@since 2.5.0
 @see [[m:Thread#fetch]]
 #@end
