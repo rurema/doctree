@@ -1147,6 +1147,16 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+IO.popen("-") do |pipe|
+  if pipe
+    $stderr.puts "In parent, child pid is #{pipe.pid}" # => In parent, child pid is 16013
+  else
+    $stderr.puts "In child, pid is #{$$}"              # => In child, pid is 16013
+  end
+end
+#@end
+
 --- pos    -> Integer
 --- tell   -> Integer
 
