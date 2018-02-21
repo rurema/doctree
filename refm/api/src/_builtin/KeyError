@@ -27,6 +27,7 @@ p err.message  # => "Message"
 p err.receiver # => {:foo=>1}
 p err.key      # => :bar
 #@end
+#@end
 #@since 2.5.0
 == Instance Methods
 
