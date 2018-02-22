@@ -472,6 +472,15 @@ name に対応するスレッド固有データがない時には、引数 defau
 @raise KeyError 引数defaultもブロックも与えられてない時、
                 name に対応するスレッド固有データがないと発生します。
 
+#@samplecode 例
+th = Thread.new { Thread.current[:name] = 'A' }
+th.join
+th.fetch(:name)   # => "A"
+th.fetch(:fetch, 'B')   # => "B"
+th.fetch('name')  {|name| "Thread" + name}  # => "A"
+th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
+#@end
+
 @see [[m:Thread#[] ]]
 #@end
 
