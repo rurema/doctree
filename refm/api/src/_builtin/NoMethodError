@@ -25,6 +25,9 @@
 == Class Methods
 
 --- new(error_message = "", name = nil, args = nil) -> NoMethodError
+#@since 2.6.0
+--- new(error_message = "", name = nil, args = nil, receiver:) -> NoMethodError
+#@end
 
 例外オブジェクトを生成して返します。
 
@@ -34,6 +37,9 @@
 
 @param args メソッド呼び出しに使われた引数です
 
+#@since 2.6.0
+@param receiver 原因となったメソッド呼び出しのレシーバです
+#@end
 
 例:
 
