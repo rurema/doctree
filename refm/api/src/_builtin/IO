@@ -1184,6 +1184,10 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@samplecode 例
+$stdout.print("This is ", 100, " percent.\n") # => This is 100 percent.
+#@end
+
 @see [[m:Kernel.#print]]
 
 --- printf(format, *arg)    -> nil
