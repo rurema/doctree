@@ -288,7 +288,7 @@ false を返します。
     #@samplecode 正規表現
     r = /abc/
     m1 = r.match("abc")  #=> #<MatchData "abc">
-    m2 = r.match("abcde")  #=> #<MatchData "abcde">
+    m2 = r.match("abcde")  #=> #<MatchData "abc">
     m1 == m2  #=> false
     m2 = r.match("abc")  #=> #<MatchData "abc">
     m1 == m2  #=> true
