@@ -1201,6 +1201,8 @@ C 言語の printf と同じように、format に従い引数
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@#noexample Kernel.#printf を参照
+
 @see [[m:Kernel.#printf]]
 
 --- putc(ch)    -> object
