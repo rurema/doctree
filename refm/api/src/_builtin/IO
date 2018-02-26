@@ -1215,6 +1215,11 @@ C 言語の printf と同じように、format に従い引数
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@samplecode 例
+$stdout.putc "A" # => A
+$stdout.putc 65  # => A
+#@end
+
 @see [[m:Kernel.#putc]]
 
 --- puts(*obj)    -> nil
