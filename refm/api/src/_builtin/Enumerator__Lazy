@@ -116,6 +116,9 @@ Enumerator::Lazy のインスタンスを返します。
 
 --- select {|item| ... } -> Enumerator::Lazy
 --- find_all {|item| ... } -> Enumerator::Lazy
+#@since 2.6.0
+--- filter {|item| ... } -> Enumerator::Lazy
+#@end
 
 [[m:Enumerable#select]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
