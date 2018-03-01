@@ -1569,6 +1569,16 @@ offset 位置への移動が成功すれば 0 を返します。
 
 @raise IOError 既に close されていた場合に発生します。 
 
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\n")
+File.open("testfile") do |f|
+  s = f.stat
+  "%o" % s.mode   # => "100644"
+  s.blksize       # => 4096
+  s.atime         # => 2018-03-01 23:19:59 +0900
+end
+#@end
+
 @see [[m:File#lstat]], [[m:File.stat]], [[m:File.lstat]] 
 
 --- sync    -> bool
