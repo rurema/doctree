@@ -1577,6 +1577,14 @@ offset 位置への移動が成功すれば 0 を返します。
 
 @raise IOError 既に close されていた場合に発生します。 
 
+#@samplecode 例
+File.open("testfile", "w") do |f|
+  f.sync      # => false
+  f.sync = true
+  f.sync      # => true
+end
+#@end
+
 --- sync=(newstate)
 
 自身を同期モードに設定すると、出力関数の呼出毎にバッファがフラッシュされます。
@@ -1584,6 +1592,8 @@ offset 位置への移動が成功すれば 0 を返します。
 @param newstate 自身を同期モードに設定するかを boolean で指定します。
 
 @raise IOError 既に close されていた場合に発生します。 
+
+@see [[m:IO#sync]]
 
 --- sysread(maxlen, outbuf = "")   -> String
 
