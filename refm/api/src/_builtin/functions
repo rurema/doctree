@@ -1193,6 +1193,37 @@ start 段上の呼び出し元の情報を [[m:$@]]
 
 @param range  取得したいフレームの範囲を示す [[c:Range]] オブジェクトを指定します。
 
+#@samplecode 例
+def test1(start, length)
+  locations = caller_locations(start, length)
+  p locations
+  p locations.map(&:lineno)
+  p locations.map(&:path)
+end
+
+def test2(start, length)
+  test1(start, length)
+end
+
+def test3(start, length)
+  test2(start, length)
+end
+
+caller_locations # => []
+test3(1, nil)
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'", "/Users/user/test.rb:17:in `<main>'"]
+# => [9, 13, 17]
+# => ["/Users/user/test.rb", "/Users/user/test.rb", "/Users/user/test.rb"]
+test3(1, 2)
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'"]
+# => [9, 13]
+# => ["/Users/user/test.rb", "/Users/user/test.rb"]
+test3(2, 1)
+# => ["/Users/user/test.rb:13:in `test3'"]
+# => [13]
+# => ["/Users/user/test.rb"]
+#@end
+
 @see [[c:Thread::Backtrace::Location]], [[m:Kernel.#caller]]
 
 --- gets(rs = $/) -> String | nil
