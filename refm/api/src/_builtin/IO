@@ -1715,6 +1715,8 @@ stdio を経由しないので他の出力メソッドと混用すると思わ�
 
 self を返します。
 
+#@#noexample
+
 --- ungetc(char)     -> nil
 
 指定された char を読み戻します。
