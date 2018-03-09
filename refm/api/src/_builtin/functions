@@ -1940,6 +1940,18 @@ $_.chopとこのメソッド chop は以下の点で違いがあります。
   * chop は $_ の値をコピーして、コピーの方を更新し、
   $_ に再代入します。
 
+#@samplecode 例
+$_ = "test\r\n"
+$_          # => "test\r\n"
+chop        # => "test"
+$_ = "test\n"
+$_          # => "test\n"
+chop        # => "test"
+$_ = "test"
+$_          # => "test"
+chop        # => "tes"
+#@end
+
 @see [[m:String#chop]],[[m:$_]]
 
 --- chomp(rs = $/)  -> String
