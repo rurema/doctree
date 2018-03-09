@@ -110,6 +110,13 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
 
 @param block [[m:Object#initialize]] に渡されるブロックを指定します。
 
+例:
+  # [[c:Class]] クラスのインスタンス、C クラスを生成
+  C = Class.new   # => C
+
+  # [[c:Class]] クラスのインスタンス、C クラスのインスタンスを生成
+  C.new           # => #<C:0x00005623f8b4e458>
+
 --- superclass    -> Class | nil
 
 自身のスーパークラスを返します。
