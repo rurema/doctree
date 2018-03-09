@@ -1001,6 +1001,18 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @see [[m:Module#method_defined?]]
 
+例:
+  module Foo
+    def foo; end
+    protected def bar; end
+    private def baz; end
+  end
+
+  Foo.protected_method_defined?(:foo) # => false
+  Foo.protected_method_defined?(:bar) # => true
+  Foo.protected_method_defined?(:baz) # => false
+  Foo.protected_method_defined?(:qux) # => false
+
 --- public_method_defined?(name) -> bool
 
 インスタンスメソッド name がモジュールに定義されており、
