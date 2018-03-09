@@ -132,3 +132,7 @@ ruby: illegal switch in RUBYOPT: -y (RuntimeError)
   設定されていないとき(nilのとき)は
   "/usr/local/bin:/usr/ucb:/usr/bin:/bin:."
   で検索されます。
+
+: RUBY_GC_*
+
+  [[ref:c:GC#tuning_gc]] を参照。
