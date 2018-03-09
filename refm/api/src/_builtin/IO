@@ -1205,6 +1205,15 @@ end
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\n")
+File.open("testfile") do |f|
+  f.pos    # => 0
+  f.pos = 17
+  f.gets   # => "This is line two\n"
+end
+#@end
+
 --- print(*arg)    -> nil
 
 引数を IO ポートに順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
