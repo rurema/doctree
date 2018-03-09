@@ -1182,6 +1182,15 @@ end
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "This is line one\n")
+File.open("testfile") do |f|
+  f.pos    # => 0
+  f.gets   # => "This is line one\n"
+  f.pos    # => 17
+end
+#@end
+
 --- pos=(n)
 
 ファイルポインタを指定位置に移動します。
