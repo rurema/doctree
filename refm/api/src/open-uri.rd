@@ -277,7 +277,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 --- read(options = {})     -> String
 
 自身が表す内容を読み込んで文字列として返します。
-self.open(options={}).read と同じです。
+self.open(options={}) {|io| io.read } と同じです。
 このメソッドによって返される文字列は [[c:OpenURI::Meta]]
 によって extend されています。
 
