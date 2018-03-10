@@ -850,6 +850,18 @@ end
 
 ポートがクローズされている時に真を返します。
 
+#@samplecode 例
+IO.write("testfile", "test")
+f = File.new("testfile")
+f.close         # => nil
+f.closed?       # => true
+f = IO.popen("/bin/sh","r+")
+f.close_write   # => nil
+f.closed?       # => false
+f.close_read    # => nil
+f.closed?       # => true
+#@end
+
 #@since 2.4.0
 --- each(rs = $/, chomp: false) {|line| ... }         -> self
 --- each(limit, chomp: false) {|line| ... }           -> self
@@ -897,18 +909,6 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
-
-#@samplecode 例
-IO.write("testfile", "test")
-f = File.new("testfile")
-f.close         # => nil
-f.closed?       # => true
-f = IO.popen("/bin/sh","r+")
-f.close_write   # => nil
-f.closed?       # => false
-f.close_read    # => nil
-f.closed?       # => true
-#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
