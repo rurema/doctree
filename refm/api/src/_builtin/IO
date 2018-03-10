@@ -807,6 +807,8 @@ f.close
 # f.read # => IOError (すでに close しているので read できない)
 #@end
 
+@see [[m:IO#closed?]], [[m:IO#close_read]], [[m:IO#close_write]]
+
 --- close_read    -> nil
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
@@ -827,6 +829,8 @@ IO.popen("/bin/sh","r+") do |f|
 end
 #@end
 
+@see [[m:IO#close]], [[m:IO#closed?]], [[m:IO#close_write]]
+
 --- close_write    -> nil
 
 書き込み用の IO を close します。
@@ -846,6 +850,8 @@ f = IO.popen("/bin/sh","r+") do |f|
 end
 #@end
 
+@see [[m:IO#close]], [[m:IO#closed?]], [[m:IO#close_read]]
+
 --- closed?    -> bool
 
 ポートがクローズされている時に真を返します。
@@ -861,6 +867,8 @@ f.closed?       # => false
 f.close_read    # => nil
 f.closed?       # => true
 #@end
+
+@see [[m:IO#close]], [[m:IO#close_read]], [[m:IO#close_write]]
 
 #@since 2.4.0
 --- each(rs = $/, chomp: false) {|line| ... }         -> self
