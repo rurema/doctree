@@ -854,7 +854,8 @@ end
 
 --- closed?    -> bool
 
-ポートがクローズされている時に真を返します。
+self が完全に(読み込み用と書き込み用の両方が)クローズされている場合に true を返します。
+そうでない場合は false を返します。
 
 #@samplecode 例
 IO.write("testfile", "test")
