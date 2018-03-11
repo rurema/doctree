@@ -807,6 +807,8 @@ f.close
 # f.read # => IOError (すでに close しているので read できない)
 #@end
 
+@see [[m:IO#closed?]], [[m:IO#close_read]], [[m:IO#close_write]]
+
 --- close_read    -> nil
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
@@ -827,6 +829,8 @@ IO.popen("/bin/sh","r+") do |f|
 end
 #@end
 
+@see [[m:IO#close]], [[m:IO#closed?]], [[m:IO#close_write]]
+
 --- close_write    -> nil
 
 書き込み用の IO を close します。
@@ -846,9 +850,26 @@ f = IO.popen("/bin/sh","r+") do |f|
 end
 #@end
 
+@see [[m:IO#close]], [[m:IO#closed?]], [[m:IO#close_read]]
+
 --- closed?    -> bool
 
-ポートがクローズされている時に真を返します。
+self が完全に(読み込み用と書き込み用の両方が)クローズされている場合に true を返します。
+そうでない場合は false を返します。
+
+#@samplecode 例
+IO.write("testfile", "test")
+f = File.new("testfile")
+f.close         # => nil
+f.closed?       # => true
+f = IO.popen("/bin/sh","r+")
+f.close_write   # => nil
+f.closed?       # => false
+f.close_read    # => nil
+f.closed?       # => true
+#@end
+
+@see [[m:IO#close]], [[m:IO#close_read]], [[m:IO#close_write]]
 
 #@since 2.4.0
 --- each(rs = $/, chomp: false) {|line| ... }         -> self
@@ -897,18 +918,6 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
-
-#@samplecode 例
-IO.write("testfile", "test")
-f = File.new("testfile")
-f.close         # => nil
-f.closed?       # => true
-f = IO.popen("/bin/sh","r+")
-f.close_write   # => nil
-f.closed?       # => false
-f.close_read    # => nil
-f.closed?       # => true
-#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
