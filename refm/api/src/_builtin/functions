@@ -1903,6 +1903,11 @@ $_.sub とこのメソッド sub は以下の点で違いがあります。
                   文字列を指定した場合は全く同じ文字列にだけマッチする
 @param replace    pattern で指定した文字列と置き換える文字列
 
+#@samplecode 例
+$_               # => "testtest\n"
+sub(/es/, '!!')  # => "t!!ttest\n"
+#@end
+
 @see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace)          -> String
