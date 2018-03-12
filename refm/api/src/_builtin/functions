@@ -597,7 +597,12 @@ syscall(2) や
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
 @raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-#@#例...
+
+#@samplecode 例
+syscall 4, 1, "hello\n", 6   # '4' is write(2) on our box
+# => hello
+#@end
+
 @see [[lib:fiddle]], [[man:syscall(2freebsd)]], [[man:syscall(2linux)]]
 
 
