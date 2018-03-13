@@ -775,6 +775,13 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 : ?C
     ファイルの inode 変更時刻を返す -> Time
 
+#@samplecode 例
+IO.write("testfile", "test")
+test("r", "testfile") # => true
+test("s", "testfile") # => 4
+test("M", "testfile") # => 2018-03-31 07:38:40 +0900
+#@end
+
 --- test(cmd, file1, file2) -> bool
 
 ２ファイル間のファイルテストを行います。
@@ -794,6 +801,20 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
     ファイル1の方がファイル2より最終更新時刻が古い
 : ?-
     ファイル1とファイル2が同一のファイルである
+
+#@samplecode 例
+IO.write("testfile1", "test1")
+IO.write("testfile2", "test2")
+%w(= < > -).each do |e|
+  result = test(e, "testfile1", "testfile2")
+  puts "#{e}: #{result}"
+end
+#@end
+
+# => =: true
+# => <: false
+# => >: false
+# => -: false
 
 --- load(file, priv = false) -> true
 
