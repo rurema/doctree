@@ -1970,6 +1970,8 @@ command を登録します。[[m:Signal.#trap]]と同じです。
 @param signal [[m:Signal.#trap]] 参照
 @param command [[m:Signal.#trap]] 参照
 
+#@#noexample Signal.#trap を参照
+
 @see [[m:Signal.#trap]],[[c:Signal]]
 
 --- trace_var(varname, hook) -> nil
