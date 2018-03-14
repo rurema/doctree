@@ -267,6 +267,12 @@ GCのストレスモードを引数 value に設定します。
 : 0x04
   malloc/calloc/realloc の後でメジャーGCを動作させる場合に指定します。
 
+#@samplecode 例
+GC.stress # => false
+GC.stress = true
+GC.stress # => true
+#@end
+
 @see [[m:GC.stress]]
 
 #@since 1.9.1
