@@ -1495,7 +1495,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 
 @see [[m:Object#to_a]],[[m:Object#to_ary]],[[c:Array]]
 
+#@since 2.6.0
+--- Float(arg, exception: true) -> Float | nil
+#@else
 --- Float(arg) -> Float
+#@end
 
 引数を浮動小数点数([[c:Float]])に変換した結果を返します。
 
@@ -1505,6 +1509,10 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 メソッド Float は文字列に対し [[m:String#to_f]] よりも厳密な変換を行います。
 
 @param arg 変換対象のオブジェクトです。
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 @raise ArgumentError 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
 @raise TypeError nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
                  to_f が浮動小数点数を返さなかった場合に発生します。
