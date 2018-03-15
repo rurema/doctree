@@ -1534,7 +1534,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 
 @see [[m:String#to_f]],[[c:Float]]
 
+#@since 2.6.0
+--- Integer(arg, base = 0, exception: true) -> Integer | nil
+#@else
 --- Integer(arg, base = 0) -> Integer
+#@end
 
 引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
 
@@ -1552,6 +1556,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
             ら基数を判断します。その場合に認識できるプリフィクスは、0b
             (2 進数)、0 (8 進数)、0o (8 進数)、0d (10 進数)、0x (16 進
             数) です。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 整数と見なせない文字列を引数に指定した場合に発生します。
 @raise TypeError メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
