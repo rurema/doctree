@@ -2290,8 +2290,13 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 @see [[m:Kernel.#__method__]]
 
+#@since 2.6.0
+--- Complex(r, i = 0, exception: true) -> Complex | nil
+--- Complex(s, exception: true)        -> Complex | nil
+#@else
 --- Complex(r, i = 0) -> Complex
 --- Complex(s)        -> Complex
+#@end
 
 実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
 
@@ -2300,6 +2305,11 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 @param i 生成する複素数の虚部。省略した場合は 0 です。
 
 @param s 生成する複素数を表す文字列。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 
