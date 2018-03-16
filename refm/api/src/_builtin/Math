@@ -54,6 +54,10 @@ x の逆正弦関数の値をラジアンで返します。
 @raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+Math.asin(1) == Math::PI/2  # => true
+#@end
+
 --- atan(x) -> Float
 
 x の逆正接関数の値をラジアンで返します。
