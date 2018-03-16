@@ -32,6 +32,10 @@ x の逆余弦関数の値をラジアンで返します。
 @raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+Math.acos(0) == Math::PI/2  # => true
+#@end
+
 --- asin(x) -> Float
 
 x の逆正弦関数の値をラジアンで返します。
