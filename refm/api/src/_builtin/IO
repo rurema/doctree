@@ -637,8 +637,6 @@ IO.readlines("testfile", chomp: true)  # => ["line1", "line2,", "line3"]
 それぞれ配列にして、配列の配列として返します。
 タイムアウトした時には nil を返します。
 
-[[m:Kernel.#select]] と同じです。
-
 @param reads 入力待ちする [[c:IO]] オブジェクトの配列を渡します。
 
 @param writes 出力待ちする [[c:IO]] オブジェクトの配列を渡します。
@@ -669,6 +667,8 @@ IO.readlines("testfile", chomp: true)  # => ["line1", "line2,", "line3"]
      w.write(mesg)
    end
  }
+
+@see [[m:Kernel.#select]]
 
 --- sysopen(path, mode = "r", perm = 0666)     -> Integer
 
