@@ -162,7 +162,7 @@ IO に対してエンコーディングを指定する方法には、生成時�
 #@#Win, Mac では UTF-8 です(予定)。
 UNIX では ASCII-8BIT です。
 
-==== binmode
+====[a:io_binmode] バイナリモード
 
 Windows の IO にはテキストモードとバイナリモードという2種類のモードが存在します。
 これらのモードは上で説明した IO のエンコーディングとは独立です。改行の変換にしか影響しません。
@@ -728,6 +728,9 @@ IO.read("testfile")                     # => "0123456789"
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
 
+ファイルを開くときの mode が "rb:ASCII-8BIT" で、バイナリモードが有効
+である点以外は [[m:IO.write]] と同じです。
+
 offset を指定するとその位置までシークします。
 
 offset を指定しないと、書き込みの末尾でファイルを
@@ -765,7 +768,7 @@ p Digest::MD5.hexdigest(IO.binread('rurema.txtmode.png'))
 # => "997651a2e096c3a1f584f4276f9fceed" (Windowsでの実行結果
 #@end
 
-@see [[m:IO.write]]
+@see [[ref:c:IO#io_binmode]], [[m:IO.write]]
 
 == Instance Methods
 
@@ -794,6 +797,8 @@ object を出力します。object が文字列でない時にはメソッ
 バイナリモードから通常のモードに戻す方法は再オープンしかありません。
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
+
+@see [[ref:c:IO#io_binmode]], [[m:IO#binmode?]]
 
 --- clone    -> IO
 --- dup      -> IO
@@ -2014,7 +2019,7 @@ self は読み込み用にオープンされていなければなりません。
 
 #@#noexample binmode を参照
 
-@see [[m:IO#binmode]]
+@see [[ref:c:IO#io_binmode]], [[m:IO#binmode]]
 
 --- close_on_exec=(bool)
 自身に close-on-exec フラグを設定します。
