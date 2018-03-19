@@ -737,6 +737,34 @@ offset を指定しないと、書き込みの末尾でファイルを
 @param string 書き込む文字列
 @param offset 書き込み開始位置
 
+#@samplecode 例
+require 'base64'
+require 'digest/md5'
+
+# $ base64 /path/to/bitclust/theme/default/rurema.png した文字列
+rurema_b64 = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAALGPC/xhBQAAAAZ0Uk5T
+AP8A/wD/N1gbfQAAAFRJREFUKM9j+A8GDMQBkEqIamPjVRCEqQhZCkMDUAgDGcNk0TUwgKXTUFVD
+uAgFmBrQfPOfSA2YjKGngQRPkxCsJEccaUmD5MR3hhCAqIZqICl5AwC33+NQ9pXi+AAAAABJRU5E
+rkJggg=='
+rurema_png = Base64.decode64(rurema_b64)
+
+# expected md5sum
+p Digest::MD5.hexdigest(rurema_png)
+# => "5f0b286bc25e276795518e93e9f2cc29" (Macでの実行結果
+# => "5f0b286bc25e276795518e93e9f2cc29" (Windowsでの実行結果
+
+IO.binwrite('rurema.binmode.png', rurema_png)
+IO.write('rurema.txtmode.png', rurema_png)
+
+p Digest::MD5.hexdigest(IO.binread('rurema.binmode.png'))
+# => "5f0b286bc25e276795518e93e9f2cc29" (Macでの実行結果
+# => "5f0b286bc25e276795518e93e9f2cc29" (Windowsでの実行結果
+
+p Digest::MD5.hexdigest(IO.binread('rurema.txtmode.png'))
+# => "5f0b286bc25e276795518e93e9f2cc29" (Macでの実行結果
+# => "997651a2e096c3a1f584f4276f9fceed" (Windowsでの実行結果
+#@end
+
 @see [[m:IO.write]]
 
 == Instance Methods
