@@ -271,6 +271,10 @@ x の誤差関数の値を返します。
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+Math.erf(0) # => 0.0
+#@end
+
 --- erfc(x) -> Float
 x の相補誤差関数の値を返します。
 
