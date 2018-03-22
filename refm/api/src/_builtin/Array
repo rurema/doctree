@@ -2317,9 +2317,11 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 @raise TypeError ブロックの評価結果が true、false、nil、数値以外であっ
                  た場合に発生します。
 
-#@until 2.3.0
+#@end
+#@if("2.0.0" <= version and version < "2.3.0")
 @see [[m:Range#bsearch]], [[url:http://magazine.rubyist.net/?0041-200Special-note#l15]]
-#@else
+#@end
+#@since 2.3.0
 @see [[m:Array#bsearch_index]], [[m:Range#bsearch]], [[url:http://magazine.rubyist.net/?0041-200Special-note#l15]]
 
 --- bsearch_index { |x| ... } -> Integer | nil
@@ -2351,7 +2353,6 @@ ary.bsearch_index { |x| 4 - x / 2 } # => nil
 #@end
 
 @see [[m:Array#bsearch]]
-#@end
 #@end
 
 #@since 2.4.0
