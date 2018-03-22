@@ -162,7 +162,7 @@ IO に対してエンコーディングを指定する方法には、生成時�
 #@#Win, Mac では UTF-8 です(予定)。
 UNIX では ASCII-8BIT です。
 
-==== binmode
+====[a:io_binmode] バイナリモード
 
 Windows の IO にはテキストモードとバイナリモードという2種類のモードが存在します。
 これらのモードは上で説明した IO のエンコーディングとは独立です。改行の変換にしか影響しません。
@@ -728,6 +728,9 @@ IO.read("testfile")                     # => "0123456789"
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
 
+ファイルを開くときの mode が "rb:ASCII-8BIT" で、バイナリモードが有効
+である点以外は [[m:IO.write]] と同じです。
+
 offset を指定するとその位置までシークします。
 
 offset を指定しないと、書き込みの末尾でファイルを
@@ -737,35 +740,29 @@ offset を指定しないと、書き込みの末尾でファイルを
 @param string 書き込む文字列
 @param offset 書き込み開始位置
 
+#@# TODO: 2.4以上のみを対象できる状況になったらString#unpack1でunpack('m').firstを置き換える。
 #@samplecode 例
-require 'base64'
-require 'digest/md5'
+# 8x8の真っ白なPNG画像データ。
+png = 'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAQSURBVBhXY/iPAwwpif//Aboev0GEdLc5AAAAAElFTkSuQmCC'.unpack('m').first
 
-# $ base64 /path/to/bitclust/theme/default/rurema.png した文字列
-rurema_b64 = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAALGPC/xhBQAAAAZ0Uk5T
-AP8A/wD/N1gbfQAAAFRJREFUKM9j+A8GDMQBkEqIamPjVRCEqQhZCkMDUAgDGcNk0TUwgKXTUFVD
-uAgFmBrQfPOfSA2YjKGngQRPkxCsJEccaUmD5MR3hhCAqIZqICl5AwC33+NQ9pXi+AAAAABJRU5E
-rkJggg=='
-rurema_png = Base64.decode64(rurema_b64)
+# 期待する先頭16バイトの16進ダンプ: どの環境でも同じ。
+puts png[0...16].unpack('C*').map {|c| '%02x' % c }.join(' ')
+# => 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52
 
-# expected md5sum
-p Digest::MD5.hexdigest(rurema_png)
-# => "5f0b286bc25e276795518e93e9f2cc29" (Macでの実行結果
-# => "5f0b286bc25e276795518e93e9f2cc29" (Windowsでの実行結果
+# binwriteを使用した場合: どの環境でも正しく保存できる。
+IO.binwrite('white.binmode.png', png)
+puts IO.binread('white.binmode.png', 16).unpack('C*').map {|c| '%02x' % c }.join(' ')
+# => 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52
 
-IO.binwrite('rurema.binmode.png', rurema_png)
-IO.write('rurema.txtmode.png', rurema_png)
-
-p Digest::MD5.hexdigest(IO.binread('rurema.binmode.png'))
-# => "5f0b286bc25e276795518e93e9f2cc29" (Macでの実行結果
-# => "5f0b286bc25e276795518e93e9f2cc29" (Windowsでの実行結果
-
-p Digest::MD5.hexdigest(IO.binread('rurema.txtmode.png'))
-# => "5f0b286bc25e276795518e93e9f2cc29" (Macでの実行結果
-# => "997651a2e096c3a1f584f4276f9fceed" (Windowsでの実行結果
+# binwriteを使用しなかった場合: Windowsで改行文字(0x0a: "\n")と同じビット列が変換されてしまう。
+IO.write('white.txtmode.png', png)
+puts IO.binread('white.txtmode.png', 16).unpack('C*').map {|c| '%02x' % c }.join(' ')
+# => 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 (Linux/Macの場合
+# => 89 50 4e 47 0d 0d 0a 1a 0d 0a 00 00 00 0d 49 48 (Windowsの場合
 #@end
 
-@see [[m:IO.write]]
+@see [[ref:c:IO#io_binmode]], [[m:IO.write]]
 
 == Instance Methods
 
@@ -794,6 +791,8 @@ object を出力します。object が文字列でない時にはメソッ
 バイナリモードから通常のモードに戻す方法は再オープンしかありません。
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
+
+@see [[ref:c:IO#io_binmode]], [[m:IO#binmode?]]
 
 --- clone    -> IO
 --- dup      -> IO
@@ -2014,7 +2013,7 @@ self は読み込み用にオープンされていなければなりません。
 
 #@#noexample binmode を参照
 
-@see [[m:IO#binmode]]
+@see [[ref:c:IO#io_binmode]], [[m:IO#binmode]]
 
 --- close_on_exec=(bool)
 自身に close-on-exec フラグを設定します。
