@@ -577,15 +577,15 @@ fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
 
 #@samplecode ブロックを指定しなかった場合
-if pid = fork
-  puts "parent process. pid: #{Process.pid}, child pid: #{pid}"
+if child_pid = fork
+  puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
   # => parent process. pid: 81060, child pid: 81329
 
   # 親プロセスでの処理
   # ...
 
   # 子プロセスの終了を待って終了。
-  Process.waitpid(pid)
+  Process.waitpid(child_pid)
 else
   puts "child process. pid: #{Process.pid}"
   # => child process. pid: 81329
@@ -596,7 +596,7 @@ end
 #@end
 
 #@samplecode ブロックを指定した場合
-pid = fork do
+child_pid = fork do
   puts "child process. pid: #{Process.pid}"
   # => child process. pid: 79602
 
@@ -604,14 +604,14 @@ pid = fork do
   sleep(1)
 end
 
-puts "parent process. pid: #{Process.pid}, child pid: #{pid}"
+puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
 # => parent process. pid: 79055, child pid: 79602
 
 # 親プロセスでの処理
 # ...
 
 # 子プロセスの終了を待って終了。
-Process.waitpid(pid)
+Process.waitpid(child_pid)
 #@end
 
 
