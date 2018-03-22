@@ -575,7 +575,46 @@ nil を返します。ブロックを指定して呼び出した場合には、�
 fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-#@#例...
+
+#@samplecode ブロックを指定しなかった場合
+if child_pid = fork
+  puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+  # => parent process. pid: 81060, child pid: 81329
+
+  # 親プロセスでの処理
+  # ...
+
+  # 子プロセスの終了を待って終了。
+  Process.waitpid(child_pid)
+else
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 81329
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+#@end
+
+#@samplecode ブロックを指定した場合
+child_pid = fork do
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 79602
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+
+puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+# => parent process. pid: 79055, child pid: 79602
+
+# 親プロセスでの処理
+# ...
+
+# 子プロセスの終了を待って終了。
+Process.waitpid(child_pid)
+#@end
+
+
 @see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
