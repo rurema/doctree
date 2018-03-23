@@ -899,6 +899,19 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 
 @param feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
+
+#@samplecode 例
+$LOADED_FEATURES.grep(/prime/).size # => 0
+require "prime"       # => true
+$LOADED_FEATURES.grep(/prime/).size # => 1
+require "prime"       # => false
+begin
+  require "invalid"
+rescue LoadError => e
+  e.message # => "cannot load such file -- invalid"
+end
+#@end
+
 #@since 1.9.1
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]],[[m:Kernel.#require_relative]]
 #@else
