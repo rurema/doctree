@@ -306,6 +306,12 @@ x の指数関数の値を返します。
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+Math.exp(0)       # => 1.0
+Math.exp(1)       # => 2.718281828459045
+Math.exp(1.5)     # => 4.4816890703380645
+#@end
+
 @see [[man:exp(3)]]
 
 --- frexp(x) -> [Float, Integer]
