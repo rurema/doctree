@@ -326,6 +326,11 @@ Math.exp(1.5)     # => 4.4816890703380645
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+fraction, exponent = Math.frexp(1234)   # => [0.6025390625, 11]
+fraction * 2**exponent                  # => 1234.0
+#@end
+
 #@since 1.8.0
 --- hypot(x, y) -> Float
 
