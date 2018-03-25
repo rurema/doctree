@@ -364,6 +364,11 @@ sqrt(x*x + y*y) を返します。
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+fraction, exponent = Math.frexp(1234)
+Math.ldexp(fraction, exponent)   # => 1234.0
+#@end
+
 #@since 1.9.1
 --- log(x) -> Float
 --- log(x, b) -> Float
