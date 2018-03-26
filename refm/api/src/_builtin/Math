@@ -553,6 +553,10 @@ log(|gamma(x)|) と、gamma(x) の符号を返します。
 
 @raise RangeError xに実数以外の数値を指定した場合に発生します。
 
+#@samplecode 例
+Math.lgamma(0) # => [Infinity, 1]
+#@end
+
 @see [[m:Math.#gamma]]
 
 #@end
