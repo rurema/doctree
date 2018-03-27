@@ -394,6 +394,15 @@ x の対数を返します。
 #@else
 @raise DomainError 引数 x に負の数を指定した場合に発生します。
 #@end
+
+#@samplecode 例
+Math.log(0)          # => -Infinity
+Math.log(1)          # => 0.0
+Math.log(Math::E)    # => 1.0
+Math.log(Math::E**3) # => 3.0
+Math.log(12, 3)      # => 2.2618595071429146
+#@end
+
 #@else
 --- log(x) -> Float
 
