@@ -447,6 +447,12 @@ x の常用対数を返します。
 @raise Errno::ERANGE 引数が 0 の場合に発生します。
 #@end
 
+#@samplecode 例
+Math.log10(1)       # => 0.0
+Math.log10(10)      # => 1.0
+Math.log10(10**100) # => 100.0
+#@end
+
 --- sqrt(x) -> Float
 
 x の平方根を返します。
