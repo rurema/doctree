@@ -429,6 +429,12 @@ x の自然対数を返します。
 @raise RangeError xに実数以外の数値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+Math.log2(1)      # => 0.0
+Math.log2(2)      # => 1.0
+Math.log2(32768)  # => 15.0
+Math.log2(65536)  # => 16.0
+#@end
 
 --- log10(x) -> Float
 
