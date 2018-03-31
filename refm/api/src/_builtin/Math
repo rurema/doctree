@@ -193,6 +193,10 @@ x の正弦関数の値をラジアンで返します。
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@end
 
+#@samplecode 例
+Math.sin(Math::PI/2) # => 1.0
+#@end
+
 --- tan(x) -> Float
 
 x の正接関数の値をラジアンで返します。
