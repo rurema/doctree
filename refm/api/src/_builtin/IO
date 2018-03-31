@@ -1789,6 +1789,14 @@ stdio を経由しないので他の出力メソッドと混用すると思わ�
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@samplecode 例
+File.open("testfile", "w+") do |f|
+  f.syswrite("ABCDE") # => 5
+  f.syswrite(:ABC)    # => 3
+end
+File.read("testfile") # => "ABCDEABC"
+#@end
+
 --- to_io    -> self
 
 self を返します。
