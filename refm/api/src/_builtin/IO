@@ -743,8 +743,8 @@ offset を指定しないと、書き込みの末尾でファイルを
 #@# TODO: 2.4以上のみを対象できる状況になったらString#unpack1でunpack('m').firstを置き換える。
 #@samplecode 例
 # 8x8の真っ白なPNG画像データ。
-png = 'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-jwv8YQUAAAAQSURBVBhXY/iPAwwpif//Aboev0GEdLc5AAAAAElFTkSuQmCC'.unpack('m').first
+png = 'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAADklEQVQIW2P4DwUMlDEA98A/wTjP
+QBoAAAAASUVORK5CYII='.unpack('m').first
 
 # 期待する先頭16バイトの16進ダンプ: どの環境でも同じ。
 puts png[0...16].unpack('C*').map {|c| '%02x' % c }.join(' ')
