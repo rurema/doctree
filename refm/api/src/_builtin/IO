@@ -2169,6 +2169,17 @@ IO のすべてのバッファされているデータを直ちにディスク�
 @raise NotImplementedError [[man:fdatasync(2)]] も [[man:fsync(2)]] も
        サポートされていない OS で発生します。
 
+#@samplecode 例
+require "tempfile"
+
+Tempfile.open("testtmpfile") do |f|
+  f.print "test"
+  File.read(f.path) # => ""
+  f.fdatasync
+  File.read(f.path) # => "test"
+end
+#@end
+
 --- advise(advice, offset=0, len=0) -> nil
 
 [[man:posix_fadvise(2)]] を呼びだし、
