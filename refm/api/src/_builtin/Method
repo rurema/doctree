@@ -371,6 +371,16 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
 である)場合は nil を返します。
 
+#@samplecode 例
+def sample1
+end
+def sample2
+end
+method(:sample1).source_location        # => ["/path/to/target.rb", 1]
+method(:sample2).source_location        # => ["/path/to/target.rb", 3]
+"test".method(:upcase).source_location  # => nil
+#@end
+
 @see [[m:Proc#source_location]]
 #@end
 
