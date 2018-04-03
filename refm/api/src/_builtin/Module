@@ -919,6 +919,8 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
+#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
+
 @see [[m:Object#public_methods]], [[m:Module#instance_methods]]
 
 #@since 1.9.1
