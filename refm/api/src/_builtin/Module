@@ -1691,6 +1691,32 @@ prepend の処理の実体です。このメソッド自体は mod で指定し�
 @param mod prepend を呼び出したモジュール
 @return mod が返されます
 
+#@samplecode 例
+class Recorder
+  RECORDS = []
+end
+
+module X
+  def self.prepend_features(mod)
+    Recorder::RECORDS << mod
+  end
+end
+
+class A
+  prepend X
+end
+
+class B
+  include X
+end
+
+class C
+  prepend X
+end
+
+Recorder::RECORDS # => [A, C]
+#@end
+
 --- prepended(class_or_module) -> ()
 
 self が [[m:Module#prepend]] されたときに対象のクラスまたはモジュールを
