@@ -1580,6 +1580,29 @@ name で指定した定数の可視性を public に変更します。
 
 @return self を返します。
 
+#@samplecode 例
+module SampleModule
+  class SampleInnerClass
+  end
+
+  # => 非公開クラスであることを明示するために private にする
+  private_constant :SampleInnerClass
+end
+
+begin
+  SampleModule::SampleInnerClass
+rescue => e
+  e # => #<NameError: private constant SampleModule::SampleInnerClass referenced>
+end
+
+module SampleModule
+  # => 非公開クラスであることは承知で利用するために public にする
+  public_constant :SampleInnerClass
+end
+
+SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
+#@end
+
 @see [[m:Module#private_constant]], [[m:Object#untrusted?]]
 
 #@end
