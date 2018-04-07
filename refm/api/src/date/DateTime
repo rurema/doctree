@@ -278,6 +278,9 @@ strftime('%FT%T%:z') と等価です。
   #=> "H13.02.03T04:05:06.123456789+07:00"
 
 --- min -> Integer
+#@since 1.9.1
+--- minute -> Integer
+#@end
 分を返します (0-59)。
 
 #@since 1.8.0
