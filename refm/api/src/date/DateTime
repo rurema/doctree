@@ -303,6 +303,9 @@ self を複製して、その時差を設定しなおします。
 時差を返します。
 
 --- sec -> Integer
+#@since 1.9.1
+--- second -> Integer
+#@end
 秒を返します (0-59)。
 
 --- zone -> String
