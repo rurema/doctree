@@ -312,3 +312,9 @@ self を複製して、その時差を設定しなおします。
 タイムゾーンを返します。
 
 これは、正確には時差をあらわす文字列です。
+
+--- sec_fraction -> Rational
+#@since 1.9.1
+--- second_fraction -> Rational
+#@end
+秒の小数点以下の部分を表す分数を返します。
