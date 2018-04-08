@@ -309,9 +309,7 @@ Ruby起動時の初期値は 0 です。
 この変数はグローバルスコープ、読み取り専用です。
 
 --- $0 -> String
-#@since 1.8.2
 --- $PROGRAM_NAME -> String
-#@end
 
 現在実行中の Ruby スクリプトの名前を表す文字列です。
 
@@ -412,9 +410,7 @@ require 'foo' を実行すると、
 @see [[d:spec/rubycmd]], [[d:spec/envvars]]
 
 --- $"               -> [String]
-#@since 1.8.2
 --- $LOADED_FEATURES -> [String]
-#@end
 
 [[m:Kernel.#require]] でロードされたファイル名を含む配列です。
 

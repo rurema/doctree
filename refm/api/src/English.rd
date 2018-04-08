@@ -41,18 +41,6 @@
     p $ERROR_POSITION #=> ["sample.rb:5"]
   end
 
-#@until 1.8.2
---- $LOADED_FEATURES -> [String]
-
-[[m:$"]] の別名
-
-  require "English"
-  require "find"
-
-  p $LOADED_FEATURES #=> ["English.rb", "find.rb"]
-
-#@end
-
 --- $FS              -> String | nil
 --- $FIELD_SEPARATOR -> String | nil
 
@@ -238,19 +226,6 @@
   $IGNORECASE = true # => warning: variable $= is no longer effective; ignored
   $IGNORECASE        # => warning: variable $= is no longer effective
                      #    false
-
---- $PROGRAM_NAME -> String
-
-[[m:$0]] の別名
-
-  require "English"
-  
-  p $PROGRAM_NAME
-  #end of sample.rb
-
-  ruby sample.rb  #=> "sample.rb"
-  ruby ./sample.rb #=> "./sample.rb"
-  ruby /home/hoge/bin/sample.rb #=> "/home/hoge/bin/sample.rb"
 
 --- $ARGV -> [String]
 
