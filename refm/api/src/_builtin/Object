@@ -870,6 +870,14 @@ self#=~(obj) を反転した結果と同じ結果を返します。
 
 @param other 判定するオブジェクトを指定します。
 
+#@samplecode 例
+obj = 'regexp'
+p (obj !~ /re/) # => false
+
+obj = nil
+p (obj !~ /re/) # => true
+#@end
+
 @see [[m:Object#=~]]
 #@end
 
