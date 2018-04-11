@@ -594,15 +594,17 @@ nil の場合システムが適当にローカルホストを
 
 @param host ホスト名、もしくはアドレスを示す文字列
 
-  require 'net/http'
-  
-  http = Net::HTTP.new("www.example.com")
-  http.local_host = "192.168.0.5"
-  http.local_port = "53043"
-  
-  http.start
-  p http.get("/").body
+#@samplecode 例
+require 'net/http'
 
+http = Net::HTTP.new("www.example.com")
+http.local_host = "192.168.0.5"
+http.local_port = "53043"
+
+http.start do |h|
+  p h.get("/").body
+end
+#@end
 
 @see [[m:Net::HTTP#local_host=]], [[m:Net::HTTP#local_port]]
 
@@ -626,14 +628,17 @@ nil の場合システムが適当にローカルポートを
 
 @param port ローカルポート(数値、もしくはサービス名文字列)
 
-  require 'net/http'
-  
-  http = Net::HTTP.new("www.example.com")
-  http.local_host = "192.168.0.5"
-  http.local_port = "53043"
-  
-  http.start
-  p http.get("/").body
+#@samplecode 例
+require 'net/http'
+
+http = Net::HTTP.new("www.example.com")
+http.local_host = "192.168.0.5"
+http.local_port = "53043"
+
+http.start do |h|
+  p h.get("/").body
+end
+#@end
 
 @see [[m:Net::HTTP#local_port=]], [[m:Net::HTTP#local_host]]
 
