@@ -836,11 +836,13 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 
 @param other 任意のオブジェクトです。結果に影響しません。
 
-  obj = 'regexp'
-  p(obj =~ /re/) #=> 0
-  
-  obj = nil
-  p(obj =~ /re/) #=> nil
+#@samplecode 例
+obj = 'regexp'
+p(obj =~ /re/) #=> 0
+
+obj = nil
+p(obj =~ /re/) #=> nil
+#@end
 
 @see [[m:String#=~]]
 
