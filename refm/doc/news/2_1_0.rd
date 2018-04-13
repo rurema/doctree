@@ -215,7 +215,7 @@
 
   * [[lib:rdoc]]
     * 4.1.0 に更新。主にデフォルトのテンプレートとアクセシビリティを改善しました。
-      [[url:https://github.com/rdoc/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
+      [[url:https://github.com/ruby/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
 
   * [[lib:resolv]]
     * 追加: [[m:Resolv::DNS.fetch_resource]]
