@@ -1269,6 +1269,8 @@ marshal_dump/marshal_load を使うべきです。
 
 @return   返り値は無視されます。
 
+#@#noexample 参照先の Object#marshal_dump にサンプルが書かれているため
+
 @see [[m:Object#marshal_dump]], [[c:Marshal]]
 
 #@end
