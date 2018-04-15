@@ -1797,6 +1797,8 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 オブジェクトの「untrustマーク」を取り除きます。
 
+#@#noexample deprecated
+
 @see [[m:Object#untrusted?]],[[m:Object#untrust]]
 
 --- untrusted? -> bool
