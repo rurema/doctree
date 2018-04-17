@@ -1813,6 +1813,8 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 オブジェクトの「untrustマーク」をセットします。
 
+#@#noexample deprecated
+
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
 #@end
 
