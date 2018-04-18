@@ -387,7 +387,9 @@ x に汚染マークが付いていたら真。
 --- MACRO void OBJSETUP(obj, VALUE klass, int typeflag)
 
 obj をクラス klass とフラグ typeflag で初期化する。
+#@until 2.3.0
 $SAFE >= 3 のときは無条件で汚染する。
+#@end
 
 --- MACRO int POSFIXABLE(long f)
 
