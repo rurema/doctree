@@ -1558,11 +1558,6 @@ name で指定した定数の可視性を private に変更します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-       untrust なオブジェクトではない場合に発生します。
-#@end
-
 @return self を返します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
@@ -1574,11 +1569,6 @@ name で指定した定数の可視性を public に変更します。
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-       untrust なオブジェクトではない場合に発生します。
-#@end
 
 @return self を返します。
 
@@ -1595,9 +1585,6 @@ deprecate に設定した定数を参照すると警告メッセージが表示�
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
-
-#@# @raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-#@#        untrust なオブジェクトではない場合に発生します。
 
 @return self を返します。
 
