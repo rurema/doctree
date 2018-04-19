@@ -1806,6 +1806,8 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 オブジェクトの「untrustマーク」がセットされている時真を返します。
 
+#@#noexample deprecated
+
 @see [[m:Object#trust]],[[m:Object#untrust]]
 
 --- untrust -> self
