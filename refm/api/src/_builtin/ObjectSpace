@@ -157,6 +157,10 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
+#@#noexample 参照先の GC.start と同様の動作のため
+
+@see [[m:GC.start]]
+
 --- undefine_finalizer(obj)    -> object
 
 obj に対するファイナライザをすべて解除します。
