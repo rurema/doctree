@@ -1409,6 +1409,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 引数が与えられた時には引数によって指定されたメソッドを private に
 設定します。
 
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
+
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
@@ -1433,6 +1435,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 引数が与えられた時には引数によって指定されたメソッドを protected
 に設定します。
 
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
+
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
@@ -1446,6 +1450,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 引数が与えられた時には引数によって指定されたメソッドを public に設
 定します。
+
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
 
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
