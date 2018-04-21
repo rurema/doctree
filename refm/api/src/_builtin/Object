@@ -226,6 +226,9 @@ other が self 自身の時、真を返します。
 #@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
@@ -243,6 +246,9 @@ other が self 自身の時、真を返します。
 #@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
@@ -260,6 +266,9 @@ other が self 自身の時、真を返します。
 #@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
