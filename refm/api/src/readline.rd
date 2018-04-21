@@ -55,10 +55,6 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 @param prompt カーソルの前に表示する文字列を指定します。デフォルトは""です。
 @param add_hist 真ならば、入力した文字列をヒストリに記録します。デフォルトは偽です。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @raise IOError 標準入力が tty でない、かつ、標準入力をクローズしている
                ([[man:isatty(2)]] の errno が EBADF である。) 場合に発生します。
 
@@ -199,10 +195,6 @@ proc は、次のものを想定しています。
             nil を指定した場合はデフォルトの動作になります。
 #@end
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 例: foo、foobar、foobazを補完する。
 
   require 'readline'
@@ -224,10 +216,6 @@ proc は、次のものを想定しています。
 ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクト
 proc を取得します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.completion_proc=]]
 
 --- completion_case_fold=(bool)
@@ -236,10 +224,6 @@ proc を取得します。
 bool が真ならば同一視します。bool が偽ならば同一視しません。
 
 @param bool 大文字と小文字を同一視する(true)／しない(false)を指定します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see [[m:Readline.completion_case_fold]]
 
@@ -255,10 +239,6 @@ bool が真ならば同一視します。bool が偽ならば同一視しませ�
   Readline.completion_case_fold = "This is a String."
   p Readline.completion_case_fold # => "This is a String."
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.completion_case_fold=]]
 
 --- vi_editing_mode -> nil
@@ -270,10 +250,6 @@ vi モードの詳細は、GNU Readline のマニュアルを参照してくだ�
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 --- emacs_editing_mode -> nil
 
 編集モードを Emacs モードにします。デフォルトは Emacs モードです。
@@ -284,10 +260,6 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 --- completion_append_character=(string)
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字 string を指定します。
@@ -295,10 +267,6 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 @param string 1文字を指定します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 半角スペース「" "」などの単語を区切る文字を指定すれば、
 連続して入力する際に便利です。
@@ -327,10 +295,6 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.completion_append_character=]]
 
 #@since 1.8.0
@@ -346,10 +310,6 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.basic_word_break_characters]]
 
 --- basic_word_break_characters -> String
@@ -358,10 +318,6 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 単語の区切りを示す複数の文字で構成される文字列を取得します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see [[m:Readline.basic_word_break_characters=]]
 
@@ -379,10 +335,6 @@ GNU Readline のデフォルトの値は、
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.completer_word_break_characters]]
 
 --- completer_word_break_characters -> String
@@ -393,10 +345,6 @@ GNU Readline のデフォルトの値は、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see [[m:Readline.completer_word_break_characters=]]
 
@@ -411,10 +359,6 @@ GNU Readline のデフォルト値は、「"'」です。
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.basic_quote_characters]]
 
 --- basic_quote_characters -> String
@@ -423,10 +367,6 @@ GNU Readline のデフォルト値は、「"'」です。
 複数の文字で構成される文字列を取得します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see [[m:Readline.basic_quote_characters=]]
 
@@ -441,10 +381,6 @@ GNU Readline のデフォルト値は、「"'」です。
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.completer_quote_characters]]
 
 --- completer_quote_characters -> String
@@ -453,10 +389,6 @@ GNU Readline のデフォルト値は、「"'」です。
 クオートするための複数の文字で構成される文字列を取得します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see [[m:Readline.completer_quote_characters=]]
 
@@ -471,10 +403,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see [[m:Readline.filename_quote_characters]]
 
 --- filename_quote_characters -> String
@@ -483,10 +411,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 クオートするための複数の文字で構成される文字列を取得します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see [[m:Readline.filename_quote_characters=]]
 #@end
@@ -502,10 +426,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 @see GNU Readline ライブラリの rl_set_screen_size 関数
 
 --- Readline.get_screen_size -> [Integer, Integer]
@@ -513,10 +433,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 端末のサイズを [rows, columns] で返します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 @see GNU Readline ライブラリの rl_get_screen_size 関数
 #@end
@@ -577,10 +493,6 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
 @raise RangeError index で指定したインデックスが int 型よりも大きな値の場合に発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 例:
 
   require "readline"
@@ -627,20 +539,12 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 --- <<(string) -> self
 
 ヒストリの最後に string で指定した文字列を追加します。
 self を返します。
 
 @param string 文字列を指定します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 例: "foo"を追加する。
 
@@ -666,10 +570,6 @@ self を返します。
 
 @param string 文字列を指定します。複数指定できます。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 例: "foo"を追加する。
 
   require "readline"
@@ -694,10 +594,6 @@ self を返します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 例:
 
   require "readline"
@@ -716,10 +612,6 @@ self を返します。
 最初の内容は、ヒストリから取り除かれます。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 例:
 
@@ -740,10 +632,6 @@ self を返します。
 
 ヒストリの内容に対してブロックを評価します。
 ブロックパラメータにはヒストリの最初から最後までの内容を順番に渡します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 例: ヒストリの内容を最初から順番に出力する。
 
@@ -771,10 +659,6 @@ self を返します。
 
 ヒストリに格納された内容の数を取得します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
-
 例: ヒストリの内容を最初から順番に出力する。
 
   require "readline"
@@ -788,10 +672,6 @@ self を返します。
 
 ヒストリに格納された内容の数が 0 の場合は true を、
 そうでない場合は false を返します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 例:
 
@@ -816,10 +696,6 @@ index が -1 の場合は [[m:Readline::HISTORY.pop]] と同様に動作しま�
 @param index 削除対象のヒストリのインデックスを指定します。
 
 @raise NotImplementedError サポートしていない環境で発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
-#@end
 
 例:
 
