@@ -70,6 +70,11 @@ ENV.has_key?('NEW_KEY') # => false
 
 環境変数をすべてクリアします。self を返します。
 
+#@samplecode
+ENV.clear
+p ENV # => {}
+#@end
+
 --- delete(key) -> String | nil
 --- delete(key) {|key| ... } -> String | nil
 
