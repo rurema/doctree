@@ -1791,7 +1791,6 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 @raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
-#@since 1.9.1
 --- trust -> self
 #@todo
 
@@ -1818,7 +1817,6 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 #@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
-#@end
 
 #@since 1.9.2
 --- singleton_class -> Class
