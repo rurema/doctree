@@ -168,6 +168,35 @@ obj を返します。
 
 @param obj ファイナライザを解除したいオブジェクトを指定します。
 
+#@samplecode 例
+class Sample
+  def Sample.callback
+    proc {
+      puts "finalize"
+    }
+  end
+
+  def initialize
+    ObjectSpace.define_finalizer(self, Sample.callback)
+  end
+
+  def undef
+    ObjectSpace.undefine_finalizer(self)
+  end
+end
+
+sample = Sample.new
+GC.start
+# => finalize
+
+sample = Sample.new
+sample.undef
+GC.start
+# ※何も出力されない
+#@end
+
+@see [[m:ObjectSpace.#define_finalizer]]
+
 #@since 1.9.1
 --- count_objects(result_hash = {}) -> Hash
 
