@@ -221,8 +221,13 @@ CGI等でユーザからの入力を処理するのに適しています。
      その [[c:Proc]] オブジェクトが call されると、記憶していたセーフレベルで実行される。
    * 汚染された文字列を第二引数に指定して [[m:Kernel.#trap]]/[[m:Kernel.#trace_var]] を
      実行するとその時点で例外 [[c:SecurityError]] が発生する。
-   * 実装の都合上 [[c:Fixnum]], [[c:Symbol]], true, false, nil は汚染されない。
-     なお [[c:Bignum]], [[c:Float]] は汚染されることは注意が必要。
+#@since 2.4.0
+   * 実装の都合上 [[c:Integer]], [[c:Float]], [[c:Symbol]], true,
+     false, nil は汚染されない。
+#@else
+   * 実装の都合上 [[c:Fixnum]], [[c:Bignum]], [[c:Float]],
+     [[c:Symbol]], true, false, nil は汚染されない。
+#@end
 
 === 使用例
 
