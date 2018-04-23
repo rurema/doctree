@@ -903,7 +903,7 @@ nil を渡すとトレースを解除します。
 
 @see [[m:Thread#thread_variable_set]], [[m:Thread#[] ]]
 
-@see [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html#fiber-%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%AE%E6%A9%9F%E8%83%BD%E3%81%AE%E8%BF%BD%E5%8A%A0]]
+@see [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]]
 
 --- thread_variable_set(key, value)
 
