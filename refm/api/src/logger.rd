@@ -215,9 +215,9 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 === 参考
 
 : Rubyist Magazine
-  [[url:http://magazine.rubyist.net/]]
+  [[url:https://magazine.rubyist.net/]]
 : 標準添付ライブラリ紹介【第 2 回】
-  [[url:http://magazine.rubyist.net/?0008-BundledLibraries]]
+  [[url:https://magazine.rubyist.net/articles/0008/0008-BundledLibraries.html]]
 
 = class Logger < Object
 include Logger::Severity
