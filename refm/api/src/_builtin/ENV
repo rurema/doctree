@@ -354,3 +354,18 @@ select! はオブジェクトが変更された場合に self を、
 
 @see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [[m:Hash#select!]],
 #@end
+#@since 2.6.0
+--- slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+#@samplecode 例
+ENV["foo"] = "bar"
+ENV["baz"] = "qux"
+ENV["bar"] = "rab"
+ENV.slice()             # => {}
+ENV.slice("")           # => {}
+ENV.slice("unknown")    # => {}
+ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
+#@end
+#@end
