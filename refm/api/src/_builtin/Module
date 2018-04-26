@@ -1621,7 +1621,7 @@ deprecate に設定した定数を参照すると警告メッセージが表示�
 
 refinements 機能の詳細については以下を参照してください。
 
- * [[url:http://magazine.rubyist.net/?0041-200Special-refinement]]
+ * [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html]]
 #@since 2.1.0
  * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
 #@else

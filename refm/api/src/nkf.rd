@@ -157,7 +157,7 @@ Ruby から使うためのモジュールです。
 
 === 参考
 
-  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:http://magazine.rubyist.net/?0009-BundledLibraries#l15]]
+  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:https://magazine.rubyist.net/articles/0009/0009-BundledLibraries.html#nkf]]
 
 == Module Functions
 

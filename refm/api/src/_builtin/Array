@@ -2319,10 +2319,10 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 
 #@end
 #@if("2.0.0" <= version and version < "2.3.0")
-@see [[m:Range#bsearch]], [[url:http://magazine.rubyist.net/?0041-200Special-note#l15]]
+@see [[m:Range#bsearch]], [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]]
 #@end
 #@since 2.3.0
-@see [[m:Array#bsearch_index]], [[m:Range#bsearch]], [[url:http://magazine.rubyist.net/?0041-200Special-note#l15]]
+@see [[m:Array#bsearch_index]], [[m:Range#bsearch]], [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]]
 
 --- bsearch_index { |x| ... } -> Integer | nil
 --- bsearch_index             -> Enumerator

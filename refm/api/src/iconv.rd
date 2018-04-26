@@ -93,7 +93,7 @@ GNU libiconv で iconv ライブラリがビルドしてある場合、
 
 === 参考
 
-  * 標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv ([[url:http://magazine.rubyist.net/?0009-BundledLibraries#l30]])
+  * 標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv ([[url:https://magazine.rubyist.net/articles/0009/0009-BundledLibraries.html#iconv]])
 
 = class Iconv < Data
 iconv 関数のラッパークラスです。

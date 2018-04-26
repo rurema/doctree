@@ -6,14 +6,14 @@ Microsoft Windows で COM や ActiveX を扱うためのライブラリです。
   * [[url:http://suke.my.coocan.jp/ruby/win32ole/index.html]]
   * [[url:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=Win32OLE]]
   * [[url:http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/ruby-win32ole.html]]
-  * Rubyist Magazine [[url:http://magazine.rubyist.net/]]
-    * Win32OLE 活用法【第 1 回】 Win32OLE ことはじめ [[url:http://magazine.rubyist.net/?0003-Win32OLE]]
-    * Win32OLE 活用法【第 2 回】 Excel [[url:http://magazine.rubyist.net/?0004-Win32OLE]]
-    * Win32OLE 活用法【第 3 回】 ADODB [[url:http://magazine.rubyist.net/?0005-Win32OLE]]
-    * Win32OLE 活用法【第 4 回】 Adobe Illustrator [[url:http://magazine.rubyist.net/?0006-Win32OLE]]
-    * Win32OLE 活用法【第 5 回】 Outlook [[url:http://magazine.rubyist.net/?0007-Win32OLE]]
-    * Win32OLE 活用法【第 6 回】 Web 自動巡回 [[url:http://magazine.rubyist.net/?0008-Win32OLE]]
-    * Win32OLE 活用法【第 7 回】ほかの言語での COM [[url:http://magazine.rubyist.net/?0009-Win32OLE]]
+  * Rubyist Magazine [[url:https://magazine.rubyist.net/]]
+    * Win32OLE 活用法【第 1 回】 Win32OLE ことはじめ [[url:https://magazine.rubyist.net/articles/0003/0003-Win32OLE.html]]
+    * Win32OLE 活用法【第 2 回】 Excel [[url:https://magazine.rubyist.net/articles/0004/0004-Win32OLE.html]]
+    * Win32OLE 活用法【第 3 回】 ADODB [[url:https://magazine.rubyist.net/articles/0005/0005-Win32OLE.html]]
+    * Win32OLE 活用法【第 4 回】 Adobe Illustrator [[url:https://magazine.rubyist.net/articles/0006/0006-Win32OLE.html]]
+    * Win32OLE 活用法【第 5 回】 Outlook [[url:https://magazine.rubyist.net/articles/0007/0007-Win32OLE.html]]
+    * Win32OLE 活用法【第 6 回】 Web 自動巡回 [[url:https://magazine.rubyist.net/articles/0008/0008-Win32OLE.html]]
+    * Win32OLE 活用法【第 7 回】ほかの言語での COM [[url:https://magazine.rubyist.net/articles/0009/0009-Win32OLE.html]]
 
 #@include(win32ole/WIN32OLE)
 #@include(win32ole/WIN32OLE_EVENT)

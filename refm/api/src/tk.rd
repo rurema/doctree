@@ -58,7 +58,7 @@ tkを用いてGUIアプリケーションを作成するためのライブラリ
 === 参考
 
  * [[unknown:RubyTkFAQ]]
- * "Rubyist Magazine - 0003-Ruby/Tk の動向"[[url:http://magazine.rubyist.net/?0003-RubyTkMovement]]
+ * "Rubyist Magazine - 0003-Ruby/Tk の動向"[[url:https://magazine.rubyist.net/articles/0003/0003-RubyTkMovement.html]]
 
 === 注意
 
