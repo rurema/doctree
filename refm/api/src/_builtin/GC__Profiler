@@ -117,6 +117,12 @@ GC::Profiler.report
 GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
 #@end
 
+#@samplecode 例
+GC::Profiler.enable
+GC.start
+GC::Profiler.total_time # => 0.0011530000000000012
+#@end
+
 #@since 2.0.0
 --- raw_data -> [Hash, ...] | nil
 
