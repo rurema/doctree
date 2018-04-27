@@ -104,6 +104,8 @@ MT19937に基づく疑似乱数生成器を提供するクラスです。
 
 @param number 疑似乱数発生器の種を整数で指定します。
 
+#@#noexample 詳しくは Kernel.#srand を参照
+
 #@since 1.9.3
 @see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
 #@else
