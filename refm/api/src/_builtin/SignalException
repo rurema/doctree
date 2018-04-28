@@ -38,6 +38,17 @@
                   定した場合は to_int メソッドによる暗黙の型変換を試み
                   ます。
 
+#@samplecode 例
+signal_number = Signal.list["INT"]
+se = SignalException.new(signal_number) # => #<SignalException: SIGINT>
+se.signo # => 2
+#@end
+
+#@samplecode 例
+se = SignalException.new("INT") # => #<SignalException: SIGINT>
+se.signm # => "SIGINT"
+#@end
+
 @see [[m:Signal.#list]]
 
 == Instance Methods
