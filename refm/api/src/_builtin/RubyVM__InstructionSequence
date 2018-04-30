@@ -223,6 +223,11 @@ options で指定します。
 
 self の情報をラベルとパスを含んだ人間に読みやすい文字列にして返します。
 
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+iseq.inspect # => "<RubyVM::InstructionSequence:<compiled>@<compiled>>"
+#@end
+
 #@since 2.0.0
 @see [[m:RubyVM::InstructionSequence#label]],
      [[m:RubyVM::InstructionSequence#path]]
