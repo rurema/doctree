@@ -275,6 +275,8 @@ range.end - range.begin が実数を返す場合も同様です。
 --- state -> Integer
 C言語レベルで定義されている構造体MTの状態を参照します。詳しくはrandom.c を参照してください。
 
+#@#noexample 詳しくはrandom.c を参照
+
 --- left -> Integer
 C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
 
@@ -319,6 +321,8 @@ C言語レベルで定義されている構造体MTの変数leftを参照しま�
 
 --- state -> Integer
 C言語レベルで定義されている構造体MTの静的変数default_randの状態を参照します。詳しくはrandom.c を参照してください。
+
+#@#noexample 詳しくはrandom.c を参照
 
 --- left -> Integer
 C言語レベルで定義されている構造体MTの静的変数default_randの変数leftを参照します。詳しくはrandom.c を参照してください。
