@@ -1795,34 +1795,32 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 #@end
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
-#@since 1.9.1
 --- trust -> self
-#@todo
 
-オブジェクトの「untrustマーク」を取り除きます。
+このメソッドは deprecated です。
+[[m:Object#untaint]] と同じ動作をします。
 
 #@#noexample deprecated
 
 @see [[m:Object#untrusted?]],[[m:Object#untrust]]
 
 --- untrusted? -> bool
-#@todo
 
-オブジェクトの「untrustマーク」がセットされている時真を返します。
+このメソッドは deprecated です。
+[[m:Object#tainted?]] と同じ動作をします。
 
 #@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrust]]
 
 --- untrust -> self
-#@todo
 
-オブジェクトの「untrustマーク」をセットします。
+このメソッドは deprecated です。
+[[m:Object#taint]] と同じ動作をします。
 
 #@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
-#@end
 
 #@since 1.9.2
 --- singleton_class -> Class
