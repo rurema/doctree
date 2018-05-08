@@ -491,6 +491,13 @@ name に対応するスレッド固有データがない時には、引数 defau
 
 @param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@samplecode 例
+thread = Thread.new { sleep 1 }
+thread.abort_on_exception # => false
+thread.abort_on_exception = true
+thread.abort_on_exception # => true
+#@end
+
 #@since 2.4.0
 --- report_on_exception               -> bool
 --- report_on_exception=(newstate)
