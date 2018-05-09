@@ -136,6 +136,38 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 
 @param klass クラスかモジュールを指定します。
 
+#@samplecode 例: ブロックなし
+p ObjectSpace.each_object
+# => #<Enumerator: ObjectSpace:each_object(false)>
+#@end
+
+#@samplecode 例: 全てのオブジェクトを扱う
+ObjectSpace.each_object.take(5).each { |x| p x }
+count = ObjectSpace.each_object { |x| x }
+puts "Total count: #{count}"
+
+# => "scope"
+# => "scopes"
+# => "sym"
+# => "class_names"
+# => "@corrections"
+# => Total count: 9938
+#@end
+
+#@samplecode 例: 任意のクラスを扱う
+Person = Struct.new(:name)
+s1 = Person.new("tanaka")
+s2 = Person.new("sato")
+
+count = ObjectSpace.each_object(Person) { |x| p x }
+puts "Total count: #{count}"
+
+# => #<struct Person name="sato">
+# => #<struct Person name="tanaka">
+# => Total count: 2
+#@end
+
+
 #@since 2.1.0
 --- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
 #@else
