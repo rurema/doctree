@@ -939,6 +939,8 @@ self の非同期例外のキューが空かどうかを返します。
 
 @param error 対象の例外クラスを指定します。
 
+#@#noexample Thread.pending_interrupt? を参照
+
 @see [[m:Thread.pending_interrupt?]]
 #@end
 
