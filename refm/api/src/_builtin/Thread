@@ -238,6 +238,8 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 [[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
 #@end
 
+#@#noexample deprecated
+
 --- DEBUG -> Integer
 
 スレッドのデバッグレベルを返します。
