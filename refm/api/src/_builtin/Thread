@@ -245,6 +245,10 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
 
+#@samplecode 例
+Thread.DEBUG # => 0
+#@end
+
 --- DEBUG=(val)
 
 スレッドのデバッグレベルを val に設定します。
