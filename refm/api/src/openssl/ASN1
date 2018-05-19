@@ -162,7 +162,7 @@ ASN.1 オブジェクトが Constructive である場合は、
             ...
 
 @param der DER形式の文字列
-@raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
+@raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
 
 --- decode_all(der) -> [OpenSSL::ASN1::ASN1Data]
 DER 表現の文字列を解析し、そこにエンコードされている ASN.1 の値を全て
@@ -170,7 +170,7 @@ DER 表現の文字列を解析し、そこにエンコードされている ASN
 返します。
 
 @param der DER形式の文字列
-@raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
+@raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
 @see [[m:OpenSSl::ASN1.#decode]]
 
 --- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> Qnil
@@ -191,7 +191,7 @@ DER形式の文字列を解析し、そこに含まれる ASN.1 の値
   * tag: タグ番号
 
 @param der DER形式の文字列
-@raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
+@raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
 @see [[m:OpenSSl::ASN1.#decode]]
 
 --- Boolean(value) -> OpenSSL::ASN1::Boolean
