@@ -173,7 +173,7 @@ DER 表現の文字列を解析し、そこにエンコードされている ASN
 @raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
 @see [[m:OpenSSl::ASN1.#decode]]
 
---- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> Qnil
+--- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> nil
 DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 のプロパティを引数として与えられたブロックを呼びだします。
 
