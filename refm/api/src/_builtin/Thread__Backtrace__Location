@@ -104,6 +104,24 @@ self が表すフレームの絶対パスを返します。
 self が表すフレームを [[m:Kernel.#caller]] と同じ表現にした文字列を返し
 ます。
 
+#@samplecode 例
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
+  end
+end
+
+Foo.new(0..2).locations.map do |call|
+  puts call.to_s
+end
+
+# => path/to/foo.rb:5:in `initialize'
+# path/to/foo.rb:9:in `new'
+# path/to/foo.rb:9:in `<main>'
+#@end
+
 --- inspect -> String
 
 [[m:Thread::Backtrace::Location#to_s]] の結果を人間が読みやすいような文
