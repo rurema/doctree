@@ -164,6 +164,38 @@ alias ConditionVariable
 @return 状態を待っているスレッドがあった場合は、そのスレッドを返します。
         そうでなければ nil を返します。
 
+#@samplecode 例
+mutex = Mutex.new
+cv = ConditionVariable.new
+flg = true
+
+3.times {
+  Thread.start {
+    mutex.synchronize {
+      puts "a1"
+      while (flg)
+        cv.wait(mutex)
+      end
+      puts "a2"
+    }
+  }
+}
+
+Thread.start {
+  mutex.synchronize {
+    flg = false
+    cv.signal
+  }
+}
+
+sleep 1
+
+# => a1
+# => a1
+# => a1
+# => a2
+#@end
+
 #@since 1.9.2
 --- wait(mutex, timeout = nil) -> self
 #@else
