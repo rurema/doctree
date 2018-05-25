@@ -137,6 +137,8 @@ alias ConditionVariable
 #@end
 状態変数を生成して返します。
 
+#@#noexample :Conditionvariable#signal 等を参照
+
 == Instance Methods
 
 --- broadcast -> [Thread]
