@@ -84,6 +84,8 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 キューの値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。
 
+#@#noexample 要約の例を参照
+
 #@since 2.3.0
 --- close -> self
 
