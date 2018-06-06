@@ -77,6 +77,53 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 @param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
 
+#@samplecode 例
+require 'thread'
+
+q = Queue.new
+
+th1 = Thread.start do
+  while resource = q.pop
+    puts resource
+  end
+end
+
+[:resource1, :resource2, :resource3, nil].each { |r|
+  q.push(r)
+}
+
+th1.join
+#@end
+
+#@samplecode 例: nonblock = true
+require 'thread'
+
+q = Queue.new
+
+th1 = Thread.start do
+  while resource = q.pop
+    puts resource
+  end
+end
+
+[:resource1, :resource2, :resource3, nil].each { |r|
+  q.push(r)
+}
+
+begin
+  th1.join
+  q.pop(true)
+rescue => e
+  p e.message
+end
+
+# => resource1
+# resource2
+# resource3
+# => #<ThreadError: queue empty>
+# => "queue empty"
+#@end
+
 --- push(value) -> ()
 --- <<(value)   -> ()
 --- enq(value)  -> ()
