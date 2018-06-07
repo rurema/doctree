@@ -60,6 +60,16 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 キューが空の時、真を返します。
 
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+q.empty? # => true
+q.push(:resource)
+q.empty? # => false
+#@end
+
 --- length -> Integer
 --- size -> Integer
 
