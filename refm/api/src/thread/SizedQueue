@@ -81,6 +81,7 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 @param non_block true を与えると、キューが一杯の時に例外 [[c:ThreadError]] が発生します。
 #@end
 
+#@#noexample 要約の例を参照
 @see  [[m:Thread::Queue#push]]
 #@else
 キューのサイズが [[m:SizedQueue#max]] に達している場合は、
@@ -89,6 +90,7 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 
 @param obj キューに追加したいオブジェクトを指定します。
 
+#@#noexample 要約の例を参照
 @see  [[m:Queue#push]]
 #@end
 
