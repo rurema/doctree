@@ -313,6 +313,12 @@ self の状態を人間に読みやすい文字列にして返します。
 
 発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
 
+#@samplecode 例
+TracePoint.trace do |tp|
+  tp.binding # => #<Binding:0x2fbb750>
+end
+#@end
+
 --- self -> object
 
 イベントを発生させたオブジェクトを返します。
