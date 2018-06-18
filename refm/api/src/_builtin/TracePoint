@@ -237,6 +237,8 @@ self のトレースを無効にします。
 self のトレースが有効な場合に true を、そうでない場合に false を返しま
 す。
 
+#@#noexample TracePoint#enable, TracePoint#disable  の例を参照
+
 @see [[m:TracePoint#enable]], [[m:TracePoint#disable]]
 
 --- inspect -> String
