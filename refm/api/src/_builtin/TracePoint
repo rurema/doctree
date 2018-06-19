@@ -252,6 +252,18 @@ self の状態を人間に読みやすい文字列にして返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+trace = TracePoint.new do |tp|
+  p tp.event
+end
+trace.enable
+a = (1 + 1)
+
+# => :c_return
+# :line
+# :line
+#@end
+
 --- lineno -> Integer
 
 発生したイベントの行番号を返します。
