@@ -243,6 +243,13 @@ self のトレースが有効な場合に true を、そうでない場合に fa
 
 self の状態を人間に読みやすい文字列にして返します。
 
+#@samplecode 例
+trace = TracePoint.new do |tp|
+  p tp.inspect # => "#<TracePoint:c_return `enable'@/path/to/test.rb:4>"
+end
+trace.enable
+#@end
+
 --- event -> Symbol
 
 発生したイベントの種類を [[c:Symbol]] で返します。
