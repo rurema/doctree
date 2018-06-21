@@ -258,6 +258,13 @@ self の状態を人間に読みやすい文字列にして返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+trace = TracePoint.new do |tp|
+  tp. lineno # => 4
+end
+trace.enable
+#@end
+
 --- path -> String
 
 イベントが発生したファイルのパスを返します。
