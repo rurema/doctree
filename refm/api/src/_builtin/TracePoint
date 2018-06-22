@@ -271,6 +271,13 @@ self の状態を人間に読みやすい文字列にして返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+trace = TracePoint.new do |tp|
+  tp.method_id # => :enable
+end
+trace.enable
+#@end
+
 --- defined_class -> Class | module
 
 メソッドを定義したクラスかモジュールを返します。
