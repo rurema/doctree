@@ -19,6 +19,12 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@samplecode 例
+Thread.abort_on_exception # => false
+Thread.abort_on_exception = true
+Thread.abort_on_exception # => true
+#@end
+
 #@since 2.4.0
 --- report_on_exception             -> bool
 --- report_on_exception=(newstate)
