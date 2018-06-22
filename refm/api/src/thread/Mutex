@@ -69,6 +69,17 @@ mutex をロックし、ブロックを実行します。実行後に必ず mute
                    した場合に発生します。
 #@end
 
+#@samplecode 例
+m = Mutex.new
+result = m.synchronize do
+  m.locked? # => true
+  # critical part
+  "result"
+end
+m.locked? # => false
+result # => "result"
+#@end
+
 --- try_lock -> bool
 mutex をロックしようとして、ロックが成功した場合、真を返します。
 ロックできなかった場合にはブロックせず偽を返します。
