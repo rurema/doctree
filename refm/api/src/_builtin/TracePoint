@@ -330,6 +330,13 @@ self の状態を人間に読みやすい文字列にして返します。
 @raise RuntimeError :return、:c_return、:b_return イベントのためのイベ
                     ントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+trace = TracePoint.new do |tp|
+  tp.return_value # => false
+end
+trace.enable
+#@end
+
 --- raised_exception -> Exception
 
 発生した例外を返します。
