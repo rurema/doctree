@@ -500,6 +500,31 @@ ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
+#@samplecode 例
+require "csv"
+
+options = { headers: true }
+
+text =<<-EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+EOS
+
+csv = CSV.instance(text, options)
+csv2 = CSV.instance(text, options)
+csv.object_id == csv2.object_id # => true
+print csv.read
+
+# => id,first name,last name,age
+# 1,taro,tanaka,20
+# 2,jiro,suzuki,18
+# 3,ami,sato,19
+# 4,yumi,adachi,21
+#@end
+
 @see [[m:CSV.new]]
 
 #@until 2.0.0
