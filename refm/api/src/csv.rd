@@ -604,6 +604,41 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
+#@samplecode 例
+require 'csv'
+require 'pp'
+
+s = <<EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+EOS
+
+pp CSV.parse(s)
+# => [["id", "first name", "last name", "age"],
+#     ["1", "taro", "tanaka", "20"],
+#     ["2", "jiro", "suzuki", "18"]]
+
+CSV.parse(s, headers: true).each do |row|
+  p [row['first name'], row['age']]
+end
+# => ["taro", "20"]
+#    ["jiro", "18"]
+#@end
+
+#@samplecode 例
+require "csv"
+
+options = { col_sep: '|' }
+row = "id|first name|last name|age\n1|taro|tanaka|20\n2|jiro|suzuki|18"
+CSV.parse(row, options) do |row|
+  p [row[1], row[2]]
+end
+# => ["first name", "last name"]
+# => ["taro", "tanaka"]
+# => ["jiro", "suzuki"]
+#@end
+
 --- parse_line(line, options = Hash.new) -> Array
 
 このメソッドは一行の CSV 文字列を配列に変換するためのショートカットです。
