@@ -23,7 +23,7 @@ Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アク�
 
 == Class Methods
 
---- new -> Mutex
+--- new -> Thread::Mutex
 新しい mutex を生成して返します。
 
 #@#noexample :Mutex#unlock 等を参照
