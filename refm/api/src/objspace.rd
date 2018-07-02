@@ -172,3 +172,18 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 @see [[url:http://www.atdot.net/~ko1/diary/201212.html#d8]],
      [[url:http://www.atdot.net/~ko1/diary/201212.html#d9]]
 #@end
+
+#@since 2.1.0
+--- trace_object_allocations_start -> nil
+
+オブジェクト割り当てのトレースを開始します。
+
+#@end
+
+#@since 2.1.0
+--- trace_object_allocations_stop -> nil
+
+オブジェクト割り当てのトレースを終了します。
+
+トーレスを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
+#@end
