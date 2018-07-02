@@ -618,14 +618,51 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 CSV ファイルを配列の配列にするために使います。
 headers オプションに偽でない値を指定した場合は [[c:CSV::Table]] オブジェクトを返します。
 
-#@# 例を追加する
-
 @param path CSV ファイルのパスを指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入力のエンコーディングを指定することができます。
                入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
                必ず指定しなければなりません。
+
+#@samplecode 例
+require "csv"
+require "pp"
+
+File.write("test.csv", <<CSV)
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+
+pp CSV.read("test.csv")
+
+# => [["id", "first name", "last name", "age"],
+#    ["1", "taro", "tanaka", "20"],
+#    ["2", "jiro", "suzuki", "18"],
+#    ["3", "ami", "sato", "19"],
+#    ["4", "yumi", "adachi", "21"]]
+#@end
+
+#@samplecode 例
+require "csv"
+
+options = { headers: true }
+
+File.write("test.csv", <<CSV)
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+
+table = CSV.read("test.csv", options)
+p table.class # => CSV::Table
+p table[0]    # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+#@end
 
 @see [[m:CSV.new]], [[m:CSV.table]]
 
