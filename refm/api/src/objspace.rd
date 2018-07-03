@@ -187,3 +187,27 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 トーレスを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
 #@end
+
+#@since 2.1.0
+--- allocation_sourcefile(object) -> String
+
+objectの元となったソースファイル名を返します。
+
+@param object 元となるソースファイル名を取得したいobjectを指定します。
+@return objectの元となるソースファイル名を返します。存在しない場合はnilを返します。
+#@end
+
+#@since 2.1.0
+--- allocation_sourceline(object) -> integer
+
+objectの元となったソースファイルの行数を返します。
+
+@param object 元となるソースファイルの行数を取得したいobjectを指定します。
+@return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
+#@end
+
+#@since 2.1.0
+--- trace_object_allocations { ... }
+
+与えられたブロック内でオブジェクトのトレースを行います。　
+#@end
