@@ -1,5 +1,8 @@
 ruby-reference-manual メーリングリストについて。
 
+QuickML の仕様により、長期間が投稿がなかったため消滅しました。
+以下は古い情報です。
+
 プロジェクトに参加したい人は必ずメーリングリストに加入してください。
 メーリングリストのアドレスは ruby-reference-manual ＠ ml.fdiary.net です。
 
