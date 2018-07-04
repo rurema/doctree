@@ -36,16 +36,12 @@ ruby-reference-manual メーリングリストに参加した時点で
 以下に手続きとその必要度を示します。
 Git レポジトリについては [[GitRepository]] を参照してください。
 
- * [ruby-reference-manual ML](https://github.com/rurema/doctree/wiki/MailingList) 参加
-   * 必須
  * BitClust のチェックアウト
    * Gem で BitClust を入れれば不要
  * ドキュメントのチェックアウト
    * まともに活動するなら必須
  * GitHub アカウント
    * まともに活動するなら必須
- * [ruby-reference-manual-diff ML](https://github.com/rurema/doctree/wiki/MailingList) 参加
-   * 入っておくと便利だがどちらでも
  * Gitter の[rurema/Lobby](https://gitter.im/rurema-dev/Lobby)
    * チャット。Issueを立てるまでもない相談など
 
