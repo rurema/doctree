@@ -666,25 +666,49 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 [[m:IO#binmode]] に委譲します。
 
+#@#noexample IO#binmode の例を参照
+
+@see [[m:IO#binmode]]
+
 --- binmode? -> bool
 
 [[m:IO#binmode?]] に委譲します。
+
+#@#noexample IO#binmode? の例を参照
+
+@see [[m:IO#binmode?]]
 
 --- close -> nil
 
 [[m:IO#close]] に委譲します。
 
+#@#noexample IO#close の例を参照
+
+@see [[m:IO#close]]
+
 --- close_read -> nil
 
 [[m:IO#close_read]] に委譲します。
+
+#@#noexample IO#close_read の例を参照
+
+@see [[m:IO#close_read]]
 
 --- close_write -> nil
 
 [[m:IO#close_write]] に委譲します。
 
+#@#noexample IO#close_write の例を参照
+
+@see [[m:IO#close_write]]
+
 --- closed? -> bool
 
 [[m:IO#closed?]] に委譲します。
+
+#@#noexample IO#closed? の例を参照
+
+@see [[m:IO#closed?]]
 
 --- col_sep -> String
 
@@ -728,6 +752,10 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 --- eof? -> bool
 
 [[m:IO#eof]], [[m:IO#eof?]] に委譲します。
+
+#@#noexample IO#eof, IO#eof? の例を参照
+
+@see [[m:IO#eof]], [[m:IO#eof?]]
 
 --- external_encoding -> Encoding | nil
 
@@ -807,14 +835,26 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 [[m:IO#internal_encoding]] に委譲します。
 
+#@#noexample IO#internal_encoding の例を参照
+
+@see [[m:IO#internal_encoding]]
+
 --- ioctl(cmd, arg = 0)    -> Integer
 
 [[m:IO#ioctl]] に委譲します。
+
+#@#noexample IO#ioctl の例を参照
+
+@see [[m:IO#ioctl]]
 
 --- isatty    -> bool
 --- tty?      -> bool
 
 [[m:IO#isatty]], [[m:IO#tty?]] に委譲します。
+
+#@#noexample IO#isatty, IO#tty? の例を参照
+
+@see [[m:IO#isatty]], [[m:IO#tty?]]
 
 --- lineno -> Integer
 
@@ -825,18 +865,34 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 [[m:IO#path]] に委譲します。
 
+#@#noexample IO#path の例を参照
+
+@see [[m:IO#path]]
+
 --- pid    -> Integer | nil
 
 [[m:IO#pid]] に委譲します。
+
+#@#noexample IO#pid の例を参照
+
+@see [[m:IO#pid]]
 
 --- pos    -> Integer
 --- tell   -> Integer
 
 [[m:IO#pos]], [[m:IO#tell]] に委譲します。
 
+#@#noexample IO#pos, IO#tell  の例を参照
+
+@see [[m:IO#pos]], [[m:IO#tell]]
+
 --- pos=(n)
 
 [[m:IO#pos=]] に委譲します。
+
+#@#noexample IO#pos= の例を参照
+
+@see [[m:IO#pos=]]
 
 --- quote_char -> String
 
@@ -855,6 +911,10 @@ self の生成時に headers オプションに偽でない値が指定されて
 --- reopen(io) -> self
 
 [[m:IO#reopen]] に委譲します。
+
+#@#noexample IO#reopen の例を参照
+
+@see [[m:IO#reopen]]
 
 --- return_headers? -> bool
 
@@ -879,6 +939,10 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 [[m:IO#seek]] に委譲します。
 
+#@#noexample IO#seek の例を参照
+
+@see [[m:IO#seek]]
+
 --- shift    -> Array | CSV::Row
 --- gets     -> Array | CSV::Row
 --- readline -> Array | CSV::Row
@@ -901,25 +965,49 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 [[m:IO#stat]] に委譲します。
 
+#@#noexample IO#stat の例を参照
+
+@see [[m:IO#stat]]
+
 --- string -> String
 
 [[m:StringIO#string]] に委譲します。
+
+#@#noexample StringIO#string の例を参照
+
+@see [[m:StringIO#string]]
 
 --- sync -> bool
 
 [[m:IO#sync]] に委譲します。
 
+#@#noexample IO#sync の例を参照
+
+@see [[m:IO#sync]]
+
 --- sync=(newstate)
 
 [[m:IO#sync=]] に委譲します。
+
+#@#noexample IO#sync= の例を参照
+
+@see [[m:IO#sync=]]
 
 --- to_io -> self
 
 [[m:IO#to_io]] に委譲します。
 
+#@#noexample IO#to_io の例を参照
+
+@see [[m:IO#to_io]]
+
 --- truncate(path, length)    -> 0
 
 [[m:File#truncate]] に委譲します。
+
+#@#noexample File#truncate の例を参照
+
+@see [[m:File#truncate]]
 
 --- unconverted_fields? -> bool
 
