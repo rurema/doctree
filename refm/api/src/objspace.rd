@@ -197,6 +197,15 @@ objectの元となったソースファイル名を返します。
 @return objectの元となるソースファイル名を返します。存在しない場合はnilを返します。
 #@end
 
+#@samplecode 例:test.rbというファイルで下記のスクリプトを実行した場合
+require 'objspace'
+
+ObjectSpace::trace_object_allocations_start
+obj = Object.new
+puts "file:#{ObjectSpace::allocation_sourcefile(obj)}"   # => file:test.rb
+ObjectSpace::trace_object_allocations_stop
+#@end
+
 #@since 2.1.0
 --- allocation_sourceline(object) -> integer
 
@@ -204,6 +213,16 @@ objectの元となったソースファイルの行数を返します。
 
 @param object 元となるソースファイルの行数を取得したいobjectを指定します。
 @return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
+#@end
+
+例
+#@samplecode
+require 'objspace'
+
+ObjectSpace::trace_object_allocations_start
+obj = Object.new
+puts "line:#{ObjectSpace::allocation_sourceline(obj)}"  # => line:4
+ObjectSpace::trace_object_allocations_stop
 #@end
 
 #@since 2.1.0
