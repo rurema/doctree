@@ -229,4 +229,22 @@ ObjectSpace::trace_object_allocations_stop
 --- trace_object_allocations { ... }
 
 与えられたブロック内でオブジェクトのトレースを行います。　
+
+例
+#@samplecode
+require 'objspace'
+
+class C
+  include ObjectSpace
+
+  def foo
+    trace_object_allocations do
+      obj = Object.new
+      p "#{allocation_sourcefile(obj)}:#{allocation_sourceline(obj)}"
+    end
+  end
+end
+
+C.new.foo #=> "objtrace.rb:8"
+#@end
 #@end
