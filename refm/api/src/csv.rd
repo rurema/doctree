@@ -712,6 +712,13 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 現在の変換器のリストを返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", { converters: CSV::Converters.keys })
+csv.converters  # => [:integer, :float, :integer, :float, :date, :date_time, :date_time, :integer, :float]
+#@end
+
 @see [[m:CSV::Converters]]
 
 --- each{|row| ... } -> nil
