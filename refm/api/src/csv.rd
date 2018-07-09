@@ -708,6 +708,32 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 @param name 変換器の名前を指定します。
 
+#@samplecode 例 name で Converter を指定
+require "csv"
+
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10")
+csv.convert(:date)
+csv.read # => [["date1", "date2"], [#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)>, #<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>]]
+#@end
+
+#@samplecode 例 ブロックを指定
+require "csv"
+
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", headers: true)
+csv.convert do |field,field_info|
+  p field
+  p field_info
+  Date.parse(field)
+end
+p csv.first
+
+# => "2018-07-09"
+# => <struct CSV::FieldInfo index=0, line=2, header="date1">
+# => "2018-07-10"
+# => #<struct CSV::FieldInfo index=1, line=2, header="date2">
+# => #<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>>
+#@end
+
 --- converters -> Array
 
 現在の変換器のリストを返します。
