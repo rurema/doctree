@@ -724,6 +724,13 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 読み書きするときに使用するエンコーディングを返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
+csv.encoding # => #<Encoding:UTF-8>
+#@end
+
 --- eof -> bool
 --- eof? -> bool
 
