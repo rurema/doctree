@@ -741,6 +741,26 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 フィールドサイズの最大値を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new(DATA)
+csv.field_size_limit # => nil
+p csv.read # => [["a", "b"], ["\n2\n2\n", ""]]
+
+DATA.rewind
+csv = CSV.new(DATA, field_size_limit: 4)
+p csv.field_size_limit # => 4
+csv.read # => #<CSV::MalformedCSVError: Field size exceeded on line 2.>
+
+__END__
+"a","b"
+"
+2
+2
+",""
+#@end
+
 @see [[m:CSV.new]]
 
 --- fileno -> Integer
