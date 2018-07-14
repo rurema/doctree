@@ -891,6 +891,18 @@ self の生成時に headers オプションに偽でない値が指定されて
 @return ヘッダを使用しない場合は配列を返します。
         ヘッダを使用する場合は [[c:CSV::Row]] を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new(DATA.read)
+csv.readline # => ["header1", "header2"]
+csv.readline # => ["row1_1", "row1_2"]
+
+__END__
+header1,header2
+row1_1,row1_2
+#@end
+
 --- skip_blanks? -> bool
 
 真である場合は、空行を読み飛ばします。
