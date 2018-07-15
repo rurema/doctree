@@ -776,6 +776,24 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 @param name 変換器の名前を指定します。
 
+#@samplecode 例 name を指定
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", { headers: true })
+csv.header_convert(:symbol)
+csv.first.headers # => [:header1, :header2]
+#@end
+
+#@samplecode 例 ブロックを指定
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", { headers: true })
+csv.header_convert do |field|
+  field.to_sym
+end
+csv.first.headers # => [:header1, :header2]
+#@end
+
 @see [[m:CSV#convert]]
 
 --- header_converters -> Array
