@@ -784,6 +784,14 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 組込みの変換器は名前を返します。それ以外は、オブジェクトを返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("HEADER1,HEADER2\nrow1_1,row1_2", headers: true, header_converters: CSV::HeaderConverters.keys)
+csv.header_converters # => [:downcase, :symbol]
+csv.read.to_a         # => [[:header1, :header2], ["row1_1", "row1_2"]]
+#@end
+
 @see [[m:CSV.new]]
 
 --- header_row? -> bool
