@@ -791,6 +791,15 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 次に読み込まれる行が、ヘッダである場合に真を返します。
 そうでない場合は、偽を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
+csv.header_row? # => true
+csv.readline
+csv.header_row? # => false
+#@end
+
 --- headers -> Array | true | nil
 
 nil を返した場合は、ヘッダは使用されません。
