@@ -86,39 +86,40 @@ obj.collect {|item| item } を実行します。
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
-#@since 1.8.7
-#@since 1.9.1
---- each_with_index                      -> Enumerator
-#@else
---- each_with_index                      -> Enumerable::Enumerator
---- enum_with_index                      -> Enumerable::Enumerator
-#@end
-#@end
---- each_with_index {|item, index| ... } -> self
+--- each_with_index(*args)                      -> Enumerator
+--- each_with_index(*args) {|item, index| ... } -> self
 
 要素とそのインデックスをブロックに渡して繰り返します。
 
-self を返します。
-
-#@since 1.9.1
 ブロックを省略した場合は、
 要素とそのインデックスを繰り返すような
 [[c:Enumerator]] を返します。
-#@end
 
-例:
+[[m:Enumerator#with_index]] は offset 引数を受け取りますが、
+each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
+
+@param args イテレータメソッド (each など) にそのまま渡されます。
+
+#@samplecode 例
     [5, 10, 15].each_with_index do |n, idx|
       p [n, idx]
     end
         # => [5, 0]
         #    [10, 1]
         #    [15, 2]
+#@end
 
-#@since 1.8.4
-#@until 1.8.6
-@see [[m:Enumerable::Enumerator#enum_with_index]]
+#@samplecode 引数ありの例
+require 'stringio'
+StringIO.new("foo|bar|baz").each_with_index("|") do |s, i|
+  p [s, i]
+end
+# => ["foo|", 0]
+#    ["bar|", 1]
+#    ["baz", 2]
 #@end
-#@end
+
+@see [[m:Enumerator#with_index]]
 
 #@since 1.8.7
 #@since 1.9.1
