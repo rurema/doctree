@@ -797,6 +797,17 @@ nil を返した場合は、ヘッダは使用されません。
 真を返した場合は、ヘッダを使用するが、まだ読み込まれていません。
 配列を返した場合は、ヘッダは既に読み込まれています。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.headers # => nil
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
+csv.headers # => true
+csv.read
+csv.headers # =>["header1", "header2"]
+#@end
+
 @see [[m:CSV.new]]
 
 --- inspect -> String
