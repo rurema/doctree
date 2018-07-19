@@ -803,6 +803,13 @@ nil を返した場合は、ヘッダは使用されません。
 
 ASCII 互換文字列で自身の情報を表したものを返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" row_sep:\"\\n\" quote_char:\"\\\"\">"
+#@end
+
 --- internal_encoding   -> Encoding | nil
 
 [[m:IO#internal_encoding]] に委譲します。
