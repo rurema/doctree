@@ -842,6 +842,13 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 フィールドをクオートするのに使用する文字列を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", quote_char: "'")
+csv.quote_char # => "'"
+#@end
+
 @see [[m:CSV.new]]
 
 --- read -> [Array] | CSV::Table
