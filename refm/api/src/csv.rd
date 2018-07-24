@@ -867,6 +867,17 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 [[m:IO#rewind]] に似ています。[[m:CSV#lineno]] を 0 にします。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.lineno # => 0
+csv.readline
+csv.lineno # => 1
+csv.rewind
+csv.lineno # => 0
+#@end
+
 @see [[m:IO#rewind]]
 
 --- row_sep -> String
