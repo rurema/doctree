@@ -873,6 +873,14 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 行区切り文字列として使用する文字列を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2|row1_1,row1_2", row_sep: "|")
+csv.row_sep # => "|"
+csv.read    # => [["header1", "header2"], ["row1_1", "row1_2"]]
+#@end
+
 @see [[m:CSV.new]]
 
 --- seek(offset, whence = IO::SEEK_SET)    -> 0
