@@ -895,6 +895,17 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 真である場合は、空行を読み飛ばします。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\n\nrow1_1,row1_2")
+csv.skip_blanks? # => false
+csv.read         # => [["header1", "header2"], [], ["row1_1", "row1_2"]]
+csv = CSV.new("header1,header2\n\nrow1_1,row1_2", skip_blanks: true)
+csv.skip_blanks? # => true
+csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
+#@end
+
 @see [[m:CSV.new]]
 
 --- stat    -> File::Stat
