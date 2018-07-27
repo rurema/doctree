@@ -121,6 +121,9 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
     * did_you_mean    did_you_mean (default: enabled)
     * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
 #@end
+#@since 2.6.0
+    * jit             MJIT (default: disabled)
+#@end
 //}
 
 : --disable
@@ -316,14 +319,6 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 
 #@since 2.6.0
 ==== MJIT のオプション (実験的)
-: --jit
-
-  デフォルトの設定でMJITを有効にします。
-
-: --jit-[option]
-
-  指定した設定でMJITを有効にします。
-
 : --jit-warnings
 
   MJITの警告の出力を有効にします。
