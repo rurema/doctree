@@ -935,6 +935,27 @@ self の生成時に headers オプションに偽でない値が指定されて
 ヘッダを出力先に書き込む場合は真を返します。
 そうでない場合は偽を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10")
+csv.write_headers? # => nil
+
+header = ["header1", "header2"]
+row = ["row1_1", "row1_2"]
+result = CSV.generate(headers: header, write_headers: false) do |csv|
+  csv.write_headers? # => false
+  csv << row
+end
+result # => "row1_1,row1_2\n"
+
+result = CSV.generate(headers: header, write_headers: true) do |csv|
+  csv.write_headers? # => true
+  csv << row
+end
+result # => "header1,header2\nrow1_1,row1_2\n"
+#@end
+
 @see [[m:CSV.new]]
 
 
