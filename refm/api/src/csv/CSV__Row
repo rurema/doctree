@@ -53,6 +53,17 @@ include Enumerable
 
 @param other 比較対象の [[c:CSV::Row]] のインスタンスを指定します。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row1 == row2 # => true
+row2 << ["header3", "row1_3"]
+row1 == row2 # => false
+#@end
+
 --- field(header_or_index, minimum_index = 0) -> object | nil
 --- [](header_or_index, minimum_index = 0) -> object | nil
 
