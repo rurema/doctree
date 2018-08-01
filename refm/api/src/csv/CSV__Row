@@ -63,6 +63,17 @@ include Enumerable
 @param minimum_index このインデックスより後で、ヘッダの名前を探します。
                      重複しているヘッダがある場合に便利です。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row.field("header1") # => "row1_1"
+row.field("header2") # => "row1_2"
+row["header1"]       # => "row1_1"
+row["header2"]       # => "row1_2"
+#@end
+
 --- []=(header_or_index, value)
 
 ヘッダの名前かインデックスでフィールドを探し、値をセットします。
