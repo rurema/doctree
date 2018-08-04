@@ -127,6 +127,14 @@ include Enumerable
 
 @param data この行に含まれているかどうか調べたい値を指定します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], [1, 2, 3, 4])
+row.field?(1) # => true
+row.field?(5) # => false
+#@end
+
 --- field_row? -> bool
 フィールド行であれば真を返します。そうでなければ偽を返します。
 
