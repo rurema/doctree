@@ -868,6 +868,32 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 データソースは読み込み用にオープンされている必要があります。
 
+#@samplecode 例 headers: false
+require "csv"
+
+csv = CSV.new(DATA.read)
+csv.read
+# => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+
+__END__
+header1,header2
+row1_1,row1_2
+row2_1,row2_2
+#@end
+
+#@samplecode 例 headers: true
+require "csv"
+
+csv = CSV.new(DATA.read, headers: true)
+csv.read
+# => #<CSV::Table mode:col_or_row row_count:3>
+
+__END__
+header1,header2
+row1_1,row1_2
+row2_1,row2_2
+#@end
+
 --- reopen(io) -> self
 
 [[m:IO#reopen]] に委譲します。
