@@ -1,0 +1,32 @@
+#@since 2.6.0
+= class Enumerator::ArithmeticSequence < Enumerator
+
+算術シーケンスを提供するためのクラス。
+
+ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] によって生成されます。
+
+== Class Methods
+
+== Instance Methods
+
+--- begin -> Numeric
+
+始端を返します。
+
+@see [[m:Enumerator::ArithmeticSequence#end]]
+
+--- end -> Numeric | nil
+
+終端を返します。
+
+@see [[m:Enumerator::ArithmeticSequence#begin]]
+
+--- exclude_end? -> bool
+
+終端を含まないとき真を返します。
+
+--- step -> Numeric
+
+ステップ数を返します。
+
+#@end
