@@ -27,6 +27,6 @@ ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] �
 
 --- step -> Numeric
 
-ステップ数を返します。
+各ステップの大きさを返します。
 
 #@end
