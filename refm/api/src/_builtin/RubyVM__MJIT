@@ -10,10 +10,11 @@ MJIT が有効かどうかを返します。
 
 @see [[m:RubyVM::MJIT.pause]], [[m:RubyVM::MJIT.resume]]
 
---- pause -> bool
+--- pause(wait: true) -> bool
 
 MJIT を一時停止します。
 
+@param wait 真のときは JIT キューが空になるまで待ちます。
 @return 停止したときは true を、すでに停止していたときは false を返します。
 @raise RuntimeError MJIT が有効ではないときに発生します。
 
