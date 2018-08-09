@@ -828,6 +828,15 @@ csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" r
 このファイルから読み込んだ最終行の行番号を返します。
 フィールドに含まれる改行はこの値には影響しません。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.lineno # => 0
+csv.readline
+csv.lineno # => 1
+#@end
+
 --- path    -> String
 
 [[m:IO#path]] に委譲します。
