@@ -1,7 +1,7 @@
 #@since 2.6.0
 = class Enumerator::ArithmeticSequence < Enumerator
 
-算術シーケンスを提供するためのクラス。
+等差数列を提供するためのクラス。
 
 ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] によって生成されます。
 
@@ -11,22 +11,22 @@ ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] �
 
 --- begin -> Numeric
 
-始端を返します。
+初項 (始端) を返します。
 
 @see [[m:Enumerator::ArithmeticSequence#end]]
 
 --- end -> Numeric | nil
 
-終端を返します。
+上界 (終端) を返します。
 
 @see [[m:Enumerator::ArithmeticSequence#begin]]
 
 --- exclude_end? -> bool
 
-終端を含まないとき真を返します。
+上界 (終端) を含まないとき真を返します。
 
 --- step -> Numeric
 
-各ステップの大きさを返します。
+公差 (各ステップの大きさ) を返します。
 
 #@end
