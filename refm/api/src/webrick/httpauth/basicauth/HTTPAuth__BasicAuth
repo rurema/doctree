@@ -17,7 +17,7 @@ HTTP の Basic 認証のためのクラスです。
       authenticator.authenticate(req, res)
       res.body = "hoge"
     }
-    srv.start # 127.0.0.1/basic_auth
+    srv.start # http://127.0.0.1:10080/basic_auth
 
 == Class Methods
 
