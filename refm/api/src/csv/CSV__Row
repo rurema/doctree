@@ -164,6 +164,13 @@ include Enumerable
 --- headers -> Array
 この行のヘッダのリストを返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+row.headers # => ["header1", "header2"]
+#@end
+
 --- index(header, minimum_index = 0) -> Integer
 
 与えられたヘッダの名前に対応するインデックスを返します。
