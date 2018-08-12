@@ -173,6 +173,14 @@ include Enumerable
 @param minimum_index このインデックスより後で、ヘッダの名前を探します。
                      重複しているヘッダがある場合に便利です。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header1"], [1, 2, 3])
+row.index("header1")    # => 0
+row.index("header1", 1) # => 2
+#@end
+
 @see [[m:CSV::Row#field]]
 
 --- inspect -> String
