@@ -183,6 +183,10 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を�
 
 [[m:Array#length]], [[m:Array#size]] に委譲します。
 
+#@#noexample Array#size の例を参照
+
+@see [[m:Array#size]]
+
 --- push(*args) -> self
 複数のフィールドを追加するためのショートカットです。
 
