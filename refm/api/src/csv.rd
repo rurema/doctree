@@ -612,6 +612,21 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
+#@samplecode 例
+require 'csv'
+
+p CSV.parse_line("1,taro,tanaka,20")
+# => ["1", "taro", "tanaka", "20"]
+
+p CSV.parse_line("1|taro|tanaka|20", col_sep: '|')
+# => ["1", "taro", "tanaka", "20"]
+
+# 列をダブルクオートで囲むとその中にカンマや改行を含める事もできる。
+# 他の仕様も含め詳しくはRFC4180を参照。
+p CSV.parse_line("1,\"ta,ro\",\"tana\nka\", 20")
+# => ["1", "ta,ro", "tana\nka", " 20"]
+#@end
+
 --- read(path, options = Hash.new) -> [Array] | CSV::Table
 --- readlines(path, options = Hash.new) -> [Array] | CSV::Table
 
