@@ -45,6 +45,14 @@ obj が消費するメモリ使用量をバイト単位で返します。
 
 本メソッドは C Ruby 以外では動作しません。
 
+#@samplecode 例
+require 'objspace'
+
+ObjectSpace.memsize_of(10)            # => 0
+#@# todo 0 になる理由
+ObjectSpace.memsize_of("12345" * 10)  # => 91
+#@end
+
 #@since 1.9.3
 --- memsize_of_all(klass = nil) -> Integer
 
