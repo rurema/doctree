@@ -544,7 +544,7 @@ argv からオプションを取り除いたものを返します。
 
 #@since 2.4.0
 --- order!(argv = self.default_argv, into: nil)             -> [String]
---- order!(argv = self.default_argv, inot: nil) {|s| ...}   -> [String]
+--- order!(argv = self.default_argv, into: nil) {|s| ...}   -> [String]
 #@else
 --- order!(argv = self.default_argv)             -> [String]
 --- order!(argv = self.default_argv) {|s| ...}   -> [String]
