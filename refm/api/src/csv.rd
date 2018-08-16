@@ -890,31 +890,31 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 データソースは読み込み用にオープンされている必要があります。
 
-例 headers: false
+#@samplecode 例 headers: false
+require "csv"
 
-  require "csv"
+csv = CSV.new(DATA.read)
+csv.read
+# => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
 
-  csv = CSV.new(DATA.read)
-  csv.read
-  # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+__END__
+header1,header2
+row1_1,row1_2
+row2_1,row2_2
+#@end
 
-  __END__
-  header1,header2
-  row1_1,row1_2
-  row2_1,row2_2
+#@samplecode 例 headers: true
+require "csv"
 
-例 headers: true
+csv = CSV.new(DATA.read, headers: true)
+csv.read
+# => #<CSV::Table mode:col_or_row row_count:3>
 
-  require "csv"
-
-  csv = CSV.new(DATA.read, headers: true)
-  csv.read
-  # => #<CSV::Table mode:col_or_row row_count:3>
-
-  __END__
-  header1,header2
-  row1_1,row1_2
-  row2_1,row2_2
+__END__
+header1,header2
+row1_1,row1_2
+row2_1,row2_2
+#@end
 
 --- reopen(io) -> self
 
@@ -974,17 +974,17 @@ csv.read    # => [["header1", "header2"], ["row1_1", "row1_2"]]
 @return ヘッダを使用しない場合は配列を返します。
         ヘッダを使用する場合は [[c:CSV::Row]] を返します。
 
-例
+#@samplecode 例
+require "csv"
 
-  require "csv"
+csv = CSV.new(DATA.read)
+csv.readline # => ["header1", "header2"]
+csv.readline # => ["row1_1", "row1_2"]
 
-  csv = CSV.new(DATA.read)
-  csv.readline # => ["header1", "header2"]
-  csv.readline # => ["row1_1", "row1_2"]
-
-  __END__
-  header1,header2
-  row1_1,row1_2
+__END__
+header1,header2
+row1_1,row1_2
+#@end
 
 --- skip_blanks? -> bool
 
