@@ -203,6 +203,13 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を�
 フィールドの順序は無視されます。
 重複したフィールドは削除されます。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header2", "header1", "header2"], [1, 2, 3])
+row.to_hash # => {"header2"=>3, "header1"=>2}
+#@end
+
 == Protected Instance Methods
 
 --- row -> Array
