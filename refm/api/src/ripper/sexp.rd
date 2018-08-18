@@ -18,7 +18,7 @@ Ruby プログラム str を解析して S 式のツリーにして返します�
 
   require 'ripper'
   require 'pp'
-  
+
   pp Ripper.sexp("def m(a) nil end")
     # => [:program,
           [[:def,
@@ -65,7 +65,7 @@ Ruby プログラム str を解析して S 式のツリーにして返します�
 
   require 'ripper'
   require 'pp'
-  
+
   pp Ripper.sexp_raw("def m(a) nil end")
     # => [:program,
           [:stmts_add,
