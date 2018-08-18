@@ -334,7 +334,7 @@ output にノードを出力します。
 @param indent インデントの大きさ。無視されます。
 
 = class REXML::ElementDecl < REXML::Declaration
-DTD の要素宣言(Element Decleration)を表すクラスです。
+DTD の要素宣言(Element Declaration)を表すクラスです。
 
 == Class Methods
 
