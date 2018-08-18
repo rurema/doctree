@@ -646,20 +646,20 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 --- table(path, options = Hash.new) -> CSV::Table | [Array]
 
-以下の例と同等のことを行うメソッドです。
+以下と同等のことを行うメソッドです。
 日本語の CSV ファイルを扱う場合はあまり使いません。
 
-例:
-
-  require 'csv'
- 
-  CSV.read( path, { headers:           true,
-                    converters:        :numeric,
-                    header_converters: :symbol }.merge(options) )
+#@samplecode
+CSV.read( path, { headers:           true,
+                  converters:        :numeric,
+                  header_converters: :symbol }.merge(options) )
+#@end
 
 @param path ファイル名を指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+
+#@#noexample CSV.readを参照。
 
 @see [[m:CSV.read]]
 
