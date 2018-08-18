@@ -6,8 +6,6 @@ rvm:
 notifications:
   email:
     recipients:
-      - okkez000@gmail.com
-      - zn@mbf.nifty.com
       - sho.hsmt@gmail.com
   irc:
     channels:

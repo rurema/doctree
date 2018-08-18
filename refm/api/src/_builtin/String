@@ -55,11 +55,7 @@ Ruby の String クラスは mutable です。
 [[m:String#upcase!]] メソッドの使用例を以下に示します。
 
 #@samplecode 例:String#upcase!
-a = "string"
-b = a
-a.upcase!
-p a   # => "STRING"
-p b   # => "STRING"
+...
 #@end
 
 この例では、a に対してメソッドを呼んだにも関わらず b も変更されています。
