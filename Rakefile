@@ -98,8 +98,10 @@ task :check_prev_commit_format do
       if %r!\Arefm/api/!.match(path)
         htmls = []
         htmls << `bundle exec bitclust htmlfile --ruby=#{v} #{path}`
+        raise "Failed to bitclust htmlfile, ruby: #{v}, path: #{path}" unless $?.success?
         File.read(path).scan(/^=[^=]\w+\s*(\S+)\s*(?:<\s*(\S+))?/).each do |k, pk|
           html = `bundle exec bitclust htmlfile --ruby=#{v} --target=#{k} #{path}`
+          raise "Failed to bitclust htmlfile, ruby: #{v}, target: #{k}, path: #{path}" unless $?.success?
           htmls << html
 
           a = html.lines.grep(/\[UNKNOWN_META_INFO\]/)
