@@ -292,7 +292,6 @@ Range#each は各要素の succ メソッドを使用してイテレーション
   # => "a"
        "c"
        "e"
-#@end
 
 --- ==(other)     -> bool
 
