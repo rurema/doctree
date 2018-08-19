@@ -604,6 +604,41 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
+#@samplecode 例
+require 'csv'
+require 'pp'
+
+s = <<EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+EOS
+
+pp CSV.parse(s)
+# => [["id", "first name", "last name", "age"],
+#     ["1", "taro", "tanaka", "20"],
+#     ["2", "jiro", "suzuki", "18"]]
+
+CSV.parse(s, headers: true).each do |row|
+  p [row['first name'], row['age']]
+end
+# => ["taro", "20"]
+#    ["jiro", "18"]
+#@end
+
+#@samplecode 例
+require "csv"
+
+options = { col_sep: '|' }
+row = "id|first name|last name|age\n1|taro|tanaka|20\n2|jiro|suzuki|18"
+CSV.parse(row, options) do |row|
+  p [row[1], row[2]]
+end
+# => ["first name", "last name"]
+# => ["taro", "tanaka"]
+# => ["jiro", "suzuki"]
+#@end
+
 --- parse_line(line, options = Hash.new) -> Array
 
 このメソッドは一行の CSV 文字列を配列に変換するためのショートカットです。
@@ -612,13 +647,26 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
+#@samplecode 例
+require 'csv'
+
+p CSV.parse_line("1,taro,tanaka,20")
+# => ["1", "taro", "tanaka", "20"]
+
+p CSV.parse_line("1|taro|tanaka|20", col_sep: '|')
+# => ["1", "taro", "tanaka", "20"]
+
+# 列をダブルクオートで囲むとその中にカンマや改行を含める事もできる。
+# 他の仕様も含め詳しくはRFC4180を参照。
+p CSV.parse_line("1,\"ta,ro\",\"tana\nka\", 20")
+# => ["1", "ta,ro", "tana\nka", " 20"]
+#@end
+
 --- read(path, options = Hash.new) -> [Array] | CSV::Table
 --- readlines(path, options = Hash.new) -> [Array] | CSV::Table
 
 CSV ファイルを配列の配列にするために使います。
 headers オプションに偽でない値を指定した場合は [[c:CSV::Table]] オブジェクトを返します。
-
-#@# 例を追加する
 
 @param path CSV ファイルのパスを指定します。
 
@@ -626,6 +674,45 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
                :encoding というキーを使用すると入力のエンコーディングを指定することができます。
                入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
                必ず指定しなければなりません。
+
+#@samplecode 例
+require "csv"
+require "pp"
+
+File.write("test.csv", <<CSV)
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+
+pp CSV.read("test.csv")
+
+# => [["id", "first name", "last name", "age"],
+#    ["1", "taro", "tanaka", "20"],
+#    ["2", "jiro", "suzuki", "18"],
+#    ["3", "ami", "sato", "19"],
+#    ["4", "yumi", "adachi", "21"]]
+#@end
+
+#@samplecode 例
+require "csv"
+
+options = { headers: true }
+
+File.write("test.csv", <<CSV)
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+
+table = CSV.read("test.csv", options)
+p table.class # => CSV::Table
+p table[0]    # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+#@end
 
 @see [[m:CSV.new]], [[m:CSV.table]]
 
@@ -724,6 +811,13 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 読み書きするときに使用するエンコーディングを返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
+csv.encoding # => #<Encoding:UTF-8>
+#@end
+
 --- eof -> bool
 --- eof? -> bool
 
@@ -803,6 +897,13 @@ nil を返した場合は、ヘッダは使用されません。
 
 ASCII 互換文字列で自身の情報を表したものを返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" row_sep:\"\\n\" quote_char:\"\\\"\">"
+#@end
+
 --- internal_encoding   -> Encoding | nil
 
 [[m:IO#internal_encoding]] に委譲します。
@@ -820,6 +921,15 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 このファイルから読み込んだ最終行の行番号を返します。
 フィールドに含まれる改行はこの値には影響しません。
+
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.lineno # => 0
+csv.readline
+csv.lineno # => 1
+#@end
 
 --- path    -> String
 
@@ -852,6 +962,32 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 データソースは読み込み用にオープンされている必要があります。
 
+#@samplecode 例 headers: false
+require "csv"
+
+csv = CSV.new(DATA.read)
+csv.read
+# => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+
+__END__
+header1,header2
+row1_1,row1_2
+row2_1,row2_2
+#@end
+
+#@samplecode 例 headers: true
+require "csv"
+
+csv = CSV.new(DATA.read, headers: true)
+csv.read
+# => #<CSV::Table mode:col_or_row row_count:3>
+
+__END__
+header1,header2
+row1_1,row1_2
+row2_1,row2_2
+#@end
+
 --- reopen(io) -> self
 
 [[m:IO#reopen]] に委譲します。
@@ -867,11 +1003,30 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 [[m:IO#rewind]] に似ています。[[m:CSV#lineno]] を 0 にします。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2")
+csv.lineno # => 0
+csv.readline
+csv.lineno # => 1
+csv.rewind
+csv.lineno # => 0
+#@end
+
 @see [[m:IO#rewind]]
 
 --- row_sep -> String
 
 行区切り文字列として使用する文字列を返します。
+
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2|row1_1,row1_2", row_sep: "|")
+csv.row_sep # => "|"
+csv.read    # => [["header1", "header2"], ["row1_1", "row1_2"]]
+#@end
 
 @see [[m:CSV.new]]
 
@@ -890,6 +1045,18 @@ self の生成時に headers オプションに偽でない値が指定されて
 
 @return ヘッダを使用しない場合は配列を返します。
         ヘッダを使用する場合は [[c:CSV::Row]] を返します。
+
+#@samplecode 例
+require "csv"
+
+csv = CSV.new(DATA.read)
+csv.readline # => ["header1", "header2"]
+csv.readline # => ["row1_1", "row1_2"]
+
+__END__
+header1,header2
+row1_1,row1_2
+#@end
 
 --- skip_blanks? -> bool
 

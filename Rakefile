@@ -1,6 +1,6 @@
 
-OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0]
-SUPPORTED_VERSIONS = %w[2.2.0 2.3.0 2.4.0 2.5.0]
+OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0 2.2.0]
+SUPPORTED_VERSIONS = %w[2.3.0 2.4.0 2.5.0]
 UNRELEASED_VERSIONS = %w[2.6.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 
@@ -93,13 +93,16 @@ desc "Check previous commit format"
 task :check_prev_commit_format do
   change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
   res = []
-  ALL_VERSIONS.each do |v|
+  [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS].each do |v|
     change_files.each do |path|
       if %r!\Arefm/api/!.match(path)
         htmls = []
         htmls << `bundle exec bitclust htmlfile --ruby=#{v} #{path}`
-        File.read(path).scan(/^=[^=]\w+\s*(\S+)\s*(?:<\s*(\S+))?/).each do |k, pk|
+        raise "Failed to bitclust htmlfile, ruby: #{v}, path: #{path}" unless $?.success?
+        File.read(path).scan(/^=([^=]\w+)\s*(\S+)\s*(?:<\s*(\S+))?/).each do |t, k, pk|
+          next if /\bre(open|define)\b/.match(t)
           html = `bundle exec bitclust htmlfile --ruby=#{v} --target=#{k} #{path}`
+          raise "Failed to bitclust htmlfile, ruby: #{v}, target: #{k}, path: #{path}" unless $?.success?
           htmls << html
 
           a = html.lines.grep(/\[UNKNOWN_META_INFO\]/)
