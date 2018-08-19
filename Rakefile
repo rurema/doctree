@@ -1,6 +1,6 @@
 
-OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0]
-SUPPORTED_VERSIONS = %w[2.2.0 2.3.0 2.4.0 2.5.0]
+OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0 2.2.0]
+SUPPORTED_VERSIONS = %w[2.3.0 2.4.0 2.5.0]
 UNRELEASED_VERSIONS = %w[2.6.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 
@@ -93,7 +93,7 @@ desc "Check previous commit format"
 task :check_prev_commit_format do
   change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
   res = []
-  ALL_VERSIONS.each do |v|
+  [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS].each do |v|
     change_files.each do |path|
       if %r!\Arefm/api/!.match(path)
         htmls = []
