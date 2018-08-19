@@ -307,8 +307,13 @@ Hash を options として渡すことで、起動される子プロセスの
   これを true に設定すると
   リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
   ファイルデスクリプタをすべて閉じます。
+#@since 2.6.0
+  false がデフォルトです。
+#@else
+#@# 2.0.0 から 2.5 までは true がデフォルト
   true がデフォルトです。
-  
+#@end
+
 === option引数によるリダイレクトの概要
 Hash のキー(子プロセス側)には以下のいずれかが指定できます。
   * 単一のファイルデスクリプタ
@@ -424,12 +429,27 @@ stderr と stdout を混ぜる例を以下に示します。
   p io.read #=> "out\nerr\n
 
 spawn と IO.popen では
+#@since 2.6.0
+デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
+#@else
+spawn と IO.popen では
 デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+#@end
 「:close_others」オプションでこの挙動を制御できます。
 標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
 限り、このオプションの影響を受けません。
+
+「:close_others」とは無関係に ruby が open する IO には
+デフォルトでは close_on_exec が設定されていて、自動的に
+閉じられることに注意してください。
+
+#@since 2.6.0
+  pid = spawn(command, :close_others=>true)  # close 3,4,5,...
+  pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
+#@else
   pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
   pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+#@end
 
 これを利用して spawn を [[m:IO.popen]] のように使うことができます。
   # similar to r = IO.popen(command)
