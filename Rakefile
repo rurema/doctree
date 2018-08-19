@@ -93,7 +93,7 @@ desc "Check previous commit format"
 task :check_prev_commit_format do
   change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
   res = []
-  ALL_VERSIONS.each do |v|
+  [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS].each do |v|
     change_files.each do |path|
       if %r!\Arefm/api/!.match(path)
         htmls = []
