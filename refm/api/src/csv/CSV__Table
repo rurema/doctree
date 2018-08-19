@@ -175,7 +175,7 @@ include Enumerable
 ムモードでは、ブロックに列名と対応する値の配列を与え、列単位で繰り返し
 ます。
 
---- each{|header, field| ... } -> self
+--- each{|row| ... } -> self
 --- each{|column_name, values| ... } -> self
 
 デフォルトのミックスモードかロウモードでは、行単位で繰り返します。カラ
