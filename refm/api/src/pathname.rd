@@ -727,7 +727,7 @@ FileTest.writable_real?(self.to_s) と同じです。
 #@since 2.4.0
 --- empty? -> bool
 #@end
-FileTest.zero?(self.to_s) と同じです。
+ディレクトリに対しては Dir.empty?(self.to_s) と同じ、他に対しては FileTest.zero?(self.to_s) と同じです。
 
 @see [[m:FileTest.#zero?]]
 
