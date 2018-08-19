@@ -857,6 +857,38 @@ nilを設定するとタイムアウトしなくなります。
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
 
+#@since 2.6.0
+--- write_timeout -> Numeric|nil
+書き込み([[man:write(2)]]) 一回でブロックしてよい最大秒数
+を返します。
+
+この秒数たっても書き込めなければ例外 [[c:Net::WriteTimeout]]
+を発生します。
+
+Windows では Net::WriteTimeout は発生しません。
+
+デフォルトは 60 (秒)です。
+
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#write_timeout=]]
+
+--- write_timeout=(seconds)
+
+書き込み([[man:write(2)]]) 一回でブロックしてよい最大秒数を
+設定します。
+
+Float や Rational も設定できます。
+
+この秒数たっても書き込めなければ例外 [[c:Net::WriteTimeout]]
+を発生します。
+
+Windows では Net::WriteTimeout は発生しません。
+
+デフォルトは 60 (秒)です。
+
+@param second 待つ秒数を指定します。
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#write_timeout]]
+#@end
+
 #@since 2.0.0
 --- keep_alive_timeout -> Integer
 以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
