@@ -724,12 +724,17 @@ FileTest.writable_real?(self.to_s) と同じです。
 @see [[m:FileTest.#writable_real?]]
 
 --- zero? -> bool
-#@since 2.4.0
---- empty? -> bool
-#@end
-ディレクトリに対しては Dir.empty?(self.to_s) と同じ、他に対しては FileTest.zero?(self.to_s) と同じです。
+
+FileTest.zero?(self.to_s) と同じです。
 
 @see [[m:FileTest.#zero?]]
+
+#@since 2.4.0
+--- empty? -> bool
+ディレクトリに対しては Dir.empty?(self.to_s) と同じ、他に対しては FileTest.empty?(self.to_s) と同じです。
+
+@see [[m:Dir.empty?]], [[m:FileTest.#empty?]]
+#@end
 
 #@until 1.9.2
 --- chdir{|path| ... } -> object
