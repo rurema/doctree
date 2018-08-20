@@ -56,6 +56,20 @@ include Enumerable
 
 @param other [[c:CSV::Table]] を指定します。
 
+#@samplecode 例
+require "csv"
+
+row1_1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row1_2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+row2_1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2_2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table1 = CSV::Table.new([row1_1, row1_2])
+table2 = CSV::Table.new([row2_1, row2_2])
+table1 == table2 # => true
+table2 << CSV::Row.new(["header1", "header2"], ["row3_1", "row3_2"])
+table1 == table2 # => false
+#@end
+
 --- [](index_or_header) -> object
 
 ミックスモードでは、このメソッドは引数に行番号を指定すれば行単位で動作
