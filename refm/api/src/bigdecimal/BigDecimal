@@ -806,10 +806,14 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 
   require "bigdecimal"
   BigDecimal("1234.5678").inspect
+#@since 2.4.0
+  # => "0.12345678e4"
+#@else
   # => "#<BigDecimal:b7ea1130,'0.12345678E4',8(12)>"
 
 最初の16進数はオブジェクトのアドレス、次の文字列 '0.12345678E4' は値、
 最後の値 8(12) は現在の有効桁数(最大有効数字)を表します。
+#@end
 
 --- power(n)       -> BigDecimal
 #@since 1.9.3
