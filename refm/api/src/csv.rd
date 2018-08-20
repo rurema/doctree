@@ -629,8 +629,8 @@ end
 #@samplecode 例
 require "csv"
 
-row = "id|first name|last name|age\n1|taro|tanaka|20\n2|jiro|suzuki|18"
-CSV.parse(row, col_sep: '|') do |row|
+csv = "id|first name|last name|age\n1|taro|tanaka|20\n2|jiro|suzuki|18"
+CSV.parse(csv, col_sep: '|') do |row|
   p [row[1], row[2]]
 end
 # => ["first name", "last name"]
