@@ -629,9 +629,8 @@ end
 #@samplecode 例
 require "csv"
 
-options = { col_sep: '|' }
-row = "id|first name|last name|age\n1|taro|tanaka|20\n2|jiro|suzuki|18"
-CSV.parse(row, options) do |row|
+csv = "id|first name|last name|age\n1|taro|tanaka|20\n2|jiro|suzuki|18"
+CSV.parse(csv, col_sep: '|') do |row|
   p [row[1], row[2]]
 end
 # => ["first name", "last name"]
@@ -699,8 +698,6 @@ pp CSV.read("test.csv")
 #@samplecode 例
 require "csv"
 
-options = { headers: true }
-
 File.write("test.csv", <<CSV)
 id,first name,last name,age
 1,taro,tanaka,20
@@ -709,7 +706,7 @@ id,first name,last name,age
 4,yumi,adachi,21
 CSV
 
-table = CSV.read("test.csv", options)
+table = CSV.read("test.csv", headers: true)
 p table.class # => CSV::Table
 p table[0]    # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 #@end
