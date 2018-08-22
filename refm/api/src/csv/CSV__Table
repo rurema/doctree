@@ -92,6 +92,24 @@ include Enumerable
 
 @param value 値を指定します。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+row3 = CSV::Row.new(["header1", "header2"], ["row3_1", "row3_2"])
+table = CSV::Table.new([row1, row2])
+table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+table[1] = row3
+table[1] # => #<CSV::Row "header1":"row3_1" "header2":"row3_2">
+table.by_col!
+table[0] # => ["row1_1", "row3_1"]
+table[1] # => ["row1_2", "row3_2"]
+table[1] = ["row1_2", "row2_2"]
+table[1] # => ["row1_2", "row2_2"]
+#@end
+
 --- by_col -> CSV::Table
 
 カラムモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
