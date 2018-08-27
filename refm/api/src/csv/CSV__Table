@@ -145,6 +145,18 @@ include Enumerable
 このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
 チェーンに組込まないようにしてください。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table         # => #<CSV::Table mode:col_or_row row_count:3>
+row_table = table.by_row  # => #<CSV::Table mode:row row_count:3>
+row_table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+row_table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+#@end
+
 --- by_row! -> self
 
 自身をロウモードに変更します。
