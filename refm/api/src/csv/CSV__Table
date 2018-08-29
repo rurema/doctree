@@ -164,6 +164,16 @@ include Enumerable
 探索方法を変更したい場合は [[m:CSV::Table#by_col!]],
 [[m:CSV::Table#by_row!]] を使用してください。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.delete(1)
+table.to_a         # => [["header1", "header2"], ["row1_1", "row1_2"]]
+#@end
+
 @see [[m:CSV::Table#by_col!]], [[m:CSV::Table#by_row!]]
 
 --- delete_if{|row| ... } -> self
