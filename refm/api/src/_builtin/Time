@@ -551,11 +551,51 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * 数値: 表示桁数を指定する
 EとOは無視されます。
 
+#@samplecode 例
   t = Time.now                         #=> 2010-09-05 15:41:17 0900
   t.strftime("Printed on %m/%d/%Y")    #=> "Printed on 09/05/2010"
   t.strftime("Printed on %m/%-d/%_6Y") #=> "Printed on 09/5/  2010"
   t.strftime("at %I:%M%p")             #=> "at 03:41PM"
   t.strftime("at %I:%M%#p")            #=> "at 03:41pm"
+#@end
+
+#@samplecode 様々なISO 8601形式
+t = Time.new(2001,2,3,4,5,6,"+09:00")
+t.strftime("%Y%m%d")           # => 20010203                  Calendar date (basic)
+t.strftime("%F")               # => 2001-02-03                Calendar date (extended)
+t.strftime("%Y-%m")            # => 2001-02                   Calendar date, reduced accuracy, specific month
+t.strftime("%Y")               # => 2001                      Calendar date, reduced accuracy, specific year
+t.strftime("%C")               # => 20                        Calendar date, reduced accuracy, specific century
+t.strftime("%Y%j")             # => 2001034                   Ordinal date (basic)
+t.strftime("%Y-%j")            # => 2001-034                  Ordinal date (extended)
+t.strftime("%GW%V%u")          # => 2001W056                  Week date (basic)
+t.strftime("%G-W%V-%u")        # => 2001-W05-6                Week date (extended)
+t.strftime("%GW%V")            # => 2001W05                   Week date, reduced accuracy, specific week (basic)
+t.strftime("%G-W%V")           # => 2001-W05                  Week date, reduced accuracy, specific week (extended)
+t.strftime("%H%M%S")           # => 040506                    Local time (basic)
+t.strftime("%T")               # => 04:05:06                  Local time (extended)
+t.strftime("%H%M")             # => 0405                      Local time, reduced accuracy, specific minute (basic)
+t.strftime("%H:%M")            # => 04:05                     Local time, reduced accuracy, specific minute (extended)
+t.strftime("%H")               # => 04                        Local time, reduced accuracy, specific hour
+t.strftime("%H%M%S,%L")        # => 040506,000                Local time with decimal fraction, comma as decimal sign (basic)
+t.strftime("%T,%L")            # => 04:05:06,000              Local time with decimal fraction, comma as decimal sign (extended)
+t.strftime("%H%M%S.%L")        # => 040506.000                Local time with decimal fraction, full stop as decimal sign (basic)
+t.strftime("%T.%L")            # => 04:05:06.000              Local time with decimal fraction, full stop as decimal sign (extended)
+t.strftime("%H%M%S%z")         # => 040506+0900               Local time and the difference from UTC (basic)
+t.strftime("%T%:z")            # => 04:05:06+09:00            Local time and the difference from UTC (extended)
+t.strftime("%Y%m%dT%H%M%S%z")  # => 20010203T040506+0900      Date and time of day for calendar date (basic)
+t.strftime("%FT%T%:z")         # => 2001-02-03T04:05:06+09:00 Date and time of day for calendar date (extended)
+t.strftime("%Y%jT%H%M%S%z")    # => 2001034T040506+0900       Date and time of day for ordinal date (basic)
+t.strftime("%Y-%jT%T%:z")      # => 2001-034T04:05:06+09:00   Date and time of day for ordinal date (extended)
+t.strftime("%GW%V%uT%H%M%S%z") # => 2001W056T040506+0900      Date and time of day for week date (basic)
+t.strftime("%G-W%V-%uT%T%:z")  # => 2001-W05-6T04:05:06+09:00 Date and time of day for week date (extended)
+t.strftime("%Y%m%dT%H%M")      # => 20010203T0405             Calendar date and local time (basic)
+t.strftime("%FT%R")            # => 2001-02-03T04:05          Calendar date and local time (extended)
+t.strftime("%Y%jT%H%MZ")       # => 2001034T0405Z             Ordinal date and UTC of day (basic)
+t.strftime("%Y-%jT%RZ")        # => 2001-034T04:05Z           Ordinal date and UTC of day (extended)
+t.strftime("%GW%V%uT%H%M%z")   # => 2001W056T0405+0900        Week date and local time and difference from UTC (basic)
+t.strftime("%G-W%V-%uT%R%:z")  # => 2001-W05-6T04:05+09:00    Week date and local time and difference from UTC (extended)
+#@end
 
 --- sec    -> Integer
 
