@@ -231,6 +231,15 @@ include Enumerable
 
 一番目の要素はヘッダで、残りの要素はデータを表わします。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+#@end
+
 --- to_csv(options = Hash.new) -> String
 --- to_s(options = Hash.new) -> String
 
