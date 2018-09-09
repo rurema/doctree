@@ -1173,6 +1173,8 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 @param val ヘッダを表す配列を指定します。
 
+#@#noexample
+
 = class CSV::MalformedCSVError < RuntimeError
 
 不正な CSV をパースしようとしたときに発生する例外です。
