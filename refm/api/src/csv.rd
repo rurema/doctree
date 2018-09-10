@@ -1146,6 +1146,20 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 行内で何番目のフィールドかわかるゼロベースのインデックスを返します。
 
+#@samplecode 例
+require 'csv'
+
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", headers: true)
+csv.convert do |field,field_info|
+  p field_info.index
+  Date.parse(field)
+end
+csv.first
+
+# => 0
+# => 1
+#@end
+
 --- index=(val)
 
 インデックスの値をセットします。
