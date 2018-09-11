@@ -5,7 +5,7 @@
 第 1 段階では、クラスリファレンスのフォーマットを
 新システムに移行することを目指します。
 
-作業方法については [Phase1WorkingScheme](https://bugs.ruby-lang.org/projects/rurema/wiki/Phase1WorkingScheme) を見てください。
+作業方法については [[Phase1WorkingScheme]] を見てください。
 
 この作業は 2006-10-12 に完了しました。
 
@@ -17,7 +17,7 @@
 とにかくエントリ数が揃えばよいので、
 ドキュメントを書く必要はありません。
 
-作業方法については [Phase2WorkingScheme](https://bugs.ruby-lang.org/projects/rurema/wiki/Phase2WorkingScheme) を見てください。
+作業方法については [[Phase2WorkingScheme]] を見てください。
 
 この作業は 2007-01-08 に完了しました。
 
