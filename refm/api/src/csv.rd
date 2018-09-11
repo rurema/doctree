@@ -1152,6 +1152,8 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 @param val インデックスの値を指定します。
 
+#@#noexample
+
 --- line -> Integer
 
 行番号を返します。
