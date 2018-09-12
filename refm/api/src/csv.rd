@@ -851,6 +851,35 @@ csv.encoding # => #<Encoding:UTF-8>
 
 出力されるフィールドがクオートされる場合は、真を返します。
 
+#@samplecode 例
+require "csv"
+
+rows = [["header1", "header2"], ["row1_1,", "row1_2"]]
+result = CSV.generate(force_quotes: false) do |csv|
+  rows.each { |row| csv << row }
+  csv.force_quotes? # => false
+end
+print result
+
+# => header1,header2
+#    "row1_1,",row1_2
+#@end
+
+#@samplecode 例
+require "csv"
+
+rows = [["header1", "header2"], ["row1_1,", "row1_2"]]
+result = CSV.generate(force_quotes: true) do |csv|
+  rows.each { |row| csv << row }
+  csv.force_quotes? # => true
+end
+print result
+
+# => true
+# => "header1","header2"
+#    "row1_1,","row1_2"
+#@end
+
 @see [[m:CSV.new]]
 
 --- fsync -> 0 | nil
