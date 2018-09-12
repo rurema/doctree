@@ -276,9 +276,9 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 
 #@since 2.6.0
 @param s 各ステップの大きさを数値で指定します。負の数を指定することもできます。
-@return ブロックつきの時は self を返します。
-@return ブロックなしで数値の Range の時は [[c:Enumerator::ArithmeticSequence]] を返します。
-@return ブロックなしのその他の時は [[c:Enumerator]] を返します。
+@return ブロックを指定した時は self を返します。
+@return ブロックを指定しなかった時かつ数値の Range の時は [[c:Enumerator::ArithmeticSequence]] を返します。
+@return ブロックを指定しなかったその他の Range の時は [[c:Enumerator]] を返します。(例: String の Range)
 #@else
 @param s 正の整数を指定します。
 @return ブロックつきの時は self を返します。
