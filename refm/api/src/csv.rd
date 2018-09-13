@@ -1191,6 +1191,18 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 @param val 行番号を指定します。
 
+#@samplecode 例
+require 'csv'
+
+csv = CSV.new("date1,date2,date3\n2018-07-09,2018-07-10\n2018-08-09,2018-08-10", headers: true)
+csv.convert do |field,field_info|
+  field_info.line = 99
+  p field_info.line # => 99
+  Date.parse(field)
+end
+csv.to_a
+#@end
+
 --- header -> Array
 
 利用可能な場合はヘッダを表す配列を返します。
