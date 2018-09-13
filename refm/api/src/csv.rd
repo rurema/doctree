@@ -849,7 +849,7 @@ csv.encoding # => #<Encoding:UTF-8>
 
 --- force_quotes? -> bool
 
-出力されるフィールドがクオートされる場合は、真を返します。
+出力される全てのフィールドがクオートされる場合は、真を返します。
 
 #@samplecode 例
 require "csv"
