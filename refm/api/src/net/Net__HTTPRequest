@@ -61,6 +61,14 @@ f は read(size) メソッドが定義されている必要があります。
 
 リクエストする path を文字列で返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.path # => "/index.html"
+#@end
+
 --- request_body_permitted? -> bool
 
 リクエストにエンティティボディを一緒に送ることが許されている
