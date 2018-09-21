@@ -1701,12 +1701,26 @@ self をそのまま返します。
 
 #@since 2.1.0
 --- to_h -> Hash
+#@since 2.6.0
+--- to_h { block } -> Hash
+#@end
 
 self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
 返します。
 
-   [[:foo, :bar], [1, 2]].to_h
-     # => {:foo => :bar, 1 => 2}
+#@samplecode 例
+[[:foo, :bar], [1, 2]].to_h # => {:foo => :bar, 1 => 2}
+#@end
+
+#@since 2.6.0
+ブロックを指定すると配列の各要素でブロックを呼び出し、
+その結果をペアとして使います。
+
+#@samplecode ブロック付きの例
+["foo", "bar"].to_h {|s| [s.ord, s]} # => {102=>"foo", 98=>"bar"}
+#@end
+#@end
+
 #@end
 
 #@since 1.8.0
