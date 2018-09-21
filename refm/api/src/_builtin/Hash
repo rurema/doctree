@@ -1125,10 +1125,136 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
 @see [[m:Object#hash]]
 
+#@since 2.6.0
+--- merge(*others) -> Hash
+--- merge(*others) {|key, self_val, other_val| ... } -> Hash
+
+selfとothersのハッシュの内容を順番にマージ(統合)した結果を返します。
+デフォルト値はselfの設定のままです。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+othersがハッシュではない場合、othersのメソッドto_hashを使って暗黙の変換を試みます。
+
+@param others マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+@return マージした結果を返します
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h3 = { "b" => 100, "d" => 400 }
+h1.merge()     # => {"a"=>100, "b"=>200}
+h1.merge(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1.merge(h2, h3)
+               # => {"a"=>100, "b"=>100, "c"=>300, "d"=>400}
+h1.merge(h2){|key, oldval, newval| newval - oldval}
+               # => {"a"=>100, "b"=>54,  "c"=>300}
+h1.merge(h2, h3){|key, oldval, newval| newval - oldval}
+               # => {"a"=>100, "b"=>46,  "c"=>300, "d"=>400}
+h1             # => {"a"=>100, "b"=>200}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.merge(bar)
+       # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"b", 3=>"c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+#@end
+
+#@samplecode
+class Foo
+  def to_hash
+    {:Australia => 'Sydney',
+     :France => 'Paris'
+     }
+  end
+end
+
+h = {:Germany => 'Berlin',
+     :Australia => 'Canberra',
+     :France => 'Paris'
+     }
+
+# 暗黙の変換
+p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+#@end
+
+@see [[m:Hash#update]],[[m:Hash#replace]]
+
+--- merge!(*others) -> self
+--- merge!(*others) {|key, self_val, other_val| ... } -> self
+--- update(*other) -> self
+--- update(*other) {|key, self_val, other_val| ... } -> self
+
+selfとothersのハッシュの内容を順番にマージ(統合)します。
+
+デフォルト値はselfの設定のままです。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+othersがハッシュではない場合、othersのメソッドto_hashを使って暗黙の変換を試みます。
+
+@param others マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+@return マージ後のselfを返します。
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h1.merge!()     # => {"a"=>100, "b"=>200}
+h1              # => {"a"=>100, "b"=>200}
+#@end
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge!(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1              # => {"a"=>100, "b"=>254, "c"=>300}
+#@end
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h3 = { "b" => 100, "d" => 400 }
+h1.merge!(h2, h3)  # => {"a"=>100, "b"=>100, "c"=>300, "d"=>400}
+h1                 # => {"a"=>100, "b"=>100, "c"=>300, "d"=>400}
+#@end
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h3 = { "b" => 100, "d" => 400 }
+h1.merge!(h2, h3) { |key, v1, v2| v1 }
+                # => {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+h1              # => {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#@end
+
+@see [[m:Hash#merge]],[[m:Hash#replace]]
+
+#@else
 --- merge(other) -> Hash
 --- merge(other) {|key, self_val, other_val| ... } -> Hash
---- merge!(other) -> self
---- merge!(other) {|key, self_val, other_val| ... } -> self
 
 selfとotherのハッシュの内容をマージ(統合)した結果を返します。デフォルト値はselfの設定のままです。
 
@@ -1137,61 +1263,93 @@ self と other に同じキーがあった場合はブロック付きか否か�
 その返す値を重複キーに対応する値にします。ブロック付きでない
 場合は常に other の値を使います。
 
-Hash#merge! は、マージの結果でselfを変更する破壊的メソッドで、[[m:Hash#update]] の別名です。
-
 otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
 
 @param other マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
 @return マージした結果を返します
 
-  foo = {1 => 'a', 2 => 'b', 3 => 'c'}
-  bar = {2 => 'B', 3 => 'C', 4 => 'D'}
-  
-  p foo.merge(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"b", 3=>"c"}
-  
-  p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val } #=> {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
-  
-  class Foo
-    def to_hash
-      {:Australia => 'Sydney',
-       :France => 'Paris'
-       }
-    end
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge()     # => {"a"=>100, "b"=>200}
+h1.merge(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1.merge(h2){|key, oldval, newval| newval - oldval}
+               # => {"a"=>100, "b"=>54,  "c"=>300}
+h1             # => {"a"=>100, "b"=>200}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.merge(bar)
+       # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"b", 3=>"c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+#@end
+
+#@samplecode
+class Foo
+  def to_hash
+    {:Australia => 'Sydney',
+     :France => 'Paris'
+     }
   end
-  
-  h = {:Germany => 'Berlin',
-       :Australia => 'Canberra',
-       :France => 'Paris'
-       }
-  h.merge!(Foo.new) #暗黙の変換
-  p h #=> {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+end
+
+h = {:Germany => 'Berlin',
+     :Australia => 'Canberra',
+     :France => 'Paris'
+     }
+
+# 暗黙の変換
+p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+#@end
 
 @see [[m:Hash#update]],[[m:Hash#replace]]
 
+--- merge!(other) -> self
+--- merge!(other) {|key, self_val, other_val| ... } -> self
 --- update(other) -> self
 --- update(other) {|key, self_val, other_val| ... } -> self
 
-selfとotherのハッシュの内容をマージ(統合)します。[[m:Hash#merge!]]と同じです。
+selfとotherのハッシュの内容をマージ(統合)します。
 
 デフォルト値はselfの設定のままです。
+
+self と other に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に other の値を使います。
+
 otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
 
 @param other マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
 @return マージ後のselfを返します。
 
-  foo = {1 => 'a', 2 => 'b', 3 => 'c'}
-  bar = {2 => 'B', 3 => 'C', 4 => 'D'}
-  
-  p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  
-  p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
-  p foo  #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge!(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1              # => {"a"=>100, "b"=>254, "c"=>300}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#@end
 
 @see [[m:Hash#merge!]]
-
+#@end
 --- ==(other) -> bool
 --- ===(other) -> bool
 #@since 1.8.7
