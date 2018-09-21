@@ -116,6 +116,8 @@ initheader でリクエストヘッダを指定することができます。
 @param path リクエストする path を文字列で与えます。
 @param initheader リクエストヘッダをハッシュで指定します。
 
+#@#noexample
+
 #@# == Constants
 #@# --- METHOD -> String
 #@# リクエストの HTTP メソッドを文字列で返します。
