@@ -1257,6 +1257,11 @@ Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4], 
 行列が反対称行列 (交代行列、歪〔わい〕対称行列とも) ならば真を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
+
+--- reflexive? -> bool
+行列が反射的ならば真を返します。
+
+@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 #@end
 
 #@since 1.9.3
