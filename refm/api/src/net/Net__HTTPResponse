@@ -17,6 +17,13 @@ Net::HTTP クラスは実際には HTTPResponse のサブクラスを返しま�
 #@# --- read_new 
 #@# internal use only
 
+#@samplecode 例
+require 'net/http'
+
+Net::HTTPSuccess.body_permitted?     # => true
+Net::HTTPNotModified.body_permitted? # => false
+#@end
+
 == Instance Methods
 
 --- code -> String
