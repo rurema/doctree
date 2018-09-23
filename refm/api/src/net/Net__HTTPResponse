@@ -79,6 +79,14 @@ msg は obsolete です。使わないでください。
 
 entity は obsolete です。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.body[0..10] # => "<!doctype h"
+#@end
+
 --- read_body(dest=nil) -> String|nil
 --- read_body {|str| .... } -> ()
 
