@@ -66,6 +66,8 @@ msg は obsolete です。使わないでください。
 
 自分自身を返します。
 
+#@#noexample
+
 --- body -> String | () | nil
 --- entity -> String | () | nil
 
