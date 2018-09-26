@@ -39,6 +39,14 @@ msg は obsolete です。使わないでください。
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.http_version # => "1.1"
+#@end
+
 #@since 1.8.0
 --- to_ary -> [Net::HTTPResponse, String]
 このメソッドは net/http.rb 1.1 との互換性のために存在します。
