@@ -35,6 +35,14 @@ HTTP サーバがリザルトコードに付加して返すメッセージです
 
 msg は obsolete です。使わないでください。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.message # => "OK"
+#@end
+
 --- http_version -> String
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
