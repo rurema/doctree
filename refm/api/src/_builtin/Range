@@ -283,8 +283,8 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 @param s 正の整数を指定します。
 @return ブロックつきの時は self を返します。
 @return ブロックなしの時は [[c:Enumerator]] を返します。
-#@end
 @raise ArgumentError s に 0 または負の数を指定した場合に発生します
+#@end
 
 例:
 
