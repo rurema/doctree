@@ -270,6 +270,8 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 --- step(s = 1) -> Enumerator
 #@since 2.6.0
 --- step(s = 1) -> Enumerator::ArithmeticSequence
+--- %(s)        -> Enumerator
+--- %(s)        -> Enumerator::ArithmeticSequence
 #@end
 
 範囲内の要素を s おきに繰り返します。
