@@ -90,6 +90,14 @@ entity は obsolete です。
 
 レスポンスがボディを持たない場合には nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.read_body[0..10] # => "<!doctype h"
+#@end
+
 一度ブロックを与えずにこのメソッドを呼んだ場合には、
 次からはすでに読みだしたボディを文字列として
 返します。また一度ブロックを与えてこのメソッドを呼んだ場合には、
