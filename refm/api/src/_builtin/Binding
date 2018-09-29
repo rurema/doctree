@@ -133,4 +133,6 @@ eval(expr, self, fname, lineno) とするのと同じです。
 REPLのセッションを開始します。
 
 2.5.0 からは require 'irb' せずに直接 binding.irb を呼び出しても使えるようになりました。(実験的)
+
+@see [[lib:irb]]
 #@end
