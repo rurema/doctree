@@ -39,13 +39,6 @@ msg は obsolete です。使わないでください。
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
-#@since 1.8.0
---- to_ary -> [Net::HTTPResponse, String]
-このメソッドは net/http.rb 1.1 との互換性のために存在します。
-
-[self, self.body] を返します。
-#@end
-
 --- value -> nil
 レスポンスが 2xx(成功)でなかった場合に、対応する
 例外を発生させます。
