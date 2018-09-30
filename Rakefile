@@ -101,7 +101,8 @@ task :check_prev_commit_format do
         raise "Failed to bitclust htmlfile, ruby: #{v}, path: #{path}" unless $?.success?
         File.read(path).scan(/^=([^=]\w+)\s*(\S+)\s*(?:<\s*(\S+))?/).each do |t, k, pk|
           next if /\bre(open|define)\b/.match(t)
-          html = `bundle exec bitclust htmlfile --ruby=#{v} --target=#{k} #{path}`
+          html = `bundle exec bitclust htmlfile --ruby=#{v} --target=#{k} #{path} 2>&1`
+          next if /\Abitclust: error: no such/.match(html) && !$?.success?
           raise "Failed to bitclust htmlfile, ruby: #{v}, target: #{k}, path: #{path}" unless $?.success?
           htmls << html
 
