@@ -1618,6 +1618,14 @@ key ヘッダフィールドを返します。
 たとえばキー 'content-length' に対しては  '2048'
 のような文字列が得られます。キーが存在しなければ nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req['user-agent'] # => Ruby
+#@end
+
 #@since 1.8.3
 一種類のヘッダフィールドが一つのヘッダの中に複数存在する
 場合にはそれを全て ", " で連結した文字列を返します。
