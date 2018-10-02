@@ -1642,6 +1642,16 @@ val に nil を与えるとそのフィールドを削除します。
 @param key ヘッダフィール名を文字列で与えます。
 @param val keyで指定したフィールドにセットする文字列を与えます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req['user-agent'] # => Ruby
+req['user-agent'] = "update"
+req['user-agent'] # => update
+#@end
+
 @see [[m:Net::HTTPHeader#[] ]],
 #@since 1.8.3
      [[m:Net::HTTPHeader#add_field]],
