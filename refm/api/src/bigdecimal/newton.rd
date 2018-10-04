@@ -62,7 +62,7 @@ require bigdecimal/ludcmp
 
 Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
- * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/nlsolve.rb?view=markup]]
+ * [[url:https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/nlsolve.rb?view=markup]]
 
 = module Newton
 
