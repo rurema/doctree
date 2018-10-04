@@ -4,7 +4,7 @@
 
 ## 1. ダウンロード
 
-BitClust の Gem をインストースしてドキュメントのソースをリポジトリから取ってきます。
+BitClust の Gem をインストールしてドキュメントのソースをリポジトリから取ってきます。
 
 ```
 $ gem install bitclust-core bitclust-dev refe2
