@@ -37,7 +37,7 @@ Integer.sqrt(25)       # => 5
 Integer.sqrt(10**400) == 10**200 # => true
 #@end
 
-Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の制度の限界によって
+Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の精度の限界によって
 真の値とは違う結果になることがあります。
 
 #@samplecode
