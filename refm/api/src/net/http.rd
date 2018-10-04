@@ -1728,6 +1728,16 @@ Transfer-Encoding: ヘッダフィールドが "chunked" である
 Transfer-Encoding: ヘッダフィールドが存在しなかったり、
 "chunked" 以外である場合には偽を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.chunked? # => false
+req["Transfer-Encoding"] = "chunked"
+req.chunked? # => true
+#@end
+
 --- content_type -> String|nil
 "text/html" のような Content-Type を表す
 文字列を返します。
