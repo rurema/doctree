@@ -1780,6 +1780,16 @@ Content-Length: ヘッダフィールドの表している値を整数で返し�
 @raise Net::HTTPHeaderSyntaxError フィールドの値が不正である場合に
                                   発生します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.content_length  # => nil
+req.content_length = 10
+req.content_length  # => 10
+#@end
+
 --- content_length=(len)
 Content-Length: ヘッダフィールドに値を設定します。
 
