@@ -159,6 +159,14 @@ include Enumerable
 
 @param name この行のヘッダに含まれているかどうか調べたい値を指定します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+row.header?("header1") # => true
+row.header?("header3") # => false
+#@end
+
 --- header_row? -> bool
 ヘッダ行であれば真を返します。そうでなければ偽を返します。
 
