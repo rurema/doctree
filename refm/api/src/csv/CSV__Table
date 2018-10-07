@@ -212,6 +212,10 @@ include Enumerable
 
 [[m:Array#length]], [[m:Array#size]] に委譲します。
 
+#@#noexample Array#length, Array#size の例を参照
+
+@see [[m:Array#length]], [[m:Array#size]]
+
 --- mode -> Symbol
 
 現在のアクセスモードを返します。
