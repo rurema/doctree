@@ -115,6 +115,18 @@ include Enumerable
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], [1, 2, 3, 4])
+row.each { |header, field| puts "#{header} - #{field}" }
+
+# => header1 - 1
+# => header2 - 2
+# => header3 - 3
+# => header4 - 4
+#@end
+
 --- empty? -> bool
 
 内部で保持している @row へ委譲します。
