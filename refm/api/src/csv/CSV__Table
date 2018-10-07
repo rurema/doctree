@@ -224,7 +224,7 @@ include Enumerable
 
 複数の行を追加するためのショートカットです。
 
-@param rows [[c:CSV::Rows]] のインスタンスか配列を指定します。
+@param rows [[c:CSV::Row]] のインスタンスか配列を指定します。
 
 以下と同じです。
   require 'csv'
