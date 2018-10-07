@@ -229,6 +229,8 @@ row.to_hash # => {"header2"=>3, "header1"=>2}
 
 同値性を比較するために使用する内部的なデータです。
 
+#@#noexample
+
 #@else
 = class CSV::Row < Array
 CSV形式1行分のデータ（Row）を操作するためのクラス。
