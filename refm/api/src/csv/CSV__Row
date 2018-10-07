@@ -201,6 +201,14 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を�
 
 自身を CSV な文字列として返します。ヘッダは使用しません。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+row.to_csv                                    # => "1,2\n"
+row.to_csv( {col_sep: "|", row_sep: "<br>"} ) # => "1|2<br>"
+#@end
+
 --- to_hash -> Hash
 
 自身をシンプルなハッシュに変換します。
