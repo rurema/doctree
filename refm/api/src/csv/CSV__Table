@@ -186,6 +186,10 @@ include Enumerable
 
 [[m:Array#empty?]] に委譲します。
 
+#@#noexample Array#empty? の例を参照
+
+@see [[m:Array#empty?]]
+
 --- headers -> Array
 
 自身のヘッダ行を返します。
