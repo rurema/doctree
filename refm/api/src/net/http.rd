@@ -1734,6 +1734,16 @@ Transfer-Encoding: ヘッダフィールドが存在しなかったり、
 
 Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/comments.cgi?post=comment')
+req = Net::HTTP::Post.new(uri.request_uri)
+req.content_type  # => nil
+req.content_type = 'multipart/form-data'
+req.content_type  # => "multipart/form-data"
+#@end
+
 --- content_type=(type)
 --- set_content_type(type, params = {})
 type と params から Content-Type: ヘッダフィールドの
