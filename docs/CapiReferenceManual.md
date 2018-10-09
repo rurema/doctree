@@ -2,7 +2,7 @@
 <dt>名前</dt>
 <dd>C API リファレンス</dd>
 <dt>URL</dt>
-<dd><a href="http://doc.ruby-lang.org/ja/1.9.3/function/index.html">http://doc.ruby-lang.org/ja/1.9.3/function/index.html</a></dd>
+<dd><a href="https://docs.ruby-lang.org/ja/latest/function/index.html">https://docs.ruby-lang.org/ja/latest/function/index.html</a></dd>
 <dt>代替 URL</dt>
 <dd><a href="http://doc.okkez.net/193/view/function/">http://doc.okkez.net/193/view/function/</a></dd>
 <dt>概要</dt>
