@@ -433,6 +433,13 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
                :encoding というキーを使用すると出力のエンコーディングを指定することができます。
                :row_sep というキーの値には [[m:$/]] がセットされます。
 
+#@samplecode 例
+require "csv"
+
+taro = ['1', 'taro', 'tanaka', '20']
+CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
+#@end
+
 @see [[m:CSV.new]]
 
 --- instance(data = $stdout, options = Hash.new) -> CSV
