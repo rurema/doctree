@@ -1393,6 +1393,14 @@ row で指定された配列をパースし、fs で指定された文字をフ�
           nil (デフォルト) で ',' をセパレータとします。
 @param rs 無視されます。
 
+#@samplecode 例
+require "csv"
+
+options = { col_sep: '|' }
+taro = ['1', 'taro', 'tanaka', '20']
+CSV.generate_line(taro, options) # => "1|taro|tanaka|20\n"
+#@end
+
 --- parse_line(src, fs = nil, rs = nil) -> Array
 
 src で指定された文字列を1行分としてパースし配列に変換して返します。
