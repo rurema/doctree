@@ -1,6 +1,5 @@
 category FileFormat
 
-#@since 1.9.1
 CSV (Comma Separated Values) を扱うライブラリです。
 
 #@# 説明を記述する
@@ -252,10 +251,8 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   false
 : :force_quotes
   false
-#@since 2.0.0
 : :skip_lines
   nil
-#@end
 
 --- VERSION -> String
 
@@ -352,60 +349,12 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   真を指定すると、空行を読み飛ばします。
 : :force_quotes
   真を指定すると、全てのフィールドを作成時にクオートします。
-#@since 2.0.0
 : :skip_lines
   指定した正規表現にマッチしたそれぞれの行をコメントとして読み飛ばします。
-#@end
 
 @raise CSV::MalformedCSVError 不正な CSV をパースしようとしたときに発生します。
 
 @see [[m:CSV::DEFAULT_OPTIONS]], [[m:CSV.open]]
-
-#@until 2.0.0
---- dump(ary_of_objs, io = "", options = Hash.new) -> String | nil
-
-このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアラ
-イズすることができます。[[c:Marshal]] や [[lib:yaml]] よりは不便ですが、
-スプレッドシートやデータベースとのやりとりには役に立つでしょう。
-
-このメソッドは単純なオブジェクトや構造体を扱う場合はうまく動くことを意
-図しています。[[m:Struct#members]] を使ってインスタンス変数をシリアライ
-ズします。
-
-もっと複雑なシリアライゼーションが必要な場合は、ダンプしたいクラスにメ
-ソッドを追加すると制御することができます。
-
-#@# ユーザが定義しないかぎり存在しないメソッドなのでリンクにはしない
-
-Object.csv_meta を定義すると、ダンプするデータの一行目を変更することが
-できます。この行は次の形式のハッシュのようなものです。
-
-  key_1,value_1,key_2,value_2,...
-
-[[m:CSV.load]] は "class" というキーと文字列化したクラス名を期待してい
-ます。Object.csv_meta を定義しなければ [[m:CSV.dump]] はそれを生成しま
-す。ary_of_objs の最初の要素の Object.csv_meta だけが呼ばれます。
-
-次に Object#csv_headers を定義することができます。このメソッドはダンプ
-するデータの二行目を出力します。二行目はそれぞれの列のヘッダを与えるた
-めに使います。デフォルトでは、[[m:CSV.load]] はヘッダが "@" で始まって
-いればインスタンス変数に値をセットし、そうでなければヘッダの名前をメソッ
-ド名、フィールドの値を引数として [[m:Object#send]] を呼び出します。
-ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
-
-最後に、Object#csv_dump を定義することができます。Object#csv_dump の引
-数はヘッダで返り値はフィールドの配列です。このメソッドは ary_of_objs の
-全ての要素に対して一度ずつ呼ばれます。
-
-@param ary_of_objs 任意の配列を指定します。
-
-@param io データの出力先を指定します。デフォルトは文字列です。ファイル
-          に出力することもできます。
-
-@param options オプションを指定します。[[m:CSV.new]] と同じです。
-
-@see [[m:CSV.new]]
-#@end
 
 --- filter(options = Hash.new){|row| ... }
 --- filter(input, options = Hash.new){|row| ... }
@@ -484,6 +433,13 @@ ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
                :encoding というキーを使用すると出力のエンコーディングを指定することができます。
                :row_sep というキーの値には [[m:$/]] がセットされます。
 
+#@samplecode 例
+require "csv"
+
+taro = ['1', 'taro', 'tanaka', '20']
+CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
+#@end
+
 @see [[m:CSV.new]]
 
 --- instance(data = $stdout, options = Hash.new) -> CSV
@@ -501,29 +457,6 @@ ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
 
 @see [[m:CSV.new]]
-
-#@until 2.0.0
---- load(io_or_str, options = Hash.new) -> Array
-
-このメソッドは [[m:CSV.dump]] で出力されたデータを読み込みます。
-
-csv_load という名前のクラスメソッドを追加すると、データを読み込む方法を
-カスタマイズすることができます。csv_load メソッドはメタデータ、ヘッダ、行
-の三つのパラメータを受けとります。そしてそれらを元にして復元したオブジェクトを
-返します。
-
-Remember that all fields will be Strings after this load.  If you need
-something else, use +options+ to setup converters or provide a custom
-csv_load() implementation.
-
-#@# カスタマイズの例が必要
-
-@param io_or_str [[c:IO]] か [[c:String]] のインスタンスを指定します。
-
-@param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
-
-@see [[m:CSV.new]], [[m:CSV.dump]]
-#@end
 
 --- open(filename, mode = "rb", options = Hash.new){|csv| ... } -> nil
 --- open(filename, mode = "rb", options = Hash.new) -> CSV
@@ -545,10 +478,8 @@ Ruby1.9 以降では [[m:CSV.foreach]] を使うとブロックに行を渡し�
 コーディングをチェックします。"rb:UTF-32BE:UTF-8" のように mode を指定
 すると UTF-32BE のデータを読み込んでUTF-8 に変換してから解析します。
 
-#@since 1.9.2
 また "rb:BOM|UTF-8" のように mode を指定すると BOM を自動的に取り除きま
 す。
-#@end
 
 CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委譲します。
 
@@ -1208,302 +1139,3 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 #@include(csv/CSV__Row)
 #@include(csv/CSV__Table)
-#@else
-CSV (Comma Separated Values) を扱うライブラリです。
-
-= class CSV < Object
-
-CSV (Comma Separated Values) を扱うクラスです。
-
-各メソッドの共通パラメタ
-
-  mode
-     'r', 'w', 'rb', 'wb' から指定可能です。
-
-     - 'r' 読み込み
-     - 'w' 書き込み
-     - 'b' バイナリモード
-  fs
-     フィールドの区切り文字(あるいは文字列)。
-     数値(Integer#chr で変換可能な値のみ)を指定した場合は対応する文字が区切り文字になります。
-     デフォルトは ','。
-  rs
-     行区切り文字。nil (デフォルト) で CrLf / Lf。
-     Cr で区切りたい場合は ?\r を渡します。
-
-== Class Methods
-
---- open(path, mode, fs = nil, rs = nil) {|row| ... } -> nil
---- open(path, mode, fs = nil, rs = nil) -> CSV::Reader | CSV::Writer
-
-CSVファイルを読み込んでパースします。
-
-読み込みモード時には path にあるファイルを開き各行を配列として
-ブロックに渡します。
-
-@param path パースするファイルのファイル名
-@param mode 処理モードの指定
-            'r', 'w', 'rb', 'wb' から指定可能です。
-            - 'r' 読み込み
-            - 'w' 書き込み
-            - 'b' バイナリモード
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 行区切り文字の指定。nil (デフォルト) で CRLF / LF。
-          CR を行区切りとしたい場合は ?\r を渡します。
-
-=== 注意
-
-パース時に""(空文字)と値なし(nil)を区別します。
-例えば、読み込みモード時にa, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
-
-例:
-
-  require 'csv'
-  CSV.open("/temp/test.csv", 'r') do |row|
-    puts row.join("<>")
-  end
-
-tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外で指定
-
-  require 'csv'
-  CSV.open("/temp/test.tsv", 'r', "\t") do |row|
-    puts row.join("<>")
-  end
-
-ブロックを渡さなかった場合 CSV::Reader を返します。
-
-書き込みモード時には path にあるファイルを開き CSV::Writer をブロックに渡します。
-
-例:
-
-  require 'csv'
-  CSV.open("/temp/test.csv", 'w') do |writer|
-    writer << ["ruby", "perl", "python"]
-    writer << ["java", "C", "C++"]
-  end
-
-ブロック未指定の場合 CSV::Writer を返します。
-
-#@since 1.8.2
-
---- foreach(path, rs = nil) {|row| ... } -> nil
-
-読み込みモードでファイルを開き、各行を配列でブロックに渡します。
-
-@param path パースするファイルのファイル名
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-
-=== 注意
-
-パース時に""(空文字)と値なしを区別します。
-例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
-
-例:
-
-  require 'csv'
-  CSV.foreach('test.csv'){|row|
-    puts row.join(':')
-  }
-
---- read(path, length = nil, offset = nil) -> Array
-
-path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
-
-@param path パースするファイルのファイル名
-@param length 対象ファイルの読み込みサイズ
-@param offset 読み込み開始位置
-
-=== 注意
-
-パース時に""(空文字)と値なしを区別します。
-例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
-
---- readlines(path, rs = nil) -> Array
-
-path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
-
-@param path パースするファイルのファイル名
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-
-=== 注意
-
-パース時に""(空文字)と値なしを区別します。
-例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
-
-#@end
-
---- generate(path, fs = nil, rs = nil) -> CSV::BasicWriter
---- generate(path, fs = nil, rs = nil) {|writer| ... } -> nil
-
-path で指定されたファイルを書き込みモードで開き、ブロックに渡します。
-ブロック未指定の場合は [[c:CSV::BasicWriter]] を返します。
-
-@param path 書き込みモードでopenするファイルのファイル名
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-
-=== 注意
-
-ファイル書き込み時に""(空文字)と値なし(nil)を区別します。
-例えば、["a", "", nil, "b"] の配列を渡した場合に a, "", , b という行をファイルに書き込みます。
-
-例:
-  require 'csv'
-  a = ["1","ABC","abc"]
-  b = ["2","DEF","def"]
-  c = ["3","GHI","ghi"]
-  x = [a, b, c]
-
-  CSV.generate("test2.csv"){|writer|
-    x.each{|row|
-      writer << row
-    }
-  }
-
---- parse(str_or_readable, fs = nil, rs = nil) -> Array
---- parse(str_or_readable, fs = nil, rs = nil){|rows| ... } -> nil
-
-str_or_readable で指定された文字列をパースし配列の配列に変換、ブロックに渡します。
-ブロック未指定の場合は変換された配列の配列を返します。
-
-@param str_or_readable パースする文字列
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-
-例:
-  require 'csv'
-  CSV.parse("A,B,C\nd,e,f\nG,H,I"){|rows|
-    p rows
-  }
-
---- generate_line(row, fs = nil, rs = nil) -> String
-
-row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
-1行分の文字列を返します。
-
-@param row パースする配列
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 無視されます。
-
-#@samplecode 例
-require "csv"
-
-options = { col_sep: '|' }
-taro = ['1', 'taro', 'tanaka', '20']
-CSV.generate_line(taro, options) # => "1|taro|tanaka|20\n"
-#@end
-
---- parse_line(src, fs = nil, rs = nil) -> Array
-
-src で指定された文字列を1行分としてパースし配列に変換して返します。
-
-@param src パースする文字列
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-
-#@until 1.9.1
---- generate_row(src, cells, out_dev, fs = nil, rs = nil) -> Fixnum
-
-src で指定された配列をパースして csv形式の文字列として(行区切り文字も含めて) out_dev に出力します。
-返り値として fs で区切ったフィールド(cell)の数を返します。
-
-@param src パースする配列
-@param cells パースするフィールド数。
-@param out_dev csv形式の文字列の出力先。
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-
-=== 注意
-
-配列のパース時に""(空文字)と値なし(nil)を区別します。
-例えば、["a", "", nil, "b"] の配列を渡した場合に a,"", , b という文字列を生成します。
-
-例:
-  require 'csv'
-  row1 = ['a', 'b', 'c']
-  row2 = ['1', '2', '3']
-  row3 = ['A', 'B', 'C']
-  src = [row1, row2, row3]
-  buf = ''
-  src.each do |row|
-    parsed_cells = CSV.generate_row(row, 2, buf)
-  end
-  p buf #=>"a,b\n1,2\n,A,B\n"
-
-
---- parse_row(src, index, out_dev, fs = nil, rs = nil) -> Array
-
-CSV形式の文字列をパースしてCSV1行(row)分のデータを配列に変換し out_dev に出力します。
-
-@param src パースする文字列(CSV形式)
-@param index パース開始位置
-@param out_dev 変換したデータの出力先。
-@param fs フィールドセパレータの指定。
-          nil (デフォルト) で ',' をセパレータとします。
-@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
-          Cr を行区切りとしたい場合は ?\r を渡します。
-@return  変換したArrayのサイズと変換をした文字列の位置をArrayとして返します。
-
-=== 注意
-
-パース時に""(空文字)と値なしを区別します。
-例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
-
-例:
-   require 'csv'
-   src = "a,b,c\n1,2\nA,B,C,D"
-   i = 0
-
-   x = [] #結果を格納する配列
-   begin
-     parsed = []
-     parsed_cells, i = CSV.parse_row(src, i, parsed)
-     x.push(parsed)
-   end while parsed_cells > 0
-
-   x.each{ |row|
-     p '-----'
-     row.each{ |cell|
-       p cell
-     }
-   }
-
-実行結果:
-  a
-  b
-  c
-  -----
-  1
-  2
-  -----
-  A
-  B
-  C
-  D
-
-#@end
-
-#@include(csv/CSV__Cell)
-#@include(csv/CSV__Row)
-#@include(csv/CSV__BasicWriter)
-#@include(csv/CSV__IOBuf)
-#@include(csv/CSV__IOReader)
-#@include(csv/CSV__IllegalFormatError)
-#@include(csv/CSV__Reader)
-#@include(csv/CSV__StreamBuf)
-#@include(csv/CSV__StringReader)
-#@include(csv/CSV__Writer)
-#@end
-
