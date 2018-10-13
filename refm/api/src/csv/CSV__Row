@@ -143,6 +143,15 @@ row.each { |header, field| puts "#{header} - #{field}" }
 --- field_row? -> bool
 フィールド行であれば真を返します。そうでなければ偽を返します。
 
+#@samplecode 例
+require "csv"
+
+header_row = CSV::Row.new(["header1", "header2"], [], true)
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+header_row.field_row? # => false
+row.field_row?        # => true
+#@end
+
 --- fields(*headers_and_or_indices) -> Array
 --- values_at(*headers_and_or_indices) -> Array
 
