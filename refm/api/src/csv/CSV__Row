@@ -46,6 +46,26 @@ include Enumerable
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例 2要素の配列を指定
+require "csv"
+
+row = CSV::Row.new([], [], true)
+
+row << ["header1", "row1_1"]
+row << ["header2", "row1_2"]
+row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
+#@end
+
+#@samplecode 例 Hash を指定
+require "csv"
+
+row = CSV::Row.new([], [], true)
+
+row << { "header1" => "row1_1" }
+row << { "header2" => "row1_2" }
+row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
+#@end
+
 --- ==(other) -> bool
 
 自身が other と同じヘッダやフィールドを持つ場合に真を返します。
