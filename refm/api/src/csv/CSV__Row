@@ -105,6 +105,37 @@ row["header2"]       # => "row1_2"
 
 @param value 値を指定します。
 
+#@samplecode 例 ヘッダの名前で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row["header1"]  # => "row1_1"
+row["header1"] = "updated"
+row["header1"]  # => "updated"
+#@end
+
+#@samplecode 例 ヘッダの index で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row["header1"]  # => "row1_1"
+row[0] = "updated"
+row["header1"]  # => "updated"
+#@end
+
+#@samplecode 例 ヘッダの名前と offset で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header1"], ["row1_1", "row1_2", "row1_3"])
+
+row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
+row["header1", 1] = "updated"
+row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"updated">
+#@end
+
+
 @see [[m:CSV::Row#field]]
 
 --- []=(header, offset, value)
