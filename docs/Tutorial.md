@@ -107,6 +107,11 @@ $ git diff
 $ bitclust htmlfile ./refm/api/src/_builtin/Array --target=Array#pop --ruby=1.9.2 > /tmp/Array_pop.html
 ```
 出力されたhtmlファイルをお使いのブラウザーで確認してみてください。
+zsh なら以下のようにすれば、一時ファイルを作成しません。
+
+```
+$ firefox =(bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array#pop --ruby=1.9.2)
+```
 
 ### 3.6 commit する
 
@@ -160,14 +165,3 @@ Switched to branch 'master'
 ```
 
 「3.3 トピックブランチを作る」に戻り、編集を再開してください。
-
-## 4. プレビュー
-
-```
-$ bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array#pop --ruby=1.9.2 > /tmp/a.html
-```
-zsh なら以下のようにすれば、一時ファイルを作成しません。
-
-```
-$ firefox =(bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array#pop --ruby=1.9.2)
-```
