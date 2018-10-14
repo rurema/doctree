@@ -929,6 +929,13 @@ csv.lineno # => 1
 
 フィールドをクオートするのに使用する文字列を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", quote_char: "'")
+csv.quote_char # => "'"
+#@end
+
 @see [[m:CSV.new]]
 
 --- read -> [Array] | CSV::Table
