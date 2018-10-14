@@ -102,7 +102,6 @@ $ firefox =(bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array
 以下のコマンドでデータベースのディレクトリを作ります。
 
 ```
-$ cd rubydoc/
 $ bitclust -d ./db-2.5.0 init version=2.5.0 encoding=UTF-8
 ```
 
