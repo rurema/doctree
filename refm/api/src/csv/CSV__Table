@@ -58,6 +58,16 @@ table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1])
+table << row2
+table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+#@end
+
 --- ==(other) -> bool
 
 自身の全ての行が比較対象と同じである場合は真を返します。
