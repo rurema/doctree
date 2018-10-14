@@ -131,7 +131,7 @@ $ bitclust -d ./db-2.5.0 update --stdlibtree=refm/api/src
 DBの更新後は以下のコマンドでサーバを起動し、 `http://localhost:10080/バージョン/` にアクセスして確認してください。
 
 ```
-$ bitclust server --database=. --debug
+$ bitclust server --database=db-2.5.0 --debug ※状況確認中。動作しません。
 ```
 
 動作確認後は Ctrl+C でサーバを終了します。
