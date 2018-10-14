@@ -559,14 +559,14 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委
 #@samplecode 例 読み取り・ブロック指定なし
 require "csv"
 
-File.write("test.txt", <<CSV)
+File.write("test.csv", <<CSV)
 id,first name,last name,age
 1,taro,tanaka,20
 2,jiro,suzuki,18
 3,ami,sato,19
 4,yumi,adachi,21
 CSV
-csv = CSV.open("test.txt", headers: true)
+csv = CSV.open("test.csv", headers: true)
 csv.class # => CSV
 csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 #@end
@@ -582,8 +582,8 @@ id,first name,last name,age
 4,yumi,adachi,21
 EOS
 
-File.write("test.txt", users)
-CSV.open("test.txt", headers: true) do |csv|
+File.write("test.csv", users)
+CSV.open("test.csv", headers: true) do |csv|
   csv.class # => CSV
   csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 end
@@ -592,14 +592,14 @@ end
 #@samplecode 例 書き込み・ブロック指定あり
 require "csv"
 
-CSV.open("test.txt", "w") do |csv|
+CSV.open("test.csv", "w") do |csv|
   csv << ["id", "first name", "last name", "age"]
   csv << ["1", "taro", "tanaka", "20"]
   csv << ["2", "jiro", "suzuki", "18"]
   csv << ["3", "ami", "sato", "19"]
   csv << ["4", "yumi", "adachi", "21"]
 end
-print File.read("test.txt")
+print File.read("test.csv")
 
 # => id,first name,last name,age
 #    1,taro,tanaka,20
