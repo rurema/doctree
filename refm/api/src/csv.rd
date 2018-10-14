@@ -1209,7 +1209,7 @@ csv.convert do |field,field_info|
   p field_info.index
   Date.parse(field)
 end
-csv.first
+csv.first # => #<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>>
 
 # => 0
 # => 1
@@ -1233,7 +1233,7 @@ csv.convert do |field,field_info|
   p field_info.line
   Date.parse(field)
 end
-csv.to_a
+csv.to_a # => [#<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)> "date3":nil>, ...]
 
 # => 2
 # => 2
@@ -1259,7 +1259,7 @@ csv.convert do |field,field_info|
   p field_info.header
   Date.parse(field)
 end
-csv.first
+csv.first # => #<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>>
 
 # => "date1"
 # => "date2"
