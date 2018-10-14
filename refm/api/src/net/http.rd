@@ -1849,6 +1849,18 @@ val は ", " で連結した文字列がブロックに渡されます。
 
 渡される文字列は ", " で連結したものです。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.each_value { |value| puts value }
+
+# => gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+# => */*
+# => Ruby
+#@end
+
 --- key?(key) -> bool
 key というヘッダフィールドがあれば真を返します。
 key は大文字小文字を区別しません。
