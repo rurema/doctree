@@ -800,8 +800,12 @@ CSV.read( path, { headers:           true,
 --- convert{|field, field_info| ... }
 #@# discard
 
-組み込みの [[m:CSV::Converters]] を変換器として利用するために使います。
-また、独自の変換器を追加することもできます。
+引数 name で指定した変換器かブロックに各フィールドを渡して文字列から別
+のオブジェクトへと変換します。
+
+引数 name を指定した場合は、組み込みの [[m:CSV::Converters]] を変換器
+として利用するために使います。また、独自の変換器を追加することもできま
+す。
 
 ブロックパラメータを一つ受け取るブロックを与えた場合は、そのブロックは
 フィールドを受け取ります。ブロックパラメータを二つ受け取るブロックを与
@@ -836,6 +840,8 @@ p csv.first
 # => #<struct CSV::FieldInfo index=1, line=2, header="date2">
 # => #<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>>
 #@end
+
+@see [[m:CSV#converters]], [[m:CSV#header_convert]]
 
 --- converters -> Array
 
@@ -948,7 +954,7 @@ print result
 
 @param name 変換器の名前を指定します。
 
-@see [[m:CSV#convert]]
+@see [[m:CSV#header_converters]], [[m:CSV#convert]]
 
 --- header_converters -> Array
 
