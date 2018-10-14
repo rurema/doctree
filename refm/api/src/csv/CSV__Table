@@ -296,6 +296,14 @@ table.each { |column_name, values| print column_name, values, "\n" }
 
 テーブルが空である場合は空の配列を返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+table = CSV::Table.new([row])
+table.headers # => ["header1", "header2"]
+#@end
+
 --- inspect -> String
 
 モードとサイズを US-ASCII な文字列で返します。
