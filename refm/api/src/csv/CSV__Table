@@ -38,6 +38,15 @@ include Enumerable
 
 @param array_of_rows [[c:CSV::Row]] のインスタンスの配列を指定します。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+#@end
+
 == Instance Methods
 
 --- <<(row_or_array) -> self
