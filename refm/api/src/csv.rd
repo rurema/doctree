@@ -354,6 +354,42 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 @raise CSV::MalformedCSVError 不正な CSV をパースしようとしたときに発生します。
 
+#@samplecode 例: ファイルの読み込み
+require "csv"
+
+users =<<-EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+EOS
+
+File.write("test.csv", users)
+
+File.open("test.csv", "r") do |f|
+  csv = CSV.new(f, headers: true)
+  csv.class # => CSV
+  csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+end
+#@end
+
+#@samplecode 例 文字列の読み込み
+require "csv"
+
+users =<<-EOS
+id|first name|last name|age
+1|taro|tanaka|20
+2|jiro|suzuki|18
+3|ami|sato|19
+4|yumi|adachi|21
+EOS
+
+csv = CSV.new(users, { headers: true, col_sep: "|" })
+p csv.class # => CSV
+p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+#@end
+
 @see [[m:CSV::DEFAULT_OPTIONS]], [[m:CSV.open]]
 
 --- filter(options = Hash.new){|row| ... }
