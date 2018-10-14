@@ -1211,6 +1211,22 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 行番号を返します。
 
+#@samplecode 例
+require 'csv'
+
+csv = CSV.new("date1,date2,date3\n2018-07-09,2018-07-10\n2018-08-09,2018-08-10", headers: true)
+csv.convert do |field,field_info|
+  p field_info.line
+  Date.parse(field)
+end
+csv.to_a
+
+# => 2
+# => 2
+# => 3
+# => 3
+#@end
+
 --- line=(val)
 
 行番号をセットします。
