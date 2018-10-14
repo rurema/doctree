@@ -102,14 +102,14 @@ $ firefox =(bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array
 以下のコマンドでデータベースのディレクトリを作ります。
 
 ```
-$ cd rubydoc/refm/api
+$ cd rubydoc/
 $ bitclust -d ./db-2.5.0 init version=2.5.0 encoding=UTF-8
 ```
 
-次に、以下のコマンドでデータベースを更新します。これには数分かかることがあります。
+次に、以下のコマンドでデータベースを更新します。C API以外の全てのデータベースを作成します。これには数分かかることがあります。
 
 ```
-$ bitclust -d ./db-2.5.0 update --stdlibtree=src
+$ bitclust -d ./db-2.5.0 update --stdlibtree=refm/api/src
 ```
 データベースのディレクトリ名は、ここではdb-2.5.0/としましたが、好きな名前を付けて構いません。
 
