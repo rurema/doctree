@@ -1251,6 +1251,19 @@ csv.to_a
 
 利用可能な場合はヘッダを表す配列を返します。
 
+#@samplecode 例
+require 'csv'
+
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", headers: true)
+csv.convert do |field,field_info|
+  p field_info.header
+  Date.parse(field)
+end
+csv.first
+
+# => "date1"
+# => "date2"
+#@end
 
 --- header=(val)
 
