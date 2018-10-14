@@ -328,6 +328,16 @@ table.headers # => ["header1", "header2"]
 
 現在のアクセスモードを返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+table = CSV::Table.new([row])
+table.mode    # => :col_or_row
+table.by_col!
+table.mode    # => :col
+#@end
+
 --- push(*rows) -> self
 
 複数の行を追加するためのショートカットです。
