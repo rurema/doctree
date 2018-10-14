@@ -172,6 +172,17 @@ col_table[1] # => ["row1_2", "row2_2"]
 
 @return 必ず自身を返すので安全にメソッドチェーンできます。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.by_col!
+table[0] # => ["row1_1", "row2_1"]
+table[1] # => ["row1_2", "row2_2"]
+#@end
+
 --- by_col_or_row -> CSV::Table
 
 ミックスモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
