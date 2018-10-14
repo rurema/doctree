@@ -121,6 +121,9 @@ $ bitclust -d ./db-2.5.0 init version=2.5.0 encoding=UTF-8
 ```
 $ bitclust -d ./db-2.5.0 update --stdlibtree=refm/api/src
 ```
+
+「singleton object class not implemented yet」と警告が2行程出力されますが無視して問題ありません。
+
 データベースのディレクトリ名は、ここではdb-2.5.0/としましたが、好きな名前を付けて構いません。
 
 2.3.0や2.4.0など、Rubyの他のバージョンのリファレンスをプレビューしたい場合は、versionを変えて上記の手順を繰り返して下さい。
