@@ -49,6 +49,17 @@ $ cd ./rubydoc
 
 またディレクトリ名を指定しなくても構いません。その場合、doctreeというディレクトリ名でリポジトリがコピーされます。
 
+なお、この時以下のようにしておくとrurema/doctreeからの修正を取り込みやすいですが、必須ではありません。
+
+```
+$ git remote add upstream https://github.com/rurema/doctree.git
+$ git remote -v
+origin  git@github.com:自分のアカウント名/doctree.git (fetch)
+origin  git@github.com:自分のアカウント名/doctree.git (push)
+upstream        https://github.com/rurema/doctree.git (fetch)
+upstream        https://github.com/rurema/doctree.git (push)
+```
+
 ## 4. トピックブランチを作る
 
 以下のコマンドを実行し、今回のPull Request用の一時的なブランチを作成します。
@@ -171,6 +182,19 @@ https://github.com/自分のアカウント名/doctree
 ```
 $ git checkout master
 Switched to branch 'master'
+```
+
+「3. リポジトリを作業ディレクトリへとcloneする」の最後の設定がしてある時に以下のコマンドを実行する事でrurema/doctreeの修正を取り込みます。
+
+```
+$ git branch
+(以下のようにmasterを見ている事)
+* master
+
+$ git status
+(修正がない事)
+
+$ git fetch upstream && git merge upstream/master
 ```
 
 「4. トピックブランチを作る」に戻り、編集を再開してください。
