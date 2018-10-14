@@ -1247,9 +1247,9 @@ csv.to_a
 
 @param val 行番号を指定します。
 
---- header -> Array
+--- header -> String | nil
 
-利用可能な場合はヘッダを表す配列を返します。
+利用可能な場合はヘッダを表す文字列を返します。
 
 #@samplecode 例
 require 'csv'
@@ -1267,9 +1267,9 @@ csv.first
 
 --- header=(val)
 
-ヘッダを表す配列をセットします。
+ヘッダを表す文字列をセットします。
 
-@param val ヘッダを表す配列を指定します。
+@param val ヘッダを表す文字列を指定します。
 
 = class CSV::MalformedCSVError < RuntimeError
 
