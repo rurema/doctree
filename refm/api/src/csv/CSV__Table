@@ -153,6 +153,17 @@ table[1] # => ["row1_2", "row2_2"]
 このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
 チェーンに組込まないようにしてください。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+col_table = table.by_col
+col_table[0] # => ["row1_1", "row2_1"]
+col_table[1] # => ["row1_2", "row2_2"]
+#@end
+
 --- by_col! -> self
 
 自身をカラムモードに変更します。
