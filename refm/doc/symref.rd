@@ -142,7 +142,7 @@
 
 : xxx&.yyy
 
- ぼっち演算子。xxx が nil でないときにメソッドyyyを呼び出す。[[d:spec/call]] を参照。
+ ぼっち演算子（safe navigation operator）。xxx が nil でないときにメソッドyyyを呼び出す。[[d:spec/call]] を参照。
 
 ===[a:or] |
 
