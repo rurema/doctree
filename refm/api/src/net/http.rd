@@ -1706,6 +1706,41 @@ key は大文字小文字を区別しません。
 @param key ヘッダフィール名を文字列で与えます。
 @param default 該当するキーが登録されていない時の返り値を指定します。
 @raise IndexError 引数defaultもブロックも与えられてない時、キーの探索に 失敗すると発生します。
+
+#@samplecode 例 key のみ指定。key が存在する
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.fetch("user-agent") # => "Ruby"
+#@end
+
+#@samplecode 例 key のみ指定。key が存在しない
+require 'net/http'
+
+begin
+  req.fetch("content-length")
+rescue => e
+  e # => #<KeyError: key not found: "content-length">
+end
+#@end
+
+#@samplecode 例 key , default を指定
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.fetch("content-length", "default") # => "default"
+#@end
+
+#@samplecode 例 key とブロックを指定
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.fetch("content-length") { |e| 99 } # => 99
+#@end
+
 @see [[m:Net::HTTPHeader#[] ]]
 
 --- size -> Integer
