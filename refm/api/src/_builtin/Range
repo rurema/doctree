@@ -145,27 +145,28 @@ cが数値ではなく終端が計算でもとまらない時、パフォーマ�
 
 @param obj 比較対象のオブジェクトを指定します。
 
-例:
+#@samplecode 数値は連続的に扱われているため、 include? / cover? が同じ結果を返す
+(1.1..2.3).include?(1.0)    # => false
+(1.1..2.3).include?(1.1)    # => true
+(1.1..2.3).include?(1.555)  # => true
+(1.1..2.3).cover?(1.0)      # => false
+(1.1..2.3).cover?(1.1)      # => true
+(1.1..2.3).cover?(1.555)    # => true
+#@end
 
-  # 数値は連続的に扱われているため、 include? / cover? が同じ結果を返す
-  (1.1..2.3).include?(1.0)    # => false
-  (1.1..2.3).include?(1.1)    # => true
-  (1.1..2.3).include?(1.555)  # => true
-  (1.1..2.3).cover?(1.0)      # => false
-  (1.1..2.3).cover?(1.1)      # => true
-  (1.1..2.3).cover?(1.555)    # => true
-  
-  # String の例
-  ('b'..'d').include?('d')    # => true
-  ('b'..'d').include?('ba')   # => false
-  ('b'..'d').cover?('d')      # => true
-  ('b'..'d').cover?('ba')     # => true
-  
-  # Date, DateTime の例
-  (Date.new(2014,1,3)..Date.new(2014,1,5)).include?(Date.new(2014,1,5))           # => true
-  (Time.new(2014,1,3)..Time.new(2014,1,5)).include?(Time.new(2014,1,4,10,10,10))  # => true
-  (Date.new(2014,1,3)..Date.new(2014,1,5)).cover?(Date.new(2014,1,5))             # => true
-  (Time.new(2014,1,3)..Time.new(2014,1,5)).cover?(Time.new(2014,1,4,10,10,10))    # => true
+#@samplecode String の例
+('b'..'d').include?('d')    # => true
+('b'..'d').include?('ba')   # => false
+('b'..'d').cover?('d')      # => true
+('b'..'d').cover?('ba')     # => true
+#@end
+
+#@samplecode Date, DateTime の例
+(Date.new(2014,1,3)..Date.new(2014,1,5)).include?(Date.new(2014,1,5))           # => true
+(Time.new(2014,1,3)..Time.new(2014,1,5)).include?(Time.new(2014,1,4,10,10,10))  # => true
+(Date.new(2014,1,3)..Date.new(2014,1,5)).cover?(Date.new(2014,1,5))             # => true
+(Time.new(2014,1,3)..Time.new(2014,1,5)).cover?(Time.new(2014,1,4,10,10,10))    # => true
+#@end
 
 #@since 2.6.0
 #@samplecode Range の例
