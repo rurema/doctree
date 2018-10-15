@@ -91,13 +91,17 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 == Instance Methods
 
+#@until 2.6.0
 --- ===(obj) -> bool
+#@end
 --- include?(obj) -> bool
 --- member?(obj) -> bool
 
 obj が範囲内に含まれている時に真を返します。
 
+#@until 2.6.0
 [[m:Range#===]] は主に case 式での比較に用いられます。
+#@end
 
 <=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
 
@@ -114,9 +118,16 @@ obj が範囲内に含まれている時に真を返します。
 @see [[ref:d:spec/control#case]]
 @see [[m:Range#cover?]]
 
+#@since 2.6.0
+--- ===(obj) -> bool
+#@end
 --- cover?(obj) -> bool
 
 obj が範囲内に含まれている時に真を返します。
+
+#@since 2.6.0
+[[m:Range#===]] は主に case 式での比較に用いられます。
+#@end
 
 [[m:Range#include?]] と異なり <=> メソッドによる演算により範囲内かどうかを判定します。
 [[m:Range#include?]] は原則として離散値を扱い、
