@@ -1680,6 +1680,15 @@ key ヘッダフィールドの値 (文字列) を配列で返します。
 key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+res = Net::HTTP.get_response(uri)
+res.get_fields('accept-ranges') # => ["none"]
+#@end
+
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#add_field]]
 
