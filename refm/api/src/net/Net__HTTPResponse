@@ -27,6 +27,14 @@ HTTP のリザルトコードです。例えば '302' などです。
 レスポンスオブジェクトがどのクラスのインスタンスかを
 見ることでもレスポンスの種類を判別できます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.code # => "200"
+#@end
+
 --- message -> String
 --- msg -> String
 
