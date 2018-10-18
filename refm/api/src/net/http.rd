@@ -1855,6 +1855,15 @@ key は大文字小文字を区別しません。
 
 @param key 探すヘッダフィールド名を文字列で与えます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+res = Net::HTTP.get_response(uri)
+res.key?('accept-ranges')    # => true
+res.key?('nonexist-header')  # => false
+#@end
+
 --- method -> String
 
 リクエストの HTTP メソッドを文字列で返します。
