@@ -65,6 +65,27 @@ response.message # => "OK"
 @raise HTTPServerException レスポンスが 4xx である場合に発生します。
 @raise HTTPFatalError レスポンスが 5xx である場合に発生します。
 
+#@samplecode 例 レスポンスが 2xx(成功)
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.value # => nil
+#@end
+
+#@samplecode 例 レスポンスが 2xx以外
+require 'net/http'
+
+uri = "http://www.example.com/invalid.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+begin
+  response.value
+rescue => e
+  e.class # => Net::HTTPServerException
+  e.message # => 404 "Not Found"
+end
+#@end
+
 
 --- response -> self
 --- header -> self
