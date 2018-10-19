@@ -1715,6 +1715,8 @@ key は大文字小文字を区別しません。
 
 ヘッダフィールドの数を返します。
 
+#@#noexample
+
 --- basic_auth(account, password) -> ()
 Authorization: ヘッダを BASIC 認証用にセットします。
 
