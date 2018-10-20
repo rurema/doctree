@@ -1750,6 +1750,14 @@ type と params から Content-Type: ヘッダフィールドの
 
 Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+res = Net::HTTP.get_response(uri)
+res.main_type # => "text"
+#@end
+
 --- sub_type -> String|nil
 "text/html" における "html" のようなサブタイプを表す
 文字列を返します。
