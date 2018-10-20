@@ -55,6 +55,14 @@ response.message # => "OK"
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.http_version # => "1.1"
+#@end
+
 --- value -> nil
 レスポンスが 2xx(成功)でなかった場合に、対応する
 例外を発生させます。
