@@ -1861,6 +1861,14 @@ key は大文字小文字を区別しません。
 
 リクエストの HTTP メソッドを文字列で返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.method # => "GET"
+#@end
+
 --- proxy_basic_auth(account, password) -> ()
 
 Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
