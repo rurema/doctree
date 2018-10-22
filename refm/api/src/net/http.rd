@@ -1868,6 +1868,14 @@ Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 @param account アカウント名を文字列で与えます。
 @param password パスワードを文字列で与えます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.proxy_basic_auth("account", "password") # => ["Basic YWNjb3VudDpwYXNzd29yZA=="]
+#@end
+
 --- range -> Range|nil
 
 Range: ヘッダの示す範囲を [[c:Range]] オブジェクトで返します。
