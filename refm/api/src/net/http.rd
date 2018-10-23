@@ -1877,6 +1877,24 @@ Range: ヘッダの示す範囲を [[c:Range]] オブジェクトで返します
 @raise Net::HTTPHeaderSyntaxError Range:ヘッダの中身が規格通り
                                   でない場合に発生します。
 
+#@samplecode 例 正常な値
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req['range'] = "bytes=1-5"
+req.range # => [1..5]
+#@end
+
+#@samplecode 例 Net::HTTPHeaderSyntaxError
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req['range'] = "invalid"
+req.range # => Net::HTTPHeaderSyntaxError
+#@end
+
 --- range=(r)
 --- range=(n)
 --- set_range(i, len) -> ()
