@@ -173,6 +173,14 @@ Ruby はサポートしていないが拡張ライブラリがサポートして
 複製されたエンコーディングは元のエンコーディングと同じバイト構造を持たなければなりません。
 name という名前のエンコーディングが既に存在する場合は [[c:ArgumentError]] を発生します。
 
+#@samplecode
+encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
+encoding.name                                                #=> "REPLICATED_UTF-8"
+"\u3042".force_encoding(Encoding::UTF_8).valid_encoding?     #=> true
+"\u3042".force_encoding(encoding).valid_encoding?            #=> true
+"\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
+#@end
+
 #@end
 == Constants
 
