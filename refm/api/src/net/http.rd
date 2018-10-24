@@ -1807,6 +1807,16 @@ Content-Range: ヘッダフィールドの表している長さを整数で返�
                                   の値が不正である場合に
                                   発生します。
                                   
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req['Content-Range'] = "bytes 1-500/1000"
+req.range_length # => 500
+#@end
+
 --- delete(key) -> String | nil
 key ヘッダフィールドを削除します。
 
