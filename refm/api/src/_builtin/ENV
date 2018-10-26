@@ -119,6 +119,12 @@ key と value を引数としてブロックを評価した値が真であ
 
 reject! は要素に変化がなければ nil を返します。
 
+#@samplecode
+ENV['FOO'] = 'bar'
+ENV.delete_if { |key, value| key == 'FOO' && value == 'bar' } # => ENV
+ENV.reject! { |key, value| key == 'FOO' && value == 'bar' } # => nil
+#@end
+
 #@since 1.8.7
 #@since 1.9.1
 --- each                          -> Enumerator
