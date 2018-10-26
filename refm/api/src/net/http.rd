@@ -1773,6 +1773,14 @@ Content-Type のパラメータを {"charset" => "iso-2022-jp"}
 Content-Type: ヘッダフィールドが存在しない場合には
 空のハッシュを返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+res = Net::HTTP.get_response(uri)
+res.type_params # => {"charset"=>"UTF-8"}
+#@end
+
 --- form_data=(params)
 --- set_form_data(params, sep = '&') -> ()
 HTMLのフォームのデータ params から
