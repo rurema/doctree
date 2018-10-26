@@ -132,6 +132,14 @@ reject! は要素に変化がなければ nil を返します。
 --- each_pair {|key, value| ... } -> self
 key と value を引数としてブロックを評価します。
 
+#@samplecode
+ENV['FOO'] = 'bar'
+ENV.each do |key, value|
+  p "value is #{value}" if key == 'FOO' # => "value is bar"
+end
+# => ENV
+#@end
+
 #@since 1.9.1
 --- each_key              -> Enumerator
 #@else
