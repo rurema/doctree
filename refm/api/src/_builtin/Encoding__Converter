@@ -163,6 +163,16 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 直前に変換器で発生した例外に相当する例外オブジェクトを返します
 直線の変換で例外が発生していない場合は nil を返します。
 
+#@samplecode
+ec = Encoding::Converter.new("UTF-16LE", "UTF-8")
+begin
+  ec.convert("\x00\xd8@\x00")
+rescue => e
+  p e #=> #<Encoding::InvalidByteSequenceError: "\x00\xD8" followed by "@\x00" on UTF-16LE>
+end
+ec.last_error #=> #<Encoding::InvalidByteSequenceError: "\x00\xD8" followed by "@\x00" on UTF-16LE>
+#@end
+
 --- finish -> String
 変換処理を終了し、結果文字列の末尾を返します。
 変換元の文字列の末尾がバイト列の途中で終わっていた場合、保持しているバイト列全てを返します。
