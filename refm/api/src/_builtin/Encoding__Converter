@@ -334,4 +334,18 @@ primitive_errinfo はもっぱら [[m:Encoding::Converter#primitive_convert]] �
 
 @return 格納されていたバイト列
 
+#@samplecode
+ec = Encoding::Converter.new("UTF-16LE", "UTF-8")
+ec.primitive_convert("\x00\xd8\x61\x00", "")
+ec.primitive_errinfo #=> [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "a\x00"]
+ec.putback #=> "a"
+ec.putback #=> ""
+
+# call with max_numbytes
+ec.primitive_convert("\x00\xd8\x61\x00", "")
+ec.putback(1) #=> "\x00"
+ec.putback(1) #=> "\x61"
+ec.putback(1) #=> ""
+#@end
+
 #@end
