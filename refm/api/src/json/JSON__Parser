@@ -26,6 +26,60 @@ alias JSON::Ext::Parser
 
 @param options オプションを指定するためのハッシュです。
 
+#@samplecode 例
+require 'json'
+
+parser = JSON::Parser.new(DATA.read)
+print parser.source
+
+# => {
+# =>   "Tanaka": {
+# =>     "name":"tanaka",
+# =>     "age":20
+# =>   },
+# =>   "Suzuki": {
+# =>     "name":"suzuki",
+# =>     "age":25
+# =>   }
+# => }
+
+__END__
+{
+  "Tanaka": {
+    "name":"tanaka",
+    "age":20
+  },
+  "Suzuki": {
+    "name":"suzuki",
+    "age":25
+  }
+}
+#@end
+
+#@samplecode 例 object_class を指定する
+require 'json'
+
+class Person
+  attr_accessor  :name, :age
+
+  def []=(key, value)
+    instance_variable_set("@#{key}", value)
+  end
+end
+
+parser = JSON::Parser.new(DATA.read, object_class: Person)
+person = parser.parse
+person.class # => Person
+person.name  # => "tanaka"
+person.age   # => 20
+
+__END__
+{
+  "name":"tanaka",
+  "age":20
+}
+#@end
+
 == Public Instance Methods
 
 --- parse -> object
