@@ -1723,6 +1723,14 @@ Authorization: ヘッダを BASIC 認証用にセットします。
 @param account アカウント名を文字列で与えます。
 @param password パスワードを文字列で与えます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
+#@end
+
 --- chunked? -> bool
 Transfer-Encoding: ヘッダフィールドが "chunked" である
 場合に真を返します。
