@@ -1717,7 +1717,7 @@ key は大文字小文字を区別しません。
 
 #@#noexample
 
---- basic_auth(account, password) -> ()
+--- basic_auth(account, password) -> [String]
 Authorization: ヘッダを BASIC 認証用にセットします。
 
 @param account アカウント名を文字列で与えます。
