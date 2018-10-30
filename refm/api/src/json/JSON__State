@@ -47,6 +47,24 @@ JSON 形式の文字列を生成するための設定を保持しておくため
         options を返します。いずれでも無い場合は、何も設定されていない [[c:JSON::State]] の
         インスタンスを返します。
 
+#@samplecode 例 Hash を指定
+require "json"
+
+json_state = JSON::State.from_state(indent: "\t")
+json_state.class     # JSON::Ext::Generator::State
+json_state.indent # => "\t"
+#@end
+
+#@samplecode 例 JSON::State を指定
+require "json"
+
+json_state = JSON::State.from_state(indent: "\t")
+# JSON を出力する何らかの処理を実行する
+copy = JSON::State.from_state(json_state)
+copy.class  # => JSON::Ext::Generator::State
+copy.indent # => "\t"
+#@end
+
 == Public Instance Methods
 
 --- allow_nan? -> bool
