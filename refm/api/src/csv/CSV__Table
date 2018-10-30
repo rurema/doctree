@@ -236,7 +236,17 @@ table[1] # => ["row1_2", "row2_2"]
 探索方法を変更したい場合は [[m:CSV::Table#by_col!]],
 [[m:CSV::Table#by_row!]] を使用してください。
 
-@see [[m:CSV::Table#by_col!]], [[m:CSV::Table#by_row!]]
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.delete(1)
+table.to_a         # => [["header1", "header2"], ["row1_1", "row1_2"]]
+#@end
+
+@see [[m:CSV::Table#by_col!]], [[m:CSV::Table#by_row!]], [[m:CSV::Table#delete_if]]
 
 --- delete_if{|row| ... } -> self
 --- delete_if{|column_name, values| ... } -> self
@@ -246,6 +256,8 @@ table[1] # => ["row1_2", "row2_2"]
 デフォルトのミックスモードかロウモードでは、行単位で繰り返します。カラ
 ムモードでは、ブロックに列名と対応する値の配列を与え、列単位で繰り返し
 ます。
+
+@see [[m:CSV::Table#delete]]
 
 --- each{|row| ... } -> self
 --- each{|column_name, values| ... } -> self

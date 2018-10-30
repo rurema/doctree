@@ -138,12 +138,28 @@ response.body[0..10] # => "<!doctype h"
 
 レスポンスがボディを持たない場合には nil を返します。
 
-#@samplecode 例
+#@samplecode 例1 ブロックを与えずに一度に結果取得
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
 response = Net::HTTP.get_response(URI.parse(uri))
 response.read_body[0..10] # => "<!doctype h"
+#@end
+
+#@samplecode 例2 ブロックを与えて大きいファイルを取得
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/path/to/big.file')
+Net::HTTP.start(uri.host, uri.port) do |http|
+  File.open("/path/to/big.file", "w") do |f|
+    # Net::HTTP#request_get と Net::HTTPResponse#read_body で少しずつ読み書き。メモリ消費が少ない。
+    http.request_get(uri.path) do |response|
+      response.read_body do |s|
+        f.write(s)
+      end
+    end
+  end
+end
 #@end
 
 一度ブロックを与えずにこのメソッドを呼んだ場合には、
@@ -158,6 +174,9 @@ dest を指定した場合には
 「dest << ボディの断片」を実行します。
 
 @param dest obsoleteな引数です。利用しないでください。
+
+@see [[m:Net::HTTP#request_get]]
+
 #@# = Constants
 #@# --- CODE_CLASS_TO_OBJ
 #@# --- CODE_TO_OBJ
