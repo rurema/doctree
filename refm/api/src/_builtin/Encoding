@@ -87,9 +87,9 @@
        "BINARY", "CP932", "eucJP", ...]
 
 --- default_external -> Encoding
-規定の外部エンコーディングを返します。
+既定の外部エンコーディングを返します。
 
-入出力において、外部エンコーディングが指定されていない場合の規定値として利用されます。Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
+入出力において、外部エンコーディングが指定されていない場合の既定値として利用されます。Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
 
 default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が nil を返す場合には US-ASCII が、
 ロケールにRubyが扱えないエンコーディングが指定されている場合には ASCII-8BIT が、default_external に設定されます。
@@ -97,13 +97,13 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 @see [[man:locale(1)]], [[m:Encoding.locale_charmap]]
 
 --- default_external=(encoding)
-規定の外部エンコーディングを設定します。
+既定の外部エンコーディングを設定します。
 
 --- default_internal -> Encoding | nil
-規定の内部エンコーディングを返します。
+既定の内部エンコーディングを返します。
 
 --- default_internal=(encoding)
-規定の内部エンコーディングを設定します。
+既定の内部エンコーディングを設定します。
 
 --- locale_charmap -> String | nil
 ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
