@@ -164,13 +164,11 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 直線の変換で例外が発生していない場合は nil を返します。
 
 #@samplecode
-ec = Encoding::Converter.new("UTF-16LE", "UTF-8")
-begin
-  ec.convert("\x00\xd8@\x00")
-rescue => e
-  p e #=> #<Encoding::InvalidByteSequenceError: "\x00\xD8" followed by "@\x00" on UTF-16LE>
-end
-ec.last_error #=> #<Encoding::InvalidByteSequenceError: "\x00\xD8" followed by "@\x00" on UTF-16LE>
+ec = Encoding::Converter.new("utf-8", "iso-8859-1")
+p ec.primitive_convert(src="\xf1abcd", dst="")       #=> :invalid_byte_sequence
+p ec.last_error      #=> #<Encoding::InvalidByteSequenceError: "\xF1" followed by "a" on UTF-8>
+p ec.primitive_convert(src, dst, nil, 1)             #=> :destination_buffer_full
+p ec.last_error      #=> nil
 #@end
 
 --- finish -> String
