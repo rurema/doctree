@@ -161,7 +161,7 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 --- last_error -> Exception | nil
 直前に変換器で発生した例外に相当する例外オブジェクトを返します
-直線の変換で例外が発生していない場合は nil を返します。
+直前の変換で例外が発生していない場合は nil を返します。
 
 #@samplecode
 ec = Encoding::Converter.new("utf-8", "iso-8859-1")
