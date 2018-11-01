@@ -240,5 +240,15 @@ t2 = t + 0.1       # => 2017-11-10 04:42:19 +0900
 ```
 
 ## RDocとの関係
-Ruby本家の　RDoc　があり、そのままの内容で問題ない場合はそのまま活用する。
-RDocがあるが、あえて別の内容にする場合はプルリクエスト時に「なぜ別の内容にしたか」について理由を明記すること。
+Ruby本家の　[RDoc](https://docs.ruby-lang.org/en/2.5.0/index.html)　があり、そのままの内容で問題ない場合はそのまま活用する。
+RDoc があるが、あえて別の内容にする場合はプルリクエスト時に「なぜ別の内容にしたか」について理由を明記すること。
+
+RDoc について補足。例えば るりまで Array#append を確認する場合は、以下を確認するおことになります。
+
+* [instance method Array#assoc (Ruby 2.5.0)](https://docs.ruby-lang.org/ja/latest/method/Array/i/assoc.html)
+
+このメソッドに対応する RDoc に遷移するには、画面右端にある `[rdoc]`を選択します。
+
+* [class Array - Documentation for Ruby 2.5.0](https://docs.ruby-lang.org/en/2.5.0/Array.html#method-i-assoc)
+
+になります。
