@@ -186,7 +186,7 @@ proc として手続きオブジェクトが与えられた場合は、読み込
 #@end
 #@if (version >= "2.4.0")
 : :allow_blank
-  真を指定すると、sourceがnilの場合にnilを返却します。デフォルトは真です。
+  真を指定すると、sourceがnilの場合にnilを返します。デフォルトは真です。
 #@end
 : :create_additions
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
