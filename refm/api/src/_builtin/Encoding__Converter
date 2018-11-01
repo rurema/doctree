@@ -183,7 +183,15 @@ ec.destination_encoding #=> #<Encoding:EUC-JP>
 
 --- last_error -> Exception | nil
 直前に変換器で発生した例外に相当する例外オブジェクトを返します
-直線の変換で例外が発生していない場合は nil を返します。
+直前の変換で例外が発生していない場合は nil を返します。
+
+#@samplecode
+ec = Encoding::Converter.new("utf-8", "iso-8859-1")
+p ec.primitive_convert(src="\xf1abcd", dst="")       #=> :invalid_byte_sequence
+p ec.last_error      #=> #<Encoding::InvalidByteSequenceError: "\xF1" followed by "a" on UTF-8>
+p ec.primitive_convert(src, dst, nil, 1)             #=> :destination_buffer_full
+p ec.last_error      #=> nil
+#@end
 
 --- finish -> String
 変換処理を終了し、結果文字列の末尾を返します。
