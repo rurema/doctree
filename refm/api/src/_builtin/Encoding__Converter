@@ -96,10 +96,20 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 @return 変換元のエンコーディング
 
+#@samplecode
+ec = Encoding::Converter.new("utf-8", "euc-jp")
+ec.source_encoding #=> #<Encoding:UTF-8>
+#@end
+
 --- destination_encoding -> Encoding
 変換先のエンコーディングを返します。
 
 @return 変換先のエンコーディング
+
+#@samplecode
+ec = Encoding::Converter.new("utf-8", "euc-jp")
+ec.destination_encoding #=> #<Encoding:EUC-JP>
+#@end
 
 --- convpath -> Array
 変換器が行う変換の経路を配列にして返します。
