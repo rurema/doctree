@@ -54,6 +54,15 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 NaN, Infinity, -Infinity を生成できる場合、真を返します。
 そうでない場合は偽を返します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new({})
+json_state.allow_nan? # => false
+json_state = JSON::State.new(allow_nan: true)
+json_state.allow_nan? # => true
+#@end
+
 @see [[rfc:4627]]
 
 --- array_nl -> String
