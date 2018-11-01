@@ -43,9 +43,11 @@ options では [[m:String#encode]] でのハッシュオプションに加えて
 引数とエンコーディングと同じ文字集合を持つ ASCII 互換エンコーディングを返します。引数と戻り値、2 つのエンコーディング間では変換しても未定義文字の例外は発生しません。
 引数が ASCII 互換エンコーディングである場合や、エンコーディングでない場合は nil を返します。
 
+#@samplecode
   Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-JP>
   Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
   Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
+#@end
 
 --- search_convpath(source_encoding, destination_encoding, options) -> Array
 引数で指定した文字エンコーディングの変換の経路を配列にして返します。
@@ -61,23 +63,25 @@ options では [[m:String#encode]] でのハッシュオプションに加えて
                [[m:Encoding::Converter.new]] と同じオプションが指定でき
                ます。
 
+#@samplecode
   p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP")
   # => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
   #     [#<Encoding:UTF-8>, #<Encoding:EUC-JP>]]
 
   p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP", universal_newline: true)
-  or
+  # or
   p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP", newline: :universal)
   # => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
   #     [#<Encoding:UTF-8>, #<Encoding:EUC-JP>],
   #     "universal_newline"]
 
   p Encoding::Converter.search_convpath("ISO-8859-1", "UTF-32BE", universal_newline: true)
-  or
+  # or
   p Encoding::Converter.search_convpath("ISO-8859-1", "UTF-32BE", newline: :universal)
   # => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
   #     "universal_newline",
   #     [#<Encoding:UTF-8>, #<Encoding:UTF-32BE>]]
+#@end
 
 @see [[m:Encoding::Converter#convpath]], [[m:Encoding::Converter.new]]
 
@@ -102,11 +106,13 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 @return 変換器が行う変換の経路の配列
 
+#@samplecode
   ec = Encoding::Converter.new("ISo-8859-1", "EUC-JP", crlf_newline: true)
   p ec.convpath
   #=> [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
   #    [#<Encoding:UTF-8>, #<Encoding:EUC-JP>],
   #    "crlf_newline"]
+#@end
 
 @see [[m:Encoding::Converter.search_convpath]]
 
@@ -115,20 +121,24 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 @return 変換器に設定されている置換文字
 
+#@samplecode
   ec = Encoding::Converter.new("euc-jp", "us-ascii")
   p ec.replacement    #=> "?"
   
   ec = Encoding::Converter.new("euc-jp", "utf-8")
   p ec.replacement    #=> "\uFFFD"
+#@end
 
 --- replacement=(string)
 置換文字を設定します。
 
 @param string 変換器に設定する置換文字
 
+#@samplecode
   ec = Encoding::Converter.new("utf-8", "us-ascii", :undef => :replace)
   ec.replacement = "<undef>"
   p ec.convert("a \u3042 b")      #=> "a <undef> b"
+#@end
 
 --- convert(source_string) -> String
 与えられた文字列を変換して、変換できた結果を返します。
@@ -144,6 +154,7 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 @raise Encoding::InvalidByteSequenceError 変換元のエンコーディングにおいて不正なバイト列があった場合に発生します。
 @raise Encoding::UndefinedConversionError 変換先のエンコーディングで未定義な文字があった場合に発生します。
 
+#@samplecode
   ec = Encoding::Converter.new("utf-8", "euc-jp")
   puts ec.convert("\u3042").dump     #=> "\xA4\xA2"
   puts ec.finish.dump                #=> ""
@@ -158,6 +169,7 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
   puts ec.convert("\x81").dump       #=> "".force_encoding("ISO-2022-JP")
   puts ec.convert("\x82").dump       #=> "\e$B$\"".force_encoding("ISO-2022-JP")
   puts ec.finish.dump                #=> "\e(B".force_encoding("ISO-2022-JP")
+#@end
 
 --- last_error -> Exception | nil
 直前に変換器で発生した例外に相当する例外オブジェクトを返します
@@ -171,9 +183,11 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 @raise Encoding::InvalidByteSequenceError 変換元のエンコーディングにお
        いて不正なバイト列があった場合に発生します。
 
+#@samplecode
   ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
   p ec.convert("\u3042")     #=> "\e$B$\""
   p ec.finish                #=> "\e(B"
+#@end
 
 --- primitive_convert(source_buffer, destination_buffer) -> Symbol
 --- primitive_convert(source_buffer, destination_buffer, destination_byteoffset) -> Symbol
@@ -210,6 +224,7 @@ options には以下が指定できます。
   * :source_buffer_empty
   * :finished
 
+#@samplecode
   ec = Encoding::Converter.new("UTF-8", "EUC-JP")
   src = "abc\x81あいう\u{20bb7}\xe3"
   dst = ''
@@ -231,6 +246,7 @@ options には以下が指定できます。
     end
     break
   end while nil
+#@end
 
 不正なバイトや変換先で未定義なバイトをエスケープしつつ変換する例です。以上のように、戻り値で分岐させつつ、[[m:Encoding::Converter#primitive_errinfo]] の情報を参照して処理していくことになります。
 
@@ -246,6 +262,7 @@ error_bytes はエラーの発生原因となったバイト列、readagain_byte
 
 primitive_errinfo はもっぱら [[m:Encoding::Converter#primitive_convert]] と組み合わせて使います。[[m:Encoding::Converter#convert]] を用いている場合にも取得することはできますが、有用な使い方は難しいでしょう。
 
+#@samplecode
   # \xff is invalid as EUC-JP.
   ec = Encoding::Converter.new("EUC-JP", "Shift_JIS")
   ec.primitive_convert(src="\xff", dst="", nil, 10)
@@ -294,6 +311,7 @@ primitive_errinfo はもっぱら [[m:Encoding::Converter#primitive_convert]] �
   #=> [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "@\x00"]
   p src
   #=> ""
+#@end
 
 --- insert_output(string) -> nil
 変換器内のバッファに文字列を挿入します。
@@ -306,6 +324,7 @@ primitive_errinfo はもっぱら [[m:Encoding::Converter#primitive_convert]] �
 
 @param string 挿入する文字列
 
+#@samplecode
   ec = Encoding::Converter.new("utf-8", "iso-8859-1")
   src = "HIRAGANA LETTER A is \u{3042}."
   dst = ""
@@ -323,6 +342,7 @@ primitive_errinfo はもっぱら [[m:Encoding::Converter#primitive_convert]] �
   ec.insert_output "?"                # state change required to output "?".
   p ec.primitive_convert(src, dst)    #=> :finished
   puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H\e(B?\e$B!#\e(B".force_encoding("ISO-20     22-JP"), ""]
+#@end
 
 --- putback -> String
 --- putback(max_numbytes) -> String
