@@ -454,6 +454,30 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
                ASCII と互換性の無い文字エンコーディングを持つ文字列を出力する場合は、このヒントを
                指定する必要があります。
 
+#@samplecode 例
+require "csv"
+
+text =<<-EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+EOS
+
+csv = CSV.generate(text, :headers => true) do |csv|
+  csv.add_row(["5", "saburo", "kondo", "34"])
+end
+
+print csv
+# => id,first name,last name,age
+# 1,taro,tanaka,20
+# 2,jiro,suzuki,18
+# 3,ami,sato,19
+# 4,yumi,adachi,21
+# 5,saburo,kondo,34
+#@end
+
 @see [[m:CSV.new]]
 
 --- generate_line(row, options = Hash.new) -> String
