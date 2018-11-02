@@ -29,6 +29,15 @@ include Net::HTTPHeader
 --- body -> String
 サーバに送るリクエストのエンティティボディを返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Post.new(uri.request_uri)
+req.body = "Test Post Data"
+req.body # => "Test Post Data"
+#@end
+
 #@since 1.8.3
 @see [[m:Net::HTTPGenericRequest#body=]]
 #@end
