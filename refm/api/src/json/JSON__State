@@ -60,6 +60,15 @@ NaN, Infinity, -Infinity を生成できる場合、真を返します。
 
 JSON の配列の後に出力する文字列を返します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new({})
+json_state.array_nl # => ""
+json_state = JSON::State.new(array_nl: "\n")
+json_state.array_nl # => "\n"
+#@end
+
 --- array_nl=(str)
 
 JSON の配列の後に出力する文字列をセットします。
