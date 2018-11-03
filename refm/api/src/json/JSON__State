@@ -64,6 +64,15 @@ JSON の配列の後に出力する文字列を返します。
 
 JSON の配列の後に出力する文字列をセットします。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new({})
+json_state.array_nl        # => ""
+json_state.array_nl = "\n" # => "\n"
+json_state.array_nl        # => "\n"
+#@end
+
 --- check_circular? -> bool
 
 循環参照のチェックを行う場合は、真を返します。
