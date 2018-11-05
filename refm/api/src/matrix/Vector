@@ -17,54 +17,6 @@ include Enumerable
 
 #@#  require 'matrix'
 
-=== Complexクラスとの併用 Working with Complex class
-
-require 'complex' することによって、
-Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されます。
-多くのメソッドは、この拡張されたVectorクラスでも、期待通りに動作します。
-
-次の例は、各要素を共役複素数に置換するメソッド (Vector#conjugate)です。
-
-  require 'matrix'
-  require 'complex'
-  
-  class Vector
-    def conjugate
-      collect{|e| e.conjugate }
-    end
-  end
-  
-  v1 = Vector[Complex(1,1),Complex(2,2),Complex(3,3)]
-  v2 = v1.conjugate
-  p v2 #=> Vector[Complex(1,-1),Complex(2,-2),Complex(3,-3)]
-  v3 = v1+v2
-  p v3 #=> Vector[Complex(1,0),Complex(2,0),Complex(3,0)]
-
-
-しかし、Complex 要素に拡張された Vector クラスで、
-期待通りに動作しないメソッドもあります。
-例えば、ベクトルの絶対値を求める [[m:Vector#r]] メソッドは、
-各要素の2乗和の平方根 [[m:Math.#sqrt]] を求めますが、
-このとき例外を発生させる可能性があります。
-
-複素数を要素とするベクトルの絶対値を求めるためには、
-各要素の絶対値の2乗和をとらなくてはなりません(次の例 Vector#absメソッド）。
-
-  require 'matrix'
-  require 'complex'
-  
-  class Vector
-    def abs
-      r=0
-      @elements.each{|e| r += e.abs2 }
-      Math.sqrt(r)
-    end
-  end
-  
-  v = Vector[Complex(1,1),Complex(2,2),Complex(3,3)]
-  p v.abs #=> 5.291502622 # Math.sqrt(28)
-  p v.r   #=> 'sqrt': undefined method `Rational'
-
 #@#=== ChangeLog
 #@#
 #@#  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
@@ -296,44 +248,32 @@ self の各要素を数 other で割った行列を返します。
 #@end
 
 --- r -> Float
-#@since 1.9.3
 --- magnitude -> Float
 --- norm -> Float
-#@end
 
 ベクトルの大きさ（ノルム）を返します。
- 
-ただし、要素の自乗和の平方根（Math.sqrt）を計算しているので、
-複素ベクトルの場合は一般に正しい値（要素の絶対値自乗の和の平方根）
-を返しません。
 
- require 'matrix'
- Vector[3, 4].r # => 5.0
- Vector[Complex(0, 1), 0].r # => Complex(0.0, 1.0)   正しくは 1.0
+#@samplecode 例
+require 'matrix'
+Vector[3, 4].norm # => 5.0
+Vector[Complex(0, 1), 0].norm # => 1.0
+#@end
 
-要素が複素数の場合にも対応したメソッドは以下のように定義できます。
+@see [[m:Vector#normalize]]
 
-  require 'matrix'
-  
-  class Vector
-    def norm
-      Math.sqrt @elements.inject(0){|sum, z| sum+(z*z).abs}
-    end
-  end
-  
-  Vector[Complex(0, 1), 0].norm # => 1.0
-
-#@# 2.0 以降ではC^nの場合でも正しい norm を返す予定(2012-10-07)
-
-#@since 1.9.3
 --- normalize -> Vector
 自身を [[m:Vector#norm]] で正規化したベクトルを返します。
 
-[[m:Vector#norm]] を使うため複素ベクトルでは一般に正しい値を返しません。
-
 @raise Vector::ZeroVectorError ベクトルが0である場合に発生します。
 
+#@samplecode 例
+require 'matrix'
+v = Vector[2, 6, 9].normalize
+# => Vector[0.18181818181818182, 0.5454545454545454, 0.8181818181818182]
+v.norm # => 11.0
 #@end
+
+@see [[m:Vector#norm]]
 
 #@since 2.2.0
 --- angle_with(v) -> Float
