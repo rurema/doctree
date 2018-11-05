@@ -903,7 +903,7 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 自分自身と other を比較し、同値であれば真(true)を返します。
 
-@param other 比較対称のオブジェクト
+@param other 比較対象のオブジェクト
 
 #@since 1.9.3
 --- diagonal? -> bool
