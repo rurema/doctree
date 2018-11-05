@@ -613,10 +613,6 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 すべての要素がゼロであれば true を返します。
 #@end
 
-= class ExceptionForMatrix::ErrDimensionMismatch < StandardError
-= class ExceptionForMatrix::ErrNotRegular < StandardError
-= class ExceptionForMatrix::ErrOperationNotDefined < StandardError
-
 #@since 1.9.3
 = class Vector::ZeroVectorError < StandardError
 ベクトルが 0 でエラーとなる([[m:Vector#normalize]] など)場合に
