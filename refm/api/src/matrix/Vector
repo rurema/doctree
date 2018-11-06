@@ -270,7 +270,7 @@ Vector[Complex(0, 1), 0].norm # => 1.0
 require 'matrix'
 v = Vector[2, 6, 9].normalize
 # => Vector[0.18181818181818182, 0.5454545454545454, 0.8181818181818182]
-v.norm # => 11.0
+v.norm # => 1.0
 #@end
 
 @see [[m:Vector#norm]]
