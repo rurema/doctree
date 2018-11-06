@@ -32,6 +32,28 @@ options では [[m:String#encode]] でのハッシュオプションに加えて
   * Encoding::Converter::XML_ATTR_CONTENT_DECORATOR
   * Encoding::Converter::XML_ATTR_QUOTE_DECORATOR
 
+#@samplecode
+# UTF-16BE to UTF-8
+ec = Encoding::Converter.new("UTF-16BE", "UTF-8")
+
+# Usually, decorators such as newline conversion are inserted last.
+ec = Encoding::Converter.new("UTF-16BE", "UTF-8", :universal_newline => true)
+p ec.convpath #=> [[#<Encoding:UTF-16BE>, #<Encoding:UTF-8>],
+              #    "universal_newline"]
+
+# But, if the last encoding is ASCII incompatible,
+# decorators are inserted before the last conversion.
+ec = Encoding::Converter.new("UTF-8", "UTF-16BE", :crlf_newline => true)
+p ec.convpath #=> ["crlf_newline",
+              #    [#<Encoding:UTF-8>, #<Encoding:UTF-16BE>]]
+
+# Conversion path can be specified directly.
+ec = Encoding::Converter.new(["universal_newline", ["EUC-JP", "UTF-8"], ["UTF-8", "UTF-16BE"]])
+p ec.convpath #=> ["universal_newline",
+              #    [#<Encoding:EUC-JP>, #<Encoding:UTF-8>],
+              #    [#<Encoding:UTF-8>, #<Encoding:UTF-16BE>]]
+#@end
+
 --- asciicompat_encoding(string) -> Encoding | nil
 --- asciicompat_encoding(encoding) -> Encoding | nil
 同じ文字集合を持つ ASCII 互換エンコーディングを返します。
