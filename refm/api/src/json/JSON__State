@@ -168,7 +168,7 @@ checked.
 
 --- buffer_initial_length -> Integer
 
-This integer returns the current inital length of the buffer.
+This integer returns the current initial length of the buffer.
 
 --- buffer_initial_length=(length)
 
