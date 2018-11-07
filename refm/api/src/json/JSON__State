@@ -91,6 +91,18 @@ JSON の配列の後に出力する文字列をセットします。
 
 @param string インデントに使用する文字列を指定します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+json_state.indent = "  "
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
+#@end
+
 --- max_nesting -> Integer
 
 生成される JSON 形式の文字列のネストの深さの最大値を返します。
