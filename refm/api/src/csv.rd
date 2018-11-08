@@ -1396,6 +1396,8 @@ p csv.first
 
 @param val インデックスの値を指定します。
 
+#@#noexample
+
 --- line -> Integer
 
 行番号を返します。
