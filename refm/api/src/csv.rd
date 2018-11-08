@@ -1450,6 +1450,8 @@ p csv.first
 
 @param val ヘッダを表す文字列を指定します。
 
+#@#noexample
+
 = class CSV::MalformedCSVError < RuntimeError
 
 不正な CSV をパースしようとしたときに発生する例外です。
