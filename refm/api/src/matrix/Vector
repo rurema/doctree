@@ -240,7 +240,7 @@ v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できま
 #@since 1.9.2
 --- /(other) -> Vector
 
-self の各要素を数 other で割った行列を返します。
+self の各要素を数 other で割ったベクトルを返します。
 
 @param other self の各要素を割る [[c:Numeric]] オブジェクトを指定します。
 @raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix 
