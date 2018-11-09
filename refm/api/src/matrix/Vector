@@ -237,7 +237,6 @@ v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できま
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
-#@since 1.9.2
 --- /(other) -> Vector
 
 self の各要素を数 other で割ったベクトルを返します。
@@ -245,7 +244,6 @@ self の各要素を数 other で割ったベクトルを返します。
 @param other self の各要素を割る [[c:Numeric]] オブジェクトを指定します。
 @raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix 
        の場合に発生します
-#@end
 
 --- r -> Float
 --- magnitude -> Float
