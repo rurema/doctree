@@ -15,8 +15,20 @@ include Math
 
 #@samplecode 例
 require "cmath"
-CMath.sqrt(-9)# => (0+3.0i)
-CMath.sqrt!(4)# => 2.0
+
+# 複素数の範囲の立方根（の主値）= exp(1/3 πi)
+CMath.cbrt(-1) # => (0.5000000000000001+0.8660254037844386i)
+
+# 実数の範囲の立方根
+Math.cbrt(-1) # => -1.0
+
+include CMath
+
+# レシーバー無しで使える
+cbrt(-1) # => (0.5000000000000001+0.8660254037844386i)
+
+# cbrt! は Math.cbrt のエイリアス
+cbrt!(-1) # => -1.0
 #@end
 
 == Module Functions
