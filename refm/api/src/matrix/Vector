@@ -38,13 +38,13 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 
 @param a ベクトルの要素
 
-例:
-
-  require 'matrix'
-  v1 = Vector[1, 3, 5, 7]
-  v2 = Vector[5.25, 10.5]
-  p v1   #=> Vector[1, 3, 5, 7]
-  p v2   #=> Vector[5.25, 10.5]
+#@samplecode 例
+require 'matrix'
+v1 = Vector[1, 3, 5, 7]
+v2 = Vector[5.25, 10.5]
+p v1   # => Vector[1, 3, 5, 7]
+p v2   # => Vector[5.25, 10.5]
+#@end
 
 --- elements(a, copy = true) -> Vector
 
@@ -54,17 +54,17 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 @param a     [[c:Vector]]を生成する際の要素の配列
 @param copy  引数の配列 a のコピーをするかどうかのフラグ
 
-例:
-
-  require 'matrix'
-  a = [1, 2, 3, 4]
-  v1 = Vector.elements(a, true)
-  v2 = Vector.elements(a, false)
-  p v1        #=> Vector[1, 2, 3, 4]
-  p v2        #=> Vector[1, 2, 3, 4]
-  a[0] = -1
-  p v1        #=> Vector[1, 2, 3, 4]
-  p v2        #=> Vector[-1, 2, 3, 4]
+#@samplecode 例
+require 'matrix'
+a = [1, 2, 3, 4]
+v1 = Vector.elements(a, true)
+v2 = Vector.elements(a, false)
+p v1        # => Vector[1, 2, 3, 4]
+p v2        # => Vector[1, 2, 3, 4]
+a[0] = -1
+p v1        # => Vector[1, 2, 3, 4]
+p v2        # => Vector[-1, 2, 3, 4]
+#@end
 
 #@since 2.2.0
 --- independent?(*vectors) -> bool
@@ -77,9 +77,11 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 
 size 次元ベクトル空間の index 番目の標準基底を返します。
 
-  require 'matrix'
-  Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
-  
+#@samplecode 例
+require 'matrix'
+Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
+#@end
+
 @param size ベクトルの次元
 @param index 標準基底の何番目か。0 origin
 
@@ -90,8 +92,10 @@ size 次元ベクトル空間の index 番目の標準基底を返します。
 
 零ベクトルを返します。
 
-  require 'matrix'
-  Vector.zero(3) # => Vector[0, 0, 0]
+#@samplecode 例
+require 'matrix'
+Vector.zero(3) # => Vector[0, 0, 0]
+#@end
 
 @param size ベクトルの次元
 #@end
@@ -112,7 +116,7 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@# for internal use
 #@# --- init_elements(array, copy) -> Array
 #@# ベクトルの要素を引数 array で初期化します。
-#@# 
+#@#
 #@# @param array ベクトルとして初期化する Array を指定します。
 #@# @param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
 #@#              true の場合はコピーします。
@@ -129,13 +133,13 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@#以下に、その定義と使用例を示します。
 #@#
 #@#  require 'matrix'
-#@#  
+#@#
 #@#  class Vector
 #@#    def []=(i,x)
 #@#      @elements[i]=x
 #@#    end
 #@#  end
-#@#  
+#@#
 #@#  v=Vector[1,2,3]
 #@#  v[2]=-1
 #@#  p v #=> Vector[1,2,-1]
@@ -150,9 +154,9 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 #@# for internal use
 #@# --- compare_by(elements) -> bool
-#@# 
+#@#
 #@# 自分自身と引数 elements を配列として比較します。
-#@# 
+#@#
 #@# @param elements 比較する配列。
 #@# @return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
 
@@ -162,13 +166,13 @@ self の各要素に数 other を乗じたベクトルを返します。
 
 @param other self の各要素に掛ける [[c:Numeric]] オブジェクトを指定します。
 
-例:
-
-  require 'matrix'
-  a = [1, 2, 3.5, 100]
-  v1 = Vector.elements(a)
-  p v1.*(2)     #=> Vector[2, 4, 7.0, 200]
-  p v1.*(-1.5)  #=> Vector[-1.5, -3.0, -5.25, -150.0]
+#@samplecode 例
+require 'matrix'
+a = [1, 2, 3.5, 100]
+v1 = Vector.elements(a)
+p v1.*(2)     # => Vector[2, 4, 7.0, 200]
+p v1.*(-1.5)  # => Vector[-1.5, -3.0, -5.25, -150.0]
+#@end
 
 --- *(m) -> Matrix
 
@@ -181,14 +185,15 @@ self の各要素に数 other を乗じたベクトルを返します。
 
 引数の行列 m は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
 
-例:
-  require 'matrix'
+#@samplecode 例
+require 'matrix'
 
-  v = Vector[1, 2]
-  a = [4, 5, 6]
-  m = Matrix[a]
+v = Vector[1, 2]
+a = [4, 5, 6]
+m = Matrix[a]
 
-  p v * m #=> Matrix[[4, 5, 6], [8, 10, 12]]
+p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
+#@end
 
 --- +(v) -> Vector | Matrix
 
@@ -242,7 +247,7 @@ v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できま
 self の各要素を数 other で割ったベクトルを返します。
 
 @param other self の各要素を割る [[c:Numeric]] オブジェクトを指定します。
-@raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix 
+@raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix
        の場合に発生します
 
 --- r -> Float
@@ -278,8 +283,10 @@ v.norm # => 1.0
 
 v と self がなす角度を返します。
 
-  require 'matrix'
-  Vector[1,0].angle_with(Vector[0,1]) # => Math::PI/2
+#@samplecode 例
+require 'matrix'
+Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
+#@end
 
 @param v このベクトルと self とがなす角度を計算します
 @raise ZeroVectorError self もしくは v のどちらかが零ベクトルである場合に
@@ -337,16 +344,16 @@ n次元ベクトルでなければなりません。
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 #@end
 
-例:
-
-  require 'matrix'
-  a = [1, 2, 3.5, -10]
-  v1 = Vector.elements(a)
-  p v1 #=> Vector[1, 2, 3.5, -10]
-  v2 =  v1.map{|x|
-    x * -1
-  }
-  p v2 #=> Vector[-1, -2, -3.5, 10]
+#@samplecode 例
+require 'matrix'
+a = [1, 2, 3.5, -10]
+v1 = Vector.elements(a)
+p v1 # => Vector[1, 2, 3.5, -10]
+v2 =  v1.map{|x|
+  x * -1
+}
+p v2 # => Vector[-1, -2, -3.5, 10]
+#@end
 
 #@since 1.9.2
 --- each{|e| ... } -> self
@@ -401,19 +408,19 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 次の例は、２つのベクトルの要素毎の積を要素とする配列を生成します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-  
-  v1 = Vector[2, 3, 5]
-  v2 = Vector[7, 9, 11]
-  a = Array[7, 9, 11]
+v1 = Vector[2, 3, 5]
+v2 = Vector[7, 9, 11]
+a = Array[7, 9, 11]
 
-  z = v1.collect2(v2){|x, y| x * y }
-  p z #=> [14, 27, 55]
+z = v1.collect2(v2){ |x, y| x * y }
+p z # => [14, 27, 55]
 
-  z = v1.collect2(a) {|x, y| x * y } # ArrayでもOK
-  p z #=> [14, 27, 55]
+z = v1.collect2(a) { |x, y| x * y } # Array でも OK
+p z # => [14, 27, 55]
+#@end
 
 --- map2(v) {|x, y| ... } -> Vector
 
@@ -434,19 +441,19 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 次の例は、２つのベクトルの要素毎の積を要素として持つベクトルを生成します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-  
-  v1 = Vector[2, 3, 5]
-  v2 = Vector[7, 9, 11]
-  a = Array[7, 9, 11]
+v1 = Vector[2, 3, 5]
+v2 = Vector[7, 9, 11]
+a = Array[7, 9, 11]
 
-  z = v1.map2(v2) {|x, y| x * y }
-  p z #=> Vector[14, 27, 55]
+z = v1.map2(v2) { |x, y| x * y }
+p z # => Vector[14, 27, 55]
 
-  z = v1.map2(a) {|x, y| x * y } # ArrayでもOK
-  p z #=> Vector[14, 27, 55]
+z = v1.map2(a) { |x, y| x * y } # Array でも OK
+p z # => Vector[14, 27, 55]
+#@end
 
 --- covector -> Matrix
 [[c:Matrix]] オブジェクトへ変換します。
@@ -454,38 +461,38 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 列ベクトル (行列)、すなわち、(n, 1) 型の行列に変換します。
 実際には [[m:Matrix.row_vector]](self) を適用します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector[2, 3, 5]
-  p v #=> Vector[2, 3, 5]
-  m = v.covector
-  p m #=> Matrix[[2, 3, 5]]
+v = Vector[2, 3, 5]
+p v # => Vector[2, 3, 5]
+m = v.covector
+p m # => Matrix[[2, 3, 5]]
+#@end
 
 --- to_a -> Array
 
 ベクトル([[c:Vector]])から配列 ([[c:Array]]) に変換します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector[2, 3, 5, 7, 9]
-  a = v.to_a
-  p a #=> [2, 3, 5, 7, 9]
+v = Vector[2, 3, 5, 7, 9]
+a = v.to_a
+p a # => [2, 3, 5, 7, 9]
+#@end
 
 --- to_s -> String
 
 ベクトル([[c:Vector]])から文字列 ([[c:String]]) に変換します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector[2, 3, 5, 7, 9]
-  s = v.to_s
-  p s #=> "Vector[2, 3, 5, 7, 9]"
+v = Vector[2, 3, 5, 7, 9]
+s = v.to_s
+p s # => "Vector[2, 3, 5, 7, 9]"
+#@end
 
 #@since 1.9.1
 --- elements_to_f -> Vector
@@ -495,12 +502,13 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 このメソッドは deprecated です。 map(&:to_f) を使ってください。
 #@end
 
-例:
-  require 'matrix'
+#@samplecode 例
+require 'matrix'
 
-  v = Vector.elements([2, 3, 5, 7, 9])
-  vf = v.elements_to_f
-  p vf #=> "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
+v = Vector.elements([2, 3, 5, 7, 9])
+vf = v.elements_to_f
+p vf # => "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
+#@end
 
 --- elements_to_i -> Vector
 ベクトルの各成分を[[c:Integer]]に変換したベクトルを返します。
@@ -509,12 +517,12 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 このメソッドは deprecated です。 map(&:to_i) を使ってください。
 #@end
 
-例:
-  require 'matrix'
-
-  v = Vector.elements([2.5, 3.0, 5.01, 7])
-  vi = v.elements_to_i
-  p vi #=> "Vector[2, 3, 5, 7]"
+#@samplecode 例
+require 'matrix'
+v = Vector.elements([2.5, 3.0, 5.01, 7])
+vi = v.elements_to_i
+p vi # => "Vector[2, 3, 5, 7]"
+#@end
 
 --- elements_to_r -> Vector
 ベクトルの各成分を[[c:Rational]]に変換したベクトルを返します。
@@ -523,13 +531,13 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 このメソッドは deprecated です。 map(&:to_r) を使ってください。
 #@end
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector.elements([2.5, 3.0, 5.75, 7])
-  vr = v.elements_to_r
-  p vr #=> "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1)]"
+v = Vector.elements([2.5, 3.0, 5.75, 7])
+vr = v.elements_to_r
+p vr # => "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1)]"
+#@end
 
 #@end
 
@@ -541,7 +549,7 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 自分自身をコピーしたベクトルを返します。
 
---- inspect() -> String 
+--- inspect() -> String
 
 オブジェクトの内容を文字列化します。
 
