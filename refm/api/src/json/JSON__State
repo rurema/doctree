@@ -123,6 +123,20 @@ JSON 形式の文字列のトークン間に挿入する文字列をセットし
 
 @param string JSON 形式の文字列のトークン間に挿入する文字列を指定します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(space: "")
+json_state.space             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state.space = "\t"
+json_state.space             # => "\t"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":  "tanaka","age": 19}]
+#@end
+
 --- space_before -> String
 
 JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
