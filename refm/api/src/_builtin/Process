@@ -292,10 +292,27 @@ MSDOS 環境の場合、command はサブシェル経由で実行されます。
 
 返される配列の最大要素数は [[m:Process.#maxgroups]] です。
 
+このメソッドは [[man:getgroups(2)]] の単純なラッパーです。
+このことは以下の特徴がプラットフォームに依存することを意味します。
+
+ * 結果がソートされているかどうか
+ * 結果が実効グループ ID を含むかどうか
+ * グループ ID が重複している可能性があるかどうか
+
+ソート済みで重複のないグループ ID の配列の取得は以下のようにできます:
+
+#@samplecode
+Process.groups.uniq.sort
+#@end
+
 @raise Errno::EXXX [[m:Process.#maxgroups]] が実際に返される補助グループ ID の
                    数よりも少ない値を設定していると発生します。
 
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
+#@samplecode
+Process.groups   #=> [27, 6, 10, 11]
+#@end
 
 @see [[man:getgroups(2)]]
 
