@@ -1271,17 +1271,6 @@ Matrix[[1, -2, 3], [2, 0, 6], [-3, -6, 0]].antisymmetric? # => false
 Matrix[[0, 2, -3], [2, 0, 6], [-3, 6, 0]].antisymmetric? # => false
 #@end
 
---- reflexive? -> bool
-行列が反射的ならば真を返します。
-
-@raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
-
-#@samplecode
-require 'matrix'
-
-Matrix[[1, 2, 3], [4, 1, 3], [5, 3, 1]].reflexive? # => true
-Matrix.empty.reflexive? # => true
-#@end
 #@end
 
 #@since 1.9.3
