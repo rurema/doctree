@@ -142,6 +142,25 @@ JSON 形式の文字列中で JavaScript のオブジェクトを表す部分に
 
 自身をハッシュに変換します。
 
+#@samplecode 例
+require "json"
+require "pp"
+
+json_state = JSON::State.new
+pp json_state.to_h
+
+# => {:indent=>"",
+#     :space=>"",
+#     :space_before=>"",
+#     :object_nl=>"",
+#     :array_nl=>"",
+#     :allow_nan=>false,
+#     :ascii_only=>false,
+#     :max_nesting=>100,
+#     :depth=>0,
+#     :buffer_initial_length=>1024}
+#@end
+
 --- ascii_only? -> bool
 
 Returns true, if NaN, Infinity, and -Infinity should be generated,
