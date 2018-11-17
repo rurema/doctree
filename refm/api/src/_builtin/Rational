@@ -13,8 +13,8 @@ Rational('0.33')     # => (33/100)
 Rational.new(1, 3)   # => NoMethodError
 #@end
 
-ただし、1.8系とは異なり、[[c:Rational]] オブジェクトは常に既約(それ以上
-約分できない状態)である事に注意してください。
+[[c:Rational]] オブジェクトは常に既約(それ以上約分できない状態)である
+事に注意してください。
 
 #@samplecode 例
 Rational(2, 6)       # => (1/3)
@@ -78,17 +78,6 @@ r ** Rational(2, 1)  # => (9/16)
 r ** 2               # => (9/16)
 r ** 2.0             # => 0.5625
 r ** Rational(1, 2)  # => 0.866025403784439
-#@end
-
-注意:
-
-1.8 系とは計算結果のオブジェクトが異なる場合がある事に注意してください。
-other に [[c:Rational]] を指定した場合には戻り値は必ず [[c:Float]] を返
-していました。
-
-#@samplecode 1.8.7 の場合
-r = Rational(3, 4)
-r ** Rational(2, 1) # => 0.5625
 #@end
 
 --- +(other) -> Rational | Float
@@ -626,9 +615,6 @@ Rational(0.5).to_s   # => "1/2"
 
 [[m:Marshal.#load]] のためのメソッドです。
 Rational::compatible#marshal_load で復元可能な配列を返します。
-
-2.0 以降では [[m:Marshal.#load]] で 1.8 系の [[c:Rational]] オブジェク
-トを保存した文字列も復元できます。
 
 [注意] Rational::compatible は通常の方法では参照する事ができません。
 
