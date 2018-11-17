@@ -13,8 +13,8 @@ Rational('0.33')     # => (33/100)
 Rational.new(1, 3)   # => NoMethodError
 #@end
 
-ただし、1.8系とは異なり、[[c:Rational]] オブジェクトは常に既約(それ以上
-約分できない状態)である事に注意してください。
+[[c:Rational]] オブジェクトは常に既約(それ以上約分できない状態)である
+事に注意してください。
 
 #@samplecode 例
 Rational(2, 6)       # => (1/3)
@@ -22,28 +22,6 @@ Rational(1, 3) * 3   # => (1/1)
 #@end
 
 == Public Instance Methods
-
-#@until 1.9.2
---- %(other)      -> Rational | Float
---- modulo(other) -> Rational | Float
-
-剰余を計算します。
-
-@param other 自身を割る数
-
-other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
-す。
-
-#@samplecode 例
-r = Rational(7, 4)
-r % Rational(1, 2)   # => (1/4)
-r % 1                # => (3/4)
-r % Rational(1, 7)   # => (1/28)
-r % 0.26             # => 0.19
-#@end
-
-@raise ZeroDivisionError other が 0 の時に発生します。
-#@end
 
 --- *(other) -> Rational | Float
 
@@ -78,17 +56,6 @@ r ** Rational(2, 1)  # => (9/16)
 r ** 2               # => (9/16)
 r ** 2.0             # => 0.5625
 r ** Rational(1, 2)  # => 0.866025403784439
-#@end
-
-注意:
-
-1.8 系とは計算結果のオブジェクトが異なる場合がある事に注意してください。
-other に [[c:Rational]] を指定した場合には戻り値は必ず [[c:Float]] を返
-していました。
-
-#@samplecode 1.8.7 の場合
-r = Rational(3, 4)
-r ** Rational(2, 1) # => 0.5625
 #@end
 
 --- +(other) -> Rational | Float
@@ -130,11 +97,8 @@ r - 0.5              # => 0.25
 @param other 自身を割る数
 
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
-す。
-#@since 1.9.3
-ただし 0 以外の整数に等しい場合は [[c:Rational]] で返します。
+す。ただし 0 以外の整数に等しい場合は [[c:Rational]] で返します。
 #@# r28844 と r28886
-#@end
 
 #@samplecode 例
 r = Rational(3, 4)
@@ -161,25 +125,14 @@ r = Rational(3, 4)
 #@end
 #@end
 
-#@since 1.9.2
 --- <=>(other) -> -1 | 0 | 1 | nil
-#@else
---- <=>(other) -> -1 | 0 | 1
-#@end
 
 self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
--1 を返します。
-#@since 1.9.2
-比較できない場合はnilを返します。
-#@end
+-1 を返します。比較できない場合はnilを返します。
 
 @param other 自身と比較する数値
 
-#@since 1.9.2
 @return      -1 か 0 か 1 か nil を返します。
-#@else
-@return      -1 か 0 か 1 を返します。
-#@end
 
 #@samplecode 例
 Rational(2, 3)  <=> Rational(2, 3)  # => 0
@@ -243,19 +196,13 @@ Rational(-1, 2).abs    # => (1/2)
 #@end
 
 
-#@since 1.9.2
 --- ceil(precision = 0) -> Integer | Rational
-#@else
---- ceil                -> Integer
-#@end
 
 自身と等しいかより大きな整数のうち最小のものを返します。
 
-#@since 1.9.2
 @param precision 計算結果の精度
 
 @raise TypeError precision に整数以外のものを指定すると発生します。
-#@end
 
 #@samplecode 例
 Rational(3).ceil      # => 3
@@ -263,7 +210,6 @@ Rational(2, 3).ceil   # => 1
 Rational(-3, 2).ceil  # => -1
 #@end
 
-#@since 1.9.2
 precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 数か [[c:Rational]] を返します。
 
@@ -272,7 +218,6 @@ Rational('-123.456').ceil(+1)       # => (-617/5)
 Rational('-123.456').ceil(+1).to_f  # => -123.4
 Rational('-123.456').ceil(0)        # => -123
 Rational('-123.456').ceil(-1)       # => -120
-#@end
 #@end
 
 @see [[m:Rational#floor]], [[m:Rational#round]], [[m:Rational#truncate]]
@@ -304,31 +249,6 @@ Rational(-2, -10).denominator # => 5
 
 @see [[m:Rational#numerator]]
 
-#@until 1.9.2
---- div(other) -> Integer
-
-self を other で割った整数の商を返します。
-
-@param other 自身を割る数
-
-#@samplecode 例
-Rational(1, 2).div(Rational(2, 3)) # => 0
-#@end
-
---- divmod(other) -> [Integer, Float | Rational]
-
-self を other で割った、商と余りの配列を返します。
-
-other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
-
-@param other 自身を割る数
-
-#@samplecode 例
-Rational(7, 4).divmod(Rational(1, 2)) # => [3, (1/4)]
-Rational(1, 2).divmod(2.0)            # => [0, 0.5]
-#@end
-#@end
-
 --- fdiv(other) -> Float
 
 self を other で割った商を [[c:Float]] で返します。
@@ -345,19 +265,13 @@ Rational(1).fdiv(Complex(1, 0))  # => 1.0
 Rational(1).fdiv(Complex(0, 1))  # => RangeError
 #@end
 
-#@since 1.9.2
 --- floor(precision = 0) -> Integer | Rational
-#@else
---- floor -> Integer
-#@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
 
-#@since 1.9.2
 @param precision 計算結果の精度
 
 @raise TypeError precision に整数以外のものを指定すると発生します。
-#@end
 
 #@samplecode 例
 Rational(3).floor     # => 3
@@ -374,7 +288,6 @@ Rational(-7, 4).to_i  # => -1
 Rational(-7, 4).floor # => -2
 #@end
 
-#@since 1.9.2
 precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 数か [[c:Rational]] を返します。
 
@@ -383,7 +296,6 @@ Rational('-123.456').floor(+1)       # => (-247/2)
 Rational('-123.456').floor(+1).to_f  # => -123.5
 Rational('-123.456').floor(0)        # => -124
 Rational('-123.456').floor(-1)       # => -130
-#@end
 #@end
 
 @see [[m:Rational#ceil]], [[m:Rational#round]], [[m:Rational#truncate]]
@@ -415,30 +327,6 @@ Rational(0.5).inspect   # => "(1/2)"
 
 @see [[m:Rational#to_s]]
 
-#@until 2.0.0
---- marshal_dump -> Array
-
-[[m:Rational#marshal_load]] で復元可能な配列を返します。
-
-[注意] このメソッドは 2.0 で private メソッドに変更されました。
-
-@see [[m:Rational#marshal_load]]
-
---- marshal_load(ary) -> Rational
-
-[[m:Rational#marshal_dump]] で得られた配列を基に、[[c:Rational]] オブジェ
-クトを復元します。
-
-@param ary 2 要素の数値の配列を指定します。
-
-@raise ArgumentError 配列の要素数が 2 以外であった場合に発生します。
-
-[注意] このメソッドは 2.0 で Rational::compatible#marshal_load に移動さ
-れました。
-
-@see [[m:Rational#marshal_dump]]
-#@end
-
 --- numerator -> Integer
 
 分子を返します。
@@ -454,7 +342,6 @@ Rational(-2, -10).numerator # => 1
 
 @see [[m:Rational#denominator]]
 
-#@since 1.9.2
 --- rationalize(eps = 0) -> Rational
 
 自身から eps で指定した許容誤差の範囲に収まるような [[c:Rational]] を返
@@ -470,39 +357,16 @@ r.rationalize                   # => (5033165/16777216)
 r.rationalize(Rational(0.01))   # => (3/10)
 r.rationalize(Rational(0.1))    # => (1/3)
 #@end
-#@end
 
-#@until 1.9.2
---- remainder(other) -> Rational
-
-自身を other で割った余りを返します。割り切れるような場合にも
-[[c:Rational]] を返します。
-
-@param other 自身を割る数
-
-#@samplecode 例
-Rational(1, 2).remainder(Rational(2, 3)) # => (1/2)
-Rational(4, 3).remainder(Rational(2, 3)) # => (0/1)
-#@end
-
-@see [[m:Numeric#remainder]]
-#@end
-
-#@since 1.9.2
 --- round(precision = 0) -> Integer | Rational
-#@else
---- round -> Integer
-#@end
 
 自身ともっとも近い整数を返します。
 
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
 
-#@since 1.9.2
 @param precision 計算結果の精度
 
 @raise TypeError precision に整数以外のものを指定すると発生します。
-#@end
 
 #@samplecode 例
 Rational(3).round     # => 3
@@ -510,7 +374,6 @@ Rational(2, 3).round  # => 1
 Rational(-3, 2).round # => -2
 #@end
 
-#@since 1.9.2
 precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 数か [[c:Rational]] を返します。
 
@@ -520,7 +383,6 @@ Rational('-123.456').round(+1).to_f # => -123.5
 Rational('-123.456').round(0)       # => -123
 Rational('-123.456').round(-1)      # => -120
 Rational('-123.456').round(-2)      # => -100
-#@end
 #@end
 
 @see [[m:Rational#ceil]], [[m:Rational#floor]], [[m:Rational#truncate]]
@@ -545,19 +407,13 @@ Rational(-10**1000).to_f     # => -Infinity
 #@end
 
 --- to_i -> Integer
-#@since 1.9.2
 --- truncate(precision = 0) -> Rational | Integer
-#@else
---- truncate                -> Integer
-#@end
 
 小数点以下を切り捨てて値を整数に変換します。
 
-#@since 1.9.2
 @param precision 計算結果の精度
 
 @raise TypeError precision に整数以外のものを指定すると発生します。
-#@end
 
 #@samplecode 例
 Rational(2, 3).to_i   # => 0
@@ -567,7 +423,6 @@ Rational(98, 71).to_i # => 1
 Rational(-30, 2).to_i # => -15
 #@end
 
-#@since 1.9.2
 precision を指定した場合は指定した桁数で切り捨てた整数か
 [[c:Rational]] を返します。
 
@@ -576,7 +431,6 @@ Rational('-123.456').truncate(+1)       # => (-617/5)
 Rational('-123.456').truncate(+1).to_f  # => -123.4
 Rational('-123.456').truncate(0)        # => -123
 Rational('-123.456').truncate(-1)       # => -120
-#@end
 #@end
 
 @see [[m:Rational#ceil]], [[m:Rational#floor]]
@@ -621,16 +475,11 @@ Rational(0.5).to_s   # => "1/2"
 
 @see [[m:Kernel.#Rational]]
 
-#@since 2.0.0
 --- marshal_dump -> Array
 
 [[m:Marshal.#load]] のためのメソッドです。
 Rational::compatible#marshal_load で復元可能な配列を返します。
 
-2.0 以降では [[m:Marshal.#load]] で 1.8 系の [[c:Rational]] オブジェク
-トを保存した文字列も復元できます。
-
 [注意] Rational::compatible は通常の方法では参照する事ができません。
 
 #@# #6625 を参照。
-#@end
