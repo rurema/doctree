@@ -47,14 +47,16 @@ Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張されます�
 
 次の例は、各要素を共役複素数に置換するメソッド Matrix#conjugate です。
 
-  require 'matrix'
-  require 'complex'
-  
-  class Matrix
-    def conjugate
-      collect{|e| e.conjugate }
-    end
+#@samplecode 例
+require 'matrix'
+require 'complex'
+
+class Matrix
+  def conjugate
+    collect{|e| e.conjugate }
   end
+end
+#@end
 
 
 == Class Methods
@@ -64,13 +66,13 @@ rows[i] を第 i 行とする行列を生成します。
 
 @param rows 行列の要素を数の配列の配列として渡します。
 
-例:
-
-  require 'matrix'
-  m = Matrix[[11, 12], [21, 22]]
-  p m  #=> Matrix[[11, 12], [21, 22]]
-       #   [11, 12]
-       #   [21, 22] 
+#@samplecode 例
+require 'matrix'
+m = Matrix[[11, 12], [21, 22]]
+p m  # => Matrix[[11, 12], [21, 22]]
+     #    [11, 12]
+     #    [21, 22]
+#@end
 
 --- rows(rows, copy = true) -> Matrix
 
@@ -78,17 +80,17 @@ rows[i] を第 i 行とする行列を生成します。
 
 引数 copy が偽(false)ならば、rows の複製を行いません。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
+a1 = [1, 2, 3]
+a2 = [10, 15, 20]
 
-  a1 = [1, 2, 3]
-  a2 = [10, 15, 20]
-
-  m = Matrix.rows([a1, a2], false) # 配列を複製せずに行列を生成
-  p m #=> Matrix[[1, 2, 3], [10, 15, 20]]
-  a2[1] = 1000 # 配列のデータを変更
-  p m #=> Matrix[[1, 2, 3], [10, 1000, 20]]
+m = Matrix.rows([a1, a2], false) # 配列を複製せずに行列を生成
+p m # => Matrix[[1, 2, 3], [10, 15, 20]]
+a2[1] = 1000 # 配列のデータを変更
+p m # => Matrix[[1, 2, 3], [10, 1000, 20]]
+#@end
 
 @param rows 配列の配列
 @param copy 配列を複製するかどうかを真偽値で指定
@@ -103,27 +105,27 @@ rows[i] を第 i 行とする行列を生成します。
 
 [[m:Matrix.rows]] との違いは引数として渡す配列の配列を列ベクトルの配列とみなして行列を生成します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
+a1 = [1, 2, 3]
+a2 = [4, 5, 6]
+a3 = [-1, -2, -3]
 
-  a1 = [1, 2, 3]
-  a2 = [4, 5, 6]
-  a3 = [-1, -2, -3]
+# 配列を行ベクトルとして生成
+m = Matrix.rows([a1, a2, a3], true)
+p m # => Matrix[[1, 2, 3], [4, 5, 6], [-1, -2, -3]]
+    # 行列としてのイメージ =>  [ 1,  2,  3]
+    #                          [ 4,  5,  6]
+    #                          [-1, -2, -3]
 
-  # 配列を行ベクトルとして生成
-  m = Matrix.rows([a1, a2, a3], true)
-  p m #=> Matrix[[1, 2, 3], [4, 5, 6], [-1, -2, -3]]
-      # 行列としてのイメージ =>  [ 1,  2,  3]
-      #                          [ 4,  5,  6]
-      #                          [-1, -2, -3]
-
-  # 配列を列ベクトルとして生成
-  m = Matrix.columns([a1, a2, a3])
-  p m #=> Matrix[[1, 4, -1], [2, 5, -2], [3, 6, -3]]
-      # 行列としてのイメージ =>  [1, 4, -1]
-      #                          [2, 5, -2]
-      #                          [3, 6, -3]
+# 配列を列ベクトルとして生成
+m = Matrix.columns([a1, a2, a3])
+p m # => Matrix[[1, 4, -1], [2, 5, -2], [3, 6, -3]]
+    # 行列としてのイメージ =>  [1, 4, -1]
+    #                          [2, 5, -2]
+    #                          [3, 6, -3]
+#@end
 
 
 --- diagonal(*values) -> Matrix
@@ -137,14 +139,15 @@ rows[i] を第 i 行とする行列を生成します。
 
 valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素とした1×1の行列が生成されます。
 
-例:
-  require 'matrix'
+#@samplecode 例
+require 'matrix'
 
-  m = Matrix.diagonal(1, 2, 3)
-  p m # => Matrix[[1, 0, 0], [0, 2, 0], [0, 0, 3]]
-  a = [1,2,3]
-  m = Matrix.diagonal(a)
-  p m # => Matrix[[[1, 2, 3]]]
+m = Matrix.diagonal(1, 2, 3)
+p m # => Matrix[[1, 0, 0], [0, 2, 0], [0, 0, 3]]
+a = [1,2,3]
+m = Matrix.diagonal(a)
+p m # => Matrix[[[1, 2, 3]]]
+#@end
 
 
 --- scalar(n, value) -> Matrix
@@ -154,11 +157,13 @@ valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素と
 @param n     生成する行列の次元
 @param value 生成する行列の対角要素の値
 
-例:
-  require 'matrix'
 
-  m = Matrix.scalar(3, 2.5)
-  p m # => Matrix[[2.5, 0, 0], [0, 2.5, 0], [0, 0, 2.5]]
+#@samplecode 例
+require 'matrix'
+
+m = Matrix.scalar(3, 2.5)
+p m # => Matrix[[2.5, 0, 0], [0, 2.5, 0], [0, 0, 2.5]]
+#@end
 
 --- identity(n) -> Matrix
 --- unit(n) -> Matrix
@@ -184,15 +189,17 @@ n × n の零行列（要素が全て 0 の行列）を生成して返します�
 
 row_size 、 column_size のいずれか一方は0である必要があります。
 
-  require 'matrix'
-  m = Matrix.empty(2, 0)
-  m == Matrix[ [], [] ]
-  # => true
-  n = Matrix.empty(0, 3)
-  n == Matrix.columns([ [], [], [] ])
-  # => true
-  m * n
-  # => Matrix[[0, 0, 0], [0, 0, 0]]
+#@samplecode 例
+require 'matrix'
+m = Matrix.empty(2, 0)
+m == Matrix[ [], [] ]
+# => true
+n = Matrix.empty(0, 3)
+n == Matrix.columns([ [], [], [] ])
+# => true
+m * n
+# => Matrix[[0, 0, 0], [0, 0, 0]]
+#@end
 
 @param row_size 行列の行数
 @param column_size 行列の列数
@@ -222,11 +229,13 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 
-  require 'matrix'
-  m = Matrix.build(2, 4) {|row, col| col - row }
-    => Matrix[[0, 1, 2, 3], [-1, 0, 1, 2]]
-  m = Matrix.build(3) { rand }
-    => a 3x3 matrix with random elements
+#@samplecode 例
+require 'matrix'
+m = Matrix.build(2, 4) {|row, col| col - row }
+  # => Matrix[[0, 1, 2, 3], [-1, 0, 1, 2]]
+m = Matrix.build(3) { rand }
+  # => a 3x3 matrix with random elements
+#@end
 
 @param row_size 行列の行数
 @param column_size 行列の列数
@@ -238,10 +247,12 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 
 行列 matrices を横に並べた行列を生成します。
 
-  require 'matrix'
-  x = Matrix[[1, 2], [3, 4]]
-  y = Matrix[[5, 6], [7, 8]]
-  Matrix.hstack(x, y) # => Matrix[[1, 2, 5, 6], [3, 4, 7, 8]]
+#@samplecode 例
+require 'matrix'
+x = Matrix[[1, 2], [3, 4]]
+y = Matrix[[5, 6], [7, 8]]
+Matrix.hstack(x, y) # => Matrix[[1, 2, 5, 6], [3, 4, 7, 8]]
+#@end
 
 @param matrices 並べる行列。すべての行列の行数が一致していなければならない
 @raise ExceptionForMatrix::ErrDimensionMismatch 行数の異なる行列がある場合に発生します
@@ -251,10 +262,12 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 
 行列 matrices を縦に並べた行列を生成します。
 
-  require 'matrix'
-  x = Matrix[[1, 2], [3, 4]]
-  y = Matrix[[5, 6], [7, 8]]
-  Matrix.vstack(x, y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
+#@samplecode 例
+require 'matrix'
+x = Matrix[[1, 2], [3, 4]]
+y = Matrix[[5, 6], [7, 8]]
+Matrix.vstack(x, y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
+#@end
 
 @param matrices 並べる行列。すべての行列の列数が一致していなければならない
 @raise ExceptionForMatrix::ErrDimensionMismatch 列数の異なる行列がある場合に発生します
@@ -267,10 +280,12 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 
 要素ごとにブロックを呼び出した結果を組み合わせた Matrix を返します。
 
-  require 'matrix'
-  x = Matrix[[6, 6], [4, 4]]
-  y = Matrix[[1, 2], [3, 4]]
-  Matrix.combine(x, y) {|a, b| a - b} # => Matrix[[5, 4], [1, 0]]
+#@samplecode 例
+require 'matrix'
+x = Matrix[[6, 6], [4, 4]]
+y = Matrix[[1, 2], [3, 4]]
+Matrix.combine(x, y) {|a, b| a - b} # => Matrix[[5, 4], [1, 0]]
+#@end
 
 @param matrices 並べる行列。すべての行列の行数と列数が一致していなければならない
 @raise ExceptionForMatrix::ErrDimensionMismatch 行や列の要素数が一致しない時に発生します
@@ -298,18 +313,21 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 列成分に[[m:Matrix#column_size]]より大きな値を指定した場合にはnilを返します。
 
 #@end
-例:
-  require 'matrix'
 
-  a1 = [1, 2, 3]
-  a2 = [10, 15, 20]
-  a3 = [-1, 2, 1.5]
-  m = Matrix[a1, a2, a3]
 
-  p m[0, 0] #=> 1
-  p m[1, 1] #=> 15
-  p m[1, 2] #=> 20
-  p m[1, 3] #=> nil
+#@samplecode 例
+require 'matrix'
+
+a1 = [1, 2, 3]
+a2 = [10, 15, 20]
+a3 = [-1, 2, 1.5]
+m = Matrix[a1, a2, a3]
+
+p m[0, 0] # => 1
+p m[1, 1] # => 15
+p m[1, 2] # => 20
+p m[1, 3] # => nil
+#@end
 
 --- row_size -> Integer
 #@since 2.1.0
@@ -343,9 +361,11 @@ row_size×column_sizeの行列をブロックの返り値から生成します�
 selector で行列のどの部分を探すかを指定します。この引数の意味は
 [[m:Matrix#each]] を参照してください。
 
-  require 'matrix'
-  Matrix[ [1,2], [3,4] ].index(&:even?) # => [0, 1]
-  Matrix[ [1,1], [1,1] ].index(1, :strict_lower) # => [1, 0]
+#@samplecode 例
+require 'matrix'
+Matrix[ [1,2], [3,4] ].index(&:even?) # => [0, 1]
+Matrix[ [1,1], [1,1] ].index(1, :strict_lower) # => [1, 0]
+#@end
 
 value を指定せず、さらにブロックを省略した場合、
 [[c:Enumerator]] を返します。
@@ -374,10 +394,12 @@ which に以下の [[c:Symbol]] を指定することで
 
 ブロックを省略した場合、 [[c:Enumerator]] を返します。
 
-  require 'matrix'
-  Matrix[ [1,2], [3,4] ].each { |e| puts e }
-  # => prints the numbers 1 to 4
-  Matrix[ [1,2], [3,4] ].each(:strict_lower).to_a # => [3]
+#@samplecode 例
+require 'matrix'
+Matrix[ [1,2], [3,4] ].each { |e| puts e }
+# => prints the numbers 1 to 4
+Matrix[ [1,2], [3,4] ].each(:strict_lower).to_a # => [3]
+#@end
 
 @param which どの要素に対してブロックを呼び出すのかを [[c:Symbol]] で指定します
 @see [[m:Matrix#each_with_index]]
@@ -392,14 +414,16 @@ which で処理する要素の範囲を指定することができます。
 
 ブロックを省略した場合、 [[c:Enumerator]] を返します。
 
-  require 'matrix'
-  Matrix[ [1,2], [3,4] ].each_with_index do |e, row, col|
-    puts "#{e} at #{row}, #{col}"
-  end
-    # => 1 at 0, 0
-    # => 2 at 0, 1
-    # => 3 at 1, 0
-    # => 4 at 1, 1
+#@samplecode 例
+require 'matrix'
+Matrix[ [1,2], [3,4] ].each_with_index do |e, row, col|
+  puts "#{e} at #{row}, #{col}"
+end
+  # => 1 at 0, 0
+  # => 2 at 0, 1
+  # => 3 at 1, 0
+  # => 4 at 1, 1
+#@end
 
 @param which どの要素に対してブロックを呼び出すのかを [[c:Symbol]] で指定します
 @see [[m:Matrix#each]]
@@ -420,17 +444,17 @@ selfの部分行列を返します。
 @param from_col 部分行列の開始列(0オリジンで指定)
 @param col_size 部分行列の列サイズ
 
-例:
+#@samplecode 例
+require 'matrix'
+a1 = [ 1,  2,  3,  4,  5]
+a2 = [11, 12, 13, 14, 15]
+a3 = [21, 22, 23, 24, 25]
+a4 = [31, 32, 33, 34, 35]
+a5 = [51, 52, 53, 54, 55]
+m = Matrix[a1, a2, a3, a4, a5]
 
-  require 'matrix'
-  a1 = [ 1,  2,  3,  4,  5]
-  a2 = [11, 12, 13, 14, 15]
-  a3 = [21, 22, 23, 24, 25]
-  a4 = [31, 32, 33, 34, 35]
-  a5 = [51, 52, 53, 54, 55]
-  m = Matrix[a1, a2, a3, a4, a5]
-
-  p m.minor(0, 2, 1, 2) #=> Matrix[[2, 3], [12, 13]]
+p m.minor(0, 2, 1, 2) # => Matrix[[2, 3], [12, 13]]
+#@end
 
 #@#--- []=(i,j,x)
 #@#(i,j)要素をxに変更する。
@@ -520,11 +544,13 @@ self の各成分を数 other で割った行列を返します。
 
 要素に整数を含む場合、正しい答を返さないかも知れません。
 
-  require 'matrix'
-  
-  p Matrix[[2, 1], [3, 2]].inv         #=> Matrix[[0, 0], [1, 0]]
-  
-  p Matrix[[2.0, 1.0], [3.0, 2.0]].inv #=> Matrix[[2.0, -1.0], [-3.0, 2.0]]
+#@samplecode 例
+require 'matrix'
+
+p Matrix[[2, 1], [3, 2]].inv         #=> Matrix[[0, 0], [1, 0]]
+
+p Matrix[[2.0, 1.0], [3.0, 2.0]].inv #=> Matrix[[2.0, -1.0], [-3.0, 2.0]]
+#@end
 
 #@end
 --- **(n) -> Matrix
@@ -554,11 +580,13 @@ self が正方行列ではない場合は0を返します。
 
 要素に整数を含む場合、正しい答を返さないかも知れません。
 
- require 'matrix'
+#@samplecode 例
+require 'matrix'
 
- p Matrix[[2, 1], [-1, 2]].det #=> 6
- 
- p Matrix[[2.0, 1.0], [-1.0, 2.0]].det #=> 5.0
+p Matrix[[2, 1], [-1, 2]].det #=> 6
+
+p Matrix[[2.0, 1.0], [-1.0, 2.0]].det #=> 5.0
+#@end
 #@end
 
 #@since 1.9.1
@@ -621,9 +649,10 @@ selfの行列の階数(rank)を返します。
 
 行列のトレース (trace) とは、対角要素の和です。
 
-例:
-  require 'matrix'
-  Matrix[[7,6], [3,9]].trace #=> 16
+#@samplecode 例
+require 'matrix'
+Matrix[[7,6], [3,9]].trace # => 16
+#@end
 
 trace は正方行列でのみ定義されます。
 
@@ -660,20 +689,21 @@ i 番目の行が存在しない場合は例外 TypeError が発生します。
          先頭の行が 0 番目になります。i の値が負の時には末尾から
          のインデックスと見倣します。末尾の行が -1 番目になります。
 
-例:
-  require 'matrix'
-  a1 = [1, 2, 3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
+#@samplecode 例
+require 'matrix'
+a1 = [1, 2, 3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
 
-  p m.row(1) #=> Vector[10, 15, 20]
- 
-  cnt = 0
-  m.row(0) { |x|
-    cnt = cnt + x
-  }
-  p cnt #=> 6
+p m.row(1) # => Vector[10, 15, 20]
+
+cnt = 0
+m.row(0) { |x|
+  cnt = cnt + x
+}
+p cnt # => 6
+#@end
 
 #@since 1.9.2
 --- column(j) -> Vector | nil
@@ -696,29 +726,32 @@ j 番目の列が存在しない場合は Vector[nil] を返します。
          先頭の列が 0 番目になります。j の値が負の時には末尾から
          のインデックスと見倣します。末尾の列が -1 番目になります。
 
-例:
-  require 'matrix'
+#@samplecode 例
+require 'matrix'
 
-  a1 = [ 1,  2,   3]
-  a2 = [10, 15,  20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
+a1 = [ 1,  2,   3]
+a2 = [10, 15,  20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
 
-  p m.column(1) #=> Vector[2, 15, -2]
- 
-  cnt = 0
-  m.column(0) { |x|
-    cnt = cnt + x
-  }
-  p cnt #=> 24.5
+p m.column(1) # => Vector[2, 15, -2]
+
+cnt = 0
+m.column(0) { |x|
+  cnt = cnt + x
+}
+p cnt # => 24.5
+#@end
 
 
 #@since 2.2.0
 --- adjugate -> Matrix
 余因子行列を返します。
 
-  require 'matrix'
-  Matrix[[7,6],[3,9]].adjugate # => Matrix[[9, -6], [-3, 7]]
+#@samplecode 例
+require 'matrix'
+Matrix[[7,6],[3,9]].adjugate # => Matrix[[9, -6], [-3, 7]]
+#@end
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方でない場合に発生します。
 @see [[m:Matrix#cofactor]]
@@ -745,9 +778,11 @@ row 行、もしくは column 列に関するラプラス展開をする。
 変則的な形状の行列に対してはそれ以上の意味を持ちます。例えば
 row行/column列が行列やベクトルである場合には
 
-  require 'matrix'
-  # Matrix[[7,6], [3,9]].laplace_expansion(column: 1) # => 45
-  Matrix[[Vector[1, 0], Vector[0, 1]], [2, 3]].laplace_expansion(row: 0) # => Vector[3, -2]
+#@samplecode 例
+require 'matrix'
+# Matrix[[7,6], [3,9]].laplace_expansion(column: 1) # => 45
+Matrix[[Vector[1, 0], Vector[0, 1]], [2, 3]].laplace_expansion(row: 0) # => Vector[3, -2]
+#@end
 
 @param row 行
 @param column  列
@@ -769,10 +804,12 @@ self から第 row 行と第 column 列を取り除いた行列を返します�
 
 Matrix.hstack(self, *matrices) と同じです。
 
-  require 'matrix'
-  x = Matrix[[1, 2], [3, 4]]
-  y = Matrix[[5, 6], [7, 8]]
-  x.hstack(y) # => Matrix[[1, 2, 5, 6], [3, 4, 7, 8]]
+#@samplecode 例
+require 'matrix'
+x = Matrix[[1, 2], [3, 4]]
+y = Matrix[[5, 6], [7, 8]]
+x.hstack(y) # => Matrix[[1, 2, 5, 6], [3, 4, 7, 8]]
+#@end
 
 @param matrices 並べる行列。すべての行列の行数がselfの行数と一致していなければならない
 @raise ExceptionForMatrix::ErrDimensionMismatch 行数の異なる行列がある場合に発生します
@@ -785,10 +822,12 @@ Matrix.hstack(self, *matrices) と同じです。
 
 Matrix.vstack(self, *matrices) と同じです。
 
-  require 'matrix'
-  x = Matrix[[1, 2], [3, 4]]
-  y = Matrix[[5, 6], [7, 8]]
-  x.vstack(y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
+#@samplecode 例
+require 'matrix'
+x = Matrix[[1, 2], [3, 4]]
+y = Matrix[[5, 6], [7, 8]]
+x.vstack(y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
+#@end
 
 @see [[m:Matrix.vstack]], [[m:Matrix#hstack]]
 
@@ -799,18 +838,19 @@ Matrix.vstack(self, *matrices) と同じです。
 
 行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成します。
 
-例:
-  require 'matrix'
 
-  a1 = [ 1,  2,   3]
-  a2 = [10, 15,  20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
+#@samplecode 例
+require 'matrix'
+a1 = [ 1,  2,   3]
+a2 = [10, 15,  20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
 
-  # 行列mのすべての要素に100を加える。
-  p m.collect { |x|
-    x + 100
-  } #=> Matrix[[101, 102, 103], [110, 115, 120], [99, 98, 101.5]]
+# 行列mのすべての要素に100を加える。
+p m.collect { |x|
+  x + 100
+} # => Matrix[[101, 102, 103], [110, 115, 120], [99, 98, 101.5]]
+#@end
 
 #@since 1.9.2
 --- empty? -> bool
@@ -825,13 +865,13 @@ Matrix.vstack(self, *matrices) と同じです。
 
 Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返します。
 
-例:
-
- require 'matrix'
- Matrix[[1, 0], [0, 1]].real? #=> true
- Matrix[[Complex(0, 1), 0], [0, 1]].real? #=> false
- # 要素が実数であっても Complex オブジェクトなら偽を返す。
- Matrix[[Complex(1, 0), 0], [0, 1]].real? #=> false
+#@samplecode 例
+require 'matrix'
+Matrix[[1, 0], [0, 1]].real? # => true
+Matrix[[Complex(0, 1), 0], [0, 1]].real? # => false
+# 要素が実数であっても Complex オブジェクトなら偽を返す。
+Matrix[[Complex(1, 0), 0], [0, 1]].real? # => false
+#@end
 
 #@end
 --- regular? -> bool
@@ -848,30 +888,28 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 発生させます。
 #@end
 
-例:
-  require 'matrix'
 
-  a1 = [ 1,  2,  3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
-  p m.regular? #=> true
+#@samplecode 例
+require 'matrix'
 
-  a1 = [ 1,  2,  3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, -3]
-  m = Matrix[a1, a2, a3]
-  p m.regular? #=> false
+a1 = [ 1,  2,  3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
+p m.regular? # => true
 
-  a1 = [ 1,  2,  3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, 1.5]
-  a4 = [1, 1, 1]
-  m = Matrix[a1, a2, a3, a4]
-#@until 1.9.1
-  p m.regular? #=> false
-#@else
-  p m.regular? #=> raise ExceptionForMatrix::ErrDimensionMismatch
+a1 = [ 1,  2,  3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, -3]
+m = Matrix[a1, a2, a3]
+p m.regular? # => false
+
+a1 = [ 1,  2,  3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, 1.5]
+a4 = [1, 1, 1]
+m = Matrix[a1, a2, a3, a4]
+p m.regular? # => raise ExceptionForMatrix::ErrDimensionMismatch
 #@end
 
 #@since 1.9.2
@@ -962,27 +1000,29 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 自分自身を行ベクトルの配列として返します。
 
-例:
-  require 'matrix'
-  a1 = [ 1,  2,  3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
+#@samplecode 例
+require 'matrix'
+a1 = [ 1,  2,  3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
 
-  p m.row_vectors #=> [Vector[1, 2, 3], Vector[10, 15, 20], Vector[-1, -2, 1.5]]
+p m.row_vectors # => [Vector[1, 2, 3], Vector[10, 15, 20], Vector[-1, -2, 1.5]]
+#@end
 
 --- column_vectors -> [Vector]
 
 自分自身を列ベクトルの配列として返します。
 
-例:
-  require 'matrix'
-  a1 = [ 1,  2,  3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
+#@samplecode 例
+require 'matrix'
+a1 = [ 1,  2,  3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
 
-  p m.row_vectors #=> [Vector[1, 10, -1], Vector[2, 15, -2], Vector[3, 20, 1.5]]
+p m.row_vectors # => [Vector[1, 10, -1], Vector[2, 15, -2], Vector[3, 20, 1.5]]
+#@end
 
 --- to_a -> Array
 
@@ -990,14 +1030,15 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 行ベクトルを配列([[c:Array]])としたものの配列(つまり配列の配列)として返します。
 
-例:
-  require 'matrix'
-  a1 = [ 1,  2,  3]
-  a2 = [10, 15, 20]
-  a3 = [-1, -2, 1.5]
-  m = Matrix[a1, a2, a3]
+#@samplecode 例
+require 'matrix'
+a1 = [ 1,  2,  3]
+a2 = [10, 15, 20]
+a3 = [-1, -2, 1.5]
+m = Matrix[a1, a2, a3]
 
-  p m.to_a #=> [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
+p m.to_a # => [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
+#@end
 
 
 #@if (version >= "1.9.1")
@@ -1027,7 +1068,7 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 #@# bc-rdoc: detected missing name: new
 #@# --- new(init_method, *argv)
-#@# 
+#@#
 #@# This method is used by the other methods that create matrices,
 #@# and is of no use to general users.
 #@# bc-methods -r matrix Matrix で見つからなかった。okkez
@@ -1046,44 +1087,52 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 複素共役を取った行列を返します。
 
-  require 'matrix'
-  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
-    => 1+2i   i  0
-          1   2  3
-  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
-    => 1-2i  -i  0
-          1   2  3
+#@samplecode 例
+require 'matrix'
+Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+  # => 1+2i   i  0
+  #       1   2  3
+Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
+  # => 1-2i  -i  0
+  #       1   2  3
+#@end
 
 --- imaginary -> Matrix
 --- imag -> Matrix
 
 行列の虚部を返します。
 
-  require 'matrix'
-  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
-  #  => 1+2i  i  0
-  #        1  2  3
-  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
-  #  =>   2i  i  0
-  #        0  0  0
+#@samplecode 例
+require 'matrix'
+Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+#  => 1+2i  i  0
+#        1  2  3
+Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
+#  =>   2i  i  0
+#        0  0  0
+#@end
 --- real -> Matrix
 
 行列の実部を返します。
 
-  require 'matrix'
-  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
-  #  => 1+2i  i  0
-  #        1  2  3
-  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
-  #  =>    1  0  0
-  #        1  2  3
+#@samplecode 例
+require 'matrix'
+Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+#  => 1+2i  i  0
+#        1  2  3
+Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
+#  =>    1  0  0
+#        1  2  3
+#@end
 
 --- rectangular -> [Matrix, Matrix]
 --- rect -> [Matrix, Matrix]
 行列を実部と虚部に分解したものを返します。
 
 
-  m.rect == [m.real, m.imag]  # ==> true for all matrices m
+#@samplecode 例
+m.rect == [m.real, m.imag]  # ==> true for all matrices m
+#@end
 
 @see [[m:Matrix#imaginary]], [[m:Matrix#real]]
 
@@ -1095,13 +1144,14 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 
 @param other 変換する数値オブジェクト
 
-例:
-  require 'matrix'
-  a1 = [1, 2]
-  a2 = [-1.25, 2.2]
-  m = Matrix[a1, a2]
-  r = Rational(1, 2)
-  p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
+#@samplecode 例
+require 'matrix'
+a1 = [1, 2]
+a2 = [-1.25, 2.2]
+m = Matrix[a1, a2]
+r = Rational(1, 2)
+p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
+#@end
 
 #@until 1.9.2
 #@# bc-rdoc: detected missing name: compare_by_row_vectors
@@ -1119,39 +1169,40 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 #@end
 @return selfを配列の配列とみなしたときに引数rowと等しい時にtrue, それ以外にはfalseを返します。
 
-例:
-  require 'matrix'
-  a1 = [1, 2]
-  a2 = [-1.25, 2.2]
-  m = Matrix[a1, a2] # 行列
-  rows = Array[a1, a2] # 配列の配列
-  p m.compare_by_row_vectors(rows) #=> true
+#@samplecode 例
+require 'matrix'
+a1 = [1, 2]
+a2 = [-1.25, 2.2]
+m = Matrix[a1, a2] # 行列
+rows = Array[a1, a2] # 配列の配列
+p m.compare_by_row_vectors(rows) #=> true
+#@end
 
 #@end
 #@# bc-rdoc: detected missing name: inverse_from
 #@# このメソッドは 1.9.2 以降では public でないが、1.9.1以前でも
 #@# 見せないほうがよいか？
 #@# --- inverse_from(src) -> Matrix
-#@# 
+#@#
 #@# 行列1次方程式の解(の行列)を返します。
-#@# 
+#@#
 #@# 行列1次方程式の解(の行列)を返します。
 #@# 行列の関として src * X = self となるような行列Xを返します。
 #@# #@# srcが正則行列ではないでは場合には、ExceptionForMatrix::ErrNotRegularの例外が発生します。
-#@# 
+#@#
 #@# ===== 注意
-#@# 
+#@#
 #@# inverse_fromメソッドは破壊的なメソッドです。
-#@# 
+#@#
 #@# 例:
 #@#   a1 = [1, 2]
 #@#   a2 = [3, 4.5]
 #@#   m = Matrix[a1, a2]
-#@# 
+#@#
 #@#   b1 = [1, 0]
 #@#   b2 = [-1, 1]
 #@#   n = Matrix[b1, b2]
-#@# 
+#@#
 #@#   p x = m.inverse_from(n) #=> Matrix[[1, 2.0], [4, 6.5]]
 #@#   p m #=> Matrix[[1, 2.0], [4, 6.5]]
 #@#   p n * x #=> Matrix[[1, 2.0], [3, 4.5]]
@@ -1169,12 +1220,14 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 D は対角行列で、 self == V*D*W, V = W.inverse を満たします。
 D のそれぞれの対角成分が行列の固有値です。
 
-  require 'matrix'
-  m = Matrix[[1, 2], [3, 4]]
-  v, d, v_inv = m.eigensystem
-  d.diagonal? # => true
-  v.inv == v_inv # => true
-  (v * d * v_inv).round(5) == m # => true
+#@samplecode 例
+require 'matrix'
+m = Matrix[[1, 2], [3, 4]]
+v, d, v_inv = m.eigensystem
+d.diagonal? # => true
+v.inv == v_inv # => true
+(v * d * v_inv).round(5) == m # => true
+#@end
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 @see [[c:Matrix::EigenvalueDecomposition]]
@@ -1188,14 +1241,16 @@ D のそれぞれの対角成分が行列の固有値です。
 を得ることができます。これを [L, U, P] と書くと、
 L*U = P*self を満たします。
 
-  require 'matrix'
-  a = Matrix[[1, 2], [3, 4]]
-  l, u, p = a.lup
-  l.lower_triangular? # => true
-  u.upper_triangular? # => true
-  p.permutation?      # => true
-  l * u == p * a      # => true
-  a.lup.solve([2, 5]) # => Vector[(1/1), (1/2)]
+#@samplecode 例
+require 'matrix'
+a = Matrix[[1, 2], [3, 4]]
+l, u, p = a.lup
+l.lower_triangular? # => true
+u.upper_triangular? # => true
+p.permutation?      # => true
+l * u == p * a      # => true
+a.lup.solve([2, 5]) # => Vector[(1/1), (1/2)]
+#@end
 
 @see [[c:Matrix::LUPDecomposition]]
 
@@ -1207,24 +1262,26 @@ L*U = P*self を満たします。
 --- to_s -> String
 行列を文字列化し、その文字列を返します。
 
-例:
-  require 'matrix'
-  a1 = [1, 2]
-  a2 = [3, 4.5]
-  m = Matrix[a1, a2]
+#@samplecode 例
+require 'matrix'
+a1 = [1, 2]
+a2 = [3, 4.5]
+m = Matrix[a1, a2]
 
-  p m.to_s #=> "Matrix[[1, 2], [3, 4.5]]"
+p m.to_s # => "Matrix[[1, 2], [3, 4.5]]"
+#@end
 
 --- inspect -> String
 自分自身を見やすい形式に文字列化し、その文字列を返します。
 
-例:
-  require 'matrix'
-  a1 = [1, 2]
-  a2 = [3, 4.5]
-  m = Matrix[a1, a2]
+#@samplecode 例
+require 'matrix'
+a1 = [1, 2]
+a2 = [3, 4.5]
+m = Matrix[a1, a2]
 
-  p m.to_s #=> "Matrix[[1, 2], [3, 4.5]]"
+p m.to_s # => "Matrix[[1, 2], [3, 4.5]]"
+#@end
 
 
 --- clone -> Matrix
@@ -1283,7 +1340,7 @@ Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4], 
 --- to_ary -> [Matrix, Matrix, Matrix]
 --- to_a -> [Matrix, Matrix, Matrix]
 
-[[m:Matrix::EigenvalueDecomposition#v]], 
+[[m:Matrix::EigenvalueDecomposition#v]],
 [[m:Matrix::EigenvalueDecomposition#d]],
 [[m:Matrix::EigenvalueDecomposition#v_inv]]
 をこの順に並べた配列を返します。
