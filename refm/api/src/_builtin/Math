@@ -203,9 +203,9 @@ Math.sin(Math::PI/2) # => 1.0
 
 --- tan(x) -> Float
 
-x の正接関数の値をラジアンで返します。
+x の正接関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return 実数
 
