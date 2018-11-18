@@ -205,7 +205,7 @@ Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 
 --- coerce(other) -> [Complex, Complex]
 
-other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
+other を [[c:Complex]] に変換して [変換後の other, self] の配列を返します。
 
 @raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 
