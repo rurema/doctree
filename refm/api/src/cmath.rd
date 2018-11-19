@@ -273,9 +273,7 @@ z の正弦関数の値を返します。
 
 @param z 数値（ラジアンで与えます）
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 --- cos!(x) -> Float
 
@@ -305,9 +303,7 @@ z の余弦関数の値を返します。
 
 @param z 数値（ラジアンで与えます）
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 --- tan!(x) -> Float
 
@@ -335,9 +331,7 @@ z の正接関数の値を返します。
 
 @param z 数値（ラジアンで与えます）
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 --- sinh!(x) -> Float
 
