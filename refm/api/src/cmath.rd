@@ -249,10 +249,10 @@ CMath.sqrt(Complex(0, 8))# => (2.0+2.0i)
 
 --- sin!(x) -> Float
 
-実数 x の正弦関数の値をラジアンで返します。[[m:Math.#sin]] のエイリアス
+実数 x の正弦関数の値を返します。[[m:Math.#sin]] のエイリアス
 です。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @raise TypeError x に数値以外を指定した場合に発生します。
 
