@@ -27,6 +27,17 @@ json_create メソッドで使用するクラスを決定するために使用�
 
 @param identifier 識別子を指定します。
 
+#@samplecode 例
+require "json"
+require "json/add/core"
+
+JSON.create_id                   # => "json_class"
+puts (1..5).to_json              # => {"json_class":"Range","a":[1,5,false]}
+JSON.create_id = "my_json_class" # => "my_json_class"
+JSON.create_id                   # => "my_json_class"
+puts (1..5).to_json              # => {"my_json_class":"Range","a":[1,5,false]}
+#@end
+
 #@# nodoc
 #@# --- deep_const_get
 
