@@ -331,9 +331,9 @@ CMath.tan!(4 * Math::PI / 4) # => 0.0
 
 --- tan(z) -> Float | Complex
 
-z の正接関数の値をラジアンで返します。
+z の正接関数の値を返します。
 
-@param z 数値
+@param z 数値（ラジアンで与えます）
 
 #@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
