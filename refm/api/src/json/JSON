@@ -41,6 +41,12 @@ JSON ライブラリがジェネレータとして使用するモジュールを
 
 JSON ライブラリがパーサとして使用するクラスを返します。
 
+#@samplecode 例
+require "json"
+
+JSON.parser   # => JSON::Ext::Parser
+#@end
+
 #@# nodoc
 #@# --- parser=(parser)
 
