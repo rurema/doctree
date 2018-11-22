@@ -48,6 +48,12 @@ JSON ライブラリがパーサとして使用するクラスを返します。
 
 JSON ライブラリがジェネレータの状態を表すクラスとして使用するクラスを返します。
 
+#@samplecode 例
+require "json"
+
+JSON.state   # => JSON::Ext::Generator::State
+#@end
+
 #@# 他のメソッドから考えると nodoc のはず。
 #@# --- state=(state)
 
