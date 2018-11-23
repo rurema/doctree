@@ -844,6 +844,26 @@ CSV.read( path, { headers:           true,
 
 カラム区切り文字列として使用する文字列を返します。
 
+#@samplecode 例
+require "csv"
+
+users =<<-EOS
+id|first name|last name|age
+1|taro|tanaka|20
+2|jiro|suzuki|18
+3|ami|sato|19
+4|yumi|adachi|21
+EOS
+
+csv = CSV.new(users, headers: true, col_sep: "|")
+csv.col_sep # => "|"
+csv.first.to_a # => [["id", "1"], ["first name", "taro"], ["last name", "tanaka"], ["age", "20"]]
+
+csv = CSV.new(users, headers: true)
+csv.col_sep # => ","
+csv.first.to_a # => [["id|first name|last name|age", "1|taro|tanaka|20"]]
+#@end
+
 @see [[m:CSV.new]]
 
 --- convert(name)
