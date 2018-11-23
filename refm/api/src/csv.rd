@@ -1445,6 +1445,8 @@ p csv.to_a
 
 @param val 行番号を指定します。
 
+#@#noexample
+
 --- header -> String | nil
 
 利用可能な場合はヘッダを表す文字列を返します。
