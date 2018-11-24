@@ -84,6 +84,12 @@ fast_unparse は将来削除される予定です。
 
 @param object JSON 形式の文字列に変換するオブジェクトを指定します。
 
+#@samplecode 例
+require "json"
+
+JSON.fast_generate({ name: "tanaka", age: 19 }) # => "{\"name\":\"tanaka\",\"age\":19}"
+#@end
+
 --- generate(object, state = nil) -> String
 --- unparse(object, state = nil) -> String
 
