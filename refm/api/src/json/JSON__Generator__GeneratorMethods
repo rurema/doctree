@@ -41,6 +41,12 @@ alias JSON::Ext::Generator::GeneratorMethods::Float
 
 自身から生成した JSON 形式の文字列を返します。
 
+#@samplecode 例
+require "json"
+
+(1.0).to_json # => "1.0"
+#@end
+
 = module JSON::Generator::GeneratorMethods::Hash
 alias JSON::Ext::Generator::GeneratorMethods::Hash
 
