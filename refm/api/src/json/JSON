@@ -127,6 +127,16 @@ unparse は将来削除される予定です。
 
 @raise JSON::CircularDatastructure 与えられたオブジェクトが循環参照を持つ場合に発生します。
 
+#@samplecode 例
+require "json"
+
+JSON.generate([1, 2, { name: "tanaka", age: 19 }])
+# => "[1,2,{\"name\":\"tanaka\",\"age\":19}]"
+json_state = JSON::State.new(space: "@")
+JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => "[1,2,{\"name\":@\"tanaka\",\"age\":@19}]"
+#@end
+
 @see [[c:JSON::State]], [[m:JSON.#pretty_generate]]
 
 --- load(source, proc = nil, options = {}) -> object
