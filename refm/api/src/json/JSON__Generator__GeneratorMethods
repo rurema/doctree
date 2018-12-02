@@ -61,6 +61,13 @@ alias JSON::Ext::Generator::GeneratorMethods::Hash
 @param depth ネストの深さを見つけるために使用されます。
 #@end
 
+#@samplecode 例
+require "json"
+
+person = { "name" => "tanaka", "age" => 19 }
+person.to_json # => "{\"name\":\"tanaka\",\"age\":19}"
+#@end
+
 = module JSON::Generator::GeneratorMethods::Integer
 alias JSON::Ext::Generator::GeneratorMethods::Integer
 
