@@ -71,6 +71,12 @@ alias JSON::Ext::Generator::GeneratorMethods::Integer
 
 自身から生成した JSON 形式の文字列を返します。
 
+#@samplecode 例
+require "json"
+
+10.to_json # => "10"
+#@end
+
 = module JSON::Generator::GeneratorMethods::NilClass
 alias JSON::Ext::Generator::GeneratorMethods::NilClass
 
