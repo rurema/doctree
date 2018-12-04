@@ -83,6 +83,12 @@ alias JSON::Ext::Generator::GeneratorMethods::NilClass
 
 "null" という文字列を返します。
 
+#@samplecode 例
+require "json"
+
+nil.to_json # => "null"
+#@end
+
 = module JSON::Generator::GeneratorMethods::Object
 alias JSON::Ext::Generator::GeneratorMethods::Object
 
