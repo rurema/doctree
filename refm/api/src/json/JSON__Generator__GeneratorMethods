@@ -96,6 +96,23 @@ alias JSON::Ext::Generator::GeneratorMethods::Object
 このメソッドはあるオブジェクトに to_json メソッドが定義されていない場合に使用する
 フォールバックのためのメソッドです。
 
+#@samplecode 例
+require "json"
+
+class Person
+  attr :name, :age
+
+  def initialize(name, age)
+    @name, @age = name, age
+  end
+end
+
+tanaka = Person.new("tanaka", 29)
+
+tanaka.to_json # => "\"#<Person:0x00007ffdec0167c8>\""
+tanaka.method(:to_json).owner # => JSON::Ext::Generator::GeneratorMethods::Object
+#@end
+
 = module JSON::Generator::GeneratorMethods::String
 alias JSON::Ext::Generator::GeneratorMethods::String
 
