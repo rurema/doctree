@@ -583,6 +583,16 @@ Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
 
 @param args 連結したいディレクトリ名やファイル名を文字列で与えます。
 
+#@samplecode
+require 'pathname'
+
+Pathname("foo/bar").join("baz") # => #<Pathname:foo/bar/baz>
+Pathname("foo/bar/").join("baz", "qux") # => #<Pathname:foo/bar/baz/qux>
+Pathname("foo").join("bar", "/baz") # => #<Pathname:/baz>
+#@end
+
+@see [[m:Pathname#+]]
+
 --- split -> Array
 File.split(self.to_s) と同じです。
 
