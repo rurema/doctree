@@ -153,3 +153,8 @@ alias JSON::Ext::Generator::GeneratorMethods::TrueClass
 
 "true" という文字列を返します。
 
+#@samplecode 例
+require "json"
+
+true.to_json # => "true"
+#@end
