@@ -42,6 +42,13 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 @param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
+#@samplecode 例
+require "json/add/core"
+
+Date.today.to_json
+# => "{\"json_class\":\"Date\",\"y\":2018,\"m\":12,\"d\":11,\"sg\":2299161.0}"
+#@end
+
 @see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
