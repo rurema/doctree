@@ -152,4 +152,8 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 @param args 引数には何の意味もありません。
 
+#@samplecode 例
+require "json/add/core"
 
+/0\d{1,4}-\d{1,4}-\d{4}/.to_json # => "{\"json_class\":\"Regexp\",\"o\":0,\"s\":\"0\\\\d{1,4}-\\\\d{1,4}-\\\\d{4}\"}"
+#@end
