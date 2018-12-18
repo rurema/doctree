@@ -27,6 +27,13 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存していま�
 
 @param objects JSON 形式で出力したいオブジェクトを指定します。
 
+#@samplecode 例
+require "json"
+
+j([1,2,{"name" => "tanaka","age" => 19}])
+# => [1,2,{"name":"tanaka","age":19}]
+#@end
+
 @see [[m:Kernel.#p]]
 
 --- jj(*objects) -> nil
