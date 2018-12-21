@@ -63,6 +63,12 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 
 @raise ArgumentError path が \0 を含んでいると発生します。
 
+#@samplecode 例
+require "pathname"
+
+Pathname.new(__FILE__) # => #<Pathname:/path/to/file.rb>
+#@end
+
 --- getwd -> Pathname
 --- pwd   -> Pathname
 カレントディレクトリを元に Pathname オブジェクトを生成します。
