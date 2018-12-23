@@ -68,6 +68,12 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
+#@end
+
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
 
