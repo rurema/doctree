@@ -74,6 +74,8 @@ require "pathname"
 Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
 #@end
 
+@see [[m:Dir.getwd]]
+
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
 
