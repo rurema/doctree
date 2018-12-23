@@ -155,13 +155,11 @@ CMath.log(0) # => -Infinity
 
 --- log10(z) -> Float | Complex
 
-x の常用対数を返します。
+z の常用対数を返します。
 
-@param x 数値
+@param z 数値
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 #@since 1.9.2
 --- cbrt!(x) -> Float
