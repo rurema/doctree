@@ -853,6 +853,15 @@ FileUtils.rm_r(self.to_s) と同じです。
 --- delete -> 0
 self が指すディレクトリあるいはファイルを削除します。
 
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("/path/to/sample")
+pathname.exist? # => true
+pathname.unlink # => 0
+pathname.exist? # => false
+#@end
+
 #@since 1.8.5
 
 --- ascend {|pathname| ... } -> nil
