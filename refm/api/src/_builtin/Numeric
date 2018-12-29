@@ -780,13 +780,19 @@ self.to_i と同じです。
 @see [[m:Numeric#nonzero?]]
 
 --- step(limit, step = 1) {|n| ... }    -> self
-#@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
-#@since 2.1.0
+#@since 2.6.0
+--- step(limit, step = 1) -> Enumerator::ArithmeticSequence
+#@end
 --- step(by: 1, to: Float::INFINITY) {|n| ... } -> self
 --- step(by: 1, to: Float::INFINITY) -> Enumerator
+#@since 2.6.0
+--- step(by: 1, to: Float::INFINITY) -> Enumerator::ArithmeticSequence
+#@end
 --- step(by:, to: -Float::INFINITY) {|n| ... } -> self
 --- step(by:, to: -Float::INFINITY) -> Enumerator
+#@since 2.6.0
+--- step(by:, to: -Float::INFINITY) -> Enumerator::ArithmeticSequence
 #@end
 
 self からはじめ step を足しながら limit を越える
@@ -798,12 +804,17 @@ self からはじめ step を足しながら limit を越える
 
 @param step 各ステップの大きさを数値で指定します。負の数を指定することもできます。
 
-#@since 2.1.0
 @param to 引数limitと同じですが、省略した場合はキーワード引数byが正の
           数であれば [[m:Float::INFINITY]]、負の数であれば
           -[[m:Float::INFINITY]]を指定したとみなされます。
 
 @param by 引数 step と同じです。
+
+@return ブロックが指定された時は self を返します。
+@return ブロックが指定されなかった時は [[c:Enumerator]] を返します。
+#@since 2.6.0
+@return 特に limit (または to) と step の両方が Numeric または nil の時は
+        [[c:Enumerator::ArithmeticSequence]] を返します。
 #@end
 
 @raise ArgumentError step に 0 を指定した場合に発生します。
@@ -831,13 +842,11 @@ self からはじめ step を足しながら limit を越える
   7
   6
 
-#@since 2.1.0
   3.step(by:2, to:10){|n| p n}
   3
   5
   7
   9
-#@end
 
 注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
 0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
@@ -855,8 +864,6 @@ self からはじめ step を足しながら limit を越える
        1.4   <- 1.5 が表示されない
 
 @see [[m:Integer#downto]]
-
-#@end
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 

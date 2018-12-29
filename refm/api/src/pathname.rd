@@ -68,6 +68,14 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
+#@end
+
+@see [[m:Dir.getwd]]
+
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
 
@@ -548,7 +556,7 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+@param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @see [[m:File.utime]]
 
@@ -947,7 +955,7 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 --- sub_ext(replace) -> Pathname
 
-拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクト返します。
+拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクトを返します。
 
 自身が拡張子を持たない場合は、与えられた文字列を拡張子として付加します。
 

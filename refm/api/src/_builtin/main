@@ -78,7 +78,7 @@ p public_methods(false) - basic_public_methods
 
 引数 modules で指定したモジュールを後ろから順番にインクルードします。
 
-@param moddules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
+@param modules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
 @raise ArgumentError 継承関係が循環してしまうような include を行った場
                      合に発生します。

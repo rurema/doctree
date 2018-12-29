@@ -31,6 +31,23 @@ include Enumerable
 @param header_row ヘッダ行である場合は真を指定します。そうでない場合は偽を指定します。
                   デフォルトは偽です。
 
+#@samplecode 例 header_row = true のケース
+require "csv"
+
+header = CSV::Row.new(["header1", "header2"], [], header_row: true)
+table = CSV::Table.new([header])
+table.to_a # => [["header1", "header2"]]
+#@end
+
+#@samplecode 例 header_row = false のケース
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+#@end
+
 @see [[m:CSV::Row#header_row?]], [[m:CSV::Row#field_row?]]
 
 == Instance Methods
@@ -211,6 +228,16 @@ row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
 評価した結果が真である場合に、その組を自身から削除します。
 
 @return メソッドチェーンのために自身を返します。
+
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], ["valid1", "valid2", "invalid", "valid4"])
+
+row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header3":"invalid" "header4":"valid4">
+row.delete_if { |header, field| field == "invalid" }
+row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header4":"valid4">
+#@end
 
 --- each{|header, field| ... } -> self
 

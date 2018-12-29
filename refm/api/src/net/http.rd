@@ -857,6 +857,38 @@ nilを設定するとタイムアウトしなくなります。
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
 
+#@since 2.6.0
+--- write_timeout -> Numeric|nil
+書き込み([[man:write(2)]]) 一回でブロックしてよい最大秒数
+を返します。
+
+この秒数たっても書き込めなければ例外 [[c:Net::WriteTimeout]]
+を発生します。
+
+Windows では Net::WriteTimeout は発生しません。
+
+デフォルトは 60 (秒)です。
+
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#write_timeout=]]
+
+--- write_timeout=(seconds)
+
+書き込み([[man:write(2)]]) 一回でブロックしてよい最大秒数を
+設定します。
+
+Float や Rational も設定できます。
+
+この秒数たっても書き込めなければ例外 [[c:Net::WriteTimeout]]
+を発生します。
+
+Windows では Net::WriteTimeout は発生しません。
+
+デフォルトは 60 (秒)です。
+
+@param second 待つ秒数を指定します。
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#write_timeout]]
+#@end
+
 #@since 2.0.0
 --- keep_alive_timeout -> Integer
 以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
@@ -1715,11 +1747,21 @@ key は大文字小文字を区別しません。
 
 ヘッダフィールドの数を返します。
 
---- basic_auth(account, password) -> ()
+#@#noexample
+
+--- basic_auth(account, password) -> [String]
 Authorization: ヘッダを BASIC 認証用にセットします。
 
 @param account アカウント名を文字列で与えます。
 @param password パスワードを文字列で与えます。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
+#@end
 
 --- chunked? -> bool
 Transfer-Encoding: ヘッダフィールドが "chunked" である
@@ -1727,6 +1769,16 @@ Transfer-Encoding: ヘッダフィールドが "chunked" である
 
 Transfer-Encoding: ヘッダフィールドが存在しなかったり、
 "chunked" 以外である場合には偽を返します。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.chunked? # => false
+req["Transfer-Encoding"] = "chunked"
+req.chunked? # => true
+#@end
 
 --- content_type -> String|nil
 "text/html" のような Content-Type を表す
@@ -1858,6 +1910,14 @@ key は大文字小文字を区別しません。
 --- method -> String
 
 リクエストの HTTP メソッドを文字列で返します。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.method # => "GET"
+#@end
 
 --- proxy_basic_auth(account, password) -> ()
 

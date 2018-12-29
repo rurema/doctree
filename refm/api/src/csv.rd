@@ -448,11 +448,40 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
 場合は [[m:Object#dup]] で複製してください。
 
 @param str 文字列を指定します。デフォルトは空文字列です。
+#@if( version >= "2.5.0" and version < "2.6.0" )
+           2.5.0 では不具合により引数 str を与えた場合の動作に問題があ
+           るため、指定したい場合は csv gem を 1.0.1 以上に更新する必
+           要があります。
+#@end
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると出力のエンコーディングを指定することができます。
                ASCII と互換性の無い文字エンコーディングを持つ文字列を出力する場合は、このヒントを
                指定する必要があります。
+
+#@samplecode 例
+require "csv"
+
+text =<<-EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+EOS
+
+csv = CSV.generate(text, :headers => true) do |csv|
+  csv.add_row(["5", "saburo", "kondo", "34"])
+end
+
+print csv
+# => id,first name,last name,age
+# 1,taro,tanaka,20
+# 2,jiro,suzuki,18
+# 3,ami,sato,19
+# 4,yumi,adachi,21
+# 5,saburo,kondo,34
+#@end
 
 @see [[m:CSV.new]]
 
@@ -767,29 +796,73 @@ CSV.read( path, { headers:           true,
 
 [[m:IO#binmode]] に委譲します。
 
+#@#noexample IO#binmode の例を参照
+
+@see [[m:IO#binmode]]
+
 --- binmode? -> bool
 
 [[m:IO#binmode?]] に委譲します。
+
+#@#noexample IO#binmode? の例を参照
+
+@see [[m:IO#binmode?]]
 
 --- close -> nil
 
 [[m:IO#close]] に委譲します。
 
+#@#noexample IO#close の例を参照
+
+@see [[m:IO#close]]
+
 --- close_read -> nil
 
 [[m:IO#close_read]] に委譲します。
+
+#@#noexample IO#close_read の例を参照
+
+@see [[m:IO#close_read]]
 
 --- close_write -> nil
 
 [[m:IO#close_write]] に委譲します。
 
+#@#noexample IO#close_write の例を参照
+
+@see [[m:IO#close_write]]
+
 --- closed? -> bool
 
 [[m:IO#closed?]] に委譲します。
 
+#@#noexample IO#closed? の例を参照
+
+@see [[m:IO#closed?]]
+
 --- col_sep -> String
 
 カラム区切り文字列として使用する文字列を返します。
+
+#@samplecode 例
+require "csv"
+
+users =<<-EOS
+id|first name|last name|age
+1|taro|tanaka|20
+2|jiro|suzuki|18
+3|ami|sato|19
+4|yumi|adachi|21
+EOS
+
+csv = CSV.new(users, headers: true, col_sep: "|")
+csv.col_sep # => "|"
+csv.first.to_a # => [["id", "1"], ["first name", "taro"], ["last name", "tanaka"], ["age", "20"]]
+
+csv = CSV.new(users, headers: true)
+csv.col_sep # => ","
+csv.first.to_a # => [["id|first name|last name|age", "1|taro|tanaka|20"]]
+#@end
 
 @see [[m:CSV.new]]
 
@@ -876,6 +949,10 @@ csv.encoding # => #<Encoding:UTF-8>
 
 [[m:IO#eof]], [[m:IO#eof?]] に委譲します。
 
+#@#noexample IO#eof, IO#eof? の例を参照
+
+@see [[m:IO#eof]], [[m:IO#eof?]]
+
 --- external_encoding -> Encoding | nil
 
 [[m:IO#external_encoding]] に委譲します。
@@ -887,6 +964,26 @@ csv.encoding # => #<Encoding:UTF-8>
 --- field_size_limit -> Integer
 
 フィールドサイズの最大値を返します。
+
+#@samplecode 例
+require "csv"
+
+csv = CSV.new(DATA)
+csv.field_size_limit # => nil
+p csv.read # => [["a", "b"], ["\n2\n2\n", ""]]
+
+DATA.rewind
+csv = CSV.new(DATA, field_size_limit: 4)
+p csv.field_size_limit # => 4
+csv.read # => #<CSV::MalformedCSVError: Field size exceeded on line 2.>
+
+__END__
+"a","b"
+"
+2
+2
+",""
+#@end
 
 @see [[m:CSV.new]]
 
@@ -1010,14 +1107,26 @@ csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" r
 
 [[m:IO#internal_encoding]] に委譲します。
 
+#@#noexample IO#internal_encoding の例を参照
+
+@see [[m:IO#internal_encoding]]
+
 --- ioctl(cmd, arg = 0)    -> Integer
 
 [[m:IO#ioctl]] に委譲します。
+
+#@#noexample IO#ioctl の例を参照
+
+@see [[m:IO#ioctl]]
 
 --- isatty    -> bool
 --- tty?      -> bool
 
 [[m:IO#isatty]], [[m:IO#tty?]] に委譲します。
+
+#@#noexample IO#isatty, IO#tty? の例を参照
+
+@see [[m:IO#isatty]], [[m:IO#tty?]]
 
 --- lineno -> Integer
 
@@ -1037,18 +1146,34 @@ csv.lineno # => 1
 
 [[m:IO#path]] に委譲します。
 
+#@#noexample IO#path の例を参照
+
+@see [[m:IO#path]]
+
 --- pid    -> Integer | nil
 
 [[m:IO#pid]] に委譲します。
+
+#@#noexample IO#pid の例を参照
+
+@see [[m:IO#pid]]
 
 --- pos    -> Integer
 --- tell   -> Integer
 
 [[m:IO#pos]], [[m:IO#tell]] に委譲します。
 
+#@#noexample IO#pos, IO#tell  の例を参照
+
+@see [[m:IO#pos]], [[m:IO#tell]]
+
 --- pos=(n)
 
 [[m:IO#pos=]] に委譲します。
+
+#@#noexample IO#pos= の例を参照
+
+@see [[m:IO#pos=]]
 
 --- quote_char -> String
 
@@ -1101,6 +1226,10 @@ row2_1,row2_2
 
 [[m:IO#reopen]] に委譲します。
 
+#@#noexample IO#reopen の例を参照
+
+@see [[m:IO#reopen]]
+
 --- return_headers? -> bool
 
 ヘッダを返す場合は、真を返します。
@@ -1142,6 +1271,10 @@ csv.read    # => [["header1", "header2"], ["row1_1", "row1_2"]]
 --- seek(offset, whence = IO::SEEK_SET)    -> 0
 
 [[m:IO#seek]] に委譲します。
+
+#@#noexample IO#seek の例を参照
+
+@see [[m:IO#seek]]
 
 --- shift    -> Array | CSV::Row
 --- gets     -> Array | CSV::Row
@@ -1188,25 +1321,49 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [[m:IO#stat]] に委譲します。
 
+#@#noexample IO#stat の例を参照
+
+@see [[m:IO#stat]]
+
 --- string -> String
 
 [[m:StringIO#string]] に委譲します。
+
+#@#noexample StringIO#string の例を参照
+
+@see [[m:StringIO#string]]
 
 --- sync -> bool
 
 [[m:IO#sync]] に委譲します。
 
+#@#noexample IO#sync の例を参照
+
+@see [[m:IO#sync]]
+
 --- sync=(newstate)
 
 [[m:IO#sync=]] に委譲します。
+
+#@#noexample IO#sync= の例を参照
+
+@see [[m:IO#sync=]]
 
 --- to_io -> self
 
 [[m:IO#to_io]] に委譲します。
 
+#@#noexample IO#to_io の例を参照
+
+@see [[m:IO#to_io]]
+
 --- truncate(path, length)    -> 0
 
 [[m:File#truncate]] に委譲します。
+
+#@#noexample File#truncate の例を参照
+
+@see [[m:File#truncate]]
 
 --- unconverted_fields? -> bool
 
@@ -1246,10 +1403,11 @@ csv.convert do |field,field_info|
   p field_info.index
   Date.parse(field)
 end
-csv.first
+p csv.first
 
 # => 0
 # => 1
+# => #<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>>
 #@end
 
 --- index=(val)
@@ -1257,6 +1415,8 @@ csv.first
 インデックスの値をセットします。
 
 @param val インデックスの値を指定します。
+
+#@#noexample
 
 --- line -> Integer
 
@@ -1270,12 +1430,13 @@ csv.convert do |field,field_info|
   p field_info.line
   Date.parse(field)
 end
-csv.to_a
+p csv.to_a
 
 # => 2
 # => 2
 # => 3
 # => 3
+# => [#<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)> "date3":nil>, ...]
 #@end
 
 --- line=(val)
@@ -1283,6 +1444,8 @@ csv.to_a
 行番号をセットします。
 
 @param val 行番号を指定します。
+
+#@#noexample
 
 --- header -> String | nil
 
@@ -1296,10 +1459,11 @@ csv.convert do |field,field_info|
   p field_info.header
   Date.parse(field)
 end
-csv.first
+p csv.first
 
 # => "date1"
 # => "date2"
+# => #<CSV::Row "date1":#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)> "date2":#<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>>
 #@end
 
 --- header=(val)
@@ -1307,6 +1471,8 @@ csv.first
 ヘッダを表す文字列をセットします。
 
 @param val ヘッダを表す文字列を指定します。
+
+#@#noexample
 
 = class CSV::MalformedCSVError < RuntimeError
 

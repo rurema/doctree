@@ -307,8 +307,13 @@ Hash を options として渡すことで、起動される子プロセスの
   これを true に設定すると
   リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
   ファイルデスクリプタをすべて閉じます。
+#@since 2.6.0
+  false がデフォルトです。
+#@else
+#@# 2.0.0 から 2.5 までは true がデフォルト
   true がデフォルトです。
-  
+#@end
+
 === option引数によるリダイレクトの概要
 Hash のキー(子プロセス側)には以下のいずれかが指定できます。
   * 単一のファイルデスクリプタ
@@ -423,13 +428,28 @@ stderr と stdout を混ぜる例を以下に示します。
   io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
   p io.read #=> "out\nerr\n
 
+#@since 2.6.0
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
+#@else
 spawn と IO.popen では
 デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+#@end
 「:close_others」オプションでこの挙動を制御できます。
 標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
 限り、このオプションの影響を受けません。
+
+「:close_others」とは無関係に ruby が open する IO には
+デフォルトでは close_on_exec が設定されていて、自動的に
+閉じられることに注意してください。
+
+#@since 2.6.0
+  pid = spawn(command, :close_others=>true)  # close 3,4,5,...
+  pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
+#@else
   pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
   pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+#@end
 
 これを利用して spawn を [[m:IO.popen]] のように使うことができます。
   # similar to r = IO.popen(command)
@@ -717,6 +737,13 @@ mode は以下の三つのうちのいずれかです。
 きます (整数なら File::BINARY )。この場合、バイナリモードでオープン
 します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
 合に限ります)
+
+#@since 2.6.0
+"w" に対しては "x" フラグを ("wx"や"wb+x"のように) つけることが
+できます (整数なら File::EXCL)。
+この場合、ファイルがすでに存在すると Errno::EEXIST が発生します。
+ただし、全ての種類のストリームでサポートされているとは限りません (例えばパイプ)。
+#@end
 
 === Universal Newline
 改行をLFに揃えます。一言で言えばPEP:278 [[url:https://www.python.org/dev/peps/pep-0278/]]のことです。
@@ -1578,7 +1605,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 
 @see [[m:Object#to_a]],[[m:Object#to_ary]],[[c:Array]]
 
+#@since 2.6.0
+--- Float(arg, exception: true) -> Float | nil
+#@else
 --- Float(arg) -> Float
+#@end
 
 引数を浮動小数点数([[c:Float]])に変換した結果を返します。
 
@@ -1588,6 +1619,10 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 メソッド Float は文字列に対し [[m:String#to_f]] よりも厳密な変換を行います。
 
 @param arg 変換対象のオブジェクトです。
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 @raise ArgumentError 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
 @raise TypeError nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
                  to_f が浮動小数点数を返さなかった場合に発生します。
@@ -1617,7 +1652,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 
 @see [[m:String#to_f]],[[c:Float]]
 
+#@since 2.6.0
+--- Integer(arg, base = 0, exception: true) -> Integer | nil
+#@else
 --- Integer(arg, base = 0) -> Integer
+#@end
 
 引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
 
@@ -1635,6 +1674,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
             ら基数を判断します。その場合に認識できるプリフィクスは、0b
             (2 進数)、0 (8 進数)、0o (8 進数)、0d (10 進数)、0x (16 進
             数) です。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 整数と見なせない文字列を引数に指定した場合に発生します。
 @raise TypeError メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
@@ -2358,8 +2402,13 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 @see [[m:Kernel.#__method__]]
 
+#@since 2.6.0
+--- Complex(r, i = 0, exception: true) -> Complex | nil
+--- Complex(s, exception: true)        -> Complex | nil
+#@else
 --- Complex(r, i = 0) -> Complex
 --- Complex(s)        -> Complex
+#@end
 
 実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
 
@@ -2368,6 +2417,11 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 @param i 生成する複素数の虚部。省略した場合は 0 です。
 
 @param s 生成する複素数を表す文字列。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 
@@ -2392,7 +2446,11 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 [注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
 
+#@since 2.6.0
+--- Rational(x, y = 1, exception: true) -> Rational | nil
+#@else
 --- Rational(x, y = 1) -> Rational
+#@end
 
 引数を有理数([[c:Rational]])に変換した結果を返します。
 
@@ -2400,6 +2458,11 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 @param y 変換対象のオブジェクトです。省略した場合は x だけを用いて
          [[c:Rational]] オブジェクトを作成します。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 

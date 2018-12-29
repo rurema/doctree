@@ -106,7 +106,6 @@ Ruby の文法:
   * [[d:glossary]]
   * [[d:symref]]
 #@##@# 専門的
-  * [[d:spec/bnf]]
   * [[d:marshal_format]]
 #@##@# マニュアル
 #@#  * [[c:Rubyに関する書籍]]

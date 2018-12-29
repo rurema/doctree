@@ -13,11 +13,11 @@ include Math
 [[c:Math]] モジュールの複素数版です。同名のメソッドを複素数対応します。
 従来の計算結果が必要な場合は、「メソッド名!」の形式で呼び出します。
 
-例:
-
-  require "cmath"
-  CMath.sqrt(-9)  # => (0+3.0i)
-  CMath.sqrt!(4)  # => 2.0
+#@samplecode 例
+require "cmath"
+CMath.sqrt(-9)# => (0+3.0i)
+CMath.sqrt!(4)# => 2.0
+#@end
 
 == Module Functions
 
@@ -32,13 +32,13 @@ include Math
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.exp!(0)   # => 1
-  CMath.exp!(0.5) # => Math.sqrt(Math::E)
-  CMath.exp!(1)   # => Math::E
-  CMath.exp!(2)   # => Math::E ** 2
+#@samplecode 例
+require "cmath"
+CMath.exp!(0) # => 1
+CMath.exp!(0.5) # => Math.sqrt(Math::E)
+CMath.exp!(1) # => Math::E
+CMath.exp!(2) # => Math::E ** 2
+#@end
 
 @see [[m:Math.#exp]]
 
@@ -52,12 +52,12 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 @raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
-例:
-
-  require "cmath"
-  CMath.exp(Complex(0, 0))              # => (1.0+0.0i)
-  CMath.exp(Complex(0, Math::PI))       # => (-1.0+1.2246063538223773e-16i)
-  CMath.exp(Complex(0, Math::PI / 2.0)) # => (6.123031769111886e-17+1.0i)
+#@samplecode 例
+require "cmath"
+CMath.exp(Complex(0, 0))# => (1.0+0.0i)
+CMath.exp(Complex(0, Math::PI)) # => (-1.0+1.2246063538223773e-16i)
+CMath.exp(Complex(0, Math::PI / 2.0)) # => (6.123031769111886e-17+1.0i)
+#@end
 
 --- log!(x) -> Float
 --- log!(x, b) -> Float
@@ -74,13 +74,13 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.log!(Math::E) # => 1.0
-  CMath.log!(1)       # => 0.0
-  CMath.log!(100, 10) # => 2.0
-  CMath.log!(-1.0)    # => Math::DomainError
+#@samplecode 例
+require "cmath"
+CMath.log!(Math::E) # => 1.0
+CMath.log!(1) # => 0.0
+CMath.log!(100, 10) # => 2.0
+CMath.log!(-1.0)# => Math::DomainError
+#@end
 
 @see [[m:Math.#log]]
 
@@ -97,11 +97,11 @@ z の対数を返します。
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 #@end
 
-例:
-
-  require "cmath"
-  CMath.log(Complex(0, 0)) # => -Infinity+0.0i
-  CMath.log(0)             # => -Infinity
+#@samplecode 例
+require "cmath"
+CMath.log(Complex(0, 0)) # => -Infinity+0.0i
+CMath.log(0) # => -Infinity
+#@end
 
 #@until 1.9.3
 [注意] 1.9.2 以下では z に 0+0i を与えると [[c:Math::DomainError]] が発
@@ -155,13 +155,11 @@ z の対数を返します。
 
 --- log10(z) -> Float | Complex
 
-x の常用対数を返します。
+z の常用対数を返します。
 
-@param x 数値
+@param z 数値
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 #@since 1.9.2
 --- cbrt!(x) -> Float
@@ -177,11 +175,11 @@ x の常用対数を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.cbrt!(8.0)  # => 2.0
-  CMath.cbrt!(-8.0) # => -2.0
+#@samplecode 例
+require "cmath"
+CMath.cbrt!(8.0)# => 2.0
+CMath.cbrt!(-8.0) # => -2.0
+#@end
 
 @see [[m:Math.#cbrt]]
 
@@ -196,8 +194,10 @@ z の立方根の内、主値を返します。
 @raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
-  require "cmath"
-  CMath.cbrt(-8)    # => (1.0000000000000002+1.7320508075688772i)
+#@samplecode 例
+require "cmath"
+CMath.cbrt(-8)# => (1.0000000000000002+1.7320508075688772i)
+#@end
 
 #@until 1.9.3
 [注意] 1.9.2 以下では負の実数を引数に与えると、主値以外の立方根(実数解)を
@@ -220,11 +220,11 @@ z の立方根の内、主値を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.sqrt!(4.0) # => 2.0
-  CMath.sqrt!(9.0) # => 3.0
+#@samplecode 例
+require "cmath"
+CMath.sqrt!(4.0) # => 2.0
+CMath.sqrt!(9.0) # => 3.0
+#@end
 
 @see [[m:Math.#sqrt]]
 
@@ -238,12 +238,12 @@ z の平方根を返します。
 @raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
-例:
-
-  require "cmath"
-  CMath.sqrt(-1)               # => (0+1.0i)
-  CMath.sqrt(1)                # => 1.0
-  CMath.sqrt(Complex(0, 8))    # => (2.0+2.0i)
+#@samplecode 例
+require "cmath"
+CMath.sqrt(-1) # => (0+1.0i)
+CMath.sqrt(1)# => 1.0
+CMath.sqrt(Complex(0, 8))# => (2.0+2.0i)
+#@end
 
 --- sin!(x) -> Float
 
@@ -256,12 +256,12 @@ z の平方根を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.sin!(0 * Math::PI / 4) # => 0.0
-  CMath.sin!(1 * Math::PI / 4) # => 0.7071067811865475
-  CMath.sin!(2 * Math::PI / 4) # => 1.0
+#@samplecode 例
+require "cmath"
+CMath.sin!(0 * Math::PI / 4) # => 0.0
+CMath.sin!(1 * Math::PI / 4) # => 0.7071067811865475
+CMath.sin!(2 * Math::PI / 4) # => 1.0
+#@end
 
 @see [[m:Math.#sin]]
 
@@ -288,12 +288,12 @@ z の正弦関数の値をラジアンで返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.cos!(0 * Math::PI / 4) # => 1.0
-  CMath.cos!(1 * Math::PI / 4) # => 0.7071067811865476
-  CMath.cos!(4 * Math::PI / 4) # => -1.0
+#@samplecode 例
+require "cmath"
+CMath.cos!(0 * Math::PI / 4) # => 1.0
+CMath.cos!(1 * Math::PI / 4) # => 0.7071067811865476
+CMath.cos!(4 * Math::PI / 4) # => -1.0
+#@end
 
 @see [[m:Math.#cos]]
 
@@ -318,12 +318,12 @@ z の余弦関数の値をラジアンで返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-例:
-
-  require "cmath"
-  CMath.tan!(0 * Math::PI / 4) # => 0.0
-  CMath.tan!(1 * Math::PI / 4) # => 1.0
-  CMath.tan!(4 * Math::PI / 4) # => 0.0
+#@samplecode 例
+require "cmath"
+CMath.tan!(0 * Math::PI / 4) # => 0.0
+CMath.tan!(1 * Math::PI / 4) # => 1.0
+CMath.tan!(4 * Math::PI / 4) # => 0.0
+#@end
 
 @see [[m:Math.#tan]]
 
