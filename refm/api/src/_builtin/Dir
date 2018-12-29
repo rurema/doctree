@@ -207,6 +207,9 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.children('.') #=> ["bar", "foo"]
 
+#@since 2.6.0
+@see [[m:Dir#children]]
+#@end
 @see [[m:Dir.each_child]]
 @see [[m:Dir.entries]]
 #@end
@@ -272,6 +275,9 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @see [[m:Dir.foreach]]
 @see [[m:Dir.children]]
+#@since 2.6.0
+@see [[m:Dir#each_child]]
+#@end
 #@end
 --- getwd    -> String
 --- pwd      -> String
@@ -450,6 +456,9 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
   "bar"
   "foo"
 
+#@since 2.6.0
+@see [[m:Dir#each_child]]
+#@end
 --- path    -> String
 --- to_path -> String
 
@@ -556,4 +565,41 @@ self に関連づけられたファイル記述子を表す整数を返します
 @raise IOError 既に自身が close している場合に発生します。
 
 @see [[m:IO#fileno]]
+#@end
+#@since 2.6.0
+--- each_child {|item| ... }    -> self
+--- each_child                  -> Enumerator
+
+ディレクトリの "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[[c:Enumerator]]
+オブジェクトを返します。
+
+@raise IOError 既に self が close している場合に発生します。
+
+#@samplecode 例
+Dir.open('.').each_child{|f|
+  p f
+}
+#=> "bar"
+#   "foo"
+#@end
+
+@see [[m:Dir#each]]
+@see [[m:Dir.each_child]]
+--- children -> [String]
+ディレクトリのファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+@raise IOError 既に self が close している場合に発生します。
+
+#@samplecode 例
+Dir.open('.'){|d|
+  p d.children # => ["bar", "foo"]
+}
+#@end
+
+@see [[m:Dir.children]]
 #@end
