@@ -1373,15 +1373,12 @@ key が見つからなかった場合は、nil を返します。
 
 #@end
 
-#@since 1.8.7
-#@since 1.9.1
---- select                        -> Enumerator
-#@else
---- select                        -> Enumerable::Enumerator
-#@end
-#@end
-#@since 1.9.1
+--- select                       -> Enumerator
 --- select {|key, value| ... }   -> Hash
+#@since 2.6.0
+--- filter                       -> Enumerator
+--- filter {|key, value| ... }   -> Hash
+#@end
 
 key, value のペアについてブロックを評価し，真となるペアだけを含む
 ハッシュを生成して返します。
@@ -1389,20 +1386,6 @@ key, value のペアについてブロックを評価し，真となるペアだ
    h = { "a" => 100, "b" => 200, "c" => 300 }
    h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
    h.select {|k,v| v < 200}  #=> {"a" => 100}
-
-#@else
---- select {|key, value| ... }   -> Array
-
-key, value のペアについてブロックを評価し、真となるペアだけを含む
-配列を生成して返します。
-
-生成される配列は、[key, value] を要素とする配列です。
-
-   h = { "a" => 100, "b" => 200, "c" => 300 }
-   h.select {|k,v| k > "a"}  #=> [["b", 200], ["c", 300]]
-   h.select {|k,v| v < 200}  #=> [["a", 100]]
-
-#@end
 
 #@since 1.9.1
 --- to_s     -> String

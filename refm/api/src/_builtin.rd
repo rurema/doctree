@@ -29,6 +29,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Encoding__Converter)
 #@include(_builtin/Enumerable)
 #@include(_builtin/Enumerator)
+#@since 2.6.0
+#@include(_builtin/Enumerator__ArithmeticSequence)
+#@end
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
 #@end

@@ -161,25 +161,22 @@ self を返します。
         # => -:1: unhandled exception
 #@end
 
-#@since 1.8.7
-#@since 1.9.1
 --- find_all  -> Enumerator
 --- select    -> Enumerator
-#@else
---- find_all  -> Enumerable::Enumerator
---- select    -> Enumerable::Enumerator
-#@end
+#@since 2.6.0
+--- filter    -> Enumerator
 #@end
 --- find_all {|item| ... } -> [object]
 --- select {|item| ... }   -> [object]
+#@since 2.6.0
+--- filter {|item| ... }   -> [object]
+#@end
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
-#@since 1.9.1
 ブロックを省略した場合は、各要素に対しブロックを評価し
 真になった値の配列を返すような [[c:Enumerator]] を返します。
-#@end
 
 例:
   (1..10).find_all                        # => #<Enumerator: 1..10:find_all>

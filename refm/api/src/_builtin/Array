@@ -2198,6 +2198,10 @@ srand()が有効です。
 @see [[m:Array#select!]]
 --- select! {|item| block } -> self | nil
 --- select! -> Enumerator
+#@since 2.6.0
+--- filter! {|item| block } -> self | nil
+--- filter! -> Enumerator
+#@end
 
 ブロックが false を返した要素を自身から削除します。
 変更があった場合は self を、
