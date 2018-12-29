@@ -122,7 +122,7 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
     * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
 #@end
 #@since 2.6.0
-    * jit             MJIT (default: disabled)
+    * jit             JIT (default: disabled)
 #@end
 //}
 
@@ -318,23 +318,23 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   コンパイラそのものをデバッグする人以外には必要ないと思います。
 
 #@since 2.6.0
-==== MJIT のオプション (実験的)
+==== JIT のオプション (実験的)
 
 : --jit
 
-  デフォルトの設定でMJITを有効にします。
+  デフォルトの設定でJITを有効にします。
 
 : --jit-[option]
 
-  指定した設定でMJITを有効にします。
+  指定した設定でJITを有効にします。
 
 : --jit-warnings
 
-  MJITの警告の出力を有効にします。
+  JITの警告の出力を有効にします。
 
 : --jit-debug
 
-  MJITのデバッグを有効にします。(非常に遅くなります。)
+  JITのデバッグを有効にします。(非常に遅くなります。)
 
 : --jit-wait
 
