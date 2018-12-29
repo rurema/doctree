@@ -72,7 +72,7 @@ pass が指定された場合は、秘密鍵を pass を使って復号化しま
 @param size 鍵を生成する時の素数のビット数
 @param obj 鍵データ
 @param pass 鍵データに設定したパスフレーズ
-@raise OpenSSL::PKey::RSAError 鍵の読み込みに失敗した場合に発生します。
+@raise OpenSSL::PKey::DSAError 鍵の読み込みに失敗した場合に発生します。
 
 == Instance Methods
 

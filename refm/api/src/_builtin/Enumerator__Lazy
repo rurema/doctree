@@ -16,6 +16,13 @@ map や select などのメソッドの遅延評価版を提供するための�
 #@end
  * take, take_while
  * drop, drop_while
+ * slice_before, slice_after, slice_when
+#@since 2.4.0
+ * chunk, chunk_while
+ * uniq
+#@else
+ * chunk
+#@end
  * zip (※互換性のため、ブロックを渡さないケースのみlazy)
 
 Lazyオブジェクトは、[[m:Enumerable#lazy]]メソッドによって生成されます。
@@ -374,3 +381,17 @@ Enumerator を返す」ようなメソッドを定義するときによく使わ
   # Lazy#to_enum のおかげで、repeat の返り値は
   # もとが Enumerator のときは Enumerator に、
   # もとが Lazy のときは Lazy になる
+
+#@since 2.4.0
+--- chunk_while {|elt_before, elt_after| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#chunk_while]] と同じですが、Enumerator ではなく Enumerator::Lazy を返します。
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+--- uniq               -> Enumerator::Lazy
+--- uniq {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#uniq]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+#@end

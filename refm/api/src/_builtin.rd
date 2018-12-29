@@ -44,6 +44,9 @@ require を書かなくても使うことができます。
 #@end
 #@include(_builtin/Float)
 #@include(_builtin/FloatDomainError)
+#@since 2.5.0
+#@include(_builtin/FrozenError)
+#@end
 #@include(_builtin/GC)
 #@include(_builtin/GC__Profiler)
 #@include(_builtin/Hash)

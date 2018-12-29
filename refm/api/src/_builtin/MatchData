@@ -232,12 +232,22 @@ self の内容を人間に読みやすい文字列にして返します。
 
 0 番目は [[m:$&]] のようにマッチした文字列全体を表します。
 
+#@since 2.4.0
+@param index インデックスを整数またはシンボル(名前付きキャプチャの場合)で 0 個以上指定します。
+#@else
 @param index インデックスを整数で 0 個以上指定します。
+#@end
 
   m = /(foo)(bar)(baz)/.match("foobarbaz")
   # same as m.to_a.values_at(...)
   p m.values_at(0, 1, 2, 3, 4)      #=> ["foobarbaz", "foo", "bar", "baz", nil]
   p m.values_at(-1, -2, -3, -4, -5) #=> ["baz", "bar", "foo", nil, nil]
+
+#@since 2.4.0
+  m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
+  m.to_a               #=> ["1 + 2", "1", "+", "2"]
+  m.values_at(:a, :b, :op) #=> ["1", "2", "+"]
+#@end
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 

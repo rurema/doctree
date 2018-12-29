@@ -58,13 +58,6 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返しま�
   ver1.eql?(ver2)                     # => true
   ver1.eql?(ver3)                     # => false
 
---- ints -> [Integer]
-
-バージョンを数値の配列で返します。
-
-@see [[m:Gem::Version#build_array_from_version_string]]
-
-
 --- marshal_dump -> Array
 
 完全なオブジェクトではなく、バージョン文字列のみダンプします。
@@ -75,20 +68,13 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返しま�
 
 @param array バージョン情報を含む配列を指定します。
 
---- normalize -> ()
-
-内部で保持しているバージョン情報から末尾のゼロを削除します。
-
---- to_ints -> [Integer]
-
-バージョン情報を数値の配列にして返します。
-
 --- to_s -> String
 
 バージョン情報を文字列として返します。
 
---- to_yaml_properties -> [String]
-#@todo
+#@#--- to_yaml_properties -> [String]
+#@#
+#@# :nodoc:
 
 --- version -> String
 
@@ -98,11 +84,43 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返しま�
 
 self のバージョン情報を書き換えます。
 
---- yaml_initialize(tag, values) -> String
-#@todo
-
-
+#@#--- yaml_initialize(tag, values) -> String
+#@#
+#@# :nodoc:
 
 #@#--- Gem::Version::Requirement
 #@todo Gem::Requirement に書く
 
+--- prerelease? -> bool
+
+self がプレリリースと思われる文字を含むバージョンかどうかを返します。
+
+#@samplecode 例
+Gem::Version.new('1.2.0a').prerelease? # => true
+Gem::Version.new('1.2.0').prerelease?  # => false
+#@end
+
+@see [[m:Gem::Version#release]]
+
+--- release -> Gem::Version
+
+self をリリースバージョンにした [[c:Gem::Version]] オブジェクトを返します。
+
+プレリリースではないバージョンであれば self を返します。
+
+#@samplecode 例
+Gem::Version.new('1.2.0a').release # => #<Gem::Version "1.2.0">
+Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
+#@end
+
+@see [[m:Gem::Version#prerelease?]]
+
+== Constants
+
+#@#--- VERSION_PATTERN -> String
+#@#
+#@# :nodoc:
+#@#
+#@#--- ANCHORED_VERSION_PATTERN -> Regexp
+#@#
+#@# :nodoc:

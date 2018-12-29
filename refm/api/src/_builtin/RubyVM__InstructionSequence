@@ -11,7 +11,7 @@ RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを�
 VM の命令シーケンスの一覧はRuby のソースコード中の insns.def から参照で
 きます。
 
- * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/insns.def?view=markup]]
+ * [[url:https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/insns.def?view=markup]]
 
 #@# The instruction sequence results will almost certainly change as Ruby
 #@# changes, so example output in this documentation may be different from what
@@ -223,6 +223,11 @@ options で指定します。
 
 self の情報をラベルとパスを含んだ人間に読みやすい文字列にして返します。
 
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+iseq.inspect # => "<RubyVM::InstructionSequence:<compiled>@<compiled>>"
+#@end
+
 #@since 2.0.0
 @see [[m:RubyVM::InstructionSequence#label]],
      [[m:RubyVM::InstructionSequence#path]]
@@ -291,7 +296,7 @@ self の情報を 14 要素の配列にして返します。
 
 : #absolute_path
 
-  命令シーケンスの絶対パス。文字列から作成していた場合は "<compiled>"。
+  命令シーケンスの絶対パス。文字列から作成していた場合は nil。
 
 : #first_lineno
 
@@ -325,6 +330,36 @@ self の情報を 14 要素の配列にして返します。
 : bytecode
 
   命令シーケンスを構成する命令とオペランドの配列の配列。
+
+
+#@samplecode 例
+require 'pp'
+
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+pp iseq.to_a
+# ※ Ruby 2.5.0 での実行結果
+# => ["YARVInstructionSequence/SimpleDataFormat",
+# 2,
+# 0,
+# 1,
+# {:arg_size=>0, :local_size=>2, :stack_max=>2},
+# "<compiled>",
+# "<compiled>",
+# nil,
+# 1,
+# :top,
+# [:num],
+# 0,
+# [],
+# [1,
+#  [:trace, 1],
+#  [:putobject_OP_INT2FIX_O_1_C_],
+#  [:putobject, 2],
+#  [:opt_plus, {:mid=>:+, :flag=>256, :orig_argc=>1, :blockptr=>nil}],
+#  [:dup],
+#  [:setlocal_OP__WC__0, 2],
+#  [:leave]]]
+#@end
 
 --- eval -> object
 

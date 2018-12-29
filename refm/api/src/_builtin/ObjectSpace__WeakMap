@@ -15,6 +15,8 @@ GC の対象になるオブジェクトへの weak reference を持つクラス�
 
 @param key 参照元のオブジェクトを指定します。
 
+#@#noexample ライブラリ経由で使用するものであるため
+
 --- []=(key, value)
 
 引数 key から引数 value への参照を作成します。

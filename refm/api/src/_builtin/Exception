@@ -12,6 +12,16 @@
 @param error_message エラーメッセージを表す文字列を指定します。このメッセージは
                      属性 [[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示されます。
 
+例:
+  e = Exception.new("some message")
+  p e         # => #<Exception: some message>
+  p e.message # => "some message"
+
+例:
+  e = Exception.exception("some message")
+  p e         # => #<Exception: some message>
+  p e.message # => "some message"
+
 == Instance Methods
 
 --- exception                   -> self
@@ -67,6 +77,25 @@
 現状では [[m:Exception#set_backtrace]] によって戻り値が変化する事はあり
 ません。
 
+例: test.rb
+  require "date"
+  def check_long_month(month)
+    return if Date.new(2000, month, -1).day == 31
+    raise "#{month} is not long month"
+  end
+
+  def get_exception
+    return begin
+      yield
+    rescue => e
+      e
+    end
+  end
+
+  e = get_exception { check_long_month(2) }
+  p e.backtrace_locations
+  # => ["test.rb:4:in `check_long_month'", "test.rb:15:in `block in <main>'", "test.rb:9:in `get_exception'", "test.rb:15:in `<main>'"]
+
 @see [[m:Exception#backtrace]]
 #@end
 
@@ -91,9 +120,30 @@
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
+#@samplecode 例:
+begin
+  begin
+    raise "inner"
+  rescue
+    raise "outer"
+  end
+rescue
+  $!.backtrace # => ["/path/to/test.rb:5:in `rescue in <main>'", "/path/to/test.rb:2:in `<main>'"]
+  $!.set_backtrace(["dummy1", "dummy2"])
+  $!.backtrace # => ["dummy1", "dummy2"]
+end
+#@end
+
 --- inspect -> String
 
 self のクラス名と message を文字列にして返します。
+
+例:
+  begin
+    raise "exception"
+  rescue
+    p $!.inspect # => "#<RuntimeError: exception>"
+  end
 
 #@since 1.9.1
 --- ==(other)    -> bool
@@ -128,6 +178,42 @@ message と backtrace が == メソッドで比較して
 self の前の例外(self が rescue 節や ensure 節の中で発生した例外の場合、
 その前に発生していた元々の例外)を返します。存在しない場合は nil を返し
 ます。
+
+例:
+  begin
+    begin
+      raise "inner"
+    rescue
+      raise "outer"
+    end
+  rescue
+    p $!       # => #<RuntimeError: outer>
+    p $!.cause # => #<RuntimeError: inner>
+  end
+
 #@end
 
+#@end
+#@since 2.5.0
+--- full_message  -> String
+例外の整形された文字列を返します。
+
+返される文字列は Ruby が捕捉されなかった例外を標準エラー出力に出力するときと
+同じ形式です。
+そのため、$stderr が変更されておらず、$stderr.tty? が真の場合はエスケープシーケンスによる文字装飾がついています。
+
+[注意] このメソッドは実験的な機能として提供されています。仕様が変更にな
+る可能性があります。
+
+#@samplecode 例
+begin
+  raise "test"
+rescue => e
+  p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+  $stderr = $stdout
+  p e.full_message   # => "test.rb:2:in `<main>': test (RuntimeError)\n"
+  $stderr = STDERR
+  p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+end
+#@end
 #@end

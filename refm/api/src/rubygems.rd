@@ -17,7 +17,7 @@ RubyGems を扱うためのクラスやモジュールが定義されている�
 
 #@# _builtin/ 以下に移動する予定だったが形式が違いすぎるため保留
 
-=== gem コマンドの使い方
+===[a:gem_command] gem コマンドの使い方
 
   $ gem help
   
@@ -225,9 +225,9 @@ Proxy サーバ経由で Gem パッケージをインストールするには以
 
 === 参考
 : Rubyist Magazine - シリーズ パッケージマネジメント 【第 1 回】 RubyGems (1)
-  [[url:http://magazine.rubyist.net/?0006-PackageManagement]]
+  [[url:https://magazine.rubyist.net/articles/0006/0006-PackageManagement.html]]
 : Rubyist Magazine - シリーズ パッケージマネジメント 【第 2 回】 RubyGems (2)
-  [[url:http://magazine.rubyist.net/?0010-PackageManagement]]
+  [[url:https://magazine.rubyist.net/articles/0010/0010-PackageManagement.html]]
 
 
 = reopen Kernel

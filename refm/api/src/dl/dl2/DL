@@ -38,12 +38,12 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返
 addr で指定したメモリ領域を size バイトにリサイズし、その領域を指す整数
 を返します。
 
-addr には [[m:DL.malloc]] で確保したメモリ領域を渡します。
+addr には [[m:DL.#malloc]] で確保したメモリ領域を渡します。
 また、リサイズの結果、返り値が addr と異なる場合があります。
 
 @param addr リサイズしたいメモリアドレス整数
 @param size リサイズ後のバイト数
-@see [[m:DL.malloc]]
+@see [[m:DL.#malloc]]
 
 --- free(addr)      -> nil
 

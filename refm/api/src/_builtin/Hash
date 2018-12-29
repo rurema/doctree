@@ -31,10 +31,10 @@ include Enumerable
 
 ただし、 更新不可 ([[m:Object#frozen?]] が true) では無い文字列をキーとして与えた場合は、文字列をコピーし、コピーを更新不可に設定 ([[m:Object#freeze]]) してキーとして
 使用します。この為、キーとして使われている文字列を更新しようとすると例外 
-#@since 1.9.1
-[[c:RuntimeError]] 
+#@since 2.5.0
+[[c:FrozenError]]
 #@else
-[[c:TypeError]] 
+[[c:RuntimeError]]
 #@end
 が発生するので rehash を呼ぶ必要性は生じません。
 
@@ -206,7 +206,11 @@ ifnoneを省略した Hash.new は {} と同じです。
   h = Hash.new([].freeze)
   h[0] += [0] #破壊的でないメソッドはOK
   h[1] << 1
-  # エラー `<<': can't modify frozen array (TypeError)
+#@since 2.5.0
+  # エラー: can't modify frozen Array (FrozenError)
+#@else
+  # エラー: can't modify frozen Array (RuntimeError)
+#@end
 
 --- new {|hash, key| ... } -> Hash
 空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
@@ -333,10 +337,13 @@ self に対応する [[c:Proc]] オブジェクトを返します。
 
 ハッシュの要素の数を返します。
 
-#@since 1.9.1
-  puts({ant: 9 ,dog: 101 ,cat: 3}.length) #=> 3
-#@else
-  puts({:ant => 9 ,:dog => 101 ,:cat => 3}.length) #=> 3
+#@samplecode
+h = { "d" => 100, "a" => 200, "v" => 300, "e" => 400 }
+h.length        #=> 4
+h.size          #=> 4
+h.delete("a")   #=> 200
+h.length        #=> 3
+h.size          #=> 3
 #@end
 
 --- empty? -> bool
@@ -1350,7 +1357,7 @@ key が見つからなかった場合は、nil を返します。
 
 --- rassoc(value) -> Array | nil
 
-ハッシュ内を検索して，引数 obj と 一致する値を探します。
+ハッシュ内を検索して，引数 value と 一致する値を探します。
 
 比較は == メソッドを使用して行われます。一致する値があれば，
 該当するキーとその値とを要素とするサイズ 2 の配列を返します。
@@ -1476,12 +1483,15 @@ select! はオブジェクトが変更された場合に self を、
                                        #=> { a: "1.0", b: "2.1", c: "3.2" }
 
 @see [[m:Hash#transform_values!]]
+#@since 2.5.0
+@see [[m:Hash#transform_keys]]
+@see [[m:Hash#transform_keys!]]
+#@end
 --- transform_values! {|value| ... } -> self
 --- transform_values!                -> Enumerator
 
 すべての値に対してブロックを呼び出した結果でハッシュの値を変更します。
 キーは変化しません。
-
 
 @return transform_values! は常に self を返します。
         ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
@@ -1494,4 +1504,58 @@ select! はオブジェクトが変更された場合に self を、
                                         #=> { a: "2.0", b: "5.1", c: "10.2" }
 
 @see [[m:Hash#transform_values]]
+#@end
+#@since 2.5.0
+@see [[m:Hash#transform_keys]]
+@see [[m:Hash#transform_keys!]]
+--- transform_keys {|key| ... } -> Hash
+--- transform_keys              -> Enumerator
+
+すべてのキーに対してブロックを呼び出した結果で置き換えたハッシュを返します。
+値は変化しません。
+
+#@samplecode 例
+  h = { a: 1, b: 2, c: 3 }
+  h.transform_keys {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+  h.transform_keys(&:to_s)        # => { "a" => 1, "b" => 2, "c" => 3 }
+  h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+                                  # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+#@end
+
+@see [[m:Hash#transform_keys!]]
+@see [[m:Hash#transform_values]]
+@see [[m:Hash#transform_values!]]
+
+--- transform_keys! {|key| ... } -> self
+--- transform_keys!                -> Enumerator
+
+すべての値に対してブロックを呼び出した結果でハッシュのキーを変更します。
+値は変化しません。
+
+@return transform_keys! は常に self を返します。
+        ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
+        返します。
+
+
+#@samplecode 例
+  h = { a: 1, b: 2, c: 3 }
+  h.transform_keys! {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+  h.transform_keys!(&:to_sym)      # => { a: 1, b: 2, c: 3 }
+  h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+                                   # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+#@end
+
+@see [[m:Hash#transform_keys]]
+@see [[m:Hash#transform_values]]
+@see [[m:Hash#transform_values!]]
+
+--- slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+#@samplecode 例
+  h = { a: 100, b: 200, c: 300 }
+  h.slice(:a)           # => {:a=>100}
+  h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
+#@end
 #@end

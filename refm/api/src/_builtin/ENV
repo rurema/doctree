@@ -39,11 +39,16 @@ key に対応する環境変数の値を返します。該当する環境変数�
            ジェクトを指定した場合は to_str メソッドによる暗黙の型変換
            を試みます。
 
+#@samplecode
+ENV['PATH']           # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
+ENV['NON_EXIST_KEY']  # => nil
+#@end
+
 --- []=(key, value)
 --- store(key, value) -> String
 
 key に対応する環境変数の値を value にします。
-value が nil の時、key に対応する環境変数を取り除きます。 
+value が nil の時、key に対応する環境変数を取り除きます。
 
 @param key   環境変数名を指定します。文字列で指定します。文字列以外のオ
              ブジェクトを指定した場合は to_str メソッドによる暗黙の型変
@@ -54,9 +59,21 @@ value が nil の時、key に対応する環境変数を取り除きます。
 
 @return value を返します。
 
+#@samplecode
+ENV['NEW_KEY'] = 'some_value'
+ENV['NEW_KEY'] # => 'some_value'
+ENV.store('NEW_KEY', nil) # => nil
+ENV.has_key?('NEW_KEY') # => false
+#@end
+
 --- clear  -> self
 
 環境変数をすべてクリアします。self を返します。
+
+#@samplecode
+ENV.clear
+p ENV # => {}
+#@end
 
 --- delete(key) -> String | nil
 --- delete(key) {|key| ... } -> String | nil
