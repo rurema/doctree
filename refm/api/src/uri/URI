@@ -44,6 +44,8 @@ URI を要素に分割した文字列の配列を返します。
 
 @param uri_str パースしたい URI を文字列として与えます。
 
+@raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
+
 @raise URI::InvalidURIError パースに失敗した場合に発生します。
 
 例:
@@ -69,7 +71,11 @@ URI オブジェクトを返します。
   URI.parse(uri_str) + path + ...
 
 @param uri_str URI 文字列
+
 @param path 後ろに連結する文字列
+
+@raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
+
 @raise URI::InvalidURIError パースに失敗した場合に発生します。
 
 例:
@@ -270,7 +276,7 @@ enum には通常 [key, value] という形の配列の配列を渡します。
 送るデータのエンコーディングを変換したい場合はあらかじめ
 変換しておいてください(例えば ASCII incompatible なものを
 UTF-8 に変換する場合など)。
-各要素のエンコーデイングがばらばらの場合もあらかじめエンコーディングを
+各要素のエンコーディングがばらばらの場合もあらかじめエンコーディングを
 揃えてからこのメソッドを使うべきです。
 
 このメソッドはファイルを入力にすることはできません。

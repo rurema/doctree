@@ -82,6 +82,16 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
   Signal.trap(:INT, "EXIT")         # => "DEFAULT"
   Signal.trap(:INT, nil)            # => "EXIT"
 
+#@samplecode 例
+Signal.trap(0, proc { puts "Terminating: #{$$}" })
+Signal.trap("CLD")  { puts "Child died" }
+fork && Process.wait
+
+# => Terminating: 13939
+# => Child died
+# => Terminating: 13907
+#@end
+
 @see [[d:spec/terminate]]
 
 #@since 2.0.0

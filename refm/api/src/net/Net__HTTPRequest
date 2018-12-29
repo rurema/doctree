@@ -20,12 +20,23 @@ include Net::HTTPHeader
 --- body_exist? -> bool
 このメソッドは obsolete です。
 
+#@#noexample obsolete のため不要
+
 [[m:Net::HTTPGenericRequest#response_body_permitted?]]
 の別名です。
 
 #@since 1.8.0
 --- body -> String
 サーバに送るリクエストのエンティティボディを返します。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Post.new(uri.request_uri)
+req.body = "Test Post Data"
+req.body # => "Test Post Data"
+#@end
 
 #@since 1.8.3
 @see [[m:Net::HTTPGenericRequest#body=]]
@@ -38,6 +49,15 @@ include Net::HTTPHeader
 サーバに送るリクエストのエンティティボディを文字列で設定します。
 
 @param body 設定するボディを文字列で与えます。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Post.new(uri.request_uri)
+req.body = "Test Post Data" # => "Test Post Data"
+#@end
+
 @see [[m:Net::HTTPGenericRequest#body]]
 #@end
 
@@ -66,11 +86,32 @@ f は read(size) メソッドが定義されている必要があります。
 リクエストにエンティティボディを一緒に送ることが許されている
 HTTP メソッド (POST など)の場合真を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+post = Net::HTTP::Post.new(uri.request_uri)
+post.request_body_permitted?   # => true
+
+head = Net::HTTP::Head.new(uri.request_uri)
+head.request_body_permitted?   # => false
+#@end
+
 --- response_body_permitted? -> bool
 
 サーバからのレスポンスにエンティティボディを含むことが許されている
 HTTP メソッド (GET, POST など)の場合真を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+post = Net::HTTP::Post.new(uri.request_uri)
+post.response_body_permitted?   # => true
+
+head = Net::HTTP::Head.new(uri.request_uri)
+head.response_body_permitted?   # => false
+#@end
 
 = class Net::HTTPRequest < Net::HTTPGenericRequest
 HTTP リクエストを抽象化するクラスです。
@@ -115,6 +156,8 @@ initheader でリクエストヘッダを指定することができます。
 
 @param path リクエストする path を文字列で与えます。
 @param initheader リクエストヘッダをハッシュで指定します。
+
+#@#noexample
 
 #@# == Constants
 #@# --- METHOD -> String

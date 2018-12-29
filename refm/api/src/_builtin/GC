@@ -13,7 +13,7 @@ Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されま�
 これらの環境変数の効果はRubyの起動時のみ有効です(つまりrubyを動かしている
 途中で変更することはできません)。
 
-==== チューニングための環境変数
+====[a:tuning_gc] チューニングのための環境変数
  * RUBY_GC_HEAP_INIT_SLOTS (default: 10000) - 最初に確保されるスロット数。
  * RUBY_GC_HEAP_FREE_SLOTS (default: 4096) - GC後、必ずこの数の空きスロット数が確保される。
    つまりGC後に空きスロットが足りなければ新たなページを確保し、空きスロット数を増やす。
@@ -189,6 +189,11 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
 
+#@samplecode 例
+GC.disable   # => false
+GC.disable   # => true
+#@end
+
 @see [[m:GC.enable]]
 
 --- enable -> bool
@@ -199,6 +204,12 @@ false)。
 false)。
 
 @see [[m:GC.disable]]
+
+#@samplecode 例
+GC.disable   # => false
+GC.enable    # => true
+GC.enable    # => false
+#@end
 
 #@since 2.1.0
 --- start(full_mark: true, immediate_sweep: true) -> nil
@@ -225,20 +236,55 @@ nil を返します。
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
-#@since 1.8.7
+#@samplecode 例
+GC.count  # => 3
+GC.start  # => nil
+GC.count  # => 4
+#@end
+
 --- stress -> bool
+
+GCがストレスモードかどうかを返します。
+
+真が設定されている場合は GC を行えるすべての機会に GC を行います。
+
+@see [[m:GC.stress=]]
+
 --- stress=(value)
 
-GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
+GCのストレスモードを引数 value に設定します。
+引数 value が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
-@param value 任意のオブジェクト。真偽値として解釈されます。
+この機能はデバッグ用途に提供されています。ストレスモードを有効にすると
+プログラムのパフォーマンスが低下します。
+
+@param value 任意のオブジェクト。整数以外の値を指定した場合は真偽値として解釈されます。
+             整数を指定する場合は以下のフラグをOR演算した値を指定します。
+: 0x01
+  マイナー GC を動作させる場合に指定します。
+: 0x02
+  sweep を遅らせる(Lazy Sweep を行う)に指定します。
+: 0x04
+  malloc/calloc/realloc の後でメジャーGCを動作させる場合に指定します。
+
+#@samplecode 例
+GC.stress # => false
+GC.stress = true
+GC.stress # => true
 #@end
+
+@see [[m:GC.stress]]
 
 #@since 1.9.1
 --- count -> Integer
 
 プロセス開始からガーベージコレクトを実行した回数を [[c:Integer]] で返し
 ます。
+
+#@samplecode 例
+GC.count # => 3
+#@end
+
 #@end
 
 #@since 1.9.3
@@ -353,7 +399,7 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 
 == Instance Methods
 
---- garbage_collect -> nil
+--- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
 
 ガーベージコレクトを開始します。
 
@@ -361,6 +407,17 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
+
+@param full_mark マイナー GC を動作させる場合は false を、そうでない場
+                 合は true を指定します。
+
+@param immediate_sweep sweep を遅らせる(Lazy Sweep を行う)場合は false
+                       を、そうでない場合は true を指定します。
+
+注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
+す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
+トしていない場合はキーワード引数を指定しても無視される可能性があります。
+
 
 #@since 2.1.0
 == Constants

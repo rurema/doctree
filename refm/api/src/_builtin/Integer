@@ -18,6 +18,36 @@ alias Bignum
 2.4.0 から [[c:Fixnum]], [[c:Bignum]] は Integerに統合されました。
 2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
 
+== Class Methods
+
+#@since 2.5.0
+--- sqrt(n) -> Integer
+
+非負整数 n の整数の平方根を返します。すなわち n の平方根以下の
+最大の非負整数を返します。
+
+@param n 非負整数。Integer ではない場合は、最初に Integer に変換されます。
+@raise Math::DomainError n が負の整数の時に発生します。
+
+#@samplecode
+Integer.sqrt(0)        # => 0
+Integer.sqrt(1)        # => 1
+Integer.sqrt(24)       # => 4
+Integer.sqrt(25)       # => 5
+Integer.sqrt(10**400) == 10**200 # => true
+#@end
+
+Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の精度の限界によって
+真の値とは違う結果になることがあります。
+
+#@samplecode
+Integer.sqrt(10**46)     #=> 100000000000000000000000
+Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
+#@end
+
+
+@see [[m:Math.sqrt]]
+#@end
 == Instance Methods
 
 #@until 1.9.1
@@ -152,75 +182,143 @@ self を返します。
   10.to_i   # => 10
 
 #@since 2.4.0
+#@since 2.5.0
+--- floor(ndigits = 0) -> Integer
+#@else
 --- floor(ndigits = 0) -> Integer | Float
+#@end
 
 self と等しいかより小さな整数のうち最大のものを返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-  1.floor        # => 1
-  1.floor(2)     # => 1.0
-  15.floor(-1)   # => 10
+#@samplecode
+1.floor           # => 1
+#@since 2.5.0
+1.floor(2)        # => 1
+#@else
+1.floor(2)        # => 1.0
+#@end
+18.floor(-1)      # => 10
+(-18).floor(-1)   # => -20
+#@end
 
 @see [[m:Numeric#floor]]
 
+#@since 2.5.0
+--- ceil(ndigits = 0) -> Integer
+#@else
 --- ceil(ndigits = 0) -> Integer | Float
+#@end
 
 self と等しいかより大きな整数のうち最小のものを返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-  1.ceil        # => 1
-  1.ceil(2)     # => 1.0
-  15.ceil(-1)   # => 20
+#@samplecode
+1.ceil           # => 1
+#@since 2.5.0
+1.ceil(2)        # => 1
+#@else
+1.ceil(2)        # => 1.0
+#@end
+18.ceil(-1)      # => 20
+(-18).ceil(-1)   # => -10
+#@end
 
 @see [[m:Numeric#ceil]]
 
---- round(ndigits = 0) -> Integer | Float
+#@since 2.5.0
+--- round(ndigits = 0, half: :up) -> Integer
+#@else
+--- round(ndigits = 0, half: :up) -> Integer | Float
+#@end
 
 self ともっとも近い整数を返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+@param half ちょうど半分の値の丸め方を指定します。
+       サポートされている値は以下の通りです。
 
-例:
+ * :up or nil: 0から遠い方に丸められます。
+ * :even: もっとも近い偶数に丸められます。
+ * :down: 0に近い方に丸められます。
 
-  1.round        # => 1
-  1.round(2)     # => 1.0
-  15.round(-1)   # => 20
+#@samplecode
+1.round         # => 1
+#@since 2.5.0
+1.round(2)      # => 1
+#@else
+1.round(2)      # => 1.0
+#@end
+15.round(-1)    # => 20
+(-15).round(-1) #=> -20
+
+25.round(-1, half: :up)      # => 30
+25.round(-1, half: :down)    # => 20
+25.round(-1, half: :even)    # => 20
+35.round(-1, half: :up)      # => 40
+35.round(-1, half: :down)    # => 30
+35.round(-1, half: :even)    # => 40
+(-25).round(-1, half: :up)   # => -30
+(-25).round(-1, half: :down) # => -20
+(-25).round(-1, half: :even) # => -20
+#@end
 
 @see [[m:Numeric#round]]
 
+#@since 2.5.0
+--- truncate(ndigits = 0) -> Integer
+#@else
 --- truncate(ndigits = 0) -> Integer | Float
+#@end
 
 0 から self までの整数で、自身にもっとも近い整数を返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-     1.truncate        # => 1
-     1.truncate(2)     # => 1.0
-     15.truncate(-1)   # => 10
+#@samplecode
+1.truncate           # => 1
+#@since 2.5.0
+1.truncate(2)        # => 1
+#@else
+1.truncate(2)        # => 1.0
+#@end
+18.truncate(-1)      #=> 10
+(-18).truncate(-1)   #=> -10
+#@end
 
 @see [[m:Numeric#truncate]]
 #@end
@@ -811,4 +909,54 @@ self を表すのに必要なビット数を返します。
    (2**12).bit_length        # => 13
    (2**12+1).bit_length      # => 13
 
+#@end
+#@since 2.5.0
+--- allbits?(mask) -> bool
+self & mask の全てのビットが 1 なら true を返します。
+
+self & mask == mask と等価です。
+
+@param mask ビットマスクを整数で指定します。
+
+#@samplecode
+42.allbits?(42)                   # => true
+0b1010_1010.allbits?(0b1000_0010) # => true
+0b1010_1010.allbits?(0b1000_0001) # => false
+0b1000_0010.allbits?(0b1010_1010) # => false
+#@end
+
+@see [[m:Integer#anybits?]]
+@see [[m:Integer#nobits?]]
+--- anybits? -> bool
+self & mask のいずれかのビットが 1 なら true を返します。
+
+self & mask != 0 と等価です。
+
+@param mask ビットマスクを整数で指定します。
+
+#@samplecode
+42.anybits?(42)                   # => true
+0b1010_1010.anybits?(0b1000_0010) # => true
+0b1010_1010.anybits?(0b1000_0001) # => true
+0b1000_0010.anybits?(0b0010_1100) # => false
+#@end
+
+@see [[m:Integer#allbits?]]
+@see [[m:Integer#nobits?]]
+--- nobits? -> bool
+self & mask のすべてのビットが 0 なら true を返します。
+
+self & mask == 0 と等価です。
+
+@param mask ビットマスクを整数で指定します。
+
+#@samplecode
+42.nobits?(42)                   # => false
+0b1010_1010.nobits?(0b1000_0010) # => false
+0b1010_1010.nobits?(0b1000_0001) # => false
+0b0100_0101.nobits?(0b1010_1010) # => true
+#@end
+
+@see [[m:Integer#allbits?]]
+@see [[m:Integer#anybits?]]
 #@end

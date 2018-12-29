@@ -5,9 +5,15 @@ include Enumerable
 
 == Class Methods
 
---- [](*pattern)                        -> [String]
+#@since 2.5.0
+--- [](*pattern, base: nil)                            -> [String]
+--- glob(pattern, flags = 0, base: nil)                -> [String]
+--- glob(pattern, flags = 0, base: nil) {|file| ...}   -> nil
+#@else
+--- [](*pattern)                            -> [String]
 --- glob(pattern, flags = 0)                -> [String]
 --- glob(pattern, flags = 0) {|file| ...}   -> nil
+#@end
 
 ワイルドカードの展開を行い、
 パターンにマッチするファイル名を文字列の配列として返します。
@@ -28,6 +34,12 @@ include Enumerable
   Dir.glob("*")                      #=> ["bar", "foo"]
   Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 //}
+
+#@since 2.5.0
+@param base カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
+            指定した場合、結果の頭にはベースディレクトリはつかないので、
+            絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
+#@end
 
 ワイルドカードには以下のものがあります。これらはバックスラッシュに
 よりエスケープすることができます。ダブルクォートの文字列中では 2
@@ -84,6 +96,15 @@ include Enumerable
   Dir.glob("[^f]*")        #=> ["bar"]
   Dir.glob("{b,f}*")       #=> ["bar", "foo"]
 
+#@since 2.5.0
+  # ベースディレクトリの例
+  rbfiles = File.join("**", "*.rb")
+  Dir.glob(rbfiles)                   #=> ["main.rb",
+                                      #    "lib/song.rb",
+                                      #    "lib/song/karaoke.rb"]
+  Dir.glob(rbfiles, base: "lib")      #=> ["song.rb",
+                                      #    "song/karaoke.rb"]
+#@end
 
 --- chdir           -> 0
 --- chdir(path)     -> 0
@@ -165,6 +186,30 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
+@see [[m:Dir.foreach]]
+#@since 2.5.0
+@see [[m:Dir.children]]
+--- children(path)                -> [String]
+--- children(path, encoding: enc) -> [String]
+
+ディレクトリ path に含まれるファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@param encoding ディレクトリのエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+
+  Dir.children('.') #=> ["bar", "foo"]
+
+@see [[m:Dir.each_child]]
+@see [[m:Dir.entries]]
+#@end
 --- foreach(path) {|file| ...}                                        -> nil
 --- foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
 --- foreach(path)                                                     -> Enumerator
@@ -194,6 +239,40 @@ path を省略した場合、環境変数 HOME または LOGDIR
   "bar"
   "foo"
 
+@see [[m:Dir.entries]]
+#@since 2.5.0
+@see [[m:Dir.each_child]]
+--- each_child(path) {|file| ...}                -> nil
+--- each_child(path, encoding: enc) {|file| ...} -> nil
+--- each_child(path)                             -> Enumerator
+--- each_child(path, encoding: enc)              -> Enumerator
+
+ディレクトリ path の "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[[c:Enumerator]] オブジェクトを返します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@param encoding ディレクトリのエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+
+  Dir.each_child('.'){|f|
+    p f
+  }
+  #=>
+  "bar"
+  "foo"
+
+@see [[m:Dir.foreach]]
+@see [[m:Dir.children]]
+#@end
 --- getwd    -> String
 --- pwd      -> String
 
@@ -249,6 +328,35 @@ path に対するディレクトリストリームをオープンして返しま
 
 @raise Errno::EXXX オープンに失敗した場合に発生します。
 
+例: Dir.new
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    d = Dir.new(tmpdir)
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+    d.close
+
+    d = Dir.new(tmpdir, encoding: Encoding::UTF_8)
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+    d.close
+  end
+
+例: Dir.open
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    d = Dir.open(tmpdir, encoding: Encoding::UTF_8)
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+    d.close
+
+    Dir.open(tmpdir, encoding: Encoding::UTF_8) do |d|
+      p d.class         # => Dir
+      p d.read.encoding # => #<Encoding:UTF-8>
+    end
+  end
 
 --- exist?(file_name)    -> bool
 #@until 2.1.0

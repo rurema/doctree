@@ -2,7 +2,7 @@ sudo: false
 language: ruby
 dist: trusty
 rvm:
-  - 2.4.2
+  - 2.5.1
 notifications:
   email:
     recipients:
@@ -16,3 +16,8 @@ notifications:
     on_failure: always # [always|never|change] # default: always
     template:
       - "%{message} by @%{author}: See %{build_url}"
+before_install:
+  - 'go get github.com/client9/misspell/...'
+script:
+  - 'bundle exec rake'
+  - '$GOPATH/bin/misspell -error -i addopt $(git ls-files | grep -vF "refm/doc/news/1.8.4.rd")'

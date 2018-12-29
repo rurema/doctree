@@ -76,6 +76,28 @@
   Bar = m
   m.name            # "Foo" か "Bar" のどちらかに決まる
 
+#@since 2.4.0
+--- used_modules -> [Module]
+
+現在のスコープで using されているすべてのモジュールを配列で返します。
+配列内のモジュールの順番は未定義です。
+
+  module A
+    refine Object do
+    end
+  end
+
+  module B
+    refine Object do
+    end
+  end
+
+  using A
+  using B
+  p Module.used_modules
+  #=> [B, A]
+#@end
+
 == Instance Methods
 
 --- <=>(other) -> Integer | nil
@@ -617,7 +639,11 @@ inherit に真を指定すると
 
   module Foo
     def foo; end
+#@since 2.5.0
+  end # => FrozenError: can't modify frozen module
+#@else
   end # => RuntimeError: can't modify frozen module
+#@end
 
 #@since 2.1.0
 #@include(Module.include)
@@ -668,6 +694,27 @@ self のインスタンスメソッド name をオブジェクト化した [[c:U
 @raise NameError self に存在しないメソッドを指定した場合に発生します。
 
 @see [[m:Module#public_instance_method]], [[m:Object#method]]
+
+例:
+  class Interpreter
+    def do_a() print "there, "; end
+    def do_d() print "Hello ";  end
+    def do_e() print "!\n";     end
+    def do_v() print "Dave";    end
+    Dispatcher = {
+      "a" => instance_method(:do_a),
+      "d" => instance_method(:do_d),
+      "e" => instance_method(:do_e),
+      "v" => instance_method(:do_v)
+    }
+    def interpret(string)
+      string.each_char {|b| Dispatcher[b].bind(self).call }
+    end
+  end
+
+  interpreter = Interpreter.new
+  interpreter.interpret('dave')
+  # => Hello there, Dave!
 
 --- method_defined?(name) -> bool
 
@@ -893,6 +940,8 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
+#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
+
 @see [[m:Object#public_methods]], [[m:Module#instance_methods]]
 
 #@since 1.9.1
@@ -934,6 +983,8 @@ self の public インスタンスメソッド name をオブジェクト化し�
 の一覧を配列で返します。
 
 @param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
+
+#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
 
 @see [[m:Object#protected_methods]], [[m:Module#instance_methods]]
 
@@ -985,6 +1036,26 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @see [[m:Module#method_defined?]]
 
+例:
+  module A
+    def method1()  end
+  end
+
+  class B
+    private
+    def method2()  end
+  end
+
+  class C < B
+    include A
+    def method3()  end
+  end
+
+  A.method_defined? :method1            # => true
+  C.private_method_defined? "method1"   # => false
+  C.private_method_defined? "method2"   # => true
+  C.method_defined? "method2"           # => false
+
 --- protected_method_defined?(name) -> bool
 
 インスタンスメソッド name がモジュールに定義されており、
@@ -994,6 +1065,18 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 @param name [[c:Symbol]] か [[c:String]] を指定します。
 
 @see [[m:Module#method_defined?]]
+
+例:
+  module Foo
+    def foo; end
+    protected def bar; end
+    private def baz; end
+  end
+
+  Foo.protected_method_defined?(:foo) # => false
+  Foo.protected_method_defined?(:bar) # => true
+  Foo.protected_method_defined?(:baz) # => false
+  Foo.protected_method_defined?(:qux) # => false
 
 --- public_method_defined?(name) -> bool
 
@@ -1367,6 +1450,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 引数が与えられた時には引数によって指定されたメソッドを private に
 設定します。
 
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
+
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
@@ -1391,6 +1476,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 引数が与えられた時には引数によって指定されたメソッドを protected
 に設定します。
 
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
+
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
@@ -1404,6 +1491,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 引数が与えられた時には引数によって指定されたメソッドを public に設
 定します。
+
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
 
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
@@ -1516,11 +1605,6 @@ name で指定した定数の可視性を private に変更します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-       untrust なオブジェクトではない場合に発生します。
-#@end
-
 @return self を返します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
@@ -1532,11 +1616,6 @@ name で指定した定数の可視性を public に変更します。
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
-
-#@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-       untrust なオブジェクトではない場合に発生します。
-#@end
 
 @return self を返します。
 
@@ -1553,9 +1632,6 @@ deprecate に設定した定数を参照すると警告メッセージが表示�
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
-
-#@# @raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-#@#        untrust なオブジェクトではない場合に発生します。
 
 @return self を返します。
 
@@ -1575,14 +1651,18 @@ deprecate に設定した定数を参照すると警告メッセージが表示�
 #@since 2.0.0
 --- refine(klass) { ... } -> Module
 
+#@since 2.4.0
+引数 klass で指定したクラスまたはモジュールだけに対して、ブロックで指定した機能を提供で
+#@else
 引数 klass で指定したクラスだけに対して、ブロックで指定した機能を提供で
+#@end
 きるモジュールを定義します。定義した機能は Module#refine を使用せずに直
 接 klass に対して変更を行う場合と異なり、限られた範囲のみ有効にできます。
 そのため、既存の機能を局所的に修正したい場合などに用いる事ができます。
 
 refinements 機能の詳細については以下を参照してください。
 
- * [[url:http://magazine.rubyist.net/?0041-200Special-refinement]]
+ * [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html]]
 #@since 2.1.0
  * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
 #@else
@@ -1596,7 +1676,11 @@ refinements 機能の詳細については以下を参照してください。
 定義した機能は [[m:main.using]] を実行した場合のみ有効になります。
 #@end
 
+#@since 2.4.0
+@param klass 拡張する対象のクラスまたはモジュールを指定します。
+#@else
 @param klass 拡張する対象のクラスを指定します。
+#@end
 
 @return ブロックで指定した機能を持つ無名のモジュールを返します。
 

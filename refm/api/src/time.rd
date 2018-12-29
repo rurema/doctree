@@ -146,7 +146,7 @@ date がISO 8601で定義されている形式に準拠していない、
 
   iso8601_time = '2008-08-31T12:34:56+09:00'
   t = Time.iso8601(iso8601_time)
-  p t #=> Sun Aug 31 03:34:56 UTC 2008
+  p t #=> 2008-08-31 12:34:56 +0900
   p t.kind_of?(Time) #=> true
 
   begin

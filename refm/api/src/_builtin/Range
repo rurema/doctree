@@ -293,7 +293,7 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 --- ==(other)     -> bool
 
 指定された other が Range クラスのインスタンスであり、
-始点と終点が == メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
+始端と終端が == メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
@@ -307,7 +307,7 @@ true を返します。そうでない場合に false を返します。
 --- eql?(other)   -> bool
 
 指定された other が Range クラスのインスタンスであり、
-始点と終点が eql? メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
+始端と終端が eql? メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
@@ -320,7 +320,7 @@ true を返します。そうでない場合に false を返します。
 
 --- hash    -> Integer
 
-始点と終点のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
+始端と終端のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
 
 例:
 
@@ -329,7 +329,7 @@ true を返します。そうでない場合に false を返します。
 
 --- to_s -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは #to_s メソッドで文
+self を文字列に変換します(始端と終端のオブジェクトは #to_s メソッドで文
 字列に変換されます)。
 
 @see [[m:Range#inspect]]
@@ -340,7 +340,7 @@ self を文字列に変換します(始点と終点のオブジェクトは #to_
 
 --- inspect -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは #inspect メソッド
+self を文字列に変換します(始端と終端のオブジェクトは #inspect メソッド
 で文字列に変換されます)。
 
 @see [[m:Range#to_s]]

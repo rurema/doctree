@@ -252,13 +252,13 @@ YAML4R
  * [[url:http://yaml4r.sourceforge.net/cookbook/]]([[url:http://yaml.org/YAML_for_ruby.html]])
  * [[url:http://yaml4r.sourceforge.net/doc/]]
 
-Rubyist Magazine: [[url:http://magazine.rubyist.net/]]
+Rubyist Magazine: [[url:https://magazine.rubyist.net/]]
 
- * プログラマーのための YAML 入門 (初級編): [[url:http://magazine.rubyist.net/?0009-YAML]]
- * プログラマーのための YAML 入門 (中級編): [[url:http://magazine.rubyist.net/?0010-YAML]]
- * プログラマーのための YAML 入門 (実践編): [[url:http://magazine.rubyist.net/?0011-YAML]]
- * プログラマーのための YAML 入門 (検証編): [[url:http://magazine.rubyist.net/?0012-YAML]]
- * プログラマーのための YAML 入門 (探索編): [[url:http://magazine.rubyist.net/?0013-YAML]]
+ * プログラマーのための YAML 入門 (初級編): [[url:https://magazine.rubyist.net/articles/0009/0009-YAML.html]]
+ * プログラマーのための YAML 入門 (中級編): [[url:https://magazine.rubyist.net/articles/0010/0010-YAML.html]]
+ * プログラマーのための YAML 入門 (実践編): [[url:https://magazine.rubyist.net/articles/0011/0011-YAML.html]]
+ * プログラマーのための YAML 入門 (検証編): [[url:https://magazine.rubyist.net/articles/0012/0012-YAML.html]]
+ * プログラマーのための YAML 入門 (探索編): [[url:https://magazine.rubyist.net/articles/0013/0013-YAML.html]]
 
 その他
 

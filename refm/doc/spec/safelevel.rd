@@ -232,36 +232,26 @@ CGI等でユーザからの入力を処理するのに適しています。
 
    * requireは$SAFE = 0で実行される
    * Level 1以上では起動時に以下の違いがある
-   * 環境変数 RUBYLIB を $: に加えない
-#@until 1.9.2
-   * カレントディレクトリを $: に加えない
-#@end
-   * 環境変数 RUBYOPT を処理しない
-   * 以下のスイッチを使用できない
-     -s -S -e -r -i -I -x
-     (スクリプトがsetgid, setuidされている時も同様)
-   * 標準入力からのプログラム読み込みを行わない
-     (スクリプトがsetgid, setuidされている時も同様)
+      * 環境変数 RUBYLIB を $: に加えない
+      * 環境変数 RUBYOPT を処理しない
+      * 標準入力からのプログラム読み込みを行わない
+        (スクリプトがsetgid, setuidされている時も同様)
+      * 以下のスイッチを使用できない
+        (スクリプトがsetgid, setuidされている時も同様)
+//emlist{
+          -s -S -e -r -i -I -x
+//}
    * setuid, setgid されたスクリプトは $SAFE = 1 以上で実行される。
    * [[c:Proc]] はその時点でのセーフレベルを記憶する。
      その [[c:Proc]] オブジェクトが call されると、記憶していたセーフレベルで実行される。
-#@until 2.1.0
-   * 汚染された [[c:Method]] オブジェクトが call されるとレベル4で実行される。
-#@end
-#@since 1.8.0
    * 汚染された文字列を第二引数に指定して [[m:Kernel.#trap]]/[[m:Kernel.#trace_var]] を
      実行するとその時点で例外 [[c:SecurityError]] が発生する。
-#@else
-   * 汚染された文字列を [[m:Kernel.#trap]]/[[m:Kernel.#trace_var]] の第二引数に指定するとレベル4で実行される。
-#@end
-#@until 2.1.0
-   * レベル4以上では out of memory でも [[c:fatal]] にならない。
-#@end
 #@since 2.4.0
-   * 実装の都合上 [[c:Integer]], [[c:Float]], [[c:Symbol]], true, false, nil は汚染されない。
+   * 実装の都合上 [[c:Integer]], [[c:Float]], [[c:Symbol]], true,
+     false, nil は汚染されない。
 #@else
-   * 実装の都合上 [[c:Fixnum]], [[c:Symbol]], true, false, nil は汚染されない。
-     なお [[c:Bignum]], [[c:Float]] は汚染されることは注意が必要。
+   * 実装の都合上 [[c:Fixnum]], [[c:Bignum]], [[c:Float]],
+     [[c:Symbol]], true, false, nil は汚染されない。
 #@end
 
 === 使用例

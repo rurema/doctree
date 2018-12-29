@@ -308,7 +308,7 @@
 
   * RDoc
     * RDoc 4.2.1 に更新しました。
-      * [[url:https://github.com/rdoc/rdoc/blob/master/History.rdoc#421--2015-12-22]]
+      * [[url:https://github.com/ruby/rdoc/blob/master/History.rdoc#421--2015-12-22]]
 
   * RubyGems
     * RubyGems 2.5.1 に更新しました。

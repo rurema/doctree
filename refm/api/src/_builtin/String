@@ -194,12 +194,13 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 #@end
 
 --- new(string = "")                -> String
-#@since 2.3.0
---- new(string = "", encoding: enc) -> String
+#@if("2.3.0" <= version and version < "2.4.0")
+--- new(string = "", encoding: string.encoding) -> String
 #@end
 #@since 2.4.0
---- new(string = "", capacity: size) -> String
---- new(string = "", encoding: enc, capacity: size) -> String
+#@# 127 は STR_BUF_MIN_SIZE。string.c 参照。
+--- new(string = "", encoding: string.encoding, capacity: 127) -> String
+--- new(string = "", encoding: string.encoding, capacity: string.bytesize) -> String
 #@end
 
 string と同じ内容の新しい文字列を作成して返します。
@@ -218,6 +219,8 @@ string と同じ内容の新しい文字列を作成して返します。
                 指定することで、なんども文字列連結する
                 (そしてreallocがなんども呼ばれる)ときの
                 パフォーマンスが改善されるかもしれません。
+                省略した場合、引数stringのバイト数が127未満であれば127、
+                それ以上であればstring.bytesizeになります。
 #@end
 @return         引数 string と同じ内容の文字列オブジェクト
 
@@ -773,10 +776,18 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @return val を返します。
 
+#@since 2.4.0
+--- capitalize(*options) -> String
+
+文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- capitalize -> String
 
 文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
+#@end
 
 #@samplecode 例
 p "foobar--".capitalize   # => "Foobar--"
@@ -787,10 +798,18 @@ p "FOOBAR--".capitalize   # => "Foobar--"
 @see [[m:String#capitalize!]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
 
+#@since 2.4.0
+--- capitalize!(*options) -> self | nil
+
+文字列先頭の文字を大文字に、残りを小文字に破壊的に変更します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- capitalize! -> self | nil
 
 文字列先頭の文字を大文字に、残りを小文字に変更します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
+#@end
 
 @return capitalize! は self を変更して返しますが、
         変更が起こらなかった場合は nil を返します。
@@ -950,6 +969,12 @@ p "foo\n".chomp    # => "foo"
 p "foo\n\r".chomp  # => "foo\n"
 #@end
 
+@see [[m:String#chomp!]]
+@see [[m:String#chop]]
+#@since 2.5.0
+@see [[m:String#delete_suffix]]
+#@end
+
 --- chomp!(rs = $/) -> self | nil
 
 self の末尾から rs で指定する改行コードを取り除きます。
@@ -975,6 +1000,12 @@ p "foo\n".chomp!    # => "foo"
 p "foo\n\r".chomp!  # => "foo\n"
 #@end
 
+@see [[m:String#chomp]]
+@see [[m:String#chop!]]
+#@since 2.5.0
+@see [[m:String#delete_suffix!]]
+#@end
+
 --- chop -> String
 
 文字列の最後の文字を取り除いた新しい文字列を生成して返します。
@@ -988,7 +1019,11 @@ p "strin".chop       # => "stri"
 p "".chop            # => ""
 #@end
 
+@see [[m:String#chomp]]
 @see [[m:String#chop!]]
+#@since 2.5.0
+@see [[m:String#delete_suffix]]
+#@end
 
 --- chop! -> self | nil
 
@@ -1006,7 +1041,11 @@ p "".chop            # => ""
   "".chop!             # => nil
 #@end
 
+@see [[m:String#chomp!]]
 @see [[m:String#chop]]
+#@since 2.5.0
+@see [[m:String#delete_suffix!]]
+#@end
 
 --- clear -> self
 
@@ -1167,6 +1206,50 @@ p str.delete!("2378")         #=> "nil"
 p str                         #=> "abc"
 #@end
 
+#@since 2.4.0
+--- downcase(*options) -> String
+
+全ての大文字を対応する小文字に置き換えた文字列を返します。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの意味は以下の通りです。
+
+: オプションなし
+  完全な Unicode ケースマッピングに対応し、ほとんどの言語に適しています。(例外は以下の :turkic,
+  :lithuanian オプションを参照)
+  Unicode 標準の表 3-14 で説明されている、コンテキスト依存のケースマッピングは、現在サポートされていません。
+
+: :ascii
+  ASCII の範囲内のみ (A-Z, a-z) が影響します。
+  このオプションは他のオプションと組み合わせることはできません。
+
+: :turkic
+  チュルク語族 (トルコ語、アゼルバイジャン語など) に適合した完全な Unicode ケースマッピングです。
+  これはたとえば大文字の I は小文字のドットなしの i (ı) にマッピングされることを意味します。
+
+: :lithuanian
+  現在は、ただの完全な Unicode ケースマッピングです。
+  将来、リトアニア語に対応した完全な Unicode ケースマッピングです。
+  (上にアクセントがあっても小文字の i のドットを維持します。)
+
+: :fold
+  downcase と downcase! のみで使えます。
+  Unicode ケースフォールディングは Unicode ケースマッピングより広範囲です。
+  このオプションは今の所、他のオプションと組み合わせることはできません。
+  (すなわち現在チュルク語族のバリアントはありません。)
+
+ASCII のみの大文字小文字変換で有効ないくつかの仮定は、より一般的なケース変換では
+成り立たないことに注意してください。例えば、結果の長さは入力の長さと同じとは
+限りません (文字数でもバイト数でも)。ラウンドトリップできるという仮定も
+成り立ちません (例えば str.downcase == str.upcase.downcase)。
+そして、Unicode 正規化 (すなわち [[m:String#unicode_normalize]]) はケース
+マッピング操作で必ずしも維持されるとは限りません。
+
+現在 ASCII 以外のケースマッピング/フォールディングは、UTF-8, UTF-16BE/LE,
+UTF-32BE/LE, ISO-8859-1~16 の String/Symbol でサポートされています。
+他のエンコーディングもサポートされる予定です。
+
+#@else
 --- downcase -> String
 
 'A' から 'Z' までの
@@ -1176,13 +1259,21 @@ p str                         #=> "abc"
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 p "STRing?".downcase   # => "string?"
 #@end
-
 @see [[m:String#downcase!]], [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
+#@since 2.4.0
+--- downcase!(*options) -> self | nil
+
+全ての大文字を対応する小文字に破壊的に置き換えます。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- downcase! -> self | nil
 
 文字列中の 'A' から 'Z' までの
@@ -1192,7 +1283,7 @@ p "STRing?".downcase   # => "string?"
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
-
+#@end
 @return self を変更して返します。変更が無かった場合は nil を返します。
 
 #@samplecode 例
@@ -1213,6 +1304,19 @@ str == eval(str.dump) となることが保証されています。
 puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 #@end
 
+#@since 2.5.0
+@see [[m:String#undump]]
+--- undump -> String
+self のエスケープを戻したものを返します。
+
+[[m:String#dump]] の逆変換にあたります。
+
+#@samplecode 例
+"\"hello \\n ''\"".undump #=> "hello \n ''"
+#@end
+
+@see [[m:String#dump]]
+#@end
 #@since 2.4.0
 --- each_line(rs = $/, chomp: false) {|line| ... } -> self
 --- each_line(rs = $/, chomp: false)  -> Enumerator
@@ -1290,7 +1394,8 @@ chomp に true を指定すると、分割した各行に対して [[m:String#ch
 
 #@since 2.4.0
 @param chomp 分割した各行に対して [[m:String#chomp]] と同等の結果を得
-             るかを boolean で指定します。
+             る場合は true を、そうでない場合は false で指定します。
+             省略した場合は false を指定したとみなされます。
 #@end
 
 ブロックが指定された場合は [[m:String#each_line]] と同じように動作しま
@@ -1442,9 +1547,6 @@ puts '\n'.gsub(/\\/) { '\\\\' }      # => \\n        # OK
 その実行結果で置き換えた文字列を生成して返します。
 ブロックなしの場合と違い、ブロックの中からは
 組み込み変数 [[m:$1]], $2, $3, ... を問題なく参照できます。
-
-なお、ブロック付きの gsub で文字列を置き換えない場合は[[String#scan]]
-と同じ動作になります。
 
 @param pattern    置き換える文字列のパターンを表す文字列か正規表現。
                   文字列を指定した場合は全く同じ文字列にだけマッチする
@@ -2462,6 +2564,13 @@ sum %= 65536
 
 @param bits    チェックサムのビット数
 
+#@since 2.4.0
+--- swapcase(*options) -> String
+
+大文字を小文字に、小文字を大文字に変更した文字列を返します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- swapcase -> String
 
 'A' から 'Z' までのアルファベット大文字を小文字に、
@@ -2470,6 +2579,7 @@ sum %= 65536
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 p "ABCxyz".swapcase   # => "abcXYZ"
@@ -2478,10 +2588,18 @@ p "Access".swapcase   # => "aCCESS"
 
 @see [[m:String#swapcase!]], [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
+#@since 2.4.0
+--- swapcase!(*options) -> self | nil
+
+大文字を小文字に、小文字を大文字に破壊的に変更します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- swapcase! -> self | nil
 
 'A' から 'Z' までのアルファベット大文字を小文字に、
 'a' から 'z' までのアルファベット小文字を大文字に、破壊的に変更します。
+#@end
 
 swapcase! は self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
@@ -2772,6 +2890,14 @@ p str   # => "f"
 
 #@include(pack-template)
 
+#@since 2.4.0
+--- upcase(*options) -> String
+
+全ての小文字を対応する大文字に置き換えた文字列を返します。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- upcase -> String
 
 'a' から 'z' までのアルファベット小文字を大文字に変換した文字列を作成して返します。
@@ -2779,6 +2905,7 @@ p str   # => "f"
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 p "stRIng? STring.".upcase   # => "STRING? STRING."
@@ -2787,6 +2914,14 @@ p "stRIng? STring.".upcase   # => "STRING? STRING."
 @see [[m:String#upcase!]], [[m:String#downcase]],
      [[m:String#swapcase]], [[m:String#capitalize]]
 
+#@since 2.4.0
+--- upcase!(*options) -> self | nil
+
+全ての小文字を対応する大文字に破壊的に置き換えます。
+どの文字がどう置き換えられるかは、オプションの有無や文字列のエンコーディングに依存します。
+
+@param options オプションの詳細は [[m:String#downcase]] を参照してください。
+#@else
 --- upcase! -> self | nil
 
 ASCII 文字列の範囲内で 'a' から 'z' までの
@@ -2797,6 +2932,7 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
 このメソッドはマルチバイト文字列を認識しますが、
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
+#@end
 
 #@samplecode 例
 buf = "stRIng? STring."
@@ -2941,6 +3077,9 @@ self の先頭が strs のいずれかであるとき true を返します。
 #@end
 
 @see [[m:String#end_with?]]
+#@since 2.5.0
+@see [[m:String#delete_prefix]], [[m:String#delete_prefix!]]
+#@end
 
 --- end_with?(*strs) -> bool
 
@@ -2955,6 +3094,9 @@ self の末尾が strs のいずれかであるとき true を返します。
 #@end
 
 @see [[m:String#start_with?]]
+#@since 2.5.0
+@see [[m:String#delete_suffix]], [[m:String#delete_suffix!]]
+#@end
 
 --- partition(sep) -> [String, String, String]
 
@@ -3521,4 +3663,103 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 #@end
 
 @see [[m:String#unpack]], [[m:Array#pack]]
+#@end
+#@since 2.5.0
+--- each_grapheme_cluster {|grapheme_cluster| block } -> self
+--- each_grapheme_cluster -> Enumerator
+
+文字列の書記素クラスタに対して繰り返します。
+
+[[m:String#each_char]] と違って、
+Unicode Standard Annex #29 ([[url:http://unicode.org/reports/tr29/]])
+で定義された書記素クラスタに対して繰り返します。
+
+#@samplecode 例
+"a\u0300".each_char.to_a.size # => 2
+"a\u0300".each_grapheme_cluster.to_a.size # => 1
+#@end
+
+@see [[m:String#grapheme_clusters]]
+
+--- grapheme_clusters                             -> [String]
+--- grapheme_clusters {|grapheme_cluster| block } -> self
+
+文字列の書記素クラスタの配列を返します。(self.each_grapheme_cluster.to_a と同じです)
+
+#@samplecode 例
+"a\u0300".grapheme_clusters # => ["à"]
+#@end
+
+ブロックが指定された場合は [[m:String#each_grapheme_cluster]] と同じように動作
+します。ただし deprecated のため、ブロックを指定する場合は
+[[m:String#each_grapheme_cluster]] を使用してください。
+
+@see [[m:String#each_grapheme_cluster]]
+--- delete_prefix(prefix) -> String
+文字列の先頭から prefix を削除した文字列のコピーを返します。
+
+@param prefix 先頭から削除する文字列を指定します。
+
+@return 文字列の先頭から prefix を削除した文字列のコピー
+
+#@samplecode
+"hello".delete_prefix("hel") # => "lo"
+"hello".delete_prefix("llo") # => "hello"
+#@end
+
+@see [[m:String#delete_prefix!]]
+@see [[m:String#delete_suffix]]
+@see [[m:String#start_with?]]
+
+--- delete_prefix!(prefix) -> self | nil
+self の先頭から破壊的に prefix を削除します。
+
+@param prefix 先頭から削除する文字列を指定します。
+
+@return 削除した場合は self、変化しなかった場合は nil
+
+#@samplecode
+"hello".delete_prefix!("hel") # => "lo"
+"hello".delete_prefix!("llo") # => nil
+#@end
+
+@see [[m:String#delete_prefix]]
+@see [[m:String#delete_suffix!]]
+@see [[m:String#start_with?]]
+
+--- delete_suffix(suffix) -> String
+文字列の末尾から suffix を削除した文字列のコピーを返します。
+
+@param suffix 末尾から削除する文字列を指定します。
+
+@return 文字列の末尾から suffix を削除した文字列のコピー
+
+#@samplecode
+"hello".delete_suffix("llo") # => "he"
+"hello".delete_suffix("hel") # => "hello"
+#@end
+
+@see [[m:String#chomp]]
+@see [[m:String#chop]]
+@see [[m:String#delete_prefix]]
+@see [[m:String#delete_suffix!]]
+@see [[m:String#end_with?]]
+
+--- delete_suffix!(suffix) -> self | nil
+self の末尾から破壊的に suffix を削除します。
+
+@param suffix 末尾から削除する文字列を指定します。
+
+@return 削除した場合は self、変化しなかった場合は nil
+
+#@samplecode
+"hello".delete_suffix!("llo") # => "he"
+"hello".delete_suffix!("hel") # => nil
+#@end
+
+@see [[m:String#chomp!]]
+@see [[m:String#chop!]]
+@see [[m:String#delete_prefix!]]
+@see [[m:String#delete_suffix]]
+@see [[m:String#end_with?]]
 #@end

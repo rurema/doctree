@@ -46,7 +46,7 @@ OpenSSLの内部テーブルに登録します。
 @param oid 登録する識別子(ドット区切り数字表記の文字列)
 @param short_name short nameとして登録する文字列
 @param long_name long nameとして登録する文字列
-@raise OpenSSL::ASN1Error 登録に失敗した場合に発生します。
+@raise OpenSSL::ASN1::ASN1Error 登録に失敗した場合に発生します。
 
 == Instance Methods
 

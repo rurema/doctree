@@ -922,7 +922,7 @@ pack は暗号になりやすい面があることを考慮し、pack を使い�
 : 構造体のアドレス
 
   例えば、
-//emplist{
+//emlist{
       struct {
         int   a;
         short b;

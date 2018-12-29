@@ -266,7 +266,7 @@ utc_offset に nil を指定した場合の値は、現在のタイムゾーン�
 
 @param  sec 秒を 0 から 60 までの整数か文字列で指定します。(60はうるう秒)
 
-@param  utc_offset 協定世界時との時差を、秒を単位とする整数か、 
+@param  utc_offset 協定世界時との時差を、秒を単位とする整数か、
                    "+HH:MM" "-HH:MM" 形式の文字列で指定します。
 
 @raise ArgumentError 与えられた引数が無効である場合に発生します。
@@ -376,6 +376,11 @@ true を返します。そうでない場合に false を返します。
 戻り値の文字エンコーディングは [[m:Encoding::ASCII_8BIT]] です。
 #@end
 #@end
+
+例:
+  Time.now.asctime            # => "Fri Nov 10 00:00:32 2017"
+  Time.now.asctime.encoding   # => #<Encoding:US-ASCII>
+  Time.now.ctime              # => "Fri Nov 10 00:00:32 2017"
 
 --- gmt?    -> bool
 --- utc?    -> bool
@@ -662,7 +667,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   Time.mktime(2003,  1,  1).yday #=> 1
   Time.mktime(2003,  3,  1).yday #=> 60
   Time.mktime(2003, 12, 31).yday #=> 365
-  
+
   # うるう年の場合
   Time.mktime(2004,  1,  1).yday #=> 1
   Time.mktime(2004,  2, 29).yday #=> 60
@@ -898,7 +903,7 @@ IEEE 754 浮動小数点数で表現できる精度が違うため、[[m:Time#to
 --- round(ndigits=0) -> Time
 
 十進小数点数で指定した桁数の精度で丸めをし、
-その [[c:Time]] オブジェクト返します。
+その [[c:Time]] オブジェクトを返します。
 (デフォルトは0、つまり小数点の所で丸めます)。
 
 ndigits には 0 以上の整数を渡します。

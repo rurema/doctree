@@ -68,6 +68,14 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
+#@end
+
+@see [[m:Dir.getwd]]
+
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
 
@@ -83,6 +91,16 @@ Pathname オブジェクトの配列として返します。
 
 @param pattern ワイルドカードパターンです
 @param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
+
+#@samplecode
+require "pathname"
+Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb.rb>]
+#@end
+
+@see [[m:Dir.glob]]
+#@since 2.5.0
+@see [[m:Pathname#glob]]
+#@end
 
 == Instance Methods
 
@@ -538,7 +556,7 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+@param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @see [[m:File.utime]]
 
@@ -714,12 +732,18 @@ FileTest.writable_real?(self.to_s) と同じです。
 @see [[m:FileTest.#writable_real?]]
 
 --- zero? -> bool
-#@since 2.4.0
---- empty? -> bool
-#@end
+
 FileTest.zero?(self.to_s) と同じです。
 
 @see [[m:FileTest.#zero?]]
+#@since 2.4.0
+     , [[m:Pathname#empty?]]
+
+--- empty? -> bool
+ディレクトリに対しては Dir.empty?(self.to_s) と同じ、他に対しては FileTest.empty?(self.to_s) と同じです。
+
+@see [[m:Dir.empty?]], [[m:FileTest.#empty?]], [[m:Pathname#zero?]]
+#@end
 
 #@until 1.9.2
 --- chdir{|path| ... } -> object
@@ -931,7 +955,7 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 --- sub_ext(replace) -> Pathname
 
-拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクト返します。
+拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクトを返します。
 
 自身が拡張子を持たない場合は、与えられた文字列を拡張子として付加します。
 
@@ -939,4 +963,30 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 
 #@end
+#@since 2.5.0
+--- glob(pattern, flags=0) -> [Pathname]
+--- glob(pattern, flags=0) {|pathname| ...} -> nil
 
+ワイルドカードの展開を行なった結果を、
+Pathname オブジェクトの配列として返します。
+
+引数の意味は、[[m:Dir.glob]] と同じです。 flag の初期値である 0 は「何
+も指定しない」ことを意味します。
+
+ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェ
+クトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値と
+しては nil を返します。
+
+このメソッドは内部で [[m:Dir.glob]] の base キーワード引数を使っています。
+
+@param pattern ワイルドカードパターンです
+@param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
+
+#@samplecode
+require "pathname"
+Pathname("ruby-2.4.2").glob("R*.md") # => [#<Pathname:ruby-2.4.2/README.md>, #<Pathname:ruby-2.4.2/README.ja.md>]
+#@end
+
+@see [[m:Dir.glob]]
+@see [[m:Pathname.glob]]
+#@end
