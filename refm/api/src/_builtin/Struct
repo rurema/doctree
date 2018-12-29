@@ -363,12 +363,28 @@ self が保持するメンバの値が変化すればこのメソッドが返す
 #@include(Struct.attention)
 #@since 2.0.0
 --- to_h -> Hash
+#@since 2.6.0
+--- to_h {|member, value| block } -> Hash
+#@end
 
 self のメンバ名([[c:Symbol]])と値の組を [[c:Hash]] にして返します。
 
+#@samplecode 例
   Customer = Struct.new(:name, :address, :zip)
   Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
   # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#@end
+
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@samplecode ブロック付きの例
+Customer = Struct.new(:name, :address, :zip)
+Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
+  [member, value*2]
+} # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
+#@end
+#@end
 
 #@include(Struct.attention)
 #@end

@@ -306,11 +306,14 @@ self を返します。
 
 #@since 2.0.0
 --- to_h -> self | Hash
+#@since 2.6.0
+--- to_h {|key, value| block } -> Hash
+#@end
 
 self を返します。[[c:Hash]] クラスのサブクラスから呼び出した場合は
 self を [[c:Hash]] オブジェクトに変換します。
 
-例:
+#@samplecode 例
   hash = {}
   p hash.to_h      # => {}
   p hash.to_h == hash # => true
@@ -320,7 +323,16 @@ self を [[c:Hash]] オブジェクトに変換します。
   p my_hash.to_h        # => {}
   p my_hash.class       # => MyHash
   p my_hash.to_h.class  # => Hash
+#@end
 
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@samplecode ブロック付きの例
+hash = { "a" => 97, "b" => 98 }
+hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
+#@end
+#@end
 #@end
 
 #@since 2.3.0

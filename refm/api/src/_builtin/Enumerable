@@ -780,14 +780,27 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 
 #@since 2.1.0
 --- to_h(*args) -> Hash
+#@since 2.6.0
+--- to_h(*args) { ... } -> Hash
+#@end
 
 self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
 返します。
 
 @param args each の呼び出し時に引数として渡されます。
 
-   %i[hello world].each_with_index.to_h
-     # => {:hello => 0, :world => 1}
+#@samplecode 例
+%i[hello world].each_with_index.to_h # => {:hello => 0, :world => 1}
+#@end
+
+#@since 2.6.0
+ブロックを指定すると各要素でブロックを呼び出し、
+その結果をペアとして使います。
+
+#@samplecode ブロック付きの例
+(1..5).to_h {|x| [x, x ** 2]} # => {1=>1, 2=>4, 3=>9, 4=>16, 5=>25}
+#@end
+#@end
 #@end
 
 #@since 1.8.0
