@@ -19,6 +19,12 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@samplecode 例
+Thread.abort_on_exception # => false
+Thread.abort_on_exception = true
+Thread.abort_on_exception # => true
+#@end
+
 #@since 2.4.0
 --- report_on_exception             -> bool
 --- report_on_exception=(newstate)
@@ -242,6 +248,9 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 スレッドのデバッグレベルを返します。
 
+スレッドのデバッグレベルが 0 のときはなにもしません。
+それ以外の場合は、スレッドのデバッグログを標準出力に出力します。
+初期値は 0 です。
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
 
@@ -249,10 +258,14 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 Thread.DEBUG # => 0
 #@end
 
+@see [[m:Thread.DEBUG=]]
+
 --- DEBUG=(val)
 
 スレッドのデバッグレベルを val に設定します。
 
+val が 真 のときは Integer に変換してから設定します。
+偽 のときは 0 を設定します。
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
 
@@ -261,6 +274,8 @@ Thread.DEBUG # => 0
 Thread.DEBUG = 1
 Thread.DEBUG # => 1
 #@end
+
+@see [[m:Thread.DEBUG]]
 
 #@end
 

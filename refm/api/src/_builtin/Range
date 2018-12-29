@@ -91,13 +91,17 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 == Instance Methods
 
+#@until 2.6.0
 --- ===(obj) -> bool
+#@end
 --- include?(obj) -> bool
 --- member?(obj) -> bool
 
 obj が範囲内に含まれている時に真を返します。
 
+#@until 2.6.0
 [[m:Range#===]] は主に case 式での比較に用いられます。
+#@end
 
 #@since 1.9.1
 <=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
@@ -116,15 +120,24 @@ include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
   p ("a" .. "c").include?("ba") # => false
   p ("a" .. "c").member?("ba")  # => false
 
+#@until 2.6.0
 @see [[ref:d:spec/control#case]]
+#@end
 #@since 1.9.1
 @see [[m:Range#cover?]]
 #@end
 
 #@since 1.9.1
+#@since 2.6.0
+--- ===(obj) -> bool
+#@end
 --- cover?(obj) -> bool
 
 obj が範囲内に含まれている時に真を返します。
+
+#@since 2.6.0
+[[m:Range#===]] は主に case 式での比較に用いられます。
+#@end
 
 [[m:Range#include?]] と異なり <=> メソッドによる演算により範囲内かどうかを判定します。
 [[m:Range#include?]] は原則として離散値を扱い、
@@ -155,6 +168,9 @@ Range#cover? は連続値を扱います。
   (Date.new(2014,1,3)..Date.new(2014,1,5)).cover?(Date.new(2014,1,5))             # => true
   (Time.new(2014,1,3)..Time.new(2014,1,5)).cover?(Time.new(2014,1,4,10,10,10))    # => true
 
+#@since 2.6.0
+@see [[ref:d:spec/control#case]]
+#@end
 @see [[m:Range#include?]]
 #@end
 
@@ -293,7 +309,7 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 --- ==(other)     -> bool
 
 指定された other が Range クラスのインスタンスであり、
-始点と終点が == メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
+始端と終端が == メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
@@ -307,7 +323,7 @@ true を返します。そうでない場合に false を返します。
 --- eql?(other)   -> bool
 
 指定された other が Range クラスのインスタンスであり、
-始点と終点が eql? メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
+始端と終端が eql? メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
@@ -320,7 +336,7 @@ true を返します。そうでない場合に false を返します。
 
 --- hash    -> Integer
 
-始点と終点のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
+始端と終端のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
 
 例:
 
@@ -329,7 +345,7 @@ true を返します。そうでない場合に false を返します。
 
 --- to_s -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは #to_s メソッドで文
+self を文字列に変換します(始端と終端のオブジェクトは #to_s メソッドで文
 字列に変換されます)。
 
 @see [[m:Range#inspect]]
@@ -340,7 +356,7 @@ self を文字列に変換します(始点と終点のオブジェクトは #to_
 
 --- inspect -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは #inspect メソッド
+self を文字列に変換します(始端と終端のオブジェクトは #inspect メソッド
 で文字列に変換されます)。
 
 @see [[m:Range#to_s]]

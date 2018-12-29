@@ -792,6 +792,14 @@ object を出力します。object が文字列でない時にはメソッ
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
+#@samplecode 例
+IO.open(IO.sysopen("testfile", "w+")) do |io|
+  io.binmode? # => false
+  io.binmode  # => #<IO:fd 8>
+  io.binmode? # => true
+end
+#@end
+
 @see [[ref:c:IO#io_binmode]], [[m:IO#binmode?]]
 
 --- clone    -> IO
@@ -1044,6 +1052,18 @@ fcntl(2) が返した整数を返します。
 @raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
 
 @raise IOError 既に close されている場合に発生します。
+
+#@samplecode 例
+require "fcntl"
+
+IO.write("testfile", "abcde")
+# ファイル状態フラグを読み出す
+File.open("testfile") do |f|
+  f.fcntl(Fcntl::F_GETFL, 0) # => 0
+  f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK) # => 0
+  f.fcntl(Fcntl::F_GETFL, 0) # => 4
+end
+#@end
 
 --- fsync    -> 0 | nil
 

@@ -8,9 +8,11 @@ Math モジュールにはさまざま数学関数がモジュール関数とし
 
 === 例
 
-  pi = Math.atan2(1, 1)*4;
-  include Math
-  pi2 = atan2(1, 1)*4
+#@samplecode
+pi = Math.atan2(1, 1)*4;
+include Math
+pi2 = atan2(1, 1)*4
+#@end
 
 == Module Functions
 
@@ -86,8 +88,10 @@ y / x の逆正接関数の値を返します。
 @return 返される値の範囲は [-π, π] です。
 
 
-  Math.atan2(1,0)   #=>  1.5707963267949
-  Math.atan2(-1,0)  #=> -1.5707963267949
+#@samplecode 例
+Math.atan2(1,0)   #=>  1.5707963267949
+Math.atan2(-1,0)  #=> -1.5707963267949
+#@end
 
 #@since 1.9.1
 @raise TypeError y, x に数値以外を指定した場合に発生します。
@@ -355,7 +359,9 @@ sqrt(x*x + y*y) を返します。
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 #@end
 
-  Math.hypot(3, 4) #=> 5.0
+#@samplecode 例
+Math.hypot(3, 4) #=> 5.0
+#@end
 
 #@end
 
@@ -613,15 +619,19 @@ Math.lgamma(0) # => [Infinity, 1]
 
 自然対数の底
 
-    p Math::E
-    # => 2.718281828
+#@samplecode 例
+p Math::E
+# => 2.718281828
+#@end
 
 --- PI -> Float
 
 円周率
 
-    p Math::PI
-    # => 3.141592654
+#@samplecode 例
+p Math::PI
+# => 3.141592654
+#@end
 
 #@since 1.9.1
 = class Math::DomainError < StandardError

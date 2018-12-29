@@ -254,14 +254,12 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 
 @param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 
-#@since 1.8.7
-#@since 1.9.1
 --- select                      -> Enumerator
-#@else
---- select                      -> Enumerable::Enumerator
-#@end
-#@end
 --- select {|key, value| ... }  -> [[String, String]]
+#@since 2.6.0
+--- filter                      -> Enumerator
+--- filter {|key, value| ... }  -> [[String, String]]
+#@end
 
 環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
 します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
@@ -340,8 +338,14 @@ self を返します。
 #@since 1.9.2
 --- keep_if {|key, value| ... } -> ENV
 --- select! {|key, value| ... } -> ENV | nil
+#@since 2.6.0
+--- filter! {|key, value| ... } -> ENV | nil
+#@end
 --- keep_if -> Enumerator
 --- select! -> Enumerator
+#@since 2.6.0
+--- filter! -> Enumerator
+#@end
 
 キーと値を引数としてブロックを評価した結果が真であ
 るような要素を環境変数に残します。
@@ -353,4 +357,19 @@ select! はオブジェクトが変更された場合に self を、
 ブロックが省略された場合には [[c:Enumerator]] を返します。
 
 @see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [[m:Hash#select!]],
+#@end
+#@since 2.6.0
+--- slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+#@samplecode 例
+ENV["foo"] = "bar"
+ENV["baz"] = "qux"
+ENV["bar"] = "rab"
+ENV.slice()             # => {}
+ENV.slice("")           # => {}
+ENV.slice("unknown")    # => {}
+ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
+#@end
 #@end
