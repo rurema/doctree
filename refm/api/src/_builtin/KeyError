@@ -35,6 +35,8 @@ p err.key      # => :bar
 
 KeyError の原因となったメソッド呼び出しのレシーバを返します。
 
+@raise ArgumentError レシーバが設定されていない時に発生します。
+
 例:
 
   h = Hash.new
@@ -48,6 +50,8 @@ KeyError の原因となったメソッド呼び出しのレシーバを返し�
 --- key -> object
 
 KeyError の原因となったメソッド呼び出しのキーを返します。
+
+@raise ArgumentError キーが設定されていない時に発生します。
 
 例:
 

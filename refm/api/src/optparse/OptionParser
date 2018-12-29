@@ -490,10 +490,17 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 
 @see [[m:OptionParser#on]], [[m:OptionParser#on_head]]
 
+#@since 2.4.0
+--- order(argv, into: nil)            -> [String]
+--- order(argv, into: nil){|s| ...}   -> [String]
+--- order(*args, into: nil)           -> [String]
+--- order(*args, into: nil){|s| ...}  -> [String]
+#@else
 --- order(argv)                     -> [String]
 --- order(argv){|s| ...}            -> [String]
 --- order(*args)                    -> [String]
 --- order(*args){|s| ...}           -> [String]
+#@end
 
 与えられた argv を順番にパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
@@ -508,6 +515,13 @@ argv からオプションを取り除いたものを返します。
 @param argv パースしたい引数を文字列の配列で指定します。
 
 @param args パースしたい引数を順に文字列として与えます。
+
+#@since 2.4.0
+@param into オプションを格納するハッシュを指定します。
+            指定したハッシュにはオプションの名前をキーとして、[[m:OptionParser#on]]に渡されたブロックの値が格納されます。
+            キーの名前はロングオプションが定義されていればロングオプションの値を、
+            ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -528,8 +542,13 @@ argv からオプションを取り除いたものを返します。
   :a
   ["-a", "foo", "somefile", "-b"]
 
+#@since 2.4.0
+--- order!(argv = self.default_argv, into: nil)             -> [String]
+--- order!(argv = self.default_argv, into: nil) {|s| ...}   -> [String]
+#@else
 --- order!(argv = self.default_argv)             -> [String]
 --- order!(argv = self.default_argv) {|s| ...}   -> [String]
+#@end
 
 与えられた argv を順番に破壊的にパースします。
 argv からオプションがすべて取り除かれます。
@@ -543,6 +562,13 @@ argv を返します。
 -b もコマンドのオプションではない引数として扱われてしまいます。
 
 @param argv パースしたい引数を文字列の配列で指定します。
+
+#@since 2.4.0
+@param into オプションを格納するハッシュを指定します。
+            指定したハッシュにはオプションの名前をキーとして、[[m:OptionParser#on]]に渡されたブロックの値が格納されます。
+            キーの名前はロングオプションが定義されていればロングオプションの値を、
+            ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -563,8 +589,13 @@ argv を返します。
   :a
   ["somefile", "-b"]
 
+#@since 2.4.0
+--- permute(argv, into: nil)   -> [String]
+--- permute(*args, into: nil)  -> [String]
+#@else
 --- permute(argv)            -> [String]
 --- permute(*args)           -> [String]
+#@end
 
 与えられた argv をパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -577,6 +608,13 @@ argv からオプションを取り除いたものを返します。
 
 @param args パースしたい引数を順に文字列として与えます。
 
+#@since 2.4.0
+@param into オプションを格納するハッシュを指定します。
+            指定したハッシュにはオプションの名前をキーとして、[[m:OptionParser#on]]に渡されたブロックの値が格納されます。
+            キーの名前はロングオプションが定義されていればロングオプションの値を、
+            ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+#@end
+
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
@@ -598,7 +636,11 @@ argv からオプションを取り除いたものを返します。
   :b
   ["somefile"]
 
+#@since 2.4.0
+--- permute!(argv = self.default_argv, into: nil)    -> [String]
+#@else
 --- permute!(argv = self.default_argv)    -> [String]
+#@end
 
 与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -609,6 +651,13 @@ argv を返します。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
+#@since 2.4.0
+@param into オプションを格納するハッシュを指定します。
+            指定したハッシュにはオプションの名前をキーとして、[[m:OptionParser#on]]に渡されたブロックの値が格納されます。
+            キーの名前はロングオプションが定義されていればロングオプションの値を、
+            ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+#@end
+
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
@@ -630,8 +679,13 @@ argv を返します。
   :b
   ["somefile"]
 
+#@since 2.4.0
+--- parse(argv, into: nil)   -> [String]
+--- parse(*args, into: nil)  -> [String]
+#@else
 --- parse(argv)           -> [String]
 --- parse(*args)          -> [String]
+#@end
 
 与えられた argv をパースします。
 argv からオプションを取り除いたものを返します。
@@ -644,11 +698,22 @@ argv からオプションを取り除いたものを返します。
 
 @param args パースしたい引数を順に文字列として与えます。
 
+#@since 2.4.0
+@param into オプションを格納するハッシュを指定します。
+            指定したハッシュにはオプションの名前をキーとして、[[m:OptionParser#on]]に渡されたブロックの値が格納されます。
+            キーの名前はロングオプションが定義されていればロングオプションの値を、
+            ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+#@end
+
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@since 2.4.0
+--- parse!(argv = self.default_argv, into: nil)   -> [String]
+#@else
 --- parse!(argv = self.default_argv)   -> [String]
+#@end
 
 与えられた argv をパースします。
 
@@ -657,6 +722,13 @@ argv からオプションを取り除いたものを返します。
 [[m:OptionParser#order!]] と同様に振舞います。
 
 @param argv パースしたい引数を文字列の配列で指定します。
+
+#@since 2.4.0
+@param into オプションを格納するハッシュを指定します。
+            指定したハッシュにはオプションの名前をキーとして、[[m:OptionParser#on]]に渡されたブロックの値が格納されます。
+            キーの名前はロングオプションが定義されていればロングオプションの値を、
+            ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク

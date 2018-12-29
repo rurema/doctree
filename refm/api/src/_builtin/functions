@@ -177,8 +177,8 @@ command を外部コマンドとして実行し、その標準出力を文字列
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-それ以外の終了ステータスの場合
-(コマンドを実行できなかった場合も含む)は false を返します。
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
@@ -319,7 +319,7 @@ Hash の値(親プロセス側)には以下のいずれかが指定できます�
   * 単一のファイルデスクリプタ
   * リダイレクト先のファイル名文字列
   * [リダイレクト先のファイル名文字列]、配列の要素にすることで
-    [[m:File::RDONLY]] でファイルを開いてリダイレクトします。
+    [[m:File::Constants::RDONLY]] でファイルを開いてリダイレクトします。
   * [リダイレクト先のファイル名文字列, モード文字列]
     open(ファイル名, モード, 0644) でファイルを開いてリダイレクト
     します。
@@ -575,7 +575,46 @@ nil を返します。ブロックを指定して呼び出した場合には、�
 fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-#@#例...
+
+#@samplecode ブロックを指定しなかった場合
+if child_pid = fork
+  puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+  # => parent process. pid: 81060, child pid: 81329
+
+  # 親プロセスでの処理
+  # ...
+
+  # 子プロセスの終了を待って終了。
+  Process.waitpid(child_pid)
+else
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 81329
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+#@end
+
+#@samplecode ブロックを指定した場合
+child_pid = fork do
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 79602
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+
+puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+# => parent process. pid: 79055, child pid: 79602
+
+# 親プロセスでの処理
+# ...
+
+# 子プロセスの終了を待って終了。
+Process.waitpid(child_pid)
+#@end
+
+
 @see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
@@ -597,7 +636,12 @@ syscall(2) や
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
 @raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-#@#例...
+
+#@samplecode 例
+syscall 4, 1, "hello\n", 6   # '4' is write(2) on our box
+# => hello
+#@end
+
 @see [[lib:fiddle]], [[man:syscall(2freebsd)]], [[man:syscall(2linux)]]
 
 
@@ -712,17 +756,21 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 @param writes [[m:IO.select]] 参照
 @param excepts [[m:IO.select]] 参照
 @param timeout [[m:IO.select]] 参照
+
+#@#noexample IO.select を参照
+
 @see [[m:IO.select]]
 
 --- test(cmd, file) -> bool | Time | Integer | nil
 
 単体のファイルでファイルテストを行います。
 
-@param cmd 以下に示す数値リテラルか文字列です(文字列の場合はその先頭の文字だけをコマンドとみなします)。
-@param file テストするファイルオブジェクトです。
+@param cmd 以下に示す文字リテラル、文字列、あるいは同じ文字を表す数値
+           です。文字列の場合はその先頭の文字だけをコマンドとみなします。
+@param file テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
 @return 下表に特に明記していないものは、真偽値を返します。
 
-以下は cmd として指定できる数値リテラルとその意味です。
+以下は cmd として指定できる文字リテラルとその意味です。
 
 : ?r
     ファイルを実効 uid で読むことができる
@@ -759,9 +807,9 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 : ?S
     ファイルはソケットである
 : ?b
-    ファイルはブロック特殊ファイルである
+    ファイルはブロックスペシャルファイルである
 : ?c
-    ファイルはキャラクター特殊ファイルである
+    ファイルはキャラクタースペシャルファイルである
 : ?u
     ファイルに setuid ビットがセットされている
 : ?g
@@ -775,16 +823,24 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 : ?C
     ファイルの inode 変更時刻を返す -> Time
 
+#@samplecode 例
+IO.write("testfile", "test")
+test("r", "testfile") # => true
+test("s", "testfile") # => 4
+test("M", "testfile") # => 2018-03-31 07:38:40 +0900
+#@end
+
 --- test(cmd, file1, file2) -> bool
 
 ２ファイル間のファイルテストを行います。
 
-@param cmd 以下に示す数値リテラルか文字列です(文字列の場合はその先頭の文字だけをコマンドとみなします)。
-@param file1 テストするファイルオブジェクトです。
-@param file2 テストするファイルオブジェクトです。
+@param cmd 以下に示す文字リテラル、文字列、あるいは同じ文字を表す数値
+           です。文字列の場合はその先頭の文字だけをコマンドとみなします。
+@param file1 テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
+@param file2 テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
 @return 真偽値を返します。
 
-以下は cmd として指定できる数値リテラルとその意味です。
+以下は cmd として指定できる文字リテラルとその意味です。
 
 : ?=
     ファイル1とファイル2の最終更新時刻が等しい
@@ -794,6 +850,20 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
     ファイル1の方がファイル2より最終更新時刻が古い
 : ?-
     ファイル1とファイル2が同一のファイルである
+
+#@samplecode 例
+IO.write("testfile1", "test1")
+IO.write("testfile2", "test2")
+%w(= < > -).each do |e|
+  result = test(e, "testfile1", "testfile2")
+  puts "#{e}: #{result}"
+end
+#@end
+
+# => =: true
+# => <: false
+# => >: false
+# => -: false
 
 --- load(file, priv = false) -> true
 
@@ -857,6 +927,19 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 
 @param feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
+
+#@samplecode 例
+$LOADED_FEATURES.grep(/prime/).size # => 0
+require "prime"       # => true
+$LOADED_FEATURES.grep(/prime/).size # => 1
+require "prime"       # => false
+begin
+  require "invalid"
+rescue LoadError => e
+  e.message # => "cannot load such file -- invalid"
+end
+#@end
+
 #@since 1.9.1
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]],[[m:Kernel.#require_relative]]
 #@else
@@ -1969,6 +2052,8 @@ command を登録します。[[m:Signal.#trap]]と同じです。
 
 @param signal [[m:Signal.#trap]] 参照
 @param command [[m:Signal.#trap]] 参照
+
+#@#noexample Signal.#trap を参照
 
 @see [[m:Signal.#trap]],[[c:Signal]]
 

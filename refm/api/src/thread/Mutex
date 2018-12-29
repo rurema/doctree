@@ -23,8 +23,10 @@ Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アク�
 
 == Class Methods
 
---- new -> Mutex
+--- new -> Thread::Mutex
 新しい mutex を生成して返します。
+
+#@#noexample :Mutex#unlock 等を参照
 
 == Instance Methods
 
@@ -65,6 +67,17 @@ mutex をロックし、ブロックを実行します。実行後に必ず mute
 #@since 2.0.0
                    また、[[m:Signal.#trap]] に指定したハンドラ内で実行
                    した場合に発生します。
+#@end
+
+#@samplecode 例
+m = Mutex.new
+result = m.synchronize do
+  m.locked? # => true
+  # critical part
+  "result"
+end
+m.locked? # => false
+result # => "result"
 #@end
 
 --- try_lock -> bool

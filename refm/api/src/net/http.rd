@@ -594,15 +594,17 @@ nil の場合システムが適当にローカルホストを
 
 @param host ホスト名、もしくはアドレスを示す文字列
 
-  require 'net/http'
-  
-  http = Net::HTTP.new("www.example.com")
-  http.local_host = "192.168.0.5"
-  http.local_port = "53043"
-  
-  http.start
-  p http.get("/").body
+#@samplecode 例
+require 'net/http'
 
+http = Net::HTTP.new("www.example.com")
+http.local_host = "192.168.0.5"
+http.local_port = "53043"
+
+http.start do |h|
+  p h.get("/").body
+end
+#@end
 
 @see [[m:Net::HTTP#local_host=]], [[m:Net::HTTP#local_port]]
 
@@ -626,14 +628,17 @@ nil の場合システムが適当にローカルポートを
 
 @param port ローカルポート(数値、もしくはサービス名文字列)
 
-  require 'net/http'
-  
-  http = Net::HTTP.new("www.example.com")
-  http.local_host = "192.168.0.5"
-  http.local_port = "53043"
-  
-  http.start
-  p http.get("/").body
+#@samplecode 例
+require 'net/http'
+
+http = Net::HTTP.new("www.example.com")
+http.local_host = "192.168.0.5"
+http.local_port = "53043"
+
+http.start do |h|
+  p h.get("/").body
+end
+#@end
 
 @see [[m:Net::HTTP#local_port=]], [[m:Net::HTTP#local_host]]
 
@@ -1710,11 +1715,21 @@ key は大文字小文字を区別しません。
 
 ヘッダフィールドの数を返します。
 
---- basic_auth(account, password) -> ()
+#@#noexample
+
+--- basic_auth(account, password) -> [String]
 Authorization: ヘッダを BASIC 認証用にセットします。
 
 @param account アカウント名を文字列で与えます。
 @param password パスワードを文字列で与えます。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
+#@end
 
 --- chunked? -> bool
 Transfer-Encoding: ヘッダフィールドが "chunked" である
@@ -1722,6 +1737,16 @@ Transfer-Encoding: ヘッダフィールドが "chunked" である
 
 Transfer-Encoding: ヘッダフィールドが存在しなかったり、
 "chunked" 以外である場合には偽を返します。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.chunked? # => false
+req["Transfer-Encoding"] = "chunked"
+req.chunked? # => true
+#@end
 
 --- content_type -> String|nil
 "text/html" のような Content-Type を表す
@@ -1853,6 +1878,14 @@ key は大文字小文字を区別しません。
 --- method -> String
 
 リクエストの HTTP メソッドを文字列で返します。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.method # => "GET"
+#@end
 
 --- proxy_basic_auth(account, password) -> ()
 

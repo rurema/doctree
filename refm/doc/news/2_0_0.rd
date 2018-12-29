@@ -343,7 +343,7 @@
   $ ri rspec:README
 //}
     * Markdown をサポートしました。[[c:RDoc::Markdown]] を見てください。
-    * [[url:https://github.com/rdoc/rdoc/blob/master/History.rdoc]]
+    * [[url:https://github.com/ruby/rdoc/blob/master/History.rdoc]]
 
   * [[lib:resolv]]
     * 追加: [[m:Resolv::DNS#timeouts=]]

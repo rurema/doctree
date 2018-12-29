@@ -16,7 +16,7 @@ category File
   find('/foo','/bar') {|f| ...}
 
 以下は、ruby のアーカイブに含まれるサンプルスクリプト
-([[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/sample/trojan.rb?view=markup]]) をこのモジュールで書き換えたものです。
+([[url:https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/sample/trojan.rb?view=markup]]) をこのモジュールで書き換えたものです。
 
   #! /usr/bin/env ruby
   require "find"

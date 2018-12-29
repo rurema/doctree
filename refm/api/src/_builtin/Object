@@ -226,6 +226,9 @@ other が self 自身の時、真を返します。
 #@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
@@ -243,6 +246,9 @@ other が self 自身の時、真を返します。
 #@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
@@ -260,6 +266,9 @@ other が self 自身の時、真を返します。
 #@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
@@ -824,39 +833,24 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 
 @see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Regexp#===]], [[m:Enumerable#grep]]
 
-#@since 1.9.1
 --- =~(other) -> nil
-#@else
---- =~(other) -> false
-#@end
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
-をサポートするためのメソッドです。
-#@since 1.9.1
-常に nil を返します。
-#@else
-常に false を返します。
-#@end
+をサポートするためのメソッドです。常に nil を返します。
 
 この定義により、=~ が再定義されたオブジェクトでは正常にマッチを行い、
-#@since 1.9.1
 それ以外のものは nil を返すようになります。
-#@else
-それ以外のものは false を返すようになります。
-#@end
 
 #@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
 
 @param other 任意のオブジェクトです。結果に影響しません。
 
-  obj = 'regexp'
-  p(obj =~ /re/) #=> 0
-  
-  obj = nil
-#@since 1.9.1
-  p(obj =~ /re/) #=> nil
-#@else
-  p(obj =~ /re/) #=> false
+#@samplecode 例
+obj = 'regexp'
+p(obj =~ /re/) #=> 0
+
+obj = nil
+p(obj =~ /re/) #=> nil
 #@end
 
 @see [[m:String#=~]]
@@ -869,6 +863,14 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 self#=~(obj) を反転した結果と同じ結果を返します。
 
 @param other 判定するオブジェクトを指定します。
+
+#@samplecode 例
+obj = 'regexp'
+p (obj !~ /re/) # => false
+
+obj = nil
+p (obj !~ /re/) # => true
+#@end
 
 @see [[m:Object#=~]]
 #@end
@@ -1268,6 +1270,8 @@ marshal_dump/marshal_load を使うべきです。
 @param obj marshal_dump の返り値のコピーです。
 
 @return   返り値は無視されます。
+
+#@#noexample 参照先の Object#marshal_dump にサンプルが書かれているため
 
 @see [[m:Object#marshal_dump]], [[c:Marshal]]
 
@@ -1786,31 +1790,37 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
+#@until 2.3.0
 @raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
+#@end
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
-#@since 1.9.1
 --- trust -> self
-#@todo
 
-オブジェクトの「untrustマーク」を取り除きます。
+このメソッドは deprecated です。
+[[m:Object#untaint]] と同じ動作をします。
+
+#@#noexample deprecated
 
 @see [[m:Object#untrusted?]],[[m:Object#untrust]]
 
 --- untrusted? -> bool
-#@todo
 
-オブジェクトの「untrustマーク」がセットされている時真を返します。
+このメソッドは deprecated です。
+[[m:Object#tainted?]] と同じ動作をします。
+
+#@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrust]]
 
 --- untrust -> self
-#@todo
 
-オブジェクトの「untrustマーク」をセットします。
+このメソッドは deprecated です。
+[[m:Object#taint]] と同じ動作をします。
+
+#@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
-#@end
 
 #@since 1.9.2
 --- singleton_class -> Class

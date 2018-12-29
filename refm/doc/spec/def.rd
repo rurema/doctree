@@ -437,7 +437,7 @@ yield を呼び出すことです。
 #@end
 
 #@since 2.0.0
-@see [[url:http://magazine.rubyist.net/?0041-200Special-kwarg]]
+@see [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-kwarg.html]]
 #@end
 
 ====[a:operator] 演算子式の定義

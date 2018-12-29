@@ -19,7 +19,7 @@
     3.14 # => 3.14.rationalize
     6.022e+23r # 指数形式と一緒には使えない
 
-    # i を付けると複素数の虚部になる
+    # i を付けると虚数単位 i を掛けた数になる
     42i  # => Complex(0, 42)
     3.14i # => Complex(0, 3.14)
 
@@ -215,7 +215,7 @@
 
   * [[lib:rdoc]]
     * 4.1.0 に更新。主にデフォルトのテンプレートとアクセシビリティを改善しました。
-      [[url:https://github.com/rdoc/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
+      [[url:https://github.com/ruby/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
 
   * [[lib:resolv]]
     * 追加: [[m:Resolv::DNS.fetch_resource]]

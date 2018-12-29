@@ -68,13 +68,16 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
 
-#@since 2.5.0
---- glob(pattern, flags=0, base: nil) -> [Pathname]
---- glob(pattern, flags=0, base: nil) {|pathname| ...} -> nil
-#@else
+#@samplecode 例
+require "pathname"
+
+Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
+#@end
+
+@see [[m:Dir.getwd]]
+
 --- glob(pattern, flags=0) -> [Pathname]
 --- glob(pattern, flags=0) {|pathname| ...} -> nil
-#@end
 
 ワイルドカードの展開を行なった結果を、
 Pathname オブジェクトの配列として返します。
@@ -88,9 +91,6 @@ Pathname オブジェクトの配列として返します。
 
 @param pattern ワイルドカードパターンです
 @param flags   パターンマッチ時のふるまいを変化させるフラグを指定します
-#@since 2.5.0
-@param base    カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
-#@end
 
 #@samplecode
 require "pathname"
@@ -98,7 +98,9 @@ Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb.r
 #@end
 
 @see [[m:Dir.glob]]
+#@since 2.5.0
 @see [[m:Pathname#glob]]
+#@end
 
 == Instance Methods
 
@@ -554,7 +556,7 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+@param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @see [[m:File.utime]]
 
@@ -730,12 +732,18 @@ FileTest.writable_real?(self.to_s) と同じです。
 @see [[m:FileTest.#writable_real?]]
 
 --- zero? -> bool
-#@since 2.4.0
---- empty? -> bool
-#@end
+
 FileTest.zero?(self.to_s) と同じです。
 
 @see [[m:FileTest.#zero?]]
+#@since 2.4.0
+     , [[m:Pathname#empty?]]
+
+--- empty? -> bool
+ディレクトリに対しては Dir.empty?(self.to_s) と同じ、他に対しては FileTest.empty?(self.to_s) と同じです。
+
+@see [[m:Dir.empty?]], [[m:FileTest.#empty?]], [[m:Pathname#zero?]]
+#@end
 
 #@until 1.9.2
 --- chdir{|path| ... } -> object
@@ -947,7 +955,7 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 --- sub_ext(replace) -> Pathname
 
-拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクト返します。
+拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクトを返します。
 
 自身が拡張子を持たない場合は、与えられた文字列を拡張子として付加します。
 
