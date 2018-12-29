@@ -322,14 +322,18 @@ Hash を options として渡すことで、起動される子プロセスの
   これを true に設定すると
   リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
   ファイルデスクリプタをすべて閉じます。
+#@since 2.6.0
+  false がデフォルトです。
+#@else
+#@# 2.0.0 から 2.5 までは true がデフォルト
   true がデフォルトです。
+#@end
 
 #@since 2.6.0
 : :exception
   [[m:Kernel.#system]] のみで指定できます。
   これを true に設定すると、nil や false を返す代わりに例外が発生します。
   false がデフォルトです。
-#@#
 #@end
 
 === option引数によるリダイレクトの概要
@@ -446,13 +450,28 @@ stderr と stdout を混ぜる例を以下に示します。
   io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
   p io.read #=> "out\nerr\n
 
+#@since 2.6.0
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
+#@else
 spawn と IO.popen では
 デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+#@end
 「:close_others」オプションでこの挙動を制御できます。
 標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
 限り、このオプションの影響を受けません。
+
+「:close_others」とは無関係に ruby が open する IO には
+デフォルトでは close_on_exec が設定されていて、自動的に
+閉じられることに注意してください。
+
+#@since 2.6.0
+  pid = spawn(command, :close_others=>true)  # close 3,4,5,...
+  pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
+#@else
   pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
   pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+#@end
 
 これを利用して spawn を [[m:IO.popen]] のように使うことができます。
   # similar to r = IO.popen(command)
@@ -740,6 +759,13 @@ mode は以下の三つのうちのいずれかです。
 きます (整数なら File::BINARY )。この場合、バイナリモードでオープン
 します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
 合に限ります)
+
+#@since 2.6.0
+"w" に対しては "x" フラグを ("wx"や"wb+x"のように) つけることが
+できます (整数なら File::EXCL)。
+この場合、ファイルがすでに存在すると Errno::EEXIST が発生します。
+ただし、全ての種類のストリームでサポートされているとは限りません (例えばパイプ)。
+#@end
 
 === Universal Newline
 改行をLFに揃えます。一言で言えばPEP:278 [[url:https://www.python.org/dev/peps/pep-0278/]]のことです。
