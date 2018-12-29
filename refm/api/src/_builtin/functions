@@ -428,8 +428,8 @@ stderr と stdout を混ぜる例を以下に示します。
   io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
   p io.read #=> "out\nerr\n
 
-spawn と IO.popen では
 #@since 2.6.0
+spawn と IO.popen では
 デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
 #@else
 spawn と IO.popen では
