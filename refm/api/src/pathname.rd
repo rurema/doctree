@@ -926,6 +926,8 @@ self の指し示すパスがディレクトリなら
 Dir.foreach(self.to_s, *args, &block) と、さもなければ
 IO.foreach(self.to_s, *args, &block) と同じです。
 
+#@#noexample obsolete
+
 #@if(version <= "1.8.0")
 --- realpath_rec
 [[m:Pathname#realpath]] メソッドの実質的な処理を行っているメソッドです。
