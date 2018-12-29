@@ -405,6 +405,26 @@ self 中で重複していて、other中に存在していなかった要素は�
     [1, 2, 1, 3, 1, 4] - [1, 4]    # => [2, 3]
 #@end
 
+#@since 2.6.0
+
+@see [[m:Array#difference]]
+--- difference(*other_arrays) -> Array
+
+自身から other_arrays の要素を取り除いた配列を生成して返します。
+
+要素の同一性は [[m:Object#hash]] と [[m:Object#eql?]] により評価されます。
+self 中で重複していて、other_arrays中に存在していなかった要素は、その重複が保持されます。
+新しい配列における要素の順は self における要素の順と同じです。
+
+#@samplecode
+[ 1, 1, 2, 2, 3, 3, 4, 5 ].difference([ 1, 2, 4 ])       # => [ 3, 3, 5 ]
+[ 1, 'c', :s, 'yep' ].difference([ 1 ], [ 'a', 'c' ])    # => [:s, "yep"]
+#@end
+
+集合のような振る舞いが必要なら [[c:Set]] も参照してください。
+
+@see [[m:Array#-]]
+#@end
 --- &(other)    -> Array
 
 集合の積演算です。両方の配列に含まれる要素からなる新しい配列を返
