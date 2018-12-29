@@ -282,21 +282,27 @@ Range#each は各要素の succ メソッドを使用してイテレーション
   (1..5).exclude_end?     # => false
   (1...5).exclude_end?    # => true
 
-#@since 1.8.0
 --- step(s = 1) {|item| ... } -> self
-#@since 1.8.7
-#@since 1.9.1
 --- step(s = 1) -> Enumerator
-#@else
---- step(s = 1) -> Enumerable::Enumerator
-#@end
+#@since 2.6.0
+--- step(s = 1) -> Enumerator::ArithmeticSequence
+--- %(s)        -> Enumerator
+--- %(s)        -> Enumerator::ArithmeticSequence
 #@end
 
 範囲内の要素を s おきに繰り返します。
 
+#@since 2.6.0
+@param s 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+@return ブロックを指定した時は self を返します。
+@return ブロックを指定しなかった時かつ数値の Range の時は [[c:Enumerator::ArithmeticSequence]] を返します。
+@return ブロックを指定しなかったその他の Range の時は [[c:Enumerator]] を返します。(例: String の Range)
+#@else
 @param s 正の整数を指定します。
-
+@return ブロックつきの時は self を返します。
+@return ブロックなしの時は [[c:Enumerator]] を返します。
 @raise ArgumentError s に 0 または負の数を指定した場合に発生します
+#@end
 
 例:
 
@@ -304,7 +310,6 @@ Range#each は各要素の succ メソッドを使用してイテレーション
   # => "a"
        "c"
        "e"
-#@end
 
 --- ==(other)     -> bool
 
