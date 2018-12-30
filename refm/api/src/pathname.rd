@@ -149,6 +149,8 @@ other は Pathname オブジェクトでなければなりません。
 --- hash -> Integer
 ハッシュ値を返します。
 
+#@#noexample
+
 --- to_s   -> String
 #@until 1.9.1
 --- to_str -> String
