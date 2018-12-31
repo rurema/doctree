@@ -93,6 +93,13 @@ JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
 このメソッドが真を返すクラスは json_create というメソッドを実装していなければなりません。
 また json_create の第一引数は必要なデータを含むハッシュを期待しています。
 
+#@samplecode 例
+require "json"
+
+String.json_creatable?  # => true
+Dir.json_creatable?     # => false
+#@end
+
 = reopen Array
 include JSON::Generator::GeneratorMethods::Array
 
