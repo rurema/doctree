@@ -69,6 +69,16 @@ jj([1,2,{"name" => "tanaka","age" => 19}])
 
 @param options [[m:JSON.#parse]], [[m:JSON.#generate]] に渡すオプションを指定します。
 
+#@samplecode 例
+require "json"
+
+JSON('[1,2,{"name":"tanaka","age":19}]')
+# => [1, 2, {"name"=>"tanaka", "age"=>19}]
+
+JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}]
+#@end
+
 @see [[m:JSON.#parse]], [[m:JSON.#generate]]
 
 = reopen Class
