@@ -180,6 +180,11 @@ command を外部コマンドとして実行し、その標準出力を文字列
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
 
+#@since 2.6.0
+options で :exception に true を指定することで、
+nil や false を返す代わりに例外を発生するようにできます。
+#@end
+
 終了ステータスは変数 [[m:$?]] で参照できます。
 
 コマンドを実行することができなかった場合、多くのシェルはステータス
@@ -211,6 +216,16 @@ Hash を options として渡すことで、起動される子プロセスの
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
+#@since 2.6.0
+@raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
+@raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+
+#@samplecode
+system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
+system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
+system('ruby -e "exit(true)"', exception: true)  # => true
+#@end
+#@end
 #@#例...
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
@@ -312,6 +327,13 @@ Hash を options として渡すことで、起動される子プロセスの
 #@else
 #@# 2.0.0 から 2.5 までは true がデフォルト
   true がデフォルトです。
+#@end
+
+#@since 2.6.0
+: :exception
+  [[m:Kernel.#system]] のみで指定できます。
+  これを true に設定すると、nil や false を返す代わりに例外が発生します。
+  false がデフォルトです。
 #@end
 
 === option引数によるリダイレクトの概要
