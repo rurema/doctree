@@ -92,10 +92,32 @@ task :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statich
 desc "Check previous commit format"
 task :check_prev_commit_format do
   change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
+  ignored_files = %w[
+     refm/api/src/_builtin/BasicObject.private_methods_from_Object
+     refm/api/src/_builtin/BasicObject.public_methods_from_Object
+     refm/api/src/_builtin/Module.alias_method
+     refm/api/src/_builtin/Module.attr
+     refm/api/src/_builtin/Module.define_method
+     refm/api/src/_builtin/Module.include
+     refm/api/src/_builtin/Module.prepend
+     refm/api/src/_builtin/Module.remove_method
+     refm/api/src/_builtin/Module.undef_method
+     refm/api/src/_builtin/constants
+     refm/api/src/_builtin/functions
+     refm/api/src/_builtin/functions_pp
+     refm/api/src/_builtin/specialvars
+     refm/api/src/rake/core_ext
+     refm/api/src/rdoc/RDoc__constants
+     refm/api/src/shell/builtincommands
+     refm/api/src/socket/constants
+     refm/api/src/tkextlib/tkDND/shape.rd
+     refm/api/src/tkextlib/tkDND/tkdnd.rd
+     refm/api/src/tkextlib/tktrans/tktrans.rd
+  ]
   res = []
   [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS].each do |v|
     change_files.each do |path|
-      if %r!\Arefm/api/!.match(path)
+      if %r!\Arefm/api/!.match(path) && !ignored_files.include?(path)
         htmls = []
         htmls << `bundle exec bitclust htmlfile --ruby=#{v} #{path}`
         raise "Failed to bitclust htmlfile, ruby: #{v}, path: #{path}" unless $?.success?
