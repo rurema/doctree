@@ -2189,10 +2189,10 @@ varname のフックを全て解除します。
 
 --- raise -> ()
 --- fail  -> ()
---- raise(message) -> ()
---- fail(message)  -> ()
---- raise(error_type, message = nil, backtrace = caller(0)) -> ()
---- fail(error_type, message = nil, backtrace = caller(0))  -> ()
+--- raise(message, cause: $!) -> ()
+--- fail(message, cause: $!)  -> ()
+--- raise(error_type, message = nil, backtrace = caller(0), cause: $!) -> ()
+--- fail(error_type, message = nil, backtrace = caller(0), cause: $!)  -> ()
 
 例外を発生させます。
 発生した例外は変数 [[m:$!]] に格納されます。また例外が
@@ -2220,6 +2220,10 @@ error_type として例外ではないクラスやオブジェクトを指定し
 @param message 例外のメッセージとなる文字列です。
 @param backtrace 例外発生時のスタックトレースで、[[m:Kernel.#caller]] の戻り値と同じ
   形式で指定しなければいけません。
+@param cause 現在の例外([[m:$!]])の代わりに [[m:Exception#cause]] に設定する例外を指定します。
+#@since 2.6.0
+  [[c:Exception]] オブジェクトまたは nil を指定できます。
+#@end
 @raise TypeError exception メソッドが例外オブジェクトを返さなかった場合に発生します。
 
 例外の捕捉の例を示します。
