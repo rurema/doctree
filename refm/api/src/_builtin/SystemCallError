@@ -68,7 +68,7 @@ other が SystemCallError のサブクラスのインスタンスで、
     rescue Errno::EWOULDBLOCK
       p $!
     end
-    
+
     # => 11
          11
          #<Errno::EAGAIN: pseudo error>
@@ -320,9 +320,9 @@ Errno::EXXX オブジェクトを生成して返します。
 
 @param error_message エラーメッセージを表す文字列
 
-  p Errno::ENOENT
+  p Errno::ENOENT.new
       # => #<Errno::ENOENT: No such file or directory>
-  p Errno::ENOENT('message')
+  p Errno::ENOENT.new('message')
       # => #<Errno::ENOENT: No such file or directory - message>
 
 == Constants
