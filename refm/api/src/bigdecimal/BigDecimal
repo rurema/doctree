@@ -355,11 +355,13 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 @raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 #@end
 
+#@until 2.6.0
 --- ver -> String
 
 このメソッドは deprecated です。
 #@since 2.5.0
 [[m:BigDecimal::VERSION]] を使用してください。
+#@end
 #@end
 
 == Instance Methods
