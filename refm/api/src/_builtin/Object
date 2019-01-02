@@ -689,13 +689,23 @@ self を引数としてブロックを評価し、self を返します。
 #@since 2.5.0
 @see [[m:Object#yield_self]]
 
---- yield_self{|x| ... } -> object
+--- yield_self {|x| ... } -> object
+#@since 2.6.0
+--- then {|x| ... } -> object
+#@end
 
 self を引数としてブロックを評価し、ブロックの結果を返します。
 
+#@since 2.6.0
 #@samplecode 例
-  "my string".yield_self {|s| s.upcase }   # => "MY STRING"
-  3.next.yield_self {|x| x**x }.to_s       # => "256"
+3.next.then {|x| x**x }.to_s             # => "256"
+"my string".yield_self {|s| s.upcase }   # => "MY STRING"
+#@end
+#@else
+#@samplecode 例
+"my string".yield_self {|s| s.upcase }   # => "MY STRING"
+3.next.yield_self {|x| x**x }.to_s       # => "256"
+#@end
 #@end
 
 @see [[m:Object#tap]]
@@ -838,10 +848,17 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
 をサポートするためのメソッドです。常に nil を返します。
 
+#@since 2.6.0
+このメソッドは deprecated です。
+意図せずに Array などに対して呼ばれた時にバグの原因になっていたため、
+代わりに [[m:NilClass#=~]] が定義されています。
+#@else
+
 この定義により、=~ が再定義されたオブジェクトでは正常にマッチを行い、
 それ以外のものは nil を返すようになります。
 
 #@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
+#@end
 
 @param other 任意のオブジェクトです。結果に影響しません。
 

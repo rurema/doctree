@@ -716,27 +716,52 @@ self のインスタンスメソッド name をオブジェクト化した [[c:U
   interpreter.interpret('dave')
   # => Hello there, Dave!
 
+#@since 2.6.0
+--- method_defined?(name, inherit=true) -> bool
+#@else
 --- method_defined?(name) -> bool
+#@end
 
 モジュールにインスタンスメソッド name が定義されており、
 かつその可視性が public または protected であるときに
 true を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
 @see [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
 
-例:
-  module Foo
-    def foo; end
-    protected def bar; end
-    private def baz; end
-  end
+#@samplecode 例
+module A
+  def method1()  end
+  def protected_method1()  end
+  protected :protected_method1
+end
+class B
+  def method2()  end
+  def private_method2()  end
+  private :private_method2
+end
+class C < B
+  include A
+  def method3()  end
+end
 
-  Foo.method_defined?(:foo) # => true
-  Foo.method_defined?(:bar) # => true
-  Foo.method_defined?(:baz) # => false
-  Foo.method_defined?(:qux) # => false
+A.method_defined? :method1              #=> true
+C.method_defined? "method1"             #=> true
+C.method_defined? "method2"             #=> true
+#@since 2.6.0
+C.method_defined? "method2", true       #=> true
+C.method_defined? "method2", false      #=> false
+#@end
+C.method_defined? "method3"             #=> true
+C.method_defined? "protected_method1"   #=> true
+C.method_defined? "method4"             #=> false
+C.method_defined? "private_method2"     #=> false
+#@end
 
 --- module_eval(expr, fname = "(eval)", lineno = 1) -> object
 --- module_eval{|mod| ... }                         -> object
@@ -1025,69 +1050,127 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
   Foo.public_class_method(:foo) # => Foo
   Foo.foo # => "foo"
 
-#@since 1.8.0
+#@since 2.6.0
+--- private_method_defined?(name, inherit=true) -> bool
+#@else
 --- private_method_defined?(name) -> bool
+#@end
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が private であるときに true を返します。
 そうでなければ false を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
-@see [[m:Module#method_defined?]]
+@see [[m:Module#method_defined?]], [[m:Module#public_method_defined?]], [[m:Module#protected_method_defined?]]
 
-例:
-  module A
-    def method1()  end
-  end
+#@samplecode 例
+module A
+  def method1()  end
+end
+class B
+  private
+  def method2()  end
+end
+class C < B
+  include A
+  def method3()  end
+end
 
-  class B
-    private
-    def method2()  end
-  end
+A.method_defined? :method1                   #=> true
+C.private_method_defined? "method1"          #=> false
+C.private_method_defined? "method2"          #=> true
+#@since 2.6.0
+C.private_method_defined? "method2", true    #=> true
+C.private_method_defined? "method2", false   #=> false
+#@end
+C.method_defined? "method2"                  #=> false
+#@end
 
-  class C < B
-    include A
-    def method3()  end
-  end
-
-  A.method_defined? :method1            # => true
-  C.private_method_defined? "method1"   # => false
-  C.private_method_defined? "method2"   # => true
-  C.method_defined? "method2"           # => false
-
+#@since 2.6.0
+--- protected_method_defined?(name, inherit=true) -> bool
+#@else
 --- protected_method_defined?(name) -> bool
+#@end
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が protected であるときに true を返します。
 そうでなければ false を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
-@see [[m:Module#method_defined?]]
+@see [[m:Module#method_defined?]], [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]]
 
-例:
-  module Foo
-    def foo; end
-    protected def bar; end
-    private def baz; end
-  end
+#@samplecode 例
+module A
+  def method1()  end
+end
+class B
+  protected
+  def method2()  end
+end
+class C < B
+  include A
+  def method3()  end
+end
 
-  Foo.protected_method_defined?(:foo) # => false
-  Foo.protected_method_defined?(:bar) # => true
-  Foo.protected_method_defined?(:baz) # => false
-  Foo.protected_method_defined?(:qux) # => false
+A.method_defined? :method1                    #=> true
+C.protected_method_defined? "method1"         #=> false
+C.protected_method_defined? "method2"         #=> true
+#@since 2.6.0
+C.protected_method_defined? "method2", true   #=> true
+C.protected_method_defined? "method2", false  #=> false
+#@end
+C.method_defined? "method2"                   #=> true
+#@end
 
+#@since 2.6.0
+--- public_method_defined?(name, inherit=true) -> bool
+#@else
 --- public_method_defined?(name) -> bool
+#@end
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が public であるときに true を返します。
 そうでなければ false を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
-@see [[m:Module#method_defined?]]
+@see [[m:Module#method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
 
+#@samplecode 例
+module A
+  def method1()  end
+end
+class B
+  protected
+  def method2()  end
+end
+class C < B
+  include A
+  def method3()  end
+end
+
+A.method_defined? :method1                 #=> true
+C.public_method_defined? "method1"         #=> true
+#@since 2.6.0
+C.public_method_defined? "method1", true   #=> true
+C.public_method_defined? "method1", false  #=> true
+#@end
+C.public_method_defined? "method2"         #=> false
+C.method_defined? "method2"                #=> true
 #@end
 
 #@since 1.8.6

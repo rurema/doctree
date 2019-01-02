@@ -3,8 +3,13 @@
 
 == Module Functions
 
+#@since 2.6.0
+--- BigDecimal(s, exception: true) -> BigDecimal
+--- BigDecimal(s, n, exception: true) -> BigDecimal
+#@else
 --- BigDecimal(s) -> BigDecimal
 --- BigDecimal(s, n) -> BigDecimal
+#@end
 
 引数で指定した値を表す BigDecimal オブジェクトを生成します。
 
@@ -30,6 +35,11 @@
 //}
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に

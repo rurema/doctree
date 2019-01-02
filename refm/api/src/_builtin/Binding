@@ -136,3 +136,14 @@ REPLのセッションを開始します。
 
 @see [[lib:irb]]
 #@end
+#@since 2.6.0
+--- source_location  -> [String, Integer]
+
+self の Ruby のソースファイル名と行番号を返します。
+
+[[ref:d:spec/variables#pseudo]] の __FILE__ と __LINE__ も参照してください。
+
+#@samplecode 例
+p binding.source_location # => ["test.rb", 1]
+#@end
+#@end

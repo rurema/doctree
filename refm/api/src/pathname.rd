@@ -63,6 +63,12 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 
 @raise ArgumentError path が \0 を含んでいると発生します。
 
+#@samplecode 例
+require "pathname"
+
+Pathname.new(__FILE__) # => #<Pathname:/path/to/file.rb>
+#@end
+
 --- getwd -> Pathname
 --- pwd   -> Pathname
 カレントディレクトリを元に Pathname オブジェクトを生成します。
@@ -148,6 +154,8 @@ other は Pathname オブジェクトでなければなりません。
 
 --- hash -> Integer
 ハッシュ値を返します。
+
+#@#noexample
 
 --- to_s   -> String
 #@until 1.9.1
@@ -925,6 +933,8 @@ Pathname オブジェクトとして生成し、ブロックへの引数とし�
 self の指し示すパスがディレクトリなら
 Dir.foreach(self.to_s, *args, &block) と、さもなければ
 IO.foreach(self.to_s, *args, &block) と同じです。
+
+#@#noexample obsolete
 
 #@if(version <= "1.8.0")
 --- realpath_rec
