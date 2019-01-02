@@ -263,6 +263,23 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 --- parent -> Pathname
 self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
 
+#@samplecode 例 絶対パス
+require "pathname"
+
+path = Pathname("/usr")
+path        # => #<Pathname:/usr>
+path.parent # => #<Pathname:/>
+#@end
+
+#@samplecode 例 相対パス
+require "pathname"
+
+path = Pathname("foo/bar")
+path.parent               # => #<Pathname:foo>
+path.parent.parent        # => #<Pathname:.>
+path.parent.parent.parent # => #<Pathname:..>
+#@end
+
 --- mountpoint? -> bool
 self がマウントポイントであれば真を返します。
 
