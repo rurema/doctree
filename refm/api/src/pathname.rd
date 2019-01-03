@@ -258,6 +258,14 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 
+#@samplecode 例
+require "pathname"
+
+path = Pathname("/not_exist")
+path.realdirpath  # => #<Pathname:/not_exist>
+path.realpath     # => Errno::ENOENT
+#@end
+
 @see [[m:Pathname#realpath]]
 #@end
 --- parent -> Pathname
