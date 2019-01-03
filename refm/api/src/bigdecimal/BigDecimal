@@ -213,6 +213,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 == Class Methods
 
+#@until 2.7.0
 --- new(s)    -> BigDecimal
 --- new(s, n) -> BigDecimal
 
@@ -221,6 +222,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 新しい BigDecimal オブジェクトを生成します。
 
 詳しくは [[m:Kernel.#BigDecimal]] を参照してください。
+#@end
 
 --- mode(s)    -> Integer | nil
 --- mode(s, v) -> Integer | nil
@@ -365,11 +367,13 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 @raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 #@end
 
+#@until 2.6.0
 --- ver -> String
 
 このメソッドは deprecated です。
 #@since 2.5.0
 [[m:BigDecimal::VERSION]] を使用してください。
+#@end
 #@end
 
 == Instance Methods
