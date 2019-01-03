@@ -19,6 +19,12 @@ alias JSON::Ext::Generator::GeneratorMethods::Array
 @param depth ネストの深さを見つけるために使用されます。
 #@end
 
+#@samplecode 例
+require "json"
+
+[1, 2, 3].to_json # => "[1,2,3]"
+#@end
+
 = module JSON::Generator::GeneratorMethods::FalseClass
 alias JSON::Ext::Generator::GeneratorMethods::FalseClass
 
