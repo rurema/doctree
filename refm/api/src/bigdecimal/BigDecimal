@@ -214,8 +214,13 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 == Class Methods
 
 #@until 2.7.0
+#@since 2.6.0
+--- new(s, exception: true)    -> BigDecimal
+--- new(s, n, exception: true) -> BigDecimal
+#@else
 --- new(s)    -> BigDecimal
 --- new(s, n) -> BigDecimal
+#@end
 
 このメソッドは deprecated です。[[m:Kernel.#BigDecimal]] を使用してください。
 
