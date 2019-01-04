@@ -4,8 +4,8 @@
 == Module Functions
 
 #@since 2.6.0
---- BigDecimal(s, exception: true) -> BigDecimal
---- BigDecimal(s, n, exception: true) -> BigDecimal
+--- BigDecimal(s, exception: true) -> BigDecimal | nil
+--- BigDecimal(s, n, exception: true) -> BigDecimal | nil
 #@else
 --- BigDecimal(s) -> BigDecimal
 --- BigDecimal(s, n) -> BigDecimal
@@ -215,8 +215,8 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 #@until 2.7.0
 #@since 2.6.0
---- new(s, exception: true)    -> BigDecimal
---- new(s, n, exception: true) -> BigDecimal
+--- new(s, exception: true)    -> BigDecimal | nil
+--- new(s, n, exception: true) -> BigDecimal | nil
 #@else
 --- new(s)    -> BigDecimal
 --- new(s, n) -> BigDecimal
