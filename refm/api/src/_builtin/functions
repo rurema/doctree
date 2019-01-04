@@ -149,6 +149,11 @@ command を外部コマンドとして実行し、その標準出力を文字列
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
 
+#@since 2.6.0
+options で :exception に true を指定することで、
+nil や false を返す代わりに例外を発生するようにできます。
+#@end
+
 終了ステータスは変数 [[m:$?]] で参照できます。
 
 コマンドを実行することができなかった場合、多くのシェルはステータス
@@ -169,6 +174,24 @@ command を外部コマンドとして実行し、その標準出力を文字列
 @param command command コマンドを文字列で指定します。
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
+#@since 2.6.0
+@raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
+@raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
+
+#@samplecode シェル経由でコマンドを実行
+system("echo *") # => true
+# fileA fileB fileC ...
+#@end
+
+#@since 2.6.0
+#@samplecode exceptionオプションを指定
+system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
+system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
+system('ruby -e "exit(true)"', exception: true)  # => true
+#@end
+#@end
+
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
 --- system(program, *args, options={}) -> bool | nil
@@ -188,10 +211,9 @@ nil や false を返す代わりに例外を発生するようにできます。
 終了ステータスは変数 [[m:$?]] で参照できます。
 
 コマンドを実行することができなかった場合、多くのシェルはステータス
-127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
-さない場合は Ruby の子プロセスがステータス 127 で終了します。
-コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
-$? を参照することで判別可能です。
+127 を返します。シェルを介さない場合は Ruby の子プロセスがステータス
+127 で終了します。コマンドが実行できなかったのか、コマンドが失敗したの
+かは、普通 [[m:$?]] を参照することで判別可能です。
 
 Hash を options として渡すことで、起動される子プロセスの
   * プロセスグループ
@@ -219,14 +241,13 @@ Hash を options として渡すことで、起動される子プロセスの
 #@since 2.6.0
 @raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
 @raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
 
-#@samplecode
-system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
-system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
-system('ruby -e "exit(true)"', exception: true)  # => true
+#@samplecode インタプリタから直接コマンドを実行
+system("echo", "*") # => true
+# *
 #@end
-#@end
-#@#例...
+
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
 --- spawn(command, options={}) -> Integer
