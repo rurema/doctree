@@ -21,7 +21,7 @@
 @param name 未定義だったシンボルです
 
 #@since 2.6.0
-@param receiver レシーバオブジェクトを指定します
+@param receiver 原因となったメソッド呼び出しのレシーバです
 #@end
 
 例:
