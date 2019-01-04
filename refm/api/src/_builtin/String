@@ -2112,7 +2112,7 @@ string.slice!("r")      #=> "r"
 string                  #=> "thing"
 #@end
 
---- split(sep = $;, limit = 0) -> [String] | [[String]]
+--- split(sep = $;, limit = 0) -> [String]
 #@since 2.6.0
 --- split(sep = $;, limit = 0) {|s| ... } -> self
 #@end
