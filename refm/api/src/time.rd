@@ -159,8 +159,8 @@ date がISO 8601で定義されている形式に準拠していない、
 @see [[m:Time#xmlschema]], [[m:Time#iso8601]]
 
 #@since 1.9.1
---- strptime(date, format) -> Time
---- strptime(date, format){|y| ... } -> Time
+--- strptime(date, format, now=self.now) -> Time
+--- strptime(date, format, now=self.now){|y| ... } -> Time
 文字列を [[m:Date._strptime]] を用いて [[c:Time]] オブジェクト
 に変換します。
 

@@ -490,17 +490,18 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
 @param format フォーマット文字列を指定します。使用できるものは 以下の通りです。
 
-#@since 1.9.1
   * %A: 曜日の名称(Sunday, Monday ... )
   * %a: 曜日の省略名(Sun, Mon ... )
   * %B: 月の名称(January, February ... )
   * %b: 月の省略名(Jan, Feb ... )
   * %C: 世紀 (2009年であれば 20)
-  * %c: 日付と時刻
+  * %c: 日付と時刻 (%a %b %e %T %Y)
   * %D: 日付 (%m/%d/%y)
   * %d: 日(01-31)
   * %e: 日。一桁の場合、半角空白で埋める ( 1..31)
   * %F: %Y-%m-%d と同等 (ISO 8601の日付フォーマット)
+  * %G: ISO 8601の暦週の年
+  * %g: ISO 8601の暦週の年の下2桁(00-99)
   * %H: 24時間制の時(00-23)
   * %h: %b と同等
   * %I: 12時間制の時(01-12)
@@ -514,6 +515,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * %N: 秒の小数点以下。桁の指定がない場合は9桁 (ナノ秒)、%6N: マイクロ秒 (6桁)、%3N: ミリ秒 (3桁)
   * %P: 午前または午後(am,pm)
   * %p: 午前または午後(AM,PM)
+  * %Q: 1970-01-01 00:00:00 UTC からの経過ミリ秒 ([[m:Time#strftime]] は対応していませんが、[[m:Date#strftime]] で使えます)
   * %R: 24時間制の時刻。%H:%M と同等。
   * %r: 12時間制の時刻。%I:%M:%S %p と同等。
   * %S: 秒(00-60) (60はうるう秒)
@@ -522,15 +524,15 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * %t: タブ文字 (\t)
   * %U: 週を表す数。最初の日曜日が第1週の始まり(00-53)
   * %u: 月曜日を1とした、曜日の数値表現 (1..7)
-  * %v: VMS形式の日付 (%e-%b-%Y)
   * %V: ISO 8601形式の暦週 (01..53)
+  * %v: VMS形式の日付 (%e-%^b-%4Y)
   * %W: 週を表す数。最初の月曜日が第1週の始まり(00-53)
   * %w: 曜日を表す数。日曜日が0(0-6)
-  * %X: 時刻
-  * %x: 日付
+  * %X: 時刻 (%Tと同等)
+  * %x: 日付 (%Dと同等)
   * %Y: 西暦を表す数
   * %y: 西暦の下2桁(00-99)
-  * %Z: タイムゾーン
+  * %Z: タイムゾーン (環境依存)
 #@#  * %Z: タイムゾーン  [[unknown:trap|trap::Time]]
   * %z: タイムゾーン。UTCからのオフセット (例 +0900)
 #@since 1.9.3
@@ -538,33 +540,8 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * %::z: タイムゾーン。コロンが入った秒まで含むUTCからのオフセット (例 +09:00:00)
 #@end
   * %%: %自身
-#@else
-  * %A: 曜日の名称(Sunday, Monday ... )
-  * %a: 曜日の省略名(Sun, Mon ... )
-  * %B: 月の名称(January, February ... )
-  * %b: 月の省略名(Jan, Feb ... )
-  * %c: 日付と時刻
-  * %d: 日(01-31)
-  * %H: 24時間制の時(00-23)
-  * %I: 12時間制の時(01-12)
-  * %j: 年中の通算日(001-366)
-  * %M: 分(00-59)
-  * %m: 月を表す数字(01-12)
-  * %p: 午前または午後(AM,PM)
-  * %S: 秒(00-60) (60はうるう秒)
-  * %U: 週を表す数。最初の日曜日が第1週の始まり(00-53)
-  * %W: 週を表す数。最初の月曜日が第1週の始まり(00-53)
-  * %w: 曜日を表す数。日曜日が0(0-6)
-  * %X: 時刻
-  * %x: 日付
-  * %Y: 西暦を表す数
-  * %y: 西暦の下2桁(00-99)
-  * %Z: タイムゾーン
-#@#  * %Z: タイムゾーン  [[unknown:trap|trap::Time]]
-  * %%: %自身
-#@end
+  * %+: [[man:date(1)]]の形式 (%a %b %e %H:%M:%S %Z %Y) ([[m:Time#strftime]] は対応していませんが、[[m:Date#strftime]] で使えます)
 
-#@since 1.9.1
 このメソッドは [[man:strftime(3)]] や glibcの仕様を参考に作成されており、以下のオプションが利用できます。
   * ^: 大文字で出力を行なう
   * #: 小文字であれば大文字に、大文字であれば小文字に変更する
@@ -572,21 +549,52 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * _: 空白埋めにする
   * 0: 0埋めにする
   * 数値: 表示桁数を指定する
+EとOは無視されます。
 
+#@samplecode 例
   t = Time.now                         #=> 2010-09-05 15:41:17 0900
   t.strftime("Printed on %m/%d/%Y")    #=> "Printed on 09/05/2010"
   t.strftime("Printed on %m/%-d/%_6Y") #=> "Printed on 09/5/  2010"
   t.strftime("at %I:%M%p")             #=> "at 03:41PM"
   t.strftime("at %I:%M%#p")            #=> "at 03:41pm"
-#@else
-現在の実装では、このメソッドは、システムの [[man:strftime(3)]]
-をそのまま使用しています。そのためここにあげた指示子以外のものが使
-用できる場合があります。ただし、上記以外の指示子を使用した場合、移
-植性をそこなう可能性がある点に注意してください。
+#@end
 
-  t = Time.now
-  t.strftime("Printed on %m/%d/%Y")   #=> "Printed on 04/09/2003"
-  t.strftime("at %I:%M%p")            #=> "at 08:56AM"
+#@samplecode 様々なISO 8601形式
+t = Time.new(2001,2,3,4,5,6,"+09:00")
+t.strftime("%Y%m%d")           # => 20010203                  Calendar date (basic)
+t.strftime("%F")               # => 2001-02-03                Calendar date (extended)
+t.strftime("%Y-%m")            # => 2001-02                   Calendar date, reduced accuracy, specific month
+t.strftime("%Y")               # => 2001                      Calendar date, reduced accuracy, specific year
+t.strftime("%C")               # => 20                        Calendar date, reduced accuracy, specific century
+t.strftime("%Y%j")             # => 2001034                   Ordinal date (basic)
+t.strftime("%Y-%j")            # => 2001-034                  Ordinal date (extended)
+t.strftime("%GW%V%u")          # => 2001W056                  Week date (basic)
+t.strftime("%G-W%V-%u")        # => 2001-W05-6                Week date (extended)
+t.strftime("%GW%V")            # => 2001W05                   Week date, reduced accuracy, specific week (basic)
+t.strftime("%G-W%V")           # => 2001-W05                  Week date, reduced accuracy, specific week (extended)
+t.strftime("%H%M%S")           # => 040506                    Local time (basic)
+t.strftime("%T")               # => 04:05:06                  Local time (extended)
+t.strftime("%H%M")             # => 0405                      Local time, reduced accuracy, specific minute (basic)
+t.strftime("%H:%M")            # => 04:05                     Local time, reduced accuracy, specific minute (extended)
+t.strftime("%H")               # => 04                        Local time, reduced accuracy, specific hour
+t.strftime("%H%M%S,%L")        # => 040506,000                Local time with decimal fraction, comma as decimal sign (basic)
+t.strftime("%T,%L")            # => 04:05:06,000              Local time with decimal fraction, comma as decimal sign (extended)
+t.strftime("%H%M%S.%L")        # => 040506.000                Local time with decimal fraction, full stop as decimal sign (basic)
+t.strftime("%T.%L")            # => 04:05:06.000              Local time with decimal fraction, full stop as decimal sign (extended)
+t.strftime("%H%M%S%z")         # => 040506+0900               Local time and the difference from UTC (basic)
+t.strftime("%T%:z")            # => 04:05:06+09:00            Local time and the difference from UTC (extended)
+t.strftime("%Y%m%dT%H%M%S%z")  # => 20010203T040506+0900      Date and time of day for calendar date (basic)
+t.strftime("%FT%T%:z")         # => 2001-02-03T04:05:06+09:00 Date and time of day for calendar date (extended)
+t.strftime("%Y%jT%H%M%S%z")    # => 2001034T040506+0900       Date and time of day for ordinal date (basic)
+t.strftime("%Y-%jT%T%:z")      # => 2001-034T04:05:06+09:00   Date and time of day for ordinal date (extended)
+t.strftime("%GW%V%uT%H%M%S%z") # => 2001W056T040506+0900      Date and time of day for week date (basic)
+t.strftime("%G-W%V-%uT%T%:z")  # => 2001-W05-6T04:05:06+09:00 Date and time of day for week date (extended)
+t.strftime("%Y%m%dT%H%M")      # => 20010203T0405             Calendar date and local time (basic)
+t.strftime("%FT%R")            # => 2001-02-03T04:05          Calendar date and local time (extended)
+t.strftime("%Y%jT%H%MZ")       # => 2001034T0405Z             Ordinal date and UTC of day (basic)
+t.strftime("%Y-%jT%RZ")        # => 2001-034T04:05Z           Ordinal date and UTC of day (extended)
+t.strftime("%GW%V%uT%H%M%z")   # => 2001W056T0405+0900        Week date and local time and difference from UTC (basic)
+t.strftime("%G-W%V-%uT%R%:z")  # => 2001-W05-6T04:05+09:00    Week date and local time and difference from UTC (extended)
 #@end
 
 --- sec    -> Integer
