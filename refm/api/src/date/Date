@@ -92,11 +92,7 @@ include Comparable
 
 == Class Methods
 
-#@since 1.8.0
 --- civil(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
-#@else
---- new3(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
-#@end
 --- new(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
 暦日付に相当する日付オブジェクトを生成します。
 
@@ -107,9 +103,6 @@ include Comparable
 零であってはなりません。
 
 最後の引数は、グレゴリオ暦をつかい始めた日をあらわすユリウス日です。
-#@if (version < "1.8.6")
-グレゴリオ暦の指定として真、ユリウス暦の指定として偽を与えることもできます。
-#@end
 省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
 [[m:Date.jd]] も参照してください。
@@ -124,15 +117,7 @@ include Comparable
   require 'date'
   Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
-#@since 1.9.1
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
-#@else
-#@since 1.8.0
---- commercial(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY) -> Date
-#@else
---- neww(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY) -> Date
-#@end
-#@end
 暦週日付に相当する日付オブジェクトを生成します。
 
 週、および週の日 (曜日) は負、
@@ -155,7 +140,6 @@ include Comparable
 
 @param year 年
 
-#@since 1.9.1
 #@# exp
 --- _httpdate(str) -> Hash
 このメソッドは [[m:Date.httpdate]] と似ていますが、日付オブジェクトを生成せずに、
@@ -173,9 +157,7 @@ include Comparable
 
 @param str 日付をあらわす文字列
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.9.1
 #@# exp
 --- _iso8601(str) -> Hash
 このメソッドは [[m:Date.iso8601]] と似ていますが、日付オブジェクトを生成せずに、
@@ -195,9 +177,7 @@ include Comparable
 
 @param str 日付をあらわす文字列
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.9.1
 #@# exp
 --- _jisx0301(str) -> Hash
 このメソッドは [[m:Date.jisx0301]] と似ていますが、日付オブジェクトを生成せずに、
@@ -215,13 +195,8 @@ include Comparable
 
 @param str 日付をあらわす文字列
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.8.6
 --- jd(jd = 0, start = Date::ITALY) -> Date
-#@else
---- new1(jd = 0, start = Date::ITALY) -> Date
-#@end
 ユリウス日に相当する日付オブジェクトを生成します。
 
 このクラスのいくつかの重要なメソッドで、
@@ -240,11 +215,7 @@ include Comparable
 
 @param year 年
 
-#@since 1.8.0
 --- ordinal(year = -4712, yday = 1, start = Date::ITALY) -> Date
-#@else
---- new2(year = -4712, yday = 1, start = Date::ITALY) -> Date
-#@end
 年間通算日 (年日付) に相当する日付オブジェクトを生成します。
 
 年の日は負、
@@ -258,12 +229,7 @@ include Comparable
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
-#@since 1.8.0
-#@since 1.9.1
 --- _parse(str, complete = true) -> Hash
-#@else
---- _parse(str, complete = false) -> Hash
-#@end
 このメソッドは [[m:Date.parse]] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
 
@@ -272,23 +238,13 @@ include Comparable
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
 
-#@since 1.9.1
 --- parse(str = '-4712-01-01', complete = true, start = Date::ITALY) -> Date
-#@else
---- parse(str = '-4712-01-01', complete = false, start = Date::ITALY) -> Date
-#@end
 与えられた日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
-#@since 1.9.1
 年が "00" から "99" の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
 この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
-#@else
-complete が真で、年が "00" から "99" の範囲であれば、
-年の下2桁表現であるとみなしこれを補います。
-なお、省略した場合は、偽とみなします。
-#@end
 
 [[m:Date._parse]] も参照してください。
 
@@ -297,7 +253,6 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
-#@since 1.9.1
 #@# exp
 --- _rfc2822(str) -> Hash
 --- _rfc822(str) -> Hash
@@ -317,9 +272,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 @param str 日付をあらわす文字列
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.9.1
 #@# exp
 --- _rfc3339(str) -> Hash
 このメソッドは [[m:Date.rfc3339]] と似ていますが、日付オブジェクトを生成せずに、
@@ -337,7 +290,6 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 @param str 日付をあらわす文字列
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
 --- _strptime(str, format = '%F') -> Hash
 このメソッドは [[m:Date.strptime]] と似ていますが、日付オブジェクトを生成せずに、
@@ -405,8 +357,6 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
-#@end
-
 --- today(start = Date::ITALY) -> Date
 現在の日付に相当する日付オブジェクトを生成します。
 
@@ -416,24 +366,9 @@ complete が真で、年が "00" から "99" の範囲であれば、
   require 'date'
   Date.today  # => #<Date: 2017-09-20 ...>
 
-#@since 1.9.1
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
-#@else
-#@since 1.8.0
---- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
---- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
-#@else
---- exist? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
---- exist3? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
-#@end
-#@end
-#@since 1.9.1
 正しい暦日付であれば真、そうでないなら偽を返します。
-#@else
-正しい暦日付であれば、相当するユリウス日を返します。
-そうでないなら、偽を返します。
-#@end
 
 [[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
 
@@ -442,21 +377,8 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param mday 日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.1
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
-#@else
-#@since 1.8.0
---- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric | nil
-#@else
---- existw? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric | nil
-#@end
-#@end
-#@since 1.9.1
 正しい暦週日付であれば真、そうでないなら偽を返します。
-#@else
-正しい暦週日付であれば、相当するユリウス日を返します。
-そうでないなら、偽を返します。
-#@end
 
 [[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
 
@@ -465,20 +387,8 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param cwday 週の日 (曜日)
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.1
 --- valid_jd? (jd, start = Date::GREGORIAN) -> bool
-#@else
-#@since 1.8.0
---- valid_jd? (jd, start = Date::GREGORIAN) -> Numeric | nil
-#@else
---- exist1? (jd, start = Date::GREGORIAN) -> Numeric | nil
-#@end
-#@end
-#@since 1.9.1
 真を返します。
-#@else
-ひとつ目の引数をそのまま返します。
-#@end
 
 対称性のため用意されていますが、実際的に意味はありません。
 
@@ -487,21 +397,8 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param jd ユリウス日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.1
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
-#@else
-#@since 1.8.0
---- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> Numeric | nil
-#@else
---- exist2? (year, yday, start = Date::GREGORIAN) -> Numeric | nil
-#@end
-#@end
-#@since 1.9.1
 正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
-#@else
-正しい年間通算日 (年日付) であれば、相当するユリウス日を返します。
-そうでないなら、偽を返します。
-#@end
 
 [[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
@@ -509,7 +406,6 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param yday 年の日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.1
 #@# exp
 --- _xmlschema(str) -> Hash
 このメソッドは [[m:Date.xmlschema]] と似ていますが、日付オブジェクトを生成せずに、
@@ -527,7 +423,6 @@ XML Schema による書式の日付を解析し、
 
 @param str 日付をあらわす文字列
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
 == Instance Methods
 
@@ -568,10 +463,7 @@ n は数値でなければなりません。
 
   Date.new(2001,3,31) << 1 << -1   #=> #<Date: 2001-03-28 ...>
 
-
-#@since 1.9.1
 [[m:Date#prev_month]] も参照してください。
-#@end
 
 @param n 月数
 
@@ -610,13 +502,10 @@ n は数値でなければなりません。
 
   Date.new(2001,1,31) >> 1 >> -1   #=> #<Date: 2001-01-28 ...>
 
-#@since 1.9.1
 [[m:Date#next_month]] も参照してください。
-#@end
 
 @param n 月数
 
-#@since 1.8.0
 --- ajd -> Rational
 このメソッドは [[m:Date#jd]] と似ていますが、天文学的なユリウス日を返します。
 時刻を含みます。
@@ -624,7 +513,6 @@ n は数値でなければなりません。
 --- amjd -> Rational
 このメソッドは [[m:Date#mjd]] と似ていますが、天文学的な修正ユリウス日を返します。
 時刻を含みます。
-#@end
 
 --- asctime -> String
 --- ctime -> String
@@ -640,9 +528,7 @@ n は数値でなければなりません。
 暦週における年を返します。
 
 --- downto(min){|date| ...} -> self
-#@since 1.9.1
 --- downto(min) -> Enumerator
-#@end
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
 @param min 日付オブジェクト
@@ -654,24 +540,17 @@ n は数値でなければなりません。
 
 [[m:Date#new_start]]、および [[m:Date::ENGLAND]] を参照してください。
 
-#@since 1.9.1
 --- friday? -> bool
 金曜日なら真を返します。
-#@end
 
 --- gregorian -> Date
 このメソッドは、new_start(Date::GREGORIAN) と等価です。
 
 [[m:Date#new_start]]、および [[m:Date::GREGORIAN]] を参照してください。
 
-#@since 1.8.6
 --- gregorian? -> bool
-#@else
---- ns? -> bool
-#@end
 グレゴリオ暦なら真を返します。
 
-#@since 1.9.1
 #@# exp
 --- httpdate -> String
 [[RFC:2616]] ([[RFC:1123]]) で定められた書式の文字列を返します。
@@ -679,7 +558,6 @@ n は数値でなければなりません。
 --- iso8601 -> String
 --- rfc3339 -> String
 [[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
-#@end
 
 --- italy -> Date
 このメソッドは、new_start(Date::ITALY) と等価です。
@@ -692,23 +570,17 @@ n は数値でなければなりません。
 
 [[m:Date#ajd]] も参照してください。
 
-#@since 1.9.1
 --- jisx0301 -> String
 [[JIS:X 0301]] 書式の文字列を返します。
 ただし、明治以前については [[ISO:8601]] 書式になります。
 なお、明治6年以前についても太陰太陽暦を使用することはありません。
-#@end
 
 --- julian -> Date
 このメソッドは、new_start(Date::JULIAN) と等価です。
 
 [[m:Date#new_start]]、および [[m:Date::JULIAN]] を参照してください。
 
-#@since 1.8.6
 --- julian? -> bool
-#@else
---- os? -> bool
-#@end
 ユリウス暦なら真を返します。
 
 --- ld -> Integer
@@ -731,16 +603,10 @@ n は数値でなければなりません。
 --- month -> Integer
 月を返します (1-12)。
 
-#@since 1.9.1
 --- monday? -> bool
 月曜日なら真を返します。
-#@end
 
-#@since 1.8.0
 --- new_start(start = Date::ITALY) -> Date
-#@else
---- newsg(start = Date::ITALY) -> Date
-#@end
 self を複製して、その改暦日を設定しなおします。
 引数を省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
@@ -748,7 +614,6 @@ self を複製して、その改暦日を設定しなおします。
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.1
 --- next_day(n = 1) -> Date
 n 日後を返します。
 
@@ -803,31 +668,20 @@ self << (n * 12) に相当します。
 
 @param n 年数
 
-#@end
-#@since 1.9.1
 --- rfc2822 -> String
 --- rfc822 -> String
 [[RFC:2822]] で定められた書式の文字列を返します。
-#@end
 
-#@since 1.9.1
 --- saturday? -> bool
 土曜日なら真を返します。
-#@end
 
-#@since 1.8.0
 --- start -> Integer
-#@else
---- sg -> Integer
-#@end
 改暦日をあらわすユリウス日を返します。
 
 [[m:Date.new]] も参照してください。
 
 --- step(limit, step = 1){|date| ...} -> self
-#@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
-#@end
 ブロックの評価を繰り返します。ブロックは日付オブジェクトをとります。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
@@ -837,10 +691,8 @@ limit は日付オブジェクトでなければなりません、
 
 @see [[m:Date#downto]], [[m:Date#upto]]
 
-#@since 1.9.1
 --- sunday? -> bool
 日曜日なら真を返します。
-#@end
 
 --- strftime(format = '%F') -> String
 与えられた雛型で日付を書式づけます。
@@ -862,7 +714,6 @@ GNU 版にあるような幅指定などもできます。
 --- next -> Date
 翌日の日付オブジェクトを返します。
 
-#@since 1.9.1
 --- thursday? -> bool
 木曜日なら真を返します。
 
@@ -871,23 +722,18 @@ GNU 版にあるような幅指定などもできます。
 
 --- to_datetime -> DateTime
 対応する [[c:DateTime]] オブジェクトを返します。
-#@end
 
 --- to_s -> String
 [[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
 
-#@since 1.9.1
 --- to_time -> Time
 対応する [[c:Time]] オブジェクトを返します。
 
 --- tuesday? -> bool
 火曜日なら真を返します。
-#@end
 
 --- upto(max){|date| ...} -> self
-#@since 1.9.1
 --- upto(max) -> Enumerator
-#@end
 このメソッドは、step(max, 1){|date| ...} と等価です。
 
 @param max 日付オブジェクト
@@ -897,16 +743,12 @@ GNU 版にあるような幅指定などもできます。
 --- wday -> Integer
 曜日を返します (0-6、日曜日は零)。
 
-#@since 1.9.1
 --- wednesday? -> bool
 水曜日なら真を返します。
-#@end
 
-#@since 1.9.1
 #@# exp
 --- xmlschema -> String
 XML Scheme (date) による書式の文字列を返します。
-#@end
 
 --- yday -> Integer
 年の日を返します (1-366)。
@@ -914,7 +756,6 @@ XML Scheme (date) による書式の文字列を返します。
 --- year -> Integer
 年を返します。
 
-#@since 1.9.1
 = reopen Time
 
 == Instance Methods
@@ -927,4 +768,3 @@ XML Scheme (date) による書式の文字列を返します。
 
 --- to_time -> Time
 対応する [[c:Time]] オブジェクトを返します。
-#@end
