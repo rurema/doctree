@@ -24,14 +24,13 @@
 
 == Class Methods
 
-#@since 2.6.0
---- new(error_message = "", name = nil, args = nil, priv = false, receiver:) -> NoMethodError
-#@else
 #@since 2.4.0
 --- new(error_message = "", name = nil, args = nil, priv = false) -> NoMethodError
+#@since 2.6.0
+--- new(error_message = "", name = nil, args = nil, priv = false, receiver:) -> NoMethodError
+#@end
 #@else
 --- new(error_message = "", name = nil, args = nil) -> NoMethodError
-#@end
 #@end
 
 例外オブジェクトを生成して返します。
