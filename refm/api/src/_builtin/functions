@@ -178,6 +178,20 @@ nil や false を返す代わりに例外を発生するようにできます。
 @raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
 @raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
 #@end
+
+#@samplecode シェル経由でコマンドを実行
+system("echo *") # => true
+# fileA fileB fileC ...
+#@end
+
+#@since 2.6.0
+#@samplecode exceptionオプションを指定
+system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
+system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
+system('ruby -e "exit(true)"', exception: true)  # => true
+#@end
+#@end
+
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
 --- system(program, *args, options={}) -> bool | nil
@@ -227,14 +241,13 @@ Hash を options として渡すことで、起動される子プロセスの
 #@since 2.6.0
 @raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
 @raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
 
-#@samplecode
-system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
-system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
-system('ruby -e "exit(true)"', exception: true)  # => true
+#@samplecode インタプリタから直接コマンドを実行
+system("echo", "*") # => true
+# *
 #@end
-#@end
-#@#例...
+
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
 --- spawn(command, options={}) -> Integer
