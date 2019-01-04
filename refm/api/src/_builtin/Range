@@ -135,10 +135,10 @@ obj が範囲内に含まれている時に真を返します。
 Range#cover? は連続値を扱います。
 （数値については、例外として [[m:Range#include?]] も連続的に扱います。）
 
-#@since 2.6.0
 [[m:Range#exclude_end?]]がfalseなら「begin <= obj <= end」を
 trueなら「begin <= obj < end」を意味します。
 
+#@since 2.6.0
 引数がRangeオブジェクトの場合、引数の範囲がselfの範囲に含まれる時にtrueを返します。
 「(a..b).cover?(c...d)」は「a <= c && b < d」を意味します。
 cが数値ではなく終端が計算でもとまらない時、パフォーマンスの問題が起きる可能性があります。
