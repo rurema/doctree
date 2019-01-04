@@ -848,10 +848,12 @@ ch を返します。
 
 @param arg 出力するオブジェクトを任意個指定します。
 
+#@since 2.3.0
+--- read_nonblock(maxlen, exception: true)              -> String | Symbol | nil
+--- read_nonblock(maxlen, outbuf, exception: true)      -> String | Symbol | nil
+#@else
 --- read_nonblock(maxlen)              -> String
 --- read_nonblock(maxlen, outbuf)      -> String
-#@since 2.3.0
---- read_nonblock(maxlen, outbuf, exception: true)      -> String
 #@end
 #@# TODO: Windows では使えない？
 
