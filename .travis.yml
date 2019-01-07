@@ -1,8 +1,8 @@
 sudo: false
 language: ruby
-dist: trusty
+dist: xenial
 rvm:
-  - 2.5.1
+  - 2.6.0
 notifications:
   email:
     recipients:
