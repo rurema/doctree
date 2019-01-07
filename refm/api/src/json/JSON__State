@@ -163,8 +163,8 @@ pp json_state.to_h
 
 --- ascii_only? -> bool
 
-Returns true, if NaN, Infinity, and -Infinity should be generated,
-otherwise returns false.
+Returns true, if only ASCII characters should be generated. Otherwise
+returns false.
 
 --- quirks_mode? -> bool
 --- quirks_mode  -> bool
