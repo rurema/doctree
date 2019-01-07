@@ -954,6 +954,13 @@ self を表現するパス文字列に対して sub メソッドを呼び出し�
 
 @param replace pattern で指定した文字列と置き換える文字列を指定します。
 
+#@samplecode 例
+require 'pathname'
+
+path1 = Pathname('/usr/bin/perl')
+path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
+#@end
+
 @see [[m:String#sub]]
 
 #@end
