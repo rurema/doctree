@@ -376,17 +376,14 @@ h.size          #=> 3
 === 参考
 値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
 
-  def safe_invert(orig_hash)
-    result = Hash.new{|h,key| h[key] = [] }
-    orig_hash.each{|key, value|
-      result[value] << key
-    }
-    result
+#@samplecode
+def safe_invert(orig_hash)
+  orig_hash.each_key.group_by do |key|
+    orig_hash[key]
   end
-  p safe_invert({"a"=>1, "b"=>1, "c"=>3})
-      #=> {1=>["a", "b"], 3=>["c"]}
-  
-  #転載：Rubyレシピブック No.120
+end
+p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
+#@end
 
 #@since 1.9.1
 @see [[m:Hash#key]]
