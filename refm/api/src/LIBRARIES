@@ -203,6 +203,7 @@ jcode
 json
 #@# json/add/rails
 json/add/core
+json/add/symbol
 json/add/rational
 json/add/complex
 json/add/bigdecimal
