@@ -203,6 +203,8 @@ jcode
 json
 #@# json/add/rails
 json/add/core
+json/add/rational
+json/add/complex
 json/editor
 #@end
 kconv
