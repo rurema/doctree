@@ -970,6 +970,10 @@ path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
 File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェ
 クトにおいては、 to_s と同じです。
 
+#@#noexample
+
+@see [[m:Pathname#to_s]]
+
 --- sub_ext(replace) -> Pathname
 
 拡張子を与えられた文字列で置き換えた [[c:Pathname]] オブジェクトを返します。
