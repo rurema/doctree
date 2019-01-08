@@ -37,6 +37,12 @@ alias JSON::Ext::Generator::GeneratorMethods::FalseClass
 
 "false" という文字列を返します。
 
+#@samplecode 例
+require "json"
+
+false.to_json # => "false"
+#@end
+
 = module JSON::Generator::GeneratorMethods::Float
 alias JSON::Ext::Generator::GeneratorMethods::Float
 
