@@ -114,6 +114,13 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 @param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
 
+#@samplecode 例
+require "json/add/core"
+
+Person = Struct.new(:name, :age)
+Person.new("tanaka", 29).to_json # => "{\"json_class\":\"Person\",\"v\":[\"tanaka\",29]}"
+#@end
+
 @see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
 
 
