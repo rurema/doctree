@@ -205,6 +205,8 @@ json
 json/add/core
 json/add/rational
 json/add/complex
+json/add/bigdecimal
+json/add/ostruct
 json/editor
 #@end
 kconv
