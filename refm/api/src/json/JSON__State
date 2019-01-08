@@ -34,6 +34,9 @@ JSON 形式の文字列を生成するための設定を保持しておくため
   [[m:JSON::MinusInfinity]] を生成することを許すようになります。
   偽を指定した場合、これらの値を生成しようとすると例外が発生します。
   デフォルトは偽です。
+: :ascii_only
+  真を指定した場合、ASCII 文字列のみを用いて JSON 形式の文字列を生成します。
+  デフォルトは偽です。
 : :buffer_initial_length
   sets the initial length of the generator's internal buffer.
 
@@ -163,8 +166,8 @@ pp json_state.to_h
 
 --- ascii_only? -> bool
 
-Returns true, if only ASCII characters should be generated. Otherwise
-returns false.
+ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合に真を返します。
+そうでない場合に偽を返します。
 
 --- quirks_mode? -> bool
 --- quirks_mode  -> bool
