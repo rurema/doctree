@@ -1475,6 +1475,9 @@ index に負を指定すると末尾から数えた位置を変更します。
 @param index バイトをセットする位置
 @param b セットするバイト(0 から 255 までの整数)
 @raise IndexError 範囲外に値をセットしようとした場合に発生します。
+#@since 2.6.0
+@raise RangeError unsigned char の範囲外の値をセットしようとした時に発生します。
+#@end
 
 #@samplecode 例
 s = "Sunday"
