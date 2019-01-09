@@ -607,6 +607,8 @@ File.split(self.to_s) と同じです。
 --- blockdev? -> bool
 FileTest.blockdev?(self.to_s) と同じです。
 
+#@#noexample FileTest.#blockdev? の例を参照
+
 @see [[m:FileTest.#blockdev?]]
 
 --- chardev? -> bool
