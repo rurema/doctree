@@ -2038,6 +2038,10 @@ self は読み込み用にオープンされていなければなりません。
 
 @param c バイト列(文字列)、もしくは0から255までの整数
 
+#@since 2.6.0
+@raise RangeError unsigned char の範囲外の値を書き戻そうとした時に発生します。
+#@end
+
 例:
 
    f = File.new("testfile")   #=> #<File:testfile>
