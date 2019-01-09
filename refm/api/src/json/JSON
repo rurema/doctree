@@ -228,6 +228,16 @@ proc として手続きオブジェクトが与えられた場合は、読み込
 : :symbolize_names
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
 
+#@samplecode 例
+require "json"
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]')
+# => [1, 2, {"name"=>"tanaka", "age"=>19}]
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}]
+#@end
+
 @see [[m:JSON::Parser#parse]]
 
 --- parse!(source, options = {}) -> object
