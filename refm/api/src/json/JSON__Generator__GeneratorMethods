@@ -5,19 +5,14 @@ alias JSON::Ext::Generator::GeneratorMethods::Array
 [[c:Array]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
-#@since 1.9.3
---- to_json(state = nil) -> String
-#@else
---- to_json(state = nil, depth = 0) -> String
-#@end
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
 
-@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
-
-#@until 1.9.3
-@param depth ネストの深さを見つけるために使用されます。
-#@end
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -31,11 +26,16 @@ alias JSON::Ext::Generator::GeneratorMethods::FalseClass
 [[c:FalseClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
 
 "false" という文字列を返します。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -49,9 +49,14 @@ alias JSON::Ext::Generator::GeneratorMethods::Float
 [[c:Float]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -65,19 +70,14 @@ alias JSON::Ext::Generator::GeneratorMethods::Hash
 [[c:Hash]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
-#@since 1.9.3
---- to_json(state = nil) -> String
-#@else
---- to_json(state = nil, depth = 0) -> String
-#@end
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
 
-@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
-
-#@until 1.9.3
-@param depth ネストの深さを見つけるために使用されます。
-#@end
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -92,9 +92,14 @@ alias JSON::Ext::Generator::GeneratorMethods::Integer
 [[c:Integer]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -108,11 +113,16 @@ alias JSON::Ext::Generator::GeneratorMethods::NilClass
 [[c:NilClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
 
 "null" という文字列を返します。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -126,12 +136,17 @@ alias JSON::Ext::Generator::GeneratorMethods::Object
 [[c:Object]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身を to_s で文字列にした結果を JSON 形式の文字列に変換して返します。
 
 このメソッドはあるオブジェクトに to_json メソッドが定義されていない場合に使用する
 フォールバックのためのメソッドです。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -156,12 +171,17 @@ alias JSON::Ext::Generator::GeneratorMethods::String
 [[c:String]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
 
 自身のエンコードは UTF-8 であるべきです。
 "\u????" のように UTF-16 ビッグエンディアンでエンコードされた文字列を返すことがあります。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
@@ -210,11 +230,16 @@ alias JSON::Ext::Generator::GeneratorMethods::TrueClass
 [[c:TrueClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
---- to_json -> String
+--- to_json(state_or_hash = nil) -> String
 
 自身から生成した JSON 形式の文字列を返します。
 
 "true" という文字列を返します。
+
+@param state_or_hash 生成する JSON 形式の文字列をカスタマイズするため
+                     に [[c:JSON::State]] のインスタンスか、
+                     [[m:JSON::State.new]] の引数と同じ [[c:Hash]] を
+                     指定します。
 
 #@samplecode 例
 require "json"
