@@ -460,6 +460,14 @@ File.chown(owner, group, self.to_s) と同じです。
 
 @param group グループを指定します。
 
+#@samplecode 例
+require 'pathname'
+
+Pathname('testfile').stat.uid     # => 501
+Pathname('testfile').chown(502, 12)
+Pathname('testfile').stat.uid     # => 502
+#@end
+
 @see [[m:File.chown]]
 
 --- lchown(owner, group) -> Integer
