@@ -424,6 +424,17 @@ File.atime(self.to_s) を渡したものと同じです。
 --- ctime -> Time
 File.ctime(self.to_s) を渡したものと同じです。
 
+#@samplecode 例
+require 'pathname'
+
+IO.write("testfile", "test")
+pathname = Pathname("testfile")
+pathname.ctime # => 2019-01-14 00:39:51 +0900
+sleep 1
+pathname.chmod(0755)
+pathname.ctime # => 2019-01-14 00:39:52 +0900
+#@end
+
 @see [[m:File.ctime]]
 --- mtime -> Time
 File.mtime(self.to_s) を渡したものと同じです。
