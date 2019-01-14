@@ -637,6 +637,8 @@ FileTest.grpowned?(self.to_s) と同じです。
 --- directory? -> bool
 FileTest.directory?(self.to_s) と同じです。
 
+#@#noexample FileTest.#directory? の例を参照
+
 @see [[m:FileTest.#directory?]]
 
 --- file? -> bool
