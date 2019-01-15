@@ -270,6 +270,13 @@ self がマウントポイントであれば真を返します。
 self がルートディレクトリであれば真を返します。判断は文字列操作によっ
 て行われ、ファイルシステムはアクセスされません。
 
+#@samplecode 例
+require 'pathname'
+
+Pathname('/').root?         # => true
+Pathname('/im/sure').root?  # => false
+#@end
+
 --- absolute? -> bool
 self が絶対パス指定であれば真を返します。
 
