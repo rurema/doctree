@@ -612,6 +612,8 @@ FileTest.blockdev?(self.to_s) と同じです。
 --- chardev? -> bool
 FileTest.chardev?(self.to_s) と同じです。
 
+#@#noexample FileTest.chardev? の例を参照
+
 @see [[m:FileTest.#chardev?]]
 
 --- executable? -> bool
