@@ -339,6 +339,30 @@ self.children(with_directory).each と同じです。
 
 @param with_directory 偽を指定するとファイル名のみ返します。デフォルトは真です。
 
+#@samplecode 例
+require "pathname"
+
+Pathname("/usr/etc").each_child {|f| p f }
+# => #<Pathname:/usr/local/bin>
+# => #<Pathname:/usr/local/etc>
+# => #<Pathname:/usr/local/include>
+# => #<Pathname:/usr/local/lib>
+# => #<Pathname:/usr/local/opt>
+# => #<Pathname:/usr/local/sbin>
+# => #<Pathname:/usr/local/share>
+# => #<Pathname:/usr/local/var>
+
+Pathname("/usr/etc").each_child(false) {|f| p f }
+# => #<Pathname:bin>
+# => #<Pathname:etc>
+# => #<Pathname:include>
+# => #<Pathname:lib>
+# => #<Pathname:opt>
+# => #<Pathname:sbin>
+# => #<Pathname:share>
+# => #<Pathname:var>
+#@end
+
 @see [[m:Pathname#children]]
 #@end
 
