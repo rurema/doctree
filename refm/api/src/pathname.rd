@@ -829,6 +829,20 @@ self に含まれるファイルエントリ名を元にした [[c:Pathname]] �
 --- each_entry {|pathname| ... } -> nil
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 
+#@samplecode 例
+require "pathname"
+
+Pathname("/usr/local").each_entry {|f| p f }
+
+# => #<Pathname:.>
+# => #<Pathname:..>
+# => #<Pathname:bin>
+# => #<Pathname:etc>
+# => #<Pathname:include>
+# => #<Pathname:lib>
+# => #<Pathname:opt>
+#@end
+
 @see [[m:Dir.foreach]]
 
 #@end
