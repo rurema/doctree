@@ -399,6 +399,49 @@ base_directory も絶対パスでなければなりません。
 #@end
 IO.foreach(self.to_s, *args, &block) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line
+# => #<Enumerator: IO:foreach("testfile")>
+#@end
+
+#@samplecode 例 ブロックを指定
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line {|f| p f }
+
+# => "line1\n"
+# => "line2,\n"
+# => "line3\n"
+#@end
+
+#@samplecode 例 limit を指定
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line(4) {|f| p f }
+
+# => "line"
+# => "1\n"
+# => "line"
+# => "2,\n"
+# => "line"
+# => "3\n"
+#@end
+
+#@samplecode 例 sep を指定
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line(",") {|f| p f }
+
+# => "line1\nline2,"
+# => "\nline3\n"
+#@end
+
 @see [[m:IO.foreach]]
 #@end
 
