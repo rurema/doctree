@@ -787,6 +787,22 @@ FileTest.zero?(self.to_s) と同じです。
 --- empty? -> bool
 ディレクトリに対しては Dir.empty?(self.to_s) と同じ、他に対しては FileTest.empty?(self.to_s) と同じです。
 
+#@samplecode 例 ディレクトリの場合
+require "pathname"
+require 'tmpdir'
+
+Pathname("/usr/local").empty?               # => false
+Dir.mktmpdir { |dir| Pathname(dir).empty? } # => true
+#@end
+
+#@samplecode 例 ファイルの場合
+require "pathname"
+require 'tempfile'
+
+Pathname("testfile").empty?                           # => false
+Tempfile.create("tmp") { |tmp| Pathname(tmp).empty? } # => true
+#@end
+
 @see [[m:Dir.empty?]], [[m:FileTest.#empty?]], [[m:Pathname#zero?]]
 #@end
 
