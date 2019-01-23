@@ -662,6 +662,8 @@ FileTest.executable_real?(self.to_s) と同じです。
 --- exist? -> bool
 FileTest.exist?(self.to_s) と同じです。
 
+#@#noexample FileTest.#exist? の例を参照
+
 @see [[m:FileTest.#exist?]]
 
 --- grpowned? -> bool
