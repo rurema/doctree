@@ -622,6 +622,15 @@ Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
 
 @param default_dir self が相対パスであれば default_dir を基準に展開されます。
 
+#@samplecode 例
+require "pathname"
+
+path = Pathname("testfile")
+Pathname.pwd             # => #<Pathname:/path/to>
+path.expand_path         # => #<Pathname:/path/to/testfile>
+path.expand_path("../")  # => #<Pathname:/path/testfile>
+#@end
+
 @see [[m:File.expand_path]]
 
 --- join(*args) -> Pathname
