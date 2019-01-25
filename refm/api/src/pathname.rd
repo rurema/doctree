@@ -615,6 +615,8 @@ Pathname.new(File.dirname(self.to_s)) と同じです。
 --- extname -> String
 File.extname(self.to_s) と同じです。
 
+#@#noexample File.extname の例を参照
+
 @see [[m:File.extname]]
 
 --- expand_path(default_dir = '.') -> Pathname
