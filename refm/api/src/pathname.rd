@@ -679,6 +679,8 @@ FileTest.directory?(self.to_s) と同じです。
 --- file? -> bool
 FileTest.file?(self.to_s) と同じです。
 
+#@#noexample FileTest.#file? の例を参照
+
 @see [[m:FileTest.#file?]]
 
 --- pipe? -> bool
