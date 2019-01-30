@@ -482,6 +482,8 @@ File.lchmod(mode, self.to_s) と同じです。
 
 @param mode ファイルのアクセス権限を整数で指定します。
 
+#@#noexample File.lchmod の例を参照
+
 @see [[m:File.lchmod]]
 
 --- chown(owner, group) -> Integer
