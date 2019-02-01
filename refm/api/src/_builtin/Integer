@@ -323,18 +323,13 @@ self ともっとも近い整数を返します。
 @see [[m:Numeric#truncate]]
 #@end
 
---- to_s -> String
-#@since 1.8.0
---- to_s(base) -> String
-#@end
+--- to_s(base=10)    -> String
 #@since 2.4.0
---- inspect       -> String
---- inspect(base) -> String
+--- inspect(base=10) -> String
 #@end
 
 整数を 10 進文字列表現に変換します。
 
-#@since 1.8.0
 引数を指定すれば、それを基数とした文字列表
 現に変換します。
 
@@ -342,13 +337,10 @@ self ともっとも近い整数を返します。
     p 10.to_s(8)    # => "12"
     p 10.to_s(16)   # => "a"
     p 35.to_s(36)   # => "z"
-#@end
 
 @return     数値の文字列表現
-#@since 1.8.0
 @param base 基数となる 2 - 36 の数値。
 @raise ArgumentError base に 2 - 36 以外の数値を指定した場合に発生します。
-#@end
 
 #@since 2.4.0
 --- upto(max) {|n| ... } -> Integer
