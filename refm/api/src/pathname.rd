@@ -567,6 +567,8 @@ File.stat(self.to_s) と同じです。
 --- lstat -> File::Stat
 File.lstat(self.to_s) と同じです。
 
+#@#noexample File.lstat の例を参照
+
 @see [[m:File.lstat]]
 
 #@until 1.9.2
