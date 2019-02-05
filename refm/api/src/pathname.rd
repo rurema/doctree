@@ -887,6 +887,8 @@ self 配下のすべてのファイルやディレクトリを
 --- mkpath -> nil
 FileUtils.mkpath(self.to_s) と同じです。
 
+#@#noexample FileUtils.#mkpath の例を参照
+
 @see [[m:FileUtils.#mkpath]]
 
 --- rmtree -> nil
