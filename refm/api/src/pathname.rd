@@ -545,6 +545,8 @@ File.link(old, self.to_s) と同じです。
 --- open(mode = 'r', perm = 0666){|file| ... } -> object
 File.open(self.to_s, *args, &block) と同じです。
 
+#@#noexample File.open の例を参照
+
 @see [[m:File.open]]
 
 --- readlink -> Pathname
