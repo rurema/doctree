@@ -854,6 +854,8 @@ Dir.mkdir(self.to_s, *args) と同じです。
 --- opendir{|dir| ... } -> nil
 Dir.open(self.to_s, &block) と同じです。
 
+#@#noexample Dir.open の例を参照
+
 @see [[m:Dir.open]]
 
 #@since 2.2.0
