@@ -694,6 +694,8 @@ FileTest.socket?(self.to_s) と同じです。
 --- owned? -> bool
 FileTest.owned?(self.to_s) と同じです。
 
+#@#noexample FileTest.#owned?の例を参照
+
 @see [[m:FileTest.#owned?]]
 
 --- readable? -> bool
