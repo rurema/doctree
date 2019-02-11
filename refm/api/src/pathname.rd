@@ -416,6 +416,8 @@ IO.foreach(self.to_s, *args, &block) と同じです。
 --- read(*args) -> String | nil
 IO.read(self.to_s, *args)と同じです。
 
+#@#noexample IO.readの例を参照
+
 @see [[m:IO.read]]
 
 #@since 1.9.2
