@@ -706,6 +706,8 @@ FileTest.readable?(self.to_s) と同じです。
 --- readable_real? -> bool
 FileTest.readable_real?(self.to_s) と同じです。
 
+#@#noexample FileTest.#readable_real?の例を参照
+
 @see [[m:FileTest.#readable_real?]]
 
 --- setuid? -> bool
