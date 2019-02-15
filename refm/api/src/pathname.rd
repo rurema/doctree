@@ -550,6 +550,8 @@ File.open(self.to_s, *args, &block) と同じです。
 --- readlink -> Pathname
 Pathname.new(File.readlink(self.to_s)) と同じです。
 
+#@#noexample File.readlink の例を参照
+
 @see [[m:File.readlink]]
 
 --- rename(to) -> 0
