@@ -557,6 +557,8 @@ File.rename(self.to_s, to) と同じです。
 
 @param to ファイル名を表す文字列を指定します。
 
+#@#noexample File.renameの例を参照
+
 @see [[m:File.rename]]
 
 --- stat -> File::Stat
