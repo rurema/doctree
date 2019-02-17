@@ -817,6 +817,8 @@ Dir.chroot(self.to_s) と同じです。
 --- rmdir -> 0
 Dir.rmdir(self.to_s) と同じです。
 
+#@#noexample Dir.rmdirの例を参照
+
 @see [[m:Dir.rmdir]]
 
 --- entries -> [Pathname]
