@@ -2130,7 +2130,7 @@ auto-close フラグを設定します。
 
 フラグが設定されているオブジェクトは
 close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
-設定されていない場合は close しません。
+偽を設定すると close しません。
 
 @param bool 真偽値でフラグを設定します
 @see [[m:IO#autoclose?]]
@@ -2138,12 +2138,12 @@ close時/GCでのファイナライザ呼出時にファイルデスクリプタ
    f = open("/dev/null")
    IO.for_fd(f.fileno)
    # ...
-   f.gets # may cause IOError
+   f.gets # may cause Errno::EBADF
 
    f = open("/dev/null")
-   IO.for_fd(f.fileno).autoclose = true
+   IO.for_fd(f.fileno).autoclose = false
    # ...
-   f.gets # won't cause IOError
+   f.gets # won't cause Errno::EBADF
 --- autoclose? -> bool
 
 auto-close フラグを返します。
