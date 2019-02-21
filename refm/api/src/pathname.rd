@@ -721,6 +721,8 @@ FileTest.setgid?(self.to_s) と同じです。
 --- size -> Integer
 FileTest.size(self.to_s) と同じです。
 
+#@#noexample FileTest.#size の例を参照
+
 @see [[m:FileTest.#size]]
 
 --- size? -> bool
