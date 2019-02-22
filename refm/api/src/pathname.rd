@@ -726,6 +726,8 @@ FileTest.size(self.to_s) と同じです。
 --- size? -> bool
 FileTest.size?(self.to_s) と同じです。
 
+#@#noexample FileTest.#size? の例を参照
+
 @see [[m:FileTest.#size?]]
 
 --- sticky? -> bool
