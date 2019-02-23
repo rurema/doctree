@@ -690,8 +690,10 @@ self を引数としてブロックを評価し、self を返します。
 @see [[m:Object#yield_self]]
 
 --- yield_self {|x| ... } -> object
+--- yield_self            -> Enumerator
 #@since 2.6.0
 --- then {|x| ... } -> object
+--- then            -> Enumerator
 #@end
 
 self を引数としてブロックを評価し、ブロックの結果を返します。
@@ -706,6 +708,27 @@ self を引数としてブロックを評価し、ブロックの結果を返し
 "my string".yield_self {|s| s.upcase }   # => "MY STRING"
 3.next.yield_self {|x| x**x }.to_s       # => "256"
 #@end
+#@end
+
+値をメソッドチェインのパイプラインは良い使い方です。
+
+#@samplecode メソッドチェインのパイプライン
+require 'open-uri'
+require 'json'
+
+construct_url(arguments).
+  yield_self {|url| open(url).read }.
+  yield_self {|response| JSON.parse(response) }
+#@end
+
+ブロックなしで呼び出されたときは Enumerator を返します。
+例えば条件によって値を捨てるのに使えます。
+
+#@samplecode
+# 条件にあうので何もしない
+1.yield_self.detect(&:odd?)            # => 1
+# 条件に合わないので値を捨てる
+2.yield_self.detect(&:odd?)            # => nil
 #@end
 
 @see [[m:Object#tap]]
