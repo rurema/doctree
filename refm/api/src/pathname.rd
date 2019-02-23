@@ -689,6 +689,8 @@ FileTest.pipe?(self.to_s) と同じです。
 --- socket? -> bool
 FileTest.socket?(self.to_s) と同じです。
 
+#@#noexample FileTest.#socket? の例を参照
+
 @see [[m:FileTest.#socket?]]
 
 --- owned? -> bool
