@@ -720,6 +720,8 @@ FileTest.setuid?(self.to_s) と同じです。
 --- setgid? -> bool
 FileTest.setgid?(self.to_s) と同じです。
 
+#@#noexample FileTest.#setgid? の例を参照
+
 @see [[m:FileTest.#setgid?]]
 
 --- size -> Integer
