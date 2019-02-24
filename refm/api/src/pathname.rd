@@ -713,6 +713,8 @@ FileTest.readable_real?(self.to_s) と同じです。
 --- setuid? -> bool
 FileTest.setuid?(self.to_s) と同じです。
 
+#@#noexample FileTest.#setuid? の例を参照
+
 @see [[m:FileTest.#setuid?]]
 
 --- setgid? -> bool
