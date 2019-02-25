@@ -562,6 +562,8 @@ File.rename(self.to_s, to) と同じです。
 --- stat -> File::Stat
 File.stat(self.to_s) と同じです。
 
+#@#noexample File.stat の例を参照
+
 @see [[m:File.stat]]
 
 --- lstat -> File::Stat
