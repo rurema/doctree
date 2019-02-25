@@ -342,7 +342,7 @@ self.children(with_directory).each と同じです。
 #@samplecode 例
 require "pathname"
 
-Pathname("/usr/etc").each_child {|f| p f }
+Pathname("/usr/local").each_child {|f| p f }
 # => #<Pathname:/usr/local/bin>
 # => #<Pathname:/usr/local/etc>
 # => #<Pathname:/usr/local/include>
@@ -352,7 +352,7 @@ Pathname("/usr/etc").each_child {|f| p f }
 # => #<Pathname:/usr/local/share>
 # => #<Pathname:/usr/local/var>
 
-Pathname("/usr/etc").each_child(false) {|f| p f }
+Pathname("/usr/local").each_child(false) {|f| p f }
 # => #<Pathname:bin>
 # => #<Pathname:etc>
 # => #<Pathname:include>
