@@ -433,6 +433,8 @@ IO.readlines(self.to_s, *args)と同じです。
 --- sysopen(*args) -> Integer
 IO.sysopen(self.to_s, *args)と同じです。
 
+#@#noexample IO.sysopen の例を参照
+
 @see [[m:IO.sysopen]]
 
 #@since 1.8.1
