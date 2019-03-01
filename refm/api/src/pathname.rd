@@ -586,6 +586,8 @@ File.symlink(old, self.to_s) と同じです。
 --- truncate(length) -> 0
 File.truncate(self.to_s, length) と同じです。
 
+#@#noexample File.truncate の例を参照
+
 @param length 変更したいサイズを整数で与えます。
 
 @see [[m:File.truncate]]
