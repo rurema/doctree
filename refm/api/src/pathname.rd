@@ -597,6 +597,8 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 @param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
+#@#noexample File.utimeの例を参照
+
 @see [[m:File.utime]]
 
 --- basename(suffix = "") -> Pathname
