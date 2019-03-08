@@ -792,6 +792,8 @@ FileTest.writable_real?(self.to_s) と同じです。
 
 FileTest.zero?(self.to_s) と同じです。
 
+#@#noexample FileTest.#zero? の例を参照
+
 @see [[m:FileTest.#zero?]]
 #@since 2.4.0
      , [[m:Pathname#empty?]]
