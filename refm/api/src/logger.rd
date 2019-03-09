@@ -286,6 +286,16 @@ Logger オブジェクトを生成します。
 
 @param msg ログに出力するメッセージ。
 
+#@samplecode 例
+require 'logger'
+logger = Logger.new(STDOUT)
+
+logger << "add message"
+
+# => add message
+#@end
+
+
 --- add(severity, message = nil, progname = nil) -> true
 --- add(severity, message = nil, progname = nil){ ... } -> true
 --- log(severity, message = nil, progname = nil) -> true
