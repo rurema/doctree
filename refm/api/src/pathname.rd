@@ -733,6 +733,8 @@ FileTest.owned?(self.to_s) と同じです。
 --- readable? -> bool
 FileTest.readable?(self.to_s) と同じです。
 
+#@#noexample FileTest.#readable?の例を参照
+
 @see [[m:FileTest.#readable?]]
 
 --- readable_real? -> bool
