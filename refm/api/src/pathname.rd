@@ -752,6 +752,8 @@ FileTest.sticky?(self.to_s) と同じです。
 --- symlink? -> bool
 FileTest.symlink?(self.to_s) と同じです。
 
+#@#noexample FileTest.#symlink? の例を参照
+
 @see [[m:FileTest.#symlink?]]
 
 #@since 1.8.5
