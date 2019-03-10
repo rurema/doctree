@@ -677,6 +677,8 @@ FileTest.exist?(self.to_s) と同じです。
 --- grpowned? -> bool
 FileTest.grpowned?(self.to_s) と同じです。
 
+#@#noexample FileTest.#grpowned? の例を参照
+
 @see [[m:FileTest.#grpowned?]]
 
 --- directory? -> bool
