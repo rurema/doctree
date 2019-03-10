@@ -448,6 +448,8 @@ File.link(old, self.to_s) と同じです。
 --- make_symlink(old) -> 0
 File.symlink(old, self.to_s) と同じです。
 
+#@#noexample File.symlinkの例を参照
+
 @see [[m:File.symlink]]
 #@end
 
