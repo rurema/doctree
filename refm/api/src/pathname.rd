@@ -469,6 +469,8 @@ File.ctime(self.to_s) を渡したものと同じです。
 --- mtime -> Time
 File.mtime(self.to_s) を渡したものと同じです。
 
+#@#noexample File.mtime の例を参照
+
 @see [[m:File.mtime]]
 
 #@since 2.2.0
