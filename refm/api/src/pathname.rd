@@ -664,6 +664,8 @@ FileTest.chardev?(self.to_s) と同じです。
 --- executable? -> bool
 FileTest.executable?(self.to_s) と同じです。
 
+#@#noexample FileTest.#executable? の例を参照
+
 @see [[m:FileTest.#executable?]]
 
 --- executable_real? -> bool
