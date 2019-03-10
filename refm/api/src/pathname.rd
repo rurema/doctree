@@ -669,6 +669,8 @@ FileTest.executable?(self.to_s) と同じです。
 --- executable_real? -> bool
 FileTest.executable_real?(self.to_s) と同じです。
 
+#@#noexample FileTest.#executable_real? の例を参照
+
 @see [[m:FileTest.#executable_real?]]
 
 --- exist? -> bool
