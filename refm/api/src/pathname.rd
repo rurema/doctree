@@ -783,6 +783,8 @@ IO.binwrite(self.to_s, *args)と同じです。
 --- writable? -> bool
 FileTest.writable?(self.to_s) と同じです。
 
+#@#noexample FileTest.#writable? の例を参照
+
 @see [[m:FileTest.#writable?]]
 
 --- writable_real? -> bool
