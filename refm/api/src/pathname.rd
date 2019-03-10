@@ -753,6 +753,8 @@ FileTest.symlink?(self.to_s) と同じです。
 --- world_readable? -> bool
 FileTest.world_readable?(self.to_s) と同じです。
 
+#@#noexample FileTest.#world_readable? の例を参照
+
 @see [[m:FileTest.#world_readable?]]
 
 --- world_writable? -> bool
