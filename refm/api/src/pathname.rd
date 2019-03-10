@@ -758,6 +758,8 @@ FileTest.world_readable?(self.to_s) と同じです。
 --- world_writable? -> bool
 FileTest.world_writable?(self.to_s) と同じです。
 
+#@#noexample FileTest.#world_writable? の例を参照
+
 @see [[m:FileTest.#world_writable?]]
 
 #@end
