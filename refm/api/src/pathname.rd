@@ -527,6 +527,8 @@ File.fnmatch?(pattern, self.to_s, *args) と同じです。
 --- ftype -> String
 File.ftype(self.to_s) と同じです。
 
+#@#noexample File.ftype? の例を参照
+
 @see [[m:File.ftype]]
 
 #@until 1.9.2
