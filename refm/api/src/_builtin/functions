@@ -69,7 +69,7 @@ exit! は exit とは違って、例外処理などは一切行ないませ
   #   start1...
   #終了ステータス:1
 
-@see [[m:Kernel.#exit]],[[m:Kernel.#abort]]
+@see [[m:Kernel.#exit]],[[m:Kernel.#abort]],[[m:Kernel.#at_exit]],[[m:Kernel.#fork]]
 
 --- abort(message = $!.message) -> ()
 
@@ -678,7 +678,7 @@ Process.waitpid(child_pid)
 #@end
 
 
-@see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
+@see [[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#at_exit]],[[m:Kernel.#exit!]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
 
@@ -1794,7 +1794,7 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
   #   at_exit1
   #   at_exit0
 
-@see [[ref:d:spec/control#END]]
+@see [[ref:d:spec/control#END]],[[m:Kernel.#exit!]],[[m:Kernel.#fork]]
 
 --- loop         -> Enumerator
 --- loop { ... } -> object | nil
