@@ -928,6 +928,8 @@ FileUtils.mkpath(self.to_s) と同じです。
 --- rmtree -> nil
 FileUtils.rm_r(self.to_s) と同じです。
 
+#@#noexample FileUtils.#rmtree の例を参照
+
 @see [[m:FileUtils.#rm_r]]
 
 --- unlink -> 0
