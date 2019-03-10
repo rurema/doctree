@@ -477,6 +477,8 @@ File.chmod(mode, self.to_s) と同じです。
 
 @param mode ファイルのアクセス権限を整数で指定します。
 
+#@#noexample File.chmod の例を参照
+
 @see [[m:File.chmod]]
 
 --- lchmod(mode) -> Integer
