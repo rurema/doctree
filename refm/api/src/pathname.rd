@@ -788,6 +788,8 @@ FileTest.writable?(self.to_s) と同じです。
 --- writable_real? -> bool
 FileTest.writable_real?(self.to_s) と同じです。
 
+#@#noexample FileTest.#writable_real? の例を参照
+
 @see [[m:FileTest.#writable_real?]]
 
 --- zero? -> bool
