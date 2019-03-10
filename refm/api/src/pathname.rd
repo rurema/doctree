@@ -441,6 +441,8 @@ IO.sysopen(self.to_s, *args)と同じです。
 --- make_link(old) -> 0
 File.link(old, self.to_s) と同じです。
 
+#@#noexample File.linkの例を参照
+
 @see [[m:File.link]]
 
 --- make_symlink(old) -> 0
