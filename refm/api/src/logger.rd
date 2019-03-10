@@ -306,6 +306,19 @@ Logger オブジェクトを生成します。
 @param progname ログメッセージと一緒に記録するプログラム名を指定します。
                 省略すると nil が使用されますが、実際には内部で保持されている値が使用されます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.add(Logger::FATAL) { 'Fatal error!' }
+# 通常はログレベルごとのメソッドを使えばいいので、 add は使わない
+logger.fatal('Fatal error!')
+
+# => F, [2019-03-11T00:34:18.037272 #1320] FATAL -- : Fatal error!
+#    F, [2019-03-11T00:34:18.037272 #1320] FATAL -- : Fatal error!
+#@end
+
 --- close -> nil
 
 ログ出力に使用していた IO オブジェクトを閉じます。
