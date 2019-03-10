@@ -263,6 +263,19 @@ JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
   デフォルトは偽です。
 
+#@samplecode 例
+require "json"
+
+json_text = "[1,2,{\"name\":\"tanaka\",\"age\":19}, NaN]"
+JSON.parse!(json_text)
+# => [1, 2, {"name"=>"tanaka", "age"=>19}, NaN]
+
+JSON.parse!(json_text, symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}, NaN]
+
+JSON.parse(json_text) # => unexpected token at 'NaN]' (JSON::ParserError)
+#@end
+
 @see [[m:JSON::Parser#parse]]
 
 --- pretty_generate(object, options = nil) -> String
