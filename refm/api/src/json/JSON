@@ -292,6 +292,26 @@ pretty_unparse は将来削除される予定です。
 @param options [[c:JSON::State]] または、to_hash や to_h メソッドでハッシュに変換可能なオブジェクトを指定できます。
        ハッシュを使用する場合指定可能なオプションは [[m:JSON.#generate]] を参照してください。
 
+#@samplecode 例
+require "json"
+
+hash = { "name": "tanaka", "age": 19 }
+puts JSON.generate(hash)
+# => {"name":"tanaka","age":19}
+
+puts JSON.pretty_generate(hash)
+# => {
+#      "name": "tanaka",
+#      "age": 19
+#    }
+
+puts JSON.pretty_generate(hash, space: "\t")
+# => {
+#      "name":  "tanaka",
+#      "age": 19
+#    }
+#@end
+
 @see [[m:JSON.#generate]]
 
 #@# nodoc?
