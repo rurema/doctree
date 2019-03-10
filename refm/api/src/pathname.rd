@@ -428,6 +428,8 @@ IO.binread(self.to_s, *args)と同じです。
 --- readlines(*args) -> [String]
 IO.readlines(self.to_s, *args)と同じです。
 
+#@#noexample O.readlines の例を参照
+
 @see [[m:IO.readlines]]
 
 --- sysopen(*args) -> Integer
