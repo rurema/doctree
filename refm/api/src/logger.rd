@@ -310,6 +310,16 @@ Logger オブジェクトを生成します。
 
 ログ出力に使用していた IO オブジェクトを閉じます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.info("test") # => I, [2019-04-16T00:40:11.837898 #2795]  INFO -- : test
+logger.close
+logger.info("test") # => log writing failed. closed stream
+#@end
+
 --- datetime_format -> String | nil
 
 ログに記録する時の日付のフォーマットです。
