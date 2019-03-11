@@ -430,7 +430,7 @@ IO.binread(self.to_s, *args)と同じです。
 --- readlines(*args) -> [String]
 IO.readlines(self.to_s, *args)と同じです。
 
-#@#noexample O.readlines の例を参照
+#@#noexample IO.readlines の例を参照
 
 @see [[m:IO.readlines]]
 
@@ -539,7 +539,7 @@ File.fnmatch?(pattern, self.to_s, *args) と同じです。
 --- ftype -> String
 File.ftype(self.to_s) と同じです。
 
-#@#noexample File.ftype? の例を参照
+#@#noexample File.ftype の例を参照
 
 @see [[m:File.ftype]]
 
