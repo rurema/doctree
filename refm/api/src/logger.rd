@@ -320,6 +320,21 @@ Logger オブジェクトを生成します。
 なお、"%06d" には [[m:Time#strftime]] ではなく、単に [[m:Time#usec]] の
 値を [[m:String#%]] でフォーマットしたものが入ります。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.datetime_format # => nil
+logger.debug("test")
+logger.datetime_format = '%Y/%m/%dT%H:%M:%S.%06d'
+logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
+logger.debug("test")
+
+# => D, [2019-03-12T22:52:13.674385 #17393] DEBUG -- : test
+#    D, [2019/03/12T22:52:13.000012#17393] DEBUG -- : test
+#@end
+
 @see [[m:Time#strftime]], [[m:Logger#datetime_format=]]
 
 
