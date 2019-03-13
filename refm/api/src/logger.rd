@@ -327,6 +327,21 @@ Logger オブジェクトを生成します。
 
 ログに記録する時の日付のフォーマットをセットします。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.datetime_format # => nil
+logger.debug("test")
+logger.datetime_format = '%Y/%m/%dT%H:%M:%S.%06d' # => "%Y/%m/%dT%H:%M:%S.%06d"
+logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
+logger.debug("test")
+
+# => D, [2019-03-13T23:52:13.674385 #17393] DEBUG -- : test
+#    D, [2019/03/13T23:52:13.000012#17393] DEBUG -- : test
+#@end
+
 @see [[m:Time#strftime]], [[m:Logger#datetime_format]]
 
 --- debug? -> bool
