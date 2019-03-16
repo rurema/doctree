@@ -349,6 +349,15 @@ Logger オブジェクトを生成します。
 現在の Logger オブジェクトが ERROR 以上のログレベルのメッセージを記録するなら
 真を返します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.error? # => true
+logger.level = Logger::Severity::FATAL
+logger.error? # => false
+#@end
+
 --- fatal? -> bool
 
 現在の Logger オブジェクトが FATAL 以上のログレベルのメッセージを記録するなら
