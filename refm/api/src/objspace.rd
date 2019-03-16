@@ -215,8 +215,7 @@ objectの元となったソースファイルの行数を返します。
 @return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
 #@end
 
-例
-#@samplecode
+#@samplecode 例
 require 'objspace'
 
 ObjectSpace::trace_object_allocations_start
@@ -230,8 +229,7 @@ ObjectSpace::trace_object_allocations_stop
 
 与えられたブロック内でオブジェクトのトレースを行います。　
 
-例
-#@samplecode
+#@samplecode 例
 require 'objspace'
 
 class C
