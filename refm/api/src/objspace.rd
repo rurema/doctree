@@ -178,6 +178,8 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 オブジェクト割り当てのトレースを開始します。
 
+@see [[m:ObjectSpace#trace_object_allocations_stop]]
+
 #@end
 
 #@since 2.1.0
@@ -186,6 +188,9 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 オブジェクト割り当てのトレースを終了します。
 
 トレースを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
+
+@see [[m:ObjectSpace#trace_object_allocations_start]]
+
 #@end
 
 #@since 2.1.0
@@ -195,7 +200,6 @@ objectの元となったソースファイル名を返します。
 
 @param object 元となるソースファイル名を取得したいobjectを指定します。
 @return objectの元となるソースファイル名を返します。存在しない場合はnilを返します。
-#@end
 
 #@samplecode 例:test.rbというファイルで下記のスクリプトを実行した場合
 require 'objspace'
@@ -206,6 +210,10 @@ puts "file:#{ObjectSpace::allocation_sourcefile(obj)}"   # => file:test.rb
 ObjectSpace::trace_object_allocations_stop
 #@end
 
+@see [[m:ObjectSpace#trace_object_allocations_start]],
+     [[m:ObjectSpace#trace_object_allocations_stop]]
+#@end
+
 #@since 2.1.0
 --- allocation_sourceline(object) -> integer
 
@@ -213,7 +221,6 @@ objectの元となったソースファイルの行数を返します。
 
 @param object 元となるソースファイルの行数を取得したいobjectを指定します。
 @return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
-#@end
 
 #@samplecode 例
 require 'objspace'
@@ -222,6 +229,10 @@ ObjectSpace::trace_object_allocations_start
 obj = Object.new
 puts "line:#{ObjectSpace::allocation_sourceline(obj)}"  # => line:4
 ObjectSpace::trace_object_allocations_stop
+#@end
+
+@see [[m:ObjectSpace#trace_object_allocations_start]],
+     [[m:ObjectSpace#trace_object_allocations_stop]]
 #@end
 
 #@since 2.1.0
