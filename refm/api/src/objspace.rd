@@ -185,7 +185,7 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 オブジェクト割り当てのトレースを終了します。
 
-トーレスを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
+トレースを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
 #@end
 
 #@since 2.1.0
