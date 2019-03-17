@@ -450,6 +450,14 @@ FATAL 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.fatal("fatal1")               # => F, [2019-03-17T22:36:43.042422 #4028] FATAL -- : fatal1
+logger.fatal("MainApp") { "fatal2" } # => F, [2019-03-17T22:36:43.042462 #4028] FATAL -- MainApp: fatal2
+#@end
+
 @see [[m:Logger#debug]]
 
 --- unknown(progname = nil){ ... } -> true
