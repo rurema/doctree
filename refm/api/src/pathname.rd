@@ -659,6 +659,13 @@ Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
 --- split -> Array
 File.split(self.to_s) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("/path/to/sample")
+pathname.split # => [#<Pathname:/path/to>, #<Pathname:sample>]
+#@end
+
 @see [[m:File.split]]
 
 --- blockdev? -> bool
