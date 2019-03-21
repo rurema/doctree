@@ -180,3 +180,88 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 @see [[url:http://www.atdot.net/~ko1/diary/201212.html#d8]],
      [[url:http://www.atdot.net/~ko1/diary/201212.html#d9]]
 #@end
+
+#@since 2.1.0
+--- trace_object_allocations_start -> nil
+
+オブジェクト割り当てのトレースを開始します。
+
+@see [[m:ObjectSpace#trace_object_allocations_stop]]
+
+#@end
+
+#@since 2.1.0
+--- trace_object_allocations_stop -> nil
+
+オブジェクト割り当てのトレースを終了します。
+
+トレースを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
+
+@see [[m:ObjectSpace#trace_object_allocations_start]]
+
+#@end
+
+#@since 2.1.0
+--- allocation_sourcefile(object) -> String
+
+objectの元となったソースファイル名を返します。
+
+@param object 元となるソースファイル名を取得したいobjectを指定します。
+@return objectの元となるソースファイル名を返します。存在しない場合はnilを返します。
+
+#@samplecode 例:test.rbというファイルで下記のスクリプトを実行した場合
+require 'objspace'
+
+ObjectSpace::trace_object_allocations_start
+obj = Object.new
+puts "file:#{ObjectSpace::allocation_sourcefile(obj)}"   # => file:test.rb
+ObjectSpace::trace_object_allocations_stop
+#@end
+
+@see [[m:ObjectSpace#trace_object_allocations_start]],
+     [[m:ObjectSpace#trace_object_allocations_stop]]
+#@end
+
+#@since 2.1.0
+--- allocation_sourceline(object) -> integer
+
+objectの元となったソースファイルの行数を返します。
+
+@param object 元となるソースファイルの行数を取得したいobjectを指定します。
+@return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
+
+#@samplecode 例
+require 'objspace'
+
+ObjectSpace::trace_object_allocations_start
+obj = Object.new
+puts "line:#{ObjectSpace::allocation_sourceline(obj)}"  # => line:4
+ObjectSpace::trace_object_allocations_stop
+#@end
+
+@see [[m:ObjectSpace#trace_object_allocations_start]],
+     [[m:ObjectSpace#trace_object_allocations_stop]]
+#@end
+
+#@since 2.1.0
+--- trace_object_allocations { ... }
+
+与えられたブロック内でオブジェクトのトレースを行います。　
+
+#@samplecode 例
+require 'objspace'
+
+class C
+  include ObjectSpace
+
+  def foo
+    trace_object_allocations do
+      obj = Object.new
+      p "#{allocation_sourcefile(obj)}:#{allocation_sourceline(obj)}"
+    end
+  end
+end
+
+C.new.foo #=> "objtrace.rb:8"
+#@end
+#@end
