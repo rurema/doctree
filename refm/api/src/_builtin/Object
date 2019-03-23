@@ -1754,7 +1754,11 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 レシーバのクラスを返します。
 
   p "ruby".class #=> String
-  p 999999999999999.class #=> Bignum
+#@since 2.4.0
+  p 999999999999999.class #=> Integer
+#@else
+  p 999999999999999.class #=> Fixnum
+#@end
   p ARGV.class #=> Array
   p self.class #=> Object
   p Class.class #=> Class
