@@ -483,6 +483,15 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 
 @param level ログレベルを指定します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.level # => 0
+logger.level = Logger::Severity::ERROR # => 3
+logger.level # => 3
+#@end
+
 --- progname -> String
 
 ログに出力するプログラム名を取得します。
