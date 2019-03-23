@@ -266,6 +266,15 @@ self の親ディレクトリを指す新しい Pathname オブジェクトを�
 --- mountpoint? -> bool
 self がマウントポイントであれば真を返します。
 
+#@samplecode 例
+require "pathname"
+
+path = Pathname("/")
+path.mountpoint? # => true
+path = Pathname("/usr")
+path.mountpoint? # => false
+#@end
+
 --- root? -> bool
 self がルートディレクトリであれば真を返します。判断は文字列操作によっ
 て行われ、ファイルシステムはアクセスされません。
