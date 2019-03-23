@@ -643,6 +643,12 @@ Pathname.new(File.basename(self.to_s, suffix)) と同じです。
 --- dirname -> Pathname
 Pathname.new(File.dirname(self.to_s)) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+Pathname('/usr/bin/shutdown').dirname # => #<Pathname:/usr/bin>
+#@end
+
 @see [[m:File.dirname]]
 
 --- extname -> String
