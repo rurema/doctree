@@ -665,6 +665,16 @@ Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
 
 @param args 連結したいディレクトリ名やファイル名を文字列で与えます。
 
+#@samplecode 例
+require "pathname"
+
+path0 = Pathname("/usr")                # Pathname:/usr
+path0 = path0.join("bin/ruby")          # Pathname:/usr/bin/ruby
+    # 上記の path0 の処理は下記の path1 と同様のパスになります
+path1 = Pathname("/usr") + "bin/ruby"   # Pathname:/usr/bin/ruby
+path0 == path1                          #=> true
+#@end
+
 --- split -> Array
 File.split(self.to_s) と同じです。
 
