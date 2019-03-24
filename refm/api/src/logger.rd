@@ -487,6 +487,15 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 
 ログに出力するプログラム名を取得します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.progname # => 0
+logger.progname = "MyProgName"
+logger.progname # => "MyProgName"
+#@end
+
 --- progname=(name)
 
 ログに出力するプログラム名を設定します。
