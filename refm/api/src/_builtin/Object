@@ -1755,9 +1755,9 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
   p "ruby".class #=> String
 #@since 2.4.0
-  p 999999999999999.class #=> Integer
+  p 100.class #=> Integer
 #@else
-  p 999999999999999.class #=> Fixnum
+  p 100.class #=> Fixnum
 #@end
   p ARGV.class #=> Array
   p self.class #=> Object
