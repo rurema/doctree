@@ -468,6 +468,14 @@ UNKNOWN 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.unknown("unknown1")              # => A, [2019-03-28T00:26:42.850942 #2765]   ANY -- : unknown1
+logger.unknown("MyApp") { "unknown2" }  # => A, [2019-03-28T00:26:42.851021 #2765]   ANY -- MyApp: unknown2
+#@end
+
 @see [[m:Logger#debug]]
 
 --- level -> Integer
