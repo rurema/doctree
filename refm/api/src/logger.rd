@@ -414,6 +414,17 @@ WARN 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.warn("warn1")              # => W, [2019-03-27T22:46:17.744243 #12744]  WARN -- : warn1
+logger.warn("MyApp") { "warn2" }  # => W, [2019-03-27T22:46:17.744322 #12744]  WARN -- MyApp: warn2
+logger.level = Logger::Severity::ERROR
+# 出力されない
+logger.warn("warn3")
+#@end
+
 @see [[m:Logger#debug]]
 
 --- error(progname = nil){ ... } -> true
