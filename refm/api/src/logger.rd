@@ -649,6 +649,8 @@ include Logger::Severity
 
 @param msg メッセージ。
 
+#@#noexample
+
 --- datetime_format -> String
 
 ログの日時フォーマットを取得します。
