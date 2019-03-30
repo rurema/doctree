@@ -653,6 +653,8 @@ include Logger::Severity
 
 ログの日時フォーマットを取得します。
 
+#@#noexample
+
 @see [[m:Time#strftime]]
 
 --- datetime_format=(format)
