@@ -687,6 +687,13 @@ include Logger::Severity
            ハッシュのキーには :shift_age, :shift_size を指定します。
            省略すると、それぞれ 7, 1048756 (1 MByte) が使用されます。
 
+#@samplecode 例
+require 'logger'
+
+device = Logger::LogDevice.new("logfile.log")
+device # => #<Logger::LogDevice:0x00007ff4dc0a0d38 @shift_period_suffix="%Y%m%d", @shift_size=1048576, @shift_age=7, @filename="logfile.log", @dev=#<File:logfile.log>, @mon_owner=nil, @mon_count=0, @mon_mutex=#<Thread::Mutex:0x00007ff4dc0a0ce8>>
+#@end
+
 @see [[m:Logger.new]]
 
 
