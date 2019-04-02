@@ -698,6 +698,19 @@ include Logger::Severity
 
 このメソッドは同期されます。
 
+#@samplecode 例
+require 'logger'
+
+device = Logger::LogDevice.new("logfile.log")
+device.write("test1") # => 5
+device.close          # => nil
+# すでにクローズしているので書き込めない
+device.write("test2")
+# => nil
+#    log shifting failed. closed stream
+#    log writing failed. closed stream
+#@end
+
 @see [[m:IO#close]]
 
 --- dev -> IO
