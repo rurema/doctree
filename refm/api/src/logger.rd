@@ -704,6 +704,13 @@ include Logger::Severity
 
 出力先の IO オブジェクトを取得します。
 
+#@samplecode 例
+require 'logger'
+
+device = Logger::LogDevice.new("logfile.log")
+device.dev # => #<File:logfile.log>
+#@end
+
 --- filename -> String | nil
 
 出力先のファイル名を取得します。
