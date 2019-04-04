@@ -710,6 +710,13 @@ include Logger::Severity
 
 出力先がファイルではない場合は nil を返します。
 
+#@samplecode 例
+require 'logger'
+
+device = Logger::LogDevice.new("logfile.log")
+device.filename # => "logfile.log"
+#@end
+
 --- write(message) -> Integer
 
 出力先の IO オブジェクトにメッセージを書き込みます。
