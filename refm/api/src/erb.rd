@@ -219,6 +219,25 @@ fname はスクリプトを定義する際のファイル名です。主にエ�
 
 @param methodname メソッド名
 
+#@samplecode 例
+require 'erb'
+
+class MyClass_
+  def initialize(arg1, arg2)
+    @arg1 = arg1;  @arg2 = arg2
+  end
+end
+filename = 'example.rhtml'  # @arg1 と @arg2 が使われている example.rhtml
+
+erb = ERB.new(File.read(filename))
+erb.filename = filename
+MyClass = erb.def_class(MyClass_, 'render()')
+print MyClass.new('foo', 123).render()
+
+# => test1foo
+#    test2123
+#@end
+
 --- set_eoutvar(compiler, eoutvar = '_erbout') -> Array
 
 ERBの中でeRubyスクリプトの出力をためていく変数を設定します。
