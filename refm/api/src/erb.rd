@@ -209,6 +209,20 @@ fname はスクリプトを定義する際のファイル名です。主にエ�
 
 @param methodname メソッド名
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml' # @arg1 と @arg2 が使われている example.rhtml
+erb = ERB.new(File.read(filename))
+erb.filename = filename
+MyModule = erb.def_module('render(arg1, arg2)')
+class MyClass
+  include MyModule
+end
+print MyClass.new.render('foo', 123)
+# => test1foo
+#    test2123
+#@end
+
 --- def_class(superklass=Object, methodname='erb') -> Class
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
