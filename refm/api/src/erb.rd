@@ -237,6 +237,15 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 エラーメッセージを表示する際のファイル名を取得します。
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+erb = ERB.new(File.read(filename))
+erb.filename # => nil
+erb.filename = filename
+erb.filename # =>"example.rhtml"
+#@end
+
 --- filename= -> String
 
 エラーメッセージを表示する際のファイル名を設定します。
