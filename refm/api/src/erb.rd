@@ -180,6 +180,18 @@ ERB を b の binding で実行し、結果の文字列を返します。
 
 @param b eRubyスクリプトが実行されるときのbinding
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+erb = ERB.new(File.read(filename))
+test1 = "foo"
+test2 = "bar"
+puts erb.result
+
+# => test foo
+#    test bar
+#@end
+
 --- src -> String
 
 変換した Ruby スクリプトを取得します。
