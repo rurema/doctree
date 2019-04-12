@@ -687,6 +687,8 @@ include Logger::Severity
            ハッシュのキーには :shift_age, :shift_size を指定します。
            省略すると、それぞれ 7, 1048756 (1 MByte) が使用されます。
 
+#@#noexample 内部利用向けのクラスのため
+
 @see [[m:Logger.new]]
 
 
@@ -698,11 +700,15 @@ include Logger::Severity
 
 このメソッドは同期されます。
 
+#@#noexample 内部利用向けのクラスのため
+
 @see [[m:IO#close]]
 
 --- dev -> IO
 
 出力先の IO オブジェクトを取得します。
+
+#@#noexample 内部利用向けのクラスのため
 
 --- filename -> String | nil
 
@@ -710,11 +716,15 @@ include Logger::Severity
 
 出力先がファイルではない場合は nil を返します。
 
+#@#noexample 内部利用向けのクラスのため
+
 --- write(message) -> Integer
 
 出力先の IO オブジェクトにメッセージを書き込みます。
 
 このメソッドは同期されます。
+
+#@#noexample 内部利用向けのクラスのため
 
 @see [[m:IO#write]]
 
