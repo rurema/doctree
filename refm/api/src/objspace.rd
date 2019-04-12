@@ -223,7 +223,7 @@ ObjectSpace::trace_object_allocations_stop
 #@end
 
 #@since 2.1.0
---- allocation_sourceline(object) -> integer
+--- allocation_sourceline(object) -> Integer
 
 objectの元となったソースファイルの行数を返します。
 
