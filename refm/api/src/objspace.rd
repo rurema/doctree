@@ -225,10 +225,10 @@ ObjectSpace::trace_object_allocations_stop
 #@since 2.1.0
 --- allocation_sourceline(object) -> Integer
 
-objectの元となったソースファイルの行数を返します。
+objectの元となったソースファイルの行番号を返します。
 
-@param object 元となるソースファイルの行数を取得したいobjectを指定します。
-@return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
+@param object 元となるソースファイルの行番号を取得したいobjectを指定します。
+@return objectの元となるソースファイルの行番号を返します。存在しない場合はnilを返します。
 
 #@samplecode 例
 require 'objspace'
