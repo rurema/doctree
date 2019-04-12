@@ -174,6 +174,18 @@ ERB を b の binding で実行し、結果を標準出力へ印字します。
 
 @param b eRubyスクリプトが実行されるときのbinding
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+erb = ERB.new(File.read(filename))
+test1 = "foo"
+test2 = "bar"
+erb.run
+
+# => test foo
+#    test bar
+#@end
+
 --- result(b=TOPLEVEL_BINDING) -> String
 
 ERB を b の binding で実行し、結果の文字列を返します。
