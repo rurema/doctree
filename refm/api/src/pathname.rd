@@ -953,6 +953,23 @@ self に含まれるファイルエントリ名を元にした [[c:Pathname]] �
 
 @raise Errno::EXXX self が存在しないパスであったりディレクトリでなければ例外が発生します。
 
+#@samplecode 例
+require 'pathname'
+require 'pp'
+
+pp Pathname('/usr/local').entries
+# => [#<Pathname:.>,
+#     #<Pathname:..>,
+#     #<Pathname:bin>,
+#     #<Pathname:etc>,
+#     #<Pathname:include>,
+#     #<Pathname:lib>,
+#     #<Pathname:opt>,
+#     #<Pathname:sbin>,
+#     #<Pathname:share>,
+#     #<Pathname:var>]
+#@end
+
 @see [[m:Dir.entries]]
 
 #@since 1.8.1
