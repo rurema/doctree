@@ -184,6 +184,21 @@ ERB を b の binding で実行し、結果の文字列を返します。
 
 変換した Ruby スクリプトを取得します。
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+# ファイルの中身は
+# "test1<%= @arg1%>\ntest2<%= @arg2%>\n\n"
+erb = ERB.new(File.read(filename))
+puts erb.src
+
+# => #coding:US-ASCII
+#    _erbout = ''; _erbout.concat "test1"; _erbout.concat(( @arg1).to_s); _erbout.concat "\ntest2"
+#    ; _erbout.concat(( @arg2).to_s); _erbout.concat "\n\n"
+#
+#    ; _erbout.force_encoding(__ENCODING__)
+#@end
+
 --- def_method(mod, methodname, fname='(ERB)') -> nil
 
 変換した Ruby スクリプトをメソッドとして定義します。
