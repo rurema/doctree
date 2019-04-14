@@ -261,6 +261,14 @@ eRubyスクリプトのためのユーティリティを提供するモジュー
 
 @param s HTMLエスケープを行う文字列
 
+#@samplecode 例
+require "erb"
+include ERB::Util
+
+puts html_escape("is a > 0 & a < 10?")
+# => is a &gt; 0 &amp; a &lt; 10?
+#@end
+
 --- url_encode(s)  -> String
 --- u(s) -> String
 
