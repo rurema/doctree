@@ -123,6 +123,8 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@#noexample OptionParser#getopts を参照
+
 @see [[m:OptionParser#getopts]]
 
 #@end
