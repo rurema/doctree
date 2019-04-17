@@ -105,6 +105,32 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @param klass 削除したいクラスオブジェクトを指定します。
 
+#@samplecode 例
+require "optparse"
+require "time"
+
+def parse(option_parser)
+  option_parser.on("-t", "--time [TIME]", Time) do |time|
+    p time.class
+  end
+  option_parser.parse(ARGV)
+end
+
+OptionParser.accept(Time) do |s,|
+  begin
+    Time.parse(s) if s
+  rescue
+    raise OptionParser::InvalidArgument, s
+  end
+end
+
+opts1 = OptionParser.new
+parse(opts1) # => Time
+OptionParser.reject(Time)
+opts2 = OptionParser.new
+parse(opts2) # => unsupported argument type: Time (ArgumentError)
+#@end
+
 #@since 1.8.5
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
