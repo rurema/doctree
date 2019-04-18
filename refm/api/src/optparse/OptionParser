@@ -138,6 +138,26 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
 
+#@samplecode 例
+require "optparse"
+require "time"
+
+opts = OptionParser.new
+opts.accept(Time) do |s,|
+  begin
+    Time.parse(s) if s
+  rescue
+    raise OptionParser::InvalidArgument, s
+  end
+end
+
+opts.on("-t", "--time [TIME]", Time) do |time|
+  p time.class # => Time
+end
+
+opts.parse!(ARGV)
+#@end
+
 --- reject(klass)    -> ()
 
 [[m:OptionParser#accept]] で登録したクラスとブロックを
