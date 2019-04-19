@@ -405,6 +405,14 @@ INFO 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.info("info1")               # => I, [2019-03-21T03:36:28.003418 #2533]  INFO -- : info1
+logger.info("MainApp") { "info2" } # => I, [2019-03-21T03:36:28.003493 #2533]  INFO -- MainApp: info2
+#@end
+
 @see [[m:Logger#debug]]
 
 --- warn(progname = nil){ ... } -> true
