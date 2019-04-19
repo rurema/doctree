@@ -153,6 +153,21 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @return サマリの最初に表示される文字列を返します。
 
+#@samplecode 例
+require "optparse"
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end
+
+p opts.banner # => "Usage: example.rb [options]"
+#@end
+
 --- banner=(heading)
 
 サマリの最初に表示される文字列を指定します。
