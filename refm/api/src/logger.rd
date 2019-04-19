@@ -458,6 +458,17 @@ ERROR 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.error("error1") # => E, [2019-03-15T22:54:37.925635 #14878] ERROR -- : error1
+logger.error("MainApp") { "error2" } # => E, [2019-03-16T03:50:58.062094 #2172] ERROR -- MainApp: error2
+logger.level = Logger::Severity::FATAL
+# 出力されない
+logger.error("error3")
+#@end
+
 @see [[m:Logger#debug]]
 
 --- fatal(progname = nil){ ... } -> true
