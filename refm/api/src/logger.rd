@@ -492,6 +492,15 @@ UNKNOWN 情報を出力します。
 
 レシーバにセットされているログレベルを取得します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.level # => 0
+logger.level = Logger::Severity::ERROR
+logger.level # => 3
+#@end
+
 --- level=(level)
 --- sev_threshold=(level)
 
