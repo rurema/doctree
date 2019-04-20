@@ -499,6 +499,8 @@ File.birthtime(self.to_s) を渡したものと同じです。
 
 @raise NotImplementedError  Windows のような birthtime のない環境で発生します。
 
+#@#noexample File.birthtime の例を参照
+
 @see [[m:File.birthtime]]
 #@end
 
