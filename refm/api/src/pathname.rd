@@ -534,6 +534,8 @@ File.lchown(owner, group, self.to_s) と同じです。
 
 @param group グループを指定します。
 
+#@#noexample File.lchown の例を参照
+
 @see [[m:File.lchown]]
 
 --- fnmatch(pattern, *args) -> bool
