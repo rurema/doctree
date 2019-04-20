@@ -478,7 +478,7 @@ id,first name,last name,age
 4,yumi,adachi,21
 EOS
 
-csv = CSV.generate(text, :headers => true) do |csv|
+csv = CSV.generate(text, headers: true) do |csv|
   csv.add_row(["5", "saburo", "kondo", "34"])
 end
 
