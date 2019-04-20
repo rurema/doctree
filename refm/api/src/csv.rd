@@ -1308,6 +1308,18 @@ row2_1,row2_2
 ヘッダを返す場合は、真を返します。
 そうでない場合は、偽を返します。
 
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true, return_headers: false)
+csv.return_headers? # => false
+csv.shift # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true, return_headers: true)
+csv.return_headers? # => true
+csv.shift # => #<CSV::Row "header1":"header1" "header2":"header2">
+#@end
+
 @see [[m:CSV.new]]
 
 --- rewind -> 0
