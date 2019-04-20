@@ -159,6 +159,21 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @param heading サマリの最初に表示される文字列を指定します。
 
+#@samplecode 例
+require "optparse"
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]" # => "Usage: example.rb [options]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end
+
+opts.banner # => "Usage: example.rb [options]"
+#@end
+
 --- summary_width         -> Integer
 
 サマリを表示するときの幅を整数で返します。
