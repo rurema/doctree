@@ -877,6 +877,8 @@ IO.write(self.to_s, *args)と同じです。
 
 IO.binwrite(self.to_s, *args)と同じです。
 
+#@#noexample IO.binwrite の例を参照
+
 @see [[m:IO.binwrite]]
 
 #@end
