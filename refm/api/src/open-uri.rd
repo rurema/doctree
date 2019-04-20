@@ -59,12 +59,12 @@ URI オブジェクトは直接読み込むことができます。
 
 == Module Functions
 
---- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | File
---- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> nil
+--- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
+--- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
 
 name が http:// や ftp:// で始まっている文字列なら URI のリソースを
-取得した上で [[c:StringIO]] オブジェクトとして返します。
-StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+取得した上で [[c:StringIO]] オブジェクトまたは [[c:Tempfile]] オブジェクトとして返します。
+返されるオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
 
 name に open メソッドが定義されている場合は、*rest を引数として渡し
 name.open(*rest, &block) のように name の open メソッドが呼ばれます。
@@ -73,9 +73,9 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 [[m:Kernel.#open]](name, *rest) が呼ばれます。
 
 ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で
-始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクトを
-引数としてブロックを評価します。後は同様です。
-StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクト
+または [[c:Tempfile]] オブジェクトを引数としてブロックを評価します。後は同様です。
+引数のオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
 
 @param name オープンしたいリソースを文字列で与えます。
 
