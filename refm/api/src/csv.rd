@@ -71,56 +71,64 @@ include Enumerable
 
 === 読み込み
 
-  require 'csv'
+#@samplecode
+require 'csv'
 
-  # ファイルから一行ずつ
-  CSV.foreach("path/to/file.csv") do |row|
-    # use row here...
-  end
+# ファイルから一行ずつ
+CSV.foreach("path/to/file.csv") do |row|
+  # use row here...
+end
 
-  # ファイルから一度に
-  arr_of_arrs = CSV.read("path/to/file.csv")
+# ファイルから一度に
+arr_of_arrs = CSV.read("path/to/file.csv")
 
-  # 文字列から一行ずつ
-  CSV.parse("CSV,data,String") do |row|
-    # use row here...
-  end
+# 文字列から一行ずつ
+CSV.parse("CSV,data,String") do |row|
+  # use row here...
+end
 
-  # 文字列から一行ずつ
-  arr_of_arrs = CSV.parse("CSV,data,String")
+# 文字列から一行ずつ
+arr_of_arrs = CSV.parse("CSV,data,String")
+#@end
 
 === 書き込み
 
-  require 'csv'
+#@samplecode
+require 'csv'
 
-  # ファイルへ書き込み
-  CSV.open("path/to/file.csv", "wb") do |csv|
-    csv << ["row", "of", "CSV", "data"]
-    csv << ["another", "row"]
-    # ...
-  end
+# ファイルへ書き込み
+CSV.open("path/to/file.csv", "wb") do |csv|
+  csv << ["row", "of", "CSV", "data"]
+  csv << ["another", "row"]
+  # ...
+end
 
-  # 文字列へ書き込み
-  csv_string = CSV.generate do |csv|
-    csv << ["row", "of", "CSV", "data"]
-    csv << ["another", "row"]
-    # ...
-  end
+# 文字列へ書き込み
+csv_string = CSV.generate do |csv|
+  csv << ["row", "of", "CSV", "data"]
+  csv << ["another", "row"]
+  # ...
+end
+#@end
 
 === 一行変換
 
-  require 'csv'
+#@samplecode
+require 'csv'
 
-  csv_string = ["CSV", "data"].to_csv   # => "CSV,data"
-  csv_array  = "CSV,String".parse_csv   # => ["CSV", "String"]
+csv_string = ["CSV", "data"].to_csv   # => "CSV,data"
+csv_array  = "CSV,String".parse_csv   # => ["CSV", "String"]
+#@end
 
 === ショートカット
 
-  require 'csv'
+#@samplecode
+require 'csv'
 
-  CSV             { |csv_out| csv_out << %w{my data here} }  # to $stdout
-  CSV(csv = "")   { |csv_str| csv_str << %w{my data here} }  # to a String
-  CSV($stderr)    { |csv_err| csv_err << %w{my data here} }  # to $stderr
+CSV             { |csv_out| csv_out << %w{my data here} }  # to $stdout
+CSV(csv = "")   { |csv_str| csv_str << %w{my data here} }  # to a String
+CSV($stderr)    { |csv_err| csv_err << %w{my data here} }  # to $stderr
+#@end
 
 === CSV と文字エンコーディング (M17n or Multilingualization)
 
@@ -422,12 +430,12 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
 このメソッドは CSV ファイルを読むための主要なインターフェイスです。
 各行が与えられたブロックに渡されます。
 
-例:
+#@samplecode 例
+require 'csv'
 
-  require 'csv'
-
-  # UTF-32BE な CSV ファイルを読み込んで UTF-8 な row をブロックに渡します
-  CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
+# UTF-32BE な CSV ファイルを読み込んで UTF-8 な row をブロックに渡します
+CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
+#@end
 
 @param path CSV ファイルのパスを指定します。
 
