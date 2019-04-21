@@ -415,6 +415,54 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
                それ以外のキーは両方に適用されます。
                ":output_row_sep" のデフォルト値は [[m:$/]] です。
 
+#@samplecode 例: input, output は初期値
+# $ echo "header1,header2\nrow1_1,row1_2" > in.csv; ruby test.rb in.csv
+
+require "csv"
+
+options = { headers: true, return_headers: true, write_headers: true }
+
+CSV.filter(options) do |row|
+  if row.header_row?
+    row << "header3"
+    next
+  end
+  row << "row1_3"
+end
+
+# => header1,header2,header3
+# row1_1,row1_2,row1_3
+#@end
+
+#@samplecode 例: input, output を指定する
+require "csv"
+content = <<EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+EOS
+
+File.write('test.csv',content)
+options = { headers: true, return_headers: true, write_headers: true }
+
+CSV.filter(File.open("test.csv"), File.open("out.csv", "w"), options) do |row|
+  if row.header_row?
+    row << "full name"
+    next
+  end
+  row << row["first name"] + " " + row["last name"]
+end
+
+# out.csv の内容
+# => id,first name,last name,age,full name
+#    1,taro,tanaka,20,taro tanaka
+#    2,jiro,suzuki,18,jiro suzuki
+#    3,ami,sato,19,ami sato
+#    4,yumi,adachi,21,yumi adachi
+#@end
+
 @see [[m:CSV.new]]
 
 --- foreach(path, options = Hash.new){|row| ... } -> nil
