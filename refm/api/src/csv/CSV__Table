@@ -1,4 +1,3 @@
-#@since 1.9.1
 = class CSV::Table < Object
 extend Forwardable
 include Enumerable
@@ -518,5 +517,3 @@ table.values_at(1) # => [["row1_2"], ["row2_2"]]
 同値性を比較するために内部的に使用します。
 
 #@#noexample 内部で使用するためサンプル不要
-
-#@end
