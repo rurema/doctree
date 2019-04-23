@@ -759,6 +759,18 @@ argv からオプションを取り除いたものを返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@samplecode 例
+require "optparse"
+
+config = {}
+opts = OptionParser.new
+opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
+
+ENV['PROGRAM_ARGS'] = %q{--require lib1 'remain data'}
+p opts.environment('PROGRAM_ARGS') # => ["remain data"]
+p config                           # => {:lib=>"lib1"}
+#@end
+
 #@since 1.8.3
 --- default_argv    -> [String]
 
