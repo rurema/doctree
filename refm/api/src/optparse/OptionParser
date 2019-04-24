@@ -245,6 +245,24 @@ to にサマリが加えられることはありません。
 
 サマリの文字列を返します。
 
+#@samplecode 例
+require "optparse"
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end
+
+puts opts.help
+
+# => Usage: example.rb [options]
+#    -v, --[no-]verbose               Run verbosely
+#@end
+
 --- to_a    -> [String]
 
 サマリの各行を要素とした配列を返します。
