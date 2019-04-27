@@ -9,7 +9,11 @@ ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] �
 
 == Instance Methods
 
+#@since 2.7.0
 --- begin -> Numeric | nil
+#@else
+--- begin -> Numeric
+#@end
 
 初項 (始端) を返します。
 
