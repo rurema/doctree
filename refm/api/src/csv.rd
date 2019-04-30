@@ -544,6 +544,7 @@ print csv
 --- generate_line(row, options = Hash.new) -> String
 
 このメソッドは一つの [[c:Array]] オブジェクトを CSV 文字列に変換するためのショートカットです。
+複数行のCSVを扱う際は[[m:CSV#<<]]を使うとより高速です。
 
 このメソッドは可能であれば row に含まれる最初の nil でない値を用いて出力の
 エンコーディングを推測します。
