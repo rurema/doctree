@@ -121,7 +121,7 @@ p str              # => "TXT"
 2つの例の区切りがわかりにくい
 
 ```
-#samplecode 例
+#@samplecode 例
 require 'yaml'
 data = [ "Taro san", "Jiro san", "Saburo san"]
 str_r = YAML.dump(data)
