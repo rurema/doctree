@@ -207,6 +207,24 @@ opts.banner # => "Usage: example.rb [options]"
 
 @return サマリを表示する時のインデントを文字列で返します。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+opts.summary_indent         # => "    "
+opts.summarize
+# => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
+opts.summary_indent = "  "
+opts.summary_indent         # => "  "
+opts.summarize
+# => ["  -i, --init\n", "  -u, --update\n", "  -h, --help\n"]
+#@end
+
 --- summary_indent=(indent)
 
 サマリを表示する時のインデントを文字列で指定します。
