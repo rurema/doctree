@@ -1,7 +1,7 @@
 language: ruby
 dist: xenial
 rvm:
-  - 2.6.1
+  - 2.6.3
 notifications:
   email:
     recipients:
