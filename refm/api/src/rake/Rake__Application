@@ -13,6 +13,23 @@ Rake で使用するメインのクラスです。
 
 @param file_name ロード予定のファイル名を指定します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+IO.write("testlib.rb", 'def some_method; puts "test" ;end')
+Rake.application.add_import("testlib.rb")
+begin
+  some_method
+rescue StandardError => e
+  puts e    # => undefined local variable or method `some_method' for main:Object
+end
+Rake.application.load_imports
+some_method # => test
+#@end
+
 --- add_loader(ext, loader)
 
 与えられた拡張子で終わるファイル名のファイルをロードするためのローダーを
