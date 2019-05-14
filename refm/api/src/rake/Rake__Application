@@ -22,6 +22,27 @@ Rake で使用するメインのクラスです。
 
 @param loader ローダーを指定します。
 
+#@samplecode 例
+require "rake/loaders/makefile"
+
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+makefile =<<-EOS
+<< <<-'SAMPLE_MF'
+# Comments
+a: a1 a2 a3 a4
+EOS
+IO.write("sample.mf", makefile)
+Rake.application.add_loader("mf", Rake::MakefileLoader.new)
+Rake.application.add_import("sample.mf")
+Rake::Task.task_defined?("a") # => false
+Rake.application.load_imports
+Rake::Task.task_defined?("a") # => true
+#@end
+
 --- collect_tasks(argv) -> Array
 
 コマンドライン引数を解析して実行するタスクのリストを返します。
