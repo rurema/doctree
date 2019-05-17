@@ -37,6 +37,33 @@ Rake で使用するメインのクラスです。
 
 タスクとそのタスクに依存しているタスクを表示します。
 
+#@samplecode 例
+require "rake/loaders/makefile"
+
+# Rakefile での記載例とする
+
+task default: :task1
+
+task :task1
+task :task2
+task :task3
+
+Rake::Task[:task1].enhance([:task2, :task3]) do
+  puts "test"
+end
+Rake.application.display_prerequisites
+
+# => rake default
+#        task1
+#    rake task1
+#        task2
+#        task3
+#    rake task2
+#    rake task3
+#    [<Rake::Task default => [task1]>, <Rake::Task task1 => [task2, task3]>, <Rake::Task task2 => []>, <Rake::Task task3 => []>]
+#    test
+#@end
+
 --- display_tasks_and_comments
 
 タスクとコメントを表示します。
