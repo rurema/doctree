@@ -41,6 +41,24 @@ Rake で使用するメインのクラスです。
 
 タスクとコメントを表示します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+Rake::TaskManager.record_task_metadata = true
+Rake::application.options.show_tasks = :tasks
+Rake::application.options.show_task_pattern = //
+Rake::application.display_tasks_and_comments
+
+desc "task1 description"
+task :task1
+
+desc "task2 description"
+task :task2
+
+# => rake task1  # task1 description
+#    rake task2  # task2 description
+#@end
+
 --- dynamic_width -> Integer
 
 ターミナルの幅を計算します。
