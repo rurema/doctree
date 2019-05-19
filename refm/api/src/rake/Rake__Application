@@ -45,6 +45,16 @@ Rake で使用するメインのクラスです。
 
 ターミナルの幅を計算します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+# ※実際の設定によって変化
+Rake.application.dynamic_width # => 155
+#@end
+
 --- dynamic_width_stty
 
 [[man:stty(1)]] を用いてターミナルの幅を計算します。
