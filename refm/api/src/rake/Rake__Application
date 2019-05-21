@@ -53,6 +53,16 @@ Rake で使用するメインのクラスです。
 
 [[man:tput(1)]] を用いてターミナルの幅を計算します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+# ※実際の設定によって変化
+Rake.application.dynamic_width_tput # => 80
+#@end
+
 --- find_rakefile_location -> Array | nil
 
 Rakefile とそのファイルがあったディレクトリのペアを返します。
