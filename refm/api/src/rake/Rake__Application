@@ -57,6 +57,16 @@ Rake で使用するメインのクラスです。
 
 Rakefile とそのファイルがあったディレクトリのペアを返します。
 
+
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+Rake.application.find_rakefile_location # => ["Rakefile", "/path/to"]
+#@end
+
 --- handle_options
 
 コマンドラインオプションを [[c:OptionParser]] に登録します。
