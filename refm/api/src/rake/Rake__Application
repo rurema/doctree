@@ -61,6 +61,17 @@ Rakefile とそのファイルがあったディレクトリのペアを返し�
 
 コマンドラインオプションを [[c:OptionParser]] に登録します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test1
+task :test1
+task :test2
+
+# test1 test2 を引数に rake を実行
+Rake.application.handle_options # => ["test1", "test2"]
+#@end
+
 --- have_rakefile -> String | nil
 
 Rakefile がカレントディレクトリに存在する場合はそのファイル名を返します。
