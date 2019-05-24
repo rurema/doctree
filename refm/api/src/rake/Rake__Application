@@ -66,6 +66,27 @@ Rakefile とそのファイルがあったディレクトリのペアを返し�
 Rakefile がカレントディレクトリに存在する場合はそのファイル名を返します。
 そうでない場合は nil を返します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+# Rakefile がある場合
+Rake.application.have_rakefile # => "Rakefile"
+#@end
+
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+# Rakefile がない場合
+Rake.application.have_rakefile # => nil
+#@end
+
+
 @see [[m:Rake::Application::DEFAULT_RAKEFILES]]
 
 --- init(app_name = 'rake')
