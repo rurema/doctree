@@ -22,7 +22,7 @@ Rake で使用するメインのクラスです。
 
 @param loader ローダーを指定します。
 
---- collect_tasks(argv) -> Array
+--- collect_command_line_tasks(argv) -> Array
 
 コマンドライン引数を解析して実行するタスクのリストを返します。
 
