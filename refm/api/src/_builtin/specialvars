@@ -135,8 +135,8 @@ Ruby起動時の初期値は nil です。
 
 番号 n はいくらでも大きな正整数を利用できます。
 
-[[m:Regexp.last_match]][1],
-[[m:Regexp.last_match]][2], ... と同じ。
+[[m:Regexp.last_match]](1),
+[[m:Regexp.last_match]](2), ... と同じ。
 
 これらの変数はローカルスコープかつスレッドローカル、読み取り専用です。
 
