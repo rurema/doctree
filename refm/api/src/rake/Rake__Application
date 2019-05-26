@@ -69,6 +69,17 @@ Rakefile がカレントディレクトリに存在する場合はそのファ�
 
 コマンドラインオプションとアプリケーション名を初期化します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test
+
+Rake.application.name # => "rake"
+Rake.application.init("MyApp") # => ["default"]
+Rake.application.name # => "MyApp"
+#@end
+
 --- invoke_task(task_string)
 #@# private?
 
