@@ -76,6 +76,17 @@ Rakefile がカレントディレクトリに存在する場合はそのファ�
 
 @param task_string タスク名とそれに与えるパラメータをあらわす文字列を指定します。
 
+#@samplecode 例
+# Rakefile での記載例とする
+
+task default: :test
+task :test do
+  puts "test output" # => test output
+end
+
+Rake.application.invoke_task("test") # => [#<Proc:0x31b9048@file.rb:5>]
+#@end
+
 --- load_imports
 
 ロード予定のファイルを全てロードします。
