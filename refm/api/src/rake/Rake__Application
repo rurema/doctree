@@ -90,6 +90,15 @@ Rakefile を探してロードします。
 
 アプリケーションの名前を返します。通常は 'rake' という名前を返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.name # => "rake"
+end
+#@end
+
 --- options -> OpenStruct
 
 コマンドラインで与えられたアプリケーションのオプションを返します。
