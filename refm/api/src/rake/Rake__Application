@@ -98,6 +98,15 @@ Rakefile を探してロードします。
 
 rake コマンドを実行したディレクトリを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.original_dir # => "/path/to/dir"
+end
+#@end
+
 --- parse_task_string(string) -> [String, Array]
 
 与えられた文字列を解析して、タスク名とそれに与えるパラメータのペアを返します。
