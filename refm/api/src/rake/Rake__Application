@@ -120,6 +120,15 @@ rake コマンドを実行したディレクトリを返します。
 
 実際に使用されている Rakefile の名前を返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.rakefile # => "Rakefile"
+end
+#@end
+
 --- rakefile_location -> String
 
 Rakefile のパスを返します。
