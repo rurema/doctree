@@ -170,6 +170,15 @@ Rake アプリケーションに与えられたトップレベルのタスク
 
 コマンドラインで指定されたタスクのリストを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.top_level_tasks # => ["default"]
+end
+#@end
+
 --- truncate(string, width) -> String
 
 与えられた文字列を与えられた幅で切り詰めます。
