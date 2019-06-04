@@ -184,6 +184,17 @@ TTY に対する出力状態を上書きします。
 
 @param tty_output_state 変更後の状態を指定します
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.tty_output?                 # => false
+  Rake.application.tty_output = "debug output" # => "debug output"
+  Rake.application.tty_output?                 # => "debug output"
+end
+#@end
+
 --- tty_output? -> bool
 
 TTY に出力している場合は真を返します。そうでない場合は偽を返します。
