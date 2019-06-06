@@ -9,3 +9,10 @@
 与えられたファイルをロードします。
 
 @param filename ロードするファイル名を指定します。
+
+#@samplecode
+require 'rake'
+
+loader = Rake::DefaultLoader.new
+loader.load("path/to/Rakefile") # => true
+#@end
