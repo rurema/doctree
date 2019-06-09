@@ -56,6 +56,16 @@ include Rake::Cloneable
 
 @param array 比較対象の配列を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  file_list = FileList.new('lib/**/*.rb', 'test/test*.rb')
+  file_list == file_list.to_a # => true
+end
+#@end
+
 --- to_a -> Array
 --- to_ary -> Array
 
