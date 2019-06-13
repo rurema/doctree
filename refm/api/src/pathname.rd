@@ -1020,6 +1020,8 @@ Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 --- mkdir(*args) -> 0
 Dir.mkdir(self.to_s, *args) と同じです。
 
+#@#noexample Dir.mkdir の例を参照
+
 @see [[m:Dir.mkdir]]
 
 --- opendir -> Dir
