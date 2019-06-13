@@ -257,6 +257,10 @@ opts.banner # => "Usage: example.rb [options]"
 
 @param rel プログラムのリリースを文字列で指定します。
 
+#@#noexample OptionParser#verを参照
+
+@see [[OptionParser#ver]]
+
 --- ver    -> String
 
 program_name、version と release から生成したバージョンを表す文字列を返します。
