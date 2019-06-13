@@ -526,6 +526,23 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 
 @param block [[m:OptionParser#on]] と同様です。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+puts opts.help
+
+# => Usage: test [options]
+#    -i, --init
+#    -u, --update
+#    -h, --help
+#@end
+
 @see [[m:OptionParser#on]], [[m:OptionParser#on_tail]]
 
 --- on_tail(*arg, &block) -> self
