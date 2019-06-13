@@ -233,11 +233,19 @@ opts.banner # => "Usage: example.rb [options]"
 
 @return プログラムのバージョンを文字列で返します。
 
+#@#noexample OptionParser#verを参照
+
+@see [[OptionParser#ver]]
+
 --- version=(ver)
 
 プログラムのバージョンを文字列で指定します。
 
 @param ver プログラムのバージョンを文字列で指定します。
+
+#@#noexample OptionParser#verを参照
+
+@see [[OptionParser#ver]]
 
 --- release       -> String
 
