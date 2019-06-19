@@ -107,6 +107,19 @@ include Rake::Cloneable
 
 各要素に [[m:String#pathmap]] を適用した新しい [[c:Rake::FileList]] を返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+IO.write("test1.rb", "test")
+IO.write("test2.rb", "test")
+
+task default: :test_rake_app
+task :test_rake_app do
+  file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
+  file_list.pathmap("%n") # => ["test1", "test2", "test3"]
+end
+#@end
+
 @see [[m:String#pathmap]]
 
 --- ext(newext = '') -> Rake::FileList
