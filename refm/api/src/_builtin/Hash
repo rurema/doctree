@@ -1200,8 +1200,8 @@ p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Par
 
 --- merge!(*others) -> self
 --- merge!(*others) {|key, self_val, other_val| ... } -> self
---- update(*other) -> self
---- update(*other) {|key, self_val, other_val| ... } -> self
+--- update(*others) -> self
+--- update(*others) {|key, self_val, other_val| ... } -> self
 
 selfとothersのハッシュの内容を順番にマージ(統合)します。
 
