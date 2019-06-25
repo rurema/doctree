@@ -40,6 +40,18 @@
 
 @param tail 一つ前の [[c:Rake::InvocationChain]] を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  tail= Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
+  tail.to_s # => "TOP => task_a"
+  b = Rake::InvocationChain.new("task_b", tail)
+  b.to_s # => "TOP => task_a => task_b"
+end
+#@end
+
 --- append(task_name, chain) -> Rake::InvocationChain
 
 与えられたタスク名を第二引数の [[c:Rake::InvocationChain]] に追加します。
