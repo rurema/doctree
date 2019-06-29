@@ -64,12 +64,18 @@
 
 偽を返します。
 
+#@#noexample
+
 --- append(task_name) -> Rake::InvocationChain
 
 与えられた値を追加した [[c:Rake::InvocationChain]] を返します。
 
 @param task_name 追加する値を指定します。
 
+#@#noexample
+
 --- to_s -> String
 
 'TOP' という文字列を返します。
+
+#@#noexample
