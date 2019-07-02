@@ -14,6 +14,19 @@
 
 タスクのリストを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+namespace :ns do |ns|
+  task :ts1 do
+  end
+  task :ts2 do
+  end
+
+  ns.tasks # => [<Rake::Task ns:ts1 => []>, <Rake::Task ns:ts2 => []>]
+end
+#@end
+
 == Singleton Methods
 
 --- new(task_manager, scope_list)
