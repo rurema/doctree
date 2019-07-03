@@ -25,3 +25,12 @@
 --- scope_name(scope, task_name) -> String
 
 ファイルタスクはスコープを無視します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake::Task.scope_name(Rake::Scope.new("sample"), "sample_task") # => "sample:sample_task"
+end
+#@end
