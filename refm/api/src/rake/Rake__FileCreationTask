@@ -14,3 +14,7 @@
 --- timestamp -> Rake::EarlyTime
 
 どんなタイムスタンプよりも前の時刻をあらわすタイムスタンプを返します。
+
+#@#noexample FileTask#timestamp を参照
+
+@see [[FileTask#timestamp]]
