@@ -22,6 +22,8 @@ include Enumerable
 
 自身を人間に読みやすい文字列にして返します。
 
+#@#noexample Hash#inspect を参照
+
 @see [[m:Hash#inspect]]
 
 --- names -> Array
