@@ -53,6 +53,8 @@ include Enumerable
 
 @param name パラメータ名を指定します。
 
+#@#noexample
+
 == Singleton Methods
 
 --- new(names, values, parent = nil)
