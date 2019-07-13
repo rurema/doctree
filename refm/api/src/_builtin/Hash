@@ -813,9 +813,7 @@ key に対応する要素を取り除きます。
 @see [[m:Hash#delete_if]]
 
 --- reject {|key, value| ... } -> Hash
-#@since 1.8.7
---- reject                     -> Enumerable::Enumerator
-#@end
+--- reject                     -> Enumerator
 
 self を複製して、ブロックを評価した値が真になる要
 素を削除したハッシュを返します。
