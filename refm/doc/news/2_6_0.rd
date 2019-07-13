@@ -1,31 +1,29 @@
+#@since 2.6.0
 = NEWS for Ruby 2.6.0
 
-This document is a list of user visible feature changes made between
-releases except for bug fixes.
+このドキュメントは前回リリース以降のバグ修正を除くユーザーに影響のある機能の変更のリストです。
 
-Note that each entry is kept so brief that no reason behind or reference
-information is supplied with.  For a full list of changes with all
-sufficient information, see the ChangeLog file or Redmine
-(e.g. <tt>https://bugs.ruby-lang.org/issues/$FEATURE_OR_BUG_NUMBER</tt>)
+それぞれのエントリーは参照情報があるため短いです。
+十分な情報と共に書かれた全ての変更のリストは ChangeLog ファイルか bugs.ruby-lang.org の issue を参照してください。
 
-== Changes since the 2.5.0 release
+== 2.5.0 以降の変更
 
-=== Language changes
+=== 言語仕様の変更
 
-* <code>$SAFE</code> now is a process global state and can be set to 0 again. [Feature #14250]
+* <code>$SAFE</code> now is a process global state and can be set to 0 again. [[feature:14250]]
 
-* Refinements take place at block passing.  [Feature #14223]
+* Refinements take place at block passing.  [[feature:14223]]
 
-* Refinements take place at Kernel#public_send.  [Feature #15326]
+* Refinements take place at Kernel#public_send.  [[feature:15326]]
 
-* Refinements take place at Kernel#respond_to?.  [Feature #15327]
+* Refinements take place at Kernel#respond_to?.  [[feature:15327]]
 
-* +else+ without +rescue+ now causes a syntax error.  [EXPERIMENTAL] [Feature #14606]
+* +else+ without +rescue+ now causes a syntax error.  [EXPERIMENTAL] [[feature:14606]]
 
-* Constant names may start with a non-ASCII capital letter. [Feature #13770]
+* Constant names may start with a non-ASCII capital letter. [[feature:13770]]
 
 * Endless ranges are introduced.  You can use a Range that has no end,
-  like <code>(0..)</code> (or similarly <code>(0...)</code>).  [Feature #12912]
+  like <code>(0..)</code> (or similarly <code>(0...)</code>).  [[feature:12912]]
 
   The following shows typical use cases:
 
@@ -35,53 +33,53 @@ sufficient information, see the ChangeLog file or Redmine
 
 * Non-Symbol keys in a keyword arguments hash cause an exception.
 
-* The "shadowing outer local variable" warning is removed.  [Feature #12490]
+* The "shadowing outer local variable" warning is removed.  [[feature:12490]]
 
   You can now write the following without warning:
 
     user = users.find {|user| cond(user) }
 
 * Print +cause+ of the exception if the exception is not caught and printed
-  its backtraces and error message. [Feature #8257]
+  its backtraces and error message. [[feature:8257]]
 
-* The flip-flop syntax is deprecated. [Feature #5400]
+* The flip-flop syntax is deprecated. [[feature:5400]]
 
-=== Core classes updates (outstanding ones only)
+=== 組み込みクラスの更新
 
 Array::
 
   New methods::
 
-    * Added Array#union and Array#difference instance methods.  [Feature #14097]
+    * Added Array#union and Array#difference instance methods.  [[feature:14097]]
 
   Modified methods::
 
-    * Array#to_h now accepts a block that maps elements to new key/value pairs.  [Feature #15143]
+    * Array#to_h now accepts a block that maps elements to new key/value pairs.  [[feature:15143]]
 
   Aliased methods::
 
-    * Array#filter is a new alias for Array#select. [Feature #13784]
-    * Array#filter! is a new alias for Array#select!. [Feature #13784]
+    * Array#filter is a new alias for Array#select. [[feature:13784]]
+    * Array#filter! is a new alias for Array#select!. [[feature:13784]]
 
 Binding::
 
   New methods::
 
-    * Added Binding#source_location.  [Feature #14230]
+    * Added Binding#source_location.  [[feature:14230]]
 
       This method returns the source location of the binding, a 2-element
       array of <code>__FILE__</code> and <code>__LINE__</code>.
       Traditionally, the same information could be retrieved by
       <code>eval("[__FILE__, __LINE__]", binding)</code>, but we are
       planning to change this behavior so that Kernel#eval ignores
-      binding's source location [Bug #4352].  So, users should use this
+      binding's source location [[bug:4352]].  So, users should use this
       newly-introduced method instead of Kernel#eval.
 
 Dir::
 
   New methods::
 
-    * Added Dir#each_child and Dir#children instance methods. [Feature #13969]
+    * Added Dir#each_child and Dir#children instance methods. [[feature:13969]]
 
 Enumerable::
 
@@ -89,15 +87,15 @@ Enumerable::
 
     * Enumerable#chain returns an enumerator object that iterates over the
       elements of the receiver and then those of each argument
-      in sequence.  [Feature #15144]
+      in sequence.  [[feature:15144]]
 
   Modified methods::
 
-    * Enumerable#to_h now accepts a block that maps elements to new key/value pairs.  [Feature #15143]
+    * Enumerable#to_h now accepts a block that maps elements to new key/value pairs.  [[feature:15143]]
 
   Aliased methods::
 
-    * Enumerable#filter is a new alias for Enumerable#select. [Feature #13784]
+    * Enumerable#filter is a new alias for Enumerable#select. [[feature:13784]]
 
 Enumerator::ArithmeticSequence::
 
@@ -117,64 +115,64 @@ Enumerator::Lazy::
   Aliased methods::
 
     * Enumerator::Lazy#filter is a new alias for
-      Enumerator::Lazy#select.  [Feature #13784]
+      Enumerator::Lazy#select.  [[feature:13784]]
 
 Enumerator::
 
   New methods::
 
     * Enumerator#+ returns an enumerator object that iterates over the
-      elements of the receiver and then those of the other operand.  [Feature #15144]
+      elements of the receiver and then those of the other operand.  [[feature:15144]]
 
 ENV::
 
   Modified methods::
 
-    * ENV.to_h now accepts a block that maps names and values to new keys and values.  [Feature #15143]
+    * ENV.to_h now accepts a block that maps names and values to new keys and values.  [[feature:15143]]
 
 Exception::
 
   New options::
 
     * Exception#full_message takes +:highlight+ and +:order+
-      options. [Bug #14324]
+      options. [[bug:14324]]
 
 Hash::
 
   Modified methods::
 
     * Hash#merge, Hash#merge!, and Hash#update now accept multiple
-      arguments.  [Feature #15111]
+      arguments.  [[feature:15111]]
 
-    * Hash#to_h now accepts a block that maps keys and values to new keys and values.  [Feature #15143]
+    * Hash#to_h now accepts a block that maps keys and values to new keys and values.  [[feature:15143]]
 
   Aliased methods::
 
-    * Hash#filter is a new alias for Hash#select.  [Feature #13784]
+    * Hash#filter is a new alias for Hash#select.  [[feature:13784]]
 
-    * Hash#filter! is a new alias for Hash#select!. [Feature #13784]
+    * Hash#filter! is a new alias for Hash#select!. [[feature:13784]]
 
 IO::
 
   New options::
 
     * Added new mode character <code>'x'</code> to open files for exclusive
-      access. [Feature #11258]
+      access. [[feature:11258]]
 
 Kernel::
 
   Aliased methods::
 
-    * Kernel#then is a new alias for Kernel#yield_self. [Feature #14594]
+    * Kernel#then is a new alias for Kernel#yield_self. [[feature:14594]]
 
   New options::
 
     * Kernel#Complex, Kernel#Float, Kernel#Integer, and
       Kernel#Rational take an +:exception+ option to specify the way of
-      error handling.  [Feature #12732]
+      error handling.  [[feature:12732]]
 
     * Kernel#system takes an +:exception+ option to raise an exception
-      on failure.  [Feature #14386]
+      on failure.  [[feature:14386]]
 
   Incompatible changes::
 
@@ -188,13 +186,13 @@ KeyError::
   New options::
 
     * KeyError.new accepts +:receiver+ and +:key+ options to set receiver and
-      key in Ruby code.  [Feature #14313]
+      key in Ruby code.  [[feature:14313]]
 
 Method::
 
   New methods::
 
-    * Added Method#<< and Method#>> for Proc composition.  [Feature #6284]
+    * Added Method#<< and Method#>> for Proc composition.  [[feature:6284]]
 
 Module::
 
@@ -203,27 +201,27 @@ Module::
     * Module#method_defined?, Module#private_method_defined?, and
       Module#protected_method_defined? now accept the second
       parameter as optional. If it is +true+ (the default value), it checks
-      ancestor modules/classes, or checks only the class itself. [Feature #14944]
+      ancestor modules/classes, or checks only the class itself. [[feature:14944]]
 
 NameError::
 
   New options::
 
     * NameError.new accepts a +:receiver+ option to set receiver in Ruby
-      code.  [Feature #14313]
+      code.  [[feature:14313]]
 
 NilClass::
 
   New methods::
 
-    * NilClass#=~ is added for compatibility.  [Feature #15231]
+    * NilClass#=~ is added for compatibility.  [[feature:15231]]
 
 NoMethodError::
 
   New options::
 
     * NoMethodError.new accepts a +:receiver+ option to set receiver in Ruby
-      code.  [Feature #14313]
+      code.  [[feature:14313]]
 
 Numeric::
 
@@ -236,45 +234,45 @@ OpenStruct::
 
   Modified methods::
 
-    * OpenStruct#to_h now accepts a block that maps keys and values to new keys and values.  [Feature #15143]
+    * OpenStruct#to_h now accepts a block that maps keys and values to new keys and values.  [[feature:15143]]
 
 Proc::
 
   New methods::
 
-    * Added Proc#<< and Proc#>> for Proc composition.  [Feature #6284]
+    * Added Proc#<< and Proc#>> for Proc composition.  [[feature:6284]]
 
   Incompatible changes::
 
-    * Proc#call doesn't change <code>$SAFE</code> any more.  [Feature #14250]
+    * Proc#call doesn't change <code>$SAFE</code> any more.  [[feature:14250]]
 
 Random::
 
   New methods::
 
-    * Added Random.bytes.  [Feature #4938]
+    * Added Random.bytes.  [[feature:4938]]
 
 Range::
 
   New methods::
 
-    * Added Range#% instance method.  [Feature #14697]
+    * Added Range#% instance method.  [[feature:14697]]
 
   Incompatible changes::
 
-    * Range#=== now uses the +#cover?+ instead of the +#include?+ method. [Feature #14575]
-    * Range#cover? now accepts a Range object. [Feature #14473]
+    * Range#=== now uses the +#cover?+ instead of the +#include?+ method. [[feature:14575]]
+    * Range#cover? now accepts a Range object. [[feature:14473]]
     * Range#step now returns an instance of the Enumerator::ArithmeticSequence
       class rather than one of the Enumerator class.
 
 Regexp/String::
 
-    * Update Unicode version from 10.0.0 to 11.0.0. [Feature #14802]
+    * Update Unicode version from 10.0.0 to 11.0.0. [[feature:14802]]
 
       This includes a rewrite of the grapheme cluster (/\X/) algorithm
       and special-casing for Georgian MTAVRULI on String#downcase.
 
-    * Update Emoji version from 5.0 to 11.0.0 [Feature #14802]
+    * Update Emoji version from 5.0 to 11.0.0 [[feature:14802]]
 
 RubyVM::AbstractSyntaxTree::
 
@@ -294,25 +292,25 @@ RubyVM::
   New methods::
 
     * RubyVM.resolve_feature_path identifies the file that will be loaded by
-      "require(feature)". [experimental] [Feature #15230]
+      "require(feature)". [experimental] [[feature:15230]]
 
 String::
 
-  * String#crypt is now deprecated. [Feature #14915]
+  * String#crypt is now deprecated. [[feature:14915]]
 
   New features::
 
-    * String#split yields each substring to the block if given. [Feature #4780]
+    * String#split yields each substring to the block if given. [[feature:4780]]
 
 Struct::
 
   Modified methods::
 
-    * Struct#to_h now accepts a block that maps keys and values to new keys and values.  [Feature #15143]
+    * Struct#to_h now accepts a block that maps keys and values to new keys and values.  [[feature:15143]]
 
   Aliased method::
 
-    * Struct#filter is a new alias for Struct#select. [Feature #13784]
+    * Struct#filter is a new alias for Struct#select. [[feature:13784]]
 
 Time::
 
@@ -320,28 +318,28 @@ Time::
 
     * Time.new and Time#getlocal accept a timezone object as well as
       a UTC offset string. Time#+, Time#-, and Time#succ also preserve
-      the timezone.  [Feature #14850]
+      the timezone.  [[feature:14850]]
 
 TracePoint::
 
   New features::
 
-    * "script_compiled" event is supported. [Feature #15287]
+    * "script_compiled" event is supported. [[feature:15287]]
 
   New methods::
 
-    * TracePoint#parameters [Feature #14694]
+    * TracePoint#parameters [[feature:14694]]
 
-    * TracePoint#instruction_sequence [Feature #15287]
+    * TracePoint#instruction_sequence [[feature:15287]]
 
-    * TracePoint#eval_script [Feature #15287]
+    * TracePoint#eval_script [[feature:15287]]
 
   Modified methods::
 
     * TracePoint#enable accepts new keywords "target:" and "target_line:".
       Feature #15289::
 
-=== Stdlib updates (outstanding ones only)
+=== 標準添付ライブラリの更新
 
 BigDecimal::
 
@@ -371,13 +369,13 @@ BigDecimal::
 
 Bundler::
 
-  * Add Bundler to Standard Library. [Feature #12733]
+  * Add Bundler to Standard Library. [[feature:12733]]
 
   * Use 1.17.2, the latest stable version.
 
 Coverage::
 
-  A oneshot_lines mode is added.  [Feature #15022]
+  A oneshot_lines mode is added.  [[feature:15022]]
 
   This mode checks "whether each line was executed at least once or not",
   instead of "how many times each line was executed".
@@ -401,7 +399,7 @@ CSV::
 
   * Upgrade to 3.0.2. This includes performance improvements especially
     for writing. Writing is about 2 times faster.
-    See https://github.com/ruby/csv/blob/master/NEWS.md.
+    See [[url:https://github.com/ruby/csv/blob/master/NEWS.md]]
 
 ERB::
 
@@ -409,7 +407,7 @@ ERB::
 
     * Add +:trim_mode+ and +:eoutvar+ keyword arguments to ERB.new.
       Now non-keyword arguments other than the first one are softly deprecated
-      and will be removed when Ruby 2.5 becomes EOL. [Feature #14256]
+      and will be removed when Ruby 2.5 becomes EOL. [[feature:14256]]
 
     * erb command's <tt>-S</tt> option is deprecated, and will be removed
       in the next version.
@@ -418,7 +416,7 @@ FileUtils::
 
   New methods::
 
-    * FileUtils#cp_lr.  [Feature #4189]
+    * FileUtils#cp_lr.  [[feature:4189]]
 
 Matrix::
 
@@ -426,7 +424,7 @@ Matrix::
 
     * Matrix#antisymmetric?, Matrix#skew_symmetric?
 
-    * Matrix#map!, Matrix#collect! [Feature #14151]
+    * Matrix#map!, Matrix#collect! [[feature:14151]]
 
     * Matrix#[]=
 
@@ -438,16 +436,16 @@ Net::
 
   New options::
 
-    * Add +:write_timeout+ keyword argument to Net::HTTP.new. [Feature #13396]
+    * Add +:write_timeout+ keyword argument to Net::HTTP.new. [[feature:13396]]
 
   New methods::
 
-    * Add Net::HTTP#write_timeout and Net::HTTP#write_timeout=.  [Feature #13396]
+    * Add Net::HTTP#write_timeout and Net::HTTP#write_timeout=.  [[feature:13396]]
 
   New constant::
 
     * Add Net::HTTPClientException to deprecate Net::HTTPServerException,
-      whose name is misleading.  [Bug #14688]
+      whose name is misleading.  [[bug:14688]]
 
 NKF::
 
@@ -479,7 +477,7 @@ RDoc::
 REXML::
 
   * Upgrade to REXML 3.1.9.
-    See https://github.com/ruby/rexml/blob/master/NEWS.md.
+    See [[url:https://github.com/ruby/rexml/blob/master/NEWS.md]]
 
   Improved some XPath implementations::
 
@@ -526,40 +524,40 @@ RubyGems::
 
   * Upgrade to RubyGems 3.0.1
 
-  * https://blog.rubygems.org/2018/12/19/3.0.0-released.html
+  * [[url:https://blog.rubygems.org/2018/12/19/3.0.0-released.html]]
 
-  * https://blog.rubygems.org/2018/12/23/3.0.1-released.html
+  * [[url:https://blog.rubygems.org/2018/12/23/3.0.1-released.html]]
 
 Set::
 
   Aliased methods::
 
-    * Set#filter! is a new alias for Set#select!.  [Feature #13784]
+    * Set#filter! is a new alias for Set#select!.  [[feature:13784]]
 
 URI::
 
   New constant::
 
-    * Add URI::File to handle the file URI scheme.  [Feature #14035]
+    * Add URI::File to handle the file URI scheme.  [[feature:14035]]
 
-=== Compatibility issues (excluding feature bug fixes)
+=== 互換性 (機能追加とバグ修正を除く)
 
 Dir::
 
   * Dir.glob with <code>'\0'</code>-separated pattern list will be deprecated,
-    and is now warned.  [Feature #14643]
+    and is now warned.  [[feature:14643]]
 
 File::
 
   * File.read, File.binread, File.write, File.binwrite, File.foreach, and
     File.readlines do not invoke external commands even if the path starts
-    with the pipe character <code>'|'</code>. [Feature #14245]
+    with the pipe character <code>'|'</code>. [[feature:14245]]
 
 Object::
 
-  * Object#=~ is deprecated.  [Feature #15231]
+  * Object#=~ is deprecated.  [[feature:15231]]
 
-=== Stdlib compatibility issues (excluding feature bug fixes)
+=== 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
 * These standard libraries have been promoted to default gems.
 
@@ -585,7 +583,7 @@ BigDecimal::
     * BigDecimal.allocate
     * BigDecimal.ver
 
-  * Every BigDecimal object is frozen. [Feature #13984]
+  * Every BigDecimal object is frozen. [[feature:13984]]
 
   * BigDecimal() parses the given string similar to Float().
 
@@ -598,23 +596,23 @@ Pathname::
   * Pathname#read, Pathname#binread, Pathname#write, Pathname#binwrite,
     Pathname#each_line and Pathname#readlines do not invoke external
     commands even if the path starts with the pipe character <code>'|'</code>.
-    This follows [Feature #14245].
+    This follows [[feature:14245]].
 
-=== Implementation improvements
+=== 実装の改善
 
 * Speedup Proc#call because we don't need to care about <code>$SAFE</code>
-  any more. [Feature #14318]
+  any more. [[feature:14318]]
 
   With +lc_fizzbuzz+ benchmark which uses Proc#call many times we can
-  measure x1.4 improvements.  [Bug #10212]
+  measure x1.4 improvements.  [[bug:10212]]
 
-* Speedup block.call where +block+ is passed block parameter. [Feature #14330]
+* Speedup block.call where +block+ is passed block parameter. [[feature:14330]]
 
-  Ruby 2.5 improves block passing performance. [Feature #14045]
+  Ruby 2.5 improves block passing performance. [[feature:14045]]
 
   Additionally, Ruby 2.6 improves the performance of passed block calling.
 
-* Introduce an initial implementation of a JIT (Just-in-time) compiler. [Feature #14235] [experimental]
+* Introduce an initial implementation of a JIT (Just-in-time) compiler. [[feature:14235]] [experimental]
 
   * <tt>--jit</tt> command line option is added to enable JIT. <tt>--jit-verbose=1</tt>
     is good for inspection.  See <tt>ruby --help</tt> for others.
@@ -624,25 +622,25 @@ Pathname::
     but if you get an error on building a header file for JIT, you can use this option to skip
     building it as a workaround.
   * rb_waitpid reimplemented on Unix-like platforms to maintain
-    compatibility with processes created for JIT [Bug #14867]
+    compatibility with processes created for JIT [[bug:14867]]
 
 * VM generator script renewal; makes the generated VM more optimized. [GH-1779]
 
 * Thread cache enabled for pthreads platforms (for Thread.new and
-  Thread.start).  [Feature #14757]
+  Thread.start).  [[feature:14757]]
 
 * timer thread is eliminated for platforms with POSIX timers. [Misc #14937]
 
-* Transient Heap (theap) is supported. [Bug #14858] [Feature #14989]
+* Transient Heap (theap) is supported. [[bug:14858]] [[feature:14989]]
 
   theap is a managed heap for short-living memory objects. For example,
   making a small and short-living Hash object is x2 faster. With rdoc benchmark,
   we measured 6-7% performance improvement.
 
 * Native implementations (arm32, arm64, ppc64le, win32, win64, x86, amd64) of
-  coroutines to improve performance of Fiber significantly. [Feature #14739]
+  coroutines to improve performance of Fiber significantly. [[feature:14739]]
 
-=== Miscellaneous changes
+=== その他の変更
 
 * On macOS, shared libraries no longer include a full version number of Ruby
   in their names.  This eliminates the burden of each teeny upgrade on the
@@ -657,4 +655,4 @@ Pathname::
     * libruby.2.6.dylib
     * libruby.dylib -> libruby.2.6.dylib
 
-* Extracted misc/*.el files to https://github.com/ruby/elisp
+* Extracted misc/*.el files to [[url:https://github.com/ruby/elisp]]
