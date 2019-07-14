@@ -10,556 +10,539 @@
 
 === 言語仕様の変更
 
-* <code>$SAFE</code> now is a process global state and can be set to 0 again. [[feature:14250]]
+* $SAFE はプロセスグローバルで扱われることになると共に、0以外を設定した後に0に戻せるようになりました。 [[feature:14250]]
 
-* Refinements take place at block passing.  [[feature:14223]]
+* Refinements がブロック引数にも反映されるようになりました。  [[feature:14223]]
 
-* Refinements take place at Kernel#public_send.  [[feature:15326]]
+* Refinements が [[m:Kernel#public_send]] にも反映されるようになりました。  [[feature:15326]]
 
-* Refinements take place at Kernel#respond_to?.  [[feature:15327]]
+* Refinements が [[m:Kernel#respond_to?]] にも反映されるようになりました。  [[feature:15327]]
 
-* +else+ without +rescue+ now causes a syntax error.  [EXPERIMENTAL] [[feature:14606]]
+* rescue 節なしの else 節がシンタックスエラーを発生するようになりました。 [実験的] [[feature:14606]]
 
-* Constant names may start with a non-ASCII capital letter. [[feature:13770]]
+* 定数名の先頭の文字に ASCII 以外の大文字も使えるようになりました。 [[feature:13770]]
 
-* Endless ranges are introduced.  You can use a Range that has no end,
-  like <code>(0..)</code> (or similarly <code>(0...)</code>).  [[feature:12912]]
+* 終端なし [[c:Range]] が導入されました。 終端なし [[c:Range]] は (0..) や <code>(0...) のように使うことができます。  [[feature:12912]]
 
-  The following shows typical use cases:
+  典型的なユースケースは以下の通りです:
 
-    ary[1..]                              # identical to ary[1..-1]
-    (1...).each {|index| block }          # infinite loop from index 1
-    ary.zip(1..) {|elem, index| block }   # ary.each.with_index(1) { }
+      ary[1..]                              # ary[1..-1] と同じ
+      (1...).each {|index| block }          # index が 1 から始まる無限ループ
+      ary.zip(1..) {|elem, index| block }   # ary.each.with_index(1) { }
 
-* Non-Symbol keys in a keyword arguments hash cause an exception.
+* キーワード引数のハッシュに Symbol 以外のキーが含まれると例外が発生するようになりました。
 
-* The "shadowing outer local variable" warning is removed.  [[feature:12490]]
+* "shadowing outer local variable" という警告が削除されました。  [[feature:12490]]
 
-  You can now write the following without warning:
+  以下のようなコードを警告なしに書くことができます:
 
-    user = users.find {|user| cond(user) }
+      user = users.find {|user| cond(user) }
 
-* Print +cause+ of the exception if the exception is not caught and printed
-  its backtraces and error message. [[feature:8257]]
+* 例外が捕捉されず、バックトレースとエラーメッセージが表示されるときに、
+  例外の [[m:Exception#cause]] も表示されるようになりました。 [[feature:8257]]
 
-* The flip-flop syntax is deprecated. [[feature:5400]]
+* フリップフロップが非推奨になりました。 [[feature:5400]]
 
 === 組み込みクラスの更新
 
-Array::
+* [[c:Array]]
 
-  New methods::
+  * 新規メソッド
 
-    * Added Array#union and Array#difference instance methods.  [[feature:14097]]
+    * [[m:Array#union]] と [[m:Array#difference]] [[feature:14097]]
 
-  Modified methods::
+  * 変更されたメソッド
 
-    * Array#to_h now accepts a block that maps elements to new key/value pairs.  [[feature:15143]]
+    * [[m:Array#to_h]] はブロックを受け取りキーと値のペアを新しいキーと値に変換できるようになりました。 [[feature:15143]]
 
-  Aliased methods::
+  * 別名
 
-    * Array#filter is a new alias for Array#select. [[feature:13784]]
-    * Array#filter! is a new alias for Array#select!. [[feature:13784]]
+    * [[m:Array#filter]] が [[m:Array#select]] の別名として追加されました。 [[feature:13784]]
+    * [[m:Array#filter!]] が [[m:Array#select!]] の別名として追加されました。 [[feature:13784]]
 
-Binding::
+* [[c:Binding]]
 
-  New methods::
+  * 新規メソッド
 
-    * Added Binding#source_location.  [[feature:14230]]
+    * [[m:Binding#source_location]] 追加 [[feature:14230]]
 
-      This method returns the source location of the binding, a 2-element
-      array of <code>__FILE__</code> and <code>__LINE__</code>.
-      Traditionally, the same information could be retrieved by
-      <code>eval("[__FILE__, __LINE__]", binding)</code>, but we are
-      planning to change this behavior so that Kernel#eval ignores
-      binding's source location [[bug:4352]].  So, users should use this
-      newly-introduced method instead of Kernel#eval.
 
-Dir::
+      bindingのソースコード上の位置を __FILE__ と __LINE__ の二要素配列として返します。
+      従来でも eval("[__FILE__, __LINE__]", binding) とすることでこれらの情報は得られましたが、
+      将来的に [[m:Kernel#eval]] は binding のソースコード行を無視する変更を予定しているため [[bug:4352]]、
+      この新しいメソッドを用いることが今後は推奨されます。
 
-  New methods::
+* [[c:Dir]]
 
-    * Added Dir#each_child and Dir#children instance methods. [[feature:13969]]
+  * 新規メソッド
 
-Enumerable::
+    * [[m:Dir#each_child]] と [[m:Dir#children]] 追加 [[feature:13969]]
 
-  New methods::
+* [[c:Enumerable]]
 
-    * Enumerable#chain returns an enumerator object that iterates over the
-      elements of the receiver and then those of each argument
-      in sequence.  [[feature:15144]]
+  * 新規メソッド
 
-  Modified methods::
+    * [[m:Enumerable#chain]] はレシーバと引数のそれぞれの要素を順番にイテレートする
+      [[c:Enumerator::Chain]] オブジェクトを返します。 [[feature:15144]]
 
-    * Enumerable#to_h now accepts a block that maps elements to new key/value pairs.  [[feature:15143]]
+  * 変更されたメソッド
 
-  Aliased methods::
+    * [[m:Enumerable#to_h]] はブロックを受け取りキーと値のペアを新しいキーと値に変換できるようになりました。 [[feature:15143]]
 
-    * Enumerable#filter is a new alias for Enumerable#select. [[feature:13784]]
+  * 別名
 
-Enumerator::ArithmeticSequence::
+    * [[m:Enumerable#filter]] が [[m:Enumerable#select]] の別名として追加されました。 [[feature:13784]]
 
-  * This is a new class to represent a generator of an arithmetic sequence,
-    that is a number sequence defined by a common difference. It can be used
-    for representing what is similar to Python's slice. You can get an
-    instance of this class from Numeric#step and Range#step.
+* [[c:Enumerator::ArithmeticSequence]]
 
-Enumerator::Chain::
+  * 等差数列(隣接する項が共通の差(公差)を持つ数列)のジェネレーターを表現する新しいクラスです。
+    Python のスライスのようなものを表現するために使えます。
+    このクラスのインスタンスは [[m:Numeric#step]] や [[m:Range#step]] で得られます。
 
-  * This is a new class to represent a chain of enumerables that works as a
-    single enumerator, generated by such methods as Enumerable#chain and
-    Enumerator#+.
+* [[c:Enumerator::Chain]]
 
-Enumerator::Lazy::
+  * 1個の Enumerator で複数の Enumerable の連鎖を表現する新しいクラスです。
+    [[m:Enumerable#chain]] や [[m:Enumerator#+]] で生成されます。
 
-  Aliased methods::
+* [[c:Enumerator::Lazy]]
 
-    * Enumerator::Lazy#filter is a new alias for
-      Enumerator::Lazy#select.  [[feature:13784]]
+  * 別名
 
-Enumerator::
+    * [[m:Enumerator::Lazy#filter]] が [[m:Enumerator::Lazy#select]] の別名として追加されました。 [[feature:13784]]
 
-  New methods::
+* [[c:Enumerator]]
 
-    * Enumerator#+ returns an enumerator object that iterates over the
-      elements of the receiver and then those of the other operand.  [[feature:15144]]
+  * 新規メソッド
 
-ENV::
+    * [[m:Enumerator#+]] はレシーバの要素とオペランドの要素を順番にイテレートする
+      Enumerator オブジェクトを返します。 [[feature:15144]]
 
-  Modified methods::
+* [[c:ENV]]
 
-    * ENV.to_h now accepts a block that maps names and values to new keys and values.  [[feature:15143]]
+  * 変更されたメソッド
 
-Exception::
+    * [[m:ENV.to_h]] はブロックを受け取り、環境変数名と値のペアを新しいキーと値に変換できるようになりました。 [[feature:15143]]
 
-  New options::
+* [[c:Exception]]
 
-    * Exception#full_message takes +:highlight+ and +:order+
-      options. [[bug:14324]]
+  * 新規オプション
 
-Hash::
+    * [[m:Exception#full_message]] が :highlight と :order を受け付けるようになりました。 [[bug:14324]]
 
-  Modified methods::
+* [[c:Hash]]
 
-    * Hash#merge, Hash#merge!, and Hash#update now accept multiple
-      arguments.  [[feature:15111]]
+  * 変更されたメソッド
 
-    * Hash#to_h now accepts a block that maps keys and values to new keys and values.  [[feature:15143]]
+    * [[m:Hash#merge]], [[m:Hash#merge!]], [[m:Hash#update]] が引数を複数受け付けるようになりました。 [[feature:15111]]
 
-  Aliased methods::
+    * [[m:Hash#to_h]] はブロックを受け取りキーと値のペアを新しいキーと値に変換できるようになりました。 [[feature:15143]]
 
-    * Hash#filter is a new alias for Hash#select.  [[feature:13784]]
+  * 別名
 
-    * Hash#filter! is a new alias for Hash#select!. [[feature:13784]]
+    * [[m:Hash#filter]] が [[m:Hash#select]] の別名として追加されました。 [[feature:13784]]
 
-IO::
+    * [[m:Hash#filter!]] が [[m:Hash#select!]] の別名として追加されました。 [[feature:13784]]
 
-  New options::
+* [[c:IO]]
 
-    * Added new mode character <code>'x'</code> to open files for exclusive
-      access. [[feature:11258]]
+  * 新規オプション
 
-Kernel::
+    * 排他的ファイルオープンを表すモード文字 'x' が追加されました。 [[feature:11258]]
 
-  Aliased methods::
+* [[c:Kernel]]
 
-    * Kernel#then is a new alias for Kernel#yield_self. [[feature:14594]]
+  * 別名
 
-  New options::
+    * [[m:Kernel#then]] が [[m:Kernel#yield_self]] の別名として追加されました。 [[feature:14594]]
 
-    * Kernel#Complex, Kernel#Float, Kernel#Integer, and
-      Kernel#Rational take an +:exception+ option to specify the way of
-      error handling.  [[feature:12732]]
+  * 新規オプション
 
-    * Kernel#system takes an +:exception+ option to raise an exception
-      on failure.  [[feature:14386]]
+    * [[m:Kernel.#Complex]], [[m:Kernel.#Float]], [[m:Kernel.#Integer]],
+      [[m:Kernel.#Rational]] にエラー処理方法を指定する :exception オプションが
+      追加されました。 [[feature:12732]]
 
-  Incompatible changes::
+    * [[m:Kernel#system]] に失敗時に例外を発生する :exception オプションが
+      追加されました。 [[feature:14386]]
 
-    * Kernel#system and Kernel#exec do not close non-standard file descriptors
-      (the default of the +:close_others+ option is changed to +false+,
-      but we still set the +FD_CLOEXEC+ flag on descriptors we
-      create).  [Misc #14907]
+  * 非互換な変更
 
-KeyError::
+    * [[m:Kernel#system]] と [[m:Kernel#exec]] が非標準にファイルディスクリプタを閉じなくなりました。
+      (:close_others オプションのデフォルトが false になりまりました。
+      しかし、引き続き Ruby 自体が作成するディスクリプタに FD_CLOEXEC フラグは設定されます。) [[misc:14907]]
 
-  New options::
+* [[c:KeyError]]
 
-    * KeyError.new accepts +:receiver+ and +:key+ options to set receiver and
-      key in Ruby code.  [[feature:14313]]
+  * 新規オプション
 
-Method::
+    * [[m:KeyError.new]] に :receiver と :key にオプションが追加されて
+      Ruby コードからも設定できるようになりました。 [[feature:14313]]
 
-  New methods::
+* [[c:Method]]
 
-    * Added Method#<< and Method#>> for Proc composition.  [[feature:6284]]
+  * 新規メソッド
 
-Module::
+    * 関数合成用に [[m:Method#<<]] と [[m:Method#>>]] が追加されました。 [[feature:6284]]
 
-  Modified methods::
+* [[c:Module]]
 
-    * Module#method_defined?, Module#private_method_defined?, and
-      Module#protected_method_defined? now accept the second
-      parameter as optional. If it is +true+ (the default value), it checks
-      ancestor modules/classes, or checks only the class itself. [[feature:14944]]
+  * 変更されたメソッド
 
-NameError::
+    * [[m:Module#method_defined?]], [[m:Module#private_method_defined?]],
+      [[m:Module#protected_method_defined?]] が省略可能な第2引数を受け取るように
+      なりました。 true (デフォルト値) のとき、祖先のモジュールやクラスもチェックします。
+      それ以外の場合はそのクラス自身のみチェックします。 [[feature:14944]]
 
-  New options::
+* [[c:NameError]]
 
-    * NameError.new accepts a +:receiver+ option to set receiver in Ruby
-      code.  [[feature:14313]]
+  * 新規オプション
 
-NilClass::
+    * [[m:NameError.new]] に :receiver オプションが追加されて
+      Ruby コードからも設定できるようになりました。 [[feature:14313]]
 
-  New methods::
+* [[c:NilClass]]
 
-    * NilClass#=~ is added for compatibility.  [[feature:15231]]
+  * 新規メソッド
 
-NoMethodError::
+    * 互換性のため、[[m:NilClass#=~]] が追加されました。 [[feature:15231]]
 
-  New options::
+* [[c:NoMethodError]]
 
-    * NoMethodError.new accepts a +:receiver+ option to set receiver in Ruby
-      code.  [[feature:14313]]
+  * 新規オプション
 
-Numeric::
+    * [[m:NoMethodError.new]] に :receiver オプションが追加されて
+      Ruby コードからも設定できるようになりました。 [[feature:14313]]
 
-  Incompatible changes::
+* [[c:Numeric]]
 
-    * Numeric#step now returns an instance of the Enumerator::ArithmeticSequence
-      class rather than one of the Enumerator class.
+  * 非互換な変更
 
-OpenStruct::
+    * [[m:Numeric#step]] が [[c:Enumerator]] クラスのインスタンスではなく
+      [[c:Enumerator::ArithmeticSequence]] クラスのインスタンスを返すようになりました。
 
-  Modified methods::
+* [[c:OpenStruct]]
 
-    * OpenStruct#to_h now accepts a block that maps keys and values to new keys and values.  [[feature:15143]]
+  * 変更されたメソッド
 
-Proc::
+    * [[m:OpenStruct#to_h]] はブロックを受け取りキーと値のペアを新しいキーと値に変換できるようになりました。 [[feature:15143]]
 
-  New methods::
+* [[c:Proc]]
 
-    * Added Proc#<< and Proc#>> for Proc composition.  [[feature:6284]]
+  * 新規メソッド
 
-  Incompatible changes::
+    * 関数合成用に [[m:Proc#<<]] と [[m:Proc#>>]] が追加されました。 [[feature:6284]]
 
-    * Proc#call doesn't change <code>$SAFE</code> any more.  [[feature:14250]]
+  * 非互換な変更
 
-Random::
+    * [[m:Proc#call]] が [[m:$SAFE]] を変更しなくなりました。 [[feature:14250]]
 
-  New methods::
+* [[c:Random]]
 
-    * Added Random.bytes.  [[feature:4938]]
+  * 新規メソッド
 
-Range::
+    * [[m:Random.bytes]] が追加されました。 [[feature:4938]]
 
-  New methods::
+* [[c:Range]]
 
-    * Added Range#% instance method.  [[feature:14697]]
+  * 新規メソッド
 
-  Incompatible changes::
+    * [[m:Range#%]] が追加されました。 [[feature:14697]]
 
-    * Range#=== now uses the +#cover?+ instead of the +#include?+ method. [[feature:14575]]
-    * Range#cover? now accepts a Range object. [[feature:14473]]
-    * Range#step now returns an instance of the Enumerator::ArithmeticSequence
-      class rather than one of the Enumerator class.
+  * 非互換な変更
 
-Regexp/String::
+    * [[m:Range#===]] が [[m:Range#include?]] メソッドではなく [[m:Range#cover?]] メソッドを使うようになりました。 [[feature:14575]]
+    * [[m:Range#cover?]] が [[c:Range]] オブジェクトを受け付けるようになりました。 [[feature:14473]]
+    * [[m:Range#step]] が [[c:Enumerator]] クラスのインスタンスではなく
+      [[c:Enumerator::ArithmeticSequence]] クラスのインスタンスを返すようになりました。
 
-    * Update Unicode version from 10.0.0 to 11.0.0. [[feature:14802]]
+* [[c:Regexp]]/[[c:String]]
 
-      This includes a rewrite of the grapheme cluster (/\X/) algorithm
-      and special-casing for Georgian MTAVRULI on String#downcase.
+    * Unicode のバージョンを 10.0.0 から 11.0.0 に更新しました。 [[feature:14802]]
+
+      これは書記素クラスタ (/\X/) アルゴリズムの書き換えと [[m:String#downcase]] での
+      Georgian MTAVRULI の special-casing を含みます。
 
     * Update Emoji version from 5.0 to 11.0.0 [[feature:14802]]
 
-RubyVM::AbstractSyntaxTree::
+* [[c:RubyVM::AbstractSyntaxTree]]
 
-  New methods::
+  * 新規メソッド
 
-    * RubyVM::AbstractSyntaxTree.parse parses a given string and returns AST
-      nodes. [experimental]
+    * [[m:RubyVM::AbstractSyntaxTree.parse]] は文字列をパースして AST ノードを返します。 [実験的]
 
-    * RubyVM::AbstractSyntaxTree.parse_file parses a given file and returns AST
-      nodes.  [experimental]
+    * [[m:RubyVM::AbstractSyntaxTree.parse_file]] はファイルをパースして AST ノードを返します。 [実験的]
 
-    * RubyVM::AbstractSyntaxTree.of returns AST nodes of the given proc or method.
-      experimental::
+    * [[m:RubyVM::AbstractSyntaxTree.of]] は proc やメソッドに対応する AST ノードを返します。 [実験的]
 
-RubyVM::
+* [[c:RubyVM]]
 
-  New methods::
+  * 新規メソッド
 
-    * RubyVM.resolve_feature_path identifies the file that will be loaded by
-      "require(feature)". [experimental] [[feature:15230]]
+    * [[m:RubyVM.resolve_feature_path]] は "require(feature)" で読み込むファイルを
+      特定します。 [実験的] [[feature:15230]]
 
-String::
+* [[c:String]]
 
-  * String#crypt is now deprecated. [[feature:14915]]
+  * [[m:String#crypt]] は非推奨になりました。 [[feature:14915]]
 
-  New features::
+  * 新機能
 
-    * String#split yields each substring to the block if given. [[feature:4780]]
+    * [[m:String#split]] はブロックが渡されていたら部分文字列ごとに呼び出すようになりました。 [[feature:4780]]
 
-Struct::
+* [[c:Struct]]
 
-  Modified methods::
+  * 変更されたメソッド
 
-    * Struct#to_h now accepts a block that maps keys and values to new keys and values.  [[feature:15143]]
+    * [[m:Struct#to_h]] はブロックを受け取りキーと値のペアを新しいキーと値に変換できるようになりました。 [[feature:15143]]
 
-  Aliased method::
+  * 別名
 
-    * Struct#filter is a new alias for Struct#select. [[feature:13784]]
+    * [[m:Struct#filter]] が [[m:Struct#select]] の別名として追加されました。 [[feature:13784]]
 
-Time::
+* [[c:Time]]
 
-  New features::
+  * 新機能
 
-    * Time.new and Time#getlocal accept a timezone object as well as
-      a UTC offset string. Time#+, Time#-, and Time#succ also preserve
-      the timezone.  [[feature:14850]]
+    * [[m:Time.new]] と [[m:Time#getlocal]] が UTC オフセット文字列と同様に
+      タイムゾーンオブジェクトを受け付けるようになりました。[[m:Time#+]],
+      [[m:Time#-]], [[m:Time#succ]] もタイムゾーンを維持します。 [[feature:14850]]
 
-TracePoint::
+* [[c:TracePoint]]
 
-  New features::
+  * 新機能
 
-    * "script_compiled" event is supported. [[feature:15287]]
+    * "script_compiled" イベントがサポートされました。 [[feature:15287]]
 
-  New methods::
+  * 新規メソッド
 
-    * TracePoint#parameters [[feature:14694]]
+    * [[m:TracePoint#parameters]] [[feature:14694]]
 
-    * TracePoint#instruction_sequence [[feature:15287]]
+    * [[m:TracePoint#instruction_sequence]] [[feature:15287]]
 
-    * TracePoint#eval_script [[feature:15287]]
+    * [[m:TracePoint#eval_script]] [[feature:15287]]
 
-  Modified methods::
+  * 変更されたメソッド
 
-    * TracePoint#enable accepts new keywords "target:" and "target_line:".
-      Feature #15289::
+    * [[m:TracePoint#enable]] がキーワード引数 "target:" と "target_line:" を
+      受け付けるようになりました。 [[feature:15289]]
 
 === 標準添付ライブラリの更新
 
-BigDecimal::
+* [[c:BigDecimal]]
 
-  Update to version 1.4.0.  This version includes several compatibility
-  issues, see Compatibility issues section below for details.
+  バージョン 1.4.0 に更新されました。
+  このバージョンは様々な非互換な点を含んでいます。
+  詳細は下の互換性についてのセクションを参照してください。
 
-  Modified methods::
+  * 変更されたメソッド
 
-  * BigDecimal() accepts the new keyword "exception:" similar to Float().
+    * [[m:Kernel.#BigDecimal]]() は [[m:Kernel.#Float]]() のように
+      キーワード引数 "exception:" を受け付けるようになりました。
 
-  Note for the differences among recent versions::
+  * 最近のバージョンでの変更点に関する注意事項
 
-  You should want to know the differences among recent versions of bigdecimal.
-  Please select the suitable version of bigdecimal according to the following
-  information.
+    以下の情報を元に適切な bigdecimal のバージョンを選んでください。
 
-  * 1.3.5 has BigDecimal.new without "exception:" keyword.  You can see the
-    deprecation warning of BigDecimal.new when you specify "-w" option.
-    BigDecimal(), BigDecimal.new, and Object#to_d methods are the same.
+    * 1.3.5 の [[m:BigDecimal.new]] は "exception:" キーワードをサポートしていません。
+      "-w" オプションをつけた時に [[m:BigDecimal.new]] は非推奨警告を表示します。
 
-  * 1.4.0 has BigDecimal.new with "exception:" keyword.  You always see the
-    deprecation warning of BigDecimal.new.  Object#to_d method is different
-    from BigDecimal() and BigDecimal.new.
+    * 1.4.0 の [[m:BigDecimal.new]] は "exception:" キーワードをサポートしてます。
+      [[m:BigDecimal.new]] は常に非推奨警告を表示します。
+      [[m:Object#to_d]] メソッドは [[m:Kernel.#BigDecimal]]() や
+      [[m:BigDecimal.new]] とは違いがあります。
 
-  * 2.0.0 will be released soon after releasing Ruby 2.6.0.  This version
-    will not have the BigDecimal.new method.
+    * 2.0.0 は Ruby 2.6.0 のリリース後すぐにリリースされる予定です。
+      このバージョンは [[m:BigDecimal.new]] メソッドを含みません。
 
-Bundler::
+* [[c:Bundler]]
 
-  * Add Bundler to Standard Library. [[feature:12733]]
+  * Bundler が標準添付ライブラリに追加されました。 [[feature:12733]]
 
-  * Use 1.17.2, the latest stable version.
+  * 最新安定版の 1.17.2 が使われます。
 
-Coverage::
+* [[c:Coverage]]
 
-  A oneshot_lines mode is added.  [[feature:15022]]
+  oneshot_lines モードが追加されました。 [[feature:15022]]
 
-  This mode checks "whether each line was executed at least once or not",
-  instead of "how many times each line was executed".
-  A hook for each line is fired at most once, and after it is fired
-  the hook flag is removed, i.e., it runs with zero overhead.
+  このモードは「各行が何回実行されたか」の代わりに
+  「各行が少なくとも1回実行されたかどうか」をチェックします。
+  行ごとのフックは少なくとも1回実行されて、実行後はフックフラグが削除されます。
+  言い換えるとオーバーヘッドがなくなります。
 
-  New options::
+  * 新規オプション
 
-    * Add +:oneshot_lines+ keyword argument to Coverage.start.
+    * :oneshot_lines キーワード引数が [[m:Coverage.start]] に追加されました。
 
-    * Add +:stop+ and +:clear+ keyword arguments to Coverage.result.
-      If +clear+ is true, it clears the counters to zero.
-      If +stop+ is true, it disables coverage measurement.
+    * :stop と :clear キーワード引数が [[m:Coverage.result]] に追加されました。
+      clear が真の時、カウンターが0クリアされます。
+      stop が真の時、カバレッジ計測を停止します。
 
-  New methods::
+  * 新規メソッド
 
-    * Coverage.line_stub, which is a simple helper function that
-      creates the "stub" of line coverage from a given source code.
+    * [[m:Coverage.line_stub]] はソースコードからラインカバレッジ用のスタブを
+      作成するシンプルなヘルパー関数です。
 
-CSV::
+* [[c:CSV]]
 
-  * Upgrade to 3.0.2. This includes performance improvements especially
-    for writing. Writing is about 2 times faster.
-    See [[url:https://github.com/ruby/csv/blob/master/NEWS.md]]
+  * 3.0.2 に更新されました。
+    特に書き出しの高速化を含んでいます。
+    書き出しは約2倍高速化しています。
+    [[url:https://github.com/ruby/csv/blob/master/NEWS.md]] を参照してください。
 
-ERB::
+* [[c:ERB]]
 
-  New options::
+  * 新規オプション
 
-    * Add +:trim_mode+ and +:eoutvar+ keyword arguments to ERB.new.
-      Now non-keyword arguments other than the first one are softly deprecated
-      and will be removed when Ruby 2.5 becomes EOL. [[feature:14256]]
+    * :trim_mode と :eoutvar キーワード引数が [[m:ERB.new]] に追加されました。
+      最初の引数以外のキーワード引数ではない引数はやんわりと非推奨になり、
+      Ruby 2.5 が EOL になった時に削除される予定です。 [[feature:14256]]
 
-    * erb command's <tt>-S</tt> option is deprecated, and will be removed
-      in the next version.
+    * erb コマンドの -S オプションは非推奨になりました。次のバージョンで削除予定です。
 
-FileUtils::
+* [[c:FileUtils]]
 
-  New methods::
+  * 新規メソッド
 
-    * FileUtils#cp_lr.  [[feature:4189]]
+    * [[m:FileUtils#cp_lr]] [[feature:4189]]
 
-Matrix::
+* [[c:Matrix]]
 
-  New methods::
+  * 新規メソッド
 
-    * Matrix#antisymmetric?, Matrix#skew_symmetric?
+    * [[m:Matrix#antisymmetric?]], [[m:Matrix#skew_symmetric?]]
 
-    * Matrix#map!, Matrix#collect! [[feature:14151]]
+    * [[m:Matrix#map!]], [[m:Matrix#collect!]] [[feature:14151]]
 
-    * Matrix#[]=
+    * [[m:Matrix#[]=]]
 
-    * Vector#map!, Vector#collect!
+    * [[m:Vector#map!]], [[m:Vector#collect!]]
 
-    * Vector#[]=
+    * [[m:Vector#[]=]]
 
-Net::
+* [[c:Net::HTTP]]
 
-  New options::
+  * 新規オプション
 
-    * Add +:write_timeout+ keyword argument to Net::HTTP.new. [[feature:13396]]
+    * :write_timeout キーワード引数が [[m:Net::HTTP.new]] に追加されました。 [[feature:13396]]
 
-  New methods::
+  * 新規メソッド
 
-    * Add Net::HTTP#write_timeout and Net::HTTP#write_timeout=.  [[feature:13396]]
+    * [[m:Net::HTTP#write_timeout]] と [[m:Net::HTTP#write_timeout=]] が追加されました。 [[feature:13396]]
 
-  New constant::
+  * 新規定数
 
-    * Add Net::HTTPClientException to deprecate Net::HTTPServerException,
-      whose name is misleading.  [[bug:14688]]
+    * [[c:Net::HTTPClientException]] が追加されて [[c:Net::HTTPServerException]] が非推奨になりました。
+      誤解を招く名称だったため。 [[bug:14688]]
 
-NKF::
+* [[c:NKF]]
 
-  * Upgrade to nkf v2.1.5
+  * nkf v2.1.5 に更新されました。
 
-Psych::
+* [[c:Psych]]
 
-  * Upgrade to Psych 3.1.0
+  * Psych 3.1.0 に更新されました。
 
-RDoc::
+* [[c:RDoc]]
 
-  * Become about 2 times faster.
+  * 約2倍高速化されました。
 
-  * Use SOURCE_DATE_EPOCH to generate files.
+  * ファイル生成に SOURCE_DATE_EPOCH を使うようになりました。
 
-  * Fix method line number that slipped off.
+  * メソッドの行番号がずれていたのを修正しました。
 
-  * Enable <code>--width</code>, <code>--exclude</code>,
-    and <code>--line-numbers</code> that were ignored.
+  * 無視されていた --width, --exclude, --line-numbers を有効にしました。
 
-  * Add support for blockquote by ">>>" in default markup notation.
+  * デフォルトのマークアップ記法で ">>>" による引用をサポートしました。
 
-  * Add support for "Raises" lines in TomDoc notation.
+  * TomDoc 記法で "Raises" 行をサポートしました。
 
-  * Fix syntax error output.
+  * シンタックスエラー出力を修正しました。
 
-  * Fix many parsing bugs.
+  * 多数のパース中のバグを修正しました。
 
-REXML::
+* [[c:REXML]]
 
-  * Upgrade to REXML 3.1.9.
-    See [[url:https://github.com/ruby/rexml/blob/master/NEWS.md]]
+  * REXML 3.1.9 に更新されました。
+    [[url:https://github.com/ruby/rexml/blob/master/NEWS.md]] を参照してください。
 
-  Improved some XPath implementations::
+  いくつかの XPath 実装を改善:
 
-    * <code>concat()</code> function: Stringify all arguments before concatenating.
+    * concat() 関数: 結合前に全ての引数を文字列化
 
-    * <code>string()</code> function: Support context node.
+    * string() 関数: コンテキストノードをサポート
 
-    * <code>string()</code> function: Support processing instruction node.
+    * string() 関数: 処理命令 (PI) ノードをサポート
 
-    * Support <code>"*:#{ELEMENT_NAME}"</code> syntax in XPath 2.0.
+    * XPath 2.0 で"*:#{ELEMENT_NAME}" 記法をサポート
 
-  Fixed some XPath implementations::
+  いくつかの XPath 実装を修正:
 
-    * <code>"//#{ELEMENT_NAME}[#{POSITION}]"</code> case
+    * "//#{ELEMENT_NAME}[#{POSITION}]" の問題
 
-    * <code>string()</code> function: Fix <code>function(document)</code>
-      returns nodes that are out of root elements.
+    * string() 関数: function(document) がルート要素の外のノードを返すのを修正
 
-    * <code>"/ #{ELEMENT_NAME} "</code> case
+    * "/ #{ELEMENT_NAME} " の問題
 
-    * <code>"/ #{ELEMENT_NAME} [ #{PREDICATE} ]"</code> case
+    * "/ #{ELEMENT_NAME} [ #{PREDICATE} ]" の問題
 
-    * <code>"/ #{AXIS}::#{ELEMENT_NAME}"</code> case
+    * "/ #{AXIS}::#{ELEMENT_NAME}" の問題
 
-    * <code>"#{N}-#{M}"</code> case: One or more white spaces were required
-      before <code>"-"</code>
+    * "#{N}-#{M}" の問題: 1個以上の空白が "-" の前に必要でした
 
-    * <code>"/child::node()"</code> case
+    * "/child::node()" の問題
 
-    * <code>"#{FUNCTION}()/#{PATH}"</code> case
+    * "#{FUNCTION}()/#{PATH}" の問題
 
-    * <code>"@#{ATTRIBUTE}/parent::"</code> case
+    * "@#{ATTRIBUTE}/parent::" の問題
 
-    * <code>"name(#{NODE_SET})"</code> case
+    * "name(#{NODE_SET})" の問題
 
-RSS::
+* [[c:RSS]]
 
-  New options::
+  * 新規オプション
 
-    * RSS::Parser.parse now accepts options as Hash. +:validate+ ,
-      +:ignore_unknown_element+ , +:parser_class+ options are available.
+    * [[m:RSS::Parser.parse]] が [[c:Hash]] としてオプションを受け付けるようになりました。
+      :validate, :ignore_unknown_element, :parser_class オプションが利用可能です。
 
-RubyGems::
+* RubyGems
 
-  * Upgrade to RubyGems 3.0.1
+  * RubyGems 3.0.1 に更新されました。
 
   * [[url:https://blog.rubygems.org/2018/12/19/3.0.0-released.html]]
 
   * [[url:https://blog.rubygems.org/2018/12/23/3.0.1-released.html]]
 
-Set::
+* [[c:Set]]
 
-  Aliased methods::
+  * 別名
 
-    * Set#filter! is a new alias for Set#select!.  [[feature:13784]]
+    * [[m:Set#filter!]] が [[m:Set#select!]] の別名として追加されました。 [[feature:13784]]
 
-URI::
+* [[c:URI]]
 
-  New constant::
+  * 新規定数
 
-    * Add URI::File to handle the file URI scheme.  [[feature:14035]]
+    * [[c:URI::File]] が file URI スキームを扱うために追加されました。 [[feature:14035]]
 
 === 互換性 (機能追加とバグ修正を除く)
 
-Dir::
+* [[c:Dir]]
 
-  * Dir.glob with <code>'\0'</code>-separated pattern list will be deprecated,
-    and is now warned.  [[feature:14643]]
+  * [[m:Dir.glob]] に '\0'区切りのパターンリストを渡すのは非推奨になる予定で、
+    今は警告が出ます。 [[feature:14643]]
 
-File::
+* [[c:File]]
 
-  * File.read, File.binread, File.write, File.binwrite, File.foreach, and
-    File.readlines do not invoke external commands even if the path starts
-    with the pipe character <code>'|'</code>. [[feature:14245]]
+  * [[m:File.read]], [[m:File.binread]], [[m:File.write]], [[m:File.binwrite]],
+    [[m:File.foreach]], [[m:File.readlines]] はパスがパイプ文字 '|' で始まっていても
+    外部コマンドを実行しなくなりました。 [[feature:14245]]
 
-Object::
+* [[c:Object]]
 
-  * Object#=~ is deprecated.  [[feature:15231]]
+  * [[m:Object#=~]] は非推奨になりました。 [[feature:15231]]
 
 === 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
-* These standard libraries have been promoted to default gems.
+* 以下の標準添付ライブラリがデフォルト gem になりました。
 
   * e2mmap
   * forwardable
@@ -576,83 +559,88 @@ Object::
   * thwait
   * tracer
 
-BigDecimal::
+* [[c:BigDecimal]]
 
-  * The following methods are removed.
+  * 以下のメソッドが削除されました。
 
     * BigDecimal.allocate
     * BigDecimal.ver
 
-  * Every BigDecimal object is frozen. [[feature:13984]]
+  * 全ての BigDecimal オブジェクトが frozen になりました。 [[feature:13984]]
 
-  * BigDecimal() parses the given string similar to Float().
+  * [[m:Kernel.#BigDecimal]]() が文字列を [[m:Kernel.#Float]]() のように
+    パースするようになりました。
 
-  * String#to_d parses the receiver string similar to String#to_f.
+  * [[m:String#to_d]] がレシーバの文字列を [[m:String#to_f]] のように
+    パースするようになりました。
 
-  * BigDecimal.new will be removed in version 2.0.
+  * [[m:BigDecimal.new]] はバージョン 2.0 で削除予定です。
 
-Pathname::
+* [[c:Pathname]]
 
-  * Pathname#read, Pathname#binread, Pathname#write, Pathname#binwrite,
-    Pathname#each_line and Pathname#readlines do not invoke external
-    commands even if the path starts with the pipe character <code>'|'</code>.
-    This follows [[feature:14245]].
+  * [[m:Pathname#read]], [[m:Pathname#binread]], [[m:Pathname#write]],
+    [[m:Pathname#binwrite]], [[m:Pathname#each_line]], [[m:Pathname#readlines]] は
+    パスがパイプ文字 '|' で始まっていても外部コマンドを実行しなくなりました。
+    これは [[feature:14245]] の続きです。
 
 === 実装の改善
 
-* Speedup Proc#call because we don't need to care about <code>$SAFE</code>
-  any more. [[feature:14318]]
+* [[m:Proc#call]] が高速化しました。
+  もう [[m:$SAFE]] を気にしなくてもよくなったためです。 [[feature:14318]]
 
-  With +lc_fizzbuzz+ benchmark which uses Proc#call many times we can
-  measure x1.4 improvements.  [[bug:10212]]
+  [[m:Proc#call]] を何度も使っている lc_fizzbuzz ベンチマークで1.4倍の改善を
+  計測できています。 [[bug:10212]]
 
-* Speedup block.call where +block+ is passed block parameter. [[feature:14330]]
+* ブロックパラメーターとして渡された block に対する block.call が高速化されました。 [[feature:14330]]
 
-  Ruby 2.5 improves block passing performance. [[feature:14045]]
+  Ruby 2.5 ではブロック渡しのパフォーマンスを改善されました。 [[feature:14045]]
 
-  Additionally, Ruby 2.6 improves the performance of passed block calling.
+  さらに Ruby 2.6 では渡されたブロックの呼び出しのパフォーマンスが改善されました。
 
-* Introduce an initial implementation of a JIT (Just-in-time) compiler. [[feature:14235]] [experimental]
+* JIT (Just-in-time) コンパイラの初期実装が導入されました。 [[feature:14235]] [実験的]
 
-  * <tt>--jit</tt> command line option is added to enable JIT. <tt>--jit-verbose=1</tt>
-    is good for inspection.  See <tt>ruby --help</tt> for others.
-  * To generate machine code, this JIT compiler uses the C compiler used for building
-    the interpreter. Currently GCC, Clang, and Microsoft Visual C++ are supported for it.
-  * <tt>--disable-mjit-support</tt> option is added to configure. This is added for JIT debugging,
-    but if you get an error on building a header file for JIT, you can use this option to skip
-    building it as a workaround.
-  * rb_waitpid reimplemented on Unix-like platforms to maintain
-    compatibility with processes created for JIT [[bug:14867]]
+  * JIT を有効化する --jit コマンドラインオプションが追加されました。
+    「--jit-verbose=1」が調査に有用です。
+    他のオプションは「ruby --help」を参照してください。
+  * 機械語を生成するため、この JIT コンパイラはインタプリタをビルドするのに使用した C コンパイラを使用します。
+    現在は GCC, Clang, Microsoft Visual C++ をサポートしています。
+  * configure に「--disable-mjit-support」オプションが追加されました。
+    これは JIT デバッグのために追加されましたが、JIT 用のヘッダファイルのビルドでエラーが発生した場合、
+    回避策としてこのオプションを使うとビルドをスキップできます。
+  * JIT で作成されたプロセスとの互換性を維持するために Unix 系のプラットフォームで
+    rb_waitpid が再実装されました。 [[bug:14867]]
 
-* VM generator script renewal; makes the generated VM more optimized. [GH-1779]
+* 生成される VM をより最適化できるようにするために VM 生成スクリプトが一新されました。
+  [[url:https://github.com/ruby/ruby/pull/1779]]
 
-* Thread cache enabled for pthreads platforms (for Thread.new and
-  Thread.start).  [[feature:14757]]
+* pthread プラットフォームでスレッドキャッシュを有効にしました。
+  ([[m:Thread.new]] と [[m:Thread.start]]) [[feature:14757]]
 
-* timer thread is eliminated for platforms with POSIX timers. [Misc #14937]
+* POSIX タイマーのあるプラットフォームでタイマースレッドが取り除かれました。 [[misc:14937]]
 
-* Transient Heap (theap) is supported. [[bug:14858]] [[feature:14989]]
+* Transient Heap (theap) がサポートされました。 [[bug:14858]] [[feature:14989]]
 
-  theap is a managed heap for short-living memory objects. For example,
-  making a small and short-living Hash object is x2 faster. With rdoc benchmark,
-  we measured 6-7% performance improvement.
+#@# memory objects は malloc されたメモリブロックのこと
+  theap は短命なメモリオブジェクトのための管理されたヒープです。
+  例えば小さくて短命の Hash オブジェクトは2倍高速化されました。
+  rdoc ベンチマークでは 6から7%のパフォーマンスの改善を計測できました。
 
-* Native implementations (arm32, arm64, ppc64le, win32, win64, x86, amd64) of
-  coroutines to improve performance of Fiber significantly. [[feature:14739]]
+* コルーチンのネイティブ実装(arm32, arm64, ppc64le, win32, win64, x86, amd64) により
+  Fiber のパフォーマンスを大きく改善 [[feature:14739]]
 
 === その他の変更
 
-* On macOS, shared libraries no longer include a full version number of Ruby
-  in their names.  This eliminates the burden of each teeny upgrade on the
-  platform that users need to rebuild every extension library.
+* macOS で共有ライブラリの名前に Ruby のフルバージョンを含めなくなりました。
+  この変更によって macOS プラットフォームのユーザが teeny リリース毎に全ての
+  拡張ライブラリをリビルドする必要がある負担がなくなります。
 
-  Before::
+  変更前:
     * libruby.2.6.0.dylib
     * libruby.2.6.dylib -> libruby.2.6.0.dylib
     * libruby.dylib -> libruby.2.6.0.dylib
 
-  After::
+  変更後:
     * libruby.2.6.dylib
     * libruby.dylib -> libruby.2.6.dylib
 
-* Extracted misc/*.el files to [[url:https://github.com/ruby/elisp]]
+* misc/*.el ファイルが [[url:https://github.com/ruby/elisp]] に分離されました。
