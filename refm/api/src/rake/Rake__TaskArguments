@@ -34,6 +34,18 @@ include Enumerable
 
 @param names パラメータ名のリストを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  arguments = Rake::TaskArguments.new(["name1", "name2"], ["value1", "value2"])
+  new_arguments = arguments.new_scope(["name3", "name4"])
+  new_arguments         # => {}
+  new_arguments.names   # => ["name3", "name4"]
+end
+#@end
+
 --- to_hash -> Hash
 
 パラメータ名と対応する値を格納したハッシュを返します。
