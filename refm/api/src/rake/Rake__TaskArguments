@@ -28,6 +28,16 @@ include Enumerable
 
 パラメータ名のリストを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  arguments = Rake::TaskArguments.new(["name1", "name2"], ["value1", "value2"])
+  arguments.names # => ["name1", "name2"]
+end
+#@end
+
 --- new_scope(names) -> Rake::TaskArguments
 
 与えられたパラメータ名のリストを使用して新しい [[c:Rake::TaskArguments]] を作成します。
