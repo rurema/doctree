@@ -218,10 +218,15 @@ teeny リリースのそれぞれについてパッチレベルは 0 から始�
 パッチレベルという概念および RUBY_PATCHLEVEL 定数は、 Ruby 1.8.5-p1 以降、 1.8.6 以降で導入されました。
 1.8.5やそれ以前のバージョンでは定義されていません。
 
+#@since 2.7.0
+--- RUBY_REVISION -> String
+
+Ruby の GIT コミットハッシュを表す [[c:String]] オブジェクトです。
+#@else
 --- RUBY_REVISION -> Integer
 
 Ruby の Subversion でのリビジョン番号を表す [[c:Integer]] オブジェクトです。
-
+#@end
 --- RUBY_COPYRIGHT -> String
 Ruby のコピーライトを表す文字列。
 
