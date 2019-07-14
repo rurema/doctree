@@ -236,6 +236,11 @@ Ruby処理系実装の種類を表す文字列。
   jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
   "jruby"
 
+#@since 2.3.0
+--- RUBY_ENGINE_VERSION -> String
+Ruby処理系実装のバージョンを表す文字列。
+
+#@end
 --- RUBY_DESCRIPTION -> String
 Ruby の詳細を表す文字列。
 
