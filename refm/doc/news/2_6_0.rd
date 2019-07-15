@@ -644,3 +644,4 @@
     * libruby.dylib -> libruby.2.6.dylib
 
 * misc/*.el ファイルが [[url:https://github.com/ruby/elisp]] に分離されました。
+#@end
