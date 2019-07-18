@@ -14,6 +14,40 @@ Rake の主要なモジュールです。
 
 @param app [[c:Rake::Application]] のインスタンスを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+require 'pp'
+
+task default: :test_rake_app
+task :test_rake_app do
+  app = Rake::Application.new
+  app.tty_output = true
+  Rake.application = app
+  pp Rake.application
+end
+
+# => #<Rake::Application:0x34cd580
+#     @default_loader=#<Rake::DefaultLoader:0x34cd4a8>,
+#     @imported=[],
+#     @last_description=nil,
+#     @loaders=
+#      {".rb"=>#<Rake::DefaultLoader:0x34cd448>,
+#       ".rf"=>#<Rake::DefaultLoader:0x34cd3d0>,
+#       ".rake"=>#<Rake::DefaultLoader:0x34cd358>},
+#     @name="rake",
+#     @original_dir="/path/to/file",
+#     @pending_imports=[],
+#     @rakefile=nil,
+#     @rakefiles=["rakefile", "Rakefile", "rakefile.rb", "Rakefile.rb"],
+#     @rules=[],
+#     @scope=LL(),
+#     @tasks={},
+#     @terminal_columns=0,
+#     @top_level_tasks=[],
+#     @tty_output=true>
+#@end
+
 --- original_dir -> String
 
 Rake アプリケーションを開始したディレクトリを返します。
