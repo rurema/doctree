@@ -16,6 +16,17 @@
 
 全てのタスクとルールをクリアします。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.tasks # => [<Rake::Task default => [test_rake_app]>, <Rake::Task test_rake_app => []>]
+  Rake.application.clear # => []
+  Rake.application.tasks # => []
+end
+#@end
+
 --- create_rule(*args){ ... }
 
 与えられたパラメータに従ってルールを作成します。
