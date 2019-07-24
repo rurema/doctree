@@ -22,6 +22,18 @@
 
 @param args ルールに与えるパラメータを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  rule = Rake.application.create_rule '.txt' => '.md' do |t|
+    "#{t}"
+  end
+  rule # => [[/\.txt$/, [], [".md"], #<Proc:0x32263c8@/path/to/Rakefile:5>]]
+end
+#@end
+
 --- current_scope -> Array
 
 現在のスコープを返します。
