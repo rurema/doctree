@@ -26,6 +26,15 @@
 
 現在のスコープを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.current_scope # => LL()
+end
+#@end
+
 --- define_task(task_class, *args){ ... } -> Rake::Task
 
 タスクを定義します。
