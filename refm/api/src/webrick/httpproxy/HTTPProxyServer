@@ -35,6 +35,7 @@
   [[c:WEBrick::HTTPAuth::ProxyDigestAuth]] を使用します。
 //emlist{
  require 'webrick'
+ require 'webrick/httpproxy'
  auth_proc = proc{|req, res|
    unless c = req['proxy-authorization']
      res['Proxy-Authenticate'] = 'Basic realm="WEBrick Proxy"'
@@ -52,6 +53,7 @@
   nil を指定した場合なにもしません。デフォルトは nil です。
 //emlist{
  require 'webrick'
+ require 'webrick/httpproxy'
  handler = proc{|req, res|
    res.body.gsub!(/です。/, 'でんがな。')
    res.body.gsub!(/ます。/, 'まんがな。')
@@ -69,6 +71,7 @@
   を [[c:URI]] オブジェクトで指定します。
 //emlist{
   require 'uri'
+  require 'webrick/httpproxy'
   u = URI.parse('http://localhost:18080/')
   s = WEBrick::HTTPProxyServer.new( { :ProxyURI => u } )
 //}
