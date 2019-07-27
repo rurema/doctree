@@ -9,8 +9,7 @@
  require 'webrick'
  require 'webrick/httpproxy'
  
- config = { :BindAddress => '127.0.0.1', :Port => 8080 }
- s = WEBrick::HTTPProxyServer.new( config ) 
+ s = WEBrick::HTTPProxyServer.new(Port: 8080)
  Signal.trap('INT') do
    s.shutdown
  end
@@ -44,7 +43,7 @@
      # 略
    end
  }
- s = WEBrick::HTTPProxyServer.new( {:ProxyAuthProc => auth_proc} ) 
+ s = WEBrick::HTTPProxyServer.new(ProxyAuthProc: auth_proc, Port: 8080)
 //}
 : :ProxyContentHandler
   接続先の HTTP サーバからの内容を処理する [[c:Proc]] オブジェクトを指定します。
@@ -58,7 +57,7 @@
    res.body.gsub!(/です。/, 'でんがな。')
    res.body.gsub!(/ます。/, 'まんがな。')
  }
- s = WEBrick::HTTPProxyServer.new( { :ProxyContentHandler => handler } )
+ s = WEBrick::HTTPProxyServer.new(ProxyContentHandler: handler, Port: 8080)
 //}
 : :ProxyVia
   true を指定した場合 接続先の HTTP サーバへのリクエストに Via ヘッダを付けます。デフォルトは 
@@ -73,7 +72,7 @@
   require 'uri'
   require 'webrick/httpproxy'
   u = URI.parse('http://localhost:18080/')
-  s = WEBrick::HTTPProxyServer.new( { :ProxyURI => u } )
+  s = WEBrick::HTTPProxyServer.new(ProxyURI: u, Port: 8080)
 //}
 
 @param default デフォルトは [[m:WEBrick::Config::HTTP]] です。
