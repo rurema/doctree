@@ -51,6 +51,23 @@
 
 @param name 名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+namespace :sample do
+  def hoge
+    puts "hoge"
+  end
+end
+
+task :test_rake_app do
+  task.application.in_namespace("sample") do
+    hoge # => "hoge"
+  end
+end
+#@end
 
 --- intern(task_class, task_name) -> Rake::Task
 
