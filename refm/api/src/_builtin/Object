@@ -1146,7 +1146,7 @@ send, __send__ は、メソッドの呼び出し制限
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
+@see [[m:Object#public_send]], [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
 #@since 1.9.1
 --- public_send(name, *args) -> object
