@@ -22,6 +22,16 @@ JSON のオブジェクトから [[c:Complex]] のオブジェクトを生成し
 
 内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
+#@since 2.7.0
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
+            に渡されます。
+#@else
 @param args 使用しません。
+#@end
+
+#@samplecode 例
+require 'json/add/complex'
+Complex(2, 3).to_json # => "{\"json_class\":\"Complex\",\"r\":2,\"i\":3}"
+#@end
 
 @see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
