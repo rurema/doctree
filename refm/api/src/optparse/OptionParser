@@ -265,6 +265,24 @@ opts.banner # => "Usage: example.rb [options]"
 
 program_name、version と release から生成したバージョンを表す文字列を返します。
 
+#@samplecode 例
+require "optparse"
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+  opts.program_name = "Optparse Example"
+  opts.version = [0, 1]
+  opts.release = "2019-05-01"
+
+  opts.on_tail("--version", "Show version") do
+    puts opts.ver # => "Optparse Example 0.1 (2019-05-01)"
+    exit
+  end
+
+  opts.parse!(ARGV)
+end
+#@end
+
 --- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent)               -> ()
 --- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent) {|line| ... } -> ()
 
