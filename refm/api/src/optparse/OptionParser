@@ -842,6 +842,21 @@ argv からオプションを取り除いたものを返します。
                 指定されないか nil である場合、~/.options/ に
                 プログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
 
+#@samplecode 例
+require "optparse"
+
+IO.write("options.txt", %w(-a --b).join("\n"))
+options = { a: false, b: false }
+OptionParser.new do |opt|
+  opt.on('-a') { |v| options[:a] = v }
+  opt.on('--b') {|v| options[:b] = v }
+  opt.load("options.txt")   # => true
+  opt.load("not_exist.txt") # => false
+end
+
+p options # => {:a=>true, :b=>true}
+#@end
+
 --- environment(env)    -> [String]
 
 環境変数 env に対して
