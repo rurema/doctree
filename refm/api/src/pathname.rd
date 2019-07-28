@@ -306,6 +306,15 @@ Pathname('/im/sure').root?  # => false
 --- absolute? -> bool
 self が絶対パス指定であれば真を返します。
 
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("/path/to/example.rb")
+pathname.absolute? # => true
+pathname = Pathname("../")
+pathname.absolute? # => false
+#@end
+
 --- relative? -> bool
 self が相対パス指定であれば真を返します。
 
