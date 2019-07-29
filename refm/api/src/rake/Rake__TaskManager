@@ -68,6 +68,21 @@
 
 Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app1
+
+desc "test1"
+task :test_rake_app1 do |task|
+  task.application.last_comment # => "test2"
+end
+
+desc "test2"
+task :test_rake_app2 do |task|
+end
+#@end
+
 --- last_description=(description)
 
 最新の詳細説明をセットします。
