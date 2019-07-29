@@ -1919,7 +1919,7 @@ req = Net::HTTP::Get.new(uri.request_uri)
 req.method # => "GET"
 #@end
 
---- proxy_basic_auth(account, password) -> ()
+--- proxy_basic_auth(account, password) -> [String]
 
 Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 
