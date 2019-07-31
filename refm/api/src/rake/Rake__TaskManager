@@ -84,6 +84,16 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです�
 
 @param initial_scope 検索するスコープを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+task :test_rake_app do |task|
+  task.application.lookup("test_rake_app") # => <Rake::Task test_rake_app => []>
+end
+#@end
+
 --- resolve_args(args) -> Array
 
 タスクやルールに与えられたパラメータを解釈します。
