@@ -103,6 +103,18 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです�
 
 @raise RuntimeError タスクを合成できなかった場合に発生します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+task :test_rake_app do |task|
+  task.application.synthesize_file_task("sample_file") # => nil
+  IO.write("sample_file", "")
+  task.application.synthesize_file_task("sample_file") # => <Rake::FileTask sample_file => []>
+end
+#@end
+
 --- tasks -> Array
 
 全てのタスクリストを返します。
