@@ -10,6 +10,20 @@
 
 @param name タスクの名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+namespace :ns do |ns|
+  task :ts1 do
+  end
+  task :ts2 do
+  end
+
+  ns[:ts1] # => <Rake::Task ns:ts1 => []>
+  ns[:ts2] # => <Rake::Task ns:ts2 => []>
+end
+#@end
+
 --- tasks -> Array
 
 タスクのリストを返します。
