@@ -214,7 +214,11 @@ $@ の値は、[[m:$!]].backtrace の値と同じです。
 Thread.current.safe_level と同じです。
 非整数を代入しようとすると [[c:TypeError]] が発生します。
 
+#@since 2.6.0
+この変数はグローバルスコープです。
+#@else
 この変数はスレッドローカルです。
+#@end
 Ruby起動時の初期値は 0 です。
 
 --- $= -> bool
