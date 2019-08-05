@@ -332,6 +332,8 @@ self を [[c:Hash]] オブジェクトに変換します。
 hash = { "a" => 97, "b" => 98 }
 hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
 #@end
+
+@see [[m:Enumerable#map]]
 #@end
 #@end
 
