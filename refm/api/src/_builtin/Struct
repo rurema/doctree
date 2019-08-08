@@ -248,8 +248,8 @@ self の内容を人間に読みやすい文字列にして返します。
 --- select -> Enumerator
 #@end
 #@since 2.6.0
---- filter! {|i| ... } -> [object]
---- filter! -> Enumerator
+--- filter {|i| ... } -> [object]
+--- filter -> Enumerator
 #@end
 
 構造体のメンバの値に対してブロックを評価した値が真であった要素を全て含
