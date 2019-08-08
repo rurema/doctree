@@ -274,12 +274,6 @@ umask 値が 0022 ならば
 --- callback(dbman)
 #@# nodoc
 
-#@until 1.8.2
---- create_new_id -> String
-
-新しいセッション ID を生成します。
-
-#@end
 
 == Instance Methods
 
@@ -380,10 +374,6 @@ FileStore の場合はセッションファイルを削除します。
 
 == Instance Methods
 
-#@until 1.8.2
---- check_id(id) -> bool
-#@# nodoc
-#@end
 
 --- close -> ()
 #@# discard

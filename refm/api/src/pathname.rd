@@ -219,10 +219,6 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 #@since 1.9.2
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 #@end
-#@until 1.8.5
-@param force_absolute 真の場合、絶対パスを返します。 self が相対パスであれば、カレントディレクトリからの相対パスとして解釈されます。
-                      古い挙動は obsolete です。引数は省略すべきです。
-#@end
 
     require 'pathname'
 
@@ -238,15 +234,9 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
     Dir.chdir("/tmp")
 
     p path.realpath
-#@until 1.8.5
-    p path.realpath(false)
-#@end
 
     => ruby 1.8.0 (2003-10-10) [i586-linux]
        #<Pathname:/tmp/bar>
-#@until 1.8.5
-       #<Pathname:bar>
-#@end
 
 #@since 1.9.2
 @see [[m:Pathname#realdirpath]], [[m:File.realpath]]
@@ -1154,19 +1144,6 @@ Pathname オブジェクトとして生成し、ブロックへの引数とし�
 
 #@end
 
-#@until 1.8.2
-
---- cleanpath_aggressive -> Pathname
-
-[[m:Pathname#cleanpath]](false) と同じです。 1.8.2 以降より private メソッドとなり、利
-用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
-
---- cleanpath_conservative -> Pathname
-
-[[m:Pathname#cleanpath]](true) と同じです。 1.8.2 以降より private メソッドとなり、利
-用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
-
-#@end
 
 --- foreach(*args){|path| ... } -> nil
 #@since 1.8.1

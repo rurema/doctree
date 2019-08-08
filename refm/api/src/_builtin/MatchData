@@ -157,9 +157,6 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 #@since 1.8.0
 #@until 1.9.1
-#@until 1.8.1
---- select(*index)    -> [String]
-#@end
 --- select {|s| ... } -> [String]
 #@until 1.8.1
 引数が指定された場合は、正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。

@@ -1078,12 +1078,6 @@ pos = self.string.size と同じ動作です。
 この文字列は [[m:Object#freeze]] されています。
 
 
-#@until 1.8.2
-= class ScanError
-
-スキャン中に発生したエラーをあらわす例外です。
-
-#@end
 #@since 1.8.2
 = class StringScanner::Error
 

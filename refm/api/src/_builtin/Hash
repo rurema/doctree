@@ -1376,9 +1376,6 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 
 @see [[m:Hash#equal?]]
 
-#@until 1.8.7
---- eql?(other) -> bool
-#@end
 --- equal?(other) -> bool
 
 指定された other が self 自身である場合のみ真を返します。

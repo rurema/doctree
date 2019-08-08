@@ -38,9 +38,6 @@
 #@end
   pr = Proc.new { retry }
   (1..5).each(&pr)
-#@until 1.8.0
-  #=> retry from proc-closure (LocalJumpError)
-#@end
 #@end
 
 ===[a:lambda_proc] lambda と proc と Proc.new とイテレータの違い

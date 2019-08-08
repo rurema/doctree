@@ -286,29 +286,6 @@ GNUの慣習にあわせて
                 -a                               description of -a
                 -b                               description of -b
 
-#@until 1.8.2
-1.8.2以前のバージョンでは以下のように反映されません。
-        ruby ./sample.rb --help
-        # => Usage: sample [options]
---helpをオプション定義に追加するか、
-        opt.on('--help', 'show this message') { puts opt; exit }
-[[ref:argv]]の項にあるように、以下のようなARGVを使った書き方にしてください。
-
-        require 'optparse'
-        ARGV.options {|opt|
-
-          opt.on('-a', 'description of -a') {|v| p v }
-          opt.on('-b', 'description of -b') {|v| p v }
-
-          opt.parse!
-        }
-        p ARGV
-
-        ruby ./sample.rb --help
-        # => Usage: sample [options]
-               -a                               description of -a
-               -b                               description of -b
-#@end
 
 ====[a:subcmd] サブコマンド
 以下は cvs や svn のようにサブコマンドを解釈する例です。
