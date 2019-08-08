@@ -20,6 +20,8 @@ require digest/sha2
 
 = module Digest
 
+digestライブラリのための名前空間となるモジュールです。
+
 #@since 1.8.6
 == Module Functions
 
