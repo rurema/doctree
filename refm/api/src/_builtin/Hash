@@ -1382,15 +1382,9 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-#@until 1.8.7
- p({}.eql?({}))     #=> false 
- a = {}
- p a.eql?(a)        #=> true
-#@else
  p({}.equal?({}))     #=> false 
  a = {}
  p a.equal?(a)        #=> true
-#@end
 
 @see [[m:Hash#==]]
 

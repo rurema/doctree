@@ -204,11 +204,7 @@ cleanpath は、実際にファイルシステムを参照することなく、�
 #@since 1.9.2
 --- realpath(basedir = nil) -> Pathname
 #@end
-#@until 1.8.5
---- realpath(force_absolute = true) -> Pathname
-#@else
 --- realpath -> Pathname
-#@end
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
 また、ファイルシステムをアクセスし、実際に存在するパスを返します。

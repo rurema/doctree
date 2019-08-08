@@ -93,15 +93,8 @@ include Digest::Instance
 
 == Class Methods
 
-#@until 1.8.6
---- new(str = nil) -> Digest::Base
-
-新しいダイジェストオブジェクトを生成します。文字列引数が与えられると
-それを追加します([[m:Digest::Base#update]] 参照)。
-#@else
 --- new            -> Digest::Base
 新しいダイジェストオブジェクトを生成します。
-#@end
 
 --- digest(str) -> String
 

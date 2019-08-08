@@ -471,12 +471,8 @@ S/MIME 暗号化する場合に指定した送信先を意味します。
 
 #@end
 
-#@until 1.8.3
-= class OpenSSL::PKCS7::Signer < Object
-#@else
 = class OpenSSL::PKCS7::SignerInfo < Object
 alias OpenSSL::PKCS7::Signer
-#@end
 署名者の情報を表すクラスです。
 
 

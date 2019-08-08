@@ -1,16 +1,5 @@
-#@until 1.8.7
-= module OpenSSL::Cipher
-共通鍵暗号に関する機能を集めたモジュール
-
-== Module functions
---- ciphers -> [String]
-利用可能な暗号方式名を文字列の配列で返します。
-
-= class OpenSSL::Cipher::Cipher < Object
-#@else
 
 = class OpenSSL::Cipher < Object
-#@end
 
 共通鍵暗号のために抽象化されたインターフェースを提供するクラスです。
 
@@ -99,11 +88,7 @@ AES を用いる場合、通常は CBC を用いれば良いでしょう。
   p decrypted_data
 
 == Class Methods
-#@until 1.8.7
---- new(name) -> OpenSSL::Cipher::Cipher
-#@else
 --- new(name) -> OpenSSL::Cipher
-#@end
 
 共通鍵暗号のアルゴリズム名を渡し、対応する暗号オブジェクトを生成します。
 
@@ -296,11 +281,7 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 
 #@end
 
-#@until 1.8.7
-= class OpenSSL::Cipher::AES < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::AES < OpenSSL::Cipher
-#@end
 
 AES 暗号を表すクラス
 
@@ -318,11 +299,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 @param mode モード文字列
 
 #@since 1.8.5
-#@until 1.8.7
-= class OpenSSL::Cipher::AES128 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::AES128 < OpenSSL::Cipher
-#@end
 
 鍵長 128 ビットの AES 暗号を表すクラス
 
@@ -336,11 +313,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 
 @param mode モード文字列
 
-#@until 1.8.7
-= class OpenSSL::Cipher::AES192 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher
-#@end
 
 鍵長 192 ビットの AES 暗号を表すクラス
 
@@ -354,11 +327,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 
 @param mode モード文字列
 
-#@until 1.8.7
-= class OpenSSL::Cipher::AES256 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher
-#@end
 鍵長 256 ビットの AES 暗号を表すクラス
 
 == Class Methods
@@ -373,11 +342,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 
 #@end
 
-#@until 1.8.7
-= class OpenSSL::Cipher::BF < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::BF < OpenSSL::Cipher
-#@end
 BF(BlowFish)暗号を表すクラス
 
 == Class Methods
@@ -393,11 +358,7 @@ BF(BlowFish)暗号オブジェクトを生成し、返します。
 #@until 1.8.3
 = class OpenSSL::Cipher::Cast5 < OpenSSL::Cipher::Cipher
 #@else
-#@until 1.8.7
-= class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher
-#@end
 #@end
 
 CAST5 暗号を表すクラス
@@ -413,11 +374,7 @@ CAST5 暗号オブジェクトを生成し、返します。
 @param mode モード文字列
 
 
-#@until 1.8.7
-= class OpenSSL::Cipher::DES < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::DES < OpenSSL::Cipher
-#@end
 DES 暗号を表すクラス
 
 == Class Methods
@@ -434,11 +391,7 @@ DES 暗号オブジェクトを生成し、返します。
 #@until 1.8.3
 = class OpenSSL::Cipher::Idea < OpenSSL::Cipher::Cipher
 #@else
-#@until 1.8.7
-= class OpenSSL::Cipher::IDEA < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::IDEA < OpenSSL::Cipher
-#@end
 IDEA 暗号を表すクラス
 
 == Class Methods
@@ -448,11 +401,7 @@ IDEA 暗号オブジェクトを生成します。
 @param args 暗号のパラメータ
 #@end
 
-#@until 1.8.7
-= class OpenSSL::Cipher::RC2 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::RC2 < OpenSSL::Cipher
-#@end
 RC2 暗号を表すクラス
 
 == Class Methods
@@ -473,11 +422,7 @@ RC2 暗号オブジェクトを生成します。
 @param mode モード文字列
 
 
-#@until 1.8.7
-= class OpenSSL::Cipher::RC4 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::RC4 < OpenSSL::Cipher
-#@end
 
 RC4 暗号を表すクラス
 
@@ -495,11 +440,7 @@ bit で鍵長を指定できます。
 
 @param bit 鍵長のビット数(整数もしくは文字列)
 
-#@until 1.8.7
-= class OpenSSL::Cipher::RC5 < OpenSSL::Cipher::Cipher
-#@else
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher
-#@end
 
 RC5 暗号を表すクラス
 
@@ -508,9 +449,5 @@ RC5 暗号を表すクラス
 RC5 暗号オブジェクトを生成し、返します。
 
 @param args 暗号のパラメータ
-#@until 1.8.7
-= class OpenSSL::CipherError < OpenSSL::OpenSSLError
-#@else
 = class OpenSSL::Cipher::CipherError < OpenSSL::OpenSSLError
-#@end
 共通鍵暗号関連のエラーで発生する例外のクラス。
