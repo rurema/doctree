@@ -1582,16 +1582,24 @@ key, value のペアについてブロックを評価し，真となるペアだ
 
 @see [[m:Array#sort]]
 #@since 1.9.2
---- keep_if {|key, value| ... } -> self
---- select! {|key, value| ... } -> self | nil
 --- keep_if -> Enumerator
+--- keep_if {|key, value| ... } -> self
 --- select! -> Enumerator
+--- select! {|key, value| ... } -> self | nil
+#@since 2.6.0
+--- filter! -> Enumerator
+--- filter! {|key, value| ... }   -> self | nil
+#@end
 
 キーと値を引数としてブロックを評価した結果が真であるような要素を self
 に残します。
 
 keep_if は常に self を返します。
+#@since 2.6.0
+filter! と select! はオブジェクトが変更された場合に self を、
+#@else
 select! はオブジェクトが変更された場合に self を、
+#@end
 されていない場合に nil を返します。
 
 ブロックが与えられなかった場合は、自身と keep_if から生成した
