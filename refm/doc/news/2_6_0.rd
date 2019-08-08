@@ -14,9 +14,9 @@
 
   * Refinements がブロック引数にも反映されるようになりました。  [[feature:14223]]
 
-  * Refinements が [[m:Kernel#public_send]] にも反映されるようになりました。  [[feature:15326]]
+  * Refinements が [[m:Object#public_send]] にも反映されるようになりました。  [[feature:15326]]
 
-  * Refinements が [[m:Kernel#respond_to?]] にも反映されるようになりました。  [[feature:15327]]
+  * Refinements が [[m:Object#respond_to?]] にも反映されるようになりました。  [[feature:15327]]
 
   * rescue 節なしの else 節がシンタックスエラーを発生するようになりました。 [実験的] [[feature:14606]]
 
@@ -57,7 +57,7 @@
       * [[m:Binding#source_location]] 追加 [[feature:14230]]
         * bindingのソースコード上の位置を __FILE__ と __LINE__ の二要素配列として返します。
           従来でも eval("[__FILE__, __LINE__]", binding) とすることでこれらの情報は得られましたが、
-          将来的に [[m:Kernel#eval]] は binding のソースコード行を無視する変更を予定しているため [[bug:4352]]、
+          将来的に [[m:Kernel.#eval]] は binding のソースコード行を無視する変更を予定しているため [[bug:4352]]、
           この新しいメソッドを用いることが今後は推奨されます。
 
   * [[c:Dir]]
@@ -113,15 +113,15 @@
 
   * [[c:Kernel]]
     * 別名
-      * [[m:Kernel#then]] が [[m:Kernel#yield_self]] の別名として追加されました。 [[feature:14594]]
+      * [[m:Object#then]] が [[m:Object#yield_self]] の別名として追加されました。 [[feature:14594]]
     * 新規オプション
       * [[m:Kernel.#Complex]], [[m:Kernel.#Float]], [[m:Kernel.#Integer]],
         [[m:Kernel.#Rational]] にエラー処理方法を指定する :exception オプションが
         追加されました。 [[feature:12732]]
-      * [[m:Kernel#system]] に失敗時に例外を発生する :exception オプションが
+      * [[m:Kernel.#system]] に失敗時に例外を発生する :exception オプションが
         追加されました。 [[feature:14386]]
     * 非互換な変更
-      * [[m:Kernel#system]] と [[m:Kernel#exec]] が非標準にファイルディスクリプタを閉じなくなりました。
+      * [[m:Kernel.#system]] と [[m:Kernel.#exec]] が非標準にファイルディスクリプタを閉じなくなりました。
         (:close_others オプションのデフォルトが false になりまりました。
         しかし、引き続き Ruby 自体が作成するディスクリプタに FD_CLOEXEC フラグは設定されます。) [[misc:14907]]
 
@@ -249,7 +249,7 @@
       * 2.0.0 は Ruby 2.6.0 のリリース後すぐにリリースされる予定です。
         このバージョンは [[m:BigDecimal.new]] メソッドを含みません。
 
-  * [[c:Bundler]]
+  * Bundler
     * Bundler が標準添付ライブラリに追加されました。 [[feature:12733]]
     * 最新安定版の 1.17.2 が使われます。
 
@@ -283,7 +283,7 @@
 
   * [[c:FileUtils]]
     * 新規メソッド
-      * [[m:FileUtils#cp_lr]] [[feature:4189]]
+      * [[m:FileUtils.#cp_lr]] [[feature:4189]]
 
   * [[c:Matrix]]
     * 新規メソッド
