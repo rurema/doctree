@@ -194,3 +194,18 @@ zip ファイル用のファイル名を返します。
 
 @param version パッケージのバージョンを指定します。
                ':noversion' というシンボルを指定するとバージョン情報をセットしません。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir = "./pkg"
+  package_task.package_files.include("lib/**/*")
+end
+
+# rake -T を実行すると以下になる
+# => rake clobber_package  # Remove package products
+#    rake package          # Build all the packages
+#    rake repackage        # Force a rebuild of the package files
+#@end
