@@ -698,9 +698,6 @@ t.strftime("%G-W%V-%uT%R%:z")  # => 2001-W05-6T04:05+09:00    Week date and loca
 --- succ    -> Time
 
 self に 1 秒足した Time オブジェクトを生成して返します。
-#@until 1.8.6
-タイムゾーンは地方時になります。
-#@end
 
 #@since 1.9.2
 このメソッドは obsolete です。 self + 1 を代わりに使用してください。

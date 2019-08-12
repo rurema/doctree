@@ -520,14 +520,3 @@ UTF32 を表します。
 この定数は使うべきではありません。
 #@end
 #@end
-
-#@since 1.8.2
-#@until 1.8.5
---- Iconv_EUC_JP -> Regexp
-この定数は使うべきではありません。
---- Iconv_Shift_JIS -> Regexp
-この定数は使うべきではありません。
---- Iconv_UTF8 -> Regexp
-この定数は使うべきではありません。
-#@end
-#@end

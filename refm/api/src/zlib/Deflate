@@ -75,12 +75,6 @@ string を圧縮します。level の有効な値は
 
 == Instance Methods
 
-#@until 1.8.3
---- clone -> self
-
-圧縮ストリームを複製します。
-
-#@end
 
 --- deflate(string, flush = Zlib::NO_FLUSH) -> String
 
