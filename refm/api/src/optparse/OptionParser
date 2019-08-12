@@ -593,17 +593,34 @@ puts opts.help
 
 @param block [[m:OptionParser#on]] と同様です。
 
-例:
+#@samplecode 例
+require "optparse"
 
-  opts.on_tail("-h", "--help", "Show this message") do
-    puts opts
-    exit
-  end
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
 
-  opts.on_tail("--version", "Show version") do
-    puts OptionParser::Version.join('.')
-    exit
-  end
+puts opts.help
+
+# => Usage: test [options]
+#    -i, --init
+#    -u, --update
+#    -h, --help
+#@end
+
+#@samplecode 例
+opts.on_tail("-h", "--help", "Show this message") do
+  puts opts
+  exit
+end
+
+opts.on_tail("--version", "Show version") do
+  puts OptionParser::Version.join('.')
+  exit
+end
+#@end
 
 @see [[m:OptionParser#on]], [[m:OptionParser#on_head]]
 
