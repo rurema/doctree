@@ -47,6 +47,13 @@ Objectクラスのインスタンスを生成して返します。
 
 self === other である場合に 0 を返します。そうでない場合には nil を返します。
 
+#@samplecode 例
+a = Object.new
+b = Object.new
+a <=> a # => 0
+a <=> b # => nil
+#@end
+
 @see [[m:Object#===]]
 #@end
 
