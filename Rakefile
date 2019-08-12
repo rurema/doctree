@@ -1,8 +1,8 @@
-
 OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0 2.2.0]
 SUPPORTED_VERSIONS = %w[2.3.0 2.4.0 2.5.0]
 UNRELEASED_VERSIONS = %w[2.6.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
+HTML_DIRECTORY_BASE = "/tmp/html/"
 
 def generate_database(version)
   puts "generate database of #{version}"
@@ -24,12 +24,11 @@ def generate_statichtml(version)
   db = "/tmp/db-#{version}"
   generate_database(version) unless File.exist?(db)
   puts "generate static html of #{version}"
-  outputdir = "/tmp/html/#{version}"
   bitclust_gem_path = File.expand_path('../..', `bundle exec gem which bitclust`)
   raise "bitclust gem not found" unless $?.success?
   succeeded = system("bundle", "exec",
                      "bitclust", "--database=#{db}",
-                     "statichtml", "--outputdir=#{outputdir}",
+                     "statichtml", "--outputdir=#{File.join(HTML_DIRECTORY_BASE, version)}",
                      "--templatedir=#{bitclust_gem_path}/data/bitclust/template.offline",
                      "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
                      "--fs-casesensitive",
@@ -39,7 +38,7 @@ def generate_statichtml(version)
   File.symlink(version, "/tmp/html/latest")
 end
 
-task :default => [:generate, :check_prev_commit_format]
+task :default => [:generate, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -89,57 +88,20 @@ end
 desc "Generate static html"
 task :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statichtml:#{version}" }
 
-desc "Check previous commit format"
-task :check_prev_commit_format do
-  change_files = `git diff HEAD^ HEAD --name-only --diff-filter=d`.split
-  ignored_files = %w[
-     refm/api/src/_builtin/BasicObject.private_methods_from_Object
-     refm/api/src/_builtin/BasicObject.public_methods_from_Object
-     refm/api/src/_builtin/Module.alias_method
-     refm/api/src/_builtin/Module.attr
-     refm/api/src/_builtin/Module.define_method
-     refm/api/src/_builtin/Module.include
-     refm/api/src/_builtin/Module.prepend
-     refm/api/src/_builtin/Module.remove_method
-     refm/api/src/_builtin/Module.undef_method
-     refm/api/src/_builtin/constants
-     refm/api/src/_builtin/functions
-     refm/api/src/_builtin/functions_pp
-     refm/api/src/_builtin/specialvars
-     refm/api/src/rake/core_ext
-     refm/api/src/rdoc/RDoc__constants
-     refm/api/src/shell/builtincommands
-     refm/api/src/socket/constants
-     refm/api/src/tkextlib/tkDND/shape.rd
-     refm/api/src/tkextlib/tkDND/tkdnd.rd
-     refm/api/src/tkextlib/tktrans/tktrans.rd
-  ]
+desc "Check documentation format"
+task check_format: [:statichtml] do
   res = []
-  [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS].each do |v|
-    change_files.each do |path|
-      if %r!\Arefm/api/!.match(path) && !ignored_files.include?(path)
-        htmls = []
-        htmls << `bundle exec bitclust htmlfile --ruby=#{v} #{path}`
-        raise "Failed to bitclust htmlfile, ruby: #{v}, path: #{path}" unless $?.success?
-        File.read(path).scan(/^=([^=]\w+)\s*(\S+)\s*(?:<\s*(\S+))?/).each do |t, k, pk|
-          next if /\bre(open|define)\b/.match(t)
-          html = `bundle exec bitclust htmlfile --ruby=#{v} --target=#{k} #{path} 2>&1`
-          next if /\Abitclust: error: no such/.match(html) && !$?.success?
-          raise "Failed to bitclust htmlfile, ruby: #{v}, target: #{k}, path: #{path}" unless $?.success?
-          htmls << html
+  Dir.glob(File.join(HTML_DIRECTORY_BASE, '**/*.html')).each do |path|
+    html = File.read(path)
 
-          a = html.lines.grep(/\[UNKNOWN_META_INFO\]/)
-          if !a.empty?
-            res.push("Found invalid meta info: #{a.first.chomp} in #{v}:#{path}")
-          end
-        end
-        htmls.each do |html|
-          a = html.lines.grep(/<span class="compileerror">/)
-          if !a.empty?
-            res.push("Found invalid format link: #{a.first.chomp} in #{v}:#{path}")
-          end
-        end
-      end
+    a = html.lines.grep(/\[UNKNOWN_META_INFO\]/)
+    if !a.empty?
+      res.push("Found invalid meta info: #{a.first.chomp} in #{path}")
+    end
+
+    a = html.lines.grep(/<span class="compileerror">/)
+    if !a.empty?
+      res.push("Found invalid format link: #{a.first.chomp} in #{path}")
     end
   end
   if res.size > 0
