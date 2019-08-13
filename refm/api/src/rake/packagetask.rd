@@ -48,6 +48,8 @@ require rake/tasklib
 
 @param version パッケージのバージョンを指定します。
 
+#@#noexample
+
 --- name -> String
 
 バージョン情報を含まないパッケージの名前を返します。
