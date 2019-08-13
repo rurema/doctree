@@ -339,11 +339,9 @@ flags には以下のいずれかを指定できます。
 
 PEM 形式の文字列に変換します。
 
-#@since 1.8.1
 --- to_der -> String
 DER 形式のバイナリ列に変換します。
 
-#@end
 
 --- error_string -> String | nil
 検証エラーの理由を表す文字列を返します。
@@ -363,13 +361,11 @@ DER 形式のバイナリ列に変換します。
 @param str 設定するエラー文字列
 @see [[m:OpenSSL::PKCS7#error_string]]
 
-#@since 1.8.3
 --- recipients -> [OpenSSL::PKCS7::RecipientInfo]
 メッセージの送信先の情報を配列で返します。
 
 これは暗号化した場合のみ意味があります。
 
-#@end
 
 == Constants
 
@@ -435,7 +431,6 @@ PKCS#7 autenticatedAttributes(署名した時間などの情報)
 このクラスは 1.8.6 以前との互換性のために存在します。
 
 
-#@since 1.8.3
 = class OpenSSL::PKCS7::RecipientInfo < Object
 PKCS7 の送信先を表すクラスです。
 
@@ -469,7 +464,6 @@ S/MIME 暗号化する場合に指定した送信先を意味します。
 これと [[m:OpenSSL::PKCS7::RecipientInfo#issuer]] で
 送信先を一意に識別します。
 
-#@end
 
 = class OpenSSL::PKCS7::SignerInfo < Object
 alias OpenSSL::PKCS7::Signer
@@ -488,9 +482,7 @@ alias OpenSSL::PKCS7::Signer
 
 == Instance Methods
 
-#@since 1.8.3
 --- issuer -> OpenSSL::X509::Name
-#@end
 --- name -> OpenSSL::X509::Name
 
 署名者の証明書の発行者の名前(DN)を返します。

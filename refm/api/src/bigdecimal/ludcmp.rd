@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 #@since 1.9.2
 require bigdecimal
@@ -72,15 +71,9 @@ LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めて返し�
 
   include LUSolve
 
-#@since 1.8.7
   a = [['1.0', '2.0'], ['3.0', '1.0']].flatten.map(&:to_d)
   # x = ['1.0', -1.0']
   b = ['-1.0', '2.0'].map(&:to_d)
-#@else
-  a = [['1.0', '2.0'], ['3.0', '1.0']].flatten.map{|n| n.to_d}
-  # x = ['1.0', '-1.0']
-  b = ['-1.0', '2.0'].map{|n| n.to_d}
-#@end
 
   zero = '0.0'.to_d
   one = '1.0'.to_d
@@ -90,10 +83,5 @@ LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めて返し�
   # こう書いてもよい
   # x = lusolve(a, b, ludecomp(a, b.size, zero, one), zero)
 
-#@since 1.8.7
   p x.map(&:to_f)  #=> [1.0, -1.0]
-#@else
-  p x.map{|n| n.to_f}  #=> [1.0, -1.0]
-#@end
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk/bgerror
 require tk/bindtag
 require tk/button
@@ -102,4 +101,3 @@ require tk/xim
 
 [[m:TkPlace.#configure]] と同じ
 
-#@end

@@ -105,7 +105,6 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @param klass 削除したいクラスオブジェクトを指定します。
 
-#@since 1.8.5
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
@@ -127,7 +126,6 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @see [[m:OptionParser#getopts]]
 
-#@end
 
 == Instance Methods
 
@@ -906,7 +904,6 @@ p options # => {:a=>true, :b=>true}
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-#@since 1.8.3
 --- default_argv    -> [String]
 
 自身がデフォルトでパースする引数を文字列の配列で返します。
@@ -921,9 +918,7 @@ p options # => {:a=>true, :b=>true}
 
 @param argv デフォルトでパースしたい文字列の配列を指定します。
 
-#@end
 
-#@since 1.8.5
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
@@ -955,4 +950,3 @@ default_argv をパースします。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-#@end

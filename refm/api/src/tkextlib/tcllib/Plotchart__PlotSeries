@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Plotchart::PlotSeries < TkObject
 
@@ -16,4 +15,3 @@
 --- dataconfig(key, value = None)
 #@todo
 
-#@end

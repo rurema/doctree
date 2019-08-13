@@ -11,10 +11,8 @@ include Tk::Scrollable
 --- new(*args) { ... }
 #@todo
 
-#@since 1.8.3
 --- at(x, y)
 #@todo
-#@end
 
 == Instance Methods
 
@@ -24,10 +22,8 @@ include Tk::Scrollable
 --- __destroy_hook__
 #@todo
 
-#@since 1.8.3
 --- at(x, y)
 #@todo
-#@end
 
 --- index(idx)
 #@todo

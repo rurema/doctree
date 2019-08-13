@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::QName
 == class methods
 --- new(namespace = nil, name = nil)
@@ -12,10 +11,8 @@
 --- eql?(rhs)
 #@todo
 
-#@since 1.8.3
 --- dump
 #@todo
-#@end
 
 --- dup_name(name)
 #@todo
@@ -23,10 +20,8 @@
 --- hash
 #@todo
 
-#@since 1.8.2
 --- inspect
 #@todo
-#@end
 
 --- match(rhs)
 #@todo
@@ -42,13 +37,10 @@
 --- parse(str)
 #@todo
 
-#@since 1.8.2
 --- source
 --- source=(source)
 #@todo
-#@end
 
 --- to_s
 #@todo
 
-#@end

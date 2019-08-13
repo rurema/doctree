@@ -86,7 +86,6 @@ self のエンコーディングを shift_jis に変換した文字列を
 
 @see [[m:Kconv.#tosjis]]
 
-#@since 1.8.2
 --- toutf8 -> String
 
 self のエンコーディングを UTF-8 に変換した文字列を
@@ -98,9 +97,7 @@ self のエンコーディングを UTF-8 に変換した文字列を
 を使ってください。
 
 @see [[m:Kconv.#toutf8]]
-#@end
 
-#@since 1.8.2
 --- toutf16 -> String
 
 self のエンコーディングを UTF-16BE に変換した文字列を
@@ -113,7 +110,6 @@ self のエンコーディングを UTF-16BE に変換した文字列を
 
 @see [[m:Kconv.#toutf16]]
 
-#@end
 
 #@since 1.9.1
 --- toutf32 -> String
@@ -144,16 +140,13 @@ self のエンコーディングをロケールエンコーディングに変換
 
 #@end
 
-#@since 1.8.2
 --- iseuc -> bool
 
 self が EUC-JP なバイト列として正当であるかどうかを判定します。
 
 [[m:Kconv.#iseuc]](self) と同じです。
 
-#@end
 
-#@since 1.8.2
 --- issjis -> bool
 
 self が Shift_JIS なバイト列として正当であるかどうかを判定します。
@@ -161,15 +154,12 @@ self が Shift_JIS なバイト列として正当であるかどうかを判定�
 
 [[m:Kconv.#issjis]] と同じです。
 
-#@end
 
-#@since 1.8.2
 --- isutf8 -> bool
 
 self が UTF-8 なバイト列として正当であるかどうかを判定します。
 
 [[m:Kconv.#isutf8]](self) と同じです。
-#@end
 
 #@since 1.9.1
 --- isjis -> bool
@@ -261,18 +251,15 @@ Kconv の定数です。
   * ISO-2022-JP ([[m:Kconv::JIS]])
   * Shift_JIS ([[m:Kconv::SJIS]])
   * EUC-JP ([[m:Kconv::EUC]])
-#@since 1.8.2
   * ASCII ([[m:Kconv::ASCII]])
   * UTF-8 ([[m:Kconv::UTF8]])
   * UTF-16BE ([[m:Kconv::UTF16]])
-#@end
   * 不明 ([[m:Kconv::UNKNOWN]])
   * 以上のどれでもない ([[m:Kconv::BINARY]])
 のいずれかです。
 
 @param str エンコーディング判定対象の文字列
 
-#@since 1.8.2
 #@until 1.9.1
 --- guess_old(str) -> Integer
 文字列 str のエンコーディングを判定します。戻り値は
@@ -289,9 +276,7 @@ Kconv の定数です。
 @param str エンコーディング判定対象の文字列
 @see [[m:Kconv.#guess]]
 #@end
-#@end
 
-#@since 1.8.2
 --- toutf8(str) -> String
 
 文字列 str のエンコーディングを UTF-8 に変換して返します。
@@ -306,9 +291,7 @@ Kconv.kconv(str, Kconv::UTF8)と同じです。
 @param str 変換元の文字列
 @see [[m:String#toutf8]]
 
-#@end
 
-#@since 1.8.2
 --- toutf16(str) -> String
 
 文字列 str のエンコーディングを UTF-16BE に変換して返します。
@@ -323,7 +306,6 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 @param str 変換元の文字列
 @see [[m:String#toutf16]]
 
-#@end
 
 #@since 1.9.1
 --- toutf32(str) -> String
@@ -361,31 +343,25 @@ Kconv.kconv(str, Encoding.locale_charmap)と同じです。
 
 #@end
 
-#@since 1.8.2
 --- iseuc(str) -> bool
 文字列 str が EUC-JP なバイト列として正当であるかどうかを判定します。
 
 @param str 判定対象の文字列
 @see [[m:String#iseuc]]
 
-#@end
 
-#@since 1.8.2
 --- issjis(str) -> bool
 文字列 str が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
 @param str 判定対象の文字列
 @see [[m:String#issjis]]
 
-#@end
 
-#@since 1.8.2
 --- isutf8(str) -> bool
 文字列 str が UTF-8 なバイト列として正当であるかどうかを判定します。
 
 @param str 判定対象の文字列
 @see [[m:String#isutf8]]
-#@end
 
 #@since 1.9.1
 --- isjis(str) -> bool
@@ -436,11 +412,7 @@ cp932ではないことに注意してください。
 --- BINARY -> Encoding
 #@end
 
-#@since 1.8.2
 JIS EUC SJIS 以外を表します。
-#@else
-JIS EUC SJIS UTF8 UTF16 以外を表します。
-#@end
 この値は[[m:Kconv.#guess]]の返り値としてのみ用いられます。
 
 #@until 1.9.1
@@ -461,7 +433,6 @@ JIS EUC SJIS UTF8 UTF16 以外を表します。
 変換されないことを表します。
 出力エンコーディングの指定にのみ用います。
 
-#@since 1.8.2
 #@until 1.9.1
 --- ASCII -> Integer
 #@else
@@ -469,9 +440,7 @@ JIS EUC SJIS UTF8 UTF16 以外を表します。
 #@end
 
 ASCII を表します。
-#@end
 
-#@since 1.8.2
 #@until 1.9.1
 --- UTF8 -> Integer
 #@else
@@ -479,9 +448,7 @@ ASCII を表します。
 #@end
 
 UTF8 を表します。
-#@end
 
-#@since 1.8.2
 #@until 1.9.1
 --- UTF16 -> Integer
 #@else
@@ -489,9 +456,7 @@ UTF8 を表します。
 #@end
 
 UTF16 を表します。
-#@end
 
-#@since 1.8.2
 #@until 1.9.1
 --- UTF32 -> Integer
 #@else
@@ -499,9 +464,7 @@ UTF16 を表します。
 #@end
 
 UTF32 を表します。
-#@end
 
-#@since 1.8.2
 #@until 1.9.1
 --- RegexpShiftjis -> Regexp
 この定数は使うべきではありません。
@@ -512,11 +475,8 @@ UTF32 を表します。
 --- RegexpUtf8 -> Regexp
 この定数は使うべきではありません。
 #@end
-#@end
 
-#@since 1.8.5
 #@until 1.9.1
 --- REVISION -> String
 この定数は使うべきではありません。
-#@end
 #@end

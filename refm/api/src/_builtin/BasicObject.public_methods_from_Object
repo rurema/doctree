@@ -62,7 +62,6 @@ BasicObject を継承して作ったクラス内で instance_eval する場合�
 
 @see [[m:Module#module_eval]], [[m:Kernel.#eval]]
 
-#@since 1.8.7
 --- instance_exec(*args) {|*vars| ... } -> object
 
 与えられたブロックをレシーバのコンテキストで実行します。
@@ -85,5 +84,4 @@ BasicObject を継承して作ったクラス内で instance_eval する場合�
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:BasicObject#instance_eval]]
 #@else
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:Object#instance_eval]]
-#@end
 #@end

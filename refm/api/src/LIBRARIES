@@ -4,23 +4,15 @@ English
 Env
 Win32API
 #@end
-#@since 1.8.1
 abbrev
-#@end
 base64
-#@since 1.8.0
 benchmark
 bigdecimal
 bigdecimal/jacobian
 bigdecimal/ludcmp
-#@since 1.8.2
 bigdecimal/newton
-#@end
 bigdecimal/util
-#@end
-#@since 1.8.1
 bigdecimal/math
-#@end
 #@until 1.9.1
 cgi-lib
 #@end
@@ -43,9 +35,7 @@ complex
 continuation
 coverage
 #@end
-#@since 1.8.0
 csv
-#@end
 #@until 2.1.0
 curses
 #@end
@@ -60,9 +50,7 @@ delegate
 did_you_mean
 #@end
 digest
-#@since 1.8.6
 digest/bubblebabble
-#@end
 #@since 1.9.1
 #@until 2.2.0
 digest/hmac
@@ -73,14 +61,12 @@ digest/rmd160
 digest/sha1
 digest/sha2
 #@until 2.2.0
-#@since 1.8.0
 dl
 dl/import
 dl/types
 #@until 1.9.1
 dl/struct
 dl/win32
-#@end
 #@end
 #@end
 drb
@@ -110,9 +96,7 @@ fiddle/import
 fiddle/types
 #@end
 #@end
-#@since 1.8.0
 fileutils
-#@end
 #@until 1.9.1
 finalize
 #@end
@@ -122,22 +106,18 @@ forwardable
 ftools
 #@end
 gdbm
-#@since 1.8.0
 #@until 1.9.1
 generator
-#@end
 #@end
 getoptlong
 #@until 1.9.1
 getopts
 #@end
-#@since 1.8.0
 #@until 2.2.0
 gserver
 #@end
 #@until 2.0.0
 iconv
-#@end
 #@end
 #@until 1.9.1
 importenv
@@ -146,11 +126,9 @@ importenv
 io/console
 io/console/size
 #@end
-#@since 1.8.0
 io/nonblock
 io/wait
 ipaddr
-#@end
 irb
 irb/cmd/chws
 irb/cmd/help
@@ -215,9 +193,7 @@ json/add/ostruct
 json/editor
 #@end
 kconv
-#@since 1.8.1
 logger
-#@end
 #@until 1.9.1
 mailread
 #@end
@@ -269,34 +245,26 @@ ostruct
 parsearg
 parsedate
 #@end
-#@since 1.8.0
 pathname
-#@end
 #@until 1.9.1
 ping
 #@end
 #@since 2.2.0
 power_assert
 #@end
-#@since 1.8.0
 pp
 prettyprint
-#@end
 #@since 1.9.1
 prime
 #@end
 profile
-#@since 1.8.0
 profiler
-#@end
 pstore
 #@since 1.9.2
 psych
 #@end
 pty
-#@since 1.8.0
 racc/parser
-#@end
 #@since 1.9.1
 rake
 rake/classic_namespace
@@ -314,7 +282,6 @@ rake/loaders/makefile
 rational
 #@end
 rbconfig
-#@since 1.8.1
 rdoc
 rdoc/code_objects
 #@until 1.9.2
@@ -409,14 +376,12 @@ rdoc/token_stream
 #@else
 rdoc/tokenstream
 #@end
-#@end
 #@until 1.9.1
 readbytes
 #@end
 readline
 resolv-replace
 resolv
-#@since 1.8.0
 rexml
 rexml/document
 rexml/parsers/pullparser
@@ -425,20 +390,15 @@ rexml/streamlistener
 rexml/parsers/sax2parser
 rexml/sax2listener
 rexml/parsers/ultralightparser
-#@end
-#@since 1.8.1
 rinda/rinda
 rinda/tuplespace
-#@end
 #@since 1.9.1
 ripper
 ripper/filter
 ripper/lexer
 ripper/sexp
 #@end
-#@since 1.8.3
 rss
-#@end
 #@since 1.9.1
 rubygems
 rubygems/builder
@@ -541,18 +501,12 @@ runit/testresult
 runit/testsuite
 runit/topublic
 #@end
-#@since 1.8.0
 scanf
-#@end
 sdbm
-#@since 1.8.7
 securerandom
-#@end
-#@since 1.8.0
 set
 #@until 1.9.1
 sha1
-#@end
 #@end
 shell
 shell/error
@@ -606,9 +560,7 @@ soap/wsdlDriver
 #@end
 socket
 stringio
-#@since 1.8.0
 strscan
-#@end
 #@until 2.0.0
 syck
 #@since 1.9.2
@@ -629,7 +581,6 @@ syslog
 syslog/logger
 #@end
 tempfile
-#@since 1.8.0
 test/unit
 #@until 2.2.0
 test/unit/assertions
@@ -648,7 +599,6 @@ test/unit/ui/tk/testrunner
 test/unit/util/observable
 #@end
 #@end
-#@end
 thread
 thwait
 time
@@ -656,9 +606,7 @@ timeout
 #@until 2.4.0
 tk
 multi-tk
-#@since 1.8.2
 remote-tk
-#@end
 tcltklib
 tkafter
 tkbgerror
@@ -676,7 +624,6 @@ tkscrollbox
 tktext
 tkvirtevent
 tkwinpkg
-#@since 1.8.2
 tk/after
 tk/autoload
 tk/bgerror
@@ -759,7 +706,6 @@ tkextlib/tcllib/ip_entry
 tkextlib/tcllib/plotchart
 tkextlib/tcllib/style
 tkextlib/tcllib/tkpiechart
-#@since 1.8.4
 tkextlib/tcllib/dialog
 tkextlib/tcllib/getstring
 tkextlib/tcllib/history
@@ -774,12 +720,9 @@ tkextlib/tcllib/tablelist_core
 tkextlib/tcllib/tablelist_tile
 tkextlib/tcllib/tooltip
 tkextlib/tcllib/widget
-#@end
 tkextlib/tclx
 tkextlib/tile
-#@since 1.8.4
 tkextlib/tile/dialog
-#@end
 tkextlib/tile/style
 tkextlib/tile/tbutton
 tkextlib/tile/tcheckbutton
@@ -787,7 +730,6 @@ tkextlib/tile/tlabel
 tkextlib/tile/tmenubutton
 tkextlib/tile/tnotebook
 tkextlib/tile/tradiobutton
-#@since 1.8.3
 tkextlib/tile/tcombobox
 tkextlib/tile/tentry
 tkextlib/tile/tframe
@@ -799,7 +741,6 @@ tkextlib/tile/tscale
 tkextlib/tile/tscrollbar
 tkextlib/tile/tseparator
 tkextlib/tile/tsquare
-#@end
 tkextlib/tkDND
 tkextlib/tkHTML
 tkextlib/tkimg
@@ -809,28 +750,20 @@ tkextlib/treectrl
 tkextlib/vu
 tkextlib/winico
 tkextlib/winico/winico
-#@end
 tkutil
 #@end
-#@since 1.8.0
 tmpdir
-#@end
 tracer
-#@since 1.8.0
 tsort
 #@if("1.9.1" <= version and version < "2.5.0")
 ubygems
 #@end
 un
-#@end
 uri
 weakref
-#@since 1.8.0
 webrick
 webrick/accesslog
-#@since 1.8.1
 webrick/cgi
-#@end
 webrick/compat
 webrick/config
 webrick/cookie
@@ -860,14 +793,10 @@ webrick/httputils
 webrick/httpversion
 webrick/log
 webrick/server
-#@since 1.8.1
 webrick/ssl
-#@end
 webrick/utils
 win32/registry
-#@since 1.8.0
 win32/resolv
-#@end
 win32ole
 #@if("1.8.1" <= version and version < "1.9.1")
 wsdl
@@ -902,60 +831,40 @@ wsdl/xmlSchema/data
 wsdl/xmlSchema/element
 wsdl/xmlSchema/enumeration
 wsdl/xmlSchema/import
-#@since 1.8.3
 wsdl/xmlSchema/importer
 wsdl/xmlSchema/include
 wsdl/xmlSchema/length
-#@end
 wsdl/xmlSchema/parser
 wsdl/xmlSchema/pattern
 wsdl/xmlSchema/schema
 wsdl/xmlSchema/sequence
-#@since 1.8.2
 wsdl/xmlSchema/simpleContent
-#@end
-#@since 1.8.3
 wsdl/xmlSchema/simpleExtension
-#@end
-#@since 1.8.2
 wsdl/xmlSchema/simpleRestriction
 wsdl/xmlSchema/simpleType
-#@end
 wsdl/xmlSchema/unique
-#@since 1.8.3
 wsdl/xmlSchema/xsd2ruby
-#@end
 wsdl/soap/address
 wsdl/soap/binding
 wsdl/soap/body
-#@since 1.8.2
 wsdl/soap/cgiStubCreator
 wsdl/soap/classDefCreator
 wsdl/soap/classDefCreatorSupport
 wsdl/soap/clientSkeltonCreator
-#@end
 wsdl/soap/complexType
 wsdl/soap/data
 wsdl/soap/definitions
-#@since 1.8.2
 wsdl/soap/driverCreator
 wsdl/soap/element
-#@end
 wsdl/soap/fault
 wsdl/soap/header
 wsdl/soap/headerfault
-#@since 1.8.2
 wsdl/soap/mappingRegistryCreator
 wsdl/soap/methodDefCreator
-#@end
 wsdl/soap/operation
-#@since 1.8.2
 wsdl/soap/servantSkeltonCreator
 wsdl/soap/standaloneServerStubCreator
-#@end
-#@since 1.8.3
 wsdl/soap/wsdl2ruby
-#@end
 #@end
 xmlrpc
 #@until 2.4.0
@@ -988,4 +897,3 @@ yaml/yamlnode
 yaml/ypath
 #@end
 zlib
-#@end

@@ -325,7 +325,6 @@ GNUの慣習にあわせて
 ====[a:argv] ARGV の機能
 optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
 が加わります。以下の書き方ができるようになります。
-#@since 1.8.5
 [[m:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
   # sample.rb の内容
   require 'optparse'
@@ -335,30 +334,6 @@ optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
   $ ruby sample.rb -a 1 --foo --bar xxx
   {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
 のようになります。
-#@else
-        require 'optparse'
-        ARGV.options {|opt|
-
-            opt.on('-a') {|v| p v }
-            opt.on('-b') {|v| p v }
-
-            opt.parse!
-        }
-        p ARGV
-
-        ruby sample.rb -a foo bar -b baz
-        # => true
-             true
-             ["foo", "bar", "baz"]
-
-OptionParser.new にブロックを渡した場合に比べて、
- * ARGV.options メソッドのブロックでオプション定義を記述する。
- * opt.parse! の引数が ARGV 固定になる。
-といった違いがあります。
-
-特に利点があるわけではありませんが、optparse 添付のサンプルはこの書
-き方になっています。
-#@end
 
 ====[a:hyphen_start_file] '-'で始まるファイル名
 

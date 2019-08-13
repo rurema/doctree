@@ -1,4 +1,3 @@
-#@since 1.8.3
 require wsdl/xmlSchema/importer
 require wsdl/parser
 
@@ -21,4 +20,3 @@ require wsdl/parser
 
 --- parse(content, location, originalroot)
 #@todo
-#@end

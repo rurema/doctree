@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::EncodingStyle::LiteralHandler < SOAP::EncodingStyle::Handler
 
@@ -24,10 +23,8 @@
 --- decode_text(ns, text)
 #@todo
 
-#@since 1.8.2
 --- decode_attrs(ns, attrs)
 #@todo
-#@end
 
 --- decode_prologue
 #@todo
@@ -43,4 +40,3 @@
 --- Namespace
 #@todo
 
-#@end

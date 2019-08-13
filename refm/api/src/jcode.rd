@@ -135,7 +135,6 @@ self に多バイト文字が最初に現れる位置を返します。
 
 == Methods
 
-#@since 1.8.7
 --- each_char -> [String]
 --- each_char {|char| ... } -> String
 文字列中の各文字に対してブロックを呼びだします。
@@ -153,7 +152,6 @@ self に多バイト文字が最初に現れる位置を返します。
   zstr.each_char do |x|
     print "+#{x}+"
   end                     # => +Ａ++Ｂ++Ｃ++Ｄ++Ｅ++Ｆ+
-#@end
 
 --- chop -> String
 

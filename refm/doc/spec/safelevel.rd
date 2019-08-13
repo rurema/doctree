@@ -196,9 +196,7 @@ CGI等でユーザからの入力を処理するのに適しています。
      (なお out of memory でも fatal にならない)
    * 他のスレッドに影響が出る [[c:Thread]] クラスの操作および他のスレッドの [[m:Thread#[] ]]
    * [[m:ObjectSpace.#_id2ref]]
-#@since 1.8.0
    * [[m:ObjectSpace.#each_object]]
-#@end
    * 環境変数の変更
    * [[m:Kernel.#srand]]
 #@end

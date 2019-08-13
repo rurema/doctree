@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require xsd/qname
 require soap/baseData
 
@@ -61,11 +60,9 @@ include SOAP::SOAPCompoundtype
 
 == Instance Methods
 
-#@since 1.8.2
 --- element
 --- element=(value)
 #@todo
-#@end
 #@if (version == "1.8.1")
 --- content
 --- content=(value)
@@ -83,9 +80,7 @@ include SOAP::SOAPCompoundtype
 --- encode(generator, ns, attrs = {})
 #@todo
 
-#@since 1.8.2
 = class SOAP::SOAPHeader < SOAP::SOAPStruct
-#@end
 #@if (version == "1.8.1")
 = class SOAP::SOAPHeader < SOAP::SOAPArray
 #@end
@@ -101,16 +96,12 @@ include SOAP::SOAPEnvelopeElement
 --- encode(generator, ns, attrs = {})
 #@todo
 
-#@since 1.8.2
 --- add(name, value)
 #@todo
-#@end
 
 --- length
-#@since 1.8.2
 --- size
 #@todo
-#@end
 
 = class SOAP::SOAPEnvelope < XSD::NSDBase
 include SOAP::SOAPEnvelopeElement
@@ -131,17 +122,12 @@ include SOAP::SOAPCompoundtype
 --- body=(body)
 #@todo
 
-#@since 1.8.2
 --- external_content
 #@todo
-#@end
 
 --- encode(generator, ns, attrs = {})
 #@todo
 
-#@since 1.8.2
 --- to_ary
 #@todo
-#@end
 
-#@end

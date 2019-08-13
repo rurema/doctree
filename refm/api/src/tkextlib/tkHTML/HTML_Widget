@@ -1,15 +1,12 @@
-#@since 1.8.2
 
 = class Tk::HTML_Widget < TkWindow
 #@# TODO: #7000 が解決したら適切に分岐を行う。
 include Tk::Scrollable
 
 == Class Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 
 --- package_version
 #@todo
@@ -243,4 +240,3 @@ include Tk::Scrollable
 --- dom_tree(idx, val)
 #@todo
 
-#@end

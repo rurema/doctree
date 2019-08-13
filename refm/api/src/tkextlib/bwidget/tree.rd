@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/canvas
@@ -199,4 +198,3 @@ end
 #@include(tree/Tree__Node)
 #@include(tree/Tree__Event_for_Items)
 
-#@end

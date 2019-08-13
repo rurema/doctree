@@ -1,7 +1,5 @@
-#@since 1.8.2
 = class XSD::XSDUnsignedInt < XSD::XSDUnsignedLong
 == class methods
 --- new(value = nil)
 #@todo
 
-#@end

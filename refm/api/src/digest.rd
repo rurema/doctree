@@ -1,11 +1,9 @@
 category Text
 
-#@since 1.8.6
 require digest/md5
 require digest/rmd160
 require digest/sha1
 require digest/sha2
-#@end
 
 メッセージダイジェストライブラリです。
 
@@ -20,7 +18,6 @@ require digest/sha2
 
 = module Digest
 
-#@since 1.8.6
 == Module Functions
 
 --- hexencode(string) -> String
@@ -37,7 +34,6 @@ ASCIIコードを使って16進数の列を示す文字列にエンコードし�
 
 @see [[m:Digest::Base#hexdigest]]
 
-#@end
 
 #@if(version >= "1.8.6")
 = class Digest::Class < Object
@@ -107,7 +103,6 @@ new(str).digest と等価です。
 16進数の列を示す文字列にエンコードして返します。
 new(str).hexdigest と等価です。
 
-#@since 1.8.6
 --- file(path) -> object
 
 新しいダイジェストオブジェクトを生成し、
@@ -123,7 +118,6 @@ new(str).hexdigest と等価です。
         digest = Digest::SHA256.file("X11R6.8.2-src.tar.bz2")
         digest.hexdigest
         # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
-#@end
 
 == Instance Methods
 
@@ -149,7 +143,6 @@ SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイ�
 
 @see [[m:Digest::Base#hexdigest]]
 
-#@since 1.8.6
 --- digest! -> String
 
 updateや<<によって追加した文字列に対するハッシュ値を文字列で返します。
@@ -171,7 +164,6 @@ SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイ�
 
 @see [[m:Digest::Base#digest]]、[[m:Digest::Base#hexdigest!]]
 
-#@end
 
 --- hexdigest -> String
 --- to_s -> String
@@ -199,7 +191,6 @@ Rubyで書くと以下と同じです。
 
 @see [[m:Digest::Base#digest]]
 
-#@since 1.8.6
 --- hexdigest! -> String
 
 updateや<<によって追加した文字列に対するハッシュ値を、
@@ -219,7 +210,6 @@ ASCIIコードを使って16進数の列を示す文字列にエンコードし�
 
 @see [[m:Digest::Base#hexdigest]]、[[m:Digest::Base#digest!]]
 
-#@end
 
 --- update(str) -> self
 --- <<(str)     -> self
@@ -282,7 +272,6 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         digest.update("ruby")
         p digest == "58e53d1324eef6265fdb97b08ed9aadf" # => true
 
-#@since 1.8.6
 --- file(path) -> self
 
 ファイル名 file で指定したファイルの内容を読み込んでダイジェストを更新し、
@@ -326,7 +315,6 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
   require 'digest'
   ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().digest_length } # => [16, 20, 64]
 
-#@end
 
 --- reset -> self
 
@@ -336,7 +324,6 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
 それぞれの実装に適したものにオーバーライドされます。
 
-#@since 1.8.6
 = reopen Kernel
 == Private Instance Methods
 --- Digest(name) -> object
@@ -360,4 +347,3 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
     p Digest(a) # => Digest::MD5, Digest::SHA1, Digest::SHA512
   end
 
-#@end

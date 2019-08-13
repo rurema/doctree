@@ -57,11 +57,7 @@ category File
 
 @param dir ディレクトリを指定します。
 
-#@since 1.8.3
 @param options :verbose が指定できます。
-#@else
-@param options :noop, :verbose が指定できます。
-#@end
                [[ref:c:FileUtils#options]]
 
 例:
@@ -128,7 +124,6 @@ symbolic mode では以下の指定を 操作対象 演算子 権限 の順番�
  * "t": sticky ビット
 #@end
 
-#@since 1.8.3
 --- chmod_R(mode, list, options = {}) -> Array
 
 ファイル list のパーミッションを再帰的に mode へ変更します。
@@ -153,9 +148,7 @@ symbolic mode では以下の指定を 操作対象 演算子 権限 の順番�
   require 'fileutils'
   FileUtils.chmod_R(0700, '/tmp/removing')
 
-#@end
 
-#@since 1.8.3
 --- chown(user, group, list, options = {}) -> Array
 
 ファイル list の所有ユーザと所有グループを user と group に変更します。
@@ -180,9 +173,7 @@ user, group に nil または -1 を渡すとその項目は変更しません�
   require 'fileutils'
   FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
-#@end
 
-#@since 1.8.3
 --- chown_R(user, group, list, options = {}) -> Array
 
 list 以下のファイルの所有ユーザと所有グループを
@@ -211,7 +202,6 @@ user, group に nil または -1 を渡すとその項目は変更しません�
   require 'fileutils'
   FileUtils.chown_R 'www', 'www', '/var/www/htdocs'
   FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', :verbose => true
-#@end
 
 --- cmp(file_a, file_b)          -> bool
 --- compare_file(file_a, file_b) -> bool
@@ -237,7 +227,6 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 
 @param io_b [[c:IO]] オブジェクト。
 
-#@since 1.8.3
 --- copy_entry(src, dest, preserve = false, dereference_root = false) -> ()
 
 ファイル src を dest にコピーします。
@@ -255,9 +244,7 @@ src がディレクトリの場合はその中身を再帰的にコピーしま�
 @param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
                         内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
-#@end
 
-#@since 1.8.3
 --- copy_file(src, dest, preserve = false, dereference_root = true) -> ()
 
 ファイル src の内容を dest にコピーします。
@@ -272,9 +259,7 @@ src がディレクトリの場合はその中身を再帰的にコピーしま�
 @param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
                         内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
-#@end
 
-#@since 1.8.3
 --- copy_stream(src, dest) -> ()
 
 src を dest にコピーします。
@@ -284,7 +269,6 @@ src には read メソッド、dest には write メソッドが必要です。
 
 @param dest write メソッドを持つオブジェクト。
 
-#@end
 
 --- cp(src, dest, options = {})   -> ()
 --- copy(src, dest, options = {}) -> ()
@@ -676,7 +660,6 @@ rm_r(list, {:force => true}) と同じです。
   # 実際にはディレクトリの削除は行わずにメッセージ出力のみ
   FileUtils.rmdir('somedir', {:verbose => true, :noop => true})
 
-#@since 1.8.3
 --- remove_entry(path, force = false) -> ()
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
@@ -695,9 +678,7 @@ rm_r(list, {:force => true}) と同じです。
 
 @see [[m:FileUtils.#remove_entry_secure]]
 
-#@end
 
-#@since 1.8.3
 --- remove_entry_secure(path, force = false) -> ()
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
@@ -728,7 +709,6 @@ TOCTTOU (time-of-check to time-of-use)脆弱性が存在します。
 
 @param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
-#@end
 
 --- remove_file(path, force = false) -> ()
 
@@ -784,7 +764,6 @@ newer が、older_list に含まれるすべてのファイルより新しいと
   require 'fileutils'
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
-#@since 1.8.3
 == Singleton Methods
 --- collect_method(opt) -> Array
 
@@ -839,7 +818,6 @@ mid というメソッドが opt というオプションを持つ場合、真�
 #@# 
 #@# @see [[m:Module#module_function]], [[m:Module#private_class_method]]
 
-#@end
 == Constants
 
 --- METHODS -> Array

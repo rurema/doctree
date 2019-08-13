@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 = module TkComm
 extend TkUtil
@@ -13,14 +12,12 @@ include TkEvent
 
 #@end
 
-#@since 1.8.2
 --- GET_CONFIGINFO_AS_ARRAY
 #@todo
 
 --- GET_CONFIGINFOwoRES_AS_ARRAY
 #@todo
 
-#@end
 
 #@if(version <= "1.8.1")
 --- None
@@ -28,11 +25,9 @@ include TkEvent
 
 #@end
 
-#@since 1.8.2
 --- TkExtlibAutoloadModule
 #@todo
 
-#@end
 
 --- Tk_CMDTBL
 #@todo
@@ -43,18 +38,15 @@ include TkEvent
 --- Tk_WINDOWS
 #@todo
 
-#@since 1.8.2
 --- USE_TCLs_LIST_FUNCTIONS
 #@todo
 
-#@end
 
 --- WidgetClassNames
 #@todo
 
 == Class Methods
 
-#@since 1.8.2
 --- _at(x, y = nil)
 #@todo
 
@@ -64,16 +56,13 @@ include TkEvent
 --- _callback_entry_class?(klass)
 #@todo
 
-#@end
 
 --- _curr_cmd_id
 #@todo
 
-#@since 1.8.2
 --- _fromUTF8(str, encoding = nil)
 #@todo
 
-#@end
 
 --- _genobj_for_tkwidget(path)
 #@todo
@@ -87,11 +76,9 @@ include TkEvent
 --- _next_cmd_id
 #@todo
 
-#@since 1.8.2
 --- _toUTF8(str, encoding = nil)
 #@todo
 
-#@end
 
 --- array2tk_list(ary, enc = nil)
 #@todo
@@ -103,11 +90,9 @@ include TkEvent
 
 #@end
 
-#@since 1.8.2
 --- image_obj(val)
 #@todo
 
-#@end
 
 --- install_cmd(cmd)
 #@todo
@@ -122,14 +107,12 @@ include TkEvent
 #@todo
 
 
-#@since 1.8.2
 --- tk_tcl2ruby(val, enc_mode = false, listobj = true)
 #@todo
 
 --- uninstall_cmd(id)
 #@todo
 
-#@end
 
 --- window(val)
 #@todo
@@ -170,11 +153,9 @@ include TkEvent
 
 #@end
 
-#@since 1.8.2
 --- subst
 #@todo
 
-#@end
 
 #@if(version <= "1.8.1")
 --- update
@@ -182,4 +163,3 @@ include TkEvent
 
 #@end
 
-#@end

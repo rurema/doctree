@@ -357,7 +357,6 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 @param port 接続するポートを整数で指定します。
 @see [[m:Net::HTTP#get]]
 
-#@since 1.8.3
 --- post_form(uri, params) -> Net::HTTPResponse
 [[c:URI]] で指定した対象に フォームのデータを HTTP で 
 POST します。
@@ -368,7 +367,6 @@ POST します。
 @param uri POST する対象を [[c:URI]] で指定します。
 @param params POST するデータです。
 
-#@end
 
 --- proxy_address -> String|nil
 自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
@@ -440,7 +438,6 @@ address が nil のときは Net::HTTP クラスをそのまま返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
-#@since 1.8.3
 --- http_default_port -> Integer
 --- default_port -> Integer
 HTTP のデフォルトポート (80) を返します。
@@ -448,7 +445,6 @@ HTTP のデフォルトポート (80) を返します。
 --- https_default_port -> Integer
 HTTPS のデフォルトポート (443) を返します。
 
-#@end
 
 #@until 1.9.3
 --- version_1_1 -> ()
@@ -1248,7 +1244,6 @@ POST/PUT の時は data も与えられます
 #@# --- inspect
 #@# 
 
-#@since 1.8.3
 --- copy(path, initheader = nil) -> Net::HTTPResponse
 サーバの path に COPY リクエストを
 ヘッダを initheader として送ります。
@@ -1419,7 +1414,6 @@ SSLを利用して接続する場合に真を返します。
 
 @see [[lib:net/https]], [[lib:openssl]] 
 
-#@end
 
 #@since 1.9.2
 --- use_ssl=(bool)
@@ -1650,19 +1644,15 @@ key ヘッダフィールドを返します。
 たとえばキー 'content-length' に対しては  '2048'
 のような文字列が得られます。キーが存在しなければ nil を返します。
 
-#@since 1.8.3
 一種類のヘッダフィールドが一つのヘッダの中に複数存在する
 場合にはそれを全て ", " で連結した文字列を返します。
-#@end
 key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
 
 @see [[m:Net::HTTPHeader#[]=]],
-#@since 1.8.3
      [[m:Net::HTTPHeader#add_field]],
      [[m:Net::HTTPHeader#get_fields]]
-#@end
 
 --- []=(key, val)
 key ヘッダフィールドに文字列 val をセットします。
@@ -1675,12 +1665,9 @@ val に nil を与えるとそのフィールドを削除します。
 @param val keyで指定したフィールドにセットする文字列を与えます。
 
 @see [[m:Net::HTTPHeader#[] ]],
-#@since 1.8.3
      [[m:Net::HTTPHeader#add_field]],
      [[m:Net::HTTPHeader#get_fields]]
-#@end
 
-#@since 1.8.3
 --- add_field(key, val) -> ()
 
 key ヘッダフィールドに val を追加します。
@@ -1715,7 +1702,6 @@ key は大文字小文字を区別しません。
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#add_field]]
 
-#@end
 
 --- fetch(key) -> String
 --- fetch(key, default) -> String
@@ -1729,10 +1715,8 @@ key ヘッダフィールドを返します。
 ない時には、引数 default が与えられていればその値を、ブロッ
 クが与えられていればそのブロックを評価した値を返します。
 
-#@since 1.8.3
 一種類のヘッダフィールドが一つのヘッダの中に複数存在する
 場合にはそれを全て ", " で連結した文字列を返します。
-#@end
 key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。

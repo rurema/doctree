@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/iwidgets
@@ -144,4 +143,3 @@ Alias for #view_moveto
 Alias for #view_scroll
 
 
-#@end
