@@ -63,6 +63,15 @@ require rake/tasklib
 この値が真である場合は gzip した tar ファイル (tgz) を作成します。
 デフォルトは偽です。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar # => false
+end
+#@end
+
 --- need_tar=(flag)
 
 gzip した tar ファイル (tgz) を作成するかどうかを設定します。
