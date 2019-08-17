@@ -611,6 +611,9 @@ puts opts.help
 #@end
 
 #@samplecode 例
+require "optparse"
+
+opts = OptionParser.new
 opts.on_tail("-h", "--help", "Show this message") do
   puts opts
   exit
