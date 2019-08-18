@@ -45,14 +45,12 @@ GC されていれば偽を返します。
 
 @see [[lib:delegate]]
 
-#@since 1.8.6
 --- __setobj__(obj) -> ()
 
 与えられたオブジェクトを自身の参照先としてセットします。
 内部用のメソッドなので使わないでください。
 
 @param obj 任意のオブジェクトを指定します。
-#@end
 
 = class WeakRef::RefError < StandardError
 

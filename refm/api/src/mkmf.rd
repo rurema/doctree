@@ -1073,11 +1073,7 @@ $VERBOSE が真のときは何もしません。
 == Constants
 
 --- CONFIG -> Hash
-#@since 1.8.5
 [[m:RbConfig::MAKEFILE_CONFIG]] と同じです。
-#@else
-[[m:Config::MAKEFILE_CONFIG]] と同じです。
-#@end
 
 #@# --- INSTALL_DIRS
 #@# nodoc

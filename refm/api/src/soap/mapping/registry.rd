@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/baseData
 require soap/mapping/mapping
 require soap/mapping/typeMap
@@ -40,4 +39,3 @@ require soap/mapping/rubytypeFactory
 --- RubyOriginalRegistry
 #@todo
 
-#@end

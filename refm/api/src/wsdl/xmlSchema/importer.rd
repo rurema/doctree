@@ -1,4 +1,3 @@
-#@since 1.8.3
 require soap/httpconfigloader
 require wsdl/xmlSchema/parser
 
@@ -30,4 +29,3 @@ require wsdl/xmlSchema/parser
 #@todo
 
 
-#@end

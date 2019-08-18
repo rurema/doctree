@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/soap
 require soap/processor
 require soap/mapping
@@ -12,4 +11,3 @@ require soap/header/handlerset
 #@include(router/RPC__Router__Operation)
 #@include(router/RPC__Router__ApplicationScopeOperation)
 #@include(router/RPC__Router__RequestScopeOperation)
-#@end

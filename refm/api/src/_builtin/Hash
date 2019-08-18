@@ -127,22 +127,11 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
   alist = keys.zip(vals)   # あるいは alist = [keys,vals].transpose
   p Hash[*alist.flatten]   # => {1=>"a", 2=>"b", 3=>"c"}
 
-#@since 1.8.7
 (4) キーや値が配列の場合
 
   alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
   hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
 
-#@else
-(4) キーや値が配列だと (2) や (3) の方法は使えないので地道に代入するしかない
-
-  h = Hash.new
-  alist = [[1,["a"]], [2,["b"]], [3,["c"]]]
-  alist.each {|k,v|
-    h[k] = v
-  }
-  p h  # => {1=>["a"], 2=>["b"], 3=>["c"]}
-#@end
 #@end
 #@since 1.9.1
 (1) [キー, 値, ...] の配列からハッシュへ
@@ -828,14 +817,12 @@ selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]か[[
 
 @see [[m:Hash#delete_if]],[[m:Hash#delete]],[[m:Enumerable#reject]]
 
-#@since 1.8.7
 #@since 1.9.1
 --- delete_if -> Enumerator
 --- reject!   -> Enumerator
 #@else
 --- delete_if -> Enumerable::Enumerator
 --- reject!   -> Enumerable::Enumerator
-#@end
 #@end
 --- delete_if {|key, value| ... } -> self
 --- reject! {|key, value| ... } -> self|nil
@@ -847,12 +834,10 @@ delete_if は常に self を返します。
 reject! は、要素を削除しなかった場合には nil を返し、
 そうでなければ self を返します。
 
-#@since 1.8.7
 #@until 1.9.1
 ブロックを省略した場合は [[c:Enumerable::Enumerator]] を返します。
 #@else
 ブロックを省略した場合は [[c:Enumerator]] を返します。
-#@end
 #@end
 
   h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
@@ -870,14 +855,12 @@ reject! は、要素を削除しなかった場合には nil を返し、
 
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each      -> Enumerator
 --- each_pair -> Enumerator
 #@else
 --- each      -> Enumerable::Enumerator
 --- each_pair -> Enumerable::Enumerator
-#@end
 #@end
 
 ハッシュのキーと値を引数としてブロックを評価します。
@@ -887,15 +870,11 @@ reject! は、要素を削除しなかった場合には nil を返し、
 #@else
 反復の際の評価順序は不定です。
 #@end
-#@since 1.8.7
 ブロック付きの場合 self を、
 #@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 #@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
-#@end
-#@else
-self を返します。
 #@end
 
 #@if( version >= "1.8.0" and version < "1.9.1" )
@@ -917,7 +896,6 @@ each は キーと値の配列を１引数で、each_pair は別々に２引数�
       [:b, 2]
 #@end
 
-#@since 1.8.7
 each_pair は each のエイリアスです。
 
   {:a=>1, :b=>2}.each {|a| p a}
@@ -937,17 +915,14 @@ each_pair は each のエイリアスです。
 #@else
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
-#@end
 
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_key -> Enumerator
 #@else
 --- each_key -> Enumerable::Enumerator
-#@end
 #@end
 
 ハッシュのキーを引数としてブロックを評価します。
@@ -957,38 +932,30 @@ each_pair は each のエイリアスです。
 #@else
 反復の際の評価順序は不定です。
 #@end
-#@since 1.8.7
 ブロック付きの場合selfを、
 #@since 1.9.1
 無しで呼ばれた場合[[c:Enumerator]]を返します。
 #@else
 無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
 #@end
-#@else
-self を返します。
-#@end
 
   {:a=>1, :b=>2}.each_key {|k| p k}
   #=> :a
       :b
        
-#@since 1.8.7
 #@since 1.9.1
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
 #@else
   p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
 #@end
-#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
 --- each_value {|value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_value -> Enumerator
 #@else
 --- each_value -> Enumerable::Enumerator
-#@end
 #@end
 
 ハッシュの値を引数としてブロックを評価します。
@@ -998,27 +965,21 @@ self を返します。
 #@else
 反復の際の評価順序は不定です。
 #@end
-#@since 1.8.7
 ブロック付きの場合selfを、
 #@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 #@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
 #@end
-#@else
-self を返します。
-#@end
 
   {:a=>1, :b=>2}.each_value {|v| p v}
   #=> 1
       2
   
-#@since 1.8.7
 #@since 1.9.1
   p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
 #@else
   p({:a=>1, :b=>2}.each_value)  #=> #<Enumerable::Enumerator:0xbb19e4>
-#@end
 #@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
@@ -1358,9 +1319,7 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 #@end
 --- ==(other) -> bool
 --- ===(other) -> bool
-#@since 1.8.7
 --- eql?(other) -> bool
-#@end
 
 自身と other が同じ数のキーを保持し、キーが eql? メソッドで比較して全て等しく、
 値が == メソッドで比較して全て等しい場合に真を返します。
@@ -1448,7 +1407,6 @@ other が self のサブセットである場合に真を返します。
 
 --- hash    -> Integer
 
-#@since 1.8.7
 自身が保持するキーと値のハッシュ値を元にして算出した整数を返します。
 自身が保持するキーや値が変化すればこのメソッドが返す値も変化します。
 
@@ -1457,16 +1415,6 @@ other が self のサブセットである場合に真を返します。
   a[1] = :x
   p a.hash     #=> 329543
 
-#@else
-自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
-メソッド hash の返り値は自身が保持するキーや値に影響されません。
-
-  a = {}
-  p a.hash    #=> 538688380
-  a[1] = :a
-  p a.hash    #=> 538688380
-
-#@end
 
 #@since 1.9.1
 

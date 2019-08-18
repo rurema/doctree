@@ -16,29 +16,24 @@
 --- __getip
 #@todo
 
-#@since 1.8.2
 --- _conv_listelement(arg)
 #@todo
 
 --- _create_console
 #@todo
 
-#@end
 --- _eval(str)
 #@todo
 
-#@since 1.8.2
 --- _eval_with_enc(str)
 #@todo
 
 --- _eval_without_enc(str)
 #@todo
 
-#@end
 --- _fromUTF8(str, encoding = nil)
 #@todo
 
-#@since 1.8.2
 --- _get_global_var(var)
 #@todo
 
@@ -51,11 +46,9 @@
 --- _get_variable2(var, idx, flag)
 #@todo
 
-#@end
 --- _invoke(*args)
 #@todo
 
-#@since 1.8.2
 --- _invoke_with_enc(*args)
 #@todo
 
@@ -65,21 +58,15 @@
 --- _ip_id_
 #@todo
 
-#@end
-#@since 1.8.5
 --- _make_menu_embeddable(menu_path)
 #@todo
 
-#@end
-#@since 1.8.2
 --- _merge_tklist(*args)
 #@todo
 
-#@end
 --- _return_value
 #@todo
 
-#@since 1.8.2
 --- _set_global_var(var, value)
 #@todo
 
@@ -95,19 +82,15 @@
 --- _split_tklist(str)
 #@todo
 
-#@end
-#@since 1.8.1
 --- _thread_tkwait(mode, target)
 #@todo
 
 --- _thread_vwait(var)
 #@todo
 
-#@end
 --- _toUTF8(str, encoding = nil)
 #@todo
 
-#@since 1.8.2
 --- _unset_global_var(var)
 #@todo
 
@@ -120,12 +103,9 @@
 --- _unset_variable2(var, idx, flag)
 #@todo
 
-#@end
-#@since 1.8.2
 --- abort(msg = nil)
 #@todo
 
-#@end
 --- add_tk_procs(name, args = nil, body = nil)
 #@todo
 
@@ -144,15 +124,12 @@
 --- alive?
 #@todo
 
-#@since 1.8.2
 --- allow_ruby_exit=(mode)
 #@todo
 
 --- allow_ruby_exit?
 #@todo
 
-#@end
-#@since 1.8.5
 --- bg_eval(*args, &block)
 --- background_eval(*args, &block)
 #@todo
@@ -161,10 +138,8 @@
 --- bg_call(*args)
 --- background_call(*args)
 --- background_eval_proc(*args)
-#@since 1.8.5
 --- thread_eval_proc(*args)
 #@todo
-#@end
 
 --- bg_eval_string(cmd, *eval_args)
 --- bg_eval_str(cmd, *eval_args)
@@ -172,72 +147,55 @@
 --- background_eval_str(cmd, *eval_args)
 #@todo
 
-#@end
-#@since 1.8.2
 --- bgerror(cmd = Proc.new, slave = nil, &block)
 #@todo
 
-#@end
-#@since 1.8.2
 --- cb_entry_class
 #@todo
 
-#@end
 --- create_table
 #@todo
 
 --- def_alias(slave, new_cmd, org_cmd, *args)
 #@todo
 
-#@since 1.8.2
 --- delete
 #@todo
 
-#@end
 --- delete_cmd(slave, cmd)
 #@todo
 
 --- delete_slaves(*args)
 #@todo
 
-#@since 1.8.2
 --- deleted?
 --- deleteed?
 #@todo
 #@# deleteed? は typo
-#@end
 --- do_one_event(flag = TclTkLib::EventFlag::ALL)
 #@todo
 
-#@since 1.8.5
 --- eval(*args, &block)
 #@todo
 
-#@end
 --- eval_proc
-#@since 1.8.1
 --- call
 #@todo
-#@end
 
 --- eval_string(cmd, *eval_args)
-#@since 1.8.5
 --- eval_str(cmd, *eval_args)
 #@todo
-#@end
 
 
 --- exist?(slave = '')
 #@todo
 
-#@since 1.8.2
 --- exit(st = true)
 #@todo
 
 --- exit!(st = false)
 #@todo
 
-#@end
 --- expose_cmd(slave, cmd, aliasname = nil)
 #@todo
 
@@ -250,19 +208,15 @@
 --- get_eventloop_weight
 #@todo
 
-#@since 1.8.2
 --- get_limit(limit_type, slave = '', slot = nil)
 #@todo
 
-#@end
 --- get_no_event_wait
 #@todo
 
-#@since 1.8.3
 --- has_mainwindow?
 #@todo
 
-#@end
 --- hidden_cmds(slave = '')
 #@todo
 
@@ -278,11 +232,9 @@
 --- init_ip_internal
 #@todo
 
-#@since 1.8.2
 --- invalid_namespace?
 #@todo
 
-#@end
 
 --- invoke_hidden(slave, cmd, *args)
 #@todo
@@ -290,36 +242,30 @@
 --- invoke_hidden_on_global(slave, cmd, *args)
 #@todo
 
-#@since 1.8.3
 --- invoke_hidden_on_namespace(slave, ns, cmd, *args)
 #@todo
 
-#@end
 --- ip_name
 #@todo
 
 --- mainloop(check_root = true)
 #@todo
 
-#@since 1.8.1
 --- mainloop_abort_on_exception
 #@todo
 
 --- mainloop_abort_on_exception=(mode)
 #@todo
 
-#@end
 --- mainloop_watchdog(check_root = true)
 #@todo
 
 --- make_safe
 #@todo
 
-#@since 1.8.4
 --- manipulable?
 #@todo
 
-#@end
 --- mark_trusted(slave = '')
 #@todo
 
@@ -347,23 +293,18 @@
 --- path
 #@todo
 
-#@since 1.8.2
 --- recursion_limit(slave = '', limit = Tk::None)
 #@todo
 
-#@end
-#@since 1.8.5
 --- remove_tk_procs(*names)
 #@todo
 
-#@end
 --- restart(app_name = nil, keys = {})
 #@todo
 
 --- safe?
 #@todo
 
-#@since 1.8.2
 --- safe_base?
 #@todo
 
@@ -373,18 +314,15 @@
 --- safe_level=(safe)
 #@todo
 
-#@end
 --- set_eventloop_tick(tick)
 #@todo
 
 --- set_eventloop_weight(loop_max, no_event_tick)
 #@todo
 
-#@since 1.8.2
 --- set_limit(limit_type, slave = '', opts = {})
 #@todo
 
-#@end
 --- set_no_event_wait(tick)
 #@todo
 
@@ -448,7 +386,6 @@
 --- __invoke(*args)
 #@todo
 
-#@since 1.8.5
 --- __pseudo_toplevel
 #@todo
 
@@ -461,46 +398,36 @@
 --- __pseudo_toplevel_evaluable?
 #@todo
 
-#@end
-#@since 1.8.1
 --- _add_new_tables
 #@todo
 
-#@end
 --- _add_tk_procs(name, args, body)
 #@todo
 
-#@since 1.8.2
 --- _conv_listelement(arg)
 #@todo
 
-#@end
 --- _create_slave_object(keys = {})
 #@todo
 
-#@since 1.8.2
 --- _default_delete_hook(slave)
 #@todo
 
 --- _destroy_slaves_of_slaveIP(ip)
 #@todo
 
-#@end
 --- _eval(str)
 #@todo
 
-#@since 1.8.2
 --- _eval_with_enc(str)
 #@todo
 
 --- _eval_without_enc(str)
 #@todo
 
-#@end
 --- _fromUTF8(str, encoding = nil)
 #@todo
 
-#@since 1.8.2
 --- _get_global_var(var)
 #@todo
 
@@ -513,7 +440,6 @@
 --- _get_variable2(varm idx, flag)
 #@todo
 
-#@end
 --- _init_ip_env(script)
 #@todo
 
@@ -523,7 +449,6 @@
 --- _invoke(*args)
 #@todo
 
-#@since 1.8.2
 --- _invoke_with_enc(*args)
 #@todo
 
@@ -533,34 +458,24 @@
 --- _ip_id_
 #@todo
 
-#@end
-#@since 1.8.4
 --- _is_master_of?(tcltkip_obj)
 #@todo
 
-#@end
-#@since 1.8.5
 --- _make_menu_embeddable
 #@todo
 
-#@end
-#@since 1.8.2
 --- _merge_tklist(*args)
 #@todo
 
 --- _receiver_mainloop(check_root)
 #@todo
 
-#@end
-#@since 1.8.5
 --- _remove_tk_procs(*names)
 #@todo
 
-#@end
 --- _return_value
 #@todo
 
-#@since 1.8.2
 --- _set_global_var(var, value)
 #@todo
 
@@ -576,15 +491,12 @@
 --- _split_tklist(str)
 #@todo
 
-#@end
-#@since 1.8.1
 --- _thread_tkwait(mode, target)
 #@todo
 
 --- _thread_vwait(var)
 #@todo
 
-#@end
 --- _tk_cmd_tbl
 #@todo
 
@@ -597,7 +509,6 @@
 --- _toUTF8(str, encoding=nil)
 #@todo
 
-#@since 1.8.2
 --- _unset_global_var(var)
 #@todo
 
@@ -613,7 +524,6 @@
 --- abort(msg = nil)
 #@todo
 
-#@end
 --- alias_delete(slave, cmd_name)
 #@todo
 
@@ -629,50 +539,38 @@
 --- alive?
 #@todo
 
-#@since 1.8.2
 --- allow_ruby_exit=(mode)
 #@todo
 
 --- allow_ruby_exit?
 #@todo
 
-#@end
 
-#@since 1.8.5
 --- bg_eval(*args, &block)
 --- background_eval(*args, &block)
 #@todo
 
 
-#@end
-#@since 1.8.2
 --- bg_eval_proc(*args)
 --- background_eval_proc(*args)
 --- background_call(*args)
 --- bg_call(*args)
-#@since 1.8.3
 --- thread_eval_proc(*args)
 #@todo
-#@end
 
 
-#@end
-#@since 1.8.2
 --- bg_eval_string(cmd, *eval_args)
 --- bg_eval_str(cmd, *eval_args)
 --- background_eval_string(cmd, *eval_args)
 --- background_eval_str(cmd, *eval_args)
 #@todo
 
-#@end
 --- call(*args)
 #@todo
 
-#@since 1.8.3
 --- cb_error(e)
 #@todo
 
-#@end
 --- cb_eval(cmd, *args)
 #@todo
 
@@ -697,7 +595,6 @@
 --- encoding=(enc)
 #@todo
 
-#@since 1.8.2
 --- encoding_convertfrom(str, enc = Tk::None)
 --- encoding_convert_from(str, enc = Tk::None)
 #@todo
@@ -706,53 +603,40 @@
 --- encoding_convert_to(str, enc = Tk::None)
 #@todo
 
-#@end
-#@since 1.8.5
 --- eval(*args, &block)
 #@todo
 
-#@end
 --- eval_callback(*args)
 #@todo
 
 --- eval_proc(*args)
 #@todo
 
-#@since 1.8.1
 --- eval_string(cmd, *eval_args)
-#@since 1.8.2
 --- eval_str(cmd, *eval_args)
 #@todo
-#@end
 
-#@end
 --- exist?(slave = '')
 #@todo
 
-#@since 1.8.2
 --- exit(st = true)
 #@todo
 
 --- exit!(st = false)
 #@todo
 
-#@end
 --- expose_cmd(slave, cmd, aliasname = nil)
 #@todo
 
-#@since 1.8.2
 --- get_bgerror_handler(slave = '')
 #@todo
 
 --- get_limit(limit_type, slave = '', slot = nil)
 #@todo
 
-#@end
-#@since 1.8.3
 --- has_mainwindow?
 #@todo
 
-#@end
 --- hidden_cmds(slave = '')
 #@todo
 
@@ -762,22 +646,18 @@
 --- inspect
 #@todo
 
-#@since 1.8.2
 --- invalid_namespace?
 #@todo
 
-#@end
 --- invoke_hidden(slave, cmd, *args)
 #@todo
 
 --- invoke_hidden_on_global(slave, cmd, *args)
 #@todo
 
-#@since 1.8.3
 --- invoke_hidden_on_namespace(slave, ns, cmd, *args)
 #@todo
 
-#@end
 --- ip_name
 #@todo
 
@@ -787,11 +667,9 @@
 --- make_safe
 #@todo
 
-#@since 1.8.4
 --- manipulable?
 #@todo
 
-#@end
 --- mark_trusted(slave = '')
 #@todo
 
@@ -801,23 +679,18 @@
 --- path
 #@todo
 
-#@since 1.8.2
 --- recursion_limit(slave = '', limit = Tk::None)
 #@todo
 
-#@end
 --- restart(*args)
 #@todo
 
-#@since 1.8.2
 --- running_mainloop?
 #@todo
 
-#@end
 --- safe?
 #@todo
 
-#@since 1.8.2
 --- safe_base?
 #@todo
 
@@ -848,17 +721,12 @@
 --- set_bgerror_handler(cmd = Proc.new, slave = nil, &block)
 #@todo
 
-#@end
-#@since 1.8.3
 --- set_cb_error(cmd = Proc.new)
 #@todo
 
-#@end
-#@since 1.8.2
 --- set_limit(limit_type, slave = '', opts = {})
 #@todo
 
-#@end
 --- set_safe_level(safe)
 #@todo
 

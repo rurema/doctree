@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = module Tk::TkDND::DND
 
@@ -28,4 +27,3 @@
 --- dnd_drag(keys = nil)
 #@todo
 
-#@end

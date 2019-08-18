@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 
 = module TkComposite
@@ -35,4 +34,3 @@ include Tk
 #@todo
 
 
-#@end

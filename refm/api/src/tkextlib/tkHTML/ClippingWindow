@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class Tk::HTML_Widget::ClippingWindow < TkWindow
 
@@ -6,4 +5,3 @@
 --- new(parent, keys = {})
 #@todo
 
-#@end

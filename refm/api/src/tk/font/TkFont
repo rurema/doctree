@@ -6,7 +6,6 @@ extend TkFont::CoreMethods
 
 == Class Methods
 
-#@since 1.8.3
 --- actual(fnt, option = nil)
 #@todo
 
@@ -33,7 +32,6 @@ extend TkFont::CoreMethods
 
 --- metrics_displayof(fnt, win, option = nil)
 #@todo
-#@end
 
 --- families(win = nil)
 #@todo
@@ -61,10 +59,8 @@ extend TkFont::CoreMethods
 
 == Instance Methods
 
-#@since 1.8.3
 --- inspect
 #@todo
-#@end
 
 --- method_missing(id, *args)
 #@todo
@@ -82,36 +78,24 @@ extend TkFont::CoreMethods
 #@todo
 
 --- font
-#@since 1.8.1
 --- font_id
 #@todo
-#@end
 
-#@since 1.8.1
 --- latin_font_id
 #@todo
-#@end
 
 --- latin_font
-#@since 1.8.1
 --- latinfont
-#@end
 --- ascii_font
-#@since 1.8.1
 --- asciifont
 #@todo
-#@end
 
-#@since 1.8.1
 --- kanji_font_id
 #@todo
-#@end
 
 --- kanji_font
-#@since 1.8.1
 --- kanjifont
 #@todo
-#@end
 
 --- actual(option = nil)
 #@todo
@@ -145,10 +129,8 @@ extend TkFont::CoreMethods
 --- configinfo(slot = nil)
 #@todo
 
-#@since 1.8.2
 --- current_configinfo(slot = nil)
 #@todo
-#@end
 
 --- delete
 #@todo
@@ -205,14 +187,12 @@ extend TkFont::CoreMethods
 --- reset_pointadjust
 #@todo
 
-#@since 1.8.1
 #@if (version <= "1.8.3")
 --- clone
 #@todo
 
 --- dup
 #@todo
-#@end
 #@end
 
 
@@ -230,13 +210,11 @@ extend TkFont::CoreMethods
 --- Tk_FontUseTBL
 #@todo
 
-#@since 1.8.2
 --- OptionType
 #@todo
 
 --- MetricType
 #@todo
-#@end
 
 --- DEFAULT_LATIN_FONT_NAME
 #@todo

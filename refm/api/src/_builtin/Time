@@ -331,12 +331,7 @@ self より other 秒だけ後の時刻を返します。
 self と other の時刻を比較します。self の方が大きい場合は 1 を、等しい場合は 0 を、
 小さい場合は -1 を返します。比較できない場合は、nil を返します。
 
-#@since 1.8.0
 @param other 自身と比較したい時刻を Time オブジェクトで指定します。
-#@else
-@param other 自身と比較したい時刻を Time オブジェクトか数値で指定します。
-             数値の場合は起算時からの経過秒数とみなして比較します。
-#@end
 
 例:
   t = Time.now       # => 2017-11-10 04:42:19 +0900
@@ -392,7 +387,6 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   utc_t = t.getutc                   # => 2017-09-19 06:00:00 UTC
   utc_t.utc?                         # => true
 
-#@since 1.8.0
 --- getgm     -> Time
 --- getutc    -> Time
 
@@ -405,9 +399,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   y.gmt?                             #=> true
   t == y                             #=> true
 
-#@end
 
-#@since 1.8.0
 --- getlocal             -> Time
 #@since 1.9.2
 --- getlocal(utc_offset) -> Time
@@ -431,7 +423,6 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   j = t.getlocal("+09:00")        #=> 2000-01-02 05:15:01 +0900
   j.utc?                          #=> false
   t == j                          #=> true
-#@end
 #@end
 
 --- gmtime    -> self
@@ -694,7 +685,6 @@ t.strftime("%G-W%V-%uT%R%:z")  # => 2001-W05-6T04:05+09:00    Week date and loca
 
  p Time.now.zone #=> "JST"
 
-#@since 1.8.0
 --- succ    -> Time
 
 self に 1 秒足した Time オブジェクトを生成して返します。
@@ -709,7 +699,6 @@ self に 1 秒足した Time オブジェクトを生成して返します。
   # => Sun Jul 18 01:41:22 JST 2004
        Sun Jul 18 01:41:23 JST 2004
 
-#@end
 
 --- utc_offset     -> Integer
 --- gmt_offset     -> Integer

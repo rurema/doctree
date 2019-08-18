@@ -31,11 +31,9 @@
 --- mainloop_watchdog(*args)
 #@todo
 
-#@since 1.8.4
 --- manipulable?
 #@todo
 
-#@end
 --- new(*args, &block)
 #@todo
 
@@ -98,11 +96,9 @@
 --- _ip_id_
 #@todo
 
-#@since 1.8.4
 --- _is_master_of?(tcltkip_obj)
 #@todo
 
-#@end
 --- _merge_tklist(*args)
 #@todo
 
@@ -179,11 +175,9 @@
 --- get_no_event_wait
 #@todo
 
-#@since 1.8.4
 --- has_mainwindow?
 #@todo
 
-#@end
 --- invalid_namespace?
 #@todo
 
@@ -205,11 +199,9 @@
 --- make_safe
 #@todo
 
-#@since 1.8.4
 --- manipulable?
 #@todo
 
-#@end
 --- rb_appsend(async, *args)
 #@todo
 

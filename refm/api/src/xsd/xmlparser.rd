@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@include(XMLParser__Parser)
 #@include(XMLParser__REXMLParser)
 #@include(XMLParser__XMLParser)
@@ -11,4 +10,3 @@
 
 --- filter_ns(ns, attrs)
 #@todo
-#@end

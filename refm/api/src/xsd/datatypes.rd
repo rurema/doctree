@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 #@include(Charset)
 #@include(Charset__CharsetConversionError)
@@ -52,4 +51,3 @@
 #@include(XSDUnsignedLong)
 #@include(XSDUnsignedShort)
 
-#@end

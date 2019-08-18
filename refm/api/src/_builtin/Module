@@ -39,13 +39,10 @@
   end
 
 --- new -> Module
-#@since 1.8.0
 --- new {|mod| ... } -> Module
-#@end
 
 名前の付いていないモジュールを新しく生成して返します。
 
-#@since 1.8.0
 ブロックが与えられると生成したモジュールをブロックに渡し、
 モジュールのコンテキストでブロックを実行します。
 
@@ -57,7 +54,6 @@
 ブロックの実行は Module#initialize が行います。
 
 ブロックを与えた場合も生成したモジュールを返します。
-#@end
 
 このメソッドで生成されたモジュールは、
 最初に名前が必要になったときに名前が決定します。
@@ -111,18 +107,10 @@ self が other の先祖であるとき 1
 を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-その動作は不定です。
-#@end
 
 other がクラスやモジュールでなければ
-#@since 1.8.0
 nil を返します。
-#@else
-例外 [[c:TypeError]] が発生します。
-#@end
 
 @param other 比較対象のクラスやモジュール
 
@@ -138,19 +126,10 @@ nil を返します。
   p Bar <=> Foo     # => -1
   p Baz <=> Bar     # => -1
   p Baz <=> Foo     # => -1
-#@since 1.8.0
   p Baz <=> Qux     # => nil
   p Qux <=> Baz     # => nil
-#@else
-  p Baz <=> Qux     # => 1
-  p Qux <=> Baz     # => 1
-#@end
 
-#@since 1.8.0
   p Baz <=> Object.new  # => nil
-#@else
-  p Baz <=> Object.new  # => :in `<=>': <=> requires Class or Module (Object given) (TypeError)
-#@end
 
 --- <(other)  -> bool | nil
 
@@ -159,11 +138,7 @@ self が other の先祖か同一のクラス／モジュールである場合�
 #@# self < other が成立します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
@@ -181,13 +156,8 @@ false を返します。
   p Bar < Foo     # => true
   p Baz < Bar     # => true
   p Baz < Foo     # => true
-#@since 1.8.0
   p Baz < Qux     # => nil
   p Baz > Qux     # => nil
-#@else
-  p Baz < Qux     # => false
-  p Baz > Qux     # => false
-#@end
 
   p Foo < Object.new # => in `<': compared with non class/module (TypeError)
 
@@ -198,11 +168,7 @@ false を返します。
 self が other の先祖である場合、false を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
@@ -216,11 +182,7 @@ false を返します。
 self が other の子孫か同一クラスである場合、false を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
@@ -245,11 +207,7 @@ false を返します。
 self が other の子孫である場合、false を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
@@ -307,7 +265,6 @@ case ではクラス、モジュールの所属関係をチェックすること
 #@include(Module.attr)
 #@end
 
-#@since 1.8.0
 --- autoload(const_name, feature) -> nil
 
 定数 const_name を最初に参照した時に feature を [[m:Kernel.#require]] するように設定します。
@@ -319,7 +276,6 @@ case ではクラス、モジュールの所属関係をチェックすること
 @param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
 @see [[m:Kernel.#autoload]]
-#@end
 
 例:
   Date # NameError: uninitialized constant Date
@@ -498,7 +454,6 @@ name で指定される名前の定数の値を取り出します。
   p Class.const_get("Bar::BAR") # => 1
 #@end
 
-#@since 1.8.0
 --- const_missing(name)
 定義されていない定数を参照したときに Ruby インタプリタが
 このメソッドを呼びます。
@@ -519,7 +474,6 @@ name で指定される名前の定数の値を取り出します。
 
   # => undefined constant :Bar
        undefined constant :Bar
-#@end
 
 --- const_set(name, value) -> object
 
@@ -649,7 +603,6 @@ inherit に真を指定すると
 #@include(Module.include)
 #@end
 
-#@since 1.8.0
 --- include?(mod) -> bool
 
 self かその親クラス / 親モジュールがモジュール mod を
@@ -667,7 +620,6 @@ self かその親クラス / 親モジュールがモジュール mod を
 
   p C1.include?(M)   # => true
   p C2.include?(M)   # => true
-#@end
 
 --- included_modules -> [Module]
 
@@ -888,11 +840,7 @@ C.method_defined? "private_method2"     #=> false
      [:private_foo]
      [:protected_foo]
 #@else
-#@since 1.8.0
      ["protected_foo", "public_foo"]
-#@else
-     ["public_foo"]
-#@end
      ["public_foo"]
      ["private_foo"]
      ["protected_foo"]
@@ -922,11 +870,7 @@ C.method_defined? "private_method2"     #=> false
      [:private_foo]
      [:protected_foo]
 #@else
-#@since 1.8.0
      ["protected_foo", "public_foo"]
-#@else
-     ["protected_foo"]
-#@end
      ["public_foo"]
      ["private_foo"]
      ["protected_foo"]
@@ -1167,7 +1111,6 @@ C.public_method_defined? "method2"         #=> false
 C.method_defined? "method2"                #=> true
 #@end
 
-#@since 1.8.6
 --- class_variable_defined?(name) -> bool
 
 name で与えられた名前のクラス変数がモジュールに存在する場合 true を
@@ -1184,7 +1127,6 @@ name で与えられた名前のクラス変数がモジュールに存在する
    Fred.class_variable_defined?('@@foo')    #=> true
    Fred.class_variable_defined?('@@bar')    #=> false
 
-#@end
 
 #@since 1.9.1
 --- remove_class_variable(name) -> object
@@ -1247,7 +1189,6 @@ include を Ruby で書くと以下のように定義できます。
 #@include(Module.attr)
 #@end
 
-#@since 1.8.3
 --- class_variable_get(name) -> object
 
 クラス／モジュールに定義されているクラス変数 name の値を返します。
@@ -1266,9 +1207,7 @@ include を Ruby で書くと以下のように定義できます。
 
   p Fred.foo #=> 99
 
-#@end
 
-#@since 1.8.3
 --- class_variable_set(name, val) -> object
 
 クラス／モジュールにクラス変数 name を定義して、その値として
@@ -1289,7 +1228,6 @@ val をセットします。val を返します。
 
   p Fred.foo(101)   # => 101
   p Fred.new.foo    # => 101
-#@end
 
 #@until 2.5.0
 #@include(Module.define_method)
@@ -1318,7 +1256,6 @@ extend_object のデフォルトの実装では、self に定義されて
 
 @see [[m:Module#extended]]
 
-#@since 1.8.0
 --- extended(obj) -> ()
 
 self が他のオブジェクト に [[m:Object#extend]] されたときに
@@ -1338,13 +1275,11 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
 
 @see [[m:Module#extend_object]]
 
-#@end
 
 #@until 2.1.0
 #@include(Module.include)
 #@end
 
-#@since 1.8.0
 --- included(class_or_module) -> ()
 
 self が [[m:Module#include]] されたときに対象のクラスまたはモジュー
@@ -1361,7 +1296,6 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
     include Foo
   end
   # => "Bar include Foo"
-#@end
 
 @see [[m:Module#append_features]]
 
@@ -1392,7 +1326,6 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
   => method "foo" was added
      method "bar" was added
 
-#@since 1.8.0
 --- method_removed(name) -> ()
 
 メソッドが [[m:Module#remove_method]] により削除
@@ -1420,9 +1353,7 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 
   => method "foo" was removed
 
-#@end
 
-#@since 1.8.0
 --- method_undefined(name) -> ()
 
 このモジュールのインスタンスメソッド name が
@@ -1458,7 +1389,6 @@ undef 文により未定義にされると、インタプリタがこのメソ�
   method C#foo was undefined
   method C#bar was undefined
 
-#@end
 
 --- module_function(*name) -> self
 
@@ -1637,7 +1567,6 @@ name で指定した定数を取り除き、その定数に設定されていた
 #@include(Module.undef_method)
 #@end
 
-#@since 1.8.7
 --- module_exec(*args) {|*vars| ... }       -> object
 --- class_exec(*args) {|*vars| ... }        -> object
 
@@ -1671,7 +1600,6 @@ name で指定した定数を取り除き、その定数に設定されていた
 
 @see [[m:Module#module_eval]], [[m:Module#class_eval]]
 
-#@end
 
 #@since 1.9.3
 --- private_constant(*name) -> self

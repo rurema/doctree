@@ -241,7 +241,6 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 @param eoutvar eRubyスクリプトの中で出力をためていく変数
 
-#@since 1.8.1
 
 --- filename -> String
 
@@ -253,7 +252,6 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易になります。filename を設定していない場合は、エラー発生箇所は「 (ERB) 」という出力となります。
 
-#@end
 
 = module ERB::Util
 

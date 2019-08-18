@@ -1,11 +1,7 @@
-#@since 1.8.2
 category Obsolete
 
 このライブラリは obsolete です。
 [[lib:optparse]] を使ってください。
-#@else
-category CommandLine
-#@end
 
 オプションを解析するためのライブラリです。
 $OPT_xxx に値を設定します。
@@ -37,11 +33,9 @@ $OPT_xxx に値を設定します。
 
 --- getopts(single_opts, *long_opts)    -> Integer | nil
 
-#@since 1.8.2
 このメソッドは obsolete です。
 [[lib:optparse]] ライブラリで提供されている
 ARGV.getopts を使ってください。[[m:Object::ARGV]], [[m:OptionParser::Arguable#getopts]] を参照。
-#@end
 
 指定された short_opt や long_opt に応じて ARGV を解析し、
 結果をそれぞれのグローバル変数にセットします。

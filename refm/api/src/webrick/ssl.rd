@@ -1,4 +1,3 @@
-#@since 1.8.1
 [[c:WEBrick::GenericServer]] を SSL/TLS に対応させるための実装。
 このファイルを require すると WEBrick::GenericServer が SSL/TLS 対応になる。
 
@@ -116,4 +115,3 @@ config で有効な項目が増えます。以下は増える項目とそのデ�
 
 [[m:WEBrick::Config::SSL]] の内容がマージされます。
 
-#@end
