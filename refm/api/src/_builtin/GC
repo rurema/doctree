@@ -220,7 +220,11 @@ GC.enable    # => false
 ガーベージコレクトを開始します。
 
 [[m:GC#garbage_collect]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
+#@since 2.3.0
+[[m:GC.disable]] により GC が禁止されている場合でもガベージコレクトを開始します。
+#@else
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
+#@end
 
 nil を返します。
 
@@ -404,7 +408,11 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 ガーベージコレクトを開始します。
 
 [[m:GC.start]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
+#@since 2.3.0
+[[m:GC.disable]] により GC が禁止されている場合でもガベージコレクトを開始します。
+#@else
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
+#@end
 
 nil を返します。
 
