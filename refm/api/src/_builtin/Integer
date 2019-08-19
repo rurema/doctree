@@ -617,7 +617,7 @@ rescue => e
 end
 #@end
 
-@see [[m:Numeric#div]]
+@see [[m:Integer#fdiv]], [[m:Numeric#div]], [[m:Numeric#fdiv]]
 
 --- %(other) -> Numeric
 --- modulo(other) -> Numeric
@@ -672,7 +672,7 @@ self を other で割った商を [[c:Float]] で返します。
 
 @param other self を割る数を指定します。
 
-@see [[m:Numeric#quo]]
+@see [[m:Numeric#quo]], [[m:Numeric#div]], [[m:Integer#div]]
 
 --- **(other) -> Numeric
 #@since 2.5.0
