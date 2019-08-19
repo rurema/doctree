@@ -756,8 +756,15 @@ a.join
 
 --- safe_level    -> Integer
 
+#@since 2.6.0
+セーフレベルを返します。
+
+[[m:$SAFE]]がプロセスグローバルになったため、このメソッドは obsolete です。
+単純に [[m:$SAFE]] をチェックしてください。
+#@else
 self のセーフレベルを返します。カレントスレッドの
 safe_level は、[[m:$SAFE]] と同じです。
+#@end
 
 セーフレベルについては[[d:spec/safelevel]]を参照してください。
 
