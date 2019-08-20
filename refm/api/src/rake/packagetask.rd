@@ -85,6 +85,15 @@ bzip2 した tar ファイル (tar.bz2) を作成するかどうかを設定し�
 この値が真である場合は gzip した tar ファイル (tar.gz) を作成します。
 デフォルトは偽です。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar_gz # => false
+end
+#@end
+
 --- need_tar_gz=(flag)
 
 gzip した tar ファイル (tar.gz) を作成するかどうかを設定します。
