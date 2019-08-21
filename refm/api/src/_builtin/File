@@ -179,9 +179,9 @@ File.lstat("testlink").uid      # => 0
 
 例:
   IO.write("test.txt", "test")
-  p File.exists?("test.txt")  # => true
+  p File.exist?("test.txt")  # => true
   p File.delete("test.txt")   # => 1
-  p File.exists?("test.txt")  # => false
+  p File.exist?("test.txt")  # => false
   begin
     File.delete("test.txt")
   rescue
