@@ -112,6 +112,17 @@ zip ファイル (tgz) を作成するかどうかを設定します。
 
 @param dirname パッケージに入れるファイルを保存するディレクトリ名を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir # => "pkg"
+  package_task.package_dir = "package"
+  package_task.package_dir # => "package"
+end
+#@end
+
 --- package_dir_path -> String
 
 パッケージに含むファイルを配置するディレクトリを返します。
