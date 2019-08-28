@@ -126,6 +126,20 @@ zip ファイル (tgz) を作成するかどうかを設定します。
 
 @param file_list ファイルリストを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+IO.write("test1.rb", "test")
+IO.write("test2.rb", "test")
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_files # => []
+  package_task.package_files = FileList.new("test1.rb", "test2.rb")
+  package_task.package_files # => ["test1.rb", "test2.rb"]
+end
+#@end
+
 --- package_name -> String
 
 バージョン情報を含むパッケージ名を返します。
