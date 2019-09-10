@@ -553,12 +553,12 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 
 @see [[m:Kernel.#readline]], [[m:ARGF.class#gets]]
 
---- readlines(rs = $/) { |line| ... }   -> self
---- readlines(limit) { |line| ... }     -> self
---- readlines(rs, limit) { |line| ... } -> self
---- to_a(rs = $/) { |line| ... }        -> self
---- to_a(limit) { |line| ... }          -> self
---- to_a(rs, limit) { |line| ... }      -> self
+--- readlines(rs = $/) { |line| ... }   -> Array
+--- readlines(limit) { |line| ... }     -> Array
+--- readlines(rs, limit) { |line| ... } -> Array
+--- to_a(rs = $/) { |line| ... }        -> Array
+--- to_a(limit) { |line| ... }          -> Array
+--- to_a(rs, limit) { |line| ... }      -> Array
 
 ARGFの各行を配列に読み込んで返します。rsがnilの場合は要素に各ファイルを
 すべて読み込んだ配列を返します。
