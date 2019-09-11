@@ -1489,10 +1489,25 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+#@samplecode 例
+IO.write("testfile", "line1,\nline2,\nline3,\n")
+File.open("testfile") { |f| p f.readlines }      # => ["line1,\n", "line2,\n", "line3,\n"]
+File.open("testfile") { |f| p f.readlines(3) }   # => ["lin", "e1,", "\n", "lin", "e2,", "\n", "lin", "e3,", "\n"]
+File.open("testfile") { |f| p f.readlines(",") } # => ["line1,", "\nline2,", "\nline3,", "\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: rsを取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+File.open("testfile") { |f| p f.readlines(chomp: true) }       # => ["line1,\rline2,", "line3,"]
+File.open("testfile") { |f| p f.readlines("\r", chomp: true) } # => ["line1,", "line2,", "\nline3,\n"]
+#@end
+#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
