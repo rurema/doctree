@@ -1489,6 +1489,10 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
+#@#noexample 参照先の Module#protected_method_defined? にサンプルが書かれているため
+
+@see [[m:Module#protected_method_defined?]]
+
 --- public(*name) -> self
 
 メソッドを public に設定します。
