@@ -2127,6 +2127,17 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
 
 @param rs 末尾から削除する改行コードを指定します。
 
+#@samplecode 例: ruby -n で "test" を入力
+$_            # => "test\n"
+chomp         # => "test"
+#@end
+
+#@samplecode 例: ruby -n で "test," を入力し、 rs に "," を指定
+$_            # => "test\n"
+chomp         # => "test,"
+chomp(",")    # => "test"
+#@end
+
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 
 --- trap(signal, command) -> String | Proc | nil
