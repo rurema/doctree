@@ -1628,7 +1628,11 @@ foo
 #@end
 #@end
 
+#@since 2.4.0
+@see [[m:Warning#warn]], [[m:$stderr]],[[m:$VERBOSE]]
+#@else
 @see [[m:$stderr]],[[m:$VERBOSE]]
+#@end
 
 --- Array(arg) -> Array
 
