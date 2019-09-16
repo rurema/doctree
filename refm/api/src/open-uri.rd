@@ -90,18 +90,18 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
                           かつリソースの取得に失敗した時に発生します。
 
 @raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
-                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] 
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
                      を参照して下さい。
 
 例:
- 
+
   require 'open-uri'
   sio = open('http://www.example.com')
   p sio.is_a?(OpenURI::Meta) # => true
   p sio.content_type
   puts sio.read
 
-@see [[m:OpenURI.open_uri]]
+@see [[m:OpenURI.open_uri]], [[m:URI.open]]
 
 = module OpenURI
 http/ftp に簡単にアクセスするためのモジュールです。
@@ -119,9 +119,9 @@ URI である文字列 name のリソースを取得して [[c:StringIO]] オブ
 
   require 'open-uri'
   sio = OpenURI.open_uri('http://www.example.com')
-  p sio.last_modified 
+  p sio.last_modified
   puts sio.read
-  
+
   OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
 
 options には [[c:Hash]] を与えます。理解するハッシュの
@@ -129,7 +129,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
  * :proxy
  * :progress_proc
  * :content_length_proc
- * :http_basic_authentication 
+ * :http_basic_authentication
 #@since 1.9.1
  * :proxy_http_basic_authentication
  * :read_timeout
@@ -167,7 +167,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
  Content-Length ヘッダの値を引数として、実際の転送が始まる前に評価されます。Redirect された場合は、
  実際に転送されるリソースの HTTP ヘッダを利用します。Content-Length ヘッダがない場合は、nil を
  引数としてブロックを評価します。ブロックの返り値は特に利用されません。
- 
+
 : :progress_proc
  値にはブロックを与えます。ブロックは対象となる URI からデータの
  断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
@@ -237,13 +237,13 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、
                           かつリソースの取得に失敗した時に発生します。
 
-@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に 
-                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] 
+@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
                      を参照して下さい。
 
 @raise ArgumentError 与えられた mode が読み込みモードでなかった場合に発生します。
 
-= module OpenURI::OpenRead 
+= module OpenURI::OpenRead
 [[c:URI::HTTP]] と [[c:URI::FTP]] を拡張するために用意されたモジュールです。
 
 == Instance Methods
@@ -268,8 +268,8 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、かつリソースの取得に
                           失敗した時に発生します。
 
-@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に 
-                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] 
+@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
                      を参照して下さい。
 
 @see [[m:OpenURI.open_uri]]
@@ -308,7 +308,7 @@ Last-Modified ヘッダがない場合は nil を返します。
 
 例:
   require 'open-uri'
-  p open('http://www.rubyist.net/').last_modified    
+  p open('http://www.rubyist.net/').last_modified
   #=> Thu Feb 26 16:54:58 +0900 2004
 
 --- content_type    -> String
@@ -356,7 +356,7 @@ Content-Encoding ヘッダがない場合は、空の配列を返します。
 例:
   require 'open-uri'
   p open('http://example.com/').status  #=> ["200", "OK"]
- 
+
 --- base_uri    -> URI
 
 リソースの実際の URI を URI オブジェクトとして返します。
@@ -384,3 +384,45 @@ Content-Encoding ヘッダがない場合は、空の配列を返します。
 = class OpenURI::HTTPError < StandardError
 
 リソースの取得に失敗した時に投げられます。
+
+#@since 2.5.0
+= reopen URI
+
+== Class Methods
+
+--- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
+--- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
+
+name が http:// や ftp:// で始まっている文字列なら URI のリソースを
+取得した上で [[c:StringIO]] オブジェクトまたは [[c:Tempfile]] オブジェクトとして返します。
+返されるオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
+name に open メソッドが定義されている場合は、*rest を引数として渡し
+name.open(*rest, &block) のように name の open メソッドが呼ばれます。
+
+これ以外の場合は、name はファイル名として扱われ、従来の
+[[m:Kernel.#open]](name, *rest) が呼ばれます。
+
+ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で
+始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクト
+または [[c:Tempfile]] オブジェクトを引数としてブロックを評価します。後は同様です。
+引数のオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
+@param name オープンしたいリソースを文字列で与えます。
+
+@param mode モードを文字列で与えます。[[m:Kernel.#open]] と同じです。
+
+@param perm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合のファイルのパーミッションを
+            整数で指定します。[[m:Kernel.#open]] と同じです
+
+@param options ハッシュを与えます。詳しくは [[m:OpenURI.open_uri]] を参照してください。
+
+@raise OpenURI::HTTPError 対象となる URI のスキームが http であり、
+                          かつリソースの取得に失敗した時に発生します。
+
+@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
+                     を参照して下さい。
+
+@see [[m:Kernel.#open]], [[m:OpenURI.open_uri]]
+#@end
