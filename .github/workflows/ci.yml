@@ -9,7 +9,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run rake
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Install dependencies
+      run: |
+        gem install bundler --no-document
+        bundle install
+    - name: Run test
       run: bundle exec rake
     - name: Install misspell
       run: 'go get github.com/client9/misspell/...'
