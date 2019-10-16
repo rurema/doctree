@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  rake:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
@@ -17,8 +17,15 @@ jobs:
       run: |
         gem install bundler --no-document
         bundle install
-    - name: Run test
+    - name: Run rake
       run: bundle exec rake
+
+  misspell:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v1
     - name: Install misspell
       run: 'go get github.com/client9/misspell/...'
     - name: Run misspell
