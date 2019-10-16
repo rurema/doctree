@@ -58,7 +58,7 @@ string を圧縮します。level の有効な値は
 参照して下さい。nil の場合はデフォルトの値を使用します。
 
 @param level 0-9の範囲の整数, またはZlib::DEFAULT_COMPRESSIONを指定します。詳細はzlib.hを参照してください。
-@param windowBits ウィンドの大きさを整数で指定します。詳細はzlib.hを参照してください。
+@param windowBits ウィンドウの大きさを整数で指定します。詳細はzlib.hを参照してください。
 @param memlevel 0-9の範囲の整数で指定します。詳細はzlib.hを参照してください。
 @param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。詳細はzlib.h を参照してください。
 
