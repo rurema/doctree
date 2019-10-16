@@ -1,0 +1,18 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run rake
+      run: bundle exec rake
+    - name: Install misspell
+      run: 'go get github.com/client9/misspell/...'
+    - name: Run misspell
+      run: |
+        $GOPATH/bin/misspell -error -i addopt $(git ls-files | grep -vF "refm/doc/news/1.8.4.rd")
