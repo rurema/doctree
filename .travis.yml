@@ -1,13 +1,12 @@
 language: ruby
-dist: xenial
+dist: bionic
 rvm:
-  - 2.6.3
+  - 2.6.5
 notifications:
   email:
     recipients:
       - okkez000@gmail.com
-      - zn@mbf.nifty.com
-      - sho.hsmt@gmail.com
+      - kzhr.nsym@gmail.com
   irc:
     channels:
       - "chat.freenode.net#ruby-ja"
