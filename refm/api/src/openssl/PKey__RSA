@@ -21,7 +21,7 @@ RSA についてよく理解し、必要な場合のみにすべきです。
   # 秘密鍵をAES256で暗号化して private_key.pem に PEM 形式で保存
   passphrase = "!secret passphrase!"
   File.open("private_key.pem", "w") do |f|
-    f.write(rsa.export(OpenSSL::Cipher::Cipher.new("aes256"), passphrase))
+    f.write(rsa.export(OpenSSL::Cipher.new("aes256"), passphrase))
   end
   # 公開鍵をpublic_key.pemに保存
   public_key = rsa.public_key
