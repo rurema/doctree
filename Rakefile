@@ -49,20 +49,20 @@ namespace :generate do
   end
 
   desc "Generate document database of all versions"
-  task :all => ALL_VERSIONS
+  multitask :all => ALL_VERSIONS
 
   desc "Generate document database for old versions"
-  task :old => OLD_VERSIONS
+  multitask :old => OLD_VERSIONS
 
   desc "Generate document database for supported versions"
-  task :supported => SUPPORTED_VERSIONS
+  multitask :supported => SUPPORTED_VERSIONS
 
   desc "Generate document database for unreleased versions"
-  task :unreleased => UNRELEASED_VERSIONS
+  multitask :unreleased => UNRELEASED_VERSIONS
 end
 
 desc "Generate document database"
-task :generate => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "generate:#{version}" }
+multitask :generate => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "generate:#{version}" }
 
 namespace :statichtml do
   ALL_VERSIONS.each do |version|
@@ -73,20 +73,20 @@ namespace :statichtml do
   end
 
   desc "Generate static html of all versions"
-  task :all => ALL_VERSIONS
+  multitask :all => ALL_VERSIONS
 
   desc "Generate static html for old versions"
-  task :old => OLD_VERSIONS
+  multitask :old => OLD_VERSIONS
 
   desc "Generate static html for supported versions"
-  task :supported => SUPPORTED_VERSIONS
+  multitask :supported => SUPPORTED_VERSIONS
 
   desc "Generate static html for unreleased versions"
-  task :unreleased => UNRELEASED_VERSIONS
+  multitask :unreleased => UNRELEASED_VERSIONS
 end
 
 desc "Generate static html"
-task :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statichtml:#{version}" }
+multitask :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statichtml:#{version}" }
 
 desc "Check documentation format"
 task check_format: [:statichtml] do
