@@ -7,7 +7,7 @@ LU 分解を用いて、連立1次方程式 Ax = b の解 x を求める機能�
 
 Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
- * [[url:https://github.com/ruby/ruby/blob/trunk/ext/bigdecimal/sample/linear.rb]]
+ * [[url:https://github.com/ruby/ruby/blob/master/ext/bigdecimal/sample/linear.rb]]
 
 = module LUSolve
 
