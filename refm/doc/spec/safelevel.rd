@@ -53,7 +53,7 @@ Rubyではオブジェクトは「汚染されている」とみなされるこ�
   * プログラム開始時の$SAFEの値は0
 #@since 2.6.0
   * 各スレッド固有ではなくなったので必要に応じて ensure で戻す
-#@samplecode
+//emlist{
       $SAFE = 0
       th = Thread.new do
         p $SAFE # => 0
@@ -63,7 +63,7 @@ Rubyではオブジェクトは「汚染されている」とみなされるこ�
       end
       th.join
       p $SAFE # => 0
-#@end
+//}
   * $SAFE の値を現在の値より小さく変更する事もできる
 //emlist{
       $ ruby -e '$SAFE = 1; $SAFE = 0'
@@ -259,7 +259,7 @@ $SAFE はスレッドローカルからグローバルになり、レベルを�
 プログラムの一部だけを高いセーフレベルで実行するには、以下のように ensure でセーフレベルを
 戻す必要があります。
 
-#@samplecode 例
+//emlist{
 def safe(level)
   result = nil
   Thread.start do
@@ -274,7 +274,7 @@ end
 lib = "insecure_library".taint # 外部から受け取った文字列(仮)
 safe(1) { require lib }        # $SAFE が 1 なので例外
 require lib                    # 外側は影響を受けない
-#@end
+//}
 
 #@else
 
