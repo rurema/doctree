@@ -179,21 +179,29 @@ HTTP のクライアントのためのクラスです。
 
 == Class Methods
 
+#@until 2.5.0
 --- new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+#@else
+--- new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
+#@end
 
 新しい [[c:Net::HTTP]] オブジェクトを生成します。
 
 proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy からプロクシの URI を
 取り出し利用します。この場合環境変数 http_proxy が定義されていない場合には
 プロクシは利用せず直接接続します。
-
+詳しくは [[m:URI::Generic#find_proxy]] を参照してください。
 
 明示的にプロクシのホスト名とポート番号を指定してプロクシを利用することもできます。
 このときには proxy_addr にホスト名もしくは IP アドレスを渡します。
-このときに proxy_userを指定するとプロクシの認証が行われます
-
+このときに proxy_userを指定するとプロクシの認証が行われます。
+#@since 2.5.0
+no_proxy の文字列にプロクシのホスト名やIPアドレスが含まれている場合はプロクシを利用せず
+直接接続します。
+#@end
 
 このメソッドは TCP コネクションを張りません。
+
 
 @param address 接続するホスト名を文字列で指定します。
 @param port 接続するポート番号を指定します。
@@ -201,7 +209,9 @@ proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy から
 @param proxy_port プロクシのポートを指定します。
 @param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 @param proxy_pass プロクシの認証のパスワードを指定します。
-
+#@since 2.5.0
+@param no_proxy プロクシを経由せずに接続するホストの名前/IPアドレスを文字列で指定します。
+#@end
 
 --- start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 --- start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
