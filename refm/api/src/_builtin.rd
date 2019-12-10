@@ -98,6 +98,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/RegexpError)
 #@include(_builtin/RubyVM)
 #@include(_builtin/RubyVM__InstructionSequence)
+#@since 2.6.0
+#@include(_builtin/RubyVM__MJIT)
+#@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
 #@include(_builtin/SecurityError)

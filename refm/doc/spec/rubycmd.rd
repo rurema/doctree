@@ -121,6 +121,9 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
     * did_you_mean    did_you_mean (default: enabled)
     * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
 #@end
+#@since 2.6.0
+    * jit             JIT (default: disabled)
+#@end
 //}
 
 : --disable
@@ -311,6 +314,46 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   コンパイラデバッグモード。スクリプトを内部表現にコンパイルす
   る時の構文解析の過程を表示します。この表示は非常に冗長なので,
   コンパイラそのものをデバッグする人以外には必要ないと思います。
+
+#@since 2.6.0
+==== JIT のオプション (実験的)
+
+: --jit
+
+  デフォルトの設定でJITを有効にします。
+
+: --jit-[option]
+
+  指定した設定でJITを有効にします。
+
+: --jit-warnings
+
+  JITの警告の出力を有効にします。
+
+: --jit-debug
+
+  JITのデバッグを有効にします。(非常に遅くなります。)
+
+: --jit-wait
+
+  毎回JITコンパイルが終わるまで待ちます。(テスト用)
+
+: --jit-save-temps
+
+  一時ファイルを $TMP か /tmp の中に残します。(テスト用)
+
+: --jit-verbose=num
+
+  ログレベルがnum以下のログが標準エラー出力に出力されます。(デフォルト: 0)
+
+: --jit-max-cache=num
+
+  キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 1000)
+
+: --jit-min-calls=num
+
+  JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 5)
+#@end
 
 ===[a:shebang] インタプリタ行の解釈
 
