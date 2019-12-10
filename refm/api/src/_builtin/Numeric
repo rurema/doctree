@@ -403,9 +403,29 @@ self の符号を反転させたものを返します。
 
 @see [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
 
+#@since 2.4.0
+#@since 2.5.0
+--- floor(ndigits = 0) -> Integer
+#@else
+--- floor(ndigits = 0) -> Integer | Float
+#@end
+#@else
 --- floor   -> Integer
+#@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
+
+#@since 2.4.0
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+#@end
 
      1.floor        #=> 1
      1.2.floor      #=> 1
@@ -413,6 +433,9 @@ self の符号を反転させたものを返します。
      (-1.5).floor   #=> -2
 
 @see [[m:Numeric#ceil]], [[m:Numeric#round]], [[m:Numeric#truncate]]
+#@since 2.4.0
+@see [[m:Integer#floor]]
+#@end
 
 --- round   -> Integer
 
