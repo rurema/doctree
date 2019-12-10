@@ -535,7 +535,7 @@ Pathname('testfile').chown(502, 12)
 Pathname('testfile').stat.uid     # => 502
 #@end
 
-@see [[m:File.chown]]
+@see [[m:File.chown]], [[m:File#chown]]
 
 --- lchown(owner, group) -> Integer
 File.lchown(owner, group, self.to_s) と同じです。

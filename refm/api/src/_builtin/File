@@ -135,10 +135,13 @@ File.lstat("testlink").mode.to_s(8)     # => "120744"
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
-例:
-  IO.write("test.txt", "test")
-  File.chown(502, 12, "test.txt")
-  File.stat("test.txt").uid # => 502
+#@samplecode 例
+IO.write("test.txt", "test")
+File.chown(502, 12, "test.txt")
+File.stat("test.txt").uid # => 502
+#@end
+
+@see [[m:File#chown]]
 
 --- lchown(owner, group, *filename)    -> Integer
 
@@ -1065,10 +1068,13 @@ File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
-例:
-  File.open("testfile") { |f| f.chown(502, 1000) }  # => 0
-  File.stat("testfile").uid                         # => 502
-  File.stat("testfile").gid                         # => 1000
+#@samplecode 例
+File.open("testfile") { |f| f.chown(502, 1000) }  # => 0
+File.stat("testfile").uid                         # => 502
+File.stat("testfile").gid                         # => 1000
+#@end
+
+@see [[m:File.chown]]
 
 --- flock(operation)    -> 0 | false
 
