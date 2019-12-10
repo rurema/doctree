@@ -115,7 +115,6 @@ obj が範囲内に含まれている時に真を返します。
   p ("a" .. "c").include?("ba") # => false
   p ("a" .. "c").member?("ba")  # => false
 
-#@until 2.6.0
 @see [[ref:d:spec/control#case]]
 @see [[m:Range#cover?]]
 
