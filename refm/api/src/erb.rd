@@ -190,6 +190,19 @@ ERB を b の binding で実行し、結果の文字列を返します。
 
 @param b eRubyスクリプトが実行されるときのbinding
 
+#@since 2.5.0
+@see [[m:ERB#result_with_hash]]
+
+--- result_with_hash(hash) -> String
+
+ERB をハッシュオブジェクトで指定されたローカル変数を持つ
+新しいトップレベルバインディングで実行し、結果の文字列を返します。
+
+@param hash ローカル変数名をキーにしたハッシュ
+
+@see [[m:ERB#result]]
+#@end
+
 --- src -> String
 
 変換した Ruby スクリプトを取得します。
