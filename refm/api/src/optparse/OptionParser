@@ -913,6 +913,15 @@ p options # => {:a=>true, :b=>true}
 
 @param argv デフォルトでパースする文字列の配列を返します。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new
+
+# --hoo param1 --bar param2 をパラメーターに指定して実行
+opts.default_argv # => ["--foo", "param1", "--bar", "param2"]
+#@end
+
 --- default_argv=(argv)
 
 自身がデフォルトでパースする引数を文字列の配列で指定します。
