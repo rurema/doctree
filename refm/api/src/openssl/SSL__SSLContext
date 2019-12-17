@@ -191,7 +191,6 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれ�
 @param ca クライアント証明書を要求するときに提示する証明書の配列
 @see [[m:OpenSSL::SSL::SSLContext#client_ca]]
 
-#@since 1.8.3
 --- client_cert_cb -> Proc | nil
 [[m:OpenSSL::SSL::SSLContext#cert=]] でクライアント証明書を
 セットしていなかった場合にサーバからクライアント証明書の要求が来たときに
@@ -234,9 +233,7 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれ�
 
 @param cb コールバックオブジェクト([[c:Proc]]、[[c:Method]] など)
 @see [[m:OpenSSL::SSL::SSLContext#client_cert_cb]]
-#@end
 
-#@since 1.8.1
 --- extra_chain_cert -> [OpenSSL::X509::Certificate] | nil
 自分自身を証明する証明書からルート CA までの証明書のリストです。
 
@@ -258,7 +255,6 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれ�
        配列)
 @see [[m:OpenSSL::SSL::SSLContext#extra_chain_cert]]
 
-#@end
 
 --- key -> OpenSSL::PKey::PKey | nil
 [[m:OpenSSL::SSL::SSLContext#cert]] で得られる自分自身を証明するための
@@ -398,7 +394,6 @@ nil を設定するとデフォルトのコールバック(単に第一引数を
 @param mode 設定するモード(整数値)
 @see [[m:OpenSSL::SSL::SSLContext#verify_mode]]
 
-#@since 1.8.3
 --- tmp_dh_callback -> Proc | nil
 一時的 DH 鍵を生成するためのコールバックを返します。
 
@@ -431,9 +426,7 @@ cb に nil を指定するとデフォルトのパラメータが利用されま
 
 @param cb 設定するコールバック
 @see [[m:OpenSSL::SSL::SSLContext#tmp_dh_callback]]
-#@end
 
-#@since 1.8.3
 --- session_id_context -> String | nil
 セッション ID コンテキスト文字列を返します。
 
@@ -465,7 +458,6 @@ cb に nil を指定するとデフォルトのパラメータが利用されま
      [[m:OpenSSL::SSL::SSLContext#session_id_context]],
      [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]]
 
-#@end
 
 --- set_params(params) -> Hash
 パラメータをハッシュで設定します。

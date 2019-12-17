@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Tkpiechart::Slice < TkcItem
 include Tk::Tcllib::Tkpiechart::ConfigMethod
@@ -26,4 +25,3 @@ include Tk::Tcllib::Tkpiechart::ConfigMethod
 --- label(text)
 #@todo
 
-#@end

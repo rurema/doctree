@@ -16,11 +16,9 @@ FTP URI を表すクラスです。
   
   p URI::FTP.build({:host => "www.example.com", :path => "/path",  :typecode => 'a'})
   #=> #<URI::FTP:0x201bd9cc URL:ftp://www.example.com/path;type=a>
-#@since 1.8.7
   
   p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
   #=> 'ftp://example.com/%2Ffoo;type=i'
-#@end
 
 @param ary 構成要素を表す文字列の配列を与えます。要素は
 //emlist{

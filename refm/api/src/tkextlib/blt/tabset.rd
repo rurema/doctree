@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/blt
@@ -191,4 +190,3 @@ alias view
 #@include(tabset/Tabset__Tab)
 #@include(tabset/Tabset__NamedTab)
 
-#@end

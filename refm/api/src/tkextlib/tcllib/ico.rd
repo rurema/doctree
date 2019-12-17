@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/image
@@ -7,11 +6,9 @@ require tkextlib/tcllib
 = class Tk::Tcllib::ICO < TkImage
 
 == Class Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 --- package_version
 #@todo
 
@@ -55,4 +52,3 @@ require tkextlib/tcllib
 --- transparent_color(color)
 #@todo
 
-#@end

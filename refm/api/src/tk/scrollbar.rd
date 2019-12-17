@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 
@@ -51,6 +50,5 @@ require tk
 = class TkYScrollbar < TkScrollbar
 
 
-#@end
 
 

@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/itemconfig
@@ -114,4 +113,3 @@ extend Tk::ValidateConfigure
 #@include(dragdrop/DragDrop__SiteCommand__ValidateArgs)
 #@include(dragdrop/DragDrop__DnD_Handle)
 
-#@end

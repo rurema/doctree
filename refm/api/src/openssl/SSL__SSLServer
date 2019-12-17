@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class OpenSSL::SSL::SSLServer < Object
 include OpenSSL::SSL::SocketForwarder 
 
@@ -102,5 +101,4 @@ accept したらすぐに TLS/SSL ハンドシェイクを実行するかどう�
 @param how 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, 
            Socket::SHUT_RDWR などで指定します。
 
-#@end
 

@@ -1,4 +1,3 @@
-#@since 1.8.3
 
 = class Tk::Tile::TreeView < TkWindow
 include Tk::Tile::TileWidget
@@ -78,15 +77,12 @@ include Tk::Tile::TreeviewConfig
 --- selection_toggle(*items)
 #@todo
 
-#@since 1.8.3
 --- get_directory(item)
 #@todo
 
-#@end
 --- get(item, col)
 #@todo
 
 --- set(item, col, value)
 #@todo
 
-#@end

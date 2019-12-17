@@ -1,4 +1,3 @@
-#@since 1.8.2
 #@#require xsd/namedelements
 
 = class SOAP::Header::HandlerSet < Object
@@ -34,4 +33,3 @@
 --- store=(store)
 #@todo
 
-#@end

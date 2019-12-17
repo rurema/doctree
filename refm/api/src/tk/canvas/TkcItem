@@ -8,12 +8,10 @@ include TkcTagAccess
 
 == Constants
 
-#@since 1.8.2
 --- CItemTypeName
 #@todo
 #@# = nil
 
-#@end
 
 --- CItemTypeToClass
 #@todo
@@ -26,11 +24,9 @@ include TkcTagAccess
 
 == Class Methods
 
-#@since 1.8.2
 --- create(canvas, *args)
 #@todo
 
-#@end
 
 
 --- id2obj(canvas, id)
@@ -56,11 +52,9 @@ include TkcTagAccess
 #@todo
 
 
-#@since 1.8.2
 --- exist?
 #@todo
 
-#@end
 
 
 --- id

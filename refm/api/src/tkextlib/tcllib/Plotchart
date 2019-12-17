@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = module Tk::Tcllib::Plotchart
 extend TkCore
@@ -40,4 +39,3 @@ extend TkCore
 --- set_zoom_pan(w)
 #@todo
 
-#@end

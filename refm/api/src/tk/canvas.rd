@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/canvastag
@@ -18,4 +17,3 @@ require tk/scrollable
 #@include(canvas/TkcText)
 #@include(canvas/TkcWindow)
 
-#@end

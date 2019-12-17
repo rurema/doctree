@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::RPC::Router::RequestScopeOperation < SOAP::RPC::Router::Operation
 
@@ -7,4 +6,3 @@
 --- new(soapaction, receiver_factory, name, param_def, opt)
 #@todo
 
-#@end

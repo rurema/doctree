@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/scrollbar
@@ -8,11 +7,9 @@ require tkextlib/tcllib
 extend TkCore
 
 == Singleton Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 --- package_version
 #@todo
 
@@ -22,14 +19,12 @@ extend TkCore
 --- unautoscroll(win)
 #@todo
 
-#@since 1.8.4
 --- wrap
 #@todo
 
 --- unwrap
 #@todo
 
-#@end
 
 = reopen Tk::Scrollable
 == Instance Methods
@@ -47,4 +42,3 @@ extend TkCore
 --- unautoscroll
 #@todo
 
-#@end

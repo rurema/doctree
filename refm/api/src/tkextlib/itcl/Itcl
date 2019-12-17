@@ -1,15 +1,12 @@
-#@since 1.8.2
 
 = module Tk::Itcl
 include Tk
 extend Tk
 
 == Singleton Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 --- package_version
 #@todo
 
@@ -61,4 +58,3 @@ extend Tk
 --- scope(var)
 #@todo
 
-#@end

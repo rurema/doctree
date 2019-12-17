@@ -8,20 +8,16 @@ extend TkWinDDE
 #@todo
 #@# = ['dde'.freeze].freeze
 
-#@since 1.8.2
 --- PACKAGE_NAME
 #@todo
 #@# = 'dde'.freeze
 
-#@end
 
 == Class Methods
 
-#@since 1.8.2
 --- package_name
 #@todo
 
-#@end
 
 --- async_execute(service, topic, data)
 #@todo
@@ -46,11 +42,9 @@ extend TkWinDDE
 
 == Instance Methods
 
-#@since 1.8.2
 --- async_eval(topic, cmd, *args)
 #@todo
 
-#@end
 
 --- async_execute(service, topic, data)
 #@todo

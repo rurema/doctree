@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tk/canvas
@@ -21,4 +20,3 @@ require tkextlib/tcllib
 #@include(Tkpiechart__PeripheralLabeler)
 #@include(Tkpiechart__Label)
 
-#@end

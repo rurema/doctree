@@ -18,7 +18,7 @@
 @param calltype 関数の呼出規約を Symbol オブジェクトで指定します。サポートされている
                 規約は :cdecl と :stdcall です。
 
-@see [[url:http://ja.wikipedia.org/wiki/%E5%91%BC%E5%87%BA%E8%A6%8F%E7%B4%84]]
+@see [[url:https://ja.wikipedia.org/wiki/%E5%91%BC%E5%87%BA%E8%A6%8F%E7%B4%84]]
 
 
 == Module Functions
@@ -55,7 +55,7 @@ Ruby の [[c:Float]] オブジェクトに変換して返します。
 
 @param sym 自身の呼出規約を Symbol オブジェクトで指定します。
 
-@see [[url:http://ja.wikipedia.org/wiki/%E5%91%BC%E5%87%BA%E8%A6%8F%E7%B4%84]]
+@see [[url:https://ja.wikipedia.org/wiki/%E5%91%BC%E5%87%BA%E8%A6%8F%E7%B4%84]]
 
 --- ctype     -> Integer
 --- ctype=(type)

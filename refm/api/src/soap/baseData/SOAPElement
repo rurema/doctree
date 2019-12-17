@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::SOAPElement
 include Enumerable
@@ -14,10 +13,8 @@ include Enumerable
 --- from_obj(obj, namespace = nil)
 #@todo
 
-#@since 1.8.3
 --- to_elename(obj, namespace = nil)
 #@todo
-#@end
 
 == Instance Methods
 
@@ -29,16 +26,13 @@ include Enumerable
 --- elename=(value)
 #@todo
 
-#@since 1.8.2
 --- id
 --- id=(value)
 #@todo
-#@end
 
 --- precedents
 #@todo
 
-#@since 1.8.2
 --- root
 --- root=(value)
 #@todo
@@ -50,7 +44,6 @@ include Enumerable
 --- position
 --- position=(value)
 #@todo
-#@end
 
 --- extraattr
 --- extraattr=(value)
@@ -60,17 +53,13 @@ include Enumerable
 --- qualified=(value)
 #@todo
 
-#@since 1.8.3
 --- inspect
 #@todo
-#@end
 
 --- text
 --- text=(value)
-#@since 1.8.2
 --- data
 #@todo
-#@end
 
 --- add(value)
 #@todo
@@ -93,4 +82,3 @@ include Enumerable
 --- each {|key, value| ... }
 #@todo
 
-#@end

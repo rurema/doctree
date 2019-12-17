@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/tile
@@ -32,15 +31,12 @@ include Tk::Tile::TileWidget
 --- index(idx)
 #@todo
 
-#@since 1.8.4
 --- insert(idx, subwin, keys = nil)
 #@todo
 
-#@end
 --- select(idx)
 #@todo
 
 --- tabs
 #@todo
 
-#@end
