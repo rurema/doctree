@@ -26,13 +26,19 @@ def generate_statichtml(version)
   puts "generate static html of #{version}"
   bitclust_gem_path = File.expand_path('../..', `bundle exec gem which bitclust`)
   raise "bitclust gem not found" unless $?.success?
-  succeeded = system("bundle", "exec",
-                     "bitclust", "--database=#{db}",
-                     "statichtml", "--outputdir=#{File.join(HTML_DIRECTORY_BASE, version)}",
-                     "--templatedir=#{bitclust_gem_path}/data/bitclust/template.offline",
-                     "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
-                     "--fs-casesensitive",
-                     "--canonical-base-url=http://localhost:9292/latest/")
+  commands = [
+    "bundle", "exec",
+    "bitclust", "--database=#{db}",
+    "statichtml", "--outputdir=#{File.join(HTML_DIRECTORY_BASE, version)}",
+    "--templatedir=#{bitclust_gem_path}/data/bitclust/template.offline",
+    "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
+    "--fs-casesensitive",
+    "--canonical-base-url=http://localhost:9292/latest/"
+  ]
+  # To suppress progress bar
+  # because it exceeded Travis CI max log length
+  commands << "--quiet" if ENV['CI']
+  succeeded = system(*commands)
   raise "Failed to generate static html" unless succeeded
   File.unlink("/tmp/html/latest") rescue nil
   File.symlink(version, "/tmp/html/latest")
