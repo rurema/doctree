@@ -6,8 +6,8 @@ extend Enumerable
 ます。ただし、Hash と異なり、ENV のキーと値には文字列しか
 とることができません。
 
-ENV で得られる文字列は ENV['PATH'] を除いて汚染されていま
-す。オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
+ENV で得られる文字列は ENV['PATH'] 以外は常に汚染されています。
+オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
 ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
 でいる場合に限り汚染されます。
 
@@ -89,12 +89,10 @@ nil を返します。
            す。文字列以外のオブジェクトを指定した場合は to_str メソッド
            による暗黙の型変換を試みます。
 
-#@since 1.8.7
 #@since 1.9.1
 --- reject                     -> Enumerator
 #@else
 --- reject                     -> Enumerable::Enumerator
-#@end
 #@end
 --- reject {|key, value| ... } -> Hash
 
@@ -104,7 +102,6 @@ nil を返します。
 
 --- delete_if {|key, value| ... } -> ENV
 --- reject! {|key, value| ... }   -> ENV | nil
-#@since 1.8.7
 #@since 1.9.1
 --- delete_if  -> Enumerator
 --- reject!    -> Enumerator
@@ -112,14 +109,12 @@ nil を返します。
 --- delete_if  -> Enumerable::Enumerator
 --- reject!    -> Enumerable::Enumerator
 #@end
-#@end
 
 key と value を引数としてブロックを評価した値が真であ
 る時、環境変数を削除します。
 
 reject! は要素に変化がなければ nil を返します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- each                          -> Enumerator
 --- each_pair                     -> Enumerator
@@ -127,27 +122,22 @@ reject! は要素に変化がなければ nil を返します。
 --- each                          -> Enumerable::Enumerator
 --- each_pair                     -> Enumerable::Enumerator
 #@end
-#@end
 --- each {|key, value| ... }      -> self
 --- each_pair {|key, value| ... } -> self
 key と value を引数としてブロックを評価します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_key              -> Enumerator
 #@else
 --- each_key              -> Enumerable::Enumerator
 #@end
-#@end
 --- each_key {|key| ... } -> self
 key を引数としてブロックを評価します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_value                -> Enumerator
 #@else
 --- each_value                -> Enumerable::Enumerator
-#@end
 #@end
 --- each_value {|value| ... } -> self
 value を引数としてブロックを評価します。
@@ -255,15 +245,14 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 @param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 
 --- select                      -> Enumerator
---- select {|key, value| ... }  -> [[String, String]]
+--- select {|key, value| ... }  -> Hash
 #@since 2.6.0
 --- filter                      -> Enumerator
---- filter {|key, value| ... }  -> [[String, String]]
+--- filter {|key, value| ... }  -> Hash
 #@end
 
-環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
-します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
-ます。
+環境変数名と値についてブロックを評価し、真を返したものを集めたハッシュ
+を返します。
 
 --- shift -> [String, String]
 
@@ -363,7 +352,11 @@ self を返します。
 るような要素を環境変数に残します。
 
 keep_if は常に self を返します。
+#@since 2.6.0
+select! と filter! はオブジェクトが変更された場合に self を、
+#@else
 select! はオブジェクトが変更された場合に self を、
+#@end
 されていない場合に nil を返します。
 
 ブロックが省略された場合には [[c:Enumerator]] を返します。

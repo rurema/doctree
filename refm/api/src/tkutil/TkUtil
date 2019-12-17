@@ -11,13 +11,10 @@
 
 == Class Methods
 
-#@since 1.8.3
 --- _conv_args(*args)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- _get_eval_enc_str(obj)
 #@todo
 
@@ -33,12 +30,10 @@
 --- callback(*args)
 #@todo
 
-#@end
 
 --- eval_cmd(*args)
 #@todo
 
-#@since 1.8.2
 --- hash_kv(*args)
 #@todo
 
@@ -57,11 +52,9 @@
 --- uninstall_cmd(cmd_id)
 #@todo
 
-#@end
 
 == Instance Methods
 
-#@since 1.8.2
 --- _conv_args(*args)
 #@todo
 
@@ -96,4 +89,3 @@
 #@todo
 
 
-#@end

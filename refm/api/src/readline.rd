@@ -182,13 +182,11 @@ proc は、次のものを想定しています。
   (2) 引数にユーザからの入力文字列を取る。
   (3) 候補の文字列の配列を返す。
 
-#@since 1.8.0
 「/var/lib /v」の後で補完を行うと、
 デフォルトでは proc の引数に「/v」が渡されます。
 このように、ユーザが入力した文字列を
 [[m:Readline.completer_word_break_characters]] に含まれる文字で区切ったものを単語とすると、
 カーソルがある単語の最初の文字から現在のカーソル位置までの文字列が proc の引数に渡されます。
-#@end
 
 @param proc ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクトを指定します。
 #@since 1.9.2
@@ -297,7 +295,6 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 
 @see [[m:Readline.completion_append_character=]]
 
-#@since 1.8.0
 --- basic_word_break_characters=(string)
 
 ユーザの入力の補完を行う際、
@@ -413,7 +410,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 @raise NotImplementedError サポートしていない環境で発生します。
 
 @see [[m:Readline.filename_quote_characters=]]
-#@end
 
 #@since 1.9.2
 --- Readline.set_screen_size(rows, columns) -> Readline

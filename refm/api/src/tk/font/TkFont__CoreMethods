@@ -1,7 +1,5 @@
-#@since 1.8.3
 
 = module TkFont::CoreMethods
 extend TkCore
 include Tk
 
-#@end

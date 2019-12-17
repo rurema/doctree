@@ -13,22 +13,18 @@ include TkCore
 --- Tk_CBTBL
 #@todo
 
-#@since 1.8.2
 --- DEFAULT_IGNORE_EXCEPTIONS
 #@todo
 
-#@end
 
 == Class Methods
 
 --- new(*args) { .... }
 #@todo
 
-#@since 1.8.2
 --- start(*args) { .... }
 #@todo
 
-#@end
 
 --- callback(obj_id)
 #@todo
@@ -94,11 +90,9 @@ include TkCore
 --- loop_rest=(rest)
 #@todo
 
-#@since 1.8.2
 --- set_interval(interval)
 #@todo
 
-#@end
 
 --- set_procs(interval, loop_exec, *procs)
 #@todo
@@ -137,7 +131,6 @@ include TkCore
 --- info
 #@todo
 
-#@since 1.8.1
 --- eventloop_wait(check_root = false)
 #@todo
 
@@ -156,7 +149,6 @@ include TkCore
 --- wait(on_thread = true, check_root = false)
 #@todo
 
-#@end
 
 
 = class TkAfter

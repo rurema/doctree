@@ -2,14 +2,12 @@
 
 == Constants
 
-#@since 1.8.2
 --- KEY_TBL
 #@todo
 
 --- PROC_TBL
 #@todo
 
-#@end
 #@if(version <= "1.8.1")
 --- VARG_KEY
 #@todo
@@ -24,11 +22,9 @@
 --- new(d, i, s, v, pp, ss, vv, ww)
 #@todo
 
-#@since 1.8.2
 --- ret_val(val)
 #@todo
 
-#@end
 #@if(version <= "1.8.1")
 --- scan_args(arg_str, arg_val)
 #@todo

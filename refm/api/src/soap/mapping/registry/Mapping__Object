@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::Mapping::Object < Object
 include SOAP::Marshal
@@ -28,4 +27,3 @@ include SOAP::Marshal
 --- __add_xmlele_value(qname, value)
 #@todo
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::XSDDouble < XSD::XSDAnySimpleType
 include XSD::FloatConstants
 
@@ -6,4 +5,3 @@ include XSD::FloatConstants
 --- new(value = nil)
 #@todo
 
-#@end

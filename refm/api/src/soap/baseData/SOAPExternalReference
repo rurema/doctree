@@ -1,4 +1,3 @@
-#@since 1.8.2
 = class SOAP::SOAPExternalReference < XSD::NSDBase
 include SOAP::SOAPBasetype
 include SOAP::SOAPModuleUtils
@@ -16,4 +15,3 @@ include SOAP::SOAPModuleUtils
 --- refidstr
 #@todo
 
-#@end

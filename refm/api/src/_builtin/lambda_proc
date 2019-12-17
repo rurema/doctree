@@ -1,4 +1,3 @@
-#@since 1.8.0
 ===[a:should_use_next] 手続きを中断して値を返す
 
 手続きオブジェクトを中断して、呼出し元(呼び出しブロックでは yield、それ以外では [[m:Proc#call]])
@@ -31,16 +30,9 @@
   (1..5).each(&pr)         
 
 #@until 1.9.1
-#@since 1.8.0
   # each 再実行
-#@else
-  # ruby 1.6 では、LocalJumpError
-#@end
   pr = Proc.new { retry }
   (1..5).each(&pr)
-#@until 1.8.0
-  #=> retry from proc-closure (LocalJumpError)
-#@end
 #@end
 
 ===[a:lambda_proc] lambda と proc と Proc.new とイテレータの違い
@@ -130,7 +122,6 @@ Proc.new では手続きオブジェクトを囲むメソッドを抜けます�
   lambda     手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
   イテレータ メソッドを抜ける            手続きオブジェクトを抜ける   メソッドを抜ける
 
-#@end
 
 
 ===[a:orphan] orphan な手続きオブジェクトの挙動

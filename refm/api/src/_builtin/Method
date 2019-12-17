@@ -198,7 +198,6 @@ method は、メソッド名を表します。
   p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
   p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
 
-#@since 1.8.0
 klass1 と klass2 が同じ場合は以下の形式になります。
   #<Method: klass1#method>                        (形式2)
 
@@ -238,7 +237,6 @@ klass2 は実際にそのメソッドを定義しているオブジェクトに�
     include Baz
   end
   p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
-#@end
 
 @see [[m:Object#inspect]]
 
@@ -311,7 +309,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- name    -> Symbol
 #@else
@@ -362,7 +359,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
   m.receiver # => #<Foo:0x007fb39203eb78>
   m.receiver.foo(1) # => "foo called with arg 1"
 
-#@end
 
 #@since 1.9.1
 --- source_location -> [String, Integer] | nil

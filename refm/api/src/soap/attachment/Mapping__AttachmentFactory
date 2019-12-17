@@ -1,4 +1,3 @@
-#@since 1.8.2
 = class SOAP::Mapping::AttachmentFactory < SOAP::Mapping::Factory
 
 == Instance Methods
@@ -8,4 +7,3 @@
 
 --- soap2obj(obj_class, node, info, map)
 #@todo
-#@end

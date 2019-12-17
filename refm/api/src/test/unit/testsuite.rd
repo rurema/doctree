@@ -24,7 +24,6 @@ TestSuite のインスタンスを生成して返します。
 
 @param test 自身に加える TestCase か TestSuite のインスタンスを与えます。
 
-#@since 1.8.1
 --- ==(other)    -> bool
 
 自身が other と等しい場合に真を返します。
@@ -38,7 +37,6 @@ test と等しいものがなければ nil を返します
 
 @param test  自身から削除する TestCase か TestSuite のインスタンスを与えます。
 
-#@end
 
 --- empty?    -> bool
 

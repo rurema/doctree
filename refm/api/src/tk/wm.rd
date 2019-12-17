@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 
 = module Tk::Wm
@@ -6,11 +5,9 @@ include TkComm
 
 == Constants
 
-#@since 1.8.3
 --- TOPLEVEL_METHODCALL_OPTKEYS
 #@todo
 
-#@end
 
 --- TkCommandNames
 #@todo
@@ -83,11 +80,9 @@ include TkComm
 --- protocol(name = nil, cmd = nil, &block)
 #@todo
 
-#@since 1.8.3
 --- protocols(kv = nil)
 #@todo
 
-#@end
 
 --- resizable(*args)
 #@todo
@@ -123,4 +118,3 @@ include TkComm
 #@todo
 
 
-#@end

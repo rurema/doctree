@@ -1,4 +1,3 @@
-#@since 1.8.2
 = class TkCore::Tk_OBJECT_TABLE < Object
 
 == Class Methods
@@ -12,4 +11,3 @@
 --- method_missing(m, *args, &block)
 #@todo
 
-#@end

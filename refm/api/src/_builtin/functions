@@ -1628,7 +1628,11 @@ foo
 #@end
 #@end
 
+#@since 2.4.0
+@see [[m:Warning#warn]], [[m:$stderr]],[[m:$VERBOSE]]
+#@else
 @see [[m:$stderr]],[[m:$VERBOSE]]
+#@end
 
 --- Array(arg) -> Array
 
@@ -2126,6 +2130,17 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
   $_ に再代入します。
 
 @param rs 末尾から削除する改行コードを指定します。
+
+#@samplecode 例: ruby -n で "test" を入力
+$_            # => "test\n"
+chomp         # => "test"
+#@end
+
+#@samplecode 例: ruby -n で "test," を入力し、 rs に "," を指定
+$_            # => "test\n"
+chomp         # => "test,"
+chomp(",")    # => "test"
+#@end
 
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 

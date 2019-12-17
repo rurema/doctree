@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = module SOAP::Mapping
 
@@ -25,10 +24,8 @@
 --- _soap2obj(node, registry, klass = nil)
 #@todo
 
-#@since 1.8.2
 --- create_empty_object(klass)
 #@todo
-#@end
 
 --- name2elename(name)
 #@todo
@@ -36,18 +33,14 @@
 --- elename2name(name)
 #@todo
 
-#@since 1.8.3
 --- const_from_name(name, lenient = false)
 #@todo
-#@end
 
 --- class_from_name(name, lenient = false)
 #@todo
 
-#@since 1.8.3
 --- module_from_name(name, lenient = false)
 #@todo
-#@end
 
 --- class2qname(klass)
 #@todo
@@ -58,7 +51,6 @@
 --- obj2element(obj)
 #@todo
 
-#@since 1.8.3
 --- define_singleton_method(obj, name) { ... }
 #@todo
 
@@ -82,7 +74,6 @@
 
 --- schema_attribute_definition(klass)
 #@todo
-#@end
 
 #@if (version == "1.8.2")
 --- find_attribute(obj, attr_name)
@@ -111,4 +102,3 @@
 --- EMPTY_OPT
 #@todo
 
-#@end

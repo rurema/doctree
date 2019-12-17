@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/soap
 require soap/mapping
 require soap/mapping/wsdlliteralregistry
@@ -119,4 +118,3 @@ require soap/header/handlerset
 --- call(name, *params)
 #@todo
 
-#@end

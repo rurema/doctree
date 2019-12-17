@@ -20,11 +20,9 @@ require soap/mapping
 
 == Instance Methods
 
-#@since 1.8.2
 --- collect_faulttypes
 #@todo
 
-#@end
 
 --- soap_rpc_complextypes(binding)
 #@todo

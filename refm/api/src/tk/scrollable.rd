@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 
@@ -22,4 +21,3 @@ include Tk::Y_Scrollable
 #@include(scrollable/X_Scrollable)
 #@include(scrollable/Y_Scrollable)
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.2
 = class SOAP::SOAPAttachment < SOAP::SOAPExternalReference
 
 == Class Methods
@@ -10,4 +9,3 @@
 
 --- data
 #@todo
-#@end

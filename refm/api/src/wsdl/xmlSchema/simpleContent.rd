@@ -22,10 +22,8 @@ require xsd/namedelements
 #@todo
 #@end
 
-#@since 1.8.3
 --- check_lexical_format(value)
 #@todo
-#@end
 
 #@if(version <= "1.8.2")
 --- content
@@ -35,10 +33,8 @@ require xsd/namedelements
 #@todo
 
 #@end
-#@since 1.8.3
 --- extension
 #@todo
-#@end
 
 #@if(version <= "1.8.2")
 --- parse_attr
@@ -48,11 +44,9 @@ require xsd/namedelements
 --- parse_element(element)
 #@todo
 
-#@since 1.8.3
 --- restriction
 #@todo
 
-#@end
 
 --- targetnamespace
 #@todo

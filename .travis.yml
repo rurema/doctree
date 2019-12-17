@@ -1,13 +1,12 @@
 language: ruby
-dist: xenial
+dist: bionic
 rvm:
-  - 2.6.1
+  - 2.3 # docs.ruby-lang.org use "ruby 2.3.3p222 (2016-11-21) [x86_64-linux-gnu]"
 notifications:
   email:
     recipients:
       - okkez000@gmail.com
-      - zn@mbf.nifty.com
-      - sho.hsmt@gmail.com
+      - kzhr.nsym@gmail.com
   irc:
     channels:
       - "chat.freenode.net#ruby-ja"
