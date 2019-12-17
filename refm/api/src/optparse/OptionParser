@@ -930,6 +930,23 @@ opts.default_argv # => ["--foo", "param1", "--bar", "param2"]
 
 @param argv デフォルトでパースしたい文字列の配列を指定します。
 
+#@samplecode 例
+require "optparse"
+
+config = {}
+opts = OptionParser.new
+opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
+
+# パラメーター指定なしで実行
+opts.default_argv # => []
+opts.parse!
+p config          # => {}
+
+opts.default_argv = ["--require", "lib1"] # => ["--require", "lib"]
+opts.default_argv # => ["--require", "param1"]
+opts.parse!
+p config          # => {:lib=>"lib1"}
+#@end
 
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
