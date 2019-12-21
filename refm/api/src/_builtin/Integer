@@ -319,11 +319,9 @@ self ともっとも近い整数を返します。
 @see [[m:Numeric#truncate]]
 #@end
 
---- to_s -> String
---- to_s(base) -> String
+--- to_s(base=10)    -> String
 #@since 2.4.0
---- inspect       -> String
---- inspect(base) -> String
+--- inspect(base=10) -> String
 #@end
 
 整数を 10 進文字列表現に変換します。
