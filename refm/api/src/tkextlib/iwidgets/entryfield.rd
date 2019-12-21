@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/iwidgets
@@ -125,4 +124,3 @@ based on tk/scrollable.rb
 #@include(entryfield/Entryfield__EntryfieldValidate)
 #@include(entryfield/Entryfield__EntryfieldValidate__ValidateArgs)
 
-#@end

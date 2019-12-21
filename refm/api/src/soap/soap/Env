@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = module SOAP::Env
 
@@ -15,4 +14,3 @@
 --- NO_PROXY
 #@todo
 
-#@end

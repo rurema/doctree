@@ -105,7 +105,32 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @param klass 削除したいクラスオブジェクトを指定します。
 
-#@since 1.8.5
+#@samplecode 例
+require "optparse"
+require "time"
+
+def parse(option_parser)
+  option_parser.on("-t", "--time [TIME]", Time) do |time|
+    p time.class
+  end
+  option_parser.parse(ARGV)
+end
+
+OptionParser.accept(Time) do |s,|
+  begin
+    Time.parse(s) if s
+  rescue
+    raise OptionParser::InvalidArgument, s
+  end
+end
+
+opts1 = OptionParser.new
+parse(opts1) # => Time
+OptionParser.reject(Time)
+opts2 = OptionParser.new
+parse(opts2) # => unsupported argument type: Time (ArgumentError)
+#@end
+
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
@@ -123,9 +148,10 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@#noexample OptionParser#getopts を参照
+
 @see [[m:OptionParser#getopts]]
 
-#@end
 
 == Instance Methods
 
@@ -137,6 +163,26 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 @param klass クラスオブジェクトを与えます。
 
 @param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
+
+#@samplecode 例
+require "optparse"
+require "time"
+
+opts = OptionParser.new
+opts.accept(Time) do |s,|
+  begin
+    Time.parse(s) if s
+  rescue
+    raise OptionParser::InvalidArgument, s
+  end
+end
+
+opts.on("-t", "--time [TIME]", Time) do |time|
+  p time.class # => Time
+end
+
+opts.parse!(ARGV)
+#@end
 
 --- reject(klass)    -> ()
 
@@ -151,11 +197,41 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @return サマリの最初に表示される文字列を返します。
 
+#@samplecode 例
+require "optparse"
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end
+
+p opts.banner # => "Usage: example.rb [options]"
+#@end
+
 --- banner=(heading)
 
 サマリの最初に表示される文字列を指定します。
 
 @param heading サマリの最初に表示される文字列を指定します。
+
+#@samplecode 例
+require "optparse"
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]" # => "Usage: example.rb [options]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end
+
+opts.banner # => "Usage: example.rb [options]"
+#@end
 
 --- summary_width         -> Integer
 
@@ -201,11 +277,19 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @return プログラムのバージョンを文字列で返します。
 
+#@#noexample OptionParser#verを参照
+
+@see [[OptionParser#ver]]
+
 --- version=(ver)
 
 プログラムのバージョンを文字列で指定します。
 
 @param ver プログラムのバージョンを文字列で指定します。
+
+#@#noexample OptionParser#verを参照
+
+@see [[OptionParser#ver]]
 
 --- release       -> String
 
@@ -217,9 +301,31 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
 @param rel プログラムのリリースを文字列で指定します。
 
+#@#noexample OptionParser#verを参照
+
+@see [[OptionParser#ver]]
+
 --- ver    -> String
 
 program_name、version と release から生成したバージョンを表す文字列を返します。
+
+#@samplecode 例
+require "optparse"
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+  opts.program_name = "Optparse Example"
+  opts.version = [0, 1]
+  opts.release = "2019-05-01"
+
+  opts.on_tail("--version", "Show version") do
+    puts opts.ver # => "Optparse Example 0.1 (2019-05-01)"
+    exit
+  end
+
+  opts.parse!(ARGV)
+end
+#@end
 
 --- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent)               -> ()
 --- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent) {|line| ... } -> ()
@@ -242,6 +348,24 @@ to にサマリが加えられることはありません。
 --- to_s    -> String
 
 サマリの文字列を返します。
+
+#@samplecode 例
+require "optparse"
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end
+
+puts opts.help
+
+# => Usage: example.rb [options]
+#    -v, --[no-]verbose               Run verbosely
+#@end
 
 --- to_a    -> [String]
 
@@ -464,6 +588,23 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 
 @param block [[m:OptionParser#on]] と同様です。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+puts opts.help
+
+# => Usage: test [options]
+#    -i, --init
+#    -u, --update
+#    -h, --help
+#@end
+
 @see [[m:OptionParser#on]], [[m:OptionParser#on_tail]]
 
 --- on_tail(*arg, &block) -> self
@@ -476,17 +617,37 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 
 @param block [[m:OptionParser#on]] と同様です。
 
-例:
+#@samplecode 例
+require "optparse"
 
-  opts.on_tail("-h", "--help", "Show this message") do
-    puts opts
-    exit
-  end
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
 
-  opts.on_tail("--version", "Show version") do
-    puts OptionParser::Version.join('.')
-    exit
-  end
+puts opts.help
+
+# => Usage: test [options]
+#    -i, --init
+#    -u, --update
+#    -h, --help
+#@end
+
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new
+opts.on_tail("-h", "--help", "Show this message") do
+  puts opts
+  exit
+end
+
+opts.on_tail("--version", "Show version") do
+  puts OptionParser::Version.join('.')
+  exit
+end
+#@end
 
 @see [[m:OptionParser#on]], [[m:OptionParser#on_head]]
 
@@ -745,6 +906,21 @@ argv からオプションを取り除いたものを返します。
                 指定されないか nil である場合、~/.options/ に
                 プログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
 
+#@samplecode 例
+require "optparse"
+
+IO.write("options.txt", %w(-a --b).join("\n"))
+options = { a: false, b: false }
+OptionParser.new do |opt|
+  opt.on('-a') { |v| options[:a] = v }
+  opt.on('--b') {|v| options[:b] = v }
+  opt.load("options.txt")   # => true
+  opt.load("not_exist.txt") # => false
+end
+
+p options # => {:a=>true, :b=>true}
+#@end
+
 --- environment(env)    -> [String]
 
 環境変数 env に対して
@@ -757,12 +933,20 @@ argv からオプションを取り除いたものを返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-#@since 1.8.3
 --- default_argv    -> [String]
 
 自身がデフォルトでパースする引数を文字列の配列で返します。
 
 @param argv デフォルトでパースする文字列の配列を返します。
+
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new
+
+# --hoo param1 --bar param2 をパラメーターに指定して実行
+opts.default_argv # => ["--foo", "param1", "--bar", "param2"]
+#@end
 
 --- default_argv=(argv)
 
@@ -772,9 +956,24 @@ argv からオプションを取り除いたものを返します。
 
 @param argv デフォルトでパースしたい文字列の配列を指定します。
 
+#@samplecode 例
+require "optparse"
+
+config = {}
+opts = OptionParser.new
+opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
+
+# パラメーター指定なしで実行
+opts.default_argv # => []
+opts.parse!
+p config          # => {}
+
+opts.default_argv = ["--require", "lib1"] # => ["--require", "lib"]
+opts.default_argv # => ["--require", "param1"]
+opts.parse!
+p config          # => {:lib=>"lib1"}
 #@end
 
-#@since 1.8.5
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
@@ -806,4 +1005,3 @@ default_argv をパースします。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-#@end

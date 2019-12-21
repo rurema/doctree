@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/text
@@ -215,4 +214,3 @@ based on tk/scrollable.rb
 #@include(hierarchy/Hierarchy__IconCommand)
 #@include(hierarchy/Hierarchy__IconCommand__ValidateArgs)
 
-#@end

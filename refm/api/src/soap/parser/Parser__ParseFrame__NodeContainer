@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::Parser::ParseFrame::NodeContainer
 
@@ -15,4 +14,3 @@
 --- replace_node(node)
 #@todo
 
-#@end

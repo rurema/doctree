@@ -1,4 +1,3 @@
-#@since 1.8.0
 = class XMLRPC::Client::Proxy < XMLRPC::Client
 
 Class XMLRPC::Client::Proxy makes XML-RPC calls look nicer!
@@ -40,4 +39,3 @@ a RPC.
 args are arguments which are automatically given
 to every XML-RPC call before the arguments provides through method_missing.
 
-#@end

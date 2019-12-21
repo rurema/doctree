@@ -69,7 +69,7 @@ exit! は exit とは違って、例外処理などは一切行ないませ
   #   start1...
   #終了ステータス:1
 
-@see [[m:Kernel.#exit]],[[m:Kernel.#abort]]
+@see [[m:Kernel.#exit]],[[m:Kernel.#abort]],[[m:Kernel.#at_exit]],[[m:Kernel.#fork]]
 
 --- abort(message = $!.message) -> ()
 
@@ -678,7 +678,7 @@ Process.waitpid(child_pid)
 #@end
 
 
-@see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
+@see [[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#at_exit]],[[m:Kernel.#exit!]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
 
@@ -1628,7 +1628,11 @@ foo
 #@end
 #@end
 
+#@since 2.4.0
+@see [[m:Warning#warn]], [[m:$stderr]],[[m:$VERBOSE]]
+#@else
 @see [[m:$stderr]],[[m:$VERBOSE]]
+#@end
 
 --- Array(arg) -> Array
 
@@ -1794,7 +1798,7 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
   #   at_exit1
   #   at_exit0
 
-@see [[ref:d:spec/control#END]]
+@see [[ref:d:spec/control#END]],[[m:Kernel.#exit!]],[[m:Kernel.#fork]]
 
 --- loop         -> Enumerator
 --- loop { ... } -> object | nil
@@ -2126,6 +2130,17 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
   $_ に再代入します。
 
 @param rs 末尾から削除する改行コードを指定します。
+
+#@samplecode 例: ruby -n で "test" を入力
+$_            # => "test\n"
+chomp         # => "test"
+#@end
+
+#@samplecode 例: ruby -n で "test," を入力し、 rs に "," を指定
+$_            # => "test\n"
+chomp         # => "test,"
+chomp(",")    # => "test"
+#@end
 
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 

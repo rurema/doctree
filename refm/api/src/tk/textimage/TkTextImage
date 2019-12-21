@@ -8,13 +8,11 @@ include TkText::IndexModMethods
 
 == Instance Methods
 
-#@since 1.8.2
 --- id
 #@todo
 
 --- mark
 #@todo
-#@end
 
 --- [](slot)
 #@todo
@@ -31,10 +29,8 @@ include TkText::IndexModMethods
 --- configinfo(slot = nil)
 #@todo
 
-#@since 1.8.2
 --- current_configinfo(slot = nil)
 #@todo
-#@end
 
 --- image
 #@todo

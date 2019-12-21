@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/tcllib
@@ -7,11 +6,9 @@ require tkextlib/tcllib
 extend TkCore
 
 == Singleton Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 --- package_version
 #@todo
 
@@ -37,4 +34,3 @@ extend TkCore
 --- cursor_restore(cursor = None)
 #@todo
 
-#@end

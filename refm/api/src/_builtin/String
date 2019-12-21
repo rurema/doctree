@@ -1122,6 +1122,8 @@ salt には、以下の様になるべくランダムな文字列を選ぶべき
 
 注意:
 
+  * Ruby 2.6 から非推奨になったため、引き続き必要な場合は
+    string-crypt gem の使用を検討してください。
   * crypt の処理は [[man:crypt(3)]] の実装に依存しています。
     従って、crypt で処理される内容の詳細や salt の与え方については、
     利用環境の [[man:crypt(3)]] 等を見て確認してください。
@@ -1172,6 +1174,8 @@ p "123456789".delete("2378")         #=> "14569"
 p "123456789".delete("2-8", "^4-6")  #=> "14569"
 #@end
 
+@see [[m:String#delete!]]
+
 --- delete!(*strs) -> self | nil
 
 self から strs に含まれる文字を破壊的に取り除きます。
@@ -1205,6 +1209,8 @@ str = "abc"
 p str.delete!("2378")         #=> "nil"
 p str                         #=> "abc"
 #@end
+
+@see [[m:String#delete]]
 
 #@since 2.4.0
 --- downcase(*options) -> String

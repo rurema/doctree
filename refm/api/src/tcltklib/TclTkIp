@@ -14,16 +14,13 @@
 --- _toUTF8(str, encoding = nil)
 #@todo
 
-#@since 1.8.2
 --- _conv_listelement(src)
 #@todo
 
 --- _create_console
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- _get_global_var(var_name)
 #@todo
 
@@ -36,31 +33,23 @@
 --- _get_variable2(var_name, index, flag)
 #@todo
 
-#@end
 
-#@since 1.8.4
 --- _immediate_invoke
 #@todo
 
-#@end
 
 
-#@since 1.8.5
 --- _make_menu_embeddable(menu_path)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- _merge_tklist
 #@todo
 
-#@end
 
 --- _return_value
 #@todo
 
-#@since 1.8.2
 --- _set_global_var(var_name, value)
 #@todo
 
@@ -73,24 +62,18 @@
 --- _set_variable(var_name, index, value, flag)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- _split_tklist(list_str)
 #@todo
 
-#@end
 
-#@since 1.8.1
 --- _thread_tkwait(mode, target)
 #@todo
 
 --- _thread_vwait(var)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- _unset_global_var(var_name)
 #@todo
 
@@ -103,16 +86,13 @@
 --- _unset_variable2(var_name, index, flag)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- allow_ruby_exit=(val)
 #@todo
 
 --- allow_ruby_exit?
 #@todo
 
-#@end
 
 --- create_slave
 #@todo
@@ -136,17 +116,13 @@
 #@todo
 
 
-#@since 1.8.3
 --- has_mainwindow?
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- invalid_namespace?
 #@todo
 
-#@end
 
 --- mainloop
 #@todo
@@ -175,17 +151,13 @@
 --- set_eventloop_weight(loop_max, no_event)
 #@todo
 
-#@since 1.8.2
 --- set_max_block_time(time)
 #@todo
 
-#@end
 
 --- set_no_event_wait(wait)
 #@todo
 
-#@since 1.8.4
 --- slave_of?(master)
 #@todo
 
-#@end

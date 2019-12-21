@@ -22,16 +22,13 @@ Rake で使用するメインのクラスです。
 
 @param loader ローダーを指定します。
 
---- collect_tasks(argv) -> Array
+--- collect_command_line_tasks(argv) -> Array
 
 コマンドライン引数を解析して実行するタスクのリストを返します。
 
 実行するタスクが指定されていない場合はデフォルトのタスクのみ返します。
 また、このとき環境変数の解析も行います。
 
---- const_warning(const_name)
-
-トップレベルで定数を使用している場合に警告を表示します。
 
 --- display_prerequisites
 
@@ -89,17 +86,46 @@ Rakefile がカレントディレクトリに存在する場合はそのファ�
 
 Rakefile を探してロードします。
 
+#@#noexample
+
 --- name -> String
 
 アプリケーションの名前を返します。通常は 'rake' という名前を返します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.name # => "rake"
+end
+#@end
 
 --- options -> OpenStruct
 
 コマンドラインで与えられたアプリケーションのオプションを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.options  # => #<OpenStruct always_multitask=false, backtrace=false, build_all=false, dryrun=false, ignore_deprecate=false, ignore_system=false, job_stats=false, load_system=false, nosearch=false, rakelib=["rakelib"], show_all_tasks=false, show_prereqs=false, show_task_pattern=nil, show_tasks=nil, silent=false, suppress_backtrace_pattern=nil, thread_pool_size=8, trace=false, trace_output=#<IO:<STDERR>>, trace_rules=false>
+end
+#@end
+
 --- original_dir -> String
 
 rake コマンドを実行したディレクトリを返します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.original_dir # => "/path/to/dir"
+end
+#@end
 
 --- parse_task_string(string) -> [String, Array]
 
@@ -122,6 +148,15 @@ rake コマンドを実行したディレクトリを返します。
 --- rakefile -> String
 
 実際に使用されている Rakefile の名前を返します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.rakefile # => "Rakefile"
+end
+#@end
 
 --- rakefile_location -> String
 

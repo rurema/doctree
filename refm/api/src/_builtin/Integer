@@ -107,12 +107,10 @@ self は非負整数でなければいけません。非負整数でない場合
 #@end
 
 --- downto(min) {|n| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- downto(min) -> Enumerator
 #@else
 --- downto(min) -> Enumerable::Enumerator
-#@end
 #@end
 
 self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
@@ -147,12 +145,10 @@ self の次の整数を返します。
 @see [[m:Integer#pred]]
 
 --- times {|n| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- times -> Enumerator
 #@else
 --- times -> Enumerable::Enumerator
-#@end
 #@end
 
 self 回だけ繰り返します。
@@ -347,12 +343,10 @@ self ともっとも近い整数を返します。
 #@else
 --- upto(max) {|n| ... } -> Fixnum | Bignum
 #@end
-#@since 1.8.7
 #@since 1.9.1
 --- upto(max) -> Enumerator
 #@else
 --- upto(max) -> Enumerable::Enumerator
-#@end
 #@end
 
 self から max まで 1 ずつ増やしながら繰り返します。
@@ -376,7 +370,6 @@ self > max であれば何もしません。
   1.integer?     # => true
   1.0.integer?   # => false
 
-#@since 1.8.7
 --- even? -> bool
 
 自身が偶数であれば真を返します。
@@ -418,7 +411,6 @@ self から -1 した値を返します。
    (-1).pred   #=> -2
 
 @see [[m:Integer#next]]
-#@end
 
 #@since 1.9.1
 --- denominator -> Integer
@@ -536,10 +528,11 @@ self を浮動小数点数([[c:Float]])に変換します。
 
 self が [[c:Float]] の範囲に収まらない場合、[[m:Float::INFINITY]] を返します。
 
-例:
-
-  1.to_f                       # => 1.0
-  (Float::MAX.to_i * 2).to_f   # => Infinity
+#@samplecode
+1.to_f                       # => 1.0
+(Float::MAX.to_i * 2).to_f   # => Infinity
+(-Float::MAX.to_i * 2).to_f  # => -Infinity
+#@end
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
@@ -610,6 +603,20 @@ self の符号を反転させたものを返します。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
+#@samplecode 例
+4 / 2 # => 2
+5 / 2 # => 2
+-4 / 2 # => -2
+-4.div(2) # => -2
+begin
+  2 / 0
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+end
+#@end
+
+@see [[m:Integer#fdiv]], [[m:Numeric#div]], [[m:Numeric#fdiv]]
+
 --- %(other) -> Numeric
 --- modulo(other) -> Numeric
 
@@ -663,7 +670,7 @@ self を other で割った商を [[c:Float]] で返します。
 
 @param other self を割る数を指定します。
 
-@see [[m:Numeric#quo]]
+@see [[m:Numeric#quo]], [[m:Numeric#div]], [[m:Integer#div]]
 
 --- **(other) -> Numeric
 #@since 2.5.0
@@ -876,6 +883,7 @@ bitsが実数の場合、小数点以下を切り捨てた値でシフトしま�
     # => 4
          8
 
+@see [[m:Integer#bit_length]]
 --- bit_length -> Integer
 
 self を表すのに必要なビット数を返します。
@@ -902,6 +910,7 @@ self を表すのに必要なビット数を返します。
    (2**12).bit_length        # => 13
    (2**12+1).bit_length      # => 13
 
+@see [[m:Integer#size]]
 #@end
 #@since 2.5.0
 --- allbits?(mask) -> bool

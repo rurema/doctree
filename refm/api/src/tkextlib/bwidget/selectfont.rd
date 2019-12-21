@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/bwidget
@@ -25,4 +24,3 @@ extend Tk
 #@include(selectfont/SelectFont__Dialog)
 #@include(selectfont/SelectFont__Toolbar)
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Plotchart::Gnattchart < TkCanvas
 include Tk::Tcllib::Plotchart::ChartMethod
@@ -29,4 +28,3 @@ include Tk::Tcllib::Plotchart::ChartMethod
 --- font_of_part(keyword, newfont)
 #@todo
 
-#@end

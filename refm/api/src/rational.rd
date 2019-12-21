@@ -531,7 +531,6 @@ other に [[c:Rational]] を指定した場合には戻り値が [[c:Rational]] 
   # 1.9.1 の場合
   Rational(3, 4) ** Rational(2, 1)  # => (9/16)
 
-#@since 1.8.7
 --- div(other) -> Integer
 
 self を other で割った整数の商を返します。
@@ -542,7 +541,6 @@ self を other で割った整数の商を返します。
 
   Rational(1, 2).div(Rational(2, 3)) # => 0
 
-#@end
 
 --- divmod(other) -> [Integer, Float | Rational]
 
@@ -630,7 +628,6 @@ self と other を比較して、self が大きい時に 1、等しい時に 0�
   Rational(1).coerce(2)   # => [Rational(2, 1), Rational(1, 1)]
   Rational(1).coerce(2.2) # => [2.2, 1.0]
 
-#@since 1.8.7
 --- floor -> Integer
 
 自身と等しいかより小さな整数のうち最大のものを返します。
@@ -679,7 +676,6 @@ self と other を比較して、self が大きい時に 1、等しい時に 0�
 @see [[m:Rational#ceil]], [[m:Rational#floor]], [[m:Rational#truncate]]
 
 --- truncate -> Integer
-#@end
 --- to_i -> Integer
 
 小数点以下を切り捨てて値を整数に変換します。
@@ -691,9 +687,7 @@ self と other を比較して、self が大きい時に 1、等しい時に 0�
   Rational(98, 71).to_i # => 1
   Rational(-30, 2).to_i # => -15
 
-#@since 1.8.7
 @see [[m:Rational#ceil]], [[m:Rational#floor]]
-#@end
 
 --- to_f -> Float
 

@@ -8,7 +8,6 @@ Unit テストを行いたいだけのユーザが、このライブラリを re
 
 == Constants
 
-#@since 1.8.1
 --- SILENT        -> Integer
 
 テスト結果の出力レベルを表す定数です。何も出力しません。
@@ -24,7 +23,6 @@ Unit テストを行いたいだけのユーザが、このライブラリを re
 --- VERBOSE       -> Integer
 
 テスト結果の出力レベルを表す定数です。詳細な出力を行います。
-#@end
 
 = module Test::Unit::UI::TestRunnerUtilities
 
