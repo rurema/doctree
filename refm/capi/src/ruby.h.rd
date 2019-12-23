@@ -224,7 +224,7 @@ Fixnum におさまることが自明な整数を Fixnum に変換します。
 任意の整数を Fixnum か Bignum に変換します。 
 
 例:
-   VALUE num = INT2NUM(42); (Cの整数値42をRubyのオブジェクトに変換)
+   VALUE num = INT2NUM(42); //(Cの整数値42をRubyのオブジェクトに変換)
 
 --- MACRO int ISALNUM(char c)
 
