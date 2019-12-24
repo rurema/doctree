@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 require wsdl/info
 require xsd/namedelements
@@ -24,11 +23,9 @@ require xsd/namedelements
 --- bindings
 #@todo
 
-#@since 1.8.3
 --- collect_attributes
 #@todo
 
-#@end
 
 --- collect_complextypes
 #@todo
@@ -36,19 +33,15 @@ require xsd/namedelements
 --- collect_elements
 #@todo
 
-#@since 1.8.2
 --- collect_simpletypes
 #@todo
 
-#@end
 
-#@since 1.8.3
 --- importedschema
 #@todo
 
 属性
 
-#@end
 
 --- imports
 #@todo
@@ -58,12 +51,10 @@ require xsd/namedelements
 --- inspect
 #@todo
 
-#@since 1.8.3
 --- location
 --- location=(val)
 #@todo
 
-#@end
 
 --- message(name)
 #@todo
@@ -114,4 +105,3 @@ require xsd/namedelements
 
 属性
 
-#@end

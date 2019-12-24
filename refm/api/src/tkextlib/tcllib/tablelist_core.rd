@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Tablelist < TkWindow
 include Tk::Tcllib::TablelistItemConfig
@@ -297,4 +296,3 @@ alias Tk::Tcllib::Tablelist
 
 #@include(TablelistItemConfig)
 
-#@end

@@ -54,11 +54,9 @@ extend TkWinRegistry
 
 == Instance Methods
 
-#@since 1.8.2
 --- broadcast(keynam, timeout = nil)
 #@todo
 
-#@end
 
 #@if(version <= "1.8.1")
 --- delete(keynam, valnam = nil)

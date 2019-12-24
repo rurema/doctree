@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tkextlib/tcllib
@@ -34,4 +33,3 @@ require tkextlib/tcllib
 --- withdraw
 #@todo
 
-#@end

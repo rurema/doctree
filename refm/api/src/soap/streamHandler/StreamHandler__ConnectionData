@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::StreamHandler::ConnectionData < Object
 
@@ -33,4 +32,3 @@
 --- soapaction=(value)
 #@todo
 
-#@end

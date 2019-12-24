@@ -6,10 +6,8 @@ include File::Constants
 ファイルアクセスのためのクラスです。
 
 通常 [[m:Kernel.#open]] または [[m:File.open]] を使って生成します。
-#@since 1.8.0
 [[c:IO]] クラスがインクルードしている [[c:File::Constants]] は File クラスに関係する定数を
 格納したモジュールです。
-#@end
 また [[c:File::Stat]] は stat 構造体( [[man:stat(2)]] 参照)を表すクラスです。
 
 == Class Methods
@@ -78,12 +76,10 @@ filename の一番後ろのスラッシュに続く要素を返します。も�
   p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
   p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
 
-#@since 1.8.0
 File.basename の動作は [[man:basename(3)]] 
 #@#[[url:http://www.unix-systems.org/version3/online.html]]
 に従います。
   p File.basename("foo/bar/")      # => "bar"
-#@end
 
 @param filename ファイル名を表す文字列を指定します。
 
@@ -183,9 +179,9 @@ File.lstat("testlink").uid      # => 0
 
 例:
   IO.write("test.txt", "test")
-  p File.exists?("test.txt")  # => true
+  p File.exist?("test.txt")  # => true
   p File.delete("test.txt")   # => 1
-  p File.exists?("test.txt")  # => false
+  p File.exist?("test.txt")  # => false
   begin
     File.delete("test.txt")
   rescue

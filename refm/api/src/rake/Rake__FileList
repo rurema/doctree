@@ -70,6 +70,8 @@ include Rake::Cloneable
 
 [[m:Array#*]] と動作を合わせるために再定義しています。
 
+#@#noexample
+
 @see [[m:Array#*]]
 
 --- resolve -> self

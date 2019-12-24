@@ -1,4 +1,3 @@
-#@since 1.8.1
 = module XSD::Charset
 == module functions
 --- charset_label(encoding)
@@ -43,9 +42,6 @@
 --- is_utf8(str)
 #@todo
 
-#@since 1.8.3
 --- xml_encoding_label
 #@todo
-#@end
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class Tk::TkTable::ValidateCommand::ValidateArgs < TkUtil::CallbackSubst
 
@@ -6,4 +5,3 @@
 --- ret_val(val)
 #@todo
 
-#@end

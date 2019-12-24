@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require wsdl/parser
 #@#require wsdl/importer
 #@#require xsd/qname
@@ -10,4 +9,3 @@ require soap/rpc/driver
 #@include(wsdlDriver/WSDLDriverFactory)
 #@include(wsdlDriver/WSDLDriver)
 #@include(wsdlDriver/WSDLDriver__Servant__)
-#@end
