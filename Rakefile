@@ -33,7 +33,7 @@ def generate_statichtml(version)
     "--templatedir=#{bitclust_gem_path}/data/bitclust/template.offline",
     "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
     "--fs-casesensitive",
-    "--canonical-base-url=http://localhost:9292/latest/"
+    "--canonical-base-url=https://docs.ruby-lang.org/ja/latest/",
   ]
   # To suppress progress bar
   # because it exceeded Travis CI max log length
