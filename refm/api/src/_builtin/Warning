@@ -4,7 +4,34 @@
 
 本モジュールは warn インスタンスメソッドのみで構成されます。しかし、本モジュールは自身を extend するため、.warn メソッドも利用可能です。warn メソッドは Ruby が出力する全ての警告に対して呼び出されます。デフォルトでは全ての警告が [[m:$stderr]] に出力されます。
 
-[[m:Warning#warn]] をオーバーライドする事でRuby から出力される警告の動作を変更する事ができます。例えばエラーメッセージのフィルタリングや、[[m:$stderr]] 以外に警告を出力といった変更が可能です。[[m:Warning#warn]] をオーバーライドする際は super を呼び出すとデフォルトの動作である [[m:$stderr]] への出力ができます。
+[[m:Warning.warn]] をオーバーライドする事で Ruby から出力される警告の動作を変更する事ができます。例えばエラーメッセージのフィルタリングや、[[m:$stderr]] 以外に警告を出力といった変更が可能です。[[m:Warning.warn]] をオーバーライドする際は super を呼び出すとデフォルトの動作である [[m:$stderr]] への出力ができます。
+
+== Class Methods
+
+--- warn(*message) -> nil
+
+引数 message を標準エラー出力 [[m:$stderr]] に出力します。
+
+本メソッドはRubyが出力する全ての警告に対して呼び出されます。
+そのため本メソッドをオーバーライドすることで Ruby から出力される警告の動作を変更できます。
+またオーバーライドしたメソッドからは super を呼び出すことで、デフォルトの動作である [[m:$stderr]] への出力ができます。
+
+#@samplecode
+warn "hoge" # => hoge
+
+module Warning
+  # 警告メッセージの末尾に !!! を追加する
+  def self.warn(*message)
+    super(*message.map { |msg| msg.chomp + "!!!\n" })
+  end
+end
+
+warn "hoge" # => hoge!!!
+#@end
+
+@param message 出力するオブジェクトを任意個指定します。
+
+@see [[m:Kernel.#warn]], [[m:Warning#warn]]
 
 == Public Instance Methods
 
@@ -12,11 +39,11 @@
 
 引数 message を標準エラー出力 [[m:$stderr]] に出力します。
 
+[[m:Kernel.#warn]]の挙動を変更する際は、このメソッドではなくクラスメソッドである[[m:Warning.warn]]をオーバーライドする必要があります。
+
 @param message 出力するオブジェクトを任意個指定します。
 
 #@# TODO: messageに改行を渡さないとそのまま出力されるように見えるため、確認してから記載する。
 #@# Writes warning message msg to $stderr, followed by a newline if the message does not end in a newline.
 
-本メソッドはRubyが出力する全ての警告に対して呼び出されます。
-
-@see [[m:Kernel.#warn]]
+@see [[m:Kernel.#warn]], [[m:Warning.warn]]
