@@ -426,6 +426,12 @@ nil を返します。
 す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 
+#@samplecode 例
+include GC
+GC.count  # => 3
+garbage_collect
+GC.count  # => 4
+#@end
 
 #@since 2.1.0
 == Constants
