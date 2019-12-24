@@ -895,6 +895,19 @@ argv からオプションを取り除いたものを返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+ARGV             # => ["-i", "-u", "-h", "test"]
+opts.parse(ARGV) # => ["test"]
+#@end
+
 #@since 2.4.0
 --- parse!(argv = self.default_argv, into: nil)   -> [String]
 #@else
