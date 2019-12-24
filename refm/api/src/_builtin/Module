@@ -235,6 +235,26 @@ nil を返します。
 
 @see [[m:Module#<]]
 
+例:
+  module Foo; end
+  module Bar
+    include Foo
+  end
+  module Baz
+    prepend Foo
+  end
+
+  Bar.ancestors # => [Bar, Foo]
+  Foo >= Bar # => true
+  Bar >= Foo # => false
+
+  Baz.ancestors # => [Foo, Baz]
+  Foo >= Baz # => true
+  Baz >= Foo # => false
+
+  Foo >= Foo # => true
+  Foo >= Object # => nil
+
 --- ===(obj) -> bool
 
 指定された obj が self かそのサブクラスのインスタンスであるとき真を返します。
