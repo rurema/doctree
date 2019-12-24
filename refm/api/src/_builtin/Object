@@ -1790,6 +1790,11 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 #@until 2.3.0
 @raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
 #@end
+
+  ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
+  # => true
+  # false
+
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
 --- trust -> self
