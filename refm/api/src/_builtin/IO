@@ -284,6 +284,24 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
+#@samplecode 例:IO.new による読み込みモードでのファイルオープン
+io = IO.new(IO.sysopen("testfile"))
+io.class # => IO
+io.close
+#@end
+
+#@samplecode 例:IO.for_fd による読み込み・バイナリモードでのファイルオープン
+IO.binwrite("testfile", "\xBF\xAA\x16\x04.\b\xCB\x12\xACoeQ\xFDv2\xCF9+\x81\x18")
+io = IO.for_fd(IO.sysopen("testfile"), "r", { binmode: true })
+io.class # => IO
+io.binmode? # => true
+io.close
+#@end
+
+#@samplecode 例:IO.open によるファイルオープン
+IO.open(IO.sysopen("testfile")) { |io| p io.class } # => IO
+#@end
+
 #@since 2.4.0
 --- foreach(path, rs = $/, chomp: false) {|line| ... }    -> nil
 --- foreach(path, rs = $/, chomp: false)                  -> Enumerator
@@ -610,7 +628,7 @@ opts でファイルを開くときのオプションを指定します。エン
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 @param opts ファイルを開くときのオプション引数
 
@@ -623,9 +641,10 @@ IO.readlines("testfile", ",")        # => ["line1\nline2,", "\nline3\n"]
 #@end
 
 #@since 2.4.0
-#@samplecode 例: 各行の末尾から "\n", "\r", または "\r\n" を取り除く（chomp = true）
-IO.write("testfile", "line1\nline2,\nline3\n")
-IO.readlines("testfile", chomp: true)  # => ["line1", "line2,", "line3"]
+#@samplecode 例: rs を取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+IO.readlines("testfile", chomp: true)        # => ["line1,\rline2,", "line3,"]
+IO.readlines("testfile", "\r", chomp: true)  # => ["line1,", "line2,", "\nline3,\n"]
 #@end
 #@end
 
@@ -1489,10 +1508,25 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+#@samplecode 例
+IO.write("testfile", "line1,\nline2,\nline3,\n")
+File.open("testfile") { |f| p f.readlines }      # => ["line1,\n", "line2,\n", "line3,\n"]
+File.open("testfile") { |f| p f.readlines(3) }   # => ["lin", "e1,", "\n", "lin", "e2,", "\n", "lin", "e3,", "\n"]
+File.open("testfile") { |f| p f.readlines(",") } # => ["line1,", "\nline2,", "\nline3,", "\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: rsを取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+File.open("testfile") { |f| p f.readlines(chomp: true) }       # => ["line1,\rline2,", "line3,"]
+File.open("testfile") { |f| p f.readlines("\r", chomp: true) } # => ["line1,", "line2,", "\nline3,\n"]
+#@end
+#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
@@ -2130,7 +2164,7 @@ auto-close フラグを設定します。
 
 フラグが設定されているオブジェクトは
 close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
-設定されていない場合は close しません。
+偽を設定すると close しません。
 
 @param bool 真偽値でフラグを設定します
 @see [[m:IO#autoclose?]]
@@ -2138,12 +2172,12 @@ close時/GCでのファイナライザ呼出時にファイルデスクリプタ
    f = open("/dev/null")
    IO.for_fd(f.fileno)
    # ...
-   f.gets # may cause IOError
+   f.gets # may cause Errno::EBADF
 
    f = open("/dev/null")
-   IO.for_fd(f.fileno).autoclose = true
+   IO.for_fd(f.fileno).autoclose = false
    # ...
-   f.gets # won't cause IOError
+   f.gets # won't cause Errno::EBADF
 --- autoclose? -> bool
 
 auto-close フラグを返します。
@@ -2232,6 +2266,10 @@ posix_fadvise をサポートしていないプラットフォーム上では
 @raise Errno::ESPIPE ファイルデスクリプタが FIFO か pipe を指している
        場合に発生する例外(Linux はこの場合には Errno::EINVAL を発生する)
 @raise RangeError offset,lenが有効範囲から出ている場合に発生する例外
+
+#@samplecode 例
+File.open("testfile") { |f| p f.advise(:sequential) } # => nil
+#@end
 
 == Constants
 

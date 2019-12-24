@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class Tk::Itk::Archetype < TkWindow
 
@@ -20,4 +19,3 @@
 --- component_obj(*names)
 #@todo
 
-#@end

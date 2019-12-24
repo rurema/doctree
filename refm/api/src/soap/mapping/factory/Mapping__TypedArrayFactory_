@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::Mapping::TypedArrayFactory_ < SOAP::Mapping::Factory
 
@@ -15,4 +14,3 @@
 --- soap2obj(obj_class, node, info, map)
 #@todo
 
-#@end

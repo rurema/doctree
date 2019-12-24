@@ -2,12 +2,14 @@
 
 === 説明
 
-5段階のログレベルに分けてログを記録します。
+6段階のログレベルに分けてログを記録します。
 
+: UNKNOWN
+  常に記録されるべき不明なエラー
 : FATAL
   プログラムをクラッシュさせるような制御不可能なエラー
 : ERROR
-  エラー
+  制御可能なエラー
 : WARN
   警告
 : INFO
@@ -306,9 +308,32 @@ Logger オブジェクトを生成します。
 @param progname ログメッセージと一緒に記録するプログラム名を指定します。
                 省略すると nil が使用されますが、実際には内部で保持されている値が使用されます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.add(Logger::FATAL) { 'Fatal error!' }
+# 通常はログレベルごとのメソッドを使えばいいので、 add は使わない
+logger.fatal('Fatal error!')
+
+# => F, [2019-03-11T00:34:18.037272 #1320] FATAL -- : Fatal error!
+#    F, [2019-03-11T00:34:18.037272 #1320] FATAL -- : Fatal error!
+#@end
+
 --- close -> nil
 
 ログ出力に使用していた IO オブジェクトを閉じます。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.info("test") # => I, [2019-04-16T00:40:11.837898 #2795]  INFO -- : test
+logger.close
+logger.info("test") # => log writing failed. closed stream
+#@end
 
 --- datetime_format -> String | nil
 
@@ -320,12 +345,42 @@ Logger オブジェクトを生成します。
 なお、"%06d" には [[m:Time#strftime]] ではなく、単に [[m:Time#usec]] の
 値を [[m:String#%]] でフォーマットしたものが入ります。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.datetime_format # => nil
+logger.debug("test")
+logger.datetime_format = '%Y/%m/%dT%H:%M:%S.%06d'
+logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
+logger.debug("test")
+
+# => D, [2019-03-12T22:52:13.674385 #17393] DEBUG -- : test
+#    D, [2019/03/12T22:52:13.000012#17393] DEBUG -- : test
+#@end
+
 @see [[m:Time#strftime]], [[m:Logger#datetime_format=]]
 
 
 --- datetime_format=(format)
 
 ログに記録する時の日付のフォーマットをセットします。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+
+logger.datetime_format # => nil
+logger.debug("test")
+logger.datetime_format = '%Y/%m/%dT%H:%M:%S.%06d' # => "%Y/%m/%dT%H:%M:%S.%06d"
+logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
+logger.debug("test")
+
+# => D, [2019-03-13T23:52:13.674385 #17393] DEBUG -- : test
+#    D, [2019/03/13T23:52:13.000012#17393] DEBUG -- : test
+#@end
 
 @see [[m:Time#strftime]], [[m:Logger#datetime_format]]
 
@@ -334,25 +389,70 @@ Logger オブジェクトを生成します。
 現在の Logger オブジェクトが DEBUG 以上のログレベルのメッセージを記録するなら
 真を返します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT, level: Logger::Severity::DEBUG)
+logger.debug? # => true
+logger = Logger.new(STDOUT, level: Logger::Severity::INFO)
+logger.debug? # => false
+#@end
+
 --- info? -> bool
 
 現在の Logger オブジェクトが INFO 以上のログレベルのメッセージを記録するなら
 真を返します。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.info? # => true
+logger.level = Logger::Severity::ERROR
+logger.info? # => false
+#@end
 
 --- warn? -> bool
 
 現在の Logger オブジェクトが WARN 以上のログレベルのメッセージを記録するなら
 真を返します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.warn? # => true
+logger.level = Logger::Severity::ERROR
+logger.warn? # => false
+#@end
+
 --- error? -> bool
 
 現在の Logger オブジェクトが ERROR 以上のログレベルのメッセージを記録するなら
 真を返します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.error? # => true
+logger.level = Logger::Severity::FATAL
+logger.error? # => false
+#@end
+
 --- fatal? -> bool
 
 現在の Logger オブジェクトが FATAL 以上のログレベルのメッセージを記録するなら
 真を返します。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT, level: Logger::Severity::FATAL)
+logger.fatal? # => true
+logger.level = 5
+logger.fatal? # => false
+#@end
 
 --- debug(progname = nil) -> true
 --- debug(progname = nil){ ... } -> true
@@ -396,6 +496,14 @@ INFO 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.info("info1")               # => I, [2019-03-21T03:36:28.003418 #2533]  INFO -- : info1
+logger.info("MainApp") { "info2" } # => I, [2019-03-21T03:36:28.003493 #2533]  INFO -- MainApp: info2
+#@end
+
 @see [[m:Logger#debug]]
 
 --- warn(progname = nil){ ... } -> true
@@ -413,6 +521,17 @@ WARN 情報を出力します。
 
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.warn("warn1")              # => W, [2019-03-27T22:46:17.744243 #12744]  WARN -- : warn1
+logger.warn("MyApp") { "warn2" }  # => W, [2019-03-27T22:46:17.744322 #12744]  WARN -- MyApp: warn2
+logger.level = Logger::Severity::ERROR
+# 出力されない
+logger.warn("warn3")
+#@end
 
 @see [[m:Logger#debug]]
 
@@ -432,6 +551,17 @@ ERROR 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.error("error1") # => E, [2019-03-15T22:54:37.925635 #14878] ERROR -- : error1
+logger.error("MainApp") { "error2" } # => E, [2019-03-16T03:50:58.062094 #2172] ERROR -- MainApp: error2
+logger.level = Logger::Severity::FATAL
+# 出力されない
+logger.error("error3")
+#@end
+
 @see [[m:Logger#debug]]
 
 --- fatal(progname = nil){ ... } -> true
@@ -449,6 +579,14 @@ FATAL 情報を出力します。
 
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.fatal("fatal1")               # => F, [2019-03-17T22:36:43.042422 #4028] FATAL -- : fatal1
+logger.fatal("MainApp") { "fatal2" } # => F, [2019-03-17T22:36:43.042462 #4028] FATAL -- MainApp: fatal2
+#@end
 
 @see [[m:Logger#debug]]
 
@@ -468,12 +606,29 @@ UNKNOWN 情報を出力します。
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.unknown("unknown1")              # => A, [2019-03-28T00:26:42.850942 #2765]   ANY -- : unknown1
+logger.unknown("MyApp") { "unknown2" }  # => A, [2019-03-28T00:26:42.851021 #2765]   ANY -- MyApp: unknown2
+#@end
+
 @see [[m:Logger#debug]]
 
 --- level -> Integer
 --- sev_threshold -> Integer
 
 レシーバにセットされているログレベルを取得します。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.level # => 0
+logger.level = Logger::Severity::ERROR
+logger.level # => 3
+#@end
 
 --- level=(level)
 --- sev_threshold=(level)
@@ -482,6 +637,15 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 出力されません。
 
 @param level ログレベルを指定します。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.level # => 0
+logger.level = Logger::Severity::ERROR # => 3
+logger.level # => 3
+#@end
 
 --- progname -> String
 
@@ -649,9 +813,13 @@ include Logger::Severity
 
 @param msg メッセージ。
 
+#@#noexample
+
 --- datetime_format -> String
 
 ログの日時フォーマットを取得します。
+
+#@#noexample
 
 @see [[m:Time#strftime]]
 
@@ -687,6 +855,8 @@ include Logger::Severity
            ハッシュのキーには :shift_age, :shift_size を指定します。
            省略すると、それぞれ 7, 1048756 (1 MByte) が使用されます。
 
+#@#noexample 内部利用向けのクラスのため
+
 @see [[m:Logger.new]]
 
 
@@ -698,11 +868,15 @@ include Logger::Severity
 
 このメソッドは同期されます。
 
+#@#noexample 内部利用向けのクラスのため
+
 @see [[m:IO#close]]
 
 --- dev -> IO
 
 出力先の IO オブジェクトを取得します。
+
+#@#noexample 内部利用向けのクラスのため
 
 --- filename -> String | nil
 
@@ -710,11 +884,15 @@ include Logger::Severity
 
 出力先がファイルではない場合は nil を返します。
 
+#@#noexample 内部利用向けのクラスのため
+
 --- write(message) -> Integer
 
 出力先の IO オブジェクトにメッセージを書き込みます。
 
 このメソッドは同期されます。
+
+#@#noexample 内部利用向けのクラスのため
 
 @see [[m:IO#write]]
 

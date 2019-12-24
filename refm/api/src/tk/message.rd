@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 require tk/label
 
@@ -22,4 +21,3 @@ require tk/label
 #@#[WidgetClassName] = self
 
 
-#@end

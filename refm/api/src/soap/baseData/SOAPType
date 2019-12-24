@@ -1,4 +1,3 @@
-#@since 1.8.1
 = module SOAP::SOAPType
 
 == Instance Methods
@@ -25,10 +24,8 @@
 --- initialize(*args)
 #@todo
 
-#@since 1.8.3
 --- inspect
 #@todo
-#@end
 
 --- parent
 --- parent=(value)
@@ -47,4 +44,3 @@
 
 --- rootnode
 #@todo
-#@end

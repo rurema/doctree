@@ -13,11 +13,9 @@ require wsdl/info
 --- <<
 #@todo
 
-#@since 1.8.3
 --- elementformdefault
 #@todo
 
-#@end
 
 --- elements
 #@todo

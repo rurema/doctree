@@ -336,12 +336,12 @@ SafeStringValue() を使ってください。
 
 --- static void rb_clear_cache_by_class(VALUE klass)
 
-メソッドキャシュから klass クラスのメソッドの
+メソッドキャッシュから klass クラスのメソッドの
 キャッシュエントリを消去します。
 
 --- static void rb_clear_cache_by_id(ID id)
 
-メソッドキャシュから id という名前のメソッドの
+メソッドキャッシュから id という名前のメソッドの
 キャッシュエントリを全て消去します。
 
 --- static VALUE rb_cont_call(int argc, VALUE *argv, VALUE cont)

@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tk/entry
@@ -39,4 +38,3 @@ extend TkCore
 --- history_configinfo(opt)
 #@todo
 
-#@end

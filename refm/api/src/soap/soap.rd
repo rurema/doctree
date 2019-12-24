@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require xsd/qname
 #@#require xsd/charset
 
@@ -161,4 +160,3 @@
 #@# add Object#instance_variable_set
 #@# add Kernel#warn
 
-#@end

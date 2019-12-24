@@ -1,7 +1,5 @@
-#@since 1.8.2
 
 = class Tk::Itk::Toplevel < Archetype
 include Wm
 include TkMenuSpec
 
-#@end

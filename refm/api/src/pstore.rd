@@ -38,12 +38,8 @@ transaction のブロック内である必要があります。
 
 データベースを更新するときにバックアップファイルが作成されるため、
 file のあるディレクトリは書き込み可能である必要があります。
-#@since 1.8.2
 データベースの更新が成功すると、バックアップファイルは削除されます。バックアップファイル名は
 ファイル名に ".tmp" および ".new" を付けたものです。
-#@else
-バックアップファイルは削除されずに残ります。バックアップファイル名はファイル名の後に "~" を付けたものです。
-#@end
 
 @param file データベースファイル名。
 
@@ -56,7 +52,6 @@ file のあるディレクトリは書き込み可能である必要がありま
 
 == Instance Methods
 
-#@since 1.8.0
 --- transaction(read_only = false) {|pstore| ... } -> object
 
 トランザクションに入ります。
@@ -85,7 +80,6 @@ file のあるディレクトリは書き込み可能である必要がありま
   end
 
 
-#@end
 
 --- [](name) -> object
 
@@ -109,7 +103,6 @@ file のあるディレクトリは書き込み可能である必要がありま
 
 @see [[m:Hash#[]=]]
 
-#@since 1.8.0
 --- fetch(name, default = PStore::Error) -> object
 
 ルートnameに対応する値を得ます。
@@ -143,7 +136,6 @@ file のあるディレクトリは書き込み可能である必要がありま
   end
 
 @see [[m:Hash#fetch]], [[m:PStore#[] ]]
-#@end
 
 --- delete(name) -> object
 
@@ -240,7 +232,6 @@ transaction ブロックから抜けますが、データベースの変更は�
     pstore["root"]       # => nil
   end
 
-#@since 1.8.2
 #@until 1.9.1
 --- dump(table) -> String
 #@# nodoc
@@ -266,7 +257,6 @@ transaction ブロックから抜けますが、データベースの変更は�
 @param file ファイル名か [[c:IO]] オブジェクトを指定します。
 
 @see [[m:Marshal.#load]]
-#@end
 #@end
 
 #@since 1.9.1
@@ -295,7 +285,6 @@ transaction ブロックから抜けますが、データベースの変更は�
 トランザクションの中でなければ例外を発生させます。
 
 == Constants
-#@since 1.8.6
 --- RDWR_ACCESS -> Integer
 内部で利用する定数です。
 
@@ -304,7 +293,6 @@ transaction ブロックから抜けますが、データベースの変更は�
 
 --- WR_ACCESS -> Integer
 内部で利用する定数です。
-#@end
 #@since 1.9.1
 --- EMPTY_MARSHAL_CHECKSUM -> String
 内部で利用する定数です。

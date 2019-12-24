@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 = module TkBindCore
 
@@ -20,5 +19,4 @@
 --- bindinfo(context = nil)
 #@todo
 
-#@end
 

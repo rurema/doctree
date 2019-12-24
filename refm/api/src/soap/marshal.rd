@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/mapping
 require soap/processor
 
@@ -24,4 +23,3 @@ alias SOAPMarshal
 --- MarshalMappingRegistry
 #@todo
 
-#@end

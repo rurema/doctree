@@ -66,42 +66,6 @@ category Network
 
 ==== プロクシ経由のアクセス
 
-#@until 2.0.0
-[[m:Net::HTTP.Proxy]] はプロクシ経由での接続を行なうクラスを
-生成して返します。このクラスは [[c:Net::HTTP]] と同じ
-メソッドを持ち、同じように動作をします。ただし
-接続する際には常にプロクシ経由となります。
-  require 'net/http'
-  
-  proxy_addr = 'your.proxy.host'
-  proxy_port = 8080
-          :
-  Net::HTTP::Proxy(proxy_addr, proxy_port).start('www.example.com') {|http|
-    # always connect to your.proxy.addr:8080
-          :
-  }
-
-また [[m:Net::HTTP.Proxy]] は第一引数が nil だと 
-Net::HTTP 自身を返すので
-上のコードのように書いておけばプロクシなしの場合にも対応できます。
-
-[[m:Net::HTTP.Proxy]] にはユーザ名とパスワードを取る
-オプション引数があり、以下のようにして
-プロクシの認証をすることができます。
-  proxy_host = 'your.proxy.host'
-  proxy_port = 8080
-  uri = URI.parse(ENV['http_proxy'])
-  proxy_user, proxy_pass = uri.userinfo.split(/:/) if uri.userinfo
-  Net::HTTP::Proxy(proxy_host, proxy_port,
-                   proxy_user, proxy_pass).start('www.example.com') {|http|
-    # always connect to your.proxy.addr:8080 using specified username and password
-          :
-  }
-
-このライブラリは環境変数 HTTP_PROXY を一切考慮しないこと
-に注意してください。プロクシを使いたい場合は上の例のように
-明示的に取り扱わなければなりません。
-#@else
 Net::HTTP は http_proxy 環境変数が存在するならば自動的に
 その URI を利用してプロクシを利用します。http_proxyを利用したくないならば
 [[m:Net::HTTP.new]] や [[m:Net::HTTP.start]] の proxy_addr 引数に
@@ -121,7 +85,7 @@ nil を渡してください。
 
 プロクシの認証をユーザ名とパスワードですることもできます。
 詳しくは [[m:Net::HTTP.new]] を参照してください。
-#@end
+
 
 ==== リダイレクトに対応する
 以下の例の fetch はリダイレクトに対応しています。
@@ -207,29 +171,6 @@ CGIやサーバの実装者に対し `&' の代わりに
 [[lib:cgi]] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする
 必要はありません。
 
-#@until 1.9.3
-=== 新しい仕様への変更と移行措置について
-
-net/http 1.1 の挙動を使いたい場合には[[m:Net::HTTP.version_1_1]] を呼ん
-でください。その後 [[m:Net::HTTP.version_1_2]] を呼ぶと挙動が 1.2 に戻
-ります。
-
-  # example
-  Net::HTTP.start {|http1| ...(http1 has 1.2 features)... }
-  
-  Net::HTTP.version_1_1
-  Net::HTTP.start {|http2| ...(http2 has 1.1 features)... }
-  
-  Net::HTTP.version_1_2
-  Net::HTTP.start {|http3| ...(http3 has 1.2 features)... }
-
-ただし、この機能はスレッドセーフではありません。
-つまり、複数スレッドでそれぞれに version_1_1 や version_1_2 を呼んだ場合、
-次に生成する Net::HTTP オブジェクトがどちらのバージョンになるかは保証できません。
-アプリケーション全体でどちらかのバージョンに固定する必要があります。
-
-通常この機能は使わないはずです。1.2固定で利用してください。
-#@end
 
 = class Net::HTTP < Object
 alias HTTPSession
@@ -238,26 +179,29 @@ HTTP のクライアントのためのクラスです。
 
 == Class Methods
 
-#@until 2.0.0
---- new(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
-#@else
+#@until 2.5.0
 --- new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+#@else
+--- new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
 #@end
 
 新しい [[c:Net::HTTP]] オブジェクトを生成します。
 
-#@since 2.0.0
 proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy からプロクシの URI を
 取り出し利用します。この場合環境変数 http_proxy が定義されていない場合には
 プロクシは利用せず直接接続します。
-#@end
+詳しくは [[m:URI::Generic#find_proxy]] を参照してください。
 
 明示的にプロクシのホスト名とポート番号を指定してプロクシを利用することもできます。
 このときには proxy_addr にホスト名もしくは IP アドレスを渡します。
-このときに proxy_userを指定するとプロクシの認証が行われます
-
+このときに proxy_userを指定するとプロクシの認証が行われます。
+#@since 2.5.0
+no_proxy の文字列に address のホスト名やIPアドレスが含まれている場合はプロクシを利用せず
+直接接続します。
+#@end
 
 このメソッドは TCP コネクションを張りません。
+
 
 @param address 接続するホスト名を文字列で指定します。
 @param port 接続するポート番号を指定します。
@@ -265,15 +209,12 @@ proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy から
 @param proxy_port プロクシのポートを指定します。
 @param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 @param proxy_pass プロクシの認証のパスワードを指定します。
+#@since 2.5.0
+@param no_proxy プロクシを経由せずに接続するホストの名前/IPアドレスを文字列で指定します。
+#@end
 
-
-#@until 2.0.0
---- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
---- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
-#@else
 --- start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 --- start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
-#@end
 
 新しい [[c:Net::HTTP]] オブジェクトを生成し、
 TCP コネクション、 HTTP セッションを開始します。
@@ -285,11 +226,9 @@ TCP コネクション、 HTTP セッションを開始します。
 ブロックを与えなかった場合には生成したオブジェクトを渡します。
 利用後にはこのオブジェクトを [[m:Net::HTTP#finish]] してください。
 
-#@since 2.0.0
 proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシの URI を
 取り出し利用します。環境変数 http_proxy が定義されていない場合には
 プロクシは利用しません。
-#@end
 
 このメソッドは以下と同じです。
 
@@ -302,9 +241,7 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 @param proxy_port プロクシのポートを指定します。
 @param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 @param proxy_pass プロクシの認証のパスワードを指定します。
-#@since 2.0.0
 @raise Net::OpenTimeout 接続がタイムアウトしたときに発生します
-#@end
 @see [[m:Net::HTTP.new]], [[m:Net::HTTP#start]]
 
 --- get(uri) -> String
@@ -357,7 +294,6 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 @param port 接続するポートを整数で指定します。
 @see [[m:Net::HTTP#get]]
 
-#@since 1.8.3
 --- post_form(uri, params) -> Net::HTTPResponse
 [[c:URI]] で指定した対象に フォームのデータを HTTP で 
 POST します。
@@ -368,7 +304,6 @@ POST します。
 @param uri POST する対象を [[c:URI]] で指定します。
 @param params POST するデータです。
 
-#@end
 
 --- proxy_address -> String|nil
 自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
@@ -440,7 +375,6 @@ address が nil のときは Net::HTTP クラスをそのまま返します。
 
 @see [[m:Net::HTTP.Proxy]]
 
-#@since 1.8.3
 --- http_default_port -> Integer
 --- default_port -> Integer
 HTTP のデフォルトポート (80) を返します。
@@ -448,59 +382,25 @@ HTTP のデフォルトポート (80) を返します。
 --- https_default_port -> Integer
 HTTPS のデフォルトポート (443) を返します。
 
-#@end
-
-#@until 1.9.3
---- version_1_1 -> ()
-ライブラリの動作をバージョン1.1互換にします。
-
-@see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
-     [[m:Net::HTTP.version_1_2?]]
-#@end
-
-#@since 1.9.3
 --- version_1_1? -> false
 --- is_version_1_1? -> false
 何もしません。互換性のために残されており、常に false を返します。
 
 @see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_2?]]
-#@else
---- version_1_1? -> bool
---- is_version_1_1? -> bool 
-ライブラリの動作がバージョン1.1互換である場合に真を返します。
 
-@see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
-     [[m:Net::HTTP.version_1_2?]]
-#@end
 
-#@since 1.9.3
 --- version_1_2 -> true
 何もしません。互換性のために残されており、常に true を返します。
 
 @see [[m:Net::HTTP.version_1_1?]], [[m:Net::HTTP.version_1_2?]]
-#@else
---- version_1_2 -> ()
-ライブラリの動作をバージョン1.2互換、つまり
-通常の動作にします。
 
-@see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_1?]]
-     [[m:Net::HTTP.version_1_2?]]
-#@end
 
-#@since 1.9.3
 --- version_1_2? -> true
 --- is_version_1_2? -> true
 何もしません。互換性のために残されており、常に true を返します。
 
 @see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
-#@else
---- version_1_2? -> bool
---- is_version_1_2? -> bool 
-ライブラリの動作がバージョン1.2互換である場合に真を返します。
 
-@see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
-     [[m:Net::HTTP.version_1_1?]]
-#@end
 
 == Instance Methods
 
@@ -518,9 +418,8 @@ TCP コネクションを張り、HTTP セッションを開始します。
 利用後にはこのオブジェクトを [[m:Net::HTTP#finish]] してください。
 
 @raise IOError すでにセッションが開始していた場合に発生します。
-#@since 2.0.0
 @raise Net::OpenTimeout 接続がタイムアウトしたときに発生します
-#@end
+
 
 --- started? -> bool
 --- active? -> bool
@@ -570,7 +469,6 @@ io に nil を指定するとデバッグ出力を止めます。
 
 接続するポート番号を返します。
 
-#@since 2.0.0
 --- local_host -> String | nil
 
 接続に用いるローカルホスト名を返します。
@@ -642,7 +540,6 @@ end
 
 @see [[m:Net::HTTP#local_port=]], [[m:Net::HTTP#local_host]]
 
-#@end
 
 @see [[m:Net::HTTP.new]]
 --- proxy? -> bool
@@ -661,13 +558,9 @@ end
 
 proxyaddr は時代遅れのメソッドです。
 
-#@until 2.0.0
-@see [[m:Net::HTTP.Proxy]]
-#@else
 @see [[m:Net::HTTP#proxy_address=]], [[m:Net::HTTP#proxy_port]], [[m:Net::HTTP.new]]
-#@end
 
-#@since 2.0.0
+
 --- proxy_address=(address)
 
 プロクシのアドレス(ホスト名、IPアドレス)を指定します。
@@ -677,7 +570,7 @@ proxyaddr は時代遅れのメソッドです。
 @param address プロクシのホスト名、もしくはIPアドレスを表す文字列
 
 @see [[m:Net::HTTP#proxy_address=]], [[m:Net::HTTP#proxy_port]], [[m:Net::HTTP.new]]
-#@end
+
 
 --- proxy_port -> Integer|nil
 --- proxyport -> Integer|nil
@@ -687,13 +580,10 @@ proxyaddr は時代遅れのメソッドです。
 プロクシを使わない場合は nil を返します。
 
 proxyport は時代遅れのメソッドです。
-#@until 2.0.0
-@see [[m:Net::HTTP.Proxy]]
-#@else
-@see [[m:Net::HTTP#proxy_port=]], [[m:Net::HTTP#proxy_address]], [[m:Net::HTTP.new]]
-#@end
 
-#@since 2.0.0
+@see [[m:Net::HTTP#proxy_port=]], [[m:Net::HTTP#proxy_address]], [[m:Net::HTTP.new]]
+
+
 --- proxy_port=(port)
 
 プロクシのポート番号を設定します。
@@ -702,7 +592,7 @@ proxyport は時代遅れのメソッドです。
 
 @param port ポート番号(整数、文字列)
 @see [[m:Net::HTTP#proxy_port]], [[m:Net::HTTP#proxy_address]], [[m:Net::HTTP.new]]
-#@end
+
 
 --- proxy_pass -> String|nil
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
@@ -710,13 +600,8 @@ proxyport は時代遅れのメソッドです。
 を返します。
 
 そうでないなら nil を返します。
-#@until 2.0.0
-@see [[m:Net::HTTP.Proxy]]
-#@else
 @see [[m:Net::HTTP#proxy_pass=]], [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP.new]]
-#@end
 
-#@since 2.0.0
 --- proxy_pass=(pass)
 プロクシのユーザ認証のパスワードを設定します。
 
@@ -724,7 +609,7 @@ proxyport は時代遅れのメソッドです。
 
 @param pass パスワード文字列
 @see [[m:Net::HTTP#proxy_pass]], [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP.new]]
-#@end
+
 
 --- proxy_user -> String|nil
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
@@ -733,13 +618,9 @@ proxyport は時代遅れのメソッドです。
 
 そうでないなら nil を返します。
 
-#@until 2.0.0
-@see [[m:Net::HTTP.Proxy]]
-#@else
 @see [[m:Net::HTTP#proxy_pass]], [[m:Net::HTTP#proxy_user=]], [[m:Net::HTTP.new]]
-#@end
 
-#@since 2.0.0
+
 --- proxy_user=(user)
 プロクシのユーザ認証のユーザ名を設定します。
 
@@ -747,9 +628,8 @@ proxyport は時代遅れのメソッドです。
 
 @param user ユーザ名文字列
 @see [[m:Net::HTTP#proxy_pass]], [[m:Net::HTTP#proxy_user]], [[m:Net::HTTP.new]]
-#@end
 
-#@since 2.0.0
+
 --- proxy_uri -> String|nil
 
 このメソッドは内部用なので使わないでください。
@@ -777,36 +657,23 @@ proxyport は時代遅れのメソッドです。
 @param boolean プロクシ情報を環境変数から得るかどうかを指定する真偽値
 
 @see [[m:Net::HTTP#proxy_from_env?]] 
-#@end
+
 
 --- open_timeout -> Integer|nil
 接続時に待つ最大秒数を返します。
 
-#@until 2.0.0
-この秒数たってもコネクションが
-開かなければ例外 [[c:TimeoutError]] を発生します。
-#@else
 この秒数たってもコネクションが
 開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
-#@end
-#@until 2.3.0
-デフォルトは nil(タイムアウトしない)です。
-#@else
+
 デフォルトは60(秒)です。
-#@end
 
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
 
 --- open_timeout=(seconds)
 接続時に待つ最大秒数を設定します。
 
-#@until 2.0.0
-この秒数たってもコネクションが
-開かなければ例外 [[c:TimeoutError]] を発生します。
-#@else
 この秒数たってもコネクションが
 開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
-#@end
 nilを設定するとタイムアウトしなくなります。
 
 以下のコネクションを開くメソッドで有効です。
@@ -822,13 +689,8 @@ nilを設定するとタイムアウトしなくなります。
 読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数
 を返します。
 
-#@until 2.0.0
-この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
-を発生します。
-#@else
 この秒数たっても読みこめなければ例外 [[c:Net::ReadTimeout]]
 を発生します。
-#@end
 
 nilはタイムアウトしないことを意味します。
 
@@ -841,13 +703,9 @@ nilはタイムアウトしないことを意味します。
 読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数を
 設定します。
 
-#@until 2.0.0
-この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
-を発生します。
-#@else
 この秒数たっても読みこめなければ例外 [[c:Net::ReadTimeout]]
 を発生します。
-#@end
+
 nilを設定するとタイムアウトしなくなります。
 
 このタイムアウト秒数はサーバとやりとりするメソッドで有効です。
@@ -857,7 +715,39 @@ nilを設定するとタイムアウトしなくなります。
 @param second 待つ秒数を指定します。
 @see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
 
-#@since 2.0.0
+#@since 2.6.0
+--- write_timeout -> Numeric|nil
+書き込み([[man:write(2)]]) 一回でブロックしてよい最大秒数
+を返します。
+
+この秒数たっても書き込めなければ例外 [[c:Net::WriteTimeout]]
+を発生します。
+
+Windows では Net::WriteTimeout は発生しません。
+
+デフォルトは 60 (秒)です。
+
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#write_timeout=]]
+
+--- write_timeout=(seconds)
+
+書き込み([[man:write(2)]]) 一回でブロックしてよい最大秒数を
+設定します。
+
+Float や Rational も設定できます。
+
+この秒数たっても書き込めなければ例外 [[c:Net::WriteTimeout]]
+を発生します。
+
+Windows では Net::WriteTimeout は発生しません。
+
+デフォルトは 60 (秒)です。
+
+@param second 待つ秒数を指定します。
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#write_timeout]]
+#@end
+
+
 --- keep_alive_timeout -> Integer
 以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
 返します。
@@ -877,8 +767,6 @@ nilを設定するとタイムアウトしなくなります。
 が2秒である場合が多いからです。
 
 @see [[m:Net::HTTP#keep_alive_timeout]]
-
-#@end
 
 --- continue_timeout -> Integer | nil
 「100 Continue」レスポンスを待つ秒数を返します。
@@ -1216,7 +1104,6 @@ POST/PUT の時は data も与えられます
 #@# --- inspect
 #@# 
 
-#@since 1.8.3
 --- copy(path, initheader = nil) -> Net::HTTPResponse
 サーバの path に COPY リクエストを
 ヘッダを initheader として送ります。
@@ -1381,15 +1268,9 @@ dest を指定した場合には
 --- use_ssl? -> bool
 SSLを利用して接続する場合に真を返します。
 
-#@until 1.9.2
-[[lib:net/https]] を使わない場合には常に偽を返します。
-#@end
-
 @see [[lib:net/https]], [[lib:openssl]] 
 
-#@end
 
-#@since 1.9.2
 --- use_ssl=(bool)
 HTTP で SSL/TLS を使うかどうかを設定します。
 
@@ -1592,7 +1473,6 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 @param ciphers 利用可能にする共通鍵暗号の種類
 @see [[m:Net::HTTP#ciphers]]
 
-#@end
 
 = module Net::HTTPHeader
 HTTP ヘッダのためのモジュールです。
@@ -1618,19 +1498,15 @@ key ヘッダフィールドを返します。
 たとえばキー 'content-length' に対しては  '2048'
 のような文字列が得られます。キーが存在しなければ nil を返します。
 
-#@since 1.8.3
 一種類のヘッダフィールドが一つのヘッダの中に複数存在する
 場合にはそれを全て ", " で連結した文字列を返します。
-#@end
 key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
 
 @see [[m:Net::HTTPHeader#[]=]],
-#@since 1.8.3
      [[m:Net::HTTPHeader#add_field]],
      [[m:Net::HTTPHeader#get_fields]]
-#@end
 
 --- []=(key, val)
 key ヘッダフィールドに文字列 val をセットします。
@@ -1643,12 +1519,9 @@ val に nil を与えるとそのフィールドを削除します。
 @param val keyで指定したフィールドにセットする文字列を与えます。
 
 @see [[m:Net::HTTPHeader#[] ]],
-#@since 1.8.3
      [[m:Net::HTTPHeader#add_field]],
      [[m:Net::HTTPHeader#get_fields]]
-#@end
 
-#@since 1.8.3
 --- add_field(key, val) -> ()
 
 key ヘッダフィールドに val を追加します。
@@ -1683,7 +1556,6 @@ key は大文字小文字を区別しません。
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#add_field]]
 
-#@end
 
 --- fetch(key) -> String
 --- fetch(key, default) -> String
@@ -1697,10 +1569,8 @@ key ヘッダフィールドを返します。
 ない時には、引数 default が与えられていればその値を、ブロッ
 クが与えられていればそのブロックを評価した値を返します。
 
-#@since 1.8.3
 一種類のヘッダフィールドが一つのヘッダの中に複数存在する
 場合にはそれを全て ", " で連結した文字列を返します。
-#@end
 key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
@@ -1717,11 +1587,19 @@ key は大文字小文字を区別しません。
 
 #@#noexample
 
---- basic_auth(account, password) -> ()
+--- basic_auth(account, password) -> [String]
 Authorization: ヘッダを BASIC 認証用にセットします。
 
 @param account アカウント名を文字列で与えます。
 @param password パスワードを文字列で与えます。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
+#@end
 
 --- chunked? -> bool
 Transfer-Encoding: ヘッダフィールドが "chunked" である
@@ -1871,12 +1749,28 @@ key は大文字小文字を区別しません。
 
 リクエストの HTTP メソッドを文字列で返します。
 
---- proxy_basic_auth(account, password) -> ()
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.method # => "GET"
+#@end
+
+--- proxy_basic_auth(account, password) -> [String]
 
 Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 
 @param account アカウント名を文字列で与えます。
 @param password パスワードを文字列で与えます。
+
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.proxy_basic_auth("account", "password") # => ["Basic YWNjb3VudDpwYXNzd29yZA=="]
+#@end
 
 --- range -> Range|nil
 
