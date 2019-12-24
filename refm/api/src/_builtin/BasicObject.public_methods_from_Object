@@ -60,7 +60,7 @@ BasicObject を継承して作ったクラス内で instance_eval する場合�
   bar.call1 # => Object
   bar.call2 # raise NameError
 
-@see [[m:Module#module_eval]], [[m:Kernel.#eval]]
+@see [[m:Module#module_eval]], [[m:Kernel.#eval]], [[m:BasicObject#instance_exec]]
 
 --- instance_exec(*args) {|*vars| ... } -> object
 
