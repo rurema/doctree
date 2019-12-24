@@ -368,6 +368,21 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 である)場合は nil を返します。
 
 @see [[m:Proc#source_location]]
+
+例:
+  # ------- /tmp/foo.rb ---------
+  class Foo
+    def foo; end
+  end
+  # ----- end of /tmp/foo.rb ----
+
+  require '/tmp/foo'
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.source_location # => ["/tmp/foo.rb", 2]
+
+  method(:puts).source_location # => nil
+
 #@end
 
 #@since 1.9.2
