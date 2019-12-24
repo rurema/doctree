@@ -225,7 +225,7 @@ nil を返します。
 
   Prepended.ancestors # => [Awesome, Prepended]
   Awesome > Prepended # => true
-  Prepended > Awesome # => nil
+  Prepended > Awesome # => false
 
   Awesome > Awesome # => false
   Awesome > Object # => nil
