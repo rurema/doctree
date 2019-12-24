@@ -2267,6 +2267,10 @@ posix_fadvise をサポートしていないプラットフォーム上では
        場合に発生する例外(Linux はこの場合には Errno::EINVAL を発生する)
 @raise RangeError offset,lenが有効範囲から出ている場合に発生する例外
 
+#@samplecode 例
+File.open("testfile") { |f| p f.advise(:sequential) } # => nil
+#@end
+
 == Constants
 
 --- SEEK_CUR -> Integer
