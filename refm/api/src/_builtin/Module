@@ -211,15 +211,24 @@ nil を返します。
 @see [[m:Module#<]]
 
 例:
-  module Foo; end
-  module Bar
-    include Foo
+  module Awesome; end
+  module Included
+    include Awesome
+  end
+  module Prepended
+    prepend Awesome
   end
 
-  Foo > Bar # => true
-  Bar > Foo # => false
-  Foo > Foo # => false
-  Foo > Object # => nil
+  Included.ancestors # => [Included, Awesome]
+  Awesome > Included # => true
+  Included > Awesome # => false
+
+  Prepended.ancestors # => [Awesome, Prepended]
+  Awesome > Prepended # => true
+  Prepended > Awesome # => nil
+
+  Awesome > Awesome # => false
+  Awesome > Object # => nil
 
 --- >=(other) -> bool | nil
 
