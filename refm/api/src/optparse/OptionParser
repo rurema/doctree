@@ -340,6 +340,16 @@ end
 
 プログラムのリリースを文字列で返します。
 
+#@samplecode 例
+require "optparse"
+
+OptionParser.new do |opts|
+  opts.release # => nil
+  opts.release = "2019-05-01"
+  opts.release # => "2019-05-01"
+end
+#@end
+
 --- release=(rel)
 
 プログラムのリリースを文字列で指定します。
