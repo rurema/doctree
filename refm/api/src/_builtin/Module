@@ -176,6 +176,26 @@ nil を返します。
 
 @see [[m:Module#<]]
 
+例:
+  module Foo; end
+  module Bar
+    include Foo
+  end
+  module Baz
+    prepend Foo
+  end
+
+  Bar.ancestors # => [Bar, Foo]
+  Foo <= Bar # => false
+  Bar <= Foo # => true
+
+  Baz.ancestors # => [Foo, Baz]
+  Foo <= Baz # => false
+  Baz <= Foo # => true
+
+  Foo <= Foo # => true
+  Foo <= Object # => nil
+
 --- >(other)  -> bool | nil
 
 比較演算子。 self が other の先祖である場合、true を返します。
