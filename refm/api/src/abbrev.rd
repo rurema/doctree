@@ -1,4 +1,3 @@
-#@since 1.8.1
 与えられた文字列の短縮形を生成するモジュールです。
 
 = module Abbrev
@@ -79,4 +78,3 @@ self が文字列の配列の場合、self から一意に決まる短縮形を�
 
 @see [[m:Abbrev.#abbrev]]
 
-#@end

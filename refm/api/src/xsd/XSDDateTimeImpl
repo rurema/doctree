@@ -1,4 +1,3 @@
-#@since 1.8.1
 = module XSD::XSDDateTimeImpl
 == instance methods
 --- _set(t)
@@ -10,7 +9,6 @@
 --- of2tz(offset)
 #@todo
 
-#@since 1.8.3
 --- to_date
 #@todo
 
@@ -19,7 +17,6 @@
 
 --- to_obj(klass)
 #@todo
-#@end
 
 --- to_time
 #@todo
@@ -27,4 +24,3 @@
 --- tz2of(str)
 #@todo
 
-#@end

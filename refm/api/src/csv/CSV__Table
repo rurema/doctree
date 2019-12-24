@@ -1,4 +1,3 @@
-#@since 1.9.1
 = class CSV::Table < Object
 extend Forwardable
 include Enumerable
@@ -208,6 +207,18 @@ table[1] # => ["row1_2", "row2_2"]
 このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
 チェーンに組込まないようにしてください。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2]).by_col!
+table             # => #<CSV::Table mode:col row_count:3>
+col_or_row_table = table.by_col_or_row
+col_or_row_table  # => #<CSV::Table mode:col_or_row row_count:3>
+table             # => #<CSV::Table mode:col row_count:3>
+#@end
+
 --- by_col_or_row! -> self
 
 自身をミックスモードに変更します。
@@ -219,6 +230,17 @@ table[1] # => ["row1_2", "row2_2"]
 あると見なします。
 
 @return 必ず自身を返すので安全にメソッドチェーンできます。
+
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2]).by_col!
+table             # => #<CSV::Table mode:col row_count:3>
+table.by_col_or_row!
+table             # => #<CSV::Table mode:col_or_row row_count:3>
+#@end
 
 --- by_row -> CSV::Table
 
@@ -495,5 +517,3 @@ table.values_at(1) # => [["row1_2"], ["row2_2"]]
 同値性を比較するために内部的に使用します。
 
 #@#noexample 内部で使用するためサンプル不要
-
-#@end

@@ -1,15 +1,12 @@
-#@since 1.8.2
 
 = module Tk::Itk
 include Tk
 extend Tk
 
 == Singleton Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 --- package_version
 #@todo
 
@@ -19,4 +16,3 @@ extend Tk
 --- usual_names
 #@todo
 
-#@end

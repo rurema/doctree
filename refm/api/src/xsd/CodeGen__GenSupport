@@ -1,14 +1,11 @@
-#@since 1.8.2
 = module XSD::CodeGen::GenSupport
 
 == module functions
 --- capitalize(target)
 #@todo
 
-#@since 1.8.3
 --- keyword?(word)
 #@todo
-#@end
 
 --- uncapitalize(target)
 #@todo
@@ -34,4 +31,3 @@
 --- format(str, indent = nil)
 #@todo
 
-#@end

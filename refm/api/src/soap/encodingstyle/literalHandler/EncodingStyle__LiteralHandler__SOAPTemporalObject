@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::EncodingStyle::LiteralHandler::SOAPTemporalObject < Object
 
@@ -13,4 +12,3 @@
 --- parent=(value)
 #@todo
 
-#@end

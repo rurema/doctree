@@ -43,18 +43,15 @@ require wsdl/info
 #@todo
 
 
-#@since 1.8.3
 --- soapaction
 #@todo
 
-#@end
 
 --- soapoperation
 #@todo
 
 属性
 
-#@since 1.8.3
 --- soapoperation_name
 #@todo
 
@@ -62,7 +59,6 @@ require wsdl/info
 --- soapoperation_style
 #@todo
 
-#@end
 
 --- targetnamespace
 #@todo

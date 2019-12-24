@@ -321,10 +321,8 @@ pp に表示したくないインスタンス変数がある場合にこのメ�
 #@include(_builtin/functions_pp)
 #@end
 
-#@since 1.8.5
 = reopen Object
 == Instance Methods
 --- pretty_inspect    -> String
 
 self を pp で表示したときの結果を文字列として返します。
-#@end

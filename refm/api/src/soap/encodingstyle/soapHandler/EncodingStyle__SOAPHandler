@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::EncodingStyle::SOAPHandler < SOAP::EncodingStyle::Handler
 
@@ -44,4 +43,3 @@
 --- RootLiteralMap
 #@todo
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 category CUI
 
@@ -1487,7 +1486,6 @@ stdscr のカーソルがある行を削除し、後の行を上に詰めます�
 
 stdscr のカーソル位置から 1 バイト読みとって返します。
 
-#@since 1.8.3
 
 --- clrtoeol -> nil
 
@@ -1497,9 +1495,7 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 
 現在のカーソル位置に一行挿入します。
 
-#@end
 
-#@since 1.8.1
 
 --- def_prog_mode -> bool
 #@todo
@@ -1522,7 +1518,6 @@ Sets block and non-blocking reads for the window.
 - If delay is zero, then non-blocking read is used (i.e., read returns ERR if no input is waiting).
 - If delay is positive, then read blocks for delay milliseconds, and returns ERR if there is still no input.
 
-#@end
 
 --- attroff(attrs) -> Integer
 #@todo
@@ -1835,4 +1830,3 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 #@include(curses/Curses__MouseEvent)
 #@include(curses/Curses__Window)
 
-#@end

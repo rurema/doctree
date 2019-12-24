@@ -1,4 +1,3 @@
-#@since 1.8.1
 require webrick/ssl
 
 [[c:WEBrick::HTTPServer]] を SSL/TLS に対応させるための実装。
@@ -52,4 +51,3 @@ require webrick/ssl
 
 メタ変数を返します。
 
-#@end

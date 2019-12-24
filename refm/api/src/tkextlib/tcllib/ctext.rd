@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/text
@@ -7,11 +6,9 @@ require tkextlib/tcllib
 = class Tk::Tcllib::CText < TkText
 
 == Class Methods
-#@since 1.8.3
 --- package_name
 #@todo
 
-#@end
 --- package_version
 #@todo
 
@@ -82,4 +79,3 @@ require tkextlib/tcllib
 --- modified?(mode)
 #@todo
 
-#@end

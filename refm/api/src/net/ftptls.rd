@@ -17,7 +17,6 @@ FTP over SSL/TLS を実装したクラスです。
 
 == Instance Methods
 
-#@since 1.8.6
 --- connect(host, port=Net::FTP::FTP_PORT) -> ()
 host で指定されたホストに接続します。
 
@@ -27,7 +26,6 @@ host で指定されたホストに接続します。
 @param port 接続するポート番号です。
 @see [[m:Net::FTP#connect]]
 
-#@end
 
 --- login(user = "anonymous", passwd = nil, acct = nil) -> ()
 ホストへのログイン処理を行ないます。

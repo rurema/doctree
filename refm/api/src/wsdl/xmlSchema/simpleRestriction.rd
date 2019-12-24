@@ -16,11 +16,9 @@ require xsd/namedelements
 --- enumeration
 #@todo
 
-#@since 1.8.3
 --- length
 --- length=
 #@todo
-#@end
 
 --- parse_attr(attr, value)
 #@todo
@@ -28,11 +26,9 @@ require xsd/namedelements
 --- parse_element(element)
 #@todo
 
-#@since 1.8.3
 --- pattern
 --- pattern=
 #@todo
-#@end
 
 --- valid?(value)
 #@todo

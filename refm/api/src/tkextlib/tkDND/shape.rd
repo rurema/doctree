@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/setup
@@ -36,4 +35,3 @@ extend TkCore
 = reopen TkWindow
 include Tk::TkDND::Shape
 
-#@end

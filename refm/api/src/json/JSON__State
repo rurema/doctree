@@ -34,6 +34,9 @@ JSON 形式の文字列を生成するための設定を保持しておくため
   [[m:JSON::MinusInfinity]] を生成することを許すようになります。
   偽を指定した場合、これらの値を生成しようとすると例外が発生します。
   デフォルトは偽です。
+: :ascii_only
+  真を指定した場合、ASCII 文字列のみを用いて JSON 形式の文字列を生成します。
+  デフォルトは偽です。
 : :buffer_initial_length
   sets the initial length of the generator's internal buffer.
 
@@ -85,11 +88,32 @@ JSON の配列の後に出力する文字列をセットします。
 
 インデントに使用する文字列を返します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+#@end
+
 --- indent=(string)
 
 インデントに使用する文字列をセットします。
 
 @param string インデントに使用する文字列を指定します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+json_state.indent = "  "
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
+#@end
 
 --- max_nesting -> Integer
 
@@ -106,6 +130,24 @@ JSON の配列の後に出力する文字列をセットします。
 --- object_nl -> String
 
 JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(object_nl: "")
+json_state.object_nl             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state = JSON::State.new(object_nl: "\n")
+json_state.object_nl             # => "\n"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+
+# => [1,2,{
+#    "name":"tanaka",
+#    "age":19
+#    }]
+#@end
 
 --- object_nl=(string)
 
@@ -163,8 +205,8 @@ pp json_state.to_h
 
 --- ascii_only? -> bool
 
-Returns true, if NaN, Infinity, and -Infinity should be generated,
-otherwise returns false.
+ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合に真を返します。
+そうでない場合に偽を返します。
 
 --- quirks_mode? -> bool
 --- quirks_mode  -> bool

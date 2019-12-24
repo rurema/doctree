@@ -119,7 +119,6 @@ URI オブジェクトを返します。
   p URI.extract(str, ["http"])
   => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
 
-#@since 1.8.1
 --- regexp             -> Regexp
 --- regexp(schemes)    -> Regexp
 
@@ -147,7 +146,6 @@ schemes を与えた場合は、そのスキームの URI にのみマッチす�
   require 'uri'
   p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 
-#@end
 
 --- escape(str, unsafe = URI::UNSAFE)    -> String
 --- encode(str, unsafe = URI::UNSAFE)    -> String
@@ -241,7 +239,7 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 みなし、エンコーディングを付加します。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
+[[url:https://www.w3.org/TR/html5/sec-forms.html#urlencoded-form-data]]
 にもとづいて実装されています。
 
 #@# コンポーネントとは "X=Y&U=V&P=Q" という URL エンコード文字列における
@@ -288,7 +286,7 @@ UTF-8 に変換する場合など)。
 を使っています。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
+[[url:https://www.w3.org/TR/html5/sec-forms.html#urlencoded-form-data]]
 にもとづいて実装されています。
 
 @param enum エンコードするデータ列([key, value] という形のデータの列)
@@ -304,7 +302,7 @@ UTF-8 に変換する場合など)。
 空白は + に変換し、その他は %XX に、変換します。
 
 このメソッドは
-[[url:http://www.w3.org/TR/html5/forms.html#url-encoded-form-data]]
+[[url:https://www.w3.org/TR/html5/sec-forms.html#urlencoded-form-data]]
 にもとづいて実装されています。
 
 @param str エンコードする文字列

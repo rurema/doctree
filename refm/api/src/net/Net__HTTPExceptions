@@ -33,12 +33,20 @@ HTTP ステータスコード 3xx を受け取ったという例外です。
 るアクションが必要になります。
 
 = class Net::HTTPServerException < Net::ProtoServerError
+#@since 2.6.0
+alias Net::HTTPClientException
+#@end
 include Net::HTTPExceptions
 
 HTTP ステータスコード 4xx を受け取ったという例外です。
 
 クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
 れた(認証が必要、リソースが存在しないなどで)ことを示します。
+
+#@since 2.6.0
+[[c:Net::HTTPServerException]] は deprecated です。
+[[c:Net::HTTPClientException]] を使用してください。
+#@end
 
 = class Net::HTTPFatalError < Net::ProtoFatalError
 include Net::HTTPExceptions

@@ -1,4 +1,3 @@
-#@since 1.8.1
 = module XSD::NS
 
 == Instance Methods
@@ -33,9 +32,6 @@
 --- parse(elem)
 #@todo
 
-#@since 1.8.2
 --- parse_local(elem)
 #@todo
-#@end
 
-#@end

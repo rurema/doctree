@@ -1,4 +1,3 @@
-#@since 1.8.3
 
 require tk
 require tkextlib/tile
@@ -13,4 +12,3 @@ include Tk::Tile::TileWidget
 = class Tk::Tile::LabelFrame
 alias Tk::Tile::TLabelFrame
 
-#@end
