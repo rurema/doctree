@@ -284,6 +284,24 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
+#@samplecode 例:IO.new による読み込みモードでのファイルオープン
+io = IO.new(IO.sysopen("testfile"))
+io.class # => IO
+io.close
+#@end
+
+#@samplecode 例:IO.for_fd による読み込み・バイナリモードでのファイルオープン
+IO.binwrite("testfile", "\xBF\xAA\x16\x04.\b\xCB\x12\xACoeQ\xFDv2\xCF9+\x81\x18")
+io = IO.for_fd(IO.sysopen("testfile"), "r", { binmode: true })
+io.class # => IO
+io.binmode? # => true
+io.close
+#@end
+
+#@samplecode 例:IO.open によるファイルオープン
+IO.open(IO.sysopen("testfile")) { |io| p io.class } # => IO
+#@end
+
 #@since 2.4.0
 --- foreach(path, rs = $/, chomp: false) {|line| ... }    -> nil
 --- foreach(path, rs = $/, chomp: false)                  -> Enumerator
