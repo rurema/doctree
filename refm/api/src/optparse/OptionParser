@@ -296,6 +296,17 @@ opts.banner # => "Usage: example.rb [options]"
 
 @param name プログラムの名前を文字列で指定します。
 
+#@samplecode 例
+require "optparse"
+
+OptionParser.new do |opts|
+  $0                         # => /path/to/filename.rb
+  opts.program_name          # => filename
+  opts.program_name = 'test' # => "test"
+  opts.program_name          # => "test"
+end
+#@end
+
 --- version       -> String
 
 プログラムのバージョンを文字列で返します。
