@@ -1,0 +1,11 @@
+[build]
+publish = "_site/2.6.0"
+command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:2.6.0"
+
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
