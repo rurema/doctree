@@ -1667,6 +1667,22 @@ name で指定した定数の可視性を private に変更します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
 
+例:
+  module Foo
+    BAR = 'bar'
+    class Baz; end
+    QUX = 'qux'
+    class Quux; end
+
+    private_constant :QUX
+    private_constant :Quux
+  end
+
+  Foo::BAR  # => "bar"
+  Foo::Baz  # => Foo::Baz
+  Foo::QUX  # => NameError: private constant Foo::QUX referenced
+  Foo::Quux # => NameError: private constant Foo::Quux referenced
+
 --- public_constant(*name) -> self
 
 name で指定した定数の可視性を public に変更します。
