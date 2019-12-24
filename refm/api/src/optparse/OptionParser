@@ -290,6 +290,15 @@ opts.banner # => "Usage: example.rb [options]"
 
 @return プログラムの名前を文字列で返します。
 
+#@samplecode 例
+require "optparse"
+
+OptionParser.new do |opts|
+  p $0                 # => /path/to/filename.rb
+  p opts.program_name  # => filename
+end
+#@end
+
 --- program_name=(name)
 
 プログラムの名前を文字列で指定します。
