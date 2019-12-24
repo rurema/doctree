@@ -6,7 +6,6 @@ category Thread
 
 == Private Instance Methods
 
-#@since 1.8.0
 --- timeout(sec) {|i| .... }                        -> object
 --- timeout(sec, exception_class = nil) {|i| .... } -> object
 
@@ -18,7 +17,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 その例外が発生します。
 ブロックパラメータ i は sec がはいります。
 
-また sec が nil のときは制限時間なしで
+また sec が 0 もしくは nil のときは制限時間なしで
 ブロックを実行します。
 
 @param sec タイムアウトする時間を秒数で指定します.
@@ -36,7 +35,6 @@ DNSの名前解決に時間がかかった場合割り込めません
 その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
 #@# [[unknown:timeoutの落し穴|trap::timeout]]も参照
-#@end
 
 = module Timeout
 
@@ -59,7 +57,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 その例外が発生します。
 ブロックパラメータ i は sec がはいります。
 
-また sec が nil のときは制限時間なしで
+また sec が 0 もしくは nil のときは制限時間なしで
 ブロックを実行します。
 
 @param sec タイムアウトする時間を秒数で指定します.
@@ -83,7 +81,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
   t = 5
   min = [ 0, 0]
   begin
-    timeout(t){
+    Timeout.timeout(t){
       calc_pi(min)
     }
   rescue Timeout::Error
@@ -101,7 +99,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 
   class MYError < Exception;end
   begin
-    timeout(5, MYError) {
+    Timeout.timeout(5, MYError) {
       sleep(30)
     }
   rescue MYError => err
@@ -129,7 +127,7 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めま
   t = 0.1
   start = Time.now
   begin
-    timeout(t) {
+    Timeout.timeout(t) {
       p TCPSocket.gethostbyname("www.ruby-lang.org")
       # (A)
     }
@@ -187,7 +185,7 @@ timeout による割り込みは [[m:Kernel.#system]] によって呼び出さ�
   begin
     pid = nil
     com = nil
-    timeout(t) {
+    Timeout.timeout(t) {
       # system だととまらない
       # system("./loop.sh")
       com = IO.popen("./loop.sh")
@@ -233,7 +231,7 @@ timeout を捕捉しないようにライブラリ内で [[c:TimeoutError]] の�
         class Foo
           FooTimeoutError = Class.new(TimeoutError)
           def longlongtime_method
-            timeout(100, FooTimeoutError) {
+            Timeout.timeout(100, FooTimeoutError) {
                ...
             }
           end

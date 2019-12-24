@@ -27,6 +27,13 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存していま�
 
 @param objects JSON 形式で出力したいオブジェクトを指定します。
 
+#@samplecode 例
+require "json"
+
+j([1,2,{"name" => "tanaka","age" => 19}])
+# => [1,2,{"name":"tanaka","age":19}]
+#@end
+
 @see [[m:Kernel.#p]]
 
 --- jj(*objects) -> nil
@@ -34,6 +41,20 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存していま�
 与えられたオブジェクトを JSON 形式の文字列で標準出力に人間に読みやすく整形して出力します。
 
 @param objects JSON 形式で出力したいオブジェクトを指定します。
+
+#@samplecode 例
+require "json"
+
+jj([1,2,{"name" => "tanaka","age" => 19}])
+# => [
+#      1,
+#      2,
+#      {
+#        "name": "tanaka",
+#        "age": 19
+#      }
+#    ]
+#@end
 
 @see [[m:Kernel.#pp]]
 
@@ -48,6 +69,16 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存していま�
 
 @param options [[m:JSON.#parse]], [[m:JSON.#generate]] に渡すオプションを指定します。
 
+#@samplecode 例
+require "json"
+
+JSON('[1,2,{"name":"tanaka","age":19}]')
+# => [1, 2, {"name"=>"tanaka", "age"=>19}]
+
+JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}]
+#@end
+
 @see [[m:JSON.#parse]], [[m:JSON.#generate]]
 
 = reopen Class
@@ -61,6 +92,13 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存していま�
 
 このメソッドが真を返すクラスは json_create というメソッドを実装していなければなりません。
 また json_create の第一引数は必要なデータを含むハッシュを期待しています。
+
+#@samplecode 例
+require "json"
+
+String.json_creatable?  # => true
+Dir.json_creatable?     # => false
+#@end
 
 = reopen Array
 include JSON::Generator::GeneratorMethods::Array

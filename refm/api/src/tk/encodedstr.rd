@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 
 = class Tk::EncodedString < String
@@ -65,4 +64,3 @@ require tk
 == Instance Methods
 
 
-#@end

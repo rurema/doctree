@@ -162,7 +162,7 @@ IO に対してエンコーディングを指定する方法には、生成時�
 #@#Win, Mac では UTF-8 です(予定)。
 UNIX では ASCII-8BIT です。
 
-==== binmode
+====[a:io_binmode] バイナリモード
 
 Windows の IO にはテキストモードとバイナリモードという2種類のモードが存在します。
 これらのモードは上で説明した IO のエンコーディングとは独立です。改行の変換にしか影響しません。
@@ -226,6 +226,14 @@ src のオフセット(src.pos)は変更されません。
                    nil を指定した場合、コピーする長さに制限はありません。
 
 @param src_offset  コピーを始めるオフセットを数値で指定します。
+
+#@samplecode 例
+IO.write("filetest", "abcdefghij")
+IO.copy_stream("filetest", "filecopy", 2)     # => 2
+IO.read("filecopy")                           # => "ab"
+IO.copy_stream("filetest", "filecopy", 3, 4)  # => 3
+IO.read("filecopy")                           # => "efg"
+#@end
 
 --- try_convert(obj) -> IO | nil
 
@@ -305,6 +313,31 @@ path が空ファイルの場合、何もせずに nil を返します。
 #@end
 
 @raise Errno::EXXX path のオープンに失敗した場合、発生します。
+
+#@samplecode 例:rs 指定なし
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.foreach("testfile")  # => #<Enumerator: IO:foreach("testfile")>
+IO.foreach("testfile") { |x| print "GOT ", x }
+# => GOT line1
+# GOT line2,
+# GOT line3
+#@end
+
+#@samplecode 例:カンマを行の区切りに指定（ rs = "," ）
+IO.write("testfile", "line1,line2,line3")
+IO.foreach("testfile", ",") { |x| puts "GOT #{x}" }
+# => GOT line1,
+# GOT line2,
+# GOT line3
+#@end
+
+#@since 2.4.0
+#@samplecode 例: 各行の末尾から "\n", "\r", または "\r\n" を取り除く（chomp = true）
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.foreach("testfile", chomp: true) { |x| print "GOT ", x }
+# => GOT line1GOT line2,GOT line3
+#@end
+#@end
 
 @see [[m:$/]]
 
@@ -540,6 +573,13 @@ length を省略するとファイルの末尾まで読み込みます。
 
 ファイルを開くときの mode は "rb:ASCII-8BIT" です。
 
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\nThis is line three\nAnd so on...\n")
+IO.binread("testfile")           # => "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
+IO.binread("testfile", 20)       # => "This is line one\nThi"
+IO.binread("testfile", 20, 10)   # => "ne one\nThis is line "
+#@end
+
 @see [[m:IO.read]]
 
 #@since 2.4.0
@@ -570,11 +610,25 @@ opts でファイルを開くときのオプションを指定します。エン
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 @param opts ファイルを開くときのオプション引数
 
 @raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
+
+#@samplecode 例
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.readlines("testfile")             # => ["line1\n", "line2,\n", "line3\n"]
+IO.readlines("testfile", ",")        # => ["line1\nline2,", "\nline3\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: rs を取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+IO.readlines("testfile", chomp: true)        # => ["line1,\rline2,", "line3,"]
+IO.readlines("testfile", "\r", chomp: true)  # => ["line1,", "line2,", "\nline3,\n"]
+#@end
+#@end
 
 --- select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
 
@@ -583,8 +637,6 @@ opts でファイルを開くときのオプションを指定します。エン
 与えられた入力/出力/例外待ちの  IO オブジェクトの中から準備ができたものを
 それぞれ配列にして、配列の配列として返します。
 タイムアウトした時には nil を返します。
-
-[[m:Kernel.#select]] と同じです。
 
 @param reads 入力待ちする [[c:IO]] オブジェクトの配列を渡します。
 
@@ -617,6 +669,8 @@ opts でファイルを開くときのオプションを指定します。エン
    end
  }
 
+@see [[m:Kernel.#select]]
+
 --- sysopen(path, mode = "r", perm = 0666)     -> Integer
 
 path で指定されるファイルをオープンし、ファイル記述子を返しま
@@ -633,6 +687,10 @@ path で指定されるファイルをオープンし、ファイル記述子を
             ファイルのパーミッションを整数で指定します。[[m:Kernel.#open]] と同じです。
 
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
+
+#@samplecode 例
+IO.sysopen("testfile", "w+")   # => 3
+#@end
 
 @see [[m:Kernel.#open]]
 
@@ -655,11 +713,24 @@ offset を指定しないと、書き込みの末尾でファイルを
 @param offset 書き込み開始位置
 @param opt ファイルを開くときのオプション引数
 
+#@samplecode 例
+text = "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
+IO.write("testfile", text)              # => 66
+IO.write("testfile", "0123456789", 20)  #=> 10
+IO.read("testfile")
+# => "This is line one\nThi0123456789two\nThis is line three\nAnd so on...\n"
+IO.write("testfile", "0123456789")      #=> 10
+IO.read("testfile")                     # => "0123456789"
+#@end
+
 @see [[m:IO.binwrite]]
 
 --- binwrite(path, string, offset=nil) -> Integer
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
+
+ファイルを開くときの mode が "rb:ASCII-8BIT" で、バイナリモードが有効
+である点以外は [[m:IO.write]] と同じです。
 
 offset を指定するとその位置までシークします。
 
@@ -670,7 +741,29 @@ offset を指定しないと、書き込みの末尾でファイルを
 @param string 書き込む文字列
 @param offset 書き込み開始位置
 
-@see [[m:IO.write]]
+#@# TODO: 2.4以上のみを対象できる状況になったらString#unpack1でunpack('m').firstを置き換える。
+#@samplecode 例
+# 8x8の真っ白なPNG画像データ。
+png = 'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAAAAADhZOFXAAAADklEQVQIW2P4DwUMlDEA98A/wTjP
+QBoAAAAASUVORK5CYII='.unpack('m').first
+
+# 期待する先頭16バイトの16進ダンプ: どの環境でも同じ。
+puts png[0...16].unpack('C*').map {|c| '%02x' % c }.join(' ')
+# => 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52
+
+# binwriteを使用した場合: どの環境でも正しく保存できる。
+IO.binwrite('white.binmode.png', png)
+puts IO.binread('white.binmode.png', 16).unpack('C*').map {|c| '%02x' % c }.join(' ')
+# => 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52
+
+# binwriteを使用しなかった場合: Windowsで改行文字(0x0a: "\n")と同じビット列が変換されてしまう。
+IO.write('white.txtmode.png', png)
+puts IO.binread('white.txtmode.png', 16).unpack('C*').map {|c| '%02x' % c }.join(' ')
+# => 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 (Linux/Macの場合
+# => 89 50 4e 47 0d 0d 0a 1a 0d 0a 00 00 00 0d 49 48 (Windowsの場合
+#@end
+
+@see [[ref:c:IO#io_binmode]], [[m:IO.write]]
 
 == Instance Methods
 
@@ -700,6 +793,16 @@ object を出力します。object が文字列でない時にはメソッ
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
+#@samplecode 例
+IO.open(IO.sysopen("testfile", "w+")) do |io|
+  io.binmode? # => false
+  io.binmode  # => #<IO:fd 8>
+  io.binmode? # => true
+end
+#@end
+
+@see [[ref:c:IO#io_binmode]], [[m:IO#binmode?]]
+
 --- clone    -> IO
 --- dup      -> IO
 
@@ -711,6 +814,16 @@ clone の際に self は一旦 [[m:IO#flush]] されます。
 dup は内容の等しいフリーズされていない IO を返します。
 
 @raise IOError 既に close されていた場合に発生します。 
+
+#@samplecode 例
+clone_io = nil
+IO.write("testfile", "test")
+File.open("testfile") do |io|
+  clone_io = io.clone
+end
+clone_io.read # => "test"
+clone_io.close
+#@end
 
 --- close    -> nil
 
@@ -732,6 +845,16 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 @raise IOError 既に close されていた場合に発生します。
 #@end
 
+#@samplecode 例
+IO.write("testfile", "test")
+f = File.open("testfile")
+f.read   # => "test"
+f.close
+# f.read # => IOError (すでに close しているので read できない)
+#@end
+
+@see [[m:IO#closed?]], [[m:IO#close_read]], [[m:IO#close_write]]
+
 --- close_read    -> nil
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
@@ -745,6 +868,15 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
+#@samplecode 例
+IO.popen("/bin/sh","r+") do |f|
+  f.close_read
+  # f.readlines # => IOError: not opened for reading
+end
+#@end
+
+@see [[m:IO#close]], [[m:IO#closed?]], [[m:IO#close_write]]
+
 --- close_write    -> nil
 
 書き込み用の IO を close します。
@@ -757,9 +889,33 @@ self がパイプでプロセスにつながっていれば、そのプロセス
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
+#@samplecode 例
+f = IO.popen("/bin/sh","r+") do |f|
+  f.close_write
+  # f.print "nowhere" # => IOError: not opened for writing
+end
+#@end
+
+@see [[m:IO#close]], [[m:IO#closed?]], [[m:IO#close_read]]
+
 --- closed?    -> bool
 
-ポートがクローズされている時に真を返します。
+self が完全に(読み込み用と書き込み用の両方が)クローズされている場合に true を返します。
+そうでない場合は false を返します。
+
+#@samplecode 例
+IO.write("testfile", "test")
+f = File.new("testfile")
+f.close         # => nil
+f.closed?       # => true
+f = IO.popen("/bin/sh","r+")
+f.close_write   # => nil
+f.closed?       # => false
+f.close_read    # => nil
+f.closed?       # => true
+#@end
+
+@see [[m:IO#close]], [[m:IO#close_read]], [[m:IO#close_write]]
 
 #@since 2.4.0
 --- each(rs = $/, chomp: false) {|line| ... }         -> self
@@ -823,6 +979,17 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数とし�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+#@samplecode 例
+IO.write("testfile", "aあ")
+File.open("testfile") do |io|
+  io.each_byte { |x| p x }
+  # => 97
+  # 227
+  # 129
+  # 130
+end
+#@end
+
 --- bytes {|ch| ... }        -> self
 --- bytes                    -> Enumerator
 
@@ -838,6 +1005,8 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数とし�
 バイナリ読み込みメソッドとして動作します。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+#@#noexample obsolete
 
 @see [[m:IO#each_byte]]
 
@@ -885,6 +1054,18 @@ fcntl(2) が返した整数を返します。
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+require "fcntl"
+
+IO.write("testfile", "abcde")
+# ファイル状態フラグを読み出す
+File.open("testfile") do |f|
+  f.fcntl(Fcntl::F_GETFL, 0) # => 0
+  f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK) # => 0
+  f.fcntl(Fcntl::F_GETFL, 0) # => 4
+end
+#@end
+
 --- fsync    -> 0 | nil
 
 書き込み用の IO に対して、システムコール [[man:fsync(2)]]
@@ -905,6 +1086,12 @@ fcntl(2) が返した整数を返します。
 
 @raise IOError 既に close されている場合に発生します。
 
+
+#@samplecode 例
+$stdin.fileno    # => 0
+$stdout.fileno   # => 1
+#@end
+
 #@since 2.2.0
 @see [[m:Dir#fileno]]
 #@end
@@ -921,6 +1108,17 @@ IO ポートの内部バッファをフラッシュします。
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX [[man:fflush(3)]] が失敗した場合に発生します。
+
+#@samplecode 例
+require "tempfile"
+
+Tempfile.open("testtmpfile") do |f|
+  f.print "test"
+  File.read(f.path) # => ""
+  f.flush
+  File.read(f.path) # => "test"
+end
+#@end
 
 --- getc    -> String | nil
 
@@ -1004,6 +1202,11 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+File.new("testfile").isatty   # => false
+File.new("/dev/tty").isatty   # => true
+#@end
+
 --- lineno    -> Integer
 
 現在の行番号を整数で返します。実際には [[m:IO#gets]] が呼ばれた回数です。
@@ -1046,12 +1249,31 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+IO.popen("-") do |pipe|
+  if pipe
+    $stderr.puts "In parent, child pid is #{pipe.pid}" # => In parent, child pid is 16013
+  else
+    $stderr.puts "In child, pid is #{$$}"              # => In child, pid is 16013
+  end
+end
+#@end
+
 --- pos    -> Integer
 --- tell   -> Integer
 
 ファイルポインタの現在の位置を整数で返します。
 
 @raise IOError 既に close されている場合に発生します。
+
+#@samplecode 例
+IO.write("testfile", "This is line one\n")
+File.open("testfile") do |f|
+  f.pos    # => 0
+  f.gets   # => "This is line one\n"
+  f.pos    # => 17
+end
+#@end
 
 --- pos=(n)
 
@@ -1062,6 +1284,15 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 
 @raise IOError 既に close されている場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\n")
+File.open("testfile") do |f|
+  f.pos    # => 0
+  f.pos = 17
+  f.gets   # => "This is line two\n"
+end
+#@end
+
 --- print(*arg)    -> nil
 
 引数を IO ポートに順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
@@ -1071,6 +1302,10 @@ IO に対してシステムコール ioctl を実行し、その結果を返し�
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
+
+#@samplecode 例
+$stdout.print("This is ", 100, " percent.\n") # => This is 100 percent.
+#@end
 
 @see [[m:Kernel.#print]]
 
@@ -1089,6 +1324,8 @@ C 言語の printf と同じように、format に従い引数
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@#noexample Kernel.#printf を参照
+
 @see [[m:Kernel.#printf]]
 
 --- putc(ch)    -> object
@@ -1102,6 +1339,11 @@ C 言語の printf と同じように、format に従い引数
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
+
+#@samplecode 例
+$stdout.putc "A" # => A
+$stdout.putc 65  # => A
+#@end
 
 @see [[m:Kernel.#putc]]
 
@@ -1248,10 +1490,25 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+#@samplecode 例
+IO.write("testfile", "line1,\nline2,\nline3,\n")
+File.open("testfile") { |f| p f.readlines }      # => ["line1,\n", "line2,\n", "line3,\n"]
+File.open("testfile") { |f| p f.readlines(3) }   # => ["lin", "e1,", "\n", "lin", "e2,", "\n", "lin", "e3,", "\n"]
+File.open("testfile") { |f| p f.readlines(",") } # => ["line1,", "\nline2,", "\nline3,", "\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: rsを取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+File.open("testfile") { |f| p f.readlines(chomp: true) }       # => ["line1,\rline2,", "line3,"]
+File.open("testfile") { |f| p f.readlines("\r", chomp: true) } # => ["line1,", "line2,", "\nline3,\n"]
+#@end
+#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
@@ -1439,6 +1696,16 @@ offset 位置への移動が成功すれば 0 を返します。
 
 @raise IOError 既に close されていた場合に発生します。 
 
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\n")
+File.open("testfile") do |f|
+  s = f.stat
+  "%o" % s.mode   # => "100644"
+  s.blksize       # => 4096
+  s.atime         # => 2018-03-01 23:19:59 +0900
+end
+#@end
+
 @see [[m:File#lstat]], [[m:File.stat]], [[m:File.lstat]] 
 
 --- sync    -> bool
@@ -1447,6 +1714,14 @@ offset 位置への移動が成功すれば 0 を返します。
 
 @raise IOError 既に close されていた場合に発生します。 
 
+#@samplecode 例
+File.open("testfile", "w") do |f|
+  f.sync      # => false
+  f.sync = true
+  f.sync      # => true
+end
+#@end
+
 --- sync=(newstate)
 
 自身を同期モードに設定すると、出力関数の呼出毎にバッファがフラッシュされます。
@@ -1454,6 +1729,8 @@ offset 位置への移動が成功すれば 0 を返します。
 @param newstate 自身を同期モードに設定するかを boolean で指定します。
 
 @raise IOError 既に close されていた場合に発生します。 
+
+@see [[m:IO#sync]]
 
 --- sysread(maxlen, outbuf = "")   -> String
 
@@ -1548,9 +1825,19 @@ stdio を経由しないので他の出力メソッドと混用すると思わ�
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@samplecode 例
+File.open("testfile", "w+") do |f|
+  f.syswrite("ABCDE") # => 5
+  f.syswrite(:ABC)    # => 3
+end
+File.read("testfile") # => "ABCDEABC"
+#@end
+
 --- to_io    -> self
 
 self を返します。
+
+#@#noexample
 
 --- ungetc(char)     -> nil
 
@@ -1702,6 +1989,8 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+#@#noexample obsolete
+
 @see [[m:$/]], [[m:IO#each_line]]
 
 --- getbyte   -> Integer | nil
@@ -1750,6 +2039,8 @@ self は読み込み用にオープンされていなければなりません。
 
 @raise IOError self が読み込み用にオープンされていない場合に発生します。
 
+#@#noexample obsolete
+
 @see [[m:IO#each_char]]
 
 --- ungetbyte(c) -> nil
@@ -1773,6 +2064,10 @@ self は読み込み用にオープンされていなければなりません。
 --- binmode? -> bool
 
 自身がバイナリモードなら true を返します。そうでない場合、false を返します。
+
+#@#noexample binmode を参照
+
+@see [[ref:c:IO#io_binmode]], [[m:IO#binmode]]
 
 --- close_on_exec=(bool)
 自身に close-on-exec フラグを設定します。
@@ -1851,7 +2146,7 @@ auto-close フラグを設定します。
 
 フラグが設定されているオブジェクトは
 close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
-設定されていない場合は close しません。
+偽を設定すると close しません。
 
 @param bool 真偽値でフラグを設定します
 @see [[m:IO#autoclose?]]
@@ -1859,12 +2154,12 @@ close時/GCでのファイナライザ呼出時にファイルデスクリプタ
    f = open("/dev/null")
    IO.for_fd(f.fileno)
    # ...
-   f.gets # may cause IOError
+   f.gets # may cause Errno::EBADF
 
    f = open("/dev/null")
-   IO.for_fd(f.fileno).autoclose = true
+   IO.for_fd(f.fileno).autoclose = false
    # ...
-   f.gets # won't cause IOError
+   f.gets # won't cause Errno::EBADF
 --- autoclose? -> bool
 
 auto-close フラグを返します。
@@ -1894,6 +2189,8 @@ IO の各コードポイントに対して繰り返しブロックを呼びだ�
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
 
+#@#noexample obsolete
+
 @see [[m:IO#each_codepoint]]
 
 --- fdatasync -> 0 | nil
@@ -1907,6 +2204,17 @@ IO のすべてのバッファされているデータを直ちにディスク�
 
 @raise NotImplementedError [[man:fdatasync(2)]] も [[man:fsync(2)]] も
        サポートされていない OS で発生します。
+
+#@samplecode 例
+require "tempfile"
+
+Tempfile.open("testtmpfile") do |f|
+  f.print "test"
+  File.read(f.path) # => ""
+  f.fdatasync
+  File.read(f.path) # => "test"
+end
+#@end
 
 --- advise(advice, offset=0, len=0) -> nil
 

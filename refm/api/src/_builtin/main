@@ -4,8 +4,30 @@
 
 main では参照できない事に注意してください。トップレベルで self から参照してください。
 
-トップレベルで定義したメソッドは [[c:Object]] の private メソッドと
+トップレベルで定義したメソッドは [[c:Object]] の private インスタンスメソッドと
 して定義されます。
+
+#@samplecode 例: トップレベルで定義したメソッドの確認
+basic_private_methods = private_methods(false)
+basic_public_methods = public_methods(false)
+private def explicit_private_method
+end
+
+# トップレベルで定義したメソッドは main オブジェクトの private メソッドと して定義される
+def implicit_private_method
+end
+
+public def explicit_public_method
+end
+
+# main オブジェクトで独自定義した private method のみを取得する
+p private_methods(false) - basic_private_methods
+# => [:explicit_private_method, :implicit_private_method]
+
+# main オブジェクトで独自定義した public method のみを取得する
+p public_methods(false) - basic_public_methods
+# => [:explicit_public_method]
+#@end
 
 --- public(*name) -> Object
 
@@ -56,7 +78,7 @@ main では参照できない事に注意してください。トップレベル
 
 引数 modules で指定したモジュールを後ろから順番にインクルードします。
 
-@param moddules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
+@param modules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
 @raise ArgumentError 継承関係が循環してしまうような include を行った場
                      合に発生します。
@@ -98,7 +120,7 @@ hypot(3, 4)  # => 5.0
 有効にした拡張の有効範囲については以下を参照してください。
 
 #@since 2.1.0
- * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]]
 #@else
  * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]]
 #@end

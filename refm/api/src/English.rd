@@ -22,7 +22,7 @@
   class SomethingError < StandardError; end
 
   begin
-    raise SomethingError 
+    raise SomethingError
   rescue
     p $ERROR_INFO.backtrace #=> ["sample.rb:5"]
     p $ERROR_INFO.to_s #=> "SomethingError"
@@ -40,18 +40,6 @@
   rescue
     p $ERROR_POSITION #=> ["sample.rb:5"]
   end
-
-#@until 1.8.2
---- $LOADED_FEATURES -> [String]
-
-[[m:$"]] の別名
-
-  require "English"
-  require "find"
-
-  p $LOADED_FEATURES #=> ["English.rb", "find.rb"]
-
-#@end
 
 --- $FS              -> String | nil
 --- $FIELD_SEPARATOR -> String | nil
@@ -108,7 +96,7 @@
   print "ugo"
   # end of sample.rb
 
-  ruby sample.rb 
+  ruby sample.rb
   hoge
   huga
   fuge
@@ -134,13 +122,13 @@
   p $INPUT_LINE_NUMBER
   # end of sample.rb
 
-  ruby sample.rb a.txt 
+  ruby sample.rb a.txt
   #=> 5
 
 --- $LAST_READ_LINE -> String | nil
 
 [[m:$_]] の別名
-  
+
   1 e
   2 f
   3 g
@@ -149,17 +137,17 @@
   # end of a.txt
 
   ruby -rEnglish -ne'p $LAST_READ_LINE' a.txt
-  #=> 
+  #=>
   "1 e\n"
   "2 f\n"
   "3 g\n"
   "4 h\n"
   "5 i\n"
-  
+
 --- $DEFAULT_OUTPUT -> IO
 
 [[m:$>]] の別名
- 
+
   require "English"
 
   dout = $DEFAULT_OUTPUT.dup
@@ -173,14 +161,14 @@
 --- $DEFAULT_INPUT -> IO
 
 [[m:$<]] の別名
-  
+
   require "English"
   while line = $DEFAULT_INPUT.gets
     p line
   end
   # end of sample.rb
 
-  ruby sample.rb < /etc/passwd 
+  ruby sample.rb < /etc/passwd
   # => "hoge:x:500:501::/home/hoge:/bin/bash\n"
        ...
 
@@ -188,10 +176,10 @@
 --- $PROCESS_ID -> Integer
 
 [[m:$$]] の別名
- 
+
   require "English"
 
-	p sprintf("something%s", $PID) #=> "something5543" など
+  p sprintf("something%s", $PID) #=> "something5543" など
 
 --- $CHILD_STATUS -> Process::Status | nil
 
@@ -239,19 +227,6 @@
   $IGNORECASE        # => warning: variable $= is no longer effective
                      #    false
 
---- $PROGRAM_NAME -> String
-
-[[m:$0]] の別名
-
-  require "English"
-  
-  p $PROGRAM_NAME
-  #end of sample.rb
-
-  ruby sample.rb  #=> "sample.rb"
-  ruby ./sample.rb #=> "./sample.rb"
-  ruby /home/hoge/bin/sample.rb #=> "/home/hoge/bin/sample.rb"
-
 --- $ARGV -> [String]
 
 [[m:$*]] の別名
@@ -259,7 +234,7 @@
   require "English"
   p $ARGV
   # end of sample.rb
-  
+
   ruby sample.rb 31 /home/hoge/fuga.txt
   #=> ["31", "/home/hoge/fuga.txt"]
 
@@ -318,6 +293,3 @@
   $ ruby sample.rb
   "http://localhost/a.jpg"
   "link"
-  
-
-

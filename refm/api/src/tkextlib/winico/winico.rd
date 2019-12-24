@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/setup
@@ -55,4 +54,3 @@ require tkextlib/winico/setup
 
 #@include(Winico_callback)
 #@include(Winico_callback__ValidateArgs)
-#@end

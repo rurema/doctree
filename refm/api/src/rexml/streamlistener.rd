@@ -99,11 +99,9 @@ pub_sys, long_name, uri はDTDが内部サブセットのみを
   uri: nil
 という引数が渡されます。
 
-#@since 1.8.5
 --- doctype_end -> ()
 文書型宣言(DTD)の終了区切りをパースしたときに呼び出されるコールバックメソッドです。
 
-#@end
 
 --- attlistdecl(element_name, attributes, raw_content) -> ()
 DTDの属性リスト宣言をパースしたときに呼び出されるコールバックです。

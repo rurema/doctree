@@ -8,10 +8,8 @@ include WSDL::SOAP::ClassDefCreatorSupport
 
 == Constants
 
-#@since 1.8.3
 --- DEFAULT_ITEM_NAME
 #@todo
-#@end
 
 == Class Methods
 

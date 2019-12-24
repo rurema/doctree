@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::EncodingStyle::ASPDotNetHandler < SOAP::EncodingStyle::Handler
 
@@ -38,4 +37,3 @@
 --- Namespace
 #@todo
 
-#@end

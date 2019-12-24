@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Plotchart::Plot3D < TkCanvas
 include Tk::Tcllib::Plotchart::ChartMethod
@@ -26,4 +25,3 @@ include Tk::Tcllib::Plotchart::ChartMethod
 --- color(fill, border)
 #@todo
 
-#@end

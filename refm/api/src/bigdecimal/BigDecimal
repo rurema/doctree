@@ -3,8 +3,13 @@
 
 == Module Functions
 
+#@since 2.6.0
+--- BigDecimal(s, exception: true) -> BigDecimal | nil
+--- BigDecimal(s, n, exception: true) -> BigDecimal | nil
+#@else
 --- BigDecimal(s) -> BigDecimal
 --- BigDecimal(s, n) -> BigDecimal
+#@end
 
 引数で指定した値を表す BigDecimal オブジェクトを生成します。
 
@@ -30,6 +35,11 @@
 //}
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 #@since 1.9.3
 @raise ArgumentError s に [[c:Float]] オブジェクトを指定し、n に
@@ -203,14 +213,21 @@ NaN を表す [[c:BigDecimal]] オブジェクトを返します。
 
 == Class Methods
 
+#@until 2.7.0
+#@since 2.6.0
+--- new(s, exception: true)    -> BigDecimal | nil
+--- new(s, n, exception: true) -> BigDecimal | nil
+#@else
 --- new(s)    -> BigDecimal
 --- new(s, n) -> BigDecimal
+#@end
 
 このメソッドは deprecated です。[[m:Kernel.#BigDecimal]] を使用してください。
 
 新しい BigDecimal オブジェクトを生成します。
 
 詳しくは [[m:Kernel.#BigDecimal]] を参照してください。
+#@end
 
 --- mode(s)    -> Integer | nil
 --- mode(s, v) -> Integer | nil
@@ -355,11 +372,13 @@ num を [[c:BigDecimal]] に変換した結果を返します。
 @raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 #@end
 
+#@until 2.6.0
 --- ver -> String
 
 このメソッドは deprecated です。
 #@since 2.5.0
 [[m:BigDecimal::VERSION]] を使用してください。
+#@end
 #@end
 
 == Instance Methods
@@ -730,11 +749,9 @@ self を文字列に変換します (デフォルトは "0.xxxxxEn" の形にな
 
 self の指数部を整数値で返します。
 
-#@since 1.8.1
 --- precs -> [Integer, Integer]
 
 self の有効数字と最大有効数字の配列を返します。
-#@end
 
 --- sign -> Integer
 
@@ -806,10 +823,14 @@ BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
 
   require "bigdecimal"
   BigDecimal("1234.5678").inspect
+#@since 2.4.0
+  # => "0.12345678e4"
+#@else
   # => "#<BigDecimal:b7ea1130,'0.12345678E4',8(12)>"
 
 最初の16進数はオブジェクトのアドレス、次の文字列 '0.12345678E4' は値、
 最後の値 8(12) は現在の有効桁数(最大有効数字)を表します。
+#@end
 
 --- power(n)       -> BigDecimal
 #@since 1.9.3

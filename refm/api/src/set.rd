@@ -35,9 +35,11 @@ Ruby 1.9 以降では、集合オブジェクトに対する taint, untaint, fre
 dupおよび clone メソッドによって複製された集合オブジェクトにもコピー
 されます。
 
+#@until 2.2.0
 ただし、freeze された集合を clone した場合、複製された集合の内部記憶
 には freeze 情報が引き継がれません。
 したがって、生成された集合に対する要素の変更はエラーになりません。
+#@end
 #@end
 
 
@@ -610,6 +612,9 @@ self と set が互いに素な集合である場合に true を返します。
 @return 常に self を返します。
 
 --- select! {|element| ... } -> self | nil
+#@since 2.6.0
+--- filter! {|element| ... } -> self | nil
+#@end
 
 各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
 

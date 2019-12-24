@@ -9,7 +9,7 @@ eRuby スクリプトを処理するクラス。
 従来 ERbLight と呼ばれていたもので、
 標準出力への印字が文字列の挿入とならない点が eruby と異なります。
 
- * [[url:http://magazine.rubyist.net/?0017-BundledLibraries]]
+ * [[url:https://magazine.rubyist.net/articles/0017/0017-BundledLibraries.html]]
 
 
 === 使い方
@@ -148,7 +148,11 @@ ERB は入力した文字列と同じエンコーディングの文字列を返�
 
 == Class Methods
 
+#@since 2.6.0
+--- new(str, safe_level=NOT_GIVEN, trim_mode=NOT_GIVEN, eoutvar=NOT_GIVEN, trim_mode: nil, eoutvar: '_erbout') -> ERB
+#@else
 --- new(str, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
+#@end
 
 eRubyスクリプト から ERB オブジェクトを生成して返します。
 
@@ -161,6 +165,12 @@ eRubyスクリプト から ERB オブジェクトを生成して返します。
 @param eoutvar eRubyスクリプトの中で出力をためていく変数の名前を表す文
                字列。eRuby スクリプトの中でさらに ERB を使うときに変更
                します。通常は指定する必要はありません。
+
+#@since 2.6.0
+Ruby 2.6.0 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
+Ruby 2.5 が EOL になったときに削除される予定です。
+trim_mode と eoutvar の指定はキーワード引数に移行してください。
+#@end
 
 --- version -> String
 
@@ -179,6 +189,19 @@ ERB を b の binding で実行し、結果を標準出力へ印字します。
 ERB を b の binding で実行し、結果の文字列を返します。
 
 @param b eRubyスクリプトが実行されるときのbinding
+
+#@since 2.5.0
+@see [[m:ERB#result_with_hash]]
+
+--- result_with_hash(hash) -> String
+
+ERB をハッシュオブジェクトで指定されたローカル変数を持つ
+新しいトップレベルバインディングで実行し、結果の文字列を返します。
+
+@param hash ローカル変数名をキーにしたハッシュ
+
+@see [[m:ERB#result]]
+#@end
 
 --- src -> String
 
@@ -231,7 +254,6 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 @param eoutvar eRubyスクリプトの中で出力をためていく変数
 
-#@since 1.8.1
 
 --- filename -> String
 
@@ -243,7 +265,6 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易になります。filename を設定していない場合は、エラー発生箇所は「 (ERB) 」という出力となります。
 
-#@end
 
 = module ERB::Util
 
