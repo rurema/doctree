@@ -38,11 +38,9 @@ require wsdl/info
 --- part
 #@todo
 
-#@since 1.8.3
 --- targetnamespace
 #@todo
 
-#@end
 
 --- use
 #@todo

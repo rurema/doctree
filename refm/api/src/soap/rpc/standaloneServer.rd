@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/rpc/httpserver
 
 = class SOAP::RPC::StandaloneServer < SOAP::RPC::HTTPServer
@@ -16,4 +15,3 @@ require soap/rpc/httpserver
 --- add_headerhandler(obj)
 #@todo
 
-#@end

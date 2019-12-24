@@ -610,7 +610,7 @@ opts でファイルを開くときのオプションを指定します。エン
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 @param opts ファイルを開くときのオプション引数
 
@@ -623,9 +623,10 @@ IO.readlines("testfile", ",")        # => ["line1\nline2,", "\nline3\n"]
 #@end
 
 #@since 2.4.0
-#@samplecode 例: 各行の末尾から "\n", "\r", または "\r\n" を取り除く（chomp = true）
-IO.write("testfile", "line1\nline2,\nline3\n")
-IO.readlines("testfile", chomp: true)  # => ["line1", "line2,", "line3"]
+#@samplecode 例: rs を取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+IO.readlines("testfile", chomp: true)        # => ["line1,\rline2,", "line3,"]
+IO.readlines("testfile", "\r", chomp: true)  # => ["line1,", "line2,", "\nline3,\n"]
 #@end
 #@end
 
@@ -791,6 +792,14 @@ object を出力します。object が文字列でない時にはメソッ
 バイナリモードから通常のモードに戻す方法は再オープンしかありません。
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
+
+#@samplecode 例
+IO.open(IO.sysopen("testfile", "w+")) do |io|
+  io.binmode? # => false
+  io.binmode  # => #<IO:fd 8>
+  io.binmode? # => true
+end
+#@end
 
 @see [[ref:c:IO#io_binmode]], [[m:IO#binmode?]]
 
@@ -1044,6 +1053,18 @@ fcntl(2) が返した整数を返します。
 @raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
 
 @raise IOError 既に close されている場合に発生します。
+
+#@samplecode 例
+require "fcntl"
+
+IO.write("testfile", "abcde")
+# ファイル状態フラグを読み出す
+File.open("testfile") do |f|
+  f.fcntl(Fcntl::F_GETFL, 0) # => 0
+  f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK) # => 0
+  f.fcntl(Fcntl::F_GETFL, 0) # => 4
+end
+#@end
 
 --- fsync    -> 0 | nil
 
@@ -1469,10 +1490,25 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+#@samplecode 例
+IO.write("testfile", "line1,\nline2,\nline3,\n")
+File.open("testfile") { |f| p f.readlines }      # => ["line1,\n", "line2,\n", "line3,\n"]
+File.open("testfile") { |f| p f.readlines(3) }   # => ["lin", "e1,", "\n", "lin", "e2,", "\n", "lin", "e3,", "\n"]
+File.open("testfile") { |f| p f.readlines(",") } # => ["line1,", "\nline2,", "\nline3,", "\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: rsを取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+File.open("testfile") { |f| p f.readlines(chomp: true) }       # => ["line1,\rline2,", "line3,"]
+File.open("testfile") { |f| p f.readlines("\r", chomp: true) } # => ["line1,", "line2,", "\nline3,\n"]
+#@end
+#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
@@ -2110,7 +2146,7 @@ auto-close フラグを設定します。
 
 フラグが設定されているオブジェクトは
 close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
-設定されていない場合は close しません。
+偽を設定すると close しません。
 
 @param bool 真偽値でフラグを設定します
 @see [[m:IO#autoclose?]]
@@ -2118,12 +2154,12 @@ close時/GCでのファイナライザ呼出時にファイルデスクリプタ
    f = open("/dev/null")
    IO.for_fd(f.fileno)
    # ...
-   f.gets # may cause IOError
+   f.gets # may cause Errno::EBADF
 
    f = open("/dev/null")
-   IO.for_fd(f.fileno).autoclose = true
+   IO.for_fd(f.fileno).autoclose = false
    # ...
-   f.gets # won't cause IOError
+   f.gets # won't cause Errno::EBADF
 --- autoclose? -> bool
 
 auto-close フラグを返します。

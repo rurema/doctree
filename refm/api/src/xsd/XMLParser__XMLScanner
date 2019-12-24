@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::XMLParser::XMLScanner < XSD::XMLParser::Parser
 require 'xmlscan/scanner'
 
@@ -71,4 +70,3 @@ include XMLScan::Visitor
 
 --- wellformed_error(msg)
 #@todo
-#@end

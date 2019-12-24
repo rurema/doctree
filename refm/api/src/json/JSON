@@ -27,12 +27,25 @@ json_create メソッドで使用するクラスを決定するために使用�
 
 @param identifier 識別子を指定します。
 
+#@samplecode 例
+require "json"
+require "json/add/core"
+
+JSON.create_id                   # => "json_class"
+puts (1..5).to_json              # => {"json_class":"Range","a":[1,5,false]}
+JSON.create_id = "my_json_class" # => "my_json_class"
+JSON.create_id                   # => "my_json_class"
+puts (1..5).to_json              # => {"my_json_class":"Range","a":[1,5,false]}
+#@end
+
 #@# nodoc
 #@# --- deep_const_get
 
 --- generator -> JSON::Ext::Generator
 
 JSON ライブラリがジェネレータとして使用するモジュールを返します。
+
+#@#noexample
 
 #@# nodoc
 #@# --- generator=(generator)
@@ -186,7 +199,7 @@ proc として手続きオブジェクトが与えられた場合は、読み込
 #@end
 #@if (version >= "2.4.0")
 : :allow_blank
-  真を指定すると、sourceがnilの場合にnilを返却します。デフォルトは真です。
+  真を指定すると、sourceがnilの場合にnilを返します。デフォルトは真です。
 #@end
 : :create_additions
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
@@ -211,9 +224,19 @@ proc として手続きオブジェクトが与えられた場合は、読み込
   [[m:JSON::MinusInfinity]] を許可するようになります。デフォルトは偽です。
 : :create_additions
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
-  デフォルトは真です。
+  デフォルトは偽です。
 : :symbolize_names
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
+
+#@samplecode 例
+require "json"
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]')
+# => [1, 2, {"name"=>"tanaka", "age"=>19}]
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}]
+#@end
 
 @see [[m:JSON::Parser#parse]]
 
@@ -238,7 +261,20 @@ proc として手続きオブジェクトが与えられた場合は、読み込
   [[m:JSON::MinusInfinity]] を許可するようになります。デフォルトは真です。
 : :create_additions
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
-  デフォルトは真です。
+  デフォルトは偽です。
+
+#@samplecode 例
+require "json"
+
+json_text = "[1,2,{\"name\":\"tanaka\",\"age\":19}, NaN]"
+JSON.parse!(json_text)
+# => [1, 2, {"name"=>"tanaka", "age"=>19}, NaN]
+
+JSON.parse!(json_text, symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}, NaN]
+
+JSON.parse(json_text) # => unexpected token at 'NaN]' (JSON::ParserError)
+#@end
 
 @see [[m:JSON::Parser#parse]]
 
@@ -255,6 +291,26 @@ pretty_unparse は将来削除される予定です。
 
 @param options [[c:JSON::State]] または、to_hash や to_h メソッドでハッシュに変換可能なオブジェクトを指定できます。
        ハッシュを使用する場合指定可能なオプションは [[m:JSON.#generate]] を参照してください。
+
+#@samplecode 例
+require "json"
+
+hash = { "name": "tanaka", "age": 19 }
+puts JSON.generate(hash)
+# => {"name":"tanaka","age":19}
+
+puts JSON.pretty_generate(hash)
+# => {
+#      "name": "tanaka",
+#      "age": 19
+#    }
+
+puts JSON.pretty_generate(hash, space: "\t")
+# => {
+#      "name":  "tanaka",
+#      "age": 19
+#    }
+#@end
 
 @see [[m:JSON.#generate]]
 

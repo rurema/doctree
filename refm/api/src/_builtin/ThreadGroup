@@ -49,7 +49,6 @@ Thread.new{ ... } はエラーになりません。生成されたスレッド�
 
 @raise ThreadError 自身が freeze されているか enclose されている場合に、発生します。また引数 thread が属する ThreadGroup が freeze されているか enclose されている場合にも発生します。
 
-#@since 1.8.0
 --- enclose    -> self
 
 自身への [[m:ThreadGroup#add]] によるスレッドの追加・削除を禁止します。
@@ -77,9 +76,7 @@ enclose された ThreadGroup に追加や削除を行うと例外 [[c:ThreadErr
   thg2.add th
 
   => -:8:in `add': can't move from the enclosed thread group (ThreadError)
-#@end
 
-#@since 1.8.0
 --- enclosed?    -> bool
 
 自身が enclose されているなら true を返します。そうでないなら false を返します。デフォルトは false です。
@@ -97,17 +94,11 @@ freeze された ThreadGroup には Thread の追加/削除ができませんが
     p thg.enclosed?         # => false
 
 @see [[m:ThreadGroup#enclose]]
-#@end
 --- list    -> [Thread] 
 
 self に属するスレッドの配列を返します。
-#@since 1.8.0
 version 1.8 では、aborting 状態であるスレッド
 も要素に含まれます。つまり「生きている」スレッドの配列を返します。
-#@else
-終了処理中(aborting)、や終了状態(dead)であるスレッドは要素に含まれ
-ません([[m:Thread.list]]と同じです)。
-#@end
 
 == Constants
 

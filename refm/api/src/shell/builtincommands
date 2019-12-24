@@ -649,11 +649,9 @@ command を実行する.
 --- find_system_command(command)
 #@todo
 
-#@since 1.8.5
 --- identical?
 #@todo
 
-#@end
 
 #@since 1.9.1
 

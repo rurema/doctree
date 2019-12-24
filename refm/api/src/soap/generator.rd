@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require xsd/ns
 require soap/soap
 require soap/baseData
@@ -28,11 +27,9 @@ require soap/encodingstyle/handler
 --- generate_explicit_type=(value)
 #@todo
 
-#@since 1.8.3
 --- use_numeric_character_reference
 --- use_numeric_character_reference=(value)
 #@todo
-#@end
 
 --- generate(obj, io = nil)
 #@todo
@@ -43,21 +40,17 @@ require soap/encodingstyle/handler
 --- add_reftarget(name, node)
 #@todo
 
-#@since 1.8.3
 --- encode_child(ns, child, parent)
 #@todo
-#@end
 
 --- encode_element(ns, obj, parent)
 #@todo
 
-#@since 1.8.3
 --- encode_name(ns, data, attrs)
 #@todo
 
 --- encode_name_end(ns, data)
 #@todo
-#@end
 
 --- encode_tag(elename, attrs = nil)
 #@todo
@@ -71,13 +64,11 @@ require soap/encodingstyle/handler
 --- encode_string(str)
 #@todo
 
-#@since 1.8.3
 --- element_local?(element)
 #@todo
 
 --- element_qualified?(element)
 #@todo
-#@end
 
 == Constants
 
@@ -89,4 +80,3 @@ require soap/encodingstyle/handler
 
 = class SOAP::SOAPGenerator::FormatEncodeError < SOAP::Error
 
-#@end

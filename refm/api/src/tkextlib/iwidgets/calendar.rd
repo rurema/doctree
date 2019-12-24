@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/iwidgets
@@ -48,4 +47,3 @@ alias get
 #@include(calendar/Calendar__CalendarCommand)
 #@include(calendar/Calendar__CalendarCommand__ValidateArgs)
 
-#@end

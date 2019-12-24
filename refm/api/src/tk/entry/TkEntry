@@ -31,18 +31,14 @@ include TkValidation
 #@todo
 
 --- cursor
-#@since 1.8.2
 --- icursor
 #@todo
 
-#@end
 
 --- cursor=(index)
-#@since 1.8.2
 --- icursor=(index)
 #@todo
 
-#@end
 
 --- index(idx)
 #@todo
@@ -84,28 +80,22 @@ include TkValidation
 #@todo
 
 --- value
-#@since 1.8.2
 --- get
 #@todo
 
-#@end
 
 
 --- value=(val)
-#@since 1.8.2
 --- set(val)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- [](*args)
 #@todo
 
 --- []=(*args)
 #@todo
 
-#@end
 
 #@if(version <= "1.8.1")
 

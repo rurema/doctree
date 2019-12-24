@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/tagfont
@@ -11,4 +10,3 @@ require tk/canvas
 #@include(canvastag/TkcTagCurrent)
 #@include(canvastag/TkcGroup)
 
-#@end

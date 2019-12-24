@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class Tk::Itk::Component < TkObject
 
@@ -55,4 +54,3 @@
 --- bindinfo(*args)
 #@todo
 
-#@end

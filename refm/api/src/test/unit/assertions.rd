@@ -352,7 +352,6 @@ regexp !~ string が真ならばパスします。
 @see [[m:Object#equal?]], [[m:Test::Unit::Assertions#assert_same]]
 #@end
 
-#@since 1.8.1
 
 --- assert_raise(message = "") { ... }    -> object
 --- assert_raise(klass1, klass2, ..., message = "") { ... }    -> object
@@ -373,7 +372,6 @@ assert にパスした時は、実際に投げられた例外を返します。
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
-#@end
 
 --- build_message(head, template = nil, *arguments)
 

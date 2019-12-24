@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/soap
 require soap/httpconfigloader
 #@#require stringio
@@ -6,4 +5,3 @@ require soap/httpconfigloader
 #@include(streamHandler/StreamHandler)
 #@include(streamHandler/StreamHandler__ConnectionData)
 #@include(streamHandler/HTTPStreamHandler)
-#@end

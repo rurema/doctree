@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 
@@ -13,4 +12,3 @@ Ruby/Tk extension library checker
     -h : Show this message
     -- : End of options
 
-#@end

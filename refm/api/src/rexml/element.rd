@@ -75,7 +75,6 @@ self を複製して返します。
 複製されるのは名前、属性、名前空間のみです。
 子ノードは複製されません。
 
-#@since 1.8.3
 --- root_node -> REXML::Document | REXML::Node
 self が属する文書のルートノードを返します。
 
@@ -102,7 +101,6 @@ self が属する文書のルートノードを返します。
   grandchildren.name # => "grandchildren"
   grandchildren.root_node == doc # => true
 
-#@end
 
 --- root -> REXML::Element
 self が属する文書のルート要素を返します。
@@ -499,7 +497,6 @@ nil を指定すると最初のテキストノードが削除されます。
 シンボル :element を返します。
 
 
-#@since 1.8.2
 --- xpath -> String
 文書上の対象の要素にのみマッチする xpath 文字列を返します。
 
@@ -514,7 +511,6 @@ nil を指定すると最初のテキストノードが削除されます。
   b # => <b/>
   b.xpath # => "/a/b[2]"
 
-#@end
 
 --- attribute(name, namespace = nil) -> REXML::Attribute | nil
 
@@ -864,7 +860,6 @@ xpath を指定した場合は、その XPath 文字列に
   doc.root.elements.to_a("child::node()") # => [<b/>, <c/>]
   REXML::XPath.match(doc.root, "child::node()") # => ["sean", <b/>, "elliott", <c/>]
 
-#@since 1.8.6
 --- collect(xpath = nil) {|element| .. } -> [object]
 [[m:Enumerable#collect]] と同様、
 各子要素に対しブロックを呼び出し、その返り値の配列を返します。
@@ -885,7 +880,6 @@ xpath を指定した場合は、その XPath 文字列に
 @param xpath XPath文字列
 @see [[m:REXML::Elements#each]]
 
-#@end
 
 = class REXML::Attributes < Hash
 属性の集合を表すクラスです。
@@ -934,7 +928,6 @@ nameという属性名の属性がない場合は nil を返します。
   p a.attributes["bar:att"] # => "2"
 
 
-#@since 1.8.2
 --- to_a -> [Attribute]
 
 属性の配列を返します。
@@ -944,7 +937,6 @@ nameという属性名の属性がない場合は nil を返します。
   doc = REXML::Document.new("<a x='1' y='2' z='3' />")
   doc.root.attributes.to_a # => [x='1', y='2', z='3']
 
-#@end
 
 --- length -> Integer
 --- size -> Integer
@@ -1163,7 +1155,6 @@ name という名前を持つ属性をすべて削除します。
   a.attributes.delete_all("att") # => [att='&lt;']
   a # => <a foo:att='1' bar:att='2'/>
 
-#@since 1.8.5
 --- get_attribute_ns(namespace, name) -> REXML::Attribute | nil
 namespace と name で特定される属性を返します。
 
@@ -1194,4 +1185,3 @@ XML プロセッサが prefix を置き換えてしまった場合でも、こ�
   a.attributes.get_attribute_ns("http://example.org/baz", "att") # => nil
   a.attributes.get_attribute_ns("http://example.org/foo", "attt") # => nil
 
-#@end

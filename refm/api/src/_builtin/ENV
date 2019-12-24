@@ -6,8 +6,8 @@ extend Enumerable
 ます。ただし、Hash と異なり、ENV のキーと値には文字列しか
 とることができません。
 
-ENV で得られる文字列は ENV['PATH'] を除いて汚染されていま
-す。オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
+ENV で得られる文字列は ENV['PATH'] 以外は常に汚染されています。
+オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
 ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
 でいる場合に限り汚染されます。
 
@@ -70,6 +70,11 @@ ENV.has_key?('NEW_KEY') # => false
 
 環境変数をすべてクリアします。self を返します。
 
+#@samplecode
+ENV.clear
+p ENV # => {}
+#@end
+
 --- delete(key) -> String | nil
 --- delete(key) {|key| ... } -> String | nil
 
@@ -84,12 +89,10 @@ nil を返します。
            す。文字列以外のオブジェクトを指定した場合は to_str メソッド
            による暗黙の型変換を試みます。
 
-#@since 1.8.7
 #@since 1.9.1
 --- reject                     -> Enumerator
 #@else
 --- reject                     -> Enumerable::Enumerator
-#@end
 #@end
 --- reject {|key, value| ... } -> Hash
 
@@ -99,7 +102,6 @@ nil を返します。
 
 --- delete_if {|key, value| ... } -> ENV
 --- reject! {|key, value| ... }   -> ENV | nil
-#@since 1.8.7
 #@since 1.9.1
 --- delete_if  -> Enumerator
 --- reject!    -> Enumerator
@@ -107,14 +109,12 @@ nil を返します。
 --- delete_if  -> Enumerable::Enumerator
 --- reject!    -> Enumerable::Enumerator
 #@end
-#@end
 
 key と value を引数としてブロックを評価した値が真であ
 る時、環境変数を削除します。
 
 reject! は要素に変化がなければ nil を返します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- each                          -> Enumerator
 --- each_pair                     -> Enumerator
@@ -122,27 +122,22 @@ reject! は要素に変化がなければ nil を返します。
 --- each                          -> Enumerable::Enumerator
 --- each_pair                     -> Enumerable::Enumerator
 #@end
-#@end
 --- each {|key, value| ... }      -> self
 --- each_pair {|key, value| ... } -> self
 key と value を引数としてブロックを評価します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_key              -> Enumerator
 #@else
 --- each_key              -> Enumerable::Enumerator
 #@end
-#@end
 --- each_key {|key| ... } -> self
 key を引数としてブロックを評価します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_value                -> Enumerator
 #@else
 --- each_value                -> Enumerable::Enumerator
-#@end
 #@end
 --- each_value {|value| ... } -> self
 value を引数としてブロックを評価します。
@@ -249,18 +244,15 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 
 @param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 
-#@since 1.8.7
-#@since 1.9.1
 --- select                      -> Enumerator
-#@else
---- select                      -> Enumerable::Enumerator
+--- select {|key, value| ... }  -> Hash
+#@since 2.6.0
+--- filter                      -> Enumerator
+--- filter {|key, value| ... }  -> Hash
 #@end
-#@end
---- select {|key, value| ... }  -> [[String, String]]
 
-環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
-します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
-ます。
+環境変数名と値についてブロックを評価し、真を返したものを集めたハッシュ
+を返します。
 
 --- shift -> [String, String]
 
@@ -272,11 +264,23 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 環境変数から [変数名, 値] となる 2 要素の配列の配列を生成します。
 
 --- to_hash -> Hash
-#@since 2.0.0
+
+環境変数の名前をキーとし、対応する値をもつハッシュを返します。
+
 --- to_h -> Hash
+#@since 2.6.0
+--- to_h {|name, value| block } -> Hash
 #@end
 
 環境変数の名前をキーとし、対応する値をもつハッシュを返します。
+
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@samplecode ブロック付きの例
+ENV.to_h {|name, value| [name, value.size] }
+#@end
+#@end
 
 --- to_s -> String
 
@@ -335,17 +339,42 @@ self を返します。
 #@since 1.9.2
 --- keep_if {|key, value| ... } -> ENV
 --- select! {|key, value| ... } -> ENV | nil
+#@since 2.6.0
+--- filter! {|key, value| ... } -> ENV | nil
+#@end
 --- keep_if -> Enumerator
 --- select! -> Enumerator
+#@since 2.6.0
+--- filter! -> Enumerator
+#@end
 
 キーと値を引数としてブロックを評価した結果が真であ
 るような要素を環境変数に残します。
 
 keep_if は常に self を返します。
+#@since 2.6.0
+select! と filter! はオブジェクトが変更された場合に self を、
+#@else
 select! はオブジェクトが変更された場合に self を、
+#@end
 されていない場合に nil を返します。
 
 ブロックが省略された場合には [[c:Enumerator]] を返します。
 
 @see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [[m:Hash#select!]],
+#@end
+#@since 2.6.0
+--- slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+#@samplecode 例
+ENV["foo"] = "bar"
+ENV["baz"] = "qux"
+ENV["bar"] = "rab"
+ENV.slice()             # => {}
+ENV.slice("")           # => {}
+ENV.slice("unknown")    # => {}
+ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
+#@end
 #@end

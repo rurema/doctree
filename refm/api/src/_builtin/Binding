@@ -10,7 +10,6 @@
 
 == Instance Methods
 
-#@since 1.8.7
 --- eval(expr, fname = __FILE__, lineno = 1)    -> object
 
 自身をコンテキストとし文字列 expr を
@@ -33,7 +32,6 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @see [[m:Kernel.#eval]]
 
-#@end
 
 #@since 2.1.0
 --- local_variable_get(symbol) -> object
@@ -127,4 +125,23 @@ eval(expr, self, fname, lineno) とするのと同じです。
 このメソッドは以下のコードと同様の動作をします。
 
   binding.eval("self")
+#@end
+#@since 2.4.0
+--- irb -> object
+REPLのセッションを開始します。
+
+2.5.0 からは require 'irb' せずに直接 binding.irb を呼び出しても使えるようになりました。(実験的)
+
+@see [[lib:irb]]
+#@end
+#@since 2.6.0
+--- source_location  -> [String, Integer]
+
+self の Ruby のソースファイル名と行番号を返します。
+
+[[ref:d:spec/variables#pseudo]] の __FILE__ と __LINE__ も参照してください。
+
+#@samplecode 例
+p binding.source_location # => ["test.rb", 1]
+#@end
 #@end

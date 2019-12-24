@@ -58,8 +58,8 @@ Ruby から使うためのモジュールです。
     -s Shift_JIS を出力する
     -e EUC-JP を出力する
     -w UTF-8 を出力する(BOMなし)
-    -w16 UTF-16 LE を出力する 
-  -J -S -E -W -W16 入力文字列のエンコーデイングの推定値を指定する。
+    -w16 UTF-16 LE を出力する
+  -J -S -E -W -W16 入力文字列のエンコーディングの推定値を指定する。
     -J 入力に JIS を仮定する
     -S 入力に Shift_JIS と X0201片仮名(いわゆる半角片仮名)
        を仮定する。-xを指定しない場合はX0201片仮名(いわゆる半角片仮名)はX0208の
@@ -157,7 +157,7 @@ Ruby から使うためのモジュールです。
 
 === 参考
 
-  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:http://magazine.rubyist.net/?0009-BundledLibraries#l15]]
+  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:https://magazine.rubyist.net/articles/0009/0009-BundledLibraries.html#nkf]]
 
 == Module Functions
 

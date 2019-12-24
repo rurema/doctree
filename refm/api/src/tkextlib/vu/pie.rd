@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/vu
@@ -8,4 +7,3 @@ require tkextlib/vu
 #@include(PieSlice)
 #@include(NamedPieSlice)
 
-#@end

@@ -18,7 +18,7 @@ dRuby は
   * そこからのメソッド呼び出し
   * メソッド呼出の引数/返り値を [[c:Marshal]] でバイト列に変換(マーシャリング)
     して通信先のプロセスと受け渡しすること
-    
+
 ができます。これらはすべて透過的に行われます。
 
 リモートプロセスにあるオブジェクトはローカルには [[c:DRb::DRbObject]] の
@@ -69,7 +69,7 @@ CORBA の IDL のようなリモートオブジェクトのインターフェー
 proxy として動作し、proxy のメソッドを呼び出すと上に説明した通りの
 方法でリモートオブジェクトのメソッドを呼び出します。
 
-マーシャンリング可能なオブジェクトを DRbObject でリファレンスとして
+マーシャリング可能なオブジェクトを DRbObject でリファレンスとして
 渡したい、つまりコピーでなくリファレンスで渡したい場合は
 そのオブジェクトに
 [[c:DRb::DRbUndumped]] を [[m:Module#include]] します。
@@ -97,12 +97,16 @@ dRuby でインターネット上に公開するサービスを作るべきで�
   class << ro
     # リモートオブジェクトの instance_eval を呼ぶため
     # ローカルオブジェクトの instance_eval を取り除く
-    undef :instance_eval  
+    undef :instance_eval
   end
   ro.instance_eval("DANGEROUS RUBY CODE!")
 
-このような instance_eval による危険性は [[m:$SAFE]] を 1 以上に
-することで防げます。
+このような instance_eval による危険性は [[m:$SAFE]] を 1
+#@since 2.3.0
+にすることで防げます。
+#@else
+以上にすることで防げます。
+#@end
 [[m:DRb.#start_service]] の :safe_level オプションで
 リモートからのメソッド呼び出しのコンテキストで指定されるセーフレベルを
 指定できます。
@@ -127,7 +131,7 @@ dRuby でインターネット上に公開するサービスを作るべきで�
   require 'drb/drb'
   
   # 通信を待ち受ける URI
-  URI="druby://localhost:8787"
+  SERVER_URI="druby://localhost:8787"
   
   class TimeServer
   
@@ -141,7 +145,7 @@ dRuby でインターネット上に公開するサービスを作るべきで�
   FRONT_OBJECT=TimeServer.new
   
   # サーバを起動する
-  DRb.start_service(URI, FRONT_OBJECT, :safe_level => 1)
+  DRb.start_service(SERVER_URI, FRONT_OBJECT, :safe_level => 1)
   # DRb のスレッドが終了するのを待つ
   DRb.thread.join
 
@@ -259,17 +263,17 @@ dRuby のサービス(サーバ)を起動します。
 
 #@# --- to_id(obj)
 #@# #@todo
-#@# 
+#@#
 #@# Get a reference id for an object using the current server.
-#@# 
+#@#
 #@# This raises a DRbServerNotFound error if there is no current
 #@# server. See #current_server.
-#@# 
+#@#
 #@# --- to_obj(ref)
 #@# #@todo
-#@# 
+#@#
 #@# Convert a reference into an object using the current server.
-#@# 
+#@#
 #@# This raises a DRbServerNotFound error if there is no current
 #@# server. See #current_server.
 

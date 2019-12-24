@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Plotchart::Timechart < TkCanvas
 include Tk::Tcllib::Plotchart::ChartMethod
@@ -17,4 +16,3 @@ include Tk::Tcllib::Plotchart::ChartMethod
 --- vertline(txt, time)
 #@todo
 
-#@end

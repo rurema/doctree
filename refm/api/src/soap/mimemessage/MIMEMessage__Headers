@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class SOAP::MIMEMessage::Headers < Hash
 
@@ -24,4 +23,3 @@
 --- to_s
 #@todo
 
-#@end

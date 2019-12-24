@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 
 = module TkOptionDB
@@ -71,4 +70,3 @@ include Tk
 
 
 
-#@end
