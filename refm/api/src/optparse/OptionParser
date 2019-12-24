@@ -933,6 +933,22 @@ opts.parse(ARGV) # => ["test"]
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+ARGV              # => ["-i", "-u", "-h", "test"]
+opts.parse(ARGV)  # => ["test"]
+ARGV              # => ["-i", "-u", "-h", "test"]
+opts.parse!(ARGV) # => ["test"]
+ARGV              # => ["test"]
+#@end
+
 --- load(filename = nil)     -> bool
 
 指定された filename を読み込んで各行をまとめたものに対して [[m:OptionParser#parse]] を行ないます。
