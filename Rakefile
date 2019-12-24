@@ -2,7 +2,7 @@ OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0 2.2.0 2.3.0]
 SUPPORTED_VERSIONS = %w[2.4.0 2.5.0 2.6.0]
 UNRELEASED_VERSIONS = %w[2.7.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
-HTML_DIRECTORY_BASE = "/tmp/html/"
+HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
 
 def generate_database(version)
   puts "generate database of #{version}"
@@ -40,8 +40,9 @@ def generate_statichtml(version)
   commands << "--quiet" if ENV['CI']
   succeeded = system(*commands)
   raise "Failed to generate static html" unless succeeded
-  File.unlink("/tmp/html/latest") rescue nil
-  File.symlink(version, "/tmp/html/latest")
+  latest = File.join(HTML_DIRECTORY_BASE, "latest")
+  File.unlink(latest) rescue nil
+  File.symlink(version, latest)
 end
 
 task :default => [:generate, :check_format]
