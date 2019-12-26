@@ -89,6 +89,12 @@ nil を返します。
            す。文字列以外のオブジェクトを指定した場合は to_str メソッド
            による暗黙の型変換を試みます。
 
+#@samplecode
+ENV['TEST'] = 'foo'
+ENV.delete('TEST')  # => "foo"
+ENV.delete('TEST') { |key| puts "#{key} is not found in ENV" } # TEST is not found in ENV
+#@end
+
 #@since 1.9.1
 --- reject                     -> Enumerator
 #@else
