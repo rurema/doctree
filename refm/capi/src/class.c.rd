@@ -111,7 +111,7 @@ func と argc は rb_define_method と同じです。
    }
 
    void Init_func() {
-         rb_define_global_function("dup_obj", return_obj_dup, 1);
+         rb_define_global_function("dup_obj", return_obj_dup, 1); // 関数 dup_objを定義しています。
    }
 
 --- void rb_define_method(VALUE klass, const char *name, VALUE(*func)(), int argc)
