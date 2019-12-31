@@ -655,6 +655,17 @@ logger.level # => 3
 
 ログに出力するプログラム名を設定します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.progname                          # => nil
+logger.progname = "MyProgName"           # => "MyProgName"
+logger.progname                          # => "MyProgName"
+logger.info("info1")                     # => I, [2019-04-23T00:08:55.585459 #2823]  INFO -- MyProgName: info1
+logger.info("OtherProgName") { "info2" } # => I, [2019-04-23T00:08:55.585500 #2823]  INFO -- OtherProgName: info2
+#@end
+
 --- formatter -> String
 
 ログを出力する際に使用するフォーマッターを取得します。
