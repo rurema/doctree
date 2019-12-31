@@ -672,6 +672,16 @@ Pathname.new(File.basename(self.to_s, suffix)) と同じです。
 @param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
               '.' を含まない任意の文字列にマッチします。
 
+#@samplecode 例
+require "pathname"
+
+Pathname("ruby/ruby.c").basename          #=> #<Pathname:"ruby.c">
+Pathname("ruby/ruby.c").basename(".c")    #=> #<Pathname:"ruby">
+Pathname("ruby/ruby.c").basename(".*")    #=> #<Pathname:"ruby">
+Pathname("ruby/ruby.exe").basename(".*")  #=> #<Pathname:"ruby">
+Pathname("ruby/y.tab.c").basename(".*")   #=> #<Pathname:"y.tab">
+#@end
+
 @see [[m:File.basename]]
 
 --- dirname -> Pathname
