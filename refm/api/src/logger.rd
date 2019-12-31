@@ -491,7 +491,7 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.progname # => 0
+logger.progname # => nil
 logger.progname = "MyProgName"
 logger.progname # => "MyProgName"
 #@end
