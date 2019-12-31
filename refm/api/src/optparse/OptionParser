@@ -264,6 +264,24 @@ opts.banner # => "Usage: example.rb [options]"
 
 @return サマリを表示するときの幅を整数で返します。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+opts.summary_width     # => 32
+opts.summarize
+# => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
+opts.summary_width = 8
+opts.summary_width     # =>8
+opts.summarize
+# => ["    -i\n", "        --init\n", "    -u\n", "        --update\n", "    -h\n", "        --help\n"]
+#@end
+
 --- summary_width=(width)
 
 サマリを表示するときの幅を整数で指定します。
