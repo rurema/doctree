@@ -185,11 +185,11 @@ class Sample
   end
 end
 
-sample = Sample.new
+Sample.new
 GC.start
 # => finalize
 
-sample = Sample.new
+Sample.new
 sample.undef
 GC.start
 # ※何も出力されない
