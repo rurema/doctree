@@ -1,4 +1,3 @@
-#@since 1.8.0
 = module Tk::Encoding
 #@todo
 
@@ -21,13 +20,11 @@ include TkCore
 #@todo
 #@end
 
-#@since 1.8.1
 --- LIBRARY_PATH
 #@todo
 
 --- PACKAGE_PATH
 #@todo
-#@end
 
 #@if(version <= "1.8.0")
 --- PLATFORM
@@ -37,18 +34,14 @@ include TkCore
 #@todo
 #@end
 
-#@since 1.8.1
 --- TCL_LIBRARY_PATH
 #@todo
-#@end
 
-#@since 1.8.2
 --- TCL_MAJOR_VERSION
 #@todo
 
 --- TCL_MINOR_VERSION
 #@todo
-#@end
 
 --- TCL_PACKAGE_PATH
 #@todo
@@ -67,13 +60,11 @@ include TkCore
 #@todo
 #@end
 
-#@since 1.8.2
 --- TK_MAJOR_VERSION
 #@todo
 
 --- TK_MINOR_VERSION
 #@todo
-#@end
 
 --- TK_PATCHLEVEL
 #@todo
@@ -86,10 +77,8 @@ include TkCore
 --- TK_VERSION
 #@todo
 
-#@since 1.8.6
 --- Tkextlib_RELEASE_DATE
 #@todo
-#@end
 
 
 == Class Methods
@@ -97,7 +86,6 @@ include TkCore
 --- add_kinsoku(chars, mode = 'both')
 #@todo
 
-#@since 1.8.2
 --- bell(nice = false)
 #@todo
 
@@ -107,7 +95,6 @@ include TkCore
 --- const_missing(sym)
 #@todo
 
-#@end
 
 --- current_grabs(win = nil)
 #@todo
@@ -118,14 +105,12 @@ include TkCore
 --- destroy(*wins)
 #@todo
 
-#@since 1.8.2
 --- errorCode
 #@todo
 
 --- errorInfo
 #@todo
 
-#@end
 
 --- exit
 #@todo
@@ -142,74 +127,58 @@ include TkCore
 --- focus_prev(win)
 #@todo
 
-#@since 1.8.2
 --- focus_to(win, force = false)
 #@todo
 
-#@end
 
 --- fromUTF8(str, encoding = nil)
 #@todo
 
-#@since 1.8.2
 --- grid(*args)
 #@todo
 
 --- grid_forget(*args)
 #@todo
 
-#@end
 
-#@since 1.8.3
 --- has_mainwindow?
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- load_tcllibrary(file, pkg_name = Tk::None, interp = Tk::None)
 #@todo
 
 --- load_tclscript(file, enc = nil)
 #@todo
 
-#@end
 
 --- lower_window(win, below = Tk::None)
 #@todo
 
-#@since 1.8.2
 --- pack(*args)
 #@todo
 
 --- pack_forget(*args)
 #@todo
 
-#@end
 
-#@since 1.8.4
 --- pkgconfig_get(mod, key)
 #@todo
 
 --- pkgconfig_list(mod)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- place(*args)
 #@todo
 
 --- place_forget(*args)
 #@todo
 
-#@end
 
-#@since 1.8.3
 --- raise_window(win, above = Tk::None)
 #@todo
 
-#@end
 
 --- show_kinsoku(mode = 'both')
 #@todo
@@ -217,52 +186,41 @@ include TkCore
 --- strictMotif(mode = Tk::None)
 #@todo
 
-#@since 1.8.2
 --- subst_tk_backslash(str)
 #@todo
 
 --- subst_utf_backslash(str)
 #@todo
 
-#@end
 
-#@since 1.8.4
 --- tcl_pkgconfig_get
 #@todo
 
 --- tcl_pkgconfig_list(key)
 #@todo
 
-#@end
 
-#@since 1.8.3
 --- thread_update(idle = nil)
 #@todo
 
 --- thread_update_idletasks
 #@todo
 
-#@end
 
-#@since 1.8.4
 --- tk_pkgconfig_get(key)
 #@todo
 
 --- tk_pkgconfig_list
 #@todo
 
-#@end
 
 --- toUTF8(str, encoding = nil)
 #@todo
 
-#@since 1.8.2
 --- to_backslash_sequence(str)
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- ungrid(*args)
 #@todo
 
@@ -287,7 +245,6 @@ include TkCore
 --- utf_to_backslash_sequence(str)
 #@todo
 
-#@end
 
 == Instance Methods
 
@@ -299,16 +256,13 @@ include TkCore
 --- root
 #@todo
 
-#@since 1.8.2
 --- update(idle = nil)
 #@todo
 
 only for backward compatibility (This never be recommended to use)
 
-#@end
 
 
-#@end
 
 
 

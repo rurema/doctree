@@ -1,8 +1,6 @@
 = class TkMenubar < TkFrame
 include TkComposite
-#@since 1.8.2
 include TkMenuSpec
-#@end
 
 == Class Methods
 

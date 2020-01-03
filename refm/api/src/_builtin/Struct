@@ -104,23 +104,15 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
     foo = Foo.new(1)
     p foo.values      # => [1, nil]
 
-#@since 1.9.1
 --- members -> [Symbol]
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの名前([[c:Symbol]])の配列を返します。
 
-    Foo = Struct.new(:foo, :bar)
-    p Foo.members      # => [:foo, :bar]
-
-#@else
---- members -> [String]
-(このメソッドは Struct の下位クラスにのみ定義されています)
-構造体のメンバの名前([[c:String]])の配列を返します。
-
-    Foo = Struct.new(:foo, :bar)
-    p Foo.members      # => ["foo", "bar"]
-
+#@samplecode 例
+Foo = Struct.new(:foo, :bar)
+p Foo.members      # => [:foo, :bar]
 #@end
+
 == Instance Methods
 
 --- [](member) -> object
@@ -170,12 +162,10 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
   joe.zip    #=> "90210"
 
 --- each {|value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each -> Enumerator
 #@else
 --- each -> Enumerable::Enumerator
-#@end
 #@end
 構造体の各メンバに対して繰り返します。
 
@@ -191,12 +181,10 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
   #    12345
 
 --- each_pair {|member, value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_pair -> Enumerator
 #@else
 --- each_pair -> Enumerable::Enumerator
-#@end
 #@end
 構造体のメンバ名([[c:Symbol]])と値の組を引数にブロックを繰り返し実行します。
 
@@ -218,11 +206,13 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
   joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
   joe.length   #=> 3
 
---- members -> [String]
-構造体のメンバの名前(文字列)の配列を返します。
+--- members -> [Symbol]
+構造体のメンバの名前([[c:Symbol]])の配列を返します。
 
-    Foo = Struct.new(:foo, :bar)
-    p Foo.new.members  # => ["foo", "bar"]
+#@samplecode 例
+Foo = Struct.new(:foo, :bar)
+p Foo.new.members  # => [:foo, :bar]
+#@end
 
 #@include(Struct.attention)
 
@@ -230,10 +220,11 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 --- to_a -> [object]
 構造体のメンバの値を配列にいれて返します。
 
-例えば以下のようにして passwd のエントリを出力できます。
-
-  require 'etc'
-  print Etc.getpwuid.values.join(":"), "\n"
+#@samplecode 例
+  Customer = Struct.new(:name, :address, :zip)
+  Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
+  # => ["Joe Smith", "123 Maple, Anytown NC", 12345]
+#@end
 
 #@include(Struct.attention)
 
@@ -252,6 +243,10 @@ self の内容を人間に読みやすい文字列にして返します。
 --- select {|i| ... } -> [object]
 #@since 1.9.1
 --- select -> Enumerator
+#@end
+#@since 2.6.0
+--- filter {|i| ... } -> [object]
+--- filter -> Enumerator
 #@end
 
 構造体のメンバの値に対してブロックを評価した値が真であった要素を全て含
@@ -365,12 +360,28 @@ self が保持するメンバの値が変化すればこのメソッドが返す
 #@include(Struct.attention)
 #@since 2.0.0
 --- to_h -> Hash
+#@since 2.6.0
+--- to_h {|member, value| block } -> Hash
+#@end
 
 self のメンバ名([[c:Symbol]])と値の組を [[c:Hash]] にして返します。
 
+#@samplecode 例
   Customer = Struct.new(:name, :address, :zip)
   Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
   # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#@end
+
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@samplecode ブロック付きの例
+Customer = Struct.new(:name, :address, :zip)
+Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
+  [member, value*2]
+} # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
+#@end
+#@end
 
 #@include(Struct.attention)
 #@end

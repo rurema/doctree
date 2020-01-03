@@ -22,7 +22,7 @@ the same class.
 Creates a new XMLRPC::BasicServer instance, which should not be
 done, because XMLRPC::BasicServer is an abstract class. This
 method should be called from a subclass indirectly by a super call
-in the method initialize. The paramter class_delim is used
+in the method initialize. The parameter class_delim is used
 in [[m:XMLRPC::BasicServer#add_handler]] when an object is
 added as handler, to delimit the object-prefix and the method-name.
 

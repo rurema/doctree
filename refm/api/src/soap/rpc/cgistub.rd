@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/streamHandler
 #@#require webrick/httpresponse
 #@#require webrick/httpstatus
@@ -8,4 +7,3 @@ require soap/rpc/soaplet
 #@include(cgistub/RPC__CGIStub__SOAPRequest)
 #@include(cgistub/RPC__CGIStub__SOAPStdinRequest)
 #@include(cgistub/RPC__CGIStub__SOAPFCGIRequest)
-#@end

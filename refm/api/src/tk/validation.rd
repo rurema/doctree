@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 
@@ -10,4 +9,3 @@ require tk
 #@include(validation/TkValidation__ValidateCmd)
 #@include(validation/TkValidation__ValidateCmd__Action)
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::XSDGMonth < XSD::XSDAnySimpleType
 include XSD::XSDDateTimeImpl
 
@@ -6,4 +5,3 @@ include XSD::XSDDateTimeImpl
 --- new(value = nil)
 #@todo
 
-#@end

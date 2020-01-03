@@ -139,7 +139,7 @@ test_bar だけテストしたい場合は以下のようなオプションを�
 
 並列化の仕組みについては以下の記事をご覧ください。
 
- * Rubyist Magazine 0033 号 詳解! test-all 並列化: [[url:http://magazine.rubyist.net/?0033-ParallelizeTestAll]]
+ * Rubyist Magazine 0033 号 詳解! test-all 並列化: [[url:https://magazine.rubyist.net/articles/0033/0033-ParallelizeTestAll.html]]
 
 = module Test::Unit
 

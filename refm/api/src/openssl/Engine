@@ -68,7 +68,6 @@ engine から暗号化/復号化オブジェクトを生成します。
        engine がサポートしていない場合に発生します。
 
 
-#@since 1.8.3
 --- cmds -> [[String, String, String]]
 その engine がサポートしているコマンドの一覧を
 配列で返します。
@@ -86,7 +85,6 @@ engine にコマンドを送ります。
 @param val コマンド引数(文字列)
 @see [[m:OpenSSL::Engine#ctrl_cmd]]
 
-#@end
 
 --- digest(name) -> OpenSSL::Digest
 engine からメッセージダイジェストオブジェクトを生成します。

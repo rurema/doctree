@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = module Tk::Tile::TileWidget
 == Instance Methods
@@ -8,4 +7,3 @@
 --- state(state = nil)
 #@todo
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/canvas
@@ -154,4 +153,3 @@ end
 #@include(listbox/ListBox__Item)
 #@include(listbox/ListBox__Event_for_Items)
 
-#@end

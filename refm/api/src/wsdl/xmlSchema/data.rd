@@ -23,12 +23,9 @@ require wsdl/xmlSchema/pattern
 = module WSDL::XMLSchema
 
 == Constants
-#@since 1.8.2
 
 --- AllName
-#@since 1.8.3
 --- AnnotationName
-#@end
 --- AnyName
 --- AttributeName
 --- ChoiceName
@@ -38,11 +35,9 @@ require wsdl/xmlSchema/pattern
 --- EnumerationName
 --- ExtensionName
 --- ImportName
-#@since 1.8.3
 --- IncludeName
 --- LengthName
 --- PatternName
-#@end
 --- RestrictionName
 --- SequenceName
 --- SchemaName
@@ -74,4 +69,3 @@ require wsdl/xmlSchema/pattern
 --- ValueAttrName
 #@todo
 
-#@end

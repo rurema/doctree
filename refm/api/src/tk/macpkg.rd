@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 
 = reopen Tk
@@ -13,4 +12,3 @@ require tk
 
 #@include(macpkg/TkMacResource)
 
-#@end

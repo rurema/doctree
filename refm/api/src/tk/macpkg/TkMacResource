@@ -8,20 +8,16 @@ extend TkMacResource
 #@todo
 #@# ['resource'.freeze].freeze
 
-#@since 1.8.2
 --- PACKAGE_NAME
 #@todo
 #@# = 'resource'.freeze
 
-#@end
 
 == Class Methods
 
-#@since 1.8.2
 --- package_name
 #@todo
 
-#@end
 
 --- close(rsrcRef)
 #@todo

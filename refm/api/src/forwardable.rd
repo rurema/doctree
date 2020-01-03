@@ -11,7 +11,7 @@ category DesignPattern
 
 === 参考
 
-  * Rubyist Magazine 0012 号 標準添付ライブラリ紹介【第 6 回】委譲 ([[url:http://magazine.rubyist.net/?0012-BundledLibraries]])
+  * Rubyist Magazine 0012 号 標準添付ライブラリ紹介【第 6 回】委譲 ([[url:https://magazine.rubyist.net/articles/0012/0012-BundledLibraries.html]])
 
 = module Forwardable
 

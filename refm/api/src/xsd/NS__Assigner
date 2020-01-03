@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::NS::Assigner
 == class methods
 --- new
@@ -8,4 +7,3 @@
 --- assign(ns)
 #@todo
 
-#@end

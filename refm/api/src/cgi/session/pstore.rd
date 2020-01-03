@@ -31,10 +31,6 @@ require cgi/session
 
 == Instance Methods
 
-#@until 1.8.2
---- check_id(id) -> bool
-#@# nodoc
-#@end
 
 --- close -> ()
 #@# discard
@@ -54,17 +50,3 @@ require cgi/session
 
 セッションの状態をファイルに保存します。
 
-#@until 1.8.5
-= redefine CGI::Session
-
-== Instance Methods
-
---- []=(key, value)
-
-指定されたキーの値を設定します。
-
-@param key キーを指定します。
-
-@param val 値を指定します。
-
-#@end

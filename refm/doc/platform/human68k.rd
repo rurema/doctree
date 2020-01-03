@@ -14,7 +14,7 @@ RubyにおけるHuman68kのサポートは1998年4月17日から開始された(
 
 == 参照
 
-: Human68k - Wikipedia([[url:http://ja.wikipedia.org/wiki/Human68k]])
+: Human68k - Wikipedia([[url:https://ja.wikipedia.org/wiki/Human68k]])
   WikipediaでのHuman68kの解説。
 : X68000 LIBRARY([[url:http://retropc.net/x68000/]])
   ハードウェア、ソフトウェア、書籍、雑誌、などの情報を公開、また一部ソフトウェアの配布。

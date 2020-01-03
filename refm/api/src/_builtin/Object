@@ -47,6 +47,13 @@ Objectクラスのインスタンスを生成して返します。
 
 self === other である場合に 0 を返します。そうでない場合には nil を返します。
 
+#@samplecode 例
+a = Object.new
+b = Object.new
+a <=> a # => 0
+a <=> b # => nil
+#@end
+
 @see [[m:Object#===]]
 #@end
 
@@ -100,26 +107,16 @@ other が self 自身の時、真を返します。
 #@since 1.9.1
 --- methods(include_inherited = true) -> [Symbol]
 #@else
-#@since 1.8.0
 --- methods(include_inherited = true) -> [String]
-#@else
---- methods -> [String]
-
-[[m:Module#instance_methods]] と同じです。
 #@end
-#@end
-#@since 1.8.0
 そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
 このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
 ただし特別に、引数が偽の時は [[m:Object#singleton_methods]](false) と同じになっています。
-#@end
 
 #@if (version > "1.8.0")
 
-#@since 1.8.0
 @param include_inherited 引数が偽の時は [[m:Object#singleton_methods]](false) と同じになります。
-#@end
 
   #例1:
   
@@ -214,52 +211,43 @@ other が self 自身の時、真を返します。
 #@since 1.9.1
 --- public_methods(include_inherited = true) -> [Symbol]
 #@else
-#@since 1.8.0
 --- public_methods(include_inherited = true) -> [String]
-#@else
---- public_methods -> [String]
-#@end
 #@end
 
 そのオブジェクトが理解できる public メソッド名の一覧を返します。
 
-#@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
-#@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
 --- private_methods(include_inherited = true) -> [Symbol]
 #@else
-#@since 1.8.0
 --- private_methods(include_inherited = true) -> [String]
-#@else
---- private_methods -> [String]
-#@end
 #@end
 
 そのオブジェクトが理解できる private メソッド名の一覧を返します。
 
-#@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
-#@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
 --- protected_methods(include_inherited = true) -> [Symbol]
 #@else
-#@since 1.8.0
 --- protected_methods(include_inherited = true) -> [String]
-#@else
---- protected_methods -> [String]
-#@end
 #@end
 
 そのオブジェクトが理解できる protected メソッド名の一覧を返します。
 
-#@since 1.8.0
 @param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
-#@end
+
+#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+
 @see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
 #@since 1.9.1
@@ -272,7 +260,6 @@ other が self 自身の時、真を返します。
 --- singleton_methods(inherited_too = false) -> [String]
 #@end
 #@end
-#@since 1.8.0
 そのオブジェクトに対して定義されている特異メソッド名
 (public あるいは protected メソッド) の一覧を返します。
 
@@ -281,7 +268,6 @@ inherited_too が真のときは継承した特異メソッドを含みます。
 self がクラスの場合はスーパークラスのクラスメソッド([[c:Class]]のインスタンスの特異メソッド)などです。
 
 singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
-#@end
 
 #@if (version > "1.8.0")
 @param inherited_too 継承した特異メソッドを含める場合は真を、
@@ -587,7 +573,6 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   it = Foo.new
   p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
-#@since 1.8.7
 #@since 1.9.1
 --- to_enum(method = :each, *args) -> Enumerator
 --- enum_for(method = :each, *args) -> Enumerator
@@ -675,18 +660,50 @@ self を引数としてブロックを評価し、self を返します。
       .select {|x| x.even? } .tap {|x| puts "evens:    #{x}" }
       .map {|x| x*x }        .tap {|x| puts "squares:  #{x}" }
 
-#@end
 
 #@since 2.5.0
 @see [[m:Object#yield_self]]
 
---- yield_self{|x| ... } -> object
+--- yield_self {|x| ... } -> object
+--- yield_self            -> Enumerator
+#@since 2.6.0
+--- then {|x| ... } -> object
+--- then            -> Enumerator
+#@end
 
 self を引数としてブロックを評価し、ブロックの結果を返します。
 
+#@since 2.6.0
 #@samplecode 例
-  "my string".yield_self {|s| s.upcase }   # => "MY STRING"
-  3.next.yield_self {|x| x**x }.to_s       # => "256"
+3.next.then {|x| x**x }.to_s             # => "256"
+"my string".yield_self {|s| s.upcase }   # => "MY STRING"
+#@end
+#@else
+#@samplecode 例
+"my string".yield_self {|s| s.upcase }   # => "MY STRING"
+3.next.yield_self {|x| x**x }.to_s       # => "256"
+#@end
+#@end
+
+値をメソッドチェインのパイプラインに次々と渡すのは良い使い方です。
+
+#@samplecode メソッドチェインのパイプライン
+require 'open-uri'
+require 'json'
+
+construct_url(arguments).
+  yield_self {|url| open(url).read }.
+  yield_self {|response| JSON.parse(response) }
+#@end
+
+ブロックなしで呼び出されたときは Enumerator を返します。
+例えば条件によって値を捨てるのに使えます。
+
+#@samplecode
+# 条件にあうので何もしない
+1.yield_self.detect(&:odd?)            # => 1
+# 条件に合わないので値を捨てる
+2.yield_self.detect(&:odd?)            # => nil
 #@end
 
 @see [[m:Object#tap]]
@@ -824,39 +841,31 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 
 @see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Regexp#===]], [[m:Enumerable#grep]]
 
-#@since 1.9.1
 --- =~(other) -> nil
-#@else
---- =~(other) -> false
-#@end
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
-をサポートするためのメソッドです。
-#@since 1.9.1
-常に nil を返します。
+をサポートするためのメソッドです。常に nil を返します。
+
+#@since 2.6.0
+このメソッドは deprecated です。
+意図せずに Array などに対して呼ばれた時にバグの原因になっていたため、
+代わりに [[m:NilClass#=~]] が定義されています。
 #@else
-常に false を返します。
-#@end
 
 この定義により、=~ が再定義されたオブジェクトでは正常にマッチを行い、
-#@since 1.9.1
 それ以外のものは nil を返すようになります。
-#@else
-それ以外のものは false を返すようになります。
-#@end
 
 #@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
+#@end
 
 @param other 任意のオブジェクトです。結果に影響しません。
 
-  obj = 'regexp'
-  p(obj =~ /re/) #=> 0
-  
-  obj = nil
-#@since 1.9.1
-  p(obj =~ /re/) #=> nil
-#@else
-  p(obj =~ /re/) #=> false
+#@samplecode 例
+obj = 'regexp'
+p(obj =~ /re/) #=> 0
+
+obj = nil
+p(obj =~ /re/) #=> nil
 #@end
 
 @see [[m:String#=~]]
@@ -869,6 +878,14 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 self#=~(obj) を反転した結果と同じ結果を返します。
 
 @param other 判定するオブジェクトを指定します。
+
+#@samplecode 例
+obj = 'regexp'
+p (obj !~ /re/) # => false
+
+obj = nil
+p (obj !~ /re/) # => true
+#@end
 
 @see [[m:Object#=~]]
 #@end
@@ -937,21 +954,15 @@ self#=~(obj) を反転した結果と同じ結果を返します。
   
 extend の機能は、「特異クラスに対する [[m:Module#include]]」
 と言い替えることもできます。
-#@since 1.8.0
 ただしその場合、フック用のメソッド
 が [[m:Module#extended]] ではなく [[m:Module#included]] になるという違いがあります。
-#@end
 
   # obj.extend Foo, Bar とほぼ同じ
   class << obj
     include Foo, Bar
   end
 
-#@since 1.8.0
 @see [[m:Module#extend_object]],[[m:Module#include]],[[m:Module#extended]]
-#@else
-@see [[m:Module#extend_object]],[[m:Module#include]]
-#@end
 
 --- inspect -> String
 
@@ -1012,11 +1023,7 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
     p obj.instance_variable_get(:@foo)      #=> 1
     p obj.instance_variable_get(:@bar)      #=> nil
 
-#@since 1.8.6
 @see [[m:Object#instance_variable_set]],[[m:Object#instance_variables]],[[m:Object#instance_variable_defined?]]
-#@else
-@see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]]
-#@end
 #@end
 
 #@if (version >= "1.8.0")
@@ -1035,11 +1042,7 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
     p obj.instance_variable_set(:@foo, 2)   #=> 2
     p obj.instance_variable_get(:@foo)      #=> 2
 
-#@since 1.8.6
 @see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]],[[m:Object#instance_variable_defined?]]
-#@else
-@see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]]
-#@end
 #@end
 
 #@since 1.9.1
@@ -1064,7 +1067,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
 
 @see [[m:Object#instance_variable_get]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Module.constants]], [[m:Module#constants]], [[m:Module#class_variables]]
 
-#@since 1.8.6
 --- instance_variable_defined?(var) -> bool
 
 インスタンス変数 var が定義されていたら真を返します。
@@ -1082,7 +1084,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
    p fred.instance_variable_defined?("@c")   #=> false
 
 @see [[m:Object#instance_variable_get]],[[m:Object#instance_variable_set]],[[m:Object#instance_variables]]
-#@end
 
 --- send(name, *args) -> object
 --- send(name, *args) { .... } -> object
@@ -1127,7 +1128,7 @@ send, __send__ は、メソッドの呼び出し制限
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
+@see [[m:Object#public_send]], [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
 #@since 1.9.1
 --- public_send(name, *args) -> object
@@ -1156,11 +1157,9 @@ send, __send__ は、メソッドの呼び出し制限
 [[m:Marshal.#dump]] において出力するオブジェクトがメソッド _dump 
 を定義している場合には、そのメソッドの結果が書き出されます。
 
-#@since 1.8.0
 バージョン1.8.0以降では[[m:Object#marshal_dump]], [[m:Object#marshal_load]]の使用
 が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方の
 メソッドを持つ場合は marshal_dump が優先されます。
-#@end
 
 メソッド _dump は引数として再帰を制限するレベル limit を受
 け取り、オブジェクトを文字列化したものを返します。
@@ -1200,11 +1199,8 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラ�
 利用します。(例えば、クラス [[c:Time]] は、_dump/_load を定義して
 います)
 
-#@since 1.8.0
 @see [[m:Object#marshal_dump]], [[m:Object#marshal_load]], [[m:Class#_load]]
-#@end
 
-#@since 1.8.0
 --- marshal_dump -> object
 
 [[m:Marshal.#dump]] を制御するメソッドです。
@@ -1269,9 +1265,10 @@ marshal_dump/marshal_load を使うべきです。
 
 @return   返り値は無視されます。
 
+#@#noexample 参照先の Object#marshal_dump にサンプルが書かれているため
+
 @see [[m:Object#marshal_dump]], [[c:Marshal]]
 
-#@end
 
 #@since 2.4.0
 --- clone(freeze: true) -> object
@@ -1733,7 +1730,11 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 レシーバのクラスを返します。
 
   p "ruby".class #=> String
-  p 999999999999999.class #=> Bignum
+#@since 2.4.0
+  p 100.class #=> Integer
+#@else
+  p 100.class #=> Fixnum
+#@end
   p ARGV.class #=> Array
   p self.class #=> Object
   p Class.class #=> Class
@@ -1786,31 +1787,42 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
+#@until 2.3.0
 @raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
+#@end
+
+  ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
+  # => true
+  # false
+
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
-#@since 1.9.1
 --- trust -> self
-#@todo
 
-オブジェクトの「untrustマーク」を取り除きます。
+このメソッドは deprecated です。
+[[m:Object#untaint]] と同じ動作をします。
+
+#@#noexample deprecated
 
 @see [[m:Object#untrusted?]],[[m:Object#untrust]]
 
 --- untrusted? -> bool
-#@todo
 
-オブジェクトの「untrustマーク」がセットされている時真を返します。
+このメソッドは deprecated です。
+[[m:Object#tainted?]] と同じ動作をします。
+
+#@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrust]]
 
 --- untrust -> self
-#@todo
 
-オブジェクトの「untrustマーク」をセットします。
+このメソッドは deprecated です。
+[[m:Object#taint]] と同じ動作をします。
+
+#@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
-#@end
 
 #@since 1.9.2
 --- singleton_class -> Class
@@ -1893,7 +1905,6 @@ initialize という名前のメソッドは自動的に private に設定され
 
 @see [[m:Class#new]]
 
-#@since 1.8.0
 --- initialize_copy(obj) -> object
 
 (拡張ライブラリによる) ユーザ定義クラスのオブジェクトコピーの初期化メソッド。
@@ -1964,7 +1975,6 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、フ�
             #=> instance variables: #<Object:0x4019c880 @foo=1>
             #   tainted?: true
             #   singleton methods: :bar
-#@end
 
 #@since 2.0.0
 --- respond_to_missing?(symbol, include_private) -> bool

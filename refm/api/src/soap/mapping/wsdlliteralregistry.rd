@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::Mapping::WSDLLiteralRegistry < SOAP::Mapping::Registry
 
@@ -34,4 +33,3 @@
 --- MAPPING_OPT
 #@todo
 
-#@end

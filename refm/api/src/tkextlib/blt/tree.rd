@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/blt
@@ -374,4 +373,3 @@ require tkextlib/blt
 #@include(tree/Tree__Notify)
 #@include(tree/Tree__Trace)
 
-#@end

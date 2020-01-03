@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class WSDL::Info < Object
 
@@ -22,20 +21,16 @@
 属性
 
 --- root
-#@since 1.8.3
 --- root=
 #@todo
-#@end
 
 
 属性
 
-#@since 1.8.3
 --- inspect
 #@todo
 
 
-#@end
 
 --- parse_attr(attr, value)
 #@todo
@@ -49,4 +44,3 @@
 #@todo
 #@# abstract
 
-#@end

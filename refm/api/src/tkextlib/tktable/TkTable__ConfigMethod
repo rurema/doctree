@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = module Tk::TkTable::ConfigMethod
 include TkItemConfigMethod
@@ -28,4 +27,3 @@ include TkItemConfigMethod
 --- current_window_configinfo(tagOrId, slot = nil)
 #@todo
 
-#@end

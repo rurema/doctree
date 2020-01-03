@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/menuspec
@@ -11,4 +10,3 @@ require tkextlib/itk
 #@include(Itk__Widget)
 #@include(Itk__Component)
 
-#@end

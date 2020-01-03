@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class TkFont::DescendantFont < Object
 
@@ -30,4 +29,3 @@
 --- method_missing(id, *args)
 #@todo
 
-#@end

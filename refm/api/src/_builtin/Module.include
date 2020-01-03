@@ -58,7 +58,5 @@
 
   p C2.ancestors  # => [C2, C1, M, Object, Kernel]
 
-#@since 1.8.0
 引数に複数のモジュールを指定した場合、
 最後の引数から順にインクルードします。
-#@end

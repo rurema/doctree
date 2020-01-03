@@ -89,7 +89,6 @@ proc として手続きオブジェクトが与えられた場合には読み込
 @raise TypeError メジャーバージョンが異なるか、バージョンの大きな
                  マーシャルデータを読み込んだ場合に発生します。
 
-#@since 1.8.0
 == Constants
 
 --- MAJOR_VERSION -> Integer
@@ -109,4 +108,3 @@ proc として手続きオブジェクトが与えられた場合には読み込
   obj = Object.new
   major, minor = Marshal.dump(obj).unpack("cc")
   p [major, minor]
-#@end
