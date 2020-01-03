@@ -1926,7 +1926,7 @@ $_.gsub とこのメソッド gsub は以下の点で違いがあります。
 @param replace    pattern で指定した文字列と置き換える文字列
 
 #@samplecode 例
-$_                 # => "test\n"
+$_                # => "test\n"
 gsub(/es/, '!!')  # => "t!!t\n"
 #@end
 
