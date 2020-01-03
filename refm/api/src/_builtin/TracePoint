@@ -364,3 +364,14 @@ end
 
 @raise RuntimeError :raise イベントのためのイベントフックの外側で実行し
                     た場合に発生します。
+
+#@samplecode 例
+trace = TracePoint.new(:raise) do |tp|
+  tp.raised_exception # => #<ZeroDivisionError: divided by 0>
+end
+trace.enable
+begin
+  0/0
+rescue
+end
+#@end
