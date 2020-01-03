@@ -300,6 +300,16 @@ pathname.absolute? # => false
 --- relative? -> bool
 self が相対パス指定であれば真を返します。
 
+#@samplecode 例
+require 'pathname'
+
+p = Pathname.new('/im/sure')
+p.relative? #=> false
+
+p = Pathname.new('not/so/sure')
+p.relative? #=> true
+#@end
+
 --- each_filename {|v| ... } -> nil
 self のパス名要素毎にブロックを実行します。
 
