@@ -115,6 +115,24 @@ self が表すフレームのファイル名を返します。
 
 self が表すフレームの絶対パスを返します。
 
+#@samplecode 例
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
+  end
+end
+
+Foo.new(0..2).locations.map do |call|
+  puts call.absolute_path
+end
+
+# => /path/to/foo.rb
+# /path/to/foo.rb
+# /path/to/foo.rb
+#@end
+
 @see [[m:Thread::Backtrace::Location#path]]
 
 --- to_s -> String
