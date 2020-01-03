@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 = class Tk::Tcllib::Tkpiechart::Pie < TkcItem
 include Tk::Tcllib::Tkpiechart::ConfigMethod
@@ -25,4 +24,3 @@ include Tk::Tcllib::Tkpiechart::ConfigMethod
 --- selected_slices
 #@todo
 
-#@end

@@ -70,13 +70,11 @@ include Tk::Scrollable
 
 
 
-#@since 1.8.2
 --- create(type, *args)
 #@todo
 
 create a canvas item without creating a TkcItem object
 
-#@end
 #@if(version == "1.8.0")
 --- create_self(*args)
 #@todo
@@ -97,9 +95,7 @@ this method should be private.
 
 
 
-#@since 1.8.3
 --- deltag(tag, tag_to_del = Tk::None)
-#@end
 --- dtag(tag, tag_to_del = Tk::None)
 #@todo
 

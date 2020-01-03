@@ -1,10 +1,8 @@
-#@since 1.8.2
 
 = class TkEvent::Event < TkUtil::CallbackSubst
 
 == Class Methods
 
-#@since 1.8.3
 --- type_id(name)
 #@todo
 
@@ -13,11 +11,9 @@
 
 --- group_flag(id)
 #@todo
-#@end
 
 == Instance Methods
 
-#@since 1.8.3
 --- valid_fields(group_flag = nil)
 #@todo
 
@@ -26,7 +22,6 @@
 
 --- generate(win, modkeys = {})
 #@todo
-#@end
 
 --- above
 #@todo
@@ -41,10 +36,8 @@
 #@todo
 
 --- detail
-#@since 1.8.4
 --- data
 #@todo
-#@end
 
 --- focus
 #@todo
@@ -74,10 +67,8 @@
 --- place
 #@todo
 
-#@since 1.8.3
 --- property
 #@todo
-#@end
 
 --- rootwin_id
 --- root
@@ -107,10 +98,8 @@
 #@todo
 
 --- widget
-#@since 1.8.3
 --- window
 #@todo
-#@end
 
 --- width
 #@todo
@@ -136,7 +125,6 @@
 
 == Constants
 
-#@since 1.8.3
 --- TYPE_NAME_TBL
 #@todo
 
@@ -151,7 +139,6 @@
 
 --- FIELD_OPERATION
 #@todo
-#@end
 
 --- KEY_TBL
 #@todo
@@ -159,9 +146,6 @@
 --- PROC_TBL
 #@todo
 
-#@since 1.8.3
 --- ALIAS_TBL
 #@todo
-#@end
 
-#@end

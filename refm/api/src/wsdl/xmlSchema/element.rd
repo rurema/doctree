@@ -8,11 +8,9 @@ require wsdl/info
 --- new(name = nil, type = nil)
 #@todo
 
-#@since 1.8.3
 --- attr_reader_ref(symbol)
 #@todo
 
-#@end
 
 == Instance Methods
 
@@ -20,13 +18,10 @@ require wsdl/info
 --- constraint=
 #@todo
 
-#@since 1.8.2
 --- elementform
 #@todo
 
-#@end
 
-#@since 1.8.3
 --- elementformdefault
 #@todo
 
@@ -34,19 +29,16 @@ require wsdl/info
 --- form=
 #@todo
 
-#@end
 
 --- local_complextype
 --- local_complextype=
 #@todo
 
 
-#@since 1.8.3
 --- local_simpletype
 --- local_simpletype=
 #@todo
 
-#@end
 
 --- maxoccurs
 --- maxoccurs=
@@ -70,12 +62,10 @@ require wsdl/info
 --- parse_element(element)
 #@todo
 
-#@since 1.8.3
 --- ref
 --- ref=
 #@todo
 
-#@end
 
 --- refelement
 #@todo

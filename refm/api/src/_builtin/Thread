@@ -108,13 +108,8 @@ Thread.abort_on_exception # => true
 
 --- list    -> [Thread]
 
-#@since 1.8.0
 全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
 も要素に含まれます。
-#@else
-生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
-の配列を返します。
-#@end
 
   Thread.new do
     sleep 
@@ -248,6 +243,9 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 スレッドのデバッグレベルを返します。
 
+スレッドのデバッグレベルが 0 のときはなにもしません。
+それ以外の場合は、スレッドのデバッグログを標準出力に出力します。
+初期値は 0 です。
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
 
@@ -255,10 +253,14 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 Thread.DEBUG # => 0
 #@end
 
+@see [[m:Thread.DEBUG=]]
+
 --- DEBUG=(val)
 
 スレッドのデバッグレベルを val に設定します。
 
+val が 真 のときは Integer に変換してから設定します。
+偽 のときは 0 を設定します。
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
 
@@ -267,6 +269,8 @@ Thread.DEBUG # => 0
 Thread.DEBUG = 1
 Thread.DEBUG # => 1
 #@end
+
+@see [[m:Thread.DEBUG]]
 
 #@end
 
@@ -492,6 +496,15 @@ name に対応するスレッド固有データがない時には、引数 defau
 @raise KeyError 引数defaultもブロックも与えられてない時、
                 name に対応するスレッド固有データがないと発生します。
 
+#@samplecode 例
+th = Thread.new { Thread.current[:name] = 'A' }
+th.join
+th.fetch(:name)   # => "A"
+th.fetch(:fetch, 'B')   # => "B"
+th.fetch('name')  {|name| "Thread" + name}  # => "A"
+th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
+#@end
+
 @see [[m:Thread#[] ]]
 #@end
 
@@ -626,19 +639,15 @@ ensure 節を実行せずにスレッドの実行を終了させます。
     # => true
 
 --- join           -> self
-#@since 1.8.0
 --- join(limit)    -> self | nil
-#@end
 
 スレッド self の実行が終了するまで、カレントスレッドを停止し
 ます。self が例外により終了していれば、その例外がカレントス
 レッドに対して発生します。
 
-#@since 1.8.0
 limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
 
 @param limit タイムアウトする時間を整数か小数で指定します。単位は秒です。
-#@end
 
 @raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
 
@@ -756,8 +765,15 @@ a.join
 
 --- safe_level    -> Integer
 
+#@since 2.6.0
+セーフレベルを返します。
+
+[[m:$SAFE]]がプロセスグローバルになったため、このメソッドは obsolete です。
+単純に [[m:$SAFE]] をチェックしてください。
+#@else
 self のセーフレベルを返します。カレントスレッドの
 safe_level は、[[m:$SAFE]] と同じです。
+#@end
 
 セーフレベルについては[[d:spec/safelevel]]を参照してください。
 

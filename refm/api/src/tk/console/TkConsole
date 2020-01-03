@@ -4,10 +4,8 @@ include Tk
 
 == Class Methods
 
-#@since 1.8.3
 --- create
 #@todo
-#@end
 
 --- title(str = Tk::None)
 #@todo
@@ -21,13 +19,11 @@ include Tk
 --- eval(tcl_script)
 #@todo
 
-#@since 1.8.3
 --- maininterp_eval(tcl_script)
 #@todo
 
 --- maininterp_record(tcl_script)
 #@todo
-#@end
 
 == Constants
 

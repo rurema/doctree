@@ -171,7 +171,7 @@ DER 表現の文字列を解析し、そこにエンコードされている ASN
 
 @param der DER形式の文字列
 @raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
-@see [[m:OpenSSl::ASN1.#decode]]
+@see [[m:OpenSSL::ASN1.#decode]]
 
 --- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> nil
 DER形式の文字列を解析し、そこに含まれる ASN.1 の値
@@ -192,7 +192,7 @@ DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 
 @param der DER形式の文字列
 @raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
-@see [[m:OpenSSl::ASN1.#decode]]
+@see [[m:OpenSSL::ASN1.#decode]]
 
 --- Boolean(value) -> OpenSSL::ASN1::Boolean
 --- Boolean(value , tag , tagging , tag_class) -> OpenSSL::ASN1::Boolean

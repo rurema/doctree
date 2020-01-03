@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tkextlib/tcllib
@@ -17,4 +16,3 @@ require tkextlib/tcllib
 #@include(Plotchart__Gnattchart)
 #@include(Plotchart__PlotSeries)
 
-#@end

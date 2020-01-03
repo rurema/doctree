@@ -22,6 +22,7 @@
 
 == Singleton Methods
 
+--- new(sig_number)           -> SignalException
 --- new(sig_name)             -> SignalException
 --- new(sig_number, sig_name) -> SignalException
 
@@ -57,23 +58,25 @@ se.signm # => "SIGINT"
 
 self のシグナル番号を返します。
 
-例:
-  p Signal.signame(1) # => "HUP"
-  begin
-    Process.kill('HUP',Process.pid)
-    sleep
-  rescue SignalException => e
-    p e.signo # => 1
-  end
+#@samplecode 例
+p Signal.signame(1) # => "HUP"
+begin
+  Process.kill('HUP', Process.pid)
+  sleep
+rescue SignalException => e
+  p e.signo # => 1
+end
+#@end
 
 --- signm -> String
 
 self.message のエイリアスです。
 
-例:
-  begin
-    Process.kill('HUP', Process.pid)
-    sleep
-  rescue SignalException => e
-    puts e.signm  # => SIGHUP
-  end
+#@samplecode 例
+begin
+  Process.kill('HUP', Process.pid)
+  sleep
+rescue SignalException => e
+  puts e.signm  # => SIGHUP
+end
+#@end

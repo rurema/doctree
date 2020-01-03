@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require webrick/httpservlet/abstract
 #@#require webrick/httpstatus
 require soap/rpc/router
@@ -48,4 +47,3 @@ require soap/streamHandler
 --- do_POST(req, res)
 #@todo
 
-#@end

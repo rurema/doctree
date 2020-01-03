@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class SOAP::WSDLDriver::Servant__
 
 == Class Methods
@@ -14,11 +13,9 @@
 --- port
 #@todo
 
-#@since 1.8.2
 --- soapaction
 --- soapaction=(value)
 #@todo
-#@end
 
 --- default_encodingstyle
 --- default_encodingstyle=(value)
@@ -40,24 +37,19 @@
 --- wsdl_mapping_registry=(value)
 #@todo
 
-#@since 1.8.2
 --- inspect
 #@todo
-#@end
 
 --- endpoint_url
 --- endpoint_url=(endpoint_url)
 #@todo
 
-#@since 1.8.2
 --- headerhandler
 #@todo
-#@end
 
 --- streamhandler
 #@todo
 
-#@since 1.8.2
 --- test_loopback_response
 #@todo
 
@@ -66,7 +58,6 @@
 
 --- rpc_call(name, *values)
 #@todo
-#@end
 
 #@if (version == "1.8.1")
 --- rpc_send(method_name, *params)
@@ -80,7 +71,6 @@
 
 --- document_send(name, header_obj, body_obj)
 #@todo
-#@end
 
 
 

@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tk/validation
@@ -17,4 +16,3 @@ require tkextlib/tktable/setup
 #@include(TkTable__SelectionCommand__ValidateArgs)
 #@include(TkTable__ValidateCommand)
 #@include(TkTable__ValidateCommand__ValidateArgs)
-#@end

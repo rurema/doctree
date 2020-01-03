@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::XMLParser::Parser
 == class methods
 --- new(host, opt = {})
@@ -32,4 +31,3 @@
 = class XSD::XMLParser::UnexpectedElementError < XSD::XMLParser::FormatDecodeError
 
 = class XSD::XMLParser::ElementConstraintError < XSD::XMLParser::FormatDecodeError
-#@end

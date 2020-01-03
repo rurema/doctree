@@ -17,11 +17,9 @@ require xsd/namedelements
 --- base=
 #@todo
 
-#@since 1.8.3
 --- basetype
 #@todo
 
-#@end
 
 --- content
 #@todo
@@ -29,11 +27,9 @@ require xsd/namedelements
 --- derivetype
 #@todo
 
-#@since 1.8.4
 --- elementformdefault
 #@todo
 
-#@end
 
 --- parse_attr(attr, value)
 #@todo
@@ -42,8 +38,6 @@ require xsd/namedelements
 #@todo
 
 
-#@since 1.8.2
 --- targetnamespace
 #@todo
 
-#@end

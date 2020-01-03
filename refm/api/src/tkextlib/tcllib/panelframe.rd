@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tkextlib/tcllib
@@ -32,4 +31,3 @@ require tkextlib/tcllib
 = class Tk::Tcllib::Panelframe
 alias Tk::Tcllib::PanelFrame
 
-#@end

@@ -11,7 +11,7 @@ RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを�
 VM の命令シーケンスの一覧はRuby のソースコード中の insns.def から参照で
 きます。
 
- * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/insns.def?view=markup]]
+ * [[url:https://github.com/ruby/ruby/blob/master/insns.def]]
 
 #@# The instruction sequence results will almost certainly change as Ruby
 #@# changes, so example output in this documentation may be different from what

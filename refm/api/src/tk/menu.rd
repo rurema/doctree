@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 require tk/itemconfig
 require tk/menuspec
@@ -12,4 +11,3 @@ require tk/menuspec
 #@include(menu/TkMenubutton)
 #@include(menu/TkOptionMenubutton)
 #@include(menu/TkOptionMenubutton__OptionMenu)
-#@end

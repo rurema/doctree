@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require xsd/datatypes
 require soap/soap
 require soap/mapping/typeMap
@@ -8,9 +7,7 @@ require soap/mapping/typeMap
 #@include(baseData/SOAPBasetype)
 #@include(baseData/SOAPCompoundtype)
 #@include(baseData/SOAPReference)
-#@since 1.8.2
 #@include(baseData/SOAPExternalReference)
-#@end
 
 = class SOAP::SOAPNil < XSD::XSDNil
 extend SOAP::SOAPModuleUtils
@@ -98,7 +95,6 @@ include SOAP::SOAPBasetype
 extend SOAP::SOAPModuleUtils
 include SOAP::SOAPBasetype
 
-#@since 1.8.2
 = class SOAP::SOAPNonPositiveInteger < XSD::XSDPositiveInteger
 extend SOAP::SOAPModuleUtils
 include SOAP::SOAPBasetype
@@ -106,7 +102,6 @@ include SOAP::SOAPBasetype
 = class SOAP::SOAPNegativeInteger < XSD::XSDNegativeInteger
 extend SOAP::SOAPModuleUtils
 include SOAP::SOAPBasetype
-#@end
 
 = class SOAP::SOAPLong < XSD::XSDLong
 extend SOAP::SOAPModuleUtils
@@ -120,7 +115,6 @@ include SOAP::SOAPBasetype
 extend SOAP::SOAPModuleUtils
 include SOAP::SOAPBasetype
 
-#@since 1.8.2
 = class SOAP::SOAPByte < XSD::XSDByte
 extend SOAP::SOAPModuleUtils
 include SOAP::SOAPBasetype
@@ -148,10 +142,8 @@ include SOAP::SOAPBasetype
 = class SOAP::SOAPPositiveInteger < XSD::XSDPositiveInteger
 extend SOAP::SOAPModuleUtils
 include SOAP::SOAPBasetype
-#@end
 
 #@include(baseData/SOAPStruct)
 #@include(baseData/SOAPElement)
 #@include(baseData/SOAPArray)
 
-#@end

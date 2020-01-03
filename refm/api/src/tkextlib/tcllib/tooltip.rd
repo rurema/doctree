@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tkextlib/tcllib
@@ -55,4 +54,3 @@ extend TkCore
 --- erase(widget)
 #@todo
 
-#@end

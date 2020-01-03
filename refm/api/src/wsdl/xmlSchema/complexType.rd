@@ -32,11 +32,9 @@ require xsd/namedelements
 --- each_element
 #@todo
 
-#@since 1.8.3
 --- elementformdefault
 #@todo
 
-#@end
 
 --- final
 --- final=
@@ -65,20 +63,16 @@ require xsd/namedelements
 --- sequence_elements=(elements)
 #@todo
 
-#@since 1.8.2
 --- simplecontent
 --- simplecontent=
 #@todo
 
-#@end
 
 --- targetnamespace
 #@todo
 
 == Constants
 
-#@since 1.8.2
 --- AnyAsElement
 #@todo
 
-#@end

@@ -1,14 +1,11 @@
-#@since 1.8.2
 
 = class TkNamespace < TkObject
 extend Tk
 
 == Class Methods
 
-#@since 1.8.4
 --- id2obj(id)
 #@todo
-#@end
 
 --- new(name = nil, parent = nil)
 #@todo
@@ -19,10 +16,8 @@ extend Tk
 --- code(script = Proc.new)
 #@todo
 
-#@since 1.8.4
 --- current_path
 #@todo
-#@end
 
 --- current
 #@todo
@@ -72,13 +67,11 @@ extend Tk
 --- parent(namespace = Tk::None)
 #@todo
 
-#@since 1.8.3
 --- get_path
 #@todo
 
 --- set_path(*namespace_list)
 #@todo
-#@end
 
 --- qualifiers(str)
 #@todo
@@ -86,7 +79,6 @@ extend Tk
 --- tail(str)
 #@todo
 
-#@since 1.8.5
 --- upvar(namespace, *var_pairs)
 #@todo
 
@@ -95,7 +87,6 @@ extend Tk
 
 --- set_unknown_handler(cmd = Proc.new)
 #@todo
-#@end
 
 --- which(name)
 #@todo
@@ -108,10 +99,8 @@ extend Tk
 
 == Instance Methods
 
-#@since 1.8.4
 --- install_cmd(cmd)
 #@todo
-#@end
 
 --- __tk_call(*args)
 #@todo
@@ -140,10 +129,8 @@ extend Tk
 --- code(script = Proc.new)
 #@todo
 
-#@since 1.8.4
 --- current_path
 #@todo
-#@end
 
 --- current_namespace
 --- current
@@ -179,15 +166,11 @@ extend Tk
 --- parent
 #@todo
 
-#@since 1.8.3
 --- set_path
 #@todo
-#@end
 
-#@since 1.8.5
 --- upvar(*var_pairs)
 #@todo
-#@end
 
 == Constants
 
@@ -200,14 +183,9 @@ extend Tk
 --- Tk_Namespace_ID
 #@todo
 
-#@since 1.8.5
 --- Tk_NsCode_RetObjID_TBL
 #@todo
-#@end
 
-#@since 1.8.4
 --- Global
 #@todo
-#@end
 
-#@end

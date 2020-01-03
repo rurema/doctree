@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::RPC::CGIStub::SOAPRequest < Object
 
@@ -13,4 +12,3 @@
 --- meta_vars
 #@todo
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class SOAP::SOAPStruct < XSD::NSDBase
 include SOAP::SOAPCompoundtype
 include Enumerable
@@ -31,14 +30,11 @@ include Enumerable
 --- members
 #@todo
 
-#@since 1.8.3
 --- to_obj
 #@todo
-#@end
 
 --- each
 #@todo
 
 --- replace
 #@todo
-#@end

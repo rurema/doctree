@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tk
 
 = module Tk::Clock
@@ -34,4 +33,3 @@ include Tk
 --- seconds
 #@todo
 
-#@end

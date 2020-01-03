@@ -10,11 +10,6 @@ Ruby プログラムを解析するためのライブラリです。
 
 Ruby プログラムのパーサです。
 
-以下を参照して下さい。
-
-  * [[url:http://i.loveruby.net/w/RipperTutorial.html]]
-  * [[url:http://i.loveruby.net/w/RipperTutorial.TokenStreamInterface.html]]
-
 Ruby プログラムをテキストとして扱いたい場合、
 例えばソース色付けを行いたい場合は、
 [[c:Ripper::Filter]] クラスを使うとよいでしょう。

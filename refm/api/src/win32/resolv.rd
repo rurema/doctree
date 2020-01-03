@@ -1,4 +1,3 @@
-#@since 1.8.0
 category Windows
 
 require win32/registry
@@ -35,4 +34,3 @@ hosts ファイルのパスを返します。ファイルが存在しない場�
   require "win32/resolv"
   p Win32::Resolv.get_resolv_info #=> [nil, ["192.168.1.1"]]
 
-#@end
