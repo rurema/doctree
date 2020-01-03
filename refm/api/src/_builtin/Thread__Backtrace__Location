@@ -110,9 +110,9 @@ Foo.new(0..2).locations.map do |call|
   puts call.absolute_path
 end
 
-# => path/to/foo.rb
-# path/to/foo.rb
-# path/to/foo.rb
+# => /path/to/foo.rb
+# /path/to/foo.rb
+# /path/to/foo.rb
 #@end
 
 @see [[m:Thread::Backtrace::Location#path]]
