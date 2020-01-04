@@ -401,6 +401,14 @@ GC 内部の統計情報を [[c:Hash]] で返します。
            [[c:Symbol]] で指定します。
 #@end
 
+#@since 2.7.0
+--- compact -> Hash
+
+ヒープをコンパクションします。
+
+詳細は[[feature:15626]]を参照してください。
+#@end
+
 == Instance Methods
 
 --- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
