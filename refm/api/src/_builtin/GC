@@ -65,7 +65,7 @@ Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されま�
    によるフルGC発動の閾値の最大値
  * RUBY_GC_OLDMALLOC_LIMIT_GROWTH_FACTOR (default: 1.2) - oldobject による malloc
    によるフルGC発動の閾値の増加率
- 
+
 以下の2つの環境変数はobsoleteであり、新しいものを使うことが望ましい
   * RUBY_FREE_MIN       -> RUBY_GC_HEAP_FREE_SLOTS
   * RUBY_HEAP_MIN_SLOTS -> RUBY_GC_HEAP_INIT_SLOTS
@@ -121,7 +121,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
     * oldmalloc_increase_bytes_limits を越えたことが原因でGCが起動された場合は
       oldmalloc_increase_bytes_limits が RUBY_GC_OLDMALLOC_LIMIT_GROWTH_FACTOR 倍される
       (ただし、 RUBY_GC_OLDMALLOC_LIMIT_MAX を越えることはできない)
-   
+
 ==== 実行中のパラメータ
 
 プログラム実行中には、GCに関する統計情報/閾値情報を [[m:GC.stat]] で見ることができるが、
@@ -147,7 +147,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
     RUBY_GC_HEAP_INIT_SLOTS や RUBY_GC_HEAP_FREE_SLOTS
     のチューニングに関する簡単な指針が書いてあって参考になる
   * 結局の所トライ&エラーで調整する必要がある。
-  
+
 ==== この設定を理解するための用語集
 
   * スロット - Ruby のオブジェクトを1つ保持するためのメモリ領域。
@@ -169,8 +169,8 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
     x86_64上でのlinuxでは16kバイトがページのサイズと決められている。
     スロット用のメモリの確保および解放はこの単位で行われる。
     この「ページ」はOSのメモリ管理用語であるページとは異なる概念であることに注意。
-  
-  
+
+
 ==== 参考資料
 
   * [[url:http://www.atdot.net/~ko1/activities/2014_rubyconf_ph_pub.pdf]]
