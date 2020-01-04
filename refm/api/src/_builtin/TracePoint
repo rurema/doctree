@@ -259,10 +259,16 @@ self の状態を人間に読みやすい文字列にして返します。
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
 #@samplecode 例
-trace = TracePoint.new do |tp|
-  tp. lineno # => 4
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call, :return) do |tp|
+  tp.lineno
 end
 trace.enable
+foo 1
+# => 1
+# 3
 #@end
 
 --- path -> String
