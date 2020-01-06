@@ -3,7 +3,6 @@ SUPPORTED_VERSIONS = %w[2.4.0 2.5.0 2.6.0 2.7.0]
 UNRELEASED_VERSIONS = %w[2.8.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
-PREVIEW_VERSIONS = %w[2.6.0 2.7.0] # for Netlify
 
 def generate_database(version)
   puts "generate database of #{version}"
@@ -91,13 +90,33 @@ namespace :statichtml do
 
   desc "Generate static html for unreleased versions"
   multitask :unreleased => UNRELEASED_VERSIONS
-
-  # for Netlify
-  multitask :preview => PREVIEW_VERSIONS
 end
 
 desc "Generate static html"
 multitask :statichtml => SUPPORTED_VERSIONS.map {|version| "statichtml:#{version}" }
+
+desc "Create index"
+task :create_index do
+  links = []
+  Dir.glob(File.join(HTML_DIRECTORY_BASE, '*.*/doc/index.html')).each do |path|
+    path = path.delete_prefix(HTML_DIRECTORY_BASE)
+    links.push %Q[<li><a href="#{path}">#{path}</a></li>]
+  end
+  IO.write(File.join(HTML_DIRECTORY_BASE, 'index.html'), <<-'HTML'+links.sort.reverse.join("\n")+<<-'HTML')
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<ul>
+  HTML
+</ul>
+</body>
+</html>
+  HTML
+end
 
 desc "Check documentation format"
 task check_format: [:statichtml] do

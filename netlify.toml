@@ -1,6 +1,6 @@
 [build]
 publish = "_site"
-command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:preview"
+command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:supported create_index"
 
 [[headers]]
   for = "/*"
@@ -9,7 +9,3 @@ command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-
-[[redirects]]
-  from = "/"
-  to = "/2.7.0/doc/index.html"
