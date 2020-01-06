@@ -1,6 +1,6 @@
 [build]
 publish = "_site"
-command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake"
+command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:preview"
 
 [[headers]]
   for = "/*"

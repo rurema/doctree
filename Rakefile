@@ -3,6 +3,7 @@ SUPPORTED_VERSIONS = %w[2.4.0 2.5.0 2.6.0 2.7.0]
 UNRELEASED_VERSIONS = %w[2.8.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
+PREVIEW_VERSIONS = %w[2.6.0 2.7.0] # for Netlify
 
 def generate_database(version)
   puts "generate database of #{version}"
@@ -90,6 +91,9 @@ namespace :statichtml do
 
   desc "Generate static html for unreleased versions"
   multitask :unreleased => UNRELEASED_VERSIONS
+
+  # for Netlify
+  multitask :preview => PREVIEW_VERSIONS
 end
 
 desc "Generate static html"
