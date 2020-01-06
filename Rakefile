@@ -69,7 +69,7 @@ namespace :generate do
 end
 
 desc "Generate document database"
-multitask :generate => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "generate:#{version}" }
+multitask :generate => SUPPORTED_VERSIONS.map {|version| "generate:#{version}" }
 
 namespace :statichtml do
   ALL_VERSIONS.each do |version|
@@ -93,7 +93,7 @@ namespace :statichtml do
 end
 
 desc "Generate static html"
-multitask :statichtml => [*OLD_VERSIONS, *SUPPORTED_VERSIONS].map {|version| "statichtml:#{version}" }
+multitask :statichtml => SUPPORTED_VERSIONS.map {|version| "statichtml:#{version}" }
 
 desc "Check documentation format"
 task check_format: [:statichtml] do
