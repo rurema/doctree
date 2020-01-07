@@ -17,6 +17,18 @@ jobs:
       run: bundle install
     - name: Run rake
       run: bundle exec rake
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.4.0
+        path: /tmp/html/2.4.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.5.0
+        path: /tmp/html/2.5.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.6.0
+        path: /tmp/html/2.6.0
 
   misspell:
     runs-on: ubuntu-latest
