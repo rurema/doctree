@@ -106,6 +106,13 @@ ENV.delete('TEST') { |key| puts "#{key} is not found in ENV" } # TEST is not fou
 [[m:Enumerable#reject]] と異なり Hash を返します。また、とり除いた結果
 は実際の環境変数に影響を与えません。
 
+#@samplecode
+ENV['TEST'] = 'foo'
+result = ENV.reject { |key, value| key == 'TEST' }
+result['TEST'] # => nil
+ENV['TEST'] # => "foo"
+#@end
+
 --- delete_if {|key, value| ... } -> ENV
 --- reject! {|key, value| ... }   -> ENV | nil
 #@since 1.9.1
