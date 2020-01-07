@@ -57,6 +57,22 @@ thread_group.list # => [#<Thread:0x007fc6f1842d70 sleep>, #<Thread:0x007fc6f1842
 
 @raise ThreadError 自身が freeze されているか enclose されている場合に、発生します。また引数 thread が属する ThreadGroup が freeze されているか enclose されている場合にも発生します。
 
+#@samplecode 例
+puts "Initial group is #{ThreadGroup::Default.list}"
+# => Initial group is [#<Thread:0x4a49168 run>]
+
+tg = ThreadGroup.new
+t1 = Thread.new { sleep }
+t2 = Thread.new { sleep }
+puts "t1 is #{t1}" # => t1 is #<Thread:0x50bef60>
+puts "t2 is #{t2}" # => t2 is #<Thread:0x50beed0>
+tg.add(t1)
+puts "Initial group now #{ThreadGroup::Default.list}"
+# => Initial group now [#<Thread:0x3039168 run>, #<Thread:0x50beed0 run>]
+puts "tg group now #{tg.list}"
+# => tg group now [#<Thread:0x50bef60 run>]
+#@end
+
 --- enclose    -> self
 
 自身への [[m:ThreadGroup#add]] によるスレッドの追加・削除を禁止します。
