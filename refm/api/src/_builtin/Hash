@@ -1486,9 +1486,17 @@ key が見つからなかった場合は、nil を返します。
 key, value のペアについてブロックを評価し，真となるペアだけを含む
 ハッシュを生成して返します。
 
-   h = { "a" => 100, "b" => 200, "c" => 300 }
-   h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
-   h.select {|k,v| v < 200}  #=> {"a" => 100}
+ブロックが与えられなかった場合は、自身と select から生成した
+[[c:Enumerator]] オブジェクトを返します。
+
+#@samplecode
+h = { "a" => 100, "b" => 200, "c" => 300 }
+h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
+h.select {|k,v| v < 200}  #=> {"a" => 100}
+#@end
+
+
+@see [[m:Hash#select!]], [[m:Hash#reject]]
 
 #@since 1.9.1
 --- to_s     -> String
@@ -1557,7 +1565,7 @@ select! はオブジェクトが変更された場合に self を、
   h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
   h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
 
-@see [[m:Hash#select]], [[m:Hash#delete_if]],[[m:Hash#reject!]]
+@see [[m:Hash#select]], [[m:Hash#delete_if]], [[m:Hash#reject!]]
 #@end
 #@since 2.4.0
 --- transform_values {|value| ... } -> Hash
