@@ -124,6 +124,10 @@ self に属するスレッドの配列を返します。
 version 1.8 では、aborting 状態であるスレッド
 も要素に含まれます。つまり「生きている」スレッドの配列を返します。
 
+#@samplecode 例
+ThreadGroup::Default.list   # => [#<Thread:0x00007f8f13867078 run>]
+#@end
+
 == Constants
 
 --- Default -> ThreadGroup
