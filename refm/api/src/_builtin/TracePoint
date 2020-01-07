@@ -341,6 +341,17 @@ end
 
 発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.binding.local_variables # => [:ret]
+end
+trace.enable
+foo 1
+#@end
+
 --- self -> object
 
 イベントを発生させたオブジェクトを返します。
