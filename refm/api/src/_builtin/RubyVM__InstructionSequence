@@ -238,6 +238,12 @@ RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
 
 バイナリフォーマットの文字列から埋め込まれたextra_dataを取り出します。
 
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+binary = iseq.to_binary("extra_data")
+RubyVM::InstructionSequence.load_from_binary_extra_data(binary) # => extra_data
+#@end
+
 @see [[m:RubyVM::InstructionSequence#to_binary]]
 #@end
 
