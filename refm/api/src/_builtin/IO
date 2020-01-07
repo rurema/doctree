@@ -2166,6 +2166,15 @@ File.open("testfile") { |f| p f.external_encoding } # => #<Encoding:UTF-8>
 IO の内部エンコーディングを返します。
 内部エンコーディングが指定されていない場合は nil を返します。
 
+#@samplecode 例
+IO.write("testfile", "abcde")
+File.open("testfile") do |f|
+  p f.internal_encoding  # => nil
+  f.set_encoding("ASCII-8BIT", "EUC-JP")
+  p f.internal_encoding  # => #<Encoding:EUC-JP>
+end
+#@end
+
 --- set_encoding(enc_str, opt={})           -> self
 --- set_encoding(ext_enc)           -> self
 --- set_encoding(ext_enc, int_enc, opt={})  -> self
