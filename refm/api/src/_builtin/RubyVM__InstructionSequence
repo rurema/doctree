@@ -72,6 +72,24 @@ VM の命令シーケンスの一覧はRuby のソースコード中の insns.de
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
 します。
 
+#@samplecode 例
+require "pp"
+pp RubyVM::InstructionSequence.compile_option
+
+# => {:inline_const_cache=>true,
+# :peephole_optimization=>true,
+# :tailcall_optimization=>false,
+# :specialized_instruction=>true,
+# :operands_unification=>true,
+# :instructions_unification=>false,
+# :stack_caching=>false,
+# :trace_instruction=>true,
+# :frozen_string_literal=>false,
+# :debug_frozen_string_literal=>false,
+# :coverage_enabled=>true,
+# :debug_level=>0}
+#@end
+
 @see [[m:RubyVM::InstructionSequence.compile_option=]]
 
 --- compile_option=(options)
