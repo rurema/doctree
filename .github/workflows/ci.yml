@@ -29,6 +29,10 @@ jobs:
       with:
         name: statichtml-2.6.0
         path: /tmp/html/2.6.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.7.0
+        path: /tmp/html/2.7.0
 
   misspell:
     runs-on: ubuntu-latest
