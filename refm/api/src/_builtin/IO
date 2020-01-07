@@ -1942,6 +1942,22 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@since 2.5.0
+#@samplecode 例
+File.open("textfile", "w+") do |f|
+  f.write("This is", " a test\n")  # => 15
+end
+File.read("textfile")              # => "This is a test\n"
+#@end
+#@else
+#@samplecode 例
+File.open("textfile", "w+") do |f|
+  f.write("This is")  # => 7
+end
+File.read("textfile") # => "This is"
+#@end
+#@end
+
 #@since 2.1.0
 --- write_nonblock(string, exception: true) -> Integer | :wait_writable
 #@else
