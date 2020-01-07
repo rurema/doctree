@@ -161,7 +161,6 @@ CRL に関するフラグを設定します。
 @param purpose 証明書の使用目的を表す整数値
 @see [[m:OpenSSL::X509::Store#purpose=]]
 
-#@since 1.8.2
 --- time=(time)
 証明書の有効期限の検証に使う日時を設定します。
 
@@ -170,7 +169,6 @@ CRL に関するフラグを設定します。
 @param time 検証に使う日時の [[c:Time]] オブジェクト
 @see [[m:OpenSSL::X509::Store#time=]]
 
-#@end
 
 --- trust=(trust)
 

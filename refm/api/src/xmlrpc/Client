@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 #@#Copyright (C) 2001, 2002, 2003 by Michael Neumann (mneumann@ntecs.de)
 
@@ -230,4 +229,3 @@ Access the via [[m:XMLRPC::Client#http_header_extra=]] assigned header.
 
 Returns the Net::HTTPResponse object of the last RPC.
 
-#@end

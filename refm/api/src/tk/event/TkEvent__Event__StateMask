@@ -1,4 +1,3 @@
-#@since 1.8.3
 
 = module TkEvent::Event::StateMask
 
@@ -61,4 +60,3 @@
 --- OptionMask
 #@todo
 
-#@end

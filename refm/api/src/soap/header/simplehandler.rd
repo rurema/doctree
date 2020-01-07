@@ -1,4 +1,3 @@
-#@since 1.8.2
 require soap/header/handler
 require soap/baseData
 
@@ -23,4 +22,3 @@ require soap/baseData
 --- on_inbound(header, mustunderstand)
 #@todo
 
-#@end

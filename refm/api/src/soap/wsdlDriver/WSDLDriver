@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class SOAP::WSDLDriver < Object
 
 == Class Methods
@@ -14,7 +13,6 @@
 --- options
 #@todo
 
-#@since 1.8.2
 --- headerhandler
 #@todo
 
@@ -23,7 +21,6 @@
 
 --- test_loopback_response
 #@todo
-#@end
 
 --- endpoint_url
 --- endpoint_url=(value)
@@ -71,4 +68,3 @@
 
 --- reset_stream
 #@todo
-#@end

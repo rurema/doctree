@@ -95,7 +95,6 @@ nil を返します。
   ARGV.parse!
   p o                                #=> true
 
-#@since 1.8.5
 --- getopts(short_opt, *long_opt)    -> Hash
 
 指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
@@ -126,4 +125,3 @@ nil を返します。
  $ ruby t.rb -b 1 --foo  --bar xxx -- -a
  {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
 
-#@end

@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::Mapping::WSDLEncodedRegistry < SOAP::Mapping::Registry
 include SOAP::Mapping::TraverseSupport
@@ -38,4 +37,3 @@ include SOAP::Mapping::TraverseSupport
 --- MapValueName
 #@todo
 
-#@end

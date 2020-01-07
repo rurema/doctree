@@ -14,14 +14,12 @@ include WSDL::SOAP::ClassDefCreatorSupport
 
 == Instance Methods
 
-#@since 1.8.3
 --- collect_documentparameter(operation)
 #@todo
 
 --- collect_rpcparameter(operation)
 #@todo
 
-#@end
 
 --- definitions
 #@todo

@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 require tkextlib/vu
@@ -38,4 +37,3 @@ require tkextlib/vu
 --- set(val = None)
 #@todo
 
-#@end

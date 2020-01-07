@@ -69,7 +69,6 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
     ary[0].capitalize!
     p ary                     #=> ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
 
-#@since 1.8.0
 --- new(ary)    -> Array
 
 指定された配列 ary を複製して返します。
@@ -87,7 +86,6 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
     p a                        #=> ["A", "B", "C"]
     p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
 
-#@end
 
 --- new(size) {|index| ... }    -> Array
 
@@ -353,7 +351,7 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
 --- *(times)    -> Array
 
 配列の内容を times 回 繰り返した新しい配列を作成して返します。
-値はコピーされないことに注意してください[[trap:Array]]。
+値はコピーされないことに注意してください。
 
 @param times 繰り返したい回数を整数で指定します。
              整数以外のオブジェクトを指定した場合は to_int メソッドによ
@@ -383,14 +381,8 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
 
 自身から other の要素を取り除いた配列を生成して返します。
 
-#@since 1.8.0
 要素の同一性は [[m:Object#eql?]] により評価されます。
 self 中で重複していて、other中に存在していなかった要素は、その重複が保持されます。
-#@else
-重複する要素は取り除かれます。
-要素の同一性は [[m:Object#===]] が使われます。
-新しい配列における要素の順は self における要素の順と同じです。
-#@end
 
 @param other 自身から取り除きたい要素の配列を指定します。
              配列以外のオブジェクトを指定した場合は to_ary メソッドによ
@@ -399,12 +391,30 @@ self 中で重複していて、other中に存在していなかった要素は�
 @raise TypeError 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-#@since 1.8.0
     [1, 2, 1, 3, 1, 4] - [4, 2]    # => [1, 1, 3, 1]
 
     [1, 2, 1, 3, 1, 4] - [1, 4]    # => [2, 3]
+
+#@since 2.6.0
+
+@see [[m:Array#difference]]
+--- difference(*other_arrays) -> Array
+
+自身から other_arrays の要素を取り除いた配列を生成して返します。
+
+要素の同一性は [[m:Object#hash]] と [[m:Object#eql?]] により評価されます。
+self 中で重複していて、other_arrays中に存在していなかった要素は、その重複が保持されます。
+新しい配列における要素の順は self における要素の順と同じです。
+
+#@samplecode
+[ 1, 1, 2, 2, 3, 3, 4, 5 ].difference([ 1, 2, 4 ])       # => [ 3, 3, 5 ]
+[ 1, 'c', :s, 'yep' ].difference([ 1 ], [ 'a', 'c' ])    # => [:s, "yep"]
 #@end
 
+集合のような振る舞いが必要なら [[c:Set]] も参照してください。
+
+@see [[m:Array#-]]
+#@end
 --- &(other)    -> Array
 
 集合の積演算です。両方の配列に含まれる要素からなる新しい配列を返
@@ -430,7 +440,7 @@ self 中で重複していて、other中に存在していなかった要素は�
 集合の和演算です。両方の配列にいずれかに含まれる要素を全て含む新し
 い配列を返します。重複する要素は取り除かれます。
 
-要素の重複判定は、[[m:Object#eql?]] により行われます。
+要素の重複判定は、[[m:Object#eql?]] と [[m:Object#hash]] により行われます。
 
 新しい配列における要素の順は self における要素の順と同じです。
 
@@ -444,7 +454,26 @@ self 中で重複していて、other中に存在していなかった要素は�
   [1, 1, 4, 2, 3] | [5, 4, 5]  #=> [1, 4, 2, 3, 5]
 
 @see [[m:Array#&]]
+#@since 2.6.0
+@see [[m:Array#union]]
 
+--- union(*other_arrays) -> Array
+
+集合の和演算です。self と other_arrays の配列にどれかに含まれる要素を
+全て含む新しい配列を返します。重複する要素は取り除かれます。
+
+要素の重複判定は、[[m:Object#eql?]] と [[m:Object#hash]] により行われます。
+
+@param other_arrays 0個以上の配列を指定します。
+
+#@samplecode
+["a", "b", "c"].union([ "c", "d", "a" ])    #=> ["a", "b", "c", "d"]
+["a"].union(["e", "b"], ["a", "c", "b"])    #=> ["a", "e", "b", "c"]
+["a"].union # => ["a"]
+#@end
+
+@see [[m:Array#|]]
+#@end
 --- <<(obj)    -> self
 
 指定された obj を自身の末尾に破壊的に追加します。
@@ -547,7 +576,6 @@ dup は内容だけをコピーします。
 
 --- collect! {|item| ..}    -> self
 --- map! {|item| ..}        -> self
-#@since 1.8.7
 #@since 1.9.1
 --- collect!                -> Enumerator
 --- map!                    -> Enumerator
@@ -555,18 +583,15 @@ dup は内容だけをコピーします。
 --- collect!                -> Enumerable::Enumerator
 --- map!                    -> Enumerable::Enumerator
 #@end
-#@end
 
 各要素を順番にブロックに渡して評価し、その結果で要素を
 置き換えます。
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、自身と map! から生成した
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
 例:
@@ -575,12 +600,10 @@ dup は内容だけをコピーします。
     ary.map! {|i| i * 3 }
     p ary   #=> [3, 6, 9]
 
-#@since 1.8.7
     ary = [1, 2, 3]
     e = ary.map!
     e.each{ 1 }
     p ary           #=> [1, 1, 1]
-#@end
 
 #@since 1.9.1
 @see [[m:Enumerable#collect]], [[c:Enumerator]]
@@ -683,7 +706,6 @@ pos が範囲外であったら nil を返します。
 
 --- delete_if {|x| ... }    -> self
 --- reject! {|x| ... }      -> self | nil
-#@since 1.8.7
 #@since 1.9.1
 --- delete_if               -> Enumerator
 --- reject!                 -> Enumerator
@@ -691,13 +713,11 @@ pos が範囲外であったら nil を返します。
 --- delete_if               -> Enumerable::Enumerator
 --- reject!                 -> Enumerable::Enumerator
 #@end
-#@end
 
 要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
 delete_if は常に self を返しますが、reject! は要素が 1 つ以上削除されれば self を、
 1 つも削除されなければ nil を返します。
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、自身と reject! から生成した
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
@@ -706,38 +726,31 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 #@end
 返された Enumerator オブジェクトの each メソッドには、
 もとの配列に対して副作用があることに注意してください。
-#@end
 
 例:
   a = [0, 1, 2, 3, 4, 5]
   a.delete_if{|x| x % 2 == 0}
   p a #=> [1, 3, 5]
 
-#@since 1.8.7
   a = [0, 1, 2, 3, 4, 5]
   e = a.reject!
   e.each{|i| i % 2 == 0}
   p a                    #=> [1, 3, 5]  もとの配列から削除されていることに注意。
-#@end
 
 --- each {|item| .... }    -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each                   -> Enumerator
 #@else
 --- each                   -> Enumerable::Enumerator
 #@end
-#@end
 
 各要素に対してブロックを評価します。
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、自身と each から生成した
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
     [1, 2, 3].each do |i|
@@ -784,12 +797,10 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 @see [[m:Array#each_index]], [[m:Array#reverse_each]]
 
 --- each_index {|index| .... }    -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_index                    -> Enumerator
 #@else
 --- each_index                    -> Enumerable::Enumerator
-#@end
 #@end
 
 各要素のインデックスに対してブロックを評価します。
@@ -798,13 +809,11 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 
     (0 ... ary.size).each {|index| ....  }
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、自身と each_index から生成した
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
 @see [[m:Array#each]], [[m:Array#reverse_each]]
@@ -871,14 +880,12 @@ nth 番目の要素を返します。
   p result #=> 999
 
 --- fill(val)            -> self
-#@since 1.8.0
 --- fill {|index| ... }  -> self
-#@end
 
 すべての要素に val をセットします。
 
 このメソッドが val のコピーでなく val 自身をセットする
-ことに注意してください([[trap:Array]])。
+ことに注意してください。
 val の代わりにブロックを指定するとブロックの評価結果を値とします。
 
 @param val 自身にセットしたいオブジェクトを指定します。
@@ -895,21 +902,18 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 
 --- fill(val, start, length = nil)             -> self
 --- fill(val, range)                     -> self
-#@since 1.8.0
 --- fill(start, length = nil) {|index| ... }    -> self
 --- fill(range) {|index| ... }            -> self
-#@end
 
 配列の指定された範囲すべてに val をセットします。
 
 範囲の始点が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 範囲の終点が自身の末尾を越える時は長さを自動的に拡張し、拡張した部分を val で初期化します。
-このメソッドが val のコピーでなく val 自身をセットすることに注意してください([[trap:Array]])。
+このメソッドが val のコピーでなく val 自身をセットすることに注意してください。
   a = [0, 1, 2]
   a.fill("x", 5..10)
   p a #=> [0, 1, 2, nil, nil, "x", "x", "x", "x", "x", "x"]
 
-#@since 1.8.0
 val の代わりにブロックを指定するとブロックの評価結果を値とし
 ます。ブロックは要素毎に実行されるので、セットする値のそれぞれをあ
 るオブジェクトの複製にすることができます。
@@ -920,7 +924,6 @@ val の代わりにブロックを指定するとブロックの評価結果を�
     p ary.fill(0,3) {|i| i}          # => [0, 1, 2]
     p ary.fill { "foo" }             # => ["foo", "foo", "foo"]
     p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
-#@end
 
 @param val 自身に設定したいオブジェクトを指定します。
 
@@ -950,7 +953,6 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 
 @see [[m:Array#last]]
 
-#@since 1.8.0
 --- first(n)    -> Array
 
 先頭の n 要素を配列で返します。n は 0 以上でなければなりません。
@@ -977,24 +979,15 @@ val の代わりにブロックを指定するとブロックの評価結果を�
          [0, 1, 2]
 
 @see [[m:Array#last]]
-#@end
 
-#@since 1.8.7
 --- flatten(lv = nil)     -> Array
 --- flatten!(lv = nil)    -> self | nil
-#@else
---- flatten               -> Array
---- flatten!              -> self | nil
-#@end
 
 flatten は自身を再帰的に平坦化した配列を生成して返します。flatten! は
 自身を再帰的かつ破壊的に平坦化し、平坦化が行われた場合は self をそうでない
 場合は nil を返します。
-#@since 1.8.7
 lv が指定された場合、lv の深さまで再帰的に平坦化します。
-#@end
 
-#@since 1.8.7
 @param lv 平坦化の再帰の深さを整数で指定します。nil を指定した場合、再
           帰の深さの制限無しに平坦化します。
           整数以外のオブジェクトを指定した場合は to_int メソッドによる暗
@@ -1002,7 +995,6 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
-#@end
 
 @raise ArgumentError 配列要素が自身を含むような無限にネストした配列に対して flatten を呼んだ場合に発生します。
 
@@ -1019,11 +1011,9 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
     # 平坦化が行われない場合は nil を返す。
     p [1, 2, 3].flatten!            #=> nil
  
-#@since 1.8.7
     # 平坦化の再帰の深さを指定する例。
     a = [ 1, 2, [3, [4, 5] ] ]
     a.flatten(1)              #=> [1, 2, 3, [4, 5]]
-#@end
 
 --- hash    -> Integer
 
@@ -1050,7 +1040,6 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 
 --- find_index(val)          -> Integer | nil
 --- index(val)               -> Integer | nil
-#@since 1.8.7
 --- find_index {|item| ...}  -> Integer | nil
 --- index {|item| ...}       -> Integer | nil
 #@since 1.9.1
@@ -1059,7 +1048,6 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 #@else
 --- find_index               -> Enumerable::Enumerator
 --- index                    -> Enumerable::Enumerator
-#@end
 #@end
 
 条件に一致する最初の要素の位置を返します。
@@ -1073,7 +1061,6 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
     p [1, 0, 0, 0, 0].index(1)   #=> 0
     p [0, 0, 0, 0, 0].index(1)   #=> nil
 
-#@since 1.8.7
 ブロックが与えられた場合には、各要素を引数として順にブロックを実行し、
 ブロックが真を返した最初の要素の位置を返します。
 一つも真にならなかった場合は nil を返します。
@@ -1086,7 +1073,6 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 [[c:Enumerator]] のインスタンスを返します。
 #@else
 [[c:Enumerable::Enumerator]] のインスタンスを返します。
-#@end
 #@end
 
 @see [[m:Array#rindex]]
@@ -1132,7 +1118,6 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 @see [[m:Hash#dig]], [[m:Struct#dig]], [[m:OpenStruct#dig]]
 #@end
 
-#@since 1.8.0
 --- insert(nth, *val)    -> self
 
 インデックス nth の要素の直前(nth が負の場合は直後)に第 2 引数以降の値を挿入します。
@@ -1153,7 +1138,6 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
     ary.insert(-2, "X")
     p ary                  # => [1, 2, "a", "b", "X", 3]
 
-#@end
 
 --- join(sep = $,)    -> String
 
@@ -1206,7 +1190,6 @@ join した文字列を連結します。
 
 @see [[m:Array#first]]
 
-#@since 1.8.0
 --- last(n)    -> Array
 
 末尾の n 要素を配列で返します。n は 0 以上でなければなりません。
@@ -1233,7 +1216,6 @@ join した文字列を連結します。
          [0, 1, 2]
 
 @see [[m:Array#first]]
-#@end
 
 --- length    -> Integer
 --- size      -> Integer
@@ -1244,22 +1226,16 @@ join した文字列を連結します。
 
 #@until 1.9.1
 --- nitems    -> Integer
-#@since 1.8.7
 --- nitems{|obj| ... } -> Integer
-#@end
 
 nil でない要素の数を返します。
 
-#@since 1.8.7
 ブロックが与えられた場合は、各要素を引数として評価し nil でない値を返した
 要素の数を返します。
-#@end
 
 例:
   p [1, nil, 3, nil].nitems              #=> 2
-#@since 1.8.7
   p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
-#@end
 #@end
 
 --- pack(template)                      -> String
@@ -1301,12 +1277,9 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 #@include(pack-template)
 
 --- pop    -> object | nil
-#@since 1.8.7
 --- pop(n) -> Array
-#@end
 
 自身の末尾から要素を取り除いてそれを返します。
-#@since 1.8.7
 引数を指定した場合はその個数だけ取り除き、それを配列で返します。
 
 空配列の場合、n が指定されていない場合は nil を、
@@ -1323,9 +1296,6 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-#@else
-空配列の場合は nil を返します。この場合配列自身は変化しません。
-#@end
 
 例:
       array = [1, [2, 3], 4]
@@ -1336,27 +1306,19 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
       p array.pop      # => 1
       p array.pop      # => nil
       p array          # => []
-#@since 1.8.7
       array = [1, 2, 3]
       p array.pop(2)   #=> [2, 3]
       p array          #=> [1]
-#@end
 
 @see [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]]
 
-#@since 1.8.0
 --- push(*obj)        -> self
 #@since 2.5.0
 --- append(*obj)      -> self
 #@end
-#@else
---- push(obj, *rest)  -> self
-#@end
 
 指定された obj を順番に配列の末尾に追加します。
-#@since 1.8.0
 引数を指定しなければ何もしません。
-#@end
 
 @param obj 自身に追加したいオブジェクトを指定します。
 
@@ -1399,15 +1361,11 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
     p a                 #=> [4, 5, 6]
 
 --- reverse     -> Array
-#@since 1.8.0
 --- reverse!    -> self
-#@end
 
 reverse は自身の要素を逆順に並べた新しい配列を生成して返します。
 reverse! は自身を破壊的に並べ替えます。
-#@since 1.8.0
 reverse! は self を返します。
-#@end
 
  a = ["a", 2, true]
  p a.reverse         #=> [true, 2, "a"]
@@ -1418,23 +1376,19 @@ reverse! は self を返します。
  p a                 #=> [true, 2, "a"]
 
 --- reverse_each {|item| ... }    -> self
-#@since 1.8.7
 #@since 1.9.1
 --- reverse_each                  -> Enumerator
 #@else
 --- reverse_each                  -> Enumerable::Enumerator
 #@end
-#@end
 
 各要素に対して逆順にブロックを評価します。
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、自身と reverse_each から生成した
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
     a = [ "a", "b", "c" ]
@@ -1444,19 +1398,16 @@ reverse! は self を返します。
 @see [[m:Array#each]]
 
 --- rindex(val)           -> Integer | nil
-#@since 1.8.7
 --- rindex {|item| ... }  -> Integer | nil
 #@since 1.9.1
 --- rindex                -> Enumerator
 #@else
 --- rindex                -> Enumerable::Enumerator
 #@end
-#@end
 
 指定された val と == で等しい最後の要素の位置を返します。
 等しい要素がひとつもなかった時には nil を返します。
 
-#@since 1.8.7
 ブロックが与えられた時には、各要素を引数として順にブロックを実行し、
 ブロックが真を返した最初の要素の位置を返します。
 
@@ -1466,26 +1417,20 @@ reverse! は self を返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
-#@end
 
 @param val オブジェクトを指定します。
 
     p [1, 0, 0, 1, 0].rindex(1)   #=> 3
     p [1, 0, 0, 0, 0].rindex(1)   #=> 0
     p [0, 0, 0, 0, 0].rindex(1)   #=> nil
-#@since 1.8.7
     p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
-#@end
 
 @see [[m:Array#index]]
 
 --- shift -> object | nil
-#@since 1.8.7
 --- shift(n) -> Array
-#@end
 
 配列の先頭の要素を取り除いてそれを返します。
-#@since 1.8.7
 引数を指定した場合はその個数だけ取り除き、それを配列で返します。
 
 空配列の場合、n が指定されていない場合は nil を、
@@ -1502,9 +1447,6 @@ reverse! は self を返します。
                  指定した場合に発生します。
 
 @raise ArgumentError 引数に負の数を指定した場合に発生します。
-#@else
-空配列の場合は nil を返します。この場合配列自身は変化しません。
-#@end
 
 
 
@@ -1515,9 +1457,7 @@ reverse! は self を返します。
   p a                  #=> [1, 2, 3, 4]
 
   p [].shift           #=> nil
-#@since 1.8.7
   p [].shift(1)        #=> []
-#@end
 
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]]
 
@@ -1595,11 +1535,7 @@ reverse! は self を返します。
 --- sort! {|a, b| ... } -> self
 
 配列の内容をソートします。要素同士の比較は <=> 演算子を使って行います。sort はソートされた配列を生成して返します。
-#@since 1.8.0
 sort! は self を破壊的にソートし、self を返します。
-#@else
-sort! は self を破壊的に変更し、self を返します。ただし、要素の数が 2 より小さい場合には nil を返します。
-#@end
 
 ブロックとともに呼び出された時には、要素同士の比較をブロックを用いて行います。
 ブロックに2つの要素を引数として与えて評価し、その結果で比較します。
@@ -1701,15 +1637,28 @@ self をそのまま返します。
 
 #@since 2.1.0
 --- to_h -> Hash
+#@since 2.6.0
+--- to_h { block } -> Hash
+#@end
 
 self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
 返します。
 
-   [[:foo, :bar], [1, 2]].to_h
-     # => {:foo => :bar, 1 => 2}
+#@samplecode 例
+[[:foo, :bar], [1, 2]].to_h # => {:foo => :bar, 1 => 2}
 #@end
 
-#@since 1.8.0
+#@since 2.6.0
+ブロックを指定すると配列の各要素でブロックを呼び出し、
+その結果をペアとして使います。
+
+#@samplecode ブロック付きの例
+["foo", "bar"].to_h {|s| [s.ord, s]} # => {102=>"foo", 98=>"bar"}
+#@end
+#@end
+
+#@end
+
 --- transpose    -> Array
 
 自身を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
@@ -1737,14 +1686,11 @@ self を [key, value] のペアの配列として解析した結果を [[c:Hash]
        [3,4,5],
        [6,7]].transpose
     # => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
-#@end
 
 --- uniq     -> Array
 --- uniq!    -> self | nil
-#@since 1.9.2
 --- uniq {|item| ... } -> Array
 --- uniq! {|item| ... } -> self | nil
-#@end
 
 uniq は配列から重複した要素を取り除いた新しい配列を返します。
 uniq! は削除を破壊的に行い、削除が行われた場合は self を、
@@ -1757,13 +1703,13 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
     p [1, 4, 1].uniq         # => [1, 4]
     p [1, 3, 2, 2, 3].uniq   # => [1, 3, 2]
 
-#@since 1.9.2
 ブロックが与えられた場合、ブロックが返した値が重複した要素を取り除いた
 配列を返します。
 
     p [1, 3, 2, "2", "3"].uniq                # => [1, 3, 2, "2", "3"]
     p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
-#@end
+
+要素を先頭から辿っていき、最初に出現したものが残ります。
 
 --- unshift(*obj)        -> self
 #@since 2.5.0
@@ -1785,7 +1731,6 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
 
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
 
-#@since 1.8.0
 --- values_at(*selectors)    -> Array
 
 引数で指定されたインデックスに対応する要素を配列で返します。インデッ
@@ -1815,9 +1760,7 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
 
 #@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
-#@end
 
-#@since 1.8.0
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
 
@@ -1868,7 +1811,6 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
         #    [2, 5, 8]
         #    [3, 6, 9]
         #    nil
-#@end
 
 #@if (version == "1.8.7")
 --- choice        -> object | nil
@@ -1931,7 +1873,6 @@ srand()が有効です。
   p a.sample(3)     #=> [1, 9, 3]
   p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-#@since 1.8.7
 --- cycle(n=nil) {|obj| block } -> nil
 #@since 1.9.1
 --- cycle(n=nil) -> Enumerator
@@ -2121,7 +2062,6 @@ srand()が有効です。
    a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
 #@end
 
-#@end
 
 #@since 1.9.2
 --- repeated_combination(n) { |c| ... } -> Array
@@ -2198,8 +2138,33 @@ srand()が有効です。
 [[c:Enumerator]] オブジェクトを返します。
 
 @see [[m:Array#select!]]
+--- select    -> Enumerator
+#@since 2.6.0
+--- filter    -> Enumerator
+#@end
+--- select {|item| ... }   -> [object]
+#@since 2.6.0
+--- filter {|item| ... }   -> [object]
+#@end
+
+各要素に対してブロックを評価した値が真であった要素を全て含む配列を
+返します。真になる要素がひとつもなかった場合は空の配列を返します。
+
+ブロックを省略した場合は、各要素に対しブロックを評価し
+真になった値の配列を返すような [[c:Enumerator]] を返します。
+
+#@samplecode
+[1,2,3,4,5].select                      # => #<Enumerator: [1, 2, 3, 4, 5]:select>
+[1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
+#@end
+@see [[m:Enumerable#select]]
+@see [[m:Array#select!]]
 --- select! {|item| block } -> self | nil
 --- select! -> Enumerator
+#@since 2.6.0
+--- filter! {|item| block } -> self | nil
+--- filter! -> Enumerator
+#@end
 
 ブロックが false を返した要素を自身から削除します。
 変更があった場合は self を、
@@ -2412,7 +2377,7 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 例:
   [].min           #=> nil
   [].min(1)        #=> []
-  [2, 5, 3].max    #=> 2
+  [2, 5, 3].min    #=> 2
   [2, 5, 3].min(2) #=> [2, 3]
 
 @param n 取得する要素数。

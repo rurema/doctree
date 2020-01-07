@@ -1,0 +1,47 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  rake:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: bundle exec rake
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.4.0
+        path: /tmp/html/2.4.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.5.0
+        path: /tmp/html/2.5.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.6.0
+        path: /tmp/html/2.6.0
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.7.0
+        path: /tmp/html/2.7.0
+
+  misspell:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install misspell
+      run: 'go get github.com/client9/misspell/...'
+    - name: Run misspell
+      run: |
+        $HOME/go/bin/misspell -error -i addopt $(git ls-files | grep -vF "refm/doc/news/1.8.4.rd")

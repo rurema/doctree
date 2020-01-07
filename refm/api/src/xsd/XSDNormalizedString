@@ -1,7 +1,5 @@
-#@since 1.8.1
 = class XSD::XSDNormalizedString < XSD::XSDString
 == class methods
 --- new(value = nil)
 #@todo
 
-#@end

@@ -45,8 +45,6 @@ extend Tk
 #@todo
 
 #@end
-#@since 1.8.2
 --- new(event, *sequences)
 #@todo
 
-#@end

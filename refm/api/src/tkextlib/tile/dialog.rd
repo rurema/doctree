@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tkextlib/tile
@@ -38,4 +37,3 @@ require tkextlib/tile
 --- configinfo(slot = nil)
 #@todo
 
-#@end

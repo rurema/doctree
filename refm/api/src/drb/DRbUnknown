@@ -70,5 +70,5 @@ DRbUnknown オブジェクトを受け取った後に対応するクラスが定
 
 == Instance Methods
 
---- unknwon -> DRb::DRbUnknown
+--- unknown -> DRb::DRbUnknown
 ラップしているオブジェクトを返します。

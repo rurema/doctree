@@ -1,4 +1,3 @@
-#@since 1.8.4
 
 require tk
 require tk/entry
@@ -41,4 +40,3 @@ require tkextlib/tcllib
 --- configinfo(slot = nil)
 #@todo
 
-#@end

@@ -30,13 +30,11 @@ include TkMenuSpec
 --- specific_class
 #@todo
 
-#@since 1.8.2
 --- add_menu(menu_info, tearoff = false, opts = nil)
 #@todo
 
 --- add_menubar(menu_spec, tearoff = false, opts = nil)
 #@todo
-#@end
 
 #@if (version <= "1.8.1")
 --- create_self(keys)

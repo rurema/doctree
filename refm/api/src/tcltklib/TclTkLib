@@ -2,7 +2,6 @@
 
 == Constants
 
-#@since 1.8.2
 --- COMPILE_INFO
 #@todo
 
@@ -12,26 +11,20 @@
 --- RELEASE_DATE
 #@todo
 
-#@end
 
 == Class Methods
 
-#@since 1.8.2
 --- _conv_listelement(src)
 #@todo
 
 --- _fromUTF8(*args)
 #@todo
 
-#@end
 
-#@since 1.8.5
 --- _mark_at_exit
 #@todo
 
-#@end
 
-#@since 1.8.2
 --- _merge_tklist(*args)
 #@todo
 
@@ -47,18 +40,14 @@
 --- _toUTF8(*args)
 #@todo
 
-#@end
 
 --- do_one_event(*args)
 #@todo
 
-#@since 1.8.2
 --- do_thread_callback(*args)
 #@todo
 
-#@end
 
-#@since 1.8.3
 --- encoding
 #@todo
 
@@ -71,7 +60,6 @@
 --- encoding_system=(enc_name)
 #@todo
 
-#@end
 
 --- get_eventloop_tick
 #@todo
@@ -91,20 +79,16 @@
 --- mainloop_abort_on_exception=(val)
 #@todo
 
-#@since 1.8.2
 --- mainloop_thread?
 #@todo
 
-#@end
 
 --- mainloop_watchdog(*args)
 #@todo
 
-#@since 1.8.1
 --- num_of_mainwindows
 #@todo
 
-#@end
 
 --- set_eventloop_tick(tick)
 #@todo
@@ -112,11 +96,9 @@
 --- set_eventloop_weight(loop_max, no_event)
 #@todo
 
-#@since 1.8.2
 --- set_max_block_time(time)
 #@todo
 
-#@end
 
 --- set_no_event_wait(wait)
 #@todo

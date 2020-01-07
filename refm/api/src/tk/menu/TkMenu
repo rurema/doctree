@@ -4,24 +4,18 @@ include TkTreatMenuEntryFont
 #@else
 extend TkMenuSpec
 include TkMenuEntryConfig
-#@since 1.8.5
 include Tk::Wm
-#@end
 #@end
 
 == Class Methods
 
-#@since 1.8.2
 --- new_menuspec(menu_spec, parent = nil, tearoff = false, keys = nil)
 #@todo
-#@end
 
 == Instance Methods
 
-#@since 1.8.2
 --- tagid(id)
 #@todo
-#@end
 
 --- activate(index)
 #@todo
@@ -44,10 +38,8 @@ include Tk::Wm
 --- add_separator(keys = nil)
 #@todo
 
-#@since 1.8.5
 --- clone_menu(*args)
 #@todo
-#@end
 
 --- index(idx)
 #@todo
@@ -73,10 +65,8 @@ include Tk::Wm
 --- postcommand(cmd = Proc.new)
 #@todo
 
-#@since 1.8.1
 --- set_focus
 #@todo
-#@end
 
 --- tearoffcommand(cmd = Proc.new)
 #@todo

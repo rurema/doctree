@@ -6,10 +6,8 @@ include File::Constants
 ファイルアクセスのためのクラスです。
 
 通常 [[m:Kernel.#open]] または [[m:File.open]] を使って生成します。
-#@since 1.8.0
 [[c:IO]] クラスがインクルードしている [[c:File::Constants]] は File クラスに関係する定数を
 格納したモジュールです。
-#@end
 また [[c:File::Stat]] は stat 構造体( [[man:stat(2)]] 参照)を表すクラスです。
 
 == Class Methods
@@ -78,12 +76,10 @@ filename の一番後ろのスラッシュに続く要素を返します。も�
   p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
   p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
 
-#@since 1.8.0
 File.basename の動作は [[man:basename(3)]] 
 #@#[[url:http://www.unix-systems.org/version3/online.html]]
 に従います。
   p File.basename("foo/bar/")      # => "bar"
-#@end
 
 @param filename ファイル名を表す文字列を指定します。
 
@@ -139,10 +135,13 @@ File.lstat("testlink").mode.to_s(8)     # => "120744"
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
-例:
-  IO.write("test.txt", "test")
-  File.chown(502, 12, "test.txt")
-  File.stat("test.txt").uid # => 502
+#@samplecode 例
+IO.write("test.txt", "test")
+File.chown(502, 12, "test.txt")
+File.stat("test.txt").uid # => 502
+#@end
+
+@see [[m:File#chown]]
 
 --- lchown(owner, group, *filename)    -> Integer
 
@@ -183,9 +182,9 @@ File.lstat("testlink").uid      # => 0
 
 例:
   IO.write("test.txt", "test")
-  p File.exists?("test.txt")  # => true
+  p File.exist?("test.txt")  # => true
   p File.delete("test.txt")   # => 1
-  p File.exists?("test.txt")  # => false
+  p File.exist?("test.txt")  # => false
   begin
     File.delete("test.txt")
   rescue
@@ -393,11 +392,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 --- join(*item)    -> String
 
-File::SEPARATORを間に入れて文字列を連結します。
-
-  [item, item, ...].join(File::SEPARATOR)
-
-と同じです。[[d:platform/DOSISH-support]]で環境依存になる予定です。
+File::SEPARATORを間に入れて文字列を連結します。[[d:platform/DOSISH-support]]で環境依存になる予定です。
 
 @param item 連結したいディレクトリ名やファイル名を文字列で与えます。
 
@@ -656,11 +651,11 @@ File.umask         # => 6
 シンボリックのリンク先を変更します。
 #@end
 
-@param filename ファイル名を表す文字列を指定します。
-
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+@param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+
+@param filename ファイル名を表す文字列を指定します。複数指定できます。
 
 @return 変更したファイルの数を返します。
 
@@ -687,11 +682,11 @@ File.umask         # => 6
 シンボリックリンクに対しては [[m:File.utime]]　と違って、
 シンボリックそのものを変更します。
 
-@param filename ファイル名を表す文字列を指定します。
-
 @param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+@param mtime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
+
+@param filename ファイル名を表す文字列を指定します。複数指定できます。
 
 @return 変更したファイルの数を返します。
 
@@ -1073,10 +1068,13 @@ File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
-例:
-  File.open("testfile") { |f| f.chown(502, 1000) }  # => 0
-  File.stat("testfile").uid                         # => 502
-  File.stat("testfile").gid                         # => 1000
+#@samplecode 例
+File.open("testfile") { |f| f.chown(502, 1000) }  # => 0
+File.stat("testfile").uid                         # => 502
+File.stat("testfile").gid                         # => 1000
+#@end
+
+@see [[m:File.chown]]
 
 --- flock(operation)    -> 0 | false
 

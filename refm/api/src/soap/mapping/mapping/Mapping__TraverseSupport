@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = module SOAP::Mapping::TraverseSupport
 
@@ -10,4 +9,3 @@
 --- mark_unmarshalled_obj(node, obj)
 #@todo
 
-#@end

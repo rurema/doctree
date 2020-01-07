@@ -32,11 +32,9 @@ include TkcTagAccess
 --- destroy
 #@todo
 
-#@since 1.8.2
 --- exist?
 #@todo
 
-#@end
 
 
 --- id

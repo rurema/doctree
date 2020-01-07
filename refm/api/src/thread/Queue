@@ -50,20 +50,56 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 新しいキューオブジェクトを生成します。
 
+#@#noexample Thread::Queue#close 等を参照
+
 == Instance methods
 
 --- clear -> ()
 
 キューを空にします。返り値は不定です。
 
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+
+[:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
+
+q.length # => 4
+q.clear
+q.length # => 0
+#@end
+
 --- empty? -> bool
 
 キューが空の時、真を返します。
+
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+q.empty? # => true
+q.push(:resource)
+q.empty? # => false
+#@end
 
 --- length -> Integer
 --- size -> Integer
 
 キューの長さを返します。
+
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+
+[:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
+
+q.length # => 4
+#@end
 
 --- num_waiting -> Integer
 
@@ -112,4 +148,18 @@ close する事でループから脱出する事もできます。
 --- closed? -> bool
 
 キューが close されている時に true を返します。
+
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+
+[:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
+
+q.closed? # => false
+q.close
+q.closed? # => true
+#@end
+
 #@end

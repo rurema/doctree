@@ -17,13 +17,11 @@ include TkText::IndexModMethods
 --- exist?
 #@todo
 
-#@since 1.8.3
 --- pos
 #@todo
 
 --- pos=(where)
 #@todo
-#@end
 
 --- set(where)
 #@todo

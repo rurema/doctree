@@ -284,6 +284,24 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
+#@samplecode 例:IO.new による読み込みモードでのファイルオープン
+io = IO.new(IO.sysopen("testfile"))
+io.class # => IO
+io.close
+#@end
+
+#@samplecode 例:IO.for_fd による読み込み・バイナリモードでのファイルオープン
+IO.binwrite("testfile", "\xBF\xAA\x16\x04.\b\xCB\x12\xACoeQ\xFDv2\xCF9+\x81\x18")
+io = IO.for_fd(IO.sysopen("testfile"), "r", { binmode: true })
+io.class # => IO
+io.binmode? # => true
+io.close
+#@end
+
+#@samplecode 例:IO.open によるファイルオープン
+IO.open(IO.sysopen("testfile")) { |io| p io.class } # => IO
+#@end
+
 #@since 2.4.0
 --- foreach(path, rs = $/, chomp: false) {|line| ... }    -> nil
 --- foreach(path, rs = $/, chomp: false)                  -> Enumerator
@@ -610,7 +628,7 @@ opts でファイルを開くときのオプションを指定します。エン
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 @param opts ファイルを開くときのオプション引数
 
@@ -623,9 +641,10 @@ IO.readlines("testfile", ",")        # => ["line1\nline2,", "\nline3\n"]
 #@end
 
 #@since 2.4.0
-#@samplecode 例: 各行の末尾から "\n", "\r", または "\r\n" を取り除く（chomp = true）
-IO.write("testfile", "line1\nline2,\nline3\n")
-IO.readlines("testfile", chomp: true)  # => ["line1", "line2,", "line3"]
+#@samplecode 例: rs を取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+IO.readlines("testfile", chomp: true)        # => ["line1,\rline2,", "line3,"]
+IO.readlines("testfile", "\r", chomp: true)  # => ["line1,", "line2,", "\nline3,\n"]
 #@end
 #@end
 
@@ -792,6 +811,14 @@ object を出力します。object が文字列でない時にはメソッ
 
 @raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
+#@samplecode 例
+IO.open(IO.sysopen("testfile", "w+")) do |io|
+  io.binmode? # => false
+  io.binmode  # => #<IO:fd 8>
+  io.binmode? # => true
+end
+#@end
+
 @see [[ref:c:IO#io_binmode]], [[m:IO#binmode?]]
 
 --- clone    -> IO
@@ -956,6 +983,40 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+#@samplecode 例: 引数なし
+IO.write("testfile", "This is line one,\nThis is line two,\nThis is line three,\nAnd so on...")
+f = File.new("testfile")
+f.each { |line| p "#{f.lineno}: #{line}" }
+# => "1: This is line one,\n"
+# "2: This is line two,\n"
+# "3: This is line three,\n"
+# "4: And so on..."
+#@end
+#@samplecode 例: 行の区切りに半角カンマ、最大読み取りバイト数に 10 を指定
+IO.write("testfile", "This is line one,This is line two,This is line three,And so on...")
+f = File.new("testfile")
+f.each(",", 10) { |line| p "#{f.lineno}: #{line}" }
+# => "0: This is li"
+# "1: ne one,"
+# "1: This is li"
+# "2: ne two,"
+# "2: This is li"
+# "3: ne three,"
+# "3: And so on."
+# "4: .."
+#@end
+#@since 2.4.0
+#@samplecode 例: chomp = true
+IO.write("testfile", "This is line one\nThis is line two\nThis is line three\nAnd so on...")
+f = File.new("testfile")
+f.each(chomp: true) { |line| p "#{f.lineno}: #{line}" }
+# => "1: This is line one"
+# "2: This is line two"
+# "3: This is line three"
+# "4: And so on..."
+#@end
+#@end
+
 @see [[m:$/]], [[m:IO#gets]]
 
 --- each_byte {|ch| ... }    -> self
@@ -1044,6 +1105,18 @@ fcntl(2) が返した整数を返します。
 @raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
 
 @raise IOError 既に close されている場合に発生します。
+
+#@samplecode 例
+require "fcntl"
+
+IO.write("testfile", "abcde")
+# ファイル状態フラグを読み出す
+File.open("testfile") do |f|
+  f.fcntl(Fcntl::F_GETFL, 0) # => 0
+  f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK) # => 0
+  f.fcntl(Fcntl::F_GETFL, 0) # => 4
+end
+#@end
 
 --- fsync    -> 0 | nil
 
@@ -1469,10 +1542,25 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 @param limit 最大の読み込みバイト数
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+#@samplecode 例
+IO.write("testfile", "line1,\nline2,\nline3,\n")
+File.open("testfile") { |f| p f.readlines }      # => ["line1,\n", "line2,\n", "line3,\n"]
+File.open("testfile") { |f| p f.readlines(3) }   # => ["lin", "e1,", "\n", "lin", "e2,", "\n", "lin", "e3,", "\n"]
+File.open("testfile") { |f| p f.readlines(",") } # => ["line1,", "\nline2,", "\nline3,", "\n"]
+#@end
+
+#@since 2.4.0
+#@samplecode 例: rsを取り除く（chomp = true）
+IO.write("testfile", "line1,\rline2,\r\nline3,\n")
+File.open("testfile") { |f| p f.readlines(chomp: true) }       # => ["line1,\rline2,", "line3,"]
+File.open("testfile") { |f| p f.readlines("\r", chomp: true) } # => ["line1,", "line2,", "\nline3,\n"]
+#@end
+#@end
 
 @see [[m:$/]], [[m:IO#gets]]
 
@@ -1605,6 +1693,18 @@ path で指定されたファイルにストリームを繋ぎ換えます。
 @param mode パスを開く際のモードを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\n")
+f1 = File.new("testfile", "a+")
+f2 = File.new("testfile")
+f1.print("This is line three\n")
+f2.readlines                # => ["This is line one\n", "This is line two\n"]
+f1.close
+f2.reopen("testfile", "r")  # => #<File:testfile>
+f2.readlines                # => ["This is line one\n", "This is line two\n", "This is line three\n"]
+f2.close
+#@end
 
 @see [[m:Kernel.#open]]
 
@@ -1842,6 +1942,22 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
+#@since 2.5.0
+#@samplecode 例
+File.open("textfile", "w+") do |f|
+  f.write("This is", " a test\n")  # => 15
+end
+File.read("textfile")              # => "This is a test\n"
+#@end
+#@else
+#@samplecode 例
+File.open("textfile", "w+") do |f|
+  f.write("This is")  # => 7
+end
+File.read("textfile") # => "This is"
+#@end
+#@end
+
 #@since 2.1.0
 --- write_nonblock(string, exception: true) -> Integer | :wait_writable
 #@else
@@ -1973,6 +2089,20 @@ IO から1バイトを読み込み整数として返します。
 
 @raise EOFError 既に EOF に達している場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "123")
+File.open("testfile") do |f|
+  begin
+    f.readbyte  # => 49
+    f.readbyte  # => 50
+    f.readbyte  # => 51
+    f.readbyte  # => 例外発生
+  rescue => e
+    e.class # => EOFError
+  end
+end
+#@end
+
 --- each_char{|c| ... }     -> self
 --- each_char               -> Enumerator
 
@@ -2068,10 +2198,24 @@ IO の外部エンコーディングを返します。
 外部エンコーディングが指定されていない場合は nil を返します。
 ただし読み込み専用モードの場合は [[m:Encoding.default_external]] になります。
 
+#@samplecode 例
+IO.write("testfile", "abcde")
+File.open("testfile") { |f| p f.external_encoding } # => #<Encoding:UTF-8>
+#@end
+
 --- internal_encoding   -> Encoding | nil
 
 IO の内部エンコーディングを返します。
 内部エンコーディングが指定されていない場合は nil を返します。
+
+#@samplecode 例
+IO.write("testfile", "abcde")
+File.open("testfile") do |f|
+  p f.internal_encoding  # => nil
+  f.set_encoding("ASCII-8BIT", "EUC-JP")
+  p f.internal_encoding  # => #<Encoding:EUC-JP>
+end
+#@end
 
 --- set_encoding(enc_str, opt={})           -> self
 --- set_encoding(ext_enc)           -> self
@@ -2110,7 +2254,7 @@ auto-close フラグを設定します。
 
 フラグが設定されているオブジェクトは
 close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
-設定されていない場合は close しません。
+偽を設定すると close しません。
 
 @param bool 真偽値でフラグを設定します
 @see [[m:IO#autoclose?]]
@@ -2118,15 +2262,23 @@ close時/GCでのファイナライザ呼出時にファイルデスクリプタ
    f = open("/dev/null")
    IO.for_fd(f.fileno)
    # ...
-   f.gets # may cause IOError
+   f.gets # may cause Errno::EBADF
 
    f = open("/dev/null")
-   IO.for_fd(f.fileno).autoclose = true
+   IO.for_fd(f.fileno).autoclose = false
    # ...
-   f.gets # won't cause IOError
+   f.gets # won't cause Errno::EBADF
 --- autoclose? -> bool
 
 auto-close フラグを返します。
+
+#@samplecode 例
+IO.open(IO.sysopen("testfile")) do |io|
+  io.autoclose?         # => true
+  io.autoclose = false
+  io.autoclose?         # => false
+end
+#@end
 
 @see [[m:IO#autoclose=]]
 
@@ -2138,6 +2290,19 @@ IO の各コードポイントに対して繰り返しブロックを呼びだ�
 ブロックの引数にはコードポイントを表す整数が渡されます。
 
 ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
+#@samplecode 例
+IO.write("testfile", "abcdeあ")
+File.open("testfile") do |f|
+  f.each_codepoint { |i| p i }
+end
+# => 97
+# 98
+# 99
+# 100
+# 101
+# 12354
+#@end
 
 --- codepoints{|c| ... }         -> self
 --- codepoints                   -> Enumerator
@@ -2212,6 +2377,10 @@ posix_fadvise をサポートしていないプラットフォーム上では
 @raise Errno::ESPIPE ファイルデスクリプタが FIFO か pipe を指している
        場合に発生する例外(Linux はこの場合には Errno::EINVAL を発生する)
 @raise RangeError offset,lenが有効範囲から出ている場合に発生する例外
+
+#@samplecode 例
+File.open("testfile") { |f| p f.advise(:sequential) } # => nil
+#@end
 
 == Constants
 

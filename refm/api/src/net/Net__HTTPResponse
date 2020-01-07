@@ -27,6 +27,14 @@ HTTP のリザルトコードです。例えば '302' などです。
 レスポンスオブジェクトがどのクラスのインスタンスかを
 見ることでもレスポンスの種類を判別できます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.code # => "200"
+#@end
+
 --- message -> String
 --- msg -> String
 
@@ -35,15 +43,24 @@ HTTP サーバがリザルトコードに付加して返すメッセージです
 
 msg は obsolete です。使わないでください。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.message # => "OK"
+#@end
+
 --- http_version -> String
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
-#@since 1.8.0
---- to_ary -> [Net::HTTPResponse, String]
-このメソッドは net/http.rb 1.1 との互換性のために存在します。
+#@samplecode 例
+require 'net/http'
 
-[self, self.body] を返します。
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.http_version # => "1.1"
 #@end
 
 --- value -> nil
@@ -56,6 +73,27 @@ msg は obsolete です。使わないでください。
 @raise HTTPServerException レスポンスが 4xx である場合に発生します。
 @raise HTTPFatalError レスポンスが 5xx である場合に発生します。
 
+#@samplecode 例 レスポンスが 2xx(成功)
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.value # => nil
+#@end
+
+#@samplecode 例 レスポンスが 2xx以外
+require 'net/http'
+
+uri = "http://www.example.com/invalid.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+begin
+  response.value
+rescue => e
+  e.class # => Net::HTTPServerException
+  e.message # => 404 "Not Found"
+end
+#@end
+
 
 --- response -> self
 --- header -> self
@@ -65,6 +103,8 @@ msg は obsolete です。使わないでください。
 使わないでください。
 
 自分自身を返します。
+
+#@#noexample
 
 --- body -> String | () | nil
 --- entity -> String | () | nil
@@ -79,6 +119,14 @@ msg は obsolete です。使わないでください。
 
 entity は obsolete です。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.body[0..10] # => "<!doctype h"
+#@end
+
 --- read_body(dest=nil) -> String|nil
 --- read_body {|str| .... } -> ()
 
@@ -89,6 +137,30 @@ entity は obsolete です。
 文字列で与えます。
 
 レスポンスがボディを持たない場合には nil を返します。
+
+#@samplecode 例1 ブロックを与えずに一度に結果取得
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.read_body[0..10] # => "<!doctype h"
+#@end
+
+#@samplecode 例2 ブロックを与えて大きいファイルを取得
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/path/to/big.file')
+Net::HTTP.start(uri.host, uri.port) do |http|
+  File.open("/path/to/big.file", "w") do |f|
+    # Net::HTTP#request_get と Net::HTTPResponse#read_body で少しずつ読み書き。メモリ消費が少ない。
+    http.request_get(uri.path) do |response|
+      response.read_body do |s|
+        f.write(s)
+      end
+    end
+  end
+end
+#@end
 
 一度ブロックを与えずにこのメソッドを呼んだ場合には、
 次からはすでに読みだしたボディを文字列として
@@ -102,6 +174,9 @@ dest を指定した場合には
 「dest << ボディの断片」を実行します。
 
 @param dest obsoleteな引数です。利用しないでください。
+
+@see [[m:Net::HTTP#request_get]]
+
 #@# = Constants
 #@# --- CODE_CLASS_TO_OBJ
 #@# --- CODE_TO_OBJ

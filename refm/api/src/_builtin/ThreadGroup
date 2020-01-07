@@ -39,6 +39,14 @@ Thread.new{ ... } はエラーになりません。生成されたスレッド�
 
 新たな ThreadGroup を生成して返します。
 
+#@samplecode 例
+thread_group = ThreadGroup.new
+thread_group.add Thread.new { sleep 0.1; Thread.new { sleep 1 }; sleep 1 }
+thread_group.add Thread.new { sleep 2 }
+sleep 0.5
+thread_group.list # => [#<Thread:0x007fc6f1842d70 sleep>, #<Thread:0x007fc6f1842c80 sleep>, #<Thread:0x007fc6f080dba8 sleep>]
+#@end
+
 == Instance Methods
 
 --- add(thread)    -> self
@@ -65,7 +73,6 @@ puts "tg group now #{tg.list}"
 # => tg group now [#<Thread:0x50bef60 run>]
 #@end
 
-#@since 1.8.0
 --- enclose    -> self
 
 自身への [[m:ThreadGroup#add]] によるスレッドの追加・削除を禁止します。
@@ -93,9 +100,7 @@ enclose された ThreadGroup に追加や削除を行うと例外 [[c:ThreadErr
   thg2.add th
 
   => -:8:in `add': can't move from the enclosed thread group (ThreadError)
-#@end
 
-#@since 1.8.0
 --- enclosed?    -> bool
 
 自身が enclose されているなら true を返します。そうでないなら false を返します。デフォルトは false です。
@@ -113,17 +118,11 @@ freeze された ThreadGroup には Thread の追加/削除ができませんが
     p thg.enclosed?         # => false
 
 @see [[m:ThreadGroup#enclose]]
-#@end
 --- list    -> [Thread] 
 
 self に属するスレッドの配列を返します。
-#@since 1.8.0
 version 1.8 では、aborting 状態であるスレッド
 も要素に含まれます。つまり「生きている」スレッドの配列を返します。
-#@else
-終了処理中(aborting)、や終了状態(dead)であるスレッドは要素に含まれ
-ません([[m:Thread.list]]と同じです)。
-#@end
 
 == Constants
 
