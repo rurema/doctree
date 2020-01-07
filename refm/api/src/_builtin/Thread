@@ -1055,6 +1055,15 @@ thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test
 異なり、セットした変数は Fiber を切り替えても共通で使える事に注意してく
 ださい。
 
+#@samplecode 例
+thr = Thread.new do
+  Thread.current.thread_variable_set(:cat, 'meow')
+  Thread.current.thread_variable_set("dog", 'woof')
+end
+thr.join               # => #<Thread:0x401b3f10 dead>
+thr.thread_variables   # => [:dog, :cat]
+#@end
+
 @see [[m:Thread#thread_variable_get]], [[m:Thread#[] ]]
 
 --- thread_variable?(key) -> bool
