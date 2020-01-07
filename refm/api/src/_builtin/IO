@@ -2182,6 +2182,14 @@ close時/GCでのファイナライザ呼出時にファイルデスクリプタ
 
 auto-close フラグを返します。
 
+#@samplecode 例
+IO.open(IO.sysopen("testfile")) do |io|
+  io.autoclose?         # => true
+  io.autoclose = false
+  io.autoclose?         # => false
+end
+#@end
+
 @see [[m:IO#autoclose=]]
 
 --- each_codepoint{|c| ... }     -> self
