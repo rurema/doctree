@@ -998,6 +998,12 @@ th.join
 [[m:Kernel.#caller_locations]] と似ていますが、本メソッドは self に限定
 した情報を返します。
 
+#@samplecode 例
+thread = Thread.new { sleep 1 }
+thread.run
+thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test.rb:1:in `block in <main>'"]
+#@end
+
 @see [[c:Thread::Backtrace::Location]]
 
 --- thread_variable_get(key) -> object | nil
