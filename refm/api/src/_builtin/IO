@@ -1694,6 +1694,18 @@ path で指定されたファイルにストリームを繋ぎ換えます。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "This is line one\nThis is line two\n")
+f1 = File.new("testfile", "a+")
+f2 = File.new("testfile")
+f1.print("This is line three\n")
+f2.readlines                # => ["This is line one\n", "This is line two\n"]
+f1.close
+f2.reopen("testfile", "r")  # => #<File:testfile>
+f2.readlines                # => ["This is line one\n", "This is line two\n", "This is line three\n"]
+f2.close
+#@end
+
 @see [[m:Kernel.#open]]
 
 --- rewind    -> 0
