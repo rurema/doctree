@@ -417,6 +417,17 @@ foo 1
 @raise RuntimeError :return、:c_return、:b_return イベントのためのイベ
                     ントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:return) do |tp|
+  p tp.return_value # => 1
+end
+trace.enable
+foo 1
+#@end
+
 --- raised_exception -> Exception
 
 発生した例外を返します。
