@@ -226,6 +226,12 @@ options で指定します。
 
 他者により提供されたバイナリデータはロードすべきではありません。自分が変換したバイナリデータを使うべきです。
 
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+binary = iseq.to_binary
+RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
+#@end
+
 @see [[m:RubyVM::InstructionSequence#to_binary]]
 
 --- load_from_binary_extra_data(binary) -> String
