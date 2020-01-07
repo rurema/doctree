@@ -2061,6 +2061,20 @@ IO から1バイトを読み込み整数として返します。
 
 @raise EOFError 既に EOF に達している場合に発生します。
 
+#@samplecode 例
+IO.write("testfile", "123")
+File.open("testfile") do |f|
+  begin
+    f.readbyte  # => 49
+    f.readbyte  # => 50
+    f.readbyte  # => 51
+    f.readbyte  # => 例外発生
+  rescue => e
+    e.class # => EOFError
+  end
+end
+#@end
+
 --- each_char{|c| ... }     -> self
 --- each_char               -> Enumerator
 
