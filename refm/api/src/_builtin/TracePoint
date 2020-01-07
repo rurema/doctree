@@ -331,10 +331,14 @@ self の状態を人間に読みやすい文字列にして返します。
                     ントフックの外側で実行した場合に発生します。
 
 #@samplecode 例
-trace = TracePoint.new do |tp|
-  tp.return_value # => false
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:return) do |tp|
+  p tp.return_value # => 1
 end
 trace.enable
+foo 1
 #@end
 
 --- raised_exception -> Exception
