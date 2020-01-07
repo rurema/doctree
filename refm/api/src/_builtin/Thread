@@ -468,8 +468,47 @@ end
 # => #<Thread:0x00000002a54130 dead>: C
 #@end
 
+[[m:Thread#[] ]] と [[m:Thread#[]=]] を用いたスレッド固有の変数は
+Fiber を切り替えると異なる変数を返す事に注意してください。
+
+#@samplecode
+def meth(newvalue)
+  begin
+    oldvalue = Thread.current[:name]
+    Thread.current[:name] = newvalue
+    yield
+  ensure
+    Thread.current[:name] = oldvalue
+  end
+end
+#@end
+
+この関数に与えるブロックがFiberを切り替える場合は動的スコープとしては
+正しく動作しません。
+
+#@samplecode
+f = Fiber.new {
+  meth(1) {
+    Fiber.yield
+  }
+}
+meth(2) {
+  f.resume
+}
+f.resume
+p Thread.current[:name]
+# => nil if fiber-local
+# => 2 if thread-local (The value 2 is leaked to outside of meth method.)
+#@end
+
+Fiber を切り替えても同じ変数を返したい場合は
+[[m:Thread#thread_variable_get]] と [[m:Thread#thread_variable_set]]
+を使用してください。
+
 #@since 2.5.0
-@see [[m:Thread#fetch]]
+@see [[m:Thread#fetch]], [[m:Thread#[]=]]
+#@else
+[[m:Thread#[]=]]
 #@end
 --- []=(name,val)
 
