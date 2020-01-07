@@ -303,6 +303,17 @@ foo 1
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.path # => "/path/to/test.rb"
+end
+trace.enable
+foo 1
+#@end
+
 --- method_id -> Symbol | nil
 
 イベントが発生したメソッドの定義時の名前を [[c:Symbol]] で返します。
