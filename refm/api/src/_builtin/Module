@@ -39,13 +39,10 @@
   end
 
 --- new -> Module
-#@since 1.8.0
 --- new {|mod| ... } -> Module
-#@end
 
 名前の付いていないモジュールを新しく生成して返します。
 
-#@since 1.8.0
 ブロックが与えられると生成したモジュールをブロックに渡し、
 モジュールのコンテキストでブロックを実行します。
 
@@ -57,7 +54,6 @@
 ブロックの実行は Module#initialize が行います。
 
 ブロックを与えた場合も生成したモジュールを返します。
-#@end
 
 このメソッドで生成されたモジュールは、
 最初に名前が必要になったときに名前が決定します。
@@ -76,6 +72,28 @@
   Bar = m
   m.name            # "Foo" か "Bar" のどちらかに決まる
 
+#@since 2.4.0
+--- used_modules -> [Module]
+
+現在のスコープで using されているすべてのモジュールを配列で返します。
+配列内のモジュールの順番は未定義です。
+
+  module A
+    refine Object do
+    end
+  end
+
+  module B
+    refine Object do
+    end
+  end
+
+  using A
+  using B
+  p Module.used_modules
+  #=> [B, A]
+#@end
+
 == Instance Methods
 
 --- <=>(other) -> Integer | nil
@@ -89,18 +107,10 @@ self が other の先祖であるとき 1
 を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-その動作は不定です。
-#@end
 
 other がクラスやモジュールでなければ
-#@since 1.8.0
 nil を返します。
-#@else
-例外 [[c:TypeError]] が発生します。
-#@end
 
 @param other 比較対象のクラスやモジュール
 
@@ -116,19 +126,10 @@ nil を返します。
   p Bar <=> Foo     # => -1
   p Baz <=> Bar     # => -1
   p Baz <=> Foo     # => -1
-#@since 1.8.0
   p Baz <=> Qux     # => nil
   p Qux <=> Baz     # => nil
-#@else
-  p Baz <=> Qux     # => 1
-  p Qux <=> Baz     # => 1
-#@end
 
-#@since 1.8.0
   p Baz <=> Object.new  # => nil
-#@else
-  p Baz <=> Object.new  # => :in `<=>': <=> requires Class or Module (Object given) (TypeError)
-#@end
 
 --- <(other)  -> bool | nil
 
@@ -137,11 +138,7 @@ self が other の先祖か同一のクラス／モジュールである場合�
 #@# self < other が成立します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
@@ -159,13 +156,8 @@ false を返します。
   p Bar < Foo     # => true
   p Baz < Bar     # => true
   p Baz < Foo     # => true
-#@since 1.8.0
   p Baz < Qux     # => nil
   p Baz > Qux     # => nil
-#@else
-  p Baz < Qux     # => false
-  p Baz > Qux     # => false
-#@end
 
   p Foo < Object.new # => in `<': compared with non class/module (TypeError)
 
@@ -176,17 +168,33 @@ false を返します。
 self が other の先祖である場合、false を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
 @raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
+
+例:
+  module Foo; end
+  module Bar
+    include Foo
+  end
+  module Baz
+    prepend Foo
+  end
+
+  Bar.ancestors # => [Bar, Foo]
+  Foo <= Bar # => false
+  Bar <= Foo # => true
+
+  Baz.ancestors # => [Foo, Baz]
+  Foo <= Baz # => false
+  Baz <= Foo # => true
+
+  Foo <= Foo # => true
+  Foo <= Object # => nil
 
 --- >(other)  -> bool | nil
 
@@ -194,17 +202,33 @@ false を返します。
 self が other の子孫か同一クラスである場合、false を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
 @raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
+
+例:
+  module Awesome; end
+  module Included
+    include Awesome
+  end
+  module Prepended
+    prepend Awesome
+  end
+
+  Included.ancestors # => [Included, Awesome]
+  Awesome > Included # => true
+  Included > Awesome # => false
+
+  Prepended.ancestors # => [Awesome, Prepended]
+  Awesome > Prepended # => true
+  Prepended > Awesome # => false
+
+  Awesome > Awesome # => false
+  Awesome > Object # => nil
 
 --- >=(other) -> bool | nil
 
@@ -212,17 +236,33 @@ false を返します。
 self が other の子孫である場合、false を返します。
 
 継承関係にないクラス同士の比較では
-#@since 1.8.0
 nil を返します。
-#@else
-false を返します。
-#@end
 
 @param other 比較対象のモジュールやクラス
 
 @raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
+
+例:
+  module Foo; end
+  module Bar
+    include Foo
+  end
+  module Baz
+    prepend Foo
+  end
+
+  Bar.ancestors # => [Bar, Foo]
+  Foo >= Bar # => true
+  Bar >= Foo # => false
+
+  Baz.ancestors # => [Foo, Baz]
+  Foo >= Baz # => true
+  Baz >= Foo # => false
+
+  Foo >= Foo # => true
+  Foo >= Object # => nil
 
 --- ===(obj) -> bool
 
@@ -270,7 +310,10 @@ case ではクラス、モジュールの所属関係をチェックすること
 
 @see [[m:Module#included_modules]]
 
-#@since 1.8.0
+#@since 2.5.0
+#@include(Module.attr)
+#@end
+
 --- autoload(const_name, feature) -> nil
 
 定数 const_name を最初に参照した時に feature を [[m:Kernel.#require]] するように設定します。
@@ -282,7 +325,11 @@ case ではクラス、モジュールの所属関係をチェックすること
 @param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
 @see [[m:Kernel.#autoload]]
-#@end
+
+例:
+  Date # NameError: uninitialized constant Date
+  autoload :Date, 'date'
+  Date # => Date
 
 --- autoload?(const_name) -> String | nil
 autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します。
@@ -291,6 +338,14 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 @param const_name [[c:String]] または [[c:Symbol]] で指定します。
 
 @see [[m:Kernel.#autoload?]]
+
+例:
+  autoload :Date, 'date'
+
+  autoload?(:Date) # => "date"
+  Date
+  autoload?(:Date) # => nil
+  autoload?(:Foo) # => nil
 
 #@since 1.9.1
 #@since 2.0.0
@@ -448,7 +503,6 @@ name で指定される名前の定数の値を取り出します。
   p Class.const_get("Bar::BAR") # => 1
 #@end
 
-#@since 1.8.0
 --- const_missing(name)
 定義されていない定数を参照したときに Ruby インタプリタが
 このメソッドを呼びます。
@@ -469,7 +523,6 @@ name で指定される名前の定数の値を取り出します。
 
   # => undefined constant :Bar
        undefined constant :Bar
-#@end
 
 --- const_set(name, value) -> object
 
@@ -481,6 +534,26 @@ name で指定される名前の定数の値を取り出します。
 
 @param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
 @param value セットしたい値を指定します。
+
+例:
+  module Foo; end
+
+  # Symbolを指定した場合
+  Foo.const_set(:FOO, 123)
+  Foo::FOO # => 123
+
+  # Stringを指定した場合
+  Foo.const_set('BAR', 'abc')
+  Foo::BAR # => "abc"
+
+  # 既に定義されている定数の名前を指定した場合
+  Foo.const_set('BAR', '123')
+  # warning: already initialized constant Foo::BAR
+  # warning: previous definition of BAR was here
+  # => "123"
+
+  # 不適切な定数名を指定した場合
+  Foo.const_set('foo', 1) # => NameError: wrong constant name foo
 
 #@since 1.9.1
 --- constants(inherit = true) -> [Symbol]
@@ -563,11 +636,22 @@ inherit に真を指定すると
 
 @see [[m:Object#freeze]]
 
+例:
+  module Foo; end
+  Foo.freeze
+
+  module Foo
+    def foo; end
+#@since 2.5.0
+  end # => FrozenError: can't modify frozen module
+#@else
+  end # => RuntimeError: can't modify frozen module
+#@end
+
 #@since 2.1.0
 #@include(Module.include)
 #@end
 
-#@since 1.8.0
 --- include?(mod) -> bool
 
 self かその親クラス / 親モジュールがモジュール mod を
@@ -585,7 +669,6 @@ self かその親クラス / 親モジュールがモジュール mod を
 
   p C1.include?(M)   # => true
   p C2.include?(M)   # => true
-#@end
 
 --- included_modules -> [Module]
 
@@ -613,14 +696,73 @@ self のインスタンスメソッド name をオブジェクト化した [[c:U
 
 @see [[m:Module#public_instance_method]], [[m:Object#method]]
 
---- method_defined?(name) -> bool
+例:
+  class Interpreter
+    def do_a() print "there, "; end
+    def do_d() print "Hello ";  end
+    def do_e() print "!\n";     end
+    def do_v() print "Dave";    end
+    Dispatcher = {
+      "a" => instance_method(:do_a),
+      "d" => instance_method(:do_d),
+      "e" => instance_method(:do_e),
+      "v" => instance_method(:do_v)
+    }
+    def interpret(string)
+      string.each_char {|b| Dispatcher[b].bind(self).call }
+    end
+  end
 
-モジュールにインスタンスメソッド name が定義されているとき
+  interpreter = Interpreter.new
+  interpreter.interpret('dave')
+  # => Hello there, Dave!
+
+#@since 2.6.0
+--- method_defined?(name, inherit=true) -> bool
+#@else
+--- method_defined?(name) -> bool
+#@end
+
+モジュールにインスタンスメソッド name が定義されており、
+かつその可視性が public または protected であるときに
 true を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
 @see [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
+
+#@samplecode 例
+module A
+  def method1()  end
+  def protected_method1()  end
+  protected :protected_method1
+end
+class B
+  def method2()  end
+  def private_method2()  end
+  private :private_method2
+end
+class C < B
+  include A
+  def method3()  end
+end
+
+A.method_defined? :method1              #=> true
+C.method_defined? "method1"             #=> true
+C.method_defined? "method2"             #=> true
+#@since 2.6.0
+C.method_defined? "method2", true       #=> true
+C.method_defined? "method2", false      #=> false
+#@end
+C.method_defined? "method3"             #=> true
+C.method_defined? "protected_method1"   #=> true
+C.method_defined? "method4"             #=> false
+C.method_defined? "private_method2"     #=> false
+#@end
 
 --- module_eval(expr, fname = "(eval)", lineno = 1) -> object
 --- module_eval{|mod| ... }                         -> object
@@ -638,12 +780,6 @@ true を返します。
 文字列が与えられた場合には、定数とクラス変数のスコープは自身のモジュール定義式内と同じスコープになります。
 ブロックが与えられた場合には、定数とクラス変数のスコープはブロックの外側のスコープになります。
 
-#@until 1.8.0
-==== 注意
-module_eval のブロック中でメソッドを定義する場合、
-[[m:Object#instance_eval]] と同様の制限があります。
-詳細はそちらの説明を参照してください。
-#@end
 
 @param expr 評価される文字列。
 
@@ -753,11 +889,7 @@ module_eval のブロック中でメソッドを定義する場合、
      [:private_foo]
      [:protected_foo]
 #@else
-#@since 1.8.0
      ["protected_foo", "public_foo"]
-#@else
-     ["public_foo"]
-#@end
      ["public_foo"]
      ["private_foo"]
      ["protected_foo"]
@@ -787,11 +919,7 @@ module_eval のブロック中でメソッドを定義する場合、
      [:private_foo]
      [:protected_foo]
 #@else
-#@since 1.8.0
      ["protected_foo", "public_foo"]
-#@else
-     ["protected_foo"]
-#@end
      ["public_foo"]
      ["private_foo"]
      ["protected_foo"]
@@ -824,6 +952,8 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
+#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
+
 @see [[m:Object#public_methods]], [[m:Module#instance_methods]]
 
 #@since 1.9.1
@@ -839,6 +969,22 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @see [[m:Object#private_methods]], [[m:Module#instance_methods]]
 
+例:
+  module Foo
+    def foo; end
+    private def bar; end
+  end
+
+  module Bar
+    include Foo
+
+    def baz; end
+    private def qux; end
+  end
+
+  Bar.private_instance_methods # => [:qux, :bar]
+  Bar.private_instance_methods(false) # => [:qux]
+
 #@since 1.9.1
 --- protected_instance_methods(inherited_too = true) -> [Symbol]
 #@else
@@ -850,6 +996,8 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @param inherited_too false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
+#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
+
 @see [[m:Object#protected_methods]], [[m:Module#instance_methods]]
 
 --- private_class_method(*name) -> self
@@ -859,6 +1007,15 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
+例:
+    module Foo
+      def self.foo; end
+    end
+
+    Foo.singleton_class.private_method_defined?(:foo) # => false
+    Foo.private_class_method(:foo) # => Foo
+    Foo.singleton_class.private_method_defined?(:foo) # => true
+
 --- public_class_method(*name) -> self
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
@@ -866,40 +1023,143 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
-#@since 1.8.0
+例:
+  class Foo
+    def self.foo
+      "foo"
+    end
+
+    private_class_method :foo
+  end
+
+  Foo.foo # NoMethodError: private method `foo' called for Foo:Class
+
+  Foo.public_class_method(:foo) # => Foo
+  Foo.foo # => "foo"
+
+#@since 2.6.0
+--- private_method_defined?(name, inherit=true) -> bool
+#@else
 --- private_method_defined?(name) -> bool
+#@end
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が private であるときに true を返します。
 そうでなければ false を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
-@see [[m:Module#method_defined?]]
+@see [[m:Module#method_defined?]], [[m:Module#public_method_defined?]], [[m:Module#protected_method_defined?]]
 
+#@samplecode 例
+module A
+  def method1()  end
+end
+class B
+  private
+  def method2()  end
+end
+class C < B
+  include A
+  def method3()  end
+end
+
+A.method_defined? :method1                   #=> true
+C.private_method_defined? "method1"          #=> false
+C.private_method_defined? "method2"          #=> true
+#@since 2.6.0
+C.private_method_defined? "method2", true    #=> true
+C.private_method_defined? "method2", false   #=> false
+#@end
+C.method_defined? "method2"                  #=> false
+#@end
+
+#@since 2.6.0
+--- protected_method_defined?(name, inherit=true) -> bool
+#@else
 --- protected_method_defined?(name) -> bool
+#@end
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が protected であるときに true を返します。
 そうでなければ false を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
+#@end
 
-@see [[m:Module#method_defined?]]
+@see [[m:Module#method_defined?]], [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]]
 
+#@samplecode 例
+module A
+  def method1()  end
+end
+class B
+  protected
+  def method2()  end
+end
+class C < B
+  include A
+  def method3()  end
+end
+
+A.method_defined? :method1                    #=> true
+C.protected_method_defined? "method1"         #=> false
+C.protected_method_defined? "method2"         #=> true
+#@since 2.6.0
+C.protected_method_defined? "method2", true   #=> true
+C.protected_method_defined? "method2", false  #=> false
+#@end
+C.method_defined? "method2"                   #=> true
+#@end
+
+#@since 2.6.0
+--- public_method_defined?(name, inherit=true) -> bool
+#@else
 --- public_method_defined?(name) -> bool
+#@end
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が public であるときに true を返します。
 そうでなければ false を返します。
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
-
-@see [[m:Module#method_defined?]]
-
+#@since 2.6.0
+@param inherit 真を指定するとスーパークラスや include したモジュールで
+       定義されたメソッドも対象になります。
 #@end
 
-#@since 1.8.6
+@see [[m:Module#method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
+
+#@samplecode 例
+module A
+  def method1()  end
+end
+class B
+  protected
+  def method2()  end
+end
+class C < B
+  include A
+  def method3()  end
+end
+
+A.method_defined? :method1                 #=> true
+C.public_method_defined? "method1"         #=> true
+#@since 2.6.0
+C.public_method_defined? "method1", true   #=> true
+C.public_method_defined? "method1", false  #=> true
+#@end
+C.public_method_defined? "method2"         #=> false
+C.method_defined? "method2"                #=> true
+#@end
+
 --- class_variable_defined?(name) -> bool
 
 name で与えられた名前のクラス変数がモジュールに存在する場合 true を
@@ -916,7 +1176,6 @@ name で与えられた名前のクラス変数がモジュールに存在する
    Fred.class_variable_defined?('@@foo')    #=> true
    Fred.class_variable_defined?('@@bar')    #=> false
 
-#@end
 
 #@since 1.9.1
 --- remove_class_variable(name) -> object
@@ -944,24 +1203,18 @@ name で与えられた名前のクラス変数がモジュールに存在する
 #@include(Module.prepend)
 #@end
 
+#@since 2.5.0
+#@include(Module.alias_method)
+#@include(Module.define_method)
+#@include(Module.remove_method)
+#@include(Module.undef_method)
+#@end
+
 == Private Instance Methods
 
---- alias_method(new, original) -> self
-
-メソッドの別名を定義します。
-
-alias との違いは以下の通りです。
-
-  * メソッド名は [[c:String]] または [[c:Symbol]] で指定します
-  * グローバル変数の別名をつけることはできません
-
-また、クラスメソッドに対して使用することはできません。
-
-@param new 新しいメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
-
-@param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
-
-@see [[ref:d:spec/def#alias]]
+#@until 2.5.0
+#@include(Module.alias_method)
+#@end
 
 --- append_features(module_or_class) -> self
 
@@ -981,69 +1234,10 @@ include を Ruby で書くと以下のように定義できます。
 
 @see [[m:Module#included]]
 
---- attr(name, assignable = false) -> nil
+#@until 2.5.0
+#@include(Module.attr)
+#@end
 
-インスタンス変数読み取りのためのインスタンスメソッド name を定義します。
-
-このメソッドで定義されるアクセスメソッドの定義は次の通りです。
-
-  def name
-    @name
-  end
-
-省略可能な第 2 引数 assignable が指定されその値が真である
-場合には、属性の書き込み用メソッド name= も同時に定義されます。
-その定義は次の通りです。
-
-  def name=(val)
-    @name = val
-  end
-
-@param name [[c:String]] または [[c:Symbol]] で指定します。
-
-@param assignable true を指定するとインスタンス変数書き込み用のインスタンスメソッドも定義します。
-
---- attr_accessor(*name) -> nil
-
-インスタンス変数 name に対する読み取りメソッドと書き込みメソッドの両方を
-定義します。
-
-このメソッドで定義されるメソッドの定義は以下の通りです。
-
-  def name
-    @name
-  end
-  def name=(val)
-    @name = val
-  end
-
-@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
-
---- attr_reader(*name) -> nil
-
-インスタンス変数 name の読み取りメソッドを定義します。
-
-このメソッドで定義されるメソッドの定義は以下の通りです。
-
-  def name
-    @name
-  end
-
-@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
-
---- attr_writer(*name) -> nil
-
-インスタンス変数 name への書き込みメソッド (name=) を定義します。
-
-このメソッドで定義されるメソッドの定義は以下の通りです。
-
-  def name=(val)
-    @name = val
-  end
-
-@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
-
-#@since 1.8.3
 --- class_variable_get(name) -> object
 
 クラス／モジュールに定義されているクラス変数 name の値を返します。
@@ -1062,9 +1256,7 @@ include を Ruby で書くと以下のように定義できます。
 
   p Fred.foo #=> 99
 
-#@end
 
-#@since 1.8.3
 --- class_variable_set(name, val) -> object
 
 クラス／モジュールにクラス変数 name を定義して、その値として
@@ -1085,32 +1277,10 @@ val をセットします。val を返します。
 
   p Fred.foo(101)   # => 101
   p Fred.new.foo    # => 101
+
+#@until 2.5.0
+#@include(Module.define_method)
 #@end
-
---- define_method(name, method) -> Symbol
---- define_method(name) { ... } -> Symbol
-
-インスタンスメソッド name を定義します。
-
-ブロックを与えた場合、定義したメソッドの実行時にブロックが
-レシーバクラスのインスタンスの上で [[m:BasicObject#instance_eval]] されます。
-
-@param name メソッド名を [[c:String]] または [[c:Symbol]] を指定します。
-
-@param method [[c:Proc]]、[[c:Method]] あるいは [[c:UnboundMethod]] の
-       いずれかのインスタンスを指定します。
-
-@return メソッド名を表す [[c:Symbol]] を返します。
-
-@raise TypeError method に同じクラス、サブクラス、モジュール以外のメソッ
-                 ドを指定した場合に発生します。
-
-  class Foo
-    def foo() p :foo end
-    define_method(:bar, instance_method(:foo))
-  end
-  Foo.new.bar    # => :foo
-
 --- extend_object(obj) -> object
 
 [[m:Object#extend]] の実体です。オブジェクトにモジュールの機能を追加します。
@@ -1135,7 +1305,6 @@ extend_object のデフォルトの実装では、self に定義されて
 
 @see [[m:Module#extended]]
 
-#@since 1.8.0
 --- extended(obj) -> ()
 
 self が他のオブジェクト に [[m:Object#extend]] されたときに
@@ -1155,13 +1324,11 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
 
 @see [[m:Module#extend_object]]
 
-#@end
 
 #@until 2.1.0
 #@include(Module.include)
 #@end
 
-#@since 1.8.0
 --- included(class_or_module) -> ()
 
 self が [[m:Module#include]] されたときに対象のクラスまたはモジュー
@@ -1178,7 +1345,6 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
     include Foo
   end
   # => "Bar include Foo"
-#@end
 
 @see [[m:Module#append_features]]
 
@@ -1209,7 +1375,6 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
   => method "foo" was added
      method "bar" was added
 
-#@since 1.8.0
 --- method_removed(name) -> ()
 
 メソッドが [[m:Module#remove_method]] により削除
@@ -1237,9 +1402,7 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 
   => method "foo" was removed
 
-#@end
 
-#@since 1.8.0
 --- method_undefined(name) -> ()
 
 このモジュールのインスタンスメソッド name が
@@ -1275,7 +1438,6 @@ undef 文により未定義にされると、インタプリタがこのメソ�
   method C#foo was undefined
   method C#bar was undefined
 
-#@end
 
 --- module_function(*name) -> self
 
@@ -1344,6 +1506,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 引数が与えられた時には引数によって指定されたメソッドを private に
 設定します。
 
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
+
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
@@ -1368,9 +1532,15 @@ module_function はメソッドに「モジュール関数」という属性を�
 引数が与えられた時には引数によって指定されたメソッドを protected
 に設定します。
 
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
+
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
+
+#@#noexample 参照先の Module#protected_method_defined? にサンプルが書かれているため
+
+@see [[m:Module#protected_method_defined?]]
 
 --- public(*name) -> self
 
@@ -1381,6 +1551,8 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 引数が与えられた時には引数によって指定されたメソッドを public に設
 定します。
+
+可視性については [[ref:d:spec/def#limit]] を参照して下さい。
 
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
@@ -1442,101 +1614,12 @@ name で指定した定数を取り除き、その定数に設定されていた
 
 @see [[m:Module#remove_class_variable]], [[m:Object#remove_instance_variable]]
 
-#@since 1.8.0
---- remove_method(*name) -> self
+
+#@until 2.5.0
+#@include(Module.remove_method)
+#@include(Module.undef_method)
 #@end
 
-インスタンスメソッド name をモジュールから削除します。
-
-#@since 1.8.0
-Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
-#@end
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 指定したメソッドが定義されていない場合に発生します。
-
-  class C
-    def foo
-    end
-
-    remove_method :foo
-    remove_method :no_such_method   # 例外 NameError が発生
-  end
-
-@see [[m:Module#undef_method]]
-
-#@since 1.8.0
---- undef_method(*name) -> self
-
-このモジュールのインスタンスメソッド name を未定義にします。
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 指定したインスタンスメソッドが定義されていない場合に発生します。
-
-=== 「未定義にする」とは
-このモジュールのインスタンスに対して name という
-メソッドを呼び出すことを禁止するということです。
-スーパークラスの定義が継承されるかどうかという点において、
-「未定義」は「メソッドの削除」とは区別されます。
-以下のコード例を参照してください。
-
-  class A
-    def ok
-      puts 'A'
-    end
-  end
-  class B < A
-    def ok
-      puts 'B'
-    end
-  end
-
-  B.new.ok   # => B
-
-  # undef_method の場合はスーパークラスに同名のメソッドがあっても
-  # その呼び出しはエラーになる
-  class B
-    undef_method :ok
-  end
-  B.new.ok   # => NameError
-
-  # remove_method の場合はスーパークラスに同名のメソッドがあると
-  # それが呼ばれる
-  class B
-    remove_method :ok
-  end
-  B.new.ok   # => A
-
-#@#see [ruby-dev:17894]
-また、undef 文と undef_method の違いは、
-メソッド名を [[c:String]] または [[c:Symbol]] で与えられることです。
-
-  module M1
-    def foo
-    end
-    def self.moo
-      undef foo
-    end
-  end
-  M1.instance_methods false #=> ["foo"]
-  M1.moo
-  M1.instance_methods false #=> []
-  module M2
-    def foo
-    end
-    def self.moo
-      undef_method :foo
-    end
-  end
-  M2.instance_methods false #=> ["foo"]
-  M2.moo
-  M2.instance_methods false #=> []
-
-#@end
-
-#@since 1.8.7
 --- module_exec(*args) {|*vars| ... }       -> object
 --- class_exec(*args) {|*vars| ... }        -> object
 
@@ -1570,7 +1653,6 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除でき
 
 @see [[m:Module#module_eval]], [[m:Module#class_eval]]
 
-#@end
 
 #@since 1.9.3
 --- private_constant(*name) -> self
@@ -1581,14 +1663,25 @@ name で指定した定数の可視性を private に変更します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-       untrust なオブジェクトではない場合に発生します。
-#@end
-
 @return self を返します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
+
+例:
+  module Foo
+    BAR = 'bar'
+    class Baz; end
+    QUX = 'qux'
+    class Quux; end
+
+    private_constant :QUX
+    private_constant :Quux
+  end
+
+  Foo::BAR  # => "bar"
+  Foo::Baz  # => Foo::Baz
+  Foo::QUX  # => NameError: private constant Foo::QUX referenced
+  Foo::Quux # => NameError: private constant Foo::Quux referenced
 
 --- public_constant(*name) -> self
 
@@ -1598,12 +1691,30 @@ name で指定した定数の可視性を public に変更します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
 
-#@until 2.1.0
-@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-       untrust なオブジェクトではない場合に発生します。
-#@end
-
 @return self を返します。
+
+#@samplecode 例
+module SampleModule
+  class SampleInnerClass
+  end
+
+  # => 非公開クラスであることを明示するために private にする
+  private_constant :SampleInnerClass
+end
+
+begin
+  SampleModule::SampleInnerClass
+rescue => e
+  e # => #<NameError: private constant SampleModule::SampleInnerClass referenced>
+end
+
+module SampleModule
+  # => 非公開クラスであることは承知で利用するために public にする
+  public_constant :SampleInnerClass
+end
+
+SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
+#@end
 
 @see [[m:Module#private_constant]], [[m:Object#untrusted?]]
 
@@ -1619,25 +1730,38 @@ deprecate に設定した定数を参照すると警告メッセージが表示�
 
 @raise NameError 存在しない定数を指定した場合に発生します。
 
-#@# @raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で self が
-#@#        untrust なオブジェクトではない場合に発生します。
-
 @return self を返します。
+
+例:
+  FOO = 123
+  Object.deprecate_constant(:FOO) # => Object
+
+  FOO
+  # warning: constant ::FOO is deprecated
+  # => 123
+
+  Object.deprecate_constant(:BAR)
+  # NameError: constant Object::BAR not defined
+
 #@end
 
 #@since 2.0.0
 --- refine(klass) { ... } -> Module
 
+#@since 2.4.0
+引数 klass で指定したクラスまたはモジュールだけに対して、ブロックで指定した機能を提供で
+#@else
 引数 klass で指定したクラスだけに対して、ブロックで指定した機能を提供で
+#@end
 きるモジュールを定義します。定義した機能は Module#refine を使用せずに直
 接 klass に対して変更を行う場合と異なり、限られた範囲のみ有効にできます。
 そのため、既存の機能を局所的に修正したい場合などに用いる事ができます。
 
 refinements 機能の詳細については以下を参照してください。
 
- * [[url:http://magazine.rubyist.net/?0041-200Special-refinement]]
+ * [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html]]
 #@since 2.1.0
- * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html]]
+ * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html]]
 #@else
  * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html]]
 #@end
@@ -1649,7 +1773,11 @@ refinements 機能の詳細については以下を参照してください。
 定義した機能は [[m:main.using]] を実行した場合のみ有効になります。
 #@end
 
+#@since 2.4.0
+@param klass 拡張する対象のクラスまたはモジュールを指定します。
+#@else
 @param klass 拡張する対象のクラスを指定します。
+#@end
 
 @return ブロックで指定した機能を持つ無名のモジュールを返します。
 
@@ -1696,6 +1824,34 @@ prepend の処理の実体です。このメソッド自体は mod で指定し�
 @param mod prepend を呼び出したモジュール
 @return mod が返されます
 
+#@samplecode 例
+class Recorder
+  RECORDS = []
+end
+
+module X
+  def self.prepend_features(mod)
+    Recorder::RECORDS << mod
+  end
+end
+
+class A
+  prepend X
+end
+
+class B
+  include X
+end
+
+class C
+  prepend X
+end
+
+Recorder::RECORDS # => [A, C]
+#@end
+
+@see [[m:Module#prepend]], [[m:Module#prepended]]
+
 --- prepended(class_or_module) -> ()
 
 self が [[m:Module#prepend]] されたときに対象のクラスまたはモジュールを
@@ -1713,7 +1869,7 @@ self が [[m:Module#prepend]] されたときに対象のクラスまたはモ�
   end
   # => "A prepended to Enumerable"
 
-@see [[m:Module#included]], [[m:Module#prepend]]
+@see [[m:Module#included]], [[m:Module#prepend]], [[m:Module#prepend_features]]
 #@end
 
 #@since 2.1.0
@@ -1734,7 +1890,7 @@ self が特異クラスの場合に true を返します。そうでなければ
 
 有効にした拡張の有効範囲については以下を参照してください。
 
- * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]]
 
 @param module 有効にするモジュールを指定します。
 

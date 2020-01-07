@@ -13,11 +13,23 @@ nil は false オブジェクトとともに偽を表し、
 
 @param other 論理積を行なう式です
 
+例:
+  nil & true  # => false
+  nil & false # => false
+  nil & nil   # => false
+  nil & "a"   # => false
+
 --- |(other) -> bool
 
 other が真なら true を, 偽なら false を返します。
 
 @param other 論理和を行なう式です
+
+例:
+  nil | true   # => true
+  nil | false  # => false
+  nil | nil    # => false
+  nil | "a"    # => true
 
 --- ^(other) -> bool
 
@@ -25,9 +37,18 @@ other が真なら true を, 偽なら false を返します。
 
 @param other 排他的論理和を行なう式です
 
+例:
+  nil ^ true  # => true
+  nil ^ false # => false
+  nil ^ nil   # => false
+  nil ^ "a"   # => true
+
 --- nil? -> bool
 
 常に true を返します。
+
+例:
+  nil.nil?   # => true
 
 --- to_a -> Array
 
@@ -53,6 +74,9 @@ other が真なら true を, 偽なら false を返します。
 --- to_s -> String
 
 空文字列 "" を返します。
+
+例:
+  nil.to_s   # => ""
 
 #@since 1.9.1
 --- to_c -> Complex
@@ -98,4 +122,24 @@ other が真なら true を, 偽なら false を返します。
 
 例:
   nil.to_h   #=> {}
+#@end
+#@since 2.6.0
+--- =~(other) -> nil
+
+右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
+をサポートするためのメソッドです。常に nil を返します。
+
+#@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
+
+@param other 任意のオブジェクトです。結果に影響しません。
+
+#@samplecode 例
+obj = 'regexp'
+p(obj =~ /re/) #=> 0
+
+obj = nil
+p(obj =~ /re/) #=> nil
+#@end
+
+@see [[m:String#=~]]
 #@end

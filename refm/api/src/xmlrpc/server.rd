@@ -2,13 +2,13 @@ require xmlrpc/datetime
 
 XML-RPC サーバのためのライブラリです。
 
-==== CGI-based Server
+=== CGI-based Server
 
 There are also two ways to define handler, the first is
 like C/PHP, the second like Java, of course both ways
 can be mixed:
 
-===== C/PHP-like (handler functions)
+==== C/PHP-like (handler functions)
 
   require "xmlrpc/server"
 
@@ -20,7 +20,7 @@ can be mixed:
     
   s.serve
 
-===== Java-like (handler classes)
+==== Java-like (handler classes)
 
   require "xmlrpc/server"
 
@@ -43,7 +43,7 @@ To return a fault-structure you have to raise an FaultException e.g.:
 
   raise XMLRPC::FaultException.new(3, "division by Zero")
 
-====== Security Note
+===== Security Note
 
 From Brian Candler:
 
@@ -82,7 +82,7 @@ A solution is to undef insecure methods or to use XMLRPC::iPIMethods as shown be
 This adds only public instance methods explicitly declared in class MyHandler 
 (and not those inherited from any other class).
 
-===== With interface declarations
+==== With interface declarations
 
 Code sample from the book Ruby Developer's Guide:
 
@@ -103,7 +103,7 @@ Code sample from the book Ruby Developer's Guide:
   s.add_handler(Num::INTERFACE, Num.new)
   s.serve
 
-==== Standalone server
+=== Standalone server
 
 Same as CGI-based server, only that the line
 

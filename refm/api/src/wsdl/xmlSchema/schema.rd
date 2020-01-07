@@ -20,11 +20,9 @@ require xsd/namedelements
 --- attributes
 #@todo
 
-#@since 1.8.3
 --- collect_attributes
 #@todo
 
-#@end
 
 --- collect_complextypes
 #@todo
@@ -32,11 +30,9 @@ require xsd/namedelements
 --- collect_elements
 #@todo
 
-#@since 1.8.2
 --- collect_simpletypes
 #@todo
 
-#@end
 
 --- complextypes
 #@todo
@@ -49,21 +45,17 @@ require xsd/namedelements
 #@todo
 
 
-#@since 1.8.3
 --- importedschema
 #@todo
 
-#@end
 
 --- imports
 #@todo
 
-#@since 1.8.3
 --- location
 --- location=(location)
 #@todo
 
-#@end
 
 --- parse_attr(attr, value)
 #@todo
@@ -72,11 +64,9 @@ require xsd/namedelements
 #@todo
 
 
-#@since 1.8.2
 --- simpletypes
 #@todo
 
-#@end
 
 --- targetnamespace
 #@todo

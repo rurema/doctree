@@ -39,7 +39,7 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数と�
 
 @param proc ファイナライザとして [[c:Proc]] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
 
-==== 使い方の注意
+=== 使い方の注意
 
 以下は、define_finalizer の使い方の悪い例です。
 
@@ -98,7 +98,6 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 
 --- each_object        {|object| ...}    -> Integer
 --- each_object(klass) {|object| ...}    -> Integer
-#@since 1.8.7
 #@since 1.9.1
 --- each_object                          -> Enumerator
 --- each_object(klass)                   -> Enumerator
@@ -106,20 +105,17 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 --- each_object                          -> Enumerable::Enumerator
 --- each_object(klass)                   -> Enumerable::Enumerator
 #@end
-#@end
 
 指定された klass と [[m:Object#kind_of?]] の関係にある全ての
 オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
 ジェクトに対して繰り返します。
 繰り返した数を返します。
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
 次のクラスのオブジェクトについては繰り返しません
@@ -135,6 +131,38 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 なお、[[c:Symbol]] については、かわりに [[m:Symbol.all_symbols]] が使用できます。
 
 @param klass クラスかモジュールを指定します。
+
+#@samplecode 例: ブロックなし
+p ObjectSpace.each_object
+# => #<Enumerator: ObjectSpace:each_object(false)>
+#@end
+
+#@samplecode 例: 全てのオブジェクトを扱う
+ObjectSpace.each_object.take(5).each { |x| p x }
+count = ObjectSpace.each_object { |x| x }
+puts "Total count: #{count}"
+
+# => "scope"
+# => "scopes"
+# => "sym"
+# => "class_names"
+# => "@corrections"
+# => Total count: 9938
+#@end
+
+#@samplecode 例: 任意のクラスを扱う
+Person = Struct.new(:name)
+s1 = Person.new("tanaka")
+s2 = Person.new("sato")
+
+count = ObjectSpace.each_object(Person) { |x| p x }
+puts "Total count: #{count}"
+
+# => #<struct Person name="sato">
+# => #<struct Person name="tanaka">
+# => Total count: 2
+#@end
+
 
 #@since 2.1.0
 --- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
@@ -157,12 +185,45 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
+#@#noexample 参照先の GC.start と同様の動作のため
+
+@see [[m:GC.start]]
+
 --- undefine_finalizer(obj)    -> object
 
 obj に対するファイナライザをすべて解除します。
 obj を返します。
 
 @param obj ファイナライザを解除したいオブジェクトを指定します。
+
+#@samplecode 例
+class Sample
+  def Sample.callback
+    proc {
+      puts "finalize"
+    }
+  end
+
+  def initialize
+    ObjectSpace.define_finalizer(self, Sample.callback)
+  end
+
+  def undef
+    ObjectSpace.undefine_finalizer(self)
+  end
+end
+
+Sample.new
+GC.start
+# => finalize
+
+Sample.new
+sample.undef
+GC.start
+# ※何も出力されない
+#@end
+
+@see [[m:ObjectSpace.#define_finalizer]]
 
 #@since 1.9.1
 --- count_objects(result_hash = {}) -> Hash

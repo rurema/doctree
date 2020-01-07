@@ -7,7 +7,7 @@ category File
 基本的なファイル操作を集めたモジュールです。
 
 
-====[a:options] オプションの説明
+===[a:options] オプションの説明
 
 引数 options で使用できるオプションの説明です。
 メソッドごとに使用できるオプションは決まっています。
@@ -57,11 +57,7 @@ category File
 
 @param dir ディレクトリを指定します。
 
-#@since 1.8.3
 @param options :verbose が指定できます。
-#@else
-@param options :noop, :verbose が指定できます。
-#@end
                [[ref:c:FileUtils#options]]
 
 例:
@@ -128,7 +124,6 @@ symbolic mode では以下の指定を 操作対象 演算子 権限 の順番�
  * "t": sticky ビット
 #@end
 
-#@since 1.8.3
 --- chmod_R(mode, list, options = {}) -> Array
 
 ファイル list のパーミッションを再帰的に mode へ変更します。
@@ -153,9 +148,7 @@ symbolic mode では以下の指定を 操作対象 演算子 権限 の順番�
   require 'fileutils'
   FileUtils.chmod_R(0700, '/tmp/removing')
 
-#@end
 
-#@since 1.8.3
 --- chown(user, group, list, options = {}) -> Array
 
 ファイル list の所有ユーザと所有グループを user と group に変更します。
@@ -180,9 +173,7 @@ user, group に nil または -1 を渡すとその項目は変更しません�
   require 'fileutils'
   FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
-#@end
 
-#@since 1.8.3
 --- chown_R(user, group, list, options = {}) -> Array
 
 list 以下のファイルの所有ユーザと所有グループを
@@ -211,7 +202,6 @@ user, group に nil または -1 を渡すとその項目は変更しません�
   require 'fileutils'
   FileUtils.chown_R 'www', 'www', '/var/www/htdocs'
   FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', :verbose => true
-#@end
 
 --- cmp(file_a, file_b)          -> bool
 --- compare_file(file_a, file_b) -> bool
@@ -237,7 +227,6 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 
 @param io_b [[c:IO]] オブジェクト。
 
-#@since 1.8.3
 --- copy_entry(src, dest, preserve = false, dereference_root = false) -> ()
 
 ファイル src を dest にコピーします。
@@ -255,9 +244,7 @@ src がディレクトリの場合はその中身を再帰的にコピーしま�
 @param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
                         内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
-#@end
 
-#@since 1.8.3
 --- copy_file(src, dest, preserve = false, dereference_root = true) -> ()
 
 ファイル src の内容を dest にコピーします。
@@ -272,9 +259,7 @@ src がディレクトリの場合はその中身を再帰的にコピーしま�
 @param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
                         内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
-#@end
 
-#@since 1.8.3
 --- copy_stream(src, dest) -> ()
 
 src を dest にコピーします。
@@ -284,7 +269,6 @@ src には read メソッド、dest には write メソッドが必要です。
 
 @param dest write メソッドを持つオブジェクト。
 
-#@end
 
 --- cp(src, dest, options = {})   -> ()
 --- copy(src, dest, options = {}) -> ()
@@ -400,6 +384,45 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
   FileUtils.cd('/bin')
   FileUtils.ln(%w(cp mv mkdir), '/usr/bin')
 
+#@since 2.6.0
+--- cp_lr(src, dest, noop: nil, verbose: nil, dereference_root: true, remove_destination: false)
+
+src へのハードリンク dest を作成します。
+src がディレクトリの場合、再帰的にリンクします。
+dest がディレクトリの場合、src へのハードリンク dest/src を作成します。
+
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest リンク作成先のファイルかディレクトリです。
+
+@param options :noop, :verbose, :dereference_root, :remove_destination が指定できます。
+               [[ref:c:FileUtils#options]]
+
+@raise ArgumentError dest が src に含まれる場合に発生します。
+@raise Errno::EEXIST src が一つで dest がすでに存在しディレクトリでない場合に発生します。
+@raise Errno::ENOTDIR src が複数で dest がディレクトリでない場合に発生します。
+
+#@samplecode "mylib" ライブラリを site_ruby にインストールする例
+  require 'fileutils'
+  FileUtils.rm_r site_ruby + '/mylib', :force => true
+  FileUtils.cp_lr 'lib/', site_ruby + '/mylib'
+#@end
+
+#@samplecode 様々なファイルを対象ディレクトリにリンクする例
+  require 'fileutils'
+  FileUtils.cp_lr %w(mail.rb field.rb debug/), site_ruby + '/tmail'
+  FileUtils.cp_lr Dir.glob('*.rb'), '/home/aamine/lib/ruby', :noop => true, :verbose => true
+#@end
+
+#@samplecode 内容をリンクする例
+  require 'fileutils'
+  # ディレクトリそのものではなく、ディレクトリの内容をリンクしたい場合は、
+  # 以下のようになります。(たとえば src/x -> dest/x, src/y -> dest/y)
+  FileUtils.cp_lr 'src/.', 'dest'
+  # FileUtils.cp_lr('src', 'dest') は dest ディレクトリが存在すれば dest/src を作成しますが、この例はしません。
+#@end
+#@end
 --- ln_s(src, dest, options = {})    -> ()
 --- symlink(src, dest, options = {}) -> ()
 
@@ -582,7 +605,7 @@ FileUtils.rm(list, :force => true) と同じです。
 @param options :force, :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-==== 注意
+=== 注意
 
 このメソッドにはローカル脆弱性が存在します。
 この脆弱性を回避するには :secure オプションを使用してください。
@@ -609,7 +632,7 @@ rm_r(list, {:force => true}) と同じです。
 @param options :noop, :verbose, :secure が指定できます。
                [[ref:c:FileUtils#options]]
 
-==== 注意
+=== 注意
 
 このメソッドにはローカル脆弱性が存在します。
 この脆弱性を回避するには :secure オプションを使用してください。
@@ -637,7 +660,6 @@ rm_r(list, {:force => true}) と同じです。
   # 実際にはディレクトリの削除は行わずにメッセージ出力のみ
   FileUtils.rmdir('somedir', {:verbose => true, :noop => true})
 
-#@since 1.8.3
 --- remove_entry(path, force = false) -> ()
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
@@ -656,9 +678,7 @@ rm_r(list, {:force => true}) と同じです。
 
 @see [[m:FileUtils.#remove_entry_secure]]
 
-#@end
 
-#@since 1.8.3
 --- remove_entry_secure(path, force = false) -> ()
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
@@ -689,7 +709,6 @@ TOCTTOU (time-of-check to time-of-use)脆弱性が存在します。
 
 @param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
-#@end
 
 --- remove_file(path, force = false) -> ()
 
@@ -745,7 +764,6 @@ newer が、older_list に含まれるすべてのファイルより新しいと
   require 'fileutils'
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
-#@since 1.8.3
 == Singleton Methods
 --- collect_method(opt) -> Array
 
@@ -800,7 +818,6 @@ mid というメソッドが opt というオプションを持つ場合、真�
 #@# 
 #@# @see [[m:Module#module_function]], [[m:Module#private_class_method]]
 
-#@end
 == Constants
 
 --- METHODS -> Array

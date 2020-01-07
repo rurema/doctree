@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require logger
 require soap/rpc/soaplet
 require soap/streamHandler
@@ -73,4 +72,3 @@ require soap/streamHandler
 --- add_document_request_operation(factory, soapaction, name, param_def, opt = {})
 #@todo
 
-#@end

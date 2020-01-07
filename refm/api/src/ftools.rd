@@ -62,13 +62,8 @@ require 'ftools' とすると、ファイルのコピーや削除などのメソ
 
 @return 同じなら true、異なるなら false を返します。
 
-#@since 1.8.3
 --- safe_unlink(*files) -> Array
 --- rm_f(*files)        -> Array
-#@else
---- safe_unlink(*files) -> Integer
---- rm_f(*files)        -> Integer
-#@end
 
 (複数の)ファイルを可能な限り削除します。
 
@@ -77,12 +72,8 @@ rm -f([[man:rm(1)]]) に相当します。
 @param files 削除するファイルを指定します。
              最後の引数が文字列でない場合または真の場合、詳細を出力します。
 
-#@since 1.8.3
 @return files を返します。
         最後の引数が文字列でない場合は、最後の引数は取り除かれます。
-#@else
-@return 削除できたファイル数を返します。
-#@end
 
 --- makedirs(*dirs) -> Array
 --- mkpath(*dirs)   -> Array

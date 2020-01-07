@@ -110,7 +110,12 @@ libyaml のバージョンを返します。
 
 @see [[m:Psych::LIBYAML_VERSION]]
 
---- load(yaml, filename = nil) -> object
+#@since 2.5.0
+--- load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
+#@else
+--- load(yaml, filename = nil, fallback = false) -> object
+#@end
+
 YAML ドキュメントを Ruby のデータ構造(オブジェクト)に変換します。
 
 入力に複数のドキュメントが含まれている場合は、先頭のものを変換して
@@ -121,24 +126,46 @@ filename はパース中に発生した例外のメッセージに用います�
 
 @param yaml YAML ドキュメント(文字列 or IO オブジェクト)
 @param filename [[c:Psych::SyntaxError]] 発生時にファイル名として表示する文字列。
+@param fallback 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは false です。
+#@since 2.5.0
+@param symbolize_names ハッシュ(YAMLの仕様では正確にはマッピング)のキー
+                       を [[c:Symbol]] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは
+                       文字列に変換されます。
+#@end
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.parse]]
 
-==== 例
-  Psych.load("--- a")           # => 'a'
-  Psych.load("---\n - a\n - b") # => ['a', 'b']
+#@samplecode 例
+Psych.load("--- a")           # => 'a'
+Psych.load("---\n - a\n - b") # => ['a', 'b']
 
-  begin
-    Psych.load("--- `", "file.txt")
-  rescue Psych::SyntaxError => ex
-    p ex.file    # => 'file.txt'
-    p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
-  end
+begin
+  Psych.load("--- `", "file.txt")
+rescue Psych::SyntaxError => ex
+  p ex.file    # => 'file.txt'
+  p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
+end
+#@end
+
+キーワード引数 symbolize_names に true を指定した場合はハッシュのキー
+を [[c:Symbol]] に変換して返します。
+
+#@since 2.5.0
+#@samplecode 例
+Psych.load("---\n foo: bar")                         # => {"foo"=>"bar"}
+Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
+#@end
+#@end
 
 #@since 2.0
+#@since 2.5.0
+--- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil, symbolize_names: false) -> object
+#@else
 --- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil) -> object
+#@end
 
-安全に YAML YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 
 デフォルトでは以下のクラスのオブジェクトしか変換しません。
 
@@ -175,6 +202,18 @@ Psych::DisallowedClass 例外が発生します。
 yaml がエイリアスを含んでいて aliases パラメーターが false の時、
 Psych::BadAlias 例外が発生します。
 
+filename はパース中に発生した例外のメッセージに用います。
+
+キーワード引数 symbolize_names に true を指定した場合はハッシュのキー
+を [[c:Symbol]] に変換して返します。
+
+#@since 2.5.0
+#@samplecode 例
+Psych.safe_load("---\n foo: bar")                         # => {"foo"=>"bar"}
+Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
+#@end
+#@end
+
 @param io YAMLフォーマットの文書の読み込み先のIOオブジェクト。
 @param whitelist_classes 追加で読み込みを許可するクラスの配列。
 @param whitelist_symbols 引数 whitelist_classesに [[c:Symbol]] を含む場
@@ -182,6 +221,12 @@ Psych::BadAlias 例外が発生します。
                          省略した場合は全ての [[c:Symbol]] を許可します。
 @param aliases エイリアスの読み込みを許可するかどうか。
 @param filename [[c:Psych::SyntaxError]] 発生時にファイル名として表示する文字列。
+#@since 2.5.0
+@param symbolize_names ハッシュ(YAMLの仕様では正確にはマッピング)のキー
+                       を [[c:Symbol]] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは
+                       文字列に変換されます。
+#@end
 #@end
 
 --- parse(yaml, filename = nil) -> Psych::Nodes::Document
@@ -199,7 +244,7 @@ AST については [[c:Psych::Nodes]] を参照してください。
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.load]]
 
-==== 例
+=== 例
 
   Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
 
@@ -236,7 +281,7 @@ yaml が 複数の YAML ドキュメントを含む場合を取り扱うこと�
 
 @see [[c:Psych::Nodes]]
 
-==== 例
+=== 例
   Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
 
 --- dump(o, options = {}) -> String
@@ -256,7 +301,7 @@ options で出力に関するオプションを以下の指定できます。
 @param io 出力先
 @param options 出力オプション
 
-==== 例
+=== 例
 
   # Dump an array, get back a YAML string
   Psych.dump(['a', 'b'])  # => "---\n- a\n- b\n"
@@ -275,7 +320,7 @@ options で出力に関するオプションを以下の指定できます。
 
 @param objects 変換対象のオブジェクト列
 
-==== 例
+=== 例
   Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
 
 --- to_json(o) -> String

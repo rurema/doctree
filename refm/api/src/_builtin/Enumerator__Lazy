@@ -16,6 +16,13 @@ map や select などのメソッドの遅延評価版を提供するための�
 #@end
  * take, take_while
  * drop, drop_while
+ * slice_before, slice_after, slice_when
+#@since 2.4.0
+ * chunk, chunk_while
+ * uniq
+#@else
+ * chunk
+#@end
  * zip (※互換性のため、ブロックを渡さないケースのみlazy)
 
 Lazyオブジェクトは、[[m:Enumerable#lazy]]メソッドによって生成されます。
@@ -26,7 +33,7 @@ Lazyから値を取り出すには、[[m:Enumerator::Lazy#force]] または
 例:
 
   # 二乗して偶数になるような整数を、小さい方から5個表示する
-  p (1..Float::INFINITY).lazy.select{|n| (n**2).even?}.first(5)
+  p 1.step.lazy.select{|n| (n**2).even?}.first(5)
   # LTSV (http://ltsv.org/) 形式のログファイルから検索を行う
   # Enumerator::Lazy#map は配列ではなく Enumerator を返すため、
   # 巨大な配列を確保しようとしてメモリを使い切ったりはしない
@@ -66,7 +73,7 @@ Enumerable#filter_map と、その遅延評価版を定義する例:
     end
   end
 
-  (1..Float::INFINITY).lazy.filter_map{|i| i*i if i.even?}.first(5)
+  1.step.lazy.filter_map{|i| i*i if i.even?}.first(5)
       # => [4, 16, 36, 64, 100]
 
 @raise ArgumentError 引数を指定しなかった場合、ブロックを指定しなかった場合に発生します。
@@ -81,6 +88,13 @@ Enumerable#filter_map と、その遅延評価版を定義する例:
 [[m:Enumerable#map]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+例:
+  1.step.lazy.map{ |n| n % 3 == 0 }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:map>
+
+  1.step.lazy.collect{ |n| n.succ }.take(10).force
+  # => [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 @see [[m:Enumerable#map]]
 
@@ -109,10 +123,20 @@ Enumerator::Lazy のインスタンスを返します。
 
 --- select {|item| ... } -> Enumerator::Lazy
 --- find_all {|item| ... } -> Enumerator::Lazy
+#@since 2.6.0
+--- filter {|item| ... } -> Enumerator::Lazy
+#@end
 
 [[m:Enumerable#select]] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+例:
+  1.step.lazy.find_all { |i| i.even? }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:find_all>
+
+  1.step.lazy.select { |i| i.even? }.take(10).force
+  # => [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
 @see [[m:Enumerable#select]]
 
@@ -122,11 +146,24 @@ Enumerator::Lazy のインスタンスを返します。
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
+例:
+  1.step.lazy.reject { |i| i.even? }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:reject>
+
+  1.step.lazy.reject { |i| i.even? }.take(10).force
+  # => [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+
 @see [[m:Enumerable#reject]]
 
 --- grep(pattern) {|item| ... } -> Enumerator::Lazy
 
 [[m:Enumerable#grep]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+例:
+  (100..Float::INFINITY).lazy.map(&:to_s).grep(/\A(\d)\1+\z/)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator::Lazy: 100..Infinity>:map>:grep(/\A(\d)\1+\z/)>
+  (100..Float::INFINITY).lazy.map(&:to_s).grep(/\A(\d)\1+\z/).take(10).force
+  # => ["111", "222", "333", "444", "555", "666", "777", "888", "999", "1111"]
 
 #@until 2.3.0
 @see [[m:Enumerable#grep]]
@@ -136,6 +173,12 @@ Enumerator::Lazy のインスタンスを返します。
 --- grep_v(pattern) {|item| ... } -> Enumerator::Lazy
 
 [[m:Enumerable#grep_v]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+例:
+  (100..Float::INFINITY).lazy.map(&:to_s).grep_v(/(\d).*\1/)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator::Lazy: 100..Infinity>:map>:grep_v(/(\d).*\1/)>
+  (100..Float::INFINITY).lazy.map(&:to_s).grep_v(/(\d).*\1/).take(15).force
+  # => ["102", "103", "104", "105", "106", "107", "108", "109", "120", "123", "124", "125", "126", "127", "128"]
 
 @see [[m:Enumerable#grep_v]], [[m:Enumerable#grep]], [[m:Enumerator::Lazy#grep]]
 #@end
@@ -147,6 +190,13 @@ Enumerator::Lazy のインスタンスを返します。
 
 ただし一貫性のため、ブロック付きで呼び出した場合は Enumerable#zip と
 同じ挙動になります。
+
+例:
+  1.step.lazy.zip(('a'..'z').cycle)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:zip(#<Enumerator: "a".."z":cycle>)>
+
+  1.step.lazy.zip(('a'..'z').cycle).take(30).force.last(6)
+  # => [[25, "y"], [26, "z"], [27, "a"], [28, "b"], [29, "c"], [30, "d"]]
 
 @see [[m:Enumerable#zip]]
 
@@ -161,12 +211,26 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
+例:
+  1.step.lazy.take(5)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:take(5)>
+
+  1.step.lazy.take(5).force
+  # => [1, 2, 3, 4, 5]
+
 @see [[m:Enumerable#take]]
 
 --- take_while -> Enumerator::Lazy
 --- take_while {|item| ... } -> Enumerator::Lazy
 
 [[m:Enumerable#take_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+例:
+  1.step.lazy.zip(('a'..'z').cycle).take_while { |e| e.first < 100_000 }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:zip(#<Enumerator: "a".."z":cycle>)>:take_while>
+
+  1.step.lazy.zip(('a'..'z').cycle).take_while { |e| e.first < 100_000 }.force.last(5)
+  # => [[99995, "y"], [99996, "z"], [99997, "a"], [99998, "b"], [99999, "c"]]
 
 @see [[m:Enumerable#take_while]]
 
@@ -178,12 +242,25 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
+例:
+  1.step.lazy.drop(3)
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:drop(3)>
+
+  1.step.lazy.drop(3).take(10).force
+  # => [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
 @see [[m:Enumerable#drop]]
 
---- drop_while -> Enumerator::Lazy
 --- drop_while {|item| ... } -> Enumerator::Lazy
 
 [[m:Enumerable#drop_while]] と同じですが、配列ではなくEnumerator::Lazy を返します。
+
+例:
+  1.step.lazy.drop_while { |i| i < 42 }
+  # => #<Enumerator::Lazy: #<Enumerator::Lazy: #<Enumerator: 1:step>>:drop_while>
+
+  1.step.lazy.drop_while { |i| i < 42 }.take(10).force
+  # => [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
 
 @see [[m:Enumerable#drop_while]]
 
@@ -191,10 +268,22 @@ n が大きな数 (100000とか) の場合に備えて再定義されていま�
 
 self を返します。
 
+例:
+  lazy = (100..Float::INFINITY).lazy
+  p lazy.lazy         # => #<Enumerator::Lazy: 100..Infinity>
+  p lazy == lazy.lazy # => true
+
 --- chunk {|elt| ... } -> Enumerator::Lazy
 --- chunk(initial_state) {|elt, state| ... } -> Enumerator::Lazy
 
 [[m:Enumerable#chunk]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+例:
+  1.step.lazy.chunk{ |n| n % 3 == 0 }
+  # => #<Enumerator::Lazy: #<Enumerator: #<Enumerator::Generator:0x007f8bf18118f0>:each>>
+
+  1.step.lazy.chunk{ |n| n % 3 == 0 }.take(5).force
+  # => [[false, [1, 2]], [true, [3]], [false, [4, 5]], [true, [6]], [false, [7, 8]]]
 
 @see [[m:Enumerable#chunk]]
 
@@ -204,6 +293,13 @@ self を返します。
 
 [[m:Enumerable#slice_before]] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
+例:
+  1.step.lazy.slice_before { |e| e.even? }
+  # => #<Enumerator::Lazy: #<Enumerator: #<Enumerator::Generator:0x00007f9f31844ce8>:each>>
+
+  1.step.lazy.slice_before { |e| e % 3 == 0 }.take(5).force
+  # => [[1, 2], [3, 4, 5], [6, 7, 8], [9, 10, 11], [12, 13, 14]]
+
 @see [[m:Enumerable#slice_before]]
 
 #@since 2.2.0
@@ -212,11 +308,25 @@ self を返します。
 
 [[m:Enumerable#slice_after]] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
+例:
+  1.step.lazy.slice_after { |e| e % 3 == 0 }
+  # => #<Enumerator::Lazy: #<Enumerator: #<Enumerator::Generator:0x007fd73980e6f8>:each>>
+
+  1.step.lazy.slice_after { |e| e % 3 == 0 }.take(5).force
+  # => [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15]]
+
 @see [[m:Enumerable#slice_after]]
 
 --- slice_when {|elt_before, elt_after| bool } -> Enumerator::Lazy
 
 [[m:Enumerable#slice_when]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+例:
+  1.step.lazy.slice_when { |i, j| (i + j) % 5 == 0 }
+  # => #<Enumerator::Lazy: #<Enumerator: #<Enumerator::Generator:0x00007fce84118348>:each>>
+
+  1.step.lazy.slice_when { |i, j| (i + j) % 5 == 0 }.take(5).force
+  # => [[1, 2], [3, 4, 5, 6, 7], [8, 9, 10, 11, 12], [13, 14, 15, 16, 17], [18, 19, 20, 21, 22]]
 
 @see [[m:Enumerable#slice_when]]
 #@end
@@ -226,6 +336,13 @@ self を返します。
 全ての要素を含む配列を返します。Lazy から実際に値を取り出すのに使います。
 
 [[m:Enumerable#to_a]] のエイリアスです。
+
+例:
+  1.step.lazy.take(10).force
+  # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  1.step.lazy.take(10).to_a
+  # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 --- to_enum(method = :each, *args)                 -> Enumerator::Lazy
 --- enum_for(method = :each, *args)                -> Enumerator::Lazy
@@ -267,3 +384,17 @@ Enumerator を返す」ようなメソッドを定義するときによく使わ
   # Lazy#to_enum のおかげで、repeat の返り値は
   # もとが Enumerator のときは Enumerator に、
   # もとが Lazy のときは Lazy になる
+
+#@since 2.4.0
+--- chunk_while {|elt_before, elt_after| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#chunk_while]] と同じですが、Enumerator ではなく Enumerator::Lazy を返します。
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+--- uniq               -> Enumerator::Lazy
+--- uniq {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#uniq]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+#@end

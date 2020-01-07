@@ -83,7 +83,7 @@ DTD で宣言されている実体の集合を Hash で返します。
 
 これには、XML のデフォルトの実体(gt, lt, quot, apos)も含まれています。
 
-==== 例
+=== 例
   doctype = REXML::Document.new(<<EOS).doctype
   <!DOCTYPE foo [
     <!ENTITY bar "barbarbarbar">
@@ -112,7 +112,7 @@ DTD 内の属性リスト宣言で、 element という名前の要素に対し�
 [[m:REXML::Attribute#name]] と
 [[m:REXML::Attribute#value]] で表現されます。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -142,7 +142,7 @@ elementという名前の要素にはattributeという名前の属性が宣言�
 @param element 要素名(文字列)
 @param attribute 属性名(文字列)
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -180,7 +180,7 @@ output に DTD を出力します。
 @param transitive 無視されます。指定しないでください。
 @param ie_hack 無視されます。指定しないでください。
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -202,7 +202,6 @@ output に DTD を出力します。
   # <!ELEMENT book (comment)>
   # ....
 
-#@since 1.8.2
 --- context -> { Symbol => object }
 DTD が属する文書の「コンテキスト」を返します。
 
@@ -212,7 +211,6 @@ DTD が属する文書の「コンテキスト」を返します。
 コンテキストの具体的な内容については [[m:REXML::Element#context]] を
 参照してください。
 
-#@end
 
 --- entity(name) -> String | nil
 name という実体参照名を持つ実体を文字列で返します。
@@ -224,7 +222,7 @@ name という名前を持つ実体が存在しない場合には nil を返し�
 
 @param name 実体参照名(文字列)
 
-==== 例
+=== 例
   doctype = REXML::Document.new(<<EOS).doctype
   <!DOCTYPE foo [
     <!ENTITY bar "barbarbarbar">
@@ -241,7 +239,6 @@ child を子ノード列の最後に追加します。
 
 @param child 追加するノード
 
-#@since 1.8.5
 --- public -> String | nil
 DTD の公開識別子を返します。
 
@@ -292,7 +289,6 @@ name という名前を持つ記法宣言が存在しない場合は nil を返�
 
 @param name 検索する記法名
 
-#@end
 
 == Constants
 
@@ -334,7 +330,7 @@ output にノードを出力します。
 @param indent インデントの大きさ。無視されます。
 
 = class REXML::ElementDecl < REXML::Declaration
-DTD の要素宣言(Element Decleration)を表すクラスです。
+DTD の要素宣言(Element Declaration)を表すクラスです。
 
 == Class Methods
 
@@ -354,7 +350,7 @@ DTD 内の宣言でパラメータ実体参照を使って宣言が
      "-//W3C//ENTITIES Symbols for XHTML//EN"
      "xhtml-symbol.ent">
   %HTMLsymbol;
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype
@@ -395,7 +391,7 @@ output へ self を文字列化して出力します。
 DTD の記法宣言を表すクラスです。
 
 
-==== 例
+=== 例
   require 'rexml/document'
   
   doctype = REXML::Document.new(<<EOS).doctype

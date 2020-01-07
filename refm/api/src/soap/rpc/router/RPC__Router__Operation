@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::RPC::Router::Operation < Object
 
@@ -36,4 +35,3 @@
 --- call(body,mapping_registry, literal_mapping_registry, opt)
 #@todo
 
-#@end

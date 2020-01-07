@@ -6,9 +6,11 @@
 
 == Instance Methods
 
-#@since 1.8.0
 --- all?               -> bool
 --- all? {|item| ... } -> bool
+#@since 2.5.0
+--- all?(pattern)      -> bool
+#@end
 
 すべての要素が真である場合に true を返します。
 偽である要素があれば、ただちに false を返します。
@@ -17,16 +19,24 @@
 が真である場合に true を返します。ブロックが偽を返した時点で、
 ただちに false を返します。
 
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
 例:
     # すべて正の数か？
     p [5,  6, 7].all? {|v| v > 0 }   # => true
     p [5, -1, 7].all? {|v| v > 0 }   # => false
     p [].all? {|v| v > 0 }           # => true
+#@since 2.5.0
+    p %w[ant bear cat].all?(/t/)     # => false
 #@end
 
-#@since 1.8.0
 --- any?               -> bool
 --- any? {|item| ... } -> bool
+#@since 2.5.0
+--- any?(pattern)      -> bool
+#@end
 
 すべての要素が偽である場合に false を返します。
 真である要素があれば、ただちに true を返します。
@@ -35,10 +45,19 @@
 が偽である場合に false を返します。ブロックが真を返した時点
 で、ただちに true を返します。
 
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
 例:
     p [1, 2, 3].any? {|v| v > 3 }   # => false
     p [1, 2, 3].any? {|v| v > 1 }   # => true
     p [].any? {|v| v > 0 }          # => false
+#@since 2.5.0
+    p %w[ant bear cat].any?(/d/)    # => false
+    p [nil, true, 99].any?(Integer) # => true
+    p [nil, true, 99].any?          # => true
+    p [].any?                       # => false
 #@end
 
 #@since 1.9.1
@@ -63,13 +82,11 @@ obj.collect {|item| item } を実行します。
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_with_index                      -> Enumerator
 #@else
 --- each_with_index                      -> Enumerable::Enumerator
 --- enum_with_index                      -> Enumerable::Enumerator
-#@end
 #@end
 --- each_with_index {|item, index| ... } -> self
 
@@ -91,20 +108,13 @@ self を返します。
         #    [10, 1]
         #    [15, 2]
 
-#@since 1.8.4
-#@until 1.8.6
-@see [[m:Enumerable::Enumerator#enum_with_index]]
-#@end
-#@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- find(ifnone = nil)   -> Enumerator
 --- detect(ifnone = nil) -> Enumerator
 #@else
 --- find(ifnone = nil)   -> Enumerable::Enumerator
 --- detect(ifnone = nil) -> Enumerable::Enumerator
-#@end
 #@end
 --- find(ifnone = nil) {|item| ... }   -> object
 --- detect(ifnone = nil) {|item| ... } -> object
@@ -119,7 +129,6 @@ self を返します。
 真になった値を返すような [[c:Enumerator]] を返します。
 #@end
 
-#@since 1.8.0
 @param ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
 例:
@@ -131,32 +140,33 @@ self を返します。
     ifnone = proc { raise ArgumentError, "item not found" }
     p [1, 2, 3, 4, 5].find(ifnone) {|i| i % 7 == 0 }
         # ArgumentError: item not found
-#@else
-@param ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
-    [1, 2, 3].find("raise") {|v| v > 4 }
-        # => -:1: unhandled exception
-#@end
-
-#@since 1.8.7
-#@since 1.9.1
 --- find_all  -> Enumerator
 --- select    -> Enumerator
-#@else
---- find_all  -> Enumerable::Enumerator
---- select    -> Enumerable::Enumerator
-#@end
+#@since 2.6.0
+--- filter    -> Enumerator
 #@end
 --- find_all {|item| ... } -> [object]
 --- select {|item| ... }   -> [object]
+#@since 2.6.0
+--- filter {|item| ... }   -> [object]
+#@end
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
-#@since 1.9.1
 ブロックを省略した場合は、各要素に対しブロックを評価し
 真になった値の配列を返すような [[c:Enumerator]] を返します。
-#@end
+
+例:
+  (1..10).find_all                        # => #<Enumerator: 1..10:find_all>
+  (1..10).find_all { |i| i % 3 == 0 }     # => [3, 6, 9]
+
+  [1,2,3,4,5].select                      # => #<Enumerator: [1, 2, 3, 4, 5]:select>
+  [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
+
+@see [[m:Enumerable#reject]]
+@see [[m:Enumerable#grep]]
 
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
@@ -178,6 +188,7 @@ pattern === item が成立する要素を全て含んだ配列を返します。
   Array.instance_methods.grep(/gr/) # => ["group_by", "grep"]
 #@end
 
+@see [[m:Enumerable#select]]
 #@since 2.3.0
 @see [[m:Enumerable#grep_v]]
 
@@ -196,17 +207,15 @@ pattern === item が成立する要素を全て含んだ配列を返します。
   res                   # => [2, 12, 14, 16, 18, 20]
 
 @see [[m:Enumerable#grep]]
+@see [[m:Enumerable#reject]]
 #@end
 
-#@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> object
-#@since 1.8.7
 --- inject(sym)                                     -> object
 --- inject(init, sym)                               -> object
 --- reduce(init = self.first) {|result, item| ... } -> object
 --- reduce(sym)                                     -> object
 --- reduce(init, sym)                               -> object
-#@end
 
 リストのたたみこみ演算を行います。
 
@@ -223,10 +232,8 @@ self の次の要素を引数に順次ブロックを実行します。
 要素がなければブロックを実行せずに nil を返します。
 
 @param init  最初の result の値です。任意のオブジェクトが渡せます。
-#@since 1.8.7
 @param sym   ブロックの代わりに使われるメソッド名を表す [[c:Symbol]] オブジェクトを指定します。
              実行結果に対して sym という名前のメソッドが呼ばれます。             
-#@end
 例:
 
   # 合計を計算する。
@@ -241,12 +248,9 @@ self の次の要素を引数に順次ブロックを実行します。
   [1, 2, 3, 4, 5].each {|v| result += v }
   p result   # => 15
 
-#@since 1.8.7
   p [1, 2, 3, 4, 5].inject(:+)                    #=> 15
   p ["b", "c", "d"].inject("abbccddde", :squeeze) #=> "abcde"
-#@end
 
-#@end
 
 --- member?(val)  -> bool
 --- include?(val) -> bool
@@ -254,6 +258,12 @@ self の次の要素を引数に順次ブロックを実行します。
 val と == の関係にある要素を含むとき真を返します。
 
 @param val   任意のオブジェクト
+
+例:
+  IO.constants.include? :SEEK_SET          #=> true
+  IO.constants.include? :SEEK_NO_FURTHER   #=> false
+  IO.constants.member? :SEEK_SET           #=> true
+  IO.constants.member? :SEEK_NO_FURTHER    #=> false
 
 --- max    -> object | nil
 #@since 2.2.0
@@ -275,6 +285,13 @@ val と == の関係にある要素を含むとき真を返します。
 
 #@since 2.2.0
 @param n 取得する要素数。
+#@end
+
+例:
+  a = %w(albatross dog horse)
+  a.max                        # => "horse"
+#@since 2.2.0
+  a.max(2)                     # => ["horse", "dog"]
 #@end
 
 --- max {|a, b| ... }    -> object | nil
@@ -301,7 +318,36 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
-#@since 1.8.7
+例:
+  class Person
+    attr_reader :name, :age
+
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  people = [
+    Person.new("sato", 55),
+    Person.new("sato", 33),
+    Person.new("sato", 11),
+    Person.new("suzuki", 55),
+    Person.new("suzuki", 33),
+    Person.new("suzuki", 11),
+    Person.new("tanaka", 55),
+    Person.new("tanaka", 33),
+    Person.new("tanaka", 11)
+  ]
+
+  # 年齢が最大、名前が最小
+  people.max { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => #<Person:0x007fc54b0240a0 @name="sato", @age=55>
+#@since 2.2.0
+  people.max(2) { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => [#<Person:0x007fc54b0240a0 @name="sato", @age=55>, #<Person:0x007fc54c033ea0 @name="suzuki", @age=55>]
+#@end
+
 #@since 1.9.1
 --- max_by                  -> Enumerator
 #@else
@@ -340,9 +386,62 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+例:
+  a = %w(albatross dog horse)
+  a.max_by                    # => #<Enumerator: ["albatross", "dog", "horse"]:max_by>
+  a.max_by { |x| x.length }   # => "albatross"
+
+#@since 2.2.0
+例:
+  a = %w[albatross dog horse]
+  a.max_by(2)                 # => #<Enumerator: ["albatross", "dog", "horse"]:max_by(2)>
+  a.max_by(2) {|x| x.length } # => ["albatross", "horse"]
+
+例: enum.max_by（n）は、重み付きランダムサンプリングを実装するために使用できます。次の実装例は、Enumerable#wsampleを使用します。
+  module Enumerable
+    # weighted random sampling.
+    #
+    # Pavlos S. Efraimidis, Paul G. Spirakis
+    # Weighted random sampling with a reservoir
+    # Information Processing Letters
+    # Volume 97, Issue 5 (16 March 2006)
+    def wsample(n)
+      self.max_by(n) {|v| rand ** (1.0/yield(v)) }
+    end
+  end
+  e = (-20..20).to_a*10000
+  a = e.wsample(20000) {|x|
+    Math.exp(-(x/5.0)**2) # normal distribution
+  }
+  # a is 20000 samples from e.
+  p a.length #=> 20000
+  h = a.group_by {|x| x }
+  -10.upto(10) {|x| puts "*" * (h[x].length/30.0).to_i if h[x] }
+  #=> *
+  #   ***
+  #   ******
+  #   ***********
+  #   ******************
+  #   *****************************
+  #   *****************************************
+  #   ****************************************************
+  #   ***************************************************************
+  #   ********************************************************************
+  #   ***********************************************************************
+  #   ***********************************************************************
+  #   **************************************************************
+  #   ****************************************************
+  #   ***************************************
+  #   ***************************
+  #   ******************
+  #   ***********
+  #   *******
+  #   ***
+  #   *
+#@end
+
 @see [[m:Enumerable#sort_by]]
 
-#@end
 
 --- min    -> object | nil
 #@since 2.2.0
@@ -364,6 +463,13 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 #@since 2.2.0
 @param n 取得する要素数。
+#@end
+
+例:
+  a = %w(albatross dog horse)
+  a.min                                # => "albatross"
+#@since 2.2.0
+  a.min(2)                             # => ["albatross", "dog"]
 #@end
 
 --- min {|a, b| ... }    -> object | nil
@@ -388,9 +494,40 @@ a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
+
+例:
+  class Person
+    attr_reader :name, :age
+
+    def initialize(name, age)
+      @name = name
+      @age = age
+    end
+  end
+
+  people = [
+    Person.new("sato", 55),
+    Person.new("sato", 33),
+    Person.new("sato", 11),
+    Person.new("suzuki", 55),
+    Person.new("suzuki", 33),
+    Person.new("suzuki", 11),
+    Person.new("tanaka", 55),
+    Person.new("tanaka", 33),
+    Person.new("tanaka", 11)
+  ]
+
+  # 年齢が最小、名前が最大
+  people.min { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => #<Person:0x007fd6f0824190 @name="tanaka", @age=11>
+
+#@since 2.2.0
+  people.min(2) { |x, y| (x.age <=> y.age).nonzero? || y.name <=> x.name }
+  # => [#<Person:0x007fb5899ef4a8 @name="tanaka", @age=11>, #<Person:0x007fb5899ef728 @name="suzuki", @age=11>]
+#@end
+
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- min_by                  -> Enumerator
 #@else
@@ -430,16 +567,22 @@ a < b のとき負の整数を、期待しています。
 @param n 取得する要素数。
 #@end
 
-@see [[m:Enumerable#sort_by]]
-
+例:
+  a = %w(albatross dog horse)
+  a.min_by                    # => #<Enumerator: ["albatross", "dog", "horse"]:min_by>
+  a.min_by { |x| x.length }   # => "dog"
+#@since 2.2.0
+  a.min_by(2)                 # => #<Enumerator: ["albatross", "dog", "horse"]:min_by(2)>
+  a.min_by(2) {|x| x.length } # => ["dog", "horse"]
 #@end
 
-#@since 1.8.7
+@see [[m:Enumerable#sort_by]]
+
+
 #@since 1.9.1
 --- partition               -> Enumerator
 #@else
 --- partition               -> Enumerable::Enumerator
-#@end
 #@end
 --- partition {|item| ... } -> [[object], [object]]
 
@@ -459,12 +602,10 @@ a < b のとき負の整数を、期待しています。
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
-#@since 1.8.7
 #@since 1.9.1
 --- reject               -> Enumerator
 #@else
 --- reject               -> Enumerable::Enumerator
-#@end
 #@end
 --- reject {|item| ... } -> [object]
 
@@ -483,6 +624,9 @@ a < b のとき負の整数を、期待しています。
   [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
 
 @see [[m:Enumerable#select]]
+#@since 2.3.0
+@see [[m:Enumerable#grep_v]]
+#@end
 
 --- sort               -> [object]
 --- sort {|a, b| ... } -> [object]
@@ -505,15 +649,16 @@ Enumerable#sort は安定ではありません (unstable sort)。
 ※ 比較結果が同じ要素は元の順序通りに並ぶソートを
 「安定なソート (stable sort)」と言います。
 
+例:
+  %w(rhea kea flea).sort           # => ["flea", "kea", "rhea"]
+  (1..10).sort { |a, b| b <=> a }  # => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
 @see [[m:Enumerable#sort_by]]
 
-#@since 1.8.0
-#@since 1.8.7
 #@since 1.9.1
 --- sort_by               -> Enumerator
 #@else
 --- sort_by               -> Enumerable::Enumerator
-#@end
 #@end
 --- sort_by {|item| ... } -> [object]
 
@@ -578,7 +723,6 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 #@end
 
 @see [[m:Enumerable#sort]]
-#@end
 
 --- to_a(*args)    -> [object]
 --- entries(*args) -> [object]
@@ -587,19 +731,38 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 
 @param args each の呼び出し時に引数として渡されます。
 
+例:
+  (1..7).to_a                       #=> [1, 2, 3, 4, 5, 6, 7]
+  { 'a'=>1, 'b'=>2, 'c'=>3 }.to_a   #=> [["a", 1], ["b", 2], ["c", 3]]
+
+  require 'prime'
+  Prime.entries 10                  #=> [2, 3, 5, 7]
+
 #@since 2.1.0
 --- to_h(*args) -> Hash
+#@since 2.6.0
+--- to_h(*args) { ... } -> Hash
+#@end
 
 self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
 返します。
 
 @param args each の呼び出し時に引数として渡されます。
 
-   %i[hello world].each_with_index.to_h
-     # => {:hello => 0, :world => 1}
+#@samplecode 例
+%i[hello world].each_with_index.to_h # => {:hello => 0, :world => 1}
 #@end
 
-#@since 1.8.0
+#@since 2.6.0
+ブロックを指定すると各要素でブロックを呼び出し、
+その結果をペアとして使います。
+
+#@samplecode ブロック付きの例
+(1..5).to_h {|x| [x, x ** 2]} # => {1=>1, 2=>4, 3=>9, 4=>16, 5=>25}
+#@end
+#@end
+#@end
+
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
 
@@ -613,11 +776,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
 @param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
              to_ary メソッドが無い場合は each を試します。
 #@else
-#@since 1.8.2
 @param lists 配列を指定します。配列でない場合は to_a メソッドにより配列に変換します。
-#@else
-@param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
-#@end
 #@end
 
 例:
@@ -639,9 +798,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
         #    [2, 5, 8]
         #    [3, 6, 9]
         #    nil
-#@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_slice(n)               -> Enumerator
 #@else
@@ -720,9 +877,7 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 
 @see [[m:Enumerable#each_slice]]
 
-#@end
 
-#@since 1.8.7
 
 --- count                   -> Integer
 --- count(item)             -> Integer
@@ -932,7 +1087,9 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 
 --- none?               -> bool
 --- none?{|obj| ... }   -> bool
-
+#@since 2.5.0
+--- none?(pattern)      -> bool
+#@end
 ブロックを指定しない場合は、 Enumerable オブジェクトのすべての
 要素が偽であれば真を返します。そうでなければ偽を返します。
 
@@ -940,14 +1097,25 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 ブロックで評価した結果が、すべて偽であれば真を返します。
 そうでなければ偽を返します。
 
-   %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
-   %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
-   [].none?                                          #=> true
-   [nil].none?                                       #=> true
-   [nil,false].none?                                 #=> true
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
+   %w{ant bear cat}.none? {|word| word.length == 5}  # => true
+   %w{ant bear cat}.none? {|word| word.length >= 4}  # => false
+#@since 2.5.0
+   %w{ant bear cat}.none?(/d/)                       # => true
+#@end
+   [].none?                                          # => true
+   [nil].none?                                       # => true
+   [nil,false].none?                                 # => true
+   [nil, false, true].none?                          # => false
 
 --- one?                -> bool
 --- one?{|obj| ... }    -> bool
+#@since 2.5.0
+--- one?(pattern)       -> bool
+#@end
 
 ブロックを指定しない場合は、 Enumerable オブジェクトの要素のうち
 ちょうど一つだけが真であれば、真を返します。
@@ -957,10 +1125,21 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 ブロックで評価した結果、一つの要素だけが真であれば真を返します。
 そうでなければ偽を返します。
 
-   %w{ant bear cat}.one? {|word| word.length == 4}   #=> true
-   %w{ant bear cat}.one? {|word| word.length > 4}   #=> false
-   [ nil, true, 99 ].one?                            #=> false
-   [ nil, true, false ].one?                         #=> true
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
+   %w{ant bear cat}.one? {|word| word.length == 4}   # => true
+   %w{ant bear cat}.one? {|word| word.length > 4}    # => false
+#@since 2.5.0
+   %w{ant bear cat}.one?(/t/)                        # => false
+#@end
+   [ nil, true, 99 ].one?                            # => false
+   [ nil, true, false ].one?                         # => true
+#@since 2.5.0
+   [ nil, true, 99 ].one?(Integer)                   # => true
+#@end
+   [].one?                                           # => false
 
 --- take(n)               -> Array
 
@@ -1005,7 +1184,13 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 [[c:Enumerator]] を返します。
 #@end
 
-#@end
+例:
+  (1..3).reverse_each # => #<Enumerator: 1..3:reverse_each>
+  (1..3).reverse_each { |v| p v }
+  # => 3
+  #    2
+  #    1
+
 #@since 1.9.1
 --- each_with_object(obj) -> Enumerator
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object
@@ -1039,7 +1224,9 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
   [[1,2], [3,4]].flat_map{|i| i.map{|j| j*2}} # => [2,4,6,8]
 
 --- chunk {|elt| ... } -> Enumerator
+#@until 2.3.0
 --- chunk(initial_state) {|elt, state| ... } -> Enumerator
+#@end
 
 要素を前から順にブロックで評価し、その結果によって
 要素をチャンクに分けた(グループ化した)要素を持つ
@@ -1054,7 +1241,9 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 そのため、eachだと以下のようになります。
 
   enum.chunk {|elt| key }.each {|key, ary| ... }
+#@until 2.3.0
   enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
+#@end
 
 例として、整数列を連続する奇数/偶数に分ける例を見てみます。
 「n.even?」の値が切り替わるところで区切られているのがわかるでしょう。
@@ -1137,6 +1326,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
     }
   }
 
+#@until 2.3.0
 チャンク化に状態遷移が必要な場合は、
 オプション引数 initial_state に状態を保持するオブジェクトを渡します。
 この場合、ブロックの第2引数にはこのオブジェクトが dup で複製
@@ -1144,6 +1334,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
 #@# 例を追加したい
 
 @param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
+#@end
 @raise RuntimeError 予約されている値を用いた場合に発生します
 
 #@since 2.3.0
@@ -1216,7 +1407,9 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 --- slice_before(pattern) -> Enumerator
 --- slice_before {|elt| bool } -> Enumerator
+#@until 2.3.0
 --- slice_before(initial_state) {|elt, state| bool } -> Enumerator
+#@end
 
 パターンがマッチした要素、もしくはブロックが真を返した要素から
 次にマッチする手前までを
@@ -1281,6 +1474,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
   }.join(",")
   #=> "0,2-4,6,7,9"
 
+#@until 2.3.0
 しかし、ローカル変数を使うのが不適切な場合もあります。
 その場合、引数 initial_state に状態を保持するオブジェクトを
 渡すと、そのオブジェクトを [[m:Object#dup]] したオブジェクトを
@@ -1347,6 +1541,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
   }
 
 @param initial_state 状態を保持するオブジェクト。この引数は deprecated です。
+#@end
 #@end
 
 #@since 2.2.0
@@ -1497,4 +1692,53 @@ nil、 :_separator はある要素を無視したい場合に用います。
   p pythagorean_triples.take_while { |*, z| z < 100 }.force
 
 @see [[c:Enumerator::Lazy]]
+#@end
+#@since 2.4.0
+--- sum(init=0)                    -> object
+--- sum(init=0) {|e| expr }        -> object
+
+要素の合計を返します。
+
+ブロックが与えられた場合、加算する前に各要素にブロックが適用されます。
+
+selfが空の場合、initを返します。
+
+例:
+  { 1 => 10, 2 => 20 }.sum {|k, v| k * v }  # => 50
+  (1..10).sum                               # => 55
+  (1..10).sum {|v| v * 2 }                  # => 110
+  [Object.new].each.sum                     # => TypeError
+
+init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。
+
+例:
+  { 1 => 10, 2 => 20 }.sum([])                   #=> [1, 10, 2, 20]
+  "a\nb\nc".each_line.lazy.map(&:chomp).sum("")  #=> "abc"
+  [[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
+
+"+" メソッドが再定義されている場合、Enumerable#sum は再定義を無視することがあります(例えばInteger#+)。
+
+@see [[m:Array#sum]]
+--- uniq                -> Array
+--- uniq { |item| ... } -> Array
+
+self から重複した値を取り除いた配列を返します。
+
+ブロックが与えられた場合、ブロックが返した値が重複した要素を取り除いた
+配列を返します。
+
+#@samplecode 例
+olympics = {
+  1896 => 'Athens',
+  1900 => 'Paris',
+  1904 => 'Chicago',
+  1906 => 'Athens',
+  1908 => 'Rome',
+}
+olympics.uniq{|k,v| v} # => [[1896, "Athens"], [1900, "Paris"], [1904, "Chicago"], [1908, "Rome"]]
+
+(1..100).uniq{|x| (x**2) % 10 } # => [1, 2, 3, 4, 5, 10]
+#@end
+
+@see [[m:Array#uniq]]
 #@end

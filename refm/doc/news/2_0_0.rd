@@ -247,7 +247,7 @@
   * [[lib:net/http]]
     * 新機能
       * Proxies are now automatically detected from the http_proxy environment
-        variable.  See Net::HTTP::new for details.
+        variable.  See [[m:Net::HTTP.new]] for details.
       * gzip and deflate compression are now requested for all requests by
         default.  See Net::HTTP for details.
       * SSL sessions are now reused across connections for a single instance.
@@ -343,7 +343,7 @@
   $ ri rspec:README
 //}
     * Markdown をサポートしました。[[c:RDoc::Markdown]] を見てください。
-    * [[url:https://github.com/rdoc/rdoc/blob/master/History.rdoc]]
+    * [[url:https://github.com/ruby/rdoc/blob/master/History.rdoc]]
 
   * [[lib:resolv]]
     * 追加: [[m:Resolv::DNS#timeouts=]]
@@ -381,9 +381,7 @@
 
   * [[lib:tmpdir]]
     * 非互換: [[m:Dir.mktmpdir]] は [[m:FileUtils.#remove_entry_secure]] ではなく [[m:FileUtils.#remove_entry]] を使うようになりました。
-      This means that applications should not
-      change the permission of the created temporary directory to make
-      accessible from other users.
+      これはアプリケーションが作成された一時ディレクトリを全ユーザから書き込み可能に変更すべきではないことを意味します。
 
   * [[lib:yaml]]
     * Syck は削除しました。インストールされている libyaml に依存するようになりました。

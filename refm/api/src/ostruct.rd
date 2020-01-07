@@ -60,7 +60,6 @@ OpenStruct オブジェクトを生成します。
 
 == Instance Methods
 
-#@since 1.8.1
 --- ==(other) -> bool
 
 自身と比較対象のオブジェクトが等しい場合に真を返します。
@@ -68,7 +67,6 @@ OpenStruct オブジェクトを生成します。
 
 @param other 比較対象のオブジェクトを指定します。
 
-#@end
 
 #@since 2.0.0
 --- eql?(other) -> bool
@@ -85,7 +83,6 @@ true を返します。
 #@end
 
 #@until 2.0.0
-#@since 1.8.2
 --- new_ostruct_member(name) -> Symbol
 
 与えられた名前のアクセサメソッドを自身に定義します。
@@ -93,12 +90,9 @@ true を返します。
 @param name 文字列かシンボルで定義するアクセサの名前を指定します。
 
 #@end
-#@end
 
 --- inspect -> String
-#@since 1.8.3
 --- to_s -> String
-#@end
 
 オブジェクトを人間が読める形式に変換した文字列を返します。
 
@@ -115,15 +109,27 @@ nameで指定された要素を削除します。
 
 #@since 2.0.0
 --- to_h -> { Symbol => object }
+#@since 2.6.0
+--- to_h {|name, value| block } -> Hash
+#@end
 
 self を各要素の名前をキー([[c:Symbol]])、要素が値のハッシュに変換して返
 します。
 
-例:
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@end
 
-  require 'ostruct'
-  data = OpenStruct.new("country" => "Australia", :population => 20_000_000)
-  data.to_h   # => {:country => "Australia", :population => 20000000 }
+#@samplecode 例
+require 'ostruct'
+data = OpenStruct.new("country" => "Australia", :capital => "Canberra")
+data.to_h   # => {:country => "Australia", :capital => "Canberra" }
+#@since 2.6.0
+data.to_h {|name, value| [name.to_s, value.upcase] }
+            # => {"country" => "AUSTRALIA", "capital" => "CANBERRA" }
+#@end
+#@end
 
 --- each_pair                  -> Enumerator
 --- each_pair { |key, value| } -> self
@@ -194,7 +200,6 @@ self のハッシュ値を返します。
 
 == Protected Instance Methods
 
-#@since 1.8.7
 #@if (version != "1.9.1")
 --- modifiable -> Hash
 
@@ -204,7 +209,6 @@ self のハッシュ値を返します。
 
 @raise TypeError 自身が [[m:Object#freeze]] されている場合に発生します。
 
-#@end
 #@end
 
 #@since 2.0.0
@@ -217,8 +221,6 @@ self のハッシュ値を返します。
 
 == Constants
 
-#@since 1.8.3
 --- InspectKey -> :__inspect_key__
 
 内部的に使用する定数です。
-#@end

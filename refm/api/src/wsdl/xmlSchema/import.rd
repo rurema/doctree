@@ -11,11 +11,9 @@ require wsdl/xmlSchema/importer
 
 == Instance Methods
 
-#@since 1.8.3
 --- content
 #@todo
 
-#@end
 
 --- namespace
 #@todo

@@ -46,11 +46,9 @@ require wsdl/info
 --- input_info
 #@todo
 
-#@since 1.8.3
 --- inputname
 #@todo
 
-#@end
 
 --- inputparts
 #@todo

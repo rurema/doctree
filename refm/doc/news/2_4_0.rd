@@ -99,7 +99,9 @@
       for UTR #51 Unicode Emoji, Version 4.0 emoji zwj sequences.
     * [[m:Regexp#match?]] を追加 [[feature:8110]]
       true/false を返し、バックリファレンスを生成しません。
-    * Onigmo 6.0.0 に更新
+    * Onigmo 6.0.0 に更新 (Ruby 2.4.0)
+    * Onigmo 6.1.1 に更新 (Ruby 2.4.1)
+      * 非包含オペレータ(absence operator)をサポートしました [[url:https://github.com/k-takata/Onigmo/issues/82]]
 
   * [[c:Regexp]]/[[c:String]]: Unicodeのバージョンを8.0.0から9.0.0に更新しました [[feature:12513]]
 
@@ -137,10 +139,10 @@
     * [[m:TracePoint#callee_id]] を追加 [[feature:12747]]
 
   * [[c:Warning]]
-  * Warningとう名前のモジュールを導入しました。
-    デフォルトでは [[m:Warning.#warn]] という特異メソッドだけ定義されているモジュールです。
-    サードパーティのライブラリが警告を扱う方法を制御できるようになります。
-    [[feature:12299]]
+    * Warningという名前のモジュールを導入しました。
+      デフォルトでは [[m:Warning.#warn]] という特異メソッドだけ定義されているモジュールです。
+      サードパーティのライブラリが警告を扱う方法を制御できるようになります。
+      [[feature:12299]]
 
 === 標準添付ライブラリの更新 (優れたもののみ)
 
@@ -168,7 +170,7 @@
   * [[lib:net/ftp]]
     * TLSをサポート [[rfc:4217]]
     * [[m:Net::FTP.new]] の引数をキーワード引数に対応しました
-    * Add a new optional argument pathname to [[m:Net::FTP#status]] に省略可能なキーワード引数 pathname を追加
+    * [[m:Net::FTP#status]] に省略可能なキーワード引数 pathname を追加
       solebox による貢献。[[url:https://github.com/ruby/ruby/pull/1478]] [[feature:12965]]
 
   * [[lib:openssl]]

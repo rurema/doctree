@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class Tk::TclX::XPG3_MsgCat
 == Class Methods
@@ -13,4 +12,3 @@
 --- get(setnum, msgnum, defaultstr)
 #@todo
 
-#@end

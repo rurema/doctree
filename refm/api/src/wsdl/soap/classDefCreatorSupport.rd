@@ -17,11 +17,9 @@ include XSD::CodeGen::GenSupport
 --- dq(ele)
 #@todo
 
-#@since 1.8.3
 --- dqname(qname)
 #@todo
 
-#@end
 
 --- dump_method_signature(operation)
 #@todo

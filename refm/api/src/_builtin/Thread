@@ -19,6 +19,49 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@samplecode 例
+Thread.abort_on_exception # => false
+Thread.abort_on_exception = true
+Thread.abort_on_exception # => true
+#@end
+
+#@since 2.4.0
+--- report_on_exception             -> bool
+--- report_on_exception=(newstate)
+
+真の時は、いずれかのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
+
+#@since 2.5.0
+デフォルトは true です。
+#@else
+デフォルトは false です。
+#@end
+
+  Thread.new { 1.times { raise } }
+
+は $stderr に以下のように出力します:
+
+  #<Thread:...> terminated with exception (report_on_exception is true):
+  Traceback (most recent call last):
+          2: from -e:1:in `block in <main>'
+          1: from -e:1:in `times'
+
+これによってスレッドのエラーを早期に捕捉できるようになります。
+いくつかのケースでは、この出力を望まないかもしれません。
+出力を抑制するには複数の方法があります:
+
+ * 例外が意図したものではない場合、原因を修正して例外が発生しないようにする方法が最善です。
+ * 例外が意図したものの場合、例外が発生する場所により近い場所で rescue して、
+   その例外でスレッドが終了しないようにするのがより良い方法です。
+ * [[m:Thread#join]] や [[m:Thread#value]] でそのスレッドの終了を待つことが保証できるなら、
+   スレッド開始時に Thread.current.report_on_exception = false でレポートを無効化しても
+   安全です。しかし、この場合、例外をハンドルするのが遅れたり、親スレッドがブロックされていて
+   終了を待つことができなかったりするかもしれません。
+
+スレッドごとに設定する方法は [[m:Thread#report_on_exception=]] を参照してください。
+
+@param newstate スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
+#@end
 #@until 1.9.1
 --- critical             -> bool
 --- critical=(newstate)
@@ -50,6 +93,8 @@ Thread を使うことで並行プログラミングが可能になります。
 
 カレントスレッドに対して [[m:Thread#exit]] を呼びます。
 
+#@#noexample Thread#exitを参照
+
 --- kill(thread)    -> Thread
 
 指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。終了したスレッドを返します。
@@ -63,13 +108,8 @@ Thread を使うことで並行プログラミングが可能になります。
 
 --- list    -> [Thread]
 
-#@since 1.8.0
 全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
 も要素に含まれます。
-#@else
-生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
-の配列を返します。
-#@end
 
   Thread.new do
     sleep 
@@ -170,13 +210,28 @@ new メソッドと違い initialize メソッドを呼びません。
 他のスレッドから [[m:Thread#run]] メソッドで再起動されるまで、カレ
 ントスレッドの実行を停止します。
 
+#@samplecode 例
+a = Thread.new { print "a"; Thread.stop; print "c" }
+sleep 0.1 while a.status!='sleep'
+print "b"
+a.run
+a.join
+# => "abc"
+#@end
+
+@see [[m:Thread#run]], [[m:Thread#wakeup]]
+
 #@since 1.9.1
 --- exclusive { ... }  -> object
 #@# 1.8 以前は ../thread.rb にあります。
 VM グローバルの Mutex をロックし、ブロックを実行します。
 
 このクラスメソッドの挙動は 1.8 以前とは違います。
+#@since 2.6.0
+Thread.exclusive は VM グローバルの Mutex の
+#@else
 Thread.exclusive は VM グローバルの [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] の
+#@end
 synchronize を呼び出しているだけで、Thread.exclusive していないスレッドは動きます。
 #@since 2.3.0
 [[c:Thread::Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
@@ -188,15 +243,34 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 スレッドのデバッグレベルを返します。
 
+スレッドのデバッグレベルが 0 のときはなにもしません。
+それ以外の場合は、スレッドのデバッグログを標準出力に出力します。
+初期値は 0 です。
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
+
+#@samplecode 例
+Thread.DEBUG # => 0
+#@end
+
+@see [[m:Thread.DEBUG=]]
 
 --- DEBUG=(val)
 
 スレッドのデバッグレベルを val に設定します。
 
+val が 真 のときは Integer に変換してから設定します。
+偽 のときは 0 を設定します。
 使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
 あります。
+
+#@samplecode 例
+Thread.DEBUG # => 0
+Thread.DEBUG = 1
+Thread.DEBUG # => 1
+#@end
+
+@see [[m:Thread.DEBUG]]
 
 #@end
 
@@ -225,7 +299,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
     }
   end
 
-==== 使い方
+=== 使い方
 
   th = Thread.new{
     Thread.handle_interrupt(RuntimeError => :on_blocking){
@@ -296,13 +370,13 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 
 @raise ArgumentError ブロックを指定しなかった場合に発生します。
 
-==== 注意
+=== 注意
 
 非同期割り込みの利用は難しいため、スレッド間での通信を実現する場合はま
 ずはキューのような他の方法を検討してください。それでも非同期割り込みを
 利用する場合は本メソッドをよく理解してから利用してください。
 
-==== 使い方
+=== 使い方
 
 例:[[c:Thread#raise]] 発生のタイミングを制御する例
 
@@ -325,7 +399,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 [[c:RuntimeError]] を無視(延期)している間はリソースの割り当てや ensure
 節でリソースの解放を安全に行う事ができます。
 
-===== TimeoutError 対策
+==== TimeoutError 対策
 
 例:[[c:TimeoutError]] 発生のタイミングを制御する例
 
@@ -344,7 +418,7 @@ synchronize を呼び出しているだけで、Thread.exclusive していない
 クに備える事ができます。[[m:Timeout.#timeout]] はスレッドを使って実装さ
 れているため、Thread.handle_interrupt による制御が有効です。
 
-===== Stack control settings
+==== Stack control settings
 
 It's possible to stack multiple levels of ::handle_interrupt blocks in order
 to control more than one ExceptionClass and TimingSymbol at a time.
@@ -355,7 +429,7 @@ to control more than one ExceptionClass and TimingSymbol at a time.
     }
   }
 
-===== 例外クラスの継承関係
+==== 例外クラスの継承関係
 
 本メソッドでは引数 hash のキーに指定した例外クラスの全てのサブクラスが
 処理の対象になります。
@@ -379,6 +453,63 @@ name に対応するスレッド固有データがなければ nil を返し
 
 @param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。
 
+#@samplecode 例
+[
+  Thread.new { Thread.current["name"] = "A" },
+  Thread.new { Thread.current[:name]  = "B" },
+  Thread.new { Thread.current["name"] = "C" }
+].each do |th|
+  th.join
+  puts "#{th.inspect}: #{th[:name]}"
+end
+
+# => #<Thread:0x00000002a54220 dead>: A
+# => #<Thread:0x00000002a541a8 dead>: B
+# => #<Thread:0x00000002a54130 dead>: C
+#@end
+
+[[m:Thread#[] ]] と [[m:Thread#[]=]] を用いたスレッド固有の変数は
+Fiber を切り替えると異なる変数を返す事に注意してください。
+
+#@samplecode
+def meth(newvalue)
+  begin
+    oldvalue = Thread.current[:name]
+    Thread.current[:name] = newvalue
+    yield
+  ensure
+    Thread.current[:name] = oldvalue
+  end
+end
+#@end
+
+この関数に与えるブロックがFiberを切り替える場合は動的スコープとしては
+正しく動作しません。
+
+#@samplecode
+f = Fiber.new {
+  meth(1) {
+    Fiber.yield
+  }
+}
+meth(2) {
+  f.resume
+}
+f.resume
+p Thread.current[:name]
+# => nil if fiber-local
+# => 2 if thread-local (The value 2 is leaked to outside of meth method.)
+#@end
+
+Fiber を切り替えても同じ変数を返したい場合は
+[[m:Thread#thread_variable_get]] と [[m:Thread#thread_variable_set]]
+を使用してください。
+
+#@since 2.5.0
+@see [[m:Thread#fetch]], [[m:Thread#[]=]]
+#@else
+[[m:Thread#[]=]]
+#@end
 --- []=(name,val)
 
 val を name に対応するスレッド固有のデータとして格納します。
@@ -386,6 +517,35 @@ val を name に対応するスレッド固有のデータとして格納しま�
 @param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。文字列を指定した場合は [[m:String#to_sym]] によりシンボルに変換されます。
 
 @param val スレッド固有データを指定します。nil を指定するとそのスレッド固有データは削除されます。
+
+#@#noexample Thread#[]を参照
+
+@see [[m:Thread#[] ]]
+
+#@since 2.5.0
+--- fetch(name, default = nil) {|name| ... } -> object
+
+name に関連づけられたスレッドに固有のデータを返します。
+name に対応するスレッド固有データがない時には、引数 default が
+与えられていればその値を、ブロックが与えられていれば
+そのブロックを評価した値を返します。
+
+@param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。
+@param default name に対応するスレッド固有データがない時の返り値を指定します。
+@raise KeyError 引数defaultもブロックも与えられてない時、
+                name に対応するスレッド固有データがないと発生します。
+
+#@samplecode 例
+th = Thread.new { Thread.current[:name] = 'A' }
+th.join
+th.fetch(:name)   # => "A"
+th.fetch(:fetch, 'B')   # => "B"
+th.fetch('name')  {|name| "Thread" + name}  # => "A"
+th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
+#@end
+
+@see [[m:Thread#[] ]]
+#@end
 
 --- abort_on_exception               -> bool
 --- abort_on_exception=(newstate)
@@ -399,11 +559,53 @@ val を name に対応するスレッド固有のデータとして格納しま�
 
 @param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@samplecode 例
+thread = Thread.new { sleep 1 }
+thread.abort_on_exception # => false
+thread.abort_on_exception = true
+thread.abort_on_exception # => true
+#@end
+
+#@since 2.4.0
+--- report_on_exception               -> bool
+--- report_on_exception=(newstate)
+
+真の場合、そのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
+
+デフォルトはスレッド作成時の [[m:Thread.report_on_exception]] です。
+
+@param newstate スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
+
+#@samplecode 例
+a = Thread.new{ Thread.stop; raise }
+a.report_on_exception = true
+a.report_on_exception   # => true
+a.run
+# => #<Thread:0x00007fc3f48c7908@(irb):1 run> terminated with exception (report_on_exception is true):
+#    Traceback (most recent call last):
+#    (irb):1:in `block in irb_binding': unhandled exception
+#    #<Thread:0x00007fc3f48c7908@(irb):1 dead>
+b = Thread.new{ Thread.stop; raise }
+b.report_on_exception = false
+b.run   # => #<Thread:0x00007fc3f48aefc0@(irb):4 dead>
+#@end
+
+@see [[m:Thread.report_on_exception]]
+#@end
+
 --- alive?     -> bool
 
 スレッドが「生きている」時、true を返します。
 
+例:
+  thr = Thread.new { }
+  thr.join                # => #<Thread:0x401b3fb0 dead>
+  Thread.current.alive?   # => true
+  thr.alive?              # => false
+
 [[m:Thread#status]] が真を返すなら、このメソッドも真です。
+
+@see [[m:Thread#status]], [[m:Thread#stop?]]
 
 --- exit         -> self
 --- kill         -> self
@@ -483,19 +685,15 @@ ensure 節を実行せずにスレッドの実行を終了させます。
     # => true
 
 --- join           -> self
-#@since 1.8.0
 --- join(limit)    -> self | nil
-#@end
 
 スレッド self の実行が終了するまで、カレントスレッドを停止し
 ます。self が例外により終了していれば、その例外がカレントス
 レッドに対して発生します。
 
-#@since 1.8.0
 limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
 
 @param limit タイムアウトする時間を整数か小数で指定します。単位は秒です。
-#@end
 
 @raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
 
@@ -514,6 +712,13 @@ name に対応したスレッドに固有のデータが定義されていれば
 true を返します。
 
 @param name 文字列か [[c:Symbol]] で指定します。
+
+#@samplecode 例
+me = Thread.current
+me[:oliver] = "a"
+me.key?(:oliver)    # => true
+me.key?(:stanley)   # => false
+#@end
 
 --- keys    -> [Symbol]
 
@@ -538,6 +743,25 @@ priority を引き継ぎます。
 @param val スレッドの優先度を指定します。プラットフォームに依存します。
 #@else
 @param val スレッドの優先度を指定します。負の値も指定できます。
+#@end
+
+#@samplecode 例
+Thread.current.priority   # => 0
+
+count1 = count2 = 0
+a = Thread.new do
+      loop { count1 += 1 }
+    end
+a.priority = -1
+
+b = Thread.new do
+      loop { count2 += 1 }
+    end
+b.priority = -2
+count1 = count2 = 0 # reset
+sleep 1   # => 1
+count1    # => 13809431
+count2    # => 11571921
 #@end
 
 --- raise(error_type, message, traceback)     -> ()
@@ -572,12 +796,38 @@ priority を引き継ぎます。
 
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
+#@samplecode 例
+a = Thread.new { puts "a"; Thread.stop; puts "c" }
+sleep 0.1 while a.status!='sleep'
+puts "Got here"
+a.run
+a.join
+# => a
+# => Got here
+# => c
+#@end
+
+@see [[m:Thread#wakeup]], [[m:Thread.stop]]
+
 --- safe_level    -> Integer
 
+#@since 2.6.0
+セーフレベルを返します。
+
+[[m:$SAFE]]がプロセスグローバルになったため、このメソッドは obsolete です。
+単純に [[m:$SAFE]] をチェックしてください。
+#@else
 self のセーフレベルを返します。カレントスレッドの
 safe_level は、[[m:$SAFE]] と同じです。
+#@end
 
 セーフレベルについては[[d:spec/safelevel]]を参照してください。
+
+#@samplecode 例
+thr = Thread.new { $SAFE = 1; sleep }
+Thread.current.safe_level   # => 0
+thr.safe_level              # => 1
+#@end
 
 --- status    -> String | false | nil
 
@@ -601,9 +851,20 @@ safe_level は、[[m:$SAFE]] と同じです。
   d.status                #=> "aborting"
   Thread.current.status   #=> "run"
 
+@see [[m:Thread#alive?]], [[m:Thread#stop?]]
+
 --- stop?    -> bool
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
+
+#@samplecode 例
+a = Thread.new { Thread.stop }
+b = Thread.current
+a.stop?   # => true
+b.stop?   # => false
+#@end
+
+@see [[m:Thread#alive?]], [[m:Thread#status]]
 
 --- value    -> object 
 
@@ -633,12 +894,29 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
+#@samplecode 例
+c = Thread.new { Thread.stop; puts "hey!" }
+sleep 0.1 while c.status!='sleep'
+c.wakeup
+c.join
+# => "hey!"
+#@end
+
+@see [[m:Thread#run]], [[m:Thread.stop]]
+
 --- inspect -> String
 #@since 2.5.0
 --- to_s -> String
 #@end
 
 自身を人間が読める形式に変換した文字列を返します。
+
+#@samplecode 例
+a = Thread.current
+a.inspect   # => "#<Thread:0x00007fdbaf07ddb0 run>"
+b = Thread.new{}
+b.inspect   # => "#<Thread:0x00007fdbaf8f7d10@(irb):3 dead>"
+#@end
 
 #@since 1.9.2
 --- add_trace_func(pr) -> Proc
@@ -648,6 +926,26 @@ safe_level は、[[m:$SAFE]] と同じです。
 追加したハンドラを返します。
 
 @param pr トレースハンドラ([[c:Proc]] オブジェクト)
+
+#@samplecode 例
+th = Thread.new do
+  class Trace
+  end
+  43.to_s
+end
+th.add_trace_func lambda {|*arg| p arg }
+th.join
+
+# => ["line", "example.rb", 4, nil, #<Binding:0x00007f98e107d0d8>, nil]
+# => ["c-call", "example.rb", 4, :inherited, #<Binding:0x00007f98e1087448>, Class]
+# => ["c-return", "example.rb", 4, :inherited, #<Binding:0x00007f98e1085d00>, Class]
+# => ["class", "example.rb", 4, nil, #<Binding:0x00007f98e108f210>, nil]
+# => ["end", "example.rb", 5, nil, #<Binding:0x00007f98e108e5e0>, nil]
+# => ["line", "example.rb", 6, nil, #<Binding:0x00007f98e108d4b0>, nil]
+# => ["c-call", "example.rb", 6, :to_s, #<Binding:0x00007f98e1097aa0>, Integer]
+# => ["c-return", "example.rb", 6, :to_s, #<Binding:0x00007f98e1095cc8>, Integer]
+#@end
+
 @see [[m:Thread#set_trace_func]] [[m:Kernel.#set_trace_func]]
 
 --- set_trace_func(pr) -> Proc | nil
@@ -657,6 +955,31 @@ safe_level は、[[m:$SAFE]] と同じです。
 nil を渡すとトレースを解除します。
 
 設定したハンドラを返します。
+
+#@samplecode 例
+th = Thread.new do
+  class Trace
+  end
+  2.to_s
+  Thread.current.set_trace_func nil
+  3.to_s
+end
+th.set_trace_func lambda {|*arg| p arg }
+th.join
+
+# => ["line", "example.rb", 2, nil, #<Binding:0x00007fc8de87cb08>, nil]
+# => ["c-call", "example.rb", 2, :inherited, #<Binding:0x00007fc8de886770>, Class]
+# => ["c-return", "example.rb", 2, :inherited, #<Binding:0x00007fc8de8844e8>, Class]
+# => ["class", "example.rb", 2, nil, #<Binding:0x00007fc8de88e830>, nil]
+# => ["end", "example.rb", 3, nil, #<Binding:0x00007fc8de88d6b0>, nil]
+# => ["line", "example.rb", 4, nil, #<Binding:0x00007fc8de88c440>, nil]
+# => ["c-call", "example.rb", 4, :to_s, #<Binding:0x00007fc8de896f30>, Integer]
+# => ["c-return", "example.rb", 4, :to_s, #<Binding:0x00007fc8de894a50>, Integer]
+# => ["line", "example.rb", 5, nil, #<Binding:0x00007fc8de967b08>, nil]
+# => ["c-call", "example.rb", 5, :current, #<Binding:0x00007fc8de967798>, Thread]
+# => ["c-return", "example.rb", 5, :current, #<Binding:0x00007fc8de9673b0>, Thread]
+# => ["c-call", "example.rb", 5, :set_trace_func, #<Binding:0x00007fc8de966fc8>, Thread]
+#@end
 
 @param pr トレースハンドラ([[c:Proc]] オブジェクト) もしくは nil
 @see [[m:Thread#add_trace_func]] [[m:Kernel.#set_trace_func]]
@@ -687,6 +1010,12 @@ nil を渡すとトレースを解除します。
 [[m:Kernel.#caller_locations]] と似ていますが、本メソッドは self に限定
 した情報を返します。
 
+#@samplecode 例
+thread = Thread.new { sleep 1 }
+thread.run
+thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test.rb:1:in `block in <main>'"]
+#@end
+
 @see [[c:Thread::Backtrace::Location]]
 
 --- thread_variable_get(key) -> object | nil
@@ -715,7 +1044,7 @@ nil を渡すとトレースを解除します。
 
 @see [[m:Thread#thread_variable_set]], [[m:Thread#[] ]]
 
-@see [[url:http://magazine.rubyist.net/?0041-200Special-note#l16]]
+@see [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]]
 
 --- thread_variable_set(key, value)
 
@@ -751,6 +1080,8 @@ self の非同期例外のキューが空かどうかを返します。
 
 @param error 対象の例外クラスを指定します。
 
+#@#noexample Thread.pending_interrupt? を参照
+
 @see [[m:Thread.pending_interrupt?]]
 #@end
 
@@ -758,6 +1089,8 @@ self の非同期例外のキューが空かどうかを返します。
 --- name -> String
 
 self の名前を返します。
+
+#@#noexample Thread#name=を参照
 
 @see [[m:Thread#name=]]
 
@@ -770,13 +1103,23 @@ self の名前を name に設定します。
 @raise ArgumentError 引数に ASCII 互換ではないエンコーディングのものを
                      指定した場合に発生します。
 
+#@samplecode 例
+a = Thread.new{}
+a.name = 'named'
+a.name      # => "named"
+a.inspect   # => "#<Thread:0x00007f85ac8721f0@named@(irb):1 dead>"
+#@end
+
 @see [[m:Thread#name]]
 #@end
 
 == Constants
 
-#@since 1.9.1
+#@if("1.9.1" <= version and version < "2.6.0")
 --- MUTEX_FOR_THREAD_EXCLUSIVE -> Mutex
 
 [[m:Thread.exclusive]]用の[[c:Mutex]]オブジェクトです。
+#@since 2.4.0
+(private constant です。)
+#@end
 #@end

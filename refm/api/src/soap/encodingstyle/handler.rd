@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/soap
 require soap/baseData
 require soap/element
@@ -60,4 +59,3 @@ require soap/element
 
 = class SOAP::EncodingStyle::Handler::EncodingStyleError < SOAP::Error
 
-#@end

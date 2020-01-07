@@ -1,4 +1,3 @@
-#@since 1.8.2
 require soap/element
 
 = class SOAP::Header::Handler < Object
@@ -31,4 +30,3 @@ require soap/element
 --- on_inbound_headeritem(header)
 #@todo
 
-#@end

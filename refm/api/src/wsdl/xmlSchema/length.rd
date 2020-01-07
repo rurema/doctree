@@ -1,4 +1,3 @@
-#@since 1.8.3
 
 require wsdl/info
 
@@ -21,4 +20,3 @@ require wsdl/info
 #@todo
 
 
-#@end

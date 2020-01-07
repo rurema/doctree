@@ -11,10 +11,8 @@ alias TkOptionMenuButton
 --- value
 #@todo
 
-#@since 1.8.2
 --- value=(val)
 #@todo
-#@end
 
 --- activate(index)
 #@todo
@@ -49,10 +47,8 @@ alias TkOptionMenuButton
 --- menuconfiginfo(key = nil)
 #@todo
 
-#@since 1.8.2
 --- current_menuconfiginfo(key = nil)
 #@todo
-#@end
 
 --- entrycget(index, key)
 #@todo
@@ -63,10 +59,8 @@ alias TkOptionMenuButton
 --- entryconfiginfo(index, key = nil)
 #@todo
 
-#@since 1.8.2
 --- current_entryconfiginfo(index, key = nil)
 #@todo
-#@end
 
 == Constants
 

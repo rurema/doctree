@@ -62,7 +62,7 @@ illegal は内部用なので使わないでください。
 @raise RuntimeError テキストがXMLのテキストとして不正な
        文字を含んでいる場合に発生します。
 
-==== 例
+=== 例
 
 doctype なしの場合
   p REXML::Text.new("<&", false, nil, false).to_s  # => "&lt;&amp;"
@@ -107,7 +107,7 @@ filter でアンエスケープしない実体の実体名を文字列配列で�
 @param filter アンエスケープしない実体の実体名(文字列配列)
 @param illegal 内部用。使わないでください。
 
-==== 例
+=== 例
   require 'rexml/text'
   REXML::Text.unnormalize("&amp; &foobar; &lt;") # => "& &foobar; <"
   REXML::Text.unnormalize("&lt; &gt;", nil, ["lt"]) # => "&lt; >"
@@ -166,7 +166,7 @@ self を複製します。
 
 @see [[m:REXML::Text#value]]
 
-==== 例
+=== 例
   require 'rexml/document'
   t = REXML::Text.new("< & foobar", false, nil, false)
   t.to_s # => "&lt; &amp; foobar"
@@ -184,7 +184,7 @@ self を複製します。
 
 @see [[m:REXML::Text#raw]], [[m:REXML::Text#to_s]]
 
-==== 例
+=== 例
   require 'rexml/document'
   t = REXML::Text.new("< & foobar", false, nil, false)
   t.to_s # => "&lt; &amp; foobar"
@@ -201,7 +201,7 @@ self を複製します。
 val には非正規化された(エスケープされていない)文字列を渡さなければ
 なりません。
   
-==== 例
+=== 例
   require 'rexml/document'
   e = REXML::Element.new("a")
   e.add_text("foo")

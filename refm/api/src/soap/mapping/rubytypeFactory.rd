@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = class SOAP::Mapping::RubytypeFactory < SOAP::Mapping::Factory
 
@@ -47,4 +46,3 @@
 --- TYPE_HASH
 #@todo
 
-#@end

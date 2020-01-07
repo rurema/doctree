@@ -291,7 +291,11 @@ C 言語の printf と同じように、format に従い引数
 
 @see [[m:IO#printf]], [[m:Kernel.#printf]]
 
+#@since 2.5.0
+--- write(*str) -> Integer
+#@else
 --- write(str) -> Integer
+#@end
 
 自身に str を出力します。str が文字列でなけ
 れば to_s による文字列化を試みます。

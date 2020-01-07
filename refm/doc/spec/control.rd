@@ -119,7 +119,7 @@ unless は if と反対で、条件式が偽の時に then 以下の
           式 unless 式
 
 右辺の条件が成立しない時に、左辺の式を評価してその結果を返します。
-条件が成立しなければ nil を返します。
+条件が成立すれば nil を返します。
 
 ====[a:case] case
 
@@ -379,7 +379,7 @@ for や each で配列要素を複数個ずつ取得しながらループする�
 
           break
 
-          break val          
+          break val
 
 break はもっとも内側のループを脱出します。ループとは
 
@@ -409,7 +409,7 @@ break によりループを抜けた for やイテレータは nil
 
           next
 
-          next val              
+          next val
 
 
 nextはもっとも内側のループの次の繰り返しにジャンプします。
@@ -600,7 +600,7 @@ rescue 節が存在する時には rescue 節の本体が実行されます。
              #<RuntimeError: error message>
 
 例外の一致判定は，発生した例外が rescue 節で指定した
-クラスのインスタンスであるかどうかで行われます。 
+クラスのインスタンスであるかどうかで行われます。
 
 error_type が省略された時は [[c:StandardError]] のサブクラスであ
 る全ての例外を捕捉します。Rubyの組み込み例外は([[c:SystemExit]] や
@@ -608,7 +608,7 @@ error_type が省略された時は [[c:StandardError]] のサブクラスであ
 [[c:StandardError]] のサブクラスです。
 
 例外クラスのクラス階層については
-[[unknown:組み込みクラス／モジュール／例外クラス/例外クラス]]
+[[lib:_builtin]]
 を参照してください。
 
 rescue では error_type は通常の引数と同じように評価され、
@@ -662,7 +662,7 @@ rescue修飾子を伴う式の値は例外が発生しなければ式1、例外�
 
           p(open("nonexistent file") rescue false)
           => parse error
-          
+
           p((open("nonexistent file") rescue false))
           => false
 
@@ -683,6 +683,11 @@ rescue修飾子を伴う式の値は例外が発生しなければ式1、例外�
 式の値を戻り値としてメソッドの実行を終了します。式が2つ以上
 与えられた時には、それらを要素とする配列をメソッドの戻り値と
 します。式が省略された場合には nil を戻り値とします。
+
+#@since 2.4.0
+トップレベルで return した場合はプログラムが終了します。
+require, load されたファイル内のトップレベルで return した場合は呼び出し元に返ります。
+#@end
 
 ====[a:BEGIN] BEGIN
 

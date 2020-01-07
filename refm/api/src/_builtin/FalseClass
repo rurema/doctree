@@ -73,3 +73,7 @@ other が真なら true を, 偽なら false を返します。
 #@end
 
 常に文字列 "false" を返します。
+
+例:
+
+  false.to_s      # => "false"

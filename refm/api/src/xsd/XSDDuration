@@ -1,4 +1,3 @@
-#@since 1.8.1
 = class XSD::XSDDuration < XSD::XSDAnySimpleType
 == class methods
 --- new(value = nil)
@@ -33,4 +32,3 @@
 --- year=(year)
 #@todo
 
-#@end

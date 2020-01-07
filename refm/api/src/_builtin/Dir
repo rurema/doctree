@@ -4,10 +4,16 @@ include Enumerable
 ディレクトリの操作を行うためのクラスです。
 
 == Class Methods
-           
---- [](*pattern)                        -> [String]
+
+#@since 2.5.0
+--- [](*pattern, base: nil)                            -> [String]
+--- glob(pattern, flags = 0, base: nil)                -> [String]
+--- glob(pattern, flags = 0, base: nil) {|file| ...}   -> nil
+#@else
+--- [](*pattern)                            -> [String]
 --- glob(pattern, flags = 0)                -> [String]
 --- glob(pattern, flags = 0) {|file| ...}   -> nil
+#@end
 
 ワイルドカードの展開を行い、
 パターンにマッチするファイル名を文字列の配列として返します。
@@ -16,18 +22,27 @@ include Enumerable
 ブロックが与えられたときはワイルドカードにマッチしたファイルを
 引数にそのブロックを 1 つずつ評価して nil を返します
 
-@param pattern パターンを文字列で指定します。
-               パターンを "\0" で区切って 1 度に複数のパターンを指定することもで
-               きます。
+@param pattern パターンを文字列か配列で指定します。
+               配列を指定すると複数のパターンを指定できます。
+#@until 2.7.0
+               パターンを文字列で指定する場合、パターンを "\0" で区切って
+               1 度に複数のパターンを指定することもできます。
                パターンの区切りには "\0" のみ指定できます。
-               配列を指定することで複数のパターンを指定できます。
+#@end
 
 @param flags [[m:File.fnmatch]] に指定できるフラグと同様のフラグを指定できます。
              このフラグを指定することでマッチの挙動を変更することができます。
-//emlist{
-  Dir.glob("*")                      #=> ["bar", "foo"]
-  Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
-//}
+
+#@samplecode
+Dir.glob("*")                      #=> ["bar", "foo"]
+Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
+#@end
+
+#@since 2.5.0
+@param base カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
+            指定した場合、結果の頭にはベースディレクトリはつかないので、
+            絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
+#@end
 
 ワイルドカードには以下のものがあります。これらはバックスラッシュに
 よりエスケープすることができます。ダブルクォートの文字列中では 2
@@ -60,30 +75,41 @@ include Enumerable
     foo/*/*/bar ... (以下無限に続く)に対してそれぞれ
     マッチ判定を行います。
 
-例:
+#@samplecode
+# 一般的な例
+p Dir.glob("*")          #=> ["foo", "bar", "baz"]
+p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
+p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
+p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
 
-  # 一般的な例
-  p Dir.glob("*")          #=> ["foo", "bar", "baz"]
-  p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
-  p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
-  p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
+Dir.glob("b*") {|f| p f }
 
-  Dir.glob("b*") {|f| p f }
- 
-  #=> "bar"
-      "baz"
+#=> "bar"
+    "baz"
 
-  # 複数のパターンを指定する例
-  p Dir.glob("f*\0b*")     # => ["foo", "bar"]
-  p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
-  p Dir["f*", "b*"]        # => ["foo", "bar"]
+# 複数のパターンを指定する例
+p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
+p Dir["f*", "b*"]        # => ["foo", "bar"]
+#@until 2.7.0
+p Dir.glob("f*\0b*")     # => ["foo", "bar"]
+#@end
 
-  # ワイルドカードの例
-  Dir.glob("*")            #=> ["foo", "bar"]
-  Dir.glob("fo?")          #=> ["foo"]
-  Dir.glob("[^f]*")        #=> ["bar"]
-  Dir.glob("{b,f}*")       #=> ["bar", "foo"]
+# ワイルドカードの例
+Dir.glob("*")            #=> ["foo", "bar"]
+Dir.glob("fo?")          #=> ["foo"]
+Dir.glob("[^f]*")        #=> ["bar"]
+Dir.glob("{b,f}*")       #=> ["bar", "foo"]
 
+#@since 2.5.0
+# ベースディレクトリの例
+rbfiles = File.join("**", "*.rb")
+Dir.glob(rbfiles)                   #=> ["main.rb",
+                                    #    "lib/song.rb",
+                                    #    "lib/song/karaoke.rb"]
+Dir.glob(rbfiles, base: "lib")      #=> ["song.rb",
+                                    #    "song/karaoke.rb"]
+#@end
+#@end
 
 --- chdir           -> 0
 --- chdir(path)     -> 0
@@ -147,8 +173,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.delete("/tmp/hoge-jbrYBh.tmp")
 
---- entries(path)                -> [String]
---- entries(path, encoding: enc) -> [String]
+--- entries(path)                                        -> [String]
+--- entries(path, encoding: Encoding.find("filesystem")) -> [String]
 
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。
@@ -165,10 +191,37 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
   Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
---- foreach(path) {|file| ...}                -> nil
---- foreach(path, encoding: enc) {|file| ...} -> nil
---- foreach(path)                             -> Enumerator
---- foreach(path, encoding: enc)              -> Enumerator
+@see [[m:Dir.foreach]]
+#@since 2.5.0
+@see [[m:Dir.children]]
+--- children(path)                -> [String]
+--- children(path, encoding: enc) -> [String]
+
+ディレクトリ path に含まれるファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@param encoding ディレクトリのエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+
+  Dir.children('.') #=> ["bar", "foo"]
+
+#@since 2.6.0
+@see [[m:Dir#children]]
+#@end
+@see [[m:Dir.each_child]]
+@see [[m:Dir.entries]]
+#@end
+--- foreach(path) {|file| ...}                                        -> nil
+--- foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
+--- foreach(path)                                                     -> Enumerator
+--- foreach(path, encoding: Encoding.find("filesystem"))              -> Enumerator
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
 
@@ -194,6 +247,43 @@ path を省略した場合、環境変数 HOME または LOGDIR
   "bar"
   "foo"
 
+@see [[m:Dir.entries]]
+#@since 2.5.0
+@see [[m:Dir.each_child]]
+--- each_child(path) {|file| ...}                -> nil
+--- each_child(path, encoding: enc) {|file| ...} -> nil
+--- each_child(path)                             -> Enumerator
+--- each_child(path, encoding: enc)              -> Enumerator
+
+ディレクトリ path の "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[[c:Enumerator]] オブジェクトを返します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@param encoding ディレクトリのエンコーディングを文字列か
+                [[c:Encoding]] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+例:
+
+  Dir.each_child('.'){|f|
+    p f
+  }
+  #=>
+  "bar"
+  "foo"
+
+@see [[m:Dir.foreach]]
+@see [[m:Dir.children]]
+#@since 2.6.0
+@see [[m:Dir#each_child]]
+#@end
+#@end
 --- getwd    -> String
 --- pwd      -> String
 
@@ -227,12 +317,12 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になりま
 
 @see [[m:FileUtils.#makedirs]]
 
---- new(path)                              -> Dir
---- new(path, encoding: enc)               -> Dir
---- open(path)                             -> Dir
---- open(path, encoding: enc)              -> Dir
---- open(path) {|dir| ...}                 -> object
---- open(path, encoding: enc) {|dir| ...}  -> object
+--- new(path)                                                      -> Dir
+--- new(path, encoding: Encoding.find("filesystem"))               -> Dir
+--- open(path)                                                     -> Dir
+--- open(path, encoding: Encoding.find("filesystem"))              -> Dir
+--- open(path) {|dir| ...}                                         -> object
+--- open(path, encoding: Encoding.find("filesystem")) {|dir| ...}  -> object
 
 path に対するディレクトリストリームをオープンして返します。
 
@@ -249,6 +339,35 @@ path に対するディレクトリストリームをオープンして返しま
 
 @raise Errno::EXXX オープンに失敗した場合に発生します。
 
+例: Dir.new
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    d = Dir.new(tmpdir)
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+    d.close
+
+    d = Dir.new(tmpdir, encoding: Encoding::UTF_8)
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+    d.close
+  end
+
+例: Dir.open
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    d = Dir.open(tmpdir, encoding: Encoding::UTF_8)
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+    d.close
+
+    Dir.open(tmpdir, encoding: Encoding::UTF_8) do |d|
+      p d.class         # => Dir
+      p d.read.encoding # => #<Encoding:UTF-8>
+    end
+  end
 
 --- exist?(file_name)    -> bool
 #@until 2.1.0
@@ -281,6 +400,10 @@ Dir.home や Dir.home("root") は
 File.expand_path("~") や File.expand_path("~root") と
 ほぼ同じです。
 
+例:
+  Dir.home          # => "/home/vagrant"
+  Dir.home("root")  # => "/root"
+
 @see [[m:File.expand_path]]
 
 #@since 2.4.0
@@ -302,11 +425,19 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 --- close    -> nil
 
-ディレクトリストリームをクローズします。以降のディレクトリに
-対する操作は例外 [[c:IOError]] を発生させます。
+ディレクトリストリームをクローズします。
+#@until 2.3.0
+以降のディレクトリに対する操作は例外 [[c:IOError]] を発生させます。
+#@end
 クローズに成功すれば nil を返します。
 
+例:
+  d = Dir.new(".")
+  d.close  # => nil
+
+#@until 2.3.0
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
+#@end
 
 --- each {|item| ... }    -> self
 --- each                  -> Enumerator
@@ -330,17 +461,19 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
   "bar"
   "foo"
 
+#@since 2.6.0
+@see [[m:Dir#each_child]]
+#@end
 --- path    -> String
 --- to_path -> String
 
 オープンしているディレクトリのパス名を文字列で返します。
 
-@raise IOError 既に自身が close している場合に発生します。
-
 例:
-  d = Dir.new("..")
-  d.path      #=> ".."
-  d.to_path   #=> ".."
+  Dir.open("..") do |d|
+    d.path      # => ".."
+    d.to_path   # => ".."
+  end
 
 --- pos     -> Integer
 --- tell    -> Integer
@@ -370,12 +503,13 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 例:
 
-   d = Dir.new("testdir")   #=> #<Dir:0x401b3c40>
-   d.read                   #=> "."
-   i = d.tell               #=> 12
-   d.read                   #=> ".."
-   d.seek(i)                #=> #<Dir:0x401b3c40>
-   d.read                   #=> ".."
+   Dir.open("testdir") do |d|
+     d.read                   # => "."
+     i = d.tell               # => 12
+     d.read                   # => ".."
+     d.seek(i)                # => #<Dir:0x401b3c40>
+     d.read                   # => ".."
+   end
 
 --- read    -> String | nil
 
@@ -386,6 +520,21 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 @raise IOError 既に自身が close している場合に発生します。
 
+例:
+  require 'tmpdir'
+
+  Dir.mktmpdir do |tmpdir|
+    File.open("#{tmpdir}/test1.txt", "w") { |f| f.puts("test1") }
+    File.open("#{tmpdir}/test2.txt", "w") { |f| f.puts("test2") }
+    Dir.open(tmpdir) do |d|
+      p d.read   # => "."
+      p d.read   # => ".."
+      p d.read   # => "test1.txt"
+      p d.read   # => "test2.txt"
+      p d.read   # => nil
+    end
+  end
+
 --- rewind    -> self
 
 ディレクトリストリームの読み込み位置を先頭に移動させます。
@@ -394,31 +543,68 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 例:
 
-   d = Dir.new("testdir")
-   d.read     #=> "."
-   d.rewind   #=> #<Dir:0x401b3fb0>
-   d.read     #=> "."
+   Dir.open("testdir") do |d|
+     d.read     # => "."
+     d.rewind   # => #<Dir:0x401b3fb0>
+     d.read     # => "."
+   end
 
 --- inspect -> String
 
 self の情報を人間に読みやすい文字列にして返します。
 
 例:
-  d = Dir.new("/")
-  d.inspect   #=> "#<Dir:/>"
+  Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
 
 #@since 2.2.0
 --- fileno -> Integer
 
 self に関連づけられたファイル記述子を表す整数を返します。
 
-  d = Dir.new("..")
-  d.fileno   #=> 8
+  Dir.open("..") { |d| d.fileno } # => 8
 
 本メソッドでは POSIX 2008 で定義されている dirfd() 関数を使用します。
 
 @raise NotImplementedError Windows などの dirfd() 関数が存在しないプラッ
                            トフォームで発生します。
+@raise IOError 既に自身が close している場合に発生します。
 
 @see [[m:IO#fileno]]
+#@end
+#@since 2.6.0
+--- each_child {|item| ... }    -> self
+--- each_child                  -> Enumerator
+
+ディレクトリの "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[[c:Enumerator]]
+オブジェクトを返します。
+
+@raise IOError 既に self が close している場合に発生します。
+
+#@samplecode 例
+Dir.open('.').each_child{|f|
+  p f
+}
+#=> "bar"
+#   "foo"
+#@end
+
+@see [[m:Dir#each]]
+@see [[m:Dir.each_child]]
+--- children -> [String]
+ディレクトリのファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+@raise IOError 既に self が close している場合に発生します。
+
+#@samplecode 例
+Dir.open('.'){|d|
+  p d.children # => ["bar", "foo"]
+}
+#@end
+
+@see [[m:Dir.children]]
 #@end

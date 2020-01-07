@@ -3,6 +3,181 @@
 GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 するモジュールです。
 
+#@since 2.1.0
+
+=== GCのチューニングについて
+
+Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されました。
+それにともない、以下の環境変数が導入され、これらを
+設定することでGCの動作をチューニングすることができます。
+これらの環境変数の効果はRubyの起動時のみ有効です(つまりrubyを動かしている
+途中で変更することはできません)。
+
+====[a:tuning_gc] チューニングのための環境変数
+ * RUBY_GC_HEAP_INIT_SLOTS (default: 10000) - 最初に確保されるスロット数。
+ * RUBY_GC_HEAP_FREE_SLOTS (default: 4096) - GC後、必ずこの数の空きスロット数が確保される。
+   つまりGC後に空きスロットが足りなければ新たなページを確保し、空きスロット数を増やす。
+ * RUBY_GC_HEAP_GROWTH_FACTOR (default: 1.8) - Rubyではスロットを増やすための
+   メモリ確保をするたびに確保するサイズをこの係数で大きくする。
+   つまり全スロット数は指数的に増大する。これは動かしているRubyプログラムが
+   必要とするスロット数に速やかに到達するための仕組みである。
+ * RUBY_GC_HEAP_GROWTH_MAX_SLOTS (default: 0) -
+   RUBY_GC_HEAP_GROWTH_FACTORで説明したようにRubyではスロットのためのメモリ確保のサイズを
+   指数的に大きくしていくが、その上限を決める値。0は上限なしを意味する。
+   この値を指定すると、スロット数が特定の値を越えると指数的ではなく線形的に
+   スロット数が増大する。
+#@since 2.4.0
+ * RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO (2.4以降、default: 0.20) -
+   GC後の空きスロット割合の下限。
+   つまり空きスロット数の全スロット数に対する割合がこの値より小さいときは新たな
+   ページを確保する。
+ * RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO (2.4以降、
+   default: 0.40) - GC後の空きスロットの割合の目標。
+   RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIOの閾値にひっかかって新たなスロットを確保するときは
+   この割合が目標となる。
+   この値が 0.0 の場合は、RUBY_GC_HEAP_GROWTH_FACTORを直接使う。
+ * RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO (2.4以降、default: 0.65) -
+   GC後の空きスロットの割合の上限。
+   空きスロット数の全スロット数に対する割合がこの値より大きい場合は
+   積極的にページを解放する。
+#@end
+
+ * RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR (2.0) - RubyのフルGCを呼びだすための oldobject
+   数の上限を決めるための係数。
+   RubyのフルGCは oldobject の個数が閾値 old_objects_limit
+   を越えるごとに実行される。old_objects_limit はフルGCの直後に変更される。
+   その値はフルGC直後のの oldobject の個数 (
+   old_objects) の RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR 倍となる。
+   つまり、フルGC直後から oldobject の個数が RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR 倍に
+   なったタイミングでフルGCが実行される。
+   この値を調整することでフルGCの頻度を調整できる。
+
+ * RUBY_GC_MALLOC_LIMIT (default: 16*1024*1024 = 16MB) - malloc によるマイナーGC発動の
+   閾値の初期値
+ * RUBY_GC_MALLOC_LIMIT_MAX (default: 32*1024*1024 = 32MB) - malloc によるマイナーGC発動の
+   閾値の最大値
+ * RUBY_GC_MALLOC_LIMIT_GROWTH_FACTOR (default: 1.4) - malloc によるマイナーGC発動の
+   閾値の増加率
+
+ * RUBY_GC_OLDMALLOC_LIMIT (default: 16*1024*1024 = 16MB) - oldobject による malloc
+   によるフルGC発動の閾値の初期値
+ * RUBY_GC_OLDMALLOC_LIMIT_MAX (default: 128*1024*1024 = 128MB) oldobject による malloc
+   によるフルGC発動の閾値の最大値
+ * RUBY_GC_OLDMALLOC_LIMIT_GROWTH_FACTOR (default: 1.2) - oldobject による malloc
+   によるフルGC発動の閾値の増加率
+ 
+以下の2つの環境変数はobsoleteであり、新しいものを使うことが望ましい
+  * RUBY_FREE_MIN       -> RUBY_GC_HEAP_FREE_SLOTS
+  * RUBY_HEAP_MIN_SLOTS -> RUBY_GC_HEAP_INIT_SLOTS
+
+#@since 2.4.0
+==== RUBY_GC_HEAP_GROWTH_FACTOR と RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO に関する補足説明
+
+RUBY_GC_HEAP_GROWTH_FACTOR と RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO はともに
+GC後に空きスロットが少ないときにどれだけの量のメモリを新たに確保するかを決める
+パラメータである。この2つのパラメータの優先順位は以下の通りである。
+
+  * RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO が 0.0 のときはこの値は無視され、
+    RUBY_GC_HEAP_GROWTH_FACTOR のみが利用される。つまり
+    スロットが不足状態の場合にはスロット数は単純に指数的に増加する。
+  * RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO が 0.0 でない場合には、
+    RUBY_GC_HEAP_GROWTH_FACTOR で決まるスロット数と
+    RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO で決まるスロット数の大きいほうが採用される。
+
+当然、RUBY_GC_HEAP_GROWTH_MAX_SLOTS はこれらより優先度が高いことに注意。
+#@end
+
+==== malloc閾値についての説明
+
+Rubyが利用するメモリはスロット以外にもある。例えば
+長い文字列は malloc によってCのヒープ上に確保される。GCはこのようなヒープ上の
+メモリを解放するためにも実行される。
+そこで、rubyでは malloc によるメモリ消費量を保持し、この消費量が
+ある閾値を越えるとGCが起動される。また、GCが起動されるごとに
+この消費量カウンタが0にリセットされる。
+
+このカウンタは2種類あり、一方は malloc_increase_bytes、もう一方は
+oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のようになっている。
+
+  * malloc_increase_bytes について
+    * malloc_increase_bytes はRuby内でのmalloc, realloc, freeの呼びだし
+      (ruby_xmalloc, ruby_xrealloc, ruby_xfreeなど)によるメモリ利用量の増減を
+      計測する
+    * malloc_increase_bytes はマイナーGCで0にリセットされる
+    * malloc_increase_bytes が malloc_increase_bytes_limits を越えるとマイナーGCが起動される
+    * malloc_increase_bytes_limits は処理系の起動時に RUBY_GC_MALLOC_LIMIT で初期化される
+    * malloc_increase_bytes_limits を越えたことが原因でGCが起動された場合は
+      malloc_increase_bytes_limits が RUBY_GC_MALLOC_LIMIT_GROWTH_FACTOR 倍される
+      (ただし、 RUBY_GC_MALLOC_LIMIT_MAX を越えることはできない)
+  * oldmalloc_increase_bytes について
+    * oldmalloc_increase_bytes はRuby内でのmalloc, realloc, freeの呼びだし
+      (ruby_xmalloc, ruby_xrealloc, ruby_xfreeなど)によるメモリ利用量の増減を
+      計測する(これは malloc_increase_bytes と同じ)
+    * oldmalloc_increase_bytes はフルGCで0にリセットされる
+    * oldmalloc_increase_bytes が
+      oldmalloc_increase_bytes_limits を越えるとフルGCが起動される
+    * oldmalloc_increase_bytes_limits は処理系の起動時に
+      RUBY_GC_OLDMALLOC_LIMIT で初期化される
+    * oldmalloc_increase_bytes_limits を越えたことが原因でGCが起動された場合は
+      oldmalloc_increase_bytes_limits が RUBY_GC_OLDMALLOC_LIMIT_GROWTH_FACTOR 倍される
+      (ただし、 RUBY_GC_OLDMALLOC_LIMIT_MAX を越えることはできない)
+   
+==== 実行中のパラメータ
+
+プログラム実行中には、GCに関する統計情報/閾値情報を [[m:GC.stat]] で見ることができるが、
+この文章で説明した以下の情報はこれで調べることができる。
+
+  * malloc_increase_bytes
+  * malloc_increase_bytes_limits
+  * oldmalloc_increase_bytes
+  * oldmalloc_increase_bytes_limits
+  * old_objects_limit
+
+==== チューニングについて
+
+
+  * 原理的にはメモリ使用量と実行速度のトレードオフがある。
+    実行速度を上げるためにはGCの回数を減らせばよいが、そうすると
+    メモリ使用量は増える傾向になる。
+  * チューニングのためにはまず計測することが重要。[[m:GC.stat]]、[[c:GC::Profiler]]などを
+    利用してGCを計測する
+      * GCが性能上のボトルネックではないことも多い。そういう部分も含め計測する。
+      * newrelicのような高度なツールを使うことも考慮する
+  * [[url:http://tmm1.net/ruby21-rgengc/]] には
+    RUBY_GC_HEAP_INIT_SLOTS や RUBY_GC_HEAP_FREE_SLOTS
+    のチューニングに関する簡単な指針が書いてあって参考になる
+  * 結局の所トライ&エラーで調整する必要がある。
+  
+==== この設定を理解するための用語集
+
+  * スロット - Ruby のオブジェクトを1つ保持するためのメモリ領域。
+    実際にはこの領域からのポインタがCのヒープ領域に確保したメモリを所持していることが多く、
+    メモリ上の実占有領域はスロット外にもあることがしばしばある。
+    RubyのGCのチューニングには重要な概念。
+  * RGenGC - Ruby2.1で採用された世代別GC。マイナーGCとフルGCの2段階のGCをすることで
+    効率的なGCを実現する。
+  * マイナーGC - 新しいオブジェクト(前回のGCの後に生成されたオブジェクト)
+    のみを対象としたGC。GCすべきオブジェクトの数が少ないので高速。
+    また、多くのオブジェクトは経験的に生成されてすぐ不要になるので
+    マイナーGCは効率的に動作する可能性が高い。
+    マイナーGCでGCされなかったオブジェクトはoldobjectと呼ぶ。
+  * フルGC (メジャーGC) - すべてのオブジェクトを対象としたGC。マイナーGCより遅いため、
+    フルGCの回数を減らすことはGC性能に重要な問題である。
+  * ページ - スロットのメモリ確保は効率性のため、
+    「すべて別々に確保する」「大きなメモリの塊で一気に確保する」
+    のどちらでもなく、ページと呼ばれる単位で数百個という単位で確保される。
+    x86_64上でのlinuxでは16kバイトがページのサイズと決められている。
+    スロット用のメモリの確保および解放はこの単位で行われる。
+    この「ページ」はOSのメモリ管理用語であるページとは異なる概念であることに注意。
+  
+  
+==== 参考資料
+
+  * [[url:http://www.atdot.net/~ko1/activities/2014_rubyconf_ph_pub.pdf]]
+  * [[url:http://tmm1.net/ruby21-rgengc/]]
+
+#@end
+
 @see [[c:ObjectSpace]]
 
 == Singleton Methods
@@ -13,6 +188,11 @@ GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
+
+#@samplecode 例
+GC.disable   # => false
+GC.disable   # => true
+#@end
 
 @see [[m:GC.enable]]
 
@@ -25,6 +205,12 @@ false)。
 
 @see [[m:GC.disable]]
 
+#@samplecode 例
+GC.disable   # => false
+GC.enable    # => true
+GC.enable    # => false
+#@end
+
 #@since 2.1.0
 --- start(full_mark: true, immediate_sweep: true) -> nil
 #@else
@@ -34,7 +220,11 @@ false)。
 ガーベージコレクトを開始します。
 
 [[m:GC#garbage_collect]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
+#@since 2.3.0
+[[m:GC.disable]] により GC が禁止されている場合でもガベージコレクトを開始します。
+#@else
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
+#@end
 
 nil を返します。
 
@@ -50,20 +240,55 @@ nil を返します。
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
-#@since 1.8.7
+#@samplecode 例
+GC.count  # => 3
+GC.start  # => nil
+GC.count  # => 4
+#@end
+
 --- stress -> bool
+
+GCがストレスモードかどうかを返します。
+
+真が設定されている場合は GC を行えるすべての機会に GC を行います。
+
+@see [[m:GC.stress=]]
+
 --- stress=(value)
 
-GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
+GCのストレスモードを引数 value に設定します。
+引数 value が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
-@param value 任意のオブジェクト。真偽値として解釈されます。
+この機能はデバッグ用途に提供されています。ストレスモードを有効にすると
+プログラムのパフォーマンスが低下します。
+
+@param value 任意のオブジェクト。整数以外の値を指定した場合は真偽値として解釈されます。
+             整数を指定する場合は以下のフラグをOR演算した値を指定します。
+: 0x01
+  マイナー GC を動作させる場合に指定します。
+: 0x02
+  sweep を遅らせる(Lazy Sweep を行う)に指定します。
+: 0x04
+  malloc/calloc/realloc の後でメジャーGCを動作させる場合に指定します。
+
+#@samplecode 例
+GC.stress # => false
+GC.stress = true
+GC.stress # => true
 #@end
+
+@see [[m:GC.stress]]
 
 #@since 1.9.1
 --- count -> Integer
 
 プロセス開始からガーベージコレクトを実行した回数を [[c:Integer]] で返し
 ます。
+
+#@samplecode 例
+GC.count # => 3
+#@end
+
 #@end
 
 #@since 1.9.3
@@ -178,14 +403,35 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 
 == Instance Methods
 
---- garbage_collect -> nil
+--- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
 
 ガーベージコレクトを開始します。
 
 [[m:GC.start]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
+#@since 2.3.0
+[[m:GC.disable]] により GC が禁止されている場合でもガベージコレクトを開始します。
+#@else
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
+#@end
 
 nil を返します。
+
+@param full_mark マイナー GC を動作させる場合は false を、そうでない場
+                 合は true を指定します。
+
+@param immediate_sweep sweep を遅らせる(Lazy Sweep を行う)場合は false
+                       を、そうでない場合は true を指定します。
+
+注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
+す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
+トしていない場合はキーワード引数を指定しても無視される可能性があります。
+
+#@samplecode 例
+include GC
+GC.count  # => 3
+garbage_collect
+GC.count  # => 4
+#@end
 
 #@since 2.1.0
 == Constants
@@ -209,9 +455,14 @@ nil を返します。
   * "MALLOC_ALLOCATED_SIZE_CHECK"
   * "GC_PROFILE_DETAIL_MEMORY"
 
+例:
+
+  GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEEP"]
+  # この場合、GCデバッグ機能やプロファイル機能は無効化されている
+
 --- INTERNAL_CONSTANTS -> {Symbol => Integer}
 
-GC用内部定数です。
+GC用内部定数の値を保持するハッシュテーブルです。
 
   GC::INTERNAL_CONSTANTS
   # => {:RVALUE_SIZE=>40, :HEAP_PAGE_OBJ_LIMIT=>408, :HEAP_PAGE_BITMAP_SIZE=>56, :HEAP_PAGE_BITMAP_PLANES=>4}

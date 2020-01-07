@@ -1,4 +1,3 @@
-#@since 1.9.1
 = class CSV::Row < Object
 extend Forwardable
 include Enumerable
@@ -31,6 +30,23 @@ include Enumerable
 @param header_row ヘッダ行である場合は真を指定します。そうでない場合は偽を指定します。
                   デフォルトは偽です。
 
+#@samplecode 例 header_row = true のケース
+require "csv"
+
+header = CSV::Row.new(["header1", "header2"], [], header_row: true)
+table = CSV::Table.new([header])
+table.to_a # => [["header1", "header2"]]
+#@end
+
+#@samplecode 例 header_row = false のケース
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+#@end
+
 @see [[m:CSV::Row#header_row?]], [[m:CSV::Row#field_row?]]
 
 == Instance Methods
@@ -46,12 +62,43 @@ include Enumerable
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例 2要素の配列を指定
+require "csv"
+
+row = CSV::Row.new([], [], true)
+
+row << ["header1", "row1_1"]
+row << ["header2", "row1_2"]
+row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
+#@end
+
+#@samplecode 例 Hash を指定
+require "csv"
+
+row = CSV::Row.new([], [], true)
+
+row << { "header1" => "row1_1" }
+row << { "header2" => "row1_2" }
+row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
+#@end
+
 --- ==(other) -> bool
 
 自身が other と同じヘッダやフィールドを持つ場合に真を返します。
 そうでない場合は偽を返します。
 
 @param other 比較対象の [[c:CSV::Row]] のインスタンスを指定します。
+
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row1 == row2 # => true
+row2 << ["header3", "row1_3"]
+row1 == row2 # => false
+#@end
 
 --- field(header_or_index, minimum_index = 0) -> object | nil
 --- [](header_or_index, minimum_index = 0) -> object | nil
@@ -63,6 +110,17 @@ include Enumerable
 @param minimum_index このインデックスより後で、ヘッダの名前を探します。
                      重複しているヘッダがある場合に便利です。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row.field("header1") # => "row1_1"
+row.field("header2") # => "row1_2"
+row["header1"]       # => "row1_1"
+row["header2"]       # => "row1_2"
+#@end
+
 --- []=(header_or_index, value)
 
 ヘッダの名前かインデックスでフィールドを探し、値をセットします。
@@ -73,6 +131,37 @@ include Enumerable
 @param header_or_index ヘッダの名前かインデックスを指定します。
 
 @param value 値を指定します。
+
+#@samplecode 例 ヘッダの名前で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row["header1"]  # => "row1_1"
+row["header1"] = "updated"
+row["header1"]  # => "updated"
+#@end
+
+#@samplecode 例 ヘッダの index で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row["header1"]  # => "row1_1"
+row[0] = "updated"
+row["header1"]  # => "updated"
+#@end
+
+#@samplecode 例 ヘッダの名前と offset で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header1"], ["row1_1", "row1_2", "row1_3"])
+
+row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
+row["header1", 1] = "updated"
+row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"updated">
+#@end
+
 
 @see [[m:CSV::Row#field]]
 
@@ -100,6 +189,36 @@ include Enumerable
 
 @return 削除したヘッダとフィールドの組を返します。削除対象が見つからなかった場合は nil を返します。
 
+#@samplecode 例 ヘッダの名前で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+row.delete("header1")
+row # => #<CSV::Row "header2":"row1_2">
+#@end
+
+#@samplecode 例 ヘッダの index で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+
+row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+row.delete(0)
+row # => #<CSV::Row "header2":"row1_2">
+#@end
+
+#@samplecode 例 ヘッダの名前と offset で指定
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header1"], ["row1_1", "row1_2", "row1_3"])
+
+row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
+row.delete("header1", 1)
+row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+#@end
+
 @see [[m:CSV::Row#field]]
 
 --- delete_if{|header, field| ... } -> self
@@ -109,16 +228,39 @@ include Enumerable
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], ["valid1", "valid2", "invalid", "valid4"])
+
+row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header3":"invalid" "header4":"valid4">
+row.delete_if { |header, field| field == "invalid" }
+row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header4":"valid4">
+#@end
+
 --- each{|header, field| ... } -> self
 
 与えられたブロックにヘッダとフィールドの組を渡して評価します。
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], [1, 2, 3, 4])
+row.each { |header, field| puts "#{header} - #{field}" }
+
+# => header1 - 1
+# => header2 - 2
+# => header3 - 3
+# => header4 - 4
+#@end
+
 --- empty? -> bool
 
 内部で保持している @row へ委譲します。
 
+#@#noexample
 
 --- field?(data) -> bool
 
@@ -127,8 +269,25 @@ include Enumerable
 
 @param data この行に含まれているかどうか調べたい値を指定します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], [1, 2, 3, 4])
+row.field?(1) # => true
+row.field?(5) # => false
+#@end
+
 --- field_row? -> bool
 フィールド行であれば真を返します。そうでなければ偽を返します。
+
+#@samplecode 例
+require "csv"
+
+header_row = CSV::Row.new(["header1", "header2"], [], true)
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+header_row.field_row? # => false
+row.field_row?        # => true
+#@end
 
 --- fields(*headers_and_or_indices) -> Array
 --- values_at(*headers_and_or_indices) -> Array
@@ -158,11 +317,35 @@ include Enumerable
 
 @param name この行のヘッダに含まれているかどうか調べたい値を指定します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+row.header?("header1") # => true
+row.header?("header3") # => false
+#@end
+
 --- header_row? -> bool
 ヘッダ行であれば真を返します。そうでなければ偽を返します。
 
+#@samplecode 例
+require "csv"
+
+header_row = CSV::Row.new(["header1", "header2"], [], true)
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+header_row.header_row? # => true
+row.header_row?        # => false
+#@end
+
 --- headers -> Array
 この行のヘッダのリストを返します。
+
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+row.headers # => ["header1", "header2"]
+#@end
 
 --- index(header, minimum_index = 0) -> Integer
 
@@ -173,15 +356,34 @@ include Enumerable
 @param minimum_index このインデックスより後で、ヘッダの名前を探します。
                      重複しているヘッダがある場合に便利です。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header1"], [1, 2, 3])
+row.index("header1")    # => 0
+row.index("header1", 1) # => 2
+#@end
+
 @see [[m:CSV::Row#field]]
 
 --- inspect -> String
 ASCII 互換であるエンコーディングの文字列で自身の情報を返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header1"], [1, 2, 3])
+row.inspect # => "#<CSV::Row \"header1\":1 \"header2\":2 \"header1\":3>"
+#@end
+
 --- length -> Integer
 --- size -> Integer
 
 [[m:Array#length]], [[m:Array#size]] に委譲します。
+
+#@#noexample Array#size の例を参照
+
+@see [[m:Array#size]]
 
 --- push(*args) -> self
 複数のフィールドを追加するためのショートカットです。
@@ -196,6 +398,14 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を�
 
 自身を CSV な文字列として返します。ヘッダは使用しません。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2"], [1, 2])
+row.to_csv                                    # => "1,2\n"
+row.to_csv( {col_sep: "|", row_sep: "<br>"} ) # => "1|2<br>"
+#@end
+
 --- to_hash -> Hash
 
 自身をシンプルなハッシュに変換します。
@@ -203,39 +413,17 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を�
 フィールドの順序は無視されます。
 重複したフィールドは削除されます。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header2", "header1", "header2"], [1, 2, 3])
+row.to_hash # => {"header2"=>3, "header1"=>2}
+#@end
+
 == Protected Instance Methods
 
 --- row -> Array
 
 同値性を比較するために使用する内部的なデータです。
 
-#@else
-= class CSV::Row < Array
-CSV形式1行分のデータ（Row）を操作するためのクラス。
-#@# 1.8.2 以降で deprecated
-
-== Instance Methods
-
-#@until 1.8.2
-
---- match(rhs) -> bool
-自分自身と引数rhsを比較しtrue/falseを返します。
-
-比較方法としては、[[c:CSV::Row]]オブジェクトの各Cellのデータを個別にCSV::Cell#matchで比較を行いそれらの全ての返り値がtrueの時のみtrueを返します。
-
-@param rhs 比較される[[c:CSV::Row]]クラスのオブジェクト
-
-===== 注意
-
-このメソッドはバージョン1.8.2で廃止されました。
-
---- to_a -> Array
-自分自身を[[c:Array]]オブジェクトとして返します。
-
-===== 注意
-
-このメソッドはバージョン1.8.2で廃止されました。
-
-
-#@end
-#@end
+#@#noexample

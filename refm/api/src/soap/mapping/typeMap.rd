@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 = reopen SOAP
 
@@ -7,4 +6,3 @@
 --- TypeMap
 #@todo
 
-#@end

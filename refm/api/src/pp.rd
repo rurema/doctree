@@ -4,10 +4,12 @@ require prettyprint
 
 オブジェクトなどを見やすく出力するためのライブラリです。
 
+#@until 2.5.0
 このライブラリを require すると [[m:Kernel.#pp]] が定義されます。
 [[m:Kernel.#p]] のかわりに [[m:Kernel.#pp]] を使うことにより、
-適切にインデントと改行された分かりやすい出力を得ることが出来ます。pp ライブラリは、
-ユーザがあたらしく定義したクラスに対しても見やすい表示を
+適切にインデントと改行された分かりやすい出力を得ることが出来ます。
+#@end
+pp ライブラリは、ユーザがあたらしく定義したクラスに対しても見やすい表示を
 するように作られていますので、[[m:Kernel.#pp]] を使う上で余計な作業をする
 必要はありません。
 
@@ -313,37 +315,14 @@ pp に表示したくないインスタンス変数がある場合にこのメ�
 @raise RuntimeError 出力する全てのオブジェクトに [[m:Object#pretty_print]] が定義されて
                     いない場合に発生します。
 
+#@until 2.5.0
 = reopen Kernel
 == Module Functions
-#@since 1.9.2
---- pp(*obj)    -> object
-#@else
---- pp(*obj)    -> nil
+#@include(_builtin/functions_pp)
 #@end
 
-指定されたオブジェクト obj を標準出力に見やすい形式(プリティプリント)で出力します。
-obj それぞれを引数として [[m:PP.pp]] を呼びことと同等です。
-
-@param obj 表示したいオブジェクトを指定します。
-
-例:
-  require 'pp'
-
-  b = [1, 2, 3] * 4
-  a = [b, b]
-  a << a    
-  pp a
-
-  #=> [[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
-       [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
-       [...]]
-
-@see [[m:PP.pp]]
-
-#@since 1.8.5 
 = reopen Object
 == Instance Methods
 --- pretty_inspect    -> String
 
 self を pp で表示したときの結果を文字列として返します。
-#@end

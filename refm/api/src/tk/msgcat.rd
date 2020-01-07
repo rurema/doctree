@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require tk
 
@@ -9,10 +8,8 @@ include TkCore
 
 == Class Methods
 
-#@since 1.8.3
 --- package_name
 #@todo
-#@end
 
 --- callback(namespace, locale, src_str, *args)
 #@todo
@@ -100,10 +97,8 @@ include TkCore
 --- TkCommandNames
 #@todo
 
-#@since 1.8.3
 --- PACKAGE_NAME
 #@todo
-#@end
 
 --- MSGCAT_EXT
 #@todo
@@ -111,4 +106,3 @@ include TkCore
 --- UNKNOWN_CBTBL
 #@todo
 
-#@end

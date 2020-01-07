@@ -7,11 +7,9 @@ require wsdl/info
 --- new
 #@todo
 
-#@since 1.8.3
 --- attr_reader_ref(symbol)
 #@todo
 
-#@end
 
 == Instance Methods
 
@@ -31,12 +29,10 @@ require wsdl/info
 --- form=
 #@todo
 
-#@since 1.8.3
 --- local_simpletype
 --- local_simpletype=
 #@todo
 
-#@end
 
 --- name
 --- name=
@@ -52,11 +48,9 @@ require wsdl/info
 --- ref=
 #@todo
 
-#@since 1.8.3
 --- refelement
 #@todo
 
-#@end
 
 --- targetnamespace
 #@todo

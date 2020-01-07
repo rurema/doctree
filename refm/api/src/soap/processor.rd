@@ -1,4 +1,3 @@
-#@since 1.8.1
 #@#require xsd/datatypes
 require soap/soap
 require soap/element
@@ -21,4 +20,3 @@ require soap/encodingstyle/aspDotNetHandler
 --- default_parser_option=(rhs)
 #@todo
 
-#@end

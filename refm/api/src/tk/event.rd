@@ -1,4 +1,3 @@
-#@since 1.8.2
 require tkutil
 require tk
 #@include(event/TkEvent)
@@ -6,4 +5,3 @@ require tk
 #@include(event/TkEvent__Event__Grp)
 #@include(event/TkEvent__Event__StateMask)
 #@include(event/TkEvent__Event__TypeNum)
-#@end

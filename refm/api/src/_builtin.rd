@@ -29,6 +29,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Encoding__Converter)
 #@include(_builtin/Enumerable)
 #@include(_builtin/Enumerator)
+#@since 2.6.0
+#@include(_builtin/Enumerator__ArithmeticSequence)
+#@end
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
 #@end
@@ -44,6 +47,9 @@ require を書かなくても使うことができます。
 #@end
 #@include(_builtin/Float)
 #@include(_builtin/FloatDomainError)
+#@since 2.5.0
+#@include(_builtin/FrozenError)
+#@end
 #@include(_builtin/GC)
 #@include(_builtin/GC__Profiler)
 #@include(_builtin/Hash)
@@ -92,6 +98,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/RegexpError)
 #@include(_builtin/RubyVM)
 #@include(_builtin/RubyVM__InstructionSequence)
+#@since 2.6.0
+#@include(_builtin/RubyVM__MJIT)
+#@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
 #@include(_builtin/SecurityError)
@@ -125,6 +134,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/UnboundMethod)
 #@since 2.2.0
 #@include(_builtin/UncaughtThrowError)
+#@end
+#@since 2.4.0
+#@include(_builtin/Warning)
 #@end
 #@include(_builtin/ZeroDivisionError)
 #@include(_builtin/fatal)

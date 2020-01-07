@@ -52,7 +52,6 @@ args は、 [TkVariableのインスタンス, "キー", "操作"]
 
 値をvalに設定します。
 
-#@since 1.8.3
 --- set_value(val)
 #@todo
 
@@ -62,7 +61,6 @@ args は、 [TkVariableのインスタンス, "キー", "操作"]
 --- value_type=
 #@todo
 
-#@end
 
 --- [](index)
 #@todo
@@ -82,11 +80,9 @@ selfはTclの配列でなければなりません。
 値を数値([[c:Fixnum]])として返します。(現状のTkVariableは、
 Bignumを値にすることはできません)
 
-#@since 1.8.3
 --- element_to_i(*idxs)
 #@todo
 
-#@end
 
 --- to_f
 #@todo
@@ -94,11 +90,9 @@ Bignumを値にすることはできません)
 値を数値([[c:Float]])として返します。
 
 
-#@since 1.8.3
 --- element_to_f(*idxs)
 #@todo
 
-#@end
 
 --- to_s
 #@todo
@@ -167,11 +161,9 @@ TkVariable, String, Integer, Float, Arrayのいずれかです。
 --- ref(*idxs)
 #@todo
 
-#@since 1.8.3
 --- exist?(*elems)
 #@todo
 
-#@end
 
 --- trace_callback(elem, op)
 #@todo
@@ -242,7 +234,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- coerce(other)
 #@todo
 
-#@since 1.8.3
 --- size
 #@todo
 
@@ -278,7 +269,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- element_lset(elem_idxs, idx, val)
 #@todo
 
-#@end
 
 --- bool
 #@todo
@@ -293,7 +283,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- list=
 #@todo
 
-#@since 1.8.3
 --- set_list(val)
 #@todo
 
@@ -308,7 +297,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- set_list_element_type(idxs, val)
 #@todo
 
-#@end
 
 --- numeric
 #@todo
@@ -316,7 +304,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- numeric=
 #@todo
 
-#@since 1.8.3
 --- set_numeric(val)
 #@todo
 
@@ -333,10 +320,8 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- set_numeric_element_type(idxs, val)
 #@todo
 
-#@end
 
 
-#@since 1.8.3
 --- bool_element
 #@todo
 
@@ -418,7 +403,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- set_element_value_type(idxs, val)
 #@todo
 
-#@end
 
 --- default_value(val = nil)
 --- default_value(val = nil) { .... }
@@ -427,7 +411,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- default_value=
 #@todo
 
-#@since 1.8.3
 --- set_default_value(val)
 #@todo
 
@@ -444,7 +427,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- set_default_element_value_type(idxs, type)
 #@todo
 
-#@end
 
 --- default_proc(cmd = Proc.new)
 #@todo
@@ -470,7 +452,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- to_eval
 #@todo
 
-#@since 1.8.3
 --- symbol
 --- to_sym
 #@todo
@@ -496,12 +477,10 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- set_symbol_element_type(idxs, val)
 #@todo
 
-#@end
 
 --- update(hash)
 #@todo
 
-#@since 1.8.3
 --- variable
 #@todo
 
@@ -542,7 +521,6 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 --- set_window_element_type(idxs, win)
 #@todo
 
-#@end
 
 --- zero?
 #@todo

@@ -8,9 +8,7 @@ self <=> other は
  * self が other より大きいなら正の整数
  * self と other が等しいなら 0
  * self が other より小さいなら負の整数
-#@since 1.8.0
  * self と other が比較できない場合は nil
-#@end
 をそれぞれ返すことが期待されています。
 
 他の比較演算子は、 <=> 演算子を利用して定義されます。
@@ -23,7 +21,6 @@ self <=> other は
 --- ==(other)    -> bool | nil
 #@end
 
-#@since 1.8.0
 比較演算子 <=> をもとにオブジェクト同士を比較します。
 <=> が 0 を返した時に、true を返します。
 それ以外を返した場合は、false を返します。
@@ -32,15 +29,16 @@ self <=> other は
 <=> が nil を返した場合は、 nil を返します。
 #@end
 
-#@else
-self と other が等しい時真を返します。
-#@end
 
 #@until 2.3.0
 self <=> other で例外が発生した場合は例外を無視して false を返します。
 #@end
 
 @param other 自身と比較したいオブジェクトを指定します。
+
+例:
+  1 == 1   # => true
+  1 == 2   # => false
 
 --- >(other)    -> bool
 
@@ -53,9 +51,11 @@ self が other より大きい時真を返します。
 #@end
 
 @param other 自身と比較したいオブジェクトを指定します。
-#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
-#@end
+
+例:
+  1 > 0   # => true
+  1 > 1   # => false
 
 --- >=(other)    -> bool
 
@@ -68,9 +68,12 @@ self が other より大きいか等しい時真を返します。
 #@end
 
 @param other 自身と比較したいオブジェクトを指定します。
-#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
-#@end
+
+例:
+  1 >= 0   # => true
+  1 >= 1   # => true
+  1 >= 2   # => false
 
 --- <(other)    -> bool
 
@@ -83,9 +86,11 @@ self が other より小さい時真を返します。
 #@end
 
 @param other 自身と比較したいオブジェクトを指定します。
-#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
-#@end
+
+例:
+  1 < 1   # => false
+  1 < 2   # => true
 
 --- <=(other)    -> bool
 
@@ -98,9 +103,12 @@ self が other より小さいか等しい時真を返します。
 #@end
 
 @param other 自身と比較したいオブジェクトを指定します。
-#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
-#@end
+
+例:
+  1 <= 0   # => false
+  1 <= 1   # => true
+  1 <= 2   # => true
 
 --- between?(min, max)    -> bool
 
@@ -119,12 +127,28 @@ self が min と max の範囲内(min, max
 
 @param max 範囲の上端を表すオブジェクトを指定します。
 
-#@since 1.8.0
 @raise ArgumentError self <=> min か、self <=> max が nil を返
                      したときに発生します。
-#@end
 
   3.between?(1, 5)               #=> true
   6.between?(1, 5)               #=> false
   'cat'.between?('ant', 'dog')   #=> true
   'gnu'.between?('ant', 'dog')   #=> false
+
+#@since 2.4.0
+--- clamp(min, max)  -> object
+
+self を範囲内に収めます。
+
+self <=> min が負数を返したときは min を、
+self <=> max が正数を返したときは max を、
+それ以外の場合は self を返します。
+
+例:
+  12.clamp(0, 100)         #=> 12
+  523.clamp(0, 100)        #=> 100
+  -3.123.clamp(0, 100)     #=> 0
+
+  'd'.clamp('a', 'f')      #=> 'd'
+  'z'.clamp('a', 'f')      #=> 'f'
+#@end

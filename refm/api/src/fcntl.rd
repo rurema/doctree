@@ -99,8 +99,6 @@ close-on-exec フラグの値です。
 --- O_WRONLY -> Integer
 ファイルを書き込み専用で開きます。
 
-#@since 1.8.1
 --- O_ACCMODE -> Integer
 ファイルアクセスモードのマスクです。
-#@end
 

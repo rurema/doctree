@@ -1,4 +1,3 @@
-#@since 1.8.1
 require soap/property
 
 = module SOAP::HTTPConfigLoader
@@ -23,4 +22,3 @@ require soap/property
 --- key_from_file(filename)
 #@todo
 
-#@end

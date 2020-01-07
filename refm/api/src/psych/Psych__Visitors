@@ -9,7 +9,7 @@ Psych 内部で利用する、Visitor パターンのための 抽象クラス�
 = class Psych::Visitors::YAMLTree < Psych::Visitors::Visitor
 Ruby オブジェクトから YAML の AST を構築するためのクラスです。
 
-==== 例
+=== 例
   builder = Psych::Visitors::YAMLTree.new
   builder << { :foo => 'bar' }
   builder << ["baz", "bazbaz"]

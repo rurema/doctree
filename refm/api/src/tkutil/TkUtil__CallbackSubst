@@ -8,11 +8,9 @@
 
 == Class Methods
 
-#@since 1.8.3
 --- _define_attribute_aliases(tbl)
 #@todo
 
-#@end
 
 --- _get_all_subst_keys
 #@todo
@@ -35,8 +33,6 @@
 --- scan_args(arg_key, val_key)
 #@todo
 
-#@since 1.8.3
 --- subst_arg(*args)
 #@todo
 
-#@end

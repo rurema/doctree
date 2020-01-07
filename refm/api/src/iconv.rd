@@ -93,7 +93,7 @@ GNU libiconv で iconv ライブラリがビルドしてある場合、
 
 === 参考
 
-  * 標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv ([[url:http://magazine.rubyist.net/?0009-BundledLibraries#l30]])
+  * 標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv ([[url:https://magazine.rubyist.net/articles/0009/0009-BundledLibraries.html#iconv]])
 
 = class Iconv < Data
 iconv 関数のラッパークラスです。
@@ -368,13 +368,11 @@ str が nil の場合、空文字列""を返します。
 
 のような形式の文字列として返します。
 
-#@since 1.8.4
 = class Iconv::BrokenLibrary < RuntimeError
 include Iconv::Failure
 
 iconv ライブラリのバグなどにより、[[man:errno(3)]] が設定されなかった場合に発生します。
 (Windows で iconv.dll の使用する MSVC runtime DLL のバージョンが、ruby 本体が使用するものと一致していない場合も含みます。)
-#@end
 
 = class Iconv::IllegalSequence < ArgumentError
 include Iconv::Failure
@@ -388,12 +386,10 @@ include Iconv::Failure
 入力の最後が不完全な文字かシフトで終っているために変換が停止したこと
 を表します。
 
-#@since 1.8.3
 = class Iconv::InvalidEncoding < ArgumentError
 include Iconv::Failure
 
 メソッドの引数等で指定された文字コード体系が見つからない (システム上で有効でない) 場合に発生します。
-#@end
 
 = class Iconv::OutOfRange < RuntimeError
 include Iconv::Failure

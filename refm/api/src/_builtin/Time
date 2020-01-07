@@ -16,7 +16,7 @@ Time オブジェクトは時刻を起算時からの経過秒数で保持して
 現在の Unix システムでの最大時刻は、
 協定世界時の2038年1月19日午前3時14分7秒
 です。
-#@# ENV["TZ"]=""; p Time.at(0x7fffffff) # => Tue Jan 19 03:14:07 UTC 2038
+#@# ENV["TZ"]=""; p Time.at(0x7fffffff) # => 2038-01-19 03:14:07 +0000
 
 Time オブジェクトが格納可能な時刻の範囲は環境によって異なります。
 範囲の下限としては、上記起算時からの経過秒数として 0 および正数しか
@@ -47,7 +47,7 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境
 
 [[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
 
-[[man:localtime(3)]] も参照しください。
+[[man:localtime(3)]] も参照してください。
 
 === C 言語との違いに注意
 
@@ -65,6 +65,14 @@ time で指定した時刻の Time オブジェクトを返します。
 
 @param time Time オブジェクト、もしくは起算時からの経過秒数を表わす数値で指定します。
 
+例:
+  Time.at(0)                 # => 1970-01-01 09:00:00 +0900
+  Time.at(Time.at(0))        # => 1970-01-01 09:00:00 +0900
+  Time.at(Time.at(0).getutc) # => 1970-01-01 00:00:00 UTC
+  Time.at(946702800)         # => 2000-01-01 14:00:00 +0900
+  Time.at(-284061600)        # => 1960-12-31 15:00:00 +0900
+  Time.at(946684800.2).usec  # => 200000
+
 --- at(time, usec)    -> Time
 
 time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
@@ -72,10 +80,28 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 
 生成された Time オブジェクトのタイムゾーンは地方時となります。
 
-@param time 起算時からの経過秒数を表わす整数を指定します。
+@param time 起算時からの経過秒数を表わす値を[[c:Integer]]、 [[c:Float]]、 [[c:Rational]]、または他の[[c:Numeric]]で指定します。
 
-@param usec マイクロ秒を整数で指定します。
+@param usec マイクロ秒を[[c:Integer]]、 [[c:Float]]、 [[c:Rational]]、または他の[[c:Numeric]]で指定します。
 
+例:
+  Time.at(946684800, 123456.789).nsec  # => 123456789
+
+#@since 2.5.0
+--- at(seconds, xseconds, unit) -> Time
+
+unit に応じて seconds + xseconds ミリ秒などの時刻を表す Time オブジェクトを返します。
+
+@param seconds 起算時からの経過秒数を表わす値を[[c:Integer]]、 [[c:Float]]、 [[c:Rational]]、または他の[[c:Numeric]]で指定します。
+@param xseconds unit に対応するミリ秒かマイクロ秒かナノ秒を指定します。
+@param unit :millisecond, :usec, :microsecond, :nsec, :nanosecond のいずれかを指定します。
+
+例:
+  Time.at(946684800, 123.456789, :millisecond).nsec  # => 123456789
+  Time.at(946684800, 123456.789, :usec).nsec         # => 123456789
+  Time.at(946684800, 123456.789, :microsecond).nsec  # => 123456789
+  Time.at(946684800, 123456789, :nsec).nsec          # => 123456789
+#@end
 --- gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
 --- utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 
@@ -104,7 +130,7 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 
 @raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
 
-  p Time.gm(2000, 1, 1)  #=> Sat Jan 01 00:00:00 UTC 2000
+  p Time.gm(2000, 1, 1)  #=> 2000-01-01 00:00:00 UTC
 
 --- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
 --- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
@@ -171,7 +197,7 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 
 @raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
 
- p Time.local(2000, 1, 1) #=> Sat Jan 01 00:00:00 +0900 2000
+ p Time.local(2000, 1, 1) #=> 2000-01-01 00:00:00 +0900
 
 --- local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
 --- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
@@ -216,6 +242,9 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 現在時刻の Time オブジェクトを生成して返します。
 タイムゾーンは地方時となります。
 
+例:
+  Time.now # => 2009-06-24 12:39:54 +0900
+
 #@since 1.9.2
 --- new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, utc_offset = nil)    -> Time
 
@@ -237,7 +266,7 @@ utc_offset に nil を指定した場合の値は、現在のタイムゾーン�
 
 @param  sec 秒を 0 から 60 までの整数か文字列で指定します。(60はうるう秒)
 
-@param  utc_offset 協定世界時との時差を、秒を単位とする整数か、 
+@param  utc_offset 協定世界時との時差を、秒を単位とする整数か、
                    "+HH:MM" "-HH:MM" 形式の文字列で指定します。
 
 @raise ArgumentError 与えられた引数が無効である場合に発生します。
@@ -274,8 +303,8 @@ self より other 秒だけ後の時刻を返します。
 
 @param other 自身からの秒数を数値で指定します。
 
-  t = Time.now         #=> Wed Apr 09 08:56:03 CDT 2003
-  t + (60 * 60 * 24)   #=> Thu Apr 10 08:56:03 CDT 2003
+  t = Time.now         #=> 2019-12-18 22:16:49 +0900
+  t + (60 * 60 * 24)   #=> 2019-12-19 13:16:49 +0900
 
 --- -(time)    -> Float
 
@@ -283,8 +312,8 @@ self より other 秒だけ後の時刻を返します。
 
 @param time 自身との差を算出したい Time オブジェクトを指定します。
 
-  t = Time.now       #=> Wed Apr 09 08:56:03 CDT 2003
-  t2 = t + 2592000   #=> Fri May 09 08:56:03 CDT 2003
+  t = Time.now       #=> 2019-12-18 22:16:49 +0900
+  t2 = t + 2592000   #=> 2020-01-17 22:16:49 +0900
   t2 - t             #=> 2592000.0
 
 --- -(sec)    -> Time
@@ -293,21 +322,30 @@ self より other 秒だけ後の時刻を返します。
 
 @param sec 実数を秒を単位として指定します。
 
-  t = Time.now       #=> Wed Apr 09 08:56:03 CDT 2003
-  t2 = t + 2592000   #=> Fri May 09 08:56:03 CDT 2003
-  t2 - 2592000       #=> Wed Apr 09 08:56:03 CDT 2003
+  t = Time.now       #=> 2019-12-18 22:16:49 +0900
+  t2 = t + 2592000   #=> 2020-01-17 22:16:49 +0900
+  t2 - 2592000       #=> 2019-12-18 22:16:49 +0900
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
 self と other の時刻を比較します。self の方が大きい場合は 1 を、等しい場合は 0 を、
 小さい場合は -1 を返します。比較できない場合は、nil を返します。
 
-#@since 1.8.0
 @param other 自身と比較したい時刻を Time オブジェクトで指定します。
-#@else
-@param other 自身と比較したい時刻を Time オブジェクトか数値で指定します。
-             数値の場合は起算時からの経過秒数とみなして比較します。
-#@end
+
+例:
+  t = Time.now       # => 2017-11-10 04:42:19 +0900
+  t2 = t + 2592000   # => 2017-12-10 04:42:19 +0900
+  t <=> t2           # => -1
+  t2 <=> t           # => 1
+
+  t = Time.now       # => 2017-11-10 04:42:19 +0900
+  t2 = t + 0.1       # => 2017-11-10 04:42:19 +0900
+  t.nsec             # => 98222999
+  t2.nsec            # => 198222999
+  t <=> t2           # => -1
+  t2 <=> t           # => 1
+  t <=> t            # => 0
 
 --- eql?(other)    -> bool
 
@@ -315,6 +353,10 @@ other が Time かそのサブクラスのインスタンスであり自身と�
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したい時刻を Time オブジェクトを指定します。
+
+例:
+  Time.local(2000, 1, 1).eql?(Time.local(2000, 1, 1))   # => true
+  Time.local(2000, 1, 1).eql?(Time.local(2000, 1, 2))   # => false
 
 --- asctime    -> String
 --- ctime      -> String
@@ -330,27 +372,34 @@ true を返します。そうでない場合に false を返します。
 #@end
 #@end
 
+例:
+  Time.now.asctime            # => "Fri Nov 10 00:00:32 2017"
+  Time.now.asctime.encoding   # => #<Encoding:US-ASCII>
+  Time.now.ctime              # => "Fri Nov 10 00:00:32 2017"
+
 --- gmt?    -> bool
 --- utc?    -> bool
 
 self のタイムゾーンが協定世界時に設定されていれば真を返します。
 
-#@since 1.8.0
+  t = Time.local(2017,9,19,15,0,0)   # => 2017-09-19 15:00:00 +0900
+  t.utc?                             # => false
+  utc_t = t.getutc                   # => 2017-09-19 06:00:00 UTC
+  utc_t.utc?                         # => true
+
 --- getgm     -> Time
 --- getutc    -> Time
 
 タイムゾーンを協定世界時に設定した Time オブジェクトを新しく
 生成して返します。
 
-  t = Time.local(2000,1,1,20,15,1)   #=> Sat Jan 01 20:15:01 CST 2000
+  t = Time.local(2000,1,1,20,15,1)   #=> 2000-01-01 20:15:01 +0900
   t.gmt?                             #=> false
-  y = t.getgm                        #=> Sun Jan 02 02:15:01 UTC 2000
+  y = t.getgm                        #=> 2000-01-01 11:15:01 UTC
   y.gmt?                             #=> true
   t == y                             #=> true
 
-#@end
 
-#@since 1.8.0
 --- getlocal             -> Time
 #@since 1.9.2
 --- getlocal(utc_offset) -> Time
@@ -365,16 +414,15 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
                   の文字列で指定します。
 #@end
 
-  t = Time.utc(2000,1,1,20,15,1)  #=> Sat Jan 01 20:15:01 UTC 2000
+  t = Time.utc(2000,1,1,20,15,1)  #=> 2000-01-01 20:15:01 UTC
   t.utc?                          #=> true
-  l = t.getlocal                  #=> Sat Jan 01 14:15:01 CST 2000
+  l = t.getlocal                  #=> 2000-01-02 05:15:01 +0900
   l.utc?                          #=> false
   t == l                          #=> true
 #@since 1.9.2
   j = t.getlocal("+09:00")        #=> 2000-01-02 05:15:01 +0900
   j.utc?                          #=> false
   t == j                          #=> true
-#@end
 #@end
 
 --- gmtime    -> self
@@ -391,9 +439,9 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 なる場合があります。システムを越えて Time オブジェクトを受け
 渡す場合には注意する必要があります。
 
-  t = Time.now   #=> Wed Apr 09 08:56:03 CDT 2003
+  t = Time.now   #=> 2019-12-18 22:16:49 +0900
   t.gmt?         #=> false
-  t.gmtime       #=> Wed Apr 09 13:56:03 UTC 2003
+  t.gmtime       #=> 2019-12-18 13:16:49 UTC
   t.gmt?         #=> true
 
 --- localtime             -> self
@@ -420,7 +468,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
   t = Time.utc(2000, "jan", 1, 20, 15, 1)
   t.utc?                #=> true
-  t.localtime           #=> 2000-01-01 14:15:01 -0600
+  t.localtime           #=> 2000-01-02 05:15:01 +0900
   t.utc?                #=> false
 #@since 1.9.2
   t.localtime("+09:00") #=> 2000-01-02 05:15:01 +0900
@@ -433,17 +481,18 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
 @param format フォーマット文字列を指定します。使用できるものは 以下の通りです。
 
-#@since 1.9.1
   * %A: 曜日の名称(Sunday, Monday ... )
   * %a: 曜日の省略名(Sun, Mon ... )
   * %B: 月の名称(January, February ... )
   * %b: 月の省略名(Jan, Feb ... )
   * %C: 世紀 (2009年であれば 20)
-  * %c: 日付と時刻
+  * %c: 日付と時刻 (%a %b %e %T %Y)
   * %D: 日付 (%m/%d/%y)
   * %d: 日(01-31)
   * %e: 日。一桁の場合、半角空白で埋める ( 1..31)
   * %F: %Y-%m-%d と同等 (ISO 8601の日付フォーマット)
+  * %G: ISO 8601の暦週の年
+  * %g: ISO 8601の暦週の年の下2桁(00-99)
   * %H: 24時間制の時(00-23)
   * %h: %b と同等
   * %I: 12時間制の時(01-12)
@@ -457,6 +506,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * %N: 秒の小数点以下。桁の指定がない場合は9桁 (ナノ秒)、%6N: マイクロ秒 (6桁)、%3N: ミリ秒 (3桁)
   * %P: 午前または午後(am,pm)
   * %p: 午前または午後(AM,PM)
+  * %Q: 1970-01-01 00:00:00 UTC からの経過ミリ秒 ([[m:Time#strftime]] は対応していませんが、[[m:Date#strftime]] で使えます)
   * %R: 24時間制の時刻。%H:%M と同等。
   * %r: 12時間制の時刻。%I:%M:%S %p と同等。
   * %S: 秒(00-60) (60はうるう秒)
@@ -465,49 +515,22 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * %t: タブ文字 (\t)
   * %U: 週を表す数。最初の日曜日が第1週の始まり(00-53)
   * %u: 月曜日を1とした、曜日の数値表現 (1..7)
-  * %v: VMS形式の日付 (%e-%b-%Y)
   * %V: ISO 8601形式の暦週 (01..53)
+  * %v: VMS形式の日付 (%e-%^b-%4Y)
   * %W: 週を表す数。最初の月曜日が第1週の始まり(00-53)
   * %w: 曜日を表す数。日曜日が0(0-6)
-  * %X: 時刻
-  * %x: 日付
+  * %X: 時刻 (%Tと同等)
+  * %x: 日付 (%Dと同等)
   * %Y: 西暦を表す数
   * %y: 西暦の下2桁(00-99)
-  * %Z: タイムゾーン
+  * %Z: タイムゾーン (環境依存)
 #@#  * %Z: タイムゾーン  [[unknown:trap|trap::Time]]
   * %z: タイムゾーン。UTCからのオフセット (例 +0900)
-#@since 1.9.3
   * %:z: タイムゾーン。コロンが入ったUTCからのオフセット (例 +09:00)
   * %::z: タイムゾーン。コロンが入った秒まで含むUTCからのオフセット (例 +09:00:00)
-#@end
   * %%: %自身
-#@else
-  * %A: 曜日の名称(Sunday, Monday ... )
-  * %a: 曜日の省略名(Sun, Mon ... )
-  * %B: 月の名称(January, February ... )
-  * %b: 月の省略名(Jan, Feb ... )
-  * %c: 日付と時刻
-  * %d: 日(01-31)
-  * %H: 24時間制の時(00-23)
-  * %I: 12時間制の時(01-12)
-  * %j: 年中の通算日(001-366)
-  * %M: 分(00-59)
-  * %m: 月を表す数字(01-12)
-  * %p: 午前または午後(AM,PM)
-  * %S: 秒(00-60) (60はうるう秒)
-  * %U: 週を表す数。最初の日曜日が第1週の始まり(00-53)
-  * %W: 週を表す数。最初の月曜日が第1週の始まり(00-53)
-  * %w: 曜日を表す数。日曜日が0(0-6)
-  * %X: 時刻
-  * %x: 日付
-  * %Y: 西暦を表す数
-  * %y: 西暦の下2桁(00-99)
-  * %Z: タイムゾーン
-#@#  * %Z: タイムゾーン  [[unknown:trap|trap::Time]]
-  * %%: %自身
-#@end
+  * %+: [[man:date(1)]]の形式 (%a %b %e %H:%M:%S %Z %Y) ([[m:Time#strftime]] は対応していませんが、[[m:Date#strftime]] で使えます)
 
-#@since 1.9.1
 このメソッドは [[man:strftime(3)]] や glibcの仕様を参考に作成されており、以下のオプションが利用できます。
   * ^: 大文字で出力を行なう
   * #: 小文字であれば大文字に、大文字であれば小文字に変更する
@@ -515,21 +538,52 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   * _: 空白埋めにする
   * 0: 0埋めにする
   * 数値: 表示桁数を指定する
+EとOは無視されます。
 
-  t = Time.now                         #=> 2010-09-05 15:41:17 0900
-  t.strftime("Printed on %m/%d/%Y")    #=> "Printed on 09/05/2010"
-  t.strftime("Printed on %m/%-d/%_6Y") #=> "Printed on 09/5/  2010"
-  t.strftime("at %I:%M%p")             #=> "at 03:41PM"
-  t.strftime("at %I:%M%#p")            #=> "at 03:41pm"
-#@else
-現在の実装では、このメソッドは、システムの [[man:strftime(3)]]
-をそのまま使用しています。そのためここにあげた指示子以外のものが使
-用できる場合があります。ただし、上記以外の指示子を使用した場合、移
-植性をそこなう可能性がある点に注意してください。
+#@samplecode 例
+  t = Time.now                         #=> 2019-12-18 22:16:49 +0900
+  t.strftime("Printed on %m/%d/%Y")    #=> "Printed on 12/18/2019"
+  t.strftime("Printed on %m/%-d/%_6Y") #=> "Printed on 12/18/  2019"
+  t.strftime("at %I:%M%p")             #=> "at 10:16PM"
+  t.strftime("at %I:%M%#p")            #=> "at 10:16pm"
+#@end
 
-  t = Time.now
-  t.strftime("Printed on %m/%d/%Y")   #=> "Printed on 04/09/2003"
-  t.strftime("at %I:%M%p")            #=> "at 08:56AM"
+#@samplecode 様々なISO 8601形式
+t = Time.new(2001,2,3,4,5,6,"+09:00")
+t.strftime("%Y%m%d")           # => 20010203                  Calendar date (basic)
+t.strftime("%F")               # => 2001-02-03                Calendar date (extended)
+t.strftime("%Y-%m")            # => 2001-02                   Calendar date, reduced accuracy, specific month
+t.strftime("%Y")               # => 2001                      Calendar date, reduced accuracy, specific year
+t.strftime("%C")               # => 20                        Calendar date, reduced accuracy, specific century
+t.strftime("%Y%j")             # => 2001034                   Ordinal date (basic)
+t.strftime("%Y-%j")            # => 2001-034                  Ordinal date (extended)
+t.strftime("%GW%V%u")          # => 2001W056                  Week date (basic)
+t.strftime("%G-W%V-%u")        # => 2001-W05-6                Week date (extended)
+t.strftime("%GW%V")            # => 2001W05                   Week date, reduced accuracy, specific week (basic)
+t.strftime("%G-W%V")           # => 2001-W05                  Week date, reduced accuracy, specific week (extended)
+t.strftime("%H%M%S")           # => 040506                    Local time (basic)
+t.strftime("%T")               # => 04:05:06                  Local time (extended)
+t.strftime("%H%M")             # => 0405                      Local time, reduced accuracy, specific minute (basic)
+t.strftime("%H:%M")            # => 04:05                     Local time, reduced accuracy, specific minute (extended)
+t.strftime("%H")               # => 04                        Local time, reduced accuracy, specific hour
+t.strftime("%H%M%S,%L")        # => 040506,000                Local time with decimal fraction, comma as decimal sign (basic)
+t.strftime("%T,%L")            # => 04:05:06,000              Local time with decimal fraction, comma as decimal sign (extended)
+t.strftime("%H%M%S.%L")        # => 040506.000                Local time with decimal fraction, full stop as decimal sign (basic)
+t.strftime("%T.%L")            # => 04:05:06.000              Local time with decimal fraction, full stop as decimal sign (extended)
+t.strftime("%H%M%S%z")         # => 040506+0900               Local time and the difference from UTC (basic)
+t.strftime("%T%:z")            # => 04:05:06+09:00            Local time and the difference from UTC (extended)
+t.strftime("%Y%m%dT%H%M%S%z")  # => 20010203T040506+0900      Date and time of day for calendar date (basic)
+t.strftime("%FT%T%:z")         # => 2001-02-03T04:05:06+09:00 Date and time of day for calendar date (extended)
+t.strftime("%Y%jT%H%M%S%z")    # => 2001034T040506+0900       Date and time of day for ordinal date (basic)
+t.strftime("%Y-%jT%T%:z")      # => 2001-034T04:05:06+09:00   Date and time of day for ordinal date (extended)
+t.strftime("%GW%V%uT%H%M%S%z") # => 2001W056T040506+0900      Date and time of day for week date (basic)
+t.strftime("%G-W%V-%uT%T%:z")  # => 2001-W05-6T04:05:06+09:00 Date and time of day for week date (extended)
+t.strftime("%Y%m%dT%H%M")      # => 20010203T0405             Calendar date and local time (basic)
+t.strftime("%FT%R")            # => 2001-02-03T04:05          Calendar date and local time (extended)
+t.strftime("%Y%jT%H%MZ")       # => 2001034T0405Z             Ordinal date and UTC of day (basic)
+t.strftime("%Y-%jT%RZ")        # => 2001-034T04:05Z           Ordinal date and UTC of day (extended)
+t.strftime("%GW%V%uT%H%M%z")   # => 2001W056T0405+0900        Week date and local time and difference from UTC (basic)
+t.strftime("%G-W%V-%uT%R%:z")  # => 2001-W05-6T04:05+09:00    Week date and local time and difference from UTC (extended)
 #@end
 
 --- sec    -> Integer
@@ -547,9 +601,17 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
 分を整数で返します。
 
+例:
+  t = Time.now        # => 2017-09-18 07:45:05 +0900
+  p t.min             # => 45
+
 --- hour    -> Integer
 
 時を整数で返します。
+
+例:
+  t = Time.now        # => 2017-09-18 07:45:05 +0900
+  p t.hour            # => 7
 
 --- mday    -> Integer
 --- day     -> Integer
@@ -602,7 +664,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
   Time.mktime(2003,  1,  1).yday #=> 1
   Time.mktime(2003,  3,  1).yday #=> 60
   Time.mktime(2003, 12, 31).yday #=> 365
-  
+
   # うるう年の場合
   Time.mktime(2004,  1,  1).yday #=> 1
   Time.mktime(2004,  2, 29).yday #=> 60
@@ -623,13 +685,9 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 
  p Time.now.zone #=> "JST"
 
-#@since 1.8.0
 --- succ    -> Time
 
 self に 1 秒足した Time オブジェクトを生成して返します。
-#@until 1.8.6
-タイムゾーンは地方時になります。
-#@end
 
 #@since 1.9.2
 このメソッドは obsolete です。 self + 1 を代わりに使用してください。
@@ -638,10 +696,9 @@ self に 1 秒足した Time オブジェクトを生成して返します。
   t = Time.now
   p t
   p t.succ
-  # => Sun Jul 18 01:41:22 JST 2004
-       Sun Jul 18 01:41:23 JST 2004
+  # => 2019-12-18 22:16:50 +0900
+       2019-12-18 22:16:51 +0900
 
-#@end
 
 --- utc_offset     -> Integer
 --- gmt_offset     -> Integer
@@ -679,8 +736,11 @@ self に 1 秒足した Time オブジェクトを生成して返します。
   * isdst: 夏時間であるかどうか (true/false)
   * zone:  タイムゾーン (文字列)
 
-  p Time.now      # => Mon Oct 20 06:02:10 JST 2003
-  p Time.now.to_a # => [10, 2, 6, 20, 10, 2003, 1, 293, false, "JST"]
+  t = Time.now
+  p t
+  p t.to_a
+  # => 2019-12-19 16:37:30 +0900
+  # => [30, 37, 16, 19, 12, 2019, 4, 353, false, "JST"]
 
 要素の順序は C 言語の tm 構造体に合わせています。ただし、
 tm 構造体に zone はありません。
@@ -713,15 +773,22 @@ yday は 1 から数えます。
 
 起算時からの経過秒数を整数で返します。
 
+例:
+  t = Time.new(2017, 11, 12, 1, 2, 3)
+  p "%10.5f" % t.to_f   # => "1510416123.00000"
+  p t.to_i              # => 1510416123
+
 --- to_s     -> String
 
-時刻を [[man:date(1)]] のような形式の文字列に変換します。
+時刻を文字列に変換した結果を返します。
+以下のようにフォーマット文字列を使って strftime を呼び出すのと同じです。
 
-  self.strftime("%a %b %d %H:%M:%S %Z %Y")
+  t = Time.now
+  t.to_s                               #=> "2019-12-18 22:16:49 +0900"
+  t.strftime("%Y-%m-%d %H:%M:%S %z")   #=> "2019-12-18 22:16:49 +0900"
 
-と同じです。
-
-  p Time.now.to_s # => "Mon Oct 20 06:02:10 JST 2003"
+  t.utc.to_s                           #=> "2019-12-18 13:16:49 UTC"
+  t.strftime("%Y-%m-%d %H:%M:%S UTC")  #=> "2019-12-18 13:16:49 UTC"
 
 #@since 1.9.1
 #@since 2.0.0
@@ -736,6 +803,8 @@ yday は 1 から数えます。
 自身のハッシュ値を返します。
 
 @return ハッシュ値を返します。
+
+#@#noexample
 
 @see [[m:Object#hash]]
 
@@ -831,7 +900,7 @@ IEEE 754 浮動小数点数で表現できる精度が違うため、[[m:Time#to
 --- round(ndigits=0) -> Time
 
 十進小数点数で指定した桁数の精度で丸めをし、
-その [[c:Time]] オブジェクト返します。
+その [[c:Time]] オブジェクトを返します。
 (デフォルトは0、つまり小数点の所で丸めます)。
 
 ndigits には 0 以上の整数を渡します。

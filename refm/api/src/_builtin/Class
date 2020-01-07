@@ -28,9 +28,7 @@
 == Class Methods
 
 --- new(superclass = Object)                -> Class
-#@since 1.8.0
 --- new(superclass = Object) {|klass| ... } -> Class
-#@end
 
 新しく名前の付いていない superclass のサブクラスを生成します。
 
@@ -43,7 +41,6 @@
   Bar = foo
   p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
 
-#@since 1.8.0
 ブロックが与えられた場合、生成したクラスを引数として
 クラスのコンテキストでブロックを実行します。以下のコードと同じです。
 
@@ -53,11 +50,9 @@
 
 この場合も生成したクラスを返します。
 ブロックの実行は Class#initialize が行います。
-#@end
 
 @param superclass 生成するクラスのスーパークラスを指定します。
 
-#@since 1.8.0
 例:
 
  k = Class.new{|c|
@@ -71,11 +66,9 @@
      }
  o = k.new              #=> "in initialize"
  o.hoge                 #=> "hoge hoge hoge"
-#@end
 
 == Instance Methods
 
-#@since 1.8.0
 --- allocate    -> object
 
 自身のインスタンスを生成して返します。生成したオブジェクトは
@@ -94,21 +87,25 @@
 
   klass.allocate.initialized? #=> false
 
-#@end
 
 --- new(*args, &block)    -> object
 
 自身のインスタンスを生成して返します。
 このメソッドの引数はブロック引数も含め [[m:Object#initialize]] に渡されます。
 
-#@since 1.8.0
 new は [[m:Class#allocate]] でインスタンスを生成し、
 [[m:Object#initialize]] で初期化を行います。
-#@end
 
 @param args [[m:Object#initialize]] に渡される引数を指定します。
 
 @param block [[m:Object#initialize]] に渡されるブロックを指定します。
+
+例:
+  # [[c:Class]] クラスのインスタンス、C クラスを生成
+  C = Class.new   # => C
+
+  # [[c:Class]] クラスのインスタンス、C クラスのインスタンスを生成
+  C.new           # => #<C:0x00005623f8b4e458>
 
 --- superclass    -> Class | nil
 

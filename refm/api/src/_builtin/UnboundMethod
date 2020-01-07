@@ -1,8 +1,4 @@
-#@since 1.8.0
 = class UnboundMethod < Object
-#@else
-= class UnboundMethod < Method
-#@end
 
 レシーバを持たないメソッドを表すクラスです。
 呼び出すためにはレシーバにバインドする必要があります。
@@ -151,9 +147,16 @@ true を返します。そうでない場合に false を返します。
   c = Array.instance_method(:size)
   p a == c                            #=> false
 
---- clone -> Method
+--- clone -> UnboundMethod
 
 自身を複製した [[c:UnboundMethod]] オブジェクトを作成して返します。
+
+#@samplecode 例
+a = String.instance_method(:size)
+b = a.clone
+
+a == b       # => true
+#@end
 
 --- inspect -> String
 --- to_s    -> String
@@ -161,6 +164,10 @@ true を返します。そうでない場合に false を返します。
 self を読みやすい文字列として返します。
 
 詳しくは [[m:Method#inspect]] を参照してください。
+
+#@samplecode 例
+String.instance_method(:count).inspect   # => "#<UnboundMethod: String#count>"
+#@end
 
 @see [[m:Method#inspect]]
 
@@ -187,7 +194,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 #@end
 
-#@since 1.8.7
 #@until 1.9.1
 --- name    -> String
 #@else
@@ -196,10 +202,21 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドの名前を返します。
 
+例:
+
+  a = String.instance_method(:size)
+  a.name   # => :size
+
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
-#@end
+
+例:
+
+  Integer.instance_method(:to_s).owner   # => Integer
+  Integer.instance_method(:to_c).owner   # => Numeric
+  Integer.instance_method(:hash).owner   # => Kernel
+
 
 #@since 1.9.1
 --- source_location -> [String, Integer] | nil
@@ -208,6 +225,13 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
 である)場合は nil を返します。
+
+#@samplecode 例
+require 'time'
+
+Time.instance_method(:zone).source_location       # => nil
+Time.instance_method(:httpdate).source_location   # => ["/Users/user/.rbenv/versions/2.4.3/lib/ruby/2.4.0/time.rb", 654]
+#@end
 
 @see [[m:Proc#source_location]], [[m:Method#source_location]]
 #@end
@@ -219,6 +243,9 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 詳しくは [[m:Method#parameters]] を参照してください。
 
+#@#noexample Method#parametersを参照
+
+
 @see [[m:Proc#parameters]], [[m:Method#parameters]]
 #@end
 
@@ -227,6 +254,8 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 self 内で super を実行した際に実行されるメソッドを [[c:UnboundMethod]] オブジェ
 クトにして返します。
+
+#@#noexample Method#super_methodを参照
 
 @see [[m:Method#super_method]]
 #@end

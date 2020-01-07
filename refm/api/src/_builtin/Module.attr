@@ -1,0 +1,62 @@
+--- attr(*name) -> nil
+--- attr(name, true) -> nil
+--- attr(name, false) -> nil
+
+インスタンス変数読み取りのためのインスタンスメソッド name を定義します。
+
+このメソッドで定義されるアクセスメソッドの定義は次の通りです。
+
+  def name
+    @name
+  end
+
+第 2 引数 が true で指定された場合には、属性の書き込み用メソッド name= も同時に定義されます。
+その定義は次の通りです。
+
+  def name=(val)
+    @name = val
+  end
+
+第 2 引数 に true か false を指定する方法は非推奨になりました。
+
+@param name [[c:String]] または [[c:Symbol]] で指定します。
+
+--- attr_accessor(*name) -> nil
+
+インスタンス変数 name に対する読み取りメソッドと書き込みメソッドの両方を
+定義します。
+
+このメソッドで定義されるメソッドの定義は以下の通りです。
+
+  def name
+    @name
+  end
+  def name=(val)
+    @name = val
+  end
+
+@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
+
+--- attr_reader(*name) -> nil
+
+インスタンス変数 name の読み取りメソッドを定義します。
+
+このメソッドで定義されるメソッドの定義は以下の通りです。
+
+  def name
+    @name
+  end
+
+@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
+
+--- attr_writer(*name) -> nil
+
+インスタンス変数 name への書き込みメソッド (name=) を定義します。
+
+このメソッドで定義されるメソッドの定義は以下の通りです。
+
+  def name=(val)
+    @name = val
+  end
+
+@param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。

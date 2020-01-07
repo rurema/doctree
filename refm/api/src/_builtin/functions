@@ -69,7 +69,7 @@ exit! は exit とは違って、例外処理などは一切行ないませ
   #   start1...
   #終了ステータス:1
 
-@see [[m:Kernel.#exit]],[[m:Kernel.#abort]]
+@see [[m:Kernel.#exit]],[[m:Kernel.#abort]],[[m:Kernel.#at_exit]],[[m:Kernel.#fork]]
 
 --- abort(message = $!.message) -> ()
 
@@ -149,15 +149,20 @@ command を外部コマンドとして実行し、その標準出力を文字列
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
 
+#@since 2.6.0
+options で :exception に true を指定することで、
+nil や false を返す代わりに例外を発生するようにできます。
+#@end
+
 終了ステータスは変数 [[m:$?]] で参照できます。
 
 コマンドを実行することができなかった場合、多くのシェルはステータス
-127 を返します。(したがって [[m:$?]] の数値は、0x7f00)、シェルを介
-さない場合は Ruby の子プロセスがステータス 127 で終了します。
+127 を返します。シェルを介さない場合は Ruby の子プロセスがステータス
+127 で終了します。
 コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
 [[m:$?]] を参照することで判別可能です。
 
-==== 引数の解釈
+=== 引数の解釈
 
 この形式では command が shell のメタ文字
 //emlist{
@@ -169,6 +174,24 @@ command を外部コマンドとして実行し、その標準出力を文字列
 @param command command コマンドを文字列で指定します。
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
+#@since 2.6.0
+@raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
+@raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
+
+#@samplecode シェル経由でコマンドを実行
+system("echo *") # => true
+# fileA fileB fileC ...
+#@end
+
+#@since 2.6.0
+#@samplecode exceptionオプションを指定
+system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
+system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
+system('ruby -e "exit(true)"', exception: true)  # => true
+#@end
+#@end
+
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
 --- system(program, *args, options={}) -> bool | nil
@@ -177,16 +200,20 @@ command を外部コマンドとして実行し、その標準出力を文字列
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-それ以外の終了ステータスの場合
-(コマンドを実行できなかった場合も含む)は false を返します。
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
+
+#@since 2.6.0
+options で :exception に true を指定することで、
+nil や false を返す代わりに例外を発生するようにできます。
+#@end
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
 コマンドを実行することができなかった場合、多くのシェルはステータス
-127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
-さない場合は Ruby の子プロセスがステータス 127 で終了します。
-コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
-$? を参照することで判別可能です。
+127 を返します。シェルを介さない場合は Ruby の子プロセスがステータス
+127 で終了します。コマンドが実行できなかったのか、コマンドが失敗したの
+かは、普通 [[m:$?]] を参照することで判別可能です。
 
 Hash を options として渡すことで、起動される子プロセスの
   * プロセスグループ
@@ -197,7 +224,7 @@ Hash を options として渡すことで、起動される子プロセスの
 などを変更できます。環境変数のクリアなども指定できます。
 詳しくは [[m:Kernel.#spawn]] を参照してください。
 
-==== 引数の解釈
+=== 引数の解釈
 
 この形式で呼び出した場合、空白や shell のメタキャラクタも
 そのまま program の引数に渡されます。
@@ -211,7 +238,16 @@ Hash を options として渡すことで、起動される子プロセスの
 @param env 更新する環境変数を表す Hash
 @param options オプションパラメータ Hash
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
-#@#例...
+#@since 2.6.0
+@raise Errno::EXXX exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
+@raise RuntimeError exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
+
+#@samplecode インタプリタから直接コマンドを実行
+system("echo", "*") # => true
+# *
+#@end
+
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 
 --- spawn(command, options={}) -> Integer
@@ -221,7 +257,7 @@ Hash を options として渡すことで、起動される子プロセスの
 子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
 
 
-==== 引数の解釈
+=== 引数の解釈
 
 この形式では command が shell のメタ文字
 //emlist{
@@ -258,7 +294,7 @@ nil とすることで環境変数が削除([[man:unsetenv(3)]])されます。
 もしくは [[m:Process.#detach]] で子プロセスを切り離すかしてください。
 そうでないとゾンビプロセスが残る場合があります。
 
-==== 引数の解釈
+=== 引数の解釈
 
 この形式で呼び出した場合、空白や shell のメタキャラクタも
 そのまま program の引数に渡されます。
@@ -267,7 +303,7 @@ nil とすることで環境変数が削除([[man:unsetenv(3)]])されます。
 グラム名になります。
 また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 
-==== option引数の概要
+=== option引数の概要
 Hash を options として渡すことで、起動される子プロセスの
   * プロセスグループ
   * resource limit
@@ -307,9 +343,21 @@ Hash を options として渡すことで、起動される子プロセスの
   これを true に設定すると
   リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
   ファイルデスクリプタをすべて閉じます。
+#@since 2.6.0
+  false がデフォルトです。
+#@else
+#@# 2.0.0 から 2.5 までは true がデフォルト
   true がデフォルトです。
-  
-==== option引数によるリダイレクトの概要
+#@end
+
+#@since 2.6.0
+: :exception
+  [[m:Kernel.#system]] のみで指定できます。
+  これを true に設定すると、nil や false を返す代わりに例外が発生します。
+  false がデフォルトです。
+#@end
+
+=== option引数によるリダイレクトの概要
 Hash のキー(子プロセス側)には以下のいずれかが指定できます。
   * 単一のファイルデスクリプタ
   * ファイルデスクリプタの配列
@@ -319,7 +367,7 @@ Hash の値(親プロセス側)には以下のいずれかが指定できます�
   * 単一のファイルデスクリプタ
   * リダイレクト先のファイル名文字列
   * [リダイレクト先のファイル名文字列]、配列の要素にすることで
-    [[m:File::RDONLY]] でファイルを開いてリダイレクトします。
+    [[m:File::Constants::RDONLY]] でファイルを開いてリダイレクトします。
   * [リダイレクト先のファイル名文字列, モード文字列]
     open(ファイル名, モード, 0644) でファイルを開いてリダイレクト
     します。
@@ -337,7 +385,7 @@ Hash の値(親プロセス側)には以下のいずれかが指定できます�
   * 整数 指定した整数が表すファイルデスクリプタ
   * [[c:IO]] [[m:IO#fileno]] で表されるファイルデスクリプタ
 
-==== option引数の詳細および例
+=== option引数の詳細および例
 
 「:unsetenv_others」を使うと、envで指定したもの以外の環境変数を
 クリアします。
@@ -423,13 +471,28 @@ stderr と stdout を混ぜる例を以下に示します。
   io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
   p io.read #=> "out\nerr\n
 
+#@since 2.6.0
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
+#@else
 spawn と IO.popen では
 デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+#@end
 「:close_others」オプションでこの挙動を制御できます。
 標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
 限り、このオプションの影響を受けません。
+
+「:close_others」とは無関係に ruby が open する IO には
+デフォルトでは close_on_exec が設定されていて、自動的に
+閉じられることに注意してください。
+
+#@since 2.6.0
+  pid = spawn(command, :close_others=>true)  # close 3,4,5,...
+  pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
+#@else
   pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
   pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+#@end
 
 これを利用して spawn を [[m:IO.popen]] のように使うことができます。
   # similar to r = IO.popen(command)
@@ -485,7 +548,7 @@ io => io という形のオプションを指定します。
 プロセスの実行コードはそのコマンド(あるいは shell)になるので、
 起動に成功した場合、このメソッドからは戻りません。
 
-==== 引数の解釈
+=== 引数の解釈
 
 この形式では command が shell のメタ文字
 //emlist{
@@ -526,7 +589,7 @@ io => io という形のオプションを指定します。
 Hash を options として渡すことで、この挙動を変更できます。
 詳しくは [[m:Kernel.#spawn]] を参照してください。
 
-==== 引数の解釈
+=== 引数の解釈
 
 この形式で呼び出した場合、空白や shell のメタキャラクタも
 そのまま program の引数に渡されます。
@@ -575,8 +638,47 @@ nil を返します。ブロックを指定して呼び出した場合には、�
 fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-#@#例...
-@see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
+
+#@samplecode ブロックを指定しなかった場合
+if child_pid = fork
+  puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+  # => parent process. pid: 81060, child pid: 81329
+
+  # 親プロセスでの処理
+  # ...
+
+  # 子プロセスの終了を待って終了。
+  Process.waitpid(child_pid)
+else
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 81329
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+#@end
+
+#@samplecode ブロックを指定した場合
+child_pid = fork do
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 79602
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+
+puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+# => parent process. pid: 79055, child pid: 79602
+
+# 親プロセスでの処理
+# ...
+
+# 子プロセスの終了を待って終了。
+Process.waitpid(child_pid)
+#@end
+
+
+@see [[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#at_exit]],[[m:Kernel.#exit!]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
 
@@ -597,7 +699,12 @@ syscall(2) や
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
 @raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-#@#例...
+
+#@samplecode 例
+syscall 4, 1, "hello\n", 6   # '4' is write(2) on our box
+# => hello
+#@end
+
 @see [[lib:fiddle]], [[man:syscall(2freebsd)]], [[man:syscall(2linux)]]
 
 
@@ -631,7 +738,7 @@ Perlと異なりコマンドは常に `|' で始まります。
 
 @see [[m:File.open]],[[m:IO.popen]],[[m:IO.open]]
 
-==== 第二引数のオープンモード・エンコーディング
+=== 第二引数のオープンモード・エンコーディング
 文字列("mode" か "mode:ext_enc" か "mode:ext_enc:int_enc" という形式)か
 整数([[c:File::Constants]] モジュールの定数の論理和)を組み合わせて指定します。
 
@@ -674,7 +781,14 @@ mode は以下の三つのうちのいずれかです。
 します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
 合に限ります)
 
-==== Universal Newline
+#@since 2.6.0
+"w" に対しては "x" フラグを ("wx"や"wb+x"のように) つけることが
+できます (整数なら File::EXCL)。
+この場合、ファイルがすでに存在すると Errno::EEXIST が発生します。
+ただし、全ての種類のストリームでサポートされているとは限りません (例えばパイプ)。
+#@end
+
+=== Universal Newline
 改行をLFに揃えます。一言で言えばPEP:278 [[url:https://www.python.org/dev/peps/pep-0278/]]のことです。
 
 : "rt"
@@ -692,7 +806,7 @@ mode は以下の三つのうちのいずれかです。
 
 なお、以上のCR、LF、CRLFは入力のエンコーディングを解釈した後に処理されます。例えば、UTF-16LEでは、LFはバイト列"\x0a\x00"のことになります。
 
-==== エンコーディングの指定
+=== エンコーディングの指定
 ext_enc(外部エンコーディング)が指定されている場合、
 読み込まれた文字列にはこのエンコーディングが指定され、
 出力する文字列はそのエンコーディングに変換されます。
@@ -712,17 +826,21 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 @param writes [[m:IO.select]] 参照
 @param excepts [[m:IO.select]] 参照
 @param timeout [[m:IO.select]] 参照
+
+#@#noexample IO.select を参照
+
 @see [[m:IO.select]]
 
 --- test(cmd, file) -> bool | Time | Integer | nil
 
 単体のファイルでファイルテストを行います。
 
-@param cmd 以下に示す数値リテラルか文字列です(文字列の場合はその先頭の文字だけをコマンドとみなします)。
-@param file テストするファイルオブジェクトです。
+@param cmd 以下に示す文字リテラル、文字列、あるいは同じ文字を表す数値
+           です。文字列の場合はその先頭の文字だけをコマンドとみなします。
+@param file テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
 @return 下表に特に明記していないものは、真偽値を返します。
 
-以下は cmd として指定できる数値リテラルとその意味です。
+以下は cmd として指定できる文字リテラルとその意味です。
 
 : ?r
     ファイルを実効 uid で読むことができる
@@ -759,9 +877,9 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 : ?S
     ファイルはソケットである
 : ?b
-    ファイルはブロック特殊ファイルである
+    ファイルはブロックスペシャルファイルである
 : ?c
-    ファイルはキャラクター特殊ファイルである
+    ファイルはキャラクタースペシャルファイルである
 : ?u
     ファイルに setuid ビットがセットされている
 : ?g
@@ -775,16 +893,24 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 : ?C
     ファイルの inode 変更時刻を返す -> Time
 
+#@samplecode 例
+IO.write("testfile", "test")
+test("r", "testfile") # => true
+test("s", "testfile") # => 4
+test("M", "testfile") # => 2018-03-31 07:38:40 +0900
+#@end
+
 --- test(cmd, file1, file2) -> bool
 
 ２ファイル間のファイルテストを行います。
 
-@param cmd 以下に示す数値リテラルか文字列です(文字列の場合はその先頭の文字だけをコマンドとみなします)。
-@param file1 テストするファイルオブジェクトです。
-@param file2 テストするファイルオブジェクトです。
+@param cmd 以下に示す文字リテラル、文字列、あるいは同じ文字を表す数値
+           です。文字列の場合はその先頭の文字だけをコマンドとみなします。
+@param file1 テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
+@param file2 テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
 @return 真偽値を返します。
 
-以下は cmd として指定できる数値リテラルとその意味です。
+以下は cmd として指定できる文字リテラルとその意味です。
 
 : ?=
     ファイル1とファイル2の最終更新時刻が等しい
@@ -794,6 +920,20 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
     ファイル1の方がファイル2より最終更新時刻が古い
 : ?-
     ファイル1とファイル2が同一のファイルである
+
+#@samplecode 例
+IO.write("testfile1", "test1")
+IO.write("testfile2", "test2")
+%w(= < > -).each do |e|
+  result = test(e, "testfile1", "testfile2")
+  puts "#{e}: #{result}"
+end
+#@end
+
+# => =: true
+# => <: false
+# => >: false
+# => -: false
 
 --- load(file, priv = false) -> true
 
@@ -815,7 +955,7 @@ file が相対パスのときは組み込み変数 [[m:$:]]
 @raise LoadError ロードに失敗した場合に発生します。
 @see [[m:Kernel.#require]]
 
-==== require と load の違い
+=== require と load の違い
 
 [[m:Kernel.#require]] は同じファイルは一度だけしかロードしませんが、
 [[m:Kernel.#load]] は無条件にロードします。
@@ -857,6 +997,19 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 
 @param feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
+
+#@samplecode 例
+$LOADED_FEATURES.grep(/prime/).size # => 0
+require "prime"       # => true
+$LOADED_FEATURES.grep(/prime/).size # => 1
+require "prime"       # => false
+begin
+  require "invalid"
+rescue LoadError => e
+  e.message # => "cannot load such file -- invalid"
+end
+#@end
+
 #@since 1.9.1
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]],[[m:Kernel.#require_relative]]
 #@else
@@ -878,7 +1031,7 @@ require_relative を呼出すと必ず失敗します。
 @see [[m:Kernel.#require]]
 #@end
 
-==== require と load のスコープ
+=== require と load のスコープ
 
 ローカル変数はファイル間では共有されません。ですので、
 ロードしたライブラリのローカル変数を
@@ -918,7 +1071,7 @@ const_name には、 "::" 演算子を含めることはできません
     autoload :Bar, '/tmp/foo'
     p Bar #=> Bar
 
-==== ネストした定義内の定数
+=== ネストした定義内の定数
 
 const_name には、 "::" 演算子を含めることはできないので、 Kernel.#autoload 
 ではトップレベルの定数しか指定できません。
@@ -1016,7 +1169,7 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 標準添付の [[lib:debug]]、[[lib:tracer]]、
 [[lib:profile]] はこの組み込み関数を利用して実現されています。
 
-==== ブロックパラメータの意味
+=== ブロックパラメータの意味
 
 渡す Proc オブジェクトのパラメータは
   proc{|event, file, line, id, binding, klass| ... }
@@ -1193,6 +1346,37 @@ start 段上の呼び出し元の情報を [[m:$@]]
 
 @param range  取得したいフレームの範囲を示す [[c:Range]] オブジェクトを指定します。
 
+#@samplecode 例
+def test1(start, length)
+  locations = caller_locations(start, length)
+  p locations
+  p locations.map(&:lineno)
+  p locations.map(&:path)
+end
+
+def test2(start, length)
+  test1(start, length)
+end
+
+def test3(start, length)
+  test2(start, length)
+end
+
+caller_locations # => []
+test3(1, nil)
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'", "/Users/user/test.rb:17:in `<main>'"]
+# => [9, 13, 17]
+# => ["/Users/user/test.rb", "/Users/user/test.rb", "/Users/user/test.rb"]
+test3(1, 2)
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'"]
+# => [9, 13]
+# => ["/Users/user/test.rb", "/Users/user/test.rb"]
+test3(2, 1)
+# => ["/Users/user/test.rb:13:in `test3'"]
+# => [13]
+# => ["/Users/user/test.rb"]
+#@end
+
 @see [[c:Thread::Backtrace::Location]], [[m:Kernel.#caller]]
 
 --- gets(rs = $/) -> String | nil
@@ -1306,7 +1490,7 @@ rs に nil を指定すると行区切りなしとみなします。
 文字 ch を 標準出力 [[m:$stdout]] に出力します。
 
 ch が数値なら 0 〜 255 の範囲の対応する文字を出力します。
-ch が文字列なら、その先頭 1byte を出力します。
+ch が文字列なら、その先頭1文字を出力します。
 どちらでもない場合は、ch.to_int で整数に変換を試みます。
 
 @param ch 出力する文字です。数または文字列で指定します。
@@ -1360,6 +1544,9 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 
 @see [[m:Object#inspect]],[[m:Kernel.#puts]],[[m:Kernel.#print]]
 
+#@since 2.5.0
+#@include(functions_pp)
+#@end
 --- print(*arg) -> nil
 
 引数を順に標準出力 [[m:$stdout]] に出力します。引数が与えられない時には変数
@@ -1426,27 +1613,57 @@ to_s メソッドにより文字列に変換してから出力します。
 
 @see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
+#@since 2.5.0
+--- warn(*message, uplevel: nil) -> nil
+#@else
 --- warn(*message) -> nil
+#@end
 
-message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]] 
+message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]]
 フラグ が nil のときは何も出力しません。
 
 文字列以外のオブジェクトが引数として与えられた場合には、
 to_s メソッドにより文字列に変換してから出力します。
 
+#@since 2.5.0
+uplevel を指定しない場合は、
+#@end
 このメソッドは以下と同じです。
-  $stderr.puts(*message) if !$VERBOSE.nil? && !message.empty?
-  nil
+
+#@samplecode
+$stderr.puts(*message) if !$VERBOSE.nil? && !message.empty?
+nil
+#@end
 
 @param message 出力するオブジェクトを任意個指定します。
+#@since 2.5.0
+@param uplevel いくつ前の呼び出し元のファイル名と行番号を表示するかを0以上の数値で指定します。 nil の場合は表示しません。
+#@end
 @raise IOError 標準エラー出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-  warn "caution!" #=> caution!
-  $VERBOSE = nil
-  warn "caution!" # 何もしない
+#@samplecode 例
+warn "caution!" #=> caution!
+$VERBOSE = nil
+warn "caution!" # 何もしない
+#@end
 
+#@since 2.5.0
+#@samplecode uplevel の例
+def foo
+  warn("test message", uplevel: 0) # => test.rb:2: warning: test message
+  warn("test message", uplevel: 1) # => test.rb:6: warning: test message
+  warn("test message", uplevel: 2) # => test message
+end
+foo
+#@end
+#@end
+
+#@since 2.4.0
+@see [[m:Warning#warn]], [[m:$stderr]],[[m:$VERBOSE]]
+#@else
 @see [[m:$stderr]],[[m:$VERBOSE]]
+#@end
 
 --- Array(arg) -> Array
 
@@ -1466,7 +1683,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 
 @see [[m:Object#to_a]],[[m:Object#to_ary]],[[c:Array]]
 
+#@since 2.6.0
+--- Float(arg, exception: true) -> Float | nil
+#@else
 --- Float(arg) -> Float
+#@end
 
 引数を浮動小数点数([[c:Float]])に変換した結果を返します。
 
@@ -1476,6 +1697,10 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 メソッド Float は文字列に対し [[m:String#to_f]] よりも厳密な変換を行います。
 
 @param arg 変換対象のオブジェクトです。
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 @raise ArgumentError 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
 @raise TypeError nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
                  to_f が浮動小数点数を返さなかった場合に発生します。
@@ -1505,7 +1730,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 
 @see [[m:String#to_f]],[[c:Float]]
 
+#@since 2.6.0
+--- Integer(arg, base = 0, exception: true) -> Integer | nil
+#@else
 --- Integer(arg, base = 0) -> Integer
+#@end
 
 引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
 
@@ -1523,6 +1752,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
             ら基数を判断します。その場合に認識できるプリフィクスは、0b
             (2 進数)、0 (8 進数)、0o (8 進数)、0d (10 進数)、0x (16 進
             数) です。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 整数と見なせない文字列を引数に指定した場合に発生します。
 @raise TypeError メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
@@ -1595,7 +1829,7 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
   #   at_exit1
   #   at_exit0
 
-@see [[ref:d:spec/control#END]]
+@see [[ref:d:spec/control#END]],[[m:Kernel.#exit!]],[[m:Kernel.#fork]]
 
 --- loop         -> Enumerator
 --- loop { ... } -> object | nil
@@ -1874,6 +2108,11 @@ $_.sub とこのメソッド sub は以下の点で違いがあります。
                   文字列を指定した場合は全く同じ文字列にだけマッチする
 @param replace    pattern で指定した文字列と置き換える文字列
 
+#@samplecode 例
+$_               # => "testtest\n"
+sub(/es/, '!!')  # => "t!!ttest\n"
+#@end
+
 @see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace)          -> String
@@ -1896,6 +2135,11 @@ $_.gsub とこのメソッド gsub は以下の点で違いがあります。
                   文字列を指定した場合は全く同じ文字列にだけマッチする
 @param replace    pattern で指定した文字列と置き換える文字列
 
+#@samplecode 例
+$_                # => "test\n"
+gsub(/es/, '!!')  # => "t!!t\n"
+#@end
+
 @see [[m:String#gsub]],[[m:$_]]
 
 --- chop  -> String
@@ -1910,6 +2154,18 @@ $_.chopとこのメソッド chop は以下の点で違いがあります。
 
   * chop は $_ の値をコピーして、コピーの方を更新し、
   $_ に再代入します。
+
+#@samplecode 例
+$_ = "test\r\n"
+$_          # => "test\r\n"
+chop        # => "test"
+$_ = "test\n"
+$_          # => "test\n"
+chop        # => "test"
+$_ = "test"
+$_          # => "test"
+chop        # => "tes"
+#@end
 
 @see [[m:String#chop]],[[m:$_]]
 
@@ -1928,6 +2184,17 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
 
 @param rs 末尾から削除する改行コードを指定します。
 
+#@samplecode 例: ruby -n で "test" を入力
+$_            # => "test\n"
+chomp         # => "test"
+#@end
+
+#@samplecode 例: ruby -n で "test," を入力し、 rs に "," を指定
+$_            # => "test\n"
+chomp         # => "test,"
+chomp(",")    # => "test"
+#@end
+
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 
 --- trap(signal, command) -> String | Proc | nil
@@ -1940,6 +2207,8 @@ command を登録します。[[m:Signal.#trap]]と同じです。
 
 @param signal [[m:Signal.#trap]] 参照
 @param command [[m:Signal.#trap]] 参照
+
+#@#noexample Signal.#trap を参照
 
 @see [[m:Signal.#trap]],[[c:Signal]]
 
@@ -2009,10 +2278,10 @@ varname のフックを全て解除します。
 
 --- raise -> ()
 --- fail  -> ()
---- raise(message) -> ()
---- fail(message)  -> ()
---- raise(error_type, message = nil, backtrace = caller(0)) -> ()
---- fail(error_type, message = nil, backtrace = caller(0))  -> ()
+--- raise(message, cause: $!) -> ()
+--- fail(message, cause: $!)  -> ()
+--- raise(error_type, message = nil, backtrace = caller(0), cause: $!) -> ()
+--- fail(error_type, message = nil, backtrace = caller(0), cause: $!)  -> ()
 
 例外を発生させます。
 発生した例外は変数 [[m:$!]] に格納されます。また例外が
@@ -2040,6 +2309,10 @@ error_type として例外ではないクラスやオブジェクトを指定し
 @param message 例外のメッセージとなる文字列です。
 @param backtrace 例外発生時のスタックトレースで、[[m:Kernel.#caller]] の戻り値と同じ
   形式で指定しなければいけません。
+@param cause 現在の例外([[m:$!]])の代わりに [[m:Exception#cause]] に設定する例外を指定します。
+#@since 2.6.0
+  [[c:Exception]] オブジェクトまたは nil を指定できます。
+#@end
 @raise TypeError exception メソッドが例外オブジェクトを返さなかった場合に発生します。
 
 例外の捕捉の例を示します。
@@ -2244,8 +2517,13 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 @see [[m:Kernel.#__method__]]
 
+#@since 2.6.0
+--- Complex(r, i = 0, exception: true) -> Complex | nil
+--- Complex(s, exception: true)        -> Complex | nil
+#@else
 --- Complex(r, i = 0) -> Complex
 --- Complex(s)        -> Complex
+#@end
 
 実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
 
@@ -2254,6 +2532,11 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 @param i 生成する複素数の虚部。省略した場合は 0 です。
 
 @param s 生成する複素数を表す文字列。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 
@@ -2278,7 +2561,11 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 [注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
 
+#@since 2.6.0
+--- Rational(x, y = 1, exception: true) -> Rational | nil
+#@else
 --- Rational(x, y = 1) -> Rational
+#@end
 
 引数を有理数([[c:Rational]])に変換した結果を返します。
 
@@ -2286,6 +2573,11 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 @param y 変換対象のオブジェクトです。省略した場合は x だけを用いて
          [[c:Rational]] オブジェクトを作成します。
+
+#@since 2.6.0
+@param exception false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
 
 @raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 

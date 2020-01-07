@@ -1,4 +1,3 @@
-#@since 1.8.0
 category Development
 
 ベンチマークを取るためのライブラリです。
@@ -166,7 +165,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 @return STDIN.sync の値を返すだけなので返り値に意味はありません。
 
 
-===== フォーマット文字列
+=== フォーマット文字列
 
 フォーマット文字列として以下が使用できます。
 
@@ -185,7 +184,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 : %n
   ラベルで置き換えられます(Mnemonic: n of "*n*ame")。[[m:Benchmark::Tms#label]]
 
-===== 例
+=== 例
 
   require 'benchmark'
   
@@ -216,7 +215,6 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
   >total:  4.000000   0.033333   4.033333 (  1.889282)
   >avg:    1.333333   0.011111   1.344444 (  0.629761)
 
-#@end
 
 
 == Constants

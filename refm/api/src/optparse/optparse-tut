@@ -93,18 +93,44 @@ optparse を使う場合、基本的には
         require 'optparse'
         opt = OptionParser.new
 
-        OPTS = {}
+        params = {}
 
-        opt.on('-a') {|v| OPTS[:a] = v }
-        opt.on('-b') {|v| OPTS[:b] = v }
+        opt.on('-a') {|v| params[:a] = v }
+        opt.on('-b') {|v| params[:b] = v }
 
         opt.parse!(ARGV)
         p ARGV
-        p OPTS
+        p params
 
         ruby sample.rb -a foo bar -b baz
         # => ["foo", "bar", "baz"]
              {:a=>true, :b=>true}
+
+#@since 2.4.0
+
+明示的にコンテナへ格納する以外に、parse（及びparse!）メソッドの引数に
+:into オプションを指定することでハッシュへ自動的に値を格納することができます。
+この時ハッシュのキーとして利用される名前はロングオプションが定義されていれば
+ロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、
+先頭の "-" を除いてシンボル化した値が使用されます。
+
+        require 'optparse'
+        opt = OptionParser.new
+
+        params = {}
+
+        opt.on('-a') {|v| v }
+        opt.on('-b', '--bbb') {|v| v }
+
+        opt.parse!(ARGV, into: params) # intoオプションにハッシュを渡す
+        p ARGV
+        p params
+
+        ruby sample.rb -a foo bar -b baz
+        # => ["foo", "bar", "baz"]
+             {:a=>true, :bbb=>true}
+
+#@end
 
 ====[a:optionarg] オプションの引数
 
@@ -254,48 +280,25 @@ GNUの慣習にあわせて
 
         opt.parse!(ARGV)
         p ARGV
-        
+
         ruby ./sample.rb --help
         # => Usage: sample [options]
                 -a                               description of -a
                 -b                               description of -b
 
-#@until 1.8.2
-1.8.2以前のバージョンでは以下のように反映されません。
-        ruby ./sample.rb --help
-        # => Usage: sample [options]
---helpをオプション定義に追加するか、
-        opt.on('--help', 'show this message') { puts opt; exit }
-[[ref:argv]]の項にあるように、以下のようなARGVを使った書き方にしてください。
-
-        require 'optparse'
-        ARGV.options {|opt|
-
-          opt.on('-a', 'description of -a') {|v| p v }
-          opt.on('-b', 'description of -b') {|v| p v }
-
-          opt.parse!
-        }
-        p ARGV
-
-        ruby ./sample.rb --help
-        # => Usage: sample [options]
-               -a                               description of -a
-               -b                               description of -b
-#@end
 
 ====[a:subcmd] サブコマンド
 以下は cvs や svn のようにサブコマンドを解釈する例です。
 
     #! /usr/bin/ruby
     # contributed by Minero Aoki.
-    
+
     require 'optparse'
-    
+
     parser = OptionParser.new
     parser.on('-i') { puts "-i" }
     parser.on('-o') { puts '-o' }
-    
+
     subparsers = Hash.new {|h,k|
       $stderr.puts "no such subcommand: #{k}"
       exit 1
@@ -303,7 +306,7 @@ GNUの慣習にあわせて
     subparsers['add'] = OptionParser.new.on('-i') { puts "add -i" }
     subparsers['del'] = OptionParser.new.on('-i') { puts "del -i" }
     subparsers['list'] = OptionParser.new.on('-i') { puts "list -i" }
-    
+
     parser.order!(ARGV)
     subparsers[ARGV.shift].parse!(ARGV) unless ARGV.empty?
 
@@ -312,7 +315,7 @@ GNUの慣習にあわせて
     $ ruby subcom.rb -i add -i
     -i
     add -i
-    
+
     $ ruby subcom.rb list -i
     list -i
 
@@ -322,7 +325,6 @@ GNUの慣習にあわせて
 ====[a:argv] ARGV の機能
 optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
 が加わります。以下の書き方ができるようになります。
-#@since 1.8.5
 [[m:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
   # sample.rb の内容
   require 'optparse'
@@ -332,30 +334,6 @@ optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
   $ ruby sample.rb -a 1 --foo --bar xxx
   {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
 のようになります。
-#@else
-        require 'optparse'
-        ARGV.options {|opt|
-
-            opt.on('-a') {|v| p v }
-            opt.on('-b') {|v| p v }
-
-            opt.parse!
-        }
-        p ARGV
-
-        ruby sample.rb -a foo bar -b baz
-        # => true
-             true
-             ["foo", "bar", "baz"]
-
-OptionParser.new にブロックを渡した場合に比べて、
- * ARGV.options メソッドのブロックでオプション定義を記述する。
- * opt.parse! の引数が ARGV 固定になる。
-といった違いがあります。
-
-特に利点があるわけではありませんが、optparse 添付のサンプルはこの書
-き方になっています。
-#@end
 
 ====[a:hyphen_start_file] '-'で始まるファイル名
 

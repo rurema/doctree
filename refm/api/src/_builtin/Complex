@@ -6,23 +6,27 @@
 [[m:Complex.rect]]、[[m:Complex.polar]]、[[m:Numeric#to_c]]、
 [[m:String#to_c]] のいずれかを使用します。
 
-  Complex(1)           # => (1+0i)
-  Complex(2, 3)        # => (2+3i)
-  Complex.polar(2, 3)  # => (-1.9799849932008908+0.2822400161197344i)
-  Complex(0.3)         # => (0.3+0i)
-  Complex('0.3-0.5i')  # => (0.3-0.5i)
-  Complex('2/3+3/4i')  # => ((2/3)+(3/4)*i)
-  Complex('1@2')       # => (-0.4161468365471424+0.9092974268256817i)
-  3.to_c               # => (3+0i)
-  0.3.to_c             # => (0.3+0i)
-  '0.3-0.5i'.to_c      # => (0.3-0.5i)
-  '2/3+3/4i'.to_c      # => ((2/3)+(3/4)*i)
-  '1@2'.to_c           # => (-0.4161468365471424+0.9092974268256817i)
+#@samplecode Complex オブジェクトの作り方
+Complex(1)           # => (1+0i)
+Complex(2, 3)        # => (2+3i)
+Complex.polar(2, 3)  # => (-1.9799849932008908+0.2822400161197344i)
+Complex(0.3)         # => (0.3+0i)
+Complex('0.3-0.5i')  # => (0.3-0.5i)
+Complex('2/3+3/4i')  # => ((2/3)+(3/4)*i)
+Complex('1@2')       # => (-0.4161468365471424+0.9092974268256817i)
+3.to_c               # => (3+0i)
+0.3.to_c             # => (0.3+0i)
+'0.3-0.5i'.to_c      # => (0.3-0.5i)
+'2/3+3/4i'.to_c      # => ((2/3)+(3/4)*i)
+'1@2'.to_c           # => (-0.4161468365471424+0.9092974268256817i)
+#@end
 
 [[c:Complex]] オブジェクトは有理数の形式も実数の形式も扱う事ができます。
 
-  Complex(1, 1) / 2    # => ((1/2)+(1/2)*i)
-  Complex(1, 1) / 2.0  # => (0.5+0.5i)
+#@samplecode 例
+Complex(1, 1) / 2    # => ((1/2)+(1/2)*i)
+Complex(1, 1) / 2.0  # => (0.5+0.5i)
+#@end
 
 == Instance Methods
 
@@ -32,11 +36,11 @@
 
 @param other 自身に掛ける数
 
-例:
-
-  Complex(1, 2) * 2              # => (2+4i)
-  Complex(1, 2) * Complex(2, 3)  # => (-4+4i)
-  Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
+#@samplecode 例
+Complex(1, 2) * 2              # => (2+4i)
+Complex(1, 2) * Complex(2, 3)  # => (-4+7i)
+Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
+#@end
 
 --- **(other) -> Complex
 
@@ -44,9 +48,9 @@
 
 @param other 自身を other 乗する数
 
-例:
-
-  Complex('i') ** 2             # => (-1+0i)
+#@samplecode 例
+Complex('i') ** 2             # => (-1+0i)
+#@end
 
 --- +(other) -> Complex
 
@@ -54,9 +58,9 @@
 
 @param other 自身に足す数
 
-例:
-
-  Complex(1, 2) + Complex(2, 3) # => (3+5i)
+#@samplecode 例
+Complex(1, 2) + Complex(2, 3) # => (3+5i)
+#@end
 
 --- -(other) -> Complex
 
@@ -64,18 +68,18 @@
 
 @param other 自身から引く数
 
-例:
-
-  Complex(1, 2) - Complex(2, 3) # => (-1-1i)
+#@samplecode 例
+Complex(1, 2) - Complex(2, 3) # => (-1-1i)
+#@end
 
 --- -@ -> Complex
 
 自身の符号を反転させたものを返します。
 
-例:
-
-  -Complex(1)     # => (-1+0i)
-  -Complex(-1, 1) # => (1-1i)
+#@samplecode 例
+-Complex(1)     # => (-1+0i)
+-Complex(-1, 1) # => (1-1i)
+#@end
 
 --- /(other)   -> Complex
 --- quo(other) -> Complex
@@ -84,10 +88,10 @@
 
 @param other 自身を割る数
 
-例:
-
-  Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
-  Complex(10)   / 3  # => ((10/3)+(0/1)*i)
+#@samplecode 例
+Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
+Complex(10)   / 3  # => ((10/3)+(0/1)*i)
+#@end
 
 @see [[m:Numeric#quo]]
 
@@ -97,11 +101,11 @@
 
 @param other 自身と比較する数値
 
-例:
-
-  Complex(2, 1) == Complex(1) # => false
-  Complex(1, 0) == Complex(1) # => true
-  Complex(1, 0) == 1          # => true
+#@samplecode 例
+Complex(2, 1) == Complex(1) # => false
+Complex(1, 0) == Complex(1) # => true
+Complex(1, 0) == 1          # => true
+#@end
 
 --- abs       -> Numeric
 --- magnitude -> Numeric
@@ -112,11 +116,11 @@
 
   sqrt(self.real ** 2 + self.imag **2)
 
-例:
-
-  Complex(1, 2).abs         # => 2.23606797749979
-  Complex(3, 4).abs         # => 5.0
-  Complex('1/2', '1/2').abs # => 0.7071067811865476
+#@samplecode 例
+Complex(1, 2).abs         # => 2.23606797749979
+Complex(3, 4).abs         # => 5.0
+Complex('1/2', '1/2').abs # => 0.7071067811865476
+#@end
 
 @see [[m:Complex#abs2]]
 
@@ -128,11 +132,11 @@
 
   self.real ** 2 + self.imag **2
 
-例:
-
-  Complex(1, 1).abs2         # => 2
-  Complex(1.0, 1.0).abs2     # => 2.0
-  Complex('1/2', '1/2').abs2 # => (1/2)
+#@samplecode 例
+Complex(1, 1).abs2         # => 2
+Complex(1.0, 1.0).abs2     # => 2.0
+Complex('1/2', '1/2').abs2 # => (1/2)
+#@end
 
 @see [[m:Complex#abs]]
 
@@ -142,21 +146,23 @@
 
 自身の偏角を[-π,π]の範囲で返します。
 
-例:
-
-  Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966
+#@samplecode 例
+Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966
+#@end
 
 非正の実軸付近での挙動に注意してください。以下の例のように虚部が 0.0 と
 -0.0 では値が変わります。
 
-  Complex(-1, 0).arg              #=>  3.141592653589793
-  Complex(-1, -0).arg             #=>  3.141592653589793
-  Complex(-1, -0.0).arg           #=> -3.141592653589793
+#@samplecode 例
+Complex(-1, 0).arg              #=>  3.141592653589793
+Complex(-1, -0).arg             #=>  3.141592653589793
+Complex(-1, -0.0).arg           #=> -3.141592653589793
 
-  Complex(0, 0.0).arg             #=>  0.0
-  Complex(0, -0.0).arg            #=> -0.0
-  Complex(-0.0, 0).arg            #=>  3.141592653589793
-  Complex(-0.0, -0.0).arg         #=> -3.141592653589793
+Complex(0, 0.0).arg             #=>  0.0
+Complex(0, -0.0).arg            #=> -0.0
+Complex(-0.0, 0).arg            #=>  3.141592653589793
+Complex(-0.0, -0.0).arg         #=> -3.141592653589793
+#@end
 
 #@until 1.9.3
 [注意] 1.9.2 以下では 0+0i に対して呼び出すと例外
@@ -168,40 +174,53 @@
 #@since 2.4.0
 --- finite? -> bool
 
+#@since 2.5.0
+実部と虚部の両方が有限値の場合に true を、そうでない場合に false を返します。
+#@else
 自身の絶対値が有限値の場合に true を、そうでない場合に false を返します。
+#@end
+
+#@samplecode 例
+(1+1i).finite?                   # => true
+(Float::INFINITY + 1i).finite?   # => false
+#@end
 
 @see [[m:Complex#infinite?]]
 
 --- infinite? -> nil | 1
 
+#@since 2.5.0
+実部と虚部のどちらも無限大ではない場合に nil を、そうでない場合に 1 を返します。
+#@else
 自身の絶対値が無限大の場合に1を、そうでない場合に nil を返します。
+#@end
 
-例:
-
-  (1+1i).infinite?                   # => nil
-  (Float::INFINITY + 1i).infinite?   # => 1
+#@samplecode 例
+(1+1i).infinite?                   # => nil
+(Float::INFINITY + 1i).infinite?   # => 1
+#@end
 
 @see [[m:Complex#finite?]]
 #@end
 
 --- coerce(other) -> [Complex, Complex]
 
-other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
+other を [[c:Complex]] に変換して [変換後の other, self] の配列を返します。
 
 @raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 
-例:
-
-  Complex(1).coerce(2) # => [(2+0i), (1+0i)]
+#@samplecode 例
+Complex(1).coerce(2) # => [(2+0i), (1+0i)]
+#@end
 
 --- conjugate -> Complex
 --- conj      -> Complex
 
 自身の共役複素数を返します。
 
-例:
-
-  Complex(1, 2).conj # => (1-2i)
+#@samplecode 例
+Complex(1, 2).conj # => (1-2i)
+#@end
 
 --- denominator -> Integer
 
@@ -213,10 +232,10 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を�
   - + -i  ->  ----
   2   3        6    <-  denominator(分母)
 
-例:
-
-  Complex('1/2+2/3i').denominator # => 6
-  Complex(3).numerator            # => 1
+#@samplecode 例
+Complex('1/2+2/3i').denominator # => 6
+Complex(3).numerator            # => 1
+#@end
 
 @see [[m:Complex#numerator]]
 
@@ -227,25 +246,26 @@ self を other で割った商を返します。
 
 @param other 自身を割る数
 
-例:
-
-  Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
-  Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
+#@samplecode 例
+Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
+Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
+#@end
 
 @see [[m:Complex#quo]]
 
---- hash -> Integer
+#@# --- hash -> Integer
 
-自身のハッシュ値を返します。
+#@# 自身のハッシュ値を返します。
+#@# Complex#hashはnodocのため
 
 --- imag      -> Numeric
 --- imaginary -> Numeric
 
 自身の虚部を返します。
 
-例:
-
-  Complex(3, 2).imag # => 2
+#@samplecode 例
+Complex(3, 2).imag # => 2
+#@end
 
 @see [[m:Numeric#imag]]
 
@@ -253,13 +273,13 @@ self を other で割った商を返します。
 
 自身を人間が読みやすい形の文字列表現にして返します。
 
-例:
-
-  Complex(2).inspect                       # => "(2+0i)"
-  Complex('-8/6').inspect                  # => "((-4/3)+0i)"
-  Complex('1/2i').inspect                  # => "(0+(1/2)*i)"
-  Complex(0, Float::INFINITY).inspect      # => "(0+Infinity*i)"
-  Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
+#@samplecode 例
+Complex(2).inspect                       # => "(2+0i)"
+Complex('-8/6').inspect                  # => "((-4/3)+0i)"
+Complex('1/2i').inspect                  # => "(0+(1/2)*i)"
+Complex(0, Float::INFINITY).inspect      # => "(0+Infinity*i)"
+Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
+#@end
 
 #@until 2.0.0
 --- marshal_dump -> Array
@@ -289,10 +309,10 @@ self を other で割った商を返します。
 
 分子を返します。
 
-例:
-
-  Complex('1/2+2/3i').numerator # => (3+4i)
-  Complex(3).numerator          # => (3+0i)
+#@samplecode 例
+Complex('1/2+2/3i').numerator # => (3+4i)
+Complex(3).numerator          # => (3+0i)
+#@end
 
 @see [[m:Complex#denominator]]
 
@@ -300,9 +320,9 @@ self を other で割った商を返します。
 
 自身の絶対値と偏角を配列にして返します。
 
-例:
-
-  Complex.polar(1, 2).polar # => [1, 2]
+#@samplecode 例
+Complex.polar(1, 2).polar # => [1, 2]
+#@end
 
 @see [[m:Numeric#polar]]
 
@@ -310,13 +330,18 @@ self を other で割った商を返します。
 
 自身の実部を返します。
 
-例:
-
-  Complex(3, 2).real # => 3
+#@samplecode 例
+Complex(3, 2).real # => 3
+#@end
 
 --- real? -> false
 
 常に false を返します。
+
+#@samplecode 例
+(2+3i).real?   # => false
+(2+0i).real?   # => false
+#@end
 
 @see [[m:Numeric#real?]]
 
@@ -325,11 +350,11 @@ self を other で割った商を返します。
 
 実部と虚部を配列にして返します。
 
-例:
-
-  Complex(3).rect    # => [3, 0]
-  Complex(3.5).rect  # => [3.5, 0]
-  Complex(3, 2).rect # => [3, 2]
+#@samplecode 例
+Complex(3).rect    # => [3, 0]
+Complex(3.5).rect  # => [3.5, 0]
+Complex(3, 2).rect # => [3, 2]
+#@end
 
 @see [[m:Numeric#rect]]
 
@@ -339,11 +364,11 @@ self を other で割った商を返します。
 
 @raise RangeError 虚部が実数か、0 ではない場合に発生します。
 
-例:
-
-  Complex(3).to_f    # => 3.0
-  Complex(3.5).to_f  # => 3.5
-  Complex(3, 2).to_f # => RangeError
+#@samplecode 例
+Complex(3).to_f    # => 3.0
+Complex(3.5).to_f  # => 3.5
+Complex(3, 2).to_f # => RangeError
+#@end
 
 --- to_i -> Integer
 
@@ -351,11 +376,11 @@ self を other で割った商を返します。
 
 @raise RangeError 虚部が実数か、0 ではない場合に発生します。
 
-例:
-
-  Complex(3).to_i    # => 3
-  Complex(3.5).to_i  # => 3
-  Complex(3, 2).to_i # => RangeError
+#@samplecode 例
+Complex(3).to_i    # => 3
+Complex(3.5).to_i  # => 3
+Complex(3, 2).to_i # => RangeError
+#@end
 
 --- to_r             -> Rational
 #@since 1.9.2
@@ -371,10 +396,10 @@ self を other で割った商を返します。
 
 @raise RangeError 虚部が実数か、0 ではない場合に発生します。
 
-例:
-
-  Complex(3).to_r    # => (3/1)
-  Complex(3, 2).to_r # => RangeError
+#@samplecode 例
+Complex(3).to_r    # => (3/1)
+Complex(3, 2).to_r # => RangeError
+#@end
 
 #@# rationalize メソッドの引数 eps は常に無視されるため、to_r メソッド
 #@# と同じエントリとしました(sho-h)。
@@ -383,23 +408,23 @@ self を other で割った商を返します。
 
 自身を "実部 + 虚部i" 形式の文字列にして返します。
 
-例:
-
-  Complex(2).to_s                       # => "2+0i"
-  Complex('-8/6').to_s                  # => "-4/3+0i"
-  Complex('1/2i').to_s                  # => "0+1/2i"
-  Complex(0, Float::INFINITY).to_s      # => "0+Infinity*i"
-  Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
+#@samplecode 例
+Complex(2).to_s                       # => "2+0i"
+Complex('-8/6').to_s                  # => "-4/3+0i"
+Complex('1/2i').to_s                  # => "0+1/2i"
+Complex(0, Float::INFINITY).to_s      # => "0+Infinity*i"
+Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
+#@end
 
 #@since 2.0.0
 --- to_c -> self
 
 self を返します。
 
-例:
-
-  Complex(2).to_c      # => (2+0i)
-  Complex(-8, 6).to_c  # => (-8+6i)
+#@samplecode 例
+Complex(2).to_c      # => (2+0i)
+Complex(-8, 6).to_c  # => (-8+6i)
+#@end
 #@end
 
 == Class Methods
@@ -413,11 +438,11 @@ self を返します。
 
 @param i 生成する複素数の虚部。省略した場合は 0 です。
 
-例:
-
-  Complex.rect(1)           # => (1+0i)
-  Complex.rect(1, 2)        # => (1+2i)
-  Complex.rectangular(1, 2) # => (1+2i)
+#@samplecode 例
+Complex.rect(1)           # => (1+0i)
+Complex.rect(1, 2)        # => (1+2i)
+Complex.rectangular(1, 2) # => (1+2i)
+#@end
 
 @see [[m:Kernel.#Complex]]
 
@@ -429,11 +454,11 @@ self を返します。
 
 @param theta 生成する複素数の偏角。単位はラジアンです。省略した場合は 0 です。
 
-例:
-
-  Complex.polar(2.0)            # => (2.0+0.0i)
-  Complex.polar(2.0, 0)         # => (2.0+0.0i)
-  Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
+#@samplecode 例
+Complex.polar(2.0)            # => (2.0+0.0i)
+Complex.polar(2.0, 0)         # => (2.0+0.0i)
+Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
+#@end
 
 #@since 2.0.0
 == Private Instance Methods

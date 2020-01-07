@@ -90,11 +90,9 @@ Following operators support logical expressions of canvas tags
 
 
 
-#@since 1.8.2
 --- current_configinfo(key = nil)
 #@todo
 
-#@end
 
 
 --- dchars(first, last = Tk::None)
@@ -104,10 +102,8 @@ Following operators support logical expressions of canvas tags
 
 
 --- dtag(tag_to_del = Tk::None)
-#@since 1.8.3
 --- deltag(tag_to_del = Tk::None)
 #@todo
-#@end
 
 
 --- find

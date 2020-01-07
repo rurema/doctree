@@ -1,14 +1,8 @@
 = class Numeric < Object
 include Comparable
 
-数値を表す抽象クラスです。
-#@since 2.4.0
-[[c:Integer]]
-#@else
-[[c:Fixnum]]
-#@end
-や [[c:Float]] などの数値クラスは Numeric のサブクラスとして実装されて
-います。
+数値を表す抽象クラスです。[[c:Integer]] や [[c:Float]] などの数値クラス
+は Numeric のサブクラスとして実装されています。
 
 演算や比較を行うメソッド(+, -, *, /, <=>)は Numeric のサブクラスで定義されま
 す。Numeric で定義されているメソッドは、サブクラスで提供されているメソッド
@@ -366,6 +360,13 @@ include Comparable
 単項演算子の + です。
 self を返します。
 
+例:
+
+  + 10            # => 10
+  + (-10)           # => -10
+  + 0.1           # => 0.1
+  + (3r) # => (3/1)
+  + (1+3i)        # => (1+3i)
 
 --- -@    -> Numeric
 
@@ -373,6 +374,10 @@ self を返します。
 self の符号を反転させたものを返します。
 
 このメソッドは、二項演算子 - で 0 - self によって定義されています。
+
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+@see [[m:Integer#-@]]、[[m:Float#-@]]、[[m:Rational#-@]]、[[m:Complex#-@]]
 
 --- abs        -> Numeric
 #@since 1.9.1
@@ -398,9 +403,29 @@ self の符号を反転させたものを返します。
 
 @see [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
 
+#@since 2.4.0
+#@since 2.5.0
+--- floor(ndigits = 0) -> Integer
+#@else
+--- floor(ndigits = 0) -> Integer | Float
+#@end
+#@else
 --- floor   -> Integer
+#@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
+
+#@since 2.4.0
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+#@end
 
      1.floor        #=> 1
      1.2.floor      #=> 1
@@ -408,6 +433,9 @@ self の符号を反転させたものを返します。
      (-1.5).floor   #=> -2
 
 @see [[m:Numeric#ceil]], [[m:Numeric#round]], [[m:Numeric#truncate]]
+#@since 2.4.0
+@see [[m:Integer#floor]]
+#@end
 
 --- round   -> Integer
 
@@ -566,9 +594,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 self を other で割った商を返します。
 整商を得たい場合は [[m:Numeric#div]] を使ってください。
 
-#@since 1.8.7
 [[m:Numeric#fdiv]] が結果を [[c:Float]] で返すメソッドなのに対して quo はなるべく正確な数値を返すことを意図しています。
-#@end
 通常は [[c:Float]] の値を返しますが、
 [[lib:rational]] ライブラリを require している場合は有理数の範囲に収まるなら [[c:Rational]] の値を返します。
 
@@ -583,12 +609,9 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
   p 1.0.quo(3)    #=> 0.3333333333333333
   p 1.quo(3.0)    #=> 0.3333333333333333
 
-#@since 1.8.7
 @see [[m:Numeric#fdiv]]
 #@end
-#@end
 
-#@since 1.8.7
 --- fdiv(other)   -> Float | Complex
 
 self を other で割った商を [[c:Float]] で返します。
@@ -608,7 +631,6 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 #@end
 
 @see [[m:Numeric#quo]]
-#@end
 
 --- integer?    -> bool
 
@@ -659,11 +681,23 @@ modulo はメソッド % の呼び出しとして定義されています。
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
 
+例:
+
+  1.positive?    # => true
+  0.positive?    # => false
+  -1.positive?   # => false
+
 @see [[m:Numeric#negative?]]
 
 --- negative? -> bool
 
 self が 0 未満の場合に true を返します。そうでない場合に false を返します。
+
+例:
+
+  -1.negative?   # => true
+  0.negative?    # => false
+  1.negative?    # => false
 
 @see [[m:Numeric#positive?]]
 #@end
@@ -702,8 +736,6 @@ self を other で割った余り r を返します。
   p 10.nonzero?              #=> 10
   p 0.nonzero?               #=> nil
   p 0.0.nonzero?             #=> nil
- 
-  require 'rational'
   p Rational(0, 2).nonzero?  #=> nil
 
 非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以
@@ -720,18 +752,37 @@ self を other で割った余り r を返します。
 
 self の絶対値が有限値の場合に true を、そうでない場合に false を返します。
 
+例:
+
+  10.finite?                      # => true
+  Rational(3).finite?             # => true
+
+  Float::INFINITY.finite?         # => false
+  Float::INFINITY.is_a?(Numeric)  # => true
+
 @see [[m:Numeric#infinite?]]
 
---- infinite? -> -1 | 1 | nil
+--- infinite? -> nil
 
-self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
+常に nil を返します。
+自身が [[c:Float]] か[[c:Complex]]、もしくはそのサブクラスのインスタンスの場合は、self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
 
-@see [[m:Numeric#finite?]]
+例:
+
+  10.infinite?     # => nil
+  (3r).infinite?   # => nil
+
+@see [[m:Numeric#finite?]]、[[m:Float#infinite?]]、[[m:Complex#infinite?]]
 #@end
 
 --- to_int    -> Integer
 
 self.to_i と同じです。
+
+例:
+
+  (2+0i).to_int        # => 2
+  Rational(3).to_int   # => 3
 
 --- zero?    -> bool
 
@@ -744,11 +795,19 @@ self.to_i と同じです。
 @see [[m:Numeric#nonzero?]]
 
 --- step(limit, step = 1) {|n| ... }    -> self
-#@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
-#@since 2.1.0
---- step(by: step, to: limit) {|n| ... } -> self
---- step(by: step, to: limit) -> Enumerator
+#@since 2.6.0
+--- step(limit, step = 1) -> Enumerator::ArithmeticSequence
+#@end
+--- step(by: 1, to: Float::INFINITY) {|n| ... } -> self
+--- step(by: 1, to: Float::INFINITY) -> Enumerator
+#@since 2.6.0
+--- step(by: 1, to: Float::INFINITY) -> Enumerator::ArithmeticSequence
+#@end
+--- step(by:, to: -Float::INFINITY) {|n| ... } -> self
+--- step(by:, to: -Float::INFINITY) -> Enumerator
+#@since 2.6.0
+--- step(by:, to: -Float::INFINITY) -> Enumerator::ArithmeticSequence
 #@end
 
 self からはじめ step を足しながら limit を越える
@@ -759,6 +818,19 @@ self からはじめ step を足しながら limit を越える
        下限として解釈されます。
 
 @param step 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+
+@param to 引数limitと同じですが、省略した場合はキーワード引数byが正の
+          数であれば [[m:Float::INFINITY]]、負の数であれば
+          -[[m:Float::INFINITY]]を指定したとみなされます。
+
+@param by 引数 step と同じです。
+
+@return ブロックが指定された時は self を返します。
+@return ブロックが指定されなかった時は [[c:Enumerator]] を返します。
+#@since 2.6.0
+@return 特に limit (または to) と step の両方が Numeric または nil の時は
+        [[c:Enumerator::ArithmeticSequence]] を返します。
+#@end
 
 @raise ArgumentError step に 0 を指定した場合に発生します。
 
@@ -785,13 +857,11 @@ self からはじめ step を足しながら limit を越える
   7
   6
 
-#@since 2.1.0
   3.step(by:2, to:10){|n| p n}
   3
   5
   7
   9
-#@end
 
 注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
 0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
@@ -809,8 +879,6 @@ self からはじめ step を足しながら limit を越える
        1.4   <- 1.5 が表示されない
 
 @see [[m:Integer#downto]]
-
-#@end
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
@@ -874,9 +942,17 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 --- conj      -> Numeric
 --- conjugate -> Numeric
 
-自身の共役複素数(実数の場合は常に自身)を返します。
+常に self を返します。
+
+自身が [[c:Complex]] かそのサブクラスのインスタンスの場合は、自身の共役複素数(実数の場合は常に自身)を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+例:
+
+  10.conj       # => 10
+  0.1.conj      # => 0.1
+  (2/3r).conj   # => (2/3)
 
 @see [[m:Complex#conj]]
 
@@ -886,12 +962,21 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 @return 分母を返します。
 
-@see [[m:Numeric#numerator]]
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+@see [[m:Numeric#numerator]]、[[m:Integer#denominator]]、[[m:Float#denominator]]、[[m:Rational#denominator]]、[[m:Complex#denominator]]
 
 --- imag      -> 0
 --- imaginary -> 0
 
 常に 0 を返します。
+
+例:
+
+  12.imag     # => 0
+  -12.imag    # => 0
+  1.2.imag    # => 0
+  -1.2.imag   # => 0
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
@@ -903,7 +988,9 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 @return 分子を返します。
 
-@see [[m:Numeric#denominator]]
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+@see [[m:Numeric#denominator]]、[[m:Integer#numerator]]、[[m:Float#numerator]]、[[m:Rational#numerator]]、[[m:Complex#numerator]]
 
 --- polar -> [Numeric, Numeric]
 
@@ -927,16 +1014,29 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
+例:
+
+  10.real               # => 10
+  -10.real              # => -10
+  0.1.real              # => 0.1
+  Rational(2, 3).real   # => (2/3)
+
 @see [[m:Numeric#imag]]、[[m:Complex#real]]
 
 --- real?    -> bool
 
-自身が [[c:Complex]] かそのサブクラスのインスタンスでない場合に
-true を返します。そうでない場合に false を返します。
+常に true を返します。([[c:Complex]] またはそのサブクラスではないことを意味します。)
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-@see [[m:Numeric#integer?]]
+例:
+
+  10.real?               # => true
+  -10.real?              # => true
+  0.1.real?              # => true
+  Rational(2, 3).real?   # => true
+
+@see [[m:Numeric#integer?]]、[[m:Complex#real?]]
 
 --- rect        -> [Numeric, Numeric]
 --- rectangular -> [Numeric, Numeric]
