@@ -2156,6 +2156,11 @@ IO の外部エンコーディングを返します。
 外部エンコーディングが指定されていない場合は nil を返します。
 ただし読み込み専用モードの場合は [[m:Encoding.default_external]] になります。
 
+#@samplecode 例
+IO.write("testfile", "abcde")
+File.open("testfile") { |f| p f.external_encoding } # => #<Encoding:UTF-8>
+#@end
+
 --- internal_encoding   -> Encoding | nil
 
 IO の内部エンコーディングを返します。
