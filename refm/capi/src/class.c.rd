@@ -105,7 +105,9 @@ super のサブクラスとして新しい Ruby クラスを、outer の定数�
 func と argc は rb_define_method と同じです。
 
 例:
-   VALUE return_obj_dup(VALUE obj) {
+   static VALUE 
+   return_obj_dup(VALUE obj) 
+   {
          VALUE dup = rb_obj_dup(obj); // オブジェクトを複製
          return dup;
    }
