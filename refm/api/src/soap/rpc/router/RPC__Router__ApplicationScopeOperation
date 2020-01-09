@@ -1,8 +1,0 @@
-
-= class SOAP::RPC::Router::ApplicationScopeOperation < SOAP::RPC::Router::Operation
-
-== Class Methods
-
---- new(soapaction, receiver, name, param_def, opt)
-#@todo
-

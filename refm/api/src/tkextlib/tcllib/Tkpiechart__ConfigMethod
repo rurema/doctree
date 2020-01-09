@@ -1,4 +1,0 @@
-
-= module Tk::Tcllib::Tkpiechart::ConfigMethod
-include TkConfigMethod
-

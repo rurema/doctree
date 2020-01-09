@@ -1,9 +1,0 @@
-= class TkDialog < TkDialogObj
-
-== Class Methods
-
---- show(*args)
-#@todo
-
---- new(*args)
-#@todo

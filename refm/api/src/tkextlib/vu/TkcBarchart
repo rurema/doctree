@@ -1,5 +1,0 @@
-
-= class Tk::Vu::TkcBarchart < TkcItem
-
-include ChartsConfig
-

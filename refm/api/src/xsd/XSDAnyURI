@@ -1,5 +1,0 @@
-= class XSD::XSDAnyURI < XSD::XSDAnySimpleType
-== class methods
---- new(value = nil)
-#@todo
-

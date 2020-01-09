@@ -1,3 +1,0 @@
-
-= class Tk::TreeCtrl::NotifyEvent < TkUtil::CallbackSubst
-

@@ -1,1 +1,0 @@
-= class XSD::ValueSpaceError < XSD::Error

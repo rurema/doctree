@@ -1,5 +1,0 @@
-= class XSD::XSDInt < XSD::XSDLong
-== class methods
---- new(value = nil)
-#@todo
-

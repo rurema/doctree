@@ -1,5 +1,0 @@
-
-= class Tk::Vu::TkcStripchart < TkcItem
-
-include ChartsConfig
-

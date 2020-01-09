@@ -1,7 +1,0 @@
-
-= class Tk::HTML_Widget::ClippingWindow < TkWindow
-
-== Class Methods
---- new(parent, keys = {})
-#@todo
-

@@ -1,5 +1,0 @@
-
-= module TkFont::CoreMethods
-extend TkCore
-include Tk
-

@@ -1,7 +1,0 @@
-= class XSD::XSDFloat < XSD::XSDAnySimpleType
-include XSD::FloatConstants
-
-== class methods
---- new(value = nil)
-#@todo
-

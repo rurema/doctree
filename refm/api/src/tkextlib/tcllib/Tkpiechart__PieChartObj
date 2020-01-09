@@ -1,4 +1,0 @@
-
-= class Tk::Tcllib::Tkpiechart::PieChartObj < TkcItem
-include Tk::Tcllib::Tkpiechart::ConfigMethod
-

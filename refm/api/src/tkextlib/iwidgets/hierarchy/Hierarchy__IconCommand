@@ -1,9 +1,0 @@
-= class Tk::Iwidgets::Hierarchy::IconCommand < TkValidateCommand
-
-== Class Methods
-
---- _config_keys
-#@todo
-
-
-

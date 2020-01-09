@@ -1,5 +1,0 @@
-
-= class Tk::Vu::TkcSticker < TkcItem
-
-include ChartsConfig
-

@@ -1,4 +1,0 @@
-
-= class Tk::Tcllib::Tkpiechart::BoxLabeler < TkcItem
-include Tk::Tcllib::Tkpiechart::ConfigMethod
-
