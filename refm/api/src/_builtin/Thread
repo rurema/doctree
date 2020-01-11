@@ -991,6 +991,29 @@ th.join
 
 スレッドがすでに終了している場合は nil を返します。
 
+#@samplecode 例
+class C1
+  def m1
+    sleep 5
+  end
+  def m2
+    m1
+  end
+end
+
+th = Thread.new {C1.new.m2; Thread.stop}
+th.backtrace
+# => [
+#      [0] "(irb):3:in `sleep'",
+#      [1] "(irb):3:in `m1'",
+#      [2] "(irb):6:in `m2'",
+#      [3] "(irb):10:in `block in irb_binding'"
+#    ]
+
+th.kill
+th.backtrace   # => nil
+#@end
+
 #@end
 
 #@since 2.0.0
