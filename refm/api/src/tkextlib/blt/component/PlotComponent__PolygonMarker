@@ -1,2 +1,0 @@
-= class Tk::BLT::PlotComponent::PolygonMarker < Tk::BLT::PlotComponent::Marker
-

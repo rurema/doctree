@@ -1,4 +1,0 @@
-
-= class Tk::Tcllib::Tkpiechart::PeripheralLabeler < TkcItem
-include Tk::Tcllib::Tkpiechart::ConfigMethod
-

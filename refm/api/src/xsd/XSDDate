@@ -1,7 +1,0 @@
-= class XSD::XSDDate < XSD::XSDAnySimpleType
-include XSD::XSDDateTimeImpl
-
-== class methods
---- new(value = nil)
-#@todo
-

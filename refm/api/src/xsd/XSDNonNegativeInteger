@@ -1,5 +1,0 @@
-= class XSD::XSDNonNegativeInteger < XSD::XSDInteger
-== class methods
---- new(value = nil)
-#@todo
-

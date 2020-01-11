@@ -1,2 +1,0 @@
-= class Tk::BLT::PlotComponent::WindowMarker < Tk::BLT::PlotComponent::Marker
-

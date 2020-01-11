@@ -1,7 +1,0 @@
-= module SOAP::SOAPModuleUtils
-include SOAP
-
-== Instance Methods
-
---- decode(elename)
-#@todo

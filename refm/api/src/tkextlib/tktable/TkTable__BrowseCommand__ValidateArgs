@@ -1,7 +1,0 @@
-
-= class Tk::TkTable::BrowseCommand::ValidateArgs < TkUtil::CallbackSubst
-
-== Class Methods
---- ret_val(val)
-#@todo
-

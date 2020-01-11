@@ -1,9 +1,0 @@
-= class XSD::XSDDecimal < XSD::XSDAnySimpleType
-== class methods
---- new(value = nil)
-#@todo
-
-== instance methods
---- nonzero?
-#@todo
-

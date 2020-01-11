@@ -1,3 +1,0 @@
-
-= class Tk::TkTable::CellCommand < TkValidateCommand
-

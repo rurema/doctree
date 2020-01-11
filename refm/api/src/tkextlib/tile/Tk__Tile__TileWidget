@@ -1,9 +1,0 @@
-
-= module Tk::Tile::TileWidget
-== Instance Methods
---- instate(state, script = nil, &b)
-#@todo
-
---- state(state = nil)
-#@todo
-

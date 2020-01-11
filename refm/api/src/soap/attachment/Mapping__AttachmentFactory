@@ -1,9 +1,0 @@
-= class SOAP::Mapping::AttachmentFactory < SOAP::Mapping::Factory
-
-== Instance Methods
-
---- obj2soap(soap_class, obj, info, map)
-#@todo
-
---- soap2obj(obj_class, node, info, map)
-#@todo
