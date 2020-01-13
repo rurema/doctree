@@ -327,10 +327,12 @@ hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
 #@since 2.3.0
 --- to_proc -> Proc
 
-self に対応する [[c:Proc]] オブジェクトを返します。
+self のキーに対応する値を返す [[c:Proc]] オブジェクトを返します。
 
-  h = {1 => 10, 2 => 20, 3 => 30}
-  [1, 2, 3].map(&h) # => [10, 20, 30]
+#@samplecode
+h = {1 => 10, 2 => 20, 3 => 30}
+[1, 2, 3].map(&h) # => [10, 20, 30]
+#@end
 #@end
 
 --- length -> Integer
