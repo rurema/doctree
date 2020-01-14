@@ -95,6 +95,12 @@ result # => "result"
 mutex をロックしようとして、ロックが成功した場合、真を返します。
 ロックできなかった場合にはブロックせず偽を返します。
 
+#@samplecode 例
+m = Mutex.new
+m.try_lock # => true
+m.try_lock # => false
+#@end
+
 #@since 1.9.1
 --- unlock     -> self
 #@else
