@@ -44,6 +44,8 @@ SizedQueue オブジェクトを生成します。
 
 @param max キューのサイズの最大値です。
 
+#@#noexample 要約の例を参照
+
 == Instance Methods
 
 --- max -> Integer
