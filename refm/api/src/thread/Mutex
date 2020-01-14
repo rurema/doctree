@@ -53,6 +53,10 @@ mutex オブジェクトをロックします。一度に一つのス
                    した場合に発生します。
 #@end
 
+#@#noexample Thread::Mutex#unlock を参照
+
+@see [[m:Thread::Mutex#unlock]]
+
 --- locked? -> bool
 mutex がロックされている時、真を返します。
 
