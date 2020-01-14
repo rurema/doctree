@@ -60,6 +60,13 @@ mutex オブジェクトをロックします。一度に一つのス
 --- locked? -> bool
 mutex がロックされている時、真を返します。
 
+#@samplecode 例
+m = Mutex.new
+m.locked? # => false
+m.lock
+m.locked? # => true
+#@end
+
 --- synchronize { ... } -> object
 
 mutex をロックし、ブロックを実行します。実行後に必ず mutex のロックを解放します。
