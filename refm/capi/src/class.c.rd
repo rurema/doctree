@@ -151,6 +151,9 @@ rb_define_method と同じです。
 
 モジュール name を作成し返します。
 
+例:
+   VALUE rb_mHoge = rb_define_module("Hoge"); // モジュールHogeを作成
+
 --- void rb_define_module_function(VALUE module, const char *name, VALUE (*func)(), int argc)
 
 モジュール module にモジュール関数 name を定義します。
