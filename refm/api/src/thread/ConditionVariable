@@ -225,3 +225,11 @@ mutex のロックを解放し、カレントスレッドを停止します。
                らなかった場合でも指定した秒数が経過するとスリープを終了
                します。省略するとスリープし続けます。
 #@end
+
+#@since 2.1.0
+#@#noexample Thread::ConditionVariable#signal, Thread::ConditionVariable#broadcast を参照
+@see [[m:Thread::ConditionVariable#signal]], [[m:Thread::ConditionVariable#broadcast]]
+#@else
+#@#noexample ConditionVariable#signal, ConditionVariable#broadcast を参照
+@see [[m:ConditionVariable#signal]], [[m:ConditionVariable#broadcast]]
+#@end
