@@ -250,6 +250,10 @@ cが’0’から’9’、’a’から’f’、’A’から’F’のとき�
 
 --- MACRO VALUE LL2NUM(long long v)
 
+例:
+   long long n = 42;
+   VALUE num = LL2NUM(n); // (long longの整数42をRubyのオブジェクトに変換)
+
 --- MACRO VALUE LONG2FIX(long i)
 
 INT2FIX と同じです。
