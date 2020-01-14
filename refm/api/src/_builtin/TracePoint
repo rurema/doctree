@@ -310,8 +310,6 @@ foo 1
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
-@see [[m:TracePoint#callee_id]]
-
 #@samplecode
 class C
   def method_name
@@ -326,6 +324,8 @@ trace.enable do
   C.new.alias_name
 end
 #@end
+
+@see [[m:TracePoint#callee_id]]
 
 --- callee_id -> Symbol | nil
 
@@ -334,8 +334,6 @@ end
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
-@see [[m:TracePoint#method_id]]
-
 #@samplecode
 class C
   def method_name
@@ -350,6 +348,8 @@ trace.enable do
   C.new.alias_name
 end
 #@end
+
+@see [[m:TracePoint#method_id]]
 
 --- defined_class -> Class | module
 
