@@ -101,6 +101,57 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 
 @param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
 
+#@samplecode 例
+require 'thread'
+
+q = SizedQueue.new(4)
+
+th1 = Thread.start do
+  while resource = q.pop
+    puts resource
+  end
+end
+
+[:resource1, :resource2, :resource3, nil].each{|r|
+  q.push(r)
+}
+
+th1.join
+# => resource1
+# resource2
+# resource3
+#@end
+
+#@samplecode 例: nonblock = true
+require 'thread'
+
+q = SizedQueue.new(4)
+
+th1 = Thread.start do
+  while resource = q.pop
+    puts resource
+  end
+end
+
+[:resource1, :resource2, :resource3, nil].each{|r|
+  q.push(r)
+}
+
+begin
+  th1.join
+  q.pop(true)
+rescue => e
+  p e
+  p e.message
+end
+
+# => resource1
+# resource2
+# resource3
+# => #<ThreadError: queue empty>
+# => "queue empty"
+#@end
+
 #@since 2.1.0
 @see [[m:Thread::Queue#pop]]
 #@else
