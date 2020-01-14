@@ -161,4 +161,15 @@ self がカレントスレッドによってロックされている場合に tr
 [注意] このメソッドは実験的な機能として提供されています。仕様が変更にな
 る可能性があります。
 #@end
+
+#@samplecode 例
+m = Mutex.new
+m.owned? # => false
+m.lock
+Thread.new do
+  m.owned? # => false
+end.join
+m.owned? # => true
+#@end
+
 #@end
