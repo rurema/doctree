@@ -39,9 +39,7 @@ obj が消費するメモリ使用量をバイト単位で返します。
 
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
 ントとして扱う必要があります。特に T_DATA の値は正しくないでしょう。
-#@since 2.2.0
 2.2 以降では RVALUE のサイズを含んだ結果を返します。
-#@end
 
 本メソッドは C Ruby 以外では動作しません。
 
@@ -53,7 +51,6 @@ ObjectSpace.memsize_of(10)            # => 0
 ObjectSpace.memsize_of("12345" * 10)  # => 91
 #@end
 
-#@since 1.9.3
 --- memsize_of_all(klass = nil) -> Integer
 
 すべての生存しているオブジェクトが消費しているメモリ使用量をバイト単位
@@ -80,7 +77,6 @@ ObjectSpace.memsize_of("12345" * 10)  # => 91
 てください。
 
 本メソッドは C Ruby 以外では動作しません。
-#@end
 
 --- count_nodes(result_hash = nil) -> Hash
 
@@ -136,7 +132,6 @@ rb_data_type_struct に格納された名前が使用されます。
 
 本メソッドは C Ruby 以外では動作しません。
 
-#@since 2.0.0
 --- reachable_objects_from(obj) -> Array | nil
 
 obj から到達可能なすべてのオブジェクトを返します。マーク不能なオブジェ
@@ -179,18 +174,13 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 @see [[url:http://www.atdot.net/~ko1/diary/201212.html#d8]],
      [[url:http://www.atdot.net/~ko1/diary/201212.html#d9]]
-#@end
 
-#@since 2.1.0
 --- trace_object_allocations_start -> nil
 
 オブジェクト割り当てのトレースを開始します。
 
 @see [[m:ObjectSpace#trace_object_allocations_stop]]
 
-#@end
-
-#@since 2.1.0
 --- trace_object_allocations_stop -> nil
 
 オブジェクト割り当てのトレースを終了します。
@@ -199,9 +189,6 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 @see [[m:ObjectSpace#trace_object_allocations_start]]
 
-#@end
-
-#@since 2.1.0
 --- allocation_sourcefile(object) -> String
 
 objectの元となったソースファイル名を返します。
@@ -220,15 +207,13 @@ ObjectSpace::trace_object_allocations_stop
 
 @see [[m:ObjectSpace#trace_object_allocations_start]],
      [[m:ObjectSpace#trace_object_allocations_stop]]
-#@end
 
-#@since 2.1.0
---- allocation_sourceline(object) -> integer
+--- allocation_sourceline(object) -> Integer
 
-objectの元となったソースファイルの行数を返します。
+objectの元となったソースファイルの行番号を返します。
 
-@param object 元となるソースファイルの行数を取得したいobjectを指定します。
-@return objectの元となるソースファイルの行数を返します。存在しない場合はnilを返します。
+@param object 元となるソースファイルの行番号を取得したいobjectを指定します。
+@return objectの元となるソースファイルの行番号を返します。存在しない場合はnilを返します。
 
 #@samplecode 例
 require 'objspace'
@@ -241,9 +226,7 @@ ObjectSpace::trace_object_allocations_stop
 
 @see [[m:ObjectSpace#trace_object_allocations_start]],
      [[m:ObjectSpace#trace_object_allocations_stop]]
-#@end
 
-#@since 2.1.0
 --- trace_object_allocations { ... }
 
 与えられたブロック内でオブジェクトのトレースを行います。　
@@ -263,5 +246,4 @@ class C
 end
 
 C.new.foo #=> "objtrace.rb:8"
-#@end
 #@end

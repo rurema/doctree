@@ -88,11 +88,32 @@ JSON の配列の後に出力する文字列をセットします。
 
 インデントに使用する文字列を返します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+#@end
+
 --- indent=(string)
 
 インデントに使用する文字列をセットします。
 
 @param string インデントに使用する文字列を指定します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+json_state.indent = "  "
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
+#@end
 
 --- max_nesting -> Integer
 
@@ -109,6 +130,24 @@ JSON の配列の後に出力する文字列をセットします。
 --- object_nl -> String
 
 JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(object_nl: "")
+json_state.object_nl             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state = JSON::State.new(object_nl: "\n")
+json_state.object_nl             # => "\n"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+
+# => [1,2,{
+#    "name":"tanaka",
+#    "age":19
+#    }]
+#@end
 
 --- object_nl=(string)
 

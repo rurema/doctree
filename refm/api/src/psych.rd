@@ -165,7 +165,7 @@ Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 --- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil) -> object
 #@end
 
-安全に YAML YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 
 デフォルトでは以下のクラスのオブジェクトしか変換しません。
 

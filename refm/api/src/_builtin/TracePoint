@@ -245,6 +245,17 @@ self のトレースが有効な場合に true を、そうでない場合に fa
 
 self の状態を人間に読みやすい文字列にして返します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.inspect # "#<TracePoint:call `foo'@/path/to/test.rb:1>"
+end
+trace.enable
+foo 1
+#@end
+
 --- event -> Symbol
 
 発生したイベントの種類を [[c:Symbol]] で返します。
@@ -254,17 +265,54 @@ self の状態を人間に読みやすい文字列にして返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call, :return) do |tp|
+  p tp.event
+end
+trace.enable
+foo 1
+# => :call
+# :return
+#@end
+
 --- lineno -> Integer
 
 発生したイベントの行番号を返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call, :return) do |tp|
+  tp.lineno
+end
+trace.enable
+foo 1
+# => 1
+# 3
+#@end
+
 --- path -> String
 
 イベントが発生したファイルのパスを返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.path # => "/path/to/test.rb"
+end
+trace.enable
+foo 1
+#@end
 
 --- method_id -> Symbol | nil
 
@@ -341,6 +389,17 @@ end
 
 発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.binding.local_variables # => [:ret]
+end
+trace.enable
+foo 1
+#@end
+
 --- self -> object
 
 イベントを発生させたオブジェクトを返します。
@@ -358,9 +417,31 @@ end
 @raise RuntimeError :return、:c_return、:b_return イベントのためのイベ
                     ントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:return) do |tp|
+  p tp.return_value # => 1
+end
+trace.enable
+foo 1
+#@end
+
 --- raised_exception -> Exception
 
 発生した例外を返します。
 
 @raise RuntimeError :raise イベントのためのイベントフックの外側で実行し
                     た場合に発生します。
+
+#@samplecode 例
+trace = TracePoint.new(:raise) do |tp|
+  tp.raised_exception # => #<ZeroDivisionError: divided by 0>
+end
+trace.enable
+begin
+  0/0
+rescue
+end
+#@end

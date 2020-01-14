@@ -10,7 +10,6 @@
 
 == Instance Methods
 
-#@since 1.8.7
 --- eval(expr, fname = __FILE__, lineno = 1)    -> object
 
 自身をコンテキストとし文字列 expr を
@@ -33,7 +32,6 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @see [[m:Kernel.#eval]]
 
-#@end
 
 #@since 2.1.0
 --- local_variable_get(symbol) -> object

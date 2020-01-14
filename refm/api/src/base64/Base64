@@ -1,4 +1,3 @@
-#@since 1.8.2
 #@since 1.9.1
 
 = module Base64
@@ -205,5 +204,4 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 表示までしてしまうのはサンプルだからです。
 
-#@end
 #@end

@@ -56,11 +56,6 @@ sign が正しい署名でなかった場合などは false を返します。
        正しい署名でなかった場合など、検証に失敗した場合はこの
        例外は発生しないことに注意してください
 
-#@until 1.8.2
---- to_der -> String
-DER 形式の文字列に変換します。
-
-#@end
 
 = class OpenSSL::PKey::PKeyError < OpenSSL::OpenSSLError
 OpenSSL の公開鍵関連のエラーの場合に発生する例外

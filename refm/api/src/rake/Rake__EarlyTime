@@ -14,6 +14,10 @@ include Singleton
 
 @return -1 を返します。
 
+#@#noexample
+
 --- to_s -> String
 
 "<EARLY TIME>" という文字列を返します。
+
+#@#noexample
