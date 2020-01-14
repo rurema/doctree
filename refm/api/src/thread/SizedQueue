@@ -49,6 +49,11 @@ SizedQueue オブジェクトを生成します。
 --- max -> Integer
 キューの最大サイズを返します。
 
+#@samplecode 例
+q = SizedQueue.new(4)
+q.max # => 4
+#@end
+
 --- max=(n)
 キューの最大サイズを設定します。
 
