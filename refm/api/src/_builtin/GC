@@ -399,6 +399,18 @@ GC 内部の統計情報を [[c:Hash]] で返します。
 
 @param key 得られる情報から特定の情報を取得したい場合にキーを
            [[c:Symbol]] で指定します。
+
+#@samplecode 例
+latest = GC.latest_gc_info
+latest # => {:major_by=>nil, :gc_by=>:newobj, :have_finalizer=>false, :immediate_sweep=>false, :state=>:sweeping}
+
+stat = GC.stat
+merged = GC.latest_gc_info(stat)
+merged == latest.merge(stat) # => true
+
+GC.latest_gc_info(:gc_by)    # => :newobj
+#@end
+
 #@end
 
 #@since 2.7.0
