@@ -59,6 +59,16 @@ q.max # => 4
 
 @param n キューの最大サイズを指定します。
 
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = SizedQueue.new(4)
+q.max # => 4
+q.max = 5
+q.max # => 5
+#@end
+
 #@since 2.2.0
 --- push(obj, non_block = false) -> ()
 --- enq(obj, non_block = false)  -> ()
