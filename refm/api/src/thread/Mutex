@@ -149,6 +149,20 @@ Mutex はロックしたスレッド以外からロックを開放すること�
 [注意] 2.0 以降ではスリープ中でも、シグナルを受信した場合などに実行が再
 開(spurious wakeup)される場合がある点に注意してください。
 #@end
+
+#@samplecode 例
+m = Mutex.new
+th = Thread.new do
+  m.lock
+  m.sleep(2)
+end
+th.status # => "run"
+sleep 1
+th.status # => "sleep"
+sleep 1
+th.status # => false
+#@end
+
 #@end
 
 #@since 2.0.0
