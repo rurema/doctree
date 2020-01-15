@@ -236,7 +236,7 @@ BasicResponse に nonce を追加します。
 
 引数を省略すると、ランダムな nonce を生成し利用します。
 
-通常はこのメソッドを使わず [[c:OpenSSL::OCSP::BasicResponse#copy_nonce]] を
+通常はこのメソッドを使わず [[m:OpenSSL::OCSP::BasicResponse#copy_nonce]] を
 用います。
 
 @param val 追加する nonce の値(文字列)
