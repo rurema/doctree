@@ -321,16 +321,29 @@ foo 1
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
-#@since 2.4.0
+#@samplecode
+class C
+  def method_name
+  end
+  alias alias_name method_name
+end
+
+trace = TracePoint.new(:call) do |tp|
+  p [tp.method_id, tp.callee_id] # => [:method_name, :alias_name]
+end
+trace.enable do
+  C.new.alias_name
+end
+#@end
+
 @see [[m:TracePoint#callee_id]]
+
 --- callee_id -> Symbol | nil
 
 イベントが発生したメソッドの呼ばれた名前を [[c:Symbol]] で返します。
 トップレベルであった場合は nil を返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
-
-@see [[m:TracePoint#method_id]]
 
 #@samplecode
 class C
@@ -346,7 +359,9 @@ trace.enable do
   C.new.alias_name
 end
 #@end
-#@end
+
+@see [[m:TracePoint#method_id]]
+
 --- defined_class -> Class | module
 
 メソッドを定義したクラスかモジュールを返します。
