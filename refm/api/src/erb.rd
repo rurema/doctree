@@ -266,7 +266,7 @@ require "erb"
 include ERB::Util
 
 puts html_escape("is a > 0 & a < 10?")
-# => is a &gt; 0 &amp; a &lt; 10?
+# is a &gt; 0 &amp; a &lt; 10?
 #@end
 
 --- url_encode(s)  -> String
