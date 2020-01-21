@@ -275,7 +275,7 @@ require "erb"
 include ERB::Util
 
 puts url_encode("Programming Ruby:  The Pragmatic Programmer's Guide")
-# => Programming%20Ruby%3A%20%20The%20Pragmatic%20Programmer%27s%20Guide
+# Programming%20Ruby%3A%20%20The%20Pragmatic%20Programmer%27s%20Guide
 #@end
 
 = module ERB::DefMethod
