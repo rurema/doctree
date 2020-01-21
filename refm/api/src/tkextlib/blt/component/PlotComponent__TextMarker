@@ -1,2 +1,0 @@
-= class Tk::BLT::PlotComponent::TextMarker < Tk::BLT::PlotComponent::Marker
-

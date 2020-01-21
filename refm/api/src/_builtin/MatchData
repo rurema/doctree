@@ -155,22 +155,8 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 @see [[m:MatchData#post_match]]
 
-#@since 1.8.0
 #@until 1.9.1
-#@until 1.8.1
---- select(*index)    -> [String]
-#@end
 --- select {|s| ... } -> [String]
-#@until 1.8.1
-引数が指定された場合は、正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
-
-ブロックを与えられた場合は、
-各要素に対してブロックを評価した値が真であった要素を全て含む配列を
-返します。真になる要素がひとつもなかった場合は空の配列を返します。
-
-@param index インデックスを整数で 0 個以上指定します。
-
-#@else
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
@@ -179,8 +165,6 @@ self.to_a.select { ... } と同じです。
    m = /(.)(.)(\d+)(\d)/.match("THX1138: The Movie")
    p m.select{|x| /X/ =~ x}   #=> ["HX1138", "X"]
 
-#@end
-#@end
 #@end
 
 --- string -> String
@@ -225,7 +209,6 @@ self の内容を人間に読みやすい文字列にして返します。
   puts /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").inspect
   # => #<MatchData "hog" foo:"h" bar:"o" baz:"g">
 
-#@since 1.8.0
 --- values_at(*index) -> [String]
 
 正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
@@ -251,7 +234,6 @@ self の内容を人間に読みやすい文字列にして返します。
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 
-#@end
 #@since 1.9.1
 --- names -> [String]
 
@@ -286,6 +268,30 @@ self と other のマッチ対象になった文字列、元になった正規�
 false を返します。
 
 @param other 比較対象のオブジェクトを指定します。
+
+    #@samplecode 文字列
+    s = "abc"
+    m1 = s.match("a")
+    m2 = s.match("b")
+    m1 == m2  #=> false
+    m2 = s.match("a")
+    m1 == m2  #=> true
+
+    #@samplecode 正規表現
+    r = /abc/
+    m1 = r.match("abc")  #=> #<MatchData "abc">
+    m2 = r.match("abcde")  #=> #<MatchData "abc">
+    m1 == m2  #=> false
+    m2 = r.match("abc")  #=> #<MatchData "abc">
+    m1 == m2  #=> true
+
+    #@samplecode 正規表現のマッチした位置
+    r = /abc/
+    m1 = r.match("abcabc")  #=> #<MatchData "abc">
+    m2 = r.match("abcabc", 3)  #=> #<MatchData "abc">
+    m1 == m2  #=> false
+    m2 = r.match("abcabc", 0)  #=> #<MatchData "abc">
+    m1 == m2  #=> true
 
 #@end
 #@since 2.4.0

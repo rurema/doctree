@@ -37,7 +37,7 @@ Markdown syntax nor MarkdownTest mention this behavior.)
 で出力が行えます。詳しくは以下を参照してください。この拡張はデフォルト
 では無効になっています。
 
- * Github Flavored Markdown: [[url:http://github.github.com/github-flavored-markdown/]]
+ * Github Flavored Markdown: [[url:https://github.github.com/gfm/]]
 
 ==== CSS
 
@@ -81,7 +81,7 @@ Markdown syntax nor MarkdownTest mention this behavior.)
 張の一部を有効にして出力が行えます。詳しくは以下を参照してください。こ
 の拡張はデフォルトで有効になっています。
 
- * Github Flavored Markdown: [[url:http://github.github.com/github-flavored-markdown/]]
+ * Github Flavored Markdown: [[url:https://github.github.com/gfm/]]
 
 上記の URL のうち以下のものがサポートされます。:
 

@@ -6,7 +6,6 @@ category File
 
 == Class Methods
 
-#@since 1.8.7
 --- mktmpdir(prefix_suffix = nil, tmpdir = nil)             -> String
 --- mktmpdir(prefix_suffix = nil, tmpdir = nil){|dir| ... } -> object
 
@@ -87,7 +86,6 @@ category File
                      アプリケーションは一時ディレクトリを他のユーザか
                      ら書き込める権限に変更すべきではありません。
 
-#@end
 
 --- tmpdir    -> String
 

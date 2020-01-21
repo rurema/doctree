@@ -612,6 +612,9 @@ self と set が互いに素な集合である場合に true を返します。
 @return 常に self を返します。
 
 --- select! {|element| ... } -> self | nil
+#@since 2.6.0
+--- filter! {|element| ... } -> self | nil
+#@end
 
 各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
 

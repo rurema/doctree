@@ -1,6 +1,0 @@
-#@since 1.8.4
-
-= class Tk::Tcllib::Tkpiechart::Label < TkcItem
-include Tk::Tcllib::Tkpiechart::ConfigMethod
-
-#@end

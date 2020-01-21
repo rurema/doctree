@@ -1,4 +1,3 @@
-#@since 1.9.1
 = class CSV::Row < Object
 extend Forwardable
 include Enumerable
@@ -30,6 +29,23 @@ include Enumerable
 
 @param header_row ヘッダ行である場合は真を指定します。そうでない場合は偽を指定します。
                   デフォルトは偽です。
+
+#@samplecode 例 header_row = true のケース
+require "csv"
+
+header = CSV::Row.new(["header1", "header2"], [], header_row: true)
+table = CSV::Table.new([header])
+table.to_a # => [["header1", "header2"]]
+#@end
+
+#@samplecode 例 header_row = false のケース
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+#@end
 
 @see [[m:CSV::Row#header_row?]], [[m:CSV::Row#field_row?]]
 
@@ -212,6 +228,16 @@ row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
 
 @return メソッドチェーンのために自身を返します。
 
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], ["valid1", "valid2", "invalid", "valid4"])
+
+row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header3":"invalid" "header4":"valid4">
+row.delete_if { |header, field| field == "invalid" }
+row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header4":"valid4">
+#@end
+
 --- each{|header, field| ... } -> self
 
 与えられたブロックにヘッダとフィールドの組を渡して評価します。
@@ -242,6 +268,14 @@ row.each { |header, field| puts "#{header} - #{field}" }
 そうでない場合は偽を返します。
 
 @param data この行に含まれているかどうか調べたい値を指定します。
+
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new(["header1", "header2", "header3", "header4"], [1, 2, 3, 4])
+row.field?(1) # => true
+row.field?(5) # => false
+#@end
 
 --- field_row? -> bool
 フィールド行であれば真を返します。そうでなければ偽を返します。
@@ -393,34 +427,3 @@ row.to_hash # => {"header2"=>3, "header1"=>2}
 同値性を比較するために使用する内部的なデータです。
 
 #@#noexample
-
-#@else
-= class CSV::Row < Array
-CSV形式1行分のデータ（Row）を操作するためのクラス。
-#@# 1.8.2 以降で deprecated
-
-== Instance Methods
-
-#@until 1.8.2
-
---- match(rhs) -> bool
-自分自身と引数rhsを比較しtrue/falseを返します。
-
-比較方法としては、[[c:CSV::Row]]オブジェクトの各Cellのデータを個別にCSV::Cell#matchで比較を行いそれらの全ての返り値がtrueの時のみtrueを返します。
-
-@param rhs 比較される[[c:CSV::Row]]クラスのオブジェクト
-
-=== 注意
-
-このメソッドはバージョン1.8.2で廃止されました。
-
---- to_a -> Array
-自分自身を[[c:Array]]オブジェクトとして返します。
-
-=== 注意
-
-このメソッドはバージョン1.8.2で廃止されました。
-
-
-#@end
-#@end

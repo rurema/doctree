@@ -2,11 +2,11 @@ require rubygems/digest/md5
 require rubygems/format
 require rubygems/installer
 
-様々な Gem ファイルや Gem データベースを懸賞するためのライブラリです。
+様々な Gem ファイルや Gem データベースを検証するためのライブラリです。
 
 = class Gem::Validator < Object
 
-様々な Gem ファイルや Gem データベースを懸賞するためのクラスです。
+様々な Gem ファイルや Gem データベースを検証するためのクラスです。
 
 == Public Instance Methods
 

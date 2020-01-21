@@ -13,22 +13,17 @@ RbConfig モジュールを定義します。
 
 #@else
 = module Config
-#@since 1.8.5
 alias RbConfig
-#@end
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 Config モジュールを定義します。
 
-#@since 1.8.5
 RbConfig モジュールを Config と同じものとして定義します。
-#@end
 
 #@end
 
 == Singleton Methods
 
-#@since 1.8.5
 --- expand(val, config = CONFIG) -> String
 
 与えられたパスを展開します。
@@ -43,7 +38,6 @@ RbConfig モジュールを Config と同じものとして定義します。
 @see [[m:RbConfig::MAKEFILE_CONFIG]]
 #@else
 @see [[m:Config::MAKEFILE_CONFIG]]
-#@end
 #@end
 #@since 1.9.2
 --- ruby -> String

@@ -132,7 +132,7 @@
     * [[m:Struct.new]] は :keyword_init というキーワード引数を受け取り、メンバーをキーワード引数で初期化できるようになりました。
       [[feature:11925]]
 
-  * Regexp/String: Unicodeのバージョンを9.0.0 から 10.0.0 に更新しました [[feature:13685]]
+  * [[c:Regexp]]/[[c:String]]: Unicodeのバージョンを 9.0.0 から 10.0.0 に更新しました。 [[feature:13685]]
 
   * [[c:Thread]]
     * [[m:Thread#name=]] で設定した名前が Windows 10 で見えるようになりました
