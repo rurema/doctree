@@ -22,7 +22,7 @@ unがワイルドカード展開([[m:Dir.glob]]参照)します(Unix ではシ�
    ruby -run -e touch -- [-v] FILE
    ruby -run -e wait_writable -- [OPTION] FILE
    ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
-   ruby -run -e httpd -- [OPTION] DocumentRoot
+   ruby -run -e httpd -- [OPTION] [DocumentRoot]
    ruby -run -e help [COMMAND]
 
 = reopen Kernel
@@ -166,7 +166,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
 WEBrick HTTP server を起動します。
 
-  ruby -run -e httpd -- [OPTION] DocumentRoot
+  ruby -run -e httpd -- [OPTION] [DocumentRoot]
 
   --bind-address=ADDR         バインドアドレスを指定します
   --port=NUM                  ポート番号を指定します
