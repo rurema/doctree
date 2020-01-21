@@ -291,6 +291,14 @@ eRubyスクリプトのためのユーティリティを提供するモジュー
 
 @param s URLエンコードを行う文字列
 
+#@samplecode 例
+require "erb"
+include ERB::Util
+
+puts url_encode("Programming Ruby:  The Pragmatic Programmer's Guide")
+# Programming%20Ruby%3A%20%20The%20Pragmatic%20Programmer%27s%20Guide
+#@end
+
 = module ERB::DefMethod
 
 def_erb_methodを提供するモジュールです。
