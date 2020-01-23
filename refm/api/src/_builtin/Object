@@ -1744,6 +1744,10 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 --- taint -> self
 
+#@since 2.7.0
+何もせずに self を返します。
+このメソッドは deprecated で、Ruby 3.2 で削除予定です。
+#@else
 オブジェクトの「汚染マーク」をセットします。
 
 環境変数（[[c:ENV]]で得られる文字列）など一部のオブジェクトは最初から汚染されています。
@@ -1764,9 +1768,18 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
   eval(some) #=> @&%&(#!
   
   p ENV['OS'].tainted? #=> true
+#@end
 
 @see [[m:Object#tainted?]],[[m:Object#untaint]],[[m:Object#freeze]]
 
+#@since 2.7.0
+--- tainted? -> false
+
+常に false を返します。
+このメソッドは deprecated で、Ruby 3.2 で削除予定です。
+
+全てのオブジェクトは常に untainted 扱いになりました。
+#@else
 --- tainted? -> bool
 
 オブジェクトの「汚染マーク」がセットされている時真を返します。
@@ -1775,11 +1788,16 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
   p String.new.tainted? #=> false
   p ENV['OS'].tainted? #=> true
+#@end
 
 @see [[m:Object#taint]],[[m:Object#untaint]]
 
 --- untaint -> self
 
+#@since 2.7.0
+何もせずに self を返します。
+このメソッドは deprecated で、Ruby 3.2 で削除予定です。
+#@else
 オブジェクトの「汚染マーク」を取り除きます。
 
 汚染マークを取り除くことによる危険性はプログラマが責任を負う必要が
@@ -1794,6 +1812,7 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
   ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
   # => true
   # false
+#@end
 
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
@@ -1806,7 +1825,11 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 @see [[m:Object#untrusted?]],[[m:Object#untrust]]
 
+#@since 2.7.0
+--- untrusted? -> false
+#@else
 --- untrusted? -> bool
+#@ennd
 
 このメソッドは deprecated です。
 [[m:Object#tainted?]] と同じ動作をします。
