@@ -158,7 +158,7 @@ self に対応する Proc オブジェクトを返します。
 Proc#callの第一引数をレシーバとして、 self という名前のメソッドを
 残りの引数を渡して呼びだします。
 
-#@samplecode あらわに呼ぶ例
+#@samplecode 明示的に呼ぶ例
 :to_i.to_proc["ff", 16]  # => 255 ← "ff".to_i(16)と同じ
 #@end
 
