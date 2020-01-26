@@ -1829,7 +1829,7 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 --- untrusted? -> false
 #@else
 --- untrusted? -> bool
-#@ennd
+#@end
 
 このメソッドは deprecated です。
 [[m:Object#tainted?]] と同じ動作をします。
