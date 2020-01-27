@@ -419,6 +419,28 @@ GC.latest_gc_info(:gc_by)    # => :newobj
 ヒープをコンパクションします。
 
 詳細は[[feature:15626]]を参照してください。
+
+@see [[m:GC.verify_compaction_references]]
+--- verify_compaction_references(toward: nil, double_heap: nil) -> Hash
+
+コンパクションの参照の一貫性を検証します。
+
+このメソッドは実装の詳細です。
+コンパクション中に移動されたオブジェクトは T_MOVED オブジェクトに置き換えられます。
+コンパクション後には T_MOVED を参照するオブジェクトは存在するべきではありません。
+
+この関数は全てのオブジェクトが移動する余地を確保するためにヒープを2倍にして、
+全ての移動を確実にするためにヒープをコンパクションして、全ての参照を更新して、
+それからフルGCを実行します。
+もし T_MOVED への参照をもつオブジェクトがあれば、マークスタックにプッシュされて、
+SEGV が起きるでしょう。
+
+@param toward nil か :empty を指定します。
+@param double_heap ヒープサイズを2倍にするかどうかを真偽値で指定します。
+
+@return [[m:GC.compact]] の返り値と同じです。
+
+@see [[m:GC.compact]]
 #@end
 
 == Instance Methods
