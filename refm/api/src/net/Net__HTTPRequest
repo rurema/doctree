@@ -71,6 +71,16 @@ f は read(size) メソッドが定義されている必要があります。
 --- method -> String
 リクエストの HTTP メソッドを文字列で返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Post.new(uri.request_uri)
+req.method # => "POST"
+req = Net::HTTP::Get.new(uri.request_uri)
+req.method # => "GET"
+#@end
+
 --- path -> String
 
 リクエストする path を文字列で返します。
