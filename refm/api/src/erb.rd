@@ -208,11 +208,11 @@ listings.build
 
 puts listings.product + "\n" + listings.price
 
-# => Chicken Fried Steak
-#    A well messages pattie, breaded and fried.
-#    
-#    Chicken Fried Steak -- 9.95
-#    A well messages pattie, breaded and fried.
+# Chicken Fried Steak
+# A well messages pattie, breaded and fried.
+# 
+# Chicken Fried Steak -- 9.95
+# A well messages pattie, breaded and fried.
 #@end
 
 --- version -> String
