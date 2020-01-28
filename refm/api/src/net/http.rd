@@ -1652,6 +1652,16 @@ type と params から Content-Type: ヘッダフィールドの
 @param type メディアタイプを文字列で指定します。
 @param params パラメータ属性をハッシュで指定します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.content_type                          # => nil
+req.content_type = 'multipart/form-data'  # => "multipart/form-data"
+req.content_type                          # => "multipart/form-data"
+#@end
+
 --- main_type -> String|nil
 "text/html" における "text" のようなタイプを表す
 文字列を返します。
