@@ -1698,6 +1698,16 @@ len に nil を与えると Content-Length: ヘッダフィールドを
 
 @param len 設定する値を整数で与えます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.content_length      # => nil
+req.content_length = 10 # => 10
+req.content_length      # => 10
+#@end
+
 --- content_range -> Range|nil
 
 Content-Range: ヘッダフィールドの値を Range で返します。
