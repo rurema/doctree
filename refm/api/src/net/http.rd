@@ -1818,6 +1818,18 @@ req.each_capitalized_name { |key| puts key }
 
 ヘッダ名は小文字で統一されます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.each_name { |name| puts name }
+
+# => accept-encoding
+# => accept
+# => user-agent
+#@end
+
 --- each_value {|value| .... } -> ()
 保持しているヘッダの値をブロックに渡し、呼びだします。
 
