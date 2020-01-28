@@ -1772,6 +1772,18 @@ key ヘッダフィールドを削除します。
 ヘッダ名は小文字で統一されます。
 val は ", " で連結した文字列がブロックに渡されます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.each_header { |key,value| puts "#{key} = #{value}" }
+
+# => accept-encoding = gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+# => accept = */*
+# => user-agent = Ruby
+#@end
+
 --- each_capitalized {|name, value| .... } -> ()
 --- canonical_each {|name, value| .... } -> ()
 
