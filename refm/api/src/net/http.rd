@@ -1715,6 +1715,16 @@ Range の表わす長さは [[m:Net::HTTPHeader#range_length]] で得られま�
 
 ヘッダが設定されていない場合には nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.content_range      # => nil
+req['Content-Range'] = "bytes 0-499/1234"
+req.content_range      # => 0..499
+#@end
+
 --- range_length -> Integer|nil
 
 Content-Range: ヘッダフィールドの表している長さを整数で返します。
