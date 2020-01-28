@@ -808,7 +808,11 @@ C.method_defined? "private_method2"     #=> false
 @see [[m:Object#instance_eval]], [[m:Module.new]], [[m:Kernel.#eval]]
 #@end
 
+#@since 1.9.1
+--- name -> String | nil
+#@else
 --- name -> String
+#@end
 --- to_s -> String
 #@since 2.0.0
 --- inspect -> String
@@ -823,7 +827,7 @@ C.method_defined? "private_method2"     #=> false
 クラスパスの例としては「CGI::Session」「Net::HTTP」が挙げられます。
 
 #@since 1.9.1
-@return 名前のないモジュール / クラスに対しては nil を返します。
+@return 名前のないモジュール / クラスに対しては、name は nil を、それ以外はオブジェクト ID の文字列を返します。
 #@else
 @return 名前のないモジュール / クラスに対しては空文字列を返します。
 #@end
@@ -846,6 +850,8 @@ C.method_defined? "private_method2"     #=> false
 #@since 1.9.1
   p Module.new.name   #=> nil
   p Class.new.name    #=> nil
+  p Module.new.to_s   #=> "#<Module:0x00007f90b09112c8>"
+  p Class.new.to_s    #=> "#<Class:0x00007fa5c40b41b0>"
 #@else
   p Module.new.name   #=> ""
   p Class.new.name    #=> ""
