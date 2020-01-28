@@ -1727,6 +1727,22 @@ HTMLのフォームのデータ params から
 @param params HTML のフォームデータの [[c:Hash]] を与えます。
 @param sep データのセパレータを文字列で与えます。
 
+#@samplecode 例 form_data
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.form_data = {"q" => ["ruby", "perl"], "lang" => "en"} # => {"q"=>["ruby", "perl"], "lang"=>"en"}
+#@end
+
+#@samplecode 例 set_form_data
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.set_form_data({"q" => "ruby", "lang" => "en"}, ';') # => "application/x-www-form-urlencoded"
+#@end
+
 --- content_length -> Integer|nil
 Content-Length: ヘッダフィールドの表している値を整数で返します。
 
