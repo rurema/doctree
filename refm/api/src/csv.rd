@@ -1037,6 +1037,49 @@ csv.converters  # => [:integer, :float, :integer, :float, :date, :date_time, :da
 
 データソースは読み込み用にオープンされていなければなりません。
 
+#@samplecode 例 CSV.new 時に :header => true を指定した場合
+require "csv"
+
+users = <<CSV
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+csv = CSV.new(users, headers: true)
+csv.each do |row|
+  p row
+end
+
+# => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+# => #<CSV::Row "id":"2" "first name":"jiro" "last name":"suzuki" "age":"18">
+# => #<CSV::Row "id":"3" "first name":"ami" "last name":"sato" "age":"19">
+# => #<CSV::Row "id":"4" "first name":"yumi" "last name":"adachi" "age":"21">
+#@end
+
+#@samplecode 例 CSV.new 時に :header => true を指定しない場合
+require "csv"
+
+users = <<CSV
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+csv = CSV.new(users)
+csv.each do |row|
+  p row
+end
+
+# => ["id", "first name", "last name", "age"]
+# => ["1", "taro", "tanaka", "20"]
+# => ["2", "jiro", "suzuki", "18"]
+# => ["3", "ami", "sato", "19"]
+# => ["4", "yumi", "adachi", "21"]
+#@end
+
 --- encoding -> Encoding
 
 読み書きするときに使用するエンコーディングを返します。
