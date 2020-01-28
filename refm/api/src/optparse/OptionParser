@@ -396,7 +396,7 @@ end
 
 #@#noexample OptionParser#verを参照
 
-@see [[OptionParser#ver]]
+@see [[m:OptionParser#ver]]
 
 --- version=(ver)
 
@@ -406,7 +406,7 @@ end
 
 #@#noexample OptionParser#verを参照
 
-@see [[OptionParser#ver]]
+@see [[m:OptionParser#ver]]
 
 --- release       -> String
 
@@ -430,7 +430,7 @@ end
 
 #@#noexample OptionParser#verを参照
 
-@see [[OptionParser#ver]]
+@see [[m:OptionParser#ver]]
 
 --- ver    -> String
 
