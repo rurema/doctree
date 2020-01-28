@@ -191,11 +191,19 @@ class Listings
   def build
     b = binding
     # create and run templates, filling member data variables
+#@since 2.6.0
+    ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), eoutvar: "@product").result b
+#@else
     ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), 0, "", "@product").result b
+#@end
       <%= PRODUCT[:name] %>
       <%= PRODUCT[:desc] %>
     END_PRODUCT
+#@since 2.6.0
+    ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), eoutvar: "@price").result b
+#@else
     ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), 0, "", "@price").result b
+#@end
       <%= PRODUCT[:name] %> -- <%= PRODUCT[:cost] %>
       <%= PRODUCT[:desc] %>
     END_PRICE
