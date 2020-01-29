@@ -172,6 +172,57 @@ Ruby 2.5 が EOL になったときに削除される予定です。
 trim_mode と eoutvar の指定はキーワード引数に移行してください。
 #@end
 
+#@samplecode 例
+require "erb"
+
+# build data class
+class Listings
+  PRODUCT = { :name => "Chicken Fried Steak",
+              :desc => "A well messages pattie, breaded and fried.",
+              :cost => 9.95 }
+
+  attr_reader :product, :price
+
+  def initialize( product = "", price = "" )
+    @product = product
+    @price = price
+  end
+
+  def build
+    b = binding
+    # create and run templates, filling member data variables
+#@since 2.6.0
+    ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), eoutvar: "@product").result b
+#@else
+    ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), 0, "", "@product").result b
+#@end
+      <%= PRODUCT[:name] %>
+      <%= PRODUCT[:desc] %>
+    END_PRODUCT
+#@since 2.6.0
+    ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), eoutvar: "@price").result b
+#@else
+    ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), 0, "", "@price").result b
+#@end
+      <%= PRODUCT[:name] %> -- <%= PRODUCT[:cost] %>
+      <%= PRODUCT[:desc] %>
+    END_PRICE
+  end
+end
+
+# setup template data
+listings = Listings.new
+listings.build
+
+puts listings.product + "\n" + listings.price
+
+# Chicken Fried Steak
+# A well messages pattie, breaded and fried.
+# 
+# Chicken Fried Steak -- 9.95
+# A well messages pattie, breaded and fried.
+#@end
+
 --- version -> String
 
 erb.rbのリビジョン情報を返します。
