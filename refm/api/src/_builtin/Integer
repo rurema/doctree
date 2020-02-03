@@ -596,18 +596,25 @@ self の符号を反転させたものを返します。
   2 * 3   # => 6
 
 --- /(other) -> Numeric
---- div(other) -> Numeric
 
-算術演算子。商を計算します。
+除算の算術演算子。
+
+other が Integer の場合、整商（整数の商）を Integer で返します。
+普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
+
+other が Float、Rational、Complex の場合、普通の商を other と
+同じクラスのインスタンスで返します。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
 #@samplecode 例
-4 / 2 # => 2
-5 / 2 # => 2
--4 / 2 # => -2
--4.div(2) # => -2
+7 / 2 # => 3
+7 / -2 # => -4
+7 / 2.0 # => 3.5
+7 / Rational(2, 1) # => (7/2)
+7 / Complex(2, 0) # => ((7/2)+0i)
+
 begin
   2 / 0
 rescue => e
@@ -615,7 +622,41 @@ rescue => e
 end
 #@end
 
-@see [[m:Integer#fdiv]], [[m:Numeric#div]], [[m:Numeric#fdiv]]
+@see [[m:Integer#div]], [[m:Integer#fdiv]], [[m:Numeric#quo]]
+
+--- div(other) -> Integer
+
+整商（整数の商）を返します。
+普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
+
+other が Integer オブジェクトの場合、[[m:Integer#/]] の結果と一致します。
+
+div に対応する剰余メソッドは modulo です。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+#@samplecode 例
+7.div(2) # => 3
+7.div(-2) # => -4
+7.div(2.0) # => 3
+7.div(Rational(2, 1)) # => 3
+
+begin
+  2.div(0)
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+end
+
+begin
+  2.div(0.0)
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+  # Integer#/ と違い、引数が Float でもゼロで割ることはできない
+end
+#@end
+
+@see [[m:Integer#fdiv]], [[m:Integer#/]], [[m:Integer#modulo]]
 
 --- %(other) -> Numeric
 --- modulo(other) -> Numeric
