@@ -529,6 +529,13 @@ File.symlink(old, self.to_s) と同じです。
 --- atime -> Time
 File.atime(self.to_s) を渡したものと同じです。
 
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("testfile")
+pathname.atime # => 2018-12-18 20:58:13 +0900
+#@end
+
 @see [[m:File.atime]]
 
 --- ctime -> Time
