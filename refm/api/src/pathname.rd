@@ -575,6 +575,15 @@ File.fnmatch(pattern, self.to_s, *args) と同じです。
 
 @param args [[m:File.fnmatch]] を参照してください。
 
+#@samplecode 例
+require "pathname"
+
+path = Pathname("testfile")
+path.fnmatch("test*")                       # => true
+path.fnmatch("TEST*")                       # => false
+path.fnmatch("TEST*", File::FNM_CASEFOLD)   # => true
+#@end
+
 @see [[m:File.fnmatch]]
 
 --- fnmatch?(pattern, *args) -> bool
