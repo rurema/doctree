@@ -165,17 +165,15 @@ x の逆双曲線正接関数の値を返します。
 
 --- cos(x) -> Float
 
-x の余弦関数の値をラジアンで返します。
+x の余弦関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return [-1, 1] の実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.cos(Math::PI) # => -1.0
@@ -183,17 +181,15 @@ Math.cos(Math::PI) # => -1.0
 
 --- sin(x) -> Float
 
-x の正弦関数の値をラジアンで返します。
+x の正弦関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return [-1, 1] の実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.sin(Math::PI/2) # => 1.0
@@ -201,17 +197,15 @@ Math.sin(Math::PI/2) # => 1.0
 
 --- tan(x) -> Float
 
-x の正接関数の値をラジアンで返します。
+x の正接関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.tan(0) # => 0.0
