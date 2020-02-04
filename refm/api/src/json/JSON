@@ -96,6 +96,21 @@ JSON ライブラリがジェネレータの状態を表すクラスとして使
 
 @raise ArgumentError オブジェクトのネストの深さが limit を越えた場合に発生します。
 
+#@samplecode 例
+require "json"
+
+JSON.dump({ name: "tanaka", age: 19 }) # => "{\"name\":\"tanaka\",\"age\":19}"
+#@end
+
+#@samplecode 例
+require "json"
+
+File.open("test.txt", "w") do |f|
+  JSON.dump([[[[[[[[[[]]]]]]]]]], f, 10)   # => #<File:test.txt>
+  JSON.dump([[[[[[[[[[[]]]]]]]]]]], f, 10) # => exceed depth limit (ArgumentError)
+end
+#@end
+
 @see [[c:Marshal]], [[m:Marshal.#dump]]
 
 --- fast_generate(object) -> String
