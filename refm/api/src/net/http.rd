@@ -1726,6 +1726,14 @@ Content-Type: ヘッダフィールドが存在しない場合には nil を返�
 
 Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+res = Net::HTTP.get_response(uri)
+res.sub_type # => "html"
+#@end
+
 --- type_params -> Hash
 Content-Type のパラメータを {"charset" => "iso-2022-jp"}
 という形の [[c:Hash]] で返します。
