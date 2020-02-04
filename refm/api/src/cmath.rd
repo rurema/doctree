@@ -259,10 +259,10 @@ CMath.sqrt(Complex(0, 8))# => (2.0+2.0i)
 
 --- sin!(x) -> Float
 
-実数 x の正弦関数の値をラジアンで返します。[[m:Math.#sin]] のエイリアス
+実数 x の正弦関数の値を返します。[[m:Math.#sin]] のエイリアス
 です。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @raise TypeError x に数値以外を指定した場合に発生します。
 
@@ -279,20 +279,18 @@ CMath.sin!(2 * Math::PI / 4) # => 1.0
 
 --- sin(z) -> Float | Complex
 
-z の正弦関数の値をラジアンで返します。
+z の正弦関数の値を返します。
 
-@param z 数値
+@param z 数値（ラジアンで与えます）
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 --- cos!(x) -> Float
 
-実数 x の余弦関数の値をラジアンで返します。[[m:Math.#cos]] のエイリアス
+実数 x の余弦関数の値を返します。[[m:Math.#cos]] のエイリアス
 です。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return [-1, 1] の実数
 
@@ -311,20 +309,18 @@ CMath.cos!(4 * Math::PI / 4) # => -1.0
 
 --- cos(z) -> Float | Complex
 
-z の余弦関数の値をラジアンで返します。
+z の余弦関数の値を返します。
 
-@param z 数値
+@param z 数値（ラジアンで与えます）
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 --- tan!(x) -> Float
 
-実数 x の正接関数の値をラジアンで返します。[[m:Math.#tan]] のエイリアス
+実数 x の正接関数の値を返します。[[m:Math.#tan]] のエイリアス
 です。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @raise TypeError x に数値以外を指定した場合に発生します。
 
@@ -341,13 +337,11 @@ CMath.tan!(4 * Math::PI / 4) # => 0.0
 
 --- tan(z) -> Float | Complex
 
-z の正接関数の値をラジアンで返します。
+z の正接関数の値を返します。
 
-@param z 数値
+@param z 数値（ラジアンで与えます）
 
-#@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
-#@end
 
 --- sinh!(x) -> Float
 
