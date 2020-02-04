@@ -139,7 +139,7 @@ ENV['FOO'] = 'bar'
 ENV.each_key do |key|
   p "key #{key} detected" if key == 'FOO'
 end
-# => "key FOO detected"
+# "key FOO detected"
 #@end
 
 #@since 1.9.1
