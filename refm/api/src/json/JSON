@@ -49,8 +49,8 @@ end
 
 json = JSON.generate(User.new(1, "tanaka"))
 json # => "{\"json_class\":\"User\",\"id\":1,\"name\":\"tanaka\"}"
-JSON.parse(json, create_addition: true)
-# => {"json_class"=>"User", "id"=>1, "name"=>"tanaka"}
+JSON.parse(json, create_additions: true)
+# => #<User:0x0000557709b269e0 @id=1, @name="tanaka">
 #@end
 
 --- create_id=(identifier)
