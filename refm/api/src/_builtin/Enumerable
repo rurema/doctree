@@ -6,7 +6,6 @@
 
 == Instance Methods
 
-#@since 1.8.0
 --- all?               -> bool
 --- all? {|item| ... } -> bool
 #@since 2.5.0
@@ -32,9 +31,7 @@
 #@since 2.5.0
     p %w[ant bear cat].all?(/t/)     # => false
 #@end
-#@end
 
-#@since 1.8.0
 --- any?               -> bool
 --- any? {|item| ... } -> bool
 #@since 2.5.0
@@ -62,7 +59,6 @@
     p [nil, true, 99].any?          # => true
     p [].any?                       # => false
 #@end
-#@end
 
 #@since 1.9.1
 --- collect  -> Enumerator
@@ -86,48 +82,47 @@ obj.collect {|item| item } を実行します。
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
-#@since 1.8.7
-#@since 1.9.1
---- each_with_index                      -> Enumerator
-#@else
---- each_with_index                      -> Enumerable::Enumerator
---- enum_with_index                      -> Enumerable::Enumerator
-#@end
-#@end
---- each_with_index {|item, index| ... } -> self
+--- each_with_index(*args)                      -> Enumerator
+--- each_with_index(*args) {|item, index| ... } -> self
 
 要素とそのインデックスをブロックに渡して繰り返します。
 
-self を返します。
-
-#@since 1.9.1
 ブロックを省略した場合は、
 要素とそのインデックスを繰り返すような
 [[c:Enumerator]] を返します。
-#@end
 
-例:
+[[m:Enumerator#with_index]] は offset 引数を受け取りますが、
+each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
+
+@param args イテレータメソッド (each など) にそのまま渡されます。
+
+#@samplecode 例
     [5, 10, 15].each_with_index do |n, idx|
       p [n, idx]
     end
         # => [5, 0]
         #    [10, 1]
         #    [15, 2]
-
-#@since 1.8.4
-#@until 1.8.6
-@see [[m:Enumerable::Enumerator#enum_with_index]]
-#@end
 #@end
 
-#@since 1.8.7
+#@samplecode 引数ありの例
+require 'stringio'
+StringIO.new("foo|bar|baz").each_with_index("|") do |s, i|
+  p [s, i]
+end
+# => ["foo|", 0]
+#    ["bar|", 1]
+#    ["baz", 2]
+#@end
+
+@see [[m:Enumerator#with_index]]
+
 #@since 1.9.1
 --- find(ifnone = nil)   -> Enumerator
 --- detect(ifnone = nil) -> Enumerator
 #@else
 --- find(ifnone = nil)   -> Enumerable::Enumerator
 --- detect(ifnone = nil) -> Enumerable::Enumerator
-#@end
 #@end
 --- find(ifnone = nil) {|item| ... }   -> object
 --- detect(ifnone = nil) {|item| ... } -> object
@@ -142,7 +137,6 @@ self を返します。
 真になった値を返すような [[c:Enumerator]] を返します。
 #@end
 
-#@since 1.8.0
 @param ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
 例:
@@ -154,32 +148,23 @@ self を返します。
     ifnone = proc { raise ArgumentError, "item not found" }
     p [1, 2, 3, 4, 5].find(ifnone) {|i| i % 7 == 0 }
         # ArgumentError: item not found
-#@else
-@param ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
-    [1, 2, 3].find("raise") {|v| v > 4 }
-        # => -:1: unhandled exception
-#@end
-
-#@since 1.8.7
-#@since 1.9.1
 --- find_all  -> Enumerator
 --- select    -> Enumerator
-#@else
---- find_all  -> Enumerable::Enumerator
---- select    -> Enumerable::Enumerator
-#@end
+#@since 2.6.0
+--- filter    -> Enumerator
 #@end
 --- find_all {|item| ... } -> [object]
 --- select {|item| ... }   -> [object]
+#@since 2.6.0
+--- filter {|item| ... }   -> [object]
+#@end
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
-#@since 1.9.1
 ブロックを省略した場合は、各要素に対しブロックを評価し
 真になった値の配列を返すような [[c:Enumerator]] を返します。
-#@end
 
 例:
   (1..10).find_all                        # => #<Enumerator: 1..10:find_all>
@@ -233,15 +218,12 @@ pattern === item が成立する要素を全て含んだ配列を返します。
 @see [[m:Enumerable#reject]]
 #@end
 
-#@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> object
-#@since 1.8.7
 --- inject(sym)                                     -> object
 --- inject(init, sym)                               -> object
 --- reduce(init = self.first) {|result, item| ... } -> object
 --- reduce(sym)                                     -> object
 --- reduce(init, sym)                               -> object
-#@end
 
 リストのたたみこみ演算を行います。
 
@@ -258,10 +240,8 @@ self の次の要素を引数に順次ブロックを実行します。
 要素がなければブロックを実行せずに nil を返します。
 
 @param init  最初の result の値です。任意のオブジェクトが渡せます。
-#@since 1.8.7
 @param sym   ブロックの代わりに使われるメソッド名を表す [[c:Symbol]] オブジェクトを指定します。
              実行結果に対して sym という名前のメソッドが呼ばれます。             
-#@end
 例:
 
   # 合計を計算する。
@@ -276,12 +256,9 @@ self の次の要素を引数に順次ブロックを実行します。
   [1, 2, 3, 4, 5].each {|v| result += v }
   p result   # => 15
 
-#@since 1.8.7
   p [1, 2, 3, 4, 5].inject(:+)                    #=> 15
   p ["b", "c", "d"].inject("abbccddde", :squeeze) #=> "abcde"
-#@end
 
-#@end
 
 --- member?(val)  -> bool
 --- include?(val) -> bool
@@ -379,7 +356,6 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
   # => [#<Person:0x007fc54b0240a0 @name="sato", @age=55>, #<Person:0x007fc54c033ea0 @name="suzuki", @age=55>]
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- max_by                  -> Enumerator
 #@else
@@ -474,7 +450,6 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 @see [[m:Enumerable#sort_by]]
 
-#@end
 
 --- min    -> object | nil
 #@since 2.2.0
@@ -561,7 +536,6 @@ a < b のとき負の整数を、期待しています。
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- min_by                  -> Enumerator
 #@else
@@ -612,14 +586,11 @@ a < b のとき負の整数を、期待しています。
 
 @see [[m:Enumerable#sort_by]]
 
-#@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- partition               -> Enumerator
 #@else
 --- partition               -> Enumerable::Enumerator
-#@end
 #@end
 --- partition {|item| ... } -> [[object], [object]]
 
@@ -639,12 +610,10 @@ a < b のとき負の整数を、期待しています。
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
-#@since 1.8.7
 #@since 1.9.1
 --- reject               -> Enumerator
 #@else
 --- reject               -> Enumerable::Enumerator
-#@end
 #@end
 --- reject {|item| ... } -> [object]
 
@@ -694,13 +663,10 @@ Enumerable#sort は安定ではありません (unstable sort)。
 
 @see [[m:Enumerable#sort_by]]
 
-#@since 1.8.0
-#@since 1.8.7
 #@since 1.9.1
 --- sort_by               -> Enumerator
 #@else
 --- sort_by               -> Enumerable::Enumerator
-#@end
 #@end
 --- sort_by {|item| ... } -> [object]
 
@@ -765,7 +731,6 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 #@end
 
 @see [[m:Enumerable#sort]]
-#@end
 
 --- to_a(*args)    -> [object]
 --- entries(*args) -> [object]
@@ -783,17 +748,29 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 
 #@since 2.1.0
 --- to_h(*args) -> Hash
+#@since 2.6.0
+--- to_h(*args) { ... } -> Hash
+#@end
 
 self を [key, value] のペアの配列として解析した結果を [[c:Hash]] にして
 返します。
 
 @param args each の呼び出し時に引数として渡されます。
 
-   %i[hello world].each_with_index.to_h
-     # => {:hello => 0, :world => 1}
+#@samplecode 例
+%i[hello world].each_with_index.to_h # => {:hello => 0, :world => 1}
 #@end
 
-#@since 1.8.0
+#@since 2.6.0
+ブロックを指定すると各要素でブロックを呼び出し、
+その結果をペアとして使います。
+
+#@samplecode ブロック付きの例
+(1..5).to_h {|x| [x, x ** 2]} # => {1=>1, 2=>4, 3=>9, 4=>16, 5=>25}
+#@end
+#@end
+#@end
+
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
 
@@ -807,11 +784,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
 @param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
              to_ary メソッドが無い場合は each を試します。
 #@else
-#@since 1.8.2
 @param lists 配列を指定します。配列でない場合は to_a メソッドにより配列に変換します。
-#@else
-@param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
-#@end
 #@end
 
 例:
@@ -833,9 +806,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
         #    [2, 5, 8]
         #    [3, 6, 9]
         #    nil
-#@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_slice(n)               -> Enumerator
 #@else
@@ -914,9 +885,7 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 
 @see [[m:Enumerable#each_slice]]
 
-#@end
 
-#@since 1.8.7
 
 --- count                   -> Integer
 --- count(item)             -> Integer
@@ -1230,7 +1199,6 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
   #    2
   #    1
 
-#@end
 #@since 1.9.1
 --- each_with_object(obj) -> Enumerator
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object

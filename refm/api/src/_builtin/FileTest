@@ -141,7 +141,6 @@ FileTest.grpowned?("testfile")      # => false
   FileTest.file?('/bin') # => false
   FileTest.file?('/no_such_file') # => false
 
-#@since 1.8.4
 --- identical?(file1, file2)    -> bool
 
 file1 と file2 が同じファイルを指している時に真を返します。
@@ -165,7 +164,6 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @raise IOError 指定された IO オブジェクト file1, file2 が既に close されていた場合に発生します。
 
-#@end
 --- pipe?(file)    -> bool
 
 指定したファイルがパイプである時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
@@ -241,7 +239,7 @@ FileTest.readable?("testfile")      # => false
 ファイルが [[man:setuid(2)]] されている時に真を返
 します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
-@param file ファイル名を表す文字列を指定します。
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 @raise IOError 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
@@ -259,7 +257,7 @@ FileTest.setuid?("testfile")      # => false
 ファイルが [[man:setgid(2)]] されている時に真を返
 します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
-@param file ファイル名を表す文字列を指定します。
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 #@samplecode 例
 require 'fileutils'
@@ -308,7 +306,7 @@ FileTest.size?("testfile")      # => nil
 ファイルの sticky ビット([[man:chmod(2)]] 参照)が
 立っている時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
-@param file ファイル名を表す文字列を指定します。
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
 #@samplecode 例
 require 'fileutils'

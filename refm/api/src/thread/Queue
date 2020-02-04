@@ -105,6 +105,19 @@ q.length # => 4
 
 キューを待っているスレッドの数を返します。
 
+#@samplecode 例
+require 'thread'
+
+q = SizedQueue.new(1)
+q.push(1)
+t = Thread.new { q.push(2) }
+sleep 0.05 until t.stop?
+q.num_waiting # => 1
+
+q.pop
+t.join
+#@end
+
 --- pop(non_block = false) -> object
 --- shift(non_block = false) -> object
 --- deq(non_block = false) -> object
@@ -119,6 +132,8 @@ q.length # => 4
 
 キューの値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。
+
+#@#noexample 要約の例を参照
 
 #@since 2.3.0
 --- close -> self

@@ -34,7 +34,11 @@ JSON 形式の文字列を生成するための設定を保持しておくため
   [[m:JSON::MinusInfinity]] を生成することを許すようになります。
   偽を指定した場合、これらの値を生成しようとすると例外が発生します。
   デフォルトは偽です。
-
+: :ascii_only
+  真を指定した場合、ASCII 文字列のみを用いて JSON 形式の文字列を生成します。
+  デフォルトは偽です。
+: :buffer_initial_length
+  sets the initial length of the generator's internal buffer.
 
 --- from_state(options) -> JSON::State
 
@@ -70,6 +74,7 @@ JSON の配列の後に出力する文字列をセットします。
 そうでない場合は偽を返します。
 
 --- configure(options = {}) -> self
+--- merge(options = {})     -> self
 
 与えられたハッシュで自身を設定します。
 
@@ -79,19 +84,36 @@ JSON の配列の後に出力する文字列をセットします。
 
 @see [[m:JSON::State.new]]
 
---- forget(object) -> object
-
-[[m:JSON::State#remember]] で記録したオブジェクトを記録から削除します。
-
 --- indent -> String
 
 インデントに使用する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+#@end
 
 --- indent=(string)
 
 インデントに使用する文字列をセットします。
 
 @param string インデントに使用する文字列を指定します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+json_state.indent = "  "
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
+#@end
 
 --- max_nesting -> Integer
 
@@ -109,26 +131,29 @@ JSON の配列の後に出力する文字列をセットします。
 
 JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(object_nl: "")
+json_state.object_nl             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state = JSON::State.new(object_nl: "\n")
+json_state.object_nl             # => "\n"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+
+# => [1,2,{
+#    "name":"tanaka",
+#    "age":19
+#    }]
+#@end
+
 --- object_nl=(string)
 
 JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列をセットします。
 
 @param string JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を指定します。
-
---- remember(object) -> true
-
-与えられたオブジェクトのオブジェクト ID を記録します。
-
-ここで記録したオブジェクトはデータ構造の循環をチェックするために使用します。
-
-@param object 任意のオブジェクトを指定します。
-
---- seen?(object) -> bool
-
-与えられたオブジェクトが既に生成済みである場合は真を返します。
-そうでない場合は偽を返します。
-
-このメソッドはデータ構造の循環をチェックするために使用します。
 
 --- space -> String
 
@@ -154,7 +179,73 @@ JSON 形式の文字列中で JavaScript のオブジェクトを表す部分に
               前に挿入する文字列をセットします。
 
 
---- to_h -> Hash
+--- to_h    -> Hash
+--- to_hash -> Hash
 
 自身をハッシュに変換します。
 
+#@samplecode 例
+require "json"
+require "pp"
+
+json_state = JSON::State.new
+pp json_state.to_h
+
+# => {:indent=>"",
+#     :space=>"",
+#     :space_before=>"",
+#     :object_nl=>"",
+#     :array_nl=>"",
+#     :allow_nan=>false,
+#     :ascii_only=>false,
+#     :max_nesting=>100,
+#     :depth=>0,
+#     :buffer_initial_length=>1024}
+#@end
+
+--- ascii_only? -> bool
+
+ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合に真を返します。
+そうでない場合に偽を返します。
+
+--- quirks_mode? -> bool
+--- quirks_mode  -> bool
+
+Returns true, if quirks mode is enabled. Otherwise returns false.
+
+--- quirks_mode=(enable)
+
+If set to true, enables the quirks_mode mode.
+
+--- depth -> Integer
+
+This integer returns the current depth of data structure nesting.
+
+--- depth=(depth)
+
+This sets the maximum level of data structure nesting in the generated
+JSON to the integer depth, max_nesting = 0 if no maximum should be
+checked.
+
+--- buffer_initial_length -> Integer
+
+This integer returns the current initial length of the buffer.
+
+--- buffer_initial_length=(length)
+
+This sets the initial length of the buffer to length, if length > 0,
+otherwise its value isn't changed.
+
+--- [](name) -> object
+
+Return the value returned by method name.
+
+--- []=(name, value)
+
+Set the attribute name to value.
+
+--- generate(obj) -> String
+
+Generates a valid JSON document from object obj and returns the
+result. If no valid JSON document can be created this method raises a
+GeneratorError exception.

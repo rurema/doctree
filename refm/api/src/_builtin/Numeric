@@ -403,9 +403,29 @@ self の符号を反転させたものを返します。
 
 @see [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
 
+#@since 2.4.0
+#@since 2.5.0
+--- floor(ndigits = 0) -> Integer
+#@else
+--- floor(ndigits = 0) -> Integer | Float
+#@end
+#@else
 --- floor   -> Integer
+#@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
+
+#@since 2.4.0
+@param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
+               正の整数を指定した場合、[[c:Float]] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[[c:Integer]] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+#@end
 
      1.floor        #=> 1
      1.2.floor      #=> 1
@@ -413,6 +433,9 @@ self の符号を反転させたものを返します。
      (-1.5).floor   #=> -2
 
 @see [[m:Numeric#ceil]], [[m:Numeric#round]], [[m:Numeric#truncate]]
+#@since 2.4.0
+@see [[m:Integer#floor]]
+#@end
 
 --- round   -> Integer
 
@@ -571,9 +594,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 self を other で割った商を返します。
 整商を得たい場合は [[m:Numeric#div]] を使ってください。
 
-#@since 1.8.7
 [[m:Numeric#fdiv]] が結果を [[c:Float]] で返すメソッドなのに対して quo はなるべく正確な数値を返すことを意図しています。
-#@end
 通常は [[c:Float]] の値を返しますが、
 [[lib:rational]] ライブラリを require している場合は有理数の範囲に収まるなら [[c:Rational]] の値を返します。
 
@@ -588,12 +609,9 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
   p 1.0.quo(3)    #=> 0.3333333333333333
   p 1.quo(3.0)    #=> 0.3333333333333333
 
-#@since 1.8.7
 @see [[m:Numeric#fdiv]]
 #@end
-#@end
 
-#@since 1.8.7
 --- fdiv(other)   -> Float | Complex
 
 self を other で割った商を [[c:Float]] で返します。
@@ -613,7 +631,6 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 #@end
 
 @see [[m:Numeric#quo]]
-#@end
 
 --- integer?    -> bool
 
@@ -719,8 +736,6 @@ self を other で割った余り r を返します。
   p 10.nonzero?              #=> 10
   p 0.nonzero?               #=> nil
   p 0.0.nonzero?             #=> nil
- 
-  require 'rational'
   p Rational(0, 2).nonzero?  #=> nil
 
 非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以
@@ -780,13 +795,19 @@ self.to_i と同じです。
 @see [[m:Numeric#nonzero?]]
 
 --- step(limit, step = 1) {|n| ... }    -> self
-#@since 1.9.1
 --- step(limit, step = 1) -> Enumerator
-#@since 2.1.0
+#@since 2.6.0
+--- step(limit, step = 1) -> Enumerator::ArithmeticSequence
+#@end
 --- step(by: 1, to: Float::INFINITY) {|n| ... } -> self
 --- step(by: 1, to: Float::INFINITY) -> Enumerator
+#@since 2.6.0
+--- step(by: 1, to: Float::INFINITY) -> Enumerator::ArithmeticSequence
+#@end
 --- step(by:, to: -Float::INFINITY) {|n| ... } -> self
 --- step(by:, to: -Float::INFINITY) -> Enumerator
+#@since 2.6.0
+--- step(by:, to: -Float::INFINITY) -> Enumerator::ArithmeticSequence
 #@end
 
 self からはじめ step を足しながら limit を越える
@@ -798,12 +819,17 @@ self からはじめ step を足しながら limit を越える
 
 @param step 各ステップの大きさを数値で指定します。負の数を指定することもできます。
 
-#@since 2.1.0
 @param to 引数limitと同じですが、省略した場合はキーワード引数byが正の
           数であれば [[m:Float::INFINITY]]、負の数であれば
           -[[m:Float::INFINITY]]を指定したとみなされます。
 
 @param by 引数 step と同じです。
+
+@return ブロックが指定された時は self を返します。
+@return ブロックが指定されなかった時は [[c:Enumerator]] を返します。
+#@since 2.6.0
+@return 特に limit (または to) と step の両方が Numeric または nil の時は
+        [[c:Enumerator::ArithmeticSequence]] を返します。
 #@end
 
 @raise ArgumentError step に 0 を指定した場合に発生します。
@@ -831,13 +857,11 @@ self からはじめ step を足しながら limit を越える
   7
   6
 
-#@since 2.1.0
   3.step(by:2, to:10){|n| p n}
   3
   5
   7
   9
-#@end
 
 注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
 0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
@@ -855,8 +879,6 @@ self からはじめ step を足しながら limit を越える
        1.4   <- 1.5 が表示されない
 
 @see [[m:Integer#downto]]
-
-#@end
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 

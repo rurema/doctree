@@ -99,16 +99,13 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 self を other で割った商を返します。
 整商を得たい場合は [[m:Bignum#div]] を使ってください。
 
-#@since 1.8.7
 [[m:Bignum#fdiv]] との違いについては [[m:Numeric#quo]] を参照してください。
-#@end
 
 @param other self を割る数を指定します。
 
 @see [[m:Numeric#quo]]
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- fdiv(other) -> Float | Complex
 #@else
@@ -127,7 +124,6 @@ self を other で割った商を [[c:Float]] で返します。
 @see [[m:Numeric#quo]]
 #@else
 @see [[m:Bignum#quo]]
-#@end
 #@end
 
 --- **(other) -> Fixnum | Bignum | Float

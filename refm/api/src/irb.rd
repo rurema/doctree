@@ -56,9 +56,7 @@ readline ライブラリがインストールされている時には
   -Kc               ruby -Kc と同じ
 #@end
   -r library        ruby -r と同じ
-#@since 1.8.2
   -I                ruby -I と同じ
-#@end
 #@since 1.9.1
   -U                ruby -U と同じ
   -E enc            ruby -E と同じ

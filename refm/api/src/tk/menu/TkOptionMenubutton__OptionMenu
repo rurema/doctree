@@ -1,6 +1,0 @@
-= class TkOptionMenubutton::OptionMenu < TkMenu
-
-== Class Methods
-
---- new(path)
-#@todo

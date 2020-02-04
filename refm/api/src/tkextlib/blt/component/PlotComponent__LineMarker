@@ -1,2 +1,0 @@
-= class Tk::BLT::PlotComponent::LineMarker < Tk::BLT::PlotComponent::Marker
-
