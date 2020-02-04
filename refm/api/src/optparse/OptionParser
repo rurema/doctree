@@ -471,6 +471,21 @@ to にサマリが加えられることはありません。
 
 @param indent サマリのインデントを文字列で指定します。
 
+#@samplecode 例
+require "optparse"
+
+opts = OptionParser.new do |opts|
+  opts.on_head("-i", "--init")
+  opts.on("-u", "--update")
+  opts.on_tail("-h", "--help")
+end
+
+opts.summarize
+# => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
+opts.summarize(["description\n"], 10, 8, "  ")
+# => ["description\n", "  -i\n", "      --init\n", "  -u\n", "      --update\n", "  -h\n", "      --help\n"]
+#@end
+
 --- help    -> String
 --- to_s    -> String
 
