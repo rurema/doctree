@@ -132,9 +132,9 @@ require "json"
 
 JSON.generate([1, 2, { name: "tanaka", age: 19 }])
 # => "[1,2,{\"name\":\"tanaka\",\"age\":19}]"
-json_state = JSON::State.new(space: "@")
+json_state = JSON::State.new(space: " ")
 JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
-# => "[1,2,{\"name\":@\"tanaka\",\"age\":@19}]"
+# => "[1,2,{\"name\": \"tanaka\",\"age\": 19}]"
 #@end
 
 @see [[c:JSON::State]], [[m:JSON.#pretty_generate]]
