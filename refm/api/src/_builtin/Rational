@@ -420,7 +420,7 @@ Rational(2, 3).to_i   # => 0
 Rational(3).to_i      # => 3
 Rational(300.6).to_i  # => 300
 Rational(98, 71).to_i # => 1
-Rational(-31, 2).to_i  # => -15
+Rational(-31, 2).to_i # => -15
 #@end
 
 precision を指定した場合は指定した桁数で切り捨てた整数か
