@@ -161,6 +161,14 @@ end
 --- each_key {|key| ... } -> self
 key を引数としてブロックを評価します。
 
+#@samplecode
+ENV['FOO'] = 'bar'
+ENV.each_key do |key|
+  p "key #{key} detected" if key == 'FOO'
+end
+# "key FOO detected"
+#@end
+
 #@since 1.9.1
 --- each_value                -> Enumerator
 #@else
