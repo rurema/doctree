@@ -413,3 +413,7 @@ ENV.slice("unknown")    # => {}
 ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 #@end
 #@end
+#@since 2.7.0
+--- freeze -> ()
+ENV.freeze は環境変数の変更を禁止できないため、[[c:TypeError]]を発生させます。
+#@end
