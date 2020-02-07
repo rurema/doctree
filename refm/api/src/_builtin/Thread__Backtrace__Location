@@ -49,7 +49,7 @@ Ruby のフレームを表すクラスです。
 
 === 参考
 
- * Ruby VM アドベントカレンダー #4 vm_backtrace.c: [[url:http://www.atdot.net/~ko1/diary/201212.html#d4]]
+ * Ruby VM アドベントカレンダー #4 vm_backtrace.c: [[url:https://www.atdot.net/~ko1/diary/201212.html#d4]]
 
 == Instance Methods
 
