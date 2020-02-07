@@ -46,7 +46,7 @@ RubyGems を扱うためのクラスやモジュールが定義されている�
 
 ==== Gem パッケージをインストールする
 
-例えば rak ( [[url:http://rubygems.org/gems/rak]] ) をインストールするには、以下のいずれかを実行します。
+例えば rak ( [[url:https://rubygems.org/gems/rak]] ) をインストールするには、以下のいずれかを実行します。
 
   $ gem install rak
   $ sudo gem install rak
