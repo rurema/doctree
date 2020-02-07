@@ -57,7 +57,7 @@ Markdown syntax nor MarkdownTest mention this behavior.)
 る事ができます。詳しくは以下を参照してください。この拡張はデフォルトで
 有効になっています。
 
- * PHP Markdown Extra syntax: [[url:http://michelf.com/projects/php-markdown/extra/#def-list]]
+ * PHP Markdown Extra syntax: [[url:https://michelf.ca/projects/php-markdown/extra/#def-list]]
 
 例:
 
