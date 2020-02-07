@@ -3688,7 +3688,7 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 文字列の書記素クラスタに対して繰り返します。
 
 [[m:String#each_char]] と違って、
-Unicode Standard Annex #29 ([[url:http://unicode.org/reports/tr29/]])
+Unicode Standard Annex #29 ([[url:https://unicode.org/reports/tr29/]])
 で定義された書記素クラスタに対して繰り返します。
 
 #@samplecode 例
