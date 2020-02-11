@@ -230,7 +230,6 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
     => ruby 1.8.0 (2003-10-10) [i586-linux]
        #<Pathname:/tmp/bar>
 
-#@since 1.9.2
 @see [[m:Pathname#realdirpath]], [[m:File.realpath]]
 
 --- realdirpath(basedir = nil) -> Pathname
@@ -246,10 +245,14 @@ require "pathname"
 path = Pathname("/not_exist")
 path.realdirpath  # => #<Pathname:/not_exist>
 path.realpath     # => Errno::ENOENT
+
+# 最後ではないコンポーネント(/not_exist_1)も存在しないのでエラーになる。
+path = Pathname("/not_exist_1/not_exist_2")
+path.realdirpath  # => Errno::ENOENT
 #@end
 
 @see [[m:Pathname#realpath]]
-#@end
+
 --- parent -> Pathname
 self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
 
