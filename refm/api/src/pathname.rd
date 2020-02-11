@@ -1281,6 +1281,12 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 @param replace 拡張子を文字列で指定します。
 
+#@samplecode 例
+require "pathname"
+
+Pathname('/usr/bin/shutdown').sub_ext('.rb')    # => #<Pathname:/usr/bin/shutdown.rb>
+Pathname('/home/user/test.txt').sub_ext('.pdf') # => #<Pathname:/home/user/test.pdf>
+#@end
 
 #@end
 #@since 2.5.0
