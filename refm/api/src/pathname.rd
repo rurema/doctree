@@ -240,6 +240,14 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 
+#@samplecode 例
+require "pathname"
+
+path = Pathname("/not_exist")
+path.realdirpath  # => #<Pathname:/not_exist>
+path.realpath     # => Errno::ENOENT
+#@end
+
 @see [[m:Pathname#realpath]]
 #@end
 --- parent -> Pathname
@@ -1281,6 +1289,12 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 @param replace 拡張子を文字列で指定します。
 
+#@samplecode 例
+require "pathname"
+
+Pathname('/usr/bin/shutdown').sub_ext('.rb')    # => #<Pathname:/usr/bin/shutdown.rb>
+Pathname('/home/user/test.txt').sub_ext('.pdf') # => #<Pathname:/home/user/test.pdf>
+#@end
 
 #@end
 #@since 2.5.0
