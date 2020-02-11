@@ -1116,6 +1116,17 @@ p options # => {:a=>true, :b=>true}
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
+#@samplecode 例
+require "optparse"
+
+config = {}
+opts = OptionParser.new
+opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
+
+ENV['PROGRAM_ARGS'] = %q{--require lib1 'remain data'}
+p opts.environment('PROGRAM_ARGS') # => ["remain data"]
+p config                           # => {:lib=>"lib1"}
+#@end
 --- default_argv    -> [String]
 
 自身がデフォルトでパースする引数を文字列の配列で返します。
