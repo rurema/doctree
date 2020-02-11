@@ -877,6 +877,15 @@ include Logger::Severity
 @param format 日時のフォーマット文字列。[[m:Time#strftime]] で使用するフォーマット文字列と
               同じものを使用できます。
 
+#@samplecode 例
+require 'logger'
+
+formatter = Logger::Formatter.new
+formatter.datetime_format # => nil
+formatter.datetime_format = '%Y-%m-%d %H:%M:%S' # => "%Y-%m-%d %H:%M:%S"
+formatter.datetime_format # => "%Y-%m-%d %H:%M:%S"
+#@end
+
 @see [[m:Time#strftime]]
 
 == Constants
