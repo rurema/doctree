@@ -22,18 +22,21 @@ include Enumerable
 ブロックが与えられたときはワイルドカードにマッチしたファイルを
 引数にそのブロックを 1 つずつ評価して nil を返します
 
-@param pattern パターンを文字列で指定します。
-               パターンを "\0" で区切って 1 度に複数のパターンを指定することもで
-               きます。
+@param pattern パターンを文字列か配列で指定します。
+               配列を指定すると複数のパターンを指定できます。
+#@until 2.7.0
+               パターンを文字列で指定する場合、パターンを "\0" で区切って
+               1 度に複数のパターンを指定することもできます。
                パターンの区切りには "\0" のみ指定できます。
-               配列を指定することで複数のパターンを指定できます。
+#@end
 
 @param flags [[m:File.fnmatch]] に指定できるフラグと同様のフラグを指定できます。
              このフラグを指定することでマッチの挙動を変更することができます。
-//emlist{
-  Dir.glob("*")                      #=> ["bar", "foo"]
-  Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
-//}
+
+#@samplecode
+Dir.glob("*")                      #=> ["bar", "foo"]
+Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
+#@end
 
 #@since 2.5.0
 @param base カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
@@ -72,38 +75,40 @@ include Enumerable
     foo/*/*/bar ... (以下無限に続く)に対してそれぞれ
     マッチ判定を行います。
 
-例:
+#@samplecode
+# 一般的な例
+p Dir.glob("*")          #=> ["foo", "bar", "baz"]
+p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
+p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
+p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
 
-  # 一般的な例
-  p Dir.glob("*")          #=> ["foo", "bar", "baz"]
-  p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
-  p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
-  p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
+Dir.glob("b*") {|f| p f }
 
-  Dir.glob("b*") {|f| p f }
+#=> "bar"
+    "baz"
 
-  #=> "bar"
-      "baz"
+# 複数のパターンを指定する例
+p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
+p Dir["f*", "b*"]        # => ["foo", "bar"]
+#@until 2.7.0
+p Dir.glob("f*\0b*")     # => ["foo", "bar"]
+#@end
 
-  # 複数のパターンを指定する例
-  p Dir.glob("f*\0b*")     # => ["foo", "bar"]
-  p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
-  p Dir["f*", "b*"]        # => ["foo", "bar"]
-
-  # ワイルドカードの例
-  Dir.glob("*")            #=> ["foo", "bar"]
-  Dir.glob("fo?")          #=> ["foo"]
-  Dir.glob("[^f]*")        #=> ["bar"]
-  Dir.glob("{b,f}*")       #=> ["bar", "foo"]
+# ワイルドカードの例
+Dir.glob("*")            #=> ["foo", "bar"]
+Dir.glob("fo?")          #=> ["foo"]
+Dir.glob("[^f]*")        #=> ["bar"]
+Dir.glob("{b,f}*")       #=> ["bar", "foo"]
 
 #@since 2.5.0
-  # ベースディレクトリの例
-  rbfiles = File.join("**", "*.rb")
-  Dir.glob(rbfiles)                   #=> ["main.rb",
-                                      #    "lib/song.rb",
-                                      #    "lib/song/karaoke.rb"]
-  Dir.glob(rbfiles, base: "lib")      #=> ["song.rb",
-                                      #    "song/karaoke.rb"]
+# ベースディレクトリの例
+rbfiles = File.join("**", "*.rb")
+Dir.glob(rbfiles)                   #=> ["main.rb",
+                                    #    "lib/song.rb",
+                                    #    "lib/song/karaoke.rb"]
+Dir.glob(rbfiles, base: "lib")      #=> ["song.rb",
+                                    #    "song/karaoke.rb"]
+#@end
 #@end
 
 --- chdir           -> 0

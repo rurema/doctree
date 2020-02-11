@@ -1,6 +1,5 @@
 category Text
 
-#@since 1.8.7
 UNIX Bourne シェルの単語分割規則に従った文字列分割機能と文字列エスケープ
 機能を提供します。
 
@@ -13,14 +12,9 @@ Shellwords モジュールは、空白区切りの単語分割を行う shellspl
 String#shellsplit, String#shellescape, Array#shelljoin として使える
 ようになります。
 
-#@else
-UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行う
-ライブラリです。
-#@end
 
 = module Shellwords
 
-#@since 1.8.7
 UNIX Bourne シェルの単語分割規則に従った文字列分割と文字列エスケープ
 を行うモジュールです。
 
@@ -33,37 +27,22 @@ Shellwords.join も使用可能です。
 ただし、これらの短縮形式のメソッドはクラスメソッドとしてのみ定義される
 ため、関数形式の呼び出しはできません。
 
-#@else
-UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行うモジュールです。
-#@end
 
 == Module Functions
 
-#@since 1.8.7
 --- shellsplit(line) -> [String]
-#@end
 --- shellwords(line) -> [String]
 
-#@since 1.8.7
 Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
 単語 (文字列) の配列を返します。
-#@else
-UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行い、
-単語 (文字列) の配列を返します。
-#@end
 
 空白、シングルクォート (')、ダブルクォート (")、バックスラッシュ (\)
 を解釈します。
 
 @param line 分割の対象となる文字列を指定します。
 @return 分割結果の各文字列を要素とする配列を返します。
-#@since 1.8.7
 @raise ArgumentError 引数の中に対でないシングルクォートまたはダブル
        クォートが現れた場合に発生します。
-#@else
-@raise ArgumentError 引数が文字列でない場合か、引数の中に対でない
-       シングルクォートまたはダブルクォートが現れた場合に発生します。
-#@end
 
 例:
     require 'shellwords'
@@ -74,7 +53,6 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分
     p Shellwords.shellwords(%q{  A B C "D E F" "G","H I"  })
     # => ["A", "B", "C", "D E F", "G,H I"]
 
-#@since 1.8.7
 --- shellescape(str) -> String
 
 文字列を Bourne シェルのコマンドライン中で安全に使えるようにエスケープします。
@@ -108,9 +86,7 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分
     file = 'file name with spaces'
     puts Shellwords.shelljoin(['grep', pattern, file])
     # => grep Jan\ 15 file\ name\ with\ spaces
-#@end
 
-#@since 1.8.7
 == Singleton Methods
 
 --- split(line) -> [String]
@@ -141,9 +117,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割�
 
 @param array エスケープ対象の文字列を要素とする配列を指定します。
 @return エスケープ結果を連結した文字列を返します。
-#@end
 
-#@since 1.8.7
 = reopen String
 
 == Instance Methods
@@ -180,4 +154,3 @@ array.shelljoin は、Shellwords.shelljoin(array) と等価です。
 
 @return エスケープ結果を連結した文字列を返します。
 @see [[m:Shellwords.#shelljoin]]
-#@end

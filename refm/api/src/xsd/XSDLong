@@ -1,7 +1,0 @@
-#@since 1.8.1
-= class XSD::XSDLong < XSD::XSDInteger
-== class methods
---- new(value = nil)
-#@todo
-
-#@end

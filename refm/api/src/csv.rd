@@ -544,6 +544,7 @@ print csv
 --- generate_line(row, options = Hash.new) -> String
 
 このメソッドは一つの [[c:Array]] オブジェクトを CSV 文字列に変換するためのショートカットです。
+複数行のCSVを扱う際は[[m:CSV#<<]]を使うとより高速です。
 
 このメソッドは可能であれば row に含まれる最初の nil でない値を用いて出力の
 エンコーディングを推測します。
@@ -1036,6 +1037,49 @@ csv.converters  # => [:integer, :float, :integer, :float, :date, :date_time, :da
 
 データソースは読み込み用にオープンされていなければなりません。
 
+#@samplecode 例 CSV.new 時に :header => true を指定した場合
+require "csv"
+
+users = <<CSV
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+csv = CSV.new(users, headers: true)
+csv.each do |row|
+  p row
+end
+
+# => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+# => #<CSV::Row "id":"2" "first name":"jiro" "last name":"suzuki" "age":"18">
+# => #<CSV::Row "id":"3" "first name":"ami" "last name":"sato" "age":"19">
+# => #<CSV::Row "id":"4" "first name":"yumi" "last name":"adachi" "age":"21">
+#@end
+
+#@samplecode 例 CSV.new 時に :header => true を指定しない場合
+require "csv"
+
+users = <<CSV
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+CSV
+csv = CSV.new(users)
+csv.each do |row|
+  p row
+end
+
+# => ["id", "first name", "last name", "age"]
+# => ["1", "taro", "tanaka", "20"]
+# => ["2", "jiro", "suzuki", "18"]
+# => ["3", "ami", "sato", "19"]
+# => ["4", "yumi", "adachi", "21"]
+#@end
+
 --- encoding -> Encoding
 
 読み書きするときに使用するエンコーディングを返します。
@@ -1512,6 +1556,21 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 そうでない場合は、偽を返します。
 
 #@# Array, CSV::Row に動的に追加される
+
+#@samplecode 例
+require "csv"
+
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10")
+csv.unconverted_fields? # => nil
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", unconverted_fields: false)
+csv.unconverted_fields? # => false
+csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", headers: true, unconverted_fields: true)
+csv.unconverted_fields? # => true
+csv.convert(:date)
+row = csv.readline
+row.fields              # => [#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)>, #<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>]
+row.unconverted_fields  # => ["2018-07-09", "2018-07-10"]
+#@end
 
 @see [[m:CSV.new]]
 

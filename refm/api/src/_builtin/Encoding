@@ -173,6 +173,14 @@ Ruby はサポートしていないが拡張ライブラリがサポートして
 複製されたエンコーディングは元のエンコーディングと同じバイト構造を持たなければなりません。
 name という名前のエンコーディングが既に存在する場合は [[c:ArgumentError]] を発生します。
 
+#@samplecode
+encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
+encoding.name                                                #=> "REPLICATED_UTF-8"
+"\u3042".force_encoding(Encoding::UTF_8).valid_encoding?     #=> true
+"\u3042".force_encoding(encoding).valid_encoding?            #=> true
+"\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
+#@end
+
 #@end
 == Constants
 
@@ -283,7 +291,7 @@ Big5 エンコーディングです。
 
 台湾で使われている繁体字中国語のエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Big5]]
+@see [[url:https://en.wikipedia.org/wiki/Big5]]
 
 --- CP950 -> Encoding
 
@@ -432,7 +440,7 @@ IBM037 エンコーディング。
 
 CP437 エンコーディング。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_437]],
+@see [[url:https://en.wikipedia.org/wiki/Code_page_437]],
      [[m:Encoding::CP869]]
 
 
@@ -443,7 +451,7 @@ CP437 エンコーディング。
 
 ギリシャ語を取り扱う 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_737]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_737]]
 
 
 --- IBM775 -> Encoding
@@ -452,14 +460,14 @@ CP775 エンコーディング。
 
 バルト語派の言語を扱うための 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_775]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_775]]
 
 --- CP850 -> Encoding
 --- IBM850 -> Encoding
 
 CP850 エンコーディング。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_850]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_850]]
 
 --- IBM852 -> Encoding
 --- CP852 -> Encoding
@@ -469,7 +477,7 @@ CP852 エンコーディング。
 ラテンアルファベットを用いる中欧の言語のための
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_852]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_852]]
 
 --- IBM855 -> Encoding
 --- CP855 -> Encoding
@@ -479,7 +487,7 @@ CP855 エンコーディング。
 キリル文字を用いる言語のための
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_855]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_855]]
 
 --- IBM857 -> Encoding
 --- CP857 -> Encoding
@@ -489,7 +497,7 @@ CP857 エンコーディング。
 トルコ語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_857]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_857]]
 
 --- IBM860 -> Encoding
 --- CP860 -> Encoding
@@ -499,7 +507,7 @@ CP860 エンコーディング。
 ポルトガル語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_860]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_860]]
 
 
 --- IBM861 -> Encoding
@@ -509,7 +517,7 @@ CP861 エンコーディング。
 アイスランド語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_861]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_861]]
 
 
 --- IBM862 -> Encoding
@@ -519,7 +527,7 @@ CP862 エンコーディング。
 ヘブライ語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_861]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_862]]
 
 --- IBM863 -> Encoding
 --- CP863 -> Encoding
@@ -528,7 +536,7 @@ CP863 エンコーディング。
 フランス語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_863]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_863]]
 
 --- IBM864 -> Encoding
 --- CP864 -> Encoding
@@ -537,7 +545,7 @@ CP864 エンコーディング。
 アラビア語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_864]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_864]]
 
 
 --- IBM865 -> Encoding
@@ -547,7 +555,7 @@ CP865 エンコーディング。
 北欧の諸言語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_865]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_865]]
 
 --- IBM866 -> Encoding
 --- CP866 -> Encoding
@@ -556,7 +564,7 @@ CP866 エンコーディング。
 キリル文字を使う諸言語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_866]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_866]]
 
 --- IBM869 -> Encoding
 --- CP869 -> Encoding
@@ -565,7 +573,7 @@ CP869 エンコーディング。
 
 ギリシャ語を取り扱う 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_869]],
+@see [[url:https://en.wikipedia.org/wiki/Code_page_869]],
      [[m:Encoding::CP737]]
 
 --- CP949 -> Encoding
@@ -576,7 +584,7 @@ EUC-KR に近い、韓国語を取り扱う multi-byte エンコーディング�
 
 @see [[m:Encoding::EUC_KR]],
      [[url:http://www.microsoft.com/globaldev/reference/dbcs/949.mspx]],
-     [[url:http://en.wikipedia.org/wiki/EUC-KR#EUC-KR]]
+     [[url:https://en.wikipedia.org/wiki/EUC-KR#EUC-KR]]
 
 --- ISO_2022_JP_2 -> Encoding
 --- ISO2022_JP2 -> Encoding
@@ -742,7 +750,7 @@ KOI8-R エンコーディング。
 
 ロシア語のキリル文字で使われる8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/KOI8-R]]
+@see [[url:https://en.wikipedia.org/wiki/KOI8-R]]
 
 
 
@@ -752,7 +760,7 @@ KOI8-U エンコーディング。
 
 ウクライナ語のキリル文字で使われる8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/KOI8-U]]
+@see [[url:https://en.wikipedia.org/wiki/KOI8-U]]
 
 
 
@@ -766,7 +774,7 @@ MacJapanese エンコーディング。
 Mac OS の 9.x までで用いられていた Shift_JIS 亜種です。
 
 @see [[url:http://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
-     [[url:http://ja.wikipedia.org/wiki/MacJapanese]]
+     [[url:https://ja.wikipedia.org/wiki/MacJapanese]]
 
 
 #@since 1.9.2
@@ -871,7 +879,7 @@ TIS-620 エンコーディング。
 タイ語を扱うためのエンコーディングで、 ISO8859-11 とほぼ
 同一のエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533]]
+@see [[url:https://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533]]
 
 
 
@@ -884,7 +892,7 @@ Windows-1250 エンコーディング。
 ISO8859-2 の亜種です。
 
 @see [[url:http://www.microsoft.com/globaldev/reference/sbcs/1250.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1250]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1250]]
 
 --- Windows_1251 -> Encoding
 --- CP1251 -> Encoding
@@ -896,7 +904,7 @@ Windows-1251 エンコーディング。
 
 @see [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1251.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1251]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1251]]
 
 --- Windows_1252 -> Encoding
 --- CP1252 -> Encoding
@@ -909,7 +917,7 @@ ISO8859-1 の亜種です。
 @see [[m:Encoding::ISO_8859_1]]
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1252.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1252]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1252]]
 
 
 --- Windows_1253 -> Encoding
@@ -923,7 +931,7 @@ ISO8859-7 の亜種です。
 @see [[m:Encoding::ISO_8859_7]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1253.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1253]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1253]]
 
 --- Windows_1254 -> Encoding
 --- CP1254 -> Encoding
@@ -936,7 +944,7 @@ ISO8859-9 の亜種です。
 @see [[m:Encoding::ISO_8859_9]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1254.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1254]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1254]]
 
 --- Windows_1255 -> Encoding
 --- CP1255 -> Encoding
@@ -949,7 +957,7 @@ ISO8859-8 の亜種です。
 @see [[m:Encoding::ISO_8859_8]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1255.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1255]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1255]]
 
 
 --- Windows_1256 -> Encoding
@@ -962,7 +970,7 @@ Windowsで用いられる、アラビア文字を扱う 8bit single-byte エン�
 @see [[m:Encoding::ISO_8859_6]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1256.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1256]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1256]]
 
 
 --- Windows_1257 -> Encoding
@@ -975,7 +983,7 @@ ISO8859-13 の亜種です。
 @see [[m:Encoding::ISO8859_13]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1257.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1257]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1257]]
 
 
 --- Windows_1258 -> Encoding
@@ -986,7 +994,7 @@ WINDOWS-1258 エンコーディング。
 
 ベトナム語を扱う 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Windows-1258]]
+@see [[url:https://en.wikipedia.org/wiki/Windows-1258]]
 
 --- Windows_31J -> Encoding
 --- CP932 -> Encoding
@@ -1036,7 +1044,7 @@ Mac OSで使われる
 8bit single-byteエンコーディングで、
 中欧および南東欧の言語を取り扱うものです。
 
-@see [[url:http://en.wikipedia.org/wiki/Macintosh_Central_European_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Macintosh_Central_European_encoding]]
 
 --- MacCroatian -> Encoding
 --- MACCROATIAN -> Encoding
@@ -1046,7 +1054,7 @@ Mac OS で使われる
 8bit single-byteエンコーディングで、
 クロアチア語、スベロニア語を取り扱うものです。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
 
 --- MacCyrillic -> Encoding
 --- MACCYRILLIC -> Encoding
@@ -1056,7 +1064,7 @@ MacCyrillic エンコーディング。
 Mac OS で使われる 8bit single-byte エンコーディングで、
 キリル文字を取り扱うものです。
 
-@see [[url:http://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding]]
 
 --- MacGreek -> Encoding
 --- MACGREEK -> Encoding
@@ -1066,7 +1074,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 ギリシャ語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
 
 --- MacIceland -> Encoding
 --- MACICELAND -> Encoding
@@ -1077,7 +1085,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 アイスランド語のために使われます
 
-@see [[url:http://en.wikipedia.org/wiki/Mac_Icelandic_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Mac_Icelandic_encoding]]
 
 --- MacRoman -> Encoding
 --- MACROMAN -> Encoding
@@ -1089,7 +1097,7 @@ Mac OSで使われる
 
 IANA character-sets で "macintosh" で表現されるものです。
 
-@see [[url:http://en.wikipedia.org/wiki/Mac_OS_Roman]]
+@see [[url:https://en.wikipedia.org/wiki/Mac_OS_Roman]]
 
 --- MacRomania -> Encoding
 --- MACROMANIA -> Encoding
@@ -1099,7 +1107,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 ルーマニア語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
 
 --- MacThai -> Encoding
 --- MACTHAI -> Encoding
@@ -1117,7 +1125,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 トルコ語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
 
 --- MacUkraine -> Encoding
 --- MACUKRAINE -> Encoding
@@ -1126,7 +1134,7 @@ MacUkraine エンコーディング。
 Mac OS で使われる、ウクライナ語キリル文字を取り扱うエンコーディング。
 MacCyrillic の亜種です。
 
-@see [[url:http://en.wikipedia.org/wiki/Macintosh_Ukrainian_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Macintosh_Ukrainian_encoding]]
 
 --- EMACS_MULE -> Encoding
 --- Emacs_Mule -> Encoding

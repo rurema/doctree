@@ -1,9 +1,0 @@
-#@since 1.8.1
-= module SOAP::SOAPModuleUtils
-include SOAP
-
-== Instance Methods
-
---- decode(elename)
-#@todo
-#@end

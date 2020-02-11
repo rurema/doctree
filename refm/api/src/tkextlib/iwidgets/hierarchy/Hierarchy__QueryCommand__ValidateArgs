@@ -1,9 +1,0 @@
-= class Tk::Iwidgets::Hierarchy::QueryCommand::ValidateArgs < TkUtil::CallbackSubst
-
-== Class Methods
-
---- ret_val(val)
-#@todo
-
-
-

@@ -53,8 +53,19 @@ mutex オブジェクトをロックします。一度に一つのス
                    した場合に発生します。
 #@end
 
+#@#noexample Thread::Mutex#unlock を参照
+
+@see [[m:Thread::Mutex#unlock]]
+
 --- locked? -> bool
 mutex がロックされている時、真を返します。
+
+#@samplecode 例
+m = Mutex.new
+m.locked? # => false
+m.lock
+m.locked? # => true
+#@end
 
 --- synchronize { ... } -> object
 
@@ -83,6 +94,12 @@ result # => "result"
 --- try_lock -> bool
 mutex をロックしようとして、ロックが成功した場合、真を返します。
 ロックできなかった場合にはブロックせず偽を返します。
+
+#@samplecode 例
+m = Mutex.new
+m.try_lock # => true
+m.try_lock # => false
+#@end
 
 #@since 1.9.1
 --- unlock     -> self
@@ -138,6 +155,20 @@ Mutex はロックしたスレッド以外からロックを開放すること�
 [注意] 2.0 以降ではスリープ中でも、シグナルを受信した場合などに実行が再
 開(spurious wakeup)される場合がある点に注意してください。
 #@end
+
+#@samplecode 例
+m = Mutex.new
+th = Thread.new do
+  m.lock
+  m.sleep(2)
+end
+th.status # => "run"
+sleep 1
+th.status # => "sleep"
+sleep 1
+th.status # => false
+#@end
+
 #@end
 
 #@since 2.0.0
@@ -150,4 +181,15 @@ self がカレントスレッドによってロックされている場合に tr
 [注意] このメソッドは実験的な機能として提供されています。仕様が変更にな
 る可能性があります。
 #@end
+
+#@samplecode 例
+m = Mutex.new
+m.owned? # => false
+m.lock
+Thread.new do
+  m.owned? # => false
+end.join
+m.owned? # => true
+#@end
+
 #@end
