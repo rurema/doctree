@@ -1291,16 +1291,16 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 「n.even?」の値が切り替わるところで区切られているのがわかるでしょう。
 
 #@samplecode 例
-  [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5].chunk {|n|
-    n.even?
-  }.each {|even, ary|
-    p [even, ary]
-  }
-  #=> [false, [3, 1]]
-  #   [true, [4]]
-  #   [false, [1, 5, 9]]
-  #   [true, [2, 6]]
-  #   [false, [5, 3, 5]]
+[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5].chunk {|n|
+  n.even?
+}.each {|even, ary|
+  p [even, ary]
+}
+# => [false, [3, 1]]
+#    [true, [4]]
+#    [false, [1, 5, 9]]
+#    [true, [2, 6]]
+#    [false, [5, 3, 5]]
 #@end
 
 このメソッドは各要素が既にソートされている場合に便利です。
@@ -1309,14 +1309,14 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 大文字／小文字の違いを無視するため upcase しています。
 
 #@samplecode 例
-  open("/usr/share/dict/words", "r:iso-8859-1") {|f|
-    f.chunk {|line| line[0].upcase }.each {|ch, lines| p [ch, lines.length] }
-  }
-  #=> ["A", 17096]
-  #   ["B", 11070]
-  #   ["C", 19901]
-  #   ["D", 10896]
-  #   ...
+open("/usr/share/dict/words", "r:iso-8859-1") {|f|
+  f.chunk {|line| line[0].upcase }.each {|ch, lines| p [ch, lines.length] }
+}
+# => ["A", 17096]
+#    ["B", 11070]
+#    ["C", 19901]
+#    ["D", 10896]
+#    ...
 #@end
 
 さらにこのメソッドは以下の値を特別扱いします。
@@ -1329,41 +1329,41 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 それ以外のアンダースコアで始まるシンボルを指定した場合は例外が発生します。
 
 #@samplecode 例
-  items.chunk { |item| :_underscore }
-  # => RuntimeError: symbols beginning with an underscore are reserved
+items.chunk { |item| :_underscore }
+# => RuntimeError: symbols beginning with an underscore are reserved
 #@end
 
 nil、 :_separator はある要素を無視したい場合に用います。
 例として svn log の出力のハイフンの所で区切りたい場合を考えます。
 
 #@samplecode 例
-  sep = "-"*72 + "\n" # ハイフンが72個の行
-  IO.popen("svn log README") {|f|
-    f.chunk {|line|
-      line != sep || nil
-    }.each {|_, lines|
-      pp lines
-    }
+sep = "-"*72 + "\n" # ハイフンが72個の行
+IO.popen("svn log README") {|f|
+  f.chunk {|line|
+    line != sep || nil
+  }.each {|_, lines|
+    pp lines
   }
-  #=> ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
-  #    "\n",
-  #    "* README, README.ja: Update the portability section.\n",
-  #    "\n"]
-  #   ["r16725 | knu | 2008-05-31 23:34:23 +0900 (Sat, 31 May 2008) | 2 lines\n",
-  #    "\n",
-  #    "* README, README.ja: Add a note about default C flags.\n",
-  #    "\n"]
-  #   ...
+}
+#=> ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
+#    "\n",
+#    "* README, README.ja: Update the portability section.\n",
+#    "\n"]
+#   ["r16725 | knu | 2008-05-31 23:34:23 +0900 (Sat, 31 May 2008) | 2 lines\n",
+#    "\n",
+#    "* README, README.ja: Add a note about default C flags.\n",
+#    "\n"]
+#   ...
 #@end
 
 テキストを空行で区切られた段落に分けたい場合にも nil が使えます。
 
 #@samplecode 例
-  File.foreach("README").chunk {|line|
-    /\A\s*\z/ !~ line || nil
-  }.each {|_, lines|
-    pp lines
-  }
+File.foreach("README").chunk {|line|
+  /\A\s*\z/ !~ line || nil
+}.each {|_, lines|
+  pp lines
+}
 #@end
 
 「:_alone」は要素を素通ししたい場合に用います。
@@ -1371,16 +1371,16 @@ nil、 :_separator はある要素を無視したい場合に用います。
 チャンク化し、それ以外は素通しします。
 
 #@samplecode 例
-  pat = /\A[A-Z][A-Za-z0-9_]+\#/
-  open(filename) {|f|
-    f.chunk {|line| pat =~ line ? $& : :_alone }.each {|key, lines|
-      if key != :_alone
-        print lines.sort.join('')
-      else
-        print lines.join('')
-      end
-    }
+pat = /\A[A-Z][A-Za-z0-9_]+\#/
+open(filename) {|f|
+  f.chunk {|line| pat =~ line ? $& : :_alone }.each {|key, lines|
+    if key != :_alone
+      print lines.sort.join('')
+    else
+      print lines.join('')
+    end
   }
+}
 #@end
 
 #@until 2.3.0
