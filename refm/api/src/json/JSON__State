@@ -197,6 +197,17 @@ JSON.generate([[[[[[[[[[]]]]]]]]]], json_state)
 
 この値にゼロをセットすると、ネストの深さのチェックを行いません。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(max_nesting: 2)
+json_state.max_nesting            # => 2
+JSON.generate([[]], json_state)
+json_state.max_nesting = 3
+json_state.max_nesting            # => 3
+JSON.generate([[[[]]]], json_state) # => JSON::NestingError
+#@end
+
 --- object_nl -> String
 
 JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
