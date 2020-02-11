@@ -1054,7 +1054,7 @@ Mac OS で使われる
 8bit single-byteエンコーディングで、
 クロアチア語、スベロニア語を取り扱うものです。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
 
 --- MacCyrillic -> Encoding
 --- MACCYRILLIC -> Encoding
@@ -1074,7 +1074,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 ギリシャ語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
 
 --- MacIceland -> Encoding
 --- MACICELAND -> Encoding
@@ -1107,7 +1107,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 ルーマニア語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
 
 --- MacThai -> Encoding
 --- MACTHAI -> Encoding
@@ -1125,7 +1125,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 トルコ語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
 
 --- MacUkraine -> Encoding
 --- MACUKRAINE -> Encoding

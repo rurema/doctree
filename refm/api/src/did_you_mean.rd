@@ -15,4 +15,4 @@ category Development
 
  * rubygems.org: [[url:https://rubygems.org/gems/did_you_mean]]
  * プロジェクトページ: [[url:https://github.com/ruby/did_you_mean]]
- * リファレンス: [[url:http://www.rubydoc.info/gems/did_you_mean/]]
+ * リファレンス: [[url:https://www.rubydoc.info/gems/did_you_mean/]]
