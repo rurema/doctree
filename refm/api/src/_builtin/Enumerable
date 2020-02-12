@@ -1280,11 +1280,13 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 各チャンクの要素を持つ配列のペアを各要素とします。
 そのため、eachだと以下のようになります。
 
+#@samplecode
 #@until 2.3.0
-  enum.chunk {|elt| key }.each {|key, ary| ... }
-  enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
+enum.chunk {|elt| key }.each {|key, ary| do_something }
+enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| do_something }
 #@else
-  enum.chunk {|elt| key }.each {|key, ary| ... }
+enum.chunk {|elt| key }.each {|key, ary| do_something }
+#@end
 #@end
 
 例として、整数列を連続する奇数/偶数に分ける例を見てみます。
