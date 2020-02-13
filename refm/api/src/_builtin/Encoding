@@ -797,7 +797,7 @@ SJIS-KDDI エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 
 
@@ -828,7 +828,7 @@ UTF8-KDDI エンコーディングです。
 UTF8 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 --- UTF8_SOFTBANK -> Encoding
 --- UTF8_SoftBank -> Encoding
@@ -856,7 +856,7 @@ ISO-2022-JP の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 
 
@@ -868,7 +868,7 @@ stateless-ISO-2022-JP の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 
 #@end
