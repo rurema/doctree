@@ -9,7 +9,7 @@ Markdown 形式で記述されたドキュメントを [[lib:rdoc]] 上で解析
 
 詳しくは以下を参照してください。
 
- * [[url:http://daringfireball.net/projects/markdown/syntax]]
+ * [[url:https://daringfireball.net/projects/markdown/syntax]]
 
 Markdown 形式をデフォルトのフォーマットにする場合は、
 [[ref:lib:rdoc#saved_options]] を参考に プロジェクトのデフォルトを

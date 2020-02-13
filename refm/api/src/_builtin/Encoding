@@ -262,7 +262,7 @@ UTF-8。Unicode や ISO 10646 を ASCII 互換な形で符号化するための�
 
 BOM を含みません。
 
-@see [[url:http://tools.ietf.org/html/rfc3629]]
+@see [[url:https://tools.ietf.org/html/rfc3629]]
 
 
 --- UTF8_MAC -> Encoding
@@ -773,7 +773,7 @@ MacJapanese エンコーディング。
 
 Mac OS の 9.x までで用いられていた Shift_JIS 亜種です。
 
-@see [[url:http://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
+@see [[url:https://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
      [[url:https://ja.wikipedia.org/wiki/MacJapanese]]
 
 
