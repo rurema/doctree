@@ -42,7 +42,7 @@ RubyGems を扱うためのクラスやモジュールが定義されている�
         gem help <COMMAND>           COMMAND に関するヘルプを表示します
                                        (e.g. 'gem help install')
       より詳しい情報:
-        http://rubygems.rubyforge.org
+        https://rubygems.org
 
 ==== Gem パッケージをインストールする
 
@@ -213,8 +213,8 @@ Proxy サーバ経由で Gem パッケージをインストールするには以
   :backtrace: false
   :benchmark: false
   :bulk_threshold: 1000
-  :sources: 
-  - http://gems.rubyforge.org
+  :sources:
+  - https://rubygems.org
   :update_sources: true
   :verbose: true
   gemhome: /home/hoge/.gems
