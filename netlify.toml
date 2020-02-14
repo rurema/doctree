@@ -1,7 +1,3 @@
-[build]
-publish = "_site"
-command = "env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:supported create_index"
-
 [[headers]]
   for = "/*"
 

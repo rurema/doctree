@@ -1,0 +1,29 @@
+name: Netlify
+
+on:
+  push:
+  pull_request:
+    types:
+    - opened
+    - synchronize
+
+jobs:
+  rake:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: env HTML_DIRECTORY_BASE=_site CI=netlify bundle exec rake statichtml:supported create_index
+    - name: Deploy to Netlify
+      run: npx netlify-cli deploy --dir=_site
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
