@@ -1306,11 +1306,14 @@ enum.chunk {|elt| key }.each {|key, ary| do_something }
 #@end
 
 このメソッドは各要素が既にソートされている場合に便利です。
-以下の例では、テキスト辞書ファイル(中身がソートされている)
-に含まれる単語を先頭の文字ごとに数えています。
+
+以下の例では、テキスト辞書ファイルに含まれる単語の頭文字の頻度を調べています。
+このファイルは、Linux や macOS などで、ソートされた英語（など）の単語の
+リストを改行で区切って収めたものです。
 大文字／小文字の違いを無視するため upcase しています。
 
 #@samplecode 例
+# ファイルのエンコーディングは実際のファイルに合わせてください。
 open("/usr/share/dict/words", "r:iso-8859-1") {|f|
   f.chunk {|line| line[0].upcase }.each {|ch, lines| p [ch, lines.length] }
 }
