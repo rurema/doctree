@@ -8,8 +8,8 @@ GNU Readline によるコマンドライン入力インタフェースを提供�
 
 GNU Readline 互換ライブラリのひとつである Edit Line(libedit) もサポートしています。
 
-  * [[url:http://www.gnu.org/directory/readline.html]]
-  * [[url:http://www.thrysoee.dk/editline/]]
+  * [[url:https://directory.fsf.org/wiki/Readline]]
+  * [[url:https://thrysoee.dk/editline/]]
 
 Readline.readline を使用してユーザからの入力を取得できます。
 このとき、 GNU Readline のように入力の補完や
