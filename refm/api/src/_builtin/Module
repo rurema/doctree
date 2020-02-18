@@ -320,16 +320,91 @@ case ではクラス、モジュールの所属関係をチェックすること
 
 @param const_name [[c:String]] または [[c:Symbol]] で指定します。
        なお、const_name には、"::" 演算子を含めることはできません。
-       つまり、トップレベルの定数しか指定できません。
+       つまり、self のモジュール直下に定義された定数しか指定できません。
 
 @param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
-@see [[m:Kernel.#autoload]]
+#@samplecode
+# ------- /tmp/foo.rb ---------
+class Foo
+  class Bar
+  end
+end
+# ----- end of /tmp/foo.rb ----
 
-例:
-  Date # NameError: uninitialized constant Date
-  autoload :Date, 'date'
-  Date # => Date
+class Foo
+  autoload :Bar, '/tmp/foo'
+end
+p Foo::Bar #=> Foo::Bar
+#@end
+
+以下のようにモジュールを明示的にレシーバとして呼び出すこともできます。
+
+#@samplecode
+# ------- /tmp/foo.rb ---------
+class Foo
+  class Bar
+  end
+end
+# ----- end of /tmp/foo.rb ----
+
+class Foo
+end
+Foo.autoload :Bar, '/tmp/foo'
+p Foo::Bar #=> Foo::Bar
+#@end
+
+#@since 2.5.0
+以下のように、autoload したライブラリがネストした定数を定義しない場
+合、NameError が発生します。
+
+#@samplecode
+# ------- /tmp/bar.rb ---------
+class Bar
+end
+# ----- end of /tmp/bar.rb ----
+
+class Foo
+  autoload :Bar, '/tmp/bar.rb'
+end
+p Foo::Bar
+#=> -:4:in `<main>': uninitialized constant Foo::Bar (NameError)
+#@end
+#@else
+以下のように、autoload したライブラリがネストした定数を定義しない場
+合、一見、正常に動作しているように見えるので注意が必要です(警告メッ
+セージが出ています)。
+
+#@samplecode
+# ------- /tmp/bar.rb ---------
+class Bar
+end
+# ----- end of /tmp/bar.rb ----
+
+class Foo
+  autoload :Bar, '/tmp/bar.rb'
+end
+p Foo::Bar
+p Foo.autoload?(:Bar)
+#=> -:4: warning: toplevel constant Bar referenced by Foo::Bar
+#   Bar
+#   nil
+#@end
+
+これは以下のようにネストせずに定義したのと同じことです。
+
+#@samplecode
+class Foo
+end
+class Bar
+end
+p Foo::Bar
+#=> -:5: warning: toplevel constant Bar referenced by Foo::Bar
+#   Bar
+#@end
+#@end
+
+@see [[m:Kernel.#autoload]]
 
 --- autoload?(const_name) -> String | nil
 autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します。

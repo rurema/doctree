@@ -1056,76 +1056,22 @@ require_relative を呼出すと必ず失敗します。
 定数 const_name を最初に参照した時に feature を
 [[m:Kernel.#require]] するように設定します。
 
-const_name には、 "::" 演算子を含めることはできません
-（ネストした定数を指定する方法は後述）。
+const_name には、 "::" 演算子を含めることはできません。
+ネストした定数を指定する方法は [[m:Module#autoload]] を参照してください。
 
 @param const_name 定数をString または Symbol で指定します。
 @param feature require と同様な方法で autoload する対象を指定します。
 @raise LoadError featureのロードに失敗すると発生します。
 
-    ------- /tmp/foo.rb ---------
-    class Bar
-    end
-    ----- end of /tmp/foo.rb ----
+#@samplecode
+# ------- /tmp/foo.rb ---------
+class Bar
+end
+# ----- end of /tmp/foo.rb ----
 
-    autoload :Bar, '/tmp/foo'
-    p Bar #=> Bar
-
-=== ネストした定義内の定数
-
-const_name には、 "::" 演算子を含めることはできないので、 Kernel.#autoload 
-ではトップレベルの定数しか指定できません。
-
-[[m:Module#autoload]] と組み合わせることで、任意のクラス／モジュールの定数を autoload できます。
-やはりconst_name に "::" 演算子を含めることはで
-きませんが、以下のように定義する事ができます。
-
-    ------- /tmp/foo.rb ---------
-    class Foo
-      class Bar
-      end
-    end
-    ----- end of /tmp/foo.rb ----
-
-    class Foo
-      autoload :Bar, '/tmp/foo'
-    end
-    p Foo::Bar #=> Foo::Bar
-
-あるいは、以下のようにもできます。
-
-    class Foo
-    end
-    Foo.autoload :Bar, '/tmp/foo'
-    p Foo::Bar #=> Foo::Bar
-
-以下のように、autoload したライブラリがネストした定数を定義しない場
-合、一見、正常に動作しているように見えるので注意が必要です(警告メッ
-セージが出ています)。
-
-      ------- /tmp/bar.rb ---------
-      class Bar
-      end
-      ----- end of /tmp/bar.rb ----
-
-      class Foo
-        autoload :Bar, '/tmp/bar.rb'
-      end
-      p Foo::Bar
-      p Foo.autoload?(:Bar)
-      #=> -:4: warning: toplevel constant Bar referenced by Foo::Bar
-      #   Bar
-      #   nil
-
-これは以下のようにネストせずに定義したのと同じことです。
-
-      class Foo
-      end
-      class Bar
-      end
-      p Foo::Bar
-      #=> -:5: warning: toplevel constant Bar referenced by Foo::Bar
-      #   Bar
+autoload :Bar, '/tmp/foo'
+p Bar #=> Bar
+#@end
 
 @see [[m:Kernel.#autoload?]],[[m:Module#autoload]],[[m:Kernel.#require]]
 
