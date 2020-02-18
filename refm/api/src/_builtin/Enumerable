@@ -1302,8 +1302,10 @@ open("/usr/share/dict/words", "r:iso-8859-1") {|f|
 それ以外のアンダースコアで始まるシンボルを指定した場合は例外が発生します。
 
 #@samplecode 例
-items.chunk { |item| :_underscore }
+[1, 2].chunk { |item| :_underscore }.to_a
 # => RuntimeError: symbols beginning with an underscore are reserved
+
+# 「.to_a」無しだと Enumerator を返すのみで例外は発生しない
 #@end
 
 nil、 :_separator はある要素を無視したい場合に用います。
