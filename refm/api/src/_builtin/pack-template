@@ -703,21 +703,20 @@ n, N, v, V を用います。
 
 : x
 
-  ヌルバイト/1バイト読み飛ばす
+  ヌルバイト（pack）／1バイト読み飛ばし（unpack）
 #@samplecode
-    [?a, ?b].pack("CxC")    # => "a\000b"
-    [?a, ?b].pack("Cx3C")   # => "a\000\000\000b"
+    [97, 98].pack("CxC")    # => "a\x00b"
+    [97, 98].pack("Cx3C")   # => "a\x00\x00\x00b"
 
-    "a\000b".unpack("CxC")  # => [97, 98]
-    "a\377b".unpack("CxC")  # => [97, 98]
-    "a\377b".unpack("Cx3C") # => ArgumentError: x outside of string
+    "abc".unpack("CxC")  # => [97, 99]
+    "abc".unpack("Cx3C") # => ArgumentError: x outside of string
 #@end
 
 : X
 
   1バイト後退
 #@samplecode
-    [?a, ?b, ?c].pack("CCXC") # => "ac"
+    [97, 98, 99].pack("CCXC") # => "ac"
 
     "abcdef".unpack("x*XC") # => [102]
 #@end
@@ -726,9 +725,9 @@ n, N, v, V を用います。
 
   絶対位置への移動
 #@samplecode
-    [?a, ?b].pack("C @3 C") # => "a\000\000b"
+    [97, 98].pack("C @3 C") # => "a\x00\x00b"
 
-    "a\000\000b".unpack("C @3 C") # => [97, 98]
+    "abcd".unpack("C @3 C") # => [97, 100]
 #@end
 
 #@since 2.3.0
