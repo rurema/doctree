@@ -78,6 +78,7 @@ syck が廃止された場合  psych_to_yaml は廃止
 かわりに使ってください。
 
 @param tag 対象のクラスに関連付けるタグの文字列
+#@end
 
 = reopen Kernel
 
