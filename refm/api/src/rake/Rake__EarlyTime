@@ -6,7 +6,7 @@ include Singleton
 
 == Public Instance Methods
 
---- <=>(other) -> Integer
+--- <=>(other) -> -1
 
 必ず -1 を返します。
 
