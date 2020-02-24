@@ -1191,8 +1191,11 @@ pathname.exist? # => false
 #@end
 
 --- ascend {|pathname| ... } -> nil
+--- ascend                   -> Enumerator
+
 self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
 ブジェクトとして生成し、ブロックへの引数として渡して実行します。
+ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返します。
 
   require 'pathname'
 
@@ -1213,9 +1216,11 @@ self のパス名から親方向に辿っていったときの各パス名を新
 
 
 --- descend {|pathname| ... } -> nil
+--- descend                   -> Enumerator
 self のパス名の親から子供へと辿っていったときの各パス名を新しい
 Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
 す。
+ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返します。
 
   require 'pathname'
 
