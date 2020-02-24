@@ -128,7 +128,7 @@ other は Pathname オブジェクトでなければなりません。
          false
          false
 
---- <=>(other) -> bool
+--- <=>(other) -> -1 | 0 | 1 | nil
 
 パス名を比較します。other と同じなら 0 を、ASCII順で self が大きい場合
 は正、other が大きい場合は負を返します。大文字小文字は区別されます。
