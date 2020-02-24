@@ -1177,8 +1177,8 @@ FileUtils.rm_r(self.to_s) と同じです。
 
 @see [[m:FileUtils.#rm_r]]
 
---- unlink -> 0
---- delete -> 0
+--- unlink -> Integer
+--- delete -> Integer
 self が指すディレクトリあるいはファイルを削除します。
 
 #@samplecode 例
@@ -1186,7 +1186,7 @@ require "pathname"
 
 pathname = Pathname("/path/to/sample")
 pathname.exist? # => true
-pathname.unlink # => 0
+pathname.unlink # => 1
 pathname.exist? # => false
 #@end
 
