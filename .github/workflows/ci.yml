@@ -13,6 +13,7 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         # docs.ruby-lang.org uses snap ruby
+        # https://snapcraft.io/ruby
         ruby-version: 2.7
     - name: Install dependencies
       run: bundle install
