@@ -24,7 +24,7 @@ def generate_statichtml(version)
   db = "/tmp/db-#{version}"
   generate_database(version) unless File.exist?(db)
   puts "generate static html of #{version}"
-  bitclust_gem_path = File.expand_path('../..', `bundle exec gem which bitclust`)
+  bitclust_gem_path = File.expand_path('../..', `gem which bitclust`)
   raise "bitclust gem not found" unless $?.success?
   commands = [
     "bundle", "exec",
