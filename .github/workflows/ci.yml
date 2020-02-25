@@ -12,8 +12,9 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        # buster's ruby is 2.5.5 https://packages.debian.org/buster/ruby2.5
-        ruby-version: 2.5.5
+        # docs.ruby-lang.org uses snap ruby
+        # https://snapcraft.io/ruby
+        ruby-version: 2.7
     - name: Install dependencies
       run: bundle install
     - name: Run rake
