@@ -357,6 +357,7 @@ Ruby のオブジェクトに変換します。
 @param filename ファイル名
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 
+#@until 2.5.0
 --- load_documents(yaml) ->[object]
 --- load_documents(yaml){|obj| ... } -> ()
 複数の YAML ドキュメントを含むデータを
@@ -366,6 +367,7 @@ Ruby のオブジェクトに変換します。
 
 @param yaml YAML ドキュメント(文字列 or IO オブジェクト)
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+#@end
 
 #@# Deprecated methods, no documents in psych lib
 #@# --- quick_emit
