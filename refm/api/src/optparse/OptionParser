@@ -957,7 +957,7 @@ argv からオプションを取り除いたものを返します。
 --- permute!(argv = self.default_argv)    -> [String]
 #@end
 
-与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます
+与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
 argv を返します。
 
@@ -1198,4 +1198,3 @@ default_argv をパースします。
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
-
