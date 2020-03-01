@@ -541,11 +541,11 @@ self のタイムゾーンが協定世界時に設定されていれば真を返
 EとOは無視されます。
 
 #@samplecode 例
-  t = Time.now                         #=> 2019-12-18 22:16:49 +0900
-  t.strftime("Printed on %m/%d/%Y")    #=> "Printed on 12/18/2019"
-  t.strftime("Printed on %m/%-d/%_6Y") #=> "Printed on 12/18/  2019"
-  t.strftime("at %I:%M%p")             #=> "at 10:16PM"
-  t.strftime("at %I:%M%#p")            #=> "at 10:16pm"
+t = Time.now                         #=> 2019-12-18 22:16:49 +0900
+t.strftime("Printed on %m/%d/%Y")    #=> "Printed on 12/18/2019"
+t.strftime("Printed on %m/%-d/%_6Y") #=> "Printed on 12/18/  2019"
+t.strftime("at %I:%M%p")             #=> "at 10:16PM"
+t.strftime("at %I:%M%#p")            #=> "at 10:16pm"
 #@end
 
 #@samplecode 様々なISO 8601形式

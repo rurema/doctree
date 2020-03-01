@@ -71,13 +71,13 @@ Rubyではオブジェクトは「汚染されている」とみなされるこ�
 #@else
   * 各スレッドは作られた時点での親スレッドの$SAFEの値を引き継ぐ
 #@samplecode
-      $SAFE = 0
-      th = Thread.new{
-        p $SAFE # => 0
-        $SAFE = 1
-      }
-      th.join
-      p $SAFE # => 0
+$SAFE = 0
+th = Thread.new{
+  p $SAFE # => 0
+  $SAFE = 1
+}
+th.join
+p $SAFE # => 0
 #@end
   * $SAFE の値を現在の値より小さく変更する事はできない
 //emlist{

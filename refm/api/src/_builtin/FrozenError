@@ -4,7 +4,7 @@
 
 
 #@samplecode 例
-  [1, 2, 3].freeze << 4 # FrozenError: can't modify frozen Array
+[1, 2, 3].freeze << 4 # FrozenError: can't modify frozen Array
 #@end
 
 == Class Methods

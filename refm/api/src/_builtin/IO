@@ -2007,12 +2007,12 @@ preadシステムコールを使ってファイルポインタを変更せずに
 @raise NotImplementedError システムコールがサポートされていない OS で発生します。
 
 #@samplecode 例
-  File.write("testfile", "This is line one\nThis is line two\n")
-  File.open("testfile") do |f|
-    p f.read           # => "This is line one\nThis is line two\n"
-    p f.pread(12, 0)   # => "This is line"
-    p f.pread(9, 8)    # => "line one\n"
-  end
+File.write("testfile", "This is line one\nThis is line two\n")
+File.open("testfile") do |f|
+  p f.read           # => "This is line one\nThis is line two\n"
+  p f.pread(12, 0)   # => "This is line"
+  p f.pread(9, 8)    # => "line one\n"
+end
 #@end
 --- pwrite(string, offset) -> Integer
 stringをoffsetの位置にpwrite()システムコールを使って書き込みます。
@@ -2031,11 +2031,11 @@ stringをoffsetの位置にpwrite()システムコールを使って書き込み
 @raise NotImplementedError システムコールがサポートされていない OS で発生します。
 
 #@samplecode 例
-  File.open("testfile", "w") do |f|
-    f.pwrite("ABCDEF", 3)   # => 6
-  end
+File.open("testfile", "w") do |f|
+  f.pwrite("ABCDEF", 3)   # => 6
+end
 
-  File.read("testfile")     # => "\u0000\u0000\u0000ABCDEF"
+File.read("testfile")     # => "\u0000\u0000\u0000ABCDEF"
 #@end
 #@end
 --- lines(rs = $/) {|line| ... }        -> self

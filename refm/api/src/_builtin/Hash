@@ -289,15 +289,15 @@ self を返します。[[c:Hash]] クラスのサブクラスから呼び出し�
 self を [[c:Hash]] オブジェクトに変換します。
 
 #@samplecode 例
-  hash = {}
-  p hash.to_h      # => {}
-  p hash.to_h == hash # => true
+hash = {}
+p hash.to_h      # => {}
+p hash.to_h == hash # => true
 
-  class MyHash < Hash;end
-  my_hash = MyHash.new
-  p my_hash.to_h        # => {}
-  p my_hash.class       # => MyHash
-  p my_hash.to_h.class  # => Hash
+class MyHash < Hash;end
+my_hash = MyHash.new
+p my_hash.to_h        # => {}
+p my_hash.class       # => MyHash
+p my_hash.to_h.class  # => Hash
 #@end
 
 #@since 2.6.0
@@ -1607,11 +1607,11 @@ select! はオブジェクトが変更された場合に self を、
 値は変化しません。
 
 #@samplecode 例
-  h = { a: 1, b: 2, c: 3 }
-  h.transform_keys {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
-  h.transform_keys(&:to_s)        # => { "a" => 1, "b" => 2, "c" => 3 }
-  h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
-                                  # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+h = { a: 1, b: 2, c: 3 }
+h.transform_keys {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+h.transform_keys(&:to_s)        # => { "a" => 1, "b" => 2, "c" => 3 }
+h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+                                # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
 #@end
 
 @see [[m:Hash#transform_keys!]]
@@ -1630,11 +1630,11 @@ select! はオブジェクトが変更された場合に self を、
 
 
 #@samplecode 例
-  h = { a: 1, b: 2, c: 3 }
-  h.transform_keys! {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
-  h.transform_keys!(&:to_sym)      # => { a: 1, b: 2, c: 3 }
-  h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
-                                   # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+h = { a: 1, b: 2, c: 3 }
+h.transform_keys! {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+h.transform_keys!(&:to_sym)      # => { a: 1, b: 2, c: 3 }
+h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+                                 # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
 #@end
 
 @see [[m:Hash#transform_keys]]
@@ -1646,8 +1646,8 @@ select! はオブジェクトが変更された場合に self を、
 引数で指定されたキーとその値だけを含む Hash を返します。
 
 #@samplecode 例
-  h = { a: 100, b: 200, c: 300 }
-  h.slice(:a)           # => {:a=>100}
-  h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
+h = { a: 100, b: 200, c: 300 }
+h.slice(:a)           # => {:a=>100}
+h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
 #@end
 #@end
