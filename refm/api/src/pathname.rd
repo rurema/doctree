@@ -1297,8 +1297,12 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 #@samplecode 例
 require "pathname"
 
-Pathname('/usr/bin/shutdown').sub_ext('.rb')    # => #<Pathname:/usr/bin/shutdown.rb>
-Pathname('/home/user/test.txt').sub_ext('.pdf') # => #<Pathname:/home/user/test.pdf>
+Pathname('/usr/bin/shutdown').sub_ext('.rb')      # => #<Pathname:/usr/bin/shutdown.rb>
+Pathname('/home/user/test.txt').sub_ext('.pdf')   # => #<Pathname:/home/user/test.pdf>
+Pathname('/home/user/test').sub_ext('.pdf')       # => #<Pathname:/home/user/test.pdf>
+Pathname('/home/user/test.').sub_ext('.pdf')      # => #<Pathname:/home/user/test..pdf>
+Pathname('/home/user/.test').sub_ext('.pdf')      # => #<Pathname:/home/user/.test.pdf>
+Pathname('/home/user/test.tar.gz').sub_ext('.xz') # => #<Pathname:/home/user/test.tar.xz>
 #@end
 
 #@end
