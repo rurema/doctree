@@ -147,7 +147,7 @@ puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 json_state.space_before = " "
 json_state.space_before             # => " "
 puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
-# => [1,2,{"name" :"tanaka","age"  :19}]
+# => [1,2,{"name" :"tanaka","age" :19}]
 #@end
 
 --- to_h    -> Hash
