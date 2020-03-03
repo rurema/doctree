@@ -14,23 +14,24 @@ OCSP レスポンダにリクエストを送ってその返答を表示する
   require 'openssl'
   require 'net/http'
   # ...
-  cert # 検証対象の証明書(Certificate オブジェクト)
-  ca_cert # cert の CA の証明書(Certificate オブジェクト)
+  subject # 問い合わせ対象の証明書(Certificate オブジェクト)
+  issuer # subject の発行者の証明書(Certificate オブジェクト)
   store # 信頼している証明書ストア
-  cid = OpenSSL::OCSP::CertificateId(cert, ca_cert)
-  req = OpenSSL::OCSP::Response.new(cid)
+  cid = OpenSSL::OCSP::CertificateId.new(subject, issuer)
+  req = OpenSSL::OCSP::Request.new
+  req.add_certid(cid)
   req.add_nonce
   
-  http = Net::HTTP.new('http://ocsp.example.com', 80)
+  http = Net::HTTP.new('ocsp.example.com', 80)
   httpres = http.post("/", req.to_der, 'content-type' => 'application/ocsp-request')
   raise "HTTP error" if !httpres.kind_of?(Net::HTTPOK)
   res = OpenSSL::OCSP::Response.new(httpres.body)
   
   puts "Response status: #{res.status_string}"
-  exit if res.status != OpenSSL::OCSP::STATUS_SUCCESSFUL
+  exit if res.status != OpenSSL::OCSP::RESPONSE_STATUS_SUCCESSFUL
 
   basic_resp = res.basic
-  raise "nonce error" if req.check_nonce(basic_resp)
+  raise "nonce error" unless [-1, 1].include?(req.check_nonce(basic_resp))
   unless basic_resp.verify([], store)
     puts "verify response fail"
   end
@@ -43,9 +44,9 @@ OCSP レスポンダにリクエストを送ってその返答を表示する
   puts "status: #{STATUS2MESSAGE[status]}"
   puts "reason: #{reason}" if status == OpenSSL::OCSP::V_CERTSTATUS_REVOKED
   puts "revoked time: #{revtime}" if status == OpenSSL::OCSP::V_CERTSTATUS_REVOKED
-  puts "crl update: #{thisupd}"
-  puts "crl next update: #{nextupd}"
-  puts "extensions:"
+  puts "response update: #{thisupd}"
+  puts "response next update: #{nextupd}"
+  puts "extensions: "
   exts.each{|ext| p ext}
 
 == Constants
@@ -354,9 +355,9 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 @param flags フラグ(整数)
 
 = class OpenSSL::OCSP::CertificateId < Object
-失効状態を問い合わせたい個々の証明書を表すクラスです。
+失効状態を問い合わせたい個々の証明書を識別するためのクラスです。
 
-証明書にissuerの情報+αを付加したオブジェクトです。
+問い合わせたい証明書にissuerの情報+αを付加したオブジェクトです。
 
 CertificateId オブジェクトを複数 [[c:OpenSSL::OCSP::Request]] に含め、
 同時に問い合わせることができます。
@@ -375,7 +376,7 @@ subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発�
 @param subject 問合せ対象の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
 @param issuer subjectのissuer(発行者)の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
 #@since 1.9.3
-@param digest issuerの名前のハッシュ値を取るためのハッシュアルゴリズム。nilでデフォルトのアルゴリズムが使われます
+@param digest issuerの名前のハッシュ値、issuerの証明書の公開鍵のハッシュ値を取るためのハッシュアルゴリズム。nilでデフォルトのアルゴリズムが使われます
 #@end
 
 @raise OpenSSL::OCSP::OCSPError オブジェクトの生成に失敗した際に発生します
@@ -413,9 +414,9 @@ OCSP リクエストを表すクラスです。
 
 Request オブジェクトを生成します。
 引数なしの場合は、中身が空のオブジェクトを生成します。
-文字列を渡した場合は der 形式であると見なして読み込みます。
+文字列を渡した場合は DER 形式であると見なして読み込みます。
 
-@param der リクエストの情報をエンコードしたder形式の文字列
+@param der リクエストの情報をエンコードした DER 形式の文字列
 @raise OpenSSL::OCSP::OCSPError 文字列のデコードに失敗した場合に発生します
 
 == Instance Methods
@@ -465,7 +466,7 @@ Request オブジェクトが保持している問い合わせ対象の証明書
 Request オブジェクトに署名をします。
 
 この署名はリクエスタが自分自身を証明するために署名します。
-OSCP レスポンダはこの署名を確認します。
+OCSP レスポンダはこの署名を確認します。
 Request に対する署名は必須ではありません。
 
 certs に証明書の配列を渡すことで、この署名を検証するために

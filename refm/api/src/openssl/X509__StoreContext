@@ -155,7 +155,7 @@ CRL に関するフラグを設定します。
   * [[m:OpenSSL::X509::PURPOSE_SMIME_SIGN]]
   * [[m:OpenSSL::X509::PURPOSE_SSL_CLIENT]]
   * [[m:OpenSSL::X509::PURPOSE_SSL_SERVER]]
-  * [[m:OpenSSL::X509::PURPOSE_OSCP_HELPER]]
+  * [[m:OpenSSL::X509::PURPOSE_OCSP_HELPER]]
 
 証明書に記載されている使用目的が適合していない場合には検証が失敗します。
 @param purpose 証明書の使用目的を表す整数値
