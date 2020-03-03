@@ -45,7 +45,7 @@ def generate_statichtml(version)
   File.symlink(version, latest)
 end
 
-task :default => [:generate, :check_format]
+task :default => [:check_indent_in_samplecode, :generate, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -136,5 +136,24 @@ task check_format: [:statichtml] do
   end
   if res.size > 0
     raise res.sort.uniq.join("\n")
+  end
+end
+
+desc 'Check unnecessary indentation in samplecode'
+task :check_indent_in_samplecode do
+  errors = []
+  `git grep -F --name-only '\#@samplecode'`.lines(chomp: true).each do |path|
+    lines = File.read(path).lines(chomp: true)
+    lines.each.with_index do |line, idx|
+      next unless line.start_with?('#@samplecode')
+      next unless lines[idx + 1].start_with?(' ')
+
+      errors << "#{path}:#{idx + 1}: \#@samplecode の中に不要なインデントがあります。削除してください"
+    end
+  end
+
+  unless errors.empty?
+    puts errors
+    fail
   end
 end
