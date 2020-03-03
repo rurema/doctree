@@ -1711,7 +1711,7 @@ p "".hex      # => 0
 "hello".include? ?h     #=> true
 #@end
 
---- index(pattern, pos = 0) -> Integer
+--- index(pattern, pos = 0) -> Integer | nil
 
 文字列のインデックス pos から右に向かって pattern を検索し、
 最初に見つかった部分文字列の左端のインデックスを返します。
