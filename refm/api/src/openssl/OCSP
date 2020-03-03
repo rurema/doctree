@@ -22,7 +22,7 @@ OCSP レスポンダにリクエストを送ってその返答を表示する
   req.add_certid(cid)
   req.add_nonce
   
-  http = Net::HTTP.new('http://ocsp.example.com', 80)
+  http = Net::HTTP.new('ocsp.example.com', 80)
   httpres = http.post("/", req.to_der, 'content-type' => 'application/ocsp-request')
   raise "HTTP error" if !httpres.kind_of?(Net::HTTPOK)
   res = OpenSSL::OCSP::Response.new(httpres.body)
