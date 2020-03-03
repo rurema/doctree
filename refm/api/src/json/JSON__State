@@ -318,6 +318,19 @@ JSON 形式の文字列中で JavaScript のオブジェクトを表す部分に
 @param string JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
               前に挿入する文字列をセットします。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(space_before: "")
+json_state.space_before             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state.space_before = " "
+json_state.space_before             # => " "
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name" :"tanaka","age" :19}]
+#@end
 
 --- to_h    -> Hash
 --- to_hash -> Hash
