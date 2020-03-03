@@ -1,7 +1,7 @@
 language: ruby
 dist: bionic
 rvm:
-  - 2.3 # docs.ruby-lang.org use "ruby 2.3.3p222 (2016-11-21) [x86_64-linux-gnu]"
+  - 2.7.0 # docs.ruby-lang.org use ruby 2.7.0
 notifications:
   email:
     recipients:
