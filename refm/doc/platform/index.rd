@@ -19,7 +19,6 @@ Ruby は様々な環境で動作するよう各方面の有志によって移植
   * MS-DOS
     * [[d:platform/DJGPP]]
   * [[d:platform/OS2]], [[d:platform/os2_emx]], [[d:platform/emx]]
-  * [[d:platform/VMS]]
   * [[d:platform/human68k]]
   * [[d:platform/GNU]], [[d:platform/GNU Hurd]]
   * [[d:platform/WindowsCE]]
