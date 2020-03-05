@@ -17,7 +17,6 @@ Ruby は様々な環境で動作するよう各方面の有志によって移植
     * [[d:platform/Cygwin]]
   * [[d:platform/Mac]]
     * [[d:platform/MacOSX]]
-  * [[d:platform/BeOS]]
   * MS-DOS
     * [[d:platform/DJGPP]]
   * [[d:platform/OS2]], [[d:platform/os2_emx]], [[d:platform/emx]]
