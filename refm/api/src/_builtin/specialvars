@@ -392,11 +392,9 @@ ARCH の値は Config::CONFIG['arch'] で得られます。
 
 コンパイル時のデフォルトパスは
 多くの UNIX システムでは "/usr/local/lib/ruby" です。
-[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]、
-[[d:platform/bccwin32]]、[[d:platform/mswince]] 環境では
+[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]
+環境では
 ruby.dll の位置からの相対で決まります。
-[[d:platform/DJGPP]] と [[d:platform/emx]] (OS/2) では
-ruby.exe の位置からの相対で決まります。
 
 #@until 1.9.1
 -T オプションで起動時に [[m:$SAFE]] を 1 以上に
