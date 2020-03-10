@@ -1860,7 +1860,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
-res.key?('accept-ranges')    # => true
+res.key?('content-type')     # => true
 res.key?('nonexist-header')  # => false
 #@end
 
