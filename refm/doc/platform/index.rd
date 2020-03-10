@@ -13,11 +13,8 @@ Ruby は様々な環境で動作するよう各方面の有志によって移植
     * [[d:platform/Win32-native]]
       * [[d:platform/mswin32]]
       * [[d:platform/MinGW]], [[d:platform/mingw32]]
-      * [[d:platform/bccwin32]]
     * [[d:platform/Cygwin]]
   * [[d:platform/MacOSX]]
   * MS-DOS
     * [[d:platform/DJGPP]]
-  * [[d:platform/OS2]], [[d:platform/os2_emx]], [[d:platform/emx]]
-  * [[d:platform/human68k]]
   * [[d:platform/GNU]], [[d:platform/GNU Hurd]]
