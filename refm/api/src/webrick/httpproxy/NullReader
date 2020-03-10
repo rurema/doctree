@@ -1,4 +1,4 @@
-= object WEBrick::NullReader < Object
+= object WEBrick::NullReader
 
 空のソケットのふりをするオブジェクトです。
 

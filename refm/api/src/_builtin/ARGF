@@ -1,4 +1,4 @@
-= object ARGF < ARGF.class
+= object ARGF
 
 スクリプトに指定した引数
 ([[m:Object::ARGV]] を参照) をファイル名とみなして、
