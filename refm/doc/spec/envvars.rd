@@ -7,17 +7,10 @@ Rubyインタプリタは以下の環境変数を参照します。
 
  指定できないオプションを指定した場合、例外が発生します。
 
-#@since 1.9.1
 //emlist{
 $ RUBYOPT=-y ruby -e ""
 ruby: invalid switch in RUBYOPT: -y (RuntimeError)
 //}
-#@else
-//emlist{
-$ RUBYOPT=-y ruby e ""
-ruby: illegal switch in RUBYOPT: -y (RuntimeError)
-//}
-#@end
 
  sh系
 
@@ -88,39 +81,10 @@ ruby: illegal switch in RUBYOPT: -y (RuntimeError)
       set RUBYLIB=%HOMEDRIVE%%HOMEPATH%\ruby\lib;\opt\ruby\lib
 //}
 
-#@until 2.2.0
-: RUBYLIB_PREFIX
-
-#@since 1.9.1
-  この環境変数は [[d:platform/Cygwin]]版、[[d:platform/mswin32]]版、
-  [[d:platform/mingw32]]版のrubyでのみ有効です。
-#@else
-  この環境変数は [[d:platform/DJGPP]]版、[[d:platform/Cygwin]]版、[[d:platform/mswin32]]版、
-  [[d:platform/mingw32]]版のrubyでのみ有効です。
-#@end
-
-  この環境変数の値は、path1;path2 あるいは path1 path2 という形式で、
-  Rubyライブラリの探索パス[[m:$:]]の先頭部分
-  がpath1にマッチした場合に、これをpath2に置き換えます。
-  現在の実装ではライブラリのパスの prefix を ruby.exe や ruby.dll のあ
-  る位置から相対的に求めるのでこの環境変数の必要性はなくなっています。
-
-  MS-DOS系
-
-//emlist{
-      set RUBYLIB_PREFIX=/usr/local/lib/ruby;d:/ruby
-//}
-#@end
-
 : RUBYSHELL
 
-#@since 1.9.1
   この環境変数は [[d:platform/mswin32]]版、[[d:platform/mingw32]]版のrubyで
   のみ有効です。
-#@else
-  この環境変数は [[d:platform/OS2]]版、[[d:platform/mswin32]]版、[[d:platform/mingw32]]版のrubyで
-  のみ有効です。
-#@end
 
   [[m:Kernel.#system]] でコマンドを実行するときに使用するシェル
   を指定します。この環境変数が省略されていればCOMSPECの値を

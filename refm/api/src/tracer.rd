@@ -314,11 +314,6 @@ ruby 1.8 ではブロックを与えると警告がでます。
 
 == Constants
 
-#@until 1.8.4
---- MY_FILE_NAME
-#@todo
-
-#@end
 
 --- EVENT_SYMBOL
   

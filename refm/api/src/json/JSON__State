@@ -58,11 +58,29 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 NaN, Infinity, -Infinity を生成できる場合、真を返します。
 そうでない場合は偽を返します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new({})
+json_state.allow_nan? # => false
+json_state = JSON::State.new(allow_nan: true)
+json_state.allow_nan? # => true
+#@end
+
 @see [[rfc:4627]]
 
 --- array_nl -> String
 
 JSON の配列の後に出力する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new({})
+json_state.array_nl # => ""
+json_state = JSON::State.new(array_nl: "\n")
+json_state.array_nl # => "\n"
+#@end
 
 --- array_nl=(str)
 
@@ -73,6 +91,27 @@ JSON の配列の後に出力する文字列をセットします。
 循環参照のチェックを行う場合は、真を返します。
 そうでない場合は偽を返します。
 
+#@samplecode 例 ネストをチェックするケース
+require "json"
+
+a = [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+s = JSON.state.new
+begin
+  JSON.generate(a, s)
+rescue JSON::NestingError => e
+  [e, s.max_nesting, s.check_circular?] # => [#<JSON::NestingError: nesting of 100 is too deep>, 100, true]
+end
+#@end
+
+#@samplecode 例 ネストをチェックしないケース
+require "json"
+
+a = [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+s2 = JSON.state.new(max_nesting: 0)
+json = JSON.generate(a, s2)
+[json, s2.max_nesting, s2.check_circular?] # => ["[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]", 0, false]
+#@end
+
 --- configure(options = {}) -> self
 --- merge(options = {})     -> self
 
@@ -82,11 +121,34 @@ JSON の配列の後に出力する文字列をセットします。
 
 @param options このオブジェクトの設定をするためのハッシュを指定します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+
+json_state.configure(indent: "  ")
+json_state.indent # => "  "
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
+#@end
+
 @see [[m:JSON::State.new]]
 
 --- indent -> String
 
 インデントに使用する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+#@end
 
 --- indent=(string)
 
@@ -94,11 +156,40 @@ JSON の配列の後に出力する文字列をセットします。
 
 @param string インデントに使用する文字列を指定します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(indent: "\t")
+json_state.indent # => "\t"
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
+json_state.indent = "  "
+JSON.generate({key1: "value1", key2: "value2"}, json_state)
+# => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
+#@end
+
 --- max_nesting -> Integer
 
 生成される JSON 形式の文字列のネストの深さの最大値を返します。
 
 この値がゼロである場合は、ネストの深さのチェックを行いません。
+
+#@samplecode 例 ネストの深さチェックを行う
+require "json"
+
+json_state = JSON::State.new(max_nesting: 2)
+json_state.max_nesting            # => 2
+JSON.generate([[]], json_state)
+JSON.generate([[[]]], json_state) # => JSON::NestingError
+#@end
+
+#@samplecode 例 ネストの深さチェックを行わない
+require "json"
+
+json_state = JSON::State.new(max_nesting: 0)
+json_state.max_nesting            # => 0
+JSON.generate([[[[[[[[[[]]]]]]]]]], json_state)
+#@end
 
 --- max_nesting=(depth)
 
@@ -106,9 +197,38 @@ JSON の配列の後に出力する文字列をセットします。
 
 この値にゼロをセットすると、ネストの深さのチェックを行いません。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(max_nesting: 2)
+json_state.max_nesting            # => 2
+JSON.generate([[]], json_state)
+json_state.max_nesting = 3
+json_state.max_nesting            # => 3
+JSON.generate([[[[]]]], json_state) # => JSON::NestingError
+#@end
+
 --- object_nl -> String
 
 JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(object_nl: "")
+json_state.object_nl             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state = JSON::State.new(object_nl: "\n")
+json_state.object_nl             # => "\n"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+
+# => [1,2,{
+#    "name":"tanaka",
+#    "age":19
+#    }]
+#@end
 
 --- object_nl=(string)
 
@@ -116,9 +236,40 @@ JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末
 
 @param string JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を指定します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(object_nl: "")
+json_state.object_nl             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state.object_nl = "\n"
+json_state.object_nl             # => "\n"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+ # => [1,2,{
+#    "name":"tanaka",
+#    "age":19
+#    }]
+#@end
+
 --- space -> String
 
 JSON 形式の文字列のトークン間に挿入する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(space: "")
+json_state.space             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state = JSON::State.new(space: "\t")
+json_state.space             # => "\t"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":  "tanaka","age": 19}]
+#@end
 
 --- space=(string)
 
@@ -126,10 +277,38 @@ JSON 形式の文字列のトークン間に挿入する文字列をセットし
 
 @param string JSON 形式の文字列のトークン間に挿入する文字列を指定します。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(space: "")
+json_state.space             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state.space = "\t"
+json_state.space             # => "\t"
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":  "tanaka","age": 19}]
+#@end
+
 --- space_before -> String
 
 JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
 前に挿入する文字列を返します。
+
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(space_before: "")
+json_state.space_before             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state = JSON::State.new(space_before: " ")
+json_state.space_before             # => " "
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name" :"tanaka","age" :19}]
+#@end
 
 --- space_before=(string)
 
@@ -139,6 +318,19 @@ JSON 形式の文字列中で JavaScript のオブジェクトを表す部分に
 @param string JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
               前に挿入する文字列をセットします。
 
+#@samplecode 例
+require "json"
+
+json_state = JSON::State.new(space_before: "")
+json_state.space_before             # => ""
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name":"tanaka","age":19}]
+
+json_state.space_before = " "
+json_state.space_before             # => " "
+puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => [1,2,{"name" :"tanaka","age" :19}]
+#@end
 
 --- to_h    -> Hash
 --- to_hash -> Hash

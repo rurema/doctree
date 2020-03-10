@@ -21,7 +21,7 @@ RSA についてよく理解し、必要な場合のみにすべきです。
   # 秘密鍵をAES256で暗号化して private_key.pem に PEM 形式で保存
   passphrase = "!secret passphrase!"
   File.open("private_key.pem", "w") do |f|
-    f.write(rsa.export(OpenSSL::Cipher::Cipher.new("aes256"), passphrase))
+    f.write(rsa.export(OpenSSL::Cipher.new("aes256"), passphrase))
   end
   # 公開鍵をpublic_key.pemに保存
   public_key = rsa.public_key
@@ -137,11 +137,9 @@ cipher を指定して pass を省略した場合は
 
 公開鍵を出力する場合は cipher と pass は無視されます。
 
-#@since 1.8.2
 --- to_der -> String
 自身を DER 形式に変換します。
 
-#@end
 
 --- public_key -> OpenSSL::PKey::RSA
 公開鍵を複製して RSA オブジェクトとして返します。
@@ -324,7 +322,6 @@ private exponent を設定します。
 鍵が公開鍵の場合、[[m:OpenSSL::PKey::RSA#d]] 
 のように公開鍵が持っていない値は 0 になります。
 
-#@since 1.8.2
 == Constants
 
 --- PKCS1_PADDING -> Integer
@@ -369,7 +366,6 @@ PKCS #1 v2.0 で定義されているパディングモードです。
 [[m:OpenSSL::PKey::RSA#public_encrypt]]、
 [[m:OpenSSL::PKey::RSA#private_decrypt]] の
 第二引数に指定できるパディングモード。
-#@end
 
 = class OpenSSL::PKey::RSAError < OpenSSL::PKey::PKeyError
 RSA 関連のエラーが起きた場合に発生する例外のクラスです。

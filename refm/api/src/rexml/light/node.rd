@@ -90,7 +90,5 @@
 --- NAMESPLIT
 #@todo
 
-#@since 1.8.1
 --- PARENTS
 #@todo
-#@end

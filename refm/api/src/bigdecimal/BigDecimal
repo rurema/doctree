@@ -749,11 +749,9 @@ self を文字列に変換します (デフォルトは "0.xxxxxEn" の形にな
 
 self の指数部を整数値で返します。
 
-#@since 1.8.1
 --- precs -> [Integer, Integer]
 
 self の有効数字と最大有効数字の配列を返します。
-#@end
 
 --- sign -> Integer
 

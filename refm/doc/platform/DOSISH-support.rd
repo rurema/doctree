@@ -6,8 +6,7 @@ ruby version 1.7 では、DOSISH対応(DOS/Windows のパス名の扱いに対�
 更)が含まれています。(現在の)変更点を以下に示します。
 
 なお、これらの変更は [[d:platform/mswin32]] 版、[[d:platform/mingw32]]
-版, [[d:platform/bccwin32]] 版, [[d:platform/human68k]] 版,
-[[d:platform/os2_emx]] 版の Ruby にのみあてはまります。
+版の Ruby にのみあてはまります。
 
 とりあえずの目標として、
 

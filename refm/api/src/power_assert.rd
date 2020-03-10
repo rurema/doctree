@@ -7,4 +7,4 @@ Ruby向けのPower Assertを提供するライブラリです。
 
  * rubygems.org: [[url:https://rubygems.org/gems/power_assert]]
  * プロジェクトページ: [[url:https://github.com/k-tsj/power_assert]]
- * リファレンス: [[url:http://www.rubydoc.info/gems/power_assert]]
+ * リファレンス: [[url:https://www.rubydoc.info/gems/power_assert]]

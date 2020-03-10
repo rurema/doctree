@@ -13,6 +13,20 @@ JSON (JavaScript Object Notation) を扱うためのモジュールです。
 
 @param options [[m:JSON.#parse]], [[m:JSON.#generate]] の説明を参照してください。
 
+#@samplecode 例
+require "json"
+string=<<JSON
+{ "a":1, "b":2, "c":3 }
+JSON
+hash = { a: 1, b: 2, c: 3 }
+
+JSON[string].class                   # => Hash
+JSON[string]                         # => {"a"=>1, "b"=>2, "c"=>3}
+JSON[string, symbolize_names: true]  # => {:a=>1, :b=>2, :c=>3}
+JSON[hash].class                     # => String
+JSON[hash]                           # => "{\"a\":1,\"b\":2,\"c\":3}"
+#@end
+
 @see [[m:JSON.#parse]], [[m:JSON.#generate]]
 
 --- create_id -> String
@@ -20,6 +34,38 @@ JSON (JavaScript Object Notation) を扱うためのモジュールです。
 json_create メソッドで使用するクラスを決定するために使用する値を返します。
 
 デフォルトは "json_class" です。
+
+#@samplecode 例
+require "json"
+
+class User
+  attr :id, :name
+  def initialize(id, name)
+    @id, @name = id, name
+  end
+
+  def self.json_create(object)
+    new(object['id'], object["name"])
+  end
+
+  def as_json(*)
+    {
+      JSON.create_id => self.class.name,
+      "id" => id,
+      "name" => name,
+    }
+  end
+
+  def to_json(*)
+    as_json.to_json
+  end
+end
+
+json = JSON.generate(User.new(1, "tanaka"))
+json # => "{\"json_class\":\"User\",\"id\":1,\"name\":\"tanaka\"}"
+JSON.parse(json, create_additions: true)
+# => #<User:0x0000557709b269e0 @id=1, @name="tanaka">
+#@end
 
 --- create_id=(identifier)
 
@@ -54,12 +100,24 @@ JSON ライブラリがジェネレータとして使用するモジュールを
 
 JSON ライブラリがパーサとして使用するクラスを返します。
 
+#@samplecode 例
+require "json"
+
+JSON.parser   # => JSON::Ext::Parser
+#@end
+
 #@# nodoc
 #@# --- parser=(parser)
 
 --- state -> JSON::Ext::Generator::State
 
 JSON ライブラリがジェネレータの状態を表すクラスとして使用するクラスを返します。
+
+#@samplecode 例
+require "json"
+
+JSON.state   # => JSON::Ext::Generator::State
+#@end
 
 #@# 他のメソッドから考えると nodoc のはず。
 #@# --- state=(state)
@@ -82,6 +140,21 @@ JSON ライブラリがジェネレータの状態を表すクラスとして使
 
 @raise ArgumentError オブジェクトのネストの深さが limit を越えた場合に発生します。
 
+#@samplecode 例
+require "json"
+
+JSON.dump({ name: "tanaka", age: 19 }) # => "{\"name\":\"tanaka\",\"age\":19}"
+#@end
+
+#@samplecode 例
+require "json"
+
+File.open("test.txt", "w") do |f|
+  JSON.dump([[[[[[[[[[]]]]]]]]]], f, 10)   # => #<File:test.txt>
+  JSON.dump([[[[[[[[[[[]]]]]]]]]]], f, 10) # => exceed depth limit (ArgumentError)
+end
+#@end
+
 @see [[c:Marshal]], [[m:Marshal.#dump]]
 
 --- fast_generate(object) -> String
@@ -96,6 +169,12 @@ JSON ライブラリがジェネレータの状態を表すクラスとして使
 fast_unparse は将来削除される予定です。
 
 @param object JSON 形式の文字列に変換するオブジェクトを指定します。
+
+#@samplecode 例
+require "json"
+
+JSON.fast_generate({ name: "tanaka", age: 19 }) # => "{\"name\":\"tanaka\",\"age\":19}"
+#@end
 
 --- generate(object, state = nil) -> String
 --- unparse(object, state = nil) -> String
@@ -139,6 +218,16 @@ unparse は将来削除される予定です。
        を生成しようとした場合に発生します。
 
 @raise JSON::CircularDatastructure 与えられたオブジェクトが循環参照を持つ場合に発生します。
+
+#@samplecode 例
+require "json"
+
+JSON.generate([1, 2, { name: "tanaka", age: 19 }])
+# => "[1,2,{\"name\":\"tanaka\",\"age\":19}]"
+json_state = JSON::State.new(space: " ")
+JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+# => "[1,2,{\"name\": \"tanaka\",\"age\": 19}]"
+#@end
 
 @see [[c:JSON::State]], [[m:JSON.#pretty_generate]]
 

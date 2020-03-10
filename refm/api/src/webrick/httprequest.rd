@@ -28,7 +28,6 @@ WEBrick::HTTPRequest を生成して返します。
 
 @param header_name ヘッダー名を文字列で指定します。大文字と小文字を区別しません。
 
-#@since 1.8.2
 --- accept    -> [String]
 
 Accept ヘッダの内容をメディアタイプを表す文字列の配列で返します。
@@ -49,7 +48,6 @@ Accept-Encoding  ヘッダの内容をコーディングを表す文字列の配
 Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 配列は品質係数(qvalue)でソートされています。
 
-#@end
 
 --- addr    -> Array
 
@@ -69,7 +67,6 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 ブロックを指定された場合、クライアントからデータを読み込むたびにそのデータ(文字列)
 を引数としてブロックを実行します。リクエストが chunked 形式であっても引数はデコードされています。
 
-#@since 1.8.2
 --- content_length    -> Integer
 
 リクエストの Content-Length ヘッダの値を整数で返します。リクエストに Content-Length ヘッダ
@@ -79,7 +76,6 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 
 リクエストの Content-Type ヘッダを文字列で返します。
 
-#@end
 
 #@since 1.9.3
 --- continue
@@ -184,9 +180,7 @@ multipart/form-data なフォームデータであってもサイズの制限な
 リクエスト URI のクエリーを文字列で表すアクセサです。
 デフォルトは request_uri.query です。
 
-#@since 1.8.4
 --- query_string=(value)
-#@end
 
 リクエスト URI のクエリーを文字列で表すアクセサです。
 デフォルトは request_uri.query です。
