@@ -82,6 +82,9 @@ obj.collect {|item| item } を実行します。
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
+#@since 2.6.0
+@see [[m:Hash#to_h]]
+#@end
 --- each_with_index(*args)                      -> Enumerator
 --- each_with_index(*args) {|item, index| ... } -> self
 
