@@ -162,12 +162,10 @@ p Foo.members      # => [:foo, :bar]
   joe.zip    #=> "90210"
 
 --- each {|value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each -> Enumerator
 #@else
 --- each -> Enumerable::Enumerator
-#@end
 #@end
 構造体の各メンバに対して繰り返します。
 
@@ -183,12 +181,10 @@ p Foo.members      # => [:foo, :bar]
   #    12345
 
 --- each_pair {|member, value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_pair -> Enumerator
 #@else
 --- each_pair -> Enumerable::Enumerator
-#@end
 #@end
 構造体のメンバ名([[c:Symbol]])と値の組を引数にブロックを繰り返し実行します。
 
@@ -224,10 +220,11 @@ p Foo.new.members  # => [:foo, :bar]
 --- to_a -> [object]
 構造体のメンバの値を配列にいれて返します。
 
-例えば以下のようにして passwd のエントリを出力できます。
-
-  require 'etc'
-  print Etc.getpwuid.values.join(":"), "\n"
+#@samplecode 例
+  Customer = Struct.new(:name, :address, :zip)
+  Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
+  # => ["Joe Smith", "123 Maple, Anytown NC", 12345]
+#@end
 
 #@include(Struct.attention)
 
@@ -248,8 +245,8 @@ self の内容を人間に読みやすい文字列にして返します。
 --- select -> Enumerator
 #@end
 #@since 2.6.0
---- filter! {|i| ... } -> [object]
---- filter! -> Enumerator
+--- filter {|i| ... } -> [object]
+--- filter -> Enumerator
 #@end
 
 構造体のメンバの値に対してブロックを評価した値が真であった要素を全て含

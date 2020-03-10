@@ -45,26 +45,13 @@ GC されていれば偽を返します。
 
 @see [[lib:delegate]]
 
-#@since 1.8.6
 --- __setobj__(obj) -> ()
 
 与えられたオブジェクトを自身の参照先としてセットします。
 内部用のメソッドなので使わないでください。
 
 @param obj 任意のオブジェクトを指定します。
-#@end
 
-#@until 1.8.1
-== Constants
---- ID_MAP -> Hash
-
-オブジェクトをキー、参照の配列を値としたハッシュです。
-
---- ID_REV_MAP -> Hash
-
-参照をキー、オブジェクトを値としたハッシュです。
-
-#@end
 = class WeakRef::RefError < StandardError
 
 GC されたオブジェクトを参照しようとしたときに発生する例外です。

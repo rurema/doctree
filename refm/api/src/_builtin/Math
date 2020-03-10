@@ -104,7 +104,6 @@ Math.atan2(-1,0)  #=> -1.5707963267949
 #@end
 #@end
 
-#@since 1.8.0
 --- acosh(x) -> Float
 
 x の逆双曲線余弦関数の値を返します。
@@ -163,21 +162,18 @@ x の逆双曲線正接関数の値を返します。
 @raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します。
 #@end
 
-#@end
 
 --- cos(x) -> Float
 
-x の余弦関数の値をラジアンで返します。
+x の余弦関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return [-1, 1] の実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.cos(Math::PI) # => -1.0
@@ -185,17 +181,15 @@ Math.cos(Math::PI) # => -1.0
 
 --- sin(x) -> Float
 
-x の正弦関数の値をラジアンで返します。
+x の正弦関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return [-1, 1] の実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.sin(Math::PI/2) # => 1.0
@@ -203,23 +197,20 @@ Math.sin(Math::PI/2) # => 1.0
 
 --- tan(x) -> Float
 
-x の正接関数の値をラジアンで返します。
+x の正接関数の値を返します。
 
-@param x 実数
+@param x 実数（ラジアンで与えます）
 
 @return 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.tan(0) # => 0.0
 #@end
 
-#@since 1.8.0
 --- cosh(x) -> Float
 
 x の双曲線余弦関数の値を返します。
@@ -270,8 +261,6 @@ x の双曲線正接関数の値を返します。
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@end
 
-#@end
-#@since 1.8.0
 --- erf(x) -> Float
 x の誤差関数の値を返します。
 
@@ -302,7 +291,6 @@ x の相補誤差関数の値を返します。
 Math.erfc(0) # => 1.0
 #@end
 
-#@end
 
 --- exp(x) -> Float
 
@@ -343,7 +331,6 @@ fraction, exponent = Math.frexp(1234)   # => [0.6025390625, 11]
 fraction * 2**exponent                  # => 1234.0
 #@end
 
-#@since 1.8.0
 --- hypot(x, y) -> Float
 
 sqrt(x*x + y*y) を返します。
@@ -363,7 +350,6 @@ sqrt(x*x + y*y) を返します。
 Math.hypot(3, 4) #=> 5.0
 #@end
 
-#@end
 
 --- ldexp(x, exp) -> Float
 

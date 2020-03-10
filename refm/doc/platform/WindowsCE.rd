@@ -1,3 +1,0 @@
-= WindowsCE
-
---> [[d:platform/mswince]]

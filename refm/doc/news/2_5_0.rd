@@ -300,12 +300,12 @@
 
   * [[lib:rubygems]]
     * Rubygems 2.7.3 に更新
-      * [[url:http://blog.rubygems.org/2017/11/28/2.7.3-released.html]]
-      * [[url:http://blog.rubygems.org/2017/11/08/2.7.2-released.html]]
-      * [[url:http://blog.rubygems.org/2017/11/03/2.7.1-released.html]]
-      * [[url:http://blog.rubygems.org/2017/11/01/2.7.0-released.html]]
-      * [[url:http://blog.rubygems.org/2017/10/09/2.6.14-released.html]]
-      * [[url:http://blog.rubygems.org/2017/08/27/2.6.13-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/28/2.7.3-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/08/2.7.2-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/03/2.7.1-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/01/2.7.0-released.html]]
+      * [[url:https://blog.rubygems.org/2017/10/09/2.6.14-released.html]]
+      * [[url:https://blog.rubygems.org/2017/08/27/2.6.13-released.html]]
 
   * [[lib:securerandom]]
     * [[m:SecureRandom.alphanumeric]] を追加

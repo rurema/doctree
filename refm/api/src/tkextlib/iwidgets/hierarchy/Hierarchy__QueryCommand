@@ -1,9 +1,0 @@
-= class Tk::Iwidgets::Hierarchy::QueryCommand < TkValidateCommand
-
-== Class Methods
-
---- _config_keys
-#@todo
-
-
-

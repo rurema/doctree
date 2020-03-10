@@ -288,6 +288,16 @@ Logger オブジェクトを生成します。
 
 @param msg ログに出力するメッセージ。
 
+#@samplecode 例
+require 'logger'
+logger = Logger.new(STDOUT)
+
+logger << "add message"
+
+# => add message
+#@end
+
+
 --- add(severity, message = nil, progname = nil) -> true
 --- add(severity, message = nil, progname = nil){ ... } -> true
 --- log(severity, message = nil, progname = nil) -> true
@@ -651,9 +661,29 @@ logger.level # => 3
 
 ログに出力するプログラム名を取得します。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.progname # => nil
+logger.progname = "MyProgName"
+logger.progname # => "MyProgName"
+#@end
+
 --- progname=(name)
 
 ログに出力するプログラム名を設定します。
+
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.progname                          # => nil
+logger.progname = "MyProgName"           # => "MyProgName"
+logger.progname                          # => "MyProgName"
+logger.info("info1")                     # => I, [2019-04-23T00:08:55.585459 #2823]  INFO -- MyProgName: info1
+logger.info("OtherProgName") { "info2" } # => I, [2019-04-23T00:08:55.585500 #2823]  INFO -- OtherProgName: info2
+#@end
 
 --- formatter -> String
 
@@ -661,6 +691,23 @@ logger.level # => 3
 
 このメソッドの返り値が持つ call メソッドは 4 つの引数 (severity, time, program name, message) を受けとります。
 
+#@samplecode 例
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.formatter # => nil
+logger.info("test")
+# => I, [2019-05-09T22:13:56.509159 #13912]  INFO -- : test
+
+ltsv_formatter = proc { |severity, timestamp, progname, msg|
+  "time:#{timestamp}\tlevel:#{severity}\tprogname:#{progname}\tmessage:#{msg}\n"
+}
+logger.formatter = ltsv_formatter
+logger.formatter # => #<Proc:0x00007fa3048b8e00@/path/to/file:8>
+logger.info("MyApp") { "test" }
+
+# => time:2019-05-09 22:13:56 +0900 level:INFO  progname:MyApp  message:test
+#@end
 
 --- formatter=(formatter)
 
@@ -829,6 +876,15 @@ include Logger::Severity
 
 @param format 日時のフォーマット文字列。[[m:Time#strftime]] で使用するフォーマット文字列と
               同じものを使用できます。
+
+#@samplecode 例
+require 'logger'
+
+formatter = Logger::Formatter.new
+formatter.datetime_format # => nil
+formatter.datetime_format = '%Y-%m-%d %H:%M:%S' # => "%Y-%m-%d %H:%M:%S"
+formatter.datetime_format # => "%Y-%m-%d %H:%M:%S"
+#@end
 
 @see [[m:Time#strftime]]
 

@@ -243,8 +243,8 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
 
 YAML Specification
 
- * [[url:http://www.yaml.org/spec/]]
- * [[url:http://www.yaml.org/type/]]
+ * [[url:https://yaml.org/spec/]]
+ * [[url:https://yaml.org/type/]]
 
 YAML4R
 

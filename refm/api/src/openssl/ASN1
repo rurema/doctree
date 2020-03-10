@@ -114,7 +114,7 @@ DER形式の文字列をデコードしてRubyのオブジェクトに変換す�
 
 === 参照
 
- * ITU-T Rec. X.680-699 [[url:http://www.itu.int/itu-t/recommendations/index.aspx?ser=X]]
+ * ITU-T Rec. X.680-699 [[url:https://www.itu.int/itu-t/recommendations/index.aspx?ser=X]]
 
 #@#  * [RFC 3279] [[unknown:Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html]]
 #@#  * [RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html]]
@@ -171,7 +171,7 @@ DER 表現の文字列を解析し、そこにエンコードされている ASN
 
 @param der DER形式の文字列
 @raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
-@see [[m:OpenSSl::ASN1.#decode]]
+@see [[m:OpenSSL::ASN1.#decode]]
 
 --- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> nil
 DER形式の文字列を解析し、そこに含まれる ASN.1 の値
@@ -192,7 +192,7 @@ DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 
 @param der DER形式の文字列
 @raise OpenSSL::ASN1::ASN1Error 解析に失敗した場合に発生します
-@see [[m:OpenSSl::ASN1.#decode]]
+@see [[m:OpenSSL::ASN1.#decode]]
 
 --- Boolean(value) -> OpenSSL::ASN1::Boolean
 --- Boolean(value , tag , tagging , tag_class) -> OpenSSL::ASN1::Boolean

@@ -49,7 +49,7 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 例.
 
   # .irbrc
-  IRB::Inspector::INSPECTORS.def_inspector([:test]){ |v| v.to_s * 2 }
+  IRB::Inspector.def_inspector([:test]){ |v| v.to_s * 2 }
 
   $ irb --inspect test
   irb(main):001:0> :abc # => abcabc

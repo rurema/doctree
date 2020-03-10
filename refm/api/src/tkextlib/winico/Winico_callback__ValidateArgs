@@ -1,6 +1,0 @@
-#@since 1.8.2
-= class Tk::Winico::Winico_callback::ValidateArgs < TkUtil::CallbackSubst
-== Class Methods
---- ret_val(val)
-#@todo
-#@end

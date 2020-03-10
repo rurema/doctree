@@ -68,15 +68,13 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返しま�
 
 @param array バージョン情報を含む配列を指定します。
 
---- to_s -> String
-
-バージョン情報を文字列として返します。
 
 #@#--- to_yaml_properties -> [String]
 #@#
 #@# :nodoc:
 
 --- version -> String
+--- to_s -> String
 
 バージョン情報を文字列として返します。
 

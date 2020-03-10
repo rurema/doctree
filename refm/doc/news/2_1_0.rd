@@ -243,7 +243,7 @@
       * Gemfile or gem.deps.rb support including Gem.file.lock (experimental)
       * Improved, iterative resolver (compared to RubyGems 2.1 and earlier)
       * Support for a sharing a GEM_HOME across ruby platforms and versions
-      * [[lib:https://github.com/rubygems/rubygems/tree/master/History.txt]]
+      * [[url:https://github.com/rubygems/rubygems/tree/master/History.txt]]
 
   * [[lib:set]]
     * 追加: [[m:Set#intersect?]]
