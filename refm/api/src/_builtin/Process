@@ -11,7 +11,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対
 
 == Singleton Methods
 
---- abort(message = "")   -> ()
+--- abort            -> ()
+--- abort(message)   -> ()
 
 関数 [[m:Kernel.#abort]] と同じです。
 

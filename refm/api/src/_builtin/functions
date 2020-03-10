@@ -71,47 +71,62 @@ exit! は exit とは違って、例外処理などは一切行ないませ
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#abort]],[[m:Kernel.#at_exit]],[[m:Kernel.#fork]]
 
---- abort(message = $!.message) -> ()
+--- abort            -> ()
+--- abort(message)   -> ()
 
 Ruby プログラムをエラーメッセージ付きで終了します。終了ステータスは 1 固定です。
 
 このメソッドと [[m:Kernel.#exit]] との違いは、プログラムの終了ステー
 タスが 1 (正確にはCレベルの定数 EXIT_FAILURE の値)固定であることと、
-引数を省略した呼び出し時に [[m:$!]] が nil でなければその例外のメッセー
-ジを標準エラー出力 [[m:$stderr]] に出力することです。
+エラーメッセージを標準エラー出力 [[m:$stderr]] に出力することです。
 
 引数 message を指定すると SystemExit クラスの
 [[m:Exception#message]] に message を設定し
 て標準エラー出力に出力します。
 
+#@since 2.7.0
+引数を省略した呼び出し時に [[m:$!]] が nil でなければその例外のメッセージと
+バックトレースを表示します。
+#@else
+#@# 1.9.0 から 2.6 では表示されない。
+#@# https://bugs.ruby-lang.org/issues/16424
+#@end
+
 @param message エラーメッセージ文字列です。
 
-  puts 'start'
-  begin
-    puts 'start1...'
-    abort "error1"
-  rescue SystemExit => err
-    puts "end1 with #{err.inspect}"
-  end
-  
-  begin
-    puts 'start2...'
-    $! = RuntimeError.new
-    abort
-  ensure
-    puts 'end2...'
-  end
-  puts 'end' #実行されない
-  
-  #=> start
-  #   start1...
-  #   end1 with #<SystemExit: error1>
-  #   start2...
-  #   end2...
-  #終了ステータス:1
-  #(標準エラー出力)
-  #=> error1
-  #   ..:12: RuntimeError (RuntimeError)
+#@samplecode
+puts 'start'
+begin
+  puts 'start1...'
+  abort "error1"
+rescue SystemExit => err
+  puts "end1 with #{err.inspect}"
+end
+
+begin
+  puts 'start2...'
+  raise RuntimeError.new
+rescue
+  abort
+ensure
+  puts 'end2...'
+end
+puts 'end' #実行されない
+
+#(標準出力)
+#=> start
+#   start1...
+#   end1 with #<SystemExit: error1>
+#   start2...
+#   end2...
+#終了ステータス:1
+#(標準エラー出力)
+#=> error1
+#@since 2.7.0
+#   Traceback (most recent call last):
+#   sample.rb:11:in `<main>': RuntimeError (RuntimeError)
+#@end
+#@end
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#exit!]]
 
