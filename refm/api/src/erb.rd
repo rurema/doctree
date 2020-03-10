@@ -344,6 +344,14 @@ erb.filename # =>"example.rhtml"
 
 filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易になります。filename を設定していない場合は、エラー発生箇所は「 (ERB) 」という出力となります。
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+erb = ERB.new(File.read(filename))
+erb.filename # => nil
+erb.filename = filename
+erb.filename # =>"example.rhtml"
+#@end
 
 = module ERB::Util
 
