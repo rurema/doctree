@@ -1865,6 +1865,17 @@ key ヘッダフィールドを削除します。
         key ヘッダフィールドが存在しなかった場合には
         nil を返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req.content_length = 10
+req.content_length  # => 10
+req.delete("Content-Length")
+req.content_length  # => nil
+#@end
+
 --- each {|name, val| .... } -> ()
 --- each_header {|name, val| .... } -> ()
 
