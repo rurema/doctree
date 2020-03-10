@@ -248,7 +248,7 @@ require 'erb'
 filename = 'example.rhtml'
 erb = ERB.new(File.read(filename))
 erb.filename # => nil
-erb.filename = filename # => "example.rhtml"
+erb.filename = filename
 erb.filename # =>"example.rhtml"
 #@end
 
