@@ -75,7 +75,7 @@ klass のインスタンスに変換されてから、OptionParser#on メソッ�
 
   require "optparse"
   require "time"
-  
+
   OptionParser.accept(Time) do |s,|
     begin
       Time.parse(s) if s
@@ -539,17 +539,17 @@ opts.to_a # => ["Usage: test [options]", "    -i, --init\n", "    -u, --update\n
        require 'optparse'
        opts = OptionParser.new
        opts.banner = "Usage: example.rb [options]"
-       
+
        opts.separator ""
        opts.separator "Specific options:"
-       
+
        opts.on("-r", "--require LIBRARY") do |lib|
                options.library << lib
        end
 
        opts.separator ""
        opts.separator "Common options:"
-       
+
        opts.on_tail("-h", "--help", "Show this message") do
          puts opts
          exit
@@ -1123,8 +1123,8 @@ config = {}
 opts = OptionParser.new
 opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
 
-ENV['PROGRAM_ARGS'] = %q{--require lib1 'remain data'}
-p opts.environment('PROGRAM_ARGS') # => ["remain data"]
+ENV['REQUIRE_OPT'] = %q{--require lib1 'remain data'}
+p opts.environment('REQUIRE_OPT') # => ["remain data"]
 p config                           # => {:lib=>"lib1"}
 #@end
 --- default_argv    -> [String]
