@@ -47,6 +47,8 @@ $ gem install bitclust-core bitclust-dev refe2
 
 ## bitclust サブコマンド
 
+```--capi``` オプションを付けた場合，C API（refm/capi 以下）を対象とします。付けない場合，ライブラリ（refm/api/src 以下）と言語仕様など（refm/doc 以下）を対象とします。
+
 $HOME/.bitclust/config がある場合は、```-d```オプションは省略可能です。
 
 ### ユーザー向け
