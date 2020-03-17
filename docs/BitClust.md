@@ -164,9 +164,9 @@ bitclust htmlfile --capi ../doctree/refm/capi/src/array.c.rd --target=rb_ary_new
 例
 
 ```
-bitclust -d ./db property list
-bitclust -d ./db property get encoding
-bitclust -d ./db property set encoding euc-jp
+bitclust -d ./db property --list
+bitclust -d ./db property --get encoding
+bitclust -d ./db property --set encoding euc-jp
 ```
 
 <dt>bitclust preproc</dt>
