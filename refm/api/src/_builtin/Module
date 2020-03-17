@@ -320,7 +320,7 @@ case ではクラス、モジュールの所属関係をチェックすること
 
 @param const_name [[c:String]] または [[c:Symbol]] で指定します。
        なお、const_name には、"::" 演算子を含めることはできません。
-       つまり、self のモジュール直下に定義された定数しか指定できません。
+       つまり、self の直下に定義された定数しか指定できません。
 
 @param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
