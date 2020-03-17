@@ -5,10 +5,10 @@ gzip ファイルの読み書きもサポートします。
 
 === 参考
 
-: 標準添付ライブラリ紹介 【第 11 回】zlib 
+: 標準添付ライブラリ紹介 【第 11 回】zlib
   [[url:https://magazine.rubyist.net/articles/0018/0018-BundledLibraries.html]]
 
-@see [[url:http://zlib.net/]]
+@see [[url:https://zlib.net/]]
 
 #@include(zlib/Zlib)
 #@include(zlib/Error)

@@ -502,7 +502,7 @@ ARGFが開いているファイルのファイルポインタを指定位置に�
 ARGVに指定されたファイルを先頭のファイルからlengthバイト読み込み、
 その文字列をstrに出力します。読み込んだ文字列を返します。
 
-@param length 読み込むバイト数を指定します nilの場合はARGVのすべてのファ
+@param length 読み込むバイト数を指定します。nilの場合はARGVのすべてのファ
               イルを読み込みます。
 
 @param str 出力先の文字列。内容は上書きされます。
@@ -553,12 +553,12 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 
 @see [[m:Kernel.#readline]], [[m:ARGF.class#gets]]
 
---- readlines(rs = $/) { |line| ... }   -> self
---- readlines(limit) { |line| ... }     -> self
---- readlines(rs, limit) { |line| ... } -> self
---- to_a(rs = $/) { |line| ... }        -> self
---- to_a(limit) { |line| ... }          -> self
---- to_a(rs, limit) { |line| ... }      -> self
+--- readlines(rs = $/)   -> Array
+--- readlines(limit)     -> Array
+--- readlines(rs, limit) -> Array
+--- to_a(rs = $/)        -> Array
+--- to_a(limit)          -> Array
+--- to_a(rs, limit)      -> Array
 
 ARGFの各行を配列に読み込んで返します。rsがnilの場合は要素に各ファイルを
 すべて読み込んだ配列を返します。
@@ -848,15 +848,14 @@ ch を返します。
 
 @param arg 出力するオブジェクトを任意個指定します。
 
---- read_nonblock(maxlen)              -> String
---- read_nonblock(maxlen, outbuf)      -> String
 #@since 2.3.0
---- read_nonblock(maxlen, outbuf, exception: true)      -> String
+--- read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
+#@else
+--- read_nonblock(maxlen, outbuf = nil) -> String
 #@end
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
-第二の形式では読み込んだデータを outbuf に破壊的に格納してそれを返します。
 詳しくは [[m:IO#read_nonblock]] を参照してください。
 
 [[m:ARGF.class#read]] などとは違って複数ファイルを同時に読み込むことはありません。

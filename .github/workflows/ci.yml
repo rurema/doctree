@@ -1,0 +1,56 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  rake:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        # docs.ruby-lang.org uses snap ruby
+        # https://snapcraft.io/ruby
+        ruby-version: 2.7
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: bundle exec rake
+    - name: Create tarballs
+      run: |
+        set -ex
+        cd /tmp/html
+        for d in *.*; do
+          tar acf $d.tar.xz $d
+        done
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.4.0
+        path: /tmp/html/2.4.0.tar.xz
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.5.0
+        path: /tmp/html/2.5.0.tar.xz
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.6.0
+        path: /tmp/html/2.6.0.tar.xz
+    - uses: actions/upload-artifact@master
+      with:
+        name: statichtml-2.7.0
+        path: /tmp/html/2.7.0.tar.xz
+
+  misspell:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install misspell
+      run: 'go get github.com/client9/misspell/...'
+    - name: Run misspell
+      run: |
+        $HOME/go/bin/misspell -error -i addopt $(git ls-files | grep -vF "refm/doc/news/1.8.4.rd")

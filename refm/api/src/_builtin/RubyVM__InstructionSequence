@@ -11,7 +11,7 @@ RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを�
 VM の命令シーケンスの一覧はRuby のソースコード中の insns.def から参照で
 きます。
 
- * [[url:https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/insns.def?view=markup]]
+ * [[url:https://github.com/ruby/ruby/blob/master/insns.def]]
 
 #@# The instruction sequence results will almost certainly change as Ruby
 #@# changes, so example output in this documentation may be different from what
@@ -71,6 +71,24 @@ VM の命令シーケンスの一覧はRuby のソースコード中の insns.de
 
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
 します。
+
+#@samplecode 例
+require "pp"
+pp RubyVM::InstructionSequence.compile_option
+
+# => {:inline_const_cache=>true,
+# :peephole_optimization=>true,
+# :tailcall_optimization=>false,
+# :specialized_instruction=>true,
+# :operands_unification=>true,
+# :instructions_unification=>false,
+# :stack_caching=>false,
+# :trace_instruction=>true,
+# :frozen_string_literal=>false,
+# :debug_frozen_string_literal=>false,
+# :coverage_enabled=>true,
+# :debug_level=>0}
+#@end
 
 @see [[m:RubyVM::InstructionSequence.compile_option=]]
 
@@ -208,11 +226,23 @@ options で指定します。
 
 他者により提供されたバイナリデータはロードすべきではありません。自分が変換したバイナリデータを使うべきです。
 
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+binary = iseq.to_binary
+RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
+#@end
+
 @see [[m:RubyVM::InstructionSequence#to_binary]]
 
 --- load_from_binary_extra_data(binary) -> String
 
 バイナリフォーマットの文字列から埋め込まれたextra_dataを取り出します。
+
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+binary = iseq.to_binary("extra_data")
+RubyVM::InstructionSequence.load_from_binary_extra_data(binary) # => extra_data
+#@end
 
 @see [[m:RubyVM::InstructionSequence#to_binary]]
 #@end
@@ -523,6 +553,41 @@ self が表す命令シーケンスの 1 行目の行番号を返します。
 [[m:RubyVM::InstructionSequence.load_from_binary_extra_data]] メソッドでこの文字列にアクセス出来ます。
 
 注意: 変換後のバイナリデータはポータブルではありません。 to_binary で得たバイナリデータは他のマシンに移動できません。他のバージョンや他のアーキテクチャのRubyで作られたバイナリデータは使用できません。
+
+#@samplecode 例
+iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+iseq.to_binary("extra_data")
+
+# ※表示の都合上改行しているが実際は改行はない
+# => "YARB\x02\x00\x00\x00\x03\x00\x00\x00\x16\x02\x00\x00\n\x00\x00\x00\x01
+# \x00\x00\x00\x03\x00\x00\x00\x05\x00\x00\x00\x84\x01\x00\x00\x88\x01\x00
+# \x00\x02\x02\x00\x00x86_64-darwin15\x00*\x00\x00\x00\x00\x00\x00\x00\x01
+# \x00\x00\x00\x00\x00\x00\x00\\\x00\x00\x00\x00\x00\x00\x00\x0F\x00\x00\x00
+# \x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00=\x00\x00\x00\x00\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1F
+# \x00\x00\x00\x00\x00\x00\x00Y\x00\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00
+# \x00\x00\x00\x003\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00
+# \x00\x01\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x10
+# \x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\f\x00\x00\x00<\x00\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00
+# \x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00
+# \x00\x00\x9C\x00\x00\x00\x00\x00\x00\x00\xA4\x00\x00\x00\x00\x00\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xAC\x00\x00\x00
+# \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
+# \x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00
+# \x01\x00\x00\x00\x02\x00\x00\x00\xBC\x00\x00\x00\x00\x00\x00\x00\x00\x00
+# \x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x00
+# \xF1\x7F\x00\x00\b\x00\x00\x00\x00\x00\x00\x00E\x7F\x00\x00\x02\x00\x00\x00
+# \x00\x00\x00\x00\n\x00\x00\x00\x00\x00\x00\x00<compiled>\xF5\x7F\x00\x00
+# \x05\x00\x00\x00\x00\x00\x00\x00E\x7F\x00\x00\x02\x00\x00\x00\x00\x00\x00
+# \x00\x03\x00\x00\x00\x00\x00\x00\x00numE\x7F\x00\x00\x02\x00\x00\x00\x00
+# \x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00+\xA0\x01\x00\x00\xAC\x01\x00
+# \x00\xCA\x01\x00\x00\xD6\x01\x00\x00\xED\x01\x00\x00extra_data"
+#@end
 
 @see [[m:RubyVM::InstructionSequence.load_from_binary]]
 @see [[m:RubyVM::InstructionSequence.load_from_binary_extra_data]]

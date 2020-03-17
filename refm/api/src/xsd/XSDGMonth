@@ -1,9 +1,0 @@
-#@since 1.8.1
-= class XSD::XSDGMonth < XSD::XSDAnySimpleType
-include XSD::XSDDateTimeImpl
-
-== class methods
---- new(value = nil)
-#@todo
-
-#@end

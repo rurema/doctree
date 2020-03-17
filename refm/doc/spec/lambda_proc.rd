@@ -2,9 +2,9 @@
 
  * [[ref:def]]
  * [[ref:should_use_next]]
- * [[ref:orphan]]
  * [[ref:block]]
  * [[ref:lambda_proc]]
+ * [[ref:orphan]]
 
 ===[a:def] 手続きオブジェクトとは
 

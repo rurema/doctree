@@ -8,12 +8,12 @@ Telnet プロトコルをクライアント側で扱うライブラリです。
 
   * rubygems.org: [[url:https://rubygems.org/gems/net-telnet]]
   * プロジェクトページ: [[url:https://github.com/ruby/net-telnet]]
-  * リファレンス: [[url:http://www.rubydoc.info/gems/net-telnet]]
+  * リファレンス: [[url:https://www.rubydoc.info/gems/net-telnet]]
 
 #@else
 === 参考文献
 Telnet に関する RFC は数多く存在します。
-[[RFC:854]], [[RFC:855]], [[RFC:856]], [[RFC:857]], [[RFC:858]], 
+[[RFC:854]], [[RFC:855]], [[RFC:856]], [[RFC:857]], [[RFC:858]],
 [[RFC:859]], [[RFC:860]], [[RFC:861]], でプロトコルの
 基本が定義されています。
 
