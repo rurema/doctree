@@ -1,9 +1,0 @@
-#@since 1.8.2
-
-= class Tk::Vu::NamedPieSlice < PieSlice
-
-== Class Methods
---- new(parent, name, *args)
-#@todo
-
-#@end

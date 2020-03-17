@@ -49,7 +49,7 @@ Ruby のフレームを表すクラスです。
 
 === 参考
 
- * Ruby VM アドベントカレンダー #4 vm_backtrace.c: [[url:http://www.atdot.net/~ko1/diary/201212.html#d4]]
+ * Ruby VM アドベントカレンダー #4 vm_backtrace.c: [[url:https://www.atdot.net/~ko1/diary/201212.html#d4]]
 
 == Instance Methods
 
@@ -80,6 +80,24 @@ self が表すフレームの基本ラベルを返します。通常、
 [[m:Thread::Backtrace::Location#label]] から修飾を取り除いたもので構成
 されます。
 
+#@samplecode 例
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
+  end
+end
+
+Foo.new(0..2).locations.map do |call|
+  puts call.base_label
+end
+
+# => initialize
+# new
+# <main>
+#@end
+
 @see [[m:Thread::Backtrace::Location#label]]
 
 --- path -> String
@@ -97,6 +115,24 @@ self が表すフレームのファイル名を返します。
 
 self が表すフレームの絶対パスを返します。
 
+#@samplecode 例
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
+  end
+end
+
+Foo.new(0..2).locations.map do |call|
+  puts call.absolute_path
+end
+
+# => /path/to/foo.rb
+# /path/to/foo.rb
+# /path/to/foo.rb
+#@end
+
 @see [[m:Thread::Backtrace::Location#path]]
 
 --- to_s -> String
@@ -104,7 +140,43 @@ self が表すフレームの絶対パスを返します。
 self が表すフレームを [[m:Kernel.#caller]] と同じ表現にした文字列を返し
 ます。
 
+#@samplecode 例
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
+  end
+end
+
+Foo.new(0..2).locations.map do |call|
+  puts call.to_s
+end
+
+# => path/to/foo.rb:5:in `initialize'
+# path/to/foo.rb:9:in `new'
+# path/to/foo.rb:9:in `<main>'
+#@end
+
 --- inspect -> String
 
 [[m:Thread::Backtrace::Location#to_s]] の結果を人間が読みやすいような文
 字列に変換したオブジェクトを返します。
+
+#@samplecode 例
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
+  end
+end
+
+Foo.new(0..2).locations.map do |call|
+  puts call.inspect
+end
+
+# => "path/to/foo.rb:5:in `initialize'"
+# "path/to/foo.rb:9:in `new'"
+# "path/to/foo.rb:9:in `<main>'"
+#@end

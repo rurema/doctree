@@ -17,6 +17,18 @@ HTTP 例外クラスです。
 
 例外の原因となったレスポンスオブジェクトを返します。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/invalid.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+begin
+  response.value
+rescue => e
+  e.response # => #<Net::HTTPNotFound 404 Not Found readbody=true>
+end
+#@end
+
 = class Net::HTTPError < Net::ProtocolError
 include Net::HTTPExceptions
 
@@ -33,12 +45,20 @@ HTTP ステータスコード 3xx を受け取ったという例外です。
 るアクションが必要になります。
 
 = class Net::HTTPServerException < Net::ProtoServerError
+#@since 2.6.0
+alias Net::HTTPClientException
+#@end
 include Net::HTTPExceptions
 
 HTTP ステータスコード 4xx を受け取ったという例外です。
 
 クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
 れた(認証が必要、リソースが存在しないなどで)ことを示します。
+
+#@since 2.6.0
+[[c:Net::HTTPServerException]] は deprecated です。
+[[c:Net::HTTPClientException]] を使用してください。
+#@end
 
 = class Net::HTTPFatalError < Net::ProtoFatalError
 include Net::HTTPExceptions

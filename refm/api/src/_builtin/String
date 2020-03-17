@@ -3,7 +3,7 @@
 include Comparable
 
 文字列のクラスです。
-NUL 文字を含む任意のバイト列を扱うことができます。
+ヌル文字を含む任意のバイト列を扱うことができます。
 文字列の長さにはメモリ容量以外の制限はありません。
 
 文字列は通常、文字列リテラルを使って生成します。
@@ -1122,6 +1122,8 @@ salt には、以下の様になるべくランダムな文字列を選ぶべき
 
 注意:
 
+  * Ruby 2.6 から非推奨になったため、引き続き必要な場合は
+    string-crypt gem の使用を検討してください。
   * crypt の処理は [[man:crypt(3)]] の実装に依存しています。
     従って、crypt で処理される内容の詳細や salt の与え方については、
     利用環境の [[man:crypt(3)]] 等を見て確認してください。
@@ -1172,6 +1174,8 @@ p "123456789".delete("2378")         #=> "14569"
 p "123456789".delete("2-8", "^4-6")  #=> "14569"
 #@end
 
+@see [[m:String#delete!]]
+
 --- delete!(*strs) -> self | nil
 
 self から strs に含まれる文字を破壊的に取り除きます。
@@ -1205,6 +1209,8 @@ str = "abc"
 p str.delete!("2378")         #=> "nil"
 p str                         #=> "abc"
 #@end
+
+@see [[m:String#delete]]
 
 #@since 2.4.0
 --- downcase(*options) -> String
@@ -1705,7 +1711,7 @@ p "".hex      # => 0
 "hello".include? ?h     #=> true
 #@end
 
---- index(pattern, pos = 0) -> Integer
+--- index(pattern, pos = 0) -> Integer | nil
 
 文字列のインデックス pos から右に向かって pattern を検索し、
 最初に見つかった部分文字列の左端のインデックスを返します。
@@ -1753,7 +1759,7 @@ p str   # => "foobarbaz"
 なお、このメソッドの逆にシンボルに対応する文字列を得るには
 [[m:Symbol#to_s]] または [[m:Symbol#id2name]] を使います。
 
-シンボル文字列にはナルキャラクタ("\0")、空の文字列の使用も可能です。
+シンボル文字列にはヌルキャラクタ("\0")、空の文字列の使用も可能です。
 
 #@samplecode 例
 p "foo".intern                 # => :foo
@@ -2112,10 +2118,17 @@ string.slice!("r")      #=> "r"
 string                  #=> "thing"
 #@end
 
---- split(sep = $;, limit = 0) -> [String] | [[String]]
+--- split(sep = $;, limit = 0) -> [String]
+#@since 2.6.0
+--- split(sep = $;, limit = 0) {|s| ... } -> self
+#@end
 
 第 1 引数 sep で指定されたセパレータによって文字列を limit 個まで分割し、
 結果を文字列の配列で返します。
+#@since 2.6.0
+ブロックを指定すると、配列を返す代わりに分割した文字列で
+ブロックを呼び出します。
+#@end
 
 第 1 引数 sep は以下のいずれかです。
 
@@ -2147,6 +2160,10 @@ sep が正規表現で、かつその正規表現に括弧が含まれている�
 
 @param sep       文字列を分割するときのセパレータのパターン
 @param limit     分割する最大個数
+
+#@since 2.6.0
+@return ブロックを渡した場合は self、ブロックなしの場合は配列
+#@end
 
 #@samplecode 例
 p "   a \t  b \n  c".split(/\s+/) # => ["", "a", "b", "c"]
@@ -2733,8 +2750,6 @@ pattern の形式は [[man:tr(1)]] と同じです。つまり、
 文字列の先頭が `^' の場合は指定文字以外が置換の対象になります。
 
 replace に対しても `-' による範囲指定が可能です。
-例えば [[m:String#upcase]] は tr を使って
-"foo".tr('a-z', 'A-Z') と書けます。
 
 `-' は文字列の両端にない場合にだけ範囲指定の意味になります。
 `^' も文字列の先頭にあるときにだけ否定の効果を発揮します。
@@ -2765,15 +2780,6 @@ pattern の形式は [[man:tr(1)]] と同じです。
 指定文字以外が置換の対象になります。
 
 replace に対しても `-' による範囲指定が可能です。
-例えば、[[m:String#upcase]] を tr! で書くと、
-
-#@samplecode
-str = "foo"
-p str.tr!('a-z', 'A-Z') #=> "FOO"
-p str                   #=> "FOO"
-#@end
-
-となります。
 
 `-' は文字列の両端にない場合にだけ範囲指定の意味になります。
 `^' も文字列の先頭にあるときにだけ否定の効果を発揮します。
@@ -3671,7 +3677,7 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 文字列の書記素クラスタに対して繰り返します。
 
 [[m:String#each_char]] と違って、
-Unicode Standard Annex #29 ([[url:http://unicode.org/reports/tr29/]])
+Unicode Standard Annex #29 ([[url:https://unicode.org/reports/tr29/]])
 で定義された書記素クラスタに対して繰り返します。
 
 #@samplecode 例

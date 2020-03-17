@@ -1,4 +1,3 @@
-#@since 1.8.1
 
 BigDecimalを使った数学的な機能を提供します。
 
@@ -65,7 +64,7 @@ x の平方根を prec で指定した精度で計算します。
 
   require "bigdecimal/math"
 
-  puts BigMath::sqrt(BigDecimal.new('2'), 10) #=> 0.14142135623730950488016883515E1
+  puts BigMath::sqrt(BigDecimal('2'), 10) #=> 0.14142135623730950488016883515E1
 
 #@else
 
@@ -73,7 +72,7 @@ x の平方根を prec で指定した精度で計算します。
   require "bigdecimal/math"
 
   include BigMath
-  puts sqrt(BigDecimal.new('2'), 10) #=> 0.14142135623730950488016883515E1
+  puts sqrt(BigDecimal('2'), 10) #=> 0.14142135623730950488016883515E1
 
 #@end
 
@@ -94,7 +93,7 @@ x の正弦関数を prec で指定した精度で計算します。単位はラ
 
   require "bigdecimal/math"
 
-  puts BigMath::sin(BigDecimal.new('0.5'), 10) #=> 0.479425538604203000273287935689073955184741E0
+  puts BigMath::sin(BigDecimal('0.5'), 10) #=> 0.479425538604203000273287935689073955184741E0
 
 #@else
 
@@ -102,7 +101,7 @@ x の正弦関数を prec で指定した精度で計算します。単位はラ
   require "bigdecimal/math"
 
   include BigMath
-  puts sin(BigDecimal.new('0.5'), 10) #=> 0.479425538604203000273287935689073955184741E0
+  puts sin(BigDecimal('0.5'), 10) #=> 0.479425538604203000273287935689073955184741E0
 
 #@end
 
@@ -123,7 +122,7 @@ x の余弦関数を prec で指定した精度で計算します。単位はラ
 
   require "bigdecimal/math"
 
-  puts BigMath::cos(BigDecimal.new('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923E0
+  puts BigMath::cos(BigDecimal('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923E0
 
 #@else
 
@@ -131,7 +130,7 @@ x の余弦関数を prec で指定した精度で計算します。単位はラ
   require "bigdecimal/math"
 
   include BigMath
-  puts cos(BigDecimal.new('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923E0
+  puts cos(BigDecimal('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923E0
 
 #@end
 
@@ -154,7 +153,7 @@ x に無限大や NaN を指定した場合には NaN を返します。
 
   require "bigdecimal/math"
 
-  puts BigMath::atan(BigDecimal.new('0.5'), 10) #=> 0.463647609000806116214256237466868871528608E0
+  puts BigMath::atan(BigDecimal('0.5'), 10) #=> 0.463647609000806116214256237466868871528608E0
 
 #@else
 
@@ -162,7 +161,7 @@ x に無限大や NaN を指定した場合には NaN を返します。
   require "bigdecimal/math"
 
   include BigMath
-  puts atan(BigDecimal.new('0.5'), 10) #=> 0.463647609000806116214256237466868871528608E0
+  puts atan(BigDecimal('0.5'), 10) #=> 0.463647609000806116214256237466868871528608E0
 
 #@end
 
@@ -223,4 +222,3 @@ x の絶対値を 0.9999 のような 1 に近すぎる値にすると計算結�
 
 #@end
 
-#@end

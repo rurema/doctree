@@ -148,7 +148,11 @@ ERB は入力した文字列と同じエンコーディングの文字列を返�
 
 == Class Methods
 
+#@since 2.6.0
+--- new(str, safe_level=NOT_GIVEN, trim_mode=NOT_GIVEN, eoutvar=NOT_GIVEN, trim_mode: nil, eoutvar: '_erbout') -> ERB
+#@else
 --- new(str, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
+#@end
 
 eRubyスクリプト から ERB オブジェクトを生成して返します。
 
@@ -161,6 +165,63 @@ eRubyスクリプト から ERB オブジェクトを生成して返します。
 @param eoutvar eRubyスクリプトの中で出力をためていく変数の名前を表す文
                字列。eRuby スクリプトの中でさらに ERB を使うときに変更
                します。通常は指定する必要はありません。
+
+#@since 2.6.0
+Ruby 2.6.0 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
+Ruby 2.5 が EOL になったときに削除される予定です。
+trim_mode と eoutvar の指定はキーワード引数に移行してください。
+#@end
+
+#@samplecode 例
+require "erb"
+
+# build data class
+class Listings
+  PRODUCT = { :name => "Chicken Fried Steak",
+              :desc => "A well messages pattie, breaded and fried.",
+              :cost => 9.95 }
+
+  attr_reader :product, :price
+
+  def initialize( product = "", price = "" )
+    @product = product
+    @price = price
+  end
+
+  def build
+    b = binding
+    # create and run templates, filling member data variables
+#@since 2.6.0
+    ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), eoutvar: "@product").result b
+#@else
+    ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), 0, "", "@product").result b
+#@end
+      <%= PRODUCT[:name] %>
+      <%= PRODUCT[:desc] %>
+    END_PRODUCT
+#@since 2.6.0
+    ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), eoutvar: "@price").result b
+#@else
+    ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), 0, "", "@price").result b
+#@end
+      <%= PRODUCT[:name] %> -- <%= PRODUCT[:cost] %>
+      <%= PRODUCT[:desc] %>
+    END_PRICE
+  end
+end
+
+# setup template data
+listings = Listings.new
+listings.build
+
+puts listings.product + "\n" + listings.price
+
+# Chicken Fried Steak
+# A well messages pattie, breaded and fried.
+# 
+# Chicken Fried Steak -- 9.95
+# A well messages pattie, breaded and fried.
+#@end
 
 --- version -> String
 
@@ -179,6 +240,19 @@ ERB を b の binding で実行し、結果を標準出力へ印字します。
 ERB を b の binding で実行し、結果の文字列を返します。
 
 @param b eRubyスクリプトが実行されるときのbinding
+
+#@since 2.5.0
+@see [[m:ERB#result_with_hash]]
+
+--- result_with_hash(hash) -> String
+
+ERB をハッシュオブジェクトで指定されたローカル変数を持つ
+新しいトップレベルバインディングで実行し、結果の文字列を返します。
+
+@param hash ローカル変数名をキーにしたハッシュ
+
+@see [[m:ERB#result]]
+#@end
 
 --- src -> String
 
@@ -219,6 +293,25 @@ fname はスクリプトを定義する際のファイル名です。主にエ�
 
 @param methodname メソッド名
 
+#@samplecode 例
+require 'erb'
+
+class MyClass_
+  def initialize(arg1, arg2)
+    @arg1 = arg1;  @arg2 = arg2
+  end
+end
+filename = 'example.rhtml'  # @arg1 と @arg2 が使われている example.rhtml
+
+erb = ERB.new(File.read(filename))
+erb.filename = filename
+MyClass = erb.def_class(MyClass_, 'render()')
+print MyClass.new('foo', 123).render()
+
+# => test1foo
+#    test2123
+#@end
+
 --- set_eoutvar(compiler, eoutvar = '_erbout') -> Array
 
 ERBの中でeRubyスクリプトの出力をためていく変数を設定します。
@@ -231,11 +324,19 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 @param eoutvar eRubyスクリプトの中で出力をためていく変数
 
-#@since 1.8.1
 
 --- filename -> String
 
 エラーメッセージを表示する際のファイル名を取得します。
+
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+erb = ERB.new(File.read(filename))
+erb.filename # => nil
+erb.filename = filename
+erb.filename # =>"example.rhtml"
+#@end
 
 --- filename= -> String
 
@@ -243,6 +344,13 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 
 filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易になります。filename を設定していない場合は、エラー発生箇所は「 (ERB) 」という出力となります。
 
+#@samplecode 例
+require 'erb'
+filename = 'example.rhtml'
+erb = ERB.new(File.read(filename))
+erb.filename # => nil
+erb.filename = filename
+erb.filename # =>"example.rhtml"
 #@end
 
 = module ERB::Util
@@ -261,6 +369,14 @@ eRubyスクリプトのためのユーティリティを提供するモジュー
 
 @param s HTMLエスケープを行う文字列
 
+#@samplecode 例
+require "erb"
+include ERB::Util
+
+puts html_escape("is a > 0 & a < 10?")
+# is a &gt; 0 &amp; a &lt; 10?
+#@end
+
 --- url_encode(s)  -> String
 --- u(s) -> String
 
@@ -269,6 +385,14 @@ eRubyスクリプトのためのユーティリティを提供するモジュー
 文字列 s 中に含まれる 2バイト文字や半角スペースについて URL エンコードを行った文字列を返します([[m:CGI.escape]]とほぼ同じです)。
 
 @param s URLエンコードを行う文字列
+
+#@samplecode 例
+require "erb"
+include ERB::Util
+
+puts url_encode("Programming Ruby:  The Pragmatic Programmer's Guide")
+# Programming%20Ruby%3A%20%20The%20Pragmatic%20Programmer%27s%20Guide
+#@end
 
 = module ERB::DefMethod
 

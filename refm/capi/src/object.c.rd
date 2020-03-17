@@ -170,6 +170,16 @@ klass のインスタンスを作成する。
 
 [[m:Object#dup]] の実体です。
 
+Cのソースコード上でオブジェクトの複製を作成して返します。
+
+例：
+   VALUE 
+   return_copy(VALUE arg) 
+   {
+       VALUE copy = rb_obj_dup(arg); // 引数で受け取ったオブジェクトを複製し、copyに代入。
+       return copy;
+   }
+
 --- static VALUE rb_obj_equal(VALUE obj1, VALUE obj2)
 
 obj1 と obj2 が同一のオブジェクトなら真。
