@@ -39,7 +39,7 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 require "json"
 
 json_state = JSON::State.new(indent: "\t")
-json_state.class     # JSON::Ext::Generator::State
+json_state.class  # => JSON::Ext::Generator::State
 json_state.indent # => "\t"
 #@end
 
@@ -173,4 +173,3 @@ JSON 形式の文字列中で JavaScript のオブジェクトを表す部分に
 --- to_h -> Hash
 
 自身をハッシュに変換します。
-
