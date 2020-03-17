@@ -42,7 +42,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
   latest = File.join(HTML_DIRECTORY_BASE, "latest")
   File.unlink(latest) rescue nil
-  File.symlink(version, latest)
+  File.symlink(version, latest) rescue puts "Can not symlink to latest"
 end
 
 task :default => [:generate, :check_format]
