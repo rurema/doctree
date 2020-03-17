@@ -404,23 +404,23 @@ dest がディレクトリの場合、src へのハードリンク dest/src を�
 @raise Errno::ENOTDIR src が複数で dest がディレクトリでない場合に発生します。
 
 #@samplecode "mylib" ライブラリを site_ruby にインストールする例
-  require 'fileutils'
-  FileUtils.rm_r site_ruby + '/mylib', :force => true
-  FileUtils.cp_lr 'lib/', site_ruby + '/mylib'
+require 'fileutils'
+FileUtils.rm_r site_ruby + '/mylib', :force => true
+FileUtils.cp_lr 'lib/', site_ruby + '/mylib'
 #@end
 
 #@samplecode 様々なファイルを対象ディレクトリにリンクする例
-  require 'fileutils'
-  FileUtils.cp_lr %w(mail.rb field.rb debug/), site_ruby + '/tmail'
-  FileUtils.cp_lr Dir.glob('*.rb'), '/home/aamine/lib/ruby', :noop => true, :verbose => true
+require 'fileutils'
+FileUtils.cp_lr %w(mail.rb field.rb debug/), site_ruby + '/tmail'
+FileUtils.cp_lr Dir.glob('*.rb'), '/home/aamine/lib/ruby', :noop => true, :verbose => true
 #@end
 
 #@samplecode 内容をリンクする例
-  require 'fileutils'
-  # ディレクトリそのものではなく、ディレクトリの内容をリンクしたい場合は、
-  # 以下のようになります。(たとえば src/x -> dest/x, src/y -> dest/y)
-  FileUtils.cp_lr 'src/.', 'dest'
-  # FileUtils.cp_lr('src', 'dest') は dest ディレクトリが存在すれば dest/src を作成しますが、この例はしません。
+require 'fileutils'
+# ディレクトリそのものではなく、ディレクトリの内容をリンクしたい場合は、
+# 以下のようになります。(たとえば src/x -> dest/x, src/y -> dest/y)
+FileUtils.cp_lr 'src/.', 'dest'
+# FileUtils.cp_lr('src', 'dest') は dest ディレクトリが存在すれば dest/src を作成しますが、この例はしません。
 #@end
 #@end
 --- ln_s(src, dest, options = {})    -> ()
