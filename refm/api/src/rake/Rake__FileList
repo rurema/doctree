@@ -112,6 +112,22 @@ end
 
 追加リストと除外リストを評価します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+IO.write("test.rb", "test")
+IO.write("test.java", "test")
+IO.write("test.js", "test")
+
+task default: :test_rake_app
+task :test_rake_app do
+  file_list  = FileList.new("*.rb")
+  file_list.include("*.java")
+  file_list.exclude("*.js")
+  file_list.resolve # => ["test.rb", "test.java"]
+end
+#@end
+
 --- sub(pattern, replace) -> Rake::FileList
 
 自身に含まれるファイルリストのそれぞれのエントリに対して [[m:String#sub]] を実行し、
