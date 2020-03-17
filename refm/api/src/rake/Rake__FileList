@@ -128,6 +128,20 @@ end
 自身に含まれるファイルリストのそれぞれのエントリに対して [[m:String#gsub]] を実行します。
 自身を破壊的に変更します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+IO.write("test1.rb", "test")
+IO.write("test2.rb", "test")
+
+task default: :test_rake_app
+task :test_rake_app do
+  file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
+  file_list.gsub!(/\.rb/, ".erb") # => ["test1.erb", "test2.erb", "test3.erb"]
+  file_list                       # => ["test1.erb", "test2.erb", "test3.erb"]
+end
+#@end
+
 --- pathmap(spec = nil) -> Rake::FileList
 
 各要素に [[m:String#pathmap]] を適用した新しい [[c:Rake::FileList]] を返します。
