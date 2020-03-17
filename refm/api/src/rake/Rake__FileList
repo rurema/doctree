@@ -134,8 +134,8 @@ IO.write("sample2", "line1\nline2\nline3\nline4\n")
 task default: :test_rake_app
 task :test_rake_app do
 
-file_list = FileList.new('sample*')
-  file_list.egrep(/line/) # => 6
+  file_list = FileList.new('sample*')
+  file_list.egrep(/line/) # => 7
 
   file_list.egrep(/.*/) do |filename, count, line|
     "filename = #{filename}, count = #{count}, line = #{line}"
