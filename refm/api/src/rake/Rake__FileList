@@ -302,6 +302,16 @@ end
 
 全ての要素をスペースで連結した文字列を返します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  file_list = FileList['a.c', 'b.c']
+  file_list.to_s # => "a.c b.c"
+end
+#@end
+
 --- excluded_from_list?(file_name) -> bool
 
 与えられたファイル名が除外される場合は、真を返します。
