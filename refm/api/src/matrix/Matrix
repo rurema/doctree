@@ -1326,7 +1326,7 @@ Matrix.empty.antisymmetric? # => true
 Matrix[[1, 2, 3], [4, 5, 6], [7, 8, 9]].antisymmetric? # => false
 # 対角要素が違う
 Matrix[[1, -2, 3], [2, 0, 6], [-3, -6, 0]].antisymmetric? # => false
-# 負号が違う
+# 符号が違う
 Matrix[[0, 2, -3], [2, 0, 6], [-3, 6, 0]].antisymmetric? # => false
 #@end
 

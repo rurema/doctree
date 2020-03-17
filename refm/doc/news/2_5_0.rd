@@ -132,7 +132,7 @@
     * [[m:Struct.new]] は :keyword_init というキーワード引数を受け取り、メンバーをキーワード引数で初期化できるようになりました。
       [[feature:11925]]
 
-  * Regexp/String: Unicodeのバージョンを9.0.0 から 10.0.0 に更新しました [[feature:13685]]
+  * [[c:Regexp]]/[[c:String]]: Unicodeのバージョンを 9.0.0 から 10.0.0 に更新しました。 [[feature:13685]]
 
   * [[c:Thread]]
     * [[m:Thread#name=]] で設定した名前が Windows 10 で見えるようになりました
@@ -167,24 +167,24 @@
       テストスイートのカバレッジをより厳密に評価することができます。
       [[m:Coverage.start]]に与えるオプションによって計測する対象を指定することができます。
 #@samplecode
-       Coverage.start(lines: true, branches: true, methods: true)
+Coverage.start(lines: true, branches: true, methods: true)
 #@end
     * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverage.result]]を使って結果を取得することができます。
 #@samplecode
-        Coverage.result
-        #=> { "/path/to/file.rb"=>
-        #     { :lines => [1, 2, 0, nil, ...],
-        #       :branches =>
-        #         { [:if, 0, 2, 1, 6, 4] =>
-        #             { [:then, 1, 3, 2, 3, 8] => 0,
-        #               [:else, 2, 5, 2, 5, 8] => 2
-        #             }
-        #         },
-        #       :methods => {
-        #          [Object, :foo, 1, 0, 7, 3] => 2
-        #       }
-        #     }
-        #   }
+Coverage.result
+#=> { "/path/to/file.rb"=>
+#     { :lines => [1, 2, 0, nil, ...],
+#       :branches =>
+#         { [:if, 0, 2, 1, 6, 4] =>
+#             { [:then, 1, 3, 2, 3, 8] => 0,
+#               [:else, 2, 5, 2, 5, 8] => 2
+#             }
+#         },
+#       :methods => {
+#          [Object, :foo, 1, 0, 7, 3] => 2
+#       }
+#     }
+#   }
 #@end
     * ラインカバレッジについての変更はありません。ラインカバレッジの結果はただの数値の配列です。
       数値の入っている要素は実行された行を表し、その数値は実行回数を意味します。
@@ -214,8 +214,8 @@
     * Note: 互換性のため、Coverage.startにオプションを与えない場合は、ラインカバレッジのみを計測します。
       また Coverage.result も旧フォーマットを返します。
 #@samplecode
-        Coverage.result
-        #=> { "/path/to/file.rb"=> [1, 2, 0, nil, ...] }
+Coverage.result
+#=> { "/path/to/file.rb"=> [1, 2, 0, nil, ...] }
 #@end
 
   * [[lib:drb]]
@@ -300,12 +300,12 @@
 
   * [[lib:rubygems]]
     * Rubygems 2.7.3 に更新
-      * [[url:http://blog.rubygems.org/2017/11/28/2.7.3-released.html]]
-      * [[url:http://blog.rubygems.org/2017/11/08/2.7.2-released.html]]
-      * [[url:http://blog.rubygems.org/2017/11/03/2.7.1-released.html]]
-      * [[url:http://blog.rubygems.org/2017/11/01/2.7.0-released.html]]
-      * [[url:http://blog.rubygems.org/2017/10/09/2.6.14-released.html]]
-      * [[url:http://blog.rubygems.org/2017/08/27/2.6.13-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/28/2.7.3-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/08/2.7.2-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/03/2.7.1-released.html]]
+      * [[url:https://blog.rubygems.org/2017/11/01/2.7.0-released.html]]
+      * [[url:https://blog.rubygems.org/2017/10/09/2.6.14-released.html]]
+      * [[url:https://blog.rubygems.org/2017/08/27/2.6.13-released.html]]
 
   * [[lib:securerandom]]
     * [[m:SecureRandom.alphanumeric]] を追加

@@ -1,6 +1,0 @@
-= class TkBitmapImage < TkImage
-
-== Class Methods
-
---- new(*args)
-#@todo

@@ -1,5 +1,0 @@
-#@since 1.8.2
-
-= class Tk::TkTable::CellCommand < TkValidateCommand
-
-#@end

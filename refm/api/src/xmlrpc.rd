@@ -8,7 +8,7 @@ XML-RPC を扱うためのライブラリです。
 
  * rubygems.org: [[url:https://rubygems.org/gems/xmlrpc]]
  * プロジェクトページ: [[url:https://github.com/ruby/xmlrpc]]
- * リファレンス: [[url:http://www.rubydoc.info/gems/xmlrpc]]
+ * リファレンス: [[url:https://www.rubydoc.info/gems/xmlrpc]]
 #@else
 このページは xmlrpc ライブラリのまとめのページであり、require 'xmlrpc' を実行しても
 エラーになることに注意して下さい。

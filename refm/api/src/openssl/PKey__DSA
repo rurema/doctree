@@ -106,11 +106,9 @@ cipher を指定して pass を省略した場合は
 --- public_key -> OpenSSL::PKey::DSA
 公開鍵を複製して DSA オブジェクトとして返します。
 
-#@since 1.8.2
 --- to_der -> String
 自身を DER 形式に変換します。
 
-#@end
 
 --- to_text -> String
 鍵を人間が読める形式に変換します。
@@ -143,7 +141,6 @@ data は適切なハッシュ関数で計算されたダイジェストである
        例外は発生しないことに注意してください
 
 
-#@since 1.8.2
 --- p -> OpenSSL::BN
 DSA 鍵のパラメータ p を返します。
 
@@ -217,7 +214,6 @@ DSA 鍵の秘密鍵パラメータを設定します。
 公開鍵における priv_key のように自身が持っていないパラメータは
 0 がセットされます。
 
-#@end
 
 = class OpenSSL::PKey::DSAError < OpenSSL::PKey::PKeyError
 DSA 関連のエラーが起きた場合に発生する例外です。

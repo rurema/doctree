@@ -1,88 +1,36 @@
 _builtin
 English
-#@until 1.9.1
-Env
-Win32API
-#@end
-#@since 1.8.1
 abbrev
-#@end
 base64
-#@since 1.8.0
 benchmark
 bigdecimal
 bigdecimal/jacobian
 bigdecimal/ludcmp
-#@since 1.8.2
 bigdecimal/newton
-#@end
 bigdecimal/util
-#@end
-#@since 1.8.1
 bigdecimal/math
-#@end
-#@until 1.9.1
-cgi-lib
-#@end
 cgi
 cgi/session
 cgi/session/pstore
-#@since 1.9.1
 cgi/core
 cgi/cookie
 cgi/html
 cgi/util
-#@end
-#@since 1.9.1
 cmath
-#@end
-#@until 2.2.0
-complex
-#@end
-#@since 1.9.1
 continuation
 coverage
-#@end
-#@since 1.8.0
 csv
-#@end
-#@until 2.1.0
-curses
-#@end
 date
-#@until 1.9.1
-date2
-#@end
 dbm
 debug
 delegate
-#@since 2.3.0
 did_you_mean
-#@end
 digest
-#@since 1.8.6
 digest/bubblebabble
-#@end
-#@since 1.9.1
-#@until 2.2.0
-digest/hmac
-#@end
-#@end
 digest/md5
 digest/rmd160
 digest/sha1
 digest/sha2
-#@until 2.2.0
-#@since 1.8.0
-dl
-dl/import
-dl/types
-#@until 1.9.1
-dl/struct
-dl/win32
-#@end
-#@end
-#@end
 drb
 drb/acl
 drb/extserv
@@ -93,67 +41,24 @@ drb/ssl
 drb/timeridconv
 drb/unix
 e2mmap
-#@until 1.8.7
-enumerator
-#@end
 erb
-#@until 1.9.1
-eregex
-#@end
 etc
 expect
 fcntl
-#@since 1.9.1
 fiber
-#@end
-#@since 1.9.2
 fiddle
-#@since 2.0.0
 fiddle/import
 fiddle/types
-#@end
-#@end
-#@since 1.8.0
 fileutils
-#@end
-#@until 1.9.1
-finalize
-#@end
 find
 forwardable
-#@until 1.9.1
-ftools
-#@end
 gdbm
-#@since 1.8.0
-#@until 1.9.1
-generator
-#@end
-#@end
 getoptlong
-#@until 1.9.1
-getopts
-#@end
-#@since 1.8.0
-#@until 2.2.0
-gserver
-#@end
-#@until 2.0.0
-iconv
-#@end
-#@end
-#@until 1.9.1
-importenv
-#@end
-#@since 1.9.3
 io/console
 io/console/size
-#@end
-#@since 1.8.0
 io/nonblock
 io/wait
 ipaddr
-#@end
 irb
 irb/cmd/chws
 irb/cmd/help
@@ -179,14 +84,10 @@ irb/frame
 irb/help
 irb/init
 irb/input-method
-#@since 1.9.2
 irb/inspector
-#@end
 irb/locale
-#@since 1.9.1
 irb/magic-file
 irb/src_encoding
-#@end
 irb/notifier
 irb/output-method
 irb/ruby-lex
@@ -196,10 +97,6 @@ irb/version
 irb/workspace
 irb/ws-for-case-2
 irb/xmp
-#@until 1.9.1
-jcode
-#@end
-#@since 1.9.1
 json
 #@# json/add/rails
 json/add/core
@@ -216,14 +113,8 @@ json/add/complex
 json/add/bigdecimal
 json/add/ostruct
 json/editor
-#@end
 kconv
-#@since 1.8.1
 logger
-#@end
-#@until 1.9.1
-mailread
-#@end
 #@until 2.5.0
 mathn
 #@end
@@ -234,16 +125,10 @@ minitest/mock
 minitest/spec
 minitest/unit
 #@end
-#@until 1.9.1
-md5
-#@end
 mkmf
 monitor
 mutex_m
 net/ftp
-#@until 1.9.1
-net/ftptls
-#@end
 net/http
 net/https
 net/imap
@@ -251,13 +136,8 @@ net/pop
 net/protocol
 net/smtp
 net/telnet
-#@until 1.9.1
-net/telnets
-#@end
 nkf
-#@since 1.9.2
 objspace
-#@end
 observer
 open-uri
 open3
@@ -268,39 +148,17 @@ optparse/shellwords
 optparse/time
 optparse/uri
 ostruct
-#@until 1.9.1
-parsearg
-parsedate
-#@end
-#@since 1.8.0
 pathname
-#@end
-#@until 1.9.1
-ping
-#@end
-#@since 2.2.0
 power_assert
-#@end
-#@since 1.8.0
 pp
 prettyprint
-#@end
-#@since 1.9.1
 prime
-#@end
 profile
-#@since 1.8.0
 profiler
-#@end
 pstore
-#@since 1.9.2
 psych
-#@end
 pty
-#@since 1.8.0
 racc/parser
-#@end
-#@since 1.9.1
 rake
 rake/classic_namespace
 rake/clean
@@ -312,23 +170,9 @@ rake/runtest
 rake/tasklib
 rake/testtask
 rake/loaders/makefile
-#@end
-#@until 2.2.0
-rational
-#@end
 rbconfig
-#@since 1.8.1
 rdoc
 rdoc/code_objects
-#@until 1.9.2
-#@since 1.9.1
-rdoc/dot
-#@else
-rdoc/dot/dot
-#@end
-rdoc/diagram
-#@end
-#@since 1.9.2
 rdoc/alias
 rdoc/anon_class
 rdoc/any_method
@@ -346,80 +190,37 @@ rdoc/require
 rdoc/single_class
 rdoc/text
 rdoc/top_level
-#@end
 rdoc/options
 rdoc/rdoc
-#@since 1.9.1
 rdoc/known_classes
 rdoc/generator
 rdoc/generator/darkfish
-#@since 2.0.0
 rdoc/generator/json_index
-#@end
 rdoc/generator/markup
 rdoc/generator/ri
 rdoc/markup
 rdoc/markup/formatter
 rdoc/markup/to_html
 rdoc/markup/to_html_crossref
-#@until 1.9.2
-rdoc/markup/to_flow
-rdoc/markup/to_latex
-rdoc/markup/to_test
-rdoc/markup/to_texinfo
-#@end
-#@since 1.9.2
 rdoc/markup/to_ansi
 rdoc/markup/to_bs
 rdoc/markup/to_rdoc
-#@end
 rdoc/parser
 rdoc/parser/c
-#@until 1.9.2
-rdoc/parser/f95
-#@end
 rdoc/parser/ruby
 rdoc/parser/simple
-#@since 1.9.2
-#@until 1.9.3
-rdoc/parser/perl
-#@end
 rdoc/parser/ruby_tools
-#@end
-#@since 2.0.0
 rdoc/parser/changelog
 rdoc/parser/markdown
 rdoc/parser/rd
 rdoc/parser/text
 rdoc/markdown
 rdoc/markdown/entities
-#@end
 rdoc/stats
-#@else
-rdoc/usage
-rdoc/markup/simple_markup
-rdoc/markup/simple_markup/to_flow
-rdoc/markup/simple_markup/to_html
-rdoc/markup/simple_markup/to_latex
-rdoc/parsers/parse_c
-rdoc/parsers/parse_f95
-rdoc/parsers/parse_rb
-rdoc/parsers/parse_simple
-rdoc/parsers/parserfactory
-#@end
-#@since 1.9.3
 rdoc/token_stream
-#@else
-rdoc/tokenstream
-#@end
-#@end
-#@until 1.9.1
-readbytes
-#@end
 readline
 resolv-replace
 resolv
-#@since 1.8.0
 rexml
 rexml/document
 rexml/parsers/pullparser
@@ -428,21 +229,13 @@ rexml/streamlistener
 rexml/parsers/sax2parser
 rexml/sax2listener
 rexml/parsers/ultralightparser
-#@end
-#@since 1.8.1
 rinda/rinda
 rinda/tuplespace
-#@end
-#@since 1.9.1
 ripper
 ripper/filter
 ripper/lexer
 ripper/sexp
-#@end
-#@since 1.8.3
 rss
-#@end
-#@since 1.9.1
 rubygems
 rubygems/builder
 rubygems/command
@@ -496,13 +289,6 @@ rubygems/gem_openssl
 rubygems/gem_path_searcher
 rubygems/gem_runner
 rubygems/indexer
-#@until 1.9.2
-rubygems/indexer/abstract_index_builder
-rubygems/indexer/latest_index_builder
-rubygems/indexer/marshal_index_builder
-rubygems/indexer/master_index_builder
-rubygems/indexer/quick_index_builder
-#@end
 rubygems/install_update_options
 rubygems/installer
 rubygems/local_remote_options
@@ -533,30 +319,10 @@ rubygems/user_interaction
 rubygems/validator
 rubygems/version
 rubygems/version_option
-#@end
-#@if("1.8.0" <= version and version < "1.9.1")
-rubyunit
-runit/assert
-runit/cui/testrunner
-runit/error
-runit/testcase
-runit/testresult
-runit/testsuite
-runit/topublic
-#@end
-#@since 1.8.0
 scanf
-#@end
 sdbm
-#@since 1.8.7
 securerandom
-#@end
-#@since 1.8.0
 set
-#@until 1.9.1
-sha1
-#@end
-#@end
 shell
 shell/error
 shell/command-processor
@@ -566,274 +332,30 @@ shell/system-command
 shell/builtin-command
 shellwords
 singleton
-#@if("1.8.1" <= version and version < "1.9.1")
-soap
-soap/attachment
-soap/baseData
-soap/element
-soap/encodingstyle/aspDotNetHandler
-soap/encodingstyle/handler
-soap/encodingstyle/literalHandler
-soap/encodingstyle/soapHandler
-soap/generator
-soap/header/handler
-soap/header/handlerset
-soap/header/simplehandler
-soap/httpconfigloader
-soap/mapping
-soap/mapping/factory
-soap/mapping/mapping
-soap/mapping/registry
-soap/mapping/rubytypeFactory
-soap/mapping/typeMap
-soap/mapping/wsdlencodedregistry
-soap/mapping/wsdlliteralregistry
-soap/marshal
-soap/mimemessage
-soap/netHttpClient
-soap/parser
-soap/processor
-soap/property
-soap/rpc/cgistub
-soap/rpc/driver
-soap/rpc/element
-soap/rpc/httpserver
-soap/rpc/proxy
-soap/rpc/router
-soap/rpc/rpc
-soap/rpc/soaplet
-soap/rpc/standaloneServer
-soap/soap
-soap/streamHandler
-soap/wsdlDriver
-#@end
 socket
 stringio
-#@since 1.8.0
 strscan
-#@end
-#@until 2.0.0
-syck
-#@since 1.9.2
-syck/basenode
-syck/constants
-syck/error
-syck/rubytypes
-syck/stream
-syck/stringio
-syck/tag
-syck/yamlnode
-syck/ypath
-#@end
-#@end
 sync
 syslog
-#@since 2.0.0
 syslog/logger
-#@end
 tempfile
-#@since 1.8.0
 test/unit
-#@until 2.2.0
-test/unit/assertions
-test/unit/testcase
-#@until 1.9.1
-test/unit/autorunner
-test/unit/testresult
-test/unit/testsuite
-test/unit/ui/testrunnerutilities
-test/unit/ui/testrunnermediator
-test/unit/ui/console/testrunner
-test/unit/ui/fox/testrunner
-test/unit/ui/gtk/testrunner
-test/unit/ui/gtk2/testrunner
-test/unit/ui/tk/testrunner
-test/unit/util/observable
-#@end
-#@end
-#@end
 thread
 thwait
 time
 timeout
-#@until 2.4.0
-tk
-multi-tk
-#@since 1.8.2
-remote-tk
-#@end
-tcltklib
-tkafter
-tkbgerror
-tkcanvas
-tkclass
-tkconsole
-tkdialog
-tkentry
-tkfont
-tkmacpkg
-tkmenubar
-tkmngfocus
-tkpalette
-tkscrollbox
-tktext
-tkvirtevent
-tkwinpkg
-#@since 1.8.2
-tk/after
-tk/autoload
-tk/bgerror
-tk/bindtag
-tk/button
-tk/canvas
-tk/canvastag
-tk/checkbutton
-tk/clipboard
-tk/clock
-tk/composite
-tk/console
-tk/dialog
-tk/encodedstr
-tk/entry
-tk/event
-tk/font
-tk/frame
-tk/grid
-tk/image
-tk/itemconfig
-tk/itemfont
-tk/kinput
-tk/label
-tk/labelframe
-tk/listbox
-tk/macpkg
-tk/menu
-tk/menubar
-tk/menuspec
-tk/message
-tk/mngfocus
-tk/msgcat
-tk/namespace
-tk/optiondb
-tk/optionobj
-tk/pack
-tk/package
-tk/palette
-tk/panedwindow
-tk/place
-tk/radiobutton
-tk/root
-tk/scale
-tk/scrollable
-tk/scrollbar
-tk/scrollbox
-tk/selection
-tk/spinbox
-tk/tagfont
-tk/text
-tk/textimage
-tk/textmark
-tk/texttag
-tk/textwindow
-tk/timer
-tk/toplevel
-tk/txtwin_abst
-tk/validation
-tk/variable
-tk/virtevent
-tk/winfo
-tk/winpkg
-tk/wm
-tk/xim
-tkextlib/ICONS
-tkextlib/blt
-tkextlib/bwidget
-tkextlib/itcl
-tkextlib/itk
-tkextlib/iwidgets
-tkextlib/pkg_checker
-tkextlib/tcllib
-tkextlib/tcllib/autoscroll
-tkextlib/tcllib/ctext
-tkextlib/tcllib/cursor
-tkextlib/tcllib/datefield
-tkextlib/tcllib/ico
-tkextlib/tcllib/ip_entry
-tkextlib/tcllib/plotchart
-tkextlib/tcllib/style
-tkextlib/tcllib/tkpiechart
-#@since 1.8.4
-tkextlib/tcllib/dialog
-tkextlib/tcllib/getstring
-tkextlib/tcllib/history
-tkextlib/tcllib/panelframe
-tkextlib/tcllib/ruler
-tkextlib/tcllib/screenruler
-tkextlib/tcllib/scrollwin
-tkextlib/tcllib/superframe
-tkextlib/tcllib/swaplist
-tkextlib/tcllib/tablelist
-tkextlib/tcllib/tablelist_core
-tkextlib/tcllib/tablelist_tile
-tkextlib/tcllib/tooltip
-tkextlib/tcllib/widget
-#@end
-tkextlib/tclx
-tkextlib/tile
-#@since 1.8.4
-tkextlib/tile/dialog
-#@end
-tkextlib/tile/style
-tkextlib/tile/tbutton
-tkextlib/tile/tcheckbutton
-tkextlib/tile/tlabel
-tkextlib/tile/tmenubutton
-tkextlib/tile/tnotebook
-tkextlib/tile/tradiobutton
-#@since 1.8.3
-tkextlib/tile/tcombobox
-tkextlib/tile/tentry
-tkextlib/tile/tframe
-tkextlib/tile/tlabelframe
-tkextlib/tile/tpaned
-tkextlib/tile/tprogressbar
-tkextlib/tile/treeview
-tkextlib/tile/tscale
-tkextlib/tile/tscrollbar
-tkextlib/tile/tseparator
-tkextlib/tile/tsquare
-#@end
-tkextlib/tkDND
-tkextlib/tkHTML
-tkextlib/tkimg
-tkextlib/tktable
-tkextlib/tktrans
-tkextlib/treectrl
-tkextlib/vu
-tkextlib/winico
-tkextlib/winico/winico
-#@end
-tkutil
-#@end
-#@since 1.8.0
 tmpdir
-#@end
 tracer
-#@since 1.8.0
 tsort
 #@if("1.9.1" <= version and version < "2.5.0")
 ubygems
 #@end
 un
-#@end
 uri
 weakref
-#@since 1.8.0
 webrick
 webrick/accesslog
-#@since 1.8.1
 webrick/cgi
-#@end
 webrick/compat
 webrick/config
 webrick/cookie
@@ -863,132 +385,13 @@ webrick/httputils
 webrick/httpversion
 webrick/log
 webrick/server
-#@since 1.8.1
 webrick/ssl
-#@end
 webrick/utils
 win32/registry
-#@since 1.8.0
 win32/resolv
-#@end
 win32ole
-#@if("1.8.1" <= version and version < "1.9.1")
-wsdl
-wsdl/binding
-wsdl/data
-wsdl/definitions
-wsdl/documentation
-wsdl/import
-wsdl/importer
-wsdl/info
-wsdl/message
-wsdl/operation
-wsdl/operation_binding
-wsdl/param
-wsdl/parser
-wsdl/part
-wsdl/port
-wsdl/port_type
-wsdl/service
-wsdl/types
-wsdl/wsdl
-wsdl/xmlSchema/all
-wsdl/xmlSchema/annotation
-wsdl/xmlSchema/any
-wsdl/xmlSchema/attribute
-wsdl/xmlSchema/choice
-wsdl/xmlSchema/complexContent
-wsdl/xmlSchema/complexType
-wsdl/xmlSchema/content
-wsdl/xmlSchema/content
-wsdl/xmlSchema/data
-wsdl/xmlSchema/element
-wsdl/xmlSchema/enumeration
-wsdl/xmlSchema/import
-#@since 1.8.3
-wsdl/xmlSchema/importer
-wsdl/xmlSchema/include
-wsdl/xmlSchema/length
-#@end
-wsdl/xmlSchema/parser
-wsdl/xmlSchema/pattern
-wsdl/xmlSchema/schema
-wsdl/xmlSchema/sequence
-#@since 1.8.2
-wsdl/xmlSchema/simpleContent
-#@end
-#@since 1.8.3
-wsdl/xmlSchema/simpleExtension
-#@end
-#@since 1.8.2
-wsdl/xmlSchema/simpleRestriction
-wsdl/xmlSchema/simpleType
-#@end
-wsdl/xmlSchema/unique
-#@since 1.8.3
-wsdl/xmlSchema/xsd2ruby
-#@end
-wsdl/soap/address
-wsdl/soap/binding
-wsdl/soap/body
-#@since 1.8.2
-wsdl/soap/cgiStubCreator
-wsdl/soap/classDefCreator
-wsdl/soap/classDefCreatorSupport
-wsdl/soap/clientSkeltonCreator
-#@end
-wsdl/soap/complexType
-wsdl/soap/data
-wsdl/soap/definitions
-#@since 1.8.2
-wsdl/soap/driverCreator
-wsdl/soap/element
-#@end
-wsdl/soap/fault
-wsdl/soap/header
-wsdl/soap/headerfault
-#@since 1.8.2
-wsdl/soap/mappingRegistryCreator
-wsdl/soap/methodDefCreator
-#@end
-wsdl/soap/operation
-#@since 1.8.2
-wsdl/soap/servantSkeltonCreator
-wsdl/soap/standaloneServerStubCreator
-#@end
-#@since 1.8.3
-wsdl/soap/wsdl2ruby
-#@end
-#@end
 xmlrpc
-#@until 2.4.0
-xmlrpc/client
-xmlrpc/config
-xmlrpc/datetime
-xmlrpc/server
-#@end
-#@if("1.8.2" <= version and version < "1.9.1")
-xsd/codegen
-#@end
-#@if("1.8.1" <= version and version < "1.9.1")
-xsd
-xsd/datatypes
-xsd/datatypes1999
-xsd/xmlparser
-#@end
 yaml
 yaml/dbm
 yaml/store
-#@until 1.9.2
-yaml/basenode
-yaml/constants
-yaml/error
-yaml/rubytypes
-yaml/stream
-yaml/stringio
-yaml/tag
-yaml/yamlnode
-yaml/ypath
-#@end
 zlib
-#@end

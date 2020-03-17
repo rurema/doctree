@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 = class Rinda::DRbObjectTemplate < Object
 
@@ -20,4 +19,3 @@ This DRbObjectTemplate matches +ro+ if the remote object's drburi
 and drbref are the same. +nil+ is used as a wildcard.
 
 
-#@end

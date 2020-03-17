@@ -9,7 +9,11 @@ ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] �
 
 == Instance Methods
 
+#@since 2.7.0
+--- begin -> Numeric | nil
+#@else
 --- begin -> Numeric
+#@end
 
 初項 (始端) を返します。
 
@@ -17,13 +21,13 @@ ArithmeticSequenceオブジェクトは、[[m:Numeric#step]], [[m:Range#step]] �
 
 --- end -> Numeric | nil
 
-上界 (終端) を返します。
+末項（終端）を返します。
 
 @see [[m:Enumerator::ArithmeticSequence#begin]]
 
 --- exclude_end? -> bool
 
-上界 (終端) を含まないとき真を返します。
+末項（終端）を含まないとき真を返します。
 
 --- step -> Numeric
 

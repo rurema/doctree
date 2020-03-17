@@ -367,12 +367,9 @@ POP セッションを開き、認証だけを行って接続を切ります。
 @raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
 --- default_port -> Integer
-#@since 1.8.7
 --- default_pop3_port -> Integer
-#@end
 POP3 のデフォルトのポート番号(110)を返します。
 
-#@since 1.8.7
 --- default_pop3s_port -> Integer
 デフォルトのPOP3Sのポート番号(995)を返します。
 
@@ -437,7 +434,6 @@ SSL を利用しないように設定します。
 
 @see [[m:Net::POP3.enable_ssl]], [[m:Net::POP3.use_ssl?]]
 
-#@end
 
 --- socket_type -> Class
 
@@ -446,7 +442,6 @@ SSL を利用しないように設定します。
 
 == Instance Methods
 
-#@since 1.8.7
 
 --- use_ssl? -> bool
 このインスタンスが SSL を使って接続するなら真を返します。
@@ -478,7 +473,6 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 @see [[m:Net::POP3#enable_ssl]], [[m:Net::POP3#disable_ssl]], [[m:Net::POP3#use_ssl?]], [[m:Net::POP3.enable_ssl]]
 
-#@end
 
 #@# --- inspect
 

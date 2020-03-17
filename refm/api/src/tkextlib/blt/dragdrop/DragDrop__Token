@@ -1,9 +1,0 @@
-= class Tk::BLT::DragDrop::Token < TkWindow
-
-== Class Methods
-
---- new(arg)
-#@todo
-
-
-
