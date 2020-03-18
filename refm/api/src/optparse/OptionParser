@@ -1123,8 +1123,9 @@ config = {}
 opts = OptionParser.new
 opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
 
-ENV['REQUIRE_OPT'] = %q{--require lib1 'remain data'}
-p opts.environment('REQUIRE_OPT') # => ["remain data"]
+# HOGE_OPT は hoge というプログラム名に対応した名前です
+ENV['HOGE_OPT'] = %q{--require lib1 'remain data'}
+p opts.environment('HOGE_OPT') # => ["remain data"]
 p config                           # => {:lib=>"lib1"}
 #@end
 --- default_argv    -> [String]
