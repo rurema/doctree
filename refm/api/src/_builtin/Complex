@@ -114,7 +114,7 @@ Complex(1, 0) == 1          # => true
 
 以下の計算の結果を [[c:Float]] オブジェクトで返します。
 
-  sqrt(self.real ** 2 + self.imag **2)
+  sqrt(self.real ** 2 + self.imag ** 2)
 
 #@samplecode 例
 Complex(1, 2).abs         # => 2.23606797749979
@@ -130,7 +130,7 @@ Complex('1/2', '1/2').abs # => 0.7071067811865476
 
 以下の計算の結果を返します。
 
-  self.real ** 2 + self.imag **2
+  self.real ** 2 + self.imag ** 2
 
 #@samplecode 例
 Complex(1, 1).abs2         # => 2
