@@ -133,7 +133,6 @@ Gem::Specification.new do |s|
   s.email             = 'hello_author@example.com'
   s.homepage          = 'http://example.com/hello/'
   s.description       = 'hello description'
-  s.rubyforge_project = 'hello'
 end
 #@end
 
@@ -153,8 +152,6 @@ end
   この Gem のウェブサイトの URI を指定します。
 : description
   この Gem の長い説明を指定します。
-: rubyforge_project
-  Rubyforge にプロジェクトがある場合、そのプロジェクト名を指定します。
 
 実行可能なファイル (コマンド) を含む場合の gemspec は以下のようになります。
 
@@ -169,7 +166,6 @@ Gem::Specification.new do |s|
   s.email             = 'hello@example.com'
   s.homepage          = 'http://example.com/hello'
   s.rubyforge_project = 'hello'
-  s.description       = 'hello description'
 end
 #@end
 
