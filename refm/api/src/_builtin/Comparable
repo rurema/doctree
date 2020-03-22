@@ -36,9 +36,10 @@ self <=> other で例外が発生した場合は例外を無視して false を�
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-例:
-  1 == 1   # => true
-  1 == 2   # => false
+#@samplecode 例
+1 == 1   # => true
+1 == 2   # => false
+#@end
 
 --- >(other)    -> bool
 
@@ -53,9 +54,10 @@ self が other より大きい時真を返します。
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 
-例:
-  1 > 0   # => true
-  1 > 1   # => false
+#@samplecode 例
+1 > 0   # => true
+1 > 1   # => false
+#@end
 
 --- >=(other)    -> bool
 
@@ -70,10 +72,11 @@ self が other より大きいか等しい時真を返します。
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 
-例:
-  1 >= 0   # => true
-  1 >= 1   # => true
-  1 >= 2   # => false
+#@samplecode 例
+1 >= 0   # => true
+1 >= 1   # => true
+1 >= 2   # => false
+#@end
 
 --- <(other)    -> bool
 
@@ -88,9 +91,10 @@ self が other より小さい時真を返します。
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 
-例:
-  1 < 1   # => false
-  1 < 2   # => true
+#@samplecode 例
+1 < 1   # => false
+1 < 2   # => true
+#@end
 
 --- <=(other)    -> bool
 
@@ -105,10 +109,11 @@ self が other より小さいか等しい時真を返します。
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 
-例:
-  1 <= 0   # => false
-  1 <= 1   # => true
-  1 <= 2   # => true
+#@samplecode 例
+1 <= 0   # => false
+1 <= 1   # => true
+1 <= 2   # => true
+#@end
 
 --- between?(min, max)    -> bool
 
@@ -120,7 +125,9 @@ self が min と max の範囲内(min, max
 を含みます)にあるかを判断します。
 
 以下のコードと同じです。
-  self >= min and self <= max
+#@samplecode
+self >= min and self <= max
+#@end
 #@end
 
 @param min 範囲の下端を表すオブジェクトを指定します。
@@ -130,10 +137,12 @@ self が min と max の範囲内(min, max
 @raise ArgumentError self <=> min か、self <=> max が nil を返
                      したときに発生します。
 
-  3.between?(1, 5)               #=> true
-  6.between?(1, 5)               #=> false
-  'cat'.between?('ant', 'dog')   #=> true
-  'gnu'.between?('ant', 'dog')   #=> false
+#@samplecode 例
+3.between?(1, 5)               # => true
+6.between?(1, 5)               # => false
+'cat'.between?('ant', 'dog')   # => true
+'gnu'.between?('ant', 'dog')   # => false
+#@end
 
 #@since 2.4.0
 --- clamp(min, max)  -> object
