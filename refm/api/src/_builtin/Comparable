@@ -15,24 +15,11 @@ self <=> other は
 
 == Instance Methods
 
-#@since 1.9.1
 --- ==(other)    -> bool
-#@else
---- ==(other)    -> bool | nil
-#@end
 
 比較演算子 <=> をもとにオブジェクト同士を比較します。
 <=> が 0 を返した時に、true を返します。
 それ以外を返した場合は、false を返します。
-
-#@until 1.9.1
-<=> が nil を返した場合は、 nil を返します。
-#@end
-
-
-#@until 2.3.0
-self <=> other で例外が発生した場合は例外を無視して false を返します。
-#@end
 
 @param other 自身と比較したいオブジェクトを指定します。
 
@@ -43,13 +30,9 @@ self <=> other で例外が発生した場合は例外を無視して false を�
 
 --- >(other)    -> bool
 
-#@if (version < "1.8.0")
-self が other より大きい時真を返します。
-#@else
 比較演算子 <=> をもとにオブジェクト同士を比較します。
 <=> が正の整数を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
-#@end
 
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
@@ -61,13 +44,9 @@ self が other より大きい時真を返します。
 
 --- >=(other)    -> bool
 
-#@if (version < "1.8.0")
-self が other より大きいか等しい時真を返します。
-#@else
 比較演算子 <=> をもとにオブジェクト同士を比較します。
 <=> が正の整数か 0 を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
-#@end
 
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
@@ -80,13 +59,9 @@ self が other より大きいか等しい時真を返します。
 
 --- <(other)    -> bool
 
-#@if (version < "1.8.0")
-self が other より小さい時真を返します。
-#@else
 比較演算子 <=> をもとにオブジェクト同士を比較します。
 <=> が負の整数を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
-#@end
 
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
@@ -98,13 +73,9 @@ self が other より小さい時真を返します。
 
 --- <=(other)    -> bool
 
-#@if (version < "1.8.0")
-self が other より小さいか等しい時真を返します。
-#@else
 比較演算子 <=> をもとにオブジェクト同士を比較します。
 <=> が負の整数か 0 を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
-#@end
 
 @param other 自身と比較したいオブジェクトを指定します。
 @raise ArgumentError <=> が nil を返したときに発生します。
@@ -117,17 +88,12 @@ self が other より小さいか等しい時真を返します。
 
 --- between?(min, max)    -> bool
 
-#@if (version < "1.8.0")
-self が min と max の範囲内(min, max
-を含みます)にある時真を返します。
-#@else
 比較演算子 <=> をもとに self が min と max の範囲内(min, max
 を含みます)にあるかを判断します。
 
 以下のコードと同じです。
 #@samplecode
 self >= min and self <= max
-#@end
 #@end
 
 @param min 範囲の下端を表すオブジェクトを指定します。
