@@ -165,7 +165,7 @@ Gem::Specification.new do |s|
   s.authors           = ['Hello Author']
   s.email             = 'hello@example.com'
   s.homepage          = 'http://example.com/hello'
-  s.rubyforge_project = 'hello'
+  s.description       = 'hello description'
 end
 #@end
 
