@@ -15,4 +15,4 @@ Ruby は様々な環境で動作するよう各方面の有志によって移植
       * [[d:platform/MinGW]], [[d:platform/mingw32]]
     * [[d:platform/Cygwin]]
   * [[d:platform/MacOSX]]
-  * [[d:platform/GNU]], [[d:platform/GNU Hurd]]
+  * [[d:platform/GNU]], [[d:platform/GNUHurd]]
