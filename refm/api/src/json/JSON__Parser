@@ -38,3 +38,32 @@ alias JSON::Ext::Parser
 
 現在のソースのコピーを返します。
 
+#@samplecode 例
+require 'json'
+
+parser = JSON::Parser.new(DATA.read)
+print parser.source
+
+# => {
+# =>   "Tanaka": {
+# =>     "name":"tanaka",
+# =>     "age":20
+# =>   },
+# =>   "Suzuki": {
+# =>     "name":"suzuki",
+# =>     "age":25
+# =>   }
+# => }
+
+__END__
+{
+  "Tanaka": {
+    "name":"tanaka",
+    "age":20
+  },
+  "Suzuki": {
+    "name":"suzuki",
+    "age":25
+  }
+}
+#@end

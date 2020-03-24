@@ -111,7 +111,6 @@ HTTPResponse オブジェクトを生成して返します。
 
 自身が生成される時に指定されたハッシュを返します。
 
-#@since 1.8.2
 --- content_length         -> Integer | nil
 --- content_length=(len)
 
@@ -159,7 +158,6 @@ Content-Type ヘッダの値をセットします。
   res.content_type = "text/html"
 
 @see [[m:WEBrick::HTTPUtils.#mime_type]]
-#@end
 
 --- cookies    -> [WEBrick::Cookie]
 

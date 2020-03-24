@@ -202,7 +202,6 @@ output に DTD を出力します。
   # <!ELEMENT book (comment)>
   # ....
 
-#@since 1.8.2
 --- context -> { Symbol => object }
 DTD が属する文書の「コンテキスト」を返します。
 
@@ -212,7 +211,6 @@ DTD が属する文書の「コンテキスト」を返します。
 コンテキストの具体的な内容については [[m:REXML::Element#context]] を
 参照してください。
 
-#@end
 
 --- entity(name) -> String | nil
 name という実体参照名を持つ実体を文字列で返します。
@@ -241,7 +239,6 @@ child を子ノード列の最後に追加します。
 
 @param child 追加するノード
 
-#@since 1.8.5
 --- public -> String | nil
 DTD の公開識別子を返します。
 
@@ -292,7 +289,6 @@ name という名前を持つ記法宣言が存在しない場合は nil を返�
 
 @param name 検索する記法名
 
-#@end
 
 == Constants
 

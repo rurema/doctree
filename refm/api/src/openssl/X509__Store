@@ -113,7 +113,7 @@ verify を一度も呼びだしていない場合は nil を返します。
   * [[m:OpenSSL::X509::PURPOSE_SMIME_SIGN]]
   * [[m:OpenSSL::X509::PURPOSE_SSL_CLIENT]]
   * [[m:OpenSSL::X509::PURPOSE_SSL_SERVER]]
-  * [[m:OpenSSL::X509::PURPOSE_OSCP_HELPER]]
+  * [[m:OpenSSL::X509::PURPOSE_OCSP_HELPER]]
 
 この値は [[m:OpenSSL::X509::Store#verify]] で検証する場合に利用されます。
 証明書に記載されている使用目的が適合していない場合には検証が失敗します。
@@ -203,7 +203,6 @@ chain には検証したい証明書の証明書チェイン全体を
 @param chain 検証したい証明書の証明書チェイン全体の配列
 @raise OpenSSL::X509::StoreError 検証時にエラーが生じたときに発生します
 
-#@since 1.8.2
 --- time=(time)
 証明書の有効期限の検証に使う日時を設定します。
 
@@ -211,14 +210,11 @@ chain には検証したい証明書の証明書チェイン全体を
 
 @param time 検証に使う日時の [[c:Time]] オブジェクト
 @see [[m:OpenSSL::X509::StoreContext#time=]]
-#@end
 
-#@since 1.8.3
 --- set_default_paths -> nil
 システムに組込まれている証明書を読み込みます。
 
 @raise OpenSSL::X509::StoreError 読み込みに失敗した場合に発生します
-#@end
 
 = class OpenSSL::X509::StoreError < OpenSSL::OpenSSLError
 [[c:OpenSSL::X509::Store]] 関連のエラーを表す例外クラスです。

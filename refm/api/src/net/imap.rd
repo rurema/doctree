@@ -1040,14 +1040,12 @@ verify で検証するかどうか([[m:Net::IMAP::VERIFY_PEER]]、
 
 #@end
 
-#@since 1.8.2
 --- disconnected? -> bool
 
 サーバとの接続が切断されていれば真を返します。
 
 @see [[m:Net::IMAP#disconnect]]
 
-#@end
 
 --- thread(algorithm, search_keys, charset) -> [Net::IMAP::ThreadMember]
 THREADコマンドを送り、メールボックスを検索した結果を
