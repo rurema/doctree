@@ -40,9 +40,6 @@ def generate_statichtml(version)
   commands << "--quiet" if ENV['CI']
   succeeded = system(*commands)
   raise "Failed to generate static html" unless succeeded
-  latest = File.join(HTML_DIRECTORY_BASE, "latest")
-  File.unlink(latest) rescue nil
-  File.symlink(version, latest)
 end
 
 task :default => [:generate, :check_format]
