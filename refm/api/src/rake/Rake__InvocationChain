@@ -19,6 +19,16 @@
 
 @raise RuntimeError 循環したタスクの呼び出しを検出した場合に発生します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  invocation_chain= Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
+  invocation_chain.append("task_b") # => LL("task_b", "task_a")
+end
+#@end
+
 --- member?(task_name) -> bool
 
 与えられたタスク名が自身に含まれる場合は真を返します。
@@ -113,16 +123,6 @@ end
 与えられた値を追加した [[c:Rake::InvocationChain]] を返します。
 
 @param task_name 追加する値を指定します。
-
-#@samplecode
-# Rakefile での記載例とする
-
-task default: :test_rake_app
-task :test_rake_app do
-  invocation_chain= Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
-  invocation_chain.append("task_b") # => LL("task_b", "task_a")
-end
-#@end
 
 --- to_s -> String
 
