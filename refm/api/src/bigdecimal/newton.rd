@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require bigdecimal/jacobian
 require bigdecimal/ludcmp
@@ -62,7 +61,7 @@ require bigdecimal/ludcmp
 
 Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
- * [[url:https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/nlsolve.rb?view=markup]]
+ * [[url:https://github.com/ruby/ruby/blob/master/ext/bigdecimal/sample/nlsolve.rb]]
 
 = module Newton
 
@@ -101,4 +100,3 @@ include Jacobian
 
 #@# TODO: #7321 が解決した後で引数 x について修正する。
 
-#@end

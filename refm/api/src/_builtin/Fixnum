@@ -94,16 +94,13 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 self を other で割った商を返します。
 整商を得たい場合は [[m:Fixnum#div]] を使ってください。
 
-#@since 1.8.7
 [[m:Fixnum#fdiv]] との違いについては [[m:Numeric#quo]] を参照してください。
-#@end
 
 @param other self を割る数を指定します。
 
 @see [[m:Numeric#quo]]
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- fdiv(other) -> Float | Complex
 #@else
@@ -122,7 +119,6 @@ self を other で割った商を [[c:Float]] で返します。
 @see [[m:Numeric#quo]]
 #@else
 @see [[m:Fixnum#quo]]
-#@end
 #@end
 
 --- **(other) -> Fixnum | Bignum | Float
@@ -320,7 +316,6 @@ self を引数で指定した基数の文字列表現に変換します。
 
 #@end
 
-#@since 1.8.7
 --- zero? -> bool
 
 self が 0 の場合に true を返します。そうでない場合に false を返します。
@@ -333,7 +328,6 @@ self が奇数の場合に true を返します。そうでない場合に false
 
 self が偶数の場合に true を返します。そうでない場合に false を返します。
 
-#@end
 
 #@since 1.9.1
 --- abs -> Fixnum | Bignum

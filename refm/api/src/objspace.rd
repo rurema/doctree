@@ -172,8 +172,8 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 本メソッドは C Ruby 以外では動作しません。
 
-@see [[url:http://www.atdot.net/~ko1/diary/201212.html#d8]],
-     [[url:http://www.atdot.net/~ko1/diary/201212.html#d9]]
+@see [[url:https://www.atdot.net/~ko1/diary/201212.html#d8]],
+     [[url:https://www.atdot.net/~ko1/diary/201212.html#d9]]
 
 --- trace_object_allocations_start -> nil
 

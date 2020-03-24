@@ -25,9 +25,9 @@
 
 === 参考
 
- * Ruby VM アドベントカレンダー #12 TracePoint の紹介 (1): [[url:http://www.atdot.net/~ko1/diary/201212.html#d12]]
- * Ruby VM アドベントカレンダー #13 TracePoint の紹介 (2): [[url:http://www.atdot.net/~ko1/diary/201212.html#d13]]
- * Ruby VM アドベントカレンダー #14 TracePoint の紹介 (3): [[url:http://www.atdot.net/~ko1/diary/201212.html#d14]]
+ * Ruby VM アドベントカレンダー #12 TracePoint の紹介 (1): [[url:https://www.atdot.net/~ko1/diary/201212.html#d12]]
+ * Ruby VM アドベントカレンダー #13 TracePoint の紹介 (2): [[url:https://www.atdot.net/~ko1/diary/201212.html#d13]]
+ * Ruby VM アドベントカレンダー #14 TracePoint の紹介 (3): [[url:https://www.atdot.net/~ko1/diary/201212.html#d14]]
 
 == Singleton Methods
 
@@ -245,6 +245,17 @@ self のトレースが有効な場合に true を、そうでない場合に fa
 
 self の状態を人間に読みやすい文字列にして返します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.inspect # "#<TracePoint:call `foo'@/path/to/test.rb:1>"
+end
+trace.enable
+foo 1
+#@end
+
 --- event -> Symbol
 
 発生したイベントの種類を [[c:Symbol]] で返します。
@@ -254,11 +265,37 @@ self の状態を人間に読みやすい文字列にして返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call, :return) do |tp|
+  p tp.event
+end
+trace.enable
+foo 1
+# => :call
+# :return
+#@end
+
 --- lineno -> Integer
 
 発生したイベントの行番号を返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call, :return) do |tp|
+  tp.lineno
+end
+trace.enable
+foo 1
+# => 1
+# 3
+#@end
 
 --- path -> String
 
@@ -266,23 +303,23 @@ self の状態を人間に読みやすい文字列にして返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.path # => "/path/to/test.rb"
+end
+trace.enable
+foo 1
+#@end
+
 --- method_id -> Symbol | nil
 
 イベントが発生したメソッドの定義時の名前を [[c:Symbol]] で返します。
 トップレベルであった場合は nil を返します。
 
 @raise RuntimeError イベントフックの外側で実行した場合に発生します。
-
-#@since 2.4.0
-@see [[m:TracePoint#callee_id]]
---- callee_id -> Symbol | nil
-
-イベントが発生したメソッドの呼ばれた名前を [[c:Symbol]] で返します。
-トップレベルであった場合は nil を返します。
-
-@raise RuntimeError イベントフックの外側で実行した場合に発生します。
-
-@see [[m:TracePoint#method_id]]
 
 #@samplecode
 class C
@@ -298,7 +335,33 @@ trace.enable do
   C.new.alias_name
 end
 #@end
+
+@see [[m:TracePoint#callee_id]]
+
+--- callee_id -> Symbol | nil
+
+イベントが発生したメソッドの呼ばれた名前を [[c:Symbol]] で返します。
+トップレベルであった場合は nil を返します。
+
+@raise RuntimeError イベントフックの外側で実行した場合に発生します。
+
+#@samplecode
+class C
+  def method_name
+  end
+  alias alias_name method_name
+end
+
+trace = TracePoint.new(:call) do |tp|
+  p [tp.method_id, tp.callee_id] # => [:method_name, :alias_name]
+end
+trace.enable do
+  C.new.alias_name
+end
 #@end
+
+@see [[m:TracePoint#method_id]]
+
 --- defined_class -> Class | module
 
 メソッドを定義したクラスかモジュールを返します。
@@ -341,6 +404,17 @@ end
 
 発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:call) do |tp|
+  p tp.binding.local_variables # => [:ret]
+end
+trace.enable
+foo 1
+#@end
+
 --- self -> object
 
 イベントを発生させたオブジェクトを返します。
@@ -358,9 +432,31 @@ end
 @raise RuntimeError :return、:c_return、:b_return イベントのためのイベ
                     ントフックの外側で実行した場合に発生します。
 
+#@samplecode 例
+def foo(ret)
+  ret
+end
+trace = TracePoint.new(:return) do |tp|
+  p tp.return_value # => 1
+end
+trace.enable
+foo 1
+#@end
+
 --- raised_exception -> Exception
 
 発生した例外を返します。
 
 @raise RuntimeError :raise イベントのためのイベントフックの外側で実行し
                     た場合に発生します。
+
+#@samplecode 例
+trace = TracePoint.new(:raise) do |tp|
+  tp.raised_exception # => #<ZeroDivisionError: divided by 0>
+end
+trace.enable
+begin
+  0/0
+rescue
+end
+#@end

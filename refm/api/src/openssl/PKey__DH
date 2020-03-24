@@ -137,11 +137,9 @@ DH オブジェクトを生成します。
 
 鍵対の値は出力されません。
 
-#@since 1.8.2
 --- to_der -> String
 
 鍵パラメータをDER 形式に変換します。
-#@end
 
 #@# --- public_key
 #@# #@todo
@@ -174,7 +172,6 @@ DH オブジェクトを生成します。
 対応する値は 0 となります。
 
 
-#@since 1.8.2
 --- p -> OpenSSL::BN
 DH 鍵共有プロトコルの鍵パラメータ p を返します。
 
@@ -238,7 +235,6 @@ DH 鍵共有プロトコルの秘密鍵を設定します。
 @see [[m:OpenSSL::PKey::DH#priv_key]],
      [[m:OpenSSL::PKey::DH#generate_key!]]
 
-#@end
 
 = class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
 DH 鍵共有プロトコル関連のエラーが生じた場合に発生する例外です。
