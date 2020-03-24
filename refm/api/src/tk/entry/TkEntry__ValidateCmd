@@ -1,7 +1,0 @@
-= class Tkentry::ValidateCmd < Object
-include TkComm
-
-== Instance Methods
-
---- to_eval
-#@todo

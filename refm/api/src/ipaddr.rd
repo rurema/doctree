@@ -1,6 +1,5 @@
 category Network
 
-#@since 1.8.0
 IPアドレスを扱うライブラリです。
 
 = class IPAddr < Object
@@ -66,9 +65,7 @@ IP アドレスを扱うのためのクラスです。
 新しい IPAddr オブジェクトを生成します。
 
 @param ipaddr 他の IPAddr オブジェクト。
-#@since 1.8.7
               また、数値や文字列も受け付けます。
-#@end
 
 --- |(ipaddr) -> IPAddr
 
@@ -76,9 +73,7 @@ IP アドレスを扱うのためのクラスです。
 新しい IPAddr オブジェクトを生成します。
 
 @param ipaddr 他の IPAddr オブジェクト。
-#@since 1.8.7
               また、数値や文字列も受け付けます。
-#@end
 
 --- ~ -> IPAddr
 
@@ -102,9 +97,7 @@ IP アドレスを扱うのためのクラスです。
 IPAddr オブジェクト同士が等しいかを比較します。
 
 @param ipaddr 比較対象の IPAddr オブジェクト。
-#@since 1.8.7
               また、数値や文字列も受け付けます。
-#@end
 
 例:
 
@@ -125,9 +118,7 @@ IPAddr オブジェクト同士が等しいかを比較します。
 与えられた IPAddr オブジェクトが自身の範囲に入っているかを判定します。
 
 @param ipaddr 範囲に入っているかどうか調べる対象となる IPAddr オブジェクト。
-#@since 1.8.7
               また、数値や文字列も受け付けます。
-#@end
 
 --- to_i -> Integer
 
@@ -232,7 +223,6 @@ IPv4 の場合は例外を発生します。
 
 @see [[c:Socket]]
 
-#@since 1.8.7
 --- <=>(other) -> Integer | nil
 
 self と other を比較します。
@@ -267,7 +257,6 @@ self の IP アドレスとサブネットマスクで取得できる IP アド�
   #=> #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>..
   #   #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>
 
-#@end
 
 #@since 1.9.2
 --- eql?(other) -> bool
@@ -321,4 +310,3 @@ IPv6 アドレスをわかりやすく表示するためのフォーマット文
 
   "%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x"
 
-#@end

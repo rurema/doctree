@@ -5,13 +5,13 @@
 以下の例外が Zlib::Error のサブクラスとして定義されています。
 それぞれ zlib ライブラリ関数の返すエラーと対応しています。
 
-* [[c:Zlib::StreamEnd]]
-* [[c:Zlib::NeedDict]]
-* [[c:Zlib::DataError]]
-* [[c:Zlib::StreamError]]
-* [[c:Zlib::MemError]]
-* [[c:Zlib::BufError]]
-* [[c:Zlib::VersionError]]
+  * [[c:Zlib::StreamEnd]]
+  * [[c:Zlib::NeedDict]]
+  * [[c:Zlib::DataError]]
+  * [[c:Zlib::StreamError]]
+  * [[c:Zlib::MemError]]
+  * [[c:Zlib::BufError]]
+  * [[c:Zlib::VersionError]]
 
 = class Zlib::StreamEnd < Zlib::Error
 
@@ -41,4 +41,3 @@
 = class Zlib::VersionError < Zlib::Error
 
 zlib ライブラリのバージョンがこのライブラリの想定しているバージョンと互換でない場合に発生します。
-

@@ -207,7 +207,6 @@ Example:
 --- default_port -> Integer
 SMTPのデフォルトのポート番号(25)を返します。
 
-#@since 1.8.7
 --- default_submission_port -> Integer
 デフォルトのサブミッションポート番号(587)を返します。
 
@@ -218,7 +217,6 @@ SSL 通信に使われる SSL のコンテキストのデフォルト値を返�
 --- default_ssl_port -> Integer
 デフォルトのSMTPSのポート番号(465)を返します。
 
-#@end
 
 == Instance Methods
 
@@ -240,7 +238,6 @@ ESMTPモードで [[m:Net::SMTP#start]] を呼び、うまくいかなかった
 
 @see [[m:Net::SMTP#esmtp?]]
 
-#@since 1.8.7
 --- capable_starttls? -> bool
 サーバが STARTTLS を広告してきた場合に真を返します。
 
@@ -340,12 +337,9 @@ ESMTPモードで [[m:Net::SMTP#start]] を呼び、うまくいかなかった
 その Net::SMTP オブジェクトがSTARTTLSを常に使わないよう設定します。
 
 @see [[m:Net::SMTP#starttls?]], [[m:Net::SMTP#enable_starttls]], [[m:Net::SMTP#enable_starttls_auto]]
-#@end
 
 --- set_debug_output(f) -> ()
-#@since 1.8.7
 --- debug_output=(f)
-#@end
 デバッグ出力の出力先を指定します。
 このメソッドは深刻なセキュリティホールの原因となりえます。
 デバッグ用にのみ利用してください。
@@ -515,7 +509,6 @@ ready は obsolete です。
 
 @see [[m:Net::SMTP#send_message]]
 
-#@since 1.8.7
 
 --- authenticate(user, secret, authtype) -> ()
 認証を行います。
@@ -650,14 +643,11 @@ QUIT コマンドを送ります。
 通常は [[m:Net::SMTP#finish]] で
 QUIT が送られるため利用する必要はないはずです。
 
-#@end
 
 == Constants
 
-#@since 1.8.7
 --- DEFAULT_AUTH_TYPE -> Symbol
 デフォルトの認証スキーム(:plain)です。
-#@end
 
 #@# internal constants for CRAM-MD5 authentication
 #@# --- IMASK
@@ -667,10 +657,8 @@ QUIT が送られるため利用する必要はないはずです。
 --- Revision -> String
 ファイルのリビジョンです。使わないでください。
 
-#@since 1.8.7
 = class Net::SMTP::Response < Object
 [[c:Net::SMTP]] の内部用クラスです。
-#@end
 
 = module Net::SMTPError
 SMTP 関連の例外に include されるモジュールです。

@@ -208,13 +208,22 @@ $@ の値は、[[m:$!]].backtrace の値と同じです。
 
 --- $SAFE -> Integer
 
-カレントスレッドのセーフレベルを表す整数です。セーフレベルについては
-[[d:spec/safelevel]] を参照してください。
+#@since 2.6.0
+カレントプロセスのセーフレベルを表す整数です。
+#@else
+カレントスレッドのセーフレベルを表す整数です。
+#@end
+
+セーフレベルについては[[d:spec/safelevel]] を参照してください。
 
 Thread.current.safe_level と同じです。
 非整数を代入しようとすると [[c:TypeError]] が発生します。
 
+#@since 2.6.0
+この変数はグローバルスコープです。
+#@else
 この変数はスレッドローカルです。
+#@end
 Ruby起動時の初期値は 0 です。
 
 --- $= -> bool
@@ -265,12 +274,22 @@ $/ には正規表現は使えません。
 
 デフォルト値は nil で、空文字列と同じ結果になります。
 
+#@since 2.7.0
+nil 以外に変更することは非推奨になったため、
+nil 以外を代入すると警告がでるようになりました。
+#@end
+
 この変数はグローバルスコープです。
 
 --- $;  -> Regexp | String | nil
 --- $-F -> Regexp | String | nil
 
 [[m:String#split]] で引数を省略した場合の区切り文字です。
+
+#@since 2.7.0
+nil 以外に変更することは非推奨になったため、
+nil 以外を代入すると警告がでるようになりました。
+#@end
 
 nilを設定すると特殊な分割を行います。
 詳細は [[m:String#split]] を参照してください。
@@ -344,9 +363,6 @@ Rubyライブラリをロードするときの検索パスです。
 起動時にはコマンドラインオプション -I で指定したディレクトリ、
 環境変数 RUBYLIB の値、
 コンパイル時に指定したデフォルト値
-#@until 1.9.1
-、"." (カレントディレクトリ)
-#@end
 をこの順番で含みます。
 
 #@# 1.6.5 から以下のように変更されている
@@ -360,9 +376,6 @@ Rubyライブラリをロードするときの検索パスです。
   /usr/local/lib/ruby/site_ruby                サイト固有ライブラリ
   /usr/local/lib/ruby/VERSION                  標準ライブラリ
   /usr/local/lib/ruby/VERSION/ARCH             標準、システム依存、拡張ライブラリ
-#@until 1.9.1
-  .                                            カレントディレクトリ
-#@end
 
 #@#((-デフォルトの順序は 1.6.5 から変更されました-))
 上記表中の VERSION は Ruby のバージョンを表す文字列で、
@@ -373,16 +386,9 @@ ARCH の値は Config::CONFIG['arch'] で得られます。
 
 コンパイル時のデフォルトパスは
 多くの UNIX システムでは "/usr/local/lib/ruby" です。
-[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]、
-[[d:platform/bccwin32]]、[[d:platform/mswince]] 環境では
+[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]
+環境では
 ruby.dll の位置からの相対で決まります。
-[[d:platform/DJGPP]] と [[d:platform/emx]] (OS/2) では
-ruby.exe の位置からの相対で決まります。
-
-#@until 1.9.1
--T オプションで起動時に [[m:$SAFE]] を 1 以上に
-設定したときは "." (カレントディレクトリ) はロードパスに入りません。
-#@end
 
 require 'foo' を実行すると、
 以下のように foo.rb と foo.so が交互に探索されます。

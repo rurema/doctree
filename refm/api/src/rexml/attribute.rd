@@ -136,13 +136,11 @@ output が返ります。
 「:attribute」というシンボルを返します。
 
 
-#@since 1.8.2
 --- xpath -> String
 その属性を指定する xpath 文字列を返します。
 
 例えば "/foo/bar/@ns:r" という文字列を返します。
 #@# 完全な例題をここに書く
-#@end
 
 == Constants
 

@@ -20,12 +20,9 @@ URI (Uniform Resource Identifier) のためのライブラリです。
 #@include(uri/FTP)
 #@include(uri/HTTP)
 #@include(uri/LDAP)
-#@since 1.8.7
 #@include(uri/LDAPS)
-#@end
 #@include(uri/MailTo)
 
-#@since 1.8.2
 = reopen Kernel
 
 == Module Functions
@@ -41,7 +38,6 @@ URI (Uniform Resource Identifier) のためのライブラリです。
 
 @see [[m:URI.parse]]
 
-#@end
 
 = class URI::Error < StandardError
 
