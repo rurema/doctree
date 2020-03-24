@@ -10,9 +10,7 @@ eql? と hash が定義されているため、[[c:Hash]] のキーとして
 == Class Methods
 
 --- parse(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
-#@since 1.8.2
 --- parse_openssl(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
-#@end
 文字列をパースして [[c:OpenSSL::X509::Name]] オブジェクトを返します。
 
 例:
@@ -22,7 +20,6 @@ eql? と hash が定義されているため、[[c:Hash]] のキーとして
 @param str パースする文字列
 @param template 属性型に対応するデータ型を表わすハッシュ
 
-#@since 1.8.2
 --- parse_rfc2253(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
 RFC2253形式の文字列を
 パースして [[c:OpenSSL::X509::Name]] オブジェクトを返します。
@@ -30,7 +27,6 @@ RFC2253形式の文字列を
 @param str パースする文字列
 @param template 属性型に対応するデータ型を表わすハッシュ
 
-#@end
 
 --- new -> OpenSSL::X509::Name
 --- new(ary, template = OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
@@ -128,7 +124,6 @@ OpenSSL 0.9.8 と互換な古い方式のハッシュ関数の
 内部では OpenSSL の X509_NAME_hash_old を呼び出します。
 #@end
 
-#@since 1.8.2
 == Constants
 
 --- OBJECT_TYPE_TEMPLATE -> { String => Integer }
@@ -170,7 +165,6 @@ template に指定されなかった属性はこの型であると仮定して�
 
 複数行でフォーマットされます。
 
-#@end
 
 #@# internal use only
 #@# = module RFC2253DN

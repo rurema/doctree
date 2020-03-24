@@ -61,9 +61,7 @@ umask 値が 0022 ならば
 任意のユーザがそのセッション情報ファイルを見ることができます。
 それが嫌な場合は CGI::Session オブジェクト生成前に umask 値を設定してください。
 
-#@since 1.8.2
 セッション情報ファイルは 0600 で作成されるようになりました。
-#@end
 
 === CGI::HtmlExtension#form の出力
 
@@ -217,12 +215,10 @@ umask 値が 0022 ならば
 
 : new_session
     値が true のときは強制的に新しいセッションを始めます。
-#@since 1.8.2
     値が false のときは、リクエストにセッション ID が含まれていない場合に
     例外 [[c:ArgumentError]] が発生します。
     値がないときは、リクエストにセッション ID が
     含まれている場合はそれを使用し、含まれていない場合は新しいセッションを始めます。
-#@end
     (default: 偽)
 
 : database_manager
@@ -255,11 +251,9 @@ umask 値が 0022 ならば
     [[c:CGI::Session::FileStore]] がセッションデータのファイル名に与えるプレフィックス。
     (default: "")
 
-#@since 1.8.2
 : suffix
     [[c:CGI::Session::FileStore]] がセッションデータのファイル名に与えるサフィックス。
     (default: "")
-#@end
 
 : no_hidden
   真を指定すると @output_hidden が nil になります。
@@ -274,12 +268,6 @@ umask 値が 0022 ならば
 --- callback(dbman)
 #@# nodoc
 
-#@until 1.8.2
---- create_new_id -> String
-
-新しいセッション ID を生成します。
-
-#@end
 
 == Instance Methods
 
@@ -325,19 +313,15 @@ FileStore の場合はセッションファイルを削除します。
 
 セッション ID を返します。
 
-#@since 1.8.2
 --- new_session -> bool
 
 真であれば新しいセッション ID を生成します。
 
-#@end
 
-#@since 1.8.2
 = class CGI::Session::NoSession < RuntimeError
 
 セッションが初期化されていない場合に発生する例外です。
 
-#@end
 
 
 = class CGI::Session::FileStore < Object
@@ -370,20 +354,14 @@ FileStore の場合はセッションファイルを削除します。
     セッションデータのファイル名に与えるプレフィックスを指定します。
     デフォルトは空文字列です。
 
-#@since 1.8.2
 : suffix
     セッションデータのファイル名に与えるサフィックスを指定します。
     デフォルトは空文字列です。
-#@end
 
 @raise CGI::Session::NoSession セッションが初期化されていない場合に発生します。
 
 == Instance Methods
 
-#@until 1.8.2
---- check_id(id) -> bool
-#@# nodoc
-#@end
 
 --- close -> ()
 #@# discard

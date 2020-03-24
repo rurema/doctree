@@ -1,9 +1,0 @@
-= class Tk::BLT::DragDrop::PackageCommand::ValidateArgs < TkUtil::CallbackSubst
-
-== Class Methods
-
---- ret_val(val)
-#@todo
-
-
-

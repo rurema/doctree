@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 = class SimpleDelegator < Delegator
 
@@ -52,9 +51,7 @@ obj の間で呼び出せるメソッドに違いがあった場合は、
 
 @return 変更後の委譲先オブジェクト
 
-#@end
 
-#@since 1.8.2
 #@until 1.9.1
 
 --- clone -> object
@@ -65,5 +62,4 @@ dupの引数objについては、[[ruby-list:44914]]にて問題があること�
 
 @see [[m:Object#clone]],[[m:Object#dup]]
 
-#@end
 #@end

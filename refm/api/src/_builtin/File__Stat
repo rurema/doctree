@@ -16,10 +16,8 @@ include Comparable
 #@end
 
   dev         デバイス番号(ファイルシステム)
-#@since 1.8.2
   dev_major   dev の major 番号部
   dev_minor   dev の minor 番号部
-#@end
   ino         i-node 番号
   mode        ファイルモード
   nlink       ハードリンクの数
@@ -115,7 +113,6 @@ path に関する File::Stat オブジェクトを生成して返します。
   #=> 2
 #@# WindowsXP ruby1.8.6 でテスト
 
-#@since 1.8.2
 --- dev_major -> Integer
 dev の major 番号部を返します。
 
@@ -134,7 +131,6 @@ dev の minor 番号部を返します。
   #=> nil
 #@# WindowsXP ruby1.8.6 でテスト
 
-#@end
 
 --- ino -> Integer
 i-node 番号を返します。

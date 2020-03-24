@@ -96,9 +96,7 @@ r - 0.5              # => 0.25
 
 @param other 自身を割る数
 
-other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
-す。ただし 0 以外の整数に等しい場合は [[c:Rational]] で返します。
-#@# r28844 と r28886
+other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返します。
 
 #@samplecode 例
 r = Rational(3, 4)

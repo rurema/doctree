@@ -71,47 +71,62 @@ exit! は exit とは違って、例外処理などは一切行ないませ
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#abort]],[[m:Kernel.#at_exit]],[[m:Kernel.#fork]]
 
---- abort(message = $!.message) -> ()
+--- abort            -> ()
+--- abort(message)   -> ()
 
 Ruby プログラムをエラーメッセージ付きで終了します。終了ステータスは 1 固定です。
 
 このメソッドと [[m:Kernel.#exit]] との違いは、プログラムの終了ステー
 タスが 1 (正確にはCレベルの定数 EXIT_FAILURE の値)固定であることと、
-引数を省略した呼び出し時に [[m:$!]] が nil でなければその例外のメッセー
-ジを標準エラー出力 [[m:$stderr]] に出力することです。
+エラーメッセージを標準エラー出力 [[m:$stderr]] に出力することです。
 
 引数 message を指定すると SystemExit クラスの
 [[m:Exception#message]] に message を設定し
 て標準エラー出力に出力します。
 
+#@since 2.7.0
+引数を省略した呼び出し時に [[m:$!]] が nil でなければその例外のメッセージと
+バックトレースを表示します。
+#@else
+#@# 1.9.0 から 2.6 では表示されない。
+#@# https://bugs.ruby-lang.org/issues/16424
+#@end
+
 @param message エラーメッセージ文字列です。
 
-  puts 'start'
-  begin
-    puts 'start1...'
-    abort "error1"
-  rescue SystemExit => err
-    puts "end1 with #{err.inspect}"
-  end
-  
-  begin
-    puts 'start2...'
-    $! = RuntimeError.new
-    abort
-  ensure
-    puts 'end2...'
-  end
-  puts 'end' #実行されない
-  
-  #=> start
-  #   start1...
-  #   end1 with #<SystemExit: error1>
-  #   start2...
-  #   end2...
-  #終了ステータス:1
-  #(標準エラー出力)
-  #=> error1
-  #   ..:12: RuntimeError (RuntimeError)
+#@samplecode
+puts 'start'
+begin
+  puts 'start1...'
+  abort "error1"
+rescue SystemExit => err
+  puts "end1 with #{err.inspect}"
+end
+
+begin
+  puts 'start2...'
+  raise RuntimeError.new
+rescue
+  abort
+ensure
+  puts 'end2...'
+end
+puts 'end' #実行されない
+
+#(標準出力)
+#=> start
+#   start1...
+#   end1 with #<SystemExit: error1>
+#   start2...
+#   end2...
+#終了ステータス:1
+#(標準エラー出力)
+#=> error1
+#@since 2.7.0
+#   Traceback (most recent call last):
+#   sample.rb:11:in `<main>': RuntimeError (RuntimeError)
+#@end
+#@end
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#exit!]]
 
@@ -1346,6 +1361,37 @@ start 段上の呼び出し元の情報を [[m:$@]]
 
 @param range  取得したいフレームの範囲を示す [[c:Range]] オブジェクトを指定します。
 
+#@samplecode 例
+def test1(start, length)
+  locations = caller_locations(start, length)
+  p locations
+  p locations.map(&:lineno)
+  p locations.map(&:path)
+end
+
+def test2(start, length)
+  test1(start, length)
+end
+
+def test3(start, length)
+  test2(start, length)
+end
+
+caller_locations # => []
+test3(1, nil)
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'", "/Users/user/test.rb:17:in `<main>'"]
+# => [9, 13, 17]
+# => ["/Users/user/test.rb", "/Users/user/test.rb", "/Users/user/test.rb"]
+test3(1, 2)
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'"]
+# => [9, 13]
+# => ["/Users/user/test.rb", "/Users/user/test.rb"]
+test3(2, 1)
+# => ["/Users/user/test.rb:13:in `test3'"]
+# => [13]
+# => ["/Users/user/test.rb"]
+#@end
+
 @see [[c:Thread::Backtrace::Location]], [[m:Kernel.#caller]]
 
 --- gets(rs = $/) -> String | nil
@@ -1628,7 +1674,11 @@ foo
 #@end
 #@end
 
+#@since 2.4.0
+@see [[m:Warning#warn]], [[m:$stderr]],[[m:$VERBOSE]]
+#@else
 @see [[m:$stderr]],[[m:$VERBOSE]]
+#@end
 
 --- Array(arg) -> Array
 
@@ -2073,6 +2123,11 @@ $_.sub とこのメソッド sub は以下の点で違いがあります。
                   文字列を指定した場合は全く同じ文字列にだけマッチする
 @param replace    pattern で指定した文字列と置き換える文字列
 
+#@samplecode 例
+$_               # => "testtest\n"
+sub(/es/, '!!')  # => "t!!ttest\n"
+#@end
+
 @see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace)          -> String
@@ -2095,6 +2150,11 @@ $_.gsub とこのメソッド gsub は以下の点で違いがあります。
                   文字列を指定した場合は全く同じ文字列にだけマッチする
 @param replace    pattern で指定した文字列と置き換える文字列
 
+#@samplecode 例
+$_                # => "test\n"
+gsub(/es/, '!!')  # => "t!!t\n"
+#@end
+
 @see [[m:String#gsub]],[[m:$_]]
 
 --- chop  -> String
@@ -2109,6 +2169,18 @@ $_.chopとこのメソッド chop は以下の点で違いがあります。
 
   * chop は $_ の値をコピーして、コピーの方を更新し、
   $_ に再代入します。
+
+#@samplecode 例
+$_ = "test\r\n"
+$_          # => "test\r\n"
+chop        # => "test"
+$_ = "test\n"
+$_          # => "test\n"
+chop        # => "test"
+$_ = "test"
+$_          # => "test"
+chop        # => "tes"
+#@end
 
 @see [[m:String#chop]],[[m:$_]]
 
@@ -2126,6 +2198,17 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
   $_ に再代入します。
 
 @param rs 末尾から削除する改行コードを指定します。
+
+#@samplecode 例: ruby -n で "test" を入力
+$_            # => "test\n"
+chomp         # => "test"
+#@end
+
+#@samplecode 例: ruby -n で "test," を入力し、 rs に "," を指定
+$_            # => "test\n"
+chomp         # => "test,"
+chomp(",")    # => "test"
+#@end
 
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 

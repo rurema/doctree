@@ -18,9 +18,7 @@ hash と eql? が再定義されているため、[[c:Hash]] のキーとして
   URI::HTTP.default_port        # => 80
   URI::HTTPS.default_port       # => 443
   URI::LDAP.default_port        # => 389
-#@since 1.8.7
   URI::LDAPS.default_port       # => 636
-#@end
   URI::MailTo.default_port      # => nil
 
 --- component     -> [Symbol]

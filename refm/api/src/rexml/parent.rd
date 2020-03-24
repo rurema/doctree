@@ -147,9 +147,7 @@ child の子ノード列上での位置を返します。
 child が子ノードでない場合には nil を返します。
 
 --- size -> Integer
-#@since 1.8.5
 --- length -> Integer
-#@end
 
 保持している子ノードの数を返します。
 
