@@ -5,10 +5,8 @@
 [[c:File]] はこのモジュールをインクルードしているので、
 以下に挙げる定数は [[c:File]] の定数のように扱うことができます。
 
-#@since 1.8.0
 Ruby 1.8 以降では、[[c:File]] ではなく、[[c:IO]] でインクルード
 されるようになりました。
-#@end
 
 #@# 情報源: RUBY/ext/fcntl/fcntl.c
 
@@ -162,11 +160,9 @@ open(2) で O_TMPFILE が指定できる場合に使えます。
 アルファベットの大小文字を区別せずにパターンマッチを行います。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
-#@since 1.8.5
 --- FNM_SYSCASE -> Integer
 case hold なファイルシステムの場合、FNM_CASEFOLD の値になり、そうでなければゼロの値になります。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
-#@end
 
 #@since 2.0.0
 --- FNM_EXTGLOB -> Integer

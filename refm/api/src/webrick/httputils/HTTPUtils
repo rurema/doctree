@@ -84,7 +84,6 @@ HTTP ヘッダの値を分割して返します。
 
 @param str 文字列を指定します。
 
-#@since 1.8.3
 --- escape_path(str) -> String
 
 与えられた文字列を数値参照文字列に変換します。
@@ -100,7 +99,6 @@ HTTP ヘッダの値を分割して返します。
 
 @param str 文字列を指定します。
 
-#@end
 
 --- escape8bit(str) -> String
 
@@ -111,10 +109,8 @@ HTTP ヘッダの値を分割して返します。
 #@#--- normalize_path(path)
 #@#todo
 
-#@since 1.8.2
 #@#--- parse_qvalues(value)
 #@#todo
-#@end
 
 #@#--- escape_form(str)
 #@#todo
@@ -122,10 +118,8 @@ HTTP ヘッダの値を分割して返します。
 #@#--- unescape_form(str)
 #@#todo
 
-#@since 1.8.3
 #@#--- _make_regex!(str)
 #@#todo
-#@end
 
 #@#--- _escape(str, regex)
 #@#todo

@@ -24,3 +24,10 @@ GC の対象になるオブジェクトへの weak reference を持つクラス�
 @param key 参照元のオブジェクトを指定します。
 
 @param value 参照先のオブジェクトを指定します。
+
+#@samplecode 例
+weak_map = ObjectSpace::WeakMap.new
+key = "text"
+weak_map[key] = "test" # => test
+weak_map[key] # => test
+#@end

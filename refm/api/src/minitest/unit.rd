@@ -10,7 +10,7 @@ sublibrary minitest/autorun
 
   * rubygems.org: [[url:https://rubygems.org/gems/minitest]]
   * プロジェクトページ: [[url:https://github.com/seattlerb/minitest]]
-  * リファレンス: [[url:http://www.rubydoc.info/gems/minitest]]
+  * リファレンス: [[url:https://www.rubydoc.info/gems/minitest]]
 
 #@else
 === 使い方

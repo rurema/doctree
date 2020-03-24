@@ -1,8 +1,4 @@
-#@since 1.8.0
 = class UnboundMethod < Object
-#@else
-= class UnboundMethod < Method
-#@end
 
 レシーバを持たないメソッドを表すクラスです。
 呼び出すためにはレシーバにバインドする必要があります。
@@ -198,7 +194,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 #@end
 
-#@since 1.8.7
 #@until 1.9.1
 --- name    -> String
 #@else
@@ -222,7 +217,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
   Integer.instance_method(:to_c).owner   # => Numeric
   Integer.instance_method(:hash).owner   # => Kernel
 
-#@end
 
 #@since 1.9.1
 --- source_location -> [String, Integer] | nil

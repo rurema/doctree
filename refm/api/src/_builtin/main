@@ -120,7 +120,7 @@ hypot(3, 4)  # => 5.0
 有効にした拡張の有効範囲については以下を参照してください。
 
 #@since 2.1.0
- * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]]
 #@else
  * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]]
 #@end

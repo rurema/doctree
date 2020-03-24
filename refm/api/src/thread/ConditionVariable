@@ -151,6 +151,40 @@ alias ConditionVariable
 
 @return 実行待ちしていたスレッドの配列を返します。
 
+#@samplecode 例
+mutex = Mutex.new
+cv = ConditionVariable.new
+flg = true
+
+3.times {
+  Thread.start {
+    mutex.synchronize {
+      puts "a1"
+      while (flg)
+        cv.wait(mutex)
+      end
+      puts "a2"
+    }
+  }
+}
+
+Thread.start {
+  mutex.synchronize {
+    flg = false
+    cv.broadcast
+  }
+}
+
+sleep 1
+
+# => a1
+# => a1
+# => a1
+# => a2
+# => a2
+# => a2
+#@end
+
 --- signal -> Thread | nil
 
 状態変数を待っているスレッドを1つ再開します。再開された
@@ -190,4 +224,12 @@ mutex のロックを解放し、カレントスレッドを停止します。
 @param timeout スリープする秒数を指定します。この場合はシグナルを受け取
                らなかった場合でも指定した秒数が経過するとスリープを終了
                します。省略するとスリープし続けます。
+#@end
+
+#@since 2.1.0
+#@#noexample Thread::ConditionVariable#signal, Thread::ConditionVariable#broadcast を参照
+@see [[m:Thread::ConditionVariable#signal]], [[m:Thread::ConditionVariable#broadcast]]
+#@else
+#@#noexample ConditionVariable#signal, ConditionVariable#broadcast を参照
+@see [[m:ConditionVariable#signal]], [[m:ConditionVariable#broadcast]]
 #@end

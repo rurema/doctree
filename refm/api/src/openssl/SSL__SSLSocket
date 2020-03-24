@@ -457,7 +457,6 @@ true でソケットも close するようになります。
 
 @see [[m:OpenSSL::SSL::SSLSocket#peer_cert_chain]]
 
-#@since 1.8.1
 --- peer_cert_chain -> [OpenSSL::X509::Certificate] | nil
 接続相手の証明書チェインを [[c:OpenSSL::X509::Certificate]] オブジェクト
 の配列で返します。
@@ -470,7 +469,6 @@ true でソケットも close するようになります。
 ルート CA の証明書は含まれないことに注意してください。
 
 @see [[m:OpenSSL::SSL::SSLSocket#peer_cert]]
-#@end
 
 --- state -> String
 
@@ -487,14 +485,12 @@ true でソケットも close するようになります。
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 
-#@since 1.8.2
 --- pending -> Integer | nil
 OpenSSL内部のバッファが保持している、直ちに読み取り可能な
 データのバイト数を返します。
 
 ハンドシェイク開始前には nil を返します。
 
-#@end
 
 --- accept -> self
 TLS/SSL 通信をサーバモードとして開始し、クライアントからの
@@ -517,7 +513,6 @@ TLS/SSl 通信をクライアントモードとして開始し、
 @see [[m:OpenSSL::SSL::SSLSocket#accept]],
      [[m:OpenSSL::SSL::SSLSocket#connect_nonblock]]
 
-#@since 1.8.3
 --- post_connection_check(hostname) -> true
 接続後検証を行います。
 
@@ -535,7 +530,6 @@ CA が証明書に署名してそれが失効していないことしか確認�
 @param hostname チェックする FQDN の文字列
 @raise OpenSSL::SSL::SSLError チェックに失敗した場合に発生します
 
-#@end
 
 --- sysclose -> nil
 接続を閉じます。相手に'close notify'を送ります。
