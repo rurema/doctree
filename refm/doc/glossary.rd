@@ -191,6 +191,9 @@
 
 ===[a:M] M
 
+: Matz
+  Ruby の作者、まつもとゆきひろ（松本行弘）氏。
+
 : Matz Ruby
   ＝CRuby
 
