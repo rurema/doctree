@@ -119,7 +119,7 @@ desc "Check documentation format"
 task check_format: [:statichtml] do
   res = []
   Dir.glob(File.join(HTML_DIRECTORY_BASE, '**/*.html')).each do |path|
-    html = File.read(path)
+    html = File.read(path, encoding: "UTF-8")
 
     a = html.lines.grep(/\[UNKNOWN_META_INFO\]/)
     if !a.empty?
