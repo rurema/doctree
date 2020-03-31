@@ -4,8 +4,6 @@ UNRELEASED_VERSIONS = %w[2.8.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
 
-Encoding.default_external = "UTF-8"
-
 def generate_database(version)
   puts "generate database of #{version}"
   db = "/tmp/db-#{version}"
