@@ -2765,6 +2765,14 @@ replace の最後の文字が無限に続くものとして扱われます。
 p "foo".tr("f", "X")      # => "Xoo"
 p "foo".tr('a-z', 'A-Z')  # => "FOO"
 p "FOO".tr('A-Z', 'a-z')  # => "foo"
+
+# シーザー暗号の復号
+p "ORYV".tr("A-Z", "D-ZA-C") # => "RUBY"
+
+# 全角英数字といくつかの記号の半角化
+email = "ｒｕｂｙ−ｌａｎｇ＠ｅｘａｍｐｌｅ．ｃｏｍ"
+p email.tr("０-９ａ-ｚＡ-Ｚ．＠−", "0-9a-zA-Z.@-")
+# => "ruby-lang@example.com"
 #@end
 
 @see [[m:String#tr_s]]
