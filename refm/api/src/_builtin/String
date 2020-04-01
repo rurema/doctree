@@ -2775,7 +2775,7 @@ p email.tr("０-９ａ-ｚＡ-Ｚ．＠−", "0-9a-zA-Z.@-")
 # => "ruby-lang@example.com"
 #@end
 
-@see [[m:String#tr_s]]
+@see [[m:String#tr!]], [[m:String#tr_s]]
 
 --- tr!(pattern, replace) -> self | nil
 
