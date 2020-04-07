@@ -13,7 +13,7 @@ CGI プロトコルの詳細については以下の文書を参照してくだ�
 
   * [[url:https://tools.ietf.org/html/draft-coar-cgi-v11-03]]
   * [[RFC:3875]]: The Common Gateway Interface (CGI) Version 1.1
-  * [[url:http://www.w3.org/CGI/]]
+  * [[url:https://www.w3.org/CGI/]]
 
 === 使用例
 

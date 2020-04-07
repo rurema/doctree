@@ -17,54 +17,6 @@ include Enumerable
 
 #@#  require 'matrix'
 
-=== Complexクラスとの併用 Working with Complex class
-
-require 'complex' することによって、
-Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されます。
-多くのメソッドは、この拡張されたVectorクラスでも、期待通りに動作します。
-
-次の例は、各要素を共役複素数に置換するメソッド (Vector#conjugate)です。
-
-  require 'matrix'
-  require 'complex'
-  
-  class Vector
-    def conjugate
-      collect{|e| e.conjugate }
-    end
-  end
-  
-  v1 = Vector[Complex(1,1),Complex(2,2),Complex(3,3)]
-  v2 = v1.conjugate
-  p v2 #=> Vector[Complex(1,-1),Complex(2,-2),Complex(3,-3)]
-  v3 = v1+v2
-  p v3 #=> Vector[Complex(1,0),Complex(2,0),Complex(3,0)]
-
-
-しかし、Complex 要素に拡張された Vector クラスで、
-期待通りに動作しないメソッドもあります。
-例えば、ベクトルの絶対値を求める [[m:Vector#r]] メソッドは、
-各要素の2乗和の平方根 [[m:Math.#sqrt]] を求めますが、
-このとき例外を発生させる可能性があります。
-
-複素数を要素とするベクトルの絶対値を求めるためには、
-各要素の絶対値の2乗和をとらなくてはなりません(次の例 Vector#absメソッド）。
-
-  require 'matrix'
-  require 'complex'
-  
-  class Vector
-    def abs
-      r=0
-      @elements.each{|e| r += e.abs2 }
-      Math.sqrt(r)
-    end
-  end
-  
-  v = Vector[Complex(1,1),Complex(2,2),Complex(3,3)]
-  p v.abs #=> 5.291502622 # Math.sqrt(28)
-  p v.r   #=> 'sqrt': undefined method `Rational'
-
 #@#=== ChangeLog
 #@#
 #@#  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
@@ -86,13 +38,13 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 
 @param a ベクトルの要素
 
-例:
-
-  require 'matrix'
-  v1 = Vector[1, 3, 5, 7]
-  v2 = Vector[5.25, 10.5]
-  p v1   #=> Vector[1, 3, 5, 7]
-  p v2   #=> Vector[5.25, 10.5]
+#@samplecode 例
+require 'matrix'
+v1 = Vector[1, 3, 5, 7]
+v2 = Vector[5.25, 10.5]
+p v1   # => Vector[1, 3, 5, 7]
+p v2   # => Vector[5.25, 10.5]
+#@end
 
 --- elements(a, copy = true) -> Vector
 
@@ -102,17 +54,17 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 @param a     [[c:Vector]]を生成する際の要素の配列
 @param copy  引数の配列 a のコピーをするかどうかのフラグ
 
-例:
-
-  require 'matrix'
-  a = [1, 2, 3, 4]
-  v1 = Vector.elements(a, true)
-  v2 = Vector.elements(a, false)
-  p v1        #=> Vector[1, 2, 3, 4]
-  p v2        #=> Vector[1, 2, 3, 4]
-  a[0] = -1
-  p v1        #=> Vector[1, 2, 3, 4]
-  p v2        #=> Vector[-1, 2, 3, 4]
+#@samplecode 例
+require 'matrix'
+a = [1, 2, 3, 4]
+v1 = Vector.elements(a, true)
+v2 = Vector.elements(a, false)
+p v1        # => Vector[1, 2, 3, 4]
+p v2        # => Vector[1, 2, 3, 4]
+a[0] = -1
+p v1        # => Vector[1, 2, 3, 4]
+p v2        # => Vector[-1, 2, 3, 4]
+#@end
 
 #@since 2.2.0
 --- independent?(*vectors) -> bool
@@ -125,9 +77,11 @@ Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とす
 
 size 次元ベクトル空間の index 番目の標準基底を返します。
 
-  require 'matrix'
-  Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
-  
+#@samplecode 例
+require 'matrix'
+Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
+#@end
+
 @param size ベクトルの次元
 @param index 標準基底の何番目か。0 origin
 
@@ -138,8 +92,10 @@ size 次元ベクトル空間の index 番目の標準基底を返します。
 
 零ベクトルを返します。
 
-  require 'matrix'
-  Vector.zero(3) # => Vector[0, 0, 0]
+#@samplecode 例
+require 'matrix'
+Vector.zero(3) # => Vector[0, 0, 0]
+#@end
 
 @param size ベクトルの次元
 #@end
@@ -160,7 +116,7 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@# for internal use
 #@# --- init_elements(array, copy) -> Array
 #@# ベクトルの要素を引数 array で初期化します。
-#@# 
+#@#
 #@# @param array ベクトルとして初期化する Array を指定します。
 #@# @param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
 #@#              true の場合はコピーします。
@@ -177,13 +133,13 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@#以下に、その定義と使用例を示します。
 #@#
 #@#  require 'matrix'
-#@#  
+#@#
 #@#  class Vector
 #@#    def []=(i,x)
 #@#      @elements[i]=x
 #@#    end
 #@#  end
-#@#  
+#@#
 #@#  v=Vector[1,2,3]
 #@#  v[2]=-1
 #@#  p v #=> Vector[1,2,-1]
@@ -198,9 +154,9 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 #@# for internal use
 #@# --- compare_by(elements) -> bool
-#@# 
+#@#
 #@# 自分自身と引数 elements を配列として比較します。
-#@# 
+#@#
 #@# @param elements 比較する配列。
 #@# @return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
 
@@ -210,13 +166,13 @@ self の各要素に数 other を乗じたベクトルを返します。
 
 @param other self の各要素に掛ける [[c:Numeric]] オブジェクトを指定します。
 
-例:
-
-  require 'matrix'
-  a = [1, 2, 3.5, 100]
-  v1 = Vector.elements(a)
-  p v1.*(2)     #=> Vector[2, 4, 7.0, 200]
-  p v1.*(-1.5)  #=> Vector[-1.5, -3.0, -5.25, -150.0]
+#@samplecode 例
+require 'matrix'
+a = [1, 2, 3.5, 100]
+v1 = Vector.elements(a)
+p v1.*(2)     # => Vector[2, 4, 7.0, 200]
+p v1.*(-1.5)  # => Vector[-1.5, -3.0, -5.25, -150.0]
+#@end
 
 --- *(m) -> Matrix
 
@@ -229,14 +185,15 @@ self の各要素に数 other を乗じたベクトルを返します。
 
 引数の行列 m は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
 
-例:
-  require 'matrix'
+#@samplecode 例
+require 'matrix'
 
-  v = Vector[1, 2]
-  a = [4, 5, 6]
-  m = Matrix[a]
+v = Vector[1, 2]
+a = [4, 5, 6]
+m = Matrix[a]
 
-  p v * m #=> Matrix[[4, 5, 6], [8, 10, 12]]
+p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
+#@end
 
 --- +(v) -> Vector | Matrix
 
@@ -285,63 +242,51 @@ v には column_size が 1 の [[c:Matrix]] オブジェクトも指定できま
 @raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
-#@since 1.9.2
 --- /(other) -> Vector
 
-self の各要素を数 other で割った行列を返します。
+self の各要素を数 other で割ったベクトルを返します。
 
 @param other self の各要素を割る [[c:Numeric]] オブジェクトを指定します。
-@raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix 
+@raise ExceptionForMatrix::ErrOperationNotDefined other が Vector や Matrix
        の場合に発生します
-#@end
 
 --- r -> Float
-#@since 1.9.3
 --- magnitude -> Float
 --- norm -> Float
-#@end
 
 ベクトルの大きさ（ノルム）を返します。
- 
-ただし、要素の自乗和の平方根（Math.sqrt）を計算しているので、
-複素ベクトルの場合は一般に正しい値（要素の絶対値自乗の和の平方根）
-を返しません。
 
- require 'matrix'
- Vector[3, 4].r # => 5.0
- Vector[Complex(0, 1), 0].r # => Complex(0.0, 1.0)   正しくは 1.0
+#@samplecode 例
+require 'matrix'
+Vector[3, 4].norm # => 5.0
+Vector[Complex(0, 1), 0].norm # => 1.0
+#@end
 
-要素が複素数の場合にも対応したメソッドは以下のように定義できます。
+@see [[m:Vector#normalize]]
 
-  require 'matrix'
-  
-  class Vector
-    def norm
-      Math.sqrt @elements.inject(0){|sum, z| sum+(z*z).abs}
-    end
-  end
-  
-  Vector[Complex(0, 1), 0].norm # => 1.0
-
-#@# 2.0 以降ではC^nの場合でも正しい norm を返す予定(2012-10-07)
-
-#@since 1.9.3
 --- normalize -> Vector
 自身を [[m:Vector#norm]] で正規化したベクトルを返します。
 
-[[m:Vector#norm]] を使うため複素ベクトルでは一般に正しい値を返しません。
-
 @raise Vector::ZeroVectorError ベクトルが0である場合に発生します。
 
+#@samplecode 例
+require 'matrix'
+v = Vector[2, 6, 9].normalize
+# => Vector[0.18181818181818182, 0.5454545454545454, 0.8181818181818182]
+v.norm # => 1.0
 #@end
+
+@see [[m:Vector#norm]]
 
 #@since 2.2.0
 --- angle_with(v) -> Float
 
 v と self がなす角度を返します。
 
-  require 'matrix'
-  Vector[1,0].angle_with(Vector[0,1]) # => Math::PI/2
+#@samplecode 例
+require 'matrix'
+Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
+#@end
 
 @param v このベクトルと self とがなす角度を計算します
 @raise ZeroVectorError self もしくは v のどちらかが零ベクトルである場合に
@@ -374,14 +319,14 @@ self が3次元ベクトル空間のときは
 普通のクロス積です。
 それ以外の場合は拡張されたクロス積で
 n-1個のn次元ベクトルが張る空間と
-直行するベクトルを返します。
+直交するベクトルを返します。
 
 self の次元が n であるとき、 vs は n-2 個の
 n次元ベクトルでなければなりません。
 
 @param vs クロス積を取るベクトルの集合
-@raise ExceptionForMatrix::ErrOperationNotDefined
-       self の次元が1以下であるときに発生します。
+@raise ExceptionForMatrix::ErrOperationNotDefined self の
+        次元が1以下であるときに発生します。
 @raise ArgumentError vs のベクトルの個数が n-2 以外である場合に発生します。
 
 #@end
@@ -399,16 +344,16 @@ n次元ベクトルでなければなりません。
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 #@end
 
-例:
-
-  require 'matrix'
-  a = [1, 2, 3.5, -10]
-  v1 = Vector.elements(a)
-  p v1 #=> Vector[1, 2, 3.5, -10]
-  v2 =  v1.map{|x|
-    x * -1
-  }
-  p v2 #=> Vector[-1, -2, -3.5, 10]
+#@samplecode 例
+require 'matrix'
+a = [1, 2, 3.5, -10]
+v1 = Vector.elements(a)
+p v1 # => Vector[1, 2, 3.5, -10]
+v2 =  v1.map{|x|
+  x * -1
+}
+p v2 # => Vector[-1, -2, -3.5, 10]
+#@end
 
 #@since 1.9.2
 --- each{|e| ... } -> self
@@ -463,19 +408,19 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 次の例は、２つのベクトルの要素毎の積を要素とする配列を生成します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-  
-  v1 = Vector[2, 3, 5]
-  v2 = Vector[7, 9, 11]
-  a = Array[7, 9, 11]
+v1 = Vector[2, 3, 5]
+v2 = Vector[7, 9, 11]
+a = Array[7, 9, 11]
 
-  z = v1.collect2(v2){|x, y| x * y }
-  p z #=> [14, 27, 55]
+z = v1.collect2(v2){ |x, y| x * y }
+p z # => [14, 27, 55]
 
-  z = v1.collect2(a) {|x, y| x * y } # ArrayでもOK
-  p z #=> [14, 27, 55]
+z = v1.collect2(a) { |x, y| x * y } # Array でも OK
+p z # => [14, 27, 55]
+#@end
 
 --- map2(v) {|x, y| ... } -> Vector
 
@@ -496,19 +441,19 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 次の例は、２つのベクトルの要素毎の積を要素として持つベクトルを生成します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-  
-  v1 = Vector[2, 3, 5]
-  v2 = Vector[7, 9, 11]
-  a = Array[7, 9, 11]
+v1 = Vector[2, 3, 5]
+v2 = Vector[7, 9, 11]
+a = Array[7, 9, 11]
 
-  z = v1.map2(v2) {|x, y| x * y }
-  p z #=> Vector[14, 27, 55]
+z = v1.map2(v2) { |x, y| x * y }
+p z # => Vector[14, 27, 55]
 
-  z = v1.map2(a) {|x, y| x * y } # ArrayでもOK
-  p z #=> Vector[14, 27, 55]
+z = v1.map2(a) { |x, y| x * y } # Array でも OK
+p z # => Vector[14, 27, 55]
+#@end
 
 --- covector -> Matrix
 [[c:Matrix]] オブジェクトへ変換します。
@@ -516,38 +461,38 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 列ベクトル (行列)、すなわち、(n, 1) 型の行列に変換します。
 実際には [[m:Matrix.row_vector]](self) を適用します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector[2, 3, 5]
-  p v #=> Vector[2, 3, 5]
-  m = v.covector
-  p m #=> Matrix[[2, 3, 5]]
+v = Vector[2, 3, 5]
+p v # => Vector[2, 3, 5]
+m = v.covector
+p m # => Matrix[[2, 3, 5]]
+#@end
 
 --- to_a -> Array
 
 ベクトル([[c:Vector]])から配列 ([[c:Array]]) に変換します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector[2, 3, 5, 7, 9]
-  a = v.to_a
-  p a #=> [2, 3, 5, 7, 9]
+v = Vector[2, 3, 5, 7, 9]
+a = v.to_a
+p a # => [2, 3, 5, 7, 9]
+#@end
 
 --- to_s -> String
 
 ベクトル([[c:Vector]])から文字列 ([[c:String]]) に変換します。
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector[2, 3, 5, 7, 9]
-  s = v.to_s
-  p s #=> "Vector[2, 3, 5, 7, 9]"
+v = Vector[2, 3, 5, 7, 9]
+s = v.to_s
+p s # => "Vector[2, 3, 5, 7, 9]"
+#@end
 
 #@since 1.9.1
 --- elements_to_f -> Vector
@@ -557,12 +502,13 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 このメソッドは deprecated です。 map(&:to_f) を使ってください。
 #@end
 
-例:
-  require 'matrix'
+#@samplecode 例
+require 'matrix'
 
-  v = Vector.elements([2, 3, 5, 7, 9])
-  vf = v.elements_to_f
-  p vf #=> "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
+v = Vector.elements([2, 3, 5, 7, 9])
+vf = v.elements_to_f
+p vf # => "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
+#@end
 
 --- elements_to_i -> Vector
 ベクトルの各成分を[[c:Integer]]に変換したベクトルを返します。
@@ -571,12 +517,12 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 このメソッドは deprecated です。 map(&:to_i) を使ってください。
 #@end
 
-例:
-  require 'matrix'
-
-  v = Vector.elements([2.5, 3.0, 5.01, 7])
-  vi = v.elements_to_i
-  p vi #=> "Vector[2, 3, 5, 7]"
+#@samplecode 例
+require 'matrix'
+v = Vector.elements([2.5, 3.0, 5.01, 7])
+vi = v.elements_to_i
+p vi # => "Vector[2, 3, 5, 7]"
+#@end
 
 --- elements_to_r -> Vector
 ベクトルの各成分を[[c:Rational]]に変換したベクトルを返します。
@@ -585,13 +531,13 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 このメソッドは deprecated です。 map(&:to_r) を使ってください。
 #@end
 
-例:
+#@samplecode 例
+require 'matrix'
 
-  require 'matrix'
-
-  v = Vector.elements([2.5, 3.0, 5.75, 7])
-  vr = v.elements_to_r
-  p vr #=> "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1)]"
+v = Vector.elements([2.5, 3.0, 5.75, 7])
+vr = v.elements_to_r
+p vr # => "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1)]"
+#@end
 
 #@end
 
@@ -603,7 +549,7 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 自分自身をコピーしたベクトルを返します。
 
---- inspect() -> String 
+--- inspect() -> String
 
 オブジェクトの内容を文字列化します。
 
@@ -612,10 +558,6 @@ v は配列互換(size メソッドと [] メソッドを持つ)オブジェク�
 
 すべての要素がゼロであれば true を返します。
 #@end
-
-= class ExceptionForMatrix::ErrDimensionMismatch < StandardError
-= class ExceptionForMatrix::ErrNotRegular < StandardError
-= class ExceptionForMatrix::ErrOperationNotDefined < StandardError
 
 #@since 1.9.3
 = class Vector::ZeroVectorError < StandardError

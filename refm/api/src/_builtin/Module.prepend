@@ -20,7 +20,7 @@ prepend の処理を追加/変更できます。
 
 
 @param modules prepend する [[c:Module]] を指定します
-@see [[m:Module#prepend_features]]
+@see [[m:Module#prepend_features]], [[m:Module#prepended]]
 
   # super と prepend の組み合わせの例
   module X

@@ -429,16 +429,6 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 
 @param informations 情報を文字列の配列で指定します。
 
---- rubyforge_project -> String
-
-この Gem の RubyForge 上でのプロジェクト名を返します。
-
---- rubyforge_project=(project_name)
-
-この Gem の RubyForge 上でのプロジェクト名をセットします。
-
-@param project_name RubyForge 上のプロジェクト名を指定します。
-
 --- rubygems_version -> String
 
 この Gem パッケージを作成した RubyGems のバージョンを返します。

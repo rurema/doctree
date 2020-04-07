@@ -1,7 +1,0 @@
-#@since 1.8.2
-= class XSD::XSDUnsignedByte < XSD::XSDUnsignedShort
-== class methods
---- new(value = nil)
-#@todo
-
-#@end

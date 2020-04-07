@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 require yaml
 require dbm
@@ -198,4 +197,3 @@ keys に対応する値を配列に格納して返します。
 
 @param keys キーを文字列で指定します。複数指定することができます。
 
-#@end

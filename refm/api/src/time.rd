@@ -28,6 +28,11 @@ date を [[m:Date._parse]] によって
 
 与えられた時刻に上位の要素がなかったり壊れていた場合、nowの
 該当要素が使われます。
+
+  require 'time'
+  time = Time.local(2019, 5, 1)
+  Time.parse("12:00", time)   #=> 2019-05-01 12:00:00 +0900
+
 下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
 
 @param date [[c:Time]] オブジェクトに変換可能な文字列を指定します。
@@ -159,8 +164,8 @@ date がISO 8601で定義されている形式に準拠していない、
 @see [[m:Time#xmlschema]], [[m:Time#iso8601]]
 
 #@since 1.9.1
---- strptime(date, format) -> Time
---- strptime(date, format){|y| ... } -> Time
+--- strptime(date, format, now=self.now) -> Time
+--- strptime(date, format, now=self.now){|y| ... } -> Time
 文字列を [[m:Date._strptime]] を用いて [[c:Time]] オブジェクト
 に変換します。
 
