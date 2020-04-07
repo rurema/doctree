@@ -36,7 +36,7 @@ alias JSON::Ext::Parser
 require 'json'
 
 class Person
-  attr_accessor  :name, :age
+  attr_accessor :name, :age
 
   def []=(key, value)
     instance_variable_set("@#{key}", value)
@@ -61,4 +61,3 @@ __END__
 --- source -> String
 
 現在のソースのコピーを返します。
-
