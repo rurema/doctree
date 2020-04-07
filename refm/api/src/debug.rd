@@ -3,7 +3,7 @@ category Development
 Ruby デバッガです。Ruby スクリプトのソースコードデバッグに使用します。
 
 また、Emacs を使用したインタフェース rubydb3x.el が
-Ruby のアーカイブの misc/ にあるので、活用してください。
+https://github.com/ruby/elisp にあるので、活用してください。
 
 === 使い方
 

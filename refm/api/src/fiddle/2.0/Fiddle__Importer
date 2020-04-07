@@ -132,7 +132,7 @@ t がクラスの場合、t が to_ptr というインスタンスメソッド�
 
   require 'fiddle/import'
   
-  module A
+  module M
     extend Fiddle::Importer
     Timeval = struct(["long tv_sec", "long tv_usec"])
     p sizeof("char") # => 1
@@ -175,7 +175,7 @@ C の構造体型に対応する Ruby のクラスを構築して返します。
     Timeval = struct(["long tv_sec", "long tv_usec"])
   end
   
-  time = Timeval.malloc
+  time = M::Timeval.malloc
   M.gettimeofday(time, Fiddle::NULL)
   p time.tv_sec
   p time.tv_usec

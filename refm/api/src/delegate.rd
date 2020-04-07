@@ -1,4 +1,3 @@
-#@since 1.8.0
 category DesignPattern
 
 メソッドの委譲 (delegation) を行うためのライブラリです。
@@ -126,7 +125,6 @@ obj のもつインスタンスメソッドのうち、
 
 #@end
 
-#@since 1.8.0
 --- __getobj__ -> object
 
 委譲先のオブジェクトを返します。
@@ -136,7 +134,6 @@ obj のもつインスタンスメソッドのうち、
 
 @raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
-#@end
 
 #@since 1.9.1
 --- __setobj__(obj) -> object
@@ -149,7 +146,6 @@ obj のもつインスタンスメソッドのうち、
 
 #@end
 
-#@since 1.8.1
 --- marshal_dump -> object
 
 シリアライゼーションをサポートするために[[m:Delegator#__getobj__]] が返すオブジェクトを返します。
@@ -160,9 +156,7 @@ obj のもつインスタンスメソッドのうち、
 
 @param obj [[m:Delegator#marshal_dump]]の戻り値のコピー
 
-#@end
 
-#@since 1.8.3
 --- method_missing(m, *args) -> object
 
 渡されたメソッド名と引数を使って、[[m:Delegator#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
@@ -187,7 +181,6 @@ obj のもつインスタンスメソッドのうち、
 
 @see [[m:Object#respond_to?]]
 
-#@end
 
 #@since 1.9.2
 --- freeze -> self
@@ -229,14 +222,11 @@ obj のもつインスタンスメソッドのうち、
 
 == Constants
 
-#@since 1.8.7
 #@until 1.9.1
 --- IgnoreBacktracePat -> Regexp
 
 バックトレースで無視するパターンを返します。
 #@end
-#@end
 
 #@include(delegate/SimpleDelegator)
 
-#@end

@@ -1,9 +1,0 @@
-#@since 1.8.1
-= class XSD::IconvCharset
-require 'iconv'
-
-== class methods
---- safe_iconv(to, from, str)
-#@todo
-
-#@end

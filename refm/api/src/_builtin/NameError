@@ -10,12 +10,19 @@
 == Class Methods
 
 --- new(error_message = "", name = nil) -> NameError
+#@since 2.6.0
+--- new(error_message = "", name = nil, receiver:) -> NameError
+#@end
 
 例外オブジェクトを生成して返します。
 
 @param error_message エラーメッセージを表す文字列です
 
 @param name 未定義だったシンボルです
+
+#@since 2.6.0
+@param receiver 原因となったメソッド呼び出しのレシーバです
+#@end
 
 例:
 

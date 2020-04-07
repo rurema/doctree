@@ -113,7 +113,19 @@ MT19937に基づく疑似乱数生成器を提供するクラスです。
 #@else
 @see [[m:Kernel.#rand]]
 #@end
+#@since 2.6.0
+--- bytes(size) -> String
 
+ランダムなバイナリー文字列を返します。結果の文字列のサイズを指定できます。
+
+@param size 結果の文字列のサイズをバイト数で指定します。
+
+#@samplecode
+Random.bytes(10) # => "\xAC\n\x7F\x8C/\xAA\xC4\x97u\xA6"
+#@end
+
+@see [[m:Random#bytes]]
+#@end
 == Instance Methods
 --- ==(other) -> bool
 
@@ -142,6 +154,9 @@ MT19937に基づく疑似乱数生成器を提供するクラスです。
   r2 = Random.new(1)
   p r2.bytes(10) # => "%\xF4\xC1j\xEB\x80G\xFF\x8C/"
 
+#@since 2.6.0
+@see [[m:Random.bytes]]
+#@end
 #@until 2.0.0
 --- marshal_dump -> Array
 [[m:Random#marshal_load]] で復元可能な配列を返します。

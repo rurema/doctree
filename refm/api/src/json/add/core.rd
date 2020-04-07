@@ -1,155 +1,21 @@
+require json/add/date
+require json/add/date_time
+require json/add/exception
+require json/add/range
+require json/add/regexp
+require json/add/struct
+require json/add/symbol
+require json/add/time
 
 Ruby のコアクラスに JSON 形式の文字列に変換するメソッドや
 JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
-= reopen Time
-== Singleton Methods
-
---- json_create(hash) -> Time
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
-
-@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
-
-= reopen Date
-== Singleton Methods
-
---- json_create(hash) -> Date
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
-
-@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
-
-
-= reopen DateTime
-== Singleton Methods
-
---- json_create(hash) -> DateTime
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
-
-@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
-
-
-= reopen Range
-== Singleton Methods
-
---- json_create(hash) -> Range
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
-
-@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
-
-
-= reopen Struct
-== Singleton Methods
-
---- json_create(hash) -> Struct
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
-
-@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
-
-
-= reopen Exception
-== Singleton Methods
-
---- json_create(hash) -> Exception
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] に渡されます。
-
-@see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
-
-
-= reopen Regexp
-== Singleton Methods
-
---- json_create(hash) -> Regexp
-
-JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
-
-@param hash 適切なキーを持つハッシュを指定します。
-
-== Public Instance Methods
-
---- to_json(*args) -> String
-
-自身を JSON 形式の文字列に変換して返します。
-
-内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
-
-@param args 引数には何の意味もありません。
-
-
+json/add/core サブライブラリを require すると、例えば [[c:Range]] オブ
+ジェクトを JSON 形式の文字列にしたり、[[c:Range]] オブジェクトに戻す事
+ができます。
+
+#@samplecode 例
+require 'json/add/core'
+(1..10).to_json            # => "{\"json_class\":\"Range\",\"a\":[1,10,false]}"
+JSON.load((1..10).to_json) # => 1..10
+#@end

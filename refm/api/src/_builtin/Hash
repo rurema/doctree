@@ -79,22 +79,24 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
 
 @param other 生成元となるハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
 
-  h = {1 => "value"}
-  h.default = "none"
-  
-  g = Hash[h]
-  p g #=> {1=>"value"}
-  
-  p h[:no] #=> "none"
-  p g[:no] #=> nil
-  
-  h[:add] = "some"
-  p h #=> {1=>"value", :add=>"some"}
-  p g #=> {1=>"value"}
-  
-  h[1] << 'plus' #破壊的操作
-  p h #=> {1=>"valueplus", :add=>"some"}
-  p g #=> {1=>"valueplus"}
+#@samplecode
+h = {1 => "value"}
+h.default = "none"
+
+g = Hash[h]
+p g #=> {1=>"value"}
+
+p h[:no] #=> "none"
+p g[:no] #=> nil
+
+h[:add] = "some"
+p h #=> {1=>"value", :add=>"some"}
+p g #=> {1=>"value"}
+
+h[1] << 'plus' #破壊的操作
+p h #=> {1=>"valueplus", :add=>"some"}
+p g #=> {1=>"valueplus"}
+#@end
 
 --- [](*key_and_value)  -> Hash
 
@@ -109,63 +111,36 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
 
 以下は配列からハッシュを生成する方法の例です。
 
-#@until 1.9.1
 (1) [キー, 値, ...] の配列からハッシュへ
 
-  ary = [1,"a", 2,"b", 3,"c"]
-  p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>"c"}
+#@samplecode
+ary = [1,"a", 2,"b", 3,["c"]]
+p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>["c"]}
+#@end
 
 (2) キーと値のペアの配列からハッシュへ
 
-  alist = [[1,"a"], [2,"b"], [3,"c"]]
-  p Hash[*alist.flatten]  # => {1=>"a", 2=>"b", 3=>"c"}
+#@samplecode
+alist = [[1,"a"], [2,"b"], [3,["c"]]]
+p alist.flatten(1) # => [1, "a", 2, "b", 3, ["c"]]
+p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
+#@end
 
 (3) キーと値の配列のペアからハッシュへ
 
-  keys = [1, 2, 3]
-  vals = ["a", "b", "c"]
-  alist = keys.zip(vals)   # あるいは alist = [keys,vals].transpose
-  p Hash[*alist.flatten]   # => {1=>"a", 2=>"b", 3=>"c"}
-
-#@since 1.8.7
-(4) キーや値が配列の場合
-
-  alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
-  hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
-
-#@else
-(4) キーや値が配列だと (2) や (3) の方法は使えないので地道に代入するしかない
-
-  h = Hash.new
-  alist = [[1,["a"]], [2,["b"]], [3,["c"]]]
-  alist.each {|k,v|
-    h[k] = v
-  }
-  p h  # => {1=>["a"], 2=>["b"], 3=>["c"]}
+#@samplecode
+keys = [1, 2, 3]
+vals = ["a", "b", ["c"]]
+alist = keys.zip(vals)     # あるいは alist = [keys,vals].transpose
+p alist # => [[1, "a"], [2, "b"], [3, ["c"]]]
+p Hash[alist]  # => {1=>"a", 2=>"b", 3=>["c"]}
 #@end
-#@end
-#@since 1.9.1
-(1) [キー, 値, ...] の配列からハッシュへ
-
-  ary = [1,"a", 2,"b", 3,["c"]]
-  p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>["c"]}
-
-(2) キーと値のペアの配列からハッシュへ
-
-  alist = [[1,"a"], [2,"b"], [3,["c"]]]
-  p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
-
-(3) キーと値の配列のペアからハッシュへ
-
-  keys = [1, 2, 3]
-  vals = ["a", "b", ["c"]]
-  alist = keys.zip(vals)     # あるいは alist = [keys,vals].transpose
-  p Hash[alist]  # => {1=>"a", 2=>"b", 3=>["c"]}
 
 (4) キーや値が配列の場合
 
-  alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
-  hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
+#@samplecode
+alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
+hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
 #@end
 
 --- new(ifnone = nil) -> Hash
@@ -306,30 +281,46 @@ self を返します。
 
 #@since 2.0.0
 --- to_h -> self | Hash
+#@since 2.6.0
+--- to_h {|key, value| block } -> Hash
+#@end
 
 self を返します。[[c:Hash]] クラスのサブクラスから呼び出した場合は
 self を [[c:Hash]] オブジェクトに変換します。
 
-例:
-  hash = {}
-  p hash.to_h      # => {}
-  p hash.to_h == hash # => true
+#@samplecode 例
+hash = {}
+p hash.to_h      # => {}
+p hash.to_h == hash # => true
 
-  class MyHash < Hash;end
-  my_hash = MyHash.new
-  p my_hash.to_h        # => {}
-  p my_hash.class       # => MyHash
-  p my_hash.to_h.class  # => Hash
+class MyHash < Hash;end
+my_hash = MyHash.new
+p my_hash.to_h        # => {}
+p my_hash.class       # => MyHash
+p my_hash.to_h.class  # => Hash
+#@end
 
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@samplecode ブロック付きの例
+hash = { "a" => 97, "b" => 98 }
+hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
+#@end
+
+@see [[m:Enumerable#map]]
+#@end
 #@end
 
 #@since 2.3.0
 --- to_proc -> Proc
 
-self に対応する [[c:Proc]] オブジェクトを返します。
+self のキーに対応する値を返す [[c:Proc]] オブジェクトを返します。
 
-  h = {1 => 10, 2 => 20, 3 => 30}
-  [1, 2, 3].map(&h) # => [10, 20, 30]
+#@samplecode
+h = {1 => 10, 2 => 20, 3 => 30}
+[1, 2, 3].map(&h) # => [10, 20, 30]
+#@end
 #@end
 
 --- length -> Integer
@@ -364,17 +355,14 @@ h.size          #=> 3
 === 参考
 値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
 
-  def safe_invert(orig_hash)
-    result = Hash.new{|h,key| h[key] = [] }
-    orig_hash.each{|key, value|
-      result[value] << key
-    }
-    result
+#@samplecode
+def safe_invert(orig_hash)
+  orig_hash.each_key.group_by do |key|
+    orig_hash[key]
   end
-  p safe_invert({"a"=>1, "b"=>1, "c"=>3})
-      #=> {1=>["a", "b"], 3=>["c"]}
-  
-  #転載：Rubyレシピブック No.120
+end
+p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
+#@end
 
 #@since 1.9.1
 @see [[m:Hash#key]]
@@ -804,9 +792,7 @@ key に対応する要素を取り除きます。
 @see [[m:Hash#delete_if]]
 
 --- reject {|key, value| ... } -> Hash
-#@since 1.8.7
---- reject                     -> Enumerable::Enumerator
-#@end
+--- reject                     -> Enumerator
 
 self を複製して、ブロックを評価した値が真になる要
 素を削除したハッシュを返します。
@@ -821,14 +807,12 @@ selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]か[[
 
 @see [[m:Hash#delete_if]],[[m:Hash#delete]],[[m:Enumerable#reject]]
 
-#@since 1.8.7
 #@since 1.9.1
 --- delete_if -> Enumerator
 --- reject!   -> Enumerator
 #@else
 --- delete_if -> Enumerable::Enumerator
 --- reject!   -> Enumerable::Enumerator
-#@end
 #@end
 --- delete_if {|key, value| ... } -> self
 --- reject! {|key, value| ... } -> self|nil
@@ -840,12 +824,10 @@ delete_if は常に self を返します。
 reject! は、要素を削除しなかった場合には nil を返し、
 そうでなければ self を返します。
 
-#@since 1.8.7
 #@until 1.9.1
 ブロックを省略した場合は [[c:Enumerable::Enumerator]] を返します。
 #@else
 ブロックを省略した場合は [[c:Enumerator]] を返します。
-#@end
 #@end
 
   h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
@@ -863,14 +845,12 @@ reject! は、要素を削除しなかった場合には nil を返し、
 
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each      -> Enumerator
 --- each_pair -> Enumerator
 #@else
 --- each      -> Enumerable::Enumerator
 --- each_pair -> Enumerable::Enumerator
-#@end
 #@end
 
 ハッシュのキーと値を引数としてブロックを評価します。
@@ -880,15 +860,11 @@ reject! は、要素を削除しなかった場合には nil を返し、
 #@else
 反復の際の評価順序は不定です。
 #@end
-#@since 1.8.7
 ブロック付きの場合 self を、
 #@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 #@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
-#@end
-#@else
-self を返します。
 #@end
 
 #@if( version >= "1.8.0" and version < "1.9.1" )
@@ -910,7 +886,6 @@ each は キーと値の配列を１引数で、each_pair は別々に２引数�
       [:b, 2]
 #@end
 
-#@since 1.8.7
 each_pair は each のエイリアスです。
 
   {:a=>1, :b=>2}.each {|a| p a}
@@ -930,17 +905,14 @@ each_pair は each のエイリアスです。
 #@else
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
-#@end
 
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_key -> Enumerator
 #@else
 --- each_key -> Enumerable::Enumerator
-#@end
 #@end
 
 ハッシュのキーを引数としてブロックを評価します。
@@ -950,38 +922,30 @@ each_pair は each のエイリアスです。
 #@else
 反復の際の評価順序は不定です。
 #@end
-#@since 1.8.7
 ブロック付きの場合selfを、
 #@since 1.9.1
 無しで呼ばれた場合[[c:Enumerator]]を返します。
 #@else
 無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
 #@end
-#@else
-self を返します。
-#@end
 
   {:a=>1, :b=>2}.each_key {|k| p k}
   #=> :a
       :b
        
-#@since 1.8.7
 #@since 1.9.1
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
 #@else
   p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
 #@end
-#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
 --- each_value {|value| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each_value -> Enumerator
 #@else
 --- each_value -> Enumerable::Enumerator
-#@end
 #@end
 
 ハッシュの値を引数としてブロックを評価します。
@@ -991,27 +955,21 @@ self を返します。
 #@else
 反復の際の評価順序は不定です。
 #@end
-#@since 1.8.7
 ブロック付きの場合selfを、
 #@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 #@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
 #@end
-#@else
-self を返します。
-#@end
 
   {:a=>1, :b=>2}.each_value {|v| p v}
   #=> 1
       2
   
-#@since 1.8.7
 #@since 1.9.1
   p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
 #@else
   p({:a=>1, :b=>2}.each_value)  #=> #<Enumerable::Enumerator:0xbb19e4>
-#@end
 #@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
@@ -1125,10 +1083,135 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
 @see [[m:Object#hash]]
 
+#@since 2.6.0
+--- merge(*others) -> Hash
+--- merge(*others) {|key, self_val, other_val| ... } -> Hash
+
+selfとothersのハッシュの内容を順番にマージ(統合)した結果を返します。
+デフォルト値はselfの設定のままです。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+othersがハッシュではない場合、othersのメソッドto_hashを使って暗黙の変換を試みます。
+
+@param others マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+@return マージした結果を返します
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h3 = { "b" => 357, "d" => 400 }
+h1.merge          #=> {"a"=>100, "b"=>200}
+h1.merge(h2)      #=> {"a"=>100, "b"=>246, "c"=>300}
+h1.merge(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+h1.merge(h2) {|key, oldval, newval| newval - oldval}
+                  #=> {"a"=>100, "b"=>46,  "c"=>300}
+h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
+                  #=> {"a"=>100, "b"=>311, "c"=>300, "d"=>400}
+h1                #=> {"a"=>100, "b"=>200}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.merge(bar)
+       # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"b", 3=>"c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+#@end
+
+#@samplecode
+class Foo
+  def to_hash
+    {:Australia => 'Sydney',
+     :France => 'Paris'
+     }
+  end
+end
+
+h = {:Germany => 'Berlin',
+     :Australia => 'Canberra',
+     :France => 'Paris'
+     }
+
+# 暗黙の変換
+p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+#@end
+
+@see [[m:Hash#update]],[[m:Hash#replace]]
+
+--- merge!(*others) -> self
+--- merge!(*others) {|key, self_val, other_val| ... } -> self
+--- update(*others) -> self
+--- update(*others) {|key, self_val, other_val| ... } -> self
+
+selfとothersのハッシュの内容を順番にマージ(統合)します。
+
+デフォルト値はselfの設定のままです。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+othersがハッシュではない場合、othersのメソッドto_hashを使って暗黙の変換を試みます。
+
+@param others マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+@return マージ後のselfを返します。
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h1.merge!          #=> {"a"=>100, "b"=>200}
+h1                 #=> {"a"=>100, "b"=>200}
+#@end
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h1.merge!(h2)      #=> {"a"=>100, "b"=>246, "c"=>300}
+h1                 #=> {"a"=>100, "b"=>246, "c"=>300}
+#@end
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h3 = { "b" => 357, "d" => 400 }
+h1.merge!(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+h1                 #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+#@end
+
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h3 = { "b" => 357, "d" => 400 }
+h1.merge!(h2, h3) {|key, v1, v2| v1 }
+                   #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+h1                 #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#@end
+
+@see [[m:Hash#merge]],[[m:Hash#replace]]
+
+#@else
 --- merge(other) -> Hash
 --- merge(other) {|key, self_val, other_val| ... } -> Hash
---- merge!(other) -> self
---- merge!(other) {|key, self_val, other_val| ... } -> self
 
 selfとotherのハッシュの内容をマージ(統合)した結果を返します。デフォルト値はselfの設定のままです。
 
@@ -1137,66 +1220,96 @@ self と other に同じキーがあった場合はブロック付きか否か�
 その返す値を重複キーに対応する値にします。ブロック付きでない
 場合は常に other の値を使います。
 
-Hash#merge! は、マージの結果でselfを変更する破壊的メソッドで、[[m:Hash#update]] の別名です。
-
 otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
 
 @param other マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
 @return マージした結果を返します
 
-  foo = {1 => 'a', 2 => 'b', 3 => 'c'}
-  bar = {2 => 'B', 3 => 'C', 4 => 'D'}
-  
-  p foo.merge(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"b", 3=>"c"}
-  
-  p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val } #=> {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
-  
-  class Foo
-    def to_hash
-      {:Australia => 'Sydney',
-       :France => 'Paris'
-       }
-    end
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge()     # => {"a"=>100, "b"=>200}
+h1.merge(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1.merge(h2){|key, oldval, newval| newval - oldval}
+               # => {"a"=>100, "b"=>54,  "c"=>300}
+h1             # => {"a"=>100, "b"=>200}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.merge(bar)
+       # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"b", 3=>"c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+#@end
+
+#@samplecode
+class Foo
+  def to_hash
+    {:Australia => 'Sydney',
+     :France => 'Paris'
+     }
   end
-  
-  h = {:Germany => 'Berlin',
-       :Australia => 'Canberra',
-       :France => 'Paris'
-       }
-  h.merge!(Foo.new) #暗黙の変換
-  p h #=> {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+end
+
+h = {:Germany => 'Berlin',
+     :Australia => 'Canberra',
+     :France => 'Paris'
+     }
+
+# 暗黙の変換
+p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+#@end
 
 @see [[m:Hash#update]],[[m:Hash#replace]]
 
+--- merge!(other) -> self
+--- merge!(other) {|key, self_val, other_val| ... } -> self
 --- update(other) -> self
 --- update(other) {|key, self_val, other_val| ... } -> self
 
-selfとotherのハッシュの内容をマージ(統合)します。[[m:Hash#merge!]]と同じです。
+selfとotherのハッシュの内容をマージ(統合)します。
 
 デフォルト値はselfの設定のままです。
+
+self と other に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に other の値を使います。
+
 otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
 
 @param other マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
 @return マージ後のselfを返します。
 
-  foo = {1 => 'a', 2 => 'b', 3 => 'c'}
-  bar = {2 => 'B', 3 => 'C', 4 => 'D'}
-  
-  p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-  
-  p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
-  p foo  #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#@samplecode
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge!(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1              # => {"a"=>100, "b"=>254, "c"=>300}
+#@end
+
+#@samplecode
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#@end
 
 @see [[m:Hash#merge!]]
-
+#@end
 --- ==(other) -> bool
 --- ===(other) -> bool
-#@since 1.8.7
 --- eql?(other) -> bool
-#@end
 
 自身と other が同じ数のキーを保持し、キーが eql? メソッドで比較して全て等しく、
 値が == メソッドで比較して全て等しい場合に真を返します。
@@ -1212,24 +1325,15 @@ otherがハッシュではない場合、otherのメソッドto_hashを使って
 
 @see [[m:Hash#equal?]]
 
-#@until 1.8.7
---- eql?(other) -> bool
-#@end
 --- equal?(other) -> bool
 
 指定された other が self 自身である場合のみ真を返します。
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-#@until 1.8.7
- p({}.eql?({}))     #=> false 
- a = {}
- p a.eql?(a)        #=> true
-#@else
  p({}.equal?({}))     #=> false 
  a = {}
  p a.equal?(a)        #=> true
-#@end
 
 @see [[m:Hash#==]]
 
@@ -1293,7 +1397,6 @@ other が self のサブセットである場合に真を返します。
 
 --- hash    -> Integer
 
-#@since 1.8.7
 自身が保持するキーと値のハッシュ値を元にして算出した整数を返します。
 自身が保持するキーや値が変化すればこのメソッドが返す値も変化します。
 
@@ -1302,16 +1405,6 @@ other が self のサブセットである場合に真を返します。
   a[1] = :x
   p a.hash     #=> 329543
 
-#@else
-自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
-メソッド hash の返り値は自身が保持するキーや値に影響されません。
-
-  a = {}
-  p a.hash    #=> 538688380
-  a[1] = :a
-  p a.hash    #=> 538688380
-
-#@end
 
 #@since 1.9.1
 
@@ -1373,36 +1466,27 @@ key が見つからなかった場合は、nil を返します。
 
 #@end
 
-#@since 1.8.7
-#@since 1.9.1
---- select                        -> Enumerator
-#@else
---- select                        -> Enumerable::Enumerator
-#@end
-#@end
-#@since 1.9.1
+--- select                       -> Enumerator
 --- select {|key, value| ... }   -> Hash
+#@since 2.6.0
+--- filter                       -> Enumerator
+--- filter {|key, value| ... }   -> Hash
+#@end
 
 key, value のペアについてブロックを評価し，真となるペアだけを含む
 ハッシュを生成して返します。
 
-   h = { "a" => 100, "b" => 200, "c" => 300 }
-   h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
-   h.select {|k,v| v < 200}  #=> {"a" => 100}
+ブロックが与えられなかった場合は、自身と select から生成した
+[[c:Enumerator]] オブジェクトを返します。
 
-#@else
---- select {|key, value| ... }   -> Array
-
-key, value のペアについてブロックを評価し、真となるペアだけを含む
-配列を生成して返します。
-
-生成される配列は、[key, value] を要素とする配列です。
-
-   h = { "a" => 100, "b" => 200, "c" => 300 }
-   h.select {|k,v| k > "a"}  #=> [["b", 200], ["c", 300]]
-   h.select {|k,v| v < 200}  #=> [["a", 100]]
-
+#@samplecode
+h = { "a" => 100, "b" => 200, "c" => 300 }
+h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
+h.select {|k,v| v < 200}  #=> {"a" => 100}
 #@end
+
+
+@see [[m:Hash#select!]], [[m:Hash#reject]]
 
 #@since 1.9.1
 --- to_s     -> String
@@ -1435,16 +1519,24 @@ key, value のペアについてブロックを評価し、真となるペアだ
 
 @see [[m:Array#sort]]
 #@since 1.9.2
---- keep_if {|key, value| ... } -> self
---- select! {|key, value| ... } -> self | nil
 --- keep_if -> Enumerator
+--- keep_if {|key, value| ... } -> self
 --- select! -> Enumerator
+--- select! {|key, value| ... } -> self | nil
+#@since 2.6.0
+--- filter! -> Enumerator
+--- filter! {|key, value| ... }   -> self | nil
+#@end
 
 キーと値を引数としてブロックを評価した結果が真であるような要素を self
 に残します。
 
 keep_if は常に self を返します。
+#@since 2.6.0
+filter! と select! はオブジェクトが変更された場合に self を、
+#@else
 select! はオブジェクトが変更された場合に self を、
+#@end
 されていない場合に nil を返します。
 
 ブロックが与えられなかった場合は、自身と keep_if から生成した
@@ -1463,7 +1555,7 @@ select! はオブジェクトが変更された場合に self を、
   h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
   h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
 
-@see [[m:Hash#select]], [[m:Hash#delete_if]],[[m:Hash#reject!]]
+@see [[m:Hash#select]], [[m:Hash#delete_if]], [[m:Hash#reject!]]
 #@end
 #@since 2.4.0
 --- transform_values {|value| ... } -> Hash
@@ -1515,11 +1607,11 @@ select! はオブジェクトが変更された場合に self を、
 値は変化しません。
 
 #@samplecode 例
-  h = { a: 1, b: 2, c: 3 }
-  h.transform_keys {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
-  h.transform_keys(&:to_s)        # => { "a" => 1, "b" => 2, "c" => 3 }
-  h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
-                                  # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+h = { a: 1, b: 2, c: 3 }
+h.transform_keys {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+h.transform_keys(&:to_s)        # => { "a" => 1, "b" => 2, "c" => 3 }
+h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+                                # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
 #@end
 
 @see [[m:Hash#transform_keys!]]
@@ -1538,11 +1630,11 @@ select! はオブジェクトが変更された場合に self を、
 
 
 #@samplecode 例
-  h = { a: 1, b: 2, c: 3 }
-  h.transform_keys! {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
-  h.transform_keys!(&:to_sym)      # => { a: 1, b: 2, c: 3 }
-  h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
-                                   # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
+h = { a: 1, b: 2, c: 3 }
+h.transform_keys! {|k| k.to_s }  # => { "a" => 1, "b" => 2, "c" => 3 }
+h.transform_keys!(&:to_sym)      # => { a: 1, b: 2, c: 3 }
+h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+                                 # => { "a.0" => 1, "b.1" => 2, "c.2" => 3 }
 #@end
 
 @see [[m:Hash#transform_keys]]
@@ -1554,8 +1646,8 @@ select! はオブジェクトが変更された場合に self を、
 引数で指定されたキーとその値だけを含む Hash を返します。
 
 #@samplecode 例
-  h = { a: 100, b: 200, c: 300 }
-  h.slice(:a)           # => {:a=>100}
-  h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
+h = { a: 100, b: 200, c: 300 }
+h.slice(:a)           # => {:a=>100}
+h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
 #@end
 #@end

@@ -1,4 +1,3 @@
-#@since 1.8.0
 category Windows
 
 win32/registry は Win32 プラットフォームでレジストリをアクセスするための
@@ -504,4 +503,3 @@ subkey の値を返します。
 --- MAX_VALUE_LENGTH
 #@todo
 
-#@end

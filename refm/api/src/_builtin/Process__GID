@@ -1,4 +1,3 @@
-#@since 1.8.0
 = module Process::GID
 
 カレントプロセスのグループ ID を操作するためのモジュールです。
@@ -150,5 +149,4 @@
 @param name グループ名を指定します。
 
 @raise ArgumentError 引数で指定したグループが存在しない場合に発生します。
-#@end
 #@end
