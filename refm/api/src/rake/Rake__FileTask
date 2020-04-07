@@ -28,7 +28,7 @@ file "test.txt" do |task|
 end
 #@end
 
---- timestamp -> Time
+--- timestamp -> Time | Rake::LateTime
 
 ファイルタスクのタイムスタンプを返します。
 
