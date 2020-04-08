@@ -59,7 +59,8 @@ gem "rack", "~> 1.6", ">= 1.6.12"
 実行時に必要となる gem を指定します。
 
 #@samplecode
-spec.add_runtime_dependency('tanzanite', '~> 1.2', '>= 1.2.1')
+# https://github.com/rurema/bitclust/blob/v1.2.3/bitclust-core.gemspec#L25
+s.add_runtime_dependency "progressbar", ">= 1.9.0", "< 2.0"
 #@end
 
 @param gem 依存する gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
