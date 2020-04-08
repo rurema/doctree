@@ -43,7 +43,7 @@ Gem パッケージのメタデータを扱うためのクラスです。
 この gem の開発時に必要となる gem を指定します。
 
 #@samplecode
-spec.add_development_dependency('alexandrite', '~> 2.3', '>= 2.3.8')
+gem "rack", "~> 1.6", ">= 1.6.12"
 #@end
 
 @param gem 依存する gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
