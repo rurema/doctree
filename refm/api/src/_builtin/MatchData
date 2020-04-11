@@ -122,11 +122,7 @@ p $~.to_a       # => ["foobar", "foo", "bar", nil]
 p $~.captures   # => ["foo", "bar", nil]
 #@end
 
-#@since 2.4.0
 @see [[m:MatchData#to_a]], [[m:MatchData#named_captures]]
-#@else
-@see [[m:MatchData#to_a]]
-#@end
 
 --- length -> Integer
 --- size -> Integer
@@ -177,20 +173,6 @@ p $~.pre_match  # => "foo"
 #@end
 
 @see [[m:MatchData#post_match]]
-
-#@until 1.9.1
---- select {|s| ... } -> [String]
-各要素に対してブロックを評価した値が真であった要素を全て含む配列を
-返します。真になる要素がひとつもなかった場合は空の配列を返します。
-
-self.to_a.select { ... } と同じです。
-
-#@samplecode 例
-m = /(.)(.)(\d+)(\d)/.match("THX1138: The Movie")
-p m.select{|x| /X/ =~ x}   # => ["HX1138", "X"]
-#@end
-
-#@end
 
 --- string -> String
 
@@ -248,28 +230,21 @@ puts /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").inspect
 
 0 番目は [[m:$&]] のようにマッチした文字列全体を表します。
 
-#@since 2.4.0
 @param index インデックスを整数またはシンボル(名前付きキャプチャの場合)で 0 個以上指定します。
-#@else
-@param index インデックスを整数で 0 個以上指定します。
-#@end
 
 #@samplecode 例
 m = /(foo)(bar)(baz)/.match("foobarbaz")
 # same as m.to_a.values_at(...)
 p m.values_at(0, 1, 2, 3, 4)      # => ["foobarbaz", "foo", "bar", "baz", nil]
 p m.values_at(-1, -2, -3, -4, -5) # => ["baz", "bar", "foo", nil, nil]
-#@since 2.4.0
 
 m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
 m.to_a                   # => ["1 + 2", "1", "+", "2"]
 m.values_at(:a, :b, :op) # => ["1", "2", "+"]
 #@end
-#@end
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 
-#@since 1.9.1
 --- names -> [String]
 
 名前付きキャプチャの名前を文字列配列で返します。
@@ -292,8 +267,6 @@ m = /a.*b/.match("abc")
 m.regexp # => /a.*b/
 #@end
 
-#@end
-#@since 1.9.2
 --- hash -> Integer
 
 self のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
@@ -335,8 +308,6 @@ m2 = r.match("abcabc", 0) # => #<MatchData "abc">
 m1 == m2  # => true
 #@end
 
-#@end
-#@since 2.4.0
 --- named_captures -> Hash
 
 名前付きキャプチャをHashで返します。
@@ -358,4 +329,3 @@ m.named_captures # => {"a" => "x"}
 #@end
 
 @see [[m:MatchData#captures]]
-#@end
