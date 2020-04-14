@@ -34,7 +34,7 @@
 
 : Bignum
   Ruby 2.3 系までは、即値で実装されない絶対値の大きな整数オブジェクトが属す
-  クラスだった。Ruby 2.4 では Fixnum と共に [[c:Integer]] に一本化された。
+  クラスだった。Ruby 2.4 で Fixnum と共に [[c:Integer]] に一本化された。
   このとき Bignum は形式的には残されたが単なる Integer のエイリアスとなった。
 
 : blade
