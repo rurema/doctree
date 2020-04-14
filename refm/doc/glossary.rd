@@ -178,16 +178,16 @@
 
 ===[a:J] J
 
+: JIS X 3017
+  日本工業規格「プログラム言語 Ruby」。ISO/IEC 30170 を JIS 化したもの。
+  2011 年制定、2013 年改正。
+
 : JRuby
   Java で実装された Ruby の処理系。
   Ruby スクリプトから Java のクラスを利用したり、Java プログラムから Ruby を
   呼ぶなど、Ruby と Java が容易に連携できるという特長がある。
 
   [[url:https://www.jruby.org/]]
-
-: JIS X 3017
-  日本工業規格「プログラム言語 Ruby」。ISO/IEC 30170 を JIS 化したもの。
-  2011 年制定、2013 年改正。
 
 ===[a:M] M
 
