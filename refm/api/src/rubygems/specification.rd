@@ -37,24 +37,37 @@ Gem パッケージのメタデータを扱うためのクラスです。
 
 @param executables 実行コマンド名を格納した配列を指定します。
 
---- add_dependency
-#@todo
+--- add_development_dependency(gem, *requirements) -> [Gem::Dependency]
 
---- add_development_dependency(gem, *requirements) -> Array
---- add_runtime_dependency(gem, *requirements) -> Array
-#@todo
+この gem の DEVELOPMENT 依存性を追加します。
+この gem の開発時に必要となる gem を指定します。
 
-この Gem を実行するための依存関係を追加します。
+#@samplecode
+gem "rack", "~> 1.6", ">= 1.6.12"
+#@end
 
-例:
-  spec.add_runtime_dependency('jabber4r', '> 0.1', '<= 0.5')
+@param gem 依存する gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
 
+@param requirements バージョンの必要条件を 0 個以上指定します。デフォルトは ">= 0" です。
 
-@param gem 依存する Gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
+@see [[m:Gem::Specification#add_runtime_dependency]], [[c:Gem::Dependency]]
 
-@param requirements バージョンの必須条件を指定します。デフォルトは ">= 0" です。
+--- add_dependency(gem, *requirements) -> [Gem::Dependency]
+--- add_runtime_dependency(gem, *requirements) -> [Gem::Dependency]
 
-@see [[c:Gem::Dependency]]
+この gem の RUNTIME 依存性を追加します。
+実行時に必要となる gem を指定します。
+
+#@samplecode
+# https://github.com/rurema/bitclust/blob/v1.2.3/bitclust-core.gemspec#L25
+s.add_runtime_dependency "progressbar", ">= 1.9.0", "< 2.0"
+#@end
+
+@param gem 依存する gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
+
+@param requirements バージョンの必要条件を 0 個以上指定します。デフォルトは ">= 0" です。
+
+@see [[m:Gem::Specification#add_development_dependency]], [[c:Gem::Dependency]]
 
 --- assign_defaults -> ()
 
@@ -702,5 +715,3 @@ gemspec ファイルのバージョンの歴史を表す定数です。
 --- TODAY -> Time
 
 本日の日付を返します。
-
-
