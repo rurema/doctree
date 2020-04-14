@@ -137,7 +137,7 @@
   Ruby 2.3 系までは、整数は即値で実装されるものが Finxnum のインスタンスであり、
   そうでないものは Bignum のインスタンスであった。[[c:Integer]] はこれらをまとめる
   抽象クラスだった。
-  Ruby 2.4 ではこれらが Integer に統合され、Fixnum と Bignum は Integer の
+  Ruby 2.4 でこれらが Integer に統合され、Fixnum と Bignum は Integer の
   単なるエイリアスとなった。
 
 : flonum
