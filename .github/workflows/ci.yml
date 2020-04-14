@@ -28,10 +28,6 @@ jobs:
         done
     - uses: actions/upload-artifact@master
       with:
-        name: statichtml-2.4.0
-        path: /tmp/html/2.4.0.tar.xz
-    - uses: actions/upload-artifact@master
-      with:
         name: statichtml-2.5.0
         path: /tmp/html/2.5.0.tar.xz
     - uses: actions/upload-artifact@master
