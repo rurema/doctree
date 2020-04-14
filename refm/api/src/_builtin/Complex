@@ -181,7 +181,7 @@ Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 #@end
 
 #@samplecode 例
-(1+1i).finite?                   # => true
+(1 + 1i).finite?                 # => true
 (Float::INFINITY + 1i).finite?   # => false
 #@end
 
