@@ -144,11 +144,11 @@ task :check_indent_in_samplecode do
   errors = []
   `git grep -F --name-only '\#@samplecode'`.lines(chomp: true).each do |path|
     lines = File.read(path).lines(chomp: true)
-    lines.each.with_index(1) do |line, idx|
+    lines.each.with_index(1) do |line, lineno|
       next unless line.start_with?('#@samplecode')
-      next unless lines[idx].start_with?(' ')
+      next unless lines[lineno].start_with?(' ')
 
-      errors << "#{path}:#{idx}: \#@samplecode の中に不要なインデントがあります。削除してください"
+      errors << "#{path}:#{lineno}: \#@samplecode の中に不要なインデントがあります。削除してください"
     end
   end
 
