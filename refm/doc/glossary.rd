@@ -1710,7 +1710,7 @@
 
 : 例外
 : exception
-  [[c:Exception]] クラスのインスタンス。
+  [[c:Exception]] クラス（やその子孫クラス）のインスタンス。
 
 : レキシカルスコープ
 : lexical scope
