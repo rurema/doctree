@@ -241,6 +241,11 @@
 
   [[url:https://opalrb.com/]]
 
+  ウェブ上で Ruby コードが試せる TryRuby は、バージョン 4 で Opal を
+  採用し、ブラウザー上でコードを動作させるようになった。
+
+  [[url:https://try.ruby-lang.org/]]
+
 ===[a:R] R
 
 : Rake
