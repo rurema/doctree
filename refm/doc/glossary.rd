@@ -1171,7 +1171,7 @@
   →ソフトウエアテスト
 
 : テスト駆動開発
-: test-driven development
+: TDD: test-driven development
   テストコードを先に記述してから機能を実装するプログラミング手法。
 
 : テストファースト
