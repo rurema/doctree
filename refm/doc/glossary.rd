@@ -1277,7 +1277,7 @@
   すべてのオブジェクトには自身が属すクラスとは別に、オブジェクト固有の
   クラスがあり、特異クラスと呼ばれる。
 
-  参照：[[m:Object#singleton_class]] 
+  参照：[[m:Object#singleton_class]]
 
 : 特異メソッド
 : singleton method
