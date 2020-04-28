@@ -212,11 +212,11 @@ where(sales: ..100)
 #@end
 
   * 「$;」にnil以外の値を設定すると警告が出るようになりました。 [[feature:14240]]
-    This includes the usage in String#split.
+    nil以外の時は[[m:String#split]]で参照した時も警告が出ます。
     この警告は「-W:no-deprecated」オプションで止められます。
 
   * 「$,」にnil以外の値を設定すると警告が出るようになりました。 [[feature:14240]]
-    This includes the usage in Array#join.
+    nil以外の時は[[m:Array#join]]で参照した時も警告が出ます。
     この警告は「-W:no-deprecated」オプションで止められます。
 
   * ヒアドキュメントの識別子の引用符は同じ行で閉じる必要があります。
@@ -229,7 +229,7 @@ EOS
 
   * フリップフロップが非推奨になったのが元に戻されました。 [[feature:5400]]
 
-  * Comment lines can be placed between fluent dot now.
+  * 以下のような場所にコメントを書けるようになりました。
 
 #@samplecode
 foo
@@ -240,8 +240,7 @@ foo
   * リテラルの「self」をレシーバーとしたプライベートメソッド呼び出しが
     できるようになりました。 [[feature:11297]] [[feature:16123]]
 
-  * Modifier rescue now operates the same for multiple assignment as single
-    assignment. [[bug:8279]]
+  * 多重代入でのrescue修飾子が単一の代入と同じ振る舞いになりました。 [[bug:8279]]
 
 #@samplecode
 a, b = raise rescue [1, 2]
@@ -249,8 +248,8 @@ a, b = raise rescue [1, 2]
 # Now parsed as:         a, b = (raise rescue [1, 2])
 #@end
 
-  * +yield+ in singleton class syntax will now display a warning. This behavior
-    will soon be deprecated. [[feature:15575]]
+  * 特異クラス構文での yield は警告を表示するようになりました。
+    これは deprecated です。 [[feature:15575]]
     この警告は「-W:no-deprecated」オプションで止められます。
 
 #@samplecode
@@ -262,7 +261,9 @@ end
 foo { p :ok }
 #@end
 
-  * Argument forwarding by <code>(...)</code> is introduced. [[feature:16253]]
+  * 引数を転送する記法「(...)」が導入されました。 [[feature:16253]]
+    * foo の全ての引数(キーワード引数やブロックを含む)を bar に転送します。
+      注意点として括弧は必須です。「bar ...」は終端なし Range と解釈されます。
 
 #@samplecode
 def foo(...)
@@ -270,21 +271,16 @@ def foo(...)
 end
 #@end
 
-  * All arguments to +foo+ are forwarded to +bar+, including keyword and
-    block arguments.
-    Note that the parentheses are mandatory.  <code>bar ...</code> is parsed
-    as an endless range.
+  * 「$SAFE」の参照や代入は警告が表示されるようになりました。
+    Ruby 3.0 で「$SAFE」は普通のグローバル変数になる予定です。 [[feature:16131]]
 
-  * Access and setting of <code>$SAFE</code> will now always display a warning.
-    <code>$SAFE</code> will become a normal global variable in Ruby 3.0.
-    [[feature:16131]]
+  * [[m:Object#taint]],[[m:Object#untaint]],[[m:Object#trust]],[[m:Object#untrust]]と関連する
+    C の関数は何もしなくなりました。(全てのオブジェクトは untainted 扱いです。)
+    verbose モードでは警告が表示されます。
+    この警告は Ruby 3.0 では verbose モードでなくても表示され、Ruby 3.2 で削除される
+    予定です。 [[feature:16131]]
 
-  * <code>Object#{taint,untaint,trust,untrust}</code> and related functions in the C-API
-    no longer have an effect (all objects are always considered untainted), and will now
-    display a warning in verbose mode. This warning will be disabled even in non-verbose mode in
-    Ruby 3.0, and the methods and C functions will be removed in Ruby 3.2. [[feature:16131]]
-
-  * Refinements take place at Object#method and Module#instance_method. [[feature:15373]]
+  * [[m:Object#method]]と[[m:Module#instance_method]]がrefinementsを考慮するようになりました。 [[feature:15373]]
 
 === コマンドラインオプション
 
@@ -293,7 +289,7 @@ end
 カテゴリ化された警告を管理するために「-W」オプションが「:」を続けられるように
 拡張されました。 [[feature:16345]] [[feature:16420]]
 
-  * 非推奨警告を止める:
+  * 非推奨警告を止める例:
 
 //emlist{
 $ ruby -e '$; = ""'
@@ -302,13 +298,13 @@ $ ruby -e '$; = ""'
 $ ruby -W:no-deprecated -e '$; = //'
 //}
 
-  * RUBYOPT環境変数でも使えます:
+  * RUBYOPT環境変数での使用例:
 
 //emlist{
 $ RUBYOPT=-W:no-deprecated ruby -e '$; = //'
 //}
 
-  * 実験的機能の警告を止める:
+  * 実験的機能の警告を止める例:
 
 //emlist{
 $ ruby -e '0 in a'
@@ -325,7 +321,7 @@ $ RUBYOPT='-W:no-deprecated -W:no-experimental' ruby -e '($; = "") in a'
 
 組み込みクラスの更新のWarningも参照してください。
 
-=== 組み込みクラスの更新 (outstanding ones only)
+=== 組み込みクラスの更新 (注目すべきもののみ)
 
   * [[c:Array]]
     * 新規メソッド
@@ -352,7 +348,7 @@ $ RUBYOPT='-W:no-deprecated -W:no-experimental' ruby -e '($; = "") in a'
 
   * [[c:Dir]]
     * 変更されたメソッド
-      * [[m:Dir.glob]]と[[m:Dir.[] ]] がNUL区切りのグロブパターンを受け付けなくなりました。
+      * [[m:Dir.glob]]と[[m:Dir.[] ]] がNUL文字区切りのグロブパターンを受け付けなくなりました。
         代わりにArrayを使ってください。 [[feature:14643]]
 
   * [[c:Encoding]]
@@ -372,13 +368,12 @@ $ RUBYOPT='-W:no-deprecated -W:no-experimental' ruby -e '($; = "") in a'
 
   * [[c:Enumerator]]
     * 新規メソッド
-      * Added [[m:Enumerator.produce]] to generate an Enumerator from any custom
-        data transformation.  [[feature:14781]]
-      * Added [[m:Enumerator::Lazy#eager]] that generates a non-lazy enumerator
-        from a lazy enumerator.  [[feature:15901]]
-      * Added [[m:Enumerator::Yielder#to_proc]] so that a Yielder object
-        can be directly passed to another method as a block
-        argument.  [[feature:15618]]
+      * 任意のデータ変換から[[c:Enumerator]]を作成するための
+        [[m:Enumerator.produce]]メソッドが追加されました。 [[feature:14781]]
+      * lazy enumerator から lazy ではない enumerator を生成する
+        [[m:Enumerator::Lazy#eager]]メソッドが追加されました。 [[feature:15901]]
+      * [[m:Enumerator::Yielder#to_proc]]メソッドが追加され、Yielder オブジェクトを
+        直接他のメソッドのブロック引数として渡せるようになりました。 [[feature:15618]]
 #@samplecode Enumerator.produce
 require "date"
 dates = Enumerator.produce(Date.today, &:succ) #=> infinite sequence of dates
@@ -393,13 +388,13 @@ p e.map {|x| x + "?" }  #=> ["FOO!?", "BAR!?", "BAZ!?"]
 
   * [[c:Fiber]]
     * 新規メソッド
-      * Added [[m:Fiber#raise]] that behaves like [[m:Fiber#resume]] but raises an
-        exception on the resumed fiber.  [[feature:10344]]
+      * [[m:Fiber#raise]]メソッドが追加され、[[m:Fiber#resume]]のように
+        resumeして、さらに例外を発生させます。 [[feature:10344]]
 
   * [[c:File]]
     * 変更されたメソッド
-      * File.extname now returns a dot string for names ending with a dot on
-        non-Windows platforms.  [[bug:15267]]
+      * Windows以外のプラットフォームで[[m:File.extname]]が「.」で終わる文字列に対して
+        「.」を返すようになりました。  [[bug:15267]]
 
 #@samplecode
 File.extname("foo.") #=> "."
@@ -407,23 +402,25 @@ File.extname("foo.") #=> "."
 
   * [[c:FrozenError]]
     * 新規メソッド
-      * Added [[m:FrozenError#receiver]] to return the frozen object on which
-        modification was attempted.  To set this object when raising
-        FrozenError in Ruby code, FrozenError.new accepts a +:receiver+
-        option.  [[feature:15751]]
+      * 変更しようとしたfreezeされたオブジェクトを返す[[m:FrozenError#receiver]]メソッドが
+        追加されました。[[c:FrozenError]]をRubyのコードで発生する時に設定できるように
+        [[m:FrozenError.new]]メソッドが :receiver オプションを受け付けるように
+        なりました。 [[feature:15751]]
 
   * [[c:GC]]
     * 新規メソッド
-      * Added [[m:GC.compact]] method for compacting the heap.
-        This function compacts live objects in the heap so that fewer pages may
-        be used, and the heap may be more CoW (copy-on-write) friendly. [[feature:15626]]
-     *  Details on the algorithm and caveats can be found here:
+      * ヒープをコンパクションする[[m:GC.compact]]メソッドが追加されました。
+        このメソッドはヒープの生きているオブジェクトをコンパクションして、
+        ページ数を減らして、ヒープをCoW (copy-on-write)フレンドリーに
+        しようとします。 [[feature:15626]]
+     *  アルゴリズムの詳細と注意点は
         [[url:https://bugs.ruby-lang.org/issues/15626]]
+        を参照してください。
 
   * [[c:IO]]
     * 新規メソッド
-      * Added [[m:IO#set_encoding_by_bom]] to check the BOM and set the external
-        encoding.  [[bug:15210]]
+      * BOMをチェックして外部エンコーディングを設定する
+        [[m:IO#set_encoding_by_bom]]メソッドが追加されました。 [[bug:15210]]
 
   * [[c:Integer]]
     * 変更されたメソッド
@@ -442,18 +439,17 @@ File.extname("foo.") #=> "."
 
   * [[c:Module]]
     * 新規メソッド
-      * Added [[m:Module#const_source_location]] to retrieve the location where a
-        constant is defined.  [[feature:10771]]
-      * Added [[m:Module#ruby2_keywords]] for marking a method as passing keyword
-        arguments through a regular argument splat, useful when delegating
-        all arguments to another method in a way that can be backwards
-        compatible with older Ruby versions.  [[bug:16154]]
+      * 定数が定義された場所を取得する[[m:Module#const_source_location]]
+        メソッドが追加されました。 [[feature:10771]]
+      * 通常の引数分解でキーワード引数を渡すようにメソッドに印をつける
+        [[m:Module#ruby2_keywords]]を追加しました。
+        古いRubyと互換性のある方法で全ての引数を転送する時に使えます。 [[bug:16154]]
     * 変更されたメソッド
-      * [[m:Module#autoload?]] now takes an +inherit+ optional argument, like
-        [[m:Module#const_defined?]].  [[feature:15777]]
-      * [[m:Module#name]] now always returns a frozen String. The returned String is
-        always the same for a given Module. This change is
-        experimental. [[feature:16150]]
+      * [[m:Module#const_defined?]]のように[[m:Module#autoload?]]が
+        inheritオプショナル引数を受け付けるようになりました。 [[feature:15777]]
+      * [[m:Module#name]]が常にfreezeされた文字列を返すようになりました。
+        同じModuleは常に同じStringを返します。
+        この変更は実験的です。 [[feature:16150]]
 
   * [[c:NilClass]] / [[c:TrueClass]] / [[c:FalseClass]]
     * 変更されたメソッド
@@ -464,20 +460,19 @@ File.extname("foo.") #=> "."
 
   * [[c:ObjectSpace::WeakMap]]
     * 変更されたメソッド
-      * [[m:ObjectSpace::WeakMap#[]=]] now accepts special objects as either key or
-        values.  [[feature:16035]]
+      * [[m:ObjectSpace::WeakMap#[]=]]がキーや値として特殊なオブジェクト(true,false,
+        nil,Symbolなど)を受け付けるようになりました。 [[feature:16035]]
 
   * [[c:Proc]]
     * 新規メソッド
-      * Added [[m:Proc#ruby2_keywords]] for marking the proc as passing keyword
-        arguments through a regular argument splat, useful when delegating
-        all arguments to another method or proc in a way that can be backwards
-        compatible with older Ruby versions.  [[feature:16404]]
+      * 通常の引数分解でキーワード引数を渡すようにprocに印をつける
+        [[m:Proc#ruby2_keywords]]を追加しました。
+        古いRubyと互換性のある方法で全ての引数を転送する時に使えます。 [[feature:16404]]
 
   * [[c:Range]]
     * 新規メソッド
       * [[m:Range#minmax]]が[[m:Enumerable#minmax]]より高速な実装として追加されました。
-        It returns a maximum that now corresponds to Range#max. [[bug:15807]]
+        最大値に[[m:Range#max]]と同じ値を返すようになりました。 [[bug:15807]]
 
     * 変更されたメソッド
       * [[m:Range#===]]がString引数に対しても[[m:Range#cover?]]を使うようになりました。
@@ -486,8 +481,7 @@ File.extname("foo.") #=> "."
 
   * [[c:RubyVM]]
     * 削除されたメソッド
-      * RubyVM.resolve_feature_pathが
-        $LOAD_PATH.resolve_feature_pathに移動しました。
+      * RubyVM.resolve_feature_pathが$LOAD_PATH.resolve_feature_pathに移動しました。
         [[feature:15903]] [[feature:15230]]
 
   * [[c:String]]
@@ -547,7 +541,7 @@ p Foo.instance_method(:add_1).bind_call(obj, 1) #=> 2
     * 新規メソッド
       * $LOAD_PATH.resolve_feature_pathが追加されました。 [[feature:15903]] [[feature:15230]]
 
-=== 標準添付ライブラリの更新 (outstanding ones only)
+=== 標準添付ライブラリの更新 (注目すべきもののみ)
 
   * [[c:Bundler]]
     * Bundler 2.1.2 に更新されました。
@@ -574,11 +568,12 @@ p Foo.instance_method(:add_1).bind_call(obj, 1) #=> 2
     * ERBのインスタンスをMarshalできないようになりました。
 
   * [[c:IRB]]
-    * Introduce syntax highlighting inspired by the Pry gem to Binding#irb
-      source lines, REPL input, and inspect output of some core-class objects.
-    * Introduce multiline editing mode provided by Reline.
-    * Show documentation when completion.
-    * Enable auto indent and save/load history by default.
+    * Pry gem に着想を得て、[[m:Binding#irb]]のソース表示、REPLの入力、
+      いくつかのコアクラスオブジェクトのinspect出力に
+      シンタックスハイライトが導入されました。
+    * Relineによって提供される複数行編集モードが導入されました。
+    * 補完の操作でドキュメントが表示されるようになりました。
+    * オートインデントと履歴の保存と読み込みがデフォルトで有効になりました。
 
   * [[c:JSON]]
     * 2.3.0に更新されました。
@@ -703,80 +698,89 @@ Did you mean?  baz
 
 === C API の更新
 
-  * Many <code>*_kw</code> functions have been added for setting whether
-    the final argument being passed should be treated as keywords. You
-    may need to switch to these functions to avoid keyword argument
-    separation warnings, and to ensure correct behavior in Ruby 3.
+  * 渡された最後の引数をキーワード引数として扱うかどうかを設定するための
+    多数の「*_kw」関数が追加されました。
+    キーワード引数分離の警告を避けて、Ruby 3での正しい振る舞いを確実にするため、
+    これらの関数に切り替える必要があるかもしれません。
 
-  * The <code>:</code> character in rb_scan_args format string is now
-    treated as keyword arguments. Passing a positional hash instead of
-    keyword arguments will emit a deprecation warning.
+  * rb_scan_argsの書式文字列の「:」はキーワード引数として扱われるようになりました。
+    キーワード引数の代わりに位置引数のハッシュとして渡されるとdeprecated警告が
+    出ます。
 
-  * C API declarations with +ANYARGS+ are changed not to use +ANYARGS+.
+  * ANYARGSを使ったC API宣言はANYARGSを使わないように変更されました。
     See [[url:https://github.com/ruby/ruby/pull/2404]]
 
 === 実装の改善
 
   * [[c:Fiber]]
-    * Replace previous stack cache with fiber pool cache. The fiber pool
-      allocates many stacks in a single memory region. Stack allocation
-      becomes O(log N) and fiber creation is amortized O(1). Around 10x
-      performance improvement was measured in micro-benchmarks.
+    * 以前のスタックキャッシュはファイバープールキャッシュに置き換えまれました。
+      ファイバープールは単一のメモリ領域に多数のスタックを確保します。
+      スタックアロケーションはO(log N)になり、ファイバー生成の償却計算量はO(1)です。
+      マイクロベンチマークでは約10倍のパフォーマンス改善が計測されました。
       [[url:https://github.com/ruby/ruby/pull/2224]]
-    * Allow selecting different coroutine implementations by using
-      +--with-coroutine=+, e.g.
+    * 以下のように「--with-coroutine=」で別のコルーチン実装を選べるようになりました。
+
 //emlist{
 $ ./configure --with-coroutine=ucontext
 $ ./configure --with-coroutine=copy
 //}
 
   * [[c:File]]
-    * File.realpath now uses realpath(3) on many platforms, which can
-      significantly improve performance. [[feature:15797]]
+    * [[m:File.realpath]]は多くのプラットフォームでrealpath(3)を使います。
+      これは大幅にパフォーマンスを改善します。 [[feature:15797]]
 
   * [[c:Hash]]
-    * Change data structure of small Hash objects. [[feature:15602]]
+    * 小さいHashオブジェクトのデータ構造が変わりました。 [[feature:15602]]
 
   * [[c:Monitor]]
-    * Monitor class is written in C-extension. [[feature:16255]]
+    * MonitorクラスがC拡張になりました。 [[feature:16255]]
 
   * [[c:Thread]]
-    * VM stack memory allocation is now combined with native thread stack,
-      improving thread allocation performance and reducing allocation related
-      failures. Around 10x performance improvement was measured in micro-benchmarks.
+    * VMスタックのメモリ確保はネイティブスレッドのスタックと同時になり、
+      スレッドアロケーションのパフォーマンスが改善され、アロケーション関連の
+      失敗が減少します。
+      マイクロベンチマークでは約10倍のパフォーマンス改善が計測されました。
 
   * JIT
-    * JIT-ed code is recompiled to less-optimized code when an optimization assumption is invalidated.
-    * Method inlining is performed when a method is considered as pure.
-      This optimization is still experimental and many methods are NOT considered as pure yet.
-    * The default value of +--jit-max-cache+ is changed from 1,000 to 100.
-    * The default value of +--jit-min-calls+ is changed from 5 to 10,000.
+    * 最適化の仮定が無効になった時に、JITされたコードは最適化が少ないコードに
+      再コンパイルされます。
+    * メソッドをpureだとみなした時にメソッドのインライン化が実行されます。
+      この最適化はまだ実験的で、多くのメソッドはまだpureだとみなされていません。
+    * 「--jit-max-cache」のデフォルト値が1,000から100になりました。
+    * 「--jit-min-calls」のデフォルト値が5から10,000になりました。
 
   * [[c:RubyVM]]
-    * Per-call-site method cache, which has been there since around 1.9, was
-      improved: cache hit rate raised from 89% to 94%.
-      See [[url:https://github.com/ruby/ruby/pull/2583]]
+    * 1.9から存在するコールサイトごとのメソッドキャッシュが改善されました。
+      キャッシュヒット率が89%から94%に上昇しました。
+      詳細は[[url:https://github.com/ruby/ruby/pull/2583]]を
+      参照してください。
 
   * [[c:RubyVM::InstructionSequence]]
-    * RubyVM::InstructionSequence#to_binary method generates compiled binary.
-      The binary size is reduced. [[feature:16163]]
+    * [[m:RubyVM::InstructionSequence#to_binary]]メソッドは
+      コンパイルされたバイナリを生成します。
+      そのバイナリサイズが削減されました。 [[feature:16163]]
 
 === その他の変更
 
-  * Support for IA64 architecture has been removed. Hardware for testing was
-    difficult to find, native fiber code is difficult to implement, and it added
-    non-trivial complexity to the interpreter. [[feature:15894]]
+  * IA64アーキテクチャーサポートが削除されました。
+    テスト用のハードウェアを見つけることが難しく、ネイティブファイバーコードを
+    実装することが難しく、インタープリターに些細ではない複雑さをもたらして
+    いました。 [[feature:15894]]
 
-  * Require compilers to support C99. [[misc:15347]]
-    * Details of our dialect: [[url:https://bugs.ruby-lang.org/projects/ruby-master/wiki/C99]]
+  * コンパイラーにC99対応を要求するようになりました。 [[misc:15347]]
+    * 使用している機能の詳細は
+      [[url:https://bugs.ruby-lang.org/projects/ruby-master/wiki/C99]]
+      を参照してください。
 
-  * Ruby's upstream repository is changed from Subversion to Git.
+  * Rubyの上流リポジトリはSubversionからGitに変わりました。
     * [[url:https://git.ruby-lang.org/ruby.git]]
-    * RUBY_REVISION class is changed from Integer to String.
-    * RUBY_DESCRIPTION includes Git revision instead of Subversion's one.
+    * RUBY_REVISIONのクラスはIntegerからStringに変わりました。
+    * RUBY_DESCRIPTIONはSubversionのリビジョンの代わりにGitのリビジョンが
+      入るようになりました。
 
-  * Support built-in methods in Ruby with the <code>_\_builtin_</code> syntax. [[feature:16254]]
+  * 「__builtin_」構文を使ったRubyによる組み込みメソッドを
+    サポートしました。 [[feature:16254]]
 
-  * Some methods are defined in *.rb (such as trace_point.rb).
-    For example, it is easy to define a method which accepts keyword arguments.
+  * いくつかのメソッドは(trace_point.rbのように)「*.rb」で定義されています。
+    例えば、キーワード引数を受け取るメソッドの定義が簡単になります。
 #@end
