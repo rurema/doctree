@@ -61,6 +61,15 @@ include FileUtils
 この値が真の場合、実際のファイル書き込みをともなう操作は行いません。
 そうでない場合、ファイル書き込みを行います。
 
+#@samplecode
+# Rakefile での記載例とする
+task default: :sample_file_task
+
+file :sample_file_task do |t|
+  RakeFileUtils.nowrite_flag # => false
+end
+#@end
+
 --- nowrite_flag=(flag)
 
 実際に動作を行うかどうか設定します。
