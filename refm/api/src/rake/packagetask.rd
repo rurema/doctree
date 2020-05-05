@@ -69,6 +69,17 @@ gzip した tar ファイル (tgz) を作成するかどうかを設定します
 
 @param flag 真または偽を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar # => false
+  package_task.need_tar = true
+  package_task.need_tar # => true
+end
+#@end
+
 --- need_tar_bz2 -> bool
 
 この値が真である場合は bzip2 した tar ファイル (tar.bz2) を作成します。
