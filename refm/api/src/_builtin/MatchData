@@ -139,7 +139,7 @@ p $~.size       # => 4
 n 番目の部分文字列のオフセットの配列 [start, end] を返
 します。
 
-#@samplecode
+#@samplecode 例
 [ self.begin(n), self.end(n) ]
 #@end
 
