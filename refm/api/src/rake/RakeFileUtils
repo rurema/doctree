@@ -67,6 +67,18 @@ include FileUtils
 
 @param flag 実際に動作を行うかどうかを指定します。真を指定すると動作を実行しません。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :sample_file_task
+
+file :sample_file_task do |t|
+  RakeFileUtils.nowrite_flag # => false
+  RakeFileUtils.nowrite_flag = true
+  RakeFileUtils.nowrite_flag # => true
+end
+#@end
+
 --- verbose_flag -> bool
 
 この値が真の場合、詳細を表示します。
