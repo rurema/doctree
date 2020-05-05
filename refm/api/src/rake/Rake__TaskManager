@@ -75,7 +75,7 @@ task default: :test_rake_app1
 
 desc "test1"
 task :test_rake_app1 do |task|
-  task.application.last_comment # => "test2"
+  p task.application.last_description # => "test2"
 end
 
 desc "test2"
