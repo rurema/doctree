@@ -72,6 +72,23 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです�
 
 最新の詳細説明をセットします。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app1
+
+desc "test1"
+task :test_rake_app1 do |task|
+  task.application.last_description # => "test2"
+  task.application.last_description = "test3"
+  task.application.last_description # => "test3"
+end
+
+desc "test2"
+task :test_rake_app2 do |task|
+end
+#@end
+
 --- lookup(task_name, initial_scope = nil) -> Rake::Task | nil
 
 与えられたタスク名にマッチするタスクを検索します。
