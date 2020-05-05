@@ -63,6 +63,17 @@
 
 @param task_name タスクの名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+task :test_rake_app do |task|
+  task.application.intern(Rake::Task, "test_rake_app") # => <Rake::Task test_rake_app => []>
+  task.application.intern(Rake::Task, "sample_task")   # => <Rake::Task sample_task => []>
+end
+#@end
+
 --- last_description -> String
 --- last_comment -> String
 
