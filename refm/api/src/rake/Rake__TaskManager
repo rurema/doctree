@@ -12,6 +12,15 @@
 
 @param scopes スコープを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application["test_rake_app"] # => <Rake::Task test_rake_app => []>
+end
+#@end
+
 --- clear
 
 全てのタスクとルールをクリアします。
