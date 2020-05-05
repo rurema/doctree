@@ -141,7 +141,7 @@ alias ConditionVariable
 
 == Instance Methods
 
---- broadcast -> [Thread]
+--- broadcast -> self
 
 状態変数を待っているスレッドをすべて再開します。再開された
 #@since 2.1.0
@@ -151,7 +151,7 @@ alias ConditionVariable
 #@end
 で指定した mutex のロックを試みます。
 
-@return 実行待ちしていたスレッドの配列を返します。
+@return 常に self を返します。
 
 #@samplecode 例
 mutex = Mutex.new
@@ -187,7 +187,7 @@ sleep 1
 # => a2
 #@end
 
---- signal -> Thread | nil
+--- signal -> self
 
 状態変数を待っているスレッドを1つ再開します。再開された
 #@since 2.1.0
@@ -197,8 +197,7 @@ sleep 1
 #@end
 で指定した mutex のロックを試みます。
 
-@return 状態を待っているスレッドがあった場合は、そのスレッドを返します。
-        そうでなければ nil を返します。
+@return 常に self を返します。
 
 #@since 1.9.2
 --- wait(mutex, timeout = nil) -> self
