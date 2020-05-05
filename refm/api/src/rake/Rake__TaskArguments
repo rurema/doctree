@@ -11,6 +11,17 @@ include Enumerable
 
 @param key パラメータの名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  arguments = Rake::TaskArguments.new(["name1", "name2"], ["value1", "value2"])
+  arguments["name1"] # => "value1"
+  arguments["name2"] # => "value2"
+end
+#@end
+
 --- each{|key, val| ... } -> Hash
 
 自身に含まれるパラメータ名とそれに対応する値をブロックパラメータとしてブロックを評価します。
