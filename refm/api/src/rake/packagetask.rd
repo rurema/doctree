@@ -106,6 +106,15 @@ zip ファイル (tgz) を作成するかどうかを設定します。
 
 パッケージに入れるファイルを保存するディレクトリ名を返します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir # => "pkg"
+end
+#@end
+
 --- package_dir=(dirname)
 
 パッケージに入れるファイルを保存するディレクトリ名をセットします。
