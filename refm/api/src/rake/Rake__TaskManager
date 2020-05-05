@@ -34,6 +34,15 @@
 
 @param args タスクに渡すパラメータを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.define_task(Rake::Task, :t) # => <Rake::Task t => []>
+end
+#@end
+
 --- enhance_with_matching_rule(task_name, level = 0) -> Rake::Task | nil
 
 与えられたタスク名にマッチしたルールが存在する場合は、そのタスクに見つかったルールの
