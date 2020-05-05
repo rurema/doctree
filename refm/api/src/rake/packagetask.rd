@@ -58,6 +58,17 @@ require rake/tasklib
 
 @param name パッケージの名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.name # => "sample"
+  package_task.name = "update"
+  package_task.name # => "update"
+end
+#@end
+
 --- need_tar -> bool
 
 この値が真である場合は gzip した tar ファイル (tgz) を作成します。
