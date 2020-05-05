@@ -96,6 +96,15 @@ gzip した tar ファイル (tar.gz) を作成するかどうかを設定しま
 この値が真である場合は zip ファイルを作成します。
 デフォルトは偽です。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_zip # => false
+end
+#@end
+
 --- need_zip=(flag)
 
 zip ファイル (tgz) を作成するかどうかを設定します。
