@@ -39,6 +39,8 @@ require rake/tasklib
 @raise RuntimeError バージョン情報をセットしていない場合に発生します。
                     初期化時に :noversion が指定されている場合は発生しません。
 
+#@#noexample
+
 --- init(name, version)
 #@# discard
 
