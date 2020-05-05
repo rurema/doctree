@@ -52,6 +52,15 @@ require rake/tasklib
 
 バージョン情報を含まないパッケージの名前を返します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.name # => "sample"
+end
+#@end
+
 --- name=(name)
 
 バージョン情報を含まないパッケージの名前をセットします。
