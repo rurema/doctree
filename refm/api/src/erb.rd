@@ -186,10 +186,7 @@ ERB を b の binding で実行し、結果の文字列を返します。
 
 #@samplecode 例
 require 'erb'
-filename = 'example.rhtml'
-# ファイルの中身は
-# "test1<%= @arg1%>\ntest2<%= @arg2%>\n\n"
-erb = ERB.new(File.read(filename))
+erb = ERB.new("test1<%= @arg1%>\ntest2<%= @arg2%>\n\n")
 puts erb.src
 
 # => #coding:US-ASCII
