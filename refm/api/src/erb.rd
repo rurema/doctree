@@ -258,6 +258,18 @@ ERB をハッシュオブジェクトで指定されたローカル変数を持�
 
 変換した Ruby スクリプトを取得します。
 
+#@samplecode 例
+require 'erb'
+erb = ERB.new("test1<%= @arg1%>\ntest2<%= @arg2%>\n\n")
+puts erb.src
+
+# #coding:UTF-8
+# _erbout = +''; _erbout.<< "test1".freeze; _erbout.<<(( @arg1).to_s); _erbout.<< "\ntest2".freeze
+# ; _erbout.<<(( @arg2).to_s); _erbout.<< "\n\n".freeze
+#
+# ; _erbout
+#@end
+
 --- def_method(mod, methodname, fname='(ERB)') -> nil
 
 変換した Ruby スクリプトをメソッドとして定義します。
