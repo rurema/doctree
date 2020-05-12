@@ -189,11 +189,11 @@ require 'erb'
 erb = ERB.new("test1<%= @arg1%>\ntest2<%= @arg2%>\n\n")
 puts erb.src
 
-# => #coding:US-ASCII
-#    _erbout = ''; _erbout.concat "test1"; _erbout.concat(( @arg1).to_s); _erbout.concat "\ntest2"
-#    ; _erbout.concat(( @arg2).to_s); _erbout.concat "\n\n"
-#
-#    ; _erbout.force_encoding(__ENCODING__)
+# => #coding:UTF-8
+#    _erbout = +''; _erbout.<< "test1".freeze; _erbout.<<(( @arg1).to_s); _erbout.<< "\ntest2".freeze
+#    ; _erbout.<<(( @arg2).to_s); _erbout.<< "\n\n".freeze
+#    
+#    ; _erbout
 #@end
 
 --- def_method(mod, methodname, fname='(ERB)') -> nil
