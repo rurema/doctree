@@ -176,14 +176,12 @@ ERB を b の binding で実行し、結果を標準出力へ印字します。
 
 #@samplecode 例
 require 'erb'
-filename = 'example.rhtml'
-erb = ERB.new(File.read(filename))
+erb = ERB.new("test <%= test1 %>\ntest <%= test2 %>\n")
 test1 = "foo"
 test2 = "bar"
 erb.run
-
-# => test foo
-#    test bar
+# test foo
+# test bar
 #@end
 
 --- result(b=TOPLEVEL_BINDING) -> String
