@@ -119,13 +119,11 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 ([[m:Socket#listen]]と同じ)
 
 backlog は、クライアントからの接続要求を保留できる数です。
-TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
 [[man:listen(2)]] が成功すれば 0 を返します。
 失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 
 @param backlog backlog は、クライアントからの接続要求を保留できる数です。
-               TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
 @raise Errno::EXXX [[man:listen(2)]] が失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 

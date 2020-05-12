@@ -20,11 +20,9 @@ unがワイルドカード展開([[m:Dir.glob]]参照)します(Unix ではシ�
    ruby -run -e install -- [-pv -m mode] SOURCE DEST
    ruby -run -e chmod -- [-v] OCTAL-MODE FILE
    ruby -run -e touch -- [-v] FILE
-#@since 1.9.1
    ruby -run -e wait_writable -- [OPTION] FILE
    ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
-   ruby -run -e httpd -- [OPTION] DocumentRoot
-#@end
+   ruby -run -e httpd -- [OPTION] [DocumentRoot]
    ruby -run -e help [COMMAND]
 
 = reopen Kernel
@@ -123,9 +121,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
   ruby -run -e rmdir -- [OPTION] DIR
 
-#@since 1.9.1
   -p          DIR で指定されたディレクトリとその上位ディレクトリを削除します
-#@end
   -v          詳細表示
 
 @see [[man:rmdir(1)]]
@@ -143,7 +139,6 @@ Change the mode of each FILE to OCTAL-MODE.
 
 #@# 内部的に使用するだけ
 #@# --- setup(options = "", * long_options) -> ()
-#@since 1.9.1
 --- wait_writable -> ()
 ファイルが書き込み可能になるまで待ちます。
 
@@ -171,7 +166,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
 WEBrick HTTP server を起動します。
 
-  ruby -run -e httpd -- [OPTION] DocumentRoot
+  ruby -run -e httpd -- [OPTION] [DocumentRoot]
 
   --bind-address=ADDR         バインドアドレスを指定します
   --port=NUM                  ポート番号を指定します
@@ -189,4 +184,3 @@ WEBrick HTTP server を起動します。
   --ssl-private-key=KEY       サーバーの SSL 証明書の秘密鍵を指定します
 #@end
   -v                          詳細表示
-#@end

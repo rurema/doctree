@@ -70,14 +70,12 @@ DBM ファイルを空にします。
 
 DBM ファイルをクローズします。以後の操作は例外を発生させます。
 
-#@since 1.8.3
 --- closed? -> bool
 
 DBM ファイルが既に閉じられているか調べます。
 
 既に閉じられていれば true を返します。そうでなければ false を返します。
 
-#@end
 
 --- delete(key) -> String
 
@@ -349,7 +347,6 @@ value を持つ要素のキーを返します。
 
 == Constants
 
-#@since 1.8.2
 --- READER -> Integer
 
 読み込みモードでオープンします．
@@ -374,7 +371,6 @@ value を持つ要素のキーを返します。
 
 @see [[m:DBM.open]]
 
-#@end
 
 --- VERSION -> String
 

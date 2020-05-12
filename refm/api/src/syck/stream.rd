@@ -1,1 +1,0 @@
-#@include(../yaml/stream.rd)

@@ -153,7 +153,6 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 --- each(rs = $/){|line| ... }       -> self
 --- each_line(rs = $/){|line| ... }  -> self
-#@since 1.8.7
 --- lines(rs = $/){|line| ... }      -> self
 #@since 1.9.1
 --- each(rs = $/)       -> Enumerator
@@ -163,7 +162,6 @@ close された StringIO に読み書き等が行われると IOError が発生�
 --- each(rs = $/)       -> Enumerable::Enumerator
 --- each_line(rs = $/)  -> Enumerable::Enumerator
 --- lines(rs = $/)      -> Enumerable::Enumerator
-#@end
 #@end
 
 自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
@@ -183,7 +181,6 @@ close された StringIO に読み書き等が行われると IOError が発生�
 @see [[m:$/]]
 
 --- each_byte{|ch| ... }    -> self
-#@since 1.8.7
 --- bytes{|ch| ... }        -> self
 #@since 1.9.1
 --- each_byte -> Enumerator
@@ -191,7 +188,6 @@ close された StringIO に読み書き等が行われると IOError が発生�
 #@else
 --- each_byte -> Enumerable::Enumerator
 --- bytes     -> Enumerable::Enumerator
-#@end
 #@end
 
 自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
@@ -247,9 +243,7 @@ close された StringIO に読み書き等が行われると IOError が発生�
 #@until 1.9.1
 --- getc    -> Integer | nil
 #@end
-#@since 1.8.7
 --- getbyte -> Integer | nil
-#@end
 
 自身から 1 文字読み込んで、その文字に対応する Fixnum を返します。
 文字列の終端に到達した時には nil を返します。 
@@ -393,9 +387,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- readchar    -> Integer
-#@since 1.8.7
 --- readbyte    -> Integer
-#@end
 
 自身から 1 文字読み込んで、その文字に対応する整数を返します。
 
@@ -682,7 +674,6 @@ nil を返します。
   a.write("aaa")                 #=> 3
   a.string                       #=> "aaae"
 
-#@since 1.8.7
 
 --- each_char{|c| ... } -> self
 --- chars{|c| ... }     -> self
@@ -705,7 +696,6 @@ nil を返します。
 
 @see [[m:IO#each_char]]
 
-#@end
 #@since 1.9.1
 --- ungetbyte(char) -> nil
 

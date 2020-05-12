@@ -1,5 +1,0 @@
-#@since 1.8.4
-
-= class Tk::Tcllib::Plotchart::HorizontalBarchart < Tk::Tcllib::Plotchart::Barchart
-
-#@end

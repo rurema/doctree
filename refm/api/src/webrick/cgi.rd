@@ -1,4 +1,3 @@
-#@since 1.8.1
 require webrick/httprequest
 require webrick/httpresponse
 require webrick/config
@@ -190,30 +189,24 @@ config で有効なキーとその値は以下のとおりです。
 
 == Instance Methods
 
-#@since 1.8.3
 --- [](key)    -> object
 
 指定された key に対応した自身の設定値を返します。
 
 @param key 設定名を Symbol オブジェクトで指定します。
 
-#@end
 
-#@since 1.8.3
 --- config     -> Hash
 
 自身の設定を保持したハッシュを返します。
 
 @see [[m:WEBrick::CGI.new]]
-#@end
 
-#@since 1.8.3
 --- logger     -> WEBrick::BasicLog 
 
 設定されているログオブジェクトを返します。
 
 デフォルトでは [[c:WEBrick::BasicLog]].new($stderr) です。
-#@end
 
 --- service(req, res)     -> ()
 
@@ -248,4 +241,3 @@ do_XXX メソッドを呼び出します。このようにして CGI スクリ�
 
 CGI に関係する例外クラスです。
 
-#@end
