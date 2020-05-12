@@ -251,6 +251,16 @@ ERB を b の binding で実行し、結果の文字列を返します。
 
 @param b eRubyスクリプトが実行されるときのbinding
 
+#@samplecode 例
+require 'erb'
+erb = ERB.new("test <%= test1 %>\ntest <%= test2 %>\n")
+test1 = "foo"
+test2 = "bar"
+puts erb.result
+# test foo
+# test bar
+#@end
+
 #@since 2.5.0
 @see [[m:ERB#result_with_hash]]
 
