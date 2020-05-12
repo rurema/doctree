@@ -211,8 +211,8 @@ fname はスクリプトを定義する際のファイル名です。主にエ�
 
 #@samplecode 例
 require 'erb'
-filename = 'example.rhtml' # @arg1 と @arg2 が使われている example.rhtml
-erb = ERB.new(File.read(filename))
+filename = 'example.rhtml'
+erb = ERB.new("test1<%= arg1 %>\ntest2<%= arg2 %>\n")
 erb.filename = filename
 MyModule = erb.def_module('render(arg1, arg2)')
 class MyClass
