@@ -219,8 +219,8 @@ class MyClass
   include MyModule
 end
 print MyClass.new.render('foo', 123)
-# => test1foo
-#    test2123
+# test1foo
+# test2123
 #@end
 
 --- def_class(superklass=Object, methodname='erb') -> Class
