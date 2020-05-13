@@ -207,7 +207,7 @@ obj が範囲内に含まれている時に真を返します。
 Range#cover? は連続値を扱います。
 （数値については、例外として [[m:Range#include?]] も連続的に扱います。）
 
-[[m:Range#exclude_end?]]がfalseなら「begin <= obj <= end」を
+[[m:Range#exclude_end?]]がfalseなら「begin <= obj <= end」を、
 trueなら「begin <= obj < end」を意味します。
 
 #@since 2.6.0
