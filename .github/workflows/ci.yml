@@ -26,18 +26,10 @@ jobs:
         for d in *.*; do
           tar acf $d.tar.xz $d
         done
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
-        name: statichtml-2.5.0
-        path: /tmp/html/2.5.0.tar.xz
-    - uses: actions/upload-artifact@master
-      with:
-        name: statichtml-2.6.0
-        path: /tmp/html/2.6.0.tar.xz
-    - uses: actions/upload-artifact@master
-      with:
-        name: statichtml-2.7.0
-        path: /tmp/html/2.7.0.tar.xz
+        name: statichtml
+        path: /tmp/html/2.?.0.tar.xz
 
   misspell:
     runs-on: ubuntu-latest
