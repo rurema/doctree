@@ -24,12 +24,12 @@ jobs:
         set -ex
         cd /tmp/html
         for d in *.*; do
-          tar acf $d.tar.xz $d
+          tar acf ../$d.tar.xz $d
         done
     - uses: actions/upload-artifact@v2
       with:
         name: statichtml
-        path: /tmp/html/2.?.0.tar.xz
+        path: /tmp/2.?.0.tar.xz
 
     - name: Show debug info
       run: |
@@ -55,7 +55,7 @@ jobs:
         git diff --no-index html.base html.pr --output html.diff || :
     - uses: actions/upload-artifact@v2
       with:
-        name: statichtml
+        name: diff
         path: /tmp/html.diff
 
   misspell:
