@@ -52,6 +52,7 @@ jobs:
         set -x
         cd /tmp
         mv -v html html.base
+        git diff --no-index html.base html.pr --stat || :
         git diff --no-index html.base html.pr --output html.diff || :
     - uses: actions/upload-artifact@v2
       with:
