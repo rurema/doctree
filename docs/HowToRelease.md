@@ -1,5 +1,32 @@
 「Ruby リファレンスマニュアル刷新計画」のリリース手順の説明です。
 
+## bitclust の gem リリース手順
+
+2020年5月現在、 <https://github.com/rurema/bitclust> からの gem のリリースは <https://github.com/rurema/bitclust/blob/master/.github/workflows/gempush.yml> で半自動化されています。
+
+- rubygems.org にログイン
+- https://rubygems.org/profile/edit で MFA Level を UI Only に下げる
+- https://github.com/rurema/bitclust/settings/secrets で RUBYGEMS_AUTH_TOKEN を設定
+- タグを push
+
+```
+% git pull
+Already up to date.
+% git grep -F 1.2.5
+lib/bitclust/version.rb:  VERSION = "1.2.5"
+% git tag -s -m '' v1.2.5
+% git push --tags
+```
+
+- GitHub Actions のログで gem push ができているのを確認
+- Secret から RUBYGEMS_AUTH_TOKEN を Remove
+- MFA Level を UI and API に戻す
+- `lib/bitclust/version.rb` を更新
+
+## 以下、obsolete
+
+以下は古い内容で、2020年現在は生成したマニュアルのリリースはしていませんが、そのまま残しておきます。
+
 ## リリースするものとそのファイル名
 
 | リリース物 | ファイル名(案) |
