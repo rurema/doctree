@@ -8,7 +8,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -44,7 +44,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Install misspell
       run: 'go get github.com/client9/misspell/...'
     - name: Run misspell
