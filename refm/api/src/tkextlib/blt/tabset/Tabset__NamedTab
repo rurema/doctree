@@ -1,9 +1,0 @@
-= class Tk::BLT::Tabset::NamedTab < Tk::BLT::Tabset::Tab
-
-== Class Methods
-
---- new(parent, name)
-#@todo
-
-
-

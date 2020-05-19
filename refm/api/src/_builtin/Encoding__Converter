@@ -204,7 +204,7 @@ puts ec.finish.dump                #=> "\e(B".force_encoding("ISO-2022-JP")
 #@end
 
 --- last_error -> Exception | nil
-直前に変換器で発生した例外に相当する例外オブジェクトを返します
+直前に変換器で発生した例外に相当する例外オブジェクトを返します。
 直前の変換で例外が発生していない場合は nil を返します。
 
 #@samplecode

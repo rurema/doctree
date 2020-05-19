@@ -8,7 +8,7 @@ BDD 風にテストを書くためのクラスやメソッドを定義するた�
 
   * rubygems.org: [[url:https://rubygems.org/gems/minitest]]
   * プロジェクトページ: [[url:https://github.com/seattlerb/minitest]]
-  * リファレンス: [[url:http://www.rubydoc.info/gems/minitest]]
+  * リファレンス: [[url:https://www.rubydoc.info/gems/minitest]]
 
 #@else
 このライブラリは [[c:Object]] に BDD (Behavior Driven Development) 用の検査メソッドを追加します。

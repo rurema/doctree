@@ -25,6 +25,16 @@ JSON のオブジェクトから [[c:BigDecimal]] のオブジェクトを生成
 
 内部的にはハッシュにデータをセットしてから [[m:JSON::Generator::GeneratorMethods::Hash#to_json]] を呼び出しています。
 
+#@since 2.7.0
+@param args 引数はそのまま [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]
+            に渡されます。
+#@else
 @param args 使用しません。
+#@end
+
+#@samplecode 例
+require 'json/add/bigdecimal'
+BigDecimal('0.123456789123456789').to_json # => "{\"json_class\":\"BigDecimal\",\"b\":\"36:0.123456789123456789e0\"}"
+#@end
 
 @see [[m:JSON::Generator::GeneratorMethods::Hash#to_json]]

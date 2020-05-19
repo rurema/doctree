@@ -1,7 +1,0 @@
-= class TclTkLibCommand < TclTkCommand
-
-== Class Methods
-
---- new(ip, name)
-#@todo
-

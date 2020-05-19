@@ -100,7 +100,6 @@ pid で指定された子プロセスの状態をチェックし、変化があ�
 にクローズ済みでなければクローズされます。
 
 #@end
-#@since 1.8.0
 = class PTY::ChildExited < RuntimeError
 
 子プロセスが終了したり停止した場合に発生する例外です。
@@ -110,5 +109,4 @@ pid で指定された子プロセスの状態をチェックし、変化があ�
 --- status -> Process::Status
 
 子プロセスの終了ステータスを[[c:Process::Status]]オブジェクトで返します。
-#@end
 

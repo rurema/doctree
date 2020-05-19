@@ -104,6 +104,18 @@ super のサブクラスとして新しい Ruby クラスを、outer の定数�
 関数 name を定義します。
 func と argc は rb_define_method と同じです。
 
+例:
+   static VALUE 
+   return_obj_dup(VALUE obj) 
+   {
+         VALUE dup = rb_obj_dup(obj); // オブジェクトを複製
+         return dup;
+   }
+
+   void Init_func() {
+         rb_define_global_function("dup_obj", return_obj_dup, 1); // 関数 dup_objを定義しています。
+   }
+
 --- void rb_define_method(VALUE klass, const char *name, VALUE(*func)(), int argc)
 
 クラスklassのインスタンスメソッドnameを定義します。
@@ -138,6 +150,9 @@ rb_define_method と同じです。
 --- VALUE rb_define_module(const char *name)
 
 モジュール name を作成し返します。
+
+例:
+   VALUE rb_mHoge = rb_define_module("Hoge"); // モジュールHogeを作成
 
 --- void rb_define_module_function(VALUE module, const char *name, VALUE (*func)(), int argc)
 
@@ -255,7 +270,7 @@ fmt のフォーマットは以下の通りです。
 
       def some_method(a, *rest, &block)
 
-@see [[url:https://github.com/ruby/ruby/blob/trunk/doc/extension.ja.rdoc]]
+@see [[url:https://github.com/ruby/ruby/blob/master/doc/extension.ja.rdoc]]
 
 --- VALUE rb_singleton_class(VALUE obj)
 

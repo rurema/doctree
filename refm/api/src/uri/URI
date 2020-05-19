@@ -119,7 +119,6 @@ URI オブジェクトを返します。
   p URI.extract(str, ["http"])
   => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
 
-#@since 1.8.1
 --- regexp             -> Regexp
 --- regexp(schemes)    -> Regexp
 
@@ -147,7 +146,6 @@ schemes を与えた場合は、そのスキームの URI にのみマッチす�
   require 'uri'
   p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 
-#@end
 
 --- escape(str, unsafe = URI::UNSAFE)    -> String
 --- encode(str, unsafe = URI::UNSAFE)    -> String
@@ -212,7 +210,7 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 みなし、エンコーディングを付加します。
 
 このメソッドは
-[[url:http://url.spec.whatwg.org/#concept-urlencoded-parser]]
+[[url:https://url.spec.whatwg.org/#concept-urlencoded-parser]]
 にもとづいて実装されています。
 そのため「&」区切りのみに対応していて、「;」区切りには対応していません。
 

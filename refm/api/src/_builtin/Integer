@@ -107,12 +107,10 @@ self は非負整数でなければいけません。非負整数でない場合
 #@end
 
 --- downto(min) {|n| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- downto(min) -> Enumerator
 #@else
 --- downto(min) -> Enumerable::Enumerator
-#@end
 #@end
 
 self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
@@ -147,12 +145,10 @@ self の次の整数を返します。
 @see [[m:Integer#pred]]
 
 --- times {|n| ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- times -> Enumerator
 #@else
 --- times -> Enumerable::Enumerator
-#@end
 #@end
 
 self 回だけ繰り返します。
@@ -323,18 +319,13 @@ self ともっとも近い整数を返します。
 @see [[m:Numeric#truncate]]
 #@end
 
---- to_s -> String
-#@since 1.8.0
---- to_s(base) -> String
-#@end
+--- to_s(base=10)    -> String
 #@since 2.4.0
---- inspect       -> String
---- inspect(base) -> String
+--- inspect(base=10) -> String
 #@end
 
 整数を 10 進文字列表現に変換します。
 
-#@since 1.8.0
 引数を指定すれば、それを基数とした文字列表
 現に変換します。
 
@@ -342,25 +333,20 @@ self ともっとも近い整数を返します。
     p 10.to_s(8)    # => "12"
     p 10.to_s(16)   # => "a"
     p 35.to_s(36)   # => "z"
-#@end
 
 @return     数値の文字列表現
-#@since 1.8.0
 @param base 基数となる 2 - 36 の数値。
 @raise ArgumentError base に 2 - 36 以外の数値を指定した場合に発生します。
-#@end
 
 #@since 2.4.0
 --- upto(max) {|n| ... } -> Integer
 #@else
 --- upto(max) {|n| ... } -> Fixnum | Bignum
 #@end
-#@since 1.8.7
 #@since 1.9.1
 --- upto(max) -> Enumerator
 #@else
 --- upto(max) -> Enumerable::Enumerator
-#@end
 #@end
 
 self から max まで 1 ずつ増やしながら繰り返します。
@@ -384,7 +370,6 @@ self > max であれば何もしません。
   1.integer?     # => true
   1.0.integer?   # => false
 
-#@since 1.8.7
 --- even? -> bool
 
 自身が偶数であれば真を返します。
@@ -426,7 +411,6 @@ self から -1 した値を返します。
    (-1).pred   #=> -2
 
 @see [[m:Integer#next]]
-#@end
 
 #@since 1.9.1
 --- denominator -> Integer
@@ -612,12 +596,67 @@ self の符号を反転させたものを返します。
   2 * 3   # => 6
 
 --- /(other) -> Numeric
---- div(other) -> Numeric
 
-算術演算子。商を計算します。
+除算の算術演算子。
+
+other が Integer の場合、整商（整数の商）を Integer で返します。
+普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
+
+other が Float、Rational、Complex の場合、普通の商を other と
+同じクラスのインスタンスで返します。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
+
+#@samplecode 例
+7 / 2 # => 3
+7 / -2 # => -4
+7 / 2.0 # => 3.5
+7 / Rational(2, 1) # => (7/2)
+7 / Complex(2, 0) # => ((7/2)+0i)
+
+begin
+  2 / 0
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+end
+#@end
+
+@see [[m:Integer#div]], [[m:Integer#fdiv]], [[m:Numeric#quo]]
+
+--- div(other) -> Integer
+
+整商（整数の商）を返します。
+普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
+
+other が Integer オブジェクトの場合、[[m:Integer#/]] の結果と一致します。
+
+div に対応する剰余メソッドは modulo です。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+#@samplecode 例
+7.div(2) # => 3
+7.div(-2) # => -4
+7.div(2.0) # => 3
+7.div(Rational(2, 1)) # => 3
+
+begin
+  2.div(0)
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+end
+
+begin
+  2.div(0.0)
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+  # Integer#/ と違い、引数が Float でもゼロで割ることはできない
+end
+#@end
+
+@see [[m:Integer#fdiv]], [[m:Integer#/]], [[m:Integer#modulo]]
 
 --- %(other) -> Numeric
 --- modulo(other) -> Numeric
@@ -672,7 +711,7 @@ self を other で割った商を [[c:Float]] で返します。
 
 @param other self を割る数を指定します。
 
-@see [[m:Numeric#quo]]
+@see [[m:Numeric#quo]], [[m:Numeric#div]], [[m:Integer#div]]
 
 --- **(other) -> Numeric
 #@since 2.5.0

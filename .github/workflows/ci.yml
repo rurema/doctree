@@ -1,0 +1,72 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  rake:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        # docs.ruby-lang.org uses snap ruby
+        # https://snapcraft.io/ruby
+        ruby-version: 2.7
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: bundle exec rake
+    - name: Create tarballs
+      run: |
+        set -ex
+        cd /tmp/html
+        for d in *.*; do
+          tar acf ../$d.tar.xz $d
+        done
+    - uses: actions/upload-artifact@v2
+      with:
+        name: statichtml
+        path: /tmp/2.?.0.tar.xz
+
+    - name: Show debug info
+      run: |
+        set -x
+        echo ${GITHUB_BASE_REF}
+        echo ${{ github.event.pull_request.base.sha }}
+    - name: Rename generated html
+      run: |
+        cd /tmp
+        mv -v html html.pr
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.base.sha }}
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: bundle exec rake
+    - name: Rename generated html and generate diff
+      run: |
+        set -x
+        cd /tmp
+        mv -v html html.base
+        git diff --no-index html.base html.pr --stat || :
+        git diff --no-index html.base html.pr --output html.diff || :
+    - uses: actions/upload-artifact@v2
+      with:
+        name: diff
+        path: /tmp/html.diff
+
+  misspell:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install misspell
+      run: 'go get github.com/client9/misspell/...'
+    - name: Run misspell
+      run: |
+        $HOME/go/bin/misspell -error -i addopt $(git ls-files | grep -vF "refm/doc/news/1.8.4.rd")

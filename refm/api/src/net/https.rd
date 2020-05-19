@@ -5,16 +5,6 @@ category Network
 
 [[c:Net::HTTP]] を再オープンし、SSL/TLS 拡張を追加します。
 
-#@until 1.8.6
-[注意] net/https は RFC2818 の 3.1 に定められた
-「サーバーの証明書に記載された身元のチェック」を自動では実行しません。
-接続しているはずのサーバのホスト名と証明書に記載されているホスト名が
-一致するかをライブラリの使用者が各自実装する必要があります。
-
-[[url:http://www.ipa.go.jp/security/rfc/RFC2818JA.html#31]]
-
-[[ruby-dev:25254]]
-#@end
 
 === デフォルトパラメータについて
 net/https は [[m:OpenSSL::SSL::SSLContext#set_params]] で
