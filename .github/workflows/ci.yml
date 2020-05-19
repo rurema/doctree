@@ -31,6 +31,33 @@ jobs:
         name: statichtml
         path: /tmp/html/2.?.0.tar.xz
 
+    - name: Show debug info
+      run: |
+        set -x
+        echo ${GITHUB_BASE_REF}
+        echo ${{ github.event.pull_request.head.sha }}
+    - name: Rename generated html
+      run: |
+        cd /tmp
+        mv -v html html.pr
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: bundle exec rake
+    - name: Rename generated html and generate diff
+      run: |
+        set -x
+        cd /tmp
+        mv -v html html.base
+        git diff --no-index html.base html.pr > html.diff
+    - uses: actions/upload-artifact@v2
+      with:
+        name: statichtml
+        path: /tmp/html.diff
+
   misspell:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
