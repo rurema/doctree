@@ -37,7 +37,7 @@ end
 task :test_rake_app do |task|
   loader = Rake::MakefileLoader.new
   loader.load("sample.mf")
-  Rake::Task.task_defined?("a") # => true
-  Rake::Task.tasks[0] # => <Rake::FileTask a => [a1, a2, a3, a4, a5, a6, a7]>
+  p Rake::Task.task_defined?("a") # => true
+  p Rake::Task.tasks[0] # => <Rake::FileTask a => [a1, a2, a3, a4, a5, a6, a7]>
 end
 #@end
