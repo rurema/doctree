@@ -43,6 +43,7 @@ Rubyリファレンスマニュアル (通称るりま) 刷新計画のページ
   - [[GitRepository]]
   - [[Tutorial]]
   - [[Communication-and-knowledge-sharing]]
+  - [[HowToRelease]]
 
 ## System Pages
 
