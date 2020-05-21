@@ -477,15 +477,6 @@ Pathname("testfile").each_line(",") {|f| p f }
 
 @see [[m:IO.foreach]]
 
-#@until 1.9.2
---- foreachline(*args){|line| ... } -> nil
-IO.foreach(self.to_s, *args, &block) と同じです。
-
-このメソッドは obsolete です。
-代わりに [[m:Pathname#each_line]] を使ってください。
-
-@see [[m:IO.foreach]]
-#@end
 --- read(*args) -> String | nil
 IO.read(self.to_s, *args)と同じです。
 
@@ -664,20 +655,6 @@ File.ftype(self.to_s) と同じです。
 
 @see [[m:File.ftype]]
 
-#@until 1.9.2
---- link(old) -> 0
-レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
-このメソッドは obsolete です。
-代わりに [[m:Pathname#make_link]] を使ってください。
-
-File.link(old, self.to_s) と同じです。
-
-@param old ファイル名を表す文字列を指定します。
-
-@see [[m:File.link]]
-
-#@end
-
 --- open(mode = 'r', perm = 0666) -> File
 --- open(mode = 'r', perm = 0666){|file| ... } -> object
 File.open(self.to_s, *args, &block) と同じです。
@@ -715,20 +692,6 @@ File.lstat(self.to_s) と同じです。
 #@#noexample File.lstat の例を参照
 
 @see [[m:File.lstat]]
-
-#@until 1.9.2
---- symlink(old) -> 0
-レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
-このメソッドは obsolete です。
-代わりに [[m:Pathname#make_symlink]] を使ってください。
-
-File.symlink(old, self.to_s) と同じです。
-
-@param old ファイル名を表す文字列を指定します。
-
-@see [[m:File.symlink]]
-
-#@end
 
 --- truncate(length) -> 0
 File.truncate(self.to_s, length) と同じです。
@@ -1045,24 +1008,6 @@ Tempfile.create("tmp") { |tmp| Pathname(tmp).empty? } # => true
 @see [[m:Dir.empty?]], [[m:FileTest.#empty?]], [[m:Pathname#zero?]]
 #@end
 
-#@until 1.9.2
---- chdir{|path| ... } -> object
-このメソッドは obsolete です。
-代わりに [[m:Dir.chdir]] を使ってください。
-
-Dir.chdir(self.to_s, &block) と同じです。
-
-@see [[m:Dir.chdir]]
-
---- chroot -> 0
-このメソッドは obsolete です。
-代わりに [[m:Dir.chroot]] を使ってください。
-
-Dir.chroot(self.to_s) と同じです。
-
-@see [[m:Dir.chroot]]
-
-#@end
 --- rmdir -> 0
 Dir.rmdir(self.to_s) と同じです。
 
@@ -1115,16 +1060,6 @@ Pathname("/usr/local").each_entry {|f| p f }
 @see [[m:Dir.foreach]]
 
 
-#@until 1.9.2
---- dir_foreach {|pathname| ... } -> nil
-このメソッドは obsolete です。
-代わりに [[m:Pathname#each_entry]] メソッドを使ってください。
-
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
-
-@see [[m:Dir.foreach]]
-
-#@end
 --- mkdir(*args) -> 0
 Dir.mkdir(self.to_s, *args) と同じです。
 
@@ -1243,24 +1178,6 @@ Pathname オブジェクトとして生成し、ブロックへの引数とし�
      #<Pathname:path/to/some/file.rb>
 
 ファイルシステムにはアクセスしません。
-
-
-
---- foreach(*args){|path| ... } -> nil
-このメソッドは obsolete です。 each_line か each_entry を使ってください。
-
-self の指し示すパスがディレクトリなら
-Dir.foreach(self.to_s, *args, &block) と、さもなければ
-IO.foreach(self.to_s, *args, &block) と同じです。
-
-#@#noexample obsolete
-
-#@if(version <= "1.8.0")
---- realpath_rec
-[[m:Pathname#realpath]] メソッドの実質的な処理を行っているメソッドです。
-利用するべきではありません。
-
-#@end
 
 --- sub(pattern, replace)  -> Pathname
 --- sub(pattern) {|matched| ... } -> Pathname

@@ -80,9 +80,6 @@ SSL/TLS のタイムアウト秒数を返します。
      [[m:OpenSSL::SSL::SSLContext#ssl_timeout]]
 
 --- ssl_timeout=(sec)
-#@until 1.9.1
---- timeout=(sec)
-#@end
 
 SSL/TLS のタイムアウト秒数を設定します。
 
@@ -92,11 +89,6 @@ HTTP セッション開始時([[m:Net::HTTP#start]] など)に
 
 デフォルト値は [[m:OpenSSL::SSL::SSLContext#ssl_timeout=]] と
 同じで、OpenSSL のデフォルト値(300秒)を用います。
-
-#@until 1.9.1
-timeout= は obsolete です。互換性のために
-存在します。1.9 では廃止されています。
-#@end
 
 @param sec タイムアウト秒数
 @see [[m:Net::HTTP#ssl_timeout]],

@@ -59,16 +59,6 @@ category CUI
 @see [[m:Kernel.#system]], [[m:IO.popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
 #@end
 
-#@until 1.9.2
---- protect_signal{ ... } -> self
-このメソッドは何もしません。
-このメソッドは obsolete です。
-
---- reset_signal -> self
-このメソッドは何もしません。
-このメソッドは obsolete です。
-#@end
-
 == Singleton Methods
 #@since 1.9.2
 --- check(pid, raise = false) -> Process::Status | nil
