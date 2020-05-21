@@ -655,7 +655,7 @@ other_arrays の要素を自身の末尾に破壊的に連結します。
     a = [ 1, 2 ]
     a.concat(a, a)                    #=> [1, 2, 1, 2, 1, 2]
 
-see [[m:Array#+]]
+@see [[m:Array#+]]
 #@end
 
 --- delete(val)           -> object | nil
