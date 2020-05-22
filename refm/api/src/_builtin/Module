@@ -702,14 +702,10 @@ inherit に真を指定すると
 モジュールを凍結（内容の変更を禁止）します。
 
 凍結したモジュールにメソッドの追加など何らかの変更を加えようとした場合に
-#@since 1.9.1
 #@since 2.5.0
 [[c:FrozenError]]
 #@else
 [[c:RuntimeError]]
-#@end
-#@else
-[[c:TypeError]]
 #@end
 が発生します。
 
