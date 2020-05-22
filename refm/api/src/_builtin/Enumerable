@@ -179,6 +179,23 @@ end
 @see [[m:Enumerable#reject]]
 @see [[m:Enumerable#grep]]
 
+#@since 2.7.0
+--- filter_map {|item| ... } -> [object]
+--- filter_map -> Enumerator
+
+各要素に対してブロックを評価した値のうち、真であった値の
+配列を返します。
+
+ブロックを省略した場合は、各要素に対してブロックを評価した値のうち、
+真であった値の配列を返すような [[c:Enumerator]] を返します。
+
+#@samplecode 例
+(1..10).filter_map { |i| i * 2 if i.even? } #=> [4, 8, 12, 16, 20]
+#@end
+
+@see [[m:Enumerable#filter]], [[m:Enumerable#map]]
+#@end
+
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
 
