@@ -87,7 +87,7 @@ CSV.parse("CSV,data,String") do |row|
   # use row here...
 end
 
-# 文字列から一行ずつ
+# 文字列から一度に
 arr_of_arrs = CSV.parse("CSV,data,String")
 #@end
 
