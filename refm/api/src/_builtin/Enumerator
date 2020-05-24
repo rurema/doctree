@@ -93,6 +93,19 @@ new に渡されたブロックが終了した時点で each の繰り返しが�
 
 == Methods
 
+#@since 2.6.0
+--- +(enum) -> Enumerator::Chain
+
+自身と enum 引数を続けて繰り返す [[c:Enumerator::Chain]] を返します。
+
+#@samplecode 例
+e = (1..3).each + [4, 5]
+e.to_a #=> [1, 2, 3, 4, 5]
+#@end
+
+@see [[m:Enumerable#chain]]
+#@end
+
 --- each {...}        -> object
 --- each              -> self
 --- each(*args) {...} -> object

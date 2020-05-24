@@ -60,6 +60,19 @@
     p [].any?                       # => false
 #@end
 
+#@since 2.6.0
+--- chain(*enums) -> Enumerator::Chain
+
+自身と enums 引数を続けて繰り返す [[c:Enumerator::Chain]] を返します。
+
+#@samplecode 例
+e = (1..3).chain([4, 5])
+e.to_a #=> [1, 2, 3, 4, 5]
+#@end
+
+@see [[m:Enumerator#+]]
+#@end
+
 #@since 1.9.1
 --- collect  -> Enumerator
 --- map      -> Enumerator
