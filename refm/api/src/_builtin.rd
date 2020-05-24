@@ -35,6 +35,7 @@ require を書かなくても使うことができます。
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
 #@end
+#@include(_builtin/Enumerator__Yielder)
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
 #@include(_builtin/Fiber)
