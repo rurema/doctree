@@ -459,7 +459,9 @@ p s1 & s2 #=> #<Set: {10, 30}>
 #@end
 
 #@since 2.7.0
-@see [[m:Array#intersection]]
+@see [[m:Array#&]], [[m:Array#intersection]]
+#@else
+@see [[m:Array#&]]
 #@end
 
 --- ^(enum) -> Set
