@@ -260,12 +260,21 @@ dir_string を渡した場合はそのディレクトリを基準とします。
 は拡張子の一部としては見なされません。filename に拡張子が含
 まれない場合は空文字列を返します。
 
-  p File.extname("foo/foo.txt")     # => ".txt"
-  p File.extname("foo/foo.tar.gz")  # => ".gz"
-  p File.extname("foo/bar")         # => ""
-  p File.extname("foo/.bar")        # => ""
-  p File.extname("foo.txt/bar")     # => ""
-  p File.extname(".foo")            # => ""
+#@samplecode 例
+p File.extname("foo/foo.txt")     # => ".txt"
+p File.extname("foo/foo.tar.gz")  # => ".gz"
+p File.extname("foo/bar")         # => ""
+p File.extname("foo/.bar")        # => ""
+p File.extname("foo.txt/bar")     # => ""
+p File.extname(".foo")            # => ""
+#@since 2.7.0
+
+# Windows の場合
+p File.extname("foo.")            # => ""
+# Windows 以外の場合
+p File.extname("foo.")            # => "."
+#@end
+#@end
 
 @param filename ファイル名を表す文字列を指定します。
 
