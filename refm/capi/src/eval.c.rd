@@ -838,7 +838,7 @@ Thread#pass の実体。
 他のスレッドに実行権を渡します。
 対象の特定はできません。
 
-see also: [[f:rb_thread_wait_fd]], [[f:rb_thread_wait_for]]
+@see [[f:rb_thread_wait_fd]], [[f:rb_thread_wait_for]]
 
 #@until 2.2.0
 --- int rb_thread_select(int max, fd_set *read, fd_set *write, fd_set *except, struct timeval *timeout)
