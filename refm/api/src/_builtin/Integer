@@ -970,7 +970,7 @@ self & mask == mask と等価です。
 
 @see [[m:Integer#anybits?]]
 @see [[m:Integer#nobits?]]
---- anybits? -> bool
+--- anybits?(mask) -> bool
 self & mask のいずれかのビットが 1 なら true を返します。
 
 self & mask != 0 と等価です。
@@ -986,7 +986,7 @@ self & mask != 0 と等価です。
 
 @see [[m:Integer#allbits?]]
 @see [[m:Integer#nobits?]]
---- nobits? -> bool
+--- nobits?(mask) -> bool
 self & mask のすべてのビットが 0 なら true を返します。
 
 self & mask == 0 と等価です。
