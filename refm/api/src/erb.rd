@@ -166,11 +166,9 @@ eRubyスクリプト から ERB オブジェクトを生成して返します。
                字列。eRuby スクリプトの中でさらに ERB を使うときに変更
                します。通常は指定する必要はありません。
 
-#@since 2.6.0
 Ruby 2.6.0 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
 Ruby 2.5 が EOL になったときに削除される予定です。
 trim_mode と eoutvar の指定はキーワード引数に移行してください。
-#@end
 
 #@samplecode 例
 require "erb"

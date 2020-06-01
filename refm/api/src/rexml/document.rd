@@ -114,10 +114,8 @@ XML 文書([[c:REXML::Document]])ごとの展開回数がこの値を越える�
 
 デフォルトは 10000 です。
 
-#@since 2.1.0
-このメソッドは deprecated です。
+このメソッドは Ruby 2.1 から deprecated になりました。
 [[m:REXML::Security.entity_expansion_limit]] を使ってください。
-#@end
 
 @see [[m:REXML::Document.entity_expansion_limit=]]
 
@@ -129,10 +127,8 @@ XML 文書([[c:REXML::Document]])ごとの展開回数がこの値を越える�
 
 デフォルトは 10000 です。
 
-#@since 2.1.0
-このメソッドは deprecated です。
+このメソッドは Ruby 2.1 から deprecated になりました。
 [[m:REXML::Security.entity_expansion_limit=]] を使ってください。
-#@end
 
 @param val 設定する上限値(整数)
 @see [[m:REXML::Document.entity_expansion_limit]]
@@ -151,10 +147,8 @@ XML 文書([[c:REXML::Document]])ごとの展開回数がこの値を越える�
 
 デフォルトは 10240 (byte) です。
 
-#@since 2.1.0
-このメソッドは deprecated です。
+このメソッドは Ruby 2.1 から deprecated になりました。
 [[m:REXML::Security.entity_expansion_text_limit]] を使ってください。
-#@end
 
 @see [[m:REXML::Document.entity_expansion_text_limit=]],
      [[url:http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/]]
@@ -173,10 +167,8 @@ XML 文書([[c:REXML::Document]])ごとの展開回数がこの値を越える�
 
 デフォルトは 10240 (byte) です。
 
-#@since 2.1.0
-このメソッドは deprecated です。
+このメソッドは Ruby 2.1 から deprecated になりました。
 [[m:REXML::Security.entity_expansion_text_limit=]] を使ってください。
-#@end
 
 @see [[m:REXML::Document.entity_expansion_text_limit]]
      [[url:http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/]]

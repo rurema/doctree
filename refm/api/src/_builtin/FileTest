@@ -72,9 +72,6 @@ FileTest.executable_real?("empty.txt")      # => false
 #@end
 
 --- exist?(file)    -> bool
-#@until 2.1.0
---- exists?(file)    -> bool
-#@end
 
 ファイルが存在する時に真を返します。そうでない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
@@ -88,11 +85,9 @@ FileTest.executable_real?("empty.txt")      # => false
   FileTest.exist?('/etc/no_such_file') # => false
   FileTest.exist?('/etc/no_such_directory') # => false
 
-#@since 2.1.0
 --- exists?(file)    -> bool
 
-このメソッドは deprecated です。[[m:FileTest.#exist?]] を使用してください。
-#@end
+このメソッドは Ruby 2.1 から deprecated です。[[m:FileTest.#exist?]] を使用してください。
 
 --- grpowned?(file)    -> bool
 

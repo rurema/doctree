@@ -1025,21 +1025,6 @@ Hash#index は obsolete です。
 
 @see [[m:Hash#[] ]], [[m:Hash.new]], [[m:Hash#default]], [[m:Hash#default_proc]], [[m:Array#values_at]]
 
-#@if (version < "1.9.1")
---- indexes(*keys) -> [object]
---- indices(*keys) -> [object]
-
-引数で指定されたキーに対応する値の配列を返します。
-
-このメソッドは obsolete です。
-使用すると警告メッセージが表示されます。
-代わりに [[m:Hash#values_at]] を使用してください。
-
-@param keys キーを任意個指定します。
-
-@see [[m:Hash#values_at]],[[m:Hash#[] ]]
-#@end
-
 #@since 2.3.0
 --- dig(key, ...) -> object | nil
 

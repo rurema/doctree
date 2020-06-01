@@ -746,9 +746,6 @@ File.umask         # => 6
 #@#noexample
 
 --- exist?(path)    -> bool
-#@until 2.1.0
---- exists?(path)    -> bool
-#@end
 
 [[m:FileTest.#exist?]] と同じです。
 
@@ -756,13 +753,11 @@ File.umask         # => 6
 
 #@#noexample
 
-#@since 2.1.0
 --- exists?(path)    -> bool
 
-このメソッドは deprecated です。[[m:File.exist?]] を使用してください。
+このメソッドは Ruby 2.1 から deprecated です。[[m:File.exist?]] を使用してください。
 
 #@#noexample
-#@end
 
 --- file?(path)    -> bool
 

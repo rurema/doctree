@@ -308,27 +308,6 @@ utc_offset に nil を指定した場合の値は、現在のタイムゾーン�
   p Time.new(2008, 6, 21, 13, 30, 0, "+09:00") #=> 2008-06-21 13:30:00 +0900
 #@end
 
-#@until 1.9.1
---- times    -> Struct::Tms
-
-このメソッドは obsolete です。
-
-自身のプロセスとその子プロセスが消費したユーザ/システム CPU
-時間の積算を [[c:Struct::Tms]] のオブジェクトとして返します。
-Struct::Tms は以下のメンバを持つ構造体クラスです。
-
- * utime           # user time
- * stime           # system time
- * cutime          # user time of children
- * cstime          # system time of children
-
-時間の単位は秒で、浮動小数点数で与えられます。詳細は
-[[man:times(3)]] を参照してください。
-
-このメソッドは [[m:Process.#times]] に移動しました。Time.times も使えます
-が、警告メッセージが出力されます。
-#@end
-
 == Instance Methods
 
 --- +(other)    -> Time
@@ -723,9 +702,7 @@ t.strftime("%G-W%V-%uT%R%:z")  # => 2001-W05-6T04:05+09:00    Week date and loca
 
 self に 1 秒足した Time オブジェクトを生成して返します。
 
-#@since 1.9.2
 このメソッドは obsolete です。 self + 1 を代わりに使用してください。
-#@end
 
   t = Time.now
   p t

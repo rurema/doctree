@@ -17,7 +17,7 @@
     @name = val
   end
 
-第 2 引数 に true か false を指定する方法は非推奨になりました。
+第 2 引数 に true か false を指定する方法は非推奨です。
 
 @param name [[c:String]] または [[c:Symbol]] で指定します。
 

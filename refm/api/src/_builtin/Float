@@ -739,7 +739,7 @@ Float が取り得る最小の有限の値は -[[m:Float::MAX]] です。
 #@until 2.8.0
 --- ROUNDS -> Integer
 
-この定数は deprecated です。使わないでください。
+この定数は Ruby 2.7 から deprecated です。使わないでください。
 
 #@# https://bugs.ruby-lang.org/issues/16044
 
