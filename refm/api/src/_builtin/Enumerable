@@ -1777,6 +1777,20 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 "+" メソッドが再定義されている場合、Enumerable#sum は再定義を無視することがあります(例えばInteger#+)。
 
 @see [[m:Array#sum]]
+
+#@since 2.7.0
+--- tally     ->   Hash
+
+self に含まれる要素を数え上げた結果を Hash で返します。
+Hash のキーは self に含まれる要素で、Hash の値は対応する要素が出現する回数です。
+
+要素は[[m:Object#eql?]]で比較されます。
+
+#@samplecode 例
+["a", "b", "c", "b"].tally  #=> {"a"=>1, "b"=>2, "c"=>1}
+#@end
+#@end
+
 --- uniq                -> Array
 --- uniq { |item| ... } -> Array
 
