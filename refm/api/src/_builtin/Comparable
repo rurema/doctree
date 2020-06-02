@@ -112,18 +112,64 @@ self >= min and self <= max
 
 #@since 2.4.0
 --- clamp(min, max)  -> object
+#@since 2.7.0
+--- clamp(range)     -> object
+#@end
 
 self を範囲内に収めます。
 
+#@since 2.7.0
+min と max の2つの引数が渡された場合は次のようになります。
+#@end
 self <=> min が負数を返したときは min を、
 self <=> max が正数を返したときは max を、
 それ以外の場合は self を返します。
 
-例:
-  12.clamp(0, 100)         #=> 12
-  523.clamp(0, 100)        #=> 100
-  -3.123.clamp(0, 100)     #=> 0
+#@since 2.7.0
+range が1つ渡された場合は次のようになります。
+self <=> range.begin が負数を返したときは range.begin を、
+self <=> range.end が正数を返したときは range.end を、
+それ以外の場合は self を返します。
 
-  'd'.clamp('a', 'f')      #=> 'd'
-  'z'.clamp('a', 'f')      #=> 'f'
+range.begin が nil の場合、range.begin は self よりも小さい値として扱われます。
+range.end が nil の場合、range.end は self よりも大きい値として扱われます。
+#@end
+
+@param min 範囲の下端を表すオブジェクトを指定します。
+
+@param max 範囲の上端を表すオブジェクトを指定します。
+
+#@since 2.7.0
+@param range 範囲を表す Range オブジェクトを指定します。
+
+@raise ArgumentError rangeが終端を含まない範囲オブジェクトであり、
+                     終端が nil でないときに発生します。
+#@end
+
+#@samplecode 例
+12.clamp(0, 100)         #=> 12
+523.clamp(0, 100)        #=> 100
+-3.123.clamp(0, 100)     #=> 0
+
+'d'.clamp('a', 'f')      #=> 'd'
+'z'.clamp('a', 'f')      #=> 'f'
+#@end
+
+#@since 2.7.0
+#@samplecode range を渡す例
+12.clamp(0..100)     #=> 12
+523.clamp(0..100)    #=> 100
+-3.123.clamp(0..100) #=> 0
+
+'d'.clamp('a'..'f')  #=> 'd'
+'z'.clamp('a'..'f')  #=> 'f'
+
+100.clamp(0...100)   # ArgumentError
+#@end
+
+#@samplecode range の始端か終端が nil の場合
+-20.clamp(0..)   #=> 0
+523.clamp(..100) #=> 100
+#@end
+#@end
 #@end
