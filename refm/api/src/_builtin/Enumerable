@@ -1061,12 +1061,18 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要
 実装していることを仮定しています。二つ目の形式では、要素同士の比較を
 ブロックを用いて行います。
 
-   a = %w(albatross dog horse)
-   a.minmax                                 #=> ["albatross", "horse"]
-   a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
-   [].minmax # => [nil, nil]
+#@samplecode
+a = %w(albatross dog horse)
+a.minmax                                 #=> ["albatross", "horse"]
+a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
+[].minmax # => [nil, nil]
+#@end
 
+#@since 2.7.0
+@see [[m:Enumerable#sort]], [[m:Array#minmax]]
+#@else
 @see [[m:Enumerable#sort]]
+#@end
 
 #@since 1.9.1
 --- minmax_by                -> Enumerator
