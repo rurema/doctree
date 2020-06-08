@@ -162,7 +162,7 @@ message 引数を渡した場合、message 引数をメッセージとした Run
 例外発生時のスタックトレースを指定できます。
 
 @param message 例外のメッセージとなる文字列です。
-@param exception 発生させる例外です
+@param exception 発生させる例外です。
 @param backtrace 例外発生時のスタックトレースです。文字列の配列で指定します。
 
 #@samplecode 例
