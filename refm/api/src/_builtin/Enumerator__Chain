@@ -18,7 +18,7 @@ e.size #=> 5
 
 == Instance Methods
 
---- each(*args) { |...| ...} -> object
+--- each(*args) { |*args| ...} -> object
 --- each(*args) -> Enumerator
 
 まず最初の繰り返し可能なオブジェクトの each メソッドを
