@@ -102,6 +102,8 @@ initial 引数が渡された場合、最初にブロックを呼び出す時に
 
 ブロックが例外 [[c:StopIteration]]を投げた場合、繰り返しが終了します。
 
+@param initial ブロックに最初に渡される値です。任意のオブジェクトを渡せます。
+
 #@samplecode 例
 # 1, 2, 3, 4, ... と続く Enumerator
 Enumerator.produce(1, &:succ)
@@ -131,8 +133,6 @@ PATTERN = %r{\d+|[-/+*]}
 Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
 # => ["7", "+", "38", "/", "6"]
 #@end
-
-@param initial ブロックに最初に渡される値です。任意のオブジェクトを渡せます。
 #@end
 
 == Methods
