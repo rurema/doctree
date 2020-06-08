@@ -146,7 +146,7 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
 --- raise(message)                                   -> object
 --- raise(exception, message = nil, backtrace = nil) -> object
 
-自身が表すファイバーが最後に [[m:Fiber.yield]] を呼んだ場所で例外を発生させます。
+selfが表すファイバーが最後に [[m:Fiber.yield]] を呼んだ場所で例外を発生させます。
 
 Fiber.yield が呼ばれていないかファイバーがすでに終了している場合、
 [[c:FiberError]] が発生します。
