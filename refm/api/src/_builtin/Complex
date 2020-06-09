@@ -107,6 +107,27 @@ Complex(1, 0) == Complex(1) # => true
 Complex(1, 0) == 1          # => true
 #@end
 
+#@since 2.7.0
+--- <=>(other) -> -1 | 0 | 1 | nil
+
+self の虚部がゼロで other が実数の場合、
+self の実部の <=> メソッドで other と比較した結果を返します。
+other が Complex で虚部がゼロの場合も同様です。
+
+その他の場合は nil を返します。
+
+@param other 自身と比較する数値
+
+#@samplecode 例
+Complex(2, 3)  <=> Complex(2, 3) #=> nil
+Complex(2, 3)  <=> 1             #=> nil
+Complex(2)     <=> 1             #=> 1
+Complex(2)     <=> 2             #=> 0
+Complex(2)     <=> 3             #=> -1
+#@end
+
+#@end
+
 --- abs       -> Numeric
 --- magnitude -> Numeric
 
