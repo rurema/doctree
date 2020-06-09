@@ -31,10 +31,12 @@ require を書かなくても使うことができます。
 #@include(_builtin/Enumerator)
 #@since 2.6.0
 #@include(_builtin/Enumerator__ArithmeticSequence)
+#@include(_builtin/Enumerator__Chain)
 #@end
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
 #@end
+#@include(_builtin/Enumerator__Yielder)
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
 #@include(_builtin/Fiber)
@@ -98,6 +100,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/RegexpError)
 #@include(_builtin/RubyVM)
 #@include(_builtin/RubyVM__InstructionSequence)
+#@since 2.6.0
+#@include(_builtin/RubyVM__MJIT)
+#@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
 #@include(_builtin/SecurityError)
@@ -131,6 +136,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/UnboundMethod)
 #@since 2.2.0
 #@include(_builtin/UncaughtThrowError)
+#@end
+#@since 2.4.0
+#@include(_builtin/Warning)
 #@end
 #@include(_builtin/ZeroDivisionError)
 #@include(_builtin/fatal)

@@ -5,7 +5,6 @@ Ruby インタプリタを終了させるときに発生します。
 
 == Class Methods
 
-#@since 1.8.0
 --- new(status = 0, error_message = "") -> SystemExit
 
 SystemExit オブジェクトを生成して返します。
@@ -18,11 +17,9 @@ SystemExit オブジェクトを生成して返します。
 
   ex = SystemExit.new(1)
   p ex.status   # => 1
-#@end
 
 == Instance Methods
 
-#@since 1.8.0
 --- status -> Integer
 
 例外オブジェクトに保存された終了ステータスを返します。
@@ -42,9 +39,7 @@ SystemExit オブジェクトを生成して返します。
   rescue SystemExit => err
     p err.status   # => 1
   end
-#@end
 
-#@since 1.8.2
 --- success? -> bool
 
 終了ステータスが正常終了を示す値ならば true を返します。
@@ -64,4 +59,3 @@ SystemExit オブジェクトを生成して返します。
   rescue SystemExit => err
     p err.success?  # => false
   end
-#@end

@@ -101,9 +101,7 @@ URI オブジェクトを返します。
 その部分を代入してブロックを評価します。
 このときは nil を返します。
 
-#@since 2.2.0
-このメソッドは obsolete です。
-#@end
+このメソッドは Ruby 2.2 から obsolete です。
 
 @param str 文字列を与えます。
 
@@ -119,7 +117,6 @@ URI オブジェクトを返します。
   p URI.extract(str, ["http"])
   => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
 
-#@since 1.8.1
 --- regexp             -> Regexp
 --- regexp(schemes)    -> Regexp
 
@@ -137,9 +134,7 @@ schemes を与えた場合は、そのスキームの URI にのみマッチす�
 マッチするため、有効なURIかどうかは必要に応じて別途
 検査してください。
 
-#@since 2.2.0
-このメソッドは obsolete です。
-#@end
+このメソッドは Ruby 2.2 から obsolete です。
 
 @param schemes マッチさせたいスキームを、文字列の配列として与えます。
 
@@ -147,7 +142,6 @@ schemes を与えた場合は、そのスキームの URI にのみマッチす�
   require 'uri'
   p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 
-#@end
 
 --- escape(str, unsafe = URI::UNSAFE)    -> String
 --- encode(str, unsafe = URI::UNSAFE)    -> String
@@ -212,7 +206,7 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 みなし、エンコーディングを付加します。
 
 このメソッドは
-[[url:http://url.spec.whatwg.org/#concept-urlencoded-parser]]
+[[url:https://url.spec.whatwg.org/#concept-urlencoded-parser]]
 にもとづいて実装されています。
 そのため「&」区切りのみに対応していて、「;」区切りには対応していません。
 

@@ -36,7 +36,6 @@ name にクッキーの名前を、value にクッキーで保持する値を与
   "P_Number"
   "/foo/hoge"
 
-#@since 1.8.4
 --- parse_set_cookie(str)    -> WEBrick::Cookie
 
 サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
@@ -53,9 +52,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与
   "Shipping"
   "FedEx"
 
-#@end
 
-#@since 1.8.6
 
 --- parse_set_cookies(str)    -> [WEBrick::Cookie]
 
@@ -64,7 +61,6 @@ name にクッキーの名前を、value にクッキーで保持する値を与
 
 @param str Set-Cookie ヘッダの値を文字列で指定します。
 
-#@end
 
 == Instance Methods
 

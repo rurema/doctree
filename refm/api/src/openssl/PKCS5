@@ -1,5 +1,4 @@
 
-#@since 1.8.7
 = module OpenSSL::PKCS5
 OpenSSL PKCS#5 関連の機能を集めたモジュール
 
@@ -46,4 +45,3 @@ iter は鍵生成時のハッシュ関数の繰り返し回数で、大きな値
 
 = class OpenSSL::PKCS5::PKCS5Error < OpenSSL::OpenSSLError
 OpenSSL PKCS#5 関連のエラーが起きた場合に発生する例外
-#@end

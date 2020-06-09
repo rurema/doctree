@@ -52,7 +52,7 @@ args を指定すると、 method の呼び出し時に渡されます。
 
 --- new(size=nil){|y| ... }         -> Enumerator
 
-Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
+Enumerator オブジェクトを生成して返します。与えられたブロックは [[c:Enumerator::Yielder]] オブジェクトを
 引数として実行されます。
 
 生成された Enumerator オブジェクトに対して each を呼ぶと、この生成時に指定されたブロックを
@@ -91,7 +91,64 @@ new に渡されたブロックが終了した時点で each の繰り返しが�
 
   p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
+#@since 2.7.0
+--- produce(initial = nil) { |prev| ... } -> Enumerator
+
+与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
+ブロックの戻り値が、次にブロックを呼び出す時に引数として渡されます。
+initial 引数が渡された場合、最初にブロックを呼び出す時にそれがブロック
+呼び出しの引数として渡されます。initial が渡されなかった場合は nil が
+渡されます。
+
+ブロックが例外 [[c:StopIteration]]を投げた場合、繰り返しが終了します。
+
+@param initial ブロックに最初に渡される値です。任意のオブジェクトを渡せます。
+
+#@samplecode 例
+# 1, 2, 3, 4, ... と続く Enumerator
+Enumerator.produce(1, &:succ)
+
+# next を呼ぶたびランダムな数値を返す Enumerator
+Enumerator.produce { rand(10) }
+
+# ツリー構造の祖先ノードを列挙する Enumerator
+ancestors = Enumerator.produce(node) { |prev| node = prev.parent or raise StopIteration }
+enclosing_section = ancestors.find { |n| n.type == :section }
+#@end
+
+このメソッドは Enumerable の各メソッドと組み合わせて使うことで、
+while や until ループのような処理を実装できます。
+例えば [[m:Enumerable#detect]], [[m:Enumerable#slice_after]], [[m:Enumerable#take_while]]
+などと合わせて使えるでしょう。
+
+#@samplecode Enumerable のメソッドと組み合わせる例
+# 次の火曜日を返す例
+require "date"
+Enumerator.produce(Date.today, &:succ).detect(&:tuesday?)
+
+# シンプルなレキサーの例
+require "strscan"
+scanner = StringScanner.new("7+38/6")
+PATTERN = %r{\d+|[-/+*]}
+Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
+# => ["7", "+", "38", "/", "6"]
+#@end
+#@end
+
 == Methods
+
+#@since 2.6.0
+--- +(enum) -> Enumerator::Chain
+
+自身と enum 引数を続けて繰り返す [[c:Enumerator::Chain]] を返します。
+
+#@samplecode 例
+e = (1..3).each + [4, 5]
+e.to_a #=> [1, 2, 3, 4, 5]
+#@end
+
+@see [[m:Enumerable#chain]]
+#@end
 
 --- each {...}        -> object
 --- each              -> self
@@ -432,4 +489,3 @@ self の要素数を返します。
 #@# 以下のクラスはユーザが直接触れるべきではないのでドキュメントは
 #@# 書かない
 #@# = class Enumerator::Generator
-#@# = class Enumerator::Yielder

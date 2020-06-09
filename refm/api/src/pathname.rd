@@ -2,7 +2,6 @@ category File
 
 パス名をオブジェクト指向らしく扱うためのライブラリです。
 
-#@since 1.8.5
 = reopen Kernel
 
 == Private Instance Methods
@@ -15,7 +14,6 @@ Pathname.new(path) と同じです。
 @param path 文字列、または類似のオブジェクトを与えます。
             実際には to_str に反応するオブジェクトなら何でも構いません。
 
-#@end
 
 = class Pathname < Object
 
@@ -42,7 +40,6 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 
 == Constants
 
-#@since 1.8.5
 --- SEPARATOR_PAT -> Regexp
 パス名のなかのディレクトリを区切る部分にマッチする正規表現です。
 
@@ -51,7 +48,6 @@ Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m
 --- TO_PATH -> Symbol
 内部的に使っている定数です。利用者が使うことはありません。
 
-#@end
 
 == Class Methods
 
@@ -132,7 +128,7 @@ other は Pathname オブジェクトでなければなりません。
          false
          false
 
---- <=>(other) -> bool
+--- <=>(other) -> -1 | 0 | 1 | nil
 
 パス名を比較します。other と同じなら 0 を、ASCII順で self が大きい場合
 は正、other が大きい場合は負を返します。大文字小文字は区別されます。
@@ -204,11 +200,7 @@ cleanpath は、実際にファイルシステムを参照することなく、�
 #@since 1.9.2
 --- realpath(basedir = nil) -> Pathname
 #@end
-#@until 1.8.5
---- realpath(force_absolute = true) -> Pathname
-#@else
 --- realpath -> Pathname
-#@end
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
 また、ファイルシステムをアクセスし、実際に存在するパスを返します。
@@ -218,10 +210,6 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 
 #@since 1.9.2
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
-#@end
-#@until 1.8.5
-@param force_absolute 真の場合、絶対パスを返します。 self が相対パスであれば、カレントディレクトリからの相対パスとして解釈されます。
-                      古い挙動は obsolete です。引数は省略すべきです。
 #@end
 
     require 'pathname'
@@ -238,17 +226,10 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
     Dir.chdir("/tmp")
 
     p path.realpath
-#@until 1.8.5
-    p path.realpath(false)
-#@end
 
     => ruby 1.8.0 (2003-10-10) [i586-linux]
        #<Pathname:/tmp/bar>
-#@until 1.8.5
-       #<Pathname:bar>
-#@end
 
-#@since 1.9.2
 @see [[m:Pathname#realdirpath]], [[m:File.realpath]]
 
 --- realdirpath(basedir = nil) -> Pathname
@@ -258,10 +239,39 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 
-@see [[m:Pathname#realpath]]
+#@samplecode 例
+require "pathname"
+
+path = Pathname("/not_exist")
+path.realdirpath  # => #<Pathname:/not_exist>
+path.realpath     # => Errno::ENOENT
+
+# 最後ではないコンポーネント(/not_exist_1)も存在しないのでエラーになる。
+path = Pathname("/not_exist_1/not_exist_2")
+path.realdirpath  # => Errno::ENOENT
 #@end
+
+@see [[m:Pathname#realpath]]
+
 --- parent -> Pathname
 self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
+
+#@samplecode 例 絶対パス
+require "pathname"
+
+path = Pathname("/usr")
+path        # => #<Pathname:/usr>
+path.parent # => #<Pathname:/>
+#@end
+
+#@samplecode 例 相対パス
+require "pathname"
+
+path = Pathname("foo/bar")
+path.parent               # => #<Pathname:foo>
+path.parent.parent        # => #<Pathname:.>
+path.parent.parent.parent # => #<Pathname:..>
+#@end
 
 --- mountpoint? -> bool
 self がマウントポイントであれば真を返します。
@@ -289,8 +299,27 @@ Pathname('/im/sure').root?  # => false
 --- absolute? -> bool
 self が絶対パス指定であれば真を返します。
 
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("/path/to/example.rb")
+pathname.absolute? # => true
+pathname = Pathname("../")
+pathname.absolute? # => false
+#@end
+
 --- relative? -> bool
 self が相対パス指定であれば真を返します。
+
+#@samplecode 例
+require 'pathname'
+
+p = Pathname.new('/im/sure')
+p.relative? #=> false
+
+p = Pathname.new('not/so/sure')
+p.relative? #=> true
+#@end
 
 --- each_filename {|v| ... } -> nil
 self のパス名要素毎にブロックを実行します。
@@ -323,7 +352,6 @@ other が絶対パスなら単に other と同じ内容の Pathname オブジェ
 
 @param other 文字列か Pathname オブジェクトを指定します。
 
-#@since 1.8.1
 
 --- children(with_directory = true) -> [Pathname]
 self 配下にあるパス名(Pathnameオブジェクト)の配列を返します。
@@ -337,7 +365,6 @@ self 配下にあるパス名(Pathnameオブジェクト)の配列を返しま�
     require 'pathname'
     Pathname.new("/tmp").children # => [#<Pathname:.X11-unix>, #<Pathname:.iroha_unix>, ... ]
 
-#@end
 
 #@since 1.9.2
 
@@ -375,7 +402,6 @@ Pathname("/usr/local").each_child(false) {|f| p f }
 @see [[m:Pathname#children]]
 #@end
 
-#@since 1.8.1
 
 --- relative_path_from(base_directory) -> Pathname
 base_directory から self への相対パスを求め、その内容の新しい Pathname
@@ -396,9 +422,7 @@ base_directory も絶対パスでなければなりません。
 
     path.relative_path_from(base) # => #<Pathname:foo>
 
-#@end
 
-#@since 1.8.1
 
 --- each_line(*args){|line| ... } -> nil
 #@since 1.9.1
@@ -408,20 +432,51 @@ base_directory も絶対パスでなければなりません。
 #@end
 IO.foreach(self.to_s, *args, &block) と同じです。
 
+#@samplecode 例
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line
+# => #<Enumerator: IO:foreach("testfile")>
+#@end
+
+#@samplecode 例 ブロックを指定
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line {|f| p f }
+
+# => "line1\n"
+# => "line2,\n"
+# => "line3\n"
+#@end
+
+#@samplecode 例 limit を指定
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line(4) {|f| p f }
+
+# => "line"
+# => "1\n"
+# => "line"
+# => "2,\n"
+# => "line"
+# => "3\n"
+#@end
+
+#@samplecode 例 sep を指定
+require "pathname"
+
+IO.write("testfile", "line1\nline2,\nline3\n")
+Pathname("testfile").each_line(",") {|f| p f }
+
+# => "line1\nline2,"
+# => "\nline3\n"
+#@end
+
 @see [[m:IO.foreach]]
-#@end
 
-#@until 1.9.2
---- foreachline(*args){|line| ... } -> nil
-IO.foreach(self.to_s, *args, &block) と同じです。
-
-#@since 1.8.1
-このメソッドは obsolete です。
-代わりに [[m:Pathname#each_line]] を使ってください。
-#@end
-
-@see [[m:IO.foreach]]
-#@end
 --- read(*args) -> String | nil
 IO.read(self.to_s, *args)と同じです。
 
@@ -432,6 +487,15 @@ IO.read(self.to_s, *args)と同じです。
 #@since 1.9.2
 --- binread(*args) -> String | nil
 IO.binread(self.to_s, *args)と同じです。
+
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("testfile")
+pathname.binread           # => "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
+pathname.binread(20)       # => "This is line one\nThi"
+pathname.binread(20, 10)   # => "ne one\nThis is line "
+#@end
 
 @see [[m:IO.binread]]
 
@@ -450,7 +514,6 @@ IO.sysopen(self.to_s, *args)と同じです。
 
 @see [[m:IO.sysopen]]
 
-#@since 1.8.1
 --- make_link(old) -> 0
 File.link(old, self.to_s) と同じです。
 
@@ -464,10 +527,16 @@ File.symlink(old, self.to_s) と同じです。
 #@#noexample File.symlinkの例を参照
 
 @see [[m:File.symlink]]
-#@end
 
 --- atime -> Time
 File.atime(self.to_s) を渡したものと同じです。
+
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("testfile")
+pathname.atime # => 2018-12-18 20:58:13 +0900
+#@end
 
 @see [[m:File.atime]]
 
@@ -529,7 +598,15 @@ File.chown(owner, group, self.to_s) と同じです。
 
 @param group グループを指定します。
 
-@see [[m:File.chown]]
+#@samplecode 例
+require 'pathname'
+
+Pathname('testfile').stat.uid     # => 501
+Pathname('testfile').chown(502, 12)
+Pathname('testfile').stat.uid     # => 502
+#@end
+
+@see [[m:File.chown]], [[m:File#chown]]
 
 --- lchown(owner, group) -> Integer
 File.lchown(owner, group, self.to_s) と同じです。
@@ -550,6 +627,15 @@ File.fnmatch(pattern, self.to_s, *args) と同じです。
 
 @param args [[m:File.fnmatch]] を参照してください。
 
+#@samplecode 例
+require "pathname"
+
+path = Pathname("testfile")
+path.fnmatch("test*")                       # => true
+path.fnmatch("TEST*")                       # => false
+path.fnmatch("TEST*", File::FNM_CASEFOLD)   # => true
+#@end
+
 @see [[m:File.fnmatch]]
 
 --- fnmatch?(pattern, *args) -> bool
@@ -569,23 +655,11 @@ File.ftype(self.to_s) と同じです。
 
 @see [[m:File.ftype]]
 
-#@until 1.9.2
---- link(old) -> 0
-レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
-このメソッドは obsolete です。
-代わりに [[m:Pathname#make_link]] を使ってください。
-
-File.link(old, self.to_s) と同じです。
-
-@param old ファイル名を表す文字列を指定します。
-
-@see [[m:File.link]]
-
-#@end
-
 --- open(mode = 'r', perm = 0666) -> File
 --- open(mode = 'r', perm = 0666){|file| ... } -> object
 File.open(self.to_s, *args, &block) と同じです。
+
+#@#noexample File.open の例を参照
 
 @see [[m:File.open]]
 
@@ -600,6 +674,8 @@ Pathname.new(File.readlink(self.to_s)) と同じです。
 File.rename(self.to_s, to) と同じです。
 
 @param to ファイル名を表す文字列を指定します。
+
+#@#noexample File.renameの例を参照
 
 @see [[m:File.rename]]
 
@@ -616,20 +692,6 @@ File.lstat(self.to_s) と同じです。
 #@#noexample File.lstat の例を参照
 
 @see [[m:File.lstat]]
-
-#@until 1.9.2
---- symlink(old) -> 0
-レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
-このメソッドは obsolete です。
-代わりに [[m:Pathname#make_symlink]] を使ってください。
-
-File.symlink(old, self.to_s) と同じです。
-
-@param old ファイル名を表す文字列を指定します。
-
-@see [[m:File.symlink]]
-
-#@end
 
 --- truncate(length) -> 0
 File.truncate(self.to_s, length) と同じです。
@@ -657,6 +719,16 @@ Pathname.new(File.basename(self.to_s, suffix)) と同じです。
 @param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
               '.' を含まない任意の文字列にマッチします。
 
+#@samplecode 例
+require "pathname"
+
+Pathname("ruby/ruby.c").basename          #=> #<Pathname:"ruby.c">
+Pathname("ruby/ruby.c").basename(".c")    #=> #<Pathname:"ruby">
+Pathname("ruby/ruby.c").basename(".*")    #=> #<Pathname:"ruby">
+Pathname("ruby/ruby.exe").basename(".*")  #=> #<Pathname:"ruby">
+Pathname("ruby/y.tab.c").basename(".*")   #=> #<Pathname:"y.tab">
+#@end
+
 @see [[m:File.basename]]
 
 --- dirname -> Pathname
@@ -681,6 +753,15 @@ File.extname(self.to_s) と同じです。
 Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
 
 @param default_dir self が相対パスであれば default_dir を基準に展開されます。
+
+#@samplecode 例
+require "pathname"
+
+path = Pathname("testfile")
+Pathname.pwd             # => #<Pathname:/path/to>
+path.expand_path         # => #<Pathname:/path/to/testfile>
+path.expand_path("../")  # => #<Pathname:/path/testfile>
+#@end
 
 @see [[m:File.expand_path]]
 
@@ -845,7 +926,6 @@ FileTest.symlink?(self.to_s) と同じです。
 
 @see [[m:FileTest.#symlink?]]
 
-#@since 1.8.5
 
 --- world_readable? -> bool
 FileTest.world_readable?(self.to_s) と同じです。
@@ -861,7 +941,6 @@ FileTest.world_writable?(self.to_s) と同じです。
 
 @see [[m:FileTest.#world_writable?]]
 
-#@end
 
 #@since 2.1.0
 
@@ -929,28 +1008,6 @@ Tempfile.create("tmp") { |tmp| Pathname(tmp).empty? } # => true
 @see [[m:Dir.empty?]], [[m:FileTest.#empty?]], [[m:Pathname#zero?]]
 #@end
 
-#@until 1.9.2
---- chdir{|path| ... } -> object
-#@since 1.8.1
-このメソッドは obsolete です。
-代わりに [[m:Dir.chdir]] を使ってください。
-#@end
-
-Dir.chdir(self.to_s, &block) と同じです。
-
-@see [[m:Dir.chdir]]
-
---- chroot -> 0
-#@since 1.8.1
-このメソッドは obsolete です。
-代わりに [[m:Dir.chroot]] を使ってください。
-#@end
-
-Dir.chroot(self.to_s) と同じです。
-
-@see [[m:Dir.chroot]]
-
-#@end
 --- rmdir -> 0
 Dir.rmdir(self.to_s) と同じです。
 
@@ -982,7 +1039,6 @@ pp Pathname('/usr/local').entries
 
 @see [[m:Dir.entries]]
 
-#@since 1.8.1
 
 --- each_entry {|pathname| ... } -> nil
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
@@ -1003,20 +1059,7 @@ Pathname("/usr/local").each_entry {|f| p f }
 
 @see [[m:Dir.foreach]]
 
-#@end
 
-#@until 1.9.2
---- dir_foreach {|pathname| ... } -> nil
-#@since 1.8.1
-このメソッドは obsolete です。
-代わりに [[m:Pathname#each_entry]] メソッドを使ってください。
-#@end
-
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
-
-@see [[m:Dir.foreach]]
-
-#@end
 --- mkdir(*args) -> 0
 Dir.mkdir(self.to_s, *args) と同じです。
 
@@ -1074,15 +1117,25 @@ FileUtils.rm_r(self.to_s) と同じです。
 
 @see [[m:FileUtils.#rm_r]]
 
---- unlink -> 0
---- delete -> 0
+--- unlink -> Integer
+--- delete -> Integer
 self が指すディレクトリあるいはファイルを削除します。
 
-#@since 1.8.5
+#@samplecode 例
+require "pathname"
+
+pathname = Pathname("/path/to/sample")
+pathname.exist? # => true
+pathname.unlink # => 1
+pathname.exist? # => false
+#@end
 
 --- ascend {|pathname| ... } -> nil
+--- ascend                   -> Enumerator
+
 self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
 ブジェクトとして生成し、ブロックへの引数として渡して実行します。
+ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返します。
 
   require 'pathname'
 
@@ -1101,13 +1154,13 @@ self のパス名から親方向に辿っていったときの各パス名を新
 
 ファイルシステムにはアクセスしません。
 
-#@end
 
-#@since 1.8.5
 --- descend {|pathname| ... } -> nil
+--- descend                   -> Enumerator
 self のパス名の親から子供へと辿っていったときの各パス名を新しい
 Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
 す。
+ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返します。
 
   require 'pathname'
 
@@ -1126,41 +1179,6 @@ Pathname オブジェクトとして生成し、ブロックへの引数とし�
 
 ファイルシステムにはアクセスしません。
 
-#@end
-
-#@until 1.8.2
-
---- cleanpath_aggressive -> Pathname
-
-[[m:Pathname#cleanpath]](false) と同じです。 1.8.2 以降より private メソッドとなり、利
-用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
-
---- cleanpath_conservative -> Pathname
-
-[[m:Pathname#cleanpath]](true) と同じです。 1.8.2 以降より private メソッドとなり、利
-用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
-
-#@end
-
---- foreach(*args){|path| ... } -> nil
-#@since 1.8.1
-このメソッドは obsolete です。 each_line か each_entry を使ってください。
-#@end
-
-self の指し示すパスがディレクトリなら
-Dir.foreach(self.to_s, *args, &block) と、さもなければ
-IO.foreach(self.to_s, *args, &block) と同じです。
-
-#@#noexample obsolete
-
-#@if(version <= "1.8.0")
---- realpath_rec
-[[m:Pathname#realpath]] メソッドの実質的な処理を行っているメソッドです。
-利用するべきではありません。
-
-#@end
-
-#@since 1.8.5
 --- sub(pattern, replace)  -> Pathname
 --- sub(pattern) {|matched| ... } -> Pathname
 
@@ -1180,7 +1198,6 @@ path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
 
 @see [[m:String#sub]]
 
-#@end
 
 #@since 1.9.1
 --- to_path -> String
@@ -1199,6 +1216,16 @@ File.open などの引数に渡す際に呼ばれるメソッドです。 Pathna
 
 @param replace 拡張子を文字列で指定します。
 
+#@samplecode 例
+require "pathname"
+
+Pathname('/usr/bin/shutdown').sub_ext('.rb')      # => #<Pathname:/usr/bin/shutdown.rb>
+Pathname('/home/user/test.txt').sub_ext('.pdf')   # => #<Pathname:/home/user/test.pdf>
+Pathname('/home/user/test').sub_ext('.pdf')       # => #<Pathname:/home/user/test.pdf>
+Pathname('/home/user/test.').sub_ext('.pdf')      # => #<Pathname:/home/user/test..pdf>
+Pathname('/home/user/.test').sub_ext('.pdf')      # => #<Pathname:/home/user/.test.pdf>
+Pathname('/home/user/test.tar.gz').sub_ext('.xz') # => #<Pathname:/home/user/test.tar.xz>
+#@end
 
 #@end
 #@since 2.5.0

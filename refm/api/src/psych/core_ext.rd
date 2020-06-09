@@ -65,6 +65,7 @@ syck が廃止された場合  psych_to_yaml は廃止
 
 == Instance Methods
 
+#@until 2.5.0
 --- yaml_as(tag) -> ()
 --- psych_yaml_as(tag) -> ()
 
@@ -77,6 +78,7 @@ syck が廃止された場合  psych_to_yaml は廃止
 かわりに使ってください。
 
 @param tag 対象のクラスに関連付けるタグの文字列
+#@end
 
 = reopen Kernel
 
@@ -94,4 +96,3 @@ syck が廃止された場合  psych_y は廃止
 される予定であるため、特別の事情がない限り y を用いてください。
 
 @param objects YAML document に変換する Ruby のオブジェクト
-

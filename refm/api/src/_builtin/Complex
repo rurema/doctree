@@ -107,6 +107,27 @@ Complex(1, 0) == Complex(1) # => true
 Complex(1, 0) == 1          # => true
 #@end
 
+#@since 2.7.0
+--- <=>(other) -> -1 | 0 | 1 | nil
+
+self の虚部がゼロで other が実数の場合、
+self の実部の <=> メソッドで other と比較した結果を返します。
+other が Complex で虚部がゼロの場合も同様です。
+
+その他の場合は nil を返します。
+
+@param other 自身と比較する数値
+
+#@samplecode 例
+Complex(2, 3)  <=> Complex(2, 3) #=> nil
+Complex(2, 3)  <=> 1             #=> nil
+Complex(2)     <=> 1             #=> 1
+Complex(2)     <=> 2             #=> 0
+Complex(2)     <=> 3             #=> -1
+#@end
+
+#@end
+
 --- abs       -> Numeric
 --- magnitude -> Numeric
 
@@ -114,7 +135,7 @@ Complex(1, 0) == 1          # => true
 
 以下の計算の結果を [[c:Float]] オブジェクトで返します。
 
-  sqrt(self.real ** 2 + self.imag **2)
+  sqrt(self.real ** 2 + self.imag ** 2)
 
 #@samplecode 例
 Complex(1, 2).abs         # => 2.23606797749979
@@ -130,7 +151,7 @@ Complex('1/2', '1/2').abs # => 0.7071067811865476
 
 以下の計算の結果を返します。
 
-  self.real ** 2 + self.imag **2
+  self.real ** 2 + self.imag ** 2
 
 #@samplecode 例
 Complex(1, 1).abs2         # => 2
@@ -181,7 +202,7 @@ Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 #@end
 
 #@samplecode 例
-(1+1i).finite?                   # => true
+(1 + 1i).finite?                 # => true
 (Float::INFINITY + 1i).finite?   # => false
 #@end
 

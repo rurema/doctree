@@ -1,6 +1,0 @@
-= class TkTextTagSel < TkTextNamedTag
-
-== Class Methods
-
---- new(parent, *args)
-#@todo

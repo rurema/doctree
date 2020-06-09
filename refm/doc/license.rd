@@ -3,5 +3,4 @@
 このリファレンスは以下のライセンスに従って利用してください。
 
 : Creative Commons — Attribution 3.0 Unported
-  [[url:http://creativecommons.org/licenses/by/3.0/]]
-
+  [[url:https://creativecommons.org/licenses/by/3.0/]]

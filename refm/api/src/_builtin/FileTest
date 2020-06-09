@@ -72,9 +72,6 @@ FileTest.executable_real?("empty.txt")      # => false
 #@end
 
 --- exist?(file)    -> bool
-#@until 2.1.0
---- exists?(file)    -> bool
-#@end
 
 ファイルが存在する時に真を返します。そうでない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
@@ -88,11 +85,9 @@ FileTest.executable_real?("empty.txt")      # => false
   FileTest.exist?('/etc/no_such_file') # => false
   FileTest.exist?('/etc/no_such_directory') # => false
 
-#@since 2.1.0
 --- exists?(file)    -> bool
 
-このメソッドは deprecated です。[[m:FileTest.#exist?]] を使用してください。
-#@end
+このメソッドは Ruby 2.1 から deprecated です。[[m:FileTest.#exist?]] を使用してください。
 
 --- grpowned?(file)    -> bool
 
@@ -141,7 +136,6 @@ FileTest.grpowned?("testfile")      # => false
   FileTest.file?('/bin') # => false
   FileTest.file?('/no_such_file') # => false
 
-#@since 1.8.4
 --- identical?(file1, file2)    -> bool
 
 file1 と file2 が同じファイルを指している時に真を返します。
@@ -165,7 +159,6 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってくださ
 
 @raise IOError 指定された IO オブジェクト file1, file2 が既に close されていた場合に発生します。
 
-#@end
 --- pipe?(file)    -> bool
 
 指定したファイルがパイプである時に真を返します。そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。

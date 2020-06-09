@@ -132,6 +132,94 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
   m[1]      # => "foo called with arg 1"
   m.call(2) # => "foo called with arg 2"
 
+#@since 2.6.0
+--- <<(callable) -> Proc
+
+self と引数を合成した Proc を返します。
+
+戻り値の Proc は可変長の引数を受け取ります。
+戻り値の Proc を呼び出すと、まず受け取った引数を callable に渡して呼び出し、
+その戻り値を self に渡して呼び出した結果を返します。
+
+[[m:Method#>>]] とは呼び出しの順序が逆になります。
+
+@param callable Proc、Method、もしくは任意の call メソッドを持ったオブジェクト。
+
+#@samplecode 例
+def f(x)
+  x * x
+end
+
+def g(x)
+  x + x
+end
+
+# (3 + 3) * (3 + 3)
+p (method(:f) << method(:g)).call(3) # => 36
+#@end
+
+#@samplecode call を定義したオブジェクトを渡す例
+class WordScanner
+  def self.call(str)
+    str.scan(/\w+/)
+  end
+end
+
+File.write('testfile', <<~TEXT)
+  Hello, World!
+  Hello, Ruby!
+TEXT
+
+pipeline = method(:pp) << WordScanner << File.method(:read)
+pipeline.call('testfile') # => ["Hello", "World", "Hello", "Ruby"]
+#@end
+
+@see [[m:Proc#<<]], [[m:Proc#>>]]
+
+--- >>(callable) -> Proc
+
+self と引数を合成した Proc を返します。
+
+戻り値の Proc は可変長の引数を受け取ります。
+戻り値の Proc を呼び出すと、まず受け取った引数を self に渡して呼び出し、
+その戻り値を callable に渡して呼び出した結果を返します。
+
+[[m:Method#<<]] とは呼び出しの順序が逆になります。
+
+@param callable Proc、Method、もしくは任意の call メソッドを持ったオブジェクト。
+
+#@samplecode 例
+def f(x)
+  x * x
+end
+
+def g(x)
+  x + x
+end
+
+# (3 * 3) + (3 * 3)
+p (method(:f) >> method(:g)).call(3) # => 18
+#@end
+
+#@samplecode call を定義したオブジェクトを渡す例
+class WordScanner
+  def self.call(str)
+    str.scan(/\w+/)
+  end
+end
+
+File.write('testfile', <<~TEXT)
+  Hello, World!
+  Hello, Ruby!
+TEXT
+
+pipeline = File.method(:read) >> WordScanner >> method(:pp)
+pipeline.call('testfile') # => ["Hello", "World", "Hello", "Ruby"]
+#@end
+
+@see [[m:Proc#<<]], [[m:Proc#>>]]
+#@end
+
 --- arity -> Integer
 
 メソッドが受け付ける引数の数を返します。
@@ -198,7 +286,6 @@ method は、メソッド名を表します。
   p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
   p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
 
-#@since 1.8.0
 klass1 と klass2 が同じ場合は以下の形式になります。
   #<Method: klass1#method>                        (形式2)
 
@@ -238,7 +325,6 @@ klass2 は実際にそのメソッドを定義しているオブジェクトに�
     include Baz
   end
   p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
-#@end
 
 @see [[m:Object#inspect]]
 
@@ -311,7 +397,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- name    -> Symbol
 #@else
@@ -362,7 +447,6 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
   m.receiver # => #<Foo:0x007fb39203eb78>
   m.receiver.foo(1) # => "foo called with arg 1"
 
-#@end
 
 #@since 1.9.1
 --- source_location -> [String, Integer] | nil
@@ -372,6 +456,21 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 である)場合は nil を返します。
 
 @see [[m:Proc#source_location]]
+
+例:
+  # ------- /tmp/foo.rb ---------
+  class Foo
+    def foo; end
+  end
+  # ----- end of /tmp/foo.rb ----
+
+  require '/tmp/foo'
+
+  m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+  m.source_location # => ["/tmp/foo.rb", 2]
+
+  method(:puts).source_location # => nil
+
 #@end
 
 #@since 1.9.2

@@ -6,7 +6,6 @@
 
 == Instance Methods
 
-#@since 1.8.0
 --- all?               -> bool
 --- all? {|item| ... } -> bool
 #@since 2.5.0
@@ -32,9 +31,7 @@
 #@since 2.5.0
     p %w[ant bear cat].all?(/t/)     # => false
 #@end
-#@end
 
-#@since 1.8.0
 --- any?               -> bool
 --- any? {|item| ... } -> bool
 #@since 2.5.0
@@ -62,6 +59,18 @@
     p [nil, true, 99].any?          # => true
     p [].any?                       # => false
 #@end
+
+#@since 2.6.0
+--- chain(*enums) -> Enumerator::Chain
+
+自身と enums 引数を続けて繰り返す [[c:Enumerator::Chain]] を返します。
+
+#@samplecode 例
+e = (1..3).chain([4, 5])
+e.to_a #=> [1, 2, 3, 4, 5]
+#@end
+
+@see [[m:Enumerator#+]]
 #@end
 
 #@since 1.9.1
@@ -86,48 +95,50 @@ obj.collect {|item| item } を実行します。
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
-#@since 1.8.7
-#@since 1.9.1
---- each_with_index                      -> Enumerator
-#@else
---- each_with_index                      -> Enumerable::Enumerator
---- enum_with_index                      -> Enumerable::Enumerator
+#@since 2.6.0
+@see [[m:Hash#to_h]]
 #@end
-#@end
---- each_with_index {|item, index| ... } -> self
+--- each_with_index(*args)                      -> Enumerator
+--- each_with_index(*args) {|item, index| ... } -> self
 
 要素とそのインデックスをブロックに渡して繰り返します。
 
-self を返します。
-
-#@since 1.9.1
 ブロックを省略した場合は、
 要素とそのインデックスを繰り返すような
 [[c:Enumerator]] を返します。
+
+[[m:Enumerator#with_index]] は offset 引数を受け取りますが、
+each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
+
+@param args イテレータメソッド (each など) にそのまま渡されます。
+
+#@samplecode 例
+[5, 10, 15].each_with_index do |n, idx|
+  p [n, idx]
+end
+# => [5, 0]
+#    [10, 1]
+#    [15, 2]
 #@end
 
-例:
-    [5, 10, 15].each_with_index do |n, idx|
-      p [n, idx]
-    end
-        # => [5, 0]
-        #    [10, 1]
-        #    [15, 2]
-
-#@since 1.8.4
-#@until 1.8.6
-@see [[m:Enumerable::Enumerator#enum_with_index]]
-#@end
+#@samplecode 引数ありの例
+require 'stringio'
+StringIO.new("foo|bar|baz").each_with_index("|") do |s, i|
+  p [s, i]
+end
+# => ["foo|", 0]
+#    ["bar|", 1]
+#    ["baz", 2]
 #@end
 
-#@since 1.8.7
+@see [[m:Enumerator#with_index]]
+
 #@since 1.9.1
 --- find(ifnone = nil)   -> Enumerator
 --- detect(ifnone = nil) -> Enumerator
 #@else
 --- find(ifnone = nil)   -> Enumerable::Enumerator
 --- detect(ifnone = nil) -> Enumerable::Enumerator
-#@end
 #@end
 --- find(ifnone = nil) {|item| ... }   -> object
 --- detect(ifnone = nil) {|item| ... } -> object
@@ -142,7 +153,6 @@ self を返します。
 真になった値を返すような [[c:Enumerator]] を返します。
 #@end
 
-#@since 1.8.0
 @param ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
 
 例:
@@ -154,12 +164,6 @@ self を返します。
     ifnone = proc { raise ArgumentError, "item not found" }
     p [1, 2, 3, 4, 5].find(ifnone) {|i| i % 7 == 0 }
         # ArgumentError: item not found
-#@else
-@param ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
-
-    [1, 2, 3].find("raise") {|v| v > 4 }
-        # => -:1: unhandled exception
-#@end
 
 --- find_all  -> Enumerator
 --- select    -> Enumerator
@@ -187,6 +191,23 @@ self を返します。
 
 @see [[m:Enumerable#reject]]
 @see [[m:Enumerable#grep]]
+
+#@since 2.7.0
+--- filter_map {|item| ... } -> [object]
+--- filter_map -> Enumerator
+
+各要素に対してブロックを評価した値のうち、真であった値の
+配列を返します。
+
+ブロックを省略した場合は、各要素に対してブロックを評価した値のうち、
+真であった値の配列を返すような [[c:Enumerator]] を返します。
+
+#@samplecode 例
+(1..10).filter_map { |i| i * 2 if i.even? } #=> [4, 8, 12, 16, 20]
+#@end
+
+@see [[m:Enumerable#filter]], [[m:Enumerable#map]]
+#@end
 
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
@@ -230,15 +251,12 @@ pattern === item が成立する要素を全て含んだ配列を返します。
 @see [[m:Enumerable#reject]]
 #@end
 
-#@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> object
-#@since 1.8.7
 --- inject(sym)                                     -> object
 --- inject(init, sym)                               -> object
 --- reduce(init = self.first) {|result, item| ... } -> object
 --- reduce(sym)                                     -> object
 --- reduce(init, sym)                               -> object
-#@end
 
 リストのたたみこみ演算を行います。
 
@@ -255,10 +273,8 @@ self の次の要素を引数に順次ブロックを実行します。
 要素がなければブロックを実行せずに nil を返します。
 
 @param init  最初の result の値です。任意のオブジェクトが渡せます。
-#@since 1.8.7
 @param sym   ブロックの代わりに使われるメソッド名を表す [[c:Symbol]] オブジェクトを指定します。
              実行結果に対して sym という名前のメソッドが呼ばれます。             
-#@end
 例:
 
   # 合計を計算する。
@@ -273,12 +289,9 @@ self の次の要素を引数に順次ブロックを実行します。
   [1, 2, 3, 4, 5].each {|v| result += v }
   p result   # => 15
 
-#@since 1.8.7
   p [1, 2, 3, 4, 5].inject(:+)                    #=> 15
   p ["b", "c", "d"].inject("abbccddde", :squeeze) #=> "abcde"
-#@end
 
-#@end
 
 --- member?(val)  -> bool
 --- include?(val) -> bool
@@ -376,7 +389,6 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
   # => [#<Person:0x007fc54b0240a0 @name="sato", @age=55>, #<Person:0x007fc54c033ea0 @name="suzuki", @age=55>]
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- max_by                  -> Enumerator
 #@else
@@ -471,7 +483,6 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 @see [[m:Enumerable#sort_by]]
 
-#@end
 
 --- min    -> object | nil
 #@since 2.2.0
@@ -558,7 +569,6 @@ a < b のとき負の整数を、期待しています。
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
-#@since 1.8.7
 #@since 1.9.1
 --- min_by                  -> Enumerator
 #@else
@@ -609,14 +619,11 @@ a < b のとき負の整数を、期待しています。
 
 @see [[m:Enumerable#sort_by]]
 
-#@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- partition               -> Enumerator
 #@else
 --- partition               -> Enumerable::Enumerator
-#@end
 #@end
 --- partition {|item| ... } -> [[object], [object]]
 
@@ -636,12 +643,10 @@ a < b のとき負の整数を、期待しています。
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
-#@since 1.8.7
 #@since 1.9.1
 --- reject               -> Enumerator
 #@else
 --- reject               -> Enumerable::Enumerator
-#@end
 #@end
 --- reject {|item| ... } -> [object]
 
@@ -691,13 +696,10 @@ Enumerable#sort は安定ではありません (unstable sort)。
 
 @see [[m:Enumerable#sort_by]]
 
-#@since 1.8.0
-#@since 1.8.7
 #@since 1.9.1
 --- sort_by               -> Enumerator
 #@else
 --- sort_by               -> Enumerable::Enumerator
-#@end
 #@end
 --- sort_by {|item| ... } -> [object]
 
@@ -762,7 +764,6 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 #@end
 
 @see [[m:Enumerable#sort]]
-#@end
 
 --- to_a(*args)    -> [object]
 --- entries(*args) -> [object]
@@ -803,7 +804,6 @@ self を [key, value] のペアの配列として解析した結果を [[c:Hash]
 #@end
 #@end
 
-#@since 1.8.0
 --- zip(*lists)  -> [[object]]
 --- zip(*lists) {|v1, v2, ...| ...} -> nil
 
@@ -817,11 +817,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
 @param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
              to_ary メソッドが無い場合は each を試します。
 #@else
-#@since 1.8.2
 @param lists 配列を指定します。配列でない場合は to_a メソッドにより配列に変換します。
-#@else
-@param lists 配列を指定します。配列でない場合は to_ary メソッドにより配列に変換します。
-#@end
 #@end
 
 例:
@@ -843,9 +839,7 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
         #    [2, 5, 8]
         #    [3, 6, 9]
         #    nil
-#@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- each_slice(n)               -> Enumerator
 #@else
@@ -924,9 +918,7 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 
 @see [[m:Enumerable#each_slice]]
 
-#@end
 
-#@since 1.8.7
 
 --- count                   -> Integer
 --- count(item)             -> Integer
@@ -1099,12 +1091,18 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要
 実装していることを仮定しています。二つ目の形式では、要素同士の比較を
 ブロックを用いて行います。
 
-   a = %w(albatross dog horse)
-   a.minmax                                 #=> ["albatross", "horse"]
-   a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
-   [].minmax # => [nil, nil]
+#@samplecode
+a = %w(albatross dog horse)
+a.minmax                                 #=> ["albatross", "horse"]
+a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
+[].minmax # => [nil, nil]
+#@end
 
+#@since 2.7.0
+@see [[m:Enumerable#sort]], [[m:Array#minmax]]
+#@else
 @see [[m:Enumerable#sort]]
+#@end
 
 #@since 1.9.1
 --- minmax_by                -> Enumerator
@@ -1240,7 +1238,6 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
   #    2
   #    1
 
-#@end
 #@since 1.9.1
 --- each_with_object(obj) -> Enumerator
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object
@@ -1290,37 +1287,49 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 各チャンクの要素を持つ配列のペアを各要素とします。
 そのため、eachだと以下のようになります。
 
-  enum.chunk {|elt| key }.each {|key, ary| ... }
+#@samplecode
 #@until 2.3.0
-  enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
+enum.chunk {|elt| key }.each {|key, ary| do_something }
+enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| do_something }
+#@else
+enum.chunk {|elt| key }.each {|key, ary| do_something }
+#@end
 #@end
 
 例として、整数列を連続する奇数/偶数に分ける例を見てみます。
 「n.even?」の値が切り替わるところで区切られているのがわかるでしょう。
-  [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5].chunk {|n|
-    n.even?
-  }.each {|even, ary|
-    p [even, ary]
-  }
-  #=> [false, [3, 1]]
-  #   [true, [4]]
-  #   [false, [1, 5, 9]]
-  #   [true, [2, 6]]
-  #   [false, [5, 3, 5]]
+
+#@samplecode 例
+[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5].chunk {|n|
+  n.even?
+}.each {|even, ary|
+  p [even, ary]
+}
+# => [false, [3, 1]]
+#    [true, [4]]
+#    [false, [1, 5, 9]]
+#    [true, [2, 6]]
+#    [false, [5, 3, 5]]
+#@end
 
 このメソッドは各要素が既にソートされている場合に便利です。
-以下の例では、テキスト辞書ファイル(中身がソートされている)
-に含まれる単語を先頭の文字ごとに数えています。
-  # line.ord は先頭の文字のコードポイントを返す
-  open("/usr/share/dict/words", "r:iso-8859-1") {|f|
-    f.chunk {|line| line.ord }.each {|ch, lines| p [ch.chr, lines.length] }
-  }
-  #=> ["\n", 1]
-  #   ["A", 1327]
-  #   ["B", 1372]
-  #   ["C", 1507]
-  #   ["D", 791]
-  #   ...
+
+以下の例では、テキスト辞書ファイルに含まれる単語の頭文字の頻度を調べています。
+このファイルは、Linux や macOS などで、ソートされた英語（など）の単語の
+リストを改行で区切って収めたものです。
+大文字／小文字の違いを無視するため upcase しています。
+
+#@samplecode 例
+# ファイルのエンコーディングは実際のファイルに合わせてください。
+open("/usr/share/dict/words", "r:iso-8859-1") {|f|
+  f.chunk {|line| line[0].upcase }.each {|ch, lines| p [ch, lines.length] }
+}
+# => ["A", 17096]
+#    ["B", 11070]
+#    ["C", 19901]
+#    ["D", 10896]
+#    ...
+#@end
 
 さらにこのメソッドは以下の値を特別扱いします。
 
@@ -1331,50 +1340,62 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで
 
 それ以外のアンダースコアで始まるシンボルを指定した場合は例外が発生します。
 
-  items.chunk { |item| :_underscore }
-  # => RuntimeError: symbols beginning with an underscore are reserved
+#@samplecode 例
+[1, 2].chunk { |item| :_underscore }.to_a
+# => RuntimeError: symbols beginning with an underscore are reserved
+
+# 「.to_a」無しだと Enumerator を返すのみで例外は発生しない
+#@end
 
 nil、 :_separator はある要素を無視したい場合に用います。
 例として svn log の出力のハイフンの所で区切りたい場合を考えます。
-  sep = "-"*72 + "\n" # ハイフンが72個の行
-  IO.popen("svn log README") {|f|
-    f.chunk {|line|
-      line != sep || nil
-    }.each {|_, lines|
-      pp lines
-    }
-  }
-  #=> ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
-  #    "\n",
-  #    "* README, README.ja: Update the portability section.\n",
-  #    "\n"]
-  #   ["r16725 | knu | 2008-05-31 23:34:23 +0900 (Sat, 31 May 2008) | 2 lines\n",
-  #    "\n",
-  #    "* README, README.ja: Add a note about default C flags.\n",
-  #    "\n"]
-  #   ...
 
-テキストを空行で区切られた段落に分けたい場合にも nil が使えます。
-  File.foreach("README").chunk {|line|
-    /\A\s*\z/ !~ line || nil
+#@samplecode 例
+sep = "-"*72 + "\n" # ハイフンが72個の行
+IO.popen("svn log README") {|f|
+  f.chunk {|line|
+    line != sep || nil
   }.each {|_, lines|
     pp lines
   }
+}
+#=> ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
+#    "\n",
+#    "* README, README.ja: Update the portability section.\n",
+#    "\n"]
+#   ["r16725 | knu | 2008-05-31 23:34:23 +0900 (Sat, 31 May 2008) | 2 lines\n",
+#    "\n",
+#    "* README, README.ja: Add a note about default C flags.\n",
+#    "\n"]
+#   ...
+#@end
+
+テキストを空行で区切られた段落に分けたい場合にも nil が使えます。
+
+#@samplecode 例
+File.foreach("README").chunk {|line|
+  /\A\s*\z/ !~ line || nil
+}.each {|_, lines|
+  pp lines
+}
+#@end
 
 「:_alone」は要素を素通ししたい場合に用います。
 以下の例では「Foo#bar」という形式の行が連続している場合のみ
 チャンク化し、それ以外は素通しします。
 
-  pat = /\A[A-Z][A-Za-z0-9_]+\#/
-  open(filename) {|f|
-    f.chunk {|line| pat =~ line ? $& : :_alone }.each {|key, lines|
-      if key != :_alone
-        print lines.sort.join('')
-      else
-        print lines.join('')
-      end
-    }
+#@samplecode 例
+pat = /\A[A-Z][A-Za-z0-9_]+\#/
+open(filename) {|f|
+  f.chunk {|line| pat =~ line ? $& : :_alone }.each {|key, lines|
+    if key != :_alone
+      print lines.sort.join('')
+    else
+      print lines.join('')
+    end
   }
+}
+#@end
 
 #@until 2.3.0
 チャンク化に状態遷移が必要な場合は、
@@ -1769,6 +1790,20 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 "+" メソッドが再定義されている場合、Enumerable#sum は再定義を無視することがあります(例えばInteger#+)。
 
 @see [[m:Array#sum]]
+
+#@since 2.7.0
+--- tally     ->   Hash
+
+self に含まれる要素を数え上げた結果を Hash で返します。
+Hash のキーは self に含まれる要素で、Hash の値は対応する要素が出現する回数です。
+
+要素は[[m:Object#eql?]]で比較されます。
+
+#@samplecode 例
+["a", "b", "c", "b"].tally  #=> {"a"=>1, "b"=>2, "c"=>1}
+#@end
+#@end
+
 --- uniq                -> Array
 --- uniq { |item| ... } -> Array
 
