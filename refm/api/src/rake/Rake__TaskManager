@@ -30,7 +30,7 @@ task :test_rake_app do
   rule = Rake.application.create_rule '.txt' => '.md' do |t|
     "#{t}"
   end
-  rule # => [[/\.txt$/, [], [".md"], #<Proc:0x32263c8@/path/to/Rakefile:5>]]
+  p rule # => [[/\.txt$/, [], [".md"], nil, #<Proc:0x0000558dd2e32d20 /path/to/Rakefile:5>]]
 end
 #@end
 
