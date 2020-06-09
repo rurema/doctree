@@ -69,7 +69,7 @@ require "json"
 
 json_state = JSON::State.new({})
 json_state.array_nl        # => ""
-json_state.array_nl = "\n" # => "\n"
+json_state.array_nl = "\n"
 json_state.array_nl        # => "\n"
 #@end
 
@@ -166,4 +166,3 @@ JSON 形式の文字列中で JavaScript のオブジェクトを表す部分に
 --- to_h -> Hash
 
 自身をハッシュに変換します。
-
