@@ -41,8 +41,8 @@ task default: :test_rake_app
 task :test_rake_app do
   arguments = Rake::TaskArguments.new(["name1", "name2"], ["value1", "value2"])
   new_arguments = arguments.new_scope(["name3", "name4"])
-  new_arguments         # => {}
-  new_arguments.names   # => ["name3", "name4"]
+  p new_arguments         # => #<Rake::TaskArguments >
+  p new_arguments.names   # => ["name3", "name4"]
 end
 #@end
 
@@ -76,4 +76,3 @@ end
 @param values パラメータの値のリストを指定します。
 
 @param parent 親となる [[c:Rake::TaskArguments]] を指定します。
-
