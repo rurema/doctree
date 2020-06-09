@@ -31,6 +31,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Enumerator)
 #@since 2.6.0
 #@include(_builtin/Enumerator__ArithmeticSequence)
+#@include(_builtin/Enumerator__Chain)
 #@end
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
