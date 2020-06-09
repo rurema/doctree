@@ -451,10 +451,18 @@ nil を返します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 #@end
 
-  require 'set'
-  s1 = Set[10, 20, 30]
-  s2 = Set[10, 30, 50]
-  p s1 & s2 #=> #<Set: {10, 30}>
+#@samplecode
+require 'set'
+s1 = Set[10, 20, 30]
+s2 = Set[10, 30, 50]
+p s1 & s2 #=> #<Set: {10, 30}>
+#@end
+
+#@since 2.7.0
+@see [[m:Array#&]], [[m:Array#intersection]]
+#@else
+@see [[m:Array#&]]
+#@end
 
 --- ^(enum) -> Set
 
@@ -612,6 +620,9 @@ self と set が互いに素な集合である場合に true を返します。
 @return 常に self を返します。
 
 --- select! {|element| ... } -> self | nil
+#@since 2.6.0
+--- filter! {|element| ... } -> self | nil
+#@end
 
 各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
 

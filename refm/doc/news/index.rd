@@ -1,5 +1,11 @@
 = Ruby変更履歴
 
+#@since 2.7.0
+  * [[d:news/2_7_0]]
+#@end
+#@since 2.6.0
+  * [[d:news/2_6_0]]
+#@end
 #@since 2.5.0
   * [[d:news/2_5_0]]
 #@end

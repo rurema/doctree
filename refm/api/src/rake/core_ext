@@ -33,6 +33,13 @@
 
 @param newext 新しい拡張子を指定します。
 
+例:
+  require "rake"
+
+  "hoge".ext(".rb")          # => "hoge.rb"
+  "hoge.rb".ext(".erb")      # => "hoge.erb"
+  "hoge.tar.gz".ext(".bz2")  # => "hoge.tar.bz2"
+
 --- pathmap(spec = nil){ ... } -> String
 
 与えられた書式指定文字列に応じてパス(自身)を変換します。

@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 #@#require rexml/validation/validation
 #@#require rexml/parsers/baseparser
@@ -258,4 +257,3 @@ RelaxNGに基づくXMLバリデータ。
 --- inspect
 #@todo
 
-#@end

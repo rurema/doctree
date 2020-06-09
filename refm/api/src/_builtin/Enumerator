@@ -52,7 +52,7 @@ args を指定すると、 method の呼び出し時に渡されます。
 
 --- new(size=nil){|y| ... }         -> Enumerator
 
-Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
+Enumerator オブジェクトを生成して返します。与えられたブロックは [[c:Enumerator::Yielder]] オブジェクトを
 引数として実行されます。
 
 生成された Enumerator オブジェクトに対して each を呼ぶと、この生成時に指定されたブロックを
@@ -432,4 +432,3 @@ self の要素数を返します。
 #@# 以下のクラスはユーザが直接触れるべきではないのでドキュメントは
 #@# 書かない
 #@# = class Enumerator::Generator
-#@# = class Enumerator::Yielder

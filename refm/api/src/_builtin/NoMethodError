@@ -1,4 +1,3 @@
-#@since 1.8.0
 = class NoMethodError < NameError
 
 定義されていないメソッドの呼び出しが行われたときに発生します。
@@ -26,6 +25,9 @@
 
 #@since 2.4.0
 --- new(error_message = "", name = nil, args = nil, priv = false) -> NoMethodError
+#@since 2.6.0
+--- new(error_message = "", name = nil, args = nil, priv = false, receiver:) -> NoMethodError
+#@end
 #@else
 --- new(error_message = "", name = nil, args = nil) -> NoMethodError
 #@end
@@ -41,7 +43,9 @@
 #@since 2.4.0
 @param priv private なメソッドを呼び出せる形式 (関数形式(レシーバを省略した形式)) で呼ばれたかどうかを指定します
 #@end
-
+#@since 2.6.0
+@param receiver 原因となったメソッド呼び出しのレシーバです
+#@end
 
 例:
 
@@ -72,7 +76,6 @@
        :foobar
        [1, 2, 3]
 
-#@end
 #@since 2.4.0
 --- private_call? -> bool
 

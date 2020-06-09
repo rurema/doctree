@@ -1,9 +1,0 @@
-= class Tk::BWidget::NoteBook::Event_for_Tabs < TkEvent::Event
-
-== Class Methods
-
---- _get_extra_args_tbl
-#@todo
-
-
-

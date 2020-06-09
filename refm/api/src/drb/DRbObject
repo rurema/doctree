@@ -7,7 +7,7 @@ alias DRbObject
 つまりインスタンスへのメソッド呼び出しはリモートプロセスに送られ
 リモート側でメソッドが呼び出されます。
 
-内部的には [[m:Object#method_missing]] でメソッド呼び出しを
+内部的には [[m:BasicObject#method_missing]] でメソッド呼び出しを
 hook して、それを転送します。
 
 

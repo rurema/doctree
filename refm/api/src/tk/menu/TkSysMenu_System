@@ -1,7 +1,0 @@
-= class TkSysMenu_System < TkMenu
-include TkSystemMenu
-
-== Constants
-
---- SYSMENU_NAME
-#@todo

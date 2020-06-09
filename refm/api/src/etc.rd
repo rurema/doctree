@@ -15,7 +15,6 @@ category Unix
 
 == Module Functions
 
-#@since 1.8.1
 --- getgrent -> Struct::Group | nil
 
 /etc/group ファイルから読み込んだエントリを一つ返します。
@@ -68,7 +67,6 @@ category Unix
 
 @see [[man:getpwent(3)]]
 
-#@end
 
 --- getlogin -> String | nil
 
@@ -138,11 +136,7 @@ name という名前のグループエントリを返します。
 
 @raise RuntimeError /etc/group ファイルがロックされている場合に発生します。
 
-#@since 1.8.1
 @see [[m:Etc.#getgrent]], [[man:getgrent(3)]]
-#@else
-@see [[man:getgrent(3)]]
-#@end
 
 --- group {|gr| ... } -> ()
 
@@ -157,11 +151,7 @@ name という名前のグループエントリを返します。
 
 @raise RuntimeError /etc/passwd ファイルがロックされている場合に発生します。
 
-#@since 1.8.1
 @see [[m:Etc.#getpwent]], [[man:getpwent(3)]]
-#@else
-@see [[man:getpwent(3)]]
-#@end
 
 --- passwd {|pw| ... } -> ()
 

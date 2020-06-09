@@ -36,7 +36,7 @@ NIS はサポートされていません。
 == Class Methods
 --- new(resolvers = [Hosts.new, DNS.new]) -> Resolv
 resolvers に与えたリゾルバの配列を先頭から順に
-名前解決を試すような、新しいリソルバオブジェクトを返します。
+名前解決を試すような、新しいリゾルバオブジェクトを返します。
 
 resolvers の各要素は each_address と each_name という
 メソッドを持っていなければなりません。
@@ -258,7 +258,6 @@ DNSについては以下を参照してください。
 
 新しい DNS リゾルバを生成します。
 
-#@since 1.8.2
 resolv_conf が nil の場合は
 /etc/resolv.conf もしくはプラットフォーム固有の
 DNS設定を利用します。
@@ -272,7 +271,6 @@ resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
    Resolv::DNS.new(:nameserver => ['210.251.121.21'],
                    :search => ['ruby-lang.org'],
                    :ndots => 1)
-#@end
 
 #@if (version <= "1.8.1")
 @param resolv_conf DNSの設定ファイル名を文字列で与えます
