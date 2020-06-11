@@ -1,3 +1,4 @@
+
 リファレンスマニュアルの書式のまとめです。より詳しくは、
 
 * [[ClassReferenceManualFormat]]
@@ -141,22 +142,22 @@ pattern が見付からなかったときは nil を返します。
                  to_s メソッドを持たないときに発生します。
 
 #@samplecode 例
-        p "strstrstr".index(/str/)       # => 0      ← 引数 pattern の例
-        p "strstrstr".index("str")       # => 0
-        p "strstrstr".index(?s)          # => 0
+p "strstrstr".index(/str/)       # => 0      ← 引数 pattern の例
+p "strstrstr".index("str")       # => 0
+p "strstrstr".index(?s)          # => 0
 
-        p "strstrstr".index(/xxx/)       # => nil   ← 検索が失敗したときの例
-        p "strstrstr".index("xxx")       # => nil
-        p "strstrstr".index(?x)          # => nil
+p "strstrstr".index(/xxx/)       # => nil   ← 検索が失敗したときの例
+p "strstrstr".index("xxx")       # => nil
+p "strstrstr".index(?x)          # => nil
 
-        p "strstrstr".index(/str/, 0)    # => 0    ← pos 引数の例
-        p "strstrstr".index(/str/, 1)    # => 3
-        p "strstrstr".index(/str/, 3)    # => 3
-        p "strstrstr".index(/str/, 4)    # => 6
+p "strstrstr".index(/str/, 0)    # => 0    ← pos 引数の例
+p "strstrstr".index(/str/, 1)    # => 3
+p "strstrstr".index(/str/, 3)    # => 3
+p "strstrstr".index(/str/, 4)    # => 6
 
-        p "strstrstr".index(/str/, -1)   # => nil    ← 負の pos 引数の例
-        p "strstrstr".index(/str/, -2)   # => nil
-        p "strstrstr".index(/str/, -3)   # => 6
+p "strstrstr".index(/str/, -1)   # => nil    ← 負の pos 引数の例
+p "strstrstr".index(/str/, -2)   # => nil
+p "strstrstr".index(/str/, -3)   # => 6
 #@end
 
 @see \[\[m:String#rindex]]
