@@ -99,6 +99,20 @@ NOTE: Ruby 1.8.xでモジュールのインスタンスメソッドをbindする
     end
     p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 
+#@since 2.7.0
+--- bind_call(recv, *args) -> object
+--- bind_call(recv, *args) { ... } -> object
+
+self を recv に bind して args を引数として呼び出します。
+
+self.bind(recv).call(*args) と同じ意味です。
+
+#@samplecode
+puts Kernel.instance_method(:inspect).bind_call(BasicObject.new) # => #<BasicObject:0x000055c65e8ea7b8>
+#@end
+
+@see [[m:UnboundMethod#bind]], [[m:Method#call]]
+#@end
 --- arity    -> Integer
 
 メソッドが受け付ける引数の数を返します。
