@@ -4,7 +4,27 @@ on: [push, pull_request]
 
 jobs:
   rake:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        ruby: [2.7, 2.6, 2.5]
+
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Install dependencies
+      run: bundle install
+    - name: Run rake
+      run: bundle exec rake
+
+  artifact:
+    runs-on: ${{ matrix.os }}
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
@@ -19,6 +39,7 @@ jobs:
       run: bundle install
     - name: Run rake
       run: bundle exec rake
+
     - name: Create tarballs
       run: |
         set -ex
@@ -31,11 +52,6 @@ jobs:
         name: statichtml
         path: /tmp/2.?.0.tar.xz
 
-    - name: Show debug info
-      run: |
-        set -x
-        echo ${GITHUB_BASE_REF}
-        echo ${{ github.event.pull_request.base.sha }}
     - name: Rename generated html
       run: |
         cd /tmp

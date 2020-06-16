@@ -38,6 +38,7 @@ def generate_statichtml(version)
   # To suppress progress bar
   # because it exceeded Travis CI max log length
   commands << "--quiet" if ENV['CI']
+  commands << "--no-stop-on-syntax-error" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.7')
   succeeded = system(*commands)
   raise "Failed to generate static html" unless succeeded
 end
