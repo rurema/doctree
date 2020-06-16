@@ -100,6 +100,7 @@ NOTE: Ruby 1.8.xでモジュールのインスタンスメソッドをbindする
     p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 
 #@since 2.7.0
+@see [[m:UnboundMethod#bind_call]]
 --- bind_call(recv, *args) -> object
 --- bind_call(recv, *args) { ... } -> object
 

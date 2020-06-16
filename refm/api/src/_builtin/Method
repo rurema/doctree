@@ -118,6 +118,9 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 
 @param args self に渡される引数。
 
+#@since 2.7.0
+@see [[m:UnboundMethod#bind_call]]
+#@end
 @see [[d:spec/safelevel]]
 #@# セーフレベルに関するその他の詳細
 
