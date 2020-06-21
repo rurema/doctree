@@ -726,7 +726,7 @@ self に 1 秒足した Time オブジェクトを生成して返します。
 
 タイムゾーンが協定世界時に設定されている場合は 0 を返します。
 
-  p Time.now.zone  # => "JST"
+  p Time.now.getgm.zone  # => "UTC"
   p Time.now.getgm.utc_offset
   # => 0
 
