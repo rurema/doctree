@@ -23,27 +23,6 @@ jobs:
     - name: Run rake
       run: bundle exec rake
 
-  artifact:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        # docs.ruby-lang.org uses snap ruby
-        # https://snapcraft.io/ruby
-        ruby-version: 2.7
-    - name: Install dependencies
-      run: bundle install
-    - name: Run rake
-      run: bundle exec rake
-
     - name: Create tarballs
       if: ${{ runner.os != 'Windows' }}
       run: |
@@ -63,7 +42,7 @@ jobs:
         }
     - uses: actions/upload-artifact@v2
       with:
-        name: statichtml-${{ matrix.os }}
+        name: statichtml-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/2.?.0.tar.xz
 
     - name: Rename generated html
@@ -85,7 +64,7 @@ jobs:
         git diff --no-index html.base html.pr --output artifact/html.diff || :
     - uses: actions/upload-artifact@v2
       with:
-        name: diff-${{ matrix.os }}
+        name: diff-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/html.diff
 
   misspell:
