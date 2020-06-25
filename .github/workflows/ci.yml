@@ -24,7 +24,7 @@ jobs:
       run: bundle exec rake
 
   artifact:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
