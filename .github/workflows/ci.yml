@@ -24,6 +24,10 @@ jobs:
       run: bundle exec rake
 
   artifact:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
     runs-on: ${{ matrix.os }}
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
@@ -41,16 +45,26 @@ jobs:
       run: bundle exec rake
 
     - name: Create tarballs
+      if: ${{ runner.os != 'Windows' }}
       run: |
         set -ex
+        mkdir /tmp/artifact
         cd /tmp/html
         for d in *.*; do
-          tar acf ../$d.tar.xz $d
+          tar acf ../artifact/$d.tar.xz $d
         done
+    - name: Create tarballs
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        mkdir /tmp/artifact
+        cd /tmp/html
+        ls -Name "*.*" | foreach {
+          tar acf "../artifact/${_}.tar.xz" $_
+        }
     - uses: actions/upload-artifact@v2
       with:
-        name: statichtml
-        path: /tmp/2.?.0.tar.xz
+        name: statichtml-${{ matrix.os }}
+        path: /tmp/artifact/2.?.0.tar.xz
 
     - name: Rename generated html
       run: |
@@ -65,15 +79,14 @@ jobs:
       run: bundle exec rake
     - name: Rename generated html and generate diff
       run: |
-        set -x
         cd /tmp
         mv -v html html.base
         git diff --no-index html.base html.pr --stat || :
-        git diff --no-index html.base html.pr --output html.diff || :
+        git diff --no-index html.base html.pr --output artifact/html.diff || :
     - uses: actions/upload-artifact@v2
       with:
-        name: diff
-        path: /tmp/html.diff
+        name: diff-${{ matrix.os }}
+        path: /tmp/artifact/html.diff
 
   misspell:
     runs-on: ubuntu-latest
