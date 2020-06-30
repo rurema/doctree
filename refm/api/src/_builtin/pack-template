@@ -31,11 +31,7 @@ i, I (int)のサイズは常にシステム依存であり、n, N, v, V
 
 つまり、[[m:IO#ioctl]] などで C の構造体を渡すときのように、
 システム依存のサイズとエンディアンに合わせる必要があるときには
-#@since 2.3.0
 s!, S!, i!, I!, l!, L!, q!, Q!, j!, J! を用います。
-#@else
-s!, S!, i!, I!, l!, L!, q!, Q! を用います。
-#@end
 また、ネットワークプロトコルやファイルフォーマットのように、
 システムに依存しないデータを扱うときには
 n, N, v, V を用います。
@@ -56,7 +52,7 @@ n, N, v, V を用います。
 //}
 
 : エンディアン依存、整数サイズ依存 (C の構造体などに適切)
-//emlist{     
+//emlist{
   s!: signed short
   S!: unsigned short
   i!: signed int
@@ -65,10 +61,8 @@ n, N, v, V を用います。
   L!: unsigned long
   q!: signed long long
   Q!: unsigned long long
-#@since 2.3.0
   j,j!: intptr_t
   J,J!: uintptr_t
-#@end
 //}
 
 : エンディアン依存、整数サイズ非依存 (C99 の stdint.h にある厳密な幅を持つ整数型に適切)
@@ -79,7 +73,6 @@ n, N, v, V を用います。
   L: uint32_t
 //}
 
-#@since 1.9.3
 : エンディアンの強制指定(バイナリ解析などに適切)
 //emlist{
   S>:  big endian unsigned 16bit(nと同じ)
@@ -88,7 +81,6 @@ n, N, v, V を用います。
   l<:  little endian int32_t
   l!<: little endian signed long
 //}
-#@end
 
 === 各テンプレート文字の説明
 
@@ -346,17 +338,10 @@ n, N, v, V を用います。
 
   base64された文字列。60 オクテットごと(と最後)に改行コードが付加されます。
 
-#@since 1.9.1
   Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
   うちの65文字 ([A-Za-z0-9+/]の64文字とpaddingのための'=')だけを使用して
   4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
   ング法です。[[RFC:2045]], [[RFC:4648]] で定義されています。
-#@else
-  Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
-  うちの65文字 ([A-Za-z0-9+/]の64文字とpaddingのための'=')だけを使用して
-  4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
-  ング法です。[[RFC:2045]] で定義されています。
-#@end
 #@samplecode
 [""].pack("m")             # => ""
 ["\0"].pack("m")           # => "AA==\n"
@@ -380,7 +365,6 @@ n, N, v, V を用います。
 "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==\n".unpack("m")
 # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 #@end
-#@since 1.9.1
   m0 は [[RFC:4648]] 対応
 #@samplecode
 [""].pack("m0")             # => ""
@@ -402,7 +386,6 @@ n, N, v, V を用います。
 # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 #@end
 @see [[lib:base64]]
-#@end
 
 : M
 
@@ -728,7 +711,6 @@ end
 "abcd".unpack("C @3 C") # => [97, 100]
 #@end
 
-#@since 2.3.0
 : j
 
 intptr_t (ポインタの幅の符号つき整数, エンディアンに依存)
@@ -738,8 +720,6 @@ intptr_t (ポインタの幅の符号つき整数, エンディアンに依存)
 
 uintptr_t (ポインタの幅の符号なし整数, エンディアンに依存)
 #@# [[url:https://bugs.ruby-lang.org/issues/11215]]
-
-#@end
 
 === 使用例
 
@@ -941,4 +921,3 @@ v = [1,2,3].pack("i!s!l!")
 #@samplecode
 ("Comments").unpack("U*").pack("n*") # => "\000C\000o\000m\000m\000e\000n\000t\000s"
 #@end
-
