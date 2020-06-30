@@ -985,7 +985,7 @@ ruby 1.8.4 での ruby 1.8.3 からの変更点です。
 #         options.  [ruby-dev:27449]
 #
 
-    --with-extention オプション追加。((<ruby-dev:27449>))
+    --with-extension オプション追加。((<ruby-dev:27449>))
 
 : mkmf: find_executable() [compat]
 
