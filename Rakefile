@@ -4,6 +4,11 @@ UNRELEASED_VERSIONS = %w[2.8.0]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
 
+def system(*commands)
+  puts "Running #{commands.join(' ')}..."
+  super(*commands)
+end
+
 def generate_database(version)
   puts "generate database of #{version}"
   db = "/tmp/db-#{version}"
