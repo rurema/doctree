@@ -60,8 +60,8 @@ jobs:
       run: |
         cd /tmp
         mv -v html html.base
-        git diff --no-index html.base html.pr --stat || :
-        git diff --no-index html.base html.pr --output artifact/html.diff || :
+        git diff --no-index html.base html.pr --stat || true
+        git diff --no-index html.base html.pr --output artifact/html.diff || true
     - uses: actions/upload-artifact@v2
       with:
         name: diff-${{ matrix.os }}-${{ matrix.ruby }}
