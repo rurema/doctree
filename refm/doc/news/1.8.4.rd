@@ -566,7 +566,7 @@ ruby 1.8.4 での ruby 1.8.3 からの変更点です。
 #       * ext/tk/lib/tk.rb: add Tk.pkgconfig_list and Tk.pkgconfig_get
 #         [Tk8.5 feature].
 #
-#       * ext/tk/lib/tk/text.rb: supports new indices modifires on a Text
+#       * ext/tk/lib/tk/text.rb: supports new indices modifiers on a Text
 #         widget [Tk8.5 feature].
 #
 
