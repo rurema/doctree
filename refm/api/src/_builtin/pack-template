@@ -55,8 +55,8 @@ n, N, v, V を用います。
 //emlist{
   s!: signed short
   S!: unsigned short
-  i!: signed int
-  I!: unsigned int
+  i,i!: signed int
+  I,I!: unsigned int
   l!: signed long
   L!: unsigned long
   q!: signed long long
@@ -71,6 +71,8 @@ n, N, v, V を用います。
   S: uint16_t
   l: int32_t
   L: uint32_t
+  q: int64_t
+  Q: uint64_t
 //}
 
 : エンディアンの強制指定(バイナリ解析などに適切)
