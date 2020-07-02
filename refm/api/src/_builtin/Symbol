@@ -421,6 +421,20 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#empty?]]
 
+#@since 2.7.0
+--- end_with?([suffixes]+)   -> true or false
+
+Returns true if `sym` ends with one of the `suffixes` given.
+
+#@samplecode
+:hello.end_with?("ello")               #=> true
+
+# returns true if one of the +suffixes+ matches.
+:hello.end_with?("heaven", "ello")     #=> true
+:hello.end_with?("heaven", "paradise") #=> false
+#@end
+#@end
+
 #@since 2.4.0
 --- upcase(*options) -> Symbol
 #@else
