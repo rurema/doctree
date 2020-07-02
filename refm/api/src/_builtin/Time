@@ -390,6 +390,36 @@ true を返します。そうでない場合に false を返します。
   Time.now.asctime.encoding   # => #<Encoding:US-ASCII>
   Time.now.ctime              # => "Fri Nov 10 00:00:32 2017"
 
+#@since 2.7.0
+--- ceil([ndigits])   -> new_time
+
+Ceils sub seconds to a given precision in decimal digits (0 digits by
+default). It returns a new Time object. `ndigits` should be zero or a
+positive integer.
+
+#@samplecode
+require 'time'
+
+t = Time.utc(2010,3,30, 5,43,25.0123456789r)
+t.iso8601(10)          #=> "2010-03-30T05:43:25.0123456789Z"
+t.ceil.iso8601(10)     #=> "2010-03-30T05:43:26.0000000000Z"
+t.ceil(0).iso8601(10)  #=> "2010-03-30T05:43:26.0000000000Z"
+t.ceil(1).iso8601(10)  #=> "2010-03-30T05:43:25.1000000000Z"
+t.ceil(2).iso8601(10)  #=> "2010-03-30T05:43:25.0200000000Z"
+t.ceil(3).iso8601(10)  #=> "2010-03-30T05:43:25.0130000000Z"
+t.ceil(4).iso8601(10)  #=> "2010-03-30T05:43:25.0124000000Z"
+
+t = Time.utc(1999,12,31, 23,59,59)
+(t + 0.4).ceil.iso8601(3)    #=> "2000-01-01T00:00:00.000Z"
+(t + 0.9).ceil.iso8601(3)    #=> "2000-01-01T00:00:00.000Z"
+(t + 1.4).ceil.iso8601(3)    #=> "2000-01-01T00:00:01.000Z"
+(t + 1.9).ceil.iso8601(3)    #=> "2000-01-01T00:00:01.000Z"
+
+t = Time.utc(1999,12,31, 23,59,59)
+(t + 0.123456789).ceil(4).iso8601(6)  #=> "1999-12-31T23:59:59.123500Z"
+#@end
+#@end
+
 --- gmt?    -> bool
 --- utc?    -> bool
 
