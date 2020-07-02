@@ -859,6 +859,36 @@ yday は 1 から数えます。
   "%10.6f" % t.to_f   #=> "1505688305.417368"
   t.usec              #=> 417368
 
+#@since 2.7.0
+--- floor([ndigits])   -> new_time
+
+Floors sub seconds to a given precision in decimal digits (0 digits by
+default). It returns a new Time object. `ndigits` should be zero or a
+positive integer.
+
+#@samplecode
+require 'time'
+
+t = Time.utc(2010,3,30, 5,43,25.123456789r)
+t.iso8601(10)           #=> "2010-03-30T05:43:25.1234567890Z"
+t.floor.iso8601(10)     #=> "2010-03-30T05:43:25.0000000000Z"
+t.floor(0).iso8601(10)  #=> "2010-03-30T05:43:25.0000000000Z"
+t.floor(1).iso8601(10)  #=> "2010-03-30T05:43:25.1000000000Z"
+t.floor(2).iso8601(10)  #=> "2010-03-30T05:43:25.1200000000Z"
+t.floor(3).iso8601(10)  #=> "2010-03-30T05:43:25.1230000000Z"
+t.floor(4).iso8601(10)  #=> "2010-03-30T05:43:25.1234000000Z"
+
+t = Time.utc(1999,12,31, 23,59,59)
+(t + 0.4).floor.iso8601(3)    #=> "1999-12-31T23:59:59.000Z"
+(t + 0.9).floor.iso8601(3)    #=> "1999-12-31T23:59:59.000Z"
+(t + 1.4).floor.iso8601(3)    #=> "2000-01-01T00:00:00.000Z"
+(t + 1.9).floor.iso8601(3)    #=> "2000-01-01T00:00:00.000Z"
+
+t = Time.utc(1999,12,31, 23,59,59)
+(t + 0.123456789).floor(4).iso8601(6)  #=> "1999-12-31T23:59:59.123400Z"
+#@end
+#@end
+
 #@since 1.9.1
 
 --- friday? -> bool
