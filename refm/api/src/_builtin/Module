@@ -630,6 +630,58 @@ name で指定される名前の定数の値を取り出します。
   # 不適切な定数名を指定した場合
   Foo.const_set('foo', 1) # => NameError: wrong constant name foo
 
+#@since 2.7.0
+--- const_source_location(sym, inherit=true)   -> [String, Integer]
+--- const_source_location(str, inherit=true)   -> [String, Integer]
+
+Returns the Ruby source filename and line number containing the
+definition of the constant specified. If the named constant is not
+found, `nil` is returned. If the constant is found, but its source
+location can not be extracted (constant is defined in C code), empty
+array is returned.
+
+*inherit* specifies whether to lookup in `mod.ancestors` (`true` by
+default).
+
+#@samplecode
+# test.rb:
+class A         # line 1
+  C1 = 1
+  C2 = 2
+end
+
+module M        # line 6
+  C3 = 3
+end
+
+class B < A     # line 10
+  include M
+  C4 = 4
+end
+
+class A # continuation of A definition
+  C2 = 8 # constant redefinition; warned yet allowed
+end
+
+p B.const_source_location('C4')           # => ["test.rb", 12]
+p B.const_source_location('C3')           # => ["test.rb", 7]
+p B.const_source_location('C1')           # => ["test.rb", 2]
+
+p B.const_source_location('C3', false)    # => nil  -- don't lookup in ancestors
+
+p A.const_source_location('C2')           # => ["test.rb", 16] -- actual (last) definition place
+
+p Object.const_source_location('B')       # => ["test.rb", 10] -- top-level constant could be looked through Object
+p Object.const_source_location('A')       # => ["test.rb", 1] -- class reopening is NOT considered new definition
+
+p B.const_source_location('A')            # => ["test.rb", 1]  -- because Object is in ancestors
+p M.const_source_location('A')            # => ["test.rb", 1]  -- Object is not ancestor, but additionally checked for modules
+
+p Object.const_source_location('A::C1')   # => ["test.rb", 2]  -- nesting is supported
+p Object.const_source_location('String')  # => []  -- constant is defined in C code
+#@end
+#@end
+
 #@since 1.9.1
 --- constants(inherit = true) -> [Symbol]
 #@else
