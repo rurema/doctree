@@ -27,6 +27,11 @@ etc.
 :   experimental features
 
     *   Pattern matching
+
+--- []=(category, flag) -> flag
+
+Sets the warning flags for `category`. See Warning.[] for the
+categories.
 #@end
 
 --- warn(*message) -> nil
