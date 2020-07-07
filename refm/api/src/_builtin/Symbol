@@ -184,6 +184,22 @@ other が同じシンボルの時に真を返します。
   :aaa == :aaa    #=> true
   :aaa == :xxx    #=> false
 
+#@since 2.7.0
+--- start_with?([prefixes]+)   -> true or false
+
+Returns true if `sym` starts with one of the `prefixes` given. Each of
+the `prefixes` should be a String or a Regexp.
+
+#@samplecode
+:hello.start_with?("hell")               #=> true
+:hello.start_with?(/H/i)                 #=> true
+
+# returns true if one of the prefixes matches.
+:hello.start_with?("heaven", "hell")     #=> true
+:hello.start_with?("heaven", "paradise") #=> false
+#@end
+#@end
+
 --- succ -> Symbol
 --- next -> Symbol
 
@@ -404,6 +420,20 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
   :foo.empty? #=> false
 
 @see [[m:String#empty?]]
+
+#@since 2.7.0
+--- end_with?([suffixes]+)   -> true or false
+
+Returns true if `sym` ends with one of the `suffixes` given.
+
+#@samplecode
+:hello.end_with?("ello")               #=> true
+
+# returns true if one of the +suffixes+ matches.
+:hello.end_with?("heaven", "ello")     #=> true
+:hello.end_with?("heaven", "paradise") #=> false
+#@end
+#@end
 
 #@since 2.4.0
 --- upcase(*options) -> Symbol

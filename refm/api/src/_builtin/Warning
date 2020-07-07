@@ -8,6 +8,32 @@
 
 == Class Methods
 
+#@since 2.7.0
+--- [](p1) -> true or false
+
+Returns the flag to show the warning messages for `category`. Supported
+categories are:
+
+`:deprecated`
+:   deprecation warnings
+
+    *   assignment of non-nil value to `$,` and `$;`
+    *   keyword arguments
+    *   proc/lambda without block
+
+etc.
+
+`:experimental`
+:   experimental features
+
+    *   Pattern matching
+
+--- []=(category, flag) -> flag
+
+Sets the warning flags for `category`. See Warning.[] for the
+categories.
+#@end
+
 --- warn(*message) -> nil
 
 引数 message を標準エラー出力 [[m:$stderr]] に出力します。
