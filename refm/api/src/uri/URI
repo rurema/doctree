@@ -246,7 +246,7 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 @raise ArgumentError str のフォーマットが不正である場合に発生します
 @see [[m:URI.encode_www_form_component]], [[m:URI.decode_www_form]]
 
---- encode_www_form(enum) -> String
+--- encode_www_form(enum, enc=nil) -> String
 enum から URL-encoded form data を生成します。
 
 HTML5 で定義されている application/x-www-form-urlencoded 形式の
@@ -286,9 +286,10 @@ UTF-8 に変換する場合など)。
 にもとづいて実装されています。
 
 @param enum エンコードするデータ列([key, value] という形のデータの列)
+@param enc 指定された場合、パーセントエンコーディングする前に、このエンコーディングに変換
 @see [[m:URI.encode_www_form_component]], [[m:URI.decode_www_form]]
 
---- encode_www_form_component(str) -> String
+--- encode_www_form_component(str, enc=nil) -> String
 文字列を URL-encoded form data の1コンポーネント
 としてエンコードした文字列を返します。
 
@@ -302,6 +303,7 @@ UTF-8 に変換する場合など)。
 にもとづいて実装されています。
 
 @param str エンコードする文字列
+@param enc 指定された場合、パーセントエンコーディングする前に、strをこのエンコーディングに変換
 @see [[m:URI.decode_www_form_component]], [[m:URI.encode_www_form]]
 #@end
 == Constants
