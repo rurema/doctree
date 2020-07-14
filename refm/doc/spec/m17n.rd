@@ -137,7 +137,7 @@ Ruby の String は、文字の列を扱うためだけでなく、バイトの�
 p Encoding::ISO_2022_JP.dummy? # => true
 s = "漢字".encode("ISO-2022-JP")
 p s[0]   #=> "\e"
-s + "b"  #=> Encoding::CompatibilityError: incompatible character encodings: ISO-2022-JP and US-ASCII
+s + "b"  #=> Encoding::CompatibilityError: incompatible character encodings: ISO-2022-JP and UTF-8
 #@end
 
 またダミーエンコーディングはスクリプトエンコーディングとして使うことができません。
