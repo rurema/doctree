@@ -87,6 +87,7 @@ pathname のファイルを読み込み、その内容を抽象構文木にパ�
 @raise SyntaxError string が Ruby のコードとして正しくない場合に発生します。
 
 #@samplecode
+pp RubyVM::AbstractSyntaxTree.parse_file(__FILE__)
 # => (SCOPE@1:0-1:50
 #     tbl: []
 #     args: nil
