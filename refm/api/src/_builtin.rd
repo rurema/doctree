@@ -102,6 +102,8 @@ require を書かなくても使うことができます。
 #@include(_builtin/RubyVM__InstructionSequence)
 #@since 2.6.0
 #@include(_builtin/RubyVM__MJIT)
+#@include(_builtin/RubyVM__AbstractSyntaxTree)
+#@include(_builtin/RubyVM__AbstractSyntaxTree__Node)
 #@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
