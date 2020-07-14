@@ -24,6 +24,8 @@ p node.children
 
 ソースコード中で、self を表すテキストが最初に現れる列番号を返します。
 
+列番号は0-originで、バイト単位で表されます。
+
 #@samplecode
 node = RubyVM::AbstractSyntaxTree.parse('1 + 2')
 p node.first_column # => 0
@@ -32,6 +34,8 @@ p node.first_column # => 0
 --- first_lineno -> Integer
 
 ソースコード中で、self を表すテキストが最初に現れる行番号を返します。
+
+行番号は1-originです。
 
 #@samplecode
 node = RubyVM::AbstractSyntaxTree.parse('1 + 2')
@@ -52,6 +56,8 @@ puts node.inspect
 
 ソースコード中で、self を表すテキストが最後に現れる列番号を返します。
 
+列番号は0-originで、バイト単位で表されます。
+
 #@samplecode
 node = RubyVM::AbstractSyntaxTree.parse('1 + 1')
 p node.last_column # => 5
@@ -60,6 +66,8 @@ p node.last_column # => 5
 --- last_lineno -> Integer
 
 ソースコード中で、self を表すテキストが最後に現れる行番号を返します。
+
+行番号は1-originです。
 
 #@samplecode
 node = RubyVM::AbstractSyntaxTree.parse('1 + 1')
