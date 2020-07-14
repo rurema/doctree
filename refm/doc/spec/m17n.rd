@@ -131,14 +131,17 @@ Ruby の String は、文字の列を扱うためだけでなく、バイトの�
 
  * String のインスタンスメソッドは 1 文字ではなく 1 バイトを単位として動作します。
  * エンコーディングの異なる 7bit クリーンな文字列との結合ができません。
-   例外 (EncodingCompatibilityError) が発生します。
+   例外 ([[c:Encoding::CompatibilityError]]) が発生します。
+
+#@samplecode
+p Encoding::ISO_2022_JP.dummy? # => true
+s = "漢字".encode("ISO-2022-JP")
+p s[0]   #=> "\e"
+s + "b"  #=> Encoding::CompatibilityError: incompatible character encodings: ISO-2022-JP and UTF-8
+#@end
 
 またダミーエンコーディングはスクリプトエンコーディングとして使うことができません。
 
-例:
-  s = "漢字".encode("ISO-2022-JP")
-  p s[0]   #=> "\e"  
-  s + "b"  #=> EncodingCompatibilityError: incompatible character encodings: ISO-2022-JP and US-ASCII
 
 ===[a:script_encoding] スクリプトエンコーディング
 
