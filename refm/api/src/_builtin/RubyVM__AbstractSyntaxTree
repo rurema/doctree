@@ -24,6 +24,9 @@ parser gem ([[url:https://github.com/whitequark/parser]])や
 
 引数 proc に渡したProcやメソッドオブジェクトの抽象構文木を返します。
 
+このメソッドはProcやメソッドが定義されたファイルを読み込む必要があるため、
+irbのようなファイルを介さない対話的環境では動作しません。
+
 @param proc Procもしくはメソッドオブジェクトを指定します。
 
 #@samplecode
