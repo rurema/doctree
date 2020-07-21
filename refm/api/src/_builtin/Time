@@ -71,8 +71,11 @@ time で指定した時刻の Time オブジェクトを返します。
 
 @param time Time オブジェクト、もしくは起算時からの経過秒数を表わす数値で指定します。
 #@since 2.6.0
-@param in "+HH:MM" や "-HH:MM" のような形式の文字列か "UTC" かミリタリータイムゾーンの文字列
-          または数値でタイムゾーンを指定します。
+@param in "+HH:MM" や "-HH:MM" のような形式の文字列か
+#@since 2.7.0
+          "UTC" かミリタリータイムゾーンの文字列または
+#@end
+          数値でタイムゾーンを指定します。
 #@end
 
 #@samplecode
@@ -84,6 +87,8 @@ Time.at(-284061600)                       # => 1960-12-31 15:00:00 +0900
 Time.at(946684800.2).usec                 # => 200000
 #@since 2.6.0
 Time.at(1582721899, in: "+09:00")         #=> 2020-02-26 21:58:19 +0900
+#@end
+#@since 2.7.0
 Time.at(1582721899, in: "UTC")            #=> 2020-02-26 12:58:19 UTC
 Time.at(1582721899, in: "C")              #=> 2020-02-26 13:58:19 +0300
 #@end
@@ -107,8 +112,11 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 @param usec マイクロ秒を[[c:Integer]]、 [[c:Float]]、 [[c:Rational]]、または他の[[c:Numeric]]で指定します。
 
 #@since 2.6.0
-@param in "+HH:MM" や "-HH:MM" のような形式の文字列か "UTC" かミリタリータイムゾーンの文字列
-          または数値でタイムゾーンを指定します。
+@param in "+HH:MM" や "-HH:MM" のような形式の文字列か
+#@since 2.7.0
+          "UTC" かミリタリータイムゾーンの文字列または
+#@end
+          数値でタイムゾーンを指定します。
 #@end
 
 例:
@@ -126,8 +134,11 @@ unit に応じて seconds + xseconds ミリ秒などの時刻を表す Time オ�
 @param xseconds unit に対応するミリ秒かマイクロ秒かナノ秒を指定します。
 @param unit :millisecond, :usec, :microsecond, :nsec, :nanosecond のいずれかを指定します。
 #@since 2.6.0
-@param in "+HH:MM" や "-HH:MM" のような形式の文字列か "UTC" かミリタリータイムゾーンの文字列
-          または数値でタイムゾーンを指定します。
+@param in "+HH:MM" や "-HH:MM" のような形式の文字列か
+#@since 2.7.0
+          "UTC" かミリタリータイムゾーンの文字列または
+#@end
+          数値でタイムゾーンを指定します。
 #@end
 
 例:
