@@ -2080,7 +2080,7 @@ pattern が正規表現で括弧を含む場合は、
 "foobarbazfoobarbaz".scan(/ba./) {|s| p s }
     # => "bar"
     #    "baz"
-    #    "baz"
+    #    "bar"
     #    "baz"
 
 "foobarbazfoobarbaz".scan("ba") {|s| p s }
