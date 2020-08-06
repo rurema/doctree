@@ -121,8 +121,8 @@ Foo::Bar であること以外、継承関係などの機能的な関連はま�
         # File::RDONLY などと書かずに直接 RDONLY と書くことができる。
         class File
           module Constants
-             RDONLY = 0
-             WRONLY = 1
+            RDONLY = 0
+            WRONLY = 1
           end
           include Constants
         end
@@ -231,7 +231,7 @@ Ruby では、モジュールもオブジェクトの一つで [[c:Module]] ク�
 
           def fact(n)
             if n == 1 then
-               1
+              1
             else
               n * fact(n-1)
             end
@@ -397,8 +397,8 @@ yield を呼び出すことです。
 
           # yield を使う
           def foo
-          # block_given? は、メソッドがブロックを渡されて
-          # 呼ばれたかどうかを判定する組み込み関数
+            # block_given? は、メソッドがブロックを渡されて
+            # 呼ばれたかどうかを判定する組み込み関数
             if block_given?
               yield(1,2)
             end
