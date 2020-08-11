@@ -627,7 +627,7 @@ extend については、[[m:Object#extend]] を参照して
         obj = Foo.new
 
         # そのままでは呼べない
-        obj.foo rescue nil    # => -:11 - private method `foo' called for #<Foo:0x401a1860> (NameError)
+        obj.foo rescue nil    # => -:11 - protected method `foo' called for #<Foo:0x401a1860> (NameError)
 
         # クラス定義内でも呼べない
         class Foo
