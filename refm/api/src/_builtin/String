@@ -2078,22 +2078,22 @@ pattern が正規表現で括弧を含む場合は、
 
 #@samplecode 例
 "foobarbazfoobarbaz".scan(/ba./) {|s| p s }
-    # => "bar"
-    #    "baz"
-    #    "baz"
-    #    "baz"
+# "bar"
+# "baz"
+# "bar"
+# "baz"
 
 "foobarbazfoobarbaz".scan("ba") {|s| p s }
-    # => "ba"
-    #    "ba"
-    #    "ba"
-    #    "ba"
+# "ba"
+# "ba"
+# "ba"
+# "ba"
 
 "foobarbazfoobarbaz".scan(/(ba)(.)/) {|s| p s }
-    # => ["ba", "r"]
-    #    ["ba", "z"]
-    #    ["ba", "r"]
-    #    ["ba", "z"]
+# ["ba", "r"]
+# ["ba", "z"]
+# ["ba", "r"]
+# ["ba", "z"]
 #@end
 
 --- slice!(nth) -> Integer
