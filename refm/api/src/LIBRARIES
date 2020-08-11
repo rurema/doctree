@@ -16,7 +16,9 @@ cgi/core
 cgi/cookie
 cgi/html
 cgi/util
+#@until 2.7.0
 cmath
+#@end
 continuation
 coverage
 csv
@@ -40,7 +42,9 @@ drb/observer
 drb/ssl
 drb/timeridconv
 drb/unix
+#@until 2.7.0
 e2mmap
+#@end
 erb
 etc
 expect
@@ -319,10 +323,13 @@ rubygems/user_interaction
 rubygems/validator
 rubygems/version
 rubygems/version_option
+#@until 2.7.0
 scanf
+#@end
 sdbm
 securerandom
 set
+#@until 2.7.0
 shell
 shell/error
 shell/command-processor
@@ -330,18 +337,23 @@ shell/process-controller
 shell/filter
 shell/system-command
 shell/builtin-command
+#@end
 shellwords
 singleton
 socket
 stringio
 strscan
+#@until 2.7.0
 sync
+#@end
 syslog
 syslog/logger
 tempfile
 test/unit
 thread
+#@until 2.7.0
 thwait
+#@end
 time
 timeout
 tmpdir
