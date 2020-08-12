@@ -2096,7 +2096,7 @@ pattern が正規表現で括弧を含む場合は、
 # ["ba", "z"]
 #@end
 
---- slice!(nth) -> Integer
+--- slice!(nth) -> String
 --- slice!(pos, len) -> String
 --- slice!(substr) -> String
 --- slice!(regexp, nth = 0) -> String
