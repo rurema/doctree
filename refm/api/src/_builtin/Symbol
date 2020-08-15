@@ -185,10 +185,17 @@ other が同じシンボルの時に真を返します。
   :aaa == :xxx    #=> false
 
 #@since 2.7.0
---- start_with?([prefixes]+)   -> true or false
+--- start_with?(*prefixes)   -> bool
 
-Returns true if `sym` starts with one of the `prefixes` given. Each of
-the `prefixes` should be a String or a Regexp.
+self の先頭が prefixes のいずれかであるとき true を返します。
+
+(self.to_s.start_with?と同じです。)
+
+@param prefixes パターンを表す文字列または正規表現 (のリスト)
+
+@see [[m:Symbol#end_with?]]
+
+@see [[m:String#start_with?]]
 
 #@samplecode
 :hello.start_with?("hell")               #=> true
@@ -422,9 +429,17 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 @see [[m:String#empty?]]
 
 #@since 2.7.0
---- end_with?([suffixes]+)   -> true or false
+--- end_with?(*suffixes)   -> bool
 
-Returns true if `sym` ends with one of the `suffixes` given.
+self の末尾が suffixes のいずれかであるとき true を返します。
+
+(self.to_s.end_with?と同じです。)
+
+@param suffixes パターンを表す文字列 (のリスト)
+
+@see [[m:Symbol#start_with?]]
+
+@see [[m:String#end_with?]]
 
 #@samplecode
 :hello.end_with?("ello")               #=> true
