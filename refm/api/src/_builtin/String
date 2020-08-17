@@ -2991,8 +2991,13 @@ str が "string" という内容の文字列でありさえすれば常に true 
 同一のオブジェクトであるかどうかを判定したいときは
 [[m:Object#equal?]] を使ってください。
 
+#@since 2.4.0
+アルファベットの大文字小文字を無視して比較したい場合は
+[[m:String#casecmp?]] を使ってください。
+#@else
 アルファベットの大文字小文字を無視して比較したい場合は、[[m:String#upcase]],
 [[m:String#downcase]] で大文字小文字を揃えてから比較してください。
+#@end
 
 [[c:Hash]] クラス内での比較に使われます。
 
@@ -3007,9 +3012,11 @@ p "".eql?("string")        # => false
 
 p "string".eql?("str" + "ing")   # => true   (内容が同じなら true)
 p "string".eql?("stringX".chop)  # => true   (内容が同じなら true)
+#@until 2.4.0
 
 p "string".upcase.eql?("String".upcase)     # => true
 p "string".downcase.eql?("String".downcase) # => true
+#@end
 #@end
 
 @see [[c:Hash]], [[m:String#<=>]], [[m:String#casecmp]], [[m:String#==]]
