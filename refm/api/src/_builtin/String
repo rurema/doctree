@@ -2102,7 +2102,6 @@ pattern が正規表現で括弧を含む場合は、
 --- slice!(regexp, nth = 0) -> String
 --- slice!(first..last) -> String
 --- slice!(first...last) -> String
---- slice!(regexp, nth = 0) -> String
 
 指定した範囲 ([[m:String#[] ]] 参照) を
 文字列から取り除いたうえで取り除いた部分文字列を返します。
