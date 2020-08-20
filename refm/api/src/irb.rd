@@ -128,7 +128,12 @@ irb コマンドのオプションを指定したのと同じ効果が得られ�
   IRB.conf[:PROMPT] = {....}
   IRB.conf[:PROMPT_MODE] = :DEFAULT
   IRB.conf[:SINGLE_IRB] = false
+#@since 2.7.0
+  IRB.conf[:SAVE_HISTORY] = 1000
+#@end
+#@until 2.7.0
   IRB.conf[:SAVE_HISTORY] = nil
+#@end
   IRB.conf[:USE_LOADER] = true
   IRB.conf[:USE_READLINE] = nil
   IRB.conf[:USE_TRACER] = true
@@ -627,6 +632,15 @@ irb はシンボルであるかどうかの判断を間違えることがあり�
 
 ===[a:history] 履歴の保存
 
+#@since 2.7.0
+デフォルトで、実行結果の履歴1000件が ~/.irb_history に保存されます。
+
+もし履歴を保存したくない場合は、.irbrc で以下のように指定します。
+
+  IRB.conf[:SAVE_HISTORY] = nil
+
+#@end
+#@until 2.7.0
 さらに、.irbrc で以下のように
 conf.save_history の値を指定しておくと、
 実行結果の履歴がファイルに保存されます。
@@ -634,6 +648,7 @@ conf.save_history の値を指定しておくと、
   IRB.conf[:SAVE_HISTORY] = 100
 
 履歴ファイルの名前はデフォルトでは ~/.irb_history です。
+#@end
 履歴ファイルの名前は IRB.conf[:HISTORY_FILE] で指定できます。
 
 #@since 1.9.2
