@@ -34,6 +34,7 @@ p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
 [[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
 
 Ruby 1.9.2 以降の Time クラスのデザインの詳細は
+[[url:https://staff.aist.go.jp/tanaka-akira/pub/sapporo-rubykaigi-02-akr-2009.pdf]] や
 「APIデザインケーススタディ」([[url:https://gihyo.jp/book/2016/978-4-7741-7802-8]])
 の第4章を参照してください。
 
