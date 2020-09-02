@@ -198,8 +198,12 @@ String.try_convert(/re/)      # => nil
 --- new(string = "", encoding: string.encoding) -> String
 #@end
 #@since 2.4.0
-#@# 127 は STR_BUF_MIN_SIZE。string.c 参照。
+#@# capacityのデフォルトのサイズは STR_BUF_MIN_SIZE。string.c 参照。
+#@since 2.7.0
+--- new(string = "", encoding: string.encoding, capacity: 63) -> String
+#@else
 --- new(string = "", encoding: string.encoding, capacity: 127) -> String
+#@end
 --- new(string = "", encoding: string.encoding, capacity: string.bytesize) -> String
 #@end
 
