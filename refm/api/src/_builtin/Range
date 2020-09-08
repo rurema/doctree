@@ -527,14 +527,23 @@ nil を返します。引数を指定する形式では、空の配列を返し�
 #@end
 
 #@since 2.7.0
---- minmax                       -> [obj, obj]
---- minmax {| a,b | block }      -> [obj, obj]
+--- minmax                      -> [object, object]
+--- minmax {|a, b| ... }        -> [object, object]
 
-Returns a two element array which contains the minimum and the maximum
-value in the range.
+範囲内の要素のうち、最小の要素と最大の要素を要素とするサイズ 2 の配列を返します。
 
-Can be given an optional block to override the default comparison method
-`a <=> b`.
+一つ目の形式では、全要素が互いに <=> メソッドで比較できることを仮定しています。
+
+二つ目の形式では、要素同士の比較をブロックを用いて行います。
+ブロックの値は、a > b のとき正、 a == b のとき 0、a < b のとき負の整数を、期待しています。
+
+例:
+
+  (1..3).minmax # => [1, 3]
+
+  h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+  (1..3).minmax { |a, b| h[a].length <=> h[b].length } # => [1, 3]
+
 #@end
 
 --- max               -> object | nil
