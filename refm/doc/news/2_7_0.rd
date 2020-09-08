@@ -160,10 +160,8 @@ h = {}; def foo(a) a end; foo(h)    # {}
   * 「_1」などはまだローカル変数名として使えて、ローカル変数が優先されますが、
     警告が表示されます。
 
-#@samplecode
-_1 = 0            #=> warning: `_1' is reserved for numbered parameter; consider another name
-[1].each { p _1 } # prints 0 instead of 1
-#@end
+  _1 = 0            #=> warning: `_1' is reserved for numbered parameter; consider another name
+  [1].each { p _1 } # prints 0 instead of 1
 
 ==== ブロックなしの proc/lambda が deprecated
 
