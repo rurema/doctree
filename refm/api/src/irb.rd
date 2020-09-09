@@ -130,8 +130,7 @@ irb コマンドのオプションを指定したのと同じ効果が得られ�
   IRB.conf[:SINGLE_IRB] = false
 #@since 2.7.0
   IRB.conf[:SAVE_HISTORY] = 1000
-#@end
-#@until 2.7.0
+#@else
   IRB.conf[:SAVE_HISTORY] = nil
 #@end
   IRB.conf[:USE_LOADER] = true
@@ -639,8 +638,7 @@ irb はシンボルであるかどうかの判断を間違えることがあり�
 
   IRB.conf[:SAVE_HISTORY] = nil
 
-#@end
-#@until 2.7.0
+#@else
 さらに、.irbrc で以下のように
 conf.save_history の値を指定しておくと、
 実行結果の履歴がファイルに保存されます。
