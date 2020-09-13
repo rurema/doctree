@@ -64,7 +64,7 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの�
 
 = class ARGF.class
 
-extend Enumerable
+include Enumerable
 
 [[c:ARGF]] を表すクラスです。
 
