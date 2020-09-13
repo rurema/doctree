@@ -1,7 +1,7 @@
 #@#== packテンプレート文字列
 
 #@since 2.4.0
-以下にあげるものは、[[m:Array#pack]]、[[m:String#unpack]], [[m:String#unpack1]]
+以下にあげるものは、[[m:Array#pack]]、[[m:String#unpack]]、[[m:String#unpack1]]
 #@else
 以下にあげるものは、[[m:Array#pack]]、[[m:String#unpack]]
 #@end
