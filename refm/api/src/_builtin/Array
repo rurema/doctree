@@ -1285,6 +1285,12 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 
 #@include(pack-template)
 
+#@since 2.4.0
+@see [[m:String#unpack]], [[m:String#unpack1]]
+#@else
+@see [[m:String#unpack]]
+#@end
+
 --- pop    -> object | nil
 --- pop(n) -> Array
 

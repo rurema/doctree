@@ -2904,6 +2904,12 @@ p str   # => "f"
 #@include(pack-template)
 
 #@since 2.4.0
+@see [[m:String#unpack1]], [[m:Array#pack]]
+#@else
+@see [[m:Array#pack]]
+#@end
+
+#@since 2.4.0
 --- upcase(*options) -> String
 
 全ての小文字を対応する大文字に置き換えた文字列を返します。
