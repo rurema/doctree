@@ -196,7 +196,7 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
   mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
   mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
 
-@see [[m:Object#__send__]]
+@see [[m:Object#send]]
 
 #@since 1.9.3
 --- __id__ -> Integer
