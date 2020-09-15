@@ -1085,6 +1085,9 @@ send, __send__ は、メソッドの呼び出し制限
 にかかわらず任意のメソッドを呼び出せます。
 [[ref:d:spec/def#limit]] も参照してください。
 
+public メソッドだけ呼び出せれば良い場合は
+[[m:Object#public_send]] を使う方が良いでしょう。
+
 @param name 文字列か[[c:Symbol]] で指定するメソッド名です。
 @param args 呼び出すメソッドに渡す引数です。
 
