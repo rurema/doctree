@@ -1113,7 +1113,7 @@ public メソッドだけ呼び出せれば良い場合は
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#public_send]], [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
+@see [[m:Object#public_send]], [[m:BasicObject#__send__]], [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
 --- public_send(name, *args) -> object
 
