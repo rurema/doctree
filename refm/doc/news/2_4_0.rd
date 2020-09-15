@@ -12,7 +12,7 @@
 
   * 条件式での多重代入ができるようになりました [[feature:10617]]
   * [[m:Symbol#to_proc]] でメソッド呼び出し元での Refinements が有効になりました [[feature:9451]]
-  * [[m:Kernel#send]] や [[m:BasicObject#__send__]] でメソッドを呼び出したときに Refinements が有効になりました [[feature:11476]]
+  * [[m:Object#send]] や [[m:BasicObject#__send__]] でメソッドを呼び出したときに Refinements が有効になりました [[feature:11476]]
   * 後置 rescue をメソッドの引数内に書けるようになりました [[feature:12686]]
   * トップレベルで return を書けるようになりました [[feature:4840]]
 

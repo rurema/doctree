@@ -1071,8 +1071,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
 
 --- send(name, *args) -> object
 --- send(name, *args) { .... } -> object
---- __send__(name, *args) -> object
---- __send__(name, *args) { .... } -> object
 
 オブジェクトのメソッド name を args を引数に
 して呼び出し、メソッドの実行結果を返します。
@@ -1114,7 +1112,6 @@ send, __send__ は、メソッドの呼び出し制限
 
 @see [[m:Object#public_send]], [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
-#@since 1.9.1
 --- public_send(name, *args) -> object
 
 オブジェクトの public メソッド name を args を引数にして呼び出し、メソッ
@@ -1133,8 +1130,7 @@ send, __send__ は、メソッドの呼び出し制限
 
   1.public_send(:puts, "hello")  # => NoMethodError
 
-@see [[m:Object#send]]
-#@end
+@see [[m:BasicObject#__send__]], [[m:Object#send]]
 
 --- _dump(limit) -> String
 
@@ -1408,13 +1404,8 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
   p me #=> #<Method: Integer#abs>
   p me.call #=> 365
 
-#@since 2.1.0
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#singleton_method]]
-#@else
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]]
-#@end
+@see [[m:Module#instance_method]], [[c:Method]], [[m:BasicObject#__send__]], [[m:Object#send]], [[m:Kernel.#eval]], [[m:Object#singleton_method]]
 
-#@since 2.1.0
 --- singleton_method(name) -> Method
 
 オブジェクトの特異メソッド name をオブジェクト化した [[c:Method]] オブ
@@ -1440,8 +1431,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
    m.call   #=> "Hi, @iv = 99"
    m = k.singleton_method(:hello) # => NameError
 
-@see [[m:Module#instance_method]], [[c:Method]], [[m:Object#__send__]], [[m:Kernel.#eval]], [[m:Object#method]]
-#@end
+@see [[m:Module#instance_method]], [[c:Method]], [[m:BasicObject#__send__]], [[m:Object#send]], [[m:Kernel.#eval]], [[m:Object#method]]
 
 --- define_singleton_method(symbol, method) -> Symbol
 --- define_singleton_method(symbol) { ... } -> Symbol
