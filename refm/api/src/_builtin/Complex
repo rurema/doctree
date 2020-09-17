@@ -128,6 +128,31 @@ Complex(2)     <=> 3             #=> -1
 
 #@end
 
+--- <(other)    -> bool
+
+@undef
+
+--- >(other)    -> bool
+
+@undef
+
+--- <=(other)    -> bool
+
+@undef
+
+--- >=(other)    -> bool
+
+@undef
+
+--- between?(min, max)    -> bool
+
+@undef
+
+
+--- clamp(range)     -> object
+
+@undef
+
 --- abs       -> Numeric
 --- magnitude -> Numeric
 
