@@ -579,46 +579,39 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
 
 === 使用上の制限
 
-irbは, 評価できる時点(式が閉じた時点)での逐次実行を行ないます.
-したがって, rubyを直接使った時と若干異なる動作を行なう場合があります.
+irbは、 評価できる時点(式が閉じた時点)での逐次実行を行ないます。
+したがって、 Rubyを直接使った時と若干異なる動作を行なう場合があります。
 
-現在明らかになっている問題点を説明します.
+現在明らかになっている問題点を説明します。
 
 ==== ローカル変数の宣言
+以下のコードは、 Ruby スクリプトとして実行するとエラーになりません。
 
-Ruby では以下のプログラムはエラーになります.
+ eval "foo"
+ foo = 0
 
-  eval "foo = 0"
-  p foo    # -:2: undefined local variable or method `foo' for #<Object:0x40283118> (NameError)
+ところが、 irb ではエラーになります。
 
-ところが irb を用いると、以下のように、エラーになりません。
+ irb(main):001:0> eval "foo"
+ NameError (undefined local variable or method `foo' for main:Object)
+ irb(main):002:0> foo = 0
 
-  >> eval "foo = 0"
-  => 0
-  >> foo
-  => 0
+この違いは、Ruby スクリプト と irb の構文解析のタイミングの差に起因します。 Ruby は最初にスクリプト全体を解析して、宣言されているローカル変数を定義し、コードを評価します。それに対し、irb は式が完結して実行可能になった時点で評価します。
+上記の Ruby スクリプトの例では、2行目に
 
-この違いは、Ruby と irb のプログラムのコンパイル方法の差に起因します。
-Ruby は最初にスクリプト全体をコンパイルしてローカル変数を決定します。
-それに対し、irb は式が完結して実行可能になった時点で順番にコンパイルします。
-上記の例では、
+ foo = 0
 
-  eval "foo = 0"
+が宣言されているため、スクリプト全体を解析するとローカル変数 foo が定義されます。
+そのため1行目の eval "foo" で NameError になりません。
 
-が入力された時点でまずその式をコンパイル・実行します。
-この時点で変数 foo が定義されるため、
-次の式を入力する時点ですでに変数 foo が定義されているのです。
+irb の場合は1行目に入力した eval "foo" が実行可能になった時点で評価されます。その時点ではローカル変数 foo は宣言されていないため、 NameError になります。
 
-この Ruby と irb の動作の違いをなくしたい場合は、
-irb では以下のように式を begin 〜 end でくくって入力してください。
+Ruby と irb の動作の違いをなくしたい場合は、 irb では以下のように式を begin 〜 end でくくって入力してください。
 
-  >> begin
-  ?>   eval "foo = 0"
-  >>   foo
-  >> end
-  NameError: undefined local variable or method `foo' for #<Object:0x4013d0f0>
-  (irb):3
-  (irb_local_binding):1:in `eval'
+ irb(main):001:1* begin
+ irb(main):002:1*   eval "foo"
+ irb(main):003:1*   foo = 42
+ irb(main):004:0> end
 
 ==== ヒアドキュメント
 
