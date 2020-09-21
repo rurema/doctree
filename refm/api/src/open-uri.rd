@@ -2,21 +2,44 @@ category Network
 
 #@# = open-uri
 
+#@since 2.7.0
+http/ftp に簡単にアクセスするためのクラスです。
+#@else
 http/ftp に簡単にアクセスするためのクラスです。
 [[m:Kernel.#open]] を再定義します。
+#@end
 
 === 使用例
 
 http/ftp の URL を、普通のファイルのように開けます。
 
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/") {|f|
+    f.each_line {|line| p line}
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/") {|f|
     f.each_line {|line| p line}
   }
+#@end
 
 開いたファイルオブジェクトは [[c:StringIO]] もしくは [[c:Tempfile]] で
 すが [[c:OpenURI::Meta]] モジュールで拡張されていて、メタ情報を獲得する
 メソッドが使えます。
+
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/en") {|f|
+    f.each_line {|line| p line}
+    p f.base_uri         # <URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/>
+    p f.content_type     # "text/html"
+    p f.charset          # "iso-8859-1"
+    p f.content_encoding # []
+    p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/en") {|f|
     f.each_line {|line| p line}
@@ -26,7 +49,19 @@ http/ftp の URL を、普通のファイルのように開けます。
     p f.content_encoding # []
     p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002
   }
+#@end
+
 ハッシュ引数で、追加のヘッダフィールドを指定できます。
+
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/en/",
+    "User-Agent" => "Ruby/#{RUBY_VERSION}",
+    "From" => "foo@bar.invalid",
+    "Referer" => "http://www.ruby-lang.org/") {|f|
+    ...
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/en/",
     "User-Agent" => "Ruby/#{RUBY_VERSION}",
@@ -34,13 +69,24 @@ http/ftp の URL を、普通のファイルのように開けます。
     "Referer" => "http://www.ruby-lang.org/") {|f|
     ...
   }
+#@end
+
 http_proxy や ftp_proxy などの環境変数は、デフォルトで有効になっています。
 プロキシを無効にするには :proxy => nil とします。
+
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/en/",
+    :proxy => nil) {|f|
+    ...
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/en/",
     :proxy => nil) {|f|
     ...
   }
+#@end
 
 また、open-uri を読み込むと [[c:URI::HTTP]] と [[c:URI::FTP]] が
 [[c:OpenURI::OpenRead]] モジュールをインクルードします。ですので、
@@ -76,6 +122,14 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクト
 または [[c:Tempfile]] オブジェクトを引数としてブロックを評価します。後は同様です。
 引数のオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
+#@since 2.7.0
+Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くときにwarningが表示されるようになりました。
+
+  require 'open-uri'
+  open("http://www.ruby-lang.org/")
+  #=> warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+#@end
 
 @param name オープンしたいリソースを文字列で与えます。
 
