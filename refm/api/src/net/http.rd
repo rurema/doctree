@@ -250,7 +250,7 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 文字列として返します。
 
 対象の指定方法は [[c:URI]] で指定するか、
-(host, port, path) で指定するかのいずれかです。
+(host, path, port) で指定するかのいずれかです。
 
 @param uri データの取得対象を [[c:URI]] で指定します。
 @param host 接続先のホストを文字列で指定します。
@@ -264,7 +264,7 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 [[m:$stdout]] に出力します。
 
 対象の指定方法は [[c:URI]] で指定するか、
-(host, port, path) で指定するかのいずれかです。
+(host, path, port) で指定するかのいずれかです。
 
 @param uri データの取得対象を [[c:URI]] で指定します。
 @param host 接続先のホストを文字列で指定します。
@@ -286,7 +286,7 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 [[c:Net::HTTPResponse]] として返します。
 
 対象の指定方法は [[c:URI]] で指定するか、
-(host, port, path) で指定するかのいずれかです。
+(host, path, port) で指定するかのいずれかです。
 
 @param uri データの取得対象を [[c:URI]] で指定します。
 @param host 接続先のホストを文字列で指定します。
