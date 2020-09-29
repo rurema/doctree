@@ -39,8 +39,8 @@ def generate_statichtml(version)
     "--catalog=#{bitclust_gem_path}/data/bitclust/catalog",
     "--fs-casesensitive",
     "--canonical-base-url=https://docs.ruby-lang.org/ja/latest/",
-    "--edit-base-url=https://github.com/rurema/doctree/edit/master/",
   ]
+  commands << "--edit-base-url=https://github.com/rurema/doctree/edit/master/" unless ENV['CI']
   # To suppress progress bar
   # because it exceeded Travis CI max log length
   commands << "--quiet" if ENV['CI']
