@@ -1635,4 +1635,24 @@ h = { a: 100, b: 200, c: 300 }
 h.slice(:a)           # => {:a=>100}
 h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
 #@end
+
+#@since 3.0.0
+@see [[m:Hash#except]], [[m:ENV.slice]]
+#@else
+@see [[m:ENV.slice]]
+#@end
+#@end
+#@since 3.0.0
+--- except(*keys) -> Hash
+
+引数で指定された以外のキーとその値だけを含む Hash を返します。
+
+引数に指定されていて Hash に存在しないキーは無視されます。
+
+#@samplecode
+h = { a: 100, b: 200, c: 300 }
+h.except(:a) # => {:b=>200, :c=>300}
+#@end
+
+@see [[m:Hash#slice]], [[m:ENV.except]]
 #@end
