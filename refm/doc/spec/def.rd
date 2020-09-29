@@ -1,20 +1,20 @@
 = クラス／メソッドの定義
 
-  * [[ref:class]]
-  * [[ref:singleton_class]]
-  * [[ref:module]]
-  * [[ref:method]]
-  * [[ref:operator]]
-  * [[ref:nest_method]]
-  * [[ref:eval_method]]
-  * [[ref:singleton_method]]
-  * [[ref:class_method]]
-  * [[ref:limit]]
-
-定義に関する操作:
-  * [[ref:alias]]
-  * [[ref:undef]]
-  * [[ref:defined]]
+  * クラス／メソッドの定義:
+    * [[ref:class]]
+    * [[ref:singleton_class]]
+    * [[ref:module]]
+    * [[ref:method]]
+    * [[ref:operator]]
+    * [[ref:nest_method]]
+    * [[ref:eval_method]]
+    * [[ref:singleton_method]]
+    * [[ref:class_method]]
+    * [[ref:limit]]
+  * 定義に関する操作:
+    * [[ref:alias]]
+    * [[ref:undef]]
+    * [[ref:defined]]
 
 ===[a:class] クラス定義
 
