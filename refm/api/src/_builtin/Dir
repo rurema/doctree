@@ -5,6 +5,11 @@ include Enumerable
 
 == Class Methods
 
+#@since 3.0
+--- [](*pattern, base: nil, sort: true)                            -> [String]
+--- glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
+--- glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
+#@else
 #@since 2.5.0
 --- [](*pattern, base: nil)                            -> [String]
 --- glob(pattern, flags = 0, base: nil)                -> [String]
@@ -13,6 +18,7 @@ include Enumerable
 --- [](*pattern)                            -> [String]
 --- glob(pattern, flags = 0)                -> [String]
 --- glob(pattern, flags = 0) {|file| ...}   -> nil
+#@end
 #@end
 
 ワイルドカードの展開を行い、
@@ -42,6 +48,11 @@ Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 @param base カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
             指定した場合、結果の頭にはベースディレクトリはつかないので、
             絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
+#@end
+#@since 3.0
+@param sort true ならワイルドカードや文字セット(鈎括弧)にマッチした結果をソートします。
+            false を指定するとソートせず2.7以前と同じ挙動になります。
+            true の場合でも、配列で指定した複数のパターンや波括弧での順番は保存されます。
 #@end
 
 ワイルドカードには以下のものがあります。これらはバックスラッシュに
