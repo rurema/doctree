@@ -2,6 +2,9 @@
 
 日付だけでなく時刻も扱える [[c:Date]] のサブクラスです。
 
+DateTime は deprecated とされているため、
+[[c:Time]]を使うことを推奨します。
+
 === 簡単なつかいかた
 
   require 'date'
