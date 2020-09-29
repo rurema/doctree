@@ -11,7 +11,6 @@
     * [[ref:singleton_method]]
     * [[ref:class_method]]
     * [[ref:limit]]
-
   * 定義に関する操作:
     * [[ref:alias]]
     * [[ref:undef]]
