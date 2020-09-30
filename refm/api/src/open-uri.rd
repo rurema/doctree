@@ -2,10 +2,8 @@ category Network
 
 #@# = open-uri
 
-#@since 2.7.0
 http/ftp に簡単にアクセスするためのクラスです。
-#@else
-http/ftp に簡単にアクセスするためのクラスです。
+#@until 2.7.0
 [[m:Kernel.#open]] を再定義します。
 #@end
 
