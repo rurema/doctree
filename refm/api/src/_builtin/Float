@@ -736,7 +736,7 @@ Float が取り得る最小の有限の値は -[[m:Float::MAX]] です。
 
 指数表現の基数です。
 
-#@until 2.8.0
+#@until 3.0
 --- ROUNDS -> Integer
 
 この定数は Ruby 2.7 から deprecated です。使わないでください。
