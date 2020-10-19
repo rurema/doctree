@@ -9,29 +9,33 @@
 == Class Methods
 
 #@since 2.7.0
---- [](p1) -> true or false
+--- [](category) -> bool
 
-Returns the flag to show the warning messages for `category`. Supported
-categories are:
 
-`:deprecated`
-:   deprecation warnings
+category の種類の警告を表示するかどうかのフラグを返します。
 
-    *   assignment of non-nil value to `$,` and `$;`
-    *   keyword arguments
-    *   proc/lambda without block
+@param category 警告の種類を指定します。
 
-etc.
+サポートされている category は以下の通りです。
 
-`:experimental`
-:   experimental features
+: :deprecated
+  非推奨の警告。
+  例: nil ではない値を [[m:$,]] や [[m:$;]] に設定する、キーワード引数、ブロックなしで proc / lambda を呼び出す、等
 
-    *   Pattern matching
+: :experimental
+  実験的な機能。
+
+    例: パターンマッチング
 
 --- []=(category, flag) -> flag
 
-Sets the warning flags for `category`. See Warning.[] for the
-categories.
+category の警告を表示するかどうかのフラグを設定します。
+サポートされている category については [[m:Warning.[] ]] を参照してください。
+
+@param category 警告の種類を指定します。
+@param flag 真、または偽を指定します。
+
+@see [[m:Warning.[] ]]
 #@end
 
 --- warn(*message) -> nil
