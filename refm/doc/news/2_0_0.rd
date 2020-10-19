@@ -361,7 +361,7 @@
       * 任意のメタデータを持てるようになりました [[m:Gem::Specification#metadata]]
       * `gem search` はデフォルトでリモートの gem を探すようになりました
       * --document オプションを追加して --rdoc, --ri オプションを置き換えました。
-        --no-document オプションを使ってドキュメントの生成を無効化することができます。
+        --no-document オプションを使ってドキュメントの生成を無効化できます。
         --document=rdoc を使うと rdoc だけを生成できます。
       * デフォルトでは ri フォーマットだけを生成します
       * `gem server` はHTMLを生成するために [[c:RDoc::Servlet]] を使います。

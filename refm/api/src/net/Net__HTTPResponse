@@ -211,7 +211,7 @@ HTTP レスポンス 4xx (Client Error) を表現するクラスです。
 HTTP レスポンス 5xx (Server Error) を表現するクラスです。
 
 サーバがエラーを起こしているなど、サーバ側で処理
-を完了することができないことを表しています。
+を完了できないことを表しています。
 
 = class Net::HTTPContinue < Net::HTTPInformation
 HTTP レスポンス 100 (Continue) を表現するクラスです。

@@ -10,7 +10,7 @@ category FileFormat
 Psych を用いると YAML のパースと出力ができます。
 これらの機能は libyaml [[url:http://pyyaml.org/wiki/LibYAML]] を用いて
 実装されています。さらに Ruby の大半のオブジェクトと YAML フォーマットの
-データの間を相互に変換することができます。
+データの間を相互に変換できます。
 
 === 基本的な使いかた
 
@@ -51,7 +51,7 @@ Psych には YAML ドキュメントの AST にアクセスする API があり�
 
 ===== 高水準 パース API
 
-YAML ドキュメントをパースして Ruby のオブジェクトに変換することができます。
+YAML ドキュメントをパースして Ruby のオブジェクトに変換できます。
 詳しくは [[m:Psych.load]] を見てください。
 
 

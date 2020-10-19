@@ -164,12 +164,12 @@
   * [[lib:coverage]]
     * ブランチカバレッジとメソッドカバレッジの計測をサポートしました [[feature:13901]]
       この新機能と一緒にテストスイートを実行すると、テストによって実行された条件分岐やメソッドについて知ることができます。
-      テストスイートのカバレッジをより厳密に評価することができます。
-      [[m:Coverage.start]]に与えるオプションによって計測する対象を指定することができます。
+      テストスイートのカバレッジをより厳密に評価できます。
+      [[m:Coverage.start]]に与えるオプションによって計測する対象を指定できます。
 #@samplecode
 Coverage.start(lines: true, branches: true, methods: true)
 #@end
-    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverage.result]]を使って結果を取得することができます。
+    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverage.result]]を使って結果を取得できます。
 #@samplecode
 Coverage.result
 #=> { "/path/to/file.rb"=>

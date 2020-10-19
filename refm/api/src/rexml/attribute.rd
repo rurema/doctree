@@ -11,7 +11,7 @@ include REXML::Namespace
 要素における attribute=value というペアのことです。
 
 属性にはなんらかの名前空間(namespace, [[c:REXML::Namespace]])
-に属することができます。
+に属できます。
 
 == Class Methods
 

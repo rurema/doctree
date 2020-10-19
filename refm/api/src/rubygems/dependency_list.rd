@@ -20,7 +20,7 @@ Gem の依存関係を扱うためのクラスです。
 
 このことは、インストール済みの Gem を削除するときに便利です。
 このメソッドで返された順にインストール済みの Gem 削除すると、
-依存関係による多くの問題を回避することができます。
+依存関係による多くの問題を回避できます。
 
 If there are circular dependencies (yuck!), then gems will be
 returned in order until only the circular dependents and anything

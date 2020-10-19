@@ -13,7 +13,7 @@ YAML ドキュメントに変換するときには、中間的な AST に変換�
 
 YAML AST の各ノードのクラスはすべて Psych::Nodes の下にあります。
 AST を手作業で構築して、visitor を使って AST を YAML ドキュメントや
-Ruby のオブジェクトに変換したりすることができます。
+Ruby のオブジェクトに変換したりできます。
 
 以下の例ではスカラを1つ持つリストの AST を構築しています。
 
@@ -204,7 +204,7 @@ YAML ドキュメントを表すクラスです。
   * [[c:Psych::Nodes::Mapping]]
   * [[c:Psych::Nodes::Scalar]]
 この唯一の子ノードは「ルート」とも呼ばれ、[[c:Psych::Nodes::Document#root]] で
-アクセスすることができます。
+アクセスできます。
 
 == Class Methods
 --- new(version=[], tag_directives=[], implicit=false) -> Psych::Nodes::Document
@@ -303,7 +303,7 @@ YAML sequence とは基本的にはリスト、配列です。以下のような
   - I am
   - a Sequence
 
-YAML sequence には anchor を付加することができます。
+YAML sequence には anchor を付加できます。
 この例では [[m:Psych::Nodes::Sequence#anchor]] は "A" を返します。
   %YAML 1.1
   ---
