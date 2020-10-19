@@ -867,27 +867,66 @@ self の絶対値を返します。
   2 ^ 3 # => 1
 
 --- [](nth) -> Integer
+#@since 2.6.0
+--- [](nth, len) -> Integer
+#@end
+#@since 2.7.0
+--- [](range) -> Integer
+#@end
 
 nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
 を、そうでなければ 0 を返します。
 
-@param nth  何ビット目を指すかの数値
+@param nth   何ビット目を指すかの数値
+#@since 2.6.0
+@param len   何ビット分を返すか
+#@end
+#@since 2.7.0
+@param range 返すビットの範囲
+#@end
+#@since 2.6.0
+@return     self[nth] は 1 か 0
+@return     self[i, len] は (n >> i) & ((1 << len) - 1) と同じ
+#@else
 @return     1 か 0
+#@end
+#@since 2.7.0
+@return     self[i..j] は (n >> i) & ((1 << (j - i + 1)) - 1) と同じ
+@return     self[i...j] は (n >> i) & ((1 << (j - i)) - 1) と同じ
+@return     self[i..] は (n >> i) と同じ
+@return     self[..j] は n & ((1 << (j + 1)) - 1) が 0 なら 0
+@return     self[...j] は n & ((1 << j) - 1) が 0 なら 0
+@raise ArgumentError self[..j] で n & ((1 << (j + 1)) - 1) が 0 以外のとき
+@raise ArgumentError self[...j] で n & ((1 << j) - 1) が 0 以外のとき
+#@end
+
+#@samplecode
+a = 0b11001100101010
+30.downto(0) {|n| print a[n] }
+# => 0000000000000000011001100101010
+
+a = 9**15
+50.downto(0) {|n| print a[n] }
+# => 000101110110100000111000011110010100111100010111001
+#@end
+
+n[i] は (n >> i) & 1 と等価なので、負のインデックスは常に 0 を返します。
+
+#@samplecode
+p 255[-1] # => 0
+#@end
+
+#@since 2.7.0
+#@samplecode 複数ビットの例
+0b01001101[2, 4]  #=> 0b0011
+0b01001100[2..5]  #=> 0b0011
+0b01001100[2...6] #=> 0b0011
+#   ^^^^
+#@end
+#@end
 
 self[nth]=bit (つまりビットの修正) がないのは、Numeric 関連クラスが
 immutable であるためです。
-
-例:
-
-  a = 0b11001100101010
-  30.downto(0) do |n| print a[n] end
-  # => 0000000000000000011001100101010
-
-  a = 9**15
-  50.downto(0) do |n|
-    print a[n]
-  end
-  # => 000101110110100000111000011110010100111100010111001
 
 --- <<(bits) -> Integer
 
