@@ -266,7 +266,11 @@ self を読みやすい文字列として返します。
 
 以下の形式の文字列を返します。
 
+#@since 2.7.0
+  #<Method: klass1(klass2)#method(arg) foo.rb:2>    (形式1)
+#@else
   #<Method: klass1(klass2)#method>                (形式1)
+#@end
 
 klass1 は、[[m:Method#inspect]] では、レシーバのクラス名、
 [[m:UnboundMethod#inspect]] では、[[c:UnboundMethod]] オブジェクトの生成
@@ -275,59 +279,130 @@ klass1 は、[[m:Method#inspect]] では、レシーバのクラス名、
 klass2 は、実際にそのメソッドを定義しているクラス／モジュール名、
 method は、メソッド名を表します。
 
-  module Foo
-    def foo
-      "foo"
-    end
-  end
-  class Bar
-    include Foo
-    def bar
-    end
-  end
+#@since 2.7.0
+arg は引数を表します。
+「foo.rb:2」は [[m:Method#source_location]] を表します。
+source_location が nil の場合には付きません。
 
-  p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
-  p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
+#@samplecode
+module Foo
+  def foo
+    "foo"
+  end
+end
+class Bar
+  include Foo
+  def bar(a, b)
+  end
+end
+
+p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo() test.rb:2>
+p Bar.new.method(:bar)        # => #<Method: Bar#bar(a, b) test.rb:8>
+#@end
+#@else
+#@samplecode
+module Foo
+  def foo
+    "foo"
+  end
+end
+class Bar
+  include Foo
+  def bar
+  end
+end
+
+p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
+p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
+#@end
+#@end
 
 klass1 と klass2 が同じ場合は以下の形式になります。
+#@since 2.7.0
+  #<Method: klass1#method() foo.rb:2>             (形式2)
+#@else
   #<Method: klass1#method>                        (形式2)
+#@end
 
 特異メソッドに対しては、
+#@since 2.7.0
+  #<Method: obj.method() foo.rb:2>                (形式3)
+  #<Method: klass1(klass2).method() foo.rb:2>     (形式4)
+#@else
   #<Method: obj.method>                           (形式3)
   #<Method: klass1(klass2).method>                (形式4)
+#@end
 という形式の文字列を返します。二番目の形式では klass1 はレシーバ、
 klass2 は実際にそのメソッドを定義しているオブジェクトになります。
 
-  # オブジェクトの特異メソッド
-  obj = ""
-  class <<obj
-    def foo
-    end
+#@since 2.7.0
+# オブジェクトの特異メソッド
+obj = ""
+class <<obj
+  def foo
   end
-  p obj.method(:foo)      # => #<Method: "".foo>
+end
+p obj.method(:foo)      # => #<Method: "".foo() foo.rb:4>
 
-  # クラスメソッド(クラスの特異メソッド)
-  class Foo
-    def Foo.foo
-    end
+# クラスメソッド(クラスの特異メソッド)
+class Foo
+  def Foo.foo
   end
-  p Foo.method(:foo)      # => #<Method: Foo.foo>
+end
+p Foo.method(:foo)      # => #<Method: Foo.foo() foo.rb:11>
 
-  # スーパークラスのクラスメソッド
-  class Bar < Foo
-  end
-  p Bar.method(:foo)      # => #<Method: Bar(Foo).foo>
+# スーパークラスのクラスメソッド
+class Bar < Foo
+end
+p Bar.method(:foo)      # => #<Method: Bar(Foo).foo() foo.rb:11>
 
-  # 以下は(形式1)の出力になる
-  module Baz
-    def baz
-    end
+# 以下は(形式1)の出力になる
+module Baz
+  def baz
   end
+end
 
-  class <<obj
-    include Baz
+class <<obj
+  include Baz
+end
+p obj.method(:baz)      # => #<Method: String(Baz)#baz() foo.rb:23>
+#@else
+#@samplecode
+# オブジェクトの特異メソッド
+obj = ""
+class <<obj
+  def foo
   end
-  p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
+end
+p obj.method(:foo)      # => #<Method: "".foo>
+
+# クラスメソッド(クラスの特異メソッド)
+class Foo
+  def Foo.foo
+  end
+end
+p Foo.method(:foo)      # => #<Method: Foo.foo>
+
+# スーパークラスのクラスメソッド
+class Bar < Foo
+end
+#@# ruby-2.4.3 以前
+#@#p Bar.method(:foo)      # => #<Method: Bar(Foo).foo>
+#@# ruby-2.4.4 から ruby-2.7.0-preview1 まで
+p Bar.method(:foo)      # => #<Method: Bar.foo>
+
+# 以下は(形式1)の出力になる
+module Baz
+  def baz
+  end
+end
+
+class <<obj
+  include Baz
+end
+p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
+#@end
+#@end
 
 @see [[m:Object#inspect]]
 
