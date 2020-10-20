@@ -383,7 +383,7 @@ Thread.DEBUG # => 1
 例:[[c:Thread#raise]] 発生のタイミングを制御する例
 
   th = Thread.new do
-    Thead.handle_interrupt(RuntimeError => :never) {
+    Thread.handle_interrupt(RuntimeError => :never) {
       begin
         # 安全にリソースの割り当てが可能
         Thread.handle_interrupt(RuntimeError => :immediate) {
