@@ -397,8 +397,26 @@ ENV.slice("")           # => {}
 ENV.slice("unknown")    # => {}
 ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 #@end
+
+#@since 3.0.0
+@see [[m:Hash#slice]], [[m:ENV.except]]
+#@else
+@see [[m:Hash#slice]]
+#@end
 #@end
 #@since 2.7.0
 --- freeze -> ()
 ENV.freeze は環境変数の変更を禁止できないため、[[c:TypeError]]を発生させます。
+#@end
+#@since 3.0.0
+--- except(*keys) -> Hash
+
+引数で指定された以外のキーとその値だけを含む Hash を返します。
+
+#@samplecode
+ENV                       #=> {"LANG"=>"en_US.UTF-8", "TERM"=>"xterm-256color", "HOME"=>"/Users/rhc"}
+ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
+#@end
+
+@see [[m:Hash#except]], [[m:ENV.slice]]
 #@end
