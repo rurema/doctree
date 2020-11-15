@@ -537,6 +537,28 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
   [ "a", "c", 7 ] == [ "a", "c", 7 ]     #=> true
   [ "a", "c", 7 ] == [ "a", "d", "f" ]   #=> false
 
+#@since 2.6.0
+--- all?               -> bool
+--- all? {|item| ... } -> bool
+--- all?(pattern)      -> bool
+
+すべての要素が真である場合に true を返します。
+偽である要素があれば、ただちに false を返します。
+
+ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
+が真である場合に true を返します。ブロックが偽を返した時点で、
+ただちに false を返します。
+
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+
+例:
+    # すべて正の数か？
+    p [5,  6, 7].all? {|v| v > 0 }   # => true
+    p [5, -1, 7].all? {|v| v > 0 }   # => false
+    p [].all? {|v| v > 0 }           # => true
+    p %w[ant bear cat].all?(/t/)     # => false
+#@end
+
 #@since 2.2.0
 --- any?               -> bool
 --- any? {|item| ... } -> bool
@@ -1345,6 +1367,51 @@ nil でない要素の数を返します。
 例:
   p [1, nil, 3, nil].nitems              #=> 2
   p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
+#@end
+
+#@since 2.6.0
+--- none?               -> bool
+--- none?{|obj| ... }   -> bool
+--- none?(pattern)      -> bool
+
+ブロックを指定しない場合は、 配列のすべての
+要素が偽であれば真を返します。そうでなければ偽を返します。
+
+ブロックを指定した場合は、配列のすべての要素を
+ブロックで評価した結果が、すべて偽であれば真を返します。
+そうでなければ偽を返します。
+
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+
+   %w{ant bear cat}.none? {|word| word.length == 5}  # => true
+   %w{ant bear cat}.none? {|word| word.length >= 4}  # => false
+   %w{ant bear cat}.none?(/d/)                       # => true
+   [].none?                                          # => true
+   [nil].none?                                       # => true
+   [nil,false].none?                                 # => true
+   [nil, false, true].none?                          # => false
+
+--- one?                -> bool
+--- one?{|obj| ... }    -> bool
+--- one?(pattern)       -> bool
+
+ブロックを指定しない場合は、 配列の要素のうち
+ちょうど一つだけが真であれば、真を返します。
+そうでなければ偽を返します。
+
+ブロックを指定した場合は、配列の要素を
+ブロックで評価した結果、一つの要素だけが真であれば真を返します。
+そうでなければ偽を返します。
+
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+
+   %w{ant bear cat}.one? {|word| word.length == 4}   # => true
+   %w{ant bear cat}.one? {|word| word.length > 4}    # => false
+   %w{ant bear cat}.one?(/t/)                        # => false
+   [ nil, true, 99 ].one?                            # => false
+   [ nil, true, false ].one?                         # => true
+   [ nil, true, 99 ].one?(Integer)                   # => true
+   [].one?                                           # => false
 #@end
 
 --- pack(template)                      -> String
