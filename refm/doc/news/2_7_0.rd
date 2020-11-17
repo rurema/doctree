@@ -21,19 +21,25 @@ in [a, [b, *c]]
   p b #=> 1
   p c #=> [2, 3]
 end
+#@end
 
+#@samplecode
 case {a: 0, b: 1}
 in {a: 0, x: 1}
   :unreachable
 in {a: 0, b: var}
   p var #=> 1
 end
+#@end
 
+#@samplecode
 case -1
 in 0 then :unreachable
 in 1 then :unreachable
 end #=> NoMatchingPatternError
+#@end
 
+//emlist{
 json = <<END
 {
   "name": "Alice",
@@ -49,7 +55,7 @@ p age  #=> 2
 
 JSON.parse(json, symbolize_names: true) in {name: "Alice", children: [{name: "Charlie", age: age}]}
 #=> NoMatchingPatternError
-#@end
+//}
 
   * 詳細は [[url:https://speakerdeck.com/k_tsj/pattern-matching-new-feature-in-ruby-2-dot-7]] のスライドを参照してください。
   * スライドは少し古い内容になっていることに注意してください。
