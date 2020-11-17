@@ -401,9 +401,30 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 --- join(*item)    -> String
 
-File::SEPARATORを間に入れて文字列を連結します。[[d:platform/DOSISH-support]]で環境依存になる予定です。
+[[m:File::SEPARATOR]]を間に入れて文字列を連結します。[[d:platform/DOSISH-support]]で環境依存になる予定です。
 
-@param item 連結したいディレクトリ名やファイル名を文字列で与えます。
+@param item 連結したいディレクトリ名やファイル名を文字列（もしくは文字列を要素に持つ配列）で与えます。
+            文字列AとBを連結する際に、Aの末尾の文字とBの先頭の文字が[[m:File::SEPARATOR]]であった場合には、
+            まずこれらを削除した上で改めて[[m:File::SEPARATOR]]を間に入れて連結します。
+            引数の中に配列がある場合は配列要素を再帰的に展開します。空の配列は空文字列に変換されます。
+            配列・文字列以外のオブジェクトを指定した場合は、まず to_str メソッド、次に to_path メソッドにより暗黙の型変換を試みます。
+            引数がない場合には空文字列を生成して返します。
+
+@raise TypeError    引数の中に文字列以外の（暗黙の型変換が行えない）オブジェクトが存在した場合に発生します。
+
+@raise ArgumentError    引数の中に、配列要素が自身を含むような無限にネストした配列や、
+                        ヌル文字を含む文字列が存在した場合に発生します。
+
+#@samplecode 例
+File.join("a","b")                        # => "a/b"
+File.join("a/","b")                       # => "a/b"
+File.join("a/","/b")                      # => "a/b"
+File.join("a","/b")                       # => "a/b"
+File.join("a", ["b", ["c", ["d"]]])       # => "a/b/c/d"
+File.join("", "a", ["b", ["c", ["d"]]])   # => "/a/b/c/d"
+File.join([])                             # => ""
+File.join                                 # => ""
+#@end
 
 --- link(old, new)    -> 0
 
