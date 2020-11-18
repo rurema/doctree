@@ -867,10 +867,8 @@ self の絶対値を返します。
   2 ^ 3 # => 1
 
 --- [](nth) -> Integer
-#@since 2.6.0
---- [](nth, len) -> Integer
-#@end
 #@since 2.7.0
+--- [](nth, len) -> Integer
 --- [](range) -> Integer
 #@end
 
@@ -878,19 +876,11 @@ nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時
 を、そうでなければ 0 を返します。
 
 @param nth   何ビット目を指すかの数値
-#@since 2.6.0
-@param len   何ビット分を返すか
-#@end
 #@since 2.7.0
+@param len   何ビット分を返すか
 @param range 返すビットの範囲
-#@end
-#@since 2.6.0
 @return     self[nth] は 1 か 0
 @return     self[i, len] は (n >> i) & ((1 << len) - 1) と同じ
-#@else
-@return     1 か 0
-#@end
-#@since 2.7.0
 @return     self[i..j] は (n >> i) & ((1 << (j - i + 1)) - 1) と同じ
 @return     self[i...j] は (n >> i) & ((1 << (j - i)) - 1) と同じ
 @return     self[i..] は (n >> i) と同じ
@@ -898,6 +888,8 @@ nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時
 @return     self[...j] は n & ((1 << j) - 1) が 0 なら 0
 @raise ArgumentError self[..j] で n & ((1 << (j + 1)) - 1) が 0 以外のとき
 @raise ArgumentError self[...j] で n & ((1 << j) - 1) が 0 以外のとき
+#@else
+@return     1 か 0
 #@end
 
 #@samplecode
