@@ -8,12 +8,11 @@
 --- new(host, service) -> SOCKSSocket
 
 host で指定したホストの service で指定したポートと接続したソケッ
-トを返します。host はホスト名、または octet decimal
-によるインターネットアドレスを示す文字列、service
-は /etc/services (または NIS) に登録されているサー
-ビス名かポート番号です。
+トを返します。host はホスト名、またはインターネットアドレスを
+示す文字列、service は /etc/services (または NIS) に登録されている
+サービス名かポート番号です。
 
-@param host  ホスト名、または octet decimal によるインターネットアドレスを示す文字列を指定します。
+@param host  ホスト名、またはインターネットアドレスを示す文字列を指定します。
 @param service /etc/services (または NIS) に登録されているサービス名かポート番号です。
 
 
