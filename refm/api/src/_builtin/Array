@@ -557,6 +557,8 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
     p [5, -1, 7].all? {|v| v > 0 }   # => false
     p [].all? {|v| v > 0 }           # => true
     p %w[ant bear cat].all?(/t/)     # => false
+
+@see [[m:Enumerable#all?]]
 #@end
 
 #@since 2.2.0
@@ -587,6 +589,9 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
     p [nil, true, 99].any?          # => true
     p [].any?                       # => false
 #@end
+
+@see [[m:Enumerable#any?]]
+
 #@end
 
 --- assoc(key)    -> Array | nil
@@ -645,7 +650,9 @@ dup は内容だけをコピーします。
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
 #@since 2.6.0
-@see [[m:Hash#to_h]]
+@see [[m:Hash#to_h]], [[m:Enumerable#collect]], [[m:Enumerable#map]]
+#@else
+@see [[m:Enumerable#collect]], [[m:Enumerable#map]]
 #@end
 
 --- collect! {|item| ..}    -> self
@@ -755,6 +762,8 @@ other_arrays の要素を自身の末尾に破壊的に連結します。
    ary.count(2)          # => 2
    ary.count{|x|x%2==0}  # => 3
 
+@see [[m:Enumerable#count]]
+
 --- delete(val)           -> object | nil
 --- delete(val) { ... }   -> object
 
@@ -843,6 +852,8 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
+
+@see [[m:Enumerable#drop]]
 
 --- drop_while                    -> Enumerator
 --- drop_while {|element| ... }   -> Array
@@ -1383,6 +1394,8 @@ nil でない要素の数を返します。
    [nil,false].none?                                 # => true
    [nil, false, true].none?                          # => false
 
+@see [[m:Enumerable#none?]]
+
 --- one?                -> bool
 --- one?{|obj| ... }    -> bool
 --- one?(pattern)       -> bool
@@ -1404,6 +1417,8 @@ nil でない要素の数を返します。
    [ nil, true, false ].one?                         # => true
    [ nil, true, 99 ].one?(Integer)                   # => true
    [].one?                                           # => false
+
+@see [[m:Enumerable#none?]]
 #@end
 
 --- pack(template)                      -> String
@@ -1534,7 +1549,7 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
   # 偶数を除外する (奇数を集める)
   [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
 
-@see [[m:Array#select]]
+@see [[m:Array#select]], [[m:Enumerable#reject]]
 #@since 2.3.0
 @see [[m:Enumerable#grep_v]]
 #@end
@@ -1778,6 +1793,8 @@ fruits # => ["fig", "pear", "apple"]
    a = [1, 2, 3, 4, 5, 0]
    a.take(3)             # => [1, 2, 3]
 
+@see [[m:Enumerable#take]]
+
 --- take_while                    -> Enumerator
 --- take_while {|element| ... }   -> Array
 
@@ -1789,6 +1806,8 @@ fruits # => ["fig", "pear", "apple"]
 
 ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
 返します。
+
+@see [[m:Enumerable#take_while]]
 
 --- to_a       -> Array
 
