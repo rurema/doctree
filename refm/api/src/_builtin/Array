@@ -844,21 +844,13 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
 
-#@since 1.9.1
 --- drop_while                    -> Enumerator
-#@else
---- drop_while                    -> Enumerable::Enumerator
-#@end
 --- drop_while {|element| ... }   -> Array
 
 ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
 残りの要素を配列として返します。
 
-#@since 1.9.1
 ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
-#@else
-ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
-#@end
 
    a = [1, 2, 3, 4, 5, 0]
    a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
@@ -1527,21 +1519,15 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 
 @see [[m:Array#assoc]]
 
-#@since 1.9.1
 --- reject               -> Enumerator
-#@else
---- reject               -> Enumerable::Enumerator
-#@end
 --- reject {|item| ... } -> [object]
 
 各要素に対してブロックを評価し、
 その値が偽であった要素を集めた新しい配列を返します。
 条件を反転させた select です。
 
-#@since 1.9.1
 ブロックを省略した場合は、各要素に対しブロックを評価し
 偽になった値の配列を返すような [[c:Enumerator]] を返します。
-#@end
 
 例:
 
@@ -1792,11 +1778,7 @@ fruits # => ["fig", "pear", "apple"]
    a = [1, 2, 3, 4, 5, 0]
    a.take(3)             # => [1, 2, 3]
 
-#@since 1.9.1
 --- take_while                    -> Enumerator
-#@else
---- take_while                    -> Enumerable::Enumerator
-#@end
 --- take_while {|element| ... }   -> Array
 
 配列の要素を順に偽になるまでブロックで評価します。
@@ -1805,10 +1787,8 @@ fruits # => ["fig", "pear", "apple"]
    a = [1, 2, 3, 4, 5, 0]
    a.take_while {|i| i < 3 }   # => [1, 2]
 
-#@since 1.9.1
 ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
 返します。
-#@end
 
 --- to_a       -> Array
 
