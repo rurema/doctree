@@ -367,6 +367,7 @@ class <<obj
   include Baz
 end
 p obj.method(:baz)      # => #<Method: String(Baz)#baz() foo.rb:23>
+#@end
 #@else
 #@samplecode
 # オブジェクトの特異メソッド
