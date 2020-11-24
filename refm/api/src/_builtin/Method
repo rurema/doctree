@@ -313,7 +313,7 @@ class Bar
 end
 
 p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
-p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
+p Bar.new.method(:bar)        # => #<Method: Bar#bar>
 #@end
 #@end
 
