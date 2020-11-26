@@ -2418,12 +2418,17 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 --- proc { ... } -> Proc
 --- lambda { ... } -> Proc
+#@until 3.0
 --- proc -> Proc
+#@end
+#@until 2.7
 --- lambda -> Proc
+#@end
 
 与えられたブロックから手続きオブジェクト ([[c:Proc]] のインスタンス)
 を生成して返します。[[m:Proc.new]] に近い働きをします。
 
+#@until 3.0
 ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
 を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
 で呼ばれると [[c:ArgumentError]] 例外が発生します。
@@ -2431,7 +2436,23 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
 を得たい場合は明示的に & 引数でうけるべきです。
 
+ブロックを指定しない lambda は Ruby 2.6 までは警告メッセージ
+「warning: tried to create Proc object without a block」
+が出力され、Ruby 2.7 では
+[[c:ArgumentError]] (tried to create Proc object without a block)
+が発生します。
+
+ブロックを指定しない proc は、Ruby 2.7 では
+[[m:$VERBOSE]] = true のときには警告メッセージ
+「warning: Capturing the given block using Proc.new is deprecated; use `&block` instead」
+が出力され、Ruby 3.0 では
+[[c:ArgumentError]] (tried to create Proc object without a block)
+が発生します。
+
 @raise ArgumentError スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
+#@else
+@raise ArgumentError ブロックを省略した呼び出しを行ったときに発生します。
+#@end
 
   def foo &block
     lambda(&block)
