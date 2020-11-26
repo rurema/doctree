@@ -1423,10 +1423,8 @@ chomp に true を指定すると、分割した各行に対して [[m:String#ch
 #@end
 
 ブロックが指定された場合は [[m:String#each_line]] と同じように動作します。
-#@until 2.7.0
-ただし deprecated のため、ブロックを指定する場合は
-[[m:String#each_line]] を使用してください。
-#@end
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_line]]
 
@@ -1456,10 +1454,8 @@ end
 #@end
 
 ブロックが指定された場合は [[m:String#each_byte]] と同じように動作します。
-#@until 2.7.0
-ただし deprecated のため、ブロックを指定する場合は
-[[m:String#each_byte]] を使用してください。
-#@end
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_byte]]
 
@@ -3207,10 +3203,8 @@ p "aaaaa".rpartition("x")   # => ["", "", "aaaaa"]
 #@end
 
 ブロックが指定された場合は [[m:String#each_char]] と同じように動作します。
-#@until 2.7.0
-ただし deprecated のため、ブロックを指定する場合は
-[[m:String#each_char]] を使用してください。
-#@end
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_char]]
 
@@ -3244,10 +3238,8 @@ UTF-8/UTF-16(BE|LE)/UTF-32(BE|LE) 以外のエンコーディングに対して�
 #@end
 
 ブロックが指定された場合は [[m:String#each_codepoint]] と同じように動作します。
-#@until 2.7.0
-ただし deprecated のため、ブロックを指定する場合は
-[[m:String#each_codepoint]] を使用してください。
-#@end
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_codepoint]]
 
@@ -3745,10 +3737,8 @@ Unicode Standard Annex #29 ([[url:https://unicode.org/reports/tr29/]])
 #@end
 
 ブロックが指定された場合は [[m:String#each_grapheme_cluster]] と同じように動作します。
-#@until 2.7.0
-ただし deprecated のため、ブロックを指定する場合は
-[[m:String#each_grapheme_cluster]] を使用してください。
-#@end
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_grapheme_cluster]]
 --- delete_prefix(prefix) -> String
