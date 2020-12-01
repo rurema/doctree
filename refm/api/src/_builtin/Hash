@@ -234,6 +234,27 @@ ifnoneを省略した Hash.new は {} と同じです。
 
 @see [[m:Hash#default=]],[[m:Hash#default]],[[m:Hash#default_proc]]
 
+#@since 2.7.0
+--- ruby2_keywords_hash?(hash) -> bool
+
+[[m:Module#ruby2_keywords]]や[[m:Proc#ruby2_keywords]]による
+ruby2_keywords フラグが設定されているかどうかを返します。
+
+このメソッドはデバッグや調査、シリアライゼーションのために本当に必要な場合のために
+用意されていて、普通のプログラムで使うことは想定されていません。
+
+ruby 2.7.1 で追加されたため、ruby 2.7.0 では定義されていません。
+
+#@samplecode
+ruby2_keywords def foo(*args)
+  Hash.ruby2_keywords_hash?(args.last)
+end
+foo(k: 1)   # => true
+foo({k: 1}) # => false
+#@end
+
+@see [[m:Module#ruby2_keywords]], [[m:Proc#ruby2_keywords]]
+#@end
 == Instance Methods
 
 --- values -> [object]
