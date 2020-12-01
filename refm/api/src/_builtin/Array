@@ -1418,7 +1418,7 @@ nil でない要素の数を返します。
    [ nil, true, 99 ].one?(Integer)                   # => true
    [].one?                                           # => false
 
-@see [[m:Enumerable#none?]]
+@see [[m:Enumerable#one?]]
 #@end
 
 --- pack(template)                      -> String
