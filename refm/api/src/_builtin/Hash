@@ -447,10 +447,12 @@ self にデフォルト値が設定されていても無視されます（挙動
 
 @param key 探索するキーを指定します。
 
-  p({1 => "one"}.has_key?(1)) #=> true
-  p({1 => "one"}.has_key?(2)) #=> false
+#@samplecode
+p({1 => "one"}.key?(1)) # => true
+p({1 => "one"}.key?(2)) # => false
+#@end
 
-@see [[m:Hash#has_value?]]
+@see [[m:Hash#value?]]
 
 --- has_value?(value) -> bool
 --- value?(value)     -> bool
@@ -460,10 +462,12 @@ self にデフォルト値が設定されていても無視されます（挙動
 
 @param value 探索する値を指定します。
 
-  p({1 => "one"}.has_value?("one")) #=> true
-  p({1 => "one"}.has_value?("two")) #=> false
+#@samplecode
+p({1 => "one"}.value?("one")) #=> true
+p({1 => "one"}.value?("two")) #=> false
+#@end
 
-@see [[m:Hash#has_key?]]
+@see [[m:Hash#key?]]
 
 --- []=(key, value)
 --- store(key, value) -> object
@@ -621,7 +625,7 @@ key に関連づけられた値を返します。
 該当するキーが登録されていない時には、デフォルト値を返します。
 
 デフォルト値と値としての nil を区別する必要が
-ある場合は [[m:Hash#fetch]] または [[m:Hash#has_key?]] を使ってください。
+ある場合は [[m:Hash#fetch]] または [[m:Hash#key?]] を使ってください。
 
 @param key 探索するキーを指定します。
 
@@ -635,7 +639,7 @@ key に関連づけられた値を返します。
   h2 = Hash.new {|*arg| arg}
   p h2[:non]             #=> [{}, :non]
 
-@see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
+@see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
 
 --- default -> object | nil
 --- default(key) -> object | nil
