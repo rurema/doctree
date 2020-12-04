@@ -298,13 +298,14 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 @see [[m:IO#each_byte]]
 
+#@until 3.0
 --- bytes { |byte| ... } -> self
 --- bytes                -> Enumerator
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_byte]] を使用してください。
 使用すると警告メッセージが表示されます。
-
+#@end
 --- each_char { |c| ... } -> self
 --- each_char             -> Enumerator
 
@@ -343,13 +344,14 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 @see [[m:IO#each_char]], [[m:IO#chars]]
 
+#@until 3.0
 --- chars { |c| ... } -> self
 --- chars             -> Enumerator
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_char]] を使用してください。
 使用すると警告メッセージが表示されます。
-
+#@end
 --- each_codepoint { |c| ... }   -> self
 --- each_codepoint               -> Enumerator
 
@@ -368,6 +370,7 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
   ARGF.each_codepoint                  # => #<Enumerator: ARGF:each_codepoint>
   ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,101,50,10,
 
+#@until 3.0
 #@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
 --- codepoints { |c| ... }       -> self
 --- codepoints                   -> Enumerator
@@ -375,7 +378,7 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_codepoint]] を使用してください。
 使用すると警告メッセージが表示されます。
-
+#@end
 --- eof  -> bool
 --- eof? -> bool
 
@@ -609,6 +612,7 @@ ARGFが現在開いているファイルの[[c:File]]、または[[c:IO]]オブ�
 
 @see [[m:ARGF.class#file]], [[m:ARGF.class#to_write_io]]
 
+#@until 3.0
 --- lines(rs = $/) { |line| ... }   -> self
 --- lines(limit) { |line| ... }     -> self
 --- lines(rs, limit) { |line| ... } -> self
@@ -621,7 +625,7 @@ ARGFが現在開いているファイルの[[c:File]]、または[[c:IO]]オブ�
 使用すると警告メッセージが表示されます。
 
 @see [[m:$/]], [[m:ARGF.class#each_line]]
-
+#@end
 --- getbyte   -> Integer | nil
 
 self から 1 バイト(0..255)を読み込み整数として返します。
