@@ -31,28 +31,12 @@ Set クラスでは、集合要素を取り出す際の順序は保証されま�
 
 === 注意事項
 
-#@if (version < "1.9.1")
-Ruby 1.8 では、集合オブジェクトに対する taint, untaint, freeze の各
-メソッドは、内部記憶として保持するハッシュには影響しません。
-このため、集合オブジェクトの凍結および汚染マークのセットは実質的な
-効果を持ちません。
-例えば、set.freeze に続いて set.add を呼び出しても、エラーは発生
-しません。
-#@else
-Ruby 1.9 以降では、集合オブジェクトに対する taint, untaint, freeze の各
+集合オブジェクトに対する taint, untaint, freeze の各
 メソッドの効果は、内部記憶として保持するハッシュにも適用されます。
 
 集合オブジェクトおよびその内部記憶にセットされた taint 情報は、
 dupおよび clone メソッドによって複製された集合オブジェクトにもコピー
 されます。
-
-#@until 2.2.0
-ただし、freeze された集合を clone した場合、複製された集合の内部記憶
-には freeze 情報が引き継がれません。
-したがって、生成された集合に対する要素の変更はエラーになりません。
-#@end
-#@end
-
 
 === 例
 #@samplecode
@@ -89,16 +73,10 @@ include Enumerable
 引数とブロックの両方を与えた場合、enum の各要素についてブロックを
 評価し、その結果を新しい集合の要素とします。
 
-#@if (version >= "1.9.1")
 @param enum 集合要素を格納するオブジェクトを指定します。
        enum には each メソッドが定義されている必要があります。
 @raise ArgumentError 引数 enum が与えられて、かつ enum に each メソッドが
        定義されていない場合に発生します。
-#@else
-@param enum Enumerable オブジェクトを指定します。
-@raise ArgumentError Enumerable オブジェクトでない引数が与えられた場合に
-       発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -129,17 +107,11 @@ clone は、それに加えて、freeze 情報と特異メソッドをコピー�
 いずれも共通して、内部記憶として保持するハッシュもコピーしますが、
 集合の要素そのものはコピーしません。
 
-#@if (version < "1.9.1")
-ただし、Ruby 1.8 の Set クラスでは、内部記憶として用いるハッシュには
-taint 情報および freeze 情報が付加されないので、taint 情報および
-freeze 情報のコピーは実質的な効果を持ちません。
-#@else
-Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶として
+Set クラスでは、dup と clone に共通して、内部記憶として
 用いるハッシュも含めて taint 情報をコピーします。
 ただし、clone では内部記憶の freeze 情報はコピーされません。
 このため、freeze された集合を clone した場合、生成された集合の要素は
 変更可能である点に注意してください。
-#@end
 
 #@samplecode
 require 'set'
@@ -187,17 +159,11 @@ p s # => #<Set: {}>
 
 集合の要素をすべて削除し、enum で与えられた要素に置き換えます。
 
-#@if (version >= "1.9.1")
 引数 enum には each メソッドが定義されている必要があります。
 
 @param enum 置き換え後の集合要素を格納するオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum 置き換え後の集合要素を格納する Enumerable オブジェクトを
-            指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -404,16 +370,11 @@ p s2.reject! {|str| str =~ /\.o\z/}   # => nil
 
 元の集合に enum で与えられた要素を追加します。
 
-#@if (version >= "1.9.1")
 引数 enum には each メソッドが定義されている必要があります。
 
 @param enum 追加対象の要素を格納したオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum 追加対象の要素を格納した Enumerate オブジェクトを指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -426,16 +387,11 @@ p set # => #<Set: {10, 20, 30}>
 
 元の集合から、enum で与えられた要素を削除します。
 
-#@if (version >= "1.9.1")
 引数 enum には each メソッドが定義されている必要があります。
 
 @param enum 削除対象の要素を格納したオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum 削除対象の要素を格納した Enumerate オブジェクトを指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -451,14 +407,9 @@ p set # => #<Set: {40}>
 和集合、すなわち、2 つの集合の少なくともどちらか一方に属するすべての
 要素からなる新しい集合を作ります。
 
-#@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum Enumerable オブジェクトを指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -472,14 +423,9 @@ p Set[10, 20, 30] + Set[10, 20, 40]
 差集合、すなわち、元の集合の要素のうち引数 enum に含まれる要素を取り除いた
 新しい集合を作ります。
 
-#@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum Enumerable オブジェクトを指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -493,14 +439,9 @@ p Set[10, 20, 30] - Set[10, 20, 40]
 共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる
 新しい集合を作ります。
 
-#@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum Enumerable オブジェクトを指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -520,14 +461,9 @@ p s1 & s2 #=> #<Set: {10, 30}>
 対称差、すなわち、2 つの集合のいずれか一方にだけ属するすべての要素からなる
 新しい集合を作ります。
 
-#@if (version >= "1.9.1")
 @param enum each メソッドが定義されたオブジェクトを指定します。
 @raise ArgumentError 引数 enum に each メソッドが定義されていない場合に
        発生します。
-#@else
-@param enum Enumerable オブジェクトを指定します。
-@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
-#@end
 
 #@samplecode
 require 'set'
@@ -670,7 +606,6 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 @see [[m:Set#intersect?]]
 #@end
 
-#@since 1.9.2
 --- keep_if {|element| ... } -> self
 
 各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
@@ -685,7 +620,6 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
 
 @return 変更があった場合は self を、変更がなかった場合は nil を返します。
-#@end
 
 #@since 2.5.0
 --- reset -> self
