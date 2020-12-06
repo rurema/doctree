@@ -32,6 +32,9 @@ def generate_statichtml(version)
   puts "generate static html of #{version}"
   bitclust_gem_path = File.expand_path('../..', `gem which bitclust`)
   raise "bitclust gem not found" unless $?.success?
+  # If you want to know the command line of https://docs.ruby-lang.org/ja/latest/ ,
+  # see https://github.com/ruby/docs.ruby-lang.org/blob/master/system/bc-static-all
+  # instead of here.
   commands = [
     "bundle", "exec",
     "bitclust", "--database=#{db}",
