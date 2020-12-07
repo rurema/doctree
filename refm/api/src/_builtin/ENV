@@ -6,6 +6,7 @@ extend Enumerable
 ます。ただし、Hash と異なり、ENV のキーと値には文字列しか
 とることができません。
 
+#@until 2.7.0
 ENV で得られる文字列は ENV['PATH'] 以外は常に汚染されています。
 オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
 ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
@@ -16,6 +17,7 @@ ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリ�
   p ENV['TERM'].tainted?  # => true
   p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
   p path.tainted?         # => false
+#@end
 
 また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
