@@ -13,3 +13,9 @@ services:
     - "./Gemfile:/rurema/doctree/Gemfile"
     - "./Rakefile:/rurema/doctree/Rakefile"
     - "./refm:/rurema/doctree/refm"
+  web:
+    image: nginx
+    ports:
+    - "8080:80"
+    volumes:
+    - "./_site/:/usr/share/nginx/html:ro"
