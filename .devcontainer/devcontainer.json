@@ -1,5 +1,5 @@
 {
-  "dockerComposeFile": ["../docker-compose.yml"],
+  "dockerComposeFile": ["../docker-compose.yml", "./docker-compose.yml"],
   "forwardPorts": [8080],
   "name": "rurema doctree",
   "service": "rurema"
