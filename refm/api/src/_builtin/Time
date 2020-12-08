@@ -762,6 +762,7 @@ p Time.local(2000, 1, 1).isdst   # => false
 p Time.now.zone # => "JST"
 #@end
 
+#@until 3.0
 --- succ    -> Time
 
 self に 1 秒足した Time オブジェクトを生成して返します。
@@ -773,7 +774,7 @@ t = Time.local(2000)
 p t       # => 2000-01-01 00:00:00 +0900
 p t.succ  # => 2000-01-01 00:00:01 +0900
 #@end
-
+#@end
 --- utc_offset     -> Integer
 --- gmt_offset     -> Integer
 --- gmtoff         -> Integer
