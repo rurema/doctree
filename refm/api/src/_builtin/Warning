@@ -38,7 +38,7 @@ category の警告を表示するかどうかのフラグを設定します。
 @see [[m:Warning.[] ]]
 #@end
 
---- warn(*message) -> nil
+--- warn(message) -> nil
 
 引数 message を標準エラー出力 [[m:$stderr]] に出力します。
 
@@ -51,27 +51,27 @@ warn "hoge" # => hoge
 
 module Warning
   # 警告メッセージの末尾に !!! を追加する
-  def self.warn(*message)
-    super(*message.map { |msg| msg.chomp + "!!!\n" })
+  def self.warn(message)
+    super(message.chomp + "!!!\n")
   end
 end
 
 warn "hoge" # => hoge!!!
 #@end
 
-@param message 出力するオブジェクトを任意個指定します。
+@param message 出力するオブジェクトを指定します。
 
 @see [[m:Kernel.#warn]], [[m:Warning#warn]]
 
 == Public Instance Methods
 
---- warn(*message) -> nil
+--- warn(message) -> nil
 
 引数 message を標準エラー出力 [[m:$stderr]] に出力します。
 
 [[m:Kernel.#warn]]の挙動を変更する際は、このメソッドではなくクラスメソッドである[[m:Warning.warn]]をオーバーライドする必要があります。
 
-@param message 出力するオブジェクトを任意個指定します。
+@param message 出力するオブジェクトを指定します。
 
 #@# TODO: messageに改行を渡さないとそのまま出力されるように見えるため、確認してから記載する。
 #@# Writes warning message msg to $stderr, followed by a newline if the message does not end in a newline.
