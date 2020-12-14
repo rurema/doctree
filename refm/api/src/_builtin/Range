@@ -52,10 +52,8 @@ p(nil..)              # => nil..nil
 
 範囲式で両端を略した書き方はできません。
 
-#@samplecode
-p(..)  # => SyntaxError
-p(...) # Ruby 2.7 で導入されたメソッド引数の forward として解釈されてしまう
-#@end
+  p(..)  # => SyntaxError
+  p(...) # Ruby 2.7 で導入されたメソッド引数の forward として解釈されてしまう
 
 #@end
 #@end
