@@ -1440,6 +1440,13 @@ end
     # => 115
     # => 116
     # => 114
+
+"あ".each_byte do |byte|
+  p byte
+end
+    # => 227
+    # => 129
+    # => 130
 #@end
 
 @see [[m:String#bytes]]
