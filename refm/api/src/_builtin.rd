@@ -88,6 +88,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Process__GID)
 #@include(_builtin/Process__Status)
 #@include(_builtin/Process__Sys)
+#@include(_builtin/Process__Tms)
 #@include(_builtin/Process__UID)
 #@since 2.3.0
 #@include(thread/Queue)
@@ -117,7 +118,6 @@ require を書かなくても使うことができます。
 #@include(_builtin/StopIteration)
 #@include(_builtin/String)
 #@include(_builtin/Struct)
-#@include(_builtin/Struct__Tms)
 #@include(_builtin/Symbol)
 #@include(_builtin/SyntaxError)
 #@include(_builtin/SystemCallError)
