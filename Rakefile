@@ -1,8 +1,9 @@
 # coding: utf-8
 OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0 2.2.0 2.3.0 2.4.0]
-SUPPORTED_VERSIONS = %w[2.5.0 2.6.0 2.7.0]
-UNRELEASED_VERSIONS = %w[3.0]
+SUPPORTED_VERSIONS = %w[2.5.0 2.6.0 2.7.0 3.0]
+UNRELEASED_VERSIONS = %w[3.1]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
+CI_VERSIONS = [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
 
 def system(*commands)
@@ -77,7 +78,7 @@ namespace :generate do
 end
 
 desc "Generate document database"
-multitask :generate => SUPPORTED_VERSIONS.map {|version| "generate:#{version}" }
+multitask :generate => CI_VERSIONS.map {|version| "generate:#{version}" }
 
 namespace :statichtml do
   ALL_VERSIONS.each do |version|
@@ -101,7 +102,7 @@ namespace :statichtml do
 end
 
 desc "Generate static html"
-multitask :statichtml => SUPPORTED_VERSIONS.map {|version| "statichtml:#{version}" }
+multitask :statichtml => CI_VERSIONS.map {|version| "statichtml:#{version}" }
 
 desc "Create index"
 task :create_index do
