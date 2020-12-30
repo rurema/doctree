@@ -244,7 +244,7 @@ new でオブジェクトを生成することで利用します。
   }.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP])
 
 単に Ruby のブロックを C の(コールバック)関数に変換したい場合は
-[[c:Fiddle::BlockClosure]] を使うほうが簡単です。
+[[c:Fiddle::Closure::BlockCaller]] を使うほうが簡単です。
 
 == Class Methods
 --- new(ret, args, abi=Fiddle::Function::DEFAULT) -> Fiddle::Closure
@@ -295,7 +295,7 @@ Ruby のブロックを C の関数ポインタとして表現するためのク
   p s # =>  "()07Uabcqx"
 
 == Class Methods
---- new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::BlockClosure
+--- new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
 
 Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
 
