@@ -74,6 +74,9 @@ require を書かなくても使うことができます。
 #@include(thread/Mutex)
 #@include(_builtin/NameError)
 #@include(_builtin/NilClass)
+#@since 2.7.0
+#@include(_builtin/NoMatchingPatternError)
+#@end
 #@include(_builtin/NoMemoryError)
 #@include(_builtin/NoMethodError)
 #@include(_builtin/NotImplementedError)
