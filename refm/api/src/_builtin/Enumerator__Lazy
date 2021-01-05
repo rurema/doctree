@@ -418,3 +418,8 @@ Enumerator を返す」ようなメソッドを定義するときによく使わ
 [[m:Enumerable#uniq]] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
 #@end
+#@since 3.1
+--- compact -> Enumerator::Lazy
+
+[[m:Enumerable#compact]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+#@end

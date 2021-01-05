@@ -1887,3 +1887,21 @@ olympics.uniq{|k,v| v} # => [[1896, "Athens"], [1900, "Paris"], [1904, "Chicago"
 
 @see [[m:Array#uniq]]
 #@end
+#@since 3.1
+--- compact -> Array
+
+self から nil を取り除いた配列を生成して返します。
+
+#@samplecode
+def with_nils
+  yield 1
+  yield 2
+  yield nil
+  yield 3
+end
+
+to_enum(:with_nils).compact # => [1, 2, 3]
+#@end
+
+@see [[m:Array#compact]]
+#@end
