@@ -240,7 +240,7 @@ Logger オブジェクトを生成します。
 @param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
 
 @param shift_age ログファイルを保持する数か、ログファイルを切り替える頻度を指定します。
-                 頻度には daily, weekly, monthly を文字列で指定することができます。
+                 頻度には daily, weekly, monthly を文字列で指定できます。
                  省略すると、ログの保存先を切り替えません。
 
 @param shift_size shift_age を整数で指定した場合のみ有効です。
@@ -738,7 +738,7 @@ logger.info("MyApp") { "test" }
 = class Logger::Application < Object
 include Logger::Severity
 
-ユーザ定義のアプリケーションにログ機能を簡単に追加することができます。
+ユーザ定義のアプリケーションにログ機能を簡単に追加できます。
 
 === 使用方法
 
@@ -823,7 +823,7 @@ include Logger::Severity
 @param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
 
 @param shift_age ログファイルを保持する数か、ログファイルを切り替える頻度を指定します。
-                 頻度には daily, weekly, monthly を文字列で指定することができます。
+                 頻度には daily, weekly, monthly を文字列で指定できます。
                  省略すると、ログの保存先を切り替えません。
 
 @param shift_size shift_age を整数で指定した場合のみ有効です。

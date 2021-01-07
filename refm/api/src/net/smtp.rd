@@ -96,7 +96,7 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼�
 
 === SMTP認証
 
-[[c:Net::SMTP]] は PLAIN, LOGIN, CRAM MD5 の3つの方法で認証をすることができます。
+[[c:Net::SMTP]] は PLAIN, LOGIN, CRAM MD5 の3つの方法で認証できます。
 (認証については [[RFC:2554]], [[RFC:2195]] を参照してください)
 
 認証するためには、[[m:Net::SMTP.start]] もしくは [[m:Net::SMTP#start]]

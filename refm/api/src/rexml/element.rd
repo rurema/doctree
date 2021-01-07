@@ -518,7 +518,7 @@ name で指定される属性を返します。
 
 属性は [[c:REXML::Attribute]] オブジェクトの形で返します。
 
-name は "foo:bar" のように prefix を指定することができます。
+name は "foo:bar" のように prefix を指定できます。
 
 namespace で名前空間の URI を指定することで、その名前空間内で
 name という属性名を持つ属性を指定できます。
@@ -1164,7 +1164,7 @@ namespace で名前空間を、 name で prefix を含まない属性名を
 指定された属性が存在しない場合は nil を返します。
 
 XML プロセッサが prefix を置き換えてしまった場合でも、このメソッドを
-使うことで属性を正しく指定することができます。
+使うことで属性を正しく指定できます。
 
 @param namespace 名前空間(URI, 文字列)
 @param name 属性名(文字列)

@@ -162,7 +162,7 @@ Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
 --- new(path, initheader = nil) -> Net::HTTPRequest
 HTTP リクエストオブジェクトを生成します。
 
-initheader でリクエストヘッダを指定することができます。
+initheader でリクエストヘッダを指定できます。
 {ヘッダフィールド名(文字列)=>その中身(文字列)} という
 [[c:Hash]] を用います。
 

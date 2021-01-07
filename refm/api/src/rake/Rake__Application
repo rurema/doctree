@@ -241,7 +241,7 @@ Rake アプリケーションを実行します。
 #@#
 #@# システム全体の Rakefile が格納されているディレクトリを返します。
 #@#
-#@# 環境変数 RAKE_SYSTEM で設定することができます。
+#@# 環境変数 RAKE_SYSTEM で設定できます。
 #@# :nodoc:
 
 #@# --- terminal_width -> Integer

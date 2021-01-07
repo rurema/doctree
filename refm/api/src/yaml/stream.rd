@@ -22,7 +22,7 @@ Rubyist Magazine: [[url:https://magazine.rubyist.net/]]
 --- new(opts = {}) -> YAML::Stream
 #@end
 
-ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
+ストリームを返します。ストリームはYAMLドキュメントを複数保持できます。
 
 @param opts オプションを指定します。設定可能なオプションは
 #@since 1.9.2

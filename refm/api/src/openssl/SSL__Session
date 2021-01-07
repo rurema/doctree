@@ -128,13 +128,13 @@ SSL/TLS はこのセッション ID でセッションを識別します。
 --- to_der -> String
 自身を DER 形式に変換します。
 
-これによってセッションキャッシュをディスク上に保持することができます。
+これによってセッションキャッシュをディスク上に保持できます。
 
 @raise OpenSSL::SSL::Session::SessionError 変換に失敗した場合に発生します
 --- to_pem -> String
 自身を PEM 形式に変換します。
 
-これによってセッションキャッシュをディスク上に保持することができます。
+これによってセッションキャッシュをディスク上に保持できます。
 
 @raise OpenSSL::SSL::Session::SessionError 変換に失敗した場合に発生します
 --- to_text -> String

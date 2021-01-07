@@ -10,8 +10,8 @@ include REXML::Namespace
 つまり、 <element attribute="value"/> という
 要素における attribute=value というペアのことです。
 
-属性にはなんらかの名前空間(namespace, [[c:REXML::Namespace]])
-に属することができます。
+属性はなんらかの名前空間(namespace, [[c:REXML::Namespace]])
+に属せます。
 
 == Class Methods
 

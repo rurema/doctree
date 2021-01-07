@@ -433,7 +433,7 @@ p sprintf('%<foo>f : %<bar>+d', foo: 1, bar: 2) #=> "1.000000 : +2"
 
  Symbol のインスタンス name をキーとする Hash を引数にした場合、
  対応する値をフォーマットせずに参照します。
- 幅や精度を指定するために使用することができます。
+ 幅や精度を指定するために使用できます。
 #@samplecode
 p sprintf('%{foo}f : %{bar}+d', foo: 1, bar: 2) #=> "1f : 2+d"
 #@end

@@ -129,9 +129,9 @@ File.lstat("testlink").mode.to_s(8)     # => "120744"
 
 @param filename ファイル名を表す文字列を指定します。
 
-@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにできます。
 
-@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにできます。
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
@@ -151,9 +151,9 @@ File.stat("test.txt").uid # => 502
 
 @param filename ファイル名を表す文字列を指定します。
 
-@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにできます。
 
-@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにできます。
 
 @raise NotImplementedError [[man:lchown(2)]] を実装していないシステムでこのメソッドを呼び出すと発生します。
 
@@ -366,7 +366,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
  例えば、foo{a,b,c} は fooa, foob, fooc に展開されそれぞれに対してマッ
  チ判定を行います。
 
- 括弧は入れ子にすることができます。例えば、 {foo,bar{foo,bar}} は foo,
+ 括弧は入れ子にできます。例えば、 {foo,bar{foo,bar}} は foo,
  barfoo, barbar のそれぞれにマッチします。
 //emlist{
   p File.fnmatch('foo{a,b,c}', 'fooa', File::FNM_EXTGLOB)           # => true
@@ -1085,9 +1085,9 @@ File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 所有者の変更に成功した場合は 0 を返します。変更に失敗した場合は
 例外 [[c:Errno::EXXX]] が発生します。
 
-@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにできます。
 
-@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにできます。
 
 @raise IOError 自身が close されている場合に発生します。
 

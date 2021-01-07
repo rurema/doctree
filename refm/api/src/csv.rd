@@ -309,7 +309,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   フィールドの区切り文字列を指定します。この文字列はパースする前にデータの
   エンコーディングに変換されます。
 : :row_sep
-  行区切りの文字列を指定します。:auto という特別な値をセットすることができます。
+  行区切りの文字列を指定します。:auto という特別な値をセットできます。
   :auto を指定した場合データから自動的に行区切りの文字列を見つけ出します。このとき
   データの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
   A sequence will be selected even if it occurs in a quoted field, assuming that you
@@ -422,7 +422,7 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
 するのに便利です。
 
 与えられたブロックに一行ずつ渡されます。ブロックに渡された行は必要であ
-れば変更することができます。ブロックの評価後に行を全て output に書き込
+れば変更できます。ブロックの評価後に行を全て output に書き込
 みます。
 
 @param input [[c:String]] か [[c:IO]] のインスタンスを指定します。
@@ -501,7 +501,7 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 @param path CSV ファイルのパスを指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
-               :encoding というキーを使用すると入出力のエンコーディングを指定することができます。
+               :encoding というキーを使用すると入出力のエンコーディングを指定できます。
                [[m:Encoding.default_external]] と異なるエンコーディングを持つ入力を使用する場合は、
                必ずエンコーディングを指定してください。
 
@@ -510,7 +510,7 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 --- generate(str = "", options = Hash.new){|csv| ... } -> String
 
 このメソッドは与えられた文字列をラップして [[c:CSV]] のオブジェクトとしてブロックに渡します。
-ブロック内で [[c:CSV]] オブジェクトに行を追加することができます。
+ブロック内で [[c:CSV]] オブジェクトに行を追加できます。
 ブロックを評価した結果は文字列を返します。
 
 このメソッドに与えられた文字列は変更されるので、新しい文字列オブジェクトが必要な
@@ -524,7 +524,7 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 #@end
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
-               :encoding というキーを使用すると出力のエンコーディングを指定することができます。
+               :encoding というキーを使用すると出力のエンコーディングを指定できます。
                ASCII と互換性の無い文字エンコーディングを持つ文字列を出力する場合は、このヒントを
                指定する必要があります。
 
@@ -565,7 +565,7 @@ print csv
 @param row 文字列の配列を指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
-               :encoding というキーを使用すると出力のエンコーディングを指定することができます。
+               :encoding というキーを使用すると出力のエンコーディングを指定できます。
                :row_sep というキーの値には [[m:$/]] がセットされます。
 
 #@samplecode 例
@@ -712,7 +712,7 @@ print File.read("test.csv")
 --- parse(str, options = Hash.new){|row| ... } -> nil
 --- parse(str, options = Hash.new) -> Array
 
-このメソッドは文字列を簡単にパースすることができます。
+このメソッドは文字列を簡単にパースできます。
 ブロックを与えた場合は、ブロックにそれぞれの行を渡します。
 ブロックを省略した場合は、配列の配列を返します。
 
@@ -786,7 +786,7 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 @param path CSV ファイルのパスを指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
-               :encoding というキーを使用すると入力のエンコーディングを指定することができます。
+               :encoding というキーを使用すると入力のエンコーディングを指定できます。
                入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
                必ず指定しなければなりません。
 
