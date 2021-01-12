@@ -692,7 +692,7 @@ require 'open-uri'
 require 'json'
 
 construct_url(arguments).
-  yield_self {|url| open(url).read }.
+  yield_self {|url| URI(url).read }.
   yield_self {|response| JSON.parse(response) }
 #@end
 
