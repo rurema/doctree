@@ -150,7 +150,23 @@ self を返します。
   p :foo.id2name.intern == :foo  # => true
   
 @see [[m:String#intern]]
+#@since 3.0
+@see [[m:Symbol#name]]
+--- name -> String
 
+シンボルに対応する文字列を返します。
+
+[[m:Symbol#to_s]]と違って freeze された文字列を返します。
+
+#@samplecode
+p :fred.name         # => "fred"
+p :fred.name.frozen? # => true
+p :fred.to_s         # => "fred"
+p :fred.to_s.frozen? # => false
+#@end
+
+@see [[m:Symbol#to_s]]
+#@end
 --- to_proc -> Proc
 self に対応する Proc オブジェクトを返します。
 
