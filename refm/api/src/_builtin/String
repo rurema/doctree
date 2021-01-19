@@ -1337,7 +1337,7 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 
 @param rs    行末を示す文字列
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n" または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 #@samplecode 例
