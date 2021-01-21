@@ -22,8 +22,13 @@ Fiber に関するエラーが起きると発生します。
 
 ファイバーが終了するとその親にコンテキストが切り替わります。
 
+#@since 3.1
+Ruby 3.1 から fiber を require しなくても、
+コンテキストの切り替えに制限のない [[m:Fiber#transfer]] が使えます。
+#@else
 なお標準添付ライブラリ [[lib:fiber]] を require することにより、
 コンテキストの切り替えに制限のない [[m:Fiber#transfer]] が使えるようになります。
+#@end
 任意のファイバーにコンテキストを切り替えることができます。
 
 === 例外
@@ -98,6 +103,9 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
         from t.rb:5:in `<main>'
 
 == Class Methods
+#@since 3.1
+#@include(Fiber.current)
+#@end
 
 --- new{|obj| ... } -> Fiber
 
@@ -141,6 +149,10 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
  p a  #=> :foo
 
 == Instance Methods
+#@since 3.1
+#@include(Fiber.transfer)
+#@include(Fiber.alive_p)
+#@end
 #@since 2.7.0
 --- raise                                            -> object
 --- raise(message)                                   -> object
