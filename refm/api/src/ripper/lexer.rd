@@ -27,29 +27,7 @@ Ruby プログラム str をトークンに分割し、そのリストを返し�
 @raise SyntaxError raise_errors が true で、src に文法エラーがある場合に発生します。
 #@end
 
-#@since 2.5.0
-#@samplecode 2.7.2 での例
-require 'ripper'
-require 'pp'
-
-pp Ripper.lex("def m(a) nil end")
-# => [[[1, 0], :on_kw, "def", FNAME],
-#     [[1, 3], :on_sp, " ", FNAME],
-#     [[1, 4], :on_ident, "m", ENDFN],
-#     [[1, 5], :on_lparen, "(", BEG|LABEL],
-#     [[1, 6], :on_ident, "a", ARG],
-#     [[1, 7], :on_rparen, ")", ENDFN],
-#     [[1, 8], :on_sp, " ", BEG],
-#     [[1, 9], :on_kw, "nil", END],
-#     [[1, 12], :on_sp, " ", END],
-#     [[1, 13], :on_kw, "end", END]]
-
-#@since 3.0
-Ripper.lex("def req(true) end", raise_errors: true)
-# => SyntaxError (syntax error, unexpected `true', expecting ')')
-#@end
-#@end
-#@else
+#@if ("1.9.0" <= version and version < "2.5.0")
 #@samplecode
 require 'ripper'
 require 'pp'
@@ -65,6 +43,47 @@ pp Ripper.lex("def m(a) nil end")
 #     [[1, 9], :on_kw, "nil"],
 #     [[1, 12], :on_sp, " "],
 #     [[1, 13], :on_kw, "end"]]
+#@end
+#@end
+
+#@if ("2.5.0" <= version and version < "2.7.0")
+#@samplecode
+require 'ripper'
+
+pp Ripper.lex("def m(a) nil end")
+# => [[[1, 0], :on_kw, "def", EXPR_FNAME],
+#     [[1, 3], :on_sp, " ", EXPR_FNAME],
+#     [[1, 4], :on_ident, "m", EXPR_ENDFN],
+#     [[1, 5], :on_lparen, "(", EXPR_BEG|EXPR_LABEL],
+#     [[1, 6], :on_ident, "a", EXPR_ARG],
+#     [[1, 7], :on_rparen, ")", EXPR_ENDFN],
+#     [[1, 8], :on_sp, " ", EXPR_BEG],
+#     [[1, 9], :on_kw, "nil", EXPR_END],
+#     [[1, 12], :on_sp, " ", EXPR_END],
+#     [[1, 13], :on_kw, "end", EXPR_END]]
+#@end
+#@end
+
+#@if (version >= "2.7.0")
+#@samplecode
+require 'ripper'
+
+pp Ripper.lex("def m(a) nil end")
+# => [[[1, 0], :on_kw, "def", FNAME],
+#     [[1, 3], :on_sp, " ", FNAME],
+#     [[1, 4], :on_ident, "m", ENDFN],
+#     [[1, 5], :on_lparen, "(", BEG|LABEL],
+#     [[1, 6], :on_ident, "a", ARG],
+#     [[1, 7], :on_rparen, ")", ENDFN],
+#     [[1, 8], :on_sp, " ", BEG],
+#     [[1, 9], :on_kw, "nil", END],
+#     [[1, 12], :on_sp, " ", END],
+#     [[1, 13], :on_kw, "end", END]]
+#@if (version >= "3.0")
+
+Ripper.lex("def req(true) end", raise_errors: true)
+# => SyntaxError (syntax error, unexpected `true', expecting ')')
+#@end
 #@end
 #@end
 
@@ -109,10 +128,11 @@ Ruby プログラム str をトークンに分割し、そのリストを返し�
 
 #@samplecode
 require 'ripper'
+
 p Ripper.tokenize("def m(a) nil end")
 # => ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
-
 #@since 3.0
+
 Ripper.tokenize("def req(true) end", raise_errors: true)
 # => SyntaxError (syntax error, unexpected `true', expecting ')')
 #@end
