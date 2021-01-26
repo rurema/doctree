@@ -1525,6 +1525,7 @@ h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
 #@samplecode 例
 h = { a: 100, b: 200, c: 300 }
 h.slice(:a)           # => {:a=>100}
+h.slice(:c, :b)       # => {:c=>300, :b=>200}
 h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
 #@end
 
