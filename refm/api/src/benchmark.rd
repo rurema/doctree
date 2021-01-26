@@ -6,13 +6,6 @@ category Development
 
 ベンチマークを取るためのモジュールです。
 
-#@# == Class Methods
-#@# 
-#@# --- times -> Struct::Tms
-#@# 
-#@# [[m:Process.#times]] を呼び出しています。
-
-
 == Module Functions
 
 --- measure(label = "") { ... }  -> Benchmark::Tms

@@ -111,7 +111,11 @@ include Comparable
 @param mon 月
 @param mday 日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@since 2.7.0
+@raise Date::Error 正しくない日付になる組み合わせである場合に発生します。
+#@else
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
+#@end
 
 例:
   require 'date'
@@ -132,7 +136,11 @@ include Comparable
 @param cweek 週
 @param cwday 週の日 (曜日)
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@since 2.7.0
+@raise Date::Error 正しくない日付になる組み合わせである場合に発生します。
+#@else
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
+#@end
 
 --- gregorian_leap? (year) -> bool
 --- leap? (year) -> bool
@@ -227,7 +235,11 @@ include Comparable
 @param year 年
 @param yday 年の日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@since 2.7.0
+@raise Date::Error 正しくない日付になる組み合わせである場合に発生します。
+#@else
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
+#@end
 
 --- _parse(str, complete = true) -> Hash
 このメソッドは [[m:Date.parse]] と似ていますが、日付オブジェクトを生成せずに、
@@ -251,7 +263,11 @@ include Comparable
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@since 2.7.0
+@raise Date::Error 正しくない日付になる組み合わせである場合に発生します。
+#@else
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
+#@end
 
 #@# exp
 --- _rfc2822(str) -> Hash
@@ -357,7 +373,11 @@ include Comparable
 @param str 日付をあらわす文字列
 @param format 書式
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@since 2.7.0
+@raise Date::Error 正しくない日付になる組み合わせである場合に発生します。
+#@else
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
+#@end
 
 --- today(start = Date::ITALY) -> Date
 現在の日付に相当する日付オブジェクトを生成します。

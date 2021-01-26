@@ -6,7 +6,9 @@ include Enumerable
 
 一般的には配列は配列式を使って
 
-  [1, 2, 3]
+#@samplecode 例
+[1, 2, 3]
+#@end
 
 のように生成します。
 
@@ -19,17 +21,16 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
 何らかの理由で変換できないときには nil を返します。
 このメソッドは引数が配列であるかどうかを調べるために使えます。
 
-例:
+#@samplecode 例
+Array.try_convert([1])   # => [1]
+Array.try_convert("1")   # => nil
 
-   Array.try_convert([1])   # => [1]
-   Array.try_convert("1")   # => nil
-
-   if tmp = Array.try_convert(arg)
-     # the argument is an array
-   elsif tmp = String.try_convert(arg)
-     # the argument is a string
-   end
-
+if tmp = Array.try_convert(arg)
+  # the argument is an array
+elsif tmp = String.try_convert(arg)
+  # the argument is a string
+end
+#@end
 #@end
 
 --- [](*item)    -> Array
@@ -41,14 +42,14 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
 
 @param item 配列の要素を指定します。
 
-例:
+#@samplecode 例
+Array[1, 2, 3] #=> [1, 2, 3]
 
-  Array[1, 2, 3] #=> [1, 2, 3]
-  
-  class SubArray < Array
-    # ...
-  end
-  p SubArray[1, 2, 3] # => [1, 2, 3]
+class SubArray < Array
+  # ...
+end
+p SubArray[1, 2, 3] # => [1, 2, 3]
+#@end
 
 --- new(size = 0, val = nil)    -> Array
 
@@ -62,12 +63,12 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
 
 @param val 配列の要素の値を指定します。
 
-例:
-
-    ary = Array.new(3, "foo")
-    p ary                     #=> ["foo", "foo", "foo"]
-    ary[0].capitalize!
-    p ary                     #=> ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
+#@samplecode 例
+ary = Array.new(3, "foo")
+p ary                     #=> ["foo", "foo", "foo"]
+ary[0].capitalize!
+p ary                     #=> ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
+#@end
 
 --- new(ary)    -> Array
 
@@ -76,15 +77,15 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
 
 @param ary 複製したい配列を指定します。
 
-例:
+#@samplecode 例
+p Array.new([1,2,3]) # => [1,2,3]
 
-    p Array.new([1,2,3]) # => [1,2,3]
-
-    a = ["a", "b", "c"]
-    b = Array.new(a)
-    a.each{|s| s.capitalize! }
-    p a                        #=> ["A", "B", "C"]
-    p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
+a = ["a", "b", "c"]
+b = Array.new(a)
+a.each{|s| s.capitalize! }
+p a                        #=> ["A", "B", "C"]
+p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
+#@end
 
 
 --- new(size) {|index| ... }    -> Array
@@ -96,16 +97,17 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
 
 @param size 配列の長さを数値で指定します。
 
-例:
-    ary = Array.new(3){|index| "hoge#{index}"}
-    p ary                      #=> ["hoge0", "hoge1", "hoge2"]
+#@samplecode 例
+ary = Array.new(3){|index| "hoge#{index}"}
+p ary                      #=> ["hoge0", "hoge1", "hoge2"]
+#@end
 
-例:
-
-    ary = Array.new(3){ "foo" }
-    p ary                      #=> ["foo", "foo", "foo"]
-    ary[0].capitalize!
-    p ary                      #=> ["Foo", "foo", "foo"]  (各要素は違うオブジェクトである)
+#@samplecode 例
+ary = Array.new(3){ "foo" }
+p ary                      #=> ["foo", "foo", "foo"]
+ary[0].capitalize!
+p ary                      #=> ["Foo", "foo", "foo"]  (各要素は違うオブジェクトである)
+#@end
 
 == Instance Methods
 
@@ -123,14 +125,14 @@ nth 番目の要素を返します。nth 番目の要素が存在しない時に
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-  a = [ "a", "b", "c", "d", "e" ]
-  a[0]  #=> "a"
-  a[1]  #=> "b"
-  a[-1] #=> "e"
-  a[-2] #=> "d"
-  a[10] #=> nil
+#@samplecode 例
+a = [ "a", "b", "c", "d", "e" ]
+a[0]  #=> "a"
+a[1]  #=> "b"
+a[-1] #=> "e"
+a[-2] #=> "d"
+a[10] #=> nil
+#@end
 
 --- [](range)    -> Array | nil
 
@@ -143,23 +145,23 @@ range の first が end より後にある場合には空の配列を返しま�
              の要素が -1 番目になります。
              end の値が配列の範囲を越える時には、越えた分は無視されます。
 
-例:
+#@samplecode 例
+a = [ "a", "b", "c", "d", "e" ]
+a[0..1]   #=> ["a", "b"]
+a[0...1]  #=> ["a"]
+a[0..-1]  #=> ["a", "b", "c", "d", "e"]
+a[-2..-1] #=> ["d", "e"]
+a[-2..4]  #=> ["d", "e"]  (start は末尾から -2 番目、end は先頭から (4+1) 番目となる。)
+a[0..10]  #=> ["a", "b", "c", "d", "e"]
+a[10..11] #=> nil
+a[2..1]   #=> []
+a[-1..-2] #=> []
 
-  a = [ "a", "b", "c", "d", "e" ]
-  a[0..1]   #=> ["a", "b"]
-  a[0...1]  #=> ["a"]
-  a[0..-1]  #=> ["a", "b", "c", "d", "e"]
-  a[-2..-1] #=> ["d", "e"]
-  a[-2..4]  #=> ["d", "e"]  (start は末尾から -2 番目、end は先頭から (4+1) 番目となる。)
-  a[0..10]  #=> ["a", "b", "c", "d", "e"]
-  a[10..11] #=> nil
-  a[2..1]   #=> []
-  a[-1..-2] #=> []
-  
-  # 特殊なケース。first が自身の長さと同じ場合には以下のようになります。
-  a[5]                   #=> nil
-  a[5, 1]                #=> []
-  a[5..10]               #=> []
+# 特殊なケース。first が自身の長さと同じ場合には以下のようになります。
+a[5]                   #=> nil
+a[5, 1]                #=> []
+a[5..10]               #=> []
+#@end
 
 --- [](start, length)    ->  Array | nil
 
@@ -181,20 +183,20 @@ length が負の時、start が自身の範囲を越えた時には nil を返�
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
+#@samplecode 例
+a = [ "a", "b", "c", "d", "e" ]
+a[0, 1]    #=> ["a"]
+a[-1, 1]   #=> ["e"]
+a[0, 10]   #=> ["a", "b", "c", "d", "e"]
+a[0, 0]    #=> []
+a[0, -1]   #=> nil
+a[10, 1]   #=> nil
 
-  a = [ "a", "b", "c", "d", "e" ]
-  a[0, 1]    #=> ["a"]
-  a[-1, 1]   #=> ["e"]
-  a[0, 10]   #=> ["a", "b", "c", "d", "e"]
-  a[0, 0]    #=> []
-  a[0, -1]   #=> nil
-  a[10, 1]   #=> nil
- 
-  # 特殊なケース。start が自身の長さと同じ場合には以下のようになります。
-  a[5]                   #=> nil
-  a[5, 1]                #=> []
-  a[5..10]               #=> []
+# 特殊なケース。start が自身の長さと同じ場合には以下のようになります。
+a[5]                   #=> nil
+a[5, 1]                #=> []
+a[5..10]               #=> []
+#@end
 
 --- []=(nth, val)
 
@@ -212,43 +214,46 @@ nth 番目の要素を val に設定します。nth が配列の範囲を越え�
 
 @raise IndexError 指定された nth が自身の始点よりも前を指している場合に発生します。
 
-例:
+#@samplecode 例
+a = [0, 1, 2, 3, 4, 5]
+a[0] = "a"
+p a  #=> ["a", 1, 2, 3, 4, 5]
+a[10] = "x"
+p a  #=> ["a", 1, 2, 3, 4, 5, nil, nil, nil, nil, "x"]
 
-  a = [0, 1, 2, 3, 4, 5]
-  a[0] = "a"
-  p a  #=> ["a", 1, 2, 3, 4, 5]
-  a[10] = "x"
-  p a  #=> ["a", 1, 2, 3, 4, 5, nil, nil, nil, nil, "x"]
- 
-  a = [0, 1, 2, 3, 4, 5]
-  a[-100] = 1           #=> IndexError
+a = [0, 1, 2, 3, 4, 5]
+a[-100] = 1           #=> IndexError
+#@end
 
 --- []=(range, val)
 
 [[c:Range]] オブジェクト range の範囲にある要素を配列 val の内容に置換します。
 range の first が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 
-    ary = [0, 1, 2, 3, 4, 5]
-    ary[0..2] = ["a", "b"]
-    p ary  # => ["a", "b", 3, 4, 5]
+#@samplecode 例
+ary = [0, 1, 2, 3, 4, 5]
+ary[0..2] = ["a", "b"]
+p ary  # => ["a", "b", 3, 4, 5]
 
-    ary = [0, 1, 2]
-    ary[5..6] = "x"
-    p ary  # => [0, 1, 2, nil, nil, "x"]
-    
-    ary = [0, 1, 2, 3, 4, 5]
-    ary[1..3] = "x"
-    p ary  # => [0, "x", 4, 5]
+ary = [0, 1, 2]
+ary[5..6] = "x"
+p ary  # => [0, 1, 2, nil, nil, "x"]
+
+ary = [0, 1, 2, 3, 4, 5]
+ary[1..3] = "x"
+p ary  # => [0, "x", 4, 5]
+#@end
 
 @param range 設定したい配列の範囲を [[c:Range]] オブジェクトで指定します。
              range の first や end の値が負の時には末尾からのインデックスと見倣します。
              末尾の要素が -1 番目になります。
              range の first が end より後にある場合には first の直前に val を挿入します。
-//emlist{
-    ary = [0, 1, 2, 3, 4, 5]
-    ary[2..0] = ["a", "b", "c"]
-    p ary   # => [0, 1, "a", "b", "c", 2, 3, 4, 5]
-//}
+
+#@samplecode 例
+ary = [0, 1, 2, 3, 4, 5]
+ary[2..0] = ["a", "b", "c"]
+p ary   # => [0, 1, "a", "b", "c", 2, 3, 4, 5]
+#@end
 
 @param val range の範囲に設定したい要素を配列で指定します。
            配列以外のオブジェクトを指定した場合は to_ary メソッドによる
@@ -260,34 +265,38 @@ range の first が自身の末尾を越える時には配列の長さを自動�
 #@else
            val が nil か 空の配列 [] なら start から end までの要素が削除されます。
 #@end
-//emlist{
-    ary = [0, 1, 2, 3, 4, 5]
-    ary[2..4] = []
-    p ary   # => [0, 1, 5]
-//}
+
+#@samplecode 例
+ary = [0, 1, 2, 3, 4, 5]
+ary[2..4] = []
+p ary   # => [0, 1, 5]
+#@end
+
 @raise RangeError 指定された範囲の始点が自身の始点よりも前にある場合に発生します。
 
-例:
-
-  a = [0, 1, 2, 3, 4, 5]
-  a[-10..10] = 1        #=> RangeError
+#@samplecode 例
+a = [0, 1, 2, 3, 4, 5]
+a[-10..10] = 1        #=> RangeError
+#@end
 
 --- []=(start, length, val)
 
 インデックス start から length 個の要素を配列 val の内容で置き換えます。
 start が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 
-  ary = [0, 1, 2, 3]
-  ary[1, 2] = ["a", "b", "c", "d"]
-  p ary                        #=> [0, "a", "b", "c", "d", 3]
-  
-  ary = [0, 1, 2]
-  ary[5, 1] = "Z"
-  p ary                        #=> [0, 1, 2, nil, nil, "Z"]
-    
-  ary = [0, 1, 2, 3]
-  ary[0, 10] = ["a"]
-  p ary                        #=> ["a"]
+#@samplecode 例
+ary = [0, 1, 2, 3]
+ary[1, 2] = ["a", "b", "c", "d"]
+p ary                        #=> [0, "a", "b", "c", "d", 3]
+
+ary = [0, 1, 2]
+ary[5, 1] = "Z"
+p ary                        #=> [0, 1, 2, nil, nil, "Z"]
+
+ary = [0, 1, 2, 3]
+ary[0, 10] = ["a"]
+p ary                        #=> ["a"]
+#@end
 
 @param start 置き換えたい範囲の先頭のインデックスを指定します。
              start の値が負の時には末尾からのインデックスと見倣します。
@@ -299,11 +308,12 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
               length の値が 0 のときは start の直前に val を挿入します。
               整数以外のオブジェクトを指定した場合は to_int メソッドに
               よる暗黙の型変換を試みます。
-//emlist{
-    ary = [0, 1, 2, 3]
-    ary[1, 0] = ["inserted"]
-    p ary                        # => [0, "inserted", 1, 2, 3]
-//}
+
+#@samplecode 例
+ary = [0, 1, 2, 3]
+ary[1, 0] = ["inserted"]
+p ary                        # => [0, "inserted", 1, 2, 3]
+#@end
 
 @param val 設定したい要素を配列で指定します。
            配列以外のオブジェクトを指定した場合は to_ary メソッドによる
@@ -315,11 +325,12 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
 #@else
            val が nil か 空の配列 [] なら start から end までの要素が削除されます。
 #@end
-//emlist{
-    a = [0, 1, 2, 3, 4, 5]
-    a[2, 3] = []
-    p a   # => [0, 1, 5]
-//}
+
+#@samplecode 例
+a = [0, 1, 2, 3, 4, 5]
+a[2, 3] = []
+p a   # => [0, 1, 5]
+#@end
 
 @raise TypeError 引数 start、length に整数以外の(暗黙の型変換が行えな
                  い)オブジェクトを指定した場合に発生します。
@@ -342,11 +353,13 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
 @raise TypeError 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-    a = [1, 2]
-    b = [8, 9]
-    p a + b     #=> [1, 2, 8, 9]
-    p a         #=> [1, 2]        (変化なし)
-    p b         #=> [8, 9]        (こちらも変化なし)
+#@samplecode 例
+a = [1, 2]
+b = [8, 9]
+p a + b     #=> [1, 2, 8, 9]
+p a         #=> [1, 2]        (変化なし)
+p b         #=> [8, 9]        (こちらも変化なし)
+#@end
 
 --- *(times)    -> Array
 
@@ -362,7 +375,9 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
 
 @raise ArgumentError 引数に負の数を指定した場合に発生します。
 
-    p [1, 2, 3] * 3  #=> [1, 2, 3, 1, 2, 3, 1, 2, 3]
+#@samplecode 例
+p [1, 2, 3] * 3  #=> [1, 2, 3, 1, 2, 3, 1, 2, 3]
+#@end
 
 --- *(sep)    -> String
 
@@ -372,8 +387,10 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
            文字列以外のオブジェクトを指定した場合は to_str メソッドによ
            る暗黙の型変換を試みます。
 
-    p [1,2,3] * ","
-    # => "1,2,3"
+#@samplecode 例
+p [1,2,3] * ","
+# => "1,2,3"
+#@end
 
 @see [[m:Array#join]]
 
@@ -391,9 +408,11 @@ self 中で重複していて、other中に存在していなかった要素は�
 @raise TypeError 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-    [1, 2, 1, 3, 1, 4] - [4, 2]    # => [1, 1, 3, 1]
+#@samplecode 例
+[1, 2, 1, 3, 1, 4] - [4, 2]    # => [1, 1, 3, 1]
 
-    [1, 2, 1, 3, 1, 4] - [1, 4]    # => [2, 3]
+[1, 2, 1, 3, 1, 4] - [1, 4]    # => [2, 3]
+#@end
 
 #@since 2.6.0
 
@@ -406,7 +425,7 @@ self 中で重複していて、other中に存在していなかった要素は�
 self 中で重複していて、other_arrays中に存在していなかった要素は、その重複が保持されます。
 新しい配列における要素の順は self における要素の順と同じです。
 
-#@samplecode
+#@samplecode 例
 [ 1, 1, 2, 2, 3, 3, 4, 5 ].difference([ 1, 2, 4 ])       # => [ 3, 3, 5 ]
 [ 1, 'c', :s, 'yep' ].difference([ 1 ], [ 'a', 'c' ])    # => [:s, "yep"]
 #@end
@@ -431,7 +450,9 @@ self 中で重複していて、other_arrays中に存在していなかった要
 @raise TypeError 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-  [1, 1, 2, 3] & [3, 1, 4] #=> [1, 3]
+#@samplecode 例
+[1, 1, 2, 3] & [3, 1, 4] #=> [1, 3]
+#@end
 
 #@since 2.7.0
 @see [[m:Array#|]], [[m:Array#intersection]]
@@ -455,7 +476,9 @@ self 中で重複していて、other_arrays中に存在していなかった要
 @raise TypeError 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-  [1, 1, 4, 2, 3] | [5, 4, 5]  #=> [1, 4, 2, 3, 5]
+#@samplecode 例
+[1, 1, 4, 2, 3] | [5, 4, 5]  #=> [1, 4, 2, 3, 5]
+#@end
 
 @see [[m:Array#&]]
 #@since 2.6.0
@@ -470,7 +493,7 @@ self 中で重複していて、other_arrays中に存在していなかった要
 
 @param other_arrays 0個以上の配列を指定します。
 
-#@samplecode
+#@samplecode 例
 ["a", "b", "c"].union([ "c", "d", "a" ])    #=> ["a", "b", "c", "d"]
 ["a"].union(["e", "b"], ["a", "c", "b"])    #=> ["a", "e", "b", "c"]
 ["a"].union # => ["a"]
@@ -482,16 +505,20 @@ self 中で重複していて、other_arrays中に存在していなかった要
 
 指定された obj を自身の末尾に破壊的に追加します。
 
-  ary = [1]
-  ary << 2
-  p ary      # [1, 2]
+#@samplecode 例
+ary = [1]
+ary << 2
+p ary      # [1, 2]
+#@end
 
 またこのメソッドは self を返すので、以下のように連続して
 書くことができます。
 
-  ary = [1]
-  ary << 2 << 3 << 4
-  p ary   #=> [1, 2, 3, 4]
+#@samplecode 例
+ary = [1]
+ary << 2 << 3 << 4
+p ary   #=> [1, 2, 3, 4]
+#@end
 
 @param obj 自身に加えたいオブジェクトを指定します。[[m:Array#push]] と違って引数は一つしか指定できません。
 
@@ -520,9 +547,11 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
                  指定した場合に発生します。
 #@end
 
-  [ 1, 2, 3 ] <=> [ 1, 3, 2 ]       #=> -1
-  [ 1, 2, 3 ] <=> [ 1, 2, 3 ]       #=> 0
-  [ 1, 2, 3 ] <=> [ 1, 2 ]          #=> 1
+#@samplecode 例
+[ 1, 2, 3 ] <=> [ 1, 3, 2 ]       #=> -1
+[ 1, 2, 3 ] <=> [ 1, 2, 3 ]       #=> 0
+[ 1, 2, 3 ] <=> [ 1, 2 ]          #=> 1
+#@end
 
 --- ==(other)    -> bool
 
@@ -533,9 +562,70 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
 
 @see [[m:Object#==]]
 
-  [ "a", "c" ]    == [ "a", "c", 7 ]     #=> false
-  [ "a", "c", 7 ] == [ "a", "c", 7 ]     #=> true
-  [ "a", "c", 7 ] == [ "a", "d", "f" ]   #=> false
+#@samplecode 例
+[ "a", "c" ]    == [ "a", "c", 7 ]     #=> false
+[ "a", "c", 7 ] == [ "a", "c", 7 ]     #=> true
+[ "a", "c", 7 ] == [ "a", "d", "f" ]   #=> false
+#@end
+
+#@since 2.6.0
+--- all?               -> bool
+--- all? {|item| ... } -> bool
+--- all?(pattern)      -> bool
+
+すべての要素が真である場合に true を返します。
+偽である要素があれば、ただちに false を返します。
+
+ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
+が真である場合に true を返します。ブロックが偽を返した時点で、
+ただちに false を返します。
+
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+
+#@samplecode 例
+# すべて正の数か？
+p [5,  6, 7].all? {|v| v > 0 }   # => true
+p [5, -1, 7].all? {|v| v > 0 }   # => false
+p [].all? {|v| v > 0 }           # => true
+p %w[ant bear cat].all?(/t/)     # => false
+#@end
+
+@see [[m:Enumerable#all?]]
+#@end
+
+#@since 2.2.0
+--- any?               -> bool
+--- any? {|item| ... } -> bool
+#@since 2.5.0
+--- any?(pattern)      -> bool
+#@end
+
+すべての要素が偽である場合に false を返します。
+真である要素があれば、ただちに true を返します。
+
+ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
+が偽である場合に false を返します。ブロックが真を返した時点
+で、ただちに true を返します。
+
+#@since 2.5.0
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+#@end
+
+#@samplecode 例
+p [1, 2, 3].any? {|v| v > 3 }   # => false
+p [1, 2, 3].any? {|v| v > 1 }   # => true
+p [].any? {|v| v > 0 }          # => false
+#@since 2.5.0
+p %w[ant bear cat].any?(/d/)    # => false
+p [nil, true, 99].any?(Integer) # => true
+p [nil, true, 99].any?          # => true
+p [].any?                       # => false
+#@end
+#@end
+
+@see [[m:Enumerable#any?]]
+
+#@end
 
 --- assoc(key)    -> Array | nil
 
@@ -544,10 +634,12 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
 
 @param key 検索するオブジェクトを指定します。
 
-    ary = [[1,15], [2,25], [3,35]]
-    p ary.assoc(2)           # => [2, 25]
-    p ary.assoc(100)         # => nil
-    p ary.assoc(15)          # => nil
+#@samplecode 例
+ary = [[1,15], [2,25], [3,35]]
+p ary.assoc(2)           # => [2, 25]
+p ary.assoc(100)         # => nil
+p ary.assoc(15)          # => nil
+#@end
 
 @see [[m:Array#rassoc]]
 
@@ -555,9 +647,11 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
 
 配列の要素をすべて削除して空にします。
 
-    ary = [1, 2]
-    ary.clear
-    p ary     #=> []
+#@samplecode 例
+ary = [1, 2]
+ary.clear
+p ary     #=> []
+#@end
 
 --- clone    -> Array
 --- dup      -> Array
@@ -569,14 +663,37 @@ dup は内容だけをコピーします。
 またどちらのメソッドも要素それ自体のコピーはしません。
 つまり「浅い(shallow)」コピーを行います。
 
-    ary = ['string']
-    p ary             #=> ["string"]
-    copy = ary.dup
-    p copy            #=> ["string"]
+#@samplecode 例
+ary = ['string']
+p ary             #=> ["string"]
+copy = ary.dup
+p copy            #=> ["string"]
 
-    ary[0][0...3] = ''
-    p ary             #=> ["ing"]
-    p copy            #=> ["ing"]
+ary[0][0...3] = ''
+p ary             #=> ["ing"]
+p copy            #=> ["ing"]
+#@end
+
+--- collect  -> Enumerator
+--- map      -> Enumerator
+--- collect {|item| ... } -> [object]
+--- map {|item| ... }     -> [object]
+
+各要素に対してブロックを評価した結果を全て含む配列を返します。
+
+ブロックを省略した場合、上で説明した繰り返しを実行し、その結果として
+得られる配列を返すような [[c:Enumerator]] オブジェクトを返します。
+
+#@samplecode 例
+# すべて 3 倍にする
+p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
+#@end
+
+#@since 2.6.0
+@see [[m:Hash#to_h]], [[m:Enumerable#collect]], [[m:Enumerable#map]]
+#@else
+@see [[m:Enumerable#collect]], [[m:Enumerable#map]]
+#@end
 
 --- collect! {|item| ..}    -> self
 --- map! {|item| ..}        -> self
@@ -598,21 +715,21 @@ dup は内容だけをコピーします。
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 
-例:
+#@samplecode 例
+ary = [1, 2, 3]
+ary.map! {|i| i * 3 }
+p ary   #=> [3, 6, 9]
 
-    ary = [1, 2, 3]
-    ary.map! {|i| i * 3 }
-    p ary   #=> [3, 6, 9]
-
-    ary = [1, 2, 3]
-    e = ary.map!
-    e.each{ 1 }
-    p ary           #=> [1, 1, 1]
+ary = [1, 2, 3]
+e = ary.map!
+e.each{ 1 }
+p ary           #=> [1, 1, 1]
+#@end
 
 #@since 1.9.1
-@see [[m:Enumerable#collect]], [[c:Enumerator]]
+@see [[m:Array#collect]],  [[c:Enumerator]]
 #@else
-@see [[m:Enumerable#collect]], [[c:Enumerable::Enumerator]]
+@see [[m:Array#collect]], [[c:Enumerable::Enumerator]]
 #@end
 
 --- compact     -> Array
@@ -622,12 +739,14 @@ compact は自身から nil を取り除いた配列を生成して返します�
 compact! は自身から破壊的に nil を取り除き、変更が
 行われた場合は self を、そうでなければ nil を返します。
 
-    ary = [1, nil, 2, nil, 3, nil]
-    p ary.compact   #=> [1, 2, 3]
-    p ary           #=> [1, nil, 2, nil, 3, nil]
-    ary.compact!
-    p ary           #=> [1, 2, 3]
-    p ary.compact!  #=> nil
+#@samplecode 例
+ary = [1, nil, 2, nil, 3, nil]
+p ary.compact   #=> [1, 2, 3]
+p ary           #=> [1, nil, 2, nil, 3, nil]
+ary.compact!
+p ary           #=> [1, 2, 3]
+p ary.compact!  #=> nil
+#@end
 
 --- concat(other)    -> self
 
@@ -635,11 +754,13 @@ compact! は自身から破壊的に nil を取り除き、変更が
 
 @param other 自身と連結したい配列を指定します。
 
-    array = [1, 2]
-    a     = [3, 4]
-    array.concat a
-    p array          # => [1, 2, 3, 4]
-    p a              # => [3, 4]       # こちらは変わらない
+#@samplecode 例
+array = [1, 2]
+a     = [3, 4]
+array.concat a
+p array          # => [1, 2, 3, 4]
+p a              # => [3, 4]       # こちらは変わらない
+#@end
 
 #@since 2.4.0
 --- concat(*other_arrays)    -> self
@@ -648,19 +769,46 @@ other_arrays の要素を自身の末尾に破壊的に連結します。
 
 @param other_arrays 自身と連結したい配列を指定します。
 
-    [ "a", "b" ].concat( ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
-    [ "a" ].concat( ["b"], ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
-    [ "a" ].concat #=> [ "a" ]
+#@samplecode 例
+[ "a", "b" ].concat( ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
+[ "a" ].concat( ["b"], ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
+[ "a" ].concat #=> [ "a" ]
 
-    a = [ 1, 2, 3 ]
-    a.concat( [ 4, 5 ] )
-    a                                 #=> [ 1, 2, 3, 4, 5 ]
+a = [ 1, 2, 3 ]
+a.concat( [ 4, 5 ] )
+a                                 #=> [ 1, 2, 3, 4, 5 ]
 
-    a = [ 1, 2 ]
-    a.concat(a, a)                    #=> [1, 2, 1, 2, 1, 2]
+a = [ 1, 2 ]
+a.concat(a, a)                    #=> [1, 2, 1, 2, 1, 2]
+#@end
 
 @see [[m:Array#+]]
 #@end
+
+--- count                   -> Integer
+--- count(item)             -> Integer
+--- count {|obj| ... }  -> Integer
+
+レシーバの要素数を返します。
+
+引数を指定しない場合は、配列の要素数を返します。
+
+引数を一つ指定した場合は、レシーバの要素のうち引数に一致するものの
+個数をカウントして返します(一致は == で判定します)。
+
+ブロックを指定した場合は、ブロックを評価して真になった要素の個数を
+カウントして返します。
+
+@param item カウント対象となる値。
+
+#@samplecode 例
+ary = [1, 2, 4, 2]
+ary.count             # => 4
+ary.count(2)          # => 2
+ary.count{|x|x%2==0}  # => 3
+#@end
+
+@see [[m:Enumerable#count]]
 
 --- delete(val)           -> object | nil
 --- delete(val) { ... }   -> object
@@ -678,16 +826,18 @@ other_arrays の要素を自身の末尾に破壊的に連結します。
 
 @param val 自身から削除したい値を指定します。
 
-    array = [1, 2, 3, 2, 1]
-    p array.delete(2)       #=> 2
-    p array                 #=> [1, 3, 1]
+#@samplecode 例
+array = [1, 2, 3, 2, 1]
+p array.delete(2)       #=> 2
+p array                 #=> [1, 3, 1]
 
-    # ブロックなしの引数に nil を渡すとその戻り値から削除が
-    # 行われたかどうかの判定をすることはできない
-    ary = [nil,nil,nil]
-    p ary.delete(nil)       #=> nil
-    p ary                   #=> []
-    p ary.delete(nil)       #=> nil
+# ブロックなしの引数に nil を渡すとその戻り値から削除が
+# 行われたかどうかの判定をすることはできない
+ary = [nil,nil,nil]
+p ary.delete(nil)       #=> nil
+p ary                   #=> []
+p ary.delete(nil)       #=> nil
+#@end
 
 --- delete_at(pos)    -> object | nil
 
@@ -704,9 +854,11 @@ pos が範囲外であったら nil を返します。
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-    array = [0, 1, 2, 3, 4]
-    array.delete_at 2
-    p array             #=> [0, 1, 3, 4]
+#@samplecode 例
+array = [0, 1, 2, 3, 4]
+array.delete_at 2
+p array             #=> [0, 1, 3, 4]
+#@end
 
 --- delete_if {|x| ... }    -> self
 --- reject! {|x| ... }      -> self | nil
@@ -731,15 +883,43 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 返された Enumerator オブジェクトの each メソッドには、
 もとの配列に対して副作用があることに注意してください。
 
-例:
-  a = [0, 1, 2, 3, 4, 5]
-  a.delete_if{|x| x % 2 == 0}
-  p a #=> [1, 3, 5]
+#@samplecode 例
+a = [0, 1, 2, 3, 4, 5]
+a.delete_if{|x| x % 2 == 0}
+p a #=> [1, 3, 5]
 
-  a = [0, 1, 2, 3, 4, 5]
-  e = a.reject!
-  e.each{|i| i % 2 == 0}
-  p a                    #=> [1, 3, 5]  もとの配列から削除されていることに注意。
+a = [0, 1, 2, 3, 4, 5]
+e = a.reject!
+e.each{|i| i % 2 == 0}
+p a                    #=> [1, 3, 5]  もとの配列から削除されていることに注意。
+#@end
+
+--- drop(n)               -> Array
+
+配列の先頭の n 要素を捨てて、
+残りの要素を配列として返します。
+
+@param n 捨てる要素数。
+
+#@samplecode 例
+a = [1, 2, 3, 4, 5, 0]
+a.drop(3)             # => [4, 5, 0]
+#@end
+
+@see [[m:Enumerable#drop]]
+
+--- drop_while                    -> Enumerator
+--- drop_while {|element| ... }   -> Array
+
+ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
+残りの要素を配列として返します。
+
+ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
+
+#@samplecode 例
+a = [1, 2, 3, 4, 5, 0]
+a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
+#@end
 
 --- each {|item| .... }    -> self
 #@since 1.9.1
@@ -757,12 +937,14 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 
-    [1, 2, 3].each do |i|
-      puts i
-    end
-    #=> 1
-        2
-        3
+#@samplecode 例
+[1, 2, 3].each do |i|
+  puts i
+end
+#=> 1
+#   2
+#   3
+#@end
 
 #@#
 #@#each により(また、標準のメソッドで)複数の値を取得しながら繰り返す
@@ -811,7 +993,11 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 
 以下と同じです。
 
-    (0 ... ary.size).each {|index| ....  }
+#@samplecode 例
+(0 ... ary.size).each do |index|
+  # ....
+end
+#@end
 
 ブロックが与えられなかった場合は、自身と each_index から生成した
 #@since 1.9.1
@@ -826,8 +1012,10 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 
 自身の要素の数が 0 の時に真を返します。そうでない場合に false を返します。
 
-  p [].empty?         #=> true
-  p [1, 2, 3].empty?  #=> false
+#@samplecode 例
+p [].empty?         #=> true
+p [1, 2, 3].empty?  #=> false
+#@end
 
 --- eql?(other)    -> bool
 
@@ -837,9 +1025,11 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 
 @param other 自身と比較したい配列を指定します。
 
-  ["a", "b", "c"].eql? ["a", "b", "c"]      #=> true
-  ["a", "b", "c"].eql? ["a", "c", "b"]      #=> false
-  ["a", "b", 1].eql?   ["a", "b", 1.0]      #=> false (1.eql?(1.0) が false なので)
+#@samplecode 例
+["a", "b", "c"].eql? ["a", "b", "c"]      #=> true
+["a", "b", "c"].eql? ["a", "c", "b"]      #=> false
+["a", "b", 1].eql?   ["a", "b", 1.0]      #=> false (1.eql?(1.0) が false なので)
+#@end
 
 @see [[m:Object#eql?]]
 
@@ -866,22 +1056,22 @@ nth 番目の要素を返します。
 @raise IndexError 引数 ifnone もブロックも指定しておらず、 nth 番目の要
                   素も存在しなかった場合に発生します。
 
-例:
+#@samplecode 例
+a = [1, 2, 3, 4, 5]
+begin
+  p a.fetch(10)
+rescue IndexError => err
+  puts err #=> index 10 out of array
+end
 
-  a = [1, 2, 3, 4, 5]
-  begin
-    p a.fetch(10)
-  rescue IndexError => err
-    puts err #=> index 10 out of array
-  end
-  
-  p a.fetch(10, 999) #=> 999
-  
-  result = a.fetch(10){|nth|
-    print "#{nth} はありません。\n"
-    999
-  }
-  p result #=> 999
+p a.fetch(10, 999) #=> 999
+
+result = a.fetch(10){|nth|
+  print "#{nth} はありません。\n"
+  999
+}
+p result #=> 999
+#@end
 
 --- fill(val)            -> self
 --- fill {|index| ... }  -> self
@@ -894,15 +1084,17 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 
 @param val 自身にセットしたいオブジェクトを指定します。
 
-  a = [0, 1, 2, 3, 4]
-  a.fill(10)
-  p a #=> [10, 10, 10, 10, 10]
-  
-  a = [0, 1, 2, 3, 4]
-  a.fill("a")
-  p a #=> ["a", "a", "a", "a", "a"]
-  a[0].capitalize!
-  p a #=> ["A", "A", "A", "A", "A"]
+#@samplecode 例
+a = [0, 1, 2, 3, 4]
+a.fill(10)
+p a #=> [10, 10, 10, 10, 10]
+
+a = [0, 1, 2, 3, 4]
+a.fill("a")
+p a #=> ["a", "a", "a", "a", "a"]
+a[0].capitalize!
+p a #=> ["A", "A", "A", "A", "A"]
+#@end
 
 --- fill(val, start, length = nil)             -> self
 --- fill(val, range)                     -> self
@@ -914,20 +1106,24 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 範囲の始点が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 範囲の終点が自身の末尾を越える時は長さを自動的に拡張し、拡張した部分を val で初期化します。
 このメソッドが val のコピーでなく val 自身をセットすることに注意してください。
-  a = [0, 1, 2]
-  a.fill("x", 5..10)
-  p a #=> [0, 1, 2, nil, nil, "x", "x", "x", "x", "x", "x"]
+#@samplecode 例
+a = [0, 1, 2]
+a.fill("x", 5..10)
+p a #=> [0, 1, 2, nil, nil, "x", "x", "x", "x", "x", "x"]
+#@end
 
 val の代わりにブロックを指定するとブロックの評価結果を値とし
 ます。ブロックは要素毎に実行されるので、セットする値のそれぞれをあ
 るオブジェクトの複製にすることができます。
 ブロックのパラメータには start からのインデックスが渡されます。
 
-    ary = []
-    p ary.fill(1..2) {|i| i}         # => [nil, 1, 2]
-    p ary.fill(0,3) {|i| i}          # => [0, 1, 2]
-    p ary.fill { "foo" }             # => ["foo", "foo", "foo"]
-    p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
+#@samplecode 例
+ary = []
+p ary.fill(1..2) {|i| i}         # => [nil, 1, 2]
+p ary.fill(0,3) {|i| i}          # => [0, 1, 2]
+p ary.fill { "foo" }             # => ["foo", "foo", "foo"]
+p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
+#@end
 
 @param val 自身に設定したいオブジェクトを指定します。
 
@@ -952,8 +1148,10 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 
 配列の先頭の要素を返します。要素がなければ nil を返します。
 
-    p [0, 1, 2].first   #=> 0
-    p [].first          #=> nil
+#@samplecode 例
+p [0, 1, 2].first   #=> 0
+p [].first          #=> nil
+#@end
 
 @see [[m:Array#last]]
 
@@ -970,17 +1168,19 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 
 @raise ArgumentError n が負値の場合発生します。
 
-    ary =  [0, 1, 2]
-    p ary.first(0)
-    p ary.first(1)
-    p ary.first(2)
-    p ary.first(3)
-    p ary.first(4)
-    # => []
-         [0]
-         [0, 1]
-         [0, 1, 2]
-         [0, 1, 2]
+#@samplecode 例
+ary =  [0, 1, 2]
+p ary.first(0)
+p ary.first(1)
+p ary.first(2)
+p ary.first(3)
+p ary.first(4)
+# => []
+#    [0]
+#    [0, 1]
+#    [0, 1, 2]
+#    [0, 1, 2]
+#@end
 
 @see [[m:Array#last]]
 
@@ -1002,35 +1202,39 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 
 @raise ArgumentError 配列要素が自身を含むような無限にネストした配列に対して flatten を呼んだ場合に発生します。
 
-    # 自身を再帰的に平坦化する例。
-    a = [1, [2, 3, [4], 5]]
-    p a.flatten                     #=> [1, 2, 3, 4, 5]
-    p a                             #=> [1, [2, 3, [4], 5]]
+#@samplecode 例
+# 自身を再帰的に平坦化する例。
+a = [1, [2, 3, [4], 5]]
+p a.flatten                     #=> [1, 2, 3, 4, 5]
+p a                             #=> [1, [2, 3, [4], 5]]
 
-    # 自身を破壊的に平坦化する例。
-    a = [[[1, [2, 3]]]]
-    p a.flatten!                    #=> [1, 2, 3]
-    p a                             #=> [1, 2, 3]
+# 自身を破壊的に平坦化する例。
+a = [[[1, [2, 3]]]]
+p a.flatten!                    #=> [1, 2, 3]
+p a                             #=> [1, 2, 3]
 
-    # 平坦化が行われない場合は nil を返す。
-    p [1, 2, 3].flatten!            #=> nil
- 
-    # 平坦化の再帰の深さを指定する例。
-    a = [ 1, 2, [3, [4, 5] ] ]
-    a.flatten(1)              #=> [1, 2, 3, [4, 5]]
+# 平坦化が行われない場合は nil を返す。
+p [1, 2, 3].flatten!            #=> nil
+
+# 平坦化の再帰の深さを指定する例。
+a = [ 1, 2, [3, [4, 5] ] ]
+a.flatten(1)              #=> [1, 2, 3, [4, 5]]
+#@end
 
 --- hash    -> Integer
 
 自身のハッシュ値を整数で返します。ハッシュ値は自身の各要素のハッシュ値から
 計算されます。[[m:Array#eql?]] で比較して等しい配列同士は同じハッシュ値を返します。
 
-  a = ["a", "b", 1]
-  a.hash                #=>  321
-  b = a.dup
-  b.hash                #=>  321
-  
-  ["a", 1, "b"].hash    #=>  491
-  ["a", 1.0, "b"].hash  #=>  466227
+#@samplecode 例
+a = ["a", "b", 1]
+a.hash                #=>  321
+b = a.dup
+b.hash                #=>  321
+
+["a", 1, "b"].hash    #=>  491
+["a", 1.0, "b"].hash  #=>  466227
+#@end
 
 --- include?(val)    -> bool
 
@@ -1038,9 +1242,11 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 
 @param val オブジェクトを指定します。
 
-   a = [ "a", "b", "c" ]
-   a.include?("b")       #=> true
-   a.include?("z")       #=> false
+#@samplecode 例
+a = [ "a", "b", "c" ]
+a.include?("b")       #=> true
+a.include?("z")       #=> false
+#@end
 
 --- find_index(val)          -> Integer | nil
 --- index(val)               -> Integer | nil
@@ -1061,15 +1267,19 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 指定された val と == で等しい最初の要素の位置を返します。
 等しい要素がひとつもなかった場合は nil を返します。
 
-    p [1, 0, 0, 1, 0].index(1)   #=> 0
-    p [1, 0, 0, 0, 0].index(1)   #=> 0
-    p [0, 0, 0, 0, 0].index(1)   #=> nil
+#@samplecode 例
+p [1, 0, 0, 1, 0].index(1)   #=> 0
+p [1, 0, 0, 0, 0].index(1)   #=> 0
+p [0, 0, 0, 0, 0].index(1)   #=> nil
+#@end
 
 ブロックが与えられた場合には、各要素を引数として順にブロックを実行し、
 ブロックが真を返した最初の要素の位置を返します。
 一つも真にならなかった場合は nil を返します。
 
-    p [0, 1, 0, 1, 0].index {|v| v > 0}   #=> 1
+#@samplecode 例
+p [0, 1, 0, 1, 0].index {|v| v > 0}   #=> 1
+#@end
 
 
 引数、ブロックのどちらも与えられなかった場合は、
@@ -1089,16 +1299,18 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
 @param idx インデックスを整数で任意個指定します。
 
-  a = [[1, [2, 3]]]
+#@samplecode 例
+a = [[1, [2, 3]]]
 
-  a.dig(0, 1, 1)                 # => 3
-  a.dig(1, 2, 3)                 # => nil
+a.dig(0, 1, 1)                 # => 3
+a.dig(1, 2, 3)                 # => nil
 #@since 2.4.0
-  a.dig(0, 0, 0)                 # => TypeError: Integer does not have #dig method
+a.dig(0, 0, 0)                 # => TypeError: Integer does not have #dig method
 #@else
-  a.dig(0, 0, 0)                 # => TypeError: Fixnum does not have #dig method
+a.dig(0, 0, 0)                 # => TypeError: Fixnum does not have #dig method
 #@end
-  [42, {foo: :bar}].dig(1, :foo) # => :bar
+[42, {foo: :bar}].dig(1, :foo) # => :bar
+#@end
 
 @see [[m:Hash#dig]], [[m:Struct#dig]], [[m:OpenStruct#dig]]
 #@end
@@ -1117,11 +1329,13 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-    ary = [1, 2, 3]
-    ary.insert(2, "a", "b")
-    p ary                  # => [1, 2, "a", "b", 3]
-    ary.insert(-2, "X")
-    p ary                  # => [1, 2, "a", "b", "X", 3]
+#@samplecode 例
+ary = [1, 2, 3]
+ary.insert(2, "a", "b")
+p ary                  # => [1, 2, "a", "b", 3]
+ary.insert(-2, "X")
+p ary                  # => [1, 2, "a", "b", "X", 3]
+#@end
 
 #@since 2.7.0
 --- intersection(*other_arrays) -> Array
@@ -1139,7 +1353,7 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
 intersectionは[[m:Object#hash]]と[[m:Object#eql?]]を使って比較を行います。
 
-#@samplecode
+#@samplecode 例
 [1, 1, 3, 5].intersection([3, 2, 1])                  # => [1, 3]
 ["a", "b", "z"].intersection(["a", "b", "c"], ["b"])  # => ["b"]
 ["a"].intersection                                    # => ["a"]
@@ -1163,15 +1377,19 @@ join した文字列を連結します。
 のような結果になります。
 
 #@since 1.9.2
-    ary = [1,2,3]
-    ary.push ary
-    p ary           # => [1, 2, 3, [...]]
-    p ary.join      # => ArgumentError: recursive array join
+#@samplecode 例
+ary = [1,2,3]
+ary.push ary
+p ary           # => [1, 2, 3, [...]]
+p ary.join      # => ArgumentError: recursive array join
+#@end
 #@else
-    ary = [1,2,3]
-    ary.push ary
-    p ary           # => [1, 2, 3, [...]]
-    p ary.join      # => "123123[...]"
+#@samplecode 例
+ary = [1,2,3]
+ary.push ary
+p ary           # => [1, 2, 3, [...]]
+p ary.join      # => "123123[...]"
+#@end
 #@end
 
 @param sep 間に挟む文字列を指定します。nil のときは空文字列を使います。
@@ -1186,7 +1404,9 @@ join した文字列を連結します。
                      して join を呼んだ場合に発生します。
 #@end
 
-  [1, 2, 3].join('-') #=> "1-2-3"
+#@samplecode 例
+[1, 2, 3].join('-') #=> "1-2-3"
+#@end
 
 @see [[m:Array#*]], [[m:$,]]
 
@@ -1194,8 +1414,10 @@ join した文字列を連結します。
 
 配列の末尾の要素を返します。配列が空のときは nil を返します。
 
-    p [0, 1, 2].last   #=> 2
-    p [].last          #=> nil
+#@samplecode 例
+p [0, 1, 2].last   #=> 2
+p [].last          #=> nil
+#@end
 
 @see [[m:Array#first]]
 
@@ -1212,17 +1434,19 @@ join した文字列を連結します。
 
 @raise ArgumentError n が負値の場合発生します。
 
-    ary =  [0, 1, 2]
-    p ary.last(0)
-    p ary.last(1)
-    p ary.last(2)
-    p ary.last(3)
-    p ary.last(4)
-    # => []
-         [2]
-         [1, 2]
-         [0, 1, 2]
-         [0, 1, 2]
+#@samplecode 例
+ary =  [0, 1, 2]
+p ary.last(0)
+p ary.last(1)
+p ary.last(2)
+p ary.last(3)
+p ary.last(4)
+# => []
+#    [2]
+#    [1, 2]
+#    [0, 1, 2]
+#    [0, 1, 2]
+#@end
 
 @see [[m:Array#first]]
 
@@ -1231,7 +1455,9 @@ join した文字列を連結します。
 
 配列の長さを返します。配列が空のときは 0 を返します。
 
-  p [1, nil, 3, nil].size    #=> 4
+#@samplecode 例
+p [1, nil, 3, nil].size    #=> 4
+#@end
 
 #@until 1.9.1
 --- nitems    -> Integer
@@ -1242,9 +1468,63 @@ nil でない要素の数を返します。
 ブロックが与えられた場合は、各要素を引数として評価し nil でない値を返した
 要素の数を返します。
 
-例:
-  p [1, nil, 3, nil].nitems              #=> 2
-  p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
+#@samplecode 例
+p [1, nil, 3, nil].nitems              #=> 2
+p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
+#@end
+#@end
+
+#@since 2.6.0
+--- none?               -> bool
+--- none?{|obj| ... }   -> bool
+--- none?(pattern)      -> bool
+
+ブロックを指定しない場合は、 配列のすべての
+要素が偽であれば真を返します。そうでなければ偽を返します。
+
+ブロックを指定した場合は、配列のすべての要素を
+ブロックで評価した結果が、すべて偽であれば真を返します。
+そうでなければ偽を返します。
+
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+
+#@samplecode 例
+%w{ant bear cat}.none? {|word| word.length == 5}  # => true
+%w{ant bear cat}.none? {|word| word.length >= 4}  # => false
+%w{ant bear cat}.none?(/d/)                       # => true
+[].none?                                          # => true
+[nil].none?                                       # => true
+[nil,false].none?                                 # => true
+[nil, false, true].none?                          # => false
+#@end
+
+@see [[m:Enumerable#none?]]
+
+--- one?                -> bool
+--- one?{|obj| ... }    -> bool
+--- one?(pattern)       -> bool
+
+ブロックを指定しない場合は、 配列の要素のうち
+ちょうど一つだけが真であれば、真を返します。
+そうでなければ偽を返します。
+
+ブロックを指定した場合は、配列の要素を
+ブロックで評価した結果、一つの要素だけが真であれば真を返します。
+そうでなければ偽を返します。
+
+@param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
+
+#@samplecode 例
+%w{ant bear cat}.one? {|word| word.length == 4}   # => true
+%w{ant bear cat}.one? {|word| word.length > 4}    # => false
+%w{ant bear cat}.one?(/t/)                        # => false
+[ nil, true, 99 ].one?                            # => false
+[ nil, true, false ].one?                         # => true
+[ nil, true, 99 ].one?(Integer)                   # => true
+[].one?                                           # => false
+#@end
+
+@see [[m:Enumerable#one?]]
 #@end
 
 --- pack(template)                      -> String
@@ -1272,9 +1552,10 @@ buffer オプションはメモリ確保が発生しないことを保証する�
 ないことに注意してください。
 buffer のサイズ(capacity)が足りなければ、packはメモリを確保します。
 
-例:
-  ['!'].pack('@1a', buffer: 'abc')  # => "a!"
-  ['!'].pack('@5a', buffer: 'abc')  # => "abc\u0000\u0000!"
+#@samplecode 例
+['!'].pack('@1a', buffer: 'abc')  # => "a!"
+['!'].pack('@5a', buffer: 'abc')  # => "abc\u0000\u0000!"
+#@end
 #@end
 
 @param template 自身のバイナリとしてパックするためのテンプレートを文字列で指定します。
@@ -1311,19 +1592,19 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
+#@samplecode 例
+array = [1, [2, 3], 4]
+p array.pop      # => 4
+p array.pop      # => [2, 3]
+p array          # => [1]
 
-例:
-      array = [1, [2, 3], 4]
-      p array.pop      # => 4
-      p array.pop      # => [2, 3]
-      p array          # => [1]
-
-      p array.pop      # => 1
-      p array.pop      # => nil
-      p array          # => []
-      array = [1, 2, 3]
-      p array.pop(2)   #=> [2, 3]
-      p array          #=> [1]
+p array.pop      # => 1
+p array.pop      # => nil
+p array          # => []
+array = [1, 2, 3]
+p array.pop(2)   #=> [2, 3]
+p array          #=> [1]
+#@end
 
 @see [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]]
 
@@ -1337,11 +1618,13 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 
 @param obj 自身に追加したいオブジェクトを指定します。
 
-      array = [1, 2, 3]
-      array.push 4
-      array.push [5, 6]
-      array.push 7, 8
-      p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
+#@samplecode 例
+array = [1, 2, 3]
+array.push 4
+array.push [5, 6]
+array.push 7, 8
+p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
+#@end
 
 @see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]], [[m:Array#<<]]
 
@@ -1355,10 +1638,32 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 
 @param obj 検索するオブジェクトを指定します。
 
-    a = [[15,1], [25,2], [35,3]]
-    p a.rassoc(2)    # => [25, 2]
+#@samplecode 例
+a = [[15,1], [25,2], [35,3]]
+p a.rassoc(2)    # => [25, 2]
+#@end
 
 @see [[m:Array#assoc]]
+
+--- reject               -> Enumerator
+--- reject {|item| ... } -> [object]
+
+各要素に対してブロックを評価し、
+その値が偽であった要素を集めた新しい配列を返します。
+条件を反転させた select です。
+
+ブロックを省略した場合は、各要素に対しブロックを評価し
+偽になった値の配列を返すような [[c:Enumerator]] を返します。
+
+#@samplecode 例
+# 偶数を除外する (奇数を集める)
+[1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
+#@end
+
+@see [[m:Array#select]], [[m:Enumerable#reject]]
+#@since 2.3.0
+@see [[m:Enumerable#grep_v]]
+#@end
 
 --- replace(another)    -> self
 
@@ -1371,9 +1676,11 @@ buffer のサイズ(capacity)が足りなければ、packはメモリを確保�
 @raise TypeError 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-    a = [1, 2, 3]
-    a.replace [4, 5, 6]
-    p a                 #=> [4, 5, 6]
+#@samplecode 例
+a = [1, 2, 3]
+a.replace [4, 5, 6]
+p a                 #=> [4, 5, 6]
+#@end
 
 --- reverse     -> Array
 --- reverse!    -> self
@@ -1382,13 +1689,15 @@ reverse は自身の要素を逆順に並べた新しい配列を生成して返
 reverse! は自身を破壊的に並べ替えます。
 reverse! は self を返します。
 
- a = ["a", 2, true]
- p a.reverse         #=> [true, 2, "a"]
- p a                 #=> ["a", 2, true] (変化なし)
- 
- a = ["a", 2, true]
- p a.reverse!        #=> [true, 2, "a"]
- p a                 #=> [true, 2, "a"]
+#@samplecode 例
+a = ["a", 2, true]
+p a.reverse         #=> [true, 2, "a"]
+p a                 #=> ["a", 2, true] (変化なし)
+
+a = ["a", 2, true]
+p a.reverse!        #=> [true, 2, "a"]
+p a                 #=> [true, 2, "a"]
+#@end
 
 --- reverse_each {|item| ... }    -> self
 #@since 1.9.1
@@ -1406,9 +1715,11 @@ reverse! は self を返します。
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 
-    a = [ "a", "b", "c" ]
-    a.reverse_each {|x| print x, " " }
-    # => c b a
+#@samplecode 例
+a = [ "a", "b", "c" ]
+a.reverse_each {|x| print x, " " }
+# => c b a
+#@end
 
 @see [[m:Array#each]]
 
@@ -1435,10 +1746,12 @@ reverse! は self を返します。
 
 @param val オブジェクトを指定します。
 
-    p [1, 0, 0, 1, 0].rindex(1)   #=> 3
-    p [1, 0, 0, 0, 0].rindex(1)   #=> 0
-    p [0, 0, 0, 0, 0].rindex(1)   #=> nil
-    p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
+#@samplecode 例
+p [1, 0, 0, 1, 0].rindex(1)   #=> 3
+p [1, 0, 0, 0, 0].rindex(1)   #=> 0
+p [0, 0, 0, 0, 0].rindex(1)   #=> nil
+p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
+#@end
 
 @see [[m:Array#index]]
 
@@ -1465,14 +1778,14 @@ reverse! は self を返します。
 
 
 
-例:
+#@samplecode 例
+a = [0, 1, 2, 3, 4]
+p a.shift            #=> 0
+p a                  #=> [1, 2, 3, 4]
 
-  a = [0, 1, 2, 3, 4]
-  p a.shift            #=> 0
-  p a                  #=> [1, 2, 3, 4]
-
-  p [].shift           #=> nil
-  p [].shift(1)        #=> []
+p [].shift           #=> nil
+p [].shift(1)        #=> []
+#@end
 
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]]
 
@@ -1482,11 +1795,11 @@ reverse! は self を返します。
 
 @param nth 要素のインデックスを整数で指定します。[[m:Array#[] ]] と同じです。
 
-例:
-
-  p [0, 1, 2].slice(1)    #=> 1
-  p [0, 1, 2].slice(2)    #=> 2
-  p [0, 1, 2].slice(10)   #=> nil
+#@samplecode 例
+p [0, 1, 2].slice(1)    #=> 1
+p [0, 1, 2].slice(2)    #=> 2
+p [0, 1, 2].slice(10)   #=> nil
+#@end
 
 --- slice(pos, len)  -> Array | nil
 --- slice(range)     -> Array | nil
@@ -1499,11 +1812,11 @@ reverse! は self を返します。
 
 @param range [[m:Array#[] ]] と同じです。
 
-例:
-
-  p [0, 1, 2].slice(0, 2)    #=> [0, 1]
-  p [0, 1, 2].slice(2..3)    #=> [2]
-  p [0, 1, 2].slice(10, 1)   #=> nil
+#@samplecode 例
+p [0, 1, 2].slice(0, 2)    #=> [0, 1]
+p [0, 1, 2].slice(2..3)    #=> [2]
+p [0, 1, 2].slice(10, 1)   #=> nil
+#@end
 
 --- slice!(nth)       -> object | nil
 
@@ -1512,15 +1825,15 @@ reverse! は self を返します。
 
 @param nth 取り除く要素のインデックスを整数で指定します。
 
-例:
-
-   a = [ "a", "b", "c" ]
-   a.slice!(1)     #=> "b"
-   a               #=> ["a", "c"]
-   a.slice!(-1)    #=> "c"
-   a               #=> ["a"]
-   a.slice!(100)   #=> nil
-   a               #=> ["a"]
+#@samplecode 例
+a = [ "a", "b", "c" ]
+a.slice!(1)     #=> "b"
+a               #=> ["a", "c"]
+a.slice!(-1)    #=> "c"
+a               #=> ["a"]
+a.slice!(100)   #=> nil
+a               #=> ["a"]
+#@end
 
 --- slice!(start, len)  -> Array | nil
 --- slice!(range)     -> Array | nil
@@ -1534,15 +1847,15 @@ reverse! は self を返します。
 
 @param range 削除したい配列の範囲を [[c:Range]] オブジェクトで指定します。
 
-例:
+#@samplecode 例
+a = [ "a", "b", "c" ]
+a.slice!(1, 2)     #=> ["b", "c"]
+a                  #=> ["a"]
 
-   a = [ "a", "b", "c" ]
-   a.slice!(1, 2)     #=> ["b", "c"]
-   a                  #=> ["a"]
-   
-   a = [ "a", "b", "c" ]
-   a.slice!(1, 0)     #=> []
-   a                  #=> [ "a", "b", "c" ]
+a = [ "a", "b", "c" ]
+a.slice!(1, 0)     #=> []
+a                  #=> [ "a", "b", "c" ]
+#@end
 
 --- sort                -> Array
 --- sort!               -> self
@@ -1558,15 +1871,17 @@ sort! は self を破壊的にソートし、self を返します。
 ブロックは第1引数が大きいなら正の整数、両者が等しいなら0、そして第1引数の方が小さいなら
 負の整数を返さなければいけません。両者を比較できない時は nil を返します。
 
-   ary1 = [ "d", "a", "e", "c", "b" ]
-   p ary1.sort                             #=> ["a", "b", "c", "d", "e"]
-   
-   ary2 = ["9", "7", "10", "11", "8"]
-   p ary2.sort                             #=> ["10", "11", "7", "8", "9"] (文字列としてソートするとこうなる)
-   p ary2.sort{|a, b| a.to_i <=> b.to_i }  #=> ["7", "8", "9", "10", "11"] (ブロックを使って数字としてソート)
+#@samplecode 例
+ary1 = [ "d", "a", "e", "c", "b" ]
+p ary1.sort                             #=> ["a", "b", "c", "d", "e"]
 
-   # sort_by を使っても良い
-   p ary2.sort_by{|x| x.to_i }             #=> ["7", "8", "9", "10", "11"]
+ary2 = ["9", "7", "10", "11", "8"]
+p ary2.sort                             #=> ["10", "11", "7", "8", "9"] (文字列としてソートするとこうなる)
+p ary2.sort{|a, b| a.to_i <=> b.to_i }  #=> ["7", "8", "9", "10", "11"] (ブロックを使って数字としてソート)
+
+# sort_by を使っても良い
+p ary2.sort_by{|x| x.to_i }             #=> ["7", "8", "9", "10", "11"]
+#@end
 
 @see [[m:Enumerable#sort_by]]
 #@since 1.9.2
@@ -1581,7 +1896,7 @@ sort_by の破壊的バージョンです。
 ブロックを省略した場合は返り値によって配列を破壊的に
 ソートする [[c:Enumerator]] を返します。
 
-#@samplecode
+#@samplecode 例
 fruits = %w{apple pear fig}
 fruits.sort_by! { |word| word.length }
 fruits # => ["fig", "pear", "apple"]
@@ -1590,22 +1905,51 @@ fruits # => ["fig", "pear", "apple"]
 @see [[m:Enumerable#sort_by]]
 #@end
 
+--- take(n)               -> Array
+
+配列の先頭から n 要素を配列として返します。
+
+@param n 要素数を指定します。
+
+#@samplecode 例
+a = [1, 2, 3, 4, 5, 0]
+a.take(3)             # => [1, 2, 3]
+#@end
+
+@see [[m:Enumerable#take]]
+
+--- take_while                    -> Enumerator
+--- take_while {|element| ... }   -> Array
+
+配列の要素を順に偽になるまでブロックで評価します。
+最初に偽になった要素の手前の要素までを配列として返します。
+
+#@samplecode 例
+a = [1, 2, 3, 4, 5, 0]
+a.take_while {|i| i < 3 }   # => [1, 2]
+#@end
+
+ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
+返します。
+
+@see [[m:Enumerable#take_while]]
+
 --- to_a       -> Array
 
 self を返します。ただし、Array のサブクラスのインスタンスに対して呼ばれた時は、
 自身を Array に変換したものを返します。
 
-例:
+#@samplecode 例
+class SubArray < Array; end
+ary1 = Array([1, 2, 3, 4])
+ary2 = SubArray([1, 2, 3, 4])
 
-  class SubArray < Array; end
-  ary1 = Array([1, 2, 3, 4])
-  ary2 = SubArray([1, 2, 3, 4])
+ary1.to_a        # => [1, 2, 3, 4]
+ary1.to_a.class  # => Array
 
-  ary1.to_a        # => [1, 2, 3, 4]
-  ary1.to_a.class  # => Array
-
-  ary2.to_a        # => [1, 2, 3, 4]
-  ary2.to_a.class  # => Array
+ary2.to_a        # => [1, 2, 3, 4]
+ary2.to_a.class  # => Array
+#@end
 
 @see [[m:Array#to_ary]]
 
@@ -1613,17 +1957,17 @@ self を返します。ただし、Array のサブクラスのインスタンス
 
 self をそのまま返します。
 
-例:
+#@samplecode 例
+class SubArray < Array; end
+ary1 = Array([1, 2, 3, 4])
+ary2 = SubArray([1, 2, 3, 4])
 
-  class SubArray < Array; end
-  ary1 = Array([1, 2, 3, 4])
-  ary2 = SubArray([1, 2, 3, 4])
+ary1.to_ary        # => [1, 2, 3, 4]
+ary1.to_ary.class  # => Array
 
-  ary1.to_ary        # => [1, 2, 3, 4]
-  ary1.to_ary.class  # => Array
-
-  ary2.to_ary        # => [1, 2, 3, 4]
-  ary2.to_ary.class  # => SubArray
+ary2.to_ary        # => [1, 2, 3, 4]
+ary2.to_ary.class  # => SubArray
+#@end
 
 @see [[m:Array#to_a]]
 
@@ -1633,21 +1977,27 @@ self をそのまま返します。
 
 自身の情報を人間に読みやすい文字列にして返します。
 
-  [1, 2, 3, 4].to_s    # => "[1, 2, 3, 4]"
-  [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
+#@samplecode 例
+[1, 2, 3, 4].to_s    # => "[1, 2, 3, 4]"
+[1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
+#@end
 
 #@else
 --- to_s    -> String
 
 [[m:Array#join]]([[m:$,]]) と同じです。
 
-  [1, 2, 3, 4].to_s    # => "1234"
+#@samplecode 例
+[1, 2, 3, 4].to_s    # => "1234"
+#@end
 
 --- inspect -> String
 
 自身の情報を人間に読みやすい文字列にして返します。
 
-  [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
+#@samplecode 例
+[1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
+#@end
 #@end
 
 #@since 2.1.0
@@ -1684,23 +2034,25 @@ self を [key, value] のペアの配列として解析した結果を [[c:Hash]
 [[c:TypeError]] が発生します。各要素のサイズが不揃いな配列に対して
 は、例外 [[c:IndexError]] が発生します。
 
-    p [[1,2],
-       [3,4],
-       [5,6]].transpose
-    # => [[1, 3, 5], [2, 4, 6]]
+#@samplecode 例
+p [[1,2],
+   [3,4],
+   [5,6]].transpose
+# => [[1, 3, 5], [2, 4, 6]]
 
-    p [].transpose
-    # => []
+p [].transpose
+# => []
 
-    p [1,2,3].transpose
+p [1,2,3].transpose
 
-    # => -:1:in `transpose': cannot convert Fixnum into Array (TypeError)
-            from -:1
+# => -:1:in `transpose': cannot convert Fixnum into Array (TypeError)
+#       from -:1
 
-    p [[1,2],
-       [3,4,5],
-       [6,7]].transpose
-    # => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
+p [[1,2],
+   [3,4,5],
+   [6,7]].transpose
+# => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
+#@end
 
 --- uniq     -> Array
 --- uniq!    -> self | nil
@@ -1714,15 +2066,19 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
 取り除かれた要素の部分は前に詰められます。
 要素の重複判定は、[[m:Object#eql?]] により行われます。
 
-    p [1, 1, 1].uniq         # => [1]
-    p [1, 4, 1].uniq         # => [1, 4]
-    p [1, 3, 2, 2, 3].uniq   # => [1, 3, 2]
+#@samplecode 例
+p [1, 1, 1].uniq         # => [1]
+p [1, 4, 1].uniq         # => [1, 4]
+p [1, 3, 2, 2, 3].uniq   # => [1, 3, 2]
+#@end
 
 ブロックが与えられた場合、ブロックが返した値が重複した要素を取り除いた
 配列を返します。
 
-    p [1, 3, 2, "2", "3"].uniq                # => [1, 3, 2, "2", "3"]
-    p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
+#@samplecode 例
+p [1, 3, 2, "2", "3"].uniq                # => [1, 3, 2, "2", "3"]
+p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
+#@end
 
 要素を先頭から辿っていき、最初に出現したものが残ります。
 
@@ -1736,13 +2092,15 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
 
 @param obj 自身に追加したいオブジェクトを指定します。
 
-    arr = [1,2,3]
-    arr.unshift 0
-    p arr             #=> [0, 1, 2, 3]
-    arr.unshift [0]
-    p arr             #=> [[0], 0, 1, 2, 3]
-    arr.unshift 1, 2
-    p arr             #=> [1, 2, [0], 0, 1, 2, 3]
+#@samplecode 例
+arr = [1,2,3]
+arr.unshift 0
+p arr             #=> [0, 1, 2, 3]
+arr.unshift [0]
+p arr             #=> [[0], 0, 1, 2, 3]
+arr.unshift 1, 2
+p arr             #=> [1, 2, [0], 0, 1, 2, 3]
+#@end
 
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
 
@@ -1758,20 +2116,22 @@ uniq! は削除を破壊的に行い、削除が行われた場合は self を�
        ちょうど配列のサイズを指す場合は、nil で埋められます。
 #@end
 
-    ary = %w( a b c d e )
-    p ary.values_at( 0, 2, 4 )          #=> ["a", "c", "e"]
-    p ary.values_at( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil, nil]
-    p ary.values_at( 0, -1, -2 )        #=> ["a", "e", "d"]
-    p ary.values_at( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
-    p ary.values_at( 1..2 )             #=> ["b", "c"]
+#@samplecode 例
+ary = %w( a b c d e )
+p ary.values_at( 0, 2, 4 )          #=> ["a", "c", "e"]
+p ary.values_at( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil, nil]
+p ary.values_at( 0, -1, -2 )        #=> ["a", "e", "d"]
+p ary.values_at( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
+p ary.values_at( 1..2 )             #=> ["b", "c"]
 #@since 2.0.0
-    p ary.values_at( 3..10 )            #=> ["d", "e", nil, nil, nil, nil, nil, nil]
-    p ary.values_at( 6..7 )             #=> [nil, nil]
+p ary.values_at( 3..10 )            #=> ["d", "e", nil, nil, nil, nil, nil, nil]
+p ary.values_at( 6..7 )             #=> [nil, nil]
 #@else
-    p ary.values_at( 3..10 )            #=> ["d", "e", nil]
-    p ary.values_at( 6..7 )             #=> []
+p ary.values_at( 3..10 )            #=> ["d", "e", nil]
+p ary.values_at( 6..7 )             #=> []
 #@end
-    p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
+p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
+#@end
 
 #@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
@@ -1808,24 +2168,23 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
                  指定した場合に発生します。
 #@end
 
-例:
-    p [1,2,3].zip([4,5,6], [7,8,9])
-        # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+#@samplecode 例
+p [1,2,3].zip([4,5,6], [7,8,9])
+# => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
-    p [1,2].zip([:a,:b,:c], [:A,:B,:C,:D])
-        # => [[1, :a, :A], [2, :b, :B]]
+p [1,2].zip([:a,:b,:c], [:A,:B,:C,:D])
+# => [[1, :a, :A], [2, :b, :B]]
 
-    p [1,2,3,4,5].zip([:a,:b,:c], [:A,:B,:C,:D])
-        # => [[1, :a, :A], [2, :b, :B],
-        #     [3, :c, :C], [4, nil, :D], [5, nil, nil]]
-    
-    p [1,2,3].zip([4,5,6], [7,8,9]) {|ary|
-      p ary
-    }
-        # => [1, 4, 7]
-        #    [2, 5, 8]
-        #    [3, 6, 9]
-        #    nil
+p [1,2,3,4,5].zip([:a,:b,:c], [:A,:B,:C,:D])
+# => [[1, :a, :A], [2, :b, :B],
+#     [3, :c, :C], [4, nil, :D], [5, nil, nil]]
+
+p [1,2,3].zip([4,5,6], [7,8,9]) { |ary| p ary }
+# => [1, 4, 7]
+#    [2, 5, 8]
+#    [3, 6, 9]
+#    nil
+#@end
 
 #@if (version == "1.8.7")
 --- choice        -> object | nil
@@ -1839,12 +2198,12 @@ srand()が有効です。
 このメソッドは Ruby 1.8.7 と Ruby 1.9.0 にしか存在しないメソッドです。
 Ruby 1.9.1 以降では Array#sample を使ってください。
 
-例:
-
-  a = (1..10).to_a
-  p a.choice        #=>  9
-  p a.choice        #=> 10
-  p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#@samplecode 例
+a = (1..10).to_a
+p a.choice        #=>  9
+p a.choice        #=> 10
+p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#@end
 #@end
 
 --- sample        -> object | nil
@@ -1880,13 +2239,13 @@ srand()が有効です。
 
 @raise ArgumentError 引数 n に負の数を指定した場合に発生します。
 
-例:
-
-  a = (1..10).to_a
-  p a.sample        #=>  9
-  p a.sample        #=> 10
-  p a.sample(3)     #=> [1, 9, 3]
-  p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#@samplecode 例
+a = (1..10).to_a
+p a.sample        #=>  9
+p a.sample        #=> 10
+p a.sample(3)     #=> [1, 9, 3]
+p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#@end
 
 --- cycle(n=nil) {|obj| block } -> nil
 #@since 1.9.1
@@ -1912,10 +2271,10 @@ srand()が有効です。
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-   a = ["a", "b", "c"]
-   a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+#@samplecode 例
+a = ["a", "b", "c"]
+a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+#@end
 
 --- shuffle -> Array
 #@since 1.9.3
@@ -1929,16 +2288,16 @@ srand()が有効です。
 生成する疑似乱数列を用いることができます。
 #@end
 
-例:
-
-   a = [ 1, 2, 3 ]           #=> [1, 2, 3]
-   a.shuffle                 #=> [2, 3, 1]
+#@samplecode 例
+a = [ 1, 2, 3 ]           #=> [1, 2, 3]
+a.shuffle                 #=> [2, 3, 1]
 #@since 1.9.3
-   rng = Random.new
-   rng2 = rng.dup # RNGを複製
-   # 以下の2つは同じ結果を返す
-   [1,2,3].shuffle(random: rng)
-   [1,2,3].shuffle(random: rng2)
+rng = Random.new
+rng2 = rng.dup # RNGを複製
+# 以下の2つは同じ結果を返す
+[1,2,3].shuffle(random: rng)
+[1,2,3].shuffle(random: rng2)
+#@end
 #@end
 
 @see [[m:Array#shuffle!]]
@@ -1956,11 +2315,11 @@ srand()が有効です。
               トを指定した場合、[[m:Kernel.#srand]]の指定に影響されま
               せん。
 
-例:
-
-   a = [ 1, 2, 3 ]           #=> [1, 2, 3]
-   a.shuffle!                #=> [2, 3, 1]
-   a                         #=> [2, 3, 1]
+#@samplecode 例
+a = [ 1, 2, 3 ]           #=> [1, 2, 3]
+a.shuffle!                #=> [2, 3, 1]
+a                         #=> [2, 3, 1]
+#@end
 
 @see [[m:Array#shuffle]]
 
@@ -1987,15 +2346,15 @@ srand()が有効です。
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-    a = [1, 2, 3, 4]
-    a.combination(1).to_a  #=> [[1],[2],[3],[4]]
-    a.combination(2).to_a  #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
-    a.combination(3).to_a  #=> [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
-    a.combination(4).to_a  #=> [[1,2,3,4]]
-    a.combination(0).to_a  #=> [[]]: one combination of length 0
-    a.combination(5).to_a  #=> []  : no combinations of length 5
+#@samplecode 例
+a = [1, 2, 3, 4]
+a.combination(1).to_a  #=> [[1],[2],[3],[4]]
+a.combination(2).to_a  #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+a.combination(3).to_a  #=> [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
+a.combination(4).to_a  #=> [[1,2,3,4]]
+a.combination(0).to_a  #=> [[]]: one combination of length 0
+a.combination(5).to_a  #=> []  : no combinations of length 5
+#@end
 
 #@since 1.9.2
 @see [[m:Array#permutation]], [[m:Array#repeated_combination]]
@@ -2029,15 +2388,15 @@ srand()が有効です。
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-    a = [1, 2, 3]
-    a.permutation.to_a     #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-    a.permutation(1).to_a  #=> [[1],[2],[3]]
-    a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
-    a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-    a.permutation(0).to_a  #=> [[]]: one permutation of length 0
-    a.permutation(4).to_a  #=> []  : no permutations of length 4
+#@samplecode 例
+a = [1, 2, 3]
+a.permutation.to_a     #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+a.permutation(1).to_a  #=> [[1],[2],[3]]
+a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
+a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+a.permutation(0).to_a  #=> [[]]: one permutation of length 0
+a.permutation(4).to_a  #=> []  : no permutations of length 4
+#@end
 
 #@since 1.9.2
 @see [[m:Array#combination]], [[m:Array#repeated_permutation]]
@@ -2059,22 +2418,24 @@ srand()が有効です。
 
 @param lists 配列。複数指定可能。
 
-例:
-
-   [1,2,3].product([4,5])     # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
-   [1,2].product([1,2])       # => [[1,1],[1,2],[2,1],[2,2]]
-   [1,2].product([3,4],[5,6]) # => [[1,3,5],[1,3,6],[1,4,5],[1,4,6],
-                              #     [2,3,5],[2,3,6],[2,4,5],[2,4,6]]
-   [1,2].product()            # => [[1],[2]]
-   [1,2].product([])          # => []
+#@samplecode 例
+[1,2,3].product([4,5])     # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
+[1,2].product([1,2])       # => [[1,1],[1,2],[2,1],[2,2]]
+[1,2].product([3,4],[5,6]) # => [[1,3,5],[1,3,6],[1,4,5],[1,4,6],
+                           #     [2,3,5],[2,3,6],[2,4,5],[2,4,6]]
+[1,2].product()            # => [[1],[2]]
+[1,2].product([])          # => []
+#@end
 
 #@since 1.9.2
 ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
 行して self を返します。
 
-   a = []
-   [1,2,3].product([4,5]) {|e| a << e} # => [1,2,3]
-   a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
+#@samplecode 例
+a = []
+[1,2,3].product([4,5]) {|e| a << e} # => [1,2,3]
+a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
+#@end
 #@end
 
 
@@ -2095,17 +2456,17 @@ srand()が有効です。
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-    a = [1, 2, 3]
-    a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
-    a.repeated_combination(2).to_a  #=> [[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]]
-    a.repeated_combination(3).to_a  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
-                                    #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
-    a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3],
-                                    #    [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3],
-                                    #    [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]]
-    a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
+#@samplecode 例
+a = [1, 2, 3]
+a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
+a.repeated_combination(2).to_a  #=> [[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]]
+a.repeated_combination(3).to_a  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
+                                #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
+a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3],
+                                #    [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3],
+                                #    [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]]
+a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
+#@end
 
 @see [[m:Array#repeated_permutation]], [[m:Array#combination]]
 --- repeated_permutation(n) { |p| ... } -> Array
@@ -2123,14 +2484,14 @@ srand()が有効です。
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-    a = [1, 2]
-    a.repeated_permutation(1).to_a  #=> [[1], [2]]
-    a.repeated_permutation(2).to_a  #=> [[1,1],[1,2],[2,1],[2,2]]
-    a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
-                                    #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
-    a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
+#@samplecode 例
+a = [1, 2]
+a.repeated_permutation(1).to_a  #=> [[1], [2]]
+a.repeated_permutation(2).to_a  #=> [[1,1],[1,2],[2,1],[2,2]]
+a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
+                                #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
+a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
+#@end
 
 @see [[m:Array#repeated_combination]], [[m:Array#permutation]]
 --- keep_if {|item| ... } -> self
@@ -2138,16 +2499,20 @@ srand()が有効です。
 
 ブロックが false を返した要素を削除します。
 
-   a = %w{ a b c d e f }
-   a.keep_if {|v| v =~ /[aeiou]/}   # => ["a", "e"]
-   a # => ["a", "e"]
+#@samplecode 例
+a = %w{ a b c d e f }
+a.keep_if {|v| v =~ /[aeiou]/}   # => ["a", "e"]
+a # => ["a", "e"]
+#@end
 
 [[m:Array#select!]] と同様に自身を上書きしますが、削除する要素がなかっ
 た場合には修正を行いません。
 
-   a = %w{ a b c d e f }
-   a.keep_if {|v| v =~ /[a-z]/ }   # => ["a", "b", "c", "d", "e", "f"]
-   a # => ["a", "b", "c", "d", "e", "f"]
+#@samplecode 例
+a = %w{ a b c d e f }
+a.keep_if {|v| v =~ /[a-z]/ }   # => ["a", "b", "c", "d", "e", "f"]
+a # => ["a", "b", "c", "d", "e", "f"]
+#@end
 
 ブロックが与えられなかった場合は、自身と keep_if から生成した
 [[c:Enumerator]] オブジェクトを返します。
@@ -2168,7 +2533,7 @@ srand()が有効です。
 ブロックを省略した場合は、各要素に対しブロックを評価し
 真になった値の配列を返すような [[c:Enumerator]] を返します。
 
-#@samplecode
+#@samplecode 例
 [1,2,3,4,5].select                      # => #<Enumerator: [1, 2, 3, 4, 5]:select>
 [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
 #@end
@@ -2185,9 +2550,11 @@ srand()が有効です。
 変更があった場合は self を、
 変更がなかった場合には nil を返します。
 
-   a = %w{ a b c d e f }
-   a.select! {|v| v =~ /[a-z]/ }   # => nil
-   a # => ["a", "b", "c", "d", "e", "f"]
+#@samplecode 例
+a = %w{ a b c d e f }
+a.select! {|v| v =~ /[a-z]/ }   # => nil
+a # => ["a", "b", "c", "d", "e", "f"]
+#@end
 
 ブロックが与えられなかった場合は、自身と select! から生成した
 [[c:Enumerator]] オブジェクトを返します。
@@ -2207,14 +2574,14 @@ cnt より前の要素は末尾に移動します。cnt に負の数を指定し
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-   a = [ "a", "b", "c", "d" ]
-   a.rotate         # => ["b", "c", "d", "a"]
-   a                # => ["a", "b", "c", "d"]
-   a.rotate(2)      # => ["c", "d", "a", "b"]
-   a.rotate(-1)     # => ["d", "a", "b", "c"]
-   a.rotate(-3)     # => ["b", "c", "d", "a"]
+#@samplecode 例
+a = [ "a", "b", "c", "d" ]
+a.rotate         # => ["b", "c", "d", "a"]
+a                # => ["a", "b", "c", "d"]
+a.rotate(2)      # => ["c", "d", "a", "b"]
+a.rotate(-1)     # => ["d", "a", "b", "c"]
+a.rotate(-3)     # => ["b", "c", "d", "a"]
+#@end
 
 @see [[m:Array#rotate!]]
 --- rotate!(cnt = 1) -> self
@@ -2231,13 +2598,13 @@ cnt で指定したインデックスの要素が先頭になるように自身�
 @raise TypeError 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
 
-例:
-
-   a = [ "a", "b", "c", "d" ]
-   a.rotate!        #=> ["b", "c", "d", "a"]
-   a                #=> ["b", "c", "d", "a"]
-   a.rotate!(2)     #=> ["d", "a", "b", "c"]
-   a.rotate!(-3)    #=> ["a", "b", "c", "d"]
+#@samplecode 例
+a = [ "a", "b", "c", "d" ]
+a.rotate!        #=> ["b", "c", "d", "a"]
+a                #=> ["b", "c", "d", "a"]
+a.rotate!(2)     #=> ["d", "a", "b", "c"]
+a.rotate!(-3)    #=> ["a", "b", "c", "d"]
+#@end
 
 @see [[m:Array#rotate]]
 #@end
@@ -2264,11 +2631,13 @@ find-minimum モード(特に理由がない限りはこのモードを使う方
 
 ブロックの評価結果が true になる最初の要素を返すか、nil を返します。
 
-  ary = [0, 4, 7, 10, 12]
-  ary.bsearch {|x| x >=   4 } # => 4
-  ary.bsearch {|x| x >=   6 } # => 7
-  ary.bsearch {|x| x >=  -1 } # => 0
-  ary.bsearch {|x| x >= 100 } # => nil
+#@samplecode 例
+ary = [0, 4, 7, 10, 12]
+ary.bsearch {|x| x >=   4 } # => 4
+ary.bsearch {|x| x >=   6 } # => 7
+ary.bsearch {|x| x >=  -1 } # => 0
+ary.bsearch {|x| x >= 100 } # => nil
+#@end
 
 find-any モードは [[man:bsearch(3)]] のように動作します。ブロックは真偽値
 ではなく、以下のような数値を返す必要があります。求める要素が配列の i 番目
@@ -2281,11 +2650,13 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 
 ブロックの評価結果が 0 になるいずれかの要素を返すか、nil を返します。
 
-  ary = [0, 4, 7, 10, 12]
-  # 4 <= v < 8 になる要素を検索
-  ary.bsearch {|x| 1 - x / 4 } # => 4 or 7
-  # 8 <= v < 10 になる要素を検索
-  ary.bsearch {|x| 4 - x / 2 } # => nil
+#@samplecode 例
+ary = [0, 4, 7, 10, 12]
+# 4 <= v < 8 になる要素を検索
+ary.bsearch {|x| 1 - x / 4 } # => 4 or 7
+# 8 <= v < 10 になる要素を検索
+ary.bsearch {|x| 4 - x / 2 } # => nil
+#@end
 
 上記の 2 つのモードを混在して使用しないでください(ブロックの評価結果は
 常に true/false、数値のいずれかを一貫して返すようにしてください)。
@@ -2345,11 +2716,12 @@ ary.bsearch_index { |x| 4 - x / 2 } # => nil
 引数を指定しない形式では要素が存在しなければ nil を返します。
 引数を指定する形式では、空の配列を返します。
 
-例:
-  [].max           #=> nil
-  [].max(1)        #=> []
-  [2, 5, 3].max    #=> 5
-  [2, 5, 3].max(2) #=> [5, 3]
+#@samplecode 例
+[].max           #=> nil
+[].max(1)        #=> []
+[2, 5, 3].max    #=> 5
+[2, 5, 3].max(2) #=> [5, 3]
+#@end
 
 @param n 取得する要素数。
 
@@ -2366,13 +2738,14 @@ n 要素を返します。
 ブロックの値は、a > b のとき正、
 a == b のとき 0、a < b のとき負の整数を、期待しています。
 
-例:
-  [].max {|a, b| a <=> b }    #=> nil
-  [].max(1) {|a, b| a <=> b } #=> []
+#@samplecode 例
+[].max {|a, b| a <=> b }    #=> nil
+[].max(1) {|a, b| a <=> b } #=> []
 
-  ary = %w(albatross dog horse)
-  ary.max {|a, b| a.length <=> b.length }    #=> "albatross"
-  ary.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
+ary = %w(albatross dog horse)
+ary.max {|a, b| a.length <=> b.length }    #=> "albatross"
+ary.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
+#@end
 
 @param n 取得する要素数。
 
@@ -2389,11 +2762,12 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 引数を指定しない形式では要素が存在しなければ nil を返します。
 引数を指定する形式では、空の配列を返します。
 
-例:
-  [].min           #=> nil
-  [].min(1)        #=> []
-  [2, 5, 3].min    #=> 2
-  [2, 5, 3].min(2) #=> [2, 3]
+#@samplecode 例
+[].min           #=> nil
+[].min(1)        #=> []
+[2, 5, 3].min    #=> 2
+[2, 5, 3].min(2) #=> [2, 3]
+#@end
 
 @param n 取得する要素数。
 
@@ -2410,13 +2784,14 @@ n 要素を返します。
 ブロックの値は、a > b のとき正、a == b のとき 0、
 a < b のとき負の整数を、期待しています。
 
-例:
-  [].min {|a, b| a <=> b }    #=> nil
-  [].min(1) {|a, b| a <=> b } #=> []
+#@samplecode 例
+[].min {|a, b| a <=> b }    #=> nil
+[].min(1) {|a, b| a <=> b } #=> []
 
-  ary = %w(albatross dog horse)
-  ary.min {|a, b| a.length <=> b.length }    #=> "dog"
-  ary.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
+ary = %w(albatross dog horse)
+ary.min {|a, b| a.length <=> b.length }    #=> "dog"
+ary.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
+#@end
 
 @param n 取得する要素数。
 
@@ -2433,7 +2808,7 @@ a < b のとき負の整数を、期待しています。
 一つ目の形式は、各要素がすべて <=> メソッドを実装していることを仮定し
 ています。二つ目の形式では、要素同士の比較をブロックを用いて行います。
 
-#@samplecode
+#@samplecode 例
 a = %w(albatross dog horse)
 a.minmax                                 #=> ["albatross", "horse"]
 a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
@@ -2454,30 +2829,34 @@ a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
 
 配列が空の場合、initを返します。
 
-例:
-  [].sum                             #=> 0
-  [].sum(0.0)                        #=> 0.0
-  [1, 2, 3].sum                      #=> 6
-  [3, 5.5].sum                       #=> 8.5
-  [2.5, 3.0].sum(0.0) {|e| e * e }   #=> 15.25
-  [Object.new].sum                   #=> TypeError
+#@samplecode 例
+[].sum                             #=> 0
+[].sum(0.0)                        #=> 0.0
+[1, 2, 3].sum                      #=> 6
+[3, 5.5].sum                       #=> 8.5
+[2.5, 3.0].sum(0.0) {|e| e * e }   #=> 15.25
+[Object.new].sum                   #=> TypeError
+#@end
 
 配列の平均値は以下のように求められます。
 
-例:
-  mean = ary.sum(0.0) / ary.length
+#@samplecode 例
+mean = ary.sum(0.0) / ary.length
+#@end
 
 init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。
 
-例:
-  ["a", "b", "c"].sum("")            #=> "abc"
-  [[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
+#@samplecode 例
+["a", "b", "c"].sum("")            #=> "abc"
+[[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
+#@end
 
 しかし、文字列の配列や配列の配列の場合 Array#join や Array#flatten の方が Array#sum よりも高速です。
 
-例:
-  ["a", "b", "c"].join               #=> "abc"
-  [[1], [[2]], [3]].flatten(1)       #=> [1, [2], 3]
+#@samplecode 例
+["a", "b", "c"].join               #=> "abc"
+[[1], [[2]], [3]].flatten(1)       #=> [1, [2], 3]
+#@end
 
 "+" メソッドが再定義されている場合、Array#sum は再定義を無視することがあります(例えばInteger#+)。
 

@@ -45,10 +45,17 @@ category File
 
 == Module Functions
 
+#@since 2.6.0
+--- cd(dir, options = {})                   -> 0
+--- cd(dir, options = {}) {|dir| .... }     -> object
+--- chdir(dir, options = {})                -> 0
+--- chdir(dir, options = {}) {|dir| .... }  -> object
+#@else
 --- cd(dir, options = {})                   -> nil
 --- cd(dir, options = {}) {|dir| .... }     -> nil
 --- chdir(dir, options = {})                -> nil
 --- chdir(dir, options = {}) {|dir| .... }  -> nil
+#@end
 
 プロセスのカレントディレクトリを dir に変更します。
 

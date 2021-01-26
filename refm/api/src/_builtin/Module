@@ -1859,6 +1859,18 @@ SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
 name で指定した定数を deprecate に設定します。
 deprecate に設定した定数を参照すると警告メッセージが表示されます。
 
+#@since 2.7.0
+Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更になったため、
+デフォルトでは警告が表示されません。
+
+コマンドラインオプション(詳細は[[ref:d:spec/rubycmd#cmd_option]]参照)で、
+「-w」か「-W2」などを指定するか、実行中に「Warning[:deprecated] = true」で
+変更すると表示されるようになります。
+
+「$VERBOSE = true」は「Warning[:deprecated]」に影響しないため、
+表示されるかどうかは変わりません。
+#@end
+
 @param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
 
 @raise NameError 存在しない定数を指定した場合に発生します。
@@ -1894,7 +1906,7 @@ refinements 機能の詳細については以下を参照してください。
 
  * [[url:https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html]]
 #@since 2.1.0
- * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html]]
+ * [[url:https://docs.ruby-lang.org/en/master/doc/syntax/refinements_rdoc.html]]
 #@else
  * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html]]
 #@end
@@ -2057,7 +2069,7 @@ self が特異クラスの場合に true を返します。そうでなければ
 
 有効にした拡張の有効範囲については以下を参照してください。
 
- * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/master/doc/syntax/refinements_rdoc.html#label-Scope]]
 
 @param module 有効にするモジュールを指定します。
 

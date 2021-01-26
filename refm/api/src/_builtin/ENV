@@ -6,6 +6,7 @@ extend Enumerable
 ます。ただし、Hash と異なり、ENV のキーと値には文字列しか
 とることができません。
 
+#@until 2.7.0
 ENV で得られる文字列は ENV['PATH'] 以外は常に汚染されています。
 オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
 ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
@@ -16,6 +17,7 @@ ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリ�
   p ENV['TERM'].tainted?  # => true
   p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
   p path.tainted?         # => false
+#@end
 
 また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
@@ -223,12 +225,14 @@ val を値として持つ環境変数が存在する時、真を返します。
 #@since 1.9.1
 --- key(val)   -> String | nil
 #@end
+#@until 3.0
 --- index(val) -> String | nil
+#@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
 
-#@since 1.9.1
+#@until 3.0
 [[m:ENV.index]] は obsolete です。使用すると警告メッセージが表示されます。
 [[m:ENV.key]] を使用してください。
 #@end
@@ -397,8 +401,26 @@ ENV.slice("")           # => {}
 ENV.slice("unknown")    # => {}
 ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 #@end
+
+#@since 3.0.0
+@see [[m:Hash#slice]], [[m:ENV.except]]
+#@else
+@see [[m:Hash#slice]]
+#@end
 #@end
 #@since 2.7.0
 --- freeze -> ()
 ENV.freeze は環境変数の変更を禁止できないため、[[c:TypeError]]を発生させます。
+#@end
+#@since 3.0.0
+--- except(*keys) -> Hash
+
+引数で指定された以外のキーとその値だけを含む Hash を返します。
+
+#@samplecode
+ENV                       #=> {"LANG"=>"en_US.UTF-8", "TERM"=>"xterm-256color", "HOME"=>"/Users/rhc"}
+ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
+#@end
+
+@see [[m:Hash#except]], [[m:ENV.slice]]
 #@end

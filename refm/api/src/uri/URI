@@ -239,6 +239,14 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 #@# コンポーネントとは "X=Y&U=V&P=Q" という URL エンコード文字列における
 #@# X, Y, U, V, P, Q のこと
 
+#@samplecode
+require 'uri'
+enc = URI.encode_www_form_component('Ruby リファレンスマニュアル')
+# => "Ruby+%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB"
+p URI.decode_www_form_component(enc)
+# => "Ruby リファレンスマニュアル"
+#@end
+
 @param str デコード対象の文字列
 @param enc エンコーディング
 @raise ArgumentError str のフォーマットが不正である場合に発生します
@@ -299,6 +307,12 @@ UTF-8 に変換する場合など)。
 このメソッドは
 [[url:https://www.w3.org/TR/2013/CR-html5-20130806/forms.html#url-encoded-form-data]]
 にもとづいて実装されています。
+
+#@samplecode
+require 'uri'
+p URI.encode_www_form_component('Ruby リファレンスマニュアル')
+# => "Ruby+%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB"
+#@end
 
 @param str エンコードする文字列
 @param enc 指定された場合、パーセントエンコーディングする前に、strをこのエンコーディングに変換

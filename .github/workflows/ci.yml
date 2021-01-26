@@ -7,7 +7,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        ruby: [2.7, 2.6, 2.5]
+        ruby: ['3.0', 2.7, 2.6, 2.5, head]
+        exclude:
+          - ruby: '3.0'
+            os: windows-latest
 
     runs-on: ${{ matrix.os }}
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
@@ -43,7 +46,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: statichtml-${{ matrix.os }}-${{ matrix.ruby }}
-        path: /tmp/artifact/2.?.0.tar.xz
+        path: /tmp/artifact/*.*.tar.xz
 
     - name: Rename generated html
       run: |

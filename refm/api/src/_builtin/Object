@@ -692,7 +692,7 @@ require 'open-uri'
 require 'json'
 
 construct_url(arguments).
-  yield_self {|url| open(url).read }.
+  yield_self {|url| URI(url).read }.
   yield_self {|response| JSON.parse(response) }
 #@end
 
@@ -1669,6 +1669,8 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 また、オブジェクトがモジュール mod をインクルードしたクラスかそのサブクラス
 のインスタンスである場合にも真を返します。
+[[m:Module#include]]だけではなく、[[m:Object#extend]]や[[m:Module#prepend]]に
+よってサブクラスのインスタンスになる場合も含みます。
 上記のいずれでもない場合に false を返します。
 
 @param mod クラスやモジュールなど、[[c:Module]]かそのサブクラスのインスタンスです。
