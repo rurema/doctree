@@ -235,10 +235,12 @@ rexml/sax2listener
 rexml/parsers/ultralightparser
 rinda/rinda
 rinda/tuplespace
+#@since 1.9.0
 ripper
 ripper/filter
 ripper/lexer
 ripper/sexp
+#@end
 rss
 rubygems
 rubygems/builder
