@@ -206,6 +206,13 @@ $@ の値は、[[m:$!]].backtrace の値と同じです。
 
 この変数はスレッドローカルです。
 
+#@since 3.0
+--- $SAFE -> object
+
+通常のグローバル変数です。
+
+Ruby 2.7 以前は特殊変数でしたが、Ruby 3.0 から通常のグローバル変数になりました。
+#@else
 --- $SAFE -> Integer
 
 #@since 2.6.0
@@ -225,6 +232,7 @@ Thread.current.safe_level と同じです。
 この変数はスレッドローカルです。
 #@end
 Ruby起動時の初期値は 0 です。
+#@end
 
 --- $= -> bool
 
@@ -614,7 +622,17 @@ $VERBOSE はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
-#@since 1.9.1
+#@since 3.0
+--- $KCODE -> object
+--- $-K    -> object
+
+通常のグローバル変数です。
+
+Ruby 2.7 以前は特殊変数でしたが、Ruby 3.0 から通常のグローバル変数になりました。
+任意のオブジェクトを代入して nil 以外の値に設定できます。
+
+@see [[d:spec/rubycmd]]
+#@else
 --- $KCODE -> nil
 --- $-K    -> nil
 
@@ -630,49 +648,6 @@ $VERBOSE はグローバルスコープです。
   => nil
 
 @see [[d:spec/rubycmd]]
-
-#@else
---- $KCODE -> String
---- $-K    -> String
-
-Ruby の認識するマルチバイト文字列エンコーディングです。
-変数の値は "EUC" "SJIS" "UTF8" "NONE" のいずれかの文字列です。
-
-
-$KCODE の値が "EUC" のときは文字列や正規表現の
-エンコーディングが EUC-JP であると仮定します。
-同様に "SJIS" のときは Shift JIS を仮定します。
-"UTF8" のときは UTF-8 を仮定します。
-"NONE" のときはマルチバイト文字列を認識しません。
-
-代入するときには値の最初の 1 バイトしか意味がなく、
-また大文字小文字の違いも無視されます。すなわち、
-"e" "E" は "EUC"、"s" "S" は "SJIS"、
-"u" "U" は "UTF8"、"n" "N" は "NONE" に展開されます。
-
-デフォルト値は "NONE" です。
-
-[参考]
-
-現在の実装では $KCODE は Ruby の以下の動作に影響します。
-
-  * インタプリタの字句解析器
-  * [[c:Regexp]] のエンコーディングフラグのデフォルト値
-  * [[ref:d:spec/literal#regexp]]
-  * [[m:Regexp.new]]
-  * [[m:String#upcase]]
-  * [[m:String#downcase]]
-  * [[m:String#swapcase]]
-  * [[m:String#capitalize]]
-  * [[m:String#inspect]]
-  * [[m:String#split]]
-  * [[m:String#gsub]]
-  * [[m:String#scan]]
-
-$KCODE はグローバルスコープです。
-
-@see [[d:spec/rubycmd]]
-
 #@end
 
 --- $-a -> bool
