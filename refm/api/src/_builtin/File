@@ -253,6 +253,30 @@ dir_string を渡した場合はそのディレクトリを基準とします。
 
 #@end
 
+#@since 2.7.0
+--- absolute_path?(file_name) -> bool
+
+file_name が絶対パスなら true を、そうでなければ false を返します。
+
+@param file_name ファイル名を表す文字列を指定します。文字列でない場合は、to_path メソッド、to_str メソッドの順で暗黙の型変換が試みられます。
+
+@raise TypeError 引数に文字列以外の（暗黙の型変換が行えない）オブジェクトを指定した場合に発生します。
+
+#@samplecode
+File.absolute_path?("//foo/bar\\baz") # => true
+File.absolute_path?("C:foo\\bar")     # => false
+File.absolute_path?("~")              # => false
+
+# プラットフォームが cygwin、mswin、mingw の場合
+File.absolute_path?("C:\\foo\\bar")   # => true
+File.absolute_path?("/foo/bar\\baz")  # => false
+
+# プラットフォームが上記以外の場合
+File.absolute_path?("C:\\foo\\bar")   # => false
+File.absolute_path?("/foo/bar\\baz")  # => true
+#@end
+#@end
+
 --- extname(filename)    -> String
 
 ファイル名 filename の拡張子部分(最後の "." に続く文字列)を
