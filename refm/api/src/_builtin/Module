@@ -1134,11 +1134,17 @@ self の public インスタンスメソッド name をオブジェクト化し�
 @see [[m:Object#protected_methods]], [[m:Module#instance_methods]]
 
 --- private_class_method(*name) -> self
+#@since 3.0
+--- private_class_method(names) -> self
+#@end
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
 可視性を private に変更します。
 
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 例:
     module Foo
@@ -1150,11 +1156,17 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
     Foo.singleton_class.private_method_defined?(:foo) # => true
 
 --- public_class_method(*name) -> self
+#@since 3.0
+--- public_class_method(names) -> self
+#@end
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
 可視性を public に変更します。
 
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 例:
   class Foo
@@ -1630,6 +1642,9 @@ module_function はメソッドに「モジュール関数」という属性を�
 #@end
 
 --- private(*name) -> self
+#@since 3.0
+--- private(names) -> self
+#@end
 
 メソッドを private に設定します。
 
@@ -1641,7 +1656,10 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 可視性については [[ref:d:spec/def#limit]] を参照して下さい。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
@@ -1656,6 +1674,9 @@ module_function はメソッドに「モジュール関数」という属性を�
   p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoMethodError)
 
 --- protected(*name) -> self
+#@since 3.0
+--- protected(names) -> self
+#@end
 
 メソッドを protected に設定します。
 
@@ -1667,7 +1688,10 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 可視性については [[ref:d:spec/def#limit]] を参照して下さい。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
@@ -1676,6 +1700,9 @@ module_function はメソッドに「モジュール関数」という属性を�
 @see [[m:Module#protected_method_defined?]]
 
 --- public(*name) -> self
+#@since 3.0
+--- public(names) -> self
+#@end
 
 メソッドを public に設定します。
 
@@ -1687,7 +1714,10 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 可視性については [[ref:d:spec/def#limit]] を参照して下さい。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
