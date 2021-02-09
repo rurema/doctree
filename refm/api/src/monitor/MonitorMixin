@@ -54,6 +54,8 @@ buf.extend(MonitorMixin)
 super ではなく super() を呼ぶ必要があります。
 
 #@samplecode include する例
+require 'monitor'
+
 class MyObject
   include MonitorMixin
 
@@ -91,6 +93,7 @@ Mutex#lock と違うのは現在のモニターの所有者が現在実行され
 解放されません。
 
 #@samplecode 例
+require 'monitor'
 buf = []
 buf.extend(MonitorMixin)
 buf.mon_enter
@@ -140,3 +143,10 @@ mon_enter でロックした回数だけ mon_exit を
 --- new_cond -> MonitorMixin::ConditionVariable
 モニターに関連付けられた、新しい [[c:MonitorMixin::ConditionVariable]] を生成して返します。
 
+#@since 2.5.0
+--- mon_locked? -> bool
+モニターがロックされているときに true を返します。
+
+--- mon_owned? -> bool
+カレントスレッドがモニターをロックしているときに true を返します。
+#@end

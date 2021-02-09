@@ -74,35 +74,37 @@ mx.synchronize {
 一度に一つのスレッドだけがモニターをロックできます。
 既にモニターがロックされている場合は、ロックが開放されるまで
 そのスレッドは待ちます。
+#@else
+[[m:MonitorMixin#mon_enter]] の別名です。
+#@end
 
 [[m:Thread::Mutex#lock]] に相当します。
-Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
-何度でもロックできる点です。ロックした回数だけ mon_exit を呼ばなければモニターは
+Thread::Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
+何度でもロックできる点です。ロックした回数だけ [[m:Monitor#exit]] を呼ばなければモニターは
 解放されません。
 
 #@samplecode 例
 require 'monitor'
-buf = []
-buf.extend(MonitorMixin)
-buf.mon_enter
-buf.mon_enter
+mon = Monitor.new
+mon.enter
+mon.enter
 #@end
 
-Mutex#lock ではデッドロックが起きます。
+Thread::Mutex#lock ではデッドロックが起きます。
 
 #@samplecode Mutex でデッドロックする例
 m = Mutex.new
 m.lock
 m.lock # => deadlock; recursive locking (ThreadError)
 #@end
-#@else
-[[m:MonitorMixin#mon_enter]] の別名です。
-#@end
 
 --- exit -> ()
 #@since 2.7.0
 --- mon_exit -> ()
 モニターのロックを解放します。
+#@else
+[[m:MonitorMixin#mon_exit]] の別名です。
+#@end
 
 enter でロックした回数だけ exit を呼ばなければモニターは解放されません。
 
@@ -110,8 +112,15 @@ enter でロックした回数だけ exit を呼ばなければモニターは�
 スレッドが一つ実行を再開します。
 
 @raise ThreadError ロックを持っていないスレッドが呼びだした場合に発生します
-#@else
-[[m:MonitorMixin#mon_exit]] の別名です。
+
+#@samplecode 例
+require 'monitor'
+mon = Monitor.new
+mon.enter
+mon.enter
+mon.exit
+mon.exit
+mon.exit # => current thread not owner (ThreadError)
 #@end
 
 --- try_enter     -> bool
@@ -138,15 +147,13 @@ enter でロックした回数だけ exit を呼ばなければモニターは�
 
 @see [[m:Monitor#enter]]
 --- mon_locked? -> bool
-[[c:MonitorMixin]] 用の内部メソッドです。
-
+モニターがロックされているときに true を返します。
 --- mon_check_owner -> nil
 [[c:MonitorMixin]] 用の内部メソッドです。
 
 @raise ThreadError ロックを持っていないスレッドが呼びだした場合に発生します
 --- mon_owned? -> bool
-[[c:MonitorMixin]] 用の内部メソッドです。
-
+カレントスレッドがモニターをロックしているときに true を返します。
 --- wait_for_cond(cond, timeout) -> true
 [[c:MonitorMixin::ConditionVariable]] 用の内部メソッドです。
 
