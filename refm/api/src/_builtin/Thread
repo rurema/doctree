@@ -678,10 +678,9 @@ ensure 節を実行せずにスレッドの実行を終了させます。
 @see [[m:Thread#exit]], [[m:Kernel.#exit]], [[m:Kernel.#exit!]]
 #@end
 
---- group    -> ThreadGroup | nil
+--- group    -> ThreadGroup
 
 スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
-死んでいるスレッドは nil を返します。
 
     p Thread.current.group == ThreadGroup::Default
     # => true
