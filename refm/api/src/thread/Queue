@@ -114,7 +114,7 @@ begin
   th1.join
   q.pop(true)
 rescue => e
-  p e.message
+  p e
 end
 
 # => resource1
