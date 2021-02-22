@@ -2048,7 +2048,7 @@ self が [[m:Module#prepend]] されたときに対象のクラスまたはモ�
 #@end
 
 #@since 2.7.0
---- ruby2_keywords(method_name, ...)    -> self
+--- ruby2_keywords(method_name, ...)    -> nil
 
 For the given method names, marks the method as passing keywords through
 a normal argument splat.  This should only be called on methods that
