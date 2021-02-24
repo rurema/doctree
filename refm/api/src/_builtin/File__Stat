@@ -463,7 +463,6 @@ stickyビットが立っている時に真を返します。
   #...
 
 #@since 1.9.1
-#@# bc-rdoc: detected missing name: world_readable?
 --- world_readable? -> Integer | nil
 
 全てのユーザから読めるならば、そのファイルのパーミッションを表す
@@ -474,7 +473,6 @@ stickyビットが立っている時に真を返します。
    m = File.stat("/etc/passwd").world_readable?  # => 420
    sprintf("%o", m)                              # => "644"
 
-#@# bc-rdoc: detected missing name: world_writable?
 --- world_writable? -> Integer | nil
 
 全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
