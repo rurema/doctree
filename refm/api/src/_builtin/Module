@@ -631,17 +631,15 @@ name で指定される名前の定数の値を取り出します。
   Foo.const_set('foo', 1) # => NameError: wrong constant name foo
 
 #@since 2.7.0
---- const_source_location(sym, inherit=true)   -> [String, Integer]
---- const_source_location(str, inherit=true)   -> [String, Integer]
+--- const_source_location(name, inherited = true)   -> [String, Integer]
 
-Returns the Ruby source filename and line number containing the
-definition of the constant specified. If the named constant is not
-found, `nil` is returned. If the constant is found, but its source
-location can not be extracted (constant is defined in C code), empty
-array is returned.
+name で指定した定数の定義を含むソースコードのファイル名と行番号を配列で返します。
 
-*inherit* specifies whether to lookup in `mod.ancestors` (`true` by
-default).
+@param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
+@param value true を指定するとスーパークラスや include したモジュールで定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
+@return ソースコードのファイル名と行番号を配列で返します。
+        指定した定数が見つからない場合は nil を返します。
+        定数は見つかったがソースファイルが見つからなかった場合は空の配列を返します。
 
 #@samplecode
 # test.rb:
@@ -659,26 +657,26 @@ class B < A     # line 10
   C4 = 4
 end
 
-class A # continuation of A definition
-  C2 = 8 # constant redefinition; warned yet allowed
+class A # 継続して A を定義する
+  C2 = 8 # 定数を再定義する
 end
 
 p B.const_source_location('C4')           # => ["test.rb", 12]
 p B.const_source_location('C3')           # => ["test.rb", 7]
 p B.const_source_location('C1')           # => ["test.rb", 2]
 
-p B.const_source_location('C3', false)    # => nil  -- don't lookup in ancestors
+p B.const_source_location('C3', false)    # => nil  -- include したモジュールは検索しない
 
-p A.const_source_location('C2')           # => ["test.rb", 16] -- actual (last) definition place
+p A.const_source_location('C2')           # => ["test.rb", 16] -- 最後に定義された位置を返す
 
-p Object.const_source_location('B')       # => ["test.rb", 10] -- top-level constant could be looked through Object
-p Object.const_source_location('A')       # => ["test.rb", 1] -- class reopening is NOT considered new definition
+p Object.const_source_location('B')       # => ["test.rb", 10] -- Object はトップレベルの定数を検索する
+p Object.const_source_location('A')       # => ["test.rb", 1] -- クラスが再定義された場合は最初の定義位置を返す
 
-p B.const_source_location('A')            # => ["test.rb", 1]  -- because Object is in ancestors
-p M.const_source_location('A')            # => ["test.rb", 1]  -- Object is not ancestor, but additionally checked for modules
+p B.const_source_location('A')            # => ["test.rb", 1]  -- Object を継承している為
+p M.const_source_location('A')            # => ["test.rb", 1]  -- Object は継承していないが追加で modules をチェックする
 
-p Object.const_source_location('A::C1')   # => ["test.rb", 2]  -- nesting is supported
-p Object.const_source_location('String')  # => []  -- constant is defined in C code
+p Object.const_source_location('A::C1')   # => ["test.rb", 2]  -- ネストの指定もサポートしている
+p Object.const_source_location('String')  # => []  -- 定数は C のコードで定義されている
 #@end
 #@end
 
