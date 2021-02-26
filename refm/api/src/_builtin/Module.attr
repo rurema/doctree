@@ -74,7 +74,7 @@ end
 #@end
 
 #@since 3.0.0
---- attr_reader -> [Symbol]
+--- attr_reader(*name) -> [Symbol]
 #@else
 --- attr_reader(*name) -> nil
 #@end
@@ -103,7 +103,7 @@ end
 #@end
 
 #@since 3.0.0
---- attr_writer -> [Symbol]
+--- attr_writer(*name) -> [Symbol]
 #@else
 --- attr_writer(*name) -> nil
 #@end
