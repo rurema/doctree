@@ -36,7 +36,9 @@ end
 第 2 引数 に true か false を指定する方法は非推奨です。
 
 @param name [[c:String]] または [[c:Symbol]] で指定します。
+#@since 3.0.0
 @return 定義されたメソッド名を [[c:Symbol]] の配列で返します。
+#@end
 
 #@since 3.0.0
 --- attr_accessor(*name) -> [Symbol]
@@ -67,7 +69,9 @@ end
   end
 
 @param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
+#@since 3.0.0
 @return 定義されたメソッド名を [[c:Symbol]] の配列で返します。
+#@end
 
 #@since 3.0.0
 --- attr_reader -> [Symbol]
@@ -94,7 +98,9 @@ end
   end
 
 @param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
+#@since 3.0.0
 @return 定義されたメソッド名を [[c:Symbol]] の配列で返します。
+#@end
 
 #@since 3.0.0
 --- attr_writer -> [Symbol]
@@ -121,4 +127,6 @@ end
   end
 
 @param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
+#@since 3.0.0
 @return 定義されたメソッド名を [[c:Symbol]] の配列で返します。
+#@end
