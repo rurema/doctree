@@ -1,6 +1,19 @@
+#@since 3.0.0
+--- alias_method(new, original) -> Symbol
+#@else
 --- alias_method(new, original) -> self
+#@end
 
 メソッドの別名を定義します。
+
+#@since 3.0.0
+#@samplecode 例
+module Kernel
+  alias_method :hoge, :puts # => :hoge
+  alias_method "foo", :puts # => :foo
+end
+#@end
+#@end
 
 alias との違いは以下の通りです。
 
@@ -12,6 +25,10 @@ alias との違いは以下の通りです。
 @param new 新しいメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
 
 @param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
+
+#@since 3.0.0
+@return メソッド名を表す Symbol を返します。
+#@end
 
 @see [[ref:d:spec/def#alias]]
 
