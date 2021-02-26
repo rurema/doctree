@@ -32,6 +32,8 @@ alias との違いは以下の通りです。
 
 #@since 3.0.0
 @return メソッド名を表す Symbol を返します。
+#@else
+@return self を返します。
 #@end
 
 @see [[ref:d:spec/def#alias]]
