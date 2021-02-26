@@ -6,11 +6,15 @@
 
 メソッドの別名を定義します。
 
-#@since 3.0.0
 #@samplecode 例
+#@since 3.0.0
 module Kernel
   alias_method :hoge, :puts # => :hoge
   alias_method "foo", :puts # => :foo
+end
+#@else
+module Kernel
+  alias_method :hoge, :puts # => Kernel
 end
 #@end
 #@end
