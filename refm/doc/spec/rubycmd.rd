@@ -59,7 +59,8 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 
   バックトレースの最大行数を指定します。
 
-#@samplecode test.rb
+//emlist{
+# test.rb
 def f6 = raise
 def f5 = f6
 def f4 = f5
@@ -67,7 +68,7 @@ def f3 = f4
 def f2 = f3
 def f1 = f2
 f1
-#@end
+//}
 
 //emlist{
 % ruby --backtrace-limit=3 test.rb
