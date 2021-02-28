@@ -12,15 +12,17 @@
 
 このメソッドを呼び出した時点で参照可能な定数名の配列を返します。
 
-  class C
-    FOO = 1
-  end
+#@samplecode 例
+class C
+  FOO = 1
+end
 #@since 1.9.1
-  p Module.constants   # => [:RUBY_PLATFORM, :STDIN, ..., :C, ...]
-                       # 出力中に :FOO は現われない
+p Module.constants   # => [:RUBY_PLATFORM, :STDIN, ..., :C, ...]
+                     # 出力中に :FOO は現われない
 #@else
-  p Module.constants   # => ["RUBY_PLATFORM", "STDIN", ..., "C", ...]
-                       # 出力中に "FOO" は現われない
+p Module.constants   # => ["RUBY_PLATFORM", "STDIN", ..., "C", ...]
+                     # 出力中に "FOO" は現われない
+#@end
 #@end
 
 @see [[m:Module#constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#class_variables]]
@@ -30,13 +32,15 @@
 このメソッドを呼び出した時点でのクラス/モジュールのネスト情
 報を配列に入れて返します。
 
-  module Foo
-    module Bar
-      module Baz
-        p Module.nesting   # => [Foo::Bar::Baz, Foo::Bar, Foo]
-      end
+#@samplecode 例
+module Foo
+  module Bar
+    module Baz
+      p Module.nesting   # => [Foo::Bar::Baz, Foo::Bar, Foo]
     end
   end
+end
+#@end
 
 --- new -> Module
 --- new {|mod| ... } -> Module
@@ -46,9 +50,13 @@
 ブロックが与えられると生成したモジュールをブロックに渡し、
 モジュールのコンテキストでブロックを実行します。
 
-  mod = Module.new
-  mod.module_eval {|m| ... }
-  mod
+#@samplecode 例
+mod = Module.new
+mod.module_eval {|m|
+  # ...
+}
+mod
+#@end
 
 と同じです。
 ブロックの実行は Module#initialize が行います。
@@ -60,17 +68,19 @@
 モジュールの名前は、
 そのモジュールが代入されている定数名のいずれかです。
 
-  m = Module.new
-  p m               # => #<Module 0lx40198a54>
+#@samplecode 例
+m = Module.new
+p m               # => #<Module 0lx40198a54>
 #@since 1.9.1
-  p m.name          # => nil   # まだ名前は未定
+p m.name          # => nil   # まだ名前は未定
 #@else
-  p m.name          # => ""    # まだ名前は未定
+p m.name          # => ""    # まだ名前は未定
 #@end
-  Foo = m
-  # m.name          # ここで m.name を呼べば m の名前は "Foo" に確定する
-  Bar = m
-  m.name            # "Foo" か "Bar" のどちらかに決まる
+Foo = m
+# m.name          # ここで m.name を呼べば m の名前は "Foo" に確定する
+Bar = m
+m.name            # "Foo" か "Bar" のどちらかに決まる
+#@end
 
 #@since 2.4.0
 --- used_modules -> [Module]
@@ -78,20 +88,22 @@
 現在のスコープで using されているすべてのモジュールを配列で返します。
 配列内のモジュールの順番は未定義です。
 
-  module A
-    refine Object do
-    end
+#@samplecode 例
+module A
+  refine Object do
   end
+end
 
-  module B
-    refine Object do
-    end
+module B
+  refine Object do
   end
+end
 
-  using A
-  using B
-  p Module.used_modules
-  #=> [B, A]
+using A
+using B
+p Module.used_modules
+#=> [B, A]
+#@end
 #@end
 
 == Instance Methods
@@ -114,22 +126,24 @@ nil を返します。
 
 @param other 比較対象のクラスやモジュール
 
-  module Foo
-  end
-  class Bar
-    include Foo
-  end
-  class Baz < Bar
-  end
-  class Qux
-  end
-  p Bar <=> Foo     # => -1
-  p Baz <=> Bar     # => -1
-  p Baz <=> Foo     # => -1
-  p Baz <=> Qux     # => nil
-  p Qux <=> Baz     # => nil
+#@samplecode 例
+module Foo
+end
+class Bar
+  include Foo
+end
+class Baz < Bar
+end
+class Qux
+end
+p Bar <=> Foo     # => -1
+p Baz <=> Bar     # => -1
+p Baz <=> Foo     # => -1
+p Baz <=> Qux     # => nil
+p Qux <=> Baz     # => nil
 
-  p Baz <=> Object.new  # => nil
+p Baz <=> Object.new  # => nil
+#@end
 
 --- <(other)  -> bool | nil
 
@@ -144,22 +158,24 @@ nil を返します。
 
 @raise TypeError other がクラスやモジュールではない場合に発生します。
 
-  module Foo
-  end
-  class Bar
-    include Foo
-  end
-  class Baz < Bar
-  end
-  class Qux
-  end
-  p Bar < Foo     # => true
-  p Baz < Bar     # => true
-  p Baz < Foo     # => true
-  p Baz < Qux     # => nil
-  p Baz > Qux     # => nil
+#@samplecode 例
+module Foo
+end
+class Bar
+  include Foo
+end
+class Baz < Bar
+end
+class Qux
+end
+p Bar < Foo     # => true
+p Baz < Bar     # => true
+p Baz < Foo     # => true
+p Baz < Qux     # => nil
+p Baz > Qux     # => nil
 
-  p Foo < Object.new # => in `<': compared with non class/module (TypeError)
+p Foo < Object.new # => in `<': compared with non class/module (TypeError)
+#@end
 
 --- <=(other) -> bool | nil
 
@@ -176,25 +192,26 @@ nil を返します。
 
 @see [[m:Module#<]]
 
-例:
-  module Foo; end
-  module Bar
-    include Foo
-  end
-  module Baz
-    prepend Foo
-  end
+#@samplecode 例
+module Foo; end
+module Bar
+  include Foo
+end
+module Baz
+  prepend Foo
+end
 
-  Bar.ancestors # => [Bar, Foo]
-  Foo <= Bar # => false
-  Bar <= Foo # => true
+Bar.ancestors # => [Bar, Foo]
+Foo <= Bar # => false
+Bar <= Foo # => true
 
-  Baz.ancestors # => [Foo, Baz]
-  Foo <= Baz # => false
-  Baz <= Foo # => true
+Baz.ancestors # => [Foo, Baz]
+Foo <= Baz # => false
+Baz <= Foo # => true
 
-  Foo <= Foo # => true
-  Foo <= Object # => nil
+Foo <= Foo # => true
+Foo <= Object # => nil
+#@end
 
 --- >(other)  -> bool | nil
 
@@ -210,25 +227,26 @@ nil を返します。
 
 @see [[m:Module#<]]
 
-例:
-  module Awesome; end
-  module Included
-    include Awesome
-  end
-  module Prepended
-    prepend Awesome
-  end
+#@samplecode 例
+module Awesome; end
+module Included
+  include Awesome
+end
+module Prepended
+  prepend Awesome
+end
 
-  Included.ancestors # => [Included, Awesome]
-  Awesome > Included # => true
-  Included > Awesome # => false
+Included.ancestors # => [Included, Awesome]
+Awesome > Included # => true
+Included > Awesome # => false
 
-  Prepended.ancestors # => [Awesome, Prepended]
-  Awesome > Prepended # => true
-  Prepended > Awesome # => false
+Prepended.ancestors # => [Awesome, Prepended]
+Awesome > Prepended # => true
+Prepended > Awesome # => false
 
-  Awesome > Awesome # => false
-  Awesome > Object # => nil
+Awesome > Awesome # => false
+Awesome > Object # => nil
+#@end
 
 --- >=(other) -> bool | nil
 
@@ -244,25 +262,26 @@ nil を返します。
 
 @see [[m:Module#<]]
 
-例:
-  module Foo; end
-  module Bar
-    include Foo
-  end
-  module Baz
-    prepend Foo
-  end
+#@samplecode 例
+module Foo; end
+module Bar
+  include Foo
+end
+module Baz
+  prepend Foo
+end
 
-  Bar.ancestors # => [Bar, Foo]
-  Foo >= Bar # => true
-  Bar >= Foo # => false
+Bar.ancestors # => [Bar, Foo]
+Foo >= Bar # => true
+Bar >= Foo # => false
 
-  Baz.ancestors # => [Foo, Baz]
-  Foo >= Baz # => true
-  Baz >= Foo # => false
+Baz.ancestors # => [Foo, Baz]
+Foo >= Baz # => true
+Baz >= Foo # => false
 
-  Foo >= Foo # => true
-  Foo >= Object # => nil
+Foo >= Foo # => true
+Foo >= Object # => nil
+#@end
 
 --- ===(obj) -> bool
 
@@ -275,11 +294,13 @@ nil を返します。
 このメソッドは主に case 文での比較に用いられます。
 case ではクラス、モジュールの所属関係をチェックすることになります。
 
-  str = String.new
-  case str
-  when String     # String === str を評価する
-    p true        # => true
-  end
+#@samplecode 例
+str = String.new
+case str
+when String     # String === str を評価する
+  p true        # => true
+end
+#@end
 
 @param obj 任意のオブジェクト
 
@@ -290,23 +311,25 @@ case ではクラス、モジュールの所属関係をチェックすること
 クラス、モジュールのスーパークラスとインクルードしているモジュール
 を優先順位順に配列に格納して返します。
 
-  module Foo
-  end
-  class Bar
-    include Foo
-  end
-  class Baz < Bar
-    p ancestors
-    p included_modules
-    p superclass
-  end
+#@samplecode 例
+module Foo
+end
+class Bar
+  include Foo
+end
+class Baz < Bar
+  p ancestors
+  p included_modules
+  p superclass
+end
 #@since 1.9.1
-  # => [Baz, Bar, Foo, Object, Kernel, BasicObject]
+# => [Baz, Bar, Foo, Object, Kernel, BasicObject]
 #@else
-  # => [Baz, Bar, Foo, Object, Kernel]
+# => [Baz, Bar, Foo, Object, Kernel]
 #@end
-  # => [Foo, Kernel]
-  # => Bar
+# => [Foo, Kernel]
+# => Bar
+#@end
 
 @see [[m:Module#included_modules]]
 
@@ -324,7 +347,7 @@ case ではクラス、モジュールの所属関係をチェックすること
 
 @param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
-#@samplecode
+#@samplecode 例
 # ------- /tmp/foo.rb ---------
 class Foo
   class Bar
@@ -340,7 +363,7 @@ p Foo::Bar #=> Foo::Bar
 
 以下のようにモジュールを明示的にレシーバとして呼び出すこともできます。
 
-#@samplecode
+#@samplecode 例
 # ------- /tmp/foo.rb ---------
 class Foo
   class Bar
@@ -358,7 +381,7 @@ p Foo::Bar #=> Foo::Bar
 以下のように、autoload したライブラリがネストした定数を定義しない場
 合、NameError が発生します。
 
-#@samplecode
+#@samplecode 例
 # ------- /tmp/bar.rb ---------
 class Bar
 end
@@ -375,7 +398,7 @@ p Foo::Bar
 合、一見、正常に動作しているように見えるので注意が必要です(警告メッ
 セージが出ています)。
 
-#@samplecode
+#@samplecode 例
 # ------- /tmp/bar.rb ---------
 class Bar
 end
@@ -393,7 +416,7 @@ p Foo.autoload?(:Bar)
 
 これは以下のようにネストせずに定義したのと同じことです。
 
-#@samplecode
+#@samplecode 例
 class Foo
 end
 class Bar
@@ -414,13 +437,14 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 
 @see [[m:Kernel.#autoload?]]
 
-例:
-  autoload :Date, 'date'
+#@samplecode 例
+autoload :Date, 'date'
 
-  autoload?(:Date) # => "date"
-  Date
-  autoload?(:Date) # => nil
-  autoload?(:Foo) # => nil
+autoload?(:Date) # => "date"
+Date
+autoload?(:Date) # => nil
+autoload?(:Foo) # => nil
+#@end
 
 #@since 1.9.1
 #@since 2.0.0
@@ -439,26 +463,30 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 @param inherit false を指定しない場合はスーパークラスやインクルードして
        いるモジュールのクラス変数を含みます。
 
-  class One
-    @@var1 = 1
-  end
-  class Two < One
-    @@var2 = 2
-  end
-  One.class_variables          # => [:@@var1]
-  Two.class_variables          # => [:@@var2, :@@var1]
-  Two.class_variables(false)   # => [:@@var2]
+#@samplecode 例
+class One
+  @@var1 = 1
+end
+class Two < One
+  @@var2 = 2
+end
+One.class_variables          # => [:@@var1]
+Two.class_variables          # => [:@@var2, :@@var1]
+Two.class_variables(false)   # => [:@@var2]
+#@end
 #@else
 スーパークラスやインクルードしているモジュールのクラス変数は含みません。
 
-  class One
-    @@var1 = 1
-  end
-  class Two < One
-    @@var2 = 2
-  end
-  One.class_variables   # => [:@@var1]
-  Two.class_variables   # => [:@@var2]
+#@samplecode 例
+class One
+  @@var1 = 1
+end
+class Two < One
+  @@var2 = 2
+end
+One.class_variables   # => [:@@var1]
+Two.class_variables   # => [:@@var2]
+#@end
 #@end
 #@else
 スーパークラスやインクルードしているモジュールのクラス変数も含みます。
@@ -493,36 +521,38 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 
 #@end
 
-  module Kernel
-    FOO = 1
-  end
+#@samplecode 例
+module Kernel
+  FOO = 1
+end
 
-  # Object は include したモジュールの定数に対しても
-  # true を返す
-  p Object.const_defined?(:FOO)   # => true
+# Object は include したモジュールの定数に対しても
+# true を返す
+p Object.const_defined?(:FOO)   # => true
 
-  module Bar
-    BAR = 1
-  end
-  class Object
-    include Bar
-  end
-  # ユーザ定義のモジュールに対しても同様
-  p Object.const_defined?(:BAR)   # => true
+module Bar
+  BAR = 1
+end
+class Object
+  include Bar
+end
+# ユーザ定義のモジュールに対しても同様
+p Object.const_defined?(:BAR)   # => true
 
-  class Baz
-    include Bar
-  end
+class Baz
+  include Bar
+end
 #@since 1.9.1
-  # Object 以外でも同様になった
-  # 第二引数のデフォルト値が true であるため
-  p Baz.const_defined?(:BAR)      # => true
+# Object 以外でも同様になった
+# 第二引数のデフォルト値が true であるため
+p Baz.const_defined?(:BAR)      # => true
 
-  # 第二引数を false にした場合
-  p Baz.const_defined?(:BAR, false)   # => false
+# 第二引数を false にした場合
+p Baz.const_defined?(:BAR, false)   # => false
 #@else
-  # Object 以外では self の定数だけがチェック対象
-  p Baz.const_defined?(:BAR)      # => false
+# Object 以外では self の定数だけがチェック対象
+p Baz.const_defined?(:BAR)      # => false
+#@end
 #@end
 
 #@since 1.9.1
@@ -553,29 +583,31 @@ name で指定される名前の定数の値を取り出します。
 
 @raise NameError 定数が定義されていないときに発生します。
 
-  module Bar
-    BAR = 1
-  end
-  class Object
-    include Bar
-  end
-  # Object では include されたモジュールに定義された定数を見付ける
-  p Object.const_get(:BAR)   # => 1
+#@samplecode 例
+module Bar
+  BAR = 1
+end
+class Object
+  include Bar
+end
+# Object では include されたモジュールに定義された定数を見付ける
+p Object.const_get(:BAR)   # => 1
 
-  class Baz
-    include Bar
-  end
-  # Object以外でも同様
-  p Baz.const_get(:BAR)      # => 1
-  # 定義されていない定数
-  p Baz.const_get(:NOT_DEFINED) #=> raise NameError
+class Baz
+  include Bar
+end
+# Object以外でも同様
+p Baz.const_get(:BAR)      # => 1
+# 定義されていない定数
+p Baz.const_get(:NOT_DEFINED) #=> raise NameError
 #@since 1.9.1
-  # 第二引数に false を指定すると自分自身に定義された定数から探す
-  p Baz.const_get(:BAR, false) #=> raise NameError
+# 第二引数に false を指定すると自分自身に定義された定数から探す
+p Baz.const_get(:BAR, false) #=> raise NameError
 #@end
 #@since 2.0.0
-  # 完全修飾名を指定すると include や自分自身へ定義されていない場合でも参照できる
-  p Class.const_get("Bar::BAR") # => 1
+# 完全修飾名を指定すると include や自分自身へ定義されていない場合でも参照できる
+p Class.const_get("Bar::BAR") # => 1
+#@end
 #@end
 
 --- const_missing(name)
@@ -587,17 +619,19 @@ name で指定される名前の定数の値を取り出します。
 @raise NameError このメソッドを呼び出した場合、デフォルトで発生する例外
 
 
-  class Foo
-    def Foo.const_missing(id)
-      warn "undefined constant #{id.inspect}"
-    end
-
-    Bar
+#@samplecode 例
+class Foo
+  def Foo.const_missing(id)
+    warn "undefined constant #{id.inspect}"
   end
-  Foo::Bar
 
-  # => undefined constant :Bar
-       undefined constant :Bar
+  Bar
+end
+Foo::Bar
+
+# => undefined constant :Bar
+#    undefined constant :Bar
+#@end
 
 --- const_set(name, value) -> object
 
@@ -610,25 +644,26 @@ name で指定される名前の定数の値を取り出します。
 @param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
 @param value セットしたい値を指定します。
 
-例:
-  module Foo; end
+#@samplecode 例
+module Foo; end
 
-  # Symbolを指定した場合
-  Foo.const_set(:FOO, 123)
-  Foo::FOO # => 123
+# Symbolを指定した場合
+Foo.const_set(:FOO, 123)
+Foo::FOO # => 123
 
-  # Stringを指定した場合
-  Foo.const_set('BAR', 'abc')
-  Foo::BAR # => "abc"
+# Stringを指定した場合
+Foo.const_set('BAR', 'abc')
+Foo::BAR # => "abc"
 
-  # 既に定義されている定数の名前を指定した場合
-  Foo.const_set('BAR', '123')
-  # warning: already initialized constant Foo::BAR
-  # warning: previous definition of BAR was here
-  # => "123"
+# 既に定義されている定数の名前を指定した場合
+Foo.const_set('BAR', '123')
+# warning: already initialized constant Foo::BAR
+# warning: previous definition of BAR was here
+# => "123"
 
-  # 不適切な定数名を指定した場合
-  Foo.const_set('foo', 1) # => NameError: wrong constant name foo
+# 不適切な定数名を指定した場合
+Foo.const_set('foo', 1) # => NameError: wrong constant name foo
+#@end
 
 #@since 2.7.0
 --- const_source_location(name, inherited = true)   -> [String, Integer]
@@ -641,7 +676,7 @@ name で指定した定数の定義を含むソースコードのファイル名
         指定した定数が見つからない場合は nil を返します。
         定数は見つかったがソースファイルが見つからなかった場合は空の配列を返します。
 
-#@samplecode
+#@samplecode 例
 # test.rb:
 class A         # line 1
   C1 = 1
@@ -705,47 +740,47 @@ inherit に真を指定すると
 
 @see [[m:Module.constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#class_variables]]
 
- Module.constants と Module#constants の違い
+#@samplecode Module.constants と Module#constants の違い
+# 出力の簡略化のため起動時の定数一覧を取得して後で差し引く
+$clist = Module.constants
 
-  # 出力の簡略化のため起動時の定数一覧を取得して後で差し引く
-  $clist = Module.constants
-
-  class Foo
-    FOO = 1
-  end
-  class Bar
-    BAR = 1
+class Foo
+  FOO = 1
+end
+class Bar
+  BAR = 1
 
 #@since 1.9.1
-    # Bar は BAR を含む
-    p constants                         # => [:BAR]
-    # 出力に FOO は含まれない
-    p Module.constants - $clist         # => [:BAR, :Bar, :Foo]
-    class Baz
-      # Baz は定数を含まない
-      p constants                       # => []
+  # Bar は BAR を含む
+  p constants                         # => [:BAR]
+  # 出力に FOO は含まれない
+  p Module.constants - $clist         # => [:BAR, :Bar, :Foo]
+  class Baz
+    # Baz は定数を含まない
+    p constants                       # => []
 
-      # ネストしたクラスでは、外側のクラスで定義した定数は
-      # 参照可能なので、BAR は、Module.constants には含まれる
-      # (クラス Baz も Bar の定数なので同様)
-      p Module.constants - $clist       # => [:BAR, :Baz, :Foo, :Bar]
-    end
-#@else
-    # Bar は BAR を含む
-    p constants                         # => ["BAR"]
-    # 出力に FOO は含まれない
-    p Module.constants - $clist         # => ["BAR", "Bar", "Foo"]
-    class Baz
-      # Baz は定数を含まない
-      p constants                       # => []
-
-      # ネストしたクラスでは、外側のクラスで定義した定数は
-      # 参照可能なので、BAR は、Module.constants には含まれる
-      # (クラス Baz も Bar の定数なので同様)
-      p Module.constants - $clist       # => ["BAR", "Baz", "Bar", "Foo"]
-    end
-#@end
+    # ネストしたクラスでは、外側のクラスで定義した定数は
+    # 参照可能なので、BAR は、Module.constants には含まれる
+    # (クラス Baz も Bar の定数なので同様)
+    p Module.constants - $clist       # => [:BAR, :Baz, :Foo, :Bar]
   end
+#@else
+  # Bar は BAR を含む
+  p constants                         # => ["BAR"]
+  # 出力に FOO は含まれない
+  p Module.constants - $clist         # => ["BAR", "Bar", "Foo"]
+  class Baz
+    # Baz は定数を含まない
+    p constants                       # => []
+
+    # ネストしたクラスでは、外側のクラスで定義した定数は
+    # 参照可能なので、BAR は、Module.constants には含まれる
+    # (クラス Baz も Bar の定数なので同様)
+    p Module.constants - $clist       # => ["BAR", "Baz", "Bar", "Foo"]
+  end
+#@end
+end
+#@end
 
 --- freeze -> self
 
@@ -761,16 +796,17 @@ inherit に真を指定すると
 
 @see [[m:Object#freeze]]
 
-例:
-  module Foo; end
-  Foo.freeze
+#@samplecode 例
+module Foo; end
+Foo.freeze
 
-  module Foo
-    def foo; end
+module Foo
+  def foo; end
 #@since 2.5.0
-  end # => FrozenError: can't modify frozen module
+end # => FrozenError: can't modify frozen module
 #@else
-  end # => RuntimeError: can't modify frozen module
+end # => RuntimeError: can't modify frozen module
+#@end
 #@end
 
 #@since 2.1.0
@@ -784,30 +820,34 @@ self かその親クラス / 親モジュールがモジュール mod を
 
 @param mod [[c:Module]] を指定します。
 
-  module M
-  end
-  class C1
-    include M
-  end
-  class C2 < C1
-  end
+#@samplecode 例
+module M
+end
+class C1
+  include M
+end
+class C2 < C1
+end
 
-  p C1.include?(M)   # => true
-  p C2.include?(M)   # => true
+p C1.include?(M)   # => true
+p C2.include?(M)   # => true
+#@end
 
 --- included_modules -> [Module]
 
 self にインクルードされているモジュールの配列を返します。
 
-  module Mixin
-  end
+#@samplecode 例
+module Mixin
+end
 
-  module Outer
-    include Mixin
-  end
+module Outer
+  include Mixin
+end
 
-  Mixin.included_modules   #=> []
-  Outer.included_modules   #=> [Mixin]
+Mixin.included_modules   #=> []
+Outer.included_modules   #=> [Mixin]
+#@end
 
 @see [[m:Module#ancestors]]
 
@@ -821,26 +861,27 @@ self のインスタンスメソッド name をオブジェクト化した [[c:U
 
 @see [[m:Module#public_instance_method]], [[m:Object#method]]
 
-例:
-  class Interpreter
-    def do_a() print "there, "; end
-    def do_d() print "Hello ";  end
-    def do_e() print "!\n";     end
-    def do_v() print "Dave";    end
-    Dispatcher = {
-      "a" => instance_method(:do_a),
-      "d" => instance_method(:do_d),
-      "e" => instance_method(:do_e),
-      "v" => instance_method(:do_v)
-    }
-    def interpret(string)
-      string.each_char {|b| Dispatcher[b].bind(self).call }
-    end
+#@samplecode 例
+class Interpreter
+  def do_a() print "there, "; end
+  def do_d() print "Hello ";  end
+  def do_e() print "!\n";     end
+  def do_v() print "Dave";    end
+  Dispatcher = {
+    "a" => instance_method(:do_a),
+    "d" => instance_method(:do_d),
+    "e" => instance_method(:do_e),
+    "v" => instance_method(:do_v)
+  }
+  def interpret(string)
+    string.each_char {|b| Dispatcher[b].bind(self).call }
   end
+end
 
-  interpreter = Interpreter.new
-  interpreter.interpret('dave')
-  # => Hello there, Dave!
+interpreter = Interpreter.new
+interpreter.interpret('dave')
+# => Hello there, Dave!
+#@end
 
 #@since 2.6.0
 --- method_defined?(name, inherit=true) -> bool
@@ -914,18 +955,18 @@ C.method_defined? "private_method2"     #=> false
 @param lineno 文字列を指定します。行番号 lineno から文字列 expr が書かれているかのように実行されます。
               スタックトレースの表示などを差し替えることができます。
 
-例:
+#@samplecode 例
+class C
+end
+a = 1
+C.class_eval %Q{
+  def m                   # メソッドを動的に定義できる。
+    return :m, #{a}
+  end
+}
 
- class C
- end
- a = 1
- C.class_eval %Q{     
-   def m                   # メソッドを動的に定義できる。
-     return :m, #{a}
-   end
- }
- 
- p C.new.m        #=> [:m, 1]
+p C.new.m        #=> [:m, 1]
+#@end
 
 #@since 1.9.1
 @see [[m:BasicObject#instance_eval]], [[m:Module.new]], [[m:Kernel.#eval]]
@@ -957,29 +998,31 @@ C.method_defined? "private_method2"     #=> false
 @return 名前のないモジュール / クラスに対しては空文字列を返します。
 #@end
 
-  module A
-    module B
-    end
-
-    p B.name  #=> "A::B"
-
-    class C
-    end
+#@samplecode 例
+module A
+  module B
   end
 
-  p A.name    #=> "A"
-  p A::B.name #=> "A::B"
-  p A::C.name #=> "A::C"
+  p B.name  #=> "A::B"
 
-  # 名前のないモジュール / クラス
+  class C
+  end
+end
+
+p A.name    #=> "A"
+p A::B.name #=> "A::B"
+p A::C.name #=> "A::C"
+
+# 名前のないモジュール / クラス
 #@since 1.9.1
-  p Module.new.name   #=> nil
-  p Class.new.name    #=> nil
-  p Module.new.to_s   #=> "#<Module:0x00007f90b09112c8>"
-  p Class.new.to_s    #=> "#<Class:0x00007fa5c40b41b0>"
+p Module.new.name   #=> nil
+p Class.new.name    #=> nil
+p Module.new.to_s   #=> "#<Module:0x00007f90b09112c8>"
+p Class.new.to_s    #=> "#<Class:0x00007fa5c40b41b0>"
 #@else
-  p Module.new.name   #=> ""
-  p Class.new.name    #=> ""
+p Module.new.name   #=> ""
+p Class.new.name    #=> ""
+#@end
 #@end
 
 #@since 1.9.1
@@ -995,22 +1038,22 @@ C.method_defined? "private_method2"     #=> false
 
 @see [[m:Object#methods]]
 
-例1:
+#@samplecode 例1
+class Foo
+  private;   def private_foo()   end
+  protected; def protected_foo() end
+  public;    def public_foo()    end
+end
 
-  class Foo
-    private;   def private_foo()   end
-    protected; def protected_foo() end
-    public;    def public_foo()    end
-  end
+# あるクラスのインスタンスメソッドの一覧を得る
+p Foo.instance_methods(false)
+p Foo.public_instance_methods(false)
+p Foo.private_instance_methods(false)
+p Foo.protected_instance_methods(false)
 
-  # あるクラスのインスタンスメソッドの一覧を得る
-  p Foo.instance_methods(false)
-  p Foo.public_instance_methods(false)
-  p Foo.private_instance_methods(false)
-  p Foo.protected_instance_methods(false)
-
-  class Bar < Foo
-  end
+class Bar < Foo
+end
+#@end
 
 実行結果
 
@@ -1026,21 +1069,21 @@ C.method_defined? "private_method2"     #=> false
      ["protected_foo"]
 #@end
 
-例2:
+#@samplecode 例2
+class Bar
+  private;   def private_foo()   end
+  protected; def protected_foo() end
+  public;    def public_foo()    end
+end
 
-  class Bar
-    private;   def private_foo()   end
-    protected; def protected_foo() end
-    public;    def public_foo()    end
-  end
-
-  # あるクラスのインスタンスメソッドの一覧を得る。
-  # 親のクラスのインスタンスメソッドも含めるため true を指定して
-  # いるが、Object のインスタンスメソッドは一覧から排除している。
-  p Bar.instance_methods(true)           - Object.instance_methods(true)
-  p Bar.public_instance_methods(true)    - Object.public_instance_methods(true)
-  p Bar.private_instance_methods(true)   - Object.private_instance_methods(true)
-  p Bar.protected_instance_methods(true) - Object.protected_instance_methods(true)
+# あるクラスのインスタンスメソッドの一覧を得る。
+# 親のクラスのインスタンスメソッドも含めるため true を指定して
+# いるが、Object のインスタンスメソッドは一覧から排除している。
+p Bar.instance_methods(true)           - Object.instance_methods(true)
+p Bar.public_instance_methods(true)    - Object.public_instance_methods(true)
+p Bar.private_instance_methods(true)   - Object.private_instance_methods(true)
+p Bar.protected_instance_methods(true) - Object.protected_instance_methods(true)
+#@end
 
 実行結果
 
@@ -1066,8 +1109,10 @@ self の public インスタンスメソッド name をオブジェクト化し�
 @raise NameError 定義されていないメソッド名や、
        protected メソッド名、 private メソッド名を引数として与えると発生します。
 
-  Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
-  Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is private (NameError)
+#@samplecode 例
+Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
+Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is private (NameError)
+#@end
 
 @see [[m:Module#instance_method]],[[m:Object#public_method]]
 #@end
@@ -1100,21 +1145,22 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 @see [[m:Object#private_methods]], [[m:Module#instance_methods]]
 
-例:
-  module Foo
-    def foo; end
-    private def bar; end
-  end
+#@samplecode 例
+module Foo
+  def foo; end
+  private def bar; end
+end
 
-  module Bar
-    include Foo
+module Bar
+  include Foo
 
-    def baz; end
-    private def qux; end
-  end
+  def baz; end
+  private def qux; end
+end
 
-  Bar.private_instance_methods # => [:qux, :bar]
-  Bar.private_instance_methods(false) # => [:qux]
+Bar.private_instance_methods # => [:qux, :bar]
+Bar.private_instance_methods(false) # => [:qux]
+#@end
 
 #@since 1.9.1
 --- protected_instance_methods(inherited_too = true) -> [Symbol]
@@ -1144,14 +1190,15 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 @param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
 #@end
 
-例:
-    module Foo
-      def self.foo; end
-    end
+#@samplecode 例
+module Foo
+  def self.foo; end
+end
 
-    Foo.singleton_class.private_method_defined?(:foo) # => false
-    Foo.private_class_method(:foo) # => Foo
-    Foo.singleton_class.private_method_defined?(:foo) # => true
+Foo.singleton_class.private_method_defined?(:foo) # => false
+Foo.private_class_method(:foo) # => Foo
+Foo.singleton_class.private_method_defined?(:foo) # => true
+#@end
 
 --- public_class_method(*name) -> self
 #@since 3.0
@@ -1166,19 +1213,20 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 @param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
 #@end
 
-例:
-  class Foo
-    def self.foo
-      "foo"
-    end
-
-    private_class_method :foo
+#@samplecode 例
+class Foo
+  def self.foo
+    "foo"
   end
 
-  Foo.foo # NoMethodError: private method `foo' called for Foo:Class
+  private_class_method :foo
+end
 
-  Foo.public_class_method(:foo) # => Foo
-  Foo.foo # => "foo"
+Foo.foo # NoMethodError: private method `foo' called for Foo:Class
+
+Foo.public_class_method(:foo) # => Foo
+Foo.foo # => "foo"
+#@end
 
 #@since 2.6.0
 --- private_method_defined?(name, inherit=true) -> bool
@@ -1311,13 +1359,15 @@ name で与えられた名前のクラス変数がモジュールに存在する
 
 @param name [[c:Symbol]] か [[c:String]] を指定します。
 
-   class Fred
-     @@foo = 99
-   end
-   Fred.class_variable_defined?(:@@foo)    #=> true
-   Fred.class_variable_defined?(:@@bar)    #=> false
-   Fred.class_variable_defined?('@@foo')    #=> true
-   Fred.class_variable_defined?('@@bar')    #=> false
+#@samplecode 例
+class Fred
+  @@foo = 99
+end
+Fred.class_variable_defined?(:@@foo)    #=> true
+Fred.class_variable_defined?(:@@bar)    #=> false
+Fred.class_variable_defined?('@@foo')    #=> true
+Fred.class_variable_defined?('@@bar')    #=> false
+#@end
 
 
 #@since 1.9.1
@@ -1332,11 +1382,13 @@ name で与えられた名前のクラス変数がモジュールに存在する
 
 @raise NameError 引数で指定されたクラス変数がそのモジュールやクラスに定義されていない場合に発生します。
 
-  class Foo
-    @@foo = 1
-    remove_class_variable(:@@foo)   # => 1
-    p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
-  end
+#@samplecode 例
+class Foo
+  @@foo = 1
+  remove_class_variable(:@@foo)   # => 1
+  p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
+end
+#@end
 
 @see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
 
@@ -1366,14 +1418,16 @@ name で与えられた名前のクラス変数がモジュールに存在する
 このメソッドは [[m:Module#include]] の実体であり、
 include を Ruby で書くと以下のように定義できます。
 
-  def include(*modules)
-    modules.reverse_each do |mod|
-      # append_features や included はプライベートメソッドなので
-      # 直接 mod.append_features(self) などとは書けない
-      mod.__send__(:append_features, self)
-      mod.__send__(:included, self)
-    end
+#@samplecode 例
+def include(*modules)
+  modules.reverse_each do |mod|
+    # append_features や included はプライベートメソッドなので
+    # 直接 mod.append_features(self) などとは書けない
+    mod.__send__(:append_features, self)
+    mod.__send__(:included, self)
   end
+end
+#@end
 
 @see [[m:Module#included]]
 
@@ -1389,15 +1443,17 @@ include を Ruby で書くと以下のように定義できます。
 
 @raise NameError クラス変数 name が定義されていない場合、発生します。
 
-  class Fred
-    @@foo = 99
-  end
+#@samplecode 例
+class Fred
+  @@foo = 99
+end
 
-  def Fred.foo
-    class_variable_get(:@@foo)
-  end
+def Fred.foo
+  class_variable_get(:@@foo)
+end
 
-  p Fred.foo #=> 99
+p Fred.foo #=> 99
+#@end
 
 
 --- class_variable_set(name, val) -> object
@@ -1407,19 +1463,20 @@ val をセットします。val を返します。
 
 @param name [[c:String]] または [[c:Symbol]] を指定します。
 
-  class Fred
-    @@foo = 99
-    def foo
-      @@foo
-    end
+#@samplecode 例
+class Fred @@foo = 99
+  def foo
+    @@foo
   end
+end
 
-  def Fred.foo(val)
-    class_variable_set(:@@foo, val)
-  end
+def Fred.foo(val)
+  class_variable_set(:@@foo, val)
+end
 
-  p Fred.foo(101)   # => 101
-  p Fred.new.foo    # => 101
+p Fred.foo(101)   # => 101
+p Fred.new.foo    # => 101
+#@end
 
 #@until 2.5.0
 #@include(Module.define_method)
@@ -1430,14 +1487,16 @@ val をセットします。val を返します。
 
 [[m:Object#extend]] は、Ruby で書くと以下のように定義できます。
 
-  def extend(*modules)
-    modules.reverse_each do |mod|
-      # extend_object や extended はプライベートメソッドなので
-      # 直接 mod.extend_object(self) などとは書けない
-      mod.__send__(:extend_object, self)
-      mod.__send__(:extended, self)
-    end
+#@samplecode 例
+def extend(*modules)
+  modules.reverse_each do |mod|
+    # extend_object や extended はプライベートメソッドなので
+    # 直接 mod.extend_object(self) などとは書けない
+    mod.__send__(:extend_object, self)
+    mod.__send__(:extended, self)
   end
+end
+#@end
 
 extend_object のデフォルトの実装では、self に定義されて
 いるインスタンスメソッドを obj の特異メソッドとして追加します。
@@ -1455,15 +1514,17 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
 
 @param obj [[m:Object#extend]] を行ったオブジェクト
 
-  module Foo
-    def self.extended(obj)
-      p "#{obj} extend #{self}"
-    end
+#@samplecode 例
+module Foo
+  def self.extended(obj)
+    p "#{obj} extend #{self}"
   end
+end
 
-  Object.new.extend Foo
+Object.new.extend Foo
 
-  # => "#<Object:0x401cbc3c> extend Foo"
+# => "#<Object:0x401cbc3c> extend Foo"
+#@end
 
 @see [[m:Module#extend_object]]
 
@@ -1479,15 +1540,17 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 
 @param class_or_module [[m:Module#include]] を実行したオブジェクト
 
-  module Foo
-    def self.included(mod)
-      p "#{mod} include #{self}"
-    end
+#@samplecode 例
+module Foo
+  def self.included(mod)
+    p "#{mod} include #{self}"
   end
-  class Bar
-    include Foo
-  end
-  # => "Bar include Foo"
+end
+class Bar
+  include Foo
+end
+# => "Bar include Foo"
+#@end
 
 @see [[m:Module#append_features]]
 
@@ -1505,18 +1568,20 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 
 @param name 追加されたメソッドの名前が [[c:Symbol]] で渡されます。
 
-  class Foo
-    def Foo.method_added(name)
-      puts "method \"#{name}\" was added"
-    end
-
-    def foo
-    end
-    define_method :bar, instance_method(:foo)
+#@samplecode 例
+class Foo
+  def Foo.method_added(name)
+    puts "method \"#{name}\" was added"
   end
 
-  => method "foo" was added
-     method "bar" was added
+  def foo
+  end
+  define_method :bar, instance_method(:foo)
+end
+
+# => method "foo" was added
+#    method "bar" was added
+#@end
 
 --- method_removed(name) -> ()
 
@@ -1533,17 +1598,19 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモ�
 
 @param name 削除されたメソッド名が [[c:Symbol]] で渡されます。
 
-  class Foo
-    def Foo.method_removed(name)
-      puts "method \"#{name}\" was removed"
-    end
-
-    def foo
-    end
-    remove_method :foo
+#@samplecode 例
+class Foo
+  def Foo.method_removed(name)
+    puts "method \"#{name}\" was removed"
   end
 
-  => method "foo" was removed
+  def foo
+  end
+  remove_method :foo
+end
+
+# => method "foo" was removed
+#@end
 
 
 --- method_undefined(name) -> ()
@@ -1562,19 +1629,21 @@ undef 文により未定義にされると、インタプリタがこのメソ�
 
 @param name 削除/未定義にされたメソッド名が [[c:Symbol]] で渡されます。
 
-  class C
-    def C.method_undefined(name)
-      puts "method C\##{name} was undefined"
-    end
-
-    def foo
-    end
-    def bar
-    end
-
-    undef_method :foo
-    undef bar
+#@samplecode 例
+class C
+  def C.method_undefined(name)
+    puts "method C\##{name} was undefined"
   end
+
+  def foo
+  end
+  def bar
+  end
+
+  undef_method :foo
+  undef bar
+end
+#@end
 
 実行結果:
 
@@ -1605,16 +1674,18 @@ module_function はメソッドに「モジュール関数」という属性を�
 つを同時に定義するメソッドです。
 そのため、以下のように書いてもモジュール関数の別名は定義できません。
 
-  module M
-    def foo
-      p "foo"
-    end
-    module_function :foo
-    alias bar foo
+#@samplecode 例
+module M
+  def foo
+    p "foo"
   end
+  module_function :foo
+  alias bar foo
+end
 
-  M.foo   # => "foo"
-  M.bar   # => undefined method `bar' for Foo:Module (NoMethodError)
+M.foo   # => "foo"
+M.bar   # => undefined method `bar' for Foo:Module (NoMethodError)
+#@end
 
 このコードでは、モジュール関数 foo と
 プライベートインスタンスメソッド bar を定義してしまいます。
@@ -1623,17 +1694,19 @@ module_function はメソッドに「モジュール関数」という属性を�
 以下のように、先に別名を定義してから
 それぞれをモジュール関数にしなければいけません。
 
-  module M
-    def foo
-      p "foo"
-    end
-
-    alias bar foo
-    module_function :foo, :bar
+#@samplecode 例
+module M
+  def foo
+    p "foo"
   end
 
-  M.foo   # => "foo"
-  M.bar   # => "foo"
+  alias bar foo
+  module_function :foo, :bar
+end
+
+M.foo   # => "foo"
+M.bar   # => "foo"
+#@end
 
 #@until 2.1.0
 #@include(Module.prepend)
@@ -1661,15 +1734,17 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
-  class Foo
-    def foo1() 1 end      # デフォルトでは public
-    private               # 可視性を private に変更
-    def foo2() 2 end      # foo2 は private メソッド
-  end
+#@samplecode 例
+class Foo
+  def foo1() 1 end      # デフォルトでは public
+  private               # 可視性を private に変更
+  def foo2() 2 end      # foo2 は private メソッド
+end
 
-  foo = Foo.new
-  p foo.foo1          # => 1
-  p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoMethodError)
+foo = Foo.new
+p foo.foo1          # => 1
+p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoMethodError)
+#@end
 
 --- protected(*name) -> self
 #@since 3.0
@@ -1719,15 +1794,17 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
-  def foo() 1 end
-  p foo             # => 1
-  # the toplevel default is private
-  p self.foo        # => private method `foo' called for #<Object:0x401c83b0> (NoMethodError)
+#@samplecode 例
+def foo() 1 end
+p foo             # => 1
+# the toplevel default is private
+p self.foo        # => private method `foo' called for #<Object:0x401c83b0> (NoMethodError)
 
-  def bar() 2 end
-  public :bar       # visibility changed (all access allowed)
-  p bar             # => 2
-  p self.bar        # => 2
+def bar() 2 end
+public :bar       # visibility changed (all access allowed)
+p bar             # => 2
+p self.bar        # => 2
+#@end
 
 #@until 1.9.1
 --- remove_class_variable(name) -> object
@@ -1741,11 +1818,13 @@ module_function はメソッドに「モジュール関数」という属性を�
 
 @raise NameError 引数で指定されたクラス変数がそのモジュールやクラスに定義されていない場合に発生します。
 
-  class Foo
-    @@foo = 1
-    remove_class_variable(:@@foo)   # => 1
-    p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
-  end
+#@samplecode 例
+class Foo
+  @@foo = 1
+  remove_class_variable(:@@foo)   # => 1
+  p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
+end
+#@end
 
 @see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
 
@@ -1762,11 +1841,13 @@ name で指定した定数を取り除き、その定数に設定されていた
 
 @raise NameError 引数で指定された定数がそのモジュールやクラスに定義されていない場合に発生します。
 
-  class Foo
-    FOO = 1
-    p remove_const(:FOO)    # => 1
-    p FOO     # => uninitialized constant FOO at Foo (NameError)
-  end
+#@samplecode 例
+class Foo
+  FOO = 1
+  p remove_const(:FOO)    # => 1
+  p FOO     # => uninitialized constant FOO at Foo (NameError)
+end
+#@end
 
 組み込みクラス/モジュールを設定している定数や [[m:Kernel.#autoload]] を指定した(まだロードしてない)定数を含めて削除する事ができます。
 
@@ -1794,23 +1875,25 @@ name で指定した定数を取り除き、その定数に設定されていた
 @param args ブロックに渡す引数を指定します。
 
 
-   class Thing
-   end
-   c = 1
+#@samplecode 例
+class Thing
+end
+c = 1
 
-   Thing.class_exec{
-     def hello() 
-       "Hello there!" 
-     end
+Thing.class_exec{
+  def hello() 
+    "Hello there!" 
+  end
 
-     define_method(:foo) do   # ローカル変数がブロックの外側を参照している
-       c
-     end
-   }
+  define_method(:foo) do   # ローカル変数がブロックの外側を参照している
+    c
+  end
+}
 
-   t = Thing.new
-   p t.hello()            #=> "Hello there!"
-   p t.foo()              #=> 1
+t = Thing.new
+p t.hello()            #=> "Hello there!"
+p t.foo()              #=> 1
+#@end
 
 @see [[m:Module#module_eval]], [[m:Module#class_eval]]
 
@@ -1828,21 +1911,22 @@ name で指定した定数の可視性を private に変更します。
 
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
 
-例:
-  module Foo
-    BAR = 'bar'
-    class Baz; end
-    QUX = 'qux'
-    class Quux; end
+#@samplecode 例
+module Foo
+  BAR = 'bar'
+  class Baz; end
+  QUX = 'qux'
+  class Quux; end
 
-    private_constant :QUX
-    private_constant :Quux
-  end
+  private_constant :QUX
+  private_constant :Quux
+end
 
-  Foo::BAR  # => "bar"
-  Foo::Baz  # => Foo::Baz
-  Foo::QUX  # => NameError: private constant Foo::QUX referenced
-  Foo::Quux # => NameError: private constant Foo::Quux referenced
+Foo::BAR  # => "bar"
+Foo::Baz  # => Foo::Baz
+Foo::QUX  # => NameError: private constant Foo::QUX referenced
+Foo::Quux # => NameError: private constant Foo::Quux referenced
+#@end
 
 --- public_constant(*name) -> self
 
@@ -1905,16 +1989,17 @@ Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更�
 
 @return self を返します。
 
-例:
-  FOO = 123
-  Object.deprecate_constant(:FOO) # => Object
+#@samplecode 例
+FOO = 123
+Object.deprecate_constant(:FOO) # => Object
 
-  FOO
-  # warning: constant ::FOO is deprecated
-  # => 123
+FOO
+# warning: constant ::FOO is deprecated
+# => 123
 
-  Object.deprecate_constant(:BAR)
-  # NameError: constant Object::BAR not defined
+Object.deprecate_constant(:BAR)
+# NameError: constant Object::BAR not defined
+#@end
 
 #@end
 
@@ -1960,27 +2045,29 @@ refinements 機能の詳細については以下を参照してください。
 表示されます。
 #@end
 
-  class C
+#@samplecode 例
+class C
+  def foo
+    puts "C#foo"
+  end
+end
+
+module M
+  refine C do
     def foo
-      puts "C#foo"
+      puts "C#foo in M"
     end
   end
+end
 
-  module M
-    refine C do
-      def foo
-        puts "C#foo in M"
-      end
-    end
-  end
+x = C.new
+x.foo # => "C#foo"
 
-  x = C.new
-  x.foo # => "C#foo"
+using M
 
-  using M
-
-  x = C.new
-  x.foo # => "C#foo in M"
+x = C.new
+x.foo # => "C#foo in M"
+#@end
 
 @see [[m:main.using]]
 #@end
@@ -2032,15 +2119,17 @@ self が [[m:Module#prepend]] されたときに対象のクラスまたはモ�
 
 @param class_or_module [[m:Module#prepend]] を実行したオブジェクト
 
-  module A
-    def self.prepended(mod)
-      puts "#{self} prepended to #{mod}"
-    end
+#@samplecode 例
+module A
+  def self.prepended(mod)
+    puts "#{self} prepended to #{mod}"
   end
-  module Enumerable
-    prepend A
-  end
-  # => "A prepended to Enumerable"
+end
+module Enumerable
+  prepend A
+end
+# => "A prepended to Enumerable"
+#@end
 
 @see [[m:Module#included]], [[m:Module#prepend]], [[m:Module#prepend_features]]
 #@end
@@ -2069,7 +2158,7 @@ before 2.7, check that the module responds to this method before calling
 it. Also, be aware that if this method is removed, the behavior of the
 method will change so that it does not pass through keywords.
 
-#@samplecode
+#@samplecode 例
 module Mod
   def foo(meth, *args, &block)
     send(:"do_#{meth}", *args, &block)
@@ -2085,10 +2174,12 @@ end
 self が特異クラスの場合に true を返します。そうでなければ false を返し
 ます。
 
-  class C
-  end
-  C.singleton_class?                  # => false
-  C.singleton_class.singleton_class?  # => true
+#@samplecode 例
+class C
+end
+C.singleton_class?                  # => false
+C.singleton_class.singleton_class?  # => true
+#@end
 
 --- using(module) -> self
 
