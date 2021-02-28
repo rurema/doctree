@@ -99,6 +99,7 @@ URI オブジェクトは直接読み込むことができます。
   str = uri.read
   p str.base_uri
 
+#@until 3.0.0
 = redefine Kernel
 
 == Module Functions
@@ -154,6 +155,8 @@ Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くとき
   puts sio.read
 
 @see [[m:OpenURI.open_uri]], [[m:URI.open]]
+
+#@end
 
 = module OpenURI
 http/ftp に簡単にアクセスするためのモジュールです。
@@ -359,19 +362,32 @@ include OpenURI::OpenRead
 Last-Modified ヘッダがない場合は nil を返します。
 
 例:
-  require 'open-uri'
-  p open('http://www.rubyist.net/').last_modified
-  #=> Thu Feb 26 16:54:58 +0900 2004
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+p URI.open('http://www.rubyist.net/').last_modified
+#=> Thu Feb 26 16:54:58 +0900 2004
+#@else
+require 'open-uri'
+p open('http://www.rubyist.net/').last_modified
+#=> Thu Feb 26 16:54:58 +0900 2004
+#@end
+#@end
 
 --- content_type    -> String
 
 対象となるリソースの Content-Type を文字列の配列で返します。Content-Type ヘッダの情報が使われます。
 Content-Type ヘッダがない場合は、"application/octet-stream" を返します。
 
-例:
-
-  require 'open-uri'
-  p open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+p URI.open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+#@else
+require 'open-uri'
+p open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+#@end
+#@end
 
 --- charset       -> String | nil
 --- charset{ ... }  -> String
@@ -383,13 +399,21 @@ Content-Type ヘッダがない場合は、nil を返します。ただし、ブ
 その結果を返します。また対象となる URI のスキームが HTTP であり、自身のタイプが text である場合は、
 [[RFC:2616]] 3.7.1 で定められているとおり、文字列 "iso-8859-1" を返します。
 
-例:
-
-  require 'open-uri'
-  open("http://www.ruby-lang.org/en") {|f|
-    p f.content_type  # => "text/html"
-    p f.charset       # => "iso-8859-1"
-  }
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URI.open("http://www.ruby-lang.org/en") {|f|
+  p f.content_type  # => "text/html"
+  p f.charset       # => "iso-8859-1"
+}
+#@else
+require 'open-uri'
+open("http://www.ruby-lang.org/en") {|f|
+  p f.content_type  # => "text/html"
+  p f.charset       # => "iso-8859-1"
+}
+#@end
+#@end
 
 --- content_encoding    -> [String]
 
@@ -398,40 +422,68 @@ Content-Encoding ヘッダがない場合は、空の配列を返します。
 
 例:
 
-  require 'open-uri'
-  p open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+p URI.open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+#@else
+require 'open-uri'
+p open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+#@end
+#@end
 
 --- status    -> [String]
 
 対象となるリソースのステータスコードと reason phrase を文字列の配列として返します。
 
-例:
-  require 'open-uri'
-  p open('http://example.com/').status  #=> ["200", "OK"]
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+p URI.open('http://example.com/').status  #=> ["200", "OK"]
+#@else
+require 'open-uri'
+p open('http://example.com/').status  #=> ["200", "OK"]
+#@end
+#@end
 
 --- base_uri    -> URI
 
 リソースの実際の URI を URI オブジェクトとして返します。
 リダイレクトされた場合は、リダイレクトされた後のデータが存在する URI を返します。
 
-例:
-
-  require 'open-uri'
-  p open('http://www.ruby-lang.org/').base_uri
-  #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+p URL.open('http://www.ruby-lang.org/').base_uri
+#=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+#@else
+require 'open-uri'
+p open('http://www.ruby-lang.org/').base_uri
+#=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+#@end
+#@end
 
 --- meta    -> Hash
 
 ヘッダを収録したハッシュを返します。
 
-例:
-
-  require 'open-uri'
-  p open('http://example.com/').meta
-  #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
-       "content-type"=>"text/html;charset=utf-8",
-       "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
-       "transfer-encoding"=>"chunked"}
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+p URL.open('http://example.com/').meta
+#=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+#    "content-type"=>"text/html;charset=utf-8",
+#    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+#    "transfer-encoding"=>"chunked"}
+#@else
+require 'open-uri'
+p open('http://example.com/').meta
+#=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+#    "content-type"=>"text/html;charset=utf-8",
+#    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+#    "transfer-encoding"=>"chunked"}
+#@end
+#@end
 
 = class OpenURI::HTTPError < StandardError
 
