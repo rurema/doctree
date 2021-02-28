@@ -27,18 +27,20 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 === 例
 
- class Proxy < BasicObject
-   def initialize(target)
-     @target = target
-   end
+#@samplecode 例
+class Proxy < BasicObject
+  def initialize(target)
+    @target = target
+  end
  
-   def method_missing(message, *args)
-     @target.__send__(message, *args)
-   end
- end
- 
- proxy = Proxy.new("1")
- proxy.to_i #=> 1
+  def method_missing(message, *args)
+    @target.__send__(message, *args)
+  end
+end
+
+proxy = Proxy.new("1")
+proxy.to_i #=> 1
+#@end
 
 == Instance Methods
 --- ==(other) -> bool
@@ -53,19 +55,20 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 @param other 比較対象となるオブジェクト
 @return other が self と同値であれば真、さもなくば偽
 
-例:
-  class Person < BasicObject
-    def initialize(name, age)
-      @name = name
-      @age = age
-    end
+#@samplecode 例
+class Person < BasicObject
+  def initialize(name, age)
+    @name = name
+    @age = age
   end
+end
 
-  tanaka1 = Person.new("tanaka", 24)
-  tanaka2 = Person.new("tanaka", 24)
+tanaka1 = Person.new("tanaka", 24)
+tanaka2 = Person.new("tanaka", 24)
 
-  tanaka1 == tanaka1    #=> true
-  tanaka1 == tanaka2    #=> false
+tanaka1 == tanaka1    #=> true
+tanaka1 == tanaka2    #=> false
+#@end
 
 @see [[m:BasicObject#equal?]], [[m:Object#==]], [[m:Object#equal?]],
      [[m:Object#eql?]]
@@ -81,15 +84,16 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 @param other 比較対象となるオブジェクト
 @return other が self 自身であれば真、さもなくば偽
 
-例:
-  original = "a"
-  copied = original.dup
-  substituted = original
+#@samplecode 例
+original = "a"
+copied = original.dup
+substituted = original
 
-  original == copied          #=> true
-  original == substituted     #=> true
-  original.equal? copied      #=> false
-  original.equal? substituted #=> true
+original == copied          #=> true
+original == substituted     #=> true
+original.equal? copied      #=> false
+original.equal? substituted #=> true
+#@end
 
 @see [[m:Object#equal?]], [[m:Object#==]], [[m:Object#eql?]]
 
@@ -105,37 +109,39 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 
 @return オブジェクトが偽であれば真、さもなくば偽
 
-例
- class NegationRecorder < BasicObject
-   def initialize
-     @count = 0
-   end
-   attr_reader :count
+#@samplecode 例
+class NegationRecorder < BasicObject
+  def initialize
+    @count = 0
+  end
+  attr_reader :count
+ 
+  def !
+    @count += 1
+    super
+  end
+end
 
-   def !
-     @count += 1
-     super
-   end
- end
+recorder = NegationRecorder.new
+!recorder
+!!!!!!!recorder
+puts 'hoge' if !recorder
 
- recorder = NegationRecorder.new
- !recorder
- !!!!!!!recorder
- puts 'hoge' if !recorder
+puts recorder.count #=> 3
+#@end
 
- puts recorder.count #=> 3
+#@samplecode 例
+class AnotherFalse < BasicObject
+  def !
+    true
+  end
+end
+another_false = AnotherFalse.new
 
-例
- class AnotherFalse < BasicObject
-   def !
-     true
-   end
- end
- another_false = AnotherFalse.new
-
- # another_falseは*真*
- puts "another false is a truth" if another_false
-   #=> "another false is a truth"
+# another_falseは*真*
+puts "another false is a truth" if another_false
+#=> "another false is a truth"
+#@end
 
 --- !=(other) -> bool
 オブジェクトが other と等しくないことを判定します。
@@ -153,24 +159,25 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 @param other 比較対象となるオブジェクト
 @see [[m:BasicObject#==]], [[m:BasicObject#!]]
 
-例
- class NonequalityRecorder < BasicObject
-   def initialize
-     @count = 0
-   end
-   attr_reader :count
+#@samplecode 例
+class NonequalityRecorder < BasicObject
+  def initialize
+    @count = 0
+  end
+  attr_reader :count
 
-   def !=(other)
-     @count += 1
-     super
-   end
- end
- recorder = NonequalityRecorder.new
+  def !=(other)
+    @count += 1
+    super
+  end
+end
+recorder = NonequalityRecorder.new
 
- recorder != 1
- puts 'hoge' if recorder != "str"
+recorder != 1
+puts 'hoge' if recorder != "str"
 
- p recorder.count #=> 2
+p recorder.count #=> 2
+#@end
 
 
 
@@ -183,18 +190,19 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 @param name 呼び出すメソッドの名前。 [[c:Symbol]] または文字列で指定します。
 @param args メソッドに渡す任意個の引数
 
-例:
-  class Mail
-    def delete(*args)
-      "(Mail#delete) - delete " + args.join(',')
-    end
-    def send(name, *args)
-      "(Mail#send) - #{name} #{args.join(',')}"
-    end
+#@samplecode 例
+class Mail
+  def delete(*args)
+    "(Mail#delete) - delete " + args.join(',')
   end
-  mail = Mail.new
-  mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
-  mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
+  def send(name, *args)
+    "(Mail#send) - #{name} #{args.join(',')}"
+  end
+end
+mail = Mail.new
+mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
+mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
+#@end
 
 @see [[m:Object#send]]
 
@@ -207,14 +215,15 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 [[m:Object#object_id]] と同じですが、#object_id は [[c:BasicObject]] に
 はない事に注意してください。
 
-例:
-  # frozen_string_literal: false
-  obj = Object.new
-  obj.object_id == obj.__id__              # => true
-  Object.new.__id__  == Object.new.__id__  # => false
-  (21 * 2).__id__    == (21 * 2).__id__    # => true
-  "hello".__id__     == "hello".__id__     # => false
-  "hi".freeze.__id__ == "hi".freeze.__id__ # => true
+#@samplecode 例
+# frozen_string_literal: false
+obj = Object.new
+obj.object_id == obj.__id__              # => true
+Object.new.__id__  == Object.new.__id__  # => false
+(21 * 2).__id__    == (21 * 2).__id__    # => true
+"hello".__id__     == "hello".__id__     # => false
+"hi".freeze.__id__ == "hi".freeze.__id__ # => true
+#@end
 
 @see [[m:Object#object_id]], [[ruby-dev:42840]]
 #@end
@@ -241,25 +250,27 @@ Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け�
 @return ユーザー定義の method_missing メソッドの返り値が未定義メソッドの返り値で
   あるかのように見えます。
 
-  class Foo
-    def initialize(data)
-      @data = data
-    end
-    def method_missing(name, lang)
-      if name.to_s =~ /\Afind_(\d+)_in\z/
-        if @data[lang]
-          p @data[lang][$1.to_i]
-        else
-          raise "#{lang} unknown"
-        end
+#@samplecode 例
+class Foo
+  def initialize(data)
+    @data = data
+  end
+  def method_missing(name, lang)
+    if name.to_s =~ /\Afind_(\d+)_in\z/
+      if @data[lang]
+        p @data[lang][$1.to_i]
       else
-        super
+        raise "#{lang} unknown"
       end
+    else
+      super
     end
   end
-  
-  dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
-  dic.find_2_in :Esperanto #=> "du"
+end
+
+dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
+dic.find_2_in :Esperanto #=> "du"
+#@end
 
 #@since 1.9.2
 [注意] このメソッドを override する場合は対象のメソッド名に対して

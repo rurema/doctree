@@ -25,40 +25,40 @@ BasicObject を継承して作ったクラス内で instance_eval する場合�
 @param lineno 整数を指定します。行番号 lineno から文字列 expr が書かれているかのように実行されます。
               スタックトレースの表示などを差し替えることができます。
 
-例:
-
-  class Foo
-    def initialize data
-      @key = data
-    end
-    private
-    def do_fuga
-      p 'secret'
-    end
+#@samplecode 例
+class Foo
+  def initialize data
+    @key = data
   end
-  
-  some = Foo.new 'XXX'
-  some.instance_eval{p @key} #=> "XXX"
-  some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
-  
-  some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
-  messg = 'unknown'
-  some.instance_eval 'raise messg','file.rb',999 # file.rb:999: unknown (RuntimeError)
-
-例:
-
-  class Bar < BasicObject
-    def call1
-      instance_eval("::ENV.class")
-    end
-    def call2
-      instance_eval("ENV.class")
-    end
+  private
+  def do_fuga
+    p 'secret'
   end
+end
 
-  bar = Bar.new
-  bar.call1 # => Object
-  bar.call2 # raise NameError
+some = Foo.new 'XXX'
+some.instance_eval{p @key} #=> "XXX"
+some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
+
+some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
+messg = 'unknown'
+some.instance_eval 'raise messg','file.rb',999 # file.rb:999: unknown (RuntimeError)
+#@end
+
+#@samplecode 例
+class Bar < BasicObject
+  def call1
+    instance_eval("::ENV.class")
+  end
+  def call2
+    instance_eval("ENV.class")
+  end
+end
+
+bar = Bar.new
+bar.call1 # => Object
+bar.call2 # raise NameError
+#@end
 
 @see [[m:Module#module_eval]], [[m:Kernel.#eval]], [[m:BasicObject#instance_exec]]
 
@@ -71,14 +71,16 @@ BasicObject を継承して作ったクラス内で instance_eval する場合�
 
 @param args ブロックパラメータに渡す値です。
 
-   class KlassWithSecret
-     def initialize
-       @secret = 99
-     end
-   end
-   k = KlassWithSecret.new
-   # 以下で x には 5 が渡される
-   k.instance_exec(5) {|x| @secret + x }   #=> 104
+#@samplecode 例
+class KlassWithSecret
+  def initialize
+    @secret = 99
+  end
+end
+k = KlassWithSecret.new
+# 以下で x には 5 が渡される
+k.instance_exec(5) {|x| @secret + x }   #=> 104
+#@end
 
 #@since 1.9.1
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:BasicObject#instance_eval]]
