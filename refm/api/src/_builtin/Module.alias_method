@@ -31,7 +31,7 @@ alias との違いは以下の通りです。
 @param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
 
 #@since 3.0.0
-@return メソッド名を表す Symbol を返します。
+@return 作成したエイリアスのメソッド名を表す [[c:Symbol]] を返します。
 #@else
 @return self を返します。
 #@end
