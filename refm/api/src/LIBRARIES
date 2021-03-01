@@ -159,8 +159,10 @@ power_assert
 pp
 prettyprint
 prime
+#@until 2.7.0
 profile
 profiler
+#@end
 pstore
 psych
 pty
