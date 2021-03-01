@@ -106,6 +106,16 @@ range.first     # => 1
 range.first = 1 # => NoMethodError
 #@end
 
+#@since 3.0.0
+また、Ruby 3.0.0 からすべての Range オブジェクトは freeze されるようになりました。
+#@samplecode
+p (1..10).frozen?
+# => true
+p Range.new(1, 10).frozen?
+# => true
+#@end
+#@end
+
 == Class Methods
 
 --- new(first, last, exclude_end = false) -> Range

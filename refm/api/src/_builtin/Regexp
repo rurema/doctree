@@ -13,6 +13,18 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成�
   p rp1 =~ str           # => 0
   p Regexp.last_match[0] # => "this is regexp"
 
+#@since 3.0.0
+Ruby 3.0.0 から正規表現リテラルは freeze されるようになりました。
+#@samplecode
+p /abc/.frozen?
+# => true
+p /a#{42}bc/.frozen?
+# => true
+p Regexp.new('abc').frozen?
+# => false
+#@end
+#@end
+
 [[d:spec/regexp]] や [[ref:d:spec/literal#regexp]] も参照してください。
 
 == Class Methods
