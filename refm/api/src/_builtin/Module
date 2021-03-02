@@ -1464,7 +1464,8 @@ val をセットします。val を返します。
 @param name [[c:String]] または [[c:Symbol]] を指定します。
 
 #@samplecode 例
-class Fred @@foo = 99
+class Fred
+  @@foo = 99
   def foo
     @@foo
   end
