@@ -23,12 +23,14 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @param lineno 行番号を整数で与えます。式 expr の先頭行の行番号が lineno であるかのように実行されます。
 
- def get_binding(str)
-   binding
- end
- str = "hello"
- p eval("str + ' Fred'")                      #=> "hello Fred"
- p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
+#@samplecode 例
+def get_binding(str)
+  binding
+end
+str = "hello"
+p eval("str + ' Fred'")                      #=> "hello Fred"
+p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
+#@end
 
 @see [[m:Kernel.#eval]]
 
@@ -42,15 +44,19 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @raise NameError 引数 symbol で指定したローカル変数が未定義の場合に発生します。
 
-    def foo
-      a = 1
-      binding.local_variable_get(:a) # => 1
-      binding.local_variable_get(:b) # => NameError
-    end
+#@samplecode 例
+def foo
+  a = 1
+  binding.local_variable_get(:a) # => 1
+  binding.local_variable_get(:b) # => NameError
+end
+#@end
 
 このメソッドは以下のコードの短縮形です。
 
-    binding.eval("#{symbol}")
+#@samplecode
+binding.eval("#{symbol}")
+#@end
 
 @see [[m:Binding#local_variable_set]], [[m:Binding#local_variable_defined?]]
 
@@ -62,22 +68,26 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @param obj 引数 symbol で指定したローカル変数に設定するオブジェクトを指定します。
 
-    def foo
-      a = 1
-      bind = binding
-      bind.local_variable_set(:a, 2) # set existing local variable `a'
-      bind.local_variable_set(:b, 3) # create new local variable `b'
-                                     # `b' exists only in binding
-      p bind.local_variable_get(:a)  # => 2
-      p bind.local_variable_get(:b)  # => 3
-      p a                            # => 2
-      p b                            # => NameError
-    end
+#@samplecode 例
+def foo
+  a = 1
+  bind = binding
+  bind.local_variable_set(:a, 2) # set existing local variable `a'
+  bind.local_variable_set(:b, 3) # create new local variable `b'
+                                 # `b' exists only in binding
+  p bind.local_variable_get(:a)  # => 2
+  p bind.local_variable_get(:b)  # => 3
+  p a                            # => 2
+  p b                            # => NameError
+end
+#@end
 
 このメソッドは以下のコード(ただし、obj が Ruby のコードで出力される場
 合)と同様の動作をします。
 
-  binding.eval("#{symbol} = #{obj}")
+#@samplecode
+binding.eval("#{symbol} = #{obj}")
+#@end
 
 @see [[m:Binding#local_variable_get]], [[m:Binding#local_variable_defined?]]
 
@@ -88,15 +98,19 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @param symbol ローカル変数名を [[c:Symbol]] オブジェクトで指定します。
 
-    def foo
-      a = 1
-      binding.local_variable_defined?(:a) # => true
-      binding.local_variable_defined?(:b) # => false
-    end
+#@samplecode 例
+def foo
+  a = 1
+  binding.local_variable_defined?(:a) # => true
+  binding.local_variable_defined?(:b) # => false
+end
+#@end
 
 このメソッドは以下のコードの短縮形です。
 
-    binding.eval("defined?(#{symbol}) == 'local-variable'")
+#@samplecode
+binding.eval("defined?(#{symbol}) == 'local-variable'")
+#@end
 
 @see [[m:Binding#local_variable_get]], [[m:Binding#local_variable_set]]
 #@end
@@ -106,16 +120,20 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 ローカル変数の一覧を [[c:Symbol]] の配列で返します。
 
-    def foo
-      a = 1
-      2.times do |n|
-        binding.local_variables #=> [:a, :n]
-      end
-    end
+#@samplecode 例
+def foo
+  a = 1
+  2.times do |n|
+    binding.local_variables #=> [:a, :n]
+  end
+end
+#@end
 
 このメソッドは以下のコードと同様の動作をします。
 
-  binding.eval("local_variables")
+#@samplecode
+binding.eval("local_variables")
+#@end
 
 #@# #8779 を参照。
 --- receiver -> object
@@ -124,7 +142,9 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 このメソッドは以下のコードと同様の動作をします。
 
-  binding.eval("self")
+#@samplecode
+binding.eval("self")
+#@end
 #@end
 #@since 2.4.0
 --- irb -> object
@@ -141,7 +161,7 @@ self の Ruby のソースファイル名と行番号を返します。
 
 [[ref:d:spec/variables#pseudo]] の __FILE__ と __LINE__ も参照してください。
 
-#@samplecode 例
+#@samplecode
 p binding.source_location # => ["test.rb", 1]
 #@end
 #@end
