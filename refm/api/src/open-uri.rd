@@ -126,7 +126,9 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くときにwarningが表示されるようになりました。
 
   require 'open-uri'
-  open("http://www.ruby-lang.org/")
+  open("http://www.ruby-lang.org/") {|f|
+    # ...
+  }
   #=> warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
 #@end
 
@@ -149,10 +151,11 @@ Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くとき
 例:
 
   require 'open-uri'
-  sio = open('http://www.example.com')
-  p sio.is_a?(OpenURI::Meta) # => true
-  p sio.content_type
-  puts sio.read
+  sio = open('http://www.example.com') { |sio|
+    p sio.is_a?(OpenURI::Meta) # => true
+    p sio.content_type
+    puts sio.read
+  }
 
 @see [[m:OpenURI.open_uri]], [[m:URI.open]]
 
@@ -365,12 +368,16 @@ Last-Modified ヘッダがない場合は nil を返します。
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-p URI.open('http://www.rubyist.net/').last_modified
-#=> Thu Feb 26 16:54:58 +0900 2004
+URI.open('http://www.rubyist.net/') {|f|
+  p f.last_modified
+  #=> Thu Feb 26 16:54:58 +0900 2004
+}
 #@else
 require 'open-uri'
-p open('http://www.rubyist.net/').last_modified
-#=> Thu Feb 26 16:54:58 +0900 2004
+open('http://www.rubyist.net/') {|f|
+  p f.last_modified
+  #=> Thu Feb 26 16:54:58 +0900 2004
+}
 #@end
 #@end
 
@@ -382,10 +389,14 @@ Content-Type ヘッダがない場合は、"application/octet-stream" を返し�
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-p URI.open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+URI.open('http://www.ruby-lang.org/') {|f|
+  p f.content_type  #=> "text/html"
+}
 #@else
 require 'open-uri'
-p open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+open('http://www.ruby-lang.org/') {|f|
+  p f.content_type  #=> "text/html"
+}
 #@end
 #@end
 
@@ -425,10 +436,14 @@ Content-Encoding ヘッダがない場合は、空の配列を返します。
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-p URI.open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+URI.open('http://example.com/f.tar.gz') {|f|
+  p f.content_encoding  #=> ["x-gzip"]
+}
 #@else
 require 'open-uri'
-p open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+open('http://example.com/f.tar.gz') {|f|
+  p f.content_encoding  #=> ["x-gzip"]
+}
 #@end
 #@end
 
@@ -439,10 +454,14 @@ p open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-p URI.open('http://example.com/').status  #=> ["200", "OK"]
+URI.open('http://example.com/') {|f|
+  p f.status  #=> ["200", "OK"]
+}
 #@else
 require 'open-uri'
-p open('http://example.com/').status  #=> ["200", "OK"]
+open('http://example.com/') {|f|
+  p f.status  #=> ["200", "OK"]
+}
 #@end
 #@end
 
@@ -454,12 +473,16 @@ p open('http://example.com/').status  #=> ["200", "OK"]
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-p URL.open('http://www.ruby-lang.org/').base_uri
-#=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+URL.open('http://www.ruby-lang.org/') {|f|
+  p f.base_uri
+  #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+}
 #@else
 require 'open-uri'
-p open('http://www.ruby-lang.org/').base_uri
-#=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+open('http://www.ruby-lang.org/') {|f|
+  p f.base_uri
+  #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+}
 #@end
 #@end
 
@@ -470,18 +493,22 @@ p open('http://www.ruby-lang.org/').base_uri
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-p URL.open('http://example.com/').meta
-#=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
-#    "content-type"=>"text/html;charset=utf-8",
-#    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
-#    "transfer-encoding"=>"chunked"}
+URL.open('http://example.com/') {|f|
+  p f.meta
+  #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+  #    "content-type"=>"text/html;charset=utf-8",
+  #    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+  #    "transfer-encoding"=>"chunked"}
+}
 #@else
 require 'open-uri'
-p open('http://example.com/').meta
-#=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
-#    "content-type"=>"text/html;charset=utf-8",
-#    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
-#    "transfer-encoding"=>"chunked"}
+open('http://example.com/') {|f|
+  p f.meta
+  #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+  #    "content-type"=>"text/html;charset=utf-8",
+  #    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+  #    "transfer-encoding"=>"chunked"}
+}
 #@end
 #@end
 
