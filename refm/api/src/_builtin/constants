@@ -1,5 +1,6 @@
 == Constants
 
+#@until 3.0.0
 --- TRUE -> TrueClass
 非推奨です。代表的な真の値。true と同じ。
 
@@ -7,14 +8,18 @@
 
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
+#@end
 
+#@until 3.0.0
 --- FALSE -> FalseClass
 非推奨です。代表的な偽の値。false と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 false を使ってください。
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
+#@end
 
+#@until 3.0.0
 --- NIL -> NilClass
 非推奨です。 nil と同じ。
 
@@ -22,6 +27,7 @@ Ruby では false と nil が偽として扱われます。
 
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
+#@end
 
 --- STDIN -> IO
 標準入力。[[m:$stdin]] のデフォルト値。 [[m:$stdin]] も参照してください。
