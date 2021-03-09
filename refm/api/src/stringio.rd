@@ -153,15 +153,11 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 --- each(rs = $/){|line| ... }       -> self
 --- each_line(rs = $/){|line| ... }  -> self
---- lines(rs = $/){|line| ... }      -> self
-#@since 1.9.1
 --- each(rs = $/)       -> Enumerator
 --- each_line(rs = $/)  -> Enumerator
+#@until 3.0
+--- lines(rs = $/){|line| ... }      -> self
 --- lines(rs = $/)      -> Enumerator
-#@else
---- each(rs = $/)       -> Enumerable::Enumerator
---- each_line(rs = $/)  -> Enumerable::Enumerator
---- lines(rs = $/)      -> Enumerable::Enumerator
 #@end
 
 自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
@@ -179,15 +175,13 @@ close された StringIO に読み書き等が行われると IOError が発生�
   "foo\n"
 
 @see [[m:$/]]
+@see [[m:IO#each_line]]
 
 --- each_byte{|ch| ... }    -> self
---- bytes{|ch| ... }        -> self
-#@since 1.9.1
 --- each_byte -> Enumerator
+#@until 3.0
+--- bytes{|ch| ... }        -> self
 --- bytes     -> Enumerator
-#@else
---- each_byte -> Enumerable::Enumerator
---- bytes     -> Enumerable::Enumerator
 #@end
 
 自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
@@ -203,6 +197,8 @@ close された StringIO に読み書き等が行われると IOError が発生�
   111
   103
   101
+
+@see [[m:IO#each_byte]]
 
 --- eof    -> bool
 --- eof?   -> bool
@@ -676,21 +672,14 @@ nil を返します。
 
 
 --- each_char{|c| ... } -> self
---- chars{|c| ... }     -> self
-#@since 1.9.1
 --- each_char           -> Enumerator
+#@until 3.0
+--- chars{|c| ... }     -> self
 --- chars               -> Enumerator
-#@else
---- each_char           -> Enumerable::Enumerator
---- chars               -> Enumerable::Enumerator
 #@end
 自身に含まれる文字を一文字ずつブロックに渡して評価します。
 
 自身は読み込み用にオープンされていなければなりません。
-
-#@until 1.9.1
-また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
-#@end
 
 @raise IOError 自身が読み込み用にオープンされていない場合に発生します。
 
@@ -737,15 +726,14 @@ nil を返します。
 
 現在の内部エンコーディングを返します。
 
-#@since 1.9.2
---- codepoints{|codepoint| ... } -> self
---- codepoints -> Enumerator
 --- each_codepoint{|codepoint| ... } -> self
 --- each_codepoint -> Enumerator
+#@until 3.0
+--- codepoints{|codepoint| ... } -> self
+--- codepoints -> Enumerator
+#@end
 
 自身の各コードポイントに対して繰り返します。
 
 @see [[m:IO#each_codepoint]]
-
-#@end
 #@end

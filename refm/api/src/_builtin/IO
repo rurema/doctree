@@ -30,7 +30,9 @@ IO の読み込みメソッドは2種類存在します。
  * [[m:IO.foreach]]
  * [[m:IO.readlines]]
  * [[m:IO#each_line]]
+#@until 3.0
  * [[m:IO#lines]]
+#@end
  * [[m:IO#gets]]
  * [[m:IO#getc]]
  * [[m:IO#ungetc]]
@@ -1042,6 +1044,7 @@ File.open("testfile") do |io|
 end
 #@end
 
+#@until 3.0
 --- bytes {|ch| ... }        -> self
 --- bytes                    -> Enumerator
 
@@ -1061,7 +1064,7 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数とし�
 #@#noexample obsolete
 
 @see [[m:IO#each_byte]]
-
+#@end
 --- eof     -> bool
 --- eof?    -> bool
 
@@ -2038,6 +2041,7 @@ end
 File.read("testfile")     # => "\u0000\u0000\u0000ABCDEF"
 #@end
 #@end
+#@until 3.0
 --- lines(rs = $/) {|line| ... }        -> self
 --- lines(limit) {|line| ... }          -> self
 --- lines(rs, limit) {|line| ... }      -> self
@@ -2071,7 +2075,7 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 #@#noexample obsolete
 
 @see [[m:$/]], [[m:IO#each_line]]
-
+#@end
 --- getbyte   -> Integer | nil
 
 IO から1バイトを読み込み整数として返します。
@@ -2116,6 +2120,7 @@ self は読み込み用にオープンされていなければなりません。
   f = File.new("testfile")
   f.each_char {|c| print c, ' ' }   #=> #<File:testfile>
 
+#@until 3.0
 --- chars{|c| ... }         -> self
 --- chars                   -> Enumerator
 
@@ -2135,7 +2140,7 @@ self は読み込み用にオープンされていなければなりません。
 #@#noexample obsolete
 
 @see [[m:IO#each_char]]
-
+#@end
 --- ungetbyte(c) -> nil
 
 指定したバイト列を書き戻します。
@@ -2329,6 +2334,7 @@ end
 # 12354
 #@end
 
+#@until 3.0
 --- codepoints{|c| ... }         -> self
 --- codepoints                   -> Enumerator
 
@@ -2346,7 +2352,7 @@ IO の各コードポイントに対して繰り返しブロックを呼びだ�
 #@#noexample obsolete
 
 @see [[m:IO#each_codepoint]]
-
+#@end
 --- fdatasync -> 0 | nil
 
 IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
