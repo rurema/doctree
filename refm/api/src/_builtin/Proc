@@ -10,15 +10,17 @@ Proc ローカルの変数として使えます。
 Proc がローカル変数のスコープを保持していることは以下の例で
 変数 var を参照できていることからわかります。
 
-  var = 1
-  $foo = Proc.new { var }
-  var = 2
-  
-  def foo
-    $foo.call
-  end
-  
-  p foo       # => 2
+#@samplecode 例
+var = 1
+$foo = Proc.new { var }
+var = 2
+
+def foo
+  $foo.call
+end
+
+p foo       # => 2
+#@end
 
 #@include(lambda_proc)
 
@@ -32,31 +34,37 @@ Proc がローカル変数のスコープを保持していることは以下の
 ブロックを指定しなければ、このメソッドを呼び出したメソッドが
 ブロックを伴うときに、それを Proc オブジェクトとして生成して返します。
 
-  def foo
-    pr = Proc.new
-    pr.call(1)
-  end
-  foo {|arg| p arg }
-  # => 1
+#@samplecode 例
+def foo
+  pr = Proc.new
+  pr.call(1)
+end
+foo {|arg| p arg }
+# => 1
+#@end
 
 これは以下と同じです。
 
-  def foo
-    yield(1)
-  end
-  foo {|arg| p arg }
-  # => 1
+#@samplecode 例
+def foo
+  yield(1)
+end
+foo {|arg| p arg }
+# => 1
+#@end
 
 呼び出し元のメソッドがブロックを伴わなければ、例外
 [[c:ArgumentError]] が発生します。
 
-  def foo
-    Proc.new
-  end
-  foo
-  # => -:2:in `new': tried to create Proc object without a block (ArgumentError)
-          from -:2:in `foo'
-          from -:4:in `<main>'
+#@samplecode 例
+def foo
+  Proc.new
+end
+foo
+# => -:2:in `new': tried to create Proc object without a block (ArgumentError)
+#        from -:2:in `foo'
+#        from -:4:in `<main>'
+#@end
 
 Proc.new は、Proc#initialize が定義されていれば
 オブジェクトの初期化のためにこれを呼び出します。このことを
@@ -79,29 +87,33 @@ Proc.new は、Proc#initialize が定義されていれば
 
 「===」は when の所に手続きを渡せるようにするためのものです。
 
-  def sign(n)
-    case n
-    when lambda{|n| n > 0} then 1
-    when lambda{|n| n < 0} then -1
-    else 0
-    end
+#@samplecode 例
+def sign(n)
+  case n
+  when lambda{|n| n > 0} then 1
+  when lambda{|n| n < 0} then -1
+  else 0
   end
-  
-  p sign(-4) #=> -1
-  p sign(0)  #=> 0
-  p sign(7)  #=> 1
+end
+
+p sign(-4) #=> -1
+p sign(0)  #=> 0
+p sign(7)  #=> 1
+#@end
 
 また、以下のような syntactic sugar もあります。
 
-  fib = lambda{|n|
-    case n
-    when 0 then 0
-    when 1 then 1
-    else
-      fib.(n - 2) + fib.(n - 1)
-    end
-  }
-  fib.(10) # => 55
+#@samplecode 例
+fib = lambda{|n|
+  case n
+  when 0 then 0
+  when 1 then 1
+  else
+    fib.(n - 2) + fib.(n - 1)
+  end
+}
+fib.(10) # => 55
+#@end
 
 #@else
 引数はブロックパラメータにそのまま(多重代入のルールに従い)代入されます。
@@ -213,26 +225,26 @@ Proc オブジェクトが受け付ける引数の数を返します。
 
 を返します。
 
-例:
-
+#@samplecode 例
 #@since 1.9.1
- lambda{           }.arity   # => 0
- lambda{||         }.arity   # =>  0
- lambda{|x|        }.arity   # =>  1
- lambda{|*x|       }.arity   # => -1
- lambda{|x, y|     }.arity   # =>  2
- lambda{|x, *y|    }.arity   # => -2
- lambda{|(x, y)|   }.arity   # =>  1
- lambda{|(x, y), z|}.arity   # =>  2
+lambda{           }.arity   # => 0
+lambda{||         }.arity   # =>  0
+lambda{|x|        }.arity   # =>  1
+lambda{|*x|       }.arity   # => -1
+lambda{|x, y|     }.arity   # =>  2
+lambda{|x, *y|    }.arity   # => -2
+lambda{|(x, y)|   }.arity   # =>  1
+lambda{|(x, y), z|}.arity   # =>  2
 #@else
- lambda{           }.arity   # => -1
- lambda{||         }.arity   # =>  0
- lambda{|x|        }.arity   # =>  1
- lambda{|*x|       }.arity   # => -1
- lambda{|x, y|     }.arity   # =>  2
- lambda{|x, *y|    }.arity   # => -2
- lambda{|(x, y)|   }.arity   # =>  2
- lambda{|(x, y), z|}.arity   # =>  2
+lambda{           }.arity   # => -1
+lambda{||         }.arity   # =>  0
+lambda{|x|        }.arity   # =>  1
+lambda{|*x|       }.arity   # => -1
+lambda{|x, y|     }.arity   # =>  2
+lambda{|x, *y|    }.arity   # => -2
+lambda{|(x, y)|   }.arity   # =>  2
+lambda{|(x, y), z|}.arity   # =>  2
+#@end
 #@end
 
 --- binding -> Binding
@@ -240,21 +252,23 @@ Proc オブジェクトが受け付ける引数の数を返します。
 Proc オブジェクトが保持するコンテキストを 
 [[c:Binding]] オブジェクトで返します。
 
-例:
-  def fred(param)
-    proc {}
-  end
+#@samplecode 例
+def fred(param)
+  proc {}
+end
 
-  sample_proc = fred(99)
-  eval("param", sample_proc.binding)   # => 99
+sample_proc = fred(99)
+eval("param", sample_proc.binding)   # => 99
+#@end
 
 --- to_proc -> self
 
 self を返します。
 
-例:
-  pr = proc {}
-  p pr == pr.to_proc # => true
+#@samplecode 例
+pr = proc {}
+p pr == pr.to_proc # => true
+#@end
 
 --- to_s    -> String
 #@since 2.0.0
@@ -265,11 +279,13 @@ self の文字列表現を返します。
 
 可能なら self を生成したソースファイル名、行番号を含みます。
 
-  p Proc.new {
-     true
-  }.to_s
+#@samplecode 例
+p Proc.new {
+   true
+}.to_s
 
-  => "#<Proc:0x0x401a880c@-:3>"
+# => "#<Proc:0x0x401a880c@-:3>"
+#@end
 
 #@since 1.9.1
 --- curry         -> Proc
@@ -282,107 +298,111 @@ Procをカリー化します
 @param arity 引数の個数を指定します
 @return カリー化したProcオブジェクトを返します
 
-  b = proc {|x, y, z| (x||0) + (y||0) + (z||0) }
-  p b.curry[1][2][3]           #=> 6
-  p b.curry[1, 2][3, 4]        #=> 6
-  p b.curry(5)[1][2][3][4][5]  #=> 6
-  p b.curry(5)[1, 2][3, 4][5]  #=> 6
-  p b.curry(1)[1]              #=> 1
+#@samplecode 例
+b = proc {|x, y, z| (x||0) + (y||0) + (z||0) }
+p b.curry[1][2][3]           #=> 6
+p b.curry[1, 2][3, 4]        #=> 6
+p b.curry(5)[1][2][3][4][5]  #=> 6
+p b.curry(5)[1, 2][3, 4][5]  #=> 6
+p b.curry(1)[1]              #=> 1
 
-  b = proc {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.inject(0, &:+) }
-  p b.curry[1][2][3]           #=> 6
-  p b.curry[1, 2][3, 4]        #=> 10
-  p b.curry(5)[1][2][3][4][5]  #=> 15
-  p b.curry(5)[1, 2][3, 4][5]  #=> 15
-  p b.curry(1)[1]              #=> 1
+b = proc {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.inject(0, &:+) }
+p b.curry[1][2][3]           #=> 6
+p b.curry[1, 2][3, 4]        #=> 10
+p b.curry(5)[1][2][3][4][5]  #=> 15
+p b.curry(5)[1, 2][3, 4][5]  #=> 15
+p b.curry(1)[1]              #=> 1
 
-  b = lambda {|x, y, z| (x||0) + (y||0) + (z||0) }
-  p b.curry[1][2][3]           #=> 6
+b = lambda {|x, y, z| (x||0) + (y||0) + (z||0) }
+p b.curry[1][2][3]           #=> 6
 #@since 2.3.0
-  p b.curry[1, 2][3, 4]        #=> wrong number of arguments (given 4, expected 3)
-  p b.curry(5)                 #=> wrong number of arguments (given 5, expected 3)
-  p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3)
+p b.curry[1, 2][3, 4]        #=> wrong number of arguments (given 4, expected 3)
+p b.curry(5)                 #=> wrong number of arguments (given 5, expected 3)
+p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3)
 #@else
-  p b.curry[1, 2][3, 4]        #=> wrong number of arguments (4 for 3)
-  p b.curry(5)                 #=> wrong number of arguments (5 for 3)
-  p b.curry(1)                 #=> wrong number of arguments (1 for 3)
+p b.curry[1, 2][3, 4]        #=> wrong number of arguments (4 for 3)
+p b.curry(5)                 #=> wrong number of arguments (5 for 3)
+p b.curry(1)                 #=> wrong number of arguments (1 for 3)
 #@end
 
-  b = lambda {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.inject(0, &:+) }
-  p b.curry[1][2][3]           #=> 6
-  p b.curry[1, 2][3, 4]        #=> 10
-  p b.curry(5)[1][2][3][4][5]  #=> 15
-  p b.curry(5)[1, 2][3, 4][5]  #=> 15
+b = lambda {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.inject(0, &:+) }
+p b.curry[1][2][3]           #=> 6
+p b.curry[1, 2][3, 4]        #=> 10
+p b.curry(5)[1][2][3][4][5]  #=> 15
+p b.curry(5)[1, 2][3, 4][5]  #=> 15
 #@since 2.3.0
-  p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3+)
+p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3+)
 #@else
 #@since 2.0.0
-  p b.curry(1)                 #=> wrong number of arguments (1 for 3+)
+p b.curry(1)                 #=> wrong number of arguments (1 for 3+)
 #@else
-  p b.curry(1)                 #=> wrong number of arguments (1 for 3)
+p b.curry(1)                 #=> wrong number of arguments (1 for 3)
 #@end
 #@end
 
-  b = proc { :foo }
-  p b.curry[]                  #=> :foo
+b = proc { :foo }
+p b.curry[]                  #=> :foo
+#@end
 
 --- lambda? -> bool
 手続きオブジェクトの引数の取扱が厳密であるならば true を返します。
 
 
 引数の取扱の厳密さの意味は以下の例を参考にしてください。
-例:
-  # lambda で生成した Proc オブジェクトでは true 
-  lambda{}.lambda? # => true
-  # proc で生成した Proc オブジェクトでは false
-  proc{}.lambda?   # => false
-  # Proc.new で生成した Proc オブジェクトでは false
-  Proc.new{}.lambda? # => false
-  
-  # 以下、lambda?が偽である場合
-  # 余分な引数を無視する
-  proc{|a,b| [a,b]}.call(1,2,3) # => [1,2]
-  # 足りない引数には nil が渡される
-  proc{|a,b| [a,b]}.call(1) # => [1, nil]
-  # 配列1つだと展開される
-  proc{|a,b| [a,b]}.call([1,2]) # => [1,2]
-  # lambdaの場合これらはすべて ArgumentError となる
-   
-  # &が付いた仮引数で生成される Proc は lambda? が偽となる
-  def n(&b) b.lambda? end
-  n {} # => false
-  
-  # &が付いた実引数によるものは、lambda?が元の Procオブジェクトから
-  # 引き継がれる
-  lambda(&lambda {}).lambda?   #=> true
-  proc(&lambda {}).lambda?     #=> true
-  Proc.new(&lambda {}).lambda? #=> true
-  
-  lambda(&proc {}).lambda?     #=> false
-  proc(&proc {}).lambda?       #=> false
-  Proc.new(&proc {}).lambda?   #=> false
-  
-  n(&lambda {})                #=> true
-  n(&proc {})                  #=> false
-  n(&Proc.new {})              #=> false
-  
-  # Method#to_proc によるものは lambda?が真となる
-  def m() end
-  method(:m).to_proc.lambda? #=> true
-  
-  # Module#define_method は特別扱いで、
-  # これで定義されたメソッドの引数は常に厳密に取り扱われる
-  class C
-    define_method(:d) {}
-  end
-  C.new.d(1,2)       #=> ArgumentError
-  C.new.method(:d).to_proc.lambda?   #=> true
 
-  class C
-    define_method(:e, &proc {})
-  end
-  C.new.e(1,2)       #=> ArgumentError
-  C.new.method(:e).to_proc.lambda?   #=> true
+#@samplecode 例
+# lambda で生成した Proc オブジェクトでは true 
+lambda{}.lambda? # => true
+# proc で生成した Proc オブジェクトでは false
+proc{}.lambda?   # => false
+# Proc.new で生成した Proc オブジェクトでは false
+Proc.new{}.lambda? # => false
+
+# 以下、lambda?が偽である場合
+# 余分な引数を無視する
+proc{|a,b| [a,b]}.call(1,2,3) # => [1,2]
+# 足りない引数には nil が渡される
+proc{|a,b| [a,b]}.call(1) # => [1, nil]
+# 配列1つだと展開される
+proc{|a,b| [a,b]}.call([1,2]) # => [1,2]
+# lambdaの場合これらはすべて ArgumentError となる
+ 
+# &が付いた仮引数で生成される Proc は lambda? が偽となる
+def n(&b) b.lambda? end
+n {} # => false
+
+# &が付いた実引数によるものは、lambda?が元の Procオブジェクトから
+# 引き継がれる
+lambda(&lambda {}).lambda?   #=> true
+proc(&lambda {}).lambda?     #=> true
+Proc.new(&lambda {}).lambda? #=> true
+
+lambda(&proc {}).lambda?     #=> false
+proc(&proc {}).lambda?       #=> false
+Proc.new(&proc {}).lambda?   #=> false
+
+n(&lambda {})                #=> true
+n(&proc {})                  #=> false
+n(&Proc.new {})              #=> false
+
+# Method#to_proc によるものは lambda?が真となる
+def m() end
+method(:m).to_proc.lambda? #=> true
+
+# Module#define_method は特別扱いで、
+# これで定義されたメソッドの引数は常に厳密に取り扱われる
+class C
+  define_method(:d) {}
+end
+C.new.d(1,2)       #=> ArgumentError
+C.new.method(:d).to_proc.lambda?   #=> true
+
+class C
+  define_method(:e, &proc {})
+end
+C.new.e(1,2)       #=> ArgumentError
+C.new.method(:e).to_proc.lambda?   #=> true
+#@end
 
 --- source_location -> [String, Integer] | nil
 ソースコードのファイル名と行番号を配列で返します。
@@ -396,12 +416,13 @@ Procをカリー化します
 [[m:Module.attr_accessor]] で定義されたメソッドには対応していません。
 #@end
 
-例:
-  # /path/to/target.rb を実行
-  proc {}.source_location            # => ["/path/to/target.rb", 1]
-  proc {}.source_location            # => ["/path/to/target.rb", 2]
-  (eval "proc {}").source_location   # => ["(eval)", 1]
-  method(:p).to_proc.source_location # => nil
+#@samplecode 例
+# /path/to/target.rb を実行
+proc {}.source_location            # => ["/path/to/target.rb", 1]
+proc {}.source_location            # => ["/path/to/target.rb", 2]
+(eval "proc {}").source_location   # => ["(eval)", 1]
+method(:p).to_proc.source_location # => nil
+#@end
 
 @see [[m:Method#source_location]]
 
@@ -438,17 +459,18 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
 : :block
  & で指定されたブロック引数
 
-例:
+#@samplecode 例
 #@since 2.1.0
-  prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
-  prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
+prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
 #@else
 #@since 2.0.0
-  prc = lambda{|x, y=42, *other, k_x: 42, **k_other, &b|}
-  prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
+prc = lambda{|x, y=42, *other, k_x: 42, **k_other, &b|}
+prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
 #@else
-  prc = lambda{|x, y=42, *other, &b|}
-  prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
+prc = lambda{|x, y=42, *other, &b|}
+prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
+#@end
 #@end
 #@end
 
