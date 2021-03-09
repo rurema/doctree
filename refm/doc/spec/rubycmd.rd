@@ -54,6 +54,32 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   が実行されます。`-n'か`-p'オプションが同時に指定されない限り,
   このオプションは意味を持ちません。
 
+#@since 3.0.0
+: --backtrace-limit=num
+
+  バックトレースの最大行数を指定します。
+
+//emlist{
+# test.rb
+def f6 = raise
+def f5 = f6
+def f4 = f5
+def f3 = f4
+def f2 = f3
+def f1 = f2
+f1
+//}
+
+//emlist{
+% ruby --backtrace-limit=3 test.rb
+test.rb:1:in `f6': unhandled exception
+  from test.rb:2:in `f5'
+  from test.rb:3:in `f4'
+  from test.rb:4:in `f3'
+   ... 3 levels...
+//}
+#@end
+
 : -C directory
 
   スクリプト実行前に指定されたディレクトリに移動します。
@@ -195,7 +221,11 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   フラグまたは-pフラグが指定されていると
   gets
   で読み込まれた各行の最後に対して
+#@since 2.5.0
+  [[m:String#chomp!]]を行います。
+#@else
   [[m:String#chop!]]を行います。
+#@end
 
 : -n
 
@@ -262,12 +292,14 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   いので、`-S'を用いてRubyに必要に応じてスクリプトを探すように
   指示する必要があります。
 
+#@until 3.0
 : -T[level]
 
   不純度チェックを行います。level を指定すると安全度レベルをその
   レベルに設定します。level 省略時は 1 を指定したのと同じです。
   CGIプログラムなどでは-T1 程度を指定しておく方が良いでしょう。
   [[m:$SAFE]] に指定したレベルがセットされます。
+#@end
 
 : -v
   冗長モード。起動時にバージョンの表示を行い, 組み込み変数

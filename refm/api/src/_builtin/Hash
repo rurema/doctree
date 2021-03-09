@@ -8,12 +8,8 @@ include Enumerable
 #@#リテラル-ハッシュ式へのリンクつける
 
   {a => b, ... }   # aはキー、bは値となる
-#@since 1.9.1
   {s: b , ... }    # { :s => b, ... } と同じ。キーがシンボルの場合の省略した書き方
-#@end
-#@since 2.2.0
   {"a+": b , ... } # { :"a+" => b, ... } と同じ。上の表現に空白や記号を含めたい場合
-#@end
 
 キーには任意の種類のオブジェクトを用いることができますが、
 以下の２つのメソッドが適切に定義してある必要があります。
@@ -22,11 +18,7 @@ include Enumerable
 
 破壊的操作によってキーとして与えたオブジェクトの内容が変化し、[[m:Object#hash]] の返す
 値が変わるとハッシュから値が取り出せなくなりますから、
-#@since 1.9.1
 [[c:Array]]、[[c:Hash]]
-#@else
-[[c:Array]]
-#@end
 などのインスタンスはキーに向きません。[[m:Hash#rehash]] を参照。
 
 ただし、 更新不可 ([[m:Object#frozen?]] が true) では無い文字列をキーとして与えた場合は、文字列をコピーし、コピーを更新不可に設定 ([[m:Object#freeze]]) してキーとして
@@ -42,18 +34,12 @@ include Enumerable
 デフォルト値には値形式とブロック形式があります。
 実際にデフォルト値がどのように扱われるかは各メソッドの説明を参照してください。
 
-#@since 1.9.1
 ハッシュに含まれる要素の順序が保持されるようになりました。
 ハッシュにキーが追加された順序で列挙します。
-#@else
-ハッシュに含まれる要素の順序は保持されません。
-列挙する順序は不定です。
-#@end
 
 
 == Class Methods
 
-#@since 1.9.1
 --- try_convert(obj) -> Hash | nil
 
 to_hash メソッドを用いて obj をハッシュに変換しようとします。
@@ -63,7 +49,6 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
 
    Hash.try_convert({1=>2})   # => {1=>2}
    Hash.try_convert("1=>2")   # => nil
-#@end
 
 --- [](other) -> Hash
 
@@ -234,6 +219,27 @@ ifnoneを省略した Hash.new は {} と同じです。
 
 @see [[m:Hash#default=]],[[m:Hash#default]],[[m:Hash#default_proc]]
 
+#@since 2.7.0
+--- ruby2_keywords_hash?(hash) -> bool
+
+[[m:Module#ruby2_keywords]]や[[m:Proc#ruby2_keywords]]による
+ruby2_keywords フラグが設定されているかどうかを返します。
+
+このメソッドはデバッグや調査、シリアライゼーションのために本当に必要な場合のために
+用意されていて、普通のプログラムで使うことは想定されていません。
+
+ruby 2.7.1 で追加されたため、ruby 2.7.0 では定義されていません。
+
+#@samplecode
+ruby2_keywords def foo(*args)
+  Hash.ruby2_keywords_hash?(args.last)
+end
+foo(k: 1)   # => true
+foo({k: 1}) # => false
+#@end
+
+@see [[m:Module#ruby2_keywords]], [[m:Proc#ruby2_keywords]]
+#@end
 == Instance Methods
 
 --- values -> [object]
@@ -267,19 +273,13 @@ ifnoneを省略した Hash.new は {} と同じです。
 
 self を返します。
 
-#@since 2.0.0
-
 例:
   hash = {}
   p hash.to_hash         # => {}
   p hash.to_hash == hash # => true
 
 @see [[m:Object#to_hash]], [[m:Hash#to_h]]
-#@else
-@see [[m:Object#to_hash]]
-#@end
 
-#@since 2.0.0
 --- to_h -> self | Hash
 #@since 2.6.0
 --- to_h {|key, value| block } -> Hash
@@ -309,7 +309,6 @@ hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
 #@end
 
 @see [[m:Enumerable#map]]
-#@end
 #@end
 
 #@since 2.3.0
@@ -364,11 +363,7 @@ end
 p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
 #@end
 
-#@since 1.9.1
 @see [[m:Hash#key]]
-#@else
-@see [[m:Hash#index]]
-#@end
 
 --- fetch(key, default = nil) {|key| ... } -> object
 
@@ -380,24 +375,12 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
 
 @param key 探索するキーを指定します。
 @param default 該当するキーが登録されていない時の返り値を指定します。
-#@since 1.9.1
 @raise  KeyError   引数defaultもブロックも与えられてない時、キーの探索に失敗すると発生します。
-#@else
-@raise  IndexError 引数defaultもブロックも与えられてない時、キーの探索に失敗すると発生します。
-#@end
 
-#@since 1.9.1
   h = {one: nil}
-#@else
-  h = {:one => nil}
-#@end
   p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
   p h.fetch(:one)                          #=> nil
-#@since 1.9.1
   p h.fetch(:two)                          # エラー key not found (KeyError)
-#@else
-  p h.fetch(:two)                          # エラー key not found (IndexError)
-#@end
   p h.fetch(:two,"error")                  #=> "error"
   p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
   p h.fetch(:two, "error"){|key|           #=> "two not exist"
@@ -405,11 +388,7 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
     }                                      #  警告が表示される。
   
   h.default = "default"
-#@since 1.9.1
   p h.fetch(:two)                          # エラー key not found (KeyError)
-#@else
-  p h.fetch(:two)                          # エラー key not found (IndexError)
-#@end
 
 @see [[m:Hash#[] ]]
 
@@ -447,10 +426,12 @@ self にデフォルト値が設定されていても無視されます（挙動
 
 @param key 探索するキーを指定します。
 
-  p({1 => "one"}.has_key?(1)) #=> true
-  p({1 => "one"}.has_key?(2)) #=> false
+#@samplecode
+p({1 => "one"}.key?(1)) # => true
+p({1 => "one"}.key?(2)) # => false
+#@end
 
-@see [[m:Hash#has_value?]]
+@see [[m:Hash#value?]]
 
 --- has_value?(value) -> bool
 --- value?(value)     -> bool
@@ -460,10 +441,12 @@ self にデフォルト値が設定されていても無視されます（挙動
 
 @param value 探索する値を指定します。
 
-  p({1 => "one"}.has_value?("one")) #=> true
-  p({1 => "one"}.has_value?("two")) #=> false
+#@samplecode
+p({1 => "one"}.value?("one")) #=> true
+p({1 => "one"}.value?("two")) #=> false
+#@end
 
-@see [[m:Hash#has_key?]]
+@see [[m:Hash#key?]]
 
 --- []=(key, value)
 --- store(key, value) -> object
@@ -516,7 +499,6 @@ compact は自身から value が nil のもの取り除いた Hash を生成し
 
 #@end
 
-#@since 1.9.1
 --- compare_by_identity -> self
 
 ハッシュのキーの一致判定をオブジェクトの同一性で判定するように変更します。
@@ -553,7 +535,6 @@ selfが変化する破壊的メソッドです。
 
 @see [[m:Hash#compare_by_identity]]
 
-#@end
 --- shift -> [object, object]
 
 ハッシュからキーが追加された順で先頭の要素をひとつ取り除き、
@@ -621,7 +602,7 @@ key に関連づけられた値を返します。
 該当するキーが登録されていない時には、デフォルト値を返します。
 
 デフォルト値と値としての nil を区別する必要が
-ある場合は [[m:Hash#fetch]] または [[m:Hash#has_key?]] を使ってください。
+ある場合は [[m:Hash#fetch]] または [[m:Hash#key?]] を使ってください。
 
 @param key 探索するキーを指定します。
 
@@ -635,7 +616,7 @@ key に関連づけられた値を返します。
   h2 = Hash.new {|*arg| arg}
   p h2[:non]             #=> [{}, :non]
 
-@see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
+@see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
 
 --- default -> object | nil
 --- default(key) -> object | nil
@@ -701,7 +682,6 @@ self と引数 key をブロックに渡して評価し、その結果を返し�
 
 @see [[m:Hash#default]]
 
-#@since 1.9.1
 --- default_proc=(pr)
 
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを
@@ -746,7 +726,6 @@ nil を指定した場合は現在の [[m:Hash#default_proc]] をクリアしま
 
 @see [[m:Hash#default_proc]], [[m:Hash#default]]
 
-#@end
 --- clone -> Hash
 --- dup -> Hash
 
@@ -807,13 +786,8 @@ selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]か[[
 
 @see [[m:Hash#delete_if]],[[m:Hash#delete]],[[m:Enumerable#reject]]
 
-#@since 1.9.1
 --- delete_if -> Enumerator
 --- reject!   -> Enumerator
-#@else
---- delete_if -> Enumerable::Enumerator
---- reject!   -> Enumerable::Enumerator
-#@end
 --- delete_if {|key, value| ... } -> self
 --- reject! {|key, value| ... } -> self|nil
 
@@ -824,11 +798,7 @@ delete_if は常に self を返します。
 reject! は、要素を削除しなかった場合には nil を返し、
 そうでなければ self を返します。
 
-#@until 1.9.1
-ブロックを省略した場合は [[c:Enumerable::Enumerator]] を返します。
-#@else
 ブロックを省略した場合は [[c:Enumerator]] を返します。
-#@end
 
   h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
   
@@ -839,52 +809,18 @@ reject! は、要素を削除しなかった場合には nil を返し、
   p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
 
 @see [[m:Hash#reject]],[[m:Hash#delete]]
-#@since 1.9.2
 @see [[m:Hash#keep_if]],[[m:Hash#select!]]
-#@end
 
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
-#@since 1.9.1
 --- each      -> Enumerator
 --- each_pair -> Enumerator
-#@else
---- each      -> Enumerable::Enumerator
---- each_pair -> Enumerable::Enumerator
-#@end
 
 ハッシュのキーと値を引数としてブロックを評価します。
 
-#@since 1.9.1
 反復の際の評価順序はキーが追加された順です。
-#@else
-反復の際の評価順序は不定です。
-#@end
 ブロック付きの場合 self を、
-#@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
-#@else
-無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
-#@end
-
-#@if( version >= "1.8.0" and version < "1.9.1" )
-each と each_pair ではブロック引数の受渡し方が異なります。
-each は キーと値の配列を１引数で、each_pair は別々に２引数でブロックに値を渡します。
-これによりブロック引数をひとつだけ指定した場合の挙動が異なります。
-ブロック引数を２つ指定するようにすれば同じ挙動になります。
-
-  {:a=>1, :b=>2}.each {|a| p a}
-  #=> [:a, 1]
-      [:b, 2]
-  
-  {:a=>1, :b=>2}.each_pair {|*a| p a} #明示的に配列で受ける
-  #=> [:a, 1]
-      [:b, 2]
-  
-  {:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
-  #=> [:a, 1]
-      [:b, 2]
-#@end
 
 each_pair は each のエイリアスです。
 
@@ -900,86 +836,46 @@ each_pair は each のエイリアスです。
   #=> [:a, 1]
       [:b, 2]
   
-#@since 1.9.1
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
-#@else
-  p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
-#@end
 
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
-#@since 1.9.1
 --- each_key -> Enumerator
-#@else
---- each_key -> Enumerable::Enumerator
-#@end
 
 ハッシュのキーを引数としてブロックを評価します。
 
-#@since 1.9.1
 反復の際の評価順序はキーが追加された順です。
-#@else
-反復の際の評価順序は不定です。
-#@end
 ブロック付きの場合selfを、
-#@since 1.9.1
 無しで呼ばれた場合[[c:Enumerator]]を返します。
-#@else
-無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
-#@end
 
   {:a=>1, :b=>2}.each_key {|k| p k}
   #=> :a
       :b
        
-#@since 1.9.1
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
-#@else
-  p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
-#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
 --- each_value {|value| ... } -> self
-#@since 1.9.1
 --- each_value -> Enumerator
-#@else
---- each_value -> Enumerable::Enumerator
-#@end
 
 ハッシュの値を引数としてブロックを評価します。
 
-#@since 1.9.1
 反復の際の評価順序はキーが追加された順です。
-#@else
-反復の際の評価順序は不定です。
-#@end
 ブロック付きの場合selfを、
-#@since 1.9.1
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
-#@else
-無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
-#@end
 
   {:a=>1, :b=>2}.each_value {|v| p v}
   #=> 1
       2
   
-#@since 1.9.1
   p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
-#@else
-  p({:a=>1, :b=>2}.each_value)  #=> #<Enumerable::Enumerator:0xbb19e4>
-#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
-#@if (version < "1.9.1")
---- index(val) -> object
-#@else
 --- key(val) -> object
 --- index(val) -> object
-#@end
 
 値 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
@@ -991,19 +887,11 @@ Hash#index は obsolete です。
 
 @param val 探索に用いる値を指定します。
 
-#@if (version >= "1.9.1")
   h = {:ab => "some" , :cd => "all" , :ef => "all"}
   
   p h.key("some") #=> :ab
   p h.key("all") #=> :cd
   p h.key("at") #=> nil
-#@else
-  h = {:ab => "some" , :cd => "all" , :ef => "all"}
-  
-  p h.index("some") #=> :ab
-  p h.index("all") #=> :cd
-  p h.index("at") #=> nil
-#@end
 
 @see [[m:Hash#invert]]
 
@@ -1391,8 +1279,6 @@ other が self のサブセットである場合に真を返します。
   p a.hash     #=> 329543
 
 
-#@since 1.9.1
-
 --- assoc(key)   ->  Array | nil
 
 ハッシュが key をキーとして持つとき、見つかった要素のキーと値のペア
@@ -1449,8 +1335,6 @@ key が見つからなかった場合は、nil を返します。
 
 @see [[m:Hash#assoc]], [[m:Array#rassoc]]
 
-#@end
-
 --- select                       -> Enumerator
 --- select {|key, value| ... }   -> Hash
 #@since 2.6.0
@@ -1473,24 +1357,13 @@ h.select {|k,v| v < 200}  #=> {"a" => 100}
 
 @see [[m:Hash#select!]], [[m:Hash#reject]]
 
-#@since 1.9.1
 --- to_s     -> String
-#@end
 --- inspect  -> String
 
 ハッシュの内容を人間に読みやすい文字列にして返します。
 
     h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
     h.inspect   # => "{\"a\"=>100, \"c\"=>300, \"d\"=>400}"
-
-#@until 1.9.1
---- to_s     -> String
-
-ハッシュの内容を self.to_a.to_s で文字列化して返します。
-
-    h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
-    h.to_s   # => "a100c300d400"
-#@end
 
 --- sort              -> Array
 --- sort{|a, b| ... } -> Array
@@ -1503,7 +1376,7 @@ h.select {|k,v| v < 200}  #=> {"a" => 100}
   h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
 
 @see [[m:Array#sort]]
-#@since 1.9.2
+
 --- keep_if -> Enumerator
 --- keep_if {|key, value| ... } -> self
 --- select! -> Enumerator
@@ -1541,7 +1414,7 @@ select! はオブジェクトが変更された場合に self を、
   h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
 
 @see [[m:Hash#select]], [[m:Hash#delete_if]], [[m:Hash#reject!]]
-#@end
+
 #@since 2.4.0
 --- transform_values {|value| ... } -> Hash
 --- transform_values                -> Enumerator
@@ -1652,6 +1525,7 @@ h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
 #@samplecode 例
 h = { a: 100, b: 200, c: 300 }
 h.slice(:a)           # => {:a=>100}
+h.slice(:c, :b)       # => {:c=>300, :b=>200}
 h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
 #@end
 

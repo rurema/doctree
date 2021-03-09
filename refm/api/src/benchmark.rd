@@ -6,13 +6,6 @@ category Development
 
 ベンチマークを取るためのモジュールです。
 
-#@# == Class Methods
-#@# 
-#@# --- times -> Struct::Tms
-#@# 
-#@# [[m:Process.#times]] を呼び出しています。
-
-
 == Module Functions
 
 --- measure(label = "") { ... }  -> Benchmark::Tms
@@ -40,7 +33,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 
 
---- bm(label_width = 0, *labels) {|rep| ... } -> bool
+--- bm(label_width = 0, *labels) {|rep| ... } -> [Benchmark::Tms]
 
 [[m:Benchmark.#benchmark]] メソッドの引数を簡略化したものです。
 
@@ -48,8 +41,6 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 @param label_width ラベルの幅を指定します。
 @param labels     ブロックが [[c:Benchmark::Tms]] オブジェクトの配列を返す場合に指定します。
-
-@return STDIN.sync の値を返すだけなので返り値に意味はありません。
 
 例:
 
@@ -144,7 +135,7 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
   sort!  12.959000   0.010000  12.969000 ( 13.793000)
   sort   12.007000   0.000000  12.007000 ( 12.791000)
 
---- benchmark(caption = "", label_width = nil, fmtstr = nil, *labels){|rep| ...} -> bool
+--- benchmark(caption = "", label_width = nil, fmtstr = nil, *labels){|rep| ...} -> [Benchmark::Tms]
 
 [[c:Benchmark::Report]] オブジェクトを生成し、それを引数として与えられたブロックを実行します。
 
@@ -161,9 +152,6 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
                    この引数を省略すると [[m:Benchmark::FMTSTR]] が使用されます。
 #@end
 @param labels  ブロックが [[c:Benchmark::Tms]] オブジェクトの配列を返す場合に指定します。
-
-@return STDIN.sync の値を返すだけなので返り値に意味はありません。
-
 
 === フォーマット文字列
 

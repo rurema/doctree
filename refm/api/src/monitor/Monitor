@@ -1,6 +1,8 @@
 = class Monitor < Object
 
+#@until 2.7
 include MonitorMixin
+#@end
 
 スレッドの同期機構としてのモニター機能を提供するクラスです。
 また同じスレッドから何度も lock できる Mutex としての機能も提供します。
@@ -9,54 +11,53 @@ include MonitorMixin
 
 === 例
 
-  require 'monitor'
-  
-  buf = []
-  mon = Monitor.new
-  empty_cond = mon.new_cond
-  
-  # consumer
-  Thread.start do
-    loop do
-      mon.synchronize do
-        empty_cond.wait_while { buf.empty? }
-        print buf.shift
-      end
-    end
-  end
-  
-  # producer
-  while line = ARGF.gets
+#@samplecode 消費者、生産者問題の例
+require 'monitor'
+
+buf = []
+mon = Monitor.new
+empty_cond = mon.new_cond
+
+# consumer
+Thread.start do
+  loop do
     mon.synchronize do
-      buf.push(line)
-      empty_cond.signal
+      empty_cond.wait_while { buf.empty? }
+      print buf.shift
     end
   end
+end
+
+# producer
+while line = ARGF.gets
+  mon.synchronize do
+    buf.push(line)
+    empty_cond.signal
+  end
+end
+#@end
 
 2回ロックしてもデッドロックにならない例です。
 
-   require 'monitor'
-   mon = Monitor.new
-   mon.synchronize {
-     mon.synchronize{
-     
-     }
-   }
-
-#@since 2.3.0
-[[c:Thread::Mutex]] ではデッドロックになります。
-#@else
-[[c:Mutex]] ではデッドロックになります。
+#@samplecode デッドロックにならない例
+require 'monitor'
+mon = Monitor.new
+mon.synchronize {
+  mon.synchronize {
+  }
+}
 #@end
 
-   require 'thread'
-   mx = Mutex.new
-   mx.synchronize {
-     mx.synchronize{
+[[c:Thread::Mutex]] ではデッドロックになります。
 
-     }
-   }
-   # => deadlock; recursive locking (ThreadError)
+#@samplecode Mutex でデッドロックになる例
+mx = Mutex.new
+mx.synchronize {
+  mx.synchronize {
+  }
+}
+# => deadlock; recursive locking (ThreadError)
+#@end
 
 == Class Methods
 
@@ -66,10 +67,107 @@ include MonitorMixin
 == Instance Methods
 
 --- enter -> ()
+#@since 2.7.0
+--- mon_enter -> ()
+モニターをロックします。
+
+一度に一つのスレッドだけがモニターをロックできます。
+既にモニターがロックされている場合は、ロックが開放されるまで
+そのスレッドは待ちます。
+#@else
 [[m:MonitorMixin#mon_enter]] の別名です。
+#@end
+
+[[m:Thread::Mutex#lock]] に相当します。
+Thread::Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
+何度でもロックできる点です。ロックした回数だけ [[m:Monitor#exit]] を呼ばなければモニターは
+解放されません。
+
+#@samplecode 例
+require 'monitor'
+mon = Monitor.new
+mon.enter
+mon.enter
+#@end
+
+Thread::Mutex#lock ではデッドロックが起きます。
+
+#@samplecode Mutex でデッドロックする例
+m = Mutex.new
+m.lock
+m.lock # => deadlock; recursive locking (ThreadError)
+#@end
 
 --- exit -> ()
+#@since 2.7.0
+--- mon_exit -> ()
+モニターのロックを解放します。
+#@else
 [[m:MonitorMixin#mon_exit]] の別名です。
+#@end
 
---- try_enter -> bool
+enter でロックした回数だけ exit を呼ばなければモニターは解放されません。
+
+モニターが解放されればモニターのロック待ちになっていた
+スレッドが一つ実行を再開します。
+
+@raise ThreadError ロックを持っていないスレッドが呼びだした場合に発生します
+
+#@samplecode 例
+require 'monitor'
+mon = Monitor.new
+mon.enter
+mon.enter
+mon.exit
+mon.exit
+mon.exit # => current thread not owner (ThreadError)
+#@end
+
+--- try_enter     -> bool
+#@since 2.7.0
+--- try_mon_enter -> bool
+--- mon_try_enter -> bool
+モニターのロックを取得しようと試みます。
+ロックに成功した(ロックが開放状態だった、もしくは
+ロックを取得していたスレッドが自分自身であった)場合には
+真を返します。
+
+ロックができなかった場合は偽を返し、実行を継続します。この場合には
+スレッドはブロックしません。
+#@else
 [[m:MonitorMixin#mon_try_enter]] の別名です。
+#@end
+#@since 2.7.0
+--- synchronize     { ... } -> object
+--- mon_synchronize { ... } -> object
+
+モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
+
+ブロックの評価値を返り値として返します。
+
+@see [[m:Monitor#enter]]
+--- mon_locked? -> bool
+モニターがロックされているときに true を返します。
+--- mon_check_owner -> nil
+[[c:MonitorMixin]] 用の内部メソッドです。
+
+@raise ThreadError ロックを持っていないスレッドが呼びだした場合に発生します
+--- mon_owned? -> bool
+カレントスレッドがモニターをロックしているときに true を返します。
+--- wait_for_cond(cond, timeout) -> true
+[[c:MonitorMixin::ConditionVariable]] 用の内部メソッドです。
+
+@param cond [[c:Thread::ConditionVariable]] を指定します。
+@param timeout タイムアウトまでの秒数。指定しなかった場合はタイムアウトしません。
+
+#@samplecode 例
+require 'monitor'
+m = Monitor.new
+cv = Thread::ConditionVariable.new
+m.enter
+m.wait_for_cond(cv, 1)
+#@end
+
+--- new_cond -> MonitorMixin::ConditionVariable
+モニターに関連付けられた、新しい [[c:MonitorMixin::ConditionVariable]] を生成して返します。
+#@end

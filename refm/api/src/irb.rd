@@ -32,7 +32,7 @@ irb コマンドを実行すると、以下のようなプロンプトが表れ�
   irb(main):004:2>     print 1
   irb(main):005:2>   end
   irb(main):006:1> end
-  nil
+  :foo
   irb(main):007:0>
 
 また irb コマンドは [[lib:readline]] ライブラリにも対応しています。

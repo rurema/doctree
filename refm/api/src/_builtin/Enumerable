@@ -24,12 +24,24 @@
 #@end
 
 例:
+#@since 2.6.0
+    # すべて正の数か？
+    p [5,  6, 7].each.all? {|v| v > 0 }   # => true
+    p [5, -1, 7].each.all? {|v| v > 0 }   # => false
+    p [].each.all? {|v| v > 0 }           # => true
+    p %w[ant bear cat].each.all?(/t/)     # => false
+#@else
     # すべて正の数か？
     p [5,  6, 7].all? {|v| v > 0 }   # => true
     p [5, -1, 7].all? {|v| v > 0 }   # => false
     p [].all? {|v| v > 0 }           # => true
 #@since 2.5.0
     p %w[ant bear cat].all?(/t/)     # => false
+#@end
+#@end
+
+#@since 2.6.0
+@see [[m:Array#all?]]
 #@end
 
 --- any?               -> bool
@@ -50,14 +62,24 @@
 #@end
 
 例:
+#@since 2.2.0
+    p [1, 2, 3].each.any? {|v| v > 3 }   # => false
+    p [1, 2, 3].each.any? {|v| v > 1 }   # => true
+    p [].each.any? {|v| v > 0 }          # => false
+#@else
     p [1, 2, 3].any? {|v| v > 3 }   # => false
     p [1, 2, 3].any? {|v| v > 1 }   # => true
     p [].any? {|v| v > 0 }          # => false
+#@end
 #@since 2.5.0
-    p %w[ant bear cat].any?(/d/)    # => false
-    p [nil, true, 99].any?(Integer) # => true
-    p [nil, true, 99].any?          # => true
-    p [].any?                       # => false
+    p %w[ant bear cat].each.any?(/d/)    # => false
+    p [nil, true, 99].each.any?(Integer) # => true
+    p [nil, true, 99].each.any?          # => true
+    p [].each.any?                       # => false
+#@end
+
+#@since 2.2.0
+@see [[m:Array#any?]]
 #@end
 
 #@since 2.6.0
@@ -93,10 +115,12 @@ obj.collect {|item| item } を実行します。
 
 例:
     # すべて 3 倍にする
-    p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
+    p [1, 2, 3].each.map {|n| n * 3 }  # => [3, 6, 9]
 
 #@since 2.6.0
-@see [[m:Hash#to_h]]
+@see [[m:Hash#to_h]], [[m:Array#collect]], [[m:Array#map]]
+#@else
+@see [[m:Array#collect]], [[m:Array#map]]
 #@end
 --- each_with_index(*args)                      -> Enumerator
 --- each_with_index(*args) {|item, index| ... } -> self
@@ -663,9 +687,9 @@ a < b のとき負の整数を、期待しています。
 例:
 
   # 偶数を除外する (奇数を集める)
-  [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
+  [1, 2, 3, 4, 5, 6].each.reject {|i| i % 2 == 0 }  # => [1, 3, 5]
 
-@see [[m:Enumerable#select]]
+@see [[m:Enumerable#select]], [[m:Array#reject]]
 #@since 2.3.0
 @see [[m:Enumerable#grep_v]]
 #@end
@@ -945,11 +969,12 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 
 例:
 
-   ary = [1, 2, 4, 2]
-   ary.count             # => 4
-   ary.count(2)          # => 2
-   ary.count{|x|x%2==0}  # => 3
+   enum = [1, 2, 4, 2].each
+   enum.count                  # => 4
+   enum.count(2)               # => 2
+   enum.count{|x|x%2==0}       # => 3
 
+@see [[m:Array#count]]
 
 #@since 1.9.1
 --- cycle(n=nil)       -> Enumerator
@@ -991,8 +1016,10 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
 
 @param n 捨てる要素数。
 
-   a = [1, 2, 3, 4, 5, 0]
-   a.drop(3)             # => [4, 5, 0]
+   e = [1, 2, 3, 4, 5, 0].each
+   e.drop(3)             # => [4, 5, 0]
+
+@see [[m:Array#drop]]
 
 #@since 1.9.1
 --- drop_while                    -> Enumerator
@@ -1149,6 +1176,15 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
 #@end
 
+#@since 2.6.0
+   %w{ant bear cat}.each.none? {|word| word.length == 5}  # => true
+   %w{ant bear cat}.each.none? {|word| word.length >= 4}  # => false
+   %w{ant bear cat}.each.none?(/d/)                       # => true
+   [].each.none?                                          # => true
+   [nil].each.none?                                       # => true
+   [nil,false].each.none?                                 # => true
+   [nil, false, true].each.none?                          # => false
+#@else
    %w{ant bear cat}.none? {|word| word.length == 5}  # => true
    %w{ant bear cat}.none? {|word| word.length >= 4}  # => false
 #@since 2.5.0
@@ -1158,6 +1194,11 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
    [nil].none?                                       # => true
    [nil,false].none?                                 # => true
    [nil, false, true].none?                          # => false
+#@end
+
+#@since 2.6.0
+@see [[m:Array#none?]]
+#@end
 
 --- one?                -> bool
 --- one?{|obj| ... }    -> bool
@@ -1177,6 +1218,15 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
 #@end
 
+#@since 2.6.0
+   %w{ant bear cat}.each.one? {|word| word.length == 4}   # => true
+   %w{ant bear cat}.each.one? {|word| word.length > 4}    # => false
+   %w{ant bear cat}.each.one?(/t/)                        # => false
+   [ nil, true, 99 ].each.one?                            # => false
+   [ nil, true, false ].each.one?                         # => true
+   [ nil, true, 99 ].each.one?(Integer)                   # => true
+   [].each.one?                                           # => false
+#@else
    %w{ant bear cat}.one? {|word| word.length == 4}   # => true
    %w{ant bear cat}.one? {|word| word.length > 4}    # => false
 #@since 2.5.0
@@ -1188,6 +1238,11 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
    [ nil, true, 99 ].one?(Integer)                   # => true
 #@end
    [].one?                                           # => false
+#@end
+
+#@since 2.6.0
+@see [[m:Array#one?]]
+#@end
 
 --- take(n)               -> Array
 
@@ -1195,8 +1250,10 @@ Enumerable オブジェクトの先頭から n 要素を配列として返しま
 
 @param n 要素数を指定します。
 
-   a = [1, 2, 3, 4, 5, 0]
-   a.take(3)             # => [1, 2, 3]
+   e = [1, 2, 3, 4, 5, 0].each
+   e.take(3)             # => [1, 2, 3]
+
+@see [[m:Array#take]]
 
 #@since 1.9.1
 --- take_while                    -> Enumerator
@@ -1208,13 +1265,15 @@ Enumerable オブジェクトの先頭から n 要素を配列として返しま
 Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
 最初に偽になった要素の手前の要素までを配列として返します。
 
-   a = [1, 2, 3, 4, 5, 0]
-   a.take_while {|i| i < 3 }   # => [1, 2]
+   e = [1, 2, 3, 4, 5, 0].each
+   e.take_while {|i| i < 3 }   # => [1, 2]
 
 #@since 1.9.1
 ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
 返します。
 #@end
+
+@see [[m:Array#take_while]]
 
 #@since 1.9.1
 --- reverse_each -> Enumerator
@@ -1827,4 +1886,22 @@ olympics.uniq{|k,v| v} # => [[1896, "Athens"], [1900, "Paris"], [1904, "Chicago"
 #@end
 
 @see [[m:Array#uniq]]
+#@end
+#@since 3.1
+--- compact -> Array
+
+self から nil を取り除いた配列を生成して返します。
+
+#@samplecode
+def with_nils
+  yield 1
+  yield 2
+  yield nil
+  yield 3
+end
+
+to_enum(:with_nils).compact # => [1, 2, 3]
+#@end
+
+@see [[m:Array#compact]]
 #@end
