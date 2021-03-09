@@ -560,24 +560,40 @@ Errno::EACCES となった場合には無視して実行を続けます。
 
 @see [[c:Process::Tms]]
 
---- wait    -> Integer
---- wait2   -> [Integer, Process::Status]
+--- wait(pid = -1, flags = 0)       -> Integer | nil
+--- wait2(pid = -1, flags = 0)      -> [Integer, Process::Status] | nil
+--- waitpid(pid = -1, flags = 0)    -> Integer | nil
+--- waitpid2(pid = -1, flags = 0)   -> [Integer, Process::Status] | nil
 
-子プロセスのうちのひとつが終了するまで待ち、終了した子プロセスの pid を返します。
-wait2 は子プロセスの pid と終了ステータスを表す [[c:Process::Status]] オブジェクトの配列を返します。
+pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
+終了した時に pid を返します。
+wait2, waitpid2 は子プロセスの pid と終了ステータスを表す
+[[c:Process::Status]] オブジェクトの配列を返します。
+ノンブロッキングモードで子プロセスがまだ終了していない時には
+nil を返します。
 
 [[m:$?]] に終了した子プロセスの [[c:Process::Status]] オブジェクトがセットされます。
 
-#@#$? は [[c:Process::Status]] オブジェクトです。
-#@#Process.wait と Process.waitpid の実体は同じものになりました。
-#@#Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+@param pid 子プロセスのプロセス ID を整数で指定します。
+       0 以上なら指定されたプロセス ID の子プロセスを待ちます。
+       0 なら呼び出し元のプロセスとプロセスグループ ID が同じ任意の子プロセスを待ちます。
+       -1 (省略時のデフォルト) は任意の子プロセスを待ちます。
+       -1 未満なら pid の絶対値とプロセスグループ ID が同じ任意の子プロセスを待ちます。
 
-@raise Errno::ECHILD 子プロセスが一つもなければ発生します。
+@param flags Process モジュールの定数 [[m:Process::WNOHANG]](ノンブロッキングモード)と
+             [[m:Process::WUNTRACED]] の論理和を指定します。省略したときの値は 0 です。
+             ノンブロッキングモードで子プロセスがまだ終了していない時には
+             nil を返します。[[man:waitpid(2)]] か [[man:wait4(2)]] の実装されていないマシンでは
+             flags はいつも nil または 0 を指定する必要があります。
 
- pid = fork{ sleep 1 }
- Process.wait2 #=> [2756, #<Process::Status: pid=2756,exited(0)>]
+@raise Errno::ECHILD 子プロセスが存在しない場合に発生します。
 
-@see [[man:wait(2)]]
+#@samplecode
+pid = fork { sleep 1 }
+Process.wait2 # => [70024, #<Process::Status: pid 70024 exit 0>]
+#@end
+
+@see [[man:wait(2)]], [[man:waitpid(2)]]
 
 --- waitall    -> [[Integer, Process::Status]]
 
@@ -593,33 +609,6 @@ wait2 は子プロセスの pid と終了ステータスを表す [[c:Process::S
     }
     p Process.waitall
     #=> [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
-
---- waitpid(pid, flags = 0)    -> Integer | nil
---- waitpid2(pid, flags = 0)   -> [Integer, Process::Status] | nil
-
-pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
-終了した時に pid を返します。
-waitpid2 は pid と [[c:Process::Status]] オブジェクトの配列を返します。
-ノンブロッキングモードで子プロセスがまだ終了していない時には
-nil を返します。
-
-[[m:$?]] に終了した子プロセスの [[c:Process::Status]] オブジェクトがセットされます。
-
-#@#Ruby 1.8.0 からは $? は [[c:Process::Status]] オブジェクトです。
-#@#Process.wait と Process.waitpid の実体は同じものになりました。
-#@#Process.wait2 と Process.waitpid2 の実体は同じものになりました。
-
-@param pid 子プロセスのプロセス ID を整数で指定します。
-
-@param flags Process モジュールの定数 [[m:Process::WNOHANG]](ノンブロッキングモード)と
-             [[m:Process::WUNTRACED]] の論理和を指定します。省略したときの値は 0 です。
-             ノンブロッキングモードで子プロセスがまだ終了していない時には
-             nil を返します。[[man:waitpid(2)]] か [[man:wait4(2)]] の実装されていないマシンでは
-             flags はいつも nil または 0 を指定する必要があります。
-
-@raise Errno::ECHILD 子プロセスが存在しない場合に発生します。
-
-@see [[man:waitpid(2)]]
 
 #@since 1.9.1
 --- daemon(nochdir = nil, noclose = nil)    -> 0
