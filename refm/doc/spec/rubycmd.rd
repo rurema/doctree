@@ -322,7 +322,8 @@ test.rb:1:in `f6': unhandled exception
   バージョンの表示を行う事無く冗長モードになります。
 
 #@since 2.7.0
-: -W[level|:category]
+: -W[level]
+: -W:category
 
     冗長モードを三段階のレベルで指定します。それぞれ以下の通りです。
 //emlist{
