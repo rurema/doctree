@@ -185,9 +185,10 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 #@since 3.0.0
 --- auto_compact -> bool
 
-[[m:GC.auto_compact=]] に設定されている値を返します。
+auto compaction が有効化どうかを返します。
 
-@return [[m:GC.auto_compact=]] に設定されている値を返します。
+@return auto compaction が有効な場合 true を返します。
+        そうでなければ false を返します。
 
 @see [[m:GC.auto_compact=]]
 
