@@ -346,6 +346,7 @@ test.rb:1:in `f6': unhandled exception
      * -W:experimental : 実験的な機能を使用した際に警告を出力する(デフォルト)
      * -W:no-experimental : 実験的な機能を使用した際に警告を出力しない
 //}
+    ここで設定された値は [[m:Warning.[] ]] で参照することができます。
 
     NOTE: Ruby 2.7.2 からは `-W:no-deprecated' がデフォルトになります。警告を出力したい場合は `-W:deprecated' を使ってください。
 #@else
