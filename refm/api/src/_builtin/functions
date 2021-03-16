@@ -2451,15 +2451,31 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 @raise ArgumentError スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
 #@else
+
+また、lambda に & 引数を渡すのは推奨されません。& 引数ではなくてブロック記法で記述する必要があります。
+
+& 引数を渡した lambda は Warning[:deprecated] = true のときに警告メッセージ
+「warning: lambda without a literal block is deprecated; use the proc without lambda instead」
+を出力します。
+
 @raise ArgumentError ブロックを省略した呼び出しを行ったときに発生します。
 #@end
 
+#@since 3.0.0
+  def foo &block
+    proc(&block)
+  end
+
+  it = foo{p 12}
+  it.call #=> 12
+#@else
   def foo &block
     lambda(&block)
   end
-  
+
   it = foo{p 12}
   it.call #=> 12
+#@end
 
 @see [[c:Proc]],[[m:Proc.new]]
 
