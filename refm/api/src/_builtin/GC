@@ -182,6 +182,33 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 
 == Singleton Methods
 
+#@since 3.0.0
+--- auto_compact -> bool
+
+auto compaction が有効化どうかを返します。
+
+@return auto compaction が有効な場合 true を返します。
+        そうでなければ false を返します。
+
+@see [[m:GC.auto_compact=]]
+
+--- auto_compact=(bool)
+
+[[m:GC.compact]] をフルGCで行うかどうかを制御します。
+
+true を設定するとフルGCのタイミングででヒープをコンパクションします。
+
+この機能を有効にするとフルGCのパフォーマンスが低下します。
+
+デフォルトは false です。
+
+詳細は[[feature:17176]]を参照してください。
+
+@param bool フルGCでコンパクションするかどうかを true か false で設定します。
+
+@see [[m:GC.compact]] [[m:GC.auto_compact]]
+#@end
+
 --- disable -> bool
 
 ガーベージコレクトを禁止します。
