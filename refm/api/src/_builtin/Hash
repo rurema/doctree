@@ -1365,6 +1365,7 @@ h.select {|k,v| v < 200}  #=> {"a" => 100}
     h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
     h.inspect   # => "{\"a\"=>100, \"c\"=>300, \"d\"=>400}"
 
+#@if (version < "1.9.0")
 --- sort              -> Array
 --- sort{|a, b| ... } -> Array
 
@@ -1376,6 +1377,7 @@ h.select {|k,v| v < 200}  #=> {"a" => 100}
   h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
 
 @see [[m:Array#sort]]
+#@end
 
 --- keep_if -> Enumerator
 --- keep_if {|key, value| ... } -> self
