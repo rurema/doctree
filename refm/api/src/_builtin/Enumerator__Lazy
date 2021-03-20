@@ -7,6 +7,9 @@ map や select などのメソッドの遅延評価版を提供するための�
 
  * map/collect
  * flat_map/collect_concat
+#@since 2.7.0
+ * filter_map
+#@end
  * select/find_all
  * reject
 #@since 2.3.0
@@ -139,6 +142,24 @@ Enumerator::Lazy のインスタンスを返します。
   # => [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
 @see [[m:Enumerable#select]]
+
+#@since 2.7.0
+--- filter_map {|item| ... } -> Enumerator::Lazy
+
+[[m:Enumerable#filter_map]] と同じですが、配列ではなく Enumerator::Lazy を返します。
+
+@raise ArgumentError ブロックを指定しなかった場合に発生します。
+
+#@samplecode 例
+1.step.lazy.filter_map { |n| n * 2 if n.even? }
+# => #<Enumerator::Lazy: #<Enumerator::Lazy: (1.step)>:filter_map>
+
+1.step.lazy.filter_map { |n| n * 2 if n.even? }.take(10).force
+# => [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+#@end
+
+@see [[m:Enumerable#filter_map]]
+#@end
 
 --- reject {|item| ... } -> Enumerator::Lazy
 
