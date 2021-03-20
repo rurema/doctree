@@ -191,7 +191,11 @@ File.lstat("testlink").uid      # => 0
     p $!  # => #<Errno::ENOENT: No such file or directory @ unlink_internal - test.txt>
   end
 
+#@since 3.1
+--- dirname(filename, level=1)    -> String
+#@else
 --- dirname(filename)    -> String
+#@end
 
 filename の一番後ろのスラッシュより前を文
 字列として返します。スラッシュを含まないファイル名に対しては
@@ -208,7 +212,19 @@ File.dirname の動作は [[man:dirname(3)]]
     p File.dirname("foo//bar")      # => "foo"
 #@end
 
+#@since 3.1
+level が指定されたときは、最後のlevel個を取り除いた文字列を返します。
+
+#@samplecode levelを指定する例
+File.dirname("/home/gumby/work/ruby.rb", 2) # => "/home/gumby"
+File.dirname("/home/gumby/work/ruby.rb", 4) # => "/"
+#@end
+#@end
+
 @param filename ファイル名を表す文字列を指定します。
+#@since 3.1
+@param level 末尾からいくつ取り除くかを指定します。
+#@end
 
 @see [[m:File.basename]], [[m:File.extname]]
 
