@@ -1365,18 +1365,6 @@ h.select {|k,v| v < 200}  #=> {"a" => 100}
     h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
     h.inspect   # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
 
---- sort              -> Array
---- sort{|a, b| ... } -> Array
-
-ハッシュを [key, value] を要素とする配列の配列に変換して，それをソー
-トした配列を返します。
-
-  h = { "a" => 20, "b" => 30, "c" => 10  }
-  h.sort                       #=> [["a", 20], ["b", 30], ["c", 10]]
-  h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
-
-@see [[m:Array#sort]]
-
 --- keep_if -> Enumerator
 --- keep_if {|key, value| ... } -> self
 --- select! -> Enumerator
