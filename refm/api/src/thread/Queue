@@ -44,13 +44,26 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 #@since 2.1.0
 --- new -> Thread::Queue
+#@since 3.1
+--- new(items) -> Thread::Queue
+#@end
 #@else
 --- new -> Queue
 #@end
 
 新しいキューオブジェクトを生成します。
 
+#@since 3.1
+@param items 初期値を Enumerable で指定します。
+
+#@samplecode
+q = Queue.new
+q = Queue.new([a, b, c])
+q = Queue.new(items)
+#@end
+#@else
 #@#noexample Thread::Queue#close 等を参照
+#@end
 
 == Instance methods
 
