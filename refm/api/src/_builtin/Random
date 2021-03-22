@@ -353,8 +353,9 @@ C言語レベルで定義されている構造体MTの静的変数default_rand�
 
 --- DEFAULT -> Random
 
+Ruby 3.0.0 から非推奨です。代わりに Random クラスオブジェクトを疑似乱数生成器として使用してください。
+
 #@since 3.0.0
-Ruby 3.0.0 から非推奨です。代わりに Random クラスオブジェクトを使ってください。
 
 また、 Random::DEFAULT は Random クラスオブジェクトが返ります。
 
