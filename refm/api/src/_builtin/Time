@@ -420,9 +420,13 @@ p Time.local(2000).ctime              # => "Sat Jan  1 00:00:00 2000"
 #@since 2.7.0
 --- ceil(ndigits=0)   -> Time
 
-Ceils sub seconds to a given precision in decimal digits (0 digits by
-default). It returns a new Time object. `ndigits` should be zero or a
-positive integer.
+十進小数点数で指定した桁数の精度で切り上げをし、
+その [[c:Time]] オブジェクトを返します。
+(デフォルトは0、つまり小数点の所で切り上げます)。
+
+ndigits には 0 以上の整数を渡します。
+
+@param ndigits 十進での精度(桁数)
 
 #@samplecode
 require 'time'
@@ -445,6 +449,8 @@ t = Time.utc(1999,12,31, 23,59,59)
 t = Time.utc(1999,12,31, 23,59,59)
 (t + 0.123456789).ceil(4).iso8601(6)  # => "1999-12-31T23:59:59.123500Z"
 #@end
+
+@see [[m:Time#floor]], [[m:Time#round]]
 #@end
 
 --- gmt?    -> bool
@@ -920,9 +926,13 @@ p t.usec              #=> 6
 #@since 2.7.0
 --- floor(ndigits=0)   -> Time
 
-Floors sub seconds to a given precision in decimal digits (0 digits by
-default). It returns a new Time object. `ndigits` should be zero or a
-positive integer.
+十進小数点数で指定した桁数の精度で切り捨てをし、
+その [[c:Time]] オブジェクトを返します。
+(デフォルトは0、つまり小数点の所で切り捨てます)。
+
+ndigits には 0 以上の整数を渡します。
+
+@param ndigits 十進での精度(桁数)
 
 #@samplecode
 require 'time'
@@ -945,6 +955,8 @@ t = Time.utc(1999,12,31, 23,59,59)
 t = Time.utc(1999,12,31, 23,59,59)
 (t + 0.123456789).floor(4).iso8601(6)  # => "1999-12-31T23:59:59.123400Z"
 #@end
+
+@see [[m:Time#ceil]], [[m:Time#round]]
 #@end
 
 --- friday? -> bool
@@ -1054,6 +1066,10 @@ p((t + 1.5).round.iso8601(3))    # => "2000-01-01T00:00:01.000Z"
 
 t = Time.utc(1999,12,31, 23,59,59)
 p (t + 0.123456789).round(4).iso8601(6)  # => "1999-12-31T23:59:59.123500Z"
+#@end
+
+#@since 2.7.0
+@see [[m:Time#ceil]], [[m:Time#floor]]
 #@end
 
 --- subsec -> Integer | Rational
