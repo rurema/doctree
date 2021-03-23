@@ -384,7 +384,7 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
   p h.fetch(:two,"error")                  #=> "error"
   p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
   p h.fetch(:two, "error"){|key|           #=> "two not exist"
-      "#{key} not exit"                    #  warning: block supersedes default value argument
+      "#{key} not exist"                   #  warning: block supersedes default value argument
     }                                      #  警告が表示される。
   
   h.default = "default"
