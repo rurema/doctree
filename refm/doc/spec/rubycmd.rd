@@ -321,6 +321,35 @@ test.rb:1:in `f6': unhandled exception
 
   バージョンの表示を行う事無く冗長モードになります。
 
+#@since 2.7.0
+: -W[level]
+: -W:category
+
+    冗長モードを三段階のレベルで指定します。それぞれ以下の通りです。
+//emlist{
+     * -W0: 警告を出力しない
+     * -W1: 重要な警告のみ出力(デフォルト)
+     * -W2 or -W: すべての警告を出力する
+//}
+    組み込み変数 [[m:$VERBOSE]] はそれぞれ nil, false, true
+    に設定されます。
+
+    また category には以下の値を設定できます。deprecated と experimental は別々に設定することもできます。
+//emlist{
+#@since 2.7.2
+     * -W:deprecated : 非推奨な機能を使用した際に警告を出力する
+     * -W:no-deprecated : 非推奨な機能を使用した際に警告を出力しない(デフォルト)
+#@else
+     * -W:deprecated : 非推奨な機能を使用した際に警告を出力する(デフォルト)
+     * -W:no-deprecated : 非推奨な機能を使用した際に警告を出力しない
+#@end
+     * -W:experimental : 実験的な機能を使用した際に警告を出力する(デフォルト)
+     * -W:no-experimental : 実験的な機能を使用した際に警告を出力しない
+//}
+    ここで設定された値は [[m:Warning.[] ]] で参照することができます。
+
+    NOTE: Ruby 2.7.2 からは `-W:no-deprecated' がデフォルトになります。警告を出力したい場合は `-W:deprecated' を使ってください。
+#@else
 : -W[level]
 
     冗長モードを三段階のレベルで指定します。それぞれ以下の通りです。
@@ -331,6 +360,7 @@ test.rb:1:in `f6': unhandled exception
 //}
     組み込み変数 [[m:$VERBOSE]] はそれぞれ nil, false, true
     に設定されます。
+#@end
 
 : -x[directory]
 
