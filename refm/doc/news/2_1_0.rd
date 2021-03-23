@@ -182,18 +182,18 @@
     * 追加: [[m:Net::SMTP#rset]] RSET コマンドに対応している
 
   * [[lib:objspace]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_start]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_stop]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_clear]]
-    * 追加: [[m:ObjectSpace.allocation_sourcefile]]
-    * 追加: [[m:ObjectSpace.allocation_sourceline]]
-    * 追加: [[m:ObjectSpace.allocation_class_path]]
-    * 追加: [[m:ObjectSpace.allocation_method_id]]
-    * 追加: [[m:ObjectSpace.allocation_generation]]
-    * 追加: [[m:ObjectSpace.reachable_objects_from_root]]
-    * 追加: [[m:ObjectSpace.dump]]
-    * 追加: [[m:ObjectSpace.dump_all]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_start]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_stop]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_clear]]
+    * 追加: [[m:ObjectSpace.#allocation_sourcefile]]
+    * 追加: [[m:ObjectSpace.#allocation_sourceline]]
+    * 追加: [[m:ObjectSpace.#allocation_class_path]]
+    * 追加: [[m:ObjectSpace.#allocation_method_id]]
+    * 追加: [[m:ObjectSpace.#allocation_generation]]
+    * 追加: [[m:ObjectSpace.#reachable_objects_from_root]]
+    * 追加: [[m:ObjectSpace.#dump]]
+    * 追加: [[m:ObjectSpace.#dump_all]]
 
   * OpenSSL::BN
     * 拡張: [[m:OpenSSL::BN.new]] Fixnum や Bignum を引数として取れるようになりました。
