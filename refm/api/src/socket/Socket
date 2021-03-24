@@ -427,8 +427,8 @@ sockets でサーバソケットを受け取り、接続を待ち受け、
 --- ip_address_list -> [Addrinfo]
 ローカルの IP アドレスを配列で返します。
 
---- tcp(host, port, local_host=nil, local_port=nil) -> Socket
---- tcp(host, port, local_host=nil, local_port=nil) {|socket| ... } -> object
+--- tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil) -> Socket
+--- tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil) {|socket| ... } -> object
 TCP/IP で host:port に接続するソケットオブジェクトを作成します。
 
 local_host や local_port を指定した場合、ソケットをそこにバインドします。
@@ -440,6 +440,7 @@ local_host や local_port を指定した場合、ソケットをそこにバイ
 @param port 接続先のポート番号
 @param local_host 接続元のホスト名
 @param local_port 接続元のポート番号
+@param connect_timeout タイムアウトまでの秒数
 @return ブロック付きで呼ばれた場合はブロックが返した値です。
         ブロックなしで呼ばれた場合はソケットオブジェクトを返します。
 
