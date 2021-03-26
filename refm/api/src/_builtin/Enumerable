@@ -1944,7 +1944,7 @@ Hash のキーは self に含まれる要素で、Hash の値は対応する要�
 要素は[[m:Object#eql?]]で比較されます。
 
 #@since 3.1
-@param hash 結果を加算していく Hash を指定します。
+@param hash 結果を加算していく Hash を指定します。更新される値は Integer である必要があります。
 #@end
 
 #@samplecode 例
