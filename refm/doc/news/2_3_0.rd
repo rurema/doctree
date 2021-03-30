@@ -221,10 +221,10 @@
     * nkf 2.1.4 をマージしました。
 
   * [[c:ObjectSpace]] ([[lib:objspace]])
-    * [[m:ObjectSpace.count_symbols]] を追加。
-    * [[m:ObjectSpace.count_imemo_objects]] を追加。
-    * [[m:ObjectSpace.internal_class_of]] を追加。
-    * [[m:ObjectSpace.internal_super_of]] を追加。
+    * [[m:ObjectSpace.#count_symbols]] を追加。
+    * [[m:ObjectSpace.#count_imemo_objects]] を追加。
+    * [[m:ObjectSpace.#internal_class_of]] を追加。
+    * [[m:ObjectSpace.#internal_super_of]] を追加。
 
   * [[c:OpenSSL]]
     * [[m:OpenSSL::SSL::SSLSocket#accept_nonblock]] と

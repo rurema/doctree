@@ -179,7 +179,7 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 オブジェクト割り当てのトレースを開始します。
 
-@see [[m:ObjectSpace#trace_object_allocations_stop]]
+@see [[m:ObjectSpace.#trace_object_allocations_stop]]
 
 --- trace_object_allocations_stop -> nil
 
@@ -187,7 +187,7 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 トレースを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
 
-@see [[m:ObjectSpace#trace_object_allocations_start]]
+@see [[m:ObjectSpace.#trace_object_allocations_start]]
 
 --- allocation_sourcefile(object) -> String
 
@@ -205,8 +205,8 @@ puts "file:#{ObjectSpace::allocation_sourcefile(obj)}"   # => file:test.rb
 ObjectSpace::trace_object_allocations_stop
 #@end
 
-@see [[m:ObjectSpace#trace_object_allocations_start]],
-     [[m:ObjectSpace#trace_object_allocations_stop]]
+@see [[m:ObjectSpace.#trace_object_allocations_start]],
+     [[m:ObjectSpace.#trace_object_allocations_stop]]
 
 --- allocation_sourceline(object) -> Integer
 
@@ -224,8 +224,8 @@ puts "line:#{ObjectSpace::allocation_sourceline(obj)}"  # => line:4
 ObjectSpace::trace_object_allocations_stop
 #@end
 
-@see [[m:ObjectSpace#trace_object_allocations_start]],
-     [[m:ObjectSpace#trace_object_allocations_stop]]
+@see [[m:ObjectSpace.#trace_object_allocations_start]],
+     [[m:ObjectSpace.#trace_object_allocations_stop]]
 
 --- trace_object_allocations { ... }
 

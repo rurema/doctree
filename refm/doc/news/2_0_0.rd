@@ -270,7 +270,7 @@
     * 追加: [[m:Net::IMAP.default_imaps_port]]
 
   * [[lib:objspace]]
-    * 追加: [[m:ObjectSpace.reachable_objects_from]]
+    * 追加: [[m:ObjectSpace.#reachable_objects_from]]
 
   * [[lib:openssl]]
     * Consistently raise an error when trying to encode nil values. All instances
