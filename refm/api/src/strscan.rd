@@ -97,10 +97,12 @@ case2
 
 スキャンポインタの位置は文字単位でなくバイト単位となります。
 
-      # vim:set fileencoding=euc-jp:
-      require 'strscan'
-      s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
-      p s.exist?(/び/) #=> 4
+#@samplecode 例:
+# 次の行以降の内容を EUC-JP として保存して試してください
+require 'strscan'
+s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
+p s.exist?(/び/) #=> 4
+#@end
 
 StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 セットしません。代わりに [[m:StringScanner#[] ]], [[m:StringScanner#matched?]] などの
