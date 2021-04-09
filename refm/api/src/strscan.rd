@@ -99,6 +99,7 @@ case2
 
 #@samplecode 例:
 # 次の行以降の内容を EUC-JP として保存して試してください
+# vim:set fileencoding=euc-jp:
 require 'strscan'
 s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
 p s.exist?(/び/) #=> 4
