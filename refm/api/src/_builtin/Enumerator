@@ -23,8 +23,8 @@ enumerator を生成して返します。
 #@samplecode 例
 a = nil
 Thread.new do
- a = [1, 2, 3].each
- a.next
+  a = [1, 2, 3].each
+  a.next
 end.join
 
 p a.next
