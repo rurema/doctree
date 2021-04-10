@@ -11,10 +11,11 @@
 --- aliases    -> Hash
 エンコーディングの別名に対して元の名前を対応づけるハッシュを返します。
 
-例:
-  p Encoding.aliases
-  #=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1986"=>"US-ASCII",
-      "SJIS"=>"Shift_JIS", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
+#@samplecode 例
+p Encoding.aliases
+#=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1986"=>"US-ASCII",
+#   "SJIS"=>"Shift_JIS", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
+#@end
 
 --- compatible?(obj1, obj2) -> Encoding | nil
 2つのオブジェクトのエンコーディングに関する互換性をチェックします。
@@ -25,20 +26,24 @@
 その文字列を結合できます。この場合返り値のエンコーディングは
 結合した文字列が取るであろう Encoding オブジェクトを返します。
 
-  Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
-  #=> #<Encoding:ISO-8859-1>
-  
-  Encoding.compatible?(
-    "\xa1".force_encoding("iso-8859-1"),
-    "\xa1\xa1".force_encoding("euc-jp"))
-  #=> nil
+#@samplecode 例
+Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
+#=> #<Encoding:ISO-8859-1>
+
+Encoding.compatible?(
+  "\xa1".force_encoding("iso-8859-1"),
+  "\xa1\xa1".force_encoding("euc-jp"))
+#=> nil
+#@end
 
 引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には
 互換性を判定することができます。
-  Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
-  # => nil
-  Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
-  # => #<Encoding:UTF-8>
+#@samplecode 例
+Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
+# => nil
+Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
+# => #<Encoding:UTF-8>
+#@end
 @param obj1 チェック対象のオブジェクト
 @param obj2 チェック対象のオブジェクト
 
@@ -55,36 +60,39 @@
 特殊なエンコーディング名として、ロケールエンコーディングを表す locale、default_external を表す external、default_internal を表す internal があります。
 #@end
 
-例:
- p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
+#@samplecode 例
+p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
+#@end
 
 
 --- list -> [Encoding]
 現在ロードされているエンコーディングのリストを返します。
 
-例:
-    Encoding.list
-    => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
-        #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
-        #<Encoding:ISO-2022-JP (dummy)>]
-    
-    Encoding.find("US-ASCII")
-    => #<Encoding:US-ASCII>
-    
-    Encoding.list
-    => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
-        #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
-        #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
+#@samplecode 例
+Encoding.list
+# => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
+#     #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
+#     #<Encoding:ISO-2022-JP (dummy)>]
+
+Encoding.find("US-ASCII")
+# => #<Encoding:US-ASCII>
+
+Encoding.list
+# => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
+#     #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
+#     #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
+#@end
 
 --- name_list    -> [String]
 利用可能なエンコーディングの名前を文字列の配列で返します。
 
-例:
-  p Encoding.name_list
-  #=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
-       "ISO-8859-1", "Shift_JIS", "EUC-JP",
-       "Windows-31J",
-       "BINARY", "CP932", "eucJP", ...]
+#@samplecode 例
+p Encoding.name_list
+#=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
+#    "ISO-8859-1", "Shift_JIS", "EUC-JP",
+#    "Windows-31J",
+#    "BINARY", "CP932", "eucJP", ...]
+#@end
 
 --- default_external -> Encoding
 既定の外部エンコーディングを返します。
@@ -108,17 +116,21 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 --- locale_charmap -> String | nil
 ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
 
-  Debian GNU/Linux
-    LANG=C
-      Encoding.locale_charmap  => "ANSI_X3.4-1968" 
-  LANG=ja_JP.EUC-JP
-      Encoding.locale_charmap  => "EUC-JP"
+#@samplecode Debian GNU/Linux + LANG=C
+Encoding.locale_charmap #=> "ANSI_X3.4-1968"
+#@end
 
-  SunOS 5
-    LANG=C
-      Encoding.locale_charmap  => "646"
-    LANG=ja
-      Encoding.locale_charmap  => "eucJP"
+#@samplecode LANG=ja_JP.EUC-JP
+Encoding.locale_charmap #=> "EUC-JP"
+#@end
+
+#@samplecode SunOS 5 + LANG=C
+Encoding.locale_charmap #=> "646"
+#@end
+
+#@samplecode SunOS 5 + LANG=ja
+Encoding.locale_charmap #=> "eucJP"
+#@end
 
 @see [[man:charmap(5)]]
 
@@ -127,20 +139,25 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 --- inspect -> String
 プログラマにわかりやすい表現の文字列を返します。
 
-例:
-    Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
-    Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+#@samplecode 例
+Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
+Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+#@end
 
 --- name -> String
 --- to_s -> String
 エンコーディングの名前を返します。
 
-    Encoding::UTF_8.name       => "UTF-8"
+#@samplecode 例
+Encoding::UTF_8.name       #=> "UTF-8"
+#@end
 
 --- names -> String
 エンコーディングの名前とエイリアス名の配列を返します。
 
-    Encoding::UTF_8.names      => ["UTF-8", "CP65001"]
+#@samplecode 例
+Encoding::UTF_8.names      #=> ["UTF-8", "CP65001"]
+#@end
 
 --- dummy? -> bool
 自身がダミーエンコーディングである場合に true を返します。
@@ -152,9 +169,10 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも
 用います。
 
-例:
-  Encoding::ISO_2022_JP.dummy?       #=> true
-  Encoding::UTF_8.dummy?             #=> false
+#@samplecode 例
+Encoding::ISO_2022_JP.dummy?       #=> true
+Encoding::UTF_8.dummy?             #=> false
+#@end
 
 #@since 1.9.2
 --- ascii_compatible? -> bool
@@ -163,9 +181,10 @@ Ruby はサポートしていないが拡張ライブラリがサポートして
 そうでない場合は偽を返します。
 
 
-例:
-  Encoding::UTF_8.ascii_compatible?     #=> true
-  Encoding::UTF_16BE.ascii_compatible?  #=> false
+#@samplecode 例
+Encoding::UTF_8.ascii_compatible?     #=> true
+Encoding::UTF_16BE.ascii_compatible?  #=> false
+#@end
 
 --- replicate(name) -> Encoding
 
@@ -1154,32 +1173,40 @@ Emacsの多言語化(Mule)で使われているステートレスのエンコー
 
 エンコーディングの異なる文字列を連結しようとした場合などに発生します。
 
-  "あ".encode("EUC-JP") + "あ".encode("UTF-8")
-  #=> Encoding::CompatibilityError: incompatible character encodings: EUC-JP and UTF-8
+#@samplecode 例
+"あ".encode("EUC-JP") + "あ".encode("UTF-8")
+#=> Encoding::CompatibilityError: incompatible character encodings: EUC-JP and UTF-8
+#@end
 
 = class Encoding::UndefinedConversionError < EncodingError
 エンコーディング変換後の文字が存在しない場合に発生する例外。
 
 UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに発生します。
-  "\u2603".encode(Encoding::EUC_JP)
-  #=> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
+
+#@samplecode 例
+"\u2603".encode(Encoding::EUC_JP)
+#=> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
+#@end
 
 
 変換が多段階でなされ、その途中で例外が生じた場合は、
 例外オブジェクトが保持するエラー情報はその中間のものになります。
-  ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP")
-  # ISO-8859-1 -> UTF-8 -> EUC-JP
-  begin
-    ec.convert("\xa0")
-    # NO-BREAK SPACE, which is available in UTF-8 but not in EUC-JP.
-  rescue Encoding::UndefinedConversionError
-    p $!.source_encoding              #=> #<Encoding:UTF-8>
-    p $!.destination_encoding         #=> #<Encoding:EUC-JP>
-    p $!.source_encoding_name         #=> "UTF-8"
-    p $!.destination_encoding_name    #=> "EUC-JP"
-    puts $!.error_char.dump   #=> "\u{a0}"
-    p $!.error_char.encoding  #=> #<Encoding:UTF-8>
-  end
+
+#@samplecode 例
+ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP")
+# ISO-8859-1 -> UTF-8 -> EUC-JP
+begin
+  ec.convert("\xa0")
+  # NO-BREAK SPACE, which is available in UTF-8 but not in EUC-JP.
+rescue Encoding::UndefinedConversionError
+  p $!.source_encoding              #=> #<Encoding:UTF-8>
+  p $!.destination_encoding         #=> #<Encoding:EUC-JP>
+  p $!.source_encoding_name         #=> "UTF-8"
+  p $!.destination_encoding_name    #=> "EUC-JP"
+  puts $!.error_char.dump   #=> "\u{a0}"
+  p $!.error_char.encoding  #=> #<Encoding:UTF-8>
+end
+#@end
 
 
 == Instance Methods
@@ -1197,12 +1224,14 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 --- error_char -> String
 エラーを発生させた1文字を文字列で返します。
 
-  ec = Encoding::Converter.new("UTF-8", "EUC-JP")
-  begin
-    ec.convert("\u{a0}")
-  rescue Encoding::UndefinedConversionError
-    puts $!.error_char.dump   #=> "\u{a0}"
-  end
+#@samplecode 例
+ec = Encoding::Converter.new("UTF-8", "EUC-JP")
+begin
+  ec.convert("\u{a0}")
+rescue Encoding::UndefinedConversionError
+  puts $!.error_char.dump   #=> "\u{a0}"
+end
+#@end
 
 --- source_encoding -> Encoding
 エラーを発生させた変換の変換元のエンコーディングを [[c:Encoding]]
@@ -1224,10 +1253,12 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 
 通常エンコーディング変換時に発生します。
 
-  "\x82\xa0".force_encoding("cp932").encode("UTF-8")
-  #=> "あ"
-  "\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
-  #=> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
+#@samplecode 例
+"\x82\xa0".force_encoding("cp932").encode("UTF-8")
+#=> "あ"
+"\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
+#=> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
+#@end
 
 == Instance Methods
 --- destination_encoding -> Encoding
@@ -1258,15 +1289,17 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 エラー発生時に捨てられたバイト列を返します。
 
 
-  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
-  begin
-    ec.convert("abc\xA1\xFFdef")
-  rescue Encoding::InvalidByteSequenceError
-    p $!
-    #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
-    puts $!.error_bytes.dump          #=> "\xA1"
-    puts $!.readagain_bytes.dump      #=> "\xFF"
-  end
+#@samplecode 例
+ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+begin
+  ec.convert("abc\xA1\xFFdef")
+rescue Encoding::InvalidByteSequenceError
+  p $!
+  #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
+  puts $!.error_bytes.dump          #=> "\xA1"
+  puts $!.readagain_bytes.dump      #=> "\xFF"
+end
+#@end
 
 @see [[m:Encoding::InvalidByteSequenceError#readagain_bytes]]
 
@@ -1282,29 +1315,33 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 真を返します。これは後続の入力を追加することでエラーが
 解消する可能性があることを意味します。
 
-  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+#@samplecode 例
+ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
 
-  begin
-    ec.convert("abc\xA1z")
-  rescue Encoding::InvalidByteSequenceError
-    p $!
-    #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "z" on EUC-JP>
-    p $!.incomplete_input?    #=> false
-  end
+begin
+  ec.convert("abc\xA1z")
+rescue Encoding::InvalidByteSequenceError
+  p $!
+  #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "z" on EUC-JP>
+  p $!.incomplete_input?    #=> false
+end
 
-  begin
-    ec.convert("abc\xA1")
-    ec.finish
-  rescue Encoding::InvalidByteSequenceError
-    p $! #=> #<Encoding::InvalidByteSequenceError: incomplete "\xA1" on EUC-JP>
-    p $!.incomplete_input?    #=> true
-  end
+begin
+  ec.convert("abc\xA1")
+  ec.finish
+rescue Encoding::InvalidByteSequenceError
+  p $! #=> #<Encoding::InvalidByteSequenceError: incomplete "\xA1" on EUC-JP>
+  p $!.incomplete_input?    #=> true
+end
+#@end
 
 = class Encoding::ConverterNotFoundError < EncodingError
 指定した名前のエンコーディング変換をする変換器が
 存在しない場合に発生する例外。
 
-  "あ".encode("Foo")
-  #=> Encoding::ConverterNotFoundError: code converter not found (UTF-8 to Foo)
+#@samplecode 例
+"あ".encode("Foo")
+#=> Encoding::ConverterNotFoundError: code converter not found (UTF-8 to Foo)
+#@end
 
 #@end
