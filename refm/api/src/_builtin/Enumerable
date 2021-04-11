@@ -30,17 +30,21 @@ Enumerableモジュールはインクルードされています。ただし、�
 
 #@samplecode 例
 #@since 2.6.0
+require 'set'
+
 # すべて正の数か？
-p [5,  6, 7].each.all? {|v| v > 0 }   # => true
-p [5, -1, 7].each.all? {|v| v > 0 }   # => false
-p [].each.all? {|v| v > 0 }           # => true
-p %w[ant bear cat].each.all?(/t/)     # => false
+p Set[5,  6, 7].all? {|v| v > 0 }      # => true
+p Set[5, -1, 7].all? {|v| v > 0 }      # => false
+p Set[].all? {|v| v > 0 }              # => true
+
+p Set['ant', 'bear', 'cat'].all?(/t/)  # => false
 #@else
 # すべて正の数か？
 p [5,  6, 7].all? {|v| v > 0 }   # => true
 p [5, -1, 7].all? {|v| v > 0 }   # => false
 p [].all? {|v| v > 0 }           # => true
 #@since 2.5.0
+
 p %w[ant bear cat].all?(/t/)     # => false
 #@end
 #@end
@@ -68,15 +72,16 @@ p %w[ant bear cat].all?(/t/)     # => false
 #@end
 
 #@samplecode 例
-p [1, 2, 3].each.any? {|v| v > 3 }   # => false
-p [1, 2, 3].each.any? {|v| v > 1 }   # => true
-p [].each.any? {|v| v > 0 }          # => false
+require 'set'
+p Set[1, 2, 3].any? {|v| v > 3 }         # => false
+p Set[1, 2, 3].any? {|v| v > 1 }         # => true
+p Set[].any? {|v| v > 0 }                # => false
 #@since 2.5.0
-p %w[ant bear cat].each.any?(/d/)    # => false
-p [nil, true, 99].each.any?(Integer) # => true
-p [nil, true, 99].each.any?          # => true
-p [].each.any?                       # => false
+p Set['ant', 'bear', 'cat'].any?(/d/)    # => false
+p Set[nil, true, 99].any?(Integer)       # => true
 #@end
+p Set[nil, true, 99].any?                # => true
+p Set[].any?                             # => false
 #@end
 
 @see [[m:Array#any?]]
@@ -1023,13 +1028,14 @@ a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
 
 #@samplecode 例
 #@since 2.6.0
-%w{ant bear cat}.each.none? {|word| word.length == 5}  # => true
-%w{ant bear cat}.each.none? {|word| word.length >= 4}  # => false
-%w{ant bear cat}.each.none?(/d/)                       # => true
-[].each.none?                                          # => true
-[nil].each.none?                                       # => true
-[nil,false].each.none?                                 # => true
-[nil, false, true].each.none?                          # => false
+require 'set'
+Set['ant', 'bear', 'cat'].none? {|word| word.length == 5}  # => true
+Set['ant', 'bear', 'cat'].none? {|word| word.length >= 4}  # => false
+Set['ant', 'bear', 'cat'].none?(/d/)                       # => true
+Set[].none?                                                # => true
+Set[nil].none?                                             # => true
+Set[nil,false].none?                                       # => true
+Set[nil, false, true].none?                                # => false
 #@else
 %w{ant bear cat}.none? {|word| word.length == 5}  # => true
 %w{ant bear cat}.none? {|word| word.length >= 4}  # => false
@@ -1067,13 +1073,14 @@ a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
 
 #@samplecode 例
 #@since 2.6.0
-%w{ant bear cat}.each.one? {|word| word.length == 4}   # => true
-%w{ant bear cat}.each.one? {|word| word.length > 4}    # => false
-%w{ant bear cat}.each.one?(/t/)                        # => false
-[ nil, true, 99 ].each.one?                            # => false
-[ nil, true, false ].each.one?                         # => true
-[ nil, true, 99 ].each.one?(Integer)                   # => true
-[].each.one?                                           # => false
+require 'set'
+Set['ant', 'bear', 'cat'].one? {|word| word.length == 4}  # => true
+Set['ant', 'bear', 'cat'].one? {|word| word.length > 4}   # => false
+Set['ant', 'bear', 'cat'].one?(/t/)                       # => false
+Set[nil, true, 99].one?                                   # => false
+Set[nil, true, false].one?                                # => true
+Set[nil, true, 99].one?(Integer)                          # => true
+Set[].one?                                                # => false
 #@else
 %w{ant bear cat}.one? {|word| word.length == 4}   # => true
 %w{ant bear cat}.one? {|word| word.length > 4}    # => false
