@@ -38,7 +38,11 @@ category の警告を表示するかどうかのフラグを設定します。
 @see [[m:Warning.[] ]]
 #@end
 
+#@since 3.0.0
+--- warn(message, category: nil) -> nil
+#@else
 --- warn(message) -> nil
+#@end
 
 引数 message を標準エラー出力 [[m:$stderr]] に出力します。
 
@@ -47,6 +51,17 @@ category の警告を表示するかどうかのフラグを設定します。
 またオーバーライドしたメソッドからは super を呼び出すことで、デフォルトの動作である [[m:$stderr]] への出力ができます。
 
 #@samplecode
+#@since 3.0.0
+module Warning
+  # 警告メッセージに category を表示し、message 末尾に !!! を追加する
+  def self.warn(message, category: nil)
+    super("#{category} warning : #{message.chomp}!!!\n")
+  end
+end
+
+warn("hoge", category: :deprecated)
+# => deprecated warning : hoge!!!
+#@else
 warn "hoge" # => hoge
 
 module Warning
@@ -58,20 +73,29 @@ end
 
 warn "hoge" # => hoge!!!
 #@end
+#@end
 
 @param message 出力するオブジェクトを指定します。
+
+@param category 警告のカテゴリを指定します。サポートされている category については [[m:Warning.[] ]] を参照してください。
 
 @see [[m:Kernel.#warn]], [[m:Warning#warn]]
 
 == Public Instance Methods
 
+#@since 3.0.0
+--- warn(message, category: nil) -> nil
+#@else
 --- warn(message) -> nil
+#@end
 
 引数 message を標準エラー出力 [[m:$stderr]] に出力します。
 
 [[m:Kernel.#warn]]の挙動を変更する際は、このメソッドではなくクラスメソッドである[[m:Warning.warn]]をオーバーライドする必要があります。
 
 @param message 出力するオブジェクトを指定します。
+
+@param category 警告のカテゴリを指定します。サポートされている category については [[m:Warning.[] ]] を参照してください。
 
 #@# TODO: messageに改行を渡さないとそのまま出力されるように見えるため、確認してから記載する。
 #@# Writes warning message msg to $stderr, followed by a newline if the message does not end in a newline.
