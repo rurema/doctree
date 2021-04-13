@@ -190,14 +190,17 @@ obj が範囲内に含まれている時に真を返します。
 
 <=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
 
+始端と終端が数値であれば、 [[m:Range#cover?]] と同様の動きをします。
+
 @param obj 比較対象のオブジェクトを指定します。
 
 #@samplecode 例
-p (0.1 .. 0.2).member?(0.15)  # => true
-
-# 文字列の場合、include? は辞書順の比較になる
+p ("a" .. "c").include?("b")  # => true
+p ("a" .. "c").include?("B")  # => false
 p ("a" .. "c").include?("ba") # => false
-p ("a" .. "c").member?("ba")  # => false
+p ("a" .. "c").cover?("ba")   # => true
+
+p (1 .. 3).include?(1.5) # => true
 #@end
 
 @see [[ref:d:spec/control#case]]
