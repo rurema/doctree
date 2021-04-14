@@ -1413,7 +1413,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#gets]]
 
---- readlines(rs = $/) -> [String] | nil
+--- readlines(rs = $/) -> [String]
 
 [[c:ARGF]]を [[m:Kernel.#gets]](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
 行の区切りは引数 rs で指定した文字列になります。
@@ -1425,26 +1425,29 @@ rs に nil を指定すると行区切りなしとみなします。
 @param rs 行の区切りとなる文字列です。
 @raise Errno::EXXX 読み込みに失敗した場合に発生します。
 
-  ---main.rb---
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines #=> ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
+#@samplecode main.rb
+ARGV << 'b.txt' << 'b.txt'
+p readlines       #=> ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
 
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines(nil) #=> ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
+ARGV << 'b.txt' << 'b.txt'
+p readlines(nil)  #=> ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
 
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines("") #=> ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
+ARGV << 'b.txt' << 'b.txt'
+p readlines("")   #=> ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
 
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines('it') #=> ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
-  p readlines #=> nil
-  --- b.txt ---
-  hello
-  it
+ARGV << 'b.txt' << 'b.txt'
+p readlines('it') #=> ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
+p readlines       #=> []
+#@end
 
-  common
+#@samplecode b.txt
+hello
+it
 
-@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]]
+common
+#@end
+
+@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]], [[m:Kernel.#readline]]
 
 --- putc(ch) -> object
 
