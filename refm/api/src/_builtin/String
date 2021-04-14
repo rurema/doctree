@@ -450,7 +450,7 @@ p str    # => "foo!!!"
 #@end
 #@end
 
---- =~(other) -> Integer
+--- =~(other) -> Integer | nil
 
 正規表現 other とのマッチを行います。
 マッチが成功すればマッチした位置のインデックスを、そうでなければ nil を返します。
