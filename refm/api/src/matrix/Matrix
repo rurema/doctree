@@ -376,7 +376,7 @@ Matrix[ [1,2], [3,4] ].each(:strict_lower).to_a # => [3]
 #@end
 
 @param which どの要素に対してブロックを呼び出すのかを [[c:Symbol]] で指定します
-@see [[m:Matrix#each_with_index]]
+@see [[m:Matrix#each_with_index]], [[m:Matrix#map]]
 
 --- each_with_index(which = :all) {|e, row, col| ... }  -> self
 --- each_with_index(which = :all) -> Enumerator
@@ -429,23 +429,40 @@ m = Matrix[a1, a2, a3, a4, a5]
 p m.minor(0, 2, 1, 2) # => Matrix[[2, 3], [12, 13]]
 #@end
 
-#@#--- []=(i,j,x)
-#@#(i,j)要素をxに変更する。
-#@#
-#@#このメソッドは、matrix.rbに定義されていない。
-#@#以下に、その定義と使用例を示す。
-#@#
-#@#  require 'matrix'
-#@#
-#@#  class Matrix
-#@#    def []=(i,j,x)
-#@#      @rows[i][j]=x
-#@#    end
-#@#  end
-#@#
-#@#  m=Matrix[[11,12],[21,22]]
-#@#  m[1,1]=-1
-#@#  p m #=> Matrix[[11,12],[21,-1]]
+#@since 2.6.0
+--- []=(row, col, v)
+
+行が row、列が col である範囲を v に変更する。
+
+@param row  self の変更する行の範囲を [[c:Integer]] か [[c:Range]] で指定します。
+@param col  self の変更する列の範囲を [[c:Integer]] か [[c:Range]] で指定します。
+@param v  セットする要素を指定します。
+          v が [[c:Vector]] のとき、変更の対象範囲は [[c:Integer]] と [[c:Range]] で指定し、
+                                  サイズが同じである必要があります。
+          v が [[c:Matrix]] のとき、変更の対象範囲と行数・列数が同じである必要があります。
+          v が上記以外のとき、変更の対象範囲の全ての要素を v に変更します。
+
+#@samplecode
+require 'matrix'
+
+m = Matrix[[0, 0], [0, 0]]
+m[0, 1] = 6
+m[-1, -1] = 9
+p m  # => Matrix[[0, 6], [0, 9]]
+
+m = Matrix[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+m[0, 0..-1] = 5
+m[1, 0..1] = Vector[2, 4]
+m[2, 0..2] = Matrix[[3, 6, 9]]
+p m #=> Matrix[[5, 5, 5], [2, 4, 0], [3, 6, 9]]
+
+m = Matrix[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+m[0..2, 0..1] = 9
+p m  # => Matrix[[9, 9, 0], [9, 9, 0], [9, 9, 0]]
+m[1..-1, 0..1] = Matrix[[1, 2], [3, 4]]
+p m  # => Matrix[[9, 9, 0], [1, 2, 0], [3, 4, 0]]
+#@end
+#@end
 
 --- +@ -> self
 
@@ -717,24 +734,71 @@ x.vstack(y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
 
 @see [[m:Matrix.vstack]], [[m:Matrix#hstack]]
 
-
---- collect {|x| ... } -> Matrix
+#@since 2.6.0
+--- map(which = :all) {|x| ... } -> Matrix
+--- collect(which = :all) {|x| ... } -> Matrix
+--- map(which = :all) -> Enumerator
+--- collect(which = :all) -> Enumerator
+#@else
 --- map {|x| ... } -> Matrix
+--- collect {|x| ... } -> Matrix
+--- map -> Enumerator
+--- collect -> Enumerator
+#@end
 
 行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成します。
+
+ブロックがない場合、 [[c:Enumerator]] を返します。
+
+#@since 2.6.0
+@param which  which に以下の [[c:Symbol]] を指定することで、
+              引数として使われる要素を限定できます。
+              デフォルトは、:all (全ての要素)です。
+              指定できる [[c:Symbol]] の詳細は、 [[m:Matrix#each]] の項目を参照して下さい。
+#@end
+
+#@samplecode 例
+require 'matrix'
+
+m = Matrix[[1, 2], [3, 4]]
+p m.map { |x| x + 100 } # => Matrix[[101, 102], [103, 104]]
+#@since 2.6.0
+p m.map(:diagonal) { |x| x * 10 } # => Matrix[[10, 2], [3, 40]]
+#@end
+#@end
+
+#@since 2.6.0
+@see [[m:Matrix#each]], [[m:Matrix#map!]]
+#@else
+@see [[m:Matrix#each]]
+#@end
+
+#@since 2.6.0
+--- map!(which = :all) {|element| ... } -> self
+--- collect!(which = :all) {|element| ... } -> self
+--- map!(which = :all) -> Enumerator
+--- collect!(which = :all) -> Enumerator
+
+行列の各要素に対してブロックの適用を繰り返した結果で要素を置き換えます。
+
+ブロックのない場合は、自身と map! から生成した [[c:Enumerator]] オブジェクトを返します。
+
+@param which  which に以下の [[c:Symbol]] を指定することで、
+              引数として使われる要素を限定できます。
+              デフォルトは、:all (全ての要素)です。
+              指定できる [[c:Symbol]] の詳細は、 [[m:Matrix#each]] の項目を参照して下さい。
 
 
 #@samplecode 例
 require 'matrix'
-a1 = [ 1,  2,   3]
-a2 = [10, 15,  20]
-a3 = [-1, -2, 1.5]
-m = Matrix[a1, a2, a3]
 
-# 行列mのすべての要素に100を加える。
-p m.collect { |x|
-  x + 100
-} # => Matrix[[101, 102, 103], [110, 115, 120], [99, 98, 101.5]]
+m = Matrix[[1, 2], [3, 4]]
+
+p m.map! { |element| element * 10 } #=> Matrix[[10, 20], [30, 40]]
+p m                                 #=> Matrix[[10, 20], [30, 40]]
+#@end
+
+@see [[m:Matrix#each]], [[m:Matrix#map]]
 #@end
 
 --- empty? -> bool

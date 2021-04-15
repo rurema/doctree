@@ -119,24 +119,59 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 ベクトルの要素数(次元)を返します。
 
-#@#--- []=(i, x)
-#@#
-#@#i 番目の要素を x に変更します。
-#@#
-#@#このメソッドは、matrix.rb に定義されていません。
-#@#以下に、その定義と使用例を示します。
-#@#
-#@#  require 'matrix'
-#@#
-#@#  class Vector
-#@#    def []=(i,x)
-#@#      @elements[i]=x
-#@#    end
-#@#  end
-#@#
-#@#  v=Vector[1,2,3]
-#@#  v[2]=-1
-#@#  p v #=> Vector[1,2,-1]
+#@since 2.6.0
+--- []=(index, value)
+
+index 番目の要素を element に変更します。
+
+@param index インデックスを整数で指定します。
+@param value 設定したい要素の値を指定します。
+@raise TypeError ベクトルの範囲外にある整数を指定したときに、発生します。
+
+#@samplecode
+require 'matrix'
+
+v = Vector[0, 0, 0, 0, 0]
+
+v[1] = 2
+p v #=> Vector[0, 2, 0, 0, 0]
+
+v[-1] = 3
+p v #=> Vector[0, 2, 0, 0, 3]
+
+v[99] = 100
+# IndexError: given index 99 is outside of -5...5
+#@end
+#@end
+
+#@since 2.6.0
+--- []=(range, v)
+
+[[c:Range]] オブジェクト range の範囲にある要素を v の内容に置換します。
+
+@param range 設定したい配列の範囲を [[c:Range]] オブジェクトで指定します。
+@param v range の範囲に設定したい要素を指定します。
+         [[c:Vector]] や 1行の [[c:Matrix]] での指定もできます。
+@raise TypeError ベクトルの範囲外にある range を指定したときに、発生します。
+@raise ArgumentError 引数の個数が異なるときの他に、
+                     v に [[c:Vector]] を指定し、range と v のサイズが一致しないときに発生します。
+@raise Matrix::ErrDimensionMismatch v に [[c:Matrix]] を指定し、次元が合わないときに発生します。
+
+#@samplecode
+require 'matrix'
+
+v = Vector[0, 0, 0, 0, 0]
+
+v[1..2] = 5
+p v #=> Vector[0, 5, 5, 0, 0]
+
+v[1..3] = Vector[2, 4, 8]
+p v #=> Vector[0, 2, 4, 8, 0]
+
+v[1..-2] = Matrix[[3, 6, 9]]
+p v #=> Vector[0, 3, 6, 9, 0]
+#@end
+#@end
 
 --- ==(v) -> bool
 --- eql?(v) -> bool
@@ -333,6 +368,25 @@ v2 =  v1.map{|x|
   x * -1
 }
 p v2 # => Vector[-1, -2, -3.5, 10]
+#@end
+
+#@since 2.6.0
+--- collect! {|element| ... } -> self
+--- map! {|element| ... } -> self
+--- collect! -> Enumerator
+--- map! -> Enumerator
+
+ベクトルの各要素を順番にブロックに渡して評価し、その結果で要素を置き換えます。
+
+ブロックのない場合は、自身と map! から生成した [[c:Enumerator]] オブジェクトを返します。
+
+#@samplecode 例
+require 'matrix'
+
+v = Vector[1, 2, 3]
+p v.map!{ |el| el * 2 }  #=> Vector[2, 4, 6]
+p v                      #=> Vector[2, 4, 6]
+#@end
 #@end
 
 --- each{|e| ... } -> self
