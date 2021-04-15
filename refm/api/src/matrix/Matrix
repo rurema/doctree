@@ -527,44 +527,63 @@ self の各成分を数 other で割った行列を返します。
 
 逆行列を返します。
 
+#@samplecode 例
+require 'matrix'
+
+p Matrix[[2, 1], [3, 2]].inv         #=> Matrix[[(2/1), (-1/1)], [(-3/1), (2/1)]]
+
+p Matrix[[2.0, 1.0], [3.0, 2.0]].inv #=> Matrix[[2.0000000000000004, -1.0000000000000002], [-3.000000000000001, 2.0000000000000004]]
+#@end
+
 --- **(n) -> Matrix
 
 self の n 乗を返します。
 
 @param n べき数の指定
 @raise ExceptionForMatrix::ErrNotRegular n が 0 以下で、行列が正則でない場合に発生します
---- determinant -> Rational | Float
---- det -> Rational | Float
+
+--- determinant -> Numeric
+--- det -> Numeric
 
 行列式 (determinant) の値を返します。
 
+[[c:Float]] を使用すると、精度が不足するため、誤った結果が生じる可能性があることに注意してください。
+代わりに、[[c:Rational]] や [[c:BigDecimal]] などの正確なオブジェクトを使用することを検討してください。
+
 @raise ExceptionForMatrix::ErrDimensionMismatch 正方行列でない場合に発生します
 
+#@samplecode 例
+require 'matrix'
+
+p Matrix[[2, 1], [-1, 2]].det         #=> 5
+p Matrix[[2.0, 1.0], [-1.0, 2.0]].det #=> 5.0
+#@end
 
 --- determinant_e -> Rational | Float
 --- det_e -> Rational | Float
 
-不正な値を返します。
+このメソッドは deprecated です。
 [[m:Matrix#determinant]] を代わりに使ってください。
-#@# TODO: trunk では修正済み(Bug #7228)
 
 --- rank -> Integer
 
 階数 (rank) を返します。
 
-selfの行列の階数(rank)を返します。
-行列の成分が[[c:Float]]の場合は正しい値を返さない場合があります。
-その場合は行列成分に [[c:Rational]]
-もしくは [[c:BigDecimal]]
-を使用してください。
+[[c:Float]] を使用すると、精度が不足するため、誤った結果が生じる可能性があることに注意してください。
+代わりに、[[c:Rational]] や [[c:BigDecimal]] などの正確なオブジェクトを使用することを検討してください。
 
+#@samplecode
+require 'matrix'
+m = Matrix[[2, 6], [1, 3]]
+m.rank  # => 2
+#@end
 
 --- rank_e -> Integer
 
 階数 (rank) を返します。
 
-このメソッドは obsolete です。[[m:Matrix#rank]] を代わりに
-使ってください。
+このメソッドは deprecated です。
+代わりに [[m:Matrix#rank]] を使ってください。
 
 --- trace -> Integer | Float | Rational
 --- tr -> Integer | Float | Rational
@@ -587,7 +606,7 @@ trace は正方行列でのみ定義されます。
 
 転置行列 (transpose matrix) を返します。
 
-self を[[c:Matrix]]のオブジェクトで、(m,n)型行列としたとき a(j,i) を (i,j) 要素とする (n,m) 型行列を返します。
+self を [[c:Matrix]] のオブジェクトで、(m,n) 型行列としたとき a(j,i) を (i,j) 要素とする (n,m) 型行列を返します。
 
 --- row(i) -> Vector | nil
 --- row(i) {|x| ... } -> self
