@@ -115,7 +115,7 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@# @param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
 #@#              true の場合はコピーします。
 
---- size() -> Integer
+--- size -> Integer
 
 ベクトルの要素数(次元)を返します。
 
@@ -555,15 +555,15 @@ p vr # => "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1
 #@end
 
 
---- hash() -> Integer
+--- hash -> Integer
 
 自分自身のハッシュ値を返します。
 
---- clone() -> Vector
+--- clone -> Vector
 
 自分自身をコピーしたベクトルを返します。
 
---- inspect() -> String
+--- inspect -> String
 
 オブジェクトの内容を文字列化します。
 
