@@ -1189,7 +1189,7 @@ a1 = [1, 2]
 a2 = [3, 4.5]
 m = Matrix[a1, a2]
 
-p m.to_s # => "Matrix[[1, 2], [3, 4.5]]"
+p m.inspect # => "Matrix[[1, 2], [3, 4.5]]"
 #@end
 
 

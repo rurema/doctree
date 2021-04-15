@@ -500,8 +500,8 @@ p m # => Matrix[[2, 3, 5]]
 require 'matrix'
 
 v = Vector[2, 3, 5, 7, 9]
-a = v.to_a
-p a # => [2, 3, 5, 7, 9]
+p v.to_a
+# => [2, 3, 5, 7, 9]
 #@end
 
 --- to_s -> String
@@ -512,8 +512,8 @@ p a # => [2, 3, 5, 7, 9]
 require 'matrix'
 
 v = Vector[2, 3, 5, 7, 9]
-s = v.to_s
-p s # => "Vector[2, 3, 5, 7, 9]"
+p v.to_s
+# => "Vector[2, 3, 5, 7, 9]"
 #@end
 
 --- elements_to_f -> Vector
@@ -525,8 +525,8 @@ p s # => "Vector[2, 3, 5, 7, 9]"
 require 'matrix'
 
 v = Vector.elements([2, 3, 5, 7, 9])
-vf = v.elements_to_f
-p vf # => "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
+p v.elements_to_f
+# => Vector[2.0, 3.0, 5.0, 7.0, 9.0]
 #@end
 
 --- elements_to_i -> Vector
@@ -537,8 +537,8 @@ p vf # => "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
 #@samplecode 例
 require 'matrix'
 v = Vector.elements([2.5, 3.0, 5.01, 7])
-vi = v.elements_to_i
-p vi # => "Vector[2, 3, 5, 7]"
+p v.elements_to_i
+# => Vector[2, 3, 5, 7]
 #@end
 
 --- elements_to_r -> Vector
@@ -550,8 +550,8 @@ p vi # => "Vector[2, 3, 5, 7]"
 require 'matrix'
 
 v = Vector.elements([2.5, 3.0, 5.75, 7])
-vr = v.elements_to_r
-p vr # => "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1)]"
+p v.elements_to_r
+# => Vector[(5/2), (3/1), (23/4), (7/1)]
 #@end
 
 
