@@ -496,6 +496,27 @@ p (1..2).hash    # => 5646
 p (1...2).hash   # => 16782863
 #@end
 
+#@since 2.6.0
+--- to_a -> Array
+--- entries -> Array
+
+self を配列に変換します。
+
+@raise RangeError 終端のない Range オブジェクトを変換しようとしたときに発生します。
+
+#@samplecode 例
+p (5..0).to_a      # => []
+p (0..3).to_a      # => [0, 1, 2, 3]
+p ('a'..'c').to_a  # => ["a", "b", "c"]
+p (:a..:d).to_a  # => [:a, :b, :c, :d]
+
+require 'date'
+p (Date.new(1965, 4, 14) .. Date.new(1965, 4, 14)).to_a # => [#<Date: 1965-04-14 ((2438865j,0s,0n),+0s,2299161j)>]
+
+(1..).to_a   # RangeError: cannot convert endless range to an array
+#@end
+#@end
+
 --- to_s -> String
 
 self を文字列に変換します(始端と終端のオブジェクトは #to_s メソッドで文
