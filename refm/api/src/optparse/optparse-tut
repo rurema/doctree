@@ -20,15 +20,17 @@ optparse を使う場合、基本的には
 
 以下はオプション -a, -b を受け付けるコマンドを作成する例です。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a') {|v| p v }
-        opt.on('-b') {|v| p v }
+opt.on('-a') {|v| p v }
+opt.on('-b') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
-
+opt.parse!(ARGV)
+p ARGV
+#@end
+↓
         ruby sample.rb -a foo bar -b baz
         # => true
              true
@@ -55,17 +57,19 @@ optparse を使う場合、基本的には
 [[m:OptionParser#parse!]] では、ARGV からオプションが取り除かれます。
 これを避けるには [[m:OptionParser#parse]] を使います。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a') {|v| p v }
-        opt.on('-b') {|v| p v }
+opt.on('-a') {|v| p v }
+opt.on('-b') {|v| p v }
 
-        # parse() の場合、ARGVは変更されない。
-        # オプションを取り除いた結果は argv に設定される。
-        argv = opt.parse(ARGV)
+# parse() の場合、ARGVは変更されない。
+# オプションを取り除いた結果は argv に設定される。
+argv = opt.parse(ARGV)
 
-        p argv
+p argv
+#@end
 
 定義していないオプションを指定すると例外
 [[c:OptionParser::InvalidOption]] が発生します。
@@ -86,18 +90,20 @@ optparse を使う場合、基本的には
 後の処理の方で、オプションによる条件判断を加えるには、
 他のコンテナに格納します。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        params = {}
+params = {}
 
-        opt.on('-a') {|v| params[:a] = v }
-        opt.on('-b') {|v| params[:b] = v }
+opt.on('-a') {|v| params[:a] = v }
+opt.on('-b') {|v| params[:b] = v }
 
-        opt.parse!(ARGV)
-        p ARGV
-        p params
-
+opt.parse!(ARGV)
+p ARGV
+p params
+#@end
+↓
         ruby sample.rb -a foo bar -b baz
         # => ["foo", "bar", "baz"]
              {:a=>true, :b=>true}
@@ -110,18 +116,20 @@ optparse を使う場合、基本的には
 ロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、
 先頭の "-" を除いてシンボル化した値が使用されます。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        params = {}
+params = {}
 
-        opt.on('-a') {|v| v }
-        opt.on('-b', '--bbb') {|v| v }
+opt.on('-a') {|v| v }
+opt.on('-b', '--bbb') {|v| v }
 
-        opt.parse!(ARGV, into: params) # intoオプションにハッシュを渡す
-        p ARGV
-        p params
-
+opt.parse!(ARGV, into: params) # intoオプションにハッシュを渡す
+p ARGV
+p params
+#@end
+↓
         ruby sample.rb -a foo bar -b baz
         # => ["foo", "bar", "baz"]
              {:a=>true, :bbb=>true}
@@ -133,14 +141,16 @@ optparse を使う場合、基本的には
 [[m:OptionParser#on]] メソッドのオプション定義で末尾に何かを書くと、そ
 のオプションは引数を受け付けることの指定となります。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a VAL') {|v| p v }         # <- " VAL" を追加
-        opt.on('-b') {|v| p v }
+opt.on('-a VAL') {|v| p v }         # <- " VAL" を追加
+opt.on('-b') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
+opt.parse!(ARGV)
+p ARGV
+#@end
 
         ruby sample.rb -a foo bar -b baz
 
@@ -162,15 +172,17 @@ optparse を使う場合、基本的には
 
 オプションの引数が必須でないことを示すには、" [" を付けます。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a [VAL]') {|v| p v }          # <- [VAL] を追加
-        opt.on('-b') {|v| p v }
+opt.on('-a [VAL]') {|v| p v }          # <- [VAL] を追加
+opt.on('-b') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
-
+opt.parse!(ARGV)
+p ARGV
+#@end
+↓
         ruby sample.rb -a
 
         # => nil
@@ -187,15 +199,17 @@ optparse を使う場合、基本的には
 
 ロングオプションは [[m:OptionParser#on]] の引数に '--'で始まるオプションを指定します。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a', '--foo') {|v| p v }
-        opt.on('--bar') {|v| p v }
+opt.on('-a', '--foo') {|v| p v }
+opt.on('--bar') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
-
+opt.parse!(ARGV)
+p ARGV
+#@end
+↓
         ruby sample.rb -a foo bar --bar baz
         # => true
              true
@@ -203,15 +217,17 @@ optparse を使う場合、基本的には
 
 --[no-]...などとすることで、否定型のオプションを指定することができます。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode sample.rb
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a', '--foo') {|v| p v }
-        opt.on('--[no-]bar') {|v| p v }
+opt.on('-a', '--foo') {|v| p v }
+opt.on('--[no-]bar') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
-
+opt.parse!(ARGV)
+p ARGV
+#@end
+↓
         ruby sample.rb -a foo bar --bar baz --no-bar
         # => true
              true
@@ -221,23 +237,27 @@ optparse を使う場合、基本的には
 オプションに対する引数も指定できます。ショートオプションと同じだが、
 GNUの慣習にあわせて
 
-        opt.on('-a', '--foo=VAL') {|v| p v }
-        opt.on('--[no-]bar[=VAL]') {|v| p v }
+#@samplecode
+opt.on('-a', '--foo=VAL') {|v| p v }
+opt.on('--[no-]bar[=VAL]') {|v| p v }
+#@end
 
 と "=" を使うのが良いと思われます。
 
 オプションを指定する時は、どのオプションか一意に決まる長さまで指定す
 れば良いです。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a', '--foo') {|v| p v }
-        opt.on('--[no-]bar') {|v| p v }
+opt.on('-a', '--foo') {|v| p v }
+opt.on('--[no-]bar') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
-
+opt.parse!(ARGV)
+p ARGV
+#@end
+↓
         ruby sample.rb --fo
 
 この例では、--fo は、--foo を指定したのと同じになります。この例なら --f
@@ -257,26 +277,30 @@ GNUの慣習にあわせて
 (優先度は低いが VERSION 定数も参照します。Ruby のバージョンを示す VERSION
 定数が ruby 1.8 までは定義されているので注意)
 
-        require 'optparse'
-        opt = OptionParser.new
-        Version = "1.2.3"       # opt.version = "1.2.3"
-        opt.parse!(ARGV)
-
+#@samplecode
+require 'optparse'
+opt = OptionParser.new
+Version = "1.2.3"       # opt.version = "1.2.3"
+opt.parse!(ARGV)
+#@end
+↓
         ruby ./sample.rb --version
         # => sample 1.2.3
 
 [[m:OptionParser#on]] の引数にそのオプションの説明を加えると --help の
 出力に反映されます。
 
-        require 'optparse'
-        opt = OptionParser.new
+#@samplecode
+require 'optparse'
+opt = OptionParser.new
 
-        opt.on('-a', 'description of -a') {|v| p v }
-        opt.on('-b', 'description of -b') {|v| p v }
+opt.on('-a', 'description of -a') {|v| p v }
+opt.on('-b', 'description of -b') {|v| p v }
 
-        opt.parse!(ARGV)
-        p ARGV
-
+opt.parse!(ARGV)
+p ARGV
+#@end
+↓
         ruby ./sample.rb --help
         # => Usage: sample [options]
                 -a                               description of -a
@@ -286,25 +310,27 @@ GNUの慣習にあわせて
 ====[a:subcmd] サブコマンド
 以下は cvs や svn のようにサブコマンドを解釈する例です。
 
-    #! /usr/bin/ruby
-    # contributed by Minero Aoki.
+#@samplecode subcom.rb
+#! /usr/bin/ruby
+# contributed by Minero Aoki.
 
-    require 'optparse'
+require 'optparse'
 
-    parser = OptionParser.new
-    parser.on('-i') { puts "-i" }
-    parser.on('-o') { puts '-o' }
+parser = OptionParser.new
+parser.on('-i') { puts "-i" }
+parser.on('-o') { puts '-o' }
 
-    subparsers = Hash.new {|h,k|
-      $stderr.puts "no such subcommand: #{k}"
-      exit 1
-    }
-    subparsers['add'] = OptionParser.new.on('-i') { puts "add -i" }
-    subparsers['del'] = OptionParser.new.on('-i') { puts "del -i" }
-    subparsers['list'] = OptionParser.new.on('-i') { puts "list -i" }
+subparsers = Hash.new {|h,k|
+$stderr.puts "no such subcommand: #{k}"
+exit 1
+}
+subparsers['add'] = OptionParser.new.on('-i') { puts "add -i" }
+subparsers['del'] = OptionParser.new.on('-i') { puts "del -i" }
+subparsers['list'] = OptionParser.new.on('-i') { puts "list -i" }
 
-    parser.order!(ARGV)
-    subparsers[ARGV.shift].parse!(ARGV) unless ARGV.empty?
+parser.order!(ARGV)
+subparsers[ARGV.shift].parse!(ARGV) unless ARGV.empty?
+#@end
 
 実行すると以下のようになります。
 
@@ -322,10 +348,12 @@ GNUの慣習にあわせて
 optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
 が加わります。以下の書き方ができるようになります。
 [[m:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
-  # sample.rb の内容
-  require 'optparse'
-  params = ARGV.getopts("a:b:", "foo", "bar:")
-  p params
+
+#@samplecode sample.rb
+require 'optparse'
+params = ARGV.getopts("a:b:", "foo", "bar:")
+p params
+#@end
 この sample.rb を実行すると
   $ ruby sample.rb -a 1 --foo --bar xxx
   {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
