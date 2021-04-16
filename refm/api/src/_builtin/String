@@ -102,13 +102,13 @@ String オブジェクトは自身のエンコーディング情報を持ちま�
 エンコーディングの変換にはメソッド [[m:String#encode]] を使います。
 
 #@samplecode 例:エンコーディングの変換
-p "いろは".size      #=> 3 
+p "いろは".size      #=> 3
 p "漢字"[0]          #=> "漢"
 p "山本山".reverse   #=> "山本山" (回文なので分からないですね)
 p "ループ".reverse   #=> "プール"
 
 s = "ruビー"
-s[0..1] = "ル" 
+s[0..1] = "ル"
 p s                  #=> "ルビー"
 
 e = "言語".encode("EUC-JP")
@@ -1377,8 +1377,8 @@ p "aa\n".lines.to_a           # => ["aa\n"]
 p "".lines.to_a               # => []
 
 s = "aa\nbb\ncc\n"
-p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
-p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
+p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]
+p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]
 #@end
 
 @see [[m:String#lines]]
@@ -1412,7 +1412,7 @@ chomp に true を指定すると、分割した各行の末尾から rs を取�
 "hello\nworld\n".lines(chomp: true) # => ["hello", "world"]
 #@end
 #@end
-  
+
 @param rs 行末を示す文字列
 
 #@since 2.4.0
@@ -1496,7 +1496,7 @@ s.getbyte(6)        # => nil
 
 --- setbyte(index, b) -> Integer
 
-index バイト目のバイトを b に変更します。 
+index バイト目のバイトを b に変更します。
 
 index に負を指定すると末尾から数えた位置を変更します。
 
@@ -1853,7 +1853,7 @@ $&                       #=> nil
 self の「次の」文字列を返します。
 
 「次の」文字列は、対象の文字列の右端から
-アルファベットなら アルファベット順(aの次はb, zの次はa, 大文字も同様)に、 
+アルファベットなら アルファベット順(aの次はb, zの次はa, 大文字も同様)に、
 数字なら 10 進数(9 の次は 0)とみなして計算されます。
 
 #@samplecode
