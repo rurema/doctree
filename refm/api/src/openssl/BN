@@ -175,10 +175,22 @@ odd が真なら、生成される整数は奇数のみとなります。
 
 --- <=>(other) -> -1 | 0 | 1
 --- cmp(other) -> -1 | 0 | 1
-自身と other を比較し、otherのほうが小さければ-1、
-大きければ+1、等しければ 0 を返します。
+自身と other を比較し、自身が小さいときには -1、
+等しいときには 0、大きいときには 1 を返します。
 
-@param other 比較する数
+#@samplecode
+require 'openssl'
+
+OpenSSL::BN.new(5) <=> 5  # =>  0
+
+OpenSSL::BN.new(5) <=> OpenSSL::BN.new(9)  # => -1
+OpenSSL::BN.new(5) <=> OpenSSL::BN.new(5)  # =>  0
+OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
+#@end
+
+@param other 比較する整数
+@raise TypeError 比較できないときに発生します。
+@see [[m:OpenSSL::BN#ucmp]]
 
 --- ==(other) -> bool
 --- ===(other) -> bool
@@ -425,11 +437,23 @@ base で基数を指定します。10,16を指定できます。
 @see [[m:OpenSSL::BN.new]]
 
 --- ucmp(other) -> -1 | 0 | 1
-自身と other の絶対値を比較し、other の絶対値のほうが
-自身の絶対値より小さければ-1、
-大きければ+1、2つの絶対値が等しければ 0 を返します。
+自身と other の絶対値を比較し、自身の絶対値が小さいときには -1、
+等しいときには 0、 大きいときには 1 を返します。
 
-@param other 比較する数
+#@samplecode
+require 'openssl'
+
+OpenSSL::BN.new(-5).ucmp(5)  # =>  0
+
+OpenSSL::BN.new(5).ucmp(OpenSSL::BN.new(-9))  # => -1
+OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(5))  # =>  0
+OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
+#@end
+
+@param other 比較する整数
+@raise TypeError 比較できないときに発生します。
+@see [[m:OpenSSL::BN#cmp]]
+
 --- zero? -> bool
 自身が0である場合に真を返します。
 
