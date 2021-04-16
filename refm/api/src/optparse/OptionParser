@@ -144,11 +144,7 @@ parse(opts2) # => unsupported argument type: Time (ArgumentError)
 
 @param argv パースしたい配列を指定します。
 
-#@since 1.9.1
 @param opts 引数を文字列で指定します。
-#@else
-@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
-#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -1178,10 +1174,6 @@ p config          # => {:lib=>"lib1"}
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
-#@until 1.9.1
-[[lib:getopts]] 相当の機能を提供します。
-getopts と違って、グローバル変数を定義しません。
-#@end
 引数をパースした結果を、Hash として返します。
 
 配列 argv を与えた場合、argv をパースします。そうでない場合は、
@@ -1198,11 +1190,7 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 
 @param argv パースしたい配列を指定します。
 
-#@since 1.9.1
 @param opts 引数を文字列で指定します。
-#@else
-@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
-#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク

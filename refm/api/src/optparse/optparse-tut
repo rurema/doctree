@@ -38,11 +38,7 @@ optparse を使う場合、基本的には
 れた時の処理をブロックで記述します。ブロックの引数にはオプションが指定
 されたことを示す true が渡されます([[ref:optionarg]]の項も参照)。
 
-#@since 1.9.1
 [[m:Enumerator#each]] などと違い、[[m:OptionParser#on]]
-#@else
-[[m:Enumerable::Enumerator#each]] などと違い、[[m:OptionParser#on]]
-#@end
 メソッドが呼ばれた時点ではブロックは実行されません。あくまで登録される
 だけです。[[m:OptionParser#parse]] が呼ばれた時に、コマンドラインにオプ
 ションが指定されていれば実行されます。
