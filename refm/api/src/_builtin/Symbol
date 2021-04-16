@@ -242,21 +242,25 @@ self の先頭が prefixes のいずれかであるとき true を返します�
 
 @see [[m:String#succ]]
 
---- <=>(other) -> -1 | 0 | 1
+--- <=>(other) -> -1 | 0 | 1 | nil
 
 self と other のシンボルに対応する文字列を ASCII コード順で比較して、
-self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
-ます。
+self が小さい時には -1、等しい時には 0、大きい時には 1 を返します。
+
+other がシンボルではなく比較できない時には nil を返します。
 
 @param other 比較対象のシンボルを指定します。
 
-  p :aaa <=> :xxx  # => -1
-  p :aaa <=> :aaa  # => 0
-  p :xxx <=> :aaa  # => 1
+#@samplecode
+p :aaa <=> :xxx  # => -1
+p :aaa <=> :aaa  # => 0
+p :xxx <=> :aaa  # => 1
+p :foo <=> "foo" # => nil
+#@end
 
-@see [[m:String#<=>]]
+@see [[m:String#<=>]], [[m:String#casecmp]]
 
---- casecmp(other) -> -1 | 0 | 1
+--- casecmp(other) -> -1 | 0 | 1 | nil
 
 [[m:Symbol#<=>]] と同様にシンボルに対応する文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
@@ -268,17 +272,22 @@ Unicode 全体ではなく、A-Z/a-z だけです。
 
 @param other 比較対象のシンボルを指定します。
 
-  :aBcDeF.casecmp(:abcde)     #=> 1
-  :aBcDeF.casecmp(:abcdef)    #=> 0
-  :aBcDeF.casecmp(:abcdefg)   #=> -1
-  :abcdef.casecmp(:ABCDEF)    #=> 0
-  :"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") #=> 1
+#@samplecode
+:aBcDeF.casecmp(:abcde)     #=> 1
+:aBcDeF.casecmp(:abcdef)    #=> 0
+:aBcDeF.casecmp(:abcdefg)   #=> -1
+:abcdef.casecmp(:ABCDEF)    #=> 0
+:"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") #=> 1
+#@end
 
-nil は文字列のエンコーディングが非互換の時に返されます。
+other がシンボルではない場合や、文字列のエンコーディングが非互換の場合は、nil を返します。
 
-  "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}")   #=> nil
+#@samplecode
+:foo.casecmp("foo")   #=> nil
+"\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}")   #=> nil
+#@end
 
-@see [[m:String#casecmp]]
+@see [[m:String#casecmp]], [[m:Symbol#<=>]], [[m:Symbol#casecmp?]]
 
 #@since 2.4.0
 --- casecmp?(other) -> bool | nil
@@ -288,17 +297,22 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @param other 比較対象のシンボルを指定します。
 
-  :abcdef.casecmp?(:abcde)     #=> false
-  :aBcDeF.casecmp?(:abcdef)    #=> true
-  :abcdef.casecmp?(:abcdefg)   #=> false
-  :abcdef.casecmp?(:ABCDEF)    #=> true
-  :"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+#@samplecode
+:abcdef.casecmp?(:abcde)     #=> false
+:aBcDeF.casecmp?(:abcdef)    #=> true
+:abcdef.casecmp?(:abcdefg)   #=> false
+:abcdef.casecmp?(:ABCDEF)    #=> true
+:"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+#@end
 
-nil は文字列のエンコーディングが非互換の時に返されます。
+other がシンボルではない場合や、文字列のエンコーディングが非互換の場合は、nil を返します。
 
-  "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}")   #=> nil
+#@samplecode
+:foo.casecmp?("foo")   #=> nil
+"\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}")   #=> nil
+#@end
 
-@see [[m:String#casecmp?]]
+@see [[m:String#casecmp?]], [[m:Symbol#casecmp]]
 #@end
 
 --- =~(other) -> Integer | nil
