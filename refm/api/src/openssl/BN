@@ -230,7 +230,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 @raise OpenSSL::BNError 計算時エラー
 
 --- coerce(other) -> Array
-自身と other が同じクラスになるよう、自身か other を変換し 
+自身と other が同じクラスになるよう、自身か other を変換し
 [other, self] という配列にして返します。
 
 基本的に other が整数のときに、自身を Integer のオブジェクトに
@@ -336,7 +336,7 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
   OpenSSL::BN.new("127").num_bits # => 7
   OpenSSL::BN.new("-127").num_bits # => 7
   OpenSSL::BN.new("128").num_bits # => 8
-  
+
 --- num_bytes -> Integer
 自身を表現するのに使っているバイト数を返します。
 
@@ -379,7 +379,7 @@ checksがnilである場合は OpenSSL が適切な
   # 181 は 「小さな素数」である
   OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
   OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
-  
+
 @param checks Miller-Robin法の繰り返しの回数
 @param vtrivdiv 真なら小さな素数で割ることでの素数判定を試みます
 @raise OpenSSL::BNError 判定時にエラーが発生
