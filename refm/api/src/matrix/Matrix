@@ -37,25 +37,6 @@ i=jの要素a(i,j)を対角要素(diagonal element)、
 
 #@#  require 'matrix'
 
-=== Complex クラスとの併用
-
-require 'complex'することによって、
-Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張されます。
-多くのメソッドは、この拡張されたMatrixクラスでも、期待通りに動作します。
-
-次の例は、各要素を共役複素数に置換するメソッド Matrix#conjugate です。
-
-#@samplecode 例
-require 'matrix'
-require 'complex'
-
-class Matrix
-  def conjugate
-    collect{|e| e.conjugate }
-  end
-end
-#@end
-
 
 == Class Methods
 --- [](*rows) -> Matrix
