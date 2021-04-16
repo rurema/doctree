@@ -113,16 +113,16 @@ Ruby によって GC されます。すなわち、ある使わなくなった
   def number
     'make_3'
   end
-  
+
   p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
   #=> [:make_1, :make_2]
-  
+
   re  = #確実に生成されるように代入操作を行う
   :make_1,
   :'make_2',
   :"#{number}",
   'make_4'.intern
-  
+
   p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
   #=> [:make_1, :make_2, :make_3, :make_4]
 
@@ -148,7 +148,7 @@ self を返します。
 
   p :foo.id2name  # => "foo"
   p :foo.id2name.intern == :foo  # => true
-  
+
 @see [[m:String#intern]]
 #@since 3.0
 @see [[m:Symbol#name]]
