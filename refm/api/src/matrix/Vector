@@ -559,9 +559,11 @@ p v.elements_to_r
 
 自分自身のハッシュ値を返します。
 
+#@until 2.6.0
 --- clone -> Vector
 
 自分自身をコピーしたベクトルを返します。
+#@end
 
 --- inspect -> String
 

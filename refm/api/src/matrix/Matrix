@@ -1192,9 +1192,10 @@ m = Matrix[a1, a2]
 p m.inspect # => "Matrix[[1, 2], [3, 4.5]]"
 #@end
 
-
+#@until 2.6.0
 --- clone -> Matrix
 自分自身のコピーを返します。
+#@end
 
 #@since 2.5.0
 --- combine(*matrices) {|*elements| ... } -> Matrix
