@@ -61,8 +61,8 @@ Random.urandom(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 #@end
 #@end
-#@since 1.9.3
 #@end
+#@since 1.9.3
 --- rand -> Float
 --- rand(max) -> Integer | Float
 --- rand(range) -> Integer | Float | nil
