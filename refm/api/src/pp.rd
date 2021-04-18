@@ -95,12 +95,12 @@ PP のメソッドでもあります。
         first = true
         self.each{|k, v|
           unless first
-            q.text(',')          
+            q.text(',')
             q.breakable
-          end        
+          end
           q.pp k
           q.text ' => '
-          q.group(1) do          
+          q.group(1) do
             q.breakable ''
             if v.is_a?(String) and v.size > 10
               q.pp(v[0..9] + '...')
@@ -114,16 +114,16 @@ PP のメソッドでもあります。
       q.breakable
       q.text "</hash>"
     end
-  
+
     def pretty_print_cycle(q)
       q.text(empty? ? '{}' : '{...}')
     end
   end
-  
+
   h = {:a => 'a'*5, :b => 'b'*10, :c => 'c'*20, :d => 'd'*30}
   pp h
-  
-  #=> 
+
+  #=>
   <hash>
     :d => "dddddddddd...",
     :a => "aaaaa",
@@ -173,9 +173,9 @@ PP のメソッドでもあります。
   require 'pp'
   b = [1, 2, 3]
   a = [b, b]
-    
+
   pp a                        #=> [[1, 2, 3], [1, 2, 3]]
-  
+
   PP.sharing_detection = true
   pp a                        #=> [[1, 2, 3], [...]]
 
@@ -263,7 +263,7 @@ list を iter_method によってイテレートし、各要素を引数とし�
 @param pp [[c:PP]] オブジェクトです。
 
 例:
-  
+
  require 'pp'
  class Array
    def pretty_print(q)
@@ -288,8 +288,8 @@ list を iter_method によってイテレートし、各要素を引数とし�
 @param pp [[c:PP]] オブジェクトです。
 
 例:
- 
- class Array 
+
+ class Array
    def pretty_print_cycle(q)
      q.text(empty? ? '[]' : '[...]')
    end

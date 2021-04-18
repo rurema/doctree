@@ -52,7 +52,7 @@ pretty printing アルゴリズムのためのクラスです。
 そうでない場合にも利用できます。
  * [[m:PrettyPrint.new]]: 出力バッファ、空白の生成をするブロックや改行オブジェクトを設定できます。
  * [[m:PrettyPrint#text]]: 幅を設定できます。
- * [[m:PrettyPrint#breakable]] 
+ * [[m:PrettyPrint#breakable]]
 ですので、このクラスは以下のようなことにも応用が可能です。
  * proportional font を使ったテキストの整形
  * 出力幅とバイト数が異なるような多バイト文字
@@ -65,9 +65,9 @@ pretty printing アルゴリズムのためのクラスです。
 pretty printing のためのバッファを生成します。
 output は出力先です。output は << メソッドを持っていなければなりません。
 << メソッドには
- * [[m:PrettyPrint#text]] の第1引数 obj 
- * [[m:PrettyPrint#breakable]] の第1引数 sep 
- * [[m:PrettyPrint.new]] の第3引数 newline 
+ * [[m:PrettyPrint#text]] の第1引数 obj
+ * [[m:PrettyPrint#breakable]] の第1引数 sep
+ * [[m:PrettyPrint.new]] の第3引数 newline
  * [[m:PrettyPrint.new]] に与えたブロックを評価した結果
 のどれかひとつが引数として与えられます。
 
