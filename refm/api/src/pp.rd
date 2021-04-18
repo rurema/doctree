@@ -88,7 +88,10 @@ PP のメソッドでもあります。
 以下は Hash の pretty printing のカスタマイズの例です。
 
 #@samplecode
+#@until 2.5.0
 require 'pp'
+
+#@end
 class Hash
   def pretty_print(q)
     q.group(2, "<hash>") do
@@ -149,7 +152,10 @@ pp h
 @param width 出力先の幅を指定します。
 
 #@samplecode
+#@until 2.5.0
 require 'pp'
+
+#@end
 str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
 puts str
 # =>
@@ -173,7 +179,10 @@ puts str
 @param boolean 共有検出フラグを true か false で指定します。
 
 #@samplecode
+#@until 2.5.0
 require 'pp'
+
+#@end
 b = [1, 2, 3]
 a = [b, b]
 
@@ -234,8 +243,10 @@ list を iter_method によってイテレートし、各要素を引数とし�
 つまり、以下のふたつは同値です。
 
 #@samplecode
+#@until 2.5.0
 require 'pp'
 
+#@end
 q.seplist([1,2,3]) {|v| q.pp v }
 
 q.pp 1
@@ -271,7 +282,10 @@ q.pp 3
 @param pp [[c:PP]] オブジェクトです。
 
 #@samplecode
+#@until 2.5.0
 require 'pp'
+
+#@end
 class Array
   def pretty_print(q)
     q.group(1, '[', ']') {
