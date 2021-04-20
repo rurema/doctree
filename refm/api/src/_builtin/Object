@@ -114,7 +114,6 @@ other が self 自身の時、真を返します。
 
 ただし特別に、引数が偽の時は [[m:Object#singleton_methods]](false) と同じになっています。
 
-#@if (version > "1.8.0")
 
 @param include_inherited 引数が偽の時は [[m:Object#singleton_methods]](false) と同じになります。
 
@@ -183,7 +182,6 @@ other が self 自身の時、真を返します。
   ["protected_singleton", "protected_foo", "protected_parent"]
 #@end
 
-#@end
 
 @see [[m:Module#instance_methods]],[[m:Object#singleton_methods]]
 
@@ -253,12 +251,8 @@ other が self 自身の時、真を返します。
 #@since 1.9.1
 --- singleton_methods(inherited_too = true) -> [Symbol]
 #@else
-#@if (version > "1.8.0")
 --- singleton_methods(inherited_too = true) -> [String]
-#@end
-#@if (version == "1.8.0")
 --- singleton_methods(inherited_too = false) -> [String]
-#@end
 #@end
 そのオブジェクトに対して定義されている特異メソッド名
 (public あるいは protected メソッド) の一覧を返します。
@@ -269,7 +263,6 @@ self がクラスの場合はスーパークラスのクラスメソッド([[c:C
 
 singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
-#@if (version > "1.8.0")
 @param inherited_too 継承した特異メソッドを含める場合は真を、
                      そうでない場合は偽を指定します。
 
@@ -340,7 +333,6 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@else
   ["public_bar", "public_self", "protected_bar", "protected_self"]
   ["public_class_foo", "public_class_parent", "protected_class_foo", "protected_class_parent"]
-#@end
 #@end
 
 @see [[m:Object#methods]],[[m:Object#extend]]
@@ -903,10 +895,8 @@ p (obj !~ /re/) # => true
 が、extend は、ある特定のオブジェクトだけにモジュールの機能を追加
 したいときに使用します。
 
-#@if (version >= "1.8.0")
 引数に複数のモジュールを指定した場合、最後
 の引数から逆順に extend を行います。
-#@end
 
 @param modules モジュールを任意個指定します（クラスは不可）。
 @return self を返します。
@@ -987,7 +977,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
 
 @see [[m:Kernel.#p]]
 
-#@if (version >= "1.8.0")
 --- instance_variable_get(var) -> object | nil
 
 オブジェクトのインスタンス変数の値を取得して返します。
@@ -1008,9 +997,7 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
     p obj.instance_variable_get(:@bar)      #=> nil
 
 @see [[m:Object#instance_variable_set]],[[m:Object#instance_variables]],[[m:Object#instance_variable_defined?]]
-#@end
 
-#@if (version >= "1.8.0")
 --- instance_variable_set(var, value) -> object
 
 オブジェクトのインスタンス変数 var に値 value を設定します。
@@ -1027,7 +1014,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
     p obj.instance_variable_get(:@foo)      #=> 2
 
 @see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]],[[m:Object#instance_variable_defined?]]
-#@end
 
 #@since 1.9.1
 --- instance_variables -> [Symbol]
@@ -1702,9 +1688,6 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 @see [[c:NilClass]]
 
 --- class -> Class
-#@if (version < "1.9.1")
---- type -> Class
-#@end
 
 レシーバのクラスを返します。
 
