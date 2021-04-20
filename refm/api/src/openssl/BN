@@ -21,16 +21,17 @@ baseに2を指定すると文字列を big-endian の符号無し整数のバイ
 (最初の4byteはbig-endianでデータ長を表わし、その後にそのデータ長のバイト
 列(big-endian)で数値を表す。最上位ビットが立っていると負数)。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("-241") # => -241
-  OpenSSL::BN.new("ff00",16) # => 65280
-  OpenSSL::BN.new("\x81",2) # => 129
-  OpenSSL::BN.new("\xff\x81",2) # => 65409
-  OpenSSL::BN.new("\x00\x00\x00\x02\x00\x81", 0) # => 129
-  OpenSSL::BN.new("\x00\x00\x00\x02\x80\x81", 0) # => -129
-  OpenSSL::BN.new(1209) # => 1209
+OpenSSL::BN.new("-241") # => -241
+OpenSSL::BN.new("ff00",16) # => 65280
+OpenSSL::BN.new("\x81",2) # => 129
+OpenSSL::BN.new("\xff\x81",2) # => 65409
+OpenSSL::BN.new("\x00\x00\x00\x02\x00\x81", 0) # => 129
+OpenSSL::BN.new("\x00\x00\x00\x02\x80\x81", 0) # => -129
+OpenSSL::BN.new(1209) # => 1209
+#@end
 
 @param str 整数を表す文字列
 @param base 文字列から整数に変換するときの基数
@@ -216,23 +217,25 @@ OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
 --- bit_set?(n) -> bool
 自身の n ビット目が立っているなら真を返します。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("129").bit_set?(0) # => true
-  OpenSSL::BN.new("129").bit_set?(1) # => false
+OpenSSL::BN.new("129").bit_set?(0) # => true
+OpenSSL::BN.new("129").bit_set?(1) # => false
+#@end
 
 @param n 調べるビットの位置
 
 --- clear_bit!(n) -> self
 自身の n ビット目を0にします。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  a = OpenSSL::BN.new("129")
-  a.clear_bit!(0)
-  a # => 128
+a = OpenSSL::BN.new("129")
+a.clear_bit!(0)
+a # => 128
+#@end
 
 @param n 0にするビットの位置
 @raise OpenSSL::BNError 計算時エラー
@@ -272,10 +275,11 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 --- mod_add(other, m) -> OpenSSL::BN
 (self + other) % m を返します。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 4
+OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 4
+#@end
 
 @param other 和を取る数
 @param m 剰余を取る数
@@ -284,10 +288,11 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 --- mod_exp(other, m) -> OpenSSL::BN
 (self ** other) % m を返します。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 1
+OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 1
+#@end
 
 @param other 指数
 @param m 剰余を取る数
@@ -305,10 +310,11 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 --- mod_mul(other, m) -> OpenSSL::BN
 (self * other) % m を返します。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
+OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
+#@end
 
 @param other 積を取る数
 @param m 剰余を取る数
@@ -323,10 +329,11 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 --- mod_sub(other, m) -> OpenSSL::BN
 (self - other) % m を返します。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # => 4
+OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # => 4
+#@end
 
 @param other 引く数
 @param m 剰余を取る数
@@ -338,12 +345,13 @@ n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 
 符号は無視されます。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  OpenSSL::BN.new("127").num_bits # => 7
-  OpenSSL::BN.new("-127").num_bits # => 7
-  OpenSSL::BN.new("128").num_bits # => 8
+OpenSSL::BN.new("127").num_bits # => 7
+OpenSSL::BN.new("-127").num_bits # => 7
+OpenSSL::BN.new("128").num_bits # => 8
+#@end
 
 --- num_bytes -> Integer
 自身を表現するのに使っているバイト数を返します。
@@ -381,12 +389,13 @@ checksで指定した回数だけ繰り返します。
 checksがnilである場合は OpenSSL が適切な
 回数を判断します。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  # 181 は 「小さな素数」である
-  OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
-  OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
+# 181 は 「小さな素数」である
+OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
+OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
+#@end
 
 @param checks Miller-Robin法の繰り返しの回数
 @param vtrivdiv 真なら小さな素数で割ることでの素数判定を試みます
@@ -396,12 +405,13 @@ checksがnilである場合は OpenSSL が適切な
 --- set_bit!(n) -> self
 自身の n ビット目を1にします。
 
-例:
-  require 'openssl'
+#@samplecode
+require 'openssl'
 
-  a = OpenSSL::BN.new("128")
-  a.set_bit!(0)
-  a # => 129
+a = OpenSSL::BN.new("128")
+a.set_bit!(0)
+a # => 129
+#@end
 
 @param n 1にするビットの位置
 @raise OpenSSL::BNError 計算時エラー
