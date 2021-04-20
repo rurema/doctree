@@ -11,12 +11,12 @@ x の指数関数を prec で指定した精度で計算します。
 x に正の無限大を指定した場合は正の無限大を返します。負の無限大を指定し
 た場合には 0 を返します。NaN を指定した場合には NaNを返します。
 
-@param x 計算対象の数値を [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]、
+@param x 計算対象の数値を [[c:Integer]]、[[c:BigDecimal]]、
          [[c:Float]]、[[c:Rational]]オブジェクトのいずれかで指定します。
 
 @param prec 計算結果の精度を指定します。
 
-@raise ArgumentError x に [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]、
+@raise ArgumentError x に [[c:Integer]]、[[c:BigDecimal]]、
                      [[c:Float]]、[[c:Rational]]以外のオブジェクトを指
                      定した場合に発生します。
 
@@ -36,7 +36,7 @@ x の自然対数を prec で指定した精度で計算します。
 x に無限大を指定した場合は無限大を返します。NaN を指定した場合には NaN
 を返します。
 
-@param x 計算対象の数値を [[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
+@param x 計算対象の数値を [[c:Integer]]、[[c:Float]]、
          [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
          します。
 
