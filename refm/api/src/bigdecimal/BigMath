@@ -2,55 +2,33 @@
 
 BigDecimalを使った数学的な機能を提供するモジュールです。
 
-#@since 1.9.2
 == Module Functions
-#@else
-== Instance Methods
-#@end
 
 --- exp(x, prec) -> BigDecimal
 
 x の指数関数を prec で指定した精度で計算します。
 
-#@since 1.9.3
 x に正の無限大を指定した場合は正の無限大を返します。負の無限大を指定し
 た場合には 0 を返します。NaN を指定した場合には NaNを返します。
 
 @param x 計算対象の数値を [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]、
          [[c:Float]]、[[c:Rational]]オブジェクトのいずれかで指定します。
-#@else
-x に無限大や NaN を指定した場合には NaN を返します。
-
-@param x 計算対象の [[c:BigDecimal]] オブジェクトを指定します。
-#@end
 
 @param prec 計算結果の精度を指定します。
 
-#@since 1.9.3
 @raise ArgumentError x に [[c:Fixnum]]、[[c:Bignum]]、[[c:BigDecimal]]、
                      [[c:Float]]、[[c:Rational]]以外のオブジェクトを指
                      定した場合に発生します。
-#@end
 
 @raise ArgumentError prec に 0 以下の数値が指定された場合に発生します。
 
 例:
 
-#@since 1.9.2
 
   require "bigdecimal/math"
 
   puts BigMath::exp(BigDecimal('1'), 10) #=> 0.2718281828E1
 
-#@else
-
-  require "bigdecimal"
-  require "bigdecimal/math"
-
-  include BigMath
-  puts exp(BigDecimal('1'), 10) #=> 0.271828182845904523536028752390026306410273E1
-
-#@end
 
 --- log(x, prec) -> BigDecimal
 
@@ -59,39 +37,21 @@ x の自然対数を prec で指定した精度で計算します。
 x に無限大を指定した場合は無限大を返します。NaN を指定した場合には NaN
 を返します。
 
-#@since 1.9.3
 @param x 計算対象の数値を [[c:Fixnum]]、[[c:Bignum]]、[[c:Float]]、
          [[c:Rational]]、[[c:BigDecimal]] オブジェクトのいずれかで指定
          します。
-#@else
-@param x 計算対象の [[c:BigDecimal]] オブジェクトを指定します。
-#@end
 
 @param prec 計算結果の精度を指定します。
 
-#@since 1.9.3
 @raise Math::DomainError x に 0 以下の数値か [[c:Complex]] オブジェクト
                          が指定された場合に発生します。
-#@else
-@raise ArgumentError x に 0 以下の数値が指定された場合に発生します。
-#@end
 
 @raise ArgumentError prec に 0 以下の数値が指定された場合に発生します。
 
 例:
 
-#@since 1.9.2
 
   require "bigdecimal/math"
 
   puts BigMath::log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
 
-#@else
-
-  require "bigdecimal"
-  require "bigdecimal/math"
-
-  include BigMath
-  puts log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
-
-#@end
