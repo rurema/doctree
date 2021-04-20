@@ -26,8 +26,8 @@
          効桁数は以下のような割り算を実行するとき等に意味を持ちます。
 #@samplecode
 require "bigdecimal"
-BigDecimal("1")    / BigDecimal("3")    # => 0.3333333333 33E0
-BigDecimal("1",10) / BigDecimal("3",10) # => 0.3333333333 3333333333 33333333E0
+BigDecimal("1")    / BigDecimal("3")    # => 0.333333333333333333e0
+BigDecimal("1",10) / BigDecimal("3",10) # => 0.333333333333333333e0
 #@end
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
@@ -653,9 +653,9 @@ BigDecimal("0.1234567890123456789").to_s("10") # => "0.1234567890 123456789E0"
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("0.123456").to_s(" 3") # => " 0.123 456E0"
-BigDecimal("0.123456").to_s("+3") # => "+0.123 456E0"
-BigDecimal("-0.123456").to_s("3") # => "-0.123 456E0"
+BigDecimal("0.123456").to_s(" 3") # => " 0.123 456e0"
+BigDecimal("0.123456").to_s("+3") # => "+0.123 456e0"
+BigDecimal("-0.123456").to_s("3") # => "-0.123 456e0"
 #@end
 
 さらに文字列の最後に指数形式 ('E' または 'e') か指数を使わない形式
@@ -663,9 +663,9 @@ BigDecimal("-0.123456").to_s("3") # => "-0.123 456E0"
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("123.456").to_s("E")     # => "0.123456E3"
-BigDecimal("123.456").to_s("e")     # => "0.123456E3"
-                                    # (小文字で指定しても出力は 'E' になる)
+BigDecimal("123.456").to_s("e")     # => "0.123456e3"
+BigDecimal("123.456").to_s("E")     # => "0.123456e3"
+                                    # (大文字で指定しても出力は 'e' になる)
 BigDecimal("123.456").to_s("F")     # => "123.456"
 BigDecimal("1234.5678").to_s("3F")  # => "123 4.567 8"
 #@end
@@ -727,7 +727,7 @@ self が 0 以外のときに self を返します。0 のときに nil を返�
 #@samplecode
 require "bigdecimal"
 BigDecimal("0").nonzero? # => nil
-BigDecimal("1").nonzero? # => #<BigDecimal:f7236228,'0.1E1',4(8)>
+BigDecimal("1").nonzero? # => 0.1e1
 #@end
 
 --- split -> [Integer, String, Integer, Integer]
@@ -742,7 +742,7 @@ a = BigDecimal("3.14159265")
 f, x, y, z = a.split
 #@end
 
-とすると、f =+ 1、x = "314159265"、y = 10、z = 1 になります。
+とすると、f = 1、x = "314159265"、y = 10、z = 1 になります。
 従って、以下のようにする事で [[c:Float]] に変換することができます。
 
 #@samplecode
@@ -802,8 +802,7 @@ require 'bigdecimal'
 a = BigDecimal("42")
 b = BigDecimal("9")
 
-a.divmod(b)
-# => [#<BigDecimal:f74b3a14,'0.4E1',4(16)>, #<BigDecimal:f74b3a64,'0.6E1',4(12)>]
+a.divmod(b) # => [0.4e1, 0.6e1]
 #@end
 
 --- modulo(n) -> BigDecimal
@@ -900,12 +899,9 @@ self の符号を反転させたものを返します。
 
 #@samplecode
 require 'bigdecimal'
-inf = BigDecimal('Infinity')
-# => #<BigDecimal:1e16fa8,'Infinity',9(9)>
-s = Marshal.dump(inf)
-# => "\x04\bu:\x0FBigDecimal\x0F4:Infinity"
-Marshal.load(s)
-# => #<BigDecimal:82b5090,'Infinity',4(4)>
+inf = BigDecimal('Infinity') # => Infinity
+s = Marshal.dump(inf)        # => "\x04\bu:\x0FBigDecimal\x0F9:Infinity"
+Marshal.load(s)              # => Infinity
 #@end
 
 @see [[m:BigDecimal._load]], [[m:Marshal.#dump]], [[m:Marshal.#load]]
@@ -924,7 +920,7 @@ self] という配列にして返します。
 #@samplecode
 require "bigdecimal"
 a = BigDecimal("1.0")
-b = a / 2.0 # => 0.5
+b = a / 2.0 # => 0.5e0
 #@end
 
 other に [[c:Rational]] オブジェクトを指定した場合は self の有効桁数を
