@@ -3,7 +3,7 @@ include Comparable
 
 OpenSSL内で利用される多倍長整数クラスです。
 
-通常多倍長整数を利用するには [[c:Bignum]] を用いてください。
+通常多倍長整数を利用するには [[c:Integer]] を用いてください。
 
 == Class Methods
 
