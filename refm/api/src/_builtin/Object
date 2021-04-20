@@ -1,8 +1,4 @@
-#@since 1.9.1
 = class Object < BasicObject
-#@else
-= class Object
-#@end
 
 include Kernel
 
@@ -42,7 +38,6 @@ Objectクラスのインスタンスを生成して返します。
 
 @see [[m:Object#equal?]],[[m:Object#eql?]]
 
-#@since 1.9.2
 --- <=>(other) -> 0 | nil
 
 self === other である場合に 0 を返します。そうでない場合には nil を返します。
@@ -55,7 +50,6 @@ a <=> b # => nil
 #@end
 
 @see [[m:Object#===]]
-#@end
 
 --- eql?(other) -> bool
 
@@ -104,11 +98,7 @@ other が self 自身の時、真を返します。
 
 @see [[m:Object#object_id]],[[m:Object#==]],[[m:Object#eql?]],[[c:Symbol]]
 
-#@since 1.9.1
 --- methods(include_inherited = true) -> [Symbol]
-#@else
---- methods(include_inherited = true) -> [String]
-#@end
 そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
 このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
@@ -146,17 +136,10 @@ other が self 自身の時、真を返します。
 
   #実行結果
 
-#@since 1.9.1
   [:protected_singleton, :public_singleton]
   [:public_singleton, :public_foo]
   [:private_singleton, :private_foo]
   [:protected_singleton, :protected_foo]
-#@else
-  ["public_singleton", "protected_singleton"]
-  ["public_foo", "public_singleton"]
-  ["private_foo", "private_singleton"]
-  ["protected_foo", "protected_singleton"]
-#@end
 
   #例2:
 
@@ -170,22 +153,14 @@ other が self 自身の時、真を返します。
 
   #実行結果
 
-#@since 1.9.1
   [:protected_singleton, :public_singleton, :protected_foo, :public_foo, :protected_parent, :public_parent]
   [:public_singleton, :public_foo, :public_parent]
   [:private_singleton, :private_foo, :private_parent]
   [:protected_singleton, :protected_foo, :protected_parent]
-#@else
-  ["public_foo", "public_parent", "protected_singleton", "public_singleton", "protected_foo", "protected_parent"]
-  ["public_foo", "public_parent", "public_singleton"]
-  ["private_singleton", "private_foo", "private_parent"]
-  ["protected_singleton", "protected_foo", "protected_parent"]
-#@end
 
 
 @see [[m:Module#instance_methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.1
 --- public_method(name) -> Method
 
 オブジェクトの public メソッド name をオブジェクト化した
@@ -195,22 +170,12 @@ other が self 自身の時、真を返します。
 @raise NameError 定義されていないメソッド名や、
        protected メソッド名、 private メソッド名を引数として与えると発生します。
 
-#@since 2.4.0
   1.public_method(:to_int) #=> #<Method: Integer#to_int>
   1.public_method(:p)      #   method `p' for class `Integer' is private (NameError)
-#@else
-  1.public_method(:to_int) #=> #<Method: Fixnum(Integer)#to_int>
-  1.public_method(:p)      #   method `p' for class `Fixnum' is private (NameError)
-#@end
 
 @see [[m:Object#method]],[[m:Object#public_send]],[[m:Module#public_instance_method]]
-#@end
 
-#@since 1.9.1
 --- public_methods(include_inherited = true) -> [Symbol]
-#@else
---- public_methods(include_inherited = true) -> [String]
-#@end
 
 そのオブジェクトが理解できる public メソッド名の一覧を返します。
 
@@ -220,11 +185,7 @@ other が self 自身の時、真を返します。
 
 @see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.1
 --- private_methods(include_inherited = true) -> [Symbol]
-#@else
---- private_methods(include_inherited = true) -> [String]
-#@end
 
 そのオブジェクトが理解できる private メソッド名の一覧を返します。
 
@@ -234,11 +195,7 @@ other が self 自身の時、真を返します。
 
 @see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.1
 --- protected_methods(include_inherited = true) -> [Symbol]
-#@else
---- protected_methods(include_inherited = true) -> [String]
-#@end
 
 そのオブジェクトが理解できる protected メソッド名の一覧を返します。
 
@@ -248,12 +205,7 @@ other が self 自身の時、真を返します。
 
 @see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.1
 --- singleton_methods(inherited_too = true) -> [Symbol]
-#@else
---- singleton_methods(inherited_too = true) -> [String]
---- singleton_methods(inherited_too = false) -> [String]
-#@end
 そのオブジェクトに対して定義されている特異メソッド名
 (public あるいは protected メソッド) の一覧を返します。
 
@@ -305,15 +257,9 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
   #実行結果
 
-#@since 1.9.1
   [:protected_self, :public_self]
   [:protected_self, :public_self]
   [:protected_class_foo, :public_class_foo]
-#@else
-  ["public_self", "protected_self"]
-  ["public_self", "protected_self"]
-  ["public_class_foo", "protected_class_foo"]
-#@end
 
 
   #例2:
@@ -327,13 +273,8 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
   #実行結果
 
-#@since 1.9.1
   [:protected_self, :public_self, :protected_bar, :public_bar]
   [:protected_class_foo, :public_class_foo, :protected_class_parent, :public_class_parent]
-#@else
-  ["public_bar", "public_self", "protected_bar", "protected_self"]
-  ["public_class_foo", "public_class_parent", "protected_class_foo", "protected_class_parent"]
-#@end
 
 @see [[m:Object#methods]],[[m:Object#extend]]
 
@@ -341,38 +282,16 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@#nomethod
 
 オブジェクトを配列に変換した結果を返します。
-#@since 1.9.1
 デフォルトでは定義されていません。
 
 説明のためここに記載してありますが、
 このメソッドは実際には Object クラスには定義されていません。
 必要に応じてサブクラスで定義すべきものです。
-#@else
-
-配列に変換できない(to_ary を持たない)オブジェクトは、自身のみを含む長さ 1 の配
-列に変換されます。
-このメソッドは、将来 Object のメソッドからは取り除かれます。
-なので to_a を使用する場合、
-
- * すべてのオブジェクトに to_a が定義されているという期待はしない。
- * ユーザー定義のクラスには必要に応じて自分で定義する
-
-などということが必要です。
-#@end
-#@since 1.9.1
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
     p nil.to_a          # []
 
 @see [[m:Object#to_ary]],[[m:Kernel.#Array]]
-#@else
-    p( {'a'=>1}.to_a )  # [["a", 1]]
-    p ['array'].to_a    # ["array"]
-    p 1.to_a            # [1]       (warning: default `to_a' will be obsolete)
-    p nil.to_a          # []
-
-@see [[m:Object#to_ary]],[[m:Kernel.#Array]]
-#@end
 
 --- to_s -> String
 
@@ -565,27 +484,16 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   it = Foo.new
   p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
-#@since 1.9.1
 --- to_enum(method = :each, *args) -> Enumerator
 --- enum_for(method = :each, *args) -> Enumerator
-#@since 2.0.0
 --- to_enum(method = :each, *args) {|*args| ... }  -> Enumerator
 --- enum_for(method = :each, *args) {|*args| ... } -> Enumerator
-#@end
 
 [[m:Enumerator.new]](self, method, *args) を返します。
 
-#@since 2.0.0
 ブロックを指定した場合は [[m:Enumerator#size]] がブロックの評価結果を返
 します。ブロックパラメータは引数 args です。
-#@end
 
-#@else
---- to_enum(method = :each, *args) -> Enumerable::Enumerator
---- enum_for(method = :each, *args) -> Enumerable::Enumerator
-
-[[m:Enumerable::Enumerator.new]](self, method, *args) を返します。
-#@end
 
 @param method メソッド名の文字列かシンボルです。
 @param args 呼び出すメソッドに渡される引数です。
@@ -597,14 +505,8 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
   # protects an array from being modified
   a = [1, 2, 3]
-#@since 1.9.1
   p(a.to_enum) #=> #<Enumerator: [1, 2, 3]:each>
-#@else
-  p(a.to_enum) #=> #<Enumerable::Enumerator:0xbaf7ac>
-#@end
 
-#@since 1.9.1
-#@since 2.0.0
 例(ブロックを指定する場合):
 
   module Enumerable
@@ -632,13 +534,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   enum.size # => 42
 
 @see [[c:Enumerator]], [[m:Enumerator#size]]
-#@else
-@see [[c:Enumerator]]
-#@end
 
-#@else
-@see [[c:Enumerable::Enumerator]]
-#@end
 
 --- tap{|x| ... } -> self
 
@@ -763,11 +659,7 @@ hash を再定義する場合は、一様に分布する任意の整数を返す
   p :ruby.hash #=> 103538
   p :ruby.hash #=> 103538
 
-#@since 1.9.3
 @see [[m:Object#eql?]],[[m:BasicObject#__id__]]
-#@else
-@see [[m:Object#eql?]],[[m:Object#__id__]]
-#@end
 
 --- ===(other) -> bool
 
@@ -846,7 +738,6 @@ p(obj =~ /re/) #=> nil
 
 @see [[m:String#=~]]
 
-#@since 1.9.1
 --- !~(other) -> bool
 
 自身が other とマッチしない事を判定します。
@@ -864,7 +755,6 @@ p (obj !~ /re/) # => true
 #@end
 
 @see [[m:Object#=~]]
-#@end
 
 --- display(out = $stdout) -> nil
 
@@ -962,18 +852,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
   end
   Bar.new.inspect                  # => "#<Bar:0x0300c868 @bar=1>"
 
-#@until 2.0.0
-また、to_s メソッドをオーバーライドしていた場合は to_s メソッドの実行結
-果を返します。(ただし、2.0 で to_s メソッドは実行されなくなった点に注意
-してください)
-
-  class Baz
-    def to_s
-      "baz"
-    end
-  end
-  Baz.new.inspect                  # => "baz"
-#@end
 
 @see [[m:Kernel.#p]]
 
@@ -1015,7 +893,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
 
 @see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]],[[m:Object#instance_variable_defined?]]
 
-#@since 1.9.1
 --- instance_variables -> [Symbol]
 オブジェクトのインスタンス変数名をシンボルの配列として返します。
 
@@ -1024,16 +901,6 @@ inspect メソッドをオーバーライドしなかった場合、クラス名
     p obj.instance_variables
 
     #=> [:@foo, :@bar]
-#@else
---- instance_variables -> [String]
-オブジェクトのインスタンス変数名を文字列の配列として返します。
-
-    obj = Object.new
-    obj.instance_eval { @foo, @bar = nil }
-    p obj.instance_variables
-
-    #=> ["@foo", "@bar"]
-#@end
 
 @see [[m:Object#instance_variable_get]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Module.constants]], [[m:Module#constants]], [[m:Module#class_variables]]
 
@@ -1239,11 +1106,7 @@ marshal_dump/marshal_load を使うべきです。
 @see [[m:Object#marshal_dump]], [[c:Marshal]]
 
 
-#@since 2.4.0
 --- clone(freeze: true) -> object
-#@else
---- clone -> object
-#@end
 --- dup -> object
 
 オブジェクトの複製を作成して返します。
@@ -1253,14 +1116,10 @@ clone はそれに加えて freeze, 特異メソッドなどの情報も含め�
 
 clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 
-#@since 2.4.0
 [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトは複製ではなくインスタンス自身を返します。
 
 @param freeze false を指定すると freeze されていないコピーを返します。
 @raise ArgumentError [[c:TrueClass]] などの常に freeze されているオブジェクトの freeze されていないコピーを作成しようとしたときに発生します。
-#@else
-@raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトを複製しようとすると発生します。
-#@end
 
 
   obj = "string"
@@ -1450,18 +1309,13 @@ self に特異メソッド name を定義します。
   guy.define_singleton_method(:hello) { "#{self}: Hello there!" }
   guy.hello    #=>  "Bob: Hello there!"
 
-#@since 2.0.0
 --- respond_to?(name, include_all = false) -> bool
-#@else
---- respond_to?(name, include_private = false) -> bool
-#@end
 
 オブジェクトがメソッド name を持つとき真を返します。
 
 オブジェクトが メソッド name を持つというのは、
 オブジェクトが メソッド name に応答できることをいいます。
 
-#@since 1.9.2
 Windows での [[m:Process.fork]] や GNU/Linux での [[m:File.lchmod]] の
 ような [[c:NotImplementedError]] が発生する場合は false を返します。
 
@@ -1471,19 +1325,12 @@ Rubyで実装されたメソッドで NotImplementedError が発生する場合�
 
 メソッドが定義されていない場合は、[[m:Object#respond_to_missing?]] を呼
 び出してその結果を返します。
-#@end
 
 @param name [[c:Symbol]] または文字列で指定するメソッド名です。
 
-#@since 2.0.0
 @param include_all private メソッドと protected メソッドを確認の対象に
                    含めるかを true か false で指定します。省略した場合
                    は false(含めない) を指定した事になります。
-#@else
-@param include_private private メソッドを確認の対象に含めるかを true か
-                       false で指定します。省略した場合は false(含めな
-                       い) を指定した事になります。
-#@end
 
   class F
     def hello
@@ -1546,29 +1393,7 @@ Rubyで実装されたメソッドで NotImplementedError が発生する場合�
   puts File.respond_to?(:lchmod)         # => false
 
 @see [[m:Module#method_defined?]]
-#@until 2.0.0
-#@since 1.9.2
---- respond_to_missing?(symbol, include_private) -> bool
 
-自身が symbol で表されるメソッドに対し
-[[m:BasicObject#method_missing]] で反応するつもりならば真を返します。
-
-[[m:Object#respond_to?]] はメソッドが定義されていない場合、
-デフォルトでこのメソッドを呼びだし問合せます。
-
-[[m:BasicObject#method_missing]] を override した場合にこのメソッドも
-override されるべきです。
-
-false を返します。
-
-@param symbol メソッド名シンボル
-@param include_private private method も含めたい場合に true が渡されます
-
-@see [[m:Object#respond_to?]], [[m:BasicObject#method_missing]]
-#@end
-#@end
-
-#@since 2.0.0
 --- remove_instance_variable(name) -> object
 
 オブジェクトからインスタンス変数 name を取り除き、そのインス
@@ -1587,47 +1412,7 @@ false を返します。
     Foo.new.foo
 
 @see [[m:Module#remove_class_variable]],[[m:Module#remove_const]]
-#@end
 
-#@until 1.9.1
---- method_missing(name, *args) -> object
-
-呼びだされたメソッドが定義されていなかった時、Rubyインタプリタがこのメソッド
-を呼び出します。
-
-呼び出しに失敗したメソッドの名前 ([[c:Symbol]]) が name に
-その時の引数が第二引数以降に渡されます。
-
-デフォルトではこのメソッドは例外 [[c:NoMethodError]] を発生させます。
-
-#@#このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
-
-@param name 未定義メソッドの名前（シンボル）です。
-@param args 未定義メソッドに渡された引数です。
-#@#@param block 未定義メソッドに渡されたブロックです。
-@return ユーザー定義の method_missing メソッドの返り値が未定義メソッドの返り値で
-  あるかのように見えます。
-
-  class Foo
-    def initialize(data)
-      @data = data
-    end
-    def method_missing(name, lang)
-      if name.to_s =~ /\Afind_(\d+)_in\z/
-        if @data[lang]
-          p @data[lang][$1.to_i]
-        else
-          raise "#{lang} unknown"
-        end
-      else
-        super
-      end
-    end
-  end
-
-  dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
-  dic.find_2_in :Esperanto #=> "du"
-#@end
 
 --- instance_of?(klass) -> bool
 
@@ -1692,11 +1477,7 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 レシーバのクラスを返します。
 
   p "ruby".class #=> String
-#@since 2.4.0
   p 100.class #=> Integer
-#@else
-  p 100.class #=> Fixnum
-#@end
   p ARGV.class #=> Array
   p self.class #=> Object
   p Class.class #=> Class
@@ -1772,9 +1553,6 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
-#@until 2.3.0
-@raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
-#@end
 
   ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
   # => true
@@ -1817,7 +1595,6 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
 
-#@since 1.9.2
 --- singleton_class -> Class
 
 レシーバの特異クラスを返します。
@@ -1826,24 +1603,15 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 レシーバが nil か true か false なら、それぞれ NilClass, TrueClass,
 FalseClass を返します。
 
-#@since 2.4.0
 @raise TypeError レシーバが [[c:Integer]]、[[c:Float]]、[[c:Symbol]] の場合に発生します。
-#@else
-@raise TypeError レシーバが [[c:Fixnum]] か [[c:Symbol]] の場合に発生します。
-#@end
 
    Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
    String.singleton_class      #=> #<Class:String>
    nil.singleton_class         #=> NilClass
 
 @see [[m:Object#class]]
-#@end
 
-#@until 1.9.1
-#@include(BasicObject.public_methods_from_Object)
-#@end
 
-#@since 2.2.0
 #@# #6373 を参照。
 --- itself -> object
 
@@ -1851,7 +1619,6 @@ self を返します。
 
   string = 'my string' # => "my string"
   string.itself.object_id == string.object_id # => true
-#@end
 
 == Private Instance Methods
 
@@ -1969,7 +1736,6 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、フ�
             #   tainted?: true
             #   singleton methods: :bar
 
-#@since 2.0.0
 --- respond_to_missing?(symbol, include_private) -> bool
 
 自身が symbol で表されるメソッドに対し
@@ -2009,31 +1775,7 @@ s.respond_to?(:sample)    # => false
 #@end
 
 @see [[m:Object#respond_to?]], [[m:BasicObject#method_missing]]
-#@end
 
-#@until 2.0.0
---- remove_instance_variable(name) -> object
 
-オブジェクトからインスタンス変数 name を取り除き、そのインス
-タンス変数に設定されていた値を返します。
-
-@param name 削除するインスタンス変数の名前をシンボルか文字列で指定します。
-@raise NameError オブジェクトがインスタンス変数 name を持たない場合に発生します。
-
-    class Foo
-      def foo
-        @foo = 1
-        p remove_instance_variable(:@foo) #=> 1
-        p remove_instance_variable(:@foo) # instance variable @foo not defined (NameError)
-      end
-    end
-    Foo.new.foo
-
-@see [[m:Module#remove_class_variable]],[[m:Module#remove_const]]
-#@end
-
-#@until 1.9.1
-#@include(BasicObject.private_methods_from_Object)
-#@end
 
 #@include(constants)
