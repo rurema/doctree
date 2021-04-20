@@ -453,14 +453,55 @@ a # => 129
 --- to_s(base=10) -> String
 自身を表す文字列を返します。
 
-base で基数を指定します。10,16を指定できます。
-2を指定すると自身の絶対値を big-endian の符号無し整数のバイナリ列に
-変換します。
-0を指定した場合には MPI 形式の文字列(バイト列)に変換します。
+base で、変換方法(基数)を指定します。
+デフォルトは 10 で、他に 16, 2, 0 を指定できます。
 
-@param base 文字列変換の基数
+  10  10進数の表記
+  16  16進数の表記
+   2  big-endianの符号無し整数のバイナリ列
+   0  MPI形式の文字列(バイト列)
+
+@param base 文字列への変換方法(基数)
 @raise OpenSSL::BNError 変換に失敗した場合に発生します
-@see [[m:OpenSSL::BN.new]]
+
+#@samplecode
+require 'openssl'
+
+p 10.to_bn.to_s   # =>  "10"
+p (-5).to_bn.to_s # =>  "-5"
+
+p 0.to_bn.to_s(16)  # =>   "0"
+p 9.to_bn.to_s(16)  # =>  "09"
+p 10.to_bn.to_s(16) # =>  "0A"
+p 16.to_bn.to_s(16) # =>  "10"
+p 26.to_bn.to_s(16) # =>  "1A"
+p 256.to_bn.to_s(16) # => "0100"
+
+p 0.to_bn.to_s(2) # => ""
+p 6.to_bn.to_s(2) # => "\x06"
+p 7.to_bn.to_s(2) # => "\a"
+
+p 0.to_bn.to_s(0) # => "\x00\x00\x00\x00"
+p 6.to_bn.to_s(0) # => "\x00\x00\x00\x01\x06"
+p 7.to_bn.to_s(0) # => "\x00\x00\x00\x01\a"
+#@end
+
+
+--- pretty_print(pp)
+
+[[m:Kernel.#pp]] でオブジェクトの内容を出力するときに、内部で呼ばれるメソッドです。
+
+#@samplecode
+#@until 2.5.0
+require 'pp'
+#@end
+require 'openssl'
+
+pp 5.to_bn     #=> #<OpenSSL::BN 5>
+pp (-5).to_bn  #=> #<OpenSSL::BN -5>
+#@end
+
+@param pp [[c:PP]] クラスのインスタンスオブジェクト
 
 --- ucmp(other) -> -1 | 0 | 1
 自身と other の絶対値を比較し、自身の絶対値が小さいときには -1、
