@@ -334,7 +334,7 @@ Ruby の [[c:Float]] クラスが保持できる有効数字の数を返しま�
 
 #@samplecode
 require 'bigdecimal'
-p BigDecimal::double_fig  # ==> 20 (depends on the CPU etc.)
+p BigDecimal::double_fig  # ==> 16 (depends on the CPU etc.)
 #@end
 
 double_figは以下の C プログラムの結果と同じです。
