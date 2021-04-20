@@ -36,7 +36,7 @@ Objectクラスのインスタンスを生成して返します。
 
   p("foo" == "bar") #=> false
   p("foo" == "foo") #=> true
-  
+
   p(4 == 4) #=> true
   p(4 == 4.0) #=> true
 
@@ -79,7 +79,7 @@ a <=> b # => nil
 
   p(4.eql?(4)) #=> true
   p(4.eql?(4.0)) #=> false
-  
+
 @see [[m:Object#hash]],[[m:Object#equal?]],[[m:Object#==]]
 
 --- equal?(other) -> bool
@@ -99,7 +99,7 @@ other が self 自身の時、真を返します。
 
   p(4.equal?(4)) #=> true
   p(4.equal?(4.0)) #=> false
-  
+
   p(:foo.equal? :foo) #=> true
 
 @see [[m:Object#object_id]],[[m:Object#==]],[[m:Object#eql?]],[[c:Symbol]]
@@ -119,34 +119,34 @@ other が self 自身の時、真を返します。
 @param include_inherited 引数が偽の時は [[m:Object#singleton_methods]](false) と同じになります。
 
   #例1:
-  
+
   class Parent
     private;   def private_parent()   end
     protected; def protected_parent() end
     public;    def public_parent()    end
   end
-  
+
   class Foo < Parent
     private;   def private_foo()   end
     protected; def protected_foo() end
     public;    def public_foo()    end
   end
-  
+
   obj = Foo.new
   class <<obj
       private;   def private_singleton()   end
       protected; def protected_singleton() end
       public;    def public_singleton()    end
   end
-  
+
   # あるオブジェクトの応答できるメソッドの一覧を得る。
   p obj.methods(false)
   p obj.public_methods(false)
   p obj.private_methods(false)
   p obj.protected_methods(false)
-  
+
   #実行結果
-  
+
 #@since 1.9.1
   [:protected_singleton, :public_singleton]
   [:public_singleton, :public_foo]
@@ -158,9 +158,9 @@ other が self 自身の時、真を返します。
   ["private_foo", "private_singleton"]
   ["protected_foo", "protected_singleton"]
 #@end
-  
+
   #例2:
-    
+
   # あるオブジェクトの応答できるメソッドの一覧を得る。
   # 自身のクラスの親クラスのインスタンスメソッドも含めるために true を指定して
   # いるが、Object のインスタンスメソッドは一覧から排除している。
@@ -168,9 +168,9 @@ other が self 自身の時、真を返します。
   p obj.public_methods(true)    - Object.public_instance_methods(true)
   p obj.private_methods(true)   - Object.private_instance_methods(true)
   p obj.protected_methods(true) - Object.protected_instance_methods(true)
-  
+
   #実行結果
-  
+
 #@since 1.9.1
   [:protected_singleton, :public_singleton, :protected_foo, :public_foo, :protected_parent, :public_parent]
   [:public_singleton, :public_foo, :public_parent]
@@ -274,29 +274,29 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
                      そうでない場合は偽を指定します。
 
   #例1:
-  
+
   Parent = Class.new
-  
+
   class <<Parent
     private;   def private_class_parent() end
     protected; def protected_class_parent() end
     public;    def public_class_parent() end
   end
-  
+
   Foo = Class.new(Parent)
-  
+
   class <<Foo
     private;   def private_class_foo() end
     protected; def protected_class_foo() end
     public;    def public_class_foo() end
   end
-  
+
   module Bar
     private;   def private_bar()   end
     protected; def protected_bar() end
     public;    def public_bar()    end
   end
-  
+
   obj = Foo.new
   class <<obj
     include Bar
@@ -304,14 +304,14 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
     protected; def protected_self() end
     public;    def public_self()    end
   end
-  
+
   # あるオブジェクトの特異メソッドの一覧を得る。
   p obj.singleton_methods(false)
   p obj.methods(false)
   p Foo.singleton_methods(false)
-  
+
   #実行結果
-  
+
 #@since 1.9.1
   [:protected_self, :public_self]
   [:protected_self, :public_self]
@@ -322,18 +322,18 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   ["public_class_foo", "protected_class_foo"]
 #@end
 
-  
+
   #例2:
-  
+
   # あるオブジェクトの特異メソッドの一覧を得る。
   # 親クラスのクラスメソッドも含まれるよう true を指定したが、
   # Object のクラスメソッドは一覧から排除している。
-  
+
   p obj.singleton_methods(true)
   p Foo.singleton_methods(true) - Object.singleton_methods(true)
-  
+
   #実行結果
-  
+
 #@since 1.9.1
   [:protected_self, :public_self, :protected_bar, :public_bar]
   [:protected_class_foo, :public_class_foo, :protected_class_parent, :public_class_parent]
@@ -396,15 +396,15 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
     end
   end
   it = Foo.new(40)
-  
+
   puts it #=> #<Foo:0x2b69110>
-  
+
   class Foo
    def to_s
      "Class:Foo Number:#{@num}"
    end
   end
-  
+
   puts it #=> Class:Foo Number:40
 
 @see [[m:Object#to_str]],[[m:Kernel.#String]]
@@ -428,7 +428,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
      'Edition'
    end
   end
-  
+
   it = Foo.new
   p('Second' + it) #=> "SecondEdition"
 
@@ -453,7 +453,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
      [3,4]
    end
   end
-  
+
   it = Foo.new
   p([1,2] + it) #=> [1, 2, 3, 4]
 
@@ -479,7 +479,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
      {'as' => 24}
    end
   end
-  
+
   it = Foo.new
   p({:as => 12}.merge(it)) #=> {"as"=>24, :as=>12}
 
@@ -503,7 +503,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
      1
    end
   end
-  
+
   ary = [:a, :b, :c]
   p(ary[Foo.new]) # => :b
 
@@ -521,13 +521,13 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   def doing
     yield
   end
-  
+
   class Foo
    def to_proc
      Proc.new{p 'ok'}
    end
   end
-  
+
   it = Foo.new
   doing(&it) #=> "ok"
 
@@ -569,7 +569,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
      /[\d]+/
    end
   end
-  
+
   it = Foo.new
   p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
@@ -726,13 +726,13 @@ Rubyでは、(Garbage Collectされていない)アクティブなオブジェ�
 
   p "ruby".object_id #=> 22759500
   p "ruby".object_id #=> 22759400
-  
+
   p [].object_id #=> 22759360
   p [].object_id #=> 22759340
-  
+
   p :ruby.object_id #=> 103538
   p :ruby.object_id #=> 103538
-  
+
   p 11.object_id #=> 23
   p 11.object_id #=> 23
 
@@ -765,7 +765,7 @@ hash を再定義する場合は、一様に分布する任意の整数を返す
   p 0.hash #=> 1
   p 0.0.hash #=> 0
   p nil.hash #=> 4
-  
+
   p "ruby".hash #=> -241670986
   p "ruby".hash #=> -241670986
   p :ruby.hash #=> 103538
@@ -792,9 +792,9 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 @param other 比較するオブジェクトです。
 
   age = 12
-  result = 
+  result =
   case age
-  when 0 .. 2 
+  when 0 .. 2
     "baby"
   when 3 .. 6
     "little child"
@@ -805,20 +805,20 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
   else
     "adult"
   end
-  
+
   puts result #=> "child"
-  
+
   def check arg
     case arg
     when /ruby(?!\s*on\s*rails)/i
       "hit! #{arg}"
-    when String 
+    when String
       "Instance of String class. But don't hit."
     else
       "unknown"
     end
   end
-  
+
   puts check([]) #=> unknown
   puts check("mash-up in Ruby on Rails") #=> instance of String class. But not hit...
   puts check("<Ruby's world>") #=> hit! <Ruby's world>
@@ -916,26 +916,26 @@ p (obj !~ /re/) # => true
       'ok Foo'
     end
   end
-  
+
   module Bar
     def b
       'ok Bar'
     end
   end
-  
+
   obj = Object.new
   obj.extend Foo, Bar
   p obj.a #=> "ok Foo"
   p obj.b #=> "ok Bar"
-  
+
   class Klass
     include Foo
     extend Bar
   end
-  
+
   p Klass.new.a #=> "ok Foo"
   p Klass.b     #=> "ok Bar"
-  
+
 extend の機能は、「特異クラスに対する [[m:Module#include]]」
 と言い替えることもできます。
 ただしその場合、フック用のメソッド
@@ -1093,20 +1093,20 @@ public メソッドだけ呼び出せれば良い場合は
 
   p -365.send(:abs) #=> 365
   p "ruby".send(:sub,/./,"R") #=> "Ruby"
-  
-  
+
+
   class Foo
     def foo() "foo" end
     def bar() "bar" end
     def baz() "baz" end
   end
-  
+
   # 任意のキーとメソッド(の名前)の関係をハッシュに保持しておく
   # レシーバの情報がここにはないことに注意
   methods = {1 => :foo,
     2 => :bar,
     3 => :baz}
-  
+
   # キーを使って関連するメソッドを呼び出す
   # レシーバは任意(Foo クラスのインスタンスである必要もない)
   p Foo.new.send(methods[1])      # => "foo"
@@ -1137,7 +1137,7 @@ public メソッドだけ呼び出せれば良い場合は
 
 --- _dump(limit) -> String
 
-[[m:Marshal.#dump]] において出力するオブジェクトがメソッド _dump 
+[[m:Marshal.#dump]] において出力するオブジェクトがメソッド _dump
 を定義している場合には、そのメソッドの結果が書き出されます。
 
 バージョン1.8.0以降では[[m:Object#marshal_dump]], [[m:Object#marshal_load]]の使用
@@ -1189,7 +1189,7 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラ�
 [[m:Marshal.#dump]] を制御するメソッドです。
 
 Marshal.dump(some) において、出力するオブジェクト some がメソッド marshal_dump を
-持つ場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。 
+持つ場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。
 
 marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
 これから書くプログラムでは _dump/_load ではなく
@@ -1282,23 +1282,23 @@ clone や dup は浅い(shallow)コピーであることに注意してくださ
   def obj.fuga
   end
   obj.freeze
-  
+
   p(obj.equal?(obj))          #=> true
   p(obj == obj)               #=> true
   p(obj.tainted?)             #=> true
   p(obj.frozen?)              #=> true
   p(obj.respond_to?(:fuga))   #=> true
-  
+
   obj_c = obj.clone
-  
+
   p(obj.equal?(obj_c))        #=> false
   p(obj == obj_c)             #=> true
   p(obj_c.tainted?)           #=> true
   p(obj_c.frozen?)            #=> true
   p(obj_c.respond_to?(:fuga)) #=> true
-  
+
   obj_d = obj.dup
-  
+
   p(obj.equal?(obj_d))        #=> false
   p(obj == obj_d)             #=> true
   p(obj_d.tainted?)           #=> true
@@ -1319,16 +1319,16 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 含まれている場合には使えません。
 
   obj = ["a","b","c"]
-  
+
   obj_d = obj.dup
   obj_d[0] << "PLUS"
-  
+
   p obj   #=> ["aPLUS", "b", "c"]
   p obj_d #=> ["aPLUS", "b", "c"]
-  
+
   obj_m = Marshal.load(Marshal.dump(obj))
   obj_m[1] << "PLUS"
-  
+
   p obj   #=> ["aPLUS", "b", "c"]
   p obj_m #=> ["aPLUS", "bPLUS", "c"]
 
@@ -1354,7 +1354,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
   a1 = "foo".freeze
   a1 = "bar"
   p a1 #=> "bar"
-  
+
   a2 = "foo".freeze
 #@since 2.5.0
   a2.replace("bar") # can't modify frozen String (RuntimeError)
@@ -1367,18 +1367,18 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
   a = [1].freeze
   p a.frozen?     #=> true
-  
+
   a[0] = "foo"
 #@since 2.5.0
   p a             # can't modify frozen Array (FrozenError)
 #@else
   p a             # can't modify frozen Array (RuntimeError)
 #@end
-  
+
   b = a.dup
   p b             #=> [1]
   p b.frozen?     #=> false
-  
+
   b[0] = "foo"
   p b             #=> ["foo"]
 
@@ -1504,7 +1504,7 @@ Rubyで実装されたメソッドで NotImplementedError が発生する場合�
       "Bonjour"
     end
   end
-  
+
   class D
     private
     def hello
@@ -1638,7 +1638,7 @@ false を返します。
       end
     end
   end
-  
+
   dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
   dic.find_2_in :Esperanto #=> "du"
 #@end
@@ -1735,19 +1735,19 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立�
 オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
   $SAFE = 1
-  
+
   some = "puts '@&%&(#!'"
   p some.tainted? #=> false
   eval(some) #=> @&%&(#!
-  
+
   some.taint
   p some.tainted? #=> true
   eval(some) # Insecure operation - eval (SecurityError)
-  
+
   some.untaint
   p some.tainted? #=> false
   eval(some) #=> @&%&(#!
-  
+
   p ENV['OS'].tainted? #=> true
 #@end
 
@@ -1898,7 +1898,7 @@ initialize という名前のメソッドは自動的に private に設定され
       @name = name
     end
   end
-  
+
   class Bar < Foo
     def initialize name, pass
       puts "initialize Bar"
@@ -1906,9 +1906,9 @@ initialize という名前のメソッドは自動的に private に設定され
       @pass = pass
     end
   end
-  
+
   it = Bar.new('myname','0500')
-  p it 
+  p it
   #=> initialize Bar
   #   initialize Foo
   #   #<Bar:0x2b68f08 @name="myname", @pass="0500">
@@ -1929,7 +1929,7 @@ initialize_copy は、Ruby インタプリタが知り得ない情報をコピ�
 報を initialize_copy でコピーするよう定義しておくことで、dup や clone
 を再定義する必要がなくなります。
 
-デフォルトの Object#initialize_copy は、 freeze チェックおよび型のチェックを行い self 
+デフォルトの Object#initialize_copy は、 freeze チェックおよび型のチェックを行い self
 を返すだけのメソッドです。
 
 initialize_copy という名前のメソッドは
