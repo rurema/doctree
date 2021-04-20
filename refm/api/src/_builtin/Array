@@ -2863,3 +2863,16 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 
 @see [[m:Enumerable#sum]]
 #@end
+#@since 3.1
+--- intersect?(other)   -> bool
+
+other と共通の要素が少なくとも1個あれば true を、なければ false を返します。
+
+#@samplecode 例
+a = [ 1, 2, 3 ]
+b = [ 3, 4, 5 ]
+c = [ 5, 6, 7 ]
+a.intersect?(b)   # => true
+a.intersect?(c)   # => false
+#@end
+#@end
