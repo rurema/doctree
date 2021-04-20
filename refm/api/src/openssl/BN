@@ -142,35 +142,48 @@ odd が真なら、生成される整数は奇数のみとなります。
 
 @param other かける数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#mod_mul]]
+
 --- **(other) -> OpenSSL::BN
 自身の other 乗を返します。
 
 @param other 指数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#mod_exp]]
 
 --- +(other) -> OpenSSL::BN
 自身と other の和を返します。
 
 @param other 足す整数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#mod_add]]
 
 --- -(other) -> OpenSSL::BN
 自身から other を引いた値を返します。
 
 @param other 引く整数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#mod_sub]]
 
 --- /(other) -> [OpenSSL::BN, OpenSSL::BN]
 自身を other で割った商と余りを配列で返します。
 
 @param other 除数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#mod_inverse]]
 
 --- <<(other) -> OpenSSL::BN
 自身を other ビット左シフトした値を返します。
 
+#@samplecode
+bn = 1.to_bn
+pp bn << 1    # => #<OpenSSL::BN 2>
+pp bn         # => #<OpenSSL::BN 1>
+#@end
+
 @param other シフトするビット数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#lshift!]]
 
 --- <=>(other) -> -1 | 0 | 1
 --- cmp(other) -> -1 | 0 | 1
@@ -201,20 +214,49 @@ OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
 --- >>(other) -> OpenSSL::BN
 自身を other ビット右シフトした値を返します。
 
+#@samplecode
+require 'openssl'
+
+bn = 2.to_bn
+bn >> 1    # => #<OpenSSL::BN 1>
+bn         # => #<OpenSSL::BN 2>
+#@end
+
 @param other シフトするビット数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#rshift!]]
 
 --- lshift!(n) -> self
 自身を n ビット左シフトします。
+[[m:OpenSSL::BN#<<]]と異なり、破壊的メソッドです。
+
+#@samplecode
+require 'openssl'
+
+bn = 1.to_bn
+bn.lshift!(2)   # => #<OpenSSL::BN 4>
+bn              # => #<OpenSSL::BN 4>
+#@end
 
 @param n シフトするビット数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#<<]]
 
 --- rshift!(n) -> self
 自身を n ビット右シフトします。
+[[m:OpenSSL::BN#>>]と異なり、破壊的メソッドです。
+
+#@samplecode
+require 'openssl'
+
+bn = 8.to_bn
+bn.rshift!(1)    # => #<OpenSSL::BN 4>
+bn               # => #<OpenSSL::BN 4>
+#@end
 
 @param n シフトするビット数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#>>]]
 
 --- bit_set?(n) -> bool
 自身の n ビット目が立っているなら真を返します。
@@ -334,6 +376,7 @@ OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
 
 @param m mod を取る数
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#sqr]]
 
 --- mod_sub(other, m) -> OpenSSL::BN
 (self - other) % m を返します。
@@ -440,6 +483,7 @@ a # => 129
 自身の2乗を計算します。
 
 @raise OpenSSL::BNError 計算時エラー
+@see [[m:OpenSSL::BN#mod_sqr]]
 
 --- to_bn -> self
 自分自身を返します。
