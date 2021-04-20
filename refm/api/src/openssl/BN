@@ -304,6 +304,13 @@ OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 1
 (self * r) % m == 1 となる r を返します。
 存在しない場合は例外 [[c:OpenSSL::BNError]] が発生します。
 
+#@samplecode
+require 'openssl'
+
+p 3.to_bn.mod_inverse(5) # => 2
+p (3 * 2) % 5            # => 1
+#@end
+
 @param m mod を取る数
 @raise OpenSSL::BNError 計算時エラー
 
@@ -355,6 +362,17 @@ OpenSSL::BN.new("128").num_bits # => 8
 
 --- num_bytes -> Integer
 自身を表現するのに使っているバイト数を返します。
+
+#@samplecode
+require 'openssl'
+
+p 0.to_bn.num_bytes   # => 0
+p 255.to_bn.num_bytes # => 1
+p 256.to_bn.num_bytes # => 2
+
+p  0b111_11111.to_bn.num_bytes # => 1
+p 0b1000_00000.to_bn.num_bytes # => 2
+#@end
 
 --- odd? -> bool
 自身が奇数である場合に真を返します。
