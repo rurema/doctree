@@ -37,6 +37,8 @@ OpenSSL::BN.new(1209) # => 1209
 @param base 文字列から整数に変換するときの基数
 @raise OpenSSL::BNError 変換に失敗した場合に発生します
 
+@see [[m:Integer#to_bn]]
+
 --- new(bn) -> OpenSSL::BN
 
 [[c:OpenSSL::BN]] を複製して返します。
@@ -484,10 +486,33 @@ OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 = class OpenSSL::BNError < OpenSSL::OpenSSLError
 [[c:OpenSSL::BN]] 関連のエラーを表す例外です。
 
+
 = reopen Integer
 == Instance Methods
+
 --- to_bn -> OpenSSL::BN
+
 Integer を同じ数を表す [[c:OpenSSL::BN]] のオブジェクトに
 変換します。
 
-現在のバージョンでは正しく実装されていません。
+#@samplecode
+#@until 2.5.0
+require 'pp'
+#@end
+require 'openssl'
+
+pp 5.to_bn     #=> #<OpenSSL::BN 5>
+pp (-5).to_bn  #=> #<OpenSSL::BN -5>
+#@end
+
+なお、実装は、以下のようになっています。
+
+#@samplecode
+class Integer
+  def to_bn
+    OpenSSL::BN::new(self)
+  end
+end
+#@end
+
+@see [[m:OpenSSL::BN.new]]
