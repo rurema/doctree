@@ -4,41 +4,41 @@ category Math
 bigdecimal は浮動小数点数演算ライブラリです。
 任意の精度で 10 進表現された浮動小数点数を扱えます。
 
-例:
-
-  require 'bigdecimal'
-  a = BigDecimal("0.123456789123456789")
-  b = BigDecimal("123456.78912345678", 40)
-  print a + b # => 0.123456912580245903456789E6
+#@samplecode
+require 'bigdecimal'
+a = BigDecimal("0.123456789123456789")
+b = BigDecimal("123456.78912345678", 40)
+print a + b # => 0.123456912580245903456789E6
+#@end
 
 一般的な 10 進数の計算でも有用です。2 進数の浮動小数点演算には微小な誤
 差があるのに対し、[[c:BigDecimal]] では正確な値を得る事ができます。
 
-例1: 0.0001 を 10000 回足す場合。
+#@samplecode 例1: 0.0001 を 10000 回足す場合。
+sum = 0
+for i in (1..10000)
+  sum = sum + 0.0001
+end
+print sum # => 0.9999999999999062
+#@end
 
-  sum = 0
-  for i in (1..10000)
-    sum = sum + 0.0001
-  end
-  print sum # => 0.9999999999999062
+#@samplecode  例2: 0.0001 を 10000 回足す場合。(BigDecimal)
+require 'bigdecimal'
 
-例2: 0.0001 を 10000 回足す場合。(BigDecimal)
+sum = BigDecimal("0")
+for i in (1..10000)
+  sum = sum + BigDecimal("0.0001")
+end
+print sum # => 0.1E1
+#@end
 
-  require 'bigdecimal'
+#@samplecode  例3: 1.2 - 1.0 と 0.2 との比較
+require "bigdecimal"
 
-  sum = BigDecimal("0")
-  for i in (1..10000)
-    sum = sum + BigDecimal("0.0001")
-  end
-  print sum # => 0.1E1
+(BigDecimal("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
 
-例3: 1.2 - 1.0 と 0.2 との比較
-
-  require "bigdecimal"
-
-  (BigDecimal("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
-
-  (1.2 - 1.0) == 0.2 # => false
+(1.2 - 1.0) == 0.2 # => false
+#@end
 
 === 特別な値
 
@@ -49,46 +49,52 @@ bigdecimal は浮動小数点数演算ライブラリです。
 
 [[c:BigDecimal]] による演算の際には無限大を表す値を返す場合があります。
 
-例:
-
-  require "bigdecimal"
-  BigDecimal("1.0") / BigDecimal("0.0")  #=> infinity
-  BigDecimal("-1.0") / BigDecimal("0.0")  #=> -infinity
+#@samplecode
+require "bigdecimal"
+BigDecimal("1.0") / BigDecimal("0.0")  #=> infinity
+BigDecimal("-1.0") / BigDecimal("0.0")  #=> -infinity
+#@end
 
 無限大を表す [[c:BigDecimal]] オブジェクトを作成する場合、
 [[m:Kernel.#BigDecimal]] の引数に "Infinity" や "-Infinity" を指定して
 ください。(大文字小文字を区別します)
 
-  require "bigdecimal"
-  BigDecimal("Infinity")  # => #<BigDecimal:f74a2ebc,'Infinity',4(4)>
-  BigDecimal("+Infinity") # => #<BigDecimal:f74a2e6c,'Infinity',4(4)>
-  BigDecimal("-Infinity") # => #<BigDecimal:f74a2e1c,'-Infinity',4(4)>
+#@samplecode
+require "bigdecimal"
+BigDecimal("Infinity")  # => #<BigDecimal:f74a2ebc,'Infinity',4(4)>
+BigDecimal("+Infinity") # => #<BigDecimal:f74a2e6c,'Infinity',4(4)>
+BigDecimal("-Infinity") # => #<BigDecimal:f74a2e1c,'-Infinity',4(4)>
 
-  BigDecimal("infinity")  # => #<BigDecimal:f74a2dcc,'0.0',4(4)>
-  BigDecimal("-infinity") # => #<BigDecimal:f74a2d7c,'-0.0',4(4)>
+BigDecimal("infinity")  # => #<BigDecimal:f74a2dcc,'0.0',4(4)>
+BigDecimal("-infinity") # => #<BigDecimal:f74a2d7c,'-0.0',4(4)>
+#@end
 
 ==== 非数(Not a Number)
 
 0 / 0 のような未定義の計算を行った場合、非数(Not a Number)を表す値を返
 します。
 
-例:
-
-  require "bigdecimal"
-  BigDecimal("0.0") / BigDecimal("0.0") # => #<BigDecimal:f74490d8,'NaN',4(24)>
+#@samplecode
+require "bigdecimal"
+BigDecimal("0.0") / BigDecimal("0.0") # => #<BigDecimal:f74490d8,'NaN',4(24)>
+#@end
 
 NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
 [[m:Kernel.#BigDecimal]] の引数に "NaN" を指定してください。(大文字小文
 字を区別します)
 
-  require "bigdecimal"
-  BigDecimal("NaN")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
+#@samplecode
+require "bigdecimal"
+BigDecimal("NaN")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
+#@end
 
 NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
 
-  require "bigdecimal"
-  BigDecimal("NaN") == 0.0               # => false
-  BigDecimal("NaN") == BigDecimal("NaN") # => false
+#@samplecode
+require "bigdecimal"
+BigDecimal("NaN") == 0.0               # => false
+BigDecimal("NaN") == BigDecimal("NaN") # => false
+#@end
 
 ==== +ゼロと-ゼロ
 
@@ -96,20 +102,26 @@ NaN はどのような値と比較しても一致しません。(NaN 自身を�
 
 負の非常に小さな [[c:BigDecimal]] の値は -0 を表す値になります。
 
-  require "bigdecimal"
-  BigDecimal("1.0") / BigDecimal("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
+#@samplecode
+require "bigdecimal"
+BigDecimal("1.0") / BigDecimal("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
+#@end
 
 正の非常に小さな [[c:BigDecimal]] の値は 0 を表す値になります。
 
-  require "bigdecimal"
-  BigDecimal("1.0") / BigDecimal("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
+#@samplecode
+require "bigdecimal"
+BigDecimal("1.0") / BigDecimal("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
+#@end
 
 精度については [[m:BigDecimal.mode]] も併せて参照してください。
 
 また、0.0 と -0.0 は比較した場合に同じ値であるとみなされます。
 
-  require "bigdecimal"
-  BigDecimal("0.0") == BigDecimal("-0.0") # => true
+#@samplecode
+require "bigdecimal"
+BigDecimal("0.0") == BigDecimal("-0.0") # => true
+#@end
 
 これは数学的には特に意味がない事に注意してください。数学的な 0 は符号を持ちません。
 
@@ -130,11 +142,13 @@ BigDecimal オブジェクトが右にあるオブジェクトを
 単に変換を止めるだけでエラーにはなりません。
 "10XX"なら 10、"XXXX"は 0 と扱われます。
 
-  require "bigdecimal"
-  require "bigdecimal/math"
+#@samplecode
+require "bigdecimal"
+require "bigdecimal/math"
 
-  a = BigMath.E(20)
-  c = a * "0.123456789123456789123456789"   # 文字を BigDecimal に変換してから計算
+a = BigMath.E(20)
+c = a * "0.123456789123456789123456789"   # 文字を BigDecimal に変換してから計算
+#@end
 
 無限大や非数を表す文字として、
 "Infinity"、"+Infinity"、"-Infinity"、"NaN" も使用できます
@@ -144,10 +158,12 @@ BigDecimal オブジェクトが右にあるオブジェクトを
 従って、BigDecimal オブジェクトが右にある場合も大抵は大丈夫です。
 ただ、現在の Ruby インタプリタの仕様上、文字列が左にあると計算できません。
 
-  require "bigdecimal"
-  require "bigdecimal/math"
-  a = BigMath.E(20)
-  c = "0.123456789123456789123456789" * a   # エラー
+#@samplecode
+require "bigdecimal"
+require "bigdecimal/math"
+a = BigMath.E(20)
+c = "0.123456789123456789123456789" * a   # エラー
+#@end
 
 必要性があるとは思いませんが、
 どうしてもと言う人は String オブジェクトを継承した新たなクラスを作成してから、
@@ -219,12 +235,14 @@ frac[0]=1234、frac[1]=5678、frac[2]=4321、 exponent=1、sign=2
 例えば、以下のようなプログラムは全く誤差無しで計算することができます。
 以下の例は、一行に一つの数値が書いてあるファイル file の合計数値を求めるものです。
 
-   require "bigdecimal"
-   file = File::open(....,"r")
-   s = BigDecimal("0")
-   while line = file.gets
-      s = s + line
-   end
+#@samplecode
+require "bigdecimal"
+file = File::open("digits.txt","r")
+s = BigDecimal("0")
+while line = file.gets
+  s = s + line
+end
+#@end
 
 この例を 2 進数で計算すると誤差が入る可能性があります。
 例えば 0.1 を2進で表現すると
@@ -292,76 +310,86 @@ c が必要とするメモリー領域は大きくなることに注意して下
 
   これらのメソッドは先頭 (最左) の数字からの桁数を指定できます。
 
-    BigDecimal("2").div(3,12) # 2.0/3.0 => 0.6666666666 67E0
+#@samplecode
+BigDecimal("2").div(3,12) # 2.0/3.0 => 0.6666666666 67E0
+#@end
 
 : truncate, round, ceil, floor
 
   これらのメソッドは小数点からの相対位置を指定して桁数を決定します。
 
-    BigDecimal("6.66666666666666").round(12) # => 0.6666666666 667E1
+#@samplecode
+BigDecimal("6.66666666666666").round(12) # => 0.6666666666 667E1
+#@end
 
 ==== 自分で精度をコントロールしたい場合
 
 自分で精度(有効桁数)をコントロールしたい場合は add、sub、mult、div 等のメソッドが使用できます。以下の円周率を計算するプログラム例のように、求める桁数は自分で指定することができます。
 
-  #!/usr/local/bin/ruby
+#@samplecode
+#!/usr/local/bin/ruby
 
-  require "bigdecimal"
-  #
-  # Calculates 3.1415.... (the number of times that a circle's diameter
-  # will fit around the circle) using J. Machin's formula.
-  #
-  def big_pi(sig) # sig: Number of significant figures
-    exp    = -sig
-    pi     = BigDecimal("0")
-    two    = BigDecimal("2")
-    m25    = BigDecimal("-0.04")
-    m57121 = BigDecimal("-57121")
+require "bigdecimal"
+#
+# Calculates 3.1415.... (the number of times that a circle's diameter
+# will fit around the circle) using J. Machin's formula.
+#
+def big_pi(sig) # sig: Number of significant figures
+  exp    = -sig
+  pi     = BigDecimal("0")
+  two    = BigDecimal("2")
+  m25    = BigDecimal("-0.04")
+  m57121 = BigDecimal("-57121")
 
-    u = BigDecimal("1")
-    k = BigDecimal("1")
-    w = BigDecimal("1")
-    t = BigDecimal("-80")
-    while (u.nonzero? && u.exponent >= exp)
-      t   = t*m25
-      u   = t.div(k,sig)
-      pi  = pi + u
-      k   = k+two
-    end
-
-    u = BigDecimal("1")
-    k = BigDecimal("1")
-    w = BigDecimal("1")
-    t = BigDecimal("956")
-    while (u.nonzero? && u.exponent >= exp )
-      t   = t.div(m57121,sig)
-      u   = t.div(k,sig)
-      pi  = pi + u
-      k   = k+two
-    end
-    pi
+  u = BigDecimal("1")
+  k = BigDecimal("1")
+  w = BigDecimal("1")
+  t = BigDecimal("-80")
+  while (u.nonzero? && u.exponent >= exp)
+    t   = t*m25
+    u   = t.div(k,sig)
+    pi  = pi + u
+    k   = k+two
   end
 
-  if $0 == __FILE__
-    if ARGV.size == 1
-      print "PI("+ARGV[0]+"):\n"
-      p big_pi(ARGV[0].to_i)
-    else
-      print "TRY: ruby pi.rb 1000 \n"
-    end
+  u = BigDecimal("1")
+  k = BigDecimal("1")
+  w = BigDecimal("1")
+  t = BigDecimal("956")
+  while (u.nonzero? && u.exponent >= exp )
+    t   = t.div(m57121,sig)
+    u   = t.div(k,sig)
+    pi  = pi + u
+    k   = k+two
   end
+  pi
+end
+
+if $0 == __FILE__
+  if ARGV.size == 1
+    print "PI("+ARGV[0]+"):\n"
+    p big_pi(ARGV[0].to_i)
+  else
+    print "TRY: ruby pi.rb 1000 \n"
+  end
+end
+#@end
 
 === その他
 
 以下のメソッド以外にも、(C ではない) Ruby ソースの形で提供されているものもあります。例えば、
 
-  require "bigdecimal/math.rb"
+#@samplecode
+require "bigdecimal/math.rb"
+#@end
 
 とすることで、sin や cos といった関数が使用できるようになります。
 使用方法など、詳細は [[lib:bigdecimal/math]] を参照して下さい。 その他、Float との相互変換などの
 メソッドが [[lib:bigdecimal/util]] でサポートされています。利用するには
 
-  require "bigdecimal/util.rb"
+#@samplecode
+require "bigdecimal/util.rb"
+#@end
 
 のようにします。詳細は [[lib:bigdecimal/util]] を参照して下さい。
 
