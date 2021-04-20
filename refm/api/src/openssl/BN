@@ -207,7 +207,7 @@ OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
 --- ==(other) -> bool
 --- ===(other) -> bool
 --- eql?(other) -> bool
-自身と other が等しい場合に真を返します。
+自身と other が等しい場合に true を返します。
 
 @param other 比較する数
 
@@ -259,7 +259,7 @@ bn               # => #<OpenSSL::BN 4>
 @see [[m:OpenSSL::BN#>>]]
 
 --- bit_set?(n) -> bool
-自身の n ビット目が立っているなら真を返します。
+自身の n ビット目が立っているなら true を返します。
 
 #@samplecode
 require 'openssl'
@@ -269,6 +269,7 @@ OpenSSL::BN.new("129").bit_set?(1) # => false
 #@end
 
 @param n 調べるビットの位置
+@see   [[m:OpenSSL::set_bit!]]
 
 --- clear_bit!(n) -> self
 自身の n ビット目を0にします。
@@ -283,6 +284,7 @@ a # => 128
 
 @param n 0にするビットの位置
 @raise OpenSSL::BNError 計算時エラー
+@see   [[m:OpenSSL::set_bit!]]
 
 --- coerce(other) -> Array
 自身と other が同じクラスになるよう、自身か other を変換し
@@ -308,10 +310,22 @@ GCD(最大公約数)を返します。
 @raise OpenSSL::BNError 計算時エラー
 
 --- mask_bits!(n) -> self
-自身を下位 n ビットでマスクします。
+自身を下位 n ビットでマスクし、破壊的に変更します。
 
 n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 が発生します。
+
+#@samplecode
+require 'openssl'
+
+bn = 0b1111_1111.to_bn
+
+bn.mask_bits!(8)
+p "%b" % bn      # => "11111111"
+
+bn.mask_bits!(3)
+p "%b" % bn      # =>     "111"
+#@end
 
 @param n マスクするビット数
 @raise OpenSSL::BNError 計算時エラー
@@ -420,14 +434,14 @@ p 0b1000_00000.to_bn.num_bytes # => 2
 #@end
 
 --- odd? -> bool
-自身が奇数である場合に真を返します。
+自身が奇数である場合に true を返します。
 
 --- one? -> bool
-自身が1である場合に真を返します。
+自身が1である場合に true を返します。
 
 --- prime? -> bool
 --- prime?(checks) -> bool
-自身が素数であるなら真を返します。
+自身が素数であるなら true を返します。
 
 Miller-Rabin 法により確率的に判定します。
 checkで指定した回数だけ繰り返します。
@@ -439,7 +453,7 @@ checkで指定した回数だけ繰り返します。
 @see [[m:OpenSSL::BN#prime_fasttest?]]
 
 --- prime_fasttest?(checks=nil, vtrivdiv=true) -> bool
-自身が素数であるなら真を返します。
+自身が素数であるなら true を返します。
 
 vtrivdiv が真である場合には、 Miller-Rabin 法での
 判定の前に小さな素数で割ることで素数か否かを
@@ -478,6 +492,7 @@ a # => 129
 
 @param n 1にするビットの位置
 @raise OpenSSL::BNError 計算時エラー
+@see   [[m:OpenSSL::clear_bit!]], [[m:OpenSSL::bit_set?]]
 
 --- sqr -> OpenSSL::BN
 自身の2乗を計算します。
@@ -566,7 +581,7 @@ OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 @see [[m:OpenSSL::BN#cmp]]
 
 --- zero? -> bool
-自身が0である場合に真を返します。
+自身が 0 である場合に true を返します。
 
 = class OpenSSL::BNError < OpenSSL::OpenSSLError
 [[c:OpenSSL::BN]] 関連のエラーを表す例外です。
