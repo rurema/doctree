@@ -258,7 +258,7 @@ p :xxx <=> :aaa  # => 1
 p :foo <=> "foo" # => nil
 #@end
 
-@see [[m:String#<=>]], [[m:String#casecmp]]
+@see [[m:String#<=>]], [[m:Symbol#casecmp]]
 
 --- casecmp(other) -> -1 | 0 | 1 | nil
 
