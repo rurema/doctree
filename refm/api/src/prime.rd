@@ -140,10 +140,10 @@ Prime.instance.prime_division と同じです。
 
 #@samplecode 例
 require 'prime'
-Prime.each(6).each{|prime| prime }  # => 5
-Prime.each(7).each{|prime| prime }  # => 7
-Prime.each(10).each{|prime| prime } # => 7
-Prime.each(11).each{|prime| prime } # => 11
+Prime.each(6){|prime| prime }  # => 5
+Prime.each(7){|prime| prime }  # => 7
+Prime.each(10){|prime| prime } # => 7
+Prime.each(11){|prime| prime } # => 11
 #@end
 
 #@samplecode 例: 30以下の双子素数
