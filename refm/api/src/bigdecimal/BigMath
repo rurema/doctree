@@ -22,12 +22,11 @@ x に正の無限大を指定した場合は正の無限大を返します。負
 
 @raise ArgumentError prec に 0 以下の数値が指定された場合に発生します。
 
-例:
+#@samplecode
+require "bigdecimal/math"
 
-
-  require "bigdecimal/math"
-
-  puts BigMath::exp(BigDecimal('1'), 10) #=> 0.2718281828E1
+puts BigMath::exp(BigDecimal('1'), 10) #=> 0.2718281828E1
+#@end
 
 
 --- log(x, prec) -> BigDecimal
@@ -48,10 +47,8 @@ x に無限大を指定した場合は無限大を返します。NaN を指定�
 
 @raise ArgumentError prec に 0 以下の数値が指定された場合に発生します。
 
-例:
+#@samplecode
+require "bigdecimal/math"
 
-
-  require "bigdecimal/math"
-
-  puts BigMath::log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
-
+puts BigMath::log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
+#@end
