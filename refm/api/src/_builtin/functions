@@ -1574,10 +1574,14 @@ to_s メソッドにより文字列に変換してから出力します。
 
 @see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
+#@since 3.0.0
+--- warn(*message, uplevel: nil, category: nil) -> nil
+#@else
 #@since 2.5.0
 --- warn(*message, uplevel: nil) -> nil
 #@else
 --- warn(*message) -> nil
+#@end
 #@end
 
 message を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]]
@@ -1600,6 +1604,9 @@ nil
 #@since 2.5.0
 @param uplevel いくつ前の呼び出し元のファイル名と行番号を表示するかを0以上の数値で指定します。 nil の場合は表示しません。
 #@end
+#@since 3.0.0
+@param category 警告のカテゴリを指定します。サポートされている category については [[m:Warning.[] ]] を参照してください。
+#@end
 @raise IOError 標準エラー出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
@@ -1617,6 +1624,18 @@ def foo
   warn("test message", uplevel: 2) # => test message
 end
 foo
+#@end
+#@end
+
+#@since 3.0.0
+#@samplecode category の例
+Warning[:deprecated] = true # 非推奨の警告を表示する
+warn("deprecated!!", category: :deprecated)
+# => deprecated!
+
+Warning[:deprecated] = false # 非推奨の警告を表示しない
+warn("deprecated!!", category: :deprecated)
+# 警告は出力されない
 #@end
 #@end
 
