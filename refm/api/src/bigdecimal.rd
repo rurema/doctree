@@ -8,7 +8,7 @@ bigdecimal は浮動小数点数演算ライブラリです。
 require 'bigdecimal'
 a = BigDecimal("0.123456789123456789")
 b = BigDecimal("123456.78912345678", 40)
-print a + b # => 0.123456912580245903456789E6
+print a + b # => 0.123456912580245903456789e6
 #@end
 
 一般的な 10 進数の計算でも有用です。2 進数の浮動小数点演算には微小な誤
@@ -29,7 +29,7 @@ sum = BigDecimal("0")
 for i in (1..10000)
   sum = sum + BigDecimal("0.0001")
 end
-print sum # => 0.1E1
+print sum # => 0.1e1
 #@end
 
 #@samplecode  例3: 1.2 - 1.0 と 0.2 との比較
@@ -51,8 +51,8 @@ require "bigdecimal"
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("1.0") / BigDecimal("0.0")  #=> infinity
-BigDecimal("-1.0") / BigDecimal("0.0")  #=> -infinity
+BigDecimal("1.0") / BigDecimal("0.0")  #=> Infinity
+BigDecimal("-1.0") / BigDecimal("0.0")  #=> -Infinity
 #@end
 
 無限大を表す [[c:BigDecimal]] オブジェクトを作成する場合、
@@ -61,12 +61,9 @@ BigDecimal("-1.0") / BigDecimal("0.0")  #=> -infinity
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("Infinity")  # => #<BigDecimal:f74a2ebc,'Infinity',4(4)>
-BigDecimal("+Infinity") # => #<BigDecimal:f74a2e6c,'Infinity',4(4)>
-BigDecimal("-Infinity") # => #<BigDecimal:f74a2e1c,'-Infinity',4(4)>
-
-BigDecimal("infinity")  # => #<BigDecimal:f74a2dcc,'0.0',4(4)>
-BigDecimal("-infinity") # => #<BigDecimal:f74a2d7c,'-0.0',4(4)>
+BigDecimal("Infinity")  # => Infinity
+BigDecimal("+Infinity") # => Infinity
+BigDecimal("-Infinity") # => -Infinity
 #@end
 
 ==== 非数(Not a Number)
@@ -76,7 +73,7 @@ BigDecimal("-infinity") # => #<BigDecimal:f74a2d7c,'-0.0',4(4)>
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("0.0") / BigDecimal("0.0") # => #<BigDecimal:f74490d8,'NaN',4(24)>
+BigDecimal("0.0") / BigDecimal("0.0") # => NaN
 #@end
 
 NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
@@ -85,7 +82,7 @@ NaN を表す [[c:BigDecimal]] オブジェクトを作成する場合、
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("NaN")  # => #<BigDecimal:a0e49e4,'NaN',4(4)>
+BigDecimal("NaN")  # => NaN
 #@end
 
 NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
@@ -104,14 +101,14 @@ BigDecimal("NaN") == BigDecimal("NaN") # => false
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("1.0") / BigDecimal("-Infinity") # => #<BigDecimal:f74a9f64,'-0.0',4(20)>
+BigDecimal("1.0") / BigDecimal("-Infinity") # => -0.0
 #@end
 
 正の非常に小さな [[c:BigDecimal]] の値は 0 を表す値になります。
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("1.0") / BigDecimal("Infinity") # => #<BigDecimal:f74a9e88,'0.0',4(20)>
+BigDecimal("1.0") / BigDecimal("Infinity") # => 0.0
 #@end
 
 精度については [[m:BigDecimal.mode]] も併せて参照してください。
@@ -311,7 +308,8 @@ c が必要とするメモリー領域は大きくなることに注意して下
   これらのメソッドは先頭 (最左) の数字からの桁数を指定できます。
 
 #@samplecode
-BigDecimal("2").div(3,12) # 2.0/3.0 => 0.6666666666 67E0
+require "bigdecimal"
+BigDecimal("2").div(3,12) # 2.0/3.0 => 0.666666666667e0
 #@end
 
 : truncate, round, ceil, floor
@@ -319,7 +317,8 @@ BigDecimal("2").div(3,12) # 2.0/3.0 => 0.6666666666 67E0
   これらのメソッドは小数点からの相対位置を指定して桁数を決定します。
 
 #@samplecode
-BigDecimal("6.66666666666666").round(12) # => 0.6666666666 667E1
+require "bigdecimal"
+BigDecimal("6.66666666666666").round(12) # => 0.6666666666667e1
 #@end
 
 ==== 自分で精度をコントロールしたい場合
