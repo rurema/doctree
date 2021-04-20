@@ -8,16 +8,16 @@ require forwardable
 ライブラリの中心にあるのは [[c:Prime]] クラスで、これは素数全体を表すシングルトンです。また、素数性と素因数分解に関するメソッドを [[c:Integer]] に追加します。
 さらに、 Prime クラスの機能を実現するための低水準のクラスも幾つか提供されています。
 
-=== 例
+#@samplecode 例
+require 'prime'
 
-  require 'prime'
+Prime.each(100) do |prime|
+  p prime #=> 2, 3, 5, 7, 11, ..., 97
+end
 
-  Prime.each(100) do |prime|
-    p prime #=> 2, 3, 5, 7, 11, ..., 97
-  end
-
-  2.prime? #=> true
-  4.prime? #=> false
+2.prime? #=> true
+4.prime? #=> false
+#@end
 
 === 生成器
 
@@ -25,7 +25,7 @@ require forwardable
 生成器は擬似素数の列挙方法の実装を提供します。また列挙状態や列挙の上界を記憶する機能もあります。
 更に、 [[c:Enumerator]] と互換性のある外部イテレータでもあります。
 
-状況に応じて適切な疑似素数生成アルゴリズムは異なるので、いくつかの生成器の実装が用意されています。 
+状況に応じて適切な疑似素数生成アルゴリズムは異なるので、いくつかの生成器の実装が用意されています。
 [[c:Prime::PseudoPrimeGenerator]] は生成器の基底となるクラスです。
 
 : [[c:Prime::EratosthenesGenerator]]
@@ -53,10 +53,11 @@ Prime クラスはシングルトンであると考えてください。Prime �
 
 なお、利便性のためにデフォルトインスタンスのメソッドをクラスメソッドとしても利用できます。
 
-例:
-  require 'prime'
-  Prime.instance.prime?(2)  #=> true
-  Prime.prime?(2)           #=> true
+#@samplecode 例
+require 'prime'
+Prime.instance.prime?(2)  #=> true
+Prime.prime?(2)           #=> true
+#@end
 
 
 == Class Methods
@@ -137,26 +138,30 @@ Prime.instance.prime_division と同じです。
 @return ブロックの最後に評価された値を返します。
         ブロックが与えられなかった場合は、[[c:Enumerator]] と互換性のある外部イテレータを返します。
 
-=== 例:
-  require 'prime'
-  Prime.each(6).each{|prime| prime }  # => 5
-  Prime.each(7).each{|prime| prime }  # => 7
-  Prime.each(10).each{|prime| prime } # => 7
-  Prime.each(11).each{|prime| prime } # => 11
+#@samplecode 例
+require 'prime'
+Prime.each(6).each{|prime| prime }  # => 5
+Prime.each(7).each{|prime| prime }  # => 7
+Prime.each(10).each{|prime| prime } # => 7
+Prime.each(11).each{|prime| prime } # => 11
+#@end
 
-=== 例: 30以下の双子素数
-  require 'prime'
-  Prime.each(30).each_cons(2).select{|p,r| r-p == 2} 
-    #=> [[3, 5], [5, 7], [11, 13], [17, 19]]
+#@samplecode 例: 30以下の双子素数
+require 'prime'
+Prime.each(30).each_cons(2).select{|p,r| r-p == 2}
+#=> [[3, 5], [5, 7], [11, 13], [17, 19]]
+#@end
 
 === 注
 このメソッドに、真の素数列でない疑似素数を与えるべきではありません。
 
 このメソッドは、素数列の外部イテレータを内部イテレータに変換してRubyらしいプログラミングを提供することが責務です。独自に素数性の保障するのはメソッドの責務ではありません。従って、次のように精度の低い素数生成器を与えると、真に素数とは限らない数列が発生します。
- require 'prime'
- Prime.each(50, Prime::Generator23.new) do |n|
-   p n #=> [2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49]
- end
+#@samplecode 例
+require 'prime'
+Prime.each(50, Prime::Generator23.new) do |n|
+  p n #=> [2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49]
+end
+#@end
 
 @see [[m:Prime.each]], [[c:Prime::EratosthenesGenerator]], [[c:Prime::TrialDivisionGenerator]], [[c:Prime::Generator23]]
 
@@ -170,10 +175,11 @@ Prime.instance.prime_division と同じです。
 @param pd 整数のペアの配列を指定します。含まれているペアの第一要素は素因数を、
           第二要素はその素因数の指数をあらわします。
 
-例:
-  require 'prime'
-  Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
-  Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
+#@samplecode 例
+require 'prime'
+Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
+Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
+#@end
 
 @see [[m:Prime.int_from_prime_division]]
 
@@ -203,10 +209,11 @@ Prime.instance.prime_division と同じです。
 
 @raise ZeroDivisionError 与えられた数値がゼロである場合に発生します。
 
-例:
-    require 'prime'
-    Prime.prime_division(12) #=> [[2,2], [3,1]]
-    Prime.prime_division(10) #=> [[2,1], [5,1]]
+#@samplecode 例
+require 'prime'
+Prime.prime_division(12) #=> [[2,2], [3,1]]
+Prime.prime_division(10) #=> [[2,1], [5,1]]
+#@end
 
 @see [[m:Prime.prime_division]], [[c:Prime::EratosthenesGenerator]], [[c:Prime::TrialDivisionGenerator]], [[c:Prime::Generator23]]
 
@@ -274,15 +281,16 @@ include Enumerable
 
 @return ブロックを与えられた場合は self を返します。 ブロックを与えられなかった場合は Enumerator を返します。
 
-例:
-  require 'prime'
-  Prime::EratosthenesGenerator.new(10).each_with_index do |prime, index|
-    p [prime, index]
-  end
-  # [2, 0]
-  # [3, 1]
-  # [5, 2]
-  # [7, 3]
+#@samplecode 例
+require 'prime'
+Prime::EratosthenesGenerator.new(10).each_with_index do |prime, index|
+  p [prime, index]
+end
+# [2, 0]
+# [3, 1]
+# [5, 2]
+# [7, 3]
+#@end
 
 @see [[m:Enumerator#with_index]]
 
@@ -311,29 +319,31 @@ include Enumerable
 
 また内部的な列挙位置を進めます。
 
-例:
- require 'prime'
- generator = Prime::EratosthenesGenerator.new
- p generator.next #=> 2
- p generator.next #=> 3
- p generator.succ #=> 5
- p generator.succ #=> 7
- p generator.next #=> 11
+#@samplecode 例
+require 'prime'
+generator = Prime::EratosthenesGenerator.new
+p generator.next #=> 2
+p generator.next #=> 3
+p generator.succ #=> 5
+p generator.succ #=> 7
+p generator.next #=> 11
+#@end
 
 --- rewind -> nil
 
 列挙状態を巻き戻します。
 
-例:
- require 'prime'
- generator = Prime::EratosthenesGenerator.new
- p generator.next #=> 2
- p generator.next #=> 3
- p generator.next #=> 5
+#@samplecode 例
+require 'prime'
+generator = Prime::EratosthenesGenerator.new
+p generator.next #=> 2
+p generator.next #=> 3
+p generator.next #=> 5
 
- generator.rewind
+generator.rewind
 
- p generator.next #=> 2
+p generator.next #=> 2
+#@end
 
 
 = class Prime::TrialDivisionGenerator < Prime::PseudoPrimeGenerator
@@ -395,10 +405,11 @@ include Enumerable
 
 @see [[m:Prime#int_from_prime_division]]
 
-例:
-  require 'prime'
-  Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
-  Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
+#@samplecode 例
+require 'prime'
+Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
+Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
+#@end
 
 
 --- each_prime(upper_bound){|prime| ... } -> object
@@ -427,20 +438,21 @@ include Enumerable
 
 @see [[m:Prime#prime_division]]
 
-例:
-    require 'prime'
-    12.prime_division #=> [[2,2], [3,1]]
-    10.prime_division #=> [[2,1], [5,1]]
+#@samplecode 例
+require 'prime'
+12.prime_division #=> [[2,2], [3,1]]
+10.prime_division #=> [[2,1], [5,1]]
+#@end
 
 --- prime? -> bool
 
 自身が素数である場合、真を返します。
 そうでない場合は偽を返します。
 
-例:
-
-  require 'prime'
-  1.prime? # => false
-  2.prime? # => true
+#@samplecode 例
+require 'prime'
+1.prime? # => false
+2.prime? # => true
+#@end
 
 @see [[m:Prime#prime?]]

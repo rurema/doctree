@@ -16,8 +16,10 @@
 
 @raise RangeError 対応するオブジェクトが存在しなければ発生します。
 
- a = "hoge"
- p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+#@samplecode 例
+a = "hoge"
+p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+#@end
 
 --- define_finalizer(obj, proc)         -> Array
 --- define_finalizer(obj) {|id| ...}    -> Array
@@ -43,15 +45,17 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数と�
 
 以下は、define_finalizer の使い方の悪い例です。
 
-  class Foo
-    def initialize
-      ObjectSpace.define_finalizer(self) {
-        puts "foo"
-      }
-    end
+#@samplecode 悪い例
+class Foo
+  def initialize
+    ObjectSpace.define_finalizer(self) {
+      puts "foo"
+    }
   end
-  Foo.new
-  GC.start
+end
+Foo.new
+GC.start
+#@end
 
 これは、渡された proc の self が obj を参照しつ
 づけるため。そのオブジェクトが GC の対象になりません。
@@ -60,39 +64,43 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数と�
 良い例になっています。これは、クラスのコンテキストで [[c:Proc]] を
 生成することで上記の問題を回避しています。
 
-  class Bar
-    def Bar.callback
-      proc {
-        puts "bar"
-      }
-    end
-    def initialize
-      ObjectSpace.define_finalizer(self, Bar.callback)
-    end
+#@samplecode 例
+class Bar
+  def Bar.callback
+    proc {
+      puts "bar"
+    }
   end
-  Bar.new
-  GC.start
+  def initialize
+    ObjectSpace.define_finalizer(self, Bar.callback)
+  end
+end
+Bar.new
+GC.start
+#@end
 
 proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
 これは、スクリプトのメイン処理が GC の発生によって非同期に中断され
 るのを防ぐためです。不安なうちは -d オプションで
 事前に例外の発生の有無を確認しておいた方が良いでしょう。
 
-  class Baz
-    def initialize
-      ObjectSpace.define_finalizer self, eval(%q{
-        proc {
-          raise "baz" rescue puts $!
-          raise "baz2"
-          puts "baz3"
-        }
-      }, TOPLEVEL_BINDING)
-    end
+#@samplecode 例
+class Baz
+  def initialize
+    ObjectSpace.define_finalizer self, eval(%q{
+      proc {
+        raise "baz" rescue puts $!
+        raise "baz2"
+        puts "baz3"
+      }
+    }, TOPLEVEL_BINDING)
   end
-  Baz.new
-  GC.start
-  
-  # => baz
+end
+Baz.new
+GC.start
+
+# => baz
+#@end
 
 @see [[d:spec/rubycmd]]
 
@@ -237,6 +245,8 @@ GC.start
 
 @raise TypeError 引数に [[c:Hash]] 以外を与えた場合、発生します。
 
-  ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
+#@samplecode 例
+ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
+#@end
 
 #@end

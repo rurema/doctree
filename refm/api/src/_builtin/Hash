@@ -47,8 +47,10 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
 何らかの理由で変換できないときには nil を返します。
 このメソッドは引数がハッシュであるかどうかを調べるために使えます。
 
-   Hash.try_convert({1=>2})   # => {1=>2}
-   Hash.try_convert("1=>2")   # => nil
+#@samplecode
+Hash.try_convert({1=>2})   # => {1=>2}
+Hash.try_convert("1=>2")   # => nil
+#@end
 
 --- [](other) -> Hash
 
@@ -138,10 +140,12 @@ ifnoneを省略した Hash.new は {} と同じです。
 デフォルト値として、毎回同一のオブジェクトifnoneを返します。
 それにより、一箇所のデフォルト値の変更が他の値のデフォルト値にも影響します。
 
-  h = Hash.new([])
-  h[0] << 0
-  h[1] << 1
-  p h.default #=> [0, 1]
+#@samplecode
+h = Hash.new([])
+h[0] << 0
+h[1] << 1
+p h.default #=> [0, 1]
+#@end
 
 これを避けるには、破壊的でないメソッドで再代入する必要が有ります。
 また、このようなミスを防ぐためにもifnoneは freeze して破壊的操作を禁止しておくのが無難です。
@@ -150,26 +154,28 @@ ifnoneを省略した Hash.new は {} と同じです。
 
 @param ifnone キーに対応する値が存在しない時のデフォルト値です。
 
-  h = Hash.new([])
+#@samplecode 例
+h = Hash.new([])
 
-  p h[1]                  #=> []
-  p h[1].object_id        #=> 6127150
-  p h[1] << "bar"         #=> ["bar"]
-  p h[1]                  #=> ["bar"]
-  
-  p h[2]                  #=> ["bar"]
-  p h[2].object_id        #=> 6127150
-  
-  p h                     #=> {}
+p h[1]                  #=> []
+p h[1].object_id        #=> 6127150
+p h[1] << "bar"         #=> ["bar"]
+p h[1]                  #=> ["bar"]
+
+p h[2]                  #=> ["bar"]
+p h[2].object_id        #=> 6127150
+
+p h                     #=> {}
 
 
-  h = Hash.new([].freeze)
-  h[0] += [0] #破壊的でないメソッドはOK
-  h[1] << 1
+h = Hash.new([].freeze)
+h[0] += [0] #破壊的でないメソッドはOK
+h[1] << 1
 #@since 2.5.0
-  # エラー: can't modify frozen Array (FrozenError)
+# エラー: can't modify frozen Array (FrozenError)
 #@else
-  # エラー: can't modify frozen Array (RuntimeError)
+# エラー: can't modify frozen Array (RuntimeError)
+#@end
 #@end
 
 --- new {|hash, key| ... } -> Hash
@@ -182,40 +188,42 @@ ifnoneを省略した Hash.new は {} と同じです。
 
 @raise ArgumentError ブロックと通常引数を同時に与えると発生します。
 
-  # ブロックではないデフォルト値は全部同一のオブジェクトなので、
-  # 破壊的変更によって他のキーに対応する値も変更されます。
-  h = Hash.new("foo")
-  
-  p h[1]                  #=> "foo"
-  p h[1].object_id        #=> 6127170
-  p h[1] << "bar"         #=> "foobar"
-  p h[1]                  #=> "foobar"
-  
-  p h[2]                  #=> "foobar"
-  p h[2].object_id        #=> 6127170
-  
-  p h                     #=> {}
-  
-  # ブロックを与えると、対応する値がまだ無いキーが呼び出される度に
-  # ブロックを評価するので、全て別のオブジェクトになります。
-  h = Hash.new {|hash, key| hash[key] = "foo"}
-  
-  p h[1]                  #=> "foo"
-  p h[1].object_id        #=> 6126900
-  p h[1] << "bar"         #=> "foobar"
-  p h[1]                  #=> "foobar"
-  
-  p h[2]                  #=> "foo"
-  p h[2].object_id        #=> 6126840
-  
-  p h                     #=> {1=>"foobar", 2=>"foo"}
+#@samplecode 例
+# ブロックではないデフォルト値は全部同一のオブジェクトなので、
+# 破壊的変更によって他のキーに対応する値も変更されます。
+h = Hash.new("foo")
 
-  # 値が設定されていないときに(fetchのように)例外をあげるようにもできる
-  h = Hash.new {|hash, key|
-                  raise(IndexError, "hash[#{key}] has no value")
-               }
-  h[1]
-  # エラー hash[1] has no value (IndexError)
+p h[1]                  #=> "foo"
+p h[1].object_id        #=> 6127170
+p h[1] << "bar"         #=> "foobar"
+p h[1]                  #=> "foobar"
+
+p h[2]                  #=> "foobar"
+p h[2].object_id        #=> 6127170
+
+p h                     #=> {}
+
+# ブロックを与えると、対応する値がまだ無いキーが呼び出される度に
+# ブロックを評価するので、全て別のオブジェクトになります。
+h = Hash.new {|hash, key| hash[key] = "foo"}
+
+p h[1]                  #=> "foo"
+p h[1].object_id        #=> 6126900
+p h[1] << "bar"         #=> "foobar"
+p h[1]                  #=> "foobar"
+
+p h[2]                  #=> "foo"
+p h[2].object_id        #=> 6126840
+
+p h                     #=> {1=>"foobar", 2=>"foo"}
+
+# 値が設定されていないときに(fetchのように)例外をあげるようにもできる
+h = Hash.new {|hash, key|
+                raise(IndexError, "hash[#{key}] has no value")
+             }
+h[1]
+# エラー hash[1] has no value (IndexError)
+#@end
 
 @see [[m:Hash#default=]],[[m:Hash#default]],[[m:Hash#default_proc]]
 
@@ -246,8 +254,10 @@ foo({k: 1}) # => false
 
 ハッシュの全値の配列を返します。
 
-   h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-   p h1.values         #=> [100, ["some"], "c"]
+#@samplecode 例
+h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+p h1.values         #=> [100, ["some"], "c"]
+#@end
 
 @see [[m:Hash#keys]],[[m:Hash#to_a]]
 
@@ -255,8 +265,10 @@ foo({k: 1}) # => false
 
 キーと値からなる 2 要素の配列を並べた配列を生成して返します。
 
-   h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-   p h1.to_a           #=> [["a", 100], [2, ["some"]], [:c, "c"]]
+#@samplecode 例
+h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+p h1.to_a           #=> [["a", 100], [2, ["some"]], [:c, "c"]]
+#@end
 
 @see [[m:Hash#keys]],[[m:Hash#values]]
 
@@ -264,8 +276,10 @@ foo({k: 1}) # => false
 
 全キーの配列を返します。
 
-   h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-   p h1.keys           #=> ["a", 2, :c]
+#@samplecode 例
+h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+p h1.keys           #=> ["a", 2, :c]
+#@end
 
 @see [[m:Hash#values]],[[m:Hash#to_a]]
 
@@ -273,10 +287,11 @@ foo({k: 1}) # => false
 
 self を返します。
 
-例:
-  hash = {}
-  p hash.to_hash         # => {}
-  p hash.to_hash == hash # => true
+#@samplecode 例
+hash = {}
+p hash.to_hash         # => {}
+p hash.to_hash == hash # => true
+#@end
 
 @see [[m:Object#to_hash]], [[m:Hash#to_h]]
 
@@ -340,7 +355,9 @@ h.size          #=> 3
 
 ハッシュが空の時、真を返します。
 
-  puts({}.empty?) #=> true
+#@samplecode 例
+puts({}.empty?) #=> true
+#@end
 
 --- invert -> Hash
 
@@ -348,8 +365,10 @@ h.size          #=> 3
 
 異なるキーに対して等しい値が登録されている場合、最後に定義されている値が使用されます。
 
-  h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
-  p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
+#@samplecode 例
+h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
+p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
+#@end
 
 === 参考
 値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
@@ -377,18 +396,20 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
 @param default 該当するキーが登録されていない時の返り値を指定します。
 @raise  KeyError   引数defaultもブロックも与えられてない時、キーの探索に失敗すると発生します。
 
-  h = {one: nil}
-  p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
-  p h.fetch(:one)                          #=> nil
-  p h.fetch(:two)                          # エラー key not found (KeyError)
-  p h.fetch(:two,"error")                  #=> "error"
-  p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
-  p h.fetch(:two, "error"){|key|           #=> "two not exist"
-      "#{key} not exit"                    #  warning: block supersedes default value argument
-    }                                      #  警告が表示される。
-  
-  h.default = "default"
-  p h.fetch(:two)                          # エラー key not found (KeyError)
+#@samplecode 例
+h = {one: nil}
+p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
+p h.fetch(:one)                          #=> nil
+p h.fetch(:two)                          # エラー key not found (KeyError)
+p h.fetch(:two,"error")                  #=> "error"
+p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
+p h.fetch(:two, "error"){|key|           #=> "two not exist"
+    "#{key} not exist"                   #  warning: block supersedes default value argument
+  }                                      #  警告が表示される。
+
+h.default = "default"
+p h.fetch(:two)                          # エラー key not found (KeyError)
+#@end
 
 @see [[m:Hash#[] ]]
 
@@ -408,11 +429,13 @@ self にデフォルト値が設定されていても無視されます（挙動
 
 @raise KeyError ブロックが与えられてない時にキーの探索に失敗すると発生します。
 
-  h = { "cat" => "feline", "dog" => "canine", "cow" => "bovine" }
+#@samplecode 例
+h = { "cat" => "feline", "dog" => "canine", "cow" => "bovine" }
 
-  h.fetch_values("cow", "cat")                   # => ["bovine", "feline"]
-  h.fetch_values("cow", "bird")                  # raises KeyError
-  h.fetch_values("cow", "bird") { |k| k.upcase } # => ["bovine", "BIRD"]
+h.fetch_values("cow", "cat")                   # => ["bovine", "feline"]
+h.fetch_values("cow", "bird")                  # raises KeyError
+h.fetch_values("cow", "bird") { |k| k.upcase } # => ["bovine", "BIRD"]
+#@end
 
 @see [[m:Hash#values_at]], [[m:Hash#fetch]]
 #@end
@@ -458,10 +481,12 @@ key に対して value を関連づけます。value を返し
 @param value 値を指定します。
 
   
-  h = {}
-  
-  h[:key] = "value"
-  p h #=>{:key => "value"}
+#@samplecode 例
+h = {}
+
+h[:key] = "value"
+p h #=>{:key => "value"}
+#@end
 
 @see [[m:Hash#[] ]]
 
@@ -472,14 +497,16 @@ key に対して value を関連づけます。value を返し
 空にした後のselfを返します。
 デフォルト値の設定はクリアされません。
 
-  h = Hash.new("default value")
-  h[:some] = "some"
-  p h #=> {:some=>"some"}
-  
-  h.clear
-  
-  p h #=> {}
-  p h.default #=> "default value"
+#@samplecode 例
+h = Hash.new("default value")
+h[:some] = "some"
+p h #=> {:some=>"some"}
+
+h.clear
+
+p h #=> {}
+p h.default #=> "default value"
+#@end
 
 #@since 2.4.0
 --- compact -> Hash
@@ -488,12 +515,14 @@ key に対して value を関連づけます。value を返し
 compact は自身から value が nil のもの取り除いた Hash を生成して返します。 compact! は自身から破壊的に value が nil のものを取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
 
 
-  hash = {a: 1, b: nil, c: 3}
-  p hash.compact  #=> {:a=>1, :c=>3}
-  p hash          #=> {:a=>1, :b=>nil, :c=>3}
-  hash.compact!
-  hash            #=> {:a=>1, :c=>3}
-  p hash.compact! #=>  nil
+#@samplecode 例
+hash = {a: 1, b: nil, c: 3}
+p hash.compact  #=> {:a=>1, :c=>3}
+p hash          #=> {:a=>1, :b=>nil, :c=>3}
+hash.compact!
+hash            #=> {:a=>1, :c=>3}
+p hash.compact! #=>  nil
+#@end
 
 @see [[m:Array#compact]]
 
@@ -510,15 +539,17 @@ selfが変化する破壊的メソッドです。
 
 @return selfを返します。
 
-   h1 = { "a" => 100, "b" => 200, :c => "c" }
-   p h1.compare_by_identity? #=> false
-   p h1["a"]        #=> 100
-   
-   h1.compare_by_identity
-   
-   p h1.compare_by_identity? #=> true
-   p h1["a"]        #=> nil  # この"a"と最初の"a"とは違うオブジェクト
-   p h1[:c]         #=> "c"  # 同じ内容のシンボルはすべて同一
+#@samplecode 例
+h1 = { "a" => 100, "b" => 200, :c => "c" }
+p h1.compare_by_identity? #=> false
+p h1["a"]        #=> 100
+
+h1.compare_by_identity
+
+p h1.compare_by_identity? #=> true
+p h1["a"]        #=> nil  # この"a"と最初の"a"とは違うオブジェクト
+p h1[:c]         #=> "c"  # 同じ内容のシンボルはすべて同一
+#@end
 
 @see [[m:Hash#compare_by_identity?]]
 
@@ -526,12 +557,14 @@ selfが変化する破壊的メソッドです。
 
 ハッシュがキーの一致判定をオブジェクトの同一性を用いて行っているならば真を返します。
 
-   h1 = {}
-   p h1.compare_by_identity? #=> false
-   
-   h1.compare_by_identity
-   
-   p h1.compare_by_identity? #=> true
+#@samplecode 例
+h1 = {}
+p h1.compare_by_identity? #=> false
+
+h1.compare_by_identity
+
+p h1.compare_by_identity? #=> true
+#@end
 
 @see [[m:Hash#compare_by_identity]]
 
@@ -548,20 +581,21 @@ shiftは破壊的メソッドです。selfは要素を取り除かれた残り�
 将来のバージョン(Ruby 3.2を予定)ではデフォルト値に関わらず nil になる予定なので、デフォルト値を設定しているハッシュで
 shift を使う場合は注意してください。([[bug:16908]])
 
-  h = {:ab => "some" , :cd => "all"}
-  p h.shift               #=> [:ab, "some"]
-  p h.shift               #=> [:cd, "all"]
-  p h                     #=> {}
-  p h.shift               #=> nil
-  
-  h1 = Hash.new("default value")
-  p h1                    #=> {}
-  p h1.shift              #=> "default value"
-  
-  h2 = Hash.new {|*arg| arg}
-  p h2                    #=> {}
-  p h2.shift              #=> [{}, nil]
+#@samplecode 例
+h = {:ab => "some" , :cd => "all"}
+p h.shift               #=> [:ab, "some"]
+p h.shift               #=> [:cd, "all"]
+p h                     #=> {}
+p h.shift               #=> nil
 
+h1 = Hash.new("default value")
+p h1                    #=> {}
+p h1.shift              #=> "default value"
+
+h2 = Hash.new {|*arg| arg}
+p h2                    #=> {}
+p h2.shift              #=> [{}, nil]
+#@end
 
 @see [[m:Array#shift]]
 
@@ -577,25 +611,27 @@ self = other.to_hash.dup と同じです。
 @param other ハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
 @return self を返します。
 
-  foo = {1 => 'a', 2 => 'b'}
-  bar = {2 => 'B', 3 => 'C'}
-  
-  foo.replace(bar)
-  p foo  #=> {2=>"B", 3=>"C"}
-  
-  zoo = {}
-  zoo = bar.dup
-  p zoo  #=> {2=>"B", 3=>"C"}
-  
-  class Foo
-    def to_hash
-      {:japan => 'kyoto'}
-    end
+#@samplecode 例
+foo = {1 => 'a', 2 => 'b'}
+bar = {2 => 'B', 3 => 'C'}
+
+foo.replace(bar)
+p foo  #=> {2=>"B", 3=>"C"}
+
+zoo = {}
+zoo = bar.dup
+p zoo  #=> {2=>"B", 3=>"C"}
+
+class Foo
+  def to_hash
+    {:japan => 'kyoto'}
   end
-  
-  h = Hash.new
-  h.replace(Foo.new) #暗黙の変換
-  p h #=> {:japan=>"kyoto"}
+end
+
+h = Hash.new
+h.replace(Foo.new) #暗黙の変換
+p h #=> {:japan=>"kyoto"}
+#@end
   
 @see [[m:Hash#dup]],[[m:Hash#merge]],[[m:Object#to_hash]]
   
@@ -609,15 +645,17 @@ key に関連づけられた値を返します。
 
 @param key 探索するキーを指定します。
 
-  h = {:ab => "some" , :cd => "all"}
-  p h[:ab]             #=> "some"
-  p h[:ef]             #=> nil
-  
-  h1 = Hash.new("default value")
-  p h1[:non]             #=> "default value"
-  
-  h2 = Hash.new {|*arg| arg}
-  p h2[:non]             #=> [{}, :non]
+#@samplecode 例
+h = {:ab => "some" , :cd => "all"}
+p h[:ab]             #=> "some"
+p h[:ef]             #=> nil
+
+h1 = Hash.new("default value")
+p h1[:non]             #=> "default value"
+
+h2 = Hash.new {|*arg| arg}
+p h2[:non]             #=> [{}, :non]
+#@end
 
 @see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
 
@@ -634,20 +672,22 @@ self と引数 key をブロックに渡して評価し、その結果を返し�
 
 @param key デフォルトのブロックにキーとして渡されます。
 
-  h = Hash.new("default")
-  p h.default        #=> "default"
-  p h.default(:some) #=> "default"
-  p h #=>{}
-  
-  h = Hash.new{|hash, key| hash[key] ="default" }
-  p h.default        #=> nil
-  p h.default(:some) #=> "default"
-  p h                #=> {:some=>"default"}
-  
-  h = Hash.new
-  p h.default        #=> nil
-  p h.default(:some) #=> nil
-  p h                #=> {}
+#@samplecode 例
+h = Hash.new("default")
+p h.default        #=> "default"
+p h.default(:some) #=> "default"
+p h #=>{}
+
+h = Hash.new{|hash, key| hash[key] ="default" }
+p h.default        #=> nil
+p h.default(:some) #=> "default"
+p h                #=> {:some=>"default"}
+
+h = Hash.new
+p h.default        #=> nil
+p h.default(:some) #=> nil
+p h                #=> {}
+#@end
 
 @see [[m:Hash#default=]], [[m:Hash#default_proc]]
 
@@ -661,11 +701,13 @@ self と引数 key をブロックに渡して評価し、その結果を返し�
 @param value 設定するデフォルト値です。
 @return value を返します。
 
-  h = {}
-  p h.default #=>nil
-  
-  h.default = "default"
-  p h.default #=>"default"
+#@samplecode 例
+h = {}
+p h.default #=>nil
+
+h.default = "default"
+p h.default #=>"default"
+#@end
 
 @see [[m:Hash#default]]
 
@@ -674,14 +716,16 @@ self と引数 key をブロックに渡して評価し、その結果を返し�
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを返します。
 ハッシュがブロック形式のデフォルト値を持たない場合 nil を返します。
 
-  h = Hash.new {|hash, key| "The #{key} not exist in #{hash.inspect}"}
-  p h.default              #=> nil
-  p block = h.default_proc #=> #<Proc:0x0x401a9ff4>
-  p block.call({},:foo)    #=> "The foo not exist in {}"
-  
-  h = Hash.new("default")
-  p h.default              #=> "default"
-  p h.default_proc         #=> nil
+#@samplecode 例
+h = Hash.new {|hash, key| "The #{key} not exist in #{hash.inspect}"}
+p h.default              #=> nil
+p block = h.default_proc #=> #<Proc:0x0x401a9ff4>
+p block.call({},:foo)    #=> "The foo not exist in {}"
+
+h = Hash.new("default")
+p h.default              #=> "default"
+p h.default_proc         #=> nil
+#@end
 
 @see [[m:Hash#default]]
 
@@ -702,30 +746,31 @@ nil を指定した場合は現在の [[m:Hash#default_proc]] をクリアしま
 
 @param pr デフォルト値を返す手続きオブジェクト
 
-例:
-  h = {}
-  h.default_proc = proc do |hash, key|
-    hash[key] = case
-                when (key % 15).zero?
-                  "FizzBuzz"
-                when (key % 5).zero?
-                   "Buzz"
-                when (key % 3).zero?
-                   "Fizz"
-                else
-                   key
-                end
-  end
-  p h[1]  # => 1
-  p h[2]  # => 2
-  p h[3]  # => "Fizz"
-  p h[5]  # => "Buzz"
-  p h[15] # => "FizzBuzz"
+#@samplecode 例
+h = {}
+h.default_proc = proc do |hash, key|
+  hash[key] = case
+              when (key % 15).zero?
+                "FizzBuzz"
+              when (key % 5).zero?
+                 "Buzz"
+              when (key % 3).zero?
+                 "Fizz"
+              else
+                 key
+              end
+end
+p h[1]  # => 1
+p h[2]  # => 2
+p h[3]  # => "Fizz"
+p h[5]  # => "Buzz"
+p h[15] # => "FizzBuzz"
 
-  h.default_proc = nil
-  p h[16] # => nil
-  # default_proc が nil になったので `16=>16 が追加されていない`
-  p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
+h.default_proc = nil
+p h[16] # => nil
+# default_proc が nil になったので `16=>16 が追加されていない`
+p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
+#@end
 
 @see [[m:Hash#default_proc]], [[m:Hash#default]]
 
@@ -738,16 +783,18 @@ clone は frozen tainted singleton-class の情報も含めてコピーします
 またどちらのメソッドも要素それ自体のコピーはしません。つまり参照しているオブジェクトが
 変わらない「浅い(shallow)」コピーを行います。
 
-  h1 = {"have" => "have a","as" => "as a" }
-  h2 = h1.dup
-  
-  h2["have"] = "has"
-  p h2 #=> {"have"=>"has", "as"=>"as a"}
-  p h1 #=> {"have"=>"have a", "as"=>"as a"}
-  
-  h2["as"].upcase!
-  p h2 #=> {"have"=>"has", "as"=>"AS A"}
-  p h1 #=> {"have"=>"have a", "as"=>"AS A"}
+#@samplecode 例
+h1 = {"have" => "have a","as" => "as a" }
+h2 = h1.dup
+
+h2["have"] = "has"
+p h2 #=> {"have"=>"has", "as"=>"as a"}
+p h1 #=> {"have"=>"have a", "as"=>"as a"}
+
+h2["as"].upcase!
+p h2 #=> {"have"=>"has", "as"=>"AS A"}
+p h1 #=> {"have"=>"have a", "as"=>"AS A"}
+#@end
 
 @see [[m:Object#clone]]
 
@@ -763,13 +810,15 @@ key に対応する要素を取り除きます。
         
         与えられたブロックは key にマッチする要素がなかった時に評価され、その結果を返します。
 
-  h = {:ab => "some" , :cd => "all"}
-  
-  p h.delete(:ab) #=> "some"
-  p h.delete(:ef) #=> nil
-  p h.delete(:ef){|key|"#{key} Nothing"} #=> "ef Nothing"
-  
-  p h #=> {:cd=>"all"}
+#@samplecode 例
+h = {:ab => "some" , :cd => "all"}
+
+p h.delete(:ab) #=> "some"
+p h.delete(:ef) #=> nil
+p h.delete(:ef){|key|"#{key} Nothing"} #=> "ef Nothing"
+
+p h #=> {:cd=>"all"}
+#@end
 
 @see [[m:Hash#delete_if]]
 
@@ -783,9 +832,11 @@ self を複製して、ブロックを評価した値が真になる要
 [[m:Enumerable#reject]] とほぼ同じです。
 selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]か[[m:Hash#reject!]]を使います。
 
-  h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
-  
-  p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
+#@samplecode 例
+h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
+
+p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
+#@end
 
 @see [[m:Hash#delete_if]],[[m:Hash#delete]],[[m:Enumerable#reject]]
 
@@ -803,13 +854,15 @@ reject! は、要素を削除しなかった場合には nil を返し、
 
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 
-  h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
-  
-  p h.reject!{|key, value| key.to_i < value.to_i }   #=> { 6 => "4", 8 => "2" }
-  p h                                                #=> { 6 => "4", 8 => "2" }
-  
-  p h.delete_if{|key, value| key.to_i < value.to_i } #=> { 6 => "4", 8 => "2" }
-  p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
+#@samplecode 例
+h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
+
+p h.reject!{|key, value| key.to_i < value.to_i }   #=> { 6 => "4", 8 => "2" }
+p h                                                #=> { 6 => "4", 8 => "2" }
+
+p h.delete_if{|key, value| key.to_i < value.to_i } #=> { 6 => "4", 8 => "2" }
+p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
+#@end
 
 @see [[m:Hash#reject]],[[m:Hash#delete]]
 @see [[m:Hash#keep_if]],[[m:Hash#select!]]
@@ -827,19 +880,21 @@ reject! は、要素を削除しなかった場合には nil を返し、
 
 each_pair は each のエイリアスです。
 
-  {:a=>1, :b=>2}.each {|a| p a}
-  #=> [:a, 1]
-      [:b, 2]
- 
-  {:a=>1, :b=>2}.each_pair {|*a| p a} 
-  #=> [[:a, 1]]
-      [[:b, 2]]
-  
-  {:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
-  #=> [:a, 1]
-      [:b, 2]
-  
-  p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
+#@samplecode 例
+{:a=>1, :b=>2}.each {|a| p a}
+#=> [:a, 1]
+#   [:b, 2]
+
+{:a=>1, :b=>2}.each_pair {|*a| p a} 
+#=> [[:a, 1]]
+#   [[:b, 2]]
+
+{:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
+#=> [:a, 1]
+#   [:b, 2]
+
+p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
+#@end
 
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
@@ -852,11 +907,13 @@ each_pair は each のエイリアスです。
 ブロック付きの場合selfを、
 無しで呼ばれた場合[[c:Enumerator]]を返します。
 
-  {:a=>1, :b=>2}.each_key {|k| p k}
-  #=> :a
-      :b
-       
-  p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
+#@samplecode 例
+{:a=>1, :b=>2}.each_key {|k| p k}
+#=> :a
+#   :b
+
+p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
+#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
@@ -869,11 +926,13 @@ each_pair は each のエイリアスです。
 ブロック付きの場合selfを、
 無しで呼ばれた場合 [[c:Enumerator]] を返します。
 
-  {:a=>1, :b=>2}.each_value {|v| p v}
-  #=> 1
-      2
-  
-  p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
+#@samplecode 例
+{:a=>1, :b=>2}.each_value {|v| p v}
+#=> 1
+#   2
+
+p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
+#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
@@ -890,11 +949,13 @@ Hash#index は obsolete です。
 
 @param val 探索に用いる値を指定します。
 
-  h = {:ab => "some" , :cd => "all" , :ef => "all"}
-  
-  p h.key("some") #=> :ab
-  p h.key("all") #=> :cd
-  p h.key("at") #=> nil
+#@samplecode 例
+h = {:ab => "some" , :cd => "all" , :ef => "all"}
+
+p h.key("some") #=> :ab
+p h.key("all") #=> :cd
+p h.key("at") #=> nil
+#@end
 
 @see [[m:Hash#invert]]
 
@@ -909,10 +970,12 @@ Hash#index は obsolete です。
 @return 引数で指定されたキーに対応する値の配列を返します。
         引数が指定されなかった場合は、空の配列を返します。
 
-  h = {1=>"a", 2=>"b", 3=>"c"}
-  
-  p h.values_at(1,3,4)               #=> ["a", "c", nil]
-  # [h[1], h[3] ,h[4]] と同じ
+#@samplecode 例
+h = {1=>"a", 2=>"b", 3=>"c"}
+
+p h.values_at(1,3,4)               #=> ["a", "c", nil]
+# [h[1], h[3] ,h[4]] と同じ
+#@end
 
 @see [[m:Hash#[] ]], [[m:Hash.new]], [[m:Hash#default]], [[m:Hash#default_proc]], [[m:Array#values_at]]
 
@@ -924,13 +987,15 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 
 @param key キーを任意個指定します。
 
-  h = { foo: {bar: {baz: 1}}}
+#@samplecode 例
+h = { foo: {bar: {baz: 1}}}
 
-  h.dig(:foo, :bar, :baz)      # => 1
-  h.dig(:foo, :zot, :xyz)      # => nil
+h.dig(:foo, :bar, :baz)      # => 1
+h.dig(:foo, :zot, :xyz)      # => nil
 
-  g = { foo: [10, 11, 12] }
-  g.dig(:foo, 1)               # => 11
+g = { foo: [10, 11, 12] }
+g.dig(:foo, 1)               # => 11
+#@end
 
 @see [[m:Array#dig]], [[m:Struct#dig]], [[m:OpenStruct#dig]]
 #@end
@@ -946,16 +1011,18 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 @raise RuntimeError [[m:Hash#each]]などのイテレータの評価途中でrehashすると発生します。
 @return selfを返します。
 
-  a = [ "a", "b" ]
-  h = { a => 100 }
-  
-  p h[a]       #=> 100
-  
-  a[0] = "z"
-  p h[a]       #=> nil
-  
-  h.rehash
-  p h[a]       #=> 100
+#@samplecode 例
+a = [ "a", "b" ]
+h = { a => 100 }
+
+p h[a]       #=> 100
+
+a[0] = "z"
+p h[a]       #=> nil
+
+h.rehash
+p h[a]       #=> 100
+#@end
 
 @see [[m:Object#hash]]
 
@@ -1192,12 +1259,14 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-  #(出力関数は省略)
-  { 1 => :a } == { 1 => :a }               #=> true
-  { 1 => :a } == { 1 => :a, 2 => :b }      #=> false
-  { 1 => :a } == { 1.0 => :a }             #=> false  ( 1.eql?(1.0) は false なので)
-  
-  { :x => 1 } == { :x => 1.0 }             #=> true   ( 1 == 1.0 は true なので)
+#@samplecode 例
+#(出力関数は省略)
+{ 1 => :a } == { 1 => :a }               #=> true
+{ 1 => :a } == { 1 => :a, 2 => :b }      #=> false
+{ 1 => :a } == { 1.0 => :a }             #=> false  ( 1.eql?(1.0) は false なので)
+
+{ :x => 1 } == { :x => 1.0 }             #=> true   ( 1 == 1.0 は true なので)
+#@end
 
 @see [[m:Hash#equal?]]
 
@@ -1207,9 +1276,11 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
- p({}.equal?({}))     #=> false 
- a = {}
- p a.equal?(a)        #=> true
+#@samplecode 例
+p({}.equal?({}))     #=> false 
+a = {}
+p a.equal?(a)        #=> true
+#@end
 
 @see [[m:Hash#==]]
 
@@ -1220,11 +1291,13 @@ self が other のサブセットか同じである場合に真を返します�
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-  h1 = {a:1, b:2}
-  h2 = {a:1, b:2, c:3}
-  h1 <= h2   # => true
-  h2 <= h1   # => false
-  h1 <= h1   # => true
+#@samplecode 例
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 <= h2   # => true
+h2 <= h1   # => false
+h1 <= h1   # => true
+#@end
 
 @see [[m:Hash#<]], [[m:Hash#>=]], [[m:Hash#>]]
 
@@ -1234,11 +1307,13 @@ self が other のサブセットである場合に真を返します。
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-  h1 = {a:1, b:2}
-  h2 = {a:1, b:2, c:3}
-  h1 < h2    # => true
-  h2 < h1    # => false
-  h1 < h1    # => false
+#@samplecode 例
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 < h2    # => true
+h2 < h1    # => false
+h1 < h1    # => false
+#@end
 
 @see [[m:Hash#<=]], [[m:Hash#>=]], [[m:Hash#>]]
 
@@ -1248,11 +1323,13 @@ other が self のサブセットか同じである場合に真を返します�
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-  h1 = {a:1, b:2}
-  h2 = {a:1, b:2, c:3}
-  h1 >= h2   # => false
-  h2 >= h1   # => true
-  h1 >= h1   # => true
+#@samplecode 例
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 >= h2   # => false
+h2 >= h1   # => true
+h1 >= h1   # => true
+#@end
 
 @see [[m:Hash#<=]], [[m:Hash#<]], [[m:Hash#>]]
 
@@ -1262,11 +1339,13 @@ other が self のサブセットである場合に真を返します。
 
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
-  h1 = {a:1, b:2}
-  h2 = {a:1, b:2, c:3}
-  h1 > h2    # => false
-  h2 > h1    # => true
-  h1 > h1    # => false
+#@samplecode 例
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 > h2    # => false
+h2 > h1    # => true
+h1 > h1    # => false
+#@end
 
 @see [[m:Hash#<=]], [[m:Hash#<]], [[m:Hash#>=]]
 #@end
@@ -1276,10 +1355,12 @@ other が self のサブセットである場合に真を返します。
 自身が保持するキーと値のハッシュ値を元にして算出した整数を返します。
 自身が保持するキーや値が変化すればこのメソッドが返す値も変化します。
 
-  a = {}
-  p a.hash     #=> 0
-  a[1] = :x
-  p a.hash     #=> 329543
+#@samplecode 例
+a = {}
+p a.hash     #=> 0
+a[1] = :x
+p a.hash     #=> 329543
+#@end
 
 
 --- assoc(key)   ->  Array | nil
@@ -1292,10 +1373,12 @@ key が見つからなかった場合は、nil を返します。
 
 @param key 検索するキー
 
-   h = {"colors"  => ["red", "blue", "green"],
-        "letters" => ["a", "b", "c" ]}
-   h.assoc("letters")  #=> ["letters", ["a", "b", "c"]]
-   h.assoc("foo")      #=> nil
+#@samplecode 例
+h = {"colors"  => ["red", "blue", "green"],
+     "letters" => ["a", "b", "c" ]}
+h.assoc("letters")  #=> ["letters", ["a", "b", "c"]]
+h.assoc("foo")      #=> nil
+#@end
 
 
 
@@ -1313,12 +1396,14 @@ key が見つからなかった場合は、nil を返します。
 
 @param level 展開するレベル
 
-   a =  {1=> "one", 2 => [2,"two"], 3 => "three"}
-   a.flatten     #=> [1, "one", 2, [2, "two"], 3, "three"]
-   a.flatten(1)  #=> [1, "one", 2, [2, "two"], 3, "three"]
-   a.flatten(2)  #=> [1, "one", 2, 2, "two", 3, "three"]
-   a.flatten(0)  #=> [[1, "one"], [2, [2, "two"]], [3, "three"]]
-   a.flatten(-1) #=> [1, "one", 2, 2, "two", 3, "three"]
+#@samplecode 例
+a =  {1=> "one", 2 => [2,"two"], 3 => "three"}
+a.flatten     #=> [1, "one", 2, [2, "two"], 3, "three"]
+a.flatten(1)  #=> [1, "one", 2, [2, "two"], 3, "three"]
+a.flatten(2)  #=> [1, "one", 2, 2, "two", 3, "three"]
+a.flatten(0)  #=> [[1, "one"], [2, [2, "two"]], [3, "three"]]
+a.flatten(-1) #=> [1, "one", 2, 2, "two", 3, "three"]
+#@end
 
 @see [[m:Array#flatten]]
 
@@ -1332,9 +1417,11 @@ key が見つからなかった場合は、nil を返します。
 
 @param value 探索する値。
 
-   a = {1=> "one", 2 => "two", 3 => "three", "ii" => "two"}
-   a.rassoc("two")    #=> [2, "two"]
-   a.rassoc("four")   #=> nil
+#@samplecode 例
+a = {1=> "one", 2 => "two", 3 => "three", "ii" => "two"}
+a.rassoc("two")    #=> [2, "two"]
+a.rassoc("four")   #=> nil
+#@end
 
 @see [[m:Hash#assoc]], [[m:Array#rassoc]]
 
@@ -1365,8 +1452,10 @@ h.select {|k,v| v < 200}  #=> {"a" => 100}
 
 ハッシュの内容を人間に読みやすい文字列にして返します。
 
-    h = { "c" => 300, "a" => 100, "d" => 400  }
-    h.inspect   # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
+#@samplecode 例
+h = { "c" => 300, "a" => 100, "d" => 400  }
+h.inspect   # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
+#@end
 
 --- keep_if -> Enumerator
 --- keep_if {|key, value| ... } -> self
@@ -1391,18 +1480,19 @@ select! はオブジェクトが変更された場合に self を、
 ブロックが与えられなかった場合は、自身と keep_if から生成した
 [[c:Enumerator]] オブジェクトを返します。
 
-例:
-  h1 = {}
-  c = ("a".."g")
-  c.each_with_index {|e, i| h1[i] = e }
+#@samplecode 例
+h1 = {}
+c = ("a".."g")
+c.each_with_index {|e, i| h1[i] = e }
 
-  h2 = h1.dup
-  h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
+h2 = h1.dup
+h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
 
-  h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
-  h1.select! { |k, v| true }        # => nil
-  h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
-  h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
+h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+h1.select! { |k, v| true }        # => nil
+h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
+#@end
 
 @see [[m:Hash#select]], [[m:Hash#delete_if]], [[m:Hash#reject!]]
 
@@ -1417,11 +1507,13 @@ select! はオブジェクトが変更された場合に self を、
         ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
         返します。
 
-  h = { a: 1, b: 2, c: 3 }
-  h.transform_values {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
-  h.transform_values(&:to_s)           #=> { a: "1", b: "2", c: "3" }
-  h.transform_values.with_index {|v, i| "#{v}.#{i}" }
-                                       #=> { a: "1.0", b: "2.1", c: "3.2" }
+#@samplecode 例
+h = { a: 1, b: 2, c: 3 }
+h.transform_values {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
+h.transform_values(&:to_s)           #=> { a: "1", b: "2", c: "3" }
+h.transform_values.with_index {|v, i| "#{v}.#{i}" }
+                                     #=> { a: "1.0", b: "2.1", c: "3.2" }
+#@end
 
 @see [[m:Hash#transform_values!]]
 #@since 2.5.0
@@ -1438,11 +1530,13 @@ select! はオブジェクトが変更された場合に self を、
         ブロックが与えられなかった場合は、[[c:Enumerator]] オブジェクトを
         返します。
 
-  h = { a: 1, b: 2, c: 3 }
-  h.transform_values! {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
-  h.transform_values!(&:to_s)           #=> { a: "2", b: "5", c: "10" }
-  h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
-                                        #=> { a: "2.0", b: "5.1", c: "10.2" }
+#@samplecode 例
+h = { a: 1, b: 2, c: 3 }
+h.transform_values! {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
+h.transform_values!(&:to_s)           #=> { a: "2", b: "5", c: "10" }
+h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
+                                      #=> { a: "2.0", b: "5.1", c: "10.2" }
+#@end
 
 @see [[m:Hash#transform_values]]
 #@end
