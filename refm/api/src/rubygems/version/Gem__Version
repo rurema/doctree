@@ -60,10 +60,18 @@ version が正しいバージョンであれば真を返します。そうでな
 
 == Public Instance Methods
 
---- <=>(other) -> Integer | nil
+--- <=>(other) -> -1 | 0 | 1 | nil
 
-self と other を比較して、self が大きい時に 1 
-等しい時に 0、小さい時に -1 の整数を返します。
+self と other を比較して、self が小さい時に -1、
+等しい時に 0、大きい時に 1 の整数を返します。
+また、other が Gem::Version ではなく比較的ないとき、 nil を返します。
+
+#@samplecode
+p Gem::Version.new("3.9.0") <=>  Gem::Version.new("3.10.0") # => -1
+p Gem::Version.new("3.0.0") <=>  Gem::Version.new("3.0.0")  # =>  0
+
+p Gem::Version.new("3.9.0") <=> "3.9.0" # => nil
+#@end
 
 @param other 比較対象の [[c:Gem::Version]] のインスタンスを指定します。
 
