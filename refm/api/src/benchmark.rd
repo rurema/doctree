@@ -31,7 +31,12 @@ puts Benchmark.measure { "a"*1_000_000 }
 --- realtime { ... } -> Float
 
 与えられたブロックを評価して実行時間を計測して返します。
+返り値の単位は、秒です。
 
+#@samplecode
+require 'benchmark'
+puts Benchmark.realtime { [0] * (10**8) } # => 1.0929416846483946
+#@end
 
 
 --- bm(label_width = 0, *labels) {|rep| ... } -> [Benchmark::Tms]
