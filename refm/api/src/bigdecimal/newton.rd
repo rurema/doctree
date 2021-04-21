@@ -11,17 +11,10 @@ require bigdecimal/ludcmp
 
   require "bigdecimal"
   require "bigdecimal/newton"
-#@until 1.9.2
-  include Newton
-#@end
 
   ...
 
-#@since 1.9.2
   n = Newton.nlsolve(f, x)
-#@else
-  n = nlsolve(f, x)
-#@end
 
 引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
 る必要があります。
@@ -71,11 +64,7 @@ include Jacobian
 ニュートン法を用いて非線形方程式 f の解 x を求める機能を提供するモジュー
 ルです。
 
-#@since 1.9.2
 == Module Functions
-#@else
-== Instance Methods
-#@end
 
 --- norm(fv, zero = 0.0) -> Float
 

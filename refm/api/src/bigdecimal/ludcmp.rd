@@ -1,7 +1,5 @@
 
-#@since 1.9.2
 require bigdecimal
-#@end
 
 LU 分解を用いて、連立1次方程式 Ax = b の解 x を求める機能を提供します。
 
@@ -13,21 +11,13 @@ Ruby のソースコード中の以下のサンプルスクリプトも参考に
 
 LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めるモジュールです。
 
-#@since 1.9.2
 == Module Functions
-#@else
-== Instance Methods
-#@end
 
 --- ludecomp(a, n, zero = 0, one = 1) -> [Integer]
 
 n 次正方行列を表す配列 a を破壊的に変更し、返り値と併せて元の行列の LU 分解を提供します。
 
-#@since 1.9.2
 [[m:LUSolve.#lusolve]] の引数を構築するために使います。
-#@else
-[[m:LUSolve#lusolve]] の引数を構築するために使います。
-#@end
 
 @param a 行列を [[c:BigDecimal]] の配列で指定します。(各要素を
          Row-major order で 1 次元の配列にしたオブジェクトを指定し
@@ -49,19 +39,11 @@ LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めて返し�
 
 @param a 行列を [[c:BigDecimal]] の配列で指定します。
          各要素を Row-major order で並べて 1 次元の配列にし、
-#@since 1.9.2
          [[m:LUSolve.#ludecomp]] で変換したものを指定します。
-#@else
-         [[m:LUSolve#ludecomp]] で変換したものを指定します。
-#@end
 
 @param b ベクトルを [[c:BigDecimal]] の配列で指定します。
 
-#@since 1.9.2
 @param ps [[m:LUSolve.#ludecomp]] の返り値を指定します。
-#@else
-@param ps [[m:LUSolve#ludecomp]] の返り値を指定します。
-#@end
 
 @param zero 0.0 を表す値を指定します。
 

@@ -5,17 +5,10 @@
 
   require "bigdecimal"
   require "bigdecimal/jacobian"
-#@until 1.9.2
-  include Jacobian
-#@end
 
   ...
 
-#@since 1.9.2
   dfdx = Jacobian.jacobian(f,fx,x)
-#@else
-  dfdx = jacobian(f,fx,x)
-#@end
 
 引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
 る必要があります。
@@ -57,11 +50,7 @@ Row-major order で 1 次元の配列にしたオブジェクトを指定しま�
 
 ヤコビ行列を計算する機能を提供するモジュールです。
 
-#@since 1.9.2
 == Module Functions
-#@else
-== Instance Methods
-#@end
 
 --- isEqual(a, b, zero = 0.0, e = 1.0e-8) -> bool
 
@@ -85,6 +74,4 @@ Row-major order で 1 次元の配列にしたオブジェクトを指定しま�
 @return ヤコビ行列を返します。(各要素を Row-major order で 1 次元の配列
         にしたオブジェクトを指定します)
 
-#@since 2.0.0
 @raise RuntimeError 計算結果が特異ヤコビ行列になった場合に発生します。
-#@end
