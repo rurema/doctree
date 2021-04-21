@@ -44,7 +44,7 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 @raise Errno::ENOENT pathに該当するファイルが存在しない場合発生します。
 
-  p $:[0] 
+  p $:[0]
   #=> 例
   # "C:/Program Files/ruby-1.8/lib/ruby/site_ruby/1.8"
   p File::Stat.new($:[0])
@@ -85,7 +85,7 @@ path に関する File::Stat オブジェクトを生成して返します。
   "fifo"
   "link"
   "socket"
-  
+
   "unknown"
 
 #@# あらい 2002-01-06: 今のところ "unknown" を返すことはないはず。
@@ -108,7 +108,7 @@ path に関する File::Stat オブジェクトを生成して返します。
 デバイス番号(ファイルシステム)を返します。
 
   fs = File::Stat.new($0)
-  p fs.dev 
+  p fs.dev
   #例
   #=> 2
 #@# WindowsXP ruby1.8.6 でテスト
@@ -144,7 +144,7 @@ i-node 番号を返します。
 ファイルモードを返します。
 
   fs = File::Stat.new($0)
-  printf "%o\n", fs.mode 
+  printf "%o\n", fs.mode
   #例
   #=> 100644
 #@# WindowsXP ruby1.8.6 でテスト
@@ -303,14 +303,14 @@ rdev の minor 番号部を返します。
 --- executable? -> bool
 実効ユーザ/グループIDで実行できる時に真を返します。
 
-  p File::Stat.new($0).executable? 
+  p File::Stat.new($0).executable?
   # 例
   #=> true
 
 --- executable_real? -> bool
 実ユーザ/グループIDで実行できる時に真を返します。
 
-  p File::Stat.new($0).executable_real? 
+  p File::Stat.new($0).executable_real?
   #例
   #=> true
 
