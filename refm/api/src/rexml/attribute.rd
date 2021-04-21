@@ -58,15 +58,16 @@ parent を省略した場合は nil が設定されます。
 --- prefix -> String
 属性の名前空間を返します。
 
-=== 例
-  require 'rexml/document'
-  e = REXML::Element.new( "elns:myelement" )
-  e.add_attribute( "nsa:a", "aval" )
-  e.add_attribute( "b", "bval" )
-  p e.attributes.get_attribute( "a" ).prefix   # -> "nsa"
-  p e.attributes.get_attribute( "b" ).prefix   # -> "elns"
-  a = REXML::Attribute.new( "x", "y" )
-  p a.prefix                                   # -> ""
+#@samplecode
+require 'rexml/document'
+e = REXML::Element.new( "elns:myelement" )
+e.add_attribute( "nsa:a", "aval" )
+e.add_attribute( "b", "bval" )
+p e.attributes.get_attribute( "a" ).prefix   # -> "nsa"
+p e.attributes.get_attribute( "b" ).prefix   # -> "elns"
+a = REXML::Attribute.new( "x", "y" )
+p a.prefix                                   # -> ""
+#@end
 
 --- namespace(arg = nil) -> String | nil
 属性の名前空間の URI を返します。
@@ -77,13 +78,14 @@ URI が定義されていない場合は nil を返します。
        の URI が返されます。
        通常は省略します。
 
-=== 例
-  require 'rexml/document'
-  e = REXML::Element.new("el")
-  e.add_attribute("xmlns:ns", "http://www.example.com/ns")
-  e.add_attribute("ns:r", "rval")
-  p e.attributes.get_attribute("r").prefix  # => "ns"
-  p e.attributes.get_attribute("r").namespace # => "http://www.example.com/ns"
+#@samplecode
+require 'rexml/document'
+e = REXML::Element.new("el")
+e.add_attribute("xmlns:ns", "http://www.example.com/ns")
+e.add_attribute("ns:r", "rval")
+p e.attributes.get_attribute("r").prefix  # => "ns"
+p e.attributes.get_attribute("r").namespace # => "http://www.example.com/ns"
+#@end
 
 
 --- ==(other) -> bool
@@ -96,11 +98,12 @@ URI が定義されていない場合は nil を返します。
 --- to_string -> String
 "name='value'" という形式の文字列を返します。
 
-=== 例
-  require 'rexml/document'
-  e = REXML::Element.new("el")
-  e.add_attribute("ns:r", "rval")
-  p e.attributes.get_attribute("r").to_string # => "ns:r='rval'"
+#@samplecode
+require 'rexml/document'
+e = REXML::Element.new("el")
+e.add_attribute("ns:r", "rval")
+p e.attributes.get_attribute("r").to_string # => "ns:r='rval'"
+#@end
 
 --- to_s -> String
 正規化された属性値を返します。

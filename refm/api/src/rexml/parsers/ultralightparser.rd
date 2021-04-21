@@ -54,28 +54,31 @@ XML宣言、DTD、ルート要素、テキストノードの配列です。例�
 === 例
 以下の例は簡単な XML をパースし、その結果を返しています。[...]の部分は親
 ノードを指しているので、pp の表示では省略されています。
-  require 'rexml/parsers/ultralightparser'
-  require 'pp'
-  parser = REXML::Parsers::UltraLightParser.new(<<XML)
-  <?xml version="1.0" encoding="UTF-8" ?>
-  <root>
-    <a n="1">xyz</a>
-    <b m="2" />
-  </root>
-  XML
-  pp parser.parse
-  # >> [[:xmldecl, "1.0", "UTF-8", nil],
-  # >>  [:text, "\n"],
-  # >>  [:start_element,
-  # >>   [...],
-  # >>   "root",
-  # >>   {},
-  # >>   [:text, "\n  "],
-  # >>   [:start_element, [...], "a", {"n"=>"1"}, [:text, "xyz"]],
-  # >>   [:text, "\n  "],
-  # >>   [:start_element, [...], "b", {"m"=>"2"}],
-  # >>   [:text, "\n"]],
-  # >>  [:text, "\n"]]
+
+#@samplecode
+require 'rexml/parsers/ultralightparser'
+require 'pp'
+parser = REXML::Parsers::UltraLightParser.new(<<XML)
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <a n="1">xyz</a>
+  <b m="2" />
+</root>
+XML
+pp parser.parse
+# >> [[:xmldecl, "1.0", "UTF-8", nil],
+# >>  [:text, "\n"],
+# >>  [:start_element,
+# >>   [...],
+# >>   "root",
+# >>   {},
+# >>   [:text, "\n  "],
+# >>   [:start_element, [...], "a", {"n"=>"1"}, [:text, "xyz"]],
+# >>   [:text, "\n  "],
+# >>   [:start_element, [...], "b", {"m"=>"2"}],
+# >>   [:text, "\n"]],
+# >>  [:text, "\n"]]
+#@end
 
 #@until 2.1.0
 === 注意

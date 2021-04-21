@@ -54,57 +54,58 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
 : externalentity (エンティティ文字列)
   doctype内のパラメータ実体参照。
 
-=== 例
-  require 'rexml/parsers/pullparser'
-  xml = <<EOS
-  <?xml version="1.0" encoding="UTF-8" ?>
-  <?xml-stylesheet type="text/css" href="style.css"?>
-  <!DOCTYPE root SYSTEM "foo" [
-    <!ELEMENT root (a+)>
-    <!ELEMENT a>
-    <!ENTITY bar "barbarbarbar">
-    <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
-    <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
-    <!ENTITY % HTMLsymbol PUBLIC
-       "-//W3C//ENTITIES Symbols for XHTML//EN"
-       "xhtml-symbol.ent">
-    %HTMLsymbol;
-  ]>
-  <root xmlns:foo="http://example.org/foo"
-        xmlns:bar="http://example.org/bar"><![CDATA[cdata is here]]>
-    <a foo:att='1' bar:att='2' att='&lt;'/>
-    &amp;&amp; <!-- comment here--> &bar;
-  </root>
-  EOS
+#@samplecode
+require 'rexml/parsers/pullparser'
+xml = <<EOS
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<!DOCTYPE root SYSTEM "foo" [
+  <!ELEMENT root (a+)>
+  <!ELEMENT a>
+  <!ENTITY bar "barbarbarbar">
+  <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
+  <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
+  <!ENTITY % HTMLsymbol PUBLIC
+      "-//W3C//ENTITIES Symbols for XHTML//EN"
+      "xhtml-symbol.ent">
+  %HTMLsymbol;
+]>
+<root xmlns:foo="http://example.org/foo"
+      xmlns:bar="http://example.org/bar"><![CDATA[cdata is here]]>
+  <a foo:att='1' bar:att='2' att='&lt;'/>
+  &amp;&amp; <!-- comment here--> &bar;
+</root>
+EOS
 
-  parser = REXML::Parsers::PullParser.new(xml)
-  while parser.has_next?
-    p parser.pull
-  end
-  # >> xmldecl: ["1.0", "UTF-8", nil]
-  # >> text: ["\n", "\n"]
-  # >> processing_instruction: ["xml-stylesheet", " type=\"text/css\" href=\"style.css\""]
-  # >> text: ["\n", "\n"]
-  # >> start_doctype: ["root", "SYSTEM", "foo", nil]
-  # >> elementdecl: ["<!ELEMENT root (a+)"]
-  # >> elementdecl: ["<!ELEMENT a"]
-  # >> entitydecl: ["bar", "barbarbarbar"]
-  # >> attlistdecl: ["a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
-  # >> notationdecl: ["foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
-  # >> entitydecl: ["HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
-  # >> externalentity: ["%HTMLsymbol;"]
-  # >> end_doctype: []
-  # >> text: ["\n", "\n"]
-  # >> start_element: ["root", {"xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
-  # >> cdata: ["cdata is here"]
-  # >> text: ["\n  ", "\n  "]
-  # >> start_element: ["a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
-  # >> end_element: ["a"]
-  # >> text: ["\n  &amp;&amp; ", "\n  && "]
-  # >> comment: [" comment here"]
-  # >> text: [" &bar;\n", " barbarbarbar\n"]
-  # >> end_element: ["root"]
-  # >> text: ["\n", "\n"]
+parser = REXML::Parsers::PullParser.new(xml)
+while parser.has_next?
+  p parser.pull
+end
+# >> xmldecl: ["1.0", "UTF-8", nil]
+# >> text: ["\n", "\n"]
+# >> processing_instruction: ["xml-stylesheet", " type=\"text/css\" href=\"style.css\""]
+# >> text: ["\n", "\n"]
+# >> start_doctype: ["root", "SYSTEM", "foo", nil]
+# >> elementdecl: ["<!ELEMENT root (a+)"]
+# >> elementdecl: ["<!ELEMENT a"]
+# >> entitydecl: ["bar", "barbarbarbar"]
+# >> attlistdecl: ["a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+# >> notationdecl: ["foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
+# >> entitydecl: ["HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
+# >> externalentity: ["%HTMLsymbol;"]
+# >> end_doctype: []
+# >> text: ["\n", "\n"]
+# >> start_element: ["root", {"xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
+# >> cdata: ["cdata is here"]
+# >> text: ["\n  ", "\n  "]
+# >> start_element: ["a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
+# >> end_element: ["a"]
+# >> text: ["\n  &amp;&amp; ", "\n  && "]
+# >> comment: [" comment here"]
+# >> text: [" &bar;\n", " barbarbarbar\n"]
+# >> end_element: ["root"]
+# >> text: ["\n", "\n"]
+#@end
 
 = class REXML::Parsers::PullParser < Object
 extend Forwardable

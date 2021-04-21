@@ -136,35 +136,36 @@ DTDの実体宣言をパースしたときに呼び出されるコールバッ�
 
 @param content 実体宣言が配列で渡されます
 
-=== 例
 実体宣言の書き方によって content に渡されるデータの形式が異なります。
 
-  require 'rexml/parsers/baseparser'
-  require 'rexml/parsers/streamparser'
-  require 'rexml/streamlistener'
-  xml = <<EOS
-  <!DOCTYPE root [
-  <!ENTITY % YN '"Yes"'>
-  <!ENTITY % YN 'Yes'>
-  <!ENTITY WhatHeSaid "He said %YN;">
-  <!ENTITY open-hatch SYSTEM "http://www.textuality.com/boilerplate/OpenHatch.xml">
-  <!ENTITY open-hatch PUBLIC "-//Textuality//TEXT Standard open-hatch boilerplate//EN" "http://www.textuality.com/boilerplate/OpenHatch.xml">
-  <!ENTITY hatch-pic SYSTEM "../grafix/OpenHatch.gif" NDATA gif>
-  ]>
-  <root />
-  EOS
+#@samplecode
+require 'rexml/parsers/baseparser'
+require 'rexml/parsers/streamparser'
+require 'rexml/streamlistener'
+xml = <<EOS
+<!DOCTYPE root [
+<!ENTITY % YN '"Yes"'>
+<!ENTITY % YN 'Yes'>
+<!ENTITY WhatHeSaid "He said %YN;">
+<!ENTITY open-hatch SYSTEM "http://www.textuality.com/boilerplate/OpenHatch.xml">
+<!ENTITY open-hatch PUBLIC "-//Textuality//TEXT Standard open-hatch boilerplate//EN" "http://www.textuality.com/boilerplate/OpenHatch.xml">
+<!ENTITY hatch-pic SYSTEM "../grafix/OpenHatch.gif" NDATA gif>
+]>
+<root />
+EOS
 
-  class Listener
-    include REXML::StreamListener
-    def entitydecl(content); p content; end
-  end
-  REXML::Parsers::StreamParser.new(xml, Listener.new).parse
-  # >> ["YN", "\"Yes\"", "%"]
-  # >> ["YN", "Yes", "%"]
-  # >> ["WhatHeSaid", "He said %YN;"]
-  # >> ["open-hatch", "SYSTEM", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
-  # >> ["open-hatch", "PUBLIC", "-//Textuality//TEXT Standard open-hatch boilerplate//EN", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
-  # >> ["hatch-pic", "SYSTEM", "../grafix/OpenHatch.gif", "gif"]
+class Listener
+  include REXML::StreamListener
+  def entitydecl(content); p content; end
+end
+REXML::Parsers::StreamParser.new(xml, Listener.new).parse
+# >> ["YN", "\"Yes\"", "%"]
+# >> ["YN", "Yes", "%"]
+# >> ["WhatHeSaid", "He said %YN;"]
+# >> ["open-hatch", "SYSTEM", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
+# >> ["open-hatch", "PUBLIC", "-//Textuality//TEXT Standard open-hatch boilerplate//EN", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
+# >> ["hatch-pic", "SYSTEM", "../grafix/OpenHatch.gif", "gif"]
+#@end
 
 
 --- notationdecl(content) -> ()

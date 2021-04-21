@@ -5,32 +5,34 @@ XMLドキュメントを(文字列として)出力するクラスです。
 [[c:REXML::Formatters::Pretty]] と
 異なりテキストの改行や空白を修正せずにそのまま出力します。
 
-  require 'rexml/document'
-  require 'rexml/formatters/default'
-  doc = REXML::Document.new <<EOS
-  <root>
-  <children>
-    <grandchildren/>
-  </children>
-  </root>
-  EOS
+#@samplecode
+require 'rexml/document'
+require 'rexml/formatters/default'
+doc = REXML::Document.new <<EOS
+<root>
+<children>
+  <grandchildren/>
+</children>
+</root>
+EOS
 
-  default_formatter = REXML::Formatters::Default.new
-  output = StringIO.new
-  default_formatter.write(doc, output)
-  output.string
-  # => "<root>\n<children>\n  <grandchildren/>\n</children>\n</root>\n"
+default_formatter = REXML::Formatters::Default.new
+output = StringIO.new
+default_formatter.write(doc, output)
+output.string
+# => "<root>\n<children>\n  <grandchildren/>\n</children>\n</root>\n"
 
-  output = StringIO.new
-  default_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
-  output.string
-  # => "<children>\n  <grandchildren/>\n</children>"
+output = StringIO.new
+default_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
+output.string
+# => "<children>\n  <grandchildren/>\n</children>"
 
-  ie_hack_formatter = REXML::Formatters::Default.new(true)
-  output = StringIO.new
-  ie_hack_formatter.write(doc, output)
-  output.string
-  # => "<root>\n<children>\n  <grandchildren />\n</children>\n</root>\n"
+ie_hack_formatter = REXML::Formatters::Default.new(true)
+output = StringIO.new
+ie_hack_formatter.write(doc, output)
+output.string
+# => "<root>\n<children>\n  <grandchildren />\n</children>\n</root>\n"
+#@end
 
 == Class Method
 --- new(ie_hack=false) -> REXML::Formatter::Default

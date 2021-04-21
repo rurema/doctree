@@ -8,15 +8,18 @@ XML 処理命令 とは XML 文書中の <? と ?> で挟まれた部分のこ�
 XML 宣言(文書先頭の <?xml version=... ?>)はXML処理命令ではありませんが、
 似た見た目を持っています。
 
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="utf-8" ?>
-  <?xml-stylesheet type="text/css" href="style.css"?>
-  <root />
-  EOS
-  doc[2] # => <?p-i xml-stylesheet ...?>
-  doc[2].target # => "xml-stylesheet"
-  doc[2].content # => "type=\"text/css\" href=\"style.css\""
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<root />
+EOS
+doc[2] # => <?p-i xml-stylesheet ...?>
+doc[2].target # => "xml-stylesheet"
+doc[2].content # => "type=\"text/css\" href=\"style.css\""
+#@end
+
 == Class Methods
 
 --- new(target, content = nil) -> REXML::Instruction
@@ -31,16 +34,17 @@ XML 宣言(文書先頭の <?xml version=... ?>)はXML処理命令ではあり�
 --- target -> String
 XML 処理命令のターゲットを返します。
 
-=== 例
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="utf-8" ?>
-  <?xml-stylesheet type="text/css" href="style.css"?>
-  <root />
-  EOS
-  doc[2] # => <?p-i xml-stylesheet ...?>
-  doc[2].target # => "xml-stylesheet"
-  doc[2].content # => "type=\"text/css\" href=\"style.css\""
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<root />
+EOS
+doc[2] # => <?p-i xml-stylesheet ...?>
+doc[2].target # => "xml-stylesheet"
+doc[2].content # => "type=\"text/css\" href=\"style.css\""
+#@end
 
 --- target=(value)
 XML 処理命令のターゲットを value に変更します。
@@ -50,19 +54,21 @@ XML 処理命令のターゲットを value に変更します。
 --- content -> String | nil
 XML 処理命令の内容を返します。
 
-=== 例
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="utf-8" ?>
-  <?xml-stylesheet type="text/css" href="style.css"?>
-  <?foobar?>
-  <root />
-  EOS
-  doc[2] # => <?p-i xml-stylesheet ...?>
-  doc[2].target # => "xml-stylesheet"
-  doc[2].content # => "type=\"text/css\" href=\"style.css\""
-  doc[4].target # => "foobar"
-  doc[4].content # => nil
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<?foobar?>
+<root />
+EOS
+doc[2] # => <?p-i xml-stylesheet ...?>
+doc[2].target # => "xml-stylesheet"
+doc[2].content # => "type=\"text/css\" href=\"style.css\""
+doc[4].target # => "foobar"
+doc[4].content # => nil
+#@end
+
 --- content=(value)
 XML 処理命令の内容を変更します。
 

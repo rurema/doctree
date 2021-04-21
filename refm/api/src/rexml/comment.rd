@@ -7,19 +7,21 @@ XML コメントを表すクラス。
 
 コメントとは <!-- と --> で挟まれたテキストです。
 
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <!-- xx -->
-  <root>
-  <!-- yy -->
-  text
-  <!-- zz -->
-  </root>
-  EOS
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<!-- xx -->
+<root>
+<!-- yy -->
+text
+<!-- zz -->
+</root>
+EOS
 
-  doc[0].string # => " xx "
-  doc.root[1].string # => " yy "
-  doc.root[3].string # => " zz "
+doc[0].string # => " xx "
+doc.root[1].string # => " yy "
+doc.root[3].string # => " zz "
+#@end
 
 == Class Methods
 

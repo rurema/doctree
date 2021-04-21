@@ -11,137 +11,138 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
 
 [[c:REXML::Parsers::StreamParser]] のパーサよりは高機能です。
 
-=== 例
+#@samplecode
+require 'rexml/parsers/sax2parser'
+require 'rexml/sax2listener'
 
-  require 'rexml/parsers/sax2parser'
-  require 'rexml/sax2listener'
+parser = REXML::Parsers::SAX2Parser.new(<<XML)
+<root n="0">
+  <a n="1">111</a>
+  <b n="2">222</b>
+  <a n="3">333</a>
+</root>
+XML
 
-  parser = REXML::Parsers::SAX2Parser.new(<<XML)
-  <root n="0">
-    <a n="1">111</a>
-    <b n="2">222</b>
-    <a n="3">333</a>
-  </root>
-  XML
+elements = []
+parser.listen(:start_element){|uri, localname, qname, attrs|
+  elements << [qname, attrs]
+}
+as = []
+parser.listen(:start_element, ["a"]){|uri, localname, qname, attrs|
+  as << [qname, attrs]
+}
+texts = []
+parser.listen(:characters, ["a"]){|c| texts << c }
+parser.parse
+elements # => [["root", {"n"=>"0"}], ["a", {"n"=>"1"}], ["b", {"n"=>"2"}], ["a", {"n"=>"3"}]]
+as # => [["a", {"n"=>"1"}], ["a", {"n"=>"3"}]]
+texts # => ["111", "333"]
+#@end
 
-  elements = []
-  parser.listen(:start_element){|uri, localname, qname, attrs|
-    elements << [qname, attrs]
-  }
-  as = []
-  parser.listen(:start_element, ["a"]){|uri, localname, qname, attrs|
-    as << [qname, attrs]
-  }
-  texts = []
-  parser.listen(:characters, ["a"]){|c| texts << c }
-  parser.parse
-  elements # => [["root", {"n"=>"0"}], ["a", {"n"=>"1"}], ["b", {"n"=>"2"}], ["a", {"n"=>"3"}]]
-  as # => [["a", {"n"=>"1"}], ["a", {"n"=>"3"}]]
-  texts # => ["111", "333"]
+#@samplecode 仕様確認サンプル
+require 'rexml/parsers/sax2parser'
+require 'rexml/sax2listener'
 
-=== 仕様確認サンプル
-  require 'rexml/parsers/sax2parser'
-  require 'rexml/sax2listener'
+xml = <<EOS
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<!DOCTYPE root SYSTEM "foo" [
+  <!ELEMENT root (a+)>
+  <!ELEMENT a>
+  <!ENTITY bar "barbarbarbar">
+  <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
+  <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
+  <!ENTITY % HTMLsymbol PUBLIC
+      "-//W3C//ENTITIES Symbols for XHTML//EN"
+      "xhtml-symbol.ent">
+  %HTMLsymbol;
+]>
+<root xmlns="http://example.org/default"
+      xmlns:foo="http://example.org/foo"
+      xmlns:bar="http://example.org/bar"><![CDATA[cdata is here]]>
+  <a foo:att='1' bar:att='2' att='&lt;'>
+  <bar:b />
+  </a>
+  &amp;&amp; <!-- comment here--> &bar;
+</root>
+EOS
 
-  xml = <<EOS
-  <?xml version="1.0" encoding="UTF-8" ?>
-  <?xml-stylesheet type="text/css" href="style.css"?>
-  <!DOCTYPE root SYSTEM "foo" [
-    <!ELEMENT root (a+)>
-    <!ELEMENT a>
-    <!ENTITY bar "barbarbarbar">
-    <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
-    <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
-    <!ENTITY % HTMLsymbol PUBLIC
-       "-//W3C//ENTITIES Symbols for XHTML//EN"
-       "xhtml-symbol.ent">
-    %HTMLsymbol;
-  ]>
-  <root xmlns="http://example.org/default"
-        xmlns:foo="http://example.org/foo"
-        xmlns:bar="http://example.org/bar"><![CDATA[cdata is here]]>
-    <a foo:att='1' bar:att='2' att='&lt;'>
-    <bar:b />
-    </a>
-    &amp;&amp; <!-- comment here--> &bar;
-  </root>
-  EOS
-
-  class Listener
-    #include REXML::SAX2Listener
-    def method_missing(name, *args)
-      p [name, *args]
-    end
-    def respond_to_missing?(name, include_private)
-      name != :call
-    end
+class Listener
+  #include REXML::SAX2Listener
+  def method_missing(name, *args)
+    p [name, *args]
   end
+  def respond_to_missing?(name, include_private)
+    name != :call
+  end
+end
 
-  parser = REXML::Parsers::SAX2Parser.new(xml)
-  parser.listen(Listener.new)
-  parser.parse
-  # >> [:start_document]
-  # >> [:xmldecl, "1.0", "UTF-8", nil]
-  # >> [:progress, 39]
-  # >> [:characters, "\n"]
-  # >> [:progress, 91]
-  # >> [:processing_instruction, "xml-stylesheet", " type=\"text/css\" href=\"style.css\""]
-  # >> [:progress, 91]
-  # >> [:characters, "\n"]
-  # >> [:progress, 144]
-  # >> [:doctype, "root", "SYSTEM", "foo", nil]
-  # >> [:progress, 144]
-  # >> [:elementdecl, "<!ELEMENT root (a+)"]
-  # >> [:progress, 144]
-  # >> [:elementdecl, "<!ELEMENT a"]
-  # >> [:progress, 159]
-  # >> [:entitydecl, "bar", "barbarbarbar"]
-  # >> [:progress, 190]
-  # >> [:attlistdecl, "a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
-  # >> [:progress, 245]
-  # >> [:notationdecl, "foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
-  # >> [:progress, 683]
-  # >> [:entitydecl, "HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
-  # >> [:progress, 683]
-  # >> [:progress, 683]
-  # >> [:progress, 683]
-  # >> [:characters, "\n"]
-  # >> [:progress, 683]
-  # >> [:start_prefix_mapping, nil, "http://example.org/default"]
-  # >> [:start_prefix_mapping, "foo", "http://example.org/foo"]
-  # >> [:start_prefix_mapping, "bar", "http://example.org/bar"]
-  # >> [:start_element, "http://example.org/default", "root", "root", {"xmlns"=>"http://example.org/default", "xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
-  # >> [:progress, 683]
-  # >> [:cdata, "cdata is here"]
-  # >> [:progress, 683]
-  # >> [:characters, "\n  "]
-  # >> [:progress, 683]
-  # >> [:start_element, "http://example.org/default", "a", "a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
-  # >> [:progress, 683]
-  # >> [:characters, "\n  "]
-  # >> [:progress, 683]
-  # >> [:start_element, "http://example.org/bar", "b", "bar:b", {}]
-  # >> [:progress, 683]
-  # >> [:end_element, "http://example.org/bar", "b", "bar:b"]
-  # >> [:progress, 683]
-  # >> [:characters, "\n  "]
-  # >> [:progress, 683]
-  # >> [:end_element, "http://example.org/default", "a", "a"]
-  # >> [:progress, 683]
-  # >> [:characters, "\n  &amp;&amp; "]
-  # >> [:progress, 683]
-  # >> [:comment, " comment here"]
-  # >> [:progress, 683]
-  # >> [:characters, " barbarbarbar\n"]
-  # >> [:progress, 683]
-  # >> [:end_element, "http://example.org/default", "root", "root"]
-  # >> [:end_prefix_mapping, nil]
-  # >> [:end_prefix_mapping, "foo"]
-  # >> [:end_prefix_mapping, "bar"]
-  # >> [:progress, 683]
-  # >> [:characters, "\n"]
-  # >> [:progress, 683]
-  # >> [:end_document]
+parser = REXML::Parsers::SAX2Parser.new(xml)
+parser.listen(Listener.new)
+parser.parse
+# >> [:start_document]
+# >> [:xmldecl, "1.0", "UTF-8", nil]
+# >> [:progress, 39]
+# >> [:characters, "\n"]
+# >> [:progress, 91]
+# >> [:processing_instruction, "xml-stylesheet", " type=\"text/css\" href=\"style.css\""]
+# >> [:progress, 91]
+# >> [:characters, "\n"]
+# >> [:progress, 144]
+# >> [:doctype, "root", "SYSTEM", "foo", nil]
+# >> [:progress, 144]
+# >> [:elementdecl, "<!ELEMENT root (a+)"]
+# >> [:progress, 144]
+# >> [:elementdecl, "<!ELEMENT a"]
+# >> [:progress, 159]
+# >> [:entitydecl, "bar", "barbarbarbar"]
+# >> [:progress, 190]
+# >> [:attlistdecl, "a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+# >> [:progress, 245]
+# >> [:notationdecl, "foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
+# >> [:progress, 683]
+# >> [:entitydecl, "HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
+# >> [:progress, 683]
+# >> [:progress, 683]
+# >> [:progress, 683]
+# >> [:characters, "\n"]
+# >> [:progress, 683]
+# >> [:start_prefix_mapping, nil, "http://example.org/default"]
+# >> [:start_prefix_mapping, "foo", "http://example.org/foo"]
+# >> [:start_prefix_mapping, "bar", "http://example.org/bar"]
+# >> [:start_element, "http://example.org/default", "root", "root", {"xmlns"=>"http://example.org/default", "xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
+# >> [:progress, 683]
+# >> [:cdata, "cdata is here"]
+# >> [:progress, 683]
+# >> [:characters, "\n  "]
+# >> [:progress, 683]
+# >> [:start_element, "http://example.org/default", "a", "a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
+# >> [:progress, 683]
+# >> [:characters, "\n  "]
+# >> [:progress, 683]
+# >> [:start_element, "http://example.org/bar", "b", "bar:b", {}]
+# >> [:progress, 683]
+# >> [:end_element, "http://example.org/bar", "b", "bar:b"]
+# >> [:progress, 683]
+# >> [:characters, "\n  "]
+# >> [:progress, 683]
+# >> [:end_element, "http://example.org/default", "a", "a"]
+# >> [:progress, 683]
+# >> [:characters, "\n  &amp;&amp; "]
+# >> [:progress, 683]
+# >> [:comment, " comment here"]
+# >> [:progress, 683]
+# >> [:characters, " barbarbarbar\n"]
+# >> [:progress, 683]
+# >> [:end_element, "http://example.org/default", "root", "root"]
+# >> [:end_prefix_mapping, nil]
+# >> [:end_prefix_mapping, "foo"]
+# >> [:end_prefix_mapping, "bar"]
+# >> [:progress, 683]
+# >> [:characters, "\n"]
+# >> [:progress, 683]
+# >> [:end_document]
+#@end
 
 = class REXML::Parsers::SAX2Parser < Object
 

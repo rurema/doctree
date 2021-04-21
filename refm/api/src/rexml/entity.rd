@@ -5,44 +5,44 @@ XML における実体(エンティティ、entity)の宣言(declaration)を表�
 
 DTD([[c:REXML::DocType]])内の実体宣言に対応するものです。
 
-=== 例
+#@samplecode
+require 'rexml/document'
 
-  require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<!DOCTYPE document [
+<!ENTITY f "foo bar baz">
+<!ENTITY x SYSTEM "x.txt">
+<!ENTITY y SYSTEM "y.png" NDATA PNG>
+<!ENTITY % z "zzz">
+<!ENTITY zz "%z;%z;&f;">
+]>
+EOS
 
-  doc = REXML::Document.new(<<EOS)
-  <!DOCTYPE document [
-  <!ENTITY f "foo bar baz">
-  <!ENTITY x SYSTEM "x.txt">
-  <!ENTITY y SYSTEM "y.png" NDATA PNG>
-  <!ENTITY % z "zzz">
-  <!ENTITY zz "%z;%z;&f;">
-  ]>
-  EOS
+entities = doc.doctype.entities
+# f は 内部実体名なので、external や ref は nil である
+p entities["f"].name # => "f"
+p entities["f"].value # => "foo bar baz"
+p entities["f"].external # => nil
+p entities["f"].ref # => nil
 
-  entities = doc.doctype.entities
-  # f は 内部実体名なので、external や ref は nil である
-  p entities["f"].name # => "f"
-  p entities["f"].value # => "foo bar baz"
-  p entities["f"].external # => nil
-  p entities["f"].ref # => nil
+# x は 外部実体名なので value が nil で、
+# external や ref が文字列を返してくる。
+# しかし解析対象実体(parsed entity)なので ndata は nil を返す
+p entities["x"].name # => "x"
+p entities["x"].value # => nil
+p entities["x"].external # => "SYSTEM"
+p entities["x"].ref # => "x.txt"
+p entities["x"].ndata # => nil
 
-  # x は 外部実体名なので value が nil で、
-  # external や ref が文字列を返してくる。
-  # しかし解析対象実体(parsed entity)なので ndata は nil を返す
-  p entities["x"].name # => "x"
-  p entities["x"].value # => nil
-  p entities["x"].external # => "SYSTEM"
-  p entities["x"].ref # => "x.txt"
-  p entities["x"].ndata # => nil
+# y は解析対象外実体(unparsed entity)なので ndata が記法名を返す
+p entities["y"].ndata # => "PNG"
 
-  # y は解析対象外実体(unparsed entity)なので ndata が記法名を返す
-  p entities["y"].ndata # => "PNG"
-
-  # zz は中にパラメータ実体参照と内部実体参照を含むので、
-  # value, unnormalized, normalized がすべて異なる値を返す
-  p entities["zz"].value # => "zzzzzz&f;"
-  p entities["zz"].unnormalized # => "zzzzzzfoo bar baz"
-  p entities["zz"].normalized # => "%z;%z;&f;"
+# zz は中にパラメータ実体参照と内部実体参照を含むので、
+# value, unnormalized, normalized がすべて異なる値を返す
+p entities["zz"].value # => "zzzzzz&f;"
+p entities["zz"].unnormalized # => "zzzzzzfoo bar baz"
+p entities["zz"].normalized # => "%z;%z;&f;"
+#@end
 
 == Class Methods
 
@@ -77,12 +77,13 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 
 @param string 判定対象の文字列
 
-=== 例
-  require 'rexml/document'
+#@samplecode
+require 'rexml/document'
 
-  p REXML::Entity.matches?('<!ENTITY s "seal">') # => true
-  p REXML::Entity.matches?('<!ENTITY % s "seal">') # => true
-  p REXML::Entity.matches?('<!ELEMENT br EMPTY >') # => false
+p REXML::Entity.matches?('<!ENTITY s "seal">') # => true
+p REXML::Entity.matches?('<!ENTITY % s "seal">') # => true
+p REXML::Entity.matches?('<!ELEMENT br EMPTY >') # => false
+#@end
 
 
 == Instance Methods
@@ -145,9 +146,10 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 
 @see [[m:REXML::Entity#write]]
 
-=== 例
-  e = REXML::ENTITY.new("w", "wee");
-  p e.to_s # => "<!ENTITY w \"wee\">"
+#@samplecode
+e = REXML::ENTITY.new("w", "wee");
+p e.to_s # => "<!ENTITY w \"wee\">"
+#@end
 
 --- value -> String | nil
 実体の値を返します。

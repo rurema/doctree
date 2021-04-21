@@ -1,14 +1,17 @@
 = class REXML::ParseException < RuntimeError
 XML のパースに失敗したときに生じる例外です。
 
-  require 'rexml/document'
-  begin
-    REXML::Document.new("<a>foo\n</b></a> ")
-  rescue REXML::ParseException => ex
-    ex.position # => 16
-    ex.line # => 2
-    ex.context # => [16, 2, 2]
-  end
+#@samplecode
+require 'rexml/document'
+begin
+  REXML::Document.new("<a>foo\n</b></a> ")
+rescue REXML::ParseException => ex
+  ex.position # => 16
+  ex.line # => 2
+  ex.context # => [16, 2, 2]
+end
+#@end
+
 == Class Methods
 #@#
 #@# --- new(message source = nil, parser = nil, exception = nil)
