@@ -566,8 +566,8 @@ m.rank  # => 2
 このメソッドは deprecated です。
 代わりに [[m:Matrix#rank]] を使ってください。
 
---- trace -> Integer | Float | Rational
---- tr -> Integer | Float | Rational
+--- trace -> Integer | Float | Rational | Complex
+--- tr -> Integer | Float | Rational | Complex
 
 トレース (trace) を返します。
 
@@ -641,7 +641,7 @@ m = Matrix[a1, a2, a3]
 p m.column(1) # => Vector[2, 15, -2]
 
 cnt = 0
-m.column(0) { |x|
+m.column(-1) { |x|
   cnt = cnt + x
 }
 p cnt # => 24.5

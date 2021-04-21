@@ -122,7 +122,7 @@ i 番目の要素を返します。インデックスは 0 から開始します
 #@since 2.6.0
 --- []=(index, value)
 
-index 番目の要素を element に変更します。
+index 番目の要素を value に変更します。
 
 @param index インデックスを整数で指定します。
 @param value 設定したい要素の値を指定します。
