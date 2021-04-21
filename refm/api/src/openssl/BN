@@ -298,8 +298,17 @@ a # => 128
 変換して [other, 変換後オブジェクト] にして返します。
 それ以外の場合は例外 TypeError を発生させます。
 
+#@samplecode
+require 'openssl'
+p 1.to_bn.coerce(2)  # => [2, 1]
+#@end
+
 @param other 変換の基準となるオブジェクト
 @raise TypeError 変換に失敗した場合に発生します
+
+coerce メソッドの詳細な説明は、[[m:Numeric#coerce]] にあります。
+@see [[m:Numeric#coerce]]
+
 
 --- copy(other) -> self
 other の内容を自身にコピーします。
