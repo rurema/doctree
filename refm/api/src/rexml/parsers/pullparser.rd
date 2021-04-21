@@ -2,7 +2,7 @@
 プル方式の XML パーサ。
 
 [[c:REXML::Parsers::StreamParser]] はパースした結果をコールバックによって
-受動的に受け取りますが、このパーサは [[m:REXML::Parsers::PullParser#pull]] 
+受動的に受け取りますが、このパーサは [[m:REXML::Parsers::PullParser#pull]]
 によってパーサから結果をイベントという形で順に能動的に取り出します。
 外部的にはこのクラスのオブジェクトはイベントのキューと見なせます。
 pull はそのキューの先頭を取り出し、キューから取り除きます。
@@ -42,7 +42,7 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
   DTDの属性リスト宣言。属性名とデフォルト値 は { 属性名文字列 => デフォルト値文字列(なければnil) } という [[c:Hash]]
 : elementdecl (宣言文字列)
   DTDの要素宣言
-: entitydecl 
+: entitydecl
   DTDの実体宣言
 : notationdecl (記法名文字列, "PUBLIC" | "SYSTEM" | nil, 公開識別子文字列 | nil, URI文字列 | nil)
   DTDの記法宣言
@@ -50,10 +50,10 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
 : cdata (テキスト文字列)
   cdata セクション
 : xmldecl (バージョン文字列, エンコーディング文字列 | nil, standalone ("yes" | "no" | nil))
-  XML宣言 
+  XML宣言
 : externalentity (エンティティ文字列)
   doctype内のパラメータ実体参照。
-  
+
 === 例
   require 'rexml/parsers/pullparser'
   xml = <<EOS
@@ -62,7 +62,7 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
   <!DOCTYPE root SYSTEM "foo" [
     <!ELEMENT root (a+)>
     <!ELEMENT a>
-    <!ENTITY bar "barbarbarbar"> 
+    <!ENTITY bar "barbarbarbar">
     <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
     <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
     <!ENTITY % HTMLsymbol PUBLIC
@@ -76,7 +76,7 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
     &amp;&amp; <!-- comment here--> &bar;
   </root>
   EOS
-  
+
   parser = REXML::Parsers::PullParser.new(xml)
   while parser.has_next?
     p parser.pull
@@ -111,7 +111,7 @@ extend Forwardable
 include REXML::XMLTokens
 
 プル方式の XML パーサクラス。
-    
+
 == Class Methods
 
 --- new(stream) -> REXML::Parsers::PullParser
@@ -257,4 +257,3 @@ XML宣言なら真を返します。
 #@# deprecated, always returns false
 
 #@# --- inspect
-

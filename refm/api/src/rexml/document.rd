@@ -7,9 +7,9 @@ DOM スタイルの XML パーサ。
 以下のプログラムではブックマークの XML からデータを取り出します。
   require 'rexml/document'
   require 'pp'
-  
+
   Bookmark = Struct.new(:href, :title, :desc)
-  
+
   doc = REXML::Document.new(<<XML)
   <?xml version="1.0" encoding="UTF-8" ?>
   <xbel version="1.0">
@@ -29,7 +29,7 @@ DOM スタイルの XML パーサ。
     <bookmark href="https://rubygems.org/gems/bitclust-core" />
   </xbel>
   XML
-  
+
   bookmarks = REXML::XPath.match(doc, "/xbel/bookmark").map do |bookmark|
     href = bookmark.attribute("href").value
     title_element =  bookmark.elements["title"]
@@ -38,7 +38,7 @@ DOM スタイルの XML パーサ。
     desc = desc_element ? desc_element.text : nil
     Bookmark.new(href, title, desc)
   end
-  pp bookmarks    
+  pp bookmarks
   # >> [#<struct Bookmark
   # >>   href="http://www.ruby-lang.org/ja/",
   # >>   title="オブジェクト指向スクリプト言語 Ruby",
@@ -93,7 +93,7 @@ context で「コンテキスト」を指定します。テキストノードの
 XML文書を source から読み込み、パースした結果を
 listener にコールバックで伝えます。
 
-このメソッドは 
+このメソッドは
   Parsers::StreamParser.new( source, listener ).parse
 と同じ挙動をします。
 
@@ -203,10 +203,10 @@ XMLの仕様上、このオブジェクトはexpanded name名前を持ちえま�
 のいずれかです。
 
 #@# REXML::Element#add_element と同じ、ただしルート要素が2つになると例外を発生させる
-#@# 
+#@#
 #@# --- add_element(arg = nil, arg2 = nil)
 #@# #@todo
-#@# 
+#@#
 
 --- root -> REXML::Element | nil
 文書のルート要素を返します。
@@ -331,5 +331,3 @@ REXML は明示しない限り(つまりXML宣言を [[m:REXML::Document#add]] �
 #@include(xmltokens.rd)
 #@include(parsers/xpathparser.rd)
 #@include(source.rd)
-
-

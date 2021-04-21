@@ -5,7 +5,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
 設定してから [[m:REXML::Parsers::SAX2Parser#parse]] を呼び出すことで、
 パーサからコールバックが呼び出されます。
 
-コールバックには2種類あって、ブロックを使う方式と [[c:REXML::SAX2Listener]] 
+コールバックには2種類あって、ブロックを使う方式と [[c:REXML::SAX2Listener]]
 を include したクラスのオブジェクトを使う方式があります。詳しくは
 [[m:REXML::Parsers::SAX2Parser#listen]] を参照してください。
 
@@ -15,7 +15,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
 
   require 'rexml/parsers/sax2parser'
   require 'rexml/sax2listener'
-  
+
   parser = REXML::Parsers::SAX2Parser.new(<<XML)
   <root n="0">
     <a n="1">111</a>
@@ -23,7 +23,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
     <a n="3">333</a>
   </root>
   XML
-  
+
   elements = []
   parser.listen(:start_element){|uri, localname, qname, attrs|
     elements << [qname, attrs]
@@ -42,14 +42,14 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
 === 仕様確認サンプル
   require 'rexml/parsers/sax2parser'
   require 'rexml/sax2listener'
-  
+
   xml = <<EOS
   <?xml version="1.0" encoding="UTF-8" ?>
   <?xml-stylesheet type="text/css" href="style.css"?>
   <!DOCTYPE root SYSTEM "foo" [
     <!ELEMENT root (a+)>
     <!ELEMENT a>
-    <!ENTITY bar "barbarbarbar"> 
+    <!ENTITY bar "barbarbarbar">
     <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
     <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
     <!ENTITY % HTMLsymbol PUBLIC
@@ -66,7 +66,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
     &amp;&amp; <!-- comment here--> &bar;
   </root>
   EOS
-  
+
   class Listener
     #include REXML::SAX2Listener
     def method_missing(name, *args)
@@ -76,7 +76,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサ。
       name != :call
     end
   end
-  
+
   parser = REXML::Parsers::SAX2Parser.new(xml)
   parser.listen(Listener.new)
   parser.parse
@@ -182,36 +182,36 @@ sym は以下のシンボルが指定でき、どの場合にコールバック�
 [[c:REXML::SAX2Listener]] の対応するメソッドで詳しく説明されていますので
 そちらを参照してください。
 
-  * :start_document 
+  * :start_document
     (XML文書開始, [[m:REXML::SAX2Listener#start_document]])
-  * :end_document 
+  * :end_document
     (XML文書終了, [[m:REXML::SAX2Listener#end_document]])
-  * :start_element 
+  * :start_element
     (要素開始, [[m:REXML::SAX2Listener#start_element]])
-  * :end_element 
+  * :end_element
     (要素終了, [[m:REXML::SAX2Listener#end_element]])
-  * :start_prefix_mapping 
+  * :start_prefix_mapping
     (名前空間接頭辞導入, [[m:REXML::SAX2Listener#start_prefix_mapping]])
-  * :end_prefix_mapping 
+  * :end_prefix_mapping
     (名前空間接頭辞適用終了, [[m:REXML::SAX2Listener#end_prefix_mapping]])
   * :characters (文字データ, [[m:REXML::SAX2Listener#characters]])
-  * :processing_instruction 
+  * :processing_instruction
     (XML 処理命令 [[m:REXML::SAX2Listener#processing_instruction]])
-  * :doctype 
+  * :doctype
     (DTD, [[m:REXML::SAX2Listener#doctype]])
-  * :attlistdecl 
+  * :attlistdecl
     (DTDの属性リスト宣言, [[m:REXML::SAX2Listener#attlistdecl]])
-  * :entitydecl 
+  * :entitydecl
     (DTDの実体宣言, [[m:REXML::SAX2Listener#entitydecl]])
-  * :notationdecl 
+  * :notationdecl
     (DTDの記法宣言, [[m:REXML::SAX2Listener#notationdecl]])
-  * :cdata 
+  * :cdata
     (CDATA セクション, [[m:REXML::SAX2Listener#cdata]])
-  * :xmldecl 
+  * :xmldecl
     (XML 宣言, [[m:REXML::SAX2Listener#xmldecl]])
-  * :comment 
+  * :comment
     (コメント, [[m:REXML::SAX2Listener#comment]])
-  * :progress 
+  * :progress
     (入力を読み進める, [[m:REXML::SAX2Listener#progress]])
 
 
@@ -264,7 +264,7 @@ start_prefix_mapping, end_prefix_mapping では、その名前空間が導入さ
 [[m:REXML::Parsers::SAX2Parser#listen]] で指定した listener を
 取り除きます。
 
-@param listener 取り除く listener 
+@param listener 取り除く listener
 
 
 --- parse -> ()

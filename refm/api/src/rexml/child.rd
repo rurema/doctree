@@ -79,14 +79,14 @@ other を挿入します。
 
 === 例
   require 'rexml/document'
-  
+
   a = REXML::Element.new("a")
   b = a.add_element("b")
   c = REXML::Element.new("c")
   b.next_sibling = c
   d = REXML::Element.new("d")
   b.previous_sibling = d
-  
+
   p a.to_s # => "<a><d/><b/><c/></a>"
 
 
@@ -101,14 +101,14 @@ other を挿入します。
 
 === 例
   require 'rexml/document'
-  
+
   a = REXML::Element.new("a")
   b = a.add_element("b")
   c = REXML::Element.new("c")
   b.next_sibling = c
   d = REXML::Element.new("d")
   b.previous_sibling = d
-  
+
   p a.to_s # => "<a><d/><b/><c/></a>"
 
 --- document -> REXML::Document | nil

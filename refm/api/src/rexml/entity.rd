@@ -8,7 +8,7 @@ DTD([[c:REXML::DocType]])内の実体宣言に対応するものです。
 === 例
 
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <!DOCTYPE document [
   <!ENTITY f "foo bar baz">
@@ -18,14 +18,14 @@ DTD([[c:REXML::DocType]])内の実体宣言に対応するものです。
   <!ENTITY zz "%z;%z;&f;">
   ]>
   EOS
-  
+
   entities = doc.doctype.entities
   # f は 内部実体名なので、external や ref は nil である
   p entities["f"].name # => "f"
   p entities["f"].value # => "foo bar baz"
   p entities["f"].external # => nil
   p entities["f"].ref # => nil
-  
+
   # x は 外部実体名なので value が nil で、
   # external や ref が文字列を返してくる。
   # しかし解析対象実体(parsed entity)なので ndata は nil を返す
@@ -34,10 +34,10 @@ DTD([[c:REXML::DocType]])内の実体宣言に対応するものです。
   p entities["x"].external # => "SYSTEM"
   p entities["x"].ref # => "x.txt"
   p entities["x"].ndata # => nil
-  
+
   # y は解析対象外実体(unparsed entity)なので ndata が記法名を返す
   p entities["y"].ndata # => "PNG"
-  
+
   # zz は中にパラメータ実体参照と内部実体参照を含むので、
   # value, unnormalized, normalized がすべて異なる値を返す
   p entities["zz"].value # => "zzzzzz&f;"
@@ -79,7 +79,7 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 
 === 例
   require 'rexml/document'
-  
+
   p REXML::Entity.matches?('<!ENTITY s "seal">') # => true
   p REXML::Entity.matches?('<!ENTITY % s "seal">') # => true
   p REXML::Entity.matches?('<!ELEMENT br EMPTY >') # => false
@@ -91,7 +91,7 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 実体の名前を返します。
 
 --- external -> String | nil
-実体が外部実体(external entity)宣言である場合は 
+実体が外部実体(external entity)宣言である場合は
 "SYSTEM" もしくは "PUBLIC" という文字列を返します。
 
 内部実体(internal entity)宣言である場合には nil を返します。
@@ -165,40 +165,40 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 #@# Internally used strings and regexps
 #@# --- PUBIDCHAR
 #@# #@todo
-#@# 
+#@#
 #@# --- SYSTEMLITERAL
 #@# #@todo
-#@# 
+#@#
 #@# --- PUBIDLITERAL
 #@# #@todo
-#@# 
+#@#
 #@# --- EXTERNALID
 #@# #@todo
-#@# 
+#@#
 #@# --- NDATADECL
 #@# #@todo
-#@# 
+#@#
 #@# --- PEREFERENCE
 #@# #@todo
-#@# 
+#@#
 #@# --- ENTITYVALUE
 #@# #@todo
-#@# 
+#@#
 #@# --- PEDEF
 #@# #@todo
-#@# 
+#@#
 #@# --- ENTITYDEF
 #@# #@todo
-#@# 
+#@#
 #@# --- PEDECL
 #@# #@todo
-#@# 
+#@#
 #@# --- GEDECL
 #@# #@todo
-#@# 
+#@#
 #@# --- ENTITYDECL
 #@# #@todo
-#@# 
+#@#
 #@# --- PEREFERENCE_RE
 #@# #@todo
 
@@ -222,4 +222,3 @@ XML の標準的な実体(エンティティ)を保持しているモジュー�
 
 --- APOS
 「&apos;」「'」というエンティティを表わすオブジェクト。
-

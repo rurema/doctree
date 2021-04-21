@@ -13,20 +13,20 @@ XML 宣言を表すクラス。
   <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
   <e />
   EOS
-  
+
   xml_decl = doc.xml_decl
   xml_decl.version # => "1.0"
   xml_decl.encoding # => "UTF-8"
   xml_decl.standalone # => "yes"
   xml_decl.writethis # => true
-  
+
 
 XML 宣言を省略した場合の例。
   require 'rexml/document'
   doc = REXML::Document.new(<<EOS)
   <e />
   EOS
-  
+
   xml_decl = doc.xml_decl
   xml_decl.version # => "1.0"
   xml_decl.encoding # => "UTF-8"
@@ -40,7 +40,7 @@ XML 宣言が encoding 属性を持たない場合の例
   <?xml version="1.0" ?>
   <e />
   EOS
-  
+
   xml_decl = doc.xml_decl
   xml_decl.version # => "1.0"
   xml_decl.encoding # => "UTF-8"
@@ -171,17 +171,17 @@ enc に nil を渡すと XML 宣言では encoding が
 の使われるデフォルトのXMLバージョン。
 
 #@# #@todo
-#@# 
+#@#
 #@# 以下の利用法は？
 #@# --- DEFAULT_ENCODING
 #@# #@todo
-#@# 
+#@#
 #@# --- DEFAULT_STANDALONE
 #@# #@todo
 
 #@# 以下2つは内部用
 #@# --- START
 #@# #@todo
-#@# 
+#@#
 #@# --- STOP
 #@# #@todo

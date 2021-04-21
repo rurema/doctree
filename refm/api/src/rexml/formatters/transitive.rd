@@ -15,11 +15,11 @@ XMLドキュメントをテキストの内容を変えずに
   <grandchildren foo='bar' />
   </children></root>
   EOS
-  
+
   transitive_formatter = REXML::Formatters::Transitive.new
   output = StringIO.new
   transitive_formatter.write(doc, output)
-  output.string 
+  output.string
   # => "<root\n><children\n  >\n<grandchildren foo='bar'\n    />\n</children\n  ></root\n>\n"
   print output.string
   # >> <root
@@ -30,13 +30,13 @@ XMLドキュメントをテキストの内容を変えずに
   # >> </children
   # >>   ></root
   # >> >
-  
+
   output = StringIO.new
   transitive_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
-  output.string 
+  output.string
   # => "<children\n>\n<grandchildren foo='bar'\n  />\n</children\n>"
 
-  
+
 == Class Method
 --- new(indentation=2, ie_hack=false) -> REXML::Formatter::Transitive
 フォーマッタオブジェクトを生成して返します。
@@ -51,4 +51,3 @@ ie_hack に真を渡すと、空のタグを閉じる前で空白を挿入しま
 
 @param indentation インデント幅
 @param ie_hack 空のタグを閉じる所にスペースを入れるかどうかを指定します
-

@@ -90,7 +90,7 @@ URI が定義されていない場合は nil を返します。
 属性の名前と値が other と一致する場合に真を返します。
 
 #@# hash が定義されているのに eql? が定義されていない
-#@# --- hash 
+#@# --- hash
 #@# #@todo
 
 --- to_string -> String
@@ -146,4 +146,4 @@ output が返ります。
 
 #@# 内部的に使う正規表現
 #@# --- PATTERN
-#@# --- NEEDS_A_SECOND_CHECK 
+#@# --- NEEDS_A_SECOND_CHECK

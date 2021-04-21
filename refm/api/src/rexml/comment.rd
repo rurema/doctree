@@ -16,11 +16,11 @@ XML コメントを表すクラス。
   <!-- zz -->
   </root>
   EOS
-  
+
   doc[0].string # => " xx "
   doc.root[1].string # => " yy "
   doc.root[3].string # => " zz "
-  
+
 == Class Methods
 
 #@# --- new(source) -> REXML::Comment
@@ -69,6 +69,6 @@ other と内容([[m:REXML::Comment#string]])が同じならば真を返します
 
 #@# --- START
 #@# #@todo
-#@# 
+#@#
 #@# --- STOP
 #@# #@todo

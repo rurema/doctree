@@ -2,7 +2,7 @@
 ストリーム式の XML パーサ。
 
 rexml の XML パーサの中では高速ですが、機能は限定的です。
-もう少し高機能なストリーム式パーサが必要な場合は 
+もう少し高機能なストリーム式パーサが必要な場合は
 [[c:REXML::Parsers::SAX2Parser]] を用いてください。
 
 パーサからはコールバックによってパースした情報を受け取ります。
@@ -34,18 +34,18 @@ rexml の XML パーサの中では高速ですが、機能は限定的です。
     def initialize
       @events = []
     end
-    
+
     def text(text)
       @events << "text[#{text}]"
     end
-    
+
     def tag_start(name, attrs)
       @events << "tag_start[#{name}]"
     end
-    
+
     attr_reader :events
   end
-  
+
   xml = <<EOS
   <members>
     <member name="apple" color="red">
@@ -78,14 +78,14 @@ StreamParser で処理したときに、どのコールバックメソッドが�
   require 'rexml/parsers/baseparser'
   require 'rexml/parsers/streamparser'
   require 'rexml/streamlistener'
-  
+
   xml = <<EOS
   <?xml version="1.0" encoding="UTF-8" ?>
   <?xml-stylesheet type="text/css" href="style.css"?>
   <!DOCTYPE root SYSTEM "foo" [
     <!ELEMENT root (a+)>
     <!ELEMENT a>
-    <!ENTITY bar "barbarbarbar"> 
+    <!ENTITY bar "barbarbarbar">
     <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
     <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
     <!ENTITY % HTMLsymbol PUBLIC
@@ -99,7 +99,7 @@ StreamParser で処理したときに、どのコールバックメソッドが�
     &amp;&amp; <!-- comment here--> &bar;
   </root>
   EOS
-  
+
   class Listener
     def method_missing(name, *args)
       p [name, *args]
@@ -108,7 +108,7 @@ StreamParser で処理したときに、どのコールバックメソッドが�
       true
     end
   end
-  
+
   REXML::Parsers::StreamParser.new(xml, Listener.new).parse
   # >> [:xmldecl, "1.0", "UTF-8", nil]
   # >> [:text, "\n"]
@@ -150,7 +150,7 @@ StreamParser で処理したときに、どのコールバックメソッドが�
 
 #@# #@since 1.8.2
 #@# --- add_listener(listener) -> ()
-#@# 
+#@#
 #@# #@end
 
 --- parse -> ()

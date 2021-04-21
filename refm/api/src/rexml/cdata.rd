@@ -24,7 +24,7 @@ respect_whitespace に真を指定すると、text に含まれる空白文字�
   EOS
   doc.root.add(REXML::CData.new("foo bar  baz "))
   doc.to_s # => "<root><![CDATA[foo bar  baz ]]></root>\n"
-  
+
   doc = REXML::Document.new(<<EOS)
   <root />
   EOS
@@ -59,12 +59,12 @@ self を複製して返します。
 #@# #@todo
 
 #@# == Constants
-#@# 
+#@#
 #@# --- START
 #@# #@todo
-#@# 
+#@#
 #@# --- STOP
 #@# #@todo
-#@# 
+#@#
 #@# --- ILLEGAL
 #@# #@todo

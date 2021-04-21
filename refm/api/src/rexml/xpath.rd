@@ -46,11 +46,11 @@ XPathインジェクション攻撃を避けるため、適切な
     <b> b3 </b>
   </root>
   EOS
-  
+
   a = doc.root.elements[1] # => <a> ... </>
   b1 = REXML::XPath.first(a, "b")
   b1.text # => "b1"
-  
+
   REXML::XPath.first(doc, "/root/a/x:c") # => <x:c/>
   REXML::XPath.first(a, "x:c") # => <x:c/>
   REXML::XPath.first(a, "y:c") # => nil
@@ -93,7 +93,7 @@ XPathインジェクション攻撃を避けるため、適切な
     <b> b3 </b>
   </root>
   EOS
-  
+
   REXML::XPath.each(doc, "/root/a/b"){|e| p e.text }
   # >> "b1"
   # >> "b2"
@@ -132,10 +132,10 @@ XPathインジェクション攻撃を避けるため、適切な
     <b> b3 </b>
   </root>
   EOS
-  
+
   REXML::XPath.match(doc, "/root/a/b") # => [<b> ... </>, <b> ... </>]
 
 #@# == Constants
-#@# 
+#@#
 #@# --- EMPTY_HASH
 #@# #@todo

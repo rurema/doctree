@@ -9,7 +9,7 @@ RelaxNGに基づくXMLバリデータ。
 
   require 'rexml/document'
   require 'rexml/validation/relaxng'
-  
+
   relaxng_schema = <<RELAXNG
   <?xml version="1.0" encoding="UTF-8"?>
   <element name="addressBook" xmlns="http://relaxng.org/ns/structure/1.0">
@@ -30,7 +30,7 @@ RelaxNGに基づくXMLバリデータ。
     </zeroOrMore>
   <element>
   RELAXNG
-  
+
   xml = <<XML
   <addressBook>
     <card>
@@ -43,11 +43,11 @@ RelaxNGに基づくXMLバリデータ。
     </card>
   </addressBook>
   XML
-  
+
   validator = REXML::Validation::RelaxNG.new(relaxng_schema)
   parser = REXML::Parsers::TreeParser.new(xml)
   parser.add_listener(validator)
-  parser.parse 
+  parser.parse
   # ~> /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/validation.rb:22:in `validate': Validation error.  Expected: :start_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
   # ~>    )
   # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/relaxng.rb:122:in `receive'
@@ -256,4 +256,3 @@ RelaxNGに基づくXMLバリデータ。
 
 --- inspect
 #@todo
-

@@ -27,7 +27,7 @@ context には hash table で要素のコンテキストを指定します。
 の取り扱いを指定できます。
 #@include(context)
 
-@param arg 要素の名前(String)もしくは初期化に使う [[c:REXML::Element]] 
+@param arg 要素の名前(String)もしくは初期化に使う [[c:REXML::Element]]
        オブジェクト
 @param parent 親ノード
 @param context コンテキスト([[c:Hash]])
@@ -93,7 +93,7 @@ self が属する文書のルートノードを返します。
   </children>
   </root>
   EOS
-  
+
   children = doc.get_elements("/root/children").first
   children.name # => "children"
   children.root_node == doc # => true
@@ -114,7 +114,7 @@ self が属する文書のルート要素を返します。
   </children>
   </root>
   EOS
-  
+
   children = doc.get_elements("/root/children").first
   children.name # => "children"
   children.root.name # => "root"
@@ -144,7 +144,7 @@ self が属する文書([[c:REXML::Document]])オブジェクトを返します�
 
 #@# --- ignore_whitespace_nodes -> bool
 #@# buggy?
-#@# 
+#@#
 #@# #@todo
 
 --- raw -> bool
@@ -209,7 +209,7 @@ prefix で指示される名前空間の宣言が存在しない場合は nil �
   a.add_namespace("foo", "bar")  # 上と同じ意味
   a.add_namespace("twiddle")
   a.to_s # => "<a xmlns:foo='bar' xmlns='twiddle'/>"
-  a.add_namespace("foo", "baz") 
+  a.add_namespace("foo", "baz")
   a.to_s # => "<a xmlns:foo='baz' xmlns='twiddle'/>"
 
 --- delete_namespace(namespace = "xmlns") -> self
@@ -335,7 +335,7 @@ max に 0 を指定すると、max の指定は無視されます(0個ではあ�
   # >> <b id='1'/>
   doc.root.each_element_with_attribute('id', '1', 0, 'd'){|e| p e }
   # >> <d id='1'/>
-  
+
 --- each_element_with_text(text = nil, max = 0, name = nil) {|element| ... } -> ()
 テキストを子ノードとして
 持つすべての子要素を引数としてブロックを呼び出します。
@@ -477,12 +477,12 @@ nil を指定すると最初のテキストノードが削除されます。
 #@# REXML::Text#<< の問題
 #@# --- add_text(text) -> self
 #@# テキストノードを子ノードとして追加します。
-#@# 
+#@#
 #@# text には文字列もしくは [[c:REXML::Text]] を指定できます。
-#@# 
-#@# @param text 
+#@#
+#@# @param text
 #@# @see [[m:REXML::Element#add]]
-#@# 
+#@#
 #@# ==== 例
 #@#   require 'rexml/document'
 #@#   doc = REXML::Document.new("<e/>")
@@ -529,7 +529,7 @@ name という属性名を持つ属性を指定できます。
 @param namespace 名前空間のURI(文字列)
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<-EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
@@ -702,7 +702,7 @@ name を指定した場合 name という名前を持つ子要素の中で index
   doc.root.elements[1]       # => <b/>
   doc.root.elements['c']     # => <c id='1'/>
   doc.root.elements[2,'c']   # => <c id='2'/>
-  
+
   doc = REXML::Document.new '<a><b><c /><a id="1"/></b></a>'
   doc.root.elements["a"]     # => nil
   doc.root.elements["b/a"]   # => <a id='1'/>
@@ -783,7 +783,7 @@ xpath で指定した XPath 文字列にマッチする要素をすべて取り�
   doc = REXML::Document.new('<a><c/><c/><c/><c/></a>')
   doc.elements.delete_all("a/c") # => [<c/>, <c/>, <c/>, <c/>]
   doc.to_s                       # => "<a/>"
-  
+
 --- add(element = nil) -> REXML::Element
 --- <<(element = nil) -> REXML::Element
 
@@ -823,7 +823,7 @@ xpath を指定した場合には、その XPath 文字列に
   require 'rexml/xpath'
   doc = REXML::Document.new '<a><b/><c/><d/>sean<b/><c/><d/></a>'
   # <b/>,<c/>,<d/>,<b/>,<c/>, <d/> がブロックに渡される
-  doc.root.elements.each {|e|p e} 
+  doc.root.elements.each {|e|p e}
   # <b/>, <b/> がブロックに渡される
   doc.root.elements.each('b') {|e|p e}  #-> Yields b, b elements
   # <b/>,<c/>,<d/>,<b/>,<c/>,<d/> がブロックに渡される
@@ -914,16 +914,16 @@ nameという属性名の属性がない場合は nil を返します。
 === 例
 
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
     <a foo:att='1' bar:att='2' att='&lt;'/>
   </root>
   EOS
-  
+
   a = doc.get_elements("/root/a").first
-  
+
   p a.attributes["att"] # => "<"
   p a.attributes["bar:att"] # => "2"
 
@@ -945,15 +945,15 @@ nameという属性名の属性がない場合は nil を返します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
     <a foo:att='1' bar:att='2' att='&lt;'/>
   </root>
-  EOS  
+  EOS
   a = doc.get_elements("/root/a").first
-  
+
   p a.attributes.length # => 3
 
 --- each_attribute {|attribute| ... } -> ()
@@ -963,15 +963,15 @@ nameという属性名の属性がない場合は nil を返します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
     <a foo:att='1' bar:att='2' att='&lt;'/>
   </root>
-  EOS  
+  EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes.each_attribute do |attr|
     p [attr.namespace, attr.name, attr.value]
   end
@@ -987,19 +987,19 @@ nameという属性名の属性がない場合は nil を返します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
     <a foo:att='1' bar:att='2' att='&lt;'/>
   </root>
-  EOS  
+  EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes.each do |name, value|
     p [name, value]
   end
-  
+
   # => ["foo:att", "1"]
   # => ["bar:att", "2"]
   # => ["att", "<"]
@@ -1014,7 +1014,7 @@ name という名前を持つ属性がない場合は nil を返します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<-EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
@@ -1022,7 +1022,7 @@ name という名前を持つ属性がない場合は nil を返します。
   </root>
   EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes.get_attribute("att") # => att='&lt;'
   a.attributes.get_attribute("foo:att") # => foo:att='1'
 
@@ -1037,7 +1037,7 @@ name で属性の名前を、value で値を更新します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<-EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
@@ -1045,7 +1045,7 @@ name で属性の名前を、value で値を更新します。
   </root>
   EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes["att"] = "9"
   a.attributes["foo:attt"] = "8"
   a # => <a foo:att='1' bar:att='2' att='9' foo:attt='8'/>
@@ -1060,15 +1060,15 @@ self が属する要素より上位の要素で定義されているものは含
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
     <a foo:att='1' bar:att='2' att='&lt;'/>
   </root>
-  EOS  
+  EOS
   a = doc.get_elements("/root/a").first
-  
+
   p doc.root.attributes.prefixes # => ["foo", "bar"]
   p a.attributes.prefixes # => []
 
@@ -1080,18 +1080,18 @@ self の中で宣言されている名前空間の集合を返します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
     <a foo:att='1' bar:att='2' att='&lt;'/>
   </root>
-  EOS  
+  EOS
   a = doc.get_elements("/root/a").first
-  
-  p doc.root.attributes.namespaces 
+
+  p doc.root.attributes.namespaces
   # => {"foo"=>"http://example.org/foo", "bar"=>"http://example.org/bar"}
-  p a.attributes.namespaces 
+  p a.attributes.namespaces
   # => {}
 
 --- delete(attribute) -> REXML::Element
@@ -1107,7 +1107,7 @@ self が属する要素([[c:REXML::Element]])を返します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<-EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
@@ -1115,7 +1115,7 @@ self が属する要素([[c:REXML::Element]])を返します。
   </root>
   EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes.delete("att")     # => <a foo:att='1' bar:att='2'/>
   a.attributes.delete("foo:att") # => <a bar:att='2'/>
   attr = a.attributes.get_attribute("bar:att")
@@ -1143,7 +1143,7 @@ name という名前を持つ属性をすべて削除します。
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<-EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
@@ -1151,7 +1151,7 @@ name という名前を持つ属性をすべて削除します。
   </root>
   EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes.delete_all("att") # => [att='&lt;']
   a # => <a foo:att='1' bar:att='2'/>
 
@@ -1171,7 +1171,7 @@ XML プロセッサが prefix を置き換えてしまった場合でも、こ�
 
 === 例
   require 'rexml/document'
-  
+
   doc = REXML::Document.new(<<-EOS)
   <root xmlns:foo="http://example.org/foo"
         xmlns:bar="http://example.org/bar">
@@ -1179,9 +1179,8 @@ XML プロセッサが prefix を置き換えてしまった場合でも、こ�
   </root>
   EOS
   a = doc.get_elements("/root/a").first
-  
+
   a.attributes.get_attribute_ns("", "att") # => att='&lt;'
   a.attributes.get_attribute_ns("http://example.org/foo", "att") # => foo:att='1'
   a.attributes.get_attribute_ns("http://example.org/baz", "att") # => nil
   a.attributes.get_attribute_ns("http://example.org/foo", "attt") # => nil
-

@@ -46,7 +46,7 @@ DTD([[c:REXML::DocType]], [[m:REXML::Document#doctype]])
 で定義されます。DTD が与えられていない場合は、XMLの規格上
 以下の実体参照/対応文字がデフォルトで使われます。
   * &amp; &
-  * &lt; <  
+  * &lt; <
   * &gt; >
   * &quot; "
   * &apos; '
@@ -116,12 +116,12 @@ filter でアンエスケープしない実体の実体名を文字列配列で�
 #@# #@since 1.9.1
 #@# --- check(string, pattern, doctype)
 #@# #@end
-#@# 
+#@#
 #@# used internally by unnormalize
 #@# #@since 2.0.0
 #@# --- expand(ref, doctype, filter)
 #@# #@end
-#@# 
+#@#
 == Instance Methods
 
 --- raw -> bool
@@ -200,7 +200,7 @@ self を複製します。
 
 val には非正規化された(エスケープされていない)文字列を渡さなければ
 なりません。
-  
+
 === 例
   require 'rexml/document'
   e = REXML::Element.new("a")
@@ -240,30 +240,30 @@ val には非正規化された(エスケープされていない)文字列を�
 
 #@# 意味は REXML::Child と同じ
 #@# --- parent=
-#@# 
+#@#
 == Constants
 
 #@# Internally used regexps
 #@# --- SPECIALS
 #@# #@todo
-#@# 
+#@#
 #@# --- SUBSTITUTES
 #@# #@todo
-#@# 
+#@#
 #@# --- SLAICEPS
 #@# #@todo
-#@# 
+#@#
 #@# --- SETUTITSBUS
 #@# #@todo
-#@# 
+#@#
 #@# --- ILLEGAL
 #@# #@todo
-#@# 
+#@#
 #@# --- NUMERICENTITY
 #@# #@todo
-#@# 
+#@#
 #@# --- REFERENCE
 #@# #@todo
-#@# 
+#@#
 #@# --- EREFERENCE
 #@# #@todo

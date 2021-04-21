@@ -25,7 +25,7 @@ XML 宣言(文書先頭の <?xml version=... ?>)はXML処理命令ではあり�
 @param target ターゲット
 @param content 内容
 
-  
+
 == Instance Methods
 
 --- target -> String
@@ -92,9 +92,9 @@ Symbol :processing_instruction を返します。
 #@# #@end
 
 #@# == Constants
-#@# 
+#@#
 #@# --- START
 #@# #@todo
-#@# 
+#@#
 #@# --- STOP
 #@# #@todo
