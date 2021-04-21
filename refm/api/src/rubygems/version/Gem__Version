@@ -46,11 +46,11 @@ version が正しいバージョンであれば真を返します。そうでな
 
 [[c:Gem::Version]] のインスタンスを作成するためのファクトリメソッドです。
 
-例:
-
-  ver1 = Gem::Version.create('1.3.17')   # => #<Gem::Version "1.3.17">
-  ver2 = Gem::Version.create(ver1)       # => #<Gem::Version "1.3.17">
-  ver3 = Gem::Version.create(nil)        # => nil
+#@samplecode
+ver1 = Gem::Version.create('1.3.17')   # => #<Gem::Version "1.3.17">
+ver2 = Gem::Version.create(ver1)       # => #<Gem::Version "1.3.17">
+ver3 = Gem::Version.create(nil)        # => nil
+#@end
 
 @param input [[c:Gem::Version]] のインスタンスか文字列を指定します。
 
@@ -79,23 +79,23 @@ p Gem::Version.new("3.9.0") <=> "3.9.0" # => nil
 
 最後の一桁を切り上げた新しい [[c:Gem::Version]] のインスタンスを返します。
 
-例:
-
-  ver1 = Gem::Version.create('5.3.1') # => #<Gem::Version "5.3.1">
-  ver2 = ver1.bump                    # => #<Gem::Version "5.4">
+#@samplecode
+ver1 = Gem::Version.create('5.3.1') # => #<Gem::Version "5.3.1">
+ver2 = ver1.bump                    # => #<Gem::Version "5.4">
+#@end
 
 --- eql?(other) -> bool
 
 self と other の [[m:Gem::Version#version]] が等しいとき真を返します。
 そうでなければ偽を返します。
 
-例:
-
-  ver1 = Gem::Version.create('1.0')   # => #<Gem::Version "1.0">
-  ver2 = Gem::Version.create('1')     # => #<Gem::Version "1">
-  ver3 = Gem::Version.create('1.2.3') # => #<Gem::Version "1.2.3">
-  ver1.eql?(ver2)                     # => true
-  ver1.eql?(ver3)                     # => false
+#@samplecode
+ver1 = Gem::Version.create('1.0')   # => #<Gem::Version "1.0">
+ver2 = Gem::Version.create('1')     # => #<Gem::Version "1">
+ver3 = Gem::Version.create('1.2.3') # => #<Gem::Version "1.2.3">
+ver1.eql?(ver2)                     # => true
+ver1.eql?(ver3)                     # => false
+#@end
 
 --- marshal_dump -> Array
 
