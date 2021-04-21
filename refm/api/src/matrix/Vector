@@ -107,13 +107,6 @@ i 番目の要素を返します。インデックスは 0 から開始します
 @param i 取得する要素のインデックスを整数値で指定します。
          インデックスは 0 から始めます。
 
-#@# for internal use
-#@# --- init_elements(array, copy) -> Array
-#@# ベクトルの要素を引数 array で初期化します。
-#@#
-#@# @param array ベクトルとして初期化する Array を指定します。
-#@# @param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
-#@#              true の場合はコピーします。
 
 --- size -> Integer
 
