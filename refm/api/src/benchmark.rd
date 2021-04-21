@@ -16,16 +16,17 @@ category Development
 Benchmark::Tms オブジェクトには to_s が定義されているので、
 基本的には以下のように使います。
 
-  require 'benchmark'
+#@samplecode
+require 'benchmark'
 
-  puts Benchmark::CAPTION
-  puts Benchmark.measure { "a"*1_000_000 }
+puts Benchmark::CAPTION
+puts Benchmark.measure { "a"*1_000_000 }
 
-  #=>
-
-      user     system      total        real
-  1.166667   0.050000   1.216667 (  0.571355)
-
+#=>
+#
+#     user     system      total        real
+# 1.166667   0.050000   1.216667 (  0.571355)
+#@end
 
 --- realtime { ... } -> Float
 
@@ -42,60 +43,64 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 @param label_width ラベルの幅を指定します。
 @param labels     ブロックが [[c:Benchmark::Tms]] オブジェクトの配列を返す場合に指定します。
 
-例:
+#@samplecode
+require 'benchmark'
 
-  require 'benchmark'
+n = 50000
+Benchmark.bm do |x|
+x.report { for i in 1..n; a = "1"; end }
+x.report { n.times do   ; a = "1"; end }
+x.report { 1.upto(n) do ; a = "1"; end }
+end
 
-  n = 50000
-  Benchmark.bm do |x|
-    x.report { for i in 1..n; a = "1"; end }
-    x.report { n.times do   ; a = "1"; end }
-    x.report { 1.upto(n) do ; a = "1"; end }
-  end
-
-  #=>
-
-        user     system      total        real
-    1.033333   0.016667   1.016667 (  0.492106)
-    1.483333   0.000000   1.483333 (  0.694605)
-    1.516667   0.000000   1.516667 (  0.711077)
+#=>
+#
+#     user     system      total        real
+# 1.033333   0.016667   1.016667 (  0.492106)
+# 1.483333   0.000000   1.483333 (  0.694605)
+# 1.516667   0.000000   1.516667 (  0.711077)
+#@end
 
 以下のようにも書けます。
 
-  require 'benchmark'
+#@samplecode
+require 'benchmark'
 
-  n = 50000
-  Benchmark.bm(7) do |x|
-    x.report("for:")   { for i in 1..n; a = "1"; end }
-    x.report("times:") { n.times do   ; a = "1"; end }
-    x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
-  end
+n = 50000
+Benchmark.bm(7) do |x|
+  x.report("for:")   { for i in 1..n; a = "1"; end }
+  x.report("times:") { n.times do   ; a = "1"; end }
+  x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
+end
 
-  #=>
-               user     system      total        real
-  for:     1.050000   0.000000   1.050000 (  0.503462)
-  times:   1.533333   0.016667   1.550000 (  0.735473)
-  upto:    1.500000   0.016667   1.516667 (  0.711239)
+#=>
+#              user     system      total        real
+# for:     1.050000   0.000000   1.050000 (  0.503462)
+# times:   1.533333   0.016667   1.550000 (  0.735473)
+# upto:    1.500000   0.016667   1.516667 (  0.711239)
+#@end
 
 集計を付けた場合
 
-  require 'benchmark'
+#@samplecode
+require 'benchmark'
 
-  n = 50000
-  Benchmark.bm(7) do |x|
-    tf = x.report("for:")   { for i in 1..n; a = "1"; end }
-    tt = x.report("times:") { n.times do   ; a = "1"; end }
-    tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
-    [tf + tt + tu, (tf + tt + tu) / 3]
-  end
+n = 50000
+Benchmark.bm(7, ">total:", ">argv:") do |x|
+  tf = x.report("for:")   { for i in 1..n; a = "1"; end }
+  tt = x.report("times:") { n.times do   ; a = "1"; end }
+  tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
+  [tf + tt + tu, (tf + tt + tu) / 3]
+end
 
-  #=>
-               user     system      total        real
-  for:     0.040000   0.000000   0.040000 (  0.141902)
-  times:   0.010000   0.000000   0.010000 (  0.043335)
-  upto:    0.020000   0.000000   0.020000 (  0.089806)
-  >total:  0.070000   0.000000   0.070000 (  0.275044)
-  >avg:    0.023333   0.000000   0.023333 (  0.091681)
+#=>
+#               user     system      total        real
+# for:      0.001467   0.004727   0.006194 (  0.006193)
+# times:    0.003814   0.000000   0.003814 (  0.003814)
+# upto:     0.003855   0.000003   0.003858 (  0.003859)
+# >total:   0.009136   0.004730   0.013866 (  0.013867)
+# >argv:    0.003045   0.001577   0.004622 (  0.004622)
+#@end
 
 @see [[m:Benchmark.#benchmark]]
 
@@ -115,25 +120,27 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 
 @param width ラベルの幅を指定します。
 
-  require 'benchmark'
+#@samplecode
+require 'benchmark'
 
-  array = (1..1000000).map { rand }
+array = (1..1000000).map { rand }
 
-  Benchmark.bmbm do |x|
-    x.report("sort!") { array.dup.sort! }
-    x.report("sort")  { array.dup.sort  }
-  end
+Benchmark.bmbm do |x|
+  x.report("sort!") { array.dup.sort! }
+  x.report("sort")  { array.dup.sort  }
+end
 
-  #=>
-
-  Rehearsal -----------------------------------------
-  sort!  11.928000   0.010000  11.938000 ( 12.756000)
-  sort   13.048000   0.020000  13.068000 ( 13.857000)
-  ------------------------------- total: 25.006000sec
-
-              user     system      total        real
-  sort!  12.959000   0.010000  12.969000 ( 13.793000)
-  sort   12.007000   0.000000  12.007000 ( 12.791000)
+#=>
+#
+# Rehearsal -----------------------------------------
+# sort!  11.928000   0.010000  11.938000 ( 12.756000)
+# sort   13.048000   0.020000  13.068000 ( 13.857000)
+# ------------------------------- total: 25.006000sec
+#
+#             user     system      total        real
+# sort!  12.959000   0.010000  12.969000 ( 13.793000)
+# sort   12.007000   0.000000  12.007000 ( 12.791000)
+#@end
 
 --- benchmark(caption = "", label_width = nil, fmtstr = nil, *labels){|rep| ...} -> [Benchmark::Tms]
 
@@ -168,36 +175,36 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 : %n
   ラベルで置き換えられます(Mnemonic: n of "*n*ame")。[[m:Benchmark::Tms#label]]
 
-=== 例
+#@samplecode
+require 'benchmark'
 
-  require 'benchmark'
+n = 50000
 
-  n = 50000
+# これは
+#    Benchmark.bm(7, ">total:", ">avg:") do |x| ... end
+# と同じ
+Benchmark.benchmark(" "*7 + Benchmark::CAPTION,
+                    7,
+                    Benchmark::FORMAT,
+                    ">total:",
+                    ">avg:") do |x|
 
-  # これは
-  #    Benchmark.bm(7, ">total:", ">avg:") do |x| ... end
-  # と同じ
-  Benchmark.benchmark(" "*7 + Benchmark::CAPTION,
-                      7,
-                      Benchmark::FMTSTR,
-                      ">total:",
-                      ">avg:") do |x|
+  tf = x.report("for:")   { for i in 1..n; a = "1"; end }
+  tt = x.report("times:") { n.times do   ; a = "1"; end }
+  tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
 
-    tf = x.report("for:")   { for i in 1..n; a = "1"; end }
-    tt = x.report("times:") { n.times do   ; a = "1"; end }
-    tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
+  [tf+tt+tu, (tf+tt+tu)/3]
+end
 
-    [tf+tt+tu, (tf+tt+tu)/3]
-  end
-
-  #=>
-
-               user     system      total        real
-  for:     1.016667   0.016667   1.033333 (  0.485749)
-  times:   1.450000   0.016667   1.466667 (  0.681367)
-  upto:    1.533333   0.000000   1.533333 (  0.722166)
-  >total:  4.000000   0.033333   4.033333 (  1.889282)
-  >avg:    1.333333   0.011111   1.344444 (  0.629761)
+#=>
+#
+#              user     system      total        real
+# for:     1.016667   0.016667   1.033333 (  0.485749)
+# times:   1.450000   0.016667   1.466667 (  0.681367)
+# upto:    1.533333   0.000000   1.533333 (  0.722166)
+# >total:  4.000000   0.033333   4.033333 (  1.889282)
+# >avg:    1.333333   0.011111   1.344444 (  0.629761)
+#@end
 
 
 
@@ -233,7 +240,9 @@ Benchmark::Tms オブジェクトには to_s が定義されているので、
 上記のフォーマット文字列を使用しています。
 この定数の内容は以下の通りです。
 
-  "%10.6u %10.6y %10.6t %10.6r\n"
+#@samplecode
+"%10.6u %10.6y %10.6t %10.6r\n"
+#@end
 
 @see [[m:Benchmark.#benchmark]], [[m:Benchmark::Tms::FORMAT]]
 
@@ -432,7 +441,9 @@ System CPU time
 上記のフォーマット文字列を使用しています。
 この定数の内容は以下の通りです。
 
-  "%10.6u %10.6y %10.6t %10.6r\n"
+#@samplecode
+"%10.6u %10.6y %10.6t %10.6r\n"
+#@end
 
 @see [[m:Benchmark.#benchmark]], [[m:Benchmark::FORMAT]]
 
