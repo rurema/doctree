@@ -598,6 +598,18 @@ OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 @raise TypeError 比較できないときに発生します。
 @see [[m:OpenSSL::BN#cmp]]
 
+#@since 2.5.0
+--- negative? -> bool
+自身が負である場合に true を返します。Ruby 2.5, OpenSSL 2.1.0 から利用できます。
+
+#@samplecode
+require 'openssl'
+p 15.to_bn.negative?    # => false
+p  0.to_bn.negative?    # => false
+p (-5).to_bn.negative?  # => treu
+#@end
+#@end
+
 --- zero? -> bool
 自身が 0 である場合に true を返します。
 
