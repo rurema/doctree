@@ -27,13 +27,15 @@ BigDecimal オブジェクトに変換する機能を提供します。
 自身を一度 [[m:Float#to_s]] で文字列に変換してから
 [[m:Kernel.#BigDecimal]] で生成するので、精度に注意してください。
 
-  require 'bigdecimal'
-  require 'bigdecimal/util'
-  1.0.to_d.to_s # => "0.1E1"
-  (1.0/0).to_d.to_s # => "Infinity"
+#@samplecode
+require 'bigdecimal'
+require 'bigdecimal/util'
+1.0.to_d.to_s # => "0.1E1"
+(1.0/0).to_d.to_s # => "Infinity"
 
-  ((1.0/3).to_d/(2.0/3).to_d).to_s # => "0.499999999999999250000000000000375E0"
-  ((1.0/3)/(2.0/3)).to_d.to_s # => "0.5E0"
+((1.0/3).to_d/(2.0/3).to_d).to_s # => "0.499999999999999250000000000000375E0"
+((1.0/3)/(2.0/3)).to_d.to_s # => "0.5E0"
+#@end
 
 @raise ArgumentError prec に負の数を指定した場合に発生します。
 
@@ -85,12 +87,12 @@ nFig 桁まで計算を行います。
 
 @raise ArgumentError nFig に 0 以下を指定した場合に発生します。
 
-例:
-
-  require "bigdecimal"
-  require "bigdecimal/util"
-  Rational(1, 3).to_d(3).to_s  # => "0.333E0"
-  Rational(1, 3).to_d(10).to_s # => "0.3333333333E0"
+#@samplecode
+require "bigdecimal"
+require "bigdecimal/util"
+Rational(1, 3).to_d(3).to_s  # => "0.333E0"
+Rational(1, 3).to_d(10).to_s # => "0.3333333333E0"
+#@end
 
 = reopen Integer
 
