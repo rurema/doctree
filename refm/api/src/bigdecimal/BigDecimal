@@ -678,23 +678,35 @@ self の指数部を整数値で返します。
 
 self の有効数字と最大有効数字の配列を返します。
 
---- sign -> Integer
+--- sign -> -3 | -2 | -1 | 0 | 1 | 2 | 3
 
-値が正 (sign > 0)、負 (sign < 0)、その他 (sign == 0) であるかの情報を返します。
+自身の符号等の性質に応じて、[[c:Integer]] を返します。
 
-    n = a.sign
+符号が正であれば正の整数を返し、負であれば負の整数を返し、NaN であれば 0 を返します。
 
-としたとき n の値は a が以下のときを意味します。() の中の数字は、実際の
-値です (「[[ref:lib:bigdecimal#internal_structure]]」を参照)。
+  NaN        であれば、 0。 BigDecimal::SIGN_NaN と同じです。
+  +0         であれば、 1。 BigDecimal::SIGN_POSITIVE_ZERO と同じです。
+  -0         であれば、-1。 BigDecimal::SIGN_NEGATIVE_ZERO と同じです。
+  有限の正の値 であれば、 2。 BigDecimal::SIGN_POSITIVE_FINITE と同じです。
+  有限の負の値 であれば、-2。 BigDecimal::SIGN_NEGATIVE_FINITE と同じです。
+  +Infinity  であれば、 3。 BigDecimal::SIGN_POSITIVE_INFINITE と同じです。
+  -Infinity  であれば、-3。 BigDecimal::SIGN_NEGATIVE_INFINITE と同じです。
+
+BigDecimal は、 0 であっても、+ か - の符号を持つことに注意して下さい。
+(「[[ref:lib:bigdecimal#internal_structure]]」を参照)
 
 #@samplecode
-n = BigDecimal::SIGN_NaN(0)                 # a は NaN
-n = BigDecimal::SIGN_POSITIVE_ZERO(1)       # a は +0
-n = BigDecimal::SIGN_NEGATIVE_ZERO(-1)      # a は -0
-n = BigDecimal::SIGN_POSITIVE_FINITE(2)     # a は正の値
-n = BigDecimal::SIGN_NEGATIVE_FINITE(-2)    # a は負の値
-n = BigDecimal::SIGN_POSITIVE_INFINITE(3)   # a は+Infinity
-n = BigDecimal::SIGN_NEGATIVE_INFINITE(-3)  # a は-Infinity
+require "bigdecimal"
+
+p BigDecimal("NaN").sign       # =>  0
+p BigDecimal("0").sign         # =>  1
+p BigDecimal("100").sign       # =>  2
+p BigDecimal("Infinity").sign  # =>  3
+p BigDecimal("-0").sign        # => -1
+p BigDecimal("-5").sign        # => -2
+p BigDecimal("-Infinity").sign # => -3
+
+p BigDecimal("0").sign == BigDecimal::SIGN_POSITIVE_ZERO  # => true
 #@end
 
 
