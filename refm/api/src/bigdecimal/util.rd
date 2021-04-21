@@ -30,11 +30,12 @@ BigDecimal オブジェクトに変換する機能を提供します。
 #@samplecode
 require 'bigdecimal'
 require 'bigdecimal/util'
-1.0.to_d.to_s # => "0.1E1"
-(1.0/0).to_d.to_s # => "Infinity"
 
-((1.0/3).to_d/(2.0/3).to_d).to_s # => "0.499999999999999250000000000000375E0"
-((1.0/3)/(2.0/3)).to_d.to_s # => "0.5E0"
+p 1.0.to_d       # => 0.1e1
+p (1.0 / 0).to_d # => Infinity
+
+p (1.0 / 3).to_d / (2.0 / 3).to_d  # => 0.5e0
+p ((1.0 / 3) / (2.0 / 3)).to_d     # => 0.5e0
 #@end
 
 @raise ArgumentError prec に負の数を指定した場合に発生します。
@@ -90,8 +91,8 @@ nFig 桁まで計算を行います。
 #@samplecode
 require "bigdecimal"
 require "bigdecimal/util"
-Rational(1, 3).to_d(3).to_s  # => "0.333E0"
-Rational(1, 3).to_d(10).to_s # => "0.3333333333E0"
+p Rational(1, 3).to_d(3)  # => 0.333e0
+p Rational(1, 3).to_d(10) # => 0.3333333333e0
 #@end
 
 = reopen Integer

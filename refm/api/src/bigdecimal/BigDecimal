@@ -624,13 +624,13 @@ self を [[c:Rational]] オブジェクトに変換します。
 --- to_s    -> String
 --- to_s(n) -> String
 
-self を文字列に変換します (デフォルトは "0.xxxxxEn" の形になります)。
+self を文字列に変換します (デフォルトは "0.xxxxxen" の形になります)。
 
 @param n 出力の形式を [[c:Integer]] または [[c:String]] で指定します。
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("1.23456").to_s  #  ==> "0.123456E1"
+BigDecimal("1.23456").to_s  #  ==> "0.123456e1"
 #@end
 
 引数 n に正の整数が指定されたときは、小数点で分けられる左右部分を、
@@ -638,14 +638,14 @@ BigDecimal("1.23456").to_s  #  ==> "0.123456E1"
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("0.1234567890123456789").to_s(10)   # => "0.1234567890 123456789E0"
+BigDecimal("0.1234567890123456789").to_s(10)   # => "0.1234567890 123456789e0"
 #@end
 
 引数 n に正の整数を表す文字列を指定することもできます。
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("0.1234567890123456789").to_s("10") # => "0.1234567890 123456789E0"
+BigDecimal("0.1234567890123456789").to_s("10") # => "0.1234567890 123456789e0"
 #@end
 
 文字列の最初に '+' または ' ' を付けると、値が正の場合先頭に '+' または
@@ -696,6 +696,7 @@ n = BigDecimal::SIGN_NEGATIVE_FINITE(-2)    # a は負の値
 n = BigDecimal::SIGN_POSITIVE_INFINITE(3)   # a は+Infinity
 n = BigDecimal::SIGN_NEGATIVE_INFINITE(-3)  # a は-Infinity
 #@end
+
 
 --- nan? -> bool
 
