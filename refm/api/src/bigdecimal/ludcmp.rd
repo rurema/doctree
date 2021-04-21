@@ -84,4 +84,3 @@ LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めて返し�
   # x = lusolve(a, b, ludecomp(a, b.size, zero, one), zero)
 
   p x.map(&:to_f)  #=> [1.0, -1.0]
-
