@@ -802,14 +802,14 @@ p m                                 #=> Matrix[[10, 20], [30, 40]]
 #@end
 
 --- empty? -> bool
-行列が要素を持たないならば真を返します。
+行列が要素を持たないならば true を返します。
 
 要素を持たないとは、行数か列数のいずれかが0であることを意味します。
 
 @see [[m:Matrix.empty]]
 
 --- real? -> bool
-行列の全要素が実([[m:Numeric#real?]])であれば真を返します。
+行列の全要素が実([[m:Numeric#real?]])であれば true を返します。
 
 Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返します。
 
@@ -823,7 +823,7 @@ Matrix[[Complex(1, 0), 0], [0, 1]].real? # => false
 
 --- regular? -> bool
 
-行列が正方で正則なら真を、特異なら偽を返します。
+行列が正方で正則なら true を、特異なら false を返します。
 
 行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することです。
 行列式が0でないことと同値です。
@@ -859,7 +859,7 @@ p m.regular? # => raise ExceptionForMatrix::ErrDimensionMismatch
 
 --- singular? -> bool
 
-行列が正方で特異なら真を/正則なら偽を返します。
+行列が正方で特異なら true を、正則なら false を返します。
 
 行列が特異(singular)であるとは、正則でないことです。
 行列式が0であること同値です。
@@ -871,7 +871,7 @@ p m.regular? # => raise ExceptionForMatrix::ErrDimensionMismatch
 
 --- square? -> bool
 
-正方行列であるなら、真を返します。
+正方行列であるなら、 true を返します。
 
 --- ==(other) -> bool
 --- eql?(other) -> bool
@@ -881,48 +881,48 @@ p m.regular? # => raise ExceptionForMatrix::ErrDimensionMismatch
 @param other 比較対象のオブジェクト
 
 --- diagonal? -> bool
-行列が対角行列ならば真を返します。
+行列が対角行列ならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- hermitian? -> bool
-行列がエルミートならば真を返します。
+行列がエルミートならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- lower_triangular? -> bool
-行列が下三角行列ならば真を返します。
+行列が下三角行列ならば true を返します。
 
 --- normal? -> bool
-行列が正規行列ならば真を返します。
+行列が正規行列ならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- orthogonal? -> bool
-行列が直交行列ならば真を返します。
+行列が直交行列ならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- permutation? -> bool
-行列が置換行列ならば真を返します。
+行列が置換行列ならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- symmetric? -> bool
-行列が対称ならば真を返します。
+行列が対称ならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- unitary? -> bool
-行列がユニタリならば真を返します。
+行列がユニタリならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
 --- upper_triangular? -> bool
-行列が上三角行列ならば真を返します。
+行列が上三角行列ならば true を返します。
 
 --- zero? -> bool
-行列が零行列ならば真を返します。
+行列が零行列ならば true を返します。
 
 
 --- row_vectors -> [Vector]
@@ -1204,7 +1204,7 @@ Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4], 
 --- antisymmetric? -> bool
 --- skew_symmetric? -> bool
 
-行列が反対称行列 (交代行列、歪〔わい〕対称行列とも) ならば真を返します。
+行列が反対称行列 (交代行列、歪〔わい〕対称行列とも) ならば true を返します。
 
 @raise ExceptionForMatrix::ErrDimensionMismatch 行列が正方行列でない場合に発生します
 
@@ -1290,7 +1290,7 @@ LUP分解の置換行列部分を返します。
 ピボッティングを表す配列を返します。
 
 --- singular? -> bool
-元の行列が正方で特異なら真を/正則なら偽を返します。
+元の行列が正方で特異なら true を, 正則なら false を返します。
 LUP 分解の結果を利用して判定します。
 
 @see [[m:Matrix#singular?]]
