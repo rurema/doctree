@@ -181,14 +181,6 @@ p v #=> Vector[0, 3, 6, 9, 0]
 @param v 比較対象ベクトル
 
 
-#@# for internal use
-#@# --- compare_by(elements) -> bool
-#@#
-#@# 自分自身と引数 elements を配列として比較します。
-#@#
-#@# @param elements 比較する配列。
-#@# @return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
-
 --- *(other) -> Vector
 
 self の各要素に数 other を乗じたベクトルを返します。
