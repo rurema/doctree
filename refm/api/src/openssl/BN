@@ -11,15 +11,15 @@ OpenSSL内で利用される多倍長整数クラスです。
 
 文字列を多倍長整数オブジェクト([[c:OpenSSL::BN]])を生成します。
 
-base によって変換の基数を決めることができます。
-10, 16 が利用可能です。
+base で、変換方法(基数)を指定します。
+デフォルトは 10 で、他に 16, 2, 0 を指定できます。
 
-baseに2を指定すると文字列を big-endian の符号無し整数のバイナリ列とみなして
-変換します。
-
-また、base に 0 を指定すると、MPIのフォーマットから変換します。
-(最初の4byteはbig-endianでデータ長を表わし、その後にそのデータ長のバイト
-列(big-endian)で数値を表す。最上位ビットが立っていると負数)。
+  10  引数の文字列を 10進数とみなして、変換します。
+  16  引数の文字列を 16進数とみなして、変換します。
+   2  引数の文字列を big-endian の符号無し整数のバイナリ列とみなして、変換します。
+   0  引数の文字列を MPI形式の文字列(バイト列)とみなして、変換します。
+      (最初の4byteはbig-endianでデータ長を表わし、その後にそのデータ長のバイト
+       列(big-endian)で数値を表す。最上位ビットが立っていると負数)。
 
 #@samplecode
 require 'openssl'
@@ -37,7 +37,10 @@ OpenSSL::BN.new(1209) # => 1209
 @param base 文字列から整数に変換するときの基数
 @raise OpenSSL::BNError 変換に失敗した場合に発生します
 
-@see [[m:Integer#to_bn]]
+反対に、[[c:OpenSSL::BN]] クラスのオブジェクトを文字列にするには、
+[[m:OpenSSL::BN#to_s]] を用います。
+
+@see [[m:OpenSSL::BN#to_s]]
 
 --- new(bn) -> OpenSSL::BN
 
@@ -51,6 +54,7 @@ OpenSSL::BN.new(1209) # => 1209
 ([[c:OpenSSL::BN]])を生成します。
 
 @param integer 整数オブジェクト
+@see [[m:Integer#to_bn]]
 
 --- generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
 ランダム(疑似乱数的)な bits ビットの素数を返します。
@@ -545,6 +549,11 @@ p 6.to_bn.to_s(0) # => "\x00\x00\x00\x01\x06"
 p 7.to_bn.to_s(0) # => "\x00\x00\x00\x01\a"
 #@end
 
+反対に、文字列から [[c:OpenSSL::BN]] クラスのインスタンスを作るには
+[[m:OpenSSL::BN.new]] を用います。
+
+@see [[m:OpenSSL::BN.new]]
+
 
 --- pretty_print(pp)
 
@@ -615,4 +624,4 @@ class Integer
 end
 #@end
 
-@see [[m:OpenSSL::BN.new]]
+@see [[m:OpenSSL::BN.new]], [[m:OpenSSL::BN#to_i]]
