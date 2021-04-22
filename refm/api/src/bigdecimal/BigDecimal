@@ -401,7 +401,7 @@ double_figは以下の C プログラムの結果と同じです。
 
 @param other self を割る数を指定します。
 
-詳細は [[m:Float#quo]] を参照して下さい。
+詳細は [[m:Numeric#quo]] を参照して下さい。
 
 計算結果の精度については[[ref:lib:bigdecimal#precision]]を参照してください。
 
