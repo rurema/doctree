@@ -971,15 +971,15 @@ self のハッシュ値を返します。
 ブロックの評価結果を返します。
 
 #@since 2.5.0
---- clone -> BigDecimal
+--- clone -> self
 
-このメソッドは deprecated です。
+self を返すように、BigDecimal で定義されています。
 
 #@#noexample
 
 --- dup -> BigDecimal
 
-このメソッドは deprecated です。
+self を返すように、BigDecimal で定義されています。
 
 #@#noexample
 #@end
