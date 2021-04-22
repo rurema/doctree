@@ -103,26 +103,28 @@ require "yaml" した場合、特に何もしなければ
 デフォルト以外のバックエンドを使用したい場合、[[lib:yaml]] ライブラリを
 require する前に [[lib:psych]] か [[lib:syck]] を require してください。
 
-例1: [[lib:psych]] を使用する場合
+#@samplecode 例1: psych を使用する場合
+require "psych"
+require "yaml"
+YAML.load("...")
+#@end
 
-  require "psych"
-  require "yaml"
-  YAML.load(...)
-
-例2: [[lib:syck]] を使用する場合
-
-  require "syck"
-  require "yaml"
-  YAML.load(...)
+#@samplecode 例2: syck を使用する場合
+require "syck"
+require "yaml"
+YAML.load("...")
+#@end
 
 また、[[lib:yaml]] を require した後でも、YAML::ENGINE.yamler に
 "psych" を代入する事で [[lib:psych]] を使用できます。([[lib:syck]] の場
 合も同様です)
 
-  require "yaml"
-  require "psych"
-  YAML::ENGINE.yamler = "psych"
-  YAML.load(...)
+#@samplecode
+require "yaml"
+require "psych"
+YAML::ENGINE.yamler = "psych"
+YAML.load("...")
+#@end
 
 #@end
 #@end
@@ -224,18 +226,18 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
 ([[lib:syck]] のみ)
 #@end
 
-例:
-
+#@samplecode 例
 #@since 1.9.3
-  require "syck"
+require "syck"
 #@end
-  require "yaml"
-  class Foo
-    def to_yaml_type
-      return "!tag:example.com,2002:foo"
-    end
+require "yaml"
+class Foo
+  def to_yaml_type
+    return "!tag:example.com,2002:foo"
   end
-  p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
+end
+p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
+#@end
 #@end
 
 === 注意
@@ -285,7 +287,9 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクトです。そ�
 クトも同様に実体は別のオブジェクトです。もし確認したいメソッドの記述が
 見つからない場合は、[[lib:psych]] ライブラリを確認してください。
 
-  require "yaml"
+#@samplecode 例
+require "yaml"
 
-  p YAML                # => Psych
-  p YAML::Stream        # => Psych::Stream
+p YAML                # => Psych
+p YAML::Stream        # => Psych::Stream
+#@end
