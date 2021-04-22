@@ -309,7 +309,8 @@ c が必要とするメモリー領域は大きくなることに注意して下
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("2").div(3,12) # 2.0/3.0 => 0.666666666667e0
+p BigDecimal("2").div(3, 12).to_s(10) # 2.0 / 3.0
+# => 0.6666666666 67e0
 #@end
 
 : truncate, round, ceil, floor
@@ -318,7 +319,8 @@ BigDecimal("2").div(3,12) # 2.0/3.0 => 0.666666666667e0
 
 #@samplecode
 require "bigdecimal"
-BigDecimal("6.66666666666666").round(12) # => 0.6666666666667e1
+p BigDecimal("6.66666666666666").round(12).to_s(10)
+# => 0.6666666666 667e1
 #@end
 
 ==== 自分で精度をコントロールしたい場合
