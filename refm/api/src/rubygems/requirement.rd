@@ -16,9 +16,6 @@ Gem の必要条件を扱うクラスです。
 
 比較演算子と対応する処理を格納したハッシュです。
 
---- OP_RE
-
-比較演算子のいずれかにマッチする正規表現です。
 
 == Singleton Methods
 
@@ -47,9 +44,6 @@ Gem の必要条件を扱うクラスです。
 @see [[m:Gem::Requirement#parse]], [[m:Gem::Requirement.create]]
 
 == Public Instance Methods
-
-#@#--- <=>(other) -> Integer
-#@# nodoc
 
 #@#--- as_list -> [String]
 #@# nodoc
