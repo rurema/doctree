@@ -63,10 +63,6 @@ Gem の必要条件を扱うクラスです。
 #@# nodoc
 #@#必要条件をロードします。
 
---- normalize -> nil
-
-self を正規化します。
-
 --- parse(obj) -> Array
 
 バージョンの必要上件をパースして比較演算子とバージョンを要素とする二要素の配列を返します。
@@ -91,22 +87,6 @@ self を正規化します。
 
 @param version [[c:Gem::Version]] のインスタンスを指定します。
 
-@see [[m:Gem::Requirement#satisfy?]]
-
---- satisfy?(op, version, required_version) -> bool
-
-version op required_version を満たす場合に真を返します。
-そうでなければ偽を返します。
-
-@param op 比較演算子 (<, <=, =, =>, >, !=, ~>) を文字列で指定します。
-
-@param version  外部から与えられるバージョンを [[c:Gem::Version]] のインスタンスで指定します。
-
-@param required_version 満たすべき条件を示すバージョンを指定します。
-
-@see [[m:Gem::Requirement#satisfied_by?]]
 
 #@#--- to_s -> String
 #@# nodoc
-
-
