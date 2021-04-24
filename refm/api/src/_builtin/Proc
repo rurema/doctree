@@ -333,7 +333,7 @@ p b.curry(5)[1][2][3][4][5]  #=> 6
 p b.curry(5)[1, 2][3, 4][5]  #=> 6
 p b.curry(1)[1]              #=> 1
 
-b = proc {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.inject(0, &:+) }
+b = proc {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.sum }
 p b.curry[1][2][3]           #=> 6
 p b.curry[1, 2][3, 4]        #=> 10
 p b.curry(5)[1][2][3][4][5]  #=> 15
@@ -342,30 +342,16 @@ p b.curry(1)[1]              #=> 1
 
 b = lambda {|x, y, z| (x||0) + (y||0) + (z||0) }
 p b.curry[1][2][3]           #=> 6
-#@since 2.3.0
 p b.curry[1, 2][3, 4]        #=> wrong number of arguments (given 4, expected 3)
 p b.curry(5)                 #=> wrong number of arguments (given 5, expected 3)
 p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3)
-#@else
-p b.curry[1, 2][3, 4]        #=> wrong number of arguments (4 for 3)
-p b.curry(5)                 #=> wrong number of arguments (5 for 3)
-p b.curry(1)                 #=> wrong number of arguments (1 for 3)
-#@end
 
-b = lambda {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.inject(0, &:+) }
+b = lambda {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.sum }
 p b.curry[1][2][3]           #=> 6
 p b.curry[1, 2][3, 4]        #=> 10
 p b.curry(5)[1][2][3][4][5]  #=> 15
 p b.curry(5)[1, 2][3, 4][5]  #=> 15
-#@since 2.3.0
 p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3+)
-#@else
-#@since 2.0.0
-p b.curry(1)                 #=> wrong number of arguments (1 for 3+)
-#@else
-p b.curry(1)                 #=> wrong number of arguments (1 for 3)
-#@end
-#@end
 
 b = proc { :foo }
 p b.curry[]                  #=> :foo
