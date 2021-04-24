@@ -1584,15 +1584,30 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 @see [[m:Array#sum]]
 
 #@since 2.7.0
---- tally     ->   Hash
+--- tally        ->   Hash
+#@since 3.1
+--- tally(hash)  ->   Hash
+#@end
 
 self に含まれる要素を数え上げた結果を Hash で返します。
 Hash のキーは self に含まれる要素で、Hash の値は対応する要素が出現する回数です。
 
 要素は[[m:Object#eql?]]で比較されます。
 
+#@since 3.1
+@param hash 結果を加算していく Hash を指定します。更新される値は Integer である必要があります。
+#@end
+
 #@samplecode 例
 ["a", "b", "c", "b"].tally  #=> {"a"=>1, "b"=>2, "c"=>1}
+
+#@since 3.1
+h = {}
+[:a, :b, :c].tally(h)
+[:a, :b, :d].tally(h)
+
+p h # => {:a=>2, :b=>2, :c=>1, :d=>1}
+#@end
 #@end
 #@end
 
