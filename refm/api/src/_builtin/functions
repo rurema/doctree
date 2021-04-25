@@ -22,7 +22,7 @@ exit は例外 [[c:SystemExit]] を発生させ
   rescue SystemExit => err
     puts "end1 with #{err.inspect}"
   end
-  
+
   begin
     puts 'start2...'
     exit
@@ -30,7 +30,7 @@ exit は例外 [[c:SystemExit]] を発生させ
     puts 'end2...'
   end
   puts 'end' #実行されない
-  
+
   #=> start
   #   start1...
   #   end1 with #<SystemExit: exit>
@@ -64,7 +64,7 @@ exit! は exit とは違って、例外処理などは一切行ないませ
     puts 'end1...' #実行されない
   end
   puts 'end' #実行されない
-  
+
   #=> start
   #   start1...
   #終了ステータス:1
@@ -329,7 +329,7 @@ Hash を options として渡すことで、起動される子プロセスの
 
 以下のオプションが指定できます。
 
-: :unsetenv_others 
+: :unsetenv_others
   これを true にすると、envで指定した環境変数以外をすべてクリアします。
   false だとクリアしません。false がデフォルトです。
 
@@ -456,7 +456,7 @@ read mode で open されます。
 ファイルのフラグ(write/read mode)やパーミッションを明示したい
 場合は、配列を用います。
   # なにも指定がなければデフォルトで read mode が使われる。
-  pid = spawn(command, :in=>["file"]) 
+  pid = spawn(command, :in=>["file"])
   # read mode で file を open し、リダイレクトする。
   pid = spawn(command, :in=>["file", "r"])
   # write mode で file を open し、リダイレクトする。
@@ -477,7 +477,7 @@ read mode で open されます。
 これはファイルデスクリプタを直接指定するのと異なるということに
 注意してください。
 例えば、
-  :err => :out 
+  :err => :out
 とすると、子プロセスの stderr を親プロセスの stdout にリダイレクトします。
   :err => [:child, :out]
 とすると、子プロセスの stderr を子プロセスの stdout にリダイレクトします。
@@ -624,7 +624,7 @@ Hash を options として渡すことで、この挙動を変更できます。
 
 #@# コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
 #@# 以下のように exec を呼び出します。
-#@# 
+#@#
 #@#   exec [program, program], *args
 
 例
@@ -747,7 +747,7 @@ Perlと異なりコマンドは常に `|' で始まります。
 @param mode_enc モード・エンコーディングを文字列か定数の論理和で指定します。後述。
 @param perm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合の
   ファイルのパーミッションを整数で指定します。
-@raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。 
+@raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
 #@#例...
 
@@ -1059,7 +1059,7 @@ require_relative を呼出すと必ず失敗します。
   A = 1
   a = 1
   ---------- end some.rb -------
-  
+
   require 'some'
   p $a #=> 1
   p @a #=> 1
@@ -1200,7 +1200,7 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
   class Foo
   end
   43.to_s
-  
+
   # ----結果----
   # ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
   # ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
@@ -1286,7 +1286,7 @@ start 段上の呼び出し元の情報を [[m:$@]]
 のサンプルです。
 
     $DEBUG = true
-    
+
     def debug(*args)
       p [caller.first, *args] if $DEBUG
     end
@@ -1371,9 +1371,9 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
   common
   --- c.txt ---
   ARGF
-  
+
   スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
-  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
+  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#readline]]
 
@@ -1407,13 +1407,13 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
   common
   --- c.txt ---
   ARGF
-  
+
   スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
-  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
+  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#gets]]
 
---- readlines(rs = $/) -> [String] | nil
+--- readlines(rs = $/) -> [String]
 
 [[c:ARGF]]を [[m:Kernel.#gets]](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
 行の区切りは引数 rs で指定した文字列になります。
@@ -1425,26 +1425,29 @@ rs に nil を指定すると行区切りなしとみなします。
 @param rs 行の区切りとなる文字列です。
 @raise Errno::EXXX 読み込みに失敗した場合に発生します。
 
-  ---main.rb---
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines #=> ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
-  
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines(nil) #=> ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
-  
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines("") #=> ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
-  
-  ARGV << 'b.txt' << 'b.txt'
-  p readlines('it') #=> ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
-  p readlines #=> nil
-  --- b.txt ---
-  hello
-  it
-  
-  common
+#@samplecode main.rb
+ARGV << 'b.txt' << 'b.txt'
+p readlines       #=> ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
 
-@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]]
+ARGV << 'b.txt' << 'b.txt'
+p readlines(nil)  #=> ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
+
+ARGV << 'b.txt' << 'b.txt'
+p readlines("")   #=> ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
+
+ARGV << 'b.txt' << 'b.txt'
+p readlines('it') #=> ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
+p readlines       #=> []
+#@end
+
+#@samplecode b.txt
+hello
+it
+
+common
+#@end
+
+@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]], [[m:Kernel.#readline]]
 
 --- putc(ch) -> object
 
@@ -1468,7 +1471,7 @@ ch が文字列なら、その先頭1文字を出力します。
     putc(99)
     putc(355)
     #=> cccc
-    
+
     putc(99.00) #=> c
     putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
 
@@ -1495,7 +1498,7 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 
   puts "" #=> （空行）
   p "" #=> ""
-  
+
   puts 50,"50"
   #=> 50
   #=> 50
@@ -1688,11 +1691,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
     p Float(4)            #=> 4.0
     p Float(4_000)        #=> 4000.0
     p Float(9.88)         #=> 9.88
-    
+
     p Float(Time.gm(1986)) #=> 504921600.0
     p Float(Object.new)   # can't convert Object into Float (TypeError)
     p Float(nil)          # can't convert nil into Float (TypeError)
-    
+
     p Float("10")         #=> 10.0
     p Float("10e2")       #=> 1000.0
     p Float("1e-2")       #=> 0.01
@@ -1746,10 +1749,10 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
     p Integer(4)          #=> 4
     p Integer(4_000)      #=> 4000
     p Integer(9.88)       #=> 9
-    
+
     p Integer(nil)        # can't convert nil into Integer (TypeError)
     p Integer(Object.new) # cannot convert Object into Integer (TypeError)
-    
+
     p Integer("10")       #=> 10
     p Integer("10", 2)    #=> 2
     p Integer("0d10")     #=> 10
@@ -1779,7 +1782,7 @@ arg が文字列の場合、何もせず arg を返します。
      "hogehoge"
    end
   end
-  
+
   arg = Foo.new
   p String(arg) #=> "hogehoge"
 
@@ -1801,7 +1804,7 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
   END{puts "END"}
   at_exit{puts "at_exit"}
   puts "main_end"
-  
+
   #=> main_end
   #   at_exit
   #   END
@@ -1854,7 +1857,7 @@ sec が省略された場合、他スレッドからの [[m:Thread#run]]
 などで明示的に起こさない限り永久にスリープします。Thread#runを呼ぶとその時点で
 sleepの実行が中断されます。
 
-@param sec 停止する秒数を非負の数値で指定します。浮動小数点数も指定できます。 
+@param sec 停止する秒数を非負の数値で指定します。浮動小数点数も指定できます。
            省略された場合、永久にスリープします。
 
 @return 実際に停止していた秒数 (整数に丸められた値) です。
@@ -1863,7 +1866,7 @@ sleepの実行が中断されます。
     sleep
     puts 'it_end'
   end
-  
+
   re = sleep 2.11
   puts re
   it.run
@@ -1919,14 +1922,14 @@ iterator? は （ブロックが必ずイテレートするとはいえないの
       end
     end
   end
-  
+
   p result #=> 1
 
 @see [[m:Kernel.#throw]]
 
 --- throw(tag, value = nil) -> ()
 
-[[m:Kernel.#catch]]との組み合わせで大域脱出を行います。 throw 
+[[m:Kernel.#catch]]との組み合わせで大域脱出を行います。 throw
 は同じ tag を指定した catch のブロックの終わりまでジャンプします。
 
 throw は探索時に呼び出しスタックをさかのぼるので、
@@ -1949,7 +1952,7 @@ throw は探索時に呼び出しスタックをさかのぼるので、
   def foo
     throw :exit, 25
   end
-  
+
   ret = catch(:exit) do
     begin
       foo
@@ -2022,30 +2025,30 @@ seed が省略された時には
 
   num = 455675
   seeds = []
-  
+
   srand(num)
-  
+
   p rand(6) #=> 3
   p rand(6) #=> 0
   p rand(0) #=> 0.445804380918972
   p rand(0) #=> 0.422248634121701
-  
+
   seeds << srand
-  
+
   p rand(6) #=> 3
   p rand(6) #=> 3
   p rand(0) #=> 0.938911141393347
   p rand(0) #=> 0.915824970865251
-  
+
   seeds << srand(num)
-  
+
   p rand(6) #=> 3
   p rand(6) #=> 0
   p rand(0) #=> 0.445804380918972
   p rand(0) #=> 0.422248634121701
-  
+
   seeds << srand
-  
+
   p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 
 @see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
@@ -2246,10 +2249,10 @@ varname のフックを全て解除します。
   block = proc{|val| print "hookB.#{val.inspect}," }
   trace_var(:$v,&block)
   $v = 'str'        #=> hookB."str",hookA."str",
-  
+
   untrace_var(:$v,block)
   $v = 'str'        #=> hookA."str",
-  
+
   trace_var(:$v){|val| print "hookC.#{val.inspect}," }
   p untrace_var(:$v) #=> [#<Proc:0x02b68f58@..:9>, #<Proc:0x02b6978c@..:3>]
   $v = 'str'        # なにも出力されない
@@ -2306,7 +2309,7 @@ error_type として例外ではないクラスやオブジェクトを指定し
   ensure
     p err #=> #<NameError: !!error!!>
   end
-  
+
   #例2
   def foo num
     print 'in method.'
@@ -2320,16 +2323,16 @@ error_type として例外ではないクラスやオブジェクトを指定し
   ensure
     print "in ensure.\n"
   end
-  
+
   foo(4) #=> in method.in rescue.in method.in else.in ensure.
-  
+
   #例3
   class MyException
     def exception(mesg=nil)
       SecurityError.new(mesg)
     end
   end
-  
+
   begin
     raise MyException.new
   rescue SecurityError
@@ -2356,11 +2359,11 @@ Ruby における format 文字列の拡張については
 @param arg フォーマットされる引数です。
 @raise ArgumentError port を指定したのに format を省略した場合に発生します。
 @raise IOError port が書き込み用にオープンされていなければ発生します。
-@raise Errno::EXXX 出力に失敗した場合に発生します。 
+@raise Errno::EXXX 出力に失敗した場合に発生します。
 
-  printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI) 
+  printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI)
   #=> calculate PI...   3.141592653589793
-  
+
   printf("%d %04x", 123, 123)               #=> "123 007b"
   printf("%08b '%4s'", 123, 123)            #=> "01111011 ' 123'"
   printf("%1$*2$s %2$d %1$s", "hello", 8)   #=> "   hello 8 hello"
@@ -2400,11 +2403,11 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 --- eval(expr, bind, fname = "(eval)", lineno = 1) -> object
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
-す。第2引数に 
+す。第2引数に
 [[c:Binding]] オブジェクトを与えた場合、
 そのオブジェクトを生成したコンテキストで文字列を評価します。
 
-expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval 
+expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval
 実行前に補足されていた変数は eval 実行後にブロック外に持ち出せます。
 
 fname と lineno が与えられた場合には、ファイル
@@ -2423,10 +2426,10 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
   a = nil
   eval('a = RUBY_RELEASE_DATE')
   p a #=> "2007-03-13"
-  
+
   eval('def fuga;p 777 end')
   fuga #=> 777
-  
+
   eval('raise RuntimeError', binding, 'XXX.rb', 4)
   #=> XXX.rb:4: RuntimeError (RuntimeError)
   #       from ..:9
