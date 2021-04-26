@@ -115,12 +115,16 @@ BigDecimal("1.0") / BigDecimal("Infinity") # => 0.0
 
 また、0.0 と -0.0 は比較した場合に同じ値であるとみなされます。
 
+ただし、計算に利用した際に、異なる結果をもたらすことがあります。
+
 #@samplecode
 require "bigdecimal"
 BigDecimal("0.0") == BigDecimal("-0.0") # => true
+
+1 / BigDecimal("0.0")   # =>  Infinity
+1 / BigDecimal("-0.0")  # => -Infinity
 #@end
 
-これは数学的には特に意味がない事に注意してください。数学的な 0 は符号を持ちません。
 
 === 他の数値オブジェクトとの変換 (coerce)
 
