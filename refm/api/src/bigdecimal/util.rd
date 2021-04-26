@@ -1,11 +1,14 @@
 
-String、Integer、Float、Rational オブジェクトを
+String、Integer、Float、Rational, NilClass オブジェクトを
 BigDecimal オブジェクトに変換する機能を提供します。
 
  * [[m:String#to_d]]
  * [[m:Integer#to_d]]
  * [[m:Float#to_d]]
  * [[m:Rational#to_d]]
+#@since 2.6.0
+ * [[m:NilClass#to_d]]
+#@end
 
 
 これらのメソッドを使うには 'bigdecimal' と 'bigdecimal/util'を require
@@ -101,3 +104,23 @@ p Rational(1, 3).to_d(10) # => 0.3333333333e0
 自身を [[c:BigDecimal]] に変換します。BigDecimal(self) と同じです。
 
 @return [[c:BigDecimal]] に変換したオブジェクト
+
+#@since 2.6.0
+
+= reopen NilClass
+
+== Instance Methods
+
+--- to_d -> BigDecimal
+
+[[c:BigDecimal]] オブジェクトの 0.0 を返します。
+
+Ruby 2.6 で追加されたメソッドです。
+
+#@samplecode
+require "bigdecimal"
+require "bigdecimal/util"
+
+p nil.to_d  # => 0.0
+#@end
+#@end
