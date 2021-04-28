@@ -292,43 +292,47 @@ include Comparable
 
 切上げはceil, floor を使用して以下のように定義できます。
 
-  if n > 0 then
-    n.ceil
-  else
-    n.floor
-  end
+#@samplecode 例
+if n > 0 then
+  n.ceil
+else
+  n.floor
+end
+#@end
 
 また、任意桁の切上げ、切捨て、四捨五入を行うメソッドは以下のように
 定義できます。
 
-  class Numeric
-    def roundup(d=0)
-      x = 10**d
-      if self > 0
-        self.quo(x).ceil * x
-      else
-        self.quo(x).floor * x
-      end
-    end
-
-    def rounddown(d=0)
-      x = 10**d
-      if self < 0
-        self.quo(x).ceil * x
-      else
-        self.quo(x).floor * x
-      end
-    end
-
-    def roundoff(d=0)
-      x = 10**d
-      if self < 0
-        (self.quo(x) - 0.5).ceil * x
-      else
-        (self.quo(x) + 0.5).floor * x
-      end
+#@samplecode
+class Numeric
+  def roundup(d=0)
+    x = 10**d
+    if self > 0
+      self.quo(x).ceil * x
+    else
+      self.quo(x).floor * x
     end
   end
+
+  def rounddown(d=0)
+    x = 10**d
+    if self < 0
+      self.quo(x).ceil * x
+    else
+      self.quo(x).floor * x
+    end
+  end
+
+  def roundoff(d=0)
+    x = 10**d
+    if self < 0
+      (self.quo(x) - 0.5).ceil * x
+    else
+      (self.quo(x) + 0.5).floor * x
+    end
+  end
+end
+#@end
 
 #@#        numbers=[0.19, 0.15, 0.11, -0.11, -0.15, -0.19]
 #@#        methods=%w(roundup rounddown roundoff)
@@ -360,13 +364,13 @@ include Comparable
 単項演算子の + です。
 self を返します。
 
-例:
-
-  + 10            # => 10
-  + (-10)           # => -10
-  + 0.1           # => 0.1
-  + (3r) # => (3/1)
-  + (1+3i)        # => (1+3i)
+#@samplecode 例
++ 10            # => 10
++ (-10)           # => -10
++ 0.1           # => 0.1
++ (3r) # => (3/1)
++ (1+3i)        # => (1+3i)
+#@end
 
 --- -@    -> Numeric
 
@@ -380,26 +384,26 @@ self の符号を反転させたものを返します。
 @see [[m:Integer#-@]]、[[m:Float#-@]]、[[m:Rational#-@]]、[[m:Complex#-@]]
 
 --- abs        -> Numeric
-#@since 1.9.1
 --- magnitude  -> Numeric
-#@end
 
 自身の絶対値を返します。
 
-例:
-
-  12.abs         #=> 12
-  (-34.56).abs   #=> 34.56
-  -34.56.abs     #=> 34.56
+#@samplecode 例
+12.abs         #=> 12
+(-34.56).abs   #=> 34.56
+-34.56.abs     #=> 34.56
+#@end
 
 --- ceil   -> Integer
 
 自身と等しいかより大きな整数のうち最小のものを返します。
 
-     1.ceil        #=> 1
-     1.2.ceil      #=> 2
-     (-1.2).ceil   #=> -1
-     (-1.5).ceil   #=> -1
+#@samplecode 例
+1.ceil        #=> 1
+1.2.ceil      #=> 2
+(-1.2).ceil   #=> -1
+(-1.5).ceil   #=> -1
+#@end
 
 @see [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
 
@@ -427,10 +431,12 @@ self の符号を反転させたものを返します。
 #@end
 #@end
 
-     1.floor        #=> 1
-     1.2.floor      #=> 1
-     (-1.2).floor   #=> -2
-     (-1.5).floor   #=> -2
+#@samplecode 例
+1.floor        #=> 1
+1.2.floor      #=> 1
+(-1.2).floor   #=> -2
+(-1.5).floor   #=> -2
+#@end
 
 @see [[m:Numeric#ceil]], [[m:Numeric#round]], [[m:Numeric#truncate]]
 #@since 2.4.0
@@ -443,10 +449,12 @@ self の符号を反転させたものを返します。
 
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
 
-     1.round        #=> 1
-     1.2.round      #=> 1
-     (-1.2).round   #=> -1
-     (-1.5).round   #=> -2
+#@samplecode 例
+1.round        #=> 1
+1.2.round      #=> 1
+(-1.2).round   #=> -1
+(-1.5).round   #=> -2
+#@end
 
 @see [[m:Numeric#ceil]], [[m:Numeric#floor]], [[m:Numeric#truncate]]
 
@@ -454,10 +462,12 @@ self の符号を反転させたものを返します。
 
 0 から 自身までの整数で、自身にもっとも近い整数を返します。
 
-     1.truncate        #=> 1
-     1.2.truncate      #=> 1
-     (-1.2).truncate   #=> -1
-     (-1.5).truncate   #=> -1
+#@samplecode 例
+1.truncate        #=> 1
+1.2.truncate      #=> 1
+(-1.2).truncate   #=> -1
+(-1.5).truncate   #=> -1
+#@end
 
 @see [[m:Numeric#ceil]], [[m:Numeric#floor]], [[m:Numeric#round]]
 
@@ -470,17 +480,20 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 以下は [[c:Rational]] の coerce のソースです。other が自身の知らない数値クラスであった場合、
 super を呼んでいることに注意して下さい。
 
-  # lib/rational.rb より
- 
-  def coerce(other)
-    if other.kind_of?(Float)
-      return other, self.to_f
-    elsif other.kind_of?(Integer)
-      return Rational.new!(other, 1), self
-    else
-      super
-    end
+
+#@samplecode 例
+# lib/rational.rb より
+
+def coerce(other)
+  if other.kind_of?(Float)
+    return other, self.to_f
+  elsif other.kind_of?(Integer)
+    return Rational.new!(other, 1), self
+  else
+    super
   end
+end
+#@end
 
 数値クラスの算術演算子は通常自分と演算できないクラスをオペランドとして受け
 取ると coerce を使って自分とオペランドを変換した上で演算を行います。
@@ -488,20 +501,22 @@ super を呼んでいることに注意して下さい。
 引数が自身の知らない数値クラスである場合、引数の coerce により自身を変換してから
 + 演算子を呼んでいます。
 
-  # lib/rational.rb より
-  
-  def + (a)
-    if a.kind_of?(Rational)
-      # 長いので省略
-    elsif a.kind_of?(Integer)
-      # 長いので省略
-    elsif a.kind_of?(Float)
-      Float(self) + a
-    else
-      x, y = a.coerce(self)
-      x + y
-    end
+#@samplecode 例
+# lib/rational.rb より
+
+def + (a)
+  if a.kind_of?(Rational)
+    # 長いので省略
+  elsif a.kind_of?(Integer)
+    # 長いので省略
+  elsif a.kind_of?(Float)
+    Float(self) + a
+  else
+    x, y = a.coerce(self)
+    x + y
   end
+end
+#@end
 
 @param other オペランドを数値で指定します。
 
@@ -524,9 +539,11 @@ div はメソッド / を呼びだし、floorを取ることで計算されま�
 
 @param other 自身を割る数を指定します。
 
-  p 3.div(2) # => 1
-  p (-3).div(2) # => -2
-  p (-3.0).div(2) # => -2
+#@samplecode 例
+p 3.div(2) # => 1
+p (-3).div(2) # => -2
+p (-3.0).div(2) # => -2
+#@end
 
 --- divmod(other)    -> [Numeric]
 
@@ -548,15 +565,16 @@ divmod が返す商は [[m:Numeric#div]] と同じです。
 
 @param other 自身を割る数を指定します。
 
-   11.divmod(3)         #=> [3, 2]
-   (11.5).divmod(3.5)   #=> [3, 1.0]
-   11.divmod(-3)        #=> [-4, -1]
-   11.divmod(3.5)       #=> [3, 0.5]
-   (-11).divmod(3.5)    #=> [-4, 3.0]
+#@samplecode 例
+11.divmod(3)         #=> [3, 2]
+(11.5).divmod(3.5)   #=> [3, 1.0]
+11.divmod(-3)        #=> [-4, -1]
+11.divmod(3.5)       #=> [3, 0.5]
+(-11).divmod(3.5)    #=> [-4, 3.0]
+#@end
 
 @see [[m:Numeric#div]], [[m:Numeric#modulo]]
 
-#@since 1.9.1
 --- quo(other)    -> Rational | Float | Complex
 
 self を other で割った商を返します。
@@ -574,60 +592,37 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 @param other 自身を割る数を指定します。
 
-  1.quo(3)      #=> (1/3)
-  1.0.quo(3)    #=> 0.3333333333333333
+#@samplecode 例
+1.quo(3)      #=> (1/3)
+1.0.quo(3)    #=> 0.3333333333333333
 #@if("1.9.3" <= version and version <= "2.0.0")
-  1.quo(3.0)    #=> (1/3)
-                # 割る数が 0 以外の整数なら Float でも結果は Rational になる。
+1.quo(3.0)    #=> (1/3)
+              # 割る数が 0 以外の整数なら Float でも結果は Rational になる。
 #@else
-  1.quo(3.0)    #=> 0.3333333333333333
+1.quo(3.0)    #=> 0.3333333333333333
 #@end
-  1.quo(0.5)    #=> 2.0
-  
-  Complex(1, 1).quo(1)  #=> ((1/1)+(1/1)*i)
-  1.quo(Complex(1, 1))  #=> ((1/2)-(1/2)*i)
+1.quo(0.5)    #=> 2.0
+
+Complex(1, 1).quo(1)  #=> ((1/1)+(1/1)*i)
+1.quo(Complex(1, 1))  #=> ((1/2)-(1/2)*i)
+#@end
 
 @see [[m:Numeric#fdiv]]
-#@else
---- quo(other)    -> Float
-
-self を other で割った商を返します。
-整商を得たい場合は [[m:Numeric#div]] を使ってください。
-
-[[m:Numeric#fdiv]] が結果を [[c:Float]] で返すメソッドなのに対して quo はなるべく正確な数値を返すことを意図しています。
-通常は [[c:Float]] の値を返しますが、
-[[lib:rational]] ライブラリを require している場合は有理数の範囲に収まるなら [[c:Rational]] の値を返します。
-
-Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
-
-@param other 自身を割る数を指定します。
-
-  p 1.quo(3)      #=> 0.3333333333333333
-  
-  require 'rational'
-  p 1.quo(3)      #=> Rational(1, 3)
-  p 1.0.quo(3)    #=> 0.3333333333333333
-  p 1.quo(3.0)    #=> 0.3333333333333333
-
-@see [[m:Numeric#fdiv]]
-#@end
 
 --- fdiv(other)   -> Float | Complex
 
 self を other で割った商を [[c:Float]] で返します。
-#@since 1.9.1
 ただし [[c:Complex]] が関わる場合は例外です。
 その場合も成分は Float になります。
-#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 @param other 自身を割る数を指定します。
 
-  1.fdiv(3)            #=> 0.3333333333333333
-#@since 1.9.1
-  Complex(1, 1).fdiv 1 #=> (1.0+1.0i)
-  1.fdiv Complex(1, 1) #=> (0.5-0.5i)
+#@samplecode 例
+1.fdiv(3)            #=> 0.3333333333333333
+Complex(1, 1).fdiv 1 #=> (1.0+1.0i)
+1.fdiv Complex(1, 1) #=> (0.5-0.5i)
 #@end
 
 @see [[m:Numeric#quo]]
@@ -639,16 +634,15 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-例:
-  (1.0).integer? #=> false
-  (1).integer?   #=> true
+#@samplecode 例
+(1.0).integer? #=> false
+(1).integer?   #=> true
+#@end
 
 @see [[m:Numeric#real?]]
 
 --- modulo(other)    -> Numeric
-#@since 1.9.2
 --- %(other)         -> Numeric
-#@end
 
 self を other で割った余り r を返します。
 
@@ -667,12 +661,14 @@ modulo はメソッド % の呼び出しとして定義されています。
 
 @param other 自身を割る数を指定します。
 
-  p 13.modulo(4)       #=>  1
-  p (11.5).modulo(3.5) #=> 1.0
-  p 13.modulo(-4)      #=> -3
-  p (-13).modulo(4)    #=>  3
-  p (-13).modulo(-4)   #=> -1
-  p (-11).modulo(3.5)  #=> 3.0
+#@samplecode 例
+p 13.modulo(4)       #=>  1
+p (11.5).modulo(3.5) #=> 1.0
+p 13.modulo(-4)      #=> -3
+p (-13).modulo(4)    #=>  3
+p (-13).modulo(-4)   #=> -1
+p (-11).modulo(3.5)  #=> 3.0
+#@end
 
 @see [[m:Numeric#divmod]], [[m:Numeric#remainder]]
 
@@ -681,11 +677,11 @@ modulo はメソッド % の呼び出しとして定義されています。
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
 
-例:
-
-  1.positive?    # => true
-  0.positive?    # => false
-  -1.positive?   # => false
+#@samplecode 例
+1.positive?    # => true
+0.positive?    # => false
+-1.positive?   # => false
+#@end
 
 @see [[m:Numeric#negative?]]
 
@@ -693,11 +689,11 @@ self が 0 より大きい場合に true を返します。そうでない場合
 
 self が 0 未満の場合に true を返します。そうでない場合に false を返します。
 
-例:
-
-  -1.negative?   # => true
-  0.negative?    # => false
-  1.negative?    # => false
+#@samplecode 例
+-1.negative?   # => true
+0.negative?    # => false
+1.negative?    # => false
+#@end
 
 @see [[m:Numeric#positive?]]
 #@end
@@ -720,12 +716,14 @@ self を other で割った余り r を返します。
 
 @param other 自身を割る数を指定します。
 
-  p 13.remainder(4)       #=>  1
-  p (11.5).remainder(3.5) #=> 1.0
-  p 13.remainder(-4)      #=>  1
-  p (-13).remainder(4)    #=> -1
-  p (-13).remainder(-4)   #=> -1
-  p (-11).remainder(3.5)  #=> -0.5
+#@samplecode 例
+p 13.remainder(4)       #=>  1
+p (11.5).remainder(3.5) #=> 1.0
+p 13.remainder(-4)      #=>  1
+p (-13).remainder(4)    #=> -1
+p (-13).remainder(-4)   #=> -1
+p (-11).remainder(3.5)  #=> -0.5
+#@end
 
 @see [[m:Numeric#divmod]], [[m:Numeric#modulo]]
 
@@ -733,10 +731,12 @@ self を other で割った余り r を返します。
 
 自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
-  p 10.nonzero?              #=> 10
-  p 0.nonzero?               #=> nil
-  p 0.0.nonzero?             #=> nil
-  p Rational(0, 2).nonzero?  #=> nil
+#@samplecode 例
+p 10.nonzero?              #=> 10
+p 0.nonzero?               #=> nil
+p 0.0.nonzero?             #=> nil
+p Rational(0, 2).nonzero?  #=> nil
+#@end
 
 非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以
 下のように記述する事もできます。
@@ -752,13 +752,13 @@ self を other で割った余り r を返します。
 
 self の絶対値が有限値の場合に true を、そうでない場合に false を返します。
 
-例:
+#@samplecode 例
+10.finite?                      # => true
+Rational(3).finite?             # => true
 
-  10.finite?                      # => true
-  Rational(3).finite?             # => true
-
-  Float::INFINITY.finite?         # => false
-  Float::INFINITY.is_a?(Numeric)  # => true
+Float::INFINITY.finite?         # => false
+Float::INFINITY.is_a?(Numeric)  # => true
+#@end
 
 @see [[m:Numeric#infinite?]]
 
@@ -767,10 +767,10 @@ self の絶対値が有限値の場合に true を、そうでない場合に fa
 常に nil を返します。
 自身が [[c:Float]] か[[c:Complex]]、もしくはそのサブクラスのインスタンスの場合は、self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
 
-例:
-
-  10.infinite?     # => nil
-  (3r).infinite?   # => nil
+#@samplecode 例
+10.infinite?     # => nil
+(3r).infinite?   # => nil
+#@end
 
 @see [[m:Numeric#finite?]]、[[m:Float#infinite?]]、[[m:Complex#infinite?]]
 #@end
@@ -779,18 +779,20 @@ self の絶対値が有限値の場合に true を、そうでない場合に fa
 
 self.to_i と同じです。
 
-例:
-
-  (2+0i).to_int        # => 2
-  Rational(3).to_int   # => 3
+#@samplecode 例
+(2+0i).to_int        # => 2
+Rational(3).to_int   # => 3
+#@end
 
 --- zero?    -> bool
 
 自身がゼロの時、trueを返します。そうでない場合は false を返します。
 
-  p 10.zero?              #=> false
-  p 0.zero?               #=> true
-  p 0.0.zero?             #=> true
+#@samplecode 例
+p 10.zero?              #=> false
+p 0.zero?               #=> true
+p 0.0.zero?             #=> true
+#@end
 
 @see [[m:Numeric#nonzero?]]
 
@@ -837,46 +839,50 @@ self からはじめ step を足しながら limit を越える
 #@#このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
 #@#た。これにより [[c:Float]] も step できるようになりました。
 
-  2.step(5){|n| p n}
-  2
-  3
-  4
-  5
-  
-  1.1.step(1.5, 0.1) {|n| p n}
-  1.1
-  1.2
-  1.3
-  1.4
-  1.5
-  
-  10.step(6, -1){|n| p n}
-  10
-  9
-  8
-  7
-  6
+#@samplecode 例
+2.step(5){|n| p n}
+2
+3
+4
+5
 
-  3.step(by:2, to:10){|n| p n}
-  3
-  5
-  7
-  9
+1.1.step(1.5, 0.1) {|n| p n}
+1.1
+1.2
+1.3
+1.4
+1.5
+
+10.step(6, -1){|n| p n}
+10
+9
+8
+7
+6
+
+3.step(by:2, to:10){|n| p n}
+3
+5
+7
+9
+#@end
 
 注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
 0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
 生じて意図した回数ループしないことがある。step はこの誤差を考慮し
 て実装されている。
 
-    i = 1.1
-    while i <= 1.5
-      p i
-      i += 0.1
-    end
-    => 1.1
-       1.2
-       1.3
-       1.4   <- 1.5 が表示されない
+#@samplecode 例
+i = 1.1
+while i <= 1.5
+  p i
+  i += 0.1
+end
+# => 1.1
+#    1.2
+#    1.3
+#    1.4   <- 1.5 が表示されない
+#@end
 
 @see [[m:Integer#downto]]
 
@@ -889,10 +895,12 @@ Numeric のサブクラスは、上の動作を満たすよう このメソッ�
 
 @param other 自身と比較したい数値を指定します。
 
- 1 <=> 0   #=> 1
- 1 <=> 1   #=> 0
- 1 <=> 2   #=> -1
- 1 <=> "0" #=> nil
+#@samplecode 例
+1 <=> 0   #=> 1
+1 <=> 1   #=> 0
+1 <=> 2   #=> -1
+1 <=> "0" #=> nil
+#@end
 
 --- eql?(other) -> bool
 
@@ -904,23 +912,25 @@ hash メソッドを適切に定義する必要があります。
 
 @param other 自身と比較したい数値を指定します。
 
-  p 1.eql?(1)    #=> true
-  p 1.eql?(1.0)  #=> false
-  p 1 == 1.0     #=> true
+#@samplecode 例
+p 1.eql?(1)    #=> true
+p 1.eql?(1.0)  #=> false
+p 1 == 1.0     #=> true
+#@end
 
 @see [[m:Object#equal?]], [[m:Object#eql?]], [[m:Object#==]], [[m:Object#===]]
 
-#@since 1.9.1
 --- abs2 -> Numeric
 
 自身の絶対値の 2 乗を返します。
 
-例:
 
-  2.abs2    # => 4
-  -2.abs2   # => 4
-  2.0.abs2  # => 4
-  -2.0.abs2 # => 4
+#@samplecode 例
+2.abs2    # => 4
+-2.abs2   # => 4
+2.0.abs2  # => 4
+-2.0.abs2 # => 4
+#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
@@ -930,10 +940,10 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 自身の偏角(正の数なら 0、負の数なら [[m:Math::PI]])を返します。
 
-例:
-
-  1.arg  # => 0
-  -1.arg # => 3.141592653589793
+#@samplecode 例
+1.arg  # => 0
+-1.arg # => 3.141592653589793
+#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
@@ -948,11 +958,12 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-例:
 
-  10.conj       # => 10
-  0.1.conj      # => 0.1
-  (2/3r).conj   # => (2/3)
+#@samplecode 例
+10.conj       # => 10
+0.1.conj      # => 0.1
+(2/3r).conj   # => (2/3)
+#@end
 
 @see [[m:Complex#conj]]
 
@@ -971,12 +982,12 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 常に 0 を返します。
 
-例:
-
-  12.imag     # => 0
-  -12.imag    # => 0
-  1.2.imag    # => 0
-  -1.2.imag   # => 0
+#@samplecode 例
+12.imag     # => 0
+-12.imag    # => 0
+1.2.imag    # => 0
+-1.2.imag   # => 0
+#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
@@ -997,12 +1008,12 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 自身の絶対値と偏角を配列にして返します。正の数なら [self, 0]、負の数な
 ら [-self, [[m:Math::PI]]] を返します。
 
-例:
-
-  1.0.polar  # => [1.0, 0]
-  2.0.polar  # => [2.0, 0]
-  -1.0.polar # => [1.0, 3.141592653589793]
-  -2.0.polar # => [2.0, 3.141592653589793]
+#@samplecode 例
+1.0.polar  # => [1.0, 0]
+2.0.polar  # => [2.0, 0]
+-1.0.polar # => [1.0, 3.141592653589793]
+-2.0.polar # => [2.0, 3.141592653589793]
+#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
@@ -1014,12 +1025,12 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-例:
-
-  10.real               # => 10
-  -10.real              # => -10
-  0.1.real              # => 0.1
-  Rational(2, 3).real   # => (2/3)
+#@samplecode 例
+10.real               # => 10
+-10.real              # => -10
+0.1.real              # => 0.1
+Rational(2, 3).real   # => (2/3)
+#@end
 
 @see [[m:Numeric#imag]]、[[m:Complex#real]]
 
@@ -1029,12 +1040,12 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-例:
-
-  10.real?               # => true
-  -10.real?              # => true
-  0.1.real?              # => true
-  Rational(2, 3).real?   # => true
+#@samplecode 例
+10.real?               # => true
+-10.real?              # => true
+0.1.real?              # => true
+Rational(2, 3).real?   # => true
+#@end
 
 @see [[m:Numeric#integer?]]、[[m:Complex#real?]]
 
@@ -1043,12 +1054,12 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 [self, 0] を返します。
 
-例:
-
-  1.rect    # => [1, 0]
-  -1.rect   # => [-1, 0]
-  1.0.rect  # => [1.0, 0]
-  -1.0.rect # => [-1.0, 0]
+#@samplecode 例
+1.rect    # => [1, 0]
+-1.rect   # => [-1, 0]
+1.0.rect  # => [1.0, 0]
+-1.0.rect # => [-1.0, 0]
+#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
@@ -1058,28 +1069,24 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 自身を複素数 ([[c:Complex]]) に変換します。Complex(self, 0) を返します。
 
-例:
-
-  1.to_c              # => (1+0i)
-  -1.to_c             # => (-1+0i)
-  1.0.to_c            # => (1.0+0i)
-  Rational(1, 2).to_c # => ((1/2)+0i)
+#@samplecode 例
+1.to_c              # => (1+0i)
+-1.to_c             # => (-1+0i)
+1.0.to_c            # => (1.0+0i)
+Rational(1, 2).to_c # => ((1/2)+0i)
+#@end
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-#@end
-#@since 1.9.2
 --- i    -> Complex
 
 Complex(0, self) を返します。
 
 ただし、[[c:Complex]] オブジェクトでは利用できません。
 
-例:
-
-  10.i             # => (0+10i)
-  -10.i            # => (0-10i)
-  (0.1).i          # => (0+0.1i)
-  Rational(1, 2).i # => (0+(1/2)*i)
-
+#@samplecode 例
+10.i             # => (0+10i)
+-10.i            # => (0-10i)
+(0.1).i          # => (0+0.1i)
+Rational(1, 2).i # => (0+(1/2)*i)
 #@end
