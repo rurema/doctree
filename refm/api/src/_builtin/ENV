@@ -12,25 +12,25 @@ ENV で得られる文字列は ENV['PATH'] 以外は常に汚染されていま
 ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
 でいる場合に限り汚染されます。
 
-例:
-
-  p ENV['TERM'].tainted?  # => true
-  p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
-  p path.tainted?         # => false
+#@samplecode 例
+p ENV['TERM'].tainted?  # => true
+p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
+p path.tainted?         # => false
+#@end
 #@end
 
 また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
-例:
-
-  p ENV['TERM'].frozen?  # => true
+#@samplecode 例
+p ENV['TERM'].frozen?  # => true
+#@end
 
 Windows では環境変数は大文字、小文字を区別しません。(cygwin を除く)
 
-例:
-
-  ENV['OS'] # => Windows_NT
-  ENV['os'] # => Windows_NT
+#@samplecode 例
+ENV['OS'] # => Windows_NT
+ENV['os'] # => Windows_NT
+#@end
 
 --- [](key) -> String
 
