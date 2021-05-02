@@ -119,7 +119,7 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 すなわち、self が属する DTD によってすべての実体参照(&ent; と %ent; の両方)
 を展開した文字列を返します。
 
-外部実体(external enitity)宣言の場合は nil を返します。
+外部実体(external entity)宣言の場合は nil を返します。
 
 @see [[m:REXML::Entity#value]], [[m:REXML::Entity#normalized]]
 
@@ -128,7 +128,7 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 
 すなわち、一切の実体参照を展開していない値を返します。
 
-外部実体(external enitity)宣言の場合は nil を返します。
+外部実体(external entity)宣言の場合は nil を返します。
 
 @see [[m:REXML::Entity#value]], [[m:REXML::Entity#unnormalized]]
 
@@ -156,7 +156,7 @@ string が実体宣言の文法に従う文字列であれば真を返します�
 そうでない実体参照(general entity)は展開されて
 いないような値が返されます。
 
-外部実体(external enitity)宣言の場合は nil を返します。
+外部実体(external entity)宣言の場合は nil を返します。
 
 @see [[m:REXML::Entity#unnormalized]], [[m:REXML::Entity#normalized]]
 

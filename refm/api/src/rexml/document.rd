@@ -101,7 +101,7 @@ listener にコールバックで伝えます。
 および [[c:REXML::StreamListener]] を参照してください。
 
 @param source 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
-@param listner コールバックオブジェクト
+@param listener コールバックオブジェクト
 
 --- entity_expansion_limit -> Integer
 実体参照の展開回数の上限を返します。

@@ -58,7 +58,7 @@ RubyGems を扱うためのクラスやモジュールが定義されている�
 
 Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
 
-  $ gem install rak -p http://user:pasword@proxy.example.com/
+  $ gem install rak -p http://user:password@proxy.example.com/
 
 ==== Gem パッケージをアンインストールする
 

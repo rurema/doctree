@@ -41,7 +41,7 @@ context には hash table で要素のコンテキストを指定します。
 --- elements -> REXML::Elements
 要素が保持している子要素の集合を返します。
 
---- context -> {Symbol => objet} | nil
+--- context -> {Symbol => object} | nil
 
 要素の「コンテキスト」を [[c:Hash]] で返します。
 

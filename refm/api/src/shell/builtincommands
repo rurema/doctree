@@ -593,10 +593,10 @@ command を実行する.
   }
 
 
---- glob(patten) -> Shell::Filter
+--- glob(pattern) -> Shell::Filter
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
-@param patten シェルコマンド glob に与えるパターンを指定します。
+@param pattern シェルコマンド glob に与えるパターンを指定します。
               パターンの書式については、[[m:Dir.[] ]]を参照してください。
 
 動作例
