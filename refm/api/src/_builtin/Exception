@@ -141,7 +141,7 @@ end
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
-#@samplecode 例:
+#@samplecode 例
 begin
   begin
     raise "inner"
