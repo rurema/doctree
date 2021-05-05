@@ -47,7 +47,7 @@
     * [[m:File.rename]] GVL を解放するようになりました [[feature:13951]]
     * [[m:File::Stat#atime]], [[m:File::Stat#mtime]], [[m:File::Stat#ctime]]
       Windows 8 以降でタイムスタンプの分数表現をサポートしました [[feature:13726]]
-    * [[m:File::Stat#ino]], [[m:File.indentical?]]
+    * [[m:File::Stat#ino]], [[m:File.identical?]]
       Windows 8.1 以降で、ReFSの128bitのinoをサポートしました [[feature:13731]]
     * [[m:File.readable?]], [[m:File.readable_real?]], [[m:File.writable?]], [[m:File.writable_real?]],
       [[m:File.executable?]], [[m:File.executable_real?]], [[m:File.mkfifo]], [[m:File.readlink]],

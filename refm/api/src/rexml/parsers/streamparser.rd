@@ -144,7 +144,7 @@ StreamParser で処理したときに、どのコールバックメソッドが�
 ストリームパーサオブジェクトを生成します。
 
 @param source 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
-@param listner コールバックオブジェクト
+@param listener コールバックオブジェクト
 
 == Instance Methods
 

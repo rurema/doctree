@@ -1052,8 +1052,8 @@ $VERBOSE が真のときは何もしません。
 
 #@# --- typedef_expr(type, headers)
 #@# nodoc
-#@# --- try_signedness(tyep, member, headers = nil, opts = nil)
-#@# --- try_signedness(tyep, member, headers = nil, opts = nil){ ... }
+#@# --- try_signedness(type, member, headers = nil, opts = nil)
+#@# --- try_signedness(type, member, headers = nil, opts = nil){ ... }
 #@# nodoc
 
 #@# --- macro_defined?(macro, src, opt = "") -> bool

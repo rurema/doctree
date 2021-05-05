@@ -50,7 +50,7 @@ Comment オブジェクトを生成します。
 
 --- clone -> REXML::Comment
 
-内容が複製された Commnent オブジェクトを返します。
+内容が複製された Comment オブジェクトを返します。
 (親ノードの情報は複製されません)。
 
 #@# --- write(output, indent = -1, transitive = false, ie_hack = false)

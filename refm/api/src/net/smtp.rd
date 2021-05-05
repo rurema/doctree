@@ -484,7 +484,7 @@ to_addrs には送信先メールアドレスを文字列で渡します。
 
   require 'net/smtp'
 
-  Net::SMTP.start('smtp.exmaple.com', 25) {|smtp|
+  Net::SMTP.start('smtp.example.com', 25) {|smtp|
     smtp.open_message_stream('from@example.com', 'to@example.net') {|f|
       f.puts 'From: from@example.com'
       f.puts 'To: to@example.net'
