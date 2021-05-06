@@ -118,7 +118,6 @@ test.rb:1:in `f6': unhandled exception
   デバッグモードでスクリプトを実行します。[[m:$DEBUG]] を
   true にします。
 
-#@since 1.9.1
 : -E ex[:in]
 : --encoding ex[:in]
 
@@ -127,15 +126,44 @@ test.rb:1:in `f6': unhandled exception
   [[m:Encoding.default_internal]] は nil になります。また、:エンコーディ
   ング のように外部エンコーディングを省略した場合は内部エンコーディング
   のみを変更します。
-#@end
+
+//emlist{
+$ ruby -E EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
+nil
+#<Encoding:EUC-JP>
+
+$ ruby -E EUC-JP:Windows-31J -e 'p Encoding.default_internal; p Encoding.default_external'
+#<Encoding:Windows-31J>
+#<Encoding:EUC-JP>
+
+$ ruby --encoding EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
+nil
+#<Encoding:EUC-JP>
+
+$ ruby --encoding EUC-JP:Windows-31J -e 'p Encoding.default_internal; p Encoding.default_external'
+#<Encoding:Windows-31J>
+#<Encoding:EUC-JP>
+//}
 
 : --external-encoding encoding
 
   デフォルトの外部エンコーディングを指定します。
 
+//emlist{
+$ ruby --external-encoding EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
+nil
+#<Encoding:EUC-JP>
+//}
+
 : --internal-encoding encoding
 
   デフォルトの内部エンコーディングを指定します。
+
+//emlist{
+$ ruby --internal-encoding EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
+#<Encoding:EUC-JP>
+#<Encoding:UTF-8>
+//}
 
 : --enable feature
 
