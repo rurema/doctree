@@ -251,15 +251,18 @@ freeze されていない場合は self を返します。
 
 #@samplecode 例
 # frozen_string_literal: false
+
 original_text = "text"
 unfrozen_text = +original_text
-original_text == unfrozen_text      # => true
-original_text.equal?(unfrozen_text) # => true
+unfrozen_text.frozen?                 # => false
+original_text == unfrozen_text        # => true
+original_text.equal?(unfrozen_text)   # => true
 
-frozen_text = "text".freeze
-unfrozen_text = +frozen_text
-frozen_text == unfrozen_text        # => true
-frozen_text.equal?(unfrozen_text)   # => false
+original_text = "text".freeze
+unfrozen_text = +original_text
+unfrozen_text.frozen?                 # => false
+original_text == unfrozen_text        # => true
+original_text.equal?(unfrozen_text)   # => false
 #@end
 
 @see [[m:String#-@]]
@@ -271,15 +274,18 @@ freeze されていない場合は元の文字列の freeze された (できる
 
 #@samplecode 例
 # frozen_string_literal: false
-original_text = "text"
-unfrozen_text = -original_text
-original_text == unfrozen_text      # => true
-original_text.equal?(unfrozen_text) # => false
 
-frozen_text = "text".freeze
-unfrozen_text = -frozen_text
-frozen_text == unfrozen_text        # => true
-frozen_text.equal?(unfrozen_text)   # => true
+original_text = "text"
+frozen_text = -original_text
+frozen_text.frozen?                 # => true
+original_text == frozen_text        # => true
+original_text.equal?(frozen_text)   # => false
+
+original_text = "text".freeze
+frozen_text = -original_text
+frozen_text.frozen?                 # => true
+original_text == frozen_text        # => true
+original_text.equal?(frozen_text)   # => true
 #@end
 
 @see [[m:String#+@]]
