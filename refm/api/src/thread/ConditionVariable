@@ -9,7 +9,7 @@ alias ConditionVariable
 
 以下も ConditionVariable を理解するのに参考になります。
 
-[[url:http://www.ruby-doc.org/docs/ProgrammingRuby/html/tut_threads.html#UF]]
+[[url:https://ruby-doc.com/docs/ProgrammingRuby/html/tut_threads.html#UF]]
 
 === Condition Variable とは
 
