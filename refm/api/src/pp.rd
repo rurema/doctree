@@ -152,10 +152,8 @@ pp h
 @param width 出力先の幅を指定します。
 
 #@samplecode
-#@until 2.5.0
 require 'pp'
 
-#@end
 str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
 puts str
 # =>
@@ -243,10 +241,6 @@ list を iter_method によってイテレートし、各要素を引数とし�
 つまり、以下のふたつは同値です。
 
 #@samplecode
-#@until 2.5.0
-require 'pp'
-
-#@end
 q.seplist([1,2,3]) {|v| q.pp v }
 
 q.pp 1
