@@ -321,8 +321,8 @@ parser.on('-i') { puts "-i" }
 parser.on('-o') { puts '-o' }
 
 subparsers = Hash.new {|h,k|
-$stderr.puts "no such subcommand: #{k}"
-exit 1
+  $stderr.puts "no such subcommand: #{k}"
+  exit 1
 }
 subparsers['add'] = OptionParser.new.on('-i') { puts "add -i" }
 subparsers['del'] = OptionParser.new.on('-i') { puts "del -i" }
