@@ -70,7 +70,7 @@ category File
 例:
 
   require 'fileutils'
-  FileUtils.cd('/', {:verbose => true})   # chdir and report it
+  FileUtils.cd('/', **{:verbose => true})   # chdir and report it
 
 --- chmod(mode, list, options = {}) -> Array
 
@@ -307,7 +307,7 @@ file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
   require 'fileutils'
   FileUtils.cp 'eval.c', 'eval.c.org'
   FileUtils.cp(['cgi.rb', 'complex.rb', 'date.rb'], '/usr/lib/ruby/1.8')
-  FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', {:verbose => true})
+  FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', **{:verbose => true})
 
 --- cp_r(src, dest, options = {}) -> ()
 
@@ -326,13 +326,13 @@ src を dest にコピーします。src がディレクトリであったら再
 
   # installing ruby library "mylib" under the site_ruby
   require 'fileutils'
-  FileUtils.rm_r(site_ruby + '/mylib', {:force => true})
+  FileUtils.rm_r(site_ruby + '/mylib', **{:force => true})
   FileUtils.cp_r('lib/', site_ruby + '/mylib')
   # other sample
   require 'fileutils'
   FileUtils.cp_r(%w(mail.rb field.rb debug/), site_ruby + '/tmail')
   FileUtils.cp_r(Dir.glob('*.rb'), '/home/taro/lib/ruby',
-                 {:noop => true, :verbose => true})
+                 **{:noop => true, :verbose => true})
 
 --- install(src, dest, options = {}) -> ()
 
@@ -353,8 +353,8 @@ src と dest の内容が違うときだけ src を dest にコピーします�
 例:
 
   require 'fileutils'
-  FileUtils.install('ruby', '/usr/local/bin/ruby', {:mode => 0755, :verbose => true})
-  FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', {:verbose => true})
+  FileUtils.install('ruby', '/usr/local/bin/ruby', **{:mode => 0755, :verbose => true})
+  FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', **{:verbose => true})
 
 --- ln(src, dest, options = {})   -> ()
 --- link(src, dest, options = {}) -> ()
@@ -386,7 +386,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 例:
 
   require 'fileutils'
-  FileUtils.ln('gcc', 'cc', {:verbose => true})
+  FileUtils.ln('gcc', 'cc', **{:verbose => true})
   FileUtils.ln('/usr/bin/emacs21', '/usr/bin/emacs')
   FileUtils.cd('/bin')
   FileUtils.ln(%w(cp mv mkdir), '/usr/bin')
@@ -461,7 +461,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 
   require 'fileutils'
   FileUtils.ln_s('/usr/bin/ruby', '/usr/local/bin/ruby')
-  FileUtils.ln_s('verylongsourcefilename.c', 'c', {:force => true})
+  FileUtils.ln_s('verylongsourcefilename.c', 'c', **{:force => true})
   FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
 
 --- ln_sf(src, dest, options = {}) -> ()
@@ -497,7 +497,7 @@ ln_s(src, dest, :force => true) と同じです。
   require 'fileutils'
   FileUtils.mkdir('test')
   FileUtils.mkdir(%w( tmp data ))
-  FileUtils.mkdir('notexist', {:noop => true})  # does not create really
+  FileUtils.mkdir('notexist', **{:noop => true})  # does not create really
 
 #@until 1.9.1
 --- mkdir_p(list, options = {})  -> String | Array
@@ -560,9 +560,9 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 
   require 'fileutils'
   FileUtils.mv('badname.rb', 'goodname.rb')
-  FileUtils.mv('stuff.rb', 'lib/ruby', {:force => true})
+  FileUtils.mv('stuff.rb', 'lib/ruby', **{:force => true})
   FileUtils.mv(['junk.txt', 'dust.txt'], "#{ENV['HOME']}/.trash")
-  FileUtils.mv(Dir.glob('test*.rb'), 'test', {:noop => true, :verbose => true} )
+  FileUtils.mv(Dir.glob('test*.rb'), 'test', **{:noop => true, :verbose => true} )
 
 --- pwd   -> String
 --- getwd -> String
@@ -585,7 +585,7 @@ list で指定された対象を消去します。
   require 'fileutils'
   FileUtils.rm('junk.txt')
   FileUtils.rm(Dir.glob('*~'))
-  FileUtils.rm('NotExistFile', {:force => true})    # never raises exception
+  FileUtils.rm('NotExistFile', **{:force => true})    # never raises exception
 
 --- rm_f(list, options = {})        -> ()
 --- safe_unlink(list, options = {}) -> ()
@@ -631,7 +631,7 @@ FileUtils.rm(list, :force => true) と同じです。
 
 ファイルまたはディレクトリ list を再帰的に消去します。
 
-rm_r(list, {:force => true}) と同じです。
+rm_r(list, **{:force => true}) と同じです。
 
 @param list 削除する対象。一つの場合は文字列も指定可能です。
             二つ以上指定する場合は配列で指定します。
@@ -665,7 +665,7 @@ rm_r(list, {:force => true}) と同じです。
   FileUtils.rmdir('somedir')
   FileUtils.rmdir(%w(somedir anydir otherdir))
   # 実際にはディレクトリの削除は行わずにメッセージ出力のみ
-  FileUtils.rmdir('somedir', {:verbose => true, :noop => true})
+  FileUtils.rmdir('somedir', **{:verbose => true, :noop => true})
 
 --- remove_entry(path, force = false) -> ()
 
