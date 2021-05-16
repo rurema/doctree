@@ -7,62 +7,68 @@ category Network
 
 ==== ウェブサーバからドキュメントを得る (GET)
 
-例1: GET して 表示するだけ
-  require 'net/http'
-  Net::HTTP.get_print 'www.example.com', '/index.html'
+#@samplecode 例1: GET して 表示するだけ
+require 'net/http'
+Net::HTTP.get_print 'www.example.com', '/index.html'
+#@end
 
-例2: [[c:URI]] を使う
-  require 'net/http'
-  require 'uri'
-  Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+#@samplecode 例2: URI を使う
+require 'net/http'
+require 'uri'
+Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+#@end
 
-例3: より汎用的な例
+#@samplecode 例3: より汎用的な例
+require 'net/http'
+require 'uri'
 
-  require 'net/http'
-  require 'uri'
-  
-  url = URI.parse('http://www.example.com/index.html')
-  res = Net::HTTP.start(url.host, url.port) {|http|
-    http.get('/index.html')
-  }
-  puts res.body
+url = URI.parse('http://www.example.com/index.html')
+res = Net::HTTP.start(url.host, url.port) {|http|
+  http.get('/index.html')
+}
+puts res.body
+#@end
 
-例4: 上の例よりさらに汎用的な例
-  require 'net/http'
-  
-  url = URI.parse('http://www.example.com/index.html')
-  req = Net::HTTP::Get.new(url.path)
-  res = Net::HTTP.start(url.host, url.port) {|http|
-    http.request(req)
-  }
-  puts res.body
+#@samplecode 例4: 上の例よりさらに汎用的な例
+require 'net/http'
+
+url = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(url.path)
+res = Net::HTTP.start(url.host, url.port) {|http|
+  http.request(req)
+}
+puts res.body
+#@end
 
 ==== フォームの情報を送信する (POST)
-  require 'net/http'
-  require 'uri'
 
-  #例1: POSTするだけ
-  res = Net::HTTP.post_form(URI.parse('http://www.example.com/search'),
-                            {'q'=>'ruby', 'max'=>'50'})
-  puts res.body
-  
-  #例2: 認証付きで POST する
-  res = Net::HTTP.post_form(URI.parse('http://jack:pass@www.example.com/todo.cgi'),
-                            {'from'=>'2005-01-01', 'to'=>'2005-03-31'})
-  puts res.body
+#@samplecode 例
+require 'net/http'
+require 'uri'
 
-  #例3: より細かく制御する
-  url = URI.parse('http://www.example.com/todo.cgi')
-  req = Net::HTTP::Post.new(url.path)
-  req.basic_auth 'jack', 'pass'
-  req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'}, ';')
-  res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
-  case res
-  when Net::HTTPSuccess, Net::HTTPRedirection
-    # OK
-  else
-    res.value
-  end
+#例1: POSTするだけ
+res = Net::HTTP.post_form(URI.parse('http://www.example.com/search'),
+                          {'q'=>'ruby', 'max'=>'50'})
+puts res.body
+
+#例2: 認証付きで POST する
+res = Net::HTTP.post_form(URI.parse('http://jack:pass@www.example.com/todo.cgi'),
+                          {'from'=>'2005-01-01', 'to'=>'2005-03-31'})
+puts res.body
+
+#例3: より細かく制御する
+url = URI.parse('http://www.example.com/todo.cgi')
+req = Net::HTTP::Post.new(url.path)
+req.basic_auth 'jack', 'pass'
+req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'}, ';')
+res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
+case res
+when Net::HTTPSuccess, Net::HTTPRedirection
+  # OK
+else
+  res.value
+end
+#@end
 
 ==== プロクシ経由のアクセス
 
@@ -74,14 +80,16 @@ nil を渡してください。
 [[m:Net::HTTP.new]] や [[m:Net::HTTP.start]] の proxy_addr や proxy_port
 を指定することでプログラムからプロクシを指定することもできます。
 
-  require 'net/http'
+#@samplecode 例
+require 'net/http'
 
-  proxy_addr = 'your.proxy.host'
-  proxy_port = 8080
-  
-  Net::HTTP.new('example.com', nil, proxy_addr, proxy_port).start { |http|
-    # always proxy via your.proxy.addr:8080
-  }
+proxy_addr = 'your.proxy.host'
+proxy_port = 8080
+
+Net::HTTP.new('example.com', nil, proxy_addr, proxy_port).start { |http|
+  # always proxy via your.proxy.addr:8080
+}
+#@end
 
 プロクシの認証をユーザ名とパスワードですることもできます。
 詳しくは [[m:Net::HTTP.new]] を参照してください。
@@ -91,39 +99,43 @@ nil を渡してください。
 以下の例の fetch はリダイレクトに対応しています。
 limit 回数以上リダイレクトしたらエラーにします。
 
-  require 'net/http'
-  require 'uri'
-  
-  def fetch(uri_str, limit = 10)
-    # You should choose better exception. 
-    raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+#@samplecode 例
+require 'net/http'
+require 'uri'
 
-    response = Net::HTTP.get_response(URI.parse(uri_str))
-    case response
-    when Net::HTTPSuccess
-      response
-    when Net::HTTPRedirection
-      fetch(response['location'], limit - 1)
-    else
-      response.value
-    end
+def fetch(uri_str, limit = 10)
+  # You should choose better exception. 
+  raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+
+  response = Net::HTTP.get_response(URI.parse(uri_str))
+  case response
+  when Net::HTTPSuccess
+    response
+  when Net::HTTPRedirection
+    fetch(response['location'], limit - 1)
+  else
+    response.value
   end
+end
 
-  print fetch('http://www.example.org')
+print fetch('http://www.example.org')
+#@end
 
 より詳しくは [[c:Net::HTTPResponse]]、 [[c:Net::HTTPSuccess]]、
 [[c:Net::HTTPRedirection]] を参照してください。
 
 ==== Basic 認証
 
-  require 'net/http'
-  
-  Net::HTTP.start('www.example.com') {|http|
-    req = Net::HTTP::Get.new('/secret-page.html')
-    req.basic_auth 'account', 'password'
-    response = http.request(req)
-    print response.body
-  }
+#@samplecode 例
+require 'net/http'
+
+Net::HTTP.start('www.example.com') {|http|
+  req = Net::HTTP::Get.new('/secret-page.html')
+  req.basic_auth 'account', 'password'
+  response = http.request(req)
+  print response.body
+}
+#@end
 
 
 #@# === 例外
@@ -232,8 +244,10 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 
 このメソッドは以下と同じです。
 
-  require 'net/http'
-  Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).start(&block)
+#@samplecode 例
+require 'net/http'
+Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).start(&block)
+#@end
 
 @param address 接続するホスト名を文字列で指定します。
 @param port 接続するポート番号を指定します。
@@ -273,12 +287,19 @@ proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシ
 @see [[m:Net::HTTP.get]]
 
 === 例
-  require 'net/http'
-  require 'uri'
-  Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+
+#@samplecode
+require 'net/http'
+require 'uri'
+Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+#@end
+
 もしくは
-  require 'net/http'
-  Net::HTTP.get_print 'www.example.com', '/index.html'
+
+#@samplecode
+require 'net/http'
+Net::HTTP.get_print 'www.example.com', '/index.html'
+#@end
 
 --- get_response(uri) -> Net::HTTPResponse
 --- get_response(host, path = nil, port = nil) -> Net::HTTPResponse
@@ -330,7 +351,7 @@ POST します。
 @see [[m:Net::HTTP.Proxy]]
 
 --- proxy_user -> String|nil
-自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+自身が ([[m:Net::HTTP.Proxy]] によって作成された)
 プロクシ用のクラスで、かつプロクシの認証を利用する場合は
 プロクシ認証のユーザ名を返します。
 
@@ -339,7 +360,7 @@ POST します。
 @see [[m:Net::HTTP.Proxy]]
 
 #@# --- socket_type -> Net::BufferedIO
-#@# 
+#@#
 #@# このメソッドは obsolete です。
 
 --- Proxy(address, port = 80) -> Class
@@ -352,19 +373,22 @@ Proxy 経由で http サーバに接続するためのクラスを作成し返�
 
 address が nil のときは Net::HTTP クラスをそのまま返します。
 
-例1: [[m:Net::HTTP.new]] を使う
-  require 'net/http'
-  proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
-  http = proxy_class.new('www.example.org')
-  http.start {|h|
-    h.get('/ja/') # proxy.example.com 経由で接続します。
-  }
-例2: [[m:Net::HTTP.start]] を使う
-  require 'net/http'
-  proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
-  proxy_class.start('www.example.org') {|h|
-    h.get('/ja/') # proxy.example.com 経由で接続します。
-  }
+#@samplecode 例1: Net::HTTP.new を使う
+require 'net/http'
+proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
+http = proxy_class.new('www.example.org')
+http.start {|h|
+  h.get('/ja/') # proxy.example.com 経由で接続します。
+}
+#@end
+
+#@samplecode 例2: Net::HTTP.start を使う
+require 'net/http'
+proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
+proxy_class.start('www.example.org') {|h|
+  h.get('/ja/') # proxy.example.com 経由で接続します。
+}
+#@end
 
 @param address プロクシのホスト名を文字列で与えます。
 @param port プロクシのポート番号を与えます。
@@ -439,7 +463,9 @@ io に nil を指定するとデバッグ出力を止めます。
 @param io 出力先を指定します。このオブジェクトは 
           メソッド << を持っている必要があります。
 
-  http.set_debug_output($stderr)
+#@samplecode 例
+http.set_debug_output($stderr)
+#@end
 
 
 --- close_on_empty_response -> bool
@@ -825,22 +851,24 @@ dest を指定した場合には
 1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
 また、返り値が [レスポンスオブジェクト, そのボディ] となります。
 
-  # net/http version 1.1
-  response, body = http.get( '/index.html' )
-  
-  # net/http version 1.2
-  response = http.get('/index.html')
-  
-  # compatible in both version
-  response , = http.get('/index.html')
-  response.body
-  
-  # compatible, using block
-  File.open('save.txt', 'w') {|f|
-    http.get('/~foo/', nil) do |str|
-      f.write str
-    end
-  }
+#@samplecode 例
+# net/http version 1.1
+response, body = http.get( '/index.html' )
+
+# net/http version 1.2
+response = http.get('/index.html')
+
+# compatible in both version
+response , = http.get('/index.html')
+response.body
+
+# compatible, using block
+File.open('save.txt', 'w') {|f|
+  http.get('/~foo/', nil) do |str|
+    f.write str
+  end
+}
+#@end
 
 @see [[m:Net::HTTP#request_get]]
 
@@ -859,13 +887,15 @@ header が nil
 
 1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
 
-  require 'net/http'
+#@samplecode 例
+require 'net/http'
 
-  response = nil
-  Net::HTTP.start('some.www.server', 80) {|http|
-    response = http.head('/index.html')
-  }
-  p response['content-type']
+response = nil
+Net::HTTP.start('some.www.server', 80) {|http|
+  response = http.head('/index.html')
+}
+p response['content-type']
+#@end
 
 @see [[m:Net::HTTP#request_head]]
 
@@ -897,19 +927,20 @@ dest を指定した場合には
 1.1 互換モードの場合は、レスポンスに応じて例外が発生します。
 また、返り値が [レスポンスオブジェクト, そのボディ] となります。
 
-例:
-  # net/http version 1.1
-  response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
-  
-  # version 1.2
-  response = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
-  
-  # using block
-  File.open('save.html', 'w') {|f|
-    http.post('/cgi-bin/search.rb', 'query=subject&target=ruby') do |str|
-      f.write str
-    end
-  }
+#@samplecode 例
+# net/http version 1.1
+response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
+
+# version 1.2
+response = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
+
+# using block
+File.open('save.html', 'w') {|f|
+  http.post('/cgi-bin/search.rb', 'query=subject&target=ruby') do |str|
+    f.write str
+  end
+}
+#@end
 
 @see [[m:Net::HTTP#request_post]]
 
@@ -936,18 +967,20 @@ header が nil
 @param path 取得するエンティティのパスを文字列で指定します。
 @param header リクエストの HTTP ヘッダをハッシュで指定します。
 
-  # example
-  response = http.request_get('/index.html')
+#@samplecode 例
+# example
+response = http.request_get('/index.html')
+p response['content-type']
+puts response.body          # body is already read
+
+# using block
+http.request_get('/index.html') {|response|
   p response['content-type']
-  puts response.body          # body is already read
-  
-  # using block
-  http.request_get('/index.html') {|response|
-    p response['content-type']
-    response.read_body do |str|   # read body now
-      print str
-    end
-  }
+  response.read_body do |str|   # read body now
+    print str
+  end
+}
+#@end
 
 get2 は時代遅れなので使わないでください。
 
@@ -978,8 +1011,10 @@ body は空です。そのためこの動作はそれほど意味はありませ
 
 head2 は時代遅れなので使わないでください。
 
-  response = http.request_head('/index.html')
-  p response['content-type']
+#@samplecode 例
+response = http.request_head('/index.html')
+p response['content-type']
+#@end
 
 @see [[m:Net::HTTP#head]]
 
@@ -1012,19 +1047,20 @@ POST する場合にはヘッダに Content-Type: を指定する必要があり
 
 post2 は時代遅れなので使わないでください。
 
-  # 例
-  response = http.request_post('/cgi-bin/nice.rb', 'datadatadata...')
+#@samplecode 例
+response = http.request_post('/cgi-bin/nice.rb', 'datadatadata...')
+p response.status
+puts response.body          # body is already read
+
+# using block
+http.request_post('/cgi-bin/nice.rb', 'datadatadata...') {|response|
   p response.status
-  puts response.body          # body is already read
-  
-  # using block
-  http.request_post('/cgi-bin/nice.rb', 'datadatadata...') {|response|
-    p response.status
-    p response['content-type']
-    response.read_body do |str|   # read body now
-      print str
-    end
-  }
+  p response['content-type']
+  response.read_body do |str|   # read body now
+    print str
+  end
+}
+#@end
 
 @see [[m:Net::HTTP#post]], [[m:Net::HTTPResponse#read_body]]
 
@@ -1076,8 +1112,10 @@ HTTP リクエストをサーバに送り、そのレスポンスを
 @param data リクエストのボディを文字列で与えます。
 @param header リクエストのヘッダをハッシュで与えます。
 
-  response = http.send_request('GET', '/index.html')
-  puts response.body
+#@samplecode 例
+response = http.send_request('GET', '/index.html')
+puts response.body
+#@end
 
 @see [[m:Net::HTTP#request]]
 
@@ -1551,16 +1589,17 @@ key に元々設定されていた値は破棄されず、それに val 追加�
 @see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#get_fields]]
 
-例:
-  request.add_field 'X-My-Header', 'a'
-  p request['X-My-Header']              #=> "a"
-  p request.get_fields('X-My-Header')   #=> ["a"]
-  request.add_field 'X-My-Header', 'b'
-  p request['X-My-Header']              #=> "a, b"
-  p request.get_fields('X-My-Header')   #=> ["a", "b"]
-  request.add_field 'X-My-Header', 'c'
-  p request['X-My-Header']              #=> "a, b, c"
-  p request.get_fields('X-My-Header')   #=> ["a", "b", "c"]
+#@samplecode 例
+request.add_field 'X-My-Header', 'a'
+p request['X-My-Header']              #=> "a"
+p request.get_fields('X-My-Header')   #=> ["a"]
+request.add_field 'X-My-Header', 'b'
+p request['X-My-Header']              #=> "a, b"
+p request.get_fields('X-My-Header')   #=> ["a", "b"]
+request.add_field 'X-My-Header', 'c'
+p request['X-My-Header']              #=> "a, b, c"
+p request.get_fields('X-My-Header')   #=> ["a", "b", "c"]
+#@end
    
 --- get_fields(key) -> [String]
 key ヘッダフィールドの値 (文字列) を配列で返します。
@@ -2038,13 +2077,16 @@ req.range # => Net::HTTPHeaderSyntaxError
 範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
 
 以下は同じことを表しています。
-  req.range = 0..1023
-  req.range = 0...1024
-  req.range = 1024
-  req.set_range(0, 1024)
-  req.set_range(0..1023)
-  req.set_range(0...1024)
-  req.set_range(1024)
+
+#@samplecode 例
+req.range = 0..1023
+req.range = 0...1024
+req.range = 1024
+req.set_range(0, 1024)
+req.set_range(0..1023)
+req.set_range(0...1024)
+req.set_range(1024)
+#@end
 
 特別な場合として、
 n に負数を与えた場合にnは最初から(-n)バイトまでの範囲を表します。
