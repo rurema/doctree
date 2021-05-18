@@ -1,4 +1,3 @@
-#@since 1.9.1
 category Development
 
 カバレッジを測定するためのライブラリです。
@@ -60,8 +59,6 @@ Coverage.result["foo.rb"]から得られる配列は各行の実行回数にな�
 @raise RuntimeError [[m:Coverage.start]] を実行する前に実行された場合に
                     発生します。
 
-#@end
-#@since 2.3.0
 @see [[m:Coverage.peek_result]]
 --- peek_result -> Hash
 
@@ -74,7 +71,7 @@ Coverage.result["foo.rb"]から得られる配列は各行の実行回数にな�
                     発生します。
 
 @see [[m:Coverage.result]]
-#@end
+
 #@since 2.5.0
 --- running? -> bool
 
