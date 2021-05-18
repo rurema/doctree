@@ -69,7 +69,6 @@ opt で置き換えます。そうでない場合は先頭に opt を追加し�
 
 @return 文字列を返します。
 
-#@since 1.9.1
 --- set_backtrace(array) -> [String]
 
 自身に array で指定したバックトレースを設定します。
@@ -91,7 +90,6 @@ array で指定されたバックトレースから optparse ライブラリに�
 
 @return array を返します。
 
-#@end
 
 = class OptionParser::AmbiguousOption < OptionParser::ParseError
 

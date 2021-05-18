@@ -12,11 +12,13 @@
 
 というような流れになります。
 
-  require "optparse"
-  ProgramConfig = Hash.new
-  opts = OptionParser.new
-  opts.on("-a"){|v| ProgramConfig[:a] = true } # オプション「-a」がコマンドラインで指定されていた場合の動作。
-  opts.parse!(ARGV)                            # 実際にコマンドラインの parse を行う。
+#@samplecode
+require "optparse"
+ProgramConfig = Hash.new
+opts = OptionParser.new
+opts.on("-a"){|v| ProgramConfig[:a] = true } # オプション「-a」がコマンドラインで指定されていた場合の動作。
+opts.parse!(ARGV)                            # 実際にコマンドラインの parse を行う。
+#@end
 
 === デフォルトで利用可能なオプション
 
@@ -47,14 +49,16 @@ OptionParser オブジェクトを生成して返します。
 ブロックが与えられた場合、生成した OptionParser オブジェクトを引数としてブロックを評
 価します。つまり、以下のような書き方が可能です。
 
-  require 'optparse'
-  OptionParser.new do |opt|
+#@samplecode
+require 'optparse'
+OptionParser.new do |opt|
 
-    opt.on('-a') {|v| p v }
-    opt.on('-b') {|v| p v }
+  opt.on('-a') {|v| p v }
+  opt.on('-b') {|v| p v }
 
-    opt.parse!(ARGV)
-  end
+  opt.parse!(ARGV)
+end
+#@end
 
 @param banner ヘルプ(サマリ)の最初の部分に表示される、アプリケーションの説明などを文字列で与えます。
 
@@ -73,24 +77,26 @@ OptionParser オブジェクトを生成して返します。
 コマンドラインのオプションに与えられた引数は、この accept で登録したブロックで
 klass のインスタンスに変換されてから、OptionParser#on メソッドで登録したブロックに渡されます。
 
-  require "optparse"
-  require "time"
+#@samplecode
+require "optparse"
+require "time"
 
-  OptionParser.accept(Time) do |s,|
-    begin
-      Time.parse(s) if s
-    rescue
-      raise OptionParser::InvalidArgument, s
-    end
+OptionParser.accept(Time) do |s,|
+  begin
+    Time.parse(s) if s
+  rescue
+    raise OptionParser::InvalidArgument, s
   end
+end
 
-  opts = OptionParser.new
+opts = OptionParser.new
 
-  opts.on("-t", "--time [TIME]", Time) do |time|
-    p time.class #=> Time
-  end
+opts.on("-t", "--time [TIME]", Time) do |time|
+  p time.class #=> Time
+end
 
-  opts.parse!(ARGV)
+opts.parse!(ARGV)
+#@end
 
 いくつかのクラスに対しては変換用のブロックがデフォルトで登録されて
 います。[[m:OptionParser#on]] を参照して下さい。
@@ -138,11 +144,7 @@ parse(opts2) # => unsupported argument type: Time (ArgumentError)
 
 @param argv パースしたい配列を指定します。
 
-#@since 1.9.1
 @param opts 引数を文字列で指定します。
-#@else
-@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
-#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -535,25 +537,26 @@ opts.to_a # => ["Usage: test [options]", "    -i, --init\n", "    -u, --update\n
 
 @param sep サマリの区切りを文字列で指定します。
 
-例:
-       require 'optparse'
-       opts = OptionParser.new
-       opts.banner = "Usage: example.rb [options]"
+#@samplecode
+require 'optparse'
+opts = OptionParser.new
+opts.banner = "Usage: example.rb [options]"
 
-       opts.separator ""
-       opts.separator "Specific options:"
+opts.separator ""
+opts.separator "Specific options:"
 
-       opts.on("-r", "--require LIBRARY") do |lib|
-               options.library << lib
-       end
+opts.on("-r", "--require LIBRARY") do |lib|
+        options.library << lib
+end
 
-       opts.separator ""
-       opts.separator "Common options:"
+opts.separator ""
+opts.separator "Common options:"
 
-       opts.on_tail("-h", "--help", "Show this message") do
-         puts opts
-         exit
-       end
+opts.on_tail("-h", "--help", "Show this message") do
+  puts opts
+  exit
+end
+#@end
 
 --- on(short, desc = "") {|v| ... }        -> self
 --- on(long, desc = "") {|v| ... }         -> self
@@ -723,16 +726,17 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 @param rest 可能な引数を列挙した配列やハッシュを与えます。文字列を与えた場合は、
             サマリに表示されるオプションの説明と見なします。
 
-例:
-  opts.on("--protocol VALUE", [:http, :ftp, :https]){|w|
-    p w
-  }
-  # ruby command --protocol=http #=> :http
+#@samplecode
+opts.on("--protocol VALUE", [:http, :ftp, :https]){|w|
+  p w
+}
+# ruby command --protocol=http #=> :http
 
-  opts.on("-c", "--charset VALUE", {"jis" => "iso-2022-jp", "sjis" => "shift_jis"}){|w|
-    p w
-  }
-  # ruby command --charset=jis #=> "iso-2022-jp"
+opts.on("-c", "--charset VALUE", {"jis" => "iso-2022-jp", "sjis" => "shift_jis"}){|w|
+  p w
+}
+# ruby command --charset=jis #=> "iso-2022-jp"
+#@end
 
 --- on_head(*arg, &block) -> self
 
@@ -842,18 +846,18 @@ argv からオプションを取り除いたものを返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-例:
-  $ cat opt.rb
-  require 'optparse'
-  opt = OptionParser.new
+#@samplecode opt.rb
+require 'optparse'
+opt = OptionParser.new
 
-  opt.on('-a [VAL]') {|v| p :a }
-  opt.on('-b') {|v| p :b }
+opt.on('-a [VAL]') {|v| p :a }
+opt.on('-b') {|v| p :b }
 
-  opt.order(ARGV)
-  p ARGV
-
-  $ ruby opt2.rb -a foo somefile -b
+opt.order(ARGV)
+p ARGV
+#@end
+↓
+  $ ruby opt.rb -a foo somefile -b
   :a
   ["-a", "foo", "somefile", "-b"]
 
@@ -889,18 +893,18 @@ argv を返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-例:
-  $ cat opt.rb
-  require 'optparse'
-  opt = OptionParser.new
+#@samplecode opt.rb
+require 'optparse'
+opt = OptionParser.new
 
-  opt.on('-a [VAL]') {|v| p :a }
-  opt.on('-b') {|v| p :b }
+opt.on('-a [VAL]') {|v| p :a }
+opt.on('-b') {|v| p :b }
 
-  opt.order!(ARGV)
-  p ARGV
-
-  $ ruby opt2.rb -a foo somefile -b
+opt.order!(ARGV)
+p ARGV
+#@end
+↓
+  $ ruby opt.rb -a foo somefile -b
   :a
   ["somefile", "-b"]
 
@@ -934,19 +938,18 @@ argv からオプションを取り除いたものを返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-例:
+#@samplecode opt.rb
+require 'optparse'
+opt = OptionParser.new
 
-  $ cat opt.rb
-  require 'optparse'
-  opt = OptionParser.new
+opt.on('-a [VAL]') {|v| p :a }
+opt.on('-b ') {|v| p :b }
 
-  opt.on('-a [VAL]') {|v| p :a }
-  opt.on('-b ') {|v| p :b }
-
-  opt.permute!(ARGV)
-  p ARGV
-
-  $ ruby opt2.rb -a foo somefile -b
+opt.permute!(ARGV)
+p ARGV
+#@end
+↓
+  $ ruby opt.rb -a foo somefile -b
   :a
   :b
   ["somefile"]
@@ -977,19 +980,18 @@ argv を返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-例:
+#@samplecode opt.rb
+require 'optparse'
+opt = OptionParser.new
 
-  $ cat opt.rb
-  require 'optparse'
-  opt = OptionParser.new
+opt.on('-a [VAL]') {|v| p :a }
+opt.on('-b ') {|v| p :b }
 
-  opt.on('-a [VAL]') {|v| p :a }
-  opt.on('-b ') {|v| p :b }
-
-  opt.permute!(ARGV)
-  p ARGV
-
-  $ ruby opt2.rb -a foo somefile -b
+opt.permute!(ARGV)
+p ARGV
+#@end
+↓
+  $ ruby opt.rb -a foo somefile -b
   :a
   :b
   ["somefile"]
@@ -1172,29 +1174,23 @@ p config          # => {:lib=>"lib1"}
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 
-#@until 1.9.1
-[[lib:getopts]] 相当の機能を提供します。
-getopts と違って、グローバル変数を定義しません。
-#@end
 引数をパースした結果を、Hash として返します。
 
 配列 argv を与えた場合、argv をパースします。そうでない場合は、
 default_argv をパースします。
 
- opt = OptionParser.new
- params = opt.getopts(ARGV, "ab:", "foo", "bar:")
- # params["a"] = true   # -a
- # params["b"] = "1"    # -b1
- # params["foo"] = true  # --foo
- # params["bar"] = "x"  # --bar x
+#@samplecode
+opt = OptionParser.new
+params = opt.getopts(ARGV, "ab:", "foo", "bar:")
+# params["a"] = true   # -a
+# params["b"] = "1"    # -b1
+# params["foo"] = true  # --foo
+# params["bar"] = "x"  # --bar x
+#@end
 
 @param argv パースしたい配列を指定します。
 
-#@since 1.9.1
 @param opts 引数を文字列で指定します。
-#@else
-@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
-#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
