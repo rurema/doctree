@@ -13,26 +13,28 @@ pretty printing アルゴリズムは読みやすいインデントと改行を�
 
 同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。
 
- require 'prettyprint'
+#@samplecode
+require 'prettyprint'
 
- p2 = PrettyPrint.new('', 10)
- s = 'hello'
- p2.text(s)
- p2.group(p2.indent + s.size + 1) do
-   p2.breakable
-   p2.text('a')
-   p2.breakable
-   p2.text('b')
-   p2.breakable
-   p2.text('c')
- end
- p2.flush
- puts p2.output
- #=>
- hello
-       a
-       b
-       c
+p2 = PrettyPrint.new('', 10)
+s = 'hello'
+p2.text(s)
+p2.group(p2.indent + s.size + 1) do
+  p2.breakable
+  p2.text('a')
+  p2.breakable
+  p2.text('b')
+  p2.breakable
+  p2.text('c')
+end
+p2.flush
+puts p2.output
+#=>
+# hello
+#       a
+#       b
+#       c
+#@end
 
 === References
 Christian Lindig, Strictly Pretty, March 2000,
@@ -52,7 +54,7 @@ pretty printing アルゴリズムのためのクラスです。
 そうでない場合にも利用できます。
  * [[m:PrettyPrint.new]]: 出力バッファ、空白の生成をするブロックや改行オブジェクトを設定できます。
  * [[m:PrettyPrint#text]]: 幅を設定できます。
- * [[m:PrettyPrint#breakable]] 
+ * [[m:PrettyPrint#breakable]]
 ですので、このクラスは以下のようなことにも応用が可能です。
  * proportional font を使ったテキストの整形
  * 出力幅とバイト数が異なるような多バイト文字
@@ -65,9 +67,9 @@ pretty printing アルゴリズムのためのクラスです。
 pretty printing のためのバッファを生成します。
 output は出力先です。output は << メソッドを持っていなければなりません。
 << メソッドには
- * [[m:PrettyPrint#text]] の第1引数 obj 
- * [[m:PrettyPrint#breakable]] の第1引数 sep 
- * [[m:PrettyPrint.new]] の第3引数 newline 
+ * [[m:PrettyPrint#text]] の第1引数 obj
+ * [[m:PrettyPrint#breakable]] の第1引数 sep
+ * [[m:PrettyPrint.new]] の第3引数 newline
  * [[m:PrettyPrint.new]] に与えたブロックを評価した結果
 のどれかひとつが引数として与えられます。
 
@@ -86,14 +88,16 @@ PrettyPrint オブジェクトを生成し、それを引数としてブロッ�
 
 以下と同じ働きをするもので簡便のために用意されています。
 
-  require 'prettyprint'
+#@samplecode
+require 'prettyprint'
 
-  begin
-    pp = PrettyPrint.new(output, maxwidth, newline, &genspace)
-    ...
-    pp.flush
-    output
-  end
+begin
+  pp = PrettyPrint.new(output, maxwidth, newline, &genspace)
+  ...
+  pp.flush
+  output
+end
+#@end
 
 @param output 出力先を指定します。output は << メソッドを持っていなければなりません。
 
