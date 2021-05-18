@@ -677,7 +677,7 @@ p true.object_id #=> 2
 
 hash を再定義する場合は、一様に分布する任意の整数を返すようにします。
 
-@return ハッシュ値を返します。Ruby 内部の整数 (Fixnum) に収まらない場合は切り捨てられます。
+@return ハッシュ値を返します。Ruby 内部の固定長整数 fixnum に収まらない場合は切り捨てられます。
 
 #@samplecode
 p self.hash #=> 21658870
