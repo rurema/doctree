@@ -182,7 +182,8 @@ Range.new(MyInteger.new(1), MyInteger.new(3)).each {|i| puts i }
 --- include?(obj) -> bool
 --- member?(obj) -> bool
 
-obj が範囲内に含まれている時に真を返します。
+obj が範囲内に含まれている時に true を返します。
+そうでない場合は、false を返します。
 
 #@until 2.6.0
 [[m:Range#===]] は主に case 式での比較に用いられます。
@@ -190,7 +191,7 @@ obj が範囲内に含まれている時に真を返します。
 
 <=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
 
-始端と終端が数値であれば、 [[m:Range#cover?]] と同様の動きをします。
+始端・終端・引数が数値であれば、 [[m:Range#cover?]] と同様の動きをします。
 
 @param obj 比較対象のオブジェクトを指定します。
 
@@ -204,18 +205,63 @@ p (1 .. 3).include?(1.5) # => true
 #@end
 
 @see [[ref:d:spec/control#case]]
+#@since 2.6.0
+@see [[m:Range#cover?]], [[m:Range#===]]
+#@else
 @see [[m:Range#cover?]]
+#@end
 
 #@since 2.6.0
 --- ===(obj) -> bool
+
+始端と終端の中に obj があるとき、true を返します。
+そうでないとき、false を返します。
+
+[[m:Range#===]] は主に case 式での比較に用いられます。
+
+#@samplecode 例
+p (0...50) === 79  #=> false
+p (60...80) === 79 #=> true
+
+case 79
+when  0...60  then  puts "low"
+when 60...80  then  puts "medium" # => medium
+when 80..100  then  puts "high"
+end
 #@end
+
+2.5 以前は、単純に [[m:Range#include?]] メソッドを内部で呼んでいました。
+
+しかし、2.6 以降では、(文字列を除いて) [[m:Range#cover?]] と同様の処理をするように切り替わりました。
+
+ただし、=== は、[[m:Range#cover?]] のように Range オブジェクトを引数にはとる設計はありません。
+
+#@samplecode 例
+require 'date'
+p (Date.today - 100...Date.today + 100).include?(DateTime.now)  #=> false
+p (Date.today - 100...Date.today + 100).cover?(DateTime.now)    #=> true
+p (Date.today - 100...Date.today + 100) ===  DateTime.now       #=> true
+# 2.5 以前は、=== は、include? と同じく比較できず false を返していました。
+#@end
+
+#@since 2.7.0
+2.7 以降の === は、文字列も [[m:Range#cover?]] と同様の処理をするようになりました。
+
+#@samplecode 例
+p ('a'..'z').include? 'at'  #=> false
+p ('a'..'z').cover? 'at'    #=> true
+p ('a'..'z') === 'at'       #=> true
+# 2.6 以前は、=== は、include? と同じく比較できず false を返していました。
+#@end
+#@end
+
+@see [[ref:d:spec/control#case]]
+@see [[m:Range#include?]], [[m:Range#cover?]]
+#@end
+
 --- cover?(obj) -> bool
 
-obj が範囲内に含まれている時に真を返します。
-
-#@since 2.6.0
-[[m:Range#===]] は主に case 式での比較に用いられます。
-#@end
+obj が範囲内に含まれている時に true を返します。
 
 [[m:Range#include?]] と異なり <=> メソッドによる演算により範囲内かどうかを判定します。
 [[m:Range#include?]] は原則として離散値を扱い、
@@ -224,20 +270,6 @@ Range#cover? は連続値を扱います。
 
 [[m:Range#exclude_end?]]がfalseなら「begin <= obj <= end」を、
 trueなら「begin <= obj < end」を意味します。
-
-#@since 2.6.0
-引数がRangeオブジェクトの場合、引数の範囲がselfの範囲に含まれる時にtrueを返します。
-
-「(a..b).cover?(c...d)」のように終端を含まないRangeオブジェクトが引数に渡されており、
-「a <= c && b < d」を満たし、cが数値ではない(つまり引数のRangeの終端を
-求めるためにsuccメソッドの呼び出しが必要な)場合、パフォーマンスの問題が起きる可能性があります。
-
-#@samplecode パフォーマンス上の問題が起きる例
-p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz')
-# => true
-#@end
-
-#@end
 
 @param obj 比較対象のオブジェクトを指定します。
 
@@ -258,23 +290,40 @@ p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz')
 #@end
 
 #@samplecode Date, DateTime の例
-(Date.new(2014,1,3)..Date.new(2014,1,5)).include?(Date.new(2014,1,5))           # => true
-(Time.new(2014,1,3)..Time.new(2014,1,5)).include?(Time.new(2014,1,4,10,10,10))  # => true
-(Date.new(2014,1,3)..Date.new(2014,1,5)).cover?(Date.new(2014,1,5))             # => true
-(Time.new(2014,1,3)..Time.new(2014,1,5)).cover?(Time.new(2014,1,4,10,10,10))    # => true
+require 'date'
+(Date.today - 365 .. Date.today + 365).include?(Date.today)    #=> true
+(Date.today - 365 .. Date.today + 365).include?(DateTime.now)  #=> false
+(Date.today - 365 .. Date.today + 365).cover?(Date.today)      #=> true
+(Date.today - 365 .. Date.today + 365).cover?(DateTime.now)    #=> true
 #@end
 
 #@since 2.6.0
-#@samplecode Range の例
+
+--- cover?(range) -> bool
+
+2.6 以降の cover? は、[[m:Range#include?]] や [[m:Range#===]] と異なり、
+引数に Range オブジェクトを指定して比較できます。
+
+引数が Range オブジェクトの場合、引数の範囲が self の範囲に含まれる時に true を返します。
+
+@param range 比較対象の Range クラスのインスタンスを指定します。
+
+#@samplecode 引数が Range の例
 (1..5).cover?(2..3)     #=> true
 (1..5).cover?(0..6)     #=> false
 (1..5).cover?(1...6)    #=> true
 #@end
 
-@see [[ref:d:spec/control#case]]
+「(a..b).cover?(c...d)」のように終端を含まない Range オブジェクトが引数に渡されており、
+「a <= c && b < d」を満たし、cが数値ではない(つまり引数の Range の終端を
+求めるために succ メソッドの呼び出しが必要な)場合、パフォーマンスの問題が起きる可能性があります。
+
+#@samplecode パフォーマンス上の問題が起きる例
+p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz') # => true
+#@end
 #@end
 
-@see [[m:Range#include?]]
+@see [[m:Range#include?]], [[m:Range#===]]
 
 --- begin -> object
 --- first -> object
@@ -445,6 +494,27 @@ p (1..2).eql?(Range.new(1.0, 2.0))  # => false
 #@samplecode 例
 p (1..2).hash    # => 5646
 p (1...2).hash   # => 16782863
+#@end
+
+#@since 2.6.0
+--- to_a -> Array
+--- entries -> Array
+
+self を配列に変換します。
+
+@raise RangeError 終端のない Range オブジェクトを変換しようとしたときに発生します。
+
+#@samplecode 例
+p (5..0).to_a      # => []
+p (0..3).to_a      # => [0, 1, 2, 3]
+p ('a'..'c').to_a  # => ["a", "b", "c"]
+p (:a..:d).to_a  # => [:a, :b, :c, :d]
+
+require 'date'
+p (Date.new(1965, 4, 14) .. Date.new(1965, 4, 14)).to_a # => [#<Date: 1965-04-14 ((2438865j,0s,0n),+0s,2299161j)>]
+
+(1..).to_a   # RangeError: cannot convert endless range to an array
+#@end
 #@end
 
 --- to_s -> String
