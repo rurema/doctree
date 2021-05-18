@@ -15,24 +15,27 @@ category Development
 
 まず測定対象のソースを用意します。
 
-  # foo.rb
-  s = 0
-  10.times do |x|
-    s += x
-  end
+#@samplecode foo.rb
+s = 0
+10.times do |x|
+  s += x
+end
 
-  if s == 45
-    p :ok
-  else
-    p :ng
-  end
+if s == 45
+  p :ok
+else
+  p :ng
+end
+#@end
 
 以下のようにして測定を行います。
 
-  require "coverage"
-  Coverage.start
-  require "foo"
-  p Coverage.result # => {"foo.rb"=>[1, 1, 10, nil, nil, 1, 1, nil, 0, nil]}
+#@samplecode
+require "coverage"
+Coverage.start
+require "foo"
+p Coverage.result # => {"foo.rb"=>[1, 1, 10, nil, nil, 1, 1, nil, 0, nil]}
+#@end
 
 Coverage.result["foo.rb"]から得られる配列は各行の実行回数になっています。
 
@@ -77,12 +80,14 @@ Coverage.result["foo.rb"]から得られる配列は各行の実行回数にな�
 
 カバレッジ測定中かどうかを返します。
 
-  require 'coverage'
-  p Coverage.running?    #=> false
-  Coverage.start
-  p Coverage.running?    #=> true
-  p Coverage.peek_result #=> {}
-  p Coverage.running?    #=> true
-  p Coverage.result      #=> {}
-  p Coverage.running?    #=> false
+#@samplecode
+require 'coverage'
+p Coverage.running?    #=> false
+Coverage.start
+p Coverage.running?    #=> true
+p Coverage.peek_result #=> {}
+p Coverage.running?    #=> true
+p Coverage.result      #=> {}
+p Coverage.running?    #=> false
+#@end
 #@end
