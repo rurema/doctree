@@ -33,7 +33,7 @@ end
 #@samplecode
 require "coverage"
 Coverage.start
-require "foo"
+load "foo.rb"
 p Coverage.result # => {"foo.rb"=>[1, 1, 10, nil, nil, 1, 1, nil, 0, nil]}
 #@end
 
