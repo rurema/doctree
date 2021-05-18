@@ -1223,7 +1223,9 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
 深い(deep)コピーが必要な場合には、
 [[c:Marshal]]モジュールを利用して
-  Marshal.load(Marshal.dump(obj))
+#@samplecode
+Marshal.load(Marshal.dump(obj))
+#@end
 このように複製を作成する方法があります。ただしMarshal出来ないオブジェクトが
 含まれている場合には使えません。
 
