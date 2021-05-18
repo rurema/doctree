@@ -1269,9 +1269,9 @@ p a1 #=> "bar"
 
 a2 = "foo".freeze
 #@since 2.5.0
-a2.replace("bar") # can't modify frozen String (RuntimeError)
-#@else
 a2.replace("bar") # can't modify frozen String (FrozenError)
+#@else
+a2.replace("bar") # can't modify frozen String (RuntimeError)
 #@end
 #@end
 
