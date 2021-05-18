@@ -641,20 +641,20 @@ Rubyでは、(Garbage Collectされていない)アクティブなオブジェ�
 同じ内容のインスタンスを複数生成しないという内部実装が理由です。
 
 #@samplecode
-p "ruby".object_id #=> 22759500
-p "ruby".object_id #=> 22759400
+p "ruby".object_id #=> 60
+p "ruby".object_id #=> 80
 
-p [].object_id #=> 22759360
-p [].object_id #=> 22759340
+p [].object_id #=> 100
+p [].object_id #=> 120
 
-p :ruby.object_id #=> 103538
-p :ruby.object_id #=> 103538
+p :ruby.object_id #=> 710428
+p :ruby.object_id #=> 710428
 
 p 11.object_id #=> 23
 p 11.object_id #=> 23
 
-p true.object_id #=> 2
-p true.object_id #=> 2
+p true.object_id #=> 20
+p true.object_id #=> 20
 #@end
 
 @see [[m:Object#equal?]],[[c:Symbol]]
@@ -680,15 +680,15 @@ hash を再定義する場合は、一様に分布する任意の整数を返す
 @return ハッシュ値を返します。Ruby 内部の固定長整数 fixnum に収まらない場合は切り捨てられます。
 
 #@samplecode
-p self.hash #=> 21658870
-p 0.hash #=> 1
-p 0.0.hash #=> 0
-p nil.hash #=> 4
+p self.hash #=> 2013505522753096494
+p 0.hash    #=> 2647535320520409998
+p 0.0.hash  #=> -2975129765814025835
+p nil.hash  #=> 2401531420355998067
 
-p "ruby".hash #=> -241670986
-p "ruby".hash #=> -241670986
-p :ruby.hash #=> 103538
-p :ruby.hash #=> 103538
+p "ruby".hash #=> 4460896024486900438
+p "ruby".hash #=> 4460896024486900438
+p :ruby.hash  #=> 3979895509189707770
+p :ruby.hash  #=> 3979895509189707770
 #@end
 
 @see [[m:Object#eql?]],[[m:BasicObject#__id__]]
