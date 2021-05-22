@@ -9,12 +9,12 @@ category Network
 
 例1: GET して 表示するだけ
   require 'net/http'
-  Net::HTTP.get_print 'www.example.com', '/index.html'
+  print Net::HTTP.get('www.example.com', '/index.html')
 
 例2: [[c:URI]] を使う
   require 'net/http'
   require 'uri'
-  Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+  print Net::HTTP.get(URI.parse('http://www.example.com/index.html'))
 
 例3: より汎用的な例
 
