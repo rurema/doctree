@@ -148,27 +148,25 @@ require "bigdecimal"
 require "bigdecimal/math"
 
 a = BigMath.E(20)
-c = a * "0.123456789123456789123456789"   # 文字を BigDecimal に変換してから計算
+c = a * "0.123456789123456789123456789"   # 文字列を BigDecimal に変換してから計算
 #@end
 
-無限大や非数を表す文字として、
+無限大や非数を表す文字列として、
 "Infinity"、"+Infinity"、"-Infinity"、"NaN" も使用できます
 (大文字・小文字を区別します)。
 ただし、mode メソッドで false を指定した場合は例外が発生します。
 また、BigDecimalクラスは coerce(Ruby本参照)をサポートしています。
 従って、BigDecimal オブジェクトが右にある場合も大抵は大丈夫です。
-ただ、現在の Ruby インタプリタの仕様上、文字列が左にあると計算できません。
+ただ、文字列が左にあると計算はできません。
 
 #@samplecode
 require "bigdecimal"
 require "bigdecimal/math"
-a = BigMath.E(20)
-c = "0.123456789123456789123456789" * a   # エラー
+a = BigMath.E(10)
+p c = "0.123456789" * a  # => "0.1234567890.123456789"
 #@end
 
-必要性があるとは思いませんが、
-どうしてもと言う人は String オブジェクトを継承した新たなクラスを作成してから、
-そのクラスで coerce をサポートしてください。
+これは、[[m:String#*]] の内部で、BigDecimal が暗黙的に Integer に変換された結果です。
 
 ===[a:internal_structure] 内部構造
 
