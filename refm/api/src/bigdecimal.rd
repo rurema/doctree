@@ -385,7 +385,7 @@ end
 以下のメソッド以外にも、(C ではない) Ruby ソースの形で提供されているものもあります。例えば、
 
 #@samplecode
-require "bigdecimal/math.rb"
+require "bigdecimal/math"
 #@end
 
 とすることで、sin や cos といった関数が使用できるようになります。
@@ -393,7 +393,7 @@ require "bigdecimal/math.rb"
 メソッドが [[lib:bigdecimal/util]] でサポートされています。利用するには
 
 #@samplecode
-require "bigdecimal/util.rb"
+require "bigdecimal/util"
 #@end
 
 のようにします。詳細は [[lib:bigdecimal/util]] を参照して下さい。
