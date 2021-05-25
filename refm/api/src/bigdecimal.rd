@@ -345,9 +345,10 @@ p BigDecimal("6.66666666666666").round(12).to_s(10)
 
 ==== 自分で精度をコントロールしたい場合
 
-自分で精度(有効桁数)をコントロールしたい場合は add、sub、mult、div 等のメソッドが使用できます。以下の円周率を計算するプログラム例のように、求める桁数は自分で指定することができます。
+自分で精度(有効桁数)をコントロールしたい場合は add、sub、mult、div 等のメソッドが使用できます。
+以下の円周率を計算するプログラム例のように、求める桁数は自分で指定することができます。
 
-#@samplecode
+#@samplecode pi.rb
 #!/usr/local/bin/ruby
 
 require "bigdecimal"
@@ -367,10 +368,10 @@ def big_pi(sig) # sig: Number of significant figures
   w = BigDecimal("1")
   t = BigDecimal("-80")
   while (u.nonzero? && u.exponent >= exp)
-    t   = t*m25
+    t   = t * m25
     u   = t.div(k,sig)
     pi  = pi + u
-    k   = k+two
+    k   = k + two
   end
 
   u = BigDecimal("1")
@@ -381,17 +382,17 @@ def big_pi(sig) # sig: Number of significant figures
     t   = t.div(m57121,sig)
     u   = t.div(k,sig)
     pi  = pi + u
-    k   = k+two
+    k   = k + two
   end
   pi
 end
 
 if $0 == __FILE__
   if ARGV.size == 1
-    print "PI("+ARGV[0]+"):\n"
-    p big_pi(ARGV[0].to_i)
+    puts "PI("+ARGV[0]+"):"
+    puts big_pi(ARGV[0].to_i)
   else
-    print "TRY: ruby pi.rb 1000 \n"
+    puts "TRY: ruby pi.rb 1000"
   end
 end
 #@end
