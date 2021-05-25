@@ -1,5 +1,9 @@
 
+#@since 2.6.0
 String、Integer、Float、Rational, NilClass オブジェクトを
+#@else
+String、Integer、Float、Rational オブジェクトを
+#@end
 BigDecimal オブジェクトに変換する機能を提供します。
 
  * [[m:String#to_d]]
