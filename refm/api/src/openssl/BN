@@ -606,7 +606,7 @@ OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 require 'openssl'
 p 15.to_bn.negative?    # => false
 p  0.to_bn.negative?    # => false
-p (-5).to_bn.negative?  # => treu
+p (-5).to_bn.negative?  # => true
 #@end
 #@end
 
