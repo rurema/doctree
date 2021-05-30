@@ -158,7 +158,111 @@ Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 #@end
 #@end
 
-#@since 2.0
+#@since 2.6.0
+#@since 3.0.0
+--- safe_load(yaml, legacy_permitted_classes = NOT_GIVEN, legacy_permitted_symbols = NOT_GIVEN, legacy_aliases = NOT_GIVEN, legacy_filename = NOT_GIVEN, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
+#@else
+--- safe_load(yaml, legacy_permitted_classes = NOT_GIVEN, legacy_permitted_symbols = NOT_GIVEN, legacy_aliases = NOT_GIVEN, legacy_filename = NOT_GIVEN, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false) -> object
+#@end
+
+安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+
+デフォルトでは以下のクラスのオブジェクトしか変換しません。
+
+ * TrueClass
+ * FalseClass
+ * NilClass
+ * Numeric
+ * String
+ * Array
+ * Hash
+
+再帰的なデータ構造はデフォルトでは許可されていません。
+
+任意のクラスを許可するにはキーワード引数 permitted_classes を指定すると、
+そのクラスが追加されます。例えば Date クラスを許可するには
+以下のように書いてください:
+
+#@samplecode permitted_classes: [Date] の例
+Psych.safe_load(yaml, permitted_classes: [Date])
+#@end
+
+すると上のクラス一覧に加えて Date クラスが読み込まれます。
+
+エイリアスはキーワード引数 aliases を指定することで明示的に許可できます。
+
+#@samplecode aliases: true の例
+x = []
+x << x
+yaml = Psych.dump x
+Psych.safe_load yaml                # => 例外発生
+Psych.safe_load yaml, aliases: true # => エイリアスが読み込まれる
+#@end
+
+yaml に許可されていないクラスが含まれていた場合は、
+Psych::DisallowedClass 例外が発生します。
+
+yaml がエイリアスを含んでいてキーワード引数 aliases が false の時、
+Psych::BadAlias 例外が発生します。
+
+filename はパース中に発生した例外のメッセージに用います。
+
+キーワード引数 symbolize_names に true を指定した場合はハッシュのキー
+を [[c:Symbol]] に変換して返します。
+
+#@samplecode symbolize_names: true の例
+Psych.safe_load("---\n foo: bar")                         # => {"foo"=>"bar"}
+Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
+#@end
+
+#@since 3.0.0
+キーワード引数 freeze に true を指定した場合は再帰的に
+[[m:Object#freeze]] したオブジェクトを返します。
+
+#@samplecode freeze: true の例
+require "psych"
+
+data = <<~EOS
+aaa:
+  bbb: [hoge]
+EOS
+
+yaml = Psych.load(data, freeze: true)
+p yaml
+# => {"aaa"=>{"bbb"=>["hoge"]}}
+p yaml.frozen?                        # = true
+p yaml["aaa"].frozen?                 # = true
+p yaml["aaa"]["bbb"].frozen?          # = true
+p yaml["aaa"]["bbb"].first.frozen?    # = true
+#@end
+#@end
+
+また legacy_permitted_classes などのオプション引数は非推奨な引数となっています。
+[[m:$-w]] が true の時にオプション引数を渡すと警告が出力されます。
+
+#@samplecode オプション引数を使用した例
+# warning: Passing permitted_classes with the 2nd argument of Psych.safe_load is deprecated. Use keyword argument like Psych.safe_load(yaml, permitted_classes: ...) instead.
+Psych.safe_load("", [Date])
+#@end
+
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト。
+@param permitted_classes 追加で読み込みを許可するクラスの配列。
+@param permitted_symbols 引数 permitted_classesに [[c:Symbol]] を含む場
+                         合に読み込みを許可する [[c:Symbol]] の配列。
+                         省略した場合は全ての [[c:Symbol]] を許可します。
+@param aliases エイリアスの読み込みを許可するかどうか。
+@param filename [[c:Psych::SyntaxError]] 発生時にファイル名として表示する文字列。
+@param fallback 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは nil です。
+@param symbolize_names ハッシュ(YAMLの仕様では正確にはマッピング)のキー
+                       を [[c:Symbol]] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは
+                       文字列に変換されます。
+#@since 3.0.0
+@param freeze true を指定すると再帰的に freeze されたオブジェクトを返します。
+              デフォルトは false です。
+#@end
+
+#@else
 #@since 2.5.0
 --- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil, symbolize_names: false) -> object
 #@else
