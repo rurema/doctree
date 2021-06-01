@@ -91,7 +91,7 @@ end
 require 'benchmark'
 
 n = 50000
-Benchmark.bm(7, ">total:", ">argv:") do |x|
+Benchmark.bm(7, ">total:", ">avg:") do |x|
   tf = x.report("for:")   { for i in 1..n; a = "1"; end }
   tt = x.report("times:") { n.times do   ; a = "1"; end }
   tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
@@ -104,7 +104,7 @@ end
 # times:    0.003814   0.000000   0.003814 (  0.003814)
 # upto:     0.003855   0.000003   0.003858 (  0.003859)
 # >total:   0.009136   0.004730   0.013866 (  0.013867)
-# >argv:    0.003045   0.001577   0.004622 (  0.004622)
+# >avg:     0.003045   0.001577   0.004622 (  0.004622)
 #@end
 
 @see [[m:Benchmark.#benchmark]]
