@@ -2,7 +2,9 @@
 
 category Development
 
+#@until 2.7.0
 require e2mmap
+#@end
 require irb/init
 require irb/context
 require irb/extend-command
