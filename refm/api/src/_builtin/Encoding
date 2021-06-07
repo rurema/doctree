@@ -106,30 +106,6 @@ p Encoding.name_list
 default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が nil を返す場合には US-ASCII が、
 ロケールにRubyが扱えないエンコーディングが指定されている場合には ASCII-8BIT が、default_external に設定されます。
 
-以下のオブジェクトには、デフォルトで default_external が使用されます。
-
-[[c:CSV]]
-
-#@until 3.0.0
-[[c:SDBM]]
-#@end
-
-[[c:File]] * ディスクに書き込まれたデータ
-
-[[c:StringIO]]
-
-[[m:Zlib::GzipReader]]
-
-[[m:Zlib::GzipWriter]]
-
-[[m:String#inspect]]
-
-[[m:Regexp#inspect]]
-
-これらの文字列はこのエンコーディングを持ちますが、エンコーディングは有効ではないかもしれません。 [[m:String#valid_encoding?]] を確認してください。
-
-ディスクに書き込まれた [[c:File]] オブジェクトは、書き込まれた時点で default_external にトランスコードされます。
-
 @see [[d:spec/rubycmd]] [[man:locale(1)]], [[m:Encoding.locale_charmap]] [[m:Encoding.default_internal]]
 
 --- default_external=(encoding)
@@ -143,32 +119,6 @@ default_external を変更する前に作成した文字列と、default_externa
 
 --- default_internal -> Encoding | nil
 既定の内部エンコーディングを返します。
-
-default_internal が nil でない場合、以下のオブジェクトは default_internal でトランスコードされます。
-
-[[c:CSV]]
-
-[[m:Etc.sysconfdir]], [[m:Etc.systmpdir]]
-
-[[c:File]] * ディスクから読み込んだデータ
-
-[[c:Dir]] から取得した [[c:File]]
-
-[[m:Integer#chr]]
-
-[[m:String#inspect]], [[m:Regexp#inspect]]
-
-[[c:Readline]] から取得した文字列
-
-#@until 3.0.0
-[[c:SDBM]] から取得した文字列
-#@end
-
-[[m:Time#zone]]
-
-[[c:ENV]]
-
-[[c:ARGV]]
 
 [[m:String#encode]] と [[m:String#encode!]] は、引数に Encoding が与えられていない場合、 default_internal を使用します。
 
