@@ -97,7 +97,9 @@ p Encoding.name_list
 --- default_external -> Encoding
 既定の外部エンコーディングを返します。
 
-入出力において、外部エンコーディングが指定されていない場合の既定値として利用されます。Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
+標準入出力、コマンドライン引数、open 等で開くファイルなどで、外部エンコーディングが指定されていない場合の既定値として利用されます。
+
+Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
 
 #@since 3.0.0
 -E オプションを指定していない場合は、WindowsではUTF-8、その他のOSではロケールに従って default_external を決定します。
@@ -118,7 +120,9 @@ default_external を変更する前に作成した文字列と、default_externa
 @see [[d:spec/rubycmd]] [[m:Encoding.default_external]]
 
 --- default_internal -> Encoding | nil
-既定の内部エンコーディングを返します。
+既定の内部エンコーディングを返します。デフォルトでは nil です。
+
+標準入出力、コマンドライン引数、open 等で開くファイルなどで、内部エンコーディングが指定されていない場合の既定値として利用されます。
 
 [[m:String#encode]] と [[m:String#encode!]] は、引数に Encoding が与えられていない場合、 default_internal を使用します。
 
