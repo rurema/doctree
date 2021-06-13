@@ -77,8 +77,8 @@ self の符号を反転させたものを返します。
 
 #@samplecode 例
 # 剰余
-3 % 1.2   # => 0.6000000000000001
-3.0 % 0   # ZeroDivisionError
+3.0 % 1.2   # => 0.6000000000000001
+3.0 % 0.0   # ZeroDivisionError
 #@end
 
 --- **(other) -> Float
