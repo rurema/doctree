@@ -47,35 +47,38 @@ XML宣言、DTD、ルート要素、テキストノードの配列です。例�
 : [:cdata, テキスト文字列]
   cdata セクション
 : [:xmldecl, バージョン文字列, エンコーディング文字列 | nil, standalone ("yes" | "no" | nil)]
-  XML宣言 
+  XML宣言
 : [:externalentity,エンティティ文字列]
   doctype内のパラメータ実体参照。
 
 === 例
 以下の例は簡単な XML をパースし、その結果を返しています。[...]の部分は親
 ノードを指しているので、pp の表示では省略されています。
-  require 'rexml/parsers/ultralightparser'
-  require 'pp'
-  parser = REXML::Parsers::UltraLightParser.new(<<XML)
-  <?xml version="1.0" encoding="UTF-8" ?>
-  <root>
-    <a n="1">xyz</a>
-    <b m="2" />
-  </root>
-  XML
-  pp parser.parse
-  # >> [[:xmldecl, "1.0", "UTF-8", nil],
-  # >>  [:text, "\n"],
-  # >>  [:start_element,
-  # >>   [...],
-  # >>   "root",
-  # >>   {},
-  # >>   [:text, "\n  "],
-  # >>   [:start_element, [...], "a", {"n"=>"1"}, [:text, "xyz"]],
-  # >>   [:text, "\n  "],
-  # >>   [:start_element, [...], "b", {"m"=>"2"}],
-  # >>   [:text, "\n"]],
-  # >>  [:text, "\n"]]
+
+#@samplecode
+require 'rexml/parsers/ultralightparser'
+require 'pp'
+parser = REXML::Parsers::UltraLightParser.new(<<XML)
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <a n="1">xyz</a>
+  <b m="2" />
+</root>
+XML
+pp parser.parse
+# >> [[:xmldecl, "1.0", "UTF-8", nil],
+# >>  [:text, "\n"],
+# >>  [:start_element,
+# >>   [...],
+# >>   "root",
+# >>   {},
+# >>   [:text, "\n  "],
+# >>   [:start_element, [...], "a", {"n"=>"1"}, [:text, "xyz"]],
+# >>   [:text, "\n  "],
+# >>   [:start_element, [...], "b", {"m"=>"2"}],
+# >>   [:text, "\n"]],
+# >>  [:text, "\n"]]
+#@end
 
 #@until 2.1.0
 === 注意
@@ -108,10 +111,9 @@ rewind してもう一度パースできる状態にします。
 --- parse -> Array
 XML 文書のパース結果を配列による木で返します。
 
-返される木構造配列については [[ref:lib:rexml/parsers/ultralightparser#nodes]] 
+返される木構造配列については [[ref:lib:rexml/parsers/ultralightparser#nodes]]
 を参照してください。
 
 @raise REXML::ParseException XML文書のパースに失敗した場合に発生します
 @raise REXML::UndefinedNamespaceException XML文書のパース中に、定義されていない名前空間
        が現れた場合に発生します
-

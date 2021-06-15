@@ -1,11 +1,11 @@
 
-[[c:REXML::Parsers::SAX2Parser]] 
+[[c:REXML::Parsers::SAX2Parser]]
 で使われるコールバックオブジェクトのためのモジュール、
 [[c:REXML::SAX2Listener]] を定義しています。
 
 = module REXML::SAX2Listener
 
-[[c:REXML::Parsers::SAX2Parser]] 
+[[c:REXML::Parsers::SAX2Parser]]
 で使われるコールバックオブジェクトのためのモジュールです。
 
 このモジュールを include して、各メソッドを適切にオーバーライドした
@@ -95,7 +95,7 @@ XML 処理命令(PI)に対し呼び出されるコールバックメソッドで
 DTDの属性リスト宣言に対し呼び出されるコールバックメソッドです。
 
 @param element 要素名が文字列で渡されます
-@param pairs 属性名とそのデフォルト値の対応が 
+@param pairs 属性名とそのデフォルト値の対応が
      { 属性名文字列 => デフォルト値文字列(無ければnil) } という
      ハッシュテーブルで渡されます
 @param contents 文書内の属性リスト宣言の文字列がそのまま渡されます
@@ -144,5 +144,3 @@ XML文書内のコメントに出会ったときに呼び出されるコール�
 読み出したデータによるものです。
 
 @param position パーサの入力位置のバイト数
-
-

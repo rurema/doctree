@@ -169,4 +169,3 @@ replacement の parent は selfに変更されます。
 true を返します。
 
 @see [[m:REXML::Node#parent]]
-

@@ -3,58 +3,60 @@ DOM スタイルの XML パーサ。
 [[m:REXML::Document.new]] で XML 文書から DOM ツリーを
 構築し、ツリーのノードの各メソッドで文書の内容にアクセスします。
 
-=== 例
 以下のプログラムではブックマークの XML からデータを取り出します。
-  require 'rexml/document'
-  require 'pp'
-  
-  Bookmark = Struct.new(:href, :title, :desc)
-  
-  doc = REXML::Document.new(<<XML)
-  <?xml version="1.0" encoding="UTF-8" ?>
-  <xbel version="1.0">
-    <bookmark href="http://www.ruby-lang.org/ja/">
-      <title>オブジェクト指向スクリプト言語 Ruby</title>
-      <desc>Rubyの公式サイト</desc>
-    </bookmark>
-    <bookmark href="http://rurema.clear-code.com/">
-      <title>最速Rubyリファレンスマニュアル検索！ | るりまサーチ</title>
-      <desc>Rubyリファレンスマニュアルを全文検索できる。
-  とても便利。
-      </desc>
-    </bookmark>
-    <bookmark href="https://github.com/rurema/bitclust">
-      <title>rurema/bitclust · GitHub</title>
-    </bookmark>
-    <bookmark href="https://rubygems.org/gems/bitclust-core" />
-  </xbel>
-  XML
-  
-  bookmarks = REXML::XPath.match(doc, "/xbel/bookmark").map do |bookmark|
-    href = bookmark.attribute("href").value
-    title_element =  bookmark.elements["title"]
-    title = title_element ? title_element.text : nil
-    desc_element = bookmark.elements["desc"]
-    desc = desc_element ? desc_element.text : nil
-    Bookmark.new(href, title, desc)
-  end
-  pp bookmarks    
-  # >> [#<struct Bookmark
-  # >>   href="http://www.ruby-lang.org/ja/",
-  # >>   title="オブジェクト指向スクリプト言語 Ruby",
-  # >>   desc="Rubyの公式サイト">,
-  # >>  #<struct Bookmark
-  # >>   href="http://rurema.clear-code.com/",
-  # >>   title="最速Rubyリファレンスマニュアル検索！ | るりまサーチ",
-  # >>   desc="Rubyリファレンスマニュアルを全文検索できる。\nとても便利。\n    ">,
-  # >>  #<struct Bookmark
-  # >>   href="https://github.com/rurema/bitclust",
-  # >>   title="rurema/bitclust · GitHub",
-  # >>   desc=nil>,
-  # >>  #<struct Bookmark
-  # >>   href="https://rubygems.org/gems/bitclust-core",
-  # >>   title=nil,
-  # >>   desc=nil>]
+
+#@samplecode
+require 'rexml/document'
+require 'pp'
+
+Bookmark = Struct.new(:href, :title, :desc)
+
+doc = REXML::Document.new(<<XML)
+<?xml version="1.0" encoding="UTF-8" ?>
+<xbel version="1.0">
+  <bookmark href="http://www.ruby-lang.org/ja/">
+    <title>オブジェクト指向スクリプト言語 Ruby</title>
+    <desc>Rubyの公式サイト</desc>
+  </bookmark>
+  <bookmark href="http://rurema.clear-code.com/">
+    <title>最速Rubyリファレンスマニュアル検索！ | るりまサーチ</title>
+    <desc>Rubyリファレンスマニュアルを全文検索できる。
+とても便利。
+    </desc>
+  </bookmark>
+  <bookmark href="https://github.com/rurema/bitclust">
+    <title>rurema/bitclust · GitHub</title>
+  </bookmark>
+  <bookmark href="https://rubygems.org/gems/bitclust-core" />
+</xbel>
+XML
+
+bookmarks = REXML::XPath.match(doc, "/xbel/bookmark").map do |bookmark|
+  href = bookmark.attribute("href").value
+  title_element =  bookmark.elements["title"]
+  title = title_element ? title_element.text : nil
+  desc_element = bookmark.elements["desc"]
+  desc = desc_element ? desc_element.text : nil
+  Bookmark.new(href, title, desc)
+end
+pp bookmarks
+# >> [#<struct Bookmark
+# >>   href="http://www.ruby-lang.org/ja/",
+# >>   title="オブジェクト指向スクリプト言語 Ruby",
+# >>   desc="Rubyの公式サイト">,
+# >>  #<struct Bookmark
+# >>   href="http://rurema.clear-code.com/",
+# >>   title="最速Rubyリファレンスマニュアル検索！ | るりまサーチ",
+# >>   desc="Rubyリファレンスマニュアルを全文検索できる。\nとても便利。\n    ">,
+# >>  #<struct Bookmark
+# >>   href="https://github.com/rurema/bitclust",
+# >>   title="rurema/bitclust · GitHub",
+# >>   desc=nil>,
+# >>  #<struct Bookmark
+# >>   href="https://rubygems.org/gems/bitclust-core",
+# >>   title=nil,
+# >>   desc=nil>]
+#@end
 
 = class REXML::Document < REXML::Element
 
@@ -93,7 +95,7 @@ context で「コンテキスト」を指定します。テキストノードの
 XML文書を source から読み込み、パースした結果を
 listener にコールバックで伝えます。
 
-このメソッドは 
+このメソッドは
   Parsers::StreamParser.new( source, listener ).parse
 と同じ挙動をします。
 
@@ -203,10 +205,10 @@ XMLの仕様上、このオブジェクトはexpanded name名前を持ちえま�
 のいずれかです。
 
 #@# REXML::Element#add_element と同じ、ただしルート要素が2つになると例外を発生させる
-#@# 
+#@#
 #@# --- add_element(arg = nil, arg2 = nil)
 #@# #@todo
-#@# 
+#@#
 
 --- root -> REXML::Element | nil
 文書のルート要素を返します。
@@ -229,13 +231,14 @@ XML 宣言に含まれている XML 文書のバージョンを返します。
 文書が XML 宣言を持たない場合はデフォルトの値
 ([[m:REXML::XMLDecl.default]]で宣言されているもの)を返します。
 
-=== 例
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-  <e />
-  EOS
-  doc.version # => "1.0"
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<e />
+EOS
+doc.version # => "1.0"
+#@end
 
 --- encoding -> String
 XML 宣言に含まれている XML 文書のエンコーディングを返します。
@@ -243,24 +246,26 @@ XML 宣言に含まれている XML 文書のエンコーディングを返し�
 文書が XML 宣言を持たない場合はデフォルトの値
 ([[m:REXML::XMLDecl.default]]で宣言されているもの)を返します。
 
-=== 例
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-  <e />
-  EOS
-  doc.encoding # => "UTF-8"
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<e />
+EOS
+doc.encoding # => "UTF-8"
+#@end
 
 --- stand_alone? -> String
 XML 宣言の standalone の値を文字列で返します。
 
-=== 例
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-  <e />
-  EOS
-  doc.stand_alone? # => "yes"
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<e />
+EOS
+doc.stand_alone? # => "yes"
+#@end
 
 #@until 2.0.0
 --- write(output = $stdout, indent = -1, transitive = false, ie_hack = false) -> ()
@@ -331,5 +336,3 @@ REXML は明示しない限り(つまりXML宣言を [[m:REXML::Document#add]] �
 #@include(xmltokens.rd)
 #@include(parsers/xpathparser.rd)
 #@include(source.rd)
-
-
