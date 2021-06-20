@@ -25,9 +25,11 @@ example.txt:
  baz
 
 ただし、このプログラムは次のように書く方がよりRuby的です。
- ARGF.each do |line|
-   print line
- end
+#@samplecode 例
+ARGF.each do |line|
+  print line
+end
+#@end
 
 
 --- $& -> String | nil
@@ -40,12 +42,13 @@ example.txt:
 この変数はローカルスコープかつスレッドローカル、読み取り専用です。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $& 
- end
- #=> "<a href=\"http://example.com\">example.com</a>"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $& 
+end
+#=> "<a href=\"http://example.com\">example.com</a>"
+#@end
 
 
 --- $~ -> MatchData | nil
@@ -61,12 +64,13 @@ MatchData オブジェクトでも nil でもない値を代入しようとす�
 この変数はローカルスコープかつスレッドローカルです。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $~[1]
- end
- #=> "http://example.com"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $~[1]
+end
+#=> "http://example.com"
+#@end
 
 
 --- $` -> String | nil
@@ -80,12 +84,13 @@ Ruby起動時の初期値は nil です。
 この変数はローカルスコープかつスレッドローカル、読み取り専用です。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $`
- end
- #=> "<p>"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $`
+end
+#=> "<p>"
+#@end
 
 
 --- $' -> String | nil
@@ -99,12 +104,13 @@ Ruby起動時の初期値は nil です。
 この変数はローカルスコープかつスレッドローカル、読み取り専用です。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $'
- end
- #=> "</p>"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $'
+end
+#=> "</p>"
+#@end
 
 
 --- $+ -> String | nil
@@ -140,14 +146,15 @@ Ruby起動時の初期値は nil です。
 
 これらの変数はローカルスコープかつスレッドローカル、読み取り専用です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   print $1
-   print $2
- end
- #=> "http://example.com"
- #=> "example.com"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  print $1
+  print $2
+end
+#=> "http://example.com"
+#=> "example.com"
+#@end
 
 
 --- $? -> Process::Status | nil
@@ -242,9 +249,11 @@ Ruby起動時の初期値は 0 です。
 
 この変数はグローバルスコープです。
 
-  $= = true # => warning: variable $= is no longer effective; ignored
-  $=        # => warning: variable $= is no longer effective
-            #    false
+#@samplecode 例
+$= = true # => warning: variable $= is no longer effective; ignored
+$=        # => warning: variable $= is no longer effective
+          #    false
+#@end
 
 --- $/  -> String | nil
 --- $-0 -> String | nil
@@ -471,10 +480,12 @@ require 'foo' を実行すると、
 自プロセスの標準入力をリダイレクトしたいときは
 $stdin に代入すれば十分です。
 
-    # 標準入力の入力元 /tmp/foo に変更
-    $stdin = File.open("/tmp/foo", "w")
-    gets               # 入力する
-    $stdin = STDIN     # 元に戻す
+#@samplecode 例
+# 標準入力の入力元 /tmp/foo に変更
+$stdin = File.open("/tmp/foo", "w")
+gets               # 入力する
+$stdin = STDIN     # 元に戻す
+#@end
 
 ただし、[[m:Kernel.#gets]] など、特定の組み込みメソッドは
 $stdin オブジェクトにメソッドを転送して実装されています。
@@ -486,26 +497,30 @@ $stdin オブジェクトに代入したオブジェクトが以下のメソッ�
     pos=, rewind, fileno, to_io, eof, each_line, each_byte,
     binmode, closed?
 
-例:
-
-    $stdin = Object.new
-    def $stdin.gets
-      "foo"
-    end
-    p gets()  # => "foo"
+#@samplecode 例
+$stdin = Object.new
+def $stdin.gets
+  "foo"
+end
+p gets()  # => "foo"
+#@end
 
 自プロセスだけでなく、子プロセスの標準入力もリダイレクトしたいときは
 以下のように [[m:IO#reopen]] を使います。
 
-    $stdin.reopen("/tmp/foo")
+#@samplecode 例
+$stdin.reopen("/tmp/foo")
+#@end
 
 また、リダイレクトしたあと
 出力先をまた元に戻したい場合は以下のようにします。
 
-    stdin_old = $stdin.dup       # 元の $stdin を保存する
-    $stdout.reopen("/tmp/foo")   # $stdin を /tmp/foo にリダイレクトする
-    gets                         # /tmp/foo から入力
-    $stdin.reopen stdin_old      # 元に戻す
+#@samplecode 例
+stdin_old = $stdin.dup       # 元の $stdin を保存する
+$stdout.reopen("/tmp/foo")   # $stdin を /tmp/foo にリダイレクトする
+gets                         # /tmp/foo から入力
+$stdin.reopen stdin_old      # 元に戻す
+#@end
 
 $stdin はグローバルスコープです。
 
@@ -529,24 +544,30 @@ write という名前のメソッドが定義されていなければいけま�
 自プロセスの標準出力をリダイレクトしたいときには、
 以下のように $stdout に代入すれば十分です。
 
-    # 標準出力の出力先を /tmp/foo に変更
-    $stdout = File.open("/tmp/foo", "w")
-    puts "foo"         # 出力する
-    $stdout = STDOUT   # 元に戻す
+#@samplecode 例
+# 標準出力の出力先を /tmp/foo に変更
+$stdout = File.open("/tmp/foo", "w")
+puts "foo"         # 出力する
+$stdout = STDOUT   # 元に戻す
+#@end
 
 自プロセスだけでなく、子プロセスの標準出力もリダイレクトしたいときは
 以下のように [[m:IO#reopen]] を使います。
 
-    STDOUT.reopen("/tmp/foo", "w")
+#@samplecode 例
+STDOUT.reopen("/tmp/foo", "w")
+#@end
 
 また、リダイレクトしたあと
 出力先をまた元に戻したい場合は以下のようにします。
 
-    stdout_old = $stdout.dup        # 元の $stdout を保存する
-    $stdout.reopen("/tmp/foo")      # $stdout を /tmp/foo にリダイレクトする
-    puts "foo"                      # /tmp/foo に出力
-    $stdout.flush                   # 念のためフラッシュする
-    $stdout.reopen stdout_old       # 元に戻す
+#@samplecode 例
+stdout_old = $stdout.dup        # 元の $stdout を保存する
+$stdout.reopen("/tmp/foo")      # $stdout を /tmp/foo にリダイレクトする
+puts "foo"                      # /tmp/foo に出力
+$stdout.flush                   # 念のためフラッシュする
+$stdout.reopen stdout_old       # 元に戻す
+#@end
 
 $stdout はグローバルスコープです。
 
@@ -569,24 +590,30 @@ write という名前のメソッドが定義されていなければいけま�
 自プロセスの標準エラー出力をリダイレクトしたいときには、
 $stderr に代入すれば十分です。
 
-    # 標準エラー出力の出力先を /tmp/foo に変更
-    $stderr = File.open("/tmp/foo", "w")
-    puts "foo"         # 出力する
-    $stderr = STDERR   # 元に戻す
+#@samplecode 例
+# 標準エラー出力の出力先を /tmp/foo に変更
+$stderr = File.open("/tmp/foo", "w")
+puts "foo"         # 出力する
+$stderr = STDERR   # 元に戻す
+#@end
 
 自プロセスだけでなく、子プロセスの標準エラー出力も
 リダイレクトしたいときは以下のように [[m:IO#reopen]] を使います。
 
-    $stderr.reopen("/tmp/foo", "w")
+#@samplecode 例
+$stderr.reopen("/tmp/foo", "w")
+#@end
 
 また、リダイレクトしたあと
 出力先をまた元に戻したい場合は以下のようにします。
 
-    stderr_old = $stderr.dup        # 元の $stderr を保存する
-    $stderr.reopen("/tmp/foo")      # $stderr を /tmp/foo にリダイレクトする
-    puts "foo"                      # /tmp/foo に出力
-    $stderr.flush                   # 念のためフラッシュする
-    $stderr.reopen stderr_old       # 元に戻す
+#@samplecode 例
+stderr_old = $stderr.dup        # 元の $stderr を保存する
+$stderr.reopen("/tmp/foo")      # $stderr を /tmp/foo にリダイレクトする
+puts "foo"                      # /tmp/foo に出力
+$stderr.flush                   # 念のためフラッシュする
+$stderr.reopen stderr_old       # 元に戻す
+#@end
 
 $stderr はグローバルスコープです。
 
