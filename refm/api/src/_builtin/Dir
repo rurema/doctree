@@ -73,7 +73,7 @@ Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
     味で使えます。
 : { }
     コンマで区切られた文字列の組合せに展開します。例えば、
-    foo{a,b,c} は fooa, foob, fooc 
+    foo{a,b,c} は fooa, foob, fooc
     に展開されそれぞれに対してマッチ判定を行います。
 
     括弧は入れ子にすることができます。例えば、
@@ -97,7 +97,7 @@ p Dir.glob("wrong_name") #=> []                      マッチしないと空の
 Dir.glob("b*") {|f| p f }
 
 #=> "bar"
-    "baz"
+#   "baz"
 
 # 複数のパターンを指定する例
 p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
@@ -141,14 +141,14 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-   Dir.chdir("/var/spool/mail")
-   p Dir.pwd                    #=> "/var/spool/mail"
-   Dir.chdir("/tmp") do
-     p Dir.pwd                  #=> "/tmp"
-   end 
-   p Dir.pwd                    #=> "/var/spool/mail"
+#@samplecode 例
+Dir.chdir("/var/spool/mail")
+p Dir.pwd                    #=> "/var/spool/mail"
+Dir.chdir("/tmp") do
+  p Dir.pwd                  #=> "/tmp"
+end 
+p Dir.pwd                    #=> "/var/spool/mail"
+#@end
 
 --- chroot(path)    -> 0
 
@@ -162,11 +162,11 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
- p Dir.glob("*")   #=> ["file1", "file2]
- Dir.chroot("./")
- p Dir.glob("/*")  #=> ["/file1", "/file2]
+#@samplecode 例
+p Dir.glob("*")   #=> ["file1", "file2]
+Dir.chroot("./")
+p Dir.glob("/*")  #=> ["/file1", "/file2]
+#@end
 
 @see [[url:http://opengroup.org/onlinepubs/007908799/xsh/chroot.html]]
 
@@ -181,9 +181,9 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-  Dir.delete("/tmp/hoge-jbrYBh.tmp")
+#@samplecode 例
+Dir.delete("/tmp/hoge-jbrYBh.tmp")
+#@end
 
 --- entries(path)                                        -> [String]
 --- entries(path, encoding: Encoding.find("filesystem")) -> [String]
@@ -199,9 +199,9 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-  Dir.entries('.') #=> [".", "..", "bar", "foo"]
+#@samplecode 例
+Dir.entries('.') #=> [".", "..", "bar", "foo"]
+#@end
 
 @see [[m:Dir.foreach]]
 #@since 2.5.0
@@ -220,9 +220,9 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-  Dir.children('.') #=> ["bar", "foo"]
+#@samplecode 例
+Dir.children('.') #=> ["bar", "foo"]
+#@end
 
 #@since 2.6.0
 @see [[m:Dir#children]]
@@ -248,16 +248,15 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-  Dir.foreach('.'){|f|
-    p f
-  }
-  #=> 
-  "."
-  ".."
-  "bar"
-  "foo"
+#@samplecode 例
+Dir.foreach('.'){|f|
+  p f
+}
+#=> "."
+#   ".."
+#   "bar"
+#   "foo"
+#@end
 
 @see [[m:Dir.entries]]
 #@since 2.5.0
@@ -281,14 +280,13 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-  Dir.each_child('.'){|f|
-    p f
-  }
-  #=>
-  "bar"
-  "foo"
+#@samplecode 例
+Dir.each_child('.'){|f|
+  p f
+}
+#=> "bar"
+#   "foo"
+#@end
 
 @see [[m:Dir.foreach]]
 @see [[m:Dir.children]]
@@ -303,10 +301,10 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX カレントディレクトリの取得に失敗した場合に発生します(が、普通は失敗することはありません)。
 
-例:
-
-   Dir.chdir("/tmp")   #=> 0
-   Dir.getwd           #=> "/tmp"
+#@samplecode 例
+Dir.chdir("/tmp")   #=> 0
+Dir.getwd           #=> "/tmp"
+#@end
 
 --- mkdir(path, mode = 0777)    -> 0
 
@@ -321,11 +319,11 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になりま
 
 @raise Errno::EXXX ディレクトリの作成に失敗した場合に発生します。
 
-例:
-
-  p File.umask                                  #=> 2
-  Dir.mkdir('t', 0666)
-  p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
+#@samplecode 例
+p File.umask                                  #=> 2
+Dir.mkdir('t', 0666)
+p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
+#@end
 
 @see [[m:FileUtils.#makedirs]]
 
@@ -351,35 +349,37 @@ path に対するディレクトリストリームをオープンして返しま
 
 @raise Errno::EXXX オープンに失敗した場合に発生します。
 
-例: Dir.new
-  require 'tmpdir'
+#@samplecode 例: Dir.new
+require 'tmpdir'
 
-  Dir.mktmpdir do |tmpdir|
-    d = Dir.new(tmpdir)
+Dir.mktmpdir do |tmpdir|
+  d = Dir.new(tmpdir)
+  p d.class         # => Dir
+  p d.read.encoding # => #<Encoding:UTF-8>
+  d.close
+
+  d = Dir.new(tmpdir, encoding: Encoding::UTF_8)
+  p d.class         # => Dir
+  p d.read.encoding # => #<Encoding:UTF-8>
+  d.close
+end
+#@end
+
+#@samplecode 例: Dir.open
+require 'tmpdir'
+
+Dir.mktmpdir do |tmpdir|
+  d = Dir.open(tmpdir, encoding: Encoding::UTF_8)
+  p d.class         # => Dir
+  p d.read.encoding # => #<Encoding:UTF-8>
+  d.close
+
+  Dir.open(tmpdir, encoding: Encoding::UTF_8) do |d|
     p d.class         # => Dir
     p d.read.encoding # => #<Encoding:UTF-8>
-    d.close
-
-    d = Dir.new(tmpdir, encoding: Encoding::UTF_8)
-    p d.class         # => Dir
-    p d.read.encoding # => #<Encoding:UTF-8>
-    d.close
   end
-
-例: Dir.open
-  require 'tmpdir'
-
-  Dir.mktmpdir do |tmpdir|
-    d = Dir.open(tmpdir, encoding: Encoding::UTF_8)
-    p d.class         # => Dir
-    p d.read.encoding # => #<Encoding:UTF-8>
-    d.close
-
-    Dir.open(tmpdir, encoding: Encoding::UTF_8) do |d|
-      p d.class         # => Dir
-      p d.read.encoding # => #<Encoding:UTF-8>
-    end
-  end
+end
+#@end
 
 --- exist?(file_name)    -> bool
 
@@ -388,9 +388,11 @@ file_name で与えられたディレクトリが存在する場合に真を返�
 
 @param file_name 存在を確認したいディレクトリ名。
 
-  Dir.exist?(".")      # => true
-  Dir.exists?(".")     # => true
-  File.directory?(".") # => true
+#@samplecode 例
+Dir.exist?(".")      # => true
+Dir.exists?(".")     # => true
+File.directory?(".") # => true
+#@end
 
 @see [[m:File.directory?]]
 
@@ -407,9 +409,10 @@ Dir.home や Dir.home("root") は
 File.expand_path("~") や File.expand_path("~root") と
 ほぼ同じです。
 
-例:
-  Dir.home          # => "/home/vagrant"
-  Dir.home("root")  # => "/root"
+#@samplecode 例
+Dir.home          # => "/home/vagrant"
+Dir.home("root")  # => "/root"
+#@end
 
 @see [[m:File.expand_path]]
 
@@ -419,10 +422,12 @@ File.expand_path("~") や File.expand_path("~root") と
 path_name で与えられたディレクトリが空の場合に真を返します。
 ディレクトリでない場合や空でない場合に偽を返します。
 
-  Dir.empty?('.')      #=> false
-  Dir.empty?(IO::NULL) #=> false
-  require 'tmpdir'
-  Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
+#@samplecode 例
+Dir.empty?('.')      #=> false
+Dir.empty?(IO::NULL) #=> false
+require 'tmpdir'
+Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
+#@end
 
 @param path_name 確認したいディレクトリ名。
 
@@ -438,9 +443,10 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 #@end
 クローズに成功すれば nil を返します。
 
-例:
-  d = Dir.new(".")
-  d.close  # => nil
+#@samplecode 例
+d = Dir.new(".")
+d.close  # => nil
+#@end
 
 #@until 2.3.0
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
@@ -457,16 +463,15 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 @raise IOError 既に自身が close している場合に発生します。
 
-例:
-
-  Dir.open('.').each{|f|
-    p f
-  }
-  #=> 
-  "."
-  ".."
-  "bar"
-  "foo"
+#@samplecode 例
+Dir.open('.').each{|f|
+  p f
+}
+#=> "."
+#   ".."
+#   "bar"
+#   "foo"
+#@end
 
 #@since 2.6.0
 @see [[m:Dir#each_child]]
@@ -476,11 +481,12 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 オープンしているディレクトリのパス名を文字列で返します。
 
-例:
-  Dir.open("..") do |d|
-    d.path      # => ".."
-    d.to_path   # => ".."
-  end
+#@samplecode 例
+Dir.open("..") do |d|
+  d.path      # => ".."
+  d.to_path   # => ".."
+end
+#@end
 
 --- pos     -> Integer
 --- tell    -> Integer
@@ -489,13 +495,13 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 
 @raise IOError 既に自身が close している場合に発生します。
 
-例:
-
-  Dir.open("/tmp") {|d|
-    d.each {|f|
-      p d.pos
-    }
+#@samplecode 例
+Dir.open("/tmp") {|d|
+  d.each {|f|
+    p d.pos
   }
+}
+#@end
 
 --- pos=(pos)
 --- seek(pos)    -> self
@@ -508,15 +514,15 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 @raise IOError 既に自身が close している場合に発生します。
 
-例:
-
-   Dir.open("testdir") do |d|
-     d.read                   # => "."
-     i = d.tell               # => 12
-     d.read                   # => ".."
-     d.seek(i)                # => #<Dir:0x401b3c40>
-     d.read                   # => ".."
-   end
+#@samplecode 例
+Dir.open("testdir") do |d|
+  d.read                   # => "."
+  i = d.tell               # => 12
+  d.read                   # => ".."
+  d.seek(i)                # => #<Dir:0x401b3c40>
+  d.read                   # => ".."
+end
+#@end
 
 --- read    -> String | nil
 
@@ -527,20 +533,21 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 @raise IOError 既に自身が close している場合に発生します。
 
-例:
-  require 'tmpdir'
+#@samplecode 例
+require 'tmpdir'
 
-  Dir.mktmpdir do |tmpdir|
-    File.open("#{tmpdir}/test1.txt", "w") { |f| f.puts("test1") }
-    File.open("#{tmpdir}/test2.txt", "w") { |f| f.puts("test2") }
-    Dir.open(tmpdir) do |d|
-      p d.read   # => "."
-      p d.read   # => ".."
-      p d.read   # => "test1.txt"
-      p d.read   # => "test2.txt"
-      p d.read   # => nil
-    end
+Dir.mktmpdir do |tmpdir|
+  File.open("#{tmpdir}/test1.txt", "w") { |f| f.puts("test1") }
+  File.open("#{tmpdir}/test2.txt", "w") { |f| f.puts("test2") }
+  Dir.open(tmpdir) do |d|
+    p d.read   # => "."
+    p d.read   # => ".."
+    p d.read   # => "test1.txt"
+    p d.read   # => "test2.txt"
+    p d.read   # => nil
   end
+end
+#@end
 
 --- rewind    -> self
 
@@ -548,27 +555,30 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 
 @raise IOError 既に自身が close している場合に発生します。
 
-例:
-
-   Dir.open("testdir") do |d|
-     d.read     # => "."
-     d.rewind   # => #<Dir:0x401b3fb0>
-     d.read     # => "."
-   end
+#@samplecode 例
+Dir.open("testdir") do |d|
+  d.read     # => "."
+  d.rewind   # => #<Dir:0x401b3fb0>
+  d.read     # => "."
+end
+#@end
 
 --- inspect -> String
 
 self の情報を人間に読みやすい文字列にして返します。
 
-例:
-  Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
+#@samplecode 例
+Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
+#@end
 
 #@since 2.2.0
 --- fileno -> Integer
 
 self に関連づけられたファイル記述子を表す整数を返します。
 
-  Dir.open("..") { |d| d.fileno } # => 8
+#@samplecode 例
+Dir.open("..") { |d| d.fileno } # => 8
+#@end
 
 本メソッドでは POSIX 2008 で定義されている dirfd() 関数を使用します。
 
