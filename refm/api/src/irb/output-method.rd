@@ -1,4 +1,6 @@
+#@until 2.7.0
 require e2mmap
+#@end
 
 irb が出力を扱うためのサブライブラリです。
 

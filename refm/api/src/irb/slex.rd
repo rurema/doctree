@@ -1,3 +1,4 @@
+#@until 2.7.0
 require e2mmap
 require irb/notifier
 
@@ -5,3 +6,4 @@ Ruby のソースコードを字句解析するためのサブライブラリで
 [[lib:irb/ruby-lex]] から使用されます。
 
 このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
+#@end
