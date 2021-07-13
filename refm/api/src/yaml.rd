@@ -134,14 +134,14 @@ YAML.load("...")
 !ruby/sym :foo などのようにタグを指定することで、読み込み時に記述した値
 の型を指定できます。
 
-例:
-
-  require 'yaml'
-  p YAML.load(<<EOS)
+#@samplecode 例
+require 'yaml'
+p YAML.load(<<~EOS)
   ---
   !ruby/sym :foo
-  EOS
-  # => :foo
+EOS
+# => :foo
+#@end
 
 [[lib:yaml]] では、Ruby 向けに以下のローカルタグを扱えます。
 
@@ -158,66 +158,66 @@ YAML.load("...")
  * !ruby/exception: 例外オブジェクト
  * !ruby/object:<クラス名>: 上記以外のオブジェクト
 
-例:
-
-  require 'yaml'
-  p YAML.load(<<EOS)
+#@samplecode 例
+require 'yaml'
+p YAML.load(<<~EOS)
   ---
   array: !ruby/array [1, 2, 3]
   hash: !ruby/hash {foo: 1, bar: 2}
   regexp: !ruby/regexp /foo|bar/
   range: !ruby/range 1..10
-  EOS
-  # => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
+EOS
+# => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
+#@end
 
 これらは tag:ruby.yaml.org,2002:array のように指定する事もできます。
 
-例:
-
-  require 'yaml'
-  p YAML.load(<<EOS)
+#@samplecode 例
+require 'yaml'
+p YAML.load(<<~EOS)
   ---
   array: !tag:ruby.yaml.org,2002:array [1, 2, 3]
   hash: !tag:ruby.yaml.org,2002:hash {foo: 1, bar: 2}
-  EOS
-  # => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+EOS
+# => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+#@end
 
 自分で定義したクラスなどは !ruby/object:<クラス名> を指定します。なお、
 読み込む場合には既にそのクラスが定義済みでないと読み込めません。
 
 また、キーと値を指定する事でインスタンス変数を代入できます。
 
-例1:
+#@samplecode 例1
+require 'yaml'
 
-  require 'yaml'
-  
-  class Foo
-    def initialize
-      @bar = "test"
-    end
+class Foo
+  def initialize
+    @bar = "test"
   end
-  
-  p YAML.load(<<EOS)
+end
+
+p YAML.load(<<~EOS)
   ---
   !ruby/object:Foo
   bar: "test.modified"
-  EOS
-  # => #<Foo:0xf743f754 @bar="test.modified">
+EOS
+# => #<Foo:0xf743f754 @bar="test.modified">
+#@end
 
-例2:
+#@samplecode 例2
+require 'yaml'
 
-  require 'yaml'
-  
-  module Foo
-    class Bar
-    end
+module Foo
+  class Bar
   end
-  
-  p YAML.load(<<EOS)
+end
+
+p YAML.load(<<~EOS)
   ---
-  !ruby/object:Foo::Bar
-  EOS
-  # => #<Foo::Bar:0xf73907b8>
+  !ruby/object:Foo
+EOS
+# => #<Foo::Bar:0xf73907b8>
+#@end
 
 #@until 2.0.0
 また、YAML 形式に変換する際のタグを変更したい場合、to_yaml_type メソッ
