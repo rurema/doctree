@@ -22,7 +22,7 @@ include Enumerable
 などのインスタンスはキーに向きません。[[m:Hash#rehash]] を参照。
 
 ただし、 更新不可 ([[m:Object#frozen?]] が true) では無い文字列をキーとして与えた場合は、文字列をコピーし、コピーを更新不可に設定 ([[m:Object#freeze]]) してキーとして
-使用します。この為、キーとして使われている文字列を更新しようとすると例外 
+使用します。この為、キーとして使われている文字列を更新しようとすると例外
 #@since 2.5.0
 [[c:FrozenError]]
 #@else
@@ -480,7 +480,7 @@ key に対して value を関連づけます。value を返し
 @param key キーを指定します。
 @param value 値を指定します。
 
-  
+
 #@samplecode 例
 h = {}
 
@@ -632,9 +632,9 @@ h = Hash.new
 h.replace(Foo.new) #暗黙の変換
 p h #=> {:japan=>"kyoto"}
 #@end
-  
+
 @see [[m:Hash#dup]],[[m:Hash#merge]],[[m:Object#to_hash]]
-  
+
 --- [](key) -> object | nil
 key に関連づけられた値を返します。
 
@@ -807,7 +807,7 @@ key に対応する要素を取り除きます。
 
 @return 取り除かれた要素の値を返します。
         key に対応する要素が存在しない時には nil を返します。
-        
+
         与えられたブロックは key にマッチする要素がなかった時に評価され、その結果を返します。
 
 #@samplecode 例
@@ -885,11 +885,7 @@ each_pair は each のエイリアスです。
 #=> [:a, 1]
 #   [:b, 2]
 
-{:a=>1, :b=>2}.each_pair {|*a| p a} 
-#=> [[:a, 1]]
-#   [[:b, 2]]
-
-{:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
+{:a=>1, :b=>2}.each {|k, v| p [k, v]}
 #=> [:a, 1]
 #   [:b, 2]
 
@@ -1277,7 +1273,7 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 @param other 自身と比較したい Hash オブジェクトを指定します。
 
 #@samplecode 例
-p({}.equal?({}))     #=> false 
+p({}.equal?({}))     #=> false
 a = {}
 p a.equal?(a)        #=> true
 #@end
