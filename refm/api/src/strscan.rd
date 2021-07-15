@@ -577,9 +577,9 @@ p s.peek(4)     # => "test"
 p s.peek(20)    # => "test string"
 p s.peek(0)     # => ""
 begin
-s.peek(-1)   
+  s.peek(-1)
 rescue ArgumentError => err
-puts err # negative string size (or size too big)
+  puts err # negative string size (or size too big)
 end
 p s.scan(/\w+/) # => "test"
 p s.scan(/\s+/) # => " "
@@ -654,9 +654,9 @@ p s.pos = 7     # => 7
 p s.scan(/\w+/) # => "ring"
 
 begin
-s.pos = 20    
+  s.pos = 20
 rescue RangeError => err
-puts err #=> index out of range
+  puts err #=> index out of range
 end
 p s.pos = -4    # => -4
 p s.scan(/\w+/) # => "ring"
@@ -978,12 +978,14 @@ s.string.frozen? # => false
 文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。
 この仕様に依存したコードを書かないようにしましょう。
 
-      require 'strscan'
+#@samplecode 例
+require 'strscan'
 
-      str = 'test string'
-      s = StringScanner.new(str)
-      s.string == str    # => true
-      s.string.eql?(str) # => true (将来は false になる可能性がある)
+str = 'test string'
+s = StringScanner.new(str)
+s.string == str    # => true
+s.string.eql?(str) # => true (将来は false になる可能性がある)
+#@end
 
 また、返り値の文字列に対して破壊的な変更もできますが、
 この操作がスキャン対象の文字列を変更することも保証されません。
