@@ -1,8 +1,6 @@
 = class Data < Object
 
-このクラスは Ruby 2.5 から deprecated です。
-Fixnum や Bignum が Integer に統合されたように、将来 Object に統合されて
-Ruby スクリプトレベルでは見えなくなる予定です。
+このクラスは Ruby 3.0 で削除されました。
 
 拡張ライブラリを書く時に new が定義されているとまずい場合が
 あるため、[[c:Object]] から new と allocate を undef したクラスです。
