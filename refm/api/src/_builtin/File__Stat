@@ -7,13 +7,13 @@ include Comparable
 [[c:FileTest]] に同名のモジュール関数がある場合はそれと同じ働きをします。ただ、
 ファイル名を引数に取るかわりに Stat 自身について判定する点が違います。
 
-  p File::Stat.new($0).directory? #=> false
-  p FileTest.directory?($0) #=> false
-
-以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
-#@if (version >= "1.8.0")
-1.8.0 以降では nil が返ります。
+#@samplecode
+p File::Stat.new($0).directory? #=> false
+p FileTest.directory?($0) #=> false
 #@end
+
+1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
+なお、1.7 以前では 0 が返っていました。
 
   dev         デバイス番号(ファイルシステム)
   dev_major   dev の major 番号部
@@ -44,12 +44,14 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 @raise Errno::ENOENT pathに該当するファイルが存在しない場合発生します。
 
-  p $:[0] 
-  #=> 例
-  # "C:/Program Files/ruby-1.8/lib/ruby/site_ruby/1.8"
-  p File::Stat.new($:[0])
-  #=> 例
-  #<File::Stat dev=0x2, ino=0, mode=040755, nlink=1, uid=0, gid=0, rdev=0x2, size=0, blksize=nil, blocks=nil, atime=Sun Sep 02 14:15:20 +0900 2007, mtime=Tue Apr 24 23:03:44 +0900 2007, ctime=Tue Apr 24 23:03:37 +0900 2007>
+#@samplecode
+p $:[0]
+#=> 例
+# "C:/Program Files/ruby-1.8/lib/ruby/site_ruby/1.8"
+p File::Stat.new($:[0])
+#=> 例
+#<File::Stat dev=0x2, ino=0, mode=040755, nlink=1, uid=0, gid=0, rdev=0x2, size=0, blksize=nil, blocks=nil, atime=Sun Sep 02 14:15:20 +0900 2007, mtime=Tue Apr 24 23:03:44 +0900 2007, ctime=Tue Apr 24 23:03:37 +0900 2007>
+#@end
 
 == Instance Methods
 
@@ -61,17 +63,19 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 @param o [[c:File::Stat]] のインスタンスを指定します。
 
-  require 'tempfile' # for Tempfile
+#@samplecode
+require 'tempfile' # for Tempfile
 
-  fp1 = Tempfile.open("first")
-  fp1.print "古い方\n"
-  sleep(1)
-  fp2 = Tempfile.open("second")
-  fp2.print "新しい方\n"
+fp1 = Tempfile.open("first")
+fp1.print "古い方\n"
+sleep(1)
+fp2 = Tempfile.open("second")
+fp2.print "新しい方\n"
 
-  p File::Stat.new(fp1.path) <=> File::Stat.new(fp2.path) #=> -1
-  p File::Stat.new(fp2.path) <=> File::Stat.new(fp1.path) #=>  1
-  p File::Stat.new(fp1.path) <=> fp2.path #=> nil
+p File::Stat.new(fp1.path) <=> File::Stat.new(fp2.path) #=> -1
+p File::Stat.new(fp2.path) <=> File::Stat.new(fp1.path) #=>  1
+p File::Stat.new(fp1.path) <=> fp2.path #=> nil
+#@end
 
 --- ftype -> String
 ファイルのタイプを表す文字列を返します。
@@ -85,148 +89,176 @@ path に関する File::Stat オブジェクトを生成して返します。
   "fifo"
   "link"
   "socket"
-  
+
   "unknown"
 
 #@# あらい 2002-01-06: 今のところ "unknown" を返すことはないはず。
 #@# もしそのようなことがあれば、バグ報告をした方が良いと思われる。
 #@# Solaris の Door とかは unknown になる？
 
-サンプル
+#@samplecode 例
+fs = File::Stat.new($0)
+p fs.ftype #=> "file"
+p File::Stat.new($:[0]).ftype #=> "directory"
+#@end
 
-  fs = File::Stat.new($0)
-  p fs.ftype #=> "file"
-  p File::Stat.new($:[0]).ftype #=> "directory"
 
-
-#@#以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
-#@#@if (version >= "1.8.0")
-#@#1.8.0 以降では nil が返ります。
-#@#@end
+1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
+なお、1.7 以前では 0 が返っていました。
 
 --- dev -> String
 デバイス番号(ファイルシステム)を返します。
 
-  fs = File::Stat.new($0)
-  p fs.dev 
-  #例
-  #=> 2
+#@samplecode
+fs = File::Stat.new($0)
+p fs.dev
+#例
+#=> 2
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- dev_major -> Integer
 dev の major 番号部を返します。
 
-  fs = File::Stat.new($0)
-  p fs.dev_major
-  #例
-  #=> nil #この場合ではシステムでサポートされていないため
+#@samplecode
+fs = File::Stat.new($0)
+p fs.dev_major
+#例
+#=> nil #この場合ではシステムでサポートされていないため
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- dev_minor -> Integer
 dev の minor 番号部を返します。
 
-  fs = File::Stat.new($0)
-  p fs.dev_minor
-  #例
-  #=> nil
+#@samplecode
+fs = File::Stat.new($0)
+p fs.dev_minor
+#例
+#=> nil
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 
 --- ino -> Integer
 i-node 番号を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.ino      #=> 0
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.ino      #=> 0
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- mode -> Integer
 ファイルモードを返します。
 
-  fs = File::Stat.new($0)
-  printf "%o\n", fs.mode 
-  #例
-  #=> 100644
+#@samplecode
+fs = File::Stat.new($0)
+printf "%o\n", fs.mode
+#例
+#=> 100644
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- nlink -> Integer
 ハードリンクの数を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.nlink    #=> 1
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.nlink    #=> 1
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- uid -> Integer
 オーナーのユーザIDを返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.uid    #=> 0
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.uid    #=> 0
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- gid -> Integer
 オーナーのグループIDを返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.gid      #=> 0
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.gid      #=> 0
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- rdev -> Integer
 デバイスタイプ(スペシャルファイルのみ)を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.rdev     #=> 2
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.rdev     #=> 2
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- rdev_major -> Integer
 rdev の major 番号部を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.rdev_major #=> nil
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.rdev_major #=> nil
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- rdev_minor -> Integer
 rdev の minor 番号部を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.rdev_minor #=> nil
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.rdev_minor #=> nil
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- size -> Integer
 ファイルサイズ(バイト単位)を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.size    #=> 1548
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.size    #=> 1548
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- blksize -> Integer
 望ましいI/Oのブロックサイズを返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.blksize #=> nil
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.blksize #=> nil
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- blocks -> Integer
 割り当てられているブロック数を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.blocks  #=> nil
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.blocks  #=> nil
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- atime -> Time
 最終アクセス時刻を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 @see [[c:Time]]
@@ -234,9 +266,11 @@ rdev の minor 番号部を返します。
 --- mtime -> Time
 最終更新時刻を返します。
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
+#@end
 #@# WindowsXP ruby1.8.6 でテスト
 
 @see [[c:Time]]
@@ -245,123 +279,151 @@ rdev の minor 番号部を返します。
 最終状態変更時刻を返します。
 (状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
 
-  fs = File::Stat.new($0)
-  #例
-  p fs.ctime.to_f   #=> 1188719843.0
+#@samplecode
+fs = File::Stat.new($0)
+#例
+p fs.ctime.to_f   #=> 1188719843.0
+#@end
 
 #@# WindowsXP ruby1.8.6 でテスト
 
 @see [[c:Time]]
 
-#@since 2.2.0
 --- birthtime -> Time
 
 作成された時刻を返します。
 
 @raise NotImplementedError  Windows のような birthtime のない環境で発生します。
 
-  File.write("testfile", "foo")
-  sleep 10
-  File.write("testfile", "bar")
-  sleep 10
-  File.chmod(0644, "testfile")
-  sleep 10
-  File.read("testfile")
-  File.stat("testfile").birthtime   #=> 2014-02-24 11:19:17 +0900
-  File.stat("testfile").mtime       #=> 2014-02-24 11:19:27 +0900
-  File.stat("testfile").ctime       #=> 2014-02-24 11:19:37 +0900
-  File.stat("testfile").atime       #=> 2014-02-24 11:19:47 +0900
+#@samplecode
+File.write("testfile", "foo")
+sleep 10
+File.write("testfile", "bar")
+sleep 10
+File.chmod(0644, "testfile")
+sleep 10
+File.read("testfile")
+File.stat("testfile").birthtime   #=> 2014-02-24 11:19:17 +0900
+File.stat("testfile").mtime       #=> 2014-02-24 11:19:27 +0900
+File.stat("testfile").ctime       #=> 2014-02-24 11:19:37 +0900
+File.stat("testfile").atime       #=> 2014-02-24 11:19:47 +0900
 #@end
 
 --- directory? -> bool
 ディレクトリの時に真を返します。
 
-  p File::Stat.new($0).directory? #=> false
+#@samplecode
+p File::Stat.new($0).directory? #=> false
+#@end
 
 @see [[m:FileTest.#directory?]]
 
 --- readable? -> bool
 読み込み可能な時に真を返します。
 
-  p File::Stat.new($0).readable? #=> true
+#@samplecode
+p File::Stat.new($0).readable? #=> true
+#@end
 
 --- readable_real? -> bool
 実ユーザ/実グループによって読み込み可能な時に真を返します。
 
-  p File::Stat.new($0).readable_real? #=> true
+#@samplecode
+p File::Stat.new($0).readable_real? #=> true
+#@end
 
 --- writable? -> bool
 書き込み可能な時に真を返します。
 
-  p File::Stat.new($0).writable? #=> true
+#@samplecode
+p File::Stat.new($0).writable? #=> true
+#@end
 
 --- writable_real? -> bool
 実ユーザ/実グループによって書き込み可能な時に真を返します。
 
-  p File::Stat.new($0).writable_real? #=> true
+#@samplecode
+p File::Stat.new($0).writable_real? #=> true
+#@end
 
 --- executable? -> bool
 実効ユーザ/グループIDで実行できる時に真を返します。
 
-  p File::Stat.new($0).executable? 
-  # 例
-  #=> true
+#@samplecode
+p File::Stat.new($0).executable?
+# 例
+#=> true
+#@end
 
 --- executable_real? -> bool
 実ユーザ/グループIDで実行できる時に真を返します。
 
-  p File::Stat.new($0).executable_real? 
-  #例
-  #=> true
+#@samplecode
+p File::Stat.new($0).executable_real?
+#例
+#=> true
+#@end
 
 --- file? -> bool
 通常ファイルの時に真を返します。
 
-  p File::Stat.new($0).file? #=> true
+#@samplecode
+p File::Stat.new($0).file? #=> true
+#@end
 
 --- zero? -> bool
 サイズが0である時に真を返します。
 
-  p File::Stat.new($0).zero? #=> false
+#@samplecode
+p File::Stat.new($0).zero? #=> false
+#@end
 
 --- size? -> Integer | nil
 サイズが0の時にはnil、それ以外の場合はファイルサイズを返します。
 
-  require 'tempfile'
+#@samplecode
+require 'tempfile'
 
-  fp = Tempfile.new("temp")
-  p fp.size #=> 0
-  p File::Stat.new(fp.path).size? #=> nil
-  fp.print "not 0 "
-  fp.close
-  p FileTest.exist?(fp.path) #=> true
-  p File::Stat.new(fp.path).size? #=> 6
+fp = Tempfile.new("temp")
+p fp.size #=> 0
+p File::Stat.new(fp.path).size? #=> nil
+fp.print "not 0 "
+fp.close
+p FileTest.exist?(fp.path) #=> true
+p File::Stat.new(fp.path).size? #=> 6
+#@end
 
 --- owned? -> bool
 自分のものである時に真を返します。
 
-  printf "%s %s\n", $:[0], File::Stat.new($:[0]).owned?
-  #例
-  #=> /usr/local/lib/site_ruby/1.8 false
+#@samplecode
+printf "%s %s\n", $:[0], File::Stat.new($:[0]).owned?
+#例
+#=> /usr/local/lib/site_ruby/1.8 false
+#@end
 
 --- grpowned? -> bool
 グループIDが実効グループIDと等しい時に真を返します。
 
 補助グループIDは考慮されません。
 
-  printf "%s %s\n", $:[0], File::Stat.new($:[0]).grpowned?
-  #例
-  #=> /usr/local/lib/site_ruby/1.8 false
-  printf "%s %s\n", $0, File::Stat.new($0).grpowned?
-  #例
-  #=> filestat.rb true
+#@samplecode
+printf "%s %s\n", $:[0], File::Stat.new($:[0]).grpowned?
+#例
+#=> /usr/local/lib/site_ruby/1.8 false
+printf "%s %s\n", $0, File::Stat.new($0).grpowned?
+#例
+#=> filestat.rb true
+#@end
 
 --- pipe? -> bool
 無名パイプおよび名前つきパイプ(FIFO)の時に真を返します。
 
 #@#linux のみ？
-  system("mkfifo /tmp/pipetest")
-  p File::Stat.new("/tmp/pipetest").pipe? #=> true
+#@samplecode
+system("mkfifo /tmp/pipetest")
+p File::Stat.new("/tmp/pipetest").pipe? #=> true
+#@end
 
 --- symlink? -> false
 シンボリックリンクである時に真を返します。
@@ -369,100 +431,112 @@ rdev の minor 番号部を返します。
 常にfalseを返します。
 
 #@# ソースにそう書いてあったので
-
-  require 'fileutils'
-  outfile = $0 + ".ln"
-  FileUtils.ln_s($0, outfile)
-  p File::Stat.new(outfile).symlink? #=> false
-  p File.lstat(outfile).symlink?     #=> true
-  p FileTest.symlink?(outfile)       #=> true
+#@samplecode
+require 'fileutils'
+outfile = $0 + ".ln"
+FileUtils.ln_s($0, outfile)
+p File::Stat.new(outfile).symlink? #=> false
+p File.lstat(outfile).symlink?     #=> true
+p FileTest.symlink?(outfile)       #=> true
+#@end
 
 @see [[m:File.lstat]]
 
 --- socket? -> bool
 ソケットの時に真を返します。
 
-  Dir.glob("/tmp/*"){|file|
-    if File::Stat.new(file).socket?
-      printf "%s\n", file
-    end
-  }
-  #例
-  #=> /tmp/uimhelper-hogehoge
-  #...
+#@samplecode
+Dir.glob("/tmp/*"){|file|
+  if File::Stat.new(file).socket?
+    printf "%s\n", file
+  end
+}
+#例
+#=> /tmp/uimhelper-hogehoge
+#...
+#@end
 
 --- blockdev? -> bool
 ブロックスペシャルファイルの時に真を返します。
 
-  Dir.glob("/dev/*") {|bd|
-    if File::Stat.new(bd).blockdev?
-      puts bd
-    end
-  }
-  #例
-  #...
-  #=> /dev/hda1
-  #=> /dev/hda3
-  #...
+#@samplecode
+Dir.glob("/dev/*") {|bd|
+  if File::Stat.new(bd).blockdev?
+    puts bd
+  end
+}
+#例
+#...
+#=> /dev/hda1
+#=> /dev/hda3
+#...
+#@end
 
 --- chardev? -> bool
 キャラクタスペシャルファイルの時に真を返します。
 
-  Dir.glob("/dev/*") {|bd|
-    if File::Stat.new(bd).chardev?
-      puts bd
-    end
-  }
-  #例
-  #...
-  #=> /dev/tty1
-  #=> /dev/stderr
-  #...
+#@samplecode
+Dir.glob("/dev/*") {|bd|
+  if File::Stat.new(bd).chardev?
+    puts bd
+  end
+}
+#例
+#...
+#=> /dev/tty1
+#=> /dev/stderr
+#...
+#@end
 
 --- setuid? -> bool
 setuidされている時に真を返します。
 
-  Dir.glob("/bin/*") {|bd|
-    if File::Stat.new(bd).setuid?
-      puts bd
-    end
-  }
-  #例
-  #...
-  #=> /bin/ping
-  #=> /bin/su
-  #...
+#@samplecode
+Dir.glob("/bin/*") {|bd|
+  if File::Stat.new(bd).setuid?
+    puts bd
+  end
+}
+#例
+#...
+#=> /bin/ping
+#=> /bin/su
+#...
+#@end
 
 --- setgid? -> bool
 setgidされている時に真を返します。
 
-  Dir.glob("/usr/sbin/*") {|bd|
-    if File::Stat.new(bd).setgid?
-      puts bd
-    end
-  }
-  #例
-  #...
-  #=> /usr/sbin/postqueue
-  #...
+#@samplecode
+Dir.glob("/usr/sbin/*") {|bd|
+  if File::Stat.new(bd).setgid?
+    puts bd
+  end
+}
+#例
+#...
+#=> /usr/sbin/postqueue
+#...
+#@end
 
 --- sticky? -> bool
 stickyビットが立っている時に真を返します。
 
-  Dir.glob("/usr/bin/*") {|bd|
-    begin
-      if File::Stat.new(bd).sticky?
-        puts bd
-      end
-    rescue
+#@samplecode
+Dir.glob("/usr/bin/*") {|bd|
+  begin
+    if File::Stat.new(bd).sticky?
+      puts bd
     end
-  }
-  #例
-  #...
-  #=> /usr/bin/emacs-21.4
-  #...
+  rescue
+  end
+}
+#例
+#...
+#=> /usr/bin/emacs-21.4
+#...
+#@end
 
-#@since 1.9.1
 --- world_readable? -> Integer | nil
 
 全てのユーザから読めるならば、そのファイルのパーミッションを表す
@@ -470,8 +544,10 @@ stickyビットが立っている時に真を返します。
 
 整数の意味はプラットフォームに依存します。
 
-   m = File.stat("/etc/passwd").world_readable?  # => 420
-   sprintf("%o", m)                              # => "644"
+#@samplecode
+m = File.stat("/etc/passwd").world_readable?  # => 420
+sprintf("%o", m)                              # => "644"
+#@end
 
 --- world_writable? -> Integer | nil
 
@@ -480,7 +556,7 @@ stickyビットが立っている時に真を返します。
 
 整数の意味はプラットフォームに依存します。
 
-   m = File.stat("/tmp").world_writable?         # => 511
-   sprintf("%o", m)                              # => "777"
-
+#@samplecode
+m = File.stat("/tmp").world_writable?         # => 511
+sprintf("%o", m)                              # => "777"
 #@end
