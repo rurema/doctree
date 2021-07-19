@@ -22,17 +22,30 @@ require digest/sha2
 
 --- hexencode(string) -> String
 
-与えられた文字列に対するハッシュ値を、
-ASCIIコードを使って16進数の列を示す文字列にエンコードして返します。
+引数である文字列 string を、16進数に変換した文字列を生成して返します。
 
-@param string ハッシュ値の生成対象の文字列です。
+@param string 文字列を指定します。
 
-使用例(MD5の場合)
+#@samplecode
+require 'digest'
 
-        require 'digest/md5'
-        Digest::MD5.hexdigest("ruby") # => "58e53d1324eef6265fdb97b08ed9aadf"
+p Digest.hexencode("")     # => ""
+p Digest.hexencode("d")    # => "64"
+p Digest.hexencode("\1\2") # => "0102"
+p Digest.hexencode("\xB0") # => "b0"
 
-@see [[m:Digest::Base#hexdigest]]
+p digest = Digest::MD5.digest("ruby")   # => "X\xE5=\x13$\xEE\xF6&_\xDB\x97\xB0\x8E\xD9\xAA\xDF"
+p Digest.hexencode(digest)              # => "58e53d1324eef6265fdb97b08ed9aadf"
+p Digest::MD5.hexdigest("ruby")         # => "58e53d1324eef6265fdb97b08ed9aadf"
+
+p digest = Digest::SHA1.digest("ruby")   # => "\x18\xE4\x0E\x14\x01\xEE\xF6~\x1A\xE6\x9E\xFA\xB0\x9A\xFBq\xF8\x7F\xFB\x81"
+p Digest.hexencode(digest)               # => "18e40e1401eef67e1ae69efab09afb71f87ffb81"
+p Digest::SHA1.hexdigest("ruby")         # => "18e40e1401eef67e1ae69efab09afb71f87ffb81"
+#@end
+
+文字列から16進数に変換したハッシュ値を直接得たい場合は、[[m:Digest::Base.hexdigest]] を使うこともできます。
+
+@see [[m:Digest::Base.hexdigest]], [[m:Digest::Base#hexdigest]]
 
 
 #@if(version >= "1.8.6")
@@ -346,4 +359,3 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
   for a in ["MD5", "SHA1", "SHA512"]
     p Digest(a) # => Digest::MD5, Digest::SHA1, Digest::SHA512
   end
-
