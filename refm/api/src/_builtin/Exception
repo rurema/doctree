@@ -12,15 +12,17 @@
 @param error_message エラーメッセージを表す文字列を指定します。このメッセージは
                      属性 [[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示されます。
 
-例:
-  e = Exception.new("some message")
-  p e         # => #<Exception: some message>
-  p e.message # => "some message"
+#@samplecode 例
+e = Exception.new("some message")
+p e         # => #<Exception: some message>
+p e.message # => "some message"
+#@end
 
-例:
-  e = Exception.exception("some message")
-  p e         # => #<Exception: some message>
-  p e.message # => "some message"
+#@samplecode 例
+e = Exception.exception("some message")
+p e         # => #<Exception: some message>
+p e.message # => "some message"
+#@end
 
 #@since 2.5.0
 --- to_tty? -> bool
@@ -47,11 +49,13 @@ $stderr が変更されておらず、$stderr.tty? が真の場合は true を�
 
 @param error_message エラーメッセージを表す文字列を指定します。
 
-  begin
-   ...        # 何か処理
-  rescue => e
-   raise e.exception("an error occurs during hogehoge process")  # 詳しいエラーメッセージ
-  end
+#@samplecode 例
+begin
+  # ...        # 何か処理
+rescue => e
+  raise e.exception("an error occurs during hogehoge process")  # 詳しいエラーメッセージ
+end
+#@end
 
 --- backtrace    -> [String]
 
@@ -66,17 +70,19 @@ $stderr が変更されておらず、$stderr.tty? が真の場合は true を�
 
 という形式の [[c:String]] の配列です。
 
- def methd
-   raise
- end
- 
- begin
-   methd
- rescue => e
-   p e.backtrace
- end
- 
- #=> ["filename.rb:2:in `methd'", "filename.rb:6"]
+#@samplecode 例
+def methd
+  raise
+end
+
+begin
+  methd
+rescue => e
+  p e.backtrace
+end
+
+#=> ["filename.rb:2:in `methd'", "filename.rb:6"]
+#@end
 
 #@since 2.1.0
 @see [[m:Exception#backtrace_locations]]
@@ -89,24 +95,25 @@ $stderr が変更されておらず、$stderr.tty? が真の場合は true を�
 現状では [[m:Exception#set_backtrace]] によって戻り値が変化する事はあり
 ません。
 
-例: test.rb
-  require "date"
-  def check_long_month(month)
-    return if Date.new(2000, month, -1).day == 31
-    raise "#{month} is not long month"
-  end
+#@samplecode 例: test.rb
+require "date"
+def check_long_month(month)
+  return if Date.new(2000, month, -1).day == 31
+  raise "#{month} is not long month"
+end
 
-  def get_exception
-    return begin
-      yield
-    rescue => e
-      e
-    end
+def get_exception
+  return begin
+    yield
+  rescue => e
+    e
   end
+end
 
-  e = get_exception { check_long_month(2) }
-  p e.backtrace_locations
-  # => ["test.rb:4:in `check_long_month'", "test.rb:15:in `block in <main>'", "test.rb:9:in `get_exception'", "test.rb:15:in `<main>'"]
+e = get_exception { check_long_month(2) }
+p e.backtrace_locations
+# => ["test.rb:4:in `check_long_month'", "test.rb:15:in `block in <main>'", "test.rb:9:in `get_exception'", "test.rb:15:in `<main>'"]
+#@end
 
 @see [[m:Exception#backtrace]]
 #@end
@@ -119,11 +126,13 @@ $stderr が変更されておらず、$stderr.tty? が真の場合は true を�
 
 エラーメッセージをあらわす文字列を返します。
 
-  begin
-    1 + nil
-  rescue => e
-    p e.message   #=>  "nil can't be coerced into Fixnum"
-  end
+#@samplecode 例
+begin
+  1 + nil
+rescue => e
+  p e.message   #=>  "nil can't be coerced into Fixnum"
+end
+#@end
 
 --- set_backtrace(errinfo)    -> nil | String | [String]
 
@@ -132,7 +141,7 @@ $stderr が変更されておらず、$stderr.tty? が真の場合は true を�
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
-#@samplecode 例:
+#@samplecode 例
 begin
   begin
     raise "inner"
@@ -150,12 +159,13 @@ end
 
 self のクラス名と message を文字列にして返します。
 
-例:
-  begin
-    raise "exception"
-  rescue
-    p $!.inspect # => "#<RuntimeError: exception>"
-  end
+#@samplecode 例
+begin
+  raise "exception"
+rescue
+  p $!.inspect # => "#<RuntimeError: exception>"
+end
+#@end
 
 #@since 1.9.1
 --- ==(other)    -> bool
@@ -172,32 +182,33 @@ message と backtrace が == メソッドで比較して
              [[m:Exception#exception]] を実行して変換を試みます。
 #@end
 
-例:
-  require "date"
-  def check_long_month(month)
-    return if Date.new(2000, month, -1).day == 31
-    raise "#{month} is not long month"
+#@samplecode 例
+require "date"
+def check_long_month(month)
+  return if Date.new(2000, month, -1).day == 31
+  raise "#{month} is not long month"
+end
+
+def get_exception
+  return begin
+    yield
+  rescue => e
+    e
   end
+end
 
-  def get_exception
-    return begin
-      yield
-    rescue => e
-      e
-    end
-  end
+results = [2, 2, 4].map { |e | get_exception { check_long_month(e) } }
+p results.map { |e| e.class }
+# => [RuntimeError, RuntimeError, RuntimeError]
+p results.map { |e| e.message }
+# => ["2 is not long month", "2 is not long month", "4 is not long month"]
 
-  results = [2, 2, 4].map { |e | get_exception { check_long_month(e) } }
-  p results.map { |e| e.class }
-  # => [RuntimeError, RuntimeError, RuntimeError]
-  p results.map { |e| e.message }
-  # => ["2 is not long month", "2 is not long month", "4 is not long month"]
+# class, message, backtrace が同一のため true になる
+p results[0] == results[1]    # => true
 
-  # class, message, backtrace が同一のため true になる
-  p results[0] == results[1]    # => true
-
-  # class, backtrace が同一だが、message がことなるため false になる
-  p results[0] == results[2]    # => false
+# class, backtrace が同一だが、message がことなるため false になる
+p results[0] == results[2]    # => false
+#@end
 
 #@#: rdoc でも表示していないため省略。
 #@#: #@since 2.0.0
@@ -218,17 +229,18 @@ self の前の例外(self が rescue 節や ensure 節の中で発生した例�
 その前に発生していた元々の例外)を返します。存在しない場合は nil を返し
 ます。
 
-例:
+#@samplecode 例
+begin
   begin
-    begin
-      raise "inner"
-    rescue
-      raise "outer"
-    end
+    raise "inner"
   rescue
-    p $!       # => #<RuntimeError: outer>
-    p $!.cause # => #<RuntimeError: inner>
+    raise "outer"
   end
+rescue
+  p $!       # => #<RuntimeError: outer>
+  p $!.cause # => #<RuntimeError: inner>
+end
+#@end
 
 #@end
 
