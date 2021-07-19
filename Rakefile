@@ -151,7 +151,7 @@ end
 desc 'Check unnecessary indentation in samplecode'
 task :check_indent_in_samplecode do
   errors = []
-  `git grep -F --name-only '\#@samplecode'`.lines(chomp: true).each do |path|
+  `grep -rlF '\#@samplecode' refm`.lines(chomp: true).each do |path|
     lines = File.read(path).lines(chomp: true)
     lines.each.with_index(1) do |line, lineno|
       next unless line.start_with?('#@samplecode')
