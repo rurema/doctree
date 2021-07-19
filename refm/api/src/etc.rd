@@ -484,12 +484,12 @@ alias Etc::Group
 
 --- name -> String
 
-グループ名を設定します。
+グループ名を返します。
 
 
 --- name=(name)
 
-グループ名を返します。
+グループ名を設定します。
 
 --- passwd -> String
 
