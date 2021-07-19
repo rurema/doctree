@@ -4,82 +4,86 @@ tsort はトポロジカルソートと強連結成分に関するモジュー�
 
 === Example
 
-  require 'tsort'
+#@samplecode
+require 'tsort'
 
-  class Hash
-    include TSort
-    alias tsort_each_node each_key
-    def tsort_each_child(node, &block)
-      fetch(node).each(&block)
-    end
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
   end
+end
 
-  {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
-  #=> [3, 2, 1, 4]
+{1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
+#=> [3, 2, 1, 4]
 
-  {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}.strongly_connected_components
-  #=> [[4], [2, 3], [1]]
+{1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}.strongly_connected_components
+#=> [[4], [2, 3], [1]]
+#@end
 
 === より現実的な例
 
 非常に単純な `make' に似たツールは以下のように実装できます。
 
-  require 'tsort'
+#@samplecode
+require 'tsort'
 
-  class Make
-    def initialize
-      @dep = {}
-      @dep.default = []
-    end
-
-    def rule(outputs, inputs=[], &block)
-      triple = [outputs, inputs, block]
-      outputs.each {|f| @dep[f] = [triple]}
-      @dep[triple] = inputs
-    end
-
-    def build(target)
-      each_strongly_connected_component_from(target) {|ns|
-        if ns.length != 1
-          fs = ns.delete_if {|n| Array === n}
-          raise TSort::Cyclic.new("cyclic dependencies: #{fs.join ', '}")
-        end
-        n = ns.first
-        if Array === n
-          outputs, inputs, block = n
-          inputs_time = inputs.map {|f| File.mtime f}.max
-          begin
-            outputs_time = outputs.map {|f| File.mtime f}.min
-          rescue Errno::ENOENT
-            outputs_time = nil
-          end
-          if outputs_time == nil ||
-             inputs_time != nil && outputs_time <= inputs_time
-            sleep 1 if inputs_time != nil && inputs_time.to_i == Time.now.to_i
-            block.call
-          end
-        end
-      }
-    end
-
-    def tsort_each_child(node, &block)
-      @dep[node].each(&block)
-    end
-    include TSort
+class Make
+  def initialize
+    @dep = {}
+    @dep.default = []
   end
 
-  def command(arg)
-    print arg, "\n"
-    system arg
+  def rule(outputs, inputs=[], &block)
+    triple = [outputs, inputs, block]
+    outputs.each {|f| @dep[f] = [triple]}
+    @dep[triple] = inputs
   end
 
-  m = Make.new
-  m.rule(%w[t1]) { command 'date > t1' }
-  m.rule(%w[t2]) { command 'date > t2' }
-  m.rule(%w[t3]) { command 'date > t3' }
-  m.rule(%w[t4], %w[t1 t3]) { command 'cat t1 t3 > t4' }
-  m.rule(%w[t5], %w[t4 t2]) { command 'cat t4 t2 > t5' }
-  m.build('t5')
+  def build(target)
+    each_strongly_connected_component_from(target) {|ns|
+      if ns.length != 1
+        fs = ns.delete_if {|n| Array === n}
+        raise TSort::Cyclic.new("cyclic dependencies: #{fs.join ', '}")
+      end
+      n = ns.first
+      if Array === n
+        outputs, inputs, block = n
+        inputs_time = inputs.map {|f| File.mtime f}.max
+        begin
+          outputs_time = outputs.map {|f| File.mtime f}.min
+        rescue Errno::ENOENT
+          outputs_time = nil
+        end
+        if outputs_time == nil ||
+            inputs_time != nil && outputs_time <= inputs_time
+          sleep 1 if inputs_time != nil && inputs_time.to_i == Time.now.to_i
+          block.call
+        end
+      end
+    }
+  end
+
+  def tsort_each_child(node, &block)
+    @dep[node].each(&block)
+  end
+  include TSort
+end
+
+def command(arg)
+  print arg, "\n"
+  system arg
+end
+
+m = Make.new
+m.rule(%w[t1]) { command 'date > t1' }
+m.rule(%w[t2]) { command 'date > t2' }
+m.rule(%w[t3]) { command 'date > t3' }
+m.rule(%w[t4], %w[t1 t3]) { command 'cat t1 t3 > t4' }
+m.rule(%w[t5], %w[t4 t2]) { command 'cat t4 t2 > t5' }
+m.build('t5')
+#@end
 
 === Bugs
 
@@ -140,18 +144,19 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 
 @raise TSort::Cyclic 閉路が存在するとき、発生します。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  p TSort.tsort(each_node, each_child) # => [4, 2, 3, 1]
+g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+p TSort.tsort(each_node, each_child) # => [4, 2, 3, 1]
 
-  g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  p TSort.tsort(each_node, each_child) # raises TSort::Cyclic
+g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+p TSort.tsort(each_node, each_child) # raises TSort::Cyclic
+#@end
 
 @see [[m:TSort#tsort]]
 
@@ -172,17 +177,18 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 
 @raise TSort::Cyclic 閉路が存在するとき、発生します.
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  TSort.tsort_each(each_node, each_child) {|n| p n }
-  # => 4
-  #    2
-  #    3
-  #    1
+g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+TSort.tsort_each(each_node, each_child) {|n| p n }
+# => 4
+#    2
+#    3
+#    1
+#@end
 
 @see [[m:TSort#tsort_each]]
 
@@ -200,20 +206,21 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 @param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
                   ドを持つオブジェクトを指定します。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  p TSort.strongly_connected_components(each_node, each_child)
-  # => [[4], [2], [3], [1]]
+g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+p TSort.strongly_connected_components(each_node, each_child)
+# => [[4], [2], [3], [1]]
 
-  g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  p TSort.strongly_connected_components(each_node, each_child)
-  # => [[4], [2, 3], [1]]
+g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+p TSort.strongly_connected_components(each_node, each_child)
+# => [[4], [2, 3], [1]]
+#@end
 
 @see [[m:TSort#strongly_connected_components]]
 
@@ -232,27 +239,28 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 @param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
                   ドを持つオブジェクトを指定します。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
+g = {1=>[2, 3], 2=>[4], 3=>[2, 4], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
 
-  # => [4]
-  #    [2]
-  #    [3]
-  #    [1]
+# => [4]
+#    [2]
+#    [3]
+#    [1]
 
-  g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
-  each_node = lambda {|&b| g.each_key(&b) }
-  each_child = lambda {|n, &b| g[n].each(&b) }
-  TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
+g = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+each_node = lambda {|&b| g.each_key(&b) }
+each_child = lambda {|n, &b| g[n].each(&b) }
+TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
 
-  # => [4]
-  #    [2, 3]
-  #    [1]
+# => [4]
+#    [2, 3]
+#    [1]
+#@end
 
 @see [[m:TSort#each_strongly_connected_component]]
 
@@ -275,17 +283,18 @@ TSort.each_strongly_connected_component_fromは[[c:TSort]]をincludeして
 @param each_child 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
                   ドを持つオブジェクトを指定します。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  graph = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
-  each_child = lambda {|n, &b| graph[n].each(&b) }
-  TSort.each_strongly_connected_component_from(1, each_child) {|scc|
-    p scc
-  }
-  # => [4]
-  #    [2, 3]
-  #    [1]
+graph = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+each_child = lambda {|n, &b| graph[n].each(&b) }
+TSort.each_strongly_connected_component_from(1, each_child) {|scc|
+  p scc
+}
+# => [4]
+#    [2, 3]
+#    [1]
+#@end
 
 @see [[m:TSort#each_strongly_connected_component_from]]
 
@@ -298,19 +307,20 @@ TSort.each_strongly_connected_component_fromは[[c:TSort]]をincludeして
 
 @raise TSort::Cyclic 閉路が存在するとき、発生します。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  class Hash
-    include TSort
-    alias tsort_each_node each_key
-    def tsort_each_child(node, &block)
-      fetch(node).each(&block)
-    end
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
   end
+end
 
-  sorted = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
-  p sorted #=> [3, 2, 1, 4]
+sorted = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
+p sorted #=> [3, 2, 1, 4]
+#@end
 
 @see [[m:TSort.tsort]]
 
@@ -329,29 +339,30 @@ tsort_each は nil を返します。
 
 @raise TSort::Cyclic 閉路が存在するとき、発生します.
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  class Hash
-    include TSort
-    alias tsort_each_node each_key
-    def tsort_each_child(node, &block)
-      fetch(node).each(&block)
-    end
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
   end
+end
 
-  non_sort = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}
+non_sort = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}
 
-  non_sort.tsort_each {|node|
-    non_sort.tsort_each_child(node){|child|
-      printf("%d -> %d\n", node, child)
-    }
+non_sort.tsort_each {|node|
+  non_sort.tsort_each_child(node){|child|
+    printf("%d -> %d\n", node, child)
   }
+}
 
-  # 出力
-  #=> 2 -> 3
-  #=> 1 -> 2
-  #=> 1 -> 3
+# 出力
+#=> 2 -> 3
+#=> 1 -> 2
+#=> 1 -> 3
+#@end
 
 @see [[m:TSort.tsort_each]]
 
@@ -361,21 +372,22 @@ tsort_each は nil を返します。
 この配列は子から親に向かってソートされています。
 各要素は強連結成分を表す配列です。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  class Hash
-    include TSort
-    alias tsort_each_node each_key
-    def tsort_each_child(node, &block)
-      fetch(node).each(&block)
-    end
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
   end
+end
 
-  non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
 
-  p non_sort.strongly_connected_components
-  #=> [[4], [2, 3], [1]]
+p non_sort.strongly_connected_components
+#=> [[4], [2, 3], [1]]
+#@end
 
 @see [[m:TSort.strongly_connected_components]]
 
@@ -392,27 +404,28 @@ obj.strongly_connected_components.each に似ていますが、
 
 each_strongly_connected_component は nil を返します。
 
-使用例
-  require 'tsort'
+#@samplecode 使用例
+require 'tsort'
 
-  class Hash
-    include TSort
-    alias tsort_each_node each_key
-    def tsort_each_child(node, &block)
-      fetch(node).each(&block)
-    end
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
   end
+end
 
-  non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
 
-  non_sort.each_strongly_connected_component{|nodes|
-    p nodes
-  }
+non_sort.each_strongly_connected_component{|nodes|
+  p nodes
+}
 
-  #出力
-  #=> [4]
-  #=> [2, 3]
-  #=> [1]
+#出力
+#=> [4]
+#=> [2, 3]
+#=> [1]
+#@end
 
 @see [[m:TSort.each_strongly_connected_component]]
 
@@ -430,40 +443,41 @@ tsort_each_node を呼びません。
 
 @param node ノードを指定します。
 
-  #例 到達可能なノードを表示する
-  require 'tsort'
+#@samplecode 例 到達可能なノードを表示する
+require 'tsort'
 
-  class Hash
-    include TSort
-    alias tsort_each_node each_key
-    def tsort_each_child(node, &block)
-      fetch(node).each(&block)
-    end
+class Hash
+  include TSort
+  alias tsort_each_node each_key
+  def tsort_each_child(node, &block)
+    fetch(node).each(&block)
   end
+end
 
-  non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
 
-  non_sort.each_strongly_connected_component{|nodes|
-    p nodes
-    nodes.each {|node|
-      non_sort.each_strongly_connected_component_from(node){|ns|
-        printf("%s -> %s\n", node, ns.join(","))
-      }
+non_sort.each_strongly_connected_component{|nodes|
+  p nodes
+  nodes.each {|node|
+    non_sort.each_strongly_connected_component_from(node){|ns|
+      printf("%s -> %s\n", node, ns.join(","))
     }
   }
+}
 
-  #出力
-  #=> [4]
-  #=> 4 -> 4
-  #=> [2, 3]
-  #=> 2 -> 4
-  #=> 2 -> 2,3
-  #=> 3 -> 4
-  #=> 3 -> 3,2
-  #=> [1]
-  #=> 1 -> 4
-  #=> 1 -> 2,3
-  #=> 1 -> 1
+#出力
+#=> [4]
+#=> 4 -> 4
+#=> [2, 3]
+#=> 2 -> 4
+#=> 2 -> 2,3
+#=> 3 -> 4
+#=> 3 -> 3,2
+#=> [1]
+#=> 1 -> 4
+#=> 1 -> 2,3
+#=> 1 -> 1
+#@end
 
 @see [[m:TSort.each_strongly_connected_component_from]]
 
