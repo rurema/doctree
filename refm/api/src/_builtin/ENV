@@ -424,3 +424,28 @@ ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
 
 @see [[m:Hash#except]], [[m:ENV.slice]]
 #@end
+--- clone(freeze: true) -> object
+ENV オブジェクトの複製を作成して返します。
+
+ENV は OS のプロセス全体で共有される環境変数を操作するラッパーオブジェクトなので、複製は有用ではありません。
+そのため、3.1 からは複製で環境変数を操作するときに deprecated 警告がでます。
+
+テスト実行中に環境変数を退避する用途には [[m:ENV.to_h]] を使用してください。
+
+#@samplecode
+saved_env = ENV.to_h
+# (テストなど)
+ENV.replace(saved_env)
+#@end
+
+@see [[m:Object#clone]]
+#@since 3.1.0
+@see [[m:ENV.dup]]
+--- dup -> ()
+[[c:TypeError]]を発生させます。
+
+3.0 以前では Object.new と同様の ENV とは無関係の有用ではないオブジェクトを返していたため、3.1 からは例外が発生するようになりました。
+詳細は[[m:ENV.clone]]を参照してください。
+
+@see [[m:ENV.clone]]
+#@end
