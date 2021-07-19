@@ -20,8 +20,9 @@ include File::Constants
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-例:
-  File.atime(__FILE__) # => 2017-11-28 22:38:44 +0900
+#@samplecode 例
+File.atime(__FILE__) # => 2017-11-28 22:38:44 +0900
+#@end
 
 --- ctime(filename)    -> Time
 
@@ -47,8 +48,9 @@ File.ctime("testfile") # => 2017-11-30 22:42:12 +0900
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-例:
-  File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
+#@samplecode 例
+File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
+#@end
 
 #@since 2.2.0
 --- birthtime(filename) -> Time
@@ -61,7 +63,9 @@ File.ctime("testfile") # => 2017-11-30 22:42:12 +0900
 
 @raise NotImplementedError  Windows のような birthtime のない環境で発生します。
 
-  File.birthtime("testfile")   #=> Wed Apr 09 08:53:13 CDT 2003
+#@samplecode 例
+File.birthtime("testfile")   #=> Wed Apr 09 08:53:13 CDT 2003
+#@end
 #@end
 
 --- basename(filename, suffix = "")     -> String
@@ -70,16 +74,20 @@ filename の一番後ろのスラッシュに続く要素を返します。も�
 引数 suffix が与えられて、かつそれが filename の末尾に
 一致するなら、それを取り除いたものを返します。
 
-  p File.basename("ruby/ruby.c")          #=> "ruby.c"
-  p File.basename("ruby/ruby.c", ".c")    #=> "ruby"
-  p File.basename("ruby/ruby.c", ".*")    #=> "ruby"
-  p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
-  p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
+#@samplecode 例
+p File.basename("ruby/ruby.c")          #=> "ruby.c"
+p File.basename("ruby/ruby.c", ".c")    #=> "ruby"
+p File.basename("ruby/ruby.c", ".*")    #=> "ruby"
+p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
+p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
+#@end
 
 File.basename の動作は [[man:basename(3)]] 
 #@#[[url:http://www.unix-systems.org/version3/online.html]]
 に従います。
-  p File.basename("foo/bar/")      # => "bar"
+#@samplecode 例
+p File.basename("foo/bar/")      # => "bar"
+#@end
 
 @param filename ファイル名を表す文字列を指定します。
 
@@ -180,16 +188,17 @@ File.lstat("testlink").uid      # => 0
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-  IO.write("test.txt", "test")
-  p File.exist?("test.txt")  # => true
-  p File.delete("test.txt")   # => 1
-  p File.exist?("test.txt")  # => false
-  begin
-    File.delete("test.txt")
-  rescue
-    p $!  # => #<Errno::ENOENT: No such file or directory @ unlink_internal - test.txt>
-  end
+#@samplecode 例
+IO.write("test.txt", "test")
+p File.exist?("test.txt")  # => true
+p File.delete("test.txt")   # => 1
+p File.exist?("test.txt")  # => false
+begin
+  File.delete("test.txt")
+rescue
+  p $!  # => #<Errno::ENOENT: No such file or directory @ unlink_internal - test.txt>
+end
+#@end
 
 #@since 3.1
 --- dirname(filename, level=1)    -> String
@@ -201,15 +210,19 @@ filename の一番後ろのスラッシュより前を文
 字列として返します。スラッシュを含まないファイル名に対しては
 "."(カレントディレクトリ)を返します。
 
-    p File.dirname("dir/file.ext")    # => "dir"
-    p File.dirname("file.ext")        # => "."
+#@samplecode 例
+p File.dirname("dir/file.ext")    # => "dir"
+p File.dirname("file.ext")        # => "."
+#@end
 
 #@if (version >= "1.8.0")
 File.dirname の動作は [[man:dirname(3)]]
 #@#[[url:http://www.unix-systems.org/version3/online.html]] 
 に従います。
-    p File.dirname("foo/bar/")      # => "foo"
-    p File.dirname("foo//bar")      # => "foo"
+#@samplecode 例
+p File.dirname("foo/bar/")      # => "foo"
+p File.dirname("foo//bar")      # => "foo"
+#@end
 #@end
 
 #@since 3.1
@@ -236,12 +249,14 @@ path が相対パスであれば default_dir を基準にします。
 先頭の ~ はホームディレクトリ(環境変数 HOME が使われます)に、
 ~USER はそのユーザのホームディレクトリに展開されます。
 
-  p Dir.getwd                      #=> "/home/matz/work/foo"
-  p ENV["HOME"]                    #=> "/home/matz"
-  p File.expand_path("..")         #=> "/home/matz/work"
-  p File.expand_path("..", "/tmp") #=> "/"
-  p File.expand_path("~")          #=> "/home/matz"
-  p File.expand_path("~foo")       #=> "/home/foo"
+#@samplecode 例
+p Dir.getwd                      #=> "/home/matz/work/foo"
+p ENV["HOME"]                    #=> "/home/matz"
+p File.expand_path("..")         #=> "/home/matz/work"
+p File.expand_path("..", "/tmp") #=> "/"
+p File.expand_path("~")          #=> "/home/matz"
+p File.expand_path("~foo")       #=> "/home/foo"
+#@end
 
 @param path パスを表す文字列を指定します。
 
@@ -258,12 +273,14 @@ dir_string を渡した場合はそのディレクトリを基準とします。
 [[m:File.expand_path]] と異なり、 file_name 先頭が "~" である場合
 それは展開されません。普通のディレクトリ名として処理されます。
 
-  p Dir.getwd                      #=> "/home/matz/work/bar"
-  p ENV["HOME"]                    #=> "/home/matz"
-  p File.absolute_path("..")         #=> "/home/matz/work"
-  p File.absolute_path("..", "/tmp") #=> "/"
-  p File.absolute_path("~")          #=> "/home/matz/work/bar/~"
-  p File.absolute_path("~foo")       #=> "/home/matz/work/bar/~foo"
+#@samplecode 例
+p Dir.getwd                      #=> "/home/matz/work/bar"
+p ENV["HOME"]                    #=> "/home/matz"
+p File.absolute_path("..")         #=> "/home/matz/work"
+p File.absolute_path("..", "/tmp") #=> "/"
+p File.absolute_path("~")          #=> "/home/matz/work/bar/~"
+p File.absolute_path("~foo")       #=> "/home/matz/work/bar/~foo"
+#@end
 
 @see [[m:File.expand_path]]
 
@@ -278,7 +295,7 @@ file_name が絶対パスなら true を、そうでなければ false を返し
 
 @raise TypeError 引数に文字列以外の（暗黙の型変換が行えない）オブジェクトを指定した場合に発生します。
 
-#@samplecode
+#@samplecode 例
 File.absolute_path?("//foo/bar\\baz") # => true
 File.absolute_path?("C:foo\\bar")     # => false
 File.absolute_path?("~")              # => false
@@ -320,7 +337,7 @@ p File.extname("foo.")            # => "."
 
 @see [[m:File.basename]], [[m:File.dirname]]
 
---- fnmatch(pattern, path, flags = 0)     -> bool 
+--- fnmatch(pattern, path, flags = 0)     -> bool
 --- fnmatch?(pattern, path, flags = 0)    -> bool
 
 ファイル名のパターンマッチ [[man:fnmatch(3)]] を行います。
@@ -335,14 +352,14 @@ path が pattern にマッチすれば真を返します。そうでない場合
                `?', `[]' が使用できます。
                [[m:Dir.glob]] とは違って`{}' や `**/' は使用できません。
 #@end
-//emlist{
-    %w(foo foobar bar).each {|f|
-      p File.fnmatch("foo*", f)
-    }
-    # => true
-         true
-         false
-//}
+#@samplecode 例
+%w(foo foobar bar).each {|f|
+  p File.fnmatch("foo*", f)
+}
+# => true
+     true
+     false
+#@end
 
 @param path パスを表す文字列を指定します。
 
@@ -359,46 +376,46 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
  デフォルトでは \ を伴う任意の文字はその文字にマッチしますが、
  このフラグをつけると、\ が普通の文字として扱われます。
-//emlist{
-  p File.fnmatch('\a', 'a')                       # => true
-  p File.fnmatch('\a', '\a', File::FNM_NOESCAPE)  # => true
-//}
+#@samplecode
+p File.fnmatch('\a', 'a')                       # => true
+p File.fnmatch('\a', '\a', File::FNM_NOESCAPE)  # => true
+#@end
  前者で * は、エスケープされているので "*" そのものにマッチ
  します。
-//emlist{
-  p File.fnmatch('\*', 'a')                       # => false
-  p File.fnmatch('\*', '\a', File::FNM_NOESCAPE)  # => true
-//}
+#@samplecode
+p File.fnmatch('\*', 'a')                       # => false
+p File.fnmatch('\*', '\a', File::FNM_NOESCAPE)  # => true
+#@end
   単体の \ は、このフラグの有無に関わらず \ にマッチします。
   (シングルクォート文字列中では \\ は、\ であることに注意)
-//emlist{
-  p File.fnmatch('\\', '\\')                      # => true
-  p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
-//}
+#@samplecode
+p File.fnmatch('\\', '\\')                      # => true
+p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
+#@end
 
 : FNM_PATHNAME
  ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
  シェルのパターンマッチにはこのフラグが使用されています。
-//emlist{
-  p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
-  p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
-  p File.fnmatch('[/]', '/', File::FNM_PATHNAME) # => false
-//}
+#@samplecode
+p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
+p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
+p File.fnmatch('[/]', '/', File::FNM_PATHNAME) # => false
+#@end
 
 : FNM_CASEFOLD
  アルファベットの大小文字を区別せずにパターンマッチを行います。
-//emlist{
-  p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
-//}
+#@samplecode
+p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
+#@end
 
 : FNM_DOTMATCH
  ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
-//emlist{
-  p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
-  p File.fnmatch('?', '.', File::FNM_DOTMATCH)           # => true
-  p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
-  p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
-//}
+#@samplecode
+p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
+p File.fnmatch('?', '.', File::FNM_DOTMATCH)           # => true
+p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
+p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
+#@end
 
 #@since 2.0.0
 : FNM_EXTGLOB
@@ -408,10 +425,10 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
  括弧は入れ子にすることができます。例えば、 {foo,bar{foo,bar}} は foo,
  barfoo, barbar のそれぞれにマッチします。
-//emlist{
-  p File.fnmatch('foo{a,b,c}', 'fooa', File::FNM_EXTGLOB)           # => true
-  p File.fnmatch('{foo,bar{foo,bar}}', 'barfoo', File::FNM_EXTGLOB) # => true
-//}
+#@samplecode
+p File.fnmatch('foo{a,b,c}', 'fooa', File::FNM_EXTGLOB)           # => true
+p File.fnmatch('{foo,bar{foo,bar}}', 'barfoo', File::FNM_EXTGLOB) # => true
+#@end
 #@end
 
 --- ftype(filename)    -> String
@@ -434,10 +451,11 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
-例:
-  File.ftype("testfile")            # => "file"
-  File.ftype("/dev/tty")            # => "characterSpecial"
-  File.ftype("/tmp/.X11-unix/X0")   # => "socket"
+#@samplecode 例
+File.ftype("testfile")            # => "file"
+File.ftype("/dev/tty")            # => "characterSpecial"
+File.ftype("/tmp/.X11-unix/X0")   # => "socket"
+#@end
 
 --- join(*item)    -> String
 
@@ -480,10 +498,11 @@ old を指す new という名前のハードリンクを
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-  IO.write("testfile", "test")
-  File.link("testfile", "testlink")   # => 0
-  IO.read("testlink")                 # => "test"
+#@samplecode 例
+IO.write("testfile", "test")
+File.link("testfile", "testlink")   # => 0
+IO.read("testlink")                 # => "test"
+#@end
 
 --- new(path, mode = "r", perm = 0666)                -> File 
 --- open(path, mode = "r", perm = 0666)               -> File 
@@ -506,19 +525,22 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
-例: File.new による読み込みモードでのファイルオープン
-  f = File.new("testfile", "r")
-  f.class # => File
-  f.close
+#@samplecode 例: File.new による読み込みモードでのファイルオープン
+f = File.new("testfile", "r")
+f.class # => File
+f.close
+#@end
 
-例: File.open による読み込みモードでのファイルオープン
-  f = File.open("testfile", "r")
-  f.class # => File
-  f.close
+#@samplecode 例: File.open による読み込みモードでのファイルオープン
+f = File.open("testfile", "r")
+f.class # => File
+f.close
+#@end
 
-例: File.open による書き込みモードでのファイルオープン
-  File.open("testfile", "w", 0755) { |f| f.print "test" }
-  File.read("testfile")  # => "test"
+#@samplecode 例: File.open による書き込みモードでのファイルオープン
+File.open("testfile", "w", 0755) { |f| f.print "test" }
+File.read("testfile")  # => "test"
+#@end
 
 #@since 1.9.1
 --- path(filename)    -> String
@@ -527,21 +549,22 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 
 @param filename ファイル名を表す文字列か to_path メソッドが定義されたオブジェクトを指定します。
 
-例:
-  require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-  class MyPath
-    def initialize(path)
-      @path = path
-    end
-    def to_path
-      File.absolute_path(@path)
-    end
+class MyPath
+  def initialize(path)
+    @path = path
   end
+  def to_path
+    File.absolute_path(@path)
+  end
+end
 
-  File.path("/dev/null")          # => "/dev/null"
-  File.path(Pathname("/tmp"))     # => "/tmp"
-  File.path(MyPath.new("."))      # => "/Users/user/projects/txt"
+File.path("/dev/null")          # => "/dev/null"
+File.path(Pathname("/tmp"))     # => "/tmp"
+File.path(MyPath.new("."))      # => "/Users/user/projects/txt"
+#@end
 
 #@end
 
@@ -572,12 +595,13 @@ pathname の全てのコンポーネントは存在しなければなりませ�
 
 @raise Errno::ENOENT ファイルが存在しない場合に発生します。
 
-例:
-  ENV["HOME"]                     # => "/home/matz"
-  File.symlink("testfile", "testlink")
-  File.realpath("testfile")       # => "/home/matz/testfile"
-  File.realpath("testlink")       # => "/home/matz/testfile"
-  File.realpath("..", "/tmp")     # => "/"
+#@samplecode 例
+ENV["HOME"]                     # => "/home/matz"
+File.symlink("testfile", "testlink")
+File.realpath("testfile")       # => "/home/matz/testfile"
+File.realpath("testlink")       # => "/home/matz/testfile"
+File.realpath("..", "/tmp")     # => "/"
+#@end
 
 --- realdirpath(pathname, basedir = nil) -> String
 
@@ -608,21 +632,24 @@ pathname の最後のコンポーネントは存在していなくても例外�
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-  begin
-    File.rename("testfile", "testfile.bak")   # => 0
-    File.rename("testfile", "testfile.bak")
-  rescue
-    # 2回目の rename 時にすでに testfile が存在しないため例外が発生する
-    $! # => #<Errno::ENOENT: No such file or directory @ rb_file_s_rename - (testfile, testfile.bak)>
-  end
+#@samplecode 例
+begin
+  File.rename("testfile", "testfile.bak")   # => 0
+  File.rename("testfile", "testfile.bak")
+rescue
+  # 2回目の rename 時にすでに testfile が存在しないため例外が発生する
+  $! # => #<Errno::ENOENT: No such file or directory @ rb_file_s_rename - (testfile, testfile.bak)>
+end
+#@end
 
 --- split(pathname)    -> [String]
 
 pathname を dirname とbasename に分割して、2 要
 素の配列を返します。
 
-  [File.dirname(pathname), File.basename(pathname)]
+#@samplecode
+[File.dirname(pathname), File.basename(pathname)]
+#@end
 
 と同じです。
 
@@ -637,9 +664,10 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
-例:
-  File.stat("testfile").class   # => File::Stat
-  File.stat("testfile").mtime   # => 2017-12-10 01:13:56 +0900
+#@samplecode 例
+File.stat("testfile").class   # => File::Stat
+File.stat("testfile").mtime   # => 2017-12-10 01:13:56 +0900
+#@end
 
 @see [[m:IO#stat]], [[m:File#lstat]]
 
@@ -652,10 +680,11 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
-例:
-  # link.rb は t.rb のシンボリックリンク
-  File.lstat("link.rb") == File.stat("t.rb") # => false
-  File.stat("link.rb")  == File.stat("t.rb") # => true
+#@samplecode 例
+# link.rb は t.rb のシンボリックリンク
+File.lstat("link.rb") == File.stat("t.rb") # => false
+File.stat("link.rb")  == File.stat("t.rb") # => true
+#@end
 
 @see [[m:IO#stat]], [[m:File#lstat]]
 
@@ -672,8 +701,9 @@ old への new という名前のシンボリックリンクを生成します�
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-  File.symlink("testfile", "testlink")   # => 0
+#@samplecode 例
+File.symlink("testfile", "testlink")   # => 0
+#@end
 
 --- truncate(path, length)    -> 0
 
@@ -689,10 +719,11 @@ path で指定されたファイルのサイズを最大 length バイト
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例
-  IO.write("testfile", "1234567890")
-  File.truncate("testfile", 5)   # => 0
-  File.size("testfile")          # => 5
+#@samplecode 例
+IO.write("testfile", "1234567890")
+File.truncate("testfile", 5)   # => 0
+File.size("testfile")          # => 5
+#@end
 
 --- umask           -> Integer
 
@@ -731,17 +762,19 @@ File.umask         # => 6
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
-例: Time を指定
-  atime = Time.new(2018, 1, 2, 3, 4, 5)
-  mtime = Time.new(2018, 2, 3, 4, 5, 6)
-  File.utime(atime, mtime, "testfile")  # => 1
-  File.atime("testfile")                # => 2018-01-02 03:04:05 +0900
-  File.mtime("testfile")                # => 2018-02-03 04:05:06 +0900
+#@samplecode 例: Time を指定
+atime = Time.new(2018, 1, 2, 3, 4, 5)
+mtime = Time.new(2018, 2, 3, 4, 5, 6)
+File.utime(atime, mtime, "testfile")  # => 1
+File.atime("testfile")                # => 2018-01-02 03:04:05 +0900
+File.mtime("testfile")                # => 2018-02-03 04:05:06 +0900
+#@end
 
-例: 経過秒数で指定
-  File.utime(1, 2, "testfile")  # => 1
-  File.atime("testfile")                # => 1970-01-01 09:00:01 +0900
-  File.mtime("testfile")                # => 1970-01-01 09:00:02 +0900
+#@samplecode 例: 経過秒数で指定
+File.utime(1, 2, "testfile")  # => 1
+File.atime("testfile")                # => 1970-01-01 09:00:01 +0900
+File.mtime("testfile")                # => 1970-01-01 09:00:02 +0900
+#@end
 
 #@since 2.5.0
 @see [[m:File.lutime]]
@@ -969,10 +1002,10 @@ path が全てのユーザから読めるならばそのファイルのパーミ
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
-例:
-
-   m = File.world_readable?("/etc/passwd")
-   "%o" % m                               # => "644"
+#@samplecode 例
+m = File.world_readable?("/etc/passwd")
+"%o" % m                               # => "644"
+#@end
 
 --- world_writable?(path)    -> bool
 
@@ -983,10 +1016,10 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
-例:
-
-   m = File.world_writable?("/tmp")
-   "%o" % m                               #=> "777"
+#@samplecode 例
+m = File.world_writable?("/tmp")
+"%o" % m                               #=> "777"
+#@end
 #@end
 
 #@since 2.3.0
@@ -1000,9 +1033,10 @@ path が全てのユーザから書き込めるならば、そのファイルの
             ファイル作成と同様にプロセスの umask によって変更されます。
             作成されたファイルの許可モードは (mode & ~umask) になります。
 
-例:
-  File.mkfifo("testfile", 0666)
-  File.ftype("testfile")          # => "fifo"
+#@samplecode 例
+File.mkfifo("testfile", 0666)
+File.ftype("testfile")          # => "fifo"
+#@end
 
 #@end
 
@@ -1086,11 +1120,11 @@ File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 
 ファイルのサイズを返します。
 
-例:
-
-   File.open("/dev/null") do |f|
-     f.size   #=> 0
-   end
+#@samplecode 例
+File.open("/dev/null") do |f|
+  f.size   #=> 0
+end
+#@end
 
 @raise IOError 自身が close されている場合に発生します。
 
@@ -1112,10 +1146,10 @@ File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-例:
-
-   f = File.new("out", "w");
-   f.chmod(0644)   #=> 0
+#@samplecode 例
+f = File.new("out", "w");
+f.chmod(0644)   #=> 0
+#@end
 
 --- chown(owner, group)    -> 0
 
@@ -1190,54 +1224,54 @@ flock は false を返します。
   * 他のプロセスが排他ロックをすでに行っている場合にロックを行う
   * 他のプロセスがロックしている状態で排他ロックを行う
 
-例1:
+#@samplecode 例1:
+# 書き込みロック(write lock)を使用してカウンタを更新。
+# ロック前にファイルを切り詰めてしまうので、
+# モードに"w"を使ってはいけません。
+File.open("counter", File::RDWR|File::CREAT, 0644) {|f|
+  f.flock(File::LOCK_EX)
+  value = f.read.to_i + 1
+  f.rewind
+  f.write("#{value}\n")
+  f.flush
+  f.truncate(f.pos)
+}
 
-    # 書き込みロック(write lock)を使用してカウンタを更新。
-    # ロック前にファイルを切り詰めてしまうので、
-    # モードに"w"を使ってはいけません。
-    File.open("counter", File::RDWR|File::CREAT, 0644) {|f|
-      f.flock(File::LOCK_EX)
-      value = f.read.to_i + 1
-      f.rewind
-      f.write("#{value}\n")
-      f.flush
-      f.truncate(f.pos)
-    }
+# 読み込みロック(read lock)を使用してカウンタを読み込み。
+File.open("counter", "r") {|f|
+  f.flock(File::LOCK_SH)
+  p f.read
+}
+#@end
 
-    # 読み込みロック(read lock)を使用してカウンタを読み込み。
-    File.open("counter", "r") {|f|
-      f.flock(File::LOCK_SH)
-      p f.read
-    }
+#@samplecode 例2:
+f = File.open("/tmp/foo", "w")
 
-例2:
+f.flock(File::LOCK_EX)
+puts "locked by process1"
 
-    f = File.open("/tmp/foo", "w")
+fork {
+  f = File.open("/tmp/foo", "r")
+  f.flock(File::LOCK_SH)
+  puts "locked by process2"
+  sleep 5
+  puts "unlocked by process2"
+}
 
-    f.flock(File::LOCK_EX)
-    puts "locked by process1"
+sleep 5
 
-    fork {
-      f = File.open("/tmp/foo", "r")
-      f.flock(File::LOCK_SH)
-      puts "locked by process2"
-      sleep 5
-      puts "unlocked by process2"
-    }
+f.flock(File::LOCK_UN)
+puts "unlocked by process1"
+sleep 1 # <- 子プロセスが確実に先にロックするための sleep
+f.flock(File::LOCK_EX)
+puts "re-locked by process1"
 
-    sleep 5
-
-    f.flock(File::LOCK_UN)
-    puts "unlocked by process1"
-    sleep 1 # <- 子プロセスが確実に先にロックするための sleep
-    f.flock(File::LOCK_EX)
-    puts "re-locked by process1"
-
-    => locked by process1
-       unlocked by process1
-       locked by process2
-       unlocked by process2
-       re-locked by process1
+# => locked by process1
+#    unlocked by process1
+#    locked by process2
+#    unlocked by process2
+#    re-locked by process1
+#@end
 
 --- path    -> String
 #@since 1.9.1
@@ -1257,12 +1291,14 @@ flock は false を返します。
 [[m:File::Constants::TMPFILE]]オプション付きで作成されていたりする場合です。
 #@end
 
-   File.open("testfile") {|f| f.path }                        #=> "testfile"
-   File.open("/tmp/../tmp/xxx", "w") {|f| f.path }            #=> "/tmp/../tmp/xxx"
+#@samplecode 例
+File.open("testfile") {|f| f.path }                        #=> "testfile"
+File.open("/tmp/../tmp/xxx", "w") {|f| f.path }            #=> "/tmp/../tmp/xxx"
 #@since 2.5.0
-   File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } # IOError: File is unnamed (TMPFILE?)
+File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } # IOError: File is unnamed (TMPFILE?)
 #@else
-   File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } #=> "/tmp"
+File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } #=> "/tmp"
+#@end
 #@end
 
 --- lstat    -> File::Stat
@@ -1275,12 +1311,13 @@ flock は false を返します。
 
 @raise IOError 自身が close されている場合に発生します。
 
-例:
-  # testlink は testfile のシンボリックリンク
-  File.open("testlink") do |f|
-      p f.lstat == File.stat("testfile")  # => false
-      p f.stat == File.stat("testfile")   # => true
-  end
+#@samplecode 例
+# testlink は testfile のシンボリックリンク
+File.open("testlink") do |f|
+    p f.lstat == File.stat("testfile")  # => false
+    p f.stat == File.stat("testfile")   # => true
+end
+#@end
 
 @see [[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]]
 
