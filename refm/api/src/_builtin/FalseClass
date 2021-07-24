@@ -15,17 +15,19 @@ false は nil オブジェクトとともに偽を表し、
 
 & は再定義可能な演算子に分類されていますので、通常は false & other の形で使われます。
 
-   p false & true     #=> false
-   p false & false    #=> false
-   p false & nil      #=> false
-   p false & (1 == 1) #=> false
-   p false & (1 + 1)  #=> false
+#@samplecode 例
+p false & true     #=> false
+p false & false    #=> false
+p false & nil      #=> false
+p false & (1 == 1) #=> false
+p false & (1 + 1)  #=> false
 
-   p false.&(true)    #=> false
-   p false.&(false)   #=> false
-   p false.&(nil)     #=> false
-   p false.&(1 == 1)  #=> false
-   p false.&(1 + 1)   #=> false
+p false.&(true)    #=> false
+p false.&(false)   #=> false
+p false.&(nil)     #=> false
+p false.&(1 == 1)  #=> false
+p false.&(1 + 1)   #=> false
+#@end
 
 --- |(other)    -> bool
 
@@ -35,17 +37,19 @@ other が真なら true を, 偽なら false を返します。
 
 | は再定義可能な演算子に分類されていますので、通常は false | other の形で使われます。
 
-   p false | true     #=> true
-   p false | false    #=> false
-   p false | nil      #=> false
-   p false | (1 == 1) #=> true
-   p false | (1 + 1)  #=> true
+#@samplecode 例
+p false | true     #=> true
+p false | false    #=> false
+p false | nil      #=> false
+p false | (1 == 1) #=> true
+p false | (1 + 1)  #=> true
 
-   p false.|(true)    #=> true
-   p false.|(false)   #=> false
-   p false.|(nil)     #=> false
-   p false.|(1 == 1)  #=> true
-   p false.|(1 + 1)   #=> true
+p false.|(true)    #=> true
+p false.|(false)   #=> false
+p false.|(nil)     #=> false
+p false.|(1 == 1)  #=> true
+p false.|(1 + 1)   #=> true
+#@end
 
 --- ^(other)    -> bool
 
@@ -55,17 +59,19 @@ other が真なら true を, 偽なら false を返します。
 
 ^ は再定義可能な演算子に分類されていますので、通常は false ^ other の形で使われます。
 
-   p false ^ true     #=> true
-   p false ^ false    #=> false
-   p false ^ nil      #=> false
-   p false ^ (1 == 1) #=> true
-   p false ^ (1 + 1)  #=> true
+#@samplecode 例
+p false ^ true     #=> true
+p false ^ false    #=> false
+p false ^ nil      #=> false
+p false ^ (1 == 1) #=> true
+p false ^ (1 + 1)  #=> true
 
-   p false.^(true)    #=> true
-   p false.^(false)   #=> false
-   p false.^(nil)     #=> false
-   p false.^(1 == 1)  #=> true
-   p false.^(1 + 1)   #=> true
+p false.^(true)    #=> true
+p false.^(false)   #=> false
+p false.^(nil)     #=> false
+p false.^(1 == 1)  #=> true
+p false.^(1 + 1)   #=> true
+#@end
 
 --- to_s    -> String
 #@since 2.0.0
@@ -74,6 +80,6 @@ other が真なら true を, 偽なら false を返します。
 
 常に文字列 "false" を返します。
 
-例:
-
-  false.to_s      # => "false"
+#@samplecode 例
+false.to_s      # => "false"
+#@end
