@@ -50,8 +50,8 @@ p Gem::Requirement::OPS["~>"].call(Gem::Version.new('3.1'), Gem::Version.new('3.
 @return 上記以外の値を input に指定するとデフォルト値を返します。
 
 #@samplecode
-p Gem::Requirement.create("~> 3.2.1")
-# => #<Gem::Requirement:0x000000000096a578 @requirements=[["~>", #<Gem::Version "3.2.1">]]>
+pp Gem::Requirement.create("~> 3.2.1")
+# => Gem::Requirement.new(["~> 3.2.1"])
 #@end
 
 @see [[m:Gem::Requirement.new]], [[m:Gem::Requirement.default]]
@@ -61,8 +61,8 @@ p Gem::Requirement.create("~> 3.2.1")
 ゼロ以上 ( '>= 0' ) を指定して作成された [[c:Gem::Requirement]] のインスタンスを返します。
 
 #@samplecode
-p Gem::Requirement.default
-# => #<Gem::Requirement:0x0000000000a1d7b8 @requirements=[[">=", #<Gem::Version "0">]]>
+pp Gem::Requirement.default
+# => Gem::Requirement.new([">= 0"])
 #@end
 
 --- new(requirements) -> Gem::Requirement
@@ -72,8 +72,8 @@ p Gem::Requirement.default
 @param requirements 文字列か配列か [[c:Gem::Version]] のインスタンスを指定します。
 
 #@samplecode
-p Gem::Requirement.new("~> 3.2.1")
-# => #<Gem::Requirement:0x000000000096a578 @requirements=[["~>", #<Gem::Version "3.2.1">]]>
+pp Gem::Requirement.new("~> 3.2.1")
+# => Gem::Requirement.new(["~> 3.2.1"])
 #@end
 
 @see [[m:Gem::Requirement#parse]], [[m:Gem::Requirement.create]]
