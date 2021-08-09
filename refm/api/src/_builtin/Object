@@ -671,7 +671,6 @@ p true.object_id #=> 20
 の関係を必ず満たしていなければいけません。eql? を再定義した時には必ずこちらも合わせ
 て再定義してください。
 
-デフォルトでは、[[m:Object#object_id]] と同じ値を返します。
 ただし、[[c:Integer]], [[c:Symbol]], [[c:String]] だけは組込みのハッ
 シュ関数が使用されます(これを変えることはできません)。
 
@@ -691,7 +690,7 @@ p :ruby.hash  #=> 3979895509189707770
 p :ruby.hash  #=> 3979895509189707770
 #@end
 
-@see [[m:Object#eql?]],[[m:BasicObject#__id__]]
+@see [[m:Object#eql?]]
 
 --- ===(other) -> bool
 
