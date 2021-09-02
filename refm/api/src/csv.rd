@@ -1726,7 +1726,7 @@ CSV.generate_line(self, options) と同様です。
 
 Array オブジェクトを 1 行の CSV 文字列に変換するためのショートカットです。
 
-@param option [[m:CSV.generate_line]] と同様のオプションを指定します。
+@param options [[m:CSV.generate_line]] と同様のオプションを指定します。
 
 #@samplecode
 require 'csv'
