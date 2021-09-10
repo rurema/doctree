@@ -671,7 +671,7 @@ Foo.const_set('foo', 1) # => NameError: wrong constant name foo
 name で指定した定数の定義を含むソースコードのファイル名と行番号を配列で返します。
 
 @param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
-@param value true を指定するとスーパークラスや include したモジュールで定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
+@param inherited true を指定するとスーパークラスや include したモジュールで定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
 @return ソースコードのファイル名と行番号を配列で返します。
         指定した定数が見つからない場合は nil を返します。
         定数は見つかったがソースファイルが見つからなかった場合は空の配列を返します。
