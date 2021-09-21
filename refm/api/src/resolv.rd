@@ -7,13 +7,13 @@ DNS モジュールを使うことで、さまざまなリソースを直接ル�
 なお、単にホスト名から IP アドレスを得たいだけであれば、
 [[lib:socket]] ライブラリの [[m:IPSocket.getaddress]] などが使用できます。
 
-=== 例:
-  require "resolv"
-  Resolv.getaddress("www.ruby-lang.org")
-  Resolv.getname("210.251.121.214").to_s
-  Resolv::DNS.new.getresources("www.ruby-lang.org", Resolv::DNS::Resource::IN::A).collect {|r| r.address}
-  Resolv::DNS.new.getresources("ruby-lang.org", Resolv::DNS::Resource::IN::MX).collect {|r| [r.exchange.to_s, r.preference]}
-
+#@samplecode 例:
+require "resolv"
+Resolv.getaddress("www.ruby-lang.org")
+Resolv.getname("210.251.121.214").to_s
+Resolv::DNS.new.getresources("www.ruby-lang.org", Resolv::DNS::Resource::IN::A).collect {|r| r.address}
+Resolv::DNS.new.getresources("ruby-lang.org", Resolv::DNS::Resource::IN::MX).collect {|r| [r.exchange.to_s, r.preference]}
+#@end
 
 === Bugs
 #@#NIS is not supported.
@@ -49,9 +49,11 @@ resolvers の各要素は each_address と each_name という
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
-  require "resolv"
-  Resolv.getaddress("localhost") #=> "127.0.0.1"
-  Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
+#@samplecode
+require "resolv"
+Resolv.getaddress("localhost") #=> "127.0.0.1"
+Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
+#@end
 
 @param name ホスト名を文字列で与えます。
 @raise Resolv::ResolvError ルックアップに失敗したときに発生します。
@@ -79,8 +81,10 @@ IP アドレス address のホスト名をルックアップし、
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
-  require "resolv"
-  Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
+#@samplecode
+require "resolv"
+Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
+#@end
 
 @param address IPアドレスを文字列で与えます。
 @raise Resolv::ResolvError ルックアップに失敗したときに発生します。
@@ -267,10 +271,12 @@ resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
 というキーが利用可能です。
 それぞれの意味は [[man:resolv.conf(5)]] を参照してください。
 
-  require "resolv"
-   Resolv::DNS.new(:nameserver => ['210.251.121.21'],
-                   :search => ['ruby-lang.org'],
-                   :ndots => 1)
+#@samplecode
+require "resolv"
+Resolv::DNS.new(:nameserver => ['210.251.121.21'],
+                :search => ['ruby-lang.org'],
+                :ndots => 1)
+#@end
 
 #@if (version <= "1.8.1")
 @param resolv_conf DNSの設定ファイル名を文字列で与えます
@@ -444,9 +450,9 @@ DNSリゾルバを閉じます。
 
 DNSリゾルバのタイムアウト時間を設定します。
 
-例:
-
-  dns.timeouts = 3
+#@samplecode
+dns.timeouts = 3
+#@end
 
 @param values タイムアウト時間(秒)を数値か数値の配列で指定します。配列
               を指定した場合は応答を受信するまでの再試行時のタイムアウト
@@ -1506,16 +1512,16 @@ labels は [[c:Resolv::DNS::Label::Str]] の配列を与えます。
 --- subdomain_of?(other) -> bool
 other が self のサブドメインであるかどうかを返します。
 
-=== 例
-  require "resolv"
-  domain = Resolv::DNS::Name.create("y.z")
-  p Resolv::DNS::Name.create("w.x.y.z").subdomain_of?(domain) #=> true
-  p Resolv::DNS::Name.create("x.y.z").subdomain_of?(domain) #=> true
-  p Resolv::DNS::Name.create("y.z").subdomain_of?(domain) #=> false
-  p Resolv::DNS::Name.create("z").subdomain_of?(domain) #=> false
-  p Resolv::DNS::Name.create("x.y.z.").subdomain_of?(domain) #=> false
-  p Resolv::DNS::Name.create("w.z").subdomain_of?(domain) #=> false
-  
+#@samplecode
+require "resolv"
+domain = Resolv::DNS::Name.create("y.z")
+p Resolv::DNS::Name.create("w.x.y.z").subdomain_of?(domain) #=> true
+p Resolv::DNS::Name.create("x.y.z").subdomain_of?(domain) #=> true
+p Resolv::DNS::Name.create("y.z").subdomain_of?(domain) #=> false
+p Resolv::DNS::Name.create("z").subdomain_of?(domain) #=> false
+p Resolv::DNS::Name.create("x.y.z.").subdomain_of?(domain) #=> false
+p Resolv::DNS::Name.create("w.z").subdomain_of?(domain) #=> false
+#@end
 
 = class Resolv::DNS::Resource < Resolv::DNS::Query
 DNSリソースを表す抽象クラスです。
