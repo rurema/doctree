@@ -1024,9 +1024,12 @@ p Foo.new.send(methods[3])      # => "baz"
 @see [[m:Object#public_send]], [[m:BasicObject#__send__]], [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
 --- public_send(name, *args) -> object
+--- public_send(name, *args) { .... } -> object
 
 オブジェクトの public メソッド name を args を引数にして呼び出し、メソッ
 ドの実行結果を返します。
+
+ブロック付きで呼ばれたときはブロックもそのまま引き渡します。
 
 #@samplecode
 1.public_send(:+, 2)  # => 3

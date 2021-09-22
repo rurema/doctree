@@ -900,7 +900,7 @@ File.umask         # => 6
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- size?(path)    -> bool
+--- size?(path)    -> Integer | nil
 
 [[m:FileTest.#size?]] と同じです。
 

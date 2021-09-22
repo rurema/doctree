@@ -1714,3 +1714,80 @@ p csv.first
 
 #@include(csv/CSV__Row)
 #@include(csv/CSV__Table)
+
+
+= reopen Array
+
+== Instance Methods
+
+--- to_csv(**options) -> String
+
+CSV.generate_line(self, options) と同様です。
+
+Array オブジェクトを 1 行の CSV 文字列に変換するためのショートカットです。
+
+@param options [[m:CSV.generate_line]] と同様のオプションを指定します。
+
+#@samplecode
+require 'csv'
+
+p [1, 'Matz', :Ruby, Date.new(1965, 4, 14)].to_csv                                 # => "1,Matz,Ruby,1965-04-14\n"
+p [1, 'Matz', :Ruby, Date.new(1965, 4, 14)].to_csv(col_sep: ' ', row_sep: "\r\n")  # => "1 Matz Ruby 1965-04-14\r\n"
+#@end
+
+#@since 3.0.0
+Ruby 3.0 (CSV 3.1.9) から、次のオプションが使えるようになりました。
+
+#@samplecode
+require 'csv'
+
+puts [1, nil].to_csv                             # => 1,
+puts [1, nil].to_csv(write_nil_value: "N/A")     # => 1,N/A
+puts [2, ""].to_csv                              # => 2,""
+puts [2, ""].to_csv(write_empty_value: "BLANK")  # => 2,BLANK
+#@end
+#@end
+
+@see [[m:CSV.generate_line]]
+
+
+= reopen String
+
+== Instance Methods
+
+--- parse_csv(**options) -> [String]
+
+CSV.parse_line(self, options) と同様です。
+
+1 行の CSV 文字列を、文字列の配列に変換するためのショートカットです。
+
+@param options [[m:CSV.new]] と同様のオプションを指定します。
+
+#@samplecode
+require "csv"
+
+p "Matz,Ruby\n".parse_csv                                   # => ["Matz", "Ruby"]
+p "Matz|Ruby\r\n".parse_csv(col_sep: '|', row_sep: "\r\n")  # => ["Matz", "Ruby"]
+#@end
+
+Ruby 2.6 (CSV 3.0.2) から、次のオプションが使えるようになりました。
+
+#@samplecode
+require 'csv'
+
+p "1,,3\n".parse_csv                        # => ["1", nil, "3"]
+p "1,,3\n".parse_csv(nil_value: Float::NAN) # => ["1", NaN, "3"]
+#@end
+
+#@since 2.7.0
+Ruby 2.7 (CSV 3.1.2) から、次のオプションが使えるようになりました。
+
+#@samplecode
+require 'csv'
+
+p "Matz,   Ruby\n".parse_csv               # => ["Matz", "   Ruby"]
+p "Matz,   Ruby\n".parse_csv(strip: true)  # => ["Matz", "Ruby"]
+#@end
+#@end
+
+@see [[m:CSV.new]], [[c:CSV.parse_line]]

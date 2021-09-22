@@ -5,8 +5,10 @@ category Unix
 
 === 使い方
 
-  require 'etc'
-  p Etc.getlogin
+#@samplecode
+require 'etc'
+p Etc.getlogin
+#@end
 
 = module Etc
 
@@ -80,8 +82,10 @@ getlogin は [[man:su(1)]] などでログイン時のユーザとは異なる�
 
 たとえば、環境変数 USER などもあわせて、以下のようにフォールバックできます。
 
-  require "etc"
-  login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
+#@samplecode
+require "etc"
+login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
+#@end
 
 
 --- getpwnam(name) -> Struct::Passwd
@@ -162,8 +166,10 @@ name という名前のグループエントリを返します。
 
 システムの設定ディレクトリを返します。
 
-  require 'etc'
-  p Etc.sysconfdir # => "/etc"
+#@samplecode
+require 'etc'
+p Etc.sysconfdir # => "/etc"
+#@end
 
 主に "/etc" を返しますが、Ruby をソースからビルドした場合は異なるディレ
 クトリを返す場合があります。例えば、Ruby を /usr/local にインストールし
@@ -174,8 +180,10 @@ Windows では常にシステムで提供されたディレクトリを返しま
 
 システムのテンポラリディレクトリを返します。
 
-  require 'etc'
-  p Etc.systmpdir # => "/tmp"
+#@samplecode
+require 'etc'
+p Etc.systmpdir # => "/tmp"
+#@end
 
 #@end
 #@since 2.2.0
@@ -186,17 +194,17 @@ Windows では常にシステムで提供されたディレクトリを返しま
 @return 少なくとも :sysname, :nodename, :release, :version, :machine の
         5 つのキーを持つ [[c:Hash]] を返します。
 
-例:
+#@samplecode 例
+require 'etc'
+require 'pp'
 
-  require 'etc'
-  require 'pp'
-
-  pp Etc.uname
-  # => {:sysname=>"Linux",
-  #     :nodename=>"boron",
-  #     :release=>"2.6.18-6-xen-686",
-  #     :version=>"#1 SMP Thu Nov 5 19:54:42 UTC 2009",
-  #     :machine=>"i686"}
+pp Etc.uname
+# => {:sysname=>"Linux",
+#     :nodename=>"boron",
+#     :release=>"2.6.18-6-xen-686",
+#     :version=>"#1 SMP Thu Nov 5 19:54:42 UTC 2009",
+#     :machine=>"i686"}
+#@end
 
 --- sysconf(name) -> Integer | nil
 
@@ -208,12 +216,14 @@ Windows では常にシステムで提供されたディレクトリを返しま
 
 @param name [[c:Etc]] モジュールの SC_ で始まる定数のいずれかを指定します。
 
-  require "etc"
-  Etc.sysconf(Etc::SC_ARG_MAX) # => 2097152
+#@samplecode
+require "etc"
+Etc.sysconf(Etc::SC_ARG_MAX) # => 2097152
 
-  # Number of processors.
-  # It is not standardized.
-  Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
+# Number of processors.
+# It is not standardized.
+Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
+#@end
 
 --- confstr(name) -> String | nil
 
@@ -224,21 +234,23 @@ Windows では常にシステムで提供されたディレクトリを返しま
 引数 name に対応する設定が行われていない状態の場合は nil を返します。
 ([[man:confstr(3)]] が -1 を返し、errno が設定されていない場合)
 
-  require "etc"
-  Etc.confstr(Etc::CS_PATH) # => "/bin:/usr/bin"
+#@samplecode
+require "etc"
+Etc.confstr(Etc::CS_PATH) # => "/bin:/usr/bin"
 
-  # GNU/Linux
-  Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
-  Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
+# GNU/Linux
+Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
+Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
+#@end
 
 --- nprocessors -> Integer
 
 有効な CPU コア数を返します。
 
-例:
-
-  require 'etc'
-  p Etc.nprocessors #=> 4
+#@samplecode
+require 'etc'
+p Etc.nprocessors #=> 4
+#@end
 
 == Constants
 
@@ -484,12 +496,12 @@ alias Etc::Group
 
 --- name -> String
 
-グループ名を設定します。
+グループ名を返します。
 
 
 --- name=(name)
 
-グループ名を返します。
+グループ名を設定します。
 
 --- passwd -> String
 
@@ -668,8 +680,10 @@ alias Etc::Passwd
 
 @param name [[c:Etc]] モジュールの PC_ で始まる定数のいずれかを指定します。
 
-  require 'etc'
-  IO.pipe {|r, w|
-    p w.pathconf(Etc::PC_PIPE_BUF) # => 4096
-  }
+#@samplecode
+require 'etc'
+IO.pipe {|r, w|
+  p w.pathconf(Etc::PC_PIPE_BUF) # => 4096
+}
+#@end
 #@end

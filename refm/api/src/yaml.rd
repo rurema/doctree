@@ -103,26 +103,28 @@ require "yaml" した場合、特に何もしなければ
 デフォルト以外のバックエンドを使用したい場合、[[lib:yaml]] ライブラリを
 require する前に [[lib:psych]] か [[lib:syck]] を require してください。
 
-例1: [[lib:psych]] を使用する場合
+#@samplecode 例1: psych を使用する場合
+require "psych"
+require "yaml"
+YAML.load("...")
+#@end
 
-  require "psych"
-  require "yaml"
-  YAML.load(...)
-
-例2: [[lib:syck]] を使用する場合
-
-  require "syck"
-  require "yaml"
-  YAML.load(...)
+#@samplecode 例2: syck を使用する場合
+require "syck"
+require "yaml"
+YAML.load("...")
+#@end
 
 また、[[lib:yaml]] を require した後でも、YAML::ENGINE.yamler に
 "psych" を代入する事で [[lib:psych]] を使用できます。([[lib:syck]] の場
 合も同様です)
 
-  require "yaml"
-  require "psych"
-  YAML::ENGINE.yamler = "psych"
-  YAML.load(...)
+#@samplecode
+require "yaml"
+require "psych"
+YAML::ENGINE.yamler = "psych"
+YAML.load("...")
+#@end
 
 #@end
 #@end
@@ -132,14 +134,14 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
 !ruby/sym :foo などのようにタグを指定することで、読み込み時に記述した値
 の型を指定できます。
 
-例:
-
-  require 'yaml'
-  p YAML.load(<<EOS)
+#@samplecode 例
+require 'yaml'
+p YAML.load(<<~EOS)
   ---
   !ruby/sym :foo
-  EOS
-  # => :foo
+EOS
+# => :foo
+#@end
 
 [[lib:yaml]] では、Ruby 向けに以下のローカルタグを扱えます。
 
@@ -156,66 +158,66 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
  * !ruby/exception: 例外オブジェクト
  * !ruby/object:<クラス名>: 上記以外のオブジェクト
 
-例:
-
-  require 'yaml'
-  p YAML.load(<<EOS)
+#@samplecode 例
+require 'yaml'
+p YAML.load(<<~EOS)
   ---
   array: !ruby/array [1, 2, 3]
   hash: !ruby/hash {foo: 1, bar: 2}
   regexp: !ruby/regexp /foo|bar/
   range: !ruby/range 1..10
-  EOS
-  # => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
+EOS
+# => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
+#@end
 
 これらは tag:ruby.yaml.org,2002:array のように指定する事もできます。
 
-例:
-
-  require 'yaml'
-  p YAML.load(<<EOS)
+#@samplecode 例
+require 'yaml'
+p YAML.load(<<~EOS)
   ---
   array: !tag:ruby.yaml.org,2002:array [1, 2, 3]
   hash: !tag:ruby.yaml.org,2002:hash {foo: 1, bar: 2}
-  EOS
-  # => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+EOS
+# => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+#@end
 
 自分で定義したクラスなどは !ruby/object:<クラス名> を指定します。なお、
 読み込む場合には既にそのクラスが定義済みでないと読み込めません。
 
 また、キーと値を指定する事でインスタンス変数を代入できます。
 
-例1:
+#@samplecode 例1
+require 'yaml'
 
-  require 'yaml'
-  
-  class Foo
-    def initialize
-      @bar = "test"
-    end
+class Foo
+  def initialize
+    @bar = "test"
   end
-  
-  p YAML.load(<<EOS)
+end
+
+p YAML.load(<<~EOS)
   ---
   !ruby/object:Foo
   bar: "test.modified"
-  EOS
-  # => #<Foo:0xf743f754 @bar="test.modified">
+EOS
+# => #<Foo:0xf743f754 @bar="test.modified">
+#@end
 
-例2:
+#@samplecode 例2
+require 'yaml'
 
-  require 'yaml'
-  
-  module Foo
-    class Bar
-    end
+module Foo
+  class Bar
   end
-  
-  p YAML.load(<<EOS)
+end
+
+p YAML.load(<<~EOS)
   ---
-  !ruby/object:Foo::Bar
-  EOS
-  # => #<Foo::Bar:0xf73907b8>
+  !ruby/object:Foo
+EOS
+# => #<Foo::Bar:0xf73907b8>
+#@end
 
 #@until 2.0.0
 また、YAML 形式に変換する際のタグを変更したい場合、to_yaml_type メソッ
@@ -224,18 +226,18 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してくださ�
 ([[lib:syck]] のみ)
 #@end
 
-例:
-
+#@samplecode 例
 #@since 1.9.3
-  require "syck"
+require "syck"
 #@end
-  require "yaml"
-  class Foo
-    def to_yaml_type
-      return "!tag:example.com,2002:foo"
-    end
+require "yaml"
+class Foo
+  def to_yaml_type
+    return "!tag:example.com,2002:foo"
   end
-  p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
+end
+p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
+#@end
 #@end
 
 === 注意
@@ -285,7 +287,9 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクトです。そ�
 クトも同様に実体は別のオブジェクトです。もし確認したいメソッドの記述が
 見つからない場合は、[[lib:psych]] ライブラリを確認してください。
 
-  require "yaml"
+#@samplecode 例
+require "yaml"
 
-  p YAML                # => Psych
-  p YAML::Stream        # => Psych::Stream
+p YAML                # => Psych
+p YAML::Stream        # => Psych::Stream
+#@end
