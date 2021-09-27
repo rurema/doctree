@@ -491,6 +491,17 @@ CP437 エンコーディング。
 @see [[url:https://en.wikipedia.org/wiki/Code_page_437]],
      [[m:Encoding::CP869]]
 
+#@since 3.0.0
+--- IBM720 -> Encoding
+--- CP720 -> Encoding
+
+CP720 エンコーディング。
+
+アラビア語を取り扱う 8bit single-byteエンコーディングです。
+
+@see [[url:https://en.wikipedia.org/wiki/Code_page_720]]
+
+#@end
 
 --- IBM737 -> Encoding
 --- CP737 -> Encoding
