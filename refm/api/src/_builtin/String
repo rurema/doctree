@@ -1802,10 +1802,12 @@ p "foo".intern.to_s == "foo"   # => true
 文字列の文字数を返します。バイト数を知りたいときは bytesize メソッドを使ってください。
 
 #@samplecode 例
-"test".length   # => 4
-"test".size     # => 4
-"テスト".length   # => 3
-"テスト".size     # => 3
+"test".length          # => 4
+"test".size            # => 4
+"テスト".length         # => 3
+"テスト".size           # => 3
+"\x80\u3042".length    # => 2
+"\x80\u3042".size      # => 2
 #@end
 
 @see [[m:String#bytesize]]
