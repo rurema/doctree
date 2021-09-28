@@ -8,44 +8,43 @@
 [[m:UnboundMethod#bind]] によりレシーバを
 割り当てた [[c:Method]] オブジェクトを作ることができます。
 
-例: [[c:Method]] クラスの冒頭にある例を UnboundMethod で書くと以下のようになります。
+#@samplecode 例: Method クラスの冒頭にある例を UnboundMethod で書くと以下のようになります。
+class Foo
+  def foo() "foo" end
+  def bar() "bar" end
+  def baz() "baz" end
+end
 
-  class Foo
-    def foo() "foo" end
-    def bar() "bar" end
-    def baz() "baz" end
+# 任意のキーとメソッドの関係をハッシュに保持しておく
+# レシーバの情報がここにはないことに注意
+methods = {1 => Foo.instance_method(:foo),
+           2 => Foo.instance_method(:bar),
+           3 => Foo.instance_method(:baz)}
+
+# キーを使って関連するメソッドを呼び出す
+# レシーバは任意(Foo クラスのインスタンスでなければならない)
+p methods[1].bind(Foo.new).call      # => "foo"
+p methods[2].bind(Foo.new).call      # => "bar"
+p methods[3].bind(Foo.new).call      # => "baz"
+#@end
+
+#@samplecode 例: 以下はメソッドの再定義を UnboundMethod を使って行う方法です。普通は alias や super を使います。
+class Foo
+  def foo
+    p :foo
   end
-
-  # 任意のキーとメソッドの関係をハッシュに保持しておく
-  # レシーバの情報がここにはないことに注意
-  methods = {1 => Foo.instance_method(:foo),
-             2 => Foo.instance_method(:bar),
-             3 => Foo.instance_method(:baz)}
-
-  # キーを使って関連するメソッドを呼び出す
-  # レシーバは任意(Foo クラスのインスタンスでなければならない)
-  p methods[1].bind(Foo.new).call      # => "foo"
-  p methods[2].bind(Foo.new).call      # => "bar"
-  p methods[3].bind(Foo.new).call      # => "baz"
-
-例: 以下はメソッドの再定義を UnboundMethod を使って行う方法です。普通は
-alias や super を使います。
-
-  class Foo
-    def foo
-      p :foo
-    end
-    @@orig_foo = instance_method :foo
-    def foo
-      p :bar
-      @@orig_foo.bind(self).call
-    end
+  @@orig_foo = instance_method :foo
+  def foo
+    p :bar
+    @@orig_foo.bind(self).call
   end
+end
 
-  Foo.new.foo
+Foo.new.foo
 
-  => :bar
-     :foo
+# => :bar
+#    :foo
+#@end
 
 == Instance Methods
 
@@ -63,41 +62,43 @@ NOTE: Ruby 1.8.xでモジュールのインスタンスメソッドをbindする
 
 @raise TypeError objがbindできないオブジェクトである場合に発生します
 
-    # クラスのインスタンスメソッドの UnboundMethod の場合
-    class Foo
-      def foo
-        "foo"
-      end
-    end
-    
-    # UnboundMethod `m' を生成
-    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo#foo>
-    
-    # Foo のインスタンスをレシーバとする Method オブジェクトを生成
-    p m.bind(Foo.new)               # => #<Method: Foo#foo>
-    
-    # Foo のサブクラス Bar のインスタンスをレシーバとする Method
-    class Bar < Foo
-    end
-    p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
+#@samplecode 例
+# クラスのインスタンスメソッドの UnboundMethod の場合
+class Foo
+  def foo
+    "foo"
+  end
+end
+
+# UnboundMethod `m' を生成
+p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo#foo>
+
+# Foo のインスタンスをレシーバとする Method オブジェクトを生成
+p m.bind(Foo.new)               # => #<Method: Foo#foo>
+
+# Foo のサブクラス Bar のインスタンスをレシーバとする Method
+class Bar < Foo
+end
+p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 
 
-    # モジュールのインスタンスメソッドの UnboundMethod の場合
-    module Foo
-      def foo
-        "foo"
-      end
-    end
-    
-    # UnboundMethod `m' を生成
-    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo#foo>
-    
-    # Foo をインクルードしたクラス Bar のインスタンスをレシーバと
-    # する Method オブジェクトを生成
-    class Bar
-      include Foo
-    end
-    p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
+# モジュールのインスタンスメソッドの UnboundMethod の場合
+module Foo
+  def foo
+    "foo"
+  end
+end
+
+# UnboundMethod `m' を生成
+p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo#foo>
+
+# Foo をインクルードしたクラス Bar のインスタンスをレシーバと
+# する Method オブジェクトを生成
+class Bar
+  include Foo
+end
+p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
+#@end
 
 #@since 2.7.0
 @see [[m:UnboundMethod#bind_call]]
@@ -123,27 +124,29 @@ puts Kernel.instance_method(:inspect).bind_call(BasicObject.new) # => #<BasicObj
 を返します。C 言語レベルで実装されたメソッドが可変長引数を
 受け付ける場合、-1 を返します。
 
-  class C
-    def one;    end
-    def two(a); end
-    def three(*a);  end
-    def four(a, b); end
-    def five(a, b, *c);    end
-    def six(a, b, *c, &d); end
-  end
-  
-  p C.instance_method(:one).arity     #=> 0
-  p C.instance_method(:two).arity     #=> 1
-  p C.instance_method(:three).arity   #=> -1
-  p C.instance_method(:four).arity    #=> 2
-  p C.instance_method(:five).arity    #=> -3
-  p C.instance_method(:six).arity     #=> -3
-  
-  
-  String.instance_method(:size).arity      #=> 0
-  String.instance_method(:replace).arity   #=> 1
-  String.instance_method(:squeeze).arity   #=> -1
-  String.instance_method(:count).arity     #=> -1
+#@samplecode 例
+class C
+  def one;    end
+  def two(a); end
+  def three(*a);  end
+  def four(a, b); end
+  def five(a, b, *c);    end
+  def six(a, b, *c, &d); end
+end
+
+p C.instance_method(:one).arity     #=> 0
+p C.instance_method(:two).arity     #=> 1
+p C.instance_method(:three).arity   #=> -1
+p C.instance_method(:four).arity    #=> 2
+p C.instance_method(:five).arity    #=> -3
+p C.instance_method(:six).arity     #=> -3
+
+
+String.instance_method(:size).arity      #=> 0
+String.instance_method(:replace).arity   #=> 1
+String.instance_method(:squeeze).arity   #=> -1
+String.instance_method(:count).arity     #=> -1
+#@end
 
 --- ==(other)     -> bool
 #@since 1.9.1
@@ -155,12 +158,14 @@ true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-  a = String.instance_method(:size)
-  b = String.instance_method(:size)
-  p a == b                            #=> true
-  
-  c = Array.instance_method(:size)
-  p a == c                            #=> false
+#@samplecode 例
+a = String.instance_method(:size)
+b = String.instance_method(:size)
+p a == b                            #=> true
+
+c = Array.instance_method(:size)
+p a == c                            #=> false
+#@end
 
 --- clone -> UnboundMethod
 
@@ -196,15 +201,17 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 この挙動はバグなので Ruby2.0.0 以降では修正済みです。[[ruby-core:42755]]
 #@end
 
-  a = method(:==).unbind
-  b = method(:eql?).unbind
-  p a.eql? b          # => true
+#@samplecode 例
+a = method(:==).unbind
+b = method(:eql?).unbind
+p a.eql? b          # => true
 #@since 2.0.0
-  p a.hash == b.hash  # => true
-  p [a, b].uniq.size  # => 1
+p a.hash == b.hash  # => true
+p [a, b].uniq.size  # => 1
 #@else
-  p a.hash == b.hash  # => false
-  p [a, b].uniq.size  # => 2
+p a.hash == b.hash  # => false
+p [a, b].uniq.size  # => 2
+#@end
 #@end
 
 #@end
@@ -217,20 +224,20 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドの名前を返します。
 
-例:
-
-  a = String.instance_method(:size)
-  a.name   # => :size
+#@samplecode 例
+a = String.instance_method(:size)
+a.name   # => :size
+#@end
 
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
 
-例:
-
-  Integer.instance_method(:to_s).owner   # => Integer
-  Integer.instance_method(:to_c).owner   # => Numeric
-  Integer.instance_method(:hash).owner   # => Kernel
+#@samplecode 例
+Integer.instance_method(:to_s).owner   # => Integer
+Integer.instance_method(:to_c).owner   # => Numeric
+Integer.instance_method(:hash).owner   # => Kernel
+#@end
 
 
 #@since 1.9.1
@@ -280,12 +287,13 @@ self 内で super を実行した際に実行されるメソッドを [[c:Unboun
 
 オリジナルのメソッド名を返します。
 
-例:
-  class C
-    def foo; end
-    alias bar foo
-  end
-  C.instance_method(:bar).original_name # => :foo
+#@samplecode 例
+class C
+  def foo; end
+  alias bar foo
+end
+C.instance_method(:bar).original_name # => :foo
+#@end
 
 @see [[m:Method#original_name]]
 #@end
