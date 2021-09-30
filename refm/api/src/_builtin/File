@@ -357,8 +357,8 @@ path が pattern にマッチすれば真を返します。そうでない場合
   p File.fnmatch("foo*", f)
 }
 # => true
-     true
-     false
+#    true
+#    false
 #@end
 
 @param path パスを表す文字列を指定します。
