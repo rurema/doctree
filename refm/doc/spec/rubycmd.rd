@@ -128,21 +128,44 @@ test.rb:1:in `f6': unhandled exception
   のみを変更します。
 
 //emlist{
-$ ruby -E EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
+# 変更しない場合
+
+$ ruby -e 'p Encoding.default_external; p Encoding.default_internal'
+#<Encoding:UTF-8>
 nil
-#<Encoding:EUC-JP>
 
-$ ruby -E EUC-JP:Windows-31J -e 'p Encoding.default_internal; p Encoding.default_external'
-#<Encoding:Windows-31J>
-#<Encoding:EUC-JP>
 
-$ ruby --encoding EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
+# 外部エンコーディングをEUC-JPにする場合
+
+$ ruby -E EUC-JP -e 'p Encoding.default_external; p Encoding.default_internal'
+#<Encoding:EUC-JP>
 nil
-#<Encoding:EUC-JP>
 
-$ ruby --encoding EUC-JP:Windows-31J -e 'p Encoding.default_internal; p Encoding.default_external'
-#<Encoding:Windows-31J>
+$ ruby --encoding EUC-JP -e 'p Encoding.default_external; p Encoding.default_internal'
 #<Encoding:EUC-JP>
+nil
+
+
+# 内部エンコーディングをWindows-31Jにする場合
+
+$ ruby -E :Windows-31J -e 'p Encoding.default_external; p Encoding.default_internal'
+#<Encoding:Windows-31J>
+#<Encoding:UTF-8>
+
+$ ruby --encoding :Windows-31J -e 'p Encoding.default_external; p Encoding.default_internal'
+#<Encoding:UTF-8>
+#<Encoding:Windows-31J>
+
+
+# 外部エンコーディングをEUC-JP、内部エンコーディングをWindows-31Jにする場合
+
+$ ruby -E EUC-JP:Windows-31J -e 'p Encoding.default_external; p Encoding.default_internal'
+#<Encoding:EUC-JP>
+#<Encoding:Windows-31J>
+
+$ ruby --encoding EUC-JP:Windows-31J -e 'p Encoding.default_external; p Encoding.default_internal'
+#<Encoding:EUC-JP>
+#<Encoding:Windows-31J>
 //}
 
 : --external-encoding encoding
@@ -150,9 +173,9 @@ $ ruby --encoding EUC-JP:Windows-31J -e 'p Encoding.default_internal; p Encoding
   デフォルトの外部エンコーディングを指定します。
 
 //emlist{
-$ ruby --external-encoding EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
-nil
+$ ruby --external-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.default_internal'
 #<Encoding:EUC-JP>
+nil
 //}
 
 : --internal-encoding encoding
@@ -160,9 +183,9 @@ nil
   デフォルトの内部エンコーディングを指定します。
 
 //emlist{
-$ ruby --internal-encoding EUC-JP -e 'p Encoding.default_internal; p Encoding.default_external'
-#<Encoding:EUC-JP>
+$ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.default_internal'
 #<Encoding:UTF-8>
+#<Encoding:EUC-JP>
 //}
 
 : --enable feature
