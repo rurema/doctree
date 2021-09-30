@@ -1410,8 +1410,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
 @return ファイルの終り(EOF)に到達した時、 nil を返します。
 @raise Errno::EXXX 読み込みに失敗した場合に発生します。
 
-#@samplecode 例
-# ---main.rb---
+#@samplecode main.rb
 ARGV << 'b.txt' << 'c.txt'
 p gets #=> "hello\n"
 p gets(nil) #=> "it\ncommon\n"
@@ -1420,11 +1419,15 @@ p gets('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照)
 p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
 p gets #=> nil
 p readline # end of file reached (EOFError)
-# --- b.txt ---
+#@end
+
+#@samplecode b.txt
 hello
 it
 common
-# --- c.txt ---
+#@end
+
+#@samplecode b.txt
 ARGF
 # スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
 # みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
