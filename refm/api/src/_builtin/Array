@@ -910,7 +910,7 @@ a.drop(3)             # => [4, 5, 0]
 a                     # => [1, 2, 3, 4, 5, 0]
 #@end
 
-@see [[m:Enumerable#drop]]
+@see [[m:Enumerable#drop]], [[m:Array#drop_while]], [[m:Array#shift]]
 
 --- drop_while                    -> Enumerator
 --- drop_while {|element| ... }   -> Array
@@ -928,6 +928,8 @@ a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
 # 変数aの値は変化しない
 a                           # => [1, 2, 3, 4, 5, 0]
 #@end
+
+@see [[m:Enumerable#drop_while]], [[m:Array#drop]]
 
 --- each {|item| .... }    -> self
 #@since 1.9.1
