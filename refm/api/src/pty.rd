@@ -1,10 +1,10 @@
 category CUI
 
-疑似端末(Pseudo tTY)を扱うライブラリです。
+擬似端末(Pseudo tTY)を扱うライブラリです。
 
 = module PTY
 
-疑似端末(Pseudo tTY)を扱うモジュールです。
+擬似端末(Pseudo tTY)を扱うモジュールです。
 
 == Module Functions
 

@@ -57,7 +57,7 @@ OpenSSL::BN.new(1209) # => 1209
 @see [[m:Integer#to_bn]]
 
 --- generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
-ランダム(疑似乱数的)な bits ビットの素数を返します。
+ランダム(擬似乱数的)な bits ビットの素数を返します。
 
 暗号的に意味のある素数は十分大きくないといけないので、
 bits が小さすぎる場合は期待する結果を返しません。
@@ -108,7 +108,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 
 
 --- rand(bits, fill=0, odd=false) -> OpenSSL::BN
-暗号論的に強い疑似乱数を生成し、返します。
+暗号論的に強い擬似乱数を生成し、返します。
 
 bits ビットの長さの正の整数を生成します。
 
@@ -127,7 +127,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 @see [[m:OpenSSL::BN.pseudo_rand]], [[m:OpenSSL::BN.rand_range]]
 
 --- rand_range(range) -> OpenSSL::BN
-暗号論的に強い疑似乱数を 0 から range-1 までの間で生成し、返します。
+暗号論的に強い擬似乱数を 0 から range-1 までの間で生成し、返します。
 
 @param range 生成する乱数の範囲
 @raise OpenSSL::BNError 乱数の生成に失敗した場合に発生します

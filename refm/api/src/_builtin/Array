@@ -2286,7 +2286,7 @@ a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
 
 #@since 1.9.3
 引数に [[c:Random]] オブジェクトを渡すことでそのオブジェクトが
-生成する疑似乱数列を用いることができます。
+生成する擬似乱数列を用いることができます。
 #@end
 
 #@samplecode 例
