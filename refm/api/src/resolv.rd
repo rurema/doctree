@@ -270,10 +270,15 @@ resolv_conf が文字列の場合は /etc/resolv.conf と
 resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
 というキーが利用可能です。
 それぞれの意味は [[man:resolv.conf(5)]] を参照してください。
+また、:nameserver_portでアドレスとポートを指定できます。
 
 #@samplecode
 require "resolv"
 Resolv::DNS.new(:nameserver => ['210.251.121.21'],
+                :search => ['ruby-lang.org'],
+                :ndots => 1)
+
+Resolv::DNS.new(:nameserver_port => [['8.8.8.8', 53], ['8.8.4.4', 53]],
                 :search => ['ruby-lang.org'],
                 :ndots => 1)
 #@end
