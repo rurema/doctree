@@ -193,7 +193,7 @@ _ですが、組み込み変数の一部には
  end
 
  class Bar
-   p @@v       #=> RuntimeError になります。
+   p @@v       #=> RuntimeError (class variable @@v of Bar is overtaken by Foo)
  end
 
 #@end
