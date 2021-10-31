@@ -151,6 +151,7 @@ pass と iv が渡された場合、これらを用いて鍵を生成し、暗�
 @param iv IV文字列
 @raise OpenSSL::Cipher::CipherError 準備に失敗した場合に発生します
 
+--- decrypt -> self
 --- decrypt(pass, iv = nil) -> self
 復号化の準備をします。
 
