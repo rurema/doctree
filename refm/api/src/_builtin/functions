@@ -15,28 +15,30 @@ exit は例外 [[c:SystemExit]] を発生させ
 
 @param status 終了ステータスを整数か true または false で与えます。
 
-  puts 'start'
-  begin
-    puts 'start1...'
-    exit
-  rescue SystemExit => err
-    puts "end1 with #{err.inspect}"
-  end
+#@samplecode 例
+puts 'start'
+begin
+  puts 'start1...'
+  exit
+rescue SystemExit => err
+  puts "end1 with #{err.inspect}"
+end
 
-  begin
-    puts 'start2...'
-    exit
-  ensure
-    puts 'end2...'
-  end
-  puts 'end' #実行されない
+begin
+  puts 'start2...'
+  exit
+ensure
+  puts 'end2...'
+end
+puts 'end' #実行されない
 
-  #=> start
-  #   start1...
-  #   end1 with #<SystemExit: exit>
-  #   start2...
-  #   end2...
-  #終了ステータス:0
+#=> start
+#   start1...
+#   end1 with #<SystemExit: exit>
+#   start2...
+#   end2...
+#終了ステータス:0
+#@end
 
 @see [[m:Kernel.#exit!]],[[m:Kernel.#abort]], [[ref:d:spec/control#begin]]
 
@@ -55,19 +57,21 @@ exit! は exit とは違って、例外処理などは一切行ないませ
 
 @param status 終了ステータスを整数か true または false で与えます。
 
-  STDOUT.sync = true #表示前に終了しないようにする
-  puts 'start'
-  begin
-    puts 'start1...'
-    exit!
-  ensure
-    puts 'end1...' #実行されない
-  end
-  puts 'end' #実行されない
+#@samplecode 例
+STDOUT.sync = true #表示前に終了しないようにする
+puts 'start'
+begin
+  puts 'start1...'
+  exit!
+ensure
+  puts 'end1...' #実行されない
+end
+puts 'end' #実行されない
 
-  #=> start
-  #   start1...
-  #終了ステータス:1
+#=> start
+#   start1...
+#終了ステータス:1
+#@end
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#abort]],[[m:Kernel.#at_exit]],[[m:Kernel.#fork]]
 
@@ -150,8 +154,10 @@ command を外部コマンドとして実行し、その標準出力を文字列
 @return コマンドの出力を文字列で返します。
 @raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
 
-  puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
-  puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
+#@samplecode 例
+puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
+puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
+#@end
 
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]],[[m:Kernel.#spawn]]
 
@@ -302,8 +308,10 @@ env に Hash を渡すことで、[[man:exec(2)]] で子プロセス内で
 ファイルを実行する前に環境変数を変更することができます。
 Hash のキーは環境変数名文字列、Hash の値に設定する値とします。
 nil とすることで環境変数が削除([[man:unsetenv(3)]])されます。
-  # FOO を BAR にして BAZ を削除する
-  pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
+#@samplecode 例
+# FOO を BAR にして BAZ を削除する
+pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
+#@end
 
 親プロセスは [[m:Process.#waitpid]] で子プロセスの終了を待ち合わせるか
 もしくは [[m:Process.#detach]] で子プロセスを切り離すかしてください。
@@ -404,72 +412,90 @@ Hash の値(親プロセス側)には以下のいずれかが指定できます�
 
 「:unsetenv_others」を使うと、envで指定したもの以外の環境変数を
 クリアします。
-  # すべての環境変数をクリア
-  pid = spawn(command, :unsetenv_others=>true)
-  # FOO だけ
-  pid = spawn({"FOO"=>"BAR"}, command, :unsetenv_others=>true)
+#@samplecode
+# すべての環境変数をクリア
+pid = spawn(command, :unsetenv_others=>true)
+# FOO だけ
+pid = spawn({"FOO"=>"BAR"}, command, :unsetenv_others=>true)
+#@end
 
 「:pgroup」でプロセスグループを指定できます。
-  # true, 0 で新しいプロセスグループを作りそのリーダーになります。
-  pid = spawn(command, :pgroup => true)
-  # 整数を渡すとそのグループに所属します。
-  pid = spawn(command, :pgroup => 10)
+#@samplecode
+# true, 0 で新しいプロセスグループを作りそのリーダーになります。
+pid = spawn(command, :pgroup => true)
+# 整数を渡すとそのグループに所属します。
+pid = spawn(command, :pgroup => 10)
+#@end
 
 「:rlimit_core」「:rlimit_cpu」などで、resource limit を指定します。
 詳しくは [[m:Process.#setrlimit]] を見てください。
 このオプションには 整数 or 整数2つの配列、を渡すことができます。
 それぞれ [[m:Process.#setrlimit]] の引数が2個、3個の場合に対応します。
-  # 現プロセスの core の resource limit を取得
-  cur, max = Process.getrlimit(:CORE)
-  # 一時的に子プロセスの core dump を止める
-  pid = spawn(command, :rlimit_core=>[0,max]) # disable core temporary.
-  # 子プロセスで core dump を出せるようにする
-  pid = spawn(command, :rlimit_core=>max) # enable core dump
-  # 子プロセスで core dump を出せなくする
-  pid = spawn(command, :rlimit_core=>0) # never dump core.
+#@samplecode
+# 現プロセスの core の resource limit を取得
+cur, max = Process.getrlimit(:CORE)
+# 一時的に子プロセスの core dump を止める
+pid = spawn(command, :rlimit_core=>[0,max]) # disable core temporary.
+# 子プロセスで core dump を出せるようにする
+pid = spawn(command, :rlimit_core=>max) # enable core dump
+# 子プロセスで core dump を出せなくする
+pid = spawn(command, :rlimit_core=>0) # never dump core.
+#@end
 
 「:chdir」で子プロセスのカレントディレクトリを変更できます。
-  pid = spawn(command, :chdir=>"/var/tmp")
+#@samplecode
+pid = spawn(command, :chdir=>"/var/tmp")
+#@end
 
 「:umask」で子プロセスの umask を指定できます。
-   pid = spawn(command, :umask=>077)
+#@samplecode
+pid = spawn(command, :umask=>077)
+#@end
 
 リダイレクトは様々なやりかたが使えます。
 Hash のキーが子プロセス側、値が親プロセス側です。
-  # 以下の例はすべて stderr を stdout にリダイレクトします
-  pid = spawn(command, :err=>:out)
-  pid = spawn(command, 2=>1)
-  pid = spawn(command, STDERR=>:out)
-  pid = spawn(command, STDERR=>STDOUT)
+#@samplecode
+# 以下の例はすべて stderr を stdout にリダイレクトします
+pid = spawn(command, :err=>:out)
+pid = spawn(command, 2=>1)
+pid = spawn(command, STDERR=>:out)
+pid = spawn(command, STDERR=>STDOUT)
+#@end
 この例では子プロセス側の stdout には触れていないので、
 親プロセスから引き継がれます。
 
 Hash の値にはファイル名も指定できます。
-  pid = spawn(command, :in=>"/dev/null") # read mode
-  pid = spawn(command, :out=>"/dev/null") # write mode
-  pid = spawn(command, :err=>"log") # write mode
-  pid = spawn(command, 3=>"/dev/null") # read mode
+#@samplecode
+pid = spawn(command, :in=>"/dev/null") # read mode
+pid = spawn(command, :out=>"/dev/null") # write mode
+pid = spawn(command, :err=>"log") # write mode
+pid = spawn(command, 3=>"/dev/null") # read mode
+#@end
 stdout と stderr をリダイレクトした場合は、
 ファイルは write mode で open されます。それ以外の場合は
 read mode で open されます。
 
 ファイルのフラグ(write/read mode)やパーミッションを明示したい
 場合は、配列を用います。
-  # なにも指定がなければデフォルトで read mode が使われる。
-  pid = spawn(command, :in=>["file"])
-  # read mode で file を open し、リダイレクトする。
-  pid = spawn(command, :in=>["file", "r"])
-  # write mode で file を open し、リダイレクトする。
-  # パーミッションはデフォルトで 644。
-  pid = spawn(command, :out=>["log", "w"]) # 0644 assumed
-  # write mode、パーミッション 0600 でファイルをオープンし、リダイレクトする。
-  pid = spawn(command, :out=>["log", "w", 0600])
-  # flagを文字列でなくビットで指定する
-  pid = spawn(command, :out=>["log", File::WRONLY|File::EXCL|File::CREAT, 0600])
+#@samplecode
+# なにも指定がなければデフォルトで read mode が使われる。
+pid = spawn(command, :in=>["file"])
+# read mode で file を open し、リダイレクトする。
+pid = spawn(command, :in=>["file", "r"])
+# write mode で file を open し、リダイレクトする。
+# パーミッションはデフォルトで 644。
+pid = spawn(command, :out=>["log", "w"]) # 0644 assumed
+# write mode、パーミッション 0600 でファイルをオープンし、リダイレクトする。
+pid = spawn(command, :out=>["log", "w", 0600])
+# flagを文字列でなくビットで指定する
+pid = spawn(command, :out=>["log", File::WRONLY|File::EXCL|File::CREAT, 0600])
+#@end
 
 配列で複数のファイルデスクリプタを同時にリダイレクトできます。
-  # stdout と stderr を "log" ファイルにリダイレクト
-  pid = spawn(command, [:out, :err]=>["log", "w"])
+#@samplecode
+# stdout と stderr を "log" ファイルにリダイレクト
+pid = spawn(command, [:out, :err]=>["log", "w"])
+#@end
 
 複数のファイルデスクリプタを合わせてリダイレクトするには、
 [ :child, FileDescriptor ] を使うこともできます。
@@ -483,8 +509,10 @@ read mode で open されます。
 とすると、子プロセスの stderr を子プロセスの stdout にリダイレクトします。
 これを用いて、[[m:IO.popen]] で、子プロセスの
 stderr と stdout を混ぜる例を以下に示します。
-  io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
-  p io.read #=> "out\nerr\n
+#@samplecode
+io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
+p io.read #=> "out\nerr\n
+#@end
 
 #@since 2.6.0
 spawn と IO.popen では
@@ -501,39 +529,49 @@ spawn と IO.popen では
 デフォルトでは close_on_exec が設定されていて、自動的に
 閉じられることに注意してください。
 
+#@samplecode
 #@since 2.6.0
-  pid = spawn(command, :close_others=>true)  # close 3,4,5,...
-  pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
+pid = spawn(command, :close_others=>true)  # close 3,4,5,...
+pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
 #@else
-  pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
-  pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
+pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+#@end
 #@end
 
 これを利用して spawn を [[m:IO.popen]] のように使うことができます。
-  # similar to r = IO.popen(command)
-  r, w = IO.pipe
-  pid = spawn(command, :out=>w)   # r は子プロセスで閉じられる
-  w.close
+#@samplecode
+# similar to r = IO.popen(command)
+r, w = IO.pipe
+pid = spawn(command, :out=>w)   # r は子プロセスで閉じられる
+w.close
+#@end
 
 「:close」を使ってファイルデスクリプタを明示的に閉じることもできます。
-  f = open(foo)
-  # f は継承されない
-  # system は :close_others=>false がデフォルトなのでそれ以外は継承される
-  system(command, f=>:close)        # don't inherit f.
+#@samplecode
+f = open(foo)
+# f は継承されない
+# system は :close_others=>false がデフォルトなのでそれ以外は継承される
+system(command, f=>:close)        # don't inherit f.
+#@end
 
 spawn で特定のファイルデスクリプタだけを継承したい場合は、
 io => io という形のオプションを指定します。
-  # valgrind は --log-fd というオプションでログの出力先を指定できます。
-  # これで指定したファイルデスクリプタは親プロセスから
-  # 子プロセスに継承されなければならないため、 log_w=>log_w とします。
-  log_r, log_w = IO.pipe
-  pid = spawn("valgrind", "--log-fd=#{log_w.fileno}", "echo", "a", log_w=>log_w)
-  log_w.close
-  p log_r.read
+#@samplecode
+# valgrind は --log-fd というオプションでログの出力先を指定できます。
+# これで指定したファイルデスクリプタは親プロセスから
+# 子プロセスに継承されなければならないため、 log_w=>log_w とします。
+log_r, log_w = IO.pipe
+pid = spawn("valgrind", "--log-fd=#{log_w.fileno}", "echo", "a", log_w=>log_w)
+log_w.close
+p log_r.read
+#@end
 
 ファイルデスクリプタを入れ替えることもできます。
-  # stdout と stderr を入れ替えリダイレクト
-  pid = spawn(command, :out=>:err, :err=>:out)
+#@samplecode
+# stdout と stderr を入れ替えリダイレクト
+pid = spawn(command, :out=>:err, :err=>:out)
+#@end
 このような相互参照を解決するため、spawnの内部で新しい
 ファイルデスクリプタを作り、利用します。
 
@@ -577,10 +615,12 @@ io => io という形のオプションを指定します。
 @param options オプションパラメータ Hash
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
-  # a.rb
-  puts '実行前'
-  exec 'echo "実行中"'
-  puts '実行後'
+#@samplecode 例
+# a.rb
+puts '実行前'
+exec 'echo "実行中"'
+puts '実行後'
+#@end
 
 上記のスクリプトを実行すると以下のようになります。
 
@@ -627,10 +667,10 @@ Hash を options として渡すことで、この挙動を変更できます。
 #@#
 #@#   exec [program, program], *args
 
-例
-
-  # a.rb
-  exec ['sleep', 'mysleep'], '600'
+#@samplecode 例
+# a.rb
+exec ['sleep', 'mysleep'], '600'
+#@end
 
 上記スクリプトを実行すると以下のようになります。
 
@@ -828,8 +868,9 @@ ext_enc(外部エンコーディング)が指定されている場合、
 
 ext_encが'BOM|'で始まる場合、その入力に含まれるBOMはあらかじめ削られます。
 また、BOMがあった場合、入力された文字列にはそのBOMに対応するエンコーディングが設定されます。
-  # BOMでUTF-16BEかLEかを判別する例
-  File.open("utf16.txt", "rb:BOM|utf-16"){|file| .... }
+#@samplecode BOMでUTF-16BEかLEかを判別する例
+File.open("utf16.txt", "rb:BOM|utf-16"){|file| "..." }
+#@end
 
 int_encも指定されていた場合、入力された文字列をext_encでエンコーディングされた文字列とみなしてint_encへと変換し、その結果にint_encを設定して返します。
 
@@ -979,9 +1020,10 @@ load は行いません。
 require はライブラリのロード、load は
 設定ファイルの読み込みなどに使うのが典型的な用途です。
 
-  # 使用例
-  load "#{ENV['HOME']}/.myapprc"
-  load "/etc/myapprc"
+#@samplecode 例
+load "#{ENV['HOME']}/.myapprc"
+load "/etc/myapprc"
+#@end
 
 なお、特定のディレクトリからファイルをロードしたい場合、
 load 'filename' とするのは不適切です。必ず絶対パスを
@@ -1053,18 +1095,20 @@ require_relative を呼出すと必ず失敗します。
 ロード元のスクリプトから直接取得することはできません。
 このスコープの扱い方は[[m:Kernel.#load]]でも同様です。
 
-  ---------- some.rb -----------
-  $a = 1
-  @a = 1
-  A = 1
-  a = 1
-  ---------- end some.rb -------
+#@samplecode 例
+# ---------- some.rb -----------
+$a = 1
+@a = 1
+A = 1
+a = 1
+# ---------- end some.rb -------
 
-  require 'some'
-  p $a #=> 1
-  p @a #=> 1
-  p A #=> 1
-  p a # undefined local variable or method `a' for #<Object:0x294f9ec @a=1> (NameError)
+require 'some'
+p $a #=> 1
+p @a #=> 1
+p A #=> 1
+p a # undefined local variable or method `a' for #<Object:0x294f9ec @a=1> (NameError)
+#@end
 
 --- autoload(const_name, feature) -> nil
 
@@ -1101,20 +1145,22 @@ autoload 設定されていないか、ロード済みなら nil を返します
 
 @param const_name 定数をString または Symbol で指定します。
 
-    ------- /tmp/foo.rb ---------
-    class Foo
-      class Bar
-      end
-    end
-    ----- end of /tmp/foo.rb ----
+#@samplecode 例
+# ------- /tmp/foo.rb ---------
+class Foo
+  class Bar
+  end
+end
+# ----- end of /tmp/foo.rb ----
 
-    class Foo
-    end
-    p Foo.autoload?(:Bar)         #=> nil
-    Foo.autoload :Bar, '/tmp/foo'
-    p Foo.autoload?(:Bar)         #=> "/tmp/foo"
-    p Foo::Bar                    #=> Foo::Bar
-    p Foo.autoload?(:Bar)         #=> nil
+class Foo
+end
+p Foo.autoload?(:Bar)         #=> nil
+Foo.autoload :Bar, '/tmp/foo'
+p Foo.autoload?(:Bar)         #=> "/tmp/foo"
+p Foo::Bar                    #=> Foo::Bar
+p Foo.autoload?(:Bar)         #=> nil
+#@end
 
 @see [[m:Kernel.#autoload]]
 
@@ -1133,7 +1179,9 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 === ブロックパラメータの意味
 
 渡す Proc オブジェクトのパラメータは
-  proc{|event, file, line, id, binding, klass| ... }
+#@samplecode
+proc{|event, file, line, id, binding, klass| "..." }
+#@end
 で、意味は以下の通りです。
 
 : event
@@ -1192,25 +1240,25 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 
 @return proc を返します。
 
-例:
+#@samplecode 例
+set_trace_func lambda {|*arg|
+  p arg
+}
+class Foo
+end
+43.to_s
 
-  set_trace_func lambda {|*arg|
-    p arg
-  }
-  class Foo
-  end
-  43.to_s
-
-  # ----結果----
-  # ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
-  # ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
-  # ["c-call", "..", 4, :inherited, #<Binding:0x10cba98>, Class]
-  # ["c-return", "..", 4, :inherited, #<Binding:0x10cb858>, Class]
-  # ["class", "..", 4, nil, #<Binding:0x10cb600>, nil]
-  # ["end", "..", 5, nil, #<Binding:0x10cb3f0>, nil]
-  # ["line", "..", 6, nil, #<Binding:0x10cb1e0>, nil]
-  # ["c-call", "..", 6, :to_s, #<Binding:0x10cafd0>, Fixnum]
-  # ["c-return", "..", 6, :to_s, #<Binding:0x10cad78>, Fixnum]
+# ----結果----
+# ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
+# ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
+# ["c-call", "..", 4, :inherited, #<Binding:0x10cba98>, Class]
+# ["c-return", "..", 4, :inherited, #<Binding:0x10cb858>, Class]
+# ["class", "..", 4, nil, #<Binding:0x10cb600>, nil]
+# ["end", "..", 5, nil, #<Binding:0x10cb3f0>, nil]
+# ["line", "..", 6, nil, #<Binding:0x10cb1e0>, nil]
+# ["c-call", "..", 6, :to_s, #<Binding:0x10cafd0>, Fixnum]
+# ["c-return", "..", 6, :to_s, #<Binding:0x10cad78>, Fixnum]
+#@end
 
 @see [[m:Kernel.#caller]]
 
@@ -1234,66 +1282,72 @@ start 段上の呼び出し元の情報を [[m:$@]]
 @see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]],
      [[m:Kernel.#caller_locations]]
 
-    def foo
-      p caller(0)
-      p caller(1)
-      p caller(2)
-      p caller(3)
-      p caller(4)
-    end
+#@samplecode 例
+def foo
+  p caller(0)
+  p caller(1)
+  p caller(2)
+  p caller(3)
+  p caller(4)
+end
 
-    def bar
-      foo
-    end
+def bar
+  foo
+end
 
-    bar
+bar
 
-    #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
-    #   ["-:10:in `bar'", "-:13:in `<main>'"]
-    #   ["-:13:in `<main>'"]
-    #   []
-    #   nil
+#=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
+#   ["-:10:in `bar'", "-:13:in `<main>'"]
+#   ["-:13:in `<main>'"]
+#   []
+#   nil
+#@end
 
 以下の関数は、caller の要素から [ファイル名, 行番号, メソッド名]
 を取り出して返します。
 
-    def parse_caller(at)
-      if /^(.+?):(\d+)(?::in `(.*)')?/ =~ at
-        file = $1
-        line = $2.to_i
-        method = $3
-        [file, line, method]
-      end
-    end
+#@samplecode 例
+def parse_caller(at)
+  if /^(.+?):(\d+)(?::in `(.*)')?/ =~ at
+    file = $1
+    line = $2.to_i
+    method = $3
+    [file, line, method]
+  end
+end
 
-    def foo
-      p parse_caller(caller.first)
-    end
+def foo
+  p parse_caller(caller.first)
+end
 
-    def bar
-      foo
-      p parse_caller(caller.first)
-    end
+def bar
+  foo
+  p parse_caller(caller.first)
+end
 
-    bar
-    p parse_caller(caller.first)
+bar
+p parse_caller(caller.first)
 
-    #=> ["-", 15, "bar"]
-    #   ["-", 19, nil]
-    #   nil
+#=> ["-", 15, "bar"]
+#   ["-", 19, nil]
+#   nil
+#@end
 
 以下は、[[m:$DEBUG]] が真の場合に役に立つ debug 関数
 のサンプルです。
 
-    $DEBUG = true
+#@samplecode 例
+$DEBUG = true
 
-    def debug(*args)
-      p [caller.first, *args] if $DEBUG
-    end
+def debug(*args)
+  p [caller.first, *args] if $DEBUG
+end
 
-    debug "debug information"
+debug "debug information"
 
-    #=> ["-:7", "debug information"]
+#=> ["-:7", "debug information"]
+#@end
 
 --- caller_locations(start = 1, length = nil) -> [Thread::Backtrace::Location] | nil
 --- caller_locations(range)                   -> [Thread::Backtrace::Location] | nil
@@ -1356,24 +1410,29 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
 @return ファイルの終り(EOF)に到達した時、 nil を返します。
 @raise Errno::EXXX 読み込みに失敗した場合に発生します。
 
-  ---main.rb---
-  ARGV << 'b.txt' << 'c.txt'
-  p gets #=> "hello\n"
-  p gets(nil) #=> "it\ncommon\n"
-  p gets("") #=> "ARGF\n\n"
-  p gets('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
-  p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
-  p gets #=> nil
-  p readline # end of file reached (EOFError)
-  --- b.txt ---
-  hello
-  it
-  common
-  --- c.txt ---
-  ARGF
+#@samplecode main.rb
+ARGV << 'b.txt' << 'c.txt'
+p gets #=> "hello\n"
+p gets(nil) #=> "it\ncommon\n"
+p gets("") #=> "ARGF\n\n"
+p gets('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
+p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
+p gets #=> nil
+p readline # end of file reached (EOFError)
+#@end
 
-  スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
-  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
+#@samplecode b.txt
+hello
+it
+common
+#@end
+
+#@samplecode b.txt
+ARGF
+# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
+# みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
+#@end
+
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#readline]]
 
@@ -1393,23 +1452,25 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
 @raise Errno::EXXX 読み込みに失敗した場合に発生します。
 @raise EOFError readline でファイル末端(EOF)を検出すると発生します。
 
-  ---main.rb---
-  ARGV << 'b.txt' << 'c.txt'
-  p readline #=> "hello\n"
-  p readline(nil) #=> "it\ncommon\n"
-  p readline("") #=> "ARGF\n\n"
-  p readline('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
-  p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
-  p readline # end of file reached (EOFError)
-  --- b.txt ---
-  hello
-  it
-  common
-  --- c.txt ---
-  ARGF
+#@samplecode 例
+# ---main.rb---
+ARGV << 'b.txt' << 'c.txt'
+p readline #=> "hello\n"
+p readline(nil) #=> "it\ncommon\n"
+p readline("") #=> "ARGF\n\n"
+p readline('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
+p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
+p readline # end of file reached (EOFError)
+# --- b.txt ---
+hello
+it
+common
+# --- c.txt ---
+ARGF
+# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
+# みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
+#@end
 
-  スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
-  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#gets]]
 
@@ -1466,14 +1527,16 @@ ch が文字列なら、その先頭1文字を出力します。
                  指定した場合に発生します。
 
 #@#1.9でもいまのところ同じ結果
-    putc("ch")
-    putc(?c)
-    putc(99)
-    putc(355)
-    #=> cccc
+#@samplecode 例
+putc("ch")
+putc(?c)
+putc(99)
+putc(355)
+#=> cccc
 
-    putc(99.00) #=> c
-    putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
+putc(99.00) #=> c
+putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
+#@end
 
 @see [[m:IO#putc]]
 
@@ -1483,7 +1546,9 @@ ch が文字列なら、その先頭1文字を出力します。
 
 引数の inspect メソッドの返り値と改行を順番に出力します。つまり以下のコードと同じです。
 
-  print arg[0].inspect, "\n", arg[1].inspect, "\n", ...
+#@samplecode 例
+print arg[0].inspect, "\n", arg[1].inspect, "\n" #, ...
+#@end
 
 整形に用いられる[[m:Object#inspect]]は普通に文字列に変換すると
 区別がつかなくなるようなクラス間の差異も表現できるように工夫されています。
@@ -1496,15 +1561,17 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 @return 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
 
-  puts "" #=> （空行）
-  p "" #=> ""
+#@samplecode 例
+puts "" #=> （空行）
+p "" #=> ""
 
-  puts 50,"50"
-  #=> 50
-  #=> 50
-  p 50,"50"
-  #=> 50
-  #=> "50"
+puts 50,"50"
+#=> 50
+#=> 50
+p 50,"50"
+#=> 50
+#=> "50"
+#@end
 
 @see [[m:Object#inspect]],[[m:Kernel.#puts]],[[m:Kernel.#print]]
 
@@ -1529,19 +1596,21 @@ to_s メソッドにより文字列に変換してから出力します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-  print "Hello, world!"
-  print "Regexp is",/ant/
-  print nil
-  print "\n"
-  #=> Hello, world!Regexp is(?-mix:ant)
+#@samplecode 例
+print "Hello, world!"
+print "Regexp is",/ant/
+print nil
+print "\n"
+#=> Hello, world!Regexp is(?-mix:ant)
 
-  $_ = "input"
-  $, = "<and>"
-  $\ = "<end>\n"
-  print
-  print "AA","BB"
-  #=> input<end>
-  #=> AA<and>BB<end>
+$_ = "input"
+$, = "<and>"
+$\ = "<end>\n"
+print
+print "AA","BB"
+#=> input<end>
+#=> AA<and>BB<end>
+#@end
 
 @see [[m:Kernel.#puts]],[[m:Kernel.#p]],[[m:IO#print]]
 
@@ -1561,19 +1630,21 @@ to_s メソッドにより文字列に変換してから出力します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-    puts "foo", "bar\n", "baz"
-    puts ""    # 改行のみ出力
-    puts       # 改行のみ出力
-    puts nil   # 改行のみ出力
-    puts ["oui", "non"]
-    #=> foo
-    #   bar
-    #   baz
-    #
-    #
-    #
-    #   oui
-    #   non
+#@samplecode 例
+puts "foo", "bar\n", "baz"
+puts ""    # 改行のみ出力
+puts       # 改行のみ出力
+puts nil   # 改行のみ出力
+puts ["oui", "non"]
+#=> foo
+#   bar
+#   baz
+#
+#
+#
+#   oui
+#   non
+#@end
 
 @see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
@@ -1660,9 +1731,11 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 @param arg 変換対象のオブジェクトです。
 @raise TypeError to_ary, to_a の返り値が配列でなければ発生します
 
-  p Array({:it => 3}) #=> [[:it, 3]]
-  p Array(nil) #=> []
-  p Array("fefe") #=> ["fefe"]
+#@samplecode 例
+p Array({:it => 3}) #=> [[:it, 3]]
+p Array(nil) #=> []
+p Array("fefe") #=> ["fefe"]
+#@end
 
 @see [[m:Object#to_a]],[[m:Object#to_ary]],[[c:Array]]
 
@@ -1688,28 +1761,30 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 @raise TypeError nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
                  to_f が浮動小数点数を返さなかった場合に発生します。
 
-    p Float(4)            #=> 4.0
-    p Float(4_000)        #=> 4000.0
-    p Float(9.88)         #=> 9.88
+#@samplecode 例
+p Float(4)            #=> 4.0
+p Float(4_000)        #=> 4000.0
+p Float(9.88)         #=> 9.88
 
-    p Float(Time.gm(1986)) #=> 504921600.0
-    p Float(Object.new)   # can't convert Object into Float (TypeError)
-    p Float(nil)          # can't convert nil into Float (TypeError)
+p Float(Time.gm(1986)) #=> 504921600.0
+p Float(Object.new)   # can't convert Object into Float (TypeError)
+p Float(nil)          # can't convert nil into Float (TypeError)
 
-    p Float("10")         #=> 10.0
-    p Float("10e2")       #=> 1000.0
-    p Float("1e-2")       #=> 0.01
-    p Float(".1")         #=> 0.1
-    p Float("0xa")        #=> 10.0
+p Float("10")         #=> 10.0
+p Float("10e2")       #=> 1000.0
+p Float("1e-2")       #=> 0.01
+p Float(".1")         #=> 0.1
+p Float("0xa")        #=> 10.0
 
-    p Float("nan")        # invalid value for Float(): "nan" (ArgumentError)
-    p Float("INF")        # invalid value for Float(): "INF" (ArgumentError)
-    p Float("-Inf")       # invalid value for Float(): "-Inf" (ArgumentError)
-    p Float(("10" * 1000)) #=> Infinity
-    p Float("0xa.a")      # invalid value for Float(): "0xa.a" (ArgumentError)
-    p Float(" \n10\s \t") #=> 10.0 # 先頭と末尾の空白類は無視される
-    p Float("1\n0")       # invalid value for Float(): "1\n0" (ArgumentError)
-    p Float("")           # invalid value for Float(): "" (ArgumentError)
+p Float("nan")        # invalid value for Float(): "nan" (ArgumentError)
+p Float("INF")        # invalid value for Float(): "INF" (ArgumentError)
+p Float("-Inf")       # invalid value for Float(): "-Inf" (ArgumentError)
+p Float(("10" * 1000)) #=> Infinity
+p Float("0xa.a")      # invalid value for Float(): "0xa.a" (ArgumentError)
+p Float(" \n10\s \t") #=> 10.0 # 先頭と末尾の空白類は無視される
+p Float("1\n0")       # invalid value for Float(): "1\n0" (ArgumentError)
+p Float("")           # invalid value for Float(): "" (ArgumentError)
+#@end
 
 @see [[m:String#to_f]],[[c:Float]]
 
@@ -1746,24 +1821,26 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
   が整数([[c:Integer]]のサブクラス)を返さなかった場合に発生します。
 @raise TypeError 引数に nil を指定した場合に発生します。
 
-    p Integer(4)          #=> 4
-    p Integer(4_000)      #=> 4000
-    p Integer(9.88)       #=> 9
+#@samplecode 例
+p Integer(4)          #=> 4
+p Integer(4_000)      #=> 4000
+p Integer(9.88)       #=> 9
 
-    p Integer(nil)        # can't convert nil into Integer (TypeError)
-    p Integer(Object.new) # cannot convert Object into Integer (TypeError)
+p Integer(nil)        # can't convert nil into Integer (TypeError)
+p Integer(Object.new) # cannot convert Object into Integer (TypeError)
 
-    p Integer("10")       #=> 10
-    p Integer("10", 2)    #=> 2
-    p Integer("0d10")     #=> 10
-    p Integer("010")      #=> 8
-    p Integer("0o10")     #=> 8
-    p Integer("0x10")     #=> 16
-    p Integer("0b10")     #=> 2
-    p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
-    p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
-    p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
-    p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
+p Integer("10")       #=> 10
+p Integer("10", 2)    #=> 2
+p Integer("0d10")     #=> 10
+p Integer("010")      #=> 8
+p Integer("0o10")     #=> 8
+p Integer("0x10")     #=> 16
+p Integer("0b10")     #=> 2
+p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
+p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
+p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
+p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
+#@end
 
 @see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]],[[c:Integer]]
 
@@ -1777,14 +1854,16 @@ arg が文字列の場合、何もせず arg を返します。
 @param arg 変換対象のオブジェクトです。
 @raise TypeError to_s の返り値が文字列でなければ発生します。
 
-  class Foo
-   def to_s
-     "hogehoge"
-   end
-  end
+#@samplecode 例
+class Foo
+ def to_s
+   "hogehoge"
+ end
+end
 
-  arg = Foo.new
-  p String(arg) #=> "hogehoge"
+arg = Foo.new
+p String(arg) #=> "hogehoge"
+#@end
 
 @see [[m:Object#to_s]],[[c:String]]
 
@@ -1798,19 +1877,21 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
 
 @return 登録した処理を [[c:Proc]] オブジェクトで返します。
 
-  3.times do |i|
-    at_exit{puts "at_exit#{i}"}
-  end
-  END{puts "END"}
-  at_exit{puts "at_exit"}
-  puts "main_end"
+#@samplecode 例
+3.times do |i|
+  at_exit{puts "at_exit#{i}"}
+end
+END{puts "END"}
+at_exit{puts "at_exit"}
+puts "main_end"
 
-  #=> main_end
-  #   at_exit
-  #   END
-  #   at_exit2
-  #   at_exit1
-  #   at_exit0
+#=> main_end
+#   at_exit
+#   END
+#   at_exit2
+#   at_exit1
+#   at_exit0
+#@end
 
 @see [[ref:d:spec/control#END]],[[m:Kernel.#exit!]],[[m:Kernel.#fork]]
 
@@ -1819,27 +1900,31 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
 (中断されない限り)永遠にブロックの評価を繰り返します。
 ブロックが指定されなければ、代わりに [[c:Enumerator]] を返します。
 
-  loop do
-    print "Input: "
-    line = gets
-    break if !line or line =~ /^qQ/
-    # ...
-  end
+#@samplecode 例
+loop do
+  print "Input: "
+  line = gets
+  break if !line or line =~ /^qQ/
+  # ...
+end
+#@end
 
 与えられたブロック内で [[c:StopIteration]] を [[m:Kernel.#raise]] すると
 #@since 2.3.0
 ループを終了して [[c:Enumerator]] が最後に返した値を返します。
 ループを終了させる場合、通常は break を使用してください。
 
-  enum = Enumerator.new { |y|
-    y << "one"
-    y << "two"
-    :ok
-  }
+#@samplecode 例
+enum = Enumerator.new { |y|
+  y << "one"
+  y << "two"
+  :ok
+}
 
-  result = loop {
-    puts enum.next
-  } # => :ok
+result = loop {
+  puts enum.next
+} # => :ok
+#@end
 
 #@else
 ループを終了して nil を返します。
@@ -1862,19 +1947,21 @@ sleepの実行が中断されます。
 
 @return 実際に停止していた秒数 (整数に丸められた値) です。
 
-  it = Thread.new do
-    sleep
-    puts 'it_end'
-  end
+#@samplecode 例
+it = Thread.new do
+  sleep
+  puts 'it_end'
+end
 
-  re = sleep 2.11
-  puts re
-  it.run
-  re2 = sleep 0.76
-  puts re2
-  #=> 2
-  #   it_end
-  #   1
+re = sleep 2.11
+puts re
+it.run
+re2 = sleep 0.76
+puts re2
+#=> 2
+#   it_end
+#   1
+#@end
 
 --- block_given? -> bool
 --- iterator? -> bool
@@ -1887,15 +1974,17 @@ sleepの実行が中断されます。
 iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
 で block_given? を使ってください。
 
-  def check
-    if block_given?
-      puts "Block is given."
-    else
-      puts "Block isn't given."
-    end
+#@samplecode 例
+def check
+  if block_given?
+    puts "Block is given."
+  else
+    puts "Block isn't given."
   end
-  check{} #=> Block is given.
-  check #=> Block isn't given.
+end
+check{} #=> Block is given.
+check #=> Block isn't given.
+#@end
 
 --- catch {|tag| .... } -> object
 --- catch(tag) {|tag| .... } -> object
@@ -1913,17 +2002,19 @@ iterator? は （ブロックが必ずイテレートするとはいえないの
 @param tag タグとなる任意のオブジェクトです。
 @return ブロックの返り値か、対応するthrowの第二引数を返り値として返します。
 
-  result = catch do |tag|
-    for i in 1..2
-      for j in 1..2
-        for k in 1..2
-          throw tag, k
-        end
+#@samplecode 例
+result = catch do |tag|
+  for i in 1..2
+    for j in 1..2
+      for k in 1..2
+        throw tag, k
       end
     end
   end
+end
 
-  p result #=> 1
+p result #=> 1
+#@end
 
 @see [[m:Kernel.#throw]]
 
@@ -1949,22 +2040,24 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 @raise ArgumentError 同じ tag で待っている catch が存在しない場合に発生します。
 #@end
 
-  def foo
-    throw :exit, 25
-  end
+#@samplecode 例
+def foo
+  throw :exit, 25
+end
 
-  ret = catch(:exit) do
-    begin
-      foo
-      some_process()    # 絶対に実行されない
-      10
-    ensure
-      puts "ensure"
-    end
+ret = catch(:exit) do
+  begin
+    foo
+    some_process()    # 絶対に実行されない
+    10
+  ensure
+    puts "ensure"
   end
-  puts ret
-  #=> ensure
-  #   25
+end
+puts ret
+#=> ensure
+#   25
+#@end
 
 @see [[m:Kernel.#catch]]
 
@@ -1996,18 +2089,20 @@ range に含まれる数が無い場合は nil を返します。
 @param range 発生させる乱数値の範囲を [[c:Range]] オブジェクトで指定します。
              range の境界は数値でなければなりません。
 
-  srand(1234)     # 乱数の種を設定する。
-  rand            #=> 0.1915194503788923
-  rand            #=> 0.6221087710398319
-  rand(10)        #=> 4
-  rand(5.5)       #=> 0
-                  # rand(5) と同じ。 5 が乱数値の範囲に含まれないことに注意。
+#@samplecode 例
+srand(1234)     # 乱数の種を設定する。
+rand            #=> 0.1915194503788923
+rand            #=> 0.6221087710398319
+rand(10)        #=> 4
+rand(5.5)       #=> 0
+                # rand(5) と同じ。 5 が乱数値の範囲に含まれないことに注意。
 
-  rand(1..6)      #=> 2                   (1 から 6 までの整数)
-  rand(0...10)    #=> 1                   (0 から 9 までの整数。終端を含まない)
-  rand(1.0..1.5)  #=> 1.1362963047752432  (1.0 以上 1.5 以下の実数)
-  rand(1.0...1.5) #=> 1.1382321275715483  (1.0 以上 1.5 未満の実数)
-  rand(1..0)      #=> nil
+rand(1..6)      #=> 2                   (1 から 6 までの整数)
+rand(0...10)    #=> 1                   (0 から 9 までの整数。終端を含まない)
+rand(1.0..1.5)  #=> 1.1362963047752432  (1.0 以上 1.5 以下の実数)
+rand(1.0...1.5) #=> 1.1382321275715483  (1.0 以上 1.5 未満の実数)
+rand(1..0)      #=> nil
+#@end
 
 @see [[m:Kernel.#srand]], [[m:Random#rand]], [[c:Random]]
 
@@ -2027,33 +2122,35 @@ seed が省略された時には
 @param seed 乱数の種となる整数を指定します。
             [[c:Bignum]] も指定可能です。
 
-  num = 455675
-  seeds = []
+#@samplecode 例
+num = 455675
+seeds = []
 
-  srand(num)
+srand(num)
 
-  p rand(6) #=> 3
-  p rand(6) #=> 0
-  p rand(0) #=> 0.445804380918972
-  p rand(0) #=> 0.422248634121701
+p rand(6) #=> 3
+p rand(6) #=> 0
+p rand(0) #=> 0.445804380918972
+p rand(0) #=> 0.422248634121701
 
-  seeds << srand
+seeds << srand
 
-  p rand(6) #=> 3
-  p rand(6) #=> 3
-  p rand(0) #=> 0.938911141393347
-  p rand(0) #=> 0.915824970865251
+p rand(6) #=> 3
+p rand(6) #=> 3
+p rand(0) #=> 0.938911141393347
+p rand(0) #=> 0.915824970865251
 
-  seeds << srand(num)
+seeds << srand(num)
 
-  p rand(6) #=> 3
-  p rand(6) #=> 0
-  p rand(0) #=> 0.445804380918972
-  p rand(0) #=> 0.422248634121701
+p rand(6) #=> 3
+p rand(6) #=> 0
+p rand(0) #=> 0.445804380918972
+p rand(0) #=> 0.422248634121701
 
-  seeds << srand
+seeds << srand
 
-  p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
+p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
+#@end
 
 @see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
 
@@ -2062,7 +2159,9 @@ seed が省略された時には
 プログラム中で定義されているグローバル変数(`$'で始まる変数)名の
 配列を返します。
 
-  p global_variables #=> [:$;, :$-F, :$@, ... ]
+#@samplecode 例
+p global_variables #=> [:$;, :$-F, :$@, ... ]
+#@end
 
 @see [[m:Kernel.#local_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
@@ -2070,8 +2169,10 @@ seed が省略された時には
 
 現在のスコープで定義されているローカル変数名の配列を返します。
 
-  yuyu = 0
-  p local_variables #=> [:yuyu]
+#@samplecode 例
+yuyu = 0
+p local_variables #=> [:yuyu]
+#@end
 
 @see [[m:Kernel.#global_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
@@ -2229,11 +2330,13 @@ hook をすべて解除してその配列を返します(ブロックで登録�
 @return フックを登録した場合は nil を返します。解除した場合は解除した
         フックを並べた配列を返します。
 
-    trace_var(:$v){|val| puts "hook: $v=#{val.inspect}" }
-    $v = 1       #=> hook: $v=1
-    $v = "foo"   #=> hook: $v="foo"
-    $v.upcase!
-    p $v         #=> "FOO"
+#@samplecode 例
+trace_var(:$v){|val| puts "hook: $v=#{val.inspect}" }
+$v = 1       #=> hook: $v=1
+$v = "foo"   #=> hook: $v="foo"
+$v.upcase!
+p $v         #=> "FOO"
+#@end
 
 @see [[m:Kernel.#untrace_var]]
 
@@ -2249,17 +2352,19 @@ varname のフックを全て解除します。
 @param hook 文字列または [[c:Proc]] オブジェクトです。
 @return 解除されたフックの配列を返します。
 
-  trace_var(:$v){|val| print "hookA.#{val.inspect},\n" }
-  block = proc{|val| print "hookB.#{val.inspect}," }
-  trace_var(:$v,&block)
-  $v = 'str'        #=> hookB."str",hookA."str",
+#@samplecode 例
+trace_var(:$v){|val| print "hookA.#{val.inspect},\n" }
+block = proc{|val| print "hookB.#{val.inspect}," }
+trace_var(:$v,&block)
+$v = 'str'        #=> hookB."str",hookA."str",
 
-  untrace_var(:$v,block)
-  $v = 'str'        #=> hookA."str",
+untrace_var(:$v,block)
+$v = 'str'        #=> hookA."str",
 
-  trace_var(:$v){|val| print "hookC.#{val.inspect}," }
-  p untrace_var(:$v) #=> [#<Proc:0x02b68f58@..:9>, #<Proc:0x02b6978c@..:3>]
-  $v = 'str'        # なにも出力されない
+trace_var(:$v){|val| print "hookC.#{val.inspect}," }
+p untrace_var(:$v) #=> [#<Proc:0x02b68f58@..:9>, #<Proc:0x02b6978c@..:3>]
+$v = 'str'        # なにも出力されない
+#@end
 
 @see [[m:Kernel.#trace_var]]
 
@@ -2279,11 +2384,13 @@ varname のフックを全て解除します。
 例外オブジェクト ([[m:$!]]) を再発生させます。そのような
 例外が存在しないが自身は捕捉されている時には例外 [[c:RuntimeError]] を発生させます。
 
-    begin
-      open("nonexist")
-    rescue
-      raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
-    end
+#@samplecode 例
+begin
+  open("nonexist")
+rescue
+  raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
+end
+#@end
 
 引数を渡した場合は、例外メッセージ message を持った error_type の示す例外(省略時 RuntimeError)を
 発生させます。
@@ -2304,44 +2411,47 @@ error_type として例外ではないクラスやオブジェクトを指定し
 
 例外の捕捉の例を示します。
 
-  #例1
-  begin
-    raise NameError,"!!error!!"
-  rescue ArgumentError => err
-  rescue NameError => err
-  rescue TypeError => err
-  ensure
-    p err #=> #<NameError: !!error!!>
-  end
+#@samplecode 例1
+begin
+  raise NameError,"!!error!!"
+rescue ArgumentError => err
+rescue NameError => err
+rescue TypeError => err
+ensure
+  p err #=> #<NameError: !!error!!>
+end
+#@end
 
-  #例2
-  def foo num
-    print 'in method.'
-    raise "error!!" if num <= 9
-  rescue RuntimeError
-    num += 10
-    print 'in rescue.'
-    retry
-  else
-    print 'in else.'
-  ensure
-    print "in ensure.\n"
-  end
+#@samplecode 例2
+def foo num
+  print 'in method.'
+  raise "error!!" if num <= 9
+rescue RuntimeError
+  num += 10
+  print 'in rescue.'
+  retry
+else
+  print 'in else.'
+ensure
+  print "in ensure.\n"
+end
 
-  foo(4) #=> in method.in rescue.in method.in else.in ensure.
+foo(4) #=> in method.in rescue.in method.in else.in ensure.
+#@end
 
-  #例3
-  class MyException
-    def exception(mesg=nil)
-      SecurityError.new(mesg)
-    end
+#@samplecode 例3
+class MyException
+  def exception(mesg=nil)
+    SecurityError.new(mesg)
   end
+end
 
-  begin
-    raise MyException.new
-  rescue SecurityError
-    p $! #=> #<SecurityError: SecurityError>
-  end
+begin
+  raise MyException.new
+rescue SecurityError
+  p $! #=> #<SecurityError: SecurityError>
+end
+#@end
 
 @see [[m:Kernel.#caller]]
 
@@ -2365,15 +2475,17 @@ Ruby における format 文字列の拡張については
 @raise IOError port が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-  printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI)
-  #=> calculate PI...   3.141592653589793
+#@samplecode 例
+printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI)
+#=> calculate PI...   3.141592653589793
 
-  printf("%d %04x", 123, 123)               #=> "123 007b"
-  printf("%08b '%4s'", 123, 123)            #=> "01111011 ' 123'"
-  printf("%1$*2$s %2$d %1$s", "hello", 8)   #=> "   hello 8 hello"
-  printf("%1$*2$s %2$d", "hello", -8)       #=> "hello    -8"
-  printf("%+g:% g:%-g", 1.23, 1.23, 1.23)   #=> "+1.23: 1.23:1.23"
-  printf("%u", -123)                        #=> "..4294967173"
+printf("%d %04x", 123, 123)               #=> "123 007b"
+printf("%08b '%4s'", 123, 123)            #=> "01111011 ' 123'"
+printf("%1$*2$s %2$d %1$s", "hello", 8)   #=> "   hello 8 hello"
+printf("%1$*2$s %2$d", "hello", -8)       #=> "hello    -8"
+printf("%+g:% g:%-g", 1.23, 1.23, 1.23)   #=> "+1.23: 1.23:1.23"
+printf("%u", -123)                        #=> "..4294967173"
+#@end
 
 @see [[m:Kernel.#sprintf]],[[m:IO#printf]]
 
@@ -2394,12 +2506,14 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
 生成して返します。通常、[[m:Kernel.#eval]] の第二引数として使います。
 
-  def foo
-    a = 1
-    binding
-  end
+#@samplecode 例
+def foo
+  a = 1
+  binding
+end
 
-  eval("p a", foo)  #=> 1
+eval("p a", foo)  #=> 1
+#@end
 
 @see [[m:Kernel.#eval]],[[m:Object::TOPLEVEL_BINDING]]
 
@@ -2427,16 +2541,18 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 @param fname スタックトレースに表示するファイル名です。
 @param lineno 文字列 expr が書かれていると想定する先頭の行番号を整数で指定します。
 
-  a = nil
-  eval('a = RUBY_RELEASE_DATE')
-  p a #=> "2007-03-13"
+#@samplecode 例
+a = nil
+eval('a = RUBY_RELEASE_DATE')
+p a #=> "2007-03-13"
 
-  eval('def fuga;p 777 end')
-  fuga #=> 777
+eval('def fuga;p 777 end')
+fuga #=> 777
 
-  eval('raise RuntimeError', binding, 'XXX.rb', 4)
-  #=> XXX.rb:4: RuntimeError (RuntimeError)
-  #       from ..:9
+eval('raise RuntimeError', binding, 'XXX.rb', 4)
+#=> XXX.rb:4: RuntimeError (RuntimeError)
+#       from ..:9
+#@end
 
 @see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:BasicObject#instance_eval]],[[m:Object#method]],[[m:Object#send]]
 
@@ -2488,19 +2604,23 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 #@end
 
 #@since 3.0.0
-  def foo &block
-    proc(&block)
-  end
+#@samplecode 例
+def foo &block
+  proc(&block)
+end
 
-  it = foo{p 12}
-  it.call #=> 12
+it = foo{p 12}
+it.call #=> 12
+#@end
 #@else
-  def foo &block
-    lambda(&block)
-  end
+#@samplecode 例
+def foo &block
+  lambda(&block)
+end
 
-  it = foo{p 12}
-  it.call #=> 12
+it = foo{p 12}
+it.call #=> 12
+#@end
 #@end
 
 @see [[c:Proc]],[[m:Proc.new]]
@@ -2512,13 +2632,15 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 現在のメソッド名を返します。
 メソッドの外で呼ばれると nil を返します。
 
-  def foo
-    p __method__
-  end
-  alias :bar :foo
-  foo #=> :foo
-  bar #=> :foo
-  p __method__ #=> nil
+#@samplecode 例
+def foo
+  p __method__
+end
+alias :bar :foo
+foo #=> :foo
+bar #=> :foo
+p __method__ #=> nil
+#@end
 
 現在のメソッド名が alias されたメソッドの場合でも alias 元のメソッド名
 を返します。
@@ -2528,13 +2650,15 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 現在のメソッド名を返します。
 メソッドの外で呼ばれると nil を返します。
 
-  def foo
-    p __callee__
-  end
-  alias :bar :foo
-  foo # => :foo
-  bar # => :bar
-  p __callee__ # => nil
+#@samplecode 例
+def foo
+  p __callee__
+end
+alias :bar :foo
+foo # => :foo
+bar # => :bar
+p __callee__ # => nil
+#@end
 
 [[m:Kernel.#__method__]] とは異なり、現在のメソッド名が alias されたメ
 ソッドの場合には alias 先のメソッド名を返します。
@@ -2564,22 +2688,24 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 
 @raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
 
-例:
-
-  Complex(1)       # => (1+0i)
-  Complex(1, 2)    # => (1+2i)
-  Complex('1+1i')  # => (1+1i)
-  Complex('1+1j')  # => (1+1i)
-  # Complex.polar(10, 10) と同一。
-  Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
-  Complex('_')     # => ArgumentError
+#@samplecode 例
+Complex(1)       # => (1+0i)
+Complex(1, 2)    # => (1+2i)
+Complex('1+1i')  # => (1+1i)
+Complex('1+1j')  # => (1+1i)
+# Complex.polar(10, 10) と同一。
+Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
+Complex('_')     # => ArgumentError
+#@end
 
 r にも i にも複素数と解釈されるオブジェクトを指定した場合には、
 Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを返しま
 す。
 
-  Complex('1+1i', '2+3i')                          # => (-2+3i)
-  Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
+#@samplecode 例
+Complex('1+1i', '2+3i')                          # => (-2+3i)
+Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
+#@end
 
 @see [[m:Complex.rect]]、[[m:Complex.rectangular]]
 
@@ -2608,16 +2734,20 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 引数 x、y の両方を指定した場合、x/y した [[c:Rational]] オブジェクトを
 返します。
 
-  Rational("1/3")           # => (1/3)
-  Rational(1, 3)            # => (1/3)
-  Rational("0.1", "0.3")    # => (1/3)
-  Rational(Complex(1,2), 2) # => ((1/2)+(1/1)*i)
+#@samplecode 例
+Rational("1/3")           # => (1/3)
+Rational(1, 3)            # => (1/3)
+Rational("0.1", "0.3")    # => (1/3)
+Rational(Complex(1,2), 2) # => ((1/2)+(1/1)*i)
+#@end
 
 ただし、1.8系とは異なり、[[c:Rational]] オブジェクトは常に既約(それ以上
 約分できない状態)である事に注意してください。
 
-  Rational(2, 6)         # => (1/3)
-  Rational(1, 3) * 3     # => (1/1)
+#@samplecode 例
+Rational(2, 6)         # => (1/3)
+Rational(1, 3) * 3     # => (1/1)
+#@end
 
 引数に文字列を指定する場合、以下のいずれかの形式で指定します。
 
@@ -2630,32 +2760,36 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 ん。また、[[m:Kernel.#Integer]] とは違い "0x10" のような進数を表す接頭
 辞を含めた指定は行えません。
 
-例:
-
-  Rational("1/3")        # => (1/3)
-  Rational("0.3")        # => (3/10)
-  Rational('0.3E0')      # => (3/10)
-  Rational('0.1E1/3')    # => (1/3)
-  Rational('1.2/3')      # => (2/5)
-  Rational('1/3.1')      # => ArgumentError
-  Rational('3.0', '3.0') # => (1/1)
-  Rational('3/3', '3/3') # => (1/1)
-  Rational('1_234_567')  # => (1234567/1)
-  Rational(" \n10\t ")   # => (10/1) # 空白類は無視される
-  Rational("0x10")       # => ArgumentError
+#@samplecode 例
+Rational("1/3")        # => (1/3)
+Rational("0.3")        # => (3/10)
+Rational('0.3E0')      # => (3/10)
+Rational('0.1E1/3')    # => (1/3)
+Rational('1.2/3')      # => (2/5)
+Rational('1/3.1')      # => ArgumentError
+Rational('3.0', '3.0') # => (1/1)
+Rational('3/3', '3/3') # => (1/1)
+Rational('1_234_567')  # => (1234567/1)
+Rational(" \n10\t ")   # => (10/1) # 空白類は無視される
+Rational("0x10")       # => ArgumentError
+#@end
 
 引数に変換できないオブジェクトを指定した場合には [[c:ArgumentError]] が
 発生します。
 
-  Rational(Object.new)   # => ArgumentError
-  Rational("")           # => ArgumentError
-  Rational(nil)          # => ArgumentError
+#@samplecode 例
+Rational(Object.new)   # => ArgumentError
+Rational("")           # => ArgumentError
+Rational(nil)          # => ArgumentError
+#@end
 
 また、Rational('0.3') と Rational(0.3) は異なるオブジェクトを返す事に注
 意してください。前者は正確に 3/10 ですが、後者はそうではありません。
 
-  Rational('0.3')        # => (3/10)
-  Rational(0.3)          # => (5404319552844595/18014398509481984)
+#@samplecode 例
+Rational('0.3')        # => (3/10)
+Rational(0.3)          # => (5404319552844595/18014398509481984)
+#@end
 
 @see [[c:Rational]]
 
@@ -2667,10 +2801,12 @@ Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを
 
 @param arg 変換対象のオブジェクトを指定します。
 
-  Hash([])          # => {}
-  Hash(nil)         # => {}
-  Hash(key: :value) # => {:key => :value}
-  Hash([1, 2, 3])   # => TypeError
+#@samplecode 例
+Hash([])          # => {}
+Hash(nil)         # => {}
+Hash(key: :value) # => {:key => :value}
+Hash([1, 2, 3])   # => TypeError
+#@end
 
 @raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 
