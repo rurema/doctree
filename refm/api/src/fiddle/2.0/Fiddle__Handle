@@ -98,12 +98,12 @@ GC によるオブジェクトの回収時に self をクローズする([[m:Fid
 
 == Constants
 --- NEXT -> Fiddle::Handle
-RTLD_NEXT で表わされる疑似ハンドルを表します。
+RTLD_NEXT で表わされる擬似ハンドルを表します。
 
 詳しくは [[man:dlsym(3)]] を参照してください。
 
 --- DEFAULT -> Fiddle::Handle
-RTLD_DEFAULT で表わされる疑似ハンドルを表します。
+RTLD_DEFAULT で表わされる擬似ハンドルを表します。
 
 詳しくは [[man:dlsym(3)]] を参照してください。
 
