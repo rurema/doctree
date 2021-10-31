@@ -98,7 +98,9 @@ irb/notifier
 irb/output-method
 irb/ruby-lex
 irb/ruby-token
+#@until 2.7.0
 irb/slex
+#@end
 irb/version
 irb/workspace
 irb/ws-for-case-2
