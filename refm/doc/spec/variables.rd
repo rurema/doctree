@@ -137,11 +137,11 @@ _ですが、組み込み変数の一部には
 
  class Foo
  end
- 
+
  class Bar < Foo
    @@v = :bar
  end
- 
+
  class Foo
    @@v = :foo
  end
@@ -156,23 +156,44 @@ _ですが、組み込み変数の一部には
 
 #@end
 
-#@since 1.9.0
+#@until 3.0.0
 親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
 子クラスのクラス変数が上書きされます。
 
  class Foo
  end
- 
+
  class Bar < Foo
    @@v = :bar
  end
- 
+
  class Foo
    @@v = :foo
  end
 
  class Bar
    p @@v       #=> :foo
+ end
+
+#@end
+
+#@since 3.0.0
+親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合、
+子クラスが、そのクラス変数を参照した際に例外 [[c:RuntimeError]] が発生します。
+
+ class Foo
+ end
+
+ class Bar < Foo
+   @@v = :bar
+ end
+
+ class Foo
+   @@v = :foo
+ end
+
+ class Bar
+   p @@v       #=> RuntimeError (class variable @@v of Bar is overtaken by Foo)
  end
 
 #@end
@@ -189,16 +210,16 @@ _ですが、組み込み変数の一部には
    class << Foo
      p @@a       #=> :a
    end
-   
+
    def Foo.a1
      p @@a
    end
  end
 
- Foo.a1          #=> :a              
- 
+ Foo.a1          #=> :a
+
  def Foo.a2
-   p @@a 
+   p @@a
  end
  Foo.a2          #=> NameError になります。
 
