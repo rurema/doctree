@@ -240,7 +240,7 @@ pp Coverage.result  #=> {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}}
 
 #@since 2.6.0
 @param stop true であれば、カバレッジの測定を終了します。
-@param clear true であれば、測定記録をクリアにします。
+@param clear true であれば、測定記録をクリアします。
 #@else
 resultメソッドが実行された後はカバレッジの測定を行いません。
 #@end
