@@ -470,7 +470,7 @@ alias Etc::Group
 --- each                -> Enumerator
 
 /etc/group に含まれるエントリを一つずつブロックに渡して評価します。
-ブロックを省略した場合は [[c:Enumerator]] のインスタンスを返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @see [[m:Etc.#getpwent]]
 
@@ -548,7 +548,7 @@ alias Etc::Passwd
 --- each                -> Enumerator
 
 /etc/passwd に含まれるエントリを一つずつブロックに渡して評価します。
-ブロックを省略した場合は [[c:Enumerator]] のインスタンスを返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @see [[m:Etc.#getpwent]]
 

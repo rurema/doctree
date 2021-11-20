@@ -53,8 +53,7 @@ category File
 また file に渡される順序は不定です。
 
 #@since 1.9.1
-ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返
-します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 #@end
 
 @param dirs 探索するディレクトリを一つ以上指定します。

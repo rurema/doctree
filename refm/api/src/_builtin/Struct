@@ -274,8 +274,7 @@ joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, Any
 す。
 
 #@since 1.9.1
-ブロックを省略した場合は、各要素に対しブロックを評価し 真になった値の配
-列を返すような [[c:Enumerator]] を返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 #@end
 
 #@samplecode 例

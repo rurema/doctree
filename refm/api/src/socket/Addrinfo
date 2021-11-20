@@ -114,8 +114,7 @@ socktype でソケットタイプを指定します。
 
 [[m:Addrinfo.getaddrinfo]] で得られる配列の各要素を繰り返します。
 
-ブロックを省略した場合は繰り返しをする [[c:Enumerator]] オブジェクト
-を返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @param nodename ノード名文字列(ホスト名もしくは IP アドレス)
 @param service サービス名(文字列もしくはポート番号の整数)
