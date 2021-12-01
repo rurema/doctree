@@ -273,9 +273,7 @@ joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, Any
 む配列を返します。真になる要素がひとつもなかった場合は空の配列を返しま
 す。
 
-#@since 1.9.1
 ブロックを省略した場合は [[c:Enumerator]] を返します。
-#@end
 
 #@samplecode 例
 Lots = Struct.new(:a, :b, :c, :d, :e, :f)
