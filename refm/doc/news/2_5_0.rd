@@ -335,7 +335,7 @@ Coverage.result
 
 === 互換性 (機能追加とバグ修正以外)
 
-  * [[c:Socket]]
+  * [[c:BasicSocket]]
     * [[m:BasicSocket#read_nonblock]] と [[m:BasicSocket#write_nonblock]] で
       副作用として O_NONBLOCK フラグをセットするのをやめました(Linux のみ)
       [[feature:13362]]
