@@ -330,7 +330,7 @@ Coverage.result
     * RubyGem としてリリース [[feature:13173]]
     * 意図しない振舞いを避けるため [[m:Kernel.#open]] を使用するのをやめました [[misc:14216]]
 
-  * [[lib:zlip]]
+  * [[lib:zlib]]
     * [[m:Zlib::GzipWriter#write]] は複数の引数を受け取れるようになりました
 
 === 互換性 (機能追加とバグ修正以外)
