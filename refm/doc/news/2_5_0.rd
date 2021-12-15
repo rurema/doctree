@@ -165,11 +165,11 @@
     * ブランチカバレッジとメソッドカバレッジの計測をサポートしました [[feature:13901]]
       この新機能と一緒にテストスイートを実行すると、テストによって実行された条件分岐やメソッドについて知ることができます。
       テストスイートのカバレッジをより厳密に評価することができます。
-      [[m:Coverage.start]]に与えるオプションによって計測する対象を指定することができます。
+      [[m:Coverage.start]] に与えるオプションによって計測する対象を指定することができます。
 #@samplecode
 Coverage.start(lines: true, branches: true, methods: true)
 #@end
-    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverage.result]]を使って結果を取得することができます。
+    * Rubyで書かれたファイルをいくつか読み込んでから、[[m:Coverage.result]] を使って結果を取得することができます。
 #@samplecode
 Coverage.result
 #=> { "/path/to/file.rb"=>
@@ -211,7 +211,7 @@ Coverage.result
 //}
     * 例えば [Object, :foo, 1, 0, 7, 3] は Object#foo は1行目の0桁目から7行目の3桁目までで定義されている、と読みます。
       上記の例では Object#foo は2回実行されています。
-    * Note: 互換性のため、[[m:Coverage.start]]にオプションを与えない場合は、ラインカバレッジのみを計測します。
+    * Note: 互換性のため、[[m:Coverage.start]] にオプションを与えない場合は、ラインカバレッジのみを計測します。
       また [[m:Coverage.result]] も旧フォーマットを返します。
 #@samplecode
 Coverage.result
