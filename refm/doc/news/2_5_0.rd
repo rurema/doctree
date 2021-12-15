@@ -155,11 +155,11 @@
 
   * [[lib:bigdecimal]]
     * BigDecimal 1.3.4 に更新
-    * BigDecimal::VERSION を追加
+    * [[m:BigDecimal::VERSION]] を追加
     * 非推奨(1.4.0で削除予定)
       * BigDecimal.new
       * BigDecimal.ver
-    * BigDecimal#clone と [[m:BigDecimal#dup]] は新しいインスタンスを作らなくなりました。selfを返します。
+    * [[m:BigDecimal#clone]] と [[m:BigDecimal#dup]] は新しいインスタンスを作らなくなりました。selfを返します。
 
   * [[lib:coverage]]
     * ブランチカバレッジとメソッドカバレッジの計測をサポートしました [[feature:13901]]
@@ -211,8 +211,8 @@ Coverage.result
 //}
     * 例えば [Object, :foo, 1, 0, 7, 3] は Object#foo は1行目の0桁目から7行目の3桁目までで定義されている、と読みます。
       上記の例では Object#foo は2回実行されています。
-    * Note: 互換性のため、Coverage.startにオプションを与えない場合は、ラインカバレッジのみを計測します。
-      また Coverage.result も旧フォーマットを返します。
+    * Note: 互換性のため、[[m:Coverage.start]]にオプションを与えない場合は、ラインカバレッジのみを計測します。
+      また [[m:Coverage.result]] も旧フォーマットを返します。
 #@samplecode
 Coverage.result
 #=> { "/path/to/file.rb"=> [1, 2, 0, nil, ...] }
@@ -371,13 +371,13 @@ Coverage.result
       * webrick
       * zlib
 
-  * Logger
+  * [[c:Logger]]
     * Logger.new("| command") は意図せず、コマンドを実行していましたが、禁止されました。
       Logger#initialize の引数は仕様としてファイル名としてのみ扱うようになりました。
       [[bug:14212]]
 
-  * Net::HTTP
-    * Net::HTTP#start の第3引数のデフォルト値を :ENV にしました。 [[bug:13351]]
+  * [[c:Net::HTTP]]
+    * [[m:Net::HTTP#start]] の第3引数のデフォルト値を :ENV にしました。 [[bug:13351]]
       これを避けるには明示的に nil を与えてください。
 
   * mathn.rb
@@ -395,20 +395,20 @@ Coverage.result
 
 === 実装の改善
 
-  * (これは「ユーザーに見える機能の変更」ではないが) Hashクラスのhashメソッドのアルゴリズムを SipHash13 にしました
+  * (これは「ユーザーに見える機能の変更」ではないが) [[c:Hash]]クラスのhashメソッドのアルゴリズムを SipHash13 にしました
     [[feature:13017]]
 
-  * SecureRandom が OpenSSL の提供する乱数ソースよりもOSの提供する乱数ソースを優先するようにしました [[bug:9569]]
+  * [[c:SecureRandom]] が [[c:OpenSSL]] の提供する乱数ソースよりもOSの提供する乱数ソースを優先するようにしました [[bug:9569]]
 
-  * Mutex をより小さくより速く書き直しました [[feature:13517]]
+  * [[c:Mutex]] をより小さくより速く書き直しました [[feature:13517]]
 
   * lazy Proc allocation というテクニックでブロックをメソッドの引数として渡したときの性能が向上しました
     [[feature:14045]]
 
-  * TracePointのためにtrace命令の変わりに命令の動的書き換えを使用するようにしました
+  * [[c:TracePoint]]のためにtrace命令の変わりに命令の動的書き換えを使用するようにしました
     [[feature:14104]]
 
-  * ERB がテンプレートから生成するコードはRuby 2.4 よりも2倍速くなりました
+  * [[c:ERB]] がテンプレートから生成するコードはRuby 2.4 よりも2倍速くなりました
 
 === その他の変更
 
