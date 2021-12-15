@@ -159,7 +159,7 @@
     * 非推奨(1.4.0で削除予定)
       * BigDecimal.new
       * BigDecimal.ver
-    * BigDecimal#clone と #dup は新しいインスタンスを作らなくなりました。selfを返します。
+    * BigDecimal#clone と [[m:BigDecimal#dup]] は新しいインスタンスを作らなくなりました。selfを返します。
 
   * [[lib:coverage]]
     * ブランチカバレッジとメソッドカバレッジの計測をサポートしました [[feature:13901]]
