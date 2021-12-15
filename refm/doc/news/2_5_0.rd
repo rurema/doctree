@@ -264,7 +264,7 @@ Coverage.result
   * [[lib:pathname]]
     * [[m:Pathname#glob]] を追加 [[feature:7360]]
 
-  * Psych
+  * [[lib:psych]]
     * Psych 3.0.2 に更新しました
       * Convert fallback option to a keyword argument
         [[url:https://github.com/ruby/psych/pull/342]]
