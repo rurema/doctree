@@ -185,7 +185,7 @@ Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 そのクラスが追加されます。例えば Date クラスを許可するには
 以下のように書いてください:
 
-#@samplecode permitted_classes: [Date] の例
+#@samplecode permitted_classes: に Date を渡した例
 Psych.safe_load(yaml, permitted_classes: [Date])
 #@end
 
