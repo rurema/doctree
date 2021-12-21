@@ -12,7 +12,7 @@ require 'net/http'
 print Net::HTTP.get('www.example.com', '/index.html')
 #@end
 
-#@samplecode 例2: [[c:URI]] を使う
+#@samplecode 例2: URI を使う
 require 'net/http'
 require 'uri'
 print Net::HTTP.get(URI.parse('http://www.example.com/index.html'))
