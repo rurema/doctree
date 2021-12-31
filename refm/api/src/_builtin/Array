@@ -2853,14 +2853,14 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 [[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
 #@end
 
-しかし、文字列の配列や配列の配列の場合 Array#join や Array#flatten の方が Array#sum よりも高速です。
+しかし、文字列の配列や配列の配列の場合 [[m:Array#join]] や [[m:Array#flatten]] の方が [[m:Array#sum]] よりも高速です。
 
 #@samplecode 例
 ["a", "b", "c"].join               #=> "abc"
 [[1], [[2]], [3]].flatten(1)       #=> [1, [2], 3]
 #@end
 
-"+" メソッドが再定義されている場合、Array#sum は再定義を無視することがあります(例えばInteger#+)。
+"+" メソッドが再定義されている場合、[[m:Array#sum]] は再定義を無視することがあります(例えば [[m:Integer#+]])。
 
 @see [[m:Enumerable#sum]]
 #@end
