@@ -37,7 +37,7 @@ end
 //}
 
     * パターンマッチ（+case/in+）が正式機能となりました。 [[feature:17260]]
-    * 一行パターンマッチが実験的に再設計されました。
+    * 一行パターンマッチが実験的に再設計されました。 [EXPERIMENTAL]
         * +=>+ が導入されました。右代入のように使用できます。
           [[feature:17260]]
       * +in+ は +true+ もしくは +false+ を返すように変更されています。 [[feature:17371]]
@@ -58,7 +58,7 @@ p b #=> 0
 0 in 1 #=> raise NoMatchingPatternError
 //}
 
-  * Find パターンが実験的に導入されています。
+  * Find パターンが実験的に導入されています。 [EXPERIMENTAL]
     [[feature:16828]]
 
 //emlist{
@@ -71,8 +71,8 @@ in [*pre, String => x, String => y, *post]
 end
 //}
 
-  * end のないメソッド定義が実験的に導入されました。
-    [[feature:16746]]
+  * end のないメソッド定義が実験的に導入されました。 [EXPERIMENTAL]
+      [[feature:16746]]
 
 //emlist{
 def square(x) = x * x
@@ -327,7 +327,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
 (42...).frozen? # => true
 #@end
 
-  * EXPERIMENTAL: Hash#each  が常に 2 要素配列を yield するようになりました。[[bug:12706]]
+  * EXPERIMENTAL: Hash#each が常に 2 要素配列を yield するようになりました。[[bug:12706]]
     * +{ a: 1 }.each(&->(k, v) { })+ は lambda のアリティチェックが要因で、ArgumentError を浮揚するようになりました。
   * パイプがクローズされた後に標準出力へ出力しようとしても、EPIPE 例外を浮揚しないようになりました。[[feature:14413]]
   * +TRUE+/+FALSE+/+NIL+ 各定数が定義されないようになりました。
