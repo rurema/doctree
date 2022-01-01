@@ -152,7 +152,7 @@ dirty_data[(1..).step(2)] # take each second element
     * Windows では Encoding.default_external のデフォルトが UTF-8 になりました。[[feature:16604]]
   * Fiber
     * Fiber.new(blocking: true/false) は、ノンブロッキング実行コンテキストを生成することを許可するようになりました。[[feature:16786]]
-    * Fiber#blocking? は fiber がノンブロッキングであるかどうかを知らせてくれます。[[feature:16786]]
+    * Fiber#blocking? は fiber がノンブロッキングであるかを返します。[[feature:16786]]
     * Fiber#backtrace および Fiber#backtrace_locations は fiber ごとのバックトレースを提供するようになりました。[[feature:16815]]
     * Fiber#transfer の制限が緩和されました。[[bug:17221]]
   * GC
