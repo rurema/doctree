@@ -78,7 +78,7 @@ end
 def square(x) = x * x
 //}
 
-  * +# frozen-string-literal: true+ が使用されている場合、式典会を含む文字列リテラルは freeze されなくなりました。
+  * +# frozen-string-literal: true+ が使用されている場合、式展開を含む文字列リテラルは freeze されなくなりました。
     [[feature:17104]]
   * マジックコメント +shareable_constant_value+ が freeze 定数に導入されました。
     詳細は {Magic Comments}[rdoc-ref:doc/syntax/comments.rdoc@Magic+Comments] を参照してください。
