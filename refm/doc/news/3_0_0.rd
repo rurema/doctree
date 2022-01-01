@@ -149,7 +149,7 @@ dirty_data[(1..).step(2)] # take each second element
     * Windows: ENV の名前と値を UTF-8 でエンコードされた文字列として読み取ります。[[feature:12650]]
   * Encoding
     * 新しく IBM720 というエンコーディングが導入されました。[[feature:16233]]
-    * Windows では UTF-8 形式の Encoding.default_external がデフォルトになりました。[[feature:16604]]
+    * Windows では Encoding.default_external のデフォルトが UTF-8 になりました。[[feature:16604]]
   * Fiber
     * Fiber.new(blocking: true/false) は、ノンブロッキング実行コンテキストを生成することを許可するようになりました。[[feature:16786]]
     * Fiber#blocking? は fiber がノンブロッキングであるかどうかを知らせてくれます。[[feature:16786]]
