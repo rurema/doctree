@@ -154,7 +154,7 @@ dirty_data[(1..).step(2)] # take each second element
     * Fiber.new(blocking: true/false) は、ノンブロッキング実行コンテキストを生成することを許可するようになりました。[[feature:16786]]
     * Fiber#blocking? は fiber がノンブロッキングであるかどうかを知らせてくれます。[[feature:16786]]
     * Fiber#backtrace および Fiber#backtrace_locations は fiber ごとのバックトレースを提供するようになりました。[[feature:16815]]
-    * Fiber#transfer の制限が緩和されるようになりました。[[bug:17221]]
+    * Fiber#transfer の制限が緩和されました。[[bug:17221]]
   * GC
     * コンパクションが実行されるタイミングを制御するために GC.auto_compact= および GC.auto_compact が導入されました。
       +auto_compact=+ を +true+ に設定すると、主要なコレクション中にコンパクションが発生します。
