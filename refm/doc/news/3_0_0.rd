@@ -157,8 +157,8 @@ dirty_data[(1..).step(2)] # take each second element
     * Fiber#transfer の制限が緩和されました。[[bug:17221]]
   * GC
     * コンパクションが実行されるタイミングを制御するために GC.auto_compact= および GC.auto_compact が導入されました。
-      +auto_compact=+ を +true+ に設定すると、主要なコレクション中にコンパクションが発生します。
-      現時点では、コンパクションによって主要なコレクションにかなりのオーバーヘッドが追加されます。よって、まず最初にテストを実行してください！
+      +auto_compact=+ を +true+ に設定すると、メジャー GC 中にコンパクションが発生します。
+      現時点では、コンパクションによってメジャー GC にかなりのオーバーヘッドが追加されます。よって、まず最初にテストを実行してください！
       [[feature:17176]]
   * Hash
     * Hash#transform_keys および Hash#transform_keys! はキーを新しいキーにマッピングするハッシュを受け入れるようになりました。[[feature:16274]]
