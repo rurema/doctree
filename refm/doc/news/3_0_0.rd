@@ -146,7 +146,7 @@ dirty_data[(1..).step(2)] # take each second element
     * Dir.glob および Dir.[] は出力結果をデフォルトでソートするようになりました。[[feature:8709]]
   * ENV
     * ENV.except が導入されました。与えられたキーとそれらの値を除外したハッシュを返すようになりました。[[feature:15822]]
-    * Windows: ENV の名前を値を UTF-8 でエンコードされた文字列として読み取ります。[[feature:12650]]
+    * Windows: ENV の名前と値を UTF-8 でエンコードされた文字列として読み取ります。[[feature:12650]]
   * Encoding
     * 新しく IBM720 というエンコーディングが導入されました。[[feature:16233]]
     * Windows では UTF-8 形式の Encoding.default_external がデフォルトになりました。[[feature:16604]]
