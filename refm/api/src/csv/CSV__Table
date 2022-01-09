@@ -403,11 +403,12 @@ table.headers # => ["header1", "header2"]
 
 モードとサイズを US-ASCII な文字列で返します。
 
-例:
-  require 'csv'
-  csv = CSV.new("a,b,c\n1,2,3", headers: true)
-  table = csv.read
-  table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b,c\n1,2,3", headers: true)
+table = csv.read
+table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
+#@end
 
 
 --- length -> Integer
@@ -440,11 +441,13 @@ table.mode    # => :col
 @param rows [[c:CSV::Row]] のインスタンスか配列を指定します。
 
 以下と同じです。
-  require 'csv'
-  csv = CSV.new("a,b,c\n,1,2,3", headers: true)
-  table = csv.read
-  rows = [[4, 5, 6], [7, 8, 9]]
-  rows.each{|row| table << row }
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b,c\n,1,2,3", headers: true)
+table = csv.read
+rows = [[4, 5, 6], [7, 8, 9]]
+rows.each{|row| table << row }
+#@end
 
 --- to_a -> [Array]
 
@@ -471,12 +474,13 @@ CSV の文字列に変換して返します。
 デフォルトでは、ヘッダを出力します。オプションに :write_headers =>
 false を指定するとヘッダを出力しません。
 
-例:
-  require 'csv'
-  csv = CSV.new("a,b,c\n,1,2,3", headers: true)
-  table = csv.read
-  table.to_csv                       # => "a,b,c\n1,2,3\n"
-  table.to_csv(write_headers: false) # => "1,2,3\n"
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b,c\n1,2,3", headers: true)
+table = csv.read
+table.to_csv                       # => "a,b,c\n1,2,3\n"
+table.to_csv(write_headers: false) # => "1,2,3\n"
+#@end
 
 --- values_at(indices_or_headers) -> Array
 
