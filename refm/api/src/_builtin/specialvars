@@ -378,8 +378,6 @@ Rubyライブラリをロードするときの検索パスです。
 コンパイル時に指定したデフォルト値
 をこの順番で含みます。
 
-#@# 1.6.5 から以下のように変更されている
-#@# 1.6.4 以前の値は書かなくていいよね……
 以下に典型的な UNIX システム上でのロードパスを示します。
 
   -I で指定したパス
@@ -390,7 +388,6 @@ Rubyライブラリをロードするときの検索パスです。
   /usr/local/lib/ruby/VERSION                  標準ライブラリ
   /usr/local/lib/ruby/VERSION/ARCH             標準、システム依存、拡張ライブラリ
 
-#@#((-デフォルトの順序は 1.6.5 から変更されました-))
 上記表中の VERSION は Ruby のバージョンを表す文字列で、
 「1.6」や「1.8」です。
 ARCH はハードウェアと OS を表す文字列で、
@@ -423,6 +420,16 @@ require 'foo' を実行すると、
   $ ruby -e 'puts $:'
 
 とします。
+
+#@since 2.7.0
+$LOAD_PATH の特異メソッドとして resolve_feature_path が定義されています。
+require を呼んだときに読み込まれるファイルを特定できます。
+
+#@samplecode
+p $LOAD_PATH.resolve_feature_path('set')
+# => [:rb, "/build-all-ruby/2.7.0/lib/ruby/2.7.0/set.rb"]
+#@end
+#@end
 
 この変数はグローバルスコープです。
 
