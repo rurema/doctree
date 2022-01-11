@@ -192,14 +192,19 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   指定した feature を有効にします。以下のいずれかを指定できます。
 //emlist{
-    * gems            rubygems (default: enabled)
-    * rubyopt         RUBYOPT 環境変数 (default: enabled)
-#@since 2.3.0
-    * did_you_mean    did_you_mean (default: enabled)
-    * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
+    * gems            rubygems (無効にするのはデバッグ専用、default: enabled)
+#@since 3.1.0
+    * error_highlight error_highlight (default: enabled)
 #@end
+    * did_you_mean    did_you_mean (default: enabled)
+    * rubyopt         RUBYOPT 環境変数 (default: enabled)
+    * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
 #@since 2.6.0
     * jit             JIT (default: disabled)
+#@end
+#@since 3.1.0
+    * mjit            MJIT (default: disabled)
+    * yjit            YJIT (default: disabled)
 #@end
 //}
 
