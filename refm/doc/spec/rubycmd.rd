@@ -432,6 +432,13 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
   コンパイラそのものをデバッグする人以外には必要ないと思います。
 
 #@since 3.1.0
+==== JIT のオプション (実験的)
+
+: --jit
+
+  JITを有効にします。
+  YJITが有効な環境ではYJITを、それ以外の環境ではMJITを有効にします。
+
 ==== MJIT のオプション (実験的)
 
 : --mjit
