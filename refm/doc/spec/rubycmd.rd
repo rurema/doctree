@@ -465,7 +465,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
 : --mjit-max-cache=num
 
-  キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 100)
+  キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 10000)
 
 : --mjit-min-calls=num
 
