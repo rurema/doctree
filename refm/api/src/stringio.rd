@@ -382,7 +382,18 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
---- readchar    -> Integer
+--- readchar    -> String
+
+自身から 1 文字読み込んで、その文字に対応する String を返します。
+
+文字列の終端に到達した時には例外 [[c:EOFError]] を発生させます。
+
+ require "stringio"
+ a = StringIO.new("hoge")
+ a.readchar               #=> "h"
+
+@raise EOFError EOFに達した時発生する
+
 --- readbyte    -> Integer
 
 自身から 1 文字読み込んで、その文字に対応する整数を返します。
@@ -391,7 +402,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
  require "stringio"
  a = StringIO.new("hoge")
- a.readchar               #=> 104
+ a.readbyte               #=> 104
 
 @raise EOFError 文字列の終端に到達した時に発生します。
 
