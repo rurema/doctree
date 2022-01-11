@@ -390,16 +390,16 @@ file_name で与えられたディレクトリが存在する場合に真を返�
 
 #@samplecode 例
 Dir.exist?(".")      # => true
-Dir.exists?(".")     # => true
 File.directory?(".") # => true
 #@end
 
 @see [[m:File.directory?]]
 
+#@until 3.2
 --- exists?(file_name)    -> bool
 
 このメソッドは Ruby 2.1 から deprecated です。[[m:Dir.exist?]] を使用してください。
-
+#@end
 --- home          -> String | nil
 --- home(user)    -> String | nil
 
