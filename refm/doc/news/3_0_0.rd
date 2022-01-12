@@ -139,7 +139,7 @@ dirty_data[(1..).step(2)] # take each second element
 #@end
 
   * Binding
-    * 1 引数で呼び出された Binding#eval は、コード評価時に __FILE__ では "(eval)" を、__LINE__ では 1 を使うようになります。[[bug:4352]] [[bug:17419]]
+    * 1 引数で呼び出された Binding#eval は、コード評価時に __FILE__ には "(eval)" を、__LINE__ には 1 を使うようになります。[[bug:4352]] [[bug:17419]]
   * ConditionVariable
     * ConditionVariable#wait はノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。[[feature:16786]]
   * Dir
