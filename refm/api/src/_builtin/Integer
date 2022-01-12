@@ -13,6 +13,26 @@ alias Bignum
 
 == Class Methods
 
+#@since 3.1
+--- try_convert(obj) -> Integer | nil
+
+obj を Integer に変換しようと試みます。変換には [[m:Object#to_int]]
+メソッドが使われます。
+
+Integer ならそのままobjを返します。
+そうでなければ obj.to_int の結果を返すか、nil が返されます。
+
+@param obj   変換する任意のオブジェクト
+@return      Integer または nil
+@raise TypeError to_int が Integer を返さなかった場合に発生します。
+
+#@samplecode 例
+Integer.try_convert(1)    # => 1
+Integer.try_convert(1.25) # => 1
+Integer.try_convert([])   # => nil
+#@end
+#@end
+
 #@since 2.5.0
 --- sqrt(n) -> Integer
 
