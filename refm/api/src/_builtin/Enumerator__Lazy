@@ -26,6 +26,9 @@ map や select などのメソッドの遅延評価版を提供するための�
 #@else
  * chunk
 #@end
+#@since 3.1
+ * compact
+#@end
  * zip (※互換性のため、ブロックを渡さないケースのみlazy)
 
 Lazyオブジェクトは、[[m:Enumerable#lazy]]メソッドによって生成されます。
