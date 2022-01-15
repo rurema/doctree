@@ -88,7 +88,7 @@ p public_methods(false) - basic_public_methods
 
 --- include(*modules) -> self
 
-引数 modules で指定したモジュールを後ろから順番にインクルードします。
+引数 modules で指定したモジュールを後ろから順番に [[c:Object]] にインクルードします。
 
 @param modules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
