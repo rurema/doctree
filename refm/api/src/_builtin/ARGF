@@ -529,9 +529,9 @@ ARGVに指定されたファイルを先頭のファイルからlengthバイト�
 
 @see [[m:IO#read]]
 
---- readchar -> Integer
+--- readchar -> String
 
-ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返します。EOF に
+ARGFから 1 文字読み込んで、その文字に対応する String を返します。EOF に
 到達した時には EOFErrorを発生します。
 
 @raise EOFError EOFに達した時発生する
