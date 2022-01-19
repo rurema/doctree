@@ -11,8 +11,8 @@ include Enumerable
 == Class Methods
 
 #@since 2.5.0
---- new(*args, keyword_init: false)                  -> Class
---- new(*args, keyword_init: false) {|Class| block } -> Class
+--- new(*args, keyword_init: nil)                  -> Class
+--- new(*args, keyword_init: nil) {|Class| block } -> Class
 #@else
 --- new(*args)                  -> Class
 --- new(*args) {|Class| block } -> Class
@@ -36,7 +36,13 @@ printf "name:%s age:%d", fred.name, fred.age
 
 @param args 構造体を定義するための可変長引数。[[c:String]] または [[c:Symbol]] を指定します。
 #@since 2.5.0
+#@since 3.2
+@param keyword_init false を指定すると、キーワード引数で初期化しない構造体を定義します。
+#@else
 @param keyword_init true を指定すると、キーワード引数で初期化する構造体を定義します。
+#@end
+                    Ruby 3.1 では互換性に影響のある使い方をしたときに警告が出るため、
+                    従来の挙動を期待する構造体には明示的に false を指定してください。
 #@end
 
 === 第一引数が String の場合
@@ -125,6 +131,24 @@ Foo = Struct.new(:foo, :bar)
 p Foo.members      # => [:foo, :bar]
 #@end
 
+#@since 3.1
+--- keyword_init? -> bool | nil
+
+(このメソッドは Struct の下位クラスにのみ定義されています)
+構造体が作成されたときに keyword_init: true を指定されていたら true を返します。
+false を指定されていたら false を返します。
+それ以外の場合は nil を返します。
+
+#@samplecode 例
+Foo = Struct.new(:a)
+Foo.keyword_init? # => nil
+Bar = Struct.new(:a, keyword_init: true)
+Bar.keyword_init? # => true
+Baz = Struct.new(:a, keyword_init: false)
+Baz.keyword_init? # => false
+#@end
+
+#@end
 == Instance Methods
 
 --- [](member) -> object
