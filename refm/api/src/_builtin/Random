@@ -87,7 +87,11 @@ Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
 rand(10.0)         #=> 6                   (rand(10) と同じ)
 #@end
 
+#@since 3.2
+@see [[m:Random.srand]], [[m:Random#rand]]
+#@else
 @see [[m:Random.srand]], [[m:Random#rand]], [[m:Random::DEFAULT]]
+#@end
 #@else
 --- rand(max = 0) -> Integer | Float
 
@@ -112,10 +116,10 @@ rand(10.0)         #=> 6                   (rand(10) と同じ)
 
 #@#noexample 詳しくは Kernel.#srand を参照
 
-#@since 1.9.3
-@see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
-#@else
+#@since 3.2
 @see [[m:Kernel.#rand]]
+#@else
+@see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
 #@end
 #@since 2.6.0
 --- bytes(size) -> String
