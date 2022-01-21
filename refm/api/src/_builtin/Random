@@ -365,6 +365,7 @@ C言語レベルで定義されている構造体MTの静的変数default_rand�
 #@since 1.9.3
 == Constants
 
+#@until 3.2
 #@since 3.0.0
 --- DEFAULT -> Class
 #@else
@@ -387,6 +388,7 @@ Random.rand(10) # => 4
 [[m:Random.rand]] や [[m:Kernel.#rand]] などで使用されます。
 
 @see [[m:Random.srand]], [[m:Kernel.#srand]]
+#@end
 #@end
 #@end
 #@end
