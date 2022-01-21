@@ -1177,7 +1177,11 @@ marshal_dump/marshal_load を使うべきです。
 
 オブジェクトの複製を作成して返します。
 
+#@since 3.2
+dup はオブジェクトの内容をコピーし、
+#@else
 dup はオブジェクトの内容, taint 情報をコピーし、
+#@end
 clone はそれに加えて freeze, 特異メソッドなどの情報も含めた完全な複製を作成します。
 
 clone や dup は浅い(shallow)コピーであることに注意してください。後述。
@@ -1189,14 +1193,22 @@ clone や dup は浅い(shallow)コピーであることに注意してくださ
 
 #@samplecode
 obj = "string"
+#@until 3.2
 obj.taint
+#@end
 def obj.fuga
 end
 obj.freeze
 
 p(obj.equal?(obj))          #=> true
 p(obj == obj)               #=> true
+#@until 3.2
+#@since 2.7.0
+p(obj.tainted?)             #=> false
+#@else
 p(obj.tainted?)             #=> true
+#@end
+#@end
 p(obj.frozen?)              #=> true
 p(obj.respond_to?(:fuga))   #=> true
 
@@ -1204,7 +1216,13 @@ obj_c = obj.clone
 
 p(obj.equal?(obj_c))        #=> false
 p(obj == obj_c)             #=> true
+#@until 3.2
+#@since 2.7.0
+p(obj_c.tainted?)           #=> false
+#@else
 p(obj_c.tainted?)           #=> true
+#@end
+#@end
 p(obj_c.frozen?)            #=> true
 p(obj_c.respond_to?(:fuga)) #=> true
 
@@ -1212,7 +1230,13 @@ obj_d = obj.dup
 
 p(obj.equal?(obj_d))        #=> false
 p(obj == obj_d)             #=> true
+#@until 3.2
+#@since 2.7.0
+p(obj_d.tainted?)           #=> false
+#@else
 p(obj_d.tainted?)           #=> true
+#@end
+#@end
 p(obj_d.frozen?)            #=> false
 p(obj_d.respond_to?(:fuga)) #=> false
 #@end
@@ -1578,6 +1602,7 @@ p Kernel.class #=> Module
 
 @see [[m:Class#superclass]],[[m:Object#kind_of?]],[[m:Object#instance_of?]]
 
+#@until 3.2
 --- taint -> self
 
 #@since 2.7.0
@@ -1691,7 +1716,7 @@ p ENV['OS'].tainted? #=> true
 #@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
-
+#@end
 --- singleton_class -> Class
 
 レシーバの特異クラスを返します。
@@ -1802,8 +1827,12 @@ obj2 = obj.class.allocate
 obj2.initialize_copy(obj)
 #@end
 
-obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
-ザをコピーすることで複製を作ります。 obj.clone は、さらに
+#@since 3.2
+obj2 に対してさらに obj のインスタンス変数、ファイナライザを
+#@else
+obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライザを
+#@end
+コピーすることで複製を作ります。 obj.clone は、さらに
 特異メソッドのコピーも行います。
 
 #@samplecode
@@ -1817,7 +1846,9 @@ end
 
 def check(obj)
   puts "instance variables: #{obj.inspect}"
+#@until 3.2
   puts "tainted?: #{obj.tainted?}"
+#@end
   print "singleton methods: "
   begin
     p obj.bar
@@ -1827,19 +1858,27 @@ def check(obj)
 end
 
 obj.foo = 1
+#@until 3.2
 obj.taint
+#@end
 
 check Object.new.send(:initialize_copy, obj)
         #=> instance variables: #<Object:0x4019c9d4>
+#@until 3.2
         #   tainted?: false
+#@end
         #   singleton methods: #<NoMethodError: ...>
 check obj.dup
         #=> instance variables: #<Object:0x4019c9c0 @foo=1>
+#@until 3.2
         #   tainted?: true
+#@end
         #   singleton methods: #<NoMethodError: ...>
 check obj.clone
         #=> instance variables: #<Object:0x4019c880 @foo=1>
+#@until 3.2
         #   tainted?: true
+#@end
         #   singleton methods: :bar
 #@end
 
