@@ -254,7 +254,7 @@ call メソッドは文字列を返す必要があります。
 
 == Constants
 
---- VERSION -> '2.0'
+--- VERSION -> String
 
 [[c:Syslog::Logger]] のバージョンを表す文字列です。
 
