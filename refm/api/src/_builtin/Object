@@ -743,6 +743,7 @@ puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
 @see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Regexp#===]], [[m:Enumerable#grep]]
 
+#@until 3.2
 --- =~(other) -> nil
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
@@ -771,7 +772,7 @@ p(obj =~ /re/) #=> nil
 #@end
 
 @see [[m:String#=~]]
-
+#@end
 --- !~(other) -> bool
 
 自身が other とマッチしない事を判定します。
