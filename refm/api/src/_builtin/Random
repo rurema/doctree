@@ -65,7 +65,7 @@ Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 #@since 1.9.3
 --- rand -> Float
 --- rand(max) -> Integer | Float
---- rand(range) -> Integer | Float | nil
+--- rand(range) -> Integer | Float
 
 擬似乱数を発生させます。
 
@@ -214,7 +214,6 @@ max が正の整数なら整数を、正の実数なら実数を返します。
 
 三番目の形式では range で指定された範囲の値を返します。
 range の始端と終端が共に整数の場合は整数を、少なくとも片方が実数の場合は実数を返します。
-range に含まれる数が無い場合は nil を返します。
 rangeが終端を含まない(つまり ... で生成した場合)には終端の値は乱数の範囲から除かれます。
 range.end - range.begin が整数を返す場合は range.begin + self.rand((range.end - range.begin) + e)
 の値を返します(e は終端を含む場合は1、含まない場合は0です)。
