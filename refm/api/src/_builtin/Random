@@ -81,6 +81,7 @@ Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
              range の境界は数値でなければなりません。
 
 @raise Errno::EDOM rand(1..Float::INFINITY) などのように範囲に問題があるときに発生します。
+@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時や (1..0) のような値が存在しない範囲を渡した時に発生します。
 
 #@samplecode 例
 srand 1234 # 乱数の種を設定する。
@@ -202,7 +203,7 @@ p r1 == r3 # => true
 #@end
 --- rand -> Float
 --- rand(max) -> Integer | Float
---- rand(range) -> Integer | Float | nil
+--- rand(range) -> Integer | Float
 
 一様な擬似乱数を発生させます。
 
@@ -228,7 +229,8 @@ range.end - range.begin が実数を返す場合も同様です。
              range.end - range.begin は数値である必要があり、
              range.begin + 数値 が適切な値を返す必要があります。
 
-@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時に発生します。
+@raise Errno::EDOM rand(1..Float::INFINITY) などのように範囲に問題があるときに発生します。
+@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時や (1..0) のような値が存在しない範囲を渡した時などに発生します。
 
 #@samplecode 例
 # Kernel.#rand とほぼ同様の使い勝手
