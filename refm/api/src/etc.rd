@@ -161,7 +161,6 @@ name という名前のグループエントリを返します。
 
 全ての passwd エントリを順にアクセスするためのイテレータです。
 
-#@since 1.9.2
 --- sysconfdir -> String | nil
 
 システムの設定ディレクトリを返します。
@@ -185,8 +184,6 @@ require 'etc'
 p Etc.systmpdir # => "/tmp"
 #@end
 
-#@end
-#@since 2.2.0
 --- uname -> {Symbol => String}
 
 [[man:uname(2)]] で取得したシステム情報を [[c:Hash]] で返します。
@@ -452,7 +449,6 @@ p Etc.nprocessors #=> 4
 [[m:IO#pathconf]] の引数に指定します。
 
 詳細は [[man:fpathconf(3)]] を参照してください。
-#@end
 
 = class Etc::Group < Struct
 #@until 3.2
@@ -461,8 +457,6 @@ alias Struct::Group
 [[m:Etc.#getgrent]] で得られる構造体。
 
 この構造体の値を変更してもシステムには反映されません。
-
-#@since 1.9.2
 
 == Class Methods
 
@@ -473,8 +467,6 @@ alias Struct::Group
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @see [[m:Etc.#getpwent]]
-
-#@end
 
 == Instance Methods
 
@@ -540,8 +532,6 @@ alias Struct::Passwd
   * comment
   * expire
 
-#@since 1.9.2
-
 == Class Methods
 
 --- each {|entry| ... } -> Etc::Passwd
@@ -551,8 +541,6 @@ alias Struct::Passwd
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @see [[m:Etc.#getpwent]]
-
-#@end
 
 == Instance Methods
 
@@ -665,7 +653,6 @@ alias Struct::Passwd
 
 アカウント有効期限(整数)を設定します。このメンバはシステム依存です。
 
-#@since 2.2.0
 = reopen IO
 
 == Instance Methods
@@ -685,5 +672,4 @@ require 'etc'
 IO.pipe {|r, w|
   p w.pathconf(Etc::PC_PIPE_BUF) # => 4096
 }
-#@end
 #@end
