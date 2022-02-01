@@ -41,7 +41,7 @@ include Enumerable
 
 #@samplecode
 Dir.glob("*")                      #=> ["bar", "foo"]
-Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
+Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "bar", "foo"]
 #@end
 
 #@since 2.5.0
