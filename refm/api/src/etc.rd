@@ -17,7 +17,7 @@ p Etc.getlogin
 
 == Module Functions
 
---- getgrent -> Struct::Group | nil
+--- getgrent -> Etc::Group | nil
 
 /etc/group ファイルから読み込んだエントリを一つ返します。
 
@@ -26,7 +26,7 @@ p Etc.getlogin
 
 処理が終了したときは [[m:Etc.#endgrent]] を呼び出すようにしてください。
 
-@see [[man:getgrent(3)]], [[c:Struct::Group]]
+@see [[man:getgrent(3)]], [[c:Etc::Group]]
 
 --- endgrent -> nil
 
@@ -43,7 +43,7 @@ p Etc.getlogin
 
 @see [[man:getgrent(3)]]
 
---- getpwent -> Struct::Passwd | nil
+--- getpwent -> Etc::Passwd | nil
 
 /etc/passwd から読み込んだエントリを一つ返します。
 
@@ -88,7 +88,7 @@ login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
 #@end
 
 
---- getpwnam(name) -> Struct::Passwd
+--- getpwnam(name) -> Etc::Passwd
 
 passwd データベースを検索し、
 名前が name である passwd エントリを返します。
@@ -97,9 +97,9 @@ passwd データベースを検索し、
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getpwnam(3)]], [[c:Struct::Passwd]]
+@see [[man:getpwnam(3)]], [[c:Etc::Passwd]]
 
---- getpwuid(uid = getuid) -> Struct::Passwd
+--- getpwuid(uid = getuid) -> Etc::Passwd
 
 passwd データベースを検索し、
 ユーザ ID が uid である passwd エントリを返します。
@@ -108,9 +108,9 @@ passwd データベースを検索し、
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getpwuid(3)]], [[c:Struct::Passwd]]
+@see [[man:getpwuid(3)]], [[c:Etc::Passwd]]
 
---- getgrgid(gid) -> Struct::Group
+--- getgrgid(gid) -> Etc::Group
 
 group データベースを検索し、グループ ID が gid
 であるグループエントリを返します。
@@ -119,9 +119,9 @@ group データベースを検索し、グループ ID が gid
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getgrgid(3)]], [[c:Struct::Group]]
+@see [[man:getgrgid(3)]], [[c:Etc::Group]]
 
---- getgrnam(name) -> Struct::Group
+--- getgrnam(name) -> Etc::Group
 
 name という名前のグループエントリを返します。
 
@@ -129,9 +129,9 @@ name という名前のグループエントリを返します。
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getgrnam(3)]], [[c:Struct::Group]]
+@see [[man:getgrnam(3)]], [[c:Etc::Group]]
 
---- group -> Struct::Group | nil
+--- group -> Etc::Group | nil
 
 /etc/group ファイルから読み込んだエントリを一つ返します。
 
@@ -146,7 +146,7 @@ name という名前のグループエントリを返します。
 
 全てのグループエントリを順にアクセスするためのイテレータです。
 
---- passwd -> Struct::Passwd | nil
+--- passwd -> Etc::Passwd | nil
 
 /etc/passwd から読み込んだエントリを一つ返します。
 
@@ -454,9 +454,9 @@ p Etc.nprocessors #=> 4
 詳細は [[man:fpathconf(3)]] を参照してください。
 #@end
 
-= class Struct::Group < Struct
-#@since 1.9.1
-alias Etc::Group
+= class Etc::Group < Struct
+#@until 3.2
+alias Struct::Group
 #@end
 [[m:Etc.#getgrent]] で得られる構造体。
 
@@ -466,7 +466,7 @@ alias Etc::Group
 
 == Class Methods
 
---- each {|entry| ... } -> Struct::Group
+--- each {|entry| ... } -> Etc::Group
 --- each                -> Enumerator
 
 /etc/group に含まれるエントリを一つずつブロックに渡して評価します。
@@ -515,9 +515,9 @@ alias Etc::Group
 
 このグループのパスワードを設定します。
 
-= class Struct::Passwd < Struct
-#@since 1.9.1
-alias Etc::Passwd
+= class Etc::Passwd < Struct
+#@until 3.2
+alias Struct::Passwd
 #@end
 [[m:Etc.#getpwent]] で得られる構造体。
 
@@ -544,7 +544,7 @@ alias Etc::Passwd
 
 == Class Methods
 
---- each {|entry| ... } -> Struct::Passwd
+--- each {|entry| ... } -> Etc::Passwd
 --- each                -> Enumerator
 
 /etc/passwd に含まれるエントリを一つずつブロックに渡して評価します。
