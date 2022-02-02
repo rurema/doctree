@@ -83,10 +83,10 @@ def square(x) = x * x
   * 定数を freeze するためのマジックコメント shareable_constant_value が導入されました。
     詳細は [[url:https://docs.ruby-lang.org/ja/3.0/doc/spec=2fm17n.html#magic_comment]] を参照してください。
     [[feature:17273]]
-  * {静的解析}[rdoc-label:label-Static+analysis]基盤が導入されました。
-      * {RBS}[rdoc-label:label-RBS] が導入されました。
+  * 静的解析基盤が導入されました。
+      * RBS が導入されました。
         RBS は Ruby プログラムのための型定義言語です。
-      * {TypeProf}[rdoc-label:label-TypeProf] が実験的にバンドルされました。
+      * TypeProf が実験的にバンドルされました。
         TypeProf は Ruby プログラムのための型解析ツールです。
   * 非推奨に関する警告がデフォルトで非表示になりました（Ruby 2.7.2 から導入されています）。
     -W:deprecated を指定すると表示されるようになります（もしくは、-w を指定すると異なる警告が表示されます）。
