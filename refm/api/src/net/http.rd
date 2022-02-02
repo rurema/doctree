@@ -1896,7 +1896,7 @@ req['Content-Range'] = "bytes 1-500/1000"
 req.range_length # => 500
 #@end
 
---- delete(key) -> String | nil
+--- delete(key) -> [String] | nil
 key ヘッダフィールドを削除します。
 
 @param key 削除するフィールド名
@@ -1911,7 +1911,7 @@ uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.content_length = 10
 req.content_length  # => 10
-req.delete("Content-Length")
+req.delete("Content-Length")  # => ["10"]
 req.content_length  # => nil
 #@end
 
