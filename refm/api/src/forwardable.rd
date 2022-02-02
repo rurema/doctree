@@ -147,7 +147,7 @@ def_delegator は def_instance_delegator の別名になります。
 
 == Constants
 
---- FORWARDABLE_VERSION -> "1.1.0"
+--- FORWARDABLE_VERSION -> String
 
 [[lib:forwardable]] ライブラリのバージョンを返します。
 #@end
