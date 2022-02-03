@@ -1041,7 +1041,14 @@ pp Pathname('/usr/local').entries
 
 
 --- each_entry {|pathname| ... } -> nil
+#@since 3.2
+--- each_entry -> Enumerator
+#@end
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
+
+#@since 3.2
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
 
 #@samplecode 例
 require "pathname"
