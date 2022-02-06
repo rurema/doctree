@@ -177,7 +177,7 @@ dest を指定した場合には
 
 @see [[m:Net::HTTP#request_get]]
 
-= Constants
+== Constants
 
 --- CODE_CLASS_TO_OBJ -> Hash
 
