@@ -180,9 +180,26 @@ dest を指定した場合には
 
 @see [[m:Net::HTTP#request_get]]
 
-#@# = Constants
-#@# --- CODE_CLASS_TO_OBJ
-#@# --- CODE_TO_OBJ
+= Constants
+
+--- CODE_CLASS_TO_OBJ -> Hash
+
+HTTP レスポンスステータスコードの最初の数字からレスポンスのクラス(分類)を
+あらわすクラスへのハッシュです。
+
+#@samplecode
+require 'net/http'
+Net::HTTPResponse::CODE_CLASS_TO_OBJ['3'] # => Net::HTTPRedirection
+#@end
+
+--- CODE_TO_OBJ -> Hash
+
+HTTP レスポンスステータスコードから対応するクラスへのハッシュです。
+
+#@samplecode
+require 'net/http'
+Net::HTTPResponse::CODE_TO_OBJ['404'] # => Net::HTTPNotFound
+#@end
 
 = class Net::HTTPUnknownResponse < Net::HTTPResponse
 このライブラリが知らないレスポンスを表現するクラスです。
