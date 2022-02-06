@@ -13,10 +13,6 @@ Net::HTTP クラスは実際には HTTPResponse のサブクラスを返しま�
 エンティティボディを含むことが許されているレスポンスクラス
 ならば真を、そうでなければ偽を返します。
 
-#@# --- exception_type
-#@# --- read_new 
-#@# internal use only
-
 #@samplecode 例
 require 'net/http'
 
