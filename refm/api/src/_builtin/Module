@@ -1555,6 +1555,22 @@ end
 
 @see [[m:Module#append_features]]
 
+#@since 3.2
+--- const_added(name) -> ()
+
+定数 name が追加された時にインタプリタがこのメソッドを呼び出します。
+
+#@samplecode
+module Chatty
+  def self.const_added(const_name)
+    super
+    puts "Added #{const_name.inspect}"
+  end
+  FOO = 1
+end
+# => Added :FOO
+#@end
+#@end
 --- method_added(name) -> ()
 
 メソッド name が追加された時にインタプリタがこのメソッドを呼び出します。
