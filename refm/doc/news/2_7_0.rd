@@ -378,6 +378,10 @@ $ RUBYOPT='-W:no-deprecated -W:no-experimental' ruby -e '($; = "") in a'
         [[m:Enumerator::Lazy#eager]]メソッドが追加されました。 [[feature:15901]]
       * [[m:Enumerator::Yielder#to_proc]]メソッドが追加され、Yielder オブジェクトを
         直接他のメソッドのブロック引数として渡せるようになりました。 [[feature:15618]]
+      * [[m:Enumerator::Lazy#with_index]]メソッドが追加され、
+        以前のlazyではない[[m:Enumerator#with_index]]のデフォルト実装から
+	lazyになりました。[[bug:7877]]
+
 #@samplecode Enumerator.produce
 require "date"
 dates = Enumerator.produce(Date.today, &:succ) #=> infinite sequence of dates
@@ -388,6 +392,12 @@ a = %w(foo bar baz)
 e = a.lazy.map {|x| x.upcase }.map {|x| x + "!" }.eager
 p e.class               #=> Enumerator
 p e.map {|x| x + "?" }  #=> ["FOO!?", "BAR!?", "BAZ!?"]
+#@end
+#@samplecode Enumerator::Lazy#with_index
+("a"..).lazy.with_index(1) { |it, index| puts "#{index}:#{it}" }.take(3).force
+# => 1:a
+#    2:b
+#    3:c
 #@end
 
   * [[c:Fiber]]
