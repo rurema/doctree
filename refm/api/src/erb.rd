@@ -148,27 +148,32 @@ ERB は入力した文字列と同じエンコーディングの文字列を返�
 
 == Class Methods
 
+#@since 3.2
+--- new(str, trim_mode: nil, eoutvar: '_erbout') -> ERB
+#@else
 #@since 2.6.0
 --- new(str, safe_level=NOT_GIVEN, trim_mode=NOT_GIVEN, eoutvar=NOT_GIVEN, trim_mode: nil, eoutvar: '_erbout') -> ERB
 #@else
 --- new(str, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
 #@end
-
+#@end
 eRubyスクリプト から ERB オブジェクトを生成して返します。
 
 @param str eRubyスクリプトを表す文字列
-
+#@until 3.2
 @param safe_level eRubyスクリプトが実行されるときのセーフレベル
-
+#@end
 @param trim_mode 整形の挙動を変更するオプション
 
 @param eoutvar eRubyスクリプトの中で出力をためていく変数の名前を表す文
                字列。eRuby スクリプトの中でさらに ERB を使うときに変更
                します。通常は指定する必要はありません。
 
+#@until 3.2
 Ruby 2.6.0 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
-Ruby 2.5 が EOL になったときに削除される予定です。
+Ruby 3.2 で削除されました。
 trim_mode と eoutvar の指定はキーワード引数に移行してください。
+#@end
 
 #@samplecode 例
 require "erb"
