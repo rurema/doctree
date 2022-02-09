@@ -190,7 +190,7 @@ class Listings
     b = binding
     # create and run templates, filling member data variables
 #@since 2.6.0
-    ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), eoutvar: "@product").result b
+    ERB.new(<<~'END_PRODUCT', eoutvar: "@product").result b
 #@else
     ERB.new(<<-'END_PRODUCT'.gsub(/^\s+/, ""), 0, "", "@product").result b
 #@end
@@ -198,7 +198,7 @@ class Listings
       <%= PRODUCT[:desc] %>
     END_PRODUCT
 #@since 2.6.0
-    ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), eoutvar: "@price").result b
+    ERB.new(<<~'END_PRICE', eoutvar: "@price").result b
 #@else
     ERB.new(<<-'END_PRICE'.gsub(/^\s+/, ""), 0, "", "@price").result b
 #@end
