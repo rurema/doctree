@@ -70,7 +70,7 @@ p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
 @param encoding エンコーディングを表すオブジェクト。Encoding::UTF_8、'shift_jis' など。
 @return     一文字からなる文字列
 @raise RangeError self を与えられたエンコーディングで正しく解釈できない場合に発生します。
-@see [[m:String#ord]] [[m:Encoding#default_internal]]
+@see [[m:String#ord]] [[m:Encoding.default_internal]]
 
 --- digits -> [Integer]
 --- digits(base) -> [Integer]
