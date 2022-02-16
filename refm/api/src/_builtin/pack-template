@@ -489,7 +489,11 @@ n, N, v, V を用います。
   x86_64 (IEEE754 単精度 リトルエンディアン):
 #@samplecode
 [1.0].pack("f")      # => "\x00\x00\x80?"
+#@since 2.6.0
 [0.0/0.0].pack("f")  # => "\x00\x00\xC0\x7F"      # NaN
+#@else
+[0.0/0.0].pack("f")  # => "\x00\x00\xC0\xFF"      # NaN
+#@end
 [1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Inf
 [-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Inf
 #@end
@@ -514,7 +518,11 @@ n, N, v, V を用います。
   x86_64 (IEEE754 倍精度 リトルエンディアン):
 #@samplecode
 [1.0].pack("d")      # => "\x00\x00\x00\x00\x00\x00\xF0?"
+#@since 2.6.0
 [0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\x7F"      # NaN
+#@else
+[0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\xFF"      # NaN
+#@end
 [1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Inf
 [-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Inf
 #@end
