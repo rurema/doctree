@@ -494,16 +494,16 @@ n, N, v, V を用います。
 #@else
 [0.0/0.0].pack("f")  # => "\x00\x00\xC0\xFF"      # NaN
 #@end
-[1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Inf
-[-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Inf
+[1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Infinity
+[-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Infinity
 #@end
 
   SPARC64 (IEEE754 単精度 ビッグエンディアン):
 #@samplecode
 [1.0].pack("f")      # => "?\x80\x00\x00"
 [0.0/0.0].pack("f")  # => "\x7F\xC0\x00\x00"      # NaN
-[1.0/0.0].pack("f")  # => "\x7F\x80\x00\x00"      # +Inf
-[-1.0/0.0].pack("f") # => "\xFF\x80\x00\x00"      # -Inf
+[1.0/0.0].pack("f")  # => "\x7F\x80\x00\x00"      # +Infinity
+[-1.0/0.0].pack("f") # => "\xFF\x80\x00\x00"      # -Infinity
 #@end
 
   VAX (NetBSD 3.0) (非IEEE754):
@@ -523,16 +523,16 @@ n, N, v, V を用います。
 #@else
 [0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\xFF"      # NaN
 #@end
-[1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Inf
-[-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Inf
+[1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Infinity
+[-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Infinity
 #@end
 
   SPARC64 (IEEE754 倍精度 ビッグエンディアン):
 #@samplecode
 [1.0].pack("d")      # => "?\xF0\x00\x00\x00\x00\x00\x00"
 [0.0/0.0].pack("d")  # => "\x7F\xF8\x00\x00\x00\x00\x00\x00"      # NaN
-[1.0/0.0].pack("d")  # => "\x7F\xF0\x00\x00\x00\x00\x00\x00"      # +Inf
-[-1.0/0.0].pack("d") # => "\xFF\xF0\x00\x00\x00\x00\x00\x00"      # -Inf
+[1.0/0.0].pack("d")  # => "\x7F\xF0\x00\x00\x00\x00\x00\x00"      # +Infinity
+[-1.0/0.0].pack("d") # => "\xFF\xF0\x00\x00\x00\x00\x00\x00"      # -Infinity
 #@end
 
   VAX (NetBSD 3.0) (非IEEE754):
