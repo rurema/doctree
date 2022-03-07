@@ -282,6 +282,10 @@ Time.new(2021, 12, 25, "+07:30")
     * matrix 0.4.2
     * prime 0.1.2
     * debug 1.4.0
+  * The following gems has been removed from the Ruby standard library.
+    * dbm
+    * gdbm
+    * tracer
 
   * Coverage measurement now supports suspension. You can use `Coverage.suspend` to stop the measurement temporarily, and `Coverage.resume` to restart it. See [[Feature #18176]] in detail.
   * Random::Formatter is moved to random/formatter.rb, so that you can use `Random#hex`, `Random#base64`, and so on without SecureRandom. [[Feature #18190]]
