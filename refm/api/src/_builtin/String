@@ -1764,7 +1764,51 @@ p "foobarfoobar".index("bar", -6)       # => 9
 #@end
 
 @see [[m:String#rindex]]
+#@since 3.2
+@see [[m:String#byteindex]]
+--- byteindex(pattern, offset = 0) -> Integer | nil
 
+文字列の offset から右に向かって pattern を検索し、
+最初に見つかった部分文字列の左端のバイト単位のインデックスを返します。
+見つからなければ nil を返します。
+
+引数 pattern は探索する部分文字列または正規表現で指定します。
+
+offset が負の場合、文字列の末尾から数えた位置から探索します。
+
+@param pattern    探索する部分文字列または正規表現
+@param offset     探索を開始するバイト単位のオフセット
+
+@raise IndexError オフセットが文字列の境界以外をさしているときに発生します。
+
+#@samplecode 例
+'foo'.byteindex('f') # => 0
+'foo'.byteindex('o') # => 1
+'foo'.byteindex('oo') # => 1
+'foo'.byteindex('ooo') # => nil
+
+'foo'.byteindex(/f/) # => 0
+'foo'.byteindex(/o/) # => 1
+'foo'.byteindex(/oo/) # => 1
+'foo'.byteindex(/ooo/) # => nil
+
+'foo'.byteindex('o', 1) # => 1
+'foo'.byteindex('o', 2) # => 2
+'foo'.byteindex('o', 3) # => nil
+
+'foo'.byteindex('o', -1) # => 2
+'foo'.byteindex('o', -2) # => 1
+'foo'.byteindex('o', -3) # => 1
+'foo'.byteindex('o', -4) # => nil
+
+'あいう'.byteindex('う') # => 6
+'あいう'.byteindex('う', 3) # => 6
+'あいう'.byteindex('う', -3) # => 6
+'あいう'.byteindex('う', 1) # offset 1 does not land on character boundary (IndexError)
+#@end
+
+@see [[m:String#index]], [[m:String#byterindex]]
+#@end
 --- insert(pos, other) -> self
 
 pos 番目の文字の直前に文字列 other を挿入します。
@@ -2079,7 +2123,76 @@ p "foobarfoobar".rindex("bar", -6)      # => 3
 #@end
 
 @see [[m:String#index]]
+#@since 3.2
+--- byterindex(pattern, offset = self.bytesize) -> Integer | nil
 
+文字列のバイト単位のインデックス offset から左に向かって pattern を探索します。
+最初に見つかった部分文字列の左端のバイト単位のインデックスを返します。
+見つからなければ nil を返します。
+
+引数 pattern は探索する部分文字列または正規表現で指定します。
+
+offset が負の場合は、文字列の末尾から数えた位置から探索します。
+
+byterindex と [[m:String#byteindex]] とでは、探索方向だけが逆になります。
+完全に左右が反転した動作をするわけではありません。
+探索はその開始位置を右から左にずらしながら行いますが、
+部分文字列の照合はどちらのメソッドも左から右に向かって行います。
+以下の例を参照してください。
+
+#@samplecode String#byteindex の場合
+p "stringstring".byteindex("ing", 1)    # => 3
+  # ing            # ここから探索を始める
+  #  ing
+  #   ing          # 右にずらしていってここで見つかる
+#@end
+
+#@samplecode String#byterindex の場合
+p "stringstring".byterindex("ing", -1)  # => 9
+  #           ing    # インデックス -1 の文字から探索を始める
+  #          ing
+  #         ing      # 左にずらしていってここで見つかる
+#@end
+
+@param pattern    探索する部分文字列または正規表現
+@param offset     探索を始めるバイト単位のインデックス
+
+#@samplecode 例
+'foo'.byterindex('f') # => 0
+'foo'.byterindex('o') # => 2
+'foo'.byterindex('oo') # => 1
+'foo'.byterindex('ooo') # => nil
+
+'foo'.byterindex(/f/) # => 0
+'foo'.byterindex(/o/) # => 2
+'foo'.byterindex(/oo/) # => 1
+'foo'.byterindex(/ooo/) # => nil
+
+# 右でのマッチが優先
+'foo'.byterindex(/o+/) # => 2
+$~ #=> #<MatchData "o">
+
+# 最長にするには否定戻り読み(negative look-behind)と組み合わせる
+'foo'.byterindex(/(?<!o)o+/) # => 1
+$~ #=> #<MatchData "oo">
+
+# またはbyteindexを否定先読み(negative look-ahead)
+'foo'.byteindex(/o+(?!.*o)/) # => 1
+$~ #=> #<MatchData "oo">
+
+'foo'.byterindex('o', 0) # => nil
+'foo'.byterindex('o', 1) # => 1
+'foo'.byterindex('o', 2) # => 2
+'foo'.byterindex('o', 3) # => 2
+
+'foo'.byterindex('o', -1) # => 2
+'foo'.byterindex('o', -2) # => 1
+'foo'.byterindex('o', -3) # => nil
+'foo'.byterindex('o', -4) # => nil
+#@end
+
+@see [[m:String#rindex]], [[m:String#byteindex]]
+#@end
 --- scan(pattern) -> [String] | [[String]]
 
 self に対して pattern を繰り返しマッチし、
