@@ -60,7 +60,7 @@ puts res.body
 url = URI.parse('http://www.example.com/todo.cgi')
 req = Net::HTTP::Post.new(url.path)
 req.basic_auth 'jack', 'pass'
-req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'}, ';')
+req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'})
 res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
 case res
 when Net::HTTPSuccess, Net::HTTPRedirection
