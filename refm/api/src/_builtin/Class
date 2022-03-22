@@ -115,6 +115,25 @@ C = Class.new   # => C
 C.new           # => #<C:0x00005623f8b4e458>
 #@end
 
+#@since 3.1
+--- subclasses    -> [Class]
+
+自身が直接のスーパークラスになっている(特異クラスを除く)クラスの配列を返します。
+返り値の配列の順序は未定義です。
+
+#@samplecode 例
+class A; end
+class B < A; end
+class C < B; end
+class D < A; end
+
+A.subclasses        # => [D, B]
+B.subclasses        # => [C]
+C.subclasses        # => []
+#@end
+
+@see [[m:Class#superclass]]
+#@end
 --- superclass    -> Class | nil
 
 自身のスーパークラスを返します。
@@ -134,6 +153,9 @@ Object.superclass        #=> BasicObject
 BasicObject.superclass   #=> nil
 #@end
 
+#@since 3.1
+@see [[m:Class#subclasses]]
+#@end
 --- _load(str)    -> Class
 
 [[m:Object#_dump]] を参照して下さい。
