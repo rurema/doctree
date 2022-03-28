@@ -114,6 +114,12 @@ trace.disable
   ファイバーの切り替え。
 #@end
 
+#@since 2.6.0
+: :script_compiled
+
+  スクリプトのコンパイル
+#@end
+
 指定イベントに関連しない情報を取得するメソッドを実行した場合には
 [[c:RuntimeError]] が発生します。
 
