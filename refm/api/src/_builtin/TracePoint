@@ -529,4 +529,21 @@ end
 
 @raise RuntimeError :script_compiled イベントのための
                     イベントフックの外側で実行した場合に発生します。
+
+--- instruction_sequence -> RubyVM::InstructionSequence
+
+script_compiledイベント発生時にコンパイルされた
+RubyVM::InstructionSequenceインスタンスを返します。
+
+#@samplecode 例
+TracePoint.new(:script_compiled) do |tp|
+  p tp.eval_script # => <RubyVM::InstructionSequence:block in <main>@(eval):1>
+end.enable do
+  eval("puts 'hello'")
+end
+#@end
+
+@raise RuntimeError :script_compiled イベントのための
+                    イベントフックの外側で実行した場合に発生します。
+
 #@end
