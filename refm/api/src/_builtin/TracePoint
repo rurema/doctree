@@ -513,4 +513,20 @@ end
 #@end
 
 @see [[m:Method#parameters]], [[m:UnboundMethod#parameters]], [[m:Proc#parameters]]
+
+--- eval_script -> String | nil
+
+script_compiledイベント発生時にコンパイルされたソースコードを返します。
+ファイルから読み込んだ場合は、nilを返します。
+
+#@samplecode 例
+TracePoint.new(:script_compiled) do |tp|
+  p tp.eval_script # => "puts 'hello'"
+end.enable do
+  eval("puts 'hello'")
+end
+#@end
+
+@raise RuntimeError :script_compiled イベントのための
+                    イベントフックの外側で実行した場合に発生します。
 #@end
