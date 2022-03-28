@@ -492,3 +492,25 @@ begin
 rescue
 end
 #@end
+
+#@since 2.6.0
+--- parameters -> [object]
+
+現在のフックが属するメソッドまたはブロックのパラメータ定義を返します。
+フォーマットは [[m:Method#parameters]] と同じです。
+
+@raise RuntimeError :call、:return、:b_call、:b_return、:c_call、:c_return
+                    イベントのためのイベントフックの外側で実行した場合に発生します。
+
+#@samplecode 例
+def foo(a, b = 2)
+end
+TracePoint.new(:call) do |tp|
+  p tp.parameters # => [[:req, :a], [:opt, :b]]
+end.enable do
+  foo(1)
+end
+#@end
+
+@see [[m:Method#parameters]], [[m:UnboundMethod#parameters]], [[m:Proc#parameters]]
+#@end
