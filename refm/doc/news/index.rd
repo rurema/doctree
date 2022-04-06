@@ -1,5 +1,8 @@
 = Ruby変更履歴
 
+#@since 3.1
+  * [[d:news/3_1_0]]
+#@end
 #@since 3.0
   * [[d:news/3_0_0]]
 #@end
