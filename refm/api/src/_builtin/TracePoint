@@ -537,7 +537,7 @@ RubyVM::InstructionSequenceインスタンスを返します。
 
 #@samplecode 例
 TracePoint.new(:script_compiled) do |tp|
-  p tp.eval_script # => <RubyVM::InstructionSequence:block in <main>@(eval):1>
+  p tp.instruction_sequence # => <RubyVM::InstructionSequence:block in <main>@(eval):1>
 end.enable do
   eval("puts 'hello'")
 end
