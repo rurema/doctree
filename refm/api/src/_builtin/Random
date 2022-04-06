@@ -1,4 +1,3 @@
-#@since 1.9.2
 = class Random < Object
 
 MT19937に基づく擬似乱数生成器を提供するクラスです。
@@ -89,7 +88,11 @@ Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
 rand(10.0)         #=> 6                   (rand(10) と同じ)
 #@end
 
+#@since 3.2
+@see [[m:Random.srand]], [[m:Random#rand]]
+#@else
 @see [[m:Random.srand]], [[m:Random#rand]], [[m:Random::DEFAULT]]
+#@end
 #@else
 --- rand(max = 0) -> Integer | Float
 
@@ -114,10 +117,10 @@ rand(10.0)         #=> 6                   (rand(10) と同じ)
 
 #@#noexample 詳しくは Kernel.#srand を参照
 
-#@since 1.9.3
-@see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
-#@else
+#@since 3.2
 @see [[m:Kernel.#rand]]
+#@else
+@see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
 #@end
 #@since 2.6.0
 --- bytes(size) -> String
@@ -366,15 +369,16 @@ C言語レベルで定義されている構造体MTの静的変数default_rand�
 #@since 1.9.3
 == Constants
 
-#@since 3.0.0
+#@until 3.2
+#@since 3.0
 --- DEFAULT -> Class
 #@else
 --- DEFAULT -> Random
 #@end
 
-Ruby 3.0.0 から非推奨です。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
+Ruby 3.0 から非推奨です。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
 
-#@since 3.0.0
+#@since 3.0
 
 また、 Random::DEFAULT は Random クラスオブジェクトが返ります。
 
