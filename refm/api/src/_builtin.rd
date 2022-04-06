@@ -102,6 +102,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Range)
 #@include(_builtin/RangeError)
 #@include(_builtin/Rational)
+#@since 3.1
+#@include(_builtin/Refinement)
+#@end
 #@include(_builtin/Regexp)
 #@include(_builtin/RegexpError)
 #@include(_builtin/RubyVM)
