@@ -779,9 +779,14 @@ p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
 
 selfと同じ内容を持つ新しいハッシュを返します。
 
-clone は frozen tainted singleton-class の情報も含めてコピーしますが、 dup は内容だけをコピーします。
-またどちらのメソッドも要素それ自体のコピーはしません。つまり参照しているオブジェクトが
-変わらない「浅い(shallow)」コピーを行います。
+clone は frozen singleton-class の情報も含めてコピーしますが、
+#@since 2.7.0
+dup は内容だけをコピーします。
+#@else
+dup は内容と tainted だけをコピーします。
+#@end
+またどちらのメソッドも要素それ自体のコピーはしません。
+つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
 
 #@samplecode 例
 h1 = {"have" => "have a","as" => "as a" }

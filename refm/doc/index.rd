@@ -51,7 +51,9 @@ Ruby でのオブジェクト:
   * [[d:spec/eval]]
   * [[d:spec/terminate]]
   * [[d:spec/thread]]
+#@until 3.2
   * [[d:spec/safelevel]]
+#@end
 
 Ruby の文法:
   * [[d:spec/lexical]]

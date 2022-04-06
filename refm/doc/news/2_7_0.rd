@@ -278,7 +278,11 @@ end
   * 「$SAFE」の参照や代入は警告が表示されるようになりました。
     Ruby 3.0 で「$SAFE」は普通のグローバル変数になる予定です。 [[feature:16131]]
 
+#@since 3.2
+  * Object#taint,Object#untaint,Object#trust,Object#untrustと関連する
+#@else
   * [[m:Object#taint]],[[m:Object#untaint]],[[m:Object#trust]],[[m:Object#untrust]]と関連する
+#@end
     C の関数は何もしなくなりました。(全てのオブジェクトは untainted 扱いです。)
     verbose モードでは警告が表示されます。
     この警告は Ruby 3.0 では verbose モードでなくても表示され、Ruby 3.2 で削除される

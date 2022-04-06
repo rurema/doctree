@@ -140,9 +140,17 @@
     end
 //}
 
+#@since 3.2
+  * Object#untrusted?,Object#untrust,Object#trust
+#@else
   * [[m:Object#untrusted?]],[[m:Object#untrust]],[[m:Object#trust]]
+#@end
     * これらのメソッドは非推奨になりました。$VERBOSE が true のときは警告を表示します。
+#@since 3.2
+      Object#tainted?,Object#taint,Object#untaint とそれぞれ同じ動作です。
+#@else
       [[m:Object#tainted?]],[[m:Object#taint]],[[m:Object#untaint]] とそれぞれ同じ動作です。
+#@end
 
   * [[m:Module#ancestors]]
     * 特異クラスの祖先はそれ自身を含みます。

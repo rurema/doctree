@@ -658,10 +658,14 @@ p ary     #=> []
 
 レシーバと同じ内容を持つ新しい配列を返します。
 
-clone は frozen tainted singleton-class の情報も含めてコピーしますが、
+clone は frozen singleton-class の情報も含めてコピーしますが、
+#@since 2.7.0
 dup は内容だけをコピーします。
+#@else
+dup は内容と tainted だけをコピーします。
+#@end
 またどちらのメソッドも要素それ自体のコピーはしません。
-つまり「浅い(shallow)」コピーを行います。
+つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
 
 #@samplecode 例
 ary = ['string']

@@ -1910,7 +1910,11 @@ name で指定した定数の可視性を private に変更します。
 
 @return self を返します。
 
+#@since 3.2
+@see [[m:Module#public_constant]]
+#@else
 @see [[m:Module#public_constant]], [[m:Object#untrusted?]]
+#@end
 
 #@samplecode 例
 module Foo
@@ -1962,8 +1966,11 @@ end
 SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
 #@end
 
+#@since 3.2
+@see [[m:Module#private_constant]]
+#@else
 @see [[m:Module#private_constant]], [[m:Object#untrusted?]]
-
+#@end
 #@end
 
 #@since 2.3.0
