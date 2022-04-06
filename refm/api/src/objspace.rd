@@ -20,10 +20,10 @@ MRI の実装について詳しくない一般のユーザはこのライブラ�
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
 ントとして扱う必要があります。特に T_DATA の合計値は正しくないでしょう。
 
-例:
-
-  ObjectSpace.count_objects_size
-  # => {:TOTAL=>1461154, :T_CLASS=>158280, :T_MODULE=>20672, :T_STRING=>527249, ...}
+#@samplecode 例
+ObjectSpace.count_objects_size
+# => {:TOTAL=>1461154, :T_CLASS=>158280, :T_MODULE=>20672, :T_STRING=>527249, ...}
+#@end
 
 @raise TypeError result_hash にハッシュ以外を指定した時に発生します。
 
@@ -62,13 +62,15 @@ ObjectSpace.memsize_of("12345" * 10)  # => 91
 
 本メソッドは以下のような Ruby のコードで定義できます。
 
-  def memsize_of_all klass = false
-    total = 0
-    ObjectSpace.each_object{|e|
-      total += ObjectSpace.memsize_of(e) if klass == false || e.kind_of?(klass)
-    }
-    total
-  end
+#@samplecode 例
+def memsize_of_all klass = false
+  total = 0
+  ObjectSpace.each_object{|e|
+    total += ObjectSpace.memsize_of(e) if klass == false || e.kind_of?(klass)
+  }
+  total
+end
+#@end
 
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
 ントとして扱う必要があります。特に T_DATA の値は正しくないでしょう。
@@ -91,10 +93,10 @@ ObjectSpace.memsize_of("12345" * 10)  # => 91
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォー
 マンスやメモリ管理に興味のある C Ruby の開発者向けのものです。
 
-例:
-
-  ObjectSpace.count_nodes
-  # => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
+#@samplecode 例
+ObjectSpace.count_nodes
+# => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
+#@end
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
@@ -113,13 +115,13 @@ T_DATA の種類ごとにオブジェクトの数を格納したハッシュを�
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォー
 マンスに興味のある C Ruby の開発者向けのものです。
 
-例:
-
-  ObjectSpace.count_tdata_objects
-  # => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
-        :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
-        ThreadGroup=>1, Binding=>1, Thread=>1, RubyVM=>1, :iseq=>1,
-        Random=>1, ARGF.class=>1, Data=>1, :autoload=>3, Time=>2}
+#@samplecode 例
+ObjectSpace.count_tdata_objects
+# => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
+#     :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
+#     ThreadGroup=>1, Binding=>1, Thread=>1, RubyVM=>1, :iseq=>1,
+#     Random=>1, ARGF.class=>1, Data=>1, :autoload=>3, Time=>2}
+#@end
 
 現在のバージョンでは、戻り値のキーはクラスオブジェクトかシンボルのオブ
 ジェクトです。
@@ -138,28 +140,34 @@ obj から到達可能なすべてのオブジェクトを返します。マー�
 クトを指定した場合は nil を返します。本メソッドを使う事でメモリリークの
 調査が行えます。
 
-  # 配列クラス(Array)と 'a'、'b'、'c' に到達可能。
-  ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
-  # => [Array, 'a', 'b', 'c']
+#@samplecode 例
+# 配列クラス(Array)と 'a'、'b'、'c' に到達可能。
+ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
+# => [Array, 'a', 'b', 'c']
+#@end
 
 obj が 2 つ以上の同じオブジェクト x への参照を持つ場合、戻り値に含まれ
 るオブジェクト x は 1 つだけです。
 
-  # 配列クラス(Array)と v に到達可能。
-  ObjectSpace.reachable_objects_from([v = 'a', v, v])
-  # => [Array, 'a']
+#@samplecode 例
+# 配列クラス(Array)と v に到達可能。
+ObjectSpace.reachable_objects_from([v = 'a', v, v])
+# => [Array, 'a']
 
-  # 配列クラス(Array)と 3 つの異なる 'a' オブジェクトに到達可能。
-  ObjectSpace.reachable_objects_from(['a', 'a', 'a'])
-  # => [Array, 'a', 'a', 'a']
+# 配列クラス(Array)と 3 つの異なる 'a' オブジェクトに到達可能。
+ObjectSpace.reachable_objects_from(['a', 'a', 'a'])
+# => [Array, 'a', 'a', 'a']
+#@end
 
 obj にマーク不能なオブジェクト(true、false、nil、[[c:Symbol]]、
 [[c:Fixnum]]、Flonum(即値の [[c:Float]] オブジェクト))を指定した場合は
 nil を返します。
 
-  # 1 はマーク不能
-  ObjectSpace.reachable_objects_from(1)
-  # => nil
+#@samplecode 例
+# 1 はマーク不能
+ObjectSpace.reachable_objects_from(1)
+# => nil
+#@end
 
 obj が内部でオブジェクトへの参照を持つ場合、
 ObjectSpace::InternalObjectWrapper オブジェクトが戻り値に含まれます。こ
