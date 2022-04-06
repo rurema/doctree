@@ -442,6 +442,24 @@ Enumerator を返す」ようなメソッドを定義するときによく使わ
 [[m:Enumerable#uniq]] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
 #@end
+#@since 2.7.0
+--- with_index(offset = 0) {|(*args), idx| ... } -> Enumerator::Lazy
+--- with_index(offset = 0) -> Enumerator::Lazy
+
+生成時のパラメータに従って、要素にインデックスを添えて繰り返します。
+インデックスは offset から始まります。
+
+ブロックを指定した場合の戻り値は生成時に指定したレシーバ自身です。
+
+#@samplecode
+("a"..).lazy.with_index(1) { |it, index| puts "#{index}:#{it}" }.take(3).force
+# => 1:a
+#    2:b
+#    3:c
+#@end
+
+@see [[m:Enumerator#with_index]]
+#@end
 #@since 3.1
 --- compact -> Enumerator::Lazy
 
