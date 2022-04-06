@@ -1127,7 +1127,7 @@ File.open("testfile") do |f|
 end
 #@end
 
---- fsync    -> 0 | nil
+--- fsync    -> 0
 
 書き込み用の IO に対して、システムコール [[man:fsync(2)]]
 を実行します。[[m:IO#flush]] を行ったあと、(OSレベルで)まだディスクに
@@ -2359,7 +2359,7 @@ IO の各コードポイントに対して繰り返しブロックを呼びだ�
 
 @see [[m:IO#each_codepoint]]
 #@end
---- fdatasync -> 0 | nil
+--- fdatasync -> 0
 
 IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
 
