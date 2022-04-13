@@ -114,6 +114,12 @@ trace.disable
   ファイバーの切り替え。
 #@end
 
+#@since 2.6.0
+: :script_compiled
+
+  スクリプトのコンパイル
+#@end
+
 指定イベントに関連しない情報を取得するメソッドを実行した場合には
 [[c:RuntimeError]] が発生します。
 
@@ -485,4 +491,59 @@ begin
   0/0
 rescue
 end
+#@end
+
+#@since 2.6.0
+--- parameters -> [object]
+
+現在のフックが属するメソッドまたはブロックのパラメータ定義を返します。
+フォーマットは [[m:Method#parameters]] と同じです。
+
+@raise RuntimeError :call、:return、:b_call、:b_return、:c_call、:c_return
+                    イベントのためのイベントフックの外側で実行した場合に発生します。
+
+#@samplecode 例
+def foo(a, b = 2)
+end
+TracePoint.new(:call) do |tp|
+  p tp.parameters # => [[:req, :a], [:opt, :b]]
+end.enable do
+  foo(1)
+end
+#@end
+
+@see [[m:Method#parameters]], [[m:UnboundMethod#parameters]], [[m:Proc#parameters]]
+
+--- eval_script -> String | nil
+
+script_compiledイベント発生時にコンパイルされたソースコードを返します。
+ファイルから読み込んだ場合は、nilを返します。
+
+#@samplecode 例
+TracePoint.new(:script_compiled) do |tp|
+  p tp.eval_script # => "puts 'hello'"
+end.enable do
+  eval("puts 'hello'")
+end
+#@end
+
+@raise RuntimeError :script_compiled イベントのための
+                    イベントフックの外側で実行した場合に発生します。
+
+--- instruction_sequence -> RubyVM::InstructionSequence
+
+script_compiledイベント発生時にコンパイルされた
+RubyVM::InstructionSequenceインスタンスを返します。
+
+#@samplecode 例
+TracePoint.new(:script_compiled) do |tp|
+  p tp.instruction_sequence # => <RubyVM::InstructionSequence:block in <main>@(eval):1>
+end.enable do
+  eval("puts 'hello'")
+end
+#@end
+
+@raise RuntimeError :script_compiled イベントのための
+                    イベントフックの外側で実行した場合に発生します。
+
 #@end
