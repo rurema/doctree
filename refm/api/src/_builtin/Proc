@@ -446,8 +446,27 @@ self のハッシュ値を返します。
 #@#noexample
 
 #@end
-#@since 1.9.2
+
+Proc オブジェクトの引数の情報を返します。
+
+Proc オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
+各配列の要素は引数の種類に対応した以下のような Symbol と、引数名を表す Symbol の 2 要素です。
+
+#@samplecode
+prc = proc{|x, y=42, *other|}
+p prc.parameters  # => [[:opt, :x], [:opt, :y], [:rest, :other]]
+prc = lambda{|x, y=42, *other|}
+p prc.parameters  # => [[:req, :x], [:opt, :y], [:rest, :other]]
+prc = proc{|x, y=42, *other|}
+p prc.parameters(lambda: true)  # => [[:req, :x], [:opt, :y], [:rest, :other]]
+prc = lambda{|x, y=42, *other|}
+p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
+#@end
+#@since 3.2
+--- parameters(lambda: nil) -> [object]
+#@else
 --- parameters -> [object]
+#@end
 Proc オブジェクトの引数の情報を返します。
 
 Proc オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
@@ -459,37 +478,39 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
  デフォルト値が指定されたオプショナルな引数
 : :rest
  * で指定された残りすべての引数
-#@since 2.1.0
 : :keyreq
  必須のキーワード引数
-#@end
-#@since 2.0.0
 : :key
  デフォルト値が指定されたオプショナルなキーワード引数
 : :keyrest
  ** で指定された残りのキーワード引数
-#@end
 : :block
  & で指定されたブロック引数
 
+#@since 3.2
+@param lambda true なら lambda として扱ったとき、false なら lambda ではない Proc として
+              扱ったときの引数の情報を返します。
+#@end
+
 #@samplecode 例
-#@since 2.1.0
 prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
 prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
-#@else
-#@since 2.0.0
-prc = lambda{|x, y=42, *other, k_x: 42, **k_other, &b|}
-prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
-#@else
-prc = lambda{|x, y=42, *other, &b|}
-prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
 #@end
+
+#@since 3.2
+#@samplecode lambda: の例
+prc = proc{|x, y=42, *other|}
+p prc.parameters  # => [[:opt, :x], [:opt, :y], [:rest, :other]]
+prc = lambda{|x, y=42, *other|}
+p prc.parameters  # => [[:req, :x], [:opt, :y], [:rest, :other]]
+prc = proc{|x, y=42, *other|}
+p prc.parameters(lambda: true)  # => [[:req, :x], [:opt, :y], [:rest, :other]]
+prc = lambda{|x, y=42, *other|}
+p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
 #@end
 #@end
 
 @see [[m:Method#parameters]], [[m:UnboundMethod#parameters]]
-#@end
-
 #@since 2.7.0
 --- ruby2_keywords -> proc
 
