@@ -3646,7 +3646,7 @@ nth バイト目の文字を返します。nth が負の場合は文字列の末
 
 @see [[m:String#slice]]
 
---- byteslice(nth, len) -> String | nil
+--- byteslice(nth, len=1) -> String | nil
 
 nth バイト目から長さ len バイトの部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。引数が範囲外を指定した場合は
@@ -3665,7 +3665,9 @@ nil を返します。
 #@end
 
 @see [[m:String#slice]]
-
+#@since 3.2
+@see [[m:String#bytesplice]]
+#@end
 --- byteslice(range)          -> String | nil
 
 range で指定したバイトの範囲に含まれる部分文字列を返します。引数が範囲
@@ -3682,7 +3684,27 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 #@end
 
 @see [[m:String#slice]]
+#@since 3.2
+@see [[m:String#bytesplice]]
+--- bytesplice(index, length, str) -> String
+--- bytesplice(range, str)         -> String
 
+self の一部または全部を str で置き換えて str を返します。
+
+置き換え範囲の指定は、長さの指定が省略できないこと以外は
+[[m:String#byteslice]] と同じです。
+置き換え後の文字列の長さが対象の長さと違う場合、
+適切に長さが調整されます。
+
+@param index 置換したい文字列の範囲の始端
+@param length 置換したい文字列の範囲の長さ
+@param range 置換したい文字列の範囲を示す Range オブジェクト
+@raise IndexError index や length が範囲外の場合に発生
+@raise RangeError range が範囲外の場合に発生
+@raise IndexError 指定した始端や終端が文字列の境界と一致しない場合に発生
+
+@see [[m:String#byteslice]]
+#@end
 --- prepend(other_str) -> String
 文字列 other_str を先頭に破壊的に追加します。
 
