@@ -2323,7 +2323,7 @@ a                         #=> [2, 3, 1]
 
 @see [[m:Array#shuffle]]
 
---- combination(n) {|c| block }    -> Array
+--- combination(n) {|c| block }    -> self
 #@since 1.9.1
 --- combination(n)                 -> Enumerator
 #@else
@@ -2362,7 +2362,7 @@ a.combination(5).to_a  #=> []  : no combinations of length 5
 @see [[m:Array#permutation]]
 #@end
 
---- permutation(n = self.length) { |p| block }       -> Array
+--- permutation(n = self.length) { |p| block }       -> self
 #@since 1.9.1
 --- permutation(n = self.length)                     -> Enumerator
 #@else
@@ -2440,7 +2440,7 @@ a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
 
 
 #@since 1.9.2
---- repeated_combination(n) { |c| ... } -> Array
+--- repeated_combination(n) { |c| ... } -> self
 --- repeated_combination(n)             -> Enumerator
 
 サイズ n の重複組み合わせをすべて生成し、それを引数としてブロックを実行
@@ -2469,7 +2469,7 @@ a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
 #@end
 
 @see [[m:Array#repeated_permutation]], [[m:Array#combination]]
---- repeated_permutation(n) { |p| ... } -> Array
+--- repeated_permutation(n) { |p| ... } -> self
 --- repeated_permutation(n)             -> Enumerator
 
 サイズ n の重複順列をすべて生成し，それを引数としてブロックを実行します。
