@@ -22,16 +22,20 @@ end
 
 このメソッドで定義されるアクセスメソッドの定義は次の通りです。
 
-  def name
-    @name
-  end
+#@samplecode 例
+def name
+  @name
+end
+#@end
 
 第 2 引数 が true で指定された場合には、属性の書き込み用メソッド name= も同時に定義されます。
 その定義は次の通りです。
 
-  def name=(val)
-    @name = val
-  end
+#@samplecode 例
+def name=(val)
+  @name = val
+end
+#@end
 
 第 2 引数 に true か false を指定する方法は非推奨です。
 
@@ -61,12 +65,14 @@ end
 
 このメソッドで定義されるメソッドの定義は以下の通りです。
 
-  def name
-    @name
-  end
-  def name=(val)
-    @name = val
-  end
+#@samplecode 例
+def name
+  @name
+end
+def name=(val)
+  @name = val
+end
+#@end
 
 @param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
 #@since 3.0.0
@@ -93,9 +99,11 @@ end
 
 このメソッドで定義されるメソッドの定義は以下の通りです。
 
-  def name
-    @name
-  end
+#@samplecode 例
+def name
+  @name
+end
+#@end
 
 @param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
 #@since 3.0.0
@@ -122,9 +130,11 @@ end
 
 このメソッドで定義されるメソッドの定義は以下の通りです。
 
-  def name=(val)
-    @name = val
-  end
+#@samplecode 例
+def name=(val)
+  @name = val
+end
+#@end
 
 @param name [[c:String]] または [[c:Symbol]] を 1 つ以上指定します。
 #@since 3.0.0

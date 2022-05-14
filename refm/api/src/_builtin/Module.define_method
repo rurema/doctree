@@ -16,8 +16,10 @@
 @raise TypeError method に同じクラス、サブクラス、モジュール以外のメソッ
                  ドを指定した場合に発生します。
 
-  class Foo
-    def foo() p :foo end
-    define_method(:bar, instance_method(:foo))
-  end
-  Foo.new.bar    # => :foo
+#@samplecode 例
+class Foo
+  def foo() p :foo end
+  define_method(:bar, instance_method(:foo))
+end
+Foo.new.bar    # => :foo
+#@end
