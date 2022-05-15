@@ -3710,10 +3710,11 @@ self の一部または全部を str で置き換えて str を返します。
 
 @param other_str 追加したい文字列を指定します。
 
-例:
-  a = "world"
-  a.prepend("hello ") # => "hello world"
-  a                   # => "hello world"
+#@samplecode 例
+a = "world"
+a.prepend("hello ") # => "hello world"
+a                   # => "hello world"
+#@end
 
 #@since 2.4.0
 --- prepend(*arguments) -> String
