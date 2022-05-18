@@ -193,7 +193,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
   指定した feature を有効にします。以下のいずれかを指定できます。
 //emlist{
     * gems            rubygems (無効にするのはデバッグ専用、default: enabled)
-#@since 3.1.0
+#@since 3.1
     * error_highlight error_highlight (default: enabled)
 #@end
     * did_you_mean    did_you_mean (default: enabled)
@@ -202,7 +202,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 #@since 2.6.0
     * jit             JIT (default: disabled)
 #@end
-#@since 3.1.0
+#@since 3.1
     * mjit            MJIT (default: disabled)
     * yjit            YJIT (default: disabled)
 #@end
@@ -436,7 +436,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
   る時の構文解析の過程を表示します。この表示は非常に冗長なので,
   コンパイラそのものをデバッグする人以外には必要ないと思います。
 
-#@since 3.1.0
+#@since 3.1
 ==== JIT のオプション (実験的)
 
 : --jit
@@ -509,7 +509,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   貪欲なバージョニングモードを指定します。(デフォルト: disabled)
 #@end
-#@if ("2.6.0" <= version and version < "3.1.0")
+#@if ("2.6.0" <= version and version < "3.1")
 ==== JIT のオプション (実験的)
 
 : --jit

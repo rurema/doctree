@@ -439,7 +439,7 @@ ENV.replace(saved_env)
 #@end
 
 @see [[m:Object#clone]]
-#@since 3.1.0
+#@since 3.1
 @see [[m:ENV.dup]]
 --- dup -> ()
 [[c:TypeError]]を発生させます。
