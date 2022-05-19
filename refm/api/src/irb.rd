@@ -108,14 +108,20 @@ readline ライブラリがインストールされている時には
 irb コマンドは起動時に以下のパスを上から順番に探索し、
 最初に見つかったファイルを読み込みます。
 
+#@since 1.8.3
   * $IRBRC (もし環境変数 IRBRC が設定されていれば)
+#@end
+#@since 2.7.2
   * $XDG_CONFIG_HOME/irb/irbrc (もし環境変数 XDG_CONFIG_HOME が設定されていれば)
-  * ~/.irbrc
+#@end
+  * $HOME/.irbrc (もし環境変数 HOME が設定されていれば)
+#@since 2.7.2
   * ./.config/irb/irbrc
+#@end
   * ./.irbrc
   * ./irb.rc
   * ./_irbrc
-  * ./$irbrc
+  * ./$irbrc (環境変数ではなく $irbrc というファイル名)
 
 このように実際に読み込まれるファイル名は環境により異なりますが、
 このマニュアルでは単に「.irbrc」と呼称します。
