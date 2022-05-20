@@ -109,11 +109,11 @@ irb コマンドは起動時に以下のパスを上から順番に探索し、
 最初に見つかったファイルを読み込みます。
 
   * $IRBRC (もし環境変数 IRBRC が設定されていれば)
-#@since 2.7.2
+#@since 2.7.0
   * $XDG_CONFIG_HOME/irb/irbrc (もし環境変数 XDG_CONFIG_HOME が設定されていれば)
 #@end
   * $HOME/.irbrc (もし環境変数 HOME が設定されていれば)
-#@since 2.7.2
+#@since 2.7.0
   * ./.config/irb/irbrc
 #@end
   * ./.irbrc
