@@ -268,6 +268,9 @@ original_text.equal?(unfrozen_text)   # => false
 @see [[m:String#-@]]
 
 --- -@ -> String | self
+#@since 3.2
+--- dedup -> String | self
+#@end
 
 self が freeze されている文字列の場合、self を返します。
 freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
