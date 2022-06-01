@@ -248,6 +248,11 @@ d, a, u の3つのオプションがあります。
   /\w/.match("e\u{0308}") # => #<MatchData "e">
   $&.codepoints # => [101]
 
+ただし、\R は文字クラスの中では使用できません。
+
+  /\R/.match("\r\n") # => #<MatchData "\r\n">
+  /[\R]/.match("\r\n") # => nil
+
 #@end
 
 
