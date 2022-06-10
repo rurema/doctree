@@ -424,6 +424,8 @@ base_directory も絶対パスでなければなりません。
 
     path.relative_path_from(base) # => #<Pathname:foo>
 
+
+
 --- each_line(*args){|line| ... } -> nil
 #@since 1.9.1
 --- each_line(*args) -> Enumerator
