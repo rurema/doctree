@@ -415,6 +415,8 @@ base_directory も絶対パスでなければなりません。
 
 @param base_directory ベースディレクトリを表す Pathname オブジェクトを指定します。
 
+@raise ArgumentError Windows上でドライブが違うなど、base_directory から self への相対パスが求められないときに例外が発生します。
+
     require 'pathname'
 
     path = Pathname.new("/tmp/foo")
