@@ -3,16 +3,22 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  ruby-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.versions.outputs.value }}
+    steps:
+      - id: versions
+        run: |
+          versions=$(curl -s 'https://cache.ruby-lang.org/pub/misc/ci_versions/cruby.json' | jq -c '. + []')
+          echo "::set-output name=value::${versions}"
+
   rake:
+    needs: ruby-versions
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        ruby: [3.1, '3.0', 2.7, head]
-        exclude:
-          - ruby: '3.0'
-            os: windows-latest
-          - ruby: 2.7
-            os: macos-latest
+        ruby: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
 
     runs-on: ${{ matrix.os }}
 
