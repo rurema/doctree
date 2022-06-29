@@ -367,7 +367,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
       * tsort
       * un
       * weakref
-    * 以下の拡張機能が新たに default gems になりました。
+    * 以下の拡張ライブラリが新たに default gem になりました。
       * digest
       * io-nonblock
       * io-wait
