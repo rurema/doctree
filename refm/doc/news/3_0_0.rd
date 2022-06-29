@@ -339,7 +339,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
 == 標準添付ライブラリの互換性
 
   * Default gems
-    * 以下のライブラリが新たに default gems になりました。
+    * 以下のライブラリが新たに default gem になりました。
       * English
       * abbrev
       * base64
