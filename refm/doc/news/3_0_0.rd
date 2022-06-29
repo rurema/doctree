@@ -97,7 +97,7 @@ def square(x) = x * x
   * メソッド内のシングルトンクラス定義中の yield は警告ではなく SyntaxError になりました。
     メソッド外のクラス定義中の yield は LocalJumpError ではなく SyntaxError になりました。
     [[feature:15575]]
-  * スーパークラス/スーパーモジュールでクラス変数を再定義した場合、RuntimeError が浮揚されるようになりました
+  * スーパークラス/スーパーモジュールでクラス変数を再定義した場合、RuntimeError を起こすようになりました
     （今までは verbose モードでのみ警告を出していました）。
     さらにトップレベルでクラス変数にアクセスすると RuntimeError になりました。
     [[bug:14541]]
@@ -158,7 +158,7 @@ dirty_data[(1..).step(2)] # take each second element
   * GC
     * コンパクションが実行されるタイミングを制御するために GC.auto_compact= および GC.auto_compact が導入されました。
       auto_compact= を true に設定すると、メジャー GC 中にコンパクションが発生します。
-      現時点では、コンパクションによってメジャー GC にかなりのオーバーヘッドが追加されます。よって、まず最初にテストを実行してください！
+      現時点では、コンパクションによってメジャー GC にかなりのオーバーヘッドが追加されます。よって、まず最初にテストしてください！
       [[feature:17176]]
   * Hash
     * Hash#transform_keys および Hash#transform_keys! はキーを新しいキーにマッピングするハッシュを受け入れるようになりました。[[feature:16274]]
@@ -193,16 +193,16 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
       [[feature:16792]]
   * Proc
     * Proc#== and Proc#eql? are now defined and will return true for separate Proc instances if the procs were created from the same block. [[feature:14267]]
-    * Proc#== および Proc#eql? は、Procs が同じブロックから作成される場合、Proc インスタンスと分離して true を返すように定義されました。[[feature:14267]]
+    * Proc#== および Proc#eql? は、Proc が同じブロックから作成される場合、Proc インスタンスと分離して true を返すように定義されました。[[feature:14267]]
   * Queue / SizedQueue
     * Queue#pop, SizedQueue#push および関連したメソッドは、ノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。[[feature:16786]]
   * Ractor
-    * 並列処理を可能にする新しいクラスが追加されました。詳細は {Ractor}[rdoc-ref:ractor.md] を参照してください。
+    * 並列処理を可能にする新しいクラスが追加されました。詳細は [[url:https://docs.ruby-lang.org/en/master/ractor_md.html]] を参照してください。
   * Random
-    * Random::DEFAULT は Random インスタンスではなく Random クラスから参照されるようになりました。よって、Ractor で機能します。[[feature:17322]]
+    * Random::DEFAULT は Random インスタンスではなく Random クラスをさすようになりました。よって、Ractor で機能します。[[feature:17322]]
     * Random::DEFAULT は、その値がわかりにくくグローバルではなくなったため、非推奨になりました。Kernel.rand/Random.rand を直接使用するか、代わりに Random.new を使用して Random インスタンスを生成してください。[[feature:17351]]
   * String
-    * 以下のメソッドは、サブクラスインスタンスで呼び出された場合、文字列インスタンスを返すようになりました: [[bug:10845]]
+    * 以下のメソッドは、サブクラスインスタンスで呼び出された場合、String インスタンスを返すようになりました: [[bug:10845]]
       * String#*
       * String#capitalize
       * String#center
@@ -238,10 +238,10 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
       * String#upcase
   * Symbol
     * Symbol#to_proc は lambda となる Proc を返すようになりました。[[feature:16260]]
-    * Symbol#name が導入されました。 シンボルの名前がある場合は、その名前を返します。返された文字列は freeze です。[[feature:16150]]
+    * Symbol#name が導入されました。 シンボルの名前がある場合は、その名前を返します。返された文字列は freeze されています。[[feature:16150]]
   * Fiber
     * ブロッキングオペレーションをインターセプトするための Fiber.set_scheduler、および現在のスケジューラーにアクセスするための Fiber.scheduler が導入されました。
-      詳細は {Fiber}[rdoc-ref:fiber.md] のサポートされているオペレーションとスケジューラーフックの実装方法を参照してください。[[feature:16786]]
+      詳細は {Fiber}[https://docs.ruby-lang.org/ja/latest/class/Fiber.html] のサポートされているオペレーションとスケジューラーフックの実装方法を参照してください。 [[feature:16786]]
     * Fiber.blocking? は、現在の実行コンテキストがブロックされているかどうかを知らせてくれます。[[feature:16786]]
     * Thread#join はノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。 [[feature:16786]]
     * デフォルトのデッドロック検出を無効にするために Thread.ignore_deadlock アクセッサが導入されました。
@@ -298,8 +298,8 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * 組み込みメソッドは安全に上書き可能になりました。[[bug:15409]]
     * 実装では、 ! で終わるメソッドでのみ使用されます。
     * Ractor 互換
-    * YAML をサポートするよう改善されています。[[bug:8382]]
-    * オフィシャルな採用は推奨しません。OpenStruct@Caveats セクションを参照してください。
+    * YAML のサポートが改善されています。[[bug:8382]]
+    * 公式には使用を推奨しなくなりました。OpenStruct@Caveats セクションを参照してください。
   * Pathname
     * Ractor 互換
   * Psych
@@ -328,12 +328,12 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
 #@end
 
   * EXPERIMENTAL: Hash#each が常に 2 要素配列を yield するようになりました。[[bug:12706]]
-    * { a: 1 }.each(&->(k, v) { }) は lambda のアリティチェックが要因で、ArgumentError を浮揚するようになりました。
+    * { a: 1 }.each(&->(k, v) { }) は lambda のアリティチェックが要因で、ArgumentError を起こすようになりました。
   * パイプがクローズされた後に標準出力へ出力しようとしても、EPIPE 例外を浮揚しないようになりました。[[feature:14413]]
   * TRUE/FALSE/NIL 各定数が定義されないようになりました。
   * Integer#zero? は最適化のために Numeric#zero? をオーバーライドするようになりました。[[misc:16961]]
   * Enumerable#grep および Enumerable#grep_v は、正規表現が渡され、かつ、ブロックがない場合、Regexp.last_match を変更しなくなりました。[[bug:17030]]
-  * 'open-uri' を要求しても Kernel#open は再定義されなくなりました。代わりに URI.open を直接呼び出すか URI#open を使用してください。[[misc:15893]]
+  * 'open-uri' を require しても Kernel#open は再定義されなくなりました。代わりに URI.open を直接呼び出すか URI#open を使用してください。[[misc:15893]]
   * 依存関係とパフォーマンス上の理由から、SortedSet が削除されました。
 
 == 標準添付ライブラリの互換性
@@ -377,11 +377,11 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
       * win32ole
   * Bundled gems
     * net-telnet および xmlrpc は、バンドルされた gem から削除されました。
-      これらを保守したい場合は、https://github.com/ruby/xmlrpc もしくは https://github.com/ruby/net-telnet にあなたのプランをコメントしてください。
+      これらを保守したい場合は、[[url:https://github.com/ruby/xmlrpc]] もしくは [[url:https://github.com/ruby/net-telnet]] にあなたのプランをコメントしてください。
   * SDBM は Ruby 表示ん添付ライブラリから削除されました。[[bug:8446]]
-    * sdbm の課題は、https://github.com/ruby/sdbm で処理される予定です。
+    * sdbm の課題は、[[url:https://github.com/ruby/sdbm]] で処理される予定です。
   * WEBrick は Ruby 標準添付ライブラリから削除されました。[[feature:17303]]
-    * WEBrick の課題は、https://github.com/ruby/webrick で処理される予定です。
+    * WEBrick の課題は、[[url:https://github.com/ruby/webrick] で処理される予定です。
 
 == C API の更新
 
