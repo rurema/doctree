@@ -75,20 +75,22 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 書いてもエラーになります。他、細かい部分でこのあたりの規則は見直され統
 一されました。
 
-        1_000_000_000  => 1000000000
-        0xffff_ffff  => 0xffffffff
+#@samplecode
+1_000_000_000 # => 1000000000
+0xffff_ffff   # => 0xffffffff
+#@end
 
 ===[a:string] 文字列リテラル
 
-例:
-
-          "this is a string expression\n"
-          'this is a string expression\n'
-          %q!I said, "You said, 'She said it.'"!
-          %!I said, "You said, 'She said it.'"!
-          %Q('This is it.'\n)
-          "this is multi line
-          string"
+#@samplecode 例
+"this is a string expression\n"
+'this is a string expression\n'
+%q!I said, "You said, 'She said it.'"!
+%!I said, "You said, 'She said it.'"!
+%Q('This is it.'\n)
+"this is multi line
+string"
+#@end
 
 文字列はダブルクォートまたはシングルクォートで囲まれています。
 ダブルクォートで囲まれた文字列では[[ref:backslash]]と[[ref:exp]](後述)が有効になります。
@@ -105,8 +107,10 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 空白を間に挟んだ文字列リテラルは、コンパイル時に1つの文字列
 リテラルと見倣されます。
 
-          p "foo" "bar"
-          => "foobar"
+#@samplecode
+p "foo" "bar"
+# => "foobar"
+#@end
 
 [[ref:percent]] による別形式の文字列表現もあります。
 
@@ -169,7 +173,9 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 : \u{nnnn}
   Unicode 文字列(n は 0-9,a-f,A-F)。nnnnは16進数で1桁から6桁まで指定可能。
   スペースかタブ区切りで複数の Unicode 文字を指定できる。
-  例: "\u{30eb 30d3 30fc a}" # => "ルビー\n"
+#@samplecode 例
+"\u{30eb 30d3 30fc a}" # => "ルビー\n"
+#@end
 
 : \改行
 
@@ -177,11 +183,12 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 
 ====[a:exp] 式展開
 
-例:
-       ($ruby = "RUBY"の場合)
+#@samplecode 例
+# ($ruby = "RUBY"の場合)
 
-          "my name is #{$ruby}" #=> "my name is RUBY"
-          'my name is #{$ruby}' #=> "my name is #{$ruby}"
+"my name is #{$ruby}" #=> "my name is RUBY"
+'my name is #{$ruby}' #=> "my name is #{$ruby}"
+#@end
 
 ダブルクォート(")で囲まれた文字列式、コマンド文
 字列および正規表現の中では#{式}という形式で式
@@ -200,8 +207,10 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 
 式展開中のコメントは、# から } まででなく改行までです。上記の例は
 
-        p "#{ "string" # comment
-          }"                          # => "string"
+#@samplecode
+p "#{ "string" # comment
+  }"                          # => "string"
+#@end
 
 と書く必要があります。
 
@@ -241,10 +250,10 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 
 ===[a:command] コマンド出力
 
-例:
-
-          `date`
-          %x{ date }
+#@samplecode 例
+`date`
+%x{ date }
+#@end
 
 バッククォート(`)で囲まれた文字列は、ダブルクォー
 トで囲まれた文字列と同様に[[ref:backslash]]
@@ -272,31 +281,37 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 文字列ですが、ヒアドキュメントは `<<識別子' を含む行の次の行から `識別
 子' だけの行の直前までを文字列とする行指向のリテラルです。例えば、
 
-        print <<EOS      # 識別子 EOS までがリテラルになる
-          the string
-          next line
-        EOS
+#@samplecode
+print <<EOS      # 識別子 EOS までがリテラルになる
+  the string
+  next line
+EOS
+#@end
 
 これは以下と同じです。
 
-        print "  the string\n  next line\n"
+#@samplecode
+print "  the string\n  next line\n"
+#@end
 
 ヒアドキュメントでは、開始ラベル `<<識別子' が文法要素としての式
 にあたります。これは、開始ラベルを使ってヒアドキュメント全体を引数に渡
 したりレシーバにしたりできるということを意味します。
 
-        # 式の中に開始ラベルを書く
-        # method の第二引数には "    ヒアドキュメント\n" が渡される
-        method(arg1, <<LABEL, arg2)
-            ヒアドキュメント
-        LABEL
+#@samplecode
+# 式の中に開始ラベルを書く
+# method の第二引数には "    ヒアドキュメント\n" が渡される
+method(arg1, <<LABEL, arg2)
+    ヒアドキュメント
+LABEL
 
-        # ヒアドキュメントをレシーバにメソッドを呼ぶ
-        p  <<LABEL.upcase
-        the lower case string
-        LABEL
+# ヒアドキュメントをレシーバにメソッドを呼ぶ
+p  <<LABEL.upcase
+the lower case string
+LABEL
 
-        # => "THE LOWER CASE STRING"
+# => "THE LOWER CASE STRING"
+#@end
 
 開始ラベルの次の行は常にヒアドキュメントとなります。例えば、以下のよう
 な記述は文法エラーになります
@@ -311,26 +326,29 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 行をインデントすることができます。これ以外では、終端行に、余
 分な空白やコメントさえも書くことはできません。
 
-        if need_define_foo
-          eval <<-EOS   # '<<-' を使うと……
-            def foo
-              print "foo\n"
-            end
-          EOS
-          #↑終端行をインデントできます。
-        end
+#@samplecode
+if need_define_foo
+  eval <<-EOS   # '<<-' を使うと……
+    def foo
+      print "foo\n"
+    end
+  EOS
+  #↑終端行をインデントできます。
+end
+#@end
 
 #@since 2.3.0
 開始ラベルを `<<~識別子` のように `~` を付けて書くことで、以下のような
 ヒアドキュメントを書くことができます。
 
-//emlist{
-    expected_result = <<~SQUIGGLY_HEREDOC
-      This would contain specially formatted text.
+#@samplecode
+expected_result = <<~SQUIGGLY_HEREDOC
+  This would contain specially formatted text.
 
-      That might span many lines
-    SQUIGGLY_HEREDOC
-//}
+  That might span many lines
+SQUIGGLY_HEREDOC
+# => "This would contain specially formatted text.\n" + "\n" + "That might span many lines\n"
+#@end
 
 最もインデントが少ない行を基準にして、全ての行の先頭から空白を取り除きます。
 インデントの深さを決定するために主にタブやスペースで構成された行は無視されるので、注意してください。
@@ -339,13 +357,15 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 
 一行に複数のヒアドキュメントを書くこともできます。
 
-        print <<FIRST, <<SECOND
-           これは一つめのヒアドキュメントです。
-           まだ一つめです。
-        FIRST
-           この行からは二つめのヒアドキュメントです。
-           この行で終わります。
-        SECOND
+#@samplecode
+print <<FIRST, <<SECOND
+   これは一つめのヒアドキュメントです。
+   まだ一つめです。
+FIRST
+   この行からは二つめのヒアドキュメントです。
+   この行で終わります。
+SECOND
+#@end
 
 開始ラベル `<<識別子' の `識別子' を(""、''、``)のいずれかで囲む
 ことで、ヒアドキュメントとなる文字列リテラルの性質は対応する文字列リテ
@@ -357,26 +377,28 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 を参照してください。`識別子' がクォートで囲まれていないときはダブルクォー
 トでくくられているのと同じです。
 
-        # バックスラッシュ記法、式展開が有効
-        print <<"EOS"
-        The price is #{$price}.
-        EOS
+#@samplecode
+# バックスラッシュ記法、式展開が有効
+print <<"EOS"
+The price is #{$price}.
+EOS
 
-        # 上のものと同じ結果
-        print <<EOS
-        The price is #{$price}.
-        EOS
+# 上のものと同じ結果
+print <<EOS
+The price is #{$price}.
+EOS
 
-        # 式展開はできない
-        print <<'EOS'
-        The price is #{$price}.
-        EOS
+# 式展開はできない
+print <<'EOS'
+The price is #{$price}.
+EOS
 
-        # コマンドを実行
-        print <<`EOC`
-        date
-        diff test.c.org test.c
-        EOC
+# コマンドを実行
+print <<`EOC`
+date
+diff test.c.org test.c
+EOC
+#@end
 
 文字列リテラルのそれぞれの性質に関しては
 [[ref:string]]、
@@ -387,12 +409,12 @@ _ は、0x などの prefix の直後に書くことはできません。また�
 
 ===[a:regexp] 正規表現リテラル
 
-例:
-
-          /^Ruby the OOPL/
-          /Ruby/i
-          /my name is #{myname}/o
-          %r|Ruby|
+#@samplecode 例
+/^Ruby the OOPL/
+/Ruby/i
+/my name is #{myname}/o
+%r|Ruby|
+#@end
 
 /で囲まれた文字列は正規表現です。正規表現として解釈される
 メタ文字については[[d:spec/regexp]]を参照してください。
@@ -415,10 +437,10 @@ _ は、0x などの prefix の直後に書くことはできません。また�
   正規表現中の空白(改行も含む)を無視する。また、バックスラッシュでエス
   ケープしない`#' から改行までをコメントとみなして無視する(ただ
   し、コメント中に / を含めると構文解析に失敗するので注意)
-//emlist{
-  /foo        # コメント
-  bar/x
-//}
+#@samplecode
+/foo        # コメント
+bar/x
+#@end
   これは /foobar/ と同じ。
 
   空白を含めるには \  のようにエスケープします。
@@ -447,11 +469,11 @@ o オプションを指定すれば、同一の正規表現オブジェクトを
 
 ===[a:array] 配列式
 
-例:
-
-          [1, 2, 3]
-          %w(a b c)
-          %W(a b c)
+#@samplecode 例
+[1, 2, 3]
+%w(a b c)
+%W(a b c)
+#@end
 
 文法:
 
@@ -467,17 +489,23 @@ o オプションを指定すれば、同一の正規表現オブジェクトを
 
 ===[a:hash] ハッシュ式
 
-例:
-
-          { 1 => 2, 2 => 4, 3 => 6}
-          { :a => "A", :b => "B", :c => "C" }
-          { a:"A", b:"B", c:"C" } # 一つ上の例と同じ。キーがシンボルの場合はこのように書ける。
 #@since 2.2.0
-          { "a":"A", 'b':"B", "c":"C" } # 一つ上の例と同じ。
-                                        # キーにシンボルを使う文法ではこのように
-                                        # シンボル名をシングルクオートやダブルクオートで
-                                        # 囲うことができる。これによって空白を含むような
-                                        # シンボルなどをキーにできる
+#@samplecode
+{ 1 => 2, 2 => 4, 3 => 6}
+{ :a => "A", :b => "B", :c => "C" }
+{ a:"A", b:"B", c:"C" } # 一つ上の例と同じ。キーがシンボルの場合はこのように書ける。
+{ "a":"A", 'b':"B", "c":"C" } # 一つ上の例と同じ。
+                              # キーにシンボルを使う文法ではこのように
+                              # シンボル名をシングルクオートやダブルクオートで
+                              # 囲うことができる。これによって空白を含むような
+                              # シンボルなどをキーにできる
+#@end
+#@else
+#@samplecode
+{ 1 => 2, 2 => 4, 3 => 6}
+{ :a => "A", :b => "B", :c => "C" }
+{ a:"A", b:"B", c:"C" } # 一つ上の例と同じ。キーがシンボルの場合はこのように書ける。
+#@end
 #@end
 
 文法:
@@ -493,11 +521,11 @@ o オプションを指定すれば、同一の正規表現オブジェクトを
 メソッドの引数、もしくは[[ref:array]]の末尾に要素が1つ以上の
 ハッシュを渡す場合は、{, }を省略することができます。
 
-例:
-
-        method(1,2,3=>4)      # method(1,2,{3=>4})
-        obj[1=>2,3=>4]        # obj[{1=>2,3=>4}]
-        [1=>2,3=>4]           # [{1=>2, 3=>4}]
+#@samplecode 例
+method(1,2,3=>4)      # method(1,2,{3=>4})
+obj[1=>2,3=>4]        # obj[{1=>2,3=>4}]
+[1=>2,3=>4]           # [{1=>2, 3=>4}]
+#@end
 
 ハッシュ式は評価されるたびに毎回新しいハッシュオブジェクトを生成します。
 
@@ -511,18 +539,17 @@ o オプションを指定すれば、同一の正規表現オブジェクトを
 
 ===[a:symbol] シンボル
 
-例:
-
-    (シンボルの例)
-
-          :class
-          :lvar
-          :method!
-          :andthisis?
-          :$gvar
-          :@ivar
-          :@@cvar
-          :+
+#@samplecode 例
+# (シンボルの例)
+:class
+:lvar
+:method!
+:andthisis?
+:$gvar
+:@ivar
+:@@cvar
+:+
+#@end
 
 文法:
 
@@ -537,9 +564,12 @@ Symbol リテラルに指定できる演算子はメソッドとして再定義�
 けです。[[d:spec/operator]] を参照して下さい。
 
 以下の記法も使えます。
-  p :'foo-bar' #=> :"foo-bar"
-  p :"foo-bar" #=> :"foo-bar"
-  p %s{foo-bar} #=> :"foo-bar"
+
+#@samplecode
+p :'foo-bar' #=> :"foo-bar"
+p :"foo-bar" #=> :"foo-bar"
+p %s{foo-bar} #=> :"foo-bar"
+#@end
 
 この記法では、任意のシンボルを定義することができます。
 
@@ -581,38 +611,48 @@ Symbol リテラルに指定できる演算子はメソッドとして再定義�
 対応する括弧になります。括弧を区切り文字にした場合、対応が取れていれば
 区切り文字と同じ括弧を要素に含めることができます。
 
-            %(()) => "()"
+#@samplecode
+%(()) # => "()"
+#@end
 
 文字列の配列の%記法はシングルクォートで囲んだ文字列を空白文字で分割したのと
 同じです。たとえば、
 
-          %w(foo bar baz)
+#@samplecode
+%w(foo bar baz)
+#@end
 
 は['foo', 'bar', 'baz']と等価です。
 
 バックスラッシュを使って空白を要素に含むこともできます。
 
-          %w(foo\ bar baz)
+#@samplecode
+%w(foo\ bar baz)
 
-          => ["foo bar", "baz"]
+# => ["foo bar", "baz"]
+#@end
 
 %W は、%w と同様ですが、ダブルクォートで囲んだ文字列のように、式展開、
 バックスラッシュ記法が使用できます。空白による分割は式展開を評価する前
 に行われます。
 
-          v = "c d"
-          %W(a\ b #{v}e\sf #{})
+#@samplecode
+v = "c d"
+%W(a\ b #{v}e\sf #{})
 
-          => ["a b", "c de f", ""]
+# => ["a b", "c de f", ""]
+#@end
 
 シンボルの配列の場合も文字列の配列の場合と同様です。
 
-          %i(foo\ bar baz)
+#@samplecode
+%i(foo\ bar baz)
 
-          => [:"foo bar", :baz]
+# => [:"foo bar", :baz]
 
 
-          v = "c d"
-          %I(a\ b #{v}e\sf #{})
+v = "c d"
+%I(a\ b #{v}e\sf #{})
 
-          => [:"a b", :"c de f", :""]
+# => [:"a b", :"c de f", :""]
+#@end
