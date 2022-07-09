@@ -59,7 +59,7 @@ Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 #@end
 
 
-@see [[m:Math.sqrt]]
+@see [[m:Math.#sqrt]]
 #@end
 == Instance Methods
 
