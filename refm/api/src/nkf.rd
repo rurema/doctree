@@ -11,43 +11,47 @@ Ruby から使うためのモジュールです。
 
 以下は、漢字コード変換コマンドの例です。
 
-  #!/usr/local/bin/ruby
-  
-  require 'nkf'
-  
-  opt = ''
-  opt = ARGV.shift if ARGV[0][0] == ?-
-  
-  while line = ARGF.gets
-    print NKF.nkf(opt, line)
-  end
+#@samplecode 例
+#!/usr/local/bin/ruby
+
+require 'nkf'
+
+opt = ''
+opt = ARGV.shift if ARGV[0][0] == ?-
+
+while line = ARGF.gets
+  print NKF.nkf(opt, line)
+end
+#@end
 
 以下は、漢字コード判別コマンドの例です。
 
-  #!/usr/local/bin/ruby
+#@samplecode 例
+#!/usr/local/bin/ruby
+
+require 'nkf'
+
+CODES = {
+  NKF::JIS      => "JIS",
+  NKF::EUC      => "EUC",
+  NKF::SJIS     => "SJIS",
+  NKF::UTF8     => "UTF8",
+  NKF::BINARY   => "BINARY",
+  NKF::ASCII    => "ASCII",
+  NKF::UNKNOWN  => "UNKNOWN",
+}
+
+while file = ARGV.shift
+  str = open(file) {|io| io.gets(nil) }
   
-  require 'nkf'
-  
-  CODES = {
-    NKF::JIS      => "JIS",
-    NKF::EUC      => "EUC",
-    NKF::SJIS     => "SJIS",
-    NKF::UTF8     => "UTF8",
-    NKF::BINARY   => "BINARY",
-    NKF::ASCII    => "ASCII",
-    NKF::UNKNOWN  => "UNKNOWN",
-  }
-  
-  while file = ARGV.shift
-    str = open(file) {|io| io.gets(nil) }
-    
-    printf "%-10s ", file
-    if str.nil?
-      puts "EMPTY"
-    else
-      puts CODES.fetch(NKF.guess(str))
-    end
+  printf "%-10s ", file
+  if str.nil?
+    puts "EMPTY"
+  else
+    puts CODES.fetch(NKF.guess(str))
   end
+end
+#@end
 
 === オプション文字列
 
