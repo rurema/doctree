@@ -341,6 +341,10 @@ end
 
 定数 const_name を最初に参照した時に feature を [[m:Kernel.#require]] するように設定します。
 
+const_name が autoload 設定されていて、まだ定義されてない(ロードされていない)ときは、
+autoload する対象を置き換えます。
+const_name が(autoloadではなく)既に定義されているときは何もしません。
+
 @param const_name [[c:String]] または [[c:Symbol]] で指定します。
        なお、const_name には、"::" 演算子を含めることはできません。
        つまり、self の直下に定義された定数しか指定できません。
