@@ -517,13 +517,13 @@ retry をまとめると以下のようになります。
 #@until 1.9.0
 #@samplecode
 def iter
- (a)
-# :
- (b)
- yield
- (c)
-# :
- (d)
+  # (a)
+  #  :
+  # (b)
+  yield
+  # (c)
+  #  :
+  # (d)
 end
 iter { retry }  # -> (a) へ飛ぶ
 iter { redo  }  # -> (b) へ飛ぶ
@@ -533,13 +533,13 @@ iter { break }  # -> (d) へ飛ぶ
 #@else
 #@samplecode
 def iter
- (a)
-# :
- (b)
- yield
- (c)
-# :
- (d)
+  # (a)
+  #  :
+  # (b)
+  yield
+  # (c)
+  #  :
+  # (d)
 end
 iter { redo  }  # -> (b) へ飛ぶ
 iter { next  }  # -> (c) へ飛ぶ
