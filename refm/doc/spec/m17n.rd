@@ -43,9 +43,10 @@ Ruby 1.9 ではこれを用いてエンコーディングを変換するのが�
 例えばエンコーディングが不明のテキストファイルから読み込んだ文字列に後からエンコーディングを
 設定する場合などに使います。
 
-例:
-  "いろは".encode("Shift_JIS")
-   "\xA4\xA4\xA4\xED\xA4\xCF".force_encoding("EUC-JP")
+#@samplecode 例
+"いろは".encode("Shift_JIS")
+"\xA4\xA4\xA4\xED\xA4\xCF".force_encoding("EUC-JP")
+#@end
 
 ====[a:ruby18] Ruby 1.8 からの移行
 
@@ -103,15 +104,15 @@ ASCII 互換エンコーディングをもつ 7bit クリーンな文字列は�
 しかし、7bit クリーンな文字列同士の比較の際は、
 両者の文字エンコーディングが異なっていても、バイト列として一致していれば true を返します。
 
-例:
-
-  a = "abc"
-  e = a.encode("EUC-JP")
-  u = a.encode("UTF-8")
-  p e == u                           #=> true
-  p e + u                            #=> "abcabc"
-  p "あ" + e                         #=> "あabc"
-  p "あ" + u                         #=> "あabc"
+#@samplecode 例
+a = "abc"
+e = a.encode("EUC-JP")
+u = a.encode("UTF-8")
+p e == u                           #=> true
+p e + u                            #=> "abcabc"
+p "あ" + e                         #=> "あabc"
+p "あ" + u                         #=> "あabc"
+#@end
 
 ====[a:binary] バイナリの取扱い
 
@@ -152,9 +153,10 @@ ASCII 非互換のエンコーディングや、ダミーエンコーディン�
 
 現在のスクリプトエンコーディングは __ENCODING__ により取得することができます。
 
-例: 
-  # coding: euc-jp
-  p __ENCODING__     #=> #<Encoding:EUC-JP>
+#@samplecode 例
+# coding: euc-jp
+p __ENCODING__     #=> #<Encoding:EUC-JP>
+#@end
 
 ====[a:magic_comment] magic comment
 
@@ -234,7 +236,7 @@ locale がスクリプトエンコーディングになります。
   p "abc".encoding      #=> #<Encoding:EUC-JP>
   p "\x80".encoding     #=> #<Encoding:EUC-JP>
   p "\u3042".encoding   #=> #<Encoding:UTF-8>  (Unicode エスケープがあるので UTF-8 になる)
-  p "\x80\u3042".encoding #=> エラー
+  p "\x80\u3042".encoding #=> エラー: UTF-8 mixed within US-ASCII source
 
 
 #@end
