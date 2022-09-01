@@ -328,13 +328,19 @@ p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz') # => true
 --- begin -> object
 --- first -> object
 
-始端の要素を返します。範囲オブジェクトが始端を含むかどうかは関係ありま
-せん。
-
+始端の要素を返します。
+始端を持たない範囲オブジェクトの場合、begin はnilを返しますが, first は例外 [[c:RangeError]] が発生します。
 
 #@samplecode 例
+# 始端を持つ場合
 p (1..5).begin # => 1
 p (1..0).begin # => 1
+p (1..5).first # => 1
+p (1..0).first # => 1
+
+# 始端を持たない場合
+p (..5).begin #=> nil
+p (..5).first #=> RangeError
 #@end
 
 @see [[m:Range#end]]
