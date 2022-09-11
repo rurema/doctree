@@ -786,6 +786,46 @@ class Bar
 end
 #@end
 
+
+#@since 2.3.0
+--- deprecate_constant(*name) -> self
+
+name で指定した定数を deprecate に設定します。
+deprecate に設定した定数を参照すると警告メッセージが表示されます。
+
+#@since 2.7.0
+Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更になったため、
+デフォルトでは警告が表示されません。
+
+コマンドラインオプション(詳細は[[ref:d:spec/rubycmd#cmd_option]]参照)で、
+「-w」か「-W2」などを指定するか、実行中に「Warning[:deprecated] = true」で
+変更すると表示されるようになります。
+
+「$VERBOSE = true」は「Warning[:deprecated]」に影響しないため、
+表示されるかどうかは変わりません。
+#@end
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+@return self を返します。
+
+#@samplecode 例
+FOO = 123
+Object.deprecate_constant(:FOO) # => Object
+
+FOO
+# warning: constant ::FOO is deprecated
+# => 123
+
+Object.deprecate_constant(:BAR)
+# NameError: constant Object::BAR not defined
+#@end
+
+#@end
+
+
 --- freeze -> self
 
 モジュールを凍結（内容の変更を禁止）します。
@@ -977,6 +1017,41 @@ p C.new.m        #=> [:m, 1]
 #@else
 @see [[m:Object#instance_eval]], [[m:Module.new]], [[m:Kernel.#eval]]
 #@end
+
+--- module_exec(*args) {|*vars| ... }       -> object
+--- class_exec(*args) {|*vars| ... }        -> object
+
+与えられたブロックを指定された args を引数としてモジュールのコンテキストで評価します。
+
+モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
+つまり、そのモジュールの定義式の中にあるかのように実行されます。
+
+ローカル変数、定数とクラス変数のスコープはブロックの外側のスコープになります。
+
+@param args ブロックに渡す引数を指定します。
+
+
+#@samplecode 例
+class Thing
+end
+c = 1
+
+Thing.class_exec{
+  def hello() 
+    "Hello there!" 
+  end
+
+  define_method(:foo) do   # ローカル変数がブロックの外側を参照している
+    c
+  end
+}
+
+t = Thing.new
+p t.hello()            #=> "Hello there!"
+p t.foo()              #=> 1
+#@end
+
+@see [[m:Module#module_eval]], [[m:Module#class_eval]]
 
 #@since 1.9.1
 --- name -> String | nil
@@ -1204,6 +1279,41 @@ Foo.private_class_method(:foo) # => Foo
 Foo.singleton_class.private_method_defined?(:foo) # => true
 #@end
 
+
+#@since 1.9.3
+--- private_constant(*name) -> self
+
+name で指定した定数の可視性を private に変更します。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+@return self を返します。
+
+#@since 3.2
+@see [[m:Module#public_constant]]
+#@else
+@see [[m:Module#public_constant]], [[m:Object#untrusted?]]
+#@end
+
+#@samplecode 例
+module Foo
+  BAR = 'bar'
+  class Baz; end
+  QUX = 'qux'
+  class Quux; end
+
+  private_constant :QUX
+  private_constant :Quux
+end
+
+Foo::BAR  # => "bar"
+Foo::Baz  # => Foo::Baz
+Foo::QUX  # => NameError: private constant Foo::QUX referenced
+Foo::Quux # => NameError: private constant Foo::Quux referenced
+#@end
+
 --- public_class_method(*name) -> self
 #@since 3.0
 --- public_class_method(names) -> self
@@ -1230,6 +1340,45 @@ Foo.foo # NoMethodError: private method `foo' called for Foo:Class
 
 Foo.public_class_method(:foo) # => Foo
 Foo.foo # => "foo"
+#@end
+
+--- public_constant(*name) -> self
+
+name で指定した定数の可視性を public に変更します。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+@return self を返します。
+
+#@samplecode 例
+module SampleModule
+  class SampleInnerClass
+  end
+
+  # => 非公開クラスであることを明示するために private にする
+  private_constant :SampleInnerClass
+end
+
+begin
+  SampleModule::SampleInnerClass
+rescue => e
+  e # => #<NameError: private constant SampleModule::SampleInnerClass referenced>
+end
+
+module SampleModule
+  # => 非公開クラスであることは承知で利用するために public にする
+  public_constant :SampleInnerClass
+end
+
+SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
+#@end
+
+#@since 3.2
+@see [[m:Module#private_constant]]
+#@else
+@see [[m:Module#private_constant]], [[m:Object#untrusted?]]
 #@end
 
 #@since 2.6.0
@@ -1373,72 +1522,6 @@ Fred.class_variable_defined?('@@foo')    #=> true
 Fred.class_variable_defined?('@@bar')    #=> false
 #@end
 
-
-#@since 1.9.1
---- remove_class_variable(name) -> object
-
-引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
-れていた値を返します。
-
-@param name [[c:String]] または [[c:Symbol]] を指定します。
-
-@return 引数で指定されたクラス変数に設定されていた値を返します。
-
-@raise NameError 引数で指定されたクラス変数がそのモジュールやクラスに定義されていない場合に発生します。
-
-#@samplecode 例
-class Foo
-  @@foo = 1
-  remove_class_variable(:@@foo)   # => 1
-  p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
-end
-#@end
-
-@see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
-
-#@end
-
-#@since 2.1.0
-#@include(Module.prepend)
-#@end
-
-#@since 2.5.0
-#@include(Module.alias_method)
-#@include(Module.define_method)
-#@include(Module.remove_method)
-#@include(Module.undef_method)
-#@end
-
-== Private Instance Methods
-
-#@until 2.5.0
-#@include(Module.alias_method)
-#@end
-
---- append_features(module_or_class) -> self
-
-モジュール(あるいはクラス)に self の機能を追加します。
-
-このメソッドは [[m:Module#include]] の実体であり、
-include を Ruby で書くと以下のように定義できます。
-
-#@samplecode 例
-def include(*modules)
-  modules.reverse_each do |mod|
-    # append_features や included はプライベートメソッドなので
-    # 直接 mod.append_features(self) などとは書けない
-    mod.__send__(:append_features, self)
-    mod.__send__(:included, self)
-  end
-end
-#@end
-
-@see [[m:Module#included]]
-
-#@until 2.5.0
-#@include(Module.attr)
-#@end
-
 --- class_variable_get(name) -> object
 
 クラス／モジュールに定義されているクラス変数 name の値を返します。
@@ -1481,6 +1564,85 @@ end
 
 p Fred.foo(101)   # => 101
 p Fred.new.foo    # => 101
+#@end
+
+
+#@since 1.9.1
+--- remove_class_variable(name) -> object
+
+引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
+れていた値を返します。
+
+@param name [[c:String]] または [[c:Symbol]] を指定します。
+
+@return 引数で指定されたクラス変数に設定されていた値を返します。
+
+@raise NameError 引数で指定されたクラス変数がそのモジュールやクラスに定義されていない場合に発生します。
+
+#@samplecode 例
+class Foo
+  @@foo = 1
+  remove_class_variable(:@@foo)   # => 1
+  p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
+end
+#@end
+
+@see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
+
+#@end
+
+#@since 2.1.0
+--- singleton_class? -> bool
+
+self が特異クラスの場合に true を返します。そうでなければ false を返し
+ます。
+
+#@samplecode 例
+class C
+end
+C.singleton_class?                  # => false
+C.singleton_class.singleton_class?  # => true
+#@end
+
+#@since 2.1.0
+#@include(Module.prepend)
+#@end
+
+#@since 2.5.0
+#@include(Module.alias_method)
+#@include(Module.define_method)
+#@include(Module.remove_method)
+#@include(Module.undef_method)
+#@end
+
+== Private Instance Methods
+
+#@until 2.5.0
+#@include(Module.alias_method)
+#@end
+
+--- append_features(module_or_class) -> self
+
+モジュール(あるいはクラス)に self の機能を追加します。
+
+このメソッドは [[m:Module#include]] の実体であり、
+include を Ruby で書くと以下のように定義できます。
+
+#@samplecode 例
+def include(*modules)
+  modules.reverse_each do |mod|
+    # append_features や included はプライベートメソッドなので
+    # 直接 mod.append_features(self) などとは書けない
+    mod.__send__(:append_features, self)
+    mod.__send__(:included, self)
+  end
+end
+#@end
+
+@see [[m:Module#included]]
+
+#@until 2.5.0
+#@include(Module.attr)
 #@end
 
 #@until 2.5.0
@@ -1883,154 +2045,6 @@ end
 #@include(Module.undef_method)
 #@end
 
---- module_exec(*args) {|*vars| ... }       -> object
---- class_exec(*args) {|*vars| ... }        -> object
-
-与えられたブロックを指定された args を引数としてモジュールのコンテキストで評価します。
-
-モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
-つまり、そのモジュールの定義式の中にあるかのように実行されます。
-
-ローカル変数、定数とクラス変数のスコープはブロックの外側のスコープになります。
-
-@param args ブロックに渡す引数を指定します。
-
-
-#@samplecode 例
-class Thing
-end
-c = 1
-
-Thing.class_exec{
-  def hello() 
-    "Hello there!" 
-  end
-
-  define_method(:foo) do   # ローカル変数がブロックの外側を参照している
-    c
-  end
-}
-
-t = Thing.new
-p t.hello()            #=> "Hello there!"
-p t.foo()              #=> 1
-#@end
-
-@see [[m:Module#module_eval]], [[m:Module#class_eval]]
-
-
-#@since 1.9.3
---- private_constant(*name) -> self
-
-name で指定した定数の可視性を private に変更します。
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 存在しない定数を指定した場合に発生します。
-
-@return self を返します。
-
-#@since 3.2
-@see [[m:Module#public_constant]]
-#@else
-@see [[m:Module#public_constant]], [[m:Object#untrusted?]]
-#@end
-
-#@samplecode 例
-module Foo
-  BAR = 'bar'
-  class Baz; end
-  QUX = 'qux'
-  class Quux; end
-
-  private_constant :QUX
-  private_constant :Quux
-end
-
-Foo::BAR  # => "bar"
-Foo::Baz  # => Foo::Baz
-Foo::QUX  # => NameError: private constant Foo::QUX referenced
-Foo::Quux # => NameError: private constant Foo::Quux referenced
-#@end
-
---- public_constant(*name) -> self
-
-name で指定した定数の可視性を public に変更します。
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 存在しない定数を指定した場合に発生します。
-
-@return self を返します。
-
-#@samplecode 例
-module SampleModule
-  class SampleInnerClass
-  end
-
-  # => 非公開クラスであることを明示するために private にする
-  private_constant :SampleInnerClass
-end
-
-begin
-  SampleModule::SampleInnerClass
-rescue => e
-  e # => #<NameError: private constant SampleModule::SampleInnerClass referenced>
-end
-
-module SampleModule
-  # => 非公開クラスであることは承知で利用するために public にする
-  public_constant :SampleInnerClass
-end
-
-SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
-#@end
-
-#@since 3.2
-@see [[m:Module#private_constant]]
-#@else
-@see [[m:Module#private_constant]], [[m:Object#untrusted?]]
-#@end
-#@end
-
-#@since 2.3.0
---- deprecate_constant(*name) -> self
-
-name で指定した定数を deprecate に設定します。
-deprecate に設定した定数を参照すると警告メッセージが表示されます。
-
-#@since 2.7.0
-Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更になったため、
-デフォルトでは警告が表示されません。
-
-コマンドラインオプション(詳細は[[ref:d:spec/rubycmd#cmd_option]]参照)で、
-「-w」か「-W2」などを指定するか、実行中に「Warning[:deprecated] = true」で
-変更すると表示されるようになります。
-
-「$VERBOSE = true」は「Warning[:deprecated]」に影響しないため、
-表示されるかどうかは変わりません。
-#@end
-
-@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
-
-@raise NameError 存在しない定数を指定した場合に発生します。
-
-@return self を返します。
-
-#@samplecode 例
-FOO = 123
-Object.deprecate_constant(:FOO) # => Object
-
-FOO
-# warning: constant ::FOO is deprecated
-# => 123
-
-Object.deprecate_constant(:BAR)
-# NameError: constant Object::BAR not defined
-#@end
-
-#@end
-
 #@since 2.0.0
 --- refine(klass) { ... } -> Module
 
@@ -2101,6 +2115,7 @@ x.foo # => "C#foo in M"
 #@end
 
 #@since 2.0.0
+#@end
 --- prepend_features(mod) -> self
 [[m:Module#prepend]] から呼び出されるメソッドで、
 prepend の処理の実体です。このメソッド自体は mod で指定した
@@ -2194,19 +2209,6 @@ module Mod
   ruby2_keywords(:foo) if respond_to?(:ruby2_keywords, true)
 end
 #@end
-#@end
-
-#@since 2.1.0
---- singleton_class? -> bool
-
-self が特異クラスの場合に true を返します。そうでなければ false を返し
-ます。
-
-#@samplecode 例
-class C
-end
-C.singleton_class?                  # => false
-C.singleton_class.singleton_class?  # => true
 #@end
 
 --- using(module) -> self
