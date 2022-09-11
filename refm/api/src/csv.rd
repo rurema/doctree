@@ -406,7 +406,7 @@ id|first name|last name|age
 4|yumi|adachi|21
 EOS
 
-csv = CSV.new(users, { headers: true, col_sep: "|" })
+csv = CSV.new(users, headers: true, col_sep: "|")
 p csv.class # => CSV
 p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 #@end
@@ -1212,7 +1212,7 @@ print result
 #@samplecode 例 name を指定
 require "csv"
 
-csv = CSV.new("header1,header2\nrow1_1,row1_2", { headers: true })
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
 csv.header_convert(:symbol)
 csv.first.headers # => [:header1, :header2]
 #@end
@@ -1220,7 +1220,7 @@ csv.first.headers # => [:header1, :header2]
 #@samplecode 例 ブロックを指定
 require "csv"
 
-csv = CSV.new("header1,header2\nrow1_1,row1_2", { headers: true })
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
 csv.header_convert do |field|
   field.to_sym
 end
