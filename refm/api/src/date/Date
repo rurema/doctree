@@ -6,17 +6,19 @@ include Comparable
 
 === 簡単なつかいかた
 
-  require 'date'
+#@samplecode 例
+require 'date'
 
-  a = Date.new(1993, 2, 24)
-  b = Date.parse('1993-02-24')
-  b += 10
+a = Date.new(1993, 2, 24)
+b = Date.parse('1993-02-24')
+b += 10
 
-  b - a            #=> 10
-  b.year           #=> 1993
-  b.strftime('%a') #=> "Sat"
+b - a            #=> 10
+b.year           #=> 1993
+b.strftime('%a') #=> "Sat"
 
-  yesterday = Date.today - 1
+yesterday = Date.today - 1
+#@end
 
 === 用語の定義
 
@@ -117,9 +119,10 @@ include Comparable
 @raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 #@end
 
-例:
-  require 'date'
-  Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
+#@samplecode 例
+require 'date'
+Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
+#@end
 
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
 暦週日付に相当する日付オブジェクトを生成します。
@@ -384,9 +387,10 @@ include Comparable
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-例:
-  require 'date'
-  Date.today  # => #<Date: 2017-09-20 ...>
+#@samplecode 例
+require 'date'
+Date.today  # => #<Date: 2017-09-20 ...>
+#@end
 
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
@@ -467,23 +471,29 @@ x が数値ならば、self より x 日前の日付を返します。
 self より n ヶ月前の日付オブジェクトを返します。
 n は数値でなければなりません。
 
-  require 'date'
-  Date.new(2001,2,3)  <<  1   #=> #<Date: 2001-01-03 ...>
-  Date.new(2001,2,3)  << -2   #=> #<Date: 2001-04-03 ...>
+#@samplecode
+require 'date'
+Date.new(2001,2,3)  <<  1   #=> #<Date: 2001-01-03 ...>
+Date.new(2001,2,3)  << -2   #=> #<Date: 2001-04-03 ...>
+#@end
 
 対応する月に同じ日が存在しない時は、代わりにその月の末日が使われます。
 
-  require 'date'
-  Date.new(2001,3,28) << 1   #=> #<Date: 2001-02-28 ...>
-  Date.new(2001,3,31) << 1   #=> #<Date: 2001-02-28 ...>
+#@samplecode
+require 'date'
+Date.new(2001,3,28) << 1   #=> #<Date: 2001-02-28 ...>
+Date.new(2001,3,31) << 1   #=> #<Date: 2001-02-28 ...>
+#@end
 
 このことは以下のように、もしかすると予期しない振る舞いをするかもしれません。
 
-  require 'date'
-  Date.new(2001,3,31) << 2         #=> #<Date: 2001-01-31 ...>
-  Date.new(2001,3,31) << 1 << 1    #=> #<Date: 2001-01-28 ...>
+#@samplecode
+require 'date'
+Date.new(2001,3,31) << 2         #=> #<Date: 2001-01-31 ...>
+Date.new(2001,3,31) << 1 << 1    #=> #<Date: 2001-01-28 ...>
 
-  Date.new(2001,3,31) << 1 << -1   #=> #<Date: 2001-03-28 ...>
+Date.new(2001,3,31) << 1 << -1   #=> #<Date: 2001-03-28 ...>
+#@end
 
 [[m:Date#prev_month]] も参照してください。
 
@@ -519,24 +529,30 @@ p Date.new(2001, 2, 3) <=> Rational(4903887, 2) # => 0
 self から n ヶ月後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
-  require 'date'
-  Date.new(2001,2,3)  >>  1   #=> #<Date: 2001-03-03 ...>
-  Date.new(2001,2,3)  >> -2   #=> #<Date: 2000-12-03 ...>
+#@samplecode
+require 'date'
+Date.new(2001,2,3)  >>  1   #=> #<Date: 2001-03-03 ...>
+Date.new(2001,2,3)  >> -2   #=> #<Date: 2000-12-03 ...>
+#@end
 
 
 対応する月に同じ日が存在しない時は、代わりにその月の末日が使われます。
 
-  require 'date'
-  Date.new(2001,1,28) >> 1   #=> #<Date: 2001-02-28 ...>
-  Date.new(2001,1,31) >> 1   #=> #<Date: 2001-02-28 ...>
+#@samplecode
+require 'date'
+Date.new(2001,1,28) >> 1   #=> #<Date: 2001-02-28 ...>
+Date.new(2001,1,31) >> 1   #=> #<Date: 2001-02-28 ...>
+#@end
 
 このことは以下のように、もしかすると予期しない振る舞いをするかもしれません。
 
-  require 'date'
-  Date.new(2001,1,31) >> 2         #=> #<Date: 2001-03-31 ...>
-  Date.new(2001,1,31) >> 1 >> 1    #=> #<Date: 2001-03-28 ...>
+#@samplecode
+require 'date'
+Date.new(2001,1,31) >> 2         #=> #<Date: 2001-03-31 ...>
+Date.new(2001,1,31) >> 1 >> 1    #=> #<Date: 2001-03-28 ...>
 
-  Date.new(2001,1,31) >> 1 >> -1   #=> #<Date: 2001-01-28 ...>
+Date.new(2001,1,31) >> 1 >> -1   #=> #<Date: 2001-01-28 ...>
+#@end
 
 [[m:Date#next_month]] も参照してください。
 
@@ -669,10 +685,12 @@ n 年後を返します。
 
 self >> (n * 12) に相当します。
 
-  require 'date'
-  Date.new(2001,2,3).next_year      #=> #<Date: 2002-02-03 ...>
-  Date.new(2008,2,29).next_year     #=> #<Date: 2009-02-28 ...>
-  Date.new(2008,2,29).next_year(4)  #=> #<Date: 2012-02-29 ...>
+#@samplecode 例
+require 'date'
+Date.new(2001,2,3).next_year      #=> #<Date: 2002-02-03 ...>
+Date.new(2008,2,29).next_year     #=> #<Date: 2009-02-28 ...>
+Date.new(2008,2,29).next_year(4)  #=> #<Date: 2012-02-29 ...>
+#@end
 
 [[m:Date#>>]] も参照してください。
 
@@ -695,10 +713,12 @@ n 年前を返します。
 
 self << (n * 12) に相当します。
 
-  require 'date'
-  Date.new(2001,2,3).prev_year      #=> #<Date: 2000-02-03 ...>
-  Date.new(2008,2,29).prev_year     #=> #<Date: 2007-02-28 ...>
-  Date.new(2008,2,29).prev_year(4)  #=> #<Date: 2004-02-29 ...>
+#@samplecode 例
+require 'date'
+Date.new(2001,2,3).prev_year      #=> #<Date: 2000-02-03 ...>
+Date.new(2008,2,29).prev_year     #=> #<Date: 2007-02-28 ...>
+Date.new(2008,2,29).prev_year(4)  #=> #<Date: 2004-02-29 ...>
+#@end
 
 [[m:Date#<<]] も参照してください。
 
