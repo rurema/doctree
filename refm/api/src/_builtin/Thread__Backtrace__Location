@@ -4,22 +4,22 @@ Ruby のフレームを表すクラスです。
 
 [[m:Kernel.#caller_locations]] から生成されます。
 
-例1:
+#@samplecode 例1
+# caller_locations.rb
+def a(skip)
+  caller_locations(skip)
+end
+def b(skip)
+  a(skip)
+end
+def c(skip)
+  b(skip)
+end
 
-  # caller_locations.rb
-  def a(skip)
-    caller_locations(skip)
-  end
-  def b(skip)
-    a(skip)
-  end
-  def c(skip)
-    b(skip)
-  end
-
-  c(0..2).map do |call|
-    puts call.to_s
-  end
+c(0..2).map do |call|
+  puts call.to_s
+end
+#@end
 
 例1の実行結果:
 
@@ -27,19 +27,19 @@ Ruby のフレームを表すクラスです。
   caller_locations.rb:5:in `b'
   caller_locations.rb:8:in `c'
 
-例2:
-
-  # foo.rb
-  class Foo
-    attr_accessor :locations
-    def initialize(skip)
-      @locations = caller_locations(skip)
-    end
+#@samplecode 例2
+# foo.rb
+class Foo
+  attr_accessor :locations
+  def initialize(skip)
+    @locations = caller_locations(skip)
   end
+end
 
-  Foo.new(0..2).locations.map do |call|
-    puts call.to_s
-  end
+Foo.new(0..2).locations.map do |call|
+  puts call.to_s
+end
+#@end
 
 例2の実行結果:
 
@@ -59,8 +59,10 @@ self が表すフレームの行番号を返します。
 
 例: [[c:Thread::Backtrace::Location]] の例1を用いた例
 
-  loc = c(0..1).first
-  loc.lineno # => 2
+#@samplecode
+loc = c(0..1).first
+loc.lineno # => 2
+#@end
 
 --- label -> String
 
@@ -69,8 +71,10 @@ self が表すフレームのラベルを返します。通常、メソッド名
 
 例: [[c:Thread::Backtrace::Location]] の例1を用いた例
 
-  loc = c(0..1).first
-  loc.label # => "a"
+#@samplecode
+loc = c(0..1).first
+loc.label # => "a"
+#@end
 
 @see [[m:Thread::Backtrace::Location#base_label]]
 
@@ -106,8 +110,10 @@ self が表すフレームのファイル名を返します。
 
 例: [[c:Thread::Backtrace::Location]] の例1を用いた例
 
-  loc = c(0..1).first
-  loc.path # => "caller_locations.rb"
+#@samplecode
+loc = c(0..1).first
+loc.path # => "caller_locations.rb"
+#@end
 
 @see [[m:Thread::Backtrace::Location#absolute_path]]
 
