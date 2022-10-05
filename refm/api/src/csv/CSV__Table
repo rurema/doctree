@@ -406,9 +406,9 @@ table.each { |column_name, values| print column_name, values, "\n" }
 require 'csv'
 csv = CSV.new("a,b\n", headers: true)
 table = csv.read
-table.empty?     # => true
+p table.empty?     # => true
 table << [1, 2]
-table.empty?     # => false
+p table.empty?     # => false
 #@end
 
 @see [[m:Array#empty?]]
@@ -435,7 +435,7 @@ table.headers # => ["header1", "header2"]
 require 'csv'
 csv = CSV.new("a,b,c\n1,2,3", headers: true)
 table = csv.read
-table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
+p table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
 #@end
 
 
@@ -490,7 +490,7 @@ rows = [
 ]
 
 table.push(*rows)
-puts table[0..2]
+p table[0..2]
 # => [#<CSV::Row "a":"1" "b":"2" "c":"3">, #<CSV::Row "a":4 "b":5 "c":6>, #<CSV::Row "a":7 "b":8 "c":9>]
 #@end
 
@@ -525,8 +525,8 @@ false を指定するとヘッダを出力しません。
 require 'csv'
 csv = CSV.new("a,b,c\n1,2,3", headers: true)
 table = csv.read
-table.to_csv                       # => "a,b,c\n1,2,3\n"
-table.to_csv(write_headers: false) # => "1,2,3\n"
+p table.to_csv                       # => "a,b,c\n1,2,3\n"
+p table.to_csv(write_headers: false) # => "1,2,3\n"
 #@end
 
 --- values_at(indices_or_headers) -> Array
