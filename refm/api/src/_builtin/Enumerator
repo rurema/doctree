@@ -34,6 +34,7 @@ p a.next
 
 == Class Methods
 
+#@until 3.0
 --- new(obj, method = :each, *args) -> Enumerator
 
 オブジェクト obj について、 each の代わりに method という
@@ -50,7 +51,7 @@ str = "xyz"
 enum = Enumerator.new(str, :each_byte)
 p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
 #@end
-
+#@end
 
 --- new(size=nil){|y| ... }         -> Enumerator
 
@@ -167,7 +168,7 @@ e.to_a #=> [1, 2, 3, 4, 5]
 #@samplecode 例1
 str = "Yet Another Ruby Hacker"
 
-enum = Enumerator.new(str, :scan, /\w+/)
+enum = Enumerator.new {|y| str.scan(/\w+/) {|w| y << w }}
 enum.each {|word| p word }              # => "Yet"
                                         #    "Another"
                                         #    "Ruby"
@@ -382,7 +383,7 @@ next と異なり列挙状態を変更しません。
 と
   yield nil
 を区別するために使えます。
-  
+
 #@samplecode 例
 o = Object.new
 def o.each
@@ -435,7 +436,7 @@ p enum.next # => 120
 #@samplecode 例
 str = "xyz"
 
-enum = Enumerator.new(str, :each_byte)
+enum = Enumerator.new {|y| str.each_byte {|b| y << b }}
 enum.with_index {|byte, idx| p [byte, idx] }
     # => [120, 0]
     #    [121, 1]
