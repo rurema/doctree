@@ -57,7 +57,7 @@ Observable モジュールを include したクラスは
   class WarnLow < Warner
     def update(time, price)       # callback for observer
       if price < @limit
-        print "--- #{time.to_s}: Price below #@limit: #{price}\n"
+        print "--- #{time.to_s}: Price below #{@limit}: #{price}\n"
       end
     end
   end
@@ -65,7 +65,7 @@ Observable モジュールを include したクラスは
   class WarnHigh < Warner
     def update(time, price)       # callback for observer
       if price > @limit
-        print "+++ #{time.to_s}: Price above #@limit: #{price}\n"
+        print "+++ #{time.to_s}: Price above #{@limit}: #{price}\n"
       end
     end
   end
