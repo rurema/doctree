@@ -420,8 +420,9 @@ end
 
 # 応用: 引数として Proc オブジェクトとブロックの
 # 両方を受け付けるイテレータを定義する例
-def foo(block = Proc.new)
-  block.call(1,2)
+def foo(pr = nil, &block)
+  pr = pr || block
+  pr.call(1,2)
 end
 foo(proc {|a,b| p [a,b]})
 foo {|a,b| p [a,b]}
