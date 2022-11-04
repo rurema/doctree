@@ -33,7 +33,6 @@ self が other との依存関係を満たしていれば真を返します。�
 
 @see [[c:Gem::Requirement]]
 #@end
---- requirement_list  -> [String]
 --- requirements_list -> [String]
 
 バージョンの必要条件を文字列の配列として返します。
