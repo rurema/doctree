@@ -3472,9 +3472,9 @@ true を返します。さもなくば false を返します。
 "\x80".force_encoding("UTF-8").valid_encoding?      #=> false
 #@end
 
---- encode(encoding, options = nil) -> String
---- encode(encoding, from_encoding, options = nil) -> String
---- encode(options = nil) -> String
+--- encode(encoding, **options) -> String
+--- encode(encoding, from_encoding, **options) -> String
+--- encode(**options) -> String
 
 self を指定したエンコーディングに変換した文字列を作成して返します。引数
 を2つ与えた場合、第二引数は変換元のエンコーディングを意味します。さもな
@@ -3483,7 +3483,7 @@ self を指定したエンコーディングに変換した文字列を作成し
 
 @param encoding       変換先のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 @param from_encoding  変換元のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
-@param option         変換オプションをハッシュで与えます。
+@param option         変換オプションをキーワード引数で与えます。
 @return               変換された文字列
 
 変換オプション
