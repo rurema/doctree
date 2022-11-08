@@ -2356,6 +2356,16 @@ a.combination(0).to_a  #=> [[]]: one combination of length 0
 a.combination(5).to_a  #=> []  : no combinations of length 5
 #@end
 
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2, 3, 4]
+result = []
+a.combination(2) {|e| result << e} # => [1,2,3,4]
+result #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+#@end
+
 #@since 1.9.2
 @see [[m:Array#permutation]], [[m:Array#repeated_combination]]
 #@else
@@ -2396,6 +2406,16 @@ a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
 a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 a.permutation(0).to_a  #=> [[]]: one permutation of length 0
 a.permutation(4).to_a  #=> []  : no permutations of length 4
+#@end
+
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2, 3]
+result = []
+a.permutation(2) {|e| result << e} # => [1,2,3]
+result # => [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
 #@end
 
 #@since 1.9.2
@@ -2468,6 +2488,17 @@ a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,
 a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
 #@end
 
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2, 3]
+result = []
+a.repeated_combination(3) {|e| result << e} # => [1,2,3]
+result  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
+        #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
+#@end
+
 @see [[m:Array#repeated_permutation]], [[m:Array#combination]]
 --- repeated_permutation(n) { |p| ... } -> self
 --- repeated_permutation(n)             -> Enumerator
@@ -2491,6 +2522,17 @@ a.repeated_permutation(2).to_a  #=> [[1,1],[1,2],[2,1],[2,2]]
 a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
                                 #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
 a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
+#@end
+
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2]
+result = []
+a.repeated_permutation(3) {|e| result << e} # => [1,2]
+result  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
+        #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
 #@end
 
 @see [[m:Array#repeated_combination]], [[m:Array#permutation]]
