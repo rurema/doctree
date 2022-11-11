@@ -330,6 +330,10 @@ Gem を検索するパスをセットします。
 
 @see [[m:Gem.#path]]
 
+--- ruby -> String
+
+実行中のRubyインタプリタのパスを返します。
+
 == Constants
 
 --- ConfigMap -> Hash
