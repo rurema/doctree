@@ -69,7 +69,7 @@ category File
 
 #@samplecode
 require 'fileutils'
-FileUtils.cd('/', **{:verbose => true})   # chdir and report it
+FileUtils.cd('/', verbose: true)   # chdir and report it
 #@end
 
 --- chmod(mode, list, options = {}) -> Array
@@ -96,12 +96,12 @@ FileUtils.cd('/', **{:verbose => true})   # chdir and report it
 require 'fileutils'
 FileUtils.chmod(0644, %w(my.rb your.rb his.rb her.rb))
 FileUtils.chmod(0755, 'somecommand')
-FileUtils.chmod(0755, '/usr/bin/ruby', :verbose => true)
+FileUtils.chmod(0755, '/usr/bin/ruby', verbose: true)
 # Symbolic mode
 require 'fileutils'
 FileUtils.chmod("u=wr,go=rr", %w(my.rb your.rb his.rb her.rb))
 FileUtils.chmod("u=wrx,go=rx", 'somecommand')
-FileUtils.chmod("u=wrx,go=rx", '/usr/bin/ruby', :verbose => true)
+FileUtils.chmod("u=wrx,go=rx", '/usr/bin/ruby', verbose: true)
 #@end
 
 symbolic mode では以下の指定を 操作対象 演算子 権限 の順番で指定します。
@@ -173,7 +173,7 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 #@samplecode
 require 'fileutils'
 FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
-FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
+FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), verbose: true
 #@end
 
 --- chown_R(user, group, list, options = {}) -> Array
@@ -198,11 +198,11 @@ user, group に nil または -1 を渡すとその項目は変更しません�
 #@samplecode
 require 'fileutils'
 FileUtils.chown 'root', 'staff', '/usr/local/bin/ruby'
-FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
+FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), verbose: true
 
 require 'fileutils'
 FileUtils.chown_R 'www', 'www', '/var/www/htdocs'
-FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', :verbose => true
+FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', verbose: true
 #@end
 
 --- cmp(file_a, file_b)          -> bool
@@ -301,7 +301,7 @@ file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
 require 'fileutils'
 FileUtils.cp 'eval.c', 'eval.c.org'
 FileUtils.cp(['cgi.rb', 'complex.rb', 'date.rb'], '/usr/lib/ruby/1.8')
-FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', **{:verbose => true})
+FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', verbose: true)
 #@end
 
 --- cp_r(src, dest, options = {}) -> ()
@@ -320,13 +320,13 @@ src を dest にコピーします。src がディレクトリであったら再
 #@samplecode
 # installing ruby library "mylib" under the site_ruby
 require 'fileutils'
-FileUtils.rm_r(site_ruby + '/mylib', **{:force => true})
+FileUtils.rm_r(site_ruby + '/mylib', force: true)
 FileUtils.cp_r('lib/', site_ruby + '/mylib')
 # other sample
 require 'fileutils'
 FileUtils.cp_r(%w(mail.rb field.rb debug/), site_ruby + '/tmail')
 FileUtils.cp_r(Dir.glob('*.rb'), '/home/taro/lib/ruby',
-                **{:noop => true, :verbose => true})
+                noop: true, verbose: true)
 #@end
 
 --- install(src, dest, options = {}) -> ()
@@ -347,8 +347,8 @@ src と dest の内容が違うときだけ src を dest にコピーします�
 
 #@samplecode
 require 'fileutils'
-FileUtils.install('ruby', '/usr/local/bin/ruby', **{:mode => 0755, :verbose => true})
-FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', **{:verbose => true})
+FileUtils.install('ruby', '/usr/local/bin/ruby', mode: 0755, verbose: true)
+FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', verbose: true)
 #@end
 
 --- ln(src, dest, options = {})   -> ()
@@ -380,7 +380,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 
 #@samplecode
 require 'fileutils'
-FileUtils.ln('gcc', 'cc', **{:verbose => true})
+FileUtils.ln('gcc', 'cc', verbose: true)
 FileUtils.ln('/usr/bin/emacs21', '/usr/bin/emacs')
 FileUtils.cd('/bin')
 FileUtils.ln(%w(cp mv mkdir), '/usr/bin')
@@ -407,14 +407,14 @@ dest がディレクトリの場合、src へのハードリンク dest/src を�
 
 #@samplecode "mylib" ライブラリを site_ruby にインストールする例
 require 'fileutils'
-FileUtils.rm_r site_ruby + '/mylib', :force => true
+FileUtils.rm_r site_ruby + '/mylib', force: true
 FileUtils.cp_lr 'lib/', site_ruby + '/mylib'
 #@end
 
 #@samplecode 様々なファイルを対象ディレクトリにリンクする例
 require 'fileutils'
 FileUtils.cp_lr %w(mail.rb field.rb debug/), site_ruby + '/tmail'
-FileUtils.cp_lr Dir.glob('*.rb'), '/home/aamine/lib/ruby', :noop => true, :verbose => true
+FileUtils.cp_lr Dir.glob('*.rb'), '/home/aamine/lib/ruby', noop: true, verbose: true
 #@end
 
 #@samplecode 内容をリンクする例
@@ -455,7 +455,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 #@samplecode
 require 'fileutils'
 FileUtils.ln_s('/usr/bin/ruby', '/usr/local/bin/ruby')
-FileUtils.ln_s('verylongsourcefilename.c', 'c', **{:force => true})
+FileUtils.ln_s('verylongsourcefilename.c', 'c', force: true)
 FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
 #@end
 
@@ -463,7 +463,7 @@ FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
 
 src へのシンボリックリンク dest を作成します。
 
-ln_s(src, dest, :force => true) と同じです。
+ln_s(src, dest, force: true) と同じです。
 
 @param src リンク元。一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
@@ -491,7 +491,7 @@ ln_s(src, dest, :force => true) と同じです。
 require 'fileutils'
 FileUtils.mkdir('test')
 FileUtils.mkdir(%w( tmp data ))
-FileUtils.mkdir('notexist', **{:noop => true})  # does not create really
+FileUtils.mkdir('notexist', noop: true)  # does not create really
 #@end
 
 #@until 1.9.1
@@ -555,9 +555,9 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生し�
 #@samplecode
 require 'fileutils'
 FileUtils.mv('badname.rb', 'goodname.rb')
-FileUtils.mv('stuff.rb', 'lib/ruby', **{:force => true})
+FileUtils.mv('stuff.rb', 'lib/ruby', force: true)
 FileUtils.mv(['junk.txt', 'dust.txt'], "#{ENV['HOME']}/.trash")
-FileUtils.mv(Dir.glob('test*.rb'), 'test', **{:noop => true, :verbose => true} )
+FileUtils.mv(Dir.glob('test*.rb'), 'test', noop: true, verbose: true)
 #@end
 
 --- pwd   -> String
@@ -580,13 +580,13 @@ list で指定された対象を消去します。
 require 'fileutils'
 FileUtils.rm('junk.txt')
 FileUtils.rm(Dir.glob('*~'))
-FileUtils.rm('NotExistFile', **{:force => true})    # never raises exception
+FileUtils.rm('NotExistFile', force: true)    # never raises exception
 #@end
 
 --- rm_f(list, options = {})        -> ()
 --- safe_unlink(list, options = {}) -> ()
 
-FileUtils.rm(list, :force => true) と同じです。
+FileUtils.rm(list, force: true) と同じです。
 
 [[ref:c:FileUtils#options]]
 
@@ -617,7 +617,7 @@ FileUtils.rm(list, :force => true) と同じです。
 #@samplecode
 require 'fileutils'
 FileUtils.rm_r(Dir.glob('/tmp/*'))
-FileUtils.rm_r(Dir.glob('/tmp/*'), :secure => true)
+FileUtils.rm_r(Dir.glob('/tmp/*'), secure: true)
 #@end
 
 @see [[m:FileUtils.#rm]], [[m:FileUtils.#remove_entry_secure]]
@@ -627,7 +627,7 @@ FileUtils.rm_r(Dir.glob('/tmp/*'), :secure => true)
 
 ファイルまたはディレクトリ list を再帰的に消去します。
 
-rm_r(list, **{:force => true}) と同じです。
+rm_r(list, force: true) と同じです。
 
 @param list 削除する対象。一つの場合は文字列も指定可能です。
             二つ以上指定する場合は配列で指定します。
@@ -660,7 +660,7 @@ require 'fileutils'
 FileUtils.rmdir('somedir')
 FileUtils.rmdir(%w(somedir anydir otherdir))
 # 実際にはディレクトリの削除は行わずにメッセージ出力のみ
-FileUtils.rmdir('somedir', **{:verbose => true, :noop => true})
+FileUtils.rmdir('somedir', verbose: true, noop: true)
 #@end
 
 --- remove_entry(path, force = false) -> ()
@@ -745,7 +745,7 @@ list で指定されたファイルが存在しない場合は空のファイル
 #@samplecode
 require 'fileutils'
 FileUtils.touch('timestamp')
-FileUtils.touch('timestamp', :mtime => Time.now)
+FileUtils.touch('timestamp', mtime: Time.now)
 FileUtils.touch(Dir.glob('*.c'))
 #@end
 
