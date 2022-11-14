@@ -384,7 +384,9 @@ p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
 
 @see [[m:Hash#key]]
 
---- fetch(key, default = nil) {|key| ... } -> object
+--- fetch(key) -> object
+--- fetch(key, default) -> object
+--- fetch(key) {|key| ... } -> object
 
 key に関連づけられた値を返します。該当するキーが登録されてい
 ない時には、引数 default が与えられていればその値を、ブロッ
