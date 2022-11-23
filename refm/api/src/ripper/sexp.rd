@@ -14,17 +14,17 @@ Ruby プログラム str を解析して S 式のツリーにして返します�
 
 実行結果は、括弧の代わりに配列の要素として S 式のツリーを表現しています。
 
-例:
+#@samplecode 例
+require 'ripper'
+require 'pp'
 
-  require 'ripper'
-  require 'pp'
-
-  pp Ripper.sexp("def m(a) nil end")
-    # => [:program,
-          [[:def,
-            [:@ident, "m", [1, 4]],
-            [:paren, [:params, [[:@ident, "a", [1, 6]]], nil, nil, nil, nil]],
-            [:bodystmt, [[:var_ref, [:@kw, "nil", [1, 9]]]], nil, nil, nil]]]]
+pp Ripper.sexp("def m(a) nil end")
+# => [:program,
+#     [[:def,
+#       [:@ident, "m", [1, 4]],
+#       [:paren, [:params, [[:@ident, "a", [1, 6]]], nil, nil, nil, nil]],
+#       [:bodystmt, [[:var_ref, [:@kw, "nil", [1, 9]]]], nil, nil, nil]]]]
+#@end
 
 パーサイベントは以下のような形式になります。
 
@@ -61,23 +61,23 @@ Ruby プログラム str を解析して S 式のツリーにして返します�
 
 実行結果は、括弧の代わりに配列の要素として S 式のツリーを表現しています。
 
-例:
+#@samplecode 例
+require 'ripper'
+require 'pp'
 
-  require 'ripper'
-  require 'pp'
-
-  pp Ripper.sexp_raw("def m(a) nil end")
-    # => [:program,
-          [:stmts_add,
-           [:stmts_new],
-           [:def,
-            [:@ident, "m", [1, 4]],
-            [:paren, [:params, [[:@ident, "a", [1, 6]]], nil, nil, nil]],
-            [:bodystmt,
-             [:stmts_add, [:stmts_new], [:var_ref, [:@kw, "nil", [1, 9]]]],
-             nil,
-             nil,
-             nil]]]]
+pp Ripper.sexp_raw("def m(a) nil end")
+# => [:program,
+#     [:stmts_add,
+#      [:stmts_new],
+#      [:def,
+#       [:@ident, "m", [1, 4]],
+#       [:paren, [:params, [[:@ident, "a", [1, 6]]], nil, nil, nil]],
+#       [:bodystmt,
+#        [:stmts_add, [:stmts_new], [:var_ref, [:@kw, "nil", [1, 9]]]],
+#        nil,
+#        nil,
+#        nil]]]]
+#@end
 
 Ripper.sexp_raw は [[m:Ripper.sexp]] とは異なり解析結果を加工しません。
 
