@@ -377,7 +377,7 @@ def f(a, b, c, m = 1, n = 1, *rest, x, y, z, k: 1, **kwrest, &blk)
   puts "c: %p" % c
   puts "m: %p" % m
   puts "n: %p" % n
-  puts "rest: %p" % rest
+  puts "rest: %p" % [rest]
   puts "x: %p" % x
   puts "y: %p" % y
   puts "z: %p" % z
@@ -392,7 +392,7 @@ f("a", "b", "c", 2, 3, "foo", "bar", "baz", "x", "y", "z", k: 42, u: "unknown") 
   #   c: "c"
   #   m: 2
   #   n: 3
-  #   rest: "foo"
+  #   rest: ["foo", "bar", "baz"]
   #   x: "x"
   #   y: "y"
   #   z: "z"
