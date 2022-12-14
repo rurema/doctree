@@ -4,6 +4,7 @@
   * [[ref:block]]
   * [[ref:yield]]
   * [[ref:block_arg]]
+  * [[ref:numbered_parameters]]
   * [[ref:call_method]]
 
 #@samplecode 例
@@ -409,6 +410,62 @@ hoge{|a, b, c| p a} #=> [1,2,3]
 
 
 [[url:http://www.a-k-r.org/d/2007-08.html#a2007_08_16_1]]
+#@end
+
+===[a:numbered_parameters] 番号指定パラメータ
+
+ブロックに渡された値を参照するには、上記のようにブロックパラメータを定義する方法のほか、_1 や _2 といった暗黙に定義される変数を用いる方法もあります。
+この変数のことを番号指定パラメータ（Numbered parameters）と言います。番号指定パラメータは、_1 から _9 までの9つが使用可能です。
+
+#@samplecode
+def foo
+  yield "a", "b", "c"
+end
+
+foo{|a, b, c| p [a, b, c] } # => ["a", "b", "c"]
+foo{ p [_1, _2, _3] } # => ["a", "b", "c"]
+#@end
+
+ブロックパラメータと番号指定パラメータを同時に使うことはできません。
+
+#@samplecode
+def foo
+  yield "a","b","c"
+end
+
+foo {|a, b, c| p [_1, a] } # => ordinary parameter is defined (SyntaxError)
+#@end
+
+なお、ブロック内で _2 以降が使用されているかどうかで、_1 の意味が異なります。
+
+#@samplecode
+def foo
+  yield ["a", "b", "c"]
+end
+
+foo {
+  p _1 # => ["a", "b", "c"]
+}
+foo {
+  p _1 # => "a"
+  p _2 # => "b"
+}
+#@end
+
+これは、ブロックパラメータを定義した個数によって代入される値が異なることに対応します。
+
+#@samplecode
+def foo
+  yield ["a", "b", "c"]
+end
+
+foo {|a|
+  p a # => ["a", "b", "c"]
+}
+foo {|a,b|
+  p a # => "a"
+  p b # => "b"
+}
 #@end
 
 ===[a:call_method] .() および ::() 形式のメソッド呼び出し（callメソッドの糖衣構文）
