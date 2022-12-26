@@ -83,7 +83,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install misspell
-      run: 'go get github.com/client9/misspell/...'
+      run: 'curl -L https://git.io/misspell | bash'
     - name: Run misspell
       run: |
-        git ls-files -z | xargs -0 $HOME/go/bin/misspell -error -i addopt
+        git ls-files -z | xargs -0 ./bin/misspell -error -i addopt
