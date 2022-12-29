@@ -117,6 +117,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
 #@include(_builtin/SecurityError)
+#@since 3.2
+#@include(_builtin/Set)
+#@end
 #@include(_builtin/Signal)
 #@include(_builtin/SignalException)
 #@since 2.3.0
