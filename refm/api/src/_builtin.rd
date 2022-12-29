@@ -24,6 +24,9 @@ require を書かなくても使うことができます。
 #@until 3.0.0
 #@include(_builtin/Data)
 #@end
+#@since 3.2
+#@include(_builtin/Data)
+#@end
 #@include(_builtin/Dir)
 #@include(_builtin/ENV)
 #@include(_builtin/EOFError)
