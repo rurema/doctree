@@ -378,9 +378,11 @@ end
 #@# It is, though, not advised to reuse the bound value, as this pattern's goal is to signify a discarded value.
 しかし、<code>_</code> で始まる変数の目的は利用しない値を意味するので、束縛された値を再利用することはオススメしません。
 
-== Variable pinning
+#@# == Variable pinning
+== 変数のピン留め
 
-Due to the variable binding feature, existing local variable can not be straightforwardly used as a sub-pattern:
+#@# Due to the variable binding feature, existing local variable can not be straightforwardly used as a sub-pattern:
+変数の束縛の機能では存在しているローカル変数をサブパターンとしてそのまま利用することはできません。
 
 #@samplecode
 expectation = 18
@@ -392,10 +394,12 @@ else
   "not matched. expectation was: #{expectation}"
 end
 # expected: "not matched. expectation was: 18"
-# real: "matched. expectation was: 1" -- local variable just rewritten
+#@# # real: "matched. expectation was: 1" -- local variable just rewritten
+# real: "matched. expectation was: 1" -- ローカル変数が上書かれている
 #@end
 
-For this case, the pin operator <code>^</code> can be used, to tell Ruby "just use this value as part of the pattern":
+#@# For this case, the pin operator <code>^</code> can be used, to tell Ruby "just use this value as part of the pattern":
+この場合、Ruby に「この値をパターンの部品として利用するよ」ということを伝えるためにピン演算子 <code>^</code> を利用することができます。
 
 #@samplecode
 expectation = 18
@@ -408,7 +412,8 @@ end
 #=> "not matched. expectation was: 18"
 #@end
 
-One important usage of variable pinning is specifying that the same value should occur in the pattern several times:
+#@# One important usage of variable pinning is specifying that the same value should occur in the pattern several times:
+ピン演算子の重要な用途の1つはパターンに複数回出てくる値を明記することです。
 
 #@samplecode
 jane = {school: 'high', schools: [{id: 1, level: 'middle'}, {id: 2, level: 'high'}]}
@@ -422,7 +427,8 @@ else
 end
 #=> "matched. school: 2"
 
-case john # the specified school level is "high", but last school does not match
+#@# case john # the specified school level is "high", but last school does not match
+case john # 指定された school の level は "high" だが、最後の school はマッチしない
 in school:, schools: [*, {id:, level: ^school}]
   "matched. school: #{id}"
 else
@@ -431,7 +437,8 @@ end
 #=> "not matched"
 #@end
 
-In addition to pinning local variables, you can also pin instance, global, and class variables:
+#@# In addition to pinning local variables, you can also pin instance, global, and class variables:
+ローカル変数に加えてインスタンス変数やグローバル変数、クラス変数に対してもピン演算子は利用できます。
 
 #@samplecode
 $gvar = 1
@@ -448,7 +455,8 @@ class A
 end
 #@end
 
-You can also pin the result of arbitrary expressions using parentheses:
+#@# You can also pin the result of arbitrary expressions using parentheses:
+また、カッコを使って任意の式に対してピン演算子を利用できます
 
 #@samplecode
 a = 1
