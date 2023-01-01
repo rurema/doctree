@@ -29,7 +29,7 @@ Rubyでのパターンマッチは +case+/+in+ 式を用いて実装されてい
   <expression> in <pattern>
 
 #@# The +case+/+in+ expression is _exhaustive_: if the value of the expression does not match any branch of the +case+ expression (and the +else+ branch is absent), +NoMatchingPatternError+ is raised.
-+case+/+in+ 式は _網羅的_ です。もし +case+ 式の値がどの節にもマッチせず +else+ 節がない場合、+NoMatchingPatternError+ が raise されます。
++case+/+in+ 式は 「網羅的」 です。もし +case+ 式の値がどの節にもマッチせず +else+ 節がない場合、+NoMatchingPatternError+ が raise されます。
 
 #@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
 そのため、条件付きのマッチングやアンパックに +case+ 式が使われることがあります。
@@ -84,17 +84,17 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 パターンで利用できるものには次のものがあります。
 
 #@#   * any Ruby object (matched by the <code>===</code> operator, like in +when+); (<em>Value pattern</em>)
-  * Ruby のオブジェクト (+when+ での場合のように 『===』 演算子にマッチするもの) (<em>Value パターン</em>)
+  * Ruby のオブジェクト (+when+ での場合のように 『===』 演算子にマッチするもの) (「Value パターン」)
 #@#   * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
-  * Array パターン: 『[<subpattern>, <subpattern>, <subpattern>, ...]』 (<em>Array パターン</em>)
+  * Array パターン: 『[<subpattern>, <subpattern>, <subpattern>, ...]』 (「Array パターン」)
 #@#   * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
-  * Find パターン: 『[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]』 (<em>Find パターン</em>)
-#@#   * hash pattern: <code>{key: <subpattern>, key: <subpattern>, ...}</code>; (<em>Hash pattern</em>)
-  * Hash パターン: 『{key: <subpattern>, key: <subpattern>, ...}』 (<em>Hash パターン</em>)
+  * Find パターン: 『[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]』 (「Find パターン」)
+#@#   * hash pattern: <code>{key: <subpattern>, key: <subpattern>, ...}</code> (<em>Hash pattern</em>)
+  * Hash パターン: 『{key: <subpattern>, key: <subpattern>, ...}』 (「Hash パターン」)
 #@#   * combination of patterns with <code>|</code>; (<em>Alternative pattern</em>)
-  * 『|』 でのパターンの組み合わせ (<em>Alternative パターン</em>)
+  * 『|』 でのパターンの組み合わせ (「Alternative パターン」)
 #@#   * variable capture: <code><pattern> => variable</code> or <code>variable</code>; (<em>As pattern</em>, <em>Variable pattern</em>)
-  * 変数のキャプチャ: 『<pattern> => variable』 または 『variable』 (<em>As パターン</em>, <em>Variable パターン</em>)
+  * 変数のキャプチャ: 『<pattern> => variable』 または 『variable』 (「As パターン」, 「Variable パターン」)
 
 #@# Any pattern can be nested inside array/find/hash patterns where <code><subpattern></code> is specified.
 Array/Find/Hash パターンの中に 『<subpattern>』 と書かれている場所では任意のパターンをネストさせることができます。
@@ -109,7 +109,7 @@ Hash パターン はハッシュか +deconstruct_keys+ メソッドを持つオ
 ※ deconstruct や deconstruct_keys を扱う際の『〜を持つ』の定義は [[m:Object#respond_to?]] と同様です。
 
 #@# An important difference between array and hash pattern behavior is that arrays match only a _whole_ array:
-Array パターン と Hash パターン の挙動の重要な違いは Array パターンは配列の _全ての_ 要素がマッチする必要があるということです。
+Array パターン と Hash パターン の挙動の重要な違いは Array パターンは配列の 「全ての」 要素がマッチする必要があるということです。
 
 #@samplecode
 case [1, 2, 3]
@@ -598,7 +598,7 @@ end
 == 機能の現状
 
 #@# As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
-Ruby 3.1 の時点では、Find パターンは _experimental_ と考えられます。Find パターンのシンタックスは将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
+Ruby 3.1 の時点では、Find パターンは 「experimental」 と考えられます。Find パターンのシンタックスは将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
 
 #@samplecode
 [0] => [*, 0, *]
