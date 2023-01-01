@@ -630,9 +630,11 @@ Warning[:experimental] = false # At the time this line is evaluated, the parsing
 #@# Alternatively, the command line option <code>-W:no-experimental</code> can be used to turn off "experimental" feature warnings.
 代わりに、コマンドラインオプションとして <code>-W:no-experimental</code> を渡すことで "experimental" な機能に対する警告を出力させないようにできます。
 
-== Appendix A. Pattern syntax
+#@# == Appendix A. Pattern syntax
+== 付記A: パターンのシンタックス
 
-Approximate syntax is:
+#@# Approximate syntax is:
+おおよその構文は以下のとおりです。
 
   pattern: value_pattern
          | variable_pattern
@@ -668,13 +670,14 @@ Approximate syntax is:
               | Constant(key: pattern, key:, ..., **variable)
               | Constant[key: pattern, key:, ..., **variable]
 
-== Appendix B. Some undefined behavior examples
+#@# == Appendix B. Some undefined behavior examples
+== 付記B: `未定義` の振る舞いの例
 
-To leave room for optimization in the future, the specification contains some undefined behavior.
+#@# To leave room for optimization in the future, the specification contains some undefined behavior.
+将来的な最適化の余地を残すため、仕様には一部 `未定義` の振る舞いが含まれています。
 
-Use of a variable in an unmatched pattern:
-
-#@samplecode
+#@# Use of a variable in an unmatched pattern:
+#@samplecode マッチしなかったパターンの中での変数の利用
 case [0, 1]
 in [a, 2]
   "not matched"
@@ -687,9 +690,8 @@ a #=> undefined
 c #=> undefined
 #@end
 
-Number of +deconstruct+, +deconstruct_keys+ method calls:
-
-#@samplecode
+#@# Number of +deconstruct+, +deconstruct_keys+ method calls:
+#@samplecode deconstruct や deconstruct_keys が呼び出された回数
 $i = 0
 ary = [0]
 def ary.deconstruct
