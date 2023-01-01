@@ -555,9 +555,11 @@ end
 #=> "matched: 1"
 #@end
 
-== Guard clauses
+#@# == Guard clauses
+== ガード節
 
-+if+ can be used to attach an additional condition (guard clause) when the pattern matches. This condition may use bound variables:
+#@# +if+ can be used to attach an additional condition (guard clause) when the pattern matches. This condition may use bound variables:
+もしパターンマッチのときに +if+ を用いて追加の条件(ガード節)を指定した場合、変数への束縛がされた状態で条件の判定が行われます。
 
 #@samplecode
 case [1, 2]
@@ -579,7 +581,8 @@ end
 #=> "not matched"
 #@end
 
-+unless+ works, too:
+#@# +unless+ works, too:
++unless+ も利用できます。
 
 #@samplecode
 case [1, 1]
