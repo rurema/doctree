@@ -233,6 +233,7 @@ nil を返します。
 Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
 pattern matching feature via the +in+ keyword:
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in a: Integer => m
     "matched: #{m}"
@@ -240,6 +241,7 @@ pattern matching feature via the +in+ keyword:
     "not matched"
   end
   # => "matched: 1"
+#@end
 
 The pattern matching syntax is described on
 {its own page}[rdoc-ref:syntax/pattern_matching.rdoc].

@@ -27,6 +27,7 @@ The +case+/+in+ expression is _exhaustive_: if the value of the expression does 
 
 Therefore, the +case+ expression might be used for conditional matching and unpacking:
 
+#@samplecode
   config = {db: {user: 'admin', password: 'abc123'}}
 
   case config
@@ -38,21 +39,26 @@ Therefore, the +case+ expression might be used for conditional matching and unpa
     puts "Unrecognized structure of config"
   end
   # Prints: "Connect with user 'admin'"
+#@end
 
 whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
 
+#@samplecode
   config = {db: {user: 'admin', password: 'abc123'}}
 
   config => {db: {user:}} # will raise if the config's structure is unexpected
 
   puts "Connect with user '#{user}'"
   # Prints: "Connect with user 'admin'"
+#@end
 
 <code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
 You can use it when you only want to know if a pattern has been matched or not:
 
+#@samplecode
   users = [{name: "Alice", age: 12}, {name: "Bob", age: 23}]
   users.any? {|user| user in {name: /B/, age: 20..} } #=> true
+#@end
 
 See below for more examples and explanations of the syntax.
 
@@ -74,6 +80,7 @@ Hash patterns match hashes, or objects that respond to +deconstruct_keys+ (see b
 
 An important difference between array and hash pattern behavior is that arrays match only a _whole_ array:
 
+#@samplecode
   case [1, 2, 3]
   in [Integer, Integer]
     "matched"
@@ -81,9 +88,11 @@ An important difference between array and hash pattern behavior is that arrays m
     "not matched"
   end
   #=> "not matched"
+#@end
 
 while the hash matches even if there are other keys besides the specified part:
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in {a: Integer}
     "matched"
@@ -91,9 +100,11 @@ while the hash matches even if there are other keys besides the specified part:
     "not matched"
   end
   #=> "matched"
+#@end
 
 <code>{}</code> is the only exclusion from this rule. It matches only if an empty hash is given:
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in {}
     "matched"
@@ -101,7 +112,9 @@ while the hash matches even if there are other keys besides the specified part:
     "not matched"
   end
   #=> "not matched"
+#@end
 
+#@samplecode
   case {}
   in {}
     "matched"
@@ -109,9 +122,11 @@ while the hash matches even if there are other keys besides the specified part:
     "not matched"
   end
   #=> "matched"
+#@end
 
 There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
 
+#@samplecode
   case {a: 1, b: 2}
   in {a: Integer, **nil} # this will not match the pattern having keys other than a:
     "matched a part"
@@ -121,9 +136,11 @@ There is also a way to specify there should be no other keys in the matched hash
     "not matched"
   end
   #=> "matched a whole"
+#@end
 
 Both array and hash patterns support "rest" specification:
 
+#@samplecode
   case [1, 2, 3]
   in [Integer, *]
     "matched"
@@ -131,7 +148,9 @@ Both array and hash patterns support "rest" specification:
     "not matched"
   end
   #=> "matched"
+#@end
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in {a: Integer, **}
     "matched"
@@ -139,9 +158,11 @@ Both array and hash patterns support "rest" specification:
     "not matched"
   end
   #=> "matched"
+#@end
 
 Parentheses around both kinds of patterns could be omitted:
 
+#@samplecode
   case [1, 2]
   in Integer, Integer
     "matched"
@@ -149,7 +170,9 @@ Parentheses around both kinds of patterns could be omitted:
     "not matched"
   end
   #=> "matched"
+#@end
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in a: Integer
     "matched"
@@ -157,26 +180,44 @@ Parentheses around both kinds of patterns could be omitted:
     "not matched"
   end
   #=> "matched"
+#@end
 
+#@samplecode
  [1, 2] => a, b
- [1, 2] in a, b
+#@end
 
+#@samplecode
+ [1, 2] in a, b
+#@end
+
+#@samplecode
  {a: 1, b: 2, c: 3} => a:
+#@end
+
+#@# このコメントの前後のコードブロックを1つにまとめると
+#@# {a: 1, b: 2, c: 3} => a: {a: 1, b: 2, c: 3} in a:
+#@# と解釈されて duplicated key name で SyntaxError になってしまうのでやむを得ず別々のコードブロックにしている
+
+#@samplecode
  {a: 1, b: 2, c: 3} in a:
+#@end
 
 Find pattern is similar to array pattern but it can be used to check if the given object has any elements that match the pattern:
 
+#@samplecode
   case ["a", 1, "b", "c", 2]
   in [*, String, String, *]
     "matched"
   else
     "not matched"
   end
+#@end
 
 == Variable binding
 
 Besides deep structural checks, one of the very important features of the pattern matching is the binding of the matched parts to local variables. The basic form of binding is just specifying <code>=> variable_name</code> after the matched (sub)pattern (one might find this similar to storing exceptions in local variables in a <code>rescue ExceptionClass => var</code> clause):
 
+#@samplecode
   case [1, 2]
   in Integer => a, Integer
     "matched: #{a}"
@@ -184,7 +225,9 @@ Besides deep structural checks, one of the very important features of the patter
     "not matched"
   end
   #=> "matched: 1"
+#@end
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in a: Integer => m
     "matched: #{m}"
@@ -192,9 +235,11 @@ Besides deep structural checks, one of the very important features of the patter
     "not matched"
   end
   #=> "matched: 1"
+#@end
 
 If no additional check is required, for only binding some part of the data to a variable, a simpler form could be used:
 
+#@samplecode
   case [1, 2]
   in a, Integer
     "matched: #{a}"
@@ -202,7 +247,9 @@ If no additional check is required, for only binding some part of the data to a 
     "not matched"
   end
   #=> "matched: 1"
+#@end
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in a: m
     "matched: #{m}"
@@ -210,9 +257,11 @@ If no additional check is required, for only binding some part of the data to a 
     "not matched"
   end
   #=> "matched: 1"
+#@end
 
 For hash patterns, even a simpler form exists: key-only specification (without any sub-pattern) binds the local variable with the key's name, too:
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in a:
     "matched: #{a}"
@@ -220,9 +269,11 @@ For hash patterns, even a simpler form exists: key-only specification (without a
     "not matched"
   end
   #=> "matched: 1"
+#@end
 
 Binding works for nested patterns as well:
 
+#@samplecode
   case {name: 'John', friends: [{name: 'Jane'}, {name: 'Rajesh'}]}
   in name:, friends: [{name: first_friend}, *]
     "matched: #{first_friend}"
@@ -230,9 +281,11 @@ Binding works for nested patterns as well:
     "not matched"
   end
   #=> "matched: Jane"
+#@end
 
 The "rest" part of a pattern also can be bound to a variable:
 
+#@samplecode
   case [1, 2, 3]
   in a, *rest
     "matched: #{a}, #{rest}"
@@ -240,7 +293,9 @@ The "rest" part of a pattern also can be bound to a variable:
     "not matched"
   end
   #=> "matched: 1, [2, 3]"
+#@end
 
+#@samplecode
   case {a: 1, b: 2, c: 3}
   in a:, **rest
     "matched: #{a}, #{rest}"
@@ -248,9 +303,11 @@ The "rest" part of a pattern also can be bound to a variable:
     "not matched"
   end
   #=> "matched: 1, {:b=>2, :c=>3}"
+#@end
 
 Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
 
+#@samplecode
   case {a: 1, b: 2}
   in {a: } | Array
     "matched: #{a}"
@@ -258,9 +315,11 @@ Binding to variables currently does NOT work for alternative patterns joined wit
     "not matched"
   end
   # SyntaxError (illegal variable in alternative pattern (a))
+#@end
 
 Variables that start with <code>_</code> are the only exclusions from this rule:
 
+#@samplecode
   case {a: 1, b: 2}
   in {a: _, b: _foo} | Array
     "matched: #{_}, #{_foo}"
@@ -268,6 +327,7 @@ Variables that start with <code>_</code> are the only exclusions from this rule:
     "not matched"
   end
   # => "matched: 1, 2"
+#@end
 
 It is, though, not advised to reuse the bound value, as this pattern's goal is to signify a discarded value.
 
@@ -275,6 +335,7 @@ It is, though, not advised to reuse the bound value, as this pattern's goal is t
 
 Due to the variable binding feature, existing local variable can not be straightforwardly used as a sub-pattern:
 
+#@samplecode
   expectation = 18
 
   case [1, 2]
@@ -285,9 +346,11 @@ Due to the variable binding feature, existing local variable can not be straight
   end
   # expected: "not matched. expectation was: 18"
   # real: "matched. expectation was: 1" -- local variable just rewritten
+#@end
 
 For this case, the pin operator <code>^</code> can be used, to tell Ruby "just use this value as part of the pattern":
 
+#@samplecode
   expectation = 18
   case [1, 2]
   in ^expectation, *rest
@@ -296,9 +359,11 @@ For this case, the pin operator <code>^</code> can be used, to tell Ruby "just u
     "not matched. expectation was: #{expectation}"
   end
   #=> "not matched. expectation was: 18"
+#@end
 
 One important usage of variable pinning is specifying that the same value should occur in the pattern several times:
 
+#@samplecode
   jane = {school: 'high', schools: [{id: 1, level: 'middle'}, {id: 2, level: 'high'}]}
   john = {school: 'high', schools: [{id: 1, level: 'middle'}]}
 
@@ -317,9 +382,11 @@ One important usage of variable pinning is specifying that the same value should
     "not matched"
   end
   #=> "not matched"
+#@end
 
 In addition to pinning local variables, you can also pin instance, global, and class variables:
 
+#@samplecode
   $gvar = 1
   class A
     @ivar = 2
@@ -332,9 +399,11 @@ In addition to pinning local variables, you can also pin instance, global, and c
     end
     #=> "matched"
   end
+#@end
 
 You can also pin the result of arbitrary expressions using parentheses:
 
+#@samplecode
   a = 1
   b = 2
   case 3
@@ -344,11 +413,13 @@ You can also pin the result of arbitrary expressions using parentheses:
     "not matched"
   end
   #=> "matched"
+#@end
 
 == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
 
 As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
 
+#@samplecode
   class Point
     def initialize(x, y)
       @x, @y = x, y
@@ -382,9 +453,11 @@ As already mentioned above, array, find, and hash patterns besides literal array
   end
   # prints: deconstruct_keys called with [:x]
   #=> "matched: 1"
+#@end
 
 +keys+ are passed to +deconstruct_keys+ to provide a room for optimization in the matched class: if calculating a full hash representation is expensive, one may calculate only the necessary subhash. When the <code>**rest</code> pattern is used, +nil+ is passed as a +keys+ value:
 
+#@samplecode
   case Point.new(1, -2)
   in x: 0.. => px, **rest
     "matched: #{px}"
@@ -393,9 +466,11 @@ As already mentioned above, array, find, and hash patterns besides literal array
   end
   # prints: deconstruct_keys called with nil
   #=> "matched: 1"
+#@end
 
 Additionally, when matching custom classes, the expected class can be specified as part of the pattern and is checked with <code>===</code>
 
+#@samplecode
   class SuperPoint < Point
   end
 
@@ -414,11 +489,13 @@ Additionally, when matching custom classes, the expected class can be specified 
     "not matched"
   end
   #=> "matched: 1"
+#@end
 
 == Guard clauses
 
 +if+ can be used to attach an additional condition (guard clause) when the pattern matches. This condition may use bound variables:
 
+#@samplecode
   case [1, 2]
   in a, b if b == a*2
     "matched"
@@ -426,7 +503,9 @@ Additionally, when matching custom classes, the expected class can be specified 
     "not matched"
   end
   #=> "matched"
+#@end
 
+#@samplecode
   case [1, 1]
   in a, b if b == a*2
     "matched"
@@ -434,9 +513,11 @@ Additionally, when matching custom classes, the expected class can be specified 
     "not matched"
   end
   #=> "not matched"
+#@end
 
 +unless+ works, too:
 
+#@samplecode
   case [1, 1]
   in a, b unless b == a*2
     "matched"
@@ -444,25 +525,32 @@ Additionally, when matching custom classes, the expected class can be specified 
     "not matched"
   end
   #=> "matched"
+#@end
 
 == Current feature status
 
 As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
 
+#@samplecode
   [0] => [*, 0, *]
   # warning: Find pattern is experimental, and the behavior may change in future versions of Ruby!
   # warning: One-line pattern matching is experimental, and the behavior may change in future versions of Ruby!
+#@end
 
 To suppress this warning, one may use the Warning::[]= method:
 
+#@samplecode
   Warning[:experimental] = false
   eval('[0] => [*, 0, *]')
   # ...no warning printed...
+#@end
 
 Note that pattern-matching warnings are raised at compile time, so this will not suppress the warning:
 
+#@samplecode
   Warning[:experimental] = false # At the time this line is evaluated, the parsing happened and warning emitted
   [0] => [*, 0, *]
+#@end
 
 So, only subsequently loaded files or `eval`-ed code is affected by switching the flag.
 
@@ -512,6 +600,7 @@ To leave room for optimization in the future, the specification contains some un
 
 Use of a variable in an unmatched pattern:
 
+#@samplecode
   case [0, 1]
   in [a, 2]
     "not matched"
@@ -522,9 +611,11 @@ Use of a variable in an unmatched pattern:
   end
   a #=> undefined
   c #=> undefined
+#@end
 
 Number of +deconstruct+, +deconstruct_keys+ method calls:
 
+#@samplecode
   $i = 0
   ary = [0]
   def ary.deconstruct
@@ -538,3 +629,4 @@ Number of +deconstruct+, +deconstruct_keys+ method calls:
     "matched"
   end
   $i #=> undefined
+#@end
