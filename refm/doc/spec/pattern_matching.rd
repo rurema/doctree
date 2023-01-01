@@ -77,23 +77,39 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 #@# See below for more examples and explanations of the syntax.
 構文の詳細な例と説明は以下を参照してください。
 
-== Patterns
+#@# == Patterns
+== パターン
 
-Patterns can be:
+#@# Patterns can be:
+パターンで利用できるものには次のものがあります。
 
-  * any Ruby object (matched by the <code>===</code> operator, like in +when+); (<em>Value pattern</em>)
-  * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
-  * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
-  * hash pattern: <code>{key: <subpattern>, key: <subpattern>, ...}</code>; (<em>Hash pattern</em>)
-  * combination of patterns with <code>|</code>; (<em>Alternative pattern</em>)
-  * variable capture: <code><pattern> => variable</code> or <code>variable</code>; (<em>As pattern</em>, <em>Variable pattern</em>)
+#@#   * any Ruby object (matched by the <code>===</code> operator, like in +when+); (<em>Value pattern</em>)
+  * Ruby のオブジェクト (+when+ での場合のように <code>===</code> 演算子にマッチするもの) (<em>Value パターン</em>)
+#@#   * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
+  * Array パターン: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code> (<em>Array パターン</em>)
+#@#   * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
+  * Find パターン: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code> (<em>Find パターン</em>)
+#@#   * hash pattern: <code>{key: <subpattern>, key: <subpattern>, ...}</code>; (<em>Hash pattern</em>)
+  * Hash パターン: <code>{key: <subpattern>, key: <subpattern>, ...}</code> (<em>Hash パターン</em>)
+#@#   * combination of patterns with <code>|</code>; (<em>Alternative pattern</em>)
+  * <code>|</code> でのパターンの組み合わせ (<em>Alternative パターン</em>)
+#@#   * variable capture: <code><pattern> => variable</code> or <code>variable</code>; (<em>As pattern</em>, <em>Variable pattern</em>)
+  * 変数のキャプチャ: <code><pattern> => variable</code> または <code>variable</code> (<em>As パターン</em>, <em>Variable パターン</em>)
 
-Any pattern can be nested inside array/find/hash patterns where <code><subpattern></code> is specified.
+#@# Any pattern can be nested inside array/find/hash patterns where <code><subpattern></code> is specified.
+Array/Find/Hash パターンの中に <code><subpattern></code> と書かれている場所では任意のパターンをネストさせることができます。
 
-Array patterns and find patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
-Hash patterns match hashes, or objects that respond to +deconstruct_keys+ (see below about the latter). Note that only symbol keys are supported for hash patterns.
+#@# Array patterns and find patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
+Array パターン と Find パターン は配列か +deconstruct+ を持つオブジェクトにマッチします。(+deconstruct+ については後ほど説明します)
 
-An important difference between array and hash pattern behavior is that arrays match only a _whole_ array:
+#@# Hash patterns match hashes, or objects that respond to +deconstruct_keys+ (see below about the latter). Note that only symbol keys are supported for hash patterns.
+Hash パターン はハッシュか +deconstruct_keys+ メソッドを持つオブジェクトにマッチします。(+deconstruct_keys+ については後ほど説明します) Hash パターン で利用できるキーはシンボルのみです。
+
+#@# 原文にないが補足のため追加
+※ deconstruct や deconstruct_keys を扱う際の『〜を持つ』の定義は [[m:Object#respond_to?]] と同様です。
+
+#@# An important difference between array and hash pattern behavior is that arrays match only a _whole_ array:
+Array パターン と Hash パターン の挙動の重要な違いは Array パターンは配列の _全ての_ 要素がマッチする必要があるということです。
 
 #@samplecode
 case [1, 2, 3]
@@ -105,7 +121,8 @@ end
 #=> "not matched"
 #@end
 
-while the hash matches even if there are other keys besides the specified part:
+#@# while the hash matches even if there are other keys besides the specified part:
+一方 Hash パターン は一部の key だけ指定している場合(指定している key 以外にも key が存在する場合)でもマッチします。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
@@ -117,7 +134,8 @@ end
 #=> "matched"
 #@end
 
-<code>{}</code> is the only exclusion from this rule. It matches only if an empty hash is given:
+#@# <code>{}</code> is the only exclusion from this rule. It matches only if an empty hash is given:
+<code>{}</code> だけはこのルールの例外です。<code>{}</code> は空のハッシュのみマッチします。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
@@ -139,11 +157,13 @@ end
 #=> "matched"
 #@end
 
-There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
+#@# There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
+また、パターンで明示的に指定されたキー以外にキーが存在しないケースにマッチングさせたい場合、<code>**nil</code> を指定する方法もあります。
 
 #@samplecode
 case {a: 1, b: 2}
-in {a: Integer, **nil} # this will not match the pattern having keys other than a:
+#@# in {a: Integer, **nil} # this will not match the pattern having keys other than a:
+in {a: Integer, **nil} # これは a: 以外に key を持つパターンのためマッチしません
   "matched a part"
 in {a: Integer, b: Integer, **nil}
   "matched a whole"
@@ -153,7 +173,8 @@ end
 #=> "matched a whole"
 #@end
 
-Both array and hash patterns support "rest" specification:
+#@# Both array and hash patterns support "rest" specification:
+Array パターン と Hash パターン ともに "残余"(rest) の部分にマッチする構文をサポートしています。
 
 #@samplecode
 case [1, 2, 3]
@@ -175,7 +196,8 @@ end
 #=> "matched"
 #@end
 
-Parentheses around both kinds of patterns could be omitted:
+#@# Parentheses around both kinds of patterns could be omitted:
+Array パターン や Hash パターン は両端の <code>[]</code> や <code>{}</code> といったカッコを省略できます。
 
 #@samplecode
 case [1, 2]
@@ -217,7 +239,8 @@ end
 {a: 1, b: 2, c: 3} in a:
 #@end
 
-Find pattern is similar to array pattern but it can be used to check if the given object has any elements that match the pattern:
+#@# Find pattern is similar to array pattern but it can be used to check if the given object has any elements that match the pattern:
+Find パターン は Array パターン に似ていますが、オブジェクトの一部の要素がマッチしていることを検査できます。
 
 #@samplecode
 case ["a", 1, "b", "c", 2]
