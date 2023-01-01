@@ -251,9 +251,11 @@ else
 end
 #@end
 
-== Variable binding
+#@# == Variable binding
+== 変数の束縛
 
-Besides deep structural checks, one of the very important features of the pattern matching is the binding of the matched parts to local variables. The basic form of binding is just specifying <code>=> variable_name</code> after the matched (sub)pattern (one might find this similar to storing exceptions in local variables in a <code>rescue ExceptionClass => var</code> clause):
+#@# Besides deep structural checks, one of the very important features of the pattern matching is the binding of the matched parts to local variables. The basic form of binding is just specifying <code>=> variable_name</code> after the matched (sub)pattern (one might find this similar to storing exceptions in local variables in a <code>rescue ExceptionClass => var</code> clause):
+深い構造検査の他のパターンマッチの重要な機能の1つにマッチした部分のローカル変数への束縛があります。束縛の基本的な形はマッチしたパターンの後ろに <code>=> 変数名</code> と書くことです。(この形は rescue 節で <code>rescue ExceptionClass => var</code> の形で例外をローカル変数に格納する形に似ています)
 
 #@samplecode
 case [1, 2]
@@ -275,7 +277,8 @@ end
 #=> "matched: 1"
 #@end
 
-If no additional check is required, for only binding some part of the data to a variable, a simpler form could be used:
+#@# If no additional check is required, for only binding some part of the data to a variable, a simpler form could be used:
+追加のチェックが不要で変数への束縛だけがしたい場合は、より簡潔な記法が利用できます。
 
 #@samplecode
 case [1, 2]
@@ -297,7 +300,8 @@ end
 #=> "matched: 1"
 #@end
 
-For hash patterns, even a simpler form exists: key-only specification (without any sub-pattern) binds the local variable with the key's name, too:
+#@# For hash patterns, even a simpler form exists: key-only specification (without any sub-pattern) binds the local variable with the key's name, too:
+Hash パターンにもより簡潔な記法があります。チェックが不要で変数への束縛のみ行いたい場合、キー名だけを指定することでキー名と同じ変数に値を束縛することができます。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
@@ -309,7 +313,8 @@ end
 #=> "matched: 1"
 #@end
 
-Binding works for nested patterns as well:
+#@# Binding works for nested patterns as well:
+ネストしたパターンの場合も同様に値の束縛を利用できます。
 
 #@samplecode
 case {name: 'John', friends: [{name: 'Jane'}, {name: 'Rajesh'}]}
@@ -321,7 +326,8 @@ end
 #=> "matched: Jane"
 #@end
 
-The "rest" part of a pattern also can be bound to a variable:
+#@# The "rest" part of a pattern also can be bound to a variable:
+パターンの "残余"(rest) の部分も同様に変数に束縛できます。
 
 #@samplecode
 case [1, 2, 3]
@@ -343,7 +349,8 @@ end
 #=> "matched: 1, {:b=>2, :c=>3}"
 #@end
 
-Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
+#@# Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
+変数への束縛は現状、<code>|</code> で結合される Alternative パターン と同時には利用できません。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -355,7 +362,8 @@ end
 # SyntaxError (illegal variable in alternative pattern (a))
 #@end
 
-Variables that start with <code>_</code> are the only exclusions from this rule:
+#@# Variables that start with <code>_</code> are the only exclusions from this rule:
+<code>_</code> で始まる変数は例外で、Alternative パターン と同時に利用することができます。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -367,7 +375,8 @@ end
 # => "matched: 1, 2"
 #@end
 
-It is, though, not advised to reuse the bound value, as this pattern's goal is to signify a discarded value.
+#@# It is, though, not advised to reuse the bound value, as this pattern's goal is to signify a discarded value.
+しかし、<code>_</code> で始まる変数の目的は利用しない値を意味するので、束縛された値を再利用することはオススメしません。
 
 == Variable pinning
 
