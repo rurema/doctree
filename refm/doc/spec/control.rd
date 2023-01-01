@@ -234,13 +234,13 @@ Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
 pattern matching feature via the +in+ keyword:
 
 #@samplecode
-  case {a: 1, b: 2, c: 3}
-  in a: Integer => m
-    "matched: #{m}"
-  else
-    "not matched"
-  end
-  # => "matched: 1"
+case {a: 1, b: 2, c: 3}
+in a: Integer => m
+  "matched: #{m}"
+else
+  "not matched"
+end
+# => "matched: 1"
 #@end
 
 The pattern matching syntax is described on
