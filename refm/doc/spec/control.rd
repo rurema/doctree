@@ -230,8 +230,9 @@ case は、条件が成立した when 節、(あるいは else 節)
 の最後に評価した式の結果を返します。いずれの条件も成り立たなければ
 nil を返します。
 
-Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
-pattern matching feature via the +in+ keyword:
+#@# Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
+#@# pattern matching feature via the +in+ keyword:
+Ruby 2.7 からは +case+ 式は +in+ キーワードを通じてより強力なパターンマッチ構文を提供しています。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
@@ -243,8 +244,9 @@ end
 # => "matched: 1"
 #@end
 
-The pattern matching syntax is described on
-{its own page}[rdoc-ref:syntax/pattern_matching.rdoc].
+#@# The pattern matching syntax is described on
+#@# {its own page}[rdoc-ref:syntax/pattern_matching.rdoc].
+パターンマッチ構文については[[d:spec/pattern_matching]]で説明しています。
 
 === 繰り返し
 
