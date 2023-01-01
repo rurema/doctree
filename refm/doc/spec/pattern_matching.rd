@@ -470,9 +470,11 @@ end
 #=> "matched"
 #@end
 
-== Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
+#@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
+== プリミティブなオブジェクト以外とのマッチング: +deconstruct+ と +deconstruct_keys+
 
-As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
+#@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
+既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは +deconstruct+ (これは Array/Find パターンで利用されます) か +deconstruct_keys+ (これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
 
 #@samplecode
 class Point
@@ -492,12 +494,14 @@ class Point
 end
 
 case Point.new(1, -2)
-in px, Integer  # sub-patterns and variable binding works
+#@# in px, Integer  # sub-patterns and variable binding works
+in px, Integer  # サブパターンと変数への束縛も動きます
   "matched: #{px}"
 else
   "not matched"
 end
-# prints "deconstruct called"
+#@# # prints "deconstruct called"
+# "deconstruct called" が出力されます
 "matched: 1"
 
 case Point.new(1, -2)
@@ -506,11 +510,13 @@ in x: 0.. => px
 else
   "not matched"
 end
-# prints: deconstruct_keys called with [:x]
+#@# # prints: deconstruct_keys called with [:x]
+# "deconstruct_keys called with [:x]" が出力されます
 #=> "matched: 1"
 #@end
 
-+keys+ are passed to +deconstruct_keys+ to provide a room for optimization in the matched class: if calculating a full hash representation is expensive, one may calculate only the necessary subhash. When the <code>**rest</code> pattern is used, +nil+ is passed as a +keys+ value:
+#@# +keys+ are passed to +deconstruct_keys+ to provide a room for optimization in the matched class: if calculating a full hash representation is expensive, one may calculate only the necessary subhash. When the <code>**rest</code> pattern is used, +nil+ is passed as a +keys+ value:
++keys+ はマッチしたクラスの中で最適化の余地を残して +deconstruct_keys+ へと渡されます。もし全てのハッシュの表現の計算に高い負荷がかかる場合、必要なサブハッシュのみ計算されるかもしれません。<code>**rest</code> パターンが使われている場合、+keys+ の値として +nil+ が渡されます。
 
 #@samplecode
 case Point.new(1, -2)
@@ -519,11 +525,13 @@ in x: 0.. => px, **rest
 else
   "not matched"
 end
-# prints: deconstruct_keys called with nil
+#@# # prints: deconstruct_keys called with nil
+# "deconstruct_keys called with nil" が出力されます
 #=> "matched: 1"
 #@end
 
-Additionally, when matching custom classes, the expected class can be specified as part of the pattern and is checked with <code>===</code>
+#@# Additionally, when matching custom classes, the expected class can be specified as part of the pattern and is checked with <code>===</code>
+加えて、カスタムクラスにマッチするとき、期待されるクラスはパターンの部品として明記され <code>===</code> で検査されます
 
 #@samplecode
 class SuperPoint < Point
@@ -538,7 +546,8 @@ end
 #=> "not matched"
 
 case SuperPoint.new(1, -2)
-in SuperPoint[x: 0.. => px] # [] or () parentheses are allowed
+#@# in SuperPoint[x: 0.. => px] # [] or () parentheses are allowed
+in SuperPoint[x: 0.. => px] # [] や () といったカッコは許容されます
   "matched: #{px}"
 else
   "not matched"
