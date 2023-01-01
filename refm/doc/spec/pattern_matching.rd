@@ -594,9 +594,11 @@ end
 #=> "matched"
 #@end
 
-== Current feature status
+#@# == Current feature status
+== 機能の現状
 
-As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
+#@# As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
+Ruby 3.1 の時点では、Find パターンは _experimental_ と考えられます。Find パターンのシンタックスは将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
 
 #@samplecode
 [0] => [*, 0, *]
@@ -604,24 +606,29 @@ As of Ruby 3.1, find patterns are considered _experimental_: its syntax can chan
 # warning: One-line pattern matching is experimental, and the behavior may change in future versions of Ruby!
 #@end
 
-To suppress this warning, one may use the Warning::[]= method:
+#@# To suppress this warning, one may use the Warning::[]= method:
+この警告を抑制したければ、Warning::[]= メソッドが利用できます。
 
 #@samplecode
 Warning[:experimental] = false
 eval('[0] => [*, 0, *]')
-# ...no warning printed...
+#@# # ...no warning printed...
+# ...警告は出力されない...
 #@end
 
-Note that pattern-matching warnings are raised at compile time, so this will not suppress the warning:
+#@# Note that pattern-matching warnings are raised at compile time, so this will not suppress the warning:
+パターンマッチの警告はコンパイル時に発生するため、以下のような場合は警告は抑制できません。
 
 #@samplecode
 Warning[:experimental] = false # At the time this line is evaluated, the parsing happened and warning emitted
 [0] => [*, 0, *]
 #@end
 
-So, only subsequently loaded files or `eval`-ed code is affected by switching the flag.
+#@# So, only subsequently loaded files or `eval`-ed code is affected by switching the flag.
+つまり、フラグの切り替えによって影響を受けるのは切り替え以降に load されたファイルや `eval` されたコードに限られます。
 
-Alternatively, the command line option <code>-W:no-experimental</code> can be used to turn off "experimental" feature warnings.
+#@# Alternatively, the command line option <code>-W:no-experimental</code> can be used to turn off "experimental" feature warnings.
+代わりに、コマンドラインオプションとして <code>-W:no-experimental</code> を渡すことで "experimental" な機能に対する警告を出力させないようにできます。
 
 == Appendix A. Pattern syntax
 
