@@ -5,7 +5,7 @@
 パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチングを可能にする機能です。
 
 #@# Pattern matching in Ruby is implemented with the +case+/+in+ expression:
-Rubyでのパターンマッチは +case+/+in+ 式を用いて実装されています。
+Rubyでのパターンマッチは case/in 式を用いて実装されています。
 
   case <expression>
   in <pattern1>
@@ -19,20 +19,20 @@ Rubyでのパターンマッチは +case+/+in+ 式を用いて実装されてい
   end
 
 #@# (Note that +in+ and +when+ branches can NOT be mixed in one +case+ expression.)
-+in+ 節と +when+ 節は1つの +case+ 式の中に混ぜて書くことはできません。
+in 節と when 節は1つの case 式の中に混ぜて書くことはできません。
 
 #@# Or with the <code>=></code> operator and the +in+ operator, which can be used in a standalone expression:
-『=>』 演算子と +in+ 演算子で、単体の式で使用することも可能です。
+『=>』 演算子と in 演算子で、単体の式で使用することも可能です。
 
   <expression> => <pattern>
 
   <expression> in <pattern>
 
 #@# The +case+/+in+ expression is _exhaustive_: if the value of the expression does not match any branch of the +case+ expression (and the +else+ branch is absent), +NoMatchingPatternError+ is raised.
-+case+/+in+ 式は 「網羅的」 です。もし +case+ 式の値がどの節にもマッチせず +else+ 節がない場合、+NoMatchingPatternError+ が raise されます。
+case/in 式は 「網羅的」 です。もし case 式の値がどの節にもマッチせず else 節がない場合、NoMatchingPatternError が raise されます。
 
 #@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
-そのため、条件付きのマッチングやアンパックに +case+ 式が使われることがあります。
+そのため、条件付きのマッチングやアンパックに case 式が使われることがあります。
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
@@ -84,7 +84,7 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 パターンで利用できるものには次のものがあります。
 
 #@#   * any Ruby object (matched by the <code>===</code> operator, like in +when+); (<em>Value pattern</em>)
-  * Ruby のオブジェクト (+when+ での場合のように 『===』 演算子にマッチするもの) (「Value パターン」)
+  * Ruby のオブジェクト (when での場合のように 『===』 演算子にマッチするもの) (「Value パターン」)
 #@#   * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
   * Array パターン: 『[<subpattern>, <subpattern>, <subpattern>, ...]』 (「Array パターン」)
 #@#   * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
@@ -100,10 +100,10 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 Array/Find/Hash パターンの中に 『<subpattern>』 と書かれている場所では任意のパターンをネストさせることができます。
 
 #@# Array patterns and find patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
-Array パターン と Find パターン は配列か +deconstruct+ を持つオブジェクトにマッチします。(+deconstruct+ については後ほど説明します)
+Array パターン と Find パターン は配列か deconstruct を持つオブジェクトにマッチします。(deconstruct については後ほど説明します)
 
 #@# Hash patterns match hashes, or objects that respond to +deconstruct_keys+ (see below about the latter). Note that only symbol keys are supported for hash patterns.
-Hash パターン はハッシュか +deconstruct_keys+ メソッドを持つオブジェクトにマッチします。(+deconstruct_keys+ については後ほど説明します) Hash パターン で利用できるキーはシンボルのみです。
+Hash パターン はハッシュか deconstruct_keys を持つオブジェクトにマッチします。(deconstruct_keys については後ほど説明します) Hash パターン で利用できるキーはシンボルのみです。
 
 #@# 原文にないが補足のため追加
 ※ deconstruct や deconstruct_keys を扱う際の『〜を持つ』の定義は [[m:Object#respond_to?]] と同様です。
@@ -471,10 +471,10 @@ end
 #@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
-== プリミティブなオブジェクト以外とのマッチング: +deconstruct+ と +deconstruct_keys+
+== プリミティブなオブジェクト以外とのマッチング: deconstruct と deconstruct_keys
 
 #@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
-既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは +deconstruct+ (これは Array/Find パターンで利用されます) か +deconstruct_keys+ (これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
+既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは deconstruct (これは Array/Find パターンで利用されます) か deconstruct_keys (これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
 
 #@samplecode
 class Point
@@ -516,7 +516,7 @@ end
 #@end
 
 #@# +keys+ are passed to +deconstruct_keys+ to provide a room for optimization in the matched class: if calculating a full hash representation is expensive, one may calculate only the necessary subhash. When the <code>**rest</code> pattern is used, +nil+ is passed as a +keys+ value:
-+keys+ はマッチしたクラスの中で最適化の余地を残して +deconstruct_keys+ へと渡されます。もし全てのハッシュの表現の計算に高い負荷がかかる場合、必要なサブハッシュのみ計算されるかもしれません。『**rest』 パターンが使われている場合、+keys+ の値として +nil+ が渡されます。
+keys はマッチしたクラスの中で最適化の余地を残して deconstruct_keys へと渡されます。もし全てのハッシュの表現の計算に高い負荷がかかる場合、必要なサブハッシュのみ計算されるかもしれません。『**rest』 パターンが使われている場合、keys の値として nil が渡されます。
 
 #@samplecode
 case Point.new(1, -2)
@@ -559,7 +559,7 @@ end
 == ガード節
 
 #@# +if+ can be used to attach an additional condition (guard clause) when the pattern matches. This condition may use bound variables:
-もしパターンマッチのときに +if+ を用いて追加の条件(ガード節)を指定した場合、変数への束縛がされた状態で条件の判定が行われます。
+もしパターンマッチのときに if を用いて追加の条件(ガード節)を指定した場合、変数への束縛がされた状態で条件の判定が行われます。
 
 #@samplecode
 case [1, 2]
@@ -582,7 +582,7 @@ end
 #@end
 
 #@# +unless+ works, too:
-+unless+ も利用できます。
+unless も利用できます。
 
 #@samplecode
 case [1, 1]

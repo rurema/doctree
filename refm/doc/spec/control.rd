@@ -232,7 +232,7 @@ nil を返します。
 
 #@# Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
 #@# pattern matching feature via the +in+ keyword:
-Ruby 2.7 からは +case+ 式は +in+ キーワードを通じてより強力なパターンマッチ構文を提供しています。
+Ruby 2.7 からは case 式は in キーワードを通じてより強力なパターンマッチ構文を提供しています。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
