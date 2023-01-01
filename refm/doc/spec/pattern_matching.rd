@@ -1,8 +1,11 @@
-= Pattern matching
+#@# = Pattern matching
+= パターンマッチ
 
-Pattern matching is a feature allowing deep matching of structured values: checking the structure and binding the matched parts to local variables.
+#@# Pattern matching is a feature allowing deep matching of structured values: checking the structure and binding the matched parts to local variables.
+パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチングを可能にする機能です。
 
-Pattern matching in Ruby is implemented with the +case+/+in+ expression:
+#@# Pattern matching in Ruby is implemented with the +case+/+in+ expression:
+Rubyでのパターンマッチは +case+/+in+ 式を用いて実装されています。
 
   case <expression>
   in <pattern1>
@@ -15,52 +18,64 @@ Pattern matching in Ruby is implemented with the +case+/+in+ expression:
     ...
   end
 
-(Note that +in+ and +when+ branches can NOT be mixed in one +case+ expression.)
+#@# (Note that +in+ and +when+ branches can NOT be mixed in one +case+ expression.)
++in+ 節と +when+ 節は1つの +case+ 式の中に混ぜて書くことはできません。
 
-Or with the <code>=></code> operator and the +in+ operator, which can be used in a standalone expression:
+#@# Or with the <code>=></code> operator and the +in+ operator, which can be used in a standalone expression:
+<code>=></code> 演算子と +in+ 演算子で、単体の式で使用することも可能です。
 
   <expression> => <pattern>
 
   <expression> in <pattern>
 
-The +case+/+in+ expression is _exhaustive_: if the value of the expression does not match any branch of the +case+ expression (and the +else+ branch is absent), +NoMatchingPatternError+ is raised.
+#@# The +case+/+in+ expression is _exhaustive_: if the value of the expression does not match any branch of the +case+ expression (and the +else+ branch is absent), +NoMatchingPatternError+ is raised.
++case+/+in+ 式は _網羅的_ です。もし +case+ 式の値がどの節にもマッチせず +else+ 節がない場合、+NoMatchingPatternError+ が raise されます。
 
-Therefore, the +case+ expression might be used for conditional matching and unpacking:
+#@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
+そのため、条件付きのマッチングやアンパックに +case+ 式が使われることがあります。
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
 
 case config
-in db: {user:} # matches subhash and puts matched value in variable user
+#@# in db: {user:} # matches subhash and puts matched value in variable user
+in db: {user:} # ネストしたハッシュにマッチしマッチした値が変数 user に代入されます
   puts "Connect with user '#{user}'"
 in connection: {username: }
   puts "Connect with user '#{username}'"
 else
   puts "Unrecognized structure of config"
 end
-# Prints: "Connect with user 'admin'"
+#@# # Prints: "Connect with user 'admin'"
+# "Connect with user 'admin'" が出力されます
 #@end
 
-whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
+#@# whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
+一方、<code>=></code> 演算子は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
 
-config => {db: {user:}} # will raise if the config's structure is unexpected
+#@# config => {db: {user:}} # will raise if the config's structure is unexpected
+config => {db: {user:}} # config の構造が予期しないものだった場合は例外が raise されます
 
 puts "Connect with user '#{user}'"
-# Prints: "Connect with user 'admin'"
+#@# # Prints: "Connect with user 'admin'"
+# Connect with user 'admin'" が出力されます
 #@end
 
-<code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
-You can use it when you only want to know if a pattern has been matched or not:
+#@# <code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
+<code><expression> in <pattern></code> は <code><expression>; in <pattern>; true; else false; end</code> と等価です。
+#@# You can use it when you only want to know if a pattern has been matched or not:
+パターンにマッチするかどうかだけを知りたいときに使えます。
 
 #@samplecode
 users = [{name: "Alice", age: 12}, {name: "Bob", age: 23}]
 users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 #@end
 
-See below for more examples and explanations of the syntax.
+#@# See below for more examples and explanations of the syntax.
+構文の詳細な例と説明は以下を参照してください。
 
 == Patterns
 
