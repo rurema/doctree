@@ -230,6 +230,20 @@ case は、条件が成立した when 節、(あるいは else 節)
 の最後に評価した式の結果を返します。いずれの条件も成り立たなければ
 nil を返します。
 
+Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
+pattern matching feature via the +in+ keyword:
+
+  case {a: 1, b: 2, c: 3}
+  in a: Integer => m
+    "matched: #{m}"
+  else
+    "not matched"
+  end
+  # => "matched: 1"
+
+The pattern matching syntax is described on
+{its own page}[rdoc-ref:syntax/pattern_matching.rdoc].
+
 === 繰り返し
 
 ====[a:while] while
