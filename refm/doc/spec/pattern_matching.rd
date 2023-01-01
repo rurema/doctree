@@ -22,7 +22,7 @@ Rubyでのパターンマッチは +case+/+in+ 式を用いて実装されてい
 +in+ 節と +when+ 節は1つの +case+ 式の中に混ぜて書くことはできません。
 
 #@# Or with the <code>=></code> operator and the +in+ operator, which can be used in a standalone expression:
-<code>=></code> 演算子と +in+ 演算子で、単体の式で使用することも可能です。
+『=>』 演算子と +in+ 演算子で、単体の式で使用することも可能です。
 
   <expression> => <pattern>
 
@@ -51,7 +51,7 @@ end
 #@end
 
 #@# whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
-一方、<code>=></code> 演算子は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
+一方、『=>』 演算子は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
@@ -65,7 +65,7 @@ puts "Connect with user '#{user}'"
 #@end
 
 #@# <code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
-<code><expression> in <pattern></code> は <code><expression>; in <pattern>; true; else false; end</code> と等価です。
+『<expression> in <pattern>』 は 『<expression>; in <pattern>; true; else false; end』 と等価です。
 #@# You can use it when you only want to know if a pattern has been matched or not:
 パターンにマッチするかどうかだけを知りたいときに使えます。
 
@@ -84,20 +84,20 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 パターンで利用できるものには次のものがあります。
 
 #@#   * any Ruby object (matched by the <code>===</code> operator, like in +when+); (<em>Value pattern</em>)
-  * Ruby のオブジェクト (+when+ での場合のように <code>===</code> 演算子にマッチするもの) (<em>Value パターン</em>)
+  * Ruby のオブジェクト (+when+ での場合のように 『===』 演算子にマッチするもの) (<em>Value パターン</em>)
 #@#   * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
-  * Array パターン: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code> (<em>Array パターン</em>)
+  * Array パターン: 『[<subpattern>, <subpattern>, <subpattern>, ...]』 (<em>Array パターン</em>)
 #@#   * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
-  * Find パターン: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code> (<em>Find パターン</em>)
+  * Find パターン: 『[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]』 (<em>Find パターン</em>)
 #@#   * hash pattern: <code>{key: <subpattern>, key: <subpattern>, ...}</code>; (<em>Hash pattern</em>)
-  * Hash パターン: <code>{key: <subpattern>, key: <subpattern>, ...}</code> (<em>Hash パターン</em>)
+  * Hash パターン: 『{key: <subpattern>, key: <subpattern>, ...}』 (<em>Hash パターン</em>)
 #@#   * combination of patterns with <code>|</code>; (<em>Alternative pattern</em>)
-  * <code>|</code> でのパターンの組み合わせ (<em>Alternative パターン</em>)
+  * 『|』 でのパターンの組み合わせ (<em>Alternative パターン</em>)
 #@#   * variable capture: <code><pattern> => variable</code> or <code>variable</code>; (<em>As pattern</em>, <em>Variable pattern</em>)
-  * 変数のキャプチャ: <code><pattern> => variable</code> または <code>variable</code> (<em>As パターン</em>, <em>Variable パターン</em>)
+  * 変数のキャプチャ: 『<pattern> => variable』 または 『variable』 (<em>As パターン</em>, <em>Variable パターン</em>)
 
 #@# Any pattern can be nested inside array/find/hash patterns where <code><subpattern></code> is specified.
-Array/Find/Hash パターンの中に <code><subpattern></code> と書かれている場所では任意のパターンをネストさせることができます。
+Array/Find/Hash パターンの中に 『<subpattern>』 と書かれている場所では任意のパターンをネストさせることができます。
 
 #@# Array patterns and find patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
 Array パターン と Find パターン は配列か +deconstruct+ を持つオブジェクトにマッチします。(+deconstruct+ については後ほど説明します)
@@ -135,7 +135,7 @@ end
 #@end
 
 #@# <code>{}</code> is the only exclusion from this rule. It matches only if an empty hash is given:
-<code>{}</code> だけはこのルールの例外です。<code>{}</code> は空のハッシュのみマッチします。
+『{}』 だけはこのルールの例外です。『{}』 は空のハッシュのみマッチします。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
@@ -158,7 +158,7 @@ end
 #@end
 
 #@# There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
-また、パターンで明示的に指定されたキー以外にキーが存在しないケースにマッチングさせたい場合、<code>**nil</code> を指定する方法もあります。
+また、パターンで明示的に指定されたキー以外にキーが存在しないケースにマッチングさせたい場合、『**nil』 を指定する方法もあります。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -197,7 +197,7 @@ end
 #@end
 
 #@# Parentheses around both kinds of patterns could be omitted:
-Array パターン や Hash パターン は両端の <code>[]</code> や <code>{}</code> といったカッコを省略できます。
+Array パターン や Hash パターン は両端の 『[]』 や 『{}』 といったカッコを省略できます。
 
 #@samplecode
 case [1, 2]
@@ -255,7 +255,7 @@ end
 == 変数の束縛
 
 #@# Besides deep structural checks, one of the very important features of the pattern matching is the binding of the matched parts to local variables. The basic form of binding is just specifying <code>=> variable_name</code> after the matched (sub)pattern (one might find this similar to storing exceptions in local variables in a <code>rescue ExceptionClass => var</code> clause):
-深い構造検査の他のパターンマッチの重要な機能の1つにマッチした部分のローカル変数への束縛があります。束縛の基本的な形はマッチしたパターンの後ろに <code>=> 変数名</code> と書くことです。(この形は rescue 節で <code>rescue ExceptionClass => var</code> の形で例外をローカル変数に格納する形に似ています)
+深い構造検査の他のパターンマッチの重要な機能の1つにマッチした部分のローカル変数への束縛があります。束縛の基本的な形はマッチしたパターンの後ろに 『=> 変数名』 と書くことです。(この形は rescue 節で 『rescue ExceptionClass => var』 の形で例外をローカル変数に格納する形に似ています)
 
 #@samplecode
 case [1, 2]
@@ -350,7 +350,7 @@ end
 #@end
 
 #@# Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
-変数への束縛は現状、<code>|</code> で結合される Alternative パターン と同時には利用できません。
+変数への束縛は現状、『|』 で結合される Alternative パターン と同時には利用できません。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -363,7 +363,7 @@ end
 #@end
 
 #@# Variables that start with <code>_</code> are the only exclusions from this rule:
-<code>_</code> で始まる変数は例外で、Alternative パターン と同時に利用することができます。
+『_』 で始まる変数は例外で、Alternative パターン と同時に利用することができます。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -376,7 +376,7 @@ end
 #@end
 
 #@# It is, though, not advised to reuse the bound value, as this pattern's goal is to signify a discarded value.
-しかし、<code>_</code> で始まる変数の目的は利用しない値を意味するので、束縛された値を再利用することはオススメしません。
+しかし、『_』 で始まる変数の目的は利用しない値を意味するので、束縛された値を再利用することはオススメしません。
 
 #@# == Variable pinning
 == 変数のピン留め
@@ -399,7 +399,7 @@ end
 #@end
 
 #@# For this case, the pin operator <code>^</code> can be used, to tell Ruby "just use this value as part of the pattern":
-この場合、Ruby に「この値をパターンの部品として利用するよ」ということを伝えるためにピン演算子 <code>^</code> を利用することができます。
+この場合、Ruby に「この値をパターンの部品として利用するよ」ということを伝えるためにピン演算子 『^』 を利用することができます。
 
 #@samplecode
 expectation = 18
@@ -516,7 +516,7 @@ end
 #@end
 
 #@# +keys+ are passed to +deconstruct_keys+ to provide a room for optimization in the matched class: if calculating a full hash representation is expensive, one may calculate only the necessary subhash. When the <code>**rest</code> pattern is used, +nil+ is passed as a +keys+ value:
-+keys+ はマッチしたクラスの中で最適化の余地を残して +deconstruct_keys+ へと渡されます。もし全てのハッシュの表現の計算に高い負荷がかかる場合、必要なサブハッシュのみ計算されるかもしれません。<code>**rest</code> パターンが使われている場合、+keys+ の値として +nil+ が渡されます。
++keys+ はマッチしたクラスの中で最適化の余地を残して +deconstruct_keys+ へと渡されます。もし全てのハッシュの表現の計算に高い負荷がかかる場合、必要なサブハッシュのみ計算されるかもしれません。『**rest』 パターンが使われている場合、+keys+ の値として +nil+ が渡されます。
 
 #@samplecode
 case Point.new(1, -2)
@@ -531,7 +531,7 @@ end
 #@end
 
 #@# Additionally, when matching custom classes, the expected class can be specified as part of the pattern and is checked with <code>===</code>
-加えて、カスタムクラスにマッチするとき、期待されるクラスはパターンの部品として明記され <code>===</code> で検査されます
+加えて、カスタムクラスにマッチするとき、期待されるクラスはパターンの部品として明記され 『===』 で検査されます
 
 #@samplecode
 class SuperPoint < Point
@@ -628,7 +628,7 @@ Warning[:experimental] = false # At the time this line is evaluated, the parsing
 つまり、フラグの切り替えによって影響を受けるのは切り替え以降に load されたファイルや `eval` されたコードに限られます。
 
 #@# Alternatively, the command line option <code>-W:no-experimental</code> can be used to turn off "experimental" feature warnings.
-代わりに、コマンドラインオプションとして <code>-W:no-experimental</code> を渡すことで "experimental" な機能に対する警告を出力させないようにできます。
+代わりに、コマンドラインオプションとして 『-W:no-experimental』 を渡すことで "experimental" な機能に対する警告を出力させないようにできます。
 
 #@# == Appendix A. Pattern syntax
 == 付記A: パターンのシンタックス
