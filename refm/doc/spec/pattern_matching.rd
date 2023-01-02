@@ -502,7 +502,7 @@ else
 end
 #@# # prints "deconstruct called"
 # "deconstruct called" が出力されます
-"matched: 1"
+#=> "matched: 1"
 
 case Point.new(1, -2)
 in x: 0.. => px
