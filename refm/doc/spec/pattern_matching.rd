@@ -78,7 +78,7 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 構文の詳細な例と説明は以下を参照してください。
 
 #@# == Patterns
-== パターン
+=== パターン
 
 #@# Patterns can be:
 パターンで利用できるものには次のものがあります。
@@ -252,7 +252,7 @@ end
 #@end
 
 #@# == Variable binding
-== 変数の束縛
+=== 変数の束縛
 
 #@# Besides deep structural checks, one of the very important features of the pattern matching is the binding of the matched parts to local variables. The basic form of binding is just specifying <code>=> variable_name</code> after the matched (sub)pattern (one might find this similar to storing exceptions in local variables in a <code>rescue ExceptionClass => var</code> clause):
 深い構造検査の他のパターンマッチの重要な機能の1つにマッチした部分のローカル変数への束縛があります。束縛の基本的な形はマッチしたパターンの後ろに 『=> 変数名』 と書くことです。(この形は rescue 節で 『rescue ExceptionClass => var』 の形で例外をローカル変数に格納する形に似ています)
@@ -379,7 +379,7 @@ end
 しかし、『_』 で始まる変数の目的は利用しない値を意味するので、束縛された値を再利用することはオススメしません。
 
 #@# == Variable pinning
-== 変数のピン留め
+=== 変数のピン留め
 
 #@# Due to the variable binding feature, existing local variable can not be straightforwardly used as a sub-pattern:
 変数の束縛の機能では存在しているローカル変数をサブパターンとしてそのまま利用することはできません。
@@ -471,7 +471,7 @@ end
 #@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
-== プリミティブなオブジェクト以外とのマッチング: deconstruct と deconstruct_keys
+=== プリミティブなオブジェクト以外とのマッチング: deconstruct と deconstruct_keys
 
 #@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
 既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは deconstruct (これは Array/Find パターンで利用されます) か deconstruct_keys (これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
@@ -556,7 +556,7 @@ end
 #@end
 
 #@# == Guard clauses
-== ガード節
+=== ガード節
 
 #@# +if+ can be used to attach an additional condition (guard clause) when the pattern matches. This condition may use bound variables:
 もしパターンマッチのときに if を用いて追加の条件(ガード節)を指定した場合、変数への束縛がされた状態で条件の判定が行われます。
@@ -595,7 +595,7 @@ end
 #@end
 
 #@# == Current feature status
-== 機能の現状
+=== 機能の現状
 
 #@# As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
 Ruby 3.1 の時点では、Find パターンは 「experimental」 と考えられます。Find パターンのシンタックスは将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
@@ -631,7 +631,7 @@ Warning[:experimental] = false # At the time this line is evaluated, the parsing
 代わりに、コマンドラインオプションとして 『-W:no-experimental』 を渡すことで "experimental" な機能に対する警告を出力させないようにできます。
 
 #@# == Appendix A. Pattern syntax
-== 付記A: パターンのシンタックス
+=== 付記A: パターンのシンタックス
 
 #@# Approximate syntax is:
 おおよその構文は以下のとおりです。
@@ -671,7 +671,7 @@ Warning[:experimental] = false # At the time this line is evaluated, the parsing
               | Constant[key: pattern, key:, ..., **variable]
 
 #@# == Appendix B. Some undefined behavior examples
-== 付記B: `未定義` の振る舞いの例
+=== 付記B: `未定義` の振る舞いの例
 
 #@# To leave room for optimization in the future, the specification contains some undefined behavior.
 将来的な最適化の余地を残すため、仕様には一部 `未定義` の振る舞いが含まれています。
