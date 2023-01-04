@@ -1125,10 +1125,10 @@ p '123456789'.count('2378')          # => 4
 p '123456789'.count('2-8', '^4-6')   # => 4
 
 # ファイルの行数を数える
-n_lines = File.open("foo").read.count("\n")
+n_lines = File.read("foo").count("\n")
 
 # ファイルの末尾に改行コードがない場合にも対処する
-buf = File.open("foo").read
+buf = File.read("foo")
 n_lines = buf.count("\n")
 n_lines += 1 if /[^\n]\z/ =~ buf
            # if /\n\z/ !~ buf だと空ファイルを 1 行として数えてしまうのでダメ
