@@ -80,7 +80,7 @@ Math.atan(0) # => 0.0
 
 --- atan2(y, x) -> Float
 
-y / x の逆正接関数の値を返します。
+y / x の逆正接関数の値をラジアンで返します。
 
 @param y 実数
 @param x 実数
