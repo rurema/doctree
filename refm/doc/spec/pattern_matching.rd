@@ -391,7 +391,7 @@ end
 ===[a:variable_pinning] 変数のピン留め
 
 #@# Due to the variable binding feature, existing local variable can not be straightforwardly used as a sub-pattern:
-変数の束縛の機能では存在しているローカル変数をサブパターンとしてそのまま利用することはできません。
+変数の束縛の機能では存在しているローカル変数を サブパターン(Array/Find/Hashパターン構文の <subpattern> の部分) としてそのまま利用することはできません。
 
 #@samplecode
 expectation = 18
@@ -504,7 +504,7 @@ end
 
 case Point.new(1, -2)
 #@# in px, Integer  # sub-patterns and variable binding works
-in px, Integer  # サブパターンと変数への束縛も動きます
+in px, Integer  # パターンと変数への束縛も動きます
   "matched: #{px}"
 else
   "not matched"
