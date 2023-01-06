@@ -109,13 +109,10 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 Array/Find/Hash パターンの中に 『<subpattern>』 と書かれている場所では任意のパターンをネストさせることができます。
 
 #@# Array patterns and find patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
-Array パターン と Find パターン は配列か deconstruct を持つオブジェクトにマッチします。(deconstruct については後ほど説明します)
+Array パターン と Find パターン は配列か deconstruct メソッドを持つオブジェクトにマッチします。(deconstruct については後ほど説明します)
 
 #@# Hash patterns match hashes, or objects that respond to +deconstruct_keys+ (see below about the latter). Note that only symbol keys are supported for hash patterns.
-Hash パターン はハッシュか deconstruct_keys を持つオブジェクトにマッチします。(deconstruct_keys については後ほど説明します) Hash パターン で利用できるキーはシンボルのみです。
-
-#@# 原文にないが補足のため追加
-※ deconstruct や deconstruct_keys を扱う際の『〜を持つ』の定義は [[m:Object#respond_to?]] と同様です。
+Hash パターン はハッシュか deconstruct_keys メソッドを持つオブジェクトにマッチします。(deconstruct_keys については後ほど説明します) Hash パターン で利用できるキーはシンボルのみです。
 
 #@# An important difference between array and hash pattern behavior is that arrays match only a _whole_ array:
 Array パターン と Hash パターン の挙動の重要な違いは Array パターンは配列の 「全ての」 要素がマッチする必要があるということです。
