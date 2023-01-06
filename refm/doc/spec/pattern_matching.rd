@@ -38,7 +38,7 @@ in 節と when 節は1つの case 式の中に混ぜて書くことはできま�
   <expression> in <pattern>
 
 #@# The +case+/+in+ expression is _exhaustive_: if the value of the expression does not match any branch of the +case+ expression (and the +else+ branch is absent), +NoMatchingPatternError+ is raised.
-case/in 式は 「網羅的」 です。もし case 式の値がどの節にもマッチせず else 節がない場合、NoMatchingPatternError が raise されます。
+case/in 式は 「網羅的」 です。もし case 式の値がどの節にもマッチせず else 節がない場合、例外 NoMatchingPatternError が発生します。
 
 #@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
 そのため、条件付きのマッチングやアンパックに case 式が使われることがあります。
@@ -66,7 +66,7 @@ end
 config = {db: {user: 'admin', password: 'abc123'}}
 
 #@# config => {db: {user:}} # will raise if the config's structure is unexpected
-config => {db: {user:}} # config の構造が予期しないものだった場合は例外が raise されます
+config => {db: {user:}} # config の構造が予期しないものだった場合は例外が発生します
 
 puts "Connect with user '#{user}'"
 #@# # Prints: "Connect with user 'admin'"
