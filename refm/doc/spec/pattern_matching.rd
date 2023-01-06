@@ -206,7 +206,7 @@ end
 #@end
 
 #@# Parentheses around both kinds of patterns could be omitted:
-Array パターン や Hash パターン は両端の 『[]』 や 『{}』 といったカッコを省略できます。
+Array パターン や Hash パターン は両端の 『[]』 や 『{}』 といった括弧を省略できます。
 
 #@samplecode
 case [1, 2]
@@ -465,7 +465,7 @@ end
 #@end
 
 #@# You can also pin the result of arbitrary expressions using parentheses:
-また、カッコを使って任意の式に対してピン演算子を利用できます
+また、括弧を使って任意の式に対してピン演算子を利用できます
 
 #@samplecode
 a = 1
@@ -556,7 +556,7 @@ end
 
 case SuperPoint.new(1, -2)
 #@# in SuperPoint[x: 0.. => px] # [] or () parentheses are allowed
-in SuperPoint[x: 0.. => px] # [] や () といったカッコは許容されます
+in SuperPoint[x: 0.. => px] # [] や () といった括弧は許容されます
   "matched: #{px}"
 else
   "not matched"
