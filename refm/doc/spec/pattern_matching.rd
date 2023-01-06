@@ -11,7 +11,7 @@
   * [[ref:some_undefined_behavior_examples]]
 
 #@# Pattern matching is a feature allowing deep matching of structured values: checking the structure and binding the matched parts to local variables.
-パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチングを可能にする機能です。
+パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチを可能にする機能です。
 
 #@# Pattern matching in Ruby is implemented with the +case+/+in+ expression:
 Rubyでのパターンマッチは case/in 式を用いて実装されています。
@@ -41,7 +41,7 @@ in 節と when 節は1つの case 式の中に混ぜて書くことはできま�
 case/in 式は 「網羅的」 です。もし case 式の値がどの節にもマッチせず else 節がない場合、例外 NoMatchingPatternError が発生します。
 
 #@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
-そのため、条件付きのマッチングやアンパックに case 式が使われることがあります。
+そのため、条件付きのマッチやアンパックに case 式が使われることがあります。
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
@@ -167,7 +167,7 @@ end
 #@end
 
 #@# There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
-また、パターンで明示的に指定されたキー以外にキーが存在しないケースにマッチングさせたい場合、『**nil』 を指定する方法もあります。
+また、パターンで明示的に指定されたキー以外にキーが存在しないケースにマッチさせたい場合、『**nil』 を指定する方法もあります。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -480,7 +480,7 @@ end
 #@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
-===[a:matching_non_primitive_objects] プリミティブなオブジェクト以外とのマッチング: deconstruct と deconstruct_keys
+===[a:matching_non_primitive_objects] プリミティブなオブジェクト以外とのマッチ: deconstruct と deconstruct_keys
 
 #@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
 既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは deconstruct (これは Array/Find パターンで利用されます) か deconstruct_keys (これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
