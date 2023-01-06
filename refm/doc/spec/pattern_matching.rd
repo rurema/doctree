@@ -131,7 +131,7 @@ end
 #@end
 
 #@# while the hash matches even if there are other keys besides the specified part:
-一方 Hash パターン は一部の key だけ指定している場合(指定している key 以外にも key が存在する場合)でもマッチします。
+一方 Hash パターン は一部のキーだけ指定している場合(指定しているキー以外にもキーが存在する場合)でもマッチします。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
@@ -172,7 +172,7 @@ end
 #@samplecode
 case {a: 1, b: 2}
 #@# in {a: Integer, **nil} # this will not match the pattern having keys other than a:
-in {a: Integer, **nil} # これは a: 以外に key を持つパターンのためマッチしません
+in {a: Integer, **nil} # これは a: 以外にキーを持つパターンのためマッチしません
   "matched a part"
 in {a: Integer, b: Integer, **nil}
   "matched a whole"
