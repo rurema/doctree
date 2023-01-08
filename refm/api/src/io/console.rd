@@ -38,20 +38,28 @@ category CUI
 
 文字入力時のエコーバックが有効かどうかを返します。
 
---- raw {|io| ... } -> object
+--- raw(min: 1, time: 0, intr: false) {|io| ... } -> object
 
 raw モード、行編集を無効にして指定されたブロックを評価します。
 
 ブロック引数には self が渡されます。ブロックを評価した結果を返します。
 
+@param min 入力操作 (read) 時に受信したい最小のバイト数を指定します。min 値以上のバイト数を受信するまで、操作がブロッキングされます。
+
+@param time タイムアウトするまでの秒数を指定します。time よりも min が優先されるため、入力バイト数が min 値以上になるまでは、time 値に関わらず操作がブロッキングされます。
+
+@param intr trueを指定した場合は、割り込み (interrupt) 、中止 (quit) 、停止 (suspend) の各シグナルを生成する制御文字が有効になります。端末の制御については、 termios のマニュアル：[[url:https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/termios.h.html]] を参照してください。
+
 @raise LocalJumpError ブロックを指定しなかった場合に発生します。
+
+@raise ArgumentError intr に true または false 以外の値を指定した場合に発生します。
 
 以下の例では、標準入力からエコーバックなしで文字列を一行読み込みます。
 
   require "io/console"
   STDIN.raw(&:gets)
 
---- raw! -> self
+--- raw!(min: 1, time: 0, intr: false) -> self
 
 raw モードを有効にします。端末のモードを後で元に戻す必要がある場合は
 [[m:IO#raw]] を使用してください。
