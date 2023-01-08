@@ -166,10 +166,13 @@ true を返します。そうでない場合に false を返します。
 #@samplecode 例
 Dog = Data.define(:name, :age)
 dog1 = Dog.new("Fred", 5)
-dog2 = Dog.new("Fred", 5)
+dog2 = Dog.new("Fred", 5.0)
+
+p 5 == 5.0            # => true
+p 5.eql?(5.0)         # => false
 
 p dog1 == dog2        # => true
-p dog1.eql?(dog2)     # => true
+p dog1.eql?(dog2)     # => false
 p dog1.equal?(dog2)   # => false
 #@end
 
