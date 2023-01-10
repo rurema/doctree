@@ -54,6 +54,38 @@ fred = Dog.new("Fred", 5)
 fred.age = 6 # => NoMethodError
 #@end
 
+メンバを持たないサブクラスを定義することも可能です。
+以下のように、パターンマッチに利用することができます。
+
+#@samplecode 例
+class HTTPFetcher
+  Response = Data.define(:body)
+  NotFound = Data.define
+
+  def get(url)
+    # ダミーの実装
+    if url == "http://example.com/"
+      Response.new(body: "Current time is #{Time.now}")
+    else
+      NotFound.new
+    end
+  end
+end
+
+def fetch(url)
+  fetcher = HTTPFetcher.new
+  case fetcher.get(url)
+  in HTTPFetcher::Response(body)
+    body
+  in HTTPFetcher::NotFound
+    :NotFound
+  end
+end
+
+p fetch("http://example.com/")     # => "Current time is 2023-01-10 10:00:53 +0900"
+p fetch("http://example.com/404")  # => :NotFound
+#@end
+
 @param args 構造体を定義するための可変長引数。[[c:Symbol]] または [[c:String]] を指定します。
 
 @return Data のサブクラスを返します。
