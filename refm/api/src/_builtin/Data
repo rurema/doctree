@@ -285,8 +285,8 @@ p dog1.equal?(dog2)           # => false
 
 --- hash    -> Integer
 
-self が保持するメンバのハッシュ値を元にして算出した整数を返します。
-self が保持するメンバの値が異なれば、このメソッドが返す値も変化します。
+自身のハッシュ値を整数で返します。
+[[m:Data#eql?]] で比較して等しいオブジェクトは同じハッシュ値を返します。
 
 #@samplecode 例
 Dog = Data.define(:name, :age)
