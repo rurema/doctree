@@ -689,6 +689,25 @@ self を other で割った商を [[c:Float]] で返します。
 
 @see [[m:Numeric#quo]], [[m:Numeric#div]], [[m:Integer#div]]
 
+#@since 3.2
+--- ceildiv(other) -> Integer
+
+self を other で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
+すなわち、self を other で割った商を q とすると、q 以上で最小の整数を返します。
+
+@param other self を割る数を指定します。
+
+#@samplecode
+3.ceildiv(3)    # => 1
+4.ceildiv(3)    # => 2
+5.ceildiv(3)    # => 2
+3.ceildiv(1.2)  # => 3
+-5.ceildiv(3)   # => -1
+-5.ceildiv(-3)  # => 2
+#@end
+
+#@end
+
 --- **(other) -> Numeric
 #@since 2.5.0
 --- pow(other) -> Numeric
