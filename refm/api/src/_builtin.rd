@@ -21,7 +21,9 @@ require を書かなくても使うことができます。
 #@since 2.3.0
 #@include(thread/ConditionVariable)
 #@end
+#@until 3.0.0
 #@include(_builtin/Data)
+#@end
 #@include(_builtin/Dir)
 #@include(_builtin/ENV)
 #@include(_builtin/EOFError)
@@ -29,9 +31,14 @@ require を書かなくても使うことができます。
 #@include(_builtin/Encoding__Converter)
 #@include(_builtin/Enumerable)
 #@include(_builtin/Enumerator)
+#@since 2.6.0
+#@include(_builtin/Enumerator__ArithmeticSequence)
+#@include(_builtin/Enumerator__Chain)
+#@end
 #@since 2.0.0
 #@include(_builtin/Enumerator__Lazy)
 #@end
+#@include(_builtin/Enumerator__Yielder)
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
 #@include(_builtin/Fiber)
@@ -69,6 +76,9 @@ require を書かなくても使うことができます。
 #@include(thread/Mutex)
 #@include(_builtin/NameError)
 #@include(_builtin/NilClass)
+#@since 2.7.0
+#@include(_builtin/NoMatchingPatternError)
+#@end
 #@include(_builtin/NoMemoryError)
 #@include(_builtin/NoMethodError)
 #@include(_builtin/NotImplementedError)
@@ -83,6 +93,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Process__GID)
 #@include(_builtin/Process__Status)
 #@include(_builtin/Process__Sys)
+#@include(_builtin/Process__Tms)
 #@include(_builtin/Process__UID)
 #@since 2.3.0
 #@include(thread/Queue)
@@ -91,10 +102,18 @@ require を書かなくても使うことができます。
 #@include(_builtin/Range)
 #@include(_builtin/RangeError)
 #@include(_builtin/Rational)
+#@since 3.1
+#@include(_builtin/Refinement)
+#@end
 #@include(_builtin/Regexp)
 #@include(_builtin/RegexpError)
 #@include(_builtin/RubyVM)
 #@include(_builtin/RubyVM__InstructionSequence)
+#@since 2.6.0
+#@include(_builtin/RubyVM__MJIT)
+#@include(_builtin/RubyVM__AbstractSyntaxTree)
+#@include(_builtin/RubyVM__AbstractSyntaxTree__Node)
+#@end
 #@include(_builtin/RuntimeError)
 #@include(_builtin/ScriptError)
 #@include(_builtin/SecurityError)
@@ -107,7 +126,6 @@ require を書かなくても使うことができます。
 #@include(_builtin/StopIteration)
 #@include(_builtin/String)
 #@include(_builtin/Struct)
-#@include(_builtin/Struct__Tms)
 #@include(_builtin/Symbol)
 #@include(_builtin/SyntaxError)
 #@include(_builtin/SystemCallError)
@@ -128,6 +146,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/UnboundMethod)
 #@since 2.2.0
 #@include(_builtin/UncaughtThrowError)
+#@end
+#@since 2.4.0
+#@include(_builtin/Warning)
 #@end
 #@include(_builtin/ZeroDivisionError)
 #@include(_builtin/fatal)

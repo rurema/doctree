@@ -6,19 +6,23 @@
 ARGV が空なら標準入力を対象とします。
 ARGV を変更すればこのオブジェクトの動作に影響します。
 
-    while line = ARGF.gets
-      ....
-    end
+#@samplecode
+while line = ARGF.gets
+  # do something
+end
+#@end
 
 は、
 
-    while argv = ARGV.shift
-      File.open(argv) {|file|
-        while line = file.gets
-          ....
-        end
-      }
+#@samplecode
+while argv = ARGV.shift
+  File.open(argv) {|file|
+    while line = file.gets
+      # do something
     end
+  }
+end
+#@end
 
 のように動作します。
 
@@ -26,23 +30,27 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます
 最後まで ARGF を読み込んだ後、再度 ARGF から内容を読むと
 (ARGV が空なので)標準入力からの読み込みとなります。
 
-    ARGV.replace %w(/tmp/foo /tmp/bar)
-    ARGF.each {|line|
-        # 処理中の ARGV の内容を表示
-        p [ARGF.filename, ARGV]
-        ARGF.skip
-    }
-        # => ["/tmp/foo", ["/tmp/bar"]]
-        #    ["/tmp/bar", []]
-    # 最後まで読んだ後 (ARGV が空) の動作
-    p ARGF.gets      # => nil
-    p ARGF.filename  # => "-"
+#@samplecode
+ARGV.replace %w(/tmp/foo /tmp/bar)
+ARGF.each {|line|
+    # 処理中の ARGV の内容を表示
+    p [ARGF.filename, ARGV]
+    ARGF.skip
+}
+    # => ["/tmp/foo", ["/tmp/bar"]]
+    #    ["/tmp/bar", []]
+# 最後まで読んだ後 (ARGV が空) の動作
+p ARGF.gets      # => nil
+p ARGF.filename  # => "-"
+#@end
 
 [[m:Kernel.#gets]] など一部の組み込み関数は
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 また、ARGF は [[c:ARGF.class]] クラスのインスタンスです。
 各メソッドの詳細は [[c:ARGF.class]] を参照してください。
+
+別名として [[m:$<]] でも ARGF と同じオブジェクトにアクセスできます。
 
 ===[a:inplace] インプレースエディットモード
 
@@ -56,7 +64,7 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの�
 
 = class ARGF.class
 
-extend Enumerable
+include Enumerable
 
 [[c:ARGF]] を表すクラスです。
 
@@ -290,13 +298,14 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 @see [[m:IO#each_byte]]
 
+#@until 3.0
 --- bytes { |byte| ... } -> self
 --- bytes                -> Enumerator
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_byte]] を使用してください。
 使用すると警告メッセージが表示されます。
-
+#@end
 --- each_char { |c| ... } -> self
 --- each_char             -> Enumerator
 
@@ -335,13 +344,14 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
 
 @see [[m:IO#each_char]], [[m:IO#chars]]
 
+#@until 3.0
 --- chars { |c| ... } -> self
 --- chars             -> Enumerator
 
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_char]] を使用してください。
 使用すると警告メッセージが表示されます。
-
+#@end
 --- each_codepoint { |c| ... }   -> self
 --- each_codepoint               -> Enumerator
 
@@ -360,6 +370,7 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
   ARGF.each_codepoint                  # => #<Enumerator: ARGF:each_codepoint>
   ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,101,50,10,
 
+#@until 3.0
 #@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
 --- codepoints { |c| ... }       -> self
 --- codepoints                   -> Enumerator
@@ -367,7 +378,7 @@ self の各コードポイントに対して繰り返しブロックを呼びだ
 このメソッドは obsolete です。
 代わりに [[m:ARGF.class#each_codepoint]] を使用してください。
 使用すると警告メッセージが表示されます。
-
+#@end
 --- eof  -> bool
 --- eof? -> bool
 
@@ -502,7 +513,7 @@ ARGFが開いているファイルのファイルポインタを指定位置に�
 ARGVに指定されたファイルを先頭のファイルからlengthバイト読み込み、
 その文字列をstrに出力します。読み込んだ文字列を返します。
 
-@param length 読み込むバイト数を指定します nilの場合はARGVのすべてのファ
+@param length 読み込むバイト数を指定します。nilの場合はARGVのすべてのファ
               イルを読み込みます。
 
 @param str 出力先の文字列。内容は上書きされます。
@@ -518,9 +529,9 @@ ARGVに指定されたファイルを先頭のファイルからlengthバイト�
 
 @see [[m:IO#read]]
 
---- readchar -> Integer
+--- readchar -> String
 
-ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返します。EOF に
+ARGFから 1 文字読み込んで、その文字に対応する String を返します。EOF に
 到達した時には EOFErrorを発生します。
 
 @raise EOFError EOFに達した時発生する
@@ -553,12 +564,12 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 
 @see [[m:Kernel.#readline]], [[m:ARGF.class#gets]]
 
---- readlines(rs = $/) { |line| ... }   -> self
---- readlines(limit) { |line| ... }     -> self
---- readlines(rs, limit) { |line| ... } -> self
---- to_a(rs = $/) { |line| ... }        -> self
---- to_a(limit) { |line| ... }          -> self
---- to_a(rs, limit) { |line| ... }      -> self
+--- readlines(rs = $/)   -> Array
+--- readlines(limit)     -> Array
+--- readlines(rs, limit) -> Array
+--- to_a(rs = $/)        -> Array
+--- to_a(limit)          -> Array
+--- to_a(rs, limit)      -> Array
 
 ARGFの各行を配列に読み込んで返します。rsがnilの場合は要素に各ファイルを
 すべて読み込んだ配列を返します。
@@ -601,6 +612,7 @@ ARGFが現在開いているファイルの[[c:File]]、または[[c:IO]]オブ�
 
 @see [[m:ARGF.class#file]], [[m:ARGF.class#to_write_io]]
 
+#@until 3.0
 --- lines(rs = $/) { |line| ... }   -> self
 --- lines(limit) { |line| ... }     -> self
 --- lines(rs, limit) { |line| ... } -> self
@@ -613,7 +625,7 @@ ARGFが現在開いているファイルの[[c:File]]、または[[c:IO]]オブ�
 使用すると警告メッセージが表示されます。
 
 @see [[m:$/]], [[m:ARGF.class#each_line]]
-
+#@end
 --- getbyte   -> Integer | nil
 
 self から 1 バイト(0..255)を読み込み整数として返します。
@@ -668,7 +680,7 @@ ARGF はスクリプトに指定した引数([[m:Object::ARGV]] を参照) を�
 
 --- argv -> Array
 
-[[m:Kernel::ARGV]] を返します。
+[[m:Object::ARGV]] を返します。
 
 ARGF が ARGV をどう扱うかについては [[c:ARGF]] を参照してください。
 
@@ -848,15 +860,14 @@ ch を返します。
 
 @param arg 出力するオブジェクトを任意個指定します。
 
---- read_nonblock(maxlen)              -> String
---- read_nonblock(maxlen, outbuf)      -> String
 #@since 2.3.0
---- read_nonblock(maxlen, outbuf, exception: true)      -> String
+--- read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
+#@else
+--- read_nonblock(maxlen, outbuf = nil) -> String
 #@end
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
-第二の形式では読み込んだデータを outbuf に破壊的に格納してそれを返します。
 詳しくは [[m:IO#read_nonblock]] を参照してください。
 
 [[m:ARGF.class#read]] などとは違って複数ファイルを同時に読み込むことはありません。

@@ -80,7 +80,11 @@ each メソッドを持ったオブジェクトからならなんでも送るこ
 
 SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼ぶ) を要求
 されます。HELO ドメインは [[m:Net::SMTP.start]], [[m:Net::SMTP#start]]
-の第三引数 helo_domain に指定します。
+#@until 3.0.0
+の第三引数 helo に指定します。
+#@else
+のキーワード引数 helo に指定します。
+#@end
 たいていの SMTP サーバはこの HELO ドメイン
 による認証はあまり真面目に行わないので (簡単に偽造できるからです)
 デフォルト値を用いて問題にならないことが多いのですが、セッションを切られる
@@ -88,8 +92,13 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼�
 ください。もちろんそれ以外の時も HELO ドメインはちゃんと渡すのが
 よいでしょう。
 
+#@until 3.0.0
   require 'net/smtp'
   Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com')
+#@else
+  require 'net/smtp'
+  Net::SMTP.start('smtp.example.com', 25, helo: 'yourdomain.example.com')
+#@end
 
 よくあるダイヤルアップホストの場合、HELO ドメインには ISP のメール
 サーバのドメインを使っておけばたいてい通ります。
@@ -102,14 +111,21 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼�
 認証するためには、[[m:Net::SMTP.start]] もしくは [[m:Net::SMTP#start]]
 の引数に追加の引数を渡してください。
 
+#@until 3.0.0
   # 例
   require 'net/smtp'
   Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com',
                   'your_account', 'your_password', :cram_md5)
+#@else
+  # 例
+  require 'net/smtp'
+  Net::SMTP.start('smtp.example.com', 25,
+                  'user: your_account', password: 'your_password', authtype: :cram_md5)
+#@end
 
 === TLSを用いたSMTP通信
 [[c:Net::SMTP]] は [[RFC:3207]] に基づいた STARTTLS を用いる
-方法、もしくは SMTPS と呼ばれる非標準的な方法
+方法、もしくは [[RFC:8314]] に基づいた方法
 (ポート465を用い、通信全体をTLSで包む)
 によるメール送信の暗号化が可能です。
 
@@ -123,6 +139,7 @@ TLSを用いることで、通信相手の認証、および通信経路の暗�
 送る人、受け取る人を認証する
 必要がある場合は別の方法を考える必要があるでしょう。
 
+#@until 3.0.0
   require 'net/smtp'
   # STARTTLSの例
   smtp = Net::SMTP.new('smtp.example.com', 25)
@@ -132,6 +149,49 @@ TLSを用いることで、通信相手の認証、および通信経路の暗�
   smtp.start() do
     # send messages ...
   end
+#@end
+
+TLS を使用したい場合は enable_tls を使用します。
+
+  require 'net/smtp'
+  # TLSの例
+  smtp = Net::SMTP.new('smtp.example.com', 465)
+  smtp.enable_tls
+  smtp.start do
+    # send messages ...
+  end
+
+#@since 3.0.0
+サーバーが STARTTLS をサポートしている場合は自動的に STARTTLS を使用します。
+サーバーが STARTTLS をサポートしているのに STARTTLS を使用したくない場合は [[m:Net::SMTP#disable_starttls]] を使用します。
+
+  require 'net/smtp'
+  # STARTTLSを使用したくない例
+  smtp = Net::SMTP.new('smtp.example.com', 25)
+  smtp.disable_starttls
+  smtp.start do
+    # send messages ...
+  end
+
+デフォルトではサーバー証明書の検証を行い、正当な証明書でない場合は [[c:OpenSSL::SSL::SSLError]] 例外が発生します。
+証明書の検証を行いたくない場合は +tls_verify: false+ を指定します。
+
+  require 'net/smtp'
+  # 証明書の検証を行いたくない場合
+  Net::SMTP.start('192.168.1.1', 25, tls_verify: false) do |smtp|
+    # send messages ...
+  end
+
+サーバー証明書に引数で指定したホスト名が含まれていなければ [[c:OpenSSL::SSL::SSLError]] 例外が発生します。
+証明書に含まれない名前(IPアドレス等)で接続したい場合は、+tls_hostname+ で証明書のホスト名を指定します。
+
+  require 'net/smtp'
+  # 証明書と異なるホスト名で接続する場合
+  Net::SMTP.start('192.168.1.1', 25, tls_hostname: 'smtp.example.com') do |smtp|
+    # send messages ...
+  end
+#@end
+
 = class Net::SMTP < Object
 alias Net::SMTPSession
 
@@ -156,11 +216,15 @@ port は接続するポート番号です。
 @see [[m:Net::SMTP.start]], [[m:Net::SMTP#start]]
 
 #@until 1.9.1
---- start(address, port = Net::SMTP.default_port, helo_domain = 'localhost.localdomain', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
---- start(address, port = Net::SMTP.default_port, helo_domain = 'localhost.localdomain', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
+--- start(address, port = Net::SMTP.default_port, helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
+--- start(address, port = Net::SMTP.default_port, helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@else
---- start(address, port = Net::SMTP.default_port, helo_domain = 'localhost', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
---- start(address, port = Net::SMTP.default_port, helo_domain = 'localhost', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
+#@since 3.0.0
+--- start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
+--- start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
+#@end
+--- start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
+--- start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@end
 
 新しい SMTP オブジェクトを生成し、サーバに接続し、セッションを開始します。
@@ -168,8 +232,13 @@ port は接続するポート番号です。
 
 以下と同じです。
 
+#@until 3.0.0
   require 'net/smtp'
-  Net::SMTP.new(address, port).start(helo_domain, account, password, authtype)
+  Net::SMTP.new(address, port).start(helo, user, password, authtype)
+#@else
+  require 'net/smtp'
+  Net::SMTP.new(address, port).start(helo: helo, user: user, password: password, authtype: authtype)
+#@end
 
 このメソッドにブロックを与えた場合には、新しく作られた [[c:Net::SMTP]] オブジェクト
 を引数としてそのブロックを呼び、ブロック終了時に自動的に接続を閉じます。
@@ -177,7 +246,7 @@ port は接続するポート番号です。
 返されます。この場合終了時に [[m:Net::SMTP#finish]] を呼ぶのは利用者の責任と
 なります。
 
-account と password の両方が与えられた場合、
+user と password の両方が与えられた場合、
 SMTP AUTH コマンドによって認証を行います。
 authtype は使用する認証のタイプで、
 シンボルで :plain, :login, :cram_md5 を指定します。
@@ -192,8 +261,10 @@ Example:
 
 @param address 接続するサーバをホスト名もしくはIPアドレスで指定します
 @param port ポート番号、デフォルトは 25 です
-@param helo_domain HELO で名乗るドメイン名です
-@param account 認証で使うアカウント名
+@param tls_verify サーバー証明書を検証するか否か
+@param tls_hostname サーバー証明書のホスト名
+@param helo HELO で名乗るドメイン名です
+@param user 認証で使うアカウント名
 @param password 認証で使うパスワード
 @param authtype 認証の種類(:plain, :login, :cram_md5 のいずれか)
 
@@ -207,7 +278,6 @@ Example:
 --- default_port -> Integer
 SMTPのデフォルトのポート番号(25)を返します。
 
-#@since 1.8.7
 --- default_submission_port -> Integer
 デフォルトのサブミッションポート番号(587)を返します。
 
@@ -218,7 +288,6 @@ SSL 通信に使われる SSL のコンテキストのデフォルト値を返�
 --- default_ssl_port -> Integer
 デフォルトのSMTPSのポート番号(465)を返します。
 
-#@end
 
 == Instance Methods
 
@@ -240,7 +309,6 @@ ESMTPモードで [[m:Net::SMTP#start]] を呼び、うまくいかなかった
 
 @see [[m:Net::SMTP#esmtp?]]
 
-#@since 1.8.7
 --- capable_starttls? -> bool
 サーバが STARTTLS を広告してきた場合に真を返します。
 
@@ -340,12 +408,9 @@ ESMTPモードで [[m:Net::SMTP#start]] を呼び、うまくいかなかった
 その Net::SMTP オブジェクトがSTARTTLSを常に使わないよう設定します。
 
 @see [[m:Net::SMTP#starttls?]], [[m:Net::SMTP#enable_starttls]], [[m:Net::SMTP#enable_starttls_auto]]
-#@end
 
 --- set_debug_output(f) -> ()
-#@since 1.8.7
 --- debug_output=(f)
-#@end
 デバッグ出力の出力先を指定します。
 このメソッドは深刻なセキュリティホールの原因となりえます。
 デバッグ用にのみ利用してください。
@@ -353,17 +418,21 @@ ESMTPモードで [[m:Net::SMTP#start]] を呼び、うまくいかなかった
 @param f デバッグ出力先を [[c:IO]] (もしくは << というメソッドを持つクラス)で指定します
 
 #@until 1.9.1
---- start(helo_domain = 'localhost.localdomain', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
---- start(helo_domain = 'localhost.localdomain', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
+--- start(helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
+--- start(helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@else
---- start(helo_domain = 'localhost', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
---- start(helo_domain = 'localhost', account = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
+#@since 3.0.0
+--- start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
+--- start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
+#@end
+--- start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
+--- start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@end
 サーバにコネクションを張り、同時に SMTP セッションを開始します。
 
 もしすでにセッションが開始していたら IOError が発生します。
 
-account と password の両方が与えられた場合、
+user と password の両方が与えられた場合、
 SMTP AUTH コマンドによって認証を行います。
 authtype は使用する認証のタイプで、
 シンボルで :plain, :login, :cram_md5 を指定します。
@@ -374,8 +443,8 @@ authtype は使用する認証のタイプで、
 この場合終了時に [[m:Net::SMTP#finish]] を呼ぶのは利用者の責任と
 なります。
 
-@param helo_domain HELO で名乗るドメイン名です
-@param account 認証で使うアカウント名
+@param helo HELO で名乗るドメイン名です
+@param user 認証で使うアカウント名
 @param password 認証で使うパスワード
 @param authtype 認証の種類(:plain, :login, :cram_md5 のいずれか)
 
@@ -490,7 +559,7 @@ to_addrs には送信先メールアドレスを文字列で渡します。
 
   require 'net/smtp'
 
-  Net::SMTP.start('smtp.exmaple.com', 25) {|smtp|
+  Net::SMTP.start('smtp.example.com', 25) {|smtp|
     smtp.open_message_stream('from@example.com', 'to@example.net') {|f|
       f.puts 'From: from@example.com'
       f.puts 'To: to@example.net'
@@ -515,7 +584,6 @@ ready は obsolete です。
 
 @see [[m:Net::SMTP#send_message]]
 
-#@since 1.8.7
 
 --- authenticate(user, secret, authtype) -> ()
 認証を行います。
@@ -650,14 +718,11 @@ QUIT コマンドを送ります。
 通常は [[m:Net::SMTP#finish]] で
 QUIT が送られるため利用する必要はないはずです。
 
-#@end
 
 == Constants
 
-#@since 1.8.7
 --- DEFAULT_AUTH_TYPE -> Symbol
 デフォルトの認証スキーム(:plain)です。
-#@end
 
 #@# internal constants for CRAM-MD5 authentication
 #@# --- IMASK
@@ -667,10 +732,8 @@ QUIT が送られるため利用する必要はないはずです。
 --- Revision -> String
 ファイルのリビジョンです。使わないでください。
 
-#@since 1.8.7
 = class Net::SMTP::Response < Object
 [[c:Net::SMTP]] の内部用クラスです。
-#@end
 
 = module Net::SMTPError
 SMTP 関連の例外に include されるモジュールです。

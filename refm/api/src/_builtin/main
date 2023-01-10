@@ -30,6 +30,9 @@ p public_methods(false) - basic_public_methods
 #@end
 
 --- public(*name) -> Object
+#@since 3.0
+--- public(names) -> Object
+#@end
 
 メソッドを public に設定します。
 
@@ -39,7 +42,10 @@ p public_methods(false) - basic_public_methods
 引数が与えられた時には引数によって指定されたメソッドを public に設
 定します。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
@@ -48,6 +54,9 @@ p public_methods(false) - basic_public_methods
 @see [[m:Module#public]]
 
 --- private(*name) -> Object
+#@since 3.0
+--- private(names) -> Object
+#@end
 
 メソッドを private に設定します。
 
@@ -57,7 +66,10 @@ p public_methods(false) - basic_public_methods
 引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
 れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
 
@@ -76,9 +88,9 @@ p public_methods(false) - basic_public_methods
 
 --- include(*modules) -> self
 
-引数 modules で指定したモジュールを後ろから順番にインクルードします。
+引数 modules で指定したモジュールを後ろから順番に [[c:Object]] にインクルードします。
 
-@param moddules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
+@param modules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
 @raise ArgumentError 継承関係が循環してしまうような include を行った場
                      合に発生します。
@@ -120,7 +132,7 @@ hypot(3, 4)  # => 5.0
 有効にした拡張の有効範囲については以下を参照してください。
 
 #@since 2.1.0
- * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]]
 #@else
  * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]]
 #@end

@@ -106,13 +106,11 @@ DBM ファイルをクローズします。
 
 以後の操作は例外 [[c:RuntimeError]] を発生させます。
 
-#@since 1.8.3
 --- closed? -> bool
 
 DBM ファイルが既に閉じられている場合は、真を返します。
 そうでない場合は、偽を返します。
 
-#@end
 
 --- delete(key) -> object | nil
 --- delete(key) {|key| ... } -> object
@@ -461,7 +459,6 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 
 この定数は libgdbm version 1.8.0 以降より有効です。
 
-#@since 1.8.2
 --- READER -> Integer
 
 [[m:GDBM.open]] の第3引数に指定します。
@@ -486,7 +483,6 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 [[m:GDBM.open]] の第3引数に指定します。
 
 書き込みモードで、すでにファイルが存在したら削除してから作り直します。
-#@end
 
 
 = class GDBMError < StandardError

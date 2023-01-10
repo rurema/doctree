@@ -14,13 +14,15 @@ Psych を用いると YAML のパースと出力ができます。
 
 === 基本的な使いかた
 
-  require 'psych'
-  # YAML のテキストをパースする
-  Psych.load("--- foo") # => "foo"
+#@samplecode
+require 'psych'
+# YAML のテキストをパースする
+Psych.load("--- foo") # => "foo"
 
-  # YAML のデータを出力
-  Psych.dump("foo")     # => "--- foo\n...\n"
-  { :a => 'b'}.to_yaml  # => "---\n:a: b\n"
+# YAML のデータを出力
+Psych.dump("foo")     # => "--- foo\n...\n"
+{ :a => 'b'}.to_yaml  # => "---\n:a: b\n"
+#@end
 
 基本的な使い方はこれだけです。簡単な用事は
 [[m:Psych.load]]、[[m:Psych.dump]] で片付きます。
@@ -158,14 +160,120 @@ Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 #@end
 #@end
 
-#@since 2.0
+#@since 2.6.0
+#@since 3.0.0
+--- safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
+--- safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
+#@else
+--- safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false) -> object
+--- safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
+#@end
+
+安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+
+デフォルトでは以下のクラスのオブジェクトしか変換しません。
+
+ * TrueClass
+ * FalseClass
+ * NilClass
+ * Numeric
+ * String
+ * Array
+ * Hash
+
+再帰的なデータ構造はデフォルトでは許可されていません。
+
+任意のクラスを許可するにはキーワード引数 permitted_classes を指定すると、
+そのクラスが追加されます。例えば Date クラスを許可するには
+以下のように書いてください:
+
+#@samplecode permitted_classes: に Date を渡した例
+Psych.safe_load(yaml, permitted_classes: [Date])
+#@end
+
+すると上のクラス一覧に加えて Date クラスが読み込まれます。
+
+エイリアスはキーワード引数 aliases を指定することで明示的に許可できます。
+
+#@samplecode aliases: true の例
+x = []
+x << x
+yaml = Psych.dump x
+Psych.safe_load yaml                # => 例外発生
+Psych.safe_load yaml, aliases: true # => エイリアスが読み込まれる
+#@end
+
+yaml に許可されていないクラスが含まれていた場合は、
+Psych::DisallowedClass 例外が発生します。
+
+yaml がエイリアスを含んでいてキーワード引数 aliases が false の時、
+Psych::BadAlias 例外が発生します。
+
+filename はパース中に発生した例外のメッセージに用います。
+
+キーワード引数 symbolize_names に true を指定した場合はハッシュのキー
+を [[c:Symbol]] に変換して返します。
+
+#@samplecode symbolize_names: true の例
+Psych.safe_load("---\n foo: bar")                         # => {"foo"=>"bar"}
+Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
+#@end
+
+#@since 3.0.0
+キーワード引数 freeze に true を指定した場合は再帰的に
+[[m:Object#freeze]] したオブジェクトを返します。
+
+#@samplecode freeze: true の例
+require "psych"
+
+data = <<~EOS
+aaa:
+  bbb: [hoge]
+EOS
+
+yaml = Psych.load(data, freeze: true)
+p yaml
+# => {"aaa"=>{"bbb"=>["hoge"]}}
+p yaml.frozen?                        # = true
+p yaml["aaa"].frozen?                 # = true
+p yaml["aaa"]["bbb"].frozen?          # = true
+p yaml["aaa"]["bbb"].first.frozen?    # = true
+#@end
+#@end
+
+また legacy_permitted_classes などのオプション引数は非推奨な引数となっています。
+[[m:$-w]] が true の時にオプション引数を渡すと警告が出力されます。
+
+#@samplecode オプション引数を使用した例
+# warning: Passing permitted_classes with the 2nd argument of Psych.safe_load is deprecated. Use keyword argument like Psych.safe_load(yaml, permitted_classes: ...) instead.
+Psych.safe_load("", [Date])
+#@end
+
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト。
+@param permitted_classes 追加で読み込みを許可するクラスの配列。
+@param permitted_symbols 引数 permitted_classesに [[c:Symbol]] を含む場
+                         合に読み込みを許可する [[c:Symbol]] の配列。
+                         省略した場合は全ての [[c:Symbol]] を許可します。
+@param aliases エイリアスの読み込みを許可するかどうか。
+@param filename [[c:Psych::SyntaxError]] 発生時にファイル名として表示する文字列。
+@param fallback 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは nil です。
+@param symbolize_names ハッシュ(YAMLの仕様では正確にはマッピング)のキー
+                       を [[c:Symbol]] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは
+                       文字列に変換されます。
+#@since 3.0.0
+@param freeze true を指定すると再帰的に freeze されたオブジェクトを返します。
+              デフォルトは false です。
+#@end
+
+#@else
 #@since 2.5.0
 --- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil, symbolize_names: false) -> object
 #@else
 --- safe_load(yaml, whitelist_classes = [], whitelist_symbols = [], aliases = false, filename = nil) -> object
 #@end
 
-安全に YAML YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
+安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 
 デフォルトでは以下のクラスのオブジェクトしか変換しません。
 
@@ -182,19 +290,21 @@ Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 そのクラスが追加されます。例えば Date クラスを許可するには
 以下のように書いてください:
 
-  Psych.safe_load(yaml, [Date])
+#@samplecode
+Psych.safe_load(yaml, [Date])
+#@end
 
 すると上のクラス一覧に加えて Date クラスが読み込まれます。
 
 エイリアスは aliases パラメーターを変更することで明示的に許可できます。
 
-例:
-
-  x = []
-  x << x
-  yaml = Psych.dump x
-  Psych.safe_load yaml               # => 例外発生
-  Psych.safe_load yaml, [], [], true # => エイリアスが読み込まれる
+#@samplecode 例
+x = []
+x << x
+yaml = Psych.dump x
+Psych.safe_load yaml               # => 例外発生
+Psych.safe_load yaml, [], [], true # => エイリアスが読み込まれる
+#@end
 
 yaml にホワイトリストにないクラスが含まれていた場合は、
 Psych::DisallowedClass 例外が発生します。
@@ -244,16 +354,16 @@ AST については [[c:Psych::Nodes]] を参照してください。
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.load]]
 
-=== 例
+#@samplecode 例
+Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
 
-  Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
-
-  begin
-    Psych.parse("--- `", "file.txt")
-  rescue Psych::SyntaxError => ex
-    p ex.file    # => 'file.txt'
-    p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
-  end
+begin
+  Psych.parse("--- `", "file.txt")
+rescue Psych::SyntaxError => ex
+  p ex.file    # => 'file.txt'
+  p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
+end
+#@end
 
 --- parse_file(filename) -> Psych::Nodes::Document
 filename で指定したファイルをパースして YAML の AST を返します。
@@ -281,8 +391,9 @@ yaml が 複数の YAML ドキュメントを含む場合を取り扱うこと�
 
 @see [[c:Psych::Nodes]]
 
-=== 例
-  Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
+#@samplecode 例
+Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
+#@end
 
 --- dump(o, options = {}) -> String
 --- dump(o, io, options = {}) -> ()
@@ -301,27 +412,28 @@ options で出力に関するオプションを以下の指定できます。
 @param io 出力先
 @param options 出力オプション
 
-=== 例
+#@samplecode 例
+# Dump an array, get back a YAML string
+Psych.dump(['a', 'b'])  # => "---\n- a\n- b\n"
 
-  # Dump an array, get back a YAML string
-  Psych.dump(['a', 'b'])  # => "---\n- a\n- b\n"
+# Dump an array to an IO object
+Psych.dump(['a', 'b'], StringIO.new)  # => #<StringIO:0x000001009d0890>
 
-  # Dump an array to an IO object
-  Psych.dump(['a', 'b'], StringIO.new)  # => #<StringIO:0x000001009d0890>
+# Dump an array with indentation set
+Psych.dump(['a', ['b']], :indentation => 3) # => "---\n- a\n-  - b\n"
 
-  # Dump an array with indentation set
-  Psych.dump(['a', ['b']], :indentation => 3) # => "---\n- a\n-  - b\n"
-
-  # Dump an array to an IO with indentation set
-  Psych.dump(['a', ['b']], StringIO.new, :indentation => 3)
+# Dump an array to an IO with indentation set
+Psych.dump(['a', ['b']], StringIO.new, :indentation => 3)
+#@end
 
 --- dump_stream(*objects) -> String
 オブジェクト列を YAML ドキュメント列に変換します。
 
 @param objects 変換対象のオブジェクト列
 
-=== 例
-  Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
+#@samplecode 例
+Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
+#@end
 
 --- to_json(o) -> String
 Ruby のオブジェクト o を JSON の文字列に変換します。
@@ -335,14 +447,19 @@ Ruby のオブジェクトに変換します。
 
 ブロックなしの場合はオブジェクトの配列を返します。
 
-  Psych.load_stream("--- foo\n...\n--- bar\n...") # => ['foo', 'bar']
+#@samplecode 例
+Psych.load_stream("--- foo\n...\n--- bar\n...") # => ['foo', 'bar']
+#@end
 
 ブロックありの場合は各オブジェクト引数としてそのブロックを呼び出します。
-  list = []
-  Psych.load_stream("--- foo\n...\n--- bar\n...") do |ruby|
-    list << ruby
-  end
-  list # => ['foo', 'bar']
+
+#@samplecode 例
+list = []
+Psych.load_stream("--- foo\n...\n--- bar\n...") do |ruby|
+  list << ruby
+end
+list # => ['foo', 'bar']
+#@end
 
 filename はパース中に発生した例外のメッセージに用います。
 
@@ -357,6 +474,7 @@ Ruby のオブジェクトに変換します。
 @param filename ファイル名
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 
+#@until 2.5.0
 --- load_documents(yaml) ->[object]
 --- load_documents(yaml){|obj| ... } -> ()
 複数の YAML ドキュメントを含むデータを
@@ -366,6 +484,7 @@ Ruby のオブジェクトに変換します。
 
 @param yaml YAML ドキュメント(文字列 or IO オブジェクト)
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
+#@end
 
 #@# Deprecated methods, no documents in psych lib
 #@# --- quick_emit

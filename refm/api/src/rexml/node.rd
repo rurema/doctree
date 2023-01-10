@@ -36,7 +36,6 @@ XML tree 上のノードを表すモジュール。
 
 @see [[m:REXML::Parent#parent?]]
 
-#@since 1.8.3
 --- each_recursive {|node| ... } -> ()
 self とその各 element node を引数とし、ブロックを呼び出します。
 
@@ -52,5 +51,3 @@ self の親における index を返します。
 返される index は 1-origin です。
 
 ノードが親を持たない([[c:REXML::Child]] でない)場合は例外を発生させます。
-
-#@end

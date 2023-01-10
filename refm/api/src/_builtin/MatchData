@@ -20,14 +20,16 @@ n の値が負の時には末尾からのインデックスと見倣します(�
 
 @param n 返す部分文字列のインデックスを指定します。
 
-  /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.to_a       # => ["foobar", "foo", "bar", nil]
-  p $~[0]         # => "foobar"
-  p $~[1]         # => "foo"
-  p $~[2]         # => "bar"
-  p $~[3]         # => nil        (マッチしていない)
-  p $~[4]         # => nil        (範囲外)
-  p $~[-2]        # => "bar"
+#@samplecode 例
+/(foo)(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.to_a       # => ["foobar", "foo", "bar", nil]
+p $~[0]         # => "foobar"
+p $~[1]         # => "foo"
+p $~[2]         # => "bar"
+p $~[3]         # => nil        (マッチしていない)
+p $~[4]         # => nil        (範囲外)
+p $~[-2]        # => "bar"
+#@end
 
 --- [](range) -> [String]
 
@@ -35,15 +37,19 @@ n の値が負の時には末尾からのインデックスと見倣します(�
 
 @param range start..end 範囲式。
 
-  /(foo)(bar)/ =~ "foobarbaz"
-  p $~[0..2]      # => ["foobar", "foo", "bar"]
+#@samplecode 例
+/(foo)(bar)/ =~ "foobarbaz"
+p $~[0..2]      # => ["foobar", "foo", "bar"]
+#@end
 
 --- [](start, length) -> [String]
 
 start 番目から length 個の要素を含む部分配列を返します。
 
-  /(foo)(bar)/ =~ "foobarbaz"
-  p $~[0, 3]      # => ["foobar", "foo", "bar"]
+#@samplecode 例
+/(foo)(bar)/ =~ "foobarbaz"
+p $~[0, 3]      # => ["foobar", "foo", "bar"]
+#@end
 
 @see [[m:Array#[] ]]
 
@@ -54,8 +60,11 @@ name という名前付きグループにマッチした文字列を返します
 @param name 名前(シンボルか文字列)
 @raise IndexError 指定した名前が正規表現内に含まれていない場合に発生します
 
-  /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
-  /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
+#@samplecode 例
+/\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
+/(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
+#@end
+
 --- begin(n) -> Integer | nil
 
 n 番目の部分文字列先頭のオフセットを返します。
@@ -67,12 +76,14 @@ n 番目の部分文字列がマッチしていなければ nilを返します�
 
 @raise IndexError 範囲外の n を指定した場合に発生します。
 
-  /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.begin(0)   # => 0
-  p $~.begin(1)   # => 0
-  p $~.begin(2)   # => 3
-  p $~.begin(3)   # => nil
-  p $~.begin(4)   # => `begin': index 4 out of matches (IndexError)
+#@samplecode 例
+/(foo)(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.begin(0)   # => 0
+p $~.begin(1)   # => 0
+p $~.begin(2)   # => 3
+p $~.begin(3)   # => nil
+p $~.begin(4)   # => `begin': index 4 out of matches (IndexError)
+#@end
 
 @see [[m:MatchData#end]]
 
@@ -87,12 +98,14 @@ n 番目の部分文字列がマッチしていなければ nil を返します�
 
 @raise IndexError 範囲外の n を指定した場合に発生します。
 
-  /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.end(0)   # => 6
-  p $~.end(1)   # => 3
-  p $~.end(2)   # => 6
-  p $~.end(3)   # => nil
-  p $~.end(4)   # => `end': index 4 out of matches (IndexError)
+#@samplecode 例
+/(foo)(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.end(0)   # => 6
+p $~.end(1)   # => 3
+p $~.end(2)   # => 6
+p $~.end(3)   # => nil
+p $~.end(4)   # => `end': index 4 out of matches (IndexError)
+#@end
 
 @see [[m:MatchData#begin]]
 
@@ -103,30 +116,32 @@ n 番目の部分文字列がマッチしていなければ nil を返します�
 [[m:MatchData#to_a]] と異なり [[m:$&]] を要素に含みません。
 グループにマッチした部分文字列がなければ対応する要素は nil になります。
 
-  /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.to_a       # => ["foobar", "foo", "bar", nil]
-  p $~.captures       # => ["foo", "bar", nil]
-
-#@since 2.4.0
-@see [[m:MatchData#to_a]], [[m:MatchData#named_captures]]
-#@else
-@see [[m:MatchData#to_a]]
+#@samplecode 例
+/(foo)(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.to_a       # => ["foobar", "foo", "bar", nil]
+p $~.captures   # => ["foo", "bar", nil]
 #@end
+
+@see [[m:MatchData#to_a]], [[m:MatchData#named_captures]]
 
 --- length -> Integer
 --- size -> Integer
 
 部分文字列の数を返します(self.to_a.size と同じです)。
 
-  /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.size       # => 4
+#@samplecode 例
+/(foo)(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.size       # => 4
+#@end
 
---- offset(n) -> [Integer]
+--- offset(n) -> [Integer, Integer] | [nil, nil]
 
 n 番目の部分文字列のオフセットの配列 [start, end] を返
 します。
 
-  [ self.begin(n), self.end(n) ]
+#@samplecode 例
+[ self.begin(n), self.end(n) ]
+#@end
 
 と同じです。n番目の部分文字列がマッチしていなければ
 [nil, nil] を返します。
@@ -135,14 +150,88 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 @raise IndexError 範囲外の n を指定した場合に発生します。
 
+#@since 3.2
+@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#offset]]
+#@else
 @see [[m:MatchData#begin]], [[m:MatchData#end]]
+#@end
+--- offset(name) -> [Integer, Integer] | [nil, nil]
 
+name という名前付きグループに対応する部分文字列のオフセットの配列 [start, end] を返
+します。
+
+#@samplecode 例
+[ self.begin(name), self.end(name) ]
+#@end
+
+と同じです。nameの名前付きグループにマッチした部分文字列がなければ
+[nil, nil] を返します。
+
+@param name 名前(シンボルか文字列)
+
+@raise IndexError 正規表現中で定義されていない name を指定した場合に発生します。
+
+#@samplecode 例
+/(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
+p $~.offset('year')    # => [0, 4]
+p $~.offset(:year)     # => [0, 4]
+p $~.offset('month')   # => [5, 6]
+p $~.offset(:month)    # => [5, 6]
+p $~.offset('day')     # => [nil, nil]
+p $~.offset('century') # => `offset': undefined group name reference: century (IndexError)
+#@end
+
+#@since 3.2
+@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#offset]]
+#@else
+@see [[m:MatchData#begin]], [[m:MatchData#end]]
+#@end
+#@since 3.2
+--- byteoffset(n) -> [Integer, Integer] | [nil, nil]
+
+n 番目の部分文字列のバイト単位のオフセットの
+配列 [start, end] を返します。
+
+n番目の部分文字列がマッチしていなければ [nil, nil] を返します。
+
+@param n 部分文字列を指定する数値
+
+@raise IndexError 範囲外の n を指定した場合に発生します。
+
+@see [[m:MatchData#offset]]
+
+--- byteoffset(name) -> [Integer, Integer] | [nil, nil]
+
+name という名前付きグループに対応する部分文字列のバイト単位のオフセットの
+配列 [start, end] を返します。
+
+nameの名前付きグループにマッチした部分文字列がなければ
+[nil, nil] を返します。
+
+@param name 名前(シンボルか文字列)
+
+@raise IndexError 正規表現中で定義されていない name を指定した場合に発生します。
+
+#@samplecode 例
+/(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
+p $~.byteoffset('year')    # => [0, 4]
+p $~.byteoffset(:year)     # => [0, 4]
+p $~.byteoffset('month')   # => [7, 8]
+p $~.byteoffset(:month)    # => [7, 8]
+p $~.byteoffset('day')     # => [nil, nil]
+p $~.byteoffset('century') # => `offset': undefined group name reference: century (IndexError)
+#@end
+
+@see [[m:MatchData#offset]]
+#@end
 --- post_match -> String
 
 マッチした部分より後ろの文字列を返します([[m:$']]と同じ)。
 
-  /(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.post_match # => "baz"
+#@samplecode 例
+/(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.post_match # => "baz"
+#@end
 
 @see [[m:MatchData#pre_match]]
 
@@ -150,38 +239,12 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 マッチした部分より前の文字列を返します([[m:$`]]と同じ)。
 
-  /(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.pre_match  # => "foo"
+#@samplecode 例
+/(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.pre_match  # => "foo"
+#@end
 
 @see [[m:MatchData#post_match]]
-
-#@since 1.8.0
-#@until 1.9.1
-#@until 1.8.1
---- select(*index)    -> [String]
-#@end
---- select {|s| ... } -> [String]
-#@until 1.8.1
-引数が指定された場合は、正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
-
-ブロックを与えられた場合は、
-各要素に対してブロックを評価した値が真であった要素を全て含む配列を
-返します。真になる要素がひとつもなかった場合は空の配列を返します。
-
-@param index インデックスを整数で 0 個以上指定します。
-
-#@else
-各要素に対してブロックを評価した値が真であった要素を全て含む配列を
-返します。真になる要素がひとつもなかった場合は空の配列を返します。
-
-self.to_a.select { ... } と同じです。
-
-   m = /(.)(.)(\d+)(\d)/.match("THX1138: The Movie")
-   p m.select{|x| /X/ =~ x}   #=> ["HX1138", "X"]
-
-#@end
-#@end
-#@end
 
 --- string -> String
 
@@ -189,15 +252,19 @@ self.to_a.select { ... } と同じです。
 
 返す文字列はフリーズ([[m:Object#freeze]])されています。
 
-  m = /(.)(.)(\d+)(\d)/.match("THX1138.")
-  m.string   # => "THX1138."
+#@samplecode 例
+m = /(.)(.)(\d+)(\d)/.match("THX1138.")
+m.string   # => "THX1138."
+#@end
 
 --- to_a -> [String]
 
 [[m:$&]], [[m:$1]], [[m:$2]],... を格納した配列を返します。
 
-  /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
-  p $~.to_a       # => ["foobar", "foo", "bar", nil]
+#@samplecode 例
+/(foo)(bar)(BAZ)?/ =~ "foobarbaz"
+p $~.to_a       # => ["foobar", "foo", "bar", nil]
+#@end
 
 @see [[m:MatchData#captures]]
 
@@ -205,74 +272,73 @@ self.to_a.select { ... } と同じです。
 
 マッチした文字列全体を返します。
 
-  /bar/ =~ "foobarbaz"
-  p $~            # => #<MatchData:0x401b1be4>
-  p $~.to_s       # => "bar"
+#@samplecode 例
+/bar/ =~ "foobarbaz"
+p $~            # => #<MatchData:0x401b1be4>
+p $~.to_s       # => "bar"
+#@end
 
 --- inspect -> String
 
 self の内容を人間に読みやすい文字列にして返します。
 
-  puts /.$/.match("foo").inspect
-  # => #<MatchData "o">
+#@samplecode 例
+puts /.$/.match("foo").inspect
+# => #<MatchData "o">
 
-  puts /(.)(.)(.)/.match("foo").inspect
-  # => #<MatchData "foo" 1:"f" 2:"o" 3:"o">
+puts /(.)(.)(.)/.match("foo").inspect
+# => #<MatchData "foo" 1:"f" 2:"o" 3:"o">
 
-  puts /(.)(.)?(.)/.match("fo").inspect
-  # => #<MatchData "fo" 1:"f" 2:nil 3:"o">
+puts /(.)(.)?(.)/.match("fo").inspect
+# => #<MatchData "fo" 1:"f" 2:nil 3:"o">
 
-  puts /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").inspect
-  # => #<MatchData "hog" foo:"h" bar:"o" baz:"g">
+puts /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").inspect
+# => #<MatchData "hog" foo:"h" bar:"o" baz:"g">
+#@end
 
-#@since 1.8.0
 --- values_at(*index) -> [String]
 
 正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
 
 0 番目は [[m:$&]] のようにマッチした文字列全体を表します。
 
-#@since 2.4.0
 @param index インデックスを整数またはシンボル(名前付きキャプチャの場合)で 0 個以上指定します。
-#@else
-@param index インデックスを整数で 0 個以上指定します。
-#@end
 
-  m = /(foo)(bar)(baz)/.match("foobarbaz")
-  # same as m.to_a.values_at(...)
-  p m.values_at(0, 1, 2, 3, 4)      #=> ["foobarbaz", "foo", "bar", "baz", nil]
-  p m.values_at(-1, -2, -3, -4, -5) #=> ["baz", "bar", "foo", nil, nil]
+#@samplecode 例
+m = /(foo)(bar)(baz)/.match("foobarbaz")
+# same as m.to_a.values_at(...)
+p m.values_at(0, 1, 2, 3, 4)      # => ["foobarbaz", "foo", "bar", "baz", nil]
+p m.values_at(-1, -2, -3, -4, -5) # => ["baz", "bar", "foo", nil, nil]
 
-#@since 2.4.0
-  m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
-  m.to_a               #=> ["1 + 2", "1", "+", "2"]
-  m.values_at(:a, :b, :op) #=> ["1", "2", "+"]
+m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
+m.to_a                   # => ["1 + 2", "1", "+", "2"]
+m.values_at(:a, :b, :op) # => ["1", "2", "+"]
 #@end
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 
-#@end
-#@since 1.9.1
 --- names -> [String]
 
 名前付きキャプチャの名前を文字列配列で返します。
 
 self.regexp.names と同じです。
 
-    /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
-    #=> ["foo", "bar", "baz"]
+#@samplecode 例
+/(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
+# => ["foo", "bar", "baz"]
 
-    m = /(?<x>.)(?<y>.)?/.match("a") #=> #<MatchData "a" x:"a" y:nil>
-    m.names                          #=> ["x", "y"]
+m = /(?<x>.)(?<y>.)?/.match("a") # => #<MatchData "a" x:"a" y:nil>
+m.names                          # => ["x", "y"]
+#@end
 
 --- regexp -> Regexp
 自身の元になった正規表現オブジェクトを返します。
 
-    m = /a.*b/.match("abc")
-    m.regexp #=> /a.*b/
-
+#@samplecode 例
+m = /a.*b/.match("abc")
+m.regexp # => /a.*b/
 #@end
-#@since 1.9.2
+
 --- hash -> Integer
 
 self のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
@@ -287,26 +353,51 @@ false を返します。
 
 @param other 比較対象のオブジェクトを指定します。
 
+#@samplecode 文字列
+s = "abc"
+m1 = s.match("a")
+m2 = s.match("b")
+m1 == m2  # => false
+m2 = s.match("a")
+m1 == m2  # => true
 #@end
-#@since 2.4.0
+
+#@samplecode 正規表現
+r = /abc/
+m1 = r.match("abc")   # => #<MatchData "abc">
+m2 = r.match("abcde") # => #<MatchData "abc">
+m1 == m2  # => false
+m2 = r.match("abc")   # => #<MatchData "abc">
+m1 == m2  # => true
+#@end
+
+#@samplecode 正規表現のマッチした位置
+r = /abc/
+m1 = r.match("abcabc")    # => #<MatchData "abc">
+m2 = r.match("abcabc", 3) # => #<MatchData "abc">
+m1 == m2  # => false
+m2 = r.match("abcabc", 0) # => #<MatchData "abc">
+m1 == m2  # => true
+#@end
+
 --- named_captures -> Hash
 
 名前付きキャプチャをHashで返します。
 
 Hashのキーは名前付きキャプチャの名前です。Hashの値はキーの名前に対応した名前付きグループのうち最後にマッチした文字列です。
 
-例:
-  m = /(?<a>.)(?<b>.)/.match("01")
-  m.named_captures #=> {"a" => "0", "b" => "1"}
+#@samplecode 例
+m = /(?<a>.)(?<b>.)/.match("01")
+m.named_captures # => {"a" => "0", "b" => "1"}
 
-  m = /(?<a>.)(?<b>.)?/.match("0")
-  m.named_captures #=> {"a" => "0", "b" => nil}
+m = /(?<a>.)(?<b>.)?/.match("0")
+m.named_captures # => {"a" => "0", "b" => nil}
 
-  m = /(?<a>.)(?<a>.)/.match("01")
-  m.named_captures #=> {"a" => "1"}
+m = /(?<a>.)(?<a>.)/.match("01")
+m.named_captures # => {"a" => "1"}
 
-  m = /(?<a>x)|(?<a>y)/.match("x")
-  m.named_captures #=> {"a" => "x"}
+m = /(?<a>x)|(?<a>y)/.match("x")
+m.named_captures # => {"a" => "x"}
+#@end
 
 @see [[m:MatchData#captures]]
-#@end

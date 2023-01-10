@@ -108,7 +108,7 @@ revs には失効した証明書を [[c:OpenSSL::X509::Revoked]] の配列で渡
 
 rev は失効した証明書を表す [[c:OpenSSL::X509::Revoked]] オブジェクトです。
 
-帰り値は rev です。
+返り値は rev です。
 
 @param rev 追加する失効した証明書を表すオブジェクト
 @raise OpenSSL::X509::CRLError 追加に失敗した場合に発生します

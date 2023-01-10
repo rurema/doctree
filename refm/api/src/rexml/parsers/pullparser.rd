@@ -2,7 +2,7 @@
 プル方式の XML パーサ。
 
 [[c:REXML::Parsers::StreamParser]] はパースした結果をコールバックによって
-受動的に受け取りますが、このパーサは [[m:REXML::Parsers::PullParser#pull]] 
+受動的に受け取りますが、このパーサは [[m:REXML::Parsers::PullParser#pull]]
 によってパーサから結果をイベントという形で順に能動的に取り出します。
 外部的にはこのクラスのオブジェクトはイベントのキューと見なせます。
 pull はそのキューの先頭を取り出し、キューから取り除きます。
@@ -42,7 +42,7 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
   DTDの属性リスト宣言。属性名とデフォルト値 は { 属性名文字列 => デフォルト値文字列(なければnil) } という [[c:Hash]]
 : elementdecl (宣言文字列)
   DTDの要素宣言
-: entitydecl 
+: entitydecl
   DTDの実体宣言
 : notationdecl (記法名文字列, "PUBLIC" | "SYSTEM" | nil, 公開識別子文字列 | nil, URI文字列 | nil)
   DTDの記法宣言
@@ -50,68 +50,69 @@ pull は [[c:REXML::Parsers::PullEvent]] オブジェクトを返します。
 : cdata (テキスト文字列)
   cdata セクション
 : xmldecl (バージョン文字列, エンコーディング文字列 | nil, standalone ("yes" | "no" | nil))
-  XML宣言 
+  XML宣言
 : externalentity (エンティティ文字列)
   doctype内のパラメータ実体参照。
-  
-=== 例
-  require 'rexml/parsers/pullparser'
-  xml = <<EOS
-  <?xml version="1.0" encoding="UTF-8" ?>
-  <?xml-stylesheet type="text/css" href="style.css"?>
-  <!DOCTYPE root SYSTEM "foo" [
-    <!ELEMENT root (a+)>
-    <!ELEMENT a>
-    <!ENTITY bar "barbarbarbar"> 
-    <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
-    <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
-    <!ENTITY % HTMLsymbol PUBLIC
-       "-//W3C//ENTITIES Symbols for XHTML//EN"
-       "xhtml-symbol.ent">
-    %HTMLsymbol;
-  ]>
-  <root xmlns:foo="http://example.org/foo"
-        xmlns:bar="http://example.org/bar"><![CDATA[cdata is here]]>
-    <a foo:att='1' bar:att='2' att='&lt;'/>
-    &amp;&amp; <!-- comment here--> &bar;
-  </root>
-  EOS
-  
-  parser = REXML::Parsers::PullParser.new(xml)
-  while parser.has_next?
-    p parser.pull
-  end
-  # >> xmldecl: ["1.0", "UTF-8", nil]
-  # >> text: ["\n", "\n"]
-  # >> processing_instruction: ["xml-stylesheet", " type=\"text/css\" href=\"style.css\""]
-  # >> text: ["\n", "\n"]
-  # >> start_doctype: ["root", "SYSTEM", "foo", nil]
-  # >> elementdecl: ["<!ELEMENT root (a+)"]
-  # >> elementdecl: ["<!ELEMENT a"]
-  # >> entitydecl: ["bar", "barbarbarbar"]
-  # >> attlistdecl: ["a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
-  # >> notationdecl: ["foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
-  # >> entitydecl: ["HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
-  # >> externalentity: ["%HTMLsymbol;"]
-  # >> end_doctype: []
-  # >> text: ["\n", "\n"]
-  # >> start_element: ["root", {"xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
-  # >> cdata: ["cdata is here"]
-  # >> text: ["\n  ", "\n  "]
-  # >> start_element: ["a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
-  # >> end_element: ["a"]
-  # >> text: ["\n  &amp;&amp; ", "\n  && "]
-  # >> comment: [" comment here"]
-  # >> text: [" &bar;\n", " barbarbarbar\n"]
-  # >> end_element: ["root"]
-  # >> text: ["\n", "\n"]
+
+#@samplecode
+require 'rexml/parsers/pullparser'
+xml = <<EOS
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<!DOCTYPE root SYSTEM "foo" [
+  <!ELEMENT root (a+)>
+  <!ELEMENT a>
+  <!ENTITY bar "barbarbarbar">
+  <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
+  <!NOTATION foobar SYSTEM "http://example.org/foobar.dtd">
+  <!ENTITY % HTMLsymbol PUBLIC
+      "-//W3C//ENTITIES Symbols for XHTML//EN"
+      "xhtml-symbol.ent">
+  %HTMLsymbol;
+]>
+<root xmlns:foo="http://example.org/foo"
+      xmlns:bar="http://example.org/bar"><![CDATA[cdata is here]]>
+  <a foo:att='1' bar:att='2' att='&lt;'/>
+  &amp;&amp; <!-- comment here--> &bar;
+</root>
+EOS
+
+parser = REXML::Parsers::PullParser.new(xml)
+while parser.has_next?
+  p parser.pull
+end
+# >> xmldecl: ["1.0", "UTF-8", nil]
+# >> text: ["\n", "\n"]
+# >> processing_instruction: ["xml-stylesheet", " type=\"text/css\" href=\"style.css\""]
+# >> text: ["\n", "\n"]
+# >> start_doctype: ["root", "SYSTEM", "foo", nil]
+# >> elementdecl: ["<!ELEMENT root (a+)"]
+# >> elementdecl: ["<!ELEMENT a"]
+# >> entitydecl: ["bar", "barbarbarbar"]
+# >> attlistdecl: ["a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+# >> notationdecl: ["foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
+# >> entitydecl: ["HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
+# >> externalentity: ["%HTMLsymbol;"]
+# >> end_doctype: []
+# >> text: ["\n", "\n"]
+# >> start_element: ["root", {"xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
+# >> cdata: ["cdata is here"]
+# >> text: ["\n  ", "\n  "]
+# >> start_element: ["a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
+# >> end_element: ["a"]
+# >> text: ["\n  &amp;&amp; ", "\n  && "]
+# >> comment: [" comment here"]
+# >> text: [" &bar;\n", " barbarbarbar\n"]
+# >> end_element: ["root"]
+# >> text: ["\n", "\n"]
+#@end
 
 = class REXML::Parsers::PullParser < Object
 extend Forwardable
 include REXML::XMLTokens
 
 プル方式の XML パーサクラス。
-    
+
 == Class Methods
 
 --- new(stream) -> REXML::Parsers::PullParser
@@ -121,7 +122,6 @@ include REXML::XMLTokens
 
 == Instance Methods
 
-#@since 1.8.3
 --- has_next? -> bool
 未処理のイベントが残っている場合に真を返します。
 
@@ -134,7 +134,6 @@ include REXML::XMLTokens
 未処理のイベントが残っていない場合に真を返します。
 
 @see [[m:REXML::Parsers::PullParser#has_next?]]
-#@end
 
 #@# --- source
 #@# #@todo
@@ -175,13 +174,11 @@ XMLをパースし、得られたイベント列を引数として順にブロ�
 @raise REXML::UndefinedNamespaceException XML文書のパース中に、定義されていない名前空間
        が現れた場合に発生します
 
-#@since 1.8.3
 --- unshift(token) -> ()
 イベントキューの先頭に token を追加します。
 
 @param token 先頭に追加するイベント([[c:REXML::Parsers::PullEvent]] オブジェクト)
 
-#@end
 
 = class REXML::Parsers::PullEvent < Object
 [[c:REXML::Parsers::PullParser]] で使われるパース結果を表すイベントクラス。
@@ -261,4 +258,3 @@ XML宣言なら真を返します。
 #@# deprecated, always returns false
 
 #@# --- inspect
-

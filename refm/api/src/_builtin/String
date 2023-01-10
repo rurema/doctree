@@ -3,7 +3,7 @@
 include Comparable
 
 文字列のクラスです。
-NUL 文字を含む任意のバイト列を扱うことができます。
+ヌル文字を含む任意のバイト列を扱うことができます。
 文字列の長さにはメモリ容量以外の制限はありません。
 
 文字列は通常、文字列リテラルを使って生成します。
@@ -102,13 +102,13 @@ String オブジェクトは自身のエンコーディング情報を持ちま�
 エンコーディングの変換にはメソッド [[m:String#encode]] を使います。
 
 #@samplecode 例:エンコーディングの変換
-p "いろは".size      #=> 3 
+p "いろは".size      #=> 3
 p "漢字"[0]          #=> "漢"
 p "山本山".reverse   #=> "山本山" (回文なので分からないですね)
 p "ループ".reverse   #=> "プール"
 
 s = "ruビー"
-s[0..1] = "ル" 
+s[0..1] = "ル"
 p s                  #=> "ルビー"
 
 e = "言語".encode("EUC-JP")
@@ -161,11 +161,11 @@ true を返します。
 ASCII 互換エンコーディングをもつ文字列にエンコーディングの変換なしで結合することができます。
 
 #@samplecode 例:
-  s = "abc"
-  a = s.encode("EUC-JP")
-  b = s.encode("UTF-8")
-  p a == b                           #=> true
-  p a + b                            #=> "abcabc"
+s = "abc"
+a = s.encode("EUC-JP")
+b = s.encode("UTF-8")
+p a == b                           #=> true
+p a + b                            #=> "abcabc"
 #@end
 
 ここで言う「ASCII互換エンコーディング」とは、コードポイントが同一という意味ではなく
@@ -189,8 +189,8 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 @return      変換後の文字列または nil
 
 #@samplecode 例
-   String.try_convert("str")     # => "str"
-   String.try_convert(/re/)      # => nil
+String.try_convert("str")     # => "str"
+String.try_convert(/re/)      # => nil
 #@end
 
 --- new(string = "")                -> String
@@ -198,8 +198,12 @@ obj を String に変換しようと試みます。変換には [[m:Object#to_st
 --- new(string = "", encoding: string.encoding) -> String
 #@end
 #@since 2.4.0
-#@# 127 は STR_BUF_MIN_SIZE。string.c 参照。
+#@# capacityのデフォルトのサイズは STR_BUF_MIN_SIZE。string.c 参照。
+#@since 2.7.0
+--- new(string = "", encoding: string.encoding, capacity: 63) -> String
+#@else
 --- new(string = "", encoding: string.encoding, capacity: 127) -> String
+#@end
 --- new(string = "", encoding: string.encoding, capacity: string.bytesize) -> String
 #@end
 
@@ -247,35 +251,44 @@ freeze されていない場合は self を返します。
 
 #@samplecode 例
 # frozen_string_literal: false
+
 original_text = "text"
 unfrozen_text = +original_text
-original_text == unfrozen_text      # => true
-original_text.equal?(unfrozen_text) # => true
+unfrozen_text.frozen?                 # => false
+original_text == unfrozen_text        # => true
+original_text.equal?(unfrozen_text)   # => true
 
-frozen_text = "text".freeze
-unfrozen_text = +frozen_text
-frozen_text == unfrozen_text        # => true
-frozen_text.equal?(unfrozen_text)   # => false
+original_text = "text".freeze
+unfrozen_text = +original_text
+unfrozen_text.frozen?                 # => false
+original_text == unfrozen_text        # => true
+original_text.equal?(unfrozen_text)   # => false
 #@end
 
 @see [[m:String#-@]]
 
 --- -@ -> String | self
+#@since 3.2
+--- dedup -> String | self
+#@end
 
 self が freeze されている文字列の場合、self を返します。
 freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
 
 #@samplecode 例
 # frozen_string_literal: false
-original_text = "text"
-unfrozen_text = -original_text
-original_text == unfrozen_text      # => true
-original_text.equal?(unfrozen_text) # => false
 
-frozen_text = "text".freeze
-unfrozen_text = -frozen_text
-frozen_text == unfrozen_text        # => true
-frozen_text.equal?(unfrozen_text)   # => true
+original_text = "text"
+frozen_text = -original_text
+frozen_text.frozen?                 # => true
+original_text == frozen_text        # => true
+original_text.equal?(frozen_text)   # => false
+
+original_text = "text".freeze
+frozen_text = -original_text
+frozen_text.frozen?                 # => true
+original_text == frozen_text        # => true
+original_text.equal?(frozen_text)   # => true
 #@end
 
 @see [[m:String#+@]]
@@ -446,7 +459,7 @@ p str    # => "foo!!!"
 #@end
 #@end
 
---- =~(other) -> Integer
+--- =~(other) -> Integer | nil
 
 正規表現 other とのマッチを行います。
 マッチが成功すればマッチした位置のインデックスを、そうでなければ nil を返します。
@@ -875,7 +888,7 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 nil は文字列のエンコーディングが非互換の時に返されます。
 
 #@samplecode
-  "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp?("\u{c4 d6 dc}")   #=> nil
+"\u{e4 f6 fc}".encode("ISO-8859-1").casecmp?("\u{c4 d6 dc}")   #=> nil
 #@end
 
 @see [[m:String#casecmp]]
@@ -955,7 +968,7 @@ self の末尾から rs で指定する改行コードを取り除いた文字�
 rs に nil を指定した場合、このメソッドは何もしません。
 
 rs に空文字列 ("") を指定した場合は「パラグラフモード」になり、
-末尾の連続する改行コードをすべて取り除きます。
+実行環境によらず末尾の連続する改行コード("\r\n", "\n")をすべて取り除きます。
 
 #@samplecode 例
 p "foo\n".chomp             # => "foo"
@@ -967,6 +980,12 @@ p "foo\r".chomp    # => "foo"
 p "foo\r\n".chomp  # => "foo"
 p "foo\n".chomp    # => "foo"
 p "foo\n\r".chomp  # => "foo\n"
+
+p "string\n".chomp(nil)  # => "string\n"
+
+p "foo\r\n\n".chomp("")  # => "foo"
+p "foo\n\r\n".chomp("")  # => "foo"
+p "foo\n\r\r".chomp("")  # => "foo\n\r\r"
 #@end
 
 @see [[m:String#chomp!]]
@@ -979,25 +998,33 @@ p "foo\n\r".chomp  # => "foo\n"
 
 self の末尾から rs で指定する改行コードを取り除きます。
 ただし rs が "\n" ($/ のデフォルト値) のときは、
-システムによらず "\r", "\r\n", "\n" のすべてを改行コードとみなして取り除きます。
+実行環境によらず "\r", "\r\n", "\n" のすべてを改行コードとみなして取り除きます。
 
 rs に nil を指定した場合、このメソッドは何もしません。
 
 rs に空文字列 ("") を指定した場合は「パラグラフモード」になり、
-末尾の連続する改行コードをすべて取り除きます。
+実行環境によらず末尾の連続する改行コード("\r\n", "\n")をすべて取り除きます。
 
 @return chomp! は通常 self を返しますが、取り除く改行がなかった場合は nil を返します。
 
 #@samplecode 例
 buf = "string\n"
-buf.chomp!
-p buf   # => "string"
+buf.chomp!  # => nil
+p buf       # => "string"
 
 $/ = "\n"   # デフォルトと同じ
 p "foo\r".chomp!    # => "foo"
 p "foo\r\n".chomp!  # => "foo"
 p "foo\n".chomp!    # => "foo"
 p "foo\n\r".chomp!  # => "foo\n"
+
+buf = "string\n"
+buf.chomp!(nil)  # => nil
+p buf            # => "string\n"
+
+p "foo\r\n\n".chomp!("")  # => "foo"
+p "foo\n\r\n".chomp!("")  # => "foo"
+p "foo\n\r\r".chomp!("")  # => nil
 #@end
 
 @see [[m:String#chomp]]
@@ -1033,12 +1060,12 @@ p "".chop            # => ""
 @return chop! は self を変更して返しますが、取り除く文字がなかった場合は nil を返します。
 
 #@samplecode 例
-  str = "string\r\n"
-  ret = str.chop!
-  ret                  # => "string"
-  str                  # => "string"
-  str.chop!            # => "strin"
-  "".chop!             # => nil
+str = "string\r\n"
+ret = str.chop!
+ret                  # => "string"
+str                  # => "string"
+str.chop!            # => "strin"
+"".chop!             # => nil
 #@end
 
 @see [[m:String#chomp!]]
@@ -1053,13 +1080,13 @@ p "".chop            # => ""
 self を返します。
 
 #@samplecode 例
-    str = "abc"
-    str.clear
-    p str     # => ""
+str = "abc"
+str.clear
+p str     # => ""
 
-    str = ""
-    str.clear
-    p str   # => ""
+str = ""
+str.clear
+p str   # => ""
 #@end
 
 #@#--- clone
@@ -1122,6 +1149,8 @@ salt には、以下の様になるべくランダムな文字列を選ぶべき
 
 注意:
 
+  * Ruby 2.6 から非推奨になったため、引き続き必要な場合は
+    string-crypt gem の使用を検討してください。
   * crypt の処理は [[man:crypt(3)]] の実装に依存しています。
     従って、crypt で処理される内容の詳細や salt の与え方については、
     利用環境の [[man:crypt(3)]] 等を見て確認してください。
@@ -1172,6 +1201,8 @@ p "123456789".delete("2378")         #=> "14569"
 p "123456789".delete("2-8", "^4-6")  #=> "14569"
 #@end
 
+@see [[m:String#delete!]]
+
 --- delete!(*strs) -> self | nil
 
 self から strs に含まれる文字を破壊的に取り除きます。
@@ -1205,6 +1236,8 @@ str = "abc"
 p str.delete!("2378")         #=> "nil"
 p str                         #=> "abc"
 #@end
+
+@see [[m:String#delete]]
 
 #@since 2.4.0
 --- downcase(*options) -> String
@@ -1337,7 +1370,7 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり�
 
 @param rs    行末を示す文字列
 #@since 2.4.0
-@param chomp true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
+@param chomp true を指定すると各行の末尾から rs を取り除きます。
 #@end
 
 #@samplecode 例
@@ -1353,8 +1386,8 @@ p "aa\n".lines.to_a           # => ["aa\n"]
 p "".lines.to_a               # => []
 
 s = "aa\nbb\ncc\n"
-p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
-p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
+p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]
+p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]
 #@end
 
 @see [[m:String#lines]]
@@ -1370,7 +1403,7 @@ p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]
 文字列中の各行を文字列の配列で返します。(self.each_line.to_a と同じです)
 
 #@samplecode
-  "aa\nbb\ncc\n".lines # => ["aa\n", "bb\n", "cc\n"]
+"aa\nbb\ncc\n".lines # => ["aa\n", "bb\n", "cc\n"]
 #@end
 
 行の区切りは rs に指定した文字列で、 そのデフォルト値は変数 $/ の値です。
@@ -1381,15 +1414,14 @@ rs に nil を指定すると行区切りなしとみなします。 rs に空�
 ろで文字列を分割します (つまり空行で分割します)。
 
 #@since 2.4.0
-chomp に true を指定すると、分割した各行に対して [[m:String#chomp]]
-を実行するのと同等の結果を得ることができます。
+chomp に true を指定すると、分割した各行の末尾から rs を取り除きます。
 
 #@samplecode
-  "hello\nworld\n".lines              # => ["hello\n", "world\n"]
-  "hello\nworld\n".lines(chomp: true) # => ["hello", "world"]
+"hello\nworld\n".lines              # => ["hello\n", "world\n"]
+"hello\nworld\n".lines(chomp: true) # => ["hello", "world"]
 #@end
 #@end
-  
+
 @param rs 行末を示す文字列
 
 #@since 2.4.0
@@ -1398,9 +1430,9 @@ chomp に true を指定すると、分割した各行に対して [[m:String#ch
              省略した場合は false を指定したとみなされます。
 #@end
 
-ブロックが指定された場合は [[m:String#each_line]] と同じように動作しま
-す。ただし obsolete のため、ブロックを指定する場合は
-[[m:String#each_line]] を使用してください。
+ブロックが指定された場合は [[m:String#each_line]] と同じように動作します。
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_line]]
 
@@ -1416,6 +1448,13 @@ end
     # => 115
     # => 116
     # => 114
+
+"あ".each_byte do |byte|
+  p byte
+end
+    # => 227
+    # => 129
+    # => 130
 #@end
 
 @see [[m:String#bytes]]
@@ -1429,9 +1468,9 @@ end
 "str".bytes # => [115, 116, 114]
 #@end
 
-ブロックが指定された場合は [[m:String#each_byte]] と同じように動作しま
-す。ただし obsolete のため、ブロックを指定する場合は
-[[m:String#each_byte]] を使用してください。
+ブロックが指定された場合は [[m:String#each_byte]] と同じように動作します。
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_byte]]
 
@@ -1466,7 +1505,7 @@ s.getbyte(6)        # => nil
 
 --- setbyte(index, b) -> Integer
 
-index バイト目のバイトを b に変更します。 
+index バイト目のバイトを b に変更します。
 
 index に負を指定すると末尾から数えた位置を変更します。
 
@@ -1705,7 +1744,7 @@ p "".hex      # => 0
 "hello".include? ?h     #=> true
 #@end
 
---- index(pattern, pos = 0) -> Integer
+--- index(pattern, pos = 0) -> Integer | nil
 
 文字列のインデックス pos から右に向かって pattern を検索し、
 最初に見つかった部分文字列の左端のインデックスを返します。
@@ -1728,7 +1767,51 @@ p "foobarfoobar".index("bar", -6)       # => 9
 #@end
 
 @see [[m:String#rindex]]
+#@since 3.2
+@see [[m:String#byteindex]]
+--- byteindex(pattern, offset = 0) -> Integer | nil
 
+文字列の offset から右に向かって pattern を検索し、
+最初に見つかった部分文字列の左端のバイト単位のインデックスを返します。
+見つからなければ nil を返します。
+
+引数 pattern は探索する部分文字列または正規表現で指定します。
+
+offset が負の場合、文字列の末尾から数えた位置から探索します。
+
+@param pattern    探索する部分文字列または正規表現
+@param offset     探索を開始するバイト単位のオフセット
+
+@raise IndexError オフセットが文字列の境界以外をさしているときに発生します。
+
+#@samplecode 例
+'foo'.byteindex('f') # => 0
+'foo'.byteindex('o') # => 1
+'foo'.byteindex('oo') # => 1
+'foo'.byteindex('ooo') # => nil
+
+'foo'.byteindex(/f/) # => 0
+'foo'.byteindex(/o/) # => 1
+'foo'.byteindex(/oo/) # => 1
+'foo'.byteindex(/ooo/) # => nil
+
+'foo'.byteindex('o', 1) # => 1
+'foo'.byteindex('o', 2) # => 2
+'foo'.byteindex('o', 3) # => nil
+
+'foo'.byteindex('o', -1) # => 2
+'foo'.byteindex('o', -2) # => 1
+'foo'.byteindex('o', -3) # => 1
+'foo'.byteindex('o', -4) # => nil
+
+'あいう'.byteindex('う') # => 6
+'あいう'.byteindex('う', 3) # => 6
+'あいう'.byteindex('う', -3) # => 6
+'あいう'.byteindex('う', 1) # offset 1 does not land on character boundary (IndexError)
+#@end
+
+@see [[m:String#index]], [[m:String#byterindex]]
+#@end
 --- insert(pos, other) -> self
 
 pos 番目の文字の直前に文字列 other を挿入します。
@@ -1753,7 +1836,7 @@ p str   # => "foobarbaz"
 なお、このメソッドの逆にシンボルに対応する文字列を得るには
 [[m:Symbol#to_s]] または [[m:Symbol#id2name]] を使います。
 
-シンボル文字列にはナルキャラクタ("\0")、空の文字列の使用も可能です。
+シンボル文字列にはヌルキャラクタ("\0")、空の文字列の使用も可能です。
 
 #@samplecode 例
 p "foo".intern                 # => :foo
@@ -1766,10 +1849,12 @@ p "foo".intern.to_s == "foo"   # => true
 文字列の文字数を返します。バイト数を知りたいときは bytesize メソッドを使ってください。
 
 #@samplecode 例
-"test".length   # => 4
-"test".size     # => 4
-"テスト".length   # => 3
-"テスト".size     # => 3
+"test".length          # => 4
+"test".size            # => 4
+"テスト".length         # => 3
+"テスト".size           # => 3
+"\x80\u3042".length    # => 2
+"\x80\u3042".size      # => 2
 #@end
 
 @see [[m:String#bytesize]]
@@ -1823,7 +1908,7 @@ $&                       #=> nil
 self の「次の」文字列を返します。
 
 「次の」文字列は、対象の文字列の右端から
-アルファベットなら アルファベット順(aの次はb, zの次はa, 大文字も同様)に、 
+アルファベットなら アルファベット順(aの次はb, zの次はa, 大文字も同様)に、
 数字なら 10 進数(9 の次は 0)とみなして計算されます。
 
 #@samplecode
@@ -1957,8 +2042,8 @@ p "0x10".oct  # => 16
 
 #@samplecode 例
 p "-010".oct     # => -8
-p "-0x10".oct    # => 0
-p "-0b10".oct    # => 0
+p "-0x10".oct    # => -16
+p "-0b10".oct    # => -2
 
 p "1_0_1x".oct   # => 65
 #@end
@@ -2041,7 +2126,76 @@ p "foobarfoobar".rindex("bar", -6)      # => 3
 #@end
 
 @see [[m:String#index]]
+#@since 3.2
+--- byterindex(pattern, offset = self.bytesize) -> Integer | nil
 
+文字列のバイト単位のインデックス offset から左に向かって pattern を探索します。
+最初に見つかった部分文字列の左端のバイト単位のインデックスを返します。
+見つからなければ nil を返します。
+
+引数 pattern は探索する部分文字列または正規表現で指定します。
+
+offset が負の場合は、文字列の末尾から数えた位置から探索します。
+
+byterindex と [[m:String#byteindex]] とでは、探索方向だけが逆になります。
+完全に左右が反転した動作をするわけではありません。
+探索はその開始位置を右から左にずらしながら行いますが、
+部分文字列の照合はどちらのメソッドも左から右に向かって行います。
+以下の例を参照してください。
+
+#@samplecode String#byteindex の場合
+p "stringstring".byteindex("ing", 1)    # => 3
+  # ing            # ここから探索を始める
+  #  ing
+  #   ing          # 右にずらしていってここで見つかる
+#@end
+
+#@samplecode String#byterindex の場合
+p "stringstring".byterindex("ing", -1)  # => 9
+  #           ing    # インデックス -1 の文字から探索を始める
+  #          ing
+  #         ing      # 左にずらしていってここで見つかる
+#@end
+
+@param pattern    探索する部分文字列または正規表現
+@param offset     探索を始めるバイト単位のインデックス
+
+#@samplecode 例
+'foo'.byterindex('f') # => 0
+'foo'.byterindex('o') # => 2
+'foo'.byterindex('oo') # => 1
+'foo'.byterindex('ooo') # => nil
+
+'foo'.byterindex(/f/) # => 0
+'foo'.byterindex(/o/) # => 2
+'foo'.byterindex(/oo/) # => 1
+'foo'.byterindex(/ooo/) # => nil
+
+# 右でのマッチが優先
+'foo'.byterindex(/o+/) # => 2
+$~ #=> #<MatchData "o">
+
+# 最長にするには否定戻り読み(negative look-behind)と組み合わせる
+'foo'.byterindex(/(?<!o)o+/) # => 1
+$~ #=> #<MatchData "oo">
+
+# またはbyteindexを否定先読み(negative look-ahead)
+'foo'.byteindex(/o+(?!.*o)/) # => 1
+$~ #=> #<MatchData "oo">
+
+'foo'.byterindex('o', 0) # => nil
+'foo'.byterindex('o', 1) # => 1
+'foo'.byterindex('o', 2) # => 2
+'foo'.byterindex('o', 3) # => 2
+
+'foo'.byterindex('o', -1) # => 2
+'foo'.byterindex('o', -2) # => 1
+'foo'.byterindex('o', -3) # => nil
+'foo'.byterindex('o', -4) # => nil
+#@end
+
+@see [[m:String#rindex]], [[m:String#byteindex]]
+#@end
 --- scan(pattern) -> [String] | [[String]]
 
 self に対して pattern を繰り返しマッチし、
@@ -2072,31 +2226,30 @@ pattern が正規表現で括弧を含む場合は、
 
 #@samplecode 例
 "foobarbazfoobarbaz".scan(/ba./) {|s| p s }
-    # => "bar"
-    #    "baz"
-    #    "baz"
-    #    "baz"
+# "bar"
+# "baz"
+# "bar"
+# "baz"
 
 "foobarbazfoobarbaz".scan("ba") {|s| p s }
-    # => "ba"
-    #    "ba"
-    #    "ba"
-    #    "ba"
+# "ba"
+# "ba"
+# "ba"
+# "ba"
 
 "foobarbazfoobarbaz".scan(/(ba)(.)/) {|s| p s }
-    # => ["ba", "r"]
-    #    ["ba", "z"]
-    #    ["ba", "r"]
-    #    ["ba", "z"]
+# ["ba", "r"]
+# ["ba", "z"]
+# ["ba", "r"]
+# ["ba", "z"]
 #@end
 
---- slice!(nth) -> Integer
+--- slice!(nth) -> String
 --- slice!(pos, len) -> String
 --- slice!(substr) -> String
 --- slice!(regexp, nth = 0) -> String
 --- slice!(first..last) -> String
 --- slice!(first...last) -> String
---- slice!(regexp, nth = 0) -> String
 
 指定した範囲 ([[m:String#[] ]] 参照) を
 文字列から取り除いたうえで取り除いた部分文字列を返します。
@@ -2112,10 +2265,17 @@ string.slice!("r")      #=> "r"
 string                  #=> "thing"
 #@end
 
---- split(sep = $;, limit = 0) -> [String] | [[String]]
+--- split(sep = $;, limit = 0) -> [String]
+#@since 2.6.0
+--- split(sep = $;, limit = 0) {|s| ... } -> self
+#@end
 
 第 1 引数 sep で指定されたセパレータによって文字列を limit 個まで分割し、
 結果を文字列の配列で返します。
+#@since 2.6.0
+ブロックを指定すると、配列を返す代わりに分割した文字列で
+ブロックを呼び出します。
+#@end
 
 第 1 引数 sep は以下のいずれかです。
 
@@ -2147,6 +2307,10 @@ sep が正規表現で、かつその正規表現に括弧が含まれている�
 
 @param sep       文字列を分割するときのセパレータのパターン
 @param limit     分割する最大個数
+
+#@since 2.6.0
+@return ブロックを渡した場合は self、ブロックなしの場合は配列
+#@end
 
 #@samplecode 例
 p "   a \t  b \n  c".split(/\s+/) # => ["", "a", "b", "c"]
@@ -2187,7 +2351,7 @@ p "a,b,c,d,e".split(/,/, 7)  # => ["a", "b", "c", "d", "e"]
 #@end
 
 #@samplecode limit が負の数の場合は制限なく分割
-    p "a,b,c,,,".split(/,/, -1)    # => ["a", "b", "c", "", "", ""]
+p "a,b,c,,,".split(/,/, -1)    # => ["a", "b", "c", "", "", ""]
 #@end
 
 @see [[m:String#partition]], [[m:String#rpartition]]
@@ -2309,9 +2473,9 @@ p str            # => "\000  abc"   # 右側の "\0" のみ取り除かれる
 空白文字の定義は " \t\r\n\f\v" です。
 
 #@samplecode 例
-  p "  abc\n".lstrip     #=> "abc\n"
-  p "\t abc\n".lstrip    #=> "abc\n"
-  p "abc\n".lstrip       #=> "abc\n"
+p "  abc\n".lstrip     #=> "abc\n"
+p "\t abc\n".lstrip    #=> "abc\n"
+p "abc\n".lstrip       #=> "abc\n"
 #@end
 
 @see [[m:String#strip]], [[m:String#rstrip]]
@@ -2543,12 +2707,12 @@ p str    #=> "aBcabc"
 以下と同じです。
 
 #@samplecode
-   def sum(bits)
-     sum = 0
-     each_byte {|c| sum += c }
-     return 0 if sum == 0
-     sum & ((1 << bits) - 1)
-   end
+def sum(bits)
+  sum = 0
+  each_byte {|c| sum += c }
+  return 0 if sum == 0
+  sum & ((1 << bits) - 1)
+end
 #@end
 
 例えば以下のコードで UNIX System V の
@@ -2619,27 +2783,41 @@ p str   # => "abcXYZ"
 文字列を 10 進数表現と解釈して、浮動小数点数 [[c:Float]] に変換します。
 
 浮動小数点数とみなせなくなるところまでを変換対象とします。
-変換対象が空文字列であれば 0.0 を返します。
+途中に変換できないような文字列がある場合、それより先の文字列は無視されます。
 
-#@samplecode 例
-p "10".to_f    # => 10.0
+#@samplecode
+p "-10".to_f   # => -10.0
 p "10e2".to_f  # => 1000.0
 p "1e-2".to_f  # => 0.01
 p ".1".to_f    # => 0.1
 
-p "nan".to_f   # => 0.0
-p "INF".to_f   # => 0.0
-p "-Inf".to_f  # => -0.0
-p(("10" * 1000).to_f)   # => Infinity (with warning)
-
-p "".to_f      # => 0.0
-p "1_0_0".to_f # => 100.0
-p " \n10".to_f # => 10.0       # 先頭の空白は無視される
-p "0xa.a".to_f # => 0.0
+p "1_0_0".to_f # => 100.0  # 数値リテラルと同じように区切りに _ を使える
+p " \n10".to_f # => 10.0   # 先頭の空白・改行は無視される
+p "7xa.5".to_f # => 7.0
 #@end
 
-なお、このメソッドの逆に、数値を文字列に変換するには
-[[m:Kernel.#sprintf]],[[m:String#%]],[[m:Integer#to_s]]
+以下の例は、先頭に浮動小数点数とみなせるものがないため、0.0 を返します。
+変換対象が空文字列のケースでも、0.0 を返します。
+
+#@samplecode
+p "".to_f      # => 0.0
+p "nan".to_f   # => 0.0
+p "INF".to_f   # => 0.0
+p "-Inf".to_f  # => 0.0
+#@end
+
+変換後の [[c:Float]] が有限の値を取れないときは、[[m:Float::INFINITY]] を用います。
+このとき、全ての警告を有効にすると、警告が表示されます。
+
+#@samplecode
+#!ruby -W2
+
+p ("10" * 1000).to_f   # => Infinity
+# warning: Float 10101010101010101010... out of range
+#@end
+
+なお、このメソッドとは逆に、数値を文字列に変換するには
+[[m:Kernel.#sprintf]], [[m:String#%]], [[m:Integer#to_s]]
 を使用します。
 
 @see [[m:String#hex]], [[m:String#oct]], [[m:String#to_i]],
@@ -2650,20 +2828,20 @@ p "0xa.a".to_f # => 0.0
 文字列を 10 進数表現された整数であると解釈して、整数に変換します。
 
 #@samplecode 例
-  p " 10".to_i    # => 10
-  p "+10".to_i    # => 10
-  p "-10".to_i    # => -10
+p " 10".to_i    # => 10
+p "+10".to_i    # => 10
+p "-10".to_i    # => -10
 
-  p "010".to_i    # => 10
-  p "-010".to_i   # => -10
+p "010".to_i    # => 10
+p "-010".to_i   # => -10
 #@end
 
 整数とみなせない文字があればそこまでを変換対象とします。
 変換対象が空文字列であれば 0 を返します。
 
 #@samplecode 例
-  p "0x11".to_i   # => 0
-  p "".to_i       # => 0
+p "0x11".to_i   # => 0
+p "".to_i       # => 0
 #@end
 
 基数を指定することでデフォルトの 10 進以外に 2 〜 36 進数表現へ変換できます。
@@ -2676,20 +2854,20 @@ p "0xa.a".to_f # => 0.0
 例外 [[c:ArgumentError]] が発生します。
 
 #@samplecode 例
-  p "01".to_i(2)    # => 1
-  p "0b1".to_i(2)   # => 1
+p "01".to_i(2)    # => 1
+p "0b1".to_i(2)   # => 1
 
-  p "07".to_i(8)    # => 7
-  p "0o7".to_i(8)   # => 7
+p "07".to_i(8)    # => 7
+p "0o7".to_i(8)   # => 7
 
-  p "1f".to_i(16)   # => 31
-  p "0x1f".to_i(16) # => 31
+p "1f".to_i(16)   # => 31
+p "0x1f".to_i(16) # => 31
 
-  p "0b10".to_i(0)  # => 2
-  p "0o10".to_i(0)  # => 8
-  p "010".to_i(0)   # => 8
-  p "0d10".to_i(0)  # => 10
-  p "0x10".to_i(0)  # => 16
+p "0b10".to_i(0)  # => 2
+p "0o10".to_i(0)  # => 8
+p "010".to_i(0)   # => 8
+p "0d10".to_i(0)  # => 10
+p "0x10".to_i(0)  # => 16
 #@end
 
 @param base    進数を指定する整数。0 か、2〜36 の整数。
@@ -2709,8 +2887,8 @@ p "0xa.a".to_f # => 0.0
 self を返します。
 
 #@samplecode 例
-    p "str".to_s     # => "str"
-    p "str".to_str   # => "str"
+p "str".to_s     # => "str"
+p "str".to_str   # => "str"
 #@end
 
 このメソッドは、文字列を他のクラスのインスタンスと混ぜて処理したいときに有効です。
@@ -2718,9 +2896,9 @@ self を返します。
 to_s メソッドを使うと以下のように統一的に処理できます。
 
 #@samplecode 例
-    # some_method(5).downcase だと返り値が nil のときに
-    # エラーになるので to_s をはさむ
-    p some_method(5).to_s.downcase
+# some_method(5).downcase だと返り値が nil のときに
+# エラーになるので to_s をはさむ
+p some_method(5).to_s.downcase
 #@end
 
 --- tr(pattern, replace) -> String
@@ -2733,8 +2911,6 @@ pattern の形式は [[man:tr(1)]] と同じです。つまり、
 文字列の先頭が `^' の場合は指定文字以外が置換の対象になります。
 
 replace に対しても `-' による範囲指定が可能です。
-例えば [[m:String#upcase]] は tr を使って
-"foo".tr('a-z', 'A-Z') と書けます。
 
 `-' は文字列の両端にない場合にだけ範囲指定の意味になります。
 `^' も文字列の先頭にあるときにだけ否定の効果を発揮します。
@@ -2747,12 +2923,20 @@ replace の最後の文字が無限に続くものとして扱われます。
 @param replace    pattern で指定した文字を置き換える文字
 
 #@samplecode 例
-    p "foo".tr("f", "X")      # => "Xoo"
-    p "foo".tr('a-z', 'A-Z')  # => "FOO"
-    p "FOO".tr('A-Z', 'a-z')  # => "foo"
+p "foo".tr("f", "X")      # => "Xoo"
+p "foo".tr('a-z', 'A-Z')  # => "FOO"
+p "FOO".tr('A-Z', 'a-z')  # => "foo"
+
+# シーザー暗号の復号
+p "ORYV".tr("A-Z", "D-ZA-C") # => "RUBY"
+
+# 全角英数字といくつかの記号の半角化
+email = "ｒｕｂｙ−ｌａｎｇ＠ｅｘａｍｐｌｅ．ｃｏｍ"
+p email.tr("０-９ａ-ｚＡ-Ｚ．＠−", "0-9a-zA-Z.@-")
+# => "ruby-lang@example.com"
 #@end
 
-@see [[m:String#tr_s]]
+@see [[m:String#tr!]], [[m:String#tr_s]]
 
 --- tr!(pattern, replace) -> self | nil
 
@@ -2765,15 +2949,6 @@ pattern の形式は [[man:tr(1)]] と同じです。
 指定文字以外が置換の対象になります。
 
 replace に対しても `-' による範囲指定が可能です。
-例えば、[[m:String#upcase]] を tr! で書くと、
-
-#@samplecode
-str = "foo"
-p str.tr!('a-z', 'A-Z') #=> "FOO"
-p str                   #=> "FOO"
-#@end
-
-となります。
 
 `-' は文字列の両端にない場合にだけ範囲指定の意味になります。
 `^' も文字列の先頭にあるときにだけ否定の効果を発揮します。
@@ -2843,7 +3018,7 @@ pattern の形式は [[man:tr(1)]] と同じです。
 replace でも「-」を使って範囲を指定できます。
 
 #@samplecode
-  p "gooooogle".tr_s("a-z", "A-Z")   # => "GOGLE"
+p "gooooogle".tr_s("a-z", "A-Z")   # => "GOGLE"
 #@end
 
 「-」は文字列の両端にない場合にだけ範囲指定の意味になります。
@@ -2889,6 +3064,12 @@ p str   # => "f"
 @return            オブジェクトの配列
 
 #@include(pack-template)
+
+#@since 2.4.0
+@see [[m:String#unpack1]], [[m:Array#pack]]
+#@else
+@see [[m:Array#pack]]
+#@end
 
 #@since 2.4.0
 --- upcase(*options) -> String
@@ -2953,12 +3134,12 @@ self から始めて max まで
 出力します。
 
 #@samplecode
-  ("a" .. "za").each do |str|
-    puts str
-  end
-  'a'.upto('za') do |str|
-    puts str
-  end
+("a" .. "za").each do |str|
+  puts str
+end
+'a'.upto('za') do |str|
+  puts str
+end
 #@end
 
 @param max    繰り返しをやめる文字列
@@ -2977,8 +3158,13 @@ str が "string" という内容の文字列でありさえすれば常に true 
 同一のオブジェクトであるかどうかを判定したいときは
 [[m:Object#equal?]] を使ってください。
 
+#@since 2.4.0
+アルファベットの大文字小文字を無視して比較したい場合は
+[[m:String#casecmp?]] を使ってください。
+#@else
 アルファベットの大文字小文字を無視して比較したい場合は、[[m:String#upcase]],
 [[m:String#downcase]] で大文字小文字を揃えてから比較してください。
+#@end
 
 [[c:Hash]] クラス内での比較に使われます。
 
@@ -2993,9 +3179,11 @@ p "".eql?("string")        # => false
 
 p "string".eql?("str" + "ing")   # => true   (内容が同じなら true)
 p "string".eql?("stringX".chop)  # => true   (内容が同じなら true)
+#@until 2.4.0
 
 p "string".upcase.eql?("String".upcase)     # => true
 p "string".downcase.eql?("String".downcase) # => true
+#@end
 #@end
 
 @see [[c:Hash]], [[m:String#<=>]], [[m:String#casecmp]], [[m:String#==]]
@@ -3155,12 +3343,12 @@ p "aaaaa".rpartition("x")   # => ["", "", "aaaaa"]
 文字列の各文字を文字列の配列で返します。(self.each_char.to_a と同じです)
 
 #@samplecode 例
-  "hello世界".chars # => ["h", "e", "l", "l", "o", "世", "界"]
+"hello世界".chars # => ["h", "e", "l", "l", "o", "世", "界"]
 #@end
 
-ブロックが指定された場合は [[m:String#each_char]] と同じように動作しま
-す。ただし obsolete のため、ブロックを指定する場合は
-[[m:String#each_char]] を使用してください。
+ブロックが指定された場合は [[m:String#each_char]] と同じように動作します。
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_char]]
 
@@ -3193,9 +3381,9 @@ UTF-8/UTF-16(BE|LE)/UTF-32(BE|LE) 以外のエンコーディングに対して�
 # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
 #@end
 
-ブロックが指定された場合は [[m:String#each_codepoint]] と同じように動作
-します。ただし obsolete のため、ブロックを指定する場合は
-[[m:String#each_codepoint]] を使用してください。
+ブロックが指定された場合は [[m:String#each_codepoint]] と同じように動作します。
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_codepoint]]
 
@@ -3254,9 +3442,11 @@ euc_str.encoding    # => #<Encoding:EUC-JP>
 s = [164, 164, 164, 237, 164, 207].pack("C*")
 p s.encoding                                  #=> ASCII-8BIT
 p s.force_encoding("EUC-JP")                  #=> "いろは"
+p s.force_encoding(Encoding::EUC_JP)          #=> "いろは"
 
 u = [12411, 12408, 12392].pack("U*")
 u.force_encoding("UTF-8")                     #=> "ほへと"
+u.force_encoding(Encoding::UTF_8)             #=> "ほへと"
 #@end
 
 --- ascii_only?  -> bool
@@ -3282,9 +3472,9 @@ true を返します。さもなくば false を返します。
 "\x80".force_encoding("UTF-8").valid_encoding?      #=> false
 #@end
 
---- encode(encoding, options = nil) -> String
---- encode(encoding, from_encoding, options = nil) -> String
---- encode(options = nil) -> String
+--- encode(encoding, **options) -> String
+--- encode(encoding, from_encoding, **options) -> String
+--- encode(**options) -> String
 
 self を指定したエンコーディングに変換した文字列を作成して返します。引数
 を2つ与えた場合、第二引数は変換元のエンコーディングを意味します。さもな
@@ -3293,7 +3483,7 @@ self を指定したエンコーディングに変換した文字列を作成し
 
 @param encoding       変換先のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 @param from_encoding  変換元のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
-@param option         変換オプションをハッシュで与えます。
+@param option         変換オプションをキーワード引数で与えます。
 @return               変換された文字列
 
 変換オプション
@@ -3459,7 +3649,7 @@ nth バイト目の文字を返します。nth が負の場合は文字列の末
 
 @see [[m:String#slice]]
 
---- byteslice(nth, len) -> String | nil
+--- byteslice(nth, len=1) -> String | nil
 
 nth バイト目から長さ len バイトの部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。引数が範囲外を指定した場合は
@@ -3478,7 +3668,9 @@ nil を返します。
 #@end
 
 @see [[m:String#slice]]
-
+#@since 3.2
+@see [[m:String#bytesplice]]
+#@end
 --- byteslice(range)          -> String | nil
 
 range で指定したバイトの範囲に含まれる部分文字列を返します。引数が範囲
@@ -3495,16 +3687,37 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 #@end
 
 @see [[m:String#slice]]
+#@since 3.2
+@see [[m:String#bytesplice]]
+--- bytesplice(index, length, str) -> String
+--- bytesplice(range, str)         -> String
 
+self の一部または全部を str で置き換えて str を返します。
+
+置き換え範囲の指定は、長さの指定が省略できないこと以外は
+[[m:String#byteslice]] と同じです。
+置き換え後の文字列の長さが対象の長さと違う場合、
+適切に長さが調整されます。
+
+@param index 置換したい文字列の範囲の始端
+@param length 置換したい文字列の範囲の長さ
+@param range 置換したい文字列の範囲を示す Range オブジェクト
+@raise IndexError index や length が範囲外の場合に発生
+@raise RangeError range が範囲外の場合に発生
+@raise IndexError 指定した始端や終端が文字列の境界と一致しない場合に発生
+
+@see [[m:String#byteslice]]
+#@end
 --- prepend(other_str) -> String
 文字列 other_str を先頭に破壊的に追加します。
 
 @param other_str 追加したい文字列を指定します。
 
-例:
-  a = "world"
-  a.prepend("hello ") # => "hello world"
-  a                   # => "hello world"
+#@samplecode 例
+a = "world"
+a.prepend("hello ") # => "hello world"
+a                   # => "hello world"
+#@end
 
 #@since 2.4.0
 --- prepend(*arguments) -> String
@@ -3671,7 +3884,7 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 文字列の書記素クラスタに対して繰り返します。
 
 [[m:String#each_char]] と違って、
-Unicode Standard Annex #29 ([[url:http://unicode.org/reports/tr29/]])
+Unicode Standard Annex #29 ([[url:https://unicode.org/reports/tr29/]])
 で定義された書記素クラスタに対して繰り返します。
 
 #@samplecode 例
@@ -3690,9 +3903,9 @@ Unicode Standard Annex #29 ([[url:http://unicode.org/reports/tr29/]])
 "a\u0300".grapheme_clusters # => ["à"]
 #@end
 
-ブロックが指定された場合は [[m:String#each_grapheme_cluster]] と同じように動作
-します。ただし deprecated のため、ブロックを指定する場合は
-[[m:String#each_grapheme_cluster]] を使用してください。
+ブロックが指定された場合は [[m:String#each_grapheme_cluster]] と同じように動作します。
+
+Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は削除されました。
 
 @see [[m:String#each_grapheme_cluster]]
 --- delete_prefix(prefix) -> String

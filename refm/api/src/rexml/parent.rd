@@ -57,8 +57,7 @@ object を子ノード列から削除します。
 
 各子ノードに対しブロックを呼び出します。
 
-ブロックを省略した場合は、各子ノードに対し操作を
-繰り返すような [[c:Enumerator]] オブジェクトを返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 --- delete_if {|object| ... } -> ()
 #@since 1.9.1
@@ -67,8 +66,7 @@ object を子ノード列から削除します。
 
 各子ノードに対しブロックを呼び出し、真を返したノードを削除します。
 
-ブロックを省略した場合は、各子ノードに対し上の操作を
-する [[c:Enumerator]] オブジェクトを返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 
 --- delete_at(index) -> REXML::Child | nil
@@ -147,9 +145,7 @@ child の子ノード列上での位置を返します。
 child が子ノードでない場合には nil を返します。
 
 --- size -> Integer
-#@since 1.8.5
 --- length -> Integer
-#@end
 
 保持している子ノードの数を返します。
 
@@ -171,4 +167,3 @@ replacement の parent は selfに変更されます。
 true を返します。
 
 @see [[m:REXML::Node#parent]]
-

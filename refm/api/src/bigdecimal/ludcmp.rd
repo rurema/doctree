@@ -1,34 +1,23 @@
-#@since 1.8.0
 
-#@since 1.9.2
 require bigdecimal
-#@end
 
 LU 分解を用いて、連立1次方程式 Ax = b の解 x を求める機能を提供します。
 
 Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
- * [[url:https://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/linear.rb?view=markup]]
+ * [[url:https://github.com/ruby/ruby/blob/master/ext/bigdecimal/sample/linear.rb]]
 
 = module LUSolve
 
 LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めるモジュールです。
 
-#@since 1.9.2
 == Module Functions
-#@else
-== Instance Methods
-#@end
 
 --- ludecomp(a, n, zero = 0, one = 1) -> [Integer]
 
 n 次正方行列を表す配列 a を破壊的に変更し、返り値と併せて元の行列の LU 分解を提供します。
 
-#@since 1.9.2
 [[m:LUSolve.#lusolve]] の引数を構築するために使います。
-#@else
-[[m:LUSolve#lusolve]] の引数を構築するために使います。
-#@end
 
 @param a 行列を [[c:BigDecimal]] の配列で指定します。(各要素を
          Row-major order で 1 次元の配列にしたオブジェクトを指定し
@@ -50,50 +39,32 @@ LU 分解を用いて、連立1次方程式 Ax = b の解 x を求めて返し�
 
 @param a 行列を [[c:BigDecimal]] の配列で指定します。
          各要素を Row-major order で並べて 1 次元の配列にし、
-#@since 1.9.2
          [[m:LUSolve.#ludecomp]] で変換したものを指定します。
-#@else
-         [[m:LUSolve#ludecomp]] で変換したものを指定します。
-#@end
 
 @param b ベクトルを [[c:BigDecimal]] の配列で指定します。
 
-#@since 1.9.2
 @param ps [[m:LUSolve.#ludecomp]] の返り値を指定します。
-#@else
-@param ps [[m:LUSolve#ludecomp]] の返り値を指定します。
-#@end
 
 @param zero 0.0 を表す値を指定します。
 
-  require 'bigdecimal'
-  require 'bigdecimal/util'
-  require 'bigdecimal/ludcmp'
+#@samplecode
+require 'bigdecimal'
+require 'bigdecimal/util'
+require 'bigdecimal/ludcmp'
 
-  include LUSolve
+include LUSolve
 
-#@since 1.8.7
-  a = [['1.0', '2.0'], ['3.0', '1.0']].flatten.map(&:to_d)
-  # x = ['1.0', -1.0']
-  b = ['-1.0', '2.0'].map(&:to_d)
-#@else
-  a = [['1.0', '2.0'], ['3.0', '1.0']].flatten.map{|n| n.to_d}
-  # x = ['1.0', '-1.0']
-  b = ['-1.0', '2.0'].map{|n| n.to_d}
-#@end
+a = [['1.0', '2.0'], ['3.0', '1.0']].flatten.map(&:to_d)
+# x = ['1.0', -1.0']
+b = ['-1.0', '2.0'].map(&:to_d)
 
-  zero = '0.0'.to_d
-  one = '1.0'.to_d
-  # 以下の 2 行は
-  ps = ludecomp(a, b.size, zero, one)  # a が破壊的に変更される
-  x = lusolve(a, b, ps, zero)
-  # こう書いてもよい
-  # x = lusolve(a, b, ludecomp(a, b.size, zero, one), zero)
+zero = '0.0'.to_d
+one = '1.0'.to_d
+# 以下の 2 行は
+ps = ludecomp(a, b.size, zero, one)  # a が破壊的に変更される
+x = lusolve(a, b, ps, zero)
+# こう書いてもよい
+# x = lusolve(a, b, ludecomp(a, b.size, zero, one), zero)
 
-#@since 1.8.7
-  p x.map(&:to_f)  #=> [1.0, -1.0]
-#@else
-  p x.map{|n| n.to_f}  #=> [1.0, -1.0]
-#@end
-
+p x.map(&:to_f)  #=> [1.0, -1.0]
 #@end

@@ -1052,8 +1052,8 @@ $VERBOSE が真のときは何もしません。
 
 #@# --- typedef_expr(type, headers)
 #@# nodoc
-#@# --- try_signedness(tyep, member, headers = nil, opts = nil)
-#@# --- try_signedness(tyep, member, headers = nil, opts = nil){ ... }
+#@# --- try_signedness(type, member, headers = nil, opts = nil)
+#@# --- try_signedness(type, member, headers = nil, opts = nil){ ... }
 #@# nodoc
 
 #@# --- macro_defined?(macro, src, opt = "") -> bool
@@ -1073,11 +1073,7 @@ $VERBOSE が真のときは何もしません。
 == Constants
 
 --- CONFIG -> Hash
-#@since 1.8.5
 [[m:RbConfig::MAKEFILE_CONFIG]] と同じです。
-#@else
-[[m:Config::MAKEFILE_CONFIG]] と同じです。
-#@end
 
 #@# --- INSTALL_DIRS
 #@# nodoc

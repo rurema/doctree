@@ -3,23 +3,77 @@ include Comparable
 
 文字列で表現されたバージョンを比較可能 (Comparable) にするためのクラスです。
 
+バージョンを文字列で表したとき、単純に [[m:String#<=>]] で比較すると、
+"1.9" のほうが "1.10" よりも大きい（バージョンが高い）ことになってしまい、
+正しく判定できません。
+Gem::Version はこの問題を解決します。
+
+#@samplecode 文字列での比較と Gem::Version での比較
+p "1.9" < "1.10" # => false
+p Gem::Version.new("1.9") < Gem::Version.new("1.10") # => true
+#@end
+
+gem のバージョンを取り扱うためのクラスですが、バージョン表記が RubyGems の流儀
+に則っていれば RubyGems とは無関係に使うこともできます。
+
+#@samplecode バージョン表記のソートの例
+versions = %w[ 1.1  1.10  1.9  1.1.beta9  1.1.beta10 ]
+
+p versions.sort_by{ |v| Gem::Version.new(v) }
+# => ["1.1.beta9", "1.1.beta10", "1.1", "1.9", "1.10"]
+#@end
+
+上の例で、"1.9" と "1.10" では（数字列ではなく）整数として 9 より 10 が
+大きいので、"1.10" のほうが大きいと判定されています。
+
+また、"1.1.beta9" は "beta9" の部分が数字でないものを含んでいるので "1.1" の
+「プレリリース」バージョンであるとみなされます。
+この規則により、"1.1" と "1.1.beta9" では後者のほうが小さいと判定されています。
+
+"1.1.beta9" と "1.1.beta10" では、"beta9" と "beta10" の部分だけが違い
+ますが、アルファベット部分と数字部分が分割され、数字部分は整数の大小比較に
+なるため、後者のほうが大きいと判定されます。
+
 == Singleton Methods
 
+#@since 2.5.0
 --- correct?(version) -> bool
 
-version が正しいバージョンであれば真を返します。そうでなければ偽を返します。
+version が正しいバージョンであれば true を返します。そうでなければ false を返します。
+
+#@samplecode
+p Gem::Version.correct?("9.1")       # => true
+p Gem::Version.correct?("incorrect") # => false
+
+p Gem::Version.correct?(nil)         # => true
+# nil versions are discouraged and will be deprecated in Rubygems 4
+# version が nil のときは true を返しますが、推奨はされず、Ruby 2.6以降では警告がでます。
+#@end
+#@else
+--- correct?(version) -> 0 | nil
+
+version が正しいバージョンであれば 0 を返します。そうでなければ nil を返します。
+
+#@samplecode
+p Gem::Version.correct?("9.1")       # => 0
+p Gem::Version.correct?("incorrect") # => nil
+
+p Gem::Version.correct?(nil)         # => 0
+#@end
+#@end
 
 @param version バージョンを文字列か数値で指定します。
+
 
 --- create(input) -> Gem::Version | nil
 
 [[c:Gem::Version]] のインスタンスを作成するためのファクトリメソッドです。
 
-例:
-
-  ver1 = Gem::Version.create('1.3.17')   # => #<Gem::Version "1.3.17">
-  ver2 = Gem::Version.create(ver1)       # => #<Gem::Version "1.3.17">
-  ver3 = Gem::Version.create(nil)        # => nil
+#@samplecode
+ver1 = Gem::Version.create('1.3.17')   # => #<Gem::Version "1.3.17">
+ver2 = Gem::Version.create(ver1)       # => #<Gem::Version "1.3.17">
+ver3 = Gem::Version.create(nil)        # => nil
+#@end
 
 @param input [[c:Gem::Version]] のインスタンスか文字列を指定します。
 
@@ -27,12 +81,40 @@ version が正しいバージョンであれば真を返します。そうでな
 
 @see [[m:Gem::Version.correct?]]
 
+
+--- new(version) -> Gem::Version
+
+バージョンを表す文字列から、Gem::Version インスタンスを作成します。
+
+引数のバージョンを表す文字列とは、 数字かASCII文字の連続であり、ドットで区切られたものです。
+
+#@samplecode
+p Gem::Version.new('1.2.0a') # => #<Gem::Version "1.2.0a">
+
+# Ruby 2.4.1より、空白文字以外の文字がない場合、バージョンは "0" になります。
+p Gem::Version.new(' ') #=> #<Gem::Version "0">
+#@end
+
+@param version
+@raise ArgumentError input がバージョンとして不正なオブジェクトである場合に発生します。
+                     これは Gem::Version.correct? により、判定されます。
+
+
 == Public Instance Methods
 
---- <=>(other) -> Integer | nil
+--- <=>(other) -> -1 | 0 | 1 | nil
 
-self と other を比較して、self が大きい時に 1 
-等しい時に 0、小さい時に -1 の整数を返します。
+self と other を比較して、self が小さい時に -1、
+等しい時に 0、大きい時に 1 の整数を返します。
+また、other が Gem::Version ではなく比較できないとき、 nil を返します。
+
+#@samplecode
+p Gem::Version.new("3.9.0") <=>  Gem::Version.new("3.10.0") # => -1
+p Gem::Version.new("3.0.0") <=>  Gem::Version.new("3.0.0")  # =>  0
+p Gem::Version.new("3.0.0") <=>  Gem::Version.new("3.0")    # =>  0
+
+p Gem::Version.new("3.9.0") <=> "3.9.0" # => nil
+#@end
 
 @param other 比較対象の [[c:Gem::Version]] のインスタンスを指定します。
 
@@ -40,56 +122,80 @@ self と other を比較して、self が大きい時に 1
 
 最後の一桁を切り上げた新しい [[c:Gem::Version]] のインスタンスを返します。
 
-例:
+ただし、英字のプレリリースの部分は、無視されます。
 
-  ver1 = Gem::Version.create('5.3.1') # => #<Gem::Version "5.3.1">
-  ver2 = ver1.bump                    # => #<Gem::Version "5.4">
+#@samplecode
+p Gem::Version.new('5.3.1').bump     # => #<Gem::Version "5.4">
+p Gem::Version.new('5.3.1.a.1').bump # => #<Gem::Version "5.4">
+p Gem::Version.new('5.3.1.3.1').bump # => #<Gem::Version "5.3.1.4">
+#@end
 
 --- eql?(other) -> bool
 
-self と other の [[m:Gem::Version#version]] が等しいとき真を返します。
-そうでなければ偽を返します。
+self と other の [[m:Gem::Version#version]] のバージョンが等しいとき true を返します。
+そうでなければ false を返します。
 
-例:
+Comparable を include して作られた == と異なり、"1.0" と "1" は異なるものと判定します。
 
-  ver1 = Gem::Version.create('1.0')   # => #<Gem::Version "1.0">
-  ver2 = Gem::Version.create('1')     # => #<Gem::Version "1">
-  ver3 = Gem::Version.create('1.2.3') # => #<Gem::Version "1.2.3">
-  ver1.eql?(ver2)                     # => true
-  ver1.eql?(ver3)                     # => false
+#@samplecode
+ver0 = Gem::Version.create('1.0')   # #<Gem::Version "1.0">
+ver1 = Gem::Version.create('1.0')   # #<Gem::Version "1.0">
+ver2 = Gem::Version.create('1')     # #<Gem::Version "1">
+
+p ver0.eql?(ver1)     # => true
+p ver1.eql?(ver2)     # => false
+p ver1 == ver2        # => true
+#@end
 
 --- marshal_dump -> Array
 
 完全なオブジェクトではなく、バージョン文字列のみダンプします。
 
---- marshal_load(array) -> String
+#@samplecode
+p Gem::Version.new('1.2.0a').marshal_dump  # => ["1.2.0a"]
+#@end
 
-ダンプされた情報をロードします。
+--- marshal_load(array) -> nil
+
+ダンプされた情報をロードし、自身を破壊的に変更します。
+
+#@samplecode
+version = Gem::Version.new('')
+version.marshal_load(["1.2.0a"])
+p version # => #<Gem::Version "1.2.0a">
+#@end
 
 @param array バージョン情報を含む配列を指定します。
 
---- to_s -> String
-
-バージョン情報を文字列として返します。
 
 #@#--- to_yaml_properties -> [String]
 #@#
 #@# :nodoc:
 
+#@#--- segments -> Array
+#@#
+#@# :nodoc:
+
+#@since 2.5.0
+#@#--- canonical_segments -> Array
+#@#
+#@# :nodoc:
+#@end
+
 --- version -> String
+--- to_s -> String
 
 バージョン情報を文字列として返します。
 
---- version=(version)
-
-self のバージョン情報を書き換えます。
+#@samplecode
+version = Gem::Version.new("1.2.3a")
+p version.to_s     # => "1.2.3a"
+p version.version  # => "1.2.3a"
+#@end
 
 #@#--- yaml_initialize(tag, values) -> String
 #@#
 #@# :nodoc:
-
-#@#--- Gem::Version::Requirement
-#@todo Gem::Requirement に書く
 
 --- prerelease? -> bool
 
@@ -116,6 +222,14 @@ Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
 @see [[m:Gem::Version#prerelease?]]
 
 == Constants
+
+--- Requirement -> Class
+
+[[c:Gem::Requirement]] のエイリアスです。
+
+#@samplecode
+p Gem::Version::Requirement == Gem::Requirement  # => true
+#@end
 
 #@#--- VERSION_PATTERN -> String
 #@#

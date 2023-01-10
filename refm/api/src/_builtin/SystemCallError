@@ -20,7 +20,6 @@ SystemCallError オブジェクトを生成して返します。
   p SystemCallError.new("message")
       # => #<SystemCallError: unknown error - message>
 
-#@since 1.8.0
 --- new(error_message, errno) -> SystemCallError
 --- new(errno) -> SystemCallError
 整数 errno に対応する [[c:Errno::EXXX]] オブジェクトを生成して返します。
@@ -68,11 +67,10 @@ other が SystemCallError のサブクラスのインスタンスで、
     rescue Errno::EWOULDBLOCK
       p $!
     end
-    
+
     # => 11
          11
          #<Errno::EAGAIN: pseudo error>
-#@end
 
 == Instance Methods
 
@@ -80,7 +78,6 @@ other が SystemCallError のサブクラスのインスタンスで、
 
 レシーバに対応するシステム依存のエラーコードを返します。
 
-#@since 1.8.0
 エラーコードを渡さない形式で生成した場合は nil を返します。
 
   begin
@@ -96,25 +93,6 @@ other が SystemCallError のサブクラスのインスタンスで、
     p err.errno                 # => nil
   end
 
-#@else
-実際にシステムコールが発生していない場合には nil を返します。
-[[m:Kernel.#raise]] によってシステムコールエラーが発生しているかのように見せかける場合は注意してください。
-
-  begin
-    open("nonexistent file")
-  rescue Errno::ENOENT => err
-    p err.errno                 # => 2
-    p Errno::ENOENT::Errno      # => 2
-  end
-
-  begin
-    raise Errno::ENOENT
-  rescue Errno::ENOENT => err
-    p err.errno                 # => nil
-    p Errno::ENOENT::Errno      # => 2
-  end
-
-#@end
 
 なお、例外を発生させずにエラーコードを得るには、
 [[m:Errno::EXXX::Errno]] 定数を使います。
@@ -320,9 +298,9 @@ Errno::EXXX オブジェクトを生成して返します。
 
 @param error_message エラーメッセージを表す文字列
 
-  p Errno::ENOENT
+  p Errno::ENOENT.new
       # => #<Errno::ENOENT: No such file or directory>
-  p Errno::ENOENT('message')
+  p Errno::ENOENT.new('message')
       # => #<Errno::ENOENT: No such file or directory - message>
 
 == Constants

@@ -1,6 +1,0 @@
-= class TclTkImage < TclTkCommand
-
-== Class Methods
-
---- new(interp, t, *args)
-#@todo

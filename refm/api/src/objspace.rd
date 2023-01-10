@@ -20,10 +20,10 @@ MRI の実装について詳しくない一般のユーザはこのライブラ�
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
 ントとして扱う必要があります。特に T_DATA の合計値は正しくないでしょう。
 
-例:
-
-  ObjectSpace.count_objects_size
-  # => {:TOTAL=>1461154, :T_CLASS=>158280, :T_MODULE=>20672, :T_STRING=>527249, ...}
+#@samplecode 例
+ObjectSpace.count_objects_size
+# => {:TOTAL=>1461154, :T_CLASS=>158280, :T_MODULE=>20672, :T_STRING=>527249, ...}
+#@end
 
 @raise TypeError result_hash にハッシュ以外を指定した時に発生します。
 
@@ -39,9 +39,7 @@ obj が消費するメモリ使用量をバイト単位で返します。
 
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
 ントとして扱う必要があります。特に T_DATA の値は正しくないでしょう。
-#@since 2.2.0
 2.2 以降では RVALUE のサイズを含んだ結果を返します。
-#@end
 
 本メソッドは C Ruby 以外では動作しません。
 
@@ -53,7 +51,6 @@ ObjectSpace.memsize_of(10)            # => 0
 ObjectSpace.memsize_of("12345" * 10)  # => 91
 #@end
 
-#@since 1.9.3
 --- memsize_of_all(klass = nil) -> Integer
 
 すべての生存しているオブジェクトが消費しているメモリ使用量をバイト単位
@@ -65,13 +62,15 @@ ObjectSpace.memsize_of("12345" * 10)  # => 91
 
 本メソッドは以下のような Ruby のコードで定義できます。
 
-  def memsize_of_all klass = false
-    total = 0
-    ObjectSpace.each_object{|e|
-      total += ObjectSpace.memsize_of(e) if klass == false || e.kind_of?(klass)
-    }
-    total
-  end
+#@samplecode 例
+def memsize_of_all klass = false
+  total = 0
+  ObjectSpace.each_object{|e|
+    total += ObjectSpace.memsize_of(e) if klass == false || e.kind_of?(klass)
+  }
+  total
+end
+#@end
 
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
 ントとして扱う必要があります。特に T_DATA の値は正しくないでしょう。
@@ -80,7 +79,6 @@ ObjectSpace.memsize_of("12345" * 10)  # => 91
 てください。
 
 本メソッドは C Ruby 以外では動作しません。
-#@end
 
 --- count_nodes(result_hash = nil) -> Hash
 
@@ -95,10 +93,10 @@ ObjectSpace.memsize_of("12345" * 10)  # => 91
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォー
 マンスやメモリ管理に興味のある C Ruby の開発者向けのものです。
 
-例:
-
-  ObjectSpace.count_nodes
-  # => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
+#@samplecode 例
+ObjectSpace.count_nodes
+# => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
+#@end
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
@@ -117,13 +115,13 @@ T_DATA の種類ごとにオブジェクトの数を格納したハッシュを�
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォー
 マンスに興味のある C Ruby の開発者向けのものです。
 
-例:
-
-  ObjectSpace.count_tdata_objects
-  # => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
-        :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
-        ThreadGroup=>1, Binding=>1, Thread=>1, RubyVM=>1, :iseq=>1,
-        Random=>1, ARGF.class=>1, Data=>1, :autoload=>3, Time=>2}
+#@samplecode 例
+ObjectSpace.count_tdata_objects
+# => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
+#     :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
+#     ThreadGroup=>1, Binding=>1, Thread=>1, RubyVM=>1, :iseq=>1,
+#     Random=>1, ARGF.class=>1, Data=>1, :autoload=>3, Time=>2}
+#@end
 
 現在のバージョンでは、戻り値のキーはクラスオブジェクトかシンボルのオブ
 ジェクトです。
@@ -136,35 +134,40 @@ rb_data_type_struct に格納された名前が使用されます。
 
 本メソッドは C Ruby 以外では動作しません。
 
-#@since 2.0.0
 --- reachable_objects_from(obj) -> Array | nil
 
 obj から到達可能なすべてのオブジェクトを返します。マーク不能なオブジェ
 クトを指定した場合は nil を返します。本メソッドを使う事でメモリリークの
 調査が行えます。
 
-  # 配列クラス(Array)と 'a'、'b'、'c' に到達可能。
-  ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
-  # => [Array, 'a', 'b', 'c']
+#@samplecode 例
+# 配列クラス(Array)と 'a'、'b'、'c' に到達可能。
+ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
+# => [Array, 'a', 'b', 'c']
+#@end
 
 obj が 2 つ以上の同じオブジェクト x への参照を持つ場合、戻り値に含まれ
 るオブジェクト x は 1 つだけです。
 
-  # 配列クラス(Array)と v に到達可能。
-  ObjectSpace.reachable_objects_from([v = 'a', v, v])
-  # => [Array, 'a']
+#@samplecode 例
+# 配列クラス(Array)と v に到達可能。
+ObjectSpace.reachable_objects_from([v = 'a', v, v])
+# => [Array, 'a']
 
-  # 配列クラス(Array)と 3 つの異なる 'a' オブジェクトに到達可能。
-  ObjectSpace.reachable_objects_from(['a', 'a', 'a'])
-  # => [Array, 'a', 'a', 'a']
+# 配列クラス(Array)と 3 つの異なる 'a' オブジェクトに到達可能。
+ObjectSpace.reachable_objects_from(['a', 'a', 'a'])
+# => [Array, 'a', 'a', 'a']
+#@end
 
 obj にマーク不能なオブジェクト(true、false、nil、[[c:Symbol]]、
 [[c:Fixnum]]、Flonum(即値の [[c:Float]] オブジェクト))を指定した場合は
 nil を返します。
 
-  # 1 はマーク不能
-  ObjectSpace.reachable_objects_from(1)
-  # => nil
+#@samplecode 例
+# 1 はマーク不能
+ObjectSpace.reachable_objects_from(1)
+# => nil
+#@end
 
 obj が内部でオブジェクトへの参照を持つ場合、
 ObjectSpace::InternalObjectWrapper オブジェクトが戻り値に含まれます。こ
@@ -177,6 +180,78 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 本メソッドは C Ruby 以外では動作しません。
 
-@see [[url:http://www.atdot.net/~ko1/diary/201212.html#d8]],
-     [[url:http://www.atdot.net/~ko1/diary/201212.html#d9]]
+@see [[url:https://www.atdot.net/~ko1/diary/201212.html#d8]],
+     [[url:https://www.atdot.net/~ko1/diary/201212.html#d9]]
+
+--- trace_object_allocations_start -> nil
+
+オブジェクト割り当てのトレースを開始します。
+
+@see [[m:ObjectSpace.#trace_object_allocations_stop]]
+
+--- trace_object_allocations_stop -> nil
+
+オブジェクト割り当てのトレースを終了します。
+
+トレースを終了する為には、[[m:ObjectSpace.#trace_object_allocations_start]]を呼んだ回数分だけこのメソッドを呼ぶ必要があります。
+
+@see [[m:ObjectSpace.#trace_object_allocations_start]]
+
+--- allocation_sourcefile(object) -> String
+
+objectの元となったソースファイル名を返します。
+
+@param object 元となるソースファイル名を取得したいobjectを指定します。
+@return objectの元となるソースファイル名を返します。存在しない場合はnilを返します。
+
+#@samplecode 例:test.rbというファイルで下記のスクリプトを実行した場合
+require 'objspace'
+
+ObjectSpace::trace_object_allocations_start
+obj = Object.new
+puts "file:#{ObjectSpace::allocation_sourcefile(obj)}"   # => file:test.rb
+ObjectSpace::trace_object_allocations_stop
+#@end
+
+@see [[m:ObjectSpace.#trace_object_allocations_start]],
+     [[m:ObjectSpace.#trace_object_allocations_stop]]
+
+--- allocation_sourceline(object) -> Integer
+
+objectの元となったソースファイルの行番号を返します。
+
+@param object 元となるソースファイルの行番号を取得したいobjectを指定します。
+@return objectの元となるソースファイルの行番号を返します。存在しない場合はnilを返します。
+
+#@samplecode 例
+require 'objspace'
+
+ObjectSpace::trace_object_allocations_start
+obj = Object.new
+puts "line:#{ObjectSpace::allocation_sourceline(obj)}"  # => line:4
+ObjectSpace::trace_object_allocations_stop
+#@end
+
+@see [[m:ObjectSpace.#trace_object_allocations_start]],
+     [[m:ObjectSpace.#trace_object_allocations_stop]]
+
+--- trace_object_allocations { ... }
+
+与えられたブロック内でオブジェクトのトレースを行います。　
+
+#@samplecode 例
+require 'objspace'
+
+class C
+  include ObjectSpace
+
+  def foo
+    trace_object_allocations do
+      obj = Object.new
+      p "#{allocation_sourcefile(obj)}:#{allocation_sourceline(obj)}"
+    end
+  end
+end
+
+C.new.foo #=> "objtrace.rb:8"
 #@end

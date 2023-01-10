@@ -19,7 +19,7 @@
     3.14 # => 3.14.rationalize
     6.022e+23r # 指数形式と一緒には使えない
 
-    # i を付けると複素数の虚部になる
+    # i を付けると虚数単位 i を掛けた数になる
     42i  # => Complex(0, 42)
     3.14i # => Complex(0, 3.14)
 
@@ -140,9 +140,17 @@
     end
 //}
 
+#@since 3.2
+  * Object#untrusted?,Object#untrust,Object#trust
+#@else
   * [[m:Object#untrusted?]],[[m:Object#untrust]],[[m:Object#trust]]
+#@end
     * これらのメソッドは非推奨になりました。$VERBOSE が true のときは警告を表示します。
+#@since 3.2
+      Object#tainted?,Object#taint,Object#untaint とそれぞれ同じ動作です。
+#@else
       [[m:Object#tainted?]],[[m:Object#taint]],[[m:Object#untaint]] とそれぞれ同じ動作です。
+#@end
 
   * [[m:Module#ancestors]]
     * 特異クラスの祖先はそれ自身を含みます。
@@ -182,18 +190,18 @@
     * 追加: [[m:Net::SMTP#rset]] RSET コマンドに対応している
 
   * [[lib:objspace]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_start]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_stop]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_clear]]
-    * 追加: [[m:ObjectSpace.allocation_sourcefile]]
-    * 追加: [[m:ObjectSpace.allocation_sourceline]]
-    * 追加: [[m:ObjectSpace.allocation_class_path]]
-    * 追加: [[m:ObjectSpace.allocation_method_id]]
-    * 追加: [[m:ObjectSpace.allocation_generation]]
-    * 追加: [[m:ObjectSpace.reachable_objects_from_root]]
-    * 追加: [[m:ObjectSpace.dump]]
-    * 追加: [[m:ObjectSpace.dump_all]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_start]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_stop]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_clear]]
+    * 追加: [[m:ObjectSpace.#allocation_sourcefile]]
+    * 追加: [[m:ObjectSpace.#allocation_sourceline]]
+    * 追加: [[m:ObjectSpace.#allocation_class_path]]
+    * 追加: [[m:ObjectSpace.#allocation_method_id]]
+    * 追加: [[m:ObjectSpace.#allocation_generation]]
+    * 追加: [[m:ObjectSpace.#reachable_objects_from_root]]
+    * 追加: [[m:ObjectSpace.#dump]]
+    * 追加: [[m:ObjectSpace.#dump_all]]
 
   * OpenSSL::BN
     * 拡張: [[m:OpenSSL::BN.new]] Fixnum や Bignum を引数として取れるようになりました。
@@ -243,7 +251,7 @@
       * Gemfile or gem.deps.rb support including Gem.file.lock (experimental)
       * Improved, iterative resolver (compared to RubyGems 2.1 and earlier)
       * Support for a sharing a GEM_HOME across ruby platforms and versions
-      * [[lib:https://github.com/rubygems/rubygems/tree/master/History.txt]]
+      * [[url:https://github.com/rubygems/rubygems/tree/master/History.txt]]
 
   * [[lib:set]]
     * 追加: [[m:Set#intersect?]]

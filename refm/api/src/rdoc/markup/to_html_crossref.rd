@@ -23,4 +23,4 @@ RDoc 形式のドキュメントを HTML に整形するクラスです。
 @param show_hash true を指定した場合、メソッド名のリンクに # を表示しま
                  す。false の場合は表示しません。
 
-@raise ArgmentError path に nil を指定した場合に発生します。
+@raise ArgumentError path に nil を指定した場合に発生します。

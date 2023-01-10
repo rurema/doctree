@@ -8,44 +8,47 @@ XML 宣言を表すクラス。
 
 文書から XML 宣言を取り出すには [[m:REXML::Document#xml_decl]] を使います。
 
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-  <e />
-  EOS
-  
-  xml_decl = doc.xml_decl
-  xml_decl.version # => "1.0"
-  xml_decl.encoding # => "UTF-8"
-  xml_decl.standalone # => "yes"
-  xml_decl.writethis # => true
-  
+#@samplecode
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<e />
+EOS
 
-XML 宣言を省略した場合の例。
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <e />
-  EOS
-  
-  xml_decl = doc.xml_decl
-  xml_decl.version # => "1.0"
-  xml_decl.encoding # => "UTF-8"
-  xml_decl.standalone # => nil
-  xml_decl.writethis # => false
+xml_decl = doc.xml_decl
+xml_decl.version # => "1.0"
+xml_decl.encoding # => "UTF-8"
+xml_decl.standalone # => "yes"
+xml_decl.writethis # => true
+#@end
 
-XML 宣言が encoding 属性を持たない場合の例
 
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  <?xml version="1.0" ?>
-  <e />
-  EOS
-  
-  xml_decl = doc.xml_decl
-  xml_decl.version # => "1.0"
-  xml_decl.encoding # => "UTF-8"
-  xml_decl.standalone # => nil
-  xml_decl.writethis # => true
+#@samplecode XML 宣言を省略した場合の例。
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<e />
+EOS
+
+xml_decl = doc.xml_decl
+xml_decl.version # => "1.0"
+xml_decl.encoding # => "UTF-8"
+xml_decl.standalone # => nil
+xml_decl.writethis # => false
+#@end
+
+#@samplecode XML 宣言が encoding 属性を持たない場合の例
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+<?xml version="1.0" ?>
+<e />
+EOS
+
+xml_decl = doc.xml_decl
+xml_decl.version # => "1.0"
+xml_decl.encoding # => "UTF-8"
+xml_decl.standalone # => nil
+xml_decl.writethis # => true
+#@end
 
 == Class Methods
 
@@ -171,17 +174,17 @@ enc に nil を渡すと XML 宣言では encoding が
 の使われるデフォルトのXMLバージョン。
 
 #@# #@todo
-#@# 
+#@#
 #@# 以下の利用法は？
 #@# --- DEFAULT_ENCODING
 #@# #@todo
-#@# 
+#@#
 #@# --- DEFAULT_STANDALONE
 #@# #@todo
 
 #@# 以下2つは内部用
 #@# --- START
 #@# #@todo
-#@# 
+#@#
 #@# --- STOP
 #@# #@todo

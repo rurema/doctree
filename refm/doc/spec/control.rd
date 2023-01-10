@@ -32,14 +32,14 @@ RubyはC言語やPerlから引き継いだ制御構造を持ちますが、
 === 条件分岐
 ====[a:if] if
 
-例:
-
-          if age >= 12 then
-            print "adult fee\n"
-          else
-            print "child fee\n"
-          end
-          gender = if foo.gender == "male" then "male" else "female" end
+#@samplecode 例
+if age >= 12 then
+  print "adult fee\n"
+else
+  print "child fee\n"
+end
+gender = if foo.gender == "male" then "male" else "female" end
+#@end
 
 文法:
 
@@ -69,15 +69,17 @@ Ruby では if を繋げるのは elsif であり、else if
 
 また if の条件式が正規表現のリテラルである時には特別に
 
-          $_ =~ リテラル
+#@samplecode
+$_ =~ リテラル
+#@end
 
 であるかのように評価されます。
 
 ==== if 修飾子
 
-例:
-
-          print "debug\n" if $DEBUG
+#@samplecode 例
+print "debug\n" if $DEBUG
+#@end
 
 文法:
 
@@ -88,13 +90,13 @@ Ruby では if を繋げるのは elsif であり、else if
 
 ====[a:unless] unless
 
-例:
-
-          unless baby?
-            feed_meat
-          else
-            feed_milk
-          end
+#@samplecode 例
+unless baby?
+  feed_meat
+else
+  feed_milk
+end
+#@end
 
 文法:
 
@@ -110,33 +112,33 @@ unless は if と反対で、条件式が偽の時に then 以下の
 
 ==== unless 修飾子
 
-例:
-
-          print "stop\n" unless valid(passwd)
+#@samplecode 例
+print "stop\n" unless valid(passwd)
+#@end
 
 文法:
 
           式 unless 式
 
 右辺の条件が成立しない時に、左辺の式を評価してその結果を返します。
-条件が成立しなければ nil を返します。
+条件が成立すれば nil を返します。
 
 ====[a:case] case
 
-例:
-
-          case $age
-          when 0 .. 2
-            "baby"
-          when 3 .. 6
-            "little child"
-          when 7 .. 12
-            "child"
-          when 13 .. 18
-            "youth"
-          else
-            "adult"
-          end
+#@samplecode 例
+case $age
+when 0 .. 2
+  "baby"
+when 3 .. 6
+  "little child"
+when 7 .. 12
+  "child"
+when 13 .. 18
+  "youth"
+else
+  "adult"
+end
+#@end
 
 文法:
 
@@ -155,25 +157,29 @@ case は一つの式に対する一致判定による分岐を行います。whe
 
 つまり、
 
-          case 式0
-          when 式1, 式2
-            stmt1
-          when 式3, 式4
-            stmt2
-          else
-            stmt3
-          end
+#@samplecode
+case 式0
+when 式1, 式2
+  stmt1
+when 式3, 式4
+  stmt2
+else
+  stmt3
+end
+#@end
 
 は以下の if 式とほぼ等価です。
 
-          _tmp = 式0
-          if 式1 === _tmp or 式2 === _tmp
-            stmt1
-          elsif 式3 === _tmp or 式4 === _tmp
-            stmt2
-          else
-            stmt3
-          end
+#@samplecode
+_tmp = 式0
+if 式1 === _tmp or 式2 === _tmp
+  stmt1
+elsif 式3 === _tmp or 式4 === _tmp
+  stmt2
+else
+  stmt3
+end
+#@end
 
 when 節の評価順序はこの上記 if 文に書き直した場合と同じです。つまり上
 から順に(そして左から順に) === が評価されます。また「式0」は1回だけ評
@@ -181,19 +187,23 @@ when 節の評価順序はこの上記 if 文に書き直した場合と同じ�
 
 when 節の最後の式に `*' を前置すればその式は配列展開されます。
 
-        ary = [1,2,3]
+#@samplecode
+ary = [1,2,3]
 
-        case v
-        when *ary
-         ..
-        end
+case v
+when *ary
+ # ..
+end
+#@end
 
 は、
 
-        case v
-        when 1, 2, 3
-         ..
-        end
+#@samplecode
+case v
+when 1, 2, 3
+ # ..
+end
+#@end
 
 と等価です。
 
@@ -203,16 +213,18 @@ when 節の最後の式に `*' を前置すればその式は配列展開され�
 case の「式」を省略した場合、when の条件式が偽でない最初の
 式を評価します。
 
-        foo = false
-        bar = true
-        quu = false
+#@samplecode
+foo = false
+bar = true
+quu = false
 
-        case
-        when foo then puts 'foo is true'
-        when bar then puts 'bar is true'
-        when quu then puts 'quu is true'
-        end
-        # "bar is true"と表示される
+case
+when foo then puts 'foo is true'
+when bar then puts 'bar is true'
+when quu then puts 'quu is true'
+end
+# "bar is true"と表示される
+#@end
 
 case は、条件が成立した when 節、(あるいは else 節)
 の最後に評価した式の結果を返します。いずれの条件も成り立たなければ
@@ -222,14 +234,14 @@ nil を返します。
 
 ====[a:while] while
 
-例:
-
-          ary = [0,2,4,8,16,32,64,128,256,512,1024]
-          i = 0
-          while i < ary.length
-            print ary[i]
-            i += 1
-          end
+#@samplecode 例
+ary = [0,2,4,8,16,32,64,128,256,512,1024]
+i = 0
+while i < ary.length
+  print ary[i]
+  i += 1
+end
+#@end
 
 文法:
 
@@ -244,8 +256,9 @@ while 式の戻り値をその値にすることもできます。
 
 ==== while 修飾子
 
-例:
-          sleep(60) while io_not_ready?
+#@samplecode 例
+sleep(60) while io_not_ready?
+#@end
 
 文法:
 
@@ -255,11 +268,12 @@ while 式の戻り値をその値にすることもできます。
 
 左辺の式が begin 節である場合にはそれを最初に一回評価してから繰り返します。
 
-例:
-        send_request(data)
-        begin
-          res = get_response()
-        end while res == 'Continue'
+#@samplecode 例
+send_request(data)
+begin
+  res = get_response()
+end while res == 'Continue'
+#@end
 
 while 修飾した式は nil を返します。
 また、引数を伴った break により while 修飾した式の戻り値を
@@ -267,10 +281,11 @@ while 修飾した式は nil を返します。
 
 ====[a:until] until
 
-例:
-          until f.eof?
-            print f.gets
-          end
+#@samplecode 例
+until f.eof?
+  print f.gets
+end
+#@end
 
 文法:
           until 式 [do]
@@ -284,8 +299,9 @@ until 式の戻り値をその値にすることもできます。
 
 ==== until修飾子
 
-例:
-          print(f.gets) until f.eof?
+#@samplecode 例
+print(f.gets) until f.eof?
+#@end
 
 文法:
           式 until 式
@@ -295,33 +311,34 @@ until 式の戻り値をその値にすることもできます。
 
 左辺の式が begin 節である場合にはそれを最初に一回評価してから繰り返します。
 
-例:
-        send_request(data)
-        begin
-          res = get_response()
-        end until res == 'OK'
+#@samplecode 例
+send_request(data)
+begin
+  res = get_response()
+end until res == 'OK'
+#@end
 
 until 修飾した式は nil を返します。
 また、引数を伴った break により until 修飾した式の戻り値をその値にすることもできます。
 
 ====[a:for] for
 
-例:
-
-          for i in [1, 2, 3]
-            print i*2, "\n"
-          end
+#@samplecode 例
+for i in [1, 2, 3]
+  print i*2, "\n"
+end
+#@end
 
 文法:
 
-          for lhs ...  in 式 [do]
-            式..
+          for lhs ...  in 式1 [do]
+            式2..
           end
 
 式を評価した結果のオブジェクトの各要素に対して本体を繰り返し
 て実行します。これは以下の式とほぼ等価です。
 
-          (式).each `{' `|' lhs..`|' 式.. `}'
+          (式1).each `{' `|' lhs..`|' 式2.. `}'
 
 「ほぼ」というのは、do  ...  endまたは{ }による
 ブロックは新しいローカル変数の有効範囲を導入するのに対し、
@@ -333,47 +350,53 @@ for は、in に指定したオブジェクトの each
 
 複数のループ変数指定は以下のような場合に使用します。
 
-        for i,j in [[1,2], [3,4], [5,6]]
-          p [i,j]
-        end
-        => [1, 2]
-           [3, 4]
-           [5, 6]
+#@samplecode 例
+for i,j in [[1,2], [3,4], [5,6]]
+  p [i,j]
+end
+# => [1, 2]
+#    [3, 4]
+#    [5, 6]
+#@end
 
 for や each で配列要素を複数個ずつ取得しながらループすることは
 できません。
 
-        for i,j in [1, 2, 3]
-          p [i,j]
-        end
+#@samplecode
+for i,j in [1, 2, 3]
+  p [i,j]
+end
 
-        => [1, nil]
-           [2, nil]
-           [3, nil]
+# => [1, nil]
+#    [2, nil]
+#    [3, nil]
 
-        # [1,2] [3,nil] を期待するかもしれないがそうはならない
+# [1,2] [3,nil] を期待するかもしれないがそうはならない
+#@end
 
 代わりにそのようなメソッド(イテレータ)を定義する必要があります。
 
-        class Array
-          def each2
-            i = 0
-            while i < self.size
-              yield self[i], self[i+1]
-              i += 2
-            end
-          end
-        end
+#@samplecode
+class Array
+  def each2
+    i = 0
+    while i < self.size
+      yield self[i], self[i+1]
+      i += 2
+    end
+  end
+end
+#@end
 
 ====[a:break] break
 
-例:
-
-          i = 0
-          while i < 3
-            print i, "\n"
-            break
-          end
+#@samplecode 例
+i = 0
+while i < 3
+  print i, "\n"
+  break
+end
+#@end
 
 文法:
 
@@ -398,12 +421,13 @@ break によりループを抜けた for やイテレータは nil
 
 ====[a:next] next
 
-例:
-          # 空行を捨てるcat
-          ARGF.each_line do |line|
-            next if line.strip.empty?
-            print line
-          end
+#@samplecode 例
+# 空行を捨てるcat
+ARGF.each_line do |line|
+  next if line.strip.empty?
+  print line
+end
+#@end
 
 文法:
 
@@ -420,9 +444,9 @@ next により抜けた yield 式は nil を返します。
 
 ====[a:redo] redo
 
-例:
-
-          redo
+#@samplecode 例
+redo
+#@end
 
 文法:
 
@@ -432,9 +456,9 @@ next により抜けた yield 式は nil を返します。
 
 ====[a:retry] retry
 
-例:
-
-          retry
+#@samplecode 例
+retry
+#@end
 
 文法:
 
@@ -446,16 +470,18 @@ retry は、rescue 節で begin 式をはじめからもう一度実行するの
 イテレータ、ブロックまたはfor文の中で使われた場合には、そのイテレータ
 を起動しなおします。イテレータの引数も再評価されます。
 
-          for i in 1..5
-            retry if some_condition # i == 1 からやり直し
-          end
+#@samplecode
+for i in 1..5
+  retry if some_condition # i == 1 からやり直し
+end
 
-          # ユーザ定義の "untilループ"
-          def UNTIL(cond)
-            return if cond
-            yield
-            retry
-          end
+# ユーザ定義の "untilループ"
+def UNTIL(cond)
+  return if cond
+  yield
+  retry
+end
+#@end
 
 retry は、ループ以外に後述の rescue 節でも使えます。この場
 合は、begin 式を始めからもう一度実行します。
@@ -463,12 +489,14 @@ retry は、ループ以外に後述の rescue 節でも使えます。この場
 retry を使うことである処理が成功するまで処理を繰り返すようなループを作
 ることができます。
 
-          begin
-            do_something # exception raised
-          rescue
-            # handles error
-            retry  # restart from beginning
-          end
+#@samplecode
+begin
+  do_something # exception raised
+rescue
+  # handles error
+  retry  # restart from beginning
+end
+#@end
 
 #@since 1.9.1
 rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]] が発生
@@ -478,44 +506,77 @@ rescue 節やイテレータブロック、for 文以外で retry が用いら�
 例外 [[c:LocalJumpError]] が発生します。また、トップレベルで用いられた
 場合には、警告を表示してインタプリタが終了します。
 
-  retry #=> -:1: retry outside of rescue clause
+#@samplecode
+retry #=> -:1: retry outside of rescue clause
+#@end
 #@end
 
 イテレータ呼び出しにおける break, next, redo,
 retry をまとめると以下のようになります。
 
-        def iter
-         (a)
-          :
-         (b)
-         yield
-         (c)
-          :
-         (d)
-        end
 #@until 1.9.0
-        iter { retry }   -> (a) へ飛ぶ
+#@samplecode
+def iter
+  # (a)
+  #  :
+  # (b)
+  yield
+  # (c)
+  #  :
+  # (d)
+end
+iter { retry }  # -> (a) へ飛ぶ
+iter { redo  }  # -> (b) へ飛ぶ
+iter { next  }  # -> (c) へ飛ぶ
+iter { break }  # -> (d) へ飛ぶ
 #@end
-        iter { redo  }   -> (b) へ飛ぶ
-        iter { next  }   -> (c) へ飛ぶ
-        iter { break }   -> (d) へ飛ぶ
+#@else
+#@samplecode
+def iter
+  # (a)
+  #  :
+  # (b)
+  yield
+  # (c)
+  #  :
+  # (d)
+end
+iter { redo  }  # -> (b) へ飛ぶ
+iter { next  }  # -> (c) へ飛ぶ
+iter { break }  # -> (d) へ飛ぶ
+#@end
+#@end
 
 (a) は、厳密には引数評価から始まります。(b) はブロック実行の直前を指し
 ています(yield の引数が再評価されるわけではない)。(d) は、メソッドの終
 了です。
 
-        def iter(var = p("(a)"))
-          yield
-          p "(c)"
-        ensure
-          p "(d)"
-        end
 #@until 1.9.0
-        iter { p "(b)"; retry }     # -> (a) .. (b)(d)(a) .. (b)(d)(a) ...
+#@samplecode
+def iter(var = p("(a)"))
+  yield
+  p "(c)"
+ensure
+  p "(d)"
+end
+iter { p "(b)"; retry }     # -> (a) .. (b)(d)(a) .. (b)(d)(a) ...
+iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
+iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
+iter { p "(b)"; break }     # -> (a)..(b)(d)
 #@end
-        iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
-        iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
-        iter { p "(b)"; break }     # -> (a)..(b)(d)
+#@else
+#@samplecode
+def iter(var = p("(a)"))
+  yield
+  p "(c)"
+ensure
+  p "(d)"
+end
+iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
+iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
+iter { p "(b)"; break }     # -> (a)..(b)(d)
+#@end
+#@end
 
 #@until 1.9.1
 [注意] ensure は大域脱出を捕捉するため、retry の例では (d) も表示されます。
@@ -525,13 +586,13 @@ retry をまとめると以下のようになります。
 
 ====[a:raise] raise
 
-例:
-
-          raise "you lose"  # 例外 RuntimeError を発生させる
-          # 以下の二つは SyntaxError を発生させる
-          raise SyntaxError, "invalid syntax"
-          raise SyntaxError.new("invalid syntax")
-          raise             # 最後の例外の再発生
+#@samplecode 例
+raise "you lose"  # 例外 RuntimeError を発生させる
+# 以下の二つは SyntaxError を発生させる
+raise SyntaxError, "invalid syntax"
+raise SyntaxError.new("invalid syntax")
+raise             # 最後の例外の再発生
+#@end
 
 文法:
 
@@ -561,15 +622,15 @@ retry をまとめると以下のようになります。
 
 ====[a:begin] begin
 
-例:
-
-          begin
-            do_something
-          rescue
-            recover
-          ensure
-            must_to_do
-          end
+#@samplecode 例
+begin
+  do_something
+rescue
+  recover
+ensure
+  must_to_do
+end
+#@end
 
 文法:
 
@@ -590,15 +651,17 @@ rescue 節が存在する時には rescue 節の本体が実行されます。
 指定されていれば変数 evar にも $! と同様に発生した例外が格
 納されます。
 
-        begin
-          raise "error message"
-        rescue => evar
-          p $!
-          p evar
-        end
-        # => #<RuntimeError: error message>
-             #<RuntimeError: error message>
+#@samplecode
+begin
+  raise "error message"
+rescue => evar
+  p $!
+  p evar
+end
+# => #<RuntimeError: error message>
+#    #<RuntimeError: error message>
 
+#@end
 例外の一致判定は，発生した例外が rescue 節で指定した
 クラスのインスタンスであるかどうかで行われます。
 
@@ -633,8 +696,9 @@ begin なしで rescue, ensure 節を定義でき、これにより例外を処�
 
 ==== rescue修飾子
 
-例:
-          open("nonexistent file") rescue STDERR.puts "Warning: #$!"
+#@samplecode 例
+open("nonexistent file") rescue STDERR.puts "Warning: #$!"
+#@end
 
 文法:
 
@@ -644,18 +708,22 @@ begin なしで rescue, ensure 節を定義でき、これにより例外を処�
 以下と同じ意味です。捕捉する例外クラスを指定することはできません。
 (つまり、[[c:StandardError]] 例外クラスのサブクラスだけしか捕捉できません)
 
-          begin
-            式1
-          rescue
-            式2
-          end
+#@samplecode
+begin
+  式1
+rescue
+  式2
+end
+#@end
 
 rescue修飾子を伴う式の値は例外が発生しなければ式1、例外が発生すれば式2
 です。
 
-          var = open("nonexistent file") rescue false
-          p var
-          => false
+#@samplecode
+var = open("nonexistent file") rescue false
+p var
+# => false
+#@end
 
 ただし、優先順位の都合により式全体を括弧で囲む必要がある場合があります。
 メソッドの引数にするには二重の括弧が必要です。
@@ -670,11 +738,11 @@ rescue修飾子を伴う式の値は例外が発生しなければ式1、例外�
 
 ====[a:return] return
 
-例:
-
-          return
-          return 12
-          return 1,2,3
+#@samplecode 例
+return
+return 12
+return 1,2,3
+#@end
 
 文法:
 
@@ -691,11 +759,11 @@ require, load されたファイル内のトップレベルで return した場�
 
 ====[a:BEGIN] BEGIN
 
-例:
-
-          BEGIN {
-             ...
-          }
+#@samplecode 例
+BEGIN {
+  # ...
+}
+#@end
 
 文法:
 
@@ -757,11 +825,11 @@ BEGINはメソッド定義式中には書けません。parse error になりま
 
 ====[a:END] END
 
-例:
-
-          END {
-             ...
-          }
+#@samplecode 例
+END {
+  # ...
+}
+#@end
 
 文法:
 
@@ -774,25 +842,29 @@ BEGINはメソッド定義式中には書けません。parse error になりま
 複数の END ブロックを登録した場合は、登録したときと逆の順序で実
 行されます。
 
-        END { p 1 }
-        END { p 2 }
-        END { p 3 }
+#@samplecode
+END { p 1 }
+END { p 2 }
+END { p 3 }
 
-        # => 3
-             2
-             1
+# => 3
+#    2
+#    1
+#@end
 
 END ブロックは一つの記述につき最初の一回のみ有効です。たとえば以
 下のようにループの中で実行しても複数の END ブロックが登録される
 わけではありません。そのような目的には [[m:Kernel.#at_exit]] を使
 います。
 
-        5.times do |i|
-          END { p i }
-        end
-        # => 0
+#@samplecode
+5.times do |i|
+  END { p i }
+end
+# => 0
+#@end
 
-END をメソッド定義式中に書くと警告が出ます
+END をメソッド定義式中に書くと警告が出ます。
 #@#((-((<ruby 1.8 feature>)): これは 1.8.1 から [[unknown:ruby-dev:21513]]-))。
 意図的にこのようなことを行いたい場合は [[m:Kernel.#at_exit]] を使
 います。
@@ -828,12 +900,12 @@ END ブロックの中で発生した例外はその END ブロックを中断�
 ますが、すべての後始末ルーチンが実行されるよう、インタプリタは終了せず
 にメッセージだけを出力します。
 
-例:
+#@samplecode 例
+END { p "FOO" }
+END { raise "bar"; p "BAR" }
+END { raise "baz"; p "BAZ" }
 
-        END { p "FOO" }
-        END { raise "bar"; p "BAR" }
-        END { raise "baz"; p "BAZ" }
-
-        => baz (RuntimeError)
-           bar (RuntimeError)
-           "FOO"
+# => baz (RuntimeError)
+#    bar (RuntimeError)
+#    "FOO"
+#@end

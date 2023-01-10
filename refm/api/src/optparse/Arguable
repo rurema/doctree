@@ -29,16 +29,16 @@ OptionParser::Arguable を [[m:Object#extend]] します。
 が発生した場合は、全て rescue し、エラーメッセージを出力し、
 nil を返します。
 
-例:
+#@samplecode
+require 'optparse'
 
- require 'optparse'
- 
- o = nil
- ARGV.options{|opt|
-   opt.on('-a'){ o = true }
-   opt.parse!
- }
- p o                         #=> true
+o = nil
+ARGV.options{|opt|
+  opt.on('-a'){ o = true }
+  opt.parse!
+}
+p o                         #=> true
+#@end
 
 --- order!               -> [String]
 --- order!{|s| ... }     -> [String]
@@ -50,14 +50,14 @@ nil を返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスの例外になります。
 
-例:
+#@samplecode
+require 'optparse'
 
-  require 'optparse'
-  
-  o = nil
-  ARGV.options.on('-a'){ o = true }
-  ARGV.order!
-  p o                                #=> true
+o = nil
+ARGV.options.on('-a'){ o = true }
+ARGV.order!
+p o                                #=> true
+#@end
 
 --- permute!             -> [String]
 
@@ -68,14 +68,14 @@ nil を返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスの例外になります。
 
-例:
+#@samplecode
+require 'optparse'
 
-  require 'optparse'
-  
-  o = nil
-  ARGV.options.on('-a'){ o = true }
-  ARGV.permute!
-  p o                                #=> true
+o = nil
+ARGV.options.on('-a'){ o = true }
+ARGV.permute!
+p o                                #=> true
+#@end
 
 --- parse!               -> [String]
 
@@ -86,16 +86,15 @@ nil を返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスの例外になります。
 
-例:
+#@samplecode
+require 'optparse'
 
-  require 'optparse'
-  
-  o = nil
-  ARGV.options.on('-a'){ o = true }
-  ARGV.parse!
-  p o                                #=> true
+o = nil
+ARGV.options.on('-a'){ o = true }
+ARGV.parse!
+p o                                #=> true
+#@end
 
-#@since 1.8.5
 --- getopts(short_opt, *long_opt)    -> Hash
 
 指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
@@ -115,15 +114,12 @@ nil を返します。
                                 実際は OptionParser::ParseError のサブク
                                 ラスの例外になります。
 
-例:
-
- # t.rb の内容
- require 'optparse'
- params = ARGV.getopts("ab:", "foo", "bar:", "bufsize:1024")
- p params
+#@samplecode t.rb
+require 'optparse'
+params = ARGV.getopts("ab:", "foo", "bar:", "bufsize:1024")
+p params
+#@end
 
  # 実行結果
  $ ruby t.rb -b 1 --foo  --bar xxx -- -a
  {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
-
-#@end

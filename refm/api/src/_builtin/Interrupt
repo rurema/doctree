@@ -1,8 +1,4 @@
-#@since 1.8.0
 = class Interrupt < SignalException
-#@else
-= class Interrupt < Exception
-#@end
 
 SIGINT シグナルを捕捉していないときに
 SIGINT シグナルを受け取ると発生します。

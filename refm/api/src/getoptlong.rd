@@ -64,7 +64,7 @@ GNU getopt_long() および getoptlong.rb には、`REQUIRE_ORDER',
 まず、`getoptlong.rb' を Ruby で書かれたあなたのプログラムに取り込みま
 す。
 
-    require 'getoptlong.rb'
+    require 'getoptlong'
 
 #@since 1.9.1
 getoptlong はクラスを提供します。

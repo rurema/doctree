@@ -42,11 +42,11 @@ RubyGems を扱うためのクラスやモジュールが定義されている�
         gem help <COMMAND>           COMMAND に関するヘルプを表示します
                                        (e.g. 'gem help install')
       より詳しい情報:
-        http://rubygems.rubyforge.org
+        https://rubygems.org
 
 ==== Gem パッケージをインストールする
 
-例えば rak ( [[url:http://rubygems.org/gems/rak]] ) をインストールするには、以下のいずれかを実行します。
+例えば rak ( [[url:https://rubygems.org/gems/rak]] ) をインストールするには、以下のいずれかを実行します。
 
   $ gem install rak
   $ sudo gem install rak
@@ -58,7 +58,7 @@ RubyGems を扱うためのクラスやモジュールが定義されている�
 
 Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
 
-  $ gem install rak -p http://user:pasword@proxy.example.com/
+  $ gem install rak -p http://user:password@proxy.example.com/
 
 ==== Gem パッケージをアンインストールする
 
@@ -112,26 +112,29 @@ Proxy サーバ経由で Gem パッケージをインストールするには以
 最小の gemspec は以下のようになります。ビルドするために必要な最小の gemspec なので出来上がるのは
 メタデータのみを含む Gem パッケージです。また、いくつかの警告が表示されます。
 
-  Gem::Specification.new do |s|
-    s.name    = 'hello'
-    s.version = '0.0.0'
-    s.summary = 'hello summary'
-  end
+#@samplecode gemspec
+Gem::Specification.new do |s|
+  s.name    = 'hello'
+  s.version = '0.0.0'
+  s.summary = 'hello summary'
+end
+#@end
 
 実用的なライブラリを作成するための gemspec の例を示します。
 警告メッセージが出力されないようにいくつか設定を追加しています。
 
-  Gem::Specification.new do |s|
-    s.name              = 'hello'
-    s.version           = '0.0.0'
-    s.summary           = 'hello summary'
-    s.files             = ['lib/hello.rb']
-    s.authors           = ['Hello Author']
-    s.email             = 'hello_author@example.com'
-    s.homepage          = 'http://example.com/hello/'
-    s.description       = 'hello description'
-    s.rubyforge_project = 'hello'
-  end
+#@samplecode gemspec
+Gem::Specification.new do |s|
+  s.name              = 'hello'
+  s.version           = '0.0.0'
+  s.summary           = 'hello summary'
+  s.files             = ['lib/hello.rb']
+  s.authors           = ['Hello Author']
+  s.email             = 'hello_author@example.com'
+  s.homepage          = 'http://example.com/hello/'
+  s.description       = 'hello description'
+end
+#@end
 
 : name
   この Gem の名前を指定します。
@@ -149,52 +152,52 @@ Proxy サーバ経由で Gem パッケージをインストールするには以
   この Gem のウェブサイトの URI を指定します。
 : description
   この Gem の長い説明を指定します。
-: rubyforge_project
-  Rubyforge にプロジェクトがある場合、そのプロジェクト名を指定します。
 
 実行可能なファイル (コマンド) を含む場合の gemspec は以下のようになります。
 
-  Gem::Specification.new do |s|
-    s.name              = 'hello'
-    s.version           = '0.0.0'
-    s.summary           = 'hello summary'
-    s.files             = ['bin/hello', 'lib/hello.rb']
-    s.executables       = ['hello']
-    s.authors           = ['Hello Author']
-    s.email             = 'hello@example.com'
-    s.homepage          = 'http://example.com/hello'
-    s.rubyforge_project = 'hello'
-    s.description       = 'hello description'
-  end
+#@samplecode gemspec
+Gem::Specification.new do |s|
+  s.name              = 'hello'
+  s.version           = '0.0.0'
+  s.summary           = 'hello summary'
+  s.files             = ['bin/hello', 'lib/hello.rb']
+  s.executables       = ['hello']
+  s.authors           = ['Hello Author']
+  s.email             = 'hello@example.com'
+  s.homepage          = 'http://example.com/hello'
+  s.description       = 'hello description'
+end
+#@end
 
 ライブラリの例に加えて executables を追加しています。
 
 また、以下のように Rakefile にタスクを追加することもできます。
 
-  require 'rake/gempackagetask'
-  
-  PKG_FILES = FileList[
-    'lib/hello.rb',
-    'spec/*'
-  ]
-  spec = Gem::Specification.new do |s|
-    s.name             = 'hello'
-    s.version          = '0.0.1'
-    s.author           = 'Hello Author'
-    s.email            = 'hello@example.com
-    s.homepage         = 'http://example.com/hello'
-    s.platform         = Gem::Platform::RUBY
-    s.summary          = 'Hello Gem'
-    s.files            = PKG_FILES.to_a
-    s.require_path     = 'lib'
-    s.has_rdoc         = false
-    s.extra_rdoc_files = ['README']
-  end
-  
-  Rake::GemPackageTask.new(spec) do |pkg|
-    pkg.gem_spec = spec
-  end
+#@samplecode gemspec
+require 'rake/gempackagetask'
 
+PKG_FILES = FileList[
+  'lib/hello.rb',
+  'spec/*'
+]
+spec = Gem::Specification.new do |s|
+  s.name             = 'hello'
+  s.version          = '0.0.1'
+  s.author           = 'Hello Author'
+  s.email            = 'hello@example.com'
+  s.homepage         = 'http://example.com/hello'
+  s.platform         = Gem::Platform::RUBY
+  s.summary          = 'Hello Gem'
+  s.files            = PKG_FILES.to_a
+  s.require_path     = 'lib'
+  s.has_rdoc         = false
+  s.extra_rdoc_files = ['README']
+end
+
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.gem_spec = spec
+end
+#@end
 
 @see [[c:Gem::Specification]], [[lib:rake]]
 
@@ -213,8 +216,8 @@ Proxy サーバ経由で Gem パッケージをインストールするには以
   :backtrace: false
   :benchmark: false
   :bulk_threshold: 1000
-  :sources: 
-  - http://gems.rubyforge.org
+  :sources:
+  - https://rubygems.org
   :update_sources: true
   :verbose: true
   gemhome: /home/hoge/.gems
@@ -319,13 +322,15 @@ Gem を検索するパスの配列を返します。
 
 Gem のホームディレクトリをセットします。
 
-@see [[m:Gem.#set_home]]
-
 --- set_paths
 
 Gem を検索するパスをセットします。
 
 @see [[m:Gem.#path]]
+
+--- ruby -> String
+
+実行中のRubyインタプリタのパスを返します。
 
 == Constants
 

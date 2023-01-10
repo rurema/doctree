@@ -1,4 +1,3 @@
-#@since 1.9.1
 = class CSV::Table < Object
 extend Forwardable
 include Enumerable
@@ -75,7 +74,23 @@ table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_
 
 @param other [[c:CSV::Table]] を指定します。
 
---- [](index_or_header) -> object
+#@samplecode 例
+require "csv"
+
+row1_1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row1_2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+row2_1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2_2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table1 = CSV::Table.new([row1_1, row1_2])
+table2 = CSV::Table.new([row2_1, row2_2])
+table1 == table2 # => true
+table2 << CSV::Row.new(["header1", "header2"], ["row3_1", "row3_2"])
+table1 == table2 # => false
+#@end
+
+--- [](index) -> CSV::Row | [String] | nil
+--- [](range) -> [CSV::Row]| [Array] | nil
+--- [](header) -> [String] | [nil]
 
 ミックスモードでは、このメソッドは引数に行番号を指定すれば行単位で動作
 し、ヘッダの名前を指定すれば列単位で動作します。
@@ -84,10 +99,10 @@ table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_
 モードになります。また [[m:CSV::Table#by_row!]] を呼び出すとロウモード
 になります。
 
-@param index_or_header 行番号かヘッダの名前を指定します。
-
-@return 値の配列を返します。この配列を変更しても元のデータには何の影響
-        もありません。
+@param index ミックスモード・ロウモードでは、取得したい行の行番号を整数で指定します。
+             カラムモードでは、取得したい列の列番号を整数で指定します。
+@param range 取得したい範囲を整数の範囲で指定します。
+@param header 取得したい列のヘッダを文字列で指定します。ロウモードでは使用できません。
 
 #@samplecode 例
 require "csv"
@@ -95,11 +110,28 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
-table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+
+# ミックスモード
+p table.mode       # => :col_or_row
+p table[0]         # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p table[1]         # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+p table["header2"] # => ["row1_2", "row2_2"]
+p table[0..1]      # => [#<CSV::Row "header1":"row1_1" "header2":"row1_2">, #<CSV::Row "header1":"row2_1" "header2":"row2_2">]
+
+# カラムモード
 table.by_col!
-table[0] # => ["row1_1", "row2_1"]
-table[1] # => ["row1_2", "row2_2"]
+p table.mode       # => :col
+p table[0]         # => ["row1_1", "row2_1"]
+p table[1]         # => ["row1_2", "row2_2"]
+p table["header2"] # => ["row1_2", "row2_2"]
+p table[0..1]      # => [["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+
+# ロウモード
+table.by_row!
+p table.mode       # => :row
+p table[0]         # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p table[1]         # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+p table[0..1]      # => [#<CSV::Row "header1":"row1_1" "header2":"row1_2">, #<CSV::Row "header1":"row2_1" "header2":"row2_2">]
 #@end
 
 --- []=(index_or_header, value)
@@ -194,6 +226,18 @@ table[1] # => ["row1_2", "row2_2"]
 このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
 チェーンに組込まないようにしてください。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2]).by_col!
+table             # => #<CSV::Table mode:col row_count:3>
+col_or_row_table = table.by_col_or_row
+col_or_row_table  # => #<CSV::Table mode:col_or_row row_count:3>
+table             # => #<CSV::Table mode:col row_count:3>
+#@end
+
 --- by_col_or_row! -> self
 
 自身をミックスモードに変更します。
@@ -206,6 +250,17 @@ table[1] # => ["row1_2", "row2_2"]
 
 @return 必ず自身を返すので安全にメソッドチェーンできます。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2]).by_col!
+table             # => #<CSV::Table mode:col row_count:3>
+table.by_col_or_row!
+table             # => #<CSV::Table mode:col_or_row row_count:3>
+#@end
+
 --- by_row -> CSV::Table
 
 ロウモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
@@ -217,6 +272,18 @@ table[1] # => ["row1_2", "row2_2"]
 このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
 チェーンに組込まないようにしてください。
 
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table         # => #<CSV::Table mode:col_or_row row_count:3>
+row_table = table.by_row  # => #<CSV::Table mode:row row_count:3>
+row_table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+row_table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+#@end
+
 --- by_row! -> self
 
 自身をロウモードに変更します。
@@ -224,6 +291,19 @@ table[1] # => ["row1_2", "row2_2"]
 再びモードが変更されるまで、いくつかのメソッドは行単位で動きます。
 
 @return 必ず自身を返すので安全にメソッドチェーンできます。
+
+#@samplecode 例
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
+table = CSV::Table.new([row1, row2])
+table         # => #<CSV::Table mode:col_or_row row_count:3>
+table.by_row!
+table         # => #<CSV::Table mode:row row_count:3>
+table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+#@end
 
 --- delete(index_or_header) -> object
 
@@ -256,6 +336,28 @@ table.to_a         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 デフォルトのミックスモードかロウモードでは、行単位で繰り返します。カラ
 ムモードでは、ブロックに列名と対応する値の配列を与え、列単位で繰り返し
 ます。
+
+#@samplecode 例 ロウモード
+require "csv"
+
+row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "valid"])
+row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "invalid"])
+row3 = CSV::Row.new(["header1", "header2"], ["row3_1", "valid"])
+table = CSV::Table.new([row1, row2, row3])
+table.delete_if { |row| row["header2"] == "invalid" }
+table.to_a # => [["header1", "header2"], ["row1_1", "valid"], ["row3_1", "valid"]]
+#@end
+
+#@samplecode 例 カラムモード
+require "csv"
+row1 = CSV::Row.new(["id", "name"], [1, "tanaka"])
+row2 = CSV::Row.new(["id", "name"], [2, "suzuki"])
+row3 = CSV::Row.new(["id", "name"], [3, "sato"])
+table = CSV::Table.new([row1, row2, row3])
+table.by_col!
+table.delete_if { |column_name, values| column_name == "id" }
+table.to_a # => [["name"], ["tanaka"], ["suzuki"], ["sato"]]
+#@end
 
 @see [[m:CSV::Table#delete]]
 
@@ -296,9 +398,18 @@ table.each { |column_name, values| print column_name, values, "\n" }
 
 --- empty? -> bool
 
-[[m:Array#empty?]] に委譲します。
+ヘッダーを除いて、データがないときに true を返します。
 
-#@#noexample Array#empty? の例を参照
+[[m:Array#empty?]] に委譲しています。
+
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b\n", headers: true)
+table = csv.read
+p table.empty?     # => true
+table << [1, 2]
+p table.empty?     # => false
+#@end
 
 @see [[m:Array#empty?]]
 
@@ -320,19 +431,27 @@ table.headers # => ["header1", "header2"]
 
 モードとサイズを US-ASCII な文字列で返します。
 
-例:
-  require 'csv'
-  csv = CSV.new("a,b,c\n1,2,3", headers: true)
-  table = csv.read
-  table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b,c\n1,2,3", headers: true)
+table = csv.read
+p table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
+#@end
 
 
 --- length -> Integer
 --- size -> Integer
 
-[[m:Array#length]], [[m:Array#size]] に委譲します。
+(ヘッダを除く)行数を返します。
 
-#@#noexample Array#length, Array#size の例を参照
+[[m:Array#length]], [[m:Array#size]] に委譲しています。
+
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b,c\n1,2,3", headers: true)
+table = csv.read
+p table.size  # => 1
+#@end
 
 @see [[m:Array#length]], [[m:Array#size]]
 
@@ -354,14 +473,28 @@ table.mode    # => :col
 
 複数の行を追加するためのショートカットです。
 
+以下と同じです。
+#@samplecode
+rows.each {|row| self << row }
+#@end
+
 @param rows [[c:CSV::Row]] のインスタンスか配列を指定します。
 
-以下と同じです。
-  require 'csv'
-  csv = CSV.new("a,b,c\n,1,2,3", headers: true)
-  table = csv.read
-  rows = [[4, 5, 6], [7, 8, 9]]
-  rows.each{|row| table << row }
+#@samplecode 例
+require 'csv'
+csv = CSV.new("a,b,c\n1,2,3", headers: true)
+table = csv.read
+rows = [
+  CSV::Row.new(table.headers, [4, 5, 6]),
+  [7, 8, 9]
+]
+
+table.push(*rows)
+p table[0..2]
+# => [#<CSV::Row "a":"1" "b":"2" "c":"3">, #<CSV::Row "a":4 "b":5 "c":6>, #<CSV::Row "a":7 "b":8 "c":9>]
+#@end
+
+@see [[m:CSV::Table#<<]]
 
 --- to_a -> [Array]
 
@@ -388,12 +521,13 @@ CSV の文字列に変換して返します。
 デフォルトでは、ヘッダを出力します。オプションに :write_headers =>
 false を指定するとヘッダを出力しません。
 
-例:
-  require 'csv'
-  csv = CSV.new("a,b,c\n,1,2,3", headers: true)
-  table = csv.read
-  table.to_csv                       # => "a,b,c\n1,2,3\n"
-  table.to_csv(write_headers: false) # => "1,2,3\n"
+#@samplecode
+require 'csv'
+csv = CSV.new("a,b,c\n1,2,3", headers: true)
+table = csv.read
+p table.to_csv                       # => "a,b,c\n1,2,3\n"
+p table.to_csv(write_headers: false) # => "1,2,3\n"
+#@end
 
 --- values_at(indices_or_headers) -> Array
 
@@ -434,5 +568,3 @@ table.values_at(1) # => [["row1_2"], ["row2_2"]]
 同値性を比較するために内部的に使用します。
 
 #@#noexample 内部で使用するためサンプル不要
-
-#@end

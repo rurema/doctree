@@ -17,28 +17,16 @@ Socketに対してしか利用できません。
 判別が不可能な場合は0を返します。
 #@end
 
-
-
-#@until 1.9.1
---- ready? -> Integer | false | nil
-
+#@if (version == "3.0")
+--- ready? -> IO | false | nil
 ブロックせずに読み込み可能なら真を、
-不可能であれば偽を返します。
-
-より正確には、
-ブロックせずに読み込み可能ならそのバイト数を返します。
-内部のバッファにデータがある場合にはtrueを返します。
-self が EOF に達していれば false を返します。
-判定不可能な場合には false を返します。
-ブロックせずに読み込み可能な
-データが存在しない場合には nil を返します。
 #@else
 --- ready? -> bool | nil
 ブロックせずに読み込み可能ならtrueを、
+#@end
 ブロックしてしまう可能性があるならfalseを返します。
 
 判定不可能な場合は nil を返します。
-#@end
 
 --- wait(timeout = nil)          -> bool | self | nil
 #@since 2.0.0

@@ -1,10 +1,10 @@
 category CUI
 
-疑似端末(Pseudo tTY)を扱うライブラリです。
+擬似端末(Pseudo tTY)を扱うライブラリです。
 
 = module PTY
 
-疑似端末(Pseudo tTY)を扱うモジュールです。
+擬似端末(Pseudo tTY)を扱うモジュールです。
 
 == Module Functions
 
@@ -59,16 +59,6 @@ category CUI
 @see [[m:Kernel.#system]], [[m:IO.popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
 #@end
 
-#@until 1.9.2
---- protect_signal{ ... } -> self
-このメソッドは何もしません。
-このメソッドは obsolete です。
-
---- reset_signal -> self
-このメソッドは何もしません。
-このメソッドは obsolete です。
-#@end
-
 == Singleton Methods
 #@since 1.9.2
 --- check(pid, raise = false) -> Process::Status | nil
@@ -100,7 +90,6 @@ pid で指定された子プロセスの状態をチェックし、変化があ�
 にクローズ済みでなければクローズされます。
 
 #@end
-#@since 1.8.0
 = class PTY::ChildExited < RuntimeError
 
 子プロセスが終了したり停止した場合に発生する例外です。
@@ -110,5 +99,4 @@ pid で指定された子プロセスの状態をチェックし、変化があ�
 --- status -> Process::Status
 
 子プロセスの終了ステータスを[[c:Process::Status]]オブジェクトで返します。
-#@end
 

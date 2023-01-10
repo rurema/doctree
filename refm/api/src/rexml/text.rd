@@ -46,7 +46,7 @@ DTD([[c:REXML::DocType]], [[m:REXML::Document#doctype]])
 で定義されます。DTD が与えられていない場合は、XMLの規格上
 以下の実体参照/対応文字がデフォルトで使われます。
   * &amp; &
-  * &lt; <  
+  * &lt; <
   * &gt; >
   * &quot; "
   * &apos; '
@@ -62,26 +62,27 @@ illegal は内部用なので使わないでください。
 @raise RuntimeError テキストがXMLのテキストとして不正な
        文字を含んでいる場合に発生します。
 
-=== 例
+#@samplecode doctype なしの場合
+p REXML::Text.new("<&", false, nil, false).to_s  # => "&lt;&amp;"
+p REXML::Text.new("&lt;&amp;", false, nil, false).to_s # => "&amp;lt;&amp;amp;"
+p REXML::Text.new("&lt;&amp;", false, nil, true).to_s # => "&lt;&amp;"
+p REXML::Text.new("<&", false, nil, true).to_s # parse error
+#@end
 
-doctype なしの場合
-  p REXML::Text.new("<&", false, nil, false).to_s  # => "&lt;&amp;"
-  p REXML::Text.new("&lt;&amp;", false, nil, false).to_s # => "&amp;lt;&amp;amp;"
-  p REXML::Text.new("&lt;&amp;", false, nil, true).to_s # => "&lt;&amp;"
-  p REXML::Text.new("<&", false, nil, true).to_s # parse error
+#@samplecode doctype があり、実体が宣言されている場合
+require 'rexml/document'
+doc = REXML::Document.new(<<EOS)
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE root [
+<!ENTITY p "foobar publisher">
+<!ENTITY % q "quzz">
+]>
+<root />
+EOS
+REXML::Text.new("&quzz", false, doc.root, false).to_s # => "&amp;&q;"
+REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
+#@end
 
-doctype があり、実体が宣言されている場合
-  require 'rexml/document'
-  doc = REXML::Document.new(<<EOS)
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE root [
-  <!ENTITY p "foobar publisher">
-  <!ENTITY % q "quzz">
-  ]>
-  <root />
-  EOS
-  REXML::Text.new("&quzz", false, doc.root, false).to_s # => "&amp;&q;"
-  REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
 #@# entity_filter を使う場合
 #@# todo
 
@@ -107,21 +108,22 @@ filter でアンエスケープしない実体の実体名を文字列配列で�
 @param filter アンエスケープしない実体の実体名(文字列配列)
 @param illegal 内部用。使わないでください。
 
-=== 例
-  require 'rexml/text'
-  REXML::Text.unnormalize("&amp; &foobar; &lt;") # => "& &foobar; <"
-  REXML::Text.unnormalize("&lt; &gt;", nil, ["lt"]) # => "&lt; >"
+#@samplecode
+require 'rexml/text'
+REXML::Text.unnormalize("&amp; &foobar; &lt;") # => "& &foobar; <"
+REXML::Text.unnormalize("&lt; &gt;", nil, ["lt"]) # => "&lt; >"
+#@end
 
 #@# used internally, 不正な文字が含まれていないかチェックして例外を出す
 #@# #@since 1.9.1
 #@# --- check(string, pattern, doctype)
 #@# #@end
-#@# 
+#@#
 #@# used internally by unnormalize
 #@# #@since 2.0.0
 #@# --- expand(ref, doctype, filter)
 #@# #@end
-#@# 
+#@#
 == Instance Methods
 
 --- raw -> bool
@@ -166,11 +168,12 @@ self を複製します。
 
 @see [[m:REXML::Text#value]]
 
-=== 例
-  require 'rexml/document'
-  t = REXML::Text.new("< & foobar", false, nil, false)
-  t.to_s # => "&lt; &amp; foobar"
-  t.value # => "< & foobar"
+#@samplecode
+require 'rexml/document'
+t = REXML::Text.new("< & foobar", false, nil, false)
+t.to_s # => "&lt; &amp; foobar"
+t.value # => "< & foobar"
+#@end
 
 #@# #@since 1.8.3
 #@# --- inspect
@@ -184,11 +187,12 @@ self を複製します。
 
 @see [[m:REXML::Text#raw]], [[m:REXML::Text#to_s]]
 
-=== 例
-  require 'rexml/document'
-  t = REXML::Text.new("< & foobar", false, nil, false)
-  t.to_s # => "&lt; &amp; foobar"
-  t.value # => "< & foobar"
+#@samplecode
+require 'rexml/document'
+t = REXML::Text.new("< & foobar", false, nil, false)
+t.to_s # => "&lt; &amp; foobar"
+t.value # => "< & foobar"
+#@end
 
 
 #@# テキストの内容を指定した幅で折り返した文字列を返す。内部用。
@@ -200,15 +204,16 @@ self を複製します。
 
 val には非正規化された(エスケープされていない)文字列を渡さなければ
 なりません。
-  
-=== 例
-  require 'rexml/document'
-  e = REXML::Element.new("a")
-  e.add_text("foo")
-  e[0].value = "bar"
-  e.to_s # => "<a>bar</a>"
-  e[0].value = "<a>"
-  e.to_s # => "<a>&lt;a&gt;</a>"
+
+#@samplecode
+require 'rexml/document'
+e = REXML::Element.new("a")
+e.add_text("foo")
+e[0].value = "bar"
+e.to_s # => "<a>bar</a>"
+e[0].value = "<a>"
+e.to_s # => "<a>&lt;a&gt;</a>"
+#@end
 
 #@# テキストをインデントした文字列を返す。内部用。
 #@# #@since 1.8.2
@@ -240,30 +245,30 @@ val には非正規化された(エスケープされていない)文字列を�
 
 #@# 意味は REXML::Child と同じ
 #@# --- parent=
-#@# 
+#@#
 == Constants
 
 #@# Internally used regexps
 #@# --- SPECIALS
 #@# #@todo
-#@# 
+#@#
 #@# --- SUBSTITUTES
 #@# #@todo
-#@# 
+#@#
 #@# --- SLAICEPS
 #@# #@todo
-#@# 
+#@#
 #@# --- SETUTITSBUS
 #@# #@todo
-#@# 
+#@#
 #@# --- ILLEGAL
 #@# #@todo
-#@# 
+#@#
 #@# --- NUMERICENTITY
 #@# #@todo
-#@# 
+#@#
 #@# --- REFERENCE
 #@# #@todo
-#@# 
+#@#
 #@# --- EREFERENCE
 #@# #@todo

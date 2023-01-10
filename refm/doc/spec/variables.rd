@@ -23,9 +23,9 @@ _ですが、組み込み変数の一部には
 
 ===[a:local] ローカル変数
 
-例:
-
-          foobar
+#@samplecode 例
+foobar
+#@end
 
 小文字または`_'で始まる識別子はローカル変数また
 はメソッド呼び出しです。ローカル変数スコープ(クラス、モジュー
@@ -42,23 +42,27 @@ _ですが、組み込み変数の一部には
 するまで存在します。同じスコープを参照する手続きオブジェクト
 間ではローカル変数は共有されます。
 
-    # (A) の部分はスコープに入らない
-    2.times {
-      p defined?(v)    # (A)
-      v = 1            # ここ(宣言開始)から
-      p v              # ここ(ブロックの終り)までが v のスコープ
-    }
+#@samplecode 
+# (A) の部分はスコープに入らない
+2.times {
+  p defined?(v)    # (A)
+  v = 1            # ここ(宣言開始)から
+  p v              # ここ(ブロックの終り)までが v のスコープ
+}
 
-    # => nil
-         1
-         nil           <- これが nil であることに注意
-         1
+# => nil
+#    1
+#    nil           <- これが nil であることに注意
+#    1
+#@end
 
-宣言は、例え実行されなくても宣言とみなされます。
+宣言は、たとえ実行されなくても宣言とみなされます。
 
-    v = 1 if false # 代入は行われないが宣言は有効
-    p defined?(v)  # => "local-variable"
-    p v            # => nil
+#@samplecode
+v = 1 if false # 代入は行われないが宣言は有効
+p defined?(v)  # => "local-variable"
+p v            # => nil
+#@end
 
 #@until 1.9.1
 またあまり推奨はされませんが ruby インタプリタの起動時に -K オプションを指定
@@ -68,9 +72,9 @@ _ですが、組み込み変数の一部には
 
 ===[a:instance] インスタンス変数
 
-例:
-
-          @foobar
+#@samplecode 例
+@foobar
+#@end
 
 `@'で始まる変数はインスタンス変数であり、特定の
 オブジェクトに所属しています。インスタンス変数はそのクラスま
@@ -80,14 +84,14 @@ _ですが、組み込み変数の一部には
 
 ===[a:class] クラス変数
 
-例:
-
-          class Foo
-            @@foo = 1
-            def bar
-              puts @@foo
-            end
-          end
+#@samplecode 例
+class Foo
+  @@foo = 1
+  def bar
+    puts @@foo
+  end
+end
+#@end
 
 @@で始まる変数はクラス変数です。クラス変数はクラス定義
 の中で定義され、クラスの特異メソッド、インスタンスメソッドなどから参照／
@@ -106,74 +110,109 @@ _ですが、組み込み変数の一部には
 クラス変数は、そのクラスやサブクラス、それらのインスタンスで共有される
 グローバル変数であるとみなすことができます。
 
-        class Foo
-          @@foo = 1
-        end
-        class Bar < Foo
-          p @@foo += 1          # => 2
-        end
-        class Baz < Bar
-          p @@foo += 1          # => 3
-        end
+#@samplecode
+class Foo
+  @@foo = 1
+end
+
+class Bar < Foo
+  p @@foo += 1          # => 2
+end
+
+class Baz < Bar
+  p @@foo += 1          # => 3
+end
+#@end
 
 モジュールで定義されたクラス変数(モジュール変数)は、そのモジュールをイ
 ンクルードしたクラス間でも共有されます。
 
-        module Foo
-          @@foo = 1
-        end
-        class Bar
-          include Foo
-          p @@foo += 1          # => 2
-        end
-        class Baz
-          include Foo
-          p @@foo += 1          # => 3
-        end
+#@samplecode
+module Foo
+  @@foo = 1
+end
+
+class Bar
+  include Foo
+  p @@foo += 1          # => 2
+end
+
+class Baz
+  include Foo
+  p @@foo += 1          # => 3
+end
+#@end
 
 #@until 1.9.0
 親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
 子クラスのクラス変数は子クラスで保存されます。上書きされません。
 
- class Foo
- end
- 
- class Bar < Foo
-   @@v = :bar
- end
- 
- class Foo
-   @@v = :foo
- end
+#@samplecode
+class Foo
+end
 
- class Bar
-   p @@v       #=> :bar
- end
+class Bar < Foo
+  @@v = :bar
+end
 
- class Foo
-   p @@v       #=> :foo
- end
+class Foo
+  @@v = :foo
+end
+
+class Bar
+  p @@v       #=> :bar
+end
+
+class Foo
+  p @@v       #=> :foo
+end
+#@end
 
 #@end
 
-#@since 1.9.0
+#@until 3.0.0
 親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
 子クラスのクラス変数が上書きされます。
 
- class Foo
- end
- 
- class Bar < Foo
-   @@v = :bar
- end
- 
- class Foo
-   @@v = :foo
- end
+#@samplecode
+class Foo
+end
 
- class Bar
-   p @@v       #=> :foo
- end
+class Bar < Foo
+  @@v = :bar
+end
+
+class Foo
+  @@v = :foo
+end
+
+class Bar
+  p @@v       #=> :foo
+end
+#@end
+
+#@end
+
+#@since 3.0.0
+親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合、
+子クラスが、そのクラス変数を参照した際に例外 [[c:RuntimeError]] が発生します。
+
+#@samplecode
+class Foo
+end
+
+class Bar < Foo
+  @@v = :bar
+end
+
+class Foo
+  @@v = :foo
+end
+
+class Bar
+  p @@v       #=> RuntimeError (class variable @@v of Bar is overtaken by Foo)
+end
+#@end
 
 #@end
 
@@ -184,35 +223,38 @@ _ですが、組み込み変数の一部には
 
 #@# http://blade.nagaokaut.ac.jp/cgi-bin/vframe.rb/ruby/ruby-list/39212?39104-39789
 
- class Foo
-   @@a = :a
-   class << Foo
-     p @@a       #=> :a
-   end
-   
-   def Foo.a1
-     p @@a
-   end
- end
+#@samplecode
+class Foo
+  @@a = :a
 
- Foo.a1          #=> :a              
- 
- def Foo.a2
-   p @@a 
- end
- Foo.a2          #=> NameError になります。
+  class << Foo
+    p @@a       #=> :a
+  end
 
- class << Foo
-   p @@a         #=> NameError になります。
- end
+  def Foo.a1
+    p @@a
+  end
+end
+
+Foo.a1          #=> :a
+
+def Foo.a2
+  p @@a
+end
+Foo.a2          #=> NameError になります。
+
+class << Foo
+  p @@a         #=> NameError になります。
+end
+#@end
 
 
 ===[a:global] グローバル変数
 
-例:
-
-          $foobar
-          $/
+#@samplecode 例
+$foobar
+$/
+#@end
 
 `$'で始まる変数はグローバル変数で、プログラムのどこからでも参照できます(その分、利用には注意が必要です)。
 グローバル変数には宣言は必要ありません。初期化されていないグローバル変数を参照した時の値はnilです。
@@ -247,30 +289,24 @@ _ですが、組み込み変数の一部には
 また、一部の変数は読み取り専用です。ユーザープログラムから変更することができません。代入しようとすると実行時に例外を生じます。
 
 
-===[a:pseudo] 疑似変数
+===[a:pseudo] 擬似変数
 
-通常の変数以外に疑似変数と呼ばれる特殊な変数があります。
+通常の変数以外に擬似変数と呼ばれる特殊な変数があります。
 
 : self
-  現在のメソッドの実行主体
+  現在のメソッドの実行主体。
 
 : nil
-  [[c:NilClass]]クラスの唯一のインスタンス
-#@since 2.2.0
+  [[c:NilClass]]クラスの唯一のインスタンス。
   [[m:Object#frozen?]] は true を返します。
-#@end
 
 : true
-  [[c:TrueClass]]クラスの唯一のインスタンス。真の代表値
-#@since 2.2.0
+  [[c:TrueClass]]クラスの唯一のインスタンス。真の代表値。
   [[m:Object#frozen?]] は true を返します。
-#@end
 
 : false
   [[c:FalseClass]]クラスの唯一のインスタンス。nilとfalseは偽を表します。
-#@since 2.2.0
   [[m:Object#frozen?]] は true を返します。
-#@end
 
 : __FILE__
   現在のソースファイル名
@@ -281,21 +317,31 @@ _ですが、組み込み変数の一部には
 : __LINE__
   現在のソースファイル中の行番号
 
-#@since 1.9.0
 : __ENCODING__
   現在のソースファイルのスクリプトエンコーディング
-#@end
 
-疑似変数の値を変更することはできません。
+擬似変数の値を変更することはできません。
 擬似変数へ代入すると文法エラーになります。
 
 ===[a:const] 定数
 
-例:
-
-          FOOBAR
+#@since 2.6.0
+#@samplecode 例
+FOOBAR
+ＦＯＯＢＡＲ
+#@end
+#@else
+#@samplecode 例
+FOOBAR
+#@end
+#@end
 
 アルファベット大文字 ([A-Z]) で始まる識別子は定数です。
+#@since 2.6.0
+他にも、ソースエンコーディングが Unicode の時は Unicode の大文字または
+タイトルケース文字から始まる識別子も定数です。
+Unicode 以外の時は小文字に変換できる文字から始まる識別子が定数です。
+#@end
 定数の定義 (と初期化) は代入によって行われますが、メソッドの
 中では定義できません。一度定義された定数に再び代入を行おうと
 すると警告メッセージが出ます。定義されていない定数にアクセス
@@ -308,50 +354,52 @@ _ですが、組み込み変数の一部には
 プレベル)で定義された定数は [[c:Object]] に所属することになり
 ます。
 
-例:
+#@samplecode 例
+class Foo
+  FOO = 'FOO'       # クラス Foo の定数 FOO を定義(Foo::FOO)
+end
 
-        class Foo
-          FOO = 'FOO'       # クラス Foo の定数 FOO を定義(Foo::FOO)
-        end
+class Bar < Foo
+  BAR = 'BAR'       # クラス Bar の定数 BAR を定義(Bar::BAR)
 
-        class Bar < Foo
-          BAR = 'BAR'       # クラス Bar の定数 BAR を定義(Bar::BAR)
+  # 親クラスの定数は直接参照できる
+  p FOO             # => "FOO"
+  class Baz
 
-          # 親クラスの定数は直接参照できる
-          p FOO             # => "FOO"
-          class Baz
-
-            # ネストしたクラスはクラスの継承関係上は無関係であるがネス
-            # トの外側の定数も直接参照できる
-            p BAR           # => "BAR"
-          end
-        end
+    # ネストしたクラスはクラスの継承関係上は無関係であるがネス
+    # トの外側の定数も直接参照できる
+    p BAR           # => "BAR"
+  end
+end
+#@end
 
 またクラス定義式はクラスオブジェクトの生成を行うと同時に、
 名前がクラス名である定数にクラスオブジェクトを代入する動作をします。
 クラス名を参照することは文法上は定数を参照していることになります。
 
-          class C
-          end
-          p C    # => C
+#@samplecode
+class C
+end
+p C    # => C
+#@end
 
 あるクラスまたはモジュールで定義された定数を外部から参照する
 ためには`::'演算子を用います。またObjectクラスで
 定義されている定数(トップレベルの定数と言う)を確実に参照する
 ためには左辺無しの`::'演算子が使えます。
 
-例:
+#@samplecode 例
+module M
+  I = 35
+  class C
+  end
+end
+p M::I   #=> 35
+p M::C   #=> M::C
+p ::M    #=> M
 
-          module M
-            I = 35
-            class C
-            end
-          end
-          p M::I   #=> 35
-          p M::C   #=> M::C
-          p ::M    #=> M
-
-          M::NewConst = 777   # => 777
+M::NewConst = 777   # => 777
+#@end
 
 ====[a:prio] 定数参照の優先順位
 
@@ -360,57 +408,59 @@ _ですが、組み込み変数の一部には
 初にネスト関係を外側に向かって探索し、次に継承関係を上位に向かって探索
 します。
 
-例:
+#@samplecode 例
+class Foo
+  CONST = 'Foo'
+end
 
-        class Foo
-          CONST = 'Foo'
-        end
+class Bar
+  CONST = 'Bar'
 
-        class Bar
-          CONST = 'Bar'
-          class Baz < Foo
-            p CONST             # => "Bar"      外側の定数
-            # この場合、親クラスの定数は明示的に指定しなければ見えない
-            p Foo::CONST        # => "Foo"
-          end
-        end
+  class Baz < Foo
+    p CONST             # => "Bar"      外側の定数
+    # この場合、親クラスの定数は明示的に指定しなければ見えない
+    p Foo::CONST        # => "Foo"
+  end
+end
+#@end
 
 トップレベルの定数定義はネストの外側とはみなされません。したがってトッ
 プレベルの定数は、継承関係を探索した結果で参照されるので優先順位は低い
 と言えます。
 
-例:
+#@samplecode 例
+class Foo
+  CONST = 'Foo'
+end
 
-        class Foo
-          CONST = 'Foo'
-        end
+CONST = 'Object'
 
-        CONST = 'Object'
+class Bar < Foo
+  p CONST               # => "Foo"
+end
 
-        class Bar < Foo
-          p CONST               # => "Foo"
-        end
-
-        # 以下のように明示的にネストしていれば規則通り Object の定数
-        # (ネストの外側)が先に探索される
-        class Object
-          class Bar < Foo
-            p CONST             # => "Object"
-          end
-        end
+# 以下のように明示的にネストしていれば規則通り Object の定数
+# (ネストの外側)が先に探索される
+class Object
+  class Bar < Foo
+    p CONST             # => "Object"
+  end
+end
+#@end
 
 上位のクラス(クラスの継承関係上、およびネストの関係上の上位クラス)の定
 数と同名の定数(下の例で CONST) に代入を行うと、上位の定数への代入では
 なく、そのクラスの定数の定義になります。
 
-例:
+#@samplecode 例
+class Foo
+  CONST = 'Foo'
+end
 
-        class Foo
-          CONST = 'Foo'
-        end
-        class Bar < Foo
-          p CONST               # => "Foo"
-          CONST = 'Bar'         # Bar の定数 CONST を*定義*
-          p CONST               # => "Bar"  (Foo::CONST は隠蔽される)
-          p Foo::CONST          # => "Foo"  (:: 演算子で明示すれば見える)
-        end
+class Bar < Foo
+  p CONST               # => "Foo"
+  CONST = 'Bar'         # Bar の定数 CONST を*定義*
+  p CONST               # => "Bar"  (Foo::CONST は隠蔽される)
+  p Foo::CONST          # => "Foo"  (:: 演算子で明示すれば見える)
+end
+#@end

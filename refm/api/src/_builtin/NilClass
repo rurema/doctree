@@ -13,11 +13,12 @@ nil は false オブジェクトとともに偽を表し、
 
 @param other 論理積を行なう式です
 
-例:
-  nil & true  # => false
-  nil & false # => false
-  nil & nil   # => false
-  nil & "a"   # => false
+#@samplecode 例
+nil & true  # => false
+nil & false # => false
+nil & nil   # => false
+nil & "a"   # => false
+#@end
 
 --- |(other) -> bool
 
@@ -25,11 +26,12 @@ other が真なら true を, 偽なら false を返します。
 
 @param other 論理和を行なう式です
 
-例:
-  nil | true   # => true
-  nil | false  # => false
-  nil | nil    # => false
-  nil | "a"    # => true
+#@samplecode 例
+nil | true   # => true
+nil | false  # => false
+nil | nil    # => false
+nil | "a"    # => true
+#@end
 
 --- ^(other) -> bool
 
@@ -37,63 +39,69 @@ other が真なら true を, 偽なら false を返します。
 
 @param other 排他的論理和を行なう式です
 
-例:
-  nil ^ true  # => true
-  nil ^ false # => false
-  nil ^ nil   # => false
-  nil ^ "a"   # => true
+#@samplecode 例
+nil ^ true  # => true
+nil ^ false # => false
+nil ^ nil   # => false
+nil ^ "a"   # => true
+#@end
 
 --- nil? -> bool
 
 常に true を返します。
 
-例:
-  nil.nil?   # => true
+#@samplecode 例
+nil.nil?   # => true
+#@end
 
 --- to_a -> Array
 
 空配列 [] を返します。
 
-例:
-  nil.to_a   #=> []
+#@samplecode 例
+nil.to_a   #=> []
+#@end
 
 --- to_f -> Float
 
 0.0 を返します。
 
-例:
-  nil.to_f   #=> 0.0
+#@samplecode 例
+nil.to_f   #=> 0.0
+#@end
 
 --- to_i -> Integer
 
 0 を返します。
 
-例:
-  nil.to_i   #=> 0
+#@samplecode 例
+nil.to_i   #=> 0
+#@end
 
 --- to_s -> String
 
 空文字列 "" を返します。
 
-例:
-  nil.to_s   # => ""
+#@samplecode 例
+nil.to_s   # => ""
+#@end
 
 #@since 1.9.1
 --- to_c -> Complex
 
 0+0i を返します。
 
-例:
-
-  nil.to_c # => (0+0i)
+#@samplecode 例
+nil.to_c # => (0+0i)
+#@end
 
 --- to_r -> Rational
 
 0/1 を返します。
 
-例:
-
-  nil.to_r # => (0/1)
+#@samplecode 例
+nil.to_r # => (0/1)
+#@end
 
 #@end
 
@@ -107,11 +115,11 @@ other が真なら true を, 偽なら false を返します。
 
 引数 eps は常に無視されます。
 
-例:
-
-  nil.rationalize      # => (0/1)
-  nil.rationalize(100) # => (0/1)
-  nil.rationalize(0.1) # => (0/1)
+#@samplecode 例
+nil.rationalize      # => (0/1)
+nil.rationalize(100) # => (0/1)
+nil.rationalize(0.1) # => (0/1)
+#@end
 
 #@end
 
@@ -120,6 +128,27 @@ other が真なら true を, 偽なら false を返します。
 
 {} を返します。
 
-例:
-  nil.to_h   #=> {}
+#@samplecode 例
+nil.to_h   #=> {}
+#@end
+#@end
+#@since 2.6.0
+--- =~(other) -> nil
+
+右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
+をサポートするためのメソッドです。常に nil を返します。
+
+#@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
+
+@param other 任意のオブジェクトです。結果に影響しません。
+
+#@samplecode 例
+obj = 'regexp'
+p(obj =~ /re/) #=> 0
+
+obj = nil
+p(obj =~ /re/) #=> nil
+#@end
+
+@see [[m:String#=~]]
 #@end

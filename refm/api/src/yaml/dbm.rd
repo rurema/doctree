@@ -1,4 +1,3 @@
-#@since 1.8.0
 
 require yaml
 require dbm
@@ -19,7 +18,7 @@ require dbm
 
 == Constants
 
---- VERSION -> "0.1"
+--- VERSION -> String
 
 [[lib:yaml/dbm]] のバージョンを文字列で返します。
 
@@ -197,5 +196,3 @@ keys に対応する値を配列に格納して返します。
 対応するキーが見つからなかった要素には nil が格納されます。
 
 @param keys キーを文字列で指定します。複数指定することができます。
-
-#@end

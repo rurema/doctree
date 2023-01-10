@@ -11,43 +11,47 @@ Ruby から使うためのモジュールです。
 
 以下は、漢字コード変換コマンドの例です。
 
-  #!/usr/local/bin/ruby
-  
-  require 'nkf'
-  
-  opt = ''
-  opt = ARGV.shift if ARGV[0][0] == ?-
-  
-  while line = ARGF.gets
-    print NKF.nkf(opt, line)
-  end
+#@samplecode 例
+#!/usr/local/bin/ruby
+
+require 'nkf'
+
+opt = ''
+opt = ARGV.shift if ARGV[0][0] == ?-
+
+while line = ARGF.gets
+  print NKF.nkf(opt, line)
+end
+#@end
 
 以下は、漢字コード判別コマンドの例です。
 
-  #!/usr/local/bin/ruby
+#@samplecode 例
+#!/usr/local/bin/ruby
+
+require 'nkf'
+
+CODES = {
+  NKF::JIS      => "JIS",
+  NKF::EUC      => "EUC",
+  NKF::SJIS     => "SJIS",
+  NKF::UTF8     => "UTF8",
+  NKF::BINARY   => "BINARY",
+  NKF::ASCII    => "ASCII",
+  NKF::UNKNOWN  => "UNKNOWN",
+}
+
+while file = ARGV.shift
+  str = open(file) {|io| io.gets(nil) }
   
-  require 'nkf'
-  
-  CODES = {
-    NKF::JIS      => "JIS",
-    NKF::EUC      => "EUC",
-    NKF::SJIS     => "SJIS",
-    NKF::UTF8     => "UTF8",
-    NKF::BINARY   => "BINARY",
-    NKF::ASCII    => "ASCII",
-    NKF::UNKNOWN  => "UNKNOWN",
-  }
-  
-  while file = ARGV.shift
-    str = open(file) {|io| io.gets(nil) }
-    
-    printf "%-10s ", file
-    if str.nil?
-      puts "EMPTY"
-    else
-      puts CODES.fetch(NKF.guess(str))
-    end
+  printf "%-10s ", file
+  if str.nil?
+    puts "EMPTY"
+  else
+    puts CODES.fetch(NKF.guess(str))
   end
+end
+#@end
 
 === オプション文字列
 
@@ -58,8 +62,8 @@ Ruby から使うためのモジュールです。
     -s Shift_JIS を出力する
     -e EUC-JP を出力する
     -w UTF-8 を出力する(BOMなし)
-    -w16 UTF-16 LE を出力する 
-  -J -S -E -W -W16 入力文字列のエンコーデイングの推定値を指定する。
+    -w16 UTF-16 LE を出力する
+  -J -S -E -W -W16 入力文字列のエンコーディングの推定値を指定する。
     -J 入力に JIS を仮定する
     -S 入力に Shift_JIS と X0201片仮名(いわゆる半角片仮名)
        を仮定する。-xを指定しない場合はX0201片仮名(いわゆる半角片仮名)はX0208の
