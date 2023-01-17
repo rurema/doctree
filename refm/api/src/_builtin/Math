@@ -18,21 +18,17 @@ pi2 = atan2(1, 1)*4
 
 --- acos(x) -> Float
 
-x の逆余弦関数の値をラジアンで返します。
+x の逆余弦関数（arccosine）の値をラジアンで返します。
 
 @param x -1.0 <= x <= 1 の範囲内の実数
 
 @return 返される値の範囲は [0, +π] です。
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@else
-@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.acos(0) == Math::PI/2  # => true
@@ -40,21 +36,17 @@ Math.acos(0) == Math::PI/2  # => true
 
 --- asin(x) -> Float
 
-x の逆正弦関数の値をラジアンで返します。
+x の逆正弦関数（arcsine）の値をラジアンで返します。
 
 @param x -1.0 <= x <= 1 の範囲内の実数
 
 @return 返される値の範囲は[-π/2, +π/2] です。
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@else
-@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.asin(1) == Math::PI/2  # => true
@@ -62,17 +54,15 @@ Math.asin(1) == Math::PI/2  # => true
 
 --- atan(x) -> Float
 
-x の逆正接関数の値をラジアンで返します。
+x の逆正接関数（arctangent）の値をラジアンで返します。
 
 @param x 実数
 
 @return 返される値の範囲は [-π/2, +π/2] です。
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.atan(0) # => 0.0
@@ -80,7 +70,7 @@ Math.atan(0) # => 0.0
 
 --- atan2(y, x) -> Float
 
-y / x の逆正接関数の値を返します。
+y / x の逆正接関数（arctangent）の値をラジアンで返します。
 
 @param y 実数
 @param x 実数
@@ -93,20 +83,14 @@ Math.atan2(1,0)   #=>  1.5707963267949
 Math.atan2(-1,0)  #=> -1.5707963267949
 #@end
 
-#@since 1.9.1
 @raise TypeError y, x に数値以外を指定した場合に発生します。
 
 @raise RangeError y, x に実数以外の数値を指定した場合に発生します。
 
-#@until 2.2.0
-@raise DomainError 引数 y, x の両方に [[m:Float::INFINITY]] を指定した
-                   場合に発生します。
-#@end
-#@end
 
 --- acosh(x) -> Float
 
-x の逆双曲線余弦関数の値を返します。
+x の逆双曲線余弦関数（area hyperbolic cosine）の値を返します。
 
 === 定義
 
@@ -114,19 +98,15 @@ x の逆双曲線余弦関数の値を返します。
 
 @param x x >= 1 の範囲の実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@else
-@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します。
-#@end
 
 --- asinh(x) -> Float
 
-x の逆双曲線正弦関数の値を返します。
+x の逆双曲線正弦関数（area hyperbolic sine）の値を返します。
 
 === 定義
 
@@ -134,15 +114,13 @@ x の逆双曲線正弦関数の値を返します。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 --- atanh(x) -> Float
 
-x の逆双曲線正接関数の値を返します。
+x の逆双曲線正接関数（area hyperbolic tangent）の値を返します。
 
 === 定義
 
@@ -152,20 +130,16 @@ x の逆双曲線正接関数の値を返します。
 
 @return 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@else
-@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します。
-#@end
 
 
 --- cos(x) -> Float
 
-x の余弦関数の値を返します。
+x の余弦関数（cosine）の値を返します。
 
 @param x 実数（ラジアンで与えます）
 
@@ -181,7 +155,7 @@ Math.cos(Math::PI) # => -1.0
 
 --- sin(x) -> Float
 
-x の正弦関数の値を返します。
+x の正弦関数（sine）の値を返します。
 
 @param x 実数（ラジアンで与えます）
 
@@ -197,7 +171,7 @@ Math.sin(Math::PI/2) # => 1.0
 
 --- tan(x) -> Float
 
-x の正接関数の値を返します。
+x の正接関数（tangent）の値を返します。
 
 @param x 実数（ラジアンで与えます）
 
@@ -213,7 +187,7 @@ Math.tan(0) # => 0.0
 
 --- cosh(x) -> Float
 
-x の双曲線余弦関数の値を返します。
+x の双曲線余弦関数（hyperbolic cosine）の値を返します。
 
 === 定義
 
@@ -221,15 +195,13 @@ x の双曲線余弦関数の値を返します。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 --- sinh(x) -> Float
 
-x の双曲線正弦関数の値を返します。
+x の双曲線正弦関数（hyperbolic sine）の値を返します。
 
 === 定義
 
@@ -237,15 +209,13 @@ x の双曲線正弦関数の値を返します。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 --- tanh(x) -> Float
 
-x の双曲線正接関数の値を返します。
+x の双曲線正接関数（hyperbolic tangent）の値を返します。
 
 === 定義
 
@@ -255,37 +225,31 @@ x の双曲線正接関数の値を返します。
 
 @return [-1, 1] の範囲の実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 --- erf(x) -> Float
-x の誤差関数の値を返します。
+x の誤差関数（error function）の値を返します。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.erf(0) # => 0.0
 #@end
 
 --- erfc(x) -> Float
-x の相補誤差関数の値を返します。
+x の相補誤差関数（complementary error function）の値を返します。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.erfc(0) # => 1.0
@@ -294,17 +258,15 @@ Math.erfc(0) # => 1.0
 
 --- exp(x) -> Float
 
-x の指数関数の値を返します。
+x の指数関数（exponential）の値を返します。
 
-すなわち e の x 乗の値を返します( e は自然対数の底)。
+すなわち e の x 乗の値を返します（e は自然対数の底）。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.exp(0)       # => 1.0
@@ -320,11 +282,9 @@ Math.exp(1.5)     # => 4.4816890703380645
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 fraction, exponent = Math.frexp(1234)   # => [0.6025390625, 11]
@@ -340,11 +300,9 @@ sqrt(x*x + y*y) を返します。
 @param x 実数
 @param y 実数
 
-#@since 1.9.1
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.hypot(3, 4) #=> 5.0
@@ -358,42 +316,31 @@ Math.hypot(3, 4) #=> 5.0
 @param x 実数
 @param exp 整数。小数点以下切捨て。
 
-#@since 1.9.1
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 fraction, exponent = Math.frexp(1234)
 Math.ldexp(fraction, exponent)   # => 1234.0
 #@end
 
-#@since 1.9.1
 --- log(x) -> Float
 --- log(x, b) -> Float
 
-x の対数を返します。
+x の対数（logarithm）を返します。
 
-#@since 2.2.0
 引数 x, b の両方に 0 を指定した場合は [[m:Float::NAN]] を返します。
-#@else
-引数 x, b の両方に 0 を指定した場合は -[[m:Float::INFINITY]] を返します。
-#@end
 
 @param x 正の実数を指定します。
 
-@param b 底を指定します。省略した場合は自然対数を計算します。
+@param b 底を指定します。省略した場合は自然対数（natural logarithm）を計算します。
 
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 
-#@since 2.2.0
 @raise DomainError 引数のどちらかに負の数を指定した場合に発生します。
-#@else
-@raise DomainError 引数 x に負の数を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.log(0)          # => -Infinity
@@ -403,21 +350,10 @@ Math.log(Math::E**3) # => 3.0
 Math.log(12, 3)      # => 2.2618595071429146
 #@end
 
-#@else
---- log(x) -> Float
 
-x の自然対数を返します。
-
-@param x 正の実数
-
-@raise Errno::EDOM 引数が負の値である場合に発生します。
-@raise Errno::ERANGE 引数が 0 の場合に発生します。
-#@end
-
-#@since 1.9.1
 --- log2(x) -> Float
 
-2 を底とする x の対数 (binary logarithm) を返します。
+2 を底とする x の対数（binary logarithm）を返します。
 #@# Returns the base 2 logarithm of numeric.
 
 @param x 正の実数
@@ -427,7 +363,6 @@ x の自然対数を返します。
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError xに実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 Math.log2(1)      # => 0.0
@@ -438,20 +373,15 @@ Math.log2(65536)  # => 16.0
 
 --- log10(x) -> Float
 
-x の常用対数を返します。
+x の常用対数（common logarithm）を返します。
 
 @param x 正の実数
 
-#@since 1.9.1
 @raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError xに実数以外の数値を指定した場合に発生します。
-#@else
-@raise Errno::EDOM 引数が負の値である場合に発生します。
-@raise Errno::ERANGE 引数が 0 の場合に発生します。
-#@end
 
 #@samplecode 例
 Math.log10(1)       # => 0.0
@@ -461,19 +391,15 @@ Math.log10(10**100) # => 100.0
 
 --- sqrt(x) -> Float
 
-x の平方根を返します。
+x の平方根（square root）を返します。
 
 @param x 正の実数
 
-#@since 1.9.1
 @raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError xに実数以外の数値を指定した場合に発生します。
-#@else
-@raise Errno::EDOM  引数が負の値である場合に発生します。
-#@end
 
 #@samplecode 例
 0.upto(10) {|x|
@@ -492,22 +418,17 @@ x の平方根を返します。
 #   [10, 3.16227766016838, 10.0]
 #@end
 
-#@since 2.5.0
 @see [[m:Integer.sqrt]]
-#@end
 
-#@since 1.9.1
 --- cbrt(x) -> Float
 
-x の立方根を返します。
+x の立方根（cubic root）を返します。
 
 @param x 実数
 
-#@since 1.9.1
 @raise TypeError xに数値以外を指定した場合に発生します。
 
 @raise RangeError xに実数以外の数値を指定した場合に発生します。
-#@end
 
 #@samplecode 例
 -9.upto(9) {|x|
@@ -597,8 +518,6 @@ Math.lgamma(0) # => [Infinity, 1]
 
 @see [[m:Math.#gamma]]
 
-#@end
-
 == Constants
 
 --- E -> Float
@@ -619,10 +538,7 @@ p Math::PI
 # => 3.141592654
 #@end
 
-#@since 1.9.1
 = class Math::DomainError < StandardError
 
-数学関数(module Math のモジュール関数)で与えた引数が定義域
+数学関数（module Math のモジュール関数）で与えた引数が定義域
 に含まれていない場合に発生します。
-
-#@end
