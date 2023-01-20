@@ -268,6 +268,9 @@ IO.new, IO.for_fd はブロックを受け付けません。
   * :textmode 真を渡すと mode の "t" と同じ意味になります。
   * :binmode 真を渡すと mode の "b" と同じ意味になります。
   * :autoclose 偽を渡すと close時/GCでのファイナライザ呼出時に fd を close しません。
+#@since 3.2
+  * :path 文字列を渡すと、[[m:IO#path]] メソッドがその値を返すようになります。
+#@end
 また、[[m:String#encode]] で説明されている :invalid => :replace などの
 変換オプションも指定することができます。外部エンコーディングから
 内部エンコーディングへの変換をするときに用いられます。
@@ -2417,6 +2420,22 @@ posix_fadvise をサポートしていないプラットフォーム上では
 
 #@samplecode 例
 File.open("testfile") { |f| p f.advise(:sequential) } # => nil
+#@end
+
+#@since 3.2
+--- path -> String | nil
+--- to_path -> String | nil
+
+IO に関連付けられたパスを返します。IO がパスに関連付けられていない場合は nil を返します。
+
+このメソッドが返すパスがファイルシステム上に存在することは保証されていません。
+
+#@samplecode 例
+p STDIN.path                                 # => "<STDIN>"
+p IO.new(IO.sysopen("/")).path               # => "/"
+p IO.new(IO.sysopen("/"), path: "foo").path  # => "foo"
+#@end
+
 #@end
 
 == Constants
