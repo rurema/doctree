@@ -248,7 +248,7 @@ obj を to_io メソッドによって [[c:IO]] オブジェクトに変換し�
 --- new(fd, mode = "r", opt={})                -> IO
 --- for_fd(fd, mode = "r", opt={})             -> IO
 --- open(fd, mode = "r", opt={})               -> IO
---- open(fd, mode = "r" opt={}) {|io| ... }   -> object
+--- open(fd, mode = "r", opt={}) {|io| ... }   -> object
 
 オープン済みのファイルディスクリプタ fd に対する新しい
 IO オブジェクトを生成して返します。
