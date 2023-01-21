@@ -245,10 +245,10 @@ obj を to_io メソッドによって [[c:IO]] オブジェクトに変換し�
    IO.try_convert(STDOUT)     # => STDOUT
    IO.try_convert("STDOUT")   # => nil
 
---- new(fd, mode = "r", opt={})                -> IO
---- for_fd(fd, mode = "r", opt={})             -> IO
---- open(fd, mode = "r", opt={})               -> IO
---- open(fd, mode = "r", opt={}) {|io| ... }   -> object
+--- new(fd, mode = "r", **opts)                -> IO
+--- for_fd(fd, mode = "r", **opts)             -> IO
+--- open(fd, mode = "r", **opts)               -> IO
+--- open(fd, mode = "r", **opts) {|io| ... }   -> object
 
 オープン済みのファイルディスクリプタ fd に対する新しい
 IO オブジェクトを生成して返します。
@@ -257,8 +257,8 @@ IO.open にブロックが与えられた場合、IO オブジェクトを生成
 実行します。ブロックの終了とともに fd はクローズされます。ブロックの結果を返します。
 IO.new, IO.for_fd はブロックを受け付けません。
 
-=== オプション引数
-このメソッドは以下のオプションを利用できます。
+=== キーワード引数
+このメソッドは以下のキーワード引数を利用できます。
   * :mode mode引数と同じ意味です
   * :external_encoding 外部エンコーディング。"-" はデフォルト外部エンコーディングの
     別名です。
@@ -282,7 +282,7 @@ IO.new, IO.for_fd はブロックを受け付けません。
             [[man:fcntl(2)]] で F_GETFL フラグが利用できる環境では第一引数で指定した fd のモードを引き継ぎ、
             利用できない環境では "r" になります。
 
-@param opt オプション引数
+@param opts キーワード引数
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
@@ -294,7 +294,7 @@ io.close
 
 #@samplecode 例:IO.for_fd による読み込み・バイナリモードでのファイルオープン
 IO.binwrite("testfile", "\xBF\xAA\x16\x04.\b\xCB\x12\xACoeQ\xFDv2\xCF9+\x81\x18")
-io = IO.for_fd(IO.sysopen("testfile"), "r", { binmode: true })
+io = IO.for_fd(IO.sysopen("testfile"), "r", binmode: true)
 io.class # => IO
 io.binmode? # => true
 io.close
@@ -363,12 +363,12 @@ IO.foreach("testfile", chomp: true) { |x| print "GOT ", x }
 
 --- pipe                    -> [IO]
 --- pipe(ext_enc)           -> [IO]
---- pipe(enc_str, opts={})           -> [IO]
---- pipe(ext_enc, int_enc, opts={})  -> [IO]
+--- pipe(enc_str, **opts)           -> [IO]
+--- pipe(ext_enc, int_enc, **opts)  -> [IO]
 --- pipe{|read_io, write_io| ... } -> object
 --- pipe(ext_enc){|read_io, write_io| ... } -> object
---- pipe(enc_str, opt={}){|read_io, write_io| ... }           -> object
---- pipe(ext_enc, int_enc, opt={}){|read_io, write_io| ... }  -> object
+--- pipe(enc_str, **opts){|read_io, write_io| ... }           -> object
+--- pipe(ext_enc, int_enc, **opts){|read_io, write_io| ... }  -> object
 
 [[man:pipe(2)]] を実行して、相互につながった2つの
 [[c:IO]] オブジェクトを要素とする配列を返します。
@@ -390,7 +390,7 @@ close します(close されていてるオブジェクトはそのままです)
 @param ext_enc 読み込み側の外部エンコーディングを Encoding オブジェクトで指定します。
 
 @param int_enc 読み込み側の内部エンコーディングを Encoding オブジェクトで指定します。
-@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
+@param opts エンコーディングなどを設定するキーワード引数(see [[m:IO.new]])
 
 @raise Errno::EXXX IO オブジェクトの作成に失敗した場合に発生します。
 
@@ -529,9 +529,9 @@ opt ではエンコーディングの設定やプロセス起動のためのオ�
 
 @raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
---- read(path, opt = {})     -> String | nil
---- read(path, length = nil, opt = {})     -> String | nil
---- read(path, length = nil, offset = 0, opt = {})     -> String | nil
+--- read(path, **opt)     -> String | nil
+--- read(path, length = nil, **opt)     -> String | nil
+--- read(path, length = nil, offset = 0, **opt)     -> String | nil
 
 path で指定されたファイルを offset 位置から
 length バイト分読み込んで返します。
@@ -549,14 +549,13 @@ length バイト分読み込んで返します。
 
 @param offset 読み込みを始めるオフセットを整数で指定します。
 
-@param opt ファイル path を open する時に使われるオプションを Hash で指定します。
+@param opt ファイル path を open する時に使われるオプションをキーワード引数で指定します。
 
 @raise Errno::EXXX path のオープン、offset 位置への設定、ファイルの読み込みに失敗した場合に発生します。
 
 @raise ArgumentError length が負の場合に発生します。
 
-引数 opt で有効なキーと値は以下のとおりです。
-キーはいずれも Symbol オブジェクトです。
+キーワード引数で有効なキーと値は以下のとおりです。
 
 : :encoding
   
@@ -716,8 +715,8 @@ IO.sysopen("testfile", "w+")   # => 3
 
 @see [[m:Kernel.#open]]
 
---- write(path, string, opt={}) -> Integer
---- write(path, string, offset=nil, opt={}) -> Integer
+--- write(path, string, **opts) -> Integer
+--- write(path, string, offset=nil, **opts) -> Integer
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
 
@@ -728,14 +727,13 @@ offset を指定するとその位置までシークします。
 offset を指定しないと、書き込みの末尾でファイルを
 切り捨てます。
 
-引数最後のハッシュはファイルを開くときに使われます。
-エンコーディングなどを指定することができます。
+キーワード引数はファイルを開くときに使われ、エンコーディングなどを指定することができます。
 詳しくは [[m:IO.open]] を見てください。
 
 @param path ファイル名文字列
 @param string 書き込む文字列
 @param offset 書き込み開始位置
-@param opt ファイルを開くときのオプション引数
+@param opts ファイルを開くときのキーワード引数
 
 #@samplecode 例
 text = "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
@@ -2227,9 +2225,9 @@ File.open("testfile") do |f|
 end
 #@end
 
---- set_encoding(enc_str, opt={})           -> self
+--- set_encoding(enc_str, **opts)           -> self
 --- set_encoding(ext_enc)           -> self
---- set_encoding(ext_enc, int_enc, opt={})  -> self
+--- set_encoding(ext_enc, int_enc, **opts)  -> self
 
 IO のエンコーディングを設定します。
 
@@ -2242,7 +2240,7 @@ A を外部エンコーディング、 B を内部エンコーディングに指
 引数が2つの場合はそのそれぞれを外部エンコーディング、内部エンコーディング
 に設定します。
 
-opt のハッシュで外部エンコーディングを内部エンコーディングに変換する際の
+キーワード引数で外部エンコーディングを内部エンコーディングに変換する際の
 オプションを指定します。
 詳しくは [[m:String#encode]] を参照してください。
 
@@ -2253,7 +2251,7 @@ opt のハッシュで外部エンコーディングを内部エンコーディ�
 @param ext_enc 外部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 
 @param int_enc 内部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
-@param opt エンコーディング変換のオプション
+@param opts エンコーディング変換のオプション
 例:
     io = File.open(file)
     io.set_encoding("ASCII-8BIT", "EUC-JP")
