@@ -966,11 +966,11 @@ FileTest.world_writable?(self.to_s) と同じです。
 
 #@since 2.1.0
 
---- write(string, offset=nil, opt={}) -> Integer
+--- write(string, offset=nil, **opts) -> Integer
 
 #@#noexample IO.write の例を参照
 
-IO.write(self.to_s, *args)と同じです。
+IO.write(self.to_s, string, offset, **opts)と同じです。
 
 @see [[m:IO.write]]
 
