@@ -34,6 +34,8 @@ x の逆余弦関数（arccosine）の値をラジアンで返します。
 Math.acos(0) == Math::PI/2  # => true
 #@end
 
+@see [[m:Math.#cos]]
+
 --- asin(x) -> Float
 
 x の逆正弦関数（arcsine）の値をラジアンで返します。
@@ -52,6 +54,8 @@ x の逆正弦関数（arcsine）の値をラジアンで返します。
 Math.asin(1) == Math::PI/2  # => true
 #@end
 
+@see [[m:Math.#sin]]
+
 --- atan(x) -> Float
 
 x の逆正接関数（arctangent）の値をラジアンで返します。
@@ -67,6 +71,8 @@ x の逆正接関数（arctangent）の値をラジアンで返します。
 #@samplecode 例
 Math.atan(0) # => 0.0
 #@end
+
+@see [[m:Math.#atan2]], [[m:Math.#tan]]
 
 --- atan2(y, x) -> Float
 
@@ -87,6 +93,7 @@ Math.atan2(-1,0)  #=> -1.5707963267949
 
 @raise RangeError y, x に実数以外の数値を指定した場合に発生します。
 
+@see [[m:Math.#atan]], [[m:Math.#tan]]
 
 --- acosh(x) -> Float
 
@@ -104,6 +111,8 @@ x の逆双曲線余弦関数（area hyperbolic cosine）の値を返します�
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
+@see [[m:Math.#cosh]]
+
 --- asinh(x) -> Float
 
 x の逆双曲線正弦関数（area hyperbolic sine）の値を返します。
@@ -117,6 +126,8 @@ x の逆双曲線正弦関数（area hyperbolic sine）の値を返します。
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#sinh]]
 
 --- atanh(x) -> Float
 
@@ -136,6 +147,7 @@ x の逆双曲線正接関数（area hyperbolic tangent）の値を返します�
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
+@see [[m:Math.#tanh]]
 
 --- cos(x) -> Float
 
@@ -153,6 +165,8 @@ x の余弦関数（cosine）の値を返します。
 Math.cos(Math::PI) # => -1.0
 #@end
 
+@see [[m:Math.#acos]]
+
 --- sin(x) -> Float
 
 x の正弦関数（sine）の値を返します。
@@ -168,6 +182,8 @@ x の正弦関数（sine）の値を返します。
 #@samplecode 例
 Math.sin(Math::PI/2) # => 1.0
 #@end
+
+@see [[m:Math.#asin]]
 
 --- tan(x) -> Float
 
@@ -185,6 +201,8 @@ x の正接関数（tangent）の値を返します。
 Math.tan(0) # => 0.0
 #@end
 
+@see [[m:Math.#atan]], [[m:Math.#atan2]]
+
 --- cosh(x) -> Float
 
 x の双曲線余弦関数（hyperbolic cosine）の値を返します。
@@ -199,6 +217,8 @@ x の双曲線余弦関数（hyperbolic cosine）の値を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
+@see [[m:Math.#acosh]]
+
 --- sinh(x) -> Float
 
 x の双曲線正弦関数（hyperbolic sine）の値を返します。
@@ -212,6 +232,8 @@ x の双曲線正弦関数（hyperbolic sine）の値を返します。
 @raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#asinh]]
 
 --- tanh(x) -> Float
 
@@ -229,6 +251,8 @@ x の双曲線正接関数（hyperbolic tangent）の値を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
+@see [[m:Math.#atanh]]
+
 --- erf(x) -> Float
 x の誤差関数（error function）の値を返します。
 
@@ -241,6 +265,8 @@ x の誤差関数（error function）の値を返します。
 #@samplecode 例
 Math.erf(0) # => 0.0
 #@end
+
+@see [[m:Math.#erfc]]
 
 --- erfc(x) -> Float
 x の相補誤差関数（complementary error function）の値を返します。
@@ -255,6 +281,7 @@ x の相補誤差関数（complementary error function）の値を返します�
 Math.erfc(0) # => 1.0
 #@end
 
+@see [[m:Math.#erf]]
 
 --- exp(x) -> Float
 
@@ -274,7 +301,7 @@ Math.exp(1)       # => 2.718281828459045
 Math.exp(1.5)     # => 4.4816890703380645
 #@end
 
-@see [[man:exp(3)]]
+@see [[man:exp(3)]], [[m:Math.#log]]
 
 --- frexp(x) -> [Float, Integer]
 
@@ -350,6 +377,7 @@ Math.log(Math::E**3) # => 3.0
 Math.log(12, 3)      # => 2.2618595071429146
 #@end
 
+@see [[m:Math.#log2]], [[m:Math.#log10]], [[m:Math.#exp]]
 
 --- log2(x) -> Float
 
@@ -371,6 +399,8 @@ Math.log2(32768)  # => 15.0
 Math.log2(65536)  # => 16.0
 #@end
 
+@see [[m:Math.#log]], [[m:Math.#log10]]
+
 --- log10(x) -> Float
 
 x の常用対数（common logarithm）を返します。
@@ -388,6 +418,8 @@ Math.log10(1)       # => 0.0
 Math.log10(10)      # => 1.0
 Math.log10(10**100) # => 100.0
 #@end
+
+@see [[m:Math.#log]], [[m:Math.#log2]]
 
 --- sqrt(x) -> Float
 
@@ -418,7 +450,7 @@ x の平方根（square root）を返します。
 #   [10, 3.16227766016838, 10.0]
 #@end
 
-@see [[m:Integer.sqrt]]
+@see [[m:Integer.sqrt]], [[m:Math.#cbrt]]
 
 --- cbrt(x) -> Float
 
@@ -454,6 +486,8 @@ x の立方根（cubic root）を返します。
 #   [8, 2.0, 8.0]
 #   [9, 2.0800838230519, 9.0]
 #@end
+
+@see [[m:Math.#sqrt]]
 
 --- gamma(x) -> Float
 
@@ -497,6 +531,8 @@ def fact(n) (1..n).inject(1) {|r,i| r*i } end
 #   [25, 6.204484017332391e+23, 620448401733239439360000]
 #   [26, 1.5511210043330954e+25, 15511210043330985984000000]
 #@end
+
+@see [[m:Math.#lgamma]]
 
 --- lgamma(x) -> [Float, Integer]
 
