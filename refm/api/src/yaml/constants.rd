@@ -8,20 +8,18 @@ YAML 関連の定数のためのサブライブラリです。
 
 == Constants
 
---- VERSION -> "0.60"
+--- VERSION -> String
 
 このライブラリのバージョンを文字列で返します。
 
---- SUPPORTED_YAML_VERSIONS -> ["1.0"]
+--- SUPPORTED_YAML_VERSIONS -> [String]
 
 サポートする YAML のバージョンを文字列の配列で返します。
 
 --- DEFAULTS -> Hash
 
 YAMLのデフォルトの設定のハッシュです。
-#@since 1.8.3
 Ruby 1.8.3 以降では変更できません。
-#@end
 
 下記のオプションがあります。
  {

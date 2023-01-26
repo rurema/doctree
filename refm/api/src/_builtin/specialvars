@@ -25,9 +25,11 @@ example.txt:
  baz
 
 ただし、このプログラムは次のように書く方がよりRuby的です。
- ARGF.each do |line|
-   print line
- end
+#@samplecode 例
+ARGF.each do |line|
+  print line
+end
+#@end
 
 
 --- $& -> String | nil
@@ -40,12 +42,13 @@ example.txt:
 この変数はローカルスコープかつスレッドローカル、読み取り専用です。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $& 
- end
- #=> "<a href=\"http://example.com\">example.com</a>"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $& 
+end
+#=> "<a href=\"http://example.com\">example.com</a>"
+#@end
 
 
 --- $~ -> MatchData | nil
@@ -61,12 +64,13 @@ MatchData オブジェクトでも nil でもない値を代入しようとす�
 この変数はローカルスコープかつスレッドローカルです。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $~[1]
- end
- #=> "http://example.com"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $~[1]
+end
+#=> "http://example.com"
+#@end
 
 
 --- $` -> String | nil
@@ -80,12 +84,13 @@ Ruby起動時の初期値は nil です。
 この変数はローカルスコープかつスレッドローカル、読み取り専用です。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $`
- end
- #=> "<p>"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $`
+end
+#=> "<p>"
+#@end
 
 
 --- $' -> String | nil
@@ -99,12 +104,13 @@ Ruby起動時の初期値は nil です。
 この変数はローカルスコープかつスレッドローカル、読み取り専用です。
 Ruby起動時の初期値は nil です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   p $'
- end
- #=> "</p>"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  p $'
+end
+#=> "</p>"
+#@end
 
 
 --- $+ -> String | nil
@@ -135,19 +141,20 @@ Ruby起動時の初期値は nil です。
 
 番号 n はいくらでも大きな正整数を利用できます。
 
-[[m:Regexp.last_match]][1],
-[[m:Regexp.last_match]][2], ... と同じ。
+[[m:Regexp.last_match]](1),
+[[m:Regexp.last_match]](2), ... と同じ。
 
 これらの変数はローカルスコープかつスレッドローカル、読み取り専用です。
 
-=== 例
- str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>] =~ str
-   print $1
-   print $2
- end
- #=> "http://example.com"
- #=> "example.com"
+#@samplecode 例
+str = '<p><a href="http://example.com">example.com</a></p>'
+if %r[<a href="(.*?)">(.*?)</a>] =~ str
+  print $1
+  print $2
+end
+#=> "http://example.com"
+#=> "example.com"
+#@end
 
 
 --- $? -> Process::Status | nil
@@ -165,7 +172,9 @@ Ruby起動時の初期値は nil です。
 この変数はスレッドローカルで読み取り専用です。
 
 @see [[m:Process.#wait]]
-
+#@since 2.5.0
+@see [[m:Process.last_status]]
+#@end
 
 --- $! -> Exception | nil
 
@@ -204,33 +213,47 @@ $@ の値は、[[m:$!]].backtrace の値と同じです。
 
 この変数はスレッドローカルです。
 
+#@since 3.0
+--- $SAFE -> object
+
+通常のグローバル変数です。
+
+Ruby 2.7 以前は特殊変数でしたが、Ruby 3.0 から通常のグローバル変数になりました。
+#@else
 --- $SAFE -> Integer
 
-カレントスレッドのセーフレベルを表す整数です。セーフレベルについては
-[[d:spec/safelevel]] を参照してください。
+#@since 2.6.0
+カレントプロセスのセーフレベルを表す整数です。
+#@else
+カレントスレッドのセーフレベルを表す整数です。
+#@end
+
+セーフレベルについては[[d:spec/safelevel]] を参照してください。
 
 Thread.current.safe_level と同じです。
 非整数を代入しようとすると [[c:TypeError]] が発生します。
 
+#@since 2.6.0
+この変数はグローバルスコープです。
+#@else
 この変数はスレッドローカルです。
+#@end
 Ruby起動時の初期値は 0 です。
+#@end
 
 --- $= -> bool
 
-#@since 1.9.1
 過去との互換性のために残されていますが、もはや何の意味もありません。
 
 値は常に false です。代入しても無視されます。
 
-#@else
-非推奨(obsolete): この変数は将来のバージョンで削除される予定です。
-
-パターンマッチや文字列の比較でアルファベットの大文字小文字を
-区別するかどうかのフラグです。
-
-過去との互換性のために残されています。Ruby 1.9 以降では意味を持たなくなります。また、将来のバージョンでは文法エラーになる可能性もあります。新規に作成するプログラムでは利用すべきでありません。 
-#@end
 この変数はグローバルスコープです。
+
+#@samplecode 例
+$= = true # => warning: variable $= is no longer effective; ignored
+$=        # => warning: variable $= is no longer effective
+          #    false
+#@end
 
 --- $/  -> String | nil
 --- $-0 -> String | nil
@@ -239,7 +262,7 @@ Ruby起動時の初期値は 0 です。
 awk の RS 変数のように働きます。
 
 [[m:Kernel.#gets]] のような「行」単位の読み込みメソッドが「行」の区切りとして使用します。
-Rubyがコマンドオプション -0 付きで起動されたときには -0 で指定された値が規定値となります。そうでないとき、規定値は "\n" です。
+Rubyがコマンドオプション -0 付きで起動されたときには -0 で指定された値が既定値となります。そうでないとき、既定値は "\n" です。
 
 この変数に nil を設定すると読み込みメソッドはファイル全体を一度に読み込みます。
 空文字列 "" を設定するとパラグラフモードとみなされ、
@@ -268,12 +291,18 @@ $/ には正規表現は使えません。
 
 デフォルト値は nil で、空文字列と同じ結果になります。
 
+Ruby 2.7からは nil 以外に変更することは非推奨になったため、
+nil 以外を代入すると警告がでるようになりました。
+
 この変数はグローバルスコープです。
 
 --- $;  -> Regexp | String | nil
 --- $-F -> Regexp | String | nil
 
 [[m:String#split]] で引数を省略した場合の区切り文字です。
+
+Ruby 2.7からは nil 以外に変更することは非推奨になったため、
+nil 以外を代入すると警告がでるようになりました。
 
 nilを設定すると特殊な分割を行います。
 詳細は [[m:String#split]] を参照してください。
@@ -312,9 +341,7 @@ Ruby起動時の初期値は 0 です。
 この変数はグローバルスコープ、読み取り専用です。
 
 --- $0 -> String
-#@since 1.8.2
 --- $PROGRAM_NAME -> String
-#@end
 
 現在実行中の Ruby スクリプトの名前を表す文字列です。
 
@@ -349,13 +376,8 @@ Rubyライブラリをロードするときの検索パスです。
 起動時にはコマンドラインオプション -I で指定したディレクトリ、
 環境変数 RUBYLIB の値、
 コンパイル時に指定したデフォルト値
-#@until 1.9.1
-、"." (カレントディレクトリ)
-#@end
 をこの順番で含みます。
 
-#@# 1.6.5 から以下のように変更されている
-#@# 1.6.4 以前の値は書かなくていいよね……
 以下に典型的な UNIX システム上でのロードパスを示します。
 
   -I で指定したパス
@@ -365,11 +387,7 @@ Rubyライブラリをロードするときの検索パスです。
   /usr/local/lib/ruby/site_ruby                サイト固有ライブラリ
   /usr/local/lib/ruby/VERSION                  標準ライブラリ
   /usr/local/lib/ruby/VERSION/ARCH             標準、システム依存、拡張ライブラリ
-#@until 1.9.1
-  .                                            カレントディレクトリ
-#@end
 
-#@#((-デフォルトの順序は 1.6.5 から変更されました-))
 上記表中の VERSION は Ruby のバージョンを表す文字列で、
 「1.6」や「1.8」です。
 ARCH はハードウェアと OS を表す文字列で、
@@ -378,16 +396,9 @@ ARCH の値は Config::CONFIG['arch'] で得られます。
 
 コンパイル時のデフォルトパスは
 多くの UNIX システムでは "/usr/local/lib/ruby" です。
-[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]、
-[[d:platform/bccwin32]]、[[d:platform/mswince]] 環境では
+[[d:platform/mswin32]]、[[d:platform/mingw32]]、[[d:platform/Cygwin]]
+環境では
 ruby.dll の位置からの相対で決まります。
-[[d:platform/DJGPP]] と [[d:platform/emx]] (OS/2) では
-ruby.exe の位置からの相対で決まります。
-
-#@until 1.9.1
--T オプションで起動時に [[m:$SAFE]] を 1 以上に
-設定したときは "." (カレントディレクトリ) はロードパスに入りません。
-#@end
 
 require 'foo' を実行すると、
 以下のように foo.rb と foo.so が交互に探索されます。
@@ -410,14 +421,22 @@ require 'foo' を実行すると、
 
 とします。
 
+#@since 2.7.0
+$LOAD_PATH の特異メソッドとして resolve_feature_path が定義されています。
+require を呼んだときに読み込まれるファイルを特定できます。
+
+#@samplecode
+p $LOAD_PATH.resolve_feature_path('set')
+# => [:rb, "/build-all-ruby/2.7.0/lib/ruby/2.7.0/set.rb"]
+#@end
+#@end
+
 この変数はグローバルスコープです。
 
 @see [[d:spec/rubycmd]], [[d:spec/envvars]]
 
 --- $"               -> [String]
-#@since 1.8.2
 --- $LOADED_FEATURES -> [String]
-#@end
 
 [[m:Kernel.#require]] でロードされたファイル名を含む配列です。
 
@@ -468,10 +487,12 @@ require 'foo' を実行すると、
 自プロセスの標準入力をリダイレクトしたいときは
 $stdin に代入すれば十分です。
 
-    # 標準入力の入力元 /tmp/foo に変更
-    $stdin = File.open("/tmp/foo", "w")
-    gets               # 入力する
-    $stdin = STDIN     # 元に戻す
+#@samplecode 例
+# 標準入力の入力元 /tmp/foo に変更
+$stdin = File.open("/tmp/foo", "w")
+gets               # 入力する
+$stdin = STDIN     # 元に戻す
+#@end
 
 ただし、[[m:Kernel.#gets]] など、特定の組み込みメソッドは
 $stdin オブジェクトにメソッドを転送して実装されています。
@@ -483,26 +504,30 @@ $stdin オブジェクトに代入したオブジェクトが以下のメソッ�
     pos=, rewind, fileno, to_io, eof, each_line, each_byte,
     binmode, closed?
 
-例:
-
-    $stdin = Object.new
-    def $stdin.gets
-      "foo"
-    end
-    p gets()  # => "foo"
+#@samplecode 例
+$stdin = Object.new
+def $stdin.gets
+  "foo"
+end
+p gets()  # => "foo"
+#@end
 
 自プロセスだけでなく、子プロセスの標準入力もリダイレクトしたいときは
 以下のように [[m:IO#reopen]] を使います。
 
-    $stdin.reopen("/tmp/foo")
+#@samplecode 例
+$stdin.reopen("/tmp/foo")
+#@end
 
 また、リダイレクトしたあと
 出力先をまた元に戻したい場合は以下のようにします。
 
-    stdin_old = $stdin.dup       # 元の $stdin を保存する
-    $stdout.reopen("/tmp/foo")   # $stdin を /tmp/foo にリダイレクトする
-    gets                         # /tmp/foo から入力
-    $stdin.reopen stdin_old      # 元に戻す
+#@samplecode 例
+stdin_old = $stdin.dup       # 元の $stdin を保存する
+$stdout.reopen("/tmp/foo")   # $stdin を /tmp/foo にリダイレクトする
+gets                         # /tmp/foo から入力
+$stdin.reopen stdin_old      # 元に戻す
+#@end
 
 $stdin はグローバルスコープです。
 
@@ -520,36 +545,36 @@ $stdin はグローバルスコープです。
 コマンドラインオプションオプション -i を指定した場合には
 読み込み元と同じ名前のファイルを表します。
 
-#@until 1.9.1
-$stdout には $defout という別名がありますが、
-$defout は非推奨(obsolete)になったので、
-新しいコードでは常に $stdout を使ってください。
-#@end
-
 $stdout に代入するオブジェクトには
 write という名前のメソッドが定義されていなければいけません。
 
 自プロセスの標準出力をリダイレクトしたいときには、
 以下のように $stdout に代入すれば十分です。
 
-    # 標準出力の出力先を /tmp/foo に変更
-    $stdout = File.open("/tmp/foo", "w")
-    puts "foo"         # 出力する
-    $stdout = STDOUT   # 元に戻す
+#@samplecode 例
+# 標準出力の出力先を /tmp/foo に変更
+$stdout = File.open("/tmp/foo", "w")
+puts "foo"         # 出力する
+$stdout = STDOUT   # 元に戻す
+#@end
 
 自プロセスだけでなく、子プロセスの標準出力もリダイレクトしたいときは
 以下のように [[m:IO#reopen]] を使います。
 
-    STDOUT.reopen("/tmp/foo", "w")
+#@samplecode 例
+STDOUT.reopen("/tmp/foo", "w")
+#@end
 
 また、リダイレクトしたあと
 出力先をまた元に戻したい場合は以下のようにします。
 
-    stdout_old = $stdout.dup        # 元の $stdout を保存する
-    $stdout.reopen("/tmp/foo")      # $stdout を /tmp/foo にリダイレクトする
-    puts "foo"                      # /tmp/foo に出力
-    $stdout.flush                   # 念のためフラッシュする
-    $stdout.reopen stdout_old       # 元に戻す
+#@samplecode 例
+stdout_old = $stdout.dup        # 元の $stdout を保存する
+$stdout.reopen("/tmp/foo")      # $stdout を /tmp/foo にリダイレクトする
+puts "foo"                      # /tmp/foo に出力
+$stdout.flush                   # 念のためフラッシュする
+$stdout.reopen stdout_old       # 元に戻す
+#@end
 
 $stdout はグローバルスコープです。
 
@@ -566,36 +591,36 @@ Ruby インタプリタが出力するエラーメッセージや
 警告メッセージ、[[m:Kernel.#warn]] の出力先となります。
 初期値は [[m:Object::STDERR]] です。
 
-#@until 1.9.1
-$stderr には $deferr という別名がありますが、
-$deferr は非推奨(obsolete)になったので、
-新しいコードでは常に $stderr を使ってください。
-#@end
-
 $stderr に代入するオブジェクトには
 write という名前のメソッドが定義されていなければいけません。
 
 自プロセスの標準エラー出力をリダイレクトしたいときには、
 $stderr に代入すれば十分です。
 
-    # 標準エラー出力の出力先を /tmp/foo に変更
-    $stderr = File.open("/tmp/foo", "w")
-    puts "foo"         # 出力する
-    $stderr = STDERR   # 元に戻す
+#@samplecode 例
+# 標準エラー出力の出力先を /tmp/foo に変更
+$stderr = File.open("/tmp/foo", "w")
+puts "foo"         # 出力する
+$stderr = STDERR   # 元に戻す
+#@end
 
 自プロセスだけでなく、子プロセスの標準エラー出力も
 リダイレクトしたいときは以下のように [[m:IO#reopen]] を使います。
 
-    $stderr.reopen("/tmp/foo", "w")
+#@samplecode 例
+$stderr.reopen("/tmp/foo", "w")
+#@end
 
 また、リダイレクトしたあと
 出力先をまた元に戻したい場合は以下のようにします。
 
-    stderr_old = $stderr.dup        # 元の $stderr を保存する
-    $stderr.reopen("/tmp/foo")      # $stderr を /tmp/foo にリダイレクトする
-    puts "foo"                      # /tmp/foo に出力
-    $stderr.flush                   # 念のためフラッシュする
-    $stderr.reopen stderr_old       # 元に戻す
+#@samplecode 例
+stderr_old = $stderr.dup        # 元の $stderr を保存する
+$stderr.reopen("/tmp/foo")      # $stderr を /tmp/foo にリダイレクトする
+puts "foo"                      # /tmp/foo に出力
+$stderr.flush                   # 念のためフラッシュする
+$stderr.reopen stderr_old       # 元に戻す
+#@end
 
 $stderr はグローバルスコープです。
 
@@ -631,7 +656,17 @@ $VERBOSE はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
-#@since 1.9.1
+#@since 3.0
+--- $KCODE -> object
+--- $-K    -> object
+
+通常のグローバル変数です。
+
+Ruby 2.7 以前は特殊変数でしたが、Ruby 3.0 から通常のグローバル変数になりました。
+任意のオブジェクトを代入して nil 以外の値に設定できます。
+
+@see [[d:spec/rubycmd]]
+#@else
 --- $KCODE -> nil
 --- $-K    -> nil
 
@@ -647,49 +682,6 @@ $VERBOSE はグローバルスコープです。
   => nil
 
 @see [[d:spec/rubycmd]]
-
-#@else
---- $KCODE -> String
---- $-K    -> String
-
-Ruby の認識するマルチバイト文字列エンコーディングです。
-変数の値は "EUC" "SJIS" "UTF8" "NONE" のいずれかの文字列です。
-
-
-$KCODE の値が "EUC" のときは文字列や正規表現の
-エンコーディングが EUC-JP であると仮定します。
-同様に "SJIS" のときは Shift JIS を仮定します。
-"UTF8" のときは UTF-8 を仮定します。
-"NONE" のときはマルチバイト文字列を認識しません。
-
-代入するときには値の最初の 1 バイトしか意味がなく、
-また大文字小文字の違いも無視されます。すなわち、
-"e" "E" は "EUC"、"s" "S" は "SJIS"、
-"u" "U" は "UTF8"、"n" "N" は "NONE" に展開されます。
-
-デフォルト値は "NONE" です。
-
-[参考]
-
-現在の実装では $KCODE は Ruby の以下の動作に影響します。
-
-  * インタプリタの字句解析器
-  * [[c:Regexp]] のエンコーディングフラグのデフォルト値
-  * [[ref:d:spec/literal#regexp]]
-  * [[m:Regexp.new]]
-  * [[m:String#upcase]]
-  * [[m:String#downcase]]
-  * [[m:String#swapcase]]
-  * [[m:String#capitalize]]
-  * [[m:String#inspect]]
-  * [[m:String#split]]
-  * [[m:String#gsub]]
-  * [[m:String#scan]]
-
-$KCODE はグローバルスコープです。
-
-@see [[d:spec/rubycmd]]
-
 #@end
 
 --- $-a -> bool
@@ -702,7 +694,7 @@ $KCODE はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
---- $-i -> bool
+--- $-i -> String | nil
 in-place 置換モードで用いられます。
 
 コマンドラインオプション -i を指定したとき、空文字列になります。

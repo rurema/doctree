@@ -336,12 +336,12 @@ SafeStringValue() を使ってください。
 
 --- static void rb_clear_cache_by_class(VALUE klass)
 
-メソッドキャシュから klass クラスのメソッドの
+メソッドキャッシュから klass クラスのメソッドの
 キャッシュエントリを消去します。
 
 --- static void rb_clear_cache_by_id(ID id)
 
-メソッドキャシュから id という名前のメソッドの
+メソッドキャッシュから id という名前のメソッドの
 キャッシュエントリを全て消去します。
 
 --- static VALUE rb_cont_call(int argc, VALUE *argv, VALUE cont)
@@ -838,7 +838,7 @@ Thread#pass の実体。
 他のスレッドに実行権を渡します。
 対象の特定はできません。
 
-see also: [[f:rb_thread_wait_fd]], [[f:rb_thread_wait_for]]
+@see [[f:rb_thread_wait_fd]], [[f:rb_thread_wait_for]]
 
 #@until 2.2.0
 --- int rb_thread_select(int max, fd_set *read, fd_set *write, fd_set *except, struct timeval *timeout)

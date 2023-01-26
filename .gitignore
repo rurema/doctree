@@ -1,1 +1,6 @@
 /Gemfile.lock
+/.bundle
+_site/*
+!_site/.keep
+!_site/index.html
+/vendor/bundle

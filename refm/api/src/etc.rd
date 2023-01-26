@@ -5,8 +5,10 @@ category Unix
 
 === 使い方
 
-  require 'etc'
-  p Etc.getlogin
+#@samplecode
+require 'etc'
+p Etc.getlogin
+#@end
 
 = module Etc
 
@@ -15,8 +17,7 @@ category Unix
 
 == Module Functions
 
-#@since 1.8.1
---- getgrent -> Struct::Group | nil
+--- getgrent -> Etc::Group | nil
 
 /etc/group ファイルから読み込んだエントリを一つ返します。
 
@@ -25,7 +26,7 @@ category Unix
 
 処理が終了したときは [[m:Etc.#endgrent]] を呼び出すようにしてください。
 
-@see [[man:getgrent(3)]], [[c:Struct::Group]]
+@see [[man:getgrent(3)]], [[c:Etc::Group]]
 
 --- endgrent -> nil
 
@@ -42,7 +43,7 @@ category Unix
 
 @see [[man:getgrent(3)]]
 
---- getpwent -> Struct::Passwd | nil
+--- getpwent -> Etc::Passwd | nil
 
 /etc/passwd から読み込んだエントリを一つ返します。
 
@@ -68,7 +69,6 @@ category Unix
 
 @see [[man:getpwent(3)]]
 
-#@end
 
 --- getlogin -> String | nil
 
@@ -82,11 +82,13 @@ getlogin は [[man:su(1)]] などでログイン時のユーザとは異なる�
 
 たとえば、環境変数 USER などもあわせて、以下のようにフォールバックできます。
 
-  require "etc"
-  login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
+#@samplecode
+require "etc"
+login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
+#@end
 
 
---- getpwnam(name) -> Struct::Passwd
+--- getpwnam(name) -> Etc::Passwd
 
 passwd データベースを検索し、
 名前が name である passwd エントリを返します。
@@ -95,9 +97,9 @@ passwd データベースを検索し、
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getpwnam(3)]], [[c:Struct::Passwd]]
+@see [[man:getpwnam(3)]], [[c:Etc::Passwd]]
 
---- getpwuid(uid = getuid) -> Struct::Passwd
+--- getpwuid(uid = getuid) -> Etc::Passwd
 
 passwd データベースを検索し、
 ユーザ ID が uid である passwd エントリを返します。
@@ -106,9 +108,9 @@ passwd データベースを検索し、
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getpwuid(3)]], [[c:Struct::Passwd]]
+@see [[man:getpwuid(3)]], [[c:Etc::Passwd]]
 
---- getgrgid(gid) -> Struct::Group
+--- getgrgid(gid) -> Etc::Group
 
 group データベースを検索し、グループ ID が gid
 であるグループエントリを返します。
@@ -117,9 +119,9 @@ group データベースを検索し、グループ ID が gid
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getgrgid(3)]], [[c:Struct::Group]]
+@see [[man:getgrgid(3)]], [[c:Etc::Group]]
 
---- getgrnam(name) -> Struct::Group
+--- getgrnam(name) -> Etc::Group
 
 name という名前のグループエントリを返します。
 
@@ -127,9 +129,9 @@ name という名前のグループエントリを返します。
 
 @raise ArgumentError エントリが見つからなかった場合に発生します。
 
-@see [[man:getgrnam(3)]], [[c:Struct::Group]]
+@see [[man:getgrnam(3)]], [[c:Etc::Group]]
 
---- group -> Struct::Group | nil
+--- group -> Etc::Group | nil
 
 /etc/group ファイルから読み込んだエントリを一つ返します。
 
@@ -138,17 +140,13 @@ name という名前のグループエントリを返します。
 
 @raise RuntimeError /etc/group ファイルがロックされている場合に発生します。
 
-#@since 1.8.1
 @see [[m:Etc.#getgrent]], [[man:getgrent(3)]]
-#@else
-@see [[man:getgrent(3)]]
-#@end
 
 --- group {|gr| ... } -> ()
 
 全てのグループエントリを順にアクセスするためのイテレータです。
 
---- passwd -> Struct::Passwd | nil
+--- passwd -> Etc::Passwd | nil
 
 /etc/passwd から読み込んだエントリを一つ返します。
 
@@ -157,37 +155,35 @@ name という名前のグループエントリを返します。
 
 @raise RuntimeError /etc/passwd ファイルがロックされている場合に発生します。
 
-#@since 1.8.1
 @see [[m:Etc.#getpwent]], [[man:getpwent(3)]]
-#@else
-@see [[man:getpwent(3)]]
-#@end
 
 --- passwd {|pw| ... } -> ()
 
 全ての passwd エントリを順にアクセスするためのイテレータです。
 
-#@since 1.9.2
 --- sysconfdir -> String | nil
 
 システムの設定ディレクトリを返します。
 
-  require 'etc'
-  p Etc.sysconfdir # => "/etc"
+#@samplecode
+require 'etc'
+p Etc.sysconfdir # => "/etc"
+#@end
 
 主に "/etc" を返しますが、Ruby をソースからビルドした場合は異なるディレ
 クトリを返す場合があります。例えば、Ruby を /usr/local にインストールし
 た場合は、"/usr/local/etc" を返します。
+Windows では常にシステムで提供されたディレクトリを返します。
 
 --- systmpdir -> String | nil
 
 システムのテンポラリディレクトリを返します。
 
-  require 'etc'
-  p Etc.systmpdir # => "/tmp"
-
+#@samplecode
+require 'etc'
+p Etc.systmpdir # => "/tmp"
 #@end
-#@since 2.2.0
+
 --- uname -> {Symbol => String}
 
 [[man:uname(2)]] で取得したシステム情報を [[c:Hash]] で返します。
@@ -195,17 +191,17 @@ name という名前のグループエントリを返します。
 @return 少なくとも :sysname, :nodename, :release, :version, :machine の
         5 つのキーを持つ [[c:Hash]] を返します。
 
-例:
+#@samplecode 例
+require 'etc'
+require 'pp'
 
-  require 'etc'
-  require 'pp'
-
-  pp Etc.uname
-  # => {:sysname=>"Linux",
-  #     :nodename=>"boron",
-  #     :release=>"2.6.18-6-xen-686",
-  #     :version=>"#1 SMP Thu Nov 5 19:54:42 UTC 2009",
-  #     :machine=>"i686"}
+pp Etc.uname
+# => {:sysname=>"Linux",
+#     :nodename=>"boron",
+#     :release=>"2.6.18-6-xen-686",
+#     :version=>"#1 SMP Thu Nov 5 19:54:42 UTC 2009",
+#     :machine=>"i686"}
+#@end
 
 --- sysconf(name) -> Integer | nil
 
@@ -217,12 +213,14 @@ name という名前のグループエントリを返します。
 
 @param name [[c:Etc]] モジュールの SC_ で始まる定数のいずれかを指定します。
 
-  require "etc"
-  Etc.sysconf(Etc::SC_ARG_MAX) # => 2097152
+#@samplecode
+require "etc"
+Etc.sysconf(Etc::SC_ARG_MAX) # => 2097152
 
-  # Number of processors.
-  # It is not standardized.
-  Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
+# Number of processors.
+# It is not standardized.
+Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
+#@end
 
 --- confstr(name) -> String | nil
 
@@ -233,21 +231,23 @@ name という名前のグループエントリを返します。
 引数 name に対応する設定が行われていない状態の場合は nil を返します。
 ([[man:confstr(3)]] が -1 を返し、errno が設定されていない場合)
 
-  require "etc"
-  Etc.confstr(Etc::CS_PATH) # => "/bin:/usr/bin"
+#@samplecode
+require "etc"
+Etc.confstr(Etc::CS_PATH) # => "/bin:/usr/bin"
 
-  # GNU/Linux
-  Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
-  Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
+# GNU/Linux
+Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
+Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
+#@end
 
 --- nprocessors -> Integer
 
 有効な CPU コア数を返します。
 
-例:
-
-  require 'etc'
-  p Etc.nprocessors #=> 4
+#@samplecode
+require 'etc'
+p Etc.nprocessors #=> 4
+#@end
 
 == Constants
 
@@ -449,29 +449,24 @@ name という名前のグループエントリを返します。
 [[m:IO#pathconf]] の引数に指定します。
 
 詳細は [[man:fpathconf(3)]] を参照してください。
-#@end
 
-= class Struct::Group < Struct
-#@since 1.9.1
-alias Etc::Group
+= class Etc::Group < Struct
+#@until 3.2
+alias Struct::Group
 #@end
 [[m:Etc.#getgrent]] で得られる構造体。
 
 この構造体の値を変更してもシステムには反映されません。
 
-#@since 1.9.2
-
 == Class Methods
 
---- each {|entry| ... } -> Struct::Group
+--- each {|entry| ... } -> Etc::Group
 --- each                -> Enumerator
 
 /etc/group に含まれるエントリを一つずつブロックに渡して評価します。
-ブロックを省略した場合は [[c:Enumerator]] のインスタンスを返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @see [[m:Etc.#getpwent]]
-
-#@end
 
 == Instance Methods
 
@@ -493,12 +488,12 @@ alias Etc::Group
 
 --- name -> String
 
-グループ名を設定します。
+グループ名を返します。
 
 
 --- name=(name)
 
-グループ名を返します。
+グループ名を設定します。
 
 --- passwd -> String
 
@@ -512,9 +507,9 @@ alias Etc::Group
 
 このグループのパスワードを設定します。
 
-= class Struct::Passwd < Struct
-#@since 1.9.1
-alias Etc::Passwd
+= class Etc::Passwd < Struct
+#@until 3.2
+alias Struct::Passwd
 #@end
 [[m:Etc.#getpwent]] で得られる構造体。
 
@@ -537,19 +532,15 @@ alias Etc::Passwd
   * comment
   * expire
 
-#@since 1.9.2
-
 == Class Methods
 
---- each {|entry| ... } -> Struct::Passwd
+--- each {|entry| ... } -> Etc::Passwd
 --- each                -> Enumerator
 
 /etc/passwd に含まれるエントリを一つずつブロックに渡して評価します。
-ブロックを省略した場合は [[c:Enumerator]] のインスタンスを返します。
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @see [[m:Etc.#getpwent]]
-
-#@end
 
 == Instance Methods
 
@@ -662,7 +653,6 @@ alias Etc::Passwd
 
 アカウント有効期限(整数)を設定します。このメンバはシステム依存です。
 
-#@since 2.2.0
 = reopen IO
 
 == Instance Methods
@@ -677,8 +667,9 @@ alias Etc::Passwd
 
 @param name [[c:Etc]] モジュールの PC_ で始まる定数のいずれかを指定します。
 
-  require 'etc'
-  IO.pipe {|r, w|
-    p w.pathconf(Etc::PC_PIPE_BUF) # => 4096
-  }
+#@samplecode
+require 'etc'
+IO.pipe {|r, w|
+  p w.pathconf(Etc::PC_PIPE_BUF) # => 4096
+}
 #@end

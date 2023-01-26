@@ -9,28 +9,30 @@
 
 === 使用例
 
-  require 'ripper'
-  require 'cgi'
-  
-  class Ruby2HTML < Ripper::Filter
-    def on_default(event, tok, f)
-      f << CGI.escapeHTML(tok)
-    end
-  
-    def on_comment(tok, f)
-      f << %Q[<span class="comment">#{CGI.escapeHTML(tok)}</span>]
-    end
-  
-    def on_tstring_beg(tok, f)
-      f << %Q[<span class="string">#{CGI.escapeHTML(tok)}]
-    end
-  
-    def on_tstring_end(tok, f)
-      f << %Q[#{CGI.escapeHTML(tok)}</span>]
-    end
+#@samplecode
+require 'ripper'
+require 'cgi'
+
+class Ruby2HTML < Ripper::Filter
+  def on_default(event, tok, f)
+    f << CGI.escapeHTML(tok)
   end
-  
-  Ruby2HTML.new(ARGF).parse('')
+
+  def on_comment(tok, f)
+    f << %Q[<span class="comment">#{CGI.escapeHTML(tok)}</span>]
+  end
+
+  def on_tstring_beg(tok, f)
+    f << %Q[<span class="string">#{CGI.escapeHTML(tok)}]
+  end
+
+  def on_tstring_end(tok, f)
+    f << %Q[#{CGI.escapeHTML(tok)}</span>]
+  end
+end
+
+Ruby2HTML.new(ARGF).parse('')
+#@end
 
 Ruby プログラムを解析して、[[m:Ripper::SCANNER_EVENTS]] にあるスキャナ
 イベントを実行します。イベントはプログラムに書いた順番で実行されます。

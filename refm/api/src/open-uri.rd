@@ -3,20 +3,41 @@ category Network
 #@# = open-uri
 
 http/ftp に簡単にアクセスするためのクラスです。
+#@until 2.7.0
 [[m:Kernel.#open]] を再定義します。
+#@end
 
 === 使用例
 
 http/ftp の URL を、普通のファイルのように開けます。
 
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/") {|f|
+    f.each_line {|line| p line}
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/") {|f|
     f.each_line {|line| p line}
   }
+#@end
 
 開いたファイルオブジェクトは [[c:StringIO]] もしくは [[c:Tempfile]] で
 すが [[c:OpenURI::Meta]] モジュールで拡張されていて、メタ情報を獲得する
 メソッドが使えます。
+
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/en") {|f|
+    f.each_line {|line| p line}
+    p f.base_uri         # <URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/>
+    p f.content_type     # "text/html"
+    p f.charset          # "iso-8859-1"
+    p f.content_encoding # []
+    p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/en") {|f|
     f.each_line {|line| p line}
@@ -26,7 +47,19 @@ http/ftp の URL を、普通のファイルのように開けます。
     p f.content_encoding # []
     p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002
   }
+#@end
+
 ハッシュ引数で、追加のヘッダフィールドを指定できます。
+
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/en/",
+    "User-Agent" => "Ruby/#{RUBY_VERSION}",
+    "From" => "foo@bar.invalid",
+    "Referer" => "http://www.ruby-lang.org/") {|f|
+    ...
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/en/",
     "User-Agent" => "Ruby/#{RUBY_VERSION}",
@@ -34,13 +67,24 @@ http/ftp の URL を、普通のファイルのように開けます。
     "Referer" => "http://www.ruby-lang.org/") {|f|
     ...
   }
+#@end
+
 http_proxy や ftp_proxy などの環境変数は、デフォルトで有効になっています。
 プロキシを無効にするには :proxy => nil とします。
+
+#@since 2.7.0
+  require 'open-uri'
+  URI.open("http://www.ruby-lang.org/en/",
+    :proxy => nil) {|f|
+    ...
+  }
+#@else
   require 'open-uri'
   open("http://www.ruby-lang.org/en/",
     :proxy => nil) {|f|
     ...
   }
+#@end
 
 また、open-uri を読み込むと [[c:URI::HTTP]] と [[c:URI::FTP]] が
 [[c:OpenURI::OpenRead]] モジュールをインクルードします。ですので、
@@ -55,16 +99,17 @@ URI オブジェクトは直接読み込むことができます。
   str = uri.read
   p str.base_uri
 
+#@until 3.0.0
 = redefine Kernel
 
 == Module Functions
 
---- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | File
---- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> nil
+--- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
+--- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
 
 name が http:// や ftp:// で始まっている文字列なら URI のリソースを
-取得した上で [[c:StringIO]] オブジェクトとして返します。
-StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+取得した上で [[c:StringIO]] オブジェクトまたは [[c:Tempfile]] オブジェクトとして返します。
+返されるオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
 
 name に open メソッドが定義されている場合は、*rest を引数として渡し
 name.open(*rest, &block) のように name の open メソッドが呼ばれます。
@@ -73,9 +118,19 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 [[m:Kernel.#open]](name, *rest) が呼ばれます。
 
 ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で
-始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクトを
-引数としてブロックを評価します。後は同様です。
-StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクト
+または [[c:Tempfile]] オブジェクトを引数としてブロックを評価します。後は同様です。
+引数のオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
+#@since 2.7.0
+Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くときにwarningが表示されるようになりました。
+
+  require 'open-uri'
+  open("http://www.ruby-lang.org/") {|f|
+    # ...
+  }
+  #=> warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+#@end
 
 @param name オープンしたいリソースを文字列で与えます。
 
@@ -90,18 +145,21 @@ StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend さ
                           かつリソースの取得に失敗した時に発生します。
 
 @raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
-                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] 
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
                      を参照して下さい。
 
 例:
- 
-  require 'open-uri'
-  sio = open('http://www.example.com')
-  p sio.is_a?(OpenURI::Meta) # => true
-  p sio.content_type
-  puts sio.read
 
-@see [[m:OpenURI.open_uri]]
+  require 'open-uri'
+  sio = open('http://www.example.com') { |sio|
+    p sio.is_a?(OpenURI::Meta) # => true
+    p sio.content_type
+    puts sio.read
+  }
+
+@see [[m:OpenURI.open_uri]], [[m:URI.open]]
+
+#@end
 
 = module OpenURI
 http/ftp に簡単にアクセスするためのモジュールです。
@@ -119,9 +177,9 @@ URI である文字列 name のリソースを取得して [[c:StringIO]] オブ
 
   require 'open-uri'
   sio = OpenURI.open_uri('http://www.example.com')
-  p sio.last_modified 
+  p sio.last_modified
   puts sio.read
-  
+
   OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
 
 options には [[c:Hash]] を与えます。理解するハッシュの
@@ -129,7 +187,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
  * :proxy
  * :progress_proc
  * :content_length_proc
- * :http_basic_authentication 
+ * :http_basic_authentication
 #@since 1.9.1
  * :proxy_http_basic_authentication
  * :read_timeout
@@ -167,7 +225,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
  Content-Length ヘッダの値を引数として、実際の転送が始まる前に評価されます。Redirect された場合は、
  実際に転送されるリソースの HTTP ヘッダを利用します。Content-Length ヘッダがない場合は、nil を
  引数としてブロックを評価します。ブロックの返り値は特に利用されません。
- 
+
 : :progress_proc
  値にはブロックを与えます。ブロックは対象となる URI からデータの
  断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
@@ -237,13 +295,13 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、
                           かつリソースの取得に失敗した時に発生します。
 
-@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に 
-                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] 
+@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
                      を参照して下さい。
 
 @raise ArgumentError 与えられた mode が読み込みモードでなかった場合に発生します。
 
-= module OpenURI::OpenRead 
+= module OpenURI::OpenRead
 [[c:URI::HTTP]] と [[c:URI::FTP]] を拡張するために用意されたモジュールです。
 
 == Instance Methods
@@ -268,8 +326,8 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、かつリソースの取得に
                           失敗した時に発生します。
 
-@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に 
-                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] 
+@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
                      を参照して下さい。
 
 @see [[m:OpenURI.open_uri]]
@@ -277,7 +335,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 --- read(options = {})     -> String
 
 自身が表す内容を読み込んで文字列として返します。
-self.open(options={}).read と同じです。
+self.open(options={}) {|io| io.read } と同じです。
 このメソッドによって返される文字列は [[c:OpenURI::Meta]]
 によって extend されています。
 
@@ -307,19 +365,40 @@ include OpenURI::OpenRead
 Last-Modified ヘッダがない場合は nil を返します。
 
 例:
-  require 'open-uri'
-  p open('http://www.rubyist.net/').last_modified    
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URI.open('http://www.rubyist.net/') {|f|
+  p f.last_modified
   #=> Thu Feb 26 16:54:58 +0900 2004
+}
+#@else
+require 'open-uri'
+open('http://www.rubyist.net/') {|f|
+  p f.last_modified
+  #=> Thu Feb 26 16:54:58 +0900 2004
+}
+#@end
+#@end
 
 --- content_type    -> String
 
 対象となるリソースの Content-Type を文字列の配列で返します。Content-Type ヘッダの情報が使われます。
 Content-Type ヘッダがない場合は、"application/octet-stream" を返します。
 
-例:
-
-  require 'open-uri'
-  p open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URI.open('http://www.ruby-lang.org/') {|f|
+  p f.content_type  #=> "text/html"
+}
+#@else
+require 'open-uri'
+open('http://www.ruby-lang.org/') {|f|
+  p f.content_type  #=> "text/html"
+}
+#@end
+#@end
 
 --- charset       -> String | nil
 --- charset{ ... }  -> String
@@ -331,13 +410,21 @@ Content-Type ヘッダがない場合は、nil を返します。ただし、ブ
 その結果を返します。また対象となる URI のスキームが HTTP であり、自身のタイプが text である場合は、
 [[RFC:2616]] 3.7.1 で定められているとおり、文字列 "iso-8859-1" を返します。
 
-例:
-
-  require 'open-uri'
-  open("http://www.ruby-lang.org/en") {|f|
-    p f.content_type  # => "text/html"
-    p f.charset       # => "iso-8859-1"
-  }
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URI.open("http://www.ruby-lang.org/en") {|f|
+  p f.content_type  # => "text/html"
+  p f.charset       # => "iso-8859-1"
+}
+#@else
+require 'open-uri'
+open("http://www.ruby-lang.org/en") {|f|
+  p f.content_type  # => "text/html"
+  p f.charset       # => "iso-8859-1"
+}
+#@end
+#@end
 
 --- content_encoding    -> [String]
 
@@ -346,41 +433,127 @@ Content-Encoding ヘッダがない場合は、空の配列を返します。
 
 例:
 
-  require 'open-uri'
-  p open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URI.open('http://example.com/f.tar.gz') {|f|
+  p f.content_encoding  #=> ["x-gzip"]
+}
+#@else
+require 'open-uri'
+open('http://example.com/f.tar.gz') {|f|
+  p f.content_encoding  #=> ["x-gzip"]
+}
+#@end
+#@end
 
 --- status    -> [String]
 
 対象となるリソースのステータスコードと reason phrase を文字列の配列として返します。
 
-例:
-  require 'open-uri'
-  p open('http://example.com/').status  #=> ["200", "OK"]
- 
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URI.open('http://example.com/') {|f|
+  p f.status  #=> ["200", "OK"]
+}
+#@else
+require 'open-uri'
+open('http://example.com/') {|f|
+  p f.status  #=> ["200", "OK"]
+}
+#@end
+#@end
+
 --- base_uri    -> URI
 
 リソースの実際の URI を URI オブジェクトとして返します。
 リダイレクトされた場合は、リダイレクトされた後のデータが存在する URI を返します。
 
-例:
-
-  require 'open-uri'
-  p open('http://www.ruby-lang.org/').base_uri
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URL.open('http://www.ruby-lang.org/') {|f|
+  p f.base_uri
   #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+}
+#@else
+require 'open-uri'
+open('http://www.ruby-lang.org/') {|f|
+  p f.base_uri
+  #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+}
+#@end
+#@end
 
 --- meta    -> Hash
 
 ヘッダを収録したハッシュを返します。
 
-例:
-
-  require 'open-uri'
-  p open('http://example.com/').meta
+#@samplecode 例
+#@since 2.7.0
+require 'open-uri'
+URL.open('http://example.com/') {|f|
+  p f.meta
   #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
-       "content-type"=>"text/html;charset=utf-8",
-       "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
-       "transfer-encoding"=>"chunked"}
+  #    "content-type"=>"text/html;charset=utf-8",
+  #    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+  #    "transfer-encoding"=>"chunked"}
+}
+#@else
+require 'open-uri'
+open('http://example.com/') {|f|
+  p f.meta
+  #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+  #    "content-type"=>"text/html;charset=utf-8",
+  #    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+  #    "transfer-encoding"=>"chunked"}
+}
+#@end
+#@end
 
 = class OpenURI::HTTPError < StandardError
 
-リソースの取得に失敗した時に投げられます。
+URI のスキームが http または https で、リソースの取得に失敗したときに発生します。
+
+#@since 2.5.0
+= reopen URI
+
+== Class Methods
+
+--- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
+--- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
+
+name が http:// や https://、ftp:// で始まっている文字列なら URI のリソースを
+取得した上で [[c:StringIO]] オブジェクトまたは [[c:Tempfile]] オブジェクトとして返します。
+返されるオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
+name に open メソッドが定義されている場合は、*rest を引数として渡し
+name.open(*rest, &block) のように name の open メソッドが呼ばれます。
+
+これ以外の場合は、name はファイル名として扱われ、従来の
+[[m:Kernel.#open]](name, *rest) が呼ばれます。
+
+ブロックを与えた場合は上の場合と同様、name が http:// や https://、ftp:// で
+始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクト
+または [[c:Tempfile]] オブジェクトを引数としてブロックを評価します。後は同様です。
+引数のオブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
+@param name オープンしたいリソースを文字列で与えます。
+
+@param mode モードを文字列で与えます。[[m:Kernel.#open]] と同じです。
+
+@param perm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合のファイルのパーミッションを
+            整数で指定します。[[m:Kernel.#open]] と同じです
+
+@param options ハッシュを与えます。詳しくは [[m:OpenURI.open_uri]] を参照してください。
+
+@raise OpenURI::HTTPError 対象となる URI のスキームが http または https であり、
+                          かつリソースの取得に失敗したときに発生します。
+
+@raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]
+                     を参照して下さい。
+
+@see [[m:Kernel.#open]], [[m:OpenURI.open_uri]]
+#@end

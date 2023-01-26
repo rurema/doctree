@@ -1,11 +1,9 @@
 category Text
 
-#@since 1.8.6
 require digest/md5
 require digest/rmd160
 require digest/sha1
 require digest/sha2
-#@end
 
 メッセージダイジェストライブラリです。
 
@@ -16,28 +14,39 @@ require digest/sha2
 詳しくは [[c:Digest::Base]] を参照してください。
 
 なお、「メッセージダイジェスト」とは、
-データから固定長の疑似乱数を生成する演算手法のことです。
+データから固定長の擬似乱数を生成する演算手法のことです。
 
 = module Digest
 
-#@since 1.8.6
 == Module Functions
 
 --- hexencode(string) -> String
 
-与えられた文字列に対するハッシュ値を、
-ASCIIコードを使って16進数の列を示す文字列にエンコードして返します。
+引数である文字列 string を、16進数に変換した文字列を生成して返します。
 
-@param string ハッシュ値の生成対象の文字列です。
+@param string 文字列を指定します。
 
-使用例(MD5の場合)
+#@samplecode
+require 'digest'
 
-        require 'digest/md5'
-        Digest::MD5.hexdigest("ruby") # => "58e53d1324eef6265fdb97b08ed9aadf"
+p Digest.hexencode("")     # => ""
+p Digest.hexencode("d")    # => "64"
+p Digest.hexencode("\1\2") # => "0102"
+p Digest.hexencode("\xB0") # => "b0"
 
-@see [[m:Digest::Base#hexdigest]]
+p digest = Digest::MD5.digest("ruby")   # => "X\xE5=\x13$\xEE\xF6&_\xDB\x97\xB0\x8E\xD9\xAA\xDF"
+p Digest.hexencode(digest)              # => "58e53d1324eef6265fdb97b08ed9aadf"
+p Digest::MD5.hexdigest("ruby")         # => "58e53d1324eef6265fdb97b08ed9aadf"
 
+p digest = Digest::SHA1.digest("ruby")   # => "\x18\xE4\x0E\x14\x01\xEE\xF6~\x1A\xE6\x9E\xFA\xB0\x9A\xFBq\xF8\x7F\xFB\x81"
+p Digest.hexencode(digest)               # => "18e40e1401eef67e1ae69efab09afb71f87ffb81"
+p Digest::SHA1.hexdigest("ruby")         # => "18e40e1401eef67e1ae69efab09afb71f87ffb81"
 #@end
+
+文字列から16進数に変換したハッシュ値を直接得たい場合は、[[m:Digest::Base.hexdigest]] を使うこともできます。
+
+@see [[m:Digest::Base.hexdigest]], [[m:Digest::Base#hexdigest]]
+
 
 #@if(version >= "1.8.6")
 = class Digest::Class < Object
@@ -93,15 +102,8 @@ include Digest::Instance
 
 == Class Methods
 
-#@until 1.8.6
---- new(str = nil) -> Digest::Base
-
-新しいダイジェストオブジェクトを生成します。文字列引数が与えられると
-それを追加します([[m:Digest::Base#update]] 参照)。
-#@else
 --- new            -> Digest::Base
 新しいダイジェストオブジェクトを生成します。
-#@end
 
 --- digest(str) -> String
 
@@ -114,7 +116,6 @@ new(str).digest と等価です。
 16進数の列を示す文字列にエンコードして返します。
 new(str).hexdigest と等価です。
 
-#@since 1.8.6
 --- file(path) -> object
 
 新しいダイジェストオブジェクトを生成し、
@@ -130,7 +131,6 @@ new(str).hexdigest と等価です。
         digest = Digest::SHA256.file("X11R6.8.2-src.tar.bz2")
         digest.hexdigest
         # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
-#@end
 
 == Instance Methods
 
@@ -156,7 +156,6 @@ SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイ�
 
 @see [[m:Digest::Base#hexdigest]]
 
-#@since 1.8.6
 --- digest! -> String
 
 updateや<<によって追加した文字列に対するハッシュ値を文字列で返します。
@@ -178,7 +177,6 @@ SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイ�
 
 @see [[m:Digest::Base#digest]]、[[m:Digest::Base#hexdigest!]]
 
-#@end
 
 --- hexdigest -> String
 --- to_s -> String
@@ -206,7 +204,6 @@ Rubyで書くと以下と同じです。
 
 @see [[m:Digest::Base#digest]]
 
-#@since 1.8.6
 --- hexdigest! -> String
 
 updateや<<によって追加した文字列に対するハッシュ値を、
@@ -226,7 +223,6 @@ ASCIIコードを使って16進数の列を示す文字列にエンコードし�
 
 @see [[m:Digest::Base#hexdigest]]、[[m:Digest::Base#digest!]]
 
-#@end
 
 --- update(str) -> self
 --- <<(str)     -> self
@@ -289,7 +285,6 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         digest.update("ruby")
         p digest == "58e53d1324eef6265fdb97b08ed9aadf" # => true
 
-#@since 1.8.6
 --- file(path) -> self
 
 ファイル名 file で指定したファイルの内容を読み込んでダイジェストを更新し、
@@ -333,7 +328,6 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
   require 'digest'
   ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().digest_length } # => [16, 20, 64]
 
-#@end
 
 --- reset -> self
 
@@ -343,7 +337,6 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
 それぞれの実装に適したものにオーバーライドされます。
 
-#@since 1.8.6
 = reopen Kernel
 == Private Instance Methods
 --- Digest(name) -> object
@@ -366,5 +359,3 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
   for a in ["MD5", "SHA1", "SHA512"]
     p Digest(a) # => Digest::MD5, Digest::SHA1, Digest::SHA512
   end
-
-#@end

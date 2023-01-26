@@ -2,7 +2,9 @@
 
 category Development
 
+#@until 2.7.0
 require e2mmap
+#@end
 require irb/init
 require irb/context
 require irb/extend-command
@@ -32,7 +34,7 @@ irb コマンドを実行すると、以下のようなプロンプトが表れ�
   irb(main):004:2>     print 1
   irb(main):005:2>   end
   irb(main):006:1> end
-  nil
+  :foo
   irb(main):007:0>
 
 また irb コマンドは [[lib:readline]] ライブラリにも対応しています。
@@ -44,7 +46,9 @@ readline ライブラリがインストールされている時には
   irb [options] file_name opts
   options:
   -f                ~/.irbrc を読み込まない
+#@until 2.5.0
   -m                bc モード (分数と行列の計算ができる)
+#@end
   -d                $DEBUG を true にする (ruby -d と同じ)
 #@since 1.9.2
   -w                ruby -w と同じ
@@ -54,9 +58,7 @@ readline ライブラリがインストールされている時には
   -Kc               ruby -Kc と同じ
 #@end
   -r library        ruby -r と同じ
-#@since 1.8.2
   -I                ruby -I と同じ
-#@end
 #@since 1.9.1
   -U                ruby -U と同じ
   -E enc            ruby -E と同じ
@@ -65,7 +67,11 @@ readline ライブラリがインストールされている時には
   --noverbose       これから実行する行を表示しない (デフォルト)
   --echo            実行結果を表示する (デフォルト)
   --noecho          実行結果を表示しない
+#@since 2.5.0
+  --inspect         結果出力にinspectを用いる
+#@else
   --inspect         結果出力にinspectを用いる (bc モード以外ではデフォルト)
+#@end
   --noinspect       結果出力にinspectを用いない
   --readline        readlineライブラリを利用する
   --noreadline      readlineライブラリを利用しない。デフォルトでは
@@ -99,10 +105,24 @@ readline ライブラリがインストールされている時には
 
 === irb のカスタマイズ
 
-irb コマンドは起動時にホームディレクトリの .irbrc というファイルを読み込みます。
-.irbrc は Ruby スクリプトです。ホームディレクトリに .irbrc が存在しない場合は、
-カレントディレクトリの .irbrc, irb.rc, _irbrc, $irbrc を順番にロードしようと
-試みます。
+irb コマンドは起動時に以下のパスを上から順番に探索し、
+最初に見つかったファイルを読み込みます。
+
+  * $IRBRC (もし環境変数 IRBRC が設定されていれば)
+#@since 2.7.0
+  * $XDG_CONFIG_HOME/irb/irbrc (もし環境変数 XDG_CONFIG_HOME が設定されていれば)
+#@end
+  * $HOME/.irbrc (もし環境変数 HOME が設定されていれば)
+#@since 2.7.0
+  * ./.config/irb/irbrc
+#@end
+  * ./.irbrc
+  * ./irb.rc
+  * ./_irbrc
+  * ./$irbrc (環境変数ではなく $irbrc というファイル名)
+
+このように実際に読み込まれるファイル名は環境により異なりますが、
+このマニュアルでは単に「.irbrc」と呼称します。
 
 以下のような (Ruby の) 式を .irbrc に記述すると、
 irb コマンドのオプションを指定したのと同じ効果が得られます。
@@ -118,11 +138,17 @@ irb コマンドのオプションを指定したのと同じ効果が得られ�
   IRB.conf[:INSPECT_MODE] = nil
   IRB.conf[:IRB_NAME] = "irb"
   IRB.conf[:IRB_RC] = nil
+#@until 2.5.0
   IRB.conf[:MATH_MODE] = false
+#@end
   IRB.conf[:PROMPT] = {....}
   IRB.conf[:PROMPT_MODE] = :DEFAULT
   IRB.conf[:SINGLE_IRB] = false
+#@since 2.7.0
+  IRB.conf[:SAVE_HISTORY] = 1000
+#@else
   IRB.conf[:SAVE_HISTORY] = nil
+#@end
   IRB.conf[:USE_LOADER] = true
   IRB.conf[:USE_READLINE] = nil
   IRB.conf[:USE_TRACER] = true
@@ -460,7 +486,7 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
   Ruby の require の irb 版です。
   ファイル path を現在の irb インタプリタ上で実行します。
 
-  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#kernel]] と異な
+  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#require]] と異な
   り、path の内容を irb で一行ずつタイプしたかのように、irb 上で一行ず
   つ評価されます。require に成功した場合は true を、そうでない場合は
   false を返します。
@@ -569,46 +595,39 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
 
 === 使用上の制限
 
-irbは, 評価できる時点(式が閉じた時点)での逐次実行を行ないます.
-したがって, rubyを直接使った時と若干異なる動作を行なう場合があります.
+irbは、 評価できる時点(式が閉じた時点)での逐次実行を行ないます。
+したがって、 Rubyを直接使った時と若干異なる動作を行なう場合があります。
 
-現在明らかになっている問題点を説明します.
+現在明らかになっている問題点を説明します。
 
 ==== ローカル変数の宣言
+以下のコードは、 Ruby スクリプトとして実行するとエラーになりません。
 
-Ruby では以下のプログラムはエラーになります.
+ eval "foo"
+ foo = 0
 
-  eval "foo = 0"
-  p foo    # -:2: undefined local variable or method `foo' for #<Object:0x40283118> (NameError)
+ところが、 irb ではエラーになります。
 
-ところが irb を用いると、以下のように、エラーになりません。
+ irb(main):001:0> eval "foo"
+ NameError (undefined local variable or method `foo' for main:Object)
+ irb(main):002:0> foo = 0
 
-  >> eval "foo = 0"
-  => 0
-  >> foo
-  => 0
+この違いは、Ruby スクリプト と irb の構文解析のタイミングの差に起因します。 Ruby は最初にスクリプト全体を解析して、宣言されているローカル変数を定義し、コードを評価します。それに対し、irb は式が完結して実行可能になった時点で評価します。
+上記の Ruby スクリプトの例では、2行目に
 
-この違いは、Ruby と irb のプログラムのコンパイル方法の差に起因します。
-Ruby は最初にスクリプト全体をコンパイルしてローカル変数を決定します。
-それに対し、irb は式が完結して実行可能になった時点で順番にコンパイルします。
-上記の例では、
+ foo = 0
 
-  eval "foo = 0"
+が宣言されているため、スクリプト全体を解析するとローカル変数 foo が定義されます。
+そのため1行目の eval "foo" で NameError になりません。
 
-が入力された時点でまずその式をコンパイル・実行します。
-この時点で変数 foo が定義されるため、
-次の式を入力する時点ですでに変数 foo が定義されているのです。
+irb の場合は1行目に入力した eval "foo" が実行可能になった時点で評価されます。その時点ではローカル変数 foo は宣言されていないため、 NameError になります。
 
-この Ruby と irb の動作の違いをなくしたい場合は、
-irb では以下のように式を begin 〜 end でくくって入力してください。
+Ruby と irb の動作の違いをなくしたい場合は、 irb では以下のように式を begin 〜 end でくくって入力してください。
 
-  >> begin
-  ?>   eval "foo = 0"
-  >>   foo
-  >> end
-  NameError: undefined local variable or method `foo' for #<Object:0x4013d0f0>
-  (irb):3
-  (irb_local_binding):1:in `eval'
+ irb(main):001:1* begin
+ irb(main):002:1*   eval "foo"
+ irb(main):003:1*   foo = 42
+ irb(main):004:0> end
 
 ==== ヒアドキュメント
 
@@ -621,6 +640,14 @@ irb はシンボルであるかどうかの判断を間違えることがあり�
 
 ===[a:history] 履歴の保存
 
+#@since 2.7.0
+デフォルトで実行結果の履歴1000件がファイルに保存されます。保存先は $XDG_CONFIG_HOME/irb/irb_history (Ruby 2.7.2 以降かつ $XDG_CONFIG_HOME が定義されている場合) か ~/.irb_history です。
+
+もし履歴を保存したくない場合は、.irbrc で以下のように指定します。
+
+  IRB.conf[:SAVE_HISTORY] = nil
+
+#@else
 さらに、.irbrc で以下のように
 conf.save_history の値を指定しておくと、
 実行結果の履歴がファイルに保存されます。
@@ -628,6 +655,7 @@ conf.save_history の値を指定しておくと、
   IRB.conf[:SAVE_HISTORY] = 100
 
 履歴ファイルの名前はデフォルトでは ~/.irb_history です。
+#@end
 履歴ファイルの名前は IRB.conf[:HISTORY_FILE] で指定できます。
 
 #@since 1.9.2

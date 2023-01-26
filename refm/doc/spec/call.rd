@@ -4,16 +4,18 @@
   * [[ref:block]]
   * [[ref:yield]]
   * [[ref:block_arg]]
+  * [[ref:numbered_parameters]]
+  * [[ref:call_method]]
 
-例:
-
-          foo.bar()
-          foo.bar
-          bar()
-          print "hello world\n"
-          print
-          Class.new
-          Class::new
+#@samplecode 例
+foo.bar()
+foo.bar
+bar()
+print "hello world\n"
+print
+Class.new
+Class::new
+#@end
 
 文法:
 
@@ -27,7 +29,9 @@
 `.' と `::' とはほぼ同じ意味です。但し、定数を表す場合は、
 `::' を使わなければいけません(例: [[m:Math::PI]])。逆に、
 
-   Klass::Foo
+#@samplecode
+Klass::Foo
+#@end
 
 とした場合、常に定数と見なされるという制限があります。
 `::' を、クラスメソッド呼び出しに使うという流儀がありますが、
@@ -40,11 +44,15 @@
 #@#個人的な考えからです-))
 この点は要注意です。大文字で始まるメソッド名を使用する場合は
 
-   Klass.Foo
+#@samplecode
+Klass.Foo
+#@end
 
 と `.' を使うか、
 
-   Klass::Foo()
+#@samplecode
+Klass::Foo()
+#@end
 
 と括弧でメソッド呼び出しであることを明示する必要があります。
 
@@ -57,17 +65,21 @@
 引数の直前に * がついている場合、その引数の値が展開されて
 渡されます。展開はメソッド to_a を経由して行なわれます。つまり:
 
-          foo(1,*[2,3,4])
-          foo(1,*[])
-          foo(1,*[2,3,4],5)
-          foo(1,*[2,3,4],5,*[6])
+#@samplecode
+foo(1,*[2,3,4])
+foo(1,*[])
+foo(1,*[2,3,4],5)
+foo(1,*[2,3,4],5,*[6])
+#@end
 
 は、それぞれ
 
-          foo(1,2,3,4)
-          foo(1)
-          foo(1,2,3,4,5)
-          foo(1,2,3,4,5,6)
+#@samplecode
+foo(1,2,3,4)
+foo(1)
+foo(1,2,3,4,5)
+foo(1,2,3,4,5,6)
+#@end
 
 と同じです。
 
@@ -99,23 +111,27 @@
 
 レシーバが nil でない場合は通常のメソッド呼び出しが行われます。
 
-  foo = 13
-  foo&.to_s # => "13"
-  foo = nil
-  foo&.to_s # nil, not ""
+#@samplecode
+foo = 13
+foo&.to_s # => "13"
+foo = nil
+foo&.to_s # nil, not ""
+#@end
 
 `&.' は要素代入(アトリビュート)に対しても使えます。
 
-  foo&.bar = "abc" # for `bar=' method
+#@samplecode
+foo&.bar = "abc" # for `bar=' method
+#@end
 
 #@end
 
 ===[a:super] super
 
-例:
-
-          super
-          super(1,2,3)
+#@samplecode 例
+super
+super(1,2,3)
+#@end
 
 文法:
 
@@ -127,32 +143,32 @@ super は現在のメソッドがオーバーライドしているメソッド�
 渡されます。引数を渡さずにオーバーライドしたメソッドを呼び出すには
 super() と括弧を明示します。
 
-例:
+#@samplecode 例
+class Foo
+  def foo(arg=nil)
+    p arg
+  end
+end
 
-        class Foo
-          def foo(arg=nil)
-            p arg
-          end
-        end
-
-        class Bar < Foo
-          def foo(arg)
-            super(5)       # 5 を引数にして呼び出す
-            super(arg)     # 5 を引数にして呼び出す
-            super          # 5 を引数にして呼び出す super(arg) の略記法
-            arg = 1
-            super          # 1 を引数にして呼び出す super(arg) の略記法
-            super()        # 引数なしで呼び出す
-          end
-        end
-        Bar.new.foo 5
+class Bar < Foo
+  def foo(arg)
+    super(5)       # 5 を引数にして呼び出す
+    super(arg)     # 5 を引数にして呼び出す
+    super          # 5 を引数にして呼び出す super(arg) の略記法
+    arg = 1
+    super          # 1 を引数にして呼び出す super(arg) の略記法
+    super()        # 引数なしで呼び出す
+  end
+end
+Bar.new.foo 5
+#@end
 
 ===[a:block] ブロック付きメソッド呼び出し
 
-例:
-
-          [1,2,3].each do |i| print i*2, "\n" end
-          [1,2,3].each {|i| print i*2, "\n" }
+#@samplecode 例
+[1,2,3].each do |i| print i*2, "\n" end
+[1,2,3].each {|i| print i*2, "\n" }
+#@end
 
 文法:
 
@@ -173,28 +189,34 @@ do ... end または { ... }  で囲まれたコードの断片
 #@#たが、これはバグです。version 1.6.3 で修正されました-))。
 次に例を挙げますが、このような違いが影響するコードは読み辛いので避けましょう:
 
-          foobar a, b do .. end   # foobarの引数はa, bの値とブロック
-          foobar a, b { .. }      # ブロックはメソッドbの引数、aの値とbの返り値とがfoobarの引数
+#@samplecode
+foobar a, b do body end   # foobarの引数はa, bの値とブロック
+foobar a, b { body }      # ブロックはメソッドbの引数、aの値とbの返り値とがfoobarの引数
+#@end
 
 ブロックの中で初めて代入された(宣言された)ローカル変数はその
 ブロックの中でだけ有効です。例えば:
 
-          foobar {
-            i = 20                # ローカル変数 `i' が宣言された
-             ...
-          }
-          print defined? i        # `i' はここでは未定義なので false
-          foobar a, b do
-            i = 11                # まったく別の変数 i の宣言
-             ...
-          end
+#@samplecode
+foobar {
+  i = 20                # ローカル変数 `i' が宣言された
+  # ...
+}
+print defined? i        # `i' はここでは未定義なので false
+foobar a, b do
+  i = 11                # まったく別の変数 i の宣言
+  # ...
+end
+#@end
 
 以下は逆にブロック外でも有効な例です。
 
-          i = 10
-          [1,2,3].each do |m|
-            p i * m               # いきなり i を使える
-          end
+#@samplecode
+i = 10
+[1,2,3].each do |m|
+  p i * m               # いきなり i を使える
+end
+#@end
 
 ブロックの部分だけを先に定義して変数に保存しておき、後からブロック付きメソッドに渡すことも出来ます。
 それを実現するのが手続きオブジェクト([[c:Proc]])です。
@@ -203,41 +225,40 @@ do ... end または { ... }  で囲まれたコードの断片
 ことも出来ます。この場合、そのメソッドを呼ぶ手続きオブジェクトが生成さ
 れ渡されます。
 
-        # 1引数の手続き(その働きは引数をpで印字すること)を生成し、変数pobjに格納
-        pobj = proc {|v|
-          p v
-        }
+#@samplecode
+# 1引数の手続き(その働きは引数をpで印字すること)を生成し、変数pobjに格納
+pobj = proc {|v|
+  p v
+}
 
-        [1,2,3].each(&pobj) # 手続きオブジェクトをブロックの代わりに渡している
-        => 1
-           2
-           3
+[1,2,3].each(&pobj) # 手続きオブジェクトをブロックの代わりに渡している
+# => 1
+#    2
+#    3
+#@end
 
-#@since 1.8.0
 to_proc メソッドを持つオブジェクトならば、`&'
 修飾した引数として渡すことができます。デフォルトで Proc、Method オブジェ
 クトは共に to_proc メソッドを持ちます。to_proc はメソッド呼び出し時に実
 行され、Proc オブジェクトを返すことが期待されます。
 
-    class Foo
-      def to_proc
-        Proc.new {|v| p v}
-      end
-    end
+#@samplecode
+class Foo
+  def to_proc
+    Proc.new {|v| p v}
+  end
+end
 
-    [1,2,3].each(&Foo.new)
-
-    => 1
-       2
-       3
+[1,2,3].each(&Foo.new)
+# => 1
+#    2
+#    3
 #@end
 
 ブロック付きメソッドの戻り値は、通常のメソッドと同様ですが、ブロックの中から
 [[ref:d:spec/control#break]] により中断された場合は nil を返します。
 
-#@since 1.8.0
 break に引数を指定した場合はその値がブロック付きメソッドの戻り値になります。
-#@end
 
 ===[a:yield] yield
 
@@ -245,9 +266,9 @@ break に引数を指定した場合はその値がブロック付きメソッ�
 yield に渡された値はブロック記法において | と | の間にはさまれた
 変数(ブロックパラメータ)に代入されます。
 
-例:
-
-          yield data
+#@samplecode 例
+yield data
+#@end
 
 文法:
 
@@ -257,54 +278,56 @@ yield に渡された値はブロック記法において | と | の間には�
 引数をブロックパラメータとして渡してブロックを評価します。yield は
 イテレータを定義するために [[ref:d:spec/def#method]] 内で使用します。
 
-        # ブロック付きメソッドの定義、
-        # その働きは与えられたブロック(手続き)に引数1, 2を渡して実行すること
-        def foo
-          yield(1,2)
-        end
+#@samplecode
+# ブロック付きメソッドの定義、
+# その働きは与えられたブロック(手続き)に引数1, 2を渡して実行すること
+def foo
+  yield(1,2)
+end
 
-        # fooに「2引数手続き、その働きは引数を配列に括ってpで印字する」というものを渡して実行させる
-        foo {|a,b|
-          p [a, b]
-        }  # => [1, 2] (要するに p [1, 2] を実行した)
+# fooに「2引数手続き、その働きは引数を配列に括ってpで印字する」というものを渡して実行させる
+foo {|a,b|
+  p [a, b]
+}  # => [1, 2] (要するに p [1, 2] を実行した)
 
-        # 今度は「2引数手続き、その働きは足し算をしてpで印字する」というものを渡して実行させる
-        foo {|a, b|
-          p a + b
-        }  # => 3 (要するに p 1 + 2 を実行した)
+# 今度は「2引数手続き、その働きは足し算をしてpで印字する」というものを渡して実行させる
+foo {|a, b|
+  p a + b
+}  # => 3 (要するに p 1 + 2 を実行した)
 
-        # 今度のブロック付きメソッドの働きは、
-        # 与えられたブロックに引数10を渡して起動し、続けざまに引数20を渡して起動し、
-        # さらに引数30を渡して起動すること
-        def bar
-          yield 10
-          yield 20
-          yield 30
-        end
+# 今度のブロック付きメソッドの働きは、
+# 与えられたブロックに引数10を渡して起動し、続けざまに引数20を渡して起動し、
+# さらに引数30を渡して起動すること
+def bar
+  yield 10
+  yield 20
+  yield 30
+end
 
-        # barに「1引数手続き、その働きは引数に3を足してpで印字する」というものを渡して実行させる
-        bar {|v|
-          p v + 3
-        }
-        # => 13
-        #    23
-        #    33 (同じブロックが3つのyieldで3回起動された。
-        #        具体的には p 10 + 3; p 20 + 3; p 30 + 3 を実行した)
+# barに「1引数手続き、その働きは引数に3を足してpで印字する」というものを渡して実行させる
+bar {|v|
+  p v + 3
+}
+# => 13
+#    23
+#    33 (同じブロックが3つのyieldで3回起動された。
+#        具体的には p 10 + 3; p 20 + 3; p 30 + 3 を実行した)
 
-        # Array#eachの(粗製乱造の)類似品
-        def iich(arr) # 引数に配列を取る
-          idx = 0
-          while idx < arr.size
-            yield(arr[idx]) # 引数の各要素毎に、その要素を引数にしてブロックを起動
-            idx += 1
-          end
-        end
+# Array#eachの(粗製乱造の)類似品
+def iich(arr) # 引数に配列を取る
+  idx = 0
+  while idx < arr.size
+    yield(arr[idx]) # 引数の各要素毎に、その要素を引数にしてブロックを起動
+    idx += 1
+  end
+end
 
-        sum = 0
-        iich([1, 4, 9, 16, 25]) {|elem|
-          sum += elem
-        }
-        p sum # => 55
+sum = 0
+iich([1, 4, 9, 16, 25]) {|elem|
+  sum += elem
+}
+p sum # => 55
+#@end
 
 ブロックパラメータの代入は[[ref:d:spec/operator#multiassign]]と同じルールで行われます。
 また yield を実行したメソッドにブロックが渡されていない
@@ -314,9 +337,7 @@ yield はブロック内で最後に評価した式の値を返します。ま�
 [[ref:d:spec/control#next]] によりブロックの実行が中断された場合は nil
 を返します。
 
-#@since 1.8.0
 next に引数を指定した場合はその値が yield の戻り値になります。
-#@end
 
 ====[a:block_arg] ブロックパラメータの挙動
 
@@ -327,26 +348,34 @@ next に引数を指定した場合はその値が yield の戻り値になり�
 ブロックパラメータの受渡しは、以下の点に関して将来変更されるかもしれま
 せん。現在は警告が出ます。
 
-      def foo
-        yield 1,2,3
-      end
+#@samplecode
+def foo
+  yield 1,2,3
+end
 
-      foo {|v| p v}
+foo {|v| p v}
 
-      # => -:5: warning: multiple values for a block parameter (3 for 1)
-           [1, 2, 3]
+# => -:5: warning: multiple values for a block parameter (3 for 1)
+#    [1, 2, 3]
+#@end
 
 これは、
 
-      yield [1,2,3]
+#@samplecode
+yield [1,2,3]
+#@end
 
 あるいは
 
-      foo {|*v| p v}
+#@samplecode
+foo {|*v| p v}
+#@end
 
 とするべきです。同様の多重代入
 
-      v = 1,2,3
+#@samplecode
+v = 1,2,3
+#@end
 
 は現在のところ警告は出ませんが使用しない方がよいでしょう。
 #@#((-[[ruby-dev:20358]], [[ruby-dev:20409]]-))
@@ -359,24 +388,97 @@ lambda でないブロックを呼び出したとき
   * 引数の数が違ってもエラーになりません。
   * 配列をひとつ渡したときにそれが引数の並びとして展開されることがあります。
 
- def foo
-   yield 1,2,3
- end
+#@samplecode
+def foo
+  yield 1,2,3
+end
 
- foo{|v| p v}       #=> 1
+foo{|v| p v}       #=> 1
 
- def bar
-   yield [1,2,3]
- end
- 
- bar{|a, b, c| p a} #=> 1
+def bar
+  yield [1,2,3]
+end
 
- def hoge
-   yield [1,2,3],4,5
- end
- 
- hoge{|a, b, c| p a} #=> [1,2,3]
+bar{|a, b, c| p a} #=> 1
+
+def hoge
+  yield [1,2,3],4,5
+end
+
+hoge{|a, b, c| p a} #=> [1,2,3]
+#@end
 
 
 [[url:http://www.a-k-r.org/d/2007-08.html#a2007_08_16_1]]
 #@end
+
+===[a:numbered_parameters] 番号指定パラメータ
+
+ブロックに渡された値を参照するには、上記のようにブロックパラメータを定義する方法のほか、_1 や _2 といった暗黙に定義される変数を用いる方法もあります。
+この変数のことを番号指定パラメータ（Numbered parameters）と言います。番号指定パラメータは、_1 から _9 までの9つが使用可能です。
+
+#@samplecode
+def foo
+  yield "a", "b", "c"
+end
+
+foo{|a, b, c| p [a, b, c] } # => ["a", "b", "c"]
+foo{ p [_1, _2, _3] } # => ["a", "b", "c"]
+#@end
+
+ブロックパラメータと番号指定パラメータを同時に使うことはできません。
+
+#@samplecode
+def foo
+  yield "a","b","c"
+end
+
+foo {|a, b, c| p [_1, a] } # => ordinary parameter is defined (SyntaxError)
+#@end
+
+なお、ブロック内で _2 以降が使用されているかどうかで、_1 の意味が異なります。
+
+#@samplecode
+def foo
+  yield ["a", "b", "c"]
+end
+
+foo {
+  p _1 # => ["a", "b", "c"]
+}
+foo {
+  p _1 # => "a"
+  p _2 # => "b"
+}
+#@end
+
+これは、ブロックパラメータを定義した個数によって代入される値が異なることに対応します。
+
+#@samplecode
+def foo
+  yield ["a", "b", "c"]
+end
+
+foo {|a|
+  p a # => ["a", "b", "c"]
+}
+foo {|a,b|
+  p a # => "a"
+  p b # => "b"
+}
+#@end
+
+===[a:call_method] .() および ::() 形式のメソッド呼び出し（callメソッドの糖衣構文）
+
+下記はcallメソッドの糖衣構文です。
+[[m:Proc#call]]にも言及がありますが、[[c:Proc]]以外のオブジェクトに対しても（callメソッドさえ定義されていれば）使えます。
+
+#@samplecode 例
+foo.(100)      # foo.call(100)と全く同じ意味
+foo::(100)     # foo.call(100)と全く同じ意味
+#@end
+
+文法:
+
+          式  `.' `(' [[`*'] 式] ... [`&' 式] `)'
+          式 `::' `(' [[`*'] 式] ... [`&' 式] `)'

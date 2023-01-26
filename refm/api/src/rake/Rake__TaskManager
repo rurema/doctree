@@ -12,9 +12,29 @@
 
 @param scopes スコープを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application["test_rake_app"] # => <Rake::Task test_rake_app => []>
+end
+#@end
+
 --- clear
 
 全てのタスクとルールをクリアします。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.tasks # => [<Rake::Task default => [test_rake_app]>, <Rake::Task test_rake_app => []>]
+  Rake.application.clear # => []
+  Rake.application.tasks # => []
+end
+#@end
 
 --- create_rule(*args){ ... }
 
@@ -22,9 +42,30 @@
 
 @param args ルールに与えるパラメータを指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  rule = Rake.application.create_rule '.txt' => '.md' do |t|
+    "#{t}"
+  end
+  p rule # => [[/\.txt$/, [], [".md"], nil, #<Proc:0x0000558dd2e32d20 /path/to/Rakefile:5>]]
+end
+#@end
+
 --- current_scope -> Array
 
 現在のスコープを返します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.current_scope # => LL()
+end
+#@end
 
 --- define_task(task_class, *args){ ... } -> Rake::Task
 
@@ -33,6 +74,15 @@
 @param task_class タスククラスを指定します。
 
 @param args タスクに渡すパラメータを指定します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+task :test_rake_app do
+  Rake.application.define_task(Rake::Task, :t) # => <Rake::Task t => []>
+end
+#@end
 
 --- enhance_with_matching_rule(task_name, level = 0) -> Rake::Task | nil
 
@@ -51,6 +101,23 @@
 
 @param name 名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+namespace :sample do
+  def hoge
+    puts "hoge"
+  end
+end
+
+task :test_rake_app do
+  task.application.in_namespace("sample") do
+    hoge # => "hoge"
+  end
+end
+#@end
 
 --- intern(task_class, task_name) -> Rake::Task
 
@@ -63,14 +130,57 @@
 
 @param task_name タスクの名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+task :test_rake_app do |task|
+  task.application.intern(Rake::Task, "test_rake_app") # => <Rake::Task test_rake_app => []>
+  task.application.intern(Rake::Task, "sample_task")   # => <Rake::Task sample_task => []>
+end
+#@end
+
 --- last_description -> String
 --- last_comment -> String
 
 Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app1
+
+desc "test1"
+task :test_rake_app1 do |task|
+  p task.application.last_description # => "test2"
+end
+
+desc "test2"
+task :test_rake_app2 do |task|
+end
+#@end
+
 --- last_description=(description)
 
 最新の詳細説明をセットします。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app1
+
+desc "test1"
+task :test_rake_app1 do |task|
+  task.application.last_description # => "test2"
+  task.application.last_description = "test3"
+  task.application.last_description # => "test3"
+end
+
+desc "test2"
+task :test_rake_app2 do |task|
+end
+#@end
 
 --- lookup(task_name, initial_scope = nil) -> Rake::Task | nil
 
@@ -83,6 +193,16 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです�
 @param task_name タスク名を指定します。
 
 @param initial_scope 検索するスコープを指定します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+task :test_rake_app do |task|
+  task.application.lookup("test_rake_app") # => <Rake::Task test_rake_app => []>
+end
+#@end
 
 --- resolve_args(args) -> Array
 
@@ -103,6 +223,35 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです�
 
 @raise RuntimeError タスクを合成できなかった場合に発生します。
 
+#@samplecode
+# Rakefile での記載例とする
+
+task default: :test_rake_app
+
+task :test_rake_app do |task|
+  task.application.synthesize_file_task("sample_file") # => nil
+  IO.write("sample_file", "")
+  task.application.synthesize_file_task("sample_file") # => <Rake::FileTask sample_file => []>
+end
+#@end
+
 --- tasks -> Array
 
 全てのタスクリストを返します。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'pp'
+
+task default: :test_rake_app2
+
+task :test_rake_app1 do |task|
+end
+
+task :test_rake_app2 do |task|
+  pp task.application.tasks
+  # => [<Rake::Task default => [test_rake_app2]>,
+  #    <Rake::Task test_rake_app1 => []>,
+  #    <Rake::Task test_rake_app2 => []>]
+end
+#@end

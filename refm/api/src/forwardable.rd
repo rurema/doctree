@@ -11,7 +11,7 @@ category DesignPattern
 
 === 参考
 
-  * Rubyist Magazine 0012 号 標準添付ライブラリ紹介【第 6 回】委譲 ([[url:http://magazine.rubyist.net/?0012-BundledLibraries]])
+  * Rubyist Magazine 0012 号 標準添付ライブラリ紹介【第 6 回】委譲 ([[url:https://magazine.rubyist.net/articles/0012/0012-BundledLibraries.html]])
 
 = module Forwardable
 
@@ -147,7 +147,7 @@ def_delegator は def_instance_delegator の別名になります。
 
 == Constants
 
---- FORWARDABLE_VERSION -> "1.1.0"
+--- FORWARDABLE_VERSION -> String
 
 [[lib:forwardable]] ライブラリのバージョンを返します。
 #@end

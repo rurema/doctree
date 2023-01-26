@@ -2,7 +2,15 @@ Ruby プログラムをトークンのリストとして処理するためのラ
 
 = reopen Ripper
 
+#@since 3.0
+--- Ripper.lex(src, filename = '-', lineno = 1, raise_errors: false) -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+#@else
+#@since 2.5.0
+--- Ripper.lex(src, filename = '-', lineno = 1) -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+#@else
 --- Ripper.lex(src, filename = '-', lineno = 1) -> [[Integer, Integer], Symbol, String]
+#@end
+#@end
 
 Ruby プログラム str をトークンに分割し、そのリストを返します。
 ただし [[m:Ripper.tokenize]] と違い、トークンの種類と位置情報も付属します。
@@ -13,25 +21,78 @@ Ruby プログラム str をトークンに分割し、そのリストを返し�
 
 @param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-使用例
+#@since 3.0
+@param raise_errors true を指定すると、src にエラーがある場合に例外(SyntaxError)を発生させます。省略すると false になります。
 
-  require 'ripper'
-  require 'pp'
+@raise SyntaxError raise_errors が true で、src に文法エラーがある場合に発生します。
+#@end
 
-  pp Ripper.lex("def m(a) nil end")
-      #=> [[[1, 0], :on_kw, "def"],
-           [[1, 3], :on_sp, " "],
-           [[1, 4], :on_ident, "m"],
-           [[1, 5], :on_lparen, "("],
-           [[1, 6], :on_ident, "a"],
-           [[1, 7], :on_rparen, ")"],
-           [[1, 8], :on_sp, " "],
-           [[1, 9], :on_kw, "nil"],
-           [[1, 12], :on_sp, " "],
-           [[1, 13], :on_kw, "end"]]
+#@if ("1.9.0" <= version and version < "2.5.0")
+#@samplecode
+require 'ripper'
+require 'pp'
+
+pp Ripper.lex("def m(a) nil end")
+# => [[[1, 0], :on_kw, "def"],
+#     [[1, 3], :on_sp, " "],
+#     [[1, 4], :on_ident, "m"],
+#     [[1, 5], :on_lparen, "("],
+#     [[1, 6], :on_ident, "a"],
+#     [[1, 7], :on_rparen, ")"],
+#     [[1, 8], :on_sp, " "],
+#     [[1, 9], :on_kw, "nil"],
+#     [[1, 12], :on_sp, " "],
+#     [[1, 13], :on_kw, "end"]]
+#@end
+#@end
+
+#@if ("2.5.0" <= version and version < "2.7.0")
+#@samplecode
+require 'ripper'
+
+pp Ripper.lex("def m(a) nil end")
+# => [[[1, 0], :on_kw, "def", EXPR_FNAME],
+#     [[1, 3], :on_sp, " ", EXPR_FNAME],
+#     [[1, 4], :on_ident, "m", EXPR_ENDFN],
+#     [[1, 5], :on_lparen, "(", EXPR_BEG|EXPR_LABEL],
+#     [[1, 6], :on_ident, "a", EXPR_ARG],
+#     [[1, 7], :on_rparen, ")", EXPR_ENDFN],
+#     [[1, 8], :on_sp, " ", EXPR_BEG],
+#     [[1, 9], :on_kw, "nil", EXPR_END],
+#     [[1, 12], :on_sp, " ", EXPR_END],
+#     [[1, 13], :on_kw, "end", EXPR_END]]
+#@end
+#@end
+
+#@if (version >= "2.7.0")
+#@samplecode
+require 'ripper'
+
+pp Ripper.lex("def m(a) nil end")
+# => [[[1, 0], :on_kw, "def", FNAME],
+#     [[1, 3], :on_sp, " ", FNAME],
+#     [[1, 4], :on_ident, "m", ENDFN],
+#     [[1, 5], :on_lparen, "(", BEG|LABEL],
+#     [[1, 6], :on_ident, "a", ARG],
+#     [[1, 7], :on_rparen, ")", ENDFN],
+#     [[1, 8], :on_sp, " ", BEG],
+#     [[1, 9], :on_kw, "nil", END],
+#     [[1, 12], :on_sp, " ", END],
+#     [[1, 13], :on_kw, "end", END]]
+#@if (version >= "3.0")
+
+Ripper.lex("def req(true) end", raise_errors: true)
+# => SyntaxError (syntax error, unexpected `true', expecting ')')
+#@end
+#@end
+#@end
 
 Ripper.lex は分割したトークンを詳しい情報とともに返します。
+#@since 2.5.0
+返り値の配列の要素は 4 要素の配列 (概念的にはタプル) です。
+#@else
 返り値の配列の要素は 3 要素の配列 (概念的にはタプル) です。
+#@end
 その内訳を以下に示します。
 
 : 位置情報 (Integer,Integer)
@@ -40,8 +101,16 @@ Ripper.lex は分割したトークンを詳しい情報とともに返します
     トークンの種類が「:on_XXX」の形式のシンボルで渡されます。
 : トークン (String)
     トークン文字列です。
+#@since 2.5.0
+: ステート (Ripper::Lexer::State)
+    トークンの状態を表す Ripper::Lexer::State のインスタンスです。
+#@end
 
+#@since 3.0
+--- Ripper.tokenize(src, filename = '-', lineno = 1, raise_errors: false) -> [String]
+#@else
 --- Ripper.tokenize(src, filename = '-', lineno = 1) -> [String]
+#@end
 
 Ruby プログラム str をトークンに分割し、そのリストを返します。
 
@@ -51,11 +120,23 @@ Ruby プログラム str をトークンに分割し、そのリストを返し�
 
 @param lineno src の開始行番号を指定します。省略すると 1 になります。
 
-使用例
+#@since 3.0
+@param raise_errors true を指定すると、src にエラーがある場合に例外(SyntaxError)を発生させます。省略すると false になります。
 
-  require 'ripper'
-  p Ripper.tokenize("def m(a) nil end")
-      #=> ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
+@raise SyntaxError raise_errors が true で、src に文法エラーがある場合に発生します。
+#@end
+
+#@samplecode
+require 'ripper'
+
+p Ripper.tokenize("def m(a) nil end")
+# => ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
+#@since 3.0
+
+Ripper.tokenize("def req(true) end", raise_errors: true)
+# => SyntaxError (syntax error, unexpected `true', expecting ')')
+#@end
+#@end
 
 Ripper.tokenize は空白やコメントも含め、
 元の文字列にある文字は 1 バイトも残さずに分割します。
@@ -109,13 +190,21 @@ Ruby プログラムの字句解析器です。
 
 ライブラリ内部で使用します。 [[m:Ripper.tokenize]] を使用してください。
 
+#@since 2.5.0
+--- lex -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+#@else
 --- lex -> [[Integer, Integer], Symbol, String]
+#@end
 
 自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。
 
 ライブラリ内部で使用します。 [[m:Ripper.lex]] を使用してください。
 
+#@since 2.5.0
+--- parse -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+#@else
 --- parse -> [[Integer, Integer], Symbol, String]
+#@end
 
 自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。た
 だし [[m:Ripper::Lexer#lex]] と違い、結果をソートしません。

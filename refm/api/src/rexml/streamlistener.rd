@@ -1,11 +1,11 @@
 
-[[c:REXML::Parsers::StreamParser]]  
+[[c:REXML::Parsers::StreamParser]]
 で使われるコールバックオブジェクトのためのモジュール、
 [[c:REXML::StreamListener]] を定義しています。
 
 = module REXML::StreamListener
 
-[[c:REXML::Parsers::StreamParser]]  
+[[c:REXML::Parsers::StreamParser]]
 で使われるコールバックオブジェクトのためのモジュールです。
 
 このモジュールを include して、各メソッドを適切にオーバーライドした
@@ -29,8 +29,8 @@
 @param name タグ名が文字列で渡されます
 @param attrs タグの属性が"属性名" => "属性値"という [[c:Hash]] で渡されます
 
-==== 例
-  <tag attr1="value1" attr2="value2"> 
+=== 例
+  <tag attr1="value1" attr2="value2">
 という開始タグに対し、
   name: "tag"
   attrs: {"attr1" => "value1", "attr2" => "value2"}
@@ -41,7 +41,7 @@
 
 @param name タグ名が文字列で渡されます
 
-==== 例
+=== 例
   </tag>
 という終了タグに対し、
   name: "tag"
@@ -58,7 +58,7 @@ XML処理命令(PI)をパースしたときに呼び出されるコールバッ�
 @param name ターゲット名が文字列で渡されます
 @param instruction 処理命令の内容が文字列で渡されます
 
-==== 例
+=== 例
   <?xml-stylesheet type="text/css" href="style.css"?>
 というPIに対し
   name: "xml-stylesheet"
@@ -82,7 +82,7 @@ pub_sys, long_name, uri はDTDが内部サブセットのみを
        文字列で渡されます
 @param uri "SYSTEM" の場合は nil が、"PUBLIC" の場合はシステム識別子が渡されます
 
-==== 例
+=== 例
   <!DOCTYPE me PUBLIC "foo" "bar">
 というDTDに対しては
   name: "me"
@@ -99,22 +99,20 @@ pub_sys, long_name, uri はDTDが内部サブセットのみを
   uri: nil
 という引数が渡されます。
 
-#@since 1.8.5
 --- doctype_end -> ()
 文書型宣言(DTD)の終了区切りをパースしたときに呼び出されるコールバックメソッドです。
 
-#@end
 
 --- attlistdecl(element_name, attributes, raw_content) -> ()
 DTDの属性リスト宣言をパースしたときに呼び出されるコールバックです。
 
 @param element_name 要素名が文字列で渡されます
-@param attributes 属性名とそのデフォルト値の対応が 
+@param attributes 属性名とそのデフォルト値の対応が
      { 属性名文字列 => デフォルト値文字列(無ければnil) } という
      ハッシュテーブルで渡されます
 @param raw_content 文書内の属性リスト宣言の文字列がそのまま渡されます
 
-==== 例
+=== 例
   <!ATTLIST a att CDATA #REQUIRED xyz CDATA "foobar">
 という属性リスト宣言に対しては
   element_name: "a"
@@ -127,7 +125,7 @@ DTDの要素型宣言をパースしたときに呼び出されるコールバ�
 
 @param content 要素型宣言が文字列として渡されます。
 
-==== 例
+=== 例
   <!ELEMENT root (a+)>
 という属性型宣言に対しては
   content: "<!ELEMENT root (a+)"
@@ -138,42 +136,43 @@ DTDの実体宣言をパースしたときに呼び出されるコールバッ�
 
 @param content 実体宣言が配列で渡されます
 
-==== 例
 実体宣言の書き方によって content に渡されるデータの形式が異なります。
 
-  require 'rexml/parsers/baseparser'
-  require 'rexml/parsers/streamparser'
-  require 'rexml/streamlistener'
-  xml = <<EOS
-  <!DOCTYPE root [
-  <!ENTITY % YN '"Yes"'>
-  <!ENTITY % YN 'Yes'>
-  <!ENTITY WhatHeSaid "He said %YN;">
-  <!ENTITY open-hatch SYSTEM "http://www.textuality.com/boilerplate/OpenHatch.xml">
-  <!ENTITY open-hatch PUBLIC "-//Textuality//TEXT Standard open-hatch boilerplate//EN" "http://www.textuality.com/boilerplate/OpenHatch.xml">
-  <!ENTITY hatch-pic SYSTEM "../grafix/OpenHatch.gif" NDATA gif>
-  ]>
-  <root />
-  EOS
-  
-  class Listener 
-    include REXML::StreamListener
-    def entitydecl(content); p content; end
-  end
-  REXML::Parsers::StreamParser.new(xml, Listener.new).parse
-  # >> ["YN", "\"Yes\"", "%"]
-  # >> ["YN", "Yes", "%"]
-  # >> ["WhatHeSaid", "He said %YN;"]
-  # >> ["open-hatch", "SYSTEM", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
-  # >> ["open-hatch", "PUBLIC", "-//Textuality//TEXT Standard open-hatch boilerplate//EN", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
-  # >> ["hatch-pic", "SYSTEM", "../grafix/OpenHatch.gif", "gif"]
+#@samplecode
+require 'rexml/parsers/baseparser'
+require 'rexml/parsers/streamparser'
+require 'rexml/streamlistener'
+xml = <<EOS
+<!DOCTYPE root [
+<!ENTITY % YN '"Yes"'>
+<!ENTITY % YN 'Yes'>
+<!ENTITY WhatHeSaid "He said %YN;">
+<!ENTITY open-hatch SYSTEM "http://www.textuality.com/boilerplate/OpenHatch.xml">
+<!ENTITY open-hatch PUBLIC "-//Textuality//TEXT Standard open-hatch boilerplate//EN" "http://www.textuality.com/boilerplate/OpenHatch.xml">
+<!ENTITY hatch-pic SYSTEM "../grafix/OpenHatch.gif" NDATA gif>
+]>
+<root />
+EOS
+
+class Listener
+  include REXML::StreamListener
+  def entitydecl(content); p content; end
+end
+REXML::Parsers::StreamParser.new(xml, Listener.new).parse
+# >> ["YN", "\"Yes\"", "%"]
+# >> ["YN", "Yes", "%"]
+# >> ["WhatHeSaid", "He said %YN;"]
+# >> ["open-hatch", "SYSTEM", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
+# >> ["open-hatch", "PUBLIC", "-//Textuality//TEXT Standard open-hatch boilerplate//EN", "http://www.textuality.com/boilerplate/OpenHatch.xml"]
+# >> ["hatch-pic", "SYSTEM", "../grafix/OpenHatch.gif", "gif"]
+#@end
 
 
 --- notationdecl(content) -> ()
 DTDの記法宣言をパースしたときに呼び出されるコールバックメソッドです。
 
-@param content 記法宣言が 
-       [記法名文字列, 種別("PUBLIC" もしくは "SYSTEM"), 公開識別子文字列, 
+@param content 記法宣言が
+       [記法名文字列, 種別("PUBLIC" もしくは "SYSTEM"), 公開識別子文字列,
        URI文字列] という配列で渡されます。
 
 #@since 2.1.0
@@ -183,7 +182,7 @@ DTD内で、パラメータ実体参照(%entityname;)が現れたときに呼び
 
 DTDの各宣言(要素型宣言や実体参照宣言)の内側で使われた
 場合はこのメソッドはコールバックされません。
-各宣言のためのコールバックメソッド 
+各宣言のためのコールバックメソッド
 ([[m:REXML::StreamListener#elementdecl]] や [[m:REXML::StreamListener#entitydecl]]
 など)
 の引数の一部として渡されます。
@@ -199,7 +198,7 @@ CDATA セクションをパースしたときに呼び出されるコールバ�
 
 @param content CDATAセクションの内容の文字列が渡されます
 
-==== 例
+=== 例
   <![CDATA[ xyz ]]>
 というCDATAセクションに対しては
   content: " xyz "
@@ -215,7 +214,7 @@ version, encoding, standalone はXML宣言内で
 @param encoding 宣言されているエンコーディングが文字列で渡されます。
 @param standalone スタンドアロン文書であるかどうかが "yes" "no" で渡されます
 
-==== 例
+=== 例
   <?xml version="1.0" encoding="utf-8"?>
 というXML宣言に対しては
   version: "1.0"

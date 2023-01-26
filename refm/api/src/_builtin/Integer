@@ -1,6 +1,5 @@
 = class Integer < Numeric
 
-#@since 2.4.0
 alias Fixnum
 alias Bignum
 
@@ -8,82 +7,115 @@ alias Bignum
 
 整数オブジェクトに特異メソッドを追加する事はできません。追加した場合、
 [[c:TypeError]] が発生します。
-#@else
-整数の抽象クラスです。サブクラスとして [[c:Fixnum]] と [[c:Bignum]] が
-あります。この 2 種類の整数は値の大きさに応じてお互いに自動的に変換さ
-れます。ビット操作において整数は無限の長さのビットストリングとみなすこ
-とができます。
-#@end
 
 2.4.0 から [[c:Fixnum]], [[c:Bignum]] は Integerに統合されました。
 2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
 
+== Class Methods
+
+#@since 3.1
+--- try_convert(obj) -> Integer | nil
+
+obj を Integer に変換しようと試みます。変換には [[m:Object#to_int]]
+メソッドが使われます。
+
+Integer ならそのままobjを返します。
+そうでなければ obj.to_int の結果を返すか、nil が返されます。
+
+@param obj   変換する任意のオブジェクト
+@return      Integer または nil
+@raise TypeError to_int が Integer を返さなかった場合に発生します。
+
+#@samplecode 例
+Integer.try_convert(1)    # => 1
+Integer.try_convert(1.25) # => 1
+Integer.try_convert([])   # => nil
+#@end
+#@end
+
+#@since 2.5.0
+--- sqrt(n) -> Integer
+
+非負整数 n の整数の平方根を返します。すなわち n の平方根以下の
+最大の非負整数を返します。
+
+@param n 非負整数。Integer ではない場合は、最初に Integer に変換されます。
+@raise Math::DomainError n が負の整数の時に発生します。
+
+#@samplecode
+Integer.sqrt(0)        # => 0
+Integer.sqrt(1)        # => 1
+Integer.sqrt(24)       # => 4
+Integer.sqrt(25)       # => 5
+Integer.sqrt(10**400) == 10**200 # => true
+#@end
+
+Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の精度の限界によって
+真の値とは違う結果になることがあります。
+
+#@samplecode
+Integer.sqrt(10**46)     #=> 100000000000000000000000
+Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
+#@end
+
+
+@see [[m:Math.#sqrt]]
+#@end
 == Instance Methods
 
-#@until 1.9.1
---- chr -> String
-
-文字コードに対応する 1 バイトの文字列を返します。
-
-例えば65.chr は "A" を返します。
-
-逆に文字列から文字コードを得るには "A"[0] とします
-
-@return     1バイト文字列
-@raise RangeError self が 0 から 255 の範囲外の場合に発生します。
-@see [[m:String#[] ]]
-#@else
 --- chr -> String
 --- chr(encoding) -> String
 
-与えられたエンコーディング encoding において self を文字コードと見た時、それに対応する一文字からなる文字列を返します。
+self を文字コードとして見た時に、引数で与えたエンコーディング encoding に対応する文字を返します。
+
+#@samplecode
+p 65.chr
+# => "A"
+p 12354.chr
+# => `chr': 12354 out of char range (RangeError)
+
+p 12354.chr(Encoding::UTF_8)
+# => "あ"
+p 12354.chr(Encoding::EUC_JP)
+# => RangeError: invalid codepoint 0x3042 in EUC-JP
+#@end
+
 引数無しで呼ばれた場合は self を US-ASCII、ASCII-8BIT、デフォルト内部エンコーディングの順で優先的に解釈します。
 
-  p 65.chr # => "A"
-  p 0x79.chr.encoding # => #<Encoding:US_ASCII>
-  p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
-  p 12354.chr Encoding::UTF_8 # => "あ"
-  p 12354.chr Encoding::EUC_JP
-  # => RangeError: invalid codepoint 0x3042 in EUC-JP
-  p 12354.chr Encoding::ASCII_8BIT
-  # => RangeError: 12354 out of char range
-  p (2**32).chr
-  # => RangeError: bignum out of char range
+#@samplecode
+p 0x79.chr.encoding # => #<Encoding:US_ASCII>
+p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
+#@end
 
 @param encoding エンコーディングを表すオブジェクト。Encoding::UTF_8、'shift_jis' など。
 @return     一文字からなる文字列
 @raise RangeError self を与えられたエンコーディングで正しく解釈できない場合に発生します。
-@see [[m:String#ord]]
-#@end
+@see [[m:String#ord]] [[m:Encoding.default_internal]]
 
-#@since 2.4.0
 --- digits -> [Integer]
 --- digits(base) -> [Integer]
 
 base を基数として self を位取り記数法で表記した数値を配列で返します。
 base を指定しない場合の基数は 10 です。
 
-  16.digits # => [6, 1]
-  16.digits(16) # => [0, 1]
+#@samplecode
+16.digits     # => [6, 1]
+16.digits(16) # => [0, 1]
+#@end
 
 self は非負整数でなければいけません。非負整数でない場合は、Math::DomainErrorが発生します。
 
-  -10.digits # Math::DomainError: out of domain が発生
+#@samplecode
+-10.digits  # Math::DomainError: out of domain が発生
+#@end
 
 @return     位取り記数法で表した時の数値の配列
 @param base 基数となる数値。
 @raise ArgumentError base に正の整数以外を指定した場合に発生します。
 @raise Math::DomainError 非負整数以外に対して呼び出した場合に発生します。
-#@end
 
 --- downto(min) {|n| ... } -> self
-#@since 1.8.7
-#@since 1.9.1
 --- downto(min) -> Enumerator
-#@else
---- downto(min) -> Enumerable::Enumerator
-#@end
-#@end
 
 self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
 self < min であれば何もしません。
@@ -91,175 +123,212 @@ self < min であれば何もしません。
 @param min   数値
 @return      self を返します。
 
-例:
-
-  5.downto(1) {|i| print i, " " } # => "5 4 3 2 1"
+#@samplecode
+5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
+#@end
 
 @see [[m:Integer#upto]], [[m:Numeric#step]], [[m:Integer#times]]
 
-#@since 2.4.0
 --- next -> Integer
 --- succ -> Integer
-#@else
---- next -> Fixnum | Bignum
---- succ -> Fixnum | Bignum
-#@end
 
 self の次の整数を返します。
 
-例:
-
-  1.next      #=> 2
-  (-1).next   #=> 0
-  1.succ      #=> 2
-  (-1).succ   #=> 0
+#@samplecode
+1.next      #=> 2
+(-1).next   #=> 0
+1.succ      #=> 2
+(-1).succ   #=> 0
+#@end
 
 @see [[m:Integer#pred]]
 
 --- times {|n| ... } -> self
-#@since 1.8.7
-#@since 1.9.1
 --- times -> Enumerator
-#@else
---- times -> Enumerable::Enumerator
-#@end
-#@end
 
 self 回だけ繰り返します。
 self が正の整数でない場合は何もしません。
 
 またブロックパラメータには 0 から self - 1 までの数値が渡されます。
 
-  3.times { puts "Hello, World!" }  # Hello, World! と3行続いて表示される。
-  0.times { puts "Hello, World!" }  # 何も表示されない。
-  5.times {|n| print n }            # 01234 と表示される。
+#@samplecode
+3.times { puts "Hello, World!" }  # Hello, World! と3行続いて表示される。
+0.times { puts "Hello, World!" }  # 何も表示されない。
+5.times {|n| print n }            # 01234 と表示される。
+#@end
 
 @see [[m:Integer#upto]], [[m:Integer#downto]], [[m:Numeric#step]]
 
 --- to_i   -> self
 --- to_int -> self
-#@until 2.4.0
---- floor  -> self
---- ceil   -> self
---- round  -> self
---- truncate -> self
-#@end
 
 self を返します。
 
-#@since 2.4.0
+#@samplecode
+10.to_i   # => 10
+#@end
+
+#@since 2.5.0
+--- floor(ndigits = 0) -> Integer
+#@else
 --- floor(ndigits = 0) -> Integer | Float
+#@end
 
 self と等しいかより小さな整数のうち最大のものを返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-  1.floor        # => 1
-  1.floor(2)     # => 1.0
-  15.floor(-1)   # => 10
+#@samplecode
+1.floor           # => 1
+#@since 2.5.0
+1.floor(2)        # => 1
+#@else
+1.floor(2)        # => 1.0
+#@end
+18.floor(-1)      # => 10
+(-18).floor(-1)   # => -20
+#@end
 
 @see [[m:Numeric#floor]]
 
+#@since 2.5.0
+--- ceil(ndigits = 0) -> Integer
+#@else
 --- ceil(ndigits = 0) -> Integer | Float
+#@end
 
 self と等しいかより大きな整数のうち最小のものを返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-  1.ceil        # => 1
-  1.ceil(2)     # => 1.0
-  15.ceil(-1)   # => 20
+#@samplecode
+1.ceil           # => 1
+#@since 2.5.0
+1.ceil(2)        # => 1
+#@else
+1.ceil(2)        # => 1.0
+#@end
+18.ceil(-1)      # => 20
+(-18).ceil(-1)   # => -10
+#@end
 
 @see [[m:Numeric#ceil]]
 
---- round(ndigits = 0) -> Integer | Float
+#@since 2.5.0
+--- round(ndigits = 0, half: :up) -> Integer
+#@else
+--- round(ndigits = 0, half: :up) -> Integer | Float
+#@end
 
 self ともっとも近い整数を返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+@param half ちょうど半分の値の丸め方を指定します。
+       サポートされている値は以下の通りです。
 
-例:
+ * :up or nil: 0から遠い方に丸められます。
+ * :even: もっとも近い偶数に丸められます。
+ * :down: 0に近い方に丸められます。
 
-  1.round        # => 1
-  1.round(2)     # => 1.0
-  15.round(-1)   # => 20
+#@samplecode
+1.round         # => 1
+#@since 2.5.0
+1.round(2)      # => 1
+#@else
+1.round(2)      # => 1.0
+#@end
+15.round(-1)    # =>  20
+(-15).round(-1) # => -20
+
+25.round(-1, half: :up)      # => 30
+25.round(-1, half: :down)    # => 20
+25.round(-1, half: :even)    # => 20
+35.round(-1, half: :up)      # => 40
+35.round(-1, half: :down)    # => 30
+35.round(-1, half: :even)    # => 40
+(-25).round(-1, half: :up)   # => -30
+(-25).round(-1, half: :down) # => -20
+(-25).round(-1, half: :even) # => -20
+#@end
 
 @see [[m:Numeric#round]]
 
+#@since 2.5.0
+--- truncate(ndigits = 0) -> Integer
+#@else
 --- truncate(ndigits = 0) -> Integer | Float
+#@end
 
 0 から self までの整数で、自身にもっとも近い整数を返します。
 
 @param ndigits 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
                正の整数を指定した場合、[[c:Float]] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[[c:Integer]] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
 
-例:
-
-     1.truncate        # => 1
-     1.truncate(2)     # => 1.0
-     15.truncate(-1)   # => 10
+#@samplecode
+1.truncate           # => 1
+#@since 2.5.0
+1.truncate(2)        # => 1
+#@else
+1.truncate(2)        # => 1.0
+#@end
+18.truncate(-1)      # =>  10
+(-18).truncate(-1)   # => -10
+#@end
 
 @see [[m:Numeric#truncate]]
-#@end
 
---- to_s -> String
-#@since 1.8.0
---- to_s(base) -> String
-#@end
-#@since 2.4.0
---- inspect       -> String
---- inspect(base) -> String
-#@end
+--- to_s(base=10)    -> String
+--- inspect(base=10) -> String
 
 整数を 10 進文字列表現に変換します。
 
-#@since 1.8.0
 引数を指定すれば、それを基数とした文字列表
 現に変換します。
 
-    p 10.to_s(2)    # => "1010"
-    p 10.to_s(8)    # => "12"
-    p 10.to_s(16)   # => "a"
-    p 35.to_s(36)   # => "z"
+#@samplecode
+p 10.to_s(2)    # => "1010"
+p 10.to_s(8)    # => "12"
+p 10.to_s(16)   # => "a"
+p 35.to_s(36)   # => "z"
 #@end
 
 @return     数値の文字列表現
-#@since 1.8.0
 @param base 基数となる 2 - 36 の数値。
 @raise ArgumentError base に 2 - 36 以外の数値を指定した場合に発生します。
-#@end
 
-#@since 2.4.0
 --- upto(max) {|n| ... } -> Integer
-#@else
---- upto(max) {|n| ... } -> Fixnum | Bignum
-#@end
-#@since 1.8.7
-#@since 1.9.1
 --- upto(max) -> Enumerator
-#@else
---- upto(max) -> Enumerable::Enumerator
-#@end
-#@end
 
 self から max まで 1 ずつ増やしながら繰り返します。
 self > max であれば何もしません。
@@ -267,9 +336,9 @@ self > max であれば何もしません。
 @param max   数値
 @return      self を返します。
 
-例:
-
-  5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
+#@samplecode
+5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
+#@end
 
 @see [[m:Integer#downto]], [[m:Numeric#step]], [[m:Integer#times]]
 
@@ -277,48 +346,63 @@ self > max であれば何もしません。
 
 常に真を返します。
 
-#@since 1.8.7
+#@samplecode
+1.integer?     # => true
+1.0.integer?   # => false
+#@end
+
 --- even? -> bool
 
 自身が偶数であれば真を返します。
 そうでない場合は偽を返します。
 
+#@samplecode
+10.even?    # => true
+5.even?     # => false
+#@end
 
 --- odd? -> bool
 
 自身が奇数であれば真を返します。
 そうでない場合は偽を返します。
 
+#@samplecode
+5.odd?     # => true
+10.odd?    # => false
+#@end
 
 --- ord    -> Integer
 自身を返します。
 
-   10.ord    #=> 10
-#@since 1.9.1
-   # String#ord
+#@samplecode
+10.ord    #=> 10
+# String#ord
+?a.ord    #=> 97
 #@end
-   ?a.ord    #=> 97
 
-#@since 1.9.1
 @see [[m:String#ord]]
-#@end
 
 --- pred    -> Integer
 
 self から -1 した値を返します。
 
-   1.pred      #=> 0
-   (-1).pred   #=> -2
-
-@see [[m:Integer#next]]
+#@samplecode
+1.pred      #=> 0
+(-1).pred   #=> -2
 #@end
 
-#@since 1.9.1
+@see [[m:Integer#next]]
+
 --- denominator -> Integer
 
 分母(常に1)を返します。
 
 @return 分母を返します。
+
+#@samplecode
+10.denominator    # => 1
+-10.denominator   # => 1
+#@end
 
 @see [[m:Integer#numerator]]
 
@@ -328,17 +412,19 @@ self から -1 した値を返します。
 
 @raise ArgumentError n に整数以外のものを指定すると発生します。
 
-例:
-
-  2.gcd(2)                    # => 2
-  3.gcd(7)                    # => 1
-  3.gcd(-7)                   # => 1
-  ((1<<31)-1).gcd((1<<61)-1)  # => 1
+#@samplecode
+2.gcd(2)                    # => 2
+3.gcd(7)                    # => 1
+3.gcd(-7)                   # => 1
+((1<<31)-1).gcd((1<<61)-1)  # => 1
+#@end
 
 また、self や n が 0 だった場合は、0 ではない方の整数の絶対値を返します。
 
-  3.gcd(0)                    # => 3
-  0.gcd(-7)                   # => 7
+#@samplecode
+3.gcd(0)                    # => 3
+0.gcd(-7)                   # => 7
+#@end
 
 @see [[m:Integer#lcm]], [[m:Integer#gcdlcm]]
 
@@ -349,11 +435,11 @@ self から -1 した値を返します。
 
 @raise ArgumentError n に整数以外のものを指定すると発生します。
 
-例:
-
-  2.gcdlcm(2)                    # => [2, 2]
-  3.gcdlcm(-7)                   # => [1, 21]
-  ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
+#@samplecode
+2.gcdlcm(2)                    # => [2, 2]
+3.gcdlcm(-7)                   # => [1, 21]
+((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
+#@end
 
 @see [[m:Integer#gcd]], [[m:Integer#lcm]]
 
@@ -363,16 +449,18 @@ self から -1 した値を返します。
 
 @raise ArgumentError n に整数以外のものを指定すると発生します。
 
-例:
-
-  2.lcm(2)                    # => 2
-  3.lcm(-7)                   # => 21
-  ((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
+#@samplecode
+2.lcm(2)                    # => 2
+3.lcm(-7)                   # => 21
+((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
+#@end
 
 また、self や n が 0 だった場合は、0 を返します。
 
-  3.lcm(0)                    # => 0
-  0.lcm(-7)                   # => 0
+#@samplecode
+3.lcm(0)                    # => 0
+0.lcm(-7)                   # => 0
+#@end
 
 @see [[m:Integer#gcd]], [[m:Integer#gcdlcm]]
 
@@ -382,20 +470,23 @@ self から -1 した値を返します。
 
 @return 分子を返します。
 
+#@samplecode
+10.numerator    # => 10
+-10.numerator   # => -10
+#@end
+
 @see [[m:Integer#denominator]]
 
 --- to_r -> Rational
 
 自身を [[c:Rational]] に変換します。
 
-例:
-
-  1.to_r        # => (1/1)
-  (1<<64).to_r  # => (18446744073709551616/1)
-
+#@samplecode
+1.to_r        # => (1/1)
+(1<<64).to_r  # => (18446744073709551616/1)
 #@end
 
-#@since 1.9.2
+
 --- rationalize      -> Rational
 --- rationalize(eps) -> Rational
 
@@ -405,19 +496,23 @@ self から -1 した値を返します。
 
 引数 eps は常に無視されます。
 
-例:
-
-  2.rationalize      # => (2/1)
-  2.rationalize(100) # => (2/1)
-  2.rationalize(0.1) # => (2/1)
-
+#@samplecode
+2.rationalize      # => (2/1)
+2.rationalize(100) # => (2/1)
+2.rationalize(0.1) # => (2/1)
 #@end
-#@since 2.4.0
+
 --- to_f -> Float
 
 self を浮動小数点数([[c:Float]])に変換します。
 
 self が [[c:Float]] の範囲に収まらない場合、[[m:Float::INFINITY]] を返します。
+
+#@samplecode
+1.to_f                       # => 1.0
+(Float::MAX.to_i * 2).to_f   # => Infinity
+(-Float::MAX.to_i * 2).to_f  # => -Infinity
+#@end
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
@@ -425,18 +520,24 @@ self と other を比較して、self が大きい時に1、等しい時に 0、
 に-1、比較できない時に nil を返します。
 
 @param other 比較対象の数値
-@return      -1 か 0 か 1 のいずれか
+@return      -1 か 0 か 1 か nil のいずれか
 
-例:
-
-  1 <=> 2 # => -1
-  1 <=> 1 # => 0
-  2 <=> 1 # => 1
+#@samplecode
+1 <=> 2  # => -1
+1 <=> 1  # => 0
+2 <=> 1  # => 1
+2 <=> '' # => nil
+#@end
 
 --- -@ -> Integer
 
 単項演算子の - です。
 self の符号を反転させたものを返します。
+
+#@samplecode
+- 10   # => -10
+- -10  # => 10
+#@end
 
 --- +(other) -> Numeric
 
@@ -445,12 +546,20 @@ self の符号を反転させたものを返します。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
+#@samplecode
+3 + 4 # => 7
+#@end
+
 --- -(other) -> Numeric
 
 算術演算子。差を計算します。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
+
+#@samplecode
+4 - 1 #=> 3
+#@end
 
 --- *(other) -> Numeric
 
@@ -459,18 +568,84 @@ self の符号を反転させたものを返します。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
---- /(other) -> Numeric
---- div(other) -> Numeric
+#@samplecode
+2 * 3   # => 6
+#@end
 
-算術演算子。商を計算します。
+--- /(other) -> Numeric
+
+除算の算術演算子。
+
+other が Integer の場合、整商（整数の商）を Integer で返します。
+普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
+
+other が Float、Rational、Complex の場合、普通の商を other と
+同じクラスのインスタンスで返します。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
+
+#@samplecode 例
+7 / 2 # => 3
+7 / -2 # => -4
+7 / 2.0 # => 3.5
+7 / Rational(2, 1) # => (7/2)
+7 / Complex(2, 0) # => ((7/2)+0i)
+
+begin
+  2 / 0
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+end
+#@end
+
+@see [[m:Integer#div]], [[m:Integer#fdiv]], [[m:Numeric#quo]]
+
+--- div(other) -> Integer
+
+整商（整数の商）を返します。
+普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
+
+other が Integer オブジェクトの場合、[[m:Integer#/]] の結果と一致します。
+
+div に対応する剰余メソッドは modulo です。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+#@samplecode 例
+7.div(2) # => 3
+7.div(-2) # => -4
+7.div(2.0) # => 3
+7.div(Rational(2, 1)) # => 3
+
+begin
+  2.div(0)
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+end
+
+begin
+  2.div(0.0)
+rescue => e
+  e # => #<ZeroDivisionError: divided by 0>
+  # Integer#/ と違い、引数が Float でもゼロで割ることはできない
+end
+#@end
+
+@see [[m:Integer#fdiv]], [[m:Integer#/]], [[m:Integer#modulo]]
 
 --- %(other) -> Numeric
 --- modulo(other) -> Numeric
 
 算術演算子。剰余を計算します。
+
+#@samplecode
+13 % 4    # =>  1
+13 % -4   # => -3
+-13 % 4   # =>  3
+-13 % -4  # => -1
+#@end
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
@@ -483,15 +658,15 @@ r の符号は self と同じになります。
 
 @param other self を割る数。
 
-例:
+#@samplecode
+5.remainder(3)    # =>  2
+-5.remainder(3)   # => -2
+5.remainder(-3)   # =>  2
+-5.remainder(-3)  # => -2
 
-  5.remainder(3)    # => 2
-  -5.remainder(3)   # => -2
-  5.remainder(-3)   # => 2
-  -5.remainder(-3)  # => -2
-
-  -1234567890987654321.remainder(13731)      # => -6966
-  -1234567890987654321.remainder(13731.24)   # => -9906.22531493148
+-1234567890987654321.remainder(13731)      # => -6966
+-1234567890987654321.remainder(13731.24)   # => -9906.22531493148
+#@end
 
 @see [[m:Integer#divmod]], [[m:Integer#modulo]], [[m:Numeric#modulo]]
 
@@ -522,31 +697,73 @@ self を other で割った商を [[c:Float]] で返します。
 
   1.fdiv Complex(1, 1)    # => (0.5-0.5i)
 
-@see [[m:Numeric#quo]]
+@see [[m:Numeric#quo]], [[m:Numeric#div]], [[m:Integer#div]]
+
+#@since 3.2
+--- ceildiv(other) -> Integer
+
+self を other で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
+すなわち、self を other で割った商を q とすると、q 以上で最小の整数を返します。
+
+@param other self を割る数を指定します。
+
+#@samplecode
+3.ceildiv(3)    # => 1
+4.ceildiv(3)    # => 2
+5.ceildiv(3)    # => 2
+3.ceildiv(1.2)  # => 3
+-5.ceildiv(3)   # => -1
+-5.ceildiv(-3)  # => 2
+#@end
+
+#@end
 
 --- **(other) -> Numeric
+--- pow(other) -> Numeric
+--- pow(other, modulo) -> Integer
 
 算術演算子。冪(べき乗)を計算します。
 
 @param other 二項演算の右側の引数(対象)
+@param modulo 指定すると、計算途中に巨大な値を生成せずに (self**other) % modulo と同じ結果を返します。
 @return 計算結果
+@raise TypeError 2引数 pow で Integer 以外を指定した場合に発生します。
+@raise RangeError 2引数 pow で other に負の数を指定した場合に発生します。
 
-例:
+#@samplecode
+2 ** 3 # => 8
+2 ** 0 # => 1
+0 ** 0 # => 1
+3.pow(3,  8)  # =>  3
+3.pow(3, -8)  # => -5
+3.pow(2, -2)  # => -1
+-3.pow(3,  8) # =>  5
+-3.pow(3, -8) # => -3
+5.pow(2, -8)  # => -7
+#@end
 
-  2 ** 3 # => 8
-  2 ** 0 # => 1
-  0 ** 0 # => 1
+結果が巨大すぎる整数になりそうなとき、警告を出したうえで Float::INFINITY を返します。
+
+#@samplecode 計算を放棄して Float::INFINITY を返す例
+p 100**9999999
+# => warning: in a**b, b may be too big
+#    Infinity
+#@end
+
+判定の閾値は変わりえます。
+
+@see [[m:BigDecimal#power]]
 
 --- abs -> Integer
 --- magnitude -> Integer
 
 self の絶対値を返します。
 
-例:
-
-  -12345.abs   # => 12345
-  12345.abs    # => 12345
-  -1234567890987654321.abs   # => 1234567890987654321
+#@samplecode
+-12345.abs   # => 12345
+12345.abs    # => 12345
+-1234567890987654321.abs   # => 1234567890987654321
+#@end
 
 --- ==(other) -> bool
 --- ===(other) -> bool
@@ -557,10 +774,10 @@ self の絶対値を返します。
 @return      self と other が等しい場合 true を返します。
              そうでなければ false を返します。
 
-例:
-
-  1 == 2      # => false
-  1 == 1.0    # => true
+#@samplecode
+1 == 2      # => false
+1 == 1.0    # => true
+#@end
 
 --- <(other)  -> bool
 
@@ -569,6 +786,11 @@ self の絶対値を返します。
 @param other 比較対象の数値
 @return      self よりも other が大きい場合 true を返します。
              そうでなければ false を返します。
+
+#@samplecode
+1 < 1    # => false
+1 < 2    # => true
+#@end
 
 --- <=(other) -> bool
 
@@ -579,6 +801,12 @@ self の絶対値を返します。
              両者が等しい場合 true を返します。
              そうでなければ false を返します。
 
+#@samplecode
+1 <= 0    # => false
+1 <= 1    # => true
+1 <= 2    # => true
+#@end
+
 --- >(other)  -> bool
 
 比較演算子。数値として大きいか判定します。
@@ -586,6 +814,11 @@ self の絶対値を返します。
 @param other 比較対象の数値
 @return      self よりも other の方が小さい場合 true を返します。
              そうでなければ false を返します。
+
+#@samplecode
+1 > 0    # => true
+1 > 1    # => false
+#@end
 
 --- >=(other) -> bool
 
@@ -596,52 +829,101 @@ self の絶対値を返します。
              両者が等しい場合 true を返します。
              そうでなければ false を返します。
 
+#@samplecode
+1 >= 0    # => true
+1 >= 1    # => true
+1 >= 2    # => false
+#@end
+
 --- ~        -> Integer
 ビット演算子。否定を計算します。
 
-例:
-
-  ~1  # => -2
-  ~3  # => -4
-  ~-4 # => 3
+#@samplecode
+~1  # => -2
+~3  # => -4
+~-4 # => 3
+#@end
 
 --- |(other) -> Integer
 ビット二項演算子。論理和を計算します。
 
 @param other 数値
 
-例:
-
-  1 | 1 # => 1
-  2 | 3 # => 3
+#@samplecode
+1 | 1  # => 1
+2 | 3  # => 3
+#@end
 
 --- &(other) -> Integer
 ビット二項演算子。論理積を計算します。
 
 @param other 数値
 
-例:
-
-  1 & 1 # => 1
-  2 & 3 # => 2
+#@samplecode
+1 & 1  # => 1
+2 & 3  # => 2
+#@end
 
 --- ^(other) -> Integer
 ビット二項演算子。排他的論理和を計算します。
 
 @param other 数値
 
-例:
-
-  1 ^ 1 # => 0
-  2 ^ 3 # => 1
+#@samplecode
+1 ^ 1  # => 0
+2 ^ 3  # => 1
+#@end
 
 --- [](nth) -> Integer
+#@since 2.7.0
+--- [](nth, len) -> Integer
+--- [](range) -> Integer
+#@end
 
 nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
 を、そうでなければ 0 を返します。
 
-@param nth  何ビット目を指すかの数値
+@param nth   何ビット目を指すかの数値
+#@since 2.7.0
+@param len   何ビット分を返すか
+@param range 返すビットの範囲
+@return     self[nth] は 1 か 0
+@return     self[i, len] は (n >> i) & ((1 << len) - 1) と同じ
+@return     self[i..j] は (n >> i) & ((1 << (j - i + 1)) - 1) と同じ
+@return     self[i...j] は (n >> i) & ((1 << (j - i)) - 1) と同じ
+@return     self[i..] は (n >> i) と同じ
+@return     self[..j] は n & ((1 << (j + 1)) - 1) が 0 なら 0
+@return     self[...j] は n & ((1 << j) - 1) が 0 なら 0
+@raise ArgumentError self[..j] で n & ((1 << (j + 1)) - 1) が 0 以外のとき
+@raise ArgumentError self[...j] で n & ((1 << j) - 1) が 0 以外のとき
+#@else
 @return     1 か 0
+#@end
+
+#@samplecode
+a = 0b11001100101010
+30.downto(0) {|n| print a[n] }
+# => 0000000000000000011001100101010
+
+a = 9**15
+50.downto(0) {|n| print a[n] }
+# => 000101110110100000111000011110010100111100010111001
+#@end
+
+n[i] は (n >> i) & 1 と等価なので、負のインデックスは常に 0 を返します。
+
+#@samplecode
+p 255[-1] # => 0
+#@end
+
+#@since 2.7.0
+#@samplecode 複数ビットの例
+0b01001101[2, 4]  #=> 0b0011
+0b01001100[2..5]  #=> 0b0011
+0b01001100[2...6] #=> 0b0011
+#   ^^^^
+#@end
+#@end
 
 self[nth]=bit (つまりビットの修正) がないのは、Numeric 関連クラスが
 immutable であるためです。
@@ -652,10 +934,10 @@ immutable であるためです。
 
 @param bits シフトさせるビット数
 
-例:
-
-    printf("%#b\n", 0b0101 << 1) # => 0b1010
-    p -1 << 1 # => -2
+#@samplecode
+printf("%#b\n", 0b0101 << 1) # => 0b1010
+p -1 << 1 # => -2
+#@end
 
 --- >>(bits) -> Integer
 シフト演算子。bits だけビットを右にシフトします。
@@ -665,22 +947,21 @@ bitsが実数の場合、小数点以下を切り捨てた値でシフトしま�
 
 @param bits シフトさせるビット数
 
-例:
-
-    printf("%#b\n", 0b0101 >> 1) # => 0b10
-    p -1 >> 1 # => -1
+#@samplecode
+printf("%#b\n", 0b0101 >> 1) # => 0b10
+p -1 >> 1                    # => -1
+#@end
 
 --- size -> Integer
 
 整数の実装上のサイズをバイト数で返します。
 
-例:
+#@samplecode
+p 1.size              # => 8
+p 0x1_0000_0000.size  # => 8
+#@end
 
-    p 1.size
-    p 0x1_0000_0000.size
-    # => 4
-         8
-
+@see [[m:Integer#bit_length]]
 --- bit_length -> Integer
 
 self を表すのに必要なビット数を返します。
@@ -689,22 +970,72 @@ self を表すのに必要なビット数を返します。
 す。2**n の場合は n+1 になります。self にそのようなビットがない(0 や
 -1 である)場合は 0 を返します。
 
-例: ceil(log2(int < 0 ? -int : int+1)) と同じ結果
+#@samplecode 例: ceil(log2(int < 0 ? -int : int+1)) と同じ結果
+(-2**12-1).bit_length     # => 13
+(-2**12).bit_length       # => 12
+(-2**12+1).bit_length     # => 12
+-0x101.bit_length         # => 9
+-0x100.bit_length         # => 8
+-0xff.bit_length          # => 8
+-2.bit_length             # => 1
+-1.bit_length             # => 0
+0.bit_length              # => 0
+1.bit_length              # => 1
+0xff.bit_length           # => 8
+0x100.bit_length          # => 9
+(2**12-1).bit_length      # => 12
+(2**12).bit_length        # => 13
+(2**12+1).bit_length      # => 13
+#@end
 
-   (-2**12-1).bit_length     # => 13
-   (-2**12).bit_length       # => 12
-   (-2**12+1).bit_length     # => 12
-   -0x101.bit_length         # => 9
-   -0x100.bit_length         # => 8
-   -0xff.bit_length          # => 8
-   -2.bit_length             # => 1
-   -1.bit_length             # => 0
-   0.bit_length              # => 0
-   1.bit_length              # => 1
-   0xff.bit_length           # => 8
-   0x100.bit_length          # => 9
-   (2**12-1).bit_length      # => 12
-   (2**12).bit_length        # => 13
-   (2**12+1).bit_length      # => 13
+@see [[m:Integer#size]]
+#@since 2.5.0
+--- allbits?(mask) -> bool
+self & mask の全てのビットが 1 なら true を返します。
 
+self & mask == mask と等価です。
+
+@param mask ビットマスクを整数で指定します。
+
+#@samplecode
+42.allbits?(42)                   # => true
+0b1010_1010.allbits?(0b1000_0010) # => true
+0b1010_1010.allbits?(0b1000_0001) # => false
+0b1000_0010.allbits?(0b1010_1010) # => false
+#@end
+
+@see [[m:Integer#anybits?]]
+@see [[m:Integer#nobits?]]
+--- anybits?(mask) -> bool
+self & mask のいずれかのビットが 1 なら true を返します。
+
+self & mask != 0 と等価です。
+
+@param mask ビットマスクを整数で指定します。
+
+#@samplecode
+42.anybits?(42)                   # => true
+0b1010_1010.anybits?(0b1000_0010) # => true
+0b1010_1010.anybits?(0b1000_0001) # => true
+0b1000_0010.anybits?(0b0010_1100) # => false
+#@end
+
+@see [[m:Integer#allbits?]]
+@see [[m:Integer#nobits?]]
+--- nobits?(mask) -> bool
+self & mask のすべてのビットが 0 なら true を返します。
+
+self & mask == 0 と等価です。
+
+@param mask ビットマスクを整数で指定します。
+
+#@samplecode
+42.nobits?(42)                   # => false
+0b1010_1010.nobits?(0b1000_0010) # => false
+0b1010_1010.nobits?(0b1000_0001) # => false
+0b0100_0101.nobits?(0b1010_1010) # => true
+#@end
+
+@see [[m:Integer#allbits?]]
+@see [[m:Integer#anybits?]]
 #@end

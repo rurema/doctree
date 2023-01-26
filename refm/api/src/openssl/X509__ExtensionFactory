@@ -94,58 +94,49 @@ ExtensionFactory オブジェクトを生成します。
 @param value 拡張領域の値を表す文字列
 @param critical 重要度(真偽値)
 
-#@since 1.8.1
 --- issuer_certificate -> OpenSSL::X509::Certificate | nil
 自身に設定されている発行者(issuer)の証明書オブジェクトを返します。
 
 証明書が設定されていない場合は nil を返します。
 
-#@end
 
 --- issuer_certificate=(cert)
 自身に発行者(issuer)の証明書オブジェクトを設定します。
 
 @param cert 設定する証明書([[c:OpenSSL::X509::Certificate]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
-#@since 1.8.1
 --- subject_certificate -> OpenSSL::X509::Certificate | nil
 自身に設定されている所有者(subject)の証明書オブジェクトを返します。
 
 証明書が設定されていない場合は nil を返します。
 
-#@end
 --- subject_certificate=(name)
 自身に所有者(subject)の証明書オブジェクトを設定します。
 
 @param cert 設定する証明書([[c:OpenSSL::X509::Certificate]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
-#@since 1.8.1
 --- subject_request -> OpenSSL::X509::Request | nil
 自身に設定されている証明書署名要求オブジェクトを返します。
 
 設定されていない場合は nil を返します。
 
-#@end
 --- subject_request=(req)
 自身に証明書署名要求オブジェクトを設定します。
 
 @param  req 設定する証明書署名要求([[c:OpenSSL::X509::Request]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
-#@since 1.8.1
 --- crl -> OpenSSL::X509::CRL | nil
 自身に設定された証明書失効リストオブジェクトを返します。
 
 設定されていない場合は nil を返します。
-#@end
 --- crl=(crl)
 自身に証明書失効リストオブジェクトを設定します。
 
 @param crl 設定する証明書失効リスト([[c:OpenSSL::X509::CRL]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
-#@since 1.8.1
 --- config -> OpenSSL::Config
 自身に設定されているコンフィグファイルオブジェクトを設定します。
 
@@ -157,7 +148,6 @@ ExtensionFactory オブジェクトを生成します。
   factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 
 @param config 設定ファイル([[c:OpenSSL::Config]] オブジェクト)
-#@end
 
 --- create_ext_from_array(ary) -> OpenSSL::X509::Extension
 [oid, value, critical] もしくは [oid, value] という配列から

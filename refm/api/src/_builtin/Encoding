@@ -11,10 +11,11 @@
 --- aliases    -> Hash
 エンコーディングの別名に対して元の名前を対応づけるハッシュを返します。
 
-例:
-  p Encoding.aliases
-  #=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1986"=>"US-ASCII",
-      "SJIS"=>"Shift_JIS", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
+#@samplecode 例
+p Encoding.aliases
+#=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1968"=>"US-ASCII",
+#   "SJIS"=>"Windows-31J", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
+#@end
 
 --- compatible?(obj1, obj2) -> Encoding | nil
 2つのオブジェクトのエンコーディングに関する互換性をチェックします。
@@ -25,20 +26,24 @@
 その文字列を結合できます。この場合返り値のエンコーディングは
 結合した文字列が取るであろう Encoding オブジェクトを返します。
 
-  Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
-  #=> #<Encoding:ISO-8859-1>
-  
-  Encoding.compatible?(
-    "\xa1".force_encoding("iso-8859-1"),
-    "\xa1\xa1".force_encoding("euc-jp"))
-  #=> nil
+#@samplecode 例
+Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
+#=> #<Encoding:ISO-8859-1>
+
+Encoding.compatible?(
+  "\xa1".force_encoding("iso-8859-1"),
+  "\xa1\xa1".force_encoding("euc-jp"))
+#=> nil
+#@end
 
 引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には
 互換性を判定することができます。
-  Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
-  # => nil
-  Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
-  # => #<Encoding:UTF-8>
+#@samplecode 例
+Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
+# => nil
+Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
+# => #<Encoding:UTF-8>
+#@end
 @param obj1 チェック対象のオブジェクト
 @param obj2 チェック対象のオブジェクト
 
@@ -55,70 +60,106 @@
 特殊なエンコーディング名として、ロケールエンコーディングを表す locale、default_external を表す external、default_internal を表す internal があります。
 #@end
 
-例:
- p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
+#@samplecode 例
+p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
+#@end
 
 
 --- list -> [Encoding]
 現在ロードされているエンコーディングのリストを返します。
 
-例:
-    Encoding.list
-    => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
-        #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
-        #<Encoding:ISO-2022-JP (dummy)>]
-    
-    Encoding.find("US-ASCII")
-    => #<Encoding:US-ASCII>
-    
-    Encoding.list
-    => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
-        #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
-        #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
+#@samplecode 例
+Encoding.list
+# => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
+#     #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
+#     #<Encoding:ISO-2022-JP (dummy)>]
+
+Encoding.find("US-ASCII")
+# => #<Encoding:US-ASCII>
+
+Encoding.list
+# => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
+#     #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
+#     #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
+#@end
 
 --- name_list    -> [String]
 利用可能なエンコーディングの名前を文字列の配列で返します。
 
-例:
-  p Encoding.name_list
-  #=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
-       "ISO-8859-1", "Shift_JIS", "EUC-JP",
-       "Windows-31J",
-       "BINARY", "CP932", "eucJP", ...]
+#@samplecode 例
+p Encoding.name_list
+#=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
+#    "ISO-8859-1", "Shift_JIS", "EUC-JP",
+#    "Windows-31J",
+#    "BINARY", "CP932", "eucJP", ...]
+#@end
 
 --- default_external -> Encoding
-規定の外部エンコーディングを返します。
+既定の外部エンコーディングを返します。
 
-入出力において、外部エンコーディングが指定されていない場合の規定値として利用されます。Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
+標準入出力、コマンドライン引数、open で開くファイルなどで、外部エンコーディングが指定されていない場合の既定値として利用されます。
+
+Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
+
+#@since 3.0.0
+-E オプションを指定していない場合は、WindowsではUTF-8、その他のOSではロケールに従って default_external を決定します。
+#@end
 
 default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が nil を返す場合には US-ASCII が、
 ロケールにRubyが扱えないエンコーディングが指定されている場合には ASCII-8BIT が、default_external に設定されます。
 
-@see [[man:locale(1)]], [[m:Encoding.locale_charmap]]
+@see [[d:spec/rubycmd]] [[man:locale(1)]], [[m:Encoding.locale_charmap]] [[m:Encoding.default_internal]]
 
 --- default_external=(encoding)
-規定の外部エンコーディングを設定します。
+既定の外部エンコーディングを設定します。
+
+default_external を変更する前に作成した文字列と、default_external を変更した後に作成した文字列とではエンコーディングが異なる可能性があるため、Ruby スクリプト内で Encoding.default_external を設定してはいけません。代わりに、ruby -E を使用して、正しい default_external で Ruby を起動してください。
+
+デフォルトの外部エンコーディングがどのように使われるかについては [[m:Encoding.default_external]] を参照してください。
+
+@see [[d:spec/rubycmd]] [[m:Encoding.default_external]]
 
 --- default_internal -> Encoding | nil
-規定の内部エンコーディングを返します。
+既定の内部エンコーディングを返します。デフォルトでは nil です。
+
+標準入出力、コマンドライン引数、open で開くファイルなどで、内部エンコーディングが指定されていない場合の既定値として利用されます。
+
+[[m:String#encode]] と [[m:String#encode!]] は、引数に Encoding が与えられていない場合、 default_internal を使用します。
+
+文字列リテラルを作成した場合、エンコーディングには default_internal ではなく __ENCODING__ 特殊変数で参照できるスクリプトエンコーディングが使用されます。
+
+default_internal は、ソースファイルの [[m:IO.internal_encoding]] または -E オプションで初期化されます。
+
+@see [[d:spec/rubycmd]] [[m:Encoding.default_external]]
 
 --- default_internal=(encoding)
-規定の内部エンコーディングを設定します。
+
+既定の内部エンコーディングを設定します。
+
+default_internal を変更する前に作成した文字列と、default_internal を変更した後に作成した文字列とではエンコーディングが異なる可能性があるため、Ruby スクリプト内で Encoding.default_internal を設定してはいけません。代わりに、ruby -E を使用して、正しい default_internal で Ruby を起動してください。
+
+デフォルトの内部エンコーディングがどのように使われるかについては [[m:Encoding.default_internal]] を参照してください。
+
+@see [[d:spec/rubycmd]] [[m:Encoding.default_internal]]
 
 --- locale_charmap -> String | nil
 ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
 
-  Debian GNU/Linux
-    LANG=C
-      Encoding.locale_charmap  => "ANSI_X3.4-1968" 
-  LANG=ja_JP.EUC-JP
-      Encoding.locale_charmap  => "EUC-JP"
+#@samplecode Debian GNU/Linux + LANG=C
+Encoding.locale_charmap #=> "ANSI_X3.4-1968"
+#@end
 
-  SunOS 5
-    LANG=C
-      Encoding.locale_charmap  => "646"
-    LANG=ja
-      Encoding.locale_charmap  => "eucJP"
+#@samplecode LANG=ja_JP.EUC-JP
+Encoding.locale_charmap #=> "EUC-JP"
+#@end
+
+#@samplecode SunOS 5 + LANG=C
+Encoding.locale_charmap #=> "646"
+#@end
+
+#@samplecode SunOS 5 + LANG=ja
+Encoding.locale_charmap #=> "eucJP"
+#@end
 
 @see [[man:charmap(5)]]
 
@@ -127,20 +168,25 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 --- inspect -> String
 プログラマにわかりやすい表現の文字列を返します。
 
-例:
-    Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
-    Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+#@samplecode 例
+Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
+Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+#@end
 
 --- name -> String
 --- to_s -> String
 エンコーディングの名前を返します。
 
-    Encoding::UTF_8.name       => "UTF-8"
+#@samplecode 例
+Encoding::UTF_8.name       #=> "UTF-8"
+#@end
 
 --- names -> String
 エンコーディングの名前とエイリアス名の配列を返します。
 
-    Encoding::UTF_8.names      => ["UTF-8", "CP65001"]
+#@samplecode 例
+Encoding::UTF_8.names      #=> ["UTF-8", "CP65001"]
+#@end
 
 --- dummy? -> bool
 自身がダミーエンコーディングである場合に true を返します。
@@ -152,9 +198,10 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が
 Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも
 用います。
 
-例:
-  Encoding::ISO_2022_JP.dummy?       #=> true
-  Encoding::UTF_8.dummy?             #=> false
+#@samplecode 例
+Encoding::ISO_2022_JP.dummy?       #=> true
+Encoding::UTF_8.dummy?             #=> false
+#@end
 
 #@since 1.9.2
 --- ascii_compatible? -> bool
@@ -163,15 +210,24 @@ Ruby はサポートしていないが拡張ライブラリがサポートして
 そうでない場合は偽を返します。
 
 
-例:
-  Encoding::UTF_8.ascii_compatible?     #=> true
-  Encoding::UTF_16BE.ascii_compatible?  #=> false
+#@samplecode 例
+Encoding::UTF_8.ascii_compatible?     #=> true
+Encoding::UTF_16BE.ascii_compatible?  #=> false
+#@end
 
 --- replicate(name) -> Encoding
 
 レシーバのエンコーディングを複製(replicate)します。
 複製されたエンコーディングは元のエンコーディングと同じバイト構造を持たなければなりません。
 name という名前のエンコーディングが既に存在する場合は [[c:ArgumentError]] を発生します。
+
+#@samplecode
+encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
+encoding.name                                                #=> "REPLICATED_UTF-8"
+"\u3042".force_encoding(Encoding::UTF_8).valid_encoding?     #=> true
+"\u3042".force_encoding(encoding).valid_encoding?            #=> true
+"\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
+#@end
 
 #@end
 == Constants
@@ -181,6 +237,16 @@ name という名前のエンコーディングが既に存在する場合は [[
 ASCII-8BIT、ASCII互換オクテット列用のエンコーディングです。
 
 もっぱら文字エンコーディングを持たないデータ、文字を符号化したのではない単なるバイトの列を表現するために用いますが、このエンコーディングは ASCII 互換であることがポイントです。
+
+#@since 2.7.0
+--- CESU_8 -> Encoding
+
+CESU-8 エンコーディングです。
+
+UTF-8 の亜種です。Unicode コンソーシアムは使用を推奨していません。
+
+@see [[url:https://bugs.ruby-lang.org/issues/15931]], [[url:https://www.unicode.org/reports/tr26/tr26-4.html]]
+#@end
 
 --- EUC_JP -> Encoding
 --- EucJP -> Encoding
@@ -254,7 +320,7 @@ UTF-8。Unicode や ISO 10646 を ASCII 互換な形で符号化するための�
 
 BOM を含みません。
 
-@see [[url:http://tools.ietf.org/html/rfc3629]]
+@see [[url:https://tools.ietf.org/html/rfc3629]]
 
 
 --- UTF8_MAC -> Encoding
@@ -283,7 +349,7 @@ Big5 エンコーディングです。
 
 台湾で使われている繁体字中国語のエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Big5]]
+@see [[url:https://en.wikipedia.org/wiki/Big5]]
 
 --- CP950 -> Encoding
 
@@ -432,9 +498,20 @@ IBM037 エンコーディング。
 
 CP437 エンコーディング。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_437]],
+@see [[url:https://en.wikipedia.org/wiki/Code_page_437]],
      [[m:Encoding::CP869]]
 
+#@since 3.0.0
+--- IBM720 -> Encoding
+--- CP720 -> Encoding
+
+CP720 エンコーディング。
+
+アラビア語を取り扱う 8bit single-byteエンコーディングです。
+
+@see [[url:https://en.wikipedia.org/wiki/Code_page_720]]
+
+#@end
 
 --- IBM737 -> Encoding
 --- CP737 -> Encoding
@@ -443,7 +520,7 @@ CP437 エンコーディング。
 
 ギリシャ語を取り扱う 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_737]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_737]]
 
 
 --- IBM775 -> Encoding
@@ -452,14 +529,14 @@ CP775 エンコーディング。
 
 バルト語派の言語を扱うための 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_775]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_775]]
 
 --- CP850 -> Encoding
 --- IBM850 -> Encoding
 
 CP850 エンコーディング。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_850]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_850]]
 
 --- IBM852 -> Encoding
 --- CP852 -> Encoding
@@ -469,7 +546,7 @@ CP852 エンコーディング。
 ラテンアルファベットを用いる中欧の言語のための
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_852]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_852]]
 
 --- IBM855 -> Encoding
 --- CP855 -> Encoding
@@ -479,7 +556,7 @@ CP855 エンコーディング。
 キリル文字を用いる言語のための
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_855]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_855]]
 
 --- IBM857 -> Encoding
 --- CP857 -> Encoding
@@ -489,7 +566,7 @@ CP857 エンコーディング。
 トルコ語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_857]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_857]]
 
 --- IBM860 -> Encoding
 --- CP860 -> Encoding
@@ -499,7 +576,7 @@ CP860 エンコーディング。
 ポルトガル語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_860]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_860]]
 
 
 --- IBM861 -> Encoding
@@ -509,7 +586,7 @@ CP861 エンコーディング。
 アイスランド語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_861]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_861]]
 
 
 --- IBM862 -> Encoding
@@ -519,7 +596,7 @@ CP862 エンコーディング。
 ヘブライ語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_861]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_862]]
 
 --- IBM863 -> Encoding
 --- CP863 -> Encoding
@@ -528,7 +605,7 @@ CP863 エンコーディング。
 フランス語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_863]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_863]]
 
 --- IBM864 -> Encoding
 --- CP864 -> Encoding
@@ -537,7 +614,7 @@ CP864 エンコーディング。
 アラビア語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_864]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_864]]
 
 
 --- IBM865 -> Encoding
@@ -547,7 +624,7 @@ CP865 エンコーディング。
 北欧の諸言語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_865]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_865]]
 
 --- IBM866 -> Encoding
 --- CP866 -> Encoding
@@ -556,7 +633,7 @@ CP866 エンコーディング。
 キリル文字を使う諸言語に用いられる、
 8bit single-byte エンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_866]]
+@see [[url:https://en.wikipedia.org/wiki/Code_page_866]]
 
 --- IBM869 -> Encoding
 --- CP869 -> Encoding
@@ -565,7 +642,7 @@ CP869 エンコーディング。
 
 ギリシャ語を取り扱う 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Code_page_869]],
+@see [[url:https://en.wikipedia.org/wiki/Code_page_869]],
      [[m:Encoding::CP737]]
 
 --- CP949 -> Encoding
@@ -576,7 +653,7 @@ EUC-KR に近い、韓国語を取り扱う multi-byte エンコーディング�
 
 @see [[m:Encoding::EUC_KR]],
      [[url:http://www.microsoft.com/globaldev/reference/dbcs/949.mspx]],
-     [[url:http://en.wikipedia.org/wiki/EUC-KR#EUC-KR]]
+     [[url:https://en.wikipedia.org/wiki/EUC-KR#EUC-KR]]
 
 --- ISO_2022_JP_2 -> Encoding
 --- ISO2022_JP2 -> Encoding
@@ -742,7 +819,7 @@ KOI8-R エンコーディング。
 
 ロシア語のキリル文字で使われる8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/KOI8-R]]
+@see [[url:https://en.wikipedia.org/wiki/KOI8-R]]
 
 
 
@@ -752,7 +829,7 @@ KOI8-U エンコーディング。
 
 ウクライナ語のキリル文字で使われる8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/KOI8-U]]
+@see [[url:https://en.wikipedia.org/wiki/KOI8-U]]
 
 
 
@@ -765,8 +842,8 @@ MacJapanese エンコーディング。
 
 Mac OS の 9.x までで用いられていた Shift_JIS 亜種です。
 
-@see [[url:http://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
-     [[url:http://ja.wikipedia.org/wiki/MacJapanese]]
+@see [[url:https://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
+     [[url:https://ja.wikipedia.org/wiki/MacJapanese]]
 
 
 #@since 1.9.2
@@ -789,7 +866,7 @@ SJIS-KDDI エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 
 
@@ -820,7 +897,7 @@ UTF8-KDDI エンコーディングです。
 UTF8 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 --- UTF8_SOFTBANK -> Encoding
 --- UTF8_SoftBank -> Encoding
@@ -848,7 +925,7 @@ ISO-2022-JP の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 
 
@@ -860,7 +937,7 @@ stateless-ISO-2022-JP の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
 
-@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+@see [[url:https://www.au.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 
 #@end
@@ -871,7 +948,7 @@ TIS-620 エンコーディング。
 タイ語を扱うためのエンコーディングで、 ISO8859-11 とほぼ
 同一のエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533]]
+@see [[url:https://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533]]
 
 
 
@@ -884,7 +961,7 @@ Windows-1250 エンコーディング。
 ISO8859-2 の亜種です。
 
 @see [[url:http://www.microsoft.com/globaldev/reference/sbcs/1250.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1250]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1250]]
 
 --- Windows_1251 -> Encoding
 --- CP1251 -> Encoding
@@ -896,7 +973,7 @@ Windows-1251 エンコーディング。
 
 @see [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1251.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1251]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1251]]
 
 --- Windows_1252 -> Encoding
 --- CP1252 -> Encoding
@@ -909,7 +986,7 @@ ISO8859-1 の亜種です。
 @see [[m:Encoding::ISO_8859_1]]
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1252.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1252]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1252]]
 
 
 --- Windows_1253 -> Encoding
@@ -923,7 +1000,7 @@ ISO8859-7 の亜種です。
 @see [[m:Encoding::ISO_8859_7]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1253.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1253]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1253]]
 
 --- Windows_1254 -> Encoding
 --- CP1254 -> Encoding
@@ -936,7 +1013,7 @@ ISO8859-9 の亜種です。
 @see [[m:Encoding::ISO_8859_9]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1254.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1254]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1254]]
 
 --- Windows_1255 -> Encoding
 --- CP1255 -> Encoding
@@ -949,7 +1026,7 @@ ISO8859-8 の亜種です。
 @see [[m:Encoding::ISO_8859_8]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1255.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1255]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1255]]
 
 
 --- Windows_1256 -> Encoding
@@ -962,7 +1039,7 @@ Windowsで用いられる、アラビア文字を扱う 8bit single-byte エン�
 @see [[m:Encoding::ISO_8859_6]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1256.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1256]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1256]]
 
 
 --- Windows_1257 -> Encoding
@@ -975,7 +1052,7 @@ ISO8859-13 の亜種です。
 @see [[m:Encoding::ISO8859_13]],
      [[url:http://www.iana.org/assignments/character-sets]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/1257.mspx]],
-     [[url:http://en.wikipedia.org/wiki/Windows-1257]]
+     [[url:https://en.wikipedia.org/wiki/Windows-1257]]
 
 
 --- Windows_1258 -> Encoding
@@ -986,7 +1063,7 @@ WINDOWS-1258 エンコーディング。
 
 ベトナム語を扱う 8bit single-byteエンコーディングです。
 
-@see [[url:http://en.wikipedia.org/wiki/Windows-1258]]
+@see [[url:https://en.wikipedia.org/wiki/Windows-1258]]
 
 --- Windows_31J -> Encoding
 --- CP932 -> Encoding
@@ -1036,7 +1113,7 @@ Mac OSで使われる
 8bit single-byteエンコーディングで、
 中欧および南東欧の言語を取り扱うものです。
 
-@see [[url:http://en.wikipedia.org/wiki/Macintosh_Central_European_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Macintosh_Central_European_encoding]]
 
 --- MacCroatian -> Encoding
 --- MACCROATIAN -> Encoding
@@ -1046,7 +1123,7 @@ Mac OS で使われる
 8bit single-byteエンコーディングで、
 クロアチア語、スベロニア語を取り扱うものです。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
 
 --- MacCyrillic -> Encoding
 --- MACCYRILLIC -> Encoding
@@ -1056,7 +1133,7 @@ MacCyrillic エンコーディング。
 Mac OS で使われる 8bit single-byte エンコーディングで、
 キリル文字を取り扱うものです。
 
-@see [[url:http://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding]]
 
 --- MacGreek -> Encoding
 --- MACGREEK -> Encoding
@@ -1066,7 +1143,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 ギリシャ語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
 
 --- MacIceland -> Encoding
 --- MACICELAND -> Encoding
@@ -1077,7 +1154,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 アイスランド語のために使われます
 
-@see [[url:http://en.wikipedia.org/wiki/Mac_Icelandic_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Mac_Icelandic_encoding]]
 
 --- MacRoman -> Encoding
 --- MACROMAN -> Encoding
@@ -1089,7 +1166,7 @@ Mac OSで使われる
 
 IANA character-sets で "macintosh" で表現されるものです。
 
-@see [[url:http://en.wikipedia.org/wiki/Mac_OS_Roman]]
+@see [[url:https://en.wikipedia.org/wiki/Mac_OS_Roman]]
 
 --- MacRomania -> Encoding
 --- MACROMANIA -> Encoding
@@ -1099,7 +1176,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 ルーマニア語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
 
 --- MacThai -> Encoding
 --- MACTHAI -> Encoding
@@ -1117,7 +1194,7 @@ Mac OSで使われる
 8bit single-byte エンコーディングで、
 トルコ語のために使われます。
 
-@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
+@see [[url:https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
 
 --- MacUkraine -> Encoding
 --- MACUKRAINE -> Encoding
@@ -1126,7 +1203,7 @@ MacUkraine エンコーディング。
 Mac OS で使われる、ウクライナ語キリル文字を取り扱うエンコーディング。
 MacCyrillic の亜種です。
 
-@see [[url:http://en.wikipedia.org/wiki/Macintosh_Ukrainian_encoding]]
+@see [[url:https://en.wikipedia.org/wiki/Macintosh_Ukrainian_encoding]]
 
 --- EMACS_MULE -> Encoding
 --- Emacs_Mule -> Encoding
@@ -1146,32 +1223,40 @@ Emacsの多言語化(Mule)で使われているステートレスのエンコー
 
 エンコーディングの異なる文字列を連結しようとした場合などに発生します。
 
-  "あ".encode("EUC-JP") + "あ".encode("UTF-8")
-  #=> Encoding::CompatibilityError: incompatible character encodings: EUC-JP and UTF-8
+#@samplecode 例
+"あ".encode("EUC-JP") + "あ".encode("UTF-8")
+#=> Encoding::CompatibilityError: incompatible character encodings: EUC-JP and UTF-8
+#@end
 
 = class Encoding::UndefinedConversionError < EncodingError
 エンコーディング変換後の文字が存在しない場合に発生する例外。
 
 UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに発生します。
-  "\u2603".encode(Encoding::EUC_JP)
-  #=> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
+
+#@samplecode 例
+"\u2603".encode(Encoding::EUC_JP)
+#=> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
+#@end
 
 
 変換が多段階でなされ、その途中で例外が生じた場合は、
 例外オブジェクトが保持するエラー情報はその中間のものになります。
-  ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP")
-  # ISO-8859-1 -> UTF-8 -> EUC-JP
-  begin
-    ec.convert("\xa0")
-    # NO-BREAK SPACE, which is available in UTF-8 but not in EUC-JP.
-  rescue Encoding::UndefinedConversionError
-    p $!.source_encoding              #=> #<Encoding:UTF-8>
-    p $!.destination_encoding         #=> #<Encoding:EUC-JP>
-    p $!.source_encoding_name         #=> "UTF-8"
-    p $!.destination_encoding_name    #=> "EUC-JP"
-    puts $!.error_char.dump   #=> "\u{a0}"
-    p $!.error_char.encoding  #=> #<Encoding:UTF-8>
-  end
+
+#@samplecode 例
+ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP")
+# ISO-8859-1 -> UTF-8 -> EUC-JP
+begin
+  ec.convert("\xa0")
+  # NO-BREAK SPACE, which is available in UTF-8 but not in EUC-JP.
+rescue Encoding::UndefinedConversionError
+  p $!.source_encoding              #=> #<Encoding:UTF-8>
+  p $!.destination_encoding         #=> #<Encoding:EUC-JP>
+  p $!.source_encoding_name         #=> "UTF-8"
+  p $!.destination_encoding_name    #=> "EUC-JP"
+  puts $!.error_char.dump   #=> "\u{a0}"
+  p $!.error_char.encoding  #=> #<Encoding:UTF-8>
+end
+#@end
 
 
 == Instance Methods
@@ -1189,12 +1274,14 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 --- error_char -> String
 エラーを発生させた1文字を文字列で返します。
 
-  ec = Encoding::Converter.new("UTF-8", "EUC-JP")
-  begin
-    ec.convert("\u{a0}")
-  rescue Encoding::UndefinedConversionError
-    puts $!.error_char.dump   #=> "\u{a0}"
-  end
+#@samplecode 例
+ec = Encoding::Converter.new("UTF-8", "EUC-JP")
+begin
+  ec.convert("\u{a0}")
+rescue Encoding::UndefinedConversionError
+  puts $!.error_char.dump   #=> "\u{a0}"
+end
+#@end
 
 --- source_encoding -> Encoding
 エラーを発生させた変換の変換元のエンコーディングを [[c:Encoding]]
@@ -1216,10 +1303,12 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 
 通常エンコーディング変換時に発生します。
 
-  "\x82\xa0".force_encoding("cp932").encode("UTF-8")
-  #=> "あ"
-  "\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
-  #=> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
+#@samplecode 例
+"\x82\xa0".force_encoding("cp932").encode("UTF-8")
+#=> "あ"
+"\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
+#=> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
+#@end
 
 == Instance Methods
 --- destination_encoding -> Encoding
@@ -1250,15 +1339,17 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 エラー発生時に捨てられたバイト列を返します。
 
 
-  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
-  begin
-    ec.convert("abc\xA1\xFFdef")
-  rescue Encoding::InvalidByteSequenceError
-    p $!
-    #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
-    puts $!.error_bytes.dump          #=> "\xA1"
-    puts $!.readagain_bytes.dump      #=> "\xFF"
-  end
+#@samplecode 例
+ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+begin
+  ec.convert("abc\xA1\xFFdef")
+rescue Encoding::InvalidByteSequenceError
+  p $!
+  #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
+  puts $!.error_bytes.dump          #=> "\xA1"
+  puts $!.readagain_bytes.dump      #=> "\xFF"
+end
+#@end
 
 @see [[m:Encoding::InvalidByteSequenceError#readagain_bytes]]
 
@@ -1274,29 +1365,33 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 真を返します。これは後続の入力を追加することでエラーが
 解消する可能性があることを意味します。
 
-  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+#@samplecode 例
+ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
 
-  begin
-    ec.convert("abc\xA1z")
-  rescue Encoding::InvalidByteSequenceError
-    p $!
-    #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "z" on EUC-JP>
-    p $!.incomplete_input?    #=> false
-  end
+begin
+  ec.convert("abc\xA1z")
+rescue Encoding::InvalidByteSequenceError
+  p $!
+  #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "z" on EUC-JP>
+  p $!.incomplete_input?    #=> false
+end
 
-  begin
-    ec.convert("abc\xA1")
-    ec.finish
-  rescue Encoding::InvalidByteSequenceError
-    p $! #=> #<Encoding::InvalidByteSequenceError: incomplete "\xA1" on EUC-JP>
-    p $!.incomplete_input?    #=> true
-  end
+begin
+  ec.convert("abc\xA1")
+  ec.finish
+rescue Encoding::InvalidByteSequenceError
+  p $! #=> #<Encoding::InvalidByteSequenceError: incomplete "\xA1" on EUC-JP>
+  p $!.incomplete_input?    #=> true
+end
+#@end
 
 = class Encoding::ConverterNotFoundError < EncodingError
 指定した名前のエンコーディング変換をする変換器が
 存在しない場合に発生する例外。
 
-  "あ".encode("Foo")
-  #=> Encoding::ConverterNotFoundError: code converter not found (UTF-8 to Foo)
+#@samplecode 例
+"あ".encode("Foo")
+#=> Encoding::ConverterNotFoundError: code converter not found (UTF-8 to Foo)
+#@end
 
 #@end

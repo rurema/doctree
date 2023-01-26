@@ -1,4 +1,3 @@
-#@since 1.8.2
 
 require bigdecimal/jacobian
 require bigdecimal/ludcmp
@@ -12,17 +11,10 @@ require bigdecimal/ludcmp
 
   require "bigdecimal"
   require "bigdecimal/newton"
-#@until 1.9.2
-  include Newton
-#@end
 
   ...
 
-#@since 1.9.2
   n = Newton.nlsolve(f, x)
-#@else
-  n = nlsolve(f, x)
-#@end
 
 引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
 る必要があります。
@@ -62,7 +54,7 @@ require bigdecimal/ludcmp
 
 Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
- * [[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/ext/bigdecimal/sample/nlsolve.rb?view=markup]]
+ * [[url:https://github.com/ruby/ruby/blob/master/ext/bigdecimal/sample/nlsolve.rb]]
 
 = module Newton
 
@@ -72,11 +64,7 @@ include Jacobian
 ニュートン法を用いて非線形方程式 f の解 x を求める機能を提供するモジュー
 ルです。
 
-#@since 1.9.2
 == Module Functions
-#@else
-== Instance Methods
-#@end
 
 --- norm(fv, zero = 0.0) -> Float
 
@@ -100,5 +88,3 @@ include Jacobian
 @raise RuntimeError 解が収束しない場合に発生します。
 
 #@# TODO: #7321 が解決した後で引数 x について修正する。
-
-#@end

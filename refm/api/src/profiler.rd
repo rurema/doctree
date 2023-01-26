@@ -1,3 +1,4 @@
+#@until 2.7.0
 category Development
 
 プロファイラの実装です。
@@ -59,3 +60,4 @@ file には printf メソッドが定義されていなければいけません�
 --- PROFILE_PROC -> Proc
 
 内部で使用します。
+#@end

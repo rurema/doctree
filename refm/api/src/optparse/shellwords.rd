@@ -5,12 +5,14 @@ require optparse
 オプションの引数は [[m:Shellwords.#shellwords]] によって配列に変換されてから、
 [[m:OptionParser#on]] のブロックに渡されます。
 
- require 'optparse/shellwords'
- opts = OptionParser.new
- 
- opts.on("-s VAL", Shellwords){|a|
-   p a #=> ["hoge", "foo", "bar"]
- }
- opts.parse!
- 
- # ruby command -s hoge\ foo\ bar
+#@samplecode
+require 'optparse/shellwords'
+opts = OptionParser.new
+
+opts.on("-s VAL", Shellwords){|a|
+  p a #=> ["hoge", "foo", "bar"]
+}
+opts.parse!
+
+# ruby command -s hoge\ foo\ bar
+#@end

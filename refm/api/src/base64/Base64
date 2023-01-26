@@ -1,4 +1,3 @@
-#@since 1.8.2
 #@since 1.9.1
 
 = module Base64
@@ -72,14 +71,27 @@ Base64 エンコード / デコードするためのメソッドを定義した�
 @raise ArgumentError 与えられた引数が Base64 エンコードされたデータとして正しい形式ではない場合に発生します。
        例えば、アルファベットでない文字列や CR, LF などが含まれている場合にこの例外は発生します。
 
---- urlsafe_encode64(bin) -> String
+--- urlsafe_encode64(bin, padding: true) -> String
 与えられたデータを Base64 エンコードした文字列を返します。
 
 このメソッドは [[RFC:4648]] の "Base 64 Encoding with URL and Filename Safe Alphabet" に対応しています。
 "+" を "-" に "/" を "_" に置き換えます。
 
-@param bin Base64 エンコードするデータを指定します。
+デフォルトでは戻り値は = によるパディングを含むことがあります。
+パディングを含めたくない場合は、padding オプションに false を指定してください。
 
+@param bin Base64 エンコードするデータを指定します。
+@param padding false を指定した場合、 = によるパディングが行われなくなります。
+
+#@samplecode 例
+require 'base64'
+
+p Base64.urlsafe_encode64('hoge')
+# => "aG9nZQ=="
+
+p Base64.urlsafe_encode64('hoge', padding: false)
+# => "aG9nZQ"
+#@end
 
 #@else
 = module Base64
@@ -205,5 +217,4 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 表示までしてしまうのはサンプルだからです。
 
-#@end
 #@end

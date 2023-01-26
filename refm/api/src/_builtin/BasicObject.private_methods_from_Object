@@ -7,17 +7,19 @@
 
 @param name 追加されたメソッド名が [[c:Symbol]] で渡されます。
 
-    class Foo
-      def singleton_method_added(name)
-        puts "singleton method \"#{name}\" was added"
-      end
-    end
+#@samplecode 例
+class Foo
+  def singleton_method_added(name)
+    puts "singleton method \"#{name}\" was added"
+  end
+end
 
-    obj = Foo.new
-    def obj.foo
-    end
+obj = Foo.new
+def obj.foo
+end
 
-    #=> singleton method "foo" was added
+#=> singleton method "foo" was added
+#@end
 
 #@since 1.9.1
 @see [[m:Module#method_added]],[[m:BasicObject#singleton_method_removed]],[[m:BasicObject#singleton_method_undefined]]
@@ -35,21 +37,23 @@
 
 @param name 削除されたメソッド名が [[c:Symbol]] で渡されます。
 
-    class Foo
-      def singleton_method_removed(name)
-        puts "singleton method \"#{name}\" was removed"
-      end
-    end
+#@samplecode 例
+class Foo
+  def singleton_method_removed(name)
+    puts "singleton method \"#{name}\" was removed"
+  end
+end
 
-    obj = Foo.new
-    def obj.foo
-    end
+obj = Foo.new
+def obj.foo
+end
 
-    class << obj
-      remove_method :foo
-    end
+class << obj
+  remove_method :foo
+end
 
-    #=> singleton method "foo" was removed
+#=> singleton method "foo" was removed
+#@end
 
 #@since 1.9.1
 @see [[m:Module#method_removed]],[[m:BasicObject#singleton_method_added]],[[m:BasicObject#singleton_method_undefined]]
@@ -67,25 +71,27 @@ undef により未定義にされた時にインタプリタから呼び出さ�
 
 @param name 未定義にされたメソッド名が [[c:Symbol]] で渡されます。
 
-    class Foo
-      def singleton_method_undefined(name)
-        puts "singleton method \"#{name}\" was undefined"
-      end
-    end
+#@samplecode 例
+class Foo
+  def singleton_method_undefined(name)
+    puts "singleton method \"#{name}\" was undefined"
+  end
+end
 
-    obj = Foo.new
-    def obj.foo
-    end
-    def obj.bar
-    end
+obj = Foo.new
+def obj.foo
+end
+def obj.bar
+end
 
-    class << obj
-      undef_method :foo
-    end
-    obj.instance_eval {undef bar}
+class << obj
+  undef_method :foo
+end
+obj.instance_eval {undef bar}
 
-    #=> singleton method "foo" was undefined
-    #   singleton method "bar" was undefined
+#=> singleton method "foo" was undefined
+#   singleton method "bar" was undefined
+#@end
 
 #@since 1.9.1
 @see [[m:Module#method_undefined]],[[m:BasicObject#singleton_method_added]],[[m:BasicObject#singleton_method_removed]] , [[ref:d:spec/def#undef]]

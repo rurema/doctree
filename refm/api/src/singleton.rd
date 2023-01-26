@@ -19,14 +19,16 @@ new は private メソッドに移され、外部から呼び出そうとする�
 === サンプルコード
 
   require 'singleton'
+
   class SomeSingletonClass
     include Singleton
    #....
   end
+
   a = SomeSingletonClass.instance
-  b = SomeSingletonClass.instance  # a and b are same object
-  p [a,b]
-  a = SomeSingletonClass.new               # error (`new' is private)
+  b = SomeSingletonClass.instance # a and b are same object
+  p [a,b] # => [#<SomeSingletonClass:0x0000562e6e18ddd0>, #<SomeSingletonClass:0x0000562e6e18ddd0>]
+  a = SomeSingletonClass.new  # => NoMethodError (private method `new' called for SomeSingletonClass:Class)
 
 == Singleton Methods
 
@@ -37,3 +39,13 @@ new は private メソッドに移され、外部から呼び出そうとする�
 
 Singleton を include したクラスで定義されますので、
 正確には Singleton モジュールのメソッドではありません。
+
+== Instance Methods
+
+--- clone
+
+@raise TypeError このメソッドを呼び出した場合に発生します。
+
+--- dup
+
+@raise TypeError このメソッドを呼び出した場合に発生します。

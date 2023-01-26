@@ -1,21 +1,52 @@
 = 正規表現
 
+  * [[ref:metachar]]
+  * [[ref:expansion]]
+  * [[ref:char]]
+  * [[ref:anychar]]
+  * [[ref:string]]
+  * [[ref:str]]
+  * [[ref:quantifier]]
+  * [[ref:capture]]
+  * [[ref:grouping]]
+  * [[ref:subexp]]
+  * [[ref:selector]]
+  * [[ref:anchor]]
+  * [[ref:cond]]
+  * [[ref:option]]
+  * [[ref:encoding]]
+  * [[ref:comment]]
+  * [[ref:free_format_mode]]
+  * [[ref:absenceop]]
+  * [[ref:list]]
+  * [[ref:specialvar]]
+  * [[ref:references]]
+
+
 正規表現(regular expression)は文字列のパターンを記述するための言語です。
 また、この言語で記述されたパターンも正規表現と呼びます。
 
 正規表現を用いると、文字列が指定したパターンを含んでいるかどうかを判定し、
 また含んでいるならばそれが文字列中のどの場所であるかを知ることができます。
-  /pat/
-  %r{pat}
+
+#@samplecode
+/pat/
+%r{pat}
+#@end
+
 などの正規表現リテラルや [[m:Regexp.new]] などで正規表現
 オブジェクトを得ることができます。
 
 
-=== メタ文字列とリテラル、メタ文字とエスケープ
+===[a:metachar] メタ文字列とリテラル、メタ文字とエスケープ
 正規表現の文法には、正規表現内で特別な働きをする文字列と、それ以外の
 その文字列そのものにマッチするような文字列があります。
 前者をメタ文字列(meta string)、後者をリテラル(文字列)(literal string)と呼びます。
-  /京都|大阪|神戸/
+
+#@samplecode
+/京都|大阪|神戸/
+#@end
+
 という正規表現においては、「京都」「大阪」「神戸」がリテラルで、
 2つの「|」がメタ文字列です。
 
@@ -28,27 +59,37 @@
 
 メタ文字以外の文字も、メタ文字に続けて置くことで特別な働きをするよう
 になる場合があります。つまりメタ文字列を構成します。例えば
-  /[a-z]/
-  /\Axyz\Z/
+
+#@samplecode
+/[a-z]/
+/\Axyz\Z/
+#@end
+
 という正規表現において "[a-z]", "\A", "\Z"はメタ文字列です。
 
-=== 式展開
+===[a:expansion] 式展開
 正規表現内では、#{式} という形式で式を評価した文字列を埋め込むことが
 できます。
-  place = "東京都"
-  /#{place}/.match("Go to 東京都") # => #<MatchData "東京都">
+
+#@samplecode
+place = "東京都"
+/#{place}/.match("Go to 東京都") # => #<MatchData "東京都">
+#@end
 
 埋め込んだ文字列にメタ文字が含まれているならば、それは
 メタ文字として認識されます。
-  number = "(\\d+)"
-  operator = "(\\+|-|\\*|/)"
-  /#{number}#{operator}#{number}/.match("43+291") 
-  # => #<MatchData "43+291" 1:"43" 2:"+" 3:"291">
+
+#@samplecode
+number = "(\\d+)"
+operator = "(\\+|-|\\*|/)"
+/#{number}#{operator}#{number}/.match("43+291") 
+# => #<MatchData "43+291" 1:"43" 2:"+" 3:"291">
+#@end
 
 埋め込む文字列をリテラルとして認識させたい場合は [[m:Regexp.quote]] を
 使います。
 
-=== 文字
+===[a:char] 文字
 正規表現内では、「\」の後に文字列を置くことで、
 ある特定の文字を表現することができます。
 これは、改行のように Ruby の文法で特別な意味を持つ文字を埋め込む
@@ -78,7 +119,7 @@
 タブなどを含む空白文字全般にマッチするメタ文字列です。
 
 
-=== 任意の1文字
+===[a:anychar] 任意の1文字
 メタ文字 . は改行を除く任意の1文字にマッチします。
 
 ただし、オプション m によって改行にもマッチするようになります。
@@ -88,7 +129,11 @@
 文字クラス(character class)
 とは角括弧 [ と ] で囲まれ、1個以上の文字を列挙したもので、
 いずれかの1文字にマッチします。
-  /W[aeiou]rd/
+
+#@samplecode
+/W[aeiou]rd/
+#@end
+
 は Ward, Werd, Wird, Word, Wurd のいずれかにマッチします。
 
 文字クラス内のハイフン(-)は文字の範囲を表すメタ文字です。
@@ -105,16 +150,19 @@
 [a-z[0-9]] は [a-z0-9]と同じ意味を持ちます。これだけではあまり意味が
 ありませんが、文字クラスは && という、共通部分を取る演算をサポートして
 いるため、これと組合せることで意味を持ちます。
-  /[a-z[0-9]]/.match("y") # => #<MatchData "y">
-  /[a-z[0-9]]/.match("[") # => nil
-  r = /[a-w&&[^c-g]e]/ # ([a-w] かつ ([^c-g] もしくは e)) つまり [abeh-w] と同じ
-  r.match("b") # => #<MatchData "b">
-  r.match("c") # => nil
-  r.match("e") # => #<MatchData "e">
-  r.match("g") # => nil
-  r.match("h") # => #<MatchData "h">
-  r.match("w") # => #<MatchData "w">
-  r.match("z") # => nil
+
+#@samplecode
+/[a-z[0-9]]/.match("y") # => #<MatchData "y">
+/[a-z[0-9]]/.match("[") # => nil
+r = /[a-w&&[^c-g]e]/ # ([a-w] かつ ([^c-g] もしくは e)) つまり [abeh-w] と同じ
+r.match("b") # => #<MatchData "b">
+r.match("c") # => nil
+r.match("e") # => #<MatchData "e">
+r.match("g") # => nil
+r.match("h") # => #<MatchData "h">
+r.match("w") # => #<MatchData "w">
+r.match("z") # => nil
+#@end
 
 文字クラスでは、否定(^)範囲(-)共通部分(&&)列挙(並べる)という
 演算が可能ですが、これらは - > (列挙) > && > ^ という順の結合強度を持ちます。
@@ -122,7 +170,7 @@
 文字クラス内の3つのメタ文字を通常の文字の意味で使用したい場合には、
 \ によってエスケープ する必要があります。
 
-==== 文字クラスの略記法
+====[a:charclass_short] 文字クラスの略記法
 良く使われる文字クラスには省略記法が存在します。
   * \w 単語構成文字 [a-zA-Z0-9_]
   * \W 非単語構成文字 [^a-zA-Z0-9_]
@@ -135,16 +183,23 @@
 これらの「空白」「数字」などは ASCII の範囲の文字のみを対象としています。
 いわゆる「全角アルファベット」「全角空白」「全角数字」などは
 ここの空白、数字、には含まれません。
-  /\w+/.match("ＡＢＣｄｅｆ") # => nil
-  /\W+/.match("ＡＢＣｄｅｆ") # => #<MatchData "ＡＢＣｄｅｆ">
-  /\s+/.match("　") # => nil
-  /\S+/.match("　") # => #<MatchData "　">
-これらは文字クラス内で演算することもできます。
-  r = /[\d&&[^47]]/ # 4, 7 以外の数字
-  r.match("3") # => #<MatchData "3">
-  r.match("7") # => nil
 
-==== Unicode プロパティによる文字クラス指定
+#@samplecode
+/\w+/.match("ＡＢＣｄｅｆ") # => nil
+/\W+/.match("ＡＢＣｄｅｆ") # => #<MatchData "ＡＢＣｄｅｆ">
+/\s+/.match("　") # => nil
+/\S+/.match("　") # => #<MatchData "　">
+#@end
+
+これらは文字クラス内で演算することもできます。
+
+#@samplecode
+r = /[\d&&[^47]]/ # 4, 7 以外の数字
+r.match("3") # => #<MatchData "3">
+r.match("7") # => nil
+#@end
+
+====[a:charclass_prop] Unicode プロパティによる文字クラス指定
 また、Unicodeのプロパティ(属性情報)による文字クラス指定も可能です。
 以下の記法が使えます。
   * \p{property-name}
@@ -153,9 +208,12 @@
 サポートされているプロパティのリストは
 [[url:https://github.com/k-takata/Onigmo/blob/master/doc/UnicodeProps.txt]] を
 参考にしてください。また、プロパティの意味は Unicode の仕様を参照してください。
-  /\p{Letter}+/.match(".|あaＡＢｃ123") # => #<MatchData "あaＡＢｃ">
 
-==== POSIX 文字クラス
+#@samplecode
+/\p{Letter}+/.match(".|あaＡＢｃ123") # => #<MatchData "あaＡＢｃ">
+#@end
+
+====[a:charclass_posix] POSIX 文字クラス
 Unicodeプロパティと
 似た機能を持つ記法として、POSIX 文字クラスと呼ばれるものがあります。
 これらは上の省略記法とは異なり、文字クラスの中でしか用いることが
@@ -179,12 +237,15 @@ Unicode コードポイントで示されています。
   * [:word:] 単語構成文字 (Letter | Mark | Decimal_Number | Connector_Punctuation)
 これらの POSIX 文字クラスは \s といった省略記法と異なり、
 ASCIIコード範囲外の空白などを考慮に入れます。
-  /[[:alnum:]]+/.match("abＡＢ１２1") # => #<MatchData "abＡＢ１２1">
-  # \u3000 は全角空白
-  /[[:graph:]]/.match("\u3000") # => nil
-  /[[:blank:]]/.match("\u3000") # => #<MatchData "　">
-  /[[:alnum:]&&[:^lower:]]/.match("ａＡ") # => #<MatchData "Ａ">
-  /[[:print:]&&[:^lower:]]/.match(" ") # => #<MatchData " ">
+
+#@samplecode
+/[[:alnum:]]+/.match("abＡＢ１２1") # => #<MatchData "abＡＢ１２1">
+# \u3000 は全角空白
+/[[:graph:]]/.match("\u3000") # => nil
+/[[:blank:]]/.match("\u3000") # => #<MatchData "　">
+/[[:alnum:]&&[:^lower:]]/.match("ａＡ") # => #<MatchData "Ａ">
+/[[:print:]&&[:^lower:]]/.match(" ") # => #<MatchData " ">
+#@end
 
 
 注: POSIX ではここで言う文字クラスのことを「ブラケット表現」と
@@ -205,30 +266,39 @@ Unicode 系統以外のものは Onigmo の
 #@# 「クラス名」という言い方は妥当か？
 
 #@since 2.0.0
-==== オプション
+====[a:charclass_opt] オプション
 文字クラスの挙動は [[ref:option]] で変更することができます。
 d, a, u の3つのオプションがあります。
 #@end
 
 #@since 2.0.0
 
-===  特別な文字列に対するマッチ
+===[a:str]  特別な文字列に対するマッチ
 文字列の中には、CR LF のように、複数の文字一続きで1つの意味を表す
 ようなものが存在します。そのような文字列にマッチするような
 メタ文字列として以下が存在します。
-  * \R 改行 (?>\x0D\x0A|[\x0A-\x0D\x{85}\x{2028}\x{2029}])
+  * \R 改行 (?>\x0D\x0A|[\x0A-\x0D\u{85}\u{2028}\u{2029}]) (Unicode 以外では (?>\x0D\x0A|[\x0A-\x0D]) になります)
   * \X Unicode 結合文字シーケンス (eXtended grapheme cluster) (?>\P{M}\p{M}*)
 
-  # \u{0308} はウムラウト
-  /\X/.match("e\u{0308}") # => #<MatchData "ë">
-  $&.codepoints # => [101, 776]
-  /\w/.match("e\u{0308}") # => #<MatchData "e">
-  $&.codepoints # => [101]
+#@samplecode
+# \u{0308} はウムラウト
+/\X/.match("e\u{0308}") # => #<MatchData "ë">
+$&.codepoints # => [101, 776]
+/\w/.match("e\u{0308}") # => #<MatchData "e">
+$&.codepoints # => [101]
+#@end
+
+ただし、\R は文字クラスの中では使用できません。
+
+#@samplecode
+/\R/.match("\r\n") # => #<MatchData "\r\n">
+/[\R]/.match("\r\n") # => nil
+#@end
 
 #@end
 
 
-=== 繰り返し
+===[a:quantifier] 繰り返し
 
 以下のメタ文字列は繰り返しを表現します。
 直前の部分式を何回繰り返すかを指定します。このような繰り返しを
@@ -242,16 +312,19 @@ d, a, u の3つのオプションがあります。
   * {n,m} n回以上m回以下(n,mは数字)
 
 以下の例で、量指定子の基本的な使いかたを示しています。
-  # 以下の正規表現は 最初に大文字が1文字以上(H)で、小文字が1文字以上(l)、
-  # lが2文字(ll)の後ろにoが続く文字列にマッチします。
-  "Hello".match(/[[:upper:]]+[[:lower:]]+l{2}o/) # => #<MatchData "Hello">
+
+#@samplecode
+# 以下の正規表現は 最初に大文字が1文字以上(H)で、小文字が1文字以上(l)、
+# lが2文字(ll)の後ろにoが続く文字列にマッチします。
+"Hello".match(/[[:upper:]]+[[:lower:]]+l{2}o/) # => #<MatchData "Hello">
+#@end
   
 これらは「欲張り(greedy)」にマッチします。
 マッチが成功する、最長の文字列にマッチしようとします。
 そのため、これらの量指定子は特に最大量指定子(greedy quantifier)
 と呼ばれます。
 
-==== 最小量指定子(reluctant quantifier)
+====[a:quantifier_reluctant] 最小量指定子(reluctant quantifier)
 一方、以下のメタ文字列(普通の繰り返しメタ文字列に ? を付加したもの)
 はマッチが成功する、最短の文字列にマッチします。そのため、これらの
 量指定子は特に最小量指定子(reluctant quantifier)と呼ばれます。
@@ -262,14 +335,21 @@ d, a, u の3つのオプションがあります。
   * {,m}? m回以下(mは数字)
   * {n,m}? n回以上m回以下(n,mは数字)
 以下の例では、最小量指定子を使うことで、(\d+)がマッチする場所を変えています。
-  /^.*(\d+)\./.match("Copyright 2013.")  # => #<MatchData "Copyright 2013." 1:"3">
-  /^.*?(\d+)\./.match("Copyright 2013.")  # => #<MatchData "Copyright 2013." 1:"2013">
-また、ネストしていない括弧の対応を取るためにも使えます。
-  # ここでは <b> と </b> の対応を取る
-  %r{<b>.*</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>y<b>z</b>">
-  %r{<b>.*?</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>">
 
-==== 絶対最大量指定子(possessive quantifier)
+#@samplecode
+/^.*(\d+)\./.match("Copyright 2013.")  # => #<MatchData "Copyright 2013." 1:"3">
+/^.*?(\d+)\./.match("Copyright 2013.")  # => #<MatchData "Copyright 2013." 1:"2013">
+#@end
+
+また、ネストしていない括弧の対応を取るためにも使えます。
+
+#@samplecode
+# ここでは <b> と </b> の対応を取る
+%r{<b>.*</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>y<b>z</b>">
+%r{<b>.*?</b>}.match("<b>x</b>y<b>z</b>") # => #<MatchData "<b>x</b>">
+#@end
+
+====[a:quantifier_possesive] 絶対最大量指定子(possessive quantifier)
 以下のメタ文字列は、最大量指定子のように最長のマッチをしますが、
 一度マッチすると、その後マッチに失敗してもバックトラックしません。
 つまりマッチ済みの文字列を手放さずにマッチに失敗します。
@@ -279,7 +359,7 @@ d, a, u の3つのオプションがあります。
   * ?+ 0回もしくは1回
 アトミックグループを用いることで同じことができます。
 
-=== キャプチャ
+===[a:capture] キャプチャ
 丸括弧 ( ) によってキャプチャをすることができます。
 括弧に囲まれた部分正規表現にマッチした
 前からn番目の開き括弧によって囲まれた部分式にマッチした
@@ -294,24 +374,33 @@ MatchData からは [[m:MatchData#[] ]]で取り出せます。
 また、[[m:$1]], $2, ... という特殊変数によって n 番目の括弧にマッチした
 部分文字列を参照できます。これらの特殊変数はマッチ処理が終わったあとで
 しか使えないことに注意してください。
-  # (..) に at がマッチしたのを \1 で参照し、マッチが成功している。
-  m = /[csh](..) [csh]\1 in/.match("The cat sat in the hat") 
-  # => #<MatchData "cat sat in" 1:"at">
-  # Regexp#match でマッチしたテキストは MatchData#[] で参照できる
-  m[1] # => "at"
+
+#@samplecode
+# (..) に at がマッチしたのを \1 で参照し、マッチが成功している。
+m = /[csh](..) [csh]\1 in/.match("The cat sat in the hat") 
+# => #<MatchData "cat sat in" 1:"at">
+# Regexp#match でマッチしたテキストは MatchData#[] で参照できる
+m[1] # => "at"
+#@end
 
 1,2,... ではなく、名前を付けることができます。
 (?<name>pat)もしくは(?'name'pat)と記述します。キャプチャした文字列は
 [[m:MatchData#[] ]] に [[c:Symbol]] を渡すことで参照できます。
 これは名前付きキャプチャと呼ばれます。
-  m = /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")
-  # => #<MatchData "$3.67" dollars:"3" cents:"67">
-  m[:dollars] # => "3"
-  m[:cents] # => "67"
+
+#@samplecode
+m = /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")
+# => #<MatchData "$3.67" dollars:"3" cents:"67">
+m[:dollars] # => "3"
+m[:cents] # => "67"
+#@end
 
 名前付きキャプチャは正規表現内で \k<name>、\k'name' という記法で参照できます。
-  /(?<vowel>[aeiou]).\k<vowel>.\k<vowel>/.match('ototomy')
-  # => #<MatchData "ototo" vowel:"o">
+
+#@samplecode
+/(?<vowel>[aeiou]).\k<vowel>.\k<vowel>/.match('ototomy')
+# => #<MatchData "ototo" vowel:"o">
+#@end
 
 注: 名前付きキャプチャと数字によるキャプチャは併用できません。
 
@@ -319,9 +408,12 @@ MatchData からは [[m:MatchData#[] ]]で取り出せます。
 リテラル正規表現内に名前付きキャプチャがあり、 =~ の左辺で用いた
 場合には、その名前のローカル変数にキャプチャした文字列を
 代入します。
-  /\$(?<dollars>\d+)\.(?<cents>\d+)/ =~ "$3.67" # => 0
-  dollars # => "3"
-  cents # => "67"
+
+#@samplecode
+/\$(?<dollars>\d+)\.(?<cents>\d+)/ =~ "$3.67" # => 0
+dollars # => "3"
+cents # => "67"
+#@end
 
 注: ローカル変数への代入が行われるのは、左辺の正規表現リテラルが#{}による式展開を含んでいない場合に限られます。
 
@@ -333,34 +425,42 @@ MatchData からは [[m:MatchData#[] ]]で取り出せます。
 位置にあるキャプチャを表し、-2, -3, で2つ手前、3つ手前を表します。
 これは非常に多くのキャプチャを持つような正規表現を記述するためや、
 正規表現に別の正規表現を式展開で埋め込む場合などに便利です。
-  /(.)(.)\k<-2>\k<-1>/.match("xyzyz") # => #<MatchData "yzyz" 1:"y" 2:"z">
+
+#@samplecode
+/(.)(.)\k<-2>\k<-1>/.match("xyzyz") # => #<MatchData "yzyz" 1:"y" 2:"z">
+#@end
 
 
-=== グループ
+===[a:grouping] グループ
 丸括弧は部分式をグループ化するためにも使えます。( ) で囲まれた
 部分式は一つのものとして取り扱われ、量指定子などを続けて書くことができます。
 
-    # The pattern below matches a vowel followed by 2 word characters:
-    # 'aen'
-    /[aeiou]\w{2}/.match("Caenorhabditis elegans") #=> #<MatchData "aen">
-    # Whereas the following pattern matches a vowel followed by a word
-    # character, twice, i.e. <tt>[aeiou]\w[aeiou]\w</tt>: 'enor'.
-    /([aeiou]\w){2}/.match("Caenorhabditis elegans")
-        #=> #<MatchData "enor" 1:"or">
+#@samplecode
+# The pattern below matches a vowel followed by 2 word characters:
+# 'aen'
+/[aeiou]\w{2}/.match("Caenorhabditis elegans") #=> #<MatchData "aen">
+# Whereas the following pattern matches a vowel followed by a word
+# character, twice, i.e. <tt>[aeiou]\w[aeiou]\w</tt>: 'enor'.
+/([aeiou]\w){2}/.match("Caenorhabditis elegans")
+    #=> #<MatchData "enor" 1:"or">
+#@end
 
 (?:pat) という記法を使うとキャプチャせずにグループ化することができます。
 性能が多少改善する場合がありますが、多少見にくくなります。
-  # 最初のキャプチャは n で二番目のキャプチャが ti であり、
-  # \2 で二番目のキャプチャを後方参照しています
-  /I(n)ves(ti)ga\2ons/.match("Investigations")
-      # => #<MatchData "Investigations" 1:"n" 2:"ti">
-  # 最初のグループは (?: ) を使っているのでキャプチャが作られず、
-  # 1番目は ti がキャプチャされます。
-  # そして ti を \1 で参照しています。
-  /I(?:n)ves(ti)ga\1ons/.match("Investigations")
-      # => #<MatchData "Investigations" 1:"ti">
 
-==== アトミックグループ(atomic grouping)
+#@samplecode
+# 最初のキャプチャは n で二番目のキャプチャが ti であり、
+# \2 で二番目のキャプチャを後方参照しています
+/I(n)ves(ti)ga\2ons/.match("Investigations")
+    # => #<MatchData "Investigations" 1:"n" 2:"ti">
+# 最初のグループは (?: ) を使っているのでキャプチャが作られず、
+# 1番目は ti がキャプチャされます。
+# そして ti を \1 で参照しています。
+/I(?:n)ves(ti)ga\1ons/.match("Investigations")
+    # => #<MatchData "Investigations" 1:"ti">
+#@end
+
+====[a:grouping_atomic] アトミックグループ(atomic grouping)
 (?>pat) という記法で「アトミック」なグループを作れます。
 
 通常の正規表現では、ある部分式がマッチに成功した後、
@@ -376,23 +476,25 @@ MatchData からは [[m:MatchData#[] ]]で取り出せます。
 典型的にアトミックグループはバックトラックの回数を減らし
 正規表現を高速化するために用います。
 
-  # 以下のマッチはまず .* が Quote" にマッチした後、
-  # 正規表現末尾の " のマッチに失敗します。その後
-  # 一文字だけバックトラックして、" のマッチに成功します。
-  /".*"/.match('"Quote"') # => #<MatchData "\"Quote\"">
-  # 一方、以下のマッチはまず .* が Quote" 全体にマッチした後、
-  # 正規表現末尾の " のマッチに失敗します。その後
-  # バックトラックで"がマッチした状態まで戻り、
-  # (?>.*)以外の選択子がないのでマッチ全体が失敗します。
-  /"(?>.*)"/.match('"Quote"') # => nil
-  # 一方、以下のマッチはまず .* が Quote" 全体にマッチした後、
-  # 正規表現末尾の " のマッチに失敗します。その後
-  # バックトラックで"がマッチした状態まで戻り、
-  # 次の可能性(つまり | の右側)のマッチを試します。
-  # 結果としてマッチが成功します。
-  /"(?:(?>.*)|(.*))"/.match('"Quote"') # => #<MatchData "\"Quote\"" 1:"Quote">
+#@samplecode
+# 以下のマッチはまず .* が Quote" にマッチした後、
+# 正規表現末尾の " のマッチに失敗します。その後
+# 一文字だけバックトラックして、" のマッチに成功します。
+/".*"/.match('"Quote"') # => #<MatchData "\"Quote\"">
+# 一方、以下のマッチはまず .* が Quote" 全体にマッチした後、
+# 正規表現末尾の " のマッチに失敗します。その後
+# バックトラックで"がマッチした状態まで戻り、
+# (?>.*)以外の選択子がないのでマッチ全体が失敗します。
+/"(?>.*)"/.match('"Quote"') # => nil
+# 一方、以下のマッチはまず .* が Quote" 全体にマッチした後、
+# 正規表現末尾の " のマッチに失敗します。その後
+# バックトラックで"がマッチした状態まで戻り、
+# 次の可能性(つまり | の右側)のマッチを試します。
+# 結果としてマッチが成功します。
+/"(?:(?>.*)|(.*))"/.match('"Quote"') # => #<MatchData "\"Quote\"" 1:"Quote">
+#@end
 
-=== 部分式呼び出し(subexpression call)
+===[a:subexp] 部分式呼び出し(subexpression call)
 \g<name> もしくは \g'name'
 という記法で、nameと名付けられた部分正規表現にマッチしようとします。
 この記法は、部分式呼び出しと呼ばれます。
@@ -407,30 +509,33 @@ nameと名付けられた「部分正規表現」にマッチしようとしま�
 マッチに成功します。ただし、再帰的な正規表現を書く場合は、
 無限ループに陥る可能性があるため、停止条件に注意して
 この機能を使ってください。
-  /\A(?<paren>\(\g<paren>*\))*\z/ =~ '(())' # => 0 
-  # ^1
-  #      ^2
-  #           ^3
-  #                 ^4
-  #      ^5
-  #           ^6
-  #                      ^7
-  #                       ^8
-  #                       ^9
-  #                           ^10
-  # 1. \A が文字列の先頭にマッチする
-  # 2. 名前付きキャプチャの内側に入る
-  # 3. 名前付きキャプチャ内の最初の括弧 \( に文字列の最初の ( マッチする
-  # 4. \g<paren> で名前付きキャプチャ <paren> にマッチしようとする
-  # 5. 上の処理の結果(?<paren>pat)に再びマッチしようとする
-  # 6. \( に前から二番目の ( にマッチする
-  # 7. \g<paren> でさらに (?<paren>pat) にマッチしようとするが、
-  #     開き括弧 ( がもう文字列内にないので失敗する。
-  #    しかし、その後ろに量指定子*があるので、0回マッチとして成功する
-  # 8. 1つ目閉じ括弧 ) がマッチし、\g<paren>による再帰呼び出し全体が
-  #    成功する
-  # 9. 2つ目の閉じ括弧 ) が \) にマッチし、(?<paren>pat)というマッチに成功する
-  # 10. 文字列の末尾へのマッチに成功する
+
+#@samplecode
+/\A(?<paren>\(\g<paren>*\))*\z/ =~ '(())' # => 0 
+# ^1
+#      ^2
+#           ^3
+#                 ^4
+#      ^5
+#           ^6
+#                      ^7
+#                       ^8
+#                       ^9
+#                           ^10
+# 1. \A が文字列の先頭にマッチする
+# 2. 名前付きキャプチャの内側に入る
+# 3. 名前付きキャプチャ内の最初の括弧 \( に文字列の最初の ( マッチする
+# 4. \g<paren> で名前付きキャプチャ <paren> にマッチしようとする
+# 5. 上の処理の結果(?<paren>pat)に再びマッチしようとする
+# 6. \( に前から二番目の ( にマッチする
+# 7. \g<paren> でさらに (?<paren>pat) にマッチしようとするが、
+#     開き括弧 ( がもう文字列内にないので失敗する。
+#    しかし、その後ろに量指定子*があるので、0回マッチとして成功する
+# 8. 1つ目閉じ括弧 ) がマッチし、\g<paren>による再帰呼び出し全体が
+#    成功する
+# 9. 2つ目の閉じ括弧 ) が \) にマッチし、(?<paren>pat)というマッチに成功する
+# 10. 文字列の末尾へのマッチに成功する
+#@end
 
 また、パターン全体は特別に \g<0> もしくは \g'0' という記法で再帰呼び出し
 できます。番号指定による呼出も可能で、\g<n> もしくは \g'n' という
@@ -456,36 +561,44 @@ nameと名付けられた「部分正規表現」にマッチしようとしま�
   * \k'name-level'
 
 以下の例は回文にマッチする正規表現です。
-  /\A(?<a>|.|(?:(?<b>.)\g<a>\k<b+0>))\z/.match("rekxker")
-  # => #<MatchData "rekxker" a:"rekxker" b:"k">
+
+#@samplecode
+/\A(?<a>|.|(?:(?<b>.)\g<a>\k<b+0>))\z/.match("rekxker")
+# => #<MatchData "rekxker" a:"rekxker" b:"k">
+#@end
 
 以下の例では、開始タグと終了タグを対応付ける正規表現です。
-  r = Regexp.compile(<<'__REGEXP__'.strip, Regexp::EXTENDED)
-  (?<element> \g<stag> \g<content>* \g<etag> ){0}
-  (?<stag> < \g<name> \s* > ){0}
-  (?<name> [a-zA-Z_:]+ ){0}
-  (?<content> [^<&]+ (\g<element> | [^<&]+)* ){0}
-  (?<etag> </ \k<name+1> >){0}
-  \g<element>
-  __REGEXP__
-  r.match('<foo>f<bar>bbb</bar>f</foo>').captures
-  # => ["<foo>f<bar>bbb</bar>f</foo>", "<bar>", "bar", "f<bar>bbb</bar>f", "</foo>"]
+
+#@samplecode
+r = Regexp.compile(<<'__REGEXP__'.strip, Regexp::EXTENDED)
+(?<element> \g<stag> \g<content>* \g<etag> ){0}
+(?<stag> < \g<name> \s* > ){0}
+(?<name> [a-zA-Z_:]+ ){0}
+(?<content> [^<&]+ (\g<element> | [^<&]+)* ){0}
+(?<etag> </ \k<name+1> >){0}
+\g<element>
+__REGEXP__
+r.match('<foo>f<bar>bbb</bar>f</foo>').captures
+# => ["<foo>f<bar>bbb</bar>f</foo>", "<bar>", "bar", "f<bar>bbb</bar>f", "</foo>"]
+#@end
 
 最左位置での再帰呼び出しは禁止されています。
   (?<name>a|\g<name>b)   => error
   (?<name>a|b\g<name>c)  => OK
 
-=== 選択
+===[a:selector] 選択
 縦棒 | によって2つの部分正規表現のどちらか一方にマッチすれば良い
 部分正規表現を記述できます。
 
-  /\w(and|or)\w/.match("Feliformia") # => #<MatchData "form" 1:"or">
-  /\w(and|or)\w/.match("furandi")    # => #<MatchData "randi" 1:"and">
-  /\w(and|or)\w/.match("dissemblance") # => nil
+#@samplecode
+/\w(and|or)\w/.match("Feliformia") # => #<MatchData "form" 1:"or">
+/\w(and|or)\w/.match("furandi")    # => #<MatchData "randi" 1:"and">
+/\w(and|or)\w/.match("dissemblance") # => nil
+#@end
 
 このメタ文字は選択子(alternation operator)と呼ばれます。
 
-=== アンカー
+===[a:anchor] アンカー
 アンカーは幅0の文字列にマッチするメタ文字列です。
 幅0とは文字と文字の間、文字列の先頭、文字列の末尾、
 などを意味します。
@@ -506,27 +619,33 @@ nameと名付けられた「部分正規表現」にマッチしようとしま�
   * \B 非単語境界にマッチします。
     \bでマッチしない位置にマッチします。
 
-  # 文字列中の real にマッチする
-  /real/.match("surrealist") # => #<MatchData "real">
-  # 先頭に real とないとマッチしない
-  /\Areal/.match("surrealist") # => nil
-  # 単語境界がrealの前にないのでマッチしない
-  /\breal/.match("surrealist") # => nil
+#@samplecode
+# 文字列中の real にマッチする
+/real/.match("surrealist") # => #<MatchData "real">
+# 先頭に real とないとマッチしない
+/\Areal/.match("surrealist") # => nil
+# 単語境界がrealの前にないのでマッチしない
+/\breal/.match("surrealist") # => nil
+#@end
   
 単語を成す文字、成さない文字の定義はエンコードによって
 異なります。以下の例で「全角」括弧は EUC-JP では
 単語を成す文字と見なされますが、UTF-8 では見なされません。
 その結果、以下のような挙動をします。
-  # -*- coding:utf-8 -*-
-  # デフォルトは UTF-8
-  /foo\b/.match("あいうfoo%") # => #<MatchData "foo">
-  /\bfoo\b/.match("あいうfoo%") # => nil
-  /\bfoo\b/e.match("（foo）".encode("EUC-JP")) # => nil
-  /\bfoo\b/.match("（foo）") # => #<MatchData "foo">
+
+#@samplecode
+# -*- coding:utf-8 -*-
+# デフォルトは UTF-8
+/foo\b/.match("あいうfoo%") # => #<MatchData "foo">
+/\bfoo\b/.match("あいうfoo%") # => nil
+/\bfoo\b/e.match("（foo）".encode("EUC-JP")) # => nil
+/\bfoo\b/.match("（foo）") # => #<MatchData "foo">
+#@end
+
 Unicode の規格では、単語を成す文字を Word というプロパティで
 定義しています。
 
-==== 先読み、後読み(lookahead, lookbehind)
+====[a:lookahead_lookbehind] 先読み、後読み(lookahead, lookbehind)
 ある位置から続く文字列が
 ある部分式にマッチするならばその位置にマッチする
 という正規表現を書くことができます。
@@ -543,19 +662,29 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
     つまり /pat1\Kpat2/ は /(?<=pat1)pat2/ と同様の意味となります。
 #@end
 
-  # 以下の例では、後読みと先読みを使って <b> と
-  # </b> に挟まれているという条件を正規表現中に記述しつつ
-  # <b> </b> 自体にはマッチさせていない。
-  /(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
-  # => #<MatchData "bold">
 #@since 2.0.0
-  # 以下は上の正規表現と同じものを表す
-  /<b>\K\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
-  # => #<MatchData "bold">
+#@samplecode
+# 以下の例では、後読みと先読みを使って <b> と
+# </b> に挟まれているという条件を正規表現中に記述しつつ
+# <b> </b> 自体にはマッチさせていない。
+/(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
+# => #<MatchData "bold">
+# 以下は上の正規表現と同じものを表す
+/<b>\K\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
+# => #<MatchData "bold">
+#@end
+#@else
+#@samplecode
+# 以下の例では、後読みと先読みを使って <b> と
+# </b> に挟まれているという条件を正規表現中に記述しつつ
+# <b> </b> 自体にはマッチさせていない。
+/(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
+# => #<MatchData "bold">
+#@end
 #@end
 
 #@since 2.0.0
-=== 条件分岐
+===[a:cond] 条件分岐
 (?(cond)pat) もしくは (?(cond)truepat|falsepat) という
 記法で条件分岐を記述できます。
 
@@ -571,10 +700,13 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
   set var=val
   print var
 という2つの命令を持つコマンドにマッチするような正規表現です。
-  re = /\A(?:(set)|(print))\s+(\w+)(?(1)=(\d+))\z/
-  re.match("set x=32") # => #<MatchData "set x=32" 1:"set" 2:nil 3:"x" 4:"32">
-  re.match("print x") # => #<MatchData "print x" 1:nil 2:"print" 3:"x" 4:nil>
-  re.match("set y") # => nil
+
+#@samplecode
+re = /\A(?:(set)|(print))\s+(\w+)(?(1)=(\d+))\z/
+re.match("set x=32") # => #<MatchData "set x=32" 1:"set" 2:nil 3:"x" 4:"32">
+re.match("print x") # => #<MatchData "print x" 1:nil 2:"print" 3:"x" 4:nil>
+re.match("set y") # => nil
+#@end
 
 #@end
 ===[a:option] オプション
@@ -582,27 +714,37 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
 置くことで、正規表現にオプションを指定することができます。
   * /pat/i 大文字小文字を無視する
   * /pat/m メタ文字「.」が改行にマッチするようになる
-  * /pat/x コメント内の空白を無視する。コメントの仕様が変化する
+  * /pat/x [[ref:free_format_mode]]になり、空白を無視する。コメントの仕様が変化する
   * /pat/o パターン内の #{} の展開を1回限りしかしない。
 i, m, x のオプションは (?on:pat) もしくは (?on-off:pat) という記法で
 部分正規表現にのみ適用することができます。on、offにはi,m,xのいずれか
 を置きます。onにはpatの中でのみ局所的に有効にしたいオプションを、offには
 局所的に無効化したいオプションを指定します。
-  /a(?i:b)c/.match("aBc") # => #<MatchData "aBc">
-  /a(?i:b)c/.match("abc") # => #<MatchData "abc">
+
+#@samplecode
+/a(?i:b)c/.match("aBc") # => #<MatchData "aBc">
+/a(?i:b)c/.match("abc") # => #<MatchData "abc">
+#@end
+
 (?on) もしくは (?on-off) という形式を使うと、そこから後の
 部分正規表現のみオプションを有効化することができます。
-  /a(?i)bc/.match("aBc") # => #<MatchData "aBc">
-  /a(?i)bc/.match("aBC") # => #<MatchData "aBC">
-  # かっこの中で(?i)を指定すると、そのかっこの終わりまで有効
-  /a(?:(?i)bc)d/.match("aBCd") # => #<MatchData "aBCd">
-  /a(?:(?i)bc)d/.match("aBCD") # => nil
+
+#@samplecode
+/a(?i)bc/.match("aBc") # => #<MatchData "aBc">
+/a(?i)bc/.match("aBC") # => #<MatchData "aBC">
+# かっこの中で(?i)を指定すると、そのかっこの終わりまで有効
+/a(?:(?i)bc)d/.match("aBCd") # => #<MatchData "aBCd">
+/a(?:(?i)bc)d/.match("aBCD") # => nil
+#@end
 
 オプションは [[m:Regexp.new]] の引数に指定することもできます。
-  Regexp.new("abc", Regexp::IGNORECASE)                     # => /abc/i
-  Regexp.new("abc", Regexp::MULTILINE)                      # => /abc/m
-  Regexp.new("abc # Comment", Regexp::EXTENDED)             # => /abc # Comment/x
-  Regexp.new("abc", Regexp::IGNORECASE | Regexp::MULTILINE) # => /abc/mi
+
+#@samplecode
+Regexp.new("abc", Regexp::IGNORECASE)                     # => /abc/i
+Regexp.new("abc", Regexp::MULTILINE)                      # => /abc/m
+Regexp.new("abc # Comment", Regexp::EXTENDED)             # => /abc # Comment/x
+Regexp.new("abc", Regexp::IGNORECASE | Regexp::MULTILINE) # => /abc/mi
+#@end
 
 #@since 2.0.0
 2.0.0以降では、文字クラスの挙動を変更するための d,a,u というオプションを
@@ -620,7 +762,7 @@ i, m, x のオプションは (?on:pat) もしくは (?on-off:pat) という記�
 d,a,u のオプションは正規表現直後に置く方式では指定ができません。
 #@end
 
-=== エンコーディング
+===[a:encoding] エンコーディング
 通常、正規表現のエンコーディングはソースコードエンコーディングと
 同じであると見なされます。
 ただし正規表現が ascii 互換の文字しか含まない場合は 
@@ -635,10 +777,12 @@ d,a,u のオプションは正規表現直後に置く方式では指定がで�
 正規表現オブジェクトのエンコーディングは [[m:Regexp#encoding]] で
 取得できます。
 
-  # -*- coding:utf-8 -*-
-  /あいう/.encoding # => #<Encoding:UTF-8>
-  /abc/.encoding # => #<Encoding:US-ASCII>
-  /abc/u.encoding # => #<Encoding:UTF-8>
+#@samplecode
+# -*- coding:utf-8 -*-
+/あいう/.encoding # => #<Encoding:UTF-8>
+/abc/.encoding # => #<Encoding:US-ASCII>
+/abc/u.encoding # => #<Encoding:UTF-8>
+#@end
 
 正規表現のエンコーディングと文字列のエンコーディングが非互換で
 ある場合、[[c:Encoding::CompatibilityError]] が発生します。
@@ -652,39 +796,64 @@ d,a,u のオプションは正規表現直後に置く方式では指定がで�
 これが偽である場合にはASCII互換な文字列であればマッチの判定をさせる
 ことができます。[[m:Regexp.new]] に [[m:Regexp::FIXEDENCODING]] を
 指定することで明示的に指定することが可能です。
-  # -*- coding:utf-8 -*-
-  /あいう/.fixed_encoding? # => true
-  /abc/.fixed_encoding? # => false
-  /abc/e.fixed_encoding? # => true
-  /abc/ =~ "あいう" # => nil
-  /abc/e =~ "あいう" 
-  # ~> -:6:in `<main>': incompatible encoding regexp match (EUC-JP regexp with UTF-8 string) (Encoding::CompatibilityError)
+
+#@samplecode
+# -*- coding:utf-8 -*-
+/あいう/.fixed_encoding? # => true
+/abc/.fixed_encoding? # => false
+/abc/e.fixed_encoding? # => true
+/abc/ =~ "あいう" # => nil
+/abc/e =~ "あいう" 
+# ~> -:6:in `<main>': incompatible encoding regexp match (EUC-JP regexp with UTF-8 string) (Encoding::CompatibilityError)
+#@end
 
 
-=== コメント
+===[a:comment] コメント
 (?#comment here) という記法で正規表現内にコメントを書くことができます。
 この記法はフリーフォーマットモードでは使えません。
 かわりに # で行末までがコメントになります。
 
-=== フリーフォーマットモード
+===[a:free_format_mode] フリーフォーマットモード
 上に説明している x オプションを使うと空白を無視するようになります。
 これをフリーフォマットモード(free format mode, free spacing modeとも)
 と呼びます。
 
 フリーフォーマットモードでは # から行末まではコメント扱いされます。
-  float_pat = /\A
-    \d+ # 整数部
-    (\. # 小数点
-      \d+ # 小数部
-    )?  # 小数点 + 小数部 はなくともよい
-  \z/x
-  float_pat.match("3.14") # => #<MatchData "3.14" 1:".14">
+
+#@samplecode
+float_pat = /\A
+  \d+ # 整数部
+  (\. # 小数点
+    \d+ # 小数部
+  )?  # 小数点 + 小数部 はなくともよい
+\z/x
+float_pat.match("3.14") # => #<MatchData "3.14" 1:".14">
+#@end
+
 空白を表現したい場合はエスケープをしてください。
-  /x y/x.match("x y") # => nil
-  /x\ y/x.match("x y") # => #<MatchData "x y">
+
+#@samplecode
+/x y/x.match("x y") # => nil
+/x\ y/x.match("x y") # => #<MatchData "x y">
+#@end
+
 \s や \p{Space} のような文字クラスを使うのが良い場合も多いでしょう。
 
-=== 一覧
+#@since 2.4.0
+===[a:absenceop] 非包含オペレータ (absence operator) (実験的)
+(?~式) という記法で、式にマッチする文字列を含まない任意の文字列にマッチします。
+#@until 2.5.0
+(Ruby 2.4.1 で更新された Onigmo に含まれる機能のため、Ruby 2.4.0 では使えません。)
+#@end
+
+例えば (?~abc) は "", "ab", "aab", "abb", "ccdd" などにはマッチしますが、
+"abc", "aabc", "ccabcdd" などにはマッチしません。
+
+/\/\*(?~\*\/)\*\// は C スタイルのコメントにマッチします。
+例えば "/**/", "/* foo bar */" など。
+
+#@end
+===[a:list] 一覧
 Rubyで利用可能なメタ文字、メタ文字列の一覧です。
 
   * . 任意の1文字(改行を含まない)
@@ -775,7 +944,7 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   * \B 非単語境界にマッチします。
   * (?=pat) 肯定先読み
   * (?!pat) 否定先読み
-  * (<=pat) 肯定後読み
+  * (?<=pat) 肯定後読み
   * (?<!pat) 否定後読み
 #@since 2.0.0
   * \K 左側を肯定後読み
@@ -792,8 +961,12 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   * (?on-off:pat)  patの間だけ on オプションを有効にし、offオプションを無効にする
 コメント
   * (?#comment here) コメント
+#@since 2.4.0
+非包含オペレータ
+  * (?~pat) 非包含オペレータ
+#@end
 
-=== 特殊変数
+===[a:specialvar] 特殊変数
 パターンマッチしたときに、以下の特殊変数にマッチの情報をセットします。
   * [[m:$~]] 最後にマッチしたときの情報([[c:MatchData]] オブジェクト)
   * [[m:$&]] マッチしたテキスト全体
@@ -803,7 +976,8 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   * [[m:$+]] 最後(末尾)のキャプチャ文字列
 これらの変数はスレッドローカルかつメソッドでローカルな変数です。
 
-=== 参考文献
-  * 詳説正規表現(Jeffrey E. F. Friedl) 
-  * Onigmoのドキュメント
-  * Ruby の tarball に含まれている doc/re.rdoc or doc/regexp.rdoc
+===[a:references] 参考文献
+  * 『正規表現技術入門――最新エンジン実装と理論的背景』新屋良磨、鈴木勇介、高田謙 著、技術評論社（2015） [[url:https://gihyo.jp/book/2015/978-4-7741-7270-5]]
+  * 『詳説正規表現　第3版』Jeffrey E. F. Friedl 著、オライリー・ジャパン（2008） [[url:https://www.oreilly.co.jp/books/9784873113593/]]
+  * Onigmoのドキュメント：[[url:https://github.com/k-takata/Onigmo/blob/master/doc/RE.ja]]
+  * Ruby の tarball に含まれている doc/regexp.rdoc：[[url:https://github.com/ruby/ruby/blob/master/doc/regexp.rdoc]]

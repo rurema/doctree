@@ -44,11 +44,26 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 #@since 2.1.0
 --- new -> Thread::Queue
+#@since 3.1
+--- new(items) -> Thread::Queue
+#@end
 #@else
 --- new -> Queue
 #@end
 
 新しいキューオブジェクトを生成します。
+
+#@since 3.1
+@param items 初期値を Enumerable で指定します。
+
+#@samplecode
+q = Queue.new
+q = Queue.new([a, b, c])
+q = Queue.new(items)
+#@end
+#@else
+#@#noexample Thread::Queue#close 等を参照
+#@end
 
 == Instance methods
 
@@ -56,18 +71,65 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 キューを空にします。返り値は不定です。
 
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+
+[:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
+
+q.length # => 4
+q.clear
+q.length # => 0
+#@end
+
 --- empty? -> bool
 
 キューが空の時、真を返します。
+
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+q.empty? # => true
+q.push(:resource)
+q.empty? # => false
+#@end
 
 --- length -> Integer
 --- size -> Integer
 
 キューの長さを返します。
 
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+
+[:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
+
+q.length # => 4
+#@end
+
 --- num_waiting -> Integer
 
 キューを待っているスレッドの数を返します。
+
+#@samplecode 例
+require 'thread'
+
+q = SizedQueue.new(1)
+q.push(1)
+t = Thread.new { q.push(2) }
+sleep 0.05 until t.stop?
+q.num_waiting # => 1
+
+q.pop
+t.join
+#@end
 
 --- pop(non_block = false) -> object
 --- shift(non_block = false) -> object
@@ -77,12 +139,61 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 @param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
 
+#@samplecode 例
+require 'thread'
+
+q = Queue.new
+
+th1 = Thread.start do
+  while resource = q.pop
+    puts resource
+  end
+end
+
+[:resource1, :resource2, :resource3, nil].each { |r|
+  q.push(r)
+}
+
+th1.join
+#@end
+
+#@samplecode 例: nonblock = true
+require 'thread'
+
+q = Queue.new
+
+th1 = Thread.start do
+  while resource = q.pop
+    puts resource
+  end
+end
+
+[:resource1, :resource2, :resource3, nil].each { |r|
+  q.push(r)
+}
+
+begin
+  th1.join
+  q.pop(true)
+rescue => e
+  p e
+end
+
+# => resource1
+# resource2
+# resource3
+# => #<ThreadError: queue empty>
+# => "queue empty"
+#@end
+
 --- push(value) -> ()
 --- <<(value)   -> ()
 --- enq(value)  -> ()
 
 キューの値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。
+
+#@#noexample 要約の例を参照
 
 #@since 2.3.0
 --- close -> self
@@ -112,4 +223,18 @@ close する事でループから脱出する事もできます。
 --- closed? -> bool
 
 キューが close されている時に true を返します。
+
+#@samplecode 例
+#@until 2.3.0
+require 'thread'
+#@end
+q = Queue.new
+
+[:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
+
+q.closed? # => false
+q.close
+q.closed? # => true
+#@end
+
 #@end

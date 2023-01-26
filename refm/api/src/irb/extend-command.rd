@@ -5,7 +5,9 @@ require irb/cmd/pushws
 require irb/cmd/subirb
 require irb/ext/history
 require irb/ext/tracer
+#@until 2.5.0
 require irb/ext/math-mode
+#@end
 require irb/ext/use-loader
 require irb/ext/save-history
 

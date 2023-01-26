@@ -41,9 +41,9 @@ YAML ドキュメントから特定のデータを検索する機能を提供す
 
 === 参考
 
-Rubyist Magazine: [[url:http://magazine.rubyist.net/]]
+Rubyist Magazine: [[url:https://magazine.rubyist.net/]]
 
- * プログラマーのための YAML 入門 (探索編): [[url:http://magazine.rubyist.net/?0013-YAML]]
+ * プログラマーのための YAML 入門 (探索編): [[url:https://magazine.rubyist.net/articles/0013/0013-YAML.html]]
 
 == class methods
 

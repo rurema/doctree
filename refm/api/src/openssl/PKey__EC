@@ -47,7 +47,7 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 
 @param obj ECオブジェクトの生成元(EC オブジェクト or EC::Group オブジェクト
            or 文字列)
-@raise OpenSSL::PKey::EC::ECError オブジェクトの生成に失敗した場合に発生します
+@raise OpenSSL::PKey::ECError オブジェクトの生成に失敗した場合に発生します
 
 == Instance methods
 --- group -> OpenSSL::PKey::EC::Group

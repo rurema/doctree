@@ -7,16 +7,17 @@ HTTP の Basic 認証のためのクラスです。
 
     require 'webrick'
     realm = "WEBrick's realm"
-    srv = HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
+    srv = WEBrick::HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
 
-    htpd = HTTPAuth::Htpasswd.new('dot.htpasswd')
+    htpd = WEBrick::HTTPAuth::Htpasswd.new('dot.htpasswd')
     htpd.set_passwd(nil, 'username', 'supersecretpass')
 
-    authenticator = HTTPAuth::BasicAuth.new(:UserDB => htpd, :Realm => realm)
+    authenticator = WEBrick::HTTPAuth::BasicAuth.new(:UserDB => htpd, :Realm => realm)
     srv.mount_proc('/basic_auth') {|req, res|
       authenticator.authenticate(req, res)
       res.body = "hoge"
     }
+    srv.start # http://127.0.0.1:10080/basic_auth
 
 == Class Methods
 

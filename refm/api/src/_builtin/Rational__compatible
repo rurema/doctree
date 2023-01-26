@@ -1,0 +1,3 @@
+#@# nodoc
+#@#
+#@# = class Rational::compatible

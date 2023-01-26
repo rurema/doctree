@@ -17,66 +17,74 @@
 
 既存のメソッドを [[c:Method]] オブジェクト化する。
 
-  class Foo
-    def foo(arg)
-      "foo called with arg #{arg}"
-    end
+#@samplecode 例
+class Foo
+  def foo(arg)
+    "foo called with arg #{arg}"
   end
+end
 
-  m = Foo.new.method(:foo)
+m = Foo.new.method(:foo)
 
-  p m             # => #<Method: Foo#foo>
-  p m.call(1)     # => "foo called with arg 1"
+p m             # => #<Method: Foo#foo>
+p m.call(1)     # => "foo called with arg 1"
+#@end
 
 名前のないメソッド(の代わり)が必要なら [[c:Proc]] を使うと良い。
 
-  pr = Proc.new {|arg|
-    "proc called with arg #{arg}"
-  }
+#@samplecode 例
+pr = Proc.new {|arg|
+  "proc called with arg #{arg}"
+}
 
-  p pr            # => #<Proc:0x401b1fcc>
-  p pr.call(1)    # => "proc called with arg 1"
+p pr            # => #<Proc:0x401b1fcc>
+p pr.call(1)    # => "proc called with arg 1"
+#@end
 
 [[c:Method]] オブジェクトが有用なのは以下のような場合。
 
-  class Foo
-    def foo() "foo" end
-    def bar() "bar" end
-    def baz() "baz" end
-  end
+#@samplecode 例
+class Foo
+  def foo() "foo" end
+  def bar() "bar" end
+  def baz() "baz" end
+end
 
-  obj = Foo.new
+obj = Foo.new
 
-  # 任意のキーとメソッドの関係をハッシュに保持しておく
-  methods = {1 => obj.method(:foo),
-             2 => obj.method(:bar),
-             3 => obj.method(:baz)}
+# 任意のキーとメソッドの関係をハッシュに保持しておく
+methods = {1 => obj.method(:foo),
+           2 => obj.method(:bar),
+           3 => obj.method(:baz)}
 
-  # キーを使って関連するメソッドを呼び出す
-  p methods[1].call       # => "foo"
-  p methods[2].call       # => "bar"
-  p methods[3].call       # => "baz"
+# キーを使って関連するメソッドを呼び出す
+p methods[1].call       # => "foo"
+p methods[2].call       # => "bar"
+p methods[3].call       # => "baz"
+#@end
 
 しかし、レシーバを固定させる(Method オブジェクトはレシーバを保持する)必
-要がないなら [[m:Object#send]]を使う方法も有用。
+要がないなら [[m:Object#public_send]]を使う方法も有用。
 
-  class Foo
-    def foo() "foo" end
-    def bar() "bar" end
-    def baz() "baz" end
-  end
+#@samplecode 例
+class Foo
+  def foo() "foo" end
+  def bar() "bar" end
+  def baz() "baz" end
+end
 
-  # 任意のキーとメソッド(の名前)の関係をハッシュに保持しておく
-  # レシーバの情報がここにはないことに注意
-  methods = {1 => :foo,
-             2 => :bar,
-             3 => :baz}
+# 任意のキーとメソッド(の名前)の関係をハッシュに保持しておく
+# レシーバの情報がここにはないことに注意
+methods = {1 => :foo,
+           2 => :bar,
+           3 => :baz}
 
-  # キーを使って関連するメソッドを呼び出す
-  # レシーバは任意(Foo クラスのインスタンスである必要もない)
-  p Foo.new.send(methods[1])      # => "foo"
-  p Foo.new.send(methods[2])      # => "bar"
-  p Foo.new.send(methods[3])      # => "baz"
+# キーを使って関連するメソッドを呼び出す
+# レシーバは任意(Foo クラスのインスタンスである必要もない)
+p Foo.new.public_send(methods[1])      # => "foo"
+p Foo.new.public_send(methods[2])      # => "bar"
+p Foo.new.public_send(methods[3])      # => "baz"
+#@end
 
 @see [[m:Object#method]]
 
@@ -86,9 +94,26 @@
 
 自身を複製した [[c:Method]] オブジェクトを作成して返します。
 
+#@samplecode 例
+class Foo
+  def foo
+    "foo"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+m.call # => "foo"
+
+m.clone # => #<Method: Foo#foo>
+m.clone.call # => "foo"
+#@end
+
 --- [](*args) -> object
 --- call(*args) -> object
 --- call(*args) { ... } -> object
+#@since 2.5.0
+--- ===(*args) -> object
+#@end
 
 メソッドオブジェクトに封入されているメソッドを起動します。
 
@@ -98,12 +123,119 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 近付けるためだけに用意されたもので、Array#[]のような
 他の [] メソッドとの意味的な関連性はありません。
 
+#@until 2.1.0
 メソッドオブジェクトが汚染されている場合、そのメソッドは、セーフレベル 4 で実行されます
+#@end
 
 @param args self に渡される引数。
 
+#@since 2.7.0
+@see [[m:UnboundMethod#bind_call]]
+#@end
+#@until 3.2
 @see [[d:spec/safelevel]]
 #@# セーフレベルに関するその他の詳細
+#@end
+
+#@samplecode 例
+class Foo
+  def foo(arg)
+    "foo called with arg #{arg}"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+m[1]      # => "foo called with arg 1"
+m.call(2) # => "foo called with arg 2"
+#@end
+
+#@since 2.6.0
+--- <<(callable) -> Proc
+
+self と引数を合成した Proc を返します。
+
+戻り値の Proc は可変長の引数を受け取ります。
+戻り値の Proc を呼び出すと、まず受け取った引数を callable に渡して呼び出し、
+その戻り値を self に渡して呼び出した結果を返します。
+
+[[m:Method#>>]] とは呼び出しの順序が逆になります。
+
+@param callable Proc、Method、もしくは任意の call メソッドを持ったオブジェクト。
+
+#@samplecode 例
+def f(x)
+  x * x
+end
+
+def g(x)
+  x + x
+end
+
+# (3 + 3) * (3 + 3)
+p (method(:f) << method(:g)).call(3) # => 36
+#@end
+
+#@samplecode call を定義したオブジェクトを渡す例
+class WordScanner
+  def self.call(str)
+    str.scan(/\w+/)
+  end
+end
+
+File.write('testfile', <<~TEXT)
+  Hello, World!
+  Hello, Ruby!
+TEXT
+
+pipeline = method(:pp) << WordScanner << File.method(:read)
+pipeline.call('testfile') # => ["Hello", "World", "Hello", "Ruby"]
+#@end
+
+@see [[m:Proc#<<]], [[m:Proc#>>]]
+
+--- >>(callable) -> Proc
+
+self と引数を合成した Proc を返します。
+
+戻り値の Proc は可変長の引数を受け取ります。
+戻り値の Proc を呼び出すと、まず受け取った引数を self に渡して呼び出し、
+その戻り値を callable に渡して呼び出した結果を返します。
+
+[[m:Method#<<]] とは呼び出しの順序が逆になります。
+
+@param callable Proc、Method、もしくは任意の call メソッドを持ったオブジェクト。
+
+#@samplecode 例
+def f(x)
+  x * x
+end
+
+def g(x)
+  x + x
+end
+
+# (3 * 3) + (3 * 3)
+p (method(:f) >> method(:g)).call(3) # => 18
+#@end
+
+#@samplecode call を定義したオブジェクトを渡す例
+class WordScanner
+  def self.call(str)
+    str.scan(/\w+/)
+  end
+end
+
+File.write('testfile', <<~TEXT)
+  Hello, World!
+  Hello, Ruby!
+TEXT
+
+pipeline = File.method(:read) >> WordScanner >> method(:pp)
+pipeline.call('testfile') # => ["Hello", "World", "Hello", "Ruby"]
+#@end
+
+@see [[m:Proc#<<]], [[m:Proc#>>]]
+#@end
 
 --- arity -> Integer
 
@@ -116,30 +248,30 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 を返します。C 言語レベルで実装されたメソッドが可変長引数を
 受け付ける場合、-1 を返します。
 
-例:
+#@samplecode 例
+class C
+  def u;               end
+  def v(a);            end
+  def w(*a);           end
+  def x(a, b);         end
+  def y(a, b, *c);     end
+  def z(a, b, *c, &d); end
+end
 
-  class C
-    def u;               end
-    def v(a);            end
-    def w(*a);           end
-    def x(a, b);         end
-    def y(a, b, *c);     end
-    def z(a, b, *c, &d); end
-  end
-  
-  c = C.new
-  p c.method(:u).arity     #=> 0
-  p c.method(:v).arity     #=> 1
-  p c.method(:w).arity     #=> -1
-  p c.method(:x).arity     #=> 2
-  p c.method(:y).arity     #=> -3
-  p c.method(:z).arity     #=> -3
+c = C.new
+p c.method(:u).arity     #=> 0
+p c.method(:v).arity     #=> 1
+p c.method(:w).arity     #=> -1
+p c.method(:x).arity     #=> 2
+p c.method(:y).arity     #=> -3
+p c.method(:z).arity     #=> -3
 
-  s = "xyz"
-  s.method(:size).arity      #=> 0
-  s.method(:replace).arity   #=> 1
-  s.method(:squeeze).arity   #=> -1
-  s.method(:count).arity     #=> -1
+s = "xyz"
+s.method(:size).arity      #=> 0
+s.method(:replace).arity   #=> 1
+s.method(:squeeze).arity   #=> -1
+s.method(:count).arity     #=> -1
+#@end
 
 --- inspect -> String
 --- to_s    -> String
@@ -148,7 +280,11 @@ self を読みやすい文字列として返します。
 
 以下の形式の文字列を返します。
 
+#@since 2.7.0
+  #<Method: klass1(klass2)#method(arg) foo.rb:2>    (形式1)
+#@else
   #<Method: klass1(klass2)#method>                (形式1)
+#@end
 
 klass1 は、[[m:Method#inspect]] では、レシーバのクラス名、
 [[m:UnboundMethod#inspect]] では、[[c:UnboundMethod]] オブジェクトの生成
@@ -157,60 +293,131 @@ klass1 は、[[m:Method#inspect]] では、レシーバのクラス名、
 klass2 は、実際にそのメソッドを定義しているクラス／モジュール名、
 method は、メソッド名を表します。
 
-  module Foo
-    def foo
-      "foo"
-    end
-  end
-  class Bar
-    include Foo
-    def bar
-    end
-  end
+#@since 2.7.0
+arg は引数を表します。
+「foo.rb:2」は [[m:Method#source_location]] を表します。
+source_location が nil の場合には付きません。
 
-  p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
-  p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
+#@samplecode 例
+module Foo
+  def foo
+    "foo"
+  end
+end
+class Bar
+  include Foo
+  def bar(a, b)
+  end
+end
 
-#@since 1.8.0
+p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo() test.rb:2>
+p Bar.new.method(:bar)        # => #<Method: Bar#bar(a, b) test.rb:8>
+#@end
+#@else
+#@samplecode 例
+module Foo
+  def foo
+    "foo"
+  end
+end
+class Bar
+  include Foo
+  def bar
+  end
+end
+
+p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
+p Bar.new.method(:bar)        # => #<Method: Bar#bar>
+#@end
+#@end
+
 klass1 と klass2 が同じ場合は以下の形式になります。
+#@since 2.7.0
+  #<Method: klass1#method() foo.rb:2>             (形式2)
+#@else
   #<Method: klass1#method>                        (形式2)
+#@end
 
 特異メソッドに対しては、
+#@since 2.7.0
+  #<Method: obj.method() foo.rb:2>                (形式3)
+  #<Method: klass1(klass2).method() foo.rb:2>     (形式4)
+#@else
   #<Method: obj.method>                           (形式3)
   #<Method: klass1(klass2).method>                (形式4)
+#@end
 という形式の文字列を返します。二番目の形式では klass1 はレシーバ、
 klass2 は実際にそのメソッドを定義しているオブジェクトになります。
 
-  # オブジェクトの特異メソッド
-  obj = ""
-  class <<obj
-    def foo
-    end
+#@since 2.7.0
+#@samplecode 例
+# オブジェクトの特異メソッド
+obj = ""
+class <<obj
+  def foo
   end
-  p obj.method(:foo)      # => #<Method: "".foo>
+end
+p obj.method(:foo)      # => #<Method: "".foo() foo.rb:4>
 
-  # クラスメソッド(クラスの特異メソッド)
-  class Foo
-    def Foo.foo
-    end
+# クラスメソッド(クラスの特異メソッド)
+class Foo
+  def Foo.foo
   end
-  p Foo.method(:foo)      # => #<Method: Foo.foo>
+end
+p Foo.method(:foo)      # => #<Method: Foo.foo() foo.rb:11>
 
-  # スーパークラスのクラスメソッド
-  class Bar < Foo
-  end
-  p Bar.method(:foo)      # => #<Method: Bar(Foo).foo>
+# スーパークラスのクラスメソッド
+class Bar < Foo
+end
+p Bar.method(:foo)      # => #<Method: Bar(Foo).foo() foo.rb:11>
 
-  # 以下は(形式1)の出力になる
-  module Baz
-    def baz
-    end
+# 以下は(形式1)の出力になる
+module Baz
+  def baz
   end
+end
 
-  class <<obj
-    include Baz
+class <<obj
+  include Baz
+end
+p obj.method(:baz)      # => #<Method: String(Baz)#baz() foo.rb:23>
+#@end
+#@else
+#@samplecode 例
+# オブジェクトの特異メソッド
+obj = ""
+class <<obj
+  def foo
   end
-  p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
+end
+p obj.method(:foo)      # => #<Method: "".foo>
+
+# クラスメソッド(クラスの特異メソッド)
+class Foo
+  def Foo.foo
+  end
+end
+p Foo.method(:foo)      # => #<Method: Foo.foo>
+
+# スーパークラスのクラスメソッド
+class Bar < Foo
+end
+#@# ruby-2.4.3 以前
+#@#p Bar.method(:foo)      # => #<Method: Bar(Foo).foo>
+#@# ruby-2.4.4 から ruby-2.7.0-preview1 まで
+p Bar.method(:foo)      # => #<Method: Bar.foo>
+
+# 以下は(形式1)の出力になる
+module Baz
+  def baz
+  end
+end
+
+class <<obj
+  include Baz
+end
+p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
+#@end
 #@end
 
 @see [[m:Object#inspect]]
@@ -219,10 +426,34 @@ klass2 は実際にそのメソッドを定義しているオブジェクトに�
 
 self を call する [[c:Proc]] オブジェクトを生成して返します。
 
+#@samplecode 例
+class Foo
+  def foo
+    "foo"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+pr = m.to_proc # => #<Proc:0x007f874d026008 (lambda)>
+pr.call # => "foo"
+#@end
+
 --- unbind -> UnboundMethod
 
 self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
 ジェクトを生成して返します。
+
+#@samplecode 例
+class Foo
+  def foo
+    "foo"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+unbound_method = m.unbind # => #<UnboundMethod: Foo#foo>
+unbound_method.bind(Foo.new) # => #<Method: Foo#foo>
+#@end
 
 --- ==(other)     -> bool
 #@since 1.9.1
@@ -234,10 +465,12 @@ true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-  s = "bar"
-  a = s.method(:size)
-  b = s.method(:size)
-  p a == b                            #=> true
+#@samplecode 例
+s = "bar"
+a = s.method(:size)
+b = s.method(:size)
+p a == b                            #=> true
+#@end
 
 #@since 1.9.1
 --- hash    -> Integer
@@ -249,20 +482,21 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 この挙動はバグなので Ruby2.0.0 以降では修正済みです。[[ruby-core:42755]]
 #@end
 
-  a = method(:==)
-  b = method(:eql?)
-  p a.eql? b          # => true
+#@samplecode 例
+a = method(:==)
+b = method(:eql?)
+p a.eql? b          # => true
 #@since 2.0.0
-  p a.hash == b.hash  # => true
-  p [a, b].uniq.size  # => 1
+p a.hash == b.hash  # => true
+p [a, b].uniq.size  # => 1
 #@else
-  p a.hash == b.hash  # => false
-  p [a, b].uniq.size  # => 2
+p a.hash == b.hash  # => false
+p [a, b].uniq.size  # => 2
+#@end
 #@end
 
 #@end
 
-#@since 1.8.7
 #@since 1.9.1
 --- name    -> Symbol
 #@else
@@ -271,15 +505,51 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 
 このメソッドの名前を返します。
 
+#@samplecode 例
+class Foo
+  def foo(arg)
+    "foo called with arg #{arg}"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+m.name # => :foo
+#@end
+
 --- owner    -> Class | Module
 
 このメソッドが定義されている class か module を返します。
+
+#@samplecode 例
+class Foo
+  def foo(arg)
+    "foo called with arg #{arg}"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+m.owner # => Foo
+
+m = Foo.new.method(:puts) # => #<Method: Foo(Kernel)#puts>
+m.owner # => Kernel
+#@end
 
 --- receiver    -> object
 
 このメソッドオブジェクトのレシーバを返します。
 
+#@samplecode 例
+class Foo
+  def foo(arg)
+    "foo called with arg #{arg}"
+  end
+end
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+m.receiver # => #<Foo:0x007fb39203eb78>
+m.receiver.foo(1) # => "foo called with arg 1"
 #@end
+
 
 #@since 1.9.1
 --- source_location -> [String, Integer] | nil
@@ -289,6 +559,22 @@ eql? が真でも hash が一致しない場合があるので [[m:Array#uniq]] 
 である)場合は nil を返します。
 
 @see [[m:Proc#source_location]]
+
+#@samplecode 例
+# ------- /tmp/foo.rb ---------
+class Foo
+  def foo; end
+end
+# ----- end of /tmp/foo.rb ----
+
+require '/tmp/foo'
+
+m = Foo.new.method(:foo) # => #<Method: Foo#foo>
+m.source_location # => ["/tmp/foo.rb", 2]
+
+method(:puts).source_location # => nil
+#@end
+
 #@end
 
 #@since 1.9.2
@@ -318,20 +604,21 @@ Method オブジェクトが引数を取らなければ空の配列を返しま�
 : :block
  & で指定されたブロック引数
 
-例:
+#@samplecode 例
 #@since 2.1.0
-  m = Class.new{define_method(:m){|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}}.instance_method(:m)
-  m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+m = Class.new{define_method(:m){|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}}.instance_method(:m)
+m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
 #@else
 #@since 2.0.0
-  m = Class.new{define_method(:m){|x, y=42, *other, k_x: 42, **k_other, &b|}}.instance_method(:m)
-  m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
+m = Class.new{define_method(:m){|x, y=42, *other, k_x: 42, **k_other, &b|}}.instance_method(:m)
+m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
 #@else
-  m = Class.new{define_method(:m){|x, y=42, *other, &b|}}.instance_method(:m)
-  m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
+m = Class.new{define_method(:m){|x, y=42, *other, &b|}}.instance_method(:m)
+m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
 #@end
 #@end
-  File.method(:symlink).parameters #=> [[:req], [:req]]
+File.method(:symlink).parameters #=> [[:req], [:req]]
+#@end
 
 @see [[m:Proc#parameters]]
 #@end
@@ -349,22 +636,24 @@ self を元にカリー化した [[c:Proc]] を返します。
 @param arity 引数の個数を指定します。可変長の引数を指定できるメソッドを
              カリー化する際には必ず指定する必要があります。
 
-  def foo(a,b,c)
-    [a, b, c]
-  end
+#@samplecode 例
+def foo(a,b,c)
+  [a, b, c]
+end
 
-  proc  = self.method(:foo).curry
-  proc2 = proc.call(1, 2)          #=> #<Proc>
-  proc2.call(3)                    #=> [1,2,3]
+proc  = self.method(:foo).curry
+proc2 = proc.call(1, 2)          #=> #<Proc>
+proc2.call(3)                    #=> [1,2,3]
 
-  def vararg(*args)
-    args
-  end
+def vararg(*args)
+  args
+end
 
-  proc = self.method(:vararg).curry(4)
-  proc2 = proc.call(:x)      #=> #<Proc>
-  proc3 = proc2.call(:y, :z) #=> #<Proc>
-  proc3.call(:a)             #=> [:x, :y, :z, :a]
+proc = self.method(:vararg).curry(4)
+proc2 = proc.call(:x)      #=> #<Proc>
+proc3 = proc2.call(:y, :z) #=> #<Proc>
+proc3.call(:a)             #=> [:x, :y, :z, :a]
+#@end
 
 @see [[m:Proc#curry]]
 
@@ -374,6 +663,26 @@ self 内で super を実行した際に実行されるメソッドを [[c:Method
 クトにして返します。
 
 @see [[m:UnboundMethod#super_method]]
+
+#@samplecode 例
+class Super
+  def foo
+    "superclass method"
+  end
+end
+
+class Sub < Super
+  def foo
+    "subclass method"
+  end
+end
+
+m = Sub.new.method(:foo) # => #<Method: Sub#foo>
+m.call # => "subclass method"
+m.super_method # => #<Method: Super#foo>
+m.super_method.call # => "superclass method"
+#@end
+
 #@end
 
 #@since 2.1.0
@@ -381,12 +690,13 @@ self 内で super を実行した際に実行されるメソッドを [[c:Method
 
 オリジナルのメソッド名を返します。
 
-例:
-  class C
-    def foo; end
-    alias bar foo
-  end
-  C.new.method(:bar).original_name # => :foo
+#@samplecode 例
+class C
+  def foo; end
+  alias bar foo
+end
+C.new.method(:bar).original_name # => :foo
+#@end
 
 @see [[m:UnboundMethod#original_name]]
 #@end

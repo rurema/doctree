@@ -77,17 +77,18 @@ other を挿入します。
 
 @param other 挿入するノード
 
-==== 例
-  require 'rexml/document'
-  
-  a = REXML::Element.new("a")
-  b = a.add_element("b")
-  c = REXML::Element.new("c")
-  b.next_sibling = c
-  d = REXML::Element.new("d")
-  b.previous_sibling = d
-  
-  p a.to_s # => "<a><d/><b/><c/></a>"
+#@samplecode
+require 'rexml/document'
+
+a = REXML::Element.new("a")
+b = a.add_element("b")
+c = REXML::Element.new("c")
+b.next_sibling = c
+d = REXML::Element.new("d")
+b.previous_sibling = d
+
+p a.to_s # => "<a><d/><b/><c/></a>"
+#@end
 
 
 --- previous_sibling=(other)
@@ -99,17 +100,18 @@ other を挿入します。
 
 @param other 挿入するノード
 
-==== 例
-  require 'rexml/document'
-  
-  a = REXML::Element.new("a")
-  b = a.add_element("b")
-  c = REXML::Element.new("c")
-  b.next_sibling = c
-  d = REXML::Element.new("d")
-  b.previous_sibling = d
-  
-  p a.to_s # => "<a><d/><b/><c/></a>"
+#@samplecode
+require 'rexml/document'
+
+a = REXML::Element.new("a")
+b = a.add_element("b")
+c = REXML::Element.new("c")
+b.next_sibling = c
+d = REXML::Element.new("d")
+b.previous_sibling = d
+
+p a.to_s # => "<a><d/><b/><c/></a>"
+#@end
 
 --- document -> REXML::Document | nil
 そのノードが属する document ([[c:REXML::Document]]) を返します。

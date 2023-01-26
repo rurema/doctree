@@ -1,6 +1,9 @@
 = class RubyVM
 
-Ruby の VM を表すクラスです。
+Ruby の 内部情報へのアクセス手段を提供するクラスです。
+デバッグ用、プロトタイピング用、研究用などの
+とても限定された用途向けです。
+一般ユーザーは使うべきではありません。
 
 == Singleton Methods
 
@@ -28,6 +31,17 @@ Ruby の VM を表すクラスです。
 #@# --- USAGE_ANALYSIS_REGISTER_STOP
 #@#
 #@# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
+
+#@if("2.6.0" <= version and version < "2.7.0")
+--- resolve_feature_path
+require を呼んだときに読み込まれるファイルを特定します。
+このメソッドはRuby 2.7 で $LOAD_PATH の特異メソッドに移動しました。
+
+#@samplecode
+p RubyVM.resolve_feature_path('set')
+# => [:rb, "/build-all-ruby/2.6.0/lib/ruby/2.6.0/set.rb"]
+#@end
+#@end
 
 == Constants
 

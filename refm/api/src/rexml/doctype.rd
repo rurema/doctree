@@ -25,7 +25,7 @@ DocType オブジェクトを生成します。
 保持しているDTDのテキストがパースされ、その内容によって DocType
 オブジェクトが初期化されます。
   REXML::DocType.new(Source.new(<<EOS))
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   EOS
 このインターフェースは deprecated です。
@@ -43,12 +43,14 @@ DocType オブジェクトを生成します。
 --- name -> String
 ルート要素名を返します。
 
-  document = REXML::Document.new(<<EOS)
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  EOS
-  doctype = document.doctype
-  p doctype.name # => "html"
+#@samplecode
+document = REXML::Document.new(<<EOS)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+EOS
+doctype = document.doctype
+p doctype.name # => "html"
+#@end
 
 --- external_id -> String | nil
 DTD が外部サブセットを用いている場合は "SYSTEM", "PUBLIC" の
@@ -56,24 +58,26 @@ DTD が外部サブセットを用いている場合は "SYSTEM", "PUBLIC" の
 
 それ以外の場合は nil を返します。
 
-  require 'rexml/document'
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  EOS
-  doctype.name # => "html"
-  doctype.external_id  # => "PUBLIC"
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE books [
-    <!ELEMENT books (book+)>
-    <!ELEMENT book (title,author)>
-    <!ELEMENT title (#PCDATA)>
-    <!ELEMENT author (#PCDATA)>
-  ]>
-  EOS
-  doctype.name # => "books"
-  doctype.external_id # => nil
+#@samplecode
+require 'rexml/document'
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+EOS
+doctype.name # => "html"
+doctype.external_id  # => "PUBLIC"
+
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE books [
+  <!ELEMENT books (book+)>
+  <!ELEMENT book (title,author)>
+  <!ELEMENT title (#PCDATA)>
+  <!ELEMENT author (#PCDATA)>
+]>
+EOS
+doctype.name # => "books"
+doctype.external_id # => nil
+#@end
 
 --- entities -> { String => REXML::Entity }
 DTD で宣言されている実体の集合を Hash で返します。
@@ -83,17 +87,18 @@ DTD で宣言されている実体の集合を Hash で返します。
 
 これには、XML のデフォルトの実体(gt, lt, quot, apos)も含まれています。
 
-==== 例
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE foo [
-    <!ENTITY bar "barbarbarbar">
-  ]>
-  EOS
+#@samplecode
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE foo [
+  <!ENTITY bar "barbarbarbar">
+]>
+EOS
 
-  p doctype.entities # => { "gt" => #<REXML::Entity: ...>, 
-                     #      "lt" => #<REXML::Entity: ...>, ... }
-  p doctype.entities["bar"].to_s # => "<!ENTITY bar \"barbarbarbar\">"
-  p doctype.entities["gt"].to_s # => "<!ENTITY gt \">\">"
+p doctype.entities # => { "gt" => #<REXML::Entity: ...>,
+                    #      "lt" => #<REXML::Entity: ...>, ... }
+p doctype.entities["bar"].to_s # => "<!ENTITY bar \"barbarbarbar\">"
+p doctype.entities["gt"].to_s # => "<!ENTITY gt \">\">"
+#@end
 
 
 --- namespaces -> nil
@@ -112,24 +117,25 @@ DTD 内の属性リスト宣言で、 element という名前の要素に対し�
 [[m:REXML::Attribute#name]] と
 [[m:REXML::Attribute#value]] で表現されます。
 
-==== 例
-  require 'rexml/document'
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE books [
-  <!ELEMENT book (comment)>
-  <!ELEMENT comment (#PCDATA)>
-  <!ATTLIST book
-            author CDATA #REQUIRED
-            title CDATA #REQUIRED
-            publisher CDATA "foobar publisher">
-  ]>
-  EOS
-  
-  p doctype.attributes_of("book")
-  # => [author='', title='', publisher='foobar publisher'] 
-  p doctype.attributes_of("book")[0].name # => "author"
-  p doctype.attributes_of("book")[0].value # => ""
+#@samplecode
+require 'rexml/document'
+
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE books [
+<!ELEMENT book (comment)>
+<!ELEMENT comment (#PCDATA)>
+<!ATTLIST book
+          author CDATA #REQUIRED
+          title CDATA #REQUIRED
+          publisher CDATA "foobar publisher">
+]>
+EOS
+
+p doctype.attributes_of("book")
+# => [author='', title='', publisher='foobar publisher']
+p doctype.attributes_of("book")[0].name # => "author"
+p doctype.attributes_of("book")[0].value # => ""
+#@end
 
 --- attribute_of(element, attribute) -> String | nil
 DTD 内の属性リスト宣言で、 element という名前の要素の attribute という
@@ -142,24 +148,25 @@ elementという名前の要素にはattributeという名前の属性が宣言�
 @param element 要素名(文字列)
 @param attribute 属性名(文字列)
 
-==== 例
-  require 'rexml/document'
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE books [
-  <!ELEMENT book (comment)>
-  <!ELEMENT comment (#PCDATA)>
-  <!ATTLIST book
-            author CDATA #REQUIRED
-            title CDATA #REQUIRED
-            publisher CDATA "foobar publisher">
-  ]>
-  EOS
-  
-  p doctype.attribute_of("book", "publisher") # => "foobar publisher"
-  p doctype.attribute_of("bar", "foo") # => nil
-  p doctype.attribute_of("book", "baz") # => nil
-  p doctype.attribute_of("book", "title") # => nil
+#@samplecode
+require 'rexml/document'
+
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE books [
+<!ELEMENT book (comment)>
+<!ELEMENT comment (#PCDATA)>
+<!ATTLIST book
+          author CDATA #REQUIRED
+          title CDATA #REQUIRED
+          publisher CDATA "foobar publisher">
+]>
+EOS
+
+p doctype.attribute_of("book", "publisher") # => "foobar publisher"
+p doctype.attribute_of("bar", "foo") # => nil
+p doctype.attribute_of("book", "baz") # => nil
+p doctype.attribute_of("book", "title") # => nil
+#@end
 
 --- clone -> REXML::DocType
 self の複製を返します。
@@ -180,29 +187,29 @@ output に DTD を出力します。
 @param transitive 無視されます。指定しないでください。
 @param ie_hack 無視されます。指定しないでください。
 
-==== 例
-  require 'rexml/document'
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE books [
-  <!ELEMENT book (comment)>
-  <!ELEMENT comment (#PCDATA)>
-  <!ATTLIST book
-            author CDATA #REQUIRED
-            title CDATA #REQUIRED
-            publisher CDATA "foobar publisher">
-  <!ENTITY p "foobar publisher">
-  <!ENTITY % q "quzz">
-  ]>
-  EOS
-  
-  doctype.write(STDOUT)
-  # =>
-  # <!DOCTYPE books [
-  # <!ELEMENT book (comment)>
-  # ....
+#@samplecode
+require 'rexml/document'
 
-#@since 1.8.2
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE books [
+<!ELEMENT book (comment)>
+<!ELEMENT comment (#PCDATA)>
+<!ATTLIST book
+          author CDATA #REQUIRED
+          title CDATA #REQUIRED
+          publisher CDATA "foobar publisher">
+<!ENTITY p "foobar publisher">
+<!ENTITY % q "quzz">
+]>
+EOS
+
+doctype.write(STDOUT)
+# =>
+# <!DOCTYPE books [
+# <!ELEMENT book (comment)>
+# ....
+#@end
+
 --- context -> { Symbol => object }
 DTD が属する文書の「コンテキスト」を返します。
 
@@ -212,7 +219,6 @@ DTD が属する文書の「コンテキスト」を返します。
 コンテキストの具体的な内容については [[m:REXML::Element#context]] を
 参照してください。
 
-#@end
 
 --- entity(name) -> String | nil
 name という実体参照名を持つ実体を文字列で返します。
@@ -224,14 +230,15 @@ name という名前を持つ実体が存在しない場合には nil を返し�
 
 @param name 実体参照名(文字列)
 
-==== 例
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE foo [
-    <!ENTITY bar "barbarbarbar">
-  ]>
-  EOS
-  p doctype.entity("bar") # => "barbarbar"
-  p doctype.entity("foo") # => nil
+#@samplecode
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE foo [
+  <!ENTITY bar "barbarbarbar">
+]>
+EOS
+p doctype.entity("bar") # => "barbarbar"
+p doctype.entity("foo") # => nil
+#@end
 
 --- add(child) -> ()
 child を子ノード列の最後に追加します。
@@ -241,44 +248,47 @@ child を子ノード列の最後に追加します。
 
 @param child 追加するノード
 
-#@since 1.8.5
 --- public -> String | nil
 DTD の公開識別子を返します。
 
 DTD が公開識別子による外部サブセットを含んでいない場合は nil を返します。
 
-  require 'rexml/document'
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  EOS
-  doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-  doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE root SYSTEM "foobar">
-  EOS
-  doctype.system # => "foobar"
-  doctype.public  # => nil
+#@samplecode
+require 'rexml/document'
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+EOS
+doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE root SYSTEM "foobar">
+EOS
+doctype.system # => "foobar"
+doctype.public  # => nil
+#@end
 
 --- system -> String | nil
 DTD のシステム識別子を返します。
 
 DTD が外部サブセットを含んでいない場合は nil を返します。
 
-  require 'rexml/document'
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  EOS
-  doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-  doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE root SYSTEM "foobar">
-  EOS
-  doctype.system # => "foobar"
-  doctype.public  # => nil
+#@samplecode
+require 'rexml/document'
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+EOS
+doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE root SYSTEM "foobar">
+EOS
+doctype.system # => "foobar"
+doctype.public  # => nil
+#@end
 
 --- notations -> [REXML::NotationDecl]
 DTD に含まれている記法宣言 ([[c:REXML::NotationDecl]]) を
@@ -292,19 +302,18 @@ name という名前を持つ記法宣言が存在しない場合は nil を返�
 
 @param name 検索する記法名
 
-#@end
 
 == Constants
 
 #@# --- START
 #@# #@todo
-#@# 
+#@#
 #@# --- STOP
 #@# #@todo
-#@# 
+#@#
 #@# --- SYSTEM
 #@# #@todo
-#@# 
+#@#
 #@# --- PUBLIC
 #@# #@todo
 
@@ -334,7 +343,7 @@ output にノードを出力します。
 @param indent インデントの大きさ。無視されます。
 
 = class REXML::ElementDecl < REXML::Declaration
-DTD の要素宣言(Element Decleration)を表すクラスです。
+DTD の要素宣言(Element Declaration)を表すクラスです。
 
 == Class Methods
 
@@ -350,24 +359,27 @@ DTD 内の宣言でパラメータ実体参照を使って宣言が
 
 例えば、以下の DTD 宣言における %HTMLsymbol が
 それにあたります。
+
   <!ENTITY % HTMLsymbol PUBLIC
      "-//W3C//ENTITIES Symbols for XHTML//EN"
      "xhtml-symbol.ent">
   %HTMLsymbol;
-==== 例
-  require 'rexml/document'
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE xhtml [
-    <!ENTITY % HTMLsymbol PUBLIC
-       "-//W3C//ENTITIES Symbols for XHTML//EN"
-       "xhtml-symbol.ent">
-    %HTMLsymbol;
-  ]>
-  EOS
-  
-  p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s)
-  # => ["%HTMLsymbol;"]
+
+#@samplecode
+require 'rexml/document'
+
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE xhtml [
+  <!ENTITY % HTMLsymbol PUBLIC
+      "-//W3C//ENTITIES Symbols for XHTML//EN"
+      "xhtml-symbol.ent">
+  %HTMLsymbol;
+]>
+EOS
+
+p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s)
+# => ["%HTMLsymbol;"]
+#@end
 
 == Class Methods
 
@@ -395,35 +407,36 @@ output へ self を文字列化して出力します。
 DTD の記法宣言を表すクラスです。
 
 
-==== 例
-  require 'rexml/document'
-  
-  doctype = REXML::Document.new(<<EOS).doctype
-  <!DOCTYPE foo [
-  <!NOTATION type-image-svg       PUBLIC "-//W3C//DTD SVG 1.1//EN"
-       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-  <!NOTATION type-image-gif       PUBLIC "image/gif">
-  <!NOTATION foobar               SYSTEM "http://example.org/foobar.dtd">
-  ]>
-  EOS
-  
-  svg = doctype.notation("type-image-svg")
-  p svg.name  # => "type-image-svg"
-  p svg.to_s  # => "<!NOTATION type-image-svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"
-  p svg.public # => "-//W3C//DTD SVG 1.1//EN"
-  p svg.system # => "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"
-  
-  gif = doctype.notation("type-image-gif")
-  p gif.name # => "type-image-gif"
-  p gif.to_s # => "<!NOTATION type-image-gif PUBLIC \"image/gif\">"
-  p gif.public # => "image/gif"
-  p gif.system # => nil
+#@samplecode
+require 'rexml/document'
 
-  foobar = doctype.notation("foobar")
-  p foobar.name # => "foobar"
-  p foobar.to_s # => "<!NOTATION foobar SYSTEM \"http://example.org/foobar.dtd\">"
-  p foobar.public # => nil
-  p foobar.system # => "http://example.org/foobar.dtd"
+doctype = REXML::Document.new(<<EOS).doctype
+<!DOCTYPE foo [
+<!NOTATION type-image-svg       PUBLIC "-//W3C//DTD SVG 1.1//EN"
+      "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!NOTATION type-image-gif       PUBLIC "image/gif">
+<!NOTATION foobar               SYSTEM "http://example.org/foobar.dtd">
+]>
+EOS
+
+svg = doctype.notation("type-image-svg")
+p svg.name  # => "type-image-svg"
+p svg.to_s  # => "<!NOTATION type-image-svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">"
+p svg.public # => "-//W3C//DTD SVG 1.1//EN"
+p svg.system # => "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"
+
+gif = doctype.notation("type-image-gif")
+p gif.name # => "type-image-gif"
+p gif.to_s # => "<!NOTATION type-image-gif PUBLIC \"image/gif\">"
+p gif.public # => "image/gif"
+p gif.system # => nil
+
+foobar = doctype.notation("foobar")
+p foobar.name # => "foobar"
+p foobar.to_s # => "<!NOTATION foobar SYSTEM \"http://example.org/foobar.dtd\">"
+p foobar.public # => nil
+p foobar.system # => "http://example.org/foobar.dtd"
+#@end
 
 == Class Methods
 
@@ -471,4 +484,3 @@ output へ self を文字列化して出力します。
 
 --- name -> String
 記法宣言の名前を返します。
-

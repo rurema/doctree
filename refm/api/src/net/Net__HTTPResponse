@@ -6,16 +6,16 @@ Net::HTTP クラスは実際には HTTPResponse のサブクラスを返しま�
 
 == Class Methods
 
-#@# --- new(http_version, result_code, message) 
-#@# ライブラリ内部用メソッドです。使わないでください。
-
 --- body_permitted? -> bool
 エンティティボディを含むことが許されているレスポンスクラス
 ならば真を、そうでなければ偽を返します。
 
-#@# --- exception_type
-#@# --- read_new 
-#@# internal use only
+#@samplecode 例
+require 'net/http'
+
+Net::HTTPSuccess.body_permitted?     # => true
+Net::HTTPNotModified.body_permitted? # => false
+#@end
 
 == Instance Methods
 
@@ -27,6 +27,14 @@ HTTP のリザルトコードです。例えば '302' などです。
 レスポンスオブジェクトがどのクラスのインスタンスかを
 見ることでもレスポンスの種類を判別できます。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.code # => "200"
+#@end
+
 --- message -> String
 --- msg -> String
 
@@ -35,15 +43,24 @@ HTTP サーバがリザルトコードに付加して返すメッセージです
 
 msg は obsolete です。使わないでください。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.message # => "OK"
+#@end
+
 --- http_version -> String
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
-#@since 1.8.0
---- to_ary -> [Net::HTTPResponse, String]
-このメソッドは net/http.rb 1.1 との互換性のために存在します。
+#@samplecode 例
+require 'net/http'
 
-[self, self.body] を返します。
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.http_version # => "1.1"
 #@end
 
 --- value -> nil
@@ -56,6 +73,27 @@ msg は obsolete です。使わないでください。
 @raise HTTPServerException レスポンスが 4xx である場合に発生します。
 @raise HTTPFatalError レスポンスが 5xx である場合に発生します。
 
+#@samplecode 例 レスポンスが 2xx(成功)
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.value # => nil
+#@end
+
+#@samplecode 例 レスポンスが 2xx以外
+require 'net/http'
+
+uri = "http://www.example.com/invalid.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+begin
+  response.value
+rescue => e
+  e.class # => Net::HTTPServerException
+  e.message # => 404 "Not Found"
+end
+#@end
+
 
 --- response -> self
 --- header -> self
@@ -65,6 +103,8 @@ msg は obsolete です。使わないでください。
 使わないでください。
 
 自分自身を返します。
+
+#@#noexample
 
 --- body -> String | () | nil
 --- entity -> String | () | nil
@@ -79,6 +119,14 @@ msg は obsolete です。使わないでください。
 
 entity は obsolete です。
 
+#@samplecode 例
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.body[0..10] # => "<!doctype h"
+#@end
+
 --- read_body(dest=nil) -> String|nil
 --- read_body {|str| .... } -> ()
 
@@ -89,6 +137,30 @@ entity は obsolete です。
 文字列で与えます。
 
 レスポンスがボディを持たない場合には nil を返します。
+
+#@samplecode 例1 ブロックを与えずに一度に結果取得
+require 'net/http'
+
+uri = "http://www.example.com/index.html"
+response = Net::HTTP.get_response(URI.parse(uri))
+response.read_body[0..10] # => "<!doctype h"
+#@end
+
+#@samplecode 例2 ブロックを与えて大きいファイルを取得
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/path/to/big.file')
+Net::HTTP.start(uri.host, uri.port) do |http|
+  File.open("/path/to/big.file", "w") do |f|
+    # Net::HTTP#request_get と Net::HTTPResponse#read_body で少しずつ読み書き。メモリ消費が少ない。
+    http.request_get(uri.path) do |response|
+      response.read_body do |s|
+        f.write(s)
+      end
+    end
+  end
+end
+#@end
 
 一度ブロックを与えずにこのメソッドを呼んだ場合には、
 次からはすでに読みだしたボディを文字列として
@@ -102,9 +174,29 @@ dest を指定した場合には
 「dest << ボディの断片」を実行します。
 
 @param dest obsoleteな引数です。利用しないでください。
-#@# = Constants
-#@# --- CODE_CLASS_TO_OBJ
-#@# --- CODE_TO_OBJ
+
+@see [[m:Net::HTTP#request_get]]
+
+== Constants
+
+--- CODE_CLASS_TO_OBJ -> Hash
+
+HTTP レスポンスステータスコードの最初の数字からレスポンスのクラス(分類)を
+あらわすクラスへのハッシュです。
+
+#@samplecode
+require 'net/http'
+Net::HTTPResponse::CODE_CLASS_TO_OBJ['3'] # => Net::HTTPRedirection
+#@end
+
+--- CODE_TO_OBJ -> Hash
+
+HTTP レスポンスステータスコードから対応するクラスへのハッシュです。
+
+#@samplecode
+require 'net/http'
+Net::HTTPResponse::CODE_TO_OBJ['404'] # => Net::HTTPNotFound
+#@end
 
 = class Net::HTTPUnknownResponse < Net::HTTPResponse
 このライブラリが知らないレスポンスを表現するクラスです。
@@ -141,208 +233,346 @@ HTTP レスポンス 5xx (Server Error) を表現するクラスです。
 = class Net::HTTPContinue < Net::HTTPInformation
 HTTP レスポンス 100 (Continue) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.2.1 を見てください。
 
 = class Net::HTTPSwitchProtocol < Net::HTTPInformation
 HTTP レスポンス 101 (Switching Protocols) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.2.2 を見てください。
+
+#@since 2.5.0
+= class Net::HTTPProcessing < Net::HTTPInformation
+HTTP レスポンス 102 (Processing) を表現するクラスです。
+
+詳しくは [[RFC:2518]] を見てください。
+#@end
+
+#@since 2.6.0
+= class Net::HTTPEarlyHints < Net::HTTPInformation
+HTTP レスポンス 103 (Early Hints) を表現するクラスです。
+
+詳しくは [[RFC:8297]] を見てください。
+#@end
+
 
 = class Net::HTTPOK < Net::HTTPSuccess
 HTTP レスポンス 200 (OK) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.3.1 を見てください。
 
 = class Net::HTTPCreated < Net::HTTPSuccess
 HTTP レスポンス 201 (Created) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.3.2 を見てください。
 
 = class Net::HTTPAccepted < Net::HTTPSuccess
 HTTP レスポンス 202 (Accepted) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.3.3 を見てください。
 
 = class Net::HTTPNonAuthoritativeInformation < Net::HTTPSuccess
 HTTP レスポンス 203 (Non-Authoritative Information) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.3.4 を見てください。
 
 = class Net::HTTPNoContent < Net::HTTPSuccess
 HTTP レスポンス 204 (No Content) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.3.5 を見てください。
 
 = class Net::HTTPResetContent < Net::HTTPSuccess
 HTTP レスポンス 205 (Reset Content) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.3.6 を見てください。
 
 = class Net::HTTPPartialContent < Net::HTTPSuccess
 HTTP レスポンス 206 (Partial Content) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7233]] Section 4.1 を見てください。
+
+= class Net::HTTPMultiStatus < Net::HTTPSuccess
+HTTP レスポンス 207 (Multi-Status) を表現するクラスです。
+
+詳しくは [[RFC:4918]] を見てください。
+
+#@since 2.5.0
+= class Net::HTTPAlreadyReported < Net::HTTPSuccess
+HTTP レスポンス 208 (Already Reported) を表現するクラスです。
+
+詳しくは [[RFC:5842]] を見てください。
+
+#@end
+
+= class Net::HTTPIMUsed < Net::HTTPSuccess
+HTTP レスポンス 226 (IM Used) を表現するクラスです。
+
+詳しくは [[RFC:3229]] を見てください。
 
 
-= class Net::HTTPMultipleChoice < Net::HTTPRedirection
+= class Net::HTTPMultipleChoices < Net::HTTPRedirection
+alias Net::HTTPMultipleChoice
 HTTP レスポンス 300 (Multiple Choices) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.4.1 を見てください。
 
 = class Net::HTTPMovedPermanently < Net::HTTPRedirection
 HTTP レスポンス 301 (Moved Permanently) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.4.2 を見てください。
 
 = class Net::HTTPFound < Net::HTTPRedirection
 alias Net::HTTPMovedTemporarily
 
 HTTP レスポンス 302 (Found) を表現するクラスです。
-詳しくは [[RFC:2616]] を見てください。
+
+詳しくは [[RFC:7231]] Section 6.4.3 を見てください。
 
 = class Net::HTTPSeeOther < Net::HTTPRedirection
 HTTP レスポンス 303 (See Other) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.4.4 を見てください。
 
 = class Net::HTTPNotModified < Net::HTTPRedirection
 HTTP レスポンス 304 (Not Modified) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7232]] Section 4.1 を見てください。
 
 = class Net::HTTPUseProxy < Net::HTTPRedirection
 HTTP レスポンス 305 (Use Proxy) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.4.5 を見てください。
 
 #@# 306 unused
 = class Net::HTTPTemporaryRedirect < Net::HTTPRedirection
 HTTP レスポンス 307 (Temporary Redirect) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.4.7 を見てください。
+
+#@since 2.2.0
+= class Net::HTTPPermanentRedirect < Net::HTTPRedirection
+HTTP レスポンス 308 (Permanent Redirect) を表現するクラスです。
+
+詳しくは [[RFC:7538]] を見てください。
+#@end
 
 
 = class Net::HTTPBadRequest < Net::HTTPClientError
 HTTP レスポンス 400 (Bad Request) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.1 を見てください。
 
 = class Net::HTTPUnauthorized < Net::HTTPClientError
 HTTP レスポンス 401 (Unauthorized) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7235]] Section 3.1 を見てください。
 
 = class Net::HTTPPaymentRequired < Net::HTTPClientError
 HTTP レスポンス 402 (Payment Required) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.2 を見てください。
 
 = class Net::HTTPForbidden < Net::HTTPClientError
 HTTP レスポンス 403 (Forbidden) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.3 を見てください。
 
 = class Net::HTTPNotFound < Net::HTTPClientError
 HTTP レスポンス 404 (Not Found) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.4 を見てください。
 
 = class Net::HTTPMethodNotAllowed < Net::HTTPClientError
 HTTP レスポンス 405  (Method Not Allowed) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.5 を見てください。
 
 = class Net::HTTPNotAcceptable < Net::HTTPClientError
 HTTP レスポンス 406 (Not Acceptable) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.6 を見てください。
 
 = class Net::HTTPProxyAuthenticationRequired < Net::HTTPClientError
 HTTP レスポンス 407 (Proxy Authentication Required) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7235]] Section 3.2 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPRequestTimeout < Net::HTTPClientError
+alias Net::HTTPRequestTimeOut
+#@else
 = class Net::HTTPRequestTimeOut < Net::HTTPClientError
-HTTP レスポンス 408 (Request Time-out) を表現するクラスです。
+#@end
+HTTP レスポンス 408 (Request Timeout) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.7 を見てください。
 
 = class Net::HTTPConflict < Net::HTTPClientError
 HTTP レスポンス 409 (Conflict) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.8 を見てください。
 
 = class Net::HTTPGone < Net::HTTPClientError
 HTTP レスポンス 410 (Gone) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.9 を見てください。
 
 = class Net::HTTPLengthRequired < Net::HTTPClientError
 HTTP レスポンス 411 (Length Required) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.10 を見てください。
 
 = class Net::HTTPPreconditionFailed < Net::HTTPClientError
 HTTP レスポンス 412 (Precondition Failed) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7232]] Section 4.2, [[RFC:8144]] Section 3.2 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPPayloadTooLarge < Net::HTTPClientError
+alias Net::HTTPRequestEntityTooLarge
+#@else
 = class Net::HTTPRequestEntityTooLarge < Net::HTTPClientError
-HTTP レスポンス 413 (Request Entity Too Large) を表現するクラスです。
+#@end
+HTTP レスポンス 413 (Payload Too Large) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.11 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPURITooLong < Net::HTTPClientError
+alias Net::HTTPRequestURITooLong
+#@else
 = class Net::HTTPRequestURITooLong < Net::HTTPClientError
+#@end
 alias Net::HTTPRequestURITooLarge
+HTTP レスポンス 414 (URI Too Large) を表現するクラスです。
 
-HTTP レスポンス 414 (Request-URI Too Large) を表現するクラスです。
-
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.12 を見てください。
 
 = class Net::HTTPUnsupportedMediaType < Net::HTTPClientError
 
 HTTP レスポンス 415 (Unsupported Media Type) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.13, [[RFC:7694]] Section 3 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPRangeNotSatisfiable < Net::HTTPClientError
+alias Net::HTTPRequestedRangeNotSatisfiable
+#@else
 = class Net::HTTPRequestedRangeNotSatisfiable < Net::HTTPClientError
-HTTP レスポンス 416 (Requested range not satisfiable) を表現するクラスです。
+#@end
+HTTP レスポンス 416 (Range Not Satisfiable) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7233]] Section 4.4 を見てください。
 
 = class Net::HTTPExpectationFailed < Net::HTTPClientError
 HTTP レスポンス 417 (Expectation Failed) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.5.14 を見てください。
+
+#@since 2.5.0
+= class Net::HTTPMisdirectedRequest < Net::HTTPClientError
+HTTP レスポンス 421 (Misdirected Request) を表現するクラスです。
+
+詳しくは [[RFC:7540]] Section 9.1.2 を見てください。
+#@end
+
+= class Net::HTTPUnprocessableEntity < Net::HTTPClientError
+HTTP レスポンス 422 (Unprocessable Entity) を表現するクラスです。
+
+詳しくは [[RFC:4918]] を見てください。
+
+= class Net::HTTPLocked < Net::HTTPClientError
+HTTP レスポンス 423 (Locked) を表現するクラスです。
+
+詳しくは [[RFC:4918]] を見てください。
+
+= class Net::HTTPFailedDependency < Net::HTTPClientError
+HTTP レスポンス 424 (Failed Dependency) を表現するクラスです。
+
+詳しくは [[RFC:4918]] を見てください。
+
+= class Net::HTTPUpgradeRequired < Net::HTTPClientError
+HTTP レスポンス 426 (Upgrade Required) を表現するクラスです。
+
+詳しくは [[RFC:7231]] Section 6.5.15 を見てください。
+
+= class Net::HTTPPreconditionRequired < Net::HTTPClientError
+HTTP レスポンス 428 (Precondition Required) を表現するクラスです。
+
+詳しくは [[RFC:6585]] を見てください。
+
+= class Net::HTTPTooManyRequests < Net::HTTPClientError
+HTTP レスポンス 429 (Too Many Requests) を表現するクラスです。
+
+詳しくは [[RFC:6585]] を見てください。
+
+= class Net::HTTPRequestHeaderFieldsTooLarge < Net::HTTPClientError
+HTTP レスポンス 431 (Request Header Fields Too Large) を表現するクラスです。
+
+詳しくは [[RFC:6585]] を見てください。
+
+#@since 2.4.0
+= class Net::HTTPUnavailableForLegalReasons < Net::HTTPClientError
+HTTP レスポンス 451 (Unavailable For Legal Reasons) を表現するクラスです。
+
+詳しくは [[RFC:7725]] を見てください。
+#@end
 
 
 = class Net::HTTPInternalServerError < Net::HTTPServerError
 HTTP レスポンス 500 (Internal Server Error) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.6.1 を見てください。
 
 = class Net::HTTPNotImplemented < Net::HTTPServerError
 HTTP レスポンス 501 (Not Implemented) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.6.2 を見てください。
 
 = class Net::HTTPBadGateway < Net::HTTPServerError
 HTTP レスポンス 502 (Bad Gateway) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.6.3 を見てください。
 
 = class Net::HTTPServiceUnavailable < Net::HTTPServerError
 HTTP レスポンス 503 (Service Unavailable) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.6.4 を見てください。
 
+#@since 2.6.0
+= class Net::HTTPGatewayTimeout < Net::HTTPServerError
+alias Net::HTTPGatewayTimeOut
+#@else
 = class Net::HTTPGatewayTimeOut < Net::HTTPServerError
-HTTP レスポンス 504 (Gateway Time-out) を表現するクラスです。
+#@end
+HTTP レスポンス 504 (Gateway Timeout) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.6.5 を見てください。
 
 = class Net::HTTPVersionNotSupported < Net::HTTPServerError
 HTTP レスポンス 505 (HTTP Version not supported) を表現するクラスです。
 
-詳しくは [[RFC:2616]] を見てください。
+詳しくは [[RFC:7231]] Section 6.6.6 を見てください。
+#@since 2.5.0
+= class Net::HTTPVariantAlsoNegotiates < Net::HTTPServerError
+HTTP レスポンス 506 (Variant Also Negotiates) を表現するクラスです。
 
+詳しくは [[RFC:2295]] を見てください。
+#@end
+= class Net::HTTPInsufficientStorage < Net::HTTPServerError
+HTTP レスポンス 507 (Insufficient Storage) を表現するクラスです。
+
+詳しくは [[RFC:4918]] を見てください。
+#@since 2.5.0
+= class Net::HTTPLoopDetected < Net::HTTPServerError
+HTTP レスポンス 508 (Loop Detected) を表現するクラスです。
+
+詳しくは [[RFC:5842]] を見てください。
+= class Net::HTTPNotExtended < Net::HTTPServerError
+HTTP レスポンス 510 (Not Extended) を表現するクラスです。
+
+詳しくは [[RFC:2774]] を見てください。
+#@end
+= class Net::HTTPNetworkAuthenticationRequired < Net::HTTPServerError
+HTTP レスポンス 511 (Network Authentication Required) を表現するクラスです。
+
+詳しくは [[RFC:6585]] を見てください。

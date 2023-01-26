@@ -1,6 +1,10 @@
-#@#=== packテンプレート文字列
+#@#== packテンプレート文字列
 
+#@since 2.4.0
+以下にあげるものは、[[m:Array#pack]]、[[m:String#unpack]]、[[m:String#unpack1]]
+#@else
 以下にあげるものは、[[m:Array#pack]]、[[m:String#unpack]]
+#@end
 のテンプレート文字の一覧です。テンプレート文字は後に「長さ」を表す数字
 を続けることができます。「長さ」の代わりに`*'とすることで「残り全て」
 を表すこともできます。
@@ -12,12 +16,10 @@
 と書き換えることができます。
 
 テンプレート文字列中の空白類は無視されます。
-#@since 1.8.0
 また、`#' から改行あるいはテンプレート文字列の最後まではコメントとみな
 され無視されます。
-#@end
 
-==== 整数のテンプレート文字のシステム依存性
+=== 整数のテンプレート文字のシステム依存性
 
 各テンプレート文字の説明の中で、
 short や long はシステムによらずそれぞれ 2, 4バイトサ
@@ -33,21 +35,15 @@ i, I (int)のサイズは常にシステム依存であり、n, N, v, V
 
 つまり、[[m:IO#ioctl]] などで C の構造体を渡すときのように、
 システム依存のサイズとエンディアンに合わせる必要があるときには
-#@since 2.3.0
 s!, S!, i!, I!, l!, L!, q!, Q!, j!, J! を用います。
-#@else
-s!, S!, i!, I!, l!, L!, q!, Q! を用います。
-#@end
 また、ネットワークプロトコルやファイルフォーマットのように、
 システムに依存しないデータを扱うときには
 n, N, v, V を用います。
 
-#@since 1.9.3
 強制的にエンディアンを指定したいときは、
-リトルエンディアンなら<
-ビッグエンディアンなら>
-を後ろにつけます。!と組み合わせることも可能です。
-#@end
+リトルエンディアンなら < を、
+ビッグエンディアンなら >
+を後ろにつけます。! と組み合わせることも可能です。
 
 まとめると以下のようになります。
 
@@ -60,19 +56,17 @@ n, N, v, V を用います。
 //}
 
 : エンディアン依存、整数サイズ依存 (C の構造体などに適切)
-//emlist{     
+//emlist{
   s!: signed short
   S!: unsigned short
-  i!: signed int
-  I!: unsigned int
+  i,i!: signed int
+  I,I!: unsigned int
   l!: signed long
   L!: unsigned long
   q!: signed long long
   Q!: unsigned long long
-#@since 2.3.0
   j,j!: intptr_t
   J,J!: uintptr_t
-#@end
 //}
 
 : エンディアン依存、整数サイズ非依存 (C99 の stdint.h にある厳密な幅を持つ整数型に適切)
@@ -81,9 +75,10 @@ n, N, v, V を用います。
   S: uint16_t
   l: int32_t
   L: uint32_t
+  q: int64_t
+  Q: uint64_t
 //}
 
-#@since 1.9.3
 : エンディアンの強制指定(バイナリ解析などに適切)
 //emlist{
   S>:  big endian unsigned 16bit(nと同じ)
@@ -92,588 +87,624 @@ n, N, v, V を用います。
   l<:  little endian int32_t
   l!<: little endian signed long
 //}
-#@end
 
-==== 各テンプレート文字の説明
+=== 各テンプレート文字の説明
 
 説明中、[[m:Array#pack]] と [[m:String#unpack]] で違いのあるものは `/' で区切って
 「Array#pack の説明 / String#unpack の説明」としています。
 
 : a
 
-  ASCII文字列(null文字を詰める/後続するnull文字やスペースを残す)
-//emlist{
-    ["abc"].pack("a")    # => "a"
-    ["abc"].pack("a*")   # => "abc"
-    ["abc"].pack("a4")   # => "abc\0"
+  ASCII文字列(ヌル文字を詰める/後続するヌル文字やスペースを残す)
+#@samplecode
+["abc"].pack("a")    # => "a"
+["abc"].pack("a*")   # => "abc"
+["abc"].pack("a4")   # => "abc\x00"
 
-    "abc\0".unpack("a4") # => ["abc\0"]
-    "abc ".unpack("a4")  # => ["abc "]
-//}
+"abc\0".unpack("a4") # => ["abc\x00"]
+"abc ".unpack("a4")  # => ["abc "]
+#@end
 
 : A
 
-  ASCII文字列(スペースを詰める/後続するnull文字やスペースを削除)
-//emlist{
-    ["abc"].pack("A")    # => "a"
-    ["abc"].pack("A*")   # => "abc"
-    ["abc"].pack("A4")   # => "abc "
+  ASCII文字列(スペースを詰める/後続するヌル文字やスペースを削除)
+#@samplecode
+["abc"].pack("A")    # => "a"
+["abc"].pack("A*")   # => "abc"
+["abc"].pack("A4")   # => "abc "
 
-    "abc ".unpack("A4")  # => ["abc"]
-    "abc\0".unpack("A4") # => ["abc"]
-//}
+"abc ".unpack("A4")  # => ["abc"]
+"abc\0".unpack("A4") # => ["abc"]
+#@end
 
 : Z
 
-  null終端文字列(長さが`*'の場合も含め、null文字を詰める/後続するnull文字を削除)
-//emlist{
-    ["abc"].pack("Z")  # => "a"
-    ["abc"].pack("Z*") # => "abc\0"
-    ["abc"].pack("Z4") # => "abc\0"
+  ヌル終端文字列(長さが`*'の場合も含め、ヌル文字を詰める/後続するヌル文字を削除)
+#@samplecode
+["abc"].pack("Z")  # => "a"
+["abc"].pack("Z*") # => "abc\x00"
+["abc"].pack("Z5") # => "abc\x00\x00"
 
-    "abc\0".unpack("Z4") # => ["abc"]
-    "abc ".unpack("Z4")  # => ["abc "]
-//}
+"abc\0".unpack("Z4") # => ["abc"]
+"abc ".unpack("Z4")  # => ["abc "]
+#@end
 
 : b
 
   ビットストリング(各バイトごとに下位ビットから上位ビット)
-//emlist{
-    "\377\000".unpack("b*") # => ["1111111100000000"]
-    "\001\002".unpack("b*") # => ["1000000001000000"]
-    "\001\002".unpack("b3") # => ["100"]
+#@samplecode
+"\xFF\x00".unpack("b*") # => ["1111111100000000"]
+"\x01\x02".unpack("b*") # => ["1000000001000000"]
+"\x01\x02".unpack("b3") # => ["100"]
 
 
-    ["1000000001000000"].pack("b*") # => "\001\002"
-//}
+["1000000001000000"].pack("b*") # => "\x01\x02"
+#@end
 
 : B
 
   ビットストリング(各バイトごとに上位ビットから下位ビット)
-//emlist{
-    "\377\000".unpack("B*")  # => ["1111111100000000"]
-    "\001\002".unpack("B*")  # => ["0000000100000010"]
-    "\001\002".unpack("B9")  # => ["000000010"]
-    "\001\002".unpack("B15") # => ["000000010000001"]
+#@samplecode
+"\xFF\x00".unpack("B*")  # => ["1111111100000000"]
+"\x01\x02".unpack("B*")  # => ["0000000100000010"]
+"\x01\x02".unpack("B9")  # => ["000000010"]
+"\x01\x02".unpack("B15") # => ["000000010000001"]
 
-    ["0000000100000010"].pack("B*")  # => "\001\002"
-    ["0000000100000010"].pack("B0")  # => ""
-    ["0000000100000010"].pack("B1")  # => "\000"
-    ["0000000100000010"].pack("B7")  # => "\000"
-    ["0000000100000010"].pack("B8")  # => "\001"
-    ["0000000100000010"].pack("B9")  # => "\001\000"
-    ["0000000100000010"].pack("B14") # => "\001\000"
-    ["0000000100000010"].pack("B15") # => "\001\002"
-    ["0000000100000010"].pack("B16") # => "\001\002"
-//}
+["0000000100000010"].pack("B*")  # => "\x01\x02"
+["0000000100000010"].pack("B0")  # => ""
+["0000000100000010"].pack("B1")  # => "\x00"
+["0000000100000010"].pack("B7")  # => "\x00"
+["0000000100000010"].pack("B8")  # => "\x01"
+["0000000100000010"].pack("B9")  # => "\x01\x00"
+["0000000100000010"].pack("B14") # => "\x01\x00"
+["0000000100000010"].pack("B15") # => "\x01\x02"
+["0000000100000010"].pack("B16") # => "\x01\x02"
+#@end
 
 : h
 
   16進文字列(下位ニブルが先)
-//emlist{
-    "\x01\xfe".unpack("h*") # => ["10ef"]
-    "\x01\xfe".unpack("h3") # => ["10e"]
+#@samplecode
+"\x01\xFE".unpack("h*") # => ["10ef"]
+"\x01\xFE".unpack("h3") # => ["10e"]
 
-    ["10ef"].pack("h*") # => "\001\376"
-//}
+["10ef"].pack("h*") # => "\x01\xFE"
+#@end
 
 : H
 
   16進文字列(上位ニブルが先)
-//emlist{
-    "\x01\xfe".unpack("H*") # => ["01fe"]
-    "\x01\xfe".unpack("H3") # => ["01f"]
-    "~".unpack("H2")        # => ["7e"]
+#@samplecode
+"\x01\xFE".unpack("H*") # => ["01fe"]
+"\x01\xFE".unpack("H3") # => ["01f"]
+"~".unpack("H2")        # => ["7e"]
 
-    ["01fe"].pack("H*") # => "\001\376"
-    ["7e"].pack("H2")   # => "~"
-//}
+["01fe"].pack("H*") # => "\x01\xFE"
+["7e"].pack("H2")   # => "~"
+#@end
 
 : c
 
   char (8bit 符号つき整数)
-//emlist{
-    "\001\376".unpack("c*") # => [1, -2]
+#@samplecode
+"\x01\xFE".unpack("c*") # => [1, -2]
 
-    [1, -2].pack("c*")  # => "\001\376"
-    [1, 254].pack("c*") # => "\001\376"
-//}
+[1, -2].pack("c*")  # => "\x01\xFE"
+[1, 254].pack("c*") # => "\x01\xFE"
+#@end
 
 : C
 
   unsigned char (8bit 符号なし整数)
-//emlist{
-    "\001\376".unpack("C*") # => [1, 254]
+#@samplecode
+"\x01\xFE".unpack("C*") # => [1, 254]
 
-    [1, -2].pack("C*")  # => "\001\376"
-    [1, 254].pack("C*") # => "\001\376"
-//}
+[1, -2].pack("C*")  # => "\x01\xFE"
+[1, 254].pack("C*") # => "\x01\xFE"
+#@end
 
 : s
 
   short (16bit 符号つき整数, エンディアンに依存)
   (s! は 16bit でなく、short のサイズに依存)
 
-  リトルエンディアン:
-//emlist{
-    "\001\002\376\375".unpack("s*") # => [513, -514]
+  リトルエンディアン (x86_64):
+#@samplecode
+"\x01\x02\xFE\xFD".unpack("s*") # => [513, -514]
 
-    [513, 65022].pack("s*") # => "\001\002\376\375"
-    [513, -514].pack("s*")  # => "\001\002\376\375"
-//}
+[513, 65022].pack("s*") # => "\x01\x02\xFE\xFD"
+[513, -514].pack("s*")  # => "\x01\x02\xFE\xFD"
+#@end
 
-  ビッグエンディアン:
-//emlist{
-    "\001\002\376\375".unpack("s*") # => [258, -259]
+  ビッグエンディアン (SPARC64):
+#@samplecode
+"\x01\x02\xFE\xFD".unpack("s*") # => [258, -259]
 
-    [258, 65277].pack("s*") # => "\001\002\376\375"
-    [258, -259].pack("s*")  # => "\001\002\376\375"
-//}
+[258, 65277].pack("s*") # => "\x01\x02\xFE\xFD"
+[258, -259].pack("s*")  # => "\x01\x02\xFE\xFD"
+#@end
 
 : S
 
   unsigned short (16bit 符号なし整数, エンディアンに依存)
   (S! は 16bit でなく、short のサイズに依存)
 
-  リトルエンディアン:
-//emlist{
-    "\001\002\376\375".unpack("S*") # => [513, 65022]
+  リトルエンディアン (x86_64):
+#@samplecode
+"\x01\x02\xFE\xFD".unpack("S*") # => [513, 65022]
 
-    [513, 65022].pack("s*") # => "\001\002\376\375"
-    [513, -514].pack("s*")  # => "\001\002\376\375"
-//}
+[513, 65022].pack("s*") # => "\x01\x02\xFE\xFD"
+[513, -514].pack("s*")  # => "\x01\x02\xFE\xFD"
+#@end
 
-  ビッグエンディアン:
+  ビッグエンディアン (SPARC64):
 
-//emlist{
-    "\001\002\376\375".unpack("S*") # => [258, 65277]
+#@samplecode
+"\x01\x02\xFE\xFD".unpack("S*") # => [258, 65277]
 
-    [258, 65277].pack("S*") # => "\001\002\376\375"
-    [258, -259].pack("S*")  # => "\001\002\376\375"
-//}
+[258, 65277].pack("S*") # => "\x01\x02\xFE\xFD"
+[258, -259].pack("S*")  # => "\x01\x02\xFE\xFD"
+#@end
 
 : i
 
   int (符号つき整数, エンディアンと int のサイズに依存)
 
-  リトルエンディアン, 32bit int:
-//emlist{
-    "\001\002\003\004\377\376\375\374".unpack("i*") # => [67305985, -50462977]
+  リトルエンディアン (x86_64), 32bit int:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("i*") # => [67305985, -50462977]
 
-    [67305985, 4244504319].pack("i*") # => RangeError
-    [67305985, -50462977].pack("i*")  # => "\001\002\003\004\377\376\375\374"
-//}
+[67305985, 4244504319].pack("i*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[67305985, -50462977].pack("i*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
+#@# [67305985, 4244504319].pack("i*") が RangeError になるのは 1.8.0 から 1.8.2-preview3 まで
 
-  ビッグエンディアン, 32bit int:
-//emlist{
-    "\001\002\003\004\377\376\375\374".unpack("i*") # => [16909060, -66052]
+  ビッグエンディアン (SPARC64), 32bit int:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("i*") # => [16909060, -66052]
 
-    [16909060, 4294901244].pack("i*") # => RangeError
-    [16909060, -66052].pack("i*")     # => "\001\002\003\004\377\376\375\374"
-//}
+[16909060, 4294901244].pack("i*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[16909060, -66052].pack("i*")     # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
 : I
 
   unsigned int (符号なし整数, エンディアンと int のサイズに依存)
 
-  リトルエンディアン, 32bit int:
-//emlist{
-    "\001\002\003\004\377\376\375\374".unpack("I*") # => [67305985, 4244504319]
+  リトルエンディアン (x86_64), 32bit int:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("I*") # => [67305985, 4244504319]
 
-    [67305985, 4244504319].pack("I*") # => "\001\002\003\004\377\376\375\374"
-    [67305985, -50462977].pack("I*")  # => "\001\002\003\004\377\376\375\374"
-//}
-  ビッグエンディアン, 32bit int:
-//emlist{
-    "\001\002\003\004\377\376\375\374".unpack("I*") # => [16909060, 4294901244]
+[67305985, 4244504319].pack("I*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[67305985, -50462977].pack("I*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
+  ビッグエンディアン (SPARC64), 32bit int:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("I*") # => [16909060, 4294901244]
 
-    [16909060, 4294901244].pack("I*") # => "\001\002\003\004\377\376\375\374"
-    [16909060, -66052].pack("I*")     # => "\001\002\003\004\377\376\375\374"
-//}
+[16909060, 4294901244].pack("I*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[16909060, -66052].pack("I*")     # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
 
 : l
 
   long (32bit 符号つき整数, エンディアンに依存)
   (l! は 32bit でなく、long のサイズに依存)
 
-  リトルエンディアン, 32bit long:
-//emlist{
-    "\001\002\003\004\377\376\375\374".unpack("l*") # => [67305985, -50462977]
+  リトルエンディアン (x86_64), 32bit long:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("l*") # => [67305985, -50462977]
 
-    [67305985, 4244504319].pack("l*") # => RangeError
-    [67305985, -50462977].pack("l*")  # => "\001\002\003\004\377\376\375\374"
-//}
+[67305985, 4244504319].pack("l*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[67305985, -50462977].pack("l*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
+
+  ビッグエンディアン (SPARC64), 32bit long:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("l*") # => [16909060, -66052]
+
+[16909060, 4294901244].pack("l*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[16909060, -66052].pack("l*")     # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
+
 : L
 
   unsigned long (32bit 符号なし整数, エンディアンに依存)
   (L! は 32bit でなく、long のサイズに依存)
 
-  リトルエンディアン, 32bit long:
-//emlist{
-    "\001\002\003\004\377\376\375\374".unpack("L*") # => [67305985, 4244504319]
+  リトルエンディアン (x86_64), 32bit long:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("L*") # => [67305985, 4244504319]
 
-    [67305985, 4244504319].pack("L*") # => "\001\002\003\004\377\376\375\374"
-    [67305985, -50462977].pack("L*")  # => "\001\002\003\004\377\376\375\374"
-//}
-
-#@since 1.8.0
-: q
-
-  long long (符号付き整数, エンディアンと long long のサイズに依存)
-  (C で long long が扱えない場合には 64bit)
-
-  リトルエンディアン, 64bit long long:
-//emlist{
-    "\001\002\003\004\005\006\007\010\377\376\375\374\373\372\371\370".unpack("q*")
-    # => [578437695752307201, -506097522914230529]
-
-    [578437695752307201, -506097522914230529].pack("q*")
-    # => "\001\002\003\004\005\006\a\010\377\376\375\374\373\372\371\370"
-    [578437695752307201, 17940646550795321087].pack("q*")
-    # => "\001\002\003\004\005\006\a\010\377\376\375\374\373\372\371\370"
-//}
-: Q
-
-  unsigned long long (符号なし整数, エンディアンと long long のサイズに依存)
-  (C で long long が扱えない場合には 64bit)
-
-  リトルエンディアン, 64bit long long:
-//emlist{
-    "\001\002\003\004\005\006\007\010\377\376\375\374\373\372\371\370".unpack("Q*")
-    # => [578437695752307201, 17940646550795321087]
-
-    [578437695752307201, 17940646550795321087].pack("Q*")
-    # => "\001\002\003\004\005\006\a\010\377\376\375\374\373\372\371\370"
-    [578437695752307201, -506097522914230529].pack("Q*")
-    # => "\001\002\003\004\005\006\a\010\377\376\375\374\373\372\371\370"
-//}
+[67305985, 4244504319].pack("L*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[67305985, -50462977].pack("L*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 #@end
 
+  ビッグエンディアン (SPARC64), 32bit long:
+#@samplecode
+"\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("L*") # => [16909060, 4294901244]
+
+[16909060, 4294901244].pack("L*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+[16909060, -66052].pack("L*")     # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
+#@end
+
+: q
+
+  64bit 符号付き整数 (エンディアンに依存)
+  (q! は 64bit でなく、long long のサイズに依存)
+
+  リトルエンディアン (x86_64):
+#@samplecode
+"\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("q*")
+# => [578437695752307201, -506097522914230529]
+
+[578437695752307201, -506097522914230529].pack("q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+[578437695752307201, 17940646550795321087].pack("q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+#@end
+
+  ビッグエンディアン (SPARC64):
+#@samplecode
+"\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("q*")
+# => [72623859790382856, -283686952306184]
+
+[72623859790382856, -283686952306184].pack("q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+[72623859790382856, 18446460386757245432].pack("q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+#@end
+: Q
+
+  64bit 符号なし整数 (エンディアンに依存)
+  (Q! は 64bit でなく、long long のサイズに依存)
+
+  リトルエンディアン (x86_64):
+#@samplecode
+"\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("Q*")
+# => [578437695752307201, 17940646550795321087]
+
+[578437695752307201, 17940646550795321087].pack("Q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+[578437695752307201, -506097522914230529].pack("Q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+#@end
+
+  ビッグエンディアン (SPARC64):
+#@samplecode
+"\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("Q*")
+# => [72623859790382856, 18446460386757245432]
+
+[72623859790382856, 18446460386757245432].pack("Q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+[72623859790382856, -283686952306184].pack("Q*")
+# => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
+#@end
 : m
 
   base64された文字列。60 オクテットごと(と最後)に改行コードが付加されます。
 
-#@since 1.9.1
   Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
   うちの65文字 ([A-Za-z0-9+/]の64文字とpaddingのための'=')だけを使用して
   4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
   ング法です。[[RFC:2045]], [[RFC:4648]] で定義されています。
-#@else
-  Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
-  うちの65文字 ([A-Za-z0-9+/]の64文字とpaddingのための'=')だけを使用して
-  4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
-  ング法です。[[RFC:2045]] で定義されています。
+#@samplecode
+[""].pack("m")             # => ""
+["\0"].pack("m")           # => "AA==\n"
+["\0\0"].pack("m")         # => "AAA=\n"
+["\0\0\0"].pack("m")       # => "AAAA\n"
+["\xFF"].pack("m")         # => "/w==\n"
+["\xFF\xFF"].pack("m")     # => "//8=\n"
+["\xFF\xFF\xFF"].pack("m") # => "////\n"
+
+["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"].pack("m")
+# => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n"
+["abcdefghijklmnopqrstuvwxyz"].pack("m3")
+# => "YWJj\nZGVm\nZ2hp\namts\nbW5v\ncHFy\nc3R1\ndnd4\neXo=\n"
+
+"".unpack("m")       # => [""]
+"AA==\n".unpack("m") # => ["\x00"]
+"AA==".unpack("m")   # => ["\x00"]
+
+"YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n".unpack("m")
+# => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+"YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==\n".unpack("m")
+# => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 #@end
-//emlist{
-    [""].pack("m")             # => ""
-    ["\0"].pack("m")           # => "AA==\n"
-    ["\0\0"].pack("m")         # => "AAA=\n"
-    ["\0\0\0"].pack("m")       # => "AAAA\n"
-    ["\377"].pack("m")         # => "/w==\n"
-    ["\377\377"].pack("m")     # => "//8=\n"
-    ["\377\377\377"].pack("m") # => "////\n"
-
-    ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"].pack("m")
-    # => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n"
-    ["abcdefghijklmnopqrstuvwxyz"].pack("m3")
-    # => "YWJj\nZGVm\nZ2hp\namts\nbW5v\ncHFy\nc3R1\ndnd4\neXo=\n"
-
-    "".unpack("m")       # => [""]
-    "AA==\n".unpack("m") # => ["\000"]
-    "AA==".unpack("m")   # => ["\000"]
-
-    "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n".unpack("m")
-    # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
-    "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==\n".unpack("m")
-    # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
-//}
-#@since 1.9.1
   m0 は [[RFC:4648]] 対応
-//emlist{
-    [""].pack("m0")             # => ""
-    ["\0"].pack("m0")           # => "AA=="
-    ["\0\0"].pack("m0")         # => "AAA="
-    ["\0\0\0"].pack("m0")       # => "AAAA"
-    ["\377"].pack("m0")         # => "/w=="
-    ["\377\377"].pack("m0")     # => "//8="
-    ["\377\377\377"].pack("m0") # => "////"
+#@samplecode
+[""].pack("m0")             # => ""
+["\0"].pack("m0")           # => "AA=="
+["\0\0"].pack("m0")         # => "AAA="
+["\0\0\0"].pack("m0")       # => "AAAA"
+["\xFF"].pack("m0")         # => "/w=="
+["\xFF\xFF"].pack("m0")     # => "//8="
+["\xFF\xFF\xFF"].pack("m0") # => "////"
 
-    ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"].pack("m0")
-    # => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg=="
-    
-    "".unpack("m0")       # => [""]
-    "AA==\n".unpack("m0") # => ArgumentError
-    "AA==".unpack("m0")   # => ["\x00"]
-    
-    "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==".unpack("m0")
-    # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
-//}
-@see [[lib:base64]]
+["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"].pack("m0")
+# => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg=="
+
+"".unpack("m0")       # => [""]
+"AA==\n".unpack("m0") # => ArgumentError (invalid base64)
+"AA==".unpack("m0")   # => ["\x00"]
+
+"YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==".unpack("m0")
+# => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 #@end
+@see [[lib:base64]]
 
 : M
 
   quoted-printable encoding された文字列
-//emlist{
-    ["a b c\td \ne"].pack("M") # => "a b c\td =\n\ne=\n"
+#@samplecode
+["a b c\td \ne"].pack("M") # => "a b c\td =\n\ne=\n"
 
-    "a b c\td =\n\ne=\n".unpack("M") # => ["a b c\td \ne"]
-//}
+"a b c\td =\n\ne=\n".unpack("M") # => ["a b c\td \ne"]
+#@end
 
 : n
 
   ネットワークバイトオーダー(ビッグエンディアン)のunsigned short (16bit 符号なし整数)
-//emlist{
-    [0,1,-1,32767,-32768,65535].pack("n*")
-    # => "\000\000\000\001\377\377\177\377\200\000\377\377"
+#@samplecode
+[0,1,-1,32767,-32768,65535].pack("n*")
+# => "\x00\x00\x00\x01\xFF\xFF\x7F\xFF\x80\x00\xFF\xFF"
 
-    "\000\000\000\001\377\377\177\377\200\000\377\377".unpack("n*")
-    # => [0, 1, 65535, 32767, 32768, 65535]
-//}
+"\x00\x00\x00\x01\xFF\xFF\x7F\xFF\x80\x00\xFF\xFF".unpack("n*")
+# => [0, 1, 65535, 32767, 32768, 65535]
+#@end
 
 : N
 
   ネットワークバイトオーダー(ビッグエンディアン)のunsigned long (32bit 符号なし整数)
-//emlist{
-    [0,1,-1].pack("N*") # => "\000\000\000\000\000\000\000\001\377\377\377\377"
+#@samplecode
+[0,1,-1].pack("N*") # => "\x00\x00\x00\x00\x00\x00\x00\x01\xFF\xFF\xFF\xFF"
 
-    "\000\000\000\000\000\000\000\001\377\377\377\377".unpack("N*") # => [0, 1, 4294967295]
-//}
+"\x00\x00\x00\x00\x00\x00\x00\x01\xFF\xFF\xFF\xFF".unpack("N*") # => [0, 1, 4294967295]
+#@end
 
 : v
 
   "VAX"バイトオーダー(リトルエンディアン)のunsigned short (16bit 符号なし整数)
-//emlist{
-    [0,1,-1,32767,-32768,65535].pack("v*")
-    # => "\000\000\001\000\377\377\377\177\000\200\377\377"
+#@samplecode
+[0,1,-1,32767,-32768,65535].pack("v*")
+# => "\x00\x00\x01\x00\xFF\xFF\xFF\x7F\x00\x80\xFF\xFF"
 
-    "\000\000\001\000\377\377\377\177\000\200\377\377".unpack("v*")
-    # => [0, 1, 65535, 32767, 32768, 65535]
-//}
+"\x00\x00\x01\x00\xFF\xFF\xFF\x7F\x00\x80\xFF\xFF".unpack("v*")
+# => [0, 1, 65535, 32767, 32768, 65535]
+#@end
 
 : V
 
   "VAX"バイトオーダー(リトルエンディアン)のunsigned long (32bit 符号なし整数)
-//emlist{
-    [0,1,-1].pack("V*") # => "\000\000\000\000\001\000\000\000\377\377\377\377"
+#@samplecode
+[0,1,-1].pack("V*") # => "\x00\x00\x00\x00\x01\x00\x00\x00\xFF\xFF\xFF\xFF"
 
-    "\000\000\000\000\001\000\000\000\377\377\377\377".unpack("V*") # => [0, 1, 4294967295]
-//}
+
+"\x00\x00\x00\x00\x01\x00\x00\x00\xFF\xFF\xFF\xFF".unpack("V*") # => [0, 1, 4294967295]
+#@end
 
 : f
 
   単精度浮動小数点数(機種依存)
 
-  IA-32 (x86) (IEEE754 単精度 リトルエンディアン):
-//emlist{
-    [1.0].pack("f")      # => "\000\000\200?"
-    [0.0/0.0].pack("f")  # => "\000\000\300\377"      # NaN
-    [1.0/0.0].pack("f")  # => "\000\000\200\177"      # +Inf
-    [-1.0/0.0].pack("f") # => "\000\000\200\377"      # -Inf
-//}
+  x86_64 (IEEE754 単精度 リトルエンディアン):
+#@samplecode
+[1.0].pack("f")      # => "\x00\x00\x80?"
+#@since 2.6.0
+[0.0/0.0].pack("f")  # => "\x00\x00\xC0\x7F"      # NaN
+#@else
+[0.0/0.0].pack("f")  # => "\x00\x00\xC0\xFF"      # NaN
+#@end
+[1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Infinity
+[-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Infinity
+#@end
 
-  SPARC (IEEE754 単精度 ビッグエンディアン):
-//emlist{
-    [1.0].pack("f")      # => "?\200\000\000"
-    [0.0/0.0].pack("f")  # => "\177\377\377\377"      # NaN
-    [1.0/0.0].pack("f")  # => "\177\200\000\000"      # +Inf
-    [-1.0/0.0].pack("f") # => "\377\200\000\000"      # -Inf
-//}
+  SPARC64 (IEEE754 単精度 ビッグエンディアン):
+#@samplecode
+[1.0].pack("f")      # => "?\x80\x00\x00"
+[0.0/0.0].pack("f")  # => "\x7F\xC0\x00\x00"      # NaN
+[1.0/0.0].pack("f")  # => "\x7F\x80\x00\x00"      # +Infinity
+[-1.0/0.0].pack("f") # => "\xFF\x80\x00\x00"      # -Infinity
+#@end
 
   VAX (NetBSD 3.0) (非IEEE754):
-//emlist{
-    [1.0].pack("f") # => "\200@\000\000"
-//}
+#@samplecode
+[1.0].pack("f") # => "\x80@\x00\x00"
+#@end
 
 : d
 
   倍精度浮動小数点数(機種依存)
 
-  IA-32 (IEEE754 倍精度 リトルエンディアン):
-//emlist{
-    [1.0].pack("d")      # => "\000\000\000\000\000\000\360?"
-    [0.0/0.0].pack("d")  # => "\000\000\000\000\000\000\370\377"      # NaN
-    [1.0/0.0].pack("d")  # => "\000\000\000\000\000\000\360\177"      # +Inf
-    [-1.0/0.0].pack("d") # => "\000\000\000\000\000\000\360\377"      # -Inf
-//}
+  x86_64 (IEEE754 倍精度 リトルエンディアン):
+#@samplecode
+[1.0].pack("d")      # => "\x00\x00\x00\x00\x00\x00\xF0?"
+#@since 2.6.0
+[0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\x7F"      # NaN
+#@else
+[0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\xFF"      # NaN
+#@end
+[1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Infinity
+[-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Infinity
+#@end
 
-  SPARC (IEEE754 倍精度 ビッグエンディアン):
-//emlist{
-    [1.0].pack("d")      # => "?\360\000\000\000\000\000\000"
-    [0.0/0.0].pack("d")  # => "\177\377\377\377\377\377\377\377"      # NaN
-    [1.0/0.0].pack("d")  # => "\177\360\000\000\000\000\000\000"      # +Inf
-    [-1.0/0.0].pack("d") # => "\377\360\000\000\000\000\000\000"      # -Inf
-//}
+  SPARC64 (IEEE754 倍精度 ビッグエンディアン):
+#@samplecode
+[1.0].pack("d")      # => "?\xF0\x00\x00\x00\x00\x00\x00"
+[0.0/0.0].pack("d")  # => "\x7F\xF8\x00\x00\x00\x00\x00\x00"      # NaN
+[1.0/0.0].pack("d")  # => "\x7F\xF0\x00\x00\x00\x00\x00\x00"      # +Infinity
+[-1.0/0.0].pack("d") # => "\xFF\xF0\x00\x00\x00\x00\x00\x00"      # -Infinity
+#@end
 
   VAX (NetBSD 3.0) (非IEEE754):
-//emlist{
-    [1.0].pack("d") # => "\200@\000\000\000\000\000\000"
-//}
+#@samplecode
+[1.0].pack("d") # => "\x80@\x00\x00\x00\x00\x00\x00"
+#@end
 
 : e
 
   リトルエンディアンの単精度浮動小数点数(機種依存)
 
-  IA-32 (IEEE754):
-//emlist{
-    [1.0].pack("e") # => "\000\000\200?"
-//}
+  x86_64 (IEEE754):
+#@samplecode
+[1.0].pack("e") # => "\x00\x00\x80?"
+#@end
 
-  SPARC (IEEE754):
-//emlist{
-    [1.0].pack("e") # => "\000\000\200?"
-//}
+  SPARC64 (IEEE754):
+#@samplecode
+[1.0].pack("e") # => "\x00\x00\x80?"
+#@end
 
 : E
 
   リトルエンディアンの倍精度浮動小数点数(機種依存)
 
-  IA-32 (IEEE754):
-//emlist{
-    [1.0].pack("E") # => "\000\000\000\000\000\000\360?"
-//}
+  x86_64 (IEEE754):
+#@samplecode
+[1.0].pack("E") # => "\x00\x00\x00\x00\x00\x00\xF0?"
+#@end
 
-  SPARC (IEEE754):
-//emlist{
-    [1.0].pack("E") # => "\000\000\000\000\000\000\360?"
-//}
+  SPARC64 (IEEE754):
+#@samplecode
+[1.0].pack("E") # => "\x00\x00\x00\x00\x00\x00\xF0?"
+#@end
 
 : g
 
   ビッグエンディアンの単精度浮動小数点数(機種依存)
 
-  IA-32 (IEEE754):
-//emlist{
-    [1.0].pack("g") # => "?\200\000\000"
-//}
+  x86_64 (IEEE754):
+#@samplecode
+[1.0].pack("g") # => "?\x80\x00\x00"
+#@end
 
-  SPARC (IEEE754):
-//emlist{
-    [1.0].pack("g") # => "?\200\000\000"
-//}
+  SPARC64 (IEEE754):
+#@samplecode
+[1.0].pack("g") # => "?\x80\x00\x00"
+#@end
 
   IEEE754準拠な環境の場合、以下のようにして符号、指数部、仮数部を取り出せます。
-//emlist{
-    s = [v].pack("g").unpack("B*")[0][0,1]      # 符号
-    e = [v].pack("g").unpack("B*")[0][1,8]      # 指数部
-    f = [v].pack("g").unpack("B*")[0][9,23]     # 仮数部
-//}
+#@samplecode
+s = [v].pack("g").unpack("B*")[0][0,1]      # 符号
+e = [v].pack("g").unpack("B*")[0][1,8]      # 指数部
+f = [v].pack("g").unpack("B*")[0][9,23]     # 仮数部
+#@end
 
   そして、s, e, f の意味は以下の通りです。
-//emlist{
-    sgn = s == "0" ? +1.0 : -1.0
-    exp = Integer("0b" + e)
-    fra = Integer("0b" + f)
-    if exp == 0
-      if fra == 0
-        sgn * 0                     # ±0 (positive/negative zero)
-      else
-        sgn * fra * 2**(-126-23)    # 非正規化数 (denormalized number)
-      end
-    elsif exp == 255
-      if fra == 0
-        sgn * Inf                   # ±∞ (positive/negative infinity)
-      else
-        NaN                         # 非数 (not a number)
-      end
-    else
-      fra += 1 << 23                # ゲタ
-      sgn * fra * 2**(exp-127-23)   # 正規化数 (normalized number)
-    end
-//}
+#@samplecode
+sgn = s == "0" ? +1.0 : -1.0
+exp = Integer("0b" + e)
+fra = Integer("0b" + f)
+if exp == 0
+  if fra == 0
+    sgn * 0                     # ±0 (positive/negative zero)
+  else
+    sgn * fra * 2**(-126-23)    # 非正規化数 (denormalized number)
+  end
+elsif exp == 255
+  if fra == 0
+    sgn * Inf                   # ±∞ (positive/negative infinity)
+  else
+    NaN                         # 非数 (not a number)
+  end
+else
+  fra += 1 << 23                # ゲタ
+  sgn * fra * 2**(exp-127-23)   # 正規化数 (normalized number)
+end
+#@end
 
 : G
 
   ビッグエンディアンの倍精度浮動小数点数(機種依存)
 
-  IA-32:
-//emlist{
-    [1.0].pack("G") # => "?\360\000\000\000\000\000\000"
-//}
+  x86_64 (IEEE754):
+#@samplecode
+[1.0].pack("G") # => "?\xF0\x00\x00\x00\x00\x00\x00"
+#@end
 
-  SPARC:
-//emlist{
-    [1.0].pack("G") # => "?\360\000\000\000\000\000\000"
-//}
+  SPARC64 (IEEE754):
+#@samplecode
+[1.0].pack("G") # => "?\xF0\x00\x00\x00\x00\x00\x00"
+#@end
 
   IEEE754準拠な環境の場合、以下のようにして符号、指数部、仮数部を取り出せます。
-//emlist{
-    s = [v].pack("G").unpack("B*")[0][0,1]    # 符号
-    e = [v].pack("G").unpack("B*")[0][1,11]   # 指数部
-    f = [v].pack("G").unpack("B*")[0][12,52]  # 仮数部
-//}
+#@samplecode
+s = [v].pack("G").unpack("B*")[0][0,1]    # 符号
+e = [v].pack("G").unpack("B*")[0][1,11]   # 指数部
+f = [v].pack("G").unpack("B*")[0][12,52]  # 仮数部
+#@end
 
   そして、s, e, f の意味は以下の通りです。
-//emlist{
-    sgn = s == "0" ? +1.0 : -1.0
-    exp = Integer("0b" + e)
-    fra = Integer("0b" + f)
-    if exp == 0
-      if fra == 0
-        sgn * 0                     # ±0 (positive/negative zero)
-      else
-        sgn * fra * 2**(-1022-52)   # 非正規化数 (denormalized number)
-      end
-    elsif exp == 2047
-      if fra == 0
-        sgn * Inf                   # ±∞ (positive/negative infinity)
-      else
-        NaN                         # 非数 (not a number)
-      end
-    else
-      fra += 1 << 52                # ゲタ
-      sgn * fra * 2**(exp-1023-52)  # 正規化数 (normalized number)
-    end
-//}
+#@samplecode
+sgn = s == "0" ? +1.0 : -1.0
+exp = Integer("0b" + e)
+fra = Integer("0b" + f)
+if exp == 0
+  if fra == 0
+    sgn * 0                     # ±0 (positive/negative zero)
+  else
+    sgn * fra * 2**(-1022-52)   # 非正規化数 (denormalized number)
+  end
+elsif exp == 2047
+  if fra == 0
+    sgn * Inf                   # ±∞ (positive/negative infinity)
+  else
+    NaN                         # 非数 (not a number)
+  end
+else
+  fra += 1 << 52                # ゲタ
+  sgn * fra * 2**(exp-1023-52)  # 正規化数 (normalized number)
+end
+#@end
 
 : p
 
-  ナル終端の文字列へのポインタ
-//emlist{
-    [""].pack("p")             # => "\310\037\034\010"
-    ["a", "b", "c"].pack("p3") # => " =\030\010\340^\030\010\360^\030\010"
-    [nil].pack("p")            # => "\000\000\000\000"
-//}
+  ヌル終端の文字列へのポインタ
+#@samplecode
+[""].pack("p")             # => "\x980\xBEf\x1CV\x00\x00"
+["a", "b", "c"].pack("p3") # => "\x98\xE5\x9ER\xD2U\x00\x00p\xE5\x9ER\xD2U\x00\x00H\xE5\x9ER\xD2U\x00\x00"
+[nil].pack("p")            # => "\x00\x00\x00\x00\x00\x00\x00\x00"
+#@end
 
 : P
 
   構造体(固定長文字列)へのポインタ
-//emlist{
-    [nil].pack("P")    # => "\000\000\000\000"
-    ["abc"].pack("P3") # => "x*\024\010"
+#@samplecode
+[nil].pack("P")    # => "\x00\x00\x00\x00\x00\x00\x00\x00"
+["abc"].pack("P3") # => "\xA0\xEE\er\x84U\x00\x00"
 
-    ["abc"].pack("P4") # => ArgumentError: too short buffer for P(3 for 4)
-    [""].pack("P")     # => ArgumentError: too short buffer for P(0 for 1)
-//}
+["abc"].pack("P4") # => ArgumentError: too short buffer for P(3 for 4)
+[""].pack("P")     # => ArgumentError: too short buffer for P(0 for 1)
+#@end
 
 : u
 
   uuencodeされた文字列
-//emlist{
-    [""].pack("u")           # => ""
-    ["a"].pack("u")          # => "!80``\n"
-    ["abc"].pack("u")        # => "#86)C\n"
-    ["abcd"].pack("u")       # => "$86)C9```\n"
-    ["a"*45].pack("u")       # => "M86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A\n"
-    ["a"*46].pack("u")       # => "M86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A\n!80``\n"
-    ["abcdefghi"].pack("u6") # => "&86)C9&5F\n#9VAI\n"
-//}
+#@samplecode
+[""].pack("u")           # => ""
+["a"].pack("u")          # => "!80``\n"
+["abc"].pack("u")        # => "#86)C\n"
+["abcd"].pack("u")       # => "$86)C9```\n"
+["a"*45].pack("u")       # => "M86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A\n"
+["a"*46].pack("u")       # => "M86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A86%A\n!80``\n"
+["abcdefghi"].pack("u6") # => "&86)C9&5F\n#9VAI\n"
+#@end
 
 : U
 
   UTF-8
-//emlist{
-    [0].pack("U")                               # => "\000"
-    [1].pack("U")                               # => "\001"
-    [0x7f].pack("U")                            # => "\177"
-    [0x80].pack("U")                            # => "\302\200"
-    [0x7fffffff].pack("U")                      # => "\375\277\277\277\277\277"
-    [0x80000000].pack("U")                      # => RangeError
-    [0,256,65536].pack("U3")                    # => "\000\304\200\360\220\200\200"
+#@samplecode
+[0].pack("U")                               # => "\u0000"
+[1].pack("U")                               # => "\u0001"
+[0x7f].pack("U")                            # => "\u007F"
+[0x80].pack("U")                            # => "\u0080"
+[0x7fffffff].pack("U")                      # => "\xFD\xBF\xBF\xBF\xBF\xBF"
+[0x80000000].pack("U")                      # => RangeError: pack(U): value out of range
+[0,256,65536].pack("U3").b                  # => "\x00\xC4\x80\xF0\x90\x80\x80"
 
-    "\000\304\200\360\220\200\200".unpack("U3") # => [0, 256, 65536]
-    "\000\304\200\360\220\200\200".unpack("U")  # => [0]
-    "\000\304\200\360\220\200\200".unpack("U*") # => [0, 256, 65536]
-//}
+"\x00\xC4\x80\xF0\x90\x80\x80".unpack("U3") # => [0, 256, 65536]
+"\x00\xC4\x80\xF0\x90\x80\x80".unpack("U")  # => [0]
+"\x00\xC4\x80\xF0\x90\x80\x80".unpack("U*") # => [0, 256, 65536]
+#@end
 
 : w
 
@@ -686,56 +717,54 @@ n, N, v, V を用います。
 
   ISO/IEC 8825-1:1995 : Information technology−ASN.1 encoding rules : Specification of Basic Encoding Rules(BER) に定められる整数の符号化方法。
 
-//emlist{
-    [0].pack("w")             # => "\000"
-    [1].pack("w")             # => "\001"
-    [127].pack("w")           # => "\177"
-    [128].pack("w")           # => "\201\000"
-    [0x3fff].pack("w")        # => "\377\177"
-    [0x4000].pack("w")        # => "\201\200\000"
-    [0x3fffffff].pack("w")    # => "\203\377\377\377\177"
-    [0x40000000].pack("w")    # => "\204\200\200\200\000"
-    [0xffffffff].pack("w")    # => "\217\377\377\377\177"
-    [0x100000000].pack("w")   # => "\220\200\200\200\000"
+#@samplecode
+[0].pack("w")             # => "\x00"
+[1].pack("w")             # => "\x01"
+[127].pack("w")           # => "\x7F"
+[128].pack("w")           # => "\x81\x00"
+[0x3fff].pack("w")        # => "\xFF\x7F"
+[0x4000].pack("w")        # => "\x81\x80\x00"
+[0x3fffffff].pack("w")    # => "\x83\xFF\xFF\xFF\x7F"
+[0x40000000].pack("w")    # => "\x84\x80\x80\x80\x00"
+[0xffffffff].pack("w")    # => "\x8F\xFF\xFF\xFF\x7F"
+[0x100000000].pack("w")   # => "\x90\x80\x80\x80\x00"
 
-    "\0".unpack("w")          # => [0]
-    "\0\201\0\1".unpack("w*") # => [0, 128, 1]
-//}
+"\x00".unpack("w")              # => [0]
+"\x00\x81\x00\x01".unpack("w*") # => [0, 128, 1]
+#@end
 
   なお、BER圧縮整数でエンコードした結果は大小関係を保存しない。
   たとえば、[0x3fff].pack("w") > [0x4000].pack("w") である。
 
 : x
 
-  ナルバイト/1バイト読み飛ばす
-//emlist{
-    [?a, ?b].pack("CxC")    # => "a\000b"
-    [?a, ?b].pack("Cx3C")   # => "a\000\000\000b"
+  ヌルバイト（pack）／1バイト読み飛ばし（unpack）
+#@samplecode
+[97, 98].pack("CxC")    # => "a\x00b"
+[97, 98].pack("Cx3C")   # => "a\x00\x00\x00b"
 
-    "a\000b".unpack("CxC")  # => [97, 98]
-    "a\377b".unpack("CxC")  # => [97, 98]
-    "a\377b".unpack("Cx3C") # => ArgumentError: x outside of string
-//}
+"abc".unpack("CxC")  # => [97, 99]
+"abc".unpack("Cx3C") # => ArgumentError: x outside of string
+#@end
 
 : X
 
   1バイト後退
-//emlist{
-    [?a, ?b, ?c].pack("CCXC") # => "ac"
+#@samplecode
+[97, 98, 99].pack("CCXC") # => "ac"
 
-    "abcdef".unpack("x*XC") # => [102]
-//}
+"abcdef".unpack("x*XC") # => [102]
+#@end
 
 : @
 
   絶対位置への移動
-//emlist{
-    [?a, ?b].pack("C @3 C") # => "a\000\000b"
+#@samplecode
+[97, 98].pack("C @3 C") # => "a\x00\x00b"
 
-    "a\000\000b".unpack("C @3 C") # => [97, 98]
-//}
+"abcd".unpack("C @3 C") # => [97, 100]
+#@end
 
-#@since 2.3.0
 : j
 
 intptr_t (ポインタの幅の符号つき整数, エンディアンに依存)
@@ -746,9 +775,7 @@ intptr_t (ポインタの幅の符号つき整数, エンディアンに依存)
 uintptr_t (ポインタの幅の符号なし整数, エンディアンに依存)
 #@# [[url:https://bugs.ruby-lang.org/issues/11215]]
 
-#@end
-
-==== 使用例
+=== 使用例
 
 以下、pack/unpack の使用例の一部です。
 
@@ -757,166 +784,162 @@ pack は暗号になりやすい面があることを考慮し、pack を使い�
 に別解を示すためです。
 
 : 数値(文字コード)の配列を文字列に変換する例
-//emlist{
-    [82, 117, 98, 121].pack("cccc")  # => "Ruby"
-    [82, 117, 98, 121].pack("c4")    # => "Ruby"
-    [82, 117, 98, 121].pack("c*")    # => "Ruby"
+#@samplecode
+[82, 117, 98, 121].pack("cccc")  # => "Ruby"
+[82, 117, 98, 121].pack("c4")    # => "Ruby"
+[82, 117, 98, 121].pack("c*")    # => "Ruby"
 
-    s = ""
-    [82, 117, 98, 121].each {|c| s << c}
-    s    # => "Ruby"
+s = ""
+[82, 117, 98, 121].each {|c| s << c}
+s    # => "Ruby"
 
-    [82, 117, 98, 121].collect {|c| sprintf "%c", c}.join   # => "Ruby"
+[82, 117, 98, 121].collect {|c| sprintf "%c", c}.join   # => "Ruby"
 
-    [82, 117, 98, 121].inject("") {|s, c| s << c}    # => "Ruby"
-//}
+[82, 117, 98, 121].inject("") {|s, c| s << c}    # => "Ruby"
+#@end
 
 : 文字列を数値(文字コード)の配列に変換する例
-//emlist{
-    "Ruby".unpack('C*')    # => [82, 117, 98, 121]
+#@samplecode
+"Ruby".unpack('C*')    # => [82, 117, 98, 121]
 
-    a = []
-    "Ruby".each_byte {|c| a << c}
-    a    # => [82, 117, 98, 121]
-//}
+a = []
+"Ruby".each_byte {|c| a << c}
+a    # => [82, 117, 98, 121]
+#@end
 
-: "x" でナルバイトを埋めることができる
-//emlist{
-    [82, 117, 98, 121].pack("ccxxcc")    # => "Ru\000\000by"
-//}
+: "x" でヌルバイトを埋めることができる
+#@samplecode
+[82, 117, 98, 121].pack("ccxxcc")    # => "Ru\x00\x00by"
+#@end
 
 : "x" で文字を読み飛ばす事が出来る
-//emlist{
-    "Ru\0\0by".unpack('ccxxcc')    # => [82, 117, 98, 121]
-//}
+#@samplecode
+"Ru\x00\x00by".unpack('ccxxcc')    # => [82, 117, 98, 121]
+#@end
 
 : Hexダンプを数値の配列に変換する例
-//emlist{
-    "61 62 63 64 65 66".delete(' ').to_a.pack('H*').unpack('C*')
-    # => [97, 98, 99, 100, 101, 102]
+#@samplecode
+"61 62 63 64 65 66".delete(' ').lines.pack('H*').unpack('C*')
+# => [97, 98, 99, 100, 101, 102]
 
-    "61 62 63 64 65 66".split.collect {|c| c.hex}
-    # => [97, 98, 99, 100, 101, 102]
-//}
+"61 62 63 64 65 66".split.collect {|c| c.hex}
+# => [97, 98, 99, 100, 101, 102]
+#@end
 
 : バイナリと16進数のpackでは長さ指定は生成されるバイト数ではなく、ビットやニブルの個数を表す
-//emlist{
-    [0b01010010, 0b01110101, 0b01100010, 0b01111001].pack("C4")
-    # => "Ruby"
-    ["01010010011101010110001001111001"].pack("B32") # 8 bits * 4
-    # => "Ruby"
+#@samplecode
+[0b01010010, 0b01110101, 0b01100010, 0b01111001].pack("C4")
+# => "Ruby"
+["01010010011101010110001001111001"].pack("B32") # 8 bits * 4
+# => "Ruby"
 
-    [0x52, 0x75, 0x62, 0x79].pack("C4")
-    # => "Ruby"
-    ["52756279"].pack("H8")  # 2 nybbles * 4
-    # => "Ruby"
-//}
+[0x52, 0x75, 0x62, 0x79].pack("C4")
+# => "Ruby"
+["52756279"].pack("H8")  # 2 nybbles * 4
+# => "Ruby"
+#@end
 
 : テンプレート文字'a'の長さ指定は1つの文字列だけに適用される
-//emlist{
-    ["RUBY", "u", "b", "y"].pack("a4")
-    # => "RUBY"
+#@samplecode
+["RUBY", "u", "b", "y"].pack("a4")
+# => "RUBY"
 
-    ["RUBY", "u", "b", "y"].pack("aaaa")
-    # => "Ruby"
+["RUBY", "u", "b", "y"].pack("aaaa")
+# => "Ruby"
 
-    ["RUBY", "u", "b", "y"].pack("a*aaa")
-    # => "RUBYuby"
-//}
+["RUBY", "u", "b", "y"].pack("a*aaa")
+# => "RUBYuby"
+#@end
 
 : テンプレート文字"a"は、長さが足りない分をヌル文字で補う
-//emlist{
-    ["Ruby"].pack("a8")
-    # => "Ruby\000\000\000\000"
-//}
+#@samplecode
+["Ruby"].pack("a8")
+# => "Ruby\x00\x00\x00\x00"
+#@end
 
 : リトルエンディアンとビッグエンディアン
-//emlist{
-    [1,2].pack("s2")
-    # => "\000\001\000\002" # ビッグエンディアンのシステムでの出力
-    # => "\001\000\002\000" # リトルエンディアンのシステムでの出力
+#@samplecode
+[1,2].pack("s2")
+# => "\x01\x00\002\x00" # リトルエンディアンのシステムでの出力
+# => "\x00\x01\x00\002" # ビッグエンディアンのシステムでの出力
 
-    [1,2].pack("n2")
-    # => "\000\001\000\002" # システムによらずビッグエンディアン
+[1,2].pack("n2")
+# => "\x00\x01\x00\002" # システムによらずビッグエンディアン
 
-    [1,2].pack("v2")
-    # => "\001\000\002\000" # システムによらずリトルエンディアン
-//}
+[1,2].pack("v2")
+# => "\x01\x00\002\x00" # システムによらずリトルエンディアン
+#@end
 
 : ネットワークバイトオーダの signed long
-//emlist{
-      s = "\xff\xff\xff\xfe"
-      n = s.unpack("N")[0]
-      if n[31] == 1
-        n = -((n ^ 0xffff_ffff) + 1)
-      end
-      n # => -2
-//}
+#@samplecode
+s = "\xFF\xFF\xFF\xFE"
+n = s.unpack("N")[0]
+if n[31] == 1
+  n = -((n ^ 0xffff_ffff) + 1)
+end
+n # => -2
+#@end
 
 : ネットワークバイトオーダの signed long(その2)
-//emlist{
-      s = "\xff\xff\xff\xfe"
-      n = s.unpack("N").pack("l").unpack("l")[0]
-      n # => -2
-//}
+#@samplecode
+s = "\xFF\xFF\xFF\xFE"
+n = s.unpack("N").pack("l").unpack("l")[0]
+n # => -2
+#@end
 
 : IPアドレス
-//emlist{
-      require 'socket'
-      Socket.gethostbyname("localhost")[3].unpack("C4").join(".")
-      # => "127.0.0.1"
+#@samplecode
+require 'socket'
+official_hostname, alias_hostnames, address_family, *address_list = Socket.gethostbyname("localhost")
+address_list.find {|address| address.size == 4 }.unpack("C4").join(".")
+# => "127.0.0.1"
 
-      "127.0.0.1".split(".").collect {|c| c.to_i}.pack("C4")
-      # => "\177\000\000\001"
-//}
+"127.0.0.1".split(".").collect {|c| c.to_i}.pack("C4")
+# => "\x7F\x00\x00\x01"
+#@end
 
 : sockaddr_in 構造体
-//emlist{
-      require 'socket'
-      [Socket::AF_INET,
-       Socket.getservbyname('echo'),
-       127, 0, 0, 1].pack("s n C4 x8")
-      # => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
-//}
+#@samplecode
+require 'socket'
+[Socket::AF_INET,
+ Socket.getservbyname('echo'),
+ 127, 0, 0, 1].pack("s n C4 x8")
+# => "\x02\x00\x00\a\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
+#@end
 
-#@since 1.8.0
   pack/unpack を使う代わりに
   [[m:Socket.pack_sockaddr_in]],
   [[m:Socket.unpack_sockaddr_in]] メソッドがあります。
-#@end
 
 : '\0'終端文字列のアドレス
 
   テンプレート文字 "p" や "P" は、C 言語レベルのインタフェースのた
   めにあります(例えば [[m:IO#ioctl]])。
-//emlist{
-    ["foo"].pack("p")    # => "8\266\021\010"
-//}
+#@samplecode
+["foo"].pack("p")    # => "xp\xC2\x85\vV\x00\x00"
+#@end
 
   結果の文字列はゴミに見えますが、実際は文字列"foo\0"を指すアドレ
   ス(のバイナリ表現)です。以下のようにすれば見慣れた表記で見ること
   が出来ます
-//emlist{
-    printf "%#010x\n", "8\266\021\010".unpack("L")[0] # => 0x0811b638
-//}
+#@samplecode
+printf "%#014x\n", "xp\xC2\x85\vV\x00\x00".unpack("J")[0] # => 0x560b85c27078
+#@end
 
   アドレスが指す先のオブジェクト(この例で "foo\0") は、pack の結
   果が GC されるまではGCされないことが保証されています。
 
   unpack("p"), unpack("P") は、pack の結果からしか unpack できません。
-//emlist{
-    ["foo"].pack("p").unpack("p") # => ["foo"]
-    "8\266\021\010".unpack("p")
-    # => -:1:in `unpack': no associated pointer (ArgumentError)
-    #         from -:1
-//}
-#@since 1.8.0
+#@samplecode
+["foo"].pack("p").unpack("p") # => ["foo"]
+"xp\xC2\x85\vV\x00\x00".unpack("p")
+# => ArgumentError: no associated pointer
+#@end
   "p" や "P" は、nil を特別に扱い NULL
-  ポインタとして解釈します。(以下は、32bitマシンで一般的な結果)
-//emlist{
-      [nil].pack("p")        # => "\000\000\000\000"
-      "\0\0\0\0".unpack("p") # => [nil]
-//}
+  ポインタとして解釈します。(以下は、64bitマシンで一般的な結果)
+#@samplecode
+[nil].pack("p")        # => "\x00\x00\x00\x00\x00\x00\x00\x00"
+"\x00\x00\x00\x00\x00\x00\x00\x00".unpack("p") # => [nil]
 #@end
 
 : 構造体のアドレス
@@ -930,26 +953,25 @@ pack は暗号になりやすい面があることを考慮し、pack を使い�
       } v = {1,2,3};
 //}
   を表す文字列は
-//emlist{
-      v = [1,2,3].pack("i!s!l!")
-//}
+#@samplecode
+v = [1,2,3].pack("i!s!l!")
+#@end
   です。(byte alignment の問題から実際は適当な padding が必要に
   なるかもしれません)
 
   この構造体を指すアドレスは
-//emlist{
-      [v].pack("P")  # => "\300\265\021\010"
-//}
+#@samplecode
+[v].pack("P")  # => "\xC0\xCC2L\fV\x00\x00"
+#@end
   で得られます。
 
 : UTF-8からUCS-2への変換 (サロゲートを処理していないので UTF-16 とはいえない)
 
-  Little endian:
-//emlist{
-    ("Comments").unpack("U*").pack("v*") # => "C\000o\000m\000m\000e\000n\000t\000s\000"
-//}
-  Big endian:
-//emlist{
-    ("Comments").unpack("U*").pack("n*") # => "\000C\000o\000m\000m\000e\000n\000t\000s"
-//}
-
+  リトルエンディアン:
+#@samplecode
+("Comments").unpack("U*").pack("v*") # => "C\x00o\x00m\x00m\x00e\x00n\x00t\x00s\x00"
+#@end
+  ビッグエンディアン:
+#@samplecode
+("Comments").unpack("U*").pack("n*") # => "\x00C\x00o\x00m\x00m\x00e\x00n\x00t\x00s"
+#@end

@@ -34,8 +34,8 @@ modeは、O_RDONLY, O_WRONLY, O_RDWRのいずれかで
 FMODE_READWRITEは、FMODE_READABLEと
 FMODE_WRITEABLEの論理和です。
 
-Microsoft Windows などファイルにバイナリ／テキスト属性の区別があるプラッ
-トホームでは、modeにO_BINARYの論理和が指定されてい
+Microsoft Windows などファイルにバイナリ／テキスト属性の区別がある
+プラットフォームでは、modeにO_BINARYの論理和が指定されてい
 れば、戻り値にはFMODE_BINMODEの論理和が指定されます。
 
 --- static VALUE pipe_open(char *pname, char *mode)

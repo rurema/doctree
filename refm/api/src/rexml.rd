@@ -6,8 +6,8 @@ DOM スタイルと SAX スタイルの両方をカバーしています。
 DOM スタイルの API を使うためには [[lib:rexml/document]] を使います。
 
 SAX スタイルの API には、
-  * [[lib:rexml/parsers/sax2parser]] 
-  * [[lib:rexml/parsers/streamparser]] 
+  * [[lib:rexml/parsers/sax2parser]]
+  * [[lib:rexml/parsers/streamparser]]
 のいずれかを用います。
 
 また、それ以外のパーサとして

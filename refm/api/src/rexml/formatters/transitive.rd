@@ -8,35 +8,37 @@ XMLドキュメントをテキストの内容を変えずに
 テキストの空白は改行は変えたくない場合には役にたつかもしれません。
 ただ、ほとんどの場合は奇妙な出力結果になるでしょう。
 
-  require 'rexml/document'
-  require 'rexml/formatters/transitive'
-  doc = REXML::Document.new <<EOS
-  <root><children>
-  <grandchildren foo='bar' />
-  </children></root>
-  EOS
-  
-  transitive_formatter = REXML::Formatters::Transitive.new
-  output = StringIO.new
-  transitive_formatter.write(doc, output)
-  output.string 
-  # => "<root\n><children\n  >\n<grandchildren foo='bar'\n    />\n</children\n  ></root\n>\n"
-  print output.string
-  # >> <root
-  # >> ><children
-  # >>   >
-  # >> <grandchildren foo='bar'
-  # >>     />
-  # >> </children
-  # >>   ></root
-  # >> >
-  
-  output = StringIO.new
-  transitive_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
-  output.string 
-  # => "<children\n>\n<grandchildren foo='bar'\n  />\n</children\n>"
+#@samplecode
+require 'rexml/document'
+require 'rexml/formatters/transitive'
+doc = REXML::Document.new <<EOS
+<root><children>
+<grandchildren foo='bar' />
+</children></root>
+EOS
 
-  
+transitive_formatter = REXML::Formatters::Transitive.new
+output = StringIO.new
+transitive_formatter.write(doc, output)
+output.string
+# => "<root\n><children\n  >\n<grandchildren foo='bar'\n    />\n</children\n  ></root\n>\n"
+print output.string
+# >> <root
+# >> ><children
+# >>   >
+# >> <grandchildren foo='bar'
+# >>     />
+# >> </children
+# >>   ></root
+# >> >
+
+output = StringIO.new
+transitive_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
+output.string
+# => "<children\n>\n<grandchildren foo='bar'\n  />\n</children\n>"
+#@end
+
+
 == Class Method
 --- new(indentation=2, ie_hack=false) -> REXML::Formatter::Transitive
 フォーマッタオブジェクトを生成して返します。
@@ -51,4 +53,3 @@ ie_hack に真を渡すと、空のタグを閉じる前で空白を挿入しま
 
 @param indentation インデント幅
 @param ie_hack 空のタグを閉じる所にスペースを入れるかどうかを指定します
-

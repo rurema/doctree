@@ -113,16 +113,16 @@ Ruby によって GC されます。すなわち、ある使わなくなった
   def number
     'make_3'
   end
-  
+
   p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
   #=> [:make_1, :make_2]
-  
+
   re  = #確実に生成されるように代入操作を行う
   :make_1,
   :'make_2',
   :"#{number}",
   'make_4'.intern
-  
+
   p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
   #=> [:make_1, :make_2, :make_3, :make_4]
 
@@ -131,6 +131,10 @@ Ruby によって GC されます。すなわち、ある使わなくなった
 --- intern -> self
 --- to_sym -> self
 self を返します。
+
+例:
+
+  :foo.intern   # => :foo
 
 @see [[m:String#intern]]
 
@@ -144,9 +148,25 @@ self を返します。
 
   p :foo.id2name  # => "foo"
   p :foo.id2name.intern == :foo  # => true
-  
-@see [[m:String#intern]]
 
+@see [[m:String#intern]]
+#@since 3.0
+@see [[m:Symbol#name]]
+--- name -> String
+
+シンボルに対応する文字列を返します。
+
+[[m:Symbol#to_s]]と違って freeze された文字列を返します。
+
+#@samplecode
+p :fred.name         # => "fred"
+p :fred.name.frozen? # => true
+p :fred.to_s         # => "fred"
+p :fred.to_s.frozen? # => false
+#@end
+
+@see [[m:Symbol#to_s]]
+#@end
 --- to_proc -> Proc
 self に対応する Proc オブジェクトを返します。
 
@@ -154,9 +174,26 @@ self に対応する Proc オブジェクトを返します。
 Proc#callの第一引数をレシーバとして、 self という名前のメソッドを
 残りの引数を渡して呼びだします。
 
-  :to_i.to_proc["ff", 16]  #=> 255 ← "ff".to_i(16)と同じです
-  (1..3).collect(&:to_s)  #=> ["1", "2", "3"]
-  (1..3).inject(&:+)      #=> 6
+#@since 3.0.0
+生成される Proc オブジェクトは lambda です。
+#@samplecode
+:object_id.to_proc.lambda? # => true
+#@end
+#@end
+
+#@samplecode 明示的に呼ぶ例
+:to_i.to_proc["ff", 16]  # => 255 ← "ff".to_i(16)と同じ
+#@end
+
+#@samplecode 暗黙に呼ばれる例
+# メソッドに & とともにシンボルを渡すと
+# to_proc が呼ばれて Proc 化され、
+# それがブロックとして渡される。
+(1..3).collect(&:to_s)  # => ["1", "2", "3"]
+(1..3).select(&:odd?)   # => [1, 3]
+#@end
+
+@see [[ref:d:spec/call#block]]
 
 --- ==(other)        -> true | false
 
@@ -164,6 +201,34 @@ other が同じシンボルの時に真を返します。
 そうでない場合は偽を返します。
 
 @param other 比較対象のシンボルを指定します。
+
+例:
+
+  :aaa == :aaa    #=> true
+  :aaa == :xxx    #=> false
+
+#@since 2.7.0
+--- start_with?(*prefixes)   -> bool
+
+self の先頭が prefixes のいずれかであるとき true を返します。
+
+(self.to_s.start_with?と同じです。)
+
+@param prefixes パターンを表す文字列または正規表現 (のリスト)
+
+@see [[m:Symbol#end_with?]]
+
+@see [[m:String#start_with?]]
+
+#@samplecode
+:hello.start_with?("hell")               #=> true
+:hello.start_with?(/H/i)                 #=> true
+
+# returns true if one of the prefixes matches.
+:hello.start_with?("heaven", "hell")     #=> true
+:hello.start_with?("heaven", "paradise") #=> false
+#@end
+#@end
 
 --- succ -> Symbol
 --- next -> Symbol
@@ -177,21 +242,25 @@ other が同じシンボルの時に真を返します。
 
 @see [[m:String#succ]]
 
---- <=>(other) -> -1 | 0 | 1
+--- <=>(other) -> -1 | 0 | 1 | nil
 
 self と other のシンボルに対応する文字列を ASCII コード順で比較して、
-self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
-ます。
+self が小さい時には -1、等しい時には 0、大きい時には 1 を返します。
+
+other がシンボルではなく比較できない時には nil を返します。
 
 @param other 比較対象のシンボルを指定します。
 
-  p :aaa <=> :xxx  # => -1
-  p :aaa <=> :aaa  # => 0
-  p :xxx <=> :aaa  # => 1
+#@samplecode
+p :aaa <=> :xxx  # => -1
+p :aaa <=> :aaa  # => 0
+p :xxx <=> :aaa  # => 1
+p :foo <=> "foo" # => nil
+#@end
 
-@see [[m:String#<=>]]
+@see [[m:String#<=>]], [[m:Symbol#casecmp]]
 
---- casecmp(other) -> -1 | 0 | 1
+--- casecmp(other) -> -1 | 0 | 1 | nil
 
 [[m:Symbol#<=>]] と同様にシンボルに対応する文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
@@ -203,17 +272,22 @@ Unicode 全体ではなく、A-Z/a-z だけです。
 
 @param other 比較対象のシンボルを指定します。
 
-  :aBcDeF.casecmp(:abcde)     #=> 1
-  :aBcDeF.casecmp(:abcdef)    #=> 0
-  :aBcDeF.casecmp(:abcdefg)   #=> -1
-  :abcdef.casecmp(:ABCDEF)    #=> 0
-  :"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") #=> 1
+#@samplecode
+:aBcDeF.casecmp(:abcde)     #=> 1
+:aBcDeF.casecmp(:abcdef)    #=> 0
+:aBcDeF.casecmp(:abcdefg)   #=> -1
+:abcdef.casecmp(:ABCDEF)    #=> 0
+:"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") #=> 1
+#@end
 
-nil は文字列のエンコーディングが非互換の時に返されます。
+other がシンボルではない場合や、文字列のエンコーディングが非互換の場合は、nil を返します。
 
-  "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}")   #=> nil
+#@samplecode
+:foo.casecmp("foo")   #=> nil
+"\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}")   #=> nil
+#@end
 
-@see [[m:String#casecmp]]
+@see [[m:String#casecmp]], [[m:Symbol#<=>]], [[m:Symbol#casecmp?]]
 
 #@since 2.4.0
 --- casecmp?(other) -> bool | nil
@@ -223,17 +297,22 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @param other 比較対象のシンボルを指定します。
 
-  :abcdef.casecmp?(:abcde)     #=> false
-  :aBcDeF.casecmp?(:abcdef)    #=> true
-  :abcdef.casecmp?(:abcdefg)   #=> false
-  :abcdef.casecmp?(:ABCDEF)    #=> true
-  :"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+#@samplecode
+:abcdef.casecmp?(:abcde)     #=> false
+:aBcDeF.casecmp?(:abcdef)    #=> true
+:abcdef.casecmp?(:abcdefg)   #=> false
+:abcdef.casecmp?(:ABCDEF)    #=> true
+:"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+#@end
 
-nil は文字列のエンコーディングが非互換の時に返されます。
+other がシンボルではない場合や、文字列のエンコーディングが非互換の場合は、nil を返します。
 
-  "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}")   #=> nil
+#@samplecode
+:foo.casecmp?("foo")   #=> nil
+"\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}")   #=> nil
+#@end
 
-@see [[m:String#casecmp?]]
+@see [[m:String#casecmp?]], [[m:Symbol#casecmp]]
 #@end
 
 --- =~(other) -> Integer | nil
@@ -252,7 +331,11 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @see [[m:String#=~]]
 
+#@since 2.4.0
 --- match(other) -> MatchData | nil
+#@else
+--- match(other) -> Integer | nil
+#@end
 
 正規表現 other とのマッチを行います。
 
@@ -260,13 +343,23 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 
 @param other 比較対象のシンボルを指定します。
 
+#@since 2.4.0
 @return マッチが成功すれば MatchData オブジェクトを、そうでなければ nil を返します。
 
-  p :foo.match /foo/    # => #<MatchData "foo">
-  p :foobar.match /bar/ # => #<MatchData "bar">
-  p :foo.match /bar/    # => nil
+  p :foo.match(/foo/)    # => #<MatchData "foo">
+  p :foobar.match(/bar/) # => #<MatchData "bar">
+#@else
+@return マッチが成功すればマッチした位置を、そうでなければ nil を返します。
+
+  p :foo.match(/foo/)    # => 0
+  p :foobar.match(/bar/) # => 3
+#@end
+  p :foo.match(/bar/)    # => nil
 
 @see [[m:String#match]]
+#@since 2.4.0
+@see [[m:Symbol#match?]]
+#@end
 
 #@since 2.4.0
 --- match?(regexp, pos = 0) -> bool
@@ -274,6 +367,15 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 regexp.match?(self, pos) と同じです。
 regexp が文字列の場合は、正規表現にコンパイルします。
 詳しくは [[m:Regexp#match?]] を参照してください。
+
+例:
+
+  :Ruby.match?(/R.../)    # => true
+  :Ruby.match?('Ruby')    # => true
+  :Ruby.match?('Ruby',1)  # => false
+  :Ruby.match?('uby',1)   # => true
+  :Ruby.match?(/P.../)    # => false
+  $&                      # => nil
 
 @see [[m:Regexp#match?]], [[m:String#match?]]
 #@end
@@ -363,7 +465,33 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#empty?]]
 
+#@since 2.7.0
+--- end_with?(*suffixes)   -> bool
+
+self の末尾が suffixes のいずれかであるとき true を返します。
+
+(self.to_s.end_with?と同じです。)
+
+@param suffixes パターンを表す文字列 (のリスト)
+
+@see [[m:Symbol#start_with?]]
+
+@see [[m:String#end_with?]]
+
+#@samplecode
+:hello.end_with?("ello")               #=> true
+
+# returns true if one of the +suffixes+ matches.
+:hello.end_with?("heaven", "ello")     #=> true
+:hello.end_with?("heaven", "paradise") #=> false
+#@end
+#@end
+
+#@since 2.4.0
+--- upcase(*options) -> Symbol
+#@else
 --- upcase -> Symbol
+#@end
 
 小文字を大文字に変換したシンボルを返します。
 
@@ -373,7 +501,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#upcase]]
 
+#@since 2.4.0
+--- downcase(*options) -> Symbol
+#@else
 --- downcase -> Symbol
+#@end
 
 大文字を小文字に変換したシンボルを返します。
 
@@ -383,7 +515,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#downcase]]
 
+#@since 2.4.0
+--- capitalize(*options) -> Symbol
+#@else
 --- capitalize -> Symbol
+#@end
 
 シンボルに対応する文字列の先頭の文字を大文字に、残りを小文字に変更した
 シンボルを返します。
@@ -397,7 +533,11 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 @see [[m:String#capitalize]]
 
+#@since 2.4.0
+--- swapcase(*options) -> Symbol
+#@else
 --- swapcase -> Symbol
+#@end
 
 'A' から 'Z' までのアルファベット大文字を小文字に、'a' から 'z' までの
 アルファベット小文字を大文字に変更したシンボルを返します。
@@ -413,6 +553,13 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 シンボルに対応する文字列のエンコーディング情報を表現した [[c:Encoding]] オブ
 ジェクトを返します。
+
+例:
+
+  # encoding: utf-8
+
+  :foo.encoding        # => #<Encoding:US-ASCII>
+  :あかさたな.encoding   # => #<Encoding:UTF-8>
 
 @see [[m:String#encoding]]
 

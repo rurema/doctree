@@ -1163,7 +1163,7 @@ ruby version 1.8 は安定版です。1.8.0 (2003-08-04) 以降、バグ修正�
   timeout に Timeout モジュールが定義されました。((<RCR#121>))
 
   関数 ((<timeout/timeout>)) は、モジュール関数 Timeout.timeout の別名に、
-  例外 ((<TimeoutError>)) は Timout::Error の別名になりました。
+  例外 ((<TimeoutError>)) は Timeout::Error の別名になりました。
 
 : ((<MatchData#captures|MatchData/captures>)) [new]
 
@@ -1288,7 +1288,7 @@ ruby version 1.8 は安定版です。1.8.0 (2003-08-04) 以降、バグ修正�
        TkWindow#database_class is defined for querying the option database.
        It's same to TkWinfo.classname(self).
      * add TkBindTag.new_by_name and TkDatabaseClass for binding to database class
-     * check varname whether already exsist or not. (TkVarAccess.new)
+     * check varname whether already exist or not. (TkVarAccess.new)
      * TkTextWin#bbox returns an array of four numbers
      * autoload TkDialog2, TkWarning2
      * scan event callback arguments and convert to proper type

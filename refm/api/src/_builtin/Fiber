@@ -22,8 +22,13 @@ Fiber に関するエラーが起きると発生します。
 
 ファイバーが終了するとその親にコンテキストが切り替わります。
 
+#@since 3.1
+Ruby 3.1 から fiber を require しなくても、
+コンテキストの切り替えに制限のない [[m:Fiber#transfer]] が使えます。
+#@else
 なお標準添付ライブラリ [[lib:fiber]] を require することにより、
 コンテキストの切り替えに制限のない [[m:Fiber#transfer]] が使えるようになります。
+#@end
 任意のファイバーにコンテキストを切り替えることができます。
 
 === 例外
@@ -98,6 +103,9 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
         from t.rb:5:in `<main>'
 
 == Class Methods
+#@since 3.1
+#@include(Fiber.current)
+#@end
 
 --- new{|obj| ... } -> Fiber
 
@@ -141,6 +149,53 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
  p a  #=> :foo
 
 == Instance Methods
+#@since 3.1
+#@include(Fiber.transfer)
+#@include(Fiber.alive_p)
+#@end
+#@since 2.7.0
+--- raise                                            -> object
+--- raise(message)                                   -> object
+--- raise(exception, message = nil, backtrace = nil) -> object
+
+selfが表すファイバーが最後に [[m:Fiber.yield]] を呼んだ場所で例外を発生させます。
+
+Fiber.yield が呼ばれていないかファイバーがすでに終了している場合、
+[[c:FiberError]] が発生します。
+
+引数を渡さない場合、[[c:RuntimeError]] が発生します。
+message 引数を渡した場合、message 引数をメッセージとした RuntimeError
+が発生します。
+
+その他のケースでは、最初の引数は [[c:Exception]] か Exception
+のインスタンスを返す exception メソッドを持ったオブジェクトである
+必要があります。
+この場合、2つ目の引数に例外のメッセージを渡せます。また3つ目の引数に
+例外発生時のスタックトレースを指定できます。
+
+@param message 例外のメッセージとなる文字列です。
+@param exception 発生させる例外です。
+@param backtrace 例外発生時のスタックトレースです。文字列の配列で指定します。
+
+#@samplecode 例
+f = Fiber.new { Fiber.yield }
+f.resume
+f.raise "Error!" # => Error! (RuntimeError)
+#@end
+
+#@samplecode ファイバー内のイテレーションを終了させる例
+f = Fiber.new do
+  loop do
+    Fiber.yield(:loop)
+  end
+  :exit
+end
+
+p f.resume              # => :loop
+p f.raise StopIteration # => :exit
+#@end
+#@end
+
 --- resume(*arg = nil)   -> object
 
 自身が表すファイバーへコンテキストを切り替えます。

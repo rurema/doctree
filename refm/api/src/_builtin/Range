@@ -2,23 +2,96 @@
 
 include Enumerable
 
-範囲オブジェクトのクラス。範囲オブジェクトは範囲演算子 .. または
-... によって生成されます。.. 演算子によって生成された範囲
-オブジェクトは終端を含み、... 演算子によって生成された範囲オブジェ
-クトは終端を含みません。
+範囲オブジェクトのクラス。
+範囲オブジェクトは文字どおり何らかの意味での範囲を表します。数の範囲はもちろん、
+日付の範囲や、「"a" から "z" まで」といった文字列の範囲を表すこともできます。
 
-=== 例
+==== 作り方
 
-  for i in 1..5
-     # 処理
-  end
+範囲オブジェクトは、[[m:Range.new]] を用いるほか、範囲演算子（`..' または `...'）を
+用いた [[ref:d:spec/operator#range]] で生成できます。
+いずれの方法でも始端と終端を与えます。
 
-これは 1 から 5 までの範囲オブジェクトを生成して、それぞれの値に対して
-繰り返すと言う意味です。
+#@samplecode 範囲オブジェクトの例
+Range.new(1, 5) # 1 以上 5 以下
+1..5            # 同上
+1...5           # 1 以上 5 未満
+#@end
 
-範囲演算子のオペランドは互いに <=> で比較できる必要があります。
-さらに [[m:Range#each]] を実行するためには succ メソッ
-ドを実行できるものでなければいけません。
+この例で分かるように、範囲オブジェクトは終端を含む範囲も含まない範囲も表せます。
+
+#@since 2.6.0
+Ruby 2.6.0 からは、終端に nil を与えることで「終端を持たない範囲オブジェクト」
+を作ることができるようになりました。
+
+#@samplecode 終端を持たない範囲オブジェクト
+p Range.new(1, nil) # 1 以上（上限無し）を表す
+p(1..nil)           # 同上
+p(1..)              # 同上（略した書き方）
+#@end
+
+#@since 2.7.0
+また、Ruby 2.7.0 では始端に nil を与えることで「始端を持たない範囲オブジェクト」
+を作ることもできるようになりました。
+
+#@samplecode 始端を持たない範囲オブジェクト
+p Range.new(nil, 5) # 5 以下（下限無し）を表す
+p(nil..5)           # 同上
+p(..5)              # 同上（略した書き方）
+#@end
+
+始端も終端も持たない範囲オブジェクトは「全範囲」を表します。
+
+#@samplecode 始端も終端も持たない範囲オブジェクト
+# 以下はすべて同じ範囲
+p Range.new(nil, nil) # => nil..nil
+p(nil..nil)           # => nil..nil
+p(..nil)              # => nil..nil
+p(nil..)              # => nil..nil
+#@end
+
+範囲式で両端を略した書き方はできません。
+
+  p(..)  # => SyntaxError
+  p(...) # Ruby 2.7 で導入されたメソッド引数の forward として解釈されてしまう
+
+#@end
+#@end
+
+==== 機能
+
+範囲オブジェクトは範囲を表しているので、基本的な機能として「ある値がその範囲に
+含まれるか否かを判定する」ということがあります。
+
+#@samplecode 値が範囲に含まれるかどうかを判定
+p (1..5).cover?(6)  # => false
+p (1..5).cover?(5)  # => true
+p (1...5).cover?(5) # => false
+#@end
+
+[[m:Range#cover?]] メソッドでの判定には演算子 <=> が使われます。
+
+当然、始端と終端は <=> メソッドで比較可能である（nil 以外を返す）必要が
+あります。
+
+範囲オブジェクトのもう一つの基本的機能は繰り返しの範囲を表すことです。
+
+#@samplecode 繰り返しの範囲を範囲オブジェクトで表す
+(3..5).each{ |i| p i }
+# => 3
+#    4
+#    5
+
+(3...5).each{ |i| p i }
+# => 3
+#    4
+#@end
+
+繰り返しの範囲を表す範囲オブジェクトは、始端が「次の値」を返す succ メソッドを
+持たなければなりません。
+
+Range クラスには [[c:Enumerable]] が include してあるので，[[m:Range#each]] に
+基づき、Enumerable モジュールが提供する多様なメソッドを使うことができます。
 
 === 破壊的な変更
 
@@ -27,9 +100,21 @@ Ruby の Range クラスは immutable です。
 ですので、一度生成された Range のオブジェクトの指し示す範囲は
 決して変更することはできません。
 
-  range = 1..10
-  range.first     # => 1
-  range.first = 1 # => NoMethodError
+#@samplecode
+range = 1..10
+range.first     # => 1
+range.first = 1 # => NoMethodError
+#@end
+
+#@since 3.0.0
+また、Ruby 3.0.0 からすべての Range オブジェクトは freeze されるようになりました。
+#@samplecode
+p (1..10).frozen?
+# => true
+p Range.new(1, 10).frozen?
+# => true
+#@end
+#@end
 
 == Class Methods
 
@@ -47,127 +132,216 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 @raise ArgumentError first <=> last が nil の場合に発生します
 
-例: 整数の範囲オブジェクトの場合
+#@samplecode 例: 整数の範囲オブジェクトの場合
+Range.new(1, 10)       # => 1..10
+Range.new(1, 10, true) # => 1...10
+#@end
 
-  Range.new(1, 10)       # => 1..10
-  Range.new(1, 10, true) # => 1...10
+#@samplecode 例: 日付オブジェクトの範囲オブジェクトの場合
+require 'date'
+Range.new(Date.today, Date.today >> 1).each {|d| puts d }
+# => 2017-09-16
+#    2017-09-17
+#    ...
+#    2017-10-16
+#@end
 
-例: 日付オブジェクトの範囲オブジェクトの場合  
+#@samplecode 例: IPアドレスの範囲オブジェクトの場合
+require 'ipaddr'
+Range.new(IPAddr.new("192.0.2.1"), IPAddr.new("192.0.2.3")).each {|ip| puts ip}
+# => 192.0.2.1
+#    192.0.2.2
+#    192.0.2.3
+#@end
 
-  require 'date'
-  Range.new(Date.today, Date.today >> 1).each {|d| puts d }
-  # => 2017-09-16
-       2017-09-17
-       ...
-       2017-10-16
-  
-例: IPアドレスの範囲オブジェクトの場合
-
-  require 'ipaddr'
-  Range.new(IPAddr.new("192.0.2.1"), IPAddr.new("192.0.2.3")).each {|ip| puts ip}
-  # => 192.0.2.1
-       192.0.2.2
-       192.0.2.3
-
-例: 自作のオブジェクトの場合
-
-  MyInteger = Struct.new(:value) do
-    def succ
-      self.class.new(value + 1)
-    end
-
-    def <=>(other)
-      value <=> other.value
-    end
-
-    def to_s
-      value.to_s
-    end
+#@samplecode 例: 自作のオブジェクトの場合
+MyInteger = Struct.new(:value) do
+  def succ
+    self.class.new(value + 1)
   end
-  Range.new(MyInteger.new(1), MyInteger.new(3)).each {|i| puts i }
-  # => 1
-       2
-       3
+
+  def <=>(other)
+    value <=> other.value
+  end
+
+  def to_s
+    value.to_s
+  end
+end
+Range.new(MyInteger.new(1), MyInteger.new(3)).each {|i| puts i }
+# => 1
+#    2
+#    3
+#@end
 
 == Instance Methods
 
+#@until 2.6.0
 --- ===(obj) -> bool
+#@end
 --- include?(obj) -> bool
 --- member?(obj) -> bool
 
-obj が範囲内に含まれている時に真を返します。
+obj が範囲内に含まれている時に true を返します。
+そうでない場合は、false を返します。
 
+#@until 2.6.0
 [[m:Range#===]] は主に case 式での比較に用いられます。
-
-#@since 1.9.1
-<=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
-#@else
-include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
-と異なり <=> メソッドによる演算により範囲内かどうかを判定することに注意する必要があります。
 #@end
+
+<=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
+
+始端・終端・引数が数値であれば、 [[m:Range#cover?]] と同様の動きをします。
 
 @param obj 比較対象のオブジェクトを指定します。
 
-例:
+#@samplecode 例
+p ("a" .. "c").include?("b")  # => true
+p ("a" .. "c").include?("B")  # => false
+p ("a" .. "c").include?("ba") # => false
+p ("a" .. "c").cover?("ba")   # => true
 
-  p (0.1 .. 0.2).member?(0.15)  # => true
-  
-  # 文字列の場合、include? は辞書順の比較になる
-  p ("a" .. "c").include?("ba") # => false
-  p ("a" .. "c").member?("ba")  # => false
+p (1 .. 3).include?(1.5) # => true
+#@end
 
 @see [[ref:d:spec/control#case]]
-#@since 1.9.1
+#@since 2.6.0
+@see [[m:Range#cover?]], [[m:Range#===]]
+#@else
 @see [[m:Range#cover?]]
 #@end
 
-#@since 1.9.1
+#@since 2.6.0
+--- ===(obj) -> bool
+
+始端と終端の中に obj があるとき、true を返します。
+そうでないとき、false を返します。
+
+[[m:Range#===]] は主に case 式での比較に用いられます。
+
+#@samplecode 例
+p (0...50) === 79  #=> false
+p (60...80) === 79 #=> true
+
+case 79
+when  0...60  then  puts "low"
+when 60...80  then  puts "medium" # => medium
+when 80..100  then  puts "high"
+end
+#@end
+
+2.5 以前は、単純に [[m:Range#include?]] メソッドを内部で呼んでいました。
+
+しかし、2.6 以降では、(文字列を除いて) [[m:Range#cover?]] と同様の処理をするように切り替わりました。
+
+ただし、=== は、[[m:Range#cover?]] のように Range オブジェクトを引数にはとる設計はありません。
+
+#@samplecode 例
+require 'date'
+p (Date.today - 100...Date.today + 100).include?(DateTime.now)  #=> false
+p (Date.today - 100...Date.today + 100).cover?(DateTime.now)    #=> true
+p (Date.today - 100...Date.today + 100) ===  DateTime.now       #=> true
+# 2.5 以前は、=== は、include? と同じく比較できず false を返していました。
+#@end
+
+#@since 2.7.0
+2.7 以降の === は、文字列も [[m:Range#cover?]] と同様の処理をするようになりました。
+
+#@samplecode 例
+p ('a'..'z').include? 'at'  #=> false
+p ('a'..'z').cover? 'at'    #=> true
+p ('a'..'z') === 'at'       #=> true
+# 2.6 以前は、=== は、include? と同じく比較できず false を返していました。
+#@end
+#@end
+
+@see [[ref:d:spec/control#case]]
+@see [[m:Range#include?]], [[m:Range#cover?]]
+#@end
+
 --- cover?(obj) -> bool
 
-obj が範囲内に含まれている時に真を返します。
+obj が範囲内に含まれている時に true を返します。
 
 [[m:Range#include?]] と異なり <=> メソッドによる演算により範囲内かどうかを判定します。
 [[m:Range#include?]] は原則として離散値を扱い、
 Range#cover? は連続値を扱います。
 （数値については、例外として [[m:Range#include?]] も連続的に扱います。）
 
+[[m:Range#exclude_end?]]がfalseなら「begin <= obj <= end」を、
+trueなら「begin <= obj < end」を意味します。
+
 @param obj 比較対象のオブジェクトを指定します。
 
-例:
-
-  # 数値は連続的に扱われているため、 include? / cover? が同じ結果を返す
-  (1.1..2.3).include?(1.0)    # => false
-  (1.1..2.3).include?(1.1)    # => true
-  (1.1..2.3).include?(1.555)  # => true
-  (1.1..2.3).cover?(1.0)      # => false
-  (1.1..2.3).cover?(1.1)      # => true
-  (1.1..2.3).cover?(1.555)    # => true
-  
-  # String の例
-  ('b'..'d').include?('d')    # => true
-  ('b'..'d').include?('ba')   # => false
-  ('b'..'d').cover?('d')      # => true
-  ('b'..'d').cover?('ba')     # => true
-  
-  # Date, DateTime の例
-  (Date.new(2014,1,3)..Date.new(2014,1,5)).include?(Date.new(2014,1,5))           # => true
-  (Time.new(2014,1,3)..Time.new(2014,1,5)).include?(Time.new(2014,1,4,10,10,10))  # => true
-  (Date.new(2014,1,3)..Date.new(2014,1,5)).cover?(Date.new(2014,1,5))             # => true
-  (Time.new(2014,1,3)..Time.new(2014,1,5)).cover?(Time.new(2014,1,4,10,10,10))    # => true
-
-@see [[m:Range#include?]]
+#@samplecode 数値は連続的に扱われているため、 include? / cover? が同じ結果を返す
+(1.1..2.3).include?(1.0)    # => false
+(1.1..2.3).include?(1.1)    # => true
+(1.1..2.3).include?(1.555)  # => true
+(1.1..2.3).cover?(1.0)      # => false
+(1.1..2.3).cover?(1.1)      # => true
+(1.1..2.3).cover?(1.555)    # => true
 #@end
+
+#@samplecode String の例
+('b'..'d').include?('d')    # => true
+('b'..'d').include?('ba')   # => false
+('b'..'d').cover?('d')      # => true
+('b'..'d').cover?('ba')     # => true
+#@end
+
+#@samplecode Date, DateTime の例
+require 'date'
+(Date.today - 365 .. Date.today + 365).include?(Date.today)    #=> true
+(Date.today - 365 .. Date.today + 365).include?(DateTime.now)  #=> false
+(Date.today - 365 .. Date.today + 365).cover?(Date.today)      #=> true
+(Date.today - 365 .. Date.today + 365).cover?(DateTime.now)    #=> true
+#@end
+
+#@since 2.6.0
+
+--- cover?(range) -> bool
+
+2.6 以降の cover? は、[[m:Range#include?]] や [[m:Range#===]] と異なり、
+引数に Range オブジェクトを指定して比較できます。
+
+引数が Range オブジェクトの場合、引数の範囲が self の範囲に含まれる時に true を返します。
+
+@param range 比較対象の Range クラスのインスタンスを指定します。
+
+#@samplecode 引数が Range の例
+(1..5).cover?(2..3)     #=> true
+(1..5).cover?(0..6)     #=> false
+(1..5).cover?(1...6)    #=> true
+#@end
+
+「(a..b).cover?(c...d)」のように終端を含まない Range オブジェクトが引数に渡されており、
+「a <= c && b < d」を満たし、cが数値ではない(つまり引数の Range の終端を
+求めるために succ メソッドの呼び出しが必要な)場合、パフォーマンスの問題が起きる可能性があります。
+
+#@samplecode パフォーマンス上の問題が起きる例
+p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz') # => true
+#@end
+#@end
+
+@see [[m:Range#include?]], [[m:Range#===]]
 
 --- begin -> object
 --- first -> object
 
-始端の要素を返します。範囲オブジェクトが始端を含むかどうかは関係ありま
-せん。
+始端の要素を返します。
+始端を持たない範囲オブジェクトの場合、begin はnilを返しますが, first は例外 [[c:RangeError]] が発生します。
 
-例:
+#@samplecode 例
+# 始端を持つ場合
+p (1..5).begin # => 1
+p (1..0).begin # => 1
+p (1..5).first # => 1
+p (1..0).first # => 1
 
-  p (1..5).begin # => 1
-  p (1..0).begin # => 1
+# 始端を持たない場合
+p (..5).begin #=> nil
+p (..5).first #=> RangeError
+#@end
 
 @see [[m:Range#end]]
 
@@ -184,38 +358,34 @@ Range#cover? は連続値を扱います。
 
 @raise ArgumentError n に負の数を指定した場合に発生します。
 
-例:
-
-  (10..20).first(3)  # => [10, 11, 12]
+#@samplecode 例
+(10..20).first(3)  # => [10, 11, 12]
+#@end
 
 @see [[m:Range#last]], [[ruby-core:12697]]
 #@end
 
 --- each {|item|  ... } -> self
-#@since 1.8.7
 #@since 1.9.1
 --- each -> Enumerator
 #@else
 --- each -> Enumerable::Enumerator
 #@end
-#@end
 
 範囲内の要素に対して繰り返します。
 
-#@since 1.8.0
 Range#each は各要素の succ メソッドを使用してイテレーションするようになりました。
 
 @raise TypeError succ メソッドを持たないクラスの範囲オブジェクトに対してこのメソッドを呼んだ場合に発生します。
 
+
+#@samplecode 例
+(10..15).each {|n| print n, ' ' }
+# prints: 10 11 12 13 14 15
+
+(2.5..5).each {|n| print n, ' ' }
+# raises: TypeError: can't iterate from Float
 #@end
-
-例:
-
-  (10..15).each {|n| print n, ' ' }
-  # prints: 10 11 12 13 14 15
-
-  (2.5..5).each {|n| print n, ' ' }
-  # raises: TypeError: can't iterate from Float
 
 --- end -> object
 --- last -> object
@@ -223,10 +393,10 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 終端の要素を返します。範囲オブジェクトが終端を含むかどうかは関係ありま
 せん。
 
-例:
-
-  (10..20).last      # => 20
-  (10...20).last     # => 20
+#@samplecode 例
+(10..20).last      # => 20
+(10...20).last     # => 20
+#@end
 
 @see [[m:Range#begin]]
 
@@ -247,10 +417,10 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 ([[m:Range#exclude_end?]] の戻り値)に関わらず終端の要素を返す事に注意し
 てください。
 
-例:
-
-  (10..20).last(3)   # => [18, 19, 20]
-  (10...20).last(3)  # => [17, 18, 19]
+#@samplecode 例
+(10..20).last(3)   # => [18, 19, 20]
+(10...20).last(3)  # => [17, 18, 19]
+#@end
 
 @see [[m:Range#first]]
 
@@ -261,142 +431,301 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 
 範囲オブジェクトが終端を含まないとき真を返します。
 
-例:
-
-  (1..5).exclude_end?     # => false
-  (1...5).exclude_end?    # => true
-
-#@since 1.8.0
---- step(s = 1) {|item| ... } -> self
-#@since 1.8.7
-#@since 1.9.1
---- step(s = 1) -> Enumerator
-#@else
---- step(s = 1) -> Enumerable::Enumerator
+#@samplecode 例
+(1..5).exclude_end?     # => false
+(1...5).exclude_end?    # => true
 #@end
+
+--- step(s = 1) {|item| ... } -> self
+--- step(s = 1) -> Enumerator
+#@since 2.6.0
+--- step(s = 1) -> Enumerator::ArithmeticSequence
+--- %(s)        -> Enumerator
+--- %(s)        -> Enumerator::ArithmeticSequence
 #@end
 
 範囲内の要素を s おきに繰り返します。
 
+#@since 2.6.0
+@param s 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+@return ブロックを指定した時は self を返します。
+@return ブロックを指定しなかった時かつ数値の Range の時は [[c:Enumerator::ArithmeticSequence]] を返します。
+@return ブロックを指定しなかったその他の Range の時は [[c:Enumerator]] を返します。(例: String の Range)
+#@else
 @param s 正の整数を指定します。
-
+@return ブロックつきの時は self を返します。
+@return ブロックなしの時は [[c:Enumerator]] を返します。
 @raise ArgumentError s に 0 または負の数を指定した場合に発生します
+#@end
 
-例:
-
-  ("a" .. "f").step(2) {|v| p v}
-  # => "a"
-       "c"
-       "e"
+#@samplecode 例
+("a" .. "f").step(2) {|v| p v}
+# => "a"
+#    "c"
+#    "e"
 #@end
 
 --- ==(other)     -> bool
 
 指定された other が Range クラスのインスタンスであり、
-始点と終点が == メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
+始端と終端が == メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-例:
-
-  p (1..2) == (1..2)               # => true
-  p (1..2) == (1...2)              # => false
-  p (1..2) == Range.new(1.0, 2.0)  # => true
+#@samplecode 例
+p (1..2) == (1..2)               # => true
+p (1..2) == (1...2)              # => false
+p (1..2) == Range.new(1.0, 2.0)  # => true
+#@end
 
 --- eql?(other)   -> bool
 
 指定された other が Range クラスのインスタンスであり、
-始点と終点が eql? メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
+始端と終端が eql? メソッドで比較して等しく、[[m:Range#exclude_end?]] が同じ場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
-例:
-
-  p (1..2).eql?(1..2)                 # => true
-  p (1..2).eql?(1...2)                # => false
-  p (1..2).eql?(Range.new(1.0, 2.0))  # => false
+#@samplecode 例
+p (1..2).eql?(1..2)                 # => true
+p (1..2).eql?(1...2)                # => false
+p (1..2).eql?(Range.new(1.0, 2.0))  # => false
+#@end
 
 --- hash    -> Integer
 
-始点と終点のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
+始端と終端のハッシュ値と [[m:Range#exclude_end?]] の値からハッシュ値を計算して整数として返します。
 
-例:
+#@samplecode 例
+p (1..2).hash    # => 5646
+p (1...2).hash   # => 16782863
+#@end
 
-  p (1..2).hash    # => 5646
-  p (1...2).hash   # => 16782863
+#@since 2.6.0
+--- to_a -> Array
+--- entries -> Array
+
+self を配列に変換します。
+
+@raise RangeError 終端のない Range オブジェクトを変換しようとしたときに発生します。
+
+#@samplecode 例
+p (5..0).to_a      # => []
+p (0..3).to_a      # => [0, 1, 2, 3]
+p ('a'..'c').to_a  # => ["a", "b", "c"]
+p (:a..:d).to_a  # => [:a, :b, :c, :d]
+
+require 'date'
+p (Date.new(1965, 4, 14) .. Date.new(1965, 4, 14)).to_a # => [#<Date: 1965-04-14 ((2438865j,0s,0n),+0s,2299161j)>]
+
+(1..).to_a   # RangeError: cannot convert endless range to an array
+#@end
+#@end
 
 --- to_s -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは #to_s メソッドで文
+self を文字列に変換します(始端と終端のオブジェクトは #to_s メソッドで文
 字列に変換されます)。
 
 @see [[m:Range#inspect]]
 
+#@samplecode 例
+(1..5).to_s      # => "1..5"
+("1".."5").to_s  # => "1..5"
+#@end
+
 --- inspect -> String
 
-self を文字列に変換します(始点と終点のオブジェクトは #inspect メソッド
+self を文字列に変換します(始端と終端のオブジェクトは #inspect メソッド
 で文字列に変換されます)。
 
 @see [[m:Range#to_s]]
 
+#@samplecode 例
+(1..5).inspect      # => "1..5"
+("1".."5").inspect  # => "\"1\"..\"5\""
+#@end
+
 #@since 1.9.1
 --- min               -> object | nil
+#@since 2.2.0
+--- min(n)            -> [object]
+#@end
 
+#@since 2.2.0
+範囲内の最小の値、もしくは最小の n 要素が昇順で入った配列を返します。
+#@else
 範囲内の最小の値を返します。
+#@end
 
-例:
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
 
-   (1..5).min # => 1
+#@samplecode 例
+(1..5).min    # => 1
+#@end
+#@since 2.2.0
+#@samplecode 例
+(1..5).min(3) # => [1, 2, 3]
+#@end
+#@end
 
-始端が終端より大きい場合、終端を含まない範囲オブジェクトの始端が終端と
+#@since 2.2.0
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は、引数を指定しない形式では nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
 等しい場合は nil を返します。
+#@end
 
-例:
-
-   (2..1).min  # => nil
-   (1...1).min # => nil
+#@samplecode 例
+(2..1).min     # => nil
+(1...1).min    # => nil
+#@end
+#@since 2.2.0
+#@samplecode 例
+(2..1).min(3)  # => []
+(1...1).min(3) # => []
+#@end
+#@end
 
 --- min {|a, b| ... } -> object | nil
+#@since 2.2.0
+--- min(n) {|a, b| ... } -> [object]
+#@end
 
+#@since 2.2.0
+ブロックの評価結果で範囲内の各要素の大小判定を行い、最小の要素、もしくは
+最小の n 要素を返します。引数を指定しない形式では、範囲内に要素が存在しなければ
+nil を返します。引数を指定する形式では、空の配列を返します。
+#@else
 ブロックの評価結果で範囲内の各要素の大小判定を行い、最小の要素を返しま
 す。範囲内に要素が存在しなければ nil を返します。
+#@end
 
 ブロックの値は、a > b のとき正、a == b のとき 0、 a < b のとき負の整数
 を、期待しています。
+
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
 
 @raise TypeError ブロックが整数以外を返したときに発生します。
 
 @see [[m:Range#first]], [[m:Range#max]], [[m:Enumerable#min]]
 
+#@samplecode 例
+h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+(1..3).min { |a, b| h[a].length <=> h[b].length }    # => 1
+#@end
+#@since 2.2.0
+#@samplecode 例
+(1..3).min(2) { |a, b| h[a].length <=> h[b].length } # => [1, 2]
+#@end
+#@end
+
+#@since 2.7.0
+--- minmax                      -> [object, object]
+--- minmax {|a, b| ... }        -> [object, object]
+
+範囲内の要素のうち、最小の要素と最大の要素を要素とするサイズ 2 の配列を返します。
+
+一つ目の形式では、全要素が互いに <=> メソッドで比較できることを仮定しています。
+
+二つ目の形式では、要素同士の比較をブロックを用いて行います。
+ブロックの値は、a > b のとき正、 a == b のとき 0、a < b のとき負の整数を、期待しています。
+
+#@samplecode 例
+(1..3).minmax # => [1, 3]
+
+h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+(1..3).minmax { |a, b| h[a].length <=> h[b].length } # => [1, 3]
+#@end
+
+#@end
+
 --- max               -> object | nil
+#@since 2.2.0
+--- max(n) -> [object]
+#@end
 
+#@since 2.2.0
+範囲内の最大の値、もしくは最大の n 要素が降順で入った配列を返します。
+#@else
 範囲内の最大の値を返します。
+#@end
 
-例:
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
 
-   (1..5).max  # => 5
+#@samplecode 例
+(1..5).max     # => 5
+#@end
+#@since 2.2.0
+#@samplecode 例
+(1..5).max(3)  # => [5, 4, 3]
+#@end
+#@end
 
-始端が終端より大きい場合、終端を含まない範囲オブジェクトの始端が終端と
+#@since 2.2.0
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は、引数を指定しない形式では nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
 等しい場合は nil を返します。
+#@end
 
-例:
-
-   (2..1).max  # => nil
-   (1...1).max # => nil
+#@samplecode 例
+(2..1).max     # => nil
+(1...1).max    # => nil
+#@end
+#@since 2.2.0
+#@samplecode 例
+(2..1).max(3)  # => []
+(1...1).max(3) # => []
+#@end
+#@end
 
 --- max {|a, b| ... } -> object | nil
+#@since 2.2.0
+--- max(n) {|a, b| ... } -> [object]
+#@end
 
+#@since 2.2.0
+ブロックの評価結果で範囲内の各要素の大小判定を行い、最大の要素、もしくは
+最大の n 要素を返します。引数を指定しない形式では、
+範囲内に要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
 ブロックの評価結果で範囲内の各要素の大小判定を行い、最大の要素を返しま
 す。範囲内に要素が存在しなければ nil を返します。
+#@end
 
 ブロックの値は、a > b のとき正、 a == b のとき 0、a < b のとき負の整数
 を、期待しています。
 
+#@since 2.2.0
+@param n 取得する要素数。
+#@end
+
 @raise TypeError ブロックが整数以外を返したときに発生します。
 
 @see [[m:Range#last]], [[m:Range#min]], [[m:Enumerable#max]]
+#@end
+
+#@samplecode 例
+h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+(1..3).max { |a, b| h[a].length <=> h[b].length }    # => 3
+#@end
+#@since 2.2.0
+#@samplecode 例
+(1..3).max(2) { |a, b| h[a].length <=> h[b].length } # => [3, 2]
+#@end
 #@end
 
 #@since 2.0.0
@@ -421,15 +750,16 @@ find-minimum モード(特に理由がない限りはこのモードを使う方
 
 ブロックの評価結果が true になる最初の要素を返すか、nil を返します。
 
-例:
 
-   ary = [0, 4, 7, 10, 12]
-   (0...ary.size).bsearch {|i| ary[i] >= 4 } # => 1
-   (0...ary.size).bsearch {|i| ary[i] >= 6 } # => 2
-   (0...ary.size).bsearch {|i| ary[i] >= 8 } # => 3
-   (0...ary.size).bsearch {|i| ary[i] >= 100 } # => nil
+#@samplecode 例
+ary = [0, 4, 7, 10, 12]
+(0...ary.size).bsearch {|i| ary[i] >= 4 } # => 1
+(0...ary.size).bsearch {|i| ary[i] >= 6 } # => 2
+(0...ary.size).bsearch {|i| ary[i] >= 8 } # => 3
+(0...ary.size).bsearch {|i| ary[i] >= 100 } # => nil
 
-   (0.0...Float::INFINITY).bsearch {|x| Math.log(x) >= 0 } # => 1.0
+(0.0...Float::INFINITY).bsearch {|x| Math.log(x) >= 0 } # => 1.0
+#@end
 
 find-any モードは [[man:bsearch(3)]] のように動作します。ブロックは真偽値
 ではなく、以下のような数値を返す必要があります。求める値の範囲がx...y
@@ -441,12 +771,12 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 
 ブロックの評価結果が 0 になるいずれかの要素を返すか、nil を返します。
 
-例:
-
-   ary = [0, 100, 100, 100, 200]
-   (0..4).bsearch {|i| 100 - ary[i] } # => 1, 2 or 3
-   (0..4).bsearch {|i| 300 - ary[i] } # => nil
-   (0..4).bsearch {|i|  50 - ary[i] } # => nil
+#@samplecode 例
+ary = [0, 100, 100, 100, 200]
+(0..4).bsearch {|i| 100 - ary[i] } # => 1, 2 or 3
+(0..4).bsearch {|i| 300 - ary[i] } # => nil
+(0..4).bsearch {|i|  50 - ary[i] } # => nil
+#@end
 
 上記の 2 つのモードを混在して使用しないでください(ブロックの評価結果は
 常に true/false、数値のいずれかを一貫して返すようにしてください)。
@@ -465,9 +795,9 @@ find-any モードは [[man:bsearch(3)]] のように動作します。ブロッ
 範囲内の要素数を返します。始端、終端のいずれかのオブジェクトが
 [[c:Numeric]] のサブクラスのオブジェクトではない場合には nil を返します。
 
-例:
-
-  (10..20).size    # => 11
-  ("a".."z").size  # => nil
-  (-Float::INFINITY..Float::INFINITY).size # => Infinity
+#@samplecode 例
+(10..20).size    # => 11
+("a".."z").size  # => nil
+(-Float::INFINITY..Float::INFINITY).size # => Infinity
+#@end
 #@end

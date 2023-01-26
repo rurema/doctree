@@ -221,10 +221,10 @@
     * nkf 2.1.4 をマージしました。
 
   * [[c:ObjectSpace]] ([[lib:objspace]])
-    * [[m:ObjectSpace.count_symbols]] を追加。
-    * [[m:ObjectSpace.count_imemo_objects]] を追加。
-    * [[m:ObjectSpace.internal_class_of]] を追加。
-    * [[m:ObjectSpace.internal_super_of]] を追加。
+    * [[m:ObjectSpace.#count_symbols]] を追加。
+    * [[m:ObjectSpace.#count_imemo_objects]] を追加。
+    * [[m:ObjectSpace.#internal_class_of]] を追加。
+    * [[m:ObjectSpace.#internal_super_of]] を追加。
 
   * [[c:OpenSSL]]
     * [[m:OpenSSL::SSL::SSLSocket#accept_nonblock]] と
@@ -295,8 +295,8 @@
   * [[c:Net::HTTP]]
     * [[m:Net::HTTP#open_timeout]] のデフォルト値が 60 になりました。(以前は nil でした)
 
-  * [[c:Net::Telnet]]
-    * [[c:Net::Telnet]] は net-telnet gem になりました。
+  * Net::Telnet
+    * Net::Telnet は net-telnet gem になりました。
       [[feature:11083]]
 
   * [[lib:psych]]
@@ -308,7 +308,7 @@
 
   * RDoc
     * RDoc 4.2.1 に更新しました。
-      * [[url:https://github.com/rdoc/rdoc/blob/master/History.rdoc#421--2015-12-22]]
+      * [[url:https://github.com/ruby/rdoc/blob/master/History.rdoc#421--2015-12-22]]
 
   * RubyGems
     * RubyGems 2.5.1 に更新しました。

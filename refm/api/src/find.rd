@@ -16,7 +16,7 @@ category File
   find('/foo','/bar') {|f| ...}
 
 以下は、ruby のアーカイブに含まれるサンプルスクリプト
-([[url:http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/sample/trojan.rb?view=markup]]) をこのモジュールで書き換えたものです。
+([[url:https://github.com/ruby/ruby/blob/master/sample/trojan.rb]]) をこのモジュールで書き換えたものです。
 
   #! /usr/bin/env ruby
   require "find"
@@ -52,10 +52,7 @@ category File
 ディレクトリのシンボリックリンクは辿りません。
 また file に渡される順序は不定です。
 
-#@since 1.9.1
-ブロックを省略した場合は、上記の処理を行うような [[c:Enumerator]] を返
-します。
-#@end
+ブロックを省略した場合は [[c:Enumerator]] を返します。
 
 @param dirs 探索するディレクトリを一つ以上指定します。
 

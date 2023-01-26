@@ -62,27 +62,27 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返
 addr で指定したメモリ領域を size バイトにリサイズし、その領域を指す整数
 を返します。
 
-addr には [[m:DL.malloc]] で確保したメモリ領域を渡します。
+addr には [[m:Fiddle.#malloc]] で確保したメモリ領域を渡します。
 また、リサイズの結果、返り値が addr と異なる場合があります。
 
 @param addr リサイズしたいメモリアドレス整数
 @param size リサイズ後のバイト数
-@see [[m:DL.malloc]]
+@see [[m:Fiddle.#malloc]]
 
 --- free(addr)      -> nil
 
 指定された addr が指すメモリ領域を開放します。
 
-必ず [[m:DL.#malloc]] が返した整数を addr に与えなければいけません。
+必ず [[m:Fiddle.#malloc]] が返した整数を addr に与えなければいけません。
 そうでない場合、ruby インタプリタが異常終了します。
 
-@param addr [[m:DL.#malloc]] で確保されたメモリ領域を指す整数を指定します。
+@param addr [[m:Fiddle.#malloc]] で確保されたメモリ領域を指す整数を指定します。
 
 例:
-  require 'dl'
-  addr = DL.malloc(10)
+  require 'fiddle'
+  addr = Fiddle.malloc(10)
   p addr               #=> 136942800
-  DL.free(addr)
+  Fiddle.free(addr)
 
 --- dlwrap(obj)    -> Integer
 
@@ -92,23 +92,23 @@ addr には [[m:DL.malloc]] で確保したメモリ領域を渡します。
 
 例:
 
-  require 'dl'
+  require 'fiddle'
   s = 'abc'
-  p addr = DL.dlwrap(s)   #=> 136122440
-  p DL.dlunwrap(addr)     #=> "abc"
+  p addr = Fiddle.dlwrap(s)   #=> 136122440
+  p Fiddle.dlunwrap(addr)     #=> "abc"
 
 --- dlunwrap(addr)  -> object
 
 指定されたアドレスの Ruby オブジェクトを返します。
 
-@param addr [[m:DL.#dlwrap]] が返した Ruby オブジェクトのアドレス(整数)を指定します。
+@param addr [[m:Fiddle.#dlwrap]] が返した Ruby オブジェクトのアドレス(整数)を指定します。
 
 例:
 
-  require 'dl'
+  require 'fiddle'
   s = 'abc'
-  p addr = DL.dlwrap(s)   #=> 136122440
-  p DL.dlunwrap(addr)     #=> "abc"
+  p addr = Fiddle.dlwrap(s)   #=> 136122440
+  p Fiddle.dlunwrap(addr)     #=> "abc"
 
 == Constants
 

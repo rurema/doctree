@@ -6,29 +6,31 @@ extend Enumerable
 ます。ただし、Hash と異なり、ENV のキーと値には文字列しか
 とることができません。
 
-ENV で得られる文字列は ENV['PATH'] を除いて汚染されていま
-す。オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
+#@until 2.7.0
+ENV で得られる文字列は ENV['PATH'] 以外は常に汚染されています。
+オブジェクトの汚染に関しては [[d:spec/safelevel]] を参照して下さい。
 ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
 でいる場合に限り汚染されます。
 
-例:
-
-  p ENV['TERM'].tainted?  # => true
-  p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
-  p path.tainted?         # => false
+#@samplecode 例
+p ENV['TERM'].tainted?  # => true
+p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
+p path.tainted?         # => false
+#@end
+#@end
 
 また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
-例:
-
-  p ENV['TERM'].frozen?  # => true
+#@samplecode 例
+p ENV['TERM'].frozen?  # => true
+#@end
 
 Windows では環境変数は大文字、小文字を区別しません。(cygwin を除く)
 
-例:
-
-  ENV['OS'] # => Windows_NT
-  ENV['os'] # => Windows_NT
+#@samplecode 例
+ENV['OS'] # => Windows_NT
+ENV['os'] # => Windows_NT
+#@end
 
 --- [](key) -> String
 
@@ -39,11 +41,16 @@ key に対応する環境変数の値を返します。該当する環境変数�
            ジェクトを指定した場合は to_str メソッドによる暗黙の型変換
            を試みます。
 
+#@samplecode
+ENV['PATH']           # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
+ENV['NON_EXIST_KEY']  # => nil
+#@end
+
 --- []=(key, value)
 --- store(key, value) -> String
 
 key に対応する環境変数の値を value にします。
-value が nil の時、key に対応する環境変数を取り除きます。 
+value が nil の時、key に対応する環境変数を取り除きます。
 
 @param key   環境変数名を指定します。文字列で指定します。文字列以外のオ
              ブジェクトを指定した場合は to_str メソッドによる暗黙の型変
@@ -54,9 +61,21 @@ value が nil の時、key に対応する環境変数を取り除きます。
 
 @return value を返します。
 
+#@samplecode
+ENV['NEW_KEY'] = 'some_value'
+ENV['NEW_KEY'] # => 'some_value'
+ENV.store('NEW_KEY', nil) # => nil
+ENV.has_key?('NEW_KEY') # => false
+#@end
+
 --- clear  -> self
 
 環境変数をすべてクリアします。self を返します。
+
+#@samplecode
+ENV.clear
+p ENV # => {}
+#@end
 
 --- delete(key) -> String | nil
 --- delete(key) {|key| ... } -> String | nil
@@ -72,12 +91,16 @@ nil を返します。
            す。文字列以外のオブジェクトを指定した場合は to_str メソッド
            による暗黙の型変換を試みます。
 
-#@since 1.8.7
+#@samplecode
+ENV['TEST'] = 'foo'
+ENV.delete('TEST')  # => "foo"
+ENV.delete('TEST') { |key| puts "#{key} is not found in ENV" } # TEST is not found in ENV
+#@end
+
 #@since 1.9.1
 --- reject                     -> Enumerator
 #@else
 --- reject                     -> Enumerable::Enumerator
-#@end
 #@end
 --- reject {|key, value| ... } -> Hash
 
@@ -85,9 +108,15 @@ nil を返します。
 [[m:Enumerable#reject]] と異なり Hash を返します。また、とり除いた結果
 は実際の環境変数に影響を与えません。
 
+#@samplecode
+ENV['TEST'] = 'foo'
+result = ENV.reject { |key, value| key == 'TEST' }
+result['TEST'] # => nil
+ENV['TEST'] # => "foo"
+#@end
+
 --- delete_if {|key, value| ... } -> ENV
 --- reject! {|key, value| ... }   -> ENV | nil
-#@since 1.8.7
 #@since 1.9.1
 --- delete_if  -> Enumerator
 --- reject!    -> Enumerator
@@ -95,14 +124,18 @@ nil を返します。
 --- delete_if  -> Enumerable::Enumerator
 --- reject!    -> Enumerable::Enumerator
 #@end
-#@end
 
 key と value を引数としてブロックを評価した値が真であ
 る時、環境変数を削除します。
 
 reject! は要素に変化がなければ nil を返します。
 
-#@since 1.8.7
+#@samplecode
+ENV['FOO'] = 'bar'
+ENV.delete_if { |key, value| key == 'FOO' && value == 'bar' } # => ENV
+ENV.reject! { |key, value| key == 'FOO' && value == 'bar' } # => nil
+#@end
+
 #@since 1.9.1
 --- each                          -> Enumerator
 --- each_pair                     -> Enumerator
@@ -110,27 +143,38 @@ reject! は要素に変化がなければ nil を返します。
 --- each                          -> Enumerable::Enumerator
 --- each_pair                     -> Enumerable::Enumerator
 #@end
-#@end
 --- each {|key, value| ... }      -> self
 --- each_pair {|key, value| ... } -> self
 key と value を引数としてブロックを評価します。
 
-#@since 1.8.7
+#@samplecode
+ENV['FOO'] = 'bar'
+ENV.each do |key, value|
+  p "value is #{value}" if key == 'FOO' # => "value is bar"
+end
+# => ENV
+#@end
+
 #@since 1.9.1
 --- each_key              -> Enumerator
 #@else
 --- each_key              -> Enumerable::Enumerator
 #@end
-#@end
 --- each_key {|key| ... } -> self
 key を引数としてブロックを評価します。
 
-#@since 1.8.7
+#@samplecode
+ENV['FOO'] = 'bar'
+ENV.each_key do |key|
+  p "key #{key} detected" if key == 'FOO'
+end
+# "key FOO detected"
+#@end
+
 #@since 1.9.1
 --- each_value                -> Enumerator
 #@else
 --- each_value                -> Enumerable::Enumerator
-#@end
 #@end
 --- each_value {|value| ... } -> self
 value を引数としてブロックを評価します。
@@ -148,8 +192,8 @@ key に関連づけられた値を返します。該当するキーが登録さ�
 クが与えられていればそのブロックを評価した値を返します。そのいずれ
 でもなければ例外が発生します。
 
-@param key       環境変数の名前を指定します。 文字列で指定します。文字列
-                 で指定します。文字列以外のオブジェクトを指定した場合は
+@param key       環境変数の名前を指定します。 文字列で指定します。
+                 文字列以外のオブジェクトを指定した場合は
                  to_str メソッドによる暗黙の型変換を試みます。
 @param default   keyに対応する環境変数の値がないときにこの値を返します。 
 #@since 1.9.1
@@ -174,41 +218,28 @@ key で指定される環境変数が存在する時、真を返します。
 
 val を値として持つ環境変数が存在する時、真を返します。
 
-@param val 値を指定します。文字列で指定します。文字列で指定します。文字
+@param val 値を指定します。文字列で指定します。文字
            列以外のオブジェクトを指定した場合は to_str メソッドによる暗
            黙の型変換を試みます。
 
 #@since 1.9.1
 --- key(val)   -> String | nil
 #@end
+#@until 3.0
 --- index(val) -> String | nil
+#@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
 
-#@since 1.9.1
+#@until 3.0
 [[m:ENV.index]] は obsolete です。使用すると警告メッセージが表示されます。
 [[m:ENV.key]] を使用してください。
 #@end
 
-@param val 値を指定します。文字列で指定します。文字列で指定します。文字
+@param val 値を指定します。文字列で指定します。文字
            列以外のオブジェクトを指定した場合は to_str メソッドによる暗
            黙の型変換を試みます。
-
-#@until 1.9.1
---- indexes(*key) -> [String]
---- indices(*key) -> [String]
-
-このメソッドは obsolete です。
-使用すると警告メッセージが表示されます。
-代わりに [[m:ENV.values_at]] を使用します。
-
-引数で指定された名前の環境変数の値の配列を返します。
-
-@param key キーの名前を指定します。 文字列で指定します。文字列で指定し
-           ます。文字列以外のオブジェクトを指定した場合は to_str メソッ
-           ドによる暗黙の型変換を試みます。
-#@end
 
 --- inspect -> String
 
@@ -237,20 +268,17 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 
 @param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 
-#@since 1.8.7
-#@since 1.9.1
 --- select                      -> Enumerator
-#@else
---- select                      -> Enumerable::Enumerator
+--- select {|key, value| ... }  -> Hash
+#@since 2.6.0
+--- filter                      -> Enumerator
+--- filter {|key, value| ... }  -> Hash
 #@end
-#@end
---- select {|key, value| ... }  -> [[String, String]]
 
-環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
-します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
-ます。
+環境変数名と値についてブロックを評価し、真を返したものを集めたハッシュ
+を返します。
 
---- shift -> [String, String]
+--- shift -> [String, String] | nil
 
 環境変数を一つ取り除いて、それを名前と値の組の配列で返します。
 環境変数が一つも設定されていなければ nil を返します。
@@ -260,25 +288,61 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 環境変数から [変数名, 値] となる 2 要素の配列の配列を生成します。
 
 --- to_hash -> Hash
-#@since 2.0.0
+
+環境変数の名前をキーとし、対応する値をもつハッシュを返します。
+
 --- to_h -> Hash
+#@since 2.6.0
+--- to_h {|name, value| block } -> Hash
 #@end
 
 環境変数の名前をキーとし、対応する値をもつハッシュを返します。
+
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+#@samplecode ブロック付きの例
+ENV.to_h {|name, value| [name, value.size] }
+#@end
+#@end
 
 --- to_s -> String
 
 環境変数を文字列化します。 Hash#to_s と同じように動作します。
 
+#@since 3.2
+--- merge!(*others) -> ENV
+--- merge!(*others) {|key, self_val, other_val| ... } -> ENV
+--- update(*others) -> ENV
+--- update(*others) {|key, self_val, other_val| ... } -> ENV
+
+ハッシュ others の内容を環境変数にマージします。重複するキー
+に対応する値は others の内容で上書きされます。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+@param others マージ用のハッシュです。
+#@else
 --- update(other) -> ENV
+--- update(other) {|key, self_val, other_val| ... } -> ENV
+#@since 2.7.0
+--- merge!(other) -> ENV
+--- merge!(other) {|key, self_val, other_val| ... } -> ENV
+#@end
 
 ハッシュ other の内容を環境変数にマージします。重複するキー
 に対応する値は other の内容で上書きされます。
 
-self を返します。
+self と other に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に other の値を使います。
 
 @param other  上書きするハッシュを指定します。
-
+#@end
 --- values -> [String]
 
 環境変数の全値の配列を返します。
@@ -296,9 +360,9 @@ self を返します。
   ENV.update({'FOO' => 'foo', 'BAR' => 'bar'})
   p ENV.values_at(*%w(FOO BAR BAZ))   # => ["foo", "bar", nil]
 
-@param key 環境変数名を指定します。文字列で指定します。文字列で指定しま
-           す。文字列以外のオブジェクトを指定した場合は to_str メソッド
-           による暗黙の型変換を試みます。
+@param key 環境変数名を指定します。文字列で指定します。
+           文字列以外のオブジェクトを指定した場合は to_str メソッドによる暗黙の型変換を試みます。
+           
 #@since 1.9.1
 --- assoc(key) -> Array | nil
 
@@ -323,17 +387,89 @@ self を返します。
 #@since 1.9.2
 --- keep_if {|key, value| ... } -> ENV
 --- select! {|key, value| ... } -> ENV | nil
+#@since 2.6.0
+--- filter! {|key, value| ... } -> ENV | nil
+#@end
 --- keep_if -> Enumerator
 --- select! -> Enumerator
+#@since 2.6.0
+--- filter! -> Enumerator
+#@end
 
 キーと値を引数としてブロックを評価した結果が真であ
 るような要素を環境変数に残します。
 
 keep_if は常に self を返します。
+#@since 2.6.0
+select! と filter! はオブジェクトが変更された場合に self を、
+#@else
 select! はオブジェクトが変更された場合に self を、
+#@end
 されていない場合に nil を返します。
 
 ブロックが省略された場合には [[c:Enumerator]] を返します。
 
 @see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [[m:Hash#select!]],
+#@end
+#@since 2.6.0
+--- slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+#@samplecode 例
+ENV["foo"] = "bar"
+ENV["baz"] = "qux"
+ENV["bar"] = "rab"
+ENV.slice()             # => {}
+ENV.slice("")           # => {}
+ENV.slice("unknown")    # => {}
+ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
+#@end
+
+#@since 3.0.0
+@see [[m:Hash#slice]], [[m:ENV.except]]
+#@else
+@see [[m:Hash#slice]]
+#@end
+#@end
+#@since 2.7.0
+--- freeze -> ()
+ENV.freeze は環境変数の変更を禁止できないため、[[c:TypeError]]を発生させます。
+#@end
+#@since 3.0.0
+--- except(*keys) -> Hash
+
+引数で指定された以外のキーとその値だけを含む Hash を返します。
+
+#@samplecode
+ENV                       #=> {"LANG"=>"en_US.UTF-8", "TERM"=>"xterm-256color", "HOME"=>"/Users/rhc"}
+ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
+#@end
+
+@see [[m:Hash#except]], [[m:ENV.slice]]
+#@end
+--- clone(freeze: true) -> object
+ENV オブジェクトの複製を作成して返します。
+
+ENV は OS のプロセス全体で共有される環境変数を操作するラッパーオブジェクトなので、複製は有用ではありません。
+そのため、3.1 からは複製で環境変数を操作するときに deprecated 警告がでます。
+
+テスト実行中に環境変数を退避する用途には [[m:ENV.to_h]] を使用してください。
+
+#@samplecode
+saved_env = ENV.to_h
+# (テストなど)
+ENV.replace(saved_env)
+#@end
+
+@see [[m:Object#clone]]
+#@since 3.1
+@see [[m:ENV.dup]]
+--- dup -> ()
+[[c:TypeError]]を発生させます。
+
+3.0 以前では Object.new と同様の ENV とは無関係の有用ではないオブジェクトを返していたため、3.1 からは例外が発生するようになりました。
+詳細は[[m:ENV.clone]]を参照してください。
+
+@see [[m:ENV.clone]]
 #@end

@@ -39,6 +39,8 @@ require rake/tasklib
 @raise RuntimeError バージョン情報をセットしていない場合に発生します。
                     初期化時に :noversion が指定されている場合は発生しません。
 
+#@#noexample
+
 --- init(name, version)
 #@# discard
 
@@ -48,9 +50,20 @@ require rake/tasklib
 
 @param version パッケージのバージョンを指定します。
 
+#@#noexample
+
 --- name -> String
 
 バージョン情報を含まないパッケージの名前を返します。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.name # => "sample"
+end
+#@end
 
 --- name=(name)
 
@@ -58,10 +71,30 @@ require rake/tasklib
 
 @param name パッケージの名前を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.name # => "sample"
+  package_task.name = "update"
+  package_task.name # => "update"
+end
+#@end
+
 --- need_tar -> bool
 
 この値が真である場合は gzip した tar ファイル (tgz) を作成します。
 デフォルトは偽です。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar # => false
+end
+#@end
 
 --- need_tar=(flag)
 
@@ -69,10 +102,30 @@ gzip した tar ファイル (tgz) を作成するかどうかを設定します
 
 @param flag 真または偽を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar # => false
+  package_task.need_tar = true
+  package_task.need_tar # => true
+end
+#@end
+
 --- need_tar_bz2 -> bool
 
 この値が真である場合は bzip2 した tar ファイル (tar.bz2) を作成します。
 デフォルトは偽です。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar_bz2 # => false
+end
+#@end
 
 --- need_tar_bz2=(flag)
 
@@ -80,10 +133,30 @@ bzip2 した tar ファイル (tar.bz2) を作成するかどうかを設定し�
 
 @param flag 真または偽を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar_bz2 # => false
+  package_task.need_tar_bz2 = true
+  package_task.need_tar_bz2 # => true
+end
+#@end
+
 --- need_tar_gz -> bool
 
 この値が真である場合は gzip した tar ファイル (tar.gz) を作成します。
 デフォルトは偽です。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar_gz # => false
+end
+#@end
 
 --- need_tar_gz=(flag)
 
@@ -91,10 +164,30 @@ gzip した tar ファイル (tar.gz) を作成するかどうかを設定しま
 
 @param flag 真または偽を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_tar_gz # => false
+  package_task.need_tar_gz = true
+  package_task.need_tar_gz # => true
+end
+#@end
+
 --- need_zip -> bool
 
 この値が真である場合は zip ファイルを作成します。
 デフォルトは偽です。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_zip # => false
+end
+#@end
 
 --- need_zip=(flag)
 
@@ -102,9 +195,29 @@ zip ファイル (tgz) を作成するかどうかを設定します。
 
 @param flag 真または偽を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.need_zip # => false
+  package_task.need_zip = true
+  package_task.need_zip # => true
+end
+#@end
+
 --- package_dir -> String
 
 パッケージに入れるファイルを保存するディレクトリ名を返します。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir # => "pkg"
+end
+#@end
 
 --- package_dir=(dirname)
 
@@ -112,19 +225,67 @@ zip ファイル (tgz) を作成するかどうかを設定します。
 
 @param dirname パッケージに入れるファイルを保存するディレクトリ名を指定します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir # => "pkg"
+  package_task.package_dir = "package"
+  package_task.package_dir # => "package"
+end
+#@end
+
 --- package_dir_path -> String
 
 パッケージに含むファイルを配置するディレクトリを返します。
 
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir_path # => "pkg/sample-1.0.0"
+end
+#@end
+
 --- package_files -> Rake::FileList
 
 パッケージに含むファイルリストを返します。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+IO.write("test1.rb", "test")
+IO.write("test2.rb", "test")
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_files # => []
+  package_task.package_files.include("*.rb")
+  package_task.package_files # => ["test1.rb", "test2.rb"]
+end
+#@end
 
 --- package_files=(file_list)
 
 パッケージに含むファイルリストを設定します。
 
 @param file_list ファイルリストを指定します。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+IO.write("test1.rb", "test")
+IO.write("test2.rb", "test")
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_files # => []
+  package_task.package_files = FileList.new("test1.rb", "test2.rb")
+  package_task.package_files # => ["test1.rb", "test2.rb"]
+end
+#@end
 
 --- package_name -> String
 
@@ -194,3 +355,18 @@ zip ファイル用のファイル名を返します。
 
 @param version パッケージのバージョンを指定します。
                ':noversion' というシンボルを指定するとバージョン情報をセットしません。
+
+#@samplecode
+# Rakefile での記載例とする
+require 'rake/packagetask'
+
+Rake::PackageTask.new("sample", "1.0.0") do |package_task|
+  package_task.package_dir = "./pkg"
+  package_task.package_files.include("lib/**/*")
+end
+
+# rake -T を実行すると以下になる
+# => rake clobber_package  # Remove package products
+#    rake package          # Build all the packages
+#    rake repackage        # Force a rebuild of the package files
+#@end

@@ -58,5 +58,5 @@ other が ":" を含んでいる(つまり prefix を含んでいる)場合は
 == Constants
 
 #@# Internally used regexp
-#@# --- NAMESPLIT 
+#@# --- NAMESPLIT
 #@# #@todo

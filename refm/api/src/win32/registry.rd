@@ -1,4 +1,3 @@
-#@since 1.8.0
 category Windows
 
 win32/registry は Win32 プラットフォームでレジストリをアクセスするための
@@ -139,7 +138,11 @@ data はレジストリ値のデータで，クラスは以下の通りです:
     String の配列
   * REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_QWORD
     Integer
+#@since 2.5.0
+  * REG_BINARY, REG_NONE
+#@else
   * REG_BINARY
+#@end
     String (バイナリデータを含みます)
 
 オプション引数 rtype が指定されていた場合，レジストリ値の型が
@@ -500,4 +503,3 @@ subkey の値を返します。
 --- MAX_VALUE_LENGTH
 #@todo
 
-#@end

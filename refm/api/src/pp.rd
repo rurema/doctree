@@ -4,10 +4,12 @@ require prettyprint
 
 オブジェクトなどを見やすく出力するためのライブラリです。
 
+#@until 2.5.0
 このライブラリを require すると [[m:Kernel.#pp]] が定義されます。
 [[m:Kernel.#p]] のかわりに [[m:Kernel.#pp]] を使うことにより、
-適切にインデントと改行された分かりやすい出力を得ることが出来ます。pp ライブラリは、
-ユーザがあたらしく定義したクラスに対しても見やすい表示を
+適切にインデントと改行された分かりやすい出力を得ることが出来ます。
+#@end
+pp ライブラリは、ユーザがあたらしく定義したクラスに対しても見やすい表示を
 するように作られていますので、[[m:Kernel.#pp]] を使う上で余計な作業をする
 必要はありません。
 
@@ -85,49 +87,54 @@ PP のメソッドでもあります。
 
 以下は Hash の pretty printing のカスタマイズの例です。
 
-  require 'pp'
-  class Hash
-    def pretty_print(q)
-      q.group(2, "<hash>") do
-        q.breakable
-        first = true
-        self.each{|k, v|
-          unless first
-            q.text(',')          
-            q.breakable
-          end        
-          q.pp k
-          q.text ' => '
-          q.group(1) do          
-            q.breakable ''
-            if v.is_a?(String) and v.size > 10
-              q.pp(v[0..9] + '...')
-            else
-              q.pp v
-            end
-          end
-          first = false
-        }
-      end
+#@samplecode
+#@until 2.5.0
+require 'pp'
+
+#@end
+class Hash
+  def pretty_print(q)
+    q.group(2, "<hash>") do
       q.breakable
-      q.text "</hash>"
+      first = true
+      self.each{|k, v|
+        unless first
+          q.text(',')
+          q.breakable
+        end
+        q.pp k
+        q.text ' => '
+        q.group(1) do
+          q.breakable ''
+          if v.is_a?(String) and v.size > 10
+            q.pp(v[0..9] + '...')
+          else
+            q.pp v
+          end
+        end
+        first = false
+      }
     end
-  
-    def pretty_print_cycle(q)
-      q.text(empty? ? '{}' : '{...}')
-    end
+    q.breakable
+    q.text "</hash>"
   end
-  
-  h = {:a => 'a'*5, :b => 'b'*10, :c => 'c'*20, :d => 'd'*30}
-  pp h
-  
-  #=> 
-  <hash>
-    :d => "dddddddddd...",
-    :a => "aaaaa",
-    :b => "bbbbbbbbbb",
-    :c => "cccccccccc..."
-  </hash>
+
+  def pretty_print_cycle(q)
+    q.text(empty? ? '{}' : '{...}')
+  end
+end
+
+h = {:a => 'a'*5, :b => 'b'*10, :c => 'c'*20, :d => 'd'*30}
+pp h
+
+#=>
+# <hash>
+#   :d => "dddddddddd...",
+#   :a => "aaaaa",
+#   :b => "bbbbbbbbbb",
+#   :c => "cccccccccc..."
+# </hash>
+#@end
 
 = class PP < PrettyPrint
 オブジェクトなどを見やすく出力するためのクラスです。
@@ -144,15 +151,18 @@ PP のメソッドでもあります。
 
 @param width 出力先の幅を指定します。
 
-  require 'pp'
-  str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
-  puts str
-  #=>
-  [[:a, :b],
-   [:a,
-    [[:a,
-      [:a, [:a, :b]]],
-     [:a, :b]]]]
+#@samplecode
+require 'pp'
+
+str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
+puts str
+# =>
+# [[:a, :b],
+#  [:a,
+#   [[:a,
+#     [:a, [:a, :b]]],
+#    [:a, :b]]]]
+#@end
 
 @see [[m:$>]]
 
@@ -166,16 +176,19 @@ PP のメソッドでもあります。
 
 @param boolean 共有検出フラグを true か false で指定します。
 
-例:
+#@samplecode
+#@until 2.5.0
+require 'pp'
 
-  require 'pp'
-  b = [1, 2, 3]
-  a = [b, b]
-    
-  pp a                        #=> [[1, 2, 3], [1, 2, 3]]
-  
-  PP.sharing_detection = true
-  pp a                        #=> [[1, 2, 3], [...]]
+#@end
+b = [1, 2, 3]
+a = [b, b]
+
+pp a                        #=> [[1, 2, 3], [1, 2, 3]]
+
+PP.sharing_detection = true
+pp a                        #=> [[1, 2, 3], [...]]
+#@end
 
 
 --- singleline_pp(obj, out=$>)    -> object
@@ -211,8 +224,10 @@ obj がすでに、現在のノードの親において出力されていた場�
 --- comma_breakable    -> ()
 
 以下と等価な働きをするもので簡便のために用意されています。
-  text ','
-  breakable
+#@samplecode
+text ','
+breakable
+#@end
 
 @see [[m:PrettyPrint#text]], [[m:PrettyPrint#breakable]]
 
@@ -225,15 +240,15 @@ list を iter_method によってイテレートし、各要素を引数とし�
 
 つまり、以下のふたつは同値です。
 
-  require 'pp'
+#@samplecode
+q.seplist([1,2,3]) {|v| q.pp v }
 
-  q.seplist([1,2,3]) {|v| q.pp v }
-
-  q.pp 1
-  q.comma_breakable
-  q.pp 2
-  q.comma_breakable
-  q.pp 3
+q.pp 1
+q.comma_breakable
+q.pp 2
+q.comma_breakable
+q.pp 3
+#@end
 
 @param list 自身に追加したい配列を与えます。iter_method を適切に指定すれば、
             Enumerable でなくても構いません。
@@ -260,18 +275,21 @@ list を iter_method によってイテレートし、各要素を引数とし�
 
 @param pp [[c:PP]] オブジェクトです。
 
-例:
-  
- require 'pp'
- class Array
-   def pretty_print(q)
-     q.group(1, '[', ']') {
-       q.seplist(self) {|v|
-         q.pp v
-       }
-     }
-   end
- end
+#@samplecode
+#@until 2.5.0
+require 'pp'
+
+#@end
+class Array
+  def pretty_print(q)
+    q.group(1, '[', ']') {
+      q.seplist(self) {|v|
+        q.pp v
+      }
+    }
+  end
+end
+#@end
 
 @see [[m:Object#pretty_print_cycle]], [[m:Object#inspect]], [[m:PrettyPrint#text]], [[m:PrettyPrint#group]], [[m:PrettyPrint#breakable]]
 
@@ -285,13 +303,13 @@ list を iter_method によってイテレートし、各要素を引数とし�
 
 @param pp [[c:PP]] オブジェクトです。
 
-例:
- 
- class Array 
-   def pretty_print_cycle(q)
-     q.text(empty? ? '[]' : '[...]')
-   end
- end
+#@samplecode
+class Array
+  def pretty_print_cycle(q)
+    q.text(empty? ? '[]' : '[...]')
+  end
+end
+#@end
 
 @see [[m:Object#pretty_print]]
 
@@ -313,37 +331,14 @@ pp に表示したくないインスタンス変数がある場合にこのメ�
 @raise RuntimeError 出力する全てのオブジェクトに [[m:Object#pretty_print]] が定義されて
                     いない場合に発生します。
 
+#@until 2.5.0
 = reopen Kernel
 == Module Functions
-#@since 1.9.2
---- pp(*obj)    -> object
-#@else
---- pp(*obj)    -> nil
+#@include(_builtin/functions_pp)
 #@end
 
-指定されたオブジェクト obj を標準出力に見やすい形式(プリティプリント)で出力します。
-obj それぞれを引数として [[m:PP.pp]] を呼びことと同等です。
-
-@param obj 表示したいオブジェクトを指定します。
-
-例:
-  require 'pp'
-
-  b = [1, 2, 3] * 4
-  a = [b, b]
-  a << a    
-  pp a
-
-  #=> [[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
-       [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
-       [...]]
-
-@see [[m:PP.pp]]
-
-#@since 1.8.5 
 = reopen Object
 == Instance Methods
 --- pretty_inspect    -> String
 
 self を pp で表示したときの結果を文字列として返します。
-#@end

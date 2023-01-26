@@ -1,6 +1,6 @@
 = class Rake::FileTask < Rake::Task
 
-ファイルタスクは時間に基づいた依存関係を解決することができるタスクです。
+ファイルタスクは時間に基づいた依存関係を解決できるタスクです。
 
 このタスクの事前タスクのいずれか一つのタイムスタンプがこのタスクの
 タイムスタンプよりも新しければ、与えられたアクションを用いてファイルを再作成します。
@@ -16,9 +16,31 @@
 このタスクで作成しようとしているファイルが存在しない場合や、
 このタスクで作成しようとしているファイルが古い場合に真を返します。
 
---- timestamp -> Time
+#@samplecode
+# Rakefile での記載例とする
+
+task default: "test.txt"
+file "test.txt" do |task|
+  Rake.application.options.build_all = false
+  task.needed? # => true
+  IO.write("test.txt", "test")
+  task.needed? # => false
+end
+#@end
+
+--- timestamp -> Time | Rake::LateTime
 
 ファイルタスクのタイムスタンプを返します。
+
+#@samplecode
+# Rakefile での記載例とする
+
+task default: "test.txt"
+file "test.txt" do |task|
+  Rake.application.options.build_all = false
+  task.timestamp # => #<Rake::LateTime:0x2ba58f0>
+end
+#@end
 
 == Singleton Methods
 

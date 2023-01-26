@@ -19,7 +19,7 @@
     3.14 # => 3.14.rationalize
     6.022e+23r # 指数形式と一緒には使えない
 
-    # i を付けると複素数の虚部になる
+    # i を付けると虚数単位 i を掛けた数になる
     42i  # => Complex(0, 42)
     3.14i # => Complex(0, 3.14)
 
@@ -64,8 +64,8 @@
       * RUBY_HEAP_MIN_SLOTS (RUBY_GC_HEAP_INIT_SLOTS を代わりに使います)
 
   * [[c:Integer]]
-    * 追加: [[m:Fixnum#bit_length]]
-    * 追加: [[m:Bignum#bit_length]]
+    * 追加: Fixnum#bit_length
+    * 追加: Bignum#bit_length
     * [[c:Bignum]] の性能向上
       * GMP をいくつかの操作で使えるときは使います。
         乗算、除算、基数変換、GCD
@@ -140,9 +140,17 @@
     end
 //}
 
+#@since 3.2
+  * Object#untrusted?,Object#untrust,Object#trust
+#@else
   * [[m:Object#untrusted?]],[[m:Object#untrust]],[[m:Object#trust]]
+#@end
     * これらのメソッドは非推奨になりました。$VERBOSE が true のときは警告を表示します。
+#@since 3.2
+      Object#tainted?,Object#taint,Object#untaint とそれぞれ同じ動作です。
+#@else
       [[m:Object#tainted?]],[[m:Object#taint]],[[m:Object#untaint]] とそれぞれ同じ動作です。
+#@end
 
   * [[m:Module#ancestors]]
     * 特異クラスの祖先はそれ自身を含みます。
@@ -182,18 +190,18 @@
     * 追加: [[m:Net::SMTP#rset]] RSET コマンドに対応している
 
   * [[lib:objspace]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_start]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_stop]]
-    * 追加: [[m:ObjectSpace.trace_object_allocations_clear]]
-    * 追加: [[m:ObjectSpace.allocation_sourcefile]]
-    * 追加: [[m:ObjectSpace.allocation_sourceline]]
-    * 追加: [[m:ObjectSpace.allocation_class_path]]
-    * 追加: [[m:ObjectSpace.allocation_method_id]]
-    * 追加: [[m:ObjectSpace.allocation_generation]]
-    * 追加: [[m:ObjectSpace.reachable_objects_from_root]]
-    * 追加: [[m:ObjectSpace.dump]]
-    * 追加: [[m:ObjectSpace.dump_all]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_start]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_stop]]
+    * 追加: [[m:ObjectSpace.#trace_object_allocations_clear]]
+    * 追加: [[m:ObjectSpace.#allocation_sourcefile]]
+    * 追加: [[m:ObjectSpace.#allocation_sourceline]]
+    * 追加: [[m:ObjectSpace.#allocation_class_path]]
+    * 追加: [[m:ObjectSpace.#allocation_method_id]]
+    * 追加: [[m:ObjectSpace.#allocation_generation]]
+    * 追加: [[m:ObjectSpace.#reachable_objects_from_root]]
+    * 追加: [[m:ObjectSpace.#dump]]
+    * 追加: [[m:ObjectSpace.#dump_all]]
 
   * OpenSSL::BN
     * 拡張: [[m:OpenSSL::BN.new]] Fixnum や Bignum を引数として取れるようになりました。
@@ -215,7 +223,7 @@
 
   * [[lib:rdoc]]
     * 4.1.0 に更新。主にデフォルトのテンプレートとアクセシビリティを改善しました。
-      [[url:https://github.com/rdoc/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
+      [[url:https://github.com/ruby/rdoc/blob/v4.1.0.preview.1/History.rdoc]]
 
   * [[lib:resolv]]
     * 追加: [[m:Resolv::DNS.fetch_resource]]
@@ -243,7 +251,7 @@
       * Gemfile or gem.deps.rb support including Gem.file.lock (experimental)
       * Improved, iterative resolver (compared to RubyGems 2.1 and earlier)
       * Support for a sharing a GEM_HOME across ruby platforms and versions
-      * [[lib:https://github.com/rubygems/rubygems/tree/master/History.txt]]
+      * [[url:https://github.com/rubygems/rubygems/tree/master/History.txt]]
 
   * [[lib:set]]
     * 追加: [[m:Set#intersect?]]
@@ -275,10 +283,10 @@
     * レスポンスボディは readpartial や read をサポートする StringIO か他の IO のようなオブジェクトになりました。
 
   * [[lib:xmlrpc]]
-    * [[c:XMLRPC::Client]]
-      * 追加: [[m:XMLRPC::Client#http]] クライアントのために [[c:Net::HTTP]] のインスタンスを返します。
+    * XMLRPC::Client
+      * 追加: XMLRPC::Client#http クライアントのために [[c:Net::HTTP]] のインスタンスを返します。
         通常、それは必要ありません。HTTP クライアントのオプションを少し変更したいときに便利です。
-        HTTPクライアントの主要なオプションを変更するときは [[c:XMLRPC::Client]] のメソッドを使うべきです。
+        HTTPクライアントの主要なオプションを変更するときは XMLRPC::Client のメソッドを使うべきです。
 
 === 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 

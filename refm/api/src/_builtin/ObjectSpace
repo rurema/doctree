@@ -16,15 +16,17 @@
 
 @raise RangeError 対応するオブジェクトが存在しなければ発生します。
 
- a = "hoge"
- p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+#@samplecode 例
+a = "hoge"
+p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+#@end
 
 --- define_finalizer(obj, proc)         -> Array
 --- define_finalizer(obj) {|id| ...}    -> Array
 
 obj が解放されるときに実行されるファイナライザ proc を
 登録します。同じオブジェクトについて複数回呼ばれたときは置き換えで
-はなく追加登録されます。現在のセーフレベルと proc を配列にして返します。
+はなく追加登録されます。固定値 0 と proc を配列にして返します。
 
 ブロックを指定した場合は、そのブロックがファイナライザになります。
 #@since 1.9.3
@@ -39,19 +41,21 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数と�
 
 @param proc ファイナライザとして [[c:Proc]] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
 
-==== 使い方の注意
+=== 使い方の注意
 
 以下は、define_finalizer の使い方の悪い例です。
 
-  class Foo
-    def initialize
-      ObjectSpace.define_finalizer(self) {
-        puts "foo"
-      }
-    end
+#@samplecode 悪い例
+class Foo
+  def initialize
+    ObjectSpace.define_finalizer(self) {
+      puts "foo"
+    }
   end
-  Foo.new
-  GC.start
+end
+Foo.new
+GC.start
+#@end
 
 これは、渡された proc の self が obj を参照しつ
 づけるため。そのオブジェクトが GC の対象になりません。
@@ -60,45 +64,48 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数と�
 良い例になっています。これは、クラスのコンテキストで [[c:Proc]] を
 生成することで上記の問題を回避しています。
 
-  class Bar
-    def Bar.callback
-      proc {
-        puts "bar"
-      }
-    end
-    def initialize
-      ObjectSpace.define_finalizer(self, Bar.callback)
-    end
+#@samplecode 例
+class Bar
+  def Bar.callback
+    proc {
+      puts "bar"
+    }
   end
-  Bar.new
-  GC.start
+  def initialize
+    ObjectSpace.define_finalizer(self, Bar.callback)
+  end
+end
+Bar.new
+GC.start
+#@end
 
 proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
 これは、スクリプトのメイン処理が GC の発生によって非同期に中断され
 るのを防ぐためです。不安なうちは -d オプションで
 事前に例外の発生の有無を確認しておいた方が良いでしょう。
 
-  class Baz
-    def initialize
-      ObjectSpace.define_finalizer self, eval(%q{
-        proc {
-          raise "baz" rescue puts $!
-          raise "baz2"
-          puts "baz3"
-        }
-      }, TOPLEVEL_BINDING)
-    end
+#@samplecode 例
+class Baz
+  def initialize
+    ObjectSpace.define_finalizer self, eval(%q{
+      proc {
+        raise "baz" rescue puts $!
+        raise "baz2"
+        puts "baz3"
+      }
+    }, TOPLEVEL_BINDING)
   end
-  Baz.new
-  GC.start
-  
-  # => baz
+end
+Baz.new
+GC.start
+
+# => baz
+#@end
 
 @see [[d:spec/rubycmd]]
 
 --- each_object        {|object| ...}    -> Integer
 --- each_object(klass) {|object| ...}    -> Integer
-#@since 1.8.7
 #@since 1.9.1
 --- each_object                          -> Enumerator
 --- each_object(klass)                   -> Enumerator
@@ -106,20 +113,17 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 --- each_object                          -> Enumerable::Enumerator
 --- each_object(klass)                   -> Enumerable::Enumerator
 #@end
-#@end
 
 指定された klass と [[m:Object#kind_of?]] の関係にある全ての
 オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
 ジェクトに対して繰り返します。
 繰り返した数を返します。
 
-#@since 1.8.7
 ブロックが与えられなかった場合は、
 #@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
 #@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
 次のクラスのオブジェクトについては繰り返しません
@@ -135,6 +139,38 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 なお、[[c:Symbol]] については、かわりに [[m:Symbol.all_symbols]] が使用できます。
 
 @param klass クラスかモジュールを指定します。
+
+#@samplecode 例: ブロックなし
+p ObjectSpace.each_object
+# => #<Enumerator: ObjectSpace:each_object(false)>
+#@end
+
+#@samplecode 例: 全てのオブジェクトを扱う
+ObjectSpace.each_object.take(5).each { |x| p x }
+count = ObjectSpace.each_object { |x| x }
+puts "Total count: #{count}"
+
+# => "scope"
+# => "scopes"
+# => "sym"
+# => "class_names"
+# => "@corrections"
+# => Total count: 9938
+#@end
+
+#@samplecode 例: 任意のクラスを扱う
+Person = Struct.new(:name)
+s1 = Person.new("tanaka")
+s2 = Person.new("sato")
+
+count = ObjectSpace.each_object(Person) { |x| p x }
+puts "Total count: #{count}"
+
+# => #<struct Person name="sato">
+# => #<struct Person name="tanaka">
+# => Total count: 2
+#@end
+
 
 #@since 2.1.0
 --- garbage_collect(full_mark: true, immediate_sweep: true) -> nil
@@ -157,12 +193,45 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されま
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 #@end
 
+#@#noexample 参照先の GC.start と同様の動作のため
+
+@see [[m:GC.start]]
+
 --- undefine_finalizer(obj)    -> object
 
 obj に対するファイナライザをすべて解除します。
 obj を返します。
 
 @param obj ファイナライザを解除したいオブジェクトを指定します。
+
+#@samplecode 例
+class Sample
+  def Sample.callback
+    proc {
+      puts "finalize"
+    }
+  end
+
+  def initialize
+    ObjectSpace.define_finalizer(self, Sample.callback)
+  end
+
+  def undef
+    ObjectSpace.undefine_finalizer(self)
+  end
+end
+
+Sample.new
+GC.start
+# => finalize
+
+Sample.new
+sample.undef
+GC.start
+# ※何も出力されない
+#@end
+
+@see [[m:ObjectSpace.#define_finalizer]]
 
 #@since 1.9.1
 --- count_objects(result_hash = {}) -> Hash
@@ -176,48 +245,8 @@ obj を返します。
 
 @raise TypeError 引数に [[c:Hash]] 以外を与えた場合、発生します。
 
-  ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
-
+#@samplecode 例
+ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
 #@end
-#@until 1.9.1
---- add_finalizer(proc)    -> Proc
-
-このメソッドは obsolete です。代わりに
-[[m:ObjectSpace.#define_finalizer]] を使用してください。
-
-proc をファイナライザとして設定します。
-proc を返します。
-
-[[m:ObjectSpace.#call_finalizer]] で指定したオブジェクトが解放され
-る時、そのオブジェクトの ID(c.f [[m:Object#__id__]])を引数に
-ファイナライザが評価されます。
-
-@param proc ファイナライザとしたい Proc オブジェクトを指定します。
-
---- call_finalizer(obj)    -> object
-
-このメソッドは obsolete です。
-
-obj をファイナライザの対象オブジェクトとして設定します。
-obj を返します。
-
-@param obj ファイナライザの対象とするオブジェクトを指定します。
-
---- finalizers     -> [Proc]
-
-このメソッドは obsolete です。
-
-現在登録されているファイナライザの配列を返します。
-
---- remove_finalizer(proc)    -> Proc
-
-このメソッドは obsolete です。代わりに
-[[m:ObjectSpace.#undefine_finalizer]] を使用してくださ
-い。
-
-指定した proc をファイナライザから取り除きます。
-proc を返します。
-
-@param proc 取り除きたいファイナライザである Proc オブジェクトを指定します。
 
 #@end

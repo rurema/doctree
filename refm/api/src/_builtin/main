@@ -4,10 +4,35 @@
 
 main では参照できない事に注意してください。トップレベルで self から参照してください。
 
-トップレベルで定義したメソッドは main オブジェクトの private メソッドと
+トップレベルで定義したメソッドは [[c:Object]] の private インスタンスメソッドと
 して定義されます。
 
+#@samplecode 例: トップレベルで定義したメソッドの確認
+basic_private_methods = private_methods(false)
+basic_public_methods = public_methods(false)
+private def explicit_private_method
+end
+
+# トップレベルで定義したメソッドは main オブジェクトの private メソッドと して定義される
+def implicit_private_method
+end
+
+public def explicit_public_method
+end
+
+# main オブジェクトで独自定義した private method のみを取得する
+p private_methods(false) - basic_private_methods
+# => [:explicit_private_method, :implicit_private_method]
+
+# main オブジェクトで独自定義した public method のみを取得する
+p public_methods(false) - basic_public_methods
+# => [:explicit_public_method]
+#@end
+
 --- public(*name) -> Object
+#@since 3.0
+--- public(names) -> Object
+#@end
 
 メソッドを public に設定します。
 
@@ -17,13 +42,21 @@ main では参照できない事に注意してください。トップレベル
 引数が与えられた時には引数によって指定されたメソッドを public に設
 定します。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
+
+#@#noexample Module#public を参照
 
 @see [[m:Module#public]]
 
 --- private(*name) -> Object
+#@since 3.0
+--- private(names) -> Object
+#@end
 
 メソッドを private に設定します。
 
@@ -33,9 +66,14 @@ main では参照できない事に注意してください。トップレベル
 引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
 れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
-@param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
+@param name  0 個以上の [[c:String]] または [[c:Symbol]] を指定します。
+#@since 3.0
+@param names 0 個以上の [[c:String]] または [[c:Symbol]] を [[c:Array]] で指定します。
+#@end
 
 @raise NameError 存在しないメソッド名を指定した場合に発生します。
+
+#@#noexample 明示的に呼び出される機会がないため
 
 @see [[m:Module#private]]
 
@@ -46,14 +84,22 @@ main では参照できない事に注意してください。トップレベル
 
 "main" を返します。
 
+#@#noexample
+
 --- include(*modules) -> self
 
-引数 modules で指定したモジュールを後ろから順番をインクルードします。
+引数 modules で指定したモジュールを後ろから順番に [[c:Object]] にインクルードします。
 
-@param mod [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
+@param modules [[c:Module]] のインスタンス( [[c:Enumerable]] など)を指定します。
 
 @raise ArgumentError 継承関係が循環してしまうような include を行った場
                      合に発生します。
+
+#@samplecode 例:
+include Math
+
+hypot(3, 4)  # => 5.0
+#@end
 
 @see [[m:Module#include]]
 
@@ -75,6 +121,8 @@ main では参照できない事に注意してください。トップレベル
 @raise TypeError method に同じクラス、サブクラス以外のメソッドを指定し
                  た場合に発生します。
 
+#@#noexample Module#define_method を参照
+
 @see [[m:Module#define_method]]
 
 --- using(module) -> self
@@ -84,12 +132,28 @@ main では参照できない事に注意してください。トップレベル
 有効にした拡張の有効範囲については以下を参照してください。
 
 #@since 2.1.0
- * [[url:https://docs.ruby-lang.org/en/trunk/syntax/refinements_rdoc.html#label-Scope]]
+ * [[url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]]
 #@else
  * [[url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]]
 #@end
 
 @param module 有効にするモジュールを指定します。
+
+#@samplecode 例
+module Sloth
+  refine String do
+    def downcase
+      self
+    end
+  end
+end
+
+"ABC".downcase # => "abc"
+
+using Sloth
+
+"ABC".downcase # => "ABC"
+#@end
 
 #@since 2.1.0
 @see [[m:Module#refine]], [[m:Module#using]]
