@@ -5,7 +5,7 @@
   * オブジェクト同士の比較は、型の比較およびメンバの値の比較によって行われます。
   * オブジェクトはイミュータブルになります。すなわち、オブジェクト生成時に設定されたメンバはその後上書きされることはありません。
 
-[[m:Data.define]] でオブジェクトのクラスを定義することができます。定義されたクラスは Data のサブクラスとなります。
+[[m:Data.define]] でオブジェクトのクラスを定義できます。定義されたクラスは Data のサブクラスとなります。
 Data のサブクラスでは、メンバに対するアクセスメソッドが定義されています。
 
 Data と似たクラスに [[c:Struct]] があります。Struct はメンバの書き換えや列挙が可能であるなど、
@@ -21,7 +21,7 @@ fred = Dog.new("Fred", 5)
 # メンバにアクセスできる
 p fred.name # => "Fred"
 
-# キーワード引数で構築することもできる
+# キーワード引数でも構築できる
 p Dog.new(name: "Terry", age: 3)
 
 # メンバの値を書き換えることはできない
@@ -54,8 +54,8 @@ fred = Dog.new("Fred", 5)
 fred.age = 6 # => NoMethodError
 #@end
 
-メンバを持たないサブクラスを定義することも可能です。
-以下のように、パターンマッチに利用することができます。
+メンバを持たないサブクラスも定義可能です。
+以下のように、パターンマッチに利用できます。
 
 #@samplecode 例
 class HTTPFetcher
@@ -163,7 +163,7 @@ Point.new(x: 1)              # => in `initialize': missing keyword: :y (Argument
 Point.new(x: 1, y: 2, z: 3)  # => in `initialize': unknown keyword: :z (ArgumentError)
 #@end
 
-下の例のように、initialize メソッドをオーバーライドすることで new のオプション引数を実現することができます。
+下の例のように、initialize メソッドをオーバーライドすることで new のオプション引数を実現できます。
 
 #@samplecode オプション引数を実現する例
 Point = Data.define(:x, :y) do
