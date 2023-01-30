@@ -48,7 +48,7 @@ config = {db: {user: 'admin', password: 'abc123'}}
 
 case config
 #@# in db: {user:} # matches subhash and puts matched value in variable user
-in db: {user:} # ネストしたハッシュにマッチしマッチした値が変数 user に代入されます
+in db: {user:} # ネストしてハッシュにマッチして、その値を変数userに代入する
   puts "Connect with user '#{user}'"
 in connection: {username: }
   puts "Connect with user '#{username}'"
@@ -56,7 +56,7 @@ else
   puts "Unrecognized structure of config"
 end
 #@# # Prints: "Connect with user 'admin'"
-# "Connect with user 'admin'" が出力されます
+# "Connect with user 'admin'" と出力
 #@end
 
 #@# whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
@@ -66,11 +66,11 @@ end
 config = {db: {user: 'admin', password: 'abc123'}}
 
 #@# config => {db: {user:}} # will raise if the config's structure is unexpected
-config => {db: {user:}} # config の構造が予期しないものだった場合は例外が発生します
+config => {db: {user:}} # もし config の構造が期待したものでなかった場合には、例外が発生する
 
 puts "Connect with user '#{user}'"
 #@# # Prints: "Connect with user 'admin'"
-# Connect with user 'admin'" が出力されます
+# Connect with user 'admin'" と出力
 #@end
 
 #@# <code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
@@ -169,7 +169,7 @@ end
 #@samplecode
 case {a: 1, b: 2}
 #@# in {a: Integer, **nil} # this will not match the pattern having keys other than a:
-in {a: Integer, **nil} # これは a: 以外にキーを持つパターンのためマッチしません
+in {a: Integer, **nil} # a: 以外のキーがある場合にはマッチしない
   "matched a part"
 in {a: Integer, b: Integer, **nil}
   "matched a whole"
@@ -401,7 +401,7 @@ else
 end
 # expected: "not matched. expectation was: 18"
 #@# # real: "matched. expectation was: 1" -- local variable just rewritten
-# real: "matched. expectation was: 1" -- ローカル変数が上書かれている
+# 実際の動作："matched. expectation was: 1" -- ローカル変数が上書きされてしまっている
 #@end
 
 #@# For this case, the pin operator <code>^</code> can be used, to tell Ruby "just use this value as part of the pattern":
@@ -507,7 +507,7 @@ else
   "not matched"
 end
 #@# # prints "deconstruct called"
-# "deconstruct called" が出力されます
+# "deconstruct called" と出力
 #=> "matched: 1"
 
 case Point.new(1, -2)
@@ -517,7 +517,7 @@ else
   "not matched"
 end
 #@# # prints: deconstruct_keys called with [:x]
-# "deconstruct_keys called with [:x]" が出力されます
+# "deconstruct_keys called with [:x]" と出力
 #=> "matched: 1"
 #@end
 
@@ -532,7 +532,7 @@ else
   "not matched"
 end
 #@# # prints: deconstruct_keys called with nil
-# "deconstruct_keys called with nil" が出力されます
+# "deconstruct_keys called with nil" と出力
 #=> "matched: 1"
 #@end
 
@@ -553,7 +553,7 @@ end
 
 case SuperPoint.new(1, -2)
 #@# in SuperPoint[x: 0.. => px] # [] or () parentheses are allowed
-in SuperPoint[x: 0.. => px] # [] や () といった括弧は許容されます
+in SuperPoint[x: 0.. => px] # 括弧 [] か () が使える
   "matched: #{px}"
 else
   "not matched"
@@ -626,7 +626,8 @@ eval('[0] => [*, 0, *]')
 パターンマッチの警告はコンパイル時に発生するため、以下のような場合は警告は抑制できません。
 
 #@samplecode
-Warning[:experimental] = false # At the time this line is evaluated, the parsing happened and warning emitted
+#@# Warning[:experimental] = false # At the time this line is evaluated, the parsing happened and warning emitted
+Warning[:experimental] = false # この行を評価する段階では、構文解析とそれによる警告の発生は、既に終了している
 [0] => [*, 0, *]
 #@end
 
