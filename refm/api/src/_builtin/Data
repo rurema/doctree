@@ -37,7 +37,7 @@ fred.age = 6 # => NoMethodError
 
 [[c:Data]] クラスに新しいサブクラスを作って、それを返します。
 
-サブクラスでは構造体のメンバに対するアクセスメソッドが定義されています。
+サブクラスでは値オブジェクトのメンバに対するアクセスメソッドが定義されています。
 
 #@samplecode 例
 Dog = Data.define(:name, :age)
@@ -86,7 +86,7 @@ p fetch("http://example.com/")     # => "Current time is 2023-01-10 10:00:53 +09
 p fetch("http://example.com/404")  # => :NotFound
 #@end
 
-@param args 構造体を定義するための可変長引数。[[c:Symbol]] または [[c:String]] を指定します。
+@param args 値オブジェクトのクラスを定義するための可変長引数。[[c:Symbol]] または [[c:String]] を指定します。
 
 @return Data のサブクラスを返します。
 
@@ -126,15 +126,15 @@ p Point.new(x: 1, y: 2)  # => #<data Point x=1, y=2>
 --- [](**kwargs) -> Data
 
 (このメソッドは Data のサブクラスにのみ定義されています)
-構造体オブジェクトを生成して返します。
+値オブジェクトを生成して返します。
 
-@param args 構造体の初期値を指定します。
+@param args 値オブジェクトのメンバの値を指定します。
 
-@param kwargs 構造体の初期値を指定します。
+@param kwargs 値オブジェクトのメンバの値を指定します。
 
-@return 構造体クラスのインスタンス。
+@return 値オブジェクトクラスのインスタンス。
 
-@raise ArgumentError 構造体のメンバの数より多くの引数を渡した場合に発生します。
+@raise ArgumentError 値オブジェクトのメンバの数より多くの引数を渡した場合に発生します。
 
 #@samplecode 例
 Point = Data.define(:x, :y)
@@ -148,7 +148,7 @@ p p2.x    # => 3
 p p2.y    # => 4
 #@end
 
-new に渡す引数の数が構造体のメンバの数より少ないこと自体は合法です。
+new に渡す引数の数が値オブジェクトのメンバの数より少ないこと自体は合法です。
 
 次の例ではいずれのケースでもエラーが発生していますが、
 Point.new に渡した位置引数の数が多い場合(上から2番目)のみ new でエラーが発生しており、
@@ -191,7 +191,7 @@ Point.new(x: 1, y: 2, multiplier: 10)  # => #<data Point x=10, y=20>
 
 --- members -> [Symbol]
 
-構造体のメンバの名前([[c:Symbol]])の配列を返します。
+値オブジェクトのメンバの名前([[c:Symbol]])の配列を返します。
 
 #@samplecode 例
 Foo = Data.define(:foo, :bar)
@@ -352,7 +352,7 @@ joe.inspect # => "#<data Customer name=\"Joe Smith\", address=\"123 Maple, Anyto
 
 --- members -> [Symbol]
 
-構造体のメンバの名前([[c:Symbol]])の配列を返します。
+値オブジェクトのメンバの名前([[c:Symbol]])の配列を返します。
 
 #@samplecode 例
 Foo = Data.define(:foo, :bar)
@@ -387,7 +387,7 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
 
 self をコピーしたオブジェクトを返します。
 
-構造体のメンバのオブジェクトはコピーされません。つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
+値オブジェクトのメンバのオブジェクトはコピーされません。つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
 
 キーワード引数が指定された場合、引数に対応するメンバには引数の値が設定されます。存在しないメンバを指定した場合はエラーとなります。
 
