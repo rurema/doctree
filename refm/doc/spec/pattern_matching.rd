@@ -399,7 +399,8 @@ in expectation, *rest
 else
   "not matched. expectation was: #{expectation}"
 end
-# expected: "not matched. expectation was: 18"
+#@# # expected: "not matched. expectation was: 18"
+# 期待する動作："not matched. expectation was: 18"
 #@# # real: "matched. expectation was: 1" -- local variable just rewritten
 # 実際の動作："matched. expectation was: 1" -- ローカル変数が上書きされてしまっている
 #@end
@@ -693,8 +694,10 @@ in b
 in c
   "not matched"
 end
-a #=> undefined
-c #=> undefined
+#@# a #=> undefined
+a #=> 未定義
+#@# c #=> undefined
+c #=> 未定義
 #@end
 
 #@# Number of +deconstruct+, +deconstruct_keys+ method calls:
@@ -711,5 +714,6 @@ in [0, 1]
 in [0]
   "matched"
 end
-$i #=> undefined
+#@# $i #=> undefined
+$i #=> 未定義
 #@end
