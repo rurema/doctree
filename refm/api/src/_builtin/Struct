@@ -10,12 +10,17 @@ include Enumerable
 
 == Class Methods
 
-#@since 2.5.0
+#@since 3.1
 --- new(*args, keyword_init: nil)                  -> Class
 --- new(*args, keyword_init: nil) {|Class| block } -> Class
 #@else
+#@since 2.5.0
+--- new(*args, keyword_init: false)                  -> Class
+--- new(*args, keyword_init: false) {|Class| block } -> Class
+#@else
 --- new(*args)                  -> Class
 --- new(*args) {|Class| block } -> Class
+#@end
 #@end
 
 [[c:Struct]] クラスに新しいサブクラスを作って、それを返します。
@@ -37,12 +42,64 @@ printf "name:%s age:%d", fred.name, fred.age
 @param args 構造体を定義するための可変長引数。[[c:String]] または [[c:Symbol]] を指定します。
 #@since 2.5.0
 #@since 3.2
-@param keyword_init false を指定すると、キーワード引数で初期化しない構造体を定義します。
+@param keyword_init 構造体クラスのインスタンスを生成する際に、キーワード引数を使用するかどうかを指定します。値の意味は次のとおりです。
+
+  * nil: キーワード引数と位置引数のどちらを使用してもよい
+  * true: キーワード引数のみ使用できる
+  * false: キーワード引数は使用できず、位置引数のみ使用できる
+
 #@else
 @param keyword_init true を指定すると、キーワード引数で初期化する構造体を定義します。
 #@end
+#@if (version == "3.1")
                     Ruby 3.1 では互換性に影響のある使い方をしたときに警告が出るため、
                     従来の挙動を期待する構造体には明示的に false を指定してください。
+#@end
+#@end
+
+#@since 3.2
+#@samplecode 例
+Point1 = Struct.new(:x, :y)
+Point1.new(1, 2)             # => #<struct Point1 x=1, y=2>
+Point1.new(x: 1, y: 2)       # => #<struct Point1 x=1, y=2>
+Point1.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
+
+Point2 = Struct.new(:x, :y, keyword_init: nil)
+Point2.new(1, 2)             # => #<struct Point2 x=1, y=2>
+Point2.new(x: 1, y: 2)       # => #<struct Point2 x=1, y=2>
+Point2.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
+
+Point3 = Struct.new(:x, :y, keyword_init: true)
+Point3.new(1, 2)             # => wrong number of arguments (given 2, expected 0) (ArgumentError)
+Point3.new(x: 1, y: 2)       # => #<struct Point3 x=1, y=2>
+Point3.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
+
+Point4 = Struct.new(:x, :y, keyword_init: false)
+Point4.new(1, 2)             # => #<struct Point4 x=1, y=2>
+Point4.new(x: 1, y: 2)       # => #<struct Point4 x={:x=>1, :y=>2}, y=nil>
+                             # これは Point4.new({x: 1, y: 2}) とみなされていることに注意
+Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={:x=>1, :y=>2, :z=>3}, y=nil>
+#@end
+#@else
+#@samplecode 例
+Point = Struct.new(:x, :y, keyword_init: true) # => Point(keyword_init: true)
+Point.new(x: 1, y: 2) # => #<struct Point x=1, y=2>
+Point.new(x: 1)       # => #<struct Point x=1, y=nil>
+Point.new(y: 2)       # => #<struct Point x=nil, y=2>
+Point.new(z: 3)       # ArgumentError (unknown keywords: z)
+#@end
+
+#@if (version == "3.1")
+#@samplecode 警告が出る例
+Point = Struct.new(:x, :y)
+Point.new(x: 1, y: 2)   # => #<struct Point x={:x=>1, :y=>2}, y=nil>
+                        # warning: Passing only keyword arguments to Struct#initialize will behave differently from Ruby 3.2. Please use a Hash literal like .new({k: v}) instead of .new(k: v).
+
+# keyword_init: falseを指定すると警告は出ない
+Point2 = Struct.new(:x, :y, keyword_init: false)
+Point2.new(x: 1, y: 2)  # => #<struct Point2 x={:x=>1, :y=>2}, y=nil>
+#@end
+#@end
 #@end
 
 === 第一引数が String の場合
@@ -90,20 +147,6 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 てしまうことがあるためです。
 
 @see [[m:Class.new]]
-
-#@since 2.5.0
-=== keyword_init: true を指定した場合
-
-キーワード引数で初期化することを想定した構造体になります。
-
-#@samplecode 例
-Point = Struct.new(:x, :y, keyword_init: true) # => Point(keyword_init: true)
-Point.new(x: 1, y: 2) # => #<struct Point x=1, y=2>
-Point.new(x: 1)       # => #<struct Point x=1, y=nil>
-Point.new(y: 2)       # => #<struct Point x=nil, y=2>
-Point.new(z: 3)       # ArgumentError (unknown keywords: z)
-#@end
-#@end
 
 --- new(*args) -> Struct
 --- [](*args) -> Struct
