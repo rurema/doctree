@@ -478,10 +478,10 @@ end
 #@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
-===[a:matching_non_primitive_objects] プリミティブなオブジェクト以外とのマッチ: deconstruct と deconstruct_keys
+===[a:matching_non_primitive_objects] プリミティブなオブジェクト以外とのマッチ: deconstruct メソッドと deconstruct_keys メソッド
 
 #@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
-既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは deconstruct (これは Array/Find パターンで利用されます) か deconstruct_keys (これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
+既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは deconstruct メソッド(これは Array/Find パターンで利用されます) か deconstruct_keys メソッド(これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
 
 #@samplecode
 class Point
@@ -703,7 +703,7 @@ c #=> 未定義
 #@end
 
 #@# Number of +deconstruct+, +deconstruct_keys+ method calls:
-#@samplecode deconstruct や deconstruct_keys が呼び出された回数
+#@samplecode deconstruct メソッドや deconstruct_keys メソッドが呼び出された回数
 $i = 0
 ary = [0]
 def ary.deconstruct
