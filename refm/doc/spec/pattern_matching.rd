@@ -685,7 +685,7 @@ Warning[:experimental] = false # この行を評価する段階では、構文�
 将来的な最適化の余地を残すため、仕様には一部 `未定義` の振る舞いが含まれています。
 
 #@# Use of a variable in an unmatched pattern:
-#@samplecode マッチしなかったパターンの中での変数の利用
+#@samplecode マッチしなかったパターンに指定していた変数を使う
 case [0, 1]
 in [a, 2]
   "not matched"
