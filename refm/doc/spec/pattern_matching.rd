@@ -566,7 +566,7 @@ end
 ===[a:guard_clauses] ガード節
 
 #@# +if+ can be used to attach an additional condition (guard clause) when the pattern matches. This condition may use bound variables:
-もしパターンマッチのときに if を用いて追加の条件(ガード節)を指定した場合、変数への束縛がされた状態で条件の判定が行われます。
+if を使って、パターンにマッチしたときに評価される追加の条件式(ガード節)を加えることができます。この条件式では、マッチした値を束縛した変数を使うこともできます。
 
 #@samplecode
 case [1, 2]
