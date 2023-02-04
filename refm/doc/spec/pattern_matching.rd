@@ -93,7 +93,7 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 パターンで利用できるものには次のものがあります。
 
 #@#   * any Ruby object (matched by the <code>===</code> operator, like in +when+); (<em>Value pattern</em>)
-  * Ruby のオブジェクト (when での場合のように 『===』 演算子にマッチするもの) (「Value パターン」)
+  * すべてのRubyオブジェクト (when と同じように、『===』演算子でマッチする) (「Value パターン」)
 #@#   * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
   * Array パターン: 『[<subpattern>, <subpattern>, <subpattern>, ...]』 (「Array パターン」)
 #@#   * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
