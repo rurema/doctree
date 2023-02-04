@@ -164,7 +164,7 @@ end
 #@end
 
 #@# There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
-また、パターンで明示的に指定されたキー以外にキーが存在しないケースにマッチさせたい場合、『**nil』 を指定する方法もあります。
+また、パターンで明示的に指定したキー以外のキーが存在しないハッシュにのみ、マッチさせたい場合には、『**nil』 を使います。
 
 #@samplecode
 case {a: 1, b: 2}
