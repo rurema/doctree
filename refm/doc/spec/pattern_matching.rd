@@ -388,7 +388,7 @@ end
 ===[a:variable_pinning] 変数のピン留め
 
 #@# Due to the variable binding feature, existing local variable can not be straightforwardly used as a sub-pattern:
-変数の束縛の機能では存在しているローカル変数を サブパターン(Array/Find/Hashパターン構文の <subpattern> の部分) としてそのまま利用することはできません。
+既に存在しているローカル変数は、サブパターン(Array/Find/Hashパターン構文の <subpattern> の部分) として変数の値をそのまま使うことができません。(これは、変数への束縛の機能を実現するための制限です。)
 
 #@samplecode
 expectation = 18
