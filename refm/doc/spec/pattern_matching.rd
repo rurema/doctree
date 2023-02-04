@@ -307,7 +307,7 @@ end
 #@end
 
 #@# For hash patterns, even a simpler form exists: key-only specification (without any sub-pattern) binds the local variable with the key's name, too:
-Hash パターンにもより簡潔な記法があります。チェックが不要で変数への束縛のみ行いたい場合、キー名だけを指定することでキー名と同じ変数に値を束縛することができます。
+Hash パターンでは、もっと単純に書くこともできます。キーのみを指定することで、キーと同じ名前のローカル変数に値を束縛できます。
 
 #@samplecode
 case {a: 1, b: 2, c: 3}
