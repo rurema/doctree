@@ -523,7 +523,9 @@ end
 #@end
 
 #@# +keys+ are passed to +deconstruct_keys+ to provide a room for optimization in the matched class: if calculating a full hash representation is expensive, one may calculate only the necessary subhash. When the <code>**rest</code> pattern is used, +nil+ is passed as a +keys+ value:
-keys はマッチしたクラスの中で最適化の余地を残して deconstruct_keys へと渡されます。もし全てのハッシュの表現の計算に高い負荷がかかる場合、必要なサブハッシュのみ計算されるかもしれません。『**rest』 パターンが使われている場合、keys の値として nil が渡されます。
+deconstruct_keys メソッドに引数 keys を渡すのは、マッチを行うクラスの実装側に最適化の余地を残すためです。もし、ハッシュのすべての要素を計算するのが重い処理になる場合には、keys で指定された、マッチに必要になる部分のみを計算するように実装しても良いでしょう。
+
+『**rest』 パターンが使われた場合には、keys の値として nil が渡されます。
 
 #@samplecode
 case Point.new(1, -2)
