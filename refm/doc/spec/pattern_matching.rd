@@ -478,7 +478,7 @@ end
 #@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
-===[a:matching_non_primitive_objects] プリミティブなオブジェクト以外とのマッチ: deconstruct メソッドと deconstruct_keys メソッド
+===[a:matching_non_primitive_objects] 非プリミティブなオブジェクトのマッチ: deconstruct メソッドと deconstruct_keys メソッド
 
 #@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
 既に先述されている通り、配列リテラルやハッシュリテラルの他に Array, Find, Hash パターンは deconstruct メソッド(これは Array/Find パターンで利用されます) か deconstruct_keys メソッド(これは Hash パターンで利用されます) が実装されたオブジェクトにマッチします。
