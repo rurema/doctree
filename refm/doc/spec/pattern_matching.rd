@@ -605,7 +605,7 @@ end
 ===[a:current_feature_status] 機能の現状
 
 #@# As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
-Ruby 3.1 の時点では、Find パターンは 「experimental」 と考えられます。Find パターンのシンタックスは将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
+Ruby 3.1 の時点では、Find パターンは 「実験的機能」 扱いです。Find パターンの構文は将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
 
 #@samplecode
 [0] => [*, 0, *]
