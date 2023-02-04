@@ -538,7 +538,7 @@ end
 #@end
 
 #@# Additionally, when matching custom classes, the expected class can be specified as part of the pattern and is checked with <code>===</code>
-加えて、カスタムクラスにマッチするとき、期待されるクラスはパターンの部品として明記され 『===』 で検査されます
+さらに、カスタムクラスに対してマッチする場合には、期待するクラスをパターンの部品として指定することができます。これは 『===』 でチェックされます。
 
 #@samplecode
 class SuperPoint < Point
