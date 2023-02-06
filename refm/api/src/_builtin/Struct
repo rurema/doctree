@@ -11,15 +11,15 @@ include Enumerable
 == Class Methods
 
 #@since 3.1
---- new(*args, keyword_init: nil)                  -> Class
---- new(*args, keyword_init: nil) {|Class| block } -> Class
+--- new(*args, keyword_init: nil)                     -> Class
+--- new(*args, keyword_init: nil) {|subclass| block } -> Class
 #@else
 #@since 2.5.0
---- new(*args, keyword_init: false)                  -> Class
---- new(*args, keyword_init: false) {|Class| block } -> Class
+--- new(*args, keyword_init: false)                     -> Class
+--- new(*args, keyword_init: false) {|subclass| block } -> Class
 #@else
 --- new(*args)                  -> Class
---- new(*args) {|Class| block } -> Class
+--- new(*args) {|subclass| block } -> Class
 #@end
 #@end
 
