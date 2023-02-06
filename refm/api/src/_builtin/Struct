@@ -62,22 +62,30 @@ printf "name:%s age:%d", fred.name, fred.age
 Point1 = Struct.new(:x, :y)
 Point1.new(1, 2)             # => #<struct Point1 x=1, y=2>
 Point1.new(x: 1, y: 2)       # => #<struct Point1 x=1, y=2>
+Point1.new(x: 1)             # => #<struct Point1 x=1, y=nil>
+Point1.new(y: 2)             # => #<struct Point1 x=nil, y=2>
 Point1.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
 
 Point2 = Struct.new(:x, :y, keyword_init: nil)
 Point2.new(1, 2)             # => #<struct Point2 x=1, y=2>
 Point2.new(x: 1, y: 2)       # => #<struct Point2 x=1, y=2>
+Point2.new(x: 1)             # => #<struct Point2 x=1, y=nil>
+Point2.new(y: 2)             # => #<struct Point2 x=nil, y=2>
 Point2.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
 
 Point3 = Struct.new(:x, :y, keyword_init: true)
 Point3.new(1, 2)             # => wrong number of arguments (given 2, expected 0) (ArgumentError)
 Point3.new(x: 1, y: 2)       # => #<struct Point3 x=1, y=2>
+Point3.new(x: 1)             # => #<struct Point3 x=1, y=nil>
+Point3.new(y: 2)             # => #<struct Point3 x=nil, y=2>
 Point3.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
 
 Point4 = Struct.new(:x, :y, keyword_init: false)
 Point4.new(1, 2)             # => #<struct Point4 x=1, y=2>
 Point4.new(x: 1, y: 2)       # => #<struct Point4 x={:x=>1, :y=>2}, y=nil>
                              # これは Point4.new({x: 1, y: 2}) とみなされていることに注意
+Point4.new(x: 1)             # => #<struct Point4 x={:x=>1}, y=nil>
+Point4.new(y: 2)             # => #<struct Point4 x={:y=>2}, y=nil>
 Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={:x=>1, :y=>2, :z=>3}, y=nil>
 #@end
 #@else
