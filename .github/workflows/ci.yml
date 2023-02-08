@@ -23,7 +23,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -50,7 +50,7 @@ jobs:
         ls -Name "*.*" | foreach {
           tar acf "../artifact/${_}.tar.xz" $_
         }
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: statichtml-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/*.*.tar.xz
@@ -59,7 +59,7 @@ jobs:
       run: |
         cd /tmp
         mv -v html html.pr
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         ref: ${{ github.event.pull_request.base.sha }}
     - name: Install dependencies
@@ -72,7 +72,7 @@ jobs:
         mv -v html html.base
         git diff --no-index html.base html.pr --stat || true
         git diff --no-index html.base html.pr --output artifact/html.diff || true
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: diff-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/html.diff
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install misspell
       run: 'curl -L https://git.io/misspell | bash'
     - name: Run misspell
