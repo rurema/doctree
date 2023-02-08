@@ -21,8 +21,8 @@ require を書かなくても使うことができます。
 #@since 2.3.0
 #@include(thread/ConditionVariable)
 #@end
-#@until 3.0.0
-#@include(_builtin/Data)
+#@until 2.7.0
+#@include(_builtin/Data.old)
 #@end
 #@since 3.2
 #@include(_builtin/Data)
