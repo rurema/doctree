@@ -35,7 +35,7 @@ fred.age = 6 # => NoMethodError
 == Class Methods
 
 --- define(*args)       -> Class
---- define(*args) {|Class| block } -> Class
+--- define(*args) {|subclass| block } -> Class
 
 [[c:Data]] クラスに新しいサブクラスを作って、それを返します。
 
