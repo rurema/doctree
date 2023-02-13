@@ -221,6 +221,8 @@ Encoding::UTF_16BE.ascii_compatible?  #=> false
 複製されたエンコーディングは元のエンコーディングと同じバイト構造を持たなければなりません。
 name という名前のエンコーディングが既に存在する場合は [[c:ArgumentError]] を発生します。
 
+Ruby 3.2 から非推奨となり、Ruby 3.3 で削除予定です。
+
 #@samplecode
 encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
 encoding.name                                                #=> "REPLICATED_UTF-8"
