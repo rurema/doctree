@@ -310,7 +310,7 @@ p  <<LABEL.upcase
 the lower case string
 LABEL
 
-# => "THE LOWER CASE STRING"
+# => "THE LOWER CASE STRING\n"
 #@end
 
 開始ラベルの次の行は常にヒアドキュメントとなります。例えば、以下のよう
