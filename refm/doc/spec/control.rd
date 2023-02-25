@@ -511,8 +511,8 @@ retry #=> -:1: retry outside of rescue clause
 #@end
 #@end
 
-イテレータ呼び出しにおける break, next, redo,
-retry をまとめると以下のようになります。
+イテレータ呼び出しにおける break, next, redo
+をまとめると以下のようになります。
 
 #@until 1.9.0
 #@samplecode
