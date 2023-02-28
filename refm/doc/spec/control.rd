@@ -454,33 +454,6 @@ redo
 
 ループ条件のチェックを行なわず、現在の繰り返しをやり直します。
 
-====[a:retry] retry
-
-#@samplecode 例
-retry
-#@end
-
-文法:
-
-          retry
-
-retry は、rescue 節で begin 式をはじめからもう一度実行するのに使用します。
-
-retry を使うことである処理が成功するまで処理を繰り返すようなループを作
-ることができます。
-
-#@samplecode
-begin
-  do_something # exception raised
-rescue
-  # handles error
-  retry  # restart from beginning
-end
-#@end
-
-rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]] が発生
-します。
-
 イテレータ呼び出しにおける break, next, redo
 をまとめると以下のようになります。
 
@@ -514,6 +487,33 @@ iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
 iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
 iter { p "(b)"; break }     # -> (a)..(b)(d)
 #@end
+
+====[a:retry] retry
+
+#@samplecode 例
+retry
+#@end
+
+文法:
+
+          retry
+
+retry は、rescue 節で begin 式をはじめからもう一度実行するのに使用します。
+
+retry を使うことである処理が成功するまで処理を繰り返すようなループを作
+ることができます。
+
+#@samplecode
+begin
+  do_something # exception raised
+rescue
+  # handles error
+  retry  # restart from beginning
+end
+#@end
+
+rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]] が発生
+します。
 
 === 例外処理
 
