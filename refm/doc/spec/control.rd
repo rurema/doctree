@@ -454,6 +454,40 @@ redo
 
 ループ条件のチェックを行なわず、現在の繰り返しをやり直します。
 
+イテレータ呼び出しにおける break, next, redo
+をまとめると以下のようになります。
+
+#@samplecode
+def iter
+  # (a)
+  #  :
+  # (b)
+  yield
+  # (c)
+  #  :
+  # (d)
+end
+iter { redo  }  # -> (b) へ飛ぶ
+iter { next  }  # -> (c) へ飛ぶ
+iter { break }  # -> (d) へ飛ぶ
+#@end
+
+(a) は、厳密には引数評価から始まります。(b) はブロック実行の直前を指し
+ています(yield の引数が再評価されるわけではない)。(d) は、メソッドの終
+了です。
+
+#@samplecode
+def iter(var = p("(a)"))
+  yield
+  p "(c)"
+ensure
+  p "(d)"
+end
+iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
+iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
+iter { p "(b)"; break }     # -> (a)..(b)(d)
+#@end
+
 ====[a:retry] retry
 
 #@samplecode 例
@@ -464,28 +498,8 @@ retry
 
           retry
 
-#@since 1.9.1
 retry は、rescue 節で begin 式をはじめからもう一度実行するのに使用します。
-#@else
-イテレータ、ブロックまたはfor文の中で使われた場合には、そのイテレータ
-を起動しなおします。イテレータの引数も再評価されます。
 
-#@samplecode
-for i in 1..5
-  retry if some_condition # i == 1 からやり直し
-end
-
-# ユーザ定義の "untilループ"
-def UNTIL(cond)
-  return if cond
-  yield
-  retry
-end
-#@end
-
-retry は、ループ以外に後述の rescue 節でも使えます。この場
-合は、begin 式を始めからもう一度実行します。
-#@end
 retry を使うことである処理が成功するまで処理を繰り返すようなループを作
 ることができます。
 
@@ -498,89 +512,8 @@ rescue
 end
 #@end
 
-#@since 1.9.1
 rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]] が発生
 します。
-#@else
-rescue 節やイテレータブロック、for 文以外で retry が用いられた場合には
-例外 [[c:LocalJumpError]] が発生します。また、トップレベルで用いられた
-場合には、警告を表示してインタプリタが終了します。
-
-#@samplecode
-retry #=> -:1: retry outside of rescue clause
-#@end
-#@end
-
-イテレータ呼び出しにおける break, next, redo,
-retry をまとめると以下のようになります。
-
-#@until 1.9.0
-#@samplecode
-def iter
-  # (a)
-  #  :
-  # (b)
-  yield
-  # (c)
-  #  :
-  # (d)
-end
-iter { retry }  # -> (a) へ飛ぶ
-iter { redo  }  # -> (b) へ飛ぶ
-iter { next  }  # -> (c) へ飛ぶ
-iter { break }  # -> (d) へ飛ぶ
-#@end
-#@else
-#@samplecode
-def iter
-  # (a)
-  #  :
-  # (b)
-  yield
-  # (c)
-  #  :
-  # (d)
-end
-iter { redo  }  # -> (b) へ飛ぶ
-iter { next  }  # -> (c) へ飛ぶ
-iter { break }  # -> (d) へ飛ぶ
-#@end
-#@end
-
-(a) は、厳密には引数評価から始まります。(b) はブロック実行の直前を指し
-ています(yield の引数が再評価されるわけではない)。(d) は、メソッドの終
-了です。
-
-#@until 1.9.0
-#@samplecode
-def iter(var = p("(a)"))
-  yield
-  p "(c)"
-ensure
-  p "(d)"
-end
-iter { p "(b)"; retry }     # -> (a) .. (b)(d)(a) .. (b)(d)(a) ...
-iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
-iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
-iter { p "(b)"; break }     # -> (a)..(b)(d)
-#@end
-#@else
-#@samplecode
-def iter(var = p("(a)"))
-  yield
-  p "(c)"
-ensure
-  p "(d)"
-end
-iter { p "(b)"; redo  }     # -> (a) .. (b)(b)(b)(b) ...
-iter { p "(b)"; next  }     # -> (a) .. (b)(c) .. (d)
-iter { p "(b)"; break }     # -> (a)..(b)(d)
-#@end
-#@end
-
-#@until 1.9.1
-[注意] ensure は大域脱出を捕捉するため、retry の例では (d) も表示されます。
-#@end
 
 === 例外処理
 
@@ -774,29 +707,11 @@ BEGIN {
 された場合には指定された順に実行されます。
 
 BEGINブロックはコンパイル時に登録されます。
-#@since 1.9.1
+
 BEGIN ブロックは、独立したローカル変数のスコープを導入しません。つまり、
 BEGIN ブロック内で定義したローカル変数は BEGIN ブロックを抜けた後も使用
 可能です。
-#@else
-即ち一つの記述につきただ一回だけ登録が行われます。
 
-        if false
-          BEGIN { p "begin" }
-        end
-
-        # => "begin"
-
-BEGINブロックは独立したローカル変数のスコープを導入するため、ロー
-カル変数を外部と共有できません。ブロックの外と情報を伝達するには定数や
-グローバル変数などを介する必要があります。
-
-        BEGIN { $foo, foo = true, true }
-        p $foo  # => true
-        p foo   # undefined local variable or method `foo' for main:Object (NameError)
-#@end
-
-#@since 1.9.1
 BEGINはトップレベル以外では書けません。全て [[c:SyntaxError]]になります。
 
         def foo
@@ -813,15 +728,6 @@ BEGINはトップレベル以外では書けません。全て [[c:SyntaxError]]
           BEGIN { p "begin" }
         end
         # => -e:2: syntax error, unexpected keyword_BEGIN
-
-#@else
-BEGINはメソッド定義式中には書けません。parse error になります。
-
-        def foo
-          BEGIN { p "begin" }
-        end
-        # => -:2: BEGIN in method
-#@end
 
 ====[a:END] END
 
@@ -888,13 +794,8 @@ END は、BEGIN とは異なり実行時に後処理を登録します。した�
 END や [[m:Kernel.#at_exit]] で登録した後処理を取り消すこと
 はできません。
 
-#@since 1.9.1
 END ブロックは周囲とスコープを共有します。すなわちイテレータと同様のス
 コープを持ちます。
-#@else
-END ブロックは BEGIN ブロックとは異なり周囲とスコープを共有し
-ます。すなわちイテレータと同様のスコープを持ちます。
-#@end
 
 END ブロックの中で発生した例外はその END ブロックを中断し
 ますが、すべての後始末ルーチンが実行されるよう、インタプリタは終了せず
