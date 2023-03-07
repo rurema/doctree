@@ -11,7 +11,7 @@ jobs:
       - id: versions
         run: |
           versions=$(curl -s 'https://cache.ruby-lang.org/pub/misc/ci_versions/cruby.json' | jq -c '. + []')
-          echo "::set-output name=value::${versions}"
+          echo "value=${versions}" >> $GITHUB_OUTPUT
 
   rake:
     needs: ruby-versions
