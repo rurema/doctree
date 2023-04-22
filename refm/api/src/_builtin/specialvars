@@ -489,7 +489,7 @@ $stdin に代入すれば十分です。
 
 #@samplecode 例
 # 標準入力の入力元 /tmp/foo に変更
-$stdin = File.open("/tmp/foo", "w")
+$stdin = File.open("/tmp/foo", "r")
 gets               # 入力する
 $stdin = STDIN     # 元に戻す
 #@end
