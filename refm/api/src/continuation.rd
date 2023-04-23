@@ -1,6 +1,6 @@
 Ruby 1.9 以降で継続オブジェクトを扱うためのライブラリです。
 
-Ruby 2.2.0から非推奨になりました。代わりに[[lib:fiber]]を使ってください。
+Ruby 2.2.0から非推奨になりました。代わりに[[c:Fiber]]を使ってください。
 
 = reopen Kernel
 == Module functions
