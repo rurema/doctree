@@ -1577,7 +1577,7 @@ p 'xbbb-xbbb'.gsub(/x(b+)/) { $1 }   # => "bbb-bbb"  # OK
 puts '\n'.gsub(/\\/) { '\\\\' }      # => \\n        # OK
 #@end
 
-@see [[m:String#sub]]
+@see [[m:String#sub]], [[m:String#gsub!]]
 
 --- gsub(pattern) {|matched| .... } -> String
 --- gsub(pattern) -> Enumerator
@@ -1658,7 +1658,7 @@ replace に「\」自身を入れたいときは
 'abbbcd'.gsub!(/a(b+)/) { $1 }         # OK   これがもっとも安全
 #@end
 
-@see [[m:String#sub]]
+@see [[m:String#sub]], [[m:String#gsub]]
 
 --- gsub!(pattern) {|matched| .... } -> self | nil
 --- gsub!(pattern) -> Enumerator
