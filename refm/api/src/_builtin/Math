@@ -423,9 +423,9 @@ Math.log10(10**100) # => 100.0
 
 --- sqrt(x) -> Float
 
-x の平方根（square root）を返します。
+x の非負の平方根（principal square root）を返します。
 
-@param x 正の実数
+@param x 0または正の実数
 
 @raise TypeError xに数値以外を指定した場合に発生します。
 
