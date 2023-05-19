@@ -1,13 +1,14 @@
 #@since 3.2
 = NEWS for Ruby 3.2.0
 
-This document is a list of user-visible feature changes since the **3.1.0** release, except for bug fixes.
+このドキュメントは前回リリース以降のバグ修正を除くユーザーに影響のある機能の変更のリストです。
 
-Note that each entry is kept to a minimum, see links for details.
+それぞれのエントリーは参照情報があるため短いです。
+十分な情報と共に書かれた全ての変更のリストはリンク先を参照してください。
 
-== Language changes
+== 言語仕様の変更
 
-  * Anonymous rest and keyword rest arguments can now be passed as arguments, instead of just used in method parameters. [[Feature #18351]]
+  * 匿名の可変長引数と可変長キーワード引数はメソッドパラメータとしてだけではなく、引数としても使えるようになりました。 [[feature:18351]]
 
 //emlist{
 def foo(*)
@@ -18,7 +19,7 @@ def baz(**)
 end
 //}
 
-  * A proc that accepts a single positional argument and keywords will no longer autosplat. [[Bug #18633]]
+  * 1つの引数と残りをキーワードとして受け取る proc は引数を自動で展開されなくなりました。 [[bug:18633]]
 
 //emlist{
 proc{|a, **k| a}.call([1, 2])
@@ -28,30 +29,32 @@ proc{|a, **k| a}.call([1, 2])
 # => [1, 2]
 //}
 
-  * Constant assignment evaluation order for constants set on explicit objects has been made consistent with single attribute assignment evaluation order. With this code:
+  * 定数代入時の評価順序が単一の代入時と同じ評価順序となり一貫性を持つようになりました。 以下のようなコードの場合、
 
 //emlist{
 foo::BAR = baz
 //}
 
-  `foo` is now called before `baz`. Similarly, for multiple assignments to constants,  left-to-right evaluation order is used. With this code:
+  * foo は baz よりも先に評価されます。同様に複数の定数代入についても、左から右へ順に評価されます。以下のようなコードの場合、
 
 //emlist{
 foo1::BAR1, foo2::BAR2 = baz1, baz2
 //}
 
-  The following evaluation order is now used:
+  * 以下のように評価されます。
 
+//emlist{
   1. `foo1`
   2. `foo2`
   3. `baz1`
   4. `baz2`
+//}
 
-  [[Bug #15928]]
+  * [[bug:15928]]
 
-  * "Find pattern" is no longer experimental. [[Feature #18585]]
+  * Find patternが実験的な機能ではなくなりました。 [[feature:18585]]
 
-  * Methods taking a rest parameter (like `*args`) and wishing to delegate keyword arguments through `foo(*args)` must now be marked with `ruby2_keywords` (if not already the case). In other words, all methods wishing to delegate keyword arguments through `*args` must now be marked with `ruby2_keywords`, with no exception. This will make it easier to transition to other ways of delegation once a library can require Ruby 3+. Previously, the `ruby2_keywords` flag was kept if the receiving method took `*args`, but this was a bug and an inconsistency. A good technique to find the potentially-missing `ruby2_keywords` is to run the test suite, for where it fails find the last method which must receive keyword arguments, use `puts nil, caller, nil` there, and check each method/block on the call chain which must delegate keywords is correctly marked as `ruby2_keywords`. [[Bug #18625]] [[Bug #16466]]
+  * 可変長パラメータ (*args など) を受け取るメソッドで、 foo(*args) を通してキーワード引数を委譲したい場合は、 ruby2_keywords でマークしなければならなくなりました。言い換えれば, *args などを用いてキーワードを引数を例外を起こさずに委譲したい全てのメソッドは ruby2_keywords によってマークする必要があると言うことです。これによって Ruby 3 以降のバージョンへ委譲を用いている処理を有するライブラリを簡単に対応できるようになります。以前はメソッドが *args を受け取る場合、ruby2_keywords フラグが保持されていました。しかし、これには一貫性がないと言う不具合がありました。今まではキーワード引数を複数のメソッドにまたがって委譲する時に、 ruby2_keywords を正しく使っているかを確認するために、全てに対して puts nil, caller, nil を追加していましたが、この変更によりテストを実行するときに ruby2_keywords が必要であるにもかかわらず使われていないものを見つける良い手段となります。 [[bug:18625]] [[bug:16466]]
 
 #@samplecode
 def target(**kw)
@@ -71,13 +74,12 @@ end
 foo(k: 1)
 #@end
 
-== Core classes updates
-
-Note: We're only listing outstanding class updates.
+== 組み込みクラスの更新(注目すべきもののみ)
 
   * Fiber
-    * Introduce Fiber.[] and Fiber.[]= for inheritable fiber storage. Introduce Fiber#storage and Fiber#storage= (experimental) for getting and resetting the current storage.  Introduce `Fiber.new(storage:)` for setting the storage when creating a fiber. [[Feature #19078]]
-    * Existing Thread and Fiber local variables can be tricky to use. Thread-local variables are shared between all fibers, making it hard to isolate, while Fiber-local variables can be hard to share. It is often desirable to define unit of execution ("execution context") such that some state is shared between all fibers and threads created in that context.  This is what Fiber storage provides.
+    * 新規メソッド
+      * 継承可能なFiber storageとして、 Fiber.[] と Fiber.[]= が導入されました。現在のストレージの取得とリセットを行うために、 Fiber#storage と Fiber#storage= (実験的な機能)が導入されました。Fiberの作成時にストレージを設定するための Fiber.new(storage:) が導入されました。 [[feature:19078]]
+      * 既存の Thread と Fiber のローカル変数は、使い方が難しい場合があります。スレッドローカル変数はすべてのFiber間で共有されるため分離が難しく、Fiberローカル変数は共有が難しい場合があります。実行単位（ "実行コンテキスト" ）を定義して、そのコンテキストで作成されたすべての Fiber と Thread の間で何らかの状態が共有されるようにすることが望ましいことがよくあります。これはFiber storageが提供するものです。
 
 #@samplecode
 def log(message)
@@ -99,25 +101,29 @@ def handle_requests
 end
 #@end
 
-    * You should generally consider Fiber storage for any state which you want to be shared implicitly between all fibers and threads created in a given context, e.g. a connection pool, a request id, a logger level, environment variables, configuration, etc.
+  * 例えば、接続プール、リクエストID、ロガーレベル、環境変数、設定など、与えられたコンテキストで作成されたすべての Fiber と Thread の間で暗黙のうちに共有されたい状態については、一般的に Fiber storage を考慮する必要があります。
 
   * Fiber::Scheduler
-    * Introduce `Fiber::Scheduler#io_select` for non-blocking IO.select.  [[Feature #19060]]
+    * 新規メソッド
+      * ノンブロッキングな IO.select のために Fiber::Scheduler#io_select が導入されました。 [[feature:19060]]
 
   * IO
-    * Introduce IO#timeout= and IO#timeout which can cause IO::TimeoutError to be raised if a blocking operation exceeds the specified timeout. [[Feature #18630]]
+    * 新規メソッド
+      * ブロッキング処理で指定された timeout を超えた場合、IO::TimeoutError を発生させることができる IO#timeout= と IO#timeout が導入されました。 [[feature:18630]]
 
-#@samplecode
+#@samplecode IO#timeout=
 STDIN.timeout = 1
 STDIN.read # => Blocking operation timed out! (IO::TimeoutError)
 #@end
 
-    * Introduce `IO.new(..., path:)` and promote `File#path` to `IO#path`. [[Feature #19036]]
+    * 変更されたメソッド
+      * IO.new(..., path:) を導入し、 File#path が IO#path に昇格されました。 [[feature:19036]]
 
   * Class
-    * Class#attached_object, which returns the object for which the receiver is the singleton class. Raises TypeError if the receiver is not a singleton class. [[Feature #12084]]
+    * 新規メソッド
+      * Class#attached_object はレシーバが特異クラスであるオブジェクトを返します。レシーバが特異クラスでない場合は TypeError を発生させます。 [[feature:12084]]
 
-#@samplecode
+#@samplecode Class#attached_object
 class Foo; end
 
 Foo.singleton_class.attached_object        #=> Foo
@@ -127,9 +133,10 @@ nil.singleton_class.attached_object        #=> TypeError: `NilClass' is not a si
 #@end
 
   * Data
-    * New core class to represent simple immutable value object. The class is similar to Struct and partially shares an implementation, but has more lean and strict API. [[Feature #16122]]
+    * 新規クラス
+      * 単純かつ不変な値オブジェクトを表現するための新たなコアクラス Data が追加されました。 Data は Struct によく似ており、部分的に実装を共有しています。しかし、より限定的かつ少ないAPIとなっています。 [feature:16122]
 
-#@samplecode
+#@samplecode Data
 Measure = Data.define(:amount, :unit)
 distance = Measure.new(100, 'km')            #=> #<data Measure amount=100, unit="km">
 weight = Measure.new(amount: 50, unit: 'kg') #=> #<data Measure amount=50, unit="kg">
@@ -139,65 +146,74 @@ weight.amount = 40                           #=> NoMethodError: undefined method
 #@end
 
   * Encoding
-    * Encoding#replicate has been deprecated and will be removed in 3.3. [[Feature #18949]]
-    * The dummy `Encoding::UTF_16` and `Encoding::UTF_32` encodings no longer try to dynamically guess the endian based on a byte order mark. Use `Encoding::UTF_16BE`/`UTF_16LE` and `Encoding::UTF_32BE`/`UTF_32LE` instead.  This change speeds up getting the encoding of a String. [[Feature #18949]]
-    * Limit maximum encoding set size by 256. If exceeding maximum size, `EncodingError` will be raised. [[Feature #18949]]
+    * 変更されたメソッド
+      * Encoding#replicate は非推奨になり、Ruby 3.3で削除される予定です。 [[feature:18949]]
+      * ダミーエンコーディングの Encoding::UTF_16 と Encoding::UTF_32 は、BOM(byte order mark)に基づいてエンディアンを動的に推測しなくなりました。代わりに Encoding::UTF_16BE/UTF_16LE と Encoding::UTF_32BE/UTF_32LE を使用してください。この変更により、 String のエンコーディングの取得が高速化されます。 [[feature:18949]]
+      * Encodingテーブルの最大サイズが256に制限されました。最大サイズを超える場合は EncodingError が発生します。 [[feature:18949]]
 
   * Enumerator
-    * Enumerator.product has been added.  Enumerator::Product is the implementation. [[Feature #18685]]
+    * 新規メソッド
+      * Enumerator.product が追加されました。 Enumerator::Product が実装です。 [[feature:18685]]
 
   * Exception
-    * Exception#detailed_message has been added. The default error printer calls this method on the Exception object instead of #message. [[Feature #18564]]
+    * 新規メソッド
+      * Exception#detailed_message が追加されました。デフォルトのエラープリンタは、#messageの代わりにExceptionオブジェクトに対してこのメソッドを呼び出します。 [[feature:18564]]
 
   * Hash
-    * Hash#shift now always returns nil if the hash is empty, instead of returning the default value or calling the default proc. [[Bug #16908]]
+    * 変更されたメソッド
+      * Hash#shift はハッシュが空の時には、デフォルト値やデフォルトのprocを呼ぶ代わりに常にnilを返します。 [[bug:16908]]
 
   * Integer
-    * Integer#ceildiv has been added. [[Feature #18809]]
+    * 新規メソッド
+      * Integer#ceildiv が追加されました。 [[feature:18809]]
 
   * Kernel
-    * Kernel#binding raises RuntimeError if called from a non-Ruby frame (such as a method defined in C). [[Bug #18487]]
+    * 変更されたメソッド
+      * Kernel#bindingは、Ruby以外のフレーム（Cで定義されたメソッドなど）から呼び出されるとRuntimeErrorを発生するようになりました。 [[bug:18487]]
 
   * MatchData
-    * MatchData#byteoffset has been added. [[Feature #13110]]
-    * MatchData#deconstruct has been added. [[Feature #18821]]
-    * MatchData#deconstruct_keys has been added. [[Feature #18821]]
+    * 新規メソッド
+      * MatchData#byteoffset が追加されました。 [[feature:13110]]
+      * MatchData#deconstruct が追加されました。 [[feature:18821]]
+      * MatchData#deconstruct_keys が追加されました。 [[feature:18821]]
 
   * Module
-    * Module.used_refinements has been added. [[Feature #14332]]
-    * Module#refinements has been added. [[Feature #12737]]
-    * Module#const_added has been added. [[Feature #17881]]
-    * Module#undefined_instance_methods has been added. [[Feature #12655]]
+    * 新規メソッド
+      * Module.used_refinements が追加されました。 [[feature:14332]]
+      * Module#refinements が追加されました。 [[feature:12737]]
+      * Module#const_added が追加されました。 [[feature:17881]]
+      * Module#undefined_instance_methods が追加されました。 [[feature:12655]]
 
   * Proc
-    * Proc#dup returns an instance of subclass. [[Bug #17545]]
-    * Proc#parameters now accepts lambda keyword. [[Feature #15357]]
+    * 変更されたメソッド
+      * Proc#dup がサブクラスのインスタンスを返すようになりました。 [[bug:17545]]
+      * Proc#parameters が lambda キーワードを受け取ることができるようになりました。 [[feature:15357]]
 
   * Process
-    * Added `RLIMIT_NPTS` constant to FreeBSD platform
+    * 新規定数
+      * FreeBSD プラットフォームに RLIMIT_NPTS 定数が追加されました。
 
   * Regexp
-    * The cache-based optimization is introduced. Many (but not all) Regexp matching is now in linear time, which will prevent regular expression denial of service (ReDoS) vulnerability. [[Feature #19104]]
-    * Regexp.linear_time? is introduced. [[Feature #19194]]
-    * Regexp.new now supports passing the regexp flags not only as an Integer, but also as a String.  Unknown flags raise ArgumentError. Otherwise, anything other than `true`, `false`, `nil` or Integer will be warned. [[Feature #18788]]
-    * Regexp.timeout= has been added. Also, Regexp.new new supports timeout keyword. See [[Feature #17837]]
+    * キャッシュベースの最適化が導入されました。Regexpマッチングの多く（全てではない）が線形時間になり、正規表現サービス拒否（ReDoS）脆弱性を防ぐことができるようになりました。 [[feature:19104]]
+    * 新規メソッド
+      * Regexp.linear_time? が導入されました。 [[feature:19194]]
+      * Regexp.timeout= が追加されました。他にも Regexp.new に time キーワード引数が新しくサポートされました。 [[feature:17837]]
+    * 変更されたメソッド
+      * Regexp.newでは、正規表現フラグを整数値だけでなく、文字列として渡すことができるようになりました。 未知のフラグは ArgumentError を発生させます。それ以外の場合、true, false, nil, Integer 以外のものは警告されます。 [[feature:18788]]
 
   * Refinement
-    * Refinement#refined_class has been added. [[Feature #12737]]
+    * 新規メソッド
+      * Refinement#refined_class が追加されました。 [[feature:12737]]
 
   * RubyVM::AbstractSyntaxTree
-    * Add `error_tolerant` option for `parse`, `parse_file` and `of`. [[Feature #19013]]
+    * 変更されたメソッド
+      * parse, parse_file, of へ error_tolerant オプションが追加されました。 [[feature:19013]]
+        * 1. SyntaxError が発生しなくなります。
+        * 2. 文法上正しくない入力に対しても抽象構文木を返します。
+        * 3. 入力を最後まで読んだときに end が不足していた場合、 end を補って構文解析を行います。
+        * 4. インデントをもとに end をキーワードとして扱います。
 
-//emlist{
-With this option
-
-  1. SyntaxError is suppressed
-  2. AST is returned for invalid input
-  3. `end` is complemented when a parser reaches to the end of input but `end` is insufficient
-  4. `end` is treated as keyword based on indent
-//}
-
-#@samplecode
+#@samplecode RubyVM::AbstractSyntaxTree.parse
 # Without error_tolerant option
 root = RubyVM::AbstractSyntaxTree.parse(<<~RUBY)
 def m
@@ -231,130 +247,145 @@ p root.children[-1].children[-1].children[-1].children[-2..-1]
 # => [#<RubyVM::AbstractSyntaxTree::Node:CLASS@2:2-4:5>, #<RubyVM::AbstractSyntaxTree::Node:DEFN@6:2-7:5>]
 #@end
 
-    * Add `keep_tokens` option for `parse`, `parse_file` and `of`. Add `#tokens` and `#all_tokens` for RubyVM::AbstractSyntaxTree::Node [[Feature #19070]]
+    * 変更されたメソッド
+      * parse, parse_file, of へ keep_tokensオプションが追加されました。 RubyVM::AbstractSyntaxTree::Node に #tokens と #all_tokens が追加されました。 [[feature:19070]]
 
-#@samplecode
+#@samplecode RubyVM::AbstractSyntaxTree.parse
 root = RubyVM::AbstractSyntaxTree.parse("x = 1 + 2", keep_tokens: true)
 root.tokens # => [[0, :tIDENTIFIER, "x", [1, 0, 1, 1]], [1, :tSP, " ", [1, 1, 1, 2]], ...]
 root.tokens.map{_1[2]}.join # => "x = 1 + 2"
 #@end
 
   * Set
-    * Set is now available as a built-in class without the need for `require "set"`. [[Feature #16989]]
-      * It is currently autoloaded via the Set constant or a call to Enumerable#to_set.
+    * 変更されたメソッド
+      * Set は require "set" を実行しなくても使用できる組み込みのクラスとなりました。 [[feature:16989]]
+        * この機能は Set を参照した時、または Enumerable#to_set を呼んだ時に有効となります。
 
   * String
-    * String#byteindex and String#byterindex have been added. [[Feature #13110]]
-    * Update Unicode to Version 15.0.0 and Emoji Version 15.0. [[Feature #18639]]
-      * (also applies to Regexp)
-    * String#bytesplice has been added.  [[Feature #18598]]
-    * String#dedup has been added as an alias to String#-@.  [[Feature #18595]]
+    * 新規メソッド
+      * String#byteindex と String#byterindex が追加されました。 [[feature:13110]]
+      * String#bytesplice が追加されました。 [[feature:18598]]
+      * String#dedup の別名として String#-@ が追加されました。 [[feature:18595]]
+    * 変更されたメソッド
+      * Unicodeと絵文字のバージョンが15.0.0に更新されました。 [[feature:18639]]
+        * (この変更は正規表現にも反映されます)
 
   * Struct
-    * A Struct class can also be initialized with keyword arguments without `keyword_init: true` on Struct.new [[Feature #16806]]
+    * 変更されたメソッド
+      * Structクラスは Struct.new の実行時に keyword_init: true をつけなくてもキーワード引数によって初期化できるようになりました。 [[feature:16806]]
 
-#@samplecode
+#@samplecode Struct.new
 Post = Struct.new(:id, :name)
 Post.new(1, "hello") #=> #<struct Post id=1, name="hello">
-# From Ruby 3.2, the following code also works without keyword_init: true.
+# Ruby 3.2から以下のコードも keyword_init :true をつけなくても動作する
 Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
 #@end
 
   * Thread
-    * Thread.each_caller_location is added. [[Feature #16663]]
+    * 新規メソッド
+      * Thread.each_caller_location が追加されました。 [[feature:16663]]
 
   * Thread::Queue
-    * Thread::Queue#pop(timeout: sec) is added. [[Feature #18774]]
+    * 新規メソッド
+      * Thread::Queue#pop(timeout: sec) が追加されました。 [[feature:18774]]
 
   * Thread::SizedQueue
-    * Thread::SizedQueue#pop(timeout: sec) is added. [[Feature #18774]]
-    * Thread::SizedQueue#push(timeout: sec) is added. [[Feature #18944]]
+    * 新規メソッド
+      * Thread::SizedQueue#pop(timeout: sec) が追加されました。 [[feature:18774]]
+      * Thread::SizedQueue#push(timeout: sec) が追加されました。 [[feature:18944]]
 
   * Time
-    * Time#deconstruct_keys is added, allowing to use Time instances in pattern-matching expressions [[Feature #19071]]
-    * Time.new now can parse a string like generated by Time#inspect and return a Time instance based on the given argument. [[Feature #18033]]
+    * 新規メソッド
+      * Time#deconstruct_keys が追加され、Timeインスタンスでパターンマッチが使用できるようになりました。 [[feature:19071]]
+    * 変更されたメソッド
+      * Time.newは、Time#inspectが生成するような文字列を解析し、与えられた引数に基づいたTimeインスタンスを返すことができるようになりました。 [[feature:18033]]
 
   * SyntaxError
-    * SyntaxError#path has been added.  [[Feature #19138]]
+    * 新規メソッド
+      * SyntaxError#path が追加されました。 [[feature:19138]]
 
   * TracePoint
-    * TracePoint#binding now returns `nil` for `c_call`/`c_return` TracePoints. [[Bug #18487]]
-    * TracePoint#enable `target_thread` keyword argument now defaults to the current thread if a block is given and `target` and `target_line` keyword arguments are not passed. [[Bug #16889]]
+    * 変更されたメソッド
+      * TracePoint#binding が c_call/c_return の TracePoints に対して nil を返すようになりました。 [[bug:18487]]
+      * TracePoint#enable の target_thread キーワード引数で、ブロックが与えられ、 target と target_line キーワード引数が渡されない場合、現在のスレッドをデフォルトとするようになりました。 [[bug:16889]]
 
   * UnboundMethod
-    * `UnboundMethod#==` returns `true` if the actual method is same. For example, `String.instance_method(:object_id) == Array.instance_method(:object_id)` returns `true`. [[Feature #18798]]
-    * `UnboundMethod#inspect` does not show the receiver of `instance_method`. For example `String.instance_method(:object_id).inspect` returns `"#<UnboundMethod: Kernel#object_id()>"` (was `"#<UnboundMethod: String(Kernel)#object_id()>"`).
+    * 変更されたメソッド
+      * UnboundMethod#== は、実際のメソッドが同じであれば true を返します。例えば、 String.instance_method(:object_id) == Array.instance_method(:object_id) は true を返します。 [[feature:18798]]
+      * UnboundMethod#inspect は instance_method のレシーバを表示しません。例えば、 String.instance_method(:object_id).inspect は "#<UnboundMethod： Kernel#object_id()>" (これが "#<UnboundMethod： String(Kernel)#object_id()>") でした。
 
   * GC
-    * Expose `need_major_gc` via `GC.latest_gc_info`. [GH-6791]
+    * 変更されたメソッド
+      * GC.latest_gc_info を介して need_major_gc を公開しました。 [[url:https://github.com/ruby/ruby/pull/6791]]
 
   * ObjectSpace
-    * `ObjectSpace.dump_all` dump shapes as well. [GH-6868]
+    * 変更されたメソッド
+      * ObjectSpace.dump_all は形状もダンプするようになりました。 [[url:https://github.com/ruby/ruby/pull/6868]]
 
-== Stdlib updates
+== 標準添付ライブラリの更新(機能追加とバグ修正を除く)
 
   * Bundler
-    * Bundler now uses [PubGrub] resolver instead of [Molinillo] for performance improvement.
-    * Add --ext=rust support to bundle gem for creating simple gems with Rust extensions. [[GH-rubygems-6149]]
-    * Make cloning git repos faster [[GH-rubygems-4475]]
+    * Bundler は性能改善のために利用する依存解決ライブラリを Molinillo([[url:https://github.com/CocoaPods/Molinillo]]) から PubGrub([[url:https://github.com/jhawthorn/pub_grub]]) に変更しました。
+    * gem を Rust で書くための雛形作成コマンドとして bundle gem --ext=rust をサポートしました。 [[url:https://github.com/rubygems/rubygems/pull/6149]]
+    * git clone をより速く実行できるように改善しました。 [[url:https://github.com/rubygems/rubygems/pull/4475]]
 
   * RubyGems
-    * Add mswin support for cargo builder. [[GH-rubygems-6167]]
+    * cargo builder を mswin 環境でサポートしました。 [[url:https://github.com/rubygems/rubygems/pull/6167]]
 
   * CGI
-    * `CGI.escapeURIComponent` and `CGI.unescapeURIComponent` are added. [[Feature #18822]]
+    * CGI.escapeURIComponent と CGI.unescapeURIComponent が追加されました。 [[feature:18822]]
 
   * Coverage
-    * `Coverage.setup` now accepts `eval: true`. By this, `eval` and related methods are able to generate code coverage. [[Feature #19008]]
-    * `Coverage.supported?(mode)` enables detection of what coverage modes are supported. [[Feature #19026]]
+    * Coverage.setup が eval: true を受け付けるようになりました。これにより、evalと関連するメソッドでコードカバレッジを生成することができるようになりました。 [[feature:19008]]
+    * Coverage.supported?(mode) は、どのようなカバレッジモードがサポートされているかを検出することができます。 [[feature:19026]]
 
   * Date
-    * Added `Date#deconstruct_keys` and `DateTime#deconstruct_keys` same as [[Feature #19071]]
+    * Date#deconstruct_keys と DateTime#deconstruct_keys が追加されました。 [[feature:19071]]
 
   * ERB
-    * `ERB::Util.html_escape` is made faster than `CGI.escapeHTML`.
-      * It no longer allocates a String object when no character needs to be escaped.
-      * It skips calling `#to_s` method when an argument is already a String.
-      * `ERB::Escape.html_escape` is added as an alias to `ERB::Util.html_escape`, which has not been monkey-patched by Rails.
-    * `ERB::Util.url_encode` is made faster using `CGI.escapeURIComponent`.
-    * `-S` option is removed from `erb` command.
+    * ERB::Util.html_escape が CGI.escapeHTML よりも高速化されました。
+      * エスケープが必要な文字列がない場合、String オブジェクトを確保しません。
+      * 引数が String の場合、#to_s を呼ばずにスキップします。
+      * ERB::Escape.html_escape が ERB::Util.html_escape のエイリアスになりました。そのため、 Rails にモンキーパッチする必要がなくなります。
+    * ERB::Util.url_encode が CGI.escapeURIComponent よりも高速化されました。
+    * erbコマンドから -S オプションが削除されました。
 
   * FileUtils
-    * Add FileUtils.ln_sr method and `relative:` option to FileUtils.ln_s. [[Feature #18925]]
+    * FileUtils.ln_sr メソッドが追加され、 FileUtils.ln_s に relative: オプションが追加されました。 [[feature:18925]]
 
   * IRB
-    * debug.gem integration commands have been added: `debug`, `break`, `catch`, `next`, `delete`, `step`, `continue`, `finish`, `backtrace`, `info`
-      * They work even if you don't have `gem "debug"` in your Gemfile.
-      * See also: [What's new in Ruby 3.2's IRB?](https://st0012.dev/whats-new-in-ruby-3-2-irb)
-    * More Pry-like commands and features have been added.
-      * `edit` and `show_cmds` (like Pry's `help`) are added.
-      * `ls` takes `-g` or `-G` option to filter out outputs.
-      * `show_source` is aliased from `$` and accepts unquoted inputs.
-      * `whereami` is aliased from `@`.
+    * debug.gem と統合したコマンドが複数追加されました: debug, break, catch, next, delete, step, continue, finish, backtrace, info
+      * これらは Gemfile に gem "debug" と記述しなくても動かすことができます。
+      * 詳細は What's new in Ruby 3.2's IRB?([[url:https://st0012.dev/whats-new-in-ruby-3-2-irb]]) を参照してください。
+    * Pry のようなコマンドや機能が複数追加されました。
+      * edit と show_cmds (Pry の help コマンド相当) が追加されました。
+      * ls コマンドに出力をフィルタするための -g または -G オプションが追加されました。
+      * show_source のエイリアスとして $ が追加されました、また引数をクオートする必要がなくなりました。
+      * whereami のエイリアスとして @ が追加されました。
 
   * Net::Protocol
-    * Improve `Net::BufferedIO` performance. [[GH-net-protocol-14]]
+    * Net::BufferedIO が性能改善されました。 [[url:https://github.com/ruby/net-protocol/pull/14]]
 
   * Pathname
-    * Added `Pathname#lutime`. [[GH-pathname-20]]
+    * Pathname#lutime が追加されました。 [[url:https://github.com/ruby/pathname/pull/20]]
 
   * Socket
-    * Added the following constants for supported platforms.
-      * `SO_INCOMING_CPU`
-      * `SO_INCOMING_NAPI_ID`
-      * `SO_RTABLE`
-      * `SO_SETFIB`
-      * `SO_USER_COOKIE`
-      * `TCP_KEEPALIVE`
-      * `TCP_CONNECTION_INFO`
+    * サポートされたプラットフォームに以下の定数が追加されました。
+      * SO_INCOMING_CPU
+      * SO_INCOMING_NAPI_ID
+      * SO_RTABLE
+      * SO_SETFIB
+      * SO_USER_COOKIE
+      * TCP_KEEPALIVE
+      * TCP_CONNECTION_INFO
 
   * SyntaxSuggest
-    * The feature of `syntax_suggest` formerly `dead_end` is integrated in Ruby. [[Feature #18159]]
+    * syntax_suggest の機能であった dead_end がRubyに統合されました。 [[feature:18159]]
 
   * UNIXSocket
-    * Add support for UNIXSocket on Windows. Emulate anonymous sockets. Add support for File.socket? and File::Stat#socket? where possible. [[Feature #19135]]
+    * Windows の UNIXSocket のサポートが追加されました。匿名ソケットをエミュレートします。 File.socket? と File::Stat#socket? のサポートを可能な限り追加されました。 [[feature:19135]]
 
-* The following default gems are updated.
+* 以下の default gems のバージョンがアップデートされました。
   * RubyGems 3.4.1
   * abbrev 0.1.1
   * benchmark 0.2.1
@@ -420,7 +451,7 @@ Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
   * yaml 0.2.1
   * zlib 3.0.0
 
-*   The following bundled gems are updated.
+* 以下の bundled gems のバージョンがアップデートされました。
   * minitest 5.16.3
   * power_assert 2.0.3
   * test-unit 3.5.7
@@ -432,141 +463,136 @@ Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
   * typeprof 0.21.3
   * debug 1.7.1
 
-See GitHub releases like [GitHub Releases of Logger](https://github.com/ruby/logger/releases) or changelog for details of the default gems or bundled gems.
+default gems と bundled gems の詳細については GitHub Releases of Logger([[url:https://github.com/ruby/logger/releases]]) または changelog ファイルを参照してください。
 
-== Supported platforms
+== サポートプラットフォームの追加
 
-* WebAssembly/WASI is added. See [wasm/README.md] and [ruby.wasm] for more details. [[Feature #18462]]
+  * WebAssembly/WASI が追加されました。 詳細は wasm/README.md([[url:https://github.com/ruby/ruby/blob/master/wasm/README.md]]) と ruby.wasm([[url:https://github.com/ruby/ruby.wasm]]) を参照してください。 [[feature:18462]]
 
-== Compatibility issues
+== 互換性に関する変更
 
-* `String#to_c` currently treat a sequence of underscores as an end of Complex string. [[Bug #19087]]
+  * 現在、 [[m:String#to_c]] では、アンダースコアの連続をComplex文字列の末尾として扱っていました。 [[bug:19087]]
+  * [[m:ENV.dup]] と同様に [[m:ENV.clone]] も TypeError を発生するようになりました。 [[bug:17767]]
 
-* Now `ENV.clone` raises `TypeError` as well as `ENV.dup` [[Bug #17767]]
+=== 定数の削除
 
-=== Removed constants
+以下の非推奨の定数は削除されました。
 
-The following deprecated constants are removed.
+  * Fixnum と Bignum [[feature:12005]]
+  * Random::DEFAULT [[feature:17351]]
+  * Struct::Group
+  * Struct::Passwd
 
-* `Fixnum` and `Bignum` [[Feature #12005]]
-* `Random::DEFAULT` [[Feature #17351]]
-* `Struct::Group`
-* `Struct::Passwd`
+=== メソッドの削除
 
-=== Removed methods
+以下の非推奨のメソッドは削除されました。
 
-The following deprecated methods are removed.
+  * Dir.exists? [[feature:17391]]
+  * File.exists? [[feature:17391]]
+  * Kernel#=~ [[feature:15231]]
+  * Kernel#taint, Kernel#untaint, Kernel#tainted? [[feature:16131]]
+  * Kernel#trust, Kernel#untrust, Kernel#untrusted? [[feature:16131]]
+  * Method#public?, Method#private?, Method#protected?, UnboundMethod#public?, UnboundMethod#private?, UnboundMethod#protected? [[bug:18729]] [[bug:18751]] [[bug:18435]]
 
-* `Dir.exists?` [[Feature #17391]]
-* `File.exists?` [[Feature #17391]]
-* `Kernel#=~` [[Feature #15231]]
-* `Kernel#taint`, `Kernel#untaint`, `Kernel#tainted?` [[Feature #16131]]
-* `Kernel#trust`, `Kernel#untrust`, `Kernel#untrusted?` [[Feature #16131]]
-* `Method#public?`, `Method#private?`, `Method#protected?`, `UnboundMethod#public?`, `UnboundMethod#private?`, `UnboundMethod#protected?` [[Bug #18729]] [[Bug #18751]] [[Bug #18435]]
+=== 拡張ライブラリのソースコードの非互換
 
-=== Source code incompatibility of extension libraries
+  * RandomのサブクラスであるPRNGを提供する拡張ライブラリは、更新が必要です。詳細は PRNG update([[url:]]) を参照してください。 [[bug:19100]]
 
-* Extension libraries provide PRNG, subclasses of Random, need updates. See [PRNG update] below for more information. [[Bug #19100]]
+=== エラー表示
 
-=== Error printer
+  * Rubyはエラーメッセージ中の制御文字やバックスラッシュをエスケープしなくなりました。 [[feature:18367]]
 
-* Ruby no longer escapes control characters and backslashes in an error message. [[Feature #18367]]
+=== クラス/モジュールの定義時の定数探索
 
-=== Constant lookup when defining a class/module
+  * オブジェクトクラスの直下にclass/module文でクラス/モジュールを定義する際、 [[m:Module#include]] で定義された同名のクラス/モジュールが既にある場合、Ruby 3.1以前ではオープンクラスとして処理されていました。Ruby 3.2以降では、代わりに新しいクラスが定義されます。 [[feature:18832]]
 
-* When defining a class/module directly under the Object class by class/module statement, if there is already a class/module defined by `Module#include` with the same name, the statement was handled as "open class" in Ruby 3.1 or before. Since Ruby 3.2, a new class is defined instead. [[Feature #18832]]
+== 標準添付ライブラリの互換性
 
-== Stdlib compatibility issues
+  * [[c:Psych]] に同梱していた libyaml のソースコードは削除されました。また、Fiddleもlibffiのソースをバンドルしなくなりました。ユーザーは、apt、yum、brew などのパッケージマネージャを使って、自分で libyaml/libffi ライブラリをインストールする必要があります。
 
-  * Psych no longer bundles libyaml sources. And also Fiddle no longer bundles libffi sources. Users need to install the libyaml/libffi library themselves via the package manager like apt, yum, brew, etc.
-
-  * Psych and fiddle supported the static build with specific version of libyaml and libffi sources. You can build psych with libyaml-0.2.5 like this.
+  * [[c:Psych]] と fiddle には特定バージョンの libyaml や libffi のソースコードを静的リンクするための機能が追加されました。libyaml-0.2.5 をリンクしてビルドする場合は以下のように実行します。
 
 //emlist{
 $ ./configure --with-libyaml-source-dir=/path/to/libyaml-0.2.5
 //}
 
-  * And you can build fiddle with libffi-3.4.4 like this.
+  * 同様に、libffi-3.4.4 を fiddle にリンクする場合は以下のように実行します。
 
 //emlist{
 $ ./configure --with-libffi-source-dir=/path/to/libffi-3.4.4
 //}
 
-  * [[Feature #18571]]
+  * [[feature:18571]]
 
-  * Check cookie name/path/domain characters in `CGI::Cookie`. [[CVE-2021-33621]]
+  * CGI::Cookie の Cookie name/path/domain 文字をチェックします。 [[CVE-2021-33621]]
 
-  * `URI.parse` return empty string in host instead of nil. [[sec-156615]]
+  * URI.parse が host に nil の代わりに空の文字列を返します。 [[sec-156615]]
 
-== C API updates
+== C API の変更
 
-=== Updated C APIs
+=== C API の更新
 
-The following APIs are updated.
+以下の API が更新されました。
 
-  * PRNG update
-    * `rb_random_interface_t` in ruby/random.h updated and versioned. Extension libraries which use this interface and built for older versions need to rebuild with adding `init_int32` function.
+  * PRNG の更新
+    * rb_random_interface_t が更新され、新しいバージョンとなりました。 古いバージョンを用いている拡張ライブラリは新しいインターフェイスを使う必要があります。また init_int32 関数を定義する必要があります。
 
-=== Added C APIs
+=== C API の追加
 
-  * `VALUE rb_hash_new_capa(long capa)` was added to created hashes with the desired capacity.
-  * `rb_internal_thread_add_event_hook` and `rb_internal_thread_add_event_hook` were added to instrument threads scheduling.
+  * VALUE rb_hash_new_capa(long capa) が追加され、希望の容量を持つハッシュが作成されました。
+  * スレッドのスケジューリングに rb_internal_thread_add_event_hook と rb_internal_thread_add_event_hook が追加されました。
+  * 以下のイベントが追加されました。
+    * RUBY_INTERNAL_THREAD_EVENT_STARTED
+    * RUBY_INTERNAL_THREAD_EVENT_READY
+    * RUBY_INTERNAL_THREAD_EVENT_RESUMED
+    * RUBY_INTERNAL_THREAD_EVENT_SUSPENDED
+    * RUBY_INTERNAL_THREAD_EVENT_EXITED
+  * デバッガ用に rb_debug_inspector_current_depth と rb_debug_inspector_frame_depth が追加されました。
 
-//emlist{
-The following events are available:
-  * `RUBY_INTERNAL_THREAD_EVENT_STARTED`
-  * `RUBY_INTERNAL_THREAD_EVENT_READY`
-  * `RUBY_INTERNAL_THREAD_EVENT_RESUMED`
-  * `RUBY_INTERNAL_THREAD_EVENT_SUSPENDED`
-  * `RUBY_INTERNAL_THREAD_EVENT_EXITED`
-//}
+=== C API の削除
 
-  * `rb_debug_inspector_current_depth` and `rb_debug_inspector_frame_depth` are added for debuggers.
+以下の非推奨の API は削除されました。
 
-=== Removed C APIs
+  * rb_cData変数
+  * "taintedness" と "trustedness" 関数 [[feature:16131]]
 
-The following deprecated APIs are removed.
+== 実装の改善
 
-  * `rb_cData` variable.
-  * "taintedness" and "trustedness" functions. [[Feature #16131]]
-
-== Implementation improvements
-
-  * Fixed several race conditions in Kernel#autoload. [[Bug #18782]]
-  * Cache invalidation for expressions referencing constants is now more fine-grained. `RubyVM.stat(:global_constant_state)` was removed because it was closely tied to the previous caching scheme where setting any constant invalidates all caches in the system. New keys, `:constant_cache_invalidations` and `:constant_cache_misses`, were introduced to help with use cases for `:global_constant_state`. [[Feature #18589]]
-  * The cache-based optimization for Regexp matching is introduced. [[Feature #19104]]
-  * [Variable Width Allocation](https://shopify.engineering/ruby-variable-width-allocation) is now enabled by default. [[Feature #18239]]
-  * Added a new instance variable caching mechanism, called object shapes, which improves inline cache hits for most objects and allows us to generate very efficient JIT code. Objects whose instance variables are defined in a consistent order will see the most performance benefits. [[Feature #18776]]
-  * Speed up marking instruction sequences by using a bitmap to find "markable" objects. This change results in faster major collections.  [[Feature #18875]]
+  * Kernel#autoload のいくつかのレースコンディションを修正しました。 [[bug:18782]]
+  * 定数を参照する式に対するキャッシュの無効化がより細かくなりました。 RubyVM.stat(:global_constant_state) は、定数を設定するとシステム内のすべてのキャッシュが無効になるという、以前のキャッシュ方式と密接に結びついていたため削除されました。新しいキーである :constant_cache_invalidations と :constant_cache_misses は、 :global_constant_state の使用例を支援するために導入されました。 [[feature:18589]]
+  * Regexpマッチングにおけるキャッシュベースの最適化について導入されました。 [[feature:19104]]
+  * Variable Width Allocation([[url:https://shopify.engineering/ruby-variable-width-allocation]]) がデフォルトで有効になりました。 [[feature:18239]]
+  * オブジェクトシェイプと呼ばれる新しいインスタンス変数のキャッシュ機構が追加され、ほとんどのオブジェクトのインラインキャッシュヒットが改善され、非常に効率的なJITコードを生成することができるようになりました。インスタンス変数が一貫した順序で定義されているオブジェクトは、最もパフォーマンスの恩恵を受けることができます。 [[feature:18776]]
+  * "markable" なオブジェクトを見つけるためにビットマップを使用することで、マーク命令シーケンスを高速化します。この変更により、メジャーコレクションが高速化されます。 [[feature:18875]]
 
 == JIT
 
 === YJIT
 
-  * YJIT is no longer experimental
-    * Has been tested on production workloads for over a year and proven to be quite stable.
-  * YJIT now supports both x86-64 and arm64/aarch64 CPUs on Linux, MacOS, BSD and other UNIX platforms.
-    * This release brings support for Mac M1/M2, AWS Graviton and Raspberry Pi 4.
-  * Building YJIT now requires Rust 1.58.0+. [[Feature #18481]]
-    * In order to ensure that CRuby is built with YJIT, please install `rustc` >= 1.58.0 before running `./configure`
-    * Please reach out to the YJIT team should you run into any issues.
-  * Physical memory for JIT code is lazily allocated. Unlike Ruby 3.1, the RSS of a Ruby process is minimized because virtual memory pages allocated by `--yjit-exec-mem-size` will not be mapped to physical memory pages until actually utilized by JIT code.
-  * Introduce Code GC that frees all code pages when the memory consumption by JIT code reaches `--yjit-exec-mem-size`.
-    * `RubyVM::YJIT.runtime_stats` returns Code GC metrics in addition to existing `inline_code_size` and `outlined_code_size` keys: `code_gc_count`, `live_page_count`, `freed_page_count`, and `freed_code_size`.
-  * Most of the statistics produced by `RubyVM::YJIT.runtime_stats` are now available in release builds.
-    * Simply run ruby with `--yjit-stats` to compute and dump stats (incurs some run-time overhead).
-  * YJIT is now optimized to take advantage of object shapes. [[Feature #18776]]
-    * Take advantage of finer-grained constant invalidation to invalidate less code when defining new constants. [[Feature #18589]]
-  * The default `--yjit-exec-mem-size` is changed to 64 (MiB).
-  * The default `--yjit-call-threshold` is changed to 30.
+  * YJIT は実験段階ではなくなりました。
+    * 1年以上にわたって本番環境でテストされ、安定して稼働する実績があります。
+  * YJIT は x86-64 と arm64/aarch64 の CPU アーキテクチャと Linux, MacOS, BSD とその他の UNIX プラットフォームをサポートしました。
+    * このリリースでは Mac の M1/M2, AWS Graviton と Raspberry Pi 4 の ARM64 プロセッサに対応してます。
+  * YJIT をビルドするためには Rust 1.58.0 以降が必要となります。 [[feature:18481]]
+    * CRuby を YJIT を有効としてビルドするためには、rustc >= 1.58.0 をインストールした上で ./configure を実行する必要があります。
+    * もし、実行時に何かしらの問題に遭遇した場合は YJIT チームに連絡してください。
+  * JIT のための物理メモリは遅延して確保するようになりました。Ruby 3.1 と異なり --yjit-exec-mem-size に よって確保された仮想メモリのページは物理メモリのページにJITによって実際に使われるまで 割り当てられなくなったため Ruby プロセスのRSS はより小さくなりました。
+  * JIT によるメモリ消費が --yjit-exec-mem-size に達したときに、全てのコードページを解放するコードGCを導入しました。
+    * RubyVM::YJIT.runtime_stats は、既存の inline_code_size と outlined_code_size キーに加えて、 code_gc_count, live_page_count, freed_page_count と freed_code_size を コードGC のメトリクスとして表示します。
+  * リリースビルドから RubyVM::YJIT.runtime_stats によって統計の大部分を得られるようになりました。
+    * ruby コマンドに --yjit-stats を付与することで単純に表示することができます (ただしランタイムのオーバーヘッドは生じます)
+  * YJIT へ object shapes による最適化が行われました。 [[feature:18776]]
+    * 定数を無効化する粒度を細かくすることで、新しい定数を定義する際に無効化するコードの量を少なくしました。 [[feature:18589]]
+  * --yjit-exec-mem-size のデフォルト値は 64 (MiB) と変更されました。
+  * --yjit-call-threshold のデフォルト値は 30 と変更されました。
 
 === MJIT
 
-  * The MJIT compiler is re-implemented in Ruby as `ruby_vm/mjit/compiler`.
-  * MJIT compiler is executed under a forked Ruby process instead of doing it in a native thread called MJIT worker. [[Feature #18968]]
-    * As a result, Microsoft Visual Studio (MSWIN) is no longer supported.
-  * MinGW is no longer supported. [[Feature #18824]]
-  * Rename `--mjit-min-calls` to `--mjit-call-threshold`.
-  * Change default `--mjit-max-cache` back from 10000 to 100.
+  * MJIT コンパイラが ruby_vm/mjit/compiler として Ruby で再実装されました。
+  * MJIT コンパイラは MJIT ワーカーによって呼ばれた native スレッドの代わりに fork されたプロセスによって実行されるようになりました。 [[feature:18968]]
+    * そのため、Microsoft Visual Studio (MSWIN) はサポート対象外となりました。
+  * MinGW はサポート対象外となりました。[[feature:18824]]
+  * --mjit-min-calls は --mjit-call-threshold` にリネームされました。
+  * --mjit-max-cache のデフォルト値は 10000 から 100 に戻されました。
 
 #@end
