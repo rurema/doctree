@@ -21,6 +21,9 @@ parser gem ([[url:https://github.com/whitequark/parser]])や
 == Singleton Methods
 
 --- of(proc) -> RubyVM::AbstractSyntaxTree::Node
+#@since 3.2
+--- of(proc, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+#@end
 
 引数 proc に渡したProcやメソッドオブジェクトの抽象構文木を返します。
 
@@ -28,6 +31,11 @@ parser gem ([[url:https://github.com/whitequark/parser]])や
 irbのようなファイルを介さない対話的環境では動作しません。
 
 @param proc Procもしくはメソッドオブジェクトを指定します。
+#@since 3.2
+@param keep_script_lines true を指定すると、 Node#script_lines でノードと関連づけられたソースコードのテキストを取得できます。
+@param keep_tokens true を指定すると、 Node#token が利用できます。
+@param error_tolerant true を指定すると、構文エラーが発生した際にエラー箇所を type が :ERROR であるようなノードに置き換えてツリーを生成します。
+#@end
 
 #@samplecode
 pp RubyVM::AbstractSyntaxTree.of(proc {1 + 2})
@@ -61,12 +69,19 @@ pp RubyVM::AbstractSyntaxTree.of(method(:hello))
 #       (FCALL@6:2-6:21 :puts (LIST@6:7-6:21 (STR@6:7-6:21 "hello, world") nil)))
 #@end
 
-
 --- parse(string) -> RubyVM::AbstractSyntaxTree::Node
+#@since 3.2
+--- parse(string, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+#@end
 
 文字列を抽象構文木にパースし、その木の根ノードを返します。
 
 @param string パースする対象の Ruby のコードを文字列で指定します。
+#@since 3.2
+@param keep_script_lines true を指定すると、 Node#script_lines でノードと関連づけられたソースコードのテキストを取得できます。
+@param keep_tokens true を指定すると、 Node#token が利用できます。
+@param error_tolerant true を指定すると、構文エラーが発生した際にエラー箇所を type が :ERROR であるようなノードに置き換えてツリーを生成します。
+#@end
 @raise SyntaxError string が Ruby のコードとして正しくない場合に発生します。
 
 #@samplecode
@@ -77,14 +92,29 @@ pp RubyVM::AbstractSyntaxTree.parse("x = 1 + 2")
 #     body:
 #       (LASGN@1:0-1:9 :x
 #          (OPCALL@1:4-1:9 (LIT@1:4-1:5 1) :+ (LIST@1:8-1:9 (LIT@1:8-1:9 2) nil))))
+#@since 3.2
+pp RubyVM::AbstractSyntaxTree.parse("x = 1; p(x; y=2", error_tolerant: true)
+# =>  (SCOPE@1:0-1:15
+#      tbl: [:x, :y]
+#      args: nil
+#      body: (BLOCK@1:0-1:15 (LASGN@1:0-1:5 :x (LIT@1:4-1:5 1)) (ERROR@1:7-1:11) (LASGN@1:12-1:15 :y (LIT@1:14-1:15 2))))
+#@end
 #@end
 
 --- parse_file(pathname) -> RubyVM::AbstractSyntaxTree::Node
+#@since 3.2
+--- parse_file(pathname, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+#@end
 
 pathname のファイルを読み込み、その内容を抽象構文木にパースし、その木の根ノードを返します。
 
 @param pathname パースする対象のファイルパスを指定します
-@raise SyntaxError string が Ruby のコードとして正しくない場合に発生します。
+#@since 3.2
+@param keep_script_lines true を指定すると、 Node#script_lines でノードと関連づけられたソースコードのテキストを取得できます。
+@param keep_tokens true を指定すると、 Node#token が利用できます。
+@param error_tolerant true を指定すると、構文エラーが発生した際にエラー箇所を type が :ERROR であるようなノードに置き換えてツリーを生成します。
+#@end
+@raise SyntaxError pathname から取得された文字列が Ruby のコードとして正しくない場合に発生します。
 
 #@samplecode
 pp RubyVM::AbstractSyntaxTree.parse_file(__FILE__)
