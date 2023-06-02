@@ -732,12 +732,14 @@ limit を指定して、limit 秒過ぎても自身が終了しない場合、ni
 
 以下は、生成したすべてのスレッドの終了を待つ例です。
 
-   threads = []
-   threads.push(Thread.new { n = rand(5); sleep n; n })
-   threads.push(Thread.new { n = rand(5); sleep n; n })
-   threads.push(Thread.new { n = rand(5); sleep n; n })
+#@samplecode
+threads = []
+threads.push(Thread.new { n = rand(5); sleep n; n })
+threads.push(Thread.new { n = rand(5); sleep n; n })
+threads.push(Thread.new { n = rand(5); sleep n; n })
 
-   threads.each {|t| t.join}
+threads.each {|t| t.join}
+#@end
 
 --- key?(name)     -> bool
 
