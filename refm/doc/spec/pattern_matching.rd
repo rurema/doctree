@@ -11,7 +11,7 @@
   * [[ref:some_undefined_behavior_examples]]
 
 #@# Pattern matching is a feature allowing deep matching of structured values: checking the structure and binding the matched parts to local variables.
-パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチを可能にする機能です。
+パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチを可能にする機能です。(『束縛』は、パターンマッチの輸入元である関数型言語の用語で、Ruby では代入と読み替えても問題ありません)
 
 #@# Pattern matching in Ruby is implemented with the +case+/+in+ expression:
 Rubyでのパターンマッチは case/in 式を用いて実装されています。
