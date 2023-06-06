@@ -106,7 +106,7 @@ Thread.new do
 end.join
 f.resume
 #=> t.rb:5:in `resume': fiber called across threads (FiberError)
-#=>    from t.rb:5:in `<main>'
+#      from t.rb:5:in `<main>'
 #@end
 
 == Class Methods
