@@ -13,22 +13,22 @@
 @raise FiberError 自身が既に終了している場合、コンテキストの切り替えが [[c:Thread]] クラスが表すスレッド間をまたがる場合、
                   [[m:Fiber#resume]] を呼んだファイバーがその親か先祖である場合に発生します。
 
-例:
+#@samplecode 例:
+require 'fiber'
 
-  require 'fiber'
-  
-  fr1 = Fiber.new do |v|
-    :fugafuga
-  end
-  
-  fr2 = Fiber.new do |v|
-    fr1.transfer
-    :fuga
-  end
-  
-  fr3 = Fiber.new do |v|
-    fr2.resume
-    :hoge
-  end
-  
-  p fr3.resume # => :fugafuga
+fr1 = Fiber.new do |v|
+:fugafuga
+end
+
+fr2 = Fiber.new do |v|
+fr1.transfer
+:fuga
+end
+
+fr3 = Fiber.new do |v|
+fr2.resume
+:hoge
+end
+
+p fr3.resume # => :fugafuga
+#@end
