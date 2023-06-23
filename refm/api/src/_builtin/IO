@@ -198,8 +198,6 @@ IO#readline                   EOFError
 IO#readlines                  []
 IO#readpartial                EOFError
 IO#sysread                    EOFError
-IO#bytes                      通常どおり
-IO#lines                      通常どおり
 //}
 
 == Class Methods
