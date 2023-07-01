@@ -857,7 +857,6 @@ p table[0]    # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" 
 --- table(path, options = Hash.new) -> CSV::Table | [Array]
 
 以下と同等のことを行うメソッドです。
-日本語の CSV ファイルを扱う場合はあまり使いません。
 
 #@samplecode
 CSV.read( path, { headers:           true,
