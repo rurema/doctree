@@ -198,8 +198,10 @@ IO#readline                   EOFError
 IO#readlines                  []
 IO#readpartial                EOFError
 IO#sysread                    EOFError
+#@until 3.0
 IO#bytes                      通常どおり
 IO#lines                      通常どおり
+#@end
 //}
 
 == Class Methods
