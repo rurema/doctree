@@ -1833,8 +1833,13 @@ end
   method C#foo was undefined
   method C#bar was undefined
 
-
+#@since 3.0
+--- module_function() -> nil
+--- module_function(name) -> String | Symbol
+--- module_function(*name) -> Array
+#@else
 --- module_function(*name) -> self
+#@end
 
 メソッドをモジュール関数にします。
 
@@ -1847,7 +1852,13 @@ end
 モジュールの特異メソッドでもあるようなメソッドです。
 例えば [[c:Math]] モジュールのメソッドはすべてモジュール関数です。
 
+#@since 3.0
+単一の引数が与えられた時には与えられた引数をそのまま返します。
+複数の引数が与えられた時には配列にまとめて返します。
+引数なしの時は nil を返します。
+#@else
 self を返します。
+#@end
 
 @param name [[c:String]] または [[c:Symbol]] を 0 個以上指定します。
 
@@ -1895,9 +1906,13 @@ M.bar   # => "foo"
 #@include(Module.prepend)
 #@end
 
---- private(*name) -> self
 #@since 3.0
---- private(names) -> self
+--- private() -> nil
+--- private(name) -> String | Symbol
+--- private(*name) -> Array
+--- private(names) -> Array
+#@else
+--- private(*name) -> self
 #@end
 
 メソッドを private に設定します。
@@ -1929,9 +1944,13 @@ p foo.foo1          # => 1
 p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoMethodError)
 #@end
 
---- protected(*name) -> self
 #@since 3.0
---- protected(names) -> self
+--- protected() -> nil
+--- protected(name) -> String | Symbol
+--- protected(*name) -> Array
+--- protected(names) -> Array
+#@else
+--- protected(*name) -> self
 #@end
 
 メソッドを protected に設定します。
@@ -1955,9 +1974,13 @@ p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoM
 
 @see [[m:Module#protected_method_defined?]]
 
---- public(*name) -> self
 #@since 3.0
---- public(names) -> self
+--- public() -> nil
+--- public(name) -> String | Symbol
+--- public(*name) -> Array
+--- public(names) -> Array
+#@else
+--- public(*name) -> self
 #@end
 
 メソッドを public に設定します。

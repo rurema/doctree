@@ -29,9 +29,13 @@ p public_methods(false) - basic_public_methods
 # => [:explicit_public_method]
 #@end
 
---- public(*name) -> Object
 #@since 3.0
---- public(names) -> Object
+--- public() -> nil
+--- public(name) -> String | Symbol
+--- public(*name) -> Array
+--- public(names) -> Array
+#@else
+--- public(*name) -> self
 #@end
 
 メソッドを public に設定します。
@@ -53,9 +57,13 @@ p public_methods(false) - basic_public_methods
 
 @see [[m:Module#public]]
 
---- private(*name) -> Object
 #@since 3.0
---- private(names) -> Object
+--- private() -> nil
+--- private(name) -> String | Symbol
+--- private(*name) -> Array
+--- private(names) -> Array
+#@else
+--- private(*name) -> self
 #@end
 
 メソッドを private に設定します。
