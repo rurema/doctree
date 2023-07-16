@@ -327,6 +327,9 @@ require 'logger'
 logger = Logger.new(STDERR)
 logger = Logger.new(STDOUT)
 logger = Logger.new('logfile.log')
+
+file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
+logger = Logger.new(file, 'daily')
 #@end
 
 #@end
