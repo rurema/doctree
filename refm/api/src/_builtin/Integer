@@ -1,15 +1,21 @@
 = class Integer < Numeric
 
+#@until 3.2
 alias Fixnum
 alias Bignum
+#@end
 
 整数クラスです。
 
 整数オブジェクトに特異メソッドを追加する事はできません。追加した場合、
 [[c:TypeError]] が発生します。
 
+#@since 3.2
+かつて Integer クラスのエイリアスであった Fixnum と Bignum は 3.2 で削除されました。
+#@else
 2.4.0 から [[c:Fixnum]], [[c:Bignum]] は Integerに統合されました。
 2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
+#@end
 
 == Class Methods
 
