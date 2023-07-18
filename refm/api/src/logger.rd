@@ -26,26 +26,28 @@ Logger オブジェクトのログレベルを DEBUG に下げるなどという
 
 ==== 例
 
-  require 'logger'
-  logger = Logger.new(STDOUT)
-  logger.level = Logger::WARN
+#@samplecode
+require 'logger'
+logger = Logger.new(STDOUT)
+logger.level = Logger::WARN
 
-  logger.debug("Created logger")
-  logger.info("Program started")
-  logger.warn("Nothing to do!")
+logger.debug("Created logger")
+logger.info("Program started")
+logger.warn("Nothing to do!")
 
-  path = "a_non_existent_file"
+path = "a_non_existent_file"
 
-  begin
-    File.foreach(path) do |line|
-      unless line =~ /^(\w+) = (.*)$/
-        logger.error("Line in wrong format: #{line.chomp}")
-      end
+begin
+  File.foreach(path) do |line|
+    unless line =~ /^(\w+) = (.*)$/
+      logger.error("Line in wrong format: #{line.chomp}")
     end
-  rescue => err
-    logger.fatal("Caught exception; exiting")
-    logger.fatal(err)
   end
+rescue => err
+  logger.fatal("Caught exception; exiting")
+  logger.fatal(err)
+end
+#@end
 
 上の例ではログにはWARN、ERROR、FATALのみが記録されます。
 例外オブジェクトも記録するメッセージとして使えます。
@@ -75,36 +77,46 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
 1. STDERR/STDOUTに出力するように指定
 
-   require 'logger'
-   logger = Logger.new(STDERR)
-   logger = Logger.new(STDOUT)
+#@samplecode
+require 'logger'
+logger = Logger.new(STDERR)
+logger = Logger.new(STDOUT)
+#@end
 
 2. ログファイル名を指定
 
-   require 'logger'
-   logger = Logger.new('logfile.log')
+#@samplecode
+require 'logger'
+logger = Logger.new('logfile.log')
+#@end
 
 3. [[c:File]] オブジェクトを指定
 
-   require 'logger'
-   file = File.open('foo.log', File::WRONLY | File::APPEND)
-   # (古いファイルを削除する)新しいログファイルを作成する場合、以下のよ
-   # うに File::CREAT を指定。
-   # file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
-   logger = Logger.new(file)
+#@samplecode
+require 'logger'
+file = File.open('foo.log', File::WRONLY | File::APPEND)
+# (古いファイルを削除する)新しいログファイルを作成する場合、以下のよ
+# うに File::CREAT を指定。
+# file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
+logger = Logger.new(file)
+#@end
 
 4. 指定したファイルサイズに達したらログファイルの切り替えを行うように指定。
 
-   require 'logger'
-   # 約1,024,000バイトの"古い"ログファイルを10個残す
-   logger = Logger.new('foo.log', 10, 1024000)
+#@samplecode
+require 'logger'
+# 約1,024,000バイトの"古い"ログファイルを10個残す
+logger = Logger.new('foo.log', 10, 1024000)
+#@end
 
 5. ログファイルの切り替えを daily/weekly/monthly に指定
 
-   require 'logger'
-   logger = Logger.new('foo.log', 'daily')
-   logger = Logger.new('foo.log', 'weekly')
-   logger = Logger.new('foo.log', 'monthly')
+#@samplecode
+require 'logger'
+logger = Logger.new('foo.log', 'daily')
+logger = Logger.new('foo.log', 'weekly')
+logger = Logger.new('foo.log', 'monthly')
+#@end
 
 ==== ログの記録
 
@@ -115,30 +127,42 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
 1. ブロックを指定
 
-   logger.fatal { "Argument 'foo' not given." }
+#@samplecode
+logger.fatal { "Argument 'foo' not given." }
+#@end
 
 2. 文字列を指定
 
-   logger.error "Argument #{@foo} mismatch."
+#@samplecode
+logger.error "Argument #{@foo} mismatch."
+#@end
 
 3. プログラム名を指定
 
-   logger.info('initialize') { "Initializing..." }
+#@samplecode
+logger.info('initialize') { "Initializing..." }
+#@end
 
 4. ログレベルを指定
 
-   logger.add(Logger::FATAL) { 'Fatal error!' }
+#@samplecode
+logger.add(Logger::FATAL) { 'Fatal error!' }
+#@end
 
 ブロック形式だと潜在的に複雑なログを記録する場合に評価をログの記録のタ
 イミングまで遅延させる事ができます。例えば以下のようにすると、
 
-  logger.debug { "This is a " + potentially + " expensive operation" }
+#@samplecode
+logger.debug { "This is a " + potentially + " expensive operation" }
+#@end
 
 もしログレベルが INFO 以上であった場合、デバッグメッセージが記録されな
 いだけでなくブロックが評価される事もありません(以下だと記録が行われない
 のは同じですが、評価されます)。
 
-  logger.debug("This is a " + potentially + " expensive operation")
+#@samplecode
+logger.debug("This is a " + potentially + " expensive operation")
+#@end
 
 ==== loggerのclose
 
@@ -148,28 +172,36 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 
 1. オリジナルインターフェイス
 
-   logger.sev_threshold = Logger::WARN
+#@samplecode
+logger.sev_threshold = Logger::WARN
+#@end
 
 2. (ある程度の) Log4r 互換インターフェイス
 
-   logger.level = Logger::INFO
+#@samplecode
+logger.level = Logger::INFO
 
-   # DEBUG < INFO < WARN < ERROR < FATAL < UNKNOWN
+# DEBUG < INFO < WARN < ERROR < FATAL < UNKNOWN
+#@end
 
 3. [[c:Symbol]] か [[c:String]](大文字小文字の区別を行わない)
 
-   logger.level = :info
-   logger.level = 'INFO'
+#@samplecode
+logger.level = :info
+logger.level = 'INFO'
 
-   # :debug < :info < :warn < :error < :fatal < :unknown
+# :debug < :info < :warn < :error < :fatal < :unknown
+#@end
 
 #@since 2.4.0
 4. コンストラクタ
 
-   require 'logger'
-   Logger.new(logdev, level: Logger::INFO)
-   Logger.new(logdev, level: :info)
-   Logger.new(logdev, level: 'INFO')
+#@samplecode
+require 'logger'
+Logger.new(logdev, level: Logger::INFO)
+Logger.new(logdev, level: :info)
+Logger.new(logdev, level: 'INFO')
+#@end
 #@end
 
 === フォーマット
@@ -188,30 +220,38 @@ ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログ�
 [[m:Logger#datetime_format=]] を用いてログに記録する時の日時のフォーマッ
 トを変更することもできます。
 
-  logger.datetime_format = '%Y-%m-%d %H:%M:%S'
-  # e.g. "2004-01-03 00:54:26"
+#@samplecode
+logger.datetime_format = '%Y-%m-%d %H:%M:%S'
+# e.g. "2004-01-03 00:54:26"
+#@end
 
 #@since 2.4.0
 コンストラクタでも同様にできます。
 
-  require 'logger'
-  Logger.new(logdev, datetime_format: '%Y-%m-%d %H:%M:%S')
+#@samplecode
+require 'logger'
+Logger.new(logdev, datetime_format: '%Y-%m-%d %H:%M:%S')
+#@end
 #@end
 
 [[m:Logger#formatter=]] を用いてフォーマットを変更することもできます。
 
-  logger.formatter = proc do |severity, datetime, progname, msg|
-    "#{datetime}: #{msg}\n"
-  end
-  # => "2005-09-22 08:51:08 +0900: hello world"
+#@samplecode
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: #{msg}\n"
+end
+# => "2005-09-22 08:51:08 +0900: hello world"
+#@end
 
 #@since 2.4.0
 コンストラクタでも同様にできます。
 
-  require 'logger'
-  Logger.new(logdev, formatter: proc {|severity, datetime, progname, msg|
-    "#{datetime}: #{msg}\n"
-  })
+#@samplecode
+require 'logger'
+Logger.new(logdev, formatter: proc {|severity, datetime, progname, msg|
+  "#{datetime}: #{msg}\n"
+})
+#@end
 #@end
 
 === 参考
@@ -264,20 +304,34 @@ Logger オブジェクトを生成します。
                            省略した場合は '%Y%m%d' です。
 #@end
 
-例:
-
-  require 'logger'
-  logger = Logger.new(STDERR)
-  logger = Logger.new(STDOUT)
-  logger = Logger.new('logfile.log')
-  
-  file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
-  logger = Logger.new(file, 'daily')
 #@since 2.4.0
-  logger = Logger.new(file, level: :info)
-  logger = Logger.new(file, progname: 'progname')
-  logger = Logger.new(file, formatter: formatter)
-  logger = Logger.new(file, datetime_format: '%Y-%m-%d %H:%M:%S')
+
+#@samplecode 例
+require 'logger'
+logger = Logger.new(STDERR)
+logger = Logger.new(STDOUT)
+logger = Logger.new('logfile.log')
+
+file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
+logger = Logger.new(file, 'daily')
+logger = Logger.new(file, level: :info)
+logger = Logger.new(file, progname: 'progname')
+logger = Logger.new(file, formatter: formatter)
+logger = Logger.new(file, datetime_format: '%Y-%m-%d %H:%M:%S')
+#@end
+
+#@else
+
+#@samplecode 例
+require 'logger'
+logger = Logger.new(STDERR)
+logger = Logger.new(STDOUT)
+logger = Logger.new('logfile.log')
+
+file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
+logger = Logger.new(file, 'daily')
+#@end
+
 #@end
 
 == Instance Methods
@@ -482,13 +536,13 @@ logger.fatal? # => false
 @param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクトを指定します。
                 ブロックを与えた場合は、プログラム名を文字列として与えます。
 
-例:
+#@samplecode 例
+logger.debug "Waiting for input from user"
+# ...
+logger.debug { "User typed #{input}" }
 
-  logger.debug "Waiting for input from user"
-  # ...
-  logger.debug { "User typed #{input}" }
-
-  logger.debug("MainApp") { "Received connection from #{ip}" }
+logger.debug("MainApp") { "Received connection from #{ip}" }
+#@end
 
 --- info(progname = nil){ ... } -> true
 --- info(progname = nil) -> true
@@ -716,11 +770,13 @@ logger.info("MyApp") { "test" }
 @param formatter 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを
                  持つオブジェクトを指定します。call メソッドの返り値は文字列にしてください。
 
-  require 'logger'
-  logger = Logger.new
-  logger.formatter = proc{|severity, datetime, progname, message|
-    "#{datetime}: #{message}\n"
-  }
+#@samplecode
+require 'logger'
+logger = Logger.new
+logger.formatter = proc{|severity, datetime, progname, message|
+  "#{datetime}: #{message}\n"
+}
+#@end
 
 == Constants
 
