@@ -1,5 +1,3 @@
-#@since 1.9.1
-
 category FileFormat
 
 JSON (JavaScript Object Notation)を扱うライブラリです。
@@ -19,12 +17,6 @@ JSON.parse(json_str) # => {"name"=>"Ruby", "age"=>30}
 # RubyのオブジェクトをJSON文字列に変換する
 data = {"name" => "Ruby", "age" => 30}
 JSON.dump(data) # => "{\"name\":\"Ruby\",\"age\":30}"
-#@end
-
-#@until 1.9.2
-拡張ライブラリによる実装と Ruby による実装があり、拡張ライブラリによる実装が使用できるときは
-拡張ライブラリによる実装を使用します。
-Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
 #@end
 
 #@include(json/JSON)
@@ -142,5 +134,3 @@ include JSON::Generator::GeneratorMethods::String
 
 = reopen TrueClass
 include JSON::Generator::GeneratorMethods::TrueClass
-
-#@end
