@@ -1,15 +1,22 @@
-#@since 1.9.1
-
 category FileFormat
 
 JSON (JavaScript Object Notation)を扱うライブラリです。
 
 JSON の仕様は [[rfc:4627]] を参照してください。
 
-#@until 1.9.2
-拡張ライブラリによる実装と Ruby による実装があり、拡張ライブラリによる実装が使用できるときは
-拡張ライブラリによる実装を使用します。
-Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
+このライブラリでは、[[c:JSON]] モジュールに JSON を操作するための代表的なメソッドが集められています。
+詳細は [[c:JSON]] モジュールを参照してください。
+
+#@samplecode 例
+require "json"
+
+# JSON文字列をRubyのオブジェクトに変換する
+json_str = '{"name": "Ruby", "age": 30}'
+JSON.parse(json_str) # => {"name"=>"Ruby", "age"=>30}
+
+# RubyのオブジェクトをJSON文字列に変換する
+data = {"name" => "Ruby", "age" => 30}
+JSON.dump(data) # => "{\"name\":\"Ruby\",\"age\":30}"
 #@end
 
 #@include(json/JSON)
@@ -127,5 +134,3 @@ include JSON::Generator::GeneratorMethods::String
 
 = reopen TrueClass
 include JSON::Generator::GeneratorMethods::TrueClass
-
-#@end
