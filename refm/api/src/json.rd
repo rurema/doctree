@@ -2,10 +2,10 @@ category FileFormat
 
 JSON (JavaScript Object Notation)を扱うライブラリです。
 
-JSON の仕様は [[rfc:4627]] を参照してください。
-
 このライブラリでは、[[c:JSON]] モジュールに JSON を操作するための代表的なメソッドが集められています。
 詳細は [[c:JSON]] モジュールを参照してください。
+
+JSON の仕様は [[rfc:7159]] を参照してください。
 
 #@samplecode 例
 require "json"
