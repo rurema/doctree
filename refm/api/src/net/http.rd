@@ -691,7 +691,7 @@ proxyport は時代遅れのメソッドです。
 この秒数たってもコネクションが
 開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
 
-デフォルトは60(秒)です。
+デフォルトは 60 (秒)です。
 
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
 
