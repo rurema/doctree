@@ -46,7 +46,7 @@ break や return に渡した値を返します。
   * :retry
   * :next
   * :return
-#@#       * :noreason
+  * :noreason
 
 例:
 
