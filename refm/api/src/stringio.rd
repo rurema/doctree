@@ -257,9 +257,9 @@ a.getc                   # => nil
 #@samplecode 例
 require "stringio"
 a = StringIO.new("ho")
-a.getc                   #=> 104
-a.getc                   #=> 111
-a.getc                   #=> nil
+a.getbyte                #=> 104
+a.getbyte                #=> 111
+a.getbyte                #=> nil
 #@end
 
 --- gets(rs = $/)    -> String | nil
