@@ -181,6 +181,7 @@ rake/tasklib
 rake/testtask
 rake/loaders/makefile
 rbconfig
+rbconfig/sizeof
 rdoc
 rdoc/code_objects
 rdoc/alias
