@@ -64,23 +64,28 @@ jobs:
       run: |
         cd /tmp
         mv -v html html.pr
-    - uses: actions/checkout@v4
+    - name: Checkout base
+      uses: actions/checkout@v4
       with:
         ref: ${{ github.event.pull_request.base.sha }}
-    - name: Install dependencies
+    - name: Install dependencies (base)
       run: bundle install
-    - name: Run rake
+    - name: Run rake (base)
       run: bundle exec rake
+      id: generate_base
+      continue-on-error: true
     - name: Rename generated html and generate diff
       run: |
         cd /tmp
         mv -v html html.base
         git diff --no-index html.base html.pr --stat || true
         git diff --no-index html.base html.pr --output artifact/html.diff || true
+      if: ${{ steps.generate_base.outcome == 'success' }}
     - uses: actions/upload-artifact@v3
       with:
         name: diff-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/html.diff
+      if: ${{ steps.generate_base.outcome == 'success' }}
 
   misspell:
     runs-on: ubuntu-latest
