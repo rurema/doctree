@@ -256,14 +256,14 @@ a, b = raise rescue [1, 2]
     これは deprecated です。 [[feature:15575]]
     この警告は「-W:no-deprecated」オプションで止められます。
 
-#@samplecode
+//emlist{
 def foo
   class << Object.new
     yield #=> warning: `yield' in class syntax will not be supported from Ruby 3.0. [[feature:15575]]
   end
 end
 foo { p :ok }
-#@end
+//}
 
   * 引数を転送する記法「(...)」が導入されました。 [[feature:16253]]
     * foo の全ての引数(キーワード引数やブロックを含む)を bar に転送します。

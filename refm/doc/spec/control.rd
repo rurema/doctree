@@ -444,9 +444,10 @@ next により抜けた yield 式は nil を返します。
 
 ====[a:redo] redo
 
-#@samplecode 例
-redo
-#@end
+例:
+
+          redo
+
 
 文法:
 
@@ -490,9 +491,9 @@ iter { p "(b)"; break }     # -> (a)..(b)(d)
 
 ====[a:retry] retry
 
-#@samplecode 例
-retry
-#@end
+例:
+
+          retry
 
 文法:
 
