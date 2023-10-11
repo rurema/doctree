@@ -1116,10 +1116,8 @@ Dir.open(self.to_s, &block) と同じです。
 self 配下のすべてのファイルやディレクトリを
 一つずつ引数 pathname に渡してブロックを実行します。
 
-#@samplecode
-require 'find'
-Find.find(self.to_s) {|f| yield Pathname.new(f)}
-#@end
+  require 'find'
+  Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
 と同じです。
 
