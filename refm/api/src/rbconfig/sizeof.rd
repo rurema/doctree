@@ -25,5 +25,5 @@ Ruby インタプリタが作成された環境における、さまざまな型
 
 #@samplecode
 require 'rbconfig/sizeof'
-RbConfig::SIZEOF['INT_MAX'] # => 2147483647
+RbConfig::LIMITS['INT_MAX'] # => 2147483647
 #@end
