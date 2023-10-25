@@ -430,12 +430,10 @@ end
 
 @see [[ruby-core:50864]]
 
-#@until 3.2
---- binding -> Binding
-#@end
-
 #@since 3.2
 --- binding -> Binding | nil
+#@else
+--- binding -> Binding
 #@end
 
 発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
