@@ -645,7 +645,7 @@ File.lchown(owner, group, self.to_s) と同じです。
 File.fnmatch(pattern, self.to_s, *args) と同じです。
 
 @param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
-               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
+               す。[[m:Dir.glob]] とは違って`{}' は使用できません。
 
 @param args [[m:File.fnmatch]] を参照してください。
 
@@ -664,7 +664,7 @@ path.fnmatch("TEST*", File::FNM_CASEFOLD)   # => true
 File.fnmatch?(pattern, self.to_s, *args) と同じです。
 
 @param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
-               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
+               す。[[m:Dir.glob]] とは違って`{}' は使用できません。
 
 @param args [[m:File.fnmatch]] を参照してください。
 
