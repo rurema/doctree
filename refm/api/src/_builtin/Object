@@ -790,8 +790,6 @@ obj = nil
 p (obj !~ /re/) # => true
 #@end
 
-@see [[m:Object#=~]]
-
 --- display(out = $stdout) -> nil
 
 オブジェクトを out に出力します。
