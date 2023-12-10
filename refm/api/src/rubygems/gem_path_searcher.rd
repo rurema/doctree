@@ -12,13 +12,13 @@ Gem パッケージに含まれているファイルのうちロード可能な�
 
 与えられたパスにマッチする [[c:Gem::Specification]] を一つだけ返します。
 
-@see [[m:Array#find]]
+@see [[m:Enumerable#detect]]
 
 --- find_all(path) -> [Gem::Specification]
 
 与えられたパスにマッチする [[c:Gem::Specification]] を全て返します。
 
-@see [[m:Array#find_all]]
+@see [[m:Enumerable#filter]]
 
 --- init_gemspecs -> [Gem::Specification]
 
