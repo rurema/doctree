@@ -34,8 +34,10 @@ obj を指定された出力先に再帰的に出力します。
 ません。例えば、デフォルト値を求めるブロックを持った [[c:Hash]] は
 [[c:Proc]] を間接的に指していることになります。
 
-  p Marshal.dump(Hash.new {})
-  => -:1:in `dump': cannot dump hash with default proc (TypeError)
+#@samplecode 例
+p Marshal.dump(Hash.new {})
+# => -:1:in `dump': cannot dump hash with default proc (TypeError)
+#@end
 
 マーシャルの動作を任意に定義することもできます。
 
@@ -70,16 +72,18 @@ port からマーシャルデータを読み込んで、元のオブジェクト
 proc として手続きオブジェクトが与えられた場合には読み込んだ
 オブジェクトを引数にその手続きを呼び出します。
 
-  str = Marshal.dump(["a", 1, 10 ** 10, 1.0, :foo])
-  p Marshal.load(str, proc {|obj| p obj})
+#@samplecode 例
+str = Marshal.dump(["a", 1, 10 ** 10, 1.0, :foo])
+p Marshal.load(str, proc {|obj| p obj})
 
-  => "a"
-     1
-     10000000000
-     1.0
-     :foo
-     ["a", 1, 10000000000, 1.0, :foo]
-     ["a", 1, 10000000000, 1.0, :foo]
+# => "a"
+#    1
+#    10000000000
+#    1.0
+#    :foo
+#    ["a", 1, 10000000000, 1.0, :foo]
+#    ["a", 1, 10000000000, 1.0, :foo]
+#@end
 
 @param port [[c:String]] か [[c:IO]] (またはそのサブクラス)の
             インスタンスを指定します。
@@ -105,6 +109,9 @@ proc として手続きオブジェクトが与えられた場合には読み込
 マーシャルされたデータのバージョン番号は以下のようにして取得するこ
 とができます。
 
-  obj = Object.new
-  major, minor = Marshal.dump(obj).unpack("cc")
-  p [major, minor]
+#@samplecode 例
+obj = Object.new
+major, minor = Marshal.dump(obj).unpack("cc")
+p [major, minor]
+# => [4, 8]
+#@end

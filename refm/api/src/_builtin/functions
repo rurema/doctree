@@ -1118,6 +1118,10 @@ p a # undefined local variable or method `a' for #<Object:0x294f9ec @a=1> (NameE
 const_name には、 "::" 演算子を含めることはできません。
 ネストした定数を指定する方法は [[m:Module#autoload]] を参照してください。
 
+const_name が autoload 設定されていて、まだ定義されてない(ロードされていない)ときは、
+autoload する対象を置き換えます。
+const_name が(autoloadではなく)既に定義されているときは何もしません。
+
 @param const_name 定数をString または Symbol で指定します。
 @param feature require と同様な方法で autoload する対象を指定します。
 @raise LoadError featureのロードに失敗すると発生します。
@@ -1415,8 +1419,8 @@ ARGV << 'b.txt' << 'c.txt'
 p gets #=> "hello\n"
 p gets(nil) #=> "it\ncommon\n"
 p gets("") #=> "ARGF\n\n"
-p gets('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
-p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
+p gets('、') #=> "# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\n# みなして、"
+p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。\n"
 p gets #=> nil
 p readline # end of file reached (EOFError)
 #@end
@@ -1427,8 +1431,9 @@ it
 common
 #@end
 
-#@samplecode b.txt
+#@samplecode c.txt
 ARGF
+
 # スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
 # みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
 #@end

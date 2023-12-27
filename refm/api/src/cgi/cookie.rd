@@ -10,29 +10,32 @@ HTTP クッキーを利用するためのクラスを定義したライブラリ
 例:
   cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
   cookie1 = CGI::Cookie.new({"name" => "name", "value" => "value"})
-  cookie1 = CGI::Cookie.new({'name'    => 'name',
-                             'value'   => ['value1', 'value2', ...],
-                             'path'    => 'path',   # optional
-                             'domain'  => 'domain', # optional
-                             'expires' => Time.now, # optional
-                             'secure'  => true      # optional
+  cookie1 = CGI::Cookie.new({'name'      => 'name',
+                             'value'     => ['value1', 'value2', ...],
+                             'path'      => 'path',   # optional
+                             'domain'    => 'domain', # optional
+                             'expires'   => Time.now, # optional
+                             'secure'    => true      # optional
+                             'httponly'  => true      # optional
                             })
 
   cgi.out({"cookie" => [cookie1, cookie2]}){ "string" }
 
-  name    = cookie1.name
-  values  = cookie1.value
-  path    = cookie1.path
-  domain  = cookie1.domain
-  expires = cookie1.expires
-  secure  = cookie1.secure
+  name      = cookie1.name
+  values    = cookie1.value
+  path      = cookie1.path
+  domain    = cookie1.domain
+  expires   = cookie1.expires
+  secure    = cookie1.secure
+  httponly  = cookie1.httponly
 
-  cookie1.name    = 'name'
-  cookie1.value   = ['value1', 'value2', ...]
-  cookie1.path    = 'path'
-  cookie1.domain  = 'domain'
-  cookie1.expires = Time.now + 30
-  cookie1.secure  = true
+  cookie1.name      = 'name'
+  cookie1.value     = ['value1', 'value2', ...]
+  cookie1.path      = 'path'
+  cookie1.domain    = 'domain'
+  cookie1.expires   = Time.now + 30
+  cookie1.secure    = true
+  cookie1.httponly  = true
 
 @see [[rfc:2965]]
 
@@ -57,6 +60,9 @@ HTTP クッキーを利用するためのクラスを定義したライブラリ
 : secure
   真を指定すると、このクッキーはセキュアクッキーになります。
   デフォルトは偽です。セキュアクッキーは HTTPS の時のみ送信されます。
+: httponly
+  真を指定すると、このクッキーはhttpオンリークッキーになります。
+  デフォルトは偽です。httpオンリークッキーはjavascriptからアクセスできません。
 
 @param name クッキーの名前を文字列で指定します。
             クッキーの名前と値を要素とするハッシュを指定します。
@@ -66,29 +72,32 @@ HTTP クッキーを利用するためのクラスを定義したライブラリ
         例：
         cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
         cookie1 = CGI::Cookie.new({"name" => "name", "value" => "value"})
-        cookie1 = CGI::Cookie.new({'name'    => 'name',
-                                   'value'   => ['value1', 'value2', ...],
-                                   'path'    => 'path',   # optional
-                                   'domain'  => 'domain', # optional
-                                   'expires' => Time.now, # optional
-                                   'secure'  => true      # optional
+        cookie1 = CGI::Cookie.new({'name'      => 'name',
+                                   'value'     => ['value1', 'value2', ...],
+                                   'path'      => 'path',   # optional
+                                   'domain'    => 'domain', # optional
+                                   'expires'   => Time.now, # optional
+                                   'secure'    => true      # optional
+                                   'httponly'  => true      # optional
                                   })
 
         cgi.out({"cookie" => [cookie1, cookie2]}){ "string" }
 
-        name    = cookie1.name
-        values  = cookie1.value
-        path    = cookie1.path
-        domain  = cookie1.domain
-        expires = cookie1.expires
-        secure  = cookie1.secure
+        name      = cookie1.name
+        values    = cookie1.value
+        path      = cookie1.path
+        domain    = cookie1.domain
+        expires   = cookie1.expires
+        secure    = cookie1.secure
+        httponly  = cookie1.httponly
 
-        cookie1.name    = 'name'
-        cookie1.value   = ['value1', 'value2', ...]
-        cookie1.path    = 'path'
-        cookie1.domain  = 'domain'
-        cookie1.expires = Time.now + 30
-        cookie1.secure  = true
+        cookie1.name      = 'name'
+        cookie1.value     = ['value1', 'value2', ...]
+        cookie1.path      = 'path'
+        cookie1.domain    = 'domain'
+        cookie1.expires   = Time.now + 30
+        cookie1.secure    = true
+        cookie1.httponly  = true
 
 --- parse(raw_cookie) -> Hash
 
@@ -162,6 +171,17 @@ HTTP クッキーを利用するためのクラスを定義したライブラリ
 セキュアクッキーであるかどうかを変更します。
 
 @param val 真を指定すると自身はセキュアクッキーになります。
+
+--- httopnly -> bool
+
+自身がhttpオンリークッキーである場合は、真を返します。
+そうでない場合は、偽を返します。
+
+--- httopnly=(val)
+
+httpオンリークッキーであるかどうかを変更します。
+
+@param val 真を指定すると自身はhttpオンリークッキーになります。
 
 --- to_s -> String
 

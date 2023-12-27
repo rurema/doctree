@@ -1,17 +1,43 @@
 = class Integer < Numeric
 
+#@until 3.2
 alias Fixnum
 alias Bignum
+#@end
 
 整数クラスです。
 
 整数オブジェクトに特異メソッドを追加する事はできません。追加した場合、
 [[c:TypeError]] が発生します。
 
+#@since 3.2
+かつて Integer クラスのエイリアスであった Fixnum と Bignum は 3.2 で削除されました。
+#@else
 2.4.0 から [[c:Fixnum]], [[c:Bignum]] は Integerに統合されました。
 2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
+#@end
 
 == Class Methods
+
+#@since 3.1
+--- try_convert(obj) -> Integer | nil
+
+obj を Integer に変換しようと試みます。変換には [[m:Object#to_int]]
+メソッドが使われます。
+
+Integer ならそのままobjを返します。
+そうでなければ obj.to_int の結果を返すか、nil が返されます。
+
+@param obj   変換する任意のオブジェクト
+@return      Integer または nil
+@raise TypeError to_int が Integer を返さなかった場合に発生します。
+
+#@samplecode 例
+Integer.try_convert(1)    # => 1
+Integer.try_convert(1.25) # => 1
+Integer.try_convert([])   # => nil
+#@end
+#@end
 
 #@since 2.5.0
 --- sqrt(n) -> Integer
@@ -39,7 +65,7 @@ Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 #@end
 
 
-@see [[m:Math.sqrt]]
+@see [[m:Math.#sqrt]]
 #@end
 == Instance Methods
 
@@ -70,7 +96,7 @@ p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
 @param encoding エンコーディングを表すオブジェクト。Encoding::UTF_8、'shift_jis' など。
 @return     一文字からなる文字列
 @raise RangeError self を与えられたエンコーディングで正しく解釈できない場合に発生します。
-@see [[m:String#ord]] [[m:Encoding#default_internal]]
+@see [[m:String#ord]] [[m:Encoding.default_internal]]
 
 --- digits -> [Integer]
 --- digits(base) -> [Integer]
@@ -667,31 +693,50 @@ self を other で割った商を [[c:Float]] で返します。
 
 @param other self を割る数を指定します。
 
+例:
+
+  654321.fdiv(13731)      # => 47.652829364212366
+  654321.fdiv(13731.24)   # => 47.65199646936475
+
+  -1234567890987654321.fdiv(13731)      # => -89910996357705.52
+  -1234567890987654321.fdiv(13731.24)   # => -89909424858035.72
 @see [[m:Numeric#quo]], [[m:Numeric#div]], [[m:Integer#div]]
 
+#@since 3.2
+--- ceildiv(other) -> Integer
+
+self を other で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
+すなわち、self を other で割った商を q とすると、q 以上で最小の整数を返します。
+
+@param other self を割る数を指定します。
+
+#@samplecode
+3.ceildiv(3)    # => 1
+4.ceildiv(3)    # => 2
+5.ceildiv(3)    # => 2
+3.ceildiv(1.2)  # => 3
+-5.ceildiv(3)   # => -1
+-5.ceildiv(-3)  # => 2
+#@end
+
+#@end
+
 --- **(other) -> Numeric
-#@since 2.5.0
 --- pow(other) -> Numeric
 --- pow(other, modulo) -> Integer
-#@end
 
 算術演算子。冪(べき乗)を計算します。
 
 @param other 二項演算の右側の引数(対象)
-#@since 2.5.0
 @param modulo 指定すると、計算途中に巨大な値を生成せずに (self**other) % modulo と同じ結果を返します。
-#@end
 @return 計算結果
-#@since 2.5.0
 @raise TypeError 2引数 pow で Integer 以外を指定した場合に発生します。
 @raise RangeError 2引数 pow で other に負の数を指定した場合に発生します。
-#@end
 
 #@samplecode
 2 ** 3 # => 8
 2 ** 0 # => 1
 0 ** 0 # => 1
-#@since 2.5.0
 3.pow(3,  8)  # =>  3
 3.pow(3, -8)  # => -5
 3.pow(2, -2)  # => -1
@@ -699,11 +744,19 @@ self を other で割った商を [[c:Float]] で返します。
 -3.pow(3, -8) # => -3
 5.pow(2, -8)  # => -7
 #@end
+
+結果が巨大すぎる整数になりそうなとき、警告を出したうえで Float::INFINITY を返します。
+
+#@samplecode 計算を放棄して Float::INFINITY を返す例
+p 100**9999999
+# => warning: in a**b, b may be too big
+#    Infinity
 #@end
 
-#@since 2.5.0
+判定の閾値は変わりえます。
+
 @see [[m:BigDecimal#power]]
-#@end
+
 --- abs -> Integer
 --- magnitude -> Integer
 

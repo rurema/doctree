@@ -24,6 +24,8 @@ Enumerableモジュールはインクルードされています。ただし、�
 が真である場合に true を返します。ブロックが偽を返した時点で、
 ただちに false を返します。
 
+自身に要素が存在しない場合は true を返します。
+
 #@since 2.5.0
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
 #@end
@@ -57,6 +59,8 @@ p Set['ant', 'bear', 'cat'].all?(/t/)  # => false
 ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
 が偽である場合に false を返します。ブロックが真を返した時点
 で、ただちに true を返します。
+
+自身に要素が存在しない場合は false を返します。
 
 #@since 2.5.0
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
@@ -753,7 +757,11 @@ p [1,2,3].zip([4,5,6], [7,8,9]) {|ary|
 #@end
 
 --- each_slice(n)               -> Enumerator
+#@since 3.1
+--- each_slice(n) {|list| ... } -> self
+#@else
 --- each_slice(n) {|list| ... } -> nil
+#@end
 
 n 要素ずつブロックに渡して繰り返します。
 
@@ -776,7 +784,11 @@ n 要素ずつ繰り返す [[c:Enumerator]] を返します。
 @see [[m:Enumerable#each_cons]]
 
 --- each_cons(n)               -> Enumerator
+#@since 3.1
+--- each_cons(n) {|list| ... } -> self
+#@else
 --- each_cons(n) {|list| ... } -> nil
+#@end
 
 要素を重複ありで n 要素ずつに区切り、
 ブロックに渡して繰り返します。
@@ -1000,6 +1012,8 @@ a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
 ブロックを指定した場合は、Enumerable オブジェクトのすべての要素を
 ブロックで評価した結果が、すべて偽であれば真を返します。
 そうでなければ偽を返します。
+
+自身に要素が存在しない場合は true を返します。
 
 #@since 2.5.0
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。

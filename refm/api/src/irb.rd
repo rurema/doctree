@@ -105,10 +105,24 @@ readline ライブラリがインストールされている時には
 
 === irb のカスタマイズ
 
-irb コマンドは起動時にホームディレクトリの .irbrc というファイルを読み込みます。
-.irbrc は Ruby スクリプトです。ホームディレクトリに .irbrc が存在しない場合は、
-カレントディレクトリの .irbrc, irb.rc, _irbrc, $irbrc を順番にロードしようと
-試みます。
+irb コマンドは起動時に以下のパスを上から順番に探索し、
+最初に見つかったファイルを読み込みます。
+
+  * $IRBRC (もし環境変数 IRBRC が設定されていれば)
+#@since 2.7.0
+  * $XDG_CONFIG_HOME/irb/irbrc (もし環境変数 XDG_CONFIG_HOME が設定されていれば)
+#@end
+  * $HOME/.irbrc (もし環境変数 HOME が設定されていれば)
+#@since 2.7.0
+  * ./.config/irb/irbrc
+#@end
+  * ./.irbrc
+  * ./irb.rc
+  * ./_irbrc
+  * ./$irbrc (環境変数ではなく $irbrc というファイル名)
+
+このように実際に読み込まれるファイル名は環境により異なりますが、
+このマニュアルでは単に「.irbrc」と呼称します。
 
 以下のような (Ruby の) 式を .irbrc に記述すると、
 irb コマンドのオプションを指定したのと同じ効果が得られます。
@@ -472,7 +486,7 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
   Ruby の require の irb 版です。
   ファイル path を現在の irb インタプリタ上で実行します。
 
-  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#kernel]] と異な
+  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#require]] と異な
   り、path の内容を irb で一行ずつタイプしたかのように、irb 上で一行ず
   つ評価されます。require に成功した場合は true を、そうでない場合は
   false を返します。
@@ -627,7 +641,7 @@ irb はシンボルであるかどうかの判断を間違えることがあり�
 ===[a:history] 履歴の保存
 
 #@since 2.7.0
-デフォルトで、実行結果の履歴1000件が ~/.irb_history に保存されます。
+デフォルトで実行結果の履歴1000件がファイルに保存されます。保存先は $XDG_CONFIG_HOME/irb/irb_history (Ruby 2.7.2 以降かつ $XDG_CONFIG_HOME が定義されている場合) か ~/.irb_history です。
 
 もし履歴を保存したくない場合は、.irbrc で以下のように指定します。
 

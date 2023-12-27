@@ -6,26 +6,28 @@ category Text
 
 文字列に [[c:IO]] と同じインタフェースを持たせるためのクラスです。
 
-例:
-
-  require "stringio"
-  sio = StringIO.new("hoge", 'r+')
-  p sio.read                 #=> "hoge"
-  sio.rewind
-  p sio.read(1)              #=> "h"
-  sio.write("OGE")
-  sio.rewind
-  p sio.read                 #=> "hOGE"
+#@samplecode 例
+require "stringio"
+sio = StringIO.new("hoge", 'r+')
+p sio.read                 #=> "hoge"
+sio.rewind
+p sio.read(1)              #=> "h"
+sio.write("OGE")
+sio.rewind
+p sio.read                 #=> "hOGE"
+#@end
 
 === 例外
 StringIO オブジェクトは大抵の場合 IO オブジェクトと同じ例外を発生させます。
 例えば次の例では write は IOError を発生させます。
 
-  require "stringio"
-  sio = StringIO.new("hoge")
-  sio.close
-  sio.write("a")
-  # => in `write': not opened for writing (IOError)
+#@samplecode 例
+require "stringio"
+sio = StringIO.new("hoge")
+sio.close
+sio.write("a")
+# => in `write': not opened for writing (IOError)
+#@end
 
 == Class Methods
 
@@ -46,22 +48,24 @@ StringIO オブジェクトを生成して返します。
 
 @raise Errno::EACCES string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
-        require 'stringio'
-         
-        s = "foo"
-        io = StringIO.new(s)
-        p io.getc       # => 102
-        p io.pos        # => 1
-        p io.size       # => 3
-        io << "bar"   
-        p io.size       # => 4
-        p s             # => "fbar"
-        io.rewind
-        p io.gets       # => "fbar"
+#@samplecode 例
+require 'stringio'
 
-        StringIO.open("hoge"){|io|
-          p io.string   # => "hoge"
-        }
+s = "foo"
+io = StringIO.new(s)
+p io.getc       # => 102
+p io.pos        # => 1
+p io.size       # => 3
+io << "bar"   
+p io.size       # => 4
+p s             # => "fbar"
+io.rewind
+p io.gets       # => "fbar"
+
+StringIO.open("hoge"){|io|
+  p io.string   # => "hoge"
+}
+#@end
 
 == Instance Methods
 
@@ -72,15 +76,15 @@ StringIO オブジェクトを生成して返します。
 返されるのは生成時に与えられたバッファとして使われている文字列です。
 文字列は複製されないことに注意して下さい。
 
-例:
-
-  require "stringio"
-  sio = StringIO.new
-  sio << "abc"
-  s = sio.string
-  p s                    #=> "abc"
-  sio << "xyz"
-  p s                    #=> "abcxyz"
+#@samplecode 例
+require "stringio"
+sio = StringIO.new
+sio << "abc"
+s = sio.string
+p s                    #=> "abc"
+sio << "xyz"
+p s                    #=> "abcxyz"
+#@end
 
 --- string=(buf)
 
@@ -135,13 +139,15 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 自身が既に close されていた場合に true を返します。そうでない場合は、false を返します。
 
-      require "stringio"
-      sio = StringIO.open("hoge")
-      p sio.closed? # => false
-      sio.close_read
-      p sio.closed? # => false
-      sio.close_write
-      sio.closed?   # => true
+#@samplecode 例
+require "stringio"
+sio = StringIO.open("hoge")
+p sio.closed? # => false
+sio.close_read
+p sio.closed? # => false
+sio.close_write
+p sio.closed?   # => true
+#@end
 
 --- closed_read?    -> bool
 
@@ -166,13 +172,13 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 @raise IOError 自身が読み取り不可なら発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge\nfoo\n")
-  a.each{|l| p l }
-  
-  #=>
-  "hoge\n"
-  "foo\n"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge\nfoo\n")
+a.each{|l| p l }
+#=> "hoge\n"
+#   "foo\n"
+#@end
 
 @see [[m:$/]]
 @see [[m:IO#each_line]]
@@ -188,15 +194,15 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 @raise IOError 自身が読み取り不可なら発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge")
-  a.each_byte{|ch| p ch }
-  
-  #=>
-  104
-  111
-  103
-  101
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge")
+a.each_byte{|ch| p ch }
+#=> 104
+#   111
+#   103
+#   101
+#@end
 
 @see [[m:IO#each_byte]]
 
@@ -229,11 +235,13 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 @raise IOError 自身が読み取り不可なら発生します。
 
-  require "stringio"
-  a = StringIO.new("ho")
-  a.getc                   # => "h"
-  a.getc                   # => "o"
-  a.getc                   # => nil
+#@samplecode 例
+require "stringio"
+a = StringIO.new("ho")
+a.getc                   # => "h"
+a.getc                   # => "o"
+a.getc                   # => nil
+#@end
 #@end
 
 #@until 1.9.1
@@ -246,11 +254,13 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 @raise IOError 自身が読み取り不可なら発生します。
 
-  require "stringio"
-  a = StringIO.new("ho")
-  a.getc                   #=> 104
-  a.getc                   #=> 111
-  a.getc                   #=> nil
+#@samplecode 例
+require "stringio"
+a = StringIO.new("ho")
+a.getbyte                #=> 104
+a.getbyte                #=> 111
+a.getbyte                #=> nil
+#@end
 
 --- gets(rs = $/)    -> String | nil
 
@@ -261,12 +271,14 @@ close された StringIO に読み書き等が行われると IOError が発生�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge")
-  a.gets                  #=> "hoge"
-  $_                      #=> "hoge"
-  a.gets                  #=> nil
-  $_                      #=> nil
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge")
+a.gets                  #=> "hoge"
+$_                      #=> "hoge"
+a.gets                  #=> nil
+$_                      #=> nil
+#@end
 
 @see [[m:$/]]
 
@@ -307,11 +319,13 @@ StringIO には対応するパスはないので nil を返します。
 
 @raise Errno::EINVAL n がマイナスである場合に発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge", 'r+')
-  a.pos = 10
-  a << 'Z'
-  a.string                        #=> "hoge\000\000\000\000\000\000Z"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge", 'r+')
+a.pos = 10
+a << 'Z'
+a.string                        #=> "hoge\000\000\000\000\000\000Z"
+#@end
 
 --- print()        -> nil
 --- print(*obj)    -> nil
@@ -323,10 +337,12 @@ StringIO には対応するパスはないので nil を返します。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-  require "stringio"
-  a = StringIO.new("", 'r+')
-  a.print("hoge", "bar", "foo")
-  a.string                     #=> "hogebarfoo"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("", 'r+')
+a.print("hoge", "bar", "foo")
+a.string                     #=> "hogebarfoo"
+#@end
 
 --- printf(format, *obj)    -> nil
 
@@ -338,10 +354,12 @@ StringIO には対応するパスはないので nil を返します。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-  require "stringio"
-  a = StringIO.new("", 'r+')
-  a.printf("%c%c%c", 97, 98, 99)
-  a.string                      #=> "abc"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("", 'r+')
+a.printf("%c%c%c", 97, 98, 99)
+a.string                      #=> "abc"
+#@end
 
 --- putc(ch)    -> object
 
@@ -361,10 +379,12 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
-  require "stringio"
-  a = StringIO.new("", 'r+')
-  a.puts("hoge", "bar", "foo")
-  a.string                     #=> "hoge\nbar\nfoo\n"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("", 'r+')
+a.puts("hoge", "bar", "foo")
+a.string                     #=> "hoge\nbar\nfoo\n"
+#@end
 
 --- read                  -> String
 --- read(len)             -> String | nil
@@ -382,16 +402,31 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
---- readchar    -> Integer
+--- readchar    -> String
+
+自身から 1 文字読み込んで、その文字に対応する String を返します。
+
+文字列の終端に到達した時には例外 [[c:EOFError]] を発生させます。
+
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge")
+a.readchar               #=> "h"
+#@end
+
+@raise EOFError EOFに達した時発生する
+
 --- readbyte    -> Integer
 
 自身から 1 文字読み込んで、その文字に対応する整数を返します。
 
 文字列の終端に到達した時には例外 [[c:EOFError]] を発生させます。
 
- require "stringio"
- a = StringIO.new("hoge")
- a.readchar               #=> 104
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge")
+a.readbyte               #=> 104
+#@end
 
 @raise EOFError 文字列の終端に到達した時に発生します。
 
@@ -408,11 +443,13 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge\nfoo\nbar\n")
-  a.readline                           #=> "hoge\n"
-  a.readline(nil)                      #=> "foo\nbar\n"
-  a.readline                           #=> EOFError が発生する
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge\nfoo\nbar\n")
+a.readline                           #=> "hoge\n"
+a.readline(nil)                      #=> "foo\nbar\n"
+a.readline                           #=> EOFError が発生する
+#@end
 
 @see [[m:$/]]
 
@@ -425,10 +462,12 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge\nfoo\nbar\n")
-  a.readlines                          #=> ["hoge\n", "foo\n", "bar\n"]
-  a.readlines                          #=> []
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge\nfoo\nbar\n")
+a.readlines                          #=> ["hoge\n", "foo\n", "bar\n"]
+a.readlines                          #=> []
+#@end
 
 @see [[m:$/]]
 
@@ -438,13 +477,13 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @param sio 自身が表したい StringIO を指定します。
 
-例: 
-
-  require 'stringio'
-  sio = StringIO.new("hoge", 'r+')
-  sio2 = StringIO.new("foo", 'r+')
-  sio.reopen(sio2)
-  p sio.read                       #=> "foo"
+#@samplecode 例
+require 'stringio'
+sio = StringIO.new("hoge", 'r+')
+sio2 = StringIO.new("foo", 'r+')
+sio.reopen(sio2)
+p sio.read                       #=> "foo"
+#@end
 
 --- reopen(str, mode = 'r+')     -> StringIO
 
@@ -461,12 +500,12 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 
 @raise Errno::EACCES str がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
-例: 
-
-  require 'stringio'
-  sio = StringIO.new("hoge", 'r+')
-  sio.reopen('foo')
-  p sio.read                      #=> "foo"
+#@samplecode 例
+require 'stringio'
+sio = StringIO.new("hoge", 'r+')
+sio.reopen('foo')
+p sio.read                      #=> "foo"
+#@end
 
 --- rewind    -> 0
 
@@ -571,12 +610,14 @@ len を返します。
 
 @raise Errno::EINVAL len がマイナスの時に発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge", 'r+')
-  a.truncate(2)
-  a.string                       #=> "ho"
-  a.truncate(5)
-  a.string                       #=> "ho\000\000\000"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge", 'r+')
+a.truncate(2)
+a.string                       #=> "ho"
+a.truncate(5)
+a.string                       #=> "ho\000\000\000"
+#@end
 
 --- tty?    -> false
 
@@ -595,30 +636,32 @@ nil を返します。
 
 @raise IOError 自身が読み込み可能でない時に発生します。
 
-      require "stringio"
-      s = StringIO.new("hoge")
-      s.pos = 1
-      s.ungetc("H")
-      p s.string   # => "Hoge"
-      p s.pos      # => 0
+#@samplecode 例
+require "stringio"
+s = StringIO.new("hoge")
+s.pos = 1
+s.ungetc("H")
+p s.string   # => "Hoge"
+p s.pos      # => 0
 
-      s = StringIO.new("hoge")
-      s.pos = 1
-      s.ungetc("H".ord)
-      p s.string   # => "Hoge"
-      p s.pos      # => 0
+s = StringIO.new("hoge")
+s.pos = 1
+s.ungetc("H".ord)
+p s.string   # => "Hoge"
+p s.pos      # => 0
 
-      s = StringIO.new("hoge")
-      s.pos = 4
-      s.ungetc("HOGE")
-      p s.string   # => "hogHOGE"
-      p s.pos      # => 3
+s = StringIO.new("hoge")
+s.pos = 4
+s.ungetc("HOGE")
+p s.string   # => "hogHOGE"
+p s.pos      # => 3
 
-      s = StringIO.new("hoge")
-      s.pos = 8
-      s.ungetc("A")
-      p s.string   # => "hoge\000\000\000A"
-      p s.pos      # => 7
+s = StringIO.new("hoge")
+s.pos = 8
+s.ungetc("A")
+p s.string   # => "hoge\000\000\000A"
+p s.pos      # => 7
+#@end
 
 #@else
 --- ungetc(ch)    -> nil
@@ -635,18 +678,20 @@ nil を返します。
 
 @raise IOError 自身が読み込み可能でない時に発生します。
 
-      require "stringio"
-      s = StringIO.new("hoge")
-      s.pos = 1
-      s.ungetc(?H)
-      p s.string   #=> "Hoge"
-      p s.pos        #=> 0
+#@samplecode 例
+require "stringio"
+s = StringIO.new("hoge")
+s.pos = 1
+s.ungetc(?H)
+p s.string   #=> "Hoge"
+p s.pos        #=> 0
 
-      s = StringIO.new("hoge")
-      s.pos = 8
-      s.ungetc(?A)
-      p s.string   #=> "hoge\000\000\000A"
-      p s.pos        #=> 7
+s = StringIO.new("hoge")
+s.pos = 8
+s.ungetc(?A)
+p s.string   #=> "hoge\000\000\000A"
+p s.pos        #=> 7
+#@end
 #@end
 
 #@since 2.5.0
@@ -665,10 +710,12 @@ nil を返します。
 
 @raise IOError 自身が書き込み可能でない時に発生します。
 
-  require "stringio"
-  a = StringIO.new("hoge", 'r+')
-  a.write("aaa")                 #=> 3
-  a.string                       #=> "aaae"
+#@samplecode 例
+require "stringio"
+a = StringIO.new("hoge", 'r+')
+a.write("aaa")                 #=> 3
+a.string                       #=> "aaae"
+#@end
 
 
 --- each_char{|c| ... } -> self

@@ -32,10 +32,12 @@ Pathname のインスタンスメソッドには、ディレクトリのパス�
 
 Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m:Kernel#Pathname]] も使えます。
 
-  require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-  Pathname.new("foo/bar") # => #<Pathname:foo/bar>
-  Pathname("foo/bar")     # => #<Pathname:foo/bar>
+Pathname.new("foo/bar") # => #<Pathname:foo/bar>
+Pathname("foo/bar")     # => #<Pathname:foo/bar>
+#@end
 
 
 == Constants
@@ -118,15 +120,17 @@ other は Pathname オブジェクトでなければなりません。
 
 @param other 比較対象の Pathname オブジェクトを指定します。
 
-    require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-    p Pathname.new("foo/bar") == Pathname.new("foo/bar")
-    p Pathname.new("foo/bar") == Pathname.new("foo//bar")
-    p Pathname.new("foo/../foo/bar") == Pathname.new("foo/bar")
+p Pathname.new("foo/bar") == Pathname.new("foo/bar")
+p Pathname.new("foo/bar") == Pathname.new("foo//bar")
+p Pathname.new("foo/../foo/bar") == Pathname.new("foo/bar")
 
-    # => true
-         false
-         false
+# => true
+#    false
+#    false
+#@end
 
 --- <=>(other) -> -1 | 0 | 1 | nil
 
@@ -139,14 +143,16 @@ other は Pathname オブジェクトでなければなりません。
 
 @param other 比較対象の Pathname オブジェクトを指定します。
 
-    require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-    p Pathname.new("foo/bar") <=> Pathname.new("foo/bar")
-    p Pathname.new("foo/bar") <=> Pathname.new("foo//bar")
-    p Pathname.new("foo/../foo/bar") <=> Pathname.new("foo/bar")
-    => 0
-       1
-       -1
+p Pathname.new("foo/bar") <=> Pathname.new("foo/bar")
+p Pathname.new("foo/bar") <=> Pathname.new("foo//bar")
+p Pathname.new("foo/../foo/bar") <=> Pathname.new("foo/bar")
+# => 0
+#    1
+#    -1
+#@end
 
 --- hash -> Integer
 ハッシュ値を返します。
@@ -164,10 +170,12 @@ to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジ�
 渡せるようにするために用意されています。
 #@end
 
-    require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-    path = Pathname.new("/tmp/hogehoge")
-    File.open(path)
+path = Pathname.new("/tmp/hogehoge")
+File.open(path)
+#@end
 
 --- cleanpath(consider_symlink = false) -> Pathname
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
@@ -178,24 +186,26 @@ cleanpath は、実際にファイルシステムを参照することなく、�
 @param consider_symlink 真ならパス要素にシンボリックリンクがあった場合
                         にも問題ないように .. を残します。
 
-    require "pathname"
-    path = Pathname.new("//.././../")
-    path                  # => #<Pathname://.././../>
-    path.cleanpath        # => #<Pathname:/>
+#@samplecode 例
+require "pathname"
+path = Pathname.new("//.././../")
+path                  # => #<Pathname://.././../>
+path.cleanpath        # => #<Pathname:/>
 
 
-    require 'pathname'
-    Dir.rmdir("/tmp/foo")      rescue nil
-    File.unlink("/tmp/bar/foo") rescue nil
-    Dir.rmdir("/tmp/bar")      rescue nil
-    Dir.mkdir("/tmp/foo")
-    Dir.mkdir("/tmp/bar")
-    File.symlink("../foo", "/tmp/bar/foo")
-    path = Pathname.new("bar/././//foo/../bar")
-    Dir.chdir("/tmp")
+require 'pathname'
+Dir.rmdir("/tmp/foo")      rescue nil
+File.unlink("/tmp/bar/foo") rescue nil
+Dir.rmdir("/tmp/bar")      rescue nil
+Dir.mkdir("/tmp/foo")
+Dir.mkdir("/tmp/bar")
+File.symlink("../foo", "/tmp/bar/foo")
+path = Pathname.new("bar/././//foo/../bar")
+Dir.chdir("/tmp")
 
-    path.cleanpath       # => #<Pathname:bar/bar>
-    path.cleanpath(true) # => #<Pathname:bar/foo/../bar>
+path.cleanpath       # => #<Pathname:bar/bar>
+path.cleanpath(true) # => #<Pathname:bar/foo/../bar>
+#@end
 
 #@since 1.9.2
 --- realpath(basedir = nil) -> Pathname
@@ -212,23 +222,25 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発
 @param basedir ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 #@end
 
-    require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-    Dir.rmdir("/tmp/foo")      rescue nil
-    File.unlink("/tmp/bar/foo") rescue nil
-    Dir.rmdir("/tmp/bar")      rescue nil
+Dir.rmdir("/tmp/foo")      rescue nil
+File.unlink("/tmp/bar/foo") rescue nil
+Dir.rmdir("/tmp/bar")      rescue nil
 
-    Dir.mkdir("/tmp/foo")
-    Dir.mkdir("/tmp/bar")
-    File.symlink("../foo", "/tmp/bar/foo")
-    path = Pathname.new("bar/././//foo/../bar")
+Dir.mkdir("/tmp/foo")
+Dir.mkdir("/tmp/bar")
+File.symlink("../foo", "/tmp/bar/foo")
+path = Pathname.new("bar/././//foo/../bar")
 
-    Dir.chdir("/tmp")
+Dir.chdir("/tmp")
 
-    p path.realpath
+p path.realpath
 
-    => ruby 1.8.0 (2003-10-10) [i586-linux]
-       #<Pathname:/tmp/bar>
+# => ruby 1.8.0 (2003-10-10) [i586-linux]
+#    #<Pathname:/tmp/bar>
+#@end
 
 @see [[m:Pathname#realdirpath]], [[m:File.realpath]]
 
@@ -324,13 +336,15 @@ p.relative? #=> true
 --- each_filename {|v| ... } -> nil
 self のパス名要素毎にブロックを実行します。
 
-    require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-    Pathname.new("/foo/../bar").each_filename {|v| p v}
+Pathname.new("/foo/../bar").each_filename {|v| p v}
 
-    # => "foo"
-         ".."
-         "bar"
+# => "foo"
+#    ".."
+#    "bar"
+#@end
 
 --- +(other) -> Pathname
 #@since 2.2.0
@@ -343,12 +357,14 @@ Pathname オブジェクトを生成して返します。
 other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
 れます。
 
- require 'pathname'
+#@samplecode 例
+require 'pathname'
 
- Pathname("foo/bar")+"baz" # => #<Pathname:foo/bar/baz>
- Pathname("foo/bar/")+"baz" # => #<Pathname:foo/bar/baz>
- Pathname("foo/bar")+"/baz" # => #<Pathname:/baz>
- Pathname("foo/bar")+"../baz" # => #<Pathname:foo/baz>
+Pathname("foo/bar")+"baz" # => #<Pathname:foo/bar/baz>
+Pathname("foo/bar/")+"baz" # => #<Pathname:foo/bar/baz>
+Pathname("foo/bar")+"/baz" # => #<Pathname:/baz>
+Pathname("foo/bar")+"../baz" # => #<Pathname:foo/baz>
+#@end
 
 @param other 文字列か Pathname オブジェクトを指定します。
 
@@ -362,8 +378,10 @@ self 配下にあるパス名(Pathnameオブジェクト)の配列を返しま�
 
 @raise Errno::EXXX self が存在しないパスであったりディレクトリでなければ例外が発生します。
 
-    require 'pathname'
-    Pathname.new("/tmp").children # => [#<Pathname:.X11-unix>, #<Pathname:.iroha_unix>, ... ]
+#@samplecode 例
+require 'pathname'
+Pathname.new("/tmp").children # => [#<Pathname:.X11-unix>, #<Pathname:.iroha_unix>, ... ]
+#@end
 
 
 #@since 1.9.2
@@ -415,12 +433,16 @@ base_directory も絶対パスでなければなりません。
 
 @param base_directory ベースディレクトリを表す Pathname オブジェクトを指定します。
 
-    require 'pathname'
+@raise ArgumentError Windows上でドライブが違うなど、base_directory から self への相対パスが求められないときに例外が発生します。
 
-    path = Pathname.new("/tmp/foo")
-    base = Pathname.new("/tmp")
+#@samplecode 例
+require 'pathname'
 
-    path.relative_path_from(base) # => #<Pathname:foo>
+path = Pathname.new("/tmp/foo")
+base = Pathname.new("/tmp")
+
+path.relative_path_from(base) # => #<Pathname:foo>
+#@end
 
 
 
@@ -944,11 +966,11 @@ FileTest.world_writable?(self.to_s) と同じです。
 
 #@since 2.1.0
 
---- write(string, offset=nil, opt={}) -> Integer
+--- write(string, offset=nil, **opts) -> Integer
 
 #@#noexample IO.write の例を参照
 
-IO.write(self.to_s, *args)と同じです。
+IO.write(self.to_s, string, offset, **opts)と同じです。
 
 @see [[m:IO.write]]
 
@@ -1041,7 +1063,14 @@ pp Pathname('/usr/local').entries
 
 
 --- each_entry {|pathname| ... } -> nil
+#@since 3.2
+--- each_entry -> Enumerator
+#@end
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
+
+#@since 3.2
+ブロックを省略した場合は [[c:Enumerator]] を返します。
+#@end
 
 #@samplecode 例
 require "pathname"
@@ -1134,20 +1163,22 @@ self のパス名から親方向に辿っていったときの各パス名を新
 ブジェクトとして生成し、ブロックへの引数として渡して実行します。
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 
-  require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-  Pathname.new('/path/to/some/file.rb').ascend {|v| p v}
-     #<Pathname:/path/to/some/file.rb>
-     #<Pathname:/path/to/some>
-     #<Pathname:/path/to>
-     #<Pathname:/path>
-     #<Pathname:/>
+Pathname.new('/path/to/some/file.rb').ascend {|v| p v}
+# => #<Pathname:/path/to/some/file.rb>
+#    #<Pathname:/path/to/some>
+#    #<Pathname:/path/to>
+#    #<Pathname:/path>
+#    #<Pathname:/>
 
-  Pathname.new('path/to/some/file.rb').ascend {|v| p v}
-     #<Pathname:path/to/some/file.rb>
-     #<Pathname:path/to/some>
-     #<Pathname:path/to>
-     #<Pathname:path>
+Pathname.new('path/to/some/file.rb').ascend {|v| p v}
+# => #<Pathname:path/to/some/file.rb>
+#    #<Pathname:path/to/some>
+#    #<Pathname:path/to>
+#    #<Pathname:path>
+#@end
 
 ファイルシステムにはアクセスしません。
 
@@ -1159,20 +1190,22 @@ Pathname オブジェクトとして生成し、ブロックへの引数とし�
 す。
 ブロックを省略した場合は [[c:Enumerator]] を返します。
 
-  require 'pathname'
+#@samplecode 例
+require 'pathname'
 
-  Pathname.new('/path/to/some/file.rb').descend {|v| p v}
-     #<Pathname:/>
-     #<Pathname:/path>
-     #<Pathname:/path/to>
-     #<Pathname:/path/to/some>
-     #<Pathname:/path/to/some/file.rb>
+Pathname.new('/path/to/some/file.rb').descend {|v| p v}
+# => #<Pathname:/>
+#    #<Pathname:/path>
+#    #<Pathname:/path/to>
+#    #<Pathname:/path/to/some>
+#    #<Pathname:/path/to/some/file.rb>
 
-  Pathname.new('path/to/some/file.rb').descend {|v| p v}
-     #<Pathname:path>
-     #<Pathname:path/to>
-     #<Pathname:path/to/some>
-     #<Pathname:path/to/some/file.rb>
+Pathname.new('path/to/some/file.rb').descend {|v| p v}
+# => #<Pathname:path>
+#    #<Pathname:path/to>
+#    #<Pathname:path/to/some>
+#    #<Pathname:path/to/some/file.rb>
+#@end
 
 ファイルシステムにはアクセスしません。
 

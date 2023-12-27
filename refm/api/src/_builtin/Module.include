@@ -6,14 +6,16 @@
 
 @raise ArgumentError 継承関係が循環してしまうような include を行った場合に発生します。
 
-  module M
-  end
-  module M2
-    include M
-  end
-  module M
-    include M2
-  end
+#@samplecode 例
+module M
+end
+module M2
+  include M
+end
+module M
+  include M2
+end
+#@end
 
 実行結果:
 
@@ -30,14 +32,16 @@
 #@end
 インクルードは多重継承の代わりに用いられており、 mix-in とも呼びます。
 
-  class C
-    include FileTest
-    include Math
-  end
+#@samplecode 例
+class C
+  include FileTest
+  include Math
+end
 
-  p C.ancestors
+p C.ancestors
 
-  # => [C, Math, FileTest, Object, Kernel]
+# => [C, Math, FileTest, Object, Kernel]
+#@end
 
 モジュールの機能追加は、クラスの継承関係の間にそのモジュールが挿入
 されることで実現されています。従って、メソッドの探索などは
@@ -47,16 +51,18 @@
 
 同じモジュールを二回以上 include すると二回目以降は無視されます。
 
-  module M
-  end
-  class C1
-    include M
-  end
-  class C2 < C1
-    include M   # この include は無視される
-  end
+#@samplecode 例
+module M
+end
+class C1
+  include M
+end
+class C2 < C1
+  include M   # この include は無視される
+end
 
-  p C2.ancestors  # => [C2, C1, M, Object, Kernel]
+p C2.ancestors  # => [C2, C1, M, Object, Kernel]
+#@end
 
 引数に複数のモジュールを指定した場合、
 最後の引数から順にインクルードします。

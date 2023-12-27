@@ -256,14 +256,14 @@ a, b = raise rescue [1, 2]
     これは deprecated です。 [[feature:15575]]
     この警告は「-W:no-deprecated」オプションで止められます。
 
-#@samplecode
+//emlist{
 def foo
   class << Object.new
     yield #=> warning: `yield' in class syntax will not be supported from Ruby 3.0. [[feature:15575]]
   end
 end
 foo { p :ok }
-#@end
+//}
 
   * 引数を転送する記法「(...)」が導入されました。 [[feature:16253]]
     * foo の全ての引数(キーワード引数やブロックを含む)を bar に転送します。
@@ -278,7 +278,11 @@ end
   * 「$SAFE」の参照や代入は警告が表示されるようになりました。
     Ruby 3.0 で「$SAFE」は普通のグローバル変数になる予定です。 [[feature:16131]]
 
+#@since 3.2
+  * Object#taint,Object#untaint,Object#trust,Object#untrustと関連する
+#@else
   * [[m:Object#taint]],[[m:Object#untaint]],[[m:Object#trust]],[[m:Object#untrust]]と関連する
+#@end
     C の関数は何もしなくなりました。(全てのオブジェクトは untainted 扱いです。)
     verbose モードでは警告が表示されます。
     この警告は Ruby 3.0 では verbose モードでなくても表示され、Ruby 3.2 で削除される
@@ -378,6 +382,10 @@ $ RUBYOPT='-W:no-deprecated -W:no-experimental' ruby -e '($; = "") in a'
         [[m:Enumerator::Lazy#eager]]メソッドが追加されました。 [[feature:15901]]
       * [[m:Enumerator::Yielder#to_proc]]メソッドが追加され、Yielder オブジェクトを
         直接他のメソッドのブロック引数として渡せるようになりました。 [[feature:15618]]
+      * [[m:Enumerator::Lazy#with_index]]メソッドが追加され、
+        以前のlazyではない[[m:Enumerator#with_index]]のデフォルト実装から
+	lazyになりました。[[bug:7877]]
+
 #@samplecode Enumerator.produce
 require "date"
 dates = Enumerator.produce(Date.today, &:succ) #=> infinite sequence of dates
@@ -388,6 +396,12 @@ a = %w(foo bar baz)
 e = a.lazy.map {|x| x.upcase }.map {|x| x + "!" }.eager
 p e.class               #=> Enumerator
 p e.map {|x| x + "?" }  #=> ["FOO!?", "BAR!?", "BAZ!?"]
+#@end
+#@samplecode Enumerator::Lazy#with_index
+("a"..).lazy.with_index(1) { |it, index| puts "#{index}:#{it}" }.take(3).force
+# => 1:a
+#    2:b
+#    3:c
 #@end
 
   * [[c:Fiber]]

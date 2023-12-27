@@ -134,7 +134,7 @@ p $~.captures   # => ["foo", "bar", nil]
 p $~.size       # => 4
 #@end
 
---- offset(n) -> [Integer]
+--- offset(n) -> [Integer, Integer] | [nil, nil]
 
 n 番目の部分文字列のオフセットの配列 [start, end] を返
 します。
@@ -150,8 +150,80 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 @raise IndexError 範囲外の n を指定した場合に発生します。
 
+#@since 3.2
+@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#offset]]
+#@else
 @see [[m:MatchData#begin]], [[m:MatchData#end]]
+#@end
+--- offset(name) -> [Integer, Integer] | [nil, nil]
 
+name という名前付きグループに対応する部分文字列のオフセットの配列 [start, end] を返
+します。
+
+#@samplecode 例
+[ self.begin(name), self.end(name) ]
+#@end
+
+と同じです。nameの名前付きグループにマッチした部分文字列がなければ
+[nil, nil] を返します。
+
+@param name 名前(シンボルか文字列)
+
+@raise IndexError 正規表現中で定義されていない name を指定した場合に発生します。
+
+#@samplecode 例
+/(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
+p $~.offset('year')    # => [0, 4]
+p $~.offset(:year)     # => [0, 4]
+p $~.offset('month')   # => [5, 6]
+p $~.offset(:month)    # => [5, 6]
+p $~.offset('day')     # => [nil, nil]
+p $~.offset('century') # => `offset': undefined group name reference: century (IndexError)
+#@end
+
+#@since 3.2
+@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#offset]]
+#@else
+@see [[m:MatchData#begin]], [[m:MatchData#end]]
+#@end
+#@since 3.2
+--- byteoffset(n) -> [Integer, Integer] | [nil, nil]
+
+n 番目の部分文字列のバイト単位のオフセットの
+配列 [start, end] を返します。
+
+n番目の部分文字列がマッチしていなければ [nil, nil] を返します。
+
+@param n 部分文字列を指定する数値
+
+@raise IndexError 範囲外の n を指定した場合に発生します。
+
+@see [[m:MatchData#offset]]
+
+--- byteoffset(name) -> [Integer, Integer] | [nil, nil]
+
+name という名前付きグループに対応する部分文字列のバイト単位のオフセットの
+配列 [start, end] を返します。
+
+nameの名前付きグループにマッチした部分文字列がなければ
+[nil, nil] を返します。
+
+@param name 名前(シンボルか文字列)
+
+@raise IndexError 正規表現中で定義されていない name を指定した場合に発生します。
+
+#@samplecode 例
+/(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
+p $~.byteoffset('year')    # => [0, 4]
+p $~.byteoffset(:year)     # => [0, 4]
+p $~.byteoffset('month')   # => [7, 8]
+p $~.byteoffset(:month)    # => [7, 8]
+p $~.byteoffset('day')     # => [nil, nil]
+p $~.byteoffset('century') # => `offset': undefined group name reference: century (IndexError)
+#@end
+
+@see [[m:MatchData#offset]]
+#@end
 --- post_match -> String
 
 マッチした部分より後ろの文字列を返します([[m:$']]と同じ)。

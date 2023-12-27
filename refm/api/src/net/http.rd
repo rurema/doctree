@@ -60,7 +60,7 @@ puts res.body
 url = URI.parse('http://www.example.com/todo.cgi')
 req = Net::HTTP::Post.new(url.path)
 req.basic_auth 'jack', 'pass'
-req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'}, ';')
+req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'})
 res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
 case res
 when Net::HTTPSuccess, Net::HTTPRedirection
@@ -691,7 +691,7 @@ proxyport は時代遅れのメソッドです。
 この秒数たってもコネクションが
 開かなければ例外 [[c:Net::OpenTimeout]] を発生します。
 
-デフォルトは60(秒)です。
+デフォルトは 60 (秒)です。
 
 @see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
 
@@ -1896,7 +1896,7 @@ req['Content-Range'] = "bytes 1-500/1000"
 req.range_length # => 500
 #@end
 
---- delete(key) -> String | nil
+--- delete(key) -> [String] | nil
 key ヘッダフィールドを削除します。
 
 @param key 削除するフィールド名
@@ -1911,7 +1911,7 @@ uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.content_length = 10
 req.content_length  # => 10
-req.delete("Content-Length")
+req.delete("Content-Length")  # => ["10"]
 req.content_length  # => nil
 #@end
 

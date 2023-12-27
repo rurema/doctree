@@ -192,8 +192,8 @@ key に関連づけられた値を返します。該当するキーが登録さ�
 クが与えられていればそのブロックを評価した値を返します。そのいずれ
 でもなければ例外が発生します。
 
-@param key       環境変数の名前を指定します。 文字列で指定します。文字列
-                 で指定します。文字列以外のオブジェクトを指定した場合は
+@param key       環境変数の名前を指定します。 文字列で指定します。
+                 文字列以外のオブジェクトを指定した場合は
                  to_str メソッドによる暗黙の型変換を試みます。
 @param default   keyに対応する環境変数の値がないときにこの値を返します。 
 #@since 1.9.1
@@ -209,8 +209,8 @@ key に関連づけられた値を返します。該当するキーが登録さ�
 
 key で指定される環境変数が存在する時、真を返します。
 
-@param key 環境変数の名前を指定します。文字列で指定します。文字列で指定
-           します。文字列以外のオブジェクトを指定した場合は to_str メソッ
+@param key 環境変数の名前を指定します。文字列で指定します。
+           文字列以外のオブジェクトを指定した場合は to_str メソッ
            ドによる暗黙の型変換を試みます。
 
 --- has_value?(val) -> bool
@@ -278,7 +278,7 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じ�
 環境変数名と値についてブロックを評価し、真を返したものを集めたハッシュ
 を返します。
 
---- shift -> [String, String]
+--- shift -> [String, String] | nil
 
 環境変数を一つ取り除いて、それを名前と値の組の配列で返します。
 環境変数が一つも設定されていなければ nil を返します。
@@ -310,15 +310,39 @@ ENV.to_h {|name, value| [name, value.size] }
 
 環境変数を文字列化します。 Hash#to_s と同じように動作します。
 
+#@since 3.2
+--- merge!(*others) -> ENV
+--- merge!(*others) {|key, self_val, other_val| ... } -> ENV
+--- update(*others) -> ENV
+--- update(*others) {|key, self_val, other_val| ... } -> ENV
+
+ハッシュ others の内容を環境変数にマージします。重複するキー
+に対応する値は others の内容で上書きされます。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+@param others マージ用のハッシュです。
+#@else
 --- update(other) -> ENV
+--- update(other) {|key, self_val, other_val| ... } -> ENV
+#@since 2.7.0
+--- merge!(other) -> ENV
+--- merge!(other) {|key, self_val, other_val| ... } -> ENV
+#@end
 
 ハッシュ other の内容を環境変数にマージします。重複するキー
 に対応する値は other の内容で上書きされます。
 
-self を返します。
+self と other に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に other の値を使います。
 
 @param other  上書きするハッシュを指定します。
-
+#@end
 --- values -> [String]
 
 環境変数の全値の配列を返します。
@@ -439,7 +463,7 @@ ENV.replace(saved_env)
 #@end
 
 @see [[m:Object#clone]]
-#@since 3.1.0
+#@since 3.1
 @see [[m:ENV.dup]]
 --- dup -> ()
 [[c:TypeError]]を発生させます。

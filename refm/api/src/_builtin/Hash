@@ -384,7 +384,9 @@ p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
 
 @see [[m:Hash#key]]
 
---- fetch(key, default = nil) {|key| ... } -> object
+--- fetch(key) -> object
+--- fetch(key, default) -> object
+--- fetch(key) {|key| ... } -> object
 
 key に関連づけられた値を返します。該当するキーが登録されてい
 ない時には、引数 default が与えられていればその値を、ブロッ
@@ -779,9 +781,14 @@ p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
 
 selfと同じ内容を持つ新しいハッシュを返します。
 
-clone は frozen tainted singleton-class の情報も含めてコピーしますが、 dup は内容だけをコピーします。
-またどちらのメソッドも要素それ自体のコピーはしません。つまり参照しているオブジェクトが
-変わらない「浅い(shallow)」コピーを行います。
+clone は frozen singleton-class の情報も含めてコピーしますが、
+#@since 2.7.0
+dup は内容だけをコピーします。
+#@else
+dup は内容と tainted だけをコピーします。
+#@end
+またどちらのメソッドも要素それ自体のコピーはしません。
+つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
 
 #@samplecode 例
 h1 = {"have" => "have a","as" => "as a" }
@@ -933,15 +940,19 @@ p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
 --- key(val) -> object
+#@until 3.0
 --- index(val) -> object
+#@end
 
 値 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
 
 該当するキーが複数存在する場合、どのキーを返すかは不定です。
 
+#@until 3.0
 Hash#index は obsolete です。
 使用すると警告メッセージが表示されます。
+#@end
 
 @param val 探索に用いる値を指定します。
 
@@ -1573,7 +1584,7 @@ h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 #@end
 --- transform_keys!                -> Enumerator
 
-すべての値に対してブロックを呼び出した結果でハッシュのキーを変更します。
+すべてのキーに対してブロックを呼び出した結果でハッシュのキーを変更します。
 値は変化しません。
 
 #@since 3.0.0

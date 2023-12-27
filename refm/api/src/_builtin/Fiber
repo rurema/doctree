@@ -35,16 +35,17 @@ Ruby 3.1 から fiber を require しなくても、
 
 ファイバー実行中に例外が発生した場合、親ファイバーに例外が伝播します。
 
-例:
- f = Fiber.new do
-   raise StandardError, "hoge"
- end
- 
- begin
-   f.resume     # ここでも StandardError が発生する。
- rescue => e
-   p e.message  #=> "hoge"
- end
+#@samplecode 例:
+f = Fiber.new do
+  raise StandardError, "hoge"
+end
+
+begin
+f.resume     # ここでも StandardError が発生する。
+rescue => e
+p e.message  #=> "hoge"
+end
+#@end
 
 === ショートチュートリアル
 
@@ -54,53 +55,59 @@ Ruby 3.1 から fiber を require しなくても、
 生成したファイバーに対して [[m:Fiber#resume]] を呼ぶことによりコンテキストを切り替えます。
 子ファイバーのブロック中で [[m:Fiber.yield]] を呼ぶと親にコンテキストを切り替えます。
 Fiber.yield の引数が、親での Fiber#resume の返り値になります。
- f = Fiber.new do
-   n = 0
-   loop do
-     Fiber.yield(n)
-     n += 1
-   end
- end
- 
- 5.times do
-  p f.resume
- end
- 
- #=> 0
-     1
-     2
-     3
-     4
+#@samplecode 例:
+f = Fiber.new do
+  n = 0
+  loop do
+    Fiber.yield(n)
+    n += 1
+  end
+end
+
+5.times do
+ p f.resume
+end
+
+#=> 0
+    1
+    2
+    3
+    4
+#@end
 
 以下は内部イテレータを外部イテレータに変換する例です。
 実際 [[c:Enumerator]] は Fiber を用いて実装されています。
 
- def enum2gen(enum)
-   Fiber.new do
-     enum.each{|i|
-       Fiber.yield(i)
-     }
-   end
- end
+#@samplecode 例:
+def enum2gen(enum)
+  Fiber.new do
+    enum.each{|i|
+      Fiber.yield(i)
+    }
+  end
+end
  
- g = enum2gen(1..100)
+g = enum2gen(1..100)
  
- p g.resume  #=> 1
- p g.resume  #=> 2
- p g.resume  #=> 3
+p g.resume  #=> 1
+p g.resume  #=> 2
+p g.resume  #=> 3
+#@end
 
 === 注意
 
 Thread クラスが表すスレッド間をまたがるファイバーの切り替えはできません。
 例外 FiberError が発生します。
 
- f = nil
- Thread.new do
-   f = Fiber.new{}
- end.join
- f.resume
- #=> t.rb:5:in `resume': fiber called across threads (FiberError)
-        from t.rb:5:in `<main>'
+#@samplecode 例:
+f = nil
+Thread.new do
+  f = Fiber.new{}
+end.join
+f.resume
+#=> t.rb:5:in `resume': fiber called across threads (FiberError)
+#      from t.rb:5:in `<main>'
+#@end
 
 == Class Methods
 #@since 3.1
@@ -115,15 +122,17 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
 ブロックが終了した場合は親にコンテキストが切り替わります。
 その時ブロックの評価値が返されます。
 
- a = nil
- f = Fiber.new do |obj|
-   a = obj
-   :hoge
- end
+#@samplecode 例:
+a = nil
+f = Fiber.new do |obj|
+  a = obj
+  :hoge
+end
   
- b = f.resume(:foo)
- p a  #=> :foo
- p b  #=> :hoge
+b = f.resume(:foo)
+p a  #=> :foo
+p b  #=> :hoge
+#@end
 
 --- yield(*arg = nil)   -> object
 
@@ -136,17 +145,17 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り�
 @raise FiberError Fiber でのルートファイバーで呼ばれた場合に発生します。
 
 
-例:
-
- a = nil
- f = Fiber.new do
-   a = Fiber.yield()
- end
+#@samplecode 例:
+a = nil
+f = Fiber.new do
+  a = Fiber.yield()
+end
   
- f.resume()
- f.resume(:foo)
+f.resume()
+f.resume(:foo)
 
- p a  #=> :foo
+p a  #=> :foo
+#@end
 
 == Instance Methods
 #@since 3.1
@@ -221,15 +230,16 @@ p f.raise StopIteration # => :exit
                   呼び出した場合に発生します。
 #@end
 
-例:
+#@samplecode 例:
 
- f = Fiber.new do
-   Fiber.yield(:hoge)
-   :fuga
- end
+f = Fiber.new do
+  Fiber.yield(:hoge)
+  :fuga
+end
   
- p f.resume() #=> :hoge
- p f.resume() #=> :fuga
- p f.resume() #=> FiberError: dead fiber called
+p f.resume() #=> :hoge
+p f.resume() #=> :fuga
+p f.resume() #=> FiberError: dead fiber called
+#@end
 
 #@end

@@ -685,6 +685,38 @@ ensure 節を実行せずにスレッドの実行を終了させます。
     p Thread.current.group == ThreadGroup::Default
     # => true
 
+#@since 3.0.0
+--- ignore_deadlock -> bool
+
+デッドロック検知を無視する機能のon/offを返します。
+
+デフォルト値はfalseで、デッドロックが検知されます。
+
+#@#noexample Thread#ignore_deadlock=を参照
+
+@see [[m:Thread#ignore_deadlock=]]
+#@end
+
+#@since 3.0.0
+--- ignore_deadlock=(bool)
+
+デッドロック検知を無視する機能をon/offします。デフォルト値はfalseです。
+
+trueを渡すとデッドロックを検知しなくなります。
+
+#@samplecode
+Thread.ignore_deadlock = true
+queue = Thread::Queue.new
+
+trap(:SIGUSR1){queue.push "Received signal"}
+
+# ignore_deadlockがfalseだとエラーが発生する
+puts queue.pop
+#@end
+
+@see [[m:Thread#ignore_deadlock]]
+#@end
+
 --- join           -> self
 --- join(limit)    -> self | nil
 
@@ -810,6 +842,7 @@ a.join
 
 @see [[m:Thread#wakeup]], [[m:Thread.stop]]
 
+#@until 3.0
 --- safe_level    -> Integer
 
 #@since 2.6.0
@@ -831,7 +864,7 @@ thr = Thread.new { $SAFE = 1; sleep }
 Thread.current.safe_level   # => 0
 thr.safe_level              # => 1
 #@end
-
+#@end
 --- status    -> String | false | nil
 
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず

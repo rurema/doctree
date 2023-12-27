@@ -661,21 +661,20 @@ p true.object_id #=> 20
 
 --- hash -> Integer
 
-オブジェクトのハッシュ値を返します。[[c:Hash]] クラスでオブジェク
-トを格納するのに用いられています。
+オブジェクトのハッシュ値を返します。このハッシュ値は、[[m:Object#eql?]] と合わせて [[c:Hash]] クラスで、2つのオブジェクトを同一のキーとするか判定するために用いられます。
 
-メソッド hash は [[m:Object#eql?]] と組み合わせて Hash クラスで利用されます。その際
+2つのオブジェクトのハッシュ値が異なるとき、直ちに異なるキーとして判定されます。
+逆に、2つのハッシュ値が同じとき、さらに [[m:Object#eql?]] での比較により判定されます。
+そのため、同じキーとして判定される状況は [[m:Object#eql?]] の比較で真となる場合のみであり、このとき前段階としてハッシュ値どうしが等しい必要があります。
+つまり、
 
   A.eql?(B) ならば A.hash == B.hash
 
-の関係を必ず満たしていなければいけません。eql? を再定義した時には必ずこちらも合わせ
-て再定義してください。
+の関係が満たされている必要があります。
 
-デフォルトでは、[[m:Object#object_id]] と同じ値を返します。
-ただし、[[c:Integer]], [[c:Symbol]], [[c:String]] だけは組込みのハッ
-シュ関数が使用されます(これを変えることはできません)。
+ただし、ハッシュのキーとして [[c:Integer]], [[c:Symbol]], [[c:String]] などの特定の組み込みクラスが使われるときは、組込みのハッシュ関数が使用され、hash メソッドは呼ばれません。
 
-hash を再定義する場合は、一様に分布する任意の整数を返すようにします。
+hash メソッドを再定義する場合は、一様に分布する任意の整数を返すようにします。
 
 @return ハッシュ値を返します。Ruby 内部の固定長整数 fixnum に収まらない場合は切り捨てられます。
 
@@ -691,15 +690,16 @@ p :ruby.hash  #=> 3979895509189707770
 p :ruby.hash  #=> 3979895509189707770
 #@end
 
-@see [[m:Object#eql?]],[[m:BasicObject#__id__]]
+@see [[m:Object#eql?]], [[m:Hash#[] ]]
 
 --- ===(other) -> bool
 
-メソッド [[m:Object#==]] の別名です。
-case 式で使用されます。このメソッドは case 式での振る舞いを考慮して、
+case 式で使用されるメソッドです。[[ref:d:spec/control#case]] も参照してください。
+
+このメソッドは case 式での振る舞いを考慮して、
 各クラスの性質に合わせて再定義すべきです。
 
-一般的に所属性のチェックを実現するため適宜再定義されます。
+デフォルトでは内部で [[m:Object#==]] を呼び出します。
 
 when 節の式をレシーバーとして === を呼び出すことに注意してください。
 
@@ -709,19 +709,20 @@ when 節の式をレシーバーとして === を呼び出すことに注意し�
 
 #@samplecode
 age = 12
+# (0..2).===(12), (3..6).===(12), ... が実行される
 result =
-case age
-when 0 .. 2
-  "baby"
-when 3 .. 6
-  "little child"
-when 7 .. 12
-  "child"
-when 13 .. 18
-  "youth"
-else
-  "adult"
-end
+  case age
+  when 0 .. 2
+    "baby"
+  when 3 .. 6
+    "little child"
+  when 7 .. 12
+    "child"
+  when 13 .. 18
+    "youth"
+  else
+    "adult"
+  end
 
 puts result #=> "child"
 
@@ -743,6 +744,7 @@ puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
 @see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Regexp#===]], [[m:Enumerable#grep]]
 
+#@until 3.2
 --- =~(other) -> nil
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
@@ -771,7 +773,7 @@ p(obj =~ /re/) #=> nil
 #@end
 
 @see [[m:String#=~]]
-
+#@end
 --- !~(other) -> bool
 
 自身が other とマッチしない事を判定します。
@@ -787,8 +789,6 @@ p (obj !~ /re/) # => false
 obj = nil
 p (obj !~ /re/) # => true
 #@end
-
-@see [[m:Object#=~]]
 
 --- display(out = $stdout) -> nil
 
@@ -1177,7 +1177,11 @@ marshal_dump/marshal_load を使うべきです。
 
 オブジェクトの複製を作成して返します。
 
+#@since 3.2
+dup はオブジェクトの内容をコピーし、
+#@else
 dup はオブジェクトの内容, taint 情報をコピーし、
+#@end
 clone はそれに加えて freeze, 特異メソッドなどの情報も含めた完全な複製を作成します。
 
 clone や dup は浅い(shallow)コピーであることに注意してください。後述。
@@ -1189,14 +1193,22 @@ clone や dup は浅い(shallow)コピーであることに注意してくださ
 
 #@samplecode
 obj = "string"
+#@until 3.2
 obj.taint
+#@end
 def obj.fuga
 end
 obj.freeze
 
 p(obj.equal?(obj))          #=> true
 p(obj == obj)               #=> true
+#@until 3.2
+#@since 2.7.0
+p(obj.tainted?)             #=> false
+#@else
 p(obj.tainted?)             #=> true
+#@end
+#@end
 p(obj.frozen?)              #=> true
 p(obj.respond_to?(:fuga))   #=> true
 
@@ -1204,7 +1216,13 @@ obj_c = obj.clone
 
 p(obj.equal?(obj_c))        #=> false
 p(obj == obj_c)             #=> true
+#@until 3.2
+#@since 2.7.0
+p(obj_c.tainted?)           #=> false
+#@else
 p(obj_c.tainted?)           #=> true
+#@end
+#@end
 p(obj_c.frozen?)            #=> true
 p(obj_c.respond_to?(:fuga)) #=> true
 
@@ -1212,7 +1230,13 @@ obj_d = obj.dup
 
 p(obj.equal?(obj_d))        #=> false
 p(obj == obj_d)             #=> true
+#@until 3.2
+#@since 2.7.0
+p(obj_d.tainted?)           #=> false
+#@else
 p(obj_d.tainted?)           #=> true
+#@end
+#@end
 p(obj_d.frozen?)            #=> false
 p(obj_d.respond_to?(:fuga)) #=> false
 #@end
@@ -1578,6 +1602,7 @@ p Kernel.class #=> Module
 
 @see [[m:Class#superclass]],[[m:Object#kind_of?]],[[m:Object#instance_of?]]
 
+#@until 3.2
 --- taint -> self
 
 #@since 2.7.0
@@ -1691,7 +1716,7 @@ p ENV['OS'].tainted? #=> true
 #@#noexample deprecated
 
 @see [[m:Object#trust]],[[m:Object#untrusted?]]
-
+#@end
 --- singleton_class -> Class
 
 レシーバの特異クラスを返します。
@@ -1802,8 +1827,12 @@ obj2 = obj.class.allocate
 obj2.initialize_copy(obj)
 #@end
 
-obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
-ザをコピーすることで複製を作ります。 obj.clone は、さらに
+#@since 3.2
+obj2 に対してさらに obj のインスタンス変数、ファイナライザを
+#@else
+obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライザを
+#@end
+コピーすることで複製を作ります。 obj.clone は、さらに
 特異メソッドのコピーも行います。
 
 #@samplecode
@@ -1817,7 +1846,9 @@ end
 
 def check(obj)
   puts "instance variables: #{obj.inspect}"
+#@until 3.2
   puts "tainted?: #{obj.tainted?}"
+#@end
   print "singleton methods: "
   begin
     p obj.bar
@@ -1827,19 +1858,27 @@ def check(obj)
 end
 
 obj.foo = 1
+#@until 3.2
 obj.taint
+#@end
 
 check Object.new.send(:initialize_copy, obj)
         #=> instance variables: #<Object:0x4019c9d4>
+#@until 3.2
         #   tainted?: false
+#@end
         #   singleton methods: #<NoMethodError: ...>
 check obj.dup
         #=> instance variables: #<Object:0x4019c9c0 @foo=1>
+#@until 3.2
         #   tainted?: true
+#@end
         #   singleton methods: #<NoMethodError: ...>
 check obj.clone
         #=> instance variables: #<Object:0x4019c880 @foo=1>
+#@until 3.2
         #   tainted?: true
+#@end
         #   singleton methods: :bar
 #@end
 

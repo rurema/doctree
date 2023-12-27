@@ -383,7 +383,7 @@ open('http://www.rubyist.net/') {|f|
 
 --- content_type    -> String
 
-対象となるリソースの Content-Type を文字列の配列で返します。Content-Type ヘッダの情報が使われます。
+対象となるリソースの Content-Type を文字列で返します。Content-Type ヘッダの情報が使われます。
 Content-Type ヘッダがない場合は、"application/octet-stream" を返します。
 
 #@samplecode 例
@@ -514,7 +514,7 @@ open('http://example.com/') {|f|
 
 = class OpenURI::HTTPError < StandardError
 
-リソースの取得に失敗した時に投げられます。
+URI のスキームが http または https で、リソースの取得に失敗したときに発生します。
 
 #@since 2.5.0
 = reopen URI
@@ -548,8 +548,8 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 
 @param options ハッシュを与えます。詳しくは [[m:OpenURI.open_uri]] を参照してください。
 
-@raise OpenURI::HTTPError 対象となる URI のスキームが http であり、
-                          かつリソースの取得に失敗した時に発生します。
+@raise OpenURI::HTTPError 対象となる URI のスキームが http または https であり、
+                          かつリソースの取得に失敗したときに発生します。
 
 @raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
                      [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]]

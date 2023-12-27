@@ -46,13 +46,14 @@ dRuby サーバは
 
 @see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
+#@until 3.0
 --- default_safe_level(level) -> ()
 サーバ起動時の :safe_level オプションのデフォルト値を指定します。
 
 初期値は0です。
 
 @see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
-
+#@end
 --- new(uri=nil, front=nil, config_or_acl=nil) -> DRb::DRbServer
 
 dRuby サーバを起動し、DRbServerのインスタンスを返します。
@@ -132,10 +133,11 @@ verbose mode が on の場合は失敗したメソッド呼出のログが標準
 
 @see [[m:DRb::DRbServer.new]], [[m:DRb.#start_service]]
 
+#@until 3.0
 --- safe_level -> Integer
 サーバのセーフレベルを返します。
 
-
+#@end
 --- thread -> Thread
 サーバのメインスレッドを返します。
 

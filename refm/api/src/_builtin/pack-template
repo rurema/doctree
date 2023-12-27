@@ -208,7 +208,7 @@ n, N, v, V を用います。
   short (16bit 符号つき整数, エンディアンに依存)
   (s! は 16bit でなく、short のサイズに依存)
 
-  リトルエンディアン:
+  リトルエンディアン (x86_64):
 #@samplecode
 "\x01\x02\xFE\xFD".unpack("s*") # => [513, -514]
 
@@ -216,7 +216,7 @@ n, N, v, V を用います。
 [513, -514].pack("s*")  # => "\x01\x02\xFE\xFD"
 #@end
 
-  ビッグエンディアン:
+  ビッグエンディアン (SPARC64):
 #@samplecode
 "\x01\x02\xFE\xFD".unpack("s*") # => [258, -259]
 
@@ -229,7 +229,7 @@ n, N, v, V を用います。
   unsigned short (16bit 符号なし整数, エンディアンに依存)
   (S! は 16bit でなく、short のサイズに依存)
 
-  リトルエンディアン:
+  リトルエンディアン (x86_64):
 #@samplecode
 "\x01\x02\xFE\xFD".unpack("S*") # => [513, 65022]
 
@@ -237,7 +237,7 @@ n, N, v, V を用います。
 [513, -514].pack("s*")  # => "\x01\x02\xFE\xFD"
 #@end
 
-  ビッグエンディアン:
+  ビッグエンディアン (SPARC64):
 
 #@samplecode
 "\x01\x02\xFE\xFD".unpack("S*") # => [258, 65277]
@@ -250,7 +250,7 @@ n, N, v, V を用います。
 
   int (符号つき整数, エンディアンと int のサイズに依存)
 
-  リトルエンディアン, 32bit int:
+  リトルエンディアン (x86_64), 32bit int:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("i*") # => [67305985, -50462977]
 
@@ -259,7 +259,7 @@ n, N, v, V を用います。
 #@end
 #@# [67305985, 4244504319].pack("i*") が RangeError になるのは 1.8.0 から 1.8.2-preview3 まで
 
-  ビッグエンディアン, 32bit int:
+  ビッグエンディアン (SPARC64), 32bit int:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("i*") # => [16909060, -66052]
 
@@ -270,14 +270,14 @@ n, N, v, V を用います。
 
   unsigned int (符号なし整数, エンディアンと int のサイズに依存)
 
-  リトルエンディアン, 32bit int:
+  リトルエンディアン (x86_64), 32bit int:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("I*") # => [67305985, 4244504319]
 
 [67305985, 4244504319].pack("I*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 [67305985, -50462977].pack("I*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 #@end
-  ビッグエンディアン, 32bit int:
+  ビッグエンディアン (SPARC64), 32bit int:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("I*") # => [16909060, 4294901244]
 
@@ -290,7 +290,7 @@ n, N, v, V を用います。
   long (32bit 符号つき整数, エンディアンに依存)
   (l! は 32bit でなく、long のサイズに依存)
 
-  リトルエンディアン, 32bit long:
+  リトルエンディアン (x86_64), 32bit long:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("l*") # => [67305985, -50462977]
 
@@ -298,7 +298,7 @@ n, N, v, V を用います。
 [67305985, -50462977].pack("l*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 #@end
 
-  ビッグエンディアン, 32bit long:
+  ビッグエンディアン (SPARC64), 32bit long:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("l*") # => [16909060, -66052]
 
@@ -311,7 +311,7 @@ n, N, v, V を用います。
   unsigned long (32bit 符号なし整数, エンディアンに依存)
   (L! は 32bit でなく、long のサイズに依存)
 
-  リトルエンディアン, 32bit long:
+  リトルエンディアン (x86_64), 32bit long:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("L*") # => [67305985, 4244504319]
 
@@ -319,7 +319,7 @@ n, N, v, V を用います。
 [67305985, -50462977].pack("L*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 #@end
 
-  ビッグエンディアン, 32bit long:
+  ビッグエンディアン (SPARC64), 32bit long:
 #@samplecode
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("L*") # => [16909060, 4294901244]
 
@@ -332,7 +332,7 @@ n, N, v, V を用います。
   64bit 符号付き整数 (エンディアンに依存)
   (q! は 64bit でなく、long long のサイズに依存)
 
-  リトルエンディアン:
+  リトルエンディアン (x86_64):
 #@samplecode
 "\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("q*")
 # => [578437695752307201, -506097522914230529]
@@ -343,7 +343,7 @@ n, N, v, V を用います。
 # => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
 #@end
 
-  ビッグエンディアン:
+  ビッグエンディアン (SPARC64):
 #@samplecode
 "\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("q*")
 # => [72623859790382856, -283686952306184]
@@ -358,7 +358,7 @@ n, N, v, V を用います。
   64bit 符号なし整数 (エンディアンに依存)
   (Q! は 64bit でなく、long long のサイズに依存)
 
-  リトルエンディアン:
+  リトルエンディアン (x86_64):
 #@samplecode
 "\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("Q*")
 # => [578437695752307201, 17940646550795321087]
@@ -369,7 +369,7 @@ n, N, v, V を用います。
 # => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
 #@end
 
-  ビッグエンディアン:
+  ビッグエンディアン (SPARC64):
 #@samplecode
 "\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("Q*")
 # => [72623859790382856, 18446460386757245432]
@@ -489,17 +489,21 @@ n, N, v, V を用います。
   x86_64 (IEEE754 単精度 リトルエンディアン):
 #@samplecode
 [1.0].pack("f")      # => "\x00\x00\x80?"
+#@since 2.6.0
 [0.0/0.0].pack("f")  # => "\x00\x00\xC0\x7F"      # NaN
-[1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Inf
-[-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Inf
+#@else
+[0.0/0.0].pack("f")  # => "\x00\x00\xC0\xFF"      # NaN
+#@end
+[1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Infinity
+[-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Infinity
 #@end
 
-  MIPS (IEEE754 単精度 ビッグエンディアン):
+  SPARC64 (IEEE754 単精度 ビッグエンディアン):
 #@samplecode
 [1.0].pack("f")      # => "?\x80\x00\x00"
-[0.0/0.0].pack("f")  # => "\x7F\xBF\xFF\xFF"      # NaN
-[1.0/0.0].pack("f")  # => "\x7F\x80\x00\x00"      # +Inf
-[-1.0/0.0].pack("f") # => "\xFF\x80\x00\x00"      # -Inf
+[0.0/0.0].pack("f")  # => "\x7F\xC0\x00\x00"      # NaN
+[1.0/0.0].pack("f")  # => "\x7F\x80\x00\x00"      # +Infinity
+[-1.0/0.0].pack("f") # => "\xFF\x80\x00\x00"      # -Infinity
 #@end
 
   VAX (NetBSD 3.0) (非IEEE754):
@@ -514,17 +518,21 @@ n, N, v, V を用います。
   x86_64 (IEEE754 倍精度 リトルエンディアン):
 #@samplecode
 [1.0].pack("d")      # => "\x00\x00\x00\x00\x00\x00\xF0?"
+#@since 2.6.0
 [0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\x7F"      # NaN
-[1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Inf
-[-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Inf
+#@else
+[0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\xFF"      # NaN
+#@end
+[1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Infinity
+[-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Infinity
 #@end
 
-  MIPS (IEEE754 倍精度 ビッグエンディアン):
+  SPARC64 (IEEE754 倍精度 ビッグエンディアン):
 #@samplecode
 [1.0].pack("d")      # => "?\xF0\x00\x00\x00\x00\x00\x00"
-[0.0/0.0].pack("d")  # => "\x7F\xF7\xFF\xFF\xFF\xFF\xFF\xFF"      # NaN
-[1.0/0.0].pack("d")  # => "\x7F\xF0\x00\x00\x00\x00\x00\x00"      # +Inf
-[-1.0/0.0].pack("d") # => "\xFF\xF0\x00\x00\x00\x00\x00\x00"      # -Inf
+[0.0/0.0].pack("d")  # => "\x7F\xF8\x00\x00\x00\x00\x00\x00"      # NaN
+[1.0/0.0].pack("d")  # => "\x7F\xF0\x00\x00\x00\x00\x00\x00"      # +Infinity
+[-1.0/0.0].pack("d") # => "\xFF\xF0\x00\x00\x00\x00\x00\x00"      # -Infinity
 #@end
 
   VAX (NetBSD 3.0) (非IEEE754):
@@ -541,7 +549,7 @@ n, N, v, V を用います。
 [1.0].pack("e") # => "\x00\x00\x80?"
 #@end
 
-  MIPS (IEEE754):
+  SPARC64 (IEEE754):
 #@samplecode
 [1.0].pack("e") # => "\x00\x00\x80?"
 #@end
@@ -555,7 +563,7 @@ n, N, v, V を用います。
 [1.0].pack("E") # => "\x00\x00\x00\x00\x00\x00\xF0?"
 #@end
 
-  MIPS (IEEE754):
+  SPARC64 (IEEE754):
 #@samplecode
 [1.0].pack("E") # => "\x00\x00\x00\x00\x00\x00\xF0?"
 #@end
@@ -569,7 +577,7 @@ n, N, v, V を用います。
 [1.0].pack("g") # => "?\x80\x00\x00"
 #@end
 
-  MIPS (IEEE754):
+  SPARC64 (IEEE754):
 #@samplecode
 [1.0].pack("g") # => "?\x80\x00\x00"
 #@end
@@ -613,7 +621,7 @@ end
 [1.0].pack("G") # => "?\xF0\x00\x00\x00\x00\x00\x00"
 #@end
 
-  MIPS (IEEE754):
+  SPARC64 (IEEE754):
 #@samplecode
 [1.0].pack("G") # => "?\xF0\x00\x00\x00\x00\x00\x00"
 #@end

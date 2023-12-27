@@ -4,8 +4,7 @@
 # docker-compose run --rm rurema rake -T
 # docker-compose run --rm rurema rake generate:2.7.0 statichtml:2.7.0
 # open _site/2.7.0/index.html instead of /tmp/html/2.7.0/index.html
-
-version: '2'
+version: "3.8"
 services:
   rurema:
     build: .
@@ -14,3 +13,9 @@ services:
     - "./Gemfile:/rurema/doctree/Gemfile"
     - "./Rakefile:/rurema/doctree/Rakefile"
     - "./refm:/rurema/doctree/refm"
+  web:
+    image: nginx
+    ports:
+    - "8080:80"
+    volumes:
+    - "./_site/:/usr/share/nginx/html:ro"

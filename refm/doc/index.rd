@@ -1,8 +1,20 @@
 = オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル
 
  * Ruby オフィシャルサイト [[url:https://www.ruby-lang.org/ja/]]
-#@since 3.0
+#@since 3.4
  * 開発版対応リファレンス
+#@end
+#@if("3.3" <= version and version < "3.4")
+ * version 3.3 対応リファレンス
+#@end
+#@if("3.2" <= version and version < "3.3")
+ * version 3.2 対応リファレンス
+#@end
+#@if("3.1" <= version and version < "3.2")
+ * version 3.1 対応リファレンス
+#@end
+#@if("3.0" <= version and version < "3.1")
+ * version 3.0 対応リファレンス
 #@end
 #@if("2.7.0" <= version and version < "3.0")
  * version 2.7 対応リファレンス
@@ -45,7 +57,9 @@ Ruby でのオブジェクト:
   * [[d:spec/eval]]
   * [[d:spec/terminate]]
   * [[d:spec/thread]]
+#@until 3.2
   * [[d:spec/safelevel]]
+#@end
 
 Ruby の文法:
   * [[d:spec/lexical]]

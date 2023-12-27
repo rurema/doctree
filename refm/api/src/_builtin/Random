@@ -1,4 +1,3 @@
-#@since 1.9.2
 = class Random < Object
 
 MT19937に基づく擬似乱数生成器を提供するクラスです。
@@ -65,7 +64,7 @@ Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 #@since 1.9.3
 --- rand -> Float
 --- rand(max) -> Integer | Float
---- rand(range) -> Integer | Float | nil
+--- rand(range) -> Integer | Float
 
 擬似乱数を発生させます。
 
@@ -81,6 +80,7 @@ Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
              range の境界は数値でなければなりません。
 
 @raise Errno::EDOM rand(1..Float::INFINITY) などのように範囲に問題があるときに発生します。
+@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時や (1..0) のような値が存在しない範囲を渡した時に発生します。
 
 #@samplecode 例
 srand 1234 # 乱数の種を設定する。
@@ -88,7 +88,11 @@ Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
 rand(10.0)         #=> 6                   (rand(10) と同じ)
 #@end
 
+#@since 3.2
+@see [[m:Random.srand]], [[m:Random#rand]]
+#@else
 @see [[m:Random.srand]], [[m:Random#rand]], [[m:Random::DEFAULT]]
+#@end
 #@else
 --- rand(max = 0) -> Integer | Float
 
@@ -113,10 +117,10 @@ rand(10.0)         #=> 6                   (rand(10) と同じ)
 
 #@#noexample 詳しくは Kernel.#srand を参照
 
-#@since 1.9.3
-@see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
-#@else
+#@since 3.2
 @see [[m:Kernel.#rand]]
+#@else
+@see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
 #@end
 #@since 2.6.0
 --- bytes(size) -> String
@@ -202,7 +206,7 @@ p r1 == r3 # => true
 #@end
 --- rand -> Float
 --- rand(max) -> Integer | Float
---- rand(range) -> Integer | Float | nil
+--- rand(range) -> Integer | Float
 
 一様な擬似乱数を発生させます。
 
@@ -214,7 +218,6 @@ max が正の整数なら整数を、正の実数なら実数を返します。
 
 三番目の形式では range で指定された範囲の値を返します。
 range の始端と終端が共に整数の場合は整数を、少なくとも片方が実数の場合は実数を返します。
-range に含まれる数が無い場合は nil を返します。
 rangeが終端を含まない(つまり ... で生成した場合)には終端の値は乱数の範囲から除かれます。
 range.end - range.begin が整数を返す場合は range.begin + self.rand((range.end - range.begin) + e)
 の値を返します(e は終端を含む場合は1、含まない場合は0です)。
@@ -229,7 +232,8 @@ range.end - range.begin が実数を返す場合も同様です。
              range.end - range.begin は数値である必要があり、
              range.begin + 数値 が適切な値を返す必要があります。
 
-@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時に発生します。
+@raise Errno::EDOM rand(1..Float::INFINITY) などのように範囲に問題があるときに発生します。
+@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時や (1..0) のような値が存在しない範囲を渡した時などに発生します。
 
 #@samplecode 例
 # Kernel.#rand とほぼ同様の使い勝手
@@ -365,15 +369,16 @@ C言語レベルで定義されている構造体MTの静的変数default_rand�
 #@since 1.9.3
 == Constants
 
-#@since 3.0.0
+#@until 3.2
+#@since 3.0
 --- DEFAULT -> Class
 #@else
 --- DEFAULT -> Random
 #@end
 
-Ruby 3.0.0 から非推奨です。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
+Ruby 3.0 から非推奨です。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
 
-#@since 3.0.0
+#@since 3.0
 
 また、 Random::DEFAULT は Random クラスオブジェクトが返ります。
 

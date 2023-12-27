@@ -1,7 +1,10 @@
 # coding: utf-8
-OLD_VERSIONS = %w[1.8.7 1.9.3 2.0.0 2.1.0 2.2.0 2.3.0 2.4.0]
-SUPPORTED_VERSIONS = %w[2.5.0 2.6.0 2.7.0 3.0]
-UNRELEASED_VERSIONS = %w[3.1]
+OLD_VERSIONS = %w[
+  1.8.7 1.9.3
+  2.0.0 2.1.0 2.2.0 2.3.0 2.4.0 2.5.0 2.6.0 2.7.0
+]
+SUPPORTED_VERSIONS = %w[3.0 3.1 3.2 3.3]
+UNRELEASED_VERSIONS = %w[3.4]
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 CI_VERSIONS = [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
@@ -151,7 +154,7 @@ end
 desc 'Check unnecessary indentation in samplecode'
 task :check_indent_in_samplecode do
   errors = []
-  `git grep -F --name-only '\#@samplecode'`.lines(chomp: true).each do |path|
+  `grep -rlF '\#@samplecode' refm`.lines(chomp: true).each do |path|
     lines = File.read(path).lines(chomp: true)
     lines.each.with_index(1) do |line, lineno|
       next unless line.start_with?('#@samplecode')

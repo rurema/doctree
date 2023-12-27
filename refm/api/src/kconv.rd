@@ -17,20 +17,24 @@ m17n 機能を使うほうがよいでしょう。MIMEのデコード等面倒�
 
 === 使用例
 
-  require 'kconv'
-  newstring = Kconv.kconv(string, Kconv::JIS, Kconv::AUTO)
-  newstring = Kconv.tojis(string)
-  newstring = Kconv.toeuc(string)
-  newstring = Kconv.tosjis(string)
-  guessed_code = Kconv.guess(string)
+#@samplecode
+require 'kconv'
+newstring = Kconv.kconv(string, Kconv::JIS, Kconv::AUTO)
+newstring = Kconv.tojis(string)
+newstring = Kconv.toeuc(string)
+newstring = Kconv.tosjis(string)
+guessed_code = Kconv.guess(string)
+#@end
 
 または
 
-  require 'kconv'
-  newstring = string.kconv(Kconv::JIS, Kconv::AUTO)
-  newstring = string.tojis
-  newstring = string.toeuc
-  newstring = string.tosjis
+#@samplecode
+require 'kconv'
+newstring = string.kconv(Kconv::JIS, Kconv::AUTO)
+newstring = string.tojis
+newstring = string.toeuc
+newstring = string.tosjis
+#@end
 
 
 = reopen String
@@ -146,21 +150,22 @@ self が EUC-JP なバイト列として正当であるかどうかを判定し�
 
 [[m:Kconv.#iseuc]](self) と同じです。
 
-例:
-  require 'kconv'
+#@samplecode 例
+require 'kconv'
 
-  euc_str = "\
-  \xa5\xaa\xa5\xd6\xa5\xb8\xa5\xa7\xa5\xaf\xa5\xc8\xbb\xd8\xb8\xfe\
-  \xa5\xd7\xa5\xed\xa5\xb0\xa5\xe9\xa5\xdf\xa5\xf3\xa5\xb0\xb8\xc0\xb8\xec\
-  \x52\x75\x62\x79".force_encoding('EUC-JP')
+euc_str = "\
+\xa5\xaa\xa5\xd6\xa5\xb8\xa5\xa7\xa5\xaf\xa5\xc8\xbb\xd8\xb8\xfe\
+\xa5\xd7\xa5\xed\xa5\xb0\xa5\xe9\xa5\xdf\xa5\xf3\xa5\xb0\xb8\xc0\xb8\xec\
+\x52\x75\x62\x79".force_encoding('EUC-JP')
 
-  sjis_str = "\
-  \x83\x49\x83\x75\x83\x57\x83\x46\x83\x4e\x83\x67\x8e\x77\x8c\xfc\
-  \x83\x76\x83\x8d\x83\x4f\x83\x89\x83\x7e\x83\x93\x83\x4f\x8c\xbe\x8c\xea\
-  \x52\x75\x62\x79".force_encoding('Shift_JIS')
+sjis_str = "\
+\x83\x49\x83\x75\x83\x57\x83\x46\x83\x4e\x83\x67\x8e\x77\x8c\xfc\
+\x83\x76\x83\x8d\x83\x4f\x83\x89\x83\x7e\x83\x93\x83\x4f\x8c\xbe\x8c\xea\
+\x52\x75\x62\x79".force_encoding('Shift_JIS')
 
-  euc_str.iseuc  # => true
-  sjis_str.iseuc # => false
+euc_str.iseuc  # => true
+sjis_str.iseuc # => false
+#@end
 
 
 --- issjis -> bool
@@ -386,21 +391,22 @@ Kconv.kconv(str, Encoding.locale_charmap)と同じです。
 @param str 判定対象の文字列
 @see [[m:String#isjis]]
 
-例:
-  require 'kconv'
+#@samplecode 例
+require 'kconv'
 
-  euc_str = "\
-  \xa5\xaa\xa5\xd6\xa5\xb8\xa5\xa7\xa5\xaf\xa5\xc8\xbb\xd8\xb8\xfe\
-  \xa5\xd7\xa5\xed\xa5\xb0\xa5\xe9\xa5\xdf\xa5\xf3\xa5\xb0\xb8\xc0\xb8\xec\
-  \x52\x75\x62\x79".force_encoding('EUC-JP')
+euc_str = "\
+\xa5\xaa\xa5\xd6\xa5\xb8\xa5\xa7\xa5\xaf\xa5\xc8\xbb\xd8\xb8\xfe\
+\xa5\xd7\xa5\xed\xa5\xb0\xa5\xe9\xa5\xdf\xa5\xf3\xa5\xb0\xb8\xc0\xb8\xec\
+\x52\x75\x62\x79".force_encoding('EUC-JP')
 
-  jis_str = "\
-  \x1b\x24\x42\x25\x2a\x25\x56\x25\x38\x25\x27\x25\x2f\x25\x48\x3b\x58\x38\x7e\
-  \x25\x57\x25\x6d\x25\x30\x25\x69\x25\x5f\x25\x73\x25\x30\x38\x40\x38\x6c\x1b\x28\x42\
-  \x52\x75\x62\x79".force_encoding('ISO-2022-JP')
+jis_str = "\
+\x1b\x24\x42\x25\x2a\x25\x56\x25\x38\x25\x27\x25\x2f\x25\x48\x3b\x58\x38\x7e\
+\x25\x57\x25\x6d\x25\x30\x25\x69\x25\x5f\x25\x73\x25\x30\x38\x40\x38\x6c\x1b\x28\x42\
+\x52\x75\x62\x79".force_encoding('ISO-2022-JP')
 
-  euc_str.isjis  # => false
-  jis_str.isjis  # => true
+euc_str.isjis  # => false
+jis_str.isjis  # => true
+#@end
 
 #@end
 == Constants

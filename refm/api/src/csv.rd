@@ -406,7 +406,7 @@ id|first name|last name|age
 4|yumi|adachi|21
 EOS
 
-csv = CSV.new(users, { headers: true, col_sep: "|" })
+csv = CSV.new(users, headers: true, col_sep: "|")
 p csv.class # => CSV
 p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 #@end
@@ -590,6 +590,31 @@ CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
 @param data [[c:String]] か [[c:IO]] のインスタンスを指定します。
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
+
+#@samplecode 例
+require "csv"
+
+options = { headers: true }
+
+text =<<-EOS
+id,first name,last name,age
+1,taro,tanaka,20
+2,jiro,suzuki,18
+3,ami,sato,19
+4,yumi,adachi,21
+EOS
+
+csv = CSV.instance(text, options)
+csv2 = CSV.instance(text, options)
+csv.object_id == csv2.object_id # => true
+print csv.read
+
+# => id,first name,last name,age
+# 1,taro,tanaka,20
+# 2,jiro,suzuki,18
+# 3,ami,sato,19
+# 4,yumi,adachi,21
+#@end
 
 @see [[m:CSV.new]]
 
@@ -832,7 +857,6 @@ p table[0]    # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" 
 --- table(path, options = Hash.new) -> CSV::Table | [Array]
 
 以下と同等のことを行うメソッドです。
-日本語の CSV ファイルを扱う場合はあまり使いません。
 
 #@samplecode
 CSV.read( path, { headers:           true,
@@ -1212,7 +1236,7 @@ print result
 #@samplecode 例 name を指定
 require "csv"
 
-csv = CSV.new("header1,header2\nrow1_1,row1_2", { headers: true })
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
 csv.header_convert(:symbol)
 csv.first.headers # => [:header1, :header2]
 #@end
@@ -1220,7 +1244,7 @@ csv.first.headers # => [:header1, :header2]
 #@samplecode 例 ブロックを指定
 require "csv"
 
-csv = CSV.new("header1,header2\nrow1_1,row1_2", { headers: true })
+csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
 csv.header_convert do |field|
   field.to_sym
 end

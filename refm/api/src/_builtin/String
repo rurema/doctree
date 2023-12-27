@@ -268,6 +268,9 @@ original_text.equal?(unfrozen_text)   # => false
 @see [[m:String#-@]]
 
 --- -@ -> String | self
+#@since 3.2
+--- dedup -> String | self
+#@end
 
 self が freeze されている文字列の場合、self を返します。
 freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
@@ -864,7 +867,7 @@ nil は文字列のエンコーディングが非互換の時に返されます�
 "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp("\u{c4 d6 dc}")   #=> nil
 #@end
 
-@see [[m:String#<=>]], [[m:Encoding#compatible?]]
+@see [[m:String#<=>]], [[m:Encoding.compatible?]]
 
 #@since 2.4.0
 --- casecmp?(other) -> bool | nil
@@ -1122,10 +1125,10 @@ p '123456789'.count('2378')          # => 4
 p '123456789'.count('2-8', '^4-6')   # => 4
 
 # ファイルの行数を数える
-n_lines = File.open("foo").read.count("\n")
+n_lines = File.read("foo").count("\n")
 
 # ファイルの末尾に改行コードがない場合にも対処する
-buf = File.open("foo").read
+buf = File.read("foo")
 n_lines = buf.count("\n")
 n_lines += 1 if /[^\n]\z/ =~ buf
            # if /\n\z/ !~ buf だと空ファイルを 1 行として数えてしまうのでダメ
@@ -1574,7 +1577,7 @@ p 'xbbb-xbbb'.gsub(/x(b+)/) { $1 }   # => "bbb-bbb"  # OK
 puts '\n'.gsub(/\\/) { '\\\\' }      # => \\n        # OK
 #@end
 
-@see [[m:String#sub]]
+@see [[m:String#sub]], [[m:String#gsub!]]
 
 --- gsub(pattern) {|matched| .... } -> String
 --- gsub(pattern) -> Enumerator
@@ -1655,7 +1658,7 @@ replace に「\」自身を入れたいときは
 'abbbcd'.gsub!(/a(b+)/) { $1 }         # OK   これがもっとも安全
 #@end
 
-@see [[m:String#sub]]
+@see [[m:String#sub]], [[m:String#gsub]]
 
 --- gsub!(pattern) {|matched| .... } -> self | nil
 --- gsub!(pattern) -> Enumerator
@@ -1764,7 +1767,51 @@ p "foobarfoobar".index("bar", -6)       # => 9
 #@end
 
 @see [[m:String#rindex]]
+#@since 3.2
+@see [[m:String#byteindex]]
+--- byteindex(pattern, offset = 0) -> Integer | nil
 
+文字列の offset から右に向かって pattern を検索し、
+最初に見つかった部分文字列の左端のバイト単位のインデックスを返します。
+見つからなければ nil を返します。
+
+引数 pattern は探索する部分文字列または正規表現で指定します。
+
+offset が負の場合、文字列の末尾から数えた位置から探索します。
+
+@param pattern    探索する部分文字列または正規表現
+@param offset     探索を開始するバイト単位のオフセット
+
+@raise IndexError オフセットが文字列の境界以外をさしているときに発生します。
+
+#@samplecode 例
+'foo'.byteindex('f') # => 0
+'foo'.byteindex('o') # => 1
+'foo'.byteindex('oo') # => 1
+'foo'.byteindex('ooo') # => nil
+
+'foo'.byteindex(/f/) # => 0
+'foo'.byteindex(/o/) # => 1
+'foo'.byteindex(/oo/) # => 1
+'foo'.byteindex(/ooo/) # => nil
+
+'foo'.byteindex('o', 1) # => 1
+'foo'.byteindex('o', 2) # => 2
+'foo'.byteindex('o', 3) # => nil
+
+'foo'.byteindex('o', -1) # => 2
+'foo'.byteindex('o', -2) # => 1
+'foo'.byteindex('o', -3) # => 1
+'foo'.byteindex('o', -4) # => nil
+
+'あいう'.byteindex('う') # => 6
+'あいう'.byteindex('う', 3) # => 6
+'あいう'.byteindex('う', -3) # => 6
+'あいう'.byteindex('う', 1) # offset 1 does not land on character boundary (IndexError)
+#@end
+
+@see [[m:String#index]], [[m:String#byterindex]]
+#@end
 --- insert(pos, other) -> self
 
 pos 番目の文字の直前に文字列 other を挿入します。
@@ -2079,7 +2126,76 @@ p "foobarfoobar".rindex("bar", -6)      # => 3
 #@end
 
 @see [[m:String#index]]
+#@since 3.2
+--- byterindex(pattern, offset = self.bytesize) -> Integer | nil
 
+文字列のバイト単位のインデックス offset から左に向かって pattern を探索します。
+最初に見つかった部分文字列の左端のバイト単位のインデックスを返します。
+見つからなければ nil を返します。
+
+引数 pattern は探索する部分文字列または正規表現で指定します。
+
+offset が負の場合は、文字列の末尾から数えた位置から探索します。
+
+byterindex と [[m:String#byteindex]] とでは、探索方向だけが逆になります。
+完全に左右が反転した動作をするわけではありません。
+探索はその開始位置を右から左にずらしながら行いますが、
+部分文字列の照合はどちらのメソッドも左から右に向かって行います。
+以下の例を参照してください。
+
+#@samplecode String#byteindex の場合
+p "stringstring".byteindex("ing", 1)    # => 3
+  # ing            # ここから探索を始める
+  #  ing
+  #   ing          # 右にずらしていってここで見つかる
+#@end
+
+#@samplecode String#byterindex の場合
+p "stringstring".byterindex("ing", -1)  # => 9
+  #           ing    # インデックス -1 の文字から探索を始める
+  #          ing
+  #         ing      # 左にずらしていってここで見つかる
+#@end
+
+@param pattern    探索する部分文字列または正規表現
+@param offset     探索を始めるバイト単位のインデックス
+
+#@samplecode 例
+'foo'.byterindex('f') # => 0
+'foo'.byterindex('o') # => 2
+'foo'.byterindex('oo') # => 1
+'foo'.byterindex('ooo') # => nil
+
+'foo'.byterindex(/f/) # => 0
+'foo'.byterindex(/o/) # => 2
+'foo'.byterindex(/oo/) # => 1
+'foo'.byterindex(/ooo/) # => nil
+
+# 右でのマッチが優先
+'foo'.byterindex(/o+/) # => 2
+$~ #=> #<MatchData "o">
+
+# 最長にするには否定戻り読み(negative look-behind)と組み合わせる
+'foo'.byterindex(/(?<!o)o+/) # => 1
+$~ #=> #<MatchData "oo">
+
+# またはbyteindexを否定先読み(negative look-ahead)
+'foo'.byteindex(/o+(?!.*o)/) # => 1
+$~ #=> #<MatchData "oo">
+
+'foo'.byterindex('o', 0) # => nil
+'foo'.byterindex('o', 1) # => 1
+'foo'.byterindex('o', 2) # => 2
+'foo'.byterindex('o', 3) # => 2
+
+'foo'.byterindex('o', -1) # => 2
+'foo'.byterindex('o', -2) # => 1
+'foo'.byterindex('o', -3) # => nil
+'foo'.byterindex('o', -4) # => nil
+#@end
+
+@see [[m:String#rindex]], [[m:String#byteindex]]
+#@end
 --- scan(pattern) -> [String] | [[String]]
 
 self に対して pattern を繰り返しマッチし、
@@ -3356,9 +3472,9 @@ true を返します。さもなくば false を返します。
 "\x80".force_encoding("UTF-8").valid_encoding?      #=> false
 #@end
 
---- encode(encoding, options = nil) -> String
---- encode(encoding, from_encoding, options = nil) -> String
---- encode(options = nil) -> String
+--- encode(encoding, **options) -> String
+--- encode(encoding, from_encoding, **options) -> String
+--- encode(**options) -> String
 
 self を指定したエンコーディングに変換した文字列を作成して返します。引数
 を2つ与えた場合、第二引数は変換元のエンコーディングを意味します。さもな
@@ -3367,7 +3483,7 @@ self を指定したエンコーディングに変換した文字列を作成し
 
 @param encoding       変換先のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 @param from_encoding  変換元のエンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
-@param option         変換オプションをハッシュで与えます。
+@param option         変換オプションをキーワード引数で与えます。
 @return               変換された文字列
 
 変換オプション
@@ -3533,7 +3649,7 @@ nth バイト目の文字を返します。nth が負の場合は文字列の末
 
 @see [[m:String#slice]]
 
---- byteslice(nth, len) -> String | nil
+--- byteslice(nth, len=1) -> String | nil
 
 nth バイト目から長さ len バイトの部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。引数が範囲外を指定した場合は
@@ -3552,7 +3668,9 @@ nil を返します。
 #@end
 
 @see [[m:String#slice]]
-
+#@since 3.2
+@see [[m:String#bytesplice]]
+#@end
 --- byteslice(range)          -> String | nil
 
 range で指定したバイトの範囲に含まれる部分文字列を返します。引数が範囲
@@ -3569,16 +3687,37 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 #@end
 
 @see [[m:String#slice]]
+#@since 3.2
+@see [[m:String#bytesplice]]
+--- bytesplice(index, length, str) -> String
+--- bytesplice(range, str)         -> String
 
+self の一部または全部を str で置き換えて str を返します。
+
+置き換え範囲の指定は、長さの指定が省略できないこと以外は
+[[m:String#byteslice]] と同じです。
+置き換え後の文字列の長さが対象の長さと違う場合、
+適切に長さが調整されます。
+
+@param index 置換したい文字列の範囲の始端
+@param length 置換したい文字列の範囲の長さ
+@param range 置換したい文字列の範囲を示す Range オブジェクト
+@raise IndexError index や length が範囲外の場合に発生
+@raise RangeError range が範囲外の場合に発生
+@raise IndexError 指定した始端や終端が文字列の境界と一致しない場合に発生
+
+@see [[m:String#byteslice]]
+#@end
 --- prepend(other_str) -> String
 文字列 other_str を先頭に破壊的に追加します。
 
 @param other_str 追加したい文字列を指定します。
 
-例:
-  a = "world"
-  a.prepend("hello ") # => "hello world"
-  a                   # => "hello world"
+#@samplecode 例
+a = "world"
+a.prepend("hello ") # => "hello world"
+a                   # => "hello world"
+#@end
 
 #@since 2.4.0
 --- prepend(*arguments) -> String

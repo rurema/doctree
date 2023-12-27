@@ -85,10 +85,11 @@ FileTest.executable_real?("empty.txt")      # => false
   FileTest.exist?('/etc/no_such_file') # => false
   FileTest.exist?('/etc/no_such_directory') # => false
 
+#@until 3.2
 --- exists?(file)    -> bool
 
 このメソッドは Ruby 2.1 から deprecated です。[[m:FileTest.#exist?]] を使用してください。
-
+#@end
 --- grpowned?(file)    -> bool
 
 ファイルのグループ ID がカレントプロセスの実効グループ ID と等しい時に真を返

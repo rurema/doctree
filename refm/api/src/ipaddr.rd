@@ -193,6 +193,21 @@ IPv4 互換でも IPv4 組み込みでもないなら self を返します。
   p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
       # => #<IPAddr: IPv4:192.168.0.1/255.255.255.255>
 
+#@since 2.5.0
+--- prefix -> Integer
+
+プリフィックス長をビット数で返します。
+
+--- prefix=(prefixlen)
+
+プリフィックス長を prefixlen に設定します。
+
+@param prefixlen 設定したいプリフィックス長をビット数で指定します。
+
+@raise IPAddr::InvalidPrefixError 引数 prefixlen に整数以外のオブジェクトを指定した場合に発生します。
+
+#@end
+
 --- reverse -> String
 
 DNS 逆引きのための文字列を返します。

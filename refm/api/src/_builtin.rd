@@ -21,7 +21,10 @@ require を書かなくても使うことができます。
 #@since 2.3.0
 #@include(thread/ConditionVariable)
 #@end
-#@until 3.0.0
+#@until 2.7.0
+#@include(_builtin/Data.old)
+#@end
+#@since 3.2
 #@include(_builtin/Data)
 #@end
 #@include(_builtin/Dir)
@@ -102,6 +105,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Range)
 #@include(_builtin/RangeError)
 #@include(_builtin/Rational)
+#@since 3.1
+#@include(_builtin/Refinement)
+#@end
 #@include(_builtin/Regexp)
 #@include(_builtin/RegexpError)
 #@include(_builtin/RubyVM)

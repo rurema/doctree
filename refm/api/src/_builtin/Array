@@ -137,11 +137,11 @@ a[10] #=> nil
 --- [](range)    -> Array | nil
 
 [[c:Range]] オブジェクト range の範囲にある要素からなる部分配列を返します。
-range の first の値が配列の範囲に収まらない場合 nil を返します。
-range の first が end より後にある場合には空の配列を返します。
+range の begin が自身の範囲外となる時は nil を返します。ただし、begin が配列の長さに等しいときは空の配列を返します。
+range の begin が end より後にある場合には空の配列を返します。
 
 @param range 生成したい部分配列の範囲を [[c:Range]] オブジェクトで指定します。
-             range の first や end の値が負の時には末尾からのインデックスと見倣します。末尾
+             range の begin や end の値が負の時には末尾からのインデックスと見倣します。末尾
              の要素が -1 番目になります。
              end の値が配列の範囲を越える時には、越えた分は無視されます。
 
@@ -157,16 +157,16 @@ a[10..11] #=> nil
 a[2..1]   #=> []
 a[-1..-2] #=> []
 
-# 特殊なケース。first が自身の長さと同じ場合には以下のようになります。
-a[5]                   #=> nil
-a[5, 1]                #=> []
-a[5..10]               #=> []
+# 特殊なケース。begin が自身の長さと同じ場合には以下のようになります。
+a[5]      #=> nil
+a[5..10]  #=> []
 #@end
 
 --- [](start, length)    ->  Array | nil
 
 start 番目から length 個の要素を含む部分配列を返します。
-length が負の時、start が自身の範囲を越えた時には nil を返します。
+start が自身の範囲外となる時は nil を返します。ただし、start が配列の長さに等しいときは空の配列を返します。
+length が負の時は nil を返します。
 
 @param start 生成したい部分配列の先頭のインデックスを整数で指定します。
              start の値が負の時には末尾からのインデックスと見倣します。
@@ -193,9 +193,8 @@ a[0, -1]   #=> nil
 a[10, 1]   #=> nil
 
 # 特殊なケース。start が自身の長さと同じ場合には以下のようになります。
-a[5]                   #=> nil
-a[5, 1]                #=> []
-a[5..10]               #=> []
+a[5]       #=> nil
+a[5, 1]    #=> []
 #@end
 
 --- []=(nth, val)
@@ -580,6 +579,8 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
 が真である場合に true を返します。ブロックが偽を返した時点で、
 ただちに false を返します。
 
+要素の数が 0 である配列に対しては true を返します。
+
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
 
 #@samplecode 例
@@ -606,6 +607,8 @@ p %w[ant bear cat].all?(/t/)     # => false
 ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
 が偽である場合に false を返します。ブロックが真を返した時点
 で、ただちに true を返します。
+
+要素の数が 0 である配列に対しては false を返します。
 
 #@since 2.5.0
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
@@ -658,10 +661,14 @@ p ary     #=> []
 
 レシーバと同じ内容を持つ新しい配列を返します。
 
-clone は frozen tainted singleton-class の情報も含めてコピーしますが、
+clone は frozen singleton-class の情報も含めてコピーしますが、
+#@since 2.7.0
 dup は内容だけをコピーします。
+#@else
+dup は内容と tainted だけをコピーします。
+#@end
 またどちらのメソッドも要素それ自体のコピーはしません。
-つまり「浅い(shallow)」コピーを行います。
+つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
 
 #@samplecode 例
 ary = ['string']
@@ -861,24 +868,15 @@ p array             #=> [0, 1, 3, 4]
 
 --- delete_if {|x| ... }    -> self
 --- reject! {|x| ... }      -> self | nil
-#@since 1.9.1
 --- delete_if               -> Enumerator
 --- reject!                 -> Enumerator
-#@else
---- delete_if               -> Enumerable::Enumerator
---- reject!                 -> Enumerable::Enumerator
-#@end
 
 要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
 delete_if は常に self を返しますが、reject! は要素が 1 つ以上削除されれば self を、
 1 つも削除されなければ nil を返します。
 
 ブロックが与えられなかった場合は、自身と reject! から生成した
-#@since 1.9.1
 [[c:Enumerator]] オブジェクトを返します。
-#@else
-[[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 返された Enumerator オブジェクトの each メソッドには、
 もとの配列に対して副作用があることに注意してください。
 
@@ -892,6 +890,8 @@ e = a.reject!
 e.each{|i| i % 2 == 0}
 p a                    #=> [1, 3, 5]  もとの配列から削除されていることに注意。
 #@end
+
+@see [[m:Array#select!]], [[m:Array#keep_if]]
 
 --- drop(n)               -> Array
 
@@ -1494,6 +1494,8 @@ p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
 ブロックを指定した場合は、配列のすべての要素を
 ブロックで評価した結果が、すべて偽であれば真を返します。
 そうでなければ偽を返します。
+
+要素の数が 0 である配列に対しては true を返します。
 
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
 
@@ -2326,7 +2328,7 @@ a                         #=> [2, 3, 1]
 
 @see [[m:Array#shuffle]]
 
---- combination(n) {|c| block }    -> Array
+--- combination(n) {|c| block }    -> self
 #@since 1.9.1
 --- combination(n)                 -> Enumerator
 #@else
@@ -2359,13 +2361,23 @@ a.combination(0).to_a  #=> [[]]: one combination of length 0
 a.combination(5).to_a  #=> []  : no combinations of length 5
 #@end
 
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2, 3, 4]
+result = []
+a.combination(2) {|e| result << e} # => [1,2,3,4]
+result #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+#@end
+
 #@since 1.9.2
 @see [[m:Array#permutation]], [[m:Array#repeated_combination]]
 #@else
 @see [[m:Array#permutation]]
 #@end
 
---- permutation(n = self.length) { |p| block }       -> Array
+--- permutation(n = self.length) { |p| block }       -> self
 #@since 1.9.1
 --- permutation(n = self.length)                     -> Enumerator
 #@else
@@ -2399,6 +2411,16 @@ a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
 a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 a.permutation(0).to_a  #=> [[]]: one permutation of length 0
 a.permutation(4).to_a  #=> []  : no permutations of length 4
+#@end
+
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2, 3]
+result = []
+a.permutation(2) {|e| result << e} # => [1,2,3]
+result # => [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
 #@end
 
 #@since 1.9.2
@@ -2443,7 +2465,7 @@ a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
 
 
 #@since 1.9.2
---- repeated_combination(n) { |c| ... } -> Array
+--- repeated_combination(n) { |c| ... } -> self
 --- repeated_combination(n)             -> Enumerator
 
 サイズ n の重複組み合わせをすべて生成し、それを引数としてブロックを実行
@@ -2471,8 +2493,19 @@ a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,
 a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
 #@end
 
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2, 3]
+result = []
+a.repeated_combination(3) {|e| result << e} # => [1,2,3]
+result  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
+        #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
+#@end
+
 @see [[m:Array#repeated_permutation]], [[m:Array#combination]]
---- repeated_permutation(n) { |p| ... } -> Array
+--- repeated_permutation(n) { |p| ... } -> self
 --- repeated_permutation(n)             -> Enumerator
 
 サイズ n の重複順列をすべて生成し，それを引数としてブロックを実行します。
@@ -2496,11 +2529,22 @@ a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
 a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
 #@end
 
+ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+#@samplecode 例
+a = [1, 2]
+result = []
+a.repeated_permutation(3) {|e| result << e} # => [1,2]
+result  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
+        #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
+#@end
+
 @see [[m:Array#repeated_combination]], [[m:Array#permutation]]
 --- keep_if {|item| ... } -> self
 --- keep_if -> Enumerator
 
-ブロックが false を返した要素を削除します。
+ブロックが真を返した要素を残し、偽を返した要素を自身から削除します。
 
 #@samplecode 例
 a = %w{ a b c d e f }
@@ -2508,8 +2552,8 @@ a.keep_if {|v| v =~ /[aeiou]/}   # => ["a", "e"]
 a # => ["a", "e"]
 #@end
 
-[[m:Array#select!]] と同様に自身を上書きしますが、削除する要素がなかっ
-た場合には修正を行いません。
+keep_if は常に self を返しますが、[[m:Array#select!]] は要素が 1 つ以上削除されれば self を、
+1 つも削除されなければ nil を返します。
 
 #@samplecode 例
 a = %w{ a b c d e f }
@@ -2520,7 +2564,8 @@ a # => ["a", "b", "c", "d", "e", "f"]
 ブロックが与えられなかった場合は、自身と keep_if から生成した
 [[c:Enumerator]] オブジェクトを返します。
 
-@see [[m:Array#select!]]
+@see [[m:Array#select!]], [[m:Array#delete_if]]
+
 --- select    -> Enumerator
 #@since 2.6.0
 --- filter    -> Enumerator
@@ -2541,6 +2586,7 @@ a # => ["a", "b", "c", "d", "e", "f"]
 #@end
 @see [[m:Enumerable#select]]
 @see [[m:Array#select!]]
+
 --- select! {|item| block } -> self | nil
 --- select! -> Enumerator
 #@since 2.6.0
@@ -2548,7 +2594,7 @@ a # => ["a", "b", "c", "d", "e", "f"]
 --- filter! -> Enumerator
 #@end
 
-ブロックが false を返した要素を自身から削除します。
+ブロックが真を返した要素を残し、偽を返した要素を自身から削除します。
 変更があった場合は self を、
 変更がなかった場合には nil を返します。
 
@@ -2561,7 +2607,8 @@ a # => ["a", "b", "c", "d", "e", "f"]
 ブロックが与えられなかった場合は、自身と select! から生成した
 [[c:Enumerator]] オブジェクトを返します。
 
-@see [[m:Array#keep_if]]
+@see [[m:Array#keep_if]], [[m:Array#reject!]]
+
 --- rotate(cnt = 1) -> Array
 
 cnt で指定したインデックスの要素が先頭になる配列を新しく作成します。
@@ -2853,14 +2900,14 @@ init 引数を明示的に指名すると数値以外のオブジェクトにも
 [[1], [[2]], [3]].sum([])          #=> [1, [2], 3]
 #@end
 
-しかし、文字列の配列や配列の配列の場合 Array#join や Array#flatten の方が Array#sum よりも高速です。
+しかし、文字列の配列や配列の配列の場合 [[m:Array#join]] や [[m:Array#flatten]] の方が [[m:Array#sum]] よりも高速です。
 
 #@samplecode 例
 ["a", "b", "c"].join               #=> "abc"
 [[1], [[2]], [3]].flatten(1)       #=> [1, [2], 3]
 #@end
 
-"+" メソッドが再定義されている場合、Array#sum は再定義を無視することがあります(例えばInteger#+)。
+"+" メソッドが再定義されている場合、[[m:Array#sum]] は再定義を無視することがあります(例えば [[m:Integer#+]])。
 
 @see [[m:Enumerable#sum]]
 #@end

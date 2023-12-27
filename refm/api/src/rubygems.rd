@@ -322,13 +322,15 @@ Gem を検索するパスの配列を返します。
 
 Gem のホームディレクトリをセットします。
 
-@see [[m:Gem.#set_home]]
-
 --- set_paths
 
 Gem を検索するパスをセットします。
 
 @see [[m:Gem.#path]]
+
+--- ruby -> String
+
+実行中のRubyインタプリタのパスを返します。
 
 == Constants
 

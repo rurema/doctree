@@ -3,25 +3,35 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  ruby-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.versions.outputs.value }}
+    steps:
+      - id: versions
+        run: |
+          versions=$(curl -s 'https://cache.ruby-lang.org/pub/misc/ci_versions/cruby.json' | jq -c '. + []')
+          echo "value=${versions}" >> $GITHUB_OUTPUT
+
   rake:
+    needs: ruby-versions
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        ruby: ['3.0', 2.7, 2.6, 2.5, head]
+        ruby: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
         exclude:
-          - ruby: '3.0'
-            os: windows-latest
-          - ruby: 2.7
-            os: macos-latest
-          - ruby: 2.6
-            os: macos-latest
-          - ruby: 2.5
-            os: macos-latest
+        - os: macos-latest
+        - os: windows-latest
+        include:
+        - os: macos-latest
+          ruby: head
+        - os: windows-latest
+          ruby: head
 
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -48,7 +58,7 @@ jobs:
         ls -Name "*.*" | foreach {
           tar acf "../artifact/${_}.tar.xz" $_
         }
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: statichtml-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/*.*.tar.xz
@@ -57,31 +67,36 @@ jobs:
       run: |
         cd /tmp
         mv -v html html.pr
-    - uses: actions/checkout@v2
+    - name: Checkout base
+      uses: actions/checkout@v4
       with:
         ref: ${{ github.event.pull_request.base.sha }}
-    - name: Install dependencies
+    - name: Install dependencies (base)
       run: bundle install
-    - name: Run rake
+    - name: Run rake (base)
       run: bundle exec rake
+      id: generate_base
+      continue-on-error: true
     - name: Rename generated html and generate diff
       run: |
         cd /tmp
         mv -v html html.base
         git diff --no-index html.base html.pr --stat || true
         git diff --no-index html.base html.pr --output artifact/html.diff || true
-    - uses: actions/upload-artifact@v2
+      if: ${{ steps.generate_base.outcome == 'success' }}
+    - uses: actions/upload-artifact@v3
       with:
         name: diff-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/html.diff
+      if: ${{ steps.generate_base.outcome == 'success' }}
 
   misspell:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install misspell
-      run: 'go get github.com/client9/misspell/...'
+      run: 'curl -L https://git.io/misspell | bash'
     - name: Run misspell
       run: |
-        git ls-files -z | xargs -0 $HOME/go/bin/misspell -error -i addopt
+        git ls-files -z | xargs -0 ./bin/misspell -error -i addopt

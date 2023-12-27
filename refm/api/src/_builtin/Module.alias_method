@@ -38,9 +38,10 @@ alias との違いは以下の通りです。
 
 @see [[ref:d:spec/def#alias]]
 
-例:
-  module Kernel
-    alias_method :foo, :puts
-  end
+#@samplecode 例
+module Kernel
+  alias_method :foo, :puts
+end
 
-  foo "bar" # bar
+foo "bar" # bar
+#@end

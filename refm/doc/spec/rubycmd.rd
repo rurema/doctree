@@ -192,14 +192,19 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   指定した feature を有効にします。以下のいずれかを指定できます。
 //emlist{
-    * gems            rubygems (default: enabled)
-    * rubyopt         RUBYOPT 環境変数 (default: enabled)
-#@since 2.3.0
-    * did_you_mean    did_you_mean (default: enabled)
-    * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
+    * gems            rubygems (無効にするのはデバッグ専用、default: enabled)
+#@since 3.1
+    * error_highlight error_highlight (default: enabled)
 #@end
+    * did_you_mean    did_you_mean (default: enabled)
+    * rubyopt         RUBYOPT 環境変数 (default: enabled)
+    * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
 #@since 2.6.0
     * jit             JIT (default: disabled)
+#@end
+#@since 3.1
+    * mjit            MJIT (default: disabled)
+    * yjit            YJIT (default: disabled)
 #@end
 //}
 
@@ -431,7 +436,80 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
   る時の構文解析の過程を表示します。この表示は非常に冗長なので,
   コンパイラそのものをデバッグする人以外には必要ないと思います。
 
-#@since 2.6.0
+#@since 3.1
+==== JIT のオプション (実験的)
+
+: --jit
+
+  JITを有効にします。
+  YJITが有効な環境ではYJITを、それ以外の環境ではMJITを有効にします。
+
+==== MJIT のオプション (実験的)
+
+: --mjit
+
+  デフォルトの設定でMJITを有効にします。
+
+: --mjit-[option]
+
+  指定した設定でMJITを有効にします。
+
+: --mjit-warnings
+
+  JITの警告の出力を有効にします。
+
+: --mjit-debug
+
+  JITのデバッグを有効にします。(非常に遅くなります。)
+  また、指定されていれば cflags を追加します。
+
+: --mjit-wait
+
+  毎回JITコンパイルが終わるまで待ちます。(テスト用)
+
+: --mjit-save-temps
+
+  一時ファイルを $TMP か /tmp の中に残します。(テスト用)
+
+: --mjit-verbose=num
+
+  ログレベルがnum以下のログが標準エラー出力に出力されます。(デフォルト: 0)
+
+: --mjit-max-cache=num
+
+  キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 10000)
+
+: --mjit-min-calls=num
+
+  JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 10000)
+
+==== YJIT のオプション (実験的)
+
+: --yjit
+
+  デフォルトの設定でYJITを有効にします。
+
+: --yjit-[option]
+
+  指定した設定でYJITを有効にします。
+
+: --yjit-exec-mem-size=num
+
+  MiB単位で実行可能メモリブロックのサイズを指定します。(デフォルト: 256)
+
+: --yjit-call-threshold=num
+
+  JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 10)
+
+: --yjit-max-versions=num
+
+  ベーシックブロックごとのバージョンの最大数を指定します。(デフォルト: 4)
+
+: --yjit-greedy-versioning
+
+  貪欲なバージョニングモードを指定します。(デフォルト: disabled)
+#@end
+#@if ("2.6.0" <= version and version < "3.1")
 ==== JIT のオプション (実験的)
 
 : --jit
@@ -462,6 +540,16 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   ログレベルがnum以下のログが標準エラー出力に出力されます。(デフォルト: 0)
 
+#@since 2.7.0
+: --jit-max-cache=num
+
+  キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 100)
+
+: --jit-min-calls=num
+
+  JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 10000)
+#@else
+#@# 2.6 だけデフォルトが違う
 : --jit-max-cache=num
 
   キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 1000)
@@ -469,6 +557,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 : --jit-min-calls=num
 
   JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 5)
+#@end
 #@end
 
 ===[a:shebang] インタプリタ行の解釈
