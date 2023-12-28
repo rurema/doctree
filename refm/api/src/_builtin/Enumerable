@@ -1112,11 +1112,11 @@ e.take_while {|i| i < 3 }   # => [1, 2]
 [[c:Enumerator]] を返します。
 
 #@samplecode 例
-(1..3).reverse_each # => #<Enumerator: 1..3:reverse_each>
-(1..3).reverse_each { |v| p v }
-# => 3
-#    2
-#    1
+{a: 1, b: 2, c: 3}.reverse_each # => #<Enumerator: ...>
+{a: 1, b: 2, c: 3}.reverse_each { |v| p v }
+# => [:c, 3]
+#    [:b, 2]
+#    [:a, 1]
 #@end
 
 --- each_with_object(obj) -> Enumerator
