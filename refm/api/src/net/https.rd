@@ -243,7 +243,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 [[m:OpenSSL::SSL::SSLContext.new]] で指定できるものと同じです。
 
 @param ver 利用するプロトコルの種類
-@see [[m:Net::HTTP#ssl_version]], [[m:OpenSSL::SSL::SSL#ssl_version=]]
+@see [[m:Net::HTTP#ssl_version]], [[m:OpenSSL::SSL::SSLContext#ssl_version=]]
 
 
 --- ciphers -> String | [String] | nil
