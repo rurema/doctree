@@ -325,6 +325,57 @@ p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz') # => true
 
 @see [[m:Range#include?]], [[m:Range#===]]
 
+#@since 3.3
+--- overlap?(range) -> bool
+
+self と range に重なりがある場合は true を、そうでない場合は false を返します。
+
+@param range self と重なりがあるかどうかを調べたい Range オブジェクトを指定します。
+
+@raise TypeError 引数に Range でないオブジェクトを指定した場合に発生します。
+
+#@samplecode 例
+(0..2).overlap?(1..3)  #=> true
+(0..2).overlap?(3..4)  #=> false
+(0..).overlap?(..0)    #=> true
+(0..).overlap?(...0)   #=> false
+#@end
+
+self の端点と range の端点が比較可能でない（<=> メソッドが nil を返す）場合、false を返します。
+
+#@samplecode 比較可能でない例
+(1..3).overlap?('a'..'d') #=> false
+#@end
+
+self または range が空である場合、false を返します。
+
+ここで、Range が空であるとは、
+
+ * 始端が終端より大きい
+ * [[m:Range#exclude_end?]] が true であり、始端と終端が等しい
+
+のいずれかを満たすことをいいます。
+
+#@samplecode Range が空である例
+(0..2).overlap?(1...1) #=> false
+(1...1).overlap?(0..2) #=> false
+(0..2).overlap?(2..0)  #=> false
+#@end
+
+なお、上記の意味において空であることと、その Range オブジェクトが表す範囲に含まれるオブジェクトが存在しないこととは、同値ではないことに注意してください。
+
+例えば、[[c:Float]] クラスにおいては -Float::INFINITY が最小値であり、-Float::INFINITY より小さい値は存在しません。
+従って、...-Float::INFINITY という Range オブジェクトが表す範囲に含まれるオブジェクトは存在しません。
+
+しかしながら、overlap? メソッドでは、...-Float::INFINITY は上記の「空である」条件を満たさないため、「空ではない」とみなされます。
+そのため、...-Float::INFINITY は ...-Float::INFINITY 自身と重なりがあると判定されます。
+
+#@samplecode 例
+(...-Float::INFINITY).overlap?(...-Float::INFINITY) #=> true
+#@end
+
+#@end
+
 --- begin -> object
 --- first -> object
 
