@@ -1334,7 +1334,7 @@ str == eval(str.dump) となることが保証されています。
 
 #@samplecode 例
 # p だとさらにバックスラッシュが増えて見にくいので puts している
-puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
+puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\x00\b10\\\""
 #@end
 
 #@since 2.5.0
