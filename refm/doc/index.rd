@@ -70,6 +70,7 @@ Ruby の文法:
   * [[d:spec/control]]
   * [[d:spec/call]]
   * [[d:spec/def]]
+  * [[d:spec/pattern_matching]]
 
 その他:
   * [[d:spec/m17n]]
