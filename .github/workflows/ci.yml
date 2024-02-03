@@ -58,7 +58,7 @@ jobs:
         ls -Name "*.*" | foreach {
           tar acf "../artifact/${_}.tar.xz" $_
         }
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: statichtml-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/*.*.tar.xz
@@ -84,7 +84,7 @@ jobs:
         git diff --no-index html.base html.pr --stat || true
         git diff --no-index html.base html.pr --output artifact/html.diff || true
       if: ${{ steps.generate_base.outcome == 'success' }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: diff-${{ matrix.os }}-${{ matrix.ruby }}
         path: /tmp/artifact/html.diff
