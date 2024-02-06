@@ -246,7 +246,11 @@ end
 
 #@end
 #@since 2.5.0
+#@since 3.0
+--- full_message(highlight: true, order: :top)  -> String
+#@else
 --- full_message(highlight: true, order: :bottom)  -> String
+#@end
 例外の整形された文字列を返します。
 
 返される文字列は Ruby が捕捉されなかった例外を標準エラー出力に出力するときと
@@ -263,10 +267,29 @@ end
 @param highlight エスケープシーケンスによる文字装飾をつけるかどうかを指定します。
                  デフォルト値は [[m:Exception.to_tty?]] の返り値と同じです。
 
+#@since 3.0
+@param order :top か :bottom で指定する必要があります。
+             バックトレースの一番奥がエラーメッセージの上(top)か下(bottom)かを指定します。
+             デフォルト値は :top です。
+#@else
 @param order :top か :bottom で指定する必要があります。
              バックトレースの一番奥がエラーメッセージの上(top)か下(bottom)かを指定します。
              デフォルト値は [[m:Exception.to_tty?]] が真なら :bottom で偽なら :top です。
+#@end
 
+#@since 3.0
+#@samplecode 例
+begin
+  raise "test"
+rescue => e
+  p e.full_message   # => "test.rb:2:in `<main>': \e[1mtest (\e[1;4mRuntimeError\e[m\e[1m)\e[m\n"
+  $stderr = $stdout
+  p e.full_message   # => "test.rb:2:in `<main>': test (RuntimeError)\n"
+  $stderr = STDERR
+  p e.full_message   # => "test.rb:2:in `<main>': \e[1mtest (\e[1;4mRuntimeError\e[m\e[1m)\e[m\n"
+end
+#@end
+#@else
 #@samplecode 例
 begin
   raise "test"
@@ -277,6 +300,7 @@ rescue => e
   $stderr = STDERR
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
 end
+#@end
 #@end
 
 @see [[m:Exception.to_tty?]]
