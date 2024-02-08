@@ -113,7 +113,16 @@ libyaml のバージョンを返します。
 @see [[m:Psych::LIBYAML_VERSION]]
 
 #@since 2.5.0
+#@since 2.6.0
+#@since 3.1
+--- load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
+#@else
 --- load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
+--- load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
+#@end
+#@else
+--- load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
+#@end
 #@else
 --- load(yaml, filename = nil, fallback = false) -> object
 #@end
