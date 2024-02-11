@@ -774,7 +774,7 @@ GNU 版にあるような幅指定などもできます。
 木曜日なら真を返します。
 
 --- to_date -> Date
-対応する [[c:Date]] オブジェクトを返します。
+self を返します。
 
 --- to_datetime -> DateTime
 対応する [[c:DateTime]] オブジェクトを返します。
@@ -823,4 +823,4 @@ XML Scheme (date) による書式の文字列を返します。
 対応する [[c:DateTime]] オブジェクトを返します。
 
 --- to_time -> Time
-対応する [[c:Time]] オブジェクトを返します。
+self を返します。
