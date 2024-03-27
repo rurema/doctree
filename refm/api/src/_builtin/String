@@ -2422,16 +2422,14 @@ p str        # =>"123456789"
 --- strip -> String
 
 文字列先頭と末尾の空白文字を全て取り除いた文字列を生成して返します。
-空白文字の定義は " \t\r\n\f\v" です。
-また、文字列右側からは "\0" も取り除きますが、
-左側の "\0" は取り除きません。
+空白文字の定義は " \t\r\n\f\v\0" です。
 
 #@samplecode 例
 p "  abc  \r\n".strip    #=> "abc"
 p "abc\n".strip          #=> "abc"
 p "  abc".strip          #=> "abc"
 p "abc".strip            #=> "abc"
-p "  \0  abc  \0".strip  # => "\000  abc"   # 右側のみ "\0" も取り除く
+p "  \0  abc  \0".strip  #=> "abc"
 
 str = "\tabc\n"
 p str.strip              #=> "abc"
@@ -2444,9 +2442,7 @@ p str                    #=> "\tabc\n" (元の文字列は変化しない)
 --- strip! -> self | nil
 
 先頭と末尾の空白文字を全て破壊的に取り除きます。
-空白文字の定義は " \t\r\n\f\v" です。
-また、文字列右側からは "\0" も取り除きますが、
-左側の "\0" は取り除きません。
+空白文字の定義は " \t\r\n\f\v\0" です。
 
 strip! は、内容を変更した self を返します。
 ただし取り除く空白がなかったときは nil を返します。
@@ -2462,7 +2458,7 @@ p str            #=> "abc"
 
 str = "  \0  abc  \0"
 str.strip!
-p str            # => "\000  abc"   # 右側の "\0" のみ取り除かれる
+p str            #=> "abc"
 #@end
 
 @see [[m:String#strip]], [[m:String#lstrip]]
@@ -2470,7 +2466,7 @@ p str            # => "\000  abc"   # 右側の "\0" のみ取り除かれる
 --- lstrip -> String
 
 文字列の先頭にある空白文字を全て取り除いた新しい文字列を返します。
-空白文字の定義は " \t\r\n\f\v" です。
+空白文字の定義は " \t\r\n\f\v\0" です。
 
 #@samplecode 例
 p "  abc\n".lstrip     #=> "abc\n"
@@ -2483,7 +2479,7 @@ p "abc\n".lstrip       #=> "abc\n"
 --- lstrip! -> self | nil
 
 文字列の先頭にある空白文字を全て破壊的に取り除きます。
-空白文字の定義は " \t\r\n\f\v" です。
+空白文字の定義は " \t\r\n\f\v\0" です。
 
 lstrip! は self を変更して返します。
 ただし取り除く空白がなかったときは nil を返します。
