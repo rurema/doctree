@@ -1799,7 +1799,11 @@ p Float("")           # invalid value for Float(): "" (ArgumentError)
 --- Integer(arg, base = 0) -> Integer
 #@end
 
-引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
+引数を整数
+#@until 3.2
+([[c:Fixnum]],[[c:Bignum]])
+#@end
+に変換した結果を返します。
 
 引数が数値の場合は直接変換し（小数点以下切り落とし）、
 文字列の場合は、進数を表す接頭辞を含む整数表現とみなせる文字列のみ
