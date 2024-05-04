@@ -438,6 +438,30 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 # raises: TypeError: can't iterate from Float
 #@end
 
+#@since 3.3
+--- reverse_each -> Enumerator
+--- reverse_each {|element| ... } -> self
+
+逆順に各要素に対してブロックを評価します。
+
+内部で各要素を保持した配列を作ります。ただし、端点が [[c:Integer]] である場合は、配列を作らないように最適化が行われています。
+
+ブロックを省略した場合は、各要素を逆順に辿る
+[[c:Enumerator]] を返します。
+
+@raise TypeError 終端を持たない範囲オブジェクトに対してこのメソッドを呼んだ場合に発生します。
+
+#@samplecode 例
+(1..3).reverse_each # => #<Enumerator: ...>
+(1..3).reverse_each { |v| p v }
+# => 3
+#    2
+#    1
+(1..).reverse_each { |v| p v } # raises: TypeError: can't iterate from NilClass
+#@end
+
+#@end
+
 --- end -> object
 --- last -> object
 
