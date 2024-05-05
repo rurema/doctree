@@ -142,6 +142,19 @@ filename はパース中に発生した例外のメッセージに用います�
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.parse]]
 
+#@since 2.6.0
+#@samplecode 例
+Psych.load("--- a")           # => 'a'
+Psych.load("---\n - a\n - b") # => ['a', 'b']
+
+begin
+  Psych.load("--- `", filename: "file.txt")
+rescue Psych::SyntaxError => ex
+  p ex.file    # => 'file.txt'
+  p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
+end
+#@end
+#@else
 #@samplecode 例
 Psych.load("--- a")           # => 'a'
 Psych.load("---\n - a\n - b") # => ['a', 'b']
@@ -152,6 +165,7 @@ rescue Psych::SyntaxError => ex
   p ex.file    # => 'file.txt'
   p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
 end
+#@end
 #@end
 
 キーワード引数 symbolize_names に true を指定した場合はハッシュのキー
