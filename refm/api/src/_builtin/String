@@ -3691,8 +3691,15 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 @see [[m:String#bytesplice]]
 --- bytesplice(index, length, str) -> String
 --- bytesplice(range, str)         -> String
+#@since 3.3
+--- bytesplice(range, str, str_range) -> String
+#@end
 
 self の一部または全部を str で置き換えて str を返します。
+#@since 3.3
+str_range が与えられたとき、self の一部または全部を str.byteslice(str_range) で置き換えて str を返します。
+ただし、str.byteslice(str_range) は新しい文字列としてメモリ割り当てされません。
+#@end
 
 置き換え範囲の指定は、長さの指定が省略できないこと以外は
 [[m:String#byteslice]] と同じです。
@@ -3702,6 +3709,9 @@ self の一部または全部を str で置き換えて str を返します。
 @param index 置換したい文字列の範囲の始端
 @param length 置換したい文字列の範囲の長さ
 @param range 置換したい文字列の範囲を示す Range オブジェクト
+#@since 3.3
+@param str_range str の範囲を示す Range オブジェクト
+#@end
 @raise IndexError index や length が範囲外の場合に発生
 @raise RangeError range が範囲外の場合に発生
 @raise IndexError 指定した始端や終端が文字列の境界と一致しない場合に発生
