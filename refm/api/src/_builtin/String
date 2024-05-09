@@ -3691,7 +3691,7 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 @see [[m:String#bytesplice]]
 --- bytesplice(index, length, str) -> String
 #@since 3.3
---- bytesplice(range, str, str_index, str_length) -> String
+--- bytesplice(index, length, str, str_index, str_length) -> String
 #@end
 --- bytesplice(range, str)         -> String
 #@since 3.3
