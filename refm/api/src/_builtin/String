@@ -3698,9 +3698,10 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 --- bytesplice(range, str, str_range) -> String
 #@end
 
-self の一部または全部を str で置き換えて str を返します。
+self の一部または全部を str で置き換えて self を返します。
+
 #@since 3.3
-str_index と str_length もしくは str_range が与えられたとき、self の一部または全部を str.byteslice(str_index, str_length) もしくは str.byteslice(str_range) で置き換えて str を返します。
+str_index と str_length もしくは str_range が与えられたとき、self の一部または全部を str.byteslice(str_index, str_length) もしくは str.byteslice(str_range) で置き換えます。
 ただし、str の部分文字列は新しい文字列オブジェクトとして生成されません。
 #@end
 
