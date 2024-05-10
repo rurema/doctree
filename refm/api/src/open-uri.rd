@@ -473,7 +473,7 @@ open('http://example.com/') {|f|
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-URL.open('http://www.ruby-lang.org/') {|f|
+URI.open('http://www.ruby-lang.org/') {|f|
   p f.base_uri
   #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
 }
@@ -493,7 +493,7 @@ open('http://www.ruby-lang.org/') {|f|
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-URL.open('http://example.com/') {|f|
+URI.open('http://example.com/') {|f|
   p f.meta
   #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
   #    "content-type"=>"text/html;charset=utf-8",
