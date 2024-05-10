@@ -429,13 +429,13 @@ foo{ p [_1, _2, _3] } # => ["a", "b", "c"]
 
 ブロックパラメータと番号指定パラメータを同時に使うことはできません。
 
-#@samplecode
+//emlist{
 def foo
   yield "a","b","c"
 end
 
 foo {|a, b, c| p [_1, a] } # => ordinary parameter is defined (SyntaxError)
-#@end
+//}
 
 なお、ブロック内で _2 以降が使用されているかどうかで、_1 の意味が異なります。
 
