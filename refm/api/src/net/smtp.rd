@@ -120,7 +120,7 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼�
   # 例
   require 'net/smtp'
   Net::SMTP.start('smtp.example.com', 25,
-                  'user: your_account', password: 'your_password', authtype: :cram_md5)
+                   user: 'your_account', password: 'your_password', authtype: :cram_md5)
 #@end
 
 === TLSを用いたSMTP通信
