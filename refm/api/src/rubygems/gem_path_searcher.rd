@@ -12,13 +12,13 @@ Gem パッケージに含まれているファイルのうちロード可能な�
 
 与えられたパスにマッチする [[c:Gem::Specification]] を一つだけ返します。
 
-@see [[m:Array#find]]
+@see [[m:Enumerable#find]]
 
 --- find_all(path) -> [Gem::Specification]
 
 与えられたパスにマッチする [[c:Gem::Specification]] を全て返します。
 
-@see [[m:Array#find_all]]
+@see [[m:Enumerable#find_all]]
 
 --- init_gemspecs -> [Gem::Specification]
 
@@ -57,5 +57,3 @@ Gem パッケージに含まれているファイルのうちロード可能な�
 --- new -> Gem::GemPathSearcher
 
 検索を行うのに必要なデータを初期化します。
-
-
