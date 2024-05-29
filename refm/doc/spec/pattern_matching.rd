@@ -58,7 +58,7 @@ in 節と when 節は1つの case 式の中に混ぜて書くことはできま�
 case/in 式は 「網羅的」 です。もし case 式の値がどの節にもマッチせず else 節がない場合、例外 NoMatchingPatternError が発生します。
 
 #@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
-そのため、条件付きのマッチやアンパックに case 式が使われることがあります。
+そのため、条件付きのマッチや展開に case 式が使われることがあります。
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
@@ -78,10 +78,10 @@ end
 
 #@since 3.0
 #@# whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
-一方、『=>』 演算子は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
+一方、『=>』 演算子は、期待されるデータ構造があらかじめ分かっている場合に、その一部を展開するのに有効です。
 #@else
 #@# whilst standalone <code>in</code> statement is most useful when the expected data structure is known beforehand, to just unpack parts of it:
-一方、『in』 文は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
+一方、『in』 文は、期待されるデータ構造があらかじめ分かっている場合に、その一部を展開するのに有効です。
 #@end
 
 #@samplecode
@@ -221,7 +221,7 @@ end
 #@end
 
 #@# Both array and hash patterns support "rest" specification:
-Array パターン と Hash パターン ともに "残余"(rest) の部分にマッチする構文をサポートしています。
+Array パターン と Hash パターン ともに残りの部分にマッチする構文をサポートしています。
 
 #@samplecode
 case [1, 2, 3]
@@ -386,7 +386,7 @@ end
 #@end
 
 #@# The "rest" part of a pattern also can be bound to a variable:
-パターンの "残余"(rest) の部分も同様に変数に束縛できます。
+パターンの残りの部分も同様に変数に束縛できます。
 
 #@samplecode
 case [1, 2, 3]
