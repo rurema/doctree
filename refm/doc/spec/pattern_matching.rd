@@ -10,11 +10,26 @@
   * [[ref:pattern_syntax]]
   * [[ref:some_undefined_behavior_examples]]
 
+#@since 3.0
 #@# Pattern matching is a feature allowing deep matching of structured values: checking the structure and binding the matched parts to local variables.
 パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチを可能にする機能です。(『束縛』は、パターンマッチの輸入元である関数型言語の用語で、Ruby では代入と読み替えても問題ありません)
+#@else
+#@# Pattern matching is an experimental feature allowing deep matching of structured values: checking the structure and binding the matched parts to local variables.
+パターンマッチは、構造化された値に対して、構造をチェックし、マッチした部分をローカル変数に束縛するという、深いマッチを可能にする実験的な機能です。(『束縛』は、パターンマッチの輸入元である関数型言語の用語で、Ruby では代入と読み替えても問題ありません)
+#@end
 
+#@since 3.0
 #@# Pattern matching in Ruby is implemented with the +case+/+in+ expression:
 Rubyでのパターンマッチは case/in 式を用いて実装されています。
+#@else
+#@# Pattern matching in Ruby is implemented with the +in+ operator, which can be used in a standalone expression:
+Rubyでのパターンマッチは in 演算子を用いて実装されており、単体の式や
+
+  <expression> in <pattern>
+
+#@# or within the +case+ statement:
+case 文の中で利用できます。
+#@end
 
   case <expression>
   in <pattern1>
@@ -30,12 +45,14 @@ Rubyでのパターンマッチは case/in 式を用いて実装されていま�
 #@# (Note that +in+ and +when+ branches can NOT be mixed in one +case+ expression.)
 in 節と when 節は1つの case 式の中に混ぜて書くことはできません。
 
+#@since 3.0
 #@# Or with the <code>=></code> operator and the +in+ operator, which can be used in a standalone expression:
 『=>』 演算子と in 演算子で、単体の式で使用することも可能です。
 
   <expression> => <pattern>
 
   <expression> in <pattern>
+#@end
 
 #@# The +case+/+in+ expression is _exhaustive_: if the value of the expression does not match any branch of the +case+ expression (and the +else+ branch is absent), +NoMatchingPatternError+ is raised.
 case/in 式は 「網羅的」 です。もし case 式の値がどの節にもマッチせず else 節がない場合、例外 NoMatchingPatternError が発生します。
@@ -59,14 +76,24 @@ end
 # "Connect with user 'admin'" と出力
 #@end
 
+#@since 3.0
 #@# whilst the <code>=></code> operator is most useful when the expected data structure is known beforehand, to just unpack parts of it:
 一方、『=>』 演算子は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
+#@else
+#@# whilst standalone <code>in</code> statement is most useful when the expected data structure is known beforehand, to just unpack parts of it:
+一方、『in』 文は、期待されるデータ構造があらかじめ分かっている場合に、その一部をアンパックするのに有効です。
+#@end
 
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
 
+#@since 3.0
 #@# config => {db: {user:}} # will raise if the config's structure is unexpected
 config => {db: {user:}} # もし config の構造が期待したものでなかった場合には、例外が発生する
+#@else
+#@# config in {db: {user:}} # will raise if the config's structure is unexpected
+config in {db: {user:}} # もし config の構造が期待したものでなかった場合には、例外が発生する
+#@end
 
 puts "Connect with user '#{user}'"
 #@# # Prints: "Connect with user 'admin'"
@@ -78,9 +105,11 @@ puts "Connect with user '#{user}'"
 #@# You can use it when you only want to know if a pattern has been matched or not:
 パターンにマッチするかどうかだけを知りたいときに使えます。
 
+#@since 3.0
 #@samplecode
 users = [{name: "Alice", age: 12}, {name: "Bob", age: 23}]
 users.any? {|user| user in {name: /B/, age: 20..} } #=> true
+#@end
 #@end
 
 #@# See below for more examples and explanations of the syntax.
@@ -96,8 +125,10 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
   * すべてのRubyオブジェクト (when と同じように、『===』演算子でマッチする) (「Value パターン」)
 #@#   * array pattern: <code>[<subpattern>, <subpattern>, <subpattern>, ...]</code>; (<em>Array pattern</em>)
   * Array パターン: 『[<subpattern>, <subpattern>, <subpattern>, ...]』 (「Array パターン」)
+#@since 3.0
 #@#   * find pattern: <code>[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]</code>; (<em>Find pattern</em>)
   * Find パターン: 『[*variable, <subpattern>, <subpattern>, <subpattern>, ..., *variable]』 (「Find パターン」)
+#@end
 #@#   * hash pattern: <code>{key: <subpattern>, key: <subpattern>, ...}</code> (<em>Hash pattern</em>)
   * Hash パターン: 『{key: <subpattern>, key: <subpattern>, ...}』 (「Hash パターン」)
 #@#   * combination of patterns with <code>|</code>; (<em>Alternative pattern</em>)
@@ -105,11 +136,21 @@ users.any? {|user| user in {name: /B/, age: 20..} } #=> true
 #@#   * variable capture: <code><pattern> => variable</code> or <code>variable</code>; (<em>As pattern</em>, <em>Variable pattern</em>)
   * 変数のキャプチャ: 『<pattern> => variable』 または 『variable』 (「As パターン」, 「Variable パターン」)
 
+#@since 3.0
 #@# Any pattern can be nested inside array/find/hash patterns where <code><subpattern></code> is specified.
 Array/Find/Hash パターンの中に 『<subpattern>』 と書かれている場所では任意のパターンをネストさせることができます。
+#@else
+#@# Any pattern can be nested inside array/hash patterns where <code><subpattern></code> is specified.
+Array/Hash パターンの中に 『<subpattern>』 と書かれている場所では任意のパターンをネストさせることができます。
+#@end
 
+#@since 3.0
 #@# Array patterns and find patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
 Array パターン と Find パターン は配列か deconstruct メソッド(後述)を持つオブジェクトにマッチします。
+#@else
+#@# Array patterns match arrays, or objects that respond to +deconstruct+ (see below about the latter).
+Array パターン は配列か deconstruct メソッド(後述)を持つオブジェクトにマッチします。
+#@end
 
 #@# Hash patterns match hashes, or objects that respond to +deconstruct_keys+ (see below about the latter). Note that only symbol keys are supported for hash patterns.
 Hash パターン はハッシュか deconstruct_keys メソッド(後述)を持つオブジェクトにマッチします。Hash パターン で利用できるキーはシンボルのみです。
@@ -202,8 +243,18 @@ end
 #=> "matched"
 #@end
 
+#@since 3.1
 #@# Parentheses around both kinds of patterns could be omitted:
 Array パターン や Hash パターン は両端の 『[]』 や 『{}』 といった括弧を省略できます。
+#@else
+#@since 3.0
+#@# In +case+ (but not in <code>=></code> and +in+) expressions, parentheses around both kinds of patterns could be omitted:
+case 文 (in 文や => ではない) では、パターン の両端の 『[]』 や 『{}』 といった括弧を省略できます。
+#@else
+#@# In +case+ (but not in standalone +in+) statement, parentheses around both kinds of patterns could be omitted
+case 文 (単体の in 文ではない) では、パターン の両端の 『[]』 や 『{}』 といった括弧を省略できます。
+#@end
+#@end
 
 #@samplecode
 case [1, 2]
@@ -225,6 +276,7 @@ end
 #=> "matched"
 #@end
 
+#@since 3.1
 #@samplecode
 [1, 2] => a, b
 #@end
@@ -235,6 +287,7 @@ end
 
 #@samplecode
 {a: 1, b: 2, c: 3} => a:
+#@end
 #@end
 
 #@# このコメントの前後のコードブロックを1つにまとめると
@@ -444,6 +497,7 @@ end
 #=> "not matched"
 #@end
 
+#@since 3.1
 #@# In addition to pinning local variables, you can also pin instance, global, and class variables:
 ローカル変数に加えてインスタンス変数やグローバル変数、クラス変数に対してもピン演算子は利用できます。
 
@@ -476,12 +530,18 @@ else
 end
 #=> "matched"
 #@end
+#@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
 ===[a:matching_non_primitive_objects] 非プリミティブなオブジェクトのマッチ: deconstruct メソッドと deconstruct_keys メソッド
 
+#@since 3.0
 #@# As already mentioned above, array, find, and hash patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array/find patterns) or +deconstruct_keys+ (for hash patterns).
 既に述べたように、Array/Find/Hash パターンは、配列やハッシュのリテラルの他に、deconstruct メソッド(Array/Find パターン) あるいは deconstruct_keys メソッド(Hash パターン) を定義しているオブジェクトに対しても、マッチを試みます。
+#@else
+#@# As already mentioned above, hash and array patterns besides literal arrays and hashes will try to match any object implementing +deconstruct+ (for array patterns) or +deconstruct_keys+ (for hash patterns).
+既に述べたように、Array/Hash パターンは、配列やハッシュのリテラルの他に、deconstruct メソッド(Array パターン) あるいは deconstruct_keys メソッド(Hash パターン) を定義しているオブジェクトに対しても、マッチを試みます。
+#@end
 
 #@samplecode
 class Point
@@ -564,6 +624,19 @@ end
 #=> "matched: 1"
 #@end
 
+#@since 3.2
+#@# These core and library classes implement deconstruction:
+以下のクラスは deconstruct や deconstruct_keys を実装しています。
+
+#@# * MatchData#deconstruct and MatchData#deconstruct_keys;
+[[m:MatchData#deconstruct]]
+[[m:MatchData#deconstruct_keys]]
+#@# * Time#deconstruct_keys, Date#deconstruct_keys, DateTime#deconstruct_keys.
+[[m:Time#deconstruct_keys]]
+[[m:Date#deconstruct_keys]]
+[[m:DateTime#deconstruct_keys]]
+#@end
+
 #@# == Guard clauses
 ===[a:guard_clauses] ガード節
 
@@ -606,6 +679,8 @@ end
 #@# == Current feature status
 ===[a:current_feature_status] 機能の現状
 
+#@until 3.2
+#@since 3.1
 #@# As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
 Ruby 3.1 の時点では、Find パターンは 「実験的機能」 扱いです。Find パターンの構文は将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
 
@@ -614,13 +689,37 @@ Ruby 3.1 の時点では、Find パターンは 「実験的機能」 扱いで�
 # warning: Find pattern is experimental, and the behavior may change in future versions of Ruby!
 # warning: One-line pattern matching is experimental, and the behavior may change in future versions of Ruby!
 #@end
+#@else
+#@since 3.0
+#@# As of Ruby 3.0, one-line pattern matching and find pattern are considered _experimental_: its syntax can change in the future. Every time you use these features in code, the warning will be printed:
+Ruby 3.0 の時点では、1行パターンマッチ と Find パターンは 「実験的機能」 扱いです。1行パターンマッチ と Find パターンの構文は将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
+
+#@samplecode
+[0] => [*, 0, *]
+# warning: Find pattern is experimental, and the behavior may change in future versions of Ruby!
+# warning: One-line pattern matching is experimental, and the behavior may change in future versions of Ruby!
+#@end
+#@else
+#@# As of Ruby 2.7, feature is considered _experimental_: its syntax can change in the future, and the performance is not optimized yet. Every time you use pattern matching in code, the warning will be printed:
+Ruby 2.7 の時点では、パターンマッチは 「実験的機能」 扱いです。パターンマッチの構文は将来的に変更の可能性があり、まだパフォーマンスが最適化されていません。これらの機能を利用する場合は毎回警告が出力されます。
+
+#@samplecode
+{a: 1, b: 2} in {a:}
+# warning: Pattern matching is experimental, and the behavior may change in future versions of Ruby!
+#@end
+#@end
+#@end
 
 #@# To suppress this warning, one may use the Warning::[]= method:
 この警告を抑制したければ、Warning::[]= メソッドが利用できます。
 
 #@samplecode
 Warning[:experimental] = false
+#@since 3.0
 eval('[0] => [*, 0, *]')
+#@else
+eval('{a: 1, b: 2} in {a:}')
+#@end
 #@# # ...no warning printed...
 # ...警告は出力されない...
 #@end
@@ -631,7 +730,11 @@ eval('[0] => [*, 0, *]')
 #@samplecode
 #@# Warning[:experimental] = false # At the time this line is evaluated, the parsing happened and warning emitted
 Warning[:experimental] = false # この行を評価する段階では、構文解析とそれによる警告の発生は、既に終了している
+#@since 3.0
 [0] => [*, 0, *]
+#@else
+{a: 1, b: 2} in {a:}
+#@end
 #@end
 
 #@# So, only subsequently loaded files or `eval`-ed code is affected by switching the flag.
@@ -639,6 +742,7 @@ Warning[:experimental] = false # この行を評価する段階では、構文�
 
 #@# Alternatively, the command line option <code>-W:no-experimental</code> can be used to turn off "experimental" feature warnings.
 代わりに、コマンドラインオプションとして 『-W:no-experimental』 を渡すことで "experimental" な機能に対する警告を出力させないようにできます。
+#@end
 
 #@# == Appendix A. Pattern syntax
 ===[a:pattern_syntax] 付記A: パターンのシンタックス
@@ -651,16 +755,22 @@ Warning[:experimental] = false # この行を評価する段階では、構文�
          | alternative_pattern
          | as_pattern
          | array_pattern
+#@since 3.0
          | find_pattern
+#@end
          | hash_pattern
 
   value_pattern: literal
                | Constant
+#@since 3.1
                | ^local_variable
                | ^instance_variable
                | ^class_variable
                | ^global_variable
                | ^(expression)
+#@else
+               | ^variable
+#@end
 
   variable_pattern: variable
 
@@ -672,9 +782,11 @@ Warning[:experimental] = false # この行を評価する段階では、構文�
                | Constant(pattern, ..., *variable)
                | Constant[pattern, ..., *variable]
 
+#@since 3.0
   find_pattern: [*variable, pattern, ..., *variable]
               | Constant(*variable, pattern, ..., *variable)
               | Constant[*variable, pattern, ..., *variable]
+#@end
 
   hash_pattern: {key: pattern, key:, ..., **variable}
               | Constant(key: pattern, key:, ..., **variable)
