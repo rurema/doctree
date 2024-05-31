@@ -125,6 +125,11 @@ self <=> min が負数を返したときは min を、
 self <=> max が正数を返したときは max を、
 それ以外の場合は self を返します。
 
+#@since 3.0
+min が nil の場合、min は self よりも小さい値として扱われます。
+max が nil の場合、max は self よりも大きい値として扱われます。
+#@end
+
 #@since 2.7.0
 range が1つ渡された場合は次のようになります。
 self <=> range.begin が負数を返したときは range.begin を、
@@ -153,6 +158,14 @@ range.end が nil の場合、range.end は self よりも大きい値として�
 
 'd'.clamp('a', 'f')      #=> 'd'
 'z'.clamp('a', 'f')      #=> 'f'
+#@end
+
+#@since 3.0
+#@samplecode nil を渡す例
+5.clamp(0, nil)          #=> 5
+5.clamp(nil, 0)          #=> 0
+5.clamp(nil, nil)        #=> 5
+#@end
 #@end
 
 #@since 2.7.0

@@ -486,7 +486,7 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
   Ruby の require の irb 版です。
   ファイル path を現在の irb インタプリタ上で実行します。
 
-  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#kernel]] と異な
+  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#require]] と異な
   り、path の内容を irb で一行ずつタイプしたかのように、irb 上で一行ず
   つ評価されます。require に成功した場合は true を、そうでない場合は
   false を返します。

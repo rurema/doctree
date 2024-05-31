@@ -33,6 +33,23 @@ p Regexp.new('abc').frozen?
 
 == Class Methods
 
+#@since 3.3.0
+--- compile(string, option = nil) -> Regexp
+--- new(string, option = nil) -> Regexp
+
+文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
+
+第一引数が正規表現であれば第一引数を複製して返します。第二引数は警告の上無視されます。
+
+@param string 正規表現を文字列として与えます。
+
+@param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],
+              [[m:Regexp::EXTENDED]]
+              の論理和を指定します。
+              [[c:Integer]] 以外であれば真偽値の指定として見なされ
+              、真(nil, false 以外)であれば
+              [[m:Regexp::IGNORECASE]] の指定と同じになります。
+#@else
 --- compile(string, option = nil, code = nil) -> Regexp
 --- new(string, option = nil, code = nil) -> Regexp
 
@@ -51,6 +68,7 @@ p Regexp.new('abc').frozen?
 
 @param code "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
             それ以外の指定は警告を出力します。
+#@end
 
 @raise  RegexpError 正規表現のコンパイルに失敗した場合発生します。
 

@@ -430,9 +430,18 @@ end
 
 @see [[ruby-core:50864]]
 
+#@since 3.2
+--- binding -> Binding | nil
+#@else
 --- binding -> Binding
+#@end
 
 発生したイベントによって生成された [[c:Binding]] オブジェクトを返します。
+
+#@since 3.2
+C で記述されたメソッドは binding を生成しないため、
+:c_call および :c_return イベントに対しては nil を返すことに注意してください。
+#@end
 
 #@samplecode 例
 def foo(ret)
@@ -450,6 +459,10 @@ foo 1
 イベントを発生させたオブジェクトを返します。
 
 以下のようにする事で同じ値を取得できます。
+
+#@since 3.2
+なお、self メソッドは binding が nil になる :c_call および :c_return イベントに対しても正しく動作します。
+#@end
 
 #@samplecode 例
 trace.binding.eval('self')

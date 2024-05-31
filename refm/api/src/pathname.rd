@@ -966,11 +966,11 @@ FileTest.world_writable?(self.to_s) と同じです。
 
 #@since 2.1.0
 
---- write(string, offset=nil, opt={}) -> Integer
+--- write(string, offset=nil, **opts) -> Integer
 
 #@#noexample IO.write の例を参照
 
-IO.write(self.to_s, *args)と同じです。
+IO.write(self.to_s, string, offset, **opts)と同じです。
 
 @see [[m:IO.write]]
 
@@ -1116,10 +1116,8 @@ Dir.open(self.to_s, &block) と同じです。
 self 配下のすべてのファイルやディレクトリを
 一つずつ引数 pathname に渡してブロックを実行します。
 
-#@samplecode
-require 'find'
-Find.find(self.to_s) {|f| yield Pathname.new(f)}
-#@end
+  require 'find'
+  Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
 と同じです。
 

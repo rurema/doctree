@@ -60,10 +60,10 @@ YAML ドキュメントをパースして Ruby のオブジェクトに変換す
 ==== YAML ドキュメントの出力
 
 Psych は YAML ドキュメントを出力する機能があります。
-高・中・底の三つの水準の API があります。
+高・中・低の三つの水準の API があります。
 低水準 API はイベントベースの API で、中水準のものは AST を構築する API、
 高水準の API は Ruby のオブジェクトを直接 YAML ドキュメントに変換する API
-です。これはパースの高・中・底水準 API と対応しています。
+です。これはパースの高・中・低水準 API と対応しています。
 
 
 ===== 低水準出力 API
@@ -112,9 +112,13 @@ libyaml のバージョンを返します。
 
 @see [[m:Psych::LIBYAML_VERSION]]
 
-#@since 2.5.0
+#@if("2.6.0" <= version)
+--- load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
+#@end
+#@if("2.5.0" <= version and version < "3.1")
 --- load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
-#@else
+#@end
+#@if(version < "2.5.0")
 --- load(yaml, filename = nil, fallback = false) -> object
 #@end
 
@@ -138,6 +142,19 @@ filename はパース中に発生した例外のメッセージに用います�
 @raise Psych::SyntaxError YAMLドキュメントに文法エラーが発見されたときに発生します
 @see [[m:Psych.parse]]
 
+#@since 2.6.0
+#@samplecode 例
+Psych.load("--- a")           # => 'a'
+Psych.load("---\n - a\n - b") # => ['a', 'b']
+
+begin
+  Psych.load("--- `", filename: "file.txt")
+rescue Psych::SyntaxError => ex
+  p ex.file    # => 'file.txt'
+  p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
+end
+#@end
+#@else
 #@samplecode 例
 Psych.load("--- a")           # => 'a'
 Psych.load("---\n - a\n - b") # => ['a', 'b']
@@ -148,6 +165,7 @@ rescue Psych::SyntaxError => ex
   p ex.file    # => 'file.txt'
   p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
 end
+#@end
 #@end
 
 キーワード引数 symbolize_names に true を指定した場合はハッシュのキー

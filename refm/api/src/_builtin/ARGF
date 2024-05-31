@@ -342,7 +342,7 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数とし
   #    "2"
   #    "\n"
 
-@see [[m:IO#each_char]], [[m:IO#chars]]
+@see [[m:IO#each_char]]
 
 #@until 3.0
 --- chars { |c| ... } -> self
