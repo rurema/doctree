@@ -277,26 +277,33 @@ end
 #@end
 
 #@since 3.1
-#@samplecode
+
+『=>』演算子と in 演算子で括弧を省略する例です。
+
+#@# doc.ruby-lang.org のファイルを生成している ruby のバージョンの問題で，workaroundとして3.1以降のサンプルをemlistにしている
+//emlist{
 [1, 2] => a, b
-#@end
+//}
 
-#@samplecode
+//emlist{
 [1, 2] in a, b
-#@end
+//}
 
-#@samplecode
+//emlist{
 {a: 1, b: 2, c: 3} => a:
-#@end
-#@end
+//}
 
 #@# このコメントの前後のコードブロックを1つにまとめると
 #@# {a: 1, b: 2, c: 3} => a: {a: 1, b: 2, c: 3} in a:
 #@# と解釈されて duplicated key name で SyntaxError になってしまうのでやむを得ず別々のコードブロックにしている
 
-#@samplecode
+//emlist{
 {a: 1, b: 2, c: 3} in a:
+//} 
+
 #@end
+
+
 
 #@# Find pattern is similar to array pattern but it can be used to check if the given object has any elements that match the pattern:
 Find パターン は Array パターン に似ていますが、オブジェクトの一部の要素がマッチしていることを検査できます。
@@ -501,7 +508,7 @@ end
 #@# In addition to pinning local variables, you can also pin instance, global, and class variables:
 ローカル変数に加えてインスタンス変数やグローバル変数、クラス変数に対してもピン演算子は利用できます。
 
-#@samplecode
+//emlist{
 $gvar = 1
 class A
   @ivar = 2
@@ -514,12 +521,12 @@ class A
   end
   #=> "matched"
 end
-#@end
+//}
 
 #@# You can also pin the result of arbitrary expressions using parentheses:
 また、括弧を使って任意の式に対してピン演算子を利用できます
 
-#@samplecode
+//emlist{
 a = 1
 b = 2
 case 3
@@ -529,7 +536,7 @@ else
   "not matched"
 end
 #=> "matched"
-#@end
+//}
 #@end
 
 #@# == Matching non-primitive objects: +deconstruct+ and +deconstruct_keys+
