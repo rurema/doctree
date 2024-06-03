@@ -60,6 +60,7 @@ case/in 式は 「網羅的」 です。もし case 式の値がどの節にも�
 #@# Therefore, the +case+ expression might be used for conditional matching and unpacking:
 そのため、条件付きのマッチや展開に case 式が使われることがあります。
 
+#@# doc.ruby-lang.org のファイルを生成している ruby のバージョンの問題で，workaroundとして新しいバージョン用のサンプルをemlistにしている
 #@samplecode
 config = {db: {user: 'admin', password: 'abc123'}}
 
@@ -84,7 +85,7 @@ end
 一方、『in』 文は、期待されるデータ構造があらかじめ分かっている場合に、その一部を展開するのに有効です。
 #@end
 
-#@samplecode
+//emlist{
 config = {db: {user: 'admin', password: 'abc123'}}
 
 #@since 3.0
@@ -98,7 +99,7 @@ config in {db: {user:}} # もし config の構造が期待したものでなか�
 puts "Connect with user '#{user}'"
 #@# # Prints: "Connect with user 'admin'"
 # Connect with user 'admin'" と出力
-#@end
+//}
 
 #@# <code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
 『<expression> in <pattern>』 は 『<expression>; in <pattern>; true; else false; end』 と等価です。
@@ -106,10 +107,10 @@ puts "Connect with user '#{user}'"
 パターンにマッチするかどうかだけを知りたいときに使えます。
 
 #@since 3.0
-#@samplecode
+//emlist{
 users = [{name: "Alice", age: 12}, {name: "Bob", age: 23}]
 users.any? {|user| user in {name: /B/, age: 20..} } #=> true
-#@end
+//}
 #@end
 
 #@# See below for more examples and explanations of the syntax.
@@ -280,7 +281,6 @@ end
 
 『=>』演算子と in 演算子で括弧を省略する例です。
 
-#@# doc.ruby-lang.org のファイルを生成している ruby のバージョンの問題で，workaroundとして3.1以降のサンプルをemlistにしている
 //emlist{
 [1, 2] => a, b
 //}
@@ -308,14 +308,14 @@ end
 #@# Find pattern is similar to array pattern but it can be used to check if the given object has any elements that match the pattern:
 Find パターン は Array パターン に似ていますが、オブジェクトの一部の要素がマッチしていることを検査できます。
 
-#@samplecode
+//emlist{
 case ["a", 1, "b", "c", 2]
 in [*, String, String, *]
   "matched"
 else
   "not matched"
 end
-#@end
+//}
 
 #@# == Variable binding
 ===[a:variable_binding] 変数の束縛
@@ -691,21 +691,21 @@ end
 #@# As of Ruby 3.1, find patterns are considered _experimental_: its syntax can change in the future. Every time you use these features in code, a warning will be printed:
 Ruby 3.1 の時点では、Find パターンは 「実験的機能」 扱いです。Find パターンの構文は将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
 
-#@samplecode
+//emlist{
 [0] => [*, 0, *]
 # warning: Find pattern is experimental, and the behavior may change in future versions of Ruby!
 # warning: One-line pattern matching is experimental, and the behavior may change in future versions of Ruby!
-#@end
+//}
 #@else
 #@since 3.0
 #@# As of Ruby 3.0, one-line pattern matching and find pattern are considered _experimental_: its syntax can change in the future. Every time you use these features in code, the warning will be printed:
 Ruby 3.0 の時点では、1行パターンマッチ と Find パターンは 「実験的機能」 扱いです。1行パターンマッチ と Find パターンの構文は将来的に変更の可能性があります。これらの機能を利用する場合は毎回警告が出力されます。
 
-#@samplecode
+//emlist{
 [0] => [*, 0, *]
 # warning: Find pattern is experimental, and the behavior may change in future versions of Ruby!
 # warning: One-line pattern matching is experimental, and the behavior may change in future versions of Ruby!
-#@end
+}
 #@else
 #@# As of Ruby 2.7, feature is considered _experimental_: its syntax can change in the future, and the performance is not optimized yet. Every time you use pattern matching in code, the warning will be printed:
 Ruby 2.7 の時点では、パターンマッチは 「実験的機能」 扱いです。パターンマッチの構文は将来的に変更の可能性があり、まだパフォーマンスが最適化されていません。これらの機能を利用する場合は毎回警告が出力されます。
@@ -720,7 +720,7 @@ Ruby 2.7 の時点では、パターンマッチは 「実験的機能」 扱い
 #@# To suppress this warning, one may use the Warning::[]= method:
 この警告を抑制したければ、Warning::[]= メソッドが利用できます。
 
-#@samplecode
+//emlist{
 Warning[:experimental] = false
 #@since 3.0
 eval('[0] => [*, 0, *]')
@@ -729,12 +729,12 @@ eval('{a: 1, b: 2} in {a:}')
 #@end
 #@# # ...no warning printed...
 # ...警告は出力されない...
-#@end
+//}
 
 #@# Note that pattern-matching warnings are raised at compile time, so this will not suppress the warning:
 パターンマッチの警告はコンパイル時に発生するため、以下のような場合は警告は抑制できません。
 
-#@samplecode
+//emlist{
 #@# Warning[:experimental] = false # At the time this line is evaluated, the parsing happened and warning emitted
 Warning[:experimental] = false # この行を評価する段階では、構文解析とそれによる警告の発生は、既に終了している
 #@since 3.0
@@ -742,7 +742,7 @@ Warning[:experimental] = false # この行を評価する段階では、構文�
 #@else
 {a: 1, b: 2} in {a:}
 #@end
-#@end
+//}
 
 #@# So, only subsequently loaded files or `eval`-ed code is affected by switching the flag.
 つまり、フラグの切り替えによって影響を受けるのは切り替え以降に load されたファイルや `eval` されたコードに限られます。
