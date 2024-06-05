@@ -486,10 +486,12 @@ end
 
 @see [[m:CSV.new]]
 
+--- foreach(path, options = Hash.new) -> Enumerator
 --- foreach(path, options = Hash.new){|row| ... } -> nil
 
 このメソッドは CSV ファイルを読むための主要なインターフェイスです。
 各行が与えられたブロックに渡されます。
+ブロックが与えられていない場合、Enumeratorを返します。
 
 #@samplecode 例
 require 'csv'
