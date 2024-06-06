@@ -262,7 +262,7 @@ Kconv.kconv(str, Kconv::SJIS)と同じです。
 #@until 1.9.1
 --- guess(str) -> Integer
 #@else
---- guess(str) -> Encoding | nil
+--- guess(str) -> Encoding
 #@end
 
 文字列 str のエンコーディングを判定します。戻り値は
