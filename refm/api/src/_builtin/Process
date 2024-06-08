@@ -610,9 +610,9 @@ Process.wait2 # => [70024, #<Process::Status: pid 70024 exit 0>]
     p Process.waitall
     #=> [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
 
+#@since 3.3
 --- warmup    -> true
 
-#@since 3.3
 [[c:RubyVM]]にアプリケーションの起動が終了したこと及び、アプリケーションの最適化に適したタイミングであることを通知します。
 
 アプリケーションがプリフォークモデルでデプロイされる場合は、最初のフォークが行なわれる前に元のプロセスで呼び出しされることが推奨されます。
