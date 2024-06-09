@@ -110,6 +110,9 @@ p $~.end(4)   # => `end': index 4 out of matches (IndexError)
 @see [[m:MatchData#begin]]
 
 --- captures -> [String]
+#@since 3.2.0
+--- deconstruct -> [String]
+#@end
 
 [[m:$1]], [[m:$2]], ... を格納した配列を返します。
 
@@ -122,7 +125,11 @@ p $~.to_a       # => ["foobar", "foo", "bar", nil]
 p $~.captures   # => ["foo", "bar", nil]
 #@end
 
+#@since 3.2.0
+@see [[m:MatchData#to_a]], [[m:MatchData#named_captures]], [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+#@else
 @see [[m:MatchData#to_a]], [[m:MatchData#named_captures]]
+#@end
 
 --- length -> Integer
 --- size -> Integer
