@@ -264,6 +264,8 @@ end
 
 #@include(Data.attention)
 
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+
 --- deconstruct_keys(array_of_names_or_nil) -> hash
 
 self のメンバの名前と値の組を Hash で返します。
@@ -301,6 +303,8 @@ end
 @param array_of_names_or_nil 返り値に含めるメンバの名前の配列を指定します。nil の場合は全てのメンバを意味します。
 
 #@include(Data.attention)
+
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
 
 --- eql?(other)   -> bool
 
