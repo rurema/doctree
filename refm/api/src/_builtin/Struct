@@ -312,6 +312,9 @@ p Foo.new.members  # => [:foo, :bar]
 
 --- values -> [object]
 --- to_a -> [object]
+#@since 2.7.0
+--- deconstruct -> [object]
+#@end
 構造体のメンバの値を配列にいれて返します。
 
 #@samplecode 例
@@ -321,6 +324,10 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
 #@end
 
 #@include(Struct.attention)
+
+#@since 2.7.0
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+#@end
 
 --- inspect -> String
 --- to_s    -> String
