@@ -229,7 +229,7 @@ p dog1.equal?(dog2)   # => false
 
 @see [[m:Object#==]], [[m:Data#eql?]]
 
---- deconstruct   -> array
+--- deconstruct   -> [object]
 
 self のメンバの値を配列で返します。
 
@@ -266,7 +266,7 @@ end
 
 @see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
 
---- deconstruct_keys(array_of_names_or_nil) -> hash
+--- deconstruct_keys(array_of_names_or_nil) -> Hash
 
 self のメンバの名前と値の組を Hash で返します。
 
