@@ -313,7 +313,7 @@ self を複製して、その時差を設定しなおします。
 --- to_date -> Date
 対応する [[c:Date]] オブジェクトを返します。
 
---- to_datetime -> DateTime
+--- to_datetime -> self
 self を返します。
 
 --- to_time -> Time
