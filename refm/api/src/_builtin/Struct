@@ -312,6 +312,9 @@ p Foo.new.members  # => [:foo, :bar]
 
 --- values -> [object]
 --- to_a -> [object]
+#@since 2.7.0
+--- deconstruct -> [object]
+#@end
 構造体のメンバの値を配列にいれて返します。
 
 #@samplecode 例
@@ -321,6 +324,33 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
 #@end
 
 #@include(Struct.attention)
+
+#@since 2.7.0
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+#@end
+
+#@since 2.7.0
+--- deconstruct_keys(array_of_names) -> Hash
+
+self のメンバの名前と値の組を [[c:Hash]] で返します。
+
+@param array_of_names 返り値に含めるメンバの名前の配列を指定します。nil の場合は全てのメンバを意味します。
+
+#@samplecode 例
+Customer = Struct.new(:name, :address, :zip)
+joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
+h = joe.deconstruct_keys([:zip, :address])
+h # => {:zip=>12345, :address=>"123 Maple, Anytown NC"}
+
+# 引数が nil の場合は全てのメンバを返します。
+h = joe.deconstruct_keys(nil)
+h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#@end
+
+#@include(Struct.attention)
+
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+#@end
 
 --- inspect -> String
 --- to_s    -> String

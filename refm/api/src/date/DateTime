@@ -309,3 +309,50 @@ self を複製して、その時差を設定しなおします。
 --- second_fraction -> Rational
 #@end
 秒の小数点以下の部分を表す分数を返します。
+
+#@since 3.2.0
+--- deconstruct_keys(array_of_names_or_nil) -> Hash
+
+パターンマッチに使用する名前と値の [[c:Hash]] を返します。
+
+キーに利用できる名前は以下の通りです。
+
+  * :year
+  * :month
+  * :day
+  * :yday
+  * :wday
+  * :hour
+  * :min
+  * :sec
+  * :sec_fraction
+  * :zone
+
+@param array_of_names_or_nil パターンマッチに使用する名前の配列を指定します。nil の場合は全てをパターンマッチに使用します。
+
+#@samplecode 例
+dt = DateTime.new(2022, 10, 5, 13, 30)
+
+if dt in wday: 1..5, hour: 10..18 # deconstruct_keys が使われます
+  puts "Working time"
+end
+#=> "Working time" が出力される
+
+case dt
+in year: ...2022
+  puts "too old"
+in month: ..9
+  puts "quarter 1-3"
+in wday: 1..5, month:
+  puts "working day in month #{month}"
+end
+#=> "working day in month 10" が出力される
+
+# クラスのチェックと組み合わせて利用することもできます
+if dt in DateTime(wday: 1..5, hour: 10..18, day: ..7)
+  puts "Working time, first week of the month"
+end
+#@end
+
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+#@end
