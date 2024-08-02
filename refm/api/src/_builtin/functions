@@ -2161,7 +2161,11 @@ seeds << srand
 p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 #@end
 
+#@since 3.2
+@see [[m:Kernel.#rand]]
+#@else
 @see [[m:Kernel.#rand]], [[m:Random::DEFAULT]]
+#@end
 
 --- global_variables -> [Symbol]
 
