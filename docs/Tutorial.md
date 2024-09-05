@@ -141,10 +141,10 @@ $ bitclust -d ./db-2.5.0 update --stdlibtree=refm/api/src
 
 2.3.0や2.4.0など、Rubyの他のバージョンのリファレンスをプレビューしたい場合は、versionを変えて上記の手順を繰り返して下さい。
 
-DBの更新後は以下のコマンドでサーバを起動し、 `http://localhost:10080/バージョン/` にアクセスして確認してください。
+DBの更新後は以下のコマンドでサーバを起動し、 `http://localhost:30080/` にアクセスして確認してください。
 
 ```
-$ bitclust server --database=db-2.5.0 --debug ※状況確認中。動作しません。
+$ bitclust server --database=db-2.5.0 --baseurl=""  --port=30080 --debug
 ```
 
 動作確認後は Ctrl+C でサーバを終了します。
