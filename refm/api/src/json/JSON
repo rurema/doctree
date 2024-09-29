@@ -296,6 +296,26 @@ proc として手続きオブジェクトが与えられた場合は、読み込
 : :symbolize_names
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
 
+--- load_file(filespec, opts = {}) -> object
+
+filespec で指定した JSON 形式のファイルを Ruby オブジェクトとしてロードして返します。
+
+@param filespec ファイル名を指定します。
+
+@param options オプションをハッシュで指定します。指定可能なオプションは [[m:JSON.parse]] と同様です。
+
+@see [[m:JSON::Parser#parse]]
+
+--- load_file!(filespec, opts = {}) -> object
+
+filespec で指定した JSON 形式のファイルを Ruby オブジェクトとしてロードして返します。
+
+@param filespec ファイル名を指定します。
+
+@param options オプションをハッシュで指定します。指定可能なオプションは [[m:JSON.parse!]] と同様です。
+
+@see [[m:JSON::Parser#parse!]]
+
 --- parse(source, options = {}) -> object
 
 与えられた JSON 形式の文字列を Ruby オブジェクトに変換して返します。
