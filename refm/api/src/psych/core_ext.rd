@@ -84,9 +84,9 @@ syck が廃止された場合  psych_to_yaml は廃止
 
 == Instance Methods
 
---- y(*objects) -> String
---- psych_y(*objects) -> String
-objects を YAML document に変換します。
+--- y(*objects) -> nil
+--- psych_y(*objects) -> nil
+objects を YAML document として標準出力に出力します。
 
 このメソッドは irb 上でのみ定義されます。
 
