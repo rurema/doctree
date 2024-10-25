@@ -213,7 +213,6 @@ enc で指定したエンコーディングの文字列が URL エンコード�
   p ary                 #=> [['a', '1'], ['a', '2'], ['b', '3']]
   p ary.assoc('a').last #=> '1'
   p ary.assoc('b').last #=> '3'
-  p Hash[ary]['a']      #=> '2'
   p Hash[ary]           #=> {"a"=>"2", "b"=>"3"}
 
 @param str デコード対象の文字列
