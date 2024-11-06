@@ -115,7 +115,7 @@ test.rb:1:in `f6': unhandled exception
 : -d
 : --debug
 
-  デバッグモードでスクリプトを実行します。[[m:$DEBUG]] を
+  デバッグモードでスクリプトを実行します。[[m:$DEBUG]] と [[m:$VERBOSE]] を
   true にします。
 
 : -E ex[:in]
