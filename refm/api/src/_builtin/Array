@@ -2258,6 +2258,14 @@ p a.sample(3)     #=> [1, 9, 3]
 p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 #@end
 
+random [[c:SecureRandom]] などの乱数生成器を渡すことができます。
+
+#@samplecode 例
+require 'securerandom'
+a = (1..10).to_a
+p a.sample(random: SecureRandom)  #=>  2
+#@end
+
 --- cycle(n=nil) {|obj| block } -> nil
 #@since 1.9.1
 --- cycle(n=nil) -> Enumerator
