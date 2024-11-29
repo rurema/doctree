@@ -152,6 +152,9 @@ Dir.chdir("/tmp") do
   p Dir.pwd                  #=> "/tmp"
 end 
 p Dir.pwd                    #=> "/var/spool/mail"
+
+# ~ は展開されない
+Dir.chdir("~/.ssh")          # => Errno::ENOENT
 #@end
 
 --- chroot(path)    -> 0
