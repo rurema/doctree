@@ -74,6 +74,11 @@ filename の一番後ろのスラッシュに続く要素を返します。も�
 引数 suffix が与えられて、かつそれが filename の末尾に
 一致するなら、それを取り除いたものを返します。
 
+@param filename ファイル名を表す文字列を指定します。
+
+@param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
+              '.' を含まない任意の文字列にマッチします。
+
 #@samplecode 例
 p File.basename("ruby/ruby.c")          #=> "ruby.c"
 p File.basename("ruby/ruby.c", ".c")    #=> "ruby"
@@ -88,11 +93,6 @@ File.basename の動作は [[man:basename(3)]]
 #@samplecode 例
 p File.basename("foo/bar/")      # => "bar"
 #@end
-
-@param filename ファイル名を表す文字列を指定します。
-
-@param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
-              '.' を含まない任意の文字列にマッチします。
 
 @see [[m:File.dirname]], [[m:File.extname]]
 
@@ -210,6 +210,13 @@ filename の一番後ろのスラッシュより前を文
 字列として返します。スラッシュを含まないファイル名に対しては
 "."(カレントディレクトリ)を返します。
 
+@param filename ファイル名を表す文字列を指定します。
+#@since 3.1
+@param level 末尾からいくつ取り除くかを指定します。
+
+@raise ArgumentError level が負の場合に発生します。
+#@end
+
 #@samplecode 例
 p File.dirname("dir/file.ext")    # => "dir"
 p File.dirname("file.ext")        # => "."
@@ -234,13 +241,6 @@ File.dirname("/home/gumby/work/ruby.rb", 4) # => "/"
 #@end
 #@end
 
-@param filename ファイル名を表す文字列を指定します。
-#@since 3.1
-@param level 末尾からいくつ取り除くかを指定します。
-
-@raise ArgumentError level が負の場合に発生します。
-#@end
-
 @see [[m:File.basename]], [[m:File.extname]]
 
 --- expand_path(path, default_dir = '.')    -> String
@@ -251,6 +251,10 @@ path が相対パスであれば default_dir を基準にします。
 先頭の ~ はホームディレクトリ(環境変数 HOME が使われます)に、
 ~USER はそのユーザのホームディレクトリに展開されます。
 
+@param path パスを表す文字列を指定します。
+
+@param default_dir path が相対パスであれば default_dir を基準に展開されます。
+
 #@samplecode 例
 p Dir.getwd                      #=> "/home/matz/work/foo"
 p ENV["HOME"]                    #=> "/home/matz"
@@ -259,10 +263,6 @@ p File.expand_path("..", "/tmp") #=> "/"
 p File.expand_path("~")          #=> "/home/matz"
 p File.expand_path("~foo")       #=> "/home/foo"
 #@end
-
-@param path パスを表す文字列を指定します。
-
-@param default_dir path が相対パスであれば default_dir を基準に展開されます。
 
 #@since 1.9.2
 --- absolute_path(file_name, dir_string=nil) -> String
@@ -319,6 +319,8 @@ File.absolute_path?("/foo/bar\\baz")  # => true
 は拡張子の一部としては見なされません。filename に拡張子が含
 まれない場合は空文字列を返します。
 
+@param filename ファイル名を表す文字列を指定します。
+
 #@samplecode 例
 p File.extname("foo/foo.txt")     # => ".txt"
 p File.extname("foo/foo.tar.gz")  # => ".gz"
@@ -334,8 +336,6 @@ p File.extname("foo.")            # => ""
 p File.extname("foo.")            # => "."
 #@end
 #@end
-
-@param filename ファイル名を表す文字列を指定します。
 
 @see [[m:File.basename]], [[m:File.dirname]]
 
