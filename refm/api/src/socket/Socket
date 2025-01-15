@@ -875,7 +875,7 @@ connect が EINPROGRESS エラーを報告した場合、その例外(Errno::EIN
 
 ソケットからデータを受け取ります。
 
-[[m:Socket#recv]] と同様ですが、返り値として
+[[m:BasicSocket#recv]] と同様ですが、返り値として
 データ文字列と相手ソケットのアドレスのペアが返されます。
 
 flags には Socket::MSG_* という定数の bitwise OR を渡します。
