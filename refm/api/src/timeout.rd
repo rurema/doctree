@@ -2,6 +2,7 @@ category Thread
 
 タイムアウトを行うライブラリです。
 
+#@until 3.1
 = reopen Kernel
 
 == Private Instance Methods
@@ -35,6 +36,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
 #@# [[unknown:timeoutの落し穴|trap::timeout]]も参照
+#@end
 
 = module Timeout
 
@@ -118,7 +120,7 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めま
 その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
 
-以下の例では、gethostbyname(およそ0.6秒処理に時間がかかっている) が終了した直後((A)の箇所)で TimeoutError 例外があがっています。
+以下の例では、gethostbyname(およそ0.6秒処理に時間がかかっている) が終了した直後((A)の箇所)で Timeout::Error 例外があがっています。
 
 例 timeout が割り込めない
   require 'timeout'
@@ -137,7 +139,7 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めま
   # 実行例
   => ["helium.ruby-lang.org", [], 2, "210.251.121.214"]
      0.689331
-     /usr/local/lib/ruby/1.6/timeout.rb:37: execution expired (TimeoutError)
+     /usr/local/lib/ruby/1.6/timeout.rb:37: execution expired (Timeout::Error)
            from -:6:in `timeout'
            from -:6
   # gethostbyname が0.1秒かからない場合は例外が発生しないので
@@ -215,13 +217,15 @@ timeout による割り込みは [[m:Kernel.#system]] によって呼び出さ�
 #@else
 = class Timeout::Error < Interrupt
 #@end
+#@until 3.1
 alias TimeoutError
+#@end
 
 [[lib:timeout]] で定義される例外クラスです。
 関数 timeout がタイムアウトすると発生します。
 
 [[lib:timeout]] を使うライブラリを作成する場合は、ユーザが指定した
-timeout を捕捉しないようにライブラリ内で [[c:TimeoutError]] のサブクラスを
+timeout を捕捉しないようにライブラリ内で Timeout::Error のサブクラスを
 定義して使用した方が無難です。
 #@#((-注: version 1.6 では、[[unknown:ruby-list:33352]] のパッチが必要です。
 #@#このパッチは 1.7 に取り込まれました[[unknown:ruby-list:33391]]-))
@@ -229,7 +233,7 @@ timeout を捕捉しないようにライブラリ内で [[c:TimeoutError]] の�
         ==> foo.rb <==
         require 'timeout.rb'
         class Foo
-          FooTimeoutError = Class.new(TimeoutError)
+          FooTimeoutError = Class.new(Timeout::Error)
           def longlongtime_method
             Timeout.timeout(100, FooTimeoutError) {
                ...
@@ -239,7 +243,7 @@ timeout を捕捉しないようにライブラリ内で [[c:TimeoutError]] の�
 
         ==> main.rb <==
         require 'foo'
-        timeout(5) {
+        Timeout.timeout(5) {
           Foo.new.longlongtime_method
         }
 

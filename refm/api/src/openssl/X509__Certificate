@@ -160,5 +160,5 @@ DSA で署名する場合は digest は "dss1" でなければなりません。
 
 = class OpenSSL::X509::CertificateError < OpenSSL::OpenSSLError
 
-X509 証明書関連のエラーを表す例外くクラスです。
+X509 証明書関連のエラーを表す例外クラスです。
 

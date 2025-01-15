@@ -577,11 +577,11 @@ p h1.compare_by_identity? #=> true
 
 shiftは破壊的メソッドです。selfは要素を取り除かれた残りのハッシュに変更されます。
 
-ハッシュが空の場合、デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]のブロックの値か、どちらもnilならばnil）
+#@until 3.2
+Ruby 3.2以前は、ハッシュが空の場合、デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]のブロックの値か、どちらもnilならばnil）
 を返します(このとき、[key,value] という形式の値を返すわけではないことに注意)。
 
-将来のバージョン(Ruby 3.2を予定)ではデフォルト値に関わらず nil になる予定なので、デフォルト値を設定しているハッシュで
-shift を使う場合は注意してください。([[bug:16908]])
+3.2以降ではデフォルト値に関わらず nil を返すよう変更されています。
 
 #@samplecode 例
 h = {:ab => "some" , :cd => "all"}
@@ -597,6 +597,28 @@ p h1.shift              #=> "default value"
 h2 = Hash.new {|*arg| arg}
 p h2                    #=> {}
 p h2.shift              #=> [{}, nil]
+#@end
+
+#@else
+
+ハッシュが空の場合、デフォルト値に関わらず nil を返します。
+
+#@samplecode 例
+h = {:ab => "some" , :cd => "all"}
+p h.shift               #=> [:ab, "some"]
+p h.shift               #=> [:cd, "all"]
+p h                     #=> {}
+p h.shift               #=> nil
+
+h1 = Hash.new("default value")
+p h1                    #=> {}
+p h1.shift              #=> nil
+
+h2 = Hash.new {|*arg| arg}
+p h2                    #=> {}
+p h2.shift              #=> nil
+#@end
+
 #@end
 
 @see [[m:Array#shift]]

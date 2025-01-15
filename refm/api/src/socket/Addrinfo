@@ -24,7 +24,7 @@ sockaddr には文字列もしくは配列を指定します。
 なりません。
 
 実際には sockaddr には以下のようなものが使えます。
-  * ["AF_INET", 46102, "localhost.localdomain", "127,0,0,1"]
+  * ["AF_INET", 46102, "localhost.localdomain", "127.0.0.1"]
   * ["AF_INET6", 42304, "ip6-localhost", "::1"]
   * ["AF_UNIX", "/tmp/sock"]
   * Socket.sockaddr_in("smtp", "2001:DB8::1")

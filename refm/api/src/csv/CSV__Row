@@ -294,7 +294,7 @@ row.field_row?        # => true
 
 与えられた引数に対応する値の配列を返します。
 
-要素の探索に [[m:CSV::Row.field]] を使用しています。
+要素の探索に [[m:CSV::Row#field]] を使用しています。
 
 @param headers_and_or_indices ヘッダの名前かインデックスか [[c:Range]]
                               のインスタンスか第 1 要素がヘッダの名前で
@@ -418,6 +418,49 @@ require "csv"
 
 row = CSV::Row.new(["header2", "header1", "header2"], [1, 2, 3])
 row.to_hash # => {"header2"=>3, "header1"=>2}
+#@end
+
+#@since 3.1.0
+--- deconstruct -> [object]
+
+パターンマッチに使用する行の値の配列を返します。
+
+#@samplecode 例
+require "csv"
+row = CSV::Row.new(["header1", "header2", "header3"], [1, 2, 3])
+case row
+in [2.., 2.., 2..]
+  puts "all 2 or more"
+in [...2, 2.., 2..]
+  puts "first column is less than 2, and rest columns are 2 or more"
+end
+#=> "first column is less than 2, and rest columns are 2 or more" が出力される
+#@end
+
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+
+--- deconstruct_keys(keys) -> Hash
+
+パターンマッチに使用するヘッダの名前と値の [[c:Hash]] を返します。
+
+このメソッドはヘッダ名の型をシンボルに変換しないため、ヘッダ名が文字列かつ Hash パターン でパターンマッチしたい場合はキーをシンボルに変換する必要があります。
+
+@param keys パターンマッチに使用するヘッダの名前の配列を指定します。nil の場合は全てをパターンマッチに使用します。
+
+#@samplecode 例
+require "csv"
+
+row = CSV::Row.new([:header1, :header2, :header3], [1, 2, 3])
+case row
+in { header1: 2.., header2: 2.., header3: 2.. }
+  puts "all 2 or more"
+in { header1: ...2, header2: 2.., header3: 2.. }
+  puts "first column is less than 2, and rest columns are 2 or more"
+end
+#=> "first column is less than 2, and rest columns are 2 or more" が出力される
+#@end
+
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
 #@end
 
 == Protected Instance Methods

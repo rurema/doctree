@@ -1,0 +1,41 @@
+GIT
+  remote: https://github.com/rurema/bitclust.git
+  revision: 2a2028ac761cee63a27eb24f7b6673da4b9fbd3e
+  specs:
+    bitclust-core (1.4.0)
+      drb
+      nkf
+      progressbar (>= 1.9.0, < 2.0)
+      rack
+      webrick
+    bitclust-dev (1.4.0)
+      bitclust-core (= 1.4.0)
+    refe2 (1.4.0)
+      bitclust-core (= 1.4.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    drb (2.2.1)
+    nkf (0.2.0)
+    progressbar (1.13.0)
+    rack (3.1.7)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
+    rake (13.2.1)
+    webrick (1.8.1)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  bitclust-core!
+  bitclust-dev!
+  rackup
+  rake
+  refe2!
+
+BUNDLED WITH
+   2.5.11

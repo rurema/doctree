@@ -189,14 +189,14 @@ selfを返します。
 require 'strscan'
 
 s = StringScanner.new('test') # => #<StringScanner 0/4 @ "test">
-s.match(/\w(\w*)/)            # => "test"
+s.scan(/\w(\w*)/)             # => "test"
 s[0]                          # => "test"
 s[1]                          # => "est"
 s << ' string'                # => #<StringScanner 4/11 "test" @ " stri...">
 s[0]                          # => "test"
 s[1]                          # => "est"
-s.match(/\s+/)                # => " "
-s.match(/\w+/)                # => "string"
+s.scan(/\s+/)                 # => " "
+s.scan(/\w+/)                 # => "string"
 #@end
 
 この操作は StringScanner.new に渡した文字列にも影響することがあります。

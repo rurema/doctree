@@ -2,7 +2,11 @@ category Text
 
 文字列に [[c:IO]] と同じインタフェースを持たせるためのライブラリです。
 
-= class StringIO < Data
+= class StringIO < Object
+include Enumerable
+
+#@# IO::generic_writable, IO::generic_readable は内部的なもののようなのでここでは省略
+
 
 文字列に [[c:IO]] と同じインタフェースを持たせるためのクラスです。
 

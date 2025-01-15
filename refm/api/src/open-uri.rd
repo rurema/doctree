@@ -69,7 +69,7 @@ http/ftp の URL を、普通のファイルのように開けます。
   }
 #@end
 
-http_proxy や ftp_proxy などの環境変数は、デフォルトで有効になっています。
+http_proxy, ftp_proxy, no_proxy などの環境変数は、デフォルトで有効になっています。
 プロキシを無効にするには :proxy => nil とします。
 
 #@since 2.7.0
@@ -212,7 +212,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
    文字列:           "http://proxy.example.com:8000/" のようなプロクシの URI。
    URI オブジェクト: URI.parse("http://proxy.example.com:8000/") のようなプロクシの URI オブジェクト。
    true:             Proxy を環境変数などから見つけようとする。使う環境変数は schema に応じて
-                     http_proxy, https_proxy, ftp_proxy が使われる。
+                     http_proxy, https_proxy, ftp_proxy, no_proxy が使われる。
    false:            Proxy を用いない。
    nil:              Proxy を用いない。
 //}
@@ -473,7 +473,7 @@ open('http://example.com/') {|f|
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-URL.open('http://www.ruby-lang.org/') {|f|
+URI.open('http://www.ruby-lang.org/') {|f|
   p f.base_uri
   #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
 }
@@ -493,7 +493,7 @@ open('http://www.ruby-lang.org/') {|f|
 #@samplecode 例
 #@since 2.7.0
 require 'open-uri'
-URL.open('http://example.com/') {|f|
+URI.open('http://example.com/') {|f|
   p f.meta
   #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
   #    "content-type"=>"text/html;charset=utf-8",

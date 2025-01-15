@@ -447,21 +447,6 @@ self のハッシュ値を返します。
 
 #@end
 
-Proc オブジェクトの引数の情報を返します。
-
-Proc オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
-各配列の要素は引数の種類に対応した以下のような Symbol と、引数名を表す Symbol の 2 要素です。
-
-#@samplecode
-prc = proc{|x, y=42, *other|}
-p prc.parameters  # => [[:opt, :x], [:opt, :y], [:rest, :other]]
-prc = lambda{|x, y=42, *other|}
-p prc.parameters  # => [[:req, :x], [:opt, :y], [:rest, :other]]
-prc = proc{|x, y=42, *other|}
-p prc.parameters(lambda: true)  # => [[:req, :x], [:opt, :y], [:rest, :other]]
-prc = lambda{|x, y=42, *other|}
-p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
-#@end
 #@since 3.2
 --- parameters(lambda: nil) -> [object]
 #@else
