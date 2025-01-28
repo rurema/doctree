@@ -1313,7 +1313,7 @@ bar
 
 #@samplecode 例
 def parse_caller(at)
-  if /^(.+?):(\d+)(?::in `(.*)')?/ =~ at
+  if /^(.+?):(\d+)(?::in '(.*)')?/ =~ at
     file = $1
     line = $2.to_i
     method = $3
