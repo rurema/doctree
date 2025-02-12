@@ -24,7 +24,7 @@ GEM
       rack (>= 3)
       webrick (~> 1.8)
     rake (13.2.1)
-    webrick (1.8.1)
+    webrick (1.8.2)
 
 PLATFORMS
   ruby
