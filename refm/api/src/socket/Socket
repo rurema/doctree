@@ -364,7 +364,7 @@ service, protoに対応するポート番号を返
 unpack したアドレスを返します。返される値は [port, ipaddr]
 の配列です。
 
-@param sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+@param sockaddr [[ref:lib:socket#pack_string]]を指定します。
 
 例:
 
@@ -381,7 +381,7 @@ unpack したアドレスを返します。返される値は [port, ipaddr]
 [[ref:lib:socket#pack_string]]を
 unpack したソケットパス名を返します。
 
-@param sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+@param sockaddr [[ref:lib:socket#pack_string]]を指定します。
 
 例:
 
@@ -781,9 +781,9 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 と同じ働きをします。
 
 #@until 1.9.1
-@param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+@param my_sockaddr [[ref:lib:socket#pack_string]]を指定します。
 #@else
-@param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]もしくは[[c:Addrinfo]]オブジェクトを指定します。
+@param my_sockaddr [[ref:lib:socket#pack_string]]もしくは[[c:Addrinfo]]オブジェクトを指定します。
 #@end
 @return 0 を返します。
 
