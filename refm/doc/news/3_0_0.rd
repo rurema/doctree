@@ -299,7 +299,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * 実装では、 ! で終わるメソッドでのみ使用されます。
     * Ractor 互換
     * YAML のサポートが改善されています。[[bug:8382]]
-    * 公式には使用を推奨しなくなりました。OpenStruct@Caveats セクションを参照してください。
+    * 公式には使用を推奨しなくなりました。[[ref:c:OpenStruct#caveats]]を参照してください。
   * Pathname
     * Ractor 互換
   * Psych
