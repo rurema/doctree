@@ -44,8 +44,8 @@ p (1..4).all?(Integer)                 # => true
 p [1, 2, 3].all?(Integer)              # => true
 p [1, 2, 3.0].all?(Integer)            # => false
 # Hashは[k, v]のペアなのでArray/Hash === [k, v]で評価
-p {foo: 0, bar: 1}.all?(Array)         # => true
-p {foo: 0, bar: 1}.all?(Hash)          # => false
+p({foo: 0, bar: 1}.all?(Array))        # => true
+p({foo: 0, bar: 1}.all?(Hash))         # => false
 #@end
 #@end
 
