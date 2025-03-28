@@ -589,6 +589,8 @@ p [5,  6, 7].all? {|v| v > 0 }   # => true
 p [5, -1, 7].all? {|v| v > 0 }   # => false
 p [].all? {|v| v > 0 }           # => true
 p %w[ant bear cat].all?(/t/)     # => false
+p [1, 2, 3].all?(Integer)        # => true
+p [1, 2, 3.0].all?(Integer)      # => false
 #@end
 
 @see [[m:Enumerable#all?]]
