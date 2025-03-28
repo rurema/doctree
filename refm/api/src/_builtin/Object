@@ -32,7 +32,15 @@ p some #=> #<Object:0x2b696d8>
 
 @param other 比較するオブジェクトです。
 
-#@samplecode
+#@samplecode 例
+o = Object.new
+p(o.eql?(o)) #=> true
+p(o.eql?(Object.new)) #=> false
+#@end
+
+下記の例のように、各クラスの性質に合わせて再定義されることが期待されています。
+
+#@samplecode 適切に再定義されている例
 p("foo" == "bar") #=> false
 p("foo" == "foo") #=> true
 
