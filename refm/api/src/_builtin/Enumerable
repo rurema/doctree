@@ -231,7 +231,7 @@ pattern === item が成立する要素を全て含んだ配列を返します。
 #@samplecode 例
 ['aa', 'bb', 'cc', 'dd', 'ee'].grep(/[bc]/)  # => ["bb", "cc"]
 
-  Array.instance_methods.grep(/gr/) # => [:grep, :group_by]
+  Array.instance_methods.grep(/gr/) # => [:grep, :grep_v, :group_by]
 #@end
 
 @see [[m:Enumerable#select]]
