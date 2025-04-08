@@ -523,23 +523,54 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 
 範囲内の要素を s おきに繰り返します。
 
-#@since 2.6.0
+#@since 3.4
+@param s 次のステップへ遷移するたびに加算されるものを指定します。
+#@else
 @param s 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+#@end
 @return ブロックを指定した時は self を返します。
 @return ブロックを指定しなかった時かつ数値の Range の時は [[c:Enumerator::ArithmeticSequence]] を返します。
 @return ブロックを指定しなかったその他の Range の時は [[c:Enumerator]] を返します。(例: String の Range)
-#@else
-@param s 正の整数を指定します。
-@return ブロックつきの時は self を返します。
-@return ブロックなしの時は [[c:Enumerator]] を返します。
-@raise ArgumentError s に 0 または負の数を指定した場合に発生します
-#@end
 
 #@samplecode 例
-("a" .. "f").step(2) {|v| p v}
+(1..10).step(3) {|v| p v}
+# => 1
+#    4
+#    7
+#    10
+
+("a".."f").step(2) {|v| p v}
 # => "a"
 #    "c"
 #    "e"
+
+(10..0).step(-3) {|v| p v}
+# => 10
+#     7
+#     4
+#     1
+#@end
+
+#@since 3.4
+
+非数値の Range では、イテレーションに「要素 + s」を使用します。
+（文字列またはシンボルの Range で s に数値を指定した場合を除きます）
+
+#@samplecode 数値以外の Range に対する例
+# Time の Range は each でイテレートできない
+(Time.utc(2024, 12, 25)...Time.utc(2024, 12, 26)).each { |t| p t }
+# => 'Range#each': can't iterate from Time (TypeError)
+
+# step は使用可能
+(Time.utc(2024, 12, 25)...Time.utc(2024, 12, 26)).step(60*60*6) { |t| p t }
+# => 2024-12-25 00:00:00 UTC
+#    2024-12-25 06:00:00 UTC
+#    2024-12-25 12:00:00 UTC
+#    2024-12-25 18:00:00 UTC
+
+("a"..).step("*").take(3) # => ["a", "a*", "a**"]
+#@end
+
 #@end
 
 --- ==(other)     -> bool
