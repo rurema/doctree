@@ -196,7 +196,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 に対しては送り先である dest_sockaddr を指定する必要があります。実際に送っ
 たデータの長さを返します。
 
-dest_sockaddr には「ソケットアドレス構造体を pack した文字列」
+dest_sockaddr には[[ref:lib:socket#pack_string]]
 を指定します。
 
 データの送信に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
@@ -205,7 +205,7 @@ dest_sockaddr には「ソケットアドレス構造体を pack した文字列
 
 @param flags      [[man:send(2)]] の flags を参照してください。
 
-@param dest_sockaddr  「ソケットアドレス構造体を pack した文字列」を指定します。
+@param dest_sockaddr  [[ref:lib:socket#pack_string]]を指定します。
 
 @raise Errno::EXXX データの送信に失敗した場合に発生します。
 
