@@ -520,11 +520,11 @@ $stdin.reopen("/tmp/foo")
 #@end
 
 また、リダイレクトしたあと
-出力先をまた元に戻したい場合は以下のようにします。
+入力先をまた元に戻したい場合は以下のようにします。
 
 #@samplecode 例
 stdin_old = $stdin.dup       # 元の $stdin を保存する
-$stdout.reopen("/tmp/foo")   # $stdin を /tmp/foo にリダイレクトする
+$stdin.reopen("/tmp/foo")    # $stdin を /tmp/foo にリダイレクトする
 gets                         # /tmp/foo から入力
 $stdin.reopen stdin_old      # 元に戻す
 #@end
