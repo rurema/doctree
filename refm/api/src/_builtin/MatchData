@@ -253,6 +253,78 @@ p $~.byteoffset('century') # => `offset': undefined group name reference: centur
 
 @see [[m:MatchData#offset]]
 #@end
+
+#@since 3.4
+--- bytebegin(n) -> Integer | nil
+--- bytebegin(name) -> Integer | nil
+
+n 番目の部分文字列先頭のバイトオフセットを返します。
+
+0 はマッチ全体を意味します。
+n 番目の部分文字列がマッチしていなければ nilを返します。
+
+引数に文字列またはシンボルを渡した場合は、対応する名前付きキャプチャの先頭のバイトオフセットを返します。
+
+@param n 部分文字列を指定する数値。
+@param name 名前付きキャプチャを指定する文字列またはシンボル。
+
+@raise IndexError 範囲外の n を指定した場合に発生します。
+@raise IndexError 正規表現中で定義されていない name を指定した場合に発生します。
+
+#@samplecode 例
+/(c).*(いう).*(e.*)/ =~ 'abcあいうdef'
+p $~              # => #<MatchData "cあいうdef" 1:"c" 2:"いう" 3:"ef">
+p $~.bytebegin(0) # => 2
+p $~.bytebegin(1) # => 2
+p $~.bytebegin(2) # => 6
+p $~.bytebegin(3) # => 13
+p $~.bytebegin(4) # => index 4 out of matches (IndexError)
+#@end
+
+#@samplecode シンボルを指定する例
+/(?<key>\S+):\s*(?<value>\S+)/ =~ "name: ruby"
+$~                   # => #<MatchData "name: ruby" key:"name" value:"ruby">
+$~.bytebegin(:key)   # => 0
+$~.bytebegin(:value) # => 6
+$~.bytebegin(:foo)   # => undefined group name reference: foo (IndexError)
+#@end
+
+--- byteend(n) -> Integer | nil
+--- byteend(name) -> Integer | nil
+
+n 番目の部分文字列終端のバイトオフセットを返します。
+
+0 はマッチ全体を意味します。
+n 番目の部分文字列がマッチしていなければ nilを返します。
+
+引数に文字列またはシンボルを渡した場合は、対応する名前付きキャプチャの終端のバイトオフセットを返します。
+
+@param n 部分文字列を指定する数値。
+@param name 名前付きキャプチャを指定する文字列またはシンボル。
+
+@raise IndexError 範囲外の n を指定した場合に発生します。
+@raise IndexError 正規表現中で定義されていない name を指定した場合に発生します。
+
+#@samplecode 例
+/(c).*(いう).*(e.*)/ =~ 'abcあいうdef'
+p $~            # => #<MatchData "cあいうdef" 1:"c" 2:"いう" 3:"ef">
+p $~.byteend(0) # => 15
+p $~.byteend(1) # => 3
+p $~.byteend(2) # => 12
+p $~.byteend(3) # => 15
+p $~.byteend(4) # => index 4 out of matches (IndexError)
+#@end
+
+#@samplecode シンボルを指定する例
+/(?<key>\S+):\s*(?<value>\S+)/ =~ "name: ruby"
+$~                 # => #<MatchData "name: ruby" key:"name" value:"ruby">
+$~.byteend(:key)   # => 4
+$~.byteend(:value) # => 10
+$~.byteend(:foo)   # => undefined group name reference: foo (IndexError)
+#@end
+
+#@end
+
 --- post_match -> String
 
 マッチした部分より後ろの文字列を返します([[m:$']]と同じ)。
