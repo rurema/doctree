@@ -81,6 +81,17 @@ warn "hoge" # => hoge!!!
 
 @see [[m:Kernel.#warn]], [[m:Warning#warn]]
 
+#@since 3.4
+--- categories -> Array
+
+警告カテゴリの一覧を返します。
+
+#@samplecode
+Warning.categories # => [:deprecated, :experimental, :performance, :strict_unused_block]
+#@end
+
+#@end
+
 == Public Instance Methods
 
 #@since 3.0.0
