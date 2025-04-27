@@ -732,6 +732,9 @@ self を other で割り、その(剰余を考えない)商を整数に切り上
 @return 計算結果
 @raise TypeError 2引数 pow で Integer 以外を指定した場合に発生します。
 @raise RangeError 2引数 pow で other に負の数を指定した場合に発生します。
+#@since 3.4
+@raise 計算結果が巨大になりすぎる場合に発生します。
+#@end
 
 #@samplecode
 2 ** 3 # => 8
@@ -745,6 +748,7 @@ self を other で割り、その(剰余を考えない)商を整数に切り上
 5.pow(2, -8)  # => -7
 #@end
 
+#@until 3.4
 結果が巨大すぎる整数になりそうなとき、警告を出したうえで Float::INFINITY を返します。
 
 #@samplecode 計算を放棄して Float::INFINITY を返す例
@@ -754,6 +758,18 @@ p 100**9999999
 #@end
 
 判定の閾値は変わりえます。
+#@end
+
+#@since 3.4
+計算結果が巨大すぎるときは ArgumentError が発生します。
+
+#@samplecode 計算結果が巨大すぎる例
+p 100**9999999999999999999
+# => exponent is too large (ArgumentError)
+#@end
+
+判定の閾値は変わりえます。
+#@end
 
 @see [[m:BigDecimal#power]]
 

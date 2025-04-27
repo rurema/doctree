@@ -45,6 +45,9 @@ r * Rational(1, 2)   # => (3/8)
 冪(べき)乗を計算します。
 
 @param other 自身を other 乗する数
+#@since 3.4
+@raise ArgumentError 計算結果の分母・分子が巨大すぎる場合に発生します。
+#@end
 
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。other が有理数であっても、計算結果が無理数だった場合は [[c:Float]]
