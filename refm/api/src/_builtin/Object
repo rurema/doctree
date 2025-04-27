@@ -1180,7 +1180,7 @@ marshal_dump/marshal_load を使うべきです。
 @see [[m:Object#marshal_dump]], [[c:Marshal]]
 
 
---- clone(freeze: true) -> object
+--- clone(freeze: nil) -> object
 --- dup -> object
 
 オブジェクトの複製を作成して返します。
@@ -1196,7 +1196,9 @@ clone や dup は浅い(shallow)コピーであることに注意してくださ
 
 [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部のオブジェクトは複製ではなくインスタンス自身を返します。
 
-@param freeze false を指定すると freeze されていないコピーを返します。
+@param freeze true を指定すると freeze されたコピーを返します。
+              false を指定すると freeze されていないコピーを返します。
+              nil を指定すると、レシーバが freeze されていれば freeze されたコピーを、freeze されていなければ freeze されていないコピーを返します。
 @raise ArgumentError [[c:TrueClass]] などの常に freeze されているオブジェクトの freeze されていないコピーを作成しようとしたときに発生します。
 
 #@samplecode
