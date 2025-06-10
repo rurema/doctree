@@ -733,7 +733,7 @@ self を other で割り、その(剰余を考えない)商を整数に切り上
 @raise TypeError 2引数 pow で Integer 以外を指定した場合に発生します。
 @raise RangeError 2引数 pow で other に負の数を指定した場合に発生します。
 #@since 3.4
-@raise 計算結果が巨大になりすぎる場合に発生します。
+@raise ArgumentError 計算結果が巨大になりすぎる場合に発生します。
 #@end
 
 #@samplecode
