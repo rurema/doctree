@@ -1814,6 +1814,14 @@ offset が負の場合、文字列の末尾から数えた位置から探索し�
 #@end
 --- insert(pos, other) -> self
 
+文字列 other を self に挿入して self を返します。
+pos が正の場合、other を開始インデックスに挿入します。
+
+#@samplecode 例
+'foo'.insert(1, 'bar') # => "fbaroo"
+#@end
+
+pos が負の場合、self の末尾から逆方向に数えて pos+1 (self[index] の後) に other を挿入します。
 pos 番目の文字の直前に文字列 other を挿入します。
 self[pos, 0] = other と同じ操作です。
 
@@ -1821,12 +1829,8 @@ self[pos, 0] = other と同じ操作です。
 @param other    挿入する文字列
 
 #@samplecode 例
-str = "foobaz"
-str.insert(3, "bar")
-p str   # => "foobarbaz"
+'foo'.insert(-2, 'bar') # => "fobaro"
 #@end
-
-@see [[m:String#[]=]]
 
 --- intern -> Symbol
 --- to_sym -> Symbol
