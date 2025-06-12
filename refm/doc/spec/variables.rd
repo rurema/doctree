@@ -403,64 +403,125 @@ M::NewConst = 777   # => 777
 
 ====[a:prio] 定数参照の優先順位
 
-親クラスとネストの外側のクラスで同名の定数が定義されているとネストの外
-側の定数の方を先に参照します。つまり、定数参照時の定数の探索順序は、最
-初にネスト関係を外側に向かって探索し、次に継承関係を上位に向かって探索
-します。
+定数参照時の定数の探索順序には、以下の3つの場合があります。
 
-#@samplecode 例
-class Foo
-  CONST = 'Foo'
+  * :: で始まる定数参照
+  * :: を含まない定数参照
+  * 他の値から :: で繋げられた定数参照
+
+===== :: で始まる定数参照
+
+定数参照が :: で始まる場合、Object クラスを起点としてそのスーパークラスを順番に探索し、最初に見つかった定数を参照します。
+
+#@samplecode
+X = 1
+# 以下のように書いても同じ
+# class Object
+#   X = 1
+# end
+
+module M
+  X = 2
+  p ::X # => 1
+end
+#@end
+
+#@samplecode
+class BasicObject
+  X = 1
 end
 
-class Bar
-  CONST = 'Bar'
+module M
+  X = 2
+  p ::X # => 1
+end
+#@end
 
-  class Baz < Foo
-    p CONST             # => "Bar"      外側の定数
-    # この場合、親クラスの定数は明示的に指定しなければ見えない
-    p Foo::CONST        # => "Foo"
+===== :: を含まない定数参照
+
+定数参照が :: を含まない場合、定数参照の場所を起点としてソースコードにおけるクラス（あるいはモジュール。以下同じ）のネストを外側に向かって探索し、最初に見つかった定数を参照します。
+一番外側のクラスまで探索しても定数が見つからなかった場合、起点のクラスのスーパークラスを順番に探索します。
+
+#@samplecode
+X = "Object" # Object::X として定義される
+
+class C
+  X = "C"
+end
+
+module M1
+  X = "M1"
+  module M2
+    class C3 < C
+      # C3 -> M2 -> M1 -> C -> Object の順で探索される
+      p X # => "M1"
+    end
   end
 end
 #@end
 
-トップレベルの定数定義はネストの外側とはみなされません。したがってトッ
-プレベルの定数は、継承関係を探索した結果で参照されるので優先順位は低い
-と言えます。
+なお以下の例では X の参照箇所からソースコード上でクラスのネストを外側にたどると M2 のみに遭遇するため、
+M1 は探索されないことに注意してください。
 
-#@samplecode 例
-class Foo
-  CONST = 'Foo'
+#@samplecode
+X = "Object"
+
+class C
+  X = "C"
 end
 
-CONST = 'Object'
-
-class Bar < Foo
-  p CONST               # => "Foo"
+module M1
+  X = "M1"
 end
 
-# 以下のように明示的にネストしていれば規則通り Object の定数
-# (ネストの外側)が先に探索される
-class Object
-  class Bar < Foo
-    p CONST             # => "Object"
+module M1::M2
+  class C3 < C
+    # C3 -> M2 -> C -> Object の順で探索される
+    p X # => "C"
   end
 end
 #@end
 
-上位のクラス(クラスの継承関係上、およびネストの関係上の上位クラス)の定
-数と同名の定数(下の例で CONST) に代入を行うと、上位の定数への代入では
-なく、そのクラスの定数の定義になります。
+ネストしているクラスの一覧は [[m:Class.nesting]]（あるいは[[m:Module.nesting]]）で取得できます。
 
-#@samplecode 例
-class Foo
-  CONST = 'Foo'
+#@samplecode
+module M1
+  module M2
+    p Module.nesting # => [M1::M2, M1]
+  end
 end
 
-class Bar < Foo
-  p CONST               # => "Foo"
-  CONST = 'Bar'         # Bar の定数 CONST を*定義*
-  p CONST               # => "Bar"  (Foo::CONST は隠蔽される)
-  p Foo::CONST          # => "Foo"  (:: 演算子で明示すれば見える)
+module M1::M2
+  p Module.nesting # => [M1::M2]
+end
+#@end
+
+===== 他の値から :: で繋げられた定数参照
+
+他の値から :: で繋げられた定数参照の場合、:: の前にあるクラスを起点としてそのスーパークラスを順番に探索し、最初に見つかった定数を参照します。ただし、Object クラスとそのスーパークラスは探索対象となりません。
+
+#@samplecode
+X = "Object"
+Y = "Object"
+
+class C
+  X = "C"
+end
+
+class D < C
+end
+
+p D::X # => "C"
+p D::Y # => uninitialized constant D::Y (NameError)
+#@end
+
+:: を含まない定数参照と異なり、クラスのネストの外側は探索対象となりません。
+
+#@samplecode
+module M
+  X = "M"
+  class C
+  end
+  p C::X # => uninitialized constant M::C::X (NameError)
 end
 #@end
