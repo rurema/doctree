@@ -384,13 +384,24 @@ SSL/TLS サーバに接続して write します。
   require 'openssl'
   include OpenSSL
   
+  ctx = SSL::SSLContext.new
+  ctx.set_params(verify_mode: OpenSSL::SSL::VERIFY_PEER, verify_hostname: true)
+  
   soc = TCPSocket.new('www.example.com', 443)
-  ssl = SSL::SSLSocket.new(soc)
+  ssl = SSL::SSLSocket.new(soc, ctx)
+  ssl.hostname = 'www.example.com' # SNI
   ssl.connect
   ssl.post_connection_check('www.example.com')
   raise "verification error" if ssl.verify_result != OpenSSL::X509::V_OK
-  ssl.write('hoge')
   print ssl.peer_cert.to_text
+  
+  # HTTP リクエストを送信
+  ssl.write("GET / HTTP/1.1\r\n")
+  ssl.write("Host: www.example.com\r\n")
+  ssl.write("Connection: close\r\n")
+  ssl.write("\r\n")
+  print ssl.read
+  
   ssl.close
   soc.close
 
