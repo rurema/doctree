@@ -27,6 +27,11 @@ category の種類の警告を表示するかどうかのフラグを返しま�
 
     例: パターンマッチング
 
+#@since 3.3
+: :performance
+  パフォーマンスに関する警告。
+#@end
+
 --- []=(category, flag) -> flag
 
 category の警告を表示するかどうかのフラグを設定します。
