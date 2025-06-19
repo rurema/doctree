@@ -1082,6 +1082,33 @@ result = a.fetch(10){|nth|
 p result #=> 999
 #@end
 
+#@since 3.4
+--- fetch_values(*indexes)                 -> Array
+--- fetch_values(*indexes) { |index| ... } -> Array
+
+引数で指定されたインデックスに対する値の配列を返します。
+
+指定したインデックスが self の範囲外である場合、ブロックが与えられたかどうかにより挙動が異なります。
+
+ * ブロックが与えられている場合、インデックスを引数としてブロックを呼び出し、その結果の値を使用します。
+ * ブロックが与えられていない場合、[[c:IndexError]] が発生します。
+
+@param indexes 取得したい要素のインデックスを指定します。
+
+@raise IndexError ブロックが与えられてない時に、範囲外のインデックスを引数で指定すると発生します。
+
+#@samplecode 例
+ary = ["a", "b", "c"]
+
+ary.fetch_values(0, 2)  # => ["a", "c"]
+ary.fetch_values(-1, 1) # => ["d", "b"]
+ary.fetch_values(0, 10) # => index 10 outside of array bounds: -3...3 (IndexError)
+ary.fetch_values(0, 10) { |i| i.to_s } # => ["a", "10"]
+#@end
+
+@see [[m:Array#values_at]], [[m:Array#fetch]]
+#@end
+
 --- fill(val)            -> self
 --- fill {|index| ... }  -> self
 
