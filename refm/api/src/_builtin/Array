@@ -1102,7 +1102,7 @@ ary = ["a", "b", "c"]
 
 ary.fetch_values(0, 2)  # => ["a", "c"]
 ary.fetch_values(-1, 1) # => ["d", "b"]
-ary.fetch_values(0, 10) # => index 10 outside of array bounds: -4...4 (IndexError)
+ary.fetch_values(0, 10) # => index 10 outside of array bounds: -3...3 (IndexError)
 ary.fetch_values(0, 10) { |i| i.to_s } # => ["a", "10"]
 #@end
 
