@@ -149,8 +149,8 @@ nil
 # 内部エンコーディングをWindows-31Jにする場合
 
 $ ruby -E :Windows-31J -e 'p Encoding.default_external; p Encoding.default_internal'
-#<Encoding:Windows-31J>
 #<Encoding:UTF-8>
+#<Encoding:Windows-31J>
 
 $ ruby --encoding :Windows-31J -e 'p Encoding.default_external; p Encoding.default_internal'
 #<Encoding:UTF-8>
