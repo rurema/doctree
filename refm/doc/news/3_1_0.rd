@@ -169,7 +169,7 @@ C.subclasses    #=> []
 
   * [[c:Method]] / [[c:UnboundMethod]]
     * 新規メソッド
-      * Method#public?, Method#private?, Method#protected?, UnboundMethod#public?, UnboundMethod#private?, UnboundMethod#protected? が追加されました。 [[feature:11689]]
+      * [[m:Method#public?]], [[m:Method#private?]], [[m:Method#protected?]], [[m:UnboundMethod#public?]], [[m:UnboundMethod#private?]], [[m:UnboundMethod#protected?]] が追加されました。 [[feature:11689]]
 
   * [[c:Module]]
     * 変更されたメソッド
