@@ -44,7 +44,7 @@ proxy.to_i #=> 1
 
 == Instance Methods
 --- ==(other) -> bool
-オブジェクトが other と等しければ真を、さもなくば偽を返します。
+オブジェクトが other と等しければ真を、そうでない場合は偽を返します。
 
 このメソッドは各クラスの性質に合わせて、サブクラスで再定義するべきです。
 多くの場合、オブジェクトの内容が等しければ真を返すように (同値性を判定するように) 再定義
@@ -53,7 +53,7 @@ proxy.to_i #=> 1
 デフォルトでは [[m:Object#equal?]] と同じオブジェクトの同一性になっています。
 
 @param other 比較対象となるオブジェクト
-@return other が self と同値であれば真、さもなくば偽
+@return other が self と同値であれば真、そうでない場合は偽
 
 #@samplecode 例
 class Person < BasicObject
@@ -74,7 +74,7 @@ tanaka1 == tanaka2    #=> false
      [[m:Object#eql?]]
 
 --- equal?(other) -> bool
-オブジェクトが other と同一であれば真を、さもなくば偽を返します。
+オブジェクトが other と同一であれば真を、そうでない場合は偽を返します。
 
 このメソッドは2つのオブジェクトが同一のものであるかどうかを判定します。
 一般にはこのメソッドを決して再定義すべきでありません。
@@ -82,7 +82,7 @@ tanaka1 == tanaka2    #=> false
 再定義する際には自分が何をしているのかよく理解してから実行してください。
 
 @param other 比較対象となるオブジェクト
-@return other が self 自身であれば真、さもなくば偽
+@return other が self 自身であれば真、そうでない場合は偽
 
 #@samplecode 例
 original = "a"
@@ -100,14 +100,14 @@ original.equal? substituted #=> true
 --- ! -> bool
 オブジェクトを真偽値として評価し、その論理否定を返します。
 
-このメソッドは self が nil または false であれば真を、さもなくば偽を返します。
+このメソッドは self が nil または false であれば真を、そうでない場合は偽を返します。
 主に論理式の評価に伴って副作用を引き起こすことを目的に
 再定義するものと想定されています。
 
 このメソッドを再定義しても Ruby の制御式において nil や false 以外が偽として
 扱われることはありません。
 
-@return オブジェクトが偽であれば真、さもなくば偽
+@return オブジェクトが偽であれば真、そうでない場合は偽
 
 #@samplecode 例
 class NegationRecorder < BasicObject

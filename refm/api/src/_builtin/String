@@ -3492,7 +3492,7 @@ u.force_encoding(Encoding::UTF_8)             #=> "ほへと"
 
 --- ascii_only?  -> bool
 
-文字列がASCII文字のみで構成されている場合に true を返します。さもなくば
+文字列がASCII文字のみで構成されている場合に true を返します。そうでない場合は
 false を返します。
 
 例:
@@ -3505,7 +3505,7 @@ false を返します。
 --- valid_encoding?  -> bool
 
 文字列の内容が、現在のエンコーディングに照らしあわせて妥当であれば
-true を返します。さもなくば false を返します。
+true を返します。そうでない場合は false を返します。
 
 #@samplecode 例
 "\xc2\xa1".force_encoding("UTF-8").valid_encoding?  #=> true
@@ -3574,7 +3574,7 @@ str.encode("Windows-31J", fallback: { "\u00b7" => "\xA5".force_encoding("Windows
 --- encode!(encoding, from_encoding, options = nil) -> self
 
 self を指定したエンコーディングに変換し、自身を置き換えます。引数を2つ
-与えた場合、第二引数は変換元のエンコーディングを意味します。さもなくば
+与えた場合、第二引数は変換元のエンコーディングを意味します。そうでない場合は
 self のエンコーディングが使われます。変換後の self を返します。
 
 (gsub!などと異なり)変換が行なわれなくても self を返します。
