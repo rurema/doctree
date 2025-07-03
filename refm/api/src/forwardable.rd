@@ -21,20 +21,22 @@ category DesignPattern
 
 クラスに対して [[m:Object#extend]] して使います。[[m:Module#include]] でないところに注意して下さい。
 
-例:
+#@samplecode 例
+require 'forwardable'
 
-  require 'forwardable'
-  class Foo
-    extend Forwardable
-    
-    def_delegators("@out", "printf", "print")
-    def_delegators(:@in, :gets)
-    def_delegator(:@contents, :[], "content_at")
-  end
-  f = Foo.new
-  f.printf ...
-  f.gets
-  f.content_at(1)
+class Foo
+  extend Forwardable
+
+  def_delegators("@out", "printf", "print")
+  def_delegators(:@in, :gets)
+  def_delegator(:@contents, :[], "content_at")
+end
+
+f = Foo.new
+f.printf ...
+f.gets
+f.content_at(1)
+#@end
 
 == Singleton Methods
 
@@ -95,23 +97,24 @@ def_delegators は def_instance_delegators の別名になります。
 
 def_delegator は def_instance_delegator の別名になります。
 
-例:
+#@samplecode 例
+require 'forwardable'
 
-  require 'forwardable'
-  class MyQueue
-    extend Forwardable
-    attr_reader :queue
-    def initialize
-      @queue = []
-    end
-
-    def_delegator :@queue, :push, :mypush
+class MyQueue
+  extend Forwardable
+  attr_reader :queue
+  def initialize
+    @queue = []
   end
 
-  q = MyQueue.new
-  q.mypush 42
-  q.queue    # => [42]
-  q.push 23  # => NoMethodError
+  def_delegator :@queue, :push, :mypush
+end
+
+q = MyQueue.new
+q.mypush 42
+q.queue    # => [42]
+q.push 23  # => NoMethodError
+#@end
 
 @see [[m:Forwardable#def_delegators]]
 
@@ -127,23 +130,24 @@ def_delegator は def_instance_delegator の別名になります。
 
 #@# ruby-core:05899 のパッチに付いてたテストコードより。
 
-例:
+#@samplecode 例
+require 'forwardable'
 
-  require 'forwardable'
-  class Zap
-     extend Forwardable
-     delegate :length => :@str
-     delegate [:first, :last] => :@arr
-     def initialize
-        @arr = %w/foo bar baz/
-        @str = "world"
-     end
-  end
+class Zap
+    extend Forwardable
+    delegate :length => :@str
+    delegate [:first, :last] => :@arr
+    def initialize
+      @arr = %w/foo bar baz/
+      @str = "world"
+    end
+end
 
-  zap = Zap.new
-  zap.length # => 5
-  zap.first  # => "foo"
-  zap.last   # => "baz"
+zap = Zap.new
+zap.length # => 5
+zap.first  # => "foo"
+zap.last   # => "baz"
+#@end
 
 == Constants
 
