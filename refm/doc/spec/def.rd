@@ -647,8 +647,7 @@ extend については、[[m:Object#extend]] を参照して
  * private に設定されたメソッドは関数形式でしか呼び出せません。
 #@end
  * protected に設定されたメソッドは、そのメソッドを持つオブジェクトが
-   selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せ
-   ます。
+   selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せます。
 
 #@samplecode 例: protected の可視性
 class Foo
