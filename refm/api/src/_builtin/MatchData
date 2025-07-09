@@ -180,7 +180,7 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 @raise IndexError 範囲外の n を指定した場合に発生します。
 
 #@since 3.2
-@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#offset]]
+@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#byteoffset]]
 #@else
 @see [[m:MatchData#begin]], [[m:MatchData#end]]
 #@end
@@ -211,7 +211,7 @@ p $~.offset('century') # => `offset': undefined group name reference: century (I
 #@end
 
 #@since 3.2
-@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#offset]]
+@see [[m:MatchData#begin]], [[m:MatchData#end]], [[m:MatchData#byteoffset]]
 #@else
 @see [[m:MatchData#begin]], [[m:MatchData#end]]
 #@end
