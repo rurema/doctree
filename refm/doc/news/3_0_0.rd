@@ -189,7 +189,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
 
   * Mutex
     * Mutex は、Thread ごとではなく Fiber ごとに取得されるようになりました。
-      この変更は、基本的に全てのユースケースで互換性がありべきで、スケジューラーを使用する際のブロッキングを回避する必要があります。
+      この変更は、基本的に全てのユースケースで互換性があるべきで、スケジューラーを使用する際のブロッキングを回避する必要があります。
       [[feature:16792]]
   * Proc
     * Proc#== and Proc#eql? are now defined and will return true for separate Proc instances if the procs were created from the same block. [[feature:14267]]
