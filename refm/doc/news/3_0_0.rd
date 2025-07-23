@@ -414,7 +414,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * インスタンス変数
         * いくつかの冗長なチェックを削除しています。
         * 可能であれば、メソッド内のクラスとオブジェクトの複数回チェックをスキップしています。
-        * Hash やそのサブクラスの一部のコアクラスでアクセスを最適化しています。
+        * Hash のような一部のコアクラスやそのサブクラスのアクセスを最適化しています。
     * 一部の C メソッドのサポートをインライン化するメソッド
         * Kernel: #class, #frozen?
         * Integer: #-@, #~, #abs, #bit_length, #even?, #integer?, #magnitude, #odd?, #ord, #to_i, #to_int, #zero?
