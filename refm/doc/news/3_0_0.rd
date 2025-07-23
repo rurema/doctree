@@ -171,7 +171,7 @@ dirty_data[(1..).step(2)] # take each second element
     * キーワード引数 freeze: true で呼び出された Kernel#clone は、キーワード引数 freeze: true で #initialize_clone を呼び出すようになります。そして、Kernel#clone は、レシーバが freeze されていない場合、freeze して複製を返すようになります。[[feature:16175]]
     * 2 引数で呼び出された場合の Kernel#eval は、コード評価時に __FILE__ では "(eval)" を、__LINE__ では 1 を使うようになります。[[bug:4352]]
     * Kernel#lambda は、リテラルブロックなしで呼び出された場合、警告を出すようになりました。[[feature:15973]]
-    * Kernel.sleep はノンブロッキング実行コンテキストでスケジューラフック #kernel_sleep(...) を呼び出せるようになりました。[[feature:16786]]
+    * Kernel.sleep はノンブロッキング実行コンテキストでスケジューラフック #kernel_sleep(...) を呼び出すようになりました。[[feature:16786]]
   * Module
     * Module#include および Module#prepend はレシーバが include されている、もしくは、prepend されているクラスとモジュールに影響を与えるようになります。そして、他のモジュールやクラスが include される、もしくは、prepend される前に、引数がレシーバー include されるような振る舞いをミラーリングします。[[feature:9573]]
     * Module#public, Module#protected, Module#private, Module#public_class_method, Module#private_class_method, およびトップレベルな "private"/"public" メソッドが、メソッド名一覧で単一の配列引数を受け取れるようになりました。[[feature:17314]]
