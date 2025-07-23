@@ -241,7 +241,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * Symbol#name が導入されました。 シンボルの名前がある場合は、その名前を返します。返された文字列は freeze されています。[[feature:16150]]
   * Fiber
     * ブロッキングオペレーションをインターセプトするための Fiber.set_scheduler、および現在のスケジューラーにアクセスするための Fiber.scheduler が導入されました。
-      詳細は {Fiber}[https://docs.ruby-lang.org/ja/latest/class/Fiber.html] のサポートされているオペレーションとスケジューラーフックの実装方法を参照してください。 [[feature:16786]]
+      詳細は [[c:Fiber]] のサポートされているオペレーションとスケジューラーフックの実装方法を参照してください。 [[feature:16786]]
     * Fiber.blocking? は、現在の実行コンテキストがブロックされているかどうかを知らせてくれます。[[feature:16786]]
     * Thread#join はノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。 [[feature:16786]]
     * デフォルトのデッドロック検出を無効にするために Thread.ignore_deadlock アクセッサが導入されました。
