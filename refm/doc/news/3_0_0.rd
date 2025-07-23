@@ -202,7 +202,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * Random::DEFAULT は Random インスタンスではなく Random クラスをさすようになりました。よって、Ractor で機能します。[[feature:17322]]
     * Random::DEFAULT は、その値がわかりにくくグローバルではなくなったため、非推奨になりました。代わりに Kernel.rand/Random.rand を直接使用するか、Random.new を使用して Random インスタンスを生成してください。[[feature:17351]]
   * String
-    * 以下のメソッドは、サブクラスインスタンスで呼び出された場合、String インスタンスを返すようになりました: [[bug:10845]]
+    * 以下のメソッドは、サブクラスのインスタンスで呼び出された場合、サブクラスのインスタンスではなく String インスタンスを返す、または yield  するようになりました: [[bug:10845]]
       * String#*
       * String#capitalize
       * String#center
