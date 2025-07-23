@@ -243,7 +243,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * ブロッキングオペレーションをインターセプトするための Fiber.set_scheduler、および現在のスケジューラーにアクセスするための Fiber.scheduler が導入されました。
       詳細は [[c:Fiber]] のサポートされているオペレーションとスケジューラーフックの実装方法を参照してください。 [[feature:16786]]
     * Fiber.blocking? は、現在の実行コンテキストがブロックされているかどうかを知らせてくれます。[[feature:16786]]
-    * Thread#join はノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。 [[feature:16786]]
+    * Thread#join はノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出します。 [[feature:16786]]
     * デフォルトのデッドロック検出を無効にするために Thread.ignore_deadlock アクセッサが導入されました。
       また、シグナルハンドラーを使用してデッドロックを解除できるようになりました。[[bug:13768]]
   * Warning
