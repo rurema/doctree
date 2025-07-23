@@ -290,7 +290,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * Net::HTTP.get, Net::HTTP.get_response, および Net::HTTP.get_print は、最初の引数が URI の場合、2 番目の引数でリクエストヘッダーをハッシュとして受け取れるようになりました。[[feature:16686]]
   * Net::SMTP
     * SNI サポートが導入されました。
-    * Net::SMTP.start 引数がキーワード引数になりました。
+    * Net::SMTP.start の引数がキーワード引数になりました。
     * TLS はデフォルトでホスト名をチェックしなくなりました。
   * OpenStruct
     * 初期化はもはや lazy ではありません。[[bug:12136]]
