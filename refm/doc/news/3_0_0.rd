@@ -174,7 +174,7 @@ dirty_data[(1..).step(2)] # take each second element
     * Kernel.sleep はノンブロッキング実行コンテキストでスケジューラフック #kernel_sleep(...) を呼び出すようになりました。[[feature:16786]]
   * Module
     * Module#include および Module#prepend はレシーバがすでに include されている、もしくは、prepend されているクラスとモジュールに影響を与えるようになります。そして、他のモジュールやクラスが include される、もしくは、prepend される前に、引数がレシーバに include されるような振る舞いをミラーリングします。[[feature:9573]]
-    * Module#public, Module#protected, Module#private, Module#public_class_method, Module#private_class_method, およびトップレベルな "private"/"public" メソッドが、メソッド名一覧で単一の配列引数を受け取れるようになりました。[[feature:17314]]
+    * Module#public, Module#protected, Module#private, Module#public_class_method, Module#private_class_method, およびトップレベルの "private"/"public" メソッドが、メソッド名一覧が入った単一の配列引数を受け取れるようになりました。[[feature:17314]]
     * Module#attr_accessor, Module#attr_reader, Module#attr_writer および Module#attr メソッドは、定義されたメソッドのシンボルの配列を返すようになりました。[[feature:17314]]
     * Module#alias_method は、定義されたシンボルのエイリアスを返すようになりました。[[feature:17314]]
 
