@@ -193,7 +193,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
       [[feature:16792]]
   * Proc
     * Proc#== and Proc#eql? are now defined and will return true for separate Proc instances if the procs were created from the same block. [[feature:14267]]
-    * Proc#== および Proc#eql? は、Proc が同じブロックから作成される場合、Proc インスタンスと分離して true を返すように定義されました。[[feature:14267]]
+    * Proc#== および Proc#eql? は、Proc が同じブロックから作成される場合、異なる Proc インスタンスに対して true を返すように定義されました。[[feature:14267]]
   * Queue / SizedQueue
     * Queue#pop, SizedQueue#push および関連したメソッドは、ノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。[[feature:16786]]
   * Ractor
