@@ -165,10 +165,10 @@ dirty_data[(1..).step(2)] # take each second element
     * Hash#except が導入されました。与えられたキーとそれらの値を除外したハッシュを返すようになりました。[[feature:15822]]
   * IO
     * IO#nonblock? のデフォルト値が true になりました。[[feature:16786]]
-    * IO#wait_readable, IO#wait_writable, IO#read, IO#write およびその他関連するメソッド（例 IO#puts, IO#gets）は、ノンブロッキング実行コンテキストでスケジューラフック #io_wait(io, events, timeout) を呼び出せるようになりました。[[feature:16786]]
+    * IO#wait_readable, IO#wait_writable, IO#read, IO#write およびその他関連するメソッド（例 IO#puts, IO#gets）は、ノンブロッキング実行コンテキストでスケジューラフック #io_wait(io, events, timeout) を呼び出す場合があります。[[feature:16786]]
   * Kernel
-    * キーワード引数 freeze: false で呼び出された Kernel#clone は、キーワード引数 freeze: false で #initialize_clone を呼び出すようになります。[[bug:14266]]
-    * キーワード引数 freeze: true で呼び出された Kernel#clone は、キーワード引数 freeze: true で #initialize_clone を呼び出すようになります。そして、Kernel#clone は、レシーバが freeze されていない場合、freeze して複製を返すようになります。[[feature:16175]]
+    * キーワード引数 freeze: false 付きで呼び出された Kernel#clone は、キーワード引数 freeze: false 付きで #initialize_clone を呼び出すようになります。[[bug:14266]]
+    * キーワード引数 freeze: true 付きで呼び出された Kernel#clone は、キーワード引数 freeze: true 付きで #initialize_clone を呼び出すようになります。そして、Kernel#clone は、レシーバが freeze されていない場合、freeze された複製を返すようになります。[[feature:16175]]
     * 2 引数で呼び出された場合の Kernel#eval は、コード評価時に __FILE__ では "(eval)" を、__LINE__ では 1 を使うようになります。[[bug:4352]]
     * Kernel#lambda は、リテラルブロックなしで呼び出された場合、警告を出すようになりました。[[feature:15973]]
     * Kernel.sleep はノンブロッキング実行コンテキストでスケジューラフック #kernel_sleep(...) を呼び出すようになりました。[[feature:16786]]
@@ -192,10 +192,9 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
       この変更は、基本的に全てのユースケースで互換性があるべきで、スケジューラーを使用する際のブロッキングを回避する必要があります。
       [[feature:16792]]
   * Proc
-    * Proc#== and Proc#eql? are now defined and will return true for separate Proc instances if the procs were created from the same block. [[feature:14267]]
     * Proc#== および Proc#eql? は、Proc が同じブロックから作成される場合、異なる Proc インスタンスに対して true を返すように定義されました。[[feature:14267]]
   * Queue / SizedQueue
-    * Queue#pop, SizedQueue#push および関連したメソッドは、ノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出せるようになりました。[[feature:16786]]
+    * Queue#pop, SizedQueue#push および関連したメソッドは、ノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出す場合があります。[[feature:16786]]
   * Ractor
     * 並列処理を可能にする新しいクラスが追加されました。詳細は [[url:https://docs.ruby-lang.org/en/master/ractor_md.html]] を参照してください。
   * Random
@@ -243,8 +242,9 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * ブロッキングオペレーションをインターセプトするための Fiber.set_scheduler、および現在のスケジューラーにアクセスするための Fiber.scheduler が導入されました。
       詳細は [[c:Fiber]] のサポートされているオペレーションとスケジューラーフックの実装方法を参照してください。 [[feature:16786]]
     * Fiber.blocking? は、現在の実行コンテキストがブロックされているかどうかを知らせてくれます。[[feature:16786]]
+  * Thread
     * Thread#join はノンブロッキングコンテキストで block/unblock スケジューラーフックを呼び出します。 [[feature:16786]]
-    * シグナルハンドラーを使用してデッドロックを解消するという使いを許すため、デフォルトのデッドロック検出を無効にできる Thread.ignore_deadlock アクセッサが導入されました。[[bug:13768]]
+    * シグナルハンドラーを使用してデッドロックを解消するという使い方を許すため、デフォルトのデッドロック検出を無効にできる Thread.ignore_deadlock アクセッサが導入されました。[[bug:13768]]
   * Warning
     * Warning#warn は category キーワード引数をサポートするようになりました。[[feature:17122]]
 
@@ -399,8 +399,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
 
   * Ractor のためにメソッドキャッシュが刷新されました。[[feature:16614]]
     * ISeq からポイントされたインラインメソッドキャッシュは、複数の Ractor から並行してアクセスでき、メソッドキャッシュの場合でも同期が必要です。
-      しかしながら、このような同期はオーバーヘッドになる可能性があるため、(1) 使い捨てできる (2) クラスごとにキャッシュできる (3) 新規の無効化する機構を新しいインラインキャッシュメソッドに導入しました。
-      (1) はアトミックな処理を使用するのみなので、メソッドごとに呼び出す同期を回避できます。
+      しかしながら、このような同期はオーバーヘッドになる可能性があるため、(1) 使い捨てできる (2) クラスごとにキャッシュできる (3) 新規の無効化する機構を新しいインラインキャッシュメソッドに導入しました。(1) はアトミックな処理を使用するのみなので、メソッドごとに呼び出す同期を回避できます。
       詳細はチケットを参照してください。
   * メソッド呼び出しでキーワード引数を使用するときに割り当てられるハッシュの数が最大 1 に減り、特定のキーワードを受け取るメソッドにキーワード引数を渡してもハッシュを割り当てなくなりました。
   * super は、refinements, attr_reader, attr_writer ではない場合、前回と同じ型のメソッドが呼び出されたときに最適化されます。
