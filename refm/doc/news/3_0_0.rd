@@ -200,7 +200,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
     * 並列処理を可能にする新しいクラスが追加されました。詳細は [[url:https://docs.ruby-lang.org/en/master/ractor_md.html]] を参照してください。
   * Random
     * Random::DEFAULT は Random インスタンスではなく Random クラスをさすようになりました。よって、Ractor で機能します。[[feature:17322]]
-    * Random::DEFAULT は、その値がわかりにくくグローバルではなくなったため、非推奨になりました。Kernel.rand/Random.rand を直接使用するか、代わりに Random.new を使用して Random インスタンスを生成してください。[[feature:17351]]
+    * Random::DEFAULT は、その値がわかりにくくグローバルではなくなったため、非推奨になりました。代わりに Kernel.rand/Random.rand を直接使用するか、Random.new を使用して Random インスタンスを生成してください。[[feature:17351]]
   * String
     * 以下のメソッドは、サブクラスインスタンスで呼び出された場合、String インスタンスを返すようになりました: [[bug:10845]]
       * String#*
