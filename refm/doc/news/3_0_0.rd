@@ -327,7 +327,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
 #@end
 
   * EXPERIMENTAL: Hash#each が常に 2 要素配列を yield するようになりました。[[bug:12706]]
-    * { a: 1 }.each(&->(k, v) { }) は lambda のアリティチェックが要因で、ArgumentError を起こすようになりました。
+    * { a: 1 }.each(&->(k, v) { }) は lambda のアリティチェックが原因で、ArgumentError を起こすようになりました。
   * パイプがクローズされた後に標準出力へ出力しようとしても、EPIPE 例外を浮揚しないようになりました。[[feature:14413]]
   * TRUE/FALSE/NIL 各定数が定義されないようになりました。
   * Integer#zero? は最適化のために Numeric#zero? をオーバーライドするようになりました。[[misc:16961]]
