@@ -377,7 +377,7 @@ p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
   * Bundled gems
     * net-telnet および xmlrpc は、バンドルされた gem から削除されました。
       これらを保守したい場合は、[[url:https://github.com/ruby/xmlrpc]] もしくは [[url:https://github.com/ruby/net-telnet]] にあなたのプランをコメントしてください。
-  * SDBM は Ruby 表示ん添付ライブラリから削除されました。[[bug:8446]]
+  * SDBM は Ruby 標準添付ライブラリから削除されました。[[bug:8446]]
     * sdbm の課題は、[[url:https://github.com/ruby/sdbm]] で処理される予定です。
   * WEBrick は Ruby 標準添付ライブラリから削除されました。[[feature:17303]]
     * WEBrick の課題は、[[url:https://github.com/ruby/webrick] で処理される予定です。
