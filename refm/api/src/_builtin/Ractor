@@ -1,0 +1,138 @@
+= class Ractor < Object
+
+並列プログラミングの仕組みを提供するクラスです。
+
+== Class Methods
+
+--- new(*args, name: nil) {|*args| ... } -> Ractor
+
+Ractor を生成して、ブロックの評価を開始します。
+生成した Ractor を返します。
+
+@param args ブロックの引数として渡されます。
+            値が shareable である場合はそのインスタンスが、そうでない場合はコピーが試みられた値が渡されます。
+            コピーできない値であった場合は例外が発生します。
+@param name Ractor の名前を指定します。
+
+--- [](sym) -> object | nil
+
+このメソッドを呼び出した Ractor の Ractor-local storage の sym に対応するデータを取り出します。
+sym に対応するデータがなければ nil を返します。
+
+@param  sym Ractor-local storage のキーを指定します。
+@return     Ractor-local storage に格納されている値を返します。
+
+--- []=(sym, val)
+
+@param sym Ractor-local storage のキーを指定します。
+@param val 格納するデータを指定します。
+
+--- count -> Integer
+
+実行中の Ractor の数を返します。
+
+--- current -> Ractor
+
+このメソッドを呼び出された Ractor を返します。
+
+--- main -> Ractor
+
+main Ractor（プログラムの実行が開始された Ractor）を返します。
+
+--- main? -> Ractor
+
+このメソッドを呼びだした Ractor が main Ractor であるとき、true を返します。
+
+--- make_shareable(obj, copy: false) -> object
+
+obj が shareable になるよう変換します。
+
+obj が shareable でない場合、obj と obj が参照する shareable でないオブジェクトをすべて freeze します。
+
+@param obj Shareable にしたいオブジェクトを指定します。
+@param copy true の場合、obj を変更する代わりに obj のコピーを作成し shareable にします。
+
+--- receive -> object
+--- recv -> object
+
+このメソッドを呼び出した Ractor の default port からメッセージを受信します。
+
+@see [[m:Ractor::Port#receive]]
+
+--- select(*ports)
+#@todo
+
+--- shareable?(obj) -> bool
+
+obj が shareable である場合、true を返します。
+
+@param obj Shareable であるか判定したいオブジェクトを指定します。
+
+--- store_if_absent(key) { ... } -> object
+
+このメソッドを呼び出した Ractor の Ractor-local storage の key データがない場合、
+ブロックを評価した結果を格納します。
+格納した値を返します。
+
+@param key Ractor-local storage のキーを指定します。
+
+== Instance Methods
+
+#@since 3.5
+--- close -> bool
+
+Default port を閉じます。
+
+self がこのメソッドを呼び出した Ractor ではない場合、Ractor::Error が発生します。
+
+#@end
+
+#@since 3.5
+--- default_port -> Ractor::Port
+
+self の default port を返します。
+
+#@end
+
+#@since 3.5
+--- join -> Ractor
+
+self が終了するまで待ちます。
+Ractor の実行が例外で終了した場合には、 [[m:Ractor#value]]を呼び出し、その例外を再発生させます。
+
+#@end
+
+#@since 3.5
+--- monitor -> Ractor
+#@todo
+
+#@end
+
+--- name -> String
+
+self の名前を返します。
+
+@see [[m:Ractor.new]]
+
+--- <<(msg)
+--- send(msg)
+
+Ractor の default port に対してメッセージを送信します。
+
+@param msg 送信するメッセージを指定します。
+
+@see [[m:Ractor::Port#send]]
+
+#@since 3.5
+--- unmonitor -> Ractor
+#@todo
+
+#@end
+
+#@since 3.5
+--- value -> object
+
+self が終了するまで待ち、その Ractor のブロックが返した値を返します。
+Ractor の実行が例外で終了した場合には、その例外を再発生させます。
+
+#@end
