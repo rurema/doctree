@@ -685,7 +685,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。
     p Thread.current.group == ThreadGroup::Default
     # => true
 
-#@since 3.0.0
+#@since 3.0
 --- ignore_deadlock -> bool
 
 デッドロック検知を無視する機能のon/offを返します。
@@ -697,7 +697,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。
 @see [[m:Thread#ignore_deadlock=]]
 #@end
 
-#@since 3.0.0
+#@since 3.0
 --- ignore_deadlock=(bool)
 
 デッドロック検知を無視する機能をon/offします。デフォルト値はfalseです。

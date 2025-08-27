@@ -1127,7 +1127,7 @@ to_f の値と subsec の値の下のほうの桁の値は異なる場合があ�
 というのは IEEE 754 double はそれを表すのに十分な精度を
 持たないからです。subsec で得られる値が正確です。
 
-#@since 3.2.0
+#@since 3.2
 --- deconstruct_keys(array_of_names_or_nil) -> Hash
 
 パターンマッチに使用する名前と値の [[c:Hash]] を返します。

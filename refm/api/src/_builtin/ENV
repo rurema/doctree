@@ -426,7 +426,7 @@ ENV.slice("unknown")    # => {}
 ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 #@end
 
-#@since 3.0.0
+#@since 3.0
 @see [[m:Hash#slice]], [[m:ENV.except]]
 #@else
 @see [[m:Hash#slice]]
@@ -436,7 +436,7 @@ ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 --- freeze -> ()
 ENV.freeze は環境変数の変更を禁止できないため、[[c:TypeError]]を発生させます。
 #@end
-#@since 3.0.0
+#@since 3.0
 --- except(*keys) -> Hash
 
 引数で指定された以外のキーとその値だけを含む Hash を返します。
