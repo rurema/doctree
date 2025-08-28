@@ -110,7 +110,7 @@ p $~.end(4)   # => `end': index 4 out of matches (IndexError)
 @see [[m:MatchData#begin]]
 
 --- captures -> [String]
-#@since 3.2.0
+#@since 3.2
 --- deconstruct -> [String]
 #@end
 
@@ -125,13 +125,13 @@ p $~.to_a       # => ["foobar", "foo", "bar", nil]
 p $~.captures   # => ["foo", "bar", nil]
 #@end
 
-#@since 3.2.0
+#@since 3.2
 @see [[m:MatchData#to_a]], [[m:MatchData#named_captures]], [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
 #@else
 @see [[m:MatchData#to_a]], [[m:MatchData#named_captures]]
 #@end
 
-#@since 3.2.0
+#@since 3.2
 --- deconstruct_keys(array_of_names) -> Hash
 
 引数で指定された名前の名前付きキャプチャを [[c:Hash]] で返します。
@@ -512,7 +512,7 @@ m.named_captures(symbolize_names: true) #=> {:a => "1"}
 #@end
 #@end
 
-#@since 3.2.0
+#@since 3.2
 @see [[m:MatchData#captures]], [[m:MatchData#deconstruct_keys]]
 #@else
 @see [[m:MatchData#captures]]

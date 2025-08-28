@@ -17,7 +17,7 @@ p rp1 =~ str           # => 0
 p Regexp.last_match[0] # => "this is regexp"
 #@end
 
-#@since 3.0.0
+#@since 3.0
 Ruby 3.0.0 から正規表現リテラルは freeze されるようになりました。
 #@samplecode
 p /abc/.frozen?
