@@ -1657,7 +1657,7 @@ puts ["oui", "non"]
 
 @see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
-#@since 3.0.0
+#@since 3.0
 --- warn(*message, uplevel: nil, category: nil) -> nil
 #@else
 #@since 2.5.0
@@ -1687,7 +1687,7 @@ nil
 #@since 2.5.0
 @param uplevel いくつ前の呼び出し元のファイル名と行番号を表示するかを0以上の数値で指定します。 nil の場合は表示しません。
 #@end
-#@since 3.0.0
+#@since 3.0
 @param category 警告のカテゴリを指定します。サポートされている category については [[m:Warning.[] ]] を参照してください。
 #@end
 @raise IOError 標準エラー出力が書き込み用にオープンされていなければ発生します。
@@ -1710,7 +1710,7 @@ foo
 #@end
 #@end
 
-#@since 3.0.0
+#@since 3.0
 #@samplecode category の例
 Warning[:deprecated] = true # 非推奨の警告を表示する
 warn("deprecated!!", category: :deprecated)
@@ -2089,7 +2089,7 @@ range に含まれる数が無い場合は nil を返します。
 
 まだ [[m:Kernel.#srand]] が呼ばれていなければ自動的に呼び出します。
 
-#@since 3.0.0
+#@since 3.0
 擬似乱数生成器として [[c:Random]] クラスオブジェクトを使用します。
 #@else
 擬似乱数生成器として [[m:Random::DEFAULT]] を使用します。
@@ -2620,7 +2620,7 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 @raise ArgumentError ブロックを省略した呼び出しを行ったときに発生します。
 #@end
 
-#@since 3.0.0
+#@since 3.0
 #@samplecode 例
 def foo &block
   proc(&block)

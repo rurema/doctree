@@ -463,7 +463,7 @@ x と y の符号が同じとき、modulo と remainder は一致します。
 これは被除数・除数のクラスによって挙動が異なります。例えば Integer 同士なら div と同じ、Integer や Rational と Float なら quo と同じ、といった具合です。
 被除数のクラスの / メソッドの説明をご覧ください。
 
-#@since 3.2.0
+#@since 3.2
 Ruby 3.2 では整商を得るメソッドとして [[m:Integer#ceildiv]] が導入されました。
 
 ceildiv は普通の商を正の無限大に向かって丸めた整商を返します。

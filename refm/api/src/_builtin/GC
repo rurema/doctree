@@ -182,7 +182,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 
 == Singleton Methods
 
-#@since 3.0.0
+#@since 3.0
 --- auto_compact -> bool
 
 auto compaction が有効化どうかを返します。

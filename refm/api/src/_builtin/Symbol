@@ -174,7 +174,7 @@ self に対応する Proc オブジェクトを返します。
 Proc#callの第一引数をレシーバとして、 self という名前のメソッドを
 残りの引数を渡して呼びだします。
 
-#@since 3.0.0
+#@since 3.0
 生成される Proc オブジェクトは lambda です。
 #@samplecode
 :object_id.to_proc.lambda? # => true
