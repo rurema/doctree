@@ -310,7 +310,7 @@ self を複製して、その時差を設定しなおします。
 #@end
 秒の小数点以下の部分を表す分数を返します。
 
-#@since 3.2.0
+#@since 3.2
 --- deconstruct_keys(array_of_names_or_nil) -> Hash
 
 パターンマッチに使用する名前と値の [[c:Hash]] を返します。

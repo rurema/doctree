@@ -812,7 +812,7 @@ XML Scheme (date) による書式の文字列を返します。
 --- year -> Integer
 年を返します。
 
-#@since 3.2.0
+#@since 3.2
 --- deconstruct_keys(array_of_names_or_nil) -> Hash
 
 パターンマッチに使用する名前と値の [[c:Hash]] を返します。

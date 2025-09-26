@@ -43,7 +43,7 @@ category の警告を表示するかどうかのフラグを設定します。
 @see [[m:Warning.[] ]]
 #@end
 
-#@since 3.0.0
+#@since 3.0
 --- warn(message, category: nil) -> nil
 #@else
 --- warn(message) -> nil
@@ -56,7 +56,7 @@ category の警告を表示するかどうかのフラグを設定します。
 またオーバーライドしたメソッドからは super を呼び出すことで、デフォルトの動作である [[m:$stderr]] への出力ができます。
 
 #@samplecode
-#@since 3.0.0
+#@since 3.0
 module Warning
   # 警告メッセージに category を表示し、message 末尾に !!! を追加する
   def self.warn(message, category: nil)
@@ -99,7 +99,7 @@ Warning.categories # => [:deprecated, :experimental, :performance, :strict_unuse
 
 == Public Instance Methods
 
-#@since 3.0.0
+#@since 3.0
 --- warn(message, category: nil) -> nil
 #@else
 --- warn(message) -> nil
