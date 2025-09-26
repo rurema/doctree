@@ -95,7 +95,7 @@ ARGV.parse!
 p o                                #=> true
 #@end
 
---- getopts(short_opt, *long_opt)    -> Hash
+--- getopts(short_opt, *long_opt, symbolize_names: false)    -> Hash
 
 指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
 
@@ -109,6 +109,8 @@ p o                                #=> true
                 オプションが引数をとる場合は後ろに ":" を付けます。
                 オプションの引数のデフォルト値を ":" の直後に指定することができます。
                 例えば、"bufsize:1024" となります。
+
+@param symbolize_names true を指定すると、戻り値の Hash はキーがシンボルになります。false を指定した場合、戻り値の Hash はキーが文字列になります。
 
 @raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
