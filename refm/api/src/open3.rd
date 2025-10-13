@@ -13,20 +13,22 @@ category I/O
 nroff を実行してその標準入力に man ページを送り込み処理させる。
 nroff プロセスの標準出力から処理結果を受け取る。
 
-  require "open3"
+#@samplecode
+require "open3"
 
-  stdin, stdout, stderr = *Open3.popen3('nroff -man')
-  # こちらから書く
-  Thread.fork {
-    File.foreach('/usr/man/man1/ruby.1') do |line|
-      stdin.print line
-    end
-    stdin.close    # または close_write
-  }
-  # こちらから読む
-  stdout.each do |line|
-    print line
+stdin, stdout, stderr = *Open3.popen3('nroff -man')
+# こちらから書く
+Thread.fork {
+  File.foreach('/usr/man/man1/ruby.1') do |line|
+    stdin.print line
   end
+  stdin.close    # または close_write
+}
+# こちらから読む
+stdout.each do |line|
+  print line
+end
+#@end
 
 == Module Functions
 
@@ -38,8 +40,10 @@ nroff プロセスの標準出力から処理結果を受け取る。
 出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の
 配列で返します。
 
-  require 'open3'
-  stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
+#@samplecode
+require 'open3'
+stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
+#@end
 
 @param cmd 実行するコマンドを指定します。
 
@@ -51,16 +55,18 @@ nroff プロセスの標準出力から処理結果を受け取る。
 ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
 を close します。この場合はブロックの最後の式の結果を返します。
 
-  require 'open3'
+#@samplecode
+require 'open3'
 
-  Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr, wait_thr|
-    stdin.puts "stdin"
-    stdin.close     # または close_write
-    p stdout.read
-    p stderr.read
-  }
-  #=> "stdout\n"
-      "stderr\n"
+Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr, wait_thr|
+  stdin.puts "stdin"
+  stdin.close     # または close_write
+  p stdout.read
+  p stderr.read
+}
+# => "stdout\n"
+#    "stderr\n"
+#@end
 
 #@else
 --- popen3(*cmd) -> [IO, IO, IO]
@@ -82,16 +88,18 @@ cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈されま�
 ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
 を close します。この場合はブロックの最後の式の結果を返します。
 
-  require 'open3'
+#@samplecode
+require 'open3'
 
-  Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr|
-    stdin.puts "stdin"
-    stdin.close     # または close_write
-    p stdout.read
-    p stderr.read
-  }
-  #=> "stdout\n"
-      "stderr\n"
+Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr|
+  stdin.puts "stdin"
+  stdin.close     # または close_write
+  p stdout.read
+  p stderr.read
+}
+# => "stdout\n"
+#    "stderr\n"
+#@end
 
 #@end
 
@@ -106,36 +114,36 @@ stdin への入力が終わったらできる限り早く close か close_write
 [[m:Kernel.#spawn]]と同様に、引数リストの最初に環境変数をハッシュ形式で
 指定する事ができます。
 
-例:
+#@samplecode 例
+require 'open3'
 
-  require 'open3'
-
-  Open3.popen3({"foo" => "1", "bar" => "2"}, "env") {|i, o, e, t|
-    i.close
-    print o.read
-  }
-  #=> ...
-      foo=1
-      bar=2
+Open3.popen3({"foo" => "1", "bar" => "2"}, "env") {|i, o, e, t|
+  i.close
+  print o.read
+}
+#=> ...
+#   foo=1
+#   bar=2
+#@end
 
 [[m:Kernel.#spawn]]と同様に、引数リストの最後にオプションをハッシュ形式
 で指定する事ができます。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  # オプションを指定した場合。
-  Dir.chdir("/tmp")
-  Open3.popen3("pwd", :chdir=> "/") {|i,o,e,t|
-    p o.read.chomp #=> "/"
-  }
-  
-  # オプションを指定しない場合。
-  Dir.chdir("/tmp")
-  Open3.popen3("pwd") {|i,o,e,t|
-    p o.read.chomp #=> "/tmp"
-  }
+# オプションを指定した場合。
+Dir.chdir("/tmp")
+Open3.popen3("pwd", :chdir=> "/") {|i,o,e,t|
+  p o.read.chomp #=> "/"
+}
+
+# オプションを指定しない場合。
+Dir.chdir("/tmp")
+Open3.popen3("pwd") {|i,o,e,t|
+  p o.read.chomp #=> "/tmp"
+}
+#@end
 
 @see [[m:Kernel.#spawn]]
 #@else
@@ -196,14 +204,14 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用される
 パイプをバイナリモードに指定します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  o, e, s = Open3.capture3("echo a; sort >&2", :stdin_data=>"foo\nbar\nbaz\n")
-  p o #=> "a\n"
-  p e #=> "bar\nbaz\nfoo\n"
-  p s #=> #<Process::Status: pid 32682 exit 0>
+o, e, s = Open3.capture3("echo a; sort >&2", :stdin_data=>"foo\nbar\nbaz\n")
+p o #=> "a\n"
+p e #=> "bar\nbaz\nfoo\n"
+p s #=> #<Process::Status: pid 32682 exit 0>
+#@end
 
 [[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
 を実行する事ができます。
@@ -225,13 +233,13 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用される
 パイプをバイナリモードに指定します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  # factorコマンドで与えられた数値(42)を素因数分解する。
-  o, s = Open3.capture2("factor", :stdin_data=>"42")
-  p o #=> "42: 2 3 7\n"
+# factorコマンドで与えられた数値(42)を素因数分解する。
+o, s = Open3.capture2("factor", :stdin_data=>"42")
+p o #=> "42: 2 3 7\n"
+#@end
 
 [[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
 を実行する事ができます。
@@ -254,13 +262,13 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用される
 パイプをバイナリモードに指定します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  o, s = Open3.capture2e("echo a; sort >&2", :stdin_data=>"foo\nbar\nbaz\n")
-  p o #=> "a\nbar\nbaz\nfoo\n"
-  p s #=> #<Process::Status: pid 20574 exit 0>
+o, s = Open3.capture2e("echo a; sort >&2", :stdin_data=>"foo\nbar\nbaz\n")
+p o #=> "a\nbar\nbaz\nfoo\n"
+p s #=> #<Process::Status: pid 20574 exit 0>
+#@end
 
 [[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
 を実行する事ができます。
@@ -294,22 +302,22 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         と最後に実行するコマンドの標準出力、実行したプロセスを待つため
         のスレッドの配列を配列で返します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  Open3.pipeline_rw("sort", "cat -n") {|stdin, stdout, wait_thrs|
-    stdin.puts "foo"
-    stdin.puts "bar"
-    stdin.puts "baz"
-    
-    # sortコマンドにEOFを送る。
-    stdin.close
-    
-    # stdinに渡した文字列をsortコマンドが並べ替えたものに、catコマンド
-    # が行番号を付けた文字列が表示される。
-    p stdout.read   #=> "     1\tbar\n     2\tbaz\n     3\tfoo\n"
-  }
+Open3.pipeline_rw("sort", "cat -n") {|stdin, stdout, wait_thrs|
+  stdin.puts "foo"
+  stdin.puts "bar"
+  stdin.puts "baz"
+
+  # sortコマンドにEOFを送る。
+  stdin.close
+
+  # stdinに渡した文字列をsortコマンドが並べ替えたものに、catコマンド
+  # が行番号を付けた文字列が表示される。
+  p stdout.read   #=> "     1\tbar\n     2\tbaz\n     3\tfoo\n"
+}
+#@end
 
 @see [[m:Open3.#popen3]]
 
@@ -338,15 +346,15 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         ブロックを指定しなかった場合は最後に実行するコマンドの標準出力、
         実行したプロセスを待つためのスレッドの配列を配列で返します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  Open3.pipeline_r("yes", "head -10") {|r, ts|
-    p r.read      #=> "y\ny\ny\ny\ny\ny\ny\ny\ny\ny\n"
-    p ts[0].value #=> #<Process::Status: pid 24910 SIGPIPE (signal 13)>
-    p ts[1].value #=> #<Process::Status: pid 24913 exit 0>
-  }
+Open3.pipeline_r("yes", "head -10") {|r, ts|
+  p r.read      #=> "y\ny\ny\ny\ny\ny\ny\ny\ny\ny\n"
+  p ts[0].value #=> #<Process::Status: pid 24910 SIGPIPE (signal 13)>
+  p ts[1].value #=> #<Process::Status: pid 24913 exit 0>
+}
+#@end
 
 @see [[m:Open3.#popen3]]
 
@@ -375,13 +383,13 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力、
         実行したプロセスを待つためのスレッドの配列を配列で返します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  Open3.pipeline_w("bzip2 -c", :out=>"/tmp/hello.bz2") {|w, ts|
-    w.puts "hello"
-  }
+Open3.pipeline_w("bzip2 -c", :out=>"/tmp/hello.bz2") {|w, ts|
+  w.puts "hello"
+}
+#@end
 
 @see [[m:Open3.#popen3]]
 
@@ -409,17 +417,17 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         ブロックを指定しなかった場合は実行したプロセスを待つためのスレッ
         ドの配列を返します。
 
-例:
+#@samplecode 例
+require "open3"
 
-  require "open3"
-  
-  # xeyesを10秒だけ実行する。
-  Open3.pipeline_start("xeyes") {|ts|
-    sleep 10
-    t = ts[0]
-    Process.kill("TERM", t.pid)
-    p t.value #=> #<Process::Status: pid 911 SIGTERM (signal 15)>
-  }
+# xeyesを10秒だけ実行する。
+Open3.pipeline_start("xeyes") {|ts|
+  sleep 10
+  t = ts[0]
+  Process.kill("TERM", t.pid)
+  p t.value #=> #<Process::Status: pid 911 SIGTERM (signal 15)>
+}
+#@end
 
 @see [[m:Open3.#popen3]]
 
@@ -444,21 +452,21 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 
 @return 実行したコマンドの終了ステータスを配列で返します。
 
-例1:
+#@samplecode 例1
+require "open3"
 
-  require "open3"
-  
-  fname = "/usr/share/man/man1/ruby.1.gz"
-  p Open3.pipeline(["zcat", fname], "nroff -man", "less")
-  #=> [#<Process::Status: pid 11817 exit 0>,
-  #    #<Process::Status: pid 11820 exit 0>,
-  #    #<Process::Status: pid 11828 exit 0>]
+fname = "/usr/share/man/man1/ruby.1.gz"
+p Open3.pipeline(["zcat", fname], "nroff -man", "less")
+#=> [#<Process::Status: pid 11817 exit 0>,
+#    #<Process::Status: pid 11820 exit 0>,
+#    #<Process::Status: pid 11828 exit 0>]
+#@end
 
-例2:
+#@samplecode 例2
+require "open3"
 
-  require "open3"
-
-  Open3.pipeline([{"LANG"=>"C"}, "env"], ["grep", "LANG"], "less")
+Open3.pipeline([{"LANG"=>"C"}, "env"], ["grep", "LANG"], "less")
+#@end
 
 @see [[m:Open3.#popen3]]
 
