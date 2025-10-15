@@ -509,7 +509,7 @@ FileUtils.mkdir('notexist', noop: true)  # does not create really
 例えば、
 #@samplecode
 require 'fileutils'
-FileUtils.mkdir_p('/usr/local/lib/ruby')
+FileUtils.mkdir_p('/usr/local/bin/ruby')
 #@end
 
 は以下の全ディレクトリを (なければ) 作成します。
