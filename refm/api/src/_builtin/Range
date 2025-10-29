@@ -234,7 +234,7 @@ end
 
 しかし、2.6 以降では、(文字列を除いて) [[m:Range#cover?]] と同様の処理をするように切り替わりました。
 
-ただし、=== は、[[m:Range#cover?]] のように Range オブジェクトを引数にはとる設計はありません。
+ただし、=== は、[[m:Range#cover?]] のように Range オブジェクトを引数にとる設計はありません。
 
 #@samplecode 例
 require 'date'
