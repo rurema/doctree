@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -68,7 +68,7 @@ jobs:
         cd /tmp
         mv -v html html.pr
     - name: Checkout base
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         ref: ${{ github.event.pull_request.base.sha }}
     - name: Install dependencies (base)
@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Install misspell
       run: 'curl -L https://git.io/misspell | bash'
     - name: Run misspell
