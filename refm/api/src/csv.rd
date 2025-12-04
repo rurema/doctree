@@ -814,7 +814,7 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入力のエンコーディングを指定することができます。
-               入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
+               入力のエンコーディングが [[m:Encoding.default_external]] と異なる場合は
                必ず指定しなければなりません。
 
 #@samplecode 例
