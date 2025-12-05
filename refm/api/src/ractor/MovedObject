@@ -1,0 +1,9 @@
+#@since 3.0
+= class Ractor::MovedObject < BasicObject
+#@end
+
+[[m:Ractor#send]] によって 他の Ractor に移動（move）されたオブジェクトを置き換えるオブジェクトのクラスです。
+
+Ractor::MovedObject のインスタンスに対しては、あらゆるアクセスを行うことができません。
+アクセスを試みた場合、 Ractor::MovedError が発生します。
+これには inspect 等の BasicObject で定義されているメソッドも含まれます。

@@ -101,6 +101,13 @@ require を書かなくても使うことができます。
 #@since 2.3.0
 #@include(thread/Queue)
 #@end
+#@since 3.0
+#@include(_builtin/Ractor)
+#@include(ractor/MovedObject)
+#@end
+#@since 4.0
+#@include(ractor/Port)
+#@end
 #@include(_builtin/Random)
 #@include(_builtin/Range)
 #@include(_builtin/RangeError)
