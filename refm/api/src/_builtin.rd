@@ -105,7 +105,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Ractor)
 #@include(ractor/MovedObject)
 #@end
-#@since 3.5
+#@since 4.0
 #@include(ractor/Port)
 #@end
 #@include(_builtin/Random)

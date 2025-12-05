@@ -78,7 +78,7 @@ obj が shareable である場合、true を返します。
 
 == Instance Methods
 
-#@since 3.5
+#@since 4.0
 --- close -> bool
 
 Default port を閉じます。
@@ -87,14 +87,14 @@ self がこのメソッドを呼び出した Ractor ではない場合、Ractor:
 
 #@end
 
-#@since 3.5
+#@since 4.0
 --- default_port -> Ractor::Port
 
 self の default port を返します。
 
 #@end
 
-#@since 3.5
+#@since 4.0
 --- join -> Ractor
 
 self が終了するまで待ちます。
@@ -102,7 +102,7 @@ Ractor の実行が例外で終了した場合には、 [[m:Ractor#value]]を呼
 
 #@end
 
-#@since 3.5
+#@since 4.0
 --- monitor -> Ractor
 #@todo
 
@@ -123,13 +123,13 @@ Ractor の default port に対してメッセージを送信します。
 
 @see [[m:Ractor::Port#send]]
 
-#@since 3.5
+#@since 4.0
 --- unmonitor -> Ractor
 #@todo
 
 #@end
 
-#@since 3.5
+#@since 4.0
 --- value -> object
 
 self が終了するまで待ち、その Ractor のブロックが返した値を返します。
