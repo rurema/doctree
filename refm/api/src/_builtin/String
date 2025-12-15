@@ -2464,11 +2464,16 @@ str.squeeze! # => nil
 p str        # =>"123456789"
 #@end
 
+#@since 4.0.0
 --- strip(*selectors) -> String
+#@else
+--- strip -> String
+#@end
 
 文字列先頭と末尾の空白文字を全て取り除いた文字列を生成して返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
+#@since 4.0.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [[man:tr(1)]] と同じです。
@@ -2485,6 +2490,7 @@ selectors の形式は [[man:tr(1)]] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 @param selectors    取り除く文字。
+#@end
 
 #@samplecode 例
 p "  abc  \r\n".strip    #=> "abc"
@@ -2498,6 +2504,7 @@ p str.strip              #=> "abc"
 p str                    #=> "\tabc\n" (元の文字列は変化しない)
 #@end
 
+#@since 4.0.0
 #@samplecode 取り除く文字を指定
 s = "---abc+++"
 s.strip("-+") # => "abc"
@@ -2508,11 +2515,16 @@ s.strip("+-") # => "abc"
 "01234abc56789".strip("0-9") # "abc"
 "01234abc56789".strip("0-9", "^4-6") # "4abc56"
 #@end
+#@end
 
 @see [[m:String#lstrip]], [[m:String#rstrip]]
 
 
+#@since 4.0.0
 --- strip!(*selectors) -> self | nil
+#@else
+--- strip! -> self | nil
+#@end
 
 先頭と末尾の空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -2520,6 +2532,7 @@ s.strip("+-") # => "abc"
 strip! は、内容を変更した self を返します。
 ただし取り除く空白がなかったときは nil を返します。
 
+#@since 4.0.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [[man:tr(1)]] と同じです。
@@ -2536,6 +2549,7 @@ selectors の形式は [[man:tr(1)]] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 @param selectors    取り除く文字。
+#@end
 
 #@samplecode 例
 str = "  abc\r\n"
@@ -2551,6 +2565,7 @@ str.strip!
 p str            #=> "abc"
 #@end
 
+#@since 4.0.0
 #@samplecode 取り除く文字を指定
 s = "---abc+++"
 s.strip!("-+") # => "abc"
@@ -2561,14 +2576,20 @@ s.strip!("+-") # => "abc"
 "01234abc56789".strip!("0-9") # "abc"
 "01234abc56789".strip!("0-9", "^4-6") # "4abc56"
 #@end
+#@end
 
 @see [[m:String#strip]], [[m:String#lstrip]]
 
+#@since 4.0.0
 --- lstrip(*selectors) -> String
+#@else
+--- lstrip -> String
+#@end
 
 文字列の先頭にある空白文字を全て取り除いた新しい文字列を返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
+#@since 4.0.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [[man:tr(1)]] と同じです。
@@ -2585,6 +2606,7 @@ selectors の形式は [[man:tr(1)]] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 @param selectors    取り除く文字。
+#@end
 
 #@samplecode 例
 p "  abc\n".lstrip     #=> "abc\n"
@@ -2592,6 +2614,7 @@ p "\t abc\n".lstrip    #=> "abc\n"
 p "abc\n".lstrip       #=> "abc\n"
 #@end
 
+#@since 4.0.0
 #@samplecode 取り除く文字を指定
 s = "---abc+++"
 s.lstrip("-+") # => "abc+++"
@@ -2602,10 +2625,15 @@ s.lstrip("+-") # => "abc+++"
 "01234abc56789".lstrip("0-9") # "abc56789"
 "01234abc56789".lstrip("0-9", "^4-6") # "4abc56789"
 #@end
+#@end
 
 @see [[m:String#strip]], [[m:String#rstrip]]
 
+#@since 4.0.0
 --- lstrip!(*selectors) -> self | nil
+#@else
+--- lstrip! -> self | nil
+#@end
 
 文字列の先頭にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -2613,6 +2641,7 @@ s.lstrip("+-") # => "abc+++"
 lstrip! は self を変更して返します。
 ただし取り除く空白がなかったときは nil を返します。
 
+#@since 4.0.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [[man:tr(1)]] と同じです。
@@ -2629,6 +2658,7 @@ selectors の形式は [[man:tr(1)]] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 @param selectors    取り除く文字。
+#@end
 
 #@samplecode 例
 str = "  abc"
@@ -2640,6 +2670,7 @@ p str.lstrip!   # => nil
 p str           # => "abc"
 #@end
 
+#@since 4.0.0
 #@samplecode 取り除く文字を指定
 s = "---abc+++"
 s.lstrip!("-+") # => "abc+++"
@@ -2650,12 +2681,18 @@ s.lstrip!("+-") # => "abc+++"
 "01234abc56789".lstrip!("0-9") # "abc56789"
 "01234abc56789".lstrip!("0-9", "^4-6") # "4abc56789"
 #@end
+#@end
 
+#@since 4.0.0
 --- rstrip(*selectors) -> String
+#@else
+--- rstrip -> String
+#@end
 
 文字列の末尾にある空白文字を全て取り除いた新しい文字列を返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
+#@since 4.0.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [[man:tr(1)]] と同じです。
@@ -2672,6 +2709,7 @@ selectors の形式は [[man:tr(1)]] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 @param selectors    取り除く文字。
+#@end
 
 #@samplecode 例
 p "  abc\n".rstrip          #=> "  abc"
@@ -2684,6 +2722,7 @@ p str.rstrip    #=> "abc"
 p str           #=> "abc\n"  (元の文字列は変化しない)
 #@end
 
+#@since 4.0.0
 #@samplecode 取り除く文字を指定
 s = "---abc+++"
 s.rstrip("-+") # => "---abc"
@@ -2694,14 +2733,20 @@ s.rstrip("+-") # => "---abc"
 "01234abc56789".rstrip("0-9") # "01234abc"
 "01234abc56789".rstrip("0-9", "^4-6") # "01234abc56"
 #@end
+#@end
 
 @see [[m:String#lstrip]],[[m:String#strip]]
 
+#@since 4.0.0
 --- rstrip!(*selectors) -> self | nil
+#@else
+--- rstrip! -> self | nil
+#@end
 
 文字列の末尾にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
+#@since 4.0.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [[man:tr(1)]] と同じです。
@@ -2718,6 +2763,7 @@ selectors の形式は [[man:tr(1)]] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 @param selectors    取り除く文字。
+#@end
 
 #@samplecode 例
 str = "  abc\n"
@@ -2729,6 +2775,7 @@ p str.rstrip!   # => "  abc"
 p str           # => "  abc"
 #@end
 
+#@since 4.0.0
 #@samplecode 取り除く文字を指定
 s = "---abc+++"
 s.rstrip!("-+") # => "---abc"
@@ -2738,6 +2785,7 @@ s.rstrip!("+-") # => "---abc"
 #@samplecode 範囲、否定、複数の指定
 "01234abc56789".rstrip!("0-9") # "01234abc"
 "01234abc56789".rstrip!("0-9", "^4-6") # "01234abc56"
+#@end
 #@end
 
 @see [[m:String#rstrip]], [[m:String#lstrip]]
