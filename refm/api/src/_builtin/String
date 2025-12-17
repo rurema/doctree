@@ -2506,9 +2506,8 @@ p str                    #=> "\tabc\n" (元の文字列は変化しない)
 
 #@since 4.0
 #@samplecode 取り除く文字を指定
-s = "---abc+++"
-s.strip("-+") # => "abc"
-s.strip("+-") # => "abc"
+"---abc+++".strip("-+") # => "abc"
+"---abc+++".strip("+-") # => "abc"
 #@end
 
 #@samplecode 範囲、否定、複数の指定
@@ -2567,9 +2566,8 @@ p str            #=> "abc"
 
 #@since 4.0
 #@samplecode 取り除く文字を指定
-s = "---abc+++"
-s.strip!("-+") # => "abc"
-s.strip!("+-") # => "abc"
+"---abc+++".strip!("-+") # => "abc"
+"---abc+++".strip!("+-") # => "abc"
 #@end
 
 #@samplecode 範囲、否定、複数の指定
@@ -2616,9 +2614,7 @@ p "abc\n".lstrip       #=> "abc\n"
 
 #@since 4.0
 #@samplecode 取り除く文字を指定
-s = "---abc+++"
-s.lstrip("-+") # => "abc+++"
-s.lstrip("+-") # => "abc+++"
+"---abc+++".lstrip("-") # => "abc+++"
 #@end
 
 #@samplecode 範囲、否定、複数の指定
@@ -2672,9 +2668,7 @@ p str           # => "abc"
 
 #@since 4.0
 #@samplecode 取り除く文字を指定
-s = "---abc+++"
-s.lstrip!("-+") # => "abc+++"
-s.lstrip!("+-") # => "abc+++"
+"---abc+++".lstrip!("-+") # => "abc+++"
 #@end
 
 #@samplecode 範囲、否定、複数の指定
@@ -2724,9 +2718,7 @@ p str           #=> "abc\n"  (元の文字列は変化しない)
 
 #@since 4.0
 #@samplecode 取り除く文字を指定
-s = "---abc+++"
-s.rstrip("-+") # => "---abc"
-s.rstrip("+-") # => "---abc"
+"---abc+++".rstrip("+") # => "---abc"
 #@end
 
 #@samplecode 範囲、否定、複数の指定
@@ -2777,9 +2769,7 @@ p str           # => "  abc"
 
 #@since 4.0
 #@samplecode 取り除く文字を指定
-s = "---abc+++"
-s.rstrip!("-+") # => "---abc"
-s.rstrip!("+-") # => "---abc"
+"---abc+++".rstrip!("+") # => "---abc"
 #@end
 
 #@samplecode 範囲、否定、複数の指定
