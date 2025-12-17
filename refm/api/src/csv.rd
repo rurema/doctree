@@ -1761,7 +1761,7 @@ p [1, 'Matz', :Ruby, Date.new(1965, 4, 14)].to_csv                              
 p [1, 'Matz', :Ruby, Date.new(1965, 4, 14)].to_csv(col_sep: ' ', row_sep: "\r\n")  # => "1 Matz Ruby 1965-04-14\r\n"
 #@end
 
-#@since 3.0.0
+#@since 3.0
 Ruby 3.0 (CSV 3.1.9) から、次のオプションが使えるようになりました。
 
 #@samplecode
