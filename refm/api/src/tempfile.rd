@@ -85,6 +85,10 @@ p File.read(tf.path) #=> "hoge\n"
 #@since 2.1.0
 @see [[m:Tempfile.create]]
 
+#@since 3.4
+--- create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options) -> File
+--- create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options){|fp| ...} -> object
+#@else
 #@since 2.4.0
 --- create(basename="", tmpdir=nil, mode: 0, **options) -> File
 --- create(basename="", tmpdir=nil, mode: 0, **options){|fp| ...} -> object
@@ -95,6 +99,7 @@ p File.read(tf.path) #=> "hoge\n"
 #@else
 --- create(basename, *rest) -> File
 --- create(basename, *rest){|fp| ...} -> object
+#@end
 #@end
 #@end
 
@@ -123,6 +128,14 @@ createではファイルのunlinkも自動で行います。
               このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
 @param mode ファイルのモードを定数の論理和で指定します。[[m:IO.open]]
             と同じ([[m:Kernel.#open]]と同じ)ものが指定できます。
+#@end
+
+#@since 3.4
+@param anonymous テンポラリファイルを即時unlinkするかを指定します。
+                 デフォルトは false です。
+#@end
+
+#@since 2.2.0
 @param options ファイルのオプション引数を指定します。[[m:IO.open]] と同
                じものが指定できます。ただし、:permオプションは無視され
                ます。
