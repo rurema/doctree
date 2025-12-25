@@ -481,7 +481,7 @@ m2 = r.match("abcabc", 0) # => #<MatchData "abc">
 m1 == m2  # => true
 #@end
 
-#@since 3.3.0
+#@since 3.3
 --- named_captures(symbolize_names: false) -> Hash
 #@else
 --- named_captures -> Hash
@@ -505,7 +505,7 @@ m.named_captures # => {"a" => "1"}
 
 m = /(?<a>x)|(?<a>y)/.match("x")
 m.named_captures # => {"a" => "x"}
-#@since 3.3.0
+#@since 3.3
 
 m = /(?<a>.)(?<a>.)/.match("01")
 m.named_captures(symbolize_names: true) #=> {:a => "1"}

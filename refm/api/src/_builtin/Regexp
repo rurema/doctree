@@ -33,7 +33,7 @@ p Regexp.new('abc').frozen?
 
 == Class Methods
 
-#@since 3.3.0
+#@since 3.3
 --- compile(string, option = nil) -> Regexp
 --- new(string, option = nil) -> Regexp
 
