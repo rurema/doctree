@@ -1301,9 +1301,15 @@ end
 
 bar
 
+#@since 3.4
+#=> ["-:2:in 'foo'", "-:10:in 'bar'", "-:13:in '<main>'"]
+#   ["-:10:in 'bar'", "-:13:in '<main>'"]
+#   ["-:13:in '<main>'"]
+#@else
 #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
 #   ["-:10:in `bar'", "-:13:in `<main>'"]
 #   ["-:13:in `<main>'"]
+#@end
 #   []
 #   nil
 #@end
