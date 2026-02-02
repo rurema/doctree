@@ -63,8 +63,13 @@ end
 
 デフォルトでは
 
+#@since 3.4
+  * "#{sourcefile}:#{sourceline}:in '#{method}'"
+    (メソッド内の場合)
+#@else
   * "#{sourcefile}:#{sourceline}:in `#{method}'"
     (メソッド内の場合)
+#@end
   * "#{sourcefile}:#{sourceline}"
     (トップレベルの場合)
 
@@ -81,7 +86,11 @@ rescue => e
   p e.backtrace
 end
 
+#@since 3.4
+#=> ["filename.rb:2:in 'methd'", "filename.rb:6"]
+#@else
 #=> ["filename.rb:2:in `methd'", "filename.rb:6"]
+#@end
 #@end
 
 #@since 2.1.0
@@ -112,7 +121,11 @@ end
 
 e = get_exception { check_long_month(2) }
 p e.backtrace_locations
+#@since 3.4
+# => ["test.rb:4:in 'check_long_month'", "test.rb:15:in 'block in <main>'", "test.rb:9:in 'get_exception'", "test.rb:15:in '<main>'"]
+#@else
 # => ["test.rb:4:in `check_long_month'", "test.rb:15:in `block in <main>'", "test.rb:9:in `get_exception'", "test.rb:15:in `<main>'"]
+#@end
 #@end
 
 @see [[m:Exception#backtrace]]
@@ -149,7 +162,11 @@ begin
     raise "outer"
   end
 rescue
+#@since 3.4
+  $!.backtrace # => ["/path/to/test.rb:5:in 'rescue in <main>'", "/path/to/test.rb:2:in '<main>'"]
+#@else
   $!.backtrace # => ["/path/to/test.rb:5:in `rescue in <main>'", "/path/to/test.rb:2:in `<main>'"]
+#@end
   $!.set_backtrace(["dummy1", "dummy2"])
   $!.backtrace # => ["dummy1", "dummy2"]
 end
@@ -271,11 +288,23 @@ end
 begin
   raise "test"
 rescue => e
+#@since 3.4
+  p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in '<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+#@else
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+#@end
   $stderr = $stdout
+#@since 3.4
+  p e.full_message   # => "test.rb:2:in '<main>': test (RuntimeError)\n"
+#@else
   p e.full_message   # => "test.rb:2:in `<main>': test (RuntimeError)\n"
+#@end
   $stderr = STDERR
+#@since 3.4
+  p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in '<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+#@else
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
+#@end
 end
 #@end
 
