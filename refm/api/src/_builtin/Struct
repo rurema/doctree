@@ -116,7 +116,11 @@ args[0] が [[c:String]] の場合、クラス名になるので、大文字で�
 
 #@samplecode 例
 p Struct.new('foo', 'bar')
+#@since 3.4
+# => -:1:in 'new': identifier foo needs to be constant (NameError)
+#@else
 # => -:1:in `new': identifier foo needs to be constant (NameError)
+#@end
 #@end
 
 また args[1..-1] は、[[c:Symbol]] か [[c:String]] で指定します。
@@ -217,11 +221,19 @@ Foo = Struct.new(:foo, :bar)
 obj = Foo.new('FOO', 'BAR')
 p obj[:foo]     # => "FOO"
 p obj['bar']    # => "BAR"
+#@since 3.4
+# p obj[:baz]     # => in '[]': no member 'baz' in struct (NameError)
+#@else
 # p obj[:baz]     # => in `[]': no member 'baz' in struct (NameError)
+#@end
 p obj[0]        # => "FOO"
 p obj[1]        # => "BAR"
 p obj[-1]       # => "BAR"    # Array のように負のインデックスも指定できます。
-p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
+#@since 3.4
+# p obj[2]        # => in '[]': offset 2 too large for struct(size:2) (IndexError)
+#@else
+# p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
+#@end
 #@end
 
 #@include(Struct.attention)
