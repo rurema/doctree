@@ -148,7 +148,11 @@ p Regexp.last_match # => nil
 begin
   p Regexp.last_match[1] # 例外が発生する
 rescue 
+#@since 3.4
+  puts $! # => undefined method '[]' for nil:NilClass
+#@else
   puts $! # => undefined method `[]' for nil:NilClass
+#@end
 end
 p Regexp.last_match(1) # => nil
 #@end
@@ -484,7 +488,11 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生し�
 #@samplecode 例
 foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 
+#@since 3.4
+# => -:1: undefined method 'captures' for nil:NilClass (NoMethodError)
+#@else
 # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
+#@end
 #@end
 
 #@since 2.4.0
