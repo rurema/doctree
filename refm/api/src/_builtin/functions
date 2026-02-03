@@ -128,7 +128,11 @@ puts 'end' #実行されない
 #=> error1
 #@since 2.7.0
 #   Traceback (most recent call last):
+#@since 3.4
+#   sample.rb:11:in '<main>': RuntimeError (RuntimeError)
+#@else
 #   sample.rb:11:in `<main>': RuntimeError (RuntimeError)
+#@end
 #@end
 #@end
 
@@ -1107,7 +1111,11 @@ require 'some'
 p $a #=> 1
 p @a #=> 1
 p A #=> 1
+#@since 3.4
+p a # undefined local variable or method 'a' for #<Object:0x294f9ec @a=1> (NameError)
+#@else
 p a # undefined local variable or method `a' for #<Object:0x294f9ec @a=1> (NameError)
+#@end
 #@end
 
 --- autoload(const_name, feature) -> nil
@@ -1562,7 +1570,11 @@ putc(355)
 #=> cccc
 
 putc(99.00) #=> c
+#@since 3.4
+putc(33333333333333333333333333333333333) # bignum too big to convert into 'long' (RangeError)
+#@else
 putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
+#@end
 #@end
 
 @see [[m:IO#putc]]
@@ -1868,9 +1880,15 @@ p Integer("0o10")     #=> 8
 p Integer("0x10")     #=> 16
 p Integer("0b10")     #=> 2
 p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
+#@since 3.4
+p Integer("1\n0")     # 'Integer': invalid value for Integer: "1\n0" (ArgumentError)
+p Integer("hoge")     # 'Integer': invalid value for Integer: "hoge" (ArgumentError)
+p Integer("")         # 'Integer': invalid value for Integer: "" (ArgumentError)
+#@else
 p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
 p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
 p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
+#@end 
 #@end
 
 @see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]],[[c:Integer]]
@@ -2423,8 +2441,11 @@ $v = 'str'        # なにも出力されない
 begin
   open("nonexist")
 rescue
+#@since 3.4
+  raise   #=> 'open': No such file or directory - "nonexist" (Errno::ENOENT)
+#@else
   raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
-end
+#@end
 #@end
 
 引数を渡した場合は、例外メッセージ message を持った error_type の示す例外(省略時 RuntimeError)を
