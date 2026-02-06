@@ -608,8 +608,13 @@ Date.new(2001,1,31) >> 1 >> -1   #=> #<Date: 2001-01-28 ...>
 [[RFC:2616]] ([[RFC:1123]]) で定められた書式の文字列を返します。
 
 --- iso8601 -> String
---- rfc3339 -> String
 [[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
+
+#@samplecode 例
+Date.new(2001, 2, 3).iso8601 # => "2001-02-03"
+#@end
+
+@see [[m:Date#rfc3339]]
 
 --- italy -> Date
 このメソッドは、new_start(Date::ITALY) と等価です。
@@ -727,6 +732,15 @@ Date.new(2008,2,29).prev_year(4)  #=> #<Date: 2004-02-29 ...>
 --- rfc2822 -> String
 --- rfc822 -> String
 [[RFC:2822]] で定められた書式の文字列を返します。
+
+--- rfc3339 -> String
+[[RFC:3339]] 書式の文字列を返します。
+
+#@samplecode 例
+Date.new(2001, 2, 3).rfc3339 # => "2001-02-03T00:00:00+00:00"
+#@end
+
+@see [[m:Date#iso8601]]
 
 --- saturday? -> bool
 土曜日なら真を返します。
@@ -866,4 +880,3 @@ end
 
 --- to_time -> Time
 対応する [[c:Time]] オブジェクトを返します。
-
