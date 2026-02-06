@@ -1855,7 +1855,11 @@ outbuf は空文字列になります。
     buf = f.read(3)
     f.sysseek(0)
   }
+#@since 3.4
+  # => -:3:in 'sysseek': sysseek for buffered IO (IOError)
+#@else
   # => -:3:in `sysseek': sysseek for buffered IO (IOError)
+#@end
   
   File.open("/dev/null", "w") {|f|
     f.print "foo"

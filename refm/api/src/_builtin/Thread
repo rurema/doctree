@@ -43,8 +43,13 @@ Thread.abort_on_exception # => true
 
   #<Thread:...> terminated with exception (report_on_exception is true):
   Traceback (most recent call last):
+#@since 3.4
+          2: from -e:1:in 'block in <main>'
+          1: from -e:1:in 'times'
+#@else
           2: from -e:1:in `block in <main>'
           1: from -e:1:in `times'
+#@end
 
 これによってスレッドのエラーを早期に捕捉できるようになります。
 いくつかのケースでは、この出力を望まないかもしれません。
@@ -585,7 +590,11 @@ a.report_on_exception   # => true
 a.run
 # => #<Thread:0x00007fc3f48c7908@(irb):1 run> terminated with exception (report_on_exception is true):
 #    Traceback (most recent call last):
+#@since 3.4
+#    (irb):1:in 'block in irb_binding': unhandled exception
+#@else
 #    (irb):1:in `block in irb_binding': unhandled exception
+#@end
 #    #<Thread:0x00007fc3f48c7908@(irb):1 dead>
 b = Thread.new{ Thread.stop; raise }
 b.report_on_exception = false
@@ -1038,10 +1047,17 @@ end
 th = Thread.new {C1.new.m2; Thread.stop}
 th.backtrace
 # => [
+#@since 3.4
+#      [0] "(irb):3:in 'sleep'",
+#      [1] "(irb):3:in 'm1'",
+#      [2] "(irb):6:in 'm2'",
+#      [3] "(irb):10:in 'block in irb_binding'"
+#@else
 #      [0] "(irb):3:in `sleep'",
 #      [1] "(irb):3:in `m1'",
 #      [2] "(irb):6:in `m2'",
 #      [3] "(irb):10:in `block in irb_binding'"
+#@end
 #    ]
 
 th.kill
@@ -1072,7 +1088,11 @@ th.backtrace   # => nil
 #@samplecode 例
 thread = Thread.new { sleep 1 }
 thread.run
+#@since 3.4
+thread.backtrace_locations # => ["/path/to/test.rb:1:in 'sleep'", "/path/to/test.rb:1:in 'block in <main>'"]
+#@else
 thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test.rb:1:in `block in <main>'"]
+#@end
 #@end
 
 @see [[c:Thread::Backtrace::Location]]

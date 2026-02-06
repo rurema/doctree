@@ -82,7 +82,11 @@ pp Ripper.lex("def m(a) nil end")
 #@if (version >= "3.0")
 
 Ripper.lex("def req(true) end", raise_errors: true)
+#@since 3.4
+# => SyntaxError (syntax error, unexpected 'true', expecting ')')
+#@else
 # => SyntaxError (syntax error, unexpected `true', expecting ')')
+#@end
 #@end
 #@end
 #@end

@@ -82,7 +82,11 @@ p $~.begin(0)   # => 0
 p $~.begin(1)   # => 0
 p $~.begin(2)   # => 3
 p $~.begin(3)   # => nil
+#@since 3.4
+p $~.begin(4)   # => 'begin': index 4 out of matches (IndexError)
+#@else
 p $~.begin(4)   # => `begin': index 4 out of matches (IndexError)
+#@end
 #@end
 
 @see [[m:MatchData#end]]
@@ -104,7 +108,11 @@ p $~.end(0)   # => 6
 p $~.end(1)   # => 3
 p $~.end(2)   # => 6
 p $~.end(3)   # => nil
+#@since 3.4
+p $~.end(4)   # => 'end': index 4 out of matches (IndexError)
+#@else
 p $~.end(4)   # => `end': index 4 out of matches (IndexError)
+#@end
 #@end
 
 @see [[m:MatchData#begin]]
@@ -207,7 +215,11 @@ p $~.offset(:year)     # => [0, 4]
 p $~.offset('month')   # => [5, 6]
 p $~.offset(:month)    # => [5, 6]
 p $~.offset('day')     # => [nil, nil]
+#@since 3.4
+p $~.offset('century') # => 'offset': undefined group name reference: century (IndexError)
+#@else
 p $~.offset('century') # => `offset': undefined group name reference: century (IndexError)
+#@end
 #@end
 
 #@since 3.2
@@ -248,7 +260,11 @@ p $~.byteoffset(:year)     # => [0, 4]
 p $~.byteoffset('month')   # => [7, 8]
 p $~.byteoffset(:month)    # => [7, 8]
 p $~.byteoffset('day')     # => [nil, nil]
+#@since 3.4
+p $~.byteoffset('century') # => 'offset': undefined group name reference: century (IndexError)
+#@else
 p $~.byteoffset('century') # => `offset': undefined group name reference: century (IndexError)
+#@end
 #@end
 
 @see [[m:MatchData#offset]]
