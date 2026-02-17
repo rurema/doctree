@@ -4,7 +4,11 @@ category Development
 きに、自動的に他の似た名前を提案してくれるライブラリです。
 
   "Yuki".starts_with?("Y")
+#@since 3.4
+  # => NoMethodError: undefined method 'starts_with?' for "Yuki":String
+#@else
   # => NoMethodError: undefined method `starts_with?' for "Yuki":String
+#@end
   #    Did you mean?  start_with?
 
 デフォルトで有効になっており、無効にするにはコマンドラインオプションで
