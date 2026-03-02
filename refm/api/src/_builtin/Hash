@@ -1573,7 +1573,7 @@ h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
 @see [[m:Hash#transform_keys]]
 @see [[m:Hash#transform_keys!]]
 --- transform_keys {|key| ... } -> Hash
-#@since 3.0.0
+#@since 3.0
 --- transform_keys(hash)        -> Hash
 #@end
 --- transform_keys              -> Enumerator
@@ -1581,14 +1581,14 @@ h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
 すべてのキーに対してブロックを呼び出した結果で置き換えたハッシュを返します。
 値は変化しません。
 
-#@since 3.0.0
+#@since 3.0
 @param hash 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
 #@end
 
 #@samplecode 例
 h = { a: 1, b: 2, c: 3 }
 h.transform_keys {|k| k.to_s }   # => {"a"=>1, "b"=>2, "c"=>3}
-#@since 3.0.0
+#@since 3.0
 h.transform_keys(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
 #@end
 h.transform_keys(&:to_s)         # => {"a"=>1, "b"=>2, "c"=>3}
@@ -1601,7 +1601,7 @@ h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 @see [[m:Hash#transform_values!]]
 
 --- transform_keys! {|key| ... } -> self
-#@since 3.0.0
+#@since 3.0
 --- transform_keys!(hash)        -> self
 #@end
 --- transform_keys!                -> Enumerator
@@ -1609,7 +1609,7 @@ h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 すべてのキーに対してブロックを呼び出した結果でハッシュのキーを変更します。
 値は変化しません。
 
-#@since 3.0.0
+#@since 3.0
 @param hash 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
 #@end
 @return transform_keys! は常に self を返します。
@@ -1621,7 +1621,7 @@ h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 h = { a: 1, b: 2, c: 3 }
 h.transform_keys! {|k| k.to_s }   # => {"a"=>1, "b"=>2, "c"=>3}
 h.transform_keys!(&:to_sym)       # => {:a=>1, :b=>2, :c=>3}
-#@since 3.0.0
+#@since 3.0
 h.transform_keys!(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
 #@end
 h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
@@ -1643,13 +1643,13 @@ h.slice(:c, :b)       # => {:c=>300, :b=>200}
 h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
 #@end
 
-#@since 3.0.0
+#@since 3.0
 @see [[m:Hash#except]], [[m:ENV.slice]]
 #@else
 @see [[m:ENV.slice]]
 #@end
 #@end
-#@since 3.0.0
+#@since 3.0
 --- except(*keys) -> Hash
 
 引数で指定された以外のキーとその値だけを含む Hash を返します。

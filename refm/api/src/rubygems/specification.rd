@@ -244,7 +244,7 @@ RDoc でドキュメントを作成する際に使用する特別なファイル
 
 --- has_rdoc -> bool
 
-真の場合は RDoc を生成しせん。偽の場合は RDoc を生成します。
+真の場合は RDoc を生成しません。偽の場合は RDoc を生成します。
 
 --- has_rdoc=(flag)
 
@@ -252,7 +252,7 @@ RDoc を生成するかどうかをセットします。デフォルトは偽で
 
 --- has_rdoc? -> bool
 
-真の場合は RDoc を生成しせん。偽の場合は RDoc を生成します。
+真の場合は RDoc を生成しません。偽の場合は RDoc を生成します。
 
 @see [[m:Gem::Specification#has_rdoc]]
 
