@@ -1,4 +1,3 @@
-
 require bigdecimal/jacobian
 require bigdecimal/ludcmp
 

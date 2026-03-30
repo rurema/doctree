@@ -1,4 +1,3 @@
-
 = class Rinda::RequestCanceledError < ThreadError
 
 rinda で take などのリクエストが何らかの理由でキャンセルされた

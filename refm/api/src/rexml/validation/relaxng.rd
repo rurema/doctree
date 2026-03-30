@@ -1,4 +1,3 @@
-
 #@#require rexml/validation/validation
 #@#require rexml/parsers/baseparser
 

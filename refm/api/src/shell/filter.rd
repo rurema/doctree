@@ -1,4 +1,3 @@
-
 [[c:Shell::Filter]] を定義しているライブラリです。
 
 = class Shell::Filter < Object

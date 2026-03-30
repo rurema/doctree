@@ -1,4 +1,3 @@
-
 C の型の別名を定義するライブラリです。
 
 [[c:Fiddle::Win32Types]] や [[c:Fiddle::BasicTypes]] を [[m:Module#include]] する

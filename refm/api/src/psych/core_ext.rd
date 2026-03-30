@@ -1,4 +1,3 @@
-
 = reopen Object
 
 == Class Methods

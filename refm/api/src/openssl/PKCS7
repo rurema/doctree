@@ -1,4 +1,3 @@
-
 = class OpenSSL::PKCS7 < Object
 
 PKCS #7 クラス

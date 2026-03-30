@@ -1,4 +1,3 @@
-
 Gem の依存関係を管理するためのライブラリです。
 
 = class Gem::Dependency

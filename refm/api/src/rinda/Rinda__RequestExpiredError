@@ -1,4 +1,3 @@
-
 = class Rinda::RequestExpiredError < ThreadError
 
 rinda で take などのリクエストがタイムアウトしたことを

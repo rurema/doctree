@@ -1,4 +1,4 @@
-    Common Options:
+Common Options:
       -h, --help                       このコマンドのヘルプを表示します
       -V, --[no-]verbose               表示を詳細にします
       -q, --quiet                      静かに実行します

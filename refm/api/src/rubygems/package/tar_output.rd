@@ -1,4 +1,3 @@
-
 gem-format な tar ファイルを書き出す [[c:Gem::Package::TarWriter]] のラッ
 パークラスを提供するライブラリです。
 

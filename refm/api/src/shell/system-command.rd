@@ -1,4 +1,3 @@
-
 = class Shell::SystemCommand < Shell::Filter
 
 == Singleton Methods

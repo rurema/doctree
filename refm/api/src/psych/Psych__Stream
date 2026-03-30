@@ -1,4 +1,3 @@
-
 = class Psych::Stream < Psych::Visitors::YAMLTree
 
 入力されたオブジェクトから変換された YAML document を指定した
