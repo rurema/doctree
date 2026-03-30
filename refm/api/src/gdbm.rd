@@ -11,7 +11,6 @@ GDBM は dbm および ndbm 互換機能を含んでいます。
 @see [[lib:dbm]], [[lib:sdbm]], [[man:gdbm(3)]]
 
 = class GDBM < Object
-
 include Enumerable
 
 GDBM ファイルをアクセスするクラス。

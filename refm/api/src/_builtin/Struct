@@ -1,5 +1,4 @@
 = class Struct < Object
-
 include Enumerable
 
 構造体クラス。Struct.new はこのクラスのサブクラスを新たに生成します。

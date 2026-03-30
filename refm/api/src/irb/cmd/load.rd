@@ -8,7 +8,6 @@ irb 中の irb_load、irb_require、irb_source コマンドのための拡張を
 りません。
 
 = class IRB::ExtendCommand::Load < IRB::ExtendCommand::Nop
-
 include IRB::IrbLoader
 
 irb 中の irb_load コマンドのための拡張を定義したクラスです。
@@ -31,7 +30,6 @@ irb 中の irb_load コマンドのための拡張を定義したクラスです
 @raise LoadError 読み込みに失敗した場合に発生します。
 
 = class IRB::ExtendCommand::Require < IRB::ExtendCommand::Nop
-
 include IRB::IrbLoader
 
 irb 中の irb_require コマンドのための拡張を定義したクラスです。
@@ -53,7 +51,6 @@ false を返します。
 @param file_name ファイル名を文字列で指定します。
 
 = class IRB::ExtendCommand::Source < IRB::ExtendCommand::Nop
-
 include IRB::IrbLoader
 
 irb 中の irb_source コマンドのための拡張を定義したクラスです。

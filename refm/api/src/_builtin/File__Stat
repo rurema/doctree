@@ -1,5 +1,4 @@
 = class File::Stat < Object
-
 include Comparable
 
 ファイルの情報を格納したオブジェクトのクラス。

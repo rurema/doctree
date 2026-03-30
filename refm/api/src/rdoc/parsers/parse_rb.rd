@@ -100,7 +100,6 @@ Ruby のソースコードを解析するためのサブライブラリです。
 
 #@since 1.9.1
 = class RDoc::Parser::Ruby < RDoc::Parser
-
 include RDoc::RubyToken
 include RDoc::TokenStream
 #@since 1.9.2
@@ -108,7 +107,6 @@ include RDoc::Parser::RubyTools
 #@end
 #@else
 = class RDoc::RubyParser
-
 extend RDoc::ParserFactory
 
 include RubyToken

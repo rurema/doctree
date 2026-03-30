@@ -16,7 +16,6 @@ rdoc コマンドのオプションを解析するためのサブライブラリ
 = class RDoc::Options
 #@else
 = class Options
-
 include Singleton
 #@end
 

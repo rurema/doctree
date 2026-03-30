@@ -60,7 +60,6 @@ p set1                  # => #<Set: {"bar", "baz", "heh"}>
 #@end
 
 = class Set < Object
-
 include Enumerable
 
 集合を表すクラスです。要素の間に順序関係はありません。

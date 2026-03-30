@@ -57,7 +57,6 @@ Ruby のソースコード中の以下のサンプルスクリプトも参考に
  * [[url:https://github.com/ruby/ruby/blob/master/ext/bigdecimal/sample/nlsolve.rb]]
 
 = module Newton
-
 include LUSolve
 include Jacobian
 

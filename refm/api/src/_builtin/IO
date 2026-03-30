@@ -1,5 +1,4 @@
 = class IO < Object
-
 include Enumerable
 include File::Constants
 

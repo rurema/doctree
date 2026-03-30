@@ -2,7 +2,6 @@
 ドのパーサを記述するためのモジュールを定義するサブライブラリです。
 
 = module RDoc::Parser::RubyTools
-
 include RDoc::RubyToken
 
 [[c:RDoc::RubyLex]] と [[c:RDoc::RubyToken]] を使って Ruby のソースコー

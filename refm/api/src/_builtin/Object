@@ -1,5 +1,4 @@
 = class Object < BasicObject
-
 include Kernel
 
 全てのクラスのスーパークラス。

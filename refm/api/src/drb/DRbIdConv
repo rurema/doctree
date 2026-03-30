@@ -1,5 +1,4 @@
 = class DRb::DRbIdConv < Object
-
 alias DRbIdConv
 
 オブジェクトと識別子を相互に変換するクラスです。

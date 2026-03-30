@@ -36,7 +36,6 @@ end
 ただし，キーを列挙したり，自由なバイナリ値を読み書きすることができません。
 
 = class Win32::Registry < Object
-
 include Enumerable
 include Win32::Registry::Constants
 
