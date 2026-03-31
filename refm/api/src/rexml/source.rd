@@ -1,4 +1,3 @@
-
 = class REXML::SourceFactory < Object
 内部用なのでユーザは使わないでください。
 

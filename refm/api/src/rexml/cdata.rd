@@ -1,4 +1,3 @@
-
 = class REXML::CData < REXML::Text
 XML の cdata セクションを表すクラス
 

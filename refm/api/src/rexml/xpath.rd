@@ -1,4 +1,3 @@
-
 = class REXML::XPath < Object
 include REXML::Functions
 

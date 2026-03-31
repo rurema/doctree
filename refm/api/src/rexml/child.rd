@@ -1,4 +1,3 @@
-
 = class REXML::Child < Object
 include REXML::Node
 

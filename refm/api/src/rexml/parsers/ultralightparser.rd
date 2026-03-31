@@ -1,4 +1,3 @@
-
 パース結果を配列で作られた木構造により返すパーサ。
 
 [[m:REXML::Parsers::UltraLightParser.new]] でパーサオブジェクトを

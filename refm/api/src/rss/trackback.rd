@@ -1,4 +1,3 @@
-
 = module RSS::BaseTrackBackModel
 == Instance Methods
 

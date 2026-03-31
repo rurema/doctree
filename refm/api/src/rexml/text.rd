@@ -1,4 +1,3 @@
-
 = class REXML::Text < REXML::Child
 include Comparable
 

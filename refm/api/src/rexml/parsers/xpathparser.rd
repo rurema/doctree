@@ -1,4 +1,3 @@
-
 = class REXML::Parsers::XPathParser < Object
 include REXML::XMLTokens
 

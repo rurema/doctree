@@ -1,4 +1,3 @@
-
 = class REXML::Comment < REXML::Child
 include Comparable
 

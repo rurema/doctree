@@ -1,4 +1,3 @@
-
 = module RSS::ImageItemModel
 
 == Instance Methods

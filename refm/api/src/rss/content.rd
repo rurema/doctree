@@ -1,4 +1,3 @@
-
 = module RSS::ContentModel
 == Instance Methods
 --- content_encoded

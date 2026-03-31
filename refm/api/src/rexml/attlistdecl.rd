@@ -1,4 +1,3 @@
-
 = class REXML::AttlistDecl < REXML::Child
 include Enumerable
 

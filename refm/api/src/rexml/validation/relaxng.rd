@@ -1,4 +1,3 @@
-
 = class REXML::Validation::RelaxNG < Object
 include REXML::Validation::Validator
 

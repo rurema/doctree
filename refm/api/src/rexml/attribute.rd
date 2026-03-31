@@ -1,4 +1,3 @@
-
 = class REXML::Attribute
 include REXML::Node
 include REXML::Namespace

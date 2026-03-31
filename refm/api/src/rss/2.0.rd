@@ -1,4 +1,3 @@
-
 = reopen RSS::Rss::Channel 
 == Instance Methods
 

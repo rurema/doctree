@@ -1,4 +1,3 @@
-
 = module RSS::TaxonomyTopicModel
 == Instance Methods
 

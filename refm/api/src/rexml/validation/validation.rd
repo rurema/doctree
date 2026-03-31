@@ -1,4 +1,3 @@
-
 = module REXML::Validation::Validator
 
 == Instance Methods
