@@ -18,7 +18,7 @@ Makefile を作成してから make を実行します。
 
 @param directory
 
-@param dest_path 
+@param dest_path
 
 @param results コマンドの実行結果を格納します。破壊的に変更されます。
 
