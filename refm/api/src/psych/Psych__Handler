@@ -56,8 +56,10 @@ start_document に渡される引数は以下の通りです
   implicit        # => false
 
 以下の YAML に対しては
+//emlist{
   - x
   - y
+//}
 start_document に渡される引数は以下の通りです。
   version         # => []
   tag_directives  # => []

@@ -984,13 +984,11 @@ IO.write("testfile2", "test2")
   result = test(e, "testfile1", "testfile2")
   puts "#{e}: #{result}"
 end
-#@end
-
 # => =: true
 # => <: false
 # => >: false
 # => -: false
-
+#@end
 --- load(file, priv = false) -> true
 
 Ruby プログラム file をロードして実行します。再ロード可能です。
