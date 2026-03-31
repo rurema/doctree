@@ -144,7 +144,7 @@ MSDOS 環境の場合、command はサブシェル経由で実行されます。
  プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
 : [[m:Process::RLIMIT_MEMLOCK]]
  [[man:mlock(2)]] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
-: [[m:Process::RLIMIT_NPROC]] 
+: [[m:Process::RLIMIT_NPROC]]
  そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
 : [[m:Process::RLIMIT_RSS]]
  使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
