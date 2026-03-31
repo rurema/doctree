@@ -181,7 +181,7 @@ DBM ファイルが既に閉じられている場合は、真を返します。
 
 @param bool 新たにセットするモード。
 
-@see  [[m:GDBM::SYNC]], [[m:GDBM#fastmode=]]
+@see [[m:GDBM::SYNC]], [[m:GDBM#fastmode=]]
 
 --- fetch(key, ifnone = nil){|key| ... } -> object
 
