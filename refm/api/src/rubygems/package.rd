@@ -1,7 +1,6 @@
 require rubygems/digest/md5
 require rubygems/security
 require rubygems/specification
-#@# --
 require rubygems/package/f_sync_dir
 require rubygems/package/tar_header
 require rubygems/package/tar_input
