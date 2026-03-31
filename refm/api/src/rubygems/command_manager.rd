@@ -28,7 +28,6 @@ require rubygems/commands/unpack_command
 require rubygems/commands/update_command
 require rubygems/commands/which_command
 
-
 gem コマンドによってサポートされているサブコマンドを管理するライブラリです。
 
 Extra commands can be provided by writing a rubygems_plugin.rb
