@@ -1,4 +1,3 @@
-#@#require rexml/validation/validationexception
 
 = module REXML::Validation::Validator
 

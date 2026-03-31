@@ -1,5 +1,3 @@
-#@#require rexml/parsers/streamparser
-#@#require rexml/parsers/baseparser
 
 パース結果を配列で作られた木構造により返すパーサ。
 

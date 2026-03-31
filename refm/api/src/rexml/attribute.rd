@@ -1,5 +1,3 @@
-#@#require rexml/namespace
-#@#require rexml/text
 
 = class REXML::Attribute
 include REXML::Node

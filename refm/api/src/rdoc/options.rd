@@ -1,8 +1,6 @@
 #@since 1.9.1
-#@# require rdoc/ri/paths
 require optparse
 #@else
-#@# require rdoc/ri/ri_paths
 require singleton
 require getoptlong
 #@end

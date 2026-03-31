@@ -1,5 +1,3 @@
-#@#require rexml/validation/validation
-#@#require rexml/parsers/baseparser
 
 = class REXML::Validation::RelaxNG < Object
 include REXML::Validation::Validator

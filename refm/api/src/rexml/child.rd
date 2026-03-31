@@ -1,4 +1,3 @@
-#@#require rexml/node
 
 = class REXML::Child < Object
 include REXML::Node

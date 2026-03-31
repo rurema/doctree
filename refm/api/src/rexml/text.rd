@@ -1,8 +1,3 @@
-#@#require rexml/entity
-#@#require rexml/doctype
-#@#require rexml/child
-#@#require rexml/doctype
-#@#require rexml/parseexception
 
 = class REXML::Text < REXML::Child
 include Comparable

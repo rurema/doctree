@@ -9,7 +9,6 @@ require rubygems/source_index
 require rubygems/platform
 require rubygems/builder
 #@# 確かに require されているが、ファイルが存在しないためコメントアウト。
-#@# require rubygems/defaults/operating_system
 
 sublibrary rubygems/gem_runner
 

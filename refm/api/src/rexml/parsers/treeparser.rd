@@ -1,4 +1,3 @@
-#@#require rexml/validation/validationexception
 
 = class REXML::Parsers::TreeParser < Object
 内部用です。使わないでください。
