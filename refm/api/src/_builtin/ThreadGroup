@@ -9,12 +9,12 @@
 
 #@samplecode 例: 生成したすべてのThreadが終了するのを待つ
 5.times {
-       Thread.new { sleep 1; puts "#{Thread.current} finished" }
-    }
-    
-    (ThreadGroup::Default.list - [Thread.current]).each {|th| th.join}
+  Thread.new { sleep 1; puts "#{Thread.current} finished" }
+}
 
-    puts "all threads finished"
+(ThreadGroup::Default.list - [Thread.current]).each {|th| th.join}
+
+puts "all threads finished"
 #@end
 
 対象の Thread が Thread を起こす可能性がある場合
