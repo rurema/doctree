@@ -57,8 +57,8 @@ start_document に渡される引数は以下の通りです
 
 以下の YAML に対しては
 //emlist{
-  - x
-  - y
+- x
+- y
 //}
 start_document に渡される引数は以下の通りです。
   version         # => []
