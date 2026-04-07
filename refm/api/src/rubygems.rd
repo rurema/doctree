@@ -8,7 +8,6 @@ require rubygems/gem_path_searcher
 require rubygems/source_index
 require rubygems/platform
 require rubygems/builder
-#@# 確かに require されているが、ファイルが存在しないためコメントアウト。
 
 sublibrary rubygems/gem_runner
 
