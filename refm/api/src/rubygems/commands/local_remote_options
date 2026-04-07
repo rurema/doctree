@@ -1,4 +1,4 @@
-Local/Remote Options:
+    Local/Remote Options:
       -l, --local                      操作をローカルに限定します
       -r, --remote                     操作をリモートに限定します
       -b, --both                       ローカルとリモートの両方の操作を許可します
