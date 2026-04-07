@@ -1,6 +1,7 @@
-* [[url:http://purl.org/dc/elements/1.1/]]
-
 = module DublinCoreModel
+
+ * [[url:http://purl.org/dc/elements/1.1/]]
+
 == Instance Methods
 --- dc_contributor
 --- dc_contributor=
