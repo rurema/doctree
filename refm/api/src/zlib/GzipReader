@@ -1,5 +1,4 @@
 = class Zlib::GzipReader < Zlib::GzipFile
-
 include Enumerable
 
 gzip 形式の圧縮ファイルを読み込むラッパークラスです。

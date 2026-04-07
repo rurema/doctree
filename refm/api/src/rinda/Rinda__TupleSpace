@@ -1,5 +1,4 @@
 = class Rinda::TupleSpace < Object
-
 include MonitorMixin
 include DRb::DRbUndumped
 

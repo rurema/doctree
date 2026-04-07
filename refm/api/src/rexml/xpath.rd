@@ -1,6 +1,3 @@
-#@#require rexml/functions
-#@#require rexml/xpath_parser
-
 = class REXML::XPath < Object
 include REXML::Functions
 

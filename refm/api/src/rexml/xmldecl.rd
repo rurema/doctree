@@ -1,6 +1,3 @@
-#@#require rexml/encoding
-#@#require rexml/source
-
 = class REXML::XMLDecl < REXML::Child
 include REXML::Encoding
 

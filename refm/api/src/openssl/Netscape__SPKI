@@ -1,4 +1,3 @@
-
 = class OpenSSL::Netscape::SPKI < Object
 
 Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれる

@@ -164,7 +164,6 @@ interface 文の中で定義した alias は上記の「メソッド」と同様
 = class RDoc::Parser::F95 < RDoc::Parser
 #@else
 = class RDoc::Fortran95parser
-
 extend RDoc::ParserFactory
 #@end
 

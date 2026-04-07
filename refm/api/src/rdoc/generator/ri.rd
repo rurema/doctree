@@ -1,4 +1,3 @@
-
 ri のためのファイルを生成するためのサブライブラリです。
 
 = class RDoc::Generator::RI

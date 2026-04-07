@@ -1,5 +1,4 @@
 = class String < Object
-
 include Comparable
 
 文字列のクラスです。

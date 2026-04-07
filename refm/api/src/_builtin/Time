@@ -1,5 +1,4 @@
 = class Time < Object
-
 include Comparable
 
 時刻を表すクラスです。

@@ -1,4 +1,3 @@
-
 [[c:Digest::MD5]] をラップするためのライブラリです。
 
 = reopen Gem

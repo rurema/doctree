@@ -1,4 +1,3 @@
-
 ユーザとのやりとりを行うライブラリです。
 
 = module Gem::DefaultUserInteraction

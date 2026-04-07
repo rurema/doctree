@@ -1,5 +1,4 @@
 = class Range < Object
-
 include Enumerable
 
 範囲オブジェクトのクラス。

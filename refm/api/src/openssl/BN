@@ -273,7 +273,7 @@ OpenSSL::BN.new("129").bit_set?(1) # => false
 #@end
 
 @param n 調べるビットの位置
-@see   [[m:OpenSSL::set_bit!]]
+@see [[m:OpenSSL::set_bit!]]
 
 --- clear_bit!(n) -> self
 自身の n ビット目を0にします。
@@ -288,7 +288,7 @@ a # => 128
 
 @param n 0にするビットの位置
 @raise OpenSSL::BNError 計算時エラー
-@see   [[m:OpenSSL::set_bit!]]
+@see [[m:OpenSSL::set_bit!]]
 
 --- coerce(other) -> Array
 自身と other が同じクラスになるよう、自身か other を変換し
@@ -505,7 +505,7 @@ a # => 129
 
 @param n 1にするビットの位置
 @raise OpenSSL::BNError 計算時エラー
-@see   [[m:OpenSSL::clear_bit!]], [[m:OpenSSL::bit_set?]]
+@see [[m:OpenSSL::clear_bit!]], [[m:OpenSSL::bit_set?]]
 
 --- sqr -> OpenSSL::BN
 自身の2乗を計算します。

@@ -1,6 +1,5 @@
 require rubygems/command
 require rubygems/user_interaction
-#@# --
 require rubygems/commands/build_command
 require rubygems/commands/cert_command
 require rubygems/commands/check_command
@@ -28,7 +27,6 @@ require rubygems/commands/uninstall_command
 require rubygems/commands/unpack_command
 require rubygems/commands/update_command
 require rubygems/commands/which_command
-
 
 gem コマンドによってサポートされているサブコマンドを管理するライブラリです。
 

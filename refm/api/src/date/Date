@@ -1,5 +1,4 @@
 = class Date < Object
-
 include Comparable
 
 日付だけでなく時刻も扱える [[c:Time]] も利用できます。

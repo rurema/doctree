@@ -1,6 +1,3 @@
-#@#require rexml/child
-#@#require rexml/source
-
 = class REXML::AttlistDecl < REXML::Child
 include Enumerable
 

@@ -1,5 +1,4 @@
 = object ENV
-
 extend Enumerable
 
 環境変数を表すオブジェクト。[[c:Hash]] と同様のインターフェースを持ち
