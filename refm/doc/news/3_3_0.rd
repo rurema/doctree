@@ -203,7 +203,7 @@ Time.new('2023-12-20')
     * yaml 0.3.0
     * zlib 3.1.0
 
-  * 以下の gem が defalut gems から budled gems に変更されました。
+  * 以下の gem が defalut gems から bundled gems に変更されました。
     * racc 1.7.3
 
   * 以下の bundled gemsが更新されました。
@@ -246,7 +246,7 @@ default gems と bundled gems の詳細については Logger の GitHub Release
   * [[m:Kernel.#lambda]]が非ラムダ式、非リテラルブロックが与えられた場合、Ruby 3.0 以降では deprecated category の警告を発していましたが、ArgumentError を発生させるようになりました。[[feature:19777]]
   * 環境変数 RUBY_GC_HEAP_INIT_SLOTS は非推奨となり削除されました。代わりに RUBY_GC_HEAP_{0,1,2,3,4}_INIT_SLOTS を利用してください。[[feature:19785]]
   * ブロック内での引数なし it の呼び出しは非推奨となりました。 Ruby 3.4から最初のブロック引数を参照するようになります。 [[feature:18980]]
-  * NoMethodError が　#inspect を使ってレシーバーの中身を表示せず、クラス名だけ表示するようになりました。[[feature:18285]]
+  * NoMethodError が #inspect を使ってレシーバーの中身を表示せず、クラス名だけ表示するようになりました。[[feature:18285]]
 //emlist{
 ([1] * 100).nonexisting
 # undefined method `nonexisting' for an instance of Array (NoMethodError)
@@ -254,7 +254,7 @@ default gems と bundled gems の詳細については Logger の GitHub Release
   * ブロック内で匿名のメソッド引数を移譲することが禁止になりました。[[feature:19370]]
 
 == 標準添付ライブラリの互換性に関する変更
-  * racc が budled gems となりました。
+  * racc が bundled gems となりました。
     * bundler 環境で利用する場合は Gemfile に racc を追記する必要があります。
   * ext/readline の削除
     * 今後は Ruby で書かれた GNU Readline の互換ライブラリである reline をすべての環境で標準で利用し、ext/readline は削除されました。以前の ext/readline が必要なユーザーは gem install readline-ext でインストールすることができます。
