@@ -158,8 +158,11 @@ p Baz < Bar     # => true
 p Baz < Foo     # => true
 p Baz < Qux     # => nil
 p Baz > Qux     # => nil
-
+#@since 3.4
+p Foo < Object.new # => in '<': compared with non class/module (TypeError)
+#@else
 p Foo < Object.new # => in `<': compared with non class/module (TypeError)
+#@end
 #@end
 
 --- <=(other) -> bool | nil
@@ -373,7 +376,11 @@ class Foo
   autoload :Bar, '/tmp/bar.rb'
 end
 p Foo::Bar
+#@since 3.4
+#=> -:4:in '<main>': uninitialized constant Foo::Bar (NameError)
+#@else
 #=> -:4:in `<main>': uninitialized constant Foo::Bar (NameError)
+#@end
 #@end
 
 @see [[m:Kernel.#autoload]]
@@ -1005,7 +1012,11 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 #@samplecode 例
 Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
+#@since 3.4
+Kernel.public_instance_method(:p)         #   method 'p' for module 'Kernel' is private (NameError)
+#@else
 Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is private (NameError)
+#@end
 #@end
 
 @see [[m:Module#instance_method]],[[m:Object#public_method]]
@@ -1129,7 +1140,11 @@ class Foo
   private_class_method :foo
 end
 
+#@since 3.4
+Foo.foo # NoMethodError: private method 'foo' called for Foo:Class
+#@else
 Foo.foo # NoMethodError: private method `foo' called for Foo:Class
+#@end
 
 Foo.public_class_method(:foo) # => Foo
 Foo.foo # => "foo"
@@ -1657,7 +1672,11 @@ end
 
 foo = Foo.new
 p foo.foo1          # => 1
+#@since 3.4
+p foo.foo2          # => private method 'foo2' called for #<Foo:0x401b7628> (NoMethodError)
+#@else
 p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoMethodError)
+#@end
 #@end
 
 --- protected() -> nil
@@ -1708,7 +1727,11 @@ p foo.foo2          # => private method `foo2' called for #<Foo:0x401b7628> (NoM
 def foo() 1 end
 p foo             # => 1
 # the toplevel default is private
+#@since 3.4
+p self.foo        # => private method 'foo' called for #<Object:0x401c83b0> (NoMethodError)
+#@else
 p self.foo        # => private method `foo' called for #<Object:0x401c83b0> (NoMethodError)
+#@end
 
 def bar() 2 end
 public :bar       # visibility changed (all access allowed)

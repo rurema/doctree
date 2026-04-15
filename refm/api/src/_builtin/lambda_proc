@@ -123,7 +123,11 @@ def foo
 end
 
 foo.call
+#@since 3.4
+# => in 'call': return from proc-closure (LocalJumpError)
+#@else
 # => in `call': return from proc-closure (LocalJumpError)
+#@end
 #@end
 
 以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたメソッドを
