@@ -1,0 +1,29 @@
+引数の変換は以下の通りです。
+
+: void* (つまり任意のポインタ型)
+  nil ならば C の NULL に変換されます
+  [[c:Fiddle::Pointer]] は保持している C ポインタに変換されます。
+  文字列であればその先頭ポインタになります。
+  [[c:IO]] オブジェクトであれば FILE* が渡されます。
+  整数であればそれがアドレスとみなされます。
+  to_ptr を持っているならば、それを呼びだし Fiddle::Pointer に
+  変換したものを用います。
+  to_i を持っているならば、それを呼びだし結果の整数を
+  アドレスと見なします
+    
+: (unsigned) char/short/int/long/long long
+  Ruby の整数を C の整数に変換します。
+
+: double/float
+  Ruby の整数 or 浮動小数点数を C の浮動小数点数に変換します
+  
+返り値の変換は以下の通りです。
+
+: void
+  nil を返します
+
+: (unsigned) char/short/int/long/long long
+  C の整数を Ruby の整数に変換します
+
+: void*(つまり任意のポインタ型)
+  C のポインタを保持した [[c:Fiddle::Pointer]] を返します。
