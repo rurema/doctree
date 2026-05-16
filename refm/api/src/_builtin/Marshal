@@ -36,7 +36,11 @@ obj を指定された出力先に再帰的に出力します。
 
 #@samplecode 例
 p Marshal.dump(Hash.new {})
+#@since 3.4
+# => -:1:in 'dump': cannot dump hash with default proc (TypeError)
+#@else
 # => -:1:in `dump': cannot dump hash with default proc (TypeError)
+#@end
 #@end
 
 マーシャルの動作を任意に定義することもできます。

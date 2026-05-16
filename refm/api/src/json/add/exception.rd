@@ -25,7 +25,11 @@ require "json/add/core"
 begin
   0/0
 rescue => e
+#@since 3.4
+  e.to_json # => "{\"json_class\":\"ZeroDivisionError\",\"m\":\"divided by 0\",\"b\":[\"/path/to/test.rb:4:in '/'\",\"/path/to/test.rb:4:in '<main>'\"]}"
+#@else
   e.to_json # => "{\"json_class\":\"ZeroDivisionError\",\"m\":\"divided by 0\",\"b\":[\"/path/to/test.rb:4:in `/'\",\"/path/to/test.rb:4:in `<main>'\"]}"
+#@end
 end
 #@end
 

@@ -28,7 +28,11 @@ new は private メソッドに移され、外部から呼び出そうとする�
   a = SomeSingletonClass.instance
   b = SomeSingletonClass.instance # a and b are same object
   p [a,b] # => [#<SomeSingletonClass:0x0000562e6e18ddd0>, #<SomeSingletonClass:0x0000562e6e18ddd0>]
+#@since 3.4
+  a = SomeSingletonClass.new  # => NoMethodError (private method 'new' called for SomeSingletonClass:Class)
+#@else
   a = SomeSingletonClass.new  # => NoMethodError (private method `new' called for SomeSingletonClass:Class)
+#@end
 
 == Singleton Methods
 
