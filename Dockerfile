@@ -1,4 +1,4 @@
-FROM ruby:4.0.4-bookworm
+FROM ruby:4.0.5-bookworm
 RUN useradd rurema --create-home --shell /bin/bash
 USER rurema:rurema
 ENV BUNDLE_AUTO_INSTALL true
