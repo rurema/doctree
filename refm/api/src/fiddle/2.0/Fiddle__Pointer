@@ -273,7 +273,7 @@ GC が自身を解放するのに使う関数を [[c:Fiddle::CFunc]] で指定�
 
 基本的には [[m:Fiddle::Pointer.new]] で指定したサイズが返されます。
 [[m:Fiddle::Pointer.to_ptr]] で文字列を変換したときは、そのバイト数が返されます。
-[[m:Fiddle::Pointer#size=]] でこの値を変更することができます。
+[[m:Fiddle::Pointer#size=]] でこの値を変更できます。
 
 --- size=(s)
 

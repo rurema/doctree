@@ -25,7 +25,7 @@ Ruby の式には、[[d:spec/variables]]、さまざまな[[d:spec/literal]]、�
 [[d:spec/operator]]、if や while などの[[d:spec/control]]、[[d:spec/call]]、
 [[d:spec/def]]があります。
 
-式は括弧によってグルーピングすることができます。
+式は括弧によってグルーピングできます。
 
 式は評価されると値（評価値）が定まり、その値を返します。
 ただし、return、break, next といったものは値を返しません。これらは評価された
@@ -43,7 +43,7 @@ Ruby の式には、[[d:spec/variables]]、さまざまな[[d:spec/literal]]、�
     if/unless/rescue 修飾式, ...
 
 メソッドの引数に指定できない式は、括弧によるグルーピングを行うことで普
-通の式として使用することができます。
+通の式として使用できます。
 
 ===[a:terminate] プログラムの終り
 

@@ -273,7 +273,7 @@ flags には以下の値の OR を渡すことができます。
   * [[m:OpenSSL::OCSP::NOCERTS]]
 
 certs に証明書の配列を渡すことで、この署名を検証するために
-必要となる別の証明書を付加することができます。
+必要となる別の証明書を付加できます。
 
 @param signer_cert 署名者の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
 @param signer_key 証明に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
@@ -470,7 +470,7 @@ OCSP レスポンダはこの署名を確認します。
 Request に対する署名は必須ではありません。
 
 certs に証明書の配列を渡すことで、この署名を検証するために
-必要となる別の証明書を付加することができます。
+必要となる別の証明書を付加できます。
 
 @param signer_cert 署名者の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
 @param signer_key 証明に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)

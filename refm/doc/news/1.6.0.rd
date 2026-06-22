@@ -1259,7 +1259,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
 
 : ((<UnboundMethod>))#bind
 
-  モジュールの UnboundMethod オブジェクトを bind することができませんでした。
+  モジュールの UnboundMethod オブジェクトを bind できませんでした。
   ((<rubyist:0728>))
 
     module Foo

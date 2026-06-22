@@ -37,7 +37,7 @@ Encoding.compatible?(
 #@end
 
 引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には
-互換性を判定することができます。
+互換性を判定できます。
 #@samplecode 例
 Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
 # => nil

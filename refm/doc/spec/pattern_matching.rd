@@ -429,7 +429,7 @@ end
 //}
 
 #@# Variables that start with <code>_</code> are the only exclusions from this rule:
-『_』 で始まる変数は例外で、Alternative パターン と同時に利用することができます。
+『_』 で始まる変数は例外で、Alternative パターン と同時に利用できます。
 
 #@samplecode
 case {a: 1, b: 2}
@@ -466,7 +466,7 @@ end
 #@end
 
 #@# For this case, the pin operator <code>^</code> can be used, to tell Ruby "just use this value as part of the pattern":
-この場合、Ruby に「この値をパターンの部品として利用するよ」ということを伝えるためにピン演算子 『^』 を利用することができます。
+この場合、Ruby に「この値をパターンの部品として利用するよ」ということを伝えるためにピン演算子 『^』 を利用できます。
 
 #@samplecode
 expectation = 18
@@ -607,7 +607,7 @@ end
 #@end
 
 #@# Additionally, when matching custom classes, the expected class can be specified as part of the pattern and is checked with <code>===</code>
-さらに、カスタムクラスに対してマッチする場合には、期待するクラスをパターンの部品として指定することができます。これは 『===』 でチェックされます。
+さらに、カスタムクラスに対してマッチする場合には、期待するクラスをパターンの部品として指定できます。これは 『===』 でチェックされます。
 
 #@samplecode
 class SuperPoint < Point

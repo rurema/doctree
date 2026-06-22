@@ -43,7 +43,7 @@ ExtensionFactory オブジェクトを生成します。
 証明書の発行者や所有者の [[c:OpenSSL::X509::Certificate]] オブジェクトや
 [[c:OpenSSL::X509::Request]]、[[c:OpenSSL::X509::CRL]] オブジェクトを
 渡すことによって、拡張領域の中身を ExtensionFactory オブジェクトが
-計算することができます。
+計算できます。
 例えば、"subjectKeyIdentifier" 拡張領域は証明書の一部のハッシュ値
 を値として持ちますが、
 [[c:OpenSSL::X509::Certificate]] オブジェクトをあらかじめ渡しておくことによって
@@ -51,7 +51,7 @@ ExtensionFactory オブジェクトを生成します。
 これらの情報が必要ない場合は nil を渡します。
 
 以下のメソッドによってオブジェクト生成後に証明書オブジェクト等を
-設定することができます。
+設定できます。
   * [[m:OpenSSL::X509::ExtensionFactory#issuer_certificate=]]
   * [[m:OpenSSL::X509::ExtensionFactory#subject_certificate=]]
   * [[m:OpenSSL::X509::ExtensionFactory#subject_request=]]

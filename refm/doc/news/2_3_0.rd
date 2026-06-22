@@ -258,7 +258,7 @@
 === 標準添付ライブラリの互換性 (機能追加とバグ修正を除く)
 
   * ext/coverage/coverage.c
-    * [[m:Coverage.peek_result]] を追加。カバレッジツールを停止することなくカバレッジに関する情報を取得することができます。
+    * [[m:Coverage.peek_result]] を追加。カバレッジツールを停止することなくカバレッジに関する情報を取得できます。
       [[url:https://bugs.ruby-lang.org/issues/10816]]
 
   * [[c:Fiddle]]
@@ -289,7 +289,7 @@
 
   * [[c:Net::FTP]]
     * パッシブモードでの接続がデフォルトになりました。
-      [[m:Net::FTP.default_passive=]] で変更することができます。
+      [[m:Net::FTP.default_passive=]] で変更できます。
       [[feature:11612]]
 
   * [[c:Net::HTTP]]

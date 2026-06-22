@@ -14,7 +14,7 @@ require rubygems/command
         - from: http://gems.example.com # source repository URI
           to: /path/to/mirror           # destination directory
       
-      複数の取得元と配置先を指定することができます。
+      複数の取得元と配置先を指定できます。
 
 
 = class Gem::Commands::MirrorCommand < Gem::Command

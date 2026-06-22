@@ -2,7 +2,7 @@
 ソケットのアドレス情報を保持するクラスです。
 
 ホスト/ポート番号/プロトコルなどを同定するために用いられます。
-IPv4/IPv6/Unix domain socketなどのアドレス情報を保持することができます。
+IPv4/IPv6/Unix domain socketなどのアドレス情報を保持できます。
 
 struct addrinfo に対応します。
 
@@ -38,11 +38,11 @@ sockaddr には文字列もしくは配列を指定します。
 での表示にしか用いられません。
 
 family は [[m:Socket::PF_INET]] のようなプロコルファミリーを指定します。
-文字列やシンボル名を指定することができます(PF_ というプレフィクスは
+文字列やシンボル名を指定できます(PF_ というプレフィクスは
 省略することもできます)。例えば :INET, :INET6, :UNIX, "PF_INET" などです。
 
 socktype は [[m:Socket::SOCK_STREAM]] のようなソケットタイプを指定します。
-文字列やシンボル名を指定することができます(SOCK_ というプレフィクスは
+文字列やシンボル名を指定できます(SOCK_ というプレフィクスは
 省略することもできます)。例えば :STREAM, :DGRAM, :RAW, "SOCK_STREAM" などです。
 
 protocol は [[m:Socket::IPPROTO_TCP]] のようなプロトコルを指定します。
