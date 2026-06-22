@@ -4,7 +4,7 @@
 
 例:
 
-$ ruby -e 'Regexp.compile("*")'
+  $ ruby -e 'Regexp.compile("*")'
 #@since 3.4
   -e:1:in 'initialize': target of repeat operator is not specified: /*/ (RegexpError)
           from -e:1:in 'Regexp#compile'

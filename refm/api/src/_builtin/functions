@@ -1888,7 +1888,7 @@ p Integer("")         # 'Integer': invalid value for Integer: "" (ArgumentError)
 p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
 p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
 p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
-#@end 
+#@end
 #@end
 
 @see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]],[[c:Integer]]
