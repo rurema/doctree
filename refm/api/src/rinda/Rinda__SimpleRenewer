@@ -1,5 +1,3 @@
-
-
 = class Rinda::SimpleRenewer < Object
 include DRb::DRbUndumped
 

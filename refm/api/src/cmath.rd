@@ -5,7 +5,6 @@ category Math
 複素数演算をサポートするライブラリです。
 
 = module CMath
-
 include Math
 
 複素数演算をサポートするモジュールです。

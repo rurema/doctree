@@ -1,5 +1,4 @@
 = class Enumerator < Object
-
 include Enumerable
 
 each 以外のメソッドにも [[c:Enumerable]] の機能を提供するためのラッパークラスです。

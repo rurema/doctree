@@ -22,7 +22,7 @@ end
 print sum # => 0.9999999999999062
 #@end
 
-#@samplecode  例2: 0.0001 を 10000 回足す場合。(BigDecimal)
+#@samplecode 例2: 0.0001 を 10000 回足す場合。(BigDecimal)
 require 'bigdecimal'
 
 sum = BigDecimal("0")
@@ -32,7 +32,7 @@ end
 print sum # => 0.1e1
 #@end
 
-#@samplecode  例3: 1.2 - 1.0 と 0.2 との比較
+#@samplecode 例3: 1.2 - 1.0 と 0.2 との比較
 require "bigdecimal"
 
 (BigDecimal("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true

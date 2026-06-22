@@ -1,5 +1,3 @@
-#@#require rexml/text
-
 = class REXML::CData < REXML::Text
 XML の cdata セクションを表すクラス
 

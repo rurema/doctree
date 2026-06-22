@@ -1,4 +1,3 @@
-
 = class Rinda::InvalidHashTupleKey < Rinda::RindaError
 
 [[m:Rinda::TupleSpace#write]] などで不正なハッシュテーブル(キーが

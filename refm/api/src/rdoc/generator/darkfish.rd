@@ -6,7 +6,6 @@ require rdoc/generator/markup
 HTML を生成するためのサブライブラリです。
 
 = class RDoc::Generator::Darkfish
-
 include ERB::Util
 
 HTML を生成するためのクラスです。

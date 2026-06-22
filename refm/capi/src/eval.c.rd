@@ -236,7 +236,7 @@ Proc.yield の実体。
 クラス klass に mid という名前のメソッドを定義する。
 その本体は node であり、noex で示される可視性を持つ。
 
---- void rb_alias(VALUE klass, ID name, ID def)
+--- void rb_alias(VALUE klass, ID def, ID name)
 
 クラス klass に定義されたメソッド name の
 本体を実体とする新しいメソッド def を定義します。

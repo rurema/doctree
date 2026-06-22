@@ -1,8 +1,7 @@
-#@#require rss/1.0
+= module DublinCoreModel
 
  * [[url:http://purl.org/dc/elements/1.1/]]
 
-= module DublinCoreModel
 == Instance Methods
 --- dc_contributor
 --- dc_contributor=

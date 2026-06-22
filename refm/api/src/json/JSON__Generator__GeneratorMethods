@@ -1,4 +1,3 @@
-
 = module JSON::Generator::GeneratorMethods::Array
 alias JSON::Ext::Generator::GeneratorMethods::Array
 

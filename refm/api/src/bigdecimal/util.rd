@@ -1,4 +1,3 @@
-
 #@since 2.6.0
 String、Integer、Float、Rational, NilClass オブジェクトを
 #@else

@@ -13,7 +13,7 @@ struct addrinfo に対応します。
 新たな Addrinfo オブジェクトを返します。
 
 sockaddr は [[man:connect(2)]] などで使われるパラメータで、
-struct sockaddr に対応します。faimily, socktype, protocol
+struct sockaddr に対応します。family, socktype, protocol
 は [[man:socket(2)]] のパラメータに対応します。
 
 sockaddr には文字列もしくは配列を指定します。

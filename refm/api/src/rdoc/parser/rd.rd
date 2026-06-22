@@ -1,7 +1,6 @@
 RD 形式で記述されたファイルを解析するためのサブライブラリです。
 
 = class RDoc::Parser::RD < RDoc::Parser
-
 include RDoc::Parser::Text
 
 RD 形式で記述されたファイルを解析するためのクラスです。

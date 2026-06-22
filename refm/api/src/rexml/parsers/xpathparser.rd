@@ -1,6 +1,3 @@
-#@#require rexml/namespace
-#@#require rexml/xmltokens
-
 = class REXML::Parsers::XPathParser < Object
 include REXML::XMLTokens
 

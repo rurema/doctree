@@ -1,4 +1,3 @@
-
 = module OpenSSL::PKCS5
 OpenSSL PKCS#5 関連の機能を集めたモジュール
 

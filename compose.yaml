@@ -1,0 +1,23 @@
+# usage:
+#
+# docker compose build
+# docker compose run --rm rurema rake -T
+# docker compose run --rm rurema rake generate:3.4 statichtml:3.4
+# open _site/3.4/index.html instead of /tmp/html/3.4/index.html
+services:
+  rurema:
+    build:
+      context: .
+    volumes:
+      - ..:/workspaces:cached
+      - "./_site:/tmp/html/"
+      - "bundle_cache:/usr/local/bundle"
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - "./_site:/usr/share/nginx/html:ro"
+
+volumes:
+  bundle_cache:

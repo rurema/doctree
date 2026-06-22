@@ -3,6 +3,7 @@ category Math
 require matrix
 require cmath
 require prime
+
 [[c:Rational]] と [[c:Complex]] をよりシームレスに利用できるようにするライブラリです。数値ライブラリの挙動をグローバルに変更します。
 
 なお、このライブラリはRuby 2.2から非推奨(deprecated)になり、Ruby 2.5で削除されました。

@@ -1,4 +1,5 @@
 require digest
+
 = reopen Digest
 == Module Functions
 --- bubblebabble(string) -> String

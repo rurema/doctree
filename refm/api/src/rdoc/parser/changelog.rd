@@ -10,7 +10,6 @@ GNU style の ChangeLog([[url:http://www.gnu.org/prep/standards/html_node/Style-
 参照)であれば解析できます。
 
 = class RDoc::Parser::ChangeLog < RDoc::Parser
-
 include RDoc::Parser::Text
 
 ChangeLog ファイルを解析するためのクラスです。

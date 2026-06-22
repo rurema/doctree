@@ -1,4 +1,3 @@
-
 = class SimpleDelegator < Delegator
 
 [[c:Delegator]] クラスを継承し、シンプルなメソッド委譲を実現した具象クラス。

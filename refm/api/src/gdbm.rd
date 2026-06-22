@@ -11,7 +11,6 @@ GDBM は dbm および ndbm 互換機能を含んでいます。
 @see [[lib:dbm]], [[lib:sdbm]], [[man:gdbm(3)]]
 
 = class GDBM < Object
-
 include Enumerable
 
 GDBM ファイルをアクセスするクラス。
@@ -182,7 +181,7 @@ DBM ファイルが既に閉じられている場合は、真を返します。
 
 @param bool 新たにセットするモード。
 
-@see  [[m:GDBM::SYNC]], [[m:GDBM#fastmode=]]
+@see [[m:GDBM::SYNC]], [[m:GDBM#fastmode=]]
 
 --- fetch(key, ifnone = nil){|key| ... } -> object
 

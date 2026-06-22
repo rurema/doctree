@@ -1,4 +1,3 @@
-
 = class OpenSSL::Engine < Object
 OpenSSL の Engine (プラグイン)を表すオブジェクトです。
 

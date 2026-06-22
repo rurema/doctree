@@ -1,4 +1,3 @@
-
 = reopen Object
 
 == Class Methods
@@ -84,15 +83,9 @@ syck が廃止された場合  psych_to_yaml は廃止
 
 == Instance Methods
 
---- y(*objects) -> String
---- psych_y(*objects) -> String
-objects を YAML document に変換します。
+--- y(*objects) -> nil
+objects を YAML document として標準出力に出力します。
 
 このメソッドは irb 上でのみ定義されます。
-
-[[lib:syck]] に y メソッドがあるため、
-psych_y が別名として定義されています。将来的に
-syck が廃止された場合  psych_y は廃止
-される予定であるため、特別の事情がない限り y を用いてください。
 
 @param objects YAML document に変換する Ruby のオブジェクト

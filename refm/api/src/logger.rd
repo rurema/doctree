@@ -270,7 +270,7 @@ include Logger::Severity
 == Class Methods
 
 #@since 2.4.0
---- new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, shift_period_suffix: '%Y%m%d') -> Logger
+--- new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: [], skip_header: false) -> Logger
 #@else
 --- new(logdev, shift_age = 0, shift_size = 1048576) -> Logger
 #@end
@@ -298,10 +298,22 @@ Logger オブジェクトを生成します。
 @param datetime_format ログに記録する時の日時のフォーマットを指定します。
                        省略した場合は '%Y-%m-%d %H:%M:%S' です。
 
+@param binmode ログに記録する時にバイナリモードを使用するかどうかを指定します。
+               省略した場合は false です。
+               Logger v1.4.0 以降で利用可能です。
+
 @param shift_period_suffix daily、weekly、monthlyでログファイルの切り替
                            えを行う時のログファイルの名の末尾に追加する
                            文字列のフォーマットを指定します。
                            省略した場合は '%Y%m%d' です。
+
+@param reraise_write_errors ログ書き込み時にエラーが発生した場合に raise される例外クラスの配列。
+                            省略した場合は空配列です。
+                            Logger v1.6.1 以降で利用可能です。
+
+@param skip_header ログファイルの先頭にヘッダー行を出力するかどうかを指定します。
+                   true の場合は出力しません。省略した場合は false です。
+                   Logger v1.7.0 以降で利用可能です。
 #@end
 
 #@since 2.4.0

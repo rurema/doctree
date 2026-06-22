@@ -63,9 +63,9 @@ WEBrick::HTTPServer のアクセスログの形式を処理するために内部
 Apache のアクセスログと同じ時刻の形式を表す文字列です。
 
 @return 以下の文字列を返します。
-//emlist{{
+//emlist{
   "[%d/%b/%Y:%H:%M:%S %Z]"
-//}}
+//}
 
 --- COMMON_LOG_FORMAT -> String
 --- CLF -> String
@@ -73,36 +73,36 @@ Apache のアクセスログと同じ時刻の形式を表す文字列です。
 Apache のアクセスログで一般的に使われる形式を表す文字列です。
 
 @return 以下の文字列を返します。
-//emlist{{
+//emlist{
   "%h %l %u %t \"%r\" %s %b"
-//}}
+//}
 
 --- REFERER_LOG_FORMAT -> String
 
 Apache のアクセスログで一般的に使われるリファラの形式を表す文字列です。
 
 @return 以下の文字列を返します。
-//emlist{{
+//emlist{
   "%{Referer}i -> %U"
-//}}
+//}
 
 --- AGENT_LOG_FORMAT -> String
 
 Apache のアクセスログで一般的に使われる User-Agent の形式を表す文字列です。
 
 @return 以下の文字列を返します。
-//emlist{{
+//emlist{
   "%{User-Agent}i"
-//}}
+//}
 
 --- COMBINED_LOG_FORMAT -> String
 
 Apache のアクセスログで一般的に使われる形式を表す文字列です。
 
 @return 以下の文字列を返します。
-//emlist{{
+//emlist{
   "%h %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-agent}i\""
-//}}
+//}
 
 == Module Functions
 

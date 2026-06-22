@@ -851,6 +851,19 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
 
   /path/to/ruby/sitearchdir/test/foo.so
 
+ブロックを与える場合、生成する Makefile の設定部分を文字列の配列として
+yield します。
+
+   create_makefile('foo') {|conf|
+     [
+       *conf,
+       "MACRO_YOU_NEED = something",
+     ]
+   }
+
+ソースディレクトリに depend ファイルが存在する場合、その内容が
+[[m:Kernel#depend_rules]] メソッドで整形されて、生成される Makefile に加えられます。
+
 --- find_executable(bin, path = nil) -> String | nil
 
 パス path から実行ファイル bin を探します。

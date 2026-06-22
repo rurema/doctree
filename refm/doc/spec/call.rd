@@ -5,6 +5,7 @@
   * [[ref:yield]]
   * [[ref:block_arg]]
   * [[ref:numbered_parameters]]
+  * [[ref:it]]
   * [[ref:call_method]]
 
 #@samplecode 例
@@ -467,6 +468,58 @@ foo {|a,b|
   p a # => "a"
   p b # => "b"
 }
+#@end
+
+#@since 3.4
+===[a:it] it
+
+ブロックに渡された値は it という名前で参照することもできます。
+
+#@samplecode
+[1, 2, 3].map { it * 2 } # => [2, 4, 6]
+
+{a: 1, b: 2}.each { p it }
+# => [:a, 1]
+#    [:b, 2]
+#@end
+
+it は予約語ではありません。そのため、変数やメソッドの名前として it を使うこともできます。
+
+#@samplecode
+it = 0 # 警告されない
+
+def it # 警告されない
+  # ...
+end
+#@end
+
+ローカル変数 it が存在する場合、it はローカル変数の値を参照します。
+
+#@samplecode
+it = 0
+[1, 2, 3].map { it * 2 } # => [0, 0, 0]
+#@end
+
+it はネストすることができます。
+
+#@samplecode
+['foo', 'bar'].each { it.each_char { p it } }
+# => "f"
+#    "o"
+#    "o"
+#    "b"
+#    "a"
+#    "r"
+#@end
+
+通常のブロックパラメータを定義した場合、そのブロックでは it は使用できません。
+
+  [1, 2, 3].map { |x| it * 2 } # => SyntaxError: `it` is not allowed when an ordinary parameter is defined
+
+1つのブロックで番号指定パラメータと it の両方を使うことはできません。
+
+  [1, 2, 3].map { _1 + it } # => SyntaxError: `it` is not allowed when a numbered parameter is already used
+
 #@end
 
 ===[a:call_method] .() および ::() 形式のメソッド呼び出し（callメソッドの糖衣構文）

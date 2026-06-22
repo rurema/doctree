@@ -1,3 +1,5 @@
+#@until 3.2
+
 category Math
 
 #@since 3.0
@@ -58,7 +60,6 @@ p set1                  # => #<Set: {"bar", "baz", "heh"}>
 #@end
 
 = class Set < Object
-
 include Enumerable
 
 集合を表すクラスです。要素の間に順序関係はありません。
@@ -694,3 +695,5 @@ p [30, 10, 20].to_set {|num| num / 10}
 #@end
 
 @see [[m:Set.new]]
+
+#@end

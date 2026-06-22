@@ -1,5 +1,4 @@
 = class RDoc::Context < RDoc::CodeObject
-
 include Comparable
 
 モジュール、クラス、メソッドなどの、[[lib:rdoc/code_objects]] が定義す

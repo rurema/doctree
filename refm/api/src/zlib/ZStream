@@ -106,7 +106,7 @@ adler-32 チェックサムを返します。
 より具体的な振る舞いは [[m:Zlib::Deflate#finish]],
 [[m:Zlib::Inflate#finish]] を参照して下さい。
 
-@see  [[m:Zlib::Deflate#finish]],[[m:Zlib::Inflate#finish]] 
+@see [[m:Zlib::Deflate#finish]],[[m:Zlib::Inflate#finish]] 
 
 --- finished? -> bool
 --- stream_end? -> bool

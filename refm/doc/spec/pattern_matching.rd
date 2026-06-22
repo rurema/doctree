@@ -418,7 +418,7 @@ end
 #@# Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
 変数への束縛は現状、『|』 で結合される Alternative パターン と同時には利用できません。
 
-#@samplecode
+//emlist{
 case {a: 1, b: 2}
 in {a: } | Array
   "matched: #{a}"
@@ -426,7 +426,7 @@ else
   "not matched"
 end
 # SyntaxError (illegal variable in alternative pattern (a))
-#@end
+//}
 
 #@# Variables that start with <code>_</code> are the only exclusions from this rule:
 『_』 で始まる変数は例外で、Alternative パターン と同時に利用することができます。

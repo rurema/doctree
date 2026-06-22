@@ -1,6 +1,10 @@
 {
-  "dockerComposeFile": ["../docker-compose.yml", "./docker-compose.yml"],
-  "forwardPorts": [8080],
-  "name": "rurema doctree",
-  "service": "rurema"
+  "name": "rurema/doctree",
+  "dockerComposeFile": [
+    "../compose.yaml",
+    "compose.yaml"
+  ],
+  "service": "rurema",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "forwardPorts": [8080]
 }

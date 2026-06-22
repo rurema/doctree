@@ -1,4 +1,3 @@
-
 SAX2 と同等の API を持つストリーム式の XML パーサ。
 
 コールバックをパーサオブジェクトに [[m:REXML::Parsers::SAX2Parser#listen]] で

@@ -98,7 +98,6 @@ C 言語で記述された拡張ライブラリなどを解析するのに使用
 #@include(../RDoc__KNOWN_CLASSES)
 
 = class RDoc::C_Parser
-
 extend RDoc::ParserFactory
 #@end
 

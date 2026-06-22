@@ -1,8 +1,6 @@
 require rubygems
 require rdoc
-#@# require rdoc/markup/to_joined_paragraph
 require rdoc/markdown/entities
-#@# require rdoc/markdown/literals_1_9
 
 Markdown 形式で記述されたドキュメントを [[lib:rdoc]] 上で解析するための
 サブライブラリです。

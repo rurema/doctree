@@ -101,7 +101,7 @@ p Encoding.name_list
 
 Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
 
-#@since 3.0.0
+#@since 3.0
 -E オプションを指定していない場合は、WindowsではUTF-8、その他のOSではロケールに従って default_external を決定します。
 #@end
 
@@ -503,7 +503,7 @@ CP437 エンコーディング。
 @see [[url:https://en.wikipedia.org/wiki/Code_page_437]],
      [[m:Encoding::CP869]]
 
-#@since 3.0.0
+#@since 3.0
 --- IBM720 -> Encoding
 --- CP720 -> Encoding
 

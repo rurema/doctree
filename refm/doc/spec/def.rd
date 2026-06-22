@@ -647,8 +647,7 @@ extend については、[[m:Object#extend]] を参照して
  * private に設定されたメソッドは関数形式でしか呼び出せません。
 #@end
  * protected に設定されたメソッドは、そのメソッドを持つオブジェクトが
-   selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せ
-   ます。
+   selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せます。
 
 #@samplecode 例: protected の可視性
 class Foo
@@ -841,11 +840,11 @@ defined?(Foobar)
 
           defined? 式
 
-式が定義されていなければ、偽を返します。定義されていれば式の種別
+式が定義されていなければ、nil を返します。定義されていれば式の種別
 を表す文字列を返します。
 
 定義されていないメソッド、undef されたメソッド、[[m:Module#remove_method]]
-により削除されたメソッドのいずれに対しても defined? は偽を返します。
+により削除されたメソッドのいずれに対しても defined? は nil を返します。
 
 特別な用法として以下があります。
 

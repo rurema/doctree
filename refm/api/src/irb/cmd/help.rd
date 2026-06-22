@@ -1,5 +1,3 @@
-#@# require rdoc/ri/driver
-#@# require rdoc/ri/util
 require irb/cmd/nop
 
 irb 中の help コマンドのための拡張を定義したサブライブラリです。

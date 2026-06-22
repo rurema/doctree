@@ -1,7 +1,6 @@
 require e2mmap
 require irb/slex
 require rdoc/code_objects
-#@# require rdoc/markup/simple_markup/preprocess
 #@since 1.9.1
 require rdoc/parser
 #@else
@@ -100,7 +99,6 @@ Ruby のソースコードを解析するためのサブライブラリです。
 
 #@since 1.9.1
 = class RDoc::Parser::Ruby < RDoc::Parser
-
 include RDoc::RubyToken
 include RDoc::TokenStream
 #@since 1.9.2
@@ -108,7 +106,6 @@ include RDoc::Parser::RubyTools
 #@end
 #@else
 = class RDoc::RubyParser
-
 extend RDoc::ParserFactory
 
 include RubyToken

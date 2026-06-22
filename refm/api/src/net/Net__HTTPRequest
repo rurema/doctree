@@ -1,5 +1,4 @@
 = class Net::HTTPGenericRequest < Object
-
 include Net::HTTPHeader
 
 [[c:Net::HTTPRequest]] のスーパークラスです。

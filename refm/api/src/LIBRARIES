@@ -337,7 +337,9 @@ scanf
 #@end
 sdbm
 securerandom
+#@until 3.2
 set
+#@end
 #@until 2.7.0
 shell
 shell/error

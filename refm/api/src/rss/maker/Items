@@ -151,7 +151,6 @@ url，contentを設定する必要があります．
 = class RSS::Maker::ItemsBase::ItemBase::CategoriesBase < RSS::Maker::Base
 = class RSS::Maker::RSS09::Items::Item::Categories < RSS::Maker::ItemsBase::ItemBase::CategoriesBase
 = class RSS::Maker::RSS20::Items::Item::Categories < RSS::Maker::RSS09::Items::Item::Categories
-
 include Enumerable
 
 RSS 2.0を生成するときだけ利用されます．

@@ -1,4 +1,3 @@
-
 プル方式の XML パーサ。
 
 [[c:REXML::Parsers::StreamParser]] はパースした結果をコールバックによって

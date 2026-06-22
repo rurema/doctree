@@ -814,7 +814,7 @@ headers オプションに偽でない値を指定した場合は [[c:CSV::Table
 
 @param options [[m:CSV.new]] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入力のエンコーディングを指定することができます。
-               入力のエンコーディングか [[m:Encoding.default_external]] と異なる場合は
+               入力のエンコーディングが [[m:Encoding.default_external]] と異なる場合は
                必ず指定しなければなりません。
 
 #@samplecode 例
@@ -1761,7 +1761,7 @@ p [1, 'Matz', :Ruby, Date.new(1965, 4, 14)].to_csv                              
 p [1, 'Matz', :Ruby, Date.new(1965, 4, 14)].to_csv(col_sep: ' ', row_sep: "\r\n")  # => "1 Matz Ruby 1965-04-14\r\n"
 #@end
 
-#@since 3.0.0
+#@since 3.0
 Ruby 3.0 (CSV 3.1.9) から、次のオプションが使えるようになりました。
 
 #@samplecode

@@ -1,4 +1,3 @@
-
 [[c:REXML::Parsers::StreamParser]]
 で使われるコールバックオブジェクトのためのモジュール、
 [[c:REXML::StreamListener]] を定義しています。

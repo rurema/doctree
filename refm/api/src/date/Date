@@ -1,8 +1,7 @@
 = class Date < Object
-
 include Comparable
 
-日付だけでなく時刻も扱える Date のサブクラス [[c:DateTime]] も利用できます。
+日付だけでなく時刻も扱える [[c:Time]] も利用できます。
 
 === 簡単なつかいかた
 
@@ -608,8 +607,13 @@ Date.new(2001,1,31) >> 1 >> -1   #=> #<Date: 2001-01-28 ...>
 [[RFC:2616]] ([[RFC:1123]]) で定められた書式の文字列を返します。
 
 --- iso8601 -> String
---- rfc3339 -> String
 [[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
+
+#@samplecode 例
+Date.new(2001, 2, 3).iso8601 # => "2001-02-03"
+#@end
+
+@see [[m:Date#rfc3339]]
 
 --- italy -> Date
 このメソッドは、new_start(Date::ITALY) と等価です。
@@ -728,6 +732,15 @@ Date.new(2008,2,29).prev_year(4)  #=> #<Date: 2004-02-29 ...>
 --- rfc822 -> String
 [[RFC:2822]] で定められた書式の文字列を返します。
 
+--- rfc3339 -> String
+[[RFC:3339]] 書式の文字列を返します。
+
+#@samplecode 例
+Date.new(2001, 2, 3).rfc3339 # => "2001-02-03T00:00:00+00:00"
+#@end
+
+@see [[m:Date#iso8601]]
+
 --- saturday? -> bool
 土曜日なら真を返します。
 
@@ -811,6 +824,48 @@ XML Scheme (date) による書式の文字列を返します。
 
 --- year -> Integer
 年を返します。
+
+#@since 3.2
+--- deconstruct_keys(array_of_names_or_nil) -> Hash
+
+パターンマッチに使用する名前と値の [[c:Hash]] を返します。
+
+キーに利用できる名前は以下の通りです。
+
+  * :year
+  * :month
+  * :day
+  * :yday
+  * :wday
+
+@param array_of_names_or_nil パターンマッチに使用する名前の配列を指定します。nil の場合は全てをパターンマッチに使用します。
+
+#@samplecode 例
+d = Date.new(2022, 10, 5)
+
+if d in wday: 3, day: ..7 # deconstruct_keys が使われます
+  puts "first Wednesday of the month"
+end
+#=> "first Wednesday of the month" が出力される
+
+case d
+in year: ...2022
+  puts "too old"
+in month: ..9
+  puts "quarter 1-3"
+in wday: 1..5, month:
+  puts "working day in month #{month}"
+end
+#=> "working day in month 10" が出力される
+
+# クラスのチェックと組み合わせて利用することもできます
+if d in Date(wday: 3, day: ..7)
+  puts "first Wednesday of the month"
+end
+#@end
+
+@see [[ref:d:spec/pattern_matching#matching_non_primitive_objects]]
+#@end
 
 = reopen Time
 

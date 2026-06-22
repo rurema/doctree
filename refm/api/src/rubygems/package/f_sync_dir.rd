@@ -1,4 +1,3 @@
-
 = module Gem::Package::FSyncDir
 
 == Private Instance Methods

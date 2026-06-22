@@ -1,4 +1,3 @@
-
 = class OpenSSL::Cipher < Object
 
 共通鍵暗号のために抽象化されたインターフェースを提供するクラスです。

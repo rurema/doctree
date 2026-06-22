@@ -1,4 +1,3 @@
-
 HTML の実体参照のマッピングを表す情報を定義するサブライブラリです。
 
 = reopen RDoc::Markdown

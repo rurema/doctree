@@ -1,8 +1,6 @@
-
 [[c:Shell::Filter]] を定義しているライブラリです。
 
 = class Shell::Filter < Object
-
 include Enumerable
 
 コマンドの実行結果はすべて [[c:Shell::Filter]] か、そのサブクラスのインスタンスとして返ります。 

@@ -37,7 +37,7 @@ end
 
 引数 item を要素として持つ配列を生成して返します。
 
-[[c:Array]] のサブクラスを作成したしたときに、そのサブクラスのインスタンスを作成
+[[c:Array]] のサブクラスを作成したときに、そのサブクラスのインスタンスを作成
 しやすくするために用意されている。
 
 @param item 配列の要素を指定します。
@@ -589,6 +589,8 @@ p [5,  6, 7].all? {|v| v > 0 }   # => true
 p [5, -1, 7].all? {|v| v > 0 }   # => false
 p [].all? {|v| v > 0 }           # => true
 p %w[ant bear cat].all?(/t/)     # => false
+p [1, 2, 3].all?(Integer)        # => true
+p [1, 2, 3.0].all?(Integer)      # => false
 #@end
 
 @see [[m:Enumerable#all?]]
@@ -1082,6 +1084,33 @@ result = a.fetch(10){|nth|
 p result #=> 999
 #@end
 
+#@since 3.4
+--- fetch_values(*indexes)                 -> Array
+--- fetch_values(*indexes) { |index| ... } -> Array
+
+引数で指定されたインデックスに対する値の配列を返します。
+
+指定したインデックスが self の範囲外である場合、ブロックが与えられたかどうかにより挙動が異なります。
+
+ * ブロックが与えられている場合、インデックスを引数としてブロックを呼び出し、その結果の値を使用します。
+ * ブロックが与えられていない場合、[[c:IndexError]] が発生します。
+
+@param indexes 取得したい要素のインデックスを指定します。
+
+@raise IndexError ブロックが与えられてない時に、範囲外のインデックスを引数で指定すると発生します。
+
+#@samplecode 例
+ary = ["a", "b", "c"]
+
+ary.fetch_values(0, 2)  # => ["a", "c"]
+ary.fetch_values(-1, 1) # => ["c", "b"]
+ary.fetch_values(0, 10) # => index 10 outside of array bounds: -3...3 (IndexError)
+ary.fetch_values(0, 10) { |i| i.to_s } # => ["a", "10"]
+#@end
+
+@see [[m:Array#values_at]], [[m:Array#fetch]]
+#@end
+
 --- fill(val)            -> self
 --- fill {|index| ... }  -> self
 
@@ -1488,13 +1517,9 @@ p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
 --- none?{|obj| ... }   -> bool
 --- none?(pattern)      -> bool
 
-ブロックを指定しない場合は、 配列のすべての
-要素が偽であれば真を返します。そうでなければ偽を返します。
+すべての要素が偽である場合に true を返します。真である要素があれば、ただちに false を返します。
 
-ブロックを指定した場合は、配列のすべての要素を
-ブロックで評価した結果が、すべて偽であれば真を返します。
-そうでなければ偽を返します。
-
+ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果が偽である場合に true を返します。ブロックが真を返した時点で、ただちに false を返します。
 要素の数が 0 である配列に対しては true を返します。
 
 @param pattern ブロックの代わりに各要素に対して pattern === item を評価します。
@@ -1873,7 +1898,10 @@ a                  #=> [ "a", "b", "c" ]
 --- sort {|a, b| ... }  -> Array
 --- sort! {|a, b| ... } -> self
 
-配列の内容をソートします。要素同士の比較は <=> 演算子を使って行います。sort はソートされた配列を生成して返します。
+全ての要素を昇順にソートします。
+要素同士の比較は <=> 演算子を使って行います。
+
+sort は self を変更せず、ソートされた配列を生成して返します。
 sort! は self を破壊的にソートし、self を返します。
 
 ブロックとともに呼び出された時には、要素同士の比較をブロックを用いて行います。
@@ -2056,13 +2084,21 @@ p [].transpose
 
 p [1,2,3].transpose
 
+#@since 3.4
+# => -:1:in 'transpose': cannot convert Fixnum into Array (TypeError)
+#@else
 # => -:1:in `transpose': cannot convert Fixnum into Array (TypeError)
+#@end
 #       from -:1
 
 p [[1,2],
    [3,4,5],
    [6,7]].transpose
+#@since 3.4
+# => -:3:in 'transpose': element size differ (3 should be 2) (IndexError)
+#@else
 # => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
+#@end
 #@end
 
 --- uniq     -> Array
@@ -2256,6 +2292,14 @@ p a.sample        #=>  9
 p a.sample        #=> 10
 p a.sample(3)     #=> [1, 9, 3]
 p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#@end
+
+random [[c:SecureRandom]] などの乱数生成器を渡すことができます。
+
+#@samplecode 例
+require 'securerandom'
+a = (1..10).to_a
+p a.sample(random: SecureRandom)  #=>  2
 #@end
 
 --- cycle(n=nil) {|obj| block } -> nil

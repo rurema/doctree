@@ -99,7 +99,7 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 #@end
 
 #@#noexample 要約の例を参照
-@see  [[m:Thread::Queue#push]]
+@see [[m:Thread::Queue#push]]
 #@else
 キューのサイズが [[m:SizedQueue#max]] に達している場合は、
 キューのサイズが [[m:SizedQueue#max]] より小さくなるまで他のスレッドに実行を譲ります。
@@ -108,7 +108,7 @@ non_block が真でなければ、キューのサイズが [[m:Thread::SizedQueu
 @param obj キューに追加したいオブジェクトを指定します。
 
 #@#noexample 要約の例を参照
-@see  [[m:Queue#push]]
+@see [[m:Queue#push]]
 #@end
 
 --- pop(non_block = false)   -> object

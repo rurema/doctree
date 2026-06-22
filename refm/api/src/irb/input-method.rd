@@ -107,7 +107,6 @@ irb が入力を扱うためのサブライブラリです。
 読み込んだファイルの文字エンコーディングを返します。
 
 = class IRB::ReadlineInputMethod < IRB::InputMethod
-
 include Readline
 
 readline を用いた標準入力からの入力を表すクラスです。ライブラリ内部で使
