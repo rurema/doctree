@@ -2444,6 +2444,7 @@ rescue
 #@else
   raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
 #@end
+end
 #@end
 
 引数を渡した場合は、例外メッセージ message を持った error_type の示す例外(省略時 RuntimeError)を
