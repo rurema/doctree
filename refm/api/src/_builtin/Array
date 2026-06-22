@@ -2084,13 +2084,21 @@ p [].transpose
 
 p [1,2,3].transpose
 
+#@since 3.4
+# => -:1:in 'transpose': cannot convert Fixnum into Array (TypeError)
+#@else
 # => -:1:in `transpose': cannot convert Fixnum into Array (TypeError)
+#@end
 #       from -:1
 
 p [[1,2],
    [3,4,5],
    [6,7]].transpose
+#@since 3.4
+# => -:3:in 'transpose': element size differ (3 should be 2) (IndexError)
+#@else
 # => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
+#@end
 #@end
 
 --- uniq     -> Array

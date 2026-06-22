@@ -5,7 +5,11 @@
 例:
 
   bar
+#@since 3.4
+  # => NameError: undefined local variable or method 'bar' for main:Object
+#@else
   # => NameError: undefined local variable or method `bar' for main:Object
+#@end
 
 == Class Methods
 
@@ -42,7 +46,11 @@
   begin
     foobar
   rescue NameError => err
+#@since 3.4
+    p err       # => #<NameError: undefined local variable or method 'foobar' for main:Object>
+#@else
     p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
+#@end
     p err.name  # => :foobar
   end
 
@@ -55,8 +63,13 @@
   begin
     foobar
   rescue NameError => err
+#@since 3.4
+    p err       # => #<NameError: undefined local variable or method 'foobar' for main:Object>
+    p err.to_s  # => "undefined local variable or method 'foobar' for main:Object"
+#@else
     p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
     p err.to_s  # => "undefined local variable or method `foobar' for main:Object"
+#@end
   end
 
 #@since 2.3.0

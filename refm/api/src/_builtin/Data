@@ -162,10 +162,17 @@ Point.new に渡した位置引数の数が多い場合(上から2番目)のみ 
 #@samplecode 例
 Point = Data.define(:x, :y)
 
+#@since 3.4
+Point.new(1)                 # => in 'initialize': missing keyword: :y (ArgumentError)
+Point.new(1, 2, 3)           # => in 'new': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
+Point.new(x: 1)              # => in 'initialize': missing keyword: :y (ArgumentError)
+Point.new(x: 1, y: 2, z: 3)  # => in 'initialize': unknown keyword: :z (ArgumentError)
+#@else
 Point.new(1)                 # => in `initialize': missing keyword: :y (ArgumentError)
 Point.new(1, 2, 3)           # => in `new': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
 Point.new(x: 1)              # => in `initialize': missing keyword: :y (ArgumentError)
 Point.new(x: 1, y: 2, z: 3)  # => in `initialize': unknown keyword: :z (ArgumentError)
+#@end
 #@end
 
 下の例のように、initialize メソッドをオーバーライドすることで new のオプション引数を実現できます。
