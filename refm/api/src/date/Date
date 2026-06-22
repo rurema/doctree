@@ -786,8 +786,8 @@ GNU 版にあるような幅指定などもできます。
 --- thursday? -> bool
 木曜日なら真を返します。
 
---- to_date -> Date
-対応する [[c:Date]] オブジェクトを返します。
+--- to_date -> self
+self を返します。
 
 --- to_datetime -> DateTime
 対応する [[c:DateTime]] オブジェクトを返します。
@@ -877,5 +877,5 @@ end
 --- to_datetime -> DateTime
 対応する [[c:DateTime]] オブジェクトを返します。
 
---- to_time -> Time
-対応する [[c:Time]] オブジェクトを返します。
+--- to_time -> self
+self を返します。
