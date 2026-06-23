@@ -66,6 +66,13 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 他の Ractor から [[m:Ractor#send]] で送られたメッセージを受信します。
 #@end
 
+#@until 4.0
+--- receive_if {|msg| ... } -> object
+
+このメソッドを呼び出した Ractor が受信したメッセージのうち、
+ブロックの評価結果が真になる最初のメッセージを受信して返します。
+#@end
+
 --- select(*ports)
 #@todo
 
@@ -82,6 +89,16 @@ obj が shareable である場合、true を返します。
 格納した値を返します。
 
 @param key Ractor-local storage のキーを指定します。
+
+#@until 4.0
+--- yield(obj, move: false) -> object
+
+現在の Ractor の outgoing port に obj を送信します。
+別の Ractor が [[m:Ractor#take]] でこのメッセージを受信するまでブロックします。
+
+@param obj 送信するオブジェクトを指定します。
+@param move obj を「移動」する場合は true を指定します。
+#@end
 
 == Instance Methods
 
@@ -135,6 +152,14 @@ self にメッセージを送信します。
 
 #@since 4.0
 @see [[m:Ractor::Port#send]]
+#@end
+
+#@until 4.0
+--- take -> object
+
+self の outgoing port からメッセージを受信します。
+self が [[m:Ractor.yield]] で送ったメッセージ、または self のブロックが返した値を受け取ります。
+メッセージが届くまでブロックします。
 #@end
 
 #@since 4.0
