@@ -646,8 +646,7 @@ begin式全体の評価値は、本体／rescue節／else節のうち
 
 [[ref:d:spec/def#class]]、[[ref:d:spec/def#module]]、[[ref:d:spec/def#method]]
 などの定義文では、それぞれ
-begin なしで rescue, ensure 節を定義でき、これにより例外を処理することが
-できます。
+begin なしで rescue, ensure 節を定義でき、これにより例外を処理できます。
 
 ==== rescue修飾子
 
