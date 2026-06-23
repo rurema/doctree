@@ -75,7 +75,7 @@ fiber.kill
   * [[c:Range]]
     * 新規メソッド
       * beginless rangeに対しても動作する Range#reverse_each が追加されました。[[feature:18515]]
-      * Range#reverse_each は endless range に対しては例外を投げます。 [[feature:18551]]
+      * Range#reverse_each は endless range に対しては TypeError を投げます。 [[feature:18551]]
       * 2つの範囲が重複しているかどうかを確認する Range#overlap? が追加されました。[[feature:19839]]
 
   * [[c:Refinement]]
@@ -87,7 +87,7 @@ fiber.kill
 
   * [[c:String]]
     * 変更されたメソッド
-      * [[m:String#unpack]]が不明なディレクティブに対して例外を投げるようになりました。[[bug:19150]]
+      * [[m:String#unpack]]が不明なディレクティブに対して ArgumentError を投げるようになりました。[[bug:19150]]
       * [[m:String#bytesplice]]がコピー元の文字列のインデックス/長さまたはrangeを引数に取れるようになりました。これによりコピー元の部分範囲を指定できるようになりました。[[feature:19314]]
 
   * [[c:Thread::Queue]]
@@ -336,6 +336,7 @@ default gems と bundled gems の詳細については Logger の GitHub Release
     * Linux perfでのプロファイリングを容易にするために --yjit-perf が追加されました。
     * --yjit-trace-exits は、--yjit-trace-exits-sample-rate=N を使用したサンプリングをサポートします。
   * より網羅的なテストと複数のバグ修正
+  * --yjit-stats=quiet が追加され、終了時に統計を出力しないようにできます。
 
 === MJIT
   * MJIT は削除されました。
