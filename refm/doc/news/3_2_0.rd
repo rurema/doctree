@@ -54,7 +54,7 @@ foo1::BAR1, foo2::BAR2 = baz1, baz2
 
   * Find patternが実験的な機能ではなくなりました。 [[feature:18585]]
 
-  * 可変長パラメータ (*args など) を受け取るメソッドで、 foo(*args) を通してキーワード引数を委譲したい場合は、 ruby2_keywords でマークしなければならなくなりました。言い換えれば, *args などを用いてキーワードを引数を例外を起こさずに委譲したい全てのメソッドは ruby2_keywords によってマークする必要があると言うことです。これによって Ruby 3 以降のバージョンへ委譲を用いている処理を有するライブラリを簡単に対応できるようになります。以前はメソッドが *args を受け取る場合、ruby2_keywords フラグが保持されていました。しかし、これには一貫性がないと言う不具合がありました。今まではキーワード引数を複数のメソッドにまたがって委譲する時に、 ruby2_keywords を正しく使っているかを確認するために、全てに対して puts nil, caller, nil を追加していましたが、この変更によりテストを実行するときに ruby2_keywords が必要であるにもかかわらず使われていないものを見つける良い手段となります。 [[bug:18625]] [[bug:16466]]
+  * 可変長パラメータ (*args など) を受け取るメソッドで、 foo(*args) を通してキーワード引数を委譲したい場合は、 ruby2_keywords でマークしなければならなくなりました。言い換えれば, *args などを用いてキーワード引数を例外を起こさずに委譲したい全てのメソッドは ruby2_keywords によってマークする必要があると言うことです。これによって Ruby 3 以降のバージョンへ委譲を用いている処理を有するライブラリを簡単に対応できるようになります。以前はメソッドが *args を受け取る場合、ruby2_keywords フラグが保持されていました。しかし、これには一貫性がないと言う不具合がありました。今まではキーワード引数を複数のメソッドにまたがって委譲する時に、 ruby2_keywords を正しく使っているかを確認するために、全てに対して puts nil, caller, nil を追加していましたが、この変更によりテストを実行するときに ruby2_keywords が必要であるにもかかわらず使われていないものを見つける良い手段となります。 [[bug:18625]] [[bug:16466]]
 
 #@samplecode
 def target(**kw)
@@ -134,7 +134,7 @@ nil.singleton_class.attached_object        #=> TypeError: `NilClass' is not a si
 
   * Data
     * 新規クラス
-      * 単純かつ不変な値オブジェクトを表現するための新たなコアクラス Data が追加されました。 Data は Struct によく似ており、部分的に実装を共有しています。しかし、より限定的かつ少ないAPIとなっています。 [feature:16122]
+      * 単純かつ不変な値オブジェクトを表現するための新たなコアクラス Data が追加されました。 Data は Struct によく似ており、部分的に実装を共有しています。しかし、より限定的かつ少ないAPIとなっています。 [[feature:16122]]
 
 #@samplecode Data
 Measure = Data.define(:amount, :unit)
@@ -277,7 +277,7 @@ root.tokens.map{_1[2]}.join # => "x = 1 + 2"
 #@samplecode Struct.new
 Post = Struct.new(:id, :name)
 Post.new(1, "hello") #=> #<struct Post id=1, name="hello">
-# Ruby 3.2から以下のコードも keyword_init :true をつけなくても動作する
+# Ruby 3.2から以下のコードも keyword_init: true をつけなくても動作する
 Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
 #@end
 
@@ -312,7 +312,7 @@ Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
   * UnboundMethod
     * 変更されたメソッド
       * UnboundMethod#== は、実際のメソッドが同じであれば true を返します。例えば、 String.instance_method(:object_id) == Array.instance_method(:object_id) は true を返します。 [[feature:18798]]
-      * UnboundMethod#inspect は instance_method のレシーバを表示しません。例えば、 String.instance_method(:object_id).inspect は "#<UnboundMethod： Kernel#object_id()>" (これが "#<UnboundMethod： String(Kernel)#object_id()>") でした。
+      * UnboundMethod#inspect は instance_method のレシーバを表示しません。例えば、 String.instance_method(:object_id).inspect は "#<UnboundMethod: Kernel#object_id()>" (これが "#<UnboundMethod: String(Kernel)#object_id()>") でした。
 
   * GC
     * 変更されたメソッド
@@ -496,7 +496,7 @@ default gems と bundled gems の詳細については GitHub Releases of Logger
 
 === 拡張ライブラリのソースコードの非互換
 
-  * RandomのサブクラスであるPRNGを提供する拡張ライブラリは、更新が必要です。詳細は PRNG update([[url:]]) を参照してください。 [[bug:19100]]
+  * RandomのサブクラスであるPRNGを提供する拡張ライブラリは、更新が必要です。詳細は PRNG update を参照してください。 [[bug:19100]]
 
 === エラー表示
 
@@ -540,7 +540,7 @@ $ ./configure --with-libffi-source-dir=/path/to/libffi-3.4.4
 === C API の追加
 
   * VALUE rb_hash_new_capa(long capa) が追加され、希望の容量を持つハッシュが作成されました。
-  * スレッドのスケジューリングに rb_internal_thread_add_event_hook と rb_internal_thread_add_event_hook が追加されました。
+  * スレッドのスケジューリングに rb_internal_thread_add_event_hook と rb_internal_thread_remove_event_hook が追加されました。
   * 以下のイベントが追加されました。
     * RUBY_INTERNAL_THREAD_EVENT_STARTED
     * RUBY_INTERNAL_THREAD_EVENT_READY
@@ -592,7 +592,7 @@ $ ./configure --with-libffi-source-dir=/path/to/libffi-3.4.4
   * MJIT コンパイラは MJIT ワーカーによって呼ばれた native スレッドの代わりに fork されたプロセスによって実行されるようになりました。 [[feature:18968]]
     * そのため、Microsoft Visual Studio (MSWIN) はサポート対象外となりました。
   * MinGW はサポート対象外となりました。[[feature:18824]]
-  * --mjit-min-calls は --mjit-call-threshold` にリネームされました。
+  * --mjit-min-calls は --mjit-call-threshold にリネームされました。
   * --mjit-max-cache のデフォルト値は 10000 から 100 に戻されました。
 
 #@end
