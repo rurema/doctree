@@ -33,7 +33,8 @@ Port を作成した Ractor 以外で close を呼ぶことはできません。
 Port が閉じられている場合、true を返します。
 
 --- initialize_copy(p1)
-#@todo
+
+Ractor::Port は複製できません。dup や clone を呼び出すと例外が発生します。
 
 --- receive -> object
 
