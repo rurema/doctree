@@ -197,7 +197,7 @@ weight.amount = 40                           #=> NoMethodError: undefined method
     * キャッシュベースの最適化が導入されました。Regexpマッチングの多く（全てではない）が線形時間になり、正規表現サービス拒否（ReDoS）脆弱性を防ぐことができるようになりました。 [[feature:19104]]
     * 新規メソッド
       * Regexp.linear_time? が導入されました。 [[feature:19194]]
-      * Regexp.timeout= が追加されました。他にも Regexp.new に time キーワード引数が新しくサポートされました。 [[feature:17837]]
+      * Regexp.timeout= が追加されました。他にも Regexp.new に timeout キーワード引数が新しくサポートされました。 [[feature:17837]]
     * 変更されたメソッド
       * Regexp.newでは、正規表現フラグを整数値だけでなく、文字列として渡すことができるようになりました。 未知のフラグは ArgumentError を発生させます。それ以外の場合、true, false, nil, Integer 以外のものは警告されます。 [[feature:18788]]
 
@@ -347,7 +347,7 @@ Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
       * エスケープが必要な文字列がない場合、String オブジェクトを確保しません。
       * 引数が String の場合、#to_s を呼ばずにスキップします。
       * ERB::Escape.html_escape が ERB::Util.html_escape のエイリアスになりました。そのため、 Rails にモンキーパッチする必要がなくなります。
-    * ERB::Util.url_encode が CGI.escapeURIComponent よりも高速化されました。
+    * ERB::Util.url_encode が CGI.escapeURIComponent を用いて高速化されました。
     * erbコマンドから -S オプションが削除されました。
 
   * FileUtils
@@ -524,9 +524,9 @@ $ ./configure --with-libffi-source-dir=/path/to/libffi-3.4.4
 
   * [[feature:18571]]
 
-  * CGI::Cookie の Cookie name/path/domain 文字をチェックします。 [[CVE-2021-33621]]
+  * CGI::Cookie の Cookie name/path/domain 文字をチェックします。 [[url:https://www.ruby-lang.org/en/news/2022/11/22/http-response-splitting-in-cgi-cve-2021-33621/]]
 
-  * URI.parse が host に nil の代わりに空の文字列を返します。 [[sec-156615]]
+  * URI.parse が host に nil の代わりに空の文字列を返します。 [[url:https://hackerone.com/reports/156615]]
 
 == C API の変更
 
