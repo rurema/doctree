@@ -54,7 +54,7 @@ foo1::BAR1, foo2::BAR2 = baz1, baz2
 
   * Find patternが実験的な機能ではなくなりました。 [[feature:18585]]
 
-  * 可変長パラメータ (*args など) を受け取るメソッドで、 foo(*args) を通してキーワード引数を委譲したい場合は、 ruby2_keywords でマークしなければならなくなりました。言い換えれば, *args などを用いてキーワード引数を例外を起こさずに委譲したい全てのメソッドは ruby2_keywords によってマークする必要があると言うことです。これによって Ruby 3 以降のバージョンへ委譲を用いている処理を有するライブラリを簡単に対応できるようになります。以前はメソッドが *args を受け取る場合、ruby2_keywords フラグが保持されていました。しかし、これには一貫性がないと言う不具合がありました。今まではキーワード引数を複数のメソッドにまたがって委譲する時に、 ruby2_keywords を正しく使っているかを確認するために、全てに対して puts nil, caller, nil を追加していましたが、この変更によりテストを実行するときに ruby2_keywords が必要であるにもかかわらず使われていないものを見つける良い手段となります。 [[bug:18625]] [[bug:16466]]
+  * 可変長パラメータ (*args など) を受け取るメソッドで、 foo(*args) を通してキーワード引数を委譲したい場合は、 ruby2_keywords でマークしなければならなくなりました。言い換えれば、*args などを用いてキーワード引数を例外を起こさずに委譲したい全てのメソッドは ruby2_keywords によってマークする必要があると言うことです。これによって Ruby 3 以降のバージョンへ委譲を用いている処理を有するライブラリを簡単に対応できるようになります。以前はメソッドが *args を受け取る場合、ruby2_keywords フラグが保持されていました。しかし、これには一貫性がないと言う不具合がありました。今まではキーワード引数を複数のメソッドにまたがって委譲する時に、 ruby2_keywords を正しく使っているかを確認するために、全てに対して puts nil, caller, nil を追加していましたが、この変更によりテストを実行するときに ruby2_keywords が必要であるにもかかわらず使われていないものを見つける良い手段となります。 [[bug:18625]] [[bug:16466]]
 
 #@samplecode
 def target(**kw)
@@ -312,7 +312,7 @@ Post.new(id: 1, name: "hello") #=> #<struct Post id=1, name="hello">
   * UnboundMethod
     * 変更されたメソッド
       * UnboundMethod#== は、実際のメソッドが同じであれば true を返します。例えば、 String.instance_method(:object_id) == Array.instance_method(:object_id) は true を返します。 [[feature:18798]]
-      * UnboundMethod#inspect は instance_method のレシーバを表示しません。例えば、 String.instance_method(:object_id).inspect は "#<UnboundMethod: Kernel#object_id()>" (これが "#<UnboundMethod: String(Kernel)#object_id()>") でした。
+      * UnboundMethod#inspect は instance_method のレシーバを表示しません。例えば、 String.instance_method(:object_id).inspect は "#<UnboundMethod: Kernel#object_id()>" を返します(以前は "#<UnboundMethod: String(Kernel)#object_id()>" でした)。
 
   * GC
     * 変更されたメソッド
@@ -582,7 +582,7 @@ $ ./configure --with-libffi-source-dir=/path/to/libffi-3.4.4
   * リリースビルドから RubyVM::YJIT.runtime_stats によって統計の大部分を得られるようになりました。
     * ruby コマンドに --yjit-stats を付与することで単純に表示することができます (ただしランタイムのオーバーヘッドは生じます)
   * YJIT へ object shapes による最適化が行われました。 [[feature:18776]]
-    * 定数を無効化する粒度を細かくすることで、新しい定数を定義する際に無効化するコードの量を少なくしました。 [[feature:18589]]
+  * 定数を無効化する粒度を細かくすることで、新しい定数を定義する際に無効化するコードの量を少なくしました。 [[feature:18589]]
   * --yjit-exec-mem-size のデフォルト値は 64 (MiB) と変更されました。
   * --yjit-call-threshold のデフォルト値は 30 と変更されました。
 
