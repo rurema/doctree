@@ -1,6 +1,4 @@
-#@since 3.0
 = class Ractor::MovedObject < BasicObject
-#@end
 
 [[m:Ractor#send]] によって他の Ractor に移動（move）されたオブジェクトを置き換えるオブジェクトのクラスです。
 

@@ -1,6 +1,4 @@
-#@since 4.0
 = class Ractor::Port < Object
-#@end
 
 Ractor 間でメッセージを交換するための仕組みを提供するクラスです。
 
