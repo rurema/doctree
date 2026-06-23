@@ -83,7 +83,7 @@ fiber.kill
       * Refinement#refined_class が #target に名前変更されました。 Refinement#refined_class は非推奨となり、Ruby 3.4 で削除予定です。[[feature:19714]]
 
   * [[c:Regexp]]
-    * Ruby3.2で導入されたReDos対策のメモ化最適化が先読み・後読みやアトミックグループをサポートするようになり、これらの拡張を含む正規表現も入力文字列の長さに対して線形時間で実行できるようになりました。ただし、これらの拡張にはキャプチャを含めることはできず、ネストもできません。[[feature:19725]]
+    * Ruby 3.2で導入されたReDoS対策のメモ化最適化が先読み・後読みやアトミックグループをサポートするようになり、これらの拡張を含む正規表現も入力文字列の長さに対して線形時間で実行できるようになりました。ただし、これらの拡張にはキャプチャを含めることはできず、ネストもできません。[[feature:19725]]
 
   * [[c:String]]
     * 変更されたメソッド
@@ -203,7 +203,7 @@ Time.new('2023-12-20')
     * yaml 0.3.0
     * zlib 3.1.0
 
-  * 以下の gem が defalut gems から bundled gems に変更されました。
+  * 以下の gem が default gems から bundled gems に変更されました。
     * racc 1.7.3
 
   * 以下の bundled gemsが更新されました。
@@ -286,7 +286,7 @@ default gems と bundled gems の詳細については Logger の GitHub Release
     * rb_io_path(VALUE io)
       * io のパスを取得するために追加されました。
     * rb_io_closed_p(VALUE io)
-      * io の開始または終了を取得します。
+      * io が開いているか閉じているかを取得します。
     * rb_io_mode(VALUE io)
       * io のモードを取得します。
     * rb_io_open_descriptor()
