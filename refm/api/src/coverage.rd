@@ -148,7 +148,7 @@ pp Coverage.result
 
 ==== 全指定の all
 
-このモードでは、全てのカレッジモードを同時に実行することができます。
+このモードでは、全てのカレッジモードを同時に実行できます。
 
 #@since 2.6.0
 ただし、oneshot_linesカバレッジモードは実行されません。これは、linesカバレッジモードにより各行の実行回数が計測され、行が実行されたかどうかわかるためです。
@@ -271,7 +271,7 @@ p Coverage.result  # coverage measurement is not enabled (RuntimeError)
 
 #@since 2.6.0
 Ruby 2.6 以降では、オプションを指定できます。
-Coverage.result(clear: true, stop: false) と指定することで、続けて新しく実行された行だけを記録することができます。
+Coverage.result(clear: true, stop: false) と指定することで、続けて新しく実行された行だけを記録できます。
 
 #@samplecode
 require "coverage"

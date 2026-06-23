@@ -65,8 +65,7 @@ include Net::HTTPExceptions
 
 HTTP ステータスコード 5xx を受け取ったという例外です。
 
-サーバがエラーを起こしているなど、サーバ側で処理を完了することがで
-きないことを表しています。
+サーバがエラーを起こしているなど、サーバ側で処理を完了できないことを表しています。
 
 = class Net::HTTPBadResponse < StandardError
 HTTP のレスポンスが不正であった場合に発生する例外です。

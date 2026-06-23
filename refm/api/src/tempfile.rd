@@ -18,7 +18,7 @@ require delegate
  * Tempfile オブジェクトは[[c:File]]クラスへのDelegatorとして定義されており、[[c:File]]クラスのオブジェクトと同じように使うことができます。
  * Tempfile#close(true) により、作成したテンポラリファイルは削除されます。
  * スクリプトが終了するときにも削除されます。
- * [[m:Tempfile#open]]により、テンポラリファイルを再オープンすることができます。
+ * [[m:Tempfile#open]]により、テンポラリファイルを再オープンできます。
  * テンポラリファイルのモードは 0600 です。
 
 == Class Methods

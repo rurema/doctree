@@ -32,7 +32,7 @@ STDIN からの入力をパース→YAMLフォーマットで STDERR に出力
   parser.parse($stdin)
 
 [[c:Psych::Parser]] と [[c:Psych::TreeBuilder]] を組み合わせると
-YAML の AST を構築することができます。
+YAML の AST を構築できます。
 
 == Constants
 

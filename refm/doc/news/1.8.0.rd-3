@@ -2597,7 +2597,7 @@ ruby version 1.7 は開発版です。以下にあげる機能は将来削除さ
     _, foo, bar, baz = /(\w+?)\s+(\w+?)\s+(\w+)/.match("foo bar baz")
     p [foo, bar, baz]
 
-  とすることができます。
+  とできます。
 
 : ((<Math/Math.acos>))          [new]
 : ((<Math/Math.asin>))          [new]

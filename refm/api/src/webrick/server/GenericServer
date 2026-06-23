@@ -27,7 +27,7 @@ GenericServer オブジェクトを生成して返します。
   サーバのタイプを表すクラスを指定します。指定するクラスはブロックを取るstartという名前のクラスメソッドを持つ必要があります。サーバは、startメソッドの中でクライアントからの応答待ちのループ処理を実行します。WEBrickは呼ばれたスレッド内で実行する[[c:WEBrick::SimpleServer]] と、子プロセスをforkしてデーモンとして実行する[[c:WEBrick::Daemon]] を提供します。また、[[c:Thread]]を指定するとサーバはスレッド内で実行されるため[[m:WEBrick::GenericServer#start]]は呼び出し直後に呼び出し元に制御を戻します。
 : :Logger
   ログをとるオブジェクト(Logger オブジェクト)を指定します。通常は [[c:WEBrick::Log]] のインスタンスを指定します。
-  WEBrick::Log.new(log_file, level) のように出力先とログレベルを設定することができます。
+  WEBrick::Log.new(log_file, level) のように出力先とログレベルを設定できます。
   Logger オブジェクトに定義されているべきメソッドに関しては [[c:WEBrick::Log]] を参照して下さい。
 : :ServerSoftware
   サーバソフトウェア名を文字列で指定します。[[c:WEBrick::HTTPServer]] では Server ヘッダにこの値が出力されます。

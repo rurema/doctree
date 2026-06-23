@@ -9,7 +9,7 @@ UDP/IPデータグラム型ソケットのクラス。
 新しい UDP ソケットを返します。
 
 address_family には Socket::AF_INET のような整数、:INET のような
-シンボル、"INET" のような文字列を指定することができます。
+シンボル、"INET" のような文字列を指定できます。
 
   require 'socket'
 

@@ -264,7 +264,7 @@ foo,*bar = 1, 2, 3      # foo = 1; bar = [2, 3]
 (foo, bar), baz = [1, 2], 3       # foo = 1; bar = 2; baz = 3
 #@end
 
-特殊な形式の代入式も多重代入にすることができます。
+特殊な形式の代入式も多重代入にできます。
 
 #@samplecode
 class C
