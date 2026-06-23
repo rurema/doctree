@@ -66,7 +66,7 @@ fiber.kill
 
   * [[c:Process]]
     * 新規メソッド
-      * [[c:RubyVM]]にアプリケーションの起動が終了したこと及び、アプリケーションの最適化に適したタイミングであることを通知する Process.warmup が追加されました。このメソッドが行う最適化は実装依存であり、将来予告なく変更される可能性があります。[[feature:18885]]
+      * Ruby 仮想マシン (VM) にアプリケーションの起動が終了したこと及び、アプリケーションの最適化に適したタイミングであることを通知する Process.warmup が追加されました。このメソッドが行う最適化は実装依存であり、将来予告なく変更される可能性があります。[[feature:18885]]
 
   * [[c:Process::Status]]
     * 変更されたメソッド
@@ -75,12 +75,12 @@ fiber.kill
   * [[c:Range]]
     * 新規メソッド
       * beginless rangeに対しても動作する Range#reverse_each が追加されました。[[feature:18515]]
-      * Range#reverse_each は endless range に対しては例外を投げます[[feature:18551]]
+      * Range#reverse_each は endless range に対しては例外を投げます。 [[feature:18551]]
       * 2つの範囲が重複しているかどうかを確認する Range#overlap? が追加されました。[[feature:19839]]
 
   * [[c:Refinement]]
     * 変更されたメソッド
-      * Refinement#refined_class が #target に名前変更されました。 Refinement#refined_class は非推奨となり、Ruby 3.4 で削除予定です。[[feature:19714]]
+      * Refinement#refined_class の代替として Refinement#target が追加されました。 Refinement#refined_class は非推奨となり、Ruby 3.4 で削除予定です。[[feature:19714]]
 
   * [[c:Regexp]]
     * Ruby 3.2で導入されたReDoS対策のメモ化最適化が先読み・後読みやアトミックグループをサポートするようになり、これらの拡張を含む正規表現も入力文字列の長さに対して線形時間で実行できるようになりました。ただし、これらの拡張にはキャプチャを含めることはできず、ネストもできません。[[feature:19725]]
@@ -275,12 +275,12 @@ default gems と bundled gems の詳細については Logger の GitHub Release
       * rb_internal_thread_specific_key_create()
       * rb_internal_thread_specific_get()
       * rb_internal_thread_specific_set()
-    * rb_profile_thread_frames()
-      * 特定のスレッドからフレームを取得するために追加されました。[[feature:10602]]
-    * rb_data_define()
-      * Dataを定義するために追加されました。[[feature:19757]]
-    * rb_ext_resolve_symbol()
-      * 拡張ライブラリから関数を検索するために追加されました。[[feature:20005]]
+  * rb_profile_thread_frames()
+    * 特定のスレッドからフレームを取得するために追加されました。[[feature:10602]]
+  * rb_data_define()
+    * Dataを定義するために追加されました。[[feature:19757]]
+  * rb_ext_resolve_symbol()
+    * 拡張ライブラリから関数を検索するために追加されました。[[feature:20005]]
   * IO関連アップデート:
     * rb_io_t の詳細は隠され、各メンバに非推奨の属性が追加されます。 [[feature:19057]]
     * rb_io_path(VALUE io)
@@ -304,14 +304,14 @@ default gems と bundled gems の詳細については Logger の GitHub Release
     * 古い世代のオブジェクトから参照された新しい世代のオブジェクトの世代変更を少し遅延することにより、 major GC の頻度が下がりました。[[feature:19678]]
     * 環境変数 RUBY_GC_HEAP_REMEMBERED_WB_UNPROTECTED_OBJECTS_LIMIT_RATIO が追加され、 WB unprotected object の数に起因する major GC の回数をチューニングできるようになりました。デフォルトは0.01(1%)に設定されています。これにより、 major GC の頻度が下がりました。[[feature:19571]]
     * ライトバリアが [[c:Time]] [[c:Enumerator]] [[c:MatchData]] [[c:Method]] [[c:File::Stat]] [[c:BigDecimal]] など多くのクラスに実装されました。これにより minor GC の収集時間と major GC の収集頻度が削減されました。
-    * [[c:Hash]] [[c:Time]] Thread::Backtrace [[c:Thread::Backtrace::Location]] [[c:File::Stat]] [[c:Method]] などほとんどの組み込みクラスで Variable Width Allocation(VBA) が使用されるようになりました。
+    * [[c:Hash]] [[c:Time]] Thread::Backtrace [[c:Thread::Backtrace::Location]] [[c:File::Stat]] [[c:Method]] などほとんどの組み込みクラスで Variable Width Allocation(VWA) が使用されるようになりました。
   * defined?(@ivar) が Object Shapes を使って最適化されるようになりました。
 
 === YJIT
   * 大幅なパフォーマンスの改善
     * * を使った引数のサポートが改善されました。
     * 仮想マシンのスタック操作のためにレジスタが使われるようになりました。
-    * オプション引数を持つ呼び出しで全ての組合せがコンパイルされます。例外ハンドラもコンパイルされます。
+    * オプション引数を持つより多くの呼び出しがコンパイルされます。例外ハンドラもコンパイルされます。
     * サポートされていない呼び出し方や分岐の数の多い呼出しでのインタプリタへのフォールバックが行なわれなくなりました。
     * Railsの #blank? や 特別化された #present? [[url:https://github.com/rails/rails/pull/49909]]などの単純なメソッドがインライン化されます。
     * Integer#*、Integer#!=、String#!=、String#getbyte、Kernel#block_given?、Kernel#is_a?、Kernel#instance_of?、および Module#=== が特別に最適化されます。
