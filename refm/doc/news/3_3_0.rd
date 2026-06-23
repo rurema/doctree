@@ -19,7 +19,9 @@
 
   * [[c:Dir]]
     * 新規メソッド
-      * Dir.for_fd Dir.fchdir Dir#chdir が追加されました。 [[feature:19347]]
+      * Dir.for_fd が追加されました。指定されたディレクトリファイルディスクリプタに対応する Dir オブジェクトを返します。 [[feature:19347]]
+      * Dir.fchdir が追加されました。指定されたディレクトリファイルディスクリプタが指すディレクトリにカレントディレクトリを変更します。 [[feature:19347]]
+      * Dir#chdir が追加されました。その Dir オブジェクトが指すディレクトリにカレントディレクトリを変更します。 [[feature:19347]]
 
   * [[c:Encoding]]
     * 削除されたメソッド
@@ -58,7 +60,7 @@ fiber.kill
 
   * [[c:ObjectSpace::WeakMap]]
     * 新規メソッド
-      * ObjectSpace::WeakMap#delete が導入されました。[[feature:19561]]
+      * weak map のエントリを積極的にクリアするために ObjectSpace::WeakMap#delete が導入されました。[[feature:19561]]
 
   * [[c:Proc]]
     * 変更されたメソッド
@@ -66,7 +68,7 @@ fiber.kill
 
   * [[c:Process]]
     * 新規メソッド
-      * Ruby 仮想マシン (VM) にアプリケーションの起動が終了したこと及び、アプリケーションの最適化に適したタイミングであることを通知する Process.warmup が追加されました。このメソッドが行う最適化は実装依存であり、将来予告なく変更される可能性があります。[[feature:18885]]
+      * Ruby 仮想マシン (VM) にアプリケーションの起動が終了したこと及び、アプリケーションの最適化に適したタイミングであることを通知する Process.warmup が追加されました。これは長時間稼働するアプリケーションで有用です。このメソッドが行う最適化は実装依存であり、将来予告なく変更される可能性があります。[[feature:18885]]
 
   * [[c:Process::Status]]
     * 変更されたメソッド
@@ -111,7 +113,12 @@ Time.new('2023-12-20')
     * rescue イベントが追加され、rescue節を開始するときに発火するフックを入れることができるようになりました。rescue イベントはRubyレベルで記述された rescue のみサポートします。 [[bug:19572]]
 
 == 標準添付ライブラリの更新(機能追加とバグ修正を除く)
-  * RubyGems と Bundler は将来リリースされる Ruby で bundled gems となる予定の gem が Gemfile または gemspec に存在しない状態で require された際に警告を行う機能が追加されました。この警告は bootsnap gem を使っている場合には 3.3.0 の時点では機能上の制限により出力されません。そのため、環境変数として DISABLE_BOOTSNAP=1 などを設定して、少なくとも1度はアプリケーションを実行することを推奨します。以下のライブラリが警告の対象となります。[[feature:19351]][[feature:19776]][[feature:19843]]
+  * RubyGems と Bundler は将来リリースされる Ruby で bundled gems となる予定の gem が
+    Gemfile または gemspec に存在しない状態で require された際に警告を行う機能が
+    追加されました。この警告は bootsnap gem を使っている場合には 3.3.0 の時点では
+    機能上の制限により出力されません。そのため、環境変数として DISABLE_BOOTSNAP=1
+    などを設定して、少なくとも1度はアプリケーションを実行することを推奨します。
+    以下のライブラリが警告の対象となります。[[feature:19351]][[feature:19776]][[feature:19843]]
     * abbrev
     * base64
     * bigdecimal
@@ -245,13 +252,13 @@ default gems と bundled gems の詳細については Logger の GitHub Release
     * [[m:IO.write]]
   * [[m:Kernel.#lambda]]が非ラムダ式、非リテラルブロックが与えられた場合、Ruby 3.0 以降では deprecated category の警告を発していましたが、ArgumentError を発生させるようになりました。[[feature:19777]]
   * 環境変数 RUBY_GC_HEAP_INIT_SLOTS は非推奨となり削除されました。代わりに RUBY_GC_HEAP_{0,1,2,3,4}_INIT_SLOTS を利用してください。[[feature:19785]]
-  * ブロック内での引数なし it の呼び出しは非推奨となりました。 Ruby 3.4から最初のブロック引数を参照するようになります。 [[feature:18980]]
+  * 通常の引数を持たないブロック内での引数なし it の呼び出しは非推奨となりました。 Ruby 3.4から最初のブロック引数を参照するようになります。 [[feature:18980]]
   * NoMethodError が #inspect を使ってレシーバーの中身を表示せず、クラス名だけ表示するようになりました。[[feature:18285]]
 //emlist{
 ([1] * 100).nonexisting
 # undefined method `nonexisting' for an instance of Array (NoMethodError)
 //}
-  * ブロック内で匿名のメソッド引数を移譲することが禁止になりました。[[feature:19370]]
+  * 匿名引数を使うブロック内で匿名のメソッド引数を移譲することが禁止になりました。[[feature:19370]]
 
 == 標準添付ライブラリの互換性に関する変更
   * racc が bundled gems となりました。
@@ -294,7 +301,7 @@ default gems と bundled gems の詳細については Logger の GitHub Release
 
 == 実装の改善
 === パーサー
-  * Bison から Lrama LALRパーサジェネレータ([[url:https://github.com/ruby/lrama]]) に置き換えられました。[[feature:19637]]
+  * Bison から Lrama LALRパーサジェネレータ([[url:https://github.com/ruby/lrama]]) に置き換えられました。これにより、ソースコードから Ruby をビルドするために Bison をインストールする必要がなくなりました。また bison の互換性問題に悩まされることがなくなり、新機能を Lrama に実装するだけで利用できるようになります。[[feature:19637]]
     * 興味がある方は、The future vision of Ruby Parser([[url:https://rubykaigi.org/2023/presentations/spikeolaf.html]])の発表をご覧ください。
     * Lramaの内部パーサは、保守性のためにRaccによって生成されたLRパーサに置き換えられました。
   * パラメータ化ルール (?, *, +) がサポートされ、CRubyのparse.yで使用されます。
@@ -303,16 +310,16 @@ default gems と bundled gems の詳細については Logger の GitHub Release
   * Ruby 3.2 からの大幅なパフォーマンス向上
     * 古い世代のオブジェクトから参照された新しい世代のオブジェクトの世代変更を少し遅延することにより、 major GC の頻度が下がりました。[[feature:19678]]
     * 環境変数 RUBY_GC_HEAP_REMEMBERED_WB_UNPROTECTED_OBJECTS_LIMIT_RATIO が追加され、 WB unprotected object の数に起因する major GC の回数をチューニングできるようになりました。デフォルトは0.01(1%)に設定されています。これにより、 major GC の頻度が下がりました。[[feature:19571]]
-    * ライトバリアが [[c:Time]] [[c:Enumerator]] [[c:MatchData]] [[c:Method]] [[c:File::Stat]] [[c:BigDecimal]] など多くのクラスに実装されました。これにより minor GC の収集時間と major GC の収集頻度が削減されました。
-    * [[c:Hash]] [[c:Time]] Thread::Backtrace [[c:Thread::Backtrace::Location]] [[c:File::Stat]] [[c:Method]] などほとんどの組み込みクラスで Variable Width Allocation(VWA) が使用されるようになりました。
+    * ライトバリアが [[c:Time]], [[c:Enumerator]], [[c:MatchData]], [[c:Method]], [[c:File::Stat]], [[c:BigDecimal]] など多くのクラスに実装されました。これにより minor GC の収集時間と major GC の収集頻度が削減されました。
+    * [[c:Hash]], [[c:Time]], Thread::Backtrace, [[c:Thread::Backtrace::Location]], [[c:File::Stat]], [[c:Method]] などほとんどの組み込みクラスで Variable Width Allocation(VWA) が使用されるようになりました。これにより、これらのクラスの確保と解放が高速になり、メモリ使用量が減少し、ヒープの断片化が低減されます。
   * defined?(@ivar) が Object Shapes を使って最適化されるようになりました。
 
 === YJIT
   * 大幅なパフォーマンスの改善
-    * * を使った引数のサポートが改善されました。
+    * splat 引数と rest 引数のサポートが改善されました。
     * 仮想マシンのスタック操作のためにレジスタが使われるようになりました。
     * オプション引数を持つより多くの呼び出しがコンパイルされます。例外ハンドラもコンパイルされます。
-    * サポートされていない呼び出し方や分岐の数の多い呼出しでのインタプリタへのフォールバックが行なわれなくなりました。
+    * サポートされていない呼び出し方や megamorphic な(多数のレシーバ型を持つ)呼び出し箇所でのインタプリタへのフォールバックが行なわれなくなりました。
     * Railsの #blank? や 特別化された #present? [[url:https://github.com/rails/rails/pull/49909]]などの単純なメソッドがインライン化されます。
     * Integer#*、Integer#!=、String#!=、String#getbyte、Kernel#block_given?、Kernel#is_a?、Kernel#instance_of?、および Module#=== が特別に最適化されます。
     * コンパイル速度はRuby 3.2よりわずかに速くなりました。
@@ -352,6 +359,7 @@ default gems と bundled gems の詳細については Logger の GitHub Release
 
 === M:Nスレッドスケジューラ
   * M:N スレッドスケジューラが導入されました。[[feature:19842]]
+    * 背景: Ruby 1.8 以前は M:1 スレッドスケジューラ（M個の Ruby スレッドを1個のネイティブスレッドで動かす方式。ユーザレベルスレッドやグリーンスレッドと呼ばれます）が使われていました。Ruby 1.9 以降は 1:1 スレッドスケジューラ（1個の Ruby スレッドに1個のネイティブスレッド）が使われています。M:1 は必要なネイティブスレッドが1個で済むため 1:1 より低リソースですが、全てのブロッキング操作でコンテキストスイッチをサポートするのが難しいため、1.9 からは 1:1 が採用されました。M:N スレッドスケジューラは M個の Ruby スレッドに対して N個（一般に小さい数）のネイティブスレッドを使います。M:1 と同様に Ruby スレッドと同数のネイティブスレッドを必要とせず、かつ 1:1 と同様にブロッキング操作も適切にサポートします。この M:N スレッドスケジューラは Go 言語の goroutine スケジューラを参考にしています。
     * M個のRuby スレッドを、N個のネイティブスレッド（OSスレッド）で管理するので、生成管理のコストを抑えることができるようになりました。
   * C拡張ライブラリの互換性に問題が生じる可能性があるため、メインRactorでのM:Nスレッドスケジューラはデフォルトでは無効にされています。
     * RUBY_MN_THREADS=1 と環境変数を設定することで、メインRactorでM:Nスレッドスケジューラを有効にします。
