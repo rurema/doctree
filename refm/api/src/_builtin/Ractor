@@ -55,9 +55,16 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 --- receive -> object
 --- recv -> object
 
+#@since 4.0
 このメソッドを呼び出した Ractor の default port からメッセージを受信します。
 
 @see [[m:Ractor::Port#receive]]
+#@else
+このメソッドを呼び出した Ractor が受信したメッセージを取り出して返します。
+メッセージが届くまでブロックします。
+
+他の Ractor から [[m:Ractor#send]] で送られたメッセージを受信します。
+#@end
 
 --- select(*ports)
 #@todo
@@ -117,11 +124,18 @@ self の名前を返します。
 --- <<(msg)
 --- send(msg)
 
+#@since 4.0
 Ractor の default port に対してメッセージを送信します。
+#@else
+self にメッセージを送信します。
+送られたメッセージは self が [[m:Ractor.receive]] で受信できます。
+#@end
 
 @param msg 送信するメッセージを指定します。
 
+#@since 4.0
 @see [[m:Ractor::Port#send]]
+#@end
 
 #@since 4.0
 --- unmonitor -> Ractor
