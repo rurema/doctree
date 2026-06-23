@@ -28,7 +28,7 @@ Port が閉じられる前に送信され、未受信のメッセージがある
 
 Port を作成した Ractor 以外で close を呼ぶことはできません。
 
---- closed?
+--- closed? -> bool
 
 Port が閉じられている場合、true を返します。
 

@@ -39,7 +39,7 @@ sym に対応するデータがなければ nil を返します。
 
 main Ractor（プログラムの実行が開始された Ractor）を返します。
 
---- main? -> Ractor
+--- main? -> bool
 
 このメソッドを呼びだした Ractor が main Ractor であるとき、true を返します。
 
