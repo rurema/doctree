@@ -298,7 +298,7 @@ C.instance_method(:bar).original_name # => :foo
 @see [[m:Method#original_name]]
 #@end
 
-#@if (version == "3.1.0")
+#@if (version == "3.1")
 --- public? -> bool
 
 self が public であるかどうかを返します。
