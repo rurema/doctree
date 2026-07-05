@@ -1,0 +1,9 @@
+---
+library: rinda/rinda
+---
+# class Rinda::RequestExpiredError < ThreadError
+
+rinda で take などのリクエストがタイムアウトしたことを
+意味する例外クラス。
+
+

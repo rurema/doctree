@@ -1,0 +1,141 @@
+---
+library: _builtin
+---
+# module Marshal
+
+Ruby オブジェクトをファイル(または文字列)に書き出したり、読み戻したり
+する機能を提供するモジュール。
+
+大部分のクラスのインスタンスを書き出す事ができますが、書き出しの不可能なクラスも存在します([m:Marshal?.dump] を参照)。
+
+ここで「マーシャルデータ」と言う用語は、[m:Marshal?.dump] が出力する文字列
+を指すものとします。
+
+## Module Functions
+
+### module_function def dump(obj, port, limit = -1) -> IO
+### module_function def dump(obj, limit = -1) -> String
+
+obj を指定された出力先に再帰的に出力します。
+
+ファイルに書き出せないオブジェクトをファイルに書き出そうとすると
+例外 [c:TypeError] が発生します。
+ファイルに書き出せないオブジェクトは以下の通りです。
+
+ - 名前のついてない [c:Class]/[c:Module] オブジェクト。(この場
+   合は、例外 [c:ArgumentError] が発生します。無名クラスについて
+   は、[m:Module.new] を参照。)
+ - システムがオブジェクトの状態を保持するもの。具体的には以下のイン
+   スタンス。[c:Dir], [c:File::Stat], [c:IO] とそのサブクラス
+   [c:File], [c:Socket] など。
+ - [c:MatchData], [c:Data], [c:Method], [c:UnboundMethod],
+   [c:Proc], [c:Thread], [c:ThreadGroup], [c:Continuation]
+   のインスタンス。
+ - 特異メソッドを定義したオブジェクト
+
+また、これらのオブジェクトを間接的に指すオブジェクトなども書き出せ
+ません。例えば、デフォルト値を求めるブロックを持った [c:Hash] は
+[c:Proc] を間接的に指していることになります。
+
+```ruby title="例"
+p Marshal.dump(Hash.new {})
+#@since 3.4
+# => -:1:in 'dump': cannot dump hash with default proc (TypeError)
+#@else
+# => -:1:in `dump': cannot dump hash with default proc (TypeError)
+#@end
+```
+
+マーシャルの動作を任意に定義することもできます。
+
+- **param** `obj` -- ダンプする対象のオブジェクトを指定します。
+
+- **param** `port` -- [c:IO] かそのサブクラスのインスタンスを指定します。
+
+- **param** `limit` -- 指定した場合、limit 段以上深くリンクしたオブジェクトを
+             ダンプできません。負の limit を指定すると深さチェックを行いません。
+             デフォルトは -1 です。
+
+- **return** -- port を省略すると、obj をダンプした [c:String] を返します。
+             port を指定すると port を返します。
+
+- **raise** `TypeError` -- ファイルに書き出せないオブジェクトをファイルに
+                 書きだそうとした場合に発生します。
+
+- **raise** `ArgumentError` -- 名前の付いていない [c:Class] や [c:Module]
+                     オブジェクトをダンプしようとした場合に発生します。
+
+- **raise** `ArgumentError` -- limit 段以上深くリンクしたオブジェクトをダンプしようと
+                     した場合に発生します。
+
+- **SEE** [m:Object#marshal_dump], [m:Object#marshal_load]
+
+#@since 3.1
+### module_function def load(port, proc = nil, options = {})      -> object
+### module_function def restore(port, proc = nil, options = {})   -> object
+#@else
+### module_function def load(port, proc = nil)      -> object
+### module_function def restore(port, proc = nil)   -> object
+#@end
+
+port からマーシャルデータを読み込んで、元のオブジェクトと同
+じ状態をもつオブジェクトを生成します。
+
+proc として手続きオブジェクトが与えられた場合には読み込んだ
+オブジェクトを引数にその手続きを呼び出します。
+
+#@since 3.1
+options の :freeze キーに真が指定された場合、読み込んだオブジェクトを freeze して返します。
+同一の文字列が freeze されているときオブジェクトは一つしか生まれないため、この指定によりメモリ使用効率が向上する場合があります。
+#@end
+
+```ruby title="例"
+str = Marshal.dump(["a", 1, 10 ** 10, 1.0, :foo])
+p Marshal.load(str, proc {|obj| p obj})
+
+# => "a"
+#    1
+#    10000000000
+#    1.0
+#    :foo
+#    ["a", 1, 10000000000, 1.0, :foo]
+#    ["a", 1, 10000000000, 1.0, :foo]
+```
+
+- **param** `port` -- [c:String] か [c:IO] (またはそのサブクラス)の
+            インスタンスを指定します。
+
+- **param** `proc` -- 手続きオブジェクト。[c:Proc]
+
+#@since 3.1
+- **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは以下の通りです。
+
+- **`:freeze`**:
+  真偽値を指定します。真を指定すると読み込んだオブジェクトを freeze して返します。
+  デフォルトは偽です。
+#@end
+
+- **raise** `TypeError` -- メジャーバージョンが異なるか、バージョンの大きな
+                 マーシャルデータを読み込んだ場合に発生します。
+
+## Constants
+
+### const MAJOR_VERSION -> Integer
+### const MINOR_VERSION -> Integer
+
+[m:Marshal?.dump] が出力するデータフォーマットのバージョン番号です。
+
+[m:Marshal?.load] は、メジャーバージョンが異なるか、バージョンの大きな
+マーシャルデータを読み込んだとき例外 [c:TypeError] を発生させます。
+
+マイナーバージョンが古いだけのフォーマットは読み込み可能ですが、
+[m:$VERBOSE] = true のときには警告メッセージが出力されます
+
+マーシャルされたデータのバージョン番号は以下のようにして取得できます。
+
+```ruby title="例"
+obj = Object.new
+major, minor = Marshal.dump(obj).unpack("cc")
+p [major, minor]
+# => [4, 8]
+```

@@ -1,0 +1,128 @@
+---
+library: rinda/tuplespace
+include:
+  - DRb::DRbUndumped
+---
+# class Rinda::TupleEntry
+
+タプルスペース内に含まれるタプルを管理するためのクラスです。
+タプルの有効期限を管理し、タプルのキャンセル操作ができます。
+
+[m:Rinda::TupleSpace#write] はこのオブジェクトを返し、
+それを利用してタプルを明示的にキャンセルできます。
+
+ただし、タプルスペースのあるプロセスがタプルを投入したプロセスと
+異なる場合、これを受け取る側はリモートオブジェクトによって
+このオブジェクトを参照します。そのためタプルスペースのプロセス側では
+参照切れによるGCが発生し、TupleEntryオブジェクトが消滅してしまうかもしれません。
+これを防ぐには何らかの仕掛けが必要でしょう。詳しくは [lib:drb] のドキュメントを
+参照してください。
+
+## Class Methods
+
+#@# Rinda::TupleSpace が内部的に呼び出す
+#@# --- new(ary, sec = nil)
+#@# #@todo
+#@# 
+#@# Creates a TupleEntry based on +ary+ with an optional renewer or
+#@# expiry time +sec+.
+#@# 
+#@# A renewer must implement the +renew+ method which returns a
+#@# Numeric, nil, or true to indicate when the tuple has expired.
+
+## Instance Methods
+
+### def [](key)
+タプルの key に対応する要素を返します。
+
+[m:Rinda::TupleEntry#value][key] を返します。
+
+- **param** `key` -- 要素を指定するキー
+
+- **SEE** [m:Rinda::TupleEntry#fetch]
+
+### def alive? -> bool
+タプルが有効である(期限切れでもなく、キャンセルされていない)ならば
+真を返します。
+
+- **SEE** [m:Rinda::TupleEntry#canceled?], [m:Rinda::TupleEntry#expired?]
+### def cancel -> ()
+タプルをキャンセルし、タプルスペースから取り除きます。
+
+すでにタプルスペースから取り除かれている場合には何もしません。
+
+- **SEE** [m:Rinda::TupleEntry#canceled?]
+
+### def canceled? -> bool
+
+タプルが既にキャンセルされているならば真を返します。
+
+- **SEE** [m:Rinda::TupleEntry#cancel]
+
+### def expired? -> bool
+タプルが既に期限切れになっているならば真を返します。
+
+- **SEE** [m:Rinda::TupleEntry#expires], @see [m:Rinda::TupleEntry#renew]
+### def expires -> Time
+タプルの期限切れの時刻を返します。
+
+有効期限を無限に指定した場合、この時刻は Time.at(2**31-1)、つまり
+Tue Jan 19 03:14:07 GMT Standard Time 2038 を返します。
+
+- **SEE** [m:Rinda::TupleEntry#expire]
+
+### def expires=(expires) 
+タプルの期限切れの時刻を指定します。
+
+- **param** `expires` -- 期限切れの時刻([c:Time])
+
+- **SEE** [m:Rinda::TupleEntry#expires]
+
+### def fetch(key) -> object
+タプルの key に対応する要素を返します。
+
+[m:Rinda::TupleEntry#value].fetch(key) を返します。
+
+- **param** `key` -- 要素を指定するキー
+
+- **SEE** [m:Rinda::TupleEntry#\[\]]
+
+#@# Used internally from renew
+#@# --- make_expires(sec = nil) 
+#@# #@todo
+#@# 
+#@# Returns an expiry Time based on +sec+ which can be one of:
+#@# 
+#@# Numeric: +sec+ seconds into the future
+#@# 
+#@# +true+:  the expiry time is the start of 1970 (i.e. expired)
+#@# 
+#@# +nil+:   it is Tue Jan 19 03:14:07 GMT Standard Time 2038 (i.e.
+#@#          when UNIX clocks will die)
+
+#@# Used internally from initialize
+#@# --- make_tuple(ary)
+#@# #@todo
+#@# 
+#@# Creates a Rinda::Tuple for +ary+.
+
+### def renew(sec_or_renewer) -> ()
+タプルの有効期限を更新します。
+
+sec_or_renewer によって以下のように更新されます。
+  - nil :  遠い未来(実質的に無限)を指定します。詳しくは [m:Rinda::TupleEntry#expires] 参照
+  - true :  直ちに有効期限切れになるよう指定します
+  - 数値 : 有効期限を現在から sec_or_renewer 秒後に指定します
+  - それ以外 : renew メソッドを持っていると仮定され、そのメソッドの呼び出し結果を用います。
+    renew メソッドは nil, true, 数値のいずれかを上のルールに従って返さなければなりません。
+
+
+### def size -> Integer
+タプルのサイズ(配列の要素数/ハッシュテーブルのエントリー数)を返します
+
+- **SEE** [m:Rinda::TupleEntry#value]
+
+### def value -> Array | Hash
+管理対象のタプルを返します。
+
+

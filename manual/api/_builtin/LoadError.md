@@ -1,0 +1,25 @@
+---
+library: _builtin
+---
+# class LoadError < ScriptError
+
+[m:Kernel?.require] や [m:Kernel?.load] が失敗したときに発生します。
+
+## Instance Methods
+
+#@since 2.0.0
+### def path -> String | nil
+
+[m:Kernel?.require] や [m:Kernel?.load] に失敗したパスを返します。
+
+`````
+begin
+  require 'this/file/does/not/exist'
+rescue LoadError => e
+  e.path # => 'this/file/does/not/exist'
+end
+`````
+
+パスが定まらない場合は nil を返します。
+#@# irb 中で [[m:Kernel.#require_relative]] を実行した場合など。
+#@end

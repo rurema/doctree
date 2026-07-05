@@ -1,0 +1,72 @@
+---
+library: webrick/httpservlet/filehandler
+---
+# class WEBrick::HTTPServlet::DefaultFileHandler < WEBrick::HTTPServlet::AbstractServlet
+
+通常のファイルサーバとしての機能を提供するためのサーブレットです。
+[c:WEBrick::HTTPServlet::FileHandler] の内部で利用しています。
+
+## Class Methods
+
+### def new(server, local_path) -> WEBrick::HTTPServlet::DefaultFileHandler
+
+DefaultFileHandler サーブレットを生成します。ユーザが直接使うことはあま
+りありません。
+
+- **param** `server` -- [c:WEBrick::GenericServer] のサブクラスのインスタンスを
+              指定します。
+
+- **param** `local_path` -- 処理するファイルのパスを指定します。
+
+## Instance Methods
+
+### def do_GET(request, response) -> ()
+
+GET リクエストを処理します。
+
+- **param** `request` -- クライアントからのリクエストを表す [c:WEBrick::HTTPRequest] オブジェクトです。
+
+- **param** `response` -- クライアントへのレスポンスを表す [c:WEBrick::HTTPResponse] オブジェクトです。
+
+- **raise** `WEBrick::HTTPStatus::NotModified` -- 自身に関連付けられたファイルが変更されていない場合に発生します。
+
+- **raise** `WEBrick::HTTPStatus::PartialContent` -- 部分的 GET リクエストを処理した場合に発生します。
+
+### def not_modified?(request, response, mtime, etag) -> bool
+
+自身に関連付けられたファイルが更新されていなければ、真を返します。
+そうでない場合は、偽を返します。
+
+#@# 真を返す条件を詳しく
+
+- **param** `request` -- クライアントからのリクエストを表す [c:WEBrick::HTTPRequest] オブジェクトです。
+
+- **param** `response` -- クライアントへのレスポンスを表す [c:WEBrick::HTTPResponse] オブジェクトです。
+
+- **param** `mtime` -- 自身に関連付けられたファイルの最終修正時刻を指定します。
+
+- **param** `etag` -- ETag の値を指定します。
+
+### def make_partial_content(request, response, filename, filesize)
+
+部分的 GET リクエストのためのレスポンスを作成します。
+
+- **param** `request` -- クライアントからのリクエストを表す [c:WEBrick::HTTPRequest] オブジェクトです。
+
+- **param** `response` -- クライアントへのレスポンスを表す [c:WEBrick::HTTPResponse] オブジェクトです。
+
+- **param** `filename` -- ファイル名を指定します。
+
+- **param** `filesize` -- ファイルサイズを指定します。
+
+- **raise** `WEBrick::HTTPStatus::BadRequest` -- リクエストが不正である場合に発生します。
+
+- **raise** `WEBrick::HTTPStatus::RequestRangeNotSatisfiable` -- レスポンスボディが空になる場合などに発生します。
+
+### def prepare_range(range, filesize) -> [Integer, Integer]
+
+[m:WEBrick::HTTPServlet::DefaultFileHandler#make_partial_content] で利用する範囲情報を生成して返します。
+
+- **param** `range` -- 2 要素の配列を指定します。
+
+- **param** `filesize` -- ファイルサイズを指定します。

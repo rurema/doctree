@@ -1,0 +1,10 @@
+---
+library: _builtin
+---
+# class NotImplementedError < ScriptError
+
+現在のプラットフォームで実装されていない機能が呼び出されたときに発生します。
+
+例えばfsyncやforkのシステムコールに依存するメソッドが呼び出されたとき、OSまたはRubyの実行環境がそれらのシステムコールをサポートしていない場合、この例外が発生します。
+
+forkがNotImplementedErrorを発生させる場合respond_to?(:fork)はfalseを返すことに注意してください。

@@ -1,0 +1,130 @@
+---
+library: zlib
+---
+# class Zlib::ZStream < Object
+
+圧縮データを扱うストリームを表す抽象クラスです。
+具体的な圧縮/展開の操作は、それぞれサブクラスの [c:Zlib::Deflate],
+[c:Zlib::Inflate] で定義されています。
+
+Zlib::ZStream オブジェクトは、ストリーム (struct zstream) の
+入力側 (next_in) と出力側 (next_out) にそれぞれ可変長の
+バッファを持ちます。以下、入力側のバッファを「入力バッファ」、
+出力側のバッファを「出力バッファ」と呼びます。
+
+Zlib::ZStream オブジェクトに入力されたデータは、一旦入力バッファの
+末尾にストアされた後、ストリームからの出力がなくなるまで
+(処理後 avail_out > 0 となるまで) 入力バッファの先頭から順に処理されます。
+処理の間、出力バッファは全出力を保持するために必要に応じて自動的に
+確保・拡張されます。
+
+いくつかのメソッドは、出力バッファ内のデータを取り出し、
+String オブジェクトとして返します。
+
+以上を図示すると次のようになります:
+
+````````
++================ an instance of Zlib::ZStream ================+
+||                                                            ||
+||     +--------+          +-------+          +--------+      ||
+||  +--| output |<---------|zstream|<---------| input  |<--+  ||
+||  |  | buffer |  next_out+-------+next_in   | buffer |   |  ||
+||  |  +--------+                             +--------+   |  ||
+||  |                                                      |  ||
++===|======================================================|===+
+    |                                                      |
+    v                                                      |
+"output data"                                         "input data"
+````````
+
+入力バッファの内容を処理している最中にエラーが発生した場合、
+[c:Zlib::Error] のサブクラスの例外が発生します。その時、
+入力/出力バッファは共に、エラーが発生した時点の状態をそのまま
+保持します。
+
+## Class Methods
+
+### def new -> ()
+
+直接使用しません。
+通常、具体的な圧縮/展開を行う場合は、
+[m:Zlib::Deflate.new] もしくは、[m:Zlib::Inflate.new] を使用します。
+
+- **SEE** [m:Zlib::Deflate.new], [m:Zlib::Inflate.new] 
+
+## Instance Methods
+
+### def avail_in -> Integer
+
+入力バッファに溜っているデータのバイト数を返します。通常は 0 です。
+
+### def avail_out -> Integer
+
+出力バッファの空き用量をバイト数で返します。
+空きは必要な時に動的に確保されるため、通常は 0 です。
+
+### def avail_out=(size)
+
+出力側のバッファに size バイトの空きを確保します。
+すでに size バイト以上の空きがある場合、バッファは
+縮められます。空きは必要な時に動的に確保されるため、通常
+このメソッドを使う必要はありません。
+
+- **param** `size` -- 出力バッファのサイズを整数で指定します。
+
+- **return** -- size を返します。
+
+### def flush_next_in -> String
+
+入力バッファに残っているデータを強制的に取り出します。
+
+### def flush_next_out -> String
+
+出力バッファに残っているデータを強制的に取り出します。
+
+### def total_in -> Integer
+
+ストリームに入力されたデータの総バイト数を返します。
+
+### def total_out -> Integer
+
+ストリームの出力したデータの総バイト数を返します。
+
+### def data_type -> Integer
+
+ストリームに入力されたデータの形式を推測します。
+返り値は [m:Zlib::BINARY], [m:Zlib::ASCII], [m:Zlib::UNKNOWN] の
+いずれかです。
+
+### def adler -> Integer
+
+adler-32 チェックサムを返します。
+
+### def reset -> nil
+
+ストリームの状態をリセットします。
+入力/出力バッファ内に残っていたデータは破棄されます。
+
+### def finish -> String
+
+ストリームへの入力を終了し、出力バッファをフラッシュします。
+より具体的な振る舞いは [m:Zlib::Deflate#finish],
+[m:Zlib::Inflate#finish] を参照して下さい。
+
+- **SEE** [m:Zlib::Deflate#finish],[m:Zlib::Inflate#finish] 
+
+### def finished? -> bool
+### def stream_end? -> bool
+
+ストリームへの入力が終了している時に真を返します。
+
+### def close -> nil
+### def end -> nil
+
+ストリームを閉じます。
+以後、このストリームにアクセスすることはできなくなります。
+
+### def closed? -> bool
+### def ended? -> bool
+
+ストリームが閉じられている時に真を返します。

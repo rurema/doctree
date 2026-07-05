@@ -1,0 +1,7 @@
+---
+type: library
+require:
+  - webrick/httpserver
+---
+プロクシの機能を提供するライブラリです。CONNECT メソッドにも対応しています。
+

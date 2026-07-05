@@ -1,0 +1,7 @@
+---
+library: rake
+---
+# class Rake::MultiTask < Rake::Task
+
+通常のタスクと同じですが、[lib:thread] を用いて事前タスクを並列実行します。
+

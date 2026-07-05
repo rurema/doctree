@@ -1,0 +1,286 @@
+---
+library: _builtin
+---
+# class BasicObject
+特殊な用途のために意図的にほとんど何も定義されていないクラスです。
+[c:Object]クラスの親にあたります。Ruby 1.9 以降で導入されました。
+
+### 性質
+BasicObject クラスは Object クラスからほとんどのメソッドを取り除いたクラスです。
+
+Object クラスは様々な便利なメソッドや [c:Kernel] から受け継いだ関数的メソッド
+を多数有しています。
+これに対して、 BasicObject クラスはオブジェクトの同一性を識別したりメソッドを呼んだりする
+最低限の機能の他は一切の機能を持っていません。
+
+### 用途
+基本的にはほぼすべてのクラスの親は [c:Object] と考えて差し支えありません。
+しかし、ある種のクラスを定義する際には Object クラスは持っているメソッドが多すぎる
+場合があります。
+
+例えば、 [m:BasicObject#method_missing]を利用して Proxy パターンを実
+装する場合にはObject クラスに定義済みのメソッドはプロクシできないという
+問題が発生します。このような場合に Object ではなく BasicObject から派生
+して問題を解決できます。
+
+### 注意
+通常のクラスは Object またはその他の適切なクラスから派生すべきです。
+真に必要な場合にだけ BasicObject から派生してください。
+
+### 例
+
+```ruby title="例"
+class Proxy < BasicObject
+  def initialize(target)
+    @target = target
+  end
+ 
+  def method_missing(message, *args)
+    @target.__send__(message, *args)
+  end
+end
+
+proxy = Proxy.new("1")
+proxy.to_i #=> 1
+```
+
+## Instance Methods
+### def ==(other) -> bool
+オブジェクトが other と等しければ真を、そうでない場合は偽を返します。
+
+このメソッドは各クラスの性質に合わせて、サブクラスで再定義するべきです。
+多くの場合、オブジェクトの内容が等しければ真を返すように (同値性を判定するように) 再定義
+することが期待されています。
+
+デフォルトでは [m:Object#equal?] と同じオブジェクトの同一性になっています。
+
+- **param** `other` -- 比較対象となるオブジェクト
+- **return** -- other が self と同値であれば真、そうでない場合は偽
+
+```ruby title="例"
+class Person < BasicObject
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+end
+
+tanaka1 = Person.new("tanaka", 24)
+tanaka2 = Person.new("tanaka", 24)
+
+tanaka1 == tanaka1    #=> true
+tanaka1 == tanaka2    #=> false
+```
+
+- **SEE** [m:BasicObject#equal?], [m:Object#==], [m:Object#equal?],
+     [m:Object#eql?]
+
+### def equal?(other) -> bool
+オブジェクトが other と同一であれば真を、そうでない場合は偽を返します。
+
+このメソッドは2つのオブジェクトが同一のものであるかどうかを判定します。
+一般にはこのメソッドを決して再定義すべきでありません。
+ただし、 [c:BasicObject] の位置づけ上、どうしても再定義が必要な用途もあるでしょう。
+再定義する際には自分が何をしているのかよく理解してから実行してください。
+
+- **param** `other` -- 比較対象となるオブジェクト
+- **return** -- other が self 自身であれば真、そうでない場合は偽
+
+```ruby title="例"
+original = "a"
+copied = original.dup
+substituted = original
+
+original == copied          #=> true
+original == substituted     #=> true
+original.equal? copied      #=> false
+original.equal? substituted #=> true
+```
+
+- **SEE** [m:Object#equal?], [m:Object#==], [m:Object#eql?]
+
+### def ! -> bool
+オブジェクトを真偽値として評価し、その論理否定を返します。
+
+このメソッドは self が nil または false であれば真を、そうでない場合は偽を返します。
+主に論理式の評価に伴って副作用を引き起こすことを目的に
+再定義するものと想定されています。
+
+このメソッドを再定義しても Ruby の制御式において nil や false 以外が偽として
+扱われることはありません。
+
+- **return** -- オブジェクトが偽であれば真、そうでない場合は偽
+
+```ruby title="例"
+class NegationRecorder < BasicObject
+  def initialize
+    @count = 0
+  end
+  attr_reader :count
+ 
+  def !
+    @count += 1
+    super
+  end
+end
+
+recorder = NegationRecorder.new
+!recorder
+!!!!!!!recorder
+puts 'hoge' if !recorder
+
+puts recorder.count #=> 3
+```
+
+```ruby title="例"
+class AnotherFalse < BasicObject
+  def !
+    true
+  end
+end
+another_false = AnotherFalse.new
+
+# another_falseは*真*
+puts "another false is a truth" if another_false
+#=> "another false is a truth"
+```
+
+### def !=(other) -> bool
+オブジェクトが other と等しくないことを判定します。
+
+デフォルトでは self == other を評価した後に結果を論理否定して返します。
+このため、サブクラスで [m:BasicObject#==] を再定義しても != とは自動的に整合性が
+とれるようになっています。
+
+ただし、 [m:BasicObject#!=] 自身や [m:BasicObject#!] を再定義した際には、ユーザーの責任で
+整合性を保たなくてはなりません。
+
+このメソッドは主に論理式の評価に伴って副作用を引き起こすことを目的に
+再定義するものと想定されています。
+
+- **param** `other` -- 比較対象となるオブジェクト
+- **SEE** [m:BasicObject#==], [m:BasicObject#!]
+
+```ruby title="例"
+class NonequalityRecorder < BasicObject
+  def initialize
+    @count = 0
+  end
+  attr_reader :count
+
+  def !=(other)
+    @count += 1
+    super
+  end
+end
+recorder = NonequalityRecorder.new
+
+recorder != 1
+puts 'hoge' if recorder != "str"
+
+p recorder.count #=> 2
+```
+
+
+
+### def __send__(name, *args) -> object
+### def __send__(name, *args) { .... } -> object
+オブジェクトのメソッド name を args を引数にして呼び出し、メソッドの結果を返します。
+
+ブロック付きで呼ばれたときはブロックもそのまま引き渡します。
+
+- **param** `name` -- 呼び出すメソッドの名前。 [c:Symbol] または文字列で指定します。
+- **param** `args` -- メソッドに渡す任意個の引数
+
+```ruby title="例"
+class Mail
+  def delete(*args)
+    "(Mail#delete) - delete " + args.join(',')
+  end
+  def send(name, *args)
+    "(Mail#send) - #{name} #{args.join(',')}"
+  end
+end
+mail = Mail.new
+mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
+mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
+```
+
+- **SEE** [m:Object#send]
+
+#@since 1.9.3
+### def __id__ -> Integer
+
+各オブジェクトに対して一意な整数を返します。あるオブジェクトに対し
+てどのような整数が割り当てられるかは不定です。
+
+[m:Object#object_id] と同じですが、#object_id は [c:BasicObject] に
+はない事に注意してください。
+
+```ruby title="例"
+# frozen_string_literal: false
+obj = Object.new
+obj.object_id == obj.__id__              # => true
+Object.new.__id__  == Object.new.__id__  # => false
+(21 * 2).__id__    == (21 * 2).__id__    # => true
+"hello".__id__     == "hello".__id__     # => false
+"hi".freeze.__id__ == "hi".freeze.__id__ # => true
+```
+
+- **SEE** [m:Object#object_id], [ruby-dev:42840]
+#@end
+
+#@include(BasicObject.public_methods_from_Object)
+
+## Private Instance Methods
+
+### def method_missing(name, *args) -> object
+
+呼びだされたメソッドが定義されていなかった時、Rubyインタプリタがこのメソッド
+を呼び出します。
+
+呼び出しに失敗したメソッドの名前 ([c:Symbol]) が name に
+その時の引数が第二引数以降に渡されます。
+
+デフォルトではこのメソッドは例外 [c:NoMethodError] を発生させます。
+
+#@#このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
+
+- **param** `name` -- 未定義メソッドの名前（シンボル）です。
+- **param** `args` -- 未定義メソッドに渡された引数です。
+#@#@param block 未定義メソッドに渡されたブロックです。
+- **return** -- ユーザー定義の method_missing メソッドの返り値が未定義メソッドの返り値で
+  あるかのように見えます。
+
+```ruby title="例"
+class Foo
+  def initialize(data)
+    @data = data
+  end
+  def method_missing(name, lang)
+    if name.to_s =~ /\Afind_(\d+)_in\z/
+      if @data[lang]
+        p @data[lang][$1.to_i]
+      else
+        raise "#{lang} unknown"
+      end
+    else
+      super
+    end
+  end
+end
+
+dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
+dic.find_2_in :Esperanto #=> "du"
+```
+
+#@since 1.9.2
+[注意] このメソッドを override する場合は対象のメソッド名に対して
+[m:Object#respond_to?] が真を返すようにしてください。
+そのためには、[m:Object#respond_to_missing?] も同様に override する必
+要があります。
+
+- **SEE** [m:Object#respond_to?], [m:Object#respond_to_missing?]
+#@end
+
+#@include(BasicObject.private_methods_from_Object)

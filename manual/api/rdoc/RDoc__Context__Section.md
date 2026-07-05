@@ -1,0 +1,90 @@
+---
+library: rdoc/context
+include:
+#@since 1.9.2
+  - RDoc::Text
+#@end
+---
+# class RDoc::Context::Section
+
+section に関する情報を保持するクラスです。
+
+ドキュメント中で以下のように記述した情報を保持しています。
+
+`````
+# :section: The title
+# The body
+`````
+
+## Class Methods
+
+#@since 1.9.2
+### def new(parent, title, comment) -> RDoc::Context::Section
+#@else
+### def new(title, comment) -> RDoc::Context::Section
+#@end
+
+自身を初期化します。
+
+#@since 1.9.2
+- **param** `parent` -- [c:RDoc::Context] オブジェクトを指定します。
+#@end
+
+- **param** `title` -- section のタイトルを文字列で指定します。
+
+- **param** `comment` -- section のコメントを文字列で指定します。
+
+また、section のシーケンス番号を新しく作成します。
+
+## Instance Methods
+
+### def title -> String | nil
+
+section のタイトルを返します。
+
+### def comment -> String | nil
+
+section のコメントを返します。
+
+### def sequence -> String
+
+section のシーケンス番号を文字列で返します。
+
+リンクを作成する時に使われます。
+
+### def ==(other) -> bool
+
+自身と other のシーケンス番号を比較した結果を返します。
+
+- **param** `other` -- [c:RDoc::Context::Section] オブジェクトを指定します。
+
+### def inspect -> String
+
+自身の情報を人間に読みやすい文字列にして返します。
+
+#@since 1.9.1
+### def set_comment(comment) -> ()
+
+自身にコメントを設定します。
+
+- **param** `comment` -- 文字列を指定します。
+
+comment の最初の行に :section: を含んでいた場合、その行以降の文字列をコ
+メントとして設定します。そうでない場合は comment すべてをコメントとして
+設定します。
+
+`````
+# ---------------------
+# :section: The title
+# The body
+# ---------------------
+`````
+
+#@# 1.8 系では、同名の private メソッドが定義されている。
+#@end
+
+#@since 1.9.2
+### def parent -> RDoc::Context
+
+自身が所属する [c:RDoc::Context] オブジェクトを返します。
+#@end

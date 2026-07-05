@@ -1,0 +1,88 @@
+---
+library: _builtin
+---
+# class FalseClass < Object
+
+false のクラス。
+false は FalseClass クラスの唯一のインスタンスです。
+false は nil オブジェクトとともに偽を表し、
+その他の全てのオブジェクトは真です。
+
+## Instance Methods
+
+### def &(other)    -> false
+
+常に false を返します。
+
+- **param** `other` -- 論理積を行なう式です。
+
+& は再定義可能な演算子に分類されていますので、通常は false & other の形で使われます。
+
+```ruby title="例"
+p false & true     #=> false
+p false & false    #=> false
+p false & nil      #=> false
+p false & (1 == 1) #=> false
+p false & (1 + 1)  #=> false
+
+p false.&(true)    #=> false
+p false.&(false)   #=> false
+p false.&(nil)     #=> false
+p false.&(1 == 1)  #=> false
+p false.&(1 + 1)   #=> false
+```
+
+### def |(other)    -> bool
+
+other が真なら true を, 偽なら false を返します。
+
+- **param** `other` -- 論理和を行なう式です。
+
+| は再定義可能な演算子に分類されていますので、通常は false | other の形で使われます。
+
+```ruby title="例"
+p false | true     #=> true
+p false | false    #=> false
+p false | nil      #=> false
+p false | (1 == 1) #=> true
+p false | (1 + 1)  #=> true
+
+p false.|(true)    #=> true
+p false.|(false)   #=> false
+p false.|(nil)     #=> false
+p false.|(1 == 1)  #=> true
+p false.|(1 + 1)   #=> true
+```
+
+### def ^(other)    -> bool
+
+other が真なら true を, 偽なら false を返します。
+
+- **param** `other` -- 排他的論理和を行なう式です。
+
+^ は再定義可能な演算子に分類されていますので、通常は false ^ other の形で使われます。
+
+```ruby title="例"
+p false ^ true     #=> true
+p false ^ false    #=> false
+p false ^ nil      #=> false
+p false ^ (1 == 1) #=> true
+p false ^ (1 + 1)  #=> true
+
+p false.^(true)    #=> true
+p false.^(false)   #=> false
+p false.^(nil)     #=> false
+p false.^(1 == 1)  #=> true
+p false.^(1 + 1)   #=> true
+```
+
+### def to_s    -> String
+#@since 2.0.0
+### def inspect -> String
+#@end
+
+常に文字列 "false" を返します。
+
+```ruby title="例"
+false.to_s      # => "false"
+```

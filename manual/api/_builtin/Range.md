@@ -1,0 +1,933 @@
+---
+library: _builtin
+include:
+  - Enumerable
+---
+# class Range < Object
+
+範囲オブジェクトのクラス。
+範囲オブジェクトは文字どおり何らかの意味での範囲を表します。数の範囲はもちろん、
+日付の範囲や、「"a" から "z" まで」といった文字列の範囲を表すこともできます。
+
+#### 作り方
+
+範囲オブジェクトは、[m:Range.new] を用いるほか、範囲演算子（`..' または `...'）を
+用いた [ref:d:spec/operator#range] で生成できます。
+いずれの方法でも始端と終端を与えます。
+
+```ruby title="範囲オブジェクトの例"
+Range.new(1, 5) # 1 以上 5 以下
+1..5            # 同上
+1...5           # 1 以上 5 未満
+```
+
+この例で分かるように、範囲オブジェクトは終端を含む範囲も含まない範囲も表せます。
+
+#@since 2.6.0
+Ruby 2.6.0 からは、終端に nil を与えることで「終端を持たない範囲オブジェクト」
+を作ることができるようになりました。
+
+```ruby title="終端を持たない範囲オブジェクト"
+p Range.new(1, nil) # 1 以上（上限無し）を表す
+p(1..nil)           # 同上
+p(1..)              # 同上（略した書き方）
+```
+
+#@since 2.7.0
+また、Ruby 2.7.0 では始端に nil を与えることで「始端を持たない範囲オブジェクト」
+を作ることもできるようになりました。
+
+```ruby title="始端を持たない範囲オブジェクト"
+p Range.new(nil, 5) # 5 以下（下限無し）を表す
+p(nil..5)           # 同上
+p(..5)              # 同上（略した書き方）
+```
+
+始端も終端も持たない範囲オブジェクトは「全範囲」を表します。
+
+```ruby title="始端も終端も持たない範囲オブジェクト"
+# 以下はすべて同じ範囲
+p Range.new(nil, nil) # => nil..nil
+p(nil..nil)           # => nil..nil
+p(..nil)              # => nil..nil
+p(nil..)              # => nil..nil
+```
+
+範囲式で両端を略した書き方はできません。
+
+`````
+p(..)  # => SyntaxError
+p(...) # Ruby 2.7 で導入されたメソッド引数の forward として解釈されてしまう
+`````
+
+#@end
+#@end
+
+#### 機能
+
+範囲オブジェクトは範囲を表しているので、基本的な機能として「ある値がその範囲に
+含まれるか否かを判定する」ということがあります。
+
+```ruby title="値が範囲に含まれるかどうかを判定"
+p (1..5).cover?(6)  # => false
+p (1..5).cover?(5)  # => true
+p (1...5).cover?(5) # => false
+```
+
+[m:Range#cover?] メソッドでの判定には演算子 <=> が使われます。
+
+当然、始端と終端は <=> メソッドで比較可能である（nil 以外を返す）必要が
+あります。
+
+範囲オブジェクトのもう一つの基本的機能は繰り返しの範囲を表すことです。
+
+```ruby title="繰り返しの範囲を範囲オブジェクトで表す"
+(3..5).each{ |i| p i }
+# => 3
+#    4
+#    5
+
+(3...5).each{ |i| p i }
+# => 3
+#    4
+```
+
+繰り返しの範囲を表す範囲オブジェクトは、始端が「次の値」を返す succ メソッドを
+持たなければなりません。
+
+Range クラスには [c:Enumerable] が include してあるので，[m:Range#each] に
+基づき、Enumerable モジュールが提供する多様なメソッドを使うことができます。
+
+### 破壊的な変更
+
+Ruby の Range クラスは immutable です。
+つまり、オブジェクト自体を破壊的に変更することはできません。
+ですので、一度生成された Range のオブジェクトの指し示す範囲は
+決して変更することはできません。
+
+```ruby
+range = 1..10
+range.first     # => 1
+range.first = 1 # => NoMethodError
+```
+
+#@since 3.0
+また、Ruby 3.0.0 からすべての Range オブジェクトは freeze されるようになりました。
+```ruby
+p (1..10).frozen?
+# => true
+p Range.new(1, 10).frozen?
+# => true
+```
+#@end
+
+## Class Methods
+
+### def new(first, last, exclude_end = false) -> Range
+
+first から last までの範囲オブジェクトを生成して返しま
+す。
+
+exclude_end が真ならば終端を含まない範囲オブジェクトを生
+成します。exclude_end 省略時には終端を含みます。
+
+- **param** `first` -- 最初のオブジェクト
+- **param** `last` -- 最後のオブジェクト
+- **param** `exclude_end` -- 真をセットした場合終端を含まない範囲オブジェクトを生成します
+
+- **raise** `ArgumentError` -- first <=> last が nil の場合に発生します
+
+```ruby title="例: 整数の範囲オブジェクトの場合"
+Range.new(1, 10)       # => 1..10
+Range.new(1, 10, true) # => 1...10
+```
+
+```ruby title="例: 日付オブジェクトの範囲オブジェクトの場合"
+require 'date'
+Range.new(Date.today, Date.today >> 1).each {|d| puts d }
+# => 2017-09-16
+#    2017-09-17
+#    ...
+#    2017-10-16
+```
+
+```ruby title="例: IPアドレスの範囲オブジェクトの場合"
+require 'ipaddr'
+Range.new(IPAddr.new("192.0.2.1"), IPAddr.new("192.0.2.3")).each {|ip| puts ip}
+# => 192.0.2.1
+#    192.0.2.2
+#    192.0.2.3
+```
+
+```ruby title="例: 自作のオブジェクトの場合"
+MyInteger = Struct.new(:value) do
+  def succ
+    self.class.new(value + 1)
+  end
+
+  def <=>(other)
+    value <=> other.value
+  end
+
+  def to_s
+    value.to_s
+  end
+end
+Range.new(MyInteger.new(1), MyInteger.new(3)).each {|i| puts i }
+# => 1
+#    2
+#    3
+```
+
+## Instance Methods
+
+#@until 2.6.0
+### def ===(obj) -> bool
+#@end
+### def include?(obj) -> bool
+### def member?(obj) -> bool
+
+obj が範囲内に含まれている時に true を返します。
+そうでない場合は、false を返します。
+
+#@until 2.6.0
+[m:Range#===] は主に case 式での比較に用いられます。
+#@end
+
+<=> メソッドによる演算により範囲内かどうかを判定するには [m:Range#cover?] を使用してください。
+
+始端・終端・引数が数値であれば、 [m:Range#cover?] と同様の動きをします。
+
+- **param** `obj` -- 比較対象のオブジェクトを指定します。
+
+```ruby title="例"
+p ("a" .. "c").include?("b")  # => true
+p ("a" .. "c").include?("B")  # => false
+p ("a" .. "c").include?("ba") # => false
+p ("a" .. "c").cover?("ba")   # => true
+
+p (1 .. 3).include?(1.5) # => true
+```
+
+- **SEE** [ref:d:spec/control#case]
+#@since 2.6.0
+- **SEE** [m:Range#cover?], [m:Range#===]
+#@else
+- **SEE** [m:Range#cover?]
+#@end
+
+#@since 2.6.0
+### def ===(obj) -> bool
+
+始端と終端の中に obj があるとき、true を返します。
+そうでないとき、false を返します。
+
+[m:Range#===] は主に case 式での比較に用いられます。
+
+```ruby title="例"
+p (0...50) === 79  #=> false
+p (60...80) === 79 #=> true
+
+case 79
+when  0...60  then  puts "low"
+when 60...80  then  puts "medium" # => medium
+when 80..100  then  puts "high"
+end
+```
+
+2.5 以前は、単純に [m:Range#include?] メソッドを内部で呼んでいました。
+
+しかし、2.6 以降では、(文字列を除いて) [m:Range#cover?] と同様の処理をするように切り替わりました。
+
+ただし、=== は、[m:Range#cover?] のように Range オブジェクトを引数にとる設計はありません。
+
+```ruby title="例"
+require 'date'
+p (Date.today - 100...Date.today + 100).include?(DateTime.now)  #=> false
+p (Date.today - 100...Date.today + 100).cover?(DateTime.now)    #=> true
+p (Date.today - 100...Date.today + 100) ===  DateTime.now       #=> true
+# 2.5 以前は、=== は、include? と同じく比較できず false を返していました。
+```
+
+#@since 2.7.0
+2.7 以降の === は、文字列も [m:Range#cover?] と同様の処理をするようになりました。
+
+```ruby title="例"
+p ('a'..'z').include? 'at'  #=> false
+p ('a'..'z').cover? 'at'    #=> true
+p ('a'..'z') === 'at'       #=> true
+# 2.6 以前は、=== は、include? と同じく比較できず false を返していました。
+```
+#@end
+
+- **SEE** [ref:d:spec/control#case]
+- **SEE** [m:Range#include?], [m:Range#cover?]
+#@end
+
+### def cover?(obj) -> bool
+
+obj が範囲内に含まれている時に true を返します。
+
+[m:Range#include?] と異なり <=> メソッドによる演算により範囲内かどうかを判定します。
+[m:Range#include?] は原則として離散値を扱い、
+Range#cover? は連続値を扱います。
+（数値については、例外として [m:Range#include?] も連続的に扱います。）
+
+[m:Range#exclude_end?]がfalseなら「begin <= obj <= end」を、
+trueなら「begin <= obj < end」を意味します。
+
+- **param** `obj` -- 比較対象のオブジェクトを指定します。
+
+```ruby title="数値は連続的に扱われているため、 include? / cover? が同じ結果を返す"
+(1.1..2.3).include?(1.0)    # => false
+(1.1..2.3).include?(1.1)    # => true
+(1.1..2.3).include?(1.555)  # => true
+(1.1..2.3).cover?(1.0)      # => false
+(1.1..2.3).cover?(1.1)      # => true
+(1.1..2.3).cover?(1.555)    # => true
+```
+
+```ruby title="String の例"
+('b'..'d').include?('d')    # => true
+('b'..'d').include?('ba')   # => false
+('b'..'d').cover?('d')      # => true
+('b'..'d').cover?('ba')     # => true
+```
+
+```ruby title="Date, DateTime の例"
+require 'date'
+(Date.today - 365 .. Date.today + 365).include?(Date.today)    #=> true
+(Date.today - 365 .. Date.today + 365).include?(DateTime.now)  #=> false
+(Date.today - 365 .. Date.today + 365).cover?(Date.today)      #=> true
+(Date.today - 365 .. Date.today + 365).cover?(DateTime.now)    #=> true
+```
+
+#@since 2.6.0
+
+### def cover?(range) -> bool
+
+2.6 以降の cover? は、[m:Range#include?] や [m:Range#===] と異なり、
+引数に Range オブジェクトを指定して比較できます。
+
+引数が Range オブジェクトの場合、引数の範囲が self の範囲に含まれる時に true を返します。
+
+- **param** `range` -- 比較対象の Range クラスのインスタンスを指定します。
+
+```ruby title="引数が Range の例"
+(1..5).cover?(2..3)     #=> true
+(1..5).cover?(0..6)     #=> false
+(1..5).cover?(1...6)    #=> true
+```
+
+「(a..b).cover?(c...d)」のように終端を含まない Range オブジェクトが引数に渡されており、
+「a <= c && b < d」を満たし、cが数値ではない(つまり引数の Range の終端を
+求めるために succ メソッドの呼び出しが必要な)場合、パフォーマンスの問題が起きる可能性があります。
+
+```ruby title="パフォーマンス上の問題が起きる例"
+p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz') # => true
+```
+#@end
+
+- **SEE** [m:Range#include?], [m:Range#===]
+
+#@since 3.3
+### def overlap?(range) -> bool
+
+self と range に重なりがある場合は true を、そうでない場合は false を返します。
+
+- **param** `range` -- self と重なりがあるかどうかを調べたい Range オブジェクトを指定します。
+
+- **raise** `TypeError` -- 引数に Range でないオブジェクトを指定した場合に発生します。
+
+- **SEE** [m:Range#cover?]
+
+```ruby title="例"
+(0..2).overlap?(1..3)  #=> true
+(0..2).overlap?(3..4)  #=> false
+(0..).overlap?(..0)    #=> true
+(0..).overlap?(...0)   #=> false
+```
+
+self の端点と range の端点が比較可能でない（<=> メソッドが nil を返す）場合、false を返します。
+
+```ruby title="比較可能でない例"
+(1..3).overlap?('a'..'d') #=> false
+```
+
+self または range が空である場合、false を返します。
+
+ここで、Range が空であるとは、
+
+ - 始端が終端より大きい
+ - [m:Range#exclude_end?] が true であり、始端と終端が等しい
+
+のいずれかを満たすことをいいます。
+
+```ruby title="Range が空である例"
+(0..2).overlap?(1...1) #=> false
+(1...1).overlap?(0..2) #=> false
+(0..2).overlap?(2..0)  #=> false
+```
+
+なお、上記の意味において空であることと、その Range オブジェクトが表す範囲に含まれるオブジェクトが存在しないこととは、同値ではないことに注意してください。
+
+例えば、[c:Float] クラスにおいては -Float::INFINITY が最小値であり、-Float::INFINITY より小さい値は存在しません。
+従って、...-Float::INFINITY という Range オブジェクトが表す範囲に含まれるオブジェクトは存在しません。
+
+しかしながら、overlap? メソッドでは、...-Float::INFINITY は上記の「空である」条件を満たさないため、「空ではない」とみなされます。
+そのため、...-Float::INFINITY は ...-Float::INFINITY 自身と重なりがあると判定されます。
+
+```ruby title="例"
+(...-Float::INFINITY).overlap?(...-Float::INFINITY) #=> true
+```
+
+#@end
+
+### def begin -> object
+### def first -> object
+
+始端の要素を返します。
+始端を持たない範囲オブジェクトの場合、begin はnilを返しますが, first は例外 [c:RangeError] が発生します。
+
+```ruby title="例"
+# 始端を持つ場合
+p (1..5).begin # => 1
+p (1..0).begin # => 1
+p (1..5).first # => 1
+p (1..0).first # => 1
+
+# 始端を持たない場合
+p (..5).begin #=> nil
+p (..5).first #=> RangeError
+```
+
+- **SEE** [m:Range#end]
+
+#@since 1.9.1
+### def first(n) -> [object]
+
+最初の n 要素を返します。範囲内に要素が含まれない場合は空の配列を返します。
+
+- **param** `n` -- 取得する要素数を整数で指定します。整数以外のオブジェクトを指定
+         した場合は to_int メソッドによる暗黙の型変換を試みます。
+
+- **raise** `TypeError` -- 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
+                 指定した場合に発生します。
+
+- **raise** `ArgumentError` -- n に負の数を指定した場合に発生します。
+
+```ruby title="例"
+(10..20).first(3)  # => [10, 11, 12]
+```
+
+- **SEE** [m:Range#last], [ruby-core:12697]
+#@end
+
+### def each {|item|  ... } -> self
+#@since 1.9.1
+### def each -> Enumerator
+#@else
+### def each -> Enumerable::Enumerator
+#@end
+
+範囲内の要素に対して繰り返します。
+
+Range#each は各要素の succ メソッドを使用してイテレーションするようになりました。
+
+- **raise** `TypeError` -- succ メソッドを持たないクラスの範囲オブジェクトに対してこのメソッドを呼んだ場合に発生します。
+
+
+```ruby title="例"
+(10..15).each {|n| print n, ' ' }
+# prints: 10 11 12 13 14 15
+
+(2.5..5).each {|n| print n, ' ' }
+# raises: TypeError: can't iterate from Float
+```
+
+#@since 3.3
+### def reverse_each -> Enumerator
+### def reverse_each {|element| ... } -> self
+
+逆順に各要素に対してブロックを評価します。
+
+内部で各要素を保持した配列を作ります。ただし、端点が [c:Integer] である場合は、配列を作らないように最適化が行われています。
+
+ブロックを省略した場合は、各要素を逆順に辿る
+[c:Enumerator] を返します。
+
+- **raise** `TypeError` -- 終端を持たない範囲オブジェクトに対してこのメソッドを呼んだ場合に発生します。
+
+```ruby title="例"
+(1..3).reverse_each # => #<Enumerator: ...>
+(1..3).reverse_each { |v| p v }
+# => 3
+#    2
+#    1
+(1..).reverse_each { |v| p v } # raises: TypeError: can't iterate from NilClass
+```
+
+#@end
+
+### def end -> object
+### def last -> object
+
+終端の要素を返します。範囲オブジェクトが終端を含むかどうかは関係ありま
+せん。
+
+```ruby title="例"
+(10..20).last      # => 20
+(10...20).last     # => 20
+```
+
+- **SEE** [m:Range#begin]
+
+#@since 1.9.1
+### def last(n) -> [object]
+
+最後の n 要素を返します。範囲内に要素が含まれない場合は空の配列を返します。
+
+- **param** `n` -- 取得する要素数を整数で指定します。整数以外のオブジェクトを指定
+         した場合は to_int メソッドによる暗黙の型変換を試みます。
+
+- **raise** `TypeError` -- 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを
+                 指定した場合に発生します。
+
+- **raise** `ArgumentError` -- n に負の数を指定した場合に発生します。
+
+[注意] 引数を省略して実行した場合は、終端を含むかどうか
+([m:Range#exclude_end?] の戻り値)に関わらず終端の要素を返す事に注意し
+てください。
+
+```ruby title="例"
+(10..20).last(3)   # => [18, 19, 20]
+(10...20).last(3)  # => [17, 18, 19]
+```
+
+- **SEE** [m:Range#first]
+
+#@# [[ruby-core:12697]]
+#@end
+
+### def exclude_end? -> bool
+
+範囲オブジェクトが終端を含まないとき真を返します。
+
+```ruby title="例"
+(1..5).exclude_end?     # => false
+(1...5).exclude_end?    # => true
+```
+
+### def step(s = 1) {|item| ... } -> self
+### def step(s = 1) -> Enumerator
+#@since 2.6.0
+### def step(s = 1) -> Enumerator::ArithmeticSequence
+### def %(s)        -> Enumerator
+### def %(s)        -> Enumerator::ArithmeticSequence
+#@end
+
+範囲内の要素を s おきに繰り返します。
+
+#@since 3.4
+- **param** `s` -- 次のステップへ遷移するたびに加算されるものを指定します。
+#@else
+- **param** `s` -- 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+#@end
+- **return** -- ブロックを指定した時は self を返します。
+- **return** -- ブロックを指定しなかった時かつ数値の Range の時は [c:Enumerator::ArithmeticSequence] を返します。
+- **return** -- ブロックを指定しなかったその他の Range の時は [c:Enumerator] を返します。(例: String の Range)
+
+```ruby title="例"
+(1..10).step(3) {|v| p v}
+# => 1
+#    4
+#    7
+#    10
+
+("a".."f").step(2) {|v| p v}
+# => "a"
+#    "c"
+#    "e"
+
+(10..0).step(-3) {|v| p v}
+# => 10
+#     7
+#     4
+#     1
+```
+
+#@since 3.4
+
+非数値の Range では、イテレーションに「要素 + s」を使用します。
+（文字列またはシンボルの Range で s に数値を指定した場合を除きます）
+
+```ruby title="数値以外の Range に対する例"
+# Time の Range は each でイテレートできない
+(Time.utc(2024, 12, 25)...Time.utc(2024, 12, 26)).each { |t| p t }
+# => 'Range#each': can't iterate from Time (TypeError)
+
+# step は使用可能
+(Time.utc(2024, 12, 25)...Time.utc(2024, 12, 26)).step(60*60*6) { |t| p t }
+# => 2024-12-25 00:00:00 UTC
+#    2024-12-25 06:00:00 UTC
+#    2024-12-25 12:00:00 UTC
+#    2024-12-25 18:00:00 UTC
+
+("a"..).step("*").take(3) # => ["a", "a*", "a**"]
+```
+
+#@end
+
+### def ==(other)     -> bool
+
+指定された other が Range クラスのインスタンスであり、
+始端と終端が == メソッドで比較して等しく、[m:Range#exclude_end?] が同じ場合に
+true を返します。そうでない場合に false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+
+```ruby title="例"
+p (1..2) == (1..2)               # => true
+p (1..2) == (1...2)              # => false
+p (1..2) == Range.new(1.0, 2.0)  # => true
+```
+
+### def eql?(other)   -> bool
+
+指定された other が Range クラスのインスタンスであり、
+始端と終端が eql? メソッドで比較して等しく、[m:Range#exclude_end?] が同じ場合に
+true を返します。そうでない場合に false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+
+```ruby title="例"
+p (1..2).eql?(1..2)                 # => true
+p (1..2).eql?(1...2)                # => false
+p (1..2).eql?(Range.new(1.0, 2.0))  # => false
+```
+
+### def hash    -> Integer
+
+始端と終端のハッシュ値と [m:Range#exclude_end?] の値からハッシュ値を計算して整数として返します。
+
+```ruby title="例"
+p (1..2).hash    # => 5646
+p (1...2).hash   # => 16782863
+```
+
+#@since 2.6.0
+### def to_a -> Array
+### def entries -> Array
+
+self を配列に変換します。
+
+- **raise** `RangeError` -- 終端のない Range オブジェクトを変換しようとしたときに発生します。
+
+```ruby title="例"
+p (5..0).to_a      # => []
+p (0..3).to_a      # => [0, 1, 2, 3]
+p ('a'..'c').to_a  # => ["a", "b", "c"]
+p (:a..:d).to_a  # => [:a, :b, :c, :d]
+
+require 'date'
+p (Date.new(1965, 4, 14) .. Date.new(1965, 4, 14)).to_a # => [#<Date: 1965-04-14 ((2438865j,0s,0n),+0s,2299161j)>]
+
+(1..).to_a   # RangeError: cannot convert endless range to an array
+```
+#@end
+
+### def to_s -> String
+
+self を文字列に変換します(始端と終端のオブジェクトは #to_s メソッドで文
+字列に変換されます)。
+
+- **SEE** [m:Range#inspect]
+
+```ruby title="例"
+(1..5).to_s      # => "1..5"
+("1".."5").to_s  # => "1..5"
+```
+
+### def inspect -> String
+
+self を文字列に変換します(始端と終端のオブジェクトは #inspect メソッド
+で文字列に変換されます)。
+
+- **SEE** [m:Range#to_s]
+
+```ruby title="例"
+(1..5).inspect      # => "1..5"
+("1".."5").inspect  # => "\"1\"..\"5\""
+```
+
+#@since 1.9.1
+### def min               -> object | nil
+#@since 2.2.0
+### def min(n)            -> [object]
+#@end
+
+#@since 2.2.0
+範囲内の最小の値、もしくは最小の n 要素が昇順で入った配列を返します。
+#@else
+範囲内の最小の値を返します。
+#@end
+
+#@since 2.2.0
+- **param** `n` -- 取得する要素数。
+#@end
+
+```ruby title="例"
+(1..5).min    # => 1
+```
+#@since 2.2.0
+```ruby title="例"
+(1..5).min(3) # => [1, 2, 3]
+```
+#@end
+
+#@since 2.2.0
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は、引数を指定しない形式では nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は nil を返します。
+#@end
+
+```ruby title="例"
+(2..1).min     # => nil
+(1...1).min    # => nil
+```
+#@since 2.2.0
+```ruby title="例"
+(2..1).min(3)  # => []
+(1...1).min(3) # => []
+```
+#@end
+
+### def min {|a, b| ... } -> object | nil
+#@since 2.2.0
+### def min(n) {|a, b| ... } -> [object]
+#@end
+
+#@since 2.2.0
+ブロックの評価結果で範囲内の各要素の大小判定を行い、最小の要素、もしくは
+最小の n 要素を返します。引数を指定しない形式では、範囲内に要素が存在しなければ
+nil を返します。引数を指定する形式では、空の配列を返します。
+#@else
+ブロックの評価結果で範囲内の各要素の大小判定を行い、最小の要素を返しま
+す。範囲内に要素が存在しなければ nil を返します。
+#@end
+
+ブロックの値は、a > b のとき正、a == b のとき 0、 a < b のとき負の整数
+を、期待しています。
+
+#@since 2.2.0
+- **param** `n` -- 取得する要素数。
+#@end
+
+- **raise** `TypeError` -- ブロックが整数以外を返したときに発生します。
+
+- **SEE** [m:Range#first], [m:Range#max], [m:Enumerable#min]
+
+```ruby title="例"
+h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+(1..3).min { |a, b| h[a].length <=> h[b].length }    # => 1
+```
+#@since 2.2.0
+```ruby title="例"
+(1..3).min(2) { |a, b| h[a].length <=> h[b].length } # => [1, 2]
+```
+#@end
+
+#@since 2.7.0
+### def minmax                      -> [object, object]
+### def minmax {|a, b| ... }        -> [object, object]
+
+範囲内の要素のうち、最小の要素と最大の要素を要素とするサイズ 2 の配列を返します。
+
+一つ目の形式では、全要素が互いに <=> メソッドで比較できることを仮定しています。
+
+二つ目の形式では、要素同士の比較をブロックを用いて行います。
+ブロックの値は、a > b のとき正、 a == b のとき 0、a < b のとき負の整数を、期待しています。
+
+```ruby title="例"
+(1..3).minmax # => [1, 3]
+
+h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+(1..3).minmax { |a, b| h[a].length <=> h[b].length } # => [1, 3]
+```
+
+#@end
+
+### def max               -> object | nil
+#@since 2.2.0
+### def max(n) -> [object]
+#@end
+
+#@since 2.2.0
+範囲内の最大の値、もしくは最大の n 要素が降順で入った配列を返します。
+#@else
+範囲内の最大の値を返します。
+#@end
+
+#@since 2.2.0
+- **param** `n` -- 取得する要素数。
+#@end
+
+```ruby title="例"
+(1..5).max     # => 5
+```
+#@since 2.2.0
+```ruby title="例"
+(1..5).max(3)  # => [5, 4, 3]
+```
+#@end
+
+#@since 2.2.0
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は、引数を指定しない形式では nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
+始端が終端より大きい場合、もしくは、終端を含まない範囲オブジェクトの始端が終端と
+等しい場合は nil を返します。
+#@end
+
+```ruby title="例"
+(2..1).max     # => nil
+(1...1).max    # => nil
+```
+#@since 2.2.0
+```ruby title="例"
+(2..1).max(3)  # => []
+(1...1).max(3) # => []
+```
+#@end
+
+### def max {|a, b| ... } -> object | nil
+#@since 2.2.0
+### def max(n) {|a, b| ... } -> [object]
+#@end
+
+#@since 2.2.0
+ブロックの評価結果で範囲内の各要素の大小判定を行い、最大の要素、もしくは
+最大の n 要素を返します。引数を指定しない形式では、
+範囲内に要素が存在しなければ nil を返します。
+引数を指定する形式では、空の配列を返します。
+#@else
+ブロックの評価結果で範囲内の各要素の大小判定を行い、最大の要素を返しま
+す。範囲内に要素が存在しなければ nil を返します。
+#@end
+
+ブロックの値は、a > b のとき正、 a == b のとき 0、a < b のとき負の整数
+を、期待しています。
+
+#@since 2.2.0
+- **param** `n` -- 取得する要素数。
+#@end
+
+- **raise** `TypeError` -- ブロックが整数以外を返したときに発生します。
+
+- **SEE** [m:Range#last], [m:Range#min], [m:Enumerable#max]
+#@end
+
+```ruby title="例"
+h = { 1 => "C", 2 => "Go", 3 => "Ruby" }
+(1..3).max { |a, b| h[a].length <=> h[b].length }    # => 3
+```
+#@since 2.2.0
+```ruby title="例"
+(1..3).max(2) { |a, b| h[a].length <=> h[b].length } # => [3, 2]
+```
+#@end
+
+#@since 2.0.0
+### def bsearch {|obj| ... } -> object | nil
+### def bsearch              -> Enumerator
+
+ブロックの評価結果で範囲内の各要素の大小判定を行い、条件を満たす値を二
+分探索(計算量は O(log n))で検索します。要素が見つからない場合は nil を
+返します。
+
+本メソッドはブロックを評価した結果により以下のいずれかのモードで動作し
+ます。
+
+ - find-minimum モード
+ - find-any モード
+
+find-minimum モード(特に理由がない限りはこのモードを使う方がいいでしょ
+う)では、条件判定の結果を以下のようにする必要があります。
+
+ - 求める値がブロックパラメータの値か前の要素の場合: true を返す
+ - 求める値がブロックパラメータより後の要素の場合: false を返す
+
+ブロックの評価結果が true になる最初の要素を返すか、nil を返します。
+
+
+```ruby title="例"
+ary = [0, 4, 7, 10, 12]
+(0...ary.size).bsearch {|i| ary[i] >= 4 } # => 1
+(0...ary.size).bsearch {|i| ary[i] >= 6 } # => 2
+(0...ary.size).bsearch {|i| ary[i] >= 8 } # => 3
+(0...ary.size).bsearch {|i| ary[i] >= 100 } # => nil
+
+(0.0...Float::INFINITY).bsearch {|x| Math.log(x) >= 0 } # => 1.0
+```
+
+find-any モードは [man:bsearch(3)] のように動作します。ブロックは真偽値
+ではなく、以下のような数値を返す必要があります。求める値の範囲がx...y
+（x <= y）であるとします。また、ブロックパラメータの値を v とします。
+
+ - ブロックパラメータの値が求める値の範囲よりも小さい（v < x）場合: 正の数を返す
+ - ブロックパラメータの値が求める値の範囲に合致する（x <= v < y）場合: 0 を返す
+ - ブロックパラメータの値が求める値の範囲よりも大きい（y <= v）場合: 負の数を返す
+
+ブロックの評価結果が 0 になるいずれかの要素を返すか、nil を返します。
+
+```ruby title="例"
+ary = [0, 100, 100, 100, 200]
+(0..4).bsearch {|i| 100 - ary[i] } # => 1, 2 or 3
+(0..4).bsearch {|i| 300 - ary[i] } # => nil
+(0..4).bsearch {|i|  50 - ary[i] } # => nil
+```
+
+上記の 2 つのモードを混在して使用しないでください(ブロックの評価結果は
+常に true/false、数値のいずれかを一貫して返すようにしてください)。
+また、二分探索の各イテレーションで値がどのような順序で選ばれるかは
+未規定です。
+
+ブロックが与えられなかった場合は、 [c:Enumerator] のインスタンスを返します。
+
+- **raise** `TypeError` -- ブロックの評価結果が true、false、nil、数値以外であっ
+                 た場合に発生します。
+
+- **SEE** [m:Array#bsearch]
+
+### def size -> Integer | Float::INFINITY | nil
+
+#@since 3.4
+範囲内の要素数を返します。
+
+始端が整数でない場合は、始端が succ メソッドを持つ場合は nil を返し、始端が succ メソッドを持たない場合は TypeError が発生します。
+
+- **raise** `TypeError` -- self がイテレート可能でない場合に発生します。
+
+```ruby title="例"
+(10..20).size    # => 11
+("a".."z").size  # => nil
+(1..).size       # => Infinity
+(-Float::INFINITY..Float::INFINITY).size # => can't iterate from Float (TypeError)
+```
+
+#@else
+
+範囲内の要素数を返します。始端、終端のいずれかのオブジェクトが
+[c:Numeric] のサブクラスのオブジェクトではない場合には nil を返します。
+
+```ruby title="例"
+(10..20).size    # => 11
+("a".."z").size  # => nil
+(-Float::INFINITY..Float::INFINITY).size # => Infinity
+```
+#@end
+#@end

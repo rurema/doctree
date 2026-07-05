@@ -1,0 +1,16 @@
+---
+library: _builtin
+---
+# class ScriptError < Exception
+
+スクリプトのエラーを表す例外クラスです。
+
+以下の例外クラスのスーパークラスです。
+
+#@# list child classes automatically
+  - [c:LoadError]
+  - [c:NotImplementedError]
+  - [c:SyntaxError]
+
+これらの例外が発生したときは Ruby スクリプト自体に
+バグがある可能性が高いと考えられます。

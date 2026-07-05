@@ -1,0 +1,8 @@
+---
+library: rdoc/normal_module
+---
+# class RDoc::NormalModule < RDoc::ClassModule
+
+モジュールを表現するクラスです。
+
+ライブラリの内部で使用します。

@@ -1,0 +1,66 @@
+---
+library: openssl
+---
+# module OpenSSL::PKey
+公開鍵暗号関連を集めたモジュールです。
+
+# class OpenSSL::PKey::PKey < Object
+
+公開鍵暗号のための抽象クラスです。
+
+以下のサブクラスを持ちます。
+  - [c:OpenSSL::PKey::RSA]
+  - [c:OpenSSL::PKey::DSA]
+  - [c:OpenSSL::PKey::DH]
+  - [c:OpenSSL::PKey::EC]
+
+例:
+
+`````
+require "openssl"
+# 署名用の鍵を新規作成
+dsa512 = OpenSSL::PKey::DSA.new(512)
+data = 'hoge'
+# 署名
+sign = dsa512.sign("dss1", data)
+# 署名の検証
+p dsa512.verify(dss1, sign, data)
+`````
+
+## Instance Methods
+
+### def sign(digest, data) -> String
+秘密鍵で data に署名し、署名の文字列を返します。
+
+digest は利用するハッシュ関数の名前を "sha256" や "md5" 
+といった文字列で指定します。
+
+DSA で署名をする場合はハッシュ関数には "dss1" を指定してください。
+
+- **param** `digest` -- 利用するハッシュ関数の名前
+- **param** `data` -- 署名する文字列
+- **raise** `OpenSSL::PKey::PKeyError` -- 署名時にエラーが起きた場合に発生します
+
+### def verify(digest, sign, data) -> bool
+data を秘密鍵で署名したその署名文字列が sign 
+であることを公開鍵を使って検証し、検証に成功すれば true
+を返します。
+
+digest は利用するハッシュ関数の名前を "sha256" や "md5" 
+といった文字列で指定します。
+
+DSA で検証をする場合はハッシュ関数には "dss1" を指定してください。
+
+検証に失敗した、つまり署名時と異なるハッシュ関数を使った、
+sign が正しい署名でなかった場合などは false を返します。
+
+- **param** `digest` -- 利用するハッシュ関数の名前
+- **param** `sign` -- 検証に利用する署名文字列
+- **param** `data` -- 検証対象の文字列
+- **raise** `OpenSSL::PKey::PKeyError` -- 検証時にエラーが起きた場合に発生します。
+       正しい署名でなかった場合など、検証に失敗した場合はこの
+       例外は発生しないことに注意してください
+
+
+# class OpenSSL::PKey::PKeyError < OpenSSL::OpenSSLError
+OpenSSL の公開鍵関連のエラーの場合に発生する例外

@@ -1,0 +1,6 @@
+---
+library: socket
+---
+# class SocketError < StandardError
+
+[lib:socket] ライブラリに関する例外クラスです。

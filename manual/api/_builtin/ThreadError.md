@@ -1,0 +1,18 @@
+---
+library: _builtin
+---
+# class ThreadError < StandardError
+
+[c:Thread] 関連のエラーが起きたときに発生します。
+
+  - カレントスレッドを [m:Thread#join] しようとしたとき
+  - [m:Thread#join] でデッドロックしそうになったとき
+  - 終了したスレッドを [m:Thread#wakeup] あるいは [m:Thread#run] しようとしたとき
+  - スレッドが一つしかないのに [m:Thread.stop] しようとしたとき
+  - [m:Kernel?.throw] がスレッド内で [m:Kernel?.catch] されないとき
+  - スレッドから return しようとしたとき
+
+  - イテレータを与えずにスレッドを生成しようとしたとき
+  - カレントスレッドの属するスレッドグループが freeze されているときに、スレッドを生成しようとしたとき
+
+  - freeze あるいは enclose されているスレッドグループにスレッドを加えようとした時

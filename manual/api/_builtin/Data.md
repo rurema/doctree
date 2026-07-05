@@ -1,0 +1,431 @@
+---
+library: _builtin
+since: "3.2"
+---
+# class Data < Object
+
+「値オブジェクト(value object)」の定義に利用できるクラスです。
+
+以下のような特徴があります。
+
+  - オブジェクト同士の比較は、型の比較およびメンバの値の比較によって行われます。
+  - オブジェクトはイミュータブルになります。すなわち、オブジェクト生成時に設定されたメンバはその後上書きされることはありません。
+
+[m:Data.define] でオブジェクトのクラスを定義できます。定義されたクラスは Data のサブクラスとなります。
+Data のサブクラスでは、メンバに対するアクセスメソッドが定義されています。
+
+Data と似たクラスに [c:Struct] があります。Struct はメンバの書き換えや列挙が可能であるなど、
+よりコンテナ風の API を提供するクラスです。
+
+```ruby title="例"
+# Dogクラスを定義
+Dog = Data.define(:name, :age)
+
+# Dogクラスのインスタンスを作成
+fred = Dog.new("Fred", 5)
+
+# メンバにアクセスできる
+p fred.name # => "Fred"
+
+# キーワード引数でも構築できる
+p Dog.new(name: "Terry", age: 3)
+
+# メンバの値を書き換えることはできない
+fred.age = 6 # => NoMethodError
+```
+
+なお、Ruby 2.7 以前に存在し Ruby 3.0 で削除された Data クラスとは異なります。
+
+## Class Methods
+
+### def define(*args)       -> Class
+### def define(*args) {|subclass| block } -> Class
+
+[c:Data] クラスに新しいサブクラスを作って、それを返します。
+
+サブクラスでは値オブジェクトのメンバに対するアクセスメソッドが定義されています。
+
+```ruby title="例"
+Dog = Data.define(:name, :age)
+fred = Dog.new("Fred", 5)
+p fred.name # => "Fred"
+p fred.age  # => 5
+```
+
+メンバの値を書き換えることはできません。
+
+```ruby title="例"
+Dog = Data.define(:name, :age)
+fred = Dog.new("Fred", 5)
+fred.age = 6 # => NoMethodError
+```
+
+メンバを持たないサブクラスも定義可能です。
+以下のように、パターンマッチに利用できます。
+
+```ruby title="例"
+class HTTPFetcher
+  Response = Data.define(:body)
+  NotFound = Data.define
+
+  def get(url)
+    # ダミーの実装
+    if url == "http://example.com/"
+      Response.new(body: "Current time is #{Time.now}")
+    else
+      NotFound.new
+    end
+  end
+end
+
+def fetch(url)
+  fetcher = HTTPFetcher.new
+  case fetcher.get(url)
+  in HTTPFetcher::Response(body)
+    body
+  in HTTPFetcher::NotFound
+    :NotFound
+  end
+end
+
+p fetch("http://example.com/")     # => "Current time is 2023-01-10 10:00:53 +0900"
+p fetch("http://example.com/404")  # => :NotFound
+```
+
+- **param** `args` -- 値オブジェクトのクラスを定義するための可変長引数。[c:Symbol] または [c:String] を指定します。
+
+- **return** -- Data のサブクラスを返します。
+
+- **raise** `TypeError` -- 引数に [c:Symbol], [c:String] (String に暗黙の型変換が行われるオブジェクトを含む) 以外を指定した場合に発生します。
+
+### ブロックを指定した場合
+
+Data.define にブロックを指定した場合は定義した Data をコンテキストにブロックを評価します。
+また、定義した Data はブロックパラメータにも渡されます。
+
+```ruby title="例"
+Customer = Data.define(:name, :address) do
+  def greeting
+    "Hello #{name}!"
+  end
+end
+p Customer.new("Dave", "123 Main").greeting # => "Hello Dave!"
+```
+
+なお、Dataのサブクラスのインスタンスを生成する際にオプション引数を使用したいときは、
+initialize メソッドをオーバーライドすることで実現できます。
+
+```ruby title="例"
+Point = Data.define(:x, :y) do
+  def initialize(x:, y: 0)
+    super
+  end
+end
+
+p Point.new(x: 1)        # => #<data Point x=1, y=0>
+p Point.new(x: 1, y: 2)  # => #<data Point x=1, y=2>
+```
+
+### def new(*args) -> Data
+### def new(**kwargs) -> Data
+### def [](*args) -> Data
+### def [](**kwargs) -> Data
+
+(このメソッドは Data のサブクラスにのみ定義されています)
+値オブジェクトを生成して返します。
+
+- **param** `args` -- 値オブジェクトのメンバの値を指定します。
+
+- **param** `kwargs` -- 値オブジェクトのメンバの値を指定します。
+
+- **return** -- 値オブジェクトクラスのインスタンス。
+
+- **raise** `ArgumentError` -- 値オブジェクトのメンバの数より多くの引数を渡した場合に発生します。
+
+```ruby title="例"
+Point = Data.define(:x, :y)
+
+p1 = Point.new(1, 2)
+p p1.x     # => 1
+p p1.y     # => 2
+
+p2 = Point.new(x: 3, y: 4)
+p p2.x    # => 3
+p p2.y    # => 4
+```
+
+new に渡す引数の数がメンバの数より多い場合は new でエラーになります。
+
+new に渡す引数の数がメンバの数より少ない場合は new ではエラーにならず、そのまま initialize に渡されます。
+ユーザが initialize のオーバーライドを通して、少ない引数のときの適切な振舞いを実装可能とするためです。
+
+次の例ではいずれのケースでもエラーが発生していますが、
+Point.new に渡した位置引数の数が多い場合(上から2番目)のみ new でエラーが発生しており、
+残りのケースではエラーの発生箇所は new ではなく initialize であることに注意してください。
+
+```ruby title="例"
+Point = Data.define(:x, :y)
+
+#@since 3.4
+Point.new(1)                 # => in 'initialize': missing keyword: :y (ArgumentError)
+Point.new(1, 2, 3)           # => in 'new': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
+Point.new(x: 1)              # => in 'initialize': missing keyword: :y (ArgumentError)
+Point.new(x: 1, y: 2, z: 3)  # => in 'initialize': unknown keyword: :z (ArgumentError)
+#@else
+Point.new(1)                 # => in `initialize': missing keyword: :y (ArgumentError)
+Point.new(1, 2, 3)           # => in `new': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
+Point.new(x: 1)              # => in `initialize': missing keyword: :y (ArgumentError)
+Point.new(x: 1, y: 2, z: 3)  # => in `initialize': unknown keyword: :z (ArgumentError)
+#@end
+```
+
+下の例のように、initialize メソッドをオーバーライドすることで new のオプション引数を実現できます。
+
+```ruby title="オプション引数を実現する例"
+Point = Data.define(:x, :y) do
+  def initialize(x:, y: 0)
+    super
+  end
+end
+
+Point.new(x: 1)        # => #<data Point x=1, y=0>
+Point.new(x: 1, y: 2)  # => #<data Point x=1, y=2>
+```
+
+メンバに存在しない引数を受け取るようにすることもできます。
+
+```ruby title="メンバに存在しない引数を受け取る例"
+Point = Data.define(:x, :y) do
+  def initialize(x:, y:, multiplier: 1)
+    super(x: x * multiplier, y: y * multiplier)
+  end
+end
+
+Point.new(x: 1, y: 2)                  # => #<data Point x=1, y=2>
+Point.new(x: 1, y: 2, multiplier: 10)  # => #<data Point x=10, y=20>
+```
+
+### def members -> [Symbol]
+
+値オブジェクトのメンバの名前([c:Symbol])の配列を返します。
+
+```ruby title="例"
+Foo = Data.define(:foo, :bar)
+p Foo.members      # => [:foo, :bar]
+```
+
+## Instance Methods
+
+### def ==(other)    -> bool
+
+self と other のクラスが同じであり、各メンバが == メソッドで比較して等しい場合に
+true を返します。そうでない場合に false を返します。
+
+- **param** `other` -- self と比較したいオブジェクトを指定します。
+
+```ruby title="例"
+Dog = Data.define(:name, :age)
+dog1 = Dog.new("Fred", 5)
+dog2 = Dog.new("Fred", 5.0)
+
+p 5 == 5.0            # => true
+p 5.eql?(5.0)         # => false
+
+p dog1 == dog2        # => true
+p dog1.eql?(dog2)     # => false
+p dog1.equal?(dog2)   # => false
+```
+
+#@include(Data.attention)
+
+- **SEE** [m:Object#==], [m:Data#eql?]
+
+### def deconstruct   -> [object]
+
+self のメンバの値を配列で返します。
+
+```ruby title="例"
+Measure = Data.define(:amount, :unit)
+
+distance = Measure.new(10, 'km')
+distance.deconstruct # => [10, "km"]
+```
+
+このメソッドは以下のようにパターンマッチで利用されます。
+
+```ruby title="例"
+Measure = Data.define(:amount, :unit)
+distance = Measure.new(10, 'km')
+
+case distance
+in n, 'km' # 裏側で #deconstruct を呼ぶ
+  puts "It is #{n} kilometers away"
+else
+  puts "Don't know how to handle it"
+end
+# "It is 10 kilometers away" が表示される
+
+# 以下のようにも書ける
+case distance
+in Measure(n, 'km')
+  puts "It is #{n} kilometers away"
+# ...
+end
+```
+
+#@include(Data.attention)
+
+- **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
+
+### def deconstruct_keys(array_of_names_or_nil) -> Hash
+
+self のメンバの名前と値の組を Hash で返します。
+
+```ruby title="例"
+Measure = Data.define(:amount, :unit)
+
+distance = Measure.new(10, 'km')
+distance.deconstruct_keys(nil)       # => {:amount=>10, :unit=>"km"}
+distance.deconstruct_keys([:amount]) # => {:amount=>10}
+```
+
+このメソッドは以下のようにパターンマッチで利用されます。
+
+```ruby title="例"
+Measure = Data.define(:amount, :unit)
+distance = Measure.new(10, 'km')
+
+case distance
+in amount:, unit: 'km' # 裏側で #deconstruct_keys を呼ぶ
+  puts "It is #{amount} kilometers away"
+else
+  puts "Don't know how to handle it"
+end
+# "It is 10 kilometers away" が表示される
+
+# 以下のようにも書ける
+case distance
+in Measure(amount:, unit: 'km')
+  puts "It is #{amount} kilometers away"
+# ...
+end
+```
+
+- **param** `array_of_names_or_nil` -- 返り値に含めるメンバの名前の配列を指定します。nil の場合は全てのメンバを意味します。
+
+#@include(Data.attention)
+
+- **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
+
+### def eql?(other)   -> bool
+
+self と other のクラスが同じであり、各メンバが eql? メソッドで比較して等しい場合に
+true を返します。そうでない場合に false を返します。
+
+- **param** `other` -- self と比較したいオブジェクトを指定します。
+
+```ruby title="例"
+Dog = Data.define(:name, :age)
+dog1 = Dog.new("Fred", 5)
+dog2 = Dog.new("Fred", 5)
+
+p dog1 == dog2                # => true
+p dog1.eql?(dog2)             # => true
+p dog1.equal?(dog2)           # => false
+```
+
+#@include(Data.attention)
+
+- **SEE** [m:Object#eql?], [m:Data#==]
+
+### def hash    -> Integer
+
+自身のハッシュ値を整数で返します。
+[m:Data#eql?] で比較して等しいオブジェクトは同じハッシュ値を返します。
+
+```ruby title="例"
+Dog = Data.define(:name, :age)
+dog1 = Dog.new("Fred", 5)
+p dog1.hash # => -3931425561194935428
+dog2 = Dog.new("Fred", 5)
+p dog2.hash # => -3931425561194935428
+dog3 = Dog.new("Fred", 6)
+p dog3.hash # => -4469132459285820530
+```
+
+#@include(Data.attention)
+
+- **SEE** [m:Object#hash]
+
+### def inspect -> String
+### def to_s    -> String
+
+self の内容を人間に読みやすい文字列にして返します。
+
+```ruby title="例"
+Customer = Data.define(:name, :address, :zip)
+joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
+joe.inspect # => "#<data Customer name=\"Joe Smith\", address=\"123 Maple, Anytown NC\", zip=12345>"
+```
+
+#@include(Data.attention)
+
+### def members -> [Symbol]
+
+値オブジェクトのメンバの名前([c:Symbol])の配列を返します。
+
+```ruby title="例"
+Foo = Data.define(:foo, :bar)
+p Foo.new(1, 2).members      # => [:foo, :bar]
+```
+
+#@include(Data.attention)
+
+### def to_h -> Hash
+### def to_h {|member, value| block } -> Hash
+
+self のメンバ名([c:Symbol])と値の組を [c:Hash] にして返します。
+
+```ruby title="例"
+Customer = Data.define(:name, :address, :zip)
+Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
+# => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+```
+
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+```ruby title="ブロック付きの例"
+Customer = Data.define(:name, :address, :zip)
+Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
+  [member, value*2]
+} # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
+```
+
+#@include(Data.attention)
+
+### def with(**kwargs) -> Data
+
+self をコピーしたオブジェクトを返します。
+
+値オブジェクトのメンバのオブジェクトはコピーされません。つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
+
+キーワード引数が指定された場合、引数に対応するメンバには引数の値が設定されます。存在しないメンバを指定した場合はエラーとなります。
+
+- **param** `kwargs` -- コピーされたオブジェクトに設定されるメンバの値を指定します。
+
+- **raise** `ArgumentError` -- 存在しないメンバを指定した場合に発生します。
+
+```ruby title="例"
+Dog = Data.define(:name, :age)
+dog1 = Dog.new("Fred", 5)  # => #<data Dog name="Fred", age=5>
+dog2 = dog1.with(age: 6)   # => #<data Dog name="Fred", age=6>
+p dog1                     # => #<data Dog name="Fred", age=5>
+dog3 = dog1.with(type: "Terrier")  # => ArgumentError (unknown keyword: :type)
+
+# メンバのオブジェクトはコピーされず、同じオブジェクトを参照する。
+dog1.name.upcase!
+p dog1 # => #<data Dog name="FRED", age=5>
+p dog2 # => #<data Dog name="FRED", age=6>
+```
+
+#@include(Data.attention)

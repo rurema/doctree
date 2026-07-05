@@ -1,0 +1,8 @@
+---
+library: rdoc/constant
+---
+# class RDoc::Constant < RDoc::CodeObject
+
+定数を表現するクラスです。
+
+ライブラリの内部で使用します。

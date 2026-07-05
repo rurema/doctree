@@ -1,0 +1,8 @@
+---
+library: rdoc/require
+---
+# class RDoc::Require < RDoc::CodeObject
+
+require されるファイルを表現します。
+
+ライブラリの内部で使用します。

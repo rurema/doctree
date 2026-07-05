@@ -1,0 +1,83 @@
+---
+library: webrick/httpproxy
+---
+# class WEBrick::HTTPProxyServer < WEBrick::HTTPServer
+
+プロクシの機能を提供するクラスです。CONNECT メソッドにも対応しています。
+
+ - [url:https://magazine.rubyist.net/articles/0002/0002-WEBrickProxy.html]
+
+以下は完全に動作するプロクシサーバの例です。
+
+````
+require 'webrick'
+require 'webrick/httpproxy'
+
+s = WEBrick::HTTPProxyServer.new(Port: 8080)
+Signal.trap('INT') do
+  s.shutdown
+end
+s.start
+````
+
+## Class Methods
+
+### def new(config, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPProxyServer
+
+プロクシオブジェクトを生成して返します。
+
+- **param** `config` -- 設定を保存したハッシュを指定します。
+              設定として有効なハッシュのキーとその値は [m:WEBrick::HTTPServer.new] と同じです。
+              それに加えて以下のキーが有効です。
+
+- **`:ProxyAuthProc`**:
+  プロクシ認証を行う [c:Proc] オブジェクトを指定します。この proc は
+  [c:WEBrick::HTTPResponse] オブジェクトと [c:WEBrick::HTTPRequest] オブジェクトを引数として
+  proc.call(req, res) のように呼ばれます。
+  認証に失敗した場合 proc は適切な例外を発生させなければいけません。nil を指定した場合すべての接続を
+  受け付けます。デフォルトは nil です。通常は [c:WEBrick::HTTPAuth::ProxyBasicAuth] か
+  [c:WEBrick::HTTPAuth::ProxyDigestAuth] を使用します。
+```
+ require 'webrick'
+ require 'webrick/httpproxy'
+ auth_proc = proc{|req, res|
+   unless c = req['proxy-authorization']
+     res['Proxy-Authenticate'] = 'Basic realm="WEBrick Proxy"'
+     raise WEBrick::HTTPStatus::ProxyAuthenticationRequired
+   else
+     # 略
+   end
+ }
+ s = WEBrick::HTTPProxyServer.new(ProxyAuthProc: auth_proc, Port: 8080)
+```
+- **`:ProxyContentHandler`**:
+  接続先の HTTP サーバからの内容を処理する [c:Proc] オブジェクトを指定します。
+  レスポンスの内容を書き換えたりする事が出来ます。[c:WEBrick::HTTPResponse] オブジェクトと
+  [c:WEBrick::HTTPRequest] オブジェクトを引数として proc.call(req, res) のように呼ばれます。
+  nil を指定した場合なにもしません。デフォルトは nil です。
+```
+ require 'webrick'
+ require 'webrick/httpproxy'
+ handler = proc{|req, res|
+   res.body.gsub!(/です。/, 'でんがな。')
+   res.body.gsub!(/ます。/, 'まんがな。')
+ }
+ s = WEBrick::HTTPProxyServer.new(ProxyContentHandler: handler, Port: 8080)
+```
+- **`:ProxyVia`**:
+  true を指定した場合 接続先の HTTP サーバへのリクエストに Via ヘッダを付けます。デフォルトは
+  true です。
+- **`:ProxyTimeout`**:
+  true を指定した場合 接続先の HTTP サーバへのリクエストにタイムアウトを設定します。
+  タイムアウトまでの時間は設定できません。
+- **`:ProxyURI`**:
+  HTTP サーバへの接続にさらに別の Proxy サーバを使う場合にその Proxy の URI
+  を [c:URI] オブジェクトで指定します。
+```
+  require 'uri'
+  require 'webrick/httpproxy'
+  u = URI.parse('http://localhost:18080/')
+  s = WEBrick::HTTPProxyServer.new(ProxyURI: u, Port: 8080)
+```
+
+- **param** `default` -- デフォルトは [m:WEBrick::Config::HTTP] です。

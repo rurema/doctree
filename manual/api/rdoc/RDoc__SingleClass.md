@@ -1,0 +1,8 @@
+---
+library: rdoc/single_class
+---
+# class RDoc::SingleClass < RDoc::ClassModule
+
+特異クラスを表現するクラスです。
+
+ライブラリの内部で使用します。

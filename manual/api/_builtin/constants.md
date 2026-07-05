@@ -1,0 +1,311 @@
+## Constants
+
+#@until 3.0.0
+### const TRUE -> TrueClass
+非推奨です。代表的な真の値。true と同じ。
+
+この定数は過去との互換性のために提供されています。擬似変数 true を使ってください。
+
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
+#@end
+
+#@until 3.0.0
+### const FALSE -> FalseClass
+非推奨です。代表的な偽の値。false と同じ。
+
+この定数は過去との互換性のために提供されています。擬似変数 false を使ってください。
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
+#@end
+
+#@until 3.0.0
+### const NIL -> NilClass
+非推奨です。 nil と同じ。
+
+この定数は過去との互換性のために提供されています。擬似変数 nil を使ってください。
+
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
+#@end
+
+### const STDIN -> IO
+標準入力。[m:$stdin] のデフォルト値。 [m:$stdin] も参照してください。
+
+STDIN は、 ruby プロセスが起動された時点での標準入力を表します。
+起動時点では [m:$stdin] も同じ値に初期化されています。
+
+[m:$stdin] に他の入力オブジェクトを代入することで簡易なリダイレクトを実現できます。
+そして、 [m:$stdin] に STDIN を代入すればこのリダイレクトを復元できるわけです。
+
+### 注意
+STDIN は ruby 自体が起動された時点での標準入力です。
+「システムにおける標準の入力ストリーム」とは異なります。
+
+多くのシステムでは標準の入力ストリームは端末です。
+ruby 自体が他のストリームに向けて入力をリダイレクトされた状態で起動された場合、
+STDIN が保持するのは端末ではなく、リダイレクト先のストリームです。
+
+### const STDOUT -> IO
+標準出力。[m:$stdout] のデフォルト値。 [m:$stdout] も参照してください。
+
+STDOUT は、 ruby プロセスが起動された時点での標準出力を表します。
+起動時点では [m:$stdout] も同じ値に初期化されています。
+
+[m:$stdout] に他の出力オブジェクトを代入することで簡易なリダイレクトを実現できます。
+そして、 [m:$stdout] に STDOUT を代入すればこのリダイレクトを復元できるわけです。
+
+### 注意
+STDOUT は ruby 自体が起動された時点での標準出力です。
+「システムにおける標準の出力ストリーム」とは異なります。
+
+多くのシステムでは標準の出力ストリームは端末です。
+ruby 自体が他のストリームに向けて出力をリダイレクトされた状態で起動された場合、
+STDOUT が保持するのは端末ではなく、リダイレクト先のストリームです。
+
+
+### const STDERR -> IO
+標準エラー出力。[m:$stderr] のデフォルト値。 [m:$stderr] も参照してください。
+
+STDERR は、 ruby プロセスが起動された時点での標準エラー出力を表します。
+起動時点では [m:$stderr] も同じ値に初期化されています。
+
+[m:$stderr] に他の出力オブジェクトを代入することで簡易なリダイレクトを実現できます。
+そして、 [m:$stderr] に STDERR を代入すればこのリダイレクトを復元できるわけです。
+
+### 注意
+STDERR は ruby 自体が起動された時点での標準エラー出力です。
+「システムにおける標準のエラー出力ストリーム」とは異なります。
+
+多くのシステムでは標準のエラー出力ストリームは端末です。
+ruby 自体が他のストリームに向けてエラー出力をリダイレクトされた状態で起動された場合、
+STDERR が保持するのは端末ではなく、リダイレクト先のストリームです。
+
+### const ENV -> Object
+環境変数を表す (擬似) 連想配列 (詳細は [c:ENV] を参照)。
+
+この連想配列の値を変更すると子プロセスの環境として引き継がれます。
+
+### const ARGF -> Object
+引数 (なければ標準入力) で構成される仮想ファイル
+#@since 1.9.1
+(詳細は [c:ARGF]、[c:ARGF.class] を参照)。
+
+つまり [m:Kernel?.gets] は [m:ARGF.class#gets] と同じ意味です。
+[m:ARGF.class#file] で現在読み込み中のファイルオブジェクトが、
+[m:ARGF.class#filename] で現在読み込み中のファイル名が得られます。
+#@else
+(詳細は [c:ARGF] を参照)。
+
+つまり [m:Kernel?.gets] は [m:ARGF.gets] と同じ意味です。
+[m:ARGF.file] で現在読み込み中のファイルオブジェクトが、
+[m:ARGF.filename] で現在読み込み中のファイル名が得られます。
+#@end
+
+### const ARGV -> Array
+Ruby スクリプトに与えられた引数を表す配列です。
+
+組み込み変数 [m:$*] の別名です。
+Ruby 自身に対する引数は取り除かれています。
+
+例:
+
+スクリプト argv.rb の内容が
+```````
+p ARGV
+```````
+であったとします。このときシェルから次を実行すると、
+```````
+$ ruby argv.rb foo bar baz
+```````
+結果は以下のように出力されます。
+```````
+["foo", "bar", "baz"]
+```````
+
+### const DATA -> File
+スクリプトの `__END__`
+プログラムの終り以降をアクセスする [c:File] オブジェクト。
+
+[ref:d:spec/program#terminate]も参照。
+
+ソースファイルの `__END__` 以降は解析・実行の対象にならないので
+その部分にプログラムが利用するためのデータを書き込んでおくことができます。
+DATA 定数はそのデータ部分にアクセスするための [c:File] オブジェクトを保持しています。
+
+`__END__` を含まないプログラムにおいては DATA は定義されません。
+
+### 注意
+
+    - DATA.rewind で移動する読みとり位置は __END__ 直後ではなく、
+      スクリプトファイルの先頭です。
+    - スクリプトが標準入力から読みこまれた場合は標準入力になります。
+    - スクリプトがファイルや標準入力から読みこまれなかった場合や、
+      __END__ で終っていない場合には定義されません。
+    - [m:Kernel?.require] や [m:Kernel?.load] で
+      読み込まれたファイルの中であってもそのファイル (__FILE__, [ref:d:spec/variables#pseudo])
+      ではなく実行されたファイル ([m:$0]) を指します。
+
+### 例1
+```````
+print DATA.gets # => 故人西辞黄鶴楼
+print DATA.gets # => 烟花三月下揚州
+print DATA.gets # => 孤帆遠影碧空尽
+print DATA.gets # => 唯見長江天際流
+DATA.gets       # => nil
+    
+__END__
+故人西辞黄鶴楼
+烟花三月下揚州
+孤帆遠影碧空尽
+唯見長江天際流
+```````
+
+### 例2
+```````
+sum = 0
+DATA.each_line do |line|
+  sum += line.to_i
+end
+    
+DATA.rewind
+p DATA.gets    # => "sum = 0¥n"
+    
+__END__
+17
+19
+23
+29
+31
+```````
+
+### 例3
+```````
+DATA.gets    # => uninitialized constant DATA (NameError)
+```````
+
+### 例4
+
+ファイル library.rb と app.rb の内容が以下であったとします。
+
+library.rb:
+```````
+print DATA.gets
+    
+__END__
+data from library
+```````
+
+app.rb:
+```````
+require 'library.rb'
+
+__END__
+data from app
+```````
+
+このときシェルから次を実行すると
+```````
+$ ruby app.rb
+```````
+結果は以下のように出力されます。
+```````
+data from app
+```````
+
+
+### const TOPLEVEL_BINDING -> Binding
+
+トップレベルでの [c:Binding] オブジェクト。
+
+詳細は [c:Binding] を参照してください。
+
+### const RUBY_VERSION -> String
+
+Ruby のバージョンを表す文字列。
+
+Ruby のバージョンは、major.minor.teeny という形式です。
+
+### const RUBY_RELEASE_DATE -> String
+
+Ruby のリリース日を表す文字列。
+
+### const RUBY_PLATFORM -> String
+
+プラットフォームを表す文字列。
+
+### const RUBY_PATCHLEVEL -> Integer
+Ruby のパッチレベルを表す [c:Integer] オブジェクトです。
+
+パッチレベルはRubyの各バージョンに対するバグ修正パッチの適用をカウントしています。
+teeny リリースのそれぞれについてパッチレベルは 0 から始まり、
+その teeny リリースに対してバグ修正パッチが適用される度に増えていきます。
+
+パッチレベルという概念および RUBY_PATCHLEVEL 定数は、 Ruby 1.8.5-p1 以降、 1.8.6 以降で導入されました。
+1.8.5やそれ以前のバージョンでは定義されていません。
+
+#@since 2.7.0
+### const RUBY_REVISION -> String
+
+Ruby の GIT コミットハッシュを表す [c:String] オブジェクトです。
+#@else
+### const RUBY_REVISION -> Integer
+
+Ruby の Subversion でのリビジョン番号を表す [c:Integer] オブジェクトです。
+#@end
+### const RUBY_COPYRIGHT -> String
+Ruby のコピーライトを表す文字列。
+
+### const RUBY_ENGINE -> String
+Ruby処理系実装の種類を表す文字列。
+
+例:
+`````
+$ ruby-1.9.1 -ve 'p RUBY_ENGINE'
+ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]
+"ruby"
+$ jruby -ve 'p RUBY_ENGINE'
+jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
+"jruby"
+`````
+
+#@since 2.3.0
+### const RUBY_ENGINE_VERSION -> String
+Ruby処理系実装のバージョンを表す文字列。
+
+#@end
+### const RUBY_DESCRIPTION -> String
+Ruby の詳細を表す文字列。
+
+ruby -v で表示される内容が格納されています。
+
+### const SCRIPT_LINES__ -> Hash
+
+ソースファイル別にまとめられたソースコードの各行。
+
+この定数は、デフォルトでは定義されていません。
+この定数がハッシュとして定義された後にソースがコンパイルされると、
+そのソースファイル名をキーに、
+ソースを行毎に分割した配列を値にしたハッシュ要素が設定されます。
+
+この定数はデバッガ ([lib:debug]) などで利用されています。
+
+また、 [m:Kernel?.eval] によるコンパイルは対象にはなりません。
+
+
+例:
+```````
+require 'pp'
+SCRIPT_LINES__ = {}
+require 'English'
+pp SCRIPT_LINES__
+
+# => {"/usr/local/lib/ruby/1.6/English.rb"=>
+#     ["alias $ERROR_INFO              $!\n",
+#      "alias $ERROR_POSITION          $@\n",
+#      "alias $LOADED_FEATURES         $\"\n",
+#               :
+#               :
+#      "alias $POSTMATCH               $'\n",
+#      "alias $LAST_PAREN_MATCH        $+\n"]}
+```````

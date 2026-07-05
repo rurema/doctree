@@ -1,0 +1,46 @@
+---
+library: zlib
+---
+# class Zlib::Error < StandardError
+
+ライブラリ zlib の発行する全ての例外のスーパークラスです。
+
+以下の例外が Zlib::Error のサブクラスとして定義されています。
+それぞれ zlib ライブラリ関数の返すエラーと対応しています。
+
+  - [c:Zlib::StreamEnd]
+  - [c:Zlib::NeedDict]
+  - [c:Zlib::DataError]
+  - [c:Zlib::StreamError]
+  - [c:Zlib::MemError]
+  - [c:Zlib::BufError]
+  - [c:Zlib::VersionError]
+
+# class Zlib::StreamEnd < Zlib::Error
+
+全ての入力データが処理済みで全ての出力が取り出し済みである場合に発生します。
+
+# class Zlib::NeedDict < Zlib::Error
+
+展開に用いる辞書が指定されていない場合に発生します。
+
+# class Zlib::DataError < Zlib::Error
+
+入力データが壊れている場合などに発生します。
+
+# class Zlib::StreamError < Zlib::Error
+
+ストリームの状態が異常である場合や、圧縮レベルの指定が無効なもので
+ある場合に発生します。
+
+# class Zlib::MemError < Zlib::Error
+
+メモリ不足である場合に発生します。
+
+# class Zlib::BufError < Zlib::Error
+
+出力バッファのサイズが不足している場合に発生します。
+
+# class Zlib::VersionError < Zlib::Error
+
+zlib ライブラリのバージョンがこのライブラリの想定しているバージョンと互換でない場合に発生します。

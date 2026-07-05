@@ -1,0 +1,244 @@
+---
+library: rubygems/version
+include:
+  - Comparable
+---
+# class Gem::Version
+
+文字列で表現されたバージョンを比較可能 (Comparable) にするためのクラスです。
+
+バージョンを文字列で表したとき、単純に [m:String#<=>] で比較すると、
+"1.9" のほうが "1.10" よりも大きい（バージョンが高い）ことになってしまい、
+正しく判定できません。
+Gem::Version はこの問題を解決します。
+
+```ruby title="文字列での比較と Gem::Version での比較"
+p "1.9" < "1.10" # => false
+p Gem::Version.new("1.9") < Gem::Version.new("1.10") # => true
+```
+
+gem のバージョンを取り扱うためのクラスですが、バージョン表記が RubyGems の流儀
+に則っていれば RubyGems とは無関係に使うこともできます。
+
+```ruby title="バージョン表記のソートの例"
+versions = %w[ 1.1  1.10  1.9  1.1.beta9  1.1.beta10 ]
+
+p versions.sort_by{ |v| Gem::Version.new(v) }
+# => ["1.1.beta9", "1.1.beta10", "1.1", "1.9", "1.10"]
+```
+
+上の例で、"1.9" と "1.10" では（数字列ではなく）整数として 9 より 10 が
+大きいので、"1.10" のほうが大きいと判定されています。
+
+また、"1.1.beta9" は "beta9" の部分が数字でないものを含んでいるので "1.1" の
+「プレリリース」バージョンであるとみなされます。
+この規則により、"1.1" と "1.1.beta9" では後者のほうが小さいと判定されています。
+
+"1.1.beta9" と "1.1.beta10" では、"beta9" と "beta10" の部分だけが違い
+ますが、アルファベット部分と数字部分が分割され、数字部分は整数の大小比較に
+なるため、後者のほうが大きいと判定されます。
+
+## Singleton Methods
+
+#@since 2.5.0
+### def correct?(version) -> bool
+
+version が正しいバージョンであれば true を返します。そうでなければ false を返します。
+
+```ruby
+p Gem::Version.correct?("9.1")       # => true
+p Gem::Version.correct?("incorrect") # => false
+
+p Gem::Version.correct?(nil)         # => true
+# nil versions are discouraged and will be deprecated in Rubygems 4
+# version が nil のときは true を返しますが、推奨はされず、Ruby 2.6以降では警告がでます。
+```
+#@else
+### def correct?(version) -> 0 | nil
+
+version が正しいバージョンであれば 0 を返します。そうでなければ nil を返します。
+
+```ruby
+p Gem::Version.correct?("9.1")       # => 0
+p Gem::Version.correct?("incorrect") # => nil
+
+p Gem::Version.correct?(nil)         # => 0
+```
+#@end
+
+- **param** `version` -- バージョンを文字列か数値で指定します。
+
+
+### def create(input) -> Gem::Version | nil
+
+[c:Gem::Version] のインスタンスを作成するためのファクトリメソッドです。
+
+```ruby
+ver1 = Gem::Version.create('1.3.17')   # => #<Gem::Version "1.3.17">
+ver2 = Gem::Version.create(ver1)       # => #<Gem::Version "1.3.17">
+ver3 = Gem::Version.create(nil)        # => nil
+```
+
+- **param** `input` -- [c:Gem::Version] のインスタンスか文字列を指定します。
+
+- **raise** `ArgumentError` -- input がバージョンとして不正なオブジェクトである場合に発生します。
+
+- **SEE** [m:Gem::Version.correct?]
+
+
+### def new(version) -> Gem::Version
+
+バージョンを表す文字列から、Gem::Version インスタンスを作成します。
+
+引数のバージョンを表す文字列とは、 数字かASCII文字の連続であり、ドットで区切られたものです。
+
+```ruby
+p Gem::Version.new('1.2.0a') # => #<Gem::Version "1.2.0a">
+
+# Ruby 2.4.1より、空白文字以外の文字がない場合、バージョンは "0" になります。
+p Gem::Version.new(' ') #=> #<Gem::Version "0">
+```
+
+- **param** `version` --
+- **raise** `ArgumentError` -- input がバージョンとして不正なオブジェクトである場合に発生します。
+                     これは Gem::Version.correct? により、判定されます。
+
+
+## Public Instance Methods
+
+### def <=>(other) -> -1 | 0 | 1 | nil
+
+self と other を比較して、self が小さい時に -1、
+等しい時に 0、大きい時に 1 の整数を返します。
+また、other が Gem::Version ではなく比較できないとき、 nil を返します。
+
+```ruby
+p Gem::Version.new("3.9.0") <=>  Gem::Version.new("3.10.0") # => -1
+p Gem::Version.new("3.0.0") <=>  Gem::Version.new("3.0.0")  # =>  0
+p Gem::Version.new("3.0.0") <=>  Gem::Version.new("3.0")    # =>  0
+
+p Gem::Version.new("3.9.0") <=> "3.9.0" # => nil
+```
+
+- **param** `other` -- 比較対象の [c:Gem::Version] のインスタンスを指定します。
+
+### def bump -> Gem::Version
+
+最後の一桁を切り上げた新しい [c:Gem::Version] のインスタンスを返します。
+
+ただし、英字のプレリリースの部分は、無視されます。
+
+```ruby
+p Gem::Version.new('5.3.1').bump     # => #<Gem::Version "5.4">
+p Gem::Version.new('5.3.1.a.1').bump # => #<Gem::Version "5.4">
+p Gem::Version.new('5.3.1.3.1').bump # => #<Gem::Version "5.3.1.4">
+```
+
+### def eql?(other) -> bool
+
+self と other の [m:Gem::Version#version] のバージョンが等しいとき true を返します。
+そうでなければ false を返します。
+
+Comparable を include して作られた == と異なり、"1.0" と "1" は異なるものと判定します。
+
+```ruby
+ver0 = Gem::Version.create('1.0')   # #<Gem::Version "1.0">
+ver1 = Gem::Version.create('1.0')   # #<Gem::Version "1.0">
+ver2 = Gem::Version.create('1')     # #<Gem::Version "1">
+
+p ver0.eql?(ver1)     # => true
+p ver1.eql?(ver2)     # => false
+p ver1 == ver2        # => true
+```
+
+### def marshal_dump -> Array
+
+完全なオブジェクトではなく、バージョン文字列のみダンプします。
+
+```ruby
+p Gem::Version.new('1.2.0a').marshal_dump  # => ["1.2.0a"]
+```
+
+### def marshal_load(array) -> nil
+
+ダンプされた情報をロードし、自身を破壊的に変更します。
+
+```ruby
+version = Gem::Version.new('')
+version.marshal_load(["1.2.0a"])
+p version # => #<Gem::Version "1.2.0a">
+```
+
+- **param** `array` -- バージョン情報を含む配列を指定します。
+
+
+#@#--- to_yaml_properties -> [String]
+#@#
+#@# :nodoc:
+
+#@#--- segments -> Array
+#@#
+#@# :nodoc:
+
+#@since 2.5.0
+#@#--- canonical_segments -> Array
+#@#
+#@# :nodoc:
+#@end
+
+### def version -> String
+### def to_s -> String
+
+バージョン情報を文字列として返します。
+
+```ruby
+version = Gem::Version.new("1.2.3a")
+p version.to_s     # => "1.2.3a"
+p version.version  # => "1.2.3a"
+```
+
+#@#--- yaml_initialize(tag, values) -> String
+#@#
+#@# :nodoc:
+
+### def prerelease? -> bool
+
+self がプレリリースと思われる文字を含むバージョンかどうかを返します。
+
+```ruby title="例"
+Gem::Version.new('1.2.0a').prerelease? # => true
+Gem::Version.new('1.2.0').prerelease?  # => false
+```
+
+- **SEE** [m:Gem::Version#release]
+
+### def release -> Gem::Version
+
+self をリリースバージョンにした [c:Gem::Version] オブジェクトを返します。
+
+プレリリースではないバージョンであれば self を返します。
+
+```ruby title="例"
+Gem::Version.new('1.2.0a').release # => #<Gem::Version "1.2.0">
+Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
+```
+
+- **SEE** [m:Gem::Version#prerelease?]
+
+## Constants
+
+### const Requirement -> Class
+
+[c:Gem::Requirement] のエイリアスです。
+
+```ruby
+p Gem::Version::Requirement == Gem::Requirement  # => true
+```
+
+#@#--- VERSION_PATTERN -> String
+#@#
+#@# :nodoc:
+#@#
+#@#--- ANCHORED_VERSION_PATTERN -> Regexp
+#@#
+#@# :nodoc:

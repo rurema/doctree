@@ -1,0 +1,27 @@
+---
+library: _builtin
+---
+# class RegexpError < StandardError
+
+正規表現のコンパイルに失敗したときに発生します。
+
+例:
+
+`````
+$ ruby -e 'Regexp.compile("*")'
+`````
+#@since 3.4
+`````
+-e:1:in 'initialize': target of repeat operator is not specified: /*/ (RegexpError)
+        from -e:1:in 'Regexp#compile'
+`````
+#@else
+`````
+-e:1:in `initialize': target of repeat operator is not specified: /*/ (RegexpError)
+        from -e:1:in `Regexp#compile'
+`````
+#@end
+`````````````
+from -e:1
+`````````````
+

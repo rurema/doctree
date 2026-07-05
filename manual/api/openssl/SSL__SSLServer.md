@@ -1,0 +1,110 @@
+---
+library: openssl
+include:
+  - OpenSSL::SSL::SocketForwarder
+---
+# class OpenSSL::SSL::SSLServer < Object
+
+SSL サーバーのためのクラス。
+
+[c:TCPServer] をラップするクラスで、TCPServer で接続した
+ソケットを [c:OpenSSL::SSL::SSLSocket] でラップする機能を持ちます。
+おおよそ TCPServer と同様のメソッドを持ちます。
+
+基本的には SSL サーバを簡単に実装するためのクラスであり、
+これを利用せずとも SSL サーバを実装することは可能です。
+
+以下はクライアントからの入力を標準出力に出力するだけのサーバです。
+
+`````
+require 'socket'
+require 'openssl'
+  
+include OpenSSL
+  
+ctx = SSL::SSLContext.new()
+ctx.cert = X509::Certificate.new(File.read('cert.pem'))
+ctx.key = PKey::RSA.new(File.read('privkey.pem'))
+svr = TCPServer.new(2007)
+serv = SSL::SSLServer.new(svr, ctx)
+  
+loop do
+  while soc = serv.accept
+    puts soc.read
+  end
+end
+`````
+
+## Class Methods
+
+### def new(svr, ctx) -> OpenSSL::SSL::SSLServer
+[c:TCPServer] オブジェクトをラップする SSLServer オブジェクトを生成します。
+
+svr にはラップする[c:TCPServer] オブジェクトを、
+ctx には SSL サーバが用いる  [c:OpenSSL::SSL::SSLContext]
+オブジェクトを生成します。
+
+[m:OpenSSL::SSL::SSLServer#listen] や [m:OpenSSL::SSL::SSLServer#accept]
+は内部で svr で渡されたオブジェクトの
+[m:TCPServer#listen] や [m:TCPServer#accept] を呼び出します。
+
+- **param** `svr` -- 利用する [c:TCPServer] オブジェクト
+- **param** `ctx` -- SSL サーバとして用いる [c:OpenSSL::SSL::SSLContext] オブジェクト
+
+#@# ctx に session_id_context が設定されていない場合は $0 から
+#@# 設定する
+
+## Instance Methods
+
+### def to_io -> TCPServer
+ラップしている [c:TCPServer] オブジェクトを返します。
+
+### def accept -> OpenSSL::SSL::SSLSocket
+クライアントからの接続を受け付け、接続した
+SSLSocket オブジェクトを返します。
+
+[m:OpenSSL::SSL::SSLServer#start_immediately] が真ならば、
+SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから
+SSLSocket オブジェクトを返します。
+
+### def close -> nil
+内部のサーバソケットを閉じます。
+
+### def listen(backlog=5) -> 0
+ラップしている [c:TCPServer] の [m:TCPServer#listen] 
+を呼びだします。
+
+通常は TCPServer の初期化時に listen が呼びだされるため
+呼ぶ必要はないはずです。
+
+- **param** `backlog` -- クライアントからの接続要求を保留できる数
+- **raise** `Errno::EXXX` -- [man:listen(2)] が失敗すれば 例外 [c:Errno::EXXX] が発生します。
+
+### def start_immediately -> bool
+[m:OpenSSL::SSL::SSLServer#accept] で
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLServer#start_immediately=]
+
+### def start_immediately=(bool)
+[m:OpenSSL::SSL::SSLServer#accept] で
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。
+
+これを真に設定した場合は、[m:OpenSSL::SSL::SSLServer#accept] で
+接続したソケットに対し [m:OpenSSL::SSL::SSLSocket#accept] を
+呼び、ハンドシェイクを実行します。
+
+デフォルトでは true です。
+
+- **param** `bool` -- 設定する真偽値。
+- **SEE** [m:OpenSSL::SSL::SSLServer#start_immediately]
+
+### def shutdown(how=Socket::SHUT_RDWR) -> 0
+ソケットの以降の接続を終了させます。
+
+詳しくは [m:BasicSocket#shutdown] を参照してください。
+
+- **param** `how` -- 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, 
+           Socket::SHUT_RDWR などで指定します。
+
+

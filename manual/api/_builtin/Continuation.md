@@ -1,0 +1,57 @@
+---
+library: continuation
+---
+# class Continuation < Object
+
+継続を表すクラスです。
+
+[m:Kernel?.callcc] { |cont| ... } の呼び出し
+は、直前の状態(ローカル変数の定義、スタックフレーム)を cont に記憶
+してブロックを実行します。cont は、Continuation クラスのインスタ
+ンスで、[m:Continuation#call] メソッドを実行するこ
+とでいつでも記憶した状態を継続できます。
+
+C 言語の setjmp()/longjmp() がわかる人は
+`````
+setjmp() == callcc {|c| }
+longjmp() == c.call
+`````
+と考えれば、わかりやすいかも知れません(ただし、callcc はスタックが深く
+なる方向にもジャンプ出来るという違いがあります)
+
+callcc() は、ブロックの戻り値を返しますが、Continuation#call(args)
+が呼び出されたときは args を返します。
+
+例:
+#@# よりコアな例は [[ruby-list:34943]] を参照のこと
+
+`````
+以下は、Continuationによる無限ループの例
+  
+def LOOP
+  c = nil
+  yield callcc {|cnt| c = cnt; true }
+  c.call(false)
+end
+  
+LOOP {|v| p v}
+  
+=> true
+   false
+   false
+   false
+     :
+     :
+`````
+
+callcc とは、call-with-current-continuation の略です。
+
+## Instance Methods
+
+### def [](*ret)      -> ()
+### def call(*ret)    -> ()
+
+self が記憶した状態を継続します。引数は そのまま
+[m:Kernel?.callcc] の戻り値になります。
+
+- **param** `ret` -- 継続に復帰した時に返す値を指定します。

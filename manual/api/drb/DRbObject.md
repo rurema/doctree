@@ -1,0 +1,72 @@
+---
+library: drb
+alias:
+  - DRbObject
+---
+# class DRb::DRbObject < Object
+
+リモートの dRuby オブジェクトを表すオブジェクトです。
+
+このクラスのインスタンスはプロキシとして働きます。
+つまりインスタンスへのメソッド呼び出しはリモートプロセスに送られ
+リモート側でメソッドが呼び出されます。
+
+内部的には [m:BasicObject#method_missing] でメソッド呼び出しを
+hook して、それを転送します。
+
+
+## Class Methods
+#@# #@# bc-rdoc: detected missing name: _load
+#@# --- _load(s)
+#@# #@todo
+#@# 
+#@# Unmarshall a marshalled DRbObject.
+#@# 
+#@# If the referenced object is located within the local server,
+#@# then the object itself is returned. Otherwise, a new DRbObject
+#@# is created to act as a stub for the remote referenced object.
+#@# 
+#@# #@# bc-rdoc: detected missing name: new
+#@# --- new(obj, uri=nil)
+#@# #@todo
+#@# 
+#@# Create a new remote object stub.
+#@# 
+#@# obj is the (local) object we want to create a stub for. Normally
+#@# this is nil. uri is the URI of the remote object that this will
+#@# be a stub for.
+
+### def new_with_uri(uri) -> DRb::DRbObject
+URI から新しい DRbObject を生成します。
+
+別プロセスの [m:DRb?.start_service] で指定したフロントオブジェクトを
+指すリモートオブジェクトを取り出します。
+
+- **param** `uri` -- URI リモートオブジェクトを指定するための URI (文字列)
+
+#@# --- new_with -> DRb::DRbObject
+#@# used internally 
+
+## Instance Methods
+
+#@# #@# bc-rdoc: detected missing name: method_missing
+#@# --- method_missing(msg_id, *a, &b)
+#@# #@todo
+#@# 
+#@# Routes method calls to the referenced object.
+
+### def ==(other) -> bool
+### def eql?(other) -> bool
+[c:DRb::DRbObject] オブジェクト同士が同じであるなら真を返します。
+
+この同値判定は、
+オブジェクトが参照している URI と識別子が等しいかどうかでします。
+
+### def __drburi -> String|nil
+リモートオブジェクトの URI を返します。
+
+### def __drbref -> Integer|nil
+リモートオブジェクトの識別子を返します。
+
+[m:DRb::DRbObject.new_with_uri] で取り出したフロントオブジェクトは
+識別子を持たないため nil を返します。

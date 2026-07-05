@@ -1,0 +1,67 @@
+---
+library: delegate
+---
+# class SimpleDelegator < Delegator
+
+[c:Delegator] クラスを継承し、シンプルなメソッド委譲を実現した具象クラス。
+
+委譲先に指定されたオブジェクトへメソッドの実行を委譲します。
+
+例:
+
+```
+require 'delegate'
+
+foo = Object.new
+def foo.test
+  p 25
+end
+foo2 = SimpleDelegator.new(foo)
+foo2.test   # => 25
+```
+
+## Class Methods
+
+### def new(obj) -> object
+
+メソッドを委譲するオブジェクトの設定と、
+メソッド委譲を行うためのクラスメソッドの定義を行います。
+
+- **param** `obj` -- 委譲先のオブジェクト
+
+- **SEE** [m:Delegator.new]
+
+## Instance Methods
+
+### def __getobj__ -> object
+
+委譲先のオブジェクトを返します。
+
+- **SEE** [m:Delegator#__getobj__]
+
+### def __setobj__(obj) -> object
+
+委譲先のオブジェクトを obj に変更します。
+
+メソッド委譲を行うためのクラスメソッドの再定義は行われないことに注意してください。
+メソッド委譲を行うためのクラスメソッドの定義は生成時にのみ行われます。
+そのため、以前の委譲先オブジェクトと
+obj の間で呼び出せるメソッドに違いがあった場合は、
+何かしらの例外が発生する可能性があります。
+
+- **param** `obj` -- 委譲先のオブジェクト
+
+- **return** -- 変更後の委譲先オブジェクト
+
+
+#@until 1.9.1
+
+### def clone -> object
+### def dup(obj) -> object
+
+オブジェクトの複製を作成して返します。
+dupの引数objについては、[ruby-list:44914]にて問題があることが報告されています。
+
+- **SEE** [m:Object#clone],[m:Object#dup]
+
+#@end

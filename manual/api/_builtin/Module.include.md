@@ -1,0 +1,79 @@
+### def include(*mod) -> self
+
+モジュール mod をインクルードします。
+
+- **param** `mod` -- [c:Module] のインスタンス( [c:Enumerable] など)を指定します。
+
+- **raise** `ArgumentError` -- 継承関係が循環してしまうような include を行った場合に発生します。
+
+```ruby title="例"
+module M
+end
+module M2
+  include M
+end
+module M
+  include M2
+end
+```
+
+実行結果:
+
+#@since 3.4
+`````
+-:3:in 'append_features': cyclic include detected (ArgumentError)
+        from -:3:in 'include'
+`````
+#@else
+`````
+-:3:in `append_features': cyclic include detected (ArgumentError)
+        from -:3:in `include'
+`````
+#@end
+`````````````
+from -:3
+`````````````
+
+
+インクルードとは、指定されたモジュールの定義
+#@since 1.9.1
+(メソッド、定数) を引き継ぐことです。
+#@else
+(メソッド、定数、クラス変数) を引き継ぐことです。
+#@end
+インクルードは多重継承の代わりに用いられており、 mix-in とも呼びます。
+
+```ruby title="例"
+class C
+  include FileTest
+  include Math
+end
+
+p C.ancestors
+
+# => [C, Math, FileTest, Object, Kernel]
+```
+
+モジュールの機能追加は、クラスの継承関係の間にそのモジュールが挿入
+されることで実現されています。従って、メソッドの探索などは
+スーパークラスよりもインクルードされたモジュールのほうが
+先に行われます
+(上の例の [m:Module#ancestors] の結果がメソッド探索の順序です)。
+
+同じモジュールを二回以上 include すると二回目以降は無視されます。
+
+```ruby title="例"
+module M
+end
+class C1
+  include M
+end
+class C2 < C1
+  include M   # この include は無視される
+end
+
+p C2.ancestors  # => [C2, C1, M, Object, Kernel]
+```
+
+引数に複数のモジュールを指定した場合、
+最後の引数から順にインクルードします。
