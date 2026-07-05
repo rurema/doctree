@@ -1,22 +1,20 @@
 ---
 type: library
----
 #@# Author: Keiju ISHITSUKA
-
-category Development
-
+category: Development
+require:
 #@until 2.7.0
-require e2mmap
+  - e2mmap
 #@end
-require irb/init
-require irb/context
-require irb/extend-command
-require irb/ruby-lex
-require irb/input-method
-require irb/locale
+  - irb/init
+  - irb/context
+  - irb/extend-command
+  - irb/ruby-lex
+  - irb/input-method
+  - irb/locale
 #@# IRB.conf[:VERSION] を設定していない場合のみ。
-require irb/version
-
+  - irb/version
+---
 irb は Interactive Ruby の略です。
 irb を使うと、Ruby の式を標準入力から簡単に入力・実行できます。
 

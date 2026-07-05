@@ -1,10 +1,9 @@
 ---
 type: library
----
 #@# Author: Keiju ISHITSUKA
-
-require readline
-
+require:
+  - readline
+---
 irb の completion 機能を提供するライブラリです。
 
 ### 使い方
