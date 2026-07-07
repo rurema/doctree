@@ -60,11 +60,9 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
 - **raise** `ArgumentError` -- システムに定義されていないシグナルを引数 signal に
                      指定した場合に発生します。
 #@end
-````````````````````````
-例えばネイティブな Windows システム (mswin32,
-mingw など) で動く ruby では INT ILL FPE SEGV
-TERM BREAK ABRT EXIT しか定義されていません。
-````````````````````````
+                     例えばネイティブな Windows システム (mswin32,
+                     mingw など) で動く ruby では INT ILL FPE SEGV
+                     TERM BREAK ABRT EXIT しか定義されていません。
 
 いくつかのシグナルに対して、Ruby インタプリタは例外 [c:Interrupt] や
 [c:SignalException] を発生させます。このようなシグナルは例外処理によっ

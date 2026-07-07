@@ -200,9 +200,7 @@ Object#instance_eval
 #@else
 - **`[m:Object#instance_eval]`**:
 #@end
-```````
-self がそのレシーバ、class がそのレシーバの特異クラス
-```````
+    self がそのレシーバ、class がそのレシーバの特異クラス
 
 #### eval
 

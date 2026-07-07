@@ -539,9 +539,7 @@
   Ruby 3.2 で削除された。
 
 #@until 3.2
-`````
-参照：[[d:spec/safelevel]]
-`````
+  参照：[d:spec/safelevel]
 #@end
 
 - **鬼雲**:
@@ -1072,9 +1070,7 @@
   Ruby 3.2 で削除された。
 
 #@until 3.2
-`````
-参照：[[d:spec/safelevel]]
-`````
+  参照：[d:spec/safelevel]
 #@end
 
 - **セッター**:
