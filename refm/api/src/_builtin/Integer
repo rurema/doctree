@@ -1,5 +1,4 @@
 = class Integer < Numeric
-
 #@until 3.2
 alias Fixnum
 alias Bignum

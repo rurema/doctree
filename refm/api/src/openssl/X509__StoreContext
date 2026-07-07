@@ -11,7 +11,7 @@
 検証結果の詳細情報を保持するためにも使われます。
 
 == Class Methods
----new(store, cert, chain=nil) -> OpenSSL::X509::StoreContext
+--- new(store, cert, chain=nil) -> OpenSSL::X509::StoreContext
 証明書ストアコンテキストを生成します。
 
 store には検証に必要なルート CA 証明書を含む [[c:OpenSSL::X509::Store]]

@@ -1,5 +1,4 @@
 = class RDoc::CodeObject
-
 #@since 1.9.2
 include RDoc::Text
 #@end

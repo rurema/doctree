@@ -1,5 +1,5 @@
 = class OpenSSL::SSL::SSLServer < Object
-include OpenSSL::SSL::SocketForwarder 
+include OpenSSL::SSL::SocketForwarder
 
 SSL サーバーのためのクラス。
 
