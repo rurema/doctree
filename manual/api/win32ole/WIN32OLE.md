@@ -369,9 +369,9 @@ Windows標準のヘルプ表示コンポーネントのHHCtrl.OCXを利用して
                   0を指定してください。
 
 - **raise** `RuntimeError` -- オブジェクトが関連するヘルプファイルを持たない場合
-                    (no helpfile of `オブジェクト名') や、ヘルプファイル
+                    (no helpfile of `オブジェクト名`) や、ヘルプファイル
                     がインストールされていない場合 (failed to open
-                    help file `ファイル名') に通知します。
+                    help file `ファイル名`) に通知します。
 
 ``````
 excel = WIN32OLE.new('Excel.Application')

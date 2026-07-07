@@ -1884,7 +1884,7 @@ end
 
 For the given method names, marks the method as passing keywords through
 a normal argument splat.  This should only be called on methods that
-accept an argument splat (`*args`) but not explicit keywords or a
+accept an argument splat (\`*args\`) but not explicit keywords or a
 keyword splat.  It marks the method such that if the method is called
 with keyword arguments, the final hash argument is marked with a special
 flag such that if it is the final element of a normal argument splat to

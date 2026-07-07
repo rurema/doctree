@@ -39,7 +39,7 @@ p foo       # => 2
 #@until 3.0
 ブロックを指定しない場合、Ruby 2.7 では
 [m:$VERBOSE] = true のときには警告メッセージ
-「warning: Capturing the given block using Proc.new is deprecated; use `&block` instead」
+「warning: Capturing the given block using Proc.new is deprecated; use \`&block\` instead」
 が出力され、Ruby 3.0 では
 [c:ArgumentError] (tried to create Proc object without a block)
 が発生します。
@@ -509,7 +509,7 @@ p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
 ### def ruby2_keywords -> proc
 
 Marks the proc as passing keywords through a normal argument splat. This
-should only be called on procs that accept an argument splat (`*args`)
+should only be called on procs that accept an argument splat (\`*args\`)
 but not explicit keywords or a keyword splat.  It marks the proc such
 that if the proc is called with keyword arguments, the final hash
 argument is marked with a special flag such that if it is the final

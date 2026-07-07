@@ -6,7 +6,7 @@ category: DesignPattern
 
 [c:Delegator] クラスは指定したオブジェクトにメソッドの実行を委譲します。
 [c:Delegator] クラスを利用する場合はこれを継承して
-[m:Delegator#`__getobj__`] メソッドを再定義して委譲先のオブジェクトを指定します。
+[m:Delegator#__getobj__] メソッドを再定義して委譲先のオブジェクトを指定します。
 
 
 [c:SimpleDelegator] は [c:Delegator] の利用例の一つであり、
@@ -53,7 +53,7 @@ p a         # => [25]
 
 サブクラスにメソッド委譲の仕組みを提供する抽象クラス。
 
-メソッド委譲を行う場合は、本クラスを継承し[m:Delegator#`__getobj__`]を再定義する必要があります。
+メソッド委譲を行う場合は、本クラスを継承し[m:Delegator#__getobj__]を再定義する必要があります。
 
 具体的な使用例については、[c:SimpleDelegator]を参照してください。
 
@@ -67,7 +67,7 @@ p a         # => [25]
 
 obj のもつインスタンスメソッドのうち、
 自オブジェクトに定義されていないメソッドについて、
-[m:Delegator#`__getobj__`] が返すオブジェクトへ
+[m:Delegator#__getobj__] が返すオブジェクトへ
 メソッド委譲を行うクラスメソッドを定義します。
 
 - **param** `obj` -- 委譲を行うメソッドを決定するために使用するオブジェクト
@@ -150,18 +150,18 @@ obj のもつインスタンスメソッドのうち、
 
 ### def marshal_dump -> object
 
-シリアライゼーションをサポートするために[m:Delegator#`__getobj__`] が返すオブジェクトを返します。
+シリアライゼーションをサポートするために[m:Delegator#__getobj__] が返すオブジェクトを返します。
 
 ### def marshal_load(obj) -> object
 
-シリアライズされたオブジェクトから、[m:Delegator#`__getobj__`] が返すオブジェクトを再現します。
+シリアライズされたオブジェクトから、[m:Delegator#__getobj__] が返すオブジェクトを再現します。
 
 - **param** `obj` -- [m:Delegator#marshal_dump]の戻り値のコピー
 
 
 ### def method_missing(m, *args) -> object
 
-渡されたメソッド名と引数を使って、[m:Delegator#`__getobj__`] が返すオブジェクトへメソッド委譲を行います。
+渡されたメソッド名と引数を使って、[m:Delegator#__getobj__] が返すオブジェクトへメソッド委譲を行います。
 
 - **param** `m` -- メソッドの名前（シンボル）
 
@@ -177,7 +177,7 @@ obj のもつインスタンスメソッドのうち、
 
 ### def respond_to?(m) -> bool
 
-[m:Delegator#`__getobj__`] が返すオブジェクトが メソッド m を持つとき真を返します。
+[m:Delegator#__getobj__] が返すオブジェクトが メソッド m を持つとき真を返します。
 
 - **param** `m` -- メソッド名
 

@@ -933,6 +933,6 @@ p defined? Foo       # => "constant"
  - "constant"
  - "class variable"
 #@until 1.9.1
- - "$&", "$`", "$1", "$2", ...
+ - "$&", "$\`", "$1", "$2", ...
 #@end
  - "expression"

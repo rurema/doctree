@@ -147,16 +147,16 @@ open(2) で O_TMPFILE が指定できる場合に使えます。
 #@# [[m:File.fnmatch]], [[m:Dir.glob で使われる定数 ------------------
 
 ### const FNM_NOESCAPE -> Integer
-エスケープ文字 `\' を普通の文字とみなします。
+エスケープ文字 \`\' を普通の文字とみなします。
 [m:File.fnmatch], [m:Dir.glob]で使用します。
 
 ### const FNM_PATHNAME -> Integer
-ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
+ワイルドカード `*`, `?`, `[]` が `/` にマッチしなくなります。
 シェルのパターンマッチにはこのフラグが使用されています。
 [m:File.fnmatch], [m:Dir.glob]で使用します。
 
 ### const FNM_DOTMATCH -> Integer
-ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
+ワイルドカード `*`, `?`, `[]` が先頭の `.` にマッチするようになります。
 [m:File.fnmatch], [m:Dir.glob]で使用します。
 
 ### const FNM_CASEFOLD -> Integer

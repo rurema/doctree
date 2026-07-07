@@ -70,7 +70,7 @@ end
   - "#{sourcefile}:#{sourceline}:in '#{method}'"
     (メソッド内の場合)
 #@else
-  - "#{sourcefile}:#{sourceline}:in `#{method}'"
+  - "#{sourcefile}:#{sourceline}:in `#{method}`"
     (メソッド内の場合)
 #@end
   - "#{sourcefile}:#{sourceline}"

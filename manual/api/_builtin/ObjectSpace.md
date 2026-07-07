@@ -10,9 +10,9 @@ library: _builtin
 ### module_function def _id2ref(id)    -> object
 
 #@since 1.9.3
-オブジェクト ID([m:BasicObject#`__id__`])からオブジェクトを得ます。
+オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
 #@else
-オブジェクト ID([m:Object#`__id__`])からオブジェクトを得ます。
+オブジェクト ID([m:Object#__id__])からオブジェクトを得ます。
 #@end
 
 - **param** `id` -- 取得したいオブジェクトの ID を整数で指定します。
@@ -33,10 +33,10 @@ obj が解放されるときに実行されるファイナライザ proc を
 
 ブロックを指定した場合は、そのブロックがファイナライザになります。
 #@since 1.9.3
-obj の回収時にブロックは obj の ID ([m:BasicObject#`__id__`])を引数とし
+obj の回収時にブロックは obj の ID ([m:BasicObject#__id__])を引数とし
 て実行されます。
 #@else
-obj の回収時にブロックは obj の ID ([m:Object#`__id__`])を引数として実行されます。
+obj の回収時にブロックは obj の ID ([m:Object#__id__])を引数として実行されます。
 #@end
 しかし、後述の問題があるのでブロックでファイナライザを登録するのは難しいでしょう。
 

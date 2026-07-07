@@ -660,8 +660,8 @@ fred() { |index, position| ... }
  - 全角ダッシュ:  ---
  - 半角ダッシュ:  --
  - 省略符号: ...
- - 引用符: 'text' もしくは `text' もしくは &quot;text&quot;
- - 二重引用符: "text" もしくは ``text''
+ - 引用符: 'text' もしくは `text` もしくは &quot;text&quot;
+ - 二重引用符: "text" もしくは \`\`text''
  - 著作権表示: (c)
  - 登録商標: (r)
 #@end
