@@ -1,9 +1,11 @@
 GIT
-  remote: https://github.com/rurema/bitclust.git
-  revision: 2a2028ac761cee63a27eb24f7b6673da4b9fbd3e
+  remote: https://github.com/znz/bitclust.git
+  revision: 7b32aebf821379d856d8110dadb110f6fe39fc20
+  branch: feature/markdown-conversion
   specs:
     bitclust-core (1.4.0)
       drb
+      json
       nkf
       progressbar (>= 1.9.0, < 2.0)
       rack
@@ -17,6 +19,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     drb (2.2.1)
+    json (2.20.0)
     nkf (0.2.0)
     progressbar (1.13.0)
     rack (3.1.21)
