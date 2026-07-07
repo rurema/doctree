@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/znz/bitclust.git
-  revision: 7b32aebf821379d856d8110dadb110f6fe39fc20
+  revision: 4ec941bd3245598d990712bcfc73919ef464f92b
   branch: feature/markdown-conversion
   specs:
     bitclust-core (1.4.0)
@@ -18,16 +18,16 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    drb (2.2.1)
+    drb (2.2.3)
     json (2.20.0)
-    nkf (0.2.0)
+    nkf (0.3.0)
     progressbar (1.13.0)
-    rack (3.1.21)
+    rack (3.2.6)
     rackup (2.1.0)
       rack (>= 3)
       webrick (~> 1.8)
     rake (13.2.1)
-    webrick (1.8.2)
+    webrick (1.9.2)
 
 PLATFORMS
   ruby
