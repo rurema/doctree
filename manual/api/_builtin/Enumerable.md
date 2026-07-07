@@ -1294,10 +1294,8 @@ open(filename) {|f|
 ```
   enum.chunk_while { |elt_before, elt_after| bool }.each { |ary| ... }
 ```
-```````````
-to_a や map などのその他の [[c:Enumerable]] モジュールのメソッ
-ドも有用です。
-```````````
+        to_a や map などのその他の [c:Enumerable] モジュールのメソッ
+        ドも有用です。
 
 ```ruby title="例"
 # 1ずつ増加する部分配列ごとに分ける。
@@ -1483,10 +1481,8 @@ p e.map {|ll| ll[0...-1].map {|l| l.sub(/\\\n\z/, "") }.join + ll.last }
 ```
   enum.slice_when { |elt_before, elt_after| bool }.each { |ary| ... }
 ```
-```````````
-to_a や map などのその他の [[c:Enumerable]] モジュールのメソッ
-ドも有用です。
-```````````
+        to_a や map などのその他の [c:Enumerable] モジュールのメソッ
+        ドも有用です。
 
 ```ruby title="例"
 # 1ずつ増加する部分配列ごとに分ける。

@@ -53,10 +53,8 @@ MSDOS 環境の場合、command はサブシェル経由で実行されます。
 ``````
 exec "echo *"       # echoes list of files in current directory
 # never get here
-``````
 
 
-``````
 exec "echo", "*"    # echoes an asterisk
 # never get here
 ``````

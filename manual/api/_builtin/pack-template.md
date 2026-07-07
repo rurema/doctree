@@ -220,9 +220,7 @@ n, N, v, V を用います。
 [513, -514].pack("s*")  # => "\x01\x02\xFE\xFD"
 ```
 
-`````
-ビッグエンディアン (SPARC64):
-`````
+  ビッグエンディアン (SPARC64):
 ```ruby
 "\x01\x02\xFE\xFD".unpack("s*") # => [258, -259]
 
@@ -243,9 +241,7 @@ n, N, v, V を用います。
 [513, -514].pack("s*")  # => "\x01\x02\xFE\xFD"
 ```
 
-`````
-ビッグエンディアン (SPARC64):
-`````
+  ビッグエンディアン (SPARC64):
 
 ```ruby
 "\x01\x02\xFE\xFD".unpack("S*") # => [258, 65277]
@@ -287,9 +283,7 @@ n, N, v, V を用います。
 [67305985, 4244504319].pack("I*") # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 [67305985, -50462977].pack("I*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 ```
-`````
-ビッグエンディアン (SPARC64), 32bit int:
-`````
+  ビッグエンディアン (SPARC64), 32bit int:
 ```ruby
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("I*") # => [16909060, 4294901244]
 
@@ -310,9 +304,7 @@ n, N, v, V を用います。
 [67305985, -50462977].pack("l*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 ```
 
-`````
-ビッグエンディアン (SPARC64), 32bit long:
-`````
+  ビッグエンディアン (SPARC64), 32bit long:
 ```ruby
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("l*") # => [16909060, -66052]
 
@@ -333,9 +325,7 @@ n, N, v, V を用います。
 [67305985, -50462977].pack("L*")  # => "\x01\x02\x03\x04\xFF\xFE\xFD\xFC"
 ```
 
-`````
-ビッグエンディアン (SPARC64), 32bit long:
-`````
+  ビッグエンディアン (SPARC64), 32bit long:
 ```ruby
 "\x01\x02\x03\x04\xFF\xFE\xFD\xFC".unpack("L*") # => [16909060, 4294901244]
 
@@ -359,9 +349,7 @@ n, N, v, V を用います。
 # => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
 ```
 
-`````
-ビッグエンディアン (SPARC64):
-`````
+  ビッグエンディアン (SPARC64):
 ```ruby
 "\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("q*")
 # => [72623859790382856, -283686952306184]
@@ -387,9 +375,7 @@ n, N, v, V を用います。
 # => "\x01\x02\x03\x04\x05\x06\a\b\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8"
 ```
 
-`````
-ビッグエンディアン (SPARC64):
-`````
+  ビッグエンディアン (SPARC64):
 ```ruby
 "\x01\x02\x03\x04\x05\x06\x07\x08\xFF\xFE\xFD\xFC\xFB\xFA\xF9\xF8".unpack("Q*")
 # => [72623859790382856, 18446460386757245432]
@@ -430,9 +416,7 @@ n, N, v, V を用います。
 "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==\n".unpack("m")
 # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 ```
-`````
-m0 は [[RFC:4648]] 対応
-`````
+  m0 は [RFC:4648] 対応
 ```ruby
 [""].pack("m0")             # => ""
 ["\0"].pack("m0")           # => "AA=="
@@ -520,9 +504,7 @@ m0 は [[RFC:4648]] 対応
 [-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Infinity
 ```
 
-`````
-SPARC64 (IEEE754 単精度 ビッグエンディアン):
-`````
+  SPARC64 (IEEE754 単精度 ビッグエンディアン):
 ```ruby
 [1.0].pack("f")      # => "?\x80\x00\x00"
 [0.0/0.0].pack("f")  # => "\x7F\xC0\x00\x00"      # NaN
@@ -530,9 +512,7 @@ SPARC64 (IEEE754 単精度 ビッグエンディアン):
 [-1.0/0.0].pack("f") # => "\xFF\x80\x00\x00"      # -Infinity
 ```
 
-`````
-VAX (NetBSD 3.0) (非IEEE754):
-`````
+  VAX (NetBSD 3.0) (非IEEE754):
 ```ruby
 [1.0].pack("f") # => "\x80@\x00\x00"
 ```
@@ -553,9 +533,7 @@ VAX (NetBSD 3.0) (非IEEE754):
 [-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Infinity
 ```
 
-`````
-SPARC64 (IEEE754 倍精度 ビッグエンディアン):
-`````
+  SPARC64 (IEEE754 倍精度 ビッグエンディアン):
 ```ruby
 [1.0].pack("d")      # => "?\xF0\x00\x00\x00\x00\x00\x00"
 [0.0/0.0].pack("d")  # => "\x7F\xF8\x00\x00\x00\x00\x00\x00"      # NaN
@@ -563,9 +541,7 @@ SPARC64 (IEEE754 倍精度 ビッグエンディアン):
 [-1.0/0.0].pack("d") # => "\xFF\xF0\x00\x00\x00\x00\x00\x00"      # -Infinity
 ```
 
-`````
-VAX (NetBSD 3.0) (非IEEE754):
-`````
+  VAX (NetBSD 3.0) (非IEEE754):
 ```ruby
 [1.0].pack("d") # => "\x80@\x00\x00\x00\x00\x00\x00"
 ```
@@ -579,9 +555,7 @@ VAX (NetBSD 3.0) (非IEEE754):
 [1.0].pack("e") # => "\x00\x00\x80?"
 ```
 
-`````
-SPARC64 (IEEE754):
-`````
+  SPARC64 (IEEE754):
 ```ruby
 [1.0].pack("e") # => "\x00\x00\x80?"
 ```
@@ -595,9 +569,7 @@ SPARC64 (IEEE754):
 [1.0].pack("E") # => "\x00\x00\x00\x00\x00\x00\xF0?"
 ```
 
-`````
-SPARC64 (IEEE754):
-`````
+  SPARC64 (IEEE754):
 ```ruby
 [1.0].pack("E") # => "\x00\x00\x00\x00\x00\x00\xF0?"
 ```
@@ -611,25 +583,19 @@ SPARC64 (IEEE754):
 [1.0].pack("g") # => "?\x80\x00\x00"
 ```
 
-`````
-SPARC64 (IEEE754):
-`````
+  SPARC64 (IEEE754):
 ```ruby
 [1.0].pack("g") # => "?\x80\x00\x00"
 ```
 
-`````
-IEEE754準拠な環境の場合、以下のようにして符号、指数部、仮数部を取り出せます。
-`````
+  IEEE754準拠な環境の場合、以下のようにして符号、指数部、仮数部を取り出せます。
 ```ruby
 s = [v].pack("g").unpack("B*")[0][0,1]      # 符号
 e = [v].pack("g").unpack("B*")[0][1,8]      # 指数部
 f = [v].pack("g").unpack("B*")[0][9,23]     # 仮数部
 ```
 
-`````
-そして、s, e, f の意味は以下の通りです。
-`````
+  そして、s, e, f の意味は以下の通りです。
 ```ruby
 sgn = s == "0" ? +1.0 : -1.0
 exp = Integer("0b" + e)
@@ -661,25 +627,19 @@ end
 [1.0].pack("G") # => "?\xF0\x00\x00\x00\x00\x00\x00"
 ```
 
-`````
-SPARC64 (IEEE754):
-`````
+  SPARC64 (IEEE754):
 ```ruby
 [1.0].pack("G") # => "?\xF0\x00\x00\x00\x00\x00\x00"
 ```
 
-`````
-IEEE754準拠な環境の場合、以下のようにして符号、指数部、仮数部を取り出せます。
-`````
+  IEEE754準拠な環境の場合、以下のようにして符号、指数部、仮数部を取り出せます。
 ```ruby
 s = [v].pack("G").unpack("B*")[0][0,1]    # 符号
 e = [v].pack("G").unpack("B*")[0][1,11]   # 指数部
 f = [v].pack("G").unpack("B*")[0][12,52]  # 仮数部
 ```
 
-`````
-そして、s, e, f の意味は以下の通りです。
-`````
+  そして、s, e, f の意味は以下の通りです。
 ```ruby
 sgn = s == "0" ? +1.0 : -1.0
 exp = Integer("0b" + e)
@@ -779,10 +739,8 @@ end
 "\x00\x81\x00\x01".unpack("w*") # => [0, 128, 1]
 ```
 
-`````
-なお、BER圧縮整数でエンコードした結果は大小関係を保存しない。
-たとえば、[0x3fff].pack("w") > [0x4000].pack("w") である。
-`````
+  なお、BER圧縮整数でエンコードした結果は大小関係を保存しない。
+  たとえば、[0x3fff].pack("w") > [0x4000].pack("w") である。
 
 - **`x`**:
 
@@ -955,11 +913,9 @@ require 'socket'
 # => "\x02\x00\x00\a\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
 ```
 
-`````
-pack/unpack を使う代わりに
-[[m:Socket.pack_sockaddr_in]],
-[[m:Socket.unpack_sockaddr_in]] メソッドがあります。
-`````
+  pack/unpack を使う代わりに
+  [m:Socket.pack_sockaddr_in],
+  [m:Socket.unpack_sockaddr_in] メソッドがあります。
 
 - **'\0'終端文字列のアドレス**:
 
@@ -969,30 +925,24 @@ pack/unpack を使う代わりに
 ["foo"].pack("p")    # => "xp\xC2\x85\vV\x00\x00"
 ```
 
-`````
-結果の文字列はゴミに見えますが、実際は文字列"foo\0"を指すアドレ
-ス(のバイナリ表現)です。以下のようにすれば見慣れた表記で見ること
-が出来ます
-`````
+  結果の文字列はゴミに見えますが、実際は文字列"foo\0"を指すアドレ
+  ス(のバイナリ表現)です。以下のようにすれば見慣れた表記で見ること
+  が出来ます
 ```ruby
 printf "%#014x\n", "xp\xC2\x85\vV\x00\x00".unpack("J")[0] # => 0x560b85c27078
 ```
 
-`````
-アドレスが指す先のオブジェクト(この例で "foo\0") は、pack の結
-果が GC されるまではGCされないことが保証されています。
+  アドレスが指す先のオブジェクト(この例で "foo\0") は、pack の結
+  果が GC されるまではGCされないことが保証されています。
 
-unpack("p"), unpack("P") は、pack の結果からしか unpack できません。
-`````
+  unpack("p"), unpack("P") は、pack の結果からしか unpack できません。
 ```ruby
 ["foo"].pack("p").unpack("p") # => ["foo"]
 "xp\xC2\x85\vV\x00\x00".unpack("p")
 # => ArgumentError: no associated pointer
 ```
-`````
-"p" や "P" は、nil を特別に扱い NULL
-ポインタとして解釈します。(以下は、64bitマシンで一般的な結果)
-`````
+  "p" や "P" は、nil を特別に扱い NULL
+  ポインタとして解釈します。(以下は、64bitマシンで一般的な結果)
 ```ruby
 [nil].pack("p")        # => "\x00\x00\x00\x00\x00\x00\x00\x00"
 "\x00\x00\x00\x00\x00\x00\x00\x00".unpack("p") # => [nil]
@@ -1008,24 +958,18 @@ unpack("p"), unpack("P") は、pack の結果からしか unpack できません
         long  c;
       } v = {1,2,3};
 ```
-`````
-を表す文字列は
-`````
+  を表す文字列は
 ```ruby
 v = [1,2,3].pack("i!s!l!")
 ```
-`````
-です。(byte alignment の問題から実際は適当な padding が必要に
-なるかもしれません)
+  です。(byte alignment の問題から実際は適当な padding が必要に
+  なるかもしれません)
 
-この構造体を指すアドレスは
-`````
+  この構造体を指すアドレスは
 ```ruby
 [v].pack("P")  # => "\xC0\xCC2L\fV\x00\x00"
 ```
-`````
-で得られます。
-`````
+  で得られます。
 
 - **UTF-8からUCS-2への変換 (サロゲートを処理していないので UTF-16 とはいえない)**:
 
@@ -1033,9 +977,7 @@ v = [1,2,3].pack("i!s!l!")
 ```ruby
 ("Comments").unpack("U*").pack("v*") # => "C\x00o\x00m\x00m\x00e\x00n\x00t\x00s\x00"
 ```
-`````
-ビッグエンディアン:
-`````
+  ビッグエンディアン:
 ```ruby
 ("Comments").unpack("U*").pack("n*") # => "\x00C\x00o\x00m\x00m\x00e\x00n\x00t\x00s"
 ```

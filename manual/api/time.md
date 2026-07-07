@@ -229,10 +229,8 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 ```
   day-of-week, DD month-name CCYY hh:mm:ss zone
 ```
-```````````
-ただし zone は [+-]hhmm です。
-self が UTC time の場合、zone は +0000 になります。
-```````````
+        ただし zone は [+-]hhmm です。
+        self が UTC time の場合、zone は +0000 になります。
 
 使用例
 `````
@@ -252,9 +250,7 @@ p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
 ```
   day-of-week, DD month-name CCYY hh:mm:ss GMT
 ```
-```````````
-注意: 結果はいつも UTC (GMT) です。
-```````````
+        注意: 結果はいつも UTC (GMT) です。
 
 使用例
 `````
@@ -284,9 +280,7 @@ XML Schema で定義されている dateTime として
   CCYY-MM-DDThh:mm:ssTZD
   CCYY-MM-DDThh:mm:ss.sssTZD
 ```
-```````````
-ただし TZD は Z または [+-]hh:mm です。
-```````````
+        ただし TZD は Z または [+-]hh:mm です。
 
 使用例
 `````

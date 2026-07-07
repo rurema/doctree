@@ -33,11 +33,9 @@ srv.start
 
  1. サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
  2. パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServer オブジェクト)は 'view.rb' 
-````
-    を引数として CGIHandler オブジェクトを生成します。
-(3) サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
-(4) CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
-````
+     を引数として CGIHandler オブジェクトを生成します。
+ 3. サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
+ 4. CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
 
 このように [c:WEBrick] では Web サーバの機能の大部分がサーブレットの形で提供されています。
 またサーブレットを作成することにより新たな機能を Web サーバに追加することもできます。

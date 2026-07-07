@@ -819,10 +819,8 @@ ARGF.inplace_mode = '.bak'
 ARGF.lines do |line|
   print line.sub("foo","bar")
 end
-`````
 
 
-`````
 ---- -i オプションを使う場合 ----
 $ ruby -i.bak -p -e '$_.sub!("foo","bar")' file.txt
 

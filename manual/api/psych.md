@@ -38,21 +38,21 @@ Psych は YAML ドキュメントのパースができます。
 YAML の AST(Abstract Syntax Tree)にアクセスする APIがあります。
 高水準な API では、YAML のドキュメントを Ruby のオブジェクトに変換できます。
 
-===== 低水準 パース API
+##### 低水準 パース API
 
 低水準のパース API は利用者が入力となる YAML ドキュメントについて
 すでに良く知っていて、AST を構築したり Ruby のオブジェクトに変換する
 のが無駄である場合に使います。この API については
 [c:Psych::Parser] を参照してください。イベントベースの API です。
 
-===== 中水準 パース API
+##### 中水準 パース API
 
 Psych には YAML ドキュメントの AST にアクセスする API があります。
 この AST は [c:Psych::Parser] と [c:Psych::TreeBuilder] で構築します。
 [m:Psych.parse_stream]、[c:Psych::Nodes]、[c:Psych::Nodes::Node]
 などを経由して AST を解析したり操作したりできます。
 
-===== 高水準 パース API
+##### 高水準 パース API
 
 YAML ドキュメントをパースして Ruby のオブジェクトに変換できます。
 詳しくは [m:Psych.load] を見てください。
@@ -67,7 +67,7 @@ Psych は YAML ドキュメントを出力する機能があります。
 です。これはパースの高・中・低水準 API と対応しています。
 
 
-===== 低水準出力 API
+##### 低水準出力 API
 
 低水準出力 API はイベントベースな仕組みです。
 各イベントは [c:Psych::Emitter] オブジェクトに送られます。
@@ -78,7 +78,7 @@ Psych は YAML ドキュメントを出力する機能があります。
 
 詳しくは [c:Psych::Emitter] を見てください。
 
-=====  中水準出力 API 
+#####  中水準出力 API 
 
 中水準 API では、利用者が AST を構築し YAML ドキュメントに変換します。
 この AST は YAML ドキュメントをパースして得られるものと同じものです。
@@ -86,7 +86,7 @@ Psych は YAML ドキュメントを出力する機能があります。
 [c:Psych::Nodes]、[c:Psych::Nodes::Node]、[c:Psych::TreeBuilder]
 を参照してください。
 
-===== 高水準出力 API
+##### 高水準出力 API
 
 高水準 API を使うと Ruby のデータ構造(オブジェクト)を YAML のドキュメントに
 変換できます。

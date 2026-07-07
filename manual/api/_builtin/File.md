@@ -385,18 +385,14 @@ path が pattern にマッチすれば真を返します。そうでない場合
 p File.fnmatch('\a', 'a')                       # => true
 p File.fnmatch('\a', '\a', File::FNM_NOESCAPE)  # => true
 ```
-````
-前者で * は、エスケープされているので "*" そのものにマッチ
-します。
-````
+ 前者で * は、エスケープされているので "*" そのものにマッチ
+ します。
 ```ruby
 p File.fnmatch('\*', 'a')                       # => false
 p File.fnmatch('\*', '\a', File::FNM_NOESCAPE)  # => true
 ```
-`````
-単体の \ は、このフラグの有無に関わらず \ にマッチします。
-(シングルクォート文字列中では \\ は、\ であることに注意)
-`````
+  単体の \ は、このフラグの有無に関わらず \ にマッチします。
+  (シングルクォート文字列中では \\ は、\ であることに注意)
 ```ruby
 p File.fnmatch('\\', '\\')                      # => true
 p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true

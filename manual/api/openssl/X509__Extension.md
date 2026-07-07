@@ -53,22 +53,22 @@ p ex3 # => basicConstraints = CA:FALSE
 
 ## Instance Methods
 
----critical? -> bool
+### def critical? -> bool
 その拡張領域の重要度(critical)を返します。
 
 - **SEE** [c:OpenSSL::X509::Extension#critical=]
----critical=(bool)
+### def critical=(bool)
 その拡張領域の重要度(critical)を真偽値で設定します。
 
 - **param** `bool` -- 設定する重要度の真偽値
 - **SEE** [c:OpenSSL::X509::Extension#critical?]
 
----oid -> String
+### def oid -> String
 拡張領域の識別子(extnID)をOIDの文字列で返します。
 
 - **SEE** [c:OpenSSL::X509::Extension#oid=]
 
----oid=(oid)
+### def oid=(oid)
 
 拡張領域の識別子(extnID)をOIDの文字列で設定します。
 
@@ -76,19 +76,19 @@ p ex3 # => basicConstraints = CA:FALSE
 - **raise** `OpenSSL::X509::Extension` -- 識別子の設定に失敗した場合に発生します
 - **SEE** [c:OpenSSL::X509::Extension#oid]
 
----to_der -> String
+### def to_der -> String
 
 DER 形式のバイト列に変換して返します。
 
 - **raise** `OpenSSL::X509::Extension` -- 変換に失敗した場合に発生します
 
----value -> String
+### def value -> String
 
 拡張領域の値(extnValue)を返します。
 
 - **SEE** [c:OpenSSL::X509::Extension#value=]
 
----value=(value)
+### def value=(value)
 
 拡張領域の値(extnValue)を設定します。
 

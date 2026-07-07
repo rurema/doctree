@@ -25,9 +25,7 @@ ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 ```
             :host, :port, :dn, :attributes, :scope, :filter, :extensions 
 ```
-```````````````
-のいずれかです。
-```````````````
+            のいずれかです。
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。
 

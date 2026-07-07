@@ -455,15 +455,15 @@ select 要素を生成します。
               三要素の配列である場合は、順に value 属性の値、option 要素の内容、その option 要素が
               選択状態かどうかを表す真偽値となります。
        
-```````````
-例：
-popup_menu("name", "foo", "bar", "baz")
-  # <SELECT NAME="name">
-  #   <OPTION VALUE="foo">foo</OPTION>
-  #   <OPTION VALUE="bar">bar</OPTION>
-  #   <OPTION VALUE="baz">baz</OPTION>
-  # </SELECT>
+        例：
+        popup_menu("name", "foo", "bar", "baz")
+          # <SELECT NAME="name">
+          #   <OPTION VALUE="foo">foo</OPTION>
+          #   <OPTION VALUE="bar">bar</OPTION>
+          #   <OPTION VALUE="baz">baz</OPTION>
+          # </SELECT>
 
+```````````
 popup_menu("name", ["foo"], ["bar", true], "baz")
   # <SELECT NAME="name">
   #   <OPTION VALUE="foo">foo</OPTION>

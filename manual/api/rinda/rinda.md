@@ -112,10 +112,8 @@ uri = ARGV.shift
 DRb.start_service(uri, Rinda::TupleSpace.new)
 puts DRb.uri
 DRb.thread.join
-`````
 
 
-`````
 # rindas.rb
 require 'drb/drb'
 require 'rinda/rinda'
@@ -135,10 +133,8 @@ while true
   v = do_it(r[2])
   ts.write(['ans', r[1], r[2], v])
 end
-`````
 
 
-`````
 # rindac.rb
 require 'drb/drb'
 require 'rinda/rinda'

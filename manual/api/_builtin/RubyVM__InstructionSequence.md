@@ -121,9 +121,7 @@ options で指定します。
   * :tailcall_optimization
   * :trace_instruction
 ```
-``````````````````
-:debug_level をキーに指定した場合は値を数値で指定します。
-``````````````````
+               :debug_level をキーに指定した場合は値を数値で指定します。
 
 .new、.compile、.compile_file メソッドの実行の際に option 引数を指定し
 た場合はその実行のみ最適化オプションを変更する事もできます。

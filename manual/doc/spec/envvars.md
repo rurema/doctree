@@ -12,26 +12,20 @@ $ RUBYOPT=-y ruby -e ""
 ruby: invalid switch in RUBYOPT: -y (RuntimeError)
 ```
 
-````
-sh系
-````
+ sh系
 
 ```
       RUBYOPT='-Ke -rkconv'
       export RUBYOPT
 ```
 
-````
-csh系
-````
+ csh系
 
 ```
       setenv RUBYOPT '-Ke -rkconv'
 ```
 
-````
-MS-DOS系
-````
+ MS-DOS系
 
 ```
       set RUBYOPT=-Ke -rkconv
@@ -51,17 +45,13 @@ MS-DOS系
       export RUBYPATH
 ```
 
-`````
-csh系
-`````
+  csh系
 
 ```
       setenv RUBYPATH $HOME/ruby:/opt/ruby
 ```
 
-`````
-MS-DOS系
-`````
+  MS-DOS系
 
 ```
       set RUBYPATH=%HOMEDRIVE%%HOMEPATH%\ruby;\opt\ruby
@@ -79,17 +69,13 @@ MS-DOS系
       export RUBYLIB
 ```
 
-`````
-csh系
-`````
+  csh系
 
 ```
       setenv RUBYLIB $HOME/ruby/lib:/opt/ruby/lib
 ```
 
-`````
-MS-DOS系
-`````
+  MS-DOS系
 
 ```
       set RUBYLIB=%HOMEDRIVE%%HOMEPATH%\ruby\lib;\opt\ruby\lib
