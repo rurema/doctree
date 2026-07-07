@@ -74,7 +74,7 @@ filename で指定した Unix domain socket から EGD に問い合わせ、
 [m:OpenSSL::Random.egd_bytes](filename, 255) と同じです。
 
 - **param** `filename` -- EGD のソケットのファイル名
-- **raise** `OpenSSL::Random::RandomError` -- 
+- **raise** `OpenSSL::Random::RandomError` -- EGD からのエントロピー取得に失敗した場合に発生します。
 
 ### module_function def egd_bytes(filename, length) -> true
 EGD(Entropy Gathering Daemon) から length バイト分のエントロピーを得ます。
@@ -84,10 +84,8 @@ filename で指定した Unix domain socket から EGD に問い合わせ、
 
 - **param** `filename` -- EGD のソケットのファイル名
 - **param** `length` -- 読み込むバイト数
-- **raise** `OpenSSL::Random::RandomError` -- 
+- **raise** `OpenSSL::Random::RandomError` -- EGD からのエントロピー取得に失敗した場合に発生します。
 
-
-- **raise** `OpenSSL::Random::RandomError` -- 
 
 ### module_function def load_random_file(filename) -> true
 ファイルを読み込み、その内容をエントロピー源として
@@ -99,7 +97,6 @@ OpenSSL::Random.seed(File.read(filename)) と同じです。
 
 - **param** `filename` -- 読み込むファイル名
 - **raise** `OpenSSL::Random::RandomError` -- ファイルの読み込みに失敗した場合に発生します
-- **raise** `OpenSSL::Random::RandomError` -- 
 
 ### module_function def pseudo_bytes(len) -> String
 暗号論的な予測不可能性を持たない(が高速な)
