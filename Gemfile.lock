@@ -1,7 +1,6 @@
 GIT
-  remote: https://github.com/znz/bitclust.git
-  revision: 3668809a28e4883342795e28b8ff2f7a0371bd25
-  branch: feature/markdown-conversion
+  remote: https://github.com/rurema/bitclust.git
+  revision: c7500e5e2f5d2ed765af5e81e524d7e50734829d
   specs:
     bitclust-core (1.4.0)
       drb
