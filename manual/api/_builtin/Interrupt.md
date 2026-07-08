@@ -1,0 +1,33 @@
+---
+library: _builtin
+---
+# class Interrupt < SignalException
+
+SIGINT シグナルを捕捉していないときに
+SIGINT シグナルを受け取ると発生します。
+SIGINT 以外のシグナルを受信したときに発生する例外については
+[c:SignalException] を参照してください。
+
+使用例
+
+`````
+=begin
+#SIGINTを捕捉したい場合
+Signal.trap('INT'){
+  print "\nINTを捕捉した。\n"
+  exit 1
+}
+=end
+
+begin
+  begin
+    print "z"
+    $stdout.flush
+    sleep(1)
+  end while true
+rescue Interrupt
+  print "!!\n"
+  exit 1
+end
+`````
+

@@ -1,0 +1,638 @@
+---
+library: _builtin
+include:
+  - Enumerable
+---
+# class Dir < Object
+
+ディレクトリの操作を行うためのクラスです。
+
+## Class Methods
+
+#@since 3.0
+### def [](*pattern, base: nil, sort: true)                            -> [String]
+### def glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
+### def glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
+#@else
+#@since 2.5.0
+### def [](*pattern, base: nil)                            -> [String]
+### def glob(pattern, flags = 0, base: nil)                -> [String]
+### def glob(pattern, flags = 0, base: nil) {|file| ...}   -> nil
+#@else
+### def [](*pattern)                            -> [String]
+### def glob(pattern, flags = 0)                -> [String]
+### def glob(pattern, flags = 0) {|file| ...}   -> nil
+#@end
+#@end
+
+ワイルドカードの展開を行い、
+パターンにマッチするファイル名を文字列の配列として返します。
+パターンにマッチするファイルがない場合は空の配列を返します。
+
+ブロックが与えられたときはワイルドカードにマッチしたファイルを
+引数にそのブロックを 1 つずつ評価して nil を返します
+
+- **param** `pattern` -- パターンを文字列か配列で指定します。
+               配列を指定すると複数のパターンを指定できます。
+#@until 2.7.0
+               パターンを文字列で指定する場合、パターンを "\0" で区切って
+               1 度に複数のパターンを指定することもできます。
+               パターンの区切りには "\0" のみ指定できます。
+#@end
+
+- **param** `flags` -- [m:File.fnmatch] に指定できるフラグと同様のフラグを指定できます。
+             このフラグを指定することでマッチの挙動を変更できます。
+
+```ruby
+Dir.glob("*")                      #=> ["bar", "foo"]
+#@since 3.1
+Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "bar", "foo"]
+#@else
+Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
+#@end
+```
+
+#@since 2.5.0
+- **param** `base` -- カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
+            指定した場合、結果の頭にはベースディレクトリはつかないので、
+            絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
+#@end
+#@since 3.0
+- **param** `sort` -- true ならワイルドカードや文字セット(鈎括弧)にマッチした結果を
+            バイナリとして昇順にソートします。
+            false を指定するとソートせず2.7以前と同じ挙動になります。
+            true の場合でも、配列で指定した複数のパターンや波括弧での順番は保存されます。
+#@end
+
+ワイルドカードには以下のものがあります。これらはバックスラッシュに
+よりエスケープできます。ダブルクォートの文字列中では 2
+重にエスケープする必要があることに注意してください。
+ワイルドカードはデフォルトではファイル名の先頭の "." にマッチしません。
+
+- **`*`**:
+    空文字列を含む任意の文字列と一致します。
+- **`?`**:
+    任意の一文字と一致します。
+- **`[ ]`**:
+    鈎括弧内のいずれかの文字と一致します。- でつな
+    がれた文字は範囲を表します。鈎括弧の中の最初の文字が
+    ^ である時には含まれない文字と一致します。
+    ^ の代わりに ksh や POSIX shell のように ! も同じ意
+    味で使えます。
+- **`{ }`**:
+    コンマで区切られた文字列の組合せに展開します。例えば、
+    foo{a,b,c} は fooa, foob, fooc
+    に展開されそれぞれに対してマッチ判定を行います。
+
+    括弧は入れ子にできます。例えば、
+    {foo,bar{foo,bar}} は foo, barfoo, barbar
+    のそれぞれにマッチします。
+- **`**/`**:
+    ワイルドカード */ の0回以上の繰り返しを意味し、
+    ディレクトリを再帰的にたどってマッチを行います。
+    例えば,
+    foo/**/bar は foo/bar, foo/*/bar,
+    foo/*/*/bar ... (以下無限に続く)に対してそれぞれ
+    マッチ判定を行います。
+
+```ruby
+# 一般的な例
+p Dir.glob("*")          #=> ["foo", "bar", "baz"]
+p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
+p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
+p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
+
+Dir.glob("b*") {|f| p f }
+
+#=> "bar"
+#   "baz"
+
+# 複数のパターンを指定する例
+p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
+p Dir["f*", "b*"]        # => ["foo", "bar"]
+#@until 2.7.0
+p Dir.glob("f*\0b*")     # => ["foo", "bar"]
+#@end
+
+# ワイルドカードの例
+Dir.glob("*")            #=> ["foo", "bar"]
+Dir.glob("fo?")          #=> ["foo"]
+Dir.glob("[^f]*")        #=> ["bar"]
+Dir.glob("{b,f}*")       #=> ["bar", "foo"]
+
+#@since 2.5.0
+# ベースディレクトリの例
+rbfiles = File.join("**", "*.rb")
+Dir.glob(rbfiles)                   #=> ["main.rb",
+                                    #    "lib/song.rb",
+                                    #    "lib/song/karaoke.rb"]
+Dir.glob(rbfiles, base: "lib")      #=> ["song.rb",
+                                    #    "song/karaoke.rb"]
+#@end
+```
+
+### def chdir           -> 0
+### def chdir(path)     -> 0
+### def chdir {|path| ... }          -> object
+### def chdir(path) {|path| ... }    -> object
+
+カレントディレクトリを path に変更します。
+
+path を省略した場合、環境変数 HOME または LOGDIR
+が設定されていればそのディレクトリに移動します。
+カレントディレクトリの変更に成功すれば 0 を返します。
+
+ブロックが指定された場合、カレントディレクトリの変更はブロックの実行中に限
+られます。ブロックの実行結果を返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.chdir("/var/spool/mail")
+p Dir.pwd                    #=> "/var/spool/mail"
+Dir.chdir("/tmp") do
+  p Dir.pwd                  #=> "/tmp"
+end 
+p Dir.pwd                    #=> "/var/spool/mail"
+
+# ~ は展開されない
+Dir.chdir("~/.ssh")          # => Errno::ENOENT
+```
+
+### def chroot(path)    -> 0
+
+ルートディレクトリを path に変更します。
+
+スーパーユーザだけがルートディレクトリを変更できます。
+ルートディレクトリの変更に成功すれば 0 を返します。
+各プラットフォームのマニュアルの chroot の項も参照して下さい。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+p Dir.glob("*")   #=> ["file1", "file2]
+Dir.chroot("./")
+p Dir.glob("/*")  #=> ["/file1", "/file2]
+```
+
+- **SEE** [url:http://opengroup.org/onlinepubs/007908799/xsh/chroot.html]
+
+### def delete(path)    -> 0
+### def rmdir(path)     -> 0
+### def unlink(path)    -> 0
+
+ディレクトリを削除します。ディレクトリは空でなければいけませ
+ん。ディレクトリの削除に成功すれば 0 を返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.delete("/tmp/hoge-jbrYBh.tmp")
+```
+
+### def entries(path)                                        -> [String]
+### def entries(path, encoding: Encoding.find("filesystem")) -> [String]
+
+ディレクトリ path に含まれるファイルエントリ名の
+配列を返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `encoding` -- ディレクトリのエンコーディングを文字列か
+                [c:Encoding] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.entries('.') #=> [".", "..", "bar", "foo"]
+```
+
+- **SEE** [m:Dir.foreach]
+#@since 2.5.0
+- **SEE** [m:Dir.children]
+### def children(path)                -> [String]
+### def children(path, encoding: enc) -> [String]
+
+ディレクトリ path に含まれるファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `encoding` -- ディレクトリのエンコーディングを文字列か
+                [c:Encoding] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.children('.') #=> ["bar", "foo"]
+```
+
+#@since 2.6.0
+- **SEE** [m:Dir#children]
+#@end
+- **SEE** [m:Dir.each_child]
+- **SEE** [m:Dir.entries]
+#@end
+### def foreach(path) {|file| ...}                                        -> nil
+### def foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
+### def foreach(path)                                                     -> Enumerator
+### def foreach(path, encoding: Encoding.find("filesystem"))              -> Enumerator
+
+ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[c:Enumerator] オブジェクトを返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `encoding` -- ディレクトリのエンコーディングを文字列か
+                [c:Encoding] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.foreach('.'){|f|
+  p f
+}
+#=> "."
+#   ".."
+#   "bar"
+#   "foo"
+```
+
+- **SEE** [m:Dir.entries]
+#@since 2.5.0
+- **SEE** [m:Dir.each_child]
+### def each_child(path) {|file| ...}                -> nil
+### def each_child(path, encoding: enc) {|file| ...} -> nil
+### def each_child(path)                             -> Enumerator
+### def each_child(path, encoding: enc)              -> Enumerator
+
+ディレクトリ path の "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[c:Enumerator] オブジェクトを返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `encoding` -- ディレクトリのエンコーディングを文字列か
+                [c:Encoding] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.each_child('.'){|f|
+  p f
+}
+#=> "bar"
+#   "foo"
+```
+
+- **SEE** [m:Dir.foreach]
+- **SEE** [m:Dir.children]
+#@since 2.6.0
+- **SEE** [m:Dir#each_child]
+#@end
+#@end
+### def getwd    -> String
+### def pwd      -> String
+
+カレントディレクトリのフルパスを文字列で返します。
+
+- **raise** `Errno::EXXX` -- カレントディレクトリの取得に失敗した場合に発生します(が、普通は失敗することはありません)。
+
+```ruby title="例"
+Dir.chdir("/tmp")   #=> 0
+Dir.getwd           #=> "/tmp"
+```
+
+### def mkdir(path, mode = 0777)    -> 0
+
+path で指定された新しいディレクトリを作ります。パーミッションは
+mode で指定された値に umask をかけた値 (mode & ~umask) になります。
+[man:mkdir(2)] も参照して下さい。
+ディレクトリの作成に成功すれば 0 を返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `mode` -- ディレクトリのモードを整数で与えます。
+
+- **raise** `Errno::EXXX` -- ディレクトリの作成に失敗した場合に発生します。
+
+```ruby title="例"
+p File.umask                                  #=> 2
+Dir.mkdir('t', 0666)
+p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
+```
+
+- **SEE** [m:FileUtils?.makedirs]
+
+### def new(path)                                                      -> Dir
+### def new(path, encoding: Encoding.find("filesystem"))               -> Dir
+### def open(path)                                                     -> Dir
+### def open(path, encoding: Encoding.find("filesystem"))              -> Dir
+### def open(path) {|dir| ...}                                         -> object
+### def open(path, encoding: Encoding.find("filesystem")) {|dir| ...}  -> object
+
+path に対するディレクトリストリームをオープンして返します。
+
+ブロックを指定して呼び出した場合は、ディレクトリストリームを
+引数としてブロックを実行します。ブロックの実行が終了すると、
+ディレクトリは自動的にクローズされます。
+ブロックの実行結果を返します。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `encoding` -- ディレクトリのエンコーディングを文字列か
+                [c:Encoding] オブジェクトで指定します。省略した場合は
+                ファイルシステムのエンコーディングと同じになります。
+
+- **raise** `Errno::EXXX` -- オープンに失敗した場合に発生します。
+
+```ruby title="例: Dir.new"
+require 'tmpdir'
+
+Dir.mktmpdir do |tmpdir|
+  d = Dir.new(tmpdir)
+  p d.class         # => Dir
+  p d.read.encoding # => #<Encoding:UTF-8>
+  d.close
+
+  d = Dir.new(tmpdir, encoding: Encoding::UTF_8)
+  p d.class         # => Dir
+  p d.read.encoding # => #<Encoding:UTF-8>
+  d.close
+end
+```
+
+```ruby title="例: Dir.open"
+require 'tmpdir'
+
+Dir.mktmpdir do |tmpdir|
+  d = Dir.open(tmpdir, encoding: Encoding::UTF_8)
+  p d.class         # => Dir
+  p d.read.encoding # => #<Encoding:UTF-8>
+  d.close
+
+  Dir.open(tmpdir, encoding: Encoding::UTF_8) do |d|
+    p d.class         # => Dir
+    p d.read.encoding # => #<Encoding:UTF-8>
+  end
+end
+```
+
+### def exist?(file_name)    -> bool
+
+file_name で与えられたディレクトリが存在する場合に真を返します。
+そうでない場合は、偽を返します。
+
+- **param** `file_name` -- 存在を確認したいディレクトリ名。
+
+```ruby title="例"
+Dir.exist?(".")      # => true
+File.directory?(".") # => true
+```
+
+- **SEE** [m:File.directory?]
+
+#@until 3.2
+### def exists?(file_name)    -> bool
+
+このメソッドは Ruby 2.1 から deprecated です。[m:Dir.exist?] を使用してください。
+#@end
+### def home          -> String | nil
+### def home(user)    -> String | nil
+
+現在のユーザまたは指定されたユーザのホームディレクトリを返します。
+
+Dir.home や Dir.home("root") は
+File.expand_path("~") や File.expand_path("~root") と
+ほぼ同じです。
+
+```ruby title="例"
+Dir.home          # => "/home/vagrant"
+Dir.home("root")  # => "/root"
+```
+
+- **SEE** [m:File.expand_path]
+
+#@since 2.4.0
+### def empty?(path_name)    -> bool
+
+path_name で与えられたディレクトリが空の場合に真を返します。
+ディレクトリでない場合や空でない場合に偽を返します。
+
+```ruby title="例"
+Dir.empty?('.')      #=> false
+Dir.empty?(IO::NULL) #=> false
+require 'tmpdir'
+Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
+```
+
+- **param** `path_name` -- 確認したいディレクトリ名。
+
+#@end
+
+## Instance Methods
+
+### def close    -> nil
+
+ディレクトリストリームをクローズします。
+#@until 2.3.0
+以降のディレクトリに対する操作は例外 [c:IOError] を発生させます。
+#@end
+クローズに成功すれば nil を返します。
+
+```ruby title="例"
+d = Dir.new(".")
+d.close  # => nil
+```
+
+#@until 2.3.0
+- **raise** `IOError` -- close に失敗した場合に発生します。また既に自身が close している場合に発生します。
+#@end
+
+### def each {|item| ... }    -> self
+### def each                  -> Enumerator
+
+ディレクトリの各エントリを表す文字列を引数として、ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[c:Enumerator]
+オブジェクトを返します。
+
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+```ruby title="例"
+Dir.open('.').each{|f|
+  p f
+}
+#=> "."
+#   ".."
+#   "bar"
+#   "foo"
+```
+
+#@since 2.6.0
+- **SEE** [m:Dir#each_child]
+#@end
+### def path    -> String
+### def to_path -> String
+
+オープンしているディレクトリのパス名を文字列で返します。
+
+```ruby title="例"
+Dir.open("..") do |d|
+  d.path      # => ".."
+  d.to_path   # => ".."
+end
+```
+
+### def pos     -> Integer
+### def tell    -> Integer
+
+ディレクトリストリームの現在の位置を整数で返します。
+
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+```ruby title="例"
+Dir.open("/tmp") {|d|
+  d.each {|f|
+    p d.pos
+  }
+}
+```
+
+### def pos=(pos)
+### def seek(pos)    -> self
+
+ディレクトリストリームの読み込み位置を pos に移動させます。
+pos は [m:Dir#tell] で与えられた値でなければなりま
+せん。
+
+- **param** `pos` -- 変更したい位置を整数で与えます。
+
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+```ruby title="例"
+Dir.open("testdir") do |d|
+  d.read                   # => "."
+  i = d.tell               # => 12
+  d.read                   # => ".."
+  d.seek(i)                # => #<Dir:0x401b3c40>
+  d.read                   # => ".."
+end
+```
+
+### def read    -> String | nil
+
+ディレクトリストリームから次の要素を読み出して返します。最後の要素
+まで読み出していれば nil を返します。
+
+- **raise** `Errno::EXXX` -- ディレクトリの読み出しに失敗した場合に発生します。
+
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+```ruby title="例"
+require 'tmpdir'
+
+Dir.mktmpdir do |tmpdir|
+  File.open("#{tmpdir}/test1.txt", "w") { |f| f.puts("test1") }
+  File.open("#{tmpdir}/test2.txt", "w") { |f| f.puts("test2") }
+  Dir.open(tmpdir) do |d|
+    p d.read   # => "."
+    p d.read   # => ".."
+    p d.read   # => "test1.txt"
+    p d.read   # => "test2.txt"
+    p d.read   # => nil
+  end
+end
+```
+
+### def rewind    -> self
+
+ディレクトリストリームの読み込み位置を先頭に移動させます。
+
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+```ruby title="例"
+Dir.open("testdir") do |d|
+  d.read     # => "."
+  d.rewind   # => #<Dir:0x401b3fb0>
+  d.read     # => "."
+end
+```
+
+### def inspect -> String
+
+self の情報を人間に読みやすい文字列にして返します。
+
+```ruby title="例"
+Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
+```
+
+#@since 2.2.0
+### def fileno -> Integer
+
+self に関連づけられたファイル記述子を表す整数を返します。
+
+```ruby title="例"
+Dir.open("..") { |d| d.fileno } # => 8
+```
+
+本メソッドでは POSIX 2008 で定義されている dirfd() 関数を使用します。
+
+- **raise** `NotImplementedError` -- Windows などの dirfd() 関数が存在しないプラッ
+                           トフォームで発生します。
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+- **SEE** [m:IO#fileno]
+#@end
+#@since 2.6.0
+### def each_child {|item| ... }    -> self
+### def each_child                  -> Enumerator
+
+ディレクトリの "." と ".." をのぞく各エントリを表す文字列を引数として、
+ブロックを評価します。
+
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+[c:Enumerator]
+オブジェクトを返します。
+
+- **raise** `IOError` -- 既に self が close している場合に発生します。
+
+```ruby title="例"
+Dir.open('.').each_child{|f|
+  p f
+}
+#=> "bar"
+#   "foo"
+```
+
+- **SEE** [m:Dir#each]
+- **SEE** [m:Dir.each_child]
+### def children -> [String]
+ディレクトリのファイルエントリ名のうち、
+"." と ".." をのぞいた配列を返します。
+
+- **raise** `IOError` -- 既に self が close している場合に発生します。
+
+```ruby title="例"
+Dir.open('.'){|d|
+  p d.children # => ["bar", "foo"]
+}
+```
+
+- **SEE** [m:Dir.children]
+#@end

@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/rurema/bitclust.git
-  revision: 2a2028ac761cee63a27eb24f7b6673da4b9fbd3e
+  revision: c7500e5e2f5d2ed765af5e81e524d7e50734829d
   specs:
     bitclust-core (1.4.0)
       drb
+      json
       nkf
       progressbar (>= 1.9.0, < 2.0)
       rack
@@ -16,15 +17,16 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    drb (2.2.1)
-    nkf (0.2.0)
+    drb (2.2.3)
+    json (2.20.0)
+    nkf (0.3.0)
     progressbar (1.13.0)
-    rack (3.1.21)
+    rack (3.2.6)
     rackup (2.1.0)
       rack (>= 3)
       webrick (~> 1.8)
     rake (13.2.1)
-    webrick (1.8.2)
+    webrick (1.9.2)
 
 PLATFORMS
   ruby

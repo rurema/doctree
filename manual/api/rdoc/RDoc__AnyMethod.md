@@ -1,0 +1,8 @@
+---
+library: rdoc/any_method
+---
+# class RDoc::AnyMethod < RDoc::CodeObject
+
+メソッドを表現するクラスの基本クラスです。
+
+ライブラリの内部で使用します。

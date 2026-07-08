@@ -1,0 +1,255 @@
+---
+library: _builtin
+---
+# module ObjectSpace 
+
+全てのオブジェクトを操作するためのモジュールです。
+
+## Module Functions
+
+### module_function def _id2ref(id)    -> object
+
+#@since 1.9.3
+オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
+#@else
+オブジェクト ID([m:Object#__id__])からオブジェクトを得ます。
+#@end
+
+- **param** `id` -- 取得したいオブジェクトの ID を整数で指定します。
+
+- **raise** `RangeError` -- 対応するオブジェクトが存在しなければ発生します。
+
+```ruby title="例"
+a = "hoge"
+p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+```
+
+### module_function def define_finalizer(obj, proc)         -> Array
+### module_function def define_finalizer(obj) {|id| ...}    -> Array
+
+obj が解放されるときに実行されるファイナライザ proc を
+登録します。同じオブジェクトについて複数回呼ばれたときは置き換えで
+はなく追加登録されます。固定値 0 と proc を配列にして返します。
+
+ブロックを指定した場合は、そのブロックがファイナライザになります。
+#@since 1.9.3
+obj の回収時にブロックは obj の ID ([m:BasicObject#__id__])を引数とし
+て実行されます。
+#@else
+obj の回収時にブロックは obj の ID ([m:Object#__id__])を引数として実行されます。
+#@end
+しかし、後述の問題があるのでブロックでファイナライザを登録するのは難しいでしょう。
+
+- **param** `obj` -- ファイナライザを登録したいオブジェクトを指定します。
+
+- **param** `proc` -- ファイナライザとして [c:Proc] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
+
+### 使い方の注意
+
+以下は、define_finalizer の使い方の悪い例です。
+
+```ruby title="悪い例"
+class Foo
+  def initialize
+    ObjectSpace.define_finalizer(self) {
+      puts "foo"
+    }
+  end
+end
+Foo.new
+GC.start
+```
+
+これは、渡された proc の self が obj を参照しつ
+づけるため。そのオブジェクトが GC の対象になりません。
+
+[lib:tempfile] は、ファイナライザの使い方の
+良い例になっています。これは、クラスのコンテキストで [c:Proc] を
+生成することで上記の問題を回避しています。
+
+```ruby title="例"
+class Bar
+  def Bar.callback
+    proc {
+      puts "bar"
+    }
+  end
+  def initialize
+    ObjectSpace.define_finalizer(self, Bar.callback)
+  end
+end
+Bar.new
+GC.start
+```
+
+proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
+これは、スクリプトのメイン処理が GC の発生によって非同期に中断され
+るのを防ぐためです。不安なうちは -d オプションで
+事前に例外の発生の有無を確認しておいた方が良いでしょう。
+
+```ruby title="例"
+class Baz
+  def initialize
+    ObjectSpace.define_finalizer self, eval(%q{
+      proc {
+        raise "baz" rescue puts $!
+        raise "baz2"
+        puts "baz3"
+      }
+    }, TOPLEVEL_BINDING)
+  end
+end
+Baz.new
+GC.start
+
+# => baz
+```
+
+- **SEE** [d:spec/rubycmd]
+
+### module_function def each_object        {|object| ...}    -> Integer
+### module_function def each_object(klass) {|object| ...}    -> Integer
+#@since 1.9.1
+### module_function def each_object                          -> Enumerator
+### module_function def each_object(klass)                   -> Enumerator
+#@else
+### module_function def each_object                          -> Enumerable::Enumerator
+### module_function def each_object(klass)                   -> Enumerable::Enumerator
+#@end
+
+指定された klass と [m:Object#kind_of?] の関係にある全ての
+オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
+ジェクトに対して繰り返します。
+繰り返した数を返します。
+
+ブロックが与えられなかった場合は、
+#@since 1.9.1
+[c:Enumerator] オブジェクトを返します。
+#@else
+[c:Enumerable::Enumerator] オブジェクトを返します。
+#@end
+
+次のクラスのオブジェクトについては繰り返しません
+
+ - [c:Fixnum]
+ - [c:Symbol]
+ - [c:TrueClass]
+ - [c:FalseClass]
+ - [c:NilClass]
+
+とくに、klass に [c:Fixnum] や [c:Symbol] などのクラスを指定した場合は、
+何も繰り返さないことになります。
+なお、[c:Symbol] については、かわりに [m:Symbol.all_symbols] が使用できます。
+
+- **param** `klass` -- クラスかモジュールを指定します。
+
+```ruby title="例: ブロックなし"
+p ObjectSpace.each_object
+# => #<Enumerator: ObjectSpace:each_object(false)>
+```
+
+```ruby title="例: 全てのオブジェクトを扱う"
+ObjectSpace.each_object.take(5).each { |x| p x }
+count = ObjectSpace.each_object { |x| x }
+puts "Total count: #{count}"
+
+# => "scope"
+# => "scopes"
+# => "sym"
+# => "class_names"
+# => "@corrections"
+# => Total count: 9938
+```
+
+```ruby title="例: 任意のクラスを扱う"
+Person = Struct.new(:name)
+s1 = Person.new("tanaka")
+s2 = Person.new("sato")
+
+count = ObjectSpace.each_object(Person) { |x| p x }
+puts "Total count: #{count}"
+
+# => #<struct Person name="sato">
+# => #<struct Person name="tanaka">
+# => Total count: 2
+```
+
+
+#@since 2.1.0
+### module_function def garbage_collect(full_mark: true, immediate_sweep: true) -> nil
+#@else
+### module_function def garbage_collect -> nil
+#@end
+
+どこからも参照されなくなったオブジェクトを回収します。
+[m:GC.start] と同じです。
+
+#@since 2.1.0
+- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
+                 合は true を指定します。
+
+- **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
+                       を、そうでない場合は true を指定します。
+
+注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
+す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
+トしていない場合はキーワード引数を指定しても無視される可能性があります。
+#@end
+
+#@#noexample 参照先の GC.start と同様の動作のため
+
+- **SEE** [m:GC.start]
+
+### module_function def undefine_finalizer(obj)    -> object
+
+obj に対するファイナライザをすべて解除します。
+obj を返します。
+
+- **param** `obj` -- ファイナライザを解除したいオブジェクトを指定します。
+
+```ruby title="例"
+class Sample
+  def Sample.callback
+    proc {
+      puts "finalize"
+    }
+  end
+
+  def initialize
+    ObjectSpace.define_finalizer(self, Sample.callback)
+  end
+
+  def undef
+    ObjectSpace.undefine_finalizer(self)
+  end
+end
+
+Sample.new
+GC.start
+# => finalize
+
+Sample.new
+sample.undef
+GC.start
+# ※何も出力されない
+```
+
+- **SEE** [m:ObjectSpace?.define_finalizer]
+
+#@since 1.9.1
+### module_function def count_objects(result_hash = {}) -> Hash
+
+オブジェクトを種類ごとにカウントした結果を [c:Hash] として返します。
+
+このメソッドは C Ruby 以外の Ruby では動かないでしょう。
+
+- **param** `result_hash` -- ハッシュを指定します。与えられたハッシュは上書きして返されます。
+                   これを利用すると測定による影響を避けることができます。
+
+- **raise** `TypeError` -- 引数に [c:Hash] 以外を与えた場合、発生します。
+
+```ruby title="例"
+ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
+```
+
+#@end

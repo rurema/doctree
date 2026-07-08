@@ -1,0 +1,11 @@
+---
+library: rinda/rinda
+---
+# class Rinda::InvalidHashTupleKey < Rinda::RindaError
+
+[m:Rinda::TupleSpace#write] などで不正なハッシュテーブル(キーが
+文字列でないもの)をタプルスペースに書き込もうとすると発生すると発生する
+例外です。
+
+
+

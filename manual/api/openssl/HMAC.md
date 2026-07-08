@@ -1,0 +1,78 @@
+---
+library: openssl
+---
+# class OpenSSL::HMAC < Object
+HMAC を表すクラス。
+
+HMAC とは MAC(message authentication code, ハッシュ関数(MD5やSHAなど)
+と鍵の文字列をパラメータとするハッシュ関数)の一種です。
+
+メッセージの認証に利用されます。
+
+[c:OpenSSL::Digest] のようにある与えられた文字列の
+ハッシュ値を直接計算するインターフェースと
+インスタンスを生成して入力文字列を順次与えてハッシュ値を
+計算するインターフェースの2つがあります。
+
+HMAC は[RFC:2104] で定義されています。
+
+## Class Methods
+
+### def digest(digest, key, data) -> String
+渡された digest と key を用いて data の HMAC を計算し、
+その値をバイナリ文字列として返します。
+
+digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
+を渡します。
+
+- **param** `digest` -- 利用するハッシュ関数
+- **param** `key` -- 利用する鍵の文字列
+- **param** `data` -- HMAC を計算する文字列
+
+### def hexdigest(digest, key, data) -> String
+渡された digest と key を用いて data の HMAC を計算し、
+その値を16進文字列で返します。
+
+digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
+を渡します。
+
+- **param** `digest` -- 利用するハッシュ関数
+- **param** `key` -- 利用する鍵の文字列
+- **param** `data` -- HMAC を計算する文字列
+
+### def new(key, digest) -> OpenSSL::HMAC
+HMAC を計算するためのオブジェクトを生成します。
+
+生成されたオブジェクトの内部状態は入力なしの状態にリセットされます。
+
+digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
+を渡します。
+
+- **param** `key` -- 利用する鍵の文字列
+- **param** `digest` -- 利用するハッシュ関数
+
+## Instance Methods
+
+### def <<(data) -> self
+### def update(data) -> self
+入力文字列を追加し、内部状態を更新します。
+
+- **param** `data` -- 入力文字列
+
+### def digest -> String
+オブジェクトの内部状態から算出された HMAC を
+バイナリ文字列で返します。
+
+### def hexdigest -> String
+### def to_s -> String
+### def inspect -> String
+オブジェクトの内部状態から算出された HMAC を
+16進の文字列で返します。
+
+
+### def reset -> self
+内部状態をリセットします。
+
+# class OpenSSL::HMACError < OpenSSL::OpenSSLError
+OpenSSL の HMAC 関連のエラーが起きた場合に発生する例外
+

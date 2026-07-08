@@ -1,0 +1,1696 @@
+---
+library: _builtin
+include:
+  - Enumerable
+---
+# class Hash < Object
+
+ハッシュテーブル(連想配列とも呼ぶ)のクラスです。ハッシュは任意の種類のオブ
+ジェクト(キー)から任意の種類のオブジェクト(値)への関連づけを行うことができます。
+
+ハッシュ生成は多くの場合以下のようなリテラル ([ref:d:spec/literal#hash]) で行われます。
+#@#リテラル-ハッシュ式へのリンクつける
+
+`````
+{a => b, ... }   # aはキー、bは値となる
+{s: b , ... }    # { :s => b, ... } と同じ。キーがシンボルの場合の省略した書き方
+{"a+": b , ... } # { :"a+" => b, ... } と同じ。上の表現に空白や記号を含めたい場合
+`````
+
+キーには任意の種類のオブジェクトを用いることができますが、
+以下の２つのメソッドが適切に定義してある必要があります。
+  - [m:Object#hash] ハッシュの格納に用いられるハッシュ値の計算
+  - [m:Object#eql?] キーの同一性判定
+
+破壊的操作によってキーとして与えたオブジェクトの内容が変化し、[m:Object#hash] の返す
+値が変わるとハッシュから値が取り出せなくなりますから、
+[c:Array]、[c:Hash]
+などのインスタンスはキーに向きません。[m:Hash#rehash] を参照。
+
+ただし、 更新不可 ([m:Object#frozen?] が true) では無い文字列をキーとして与えた場合は、文字列をコピーし、コピーを更新不可に設定 ([m:Object#freeze]) してキーとして
+使用します。この為、キーとして使われている文字列を更新しようとすると例外
+#@since 2.5.0
+[c:FrozenError]
+#@else
+[c:RuntimeError]
+#@end
+が発生するので rehash を呼ぶ必要性は生じません。
+
+ハッシュにはデフォルト値を設定できます。存在しないキーを探索したときに返す値で、未設定時は nil です。
+デフォルト値には値形式とブロック形式があります。
+実際にデフォルト値がどのように扱われるかは各メソッドの説明を参照してください。
+
+ハッシュに含まれる要素の順序が保持されるようになりました。
+ハッシュにキーが追加された順序で列挙します。
+
+
+## Class Methods
+
+### def try_convert(obj) -> Hash | nil
+
+to_hash メソッドを用いて obj をハッシュに変換しようとします。
+
+何らかの理由で変換できないときには nil を返します。
+このメソッドは引数がハッシュであるかどうかを調べるために使えます。
+
+```ruby
+Hash.try_convert({1=>2})   # => {1=>2}
+Hash.try_convert("1=>2")   # => nil
+```
+
+### def [](other) -> Hash
+
+新しいハッシュを生成します。
+引数otherと同一のキーと値を持つ新たなハッシュを生成して返します。
+
+引数otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
+
+デフォルト値はコピーしません。生成されたハッシュのデフォルト値は nil です。
+
+引数otherと生成したハッシュは同じオブジェクトを参照することになるので、
+一方でキーや値に破壊的操作を行うともう片方にも影響します。
+
+- **param** `other` -- 生成元となるハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+
+```ruby
+h = {1 => "value"}
+h.default = "none"
+
+g = Hash[h]
+p g #=> {1=>"value"}
+
+p h[:no] #=> "none"
+p g[:no] #=> nil
+
+h[:add] = "some"
+p h #=> {1=>"value", :add=>"some"}
+p g #=> {1=>"value"}
+
+h[1] << 'plus' #破壊的操作
+p h #=> {1=>"valueplus", :add=>"some"}
+p g #=> {1=>"valueplus"}
+```
+
+### def [](*key_and_value)  -> Hash
+
+新しいハッシュを生成します。
+引数は必ず偶数個指定しなければなりません。奇数番目がキー、偶数番目が値になります。
+
+このメソッドでは生成するハッシュにデフォルト値を指定することはできません。
+[m:Hash.new]を使うか、[m:Hash#default=]で後から指定してください。
+
+- **param** `key_and_value` -- 生成するハッシュのキーと値の組です。必ず偶数個(0を含む)指定しなければいけません。
+- **raise** `ArgumentError` -- 奇数個の引数を与えたときに発生します。
+
+以下は配列からハッシュを生成する方法の例です。
+
+(1) [キー, 値, ...] の配列からハッシュへ
+
+```ruby
+ary = [1,"a", 2,"b", 3,["c"]]
+p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>["c"]}
+```
+
+(2) キーと値のペアの配列からハッシュへ
+
+```ruby
+alist = [[1,"a"], [2,"b"], [3,["c"]]]
+p alist.flatten(1) # => [1, "a", 2, "b", 3, ["c"]]
+p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
+```
+
+(3) キーと値の配列のペアからハッシュへ
+
+```ruby
+keys = [1, 2, 3]
+vals = ["a", "b", ["c"]]
+alist = keys.zip(vals)     # あるいは alist = [keys,vals].transpose
+p alist # => [[1, "a"], [2, "b"], [3, ["c"]]]
+p Hash[alist]  # => {1=>"a", 2=>"b", 3=>["c"]}
+```
+
+(4) キーや値が配列の場合
+
+```ruby
+alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
+hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
+```
+
+#@until 3.4
+### def new(ifnone = nil) -> Hash
+#@end
+#@since 3.4
+### def new(ifnone = nil, capacity: 0) -> Hash
+#@end
+
+空の新しいハッシュを生成します。ifnone はキーに対
+応する値が存在しない時のデフォルト値です。設定したデフォルト値は[m:Hash#default]で参照できます。
+
+ifnoneを省略した Hash.new は {} と同じです。
+
+デフォルト値として、毎回同一のオブジェクトifnoneを返します。
+それにより、一箇所のデフォルト値の変更が他の値のデフォルト値にも影響します。
+
+```ruby
+h = Hash.new([])
+h[0] << 0
+h[1] << 1
+p h.default #=> [0, 1]
+```
+
+これを避けるには、破壊的でないメソッドで再代入する必要が有ります。
+また、このようなミスを防ぐためにもifnoneは freeze して破壊的操作を禁止しておくのが無難です。
+
+#@#デフォルト値の扱いには注意が必要です( [[trap:Hash]] )
+
+#@since 3.4
+capacity を指定すると、指定した要素数を格納するのに充分なメモリをあらかじめ確保します。
+要素数の多いハッシュを構築する際にメモリの再配置やハッシュテーブルの再構築が不要となるため、
+パフォーマンスの改善が期待できます。
+#@end
+
+- **param** `ifnone` -- キーに対応する値が存在しない時のデフォルト値です。
+#@since 3.4
+- **param** `capacity` -- 指定した要素数に相当するメモリをあらかじめ確保します。
+#@end
+
+```ruby title="例"
+h = Hash.new([])
+
+p h[1]                  #=> []
+p h[1].object_id        #=> 6127150
+p h[1] << "bar"         #=> ["bar"]
+p h[1]                  #=> ["bar"]
+
+p h[2]                  #=> ["bar"]
+p h[2].object_id        #=> 6127150
+
+p h                     #=> {}
+
+
+h = Hash.new([].freeze)
+h[0] += [0] #破壊的でないメソッドはOK
+h[1] << 1
+#@since 2.5.0
+# エラー: can't modify frozen Array (FrozenError)
+#@else
+# エラー: can't modify frozen Array (RuntimeError)
+#@end
+```
+
+#@until 3.4
+### def new {|hash, key| ... } -> Hash
+#@end
+#@since 3.4
+### def new(capacity: 0) {|hash, key| ... } -> Hash
+#@end
+空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
+す。設定したデフォルト値は[m:Hash#default_proc]で参照できます。
+
+値が設定されていないハッシュ要素を参照するとその都度ブロックを
+実行し、その結果を返します。
+ブロックにはそのハッシュとハッシュを参照したときのキーが渡されます。
+
+#@since 3.4
+- **param** `capacity` -- 指定した要素数に相当するメモリをあらかじめ確保します。
+#@end
+
+- **raise** `ArgumentError` -- ifnone などの位置引数とブロックを同時に与えると発生します。
+
+```ruby title="例"
+# ブロックではないデフォルト値は全部同一のオブジェクトなので、
+# 破壊的変更によって他のキーに対応する値も変更されます。
+h = Hash.new("foo")
+
+p h[1]                  #=> "foo"
+p h[1].object_id        #=> 6127170
+p h[1] << "bar"         #=> "foobar"
+p h[1]                  #=> "foobar"
+
+p h[2]                  #=> "foobar"
+p h[2].object_id        #=> 6127170
+
+p h                     #=> {}
+
+# ブロックを与えると、対応する値がまだ無いキーが呼び出される度に
+# ブロックを評価するので、全て別のオブジェクトになります。
+h = Hash.new {|hash, key| hash[key] = "foo"}
+
+p h[1]                  #=> "foo"
+p h[1].object_id        #=> 6126900
+p h[1] << "bar"         #=> "foobar"
+p h[1]                  #=> "foobar"
+
+p h[2]                  #=> "foo"
+p h[2].object_id        #=> 6126840
+
+p h                     #=> {1=>"foobar", 2=>"foo"}
+
+# 値が設定されていないときに(fetchのように)例外をあげるようにもできる
+h = Hash.new {|hash, key|
+                raise(IndexError, "hash[#{key}] has no value")
+             }
+h[1]
+# エラー hash[1] has no value (IndexError)
+```
+
+- **SEE** [m:Hash#default=],[m:Hash#default],[m:Hash#default_proc]
+
+#@since 2.7.0
+### def ruby2_keywords_hash?(hash) -> bool
+
+[m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
+ruby2_keywords フラグが設定されているかどうかを返します。
+
+このメソッドはデバッグや調査、シリアライゼーションのために本当に必要な場合のために
+用意されていて、普通のプログラムで使うことは想定されていません。
+
+ruby 2.7.1 で追加されたため、ruby 2.7.0 では定義されていません。
+
+```ruby
+ruby2_keywords def foo(*args)
+  Hash.ruby2_keywords_hash?(args.last)
+end
+foo(k: 1)   # => true
+foo({k: 1}) # => false
+```
+
+- **SEE** [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords]
+#@end
+## Instance Methods
+
+### def values -> [object]
+
+ハッシュの全値の配列を返します。
+
+```ruby title="例"
+h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+p h1.values         #=> [100, ["some"], "c"]
+```
+
+- **SEE** [m:Hash#keys],[m:Hash#to_a]
+
+### def to_a -> [Array]
+
+キーと値からなる 2 要素の配列を並べた配列を生成して返します。
+
+```ruby title="例"
+h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+p h1.to_a           #=> [["a", 100], [2, ["some"]], [:c, "c"]]
+```
+
+- **SEE** [m:Hash#keys],[m:Hash#values]
+
+### def keys -> [object]
+
+全キーの配列を返します。
+
+```ruby title="例"
+h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+p h1.keys           #=> ["a", 2, :c]
+```
+
+- **SEE** [m:Hash#values],[m:Hash#to_a]
+
+### def to_hash -> self
+
+self を返します。
+
+```ruby title="例"
+hash = {}
+p hash.to_hash         # => {}
+p hash.to_hash == hash # => true
+```
+
+- **SEE** [m:Object#to_hash], [m:Hash#to_h]
+
+### def to_h -> self | Hash
+#@since 2.6.0
+### def to_h {|key, value| block } -> Hash
+#@end
+
+self を返します。[c:Hash] クラスのサブクラスから呼び出した場合は
+self を [c:Hash] オブジェクトに変換します。
+
+```ruby title="例"
+hash = {}
+p hash.to_h      # => {}
+p hash.to_h == hash # => true
+
+class MyHash < Hash;end
+my_hash = MyHash.new
+p my_hash.to_h        # => {}
+p my_hash.class       # => MyHash
+p my_hash.to_h.class  # => Hash
+```
+
+#@since 2.6.0
+ブロックを指定すると各ペアでブロックを呼び出し、
+その結果をペアとして使います。
+```ruby title="ブロック付きの例"
+hash = { "a" => 97, "b" => 98 }
+hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
+```
+
+- **SEE** [m:Enumerable#map]
+#@end
+
+#@since 2.3.0
+### def to_proc -> Proc
+
+self のキーに対応する値を返す [c:Proc] オブジェクトを返します。
+
+```ruby
+h = {1 => 10, 2 => 20, 3 => 30}
+[1, 2, 3].map(&h) # => [10, 20, 30]
+```
+#@end
+
+### def length -> Integer
+### def size -> Integer
+
+ハッシュの要素の数を返します。
+
+```ruby
+h = { "d" => 100, "a" => 200, "v" => 300, "e" => 400 }
+h.length        #=> 4
+h.size          #=> 4
+h.delete("a")   #=> 200
+h.length        #=> 3
+h.size          #=> 3
+```
+
+### def empty? -> bool
+
+ハッシュが空の時、真を返します。
+
+```ruby title="例"
+puts({}.empty?) #=> true
+```
+
+### def invert -> Hash
+
+値からキーへのハッシュを作成して返します。
+
+異なるキーに対して等しい値が登録されている場合、最後に定義されている値が使用されます。
+
+```ruby title="例"
+h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
+p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
+```
+
+### 参考
+値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
+
+```ruby
+def safe_invert(orig_hash)
+  orig_hash.each_key.group_by do |key|
+    orig_hash[key]
+  end
+end
+p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
+```
+
+- **SEE** [m:Hash#key]
+
+### def fetch(key) -> object
+### def fetch(key, default) -> object
+### def fetch(key) {|key| ... } -> object
+
+key に関連づけられた値を返します。該当するキーが登録されてい
+ない時には、引数 default が与えられていればその値を、ブロッ
+クが与えられていればそのブロックを評価した値を返します。
+
+fetchはハッシュ自身にデフォルト値が設定されていても単に無視します（挙動に変化がありません）。
+
+- **param** `key` -- 探索するキーを指定します。
+- **param** `default` -- 該当するキーが登録されていない時の返り値を指定します。
+- **raise**  `KeyError` --   引数defaultもブロックも与えられてない時、キーの探索に失敗すると発生します。
+
+```ruby title="例"
+h = {one: nil}
+p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
+p h.fetch(:one)                          #=> nil
+p h.fetch(:two)                          # エラー key not found (KeyError)
+p h.fetch(:two,"error")                  #=> "error"
+p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
+p h.fetch(:two, "error"){|key|           #=> "two not exist"
+    "#{key} not exist"                   #  warning: block supersedes default value argument
+  }                                      #  警告が表示される。
+
+h.default = "default"
+p h.fetch(:two)                          # エラー key not found (KeyError)
+```
+
+- **SEE** [m:Hash#\[\]]
+
+#@since 2.3.0
+### def fetch_values(key, ...)               -> [object]
+### def fetch_values(key, ...) { |key| ... } -> [object]
+
+引数で指定されたキーに関連づけられた値の配列を返します。
+
+該当するキーが登録されていない時には、ブロックが与えられていればそのブ
+ロックを評価した値を返します。ブロックが与えられていない時は
+[c:KeyError] が発生します。
+
+self にデフォルト値が設定されていても無視されます（挙動に変化がありません）。
+
+- **param** `key` -- 探索するキーを任意個指定します。
+
+- **raise** `KeyError` -- ブロックが与えられてない時にキーの探索に失敗すると発生します。
+
+```ruby title="例"
+h = { "cat" => "feline", "dog" => "canine", "cow" => "bovine" }
+
+h.fetch_values("cow", "cat")                   # => ["bovine", "feline"]
+h.fetch_values("cow", "bird")                  # raises KeyError
+h.fetch_values("cow", "bird") { |k| k.upcase } # => ["bovine", "BIRD"]
+```
+
+- **SEE** [m:Hash#values_at], [m:Hash#fetch]
+#@end
+
+### def has_key?(key) -> bool
+### def include?(key) -> bool
+### def key?(key)     -> bool
+### def member?(key)  -> bool
+
+ハッシュが key をキーとして持つ時真を返します。
+
+- **param** `key` -- 探索するキーを指定します。
+
+```ruby
+p({1 => "one"}.key?(1)) # => true
+p({1 => "one"}.key?(2)) # => false
+```
+
+- **SEE** [m:Hash#value?]
+
+### def has_value?(value) -> bool
+### def value?(value)     -> bool
+
+ハッシュが value を値として持つ時真を返します。
+値の一致判定は == で行われます。
+
+- **param** `value` -- 探索する値を指定します。
+
+```ruby
+p({1 => "one"}.value?("one")) #=> true
+p({1 => "one"}.value?("two")) #=> false
+```
+
+- **SEE** [m:Hash#key?]
+
+### def []=(key, value)
+### def store(key, value) -> object
+
+key に対して value を関連づけます。value を返し
+ます。
+
+- **param** `key` -- キーを指定します。
+- **param** `value` -- 値を指定します。
+
+
+```ruby title="例"
+h = {}
+
+h[:key] = "value"
+p h #=>{:key => "value"}
+```
+
+- **SEE** [m:Hash#\[\]]
+
+### def clear -> self
+
+ハッシュの中身を空にします。
+
+空にした後のselfを返します。
+デフォルト値の設定はクリアされません。
+
+```ruby title="例"
+h = Hash.new("default value")
+h[:some] = "some"
+p h #=> {:some=>"some"}
+
+h.clear
+
+p h #=> {}
+p h.default #=> "default value"
+```
+
+#@since 2.4.0
+### def compact -> Hash
+### def compact! -> self | nil
+
+compact は自身から value が nil のもの取り除いた Hash を生成して返します。 compact! は自身から破壊的に value が nil のものを取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
+
+
+```ruby title="例"
+hash = {a: 1, b: nil, c: 3}
+p hash.compact  #=> {:a=>1, :c=>3}
+p hash          #=> {:a=>1, :b=>nil, :c=>3}
+hash.compact!
+hash            #=> {:a=>1, :c=>3}
+p hash.compact! #=>  nil
+```
+
+- **SEE** [m:Array#compact]
+
+#@end
+
+### def compare_by_identity -> self
+
+ハッシュのキーの一致判定をオブジェクトの同一性で判定するように変更します。
+
+デフォルトでは、キーのオブジェクトによっては内容が同じならキーが一致しているとみなされますが、より厳密に
+[m:Object#object_id]が一致しているかどうかを条件とするようにselfを変更します。
+
+selfが変化する破壊的メソッドです。
+
+- **return** -- selfを返します。
+
+```ruby title="例"
+h1 = { "a" => 100, "b" => 200, :c => "c" }
+p h1.compare_by_identity? #=> false
+p h1["a"]        #=> 100
+
+h1.compare_by_identity
+
+p h1.compare_by_identity? #=> true
+p h1["a"]        #=> nil  # この"a"と最初の"a"とは違うオブジェクト
+p h1[:c]         #=> "c"  # 同じ内容のシンボルはすべて同一
+```
+
+- **SEE** [m:Hash#compare_by_identity?]
+
+### def compare_by_identity? -> bool
+
+ハッシュがキーの一致判定をオブジェクトの同一性を用いて行っているならば真を返します。
+
+```ruby title="例"
+h1 = {}
+p h1.compare_by_identity? #=> false
+
+h1.compare_by_identity
+
+p h1.compare_by_identity? #=> true
+```
+
+- **SEE** [m:Hash#compare_by_identity]
+
+### def shift -> [object, object] | nil
+
+ハッシュからキーが追加された順で先頭の要素をひとつ取り除き、
+[key, value]という配列として返します。
+
+shiftは破壊的メソッドです。selfは要素を取り除かれた残りのハッシュに変更されます。
+
+#@until 3.2
+Ruby 3.2以前は、ハッシュが空の場合、デフォルト値（[m:Hash#default]または[m:Hash#default_proc]のブロックの値か、どちらもnilならばnil）
+を返します(このとき、[key,value] という形式の値を返すわけではないことに注意)。
+
+3.2以降ではデフォルト値に関わらず nil を返すよう変更されています。
+
+```ruby title="例"
+h = {:ab => "some" , :cd => "all"}
+p h.shift               #=> [:ab, "some"]
+p h.shift               #=> [:cd, "all"]
+p h                     #=> {}
+p h.shift               #=> nil
+
+h1 = Hash.new("default value")
+p h1                    #=> {}
+p h1.shift              #=> "default value"
+
+h2 = Hash.new {|*arg| arg}
+p h2                    #=> {}
+p h2.shift              #=> [{}, nil]
+```
+
+#@else
+
+ハッシュが空の場合、デフォルト値に関わらず nil を返します。
+
+```ruby title="例"
+h = {:ab => "some" , :cd => "all"}
+p h.shift               #=> [:ab, "some"]
+p h.shift               #=> [:cd, "all"]
+p h                     #=> {}
+p h.shift               #=> nil
+
+h1 = Hash.new("default value")
+p h1                    #=> {}
+p h1.shift              #=> nil
+
+h2 = Hash.new {|*arg| arg}
+p h2                    #=> {}
+p h2.shift              #=> nil
+```
+
+#@end
+
+- **SEE** [m:Array#shift]
+
+### def replace(other) -> self
+
+ハッシュの内容を other の内容で置き換えます。
+
+デフォルト値の設定もotherの内容になります。
+otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
+
+self = other.to_hash.dup と同じです。
+
+- **param** `other` -- ハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+- **return** -- self を返します。
+
+```ruby title="例"
+foo = {1 => 'a', 2 => 'b'}
+bar = {2 => 'B', 3 => 'C'}
+
+foo.replace(bar)
+p foo  #=> {2=>"B", 3=>"C"}
+
+zoo = {}
+zoo = bar.dup
+p zoo  #=> {2=>"B", 3=>"C"}
+
+class Foo
+  def to_hash
+    {:japan => 'kyoto'}
+  end
+end
+
+h = Hash.new
+h.replace(Foo.new) #暗黙の変換
+p h #=> {:japan=>"kyoto"}
+```
+
+- **SEE** [m:Hash#dup],[m:Hash#merge],[m:Object#to_hash]
+
+### def [](key) -> object | nil
+key に関連づけられた値を返します。
+
+該当するキーが登録されていない時には、デフォルト値を返します。
+
+デフォルト値と値としての nil を区別する必要が
+ある場合は [m:Hash#fetch] または [m:Hash#key?] を使ってください。
+
+- **param** `key` -- 探索するキーを指定します。
+
+```ruby title="例"
+h = {:ab => "some" , :cd => "all"}
+p h[:ab]             #=> "some"
+p h[:ef]             #=> nil
+
+h1 = Hash.new("default value")
+p h1[:non]             #=> "default value"
+
+h2 = Hash.new {|*arg| arg}
+p h2[:non]             #=> [{}, :non]
+```
+
+- **SEE** [m:Hash.new], [m:Hash#fetch],[m:Hash#values_at],[m:Hash#key?], [m:Hash#default], [m:Hash#default_proc]
+
+### def default -> object | nil
+### def default(key) -> object | nil
+ハッシュのデフォルト値を返します。
+
+ハッシュのデフォルト値がブロックで与えられている場合、 1 番目の形式だと
+返り値が nil になることに注意してください。この場合、ハッシュのデフォルト値に
+ついて調べるには 2 番目の形式か [m:Hash#default_proc] を使ってください。
+
+2 番目の形式はハッシュがデフォルト値としてブロックを持つ場合に、
+self と引数 key をブロックに渡して評価し、その結果を返します。
+
+- **param** `key` -- デフォルトのブロックにキーとして渡されます。
+
+```ruby title="例"
+h = Hash.new("default")
+p h.default        #=> "default"
+p h.default(:some) #=> "default"
+p h #=>{}
+
+h = Hash.new{|hash, key| hash[key] ="default" }
+p h.default        #=> nil
+p h.default(:some) #=> "default"
+p h                #=> {:some=>"default"}
+
+h = Hash.new
+p h.default        #=> nil
+p h.default(:some) #=> nil
+p h                #=> {}
+```
+
+- **SEE** [m:Hash#default=], [m:Hash#default_proc]
+
+### def default=(value)
+
+ハッシュのデフォルト値を value に変更します。対応する値が存
+在しないキーで検索した時にはこの値を返すようになります。
+
+デフォルト値（ブロックを含む）が既に設定してあった場合も value で上書きします。
+
+- **param** `value` -- 設定するデフォルト値です。
+- **return** -- value を返します。
+
+```ruby title="例"
+h = {}
+p h.default #=>nil
+
+h.default = "default"
+p h.default #=>"default"
+```
+
+- **SEE** [m:Hash#default]
+
+### def default_proc -> Proc | nil
+
+ハッシュのデフォルト値を返す [c:Proc] オブジェクトを返します。
+ハッシュがブロック形式のデフォルト値を持たない場合 nil を返します。
+
+```ruby title="例"
+h = Hash.new {|hash, key| "The #{key} not exist in #{hash.inspect}"}
+p h.default              #=> nil
+p block = h.default_proc #=> #<Proc:0x0x401a9ff4>
+p block.call({},:foo)    #=> "The foo not exist in {}"
+
+h = Hash.new("default")
+p h.default              #=> "default"
+p h.default_proc         #=> nil
+```
+
+- **SEE** [m:Hash#default]
+
+### def default_proc=(pr)
+
+ハッシュのデフォルト値を返す [c:Proc] オブジェクトを
+変更します。
+
+以前のデフォルトは値([m:Hash#default])の場合も
+Proc の場合([m:Hash#default_proc])でも上書きされます。
+
+引数には to_proc で [c:Proc] オブジェクトに変換できる
+オブジェクトも受け付けます。
+
+#@since 2.0.0
+nil を指定した場合は現在の [m:Hash#default_proc] をクリアします。
+#@end
+
+- **param** `pr` -- デフォルト値を返す手続きオブジェクト
+
+```ruby title="例"
+h = {}
+h.default_proc = proc do |hash, key|
+  hash[key] = case
+              when (key % 15).zero?
+                "FizzBuzz"
+              when (key % 5).zero?
+                 "Buzz"
+              when (key % 3).zero?
+                 "Fizz"
+              else
+                 key
+              end
+end
+p h[1]  # => 1
+p h[2]  # => 2
+p h[3]  # => "Fizz"
+p h[5]  # => "Buzz"
+p h[15] # => "FizzBuzz"
+
+h.default_proc = nil
+p h[16] # => nil
+# default_proc が nil になったので `16=>16 が追加されていない`
+p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
+```
+
+- **SEE** [m:Hash#default_proc], [m:Hash#default]
+
+### def clone -> Hash
+### def dup -> Hash
+
+selfと同じ内容を持つ新しいハッシュを返します。
+
+clone は frozen singleton-class の情報も含めてコピーしますが、
+#@since 2.7.0
+dup は内容だけをコピーします。
+#@else
+dup は内容と tainted だけをコピーします。
+#@end
+またどちらのメソッドも要素それ自体のコピーはしません。
+つまり参照しているオブジェクトが変わらない「浅い(shallow)」コピーを行います。
+
+```ruby title="例"
+h1 = {"have" => "have a","as" => "as a" }
+h2 = h1.dup
+
+h2["have"] = "has"
+p h2 #=> {"have"=>"has", "as"=>"as a"}
+p h1 #=> {"have"=>"have a", "as"=>"as a"}
+
+h2["as"].upcase!
+p h2 #=> {"have"=>"has", "as"=>"AS A"}
+p h1 #=> {"have"=>"have a", "as"=>"AS A"}
+```
+
+- **SEE** [m:Object#clone]
+
+### def delete(key) -> object | nil
+### def delete(key) {|key| ... } -> object
+
+key に対応する要素を取り除きます。
+
+- **param** `key` -- 取り除くキーを指定します。
+
+- **return** -- 取り除かれた要素の値を返します。
+        key に対応する要素が存在しない時には nil を返します。
+
+```````````
+与えられたブロックは key にマッチする要素がなかった時に評価され、その結果を返します。
+```````````
+
+```ruby title="例"
+h = {:ab => "some" , :cd => "all"}
+
+p h.delete(:ab) #=> "some"
+p h.delete(:ef) #=> nil
+p h.delete(:ef){|key|"#{key} Nothing"} #=> "ef Nothing"
+
+p h #=> {:cd=>"all"}
+```
+
+- **SEE** [m:Hash#delete_if]
+
+### def reject {|key, value| ... } -> Hash
+### def reject                     -> Enumerator
+
+self を複製して、ブロックを評価した値が真になる要
+素を削除したハッシュを返します。
+
+ハッシュを返すことを除けば
+[m:Enumerable#reject] とほぼ同じです。
+selfを破壊的に変更したい場合はかわりに[m:Hash#delete_if]か[m:Hash#reject!]を使います。
+
+```ruby title="例"
+h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
+
+p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
+```
+
+- **SEE** [m:Hash#delete_if],[m:Hash#delete],[m:Enumerable#reject]
+
+### def delete_if -> Enumerator
+### def reject!   -> Enumerator
+### def delete_if {|key, value| ... } -> self
+### def reject! {|key, value| ... } -> self|nil
+
+キーと値を引数としてブロックを評価した結果が真であ
+るような要素を self から削除します。
+
+delete_if は常に self を返します。
+reject! は、要素を削除しなかった場合には nil を返し、
+そうでなければ self を返します。
+
+ブロックを省略した場合は [c:Enumerator] を返します。
+
+```ruby title="例"
+h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
+
+p h.reject!{|key, value| key.to_i < value.to_i }   #=> { 6 => "4", 8 => "2" }
+p h                                                #=> { 6 => "4", 8 => "2" }
+
+p h.delete_if{|key, value| key.to_i < value.to_i } #=> { 6 => "4", 8 => "2" }
+p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
+```
+
+- **SEE** [m:Hash#reject],[m:Hash#delete]
+- **SEE** [m:Hash#keep_if],[m:Hash#select!]
+
+### def each {|key, value| ... } -> self
+### def each_pair {|key, value| ... } -> self
+### def each      -> Enumerator
+### def each_pair -> Enumerator
+
+ハッシュのキーと値を引数としてブロックを評価します。
+
+反復の際の評価順序はキーが追加された順です。
+ブロック付きの場合 self を、
+無しで呼ばれた場合 [c:Enumerator] を返します。
+
+each_pair は each のエイリアスです。
+
+```ruby title="例"
+{:a=>1, :b=>2}.each {|a| p a}
+#=> [:a, 1]
+#   [:b, 2]
+
+{:a=>1, :b=>2}.each {|k, v| p [k, v]}
+#=> [:a, 1]
+#   [:b, 2]
+
+p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
+```
+
+- **SEE** [m:Hash#each_key],[m:Hash#each_value]
+
+### def each_key {|key| ... } -> self
+### def each_key -> Enumerator
+
+ハッシュのキーを引数としてブロックを評価します。
+
+反復の際の評価順序はキーが追加された順です。
+ブロック付きの場合selfを、
+無しで呼ばれた場合[c:Enumerator]を返します。
+
+```ruby title="例"
+{:a=>1, :b=>2}.each_key {|k| p k}
+#=> :a
+#   :b
+
+p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
+```
+
+- **SEE** [m:Hash#each_pair],[m:Hash#each_value]
+
+### def each_value {|value| ... } -> self
+### def each_value -> Enumerator
+
+ハッシュの値を引数としてブロックを評価します。
+
+反復の際の評価順序はキーが追加された順です。
+ブロック付きの場合selfを、
+無しで呼ばれた場合 [c:Enumerator] を返します。
+
+```ruby title="例"
+{:a=>1, :b=>2}.each_value {|v| p v}
+#=> 1
+#   2
+
+p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
+```
+
+- **SEE** [m:Hash#each_pair],[m:Hash#each_key]
+
+### def key(val) -> object
+#@until 3.0
+### def index(val) -> object
+#@end
+
+値 val に対応するキーを返します。対応する要素が存在しない時には
+nil を返します。
+
+該当するキーが複数存在する場合、どのキーを返すかは不定です。
+
+#@until 3.0
+Hash#index は obsolete です。
+使用すると警告メッセージが表示されます。
+#@end
+
+- **param** `val` -- 探索に用いる値を指定します。
+
+```ruby title="例"
+h = {:ab => "some" , :cd => "all" , :ef => "all"}
+
+p h.key("some") #=> :ab
+p h.key("all") #=> :cd
+p h.key("at") #=> nil
+```
+
+- **SEE** [m:Hash#invert]
+
+### def values_at(*keys) -> [object]
+
+引数で指定されたキーに対応する値の配列を返します。
+
+キーに対応する要素がなければデフォルト値が使用されます。
+
+- **param** `keys` -- キーを 0 個以上指定します。
+
+- **return** -- 引数で指定されたキーに対応する値の配列を返します。
+        引数が指定されなかった場合は、空の配列を返します。
+
+```ruby title="例"
+h = {1=>"a", 2=>"b", 3=>"c"}
+
+p h.values_at(1,3,4)               #=> ["a", "c", nil]
+# [h[1], h[3] ,h[4]] と同じ
+```
+
+- **SEE** [m:Hash#\[\]], [m:Hash.new], [m:Hash#default], [m:Hash#default_proc], [m:Array#values_at]
+
+#@since 2.3.0
+### def dig(key, ...) -> object | nil
+
+self 以下のネストしたオブジェクトを dig メソッドで再帰的に参照して返し
+ます。途中のオブジェクトが nil であった場合は nil を返します。
+
+- **param** `key` -- キーを任意個指定します。
+
+```ruby title="例"
+h = { foo: {bar: {baz: 1}}}
+
+h.dig(:foo, :bar, :baz)      # => 1
+h.dig(:foo, :zot, :xyz)      # => nil
+
+g = { foo: [10, 11, 12] }
+g.dig(:foo, 1)               # => 11
+```
+
+- **SEE** [m:Array#dig], [m:Struct#dig], [m:OpenStruct#dig]
+#@end
+
+### def rehash -> self
+
+キーのハッシュ値を再計算します。
+
+キーになっているオブジェクトの内容が変化した時など、
+ハッシュ値が変わってしまった場合はこのメソッドを使ってハッシュ値を再計算しない
+限り、そのキーに対応する値を取り出すことができなくなります。
+
+- **raise** `RuntimeError` -- [m:Hash#each]などのイテレータの評価途中でrehashすると発生します。
+- **return** -- selfを返します。
+
+```ruby title="例"
+a = [ "a", "b" ]
+h = { a => 100 }
+
+p h[a]       #=> 100
+
+a[0] = "z"
+p h[a]       #=> nil
+
+h.rehash
+p h[a]       #=> 100
+```
+
+- **SEE** [m:Object#hash]
+
+#@since 2.6.0
+### def merge(*others) -> Hash
+### def merge(*others) {|key, self_val, other_val| ... } -> Hash
+
+selfとothersのハッシュの内容を順番にマージ(統合)した結果を返します。
+デフォルト値はselfの設定のままです。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+othersがハッシュではない場合、othersのメソッドto_hashを使って暗黙の変換を試みます。
+
+- **param** `others` -- マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+- **return** -- マージした結果を返します
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h3 = { "b" => 357, "d" => 400 }
+h1.merge          #=> {"a"=>100, "b"=>200}
+h1.merge(h2)      #=> {"a"=>100, "b"=>246, "c"=>300}
+h1.merge(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+h1.merge(h2) {|key, oldval, newval| newval - oldval}
+                  #=> {"a"=>100, "b"=>46,  "c"=>300}
+h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
+                  #=> {"a"=>100, "b"=>311, "c"=>300, "d"=>400}
+h1                #=> {"a"=>100, "b"=>200}
+```
+
+```ruby
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.merge(bar)
+       # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"b", 3=>"c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+```
+
+```ruby
+class Foo
+  def to_hash
+    {:Australia => 'Sydney',
+     :France => 'Paris'
+     }
+  end
+end
+
+h = {:Germany => 'Berlin',
+     :Australia => 'Canberra',
+     :France => 'Paris'
+     }
+
+# 暗黙の変換
+p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+```
+
+- **SEE** [m:Hash#update],[m:Hash#replace]
+
+### def merge!(*others) -> self
+### def merge!(*others) {|key, self_val, other_val| ... } -> self
+### def update(*others) -> self
+### def update(*others) {|key, self_val, other_val| ... } -> self
+
+selfとothersのハッシュの内容を順番にマージ(統合)します。
+
+デフォルト値はselfの設定のままです。
+
+self と others に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に others の値を使います。
+
+othersがハッシュではない場合、othersのメソッドto_hashを使って暗黙の変換を試みます。
+
+- **param** `others` -- マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+- **return** -- マージ後のselfを返します。
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h1.merge!          #=> {"a"=>100, "b"=>200}
+h1                 #=> {"a"=>100, "b"=>200}
+```
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h1.merge!(h2)      #=> {"a"=>100, "b"=>246, "c"=>300}
+h1                 #=> {"a"=>100, "b"=>246, "c"=>300}
+```
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h3 = { "b" => 357, "d" => 400 }
+h1.merge!(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+h1                 #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+```
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 246, "c" => 300 }
+h3 = { "b" => 357, "d" => 400 }
+h1.merge!(h2, h3) {|key, v1, v2| v1 }
+                   #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+h1                 #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+```
+
+```ruby
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+```
+
+- **SEE** [m:Hash#merge],[m:Hash#replace]
+
+#@else
+### def merge(other) -> Hash
+### def merge(other) {|key, self_val, other_val| ... } -> Hash
+
+selfとotherのハッシュの内容をマージ(統合)した結果を返します。デフォルト値はselfの設定のままです。
+
+self と other に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に other の値を使います。
+
+otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
+
+- **param** `other` -- マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+- **return** -- マージした結果を返します
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge()     # => {"a"=>100, "b"=>200}
+h1.merge(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1.merge(h2){|key, oldval, newval| newval - oldval}
+               # => {"a"=>100, "b"=>54,  "c"=>300}
+h1             # => {"a"=>100, "b"=>200}
+```
+
+```ruby
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.merge(bar)
+       # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"b", 3=>"c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+```
+
+```ruby
+class Foo
+  def to_hash
+    {:Australia => 'Sydney',
+     :France => 'Paris'
+     }
+  end
+end
+
+h = {:Germany => 'Berlin',
+     :Australia => 'Canberra',
+     :France => 'Paris'
+     }
+
+# 暗黙の変換
+p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+```
+
+- **SEE** [m:Hash#update],[m:Hash#replace]
+
+### def merge!(other) -> self
+### def merge!(other) {|key, self_val, other_val| ... } -> self
+### def update(other) -> self
+### def update(other) {|key, self_val, other_val| ... } -> self
+
+selfとotherのハッシュの内容をマージ(統合)します。
+
+デフォルト値はselfの設定のままです。
+
+self と other に同じキーがあった場合はブロック付きか否かで
+判定方法が違います。ブロック付きのときはブロックを呼び出して
+その返す値を重複キーに対応する値にします。ブロック付きでない
+場合は常に other の値を使います。
+
+otherがハッシュではない場合、otherのメソッドto_hashを使って暗黙の変換を試みます。
+
+- **param** `other` -- マージ用のハッシュまたはメソッド to_hash でハッシュに変換できるオブジェクトです。
+- **return** -- マージ後のselfを返します。
+
+```ruby
+h1 = { "a" => 100, "b" => 200 }
+h2 = { "b" => 254, "c" => 300 }
+h1.merge!(h2)   # => {"a"=>100, "b"=>254, "c"=>300}
+h1              # => {"a"=>100, "b"=>254, "c"=>300}
+```
+
+```ruby
+foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+
+p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+```
+
+- **SEE** [m:Hash#merge!]
+#@end
+### def ==(other) -> bool
+### def ===(other) -> bool
+### def eql?(other) -> bool
+
+自身と other が同じ数のキーを保持し、キーが eql? メソッドで比較して全て等しく、
+値が == メソッドで比較して全て等しい場合に真を返します。
+
+- **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
+
+```ruby title="例"
+#(出力関数は省略)
+{ 1 => :a } == { 1 => :a }               #=> true
+{ 1 => :a } == { 1 => :a, 2 => :b }      #=> false
+{ 1 => :a } == { 1.0 => :a }             #=> false  ( 1.eql?(1.0) は false なので)
+
+{ :x => 1 } == { :x => 1.0 }             #=> true   ( 1 == 1.0 は true なので)
+```
+
+- **SEE** [m:Hash#equal?]
+
+### def equal?(other) -> bool
+
+指定された other が self 自身である場合のみ真を返します。
+
+- **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
+
+```ruby title="例"
+p({}.equal?({}))     #=> false
+a = {}
+p a.equal?(a)        #=> true
+```
+
+- **SEE** [m:Hash#==]
+
+#@since 2.3.0
+### def <=(other) -> bool
+
+self が other のサブセットか同じである場合に真を返します。
+
+- **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
+
+```ruby title="例"
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 <= h2   # => true
+h2 <= h1   # => false
+h1 <= h1   # => true
+```
+
+- **SEE** [m:Hash#<], [m:Hash#>=], [m:Hash#>]
+
+### def <(other) -> bool
+
+self が other のサブセットである場合に真を返します。
+
+- **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
+
+```ruby title="例"
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 < h2    # => true
+h2 < h1    # => false
+h1 < h1    # => false
+```
+
+- **SEE** [m:Hash#<=], [m:Hash#>=], [m:Hash#>]
+
+### def >=(other) -> bool
+
+other が self のサブセットか同じである場合に真を返します。
+
+- **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
+
+```ruby title="例"
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 >= h2   # => false
+h2 >= h1   # => true
+h1 >= h1   # => true
+```
+
+- **SEE** [m:Hash#<=], [m:Hash#<], [m:Hash#>]
+
+### def >(other) -> bool
+
+other が self のサブセットである場合に真を返します。
+
+- **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
+
+```ruby title="例"
+h1 = {a:1, b:2}
+h2 = {a:1, b:2, c:3}
+h1 > h2    # => false
+h2 > h1    # => true
+h1 > h1    # => false
+```
+
+- **SEE** [m:Hash#<=], [m:Hash#<], [m:Hash#>=]
+#@end
+
+### def hash    -> Integer
+
+自身が保持するキーと値のハッシュ値を元にして算出した整数を返します。
+自身が保持するキーや値が変化すればこのメソッドが返す値も変化します。
+
+```ruby title="例"
+a = {}
+p a.hash     #=> 0
+a[1] = :x
+p a.hash     #=> 329543
+```
+
+
+### def assoc(key)   ->  Array | nil
+
+ハッシュが key をキーとして持つとき、見つかった要素のキーと値のペア
+を配列として返します。
+
+キーの同一性判定には eql? メソッドではなく == メソッドを使います。
+key が見つからなかった場合は、nil を返します。
+
+- **param** `key` -- 検索するキー
+
+```ruby title="例"
+h = {"colors"  => ["red", "blue", "green"],
+     "letters" => ["a", "b", "c" ]}
+h.assoc("letters")  #=> ["letters", ["a", "b", "c"]]
+h.assoc("foo")      #=> nil
+```
+
+
+
+- **SEE** [m:Array#assoc]
+
+
+### def flatten(level = 1) -> Array
+
+自身を平坦化した配列を生成して返します。
+
+全てのキーと値を新しい配列の要素として展開します。
+[m:Array#flatten] と違って、デフォルトではこのメソッドは自身を
+再帰的に平坦化しません。level を指定すると指定されたレベルまで
+再帰的に平坦化します。
+
+- **param** `level` -- 展開するレベル
+
+```ruby title="例"
+a =  {1=> "one", 2 => [2,"two"], 3 => "three"}
+a.flatten     #=> [1, "one", 2, [2, "two"], 3, "three"]
+a.flatten(1)  #=> [1, "one", 2, [2, "two"], 3, "three"]
+a.flatten(2)  #=> [1, "one", 2, 2, "two", 3, "three"]
+a.flatten(0)  #=> [[1, "one"], [2, [2, "two"]], [3, "three"]]
+a.flatten(-1) #=> [1, "one", 2, 2, "two", 3, "three"]
+```
+
+- **SEE** [m:Array#flatten]
+
+### def rassoc(value) -> Array | nil
+
+ハッシュ内を検索して，引数 value と 一致する値を探します。
+
+比較は == メソッドを使用して行われます。一致する値があれば，
+該当するキーとその値とを要素とするサイズ 2 の配列を返します。
+ない場合には nil を返します。
+
+- **param** `value` -- 探索する値。
+
+```ruby title="例"
+a = {1=> "one", 2 => "two", 3 => "three", "ii" => "two"}
+a.rassoc("two")    #=> [2, "two"]
+a.rassoc("four")   #=> nil
+```
+
+- **SEE** [m:Hash#assoc], [m:Array#rassoc]
+
+### def select                       -> Enumerator
+### def select {|key, value| ... }   -> Hash
+#@since 2.6.0
+### def filter                       -> Enumerator
+### def filter {|key, value| ... }   -> Hash
+#@end
+
+key, value のペアについてブロックを評価し，真となるペアだけを含む
+ハッシュを生成して返します。
+
+ブロックが与えられなかった場合は、自身と select から生成した
+[c:Enumerator] オブジェクトを返します。
+
+```ruby
+h = { "a" => 100, "b" => 200, "c" => 300 }
+h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
+h.select {|k,v| v < 200}  #=> {"a" => 100}
+```
+
+
+- **SEE** [m:Hash#select!], [m:Hash#reject]
+
+### def to_s     -> String
+### def inspect  -> String
+
+ハッシュの内容を人間に読みやすい文字列にして返します。
+
+```ruby title="例"
+h = { "c" => 300, "a" => 100, "d" => 400  }
+h.inspect   # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
+```
+
+### def keep_if -> Enumerator
+### def keep_if {|key, value| ... } -> self
+### def select! -> Enumerator
+### def select! {|key, value| ... } -> self | nil
+#@since 2.6.0
+### def filter! -> Enumerator
+### def filter! {|key, value| ... }   -> self | nil
+#@end
+
+キーと値を引数としてブロックを評価した結果が真であるような要素を self
+に残します。
+
+keep_if は常に self を返します。
+#@since 2.6.0
+filter! と select! はオブジェクトが変更された場合に self を、
+#@else
+select! はオブジェクトが変更された場合に self を、
+#@end
+されていない場合に nil を返します。
+
+ブロックが与えられなかった場合は、自身と keep_if から生成した
+[c:Enumerator] オブジェクトを返します。
+
+```ruby title="例"
+h1 = {}
+c = ("a".."g")
+c.each_with_index {|e, i| h1[i] = e }
+
+h2 = h1.dup
+h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
+
+h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+h1.select! { |k, v| true }        # => nil
+h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+h2.keep_if { |k, v| true }        # => {0=>"a", 3=>"d", 6=>"g"}
+```
+
+- **SEE** [m:Hash#select], [m:Hash#delete_if], [m:Hash#reject!]
+
+#@since 2.4.0
+### def transform_values {|value| ... } -> Hash
+### def transform_values                -> Enumerator
+
+すべての値に対してブロックを呼び出した結果で置き換えたハッシュを返します。
+キーは変化しません。
+
+- **return** -- 置き換えたハッシュを返します。
+        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
+        返します。
+
+```ruby title="例"
+h = { a: 1, b: 2, c: 3 }
+h.transform_values {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
+h.transform_values(&:to_s)           #=> { a: "1", b: "2", c: "3" }
+h.transform_values.with_index {|v, i| "#{v}.#{i}" }
+                                     #=> { a: "1.0", b: "2.1", c: "3.2" }
+```
+
+- **SEE** [m:Hash#transform_values!]
+#@since 2.5.0
+- **SEE** [m:Hash#transform_keys]
+- **SEE** [m:Hash#transform_keys!]
+#@end
+### def transform_values! {|value| ... } -> self
+### def transform_values!                -> Enumerator
+
+すべての値に対してブロックを呼び出した結果でハッシュの値を変更します。
+キーは変化しません。
+
+- **return** -- transform_values! は常に self を返します。
+        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
+        返します。
+
+```ruby title="例"
+h = { a: 1, b: 2, c: 3 }
+h.transform_values! {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
+h.transform_values!(&:to_s)           #=> { a: "2", b: "5", c: "10" }
+h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
+                                      #=> { a: "2.0", b: "5.1", c: "10.2" }
+```
+
+- **SEE** [m:Hash#transform_values]
+#@end
+#@since 2.5.0
+- **SEE** [m:Hash#transform_keys]
+- **SEE** [m:Hash#transform_keys!]
+### def transform_keys {|key| ... } -> Hash
+#@since 3.0
+### def transform_keys(hash)        -> Hash
+#@end
+### def transform_keys              -> Enumerator
+
+すべてのキーに対してブロックを呼び出した結果で置き換えたハッシュを返します。
+値は変化しません。
+
+#@since 3.0
+- **param** `hash` -- 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
+#@end
+
+```ruby title="例"
+h = { a: 1, b: 2, c: 3 }
+h.transform_keys {|k| k.to_s }   # => {"a"=>1, "b"=>2, "c"=>3}
+#@since 3.0
+h.transform_keys(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
+#@end
+h.transform_keys(&:to_s)         # => {"a"=>1, "b"=>2, "c"=>3}
+h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+                                 # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
+```
+
+- **SEE** [m:Hash#transform_keys!]
+- **SEE** [m:Hash#transform_values]
+- **SEE** [m:Hash#transform_values!]
+
+### def transform_keys! {|key| ... } -> self
+#@since 3.0
+### def transform_keys!(hash)        -> self
+#@end
+### def transform_keys!                -> Enumerator
+
+すべてのキーに対してブロックを呼び出した結果でハッシュのキーを変更します。
+値は変化しません。
+
+#@since 3.0
+- **param** `hash` -- 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
+#@end
+- **return** -- transform_keys! は常に self を返します。
+        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
+        返します。
+
+
+```ruby title="例"
+h = { a: 1, b: 2, c: 3 }
+h.transform_keys! {|k| k.to_s }   # => {"a"=>1, "b"=>2, "c"=>3}
+h.transform_keys!(&:to_sym)       # => {:a=>1, :b=>2, :c=>3}
+#@since 3.0
+h.transform_keys!(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
+#@end
+h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+                                  # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
+```
+
+- **SEE** [m:Hash#transform_keys]
+- **SEE** [m:Hash#transform_values]
+- **SEE** [m:Hash#transform_values!]
+
+### def slice(*keys) -> Hash
+
+引数で指定されたキーとその値だけを含む Hash を返します。
+
+```ruby title="例"
+h = { a: 100, b: 200, c: 300 }
+h.slice(:a)           # => {:a=>100}
+h.slice(:c, :b)       # => {:c=>300, :b=>200}
+h.slice(:b, :c, :d)   # => {:b=>200, :c=>300}
+```
+
+#@since 3.0
+- **SEE** [m:Hash#except], [m:ENV.slice]
+#@else
+- **SEE** [m:ENV.slice]
+#@end
+#@end
+#@since 3.0
+### def except(*keys) -> Hash
+
+引数で指定された以外のキーとその値だけを含む Hash を返します。
+
+引数に指定されていて Hash に存在しないキーは無視されます。
+
+```ruby
+h = { a: 100, b: 200, c: 300 }
+h.except(:a) # => {:b=>200, :c=>300}
+```
+
+- **SEE** [m:Hash#slice], [m:ENV.except]
+#@end

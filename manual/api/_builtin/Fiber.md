@@ -1,0 +1,246 @@
+---
+library: _builtin
+---
+# class FiberError < StandardError
+Fiber に関するエラーが起きると発生します。
+
+# class Fiber
+
+ノンプリエンプティブな軽量スレッド(以下ファイバーと呼ぶ)を提供します。
+他の言語では coroutine あるいは semicoroutine と呼ばれることもあります。
+[c:Thread] と違いユーザレベルスレッドとして実装されています。
+
+[c:Thread] クラスが表すスレッドと違い、明示的に指定しない限り
+ファイバーのコンテキストは切り替わりません。
+またファイバーは親子関係を持ちます。Fiber#resume を呼んだファイバーが親になり
+呼ばれたファイバーが子になります。親子関係を壊すような遷移(例えば
+自分の親の親のファイバーへ切り替えるような処理)はできません。
+例外 FiberError が発生します。
+できることは
+ - Fiber#resume により子へコンテキストを切り替える
+ - Fiber.yield により親へコンテキストを切り替える
+の二通りです。この親子関係は一時的なものであり
+親ファイバーへコンテキストを切り替えた時点で解消されます。
+
+ファイバーが終了するとその親にコンテキストが切り替わります。
+
+#@since 3.1
+Ruby 3.1 から fiber を require しなくても、
+コンテキストの切り替えに制限のない [m:Fiber#transfer] が使えます。
+#@else
+なお標準添付ライブラリ [lib:fiber] を require することにより、
+コンテキストの切り替えに制限のない [m:Fiber#transfer] が使えるようになります。
+#@end
+任意のファイバーにコンテキストを切り替えることができます。
+
+### 例外
+
+ファイバー実行中に例外が発生した場合、親ファイバーに例外が伝播します。
+
+```ruby title="例:"
+f = Fiber.new do
+  raise StandardError, "hoge"
+end
+
+begin
+f.resume     # ここでも StandardError が発生する。
+rescue => e
+p e.message  #=> "hoge"
+end
+```
+
+### ショートチュートリアル
+
+ファイバーは処理のあるポイントで他のルーチンにコンテキストを切り替え、またそのポイントから再開する
+という目的のために使います。
+[m:Fiber.new] により与えられたブロックとともにファイバーを生成します。
+生成したファイバーに対して [m:Fiber#resume] を呼ぶことによりコンテキストを切り替えます。
+子ファイバーのブロック中で [m:Fiber.yield] を呼ぶと親にコンテキストを切り替えます。
+Fiber.yield の引数が、親での Fiber#resume の返り値になります。
+```ruby title="例:"
+f = Fiber.new do
+  n = 0
+  loop do
+    Fiber.yield(n)
+    n += 1
+  end
+end
+
+5.times do
+ p f.resume
+end
+
+#=> 0
+    1
+    2
+    3
+    4
+```
+
+以下は内部イテレータを外部イテレータに変換する例です。
+実際 [c:Enumerator] は Fiber を用いて実装されています。
+
+```ruby title="例:"
+def enum2gen(enum)
+  Fiber.new do
+    enum.each{|i|
+      Fiber.yield(i)
+    }
+  end
+end
+ 
+g = enum2gen(1..100)
+ 
+p g.resume  #=> 1
+p g.resume  #=> 2
+p g.resume  #=> 3
+```
+
+### 注意
+
+Thread クラスが表すスレッド間をまたがるファイバーの切り替えはできません。
+例外 FiberError が発生します。
+
+```ruby title="例:"
+f = nil
+Thread.new do
+  f = Fiber.new{}
+end.join
+f.resume
+#=> t.rb:5:in `resume': fiber called across threads (FiberError)
+#      from t.rb:5:in `<main>'
+```
+
+## Class Methods
+#@since 3.1
+#@include(Fiber.current)
+#@end
+
+### def new{|obj| ... } -> Fiber
+
+与えられたブロックとともにファイバーを生成して返します。
+ブロックは [m:Fiber#resume] に与えられた引数をその引数として実行されます。
+
+ブロックが終了した場合は親にコンテキストが切り替わります。
+その時ブロックの評価値が返されます。
+
+```ruby title="例:"
+a = nil
+f = Fiber.new do |obj|
+  a = obj
+  :hoge
+end
+  
+b = f.resume(:foo)
+p a  #=> :foo
+p b  #=> :hoge
+```
+
+### def yield(*arg = nil)   -> object
+
+現在のファイバーの親にコンテキストを切り替えます。
+
+コンテキストの切り替えの際に [m:Fiber#resume] に与えられた引数を yield メソッドは返します。
+
+- **param** `arg` -- 現在のファイバーの親に渡したいオブジェクトを指定します。
+
+- **raise** `FiberError` -- Fiber でのルートファイバーで呼ばれた場合に発生します。
+
+
+```ruby title="例:"
+a = nil
+f = Fiber.new do
+  a = Fiber.yield()
+end
+  
+f.resume()
+f.resume(:foo)
+
+p a  #=> :foo
+```
+
+## Instance Methods
+#@since 3.1
+#@include(Fiber.transfer)
+#@include(Fiber.alive_p)
+#@end
+#@since 2.7.0
+### def raise                                            -> object
+### def raise(message)                                   -> object
+### def raise(exception, message = nil, backtrace = nil) -> object
+
+selfが表すファイバーが最後に [m:Fiber.yield] を呼んだ場所で例外を発生させます。
+
+Fiber.yield が呼ばれていないかファイバーがすでに終了している場合、
+[c:FiberError] が発生します。
+
+引数を渡さない場合、[c:RuntimeError] が発生します。
+message 引数を渡した場合、message 引数をメッセージとした RuntimeError
+が発生します。
+
+その他のケースでは、最初の引数は [c:Exception] か Exception
+のインスタンスを返す exception メソッドを持ったオブジェクトである
+必要があります。
+この場合、2つ目の引数に例外のメッセージを渡せます。また3つ目の引数に
+例外発生時のスタックトレースを指定できます。
+
+- **param** `message` -- 例外のメッセージとなる文字列です。
+- **param** `exception` -- 発生させる例外です。
+- **param** `backtrace` -- 例外発生時のスタックトレースです。文字列の配列で指定します。
+
+```ruby title="例"
+f = Fiber.new { Fiber.yield }
+f.resume
+f.raise "Error!" # => Error! (RuntimeError)
+```
+
+```ruby title="ファイバー内のイテレーションを終了させる例"
+f = Fiber.new do
+  loop do
+    Fiber.yield(:loop)
+  end
+  :exit
+end
+
+p f.resume              # => :loop
+p f.raise StopIteration # => :exit
+```
+#@end
+
+### def resume(*arg = nil)   -> object
+
+自身が表すファイバーへコンテキストを切り替えます。
+自身は resume を呼んだファイバーの子となります。
+
+#@since 2.0.0
+#@# #5526 参照。
+ただし、[m:Fiber#transfer] を呼び出した後に resume を呼び出す事はでき
+ません。
+#@end
+
+- **param** `arg` -- self が表すファイバーに渡したいオブジェクトを指定します。
+
+- **return** -- コンテキストの切り替えの際に [m:Fiber.yield] に与えられた引数
+        を返します。ブロックの終了まで実行した場合はブロックの評価結果
+        を返します。
+
+- **raise** `FiberError` -- 自身が既に終了している場合、コンテキストの切替が
+                  Thread クラスが表すスレッド間をまたがる場合、自身が resume を
+                  呼んだファイバーの親かその祖先である場合に発生します。
+#@since 2.0.0
+                  また、[m:Fiber#transfer] を呼び出した後に resume を
+                  呼び出した場合に発生します。
+#@end
+
+```ruby title="例:"
+
+f = Fiber.new do
+  Fiber.yield(:hoge)
+  :fuga
+end
+  
+p f.resume() #=> :hoge
+p f.resume() #=> :fuga
+p f.resume() #=> FiberError: dead fiber called
+```
+

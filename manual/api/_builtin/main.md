@@ -1,0 +1,179 @@
+---
+library: _builtin
+---
+# object main
+
+トップレベルでの self を表すオブジェクトです。
+
+main では参照できない事に注意してください。トップレベルで self から参照してください。
+
+トップレベルで定義したメソッドは [c:Object] の private インスタンスメソッドと
+して定義されます。
+
+```ruby title="例: トップレベルで定義したメソッドの確認"
+basic_private_methods = private_methods(false)
+basic_public_methods = public_methods(false)
+private def explicit_private_method
+end
+
+# トップレベルで定義したメソッドは main オブジェクトの private メソッドと して定義される
+def implicit_private_method
+end
+
+public def explicit_public_method
+end
+
+# main オブジェクトで独自定義した private method のみを取得する
+p private_methods(false) - basic_private_methods
+# => [:explicit_private_method, :implicit_private_method]
+
+# main オブジェクトで独自定義した public method のみを取得する
+p public_methods(false) - basic_public_methods
+# => [:explicit_public_method]
+```
+
+#@since 3.0
+### def public() -> nil
+### def public(name) -> String | Symbol
+### def public(*name) -> Array
+### def public(names) -> Array
+#@else
+### def public(*name) -> self
+#@end
+
+メソッドを public に設定します。
+
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドをどんな形式でも呼び出せるように(public)設定します。
+
+引数が与えられた時には引数によって指定されたメソッドを public に設
+定します。
+
+- **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
+#@since 3.0
+- **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
+#@end
+
+- **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
+
+#@#noexample Module#public を参照
+
+- **SEE** [m:Module#public]
+
+#@since 3.0
+### def private() -> nil
+### def private(name) -> String | Symbol
+### def private(*name) -> Array
+### def private(names) -> Array
+#@else
+### def private(*name) -> self
+#@end
+
+メソッドを private に設定します。
+
+引数が与えられた時には引数によって指定されたメソッドを private に
+設定します。
+
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
+れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
+
+- **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
+#@since 3.0
+- **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
+#@end
+
+- **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
+
+#@#noexample 明示的に呼び出される機会がないため
+
+- **SEE** [m:Module#private]
+
+### def to_s    -> "main"
+#@since 2.0.0
+### def inspect -> "main"
+#@end
+
+"main" を返します。
+
+#@#noexample
+
+### def include(*modules) -> self
+
+引数 modules で指定したモジュールを後ろから順番に [c:Object] にインクルードします。
+
+- **param** `modules` -- [c:Module] のインスタンス( [c:Enumerable] など)を指定します。
+
+- **raise** `ArgumentError` -- 継承関係が循環してしまうような include を行った場
+                     合に発生します。
+
+```ruby title="例:"
+include Math
+
+hypot(3, 4)  # => 5.0
+```
+
+- **SEE** [m:Module#include]
+
+### def define_method(name, method) -> Symbol
+### def define_method(name) { ... } -> Symbol
+
+インスタンスメソッド name を [c:Object] に定義します。
+
+ブロックを与えた場合、定義したメソッドの実行時にブロックが
+[c:Object] インスタンスの上で [m:BasicObject#instance_eval] されます。
+
+- **param** `name` -- [c:String] または [c:Symbol] を指定します。
+
+- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] の
+              いずれかのインスタンスを指定します。
+
+- **return** -- メソッド名を表す [c:Symbol] を返します。
+
+- **raise** `TypeError` -- method に同じクラス、サブクラス以外のメソッドを指定し
+                 た場合に発生します。
+
+#@#noexample Module#define_method を参照
+
+- **SEE** [m:Module#define_method]
+
+### def using(module) -> self
+
+引数で指定したモジュールで定義された拡張を有効にします。
+
+有効にした拡張の有効範囲については以下を参照してください。
+
+#@since 2.1.0
+ - [url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]
+#@else
+ - [url:https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope]
+#@end
+
+- **param** `module` -- 有効にするモジュールを指定します。
+
+```ruby title="例"
+module Sloth
+  refine String do
+    def downcase
+      self
+    end
+  end
+end
+
+"ABC".downcase # => "abc"
+
+using Sloth
+
+"ABC".downcase # => "ABC"
+```
+
+#@since 2.1.0
+- **SEE** [m:Module#refine], [m:Module#using]
+#@else
+- **SEE** [m:Module#refine]
+#@end
+
+#@until 2.1.0
+[注意] refinements は 2.0 現在、実験的な機能として提供されています。以
+降のバージョンで仕様が変更になる可能性があります。使用すると必ず警告が
+表示されます。
+#@end

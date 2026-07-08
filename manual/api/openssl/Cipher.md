@@ -1,0 +1,442 @@
+---
+library: openssl
+---
+# class OpenSSL::Cipher < Object
+
+共通鍵暗号のために抽象化されたインターフェースを提供するクラスです。
+
+基本的にこのクラスを直接使ってデータを暗号化することは
+避けてください。通常はより高水準なインターフェースが利用可能な
+はずです。必要なのは暗号アルゴリズムを指定するため 
+[m:OpenSSL::Cipher.new] で暗号オブジェクトを生成することだけでしょう。
+
+もし、このクラスを直接利用して暗号化する場合は、暗号の鍵や
+IV(Initialization Vector)の取り扱いについて正しく理解してからに
+してください。
+
+以下の手順で利用します。
+  - [m:OpenSSL::Cipher.new] や [m:OpenSSL::Cipher::AES256.new] 
+    などで暗号オブジェクトを生成する
+  - [m:OpenSSL::Cipher#encrypt], [m:OpenSSL::Cipher#decrypt] で
+    暗号、復号のいずれをするかを設定する
+  - [m:OpenSSL::Cipher#key=], [m:OpenSSL::Cipher#iv=], 
+    [m:OpenSSL::Cipher#random_key], [m:OpenSSL::Cipher#random_iv] などで
+    鍵と IV(initialization vector) を設定する
+  - [m:OpenSSL::Cipher#update], [m:OpenSSL::Cipher#final] で
+    暗号化/復号化をする
+
+
+ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
+
+### ブロック暗号モード
+AES のようなブロック暗号では暗号方式を選択する際に
+モードを指定する必要があります。このライブラリでは
+以下のような文字列でモードを指定できます。
+  - "CBC"
+  - "CFB"
+  - "ECB"
+  - "OFB"
+これらの文字列の意味は
+[ref:lib:openssl#references] などで調べてください。
+AES を用いる場合、通常は CBC を用いれば良いでしょう。
+選択肢によっては安全性に問題があるので気をつけてください。
+
+
+### 使用例
+`````
+require 'openssl'
+  
+# 暗号化するデータ
+data = "*secret data*"
+# パスワード
+pass = "**secret password**"
+# salt
+salt = OpenSSL::Random.random_bytes(8)
+  
+# 暗号化器を作成する
+enc = OpenSSL::Cipher.new("AES-256-CBC")
+enc.encrypt
+# 鍵とIV(Initialize Vector)を PKCS#5 に従ってパスワードと salt から生成する
+key_iv = OpenSSL::PKCS5.pbkdf2_hmac_sha1(pass, salt, 2000, enc.key_len + enc.iv_len)
+key = key_iv[0, enc.key_len]
+iv = key_iv[enc.key_len, enc.iv_len]
+# 鍵とIVを設定する
+enc.key = key
+enc.iv = iv
+  
+# 暗号化する
+encrypted_data = ""
+encrypted_data << enc.update(data)
+encrypted_data << enc.final
+  
+p encrypted_data
+  
+# 復号化器を作成する
+dec = OpenSSL::Cipher.new("AES-256-CBC")
+dec.decrypt
+  
+# 鍵とIVを設定する
+dec.key = key
+dec.iv = iv
+  
+# 復号化する
+decrypted_data = ""
+decrypted_data << dec.update(encrypted_data)
+decrypted_data << dec.final
+  
+p decrypted_data
+`````
+
+## Class Methods
+### def new(name) -> OpenSSL::Cipher
+
+共通鍵暗号のアルゴリズム名を渡し、対応する暗号オブジェクトを生成します。
+
+利用できるアルゴリズムはシステムにインストールされている openssl に依存します。
+[m:OpenSSL::Cipher.ciphers] で利用可能な暗号のアルゴリズム名が得られます。
+
+さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc) 
+を用いるのが安心でしょう。
+
+#@# 参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
+#@#  require 'openssl'
+#@#  include OpenSSL::Cipher
+#@#
+#@#  # Triple DES
+#@#  c1 = Cipher.new("DES-EDE3-CBC")
+#@#  c2 = DES.new(:EDE3, "CBC")
+#@#  pass = "open sesame!"
+#@#  data = "Hello world!"
+#@#  c1.pkcs5_keyivgen(pass)
+#@#  s1 = c1.encrypt.update(data) + c1.final
+#@#  c2.pkcs5_keyivgen(pass)
+#@#  s2 = c2.decrypt.update(s1) + c2.final
+#@#  p(data == s2) #=> true
+#@#
+#@#  c1 = Cipher.new("AES256")
+#@#  c2 = Cipher.new("AES-256-CBC")
+#@#  pass = "open sesame!"
+#@#  data = "Hello world!"
+#@#  c1.pkcs5_keyivgen(pass)
+#@#  s1 = c1.encrypt.update(data) + c1.final
+#@#  c2.pkcs5_keyivgen(pass)
+#@#  s2 = c2.decrypt.update(s1) + c2.final
+#@#  p(data == s2) #=> true
+
+- **param** `name` -- 暗号化方式の名前
+- **raise** `RuntimeError` -- 利用可能でない暗号化方式名を指定した場合に発生します
+- **raise** `OpenSSL::Cipher::CipherError` -- 初期化に失敗した場合に発生します
+
+### def ciphers -> [String]
+利用可能な暗号方式名を文字列の配列で返します。
+
+`````
+require 'openssl'
+
+OpenSSL::Cipher.ciphers 
+# => ["AES-128-CBC", "AES-128-CFB", "AES-128-CFB1", "AES-128-CFB8", "AES-128-ECB", "AES-128-OFB", "AES-192-CBC", ... ]
+`````
+
+## Instance Methods
+### def reset -> self
+内部状態をリセットします。
+
+鍵、IV、暗号化/復号化待ちデータなどがクリアされます。
+
+### def encrypt -> self
+### def encrypt(pass, iv = nil) -> self
+
+暗号化の準備をします。
+
+暗号オブジェクトの内部状態を暗号化のために初期化します。
+
+pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
+鍵と IV を設定します。このやりかたは非標準的であるため利用すべきではありません。
+
+- **param** `pass` -- パスワード文字列
+- **param** `iv` -- IV文字列
+- **raise** `OpenSSL::Cipher::CipherError` -- 準備に失敗した場合に発生します
+
+### def decrypt -> self
+### def decrypt(pass, iv = nil) -> self
+復号化の準備をします。
+
+暗号オブジェクトの内部状態を復号化のために初期化します。
+
+pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
+鍵と IV を設定します。このやりかたは非標準的であるため利用すべきではありません。
+
+- **param** `pass` -- パスワード文字列
+- **param** `iv` -- IV文字列
+- **raise** `OpenSSL::Cipher::CipherError` -- 準備に失敗した場合に発生します
+
+### def update(data) -> String
+
+渡された文字列を暗号化もしくは復号化して文字列として返します。
+
+どちらがなされるかは直前に [m:OpenSSL::Cipher#encrypt] もしくは 
+[m:OpenSSL::Cipher#decrypt] のいずれが呼びだされたかに
+よって決まります。
+
+ブロック暗号を利用する場合は、暗号化/復号化はブロックサイズで規定された
+バイト数ごとに行われます。そのため余ったデータは暗号オブジェクト内部に
+保存され、次の文字列が渡されたときに使われます。
+
+暗号化/復号化すべきデータを渡し終えた後は、
+[m:OpenSSL::Cipher#final] 
+を呼びだして暗号オブジェクト内部に残されたデータを暗号化/復号化
+する必要があります。
+
+
+- **param** `data` -- 暗号化/復号化する文字列
+
+### def final -> String
+暗号オブジェクト内部に残されたデータを暗号化/復号化し、文字列で
+返します。
+
+パディング([m:OpenSSL::Cipher#padding=])を有効にしている場合は、
+残されたデータにパディングを付加した上で暗号化します。
+
+### def key=(key) 
+暗号鍵を設定します。
+
+なお、ここでいう「暗号鍵」は各暗号アルゴリズムに渡される鍵であって、
+「パスワード」ではありません。
+
+### def key_len -> Integer
+暗号鍵の長さをバイト数で返します。
+
+### def key_len=(length)
+暗号鍵の長さを変更します。
+
+- **param** `length` -- 新しく設定する長さ(バイト数)
+- **raise** `OpenSSL::Cipher::CipherError` -- 指定した長さが不適切である(暗号方式の規格上許されていない値である)場合に発生します
+
+### def iv=(iv) 
+IV(Initialization Vector) を設定します。
+
+- **param** `iv` -- IV文字列
+
+### def iv_len -> Integer
+必要な IV(Initialization Vector) の長さをバイト数で返します。
+
+### def block_size -> Integer
+暗号化のブロックのサイズをバイト数で返します。
+
+### def padding=(padding)
+パディングを設定します。
+
+1 でパディングを有効に、0で無効にします。
+
+パディングを無効化した場合には、暗号化するデータのサイズはブロックサイズの
+倍数でなければなりません。
+
+暗号化する側と復号化する側でパディングの設定を一致させておかなければなりません。
+
+- **param** `padding` -- 1でパディングを有効、0で無効
+- **raise** `OpenSSL::Cipher::CipherError` -- 設定に失敗した場合に発生します
+
+### def pkcs5_keyivgen(pass, salt=nil, num=2048, digest="md5") -> nil
+pass と salt から鍵と IV を生成し、暗号オブジェクトに設定します。
+
+このメソッドは PKCS#5 v1.5 で定義されている方法に
+従って鍵と IV を生成します。PKCS#5 v1.5 と正しく互換するには
+digest は md5 か sha1 を使い、暗号アルゴリズムは
+RC2, RC4-40, DES のいずれかを使わなければなりません。
+
+このメソッドの利用は推奨されません。これではなく
+PKCS#5 v2.0 に定義されている方法で鍵と IV を生成すべきです。
+
+salt が nil である場合には salt なしと見なします。
+
+num は必要なデータの生成でハッシュ関数を何回繰り返し適用するかを
+指定します。最低でも1000を使うべきです。
+
+- **param** `pass` -- パスワード文字列
+- **param** `salt` -- 鍵と IV を生成するための salt 文字列、長さは 8 byte でなければならない
+- **param** `num` -- ハッシュ関数の適用回数
+- **param** `digest` -- ハッシュアルゴリズムを指定する文字列もしくは [c:OpenSSL::Digest] のオブジェクト
+- **raise** `OpenSSL::Cipher::CipherError` -- saltが8 byte でない場合や、鍵と IV の設定に失敗した場合に発生します
+- **SEE** [c:OpenSSL::PKCS5]
+
+### def random_iv -> String
+IV を乱数で生成し、暗号オブジェクトに設定します。
+
+生成した IV を文字列で返します。
+
+### def random_key -> String
+鍵を乱数で生成し、暗号オブジェクトに設定します。
+
+生成した鍵を文字列で返します。
+
+
+### def name -> String
+暗号化アルゴリズムの名前を文字列で返します。
+
+
+# class OpenSSL::Cipher::Cipher < OpenSSL::Cipher
+このクラスは互換性のために存在します。
+
+[c:OpenSSL::Cipher] をかわりに利用してください。
+
+
+# class OpenSSL::Cipher::AES < OpenSSL::Cipher
+
+AES 暗号を表すクラス
+
+## Class Methods
+### def new(bit, mode) -> OpenSSL::Cipher::AES
+AES 共通鍵暗号オブジェクトを生成し、返します。
+
+AES の鍵長を整数もしくは文字列(256 or "256") bit で、
+モードを文字列 mode で指定します。
+
+指定可能な鍵数とモードは [m:OpenSSL::Cipher.ciphers] で
+取得できます。
+
+- **param** `bit` -- 鍵長整数/文字列
+- **param** `mode` -- モード文字列
+
+# class OpenSSL::Cipher::AES128 < OpenSSL::Cipher
+
+鍵長 128 ビットの AES 暗号を表すクラス
+
+## Class Methods
+### def new(mode) -> OpenSSL::Cipher::AES128
+鍵長 128 ビット AES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [m:OpenSSL::Cipher.ciphers] で取得できます。
+
+- **param** `mode` -- モード文字列
+
+# class OpenSSL::Cipher::AES192 < OpenSSL::Cipher
+
+鍵長 192 ビットの AES 暗号を表すクラス
+
+## Class Methods
+### def new(mode) -> OpenSSL::Cipher::AES192
+鍵長 192 ビット AES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [m:OpenSSL::Cipher.ciphers] で取得できます。
+
+- **param** `mode` -- モード文字列
+
+# class OpenSSL::Cipher::AES256 < OpenSSL::Cipher
+鍵長 256 ビットの AES 暗号を表すクラス
+
+## Class Methods
+### def new(mode) -> OpenSSL::Cipher::AES256
+鍵長 256 ビット AES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [m:OpenSSL::Cipher.ciphers] で取得できます。
+
+- **param** `mode` -- モード文字列
+
+
+# class OpenSSL::Cipher::BF < OpenSSL::Cipher
+BF(BlowFish)暗号を表すクラス
+
+## Class Methods
+### def new(mode) -> OpenSSL::Cipher::BF
+BF(BlowFish)暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [m:OpenSSL::Cipher.ciphers] で取得できます。
+
+- **param** `mode` -- モード文字列
+
+# class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher
+
+CAST5 暗号を表すクラス
+
+## Class Methods
+### def new(mode) -> OpenSSL::Cipher::CAST5
+CAST5 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [m:OpenSSL::Cipher.ciphers] で取得できます。
+
+- **param** `mode` -- モード文字列
+
+
+# class OpenSSL::Cipher::DES < OpenSSL::Cipher
+DES 暗号を表すクラス
+
+## Class Methods
+### def new(mode) -> OpenSSL::Cipher::DES
+DES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [m:OpenSSL::Cipher.ciphers] で取得できます。
+
+- **param** `mode` -- モード文字列
+
+
+# class OpenSSL::Cipher::IDEA < OpenSSL::Cipher
+IDEA 暗号を表すクラス
+
+## Class Methods
+### def new(*args) -> OpenSSL::Cipher::IDEA
+IDEA 暗号オブジェクトを生成します。
+
+- **param** `args` -- 暗号のパラメータ
+
+# class OpenSSL::Cipher::RC2 < OpenSSL::Cipher
+RC2 暗号を表すクラス
+
+## Class Methods
+### def new(bit, mode) -> OpenSSL::Cipher::RC2
+### def new(mode) -> OpenSSL::Cipher::RC2
+
+RC2 暗号オブジェクトを生成します。
+
+鍵長を整数もしくは文字列(40 or "40") bit で、
+モードを文字列 mode で指定します。
+
+鍵長は省略可能です。
+
+指定可能な鍵数とモードは [m:OpenSSL::Cipher.ciphers] で
+取得できます。
+
+- **param** `bit` -- 鍵長整数/文字列
+- **param** `mode` -- モード文字列
+
+
+# class OpenSSL::Cipher::RC4 < OpenSSL::Cipher
+
+RC4 暗号を表すクラス
+
+## Class Methods
+### def new() -> OpenSSL::Cipher::RC4
+### def new(bit) -> OpenSSL::Cipher::RC4
+RC4 暗号オブジェクトを生成し、返します。
+
+bit で鍵長を指定できます。
+
+指定可能な鍵数は [m:OpenSSL::Cipher.ciphers] で
+取得できます。
+
+鍵長は省略可能です。
+
+- **param** `bit` -- 鍵長のビット数(整数もしくは文字列)
+
+# class OpenSSL::Cipher::RC5 < OpenSSL::Cipher
+
+RC5 暗号を表すクラス
+
+## Class Methods
+### def new(*args) -> OpenSSL::Cipher::RC5
+RC5 暗号オブジェクトを生成し、返します。
+
+- **param** `args` -- 暗号のパラメータ
+# class OpenSSL::Cipher::CipherError < OpenSSL::OpenSSLError
+共通鍵暗号関連のエラーで発生する例外のクラス。

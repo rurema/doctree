@@ -1,0 +1,9 @@
+---
+library: rinda/rinda
+---
+# class Rinda::RequestCanceledError < ThreadError
+
+rinda で take などのリクエストが何らかの理由でキャンセルされた
+ことを意味する例外クラス。
+
+

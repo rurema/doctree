@@ -1,0 +1,167 @@
+---
+library: openssl
+---
+# class OpenSSL::X509::Certificate < Object
+
+X509 証明書クラス
+
+  - [RFC:5280]
+
+## Class Methods
+
+### def new -> OpenSSL::X509::Certificate
+### def new(obj) -> OpenSSL::X509::Certificate
+証明書オブジェクトを生成します。
+
+引数を与えなかった場合には、空の証明書を返します。
+
+obj が [c:String] である場合には、それを
+PEM 形式もしくは DER 形式の証明書データの文字列であると見なして
+その内容から証明書オブジェクトを生成します。
+
+obj が [c:IO] である場合には、そのファイルの中身から
+証明書オブジェクトを生成します。
+
+obj が [c:OpenSSL::X509::Certificate] オブジェクトである場合には、
+そのオブジェクトの内容を複製します。
+
+obj が to_der メソッドを持つ場合には、そのメソッドによって
+DER 形式のバイト列に変換し、証明書オブジェクトを生成します。
+
+- **param** `obj` -- 証明書のデータ
+- **raise** `OpenSSL::X509::CertificateError` -- 証明書のフォーマットが不正であるなど、読み込みに失敗した場合に発生します
+
+## Instance Methods
+
+### def to_der -> String
+
+DER 形式のバイト列を返します。
+
+### def to_pem -> String
+### def to_s -> String
+
+PEM 形式の文字列を返します。
+
+### def to_text -> String
+
+人間が読める形式の文字列を返します。
+
+### def version -> Integer
+X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
+
+### def version=(version)
+証明書のバージョンを設定します。
+
+- **param** `version` -- バージョン(0以上の整数)
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def signature_algorithm -> String
+発行者 (CA) が証明書に署名するのに使ったアルゴリズムです。
+
+### def serial -> Integer
+発行者 (CA) が証明書に付ける識別番号を返します。
+
+- **SEE** [m:OpenSSL::X509::Certificate#serial=]
+### def serial=(serial)
+証明書の識別番号を設定します。
+
+- **param** `serial` -- 識別番号
+- **SEE** [m:OpenSSL::X509::Certificate#serial]
+
+### def subject -> OpenSSL::X509::Name
+証明書の所有者の名前を返します。
+
+
+### def subject=(name)
+証明書の所有者の名前を設定します。
+
+- **param** `name` -- 所有者の名前の [c:OpenSSL::X509::Name] オブジェクト
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def issuer -> OpenSSL::X509::Name
+証明書の発行者の名前を返します。
+
+### def issuer=(name)
+証明書の発行者の名前を設定します。
+
+- **param** `name` -- 発行者の名前の [c:OpenSSL::X509::Name] オブジェクト
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def not_before -> Time
+証明書が有効になる時刻を返します。
+
+### def not_before=(time)
+証明書が有効になる時刻を設定します。
+
+- **param** `time` -- 証明書の開始時刻
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def not_after -> Time
+証明書が無効になる時刻を返します。
+
+### def not_after=(time)
+証明書が無効になる時刻を設定します。
+
+- **param** `time` -- 証明書の終了時刻
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def extensions -> [OpenSSL::X509::Extension]
+証明書の拡張領域の内容を返します。
+
+### def extensions=(extensions)
+証明書の拡張領域の内容を設定します。
+
+- **param** `extensions` -- 設定する拡張([c:OpenSSL::X509::Extension] オブジェクト)の配列
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def add_extension(ext) -> OpenSSL::X509::Extension
+拡張領域に拡張を追加します。
+
+- **return** -- 追加した拡張を返します
+- **param** `ext` -- 追加する拡張([c:OpenSSL::X509::Extension] オブジェクト)
+- **raise** `OpenSSL::X509::CertificateError` -- 設定に失敗した場合に発生します
+
+### def public_key -> OpenSSL::PKey::PKey
+証明書に記載された公開鍵を返します。
+
+鍵の種類によって以下のいずれかのクラスのインスタンスを返します。
+  - [c:OpenSSL::PKey::RSA]
+  - [c:OpenSSL::PKey::DSA]
+  - [c:OpenSSL::PKey::DH]
+  - [c:OpenSSL::PKey::EC]
+
+- **raise** `OpenSSL::X509::CertificateError` -- 鍵の取得に失敗した場合に発生します
+- **raise** `OpenSSL::PKey::PKeyError` -- サポートしていない種類の鍵である場合に発生します
+
+### def public_key=(pkey)
+証明書に公開鍵を設定します。
+
+- **param** `pkey` -- 公開鍵([c:OpenSSL::PKey::PKey]のサブクラスのインスタンス)
+- **raise** `OpenSSL::X509::CertificateError` -- 鍵の設定に失敗した場合に発生します
+
+### def sign(pkey, digest) -> self
+証明書に署名します。
+
+DSA で署名する場合は digest は "dss1" でなければなりません。
+
+- **param** `pkey` -- 発行者(issuer)の秘密鍵
+- **param** `digest` -- ハッシュ関数を表す文字列
+
+### def verify(key) -> bool
+証明書の発行者の公開鍵で署名を検証します。
+
+検証に成功した、すなわち self が key で署名されたことが
+確認された場合に真を返します。
+
+- **param** `key` -- 検証に利用する発行者の公開鍵
+
+### def check_private_key(private_key) -> bool
+与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめます。
+
+確認に成功した場合に真を返します。
+- **param** `private_key` -- 確認用の秘密鍵
+
+# class OpenSSL::X509::CertificateError < OpenSSL::OpenSSLError
+
+X509 証明書関連のエラーを表す例外クラスです。
+

@@ -1,5 +1,4 @@
 = class Monitor < Object
-
 #@until 2.7
 include MonitorMixin
 #@end

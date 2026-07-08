@@ -1,0 +1,30 @@
+---
+library: rinda/rinda
+include:
+  - DRb::DRbUndumped
+---
+# class Rinda::SimpleRenewer < Object
+
+シンプルな renewer で renewer のサンプル実装です。
+
+[c:Rinda::TupleSpace] が保持するタプルの有効期限を更新するクラスです。
+このクラスはタプルの寿命をプロセスの寿命と一致させることができます。
+詳しくは [c:Rinda::TupleSpace#renewer] を見てください。
+
+
+## Class Methods
+
+### def new(sec = 180) -> Rinda::SimpleRenewer
+新たな SimpleRenewer オブジェクトを生成します。
+
+sec で [m:Rinda::SimpleRenewer#renew] が返す秒数を指定します。
+- **param** `sec` -- renew が返す秒数
+
+## Instance Methods
+
+### def renew -> Integer
+[c:TupleSpace] からオブジェクトの寿命を問合せるために呼び出されます。
+
+このメソッド自体は [m:Rinda::SimpleRenewer.new] で指定した秒数を
+返します。
+

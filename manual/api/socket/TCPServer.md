@@ -1,0 +1,160 @@
+---
+library: socket
+---
+# class TCPServer < TCPSocket
+
+TCP/IP ストリーム型接続のサーバ側のソケットのクラスです。
+
+このクラスによって簡単にソケットを利用したサーバのプログラミングができます。
+
+例えば echo サーバは以下のようになります。
+
+`````
+require "socket"
+  
+gs = TCPServer.open(0)
+socks = [gs]
+addr = gs.addr
+addr.shift
+printf("server is on %s\n", addr.join(":"))
+  
+while true
+  nsock = select(socks)
+  next if nsock == nil
+  for s in nsock[0]
+    if s == gs
+      socks.push(s.accept)
+      print(s, " is accepted\n")
+    else
+      if s.eof?
+        print(s, " is gone\n")
+        s.close
+        socks.delete(s)
+      else
+        str = s.gets
+        s.write(str)
+      end
+    end
+  end
+end
+`````
+
+Thread を使えばもっと短くなります。
+
+`````
+require "socket"
+  
+gs = TCPServer.open(0)
+addr = gs.addr
+addr.shift
+printf("server is on %s\n", addr.join(":"))
+  
+while true
+  Thread.start(gs.accept) do |s|       # save to dynamic variable
+    print(s, " is accepted\n")
+    while s.gets
+      s.write($_)
+    end
+    print(s, " is gone\n")
+    s.close
+  end
+end
+`````
+
+## Class Methods
+
+### def new(host=nil, service) -> TCPServer
+### def open(host=nil, service) -> TCPServer
+
+新しいサーバー接続をオープンします。service は
+/etc/services (または NIS) に登録されているサービ
+ス名かポート番号で指定します。host を指定した時は
+指定したホストに対しての接続だけを受け付けます。
+
+省略時は全てのホストへの接続要求を受け付けることになります。
+new, open は内部では [man:getaddrinfo(3)] を呼び出しており、
+複数のアドレス構造体が検出された場合、
+最初に見つかったものを返します。
+実行環境によっては IPv4, IPv6 のどちらか専用の接続になる場合がありますが、
+その場合、host を省略せず明示的に指定することで、接続を特定できます。
+
+host に指定できる形式は[ref:lib:socket#host_format]を見てください。
+
+- **param** `host` -- 接続したいホストを指定します。
+            host に指定できる形式は[ref:lib:socket#host_format]を見てください。
+
+- **param** `service` -- /etc/services (または NIS) に登録されているサービ
+               ス名かポート番号で指定します。
+
+## Instance Methods
+
+### def accept -> TCPSocket
+
+クライアントからの接続要求を受け付け、接続した
+[c:TCPSocket] のインスタンスを返します。
+
+例:
+
+`````
+require 'socket'
+
+TCPServer.open("", 0) {|serv|
+  c = TCPSocket.new(*serv.addr.values_at(3,1))
+  s = serv.accept
+  c.write "foo"
+  p s.recv(10)  #=> "foo"
+}
+`````
+
+#@if (version >= "1.8.5")
+### def accept_nonblock -> TCPSocket
+
+ソケットをノンブロッキングモードに設定した後、
+[man:accept(2)] を呼び出します。
+
+返り値は [m:TCPServer#accept] と同じです。
+
+[man:accept(2)] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
+
+- **raise** `Errno::EXXX` -- [man:accept(2)] がエラーになった場合に発生します。
+
+#@end
+
+#@if (version >= "1.8.0")
+### def listen(backlog) -> 0
+
+[man:listen(2)] を実行します。
+([m:Socket#listen]と同じ)
+
+backlog は、クライアントからの接続要求を保留できる数です。
+
+[man:listen(2)] が成功すれば 0 を返します。
+失敗すれば 例外 [c:Errno::EXXX] が発生します。
+
+- **param** `backlog` -- backlog は、クライアントからの接続要求を保留できる数です。
+
+- **raise** `Errno::EXXX` -- [man:listen(2)] が失敗すれば 例外 [c:Errno::EXXX] が発生します。
+
+- **return** -- [man:listen(2)] が成功すれば 0 を返します。
+
+
+#@end
+
+#@if (version >= "1.8.0")
+### def sysaccept -> Integer
+
+接続したクライアントのソケットをファイル記述子で返すことを除けば
+[m:TCPServer#accept] と同じです。
+
+例:
+
+`````
+require 'socket'
+
+TCPServer.open("", 0) {|serv|
+  c = TCPSocket.new(*serv.addr.values_at(3,1))
+  p serv.sysaccept        #=> 6
+}
+`````
+#@end

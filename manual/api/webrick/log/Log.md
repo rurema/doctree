@@ -1,0 +1,18 @@
+---
+library: webrick/log
+---
+# class WEBrick::Log < WEBrick::BasicLog
+
+ログを取る機能を提供するクラスです。
+[c:WEBrick::BasicLog] との違いはログの各行の先頭に
+現在時刻が自動で挿入される点です。
+
+## Instance Methods
+
+### def time_format      -> String
+### def time_format=()
+
+時間を記録するフォーマットを文字列で表すアクセサです。
+形式は [m:Time#strftime] と同じです。
+デフォルトは "[%Y-%m-%d %H:%M:%S]" です。
+

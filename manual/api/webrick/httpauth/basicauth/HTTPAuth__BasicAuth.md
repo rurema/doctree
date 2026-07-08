@@ -1,0 +1,91 @@
+---
+library: webrick/httpauth/basicauth
+include:
+  - WEBrick::HTTPAuth::Authenticator
+---
+# class WEBrick::HTTPAuth::BasicAuth < Object
+
+HTTP の Basic 認証のためのクラスです。
+
+例
+
+```````
+require 'webrick'
+realm = "WEBrick's realm"
+srv = WEBrick::HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
+
+htpd = WEBrick::HTTPAuth::Htpasswd.new('dot.htpasswd')
+htpd.set_passwd(nil, 'username', 'supersecretpass')
+
+authenticator = WEBrick::HTTPAuth::BasicAuth.new(:UserDB => htpd, :Realm => realm)
+srv.mount_proc('/basic_auth') {|req, res|
+  authenticator.authenticate(req, res)
+  res.body = "hoge"
+}
+srv.start # http://127.0.0.1:10080/basic_auth
+```````
+
+## Class Methods
+
+### def make_passwd(realm, user, pass) -> String
+pass をランダムなソルトで crypt した文字列を返します。
+
+- **param** `realm` -- レルムを指定します。
+
+- **param** `user` -- ユーザ名を指定します。
+
+- **param** `pass` -- パスワードを指定します。
+
+### def new(config, default = Config::BasicAuth) -> WEBrick::HTTPAuth::BasicAuth
+
+BasicAuth オブジェクトを生成します。config は設定を保存したハッシュです。
+
+config で有効なハッシュキーは以下の通りです。
+
+````
+:Realm            =>
+:UserDB           =>
+:Logger           =>
+:AutoReloadUserDB =>
+````
+
+realm を表す文字列 :Realm には与えます。:UserDB
+には [c:WEBrick::HTTPAuth::Htpasswd] オブジェクトを与えます。:Logger には
+ロガーオブジェクトを与えます。また、:AutoReloadUserDB には
+[m:WEBrick::HTTPAuth::Htpasswd#get_passwd] の
+reload_db に渡す引数を与えます。
+
+- **param** `config` -- 設定を保持しているハッシュを指定します。
+
+- **param** `default` -- デフォルトは [m:WEBrick::Config::BasicAuth] です。
+
+## Instance Methods
+
+### def authenticate(request, response) -> bool
+クライアントから送られてきたユーザ名とパスワードを認証します。
+認証に失敗した場合は challenge を呼びます。
+
+- **param** `request` -- [c:WEBrick::HTTPRequest] のインスタンスを指定します。
+
+- **param** `response` -- [c:WEBrick::HTTPResponse] のインスタンスを指定します。
+
+- **raise** `WEBrick::HTTPStatus::Unauthorized` -- 認証に失敗した場合に発生します。
+
+### def challenge(request, response) -> ()
+
+クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
+設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
+
+- **raise** `WEBrick::HTTPStatus::Unauthorized` -- このメソッドを呼ぶと必ず発生します。
+
+### def logger -> object
+
+ロガーオブジェクトを返します。
+
+### def realm -> String
+
+realm を文字列で返します。
+
+### def userdb -> WEBrick::HTTPAuth::Htpasswd
+
+ユーザ名とパスワードを保存した [c:WEBrick::HTTPAuth::Htpasswd] オブジェクトを返します。

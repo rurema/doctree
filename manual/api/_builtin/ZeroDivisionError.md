@@ -1,0 +1,6 @@
+---
+library: _builtin
+---
+# class ZeroDivisionError < StandardError
+
+整数に対して整数の 0 で除算を行ったときに発生します。

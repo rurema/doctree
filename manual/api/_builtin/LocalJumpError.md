@@ -1,0 +1,79 @@
+---
+library: _builtin
+---
+# class LocalJumpError < StandardError
+
+ある [c:Proc] オブジェクトの作成元スコープがすでに終了しているとき、
+その [c:Proc] オブジェクト内で
+return, break, retry のいずれかを実行すると発生します。
+
+[c:Proc] の例を参照してください。
+
+## Instance Methods
+
+### def exit_value -> object
+
+例外 LocalJumpError を発生する原因となった
+break や return に渡した値を返します。
+
+例:
+
+`````
+def foo
+  proc { return 10 }
+end
+  
+begin
+  foo.call
+rescue LocalJumpError => err
+  p err              # => #<LocalJumpError: return from block-closure>
+  p err.reason       # => :return
+  p err.exit_value   # => 10
+end
+
+begin
+  Block.new { break 5 }.call
+rescue LocalJumpError => err
+  p err              # => #<LocalJumpError: break from block-closure>
+  p err.reason       # => :break
+  p err.exit_value   # => 5
+end
+`````
+
+### def reason -> Symbol
+
+例外を発生させた原因をシンボルで返します。
+
+返す値は以下のいずれかです。
+
+  - :break
+  - :redo
+  - :retry
+  - :next
+  - :return
+  - :noreason
+
+例:
+
+`````
+def foo
+  proc { return 10 }
+end
+  
+begin
+  foo.call
+rescue LocalJumpError => err
+  p err              # => #<LocalJumpError: return from block-closure>
+  p err.reason       # => :return
+  p err.exit_value   # => 10
+end
+
+begin
+  Block.new { break 5 }.call
+rescue LocalJumpError => err
+  p err              # => #<LocalJumpError: break from block-closure>
+  p err.reason       # => :break
+  p err.exit_value   # => 5
+end
+`````
+

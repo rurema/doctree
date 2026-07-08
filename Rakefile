@@ -14,6 +14,9 @@ def system(*commands)
   super(*commands)
 end
 
+# ソースは manual/ の Markdown ツリー（manual/doc は manual/api から自動で取り込まれる）。
+# 旧 refm/ は移行ウィンドウ中の凍結ソース。旧経路でビルドしたい場合は
+# BITCLUST_SOURCE=refm を指定する。
 def generate_database(version)
   puts "generate database of #{version}"
   db = "/tmp/db-#{version}"
@@ -21,13 +24,22 @@ def generate_database(version)
                      "bitclust", "--database=#{db}",
                      "init", "version=#{version}", "encoding=UTF-8")
   raise "Failed to initialize BitClust database" unless succeeded
-  succeeded = system("bundle", "exec", "bitclust", "--database=#{db}",
-                     "update", "--stdlibtree=refm/api/src")
-  raise "Failed to update BitClust database" unless succeeded
-  capi_files = Dir.glob("refm/capi/src/*")
-  succeeded = system("bundle", "exec", "bitclust", "--database=#{db}", "--capi",
-                     "update", *capi_files)
-  raise "Failed to update BitClust C API database" unless succeeded
+  if ENV["BITCLUST_SOURCE"] == "refm"
+    succeeded = system("bundle", "exec", "bitclust", "--database=#{db}",
+                       "update", "--stdlibtree=refm/api/src")
+    raise "Failed to update BitClust database" unless succeeded
+    capi_files = Dir.glob("refm/capi/src/*")
+    succeeded = system("bundle", "exec", "bitclust", "--database=#{db}", "--capi",
+                       "update", *capi_files)
+    raise "Failed to update BitClust C API database" unless succeeded
+  else
+    succeeded = system("bundle", "exec", "bitclust", "--database=#{db}",
+                       "update", "--markdowntree=manual/api")
+    raise "Failed to update BitClust database" unless succeeded
+    succeeded = system("bundle", "exec", "bitclust", "--database=#{db}", "--capi",
+                       "update", "--markdowntree=manual/capi")
+    raise "Failed to update BitClust C API database" unless succeeded
+  end
 end
 
 def generate_statichtml(version)
@@ -57,7 +69,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_indent_in_samplecode, :generate, :check_format]
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :generate, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -151,10 +163,27 @@ task check_format: [:statichtml] do
   end
 end
 
+desc 'Check file names that differ only in case'
+task :check_filename_case_conflicts do
+  # 大文字小文字のみが異なるファイル名は macOS/Windows の case-insensitive な
+  # ファイルシステムでチェックアウト不能になる（manual/api/rdoc/rdoc.lib.md の
+  # ような .lib 回避と front matter の name: については bitclust の
+  # doc/markdown-samples/MARKUP_SPEC.md §1.3 を参照）
+  errors = Dir.glob('{manual,refm}/**/*')
+              .group_by(&:downcase).values
+              .select { |paths| paths.size > 1 }
+              .map { |paths| "大文字小文字のみが異なるファイル名があります: #{paths.sort.join(' / ')}" }
+
+  unless errors.empty?
+    puts errors
+    fail
+  end
+end
+
 desc 'Check unnecessary indentation in samplecode'
 task :check_indent_in_samplecode do
   errors = []
-  `grep -rlF '\#@samplecode' refm`.lines(chomp: true).each do |path|
+  `grep -rlF '\#@samplecode' manual refm`.lines(chomp: true).each do |path|
     lines = File.read(path).lines(chomp: true)
     lines.each.with_index(1) do |line, lineno|
       next unless line.start_with?('#@samplecode')

@@ -1,0 +1,1236 @@
+---
+library: _builtin
+include:
+  - Comparable
+---
+# class Numeric < Object
+
+数値を表す抽象クラスです。[c:Integer] や [c:Float] などの数値クラス
+は Numeric のサブクラスとして実装されています。
+
+演算や比較を行うメソッド(+, -, *, /, <=>)は Numeric のサブクラスで定義されま
+す。Numeric で定義されているメソッドは、サブクラスで提供されているメソッド
+(+, -, *, /, %) を利用して定義されるものがほとんどです。
+つまり Numeric で定義されているメソッドは、Numeric のサブクラスとして新たに数値クラスを定義した時に、
+演算メソッド(+, -, *, /, %, <=>, coerce)だけを定義すれば、数値クラスのそのほかのメソッドが
+適切に定義されることを意図して提供されています。
+
++@, -@ は単項演算子 +, - を表しメソッド定義などではこの記法を利用します。
+
+効率のため Numeric のメソッドと同じメソッドがサブクラスで再定義されている場合があります。
+
+[m:Numeric#coerce] メソッドを使うことによって異なる数値クラス間で演算を行うこともできます。
+
+### 数値関連のメソッドを実際に定義しているクラス一覧
+
+ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、
+効率のためであったり上位抽象クラスで実装を定義できなかったり
+するためです。以下の表は
+#@since 2.4.0
+2.4.2
+#@else
+2.1.2
+#@end
+での一覧です。実際にどのメソッドがどのクラスに定義されているかはそれぞ
+れのクラスを参照してください。
+
+#@#  cary = [Numeric, Integer, Float, Rational, Complex]
+#@#  mary = cary.collect {|c| c.instance_methods(false)}
+#@#  methods = mary.flatten.uniq.sort
+#@#  
+#@#  methods.each_with_index {|op, i|
+#@#  if i % 10 == 0
+#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
+#@#                "", *cary.collect {|klass| klass.name.center(10)})
+#@#    puts heading
+#@#    puts "-" * heading.size
+#@#  end
+#@#
+#@#  printf("%23s | %10s %10s %10s %10s %10s\n",
+#@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
+#@#  }
+
+#@since 2.4.0
+````
+=> ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin15]
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+                       % |     o          o          o          -          -
+                       & |     -          o          -          -          -
+                       * |     -          o          o          o          o
+                      ** |     -          o          o          o          o
+                       + |     -          o          o          o          o
+                      +@ |     o          -          -          -          -
+                       - |     -          o          o          o          o
+                      -@ |     o          o          o          o          o
+                       / |     -          o          o          o          o
+                       < |     -          o          o          -          -
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+                      << |     -          o          -          -          -
+                      <= |     -          o          o          -          -
+                     <=> |     o          o          o          o          -
+                      == |     -          o          o          o          o
+                     === |     -          o          o          -          -
+                       > |     -          o          o          -          -
+                      >= |     -          o          o          -          -
+                      >> |     -          o          -          -          -
+                      [] |     -          o          -          -          -
+                       ^ |     -          o          -          -          -
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+                     abs |     o          o          o          o          o
+                    abs2 |     o          -          -          -          o
+                   angle |     o          -          o          -          o
+                     arg |     o          -          o          -          o
+              bit_length |     -          o          -          -          -
+                    ceil |     o          o          o          o          -
+                     chr |     -          o          -          -          -
+                  coerce |     o          o          o          o          o
+                    conj |     o          -          -          -          o
+               conjugate |     o          -          -          -          o
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+             denominator |     o          o          o          o          o
+                  digits |     -          o          -          -          -
+                     div |     o          o          -          -          -
+                  divmod |     o          o          o          -          -
+                  downto |     -          o          -          -          -
+                    eql? |     o          -          o          -          o
+                   even? |     -          o          -          -          -
+                    fdiv |     o          o          o          o          o
+                 finite? |     o          -          o          -          o
+                   floor |     o          o          o          o          -
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+                     gcd |     -          o          -          -          -
+                  gcdlcm |     -          o          -          -          -
+                    hash |     -          -          o          o          o
+                       i |     o          -          -          -          -
+                    imag |     o          -          -          -          o
+               imaginary |     o          -          -          -          o
+               infinite? |     o          -          o          -          o
+                 inspect |     -          o          o          o          o
+                integer? |     o          o          -          -          -
+                     lcm |     -          o          -          -          -
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+               magnitude |     o          o          o          o          o
+                  modulo |     o          o          o          -          -
+                    nan? |     -          -          o          -          -
+               negative? |     o          -          o          o          -
+                    next |     -          o          -          -          -
+              next_float |     -          -          o          -          -
+                nonzero? |     o          -          -          -          -
+               numerator |     o          o          o          o          o
+                    odd? |     -          o          -          -          -
+                     ord |     -          o          -          -          -
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+                   phase |     o          -          o          -          o
+                   polar |     o          -          -          -          o
+               positive? |     o          -          o          o          -
+                    pred |     -          o          -          -          -
+              prev_float |     -          -          o          -          -
+                     quo |     o          -          o          o          o
+             rationalize |     -          o          o          o          o
+                    real |     o          -          -          -          o
+                   real? |     o          -          -          -          o
+                    rect |     o          -          -          -          o
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+             rectangular |     o          -          -          -          o
+               remainder |     o          o          -          -          -
+                   round |     o          o          o          o          -
+  singleton_method_added |     o          -          -          -          -
+                    size |     -          o          -          -          -
+                    step |     o          -          -          -          -
+                    succ |     -          o          -          -          -
+                   times |     -          o          -          -          -
+                    to_c |     o          -          -          -          o
+                    to_f |     -          o          o          o          o
+                            Numeric    Integer     Float     Rational   Complex
+ --------------------------------------------------------------------------------
+                    to_i |     -          o          o          o          o
+                  to_int |     o          o          o          -          -
+                    to_r |     -          o          o          o          o
+                    to_s |     -          o          o          o          o
+                truncate |     o          o          o          o          -
+                    upto |     -          o          -          -          -
+                   zero? |     o          -          o          -          -
+                       | |     -          o          -          -          -
+                       ~ |     -          o          -          -          -
+````
+#@else
+````
+=> ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                     % |     o          -          o          o          o          -          -
+                     & |     -          -          o          o          -          -          -
+                     * |     -          -          o          o          o          o          o
+                    ** |     -          -          o          o          o          o          o
+                     + |     -          -          o          o          o          o          o
+                    +@ |     o          -          -          -          -          -          -
+                     - |     -          -          o          o          o          o          o
+                    -@ |     o          -          o          o          o          -          o
+                     / |     -          -          o          o          o          o          o
+                     < |     -          -          o          o          o          -          -
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                    << |     -          -          o          o          -          -          -
+                    <= |     -          -          o          o          o          -          -
+                   <=> |     o          -          o          o          o          o          -
+                    == |     -          -          o          o          o          o          o
+                   === |     -          -          o          o          o          -          -
+                     > |     -          -          o          o          o          -          -
+                    >= |     -          -          o          o          o          -          -
+                    >> |     -          -          o          o          -          -          -
+                    [] |     -          -          o          o          -          -          -
+                     ^ |     -          -          o          o          -          -          -
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                   abs |     o          -          o          o          o          -          o
+                  abs2 |     o          -          -          -          -          -          o
+                 angle |     o          -          -          -          o          -          o
+                   arg |     o          -          -          -          o          -          o
+            bit_length |     -          -          o          o          -          -          -
+                  ceil |     o          o          -          -          o          o          -
+                   chr |     -          o          -          -          -          -          -
+                coerce |     o          -          -          o          o          o          o
+                  conj |     o          -          -          -          -          -          o
+             conjugate |     o          -          -          -          -          -          o
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+           denominator |     o          o          -          -          o          o          o
+                   div |     o          -          o          o          -          -          -
+                divmod |     o          -          o          o          o          -          -
+                downto |     -          o          -          -          -          -          -
+                  eql? |     o          -          -          o          o          -          o
+                 even? |     -          o          o          o          -          -          -
+                  fdiv |     o          -          o          o          o          o          o
+               finite? |     -          -          -          -          o          -          -
+                 floor |     o          o          -          -          o          o          -
+                   gcd |     -          o          -          -          -          -          -
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                gcdlcm |     -          o          -          -          -          -          -
+                  hash |     -          -          -          o          o          o          o
+                     i |     o          -          -          -          -          -          -
+                  imag |     o          -          -          -          -          -          o
+             imaginary |     o          -          -          -          -          -          o
+             infinite? |     -          -          -          -          o          -          -
+               inspect |     -          -          o          o          o          o          o
+              integer? |     o          o          -          -          -          -          -
+                   lcm |     -          o          -          -          -          -          -
+             magnitude |     o          -          o          o          o          -          o
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                modulo |     o          -          o          o          o          -          -
+                  nan? |     -          -          -          -          o          -          -
+                  next |     -          o          -          -          -          -          -
+              nonzero? |     o          -          -          -          -          -          -
+             numerator |     o          o          -          -          o          o          o
+                  odd? |     -          o          o          o          -          -          -
+                   ord |     -          o          -          -          -          -          -
+                 phase |     o          -          -          -          o          -          o
+                 polar |     o          -          -          -          -          -          o
+                  pred |     -          o          -          -          -          -          -
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                   quo |     o          -          -          -          o          o          o
+           rationalize |     -          o          -          -          o          o          o
+                  real |     o          -          -          -          -          -          o
+                 real? |     o          -          -          -          -          -          o
+                  rect |     o          -          -          -          -          -          o
+           rectangular |     o          -          -          -          -          -          o
+             remainder |     o          -          -          o          -          -          -
+                 round |     o          o          -          -          o          o          -
+singleton_method_added |     o          -          -          -          -          -          -
+                  size |     -          -          o          o          -          -          -
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                  step |     o          -          -          -          -          -          -
+                  succ |     -          o          o          -          -          -          -
+                 times |     -          o          -          -          -          -          -
+                  to_c |     o          -          -          -          -          -          o
+                  to_f |     -          -          o          o          o          o          o
+                  to_i |     -          o          -          -          o          o          o
+                to_int |     o          o          -          -          o          -          -
+                  to_r |     -          o          -          -          o          o          o
+                  to_s |     -          -          o          o          o          o          o
+              truncate |     o          o          -          -          o          o          -
+                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
+          -------------------------------------------------------------------------------------------
+                  upto |     -          o          -          -          -          -          -
+                 zero? |     o          -          o          -          o          -          -
+                     | |     -          -          o          o          -          -          -
+                     ~ |     -          -          o          o          -          -          -
+````
+#@end
+
+### 丸めメソッドの動作一覧
+
+#@#         numbers=[1.9, 1.1, -1.1, -1.9]
+#@#         methods=%w(ceil floor round truncate)
+#@#
+#@#         fmt = "%5s |" + " %10s" * methods.size + "\n"
+#@#
+#@#         heading = sprintf(fmt, "", *methods)
+#@#         puts heading
+#@#         puts "-" * heading.size
+#@#
+#@#         numbers.each {|n|
+#@#           printf(fmt, n,
+#@#                  *methods.collect {|m| sprintf("%s", n.send(m))})
+#@#         }
+
+[m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#round], [m:Numeric#truncate]
+のふるまいの違いの表です。左の実数に対して各メソッドを呼ぶと表のような数を
+返します。
+
+```````````
+      |       ceil      floor      round   truncate
+----------------------------------------------------
+  1.9 |          2          1          2          1
+  1.1 |          2          1          1          1
+ -1.1 |         -1         -2         -1         -1
+ -1.9 |         -1         -2         -2         -1
+```````````
+
+### 丸めメソッドの拡張例
+
+切上げはceil, floor を使用して以下のように定義できます。
+
+```ruby title="例"
+if n > 0 then
+  n.ceil
+else
+  n.floor
+end
+```
+
+また、任意桁の切上げ、切捨て、四捨五入を行うメソッドは以下のように
+定義できます。
+
+```ruby
+class Numeric
+  def roundup(d=0)
+    x = 10**d
+    if self > 0
+      self.quo(x).ceil * x
+    else
+      self.quo(x).floor * x
+    end
+  end
+
+  def rounddown(d=0)
+    x = 10**d
+    if self < 0
+      self.quo(x).ceil * x
+    else
+      self.quo(x).floor * x
+    end
+  end
+
+  def roundoff(d=0)
+    x = 10**d
+    if self < 0
+      (self.quo(x) - 0.5).ceil * x
+    else
+      (self.quo(x) + 0.5).floor * x
+    end
+  end
+end
+```
+
+#@#        numbers=[0.19, 0.15, 0.11, -0.11, -0.15, -0.19]
+#@#        methods=%w(roundup rounddown roundoff)
+#@#        arg=1
+#@#
+#@#        fmt = "%5s |" + " %10s" * methods.size + "\n"
+#@#
+#@#        heading = sprintf(fmt, "", *methods)
+#@#        puts heading
+#@#        puts "-" * heading.size
+#@#
+#@#        numbers.each {|n|
+#@#          printf(fmt, n,
+#@#                 *methods.collect {|m| sprintf("%s", n.send(m, arg))})
+#@#        }
+#@#              |    roundup  rounddown   roundoff
+#@#        -----------------------------------------
+#@#         0.19 |        0.2        0.1        0.2
+#@#         0.15 |        0.2        0.1        0.2
+#@#         0.11 |        0.2        0.1        0.1
+#@#        -0.11 |       -0.2       -0.1       -0.1
+#@#        -0.15 |       -0.2       -0.1       -0.2
+#@#        -0.19 |       -0.2       -0.1       -0.2
+
+### 除法と商・剰余 {#division}
+
+Numeric には除法（除算；割り算；division）に関するメソッドがいくつもありますが、
+除法にはいくつか種類があるため、全貌が把握しづらくなっています。
+この節では除法の種類を説明し、各メソッドがどの除法に基づいているのかが分かるようにします。
+
+まず用語についてですが、割られる数を被除数（dividend）、割る数を除数（divisor）、
+割った結果を商（quotient）と言います。
+
+除法は大きく2つに分類できます。
+
+そのうちの一つを、ここでは「普通の除法」と呼ぶことにします。
+普通の除法は、被除数を x、除数を y、商を q としたとき、x == q⋅y となるよう定義された除法です。
+7 割る 2 を 3.5 とする除法は、普通の除法です。
+
+普通の除法における商をここでは「普通の商」と呼ぶことにしましょう。
+
+もう一つの除法は、商が必ず整数になるよう定義されるもので、これを「整除法」と言います。
+7 割る 2 を 3 余り 1 とする除法は、整除法です。
+
+整除法における商を特に「整商」と言います。
+
+整除法では、被除数を x、除数を y、商を q としたとき、x と q⋅y が一致する（つまり割り切れる）とは限りません。
+その差 x − q⋅y を剰余（余り；remainder）と言います。
+整除法は商と剰余がセットで決まる除法なので「剰余付き除法」とも呼ばれます。
+
+しばしば「整除法は整数の世界でしか成り立たない」と誤解されていますが、
+2.5 メートルの紐から 0.75 メートルの紐が何本取れて何メートルの半端が出るか、という問題を
+考えれば、被除数や除数が整数でなくてもよいことが分かります。
+
+```ruby title="例: Float の世界の整商と剰余"
+p 2.5.divmod(0.75) # => [3, 0.25]
+# 2.5 メートルの紐から 0.75 メートルの紐が 3 本取れて 0.25 メートル余る
+```
+
+ただし、複素数の世界では整商・剰余は考えないので、Complex に divmod など
+のメソッドは定義されていません。
+
+以下では、まず普通の除法に基づくメソッドについて述べます。
+
+普通の商を得るメソッドは [m:Numeric#quo] です。
+quo の返り値のクラスは、被除数・除数のクラスによって異なります。
+例えば、被除数・除数の一方が Integer、他方が Float なら返り値は Float です。
+
+普通の商を得るメソッドには、[m:Numeric#fdiv] もあります。
+これは商を Float で返します（被除数・除数の一方が Complex のときは
+Complex を返します）。
+
+整数同士の除法の場合、quo は厳密値を Rational で返しますが、
+fdiv では丸め誤差が生じうることに注意してください。
+
+次に整除法に基づくメソッドについて述べます。
+
+重要なことは、整除法の定義（言い換えれば整商・剰余の定義）がいくつもある、ということです。
+
+しかし、どの定義にも共通していることが二つあります。
+
+それは、被除数を x、除数を y としたときの整商を q、剰余を r とすると、第一に、
+
+x == y * q + r （ただし q は整数）
+
+が成り立つということです。
+第二に、剰余 r は「半端」ですから、r の絶対値は y の絶対値より小さくなくては
+ならないということです。
+
+この二つを満たす整商・剰余の定義は何通りもありますが、
+Ruby では、2通りの定義を採用し、剰余について
+[m:Numeric#modulo] メソッドと [m:Numeric#remainder] メソッドとして
+実装されています。
+
+modulo は、
+
+  - y > 0 のとき 0 <= r <  y
+  - y < 0 のとき y <  r <= 0
+
+となるように定められた剰余です。
+定義からすぐ分かるとおり、剰余 r の符号は除数 y の符号と一致します。
+
+modulo の別名は % で、普通はメソッド呼び出しの形ではなく二項演算子の
+形で用います。
+
+modulo に対応する整商は [m:Numeric#div] です。
+これは、普通の商を [m:Numeric#floor] で整数化したものと
+一致します。
+
+さきほどの例で出てきた [m:Numeric#divmod] は、
+div と modulo の値を一度に配列で返すメソッドです。
+
+一方、remainder は
+
+  - x > 0 のとき  0   <= r <  |y|
+  - x < 0 のとき -|y| <  r <= 0
+
+となるように定められた剰余です。
+定義からすぐ分かるとおり、剰余 r の符号は被除数 x の符号と一致します。
+
+remainder に対応する整商を得るメソッドはありませんが、
+x.quo(y).truncate で得ることができます。
+
+x と y の符号が同じとき、modulo と remainder は一致します。
+
+商を得るメソッドには [m:Numeric#/] もあります。
+普通はメソッド呼び出しの形ではなく、二項演算子として用います。
+これは被除数・除数のクラスによって挙動が異なります。例えば Integer 同士なら div と同じ、Integer や Rational と Float なら quo と同じ、といった具合です。
+被除数のクラスの / メソッドの説明をご覧ください。
+
+#@since 3.2
+Ruby 3.2 では整商を得るメソッドとして [m:Integer#ceildiv] が導入されました。
+
+ceildiv は普通の商を正の無限大に向かって丸めた整商を返します。
+
+n 個の物を m 個ずつまとめたとき，（半端をまとめたものも含めて）いくつのグループが
+できるかは以下のようにして得られます。
+
+```ruby title="例: n 個を m 個ずつまとめて出来るグループの数"
+p n.ceildiv(m)
+```
+
+ceildiv に対応した剰余を返すメソッドはありません。
+#@end
+
+## Instance Methods
+
+### def +@    -> self
+
+単項演算子の + です。
+self を返します。
+
+```ruby title="例"
++ 10            # => 10
++ (-10)           # => -10
++ 0.1           # => 0.1
++ (3r) # => (3/1)
++ (1+3i)        # => (1+3i)
+```
+
+### def -@    -> Numeric
+
+単項演算子の - です。
+self の符号を反転させたものを返します。
+
+このメソッドは、二項演算子 - で 0 - self によって定義されています。
+
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+- **SEE** [m:Integer#-@]、[m:Float#-@]、[m:Rational#-@]、[m:Complex#-@]
+
+### def /(other)    -> Numeric
+
+除算の演算子です。
+self を other で割った商を返します。
+
+Numeric では定義されておらず、サブクラスの実装によります。
+
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+- **SEE** [m:Integer#/], [m:Float#/], [m:Rational#/], [m:Complex#/]
+
+### def abs        -> Numeric
+### def magnitude  -> Numeric
+
+自身の絶対値を返します。
+
+```ruby title="例"
+12.abs         #=> 12
+(-34.56).abs   #=> 34.56
+-34.56.abs     #=> 34.56
+```
+
+### def ceil   -> Integer
+
+自身と等しいかより大きな整数のうち最小のものを返します。
+
+```ruby title="例"
+1.ceil        #=> 1
+1.2.ceil      #=> 2
+(-1.2).ceil   #=> -1
+(-1.5).ceil   #=> -1
+```
+
+- **SEE** [m:Numeric#floor], [m:Numeric#round], [m:Numeric#truncate]
+
+#@since 2.4.0
+#@since 2.5.0
+### def floor(ndigits = 0) -> Integer
+#@else
+### def floor(ndigits = 0) -> Integer | Float
+#@end
+#@else
+### def floor   -> Integer
+#@end
+
+自身と等しいかより小さな整数のうち最大のものを返します。
+
+#@since 2.4.0
+- **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
+#@since 2.5.0
+               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+#@else
+               正の整数を指定した場合、[c:Float] を返します。
+               小数点以下を、最大 n 桁にします。
+               負の整数を指定した場合、[c:Integer] を返します。
+               小数点位置から左に少なくとも n 個の 0 が並びます。
+#@end
+#@end
+
+```ruby title="例"
+1.floor        #=> 1
+1.2.floor      #=> 1
+(-1.2).floor   #=> -2
+(-1.5).floor   #=> -2
+```
+
+- **SEE** [m:Numeric#ceil], [m:Numeric#round], [m:Numeric#truncate]
+#@since 2.4.0
+- **SEE** [m:Integer#floor]
+#@end
+
+### def round   -> Integer
+
+自身ともっとも近い整数を返します。
+
+中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
+
+```ruby title="例"
+1.round        #=> 1
+1.2.round      #=> 1
+(-1.2).round   #=> -1
+(-1.5).round   #=> -2
+```
+
+- **SEE** [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#truncate]
+
+### def truncate   -> Integer
+
+0 から 自身までの整数で、自身にもっとも近い整数を返します。
+
+```ruby title="例"
+1.truncate        #=> 1
+1.2.truncate      #=> 1
+(-1.2).truncate   #=> -1
+(-1.5).truncate   #=> -1
+```
+
+- **SEE** [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#round]
+
+### def coerce(other)    -> [Numeric]
+
+自身と other が同じクラスになるよう、自身か other を変換し [other, self] という配列にして返します。
+
+デフォルトでは self と other を [c:Float] に変換して [other, self] という配列にして返します。
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+以下は [c:Rational] の coerce のソースです。other が自身の知らない数値クラスであった場合、
+super を呼んでいることに注意して下さい。
+
+
+```ruby title="例"
+# lib/rational.rb より
+
+def coerce(other)
+  if other.kind_of?(Float)
+    return other, self.to_f
+  elsif other.kind_of?(Integer)
+    return Rational.new!(other, 1), self
+  else
+    super
+  end
+end
+```
+
+数値クラスの算術演算子は通常自分と演算できないクラスをオペランドとして受け
+取ると coerce を使って自分とオペランドを変換した上で演算を行います。
+以下は [c:Rational] の + メソッドを一部省略したものです。
+引数が自身の知らない数値クラスである場合、引数の coerce により自身を変換してから
++ 演算子を呼んでいます。
+
+```ruby title="例"
+# lib/rational.rb より
+
+def + (a)
+  if a.kind_of?(Rational)
+    # 長いので省略
+  elsif a.kind_of?(Integer)
+    # 長いので省略
+  elsif a.kind_of?(Float)
+    Float(self) + a
+  else
+    x, y = a.coerce(self)
+    x + y
+  end
+end
+```
+
+- **param** `other` -- オペランドを数値で指定します。
+
+### def div(other)    -> Integer
+
+self を other で割った整数の商 q を返します。
+
+ここで、商 q と余り r は、それぞれ
+
+  - self == other * q + r  
+と
+  - other > 0 のとき:  0     <= r < other
+  - other < 0 のとき:  other <  r <= 0
+  - q は整数
+をみたす数です。
+商に対応する余りは [m:Numeric#modulo] で求められます。
+div はメソッド / を呼びだし、floorを取ることで計算されます。
+
+メソッド / の定義はサブクラスごとの定義を用います。
+
+- **param** `other` -- 自身を割る数を指定します。
+
+```ruby title="例"
+p 3.div(2) # => 1
+p (-3).div(2) # => -2
+p (-3.0).div(2) # => -2
+```
+
+### def divmod(other)    -> [Numeric]
+
+self を other で割った商 q と余り r を、
+[q, r] という 2 要素の配列にして返します。
+商 q は常に整数ですが、余り r は整数であるとは限りません。
+
+ここで、商 q と余り r は、
+
+  - self == other * q + r  
+と
+  - other > 0 のとき:  0     <= r < other
+  - other < 0 のとき:  other <  r <= 0
+  - q は整数
+をみたす数です。
+divmod が返す商は [m:Numeric#div] と同じです。
+また余りは、[m:Numeric#modulo] と同じです。
+このメソッドは、メソッド / と % によって定義されています。
+
+- **param** `other` -- 自身を割る数を指定します。
+
+```ruby title="例"
+11.divmod(3)         #=> [3, 2]
+(11.5).divmod(3.5)   #=> [3, 1.0]
+11.divmod(-3)        #=> [-4, -1]
+11.divmod(3.5)       #=> [3, 0.5]
+(-11).divmod(3.5)    #=> [-4, 3.0]
+```
+
+- **SEE** [m:Numeric#div], [m:Numeric#modulo]
+
+### def quo(other)    -> Rational | Float | Complex
+
+self を other で割った商を返します。
+整商を得たい場合は [m:Numeric#div] を使ってください。
+
+[m:Numeric#fdiv] が結果を [c:Float] で返すメソッドなのに対して quo はなるべく正確な数値を返すことを意図しています。
+具体的には有理数の範囲に収まる計算では [c:Rational] の値を返します。
+[c:Float] や [c:Complex] が関わるときはそれらのクラスになります。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+#@if("1.9.3" <= version and version <= "2.0.0")
+なお、割る数が 0 以外の整数の場合の挙動はバグのため Ruby2.1.0 以降では修正されています。詳しくは[url:https://bugs.ruby-lang.org/issues/5515]を参照して下さい。
+#@end
+
+- **param** `other` -- 自身を割る数を指定します。
+
+```ruby title="例"
+1.quo(3)      #=> (1/3)
+1.0.quo(3)    #=> 0.3333333333333333
+#@if("1.9.3" <= version and version <= "2.0.0")
+1.quo(3.0)    #=> (1/3)
+              # 割る数が 0 以外の整数なら Float でも結果は Rational になる。
+#@else
+1.quo(3.0)    #=> 0.3333333333333333
+#@end
+1.quo(0.5)    #=> 2.0
+
+Complex(1, 1).quo(1)  #=> ((1/1)+(1/1)*i)
+1.quo(Complex(1, 1))  #=> ((1/2)-(1/2)*i)
+```
+
+- **SEE** [m:Numeric#fdiv]
+
+### def fdiv(other)   -> Float | Complex
+
+self を other で割った商を [c:Float] で返します。
+ただし [c:Complex] が関わる場合は例外です。
+その場合も成分は Float になります。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+- **param** `other` -- 自身を割る数を指定します。
+
+```ruby title="例"
+1.fdiv(3)            #=> 0.3333333333333333
+Complex(1, 1).fdiv 1 #=> (1.0+1.0i)
+1.fdiv Complex(1, 1) #=> (0.5-0.5i)
+```
+
+- **SEE** [m:Numeric#quo]
+
+### def integer?    -> bool
+
+自身が [c:Integer] かそのサブクラスのインスタンスの場合にtrue を返し
+ます。そうでない場合に false を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+```ruby title="例"
+(1.0).integer? #=> false
+(1).integer?   #=> true
+```
+
+- **SEE** [m:Numeric#real?]
+
+### def modulo(other)    -> Numeric
+### def %(other)         -> Numeric
+
+self を other で割った余り r を返します。
+
+ここで、商 q と余り r は、
+
+  - self == other * q + r  
+と
+  - other > 0 のとき  0 <= r < other
+  - other < 0 のとき other < r <= 0
+  - q は整数
+
+をみたす数です。
+余り r は、other と同じ符号になります。
+商  q は、[m:Numeric#div] (あるいは 「/」)で求められます。
+modulo はメソッド % の呼び出しとして定義されています。
+
+- **param** `other` -- 自身を割る数を指定します。
+
+```ruby title="例"
+p 13.modulo(4)       #=>  1
+p (11.5).modulo(3.5) #=> 1.0
+p 13.modulo(-4)      #=> -3
+p (-13).modulo(4)    #=>  3
+p (-13).modulo(-4)   #=> -1
+p (-11).modulo(3.5)  #=> 3.0
+```
+
+- **SEE** [m:Numeric#divmod], [m:Numeric#remainder]
+
+#@since 2.3.0
+### def positive? -> bool
+
+self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
+
+```ruby title="例"
+1.positive?    # => true
+0.positive?    # => false
+-1.positive?   # => false
+```
+
+- **SEE** [m:Numeric#negative?]
+
+### def negative? -> bool
+
+self が 0 未満の場合に true を返します。そうでない場合に false を返します。
+
+```ruby title="例"
+-1.negative?   # => true
+0.negative?    # => false
+1.negative?    # => false
+```
+
+- **SEE** [m:Numeric#positive?]
+#@end
+
+### def remainder(other)    -> Numeric
+
+self を other で割った余り r を返します。
+
+ここで、商 q と余り r は、
+
+  - self == other * q + r  
+と
+
+  - self > 0 のとき  0 <= r < |other|
+  - self < 0 のとき -|other| < r <= 0
+  - q は整数
+
+をみたす数です。r の符号は self と同じになります。
+商 q を直接返すメソッドはありません。self.quo(other).truncate がそれに相当します。
+
+- **param** `other` -- 自身を割る数を指定します。
+
+```ruby title="例"
+p 13.remainder(4)       #=>  1
+p (11.5).remainder(3.5) #=> 1.0
+p 13.remainder(-4)      #=>  1
+p (-13).remainder(4)    #=> -1
+p (-13).remainder(-4)   #=> -1
+p (-11).remainder(3.5)  #=> -0.5
+```
+
+- **SEE** [m:Numeric#divmod], [m:Numeric#modulo]
+
+### def nonzero?    -> self | nil
+
+自身がゼロの時 nil を返し、非ゼロの時 self を返します。
+
+```ruby title="例"
+p 10.nonzero?              #=> 10
+p 0.nonzero?               #=> nil
+p 0.0.nonzero?             #=> nil
+p Rational(0, 2).nonzero?  #=> nil
+```
+
+非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以
+下のように記述する事もできます。
+
+```ruby title="例"
+a = %w( z Bb bB bb BB a aA Aa AA A )
+b = a.sort {|a,b| (a.downcase <=> b.downcase).nonzero? || a <=> b }
+b   #=> ["A", "a", "AA", "Aa", "aA", "BB", "Bb", "bB", "bb", "z"]
+```
+
+- **SEE** [m:Numeric#zero?]
+
+#@since 2.4.0
+### def finite? -> bool
+
+self の絶対値が有限値の場合に true を、そうでない場合に false を返します。
+
+```ruby title="例"
+10.finite?                      # => true
+Rational(3).finite?             # => true
+
+Float::INFINITY.finite?         # => false
+Float::INFINITY.is_a?(Numeric)  # => true
+```
+
+- **SEE** [m:Numeric#infinite?]
+
+### def infinite? -> nil
+
+常に nil を返します。
+自身が [c:Float] か[c:Complex]、もしくはそのサブクラスのインスタンスの場合は、self の絶対値が負の無限大の場合に-1を、正の無限大の場合に1を、有限値の場合に nil を返します。
+
+```ruby title="例"
+10.infinite?     # => nil
+(3r).infinite?   # => nil
+```
+
+- **SEE** [m:Numeric#finite?]、[m:Float#infinite?]、[m:Complex#infinite?]
+#@end
+
+### def to_int    -> Integer
+
+self.to_i と同じです。
+
+```ruby title="例"
+(2+0i).to_int        # => 2
+Rational(3).to_int   # => 3
+```
+
+### def zero?    -> bool
+
+自身がゼロの時、trueを返します。そうでない場合は false を返します。
+
+```ruby title="例"
+p 10.zero?              #=> false
+p 0.zero?               #=> true
+p 0.0.zero?             #=> true
+```
+
+- **SEE** [m:Numeric#nonzero?]
+
+### def step(limit, step = 1) {|n| ... }    -> self
+### def step(limit, step = 1) -> Enumerator
+#@since 2.6.0
+### def step(limit, step = 1) -> Enumerator::ArithmeticSequence
+#@end
+### def step(by: 1, to: Float::INFINITY) {|n| ... } -> self
+### def step(by: 1, to: Float::INFINITY) -> Enumerator
+#@since 2.6.0
+### def step(by: 1, to: Float::INFINITY) -> Enumerator::ArithmeticSequence
+#@end
+### def step(by:, to: -Float::INFINITY) {|n| ... } -> self
+### def step(by:, to: -Float::INFINITY) -> Enumerator
+#@since 2.6.0
+### def step(by:, to: -Float::INFINITY) -> Enumerator::ArithmeticSequence
+#@end
+
+self からはじめ step を足しながら limit を越える
+前までブロックを繰り返します。step は負の数も指定できます。また、limit や step には [c:Float] なども
+指定できます。
+
+- **param** `limit` -- ループの上限あるいは下限を数値で指定します。step に負の数が指定された場合は、
+       下限として解釈されます。
+
+- **param** `step` -- 各ステップの大きさを数値で指定します。負の数を指定することもできます。
+
+- **param** `to` -- 引数limitと同じですが、省略した場合はキーワード引数byが正の
+          数であれば [m:Float::INFINITY]、負の数であれば
+          -[m:Float::INFINITY]を指定したとみなされます。
+
+- **param** `by` -- 引数 step と同じです。
+
+- **return** -- ブロックが指定された時は self を返します。
+- **return** -- ブロックが指定されなかった時は [c:Enumerator] を返します。
+#@since 2.6.0
+- **return** -- 特に limit (または to) と step の両方が Numeric または nil の時は
+        [c:Enumerator::ArithmeticSequence] を返します。
+#@end
+
+- **raise** `ArgumentError` -- step に 0 を指定した場合に発生します。
+
+#@#このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
+#@#た。これにより [[c:Float]] も step できるようになりました。
+
+```ruby title="例"
+2.step(5){|n| p n}
+2
+3
+4
+5
+
+1.1.step(1.5, 0.1) {|n| p n}
+1.1
+1.2
+1.3
+1.4
+1.5
+
+10.step(6, -1){|n| p n}
+10
+9
+8
+7
+6
+
+3.step(by:2, to:10){|n| p n}
+3
+5
+7
+9
+```
+
+注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
+0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
+生じて意図した回数ループしないことがある。step はこの誤差を考慮し
+て実装されている。
+
+```ruby title="例"
+i = 1.1
+while i <= 1.5
+  p i
+  i += 0.1
+end
+# => 1.1
+#    1.2
+#    1.3
+#    1.4   <- 1.5 が表示されない
+```
+
+- **SEE** [m:Integer#downto]
+
+### def <=>(other) -> -1 | 0 | 1 | nil
+
+自身が other より大きい場合に 1 を、等しい場合に 0 を、小さい場合には -1 をそれぞれ返します。
+自身と other が比較できない場合には nil を返します。
+
+Numeric のサブクラスは、上の動作を満たすよう このメソッドを適切に再定義しなければなりません。
+
+- **param** `other` -- 自身と比較したい数値を指定します。
+
+```ruby title="例"
+1 <=> 0   #=> 1
+1 <=> 1   #=> 0
+1 <=> 2   #=> -1
+1 <=> "0" #=> nil
+```
+
+### def eql?(other) -> bool
+
+自身と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。
+そうでない場合に false を返します。
+
+Numeric のサブクラスは、eql? で比較して等しい数値同士が同じハッシュ値を返すように
+hash メソッドを適切に定義する必要があります。
+
+- **param** `other` -- 自身と比較したい数値を指定します。
+
+```ruby title="例"
+p 1.eql?(1)    #=> true
+p 1.eql?(1.0)  #=> false
+p 1 == 1.0     #=> true
+```
+
+- **SEE** [m:Object#equal?], [m:Object#eql?], [m:Object#==], [m:Object#===]
+
+### def abs2 -> Numeric
+
+自身の絶対値の 2 乗を返します。
+
+
+```ruby title="例"
+2.abs2    # => 4
+-2.abs2   # => 4
+2.0.abs2  # => 4
+-2.0.abs2 # => 4
+```
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+### def arg   -> 0 | Math::PI
+### def angle -> 0 | Math::PI
+### def phase -> 0 | Math::PI
+
+自身の偏角(正の数なら 0、負の数なら [m:Math::PI])を返します。
+
+```ruby title="例"
+1.arg  # => 0
+-1.arg # => 3.141592653589793
+```
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+- **SEE** [m:Complex#arg]
+
+### def conj      -> Numeric
+### def conjugate -> Numeric
+
+常に self を返します。
+
+自身が [c:Complex] かそのサブクラスのインスタンスの場合は、自身の共役複素数(実数の場合は常に自身)を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+
+```ruby title="例"
+10.conj       # => 10
+0.1.conj      # => 0.1
+(2/3r).conj   # => (2/3)
+```
+
+- **SEE** [m:Complex#conj]
+
+### def denominator -> Integer
+
+自身を [c:Rational] に変換した時の分母を返します。
+
+- **return** -- 分母を返します。
+
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+- **SEE** [m:Numeric#numerator]、[m:Integer#denominator]、[m:Float#denominator]、[m:Rational#denominator]、[m:Complex#denominator]
+
+### def imag      -> 0
+### def imaginary -> 0
+
+常に 0 を返します。
+
+```ruby title="例"
+12.imag     # => 0
+-12.imag    # => 0
+1.2.imag    # => 0
+-1.2.imag   # => 0
+```
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+- **SEE** [m:Numeric#real]、[m:Complex#imag]
+
+### def numerator -> Integer
+
+自身を [c:Rational] に変換した時の分子を返します。
+
+- **return** -- 分子を返します。
+
+#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+
+- **SEE** [m:Numeric#denominator]、[m:Integer#numerator]、[m:Float#numerator]、[m:Rational#numerator]、[m:Complex#numerator]
+
+### def polar -> [Numeric, Numeric]
+
+自身の絶対値と偏角を配列にして返します。正の数なら [self, 0]、負の数な
+ら [-self, [m:Math::PI]] を返します。
+
+```ruby title="例"
+1.0.polar  # => [1.0, 0]
+2.0.polar  # => [2.0, 0]
+-1.0.polar # => [1.0, 3.141592653589793]
+-2.0.polar # => [2.0, 3.141592653589793]
+```
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+- **SEE** [m:Complex#polar]
+
+### def real     -> Numeric
+
+自身を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+```ruby title="例"
+10.real               # => 10
+-10.real              # => -10
+0.1.real              # => 0.1
+Rational(2, 3).real   # => (2/3)
+```
+
+- **SEE** [m:Numeric#imag]、[m:Complex#real]
+
+### def real?    -> bool
+
+常に true を返します。([c:Complex] またはそのサブクラスではないことを意味します。)
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+```ruby title="例"
+10.real?               # => true
+-10.real?              # => true
+0.1.real?              # => true
+Rational(2, 3).real?   # => true
+```
+
+- **SEE** [m:Numeric#integer?]、[m:Complex#real?]
+
+### def rect        -> [Numeric, Numeric]
+### def rectangular -> [Numeric, Numeric]
+
+[self, 0] を返します。
+
+```ruby title="例"
+1.rect    # => [1, 0]
+-1.rect   # => [-1, 0]
+1.0.rect  # => [1.0, 0]
+-1.0.rect # => [-1.0, 0]
+```
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+- **SEE** [m:Complex#rect]
+
+### def to_c -> Complex
+
+自身を複素数 ([c:Complex]) に変換します。Complex(self, 0) を返します。
+
+```ruby title="例"
+1.to_c              # => (1+0i)
+-1.to_c             # => (-1+0i)
+1.0.to_c            # => (1.0+0i)
+Rational(1, 2).to_c # => ((1/2)+0i)
+```
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+### def i    -> Complex
+
+Complex(0, self) を返します。
+
+ただし、[c:Complex] オブジェクトでは利用できません。
+
+```ruby title="例"
+10.i             # => (0+10i)
+-10.i            # => (0-10i)
+(0.1).i          # => (0+0.1i)
+Rational(1, 2).i # => (0+(1/2)*i)
+```

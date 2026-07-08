@@ -1,0 +1,191 @@
+---
+library: _builtin
+---
+# module Comparable
+
+比較演算を許すクラスのための Mix-in です。このモジュールをインクルー
+ドするクラスは、基本的な比較演算子である <=> 演算子を定義してい
+る必要があります。
+
+self <=> other は
+ - self が other より大きいなら正の整数
+ - self と other が等しいなら 0
+ - self が other より小さいなら負の整数
+ - self と other が比較できない場合は nil
+をそれぞれ返すことが期待されています。
+
+他の比較演算子は、 <=> 演算子を利用して定義されます。
+
+## Instance Methods
+
+### def ==(other)    -> bool
+
+比較演算子 <=> をもとにオブジェクト同士を比較します。
+<=> が 0 を返した時に、true を返します。
+それ以外を返した場合は、false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+
+```ruby title="例"
+1 == 1   # => true
+1 == 2   # => false
+```
+
+### def >(other)    -> bool
+
+比較演算子 <=> をもとにオブジェクト同士を比較します。
+<=> が正の整数を返した場合に、true を返します。
+それ以外の整数を返した場合に、false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+- **raise** `ArgumentError` -- <=> が nil を返したときに発生します。
+
+```ruby title="例"
+1 > 0   # => true
+1 > 1   # => false
+```
+
+### def >=(other)    -> bool
+
+比較演算子 <=> をもとにオブジェクト同士を比較します。
+<=> が正の整数か 0 を返した場合に、true を返します。
+それ以外の整数を返した場合に、false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+- **raise** `ArgumentError` -- <=> が nil を返したときに発生します。
+
+```ruby title="例"
+1 >= 0   # => true
+1 >= 1   # => true
+1 >= 2   # => false
+```
+
+### def <(other)    -> bool
+
+比較演算子 <=> をもとにオブジェクト同士を比較します。
+<=> が負の整数を返した場合に、true を返します。
+それ以外の整数を返した場合に、false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+- **raise** `ArgumentError` -- <=> が nil を返したときに発生します。
+
+```ruby title="例"
+1 < 1   # => false
+1 < 2   # => true
+```
+
+### def <=(other)    -> bool
+
+比較演算子 <=> をもとにオブジェクト同士を比較します。
+<=> が負の整数か 0 を返した場合に、true を返します。
+それ以外の整数を返した場合に、false を返します。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+- **raise** `ArgumentError` -- <=> が nil を返したときに発生します。
+
+```ruby title="例"
+1 <= 0   # => false
+1 <= 1   # => true
+1 <= 2   # => true
+```
+
+### def between?(min, max)    -> bool
+
+比較演算子 <=> をもとに self が min と max の範囲内(min, max
+を含みます)にあるかを判断します。
+
+以下のコードと同じです。
+```ruby
+self >= min and self <= max
+```
+
+- **param** `min` -- 範囲の下端を表すオブジェクトを指定します。
+
+- **param** `max` -- 範囲の上端を表すオブジェクトを指定します。
+
+- **raise** `ArgumentError` -- self <=> min か、self <=> max が nil を返
+                     したときに発生します。
+
+```ruby title="例"
+3.between?(1, 5)               # => true
+6.between?(1, 5)               # => false
+'cat'.between?('ant', 'dog')   # => true
+'gnu'.between?('ant', 'dog')   # => false
+```
+
+#@since 2.4.0
+### def clamp(min, max)  -> object
+#@since 2.7.0
+### def clamp(range)     -> object
+#@end
+
+self を範囲内に収めます。
+
+#@since 2.7.0
+min と max の2つの引数が渡された場合は次のようになります。
+#@end
+self <=> min が負数を返したときは min を、
+self <=> max が正数を返したときは max を、
+それ以外の場合は self を返します。
+
+#@since 3.0
+min が nil の場合、min は self よりも小さい値として扱われます。
+max が nil の場合、max は self よりも大きい値として扱われます。
+#@end
+
+#@since 2.7.0
+range が1つ渡された場合は次のようになります。
+self <=> range.begin が負数を返したときは range.begin を、
+self <=> range.end が正数を返したときは range.end を、
+それ以外の場合は self を返します。
+
+range.begin が nil の場合、range.begin は self よりも小さい値として扱われます。
+range.end が nil の場合、range.end は self よりも大きい値として扱われます。
+#@end
+
+- **param** `min` -- 範囲の下端を表すオブジェクトを指定します。
+
+- **param** `max` -- 範囲の上端を表すオブジェクトを指定します。
+
+#@since 2.7.0
+- **param** `range` -- 範囲を表す Range オブジェクトを指定します。
+
+- **raise** `ArgumentError` -- rangeが終端を含まない範囲オブジェクトであり、
+                     終端が nil でないときに発生します。
+#@end
+
+```ruby title="例"
+12.clamp(0, 100)         #=> 12
+523.clamp(0, 100)        #=> 100
+-3.123.clamp(0, 100)     #=> 0
+
+'d'.clamp('a', 'f')      #=> 'd'
+'z'.clamp('a', 'f')      #=> 'f'
+```
+
+#@since 3.0
+```ruby title="nil を渡す例"
+5.clamp(0, nil)          #=> 5
+5.clamp(nil, 0)          #=> 0
+5.clamp(nil, nil)        #=> 5
+```
+#@end
+
+#@since 2.7.0
+```ruby title="range を渡す例"
+12.clamp(0..100)     #=> 12
+523.clamp(0..100)    #=> 100
+-3.123.clamp(0..100) #=> 0
+
+'d'.clamp('a'..'f')  #=> 'd'
+'z'.clamp('a'..'f')  #=> 'f'
+
+100.clamp(0...100)   # ArgumentError
+```
+
+```ruby title="range の始端か終端が nil の場合"
+-20.clamp(0..)   #=> 0
+523.clamp(..100) #=> 100
+```
+#@end
+#@end

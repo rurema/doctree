@@ -1,0 +1,274 @@
+---
+library: _builtin
+alias:
+  - ConditionVariable
+---
+# class Thread::ConditionVariable < Object
+
+スレッドの同期機構の一つである状態変数を実現するクラスです。
+
+以下も ConditionVariable を理解するのに参考になります。
+
+[url:https://ruby-doc.com/docs/ProgrammingRuby/html/tut_threads.html#UF]
+
+### Condition Variable とは
+
+あるスレッド A が排他領域で動いていたとします。スレッド A は現在空いていない
+リソースが必要になったので空くまで待つことにしたとします。これはうまくいきません。
+なぜなら、スレッド A は排他領域で動いているわけですから、他のスレッドは動くことが
+できません。リソースを空けることもできません。スレッド A がリソースの空きを
+待っていても、いつまでも空くことはありません。
+
+以上のような状況を解決するのが Condition Variable です。
+
+スレッド a で条件(リソースが空いているかなど)が満たされるまで wait メソッドで
+スレッドを止めます。他のスレッド b において条件が満たされたなら signal
+メソッドでスレッド a に対して条件が成立したことを通知します。これが典型的な
+使用例です。
+
+```````
+mutex = Mutex.new
+cv = ConditionVariable.new
+
+a = Thread.start {
+    mutex.synchronize {
+      ...
+      while (条件が満たされない)
+        cv.wait(mutex)
+      end
+      ...
+    }
+}
+
+b = Thread.start {
+    mutex.synchronize {
+      # 上の条件を満たすための操作
+      cv.signal
+    }
+}
+```````
+
+以下は [ruby-list:14445] で紹介されている例です。@q が空になった場合、
+あるいは満タンになった場合に Condition Variable を使って wait しています。
+
+`````
+require 'thread'
+
+class TinyQueue
+  def initialize(max=2)
+    @max = max
+    @full = ConditionVariable.new
+    @empty = ConditionVariable.new
+    @mutex = Mutex.new
+    @q = []
+  end
+
+  def count
+    @q.size
+  end
+
+  def enq(v)
+    @mutex.synchronize{
+      @full.wait(@mutex) if count == @max
+      @q.push v
+      @empty.signal if count == 1
+    }
+  end
+
+  def deq
+    @mutex.synchronize{
+      @empty.wait(@mutex) if count == 0
+      v = @q.shift
+      @full.signal if count == (@max - 1)
+      v
+    }
+  end
+
+  alias send enq
+  alias recv deq
+end
+
+if __FILE__ == $0
+  q = TinyQueue.new(1)
+  foods = 'Apple Banana Strawberry Udon Rice Milk'.split
+  l = []
+
+  th = Thread.new {
+    for obj in foods
+      q.send(obj)
+      print "sent ", obj, "\n"
+    end
+    q.send nil
+  }
+
+  l.push th
+
+  th = Thread.new {
+    while obj = q.recv
+      print "recv ", obj, "\n"
+    end
+  }
+  l.push th
+
+  l.each do |t|
+    t.join
+  end
+end
+`````
+
+実行すると以下のように出力します。
+
+`````
+$ ruby condvar.rb
+sent Apple
+recv Apple
+sent Banana
+recv Banana
+sent Strawberry
+recv Strawberry
+sent Udon
+recv Udon
+sent Rice
+recv Rice
+sent Milk
+recv Milk
+`````
+
+## Class Methods
+
+#@since 2.1.0
+### def new -> Thread::ConditionVariable
+#@else
+### def new -> ConditionVariable
+#@end
+状態変数を生成して返します。
+
+#@#noexample Thread::ConditionVariable#signal 等を参照
+
+## Instance Methods
+
+### def broadcast -> self
+
+状態変数を待っているスレッドをすべて再開します。再開された
+#@since 2.1.0
+スレッドは [m:Thread::ConditionVariable#wait]
+#@else
+スレッドは [m:ConditionVariable#wait]
+#@end
+で指定した mutex のロックを試みます。
+
+- **return** -- 常に self を返します。
+
+```ruby title="例"
+mutex = Mutex.new
+cv = ConditionVariable.new
+flg = true
+
+3.times {
+  Thread.start {
+    mutex.synchronize {
+      puts "a1"
+      while (flg)
+        cv.wait(mutex)
+      end
+      puts "a2"
+    }
+  }
+}
+
+Thread.start {
+  mutex.synchronize {
+    flg = false
+    cv.broadcast
+  }
+}
+
+sleep 1
+
+# => a1
+# => a1
+# => a1
+# => a2
+# => a2
+# => a2
+```
+
+### def signal -> self
+
+状態変数を待っているスレッドを1つ再開します。再開された
+#@since 2.1.0
+スレッドは [m:Thread::ConditionVariable#wait]
+#@else
+スレッドは [m:ConditionVariable#wait]
+#@end
+で指定した mutex のロックを試みます。
+
+- **return** -- 常に self を返します。
+
+```ruby title="例"
+mutex = Mutex.new
+cv = ConditionVariable.new
+flg = true
+
+3.times {
+  Thread.start {
+    mutex.synchronize {
+      puts "a1"
+      while (flg)
+        cv.wait(mutex)
+      end
+      puts "a2"
+    }
+  }
+}
+
+Thread.start {
+  mutex.synchronize {
+    flg = false
+    cv.signal
+  }
+}
+
+sleep 1
+
+# => a1
+# => a1
+# => a1
+# => a2
+```
+
+#@since 1.9.2
+### def wait(mutex, timeout = nil) -> self
+#@else
+### def wait(mutex) -> self
+#@end
+
+mutex のロックを解放し、カレントスレッドを停止します。
+#@since 2.1.0
+[m:Thread::ConditionVariable#signal]または、
+[m:Thread::ConditionVariable#broadcast]で送られたシグナルを
+#@else
+[m:ConditionVariable#signal]または、
+[m:ConditionVariable#broadcast]で送られたシグナルを
+#@end
+受け取ると、mutexのロックを取得し、実行状態となります。
+
+#@since 2.3.0
+- **param** `mutex` -- [c:Mutex] オブジェクトを指定します。
+#@else
+- **param** `mutex` -- [c:Thread::Mutex] オブジェクトを指定します。
+#@end
+
+#@since 1.9.2
+- **param** `timeout` -- スリープする秒数を指定します。この場合はシグナルを受け取
+               らなかった場合でも指定した秒数が経過するとスリープを終了
+               します。省略するとスリープし続けます。
+#@end
+
+#@since 2.1.0
+#@#noexample Thread::ConditionVariable#signal, Thread::ConditionVariable#broadcast を参照
+- **SEE** [m:Thread::ConditionVariable#signal], [m:Thread::ConditionVariable#broadcast]
+#@else
+#@#noexample ConditionVariable#signal, ConditionVariable#broadcast を参照
+- **SEE** [m:ConditionVariable#signal], [m:ConditionVariable#broadcast]
+#@end

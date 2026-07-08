@@ -1,0 +1,14 @@
+---
+library: webrick/server
+---
+# class WEBrick::Daemon < Object
+
+サーバのタイプを表すクラスです。
+[m:WEBrick::GenericServer.new] の設定の :ServerType の値として指定した場合
+サーバはデーモンとして動作します。
+
+#@#== Singleton Methods
+
+#@#--- start
+#@#--- start { ... }
+#@#todo

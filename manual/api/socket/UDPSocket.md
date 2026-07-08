@@ -1,0 +1,131 @@
+---
+library: socket
+---
+# class UDPSocket < IPSocket
+
+UDP/IPデータグラム型ソケットのクラス。
+
+## Class Methods
+
+### def open(address_family=Socket::AF_INET) -> UDPSocket
+### def new(address_family=Socket::AF_INET) -> UDPSocket
+新しい UDP ソケットを返します。
+
+address_family には Socket::AF_INET のような整数、:INET のような
+シンボル、"INET" のような文字列を指定できます。
+
+`````
+require 'socket'
+
+UDPSocket.new                   # => #<UDPSocket:fd 3>
+UDPSocket.new(Socket::AF_INET6) # => #<UDPSocket:fd 4>
+`````
+
+- **param** `address_family` -- ソケットのアドレスファミリー
+## Instance Methods
+
+### def bind(host, port) -> 0
+ソケットを host の port に [man:bind(2)] します。
+
+bind したポートから [m:BasicSocket#recv] でデータを受け取ることができます。
+
+- **param** `host` -- bind するホスト名文字列
+- **param** `port` -- bind するポート番号
+
+### def connect(host, port) -> 0
+
+ソケットを host の port に [man:connect(2)] します。
+
+これによって [m:UDPSocket#send] で送り先のアドレスを指定せずに
+データを送ることができます(connect しなくとも送り先のアドレスを明示すれば
+データを送ることができます)。
+
+`````
+require 'socket'
+
+u1 = UDPSocket.new
+u1.bind("127.0.0.1", 4913)
+u2 = UDPSocket.new
+u2.connect("127.0.0.1", 4913)
+u2.send "uuuu", 0
+p u1.recvfrom(10) #=> ["uuuu", ["AF_INET", 33230, "localhost", "127.0.0.1"]]
+`````
+
+- **param** `host` -- 接続するホスト名文字列
+- **param** `port` -- 接続するポート番号
+
+### def send(mesg, flags, host, port) -> Integer
+### def send(mesg, flags, sockaddr_to) -> Integer
+### def send(mesg, flags) -> Integer
+
+UDP ソケットを介してデータを送ります。
+
+flags には Socket::MSG_* という定数の bitwise OR を渡します。
+詳しい意味は [man:send(2)] を参照してください。
+
+host, port の対、もしくは sockaddr_to で送り先を指定します。
+送り先を省略した場合は [m:UDPSocket#connect] で接続した
+先にデータを送ります。
+
+実際に送ったデータの長さを返します。
+
+sockaddr_to には[ref:lib:socket#pack_string] もしくは
+[c:Addrinfo] オブジェクトを指定します。
+
+host, port に関しては [ref:lib:socket#host_format]、
+[ref:lib:socket#service_format]を参照してください。
+
+2 引数、3 引数の形式の場合の動作は、
+[m:BasicSocket#send] と同じです。
+
+4 引数の形式で、指定したホストが複数のアドレスを持つ場合、いずれか
+のアドレスへの送信が成功するまで(あるいはすべての送信が失敗するま
+で)、各アドレスへの送信を順に試みます。
+
+データの送信に失敗した場合は例外 [c:Errno::EXXX] が発生します。
+
+- **param** `mesg` -- 送るデータ文字列
+- **param** `flags` -- フラグ
+- **param** `host` -- 送り先のホスト名
+- **param** `port` -- 送り先のポート番号
+- **param** `sockaddr_to` -- 送り先のアドレス情報
+
+### def recvfrom_nonblock(maxlen, flags=0) -> [String, Array]
+ソケットをノンブロッキングモードに設定した後、
+[man:recvfrom(2)] でソケットからデータを受け取ります。
+
+maxlen で受け取るデータの最大バイト数を指定します。
+
+flags はフラグで、Socket::MSG_* の bitwise OR を渡します。
+詳しくは [man:recvfrom(2)] を参照してください。
+
+返り値はデータの文字列と送り元のアドレス情報の
+2要素の配列となります。
+
+[man:recvfrom(2)] がエラーになった場合、
+Errno::EAGAIN, Errno::EINTR を含め例外 [c:Errno::EXXX] が発生します。
+Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
+可能であることを意味する例外には、[c:IO::WaitReadable] が extend
+されています。
+
+`````
+require 'socket'
+s1 = UDPSocket.new
+s1.bind("127.0.0.1", 0)
+s2 = UDPSocket.new
+s2.bind("127.0.0.1", 0)
+s2.connect(*s1.addr.values_at(3,1))
+s1.connect(*s2.addr.values_at(3,1))
+s1.send "aaa", 0
+begin # emulate blocking recvfrom
+  p s2.recvfrom_nonblock(10)  
+  #=> ["aaa", ["AF_INET", 33302, "localhost.localdomain", "127.0.0.1"]]
+rescue IO::WaitReadable
+  IO.select([s2])
+  retry
+end
+`````
+
+- **param** `maxlen` -- 受け取るデータの最大バイト数
+- **param** `flags` -- フラグ
+- **SEE** [m:IPSocket#recvfrom]

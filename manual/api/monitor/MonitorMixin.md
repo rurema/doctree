@@ -1,0 +1,155 @@
+---
+library: monitor
+---
+# module MonitorMixin
+
+スレッドの同期機構としてのモニター機能を提供するモジュールです。
+
+クラスに [m:Module#include] したり、オブジェクトに
+[m:Object#extend] したりすることでそのクラス/オブジェクトに
+モニタ機能を追加します。
+
+### 例
+
+```ruby title="消費者、生産者問題の例"
+require 'monitor'
+
+buf = []
+buf.extend(MonitorMixin) # 配列にモニタ機能を追加
+empty_cond = buf.new_cond # 配列が空であるかないかを通知する条件変数
+
+# consumer
+Thread.start do
+  loop do
+    buf.synchronize do # ロックする
+      empty_cond.wait_while { buf.empty? } # 配列が空である間はロックを開放して待つ
+      print buf.shift # 配列が空でなくなった後ロックを取得してこの行を実行
+    end # ロックを開放
+  end
+end
+
+# producer
+while line = ARGF.gets
+  buf.synchronize do # ロックする
+    buf.push(line) # 配列を変更(追加)
+    empty_cond.signal # 配列に要素が追加されたことを条件変数を通して通知
+  end # ここでロックを開放
+end
+```
+
+### 初期化
+
+MonitorMixin は初期化される必要があります。
+上の例のように [m:Object#extend] を使って利用する場合は
+自動的に初期化されます。
+
+```ruby title="extend する例"
+require 'monitor'
+buf = []
+buf.extend(MonitorMixin)
+```
+
+しかし、MonitorMixin をクラス定義の際に [m:Module#include] を使って
+利用する場合は、initialize メソッドで super() か super を呼んで、初期化する必要があります。
+スーパークラスの initialize に引数を渡したい場合は super を、そうでない場合は super() を呼んで下さい。
+詳しくは、[ref:d:spec/call#super] を参照して下さい。
+例えば、以下の MyObject のスーパークラスは Object であり、その initialize は引数を受け付けないので
+super ではなく super() を呼ぶ必要があります。
+
+```ruby title="include する例"
+require 'monitor'
+
+class MyObject
+  include MonitorMixin
+
+  def initialize(val)
+    super()
+    @value = val
+  end
+
+  def to_s
+    synchronize {
+      @value.to_s
+    }
+  end
+end
+```
+
+以下も参考になります。
+
+  - [ruby-dev:9384]
+  - [ruby-dev:9386]
+
+## Instance Methods
+
+### def mon_enter -> ()
+
+モニターをロックします。
+
+一度に一つのスレッドだけがモニターをロックできます。
+既にモニターがロックされている場合は、ロックが開放されるまで
+そのスレッドは待ちます。
+
+[m:Thread::Mutex#lock] に相当します。
+Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
+何度でもロックできる点です。ロックした回数だけ mon_exit を呼ばなければモニターは
+解放されません。
+
+```ruby title="例"
+require 'monitor'
+buf = []
+buf.extend(MonitorMixin)
+buf.mon_enter
+buf.mon_enter
+```
+
+Mutex#lock ではデッドロックが起きます。
+
+```ruby title="Mutex でデッドロックする例"
+m = Mutex.new
+m.lock
+m.lock # => deadlock; recursive locking (ThreadError)
+```
+
+### def mon_exit -> ()
+
+モニターのロックを解放します。
+
+mon_enter でロックした回数だけ mon_exit を
+呼ばなければモニターは解放されません。
+
+モニターが解放されればモニターのロック待ちになっていた
+スレッドが一つ実行を再開します。
+
+- **raise** `ThreadError` -- ロックを持っていないスレッドが呼びだした場合に発生します
+
+### def mon_synchronize { ... } -> object
+### def synchronize     { ... } -> object
+
+モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
+
+ブロックの評価値を返り値として返します。
+
+- **SEE** [m:MonitorMixin#mon_enter]
+
+### def mon_try_enter -> bool
+### def try_mon_enter -> bool
+
+モニターのロックを取得しようと試みます。
+ロックに成功した(ロックが開放状態だった、もしくは
+ロックを取得していたスレッドが自分自身であった)場合には
+真を返します。
+
+ロックができなかった場合は偽を返し、実行を継続します。この場合には
+スレッドはブロックしません。
+
+### def new_cond -> MonitorMixin::ConditionVariable
+モニターに関連付けられた、新しい [c:MonitorMixin::ConditionVariable] を生成して返します。
+
+#@since 2.5.0
+### def mon_locked? -> bool
+モニターがロックされているときに true を返します。
+
+### def mon_owned? -> bool
+カレントスレッドがモニターをロックしているときに true を返します。
+#@end

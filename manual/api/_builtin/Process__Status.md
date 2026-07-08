@@ -1,0 +1,188 @@
+---
+library: _builtin
+---
+# class Process::Status
+
+プロセスの終了ステータスを表すクラスです。
+メソッド [m:Process?.wait2] などの返り値として使われます。
+
+### 使用例
+
+wait を使用した例
+
+`````
+fork { exit }
+Process.wait
+case
+when $?.signaled?
+  p "child #{$?.pid} was killed by signal #{$?.termsig}"
+  if $?.coredump?   # システムがこのステータスをサポートしてなければ常にfalse
+    p "child #{$?.pid} dumped core."
+  end
+when $?.stopped?
+  # 実際には Process.wait を使用しているので、ここに来ることはない
+  p "child #{$?.pid} was stopped by signal #{$?.stopsig}"
+when $?.exited?
+  p "child #{$?.pid} exited normally. status=#{$?.exitstatus}"
+else
+  p "unknown status %#x" % $?.to_i
+end
+`````
+
+SIGCHLD を trap する例
+
+`````
+trap(:SIGCHLD) {|sig|
+
+  puts "interrupted by signal #{sig} at #{caller[1]}"
+  # 複数の子プロセスの終了に対して1つの SIGCHLD しか届かない
+  # 場合があるのでループさせる必要があります
+
+  while Process.waitpid(-1, Process::WNOHANG|Process::WUNTRACED)
+    case
+    when $?.signaled?
+      puts "   child #{$?.pid} was killed by signal #{$?.termsig}"
+      if $?.coredump?
+        puts "   child #{$?.pid} dumped core."
+      end
+    when $?.stopped?
+      puts "   child #{$?.pid} was stopped by signal #{$?.stopsig}"
+    when $?.exited?
+      puts "   child #{$?.pid} exited normally. status=#{$?.exitstatus}"
+    else
+      p "unknown status %#x" % $?.to_i
+    end
+  end
+}
+
+p pid1 = fork { sleep 1; exit }
+p pid2 = fork { loop { sleep } } # signal を待つための sleep
+begin
+   Process.kill :STOP, pid2
+   sleep                      # SIGCHLD を待つための sleep
+   Process.kill :CONT, pid2
+   Process.kill :TERM, pid2
+   loop { sleep }             # SIGCHLD を待つための sleep
+rescue Errno::ECHILD
+  puts "done"
+end
+
+=> 12964
+   12965
+   interrupted by signal 17 at -:27:in `sleep'
+      child 12965 was stopped by signal 19
+   interrupted by signal 17 at -:30:in `sleep'
+      child 12965 was killed by signal 15
+   interrupted by signal 17 at -:30:in `sleep'
+      child 12964 exited normally. status=0
+   done
+`````
+
+
+## Instance Methods
+
+### def ==(other)    -> bool
+
+同じステータスの場合に真を返します。
+
+other が数値の場合、self.to_i との比較が行われます。こ
+れは後方互換性のためです。
+
+- **param** `other` -- 自身と比較したいオブジェクトを指定します。
+
+### def &(other)    -> Integer
+
+self.to_i & other と同じです。
+このメソッドは後方互換性のためにあります。
+
+- **param** `other` -- 自身との & 演算をしたい整数を指定します。
+
+### def pid    -> Integer
+
+終了したプロセスのプロセス ID を返します。
+
+### def to_i    -> Integer
+
+C 言語での終了ステータス表現の整数を返します。
+
+多くのシステムの実装では、この値の上位 8 bit に [man:exit(2)]
+に渡した終了ステータスが、下位 8 bit にシグナル等で終了した等の情
+報が入っています。
+
+### def to_s    -> String
+
+to_i.to_s と同じです。
+
+### def exited?    -> bool
+
+プロセスが [man:exit(2)] などにより正常に終了した場合に、真を返します。
+そうでない場合に false を返します。
+
+### def exitstatus    -> Integer | nil
+
+exited? が真の場合プロセスが返した終了ステータスの整数を、そ
+うでない場合は nil を返します。
+
+### def inspect    -> String
+
+自身を人間が読みやすい形の文字列表現にして返します。
+
+プロセスの状態を以下のフォーマットで返します。
+
+- **正常終了のとき**:
+ #<Process::Status: pid=18262,exited(nnn)>
+- **シグナルによる停止のとき**:
+ #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
+- **シグナルによる終了のとき**:
+ #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
+- **コアダンプしたとき(このステータスの表示はシステムに依存します)**:
+ #<Process::Status: pid=18262,coredumped>
+
+### def stopped?    -> bool
+
+プロセスが現在停止(終了ではない)している場合に真を返します。
+[m:Process?.waitpid] に [m:Process::WUNTRACED] フラグを設定した
+場合にだけ真になりえます。
+
+### def stopsig    -> Integer | nil
+
+stopped? が真の場合そのシグナルの番号を、そうでない場合は
+nil を返します。
+
+### def signaled?    -> bool
+
+プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
+を返します。
+
+### def termsig    -> Integer | nil
+
+signaled? が真の場合プロセスを終了させたシグナル番号を、
+そうでない場合は nil を返します。
+
+### def coredump?    -> bool
+
+終了時にコアダンプしていたら真を返します。
+
+このメソッドは signaled? が真のときにしか意味を持ちません。
+
+このメソッドはシステムに依存します。サポートしないプラットフォー
+ムでは常に false を返します。
+
+### def >>(num)    -> Integer
+
+self.to_i >> num と同じです。
+
+- **param** `num` -- 整数を指定します。
+
+``````
+fork { exit 99 }   #=> 26563
+Process.wait       #=> 26563
+$?.to_i            #=> 25344
+$? >> 8            #=> 99
+``````
+
+### def success?    -> bool
+
+プロセスの終了状態が成功である場合に true を返します。
+そうでない場合に false を返します。
+

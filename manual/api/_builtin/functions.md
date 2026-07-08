@@ -1,0 +1,2882 @@
+## Module Functions
+
+### module_function def exit(status = true) -> ()
+
+Rubyプログラムの実行を終了します。status として整
+数が与えられた場合、その値を Ruby コマンドの終了ステータスとします。
+デフォルトの終了ステータスは 0(正常終了)です。
+
+status が true の場合 0、 false の場合 1 を引数に指定したとみなされます。この値はCレベルの定数
+EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
+
+exit は例外 [c:SystemExit] を発生させ
+ることによってプログラムの実行を終了させますので、
+必要に応じて begin 節で捕捉できます。
+
+- **param** `status` -- 終了ステータスを整数か true または false で与えます。
+
+```ruby title="例"
+puts 'start'
+begin
+  puts 'start1...'
+  exit
+rescue SystemExit => err
+  puts "end1 with #{err.inspect}"
+end
+
+begin
+  puts 'start2...'
+  exit
+ensure
+  puts 'end2...'
+end
+puts 'end' #実行されない
+
+#=> start
+#   start1...
+#   end1 with #<SystemExit: exit>
+#   start2...
+#   end2...
+#終了ステータス:0
+```
+
+- **SEE** [m:Kernel?.exit!],[m:Kernel?.abort], [ref:d:spec/control#begin]
+
+### module_function def exit!(status = false) -> ()
+
+Rubyプログラムの実行を即座に終了します。
+status として整数が与えられた場合、その値を Ruby コマンドの終了ステータスとします。
+デフォルトの終了ステータスは 1 です。
+
+status が true の場合 0、 false の場合 1 を引数に指定したとみなされます。この値はCレベルの定数
+EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
+
+exit! は exit とは違って、例外処理などは一切行ないませ
+ん。 [m:Kernel?.fork] の後、子プロセスを終了させる時などに用
+いられます。
+
+- **param** `status` -- 終了ステータスを整数か true または false で与えます。
+
+```ruby title="例"
+STDOUT.sync = true #表示前に終了しないようにする
+puts 'start'
+begin
+  puts 'start1...'
+  exit!
+ensure
+  puts 'end1...' #実行されない
+end
+puts 'end' #実行されない
+
+#=> start
+#   start1...
+#終了ステータス:1
+```
+
+- **SEE** [m:Kernel?.exit],[m:Kernel?.abort],[m:Kernel?.at_exit],[m:Kernel?.fork]
+
+### module_function def abort            -> ()
+### module_function def abort(message)   -> ()
+
+Ruby プログラムをエラーメッセージ付きで終了します。終了ステータスは 1 固定です。
+
+このメソッドと [m:Kernel?.exit] との違いは、プログラムの終了ステー
+タスが 1 (正確にはCレベルの定数 EXIT_FAILURE の値)固定であることと、
+エラーメッセージを標準エラー出力 [m:$stderr] に出力することです。
+
+引数 message を指定すると SystemExit クラスの
+[m:Exception#message] に message を設定し
+て標準エラー出力に出力します。
+
+#@since 2.7.0
+引数を省略した呼び出し時に [m:$!] が nil でなければその例外のメッセージと
+バックトレースを表示します。
+#@else
+#@# 1.9.0 から 2.6 では表示されない。
+#@# https://bugs.ruby-lang.org/issues/16424
+#@end
+
+- **param** `message` -- エラーメッセージ文字列です。
+
+```ruby
+puts 'start'
+begin
+  puts 'start1...'
+  abort "error1"
+rescue SystemExit => err
+  puts "end1 with #{err.inspect}"
+end
+
+begin
+  puts 'start2...'
+  raise RuntimeError.new
+rescue
+  abort
+ensure
+  puts 'end2...'
+end
+puts 'end' #実行されない
+
+#(標準出力)
+#=> start
+#   start1...
+#   end1 with #<SystemExit: error1>
+#   start2...
+#   end2...
+#終了ステータス:1
+#(標準エラー出力)
+#=> error1
+#@since 2.7.0
+#   Traceback (most recent call last):
+#@since 3.4
+#   sample.rb:11:in '<main>': RuntimeError (RuntimeError)
+#@else
+#   sample.rb:11:in `<main>': RuntimeError (RuntimeError)
+#@end
+#@end
+```
+
+- **SEE** [m:Kernel?.exit],[m:Kernel?.exit!]
+
+### module_function def `(command) -> String
+
+command を外部コマンドとして実行し、その標準出力を文字列として
+返します。このメソッドは \`command\` の形式で呼ばれます。
+
+引数 command に対しダブルクォートで囲まれた文字列と同様の解釈と式展開を行った後、
+コマンドとして実行します。
+コマンドは評価されるたびに実行されます。コマンドの終了ステータスを得るには、[m:$?] を参照します。
+
+コマンドの出力を得る必要がなく、単にコマンドを実行したいだけなら
+[m:Kernel?.system] を使います。特に端末を制御するコマンドでは
+\`command\` は失敗するかもしれません。
+
+[ref:d:spec/literal#command] も参照。
+
+- **param** `command` -- コマンドとして実行する引数です。そのまま評価されるのではなく、
+       ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
+- **return** -- コマンドの出力を文字列で返します。
+- **raise** `Errno::EXXX` -- コマンドを実行できないときや失敗した場合に発生します。
+
+```ruby title="例"
+puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
+puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
+```
+
+- **SEE** [m:Kernel?.system],[m:Kernel?.exec],[m:Kernel?.spawn]
+
+### module_function def system(command, options={}) -> bool | nil
+### module_function def system(env, command, options={}) -> bool | nil
+
+引数を外部コマンドとして実行して、成功した時に真を返します。
+
+子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
+
+#@since 2.6.0
+options で :exception に true を指定することで、
+nil や false を返す代わりに例外を発生するようにできます。
+#@end
+
+終了ステータスは変数 [m:$?] で参照できます。
+
+コマンドを実行できなかった場合、多くのシェルはステータス
+127 を返します。シェルを介さない場合は Ruby の子プロセスがステータス
+127 で終了します。
+コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
+[m:$?] を参照することで判別可能です。
+
+### 引数の解釈
+
+この形式では command が shell のメタ文字
+```
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+```
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+- **param** `command` -- command コマンドを文字列で指定します。
+- **param** `env` -- 更新する環境変数を表す Hash
+- **param** `options` -- オプションパラメータ Hash
+#@since 2.6.0
+- **raise** `Errno::EXXX` -- exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
+- **raise** `RuntimeError` -- exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
+
+```ruby title="シェル経由でコマンドを実行"
+system("echo *") # => true
+# fileA fileB fileC ...
+```
+
+#@since 2.6.0
+```ruby title="exceptionオプションを指定"
+system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
+system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
+system('ruby -e "exit(true)"', exception: true)  # => true
+```
+#@end
+
+- **SEE** [m:Kernel?.`],[m:Kernel?.spawn],[m:Kernel?.exec],[man:system(3)]
+
+### module_function def system(program, *args, options={}) -> bool | nil
+### module_function def system(env, program, *args, options={}) -> bool | nil
+
+引数を外部コマンドとして実行して、成功した時に真を返します。
+
+子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
+
+#@since 2.6.0
+options で :exception に true を指定することで、
+nil や false を返す代わりに例外を発生するようにできます。
+#@end
+
+終了ステータスは変数 [m:$?] で参照できます。
+
+コマンドを実行できなかった場合、多くのシェルはステータス
+127 を返します。シェルを介さない場合は Ruby の子プロセスがステータス
+127 で終了します。コマンドが実行できなかったのか、コマンドが失敗したの
+かは、普通 [m:$?] を参照することで判別可能です。
+
+Hash を options として渡すことで、起動される子プロセスの
+  - プロセスグループ
+  - resource limit
+  - カレントディレクトリ
+  - umask
+  - 子プロセスでのリダイレクト
+などを変更できます。環境変数のクリアなども指定できます。
+詳しくは [m:Kernel?.spawn] を参照してください。
+
+### 引数の解釈
+
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
+
+- **param** `program` -- 文字列か2要素の配列です。
+- **param** `args` -- program に渡す引数を 0 個以上指定する
+- **param** `env` -- 更新する環境変数を表す Hash
+- **param** `options` -- オプションパラメータ Hash
+- **raise** `ArgumentError` -- 第一引数が配列かつ要素数が 2 でない場合に発生します。
+#@since 2.6.0
+- **raise** `Errno::EXXX` -- exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
+- **raise** `RuntimeError` -- exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
+#@end
+
+```ruby title="インタプリタから直接コマンドを実行"
+system("echo", "*") # => true
+# *
+```
+
+- **SEE** [m:Kernel?.`],[m:Kernel?.spawn],[m:Kernel?.exec],[man:system(3)]
+
+### module_function def spawn(command, options={}) -> Integer
+### module_function def spawn(env, command, options={}) -> Integer
+
+引数を外部コマンドとして実行しますが、生成した
+子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
+
+
+### 引数の解釈
+
+この形式では command が shell のメタ文字
+```
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+```
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+
+- **param** `command` -- コマンドを文字列で指定します。
+- **param** `env` -- 更新する環境変数を表す Hash
+- **param** `options` -- オプションパラメータ Hash
+- **raise** `Errno::EXXX` -- 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
+
+- **raise** `Errno::EXXX` -- コマンドが実行できなかった場合に発生します。
+
+
+- **SEE** [m:Kernel?.system],[m:Kernel?.exec]
+
+### module_function def spawn(program, *args) -> Integer
+### module_function def spawn(env, program, *args, options={}) -> Integer
+
+引数を外部コマンドとして実行しますが、生成した
+子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
+
+env に Hash を渡すことで、[man:exec(2)] で子プロセス内で
+ファイルを実行する前に環境変数を変更できます。
+Hash のキーは環境変数名文字列、Hash の値に設定する値とします。
+nil とすることで環境変数が削除([man:unsetenv(3)])されます。
+```ruby title="例"
+# FOO を BAR にして BAZ を削除する
+pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
+```
+
+親プロセスは [m:Process?.waitpid] で子プロセスの終了を待ち合わせるか
+もしくは [m:Process?.detach] で子プロセスを切り離すかしてください。
+そうでないとゾンビプロセスが残る場合があります。
+
+### 引数の解釈
+
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
+
+### option引数の概要
+Hash を options として渡すことで、起動される子プロセスの
+  - プロセスグループ
+  - resource limit
+  - カレントディレクトリ
+  - umask
+  - 子プロセスでのリダイレクト
+などを変更できます。環境変数のクリアなども指定できます。
+
+以下のオプションが指定できます。
+
+- **`:unsetenv_others`**:
+  これを true にすると、envで指定した環境変数以外をすべてクリアします。
+  false だとクリアしません。false がデフォルトです。
+
+- **`:pgroup`**:
+  引数に true or 0 を渡すと新しいプロセスグループを作成し、そこで動きます。
+  整数を渡すと、指定したプロセスグループに属します。
+  nil を渡すとプロセスグループを変更しません。デフォルトは nil です。
+
+- **`:rlimit_core, :rlimit_cpu, etc`**:
+  resource limit を設定します。詳しくは [m:Process?.setrlimit] を見て
+  ください。引数には整数、もしくは整数2つの配列を渡します。
+
+- **`:chdir`**:
+  指定した文字列をカレントディレクトリにします。
+
+- **`:umask`**:
+  指定した整数を umask に設定します。
+
+- **リダイレクト関連**:
+
+  Hash のキーに子プロセス側のファイルデスクリプタを、
+  対応する値に親プロセス側のファイルデスクリプタや
+  ファイル名を指定することでリダイレクトを実現できます。
+
+- **`:close_others`**:
+  これを true に設定すると
+  リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
+  ファイルデスクリプタをすべて閉じます。
+#@since 2.6.0
+  false がデフォルトです。
+#@else
+#@# 2.0.0 から 2.5 までは true がデフォルト
+  true がデフォルトです。
+#@end
+
+#@since 2.6.0
+- **`:exception`**:
+  [m:Kernel?.system] のみで指定できます。
+  これを true に設定すると、nil や false を返す代わりに例外が発生します。
+  false がデフォルトです。
+#@end
+
+### option引数によるリダイレクトの概要
+Hash のキー(子プロセス側)には以下のいずれかが指定できます。
+  - 単一のファイルデスクリプタ
+  - ファイルデスクリプタの配列
+配列を渡すことで複数のファイルデスクリプタを同時にリダイレクトできます。
+
+Hash の値(親プロセス側)には以下のいずれかが指定できます。
+  - 単一のファイルデスクリプタ
+  - リダイレクト先のファイル名文字列
+  - [リダイレクト先のファイル名文字列]、配列の要素にすることで
+    [m:File::Constants::RDONLY] でファイルを開いてリダイレクトします。
+  - [リダイレクト先のファイル名文字列, モード文字列]
+    open(ファイル名, モード, 0644) でファイルを開いてリダイレクト
+    します。
+  - [リダイレクト先のファイル名文字列, モード文字列, パーミション(整数)]
+    open(ファイル名, モード, パーミッション) でファイルを
+    開いてリダイレクトします。
+  - [:child, ファイルデスクリプタ]
+    子プロセス側のファイルデスクリプタを指定できます。
+  - :close キーで指定したファイルデスクリプタを子プロセス側で閉じます
+
+ファイルデスクリプタを表すためには、以下が利用できます。
+  - :in  標準入力, ファイルデスクリプタ0
+  - :out 標準出力, ファイルデスクリプタ1
+  - :err 標準エラー出力, ファイルデスクリプタ2
+  - 整数 指定した整数が表すファイルデスクリプタ
+  - [c:IO] [m:IO#fileno] で表されるファイルデスクリプタ
+
+### option引数の詳細および例
+
+「:unsetenv_others」を使うと、envで指定したもの以外の環境変数を
+クリアします。
+```ruby
+# すべての環境変数をクリア
+pid = spawn(command, :unsetenv_others=>true)
+# FOO だけ
+pid = spawn({"FOO"=>"BAR"}, command, :unsetenv_others=>true)
+```
+
+「:pgroup」でプロセスグループを指定できます。
+```ruby
+# true, 0 で新しいプロセスグループを作りそのリーダーになります。
+pid = spawn(command, :pgroup => true)
+# 整数を渡すとそのグループに所属します。
+pid = spawn(command, :pgroup => 10)
+```
+
+「:rlimit_core」「:rlimit_cpu」などで、resource limit を指定します。
+詳しくは [m:Process?.setrlimit] を見てください。
+このオプションには 整数 or 整数2つの配列、を渡すことができます。
+それぞれ [m:Process?.setrlimit] の引数が2個、3個の場合に対応します。
+```ruby
+# 現プロセスの core の resource limit を取得
+cur, max = Process.getrlimit(:CORE)
+# 一時的に子プロセスの core dump を止める
+pid = spawn(command, :rlimit_core=>[0,max]) # disable core temporary.
+# 子プロセスで core dump を出せるようにする
+pid = spawn(command, :rlimit_core=>max) # enable core dump
+# 子プロセスで core dump を出せなくする
+pid = spawn(command, :rlimit_core=>0) # never dump core.
+```
+
+「:chdir」で子プロセスのカレントディレクトリを変更できます。
+```ruby
+pid = spawn(command, :chdir=>"/var/tmp")
+```
+
+「:umask」で子プロセスの umask を指定できます。
+```ruby
+pid = spawn(command, :umask=>077)
+```
+
+リダイレクトは様々なやりかたが使えます。
+Hash のキーが子プロセス側、値が親プロセス側です。
+```ruby
+# 以下の例はすべて stderr を stdout にリダイレクトします
+pid = spawn(command, :err=>:out)
+pid = spawn(command, 2=>1)
+pid = spawn(command, STDERR=>:out)
+pid = spawn(command, STDERR=>STDOUT)
+```
+この例では子プロセス側の stdout には触れていないので、
+親プロセスから引き継がれます。
+
+Hash の値にはファイル名も指定できます。
+```ruby
+pid = spawn(command, :in=>"/dev/null") # read mode
+pid = spawn(command, :out=>"/dev/null") # write mode
+pid = spawn(command, :err=>"log") # write mode
+pid = spawn(command, 3=>"/dev/null") # read mode
+```
+stdout と stderr をリダイレクトした場合は、
+ファイルは write mode で open されます。それ以外の場合は
+read mode で open されます。
+
+ファイルのフラグ(write/read mode)やパーミッションを明示したい
+場合は、配列を用います。
+```ruby
+# なにも指定がなければデフォルトで read mode が使われる。
+pid = spawn(command, :in=>["file"])
+# read mode で file を open し、リダイレクトする。
+pid = spawn(command, :in=>["file", "r"])
+# write mode で file を open し、リダイレクトする。
+# パーミッションはデフォルトで 644。
+pid = spawn(command, :out=>["log", "w"]) # 0644 assumed
+# write mode、パーミッション 0600 でファイルをオープンし、リダイレクトする。
+pid = spawn(command, :out=>["log", "w", 0600])
+# flagを文字列でなくビットで指定する
+pid = spawn(command, :out=>["log", File::WRONLY|File::EXCL|File::CREAT, 0600])
+```
+
+配列で複数のファイルデスクリプタを同時にリダイレクトできます。
+```ruby
+# stdout と stderr を "log" ファイルにリダイレクト
+pid = spawn(command, [:out, :err]=>["log", "w"])
+```
+
+複数のファイルデスクリプタを合わせてリダイレクトするには、
+[ :child, FileDescriptor ] を使うこともできます。
+これは子プロセス側で FileDescriptor にリダイレクトすることを意味します。
+これはファイルデスクリプタを直接指定するのと異なるということに
+注意してください。
+例えば、
+`````
+:err => :out
+`````
+とすると、子プロセスの stderr を親プロセスの stdout にリダイレクトします。
+`````
+:err => [:child, :out]
+`````
+とすると、子プロセスの stderr を子プロセスの stdout にリダイレクトします。
+これを用いて、[m:IO.popen] で、子プロセスの
+stderr と stdout を混ぜる例を以下に示します。
+```ruby
+io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
+p io.read #=> "out\nerr\n
+```
+
+#@since 2.6.0
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
+#@else
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+#@end
+「:close_others」オプションでこの挙動を制御できます。
+標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
+限り、このオプションの影響を受けません。
+
+「:close_others」とは無関係に ruby が open する IO には
+デフォルトでは close_on_exec が設定されていて、自動的に
+閉じられることに注意してください。
+
+```ruby
+#@since 2.6.0
+pid = spawn(command, :close_others=>true)  # close 3,4,5,...
+pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
+#@else
+pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
+pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+#@end
+```
+
+これを利用して spawn を [m:IO.popen] のように使うことができます。
+```ruby
+# similar to r = IO.popen(command)
+r, w = IO.pipe
+pid = spawn(command, :out=>w)   # r は子プロセスで閉じられる
+w.close
+```
+
+「:close」を使ってファイルデスクリプタを明示的に閉じることもできます。
+```ruby
+f = open(foo)
+# f は継承されない
+# system は :close_others=>false がデフォルトなのでそれ以外は継承される
+system(command, f=>:close)        # don't inherit f.
+```
+
+spawn で特定のファイルデスクリプタだけを継承したい場合は、
+io => io という形のオプションを指定します。
+```ruby
+# valgrind は --log-fd というオプションでログの出力先を指定できます。
+# これで指定したファイルデスクリプタは親プロセスから
+# 子プロセスに継承されなければならないため、 log_w=>log_w とします。
+log_r, log_w = IO.pipe
+pid = spawn("valgrind", "--log-fd=#{log_w.fileno}", "echo", "a", log_w=>log_w)
+log_w.close
+p log_r.read
+```
+
+ファイルデスクリプタを入れ替えることもできます。
+```ruby
+# stdout と stderr を入れ替えリダイレクト
+pid = spawn(command, :out=>:err, :err=>:out)
+```
+このような相互参照を解決するため、spawnの内部で新しい
+ファイルデスクリプタを作り、利用します。
+
+:close_others と :close オプションが意味を持つのは、
+子プロセスに閉じていないファイルデスクリプタが全て渡される環境
+(Unix 系統の環境)のみです。
+例えば Windows では元々子プロセスにはファイルデスクリプタ 0 1 2 のみ
+渡されるので :close_others や :close オプションは意味を持ちません。
+
+
+- **param** `env` -- 更新する環境変数を表す Hash
+- **param** `program` -- 文字列か2要素の配列を指定します。
+- **param** `args` -- 渡される引数です。0 個以上の文字列を指定します。
+- **param** `options` -- オプションパラメータ Hash
+
+- **raise** `ArgumentError` -- 第一引数が配列かつ要素数が 2 でない場合に発生します。
+
+- **raise** `Errno::EXXX` -- コマンドが実行できなかった場合に発生します。
+
+- **SEE** [m:Kernel?.system],[m:Kernel?.exec]
+
+### module_function def exec(command, options={}) -> ()
+### module_function def exec(env, command, options={}) -> ()
+
+引数で指定されたコマンドを実行します。
+
+プロセスの実行コードはそのコマンド(あるいは shell)になるので、
+起動に成功した場合、このメソッドからは戻りません。
+
+### 引数の解釈
+
+この形式では command が shell のメタ文字
+```
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+```
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+- **param** `command` -- コマンドを文字列で指定します。
+- **param** `env` -- 更新する環境変数を表す Hash
+- **param** `options` -- オプションパラメータ Hash
+- **raise** `Errno::EXXX` -- 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
+
+```ruby title="例"
+# a.rb
+puts '実行前'
+exec 'echo "実行中"'
+puts '実行後'
+```
+
+上記のスクリプトを実行すると以下のようになります。
+
+`````
+$ ruby a.rb
+実行前
+実行中
+# '実行後' は表示されない
+`````
+
+### module_function def exec(program, *args, options={}) -> ()
+### module_function def exec(env, program, *args, options={}) -> ()
+
+引数で指定されたコマンドを実行します。
+
+プロセスの実行コードはそのコマンド(あるいは shell)になるので、
+起動に成功した場合、このメソッドからは戻りません。
+
+この形式では、常に shell を経由せずに実行されます。
+
+[man:exec(3)] でコマンドを実行すると、
+元々のプログラムの環境をある程度(ファイルデスクリプタなど)引き継ぎます。
+Hash を options として渡すことで、この挙動を変更できます。
+詳しくは [m:Kernel?.spawn] を参照してください。
+
+### 引数の解釈
+
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
+
+- **param** `program` -- 文字列か2要素の配列を指定します。
+- **param** `args` -- 渡される引数です。0 個以上の文字列を指定します。
+- **param** `env` -- 更新する環境変数を表す Hash
+- **param** `options` -- オプションパラメータ Hash
+- **raise** `ArgumentError` -- 第一引数が配列かつ要素数が 2 でない場合に発生します。
+- **raise** `Errno::EXXX` -- 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
+
+#@#例...
+
+#@# コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
+#@# 以下のように exec を呼び出します。
+#@#
+#@#   exec [program, program], *args
+
+```ruby title="例"
+# a.rb
+exec ['sleep', 'mysleep'], '600'
+```
+
+上記スクリプトを実行すると以下のようになります。
+
+`````
+$ ruby a.rb
+## sleep してるので制御が戻ってこない。別の仮想端末に切替えて以下を実行
+$ ps aux|grep sleep
+xxxx    32754  0.0  0.0   2580   468 pts/3    S+   22:01   0:00 mysleep 600
+xxxx    32761  0.0  0.0   2824   792 pts/6    S+   22:01   0:00 grep sleep
+`````
+
+- **SEE** [m:Kernel?.system],[m:Kernel?.`],[m:Kernel?.spawn],[m:Kernel?.fork],[m:IO.popen],[m:IO.pipe],[m:Kernel?.open],[man:exec(3)]
+
+### module_function def fork -> Integer | nil
+### module_function def fork { ... } -> Integer | nil
+
+[man:fork(2)] システムコールを使ってプロセスの複製を作
+ります。親プロセスでは子プロセスのプロセスIDを、子プロセスでは
+nil を返します。ブロックを指定して呼び出した場合には、生成し
+た子プロセスでブロックを評価します。
+
+fork 前に STDOUT と STDERR を [m:IO#flush] します。
+
+- **raise** `NotImplementedError` -- 実行環境がこのメソッドに対応していないとき発生します。
+
+```ruby title="ブロックを指定しなかった場合"
+if child_pid = fork
+  puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+  # => parent process. pid: 81060, child pid: 81329
+
+  # 親プロセスでの処理
+  # ...
+
+  # 子プロセスの終了を待って終了。
+  Process.waitpid(child_pid)
+else
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 81329
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+```
+
+```ruby title="ブロックを指定した場合"
+child_pid = fork do
+  puts "child process. pid: #{Process.pid}"
+  # => child process. pid: 79602
+
+  # 子プロセスでの処理
+  sleep(1)
+end
+
+puts "parent process. pid: #{Process.pid}, child pid: #{child_pid}"
+# => parent process. pid: 79055, child pid: 79602
+
+# 親プロセスでの処理
+# ...
+
+# 子プロセスの終了を待って終了。
+Process.waitpid(child_pid)
+```
+
+
+- **SEE** [m:IO.popen],[m:IO.pipe],[m:Kernel?.at_exit],[m:Kernel?.exit!], [man:fork(2)]
+
+### module_function def syscall(num, *arg ) -> Integer
+
+numで指定された番号のシステムコールを実行します。
+第2引数以降をシステムコールの引数として渡します。
+
+どの数値がどのシステムコールに対応するかは、
+syscall(2) や
+/usr/include/sys/syscall.h を参照してください。
+
+システムコールの慣習に従い、syscall(2)
+が -1 を返す場合には例外 [c:Errno::EXXX] が発生します。
+それ以外では、返した値をそのまま数値で返します。
+
+ライブラリ [lib:fiddle] を使えばより高レベルな操作ができます。
+
+- **param** `num` -- システムコール番号です。
+- **param** `arg` -- 文字列か、整数です。最大 9 個まで渡すことができます。
+- **raise** `Errno::EXXX` -- syscall(2) が -1 を返した場合に発生します。
+- **raise** `NotImplementedError` -- 実行環境がこのメソッドに対応していないとき発生します。
+
+```ruby title="例"
+syscall 4, 1, "hello\n", 6   # '4' is write(2) on our box
+# => hello
+```
+
+- **SEE** [lib:fiddle], [man:syscall(2freebsd)], [man:syscall(2linux)]
+
+
+### module_function def open(file, mode_enc = "r", perm = 0666) -> IO
+### module_function def open(file, mode_enc = "r", perm = 0666) {|io| ... } -> object
+
+file をオープンして、[c:IO]（[c:File]を含む）クラスのインスタンスを返します。
+
+ブロックが与えられた場合、指定されたファイルをオープンし、
+生成した [c:IO] オブジェクトを引数としてブロックを実行します。
+ブロックの終了時や例外によりブロックを脱出するとき、
+ファイルをクローズします。ブロックを評価した結果を返します。
+
+ファイル名 file が `|` で始まる時には続く文字列をコマンドとして起動し、
+コマンドの標準入出力に対してパイプラインを生成します
+
+ファイル名が "|-" である時、open は Ruby の子プロセス
+を生成し、その子プロセスとの間のパイプ([c:IO]オブジェクト)を返し
+ます。(このときの動作は、[m:IO.popen] と同じです。
+[m:File.open] にはパイプラインを生成する機能はありません)。
+
+Perlと異なりコマンドは常に `|` で始まります。
+
+- **param** `file` -- ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
+- **param** `mode_enc` -- モード・エンコーディングを文字列か定数の論理和で指定します。後述。
+- **param** `perm` -- [man:open(2)] の第 3 引数のように、ファイルを生成する場合の
+  ファイルのパーミッションを整数で指定します。
+- **raise** `Errno::EXXX` -- ファイルのオープンに失敗した場合に発生します。
+
+#@#例...
+
+- **SEE** [m:File.open],[m:IO.popen],[m:IO.open]
+
+### 第二引数のオープンモード・エンコーディング
+文字列("mode" か "mode:ext_enc" か "mode:ext_enc:int_enc" という形式)か
+整数([c:File::Constants] モジュールの定数の論理和)を組み合わせて指定します。
+
+mode は以下の三つのうちのいずれかです。
+
+- **`"r", RDONLY`**:
+    ファイルを読み込みモードでオープンします。（デフォルトのモード）
+
+- **`"w", WRONLY|CREAT|TRUNC`**:
+    ファイルを書き込みモードでオープンします。
+    オープン時にファイルがすでに存在していれば
+    その内容を空にします。
+
+- **`"a", WRONLY|CREAT|APPEND`**:
+    ファイルを書き込みモードでオープンします。
+    出力は 常に ファイルの末尾に追加されます。
+    例えば、ファイルオープン中にファイルのサイズが小さ
+    くなってもその末尾に出力されます。
+#@#    このことはログ出力な
+#@#    どでプログラムを実行したままそのログを小さくしたい場合
+#@#    に利用されます。
+
+以上の3つの後に "+" があれば、ファイルは読み書き両用モード (RDWR)
+でオープンされます。
+
+- **`"r+"`**:
+    ファイルの読み書き位置は先頭にセットされます。
+
+- **`"w+"`**:
+    "r+" と同じですが、オープン時にファイルがすでに
+    存在していればその内容を空にします。
+
+- **`"a+"`**:
+    "r+"と同様、ファイルの読み込み位置は先頭にセットされますが、
+    書き込みは常にファイル末尾に行われます。書き込みは
+    [m:IO#seek] などの影響を受けません。
+
+これらのいずれに対しても "b" フラグを ("r+b"のように) つけることがで
+きます (整数なら File::BINARY )。この場合、バイナリモードでオープン
+します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
+合に限ります)
+
+#@since 2.6.0
+"w" に対しては "x" フラグを ("wx"や"wb+x"のように) つけることが
+できます (整数なら File::EXCL)。
+この場合、ファイルがすでに存在すると Errno::EEXIST が発生します。
+ただし、全ての種類のストリームでサポートされているとは限りません (例えばパイプ)。
+#@end
+
+### Universal Newline
+改行をLFに揃えます。一言で言えばPEP:278 [url:https://www.python.org/dev/peps/pep-0278/]のことです。
+
+- **`"rt"`**:
+    CR、LF、CRLFのいずれをもLFとして読み込む。
+- **`"rb"`**:
+    CR、LF、CRLFはいずれもそのまま読み込まれる。
+- **`"r"`**:
+    "rt"と"rb"のどちらの扱いになるかはプラットフォーム依存。
+    (Unix系ならばなら"rb"、mswinやmingwなら"rt"扱いとなる)
+- **`"wb"`**:
+    LFはそのままLFとして書き込まれる。
+- **"wt" または "w"**:
+    LFはLFのままか、CR+LFか、どちらかになる。どちらになるかはプラットフォーム依存。
+    (Unix系ならばLFのまま、mswinやmingwならばCRLFとなる)
+
+なお、以上のCR、LF、CRLFは入力のエンコーディングを解釈した後に処理されます。例えば、UTF-16LEでは、LFはバイト列"\x0a\x00"のことになります。
+
+### エンコーディングの指定
+ext_enc(外部エンコーディング)が指定されている場合、
+読み込まれた文字列にはこのエンコーディングが指定され、
+出力する文字列はそのエンコーディングに変換されます。
+
+ext_encが'BOM|'で始まる場合、その入力に含まれるBOMはあらかじめ削られます。
+また、BOMがあった場合、入力された文字列にはそのBOMに対応するエンコーディングが設定されます。
+```ruby title="BOMでUTF-16BEかLEかを判別する例"
+File.open("utf16.txt", "rb:BOM|utf-16"){|file| "..." }
+```
+
+int_encも指定されていた場合、入力された文字列をext_encでエンコーディングされた文字列とみなしてint_encへと変換し、その結果にint_encを設定して返します。
+
+### module_function def select(reads, writes = [], excepts = [], timeout = nil) -> [[IO]] | nil
+
+[m:IO.select] と同じです。
+
+- **param** `reads` -- [m:IO.select] 参照
+- **param** `writes` -- [m:IO.select] 参照
+- **param** `excepts` -- [m:IO.select] 参照
+- **param** `timeout` -- [m:IO.select] 参照
+
+#@#noexample IO.select を参照
+
+- **SEE** [m:IO.select]
+
+### module_function def test(cmd, file) -> bool | Time | Integer | nil
+
+単体のファイルでファイルテストを行います。
+
+- **param** `cmd` -- 以下に示す文字リテラル、文字列、あるいは同じ文字を表す数値
+           です。文字列の場合はその先頭の文字だけをコマンドとみなします。
+- **param** `file` -- テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
+- **return** -- 下表に特に明記していないものは、真偽値を返します。
+
+以下は cmd として指定できる文字リテラルとその意味です。
+
+- **`?r`**:
+    ファイルを実効 uid で読むことができる
+- **`?w`**:
+    ファイルに実効 uid で書くことができる
+- **`?x`**:
+    ファイルを実効 uid で実行できる
+- **`?o`**:
+    ファイルの所有者が実効 uid である
+- **`?G`**:
+    ファイルのグループ所有者が実効 gid である
+- **`?R`**:
+    ファイルを実 uid で読むことができる
+- **`?W`**:
+    ファイルに実 uid で書くことができる
+- **`?X`**:
+    ファイルを実 uid で実行できる
+- **`?O`**:
+    ファイルの所有者が実 uid である
+- **`?e`**:
+    ファイルが存在する
+- **`?z`**:
+    ファイルサイズが 0 である
+- **`?s`**:
+    ファイルサイズが 0 でない (ファイルサイズを返す、0 ならば nil) -> Integer|nil
+- **`?f`**:
+    ファイルはプレーンファイルである
+- **`?d`**:
+    ファイルはディレクトリである
+- **`?l`**:
+    ファイルはシンボリックリンクである
+- **`?p`**:
+    ファイルは名前つきパイプ(FIFO)である
+- **`?S`**:
+    ファイルはソケットである
+- **`?b`**:
+    ファイルはブロックスペシャルファイルである
+- **`?c`**:
+    ファイルはキャラクタースペシャルファイルである
+- **`?u`**:
+    ファイルに setuid ビットがセットされている
+- **`?g`**:
+    ファイルに setgid ビットがセットされている
+- **`?k`**:
+    ファイルに sticky ビットがセットされている
+- **`?M`**:
+    ファイルの最終更新時刻を返す -> Time
+- **`?A`**:
+    ファイルの最終アクセス時刻を返す -> Time
+- **`?C`**:
+    ファイルの inode 変更時刻を返す -> Time
+
+```ruby title="例"
+IO.write("testfile", "test")
+test("r", "testfile") # => true
+test("s", "testfile") # => 4
+test("M", "testfile") # => 2018-03-31 07:38:40 +0900
+```
+
+### module_function def test(cmd, file1, file2) -> bool
+
+２ファイル間のファイルテストを行います。
+
+- **param** `cmd` -- 以下に示す文字リテラル、文字列、あるいは同じ文字を表す数値
+           です。文字列の場合はその先頭の文字だけをコマンドとみなします。
+- **param** `file1` -- テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
+- **param** `file2` -- テストするファイルのパスを表す文字列か IO オブジェクトを指定します。
+- **return** -- 真偽値を返します。
+
+以下は cmd として指定できる文字リテラルとその意味です。
+
+- **`?=`**:
+    ファイル1とファイル2の最終更新時刻が等しい
+- **`?>`**:
+    ファイル1の方がファイル2より最終更新時刻が新しい
+- **`?<`**:
+    ファイル1の方がファイル2より最終更新時刻が古い
+- **`?-`**:
+    ファイル1とファイル2が同一のファイルである
+
+```ruby title="例"
+IO.write("testfile1", "test1")
+IO.write("testfile2", "test2")
+%w(= < > -).each do |e|
+  result = test(e, "testfile1", "testfile2")
+  puts "#{e}: #{result}"
+end
+# => =: true
+# => <: false
+# => >: false
+# => -: false
+```
+### module_function def load(file, priv = false) -> true
+
+Ruby プログラム file をロードして実行します。再ロード可能です。
+
+file が絶対パスのときは file からロードします。
+file が相対パスのときは組み込み変数 [m:$:]
+に示されるパスとカレントディレクトリを順番に探し、最初に見付かったファイルを
+ロードします。このとき、[m:$:] の要素文字列の先頭文字が
+`~` (チルダ) だと、環境変数 HOME の値に展開されます。
+また `~USER` はそのユーザのホームディレクトリに展開されます。
+
+ロードに成功した場合は true を返します。
+
+- **param** `file` -- ファイル名の文字列です。
+- **param** `priv` -- 真のとき、ロード・実行は内部的に生成される
+            無名モジュールをトップレベルとして行われ、
+            グローバルな名前空間を汚染しません。
+- **raise** `LoadError` -- ロードに失敗した場合に発生します。
+- **SEE** [m:Kernel?.require]
+
+### require と load の違い
+
+[m:Kernel?.require] は同じファイルは一度だけしかロードしませんが、
+[m:Kernel?.load] は無条件にロードします。
+また、require は拡張子.rb や .so を自動的に補完しますが、
+load は行いません。
+require はライブラリのロード、load は
+設定ファイルの読み込みなどに使うのが典型的な用途です。
+
+```ruby title="例"
+load "#{ENV['HOME']}/.myapprc"
+load "/etc/myapprc"
+```
+
+なお、特定のディレクトリからファイルをロードしたい場合、
+load 'filename' とするのは不適切です。必ず絶対パスを
+使ってください。
+
+### module_function def require(feature) -> bool
+
+Ruby ライブラリ feature をロードします。拡張子補完を行い、
+同じファイルの複数回ロードはしません。
+
+feature が絶対パスのときは feature からロードします。
+feature が相対パスのときは組み込み変数 [m:$:]
+に示されるパスを順番に探し、最初に見付かったファイルを
+ロードします。このとき、$: の要素文字列の先頭文字が
+`~` (チルダ) だと、環境変数 HOME の値に展開されます。
+また `~USER` はそのユーザのホームディレクトリに展開されます。
+
+Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
+(*.so,*.o,*.dll など) であり、feature の拡張子が省略された場合はその
+両方から探します( *.rb が優先されます)。
+省略されなかった場合は指定された種別のみを探します。
+また、feature の拡張子にはアーキテクチャで実際に使われる拡張子に
+関らず拡張ライブラリの拡張子として常に .so を用いることができます（内部で適切に変換されます）。
+
+ライブラリのロードに成功した時には true を返し、ロードした feature の名前を(拡
+張子も含めて) 変数 [m:$"] に追加します。ただし、feature の名前が既に $"
+に含まれていた場合はロードせずに false を返します。
+
+- **param** `feature` -- ファイル名の文字列です。
+- **raise** `LoadError` -- ロードに失敗した場合に発生します。
+
+```ruby title="例"
+$LOADED_FEATURES.grep(/prime/).size # => 0
+require "prime"       # => true
+$LOADED_FEATURES.grep(/prime/).size # => 1
+require "prime"       # => false
+begin
+  require "invalid"
+rescue LoadError => e
+  e.message # => "cannot load such file -- invalid"
+end
+```
+
+#@since 1.9.1
+- **SEE** [m:Kernel?.load],[m:Kernel?.autoload],[m:Kernel?.require_relative]
+#@else
+- **SEE** [m:Kernel?.load],[m:Kernel?.autoload]
+#@end
+
+#@since 1.9.1
+### module_function def require_relative(relative_feature) -> bool
+現在のファイルからの相対パスで require します。
+
+`````
+require File.expand_path(relative_feature, File.dirname(__FILE__))
+`````
+とほぼ同じです。
+
+[m:Kernel?.eval] などで文字列を評価した場合に、そこから
+require_relative を呼出すと必ず失敗します。
+
+- **param** `relative_feature` -- ファイル名の文字列です。
+- **raise** `LoadError` -- ロードに失敗した場合に発生します。
+- **SEE** [m:Kernel?.require]
+#@end
+
+### require と load のスコープ
+
+ローカル変数はファイル間では共有されません。ですので、
+ロードしたライブラリのローカル変数を
+ロード元のスクリプトから直接取得することはできません。
+このスコープの扱い方は[m:Kernel?.load]でも同様です。
+
+```ruby title="例"
+# ---------- some.rb -----------
+$a = 1
+@a = 1
+A = 1
+a = 1
+# ---------- end some.rb -------
+
+require 'some'
+p $a #=> 1
+p @a #=> 1
+p A #=> 1
+#@since 3.4
+p a # undefined local variable or method 'a' for #<Object:0x294f9ec @a=1> (NameError)
+#@else
+p a # undefined local variable or method `a' for #<Object:0x294f9ec @a=1> (NameError)
+#@end
+```
+
+### module_function def autoload(const_name, feature) -> nil
+
+定数 const_name を最初に参照した時に feature を
+[m:Kernel?.require] するように設定します。
+
+const_name には、 "::" 演算子を含めることはできません。
+ネストした定数を指定する方法は [m:Module#autoload] を参照してください。
+
+const_name が autoload 設定されていて、まだ定義されてない(ロードされていない)ときは、
+autoload する対象を置き換えます。
+const_name が(autoloadではなく)既に定義されているときは何もしません。
+
+- **param** `const_name` -- 定数をString または Symbol で指定します。
+- **param** `feature` -- require と同様な方法で autoload する対象を指定します。
+- **raise** `LoadError` -- featureのロードに失敗すると発生します。
+
+```ruby
+# ------- /tmp/foo.rb ---------
+class Bar
+end
+# ----- end of /tmp/foo.rb ----
+
+autoload :Bar, '/tmp/foo'
+p Bar #=> Bar
+```
+
+- **SEE** [m:Kernel?.autoload?],[m:Module#autoload],[m:Kernel?.require]
+
+### module_function def autoload?(const_name) -> String | nil
+
+const_name が [m:Kernel?.autoload] 設定されているか調べます。
+
+autoload 設定されていて、autoload 定数がまだ定義されてない(ロードされていない)
+ときにそのパス名を返します。
+
+autoload 設定されていないか、ロード済みなら nil を返します。
+
+- **param** `const_name` -- 定数をString または Symbol で指定します。
+
+```ruby title="例"
+# ------- /tmp/foo.rb ---------
+class Foo
+  class Bar
+  end
+end
+# ----- end of /tmp/foo.rb ----
+
+class Foo
+end
+p Foo.autoload?(:Bar)         #=> nil
+Foo.autoload :Bar, '/tmp/foo'
+p Foo.autoload?(:Bar)         #=> "/tmp/foo"
+p Foo::Bar                    #=> Foo::Bar
+p Foo.autoload?(:Bar)         #=> nil
+```
+
+- **SEE** [m:Kernel?.autoload]
+
+### module_function def set_trace_func(proc) -> Proc
+
+Ruby インタプリタのイベントをトレースする [c:Proc] オブジェクトとして
+指定された proc を登録します。 nil を指定するとトレースがオフになります。
+
+Ruby インタプリタがプログラムを実行する過程で、メソッドの呼び出しや
+式の評価などのイベントが発生する度に、以下で説明する6個の引数とともに
+登録された [c:Proc] オブジェクトを実行します。
+
+標準添付の [lib:debug]、[lib:tracer]、
+[lib:profile] はこの組み込み関数を利用して実現されています。
+
+### ブロックパラメータの意味
+
+渡す Proc オブジェクトのパラメータは
+```ruby
+proc{|event, file, line, id, binding, klass| "..." }
+```
+で、意味は以下の通りです。
+
+- **`event`**:
+ 実行のタイプを表す、以下のいずれかの文字列。
+```
+  "line":      式の評価。
+  "call":      メソッドの呼び出し。
+  "return":    メソッド呼び出しからのリターン。
+  "c-call":    Cで記述されたメソッドの呼び出し。
+  "c-return":  Cで記述されたメソッド呼び出しからのリターン。
+  "class":     クラス定義、特異クラス定義、モジュール定義への突入。
+  "end":       クラス定義、特異クラス定義、モジュール定義の終了。
+  "raise":     例外の発生。
+```
+- **`file`**:
+ 実行中のプログラムのソースファイル名 (文字列)。
+
+- **`line`**:
+ 実行中のプログラムのソースファイル上の行番号 (整数)。
+
+- **`id`**:
+ event に応じ、以下のものが渡されます。
+ 第六ブロック引数の klass と対応しています。
+```
+    line
+        最後に呼び出されたメソッドを表す Symbol オブジェクト。
+        トップレベルでは nil。
+    call/return/c-call/c-return
+        呼び出された/リターンするメソッドを表す Symbol オブジェクト。
+    class/end
+        nil。
+    raise
+        最後に呼び出されたメソッドを表す Symbol オブジェクト。
+        トップレベルでは nil。
+```
+- **`binding`**:
+ 実行中のプログラムのコンテキストを表す [c:Binding] オブジェクト。
+
+- **`klass`**:
+ event に応じ、以下のものが渡されます。
+ 第四ブロック引数の id と対応しています。
+```
+    line
+        最後に呼び出されたメソッドが属するクラスを表す
+        Class オブジェクト。トップレベルでは nil。
+    call/return/c-call/c-return
+        呼び出された/リターンするメソッドが属するクラス
+        を表す Class オブジェクト。
+    class/end
+        nil。
+    raise
+        最後に呼び出されたメソッドが属するクラスを表す
+        Class オブジェクト。トップレベルでは nil。
+```
+- **param** `proc` -- トレース用 [c:Proc] オブジェクトを指定します。nil を指定した場合、トレースをオフにします。
+
+- **return** -- proc を返します。
+
+```ruby title="例"
+set_trace_func lambda {|*arg|
+  p arg
+}
+class Foo
+end
+43.to_s
+
+# ----結果----
+# ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
+# ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
+# ["c-call", "..", 4, :inherited, #<Binding:0x10cba98>, Class]
+# ["c-return", "..", 4, :inherited, #<Binding:0x10cb858>, Class]
+# ["class", "..", 4, nil, #<Binding:0x10cb600>, nil]
+# ["end", "..", 5, nil, #<Binding:0x10cb3f0>, nil]
+# ["line", "..", 6, nil, #<Binding:0x10cb1e0>, nil]
+# ["c-call", "..", 6, :to_s, #<Binding:0x10cafd0>, Fixnum]
+# ["c-return", "..", 6, :to_s, #<Binding:0x10cad78>, Fixnum]
+```
+
+- **SEE** [m:Kernel?.caller]
+
+### module_function def caller(start = 1)               -> [String] | nil
+### module_function def caller(start, length)           -> [String] | nil
+### module_function def caller(range)                   -> [String] | nil
+
+start 段上の呼び出し元の情報を [m:$@]
+の形式のバックトレース(文字列の配列)として返します。
+
+トップレベルでは空の配列を返します。caller の戻り値を [m:$@] に代入することで
+例外の発生位置を設定できます。
+
+引数で指定した値が範囲外の場合は nil を返します。
+
+- **param** `start` -- long の範囲を超えない正の整数でスタックレベルを指定します。
+- **param** `length` -- 取得するスタックの個数を指定します。
+
+- **param** `range` -- 取得したいスタックの範囲を示す [c:Range] オブジェクトを指定します。
+
+- **SEE** [m:Kernel?.set_trace_func],[m:Kernel?.raise],
+     [m:Kernel?.caller_locations]
+
+```ruby title="例"
+def foo
+  p caller(0)
+  p caller(1)
+  p caller(2)
+  p caller(3)
+  p caller(4)
+end
+
+def bar
+  foo
+end
+
+bar
+
+#@since 3.4
+#=> ["-:2:in 'foo'", "-:10:in 'bar'", "-:13:in '<main>'"]
+#   ["-:10:in 'bar'", "-:13:in '<main>'"]
+#   ["-:13:in '<main>'"]
+#@else
+#=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
+#   ["-:10:in `bar'", "-:13:in `<main>'"]
+#   ["-:13:in `<main>'"]
+#@end
+#   []
+#   nil
+```
+
+以下の関数は、caller の要素から [ファイル名, 行番号, メソッド名]
+を取り出して返します。
+
+```ruby title="例"
+def parse_caller(at)
+#@since 3.4
+  if /^(.+?):(\d+)(?::in '(.*)')?/ =~ at
+#@else
+  if /^(.+?):(\d+)(?::in `(.*)')?/ =~ at
+#@end
+    file = $1
+    line = $2.to_i
+    method = $3
+    [file, line, method]
+  end
+end
+
+def foo
+  p parse_caller(caller.first)
+end
+
+def bar
+  foo
+  p parse_caller(caller.first)
+end
+
+bar
+p parse_caller(caller.first)
+
+#=> ["-", 15, "bar"]
+#   ["-", 19, nil]
+#   nil
+```
+
+以下は、[m:$DEBUG] が真の場合に役に立つ debug 関数
+のサンプルです。
+
+```ruby title="例"
+$DEBUG = true
+
+def debug(*args)
+  p [caller.first, *args] if $DEBUG
+end
+
+debug "debug information"
+
+#=> ["-:7", "debug information"]
+```
+
+### module_function def caller_locations(start = 1, length = nil) -> [Thread::Backtrace::Location] | nil
+### module_function def caller_locations(range)                   -> [Thread::Backtrace::Location] | nil
+
+現在のフレームを [c:Thread::Backtrace::Location] の配列で返します。引
+数で指定した値が範囲外の場合は nil を返します。
+
+- **param** `start` -- 開始フレームの位置を数値で指定します。
+
+- **param** `length` -- 取得するフレームの個数を指定します。
+
+- **param** `range` --  取得したいフレームの範囲を示す [c:Range] オブジェクトを指定します。
+
+```ruby title="例"
+def test1(start, length)
+  locations = caller_locations(start, length)
+  p locations
+  p locations.map(&:lineno)
+  p locations.map(&:path)
+end
+
+def test2(start, length)
+  test1(start, length)
+end
+
+def test3(start, length)
+  test2(start, length)
+end
+
+caller_locations # => []
+test3(1, nil)
+#@since 3.4
+# => ["/Users/user/test.rb:9:in 'test2'", "/Users/user/test.rb:13:in 'test3'", "/Users/user/test.rb:17:in '<main>'"]
+#@else
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'", "/Users/user/test.rb:17:in `<main>'"]
+#@end
+# => [9, 13, 17]
+# => ["/Users/user/test.rb", "/Users/user/test.rb", "/Users/user/test.rb"]
+test3(1, 2)
+#@since 3.4
+# => ["/Users/user/test.rb:9:in 'test2'", "/Users/user/test.rb:13:in 'test3'"]
+#@else
+# => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'"]
+#@end
+# => [9, 13]
+# => ["/Users/user/test.rb", "/Users/user/test.rb"]
+test3(2, 1)
+#@since 3.4
+# => ["/Users/user/test.rb:13:in 'test3'"]
+#@else
+# => ["/Users/user/test.rb:13:in `test3'"]
+#@end
+# => [13]
+# => ["/Users/user/test.rb"]
+```
+
+- **SEE** [c:Thread::Backtrace::Location], [m:Kernel?.caller]
+
+### module_function def gets(rs = $/) -> String | nil
+
+[c:ARGF]から一行読み込んで、それを返します。
+行の区切りは引数 rs で指定した文字列になります。
+
+rs に nil を指定すると行区切りなしとみなしてファイルの内容を
+すべて読み込みます。ARGVに複数のファイル名が存在する場合は1度に1ファイルずつ読み込みます。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
+
+読み込んだ文字列は組み込み変数 [m:$_] にもセットされます。
+
+- **param** `rs` -- 行の区切りとなる文字列です。
+- **return** -- ファイルの終り(EOF)に到達した時、 nil を返します。
+- **raise** `Errno::EXXX` -- 読み込みに失敗した場合に発生します。
+
+```ruby title="main.rb"
+ARGV << 'b.txt' << 'c.txt'
+p gets #=> "hello\n"
+p gets(nil) #=> "it\ncommon\n"
+p gets("") #=> "ARGF\n\n"
+p gets('、') #=> "# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\n# みなして、"
+p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。\n"
+p gets #=> nil
+p readline # end of file reached (EOFError)
+```
+
+```ruby title="b.txt"
+hello
+it
+common
+```
+
+```ruby title="c.txt"
+ARGF
+
+# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
+# みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
+```
+
+
+- **SEE** [m:$/],[c:ARGF],[m:Kernel?.readlines],[m:Kernel?.readline]
+
+### module_function def readline(rs = $/) -> String
+
+[c:ARGF]から一行読み込んで、それを返します。
+行の区切りは引数 rs で指定した文字列になります。
+
+rs に nil を指定すると行区切りなしとみなしてファイルの内容を
+すべて読み込みます。ARGVに複数のファイル名が存在する場合は1度に1ファイルずつ読み込みます。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
+
+読み込んだ文字列は組み込み変数 [m:$_] にもセットされます。
+
+- **param** `rs` -- 行の区切りとなる文字列です。
+- **raise** `Errno::EXXX` -- 読み込みに失敗した場合に発生します。
+- **raise** `EOFError` -- readline でファイル末端(EOF)を検出すると発生します。
+
+```ruby title="例"
+# ---main.rb---
+ARGV << 'b.txt' << 'c.txt'
+p readline #=> "hello\n"
+p readline(nil) #=> "it\ncommon\n"
+p readline("") #=> "ARGF\n\n"
+p readline('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
+p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
+p readline # end of file reached (EOFError)
+# --- b.txt ---
+hello
+it
+common
+# --- c.txt ---
+ARGF
+# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と
+# みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
+```
+
+
+- **SEE** [m:$/],[c:ARGF],[m:Kernel?.readlines],[m:Kernel?.gets]
+
+### module_function def readlines(rs = $/) -> [String]
+
+[c:ARGF]を [m:Kernel?.gets](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
+行の区切りは引数 rs で指定した文字列になります。
+
+rs に nil を指定すると行区切りなしとみなします。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
+
+- **param** `rs` -- 行の区切りとなる文字列です。
+- **raise** `Errno::EXXX` -- 読み込みに失敗した場合に発生します。
+
+```ruby title="main.rb"
+ARGV << 'b.txt' << 'b.txt'
+p readlines       #=> ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
+
+ARGV << 'b.txt' << 'b.txt'
+p readlines(nil)  #=> ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
+
+ARGV << 'b.txt' << 'b.txt'
+p readlines("")   #=> ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
+
+ARGV << 'b.txt' << 'b.txt'
+p readlines('it') #=> ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
+p readlines       #=> []
+```
+
+```ruby title="b.txt"
+hello
+it
+
+common
+```
+
+- **SEE** [m:$/],[c:ARGF],[m:Kernel?.gets], [m:Kernel?.readline]
+
+### module_function def putc(ch) -> object
+
+文字 ch を 標準出力 [m:$stdout] に出力します。
+
+ch が数値なら 0 〜 255 の範囲の対応する文字を出力します。
+ch が文字列なら、その先頭1文字を出力します。
+どちらでもない場合は、ch.to_int で整数に変換を試みます。
+
+- **param** `ch` -- 出力する文字です。数または文字列で指定します。
+- **return** -- ch を返します
+- **raise** `RangeError` -- [c:Bignum] を引数にした場合に発生します。
+- **raise** `IOError` -- 標準出力が書き込み用にオープンされていなければ発生します。
+- **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
+- **raise** `TypeError` -- [c:Integer] に変換できないオブジェクトを引数に
+                 指定した場合に発生します。
+
+#@#1.9でもいまのところ同じ結果
+```ruby title="例"
+putc("ch")
+putc(?c)
+putc(99)
+putc(355)
+#=> cccc
+
+putc(99.00) #=> c
+#@since 3.4
+putc(33333333333333333333333333333333333) # bignum too big to convert into 'long' (RangeError)
+#@else
+putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
+#@end
+```
+
+- **SEE** [m:IO#putc]
+
+### module_function def p(*arg) -> object | Array
+
+引数を人間に読みやすい形に整形して改行と順番に標準出力 [m:$stdout] に出力します。主にデバッグに使用します。
+
+引数の inspect メソッドの返り値と改行を順番に出力します。つまり以下のコードと同じです。
+
+```ruby title="例"
+print arg[0].inspect, "\n", arg[1].inspect, "\n" #, ...
+```
+
+整形に用いられる[m:Object#inspect]は普通に文字列に変換すると
+区別がつかなくなるようなクラス間の差異も表現できるように工夫されています。
+
+p に引数を与えずに呼び出した場合は特に何もしません。
+
+- **param** `arg` -- 出力するオブジェクトを任意個指定します。
+#@#inspectが定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
+- **raise** `IOError` -- 標準出力が書き込み用にオープンされていなければ発生します。
+- **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
+- **return** -- 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
+
+```ruby title="例"
+puts "" #=> （空行）
+p "" #=> ""
+
+puts 50,"50"
+#=> 50
+#=> 50
+p 50,"50"
+#=> 50
+#=> "50"
+```
+
+- **SEE** [m:Object#inspect],[m:Kernel?.puts],[m:Kernel?.print]
+
+#@since 2.5.0
+#@include(functions_pp)
+#@end
+### module_function def print(*arg) -> nil
+
+引数を順に標準出力 [m:$stdout] に出力します。引数が与えられない時には変数
+[m:$_] の値を出力します。
+
+文字列以外のオブジェクトが引数として与えられた場合には、
+to_s メソッドにより文字列に変換してから出力します。
+
+変数 [m:$,] (出力フィールドセパレータ)に nil で
+ない値がセットされている時には、各引数の間にその文字列を出力します。
+変数 [m:$\\] (出力レコードセパレータ)に nil でな
+い値がセットされている時には、最後にそれを出力します。
+
+- **param** `arg` -- 出力するオブジェクトを任意個指定します。
+#@#to_s が定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
+- **raise** `IOError` -- 標準出力が書き込み用にオープンされていなければ発生します。
+- **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
+
+```ruby title="例"
+print "Hello, world!"
+print "Regexp is",/ant/
+print nil
+print "\n"
+#=> Hello, world!Regexp is(?-mix:ant)
+
+$_ = "input"
+$, = "<and>"
+$\ = "<end>\n"
+print
+print "AA","BB"
+#=> input<end>
+#=> AA<and>BB<end>
+```
+
+- **SEE** [m:Kernel?.puts],[m:Kernel?.p],[m:IO#print]
+
+### module_function def puts(*arg) -> nil
+
+引数と改行を順番に 標準出力 [m:$stdout] に出力します。
+引数がなければ改行のみを出力します。
+
+引数が配列の場合、その要素と改行を順に出力します。
+配列や文字列以外のオブジェクトが引数として与えられた場合には、
+当該オブジェクトを最初に to_ary により配列へ、
+次に to_s メソッドにより文字列へ変換を試みます。
+末尾が改行で終っている引数や配列の要素に対しては puts 自身
+は改行を出力しません。
+
+- **param** `arg` -- 出力するオブジェクトを任意個指定します。
+- **raise** `IOError` -- 標準出力が書き込み用にオープンされていなければ発生します。
+- **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
+
+```ruby title="例"
+puts "foo", "bar\n", "baz"
+puts ""    # 改行のみ出力
+puts       # 改行のみ出力
+puts nil   # 改行のみ出力
+puts ["oui", "non"]
+#=> foo
+#   bar
+#   baz
+#
+#
+#
+#   oui
+#   non
+```
+
+- **SEE** [m:Kernel?.print], [m:Kernel?.p], [m:IO#puts]
+
+#@since 3.0
+### module_function def warn(*message, uplevel: nil, category: nil) -> nil
+#@else
+#@since 2.5.0
+### module_function def warn(*message, uplevel: nil) -> nil
+#@else
+### module_function def warn(*message) -> nil
+#@end
+#@end
+
+message を 標準エラー出力 [m:$stderr] に出力します。 [m:$VERBOSE]
+フラグ が nil のときは何も出力しません。
+
+文字列以外のオブジェクトが引数として与えられた場合には、
+to_s メソッドにより文字列に変換してから出力します。
+
+#@since 2.5.0
+uplevel を指定しない場合は、
+#@end
+このメソッドは以下と同じです。
+
+```ruby
+$stderr.puts(*message) if !$VERBOSE.nil? && !message.empty?
+nil
+```
+
+- **param** `message` -- 出力するオブジェクトを任意個指定します。
+#@since 2.5.0
+- **param** `uplevel` -- いくつ前の呼び出し元のファイル名と行番号を表示するかを0以上の数値で指定します。 nil の場合は表示しません。
+#@end
+#@since 3.0
+- **param** `category` -- 警告のカテゴリを指定します。サポートされている category については [m:Warning.\[\]] を参照してください。
+#@end
+- **raise** `IOError` -- 標準エラー出力が書き込み用にオープンされていなければ発生します。
+- **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
+
+```ruby title="例"
+warn "caution!" #=> caution!
+$VERBOSE = nil
+warn "caution!" # 何もしない
+```
+
+#@since 2.5.0
+```ruby title="uplevel の例"
+def foo
+  warn("test message", uplevel: 0) # => test.rb:2: warning: test message
+  warn("test message", uplevel: 1) # => test.rb:6: warning: test message
+  warn("test message", uplevel: 2) # => test message
+end
+foo
+```
+#@end
+
+#@since 3.0
+```ruby title="category の例"
+Warning[:deprecated] = true # 非推奨の警告を表示する
+warn("deprecated!!", category: :deprecated)
+# => deprecated!
+
+Warning[:deprecated] = false # 非推奨の警告を表示しない
+warn("deprecated!!", category: :deprecated)
+# 警告は出力されない
+```
+#@end
+
+#@since 2.4.0
+- **SEE** [m:Warning#warn], [m:$stderr],[m:$VERBOSE]
+#@else
+- **SEE** [m:$stderr],[m:$VERBOSE]
+#@end
+
+### module_function def Array(arg) -> Array
+
+引数を配列([c:Array])に変換した結果を返します。
+
+arg.to_ary と arg.to_a をこの順に呼び出して、返ってきた配列を変換結果とします。
+
+arg に to_ary, to_a のいずれのメソッドも定義されていない場合は
+一要素の配列 [arg] を返します。
+
+- **param** `arg` -- 変換対象のオブジェクトです。
+- **raise** `TypeError` -- to_ary, to_a の返り値が配列でなければ発生します
+
+```ruby title="例"
+p Array({:it => 3}) #=> [[:it, 3]]
+p Array(nil) #=> []
+p Array("fefe") #=> ["fefe"]
+```
+
+- **SEE** [m:Object#to_a],[m:Object#to_ary],[c:Array]
+
+#@since 2.6.0
+### module_function def Float(arg, exception: true) -> Float | nil
+#@else
+### module_function def Float(arg) -> Float
+#@end
+
+引数を浮動小数点数([c:Float])に変換した結果を返します。
+
+引数が数値の場合は素直に変換し、文字列の場合
+は整数や浮動小数点数と見なせるもののみ変換します。
+
+メソッド Float は文字列に対し [m:String#to_f] よりも厳密な変換を行います。
+
+- **param** `arg` -- 変換対象のオブジェクトです。
+#@since 2.6.0
+- **param** `exception` -- false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
+- **raise** `ArgumentError` -- 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
+- **raise** `TypeError` -- nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
+                 to_f が浮動小数点数を返さなかった場合に発生します。
+
+```ruby title="例"
+p Float(4)            #=> 4.0
+p Float(4_000)        #=> 4000.0
+p Float(9.88)         #=> 9.88
+
+p Float(Time.gm(1986)) #=> 504921600.0
+p Float(Object.new)   # can't convert Object into Float (TypeError)
+p Float(nil)          # can't convert nil into Float (TypeError)
+
+p Float("10")         #=> 10.0
+p Float("10e2")       #=> 1000.0
+p Float("1e-2")       #=> 0.01
+p Float(".1")         #=> 0.1
+p Float("0xa")        #=> 10.0
+
+p Float("nan")        # invalid value for Float(): "nan" (ArgumentError)
+p Float("INF")        # invalid value for Float(): "INF" (ArgumentError)
+p Float("-Inf")       # invalid value for Float(): "-Inf" (ArgumentError)
+p Float(("10" * 1000)) #=> Infinity
+p Float("0xa.a")      # invalid value for Float(): "0xa.a" (ArgumentError)
+p Float(" \n10\s \t") #=> 10.0 # 先頭と末尾の空白類は無視される
+p Float("1\n0")       # invalid value for Float(): "1\n0" (ArgumentError)
+p Float("")           # invalid value for Float(): "" (ArgumentError)
+```
+
+- **SEE** [m:String#to_f],[c:Float]
+
+#@since 2.6.0
+### module_function def Integer(arg, base = 0, exception: true) -> Integer | nil
+#@else
+### module_function def Integer(arg, base = 0) -> Integer
+#@end
+
+引数を整数
+#@until 3.2
+([c:Fixnum],[c:Bignum])
+#@end
+に変換した結果を返します。
+
+引数が数値の場合は直接変換し（小数点以下切り落とし）、
+文字列の場合は、進数を表す接頭辞を含む整数表現とみなせる文字列のみ
+変換します。
+
+数値と文字列以外のオブジェクトに対しては arg.to_int, arg.to_i を
+この順に使用して変換します。
+
+- **param** `arg` -- 変換対象のオブジェクトです。
+
+- **param** `base` -- 基数として0か2から36の整数を指定します(引数argに文字列を指
+            定した場合のみ)。省略するか0を指定した場合はプリフィクスか
+            ら基数を判断します。その場合に認識できるプリフィクスは、0b
+            (2 進数)、0 (8 進数)、0o (8 進数)、0d (10 進数)、0x (16 進
+            数) です。
+
+#@since 2.6.0
+- **param** `exception` -- false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
+
+- **raise** `ArgumentError` -- 整数と見なせない文字列を引数に指定した場合に発生します。
+- **raise** `TypeError` -- メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
+  が整数([c:Integer]のサブクラス)を返さなかった場合に発生します。
+- **raise** `TypeError` -- 引数に nil を指定した場合に発生します。
+
+```ruby title="例"
+p Integer(4)          #=> 4
+p Integer(4_000)      #=> 4000
+p Integer(9.88)       #=> 9
+
+p Integer(nil)        # can't convert nil into Integer (TypeError)
+p Integer(Object.new) # cannot convert Object into Integer (TypeError)
+
+p Integer("10")       #=> 10
+p Integer("10", 2)    #=> 2
+p Integer("0d10")     #=> 10
+p Integer("010")      #=> 8
+p Integer("0o10")     #=> 8
+p Integer("0x10")     #=> 16
+p Integer("0b10")     #=> 2
+p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
+#@since 3.4
+p Integer("1\n0")     # 'Integer': invalid value for Integer: "1\n0" (ArgumentError)
+p Integer("hoge")     # 'Integer': invalid value for Integer: "hoge" (ArgumentError)
+p Integer("")         # 'Integer': invalid value for Integer: "" (ArgumentError)
+#@else
+p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
+p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
+p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
+#@end
+```
+
+- **SEE** [m:String#hex],[m:String#oct],[m:String#to_i],[c:Integer]
+
+### module_function def String(arg) -> String
+
+引数を文字列([c:String])に変換した結果を返します。
+
+arg.to_s を呼び出して文字列に変換します。
+arg が文字列の場合、何もせず arg を返します。
+
+- **param** `arg` -- 変換対象のオブジェクトです。
+- **raise** `TypeError` -- to_s の返り値が文字列でなければ発生します。
+
+```ruby title="例"
+class Foo
+ def to_s
+   "hogehoge"
+ end
+end
+
+arg = Foo.new
+p String(arg) #=> "hogehoge"
+```
+
+- **SEE** [m:Object#to_s],[c:String]
+
+### module_function def at_exit{ ... } -> Proc
+
+与えられたブロックをインタプリタ終了時に実行します。
+
+at_exitがメソッドである点を除けば、END ブロックによる終了
+処理の登録と同等です。登録した処理を取り消すことはできません。
+[d:spec/terminate]も参照してください。
+
+- **return** -- 登録した処理を [c:Proc] オブジェクトで返します。
+
+```ruby title="例"
+3.times do |i|
+  at_exit{puts "at_exit#{i}"}
+end
+END{puts "END"}
+at_exit{puts "at_exit"}
+puts "main_end"
+
+#=> main_end
+#   at_exit
+#   END
+#   at_exit2
+#   at_exit1
+#   at_exit0
+```
+
+- **SEE** [ref:d:spec/control#END],[m:Kernel?.exit!],[m:Kernel?.fork]
+
+### module_function def loop         -> Enumerator
+### module_function def loop { ... } -> object | nil
+(中断されない限り)永遠にブロックの評価を繰り返します。
+ブロックが指定されなければ、代わりに [c:Enumerator] を返します。
+
+```ruby title="例"
+loop do
+  print "Input: "
+  line = gets
+  break if !line or line =~ /^qQ/
+  # ...
+end
+```
+
+与えられたブロック内で [c:StopIteration] を [m:Kernel?.raise] すると
+#@since 2.3.0
+ループを終了して [c:Enumerator] が最後に返した値を返します。
+ループを終了させる場合、通常は break を使用してください。
+
+```ruby title="例"
+enum = Enumerator.new { |y|
+  y << "one"
+  y << "two"
+  :ok
+}
+
+result = loop {
+  puts enum.next
+} # => :ok
+```
+
+#@else
+ループを終了して nil を返します。
+ループを終了させる場合、通常は break を使用してください。
+#@end
+
+- **return** -- break の引数など、ループ脱出時の値を返します。
+
+### module_function def sleep -> Integer
+### module_function def sleep(sec) -> Integer
+
+sec 秒だけプログラムの実行を停止します。
+
+sec が省略された場合、他スレッドからの [m:Thread#run]
+などで明示的に起こさない限り永久にスリープします。Thread#runを呼ぶとその時点で
+sleepの実行が中断されます。
+
+- **param** `sec` -- 停止する秒数を非負の数値で指定します。浮動小数点数も指定できます。
+           省略された場合、永久にスリープします。
+
+- **return** -- 実際に停止していた秒数 (整数に丸められた値) です。
+
+```ruby title="例"
+it = Thread.new do
+  sleep
+  puts 'it_end'
+end
+
+re = sleep 2.11
+puts re
+it.run
+re2 = sleep 0.76
+puts re2
+#=> 2
+#   it_end
+#   1
+```
+
+### module_function def block_given? -> bool
+### module_function def iterator? -> bool
+
+メソッドにブロックが与えられていれば真を返します。
+
+このメソッドはカレントコンテキストにブロックが与えられているかを調べるので、
+メソッド内部以外で使っても単に false を返します。
+
+iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
+で block_given? を使ってください。
+
+```ruby title="例"
+def check
+  if block_given?
+    puts "Block is given."
+  else
+    puts "Block isn't given."
+  end
+end
+check{} #=> Block is given.
+check #=> Block isn't given.
+```
+
+### module_function def catch {|tag| .... } -> object
+### module_function def catch(tag) {|tag| .... } -> object
+
+[m:Kernel?.throw]との組み合わせで大域脱出を行います。 catch はブロックを実行します。
+
+ブロックの実行中に tag と同一のオブジェクトを引数とする [m:Kernel?.throw] が行われた
+場合は、その throw の第二引数を戻り値として、ブロックの実行を終了します。
+
+主にネストしたループから一気に脱出するのに使用します。
+
+引数を省略した場合、タグとなるオブジェクトが内部で生成され、ブロックパラメータ tag に
+渡されます。
+
+- **param** `tag` -- タグとなる任意のオブジェクトです。
+- **return** -- ブロックの返り値か、対応するthrowの第二引数を返り値として返します。
+
+```ruby title="例"
+result = catch do |tag|
+  for i in 1..2
+    for j in 1..2
+      for k in 1..2
+        throw tag, k
+      end
+    end
+  end
+end
+
+p result #=> 1
+```
+
+- **SEE** [m:Kernel?.throw]
+
+### module_function def throw(tag, value = nil) -> ()
+
+[m:Kernel?.catch]との組み合わせで大域脱出を行います。 throw
+は同じ tag を指定した catch のブロックの終わりまでジャンプします。
+
+throw は探索時に呼び出しスタックをさかのぼるので、
+ジャンプ先は同じメソッド内にあるとは限りません。
+もし ensure節 が存在するならジャンプ前に実行します。
+
+同じ tag で待っている catch が存在しない場合は、例外で
+スレッドが終了します。
+
+同じ tag であるとは [m:Object#object_id] が同じであるという意味です。
+
+- **param** `tag` -- catch の引数に対応する任意のオブジェクトです。
+- **param** `value` -- catch の戻り値になります。
+#@since 2.2.0
+- **raise** `UncaughtThrowError` -- 同じ tag で待っている catch が存在しない場合に発生します。
+#@else
+- **raise** `ArgumentError` -- 同じ tag で待っている catch が存在しない場合に発生します。
+#@end
+
+```ruby title="例"
+def foo
+  throw :exit, 25
+end
+
+ret = catch(:exit) do
+  begin
+    foo
+    some_process()    # 絶対に実行されない
+    10
+  ensure
+    puts "ensure"
+  end
+end
+puts ret
+#=> ensure
+#   25
+```
+
+- **SEE** [m:Kernel?.catch]
+
+### module_function def rand(max = 0) -> Integer | Float
+### module_function def rand(range) -> Integer | Float | nil
+
+擬似乱数を発生させます。
+
+最初の形式では
+max が 0 の場合は 0.0 以上 1.0 未満の実数を、正の整数の場合は 0 以上 max 未満の整数を返します。
+それ以外の値を指定した場合は max.to_int の絶対値が指定されたものとして扱います。
+
+二番目の形式では range で指定された範囲の値を返します。
+range の始端と終端が共に整数の場合は整数を、少なくとも片方が実数の場合は実数を返します。
+range に含まれる数が無い場合は nil を返します。
+
+まだ [m:Kernel?.srand] が呼ばれていなければ自動的に呼び出します。
+
+#@since 3.0
+擬似乱数生成器として [c:Random] クラスオブジェクトを使用します。
+#@else
+擬似乱数生成器として [m:Random::DEFAULT] を使用します。
+これは [m:Random.rand] と共通です。
+#@end
+
+- **param** `max` --   乱数値の上限を正の整数で指定します。
+             max 自体は乱数値の範囲に含まれません。
+             0 を指定すると実数値の乱数を返します。
+- **param** `range` -- 発生させる乱数値の範囲を [c:Range] オブジェクトで指定します。
+             range の境界は数値でなければなりません。
+
+```ruby title="例"
+srand(1234)     # 乱数の種を設定する。
+rand            #=> 0.1915194503788923
+rand            #=> 0.6221087710398319
+rand(10)        #=> 4
+rand(5.5)       #=> 0
+                # rand(5) と同じ。 5 が乱数値の範囲に含まれないことに注意。
+
+rand(1..6)      #=> 2                   (1 から 6 までの整数)
+rand(0...10)    #=> 1                   (0 から 9 までの整数。終端を含まない)
+rand(1.0..1.5)  #=> 1.1362963047752432  (1.0 以上 1.5 以下の実数)
+rand(1.0...1.5) #=> 1.1382321275715483  (1.0 以上 1.5 未満の実数)
+rand(1..0)      #=> nil
+```
+
+- **SEE** [m:Kernel?.srand], [m:Random#rand], [c:Random]
+
+### module_function def srand -> Integer
+### module_function def srand(seed) -> Integer
+
+[m:Kernel?.rand] や [m:Random.rand] で使用される擬似乱数生成器の種を設定し、古い種を返します。
+
+seed に整数を指定するとその絶対値を乱数の種に設定します。
+それ以外の値を指定した場合は seed.to_int が指定されたものとして扱います。
+seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
+
+seed が省略された時には
+現在の時刻やプロセス ID、srand を呼び出した回数、
+また可能なら /dev/urandom から読み出したデータなどを元に種を作ります。
+
+- **param** `seed` -- 乱数の種となる整数を指定します。
+            [c:Bignum] も指定可能です。
+
+```ruby title="例"
+num = 455675
+seeds = []
+
+srand(num)
+
+p rand(6) #=> 3
+p rand(6) #=> 0
+p rand(0) #=> 0.445804380918972
+p rand(0) #=> 0.422248634121701
+
+seeds << srand
+
+p rand(6) #=> 3
+p rand(6) #=> 3
+p rand(0) #=> 0.938911141393347
+p rand(0) #=> 0.915824970865251
+
+seeds << srand(num)
+
+p rand(6) #=> 3
+p rand(6) #=> 0
+p rand(0) #=> 0.445804380918972
+p rand(0) #=> 0.422248634121701
+
+seeds << srand
+
+p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
+```
+
+#@since 3.2
+- **SEE** [m:Kernel?.rand]
+#@else
+- **SEE** [m:Kernel?.rand], [m:Random::DEFAULT]
+#@end
+
+### module_function def global_variables -> [Symbol]
+
+プログラム中で定義されているグローバル変数(`$`で始まる変数)名の
+配列を返します。
+
+```ruby title="例"
+p global_variables #=> [:$;, :$-F, :$@, ... ]
+```
+
+- **SEE** [m:Kernel?.local_variables],[m:Object#instance_variables],[m:Module.constants],[m:Module#constants],[m:Module#class_variables]
+
+### module_function def local_variables -> [Symbol]
+
+現在のスコープで定義されているローカル変数名の配列を返します。
+
+```ruby title="例"
+yuyu = 0
+p local_variables #=> [:yuyu]
+```
+
+- **SEE** [m:Kernel?.global_variables],[m:Object#instance_variables],[m:Module.constants],[m:Module#constants],[m:Module#class_variables]
+
+### module_function def sub(pattern, replace)          -> String
+### module_function def sub(pattern) {|matched| ... }  -> String
+
+$_.sub とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.sub を使ってください。
+
+- **raise** `ArgumentError` -- replace を指定しなかった場合に発生します。
+
+$_.sub とこのメソッド sub は以下の点で違いがあります。
+
+  - sub は $_ の値をコピーして、コピーの方を更新し、
+    $_ に再代入します。
+
+- **param** `pattern` --    置き換える文字列のパターンを表す文字列か正規表現。
+                  文字列を指定した場合は全く同じ文字列にだけマッチする
+- **param** `replace` --    pattern で指定した文字列と置き換える文字列
+
+```ruby title="例"
+$_               # => "testtest\n"
+sub(/es/, '!!')  # => "t!!ttest\n"
+```
+
+- **SEE** [m:String#sub],[m:$_]
+
+### module_function def gsub(pattern, replace)          -> String
+### module_function def gsub(pattern) {|matched| ... }  -> String
+### module_function def gsub(pattern)                   -> Enumerator
+
+$_.gsub とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.gsub を使ってください。
+
+$_.gsub とこのメソッド gsub は以下の点で違いがあります。
+
+  - gsub は $_ の値をコピーして、コピーの方を更新し、
+    $_ に再代入します。
+
+
+- **param** `pattern` --    置き換える文字列のパターンを表す文字列か正規表現。
+                  文字列を指定した場合は全く同じ文字列にだけマッチする
+- **param** `replace` --    pattern で指定した文字列と置き換える文字列
+
+```ruby title="例"
+$_                # => "test\n"
+gsub(/es/, '!!')  # => "t!!t\n"
+```
+
+- **SEE** [m:String#gsub],[m:$_]
+
+### module_function def chop  -> String
+
+$_.chop とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chop を使ってください。
+
+$_.chopとこのメソッド chop は以下の点で違いがあります。
+
+  - chop は $_ の値をコピーして、コピーの方を更新し、
+    $_ に再代入します。
+
+```ruby title="例"
+$_ = "test\r\n"
+$_          # => "test\r\n"
+chop        # => "test"
+$_ = "test\n"
+$_          # => "test\n"
+chop        # => "test"
+$_ = "test"
+$_          # => "test"
+chop        # => "tes"
+```
+
+- **SEE** [m:String#chop],[m:$_]
+
+### module_function def chomp(rs = $/)  -> String
+
+$_.chomp とほぼ同じですが、置換が発生したときは、$_の内容を置き換える点が異なります。
+コマンドラインオプションで -p または -n を指定した時のみ定義されます。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chomp を使ってください。
+
+$_.chomp とこのメソッド chomp は以下の点で違いがあります。
+
+  - chomp は $_ の値をコピーして、コピーの方を更新し、
+    $_ に再代入します。
+
+- **param** `rs` -- 末尾から削除する改行コードを指定します。
+
+```ruby title="例: ruby -n で \"test\" を入力"
+$_            # => "test\n"
+chomp         # => "test"
+```
+
+```ruby title="例: ruby -n で \"test,\" を入力し、 rs に \",\" を指定"
+$_            # => "test\n"
+chomp         # => "test,"
+chomp(",")    # => "test"
+```
+
+- **SEE** [m:String#chomp],[m:$_],[m:$/]
+
+### module_function def trap(signal, command) -> String | Proc | nil
+### module_function def trap(signal) { ... }  -> String | Proc | nil
+
+signal で指定された割り込みにたいするハンドラとして
+command を登録します。[m:Signal?.trap]と同じです。
+
+[m:Signal?.trap]の使用を推奨します。
+
+- **param** `signal` -- [m:Signal?.trap] 参照
+- **param** `command` -- [m:Signal?.trap] 参照
+
+#@#noexample Signal.#trap を参照
+
+- **SEE** [m:Signal?.trap],[c:Signal]
+
+### module_function def trace_var(varname, hook) -> nil
+### module_function def trace_var(varname){|new_val| .... } -> nil
+### module_function def trace_var(varname, hook) -> [String|Proc]
+
+グローバル変数 varname への代入のフックを登録します。
+
+ここでの「グローバル変数」は、特殊変数
+([ref:d:spec/variables#builtin] を参照)も含めた `$` で始まる変数のこ
+とです。
+
+この呼び出し以降、varname で指定したグローバル変数に
+値が代入されるたびに hook かブロックが評価されます。hook が Proc オブジェクトの場合
+代入された値がブロック引数に渡されます。文字列の場合はRubyコードとして評価されます。
+
+trace_var がフックするのは明示的な代入だけです。
+フックは複数登録できます。
+
+フックを解除するには、hook に nil を
+指定するか、[m:Kernel?.untrace_var] を用います。
+
+hook が nil ならば、設定されていた
+hook をすべて解除してその配列を返します(ブロックで登録されていれば
+[c:Proc] オブジェクトで返されます)
+それ以外は、nil を返します。
+
+- **param** `varname` -- グローバル変数名を文字列か [c:Symbol] で指定します。
+- **param** `hook` -- フックになる文字列または [c:Proc] オブジェクトです。
+- **return** -- フックを登録した場合は nil を返します。解除した場合は解除した
+        フックを並べた配列を返します。
+
+```ruby title="例"
+trace_var(:$v){|val| puts "hook: $v=#{val.inspect}" }
+$v = 1       #=> hook: $v=1
+$v = "foo"   #=> hook: $v="foo"
+$v.upcase!
+p $v         #=> "FOO"
+```
+
+- **SEE** [m:Kernel?.untrace_var]
+
+### module_function def untrace_var(varname, hook = nil) -> [String|Proc]
+
+グローバル変数 varname に関連付けられたフックを解除します。
+
+hook が指定された場合にはそのフックだけを解除します。
+省略するか nil を与えた場合は
+varname のフックを全て解除します。
+
+- **param** `varname` -- グローバル変数名を文字列か [c:Symbol] で指定します。
+- **param** `hook` -- 文字列または [c:Proc] オブジェクトです。
+- **return** -- 解除されたフックの配列を返します。
+
+```ruby title="例"
+trace_var(:$v){|val| print "hookA.#{val.inspect},\n" }
+block = proc{|val| print "hookB.#{val.inspect}," }
+trace_var(:$v,&block)
+$v = 'str'        #=> hookB."str",hookA."str",
+
+untrace_var(:$v,block)
+$v = 'str'        #=> hookA."str",
+
+trace_var(:$v){|val| print "hookC.#{val.inspect}," }
+p untrace_var(:$v) #=> [#<Proc:0x02b68f58@..:9>, #<Proc:0x02b6978c@..:3>]
+$v = 'str'        # なにも出力されない
+```
+
+- **SEE** [m:Kernel?.trace_var]
+
+### module_function def raise -> ()
+### module_function def fail  -> ()
+### module_function def raise(message, cause: $!) -> ()
+### module_function def fail(message, cause: $!)  -> ()
+### module_function def raise(error_type, message = nil, backtrace = caller(0), cause: $!) -> ()
+### module_function def fail(error_type, message = nil, backtrace = caller(0), cause: $!)  -> ()
+
+例外を発生させます。
+発生した例外は変数 [m:$!] に格納されます。また例外が
+発生した時のスタックトレースは変数 [m:$@] に格納され
+ます。発生した例外は rescue 節で捕捉できます。
+
+引数無しの場合は、同スレッドの同じブロック内で最後に rescue された
+例外オブジェクト ([m:$!]) を再発生させます。そのような
+例外が存在しないが自身は捕捉されている時には例外 [c:RuntimeError] を発生させます。
+
+```ruby title="例"
+begin
+  open("nonexist")
+rescue
+#@since 3.4
+  raise   #=> 'open': No such file or directory - "nonexist" (Errno::ENOENT)
+#@else
+  raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
+#@end
+end
+```
+
+引数を渡した場合は、例外メッセージ message を持った error_type の示す例外(省略時 RuntimeError)を
+発生させます。
+
+error_type として例外ではないクラスやオブジェクトを指定した場合、
+そのオブジェクトの exception メソッドが返す値を発生する例外にします。
+その際、exception メソッドに引数として変数 message を渡すことができます。
+
+- **param** `error_type` -- 発生させる例外を例外クラスまたは例外クラスのインスタンスで指定します。
+- **param** `message` -- 例外のメッセージとなる文字列です。
+- **param** `backtrace` -- 例外発生時のスタックトレースで、[m:Kernel?.caller] の戻り値と同じ
+  形式で指定しなければいけません。
+- **param** `cause` -- 現在の例外([m:$!])の代わりに [m:Exception#cause] に設定する例外を指定します。
+#@since 2.6.0
+  [c:Exception] オブジェクトまたは nil を指定できます。
+#@end
+- **raise** `TypeError` -- exception メソッドが例外オブジェクトを返さなかった場合に発生します。
+
+例外の捕捉の例を示します。
+
+```ruby title="例1"
+begin
+  raise NameError,"!!error!!"
+rescue ArgumentError => err
+rescue NameError => err
+rescue TypeError => err
+ensure
+  p err #=> #<NameError: !!error!!>
+end
+```
+
+```ruby title="例2"
+def foo num
+  print 'in method.'
+  raise "error!!" if num <= 9
+rescue RuntimeError
+  num += 10
+  print 'in rescue.'
+  retry
+else
+  print 'in else.'
+ensure
+  print "in ensure.\n"
+end
+
+foo(4) #=> in method.in rescue.in method.in else.in ensure.
+```
+
+```ruby title="例3"
+class MyException
+  def exception(mesg=nil)
+    SecurityError.new(mesg)
+  end
+end
+
+begin
+  raise MyException.new
+rescue SecurityError
+  p $! #=> #<SecurityError: SecurityError>
+end
+```
+
+- **SEE** [m:Kernel?.caller]
+
+### module_function def printf(format, *arg) -> nil
+### module_function def printf(port, format, *arg) -> nil
+
+C 言語の printf と同じように、format に従い引数を文字列に変
+換して port に出力します。
+
+port を省略した場合は標準出力 [m:$stdout] に出力します。
+
+引数を 1 つも指定しなければ何もしません。
+
+Ruby における format 文字列の拡張については
+[m:Kernel?.sprintf]の項を参照してください。
+
+- **param** `port` -- 出力先になる[c:IO] のサブクラスのインスタンスです。
+- **param** `format` -- フォーマット文字列です。
+- **param** `arg` -- フォーマットされる引数です。
+- **raise** `ArgumentError` -- port を指定したのに format を省略した場合に発生します。
+- **raise** `IOError` -- port が書き込み用にオープンされていなければ発生します。
+- **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
+
+```ruby title="例"
+printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI)
+#=> calculate PI...   3.141592653589793
+
+printf("%d %04x", 123, 123)               #=> "123 007b"
+printf("%08b '%4s'", 123, 123)            #=> "01111011 ' 123'"
+printf("%1$*2$s %2$d %1$s", "hello", 8)   #=> "   hello 8 hello"
+printf("%1$*2$s %2$d", "hello", -8)       #=> "hello    -8"
+printf("%+g:% g:%-g", 1.23, 1.23, 1.23)   #=> "+1.23: 1.23:1.23"
+printf("%u", -123)                        #=> "..4294967173"
+```
+
+- **SEE** [m:Kernel?.sprintf],[m:IO#printf]
+
+### module_function def sprintf(format, *arg) -> String
+### module_function def format(format, *arg) -> String
+
+format 文字列を C 言語の sprintf と同じように解釈し、
+引数をフォーマットした文字列を返します。
+
+- **param** `format` -- フォーマット文字列です。
+- **param** `arg` -- フォーマットされる引数です。
+- **SEE** [m:Kernel?.printf],[m:Time#strftime],[m:Date.strptime]
+
+#@include(printf-format)
+
+### module_function def binding -> Binding
+
+変数・メソッドなどの環境情報を含んだ [c:Binding] オブジェクトを
+生成して返します。通常、[m:Kernel?.eval] の第二引数として使います。
+
+```ruby title="例"
+def foo
+  a = 1
+  binding
+end
+
+eval("p a", foo)  #=> 1
+```
+
+- **SEE** [m:Kernel?.eval],[m:Object::TOPLEVEL_BINDING]
+
+### module_function def eval(expr) -> object
+### module_function def eval(expr, bind, fname = "(eval)", lineno = 1) -> object
+
+文字列 expr を Ruby プログラムとして評価してその結果を返しま
+す。第2引数に
+[c:Binding] オブジェクトを与えた場合、
+そのオブジェクトを生成したコンテキストで文字列を評価します。
+
+expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval
+実行前に補足されていた変数は eval 実行後にブロック外に持ち出せます。
+
+fname と lineno が与えられた場合には、ファイル
+fname の行番号 lineno から文字列 expr が書かれているかのように
+コンパイルされます。スタックトレースの表示などを差し替えることが
+できます。
+
+bind によらずに特定のオブジェクトのコンテキストで expr を評価したい場合、
+[m:Module#module_eval], [m:BasicObject#instance_eval] が使えます。
+
+- **param** `expr` --  評価する文字列です。
+- **param** `bind` --  評価コンテキストです。
+- **param** `fname` -- スタックトレースに表示するファイル名です。
+- **param** `lineno` -- 文字列 expr が書かれていると想定する先頭の行番号を整数で指定します。
+
+```ruby title="例"
+a = nil
+eval('a = RUBY_RELEASE_DATE')
+p a #=> "2007-03-13"
+
+eval('def fuga;p 777 end')
+fuga #=> 777
+
+eval('raise RuntimeError', binding, 'XXX.rb', 4)
+#=> XXX.rb:4: RuntimeError (RuntimeError)
+#       from ..:9
+```
+
+- **SEE** [m:Kernel?.binding],[m:Module#module_eval],[m:BasicObject#instance_eval],[m:Object#method],[m:Object#send]
+
+#@#==== リフレクション
+
+### module_function def proc { ... } -> Proc
+### module_function def lambda { ... } -> Proc
+#@until 3.0
+### module_function def proc -> Proc
+#@end
+#@until 2.7
+### module_function def lambda -> Proc
+#@end
+
+与えられたブロックから手続きオブジェクト ([c:Proc] のインスタンス)
+を生成して返します。[m:Proc.new] に近い働きをします。
+
+#@until 3.0
+ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
+を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
+で呼ばれると [c:ArgumentError] 例外が発生します。
+
+ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
+を得たい場合は明示的に & 引数でうけるべきです。
+
+ブロックを指定しない lambda は Ruby 2.6 までは警告メッセージ
+「warning: tried to create Proc object without a block」
+が出力され、Ruby 2.7 では
+[c:ArgumentError] (tried to create Proc object without a block)
+が発生します。
+
+ブロックを指定しない proc は、Ruby 2.7 では
+[m:$VERBOSE] = true のときには警告メッセージ
+「warning: Capturing the given block using Proc.new is deprecated; use \`&block\` instead」
+が出力され、Ruby 3.0 では
+[c:ArgumentError] (tried to create Proc object without a block)
+が発生します。
+
+- **raise** `ArgumentError` -- スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
+#@else
+
+また、lambda に & 引数を渡すのは推奨されません。& 引数ではなくてブロック記法で記述する必要があります。
+
+& 引数を渡した lambda は Warning[:deprecated] = true のときに警告メッセージ
+「warning: lambda without a literal block is deprecated; use the proc without lambda instead」
+を出力します。
+
+- **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
+#@end
+
+#@since 3.0
+```ruby title="例"
+def foo &block
+  proc(&block)
+end
+
+it = foo{p 12}
+it.call #=> 12
+```
+#@else
+```ruby title="例"
+def foo &block
+  lambda(&block)
+end
+
+it = foo{p 12}
+it.call #=> 12
+```
+#@end
+
+- **SEE** [c:Proc],[m:Proc.new]
+
+#@include(lambda_proc)
+
+### module_function def __method__ -> Symbol | nil
+
+現在のメソッド名を返します。
+メソッドの外で呼ばれると nil を返します。
+
+```ruby title="例"
+def foo
+  p __method__
+end
+alias :bar :foo
+foo #=> :foo
+bar #=> :foo
+p __method__ #=> nil
+```
+
+現在のメソッド名が alias されたメソッドの場合でも alias 元のメソッド名
+を返します。
+
+### module_function def __callee__ -> Symbol | nil
+
+現在のメソッド名を返します。
+メソッドの外で呼ばれると nil を返します。
+
+```ruby title="例"
+def foo
+  p __callee__
+end
+alias :bar :foo
+foo # => :foo
+bar # => :bar
+p __callee__ # => nil
+```
+
+[m:Kernel?.__method__] とは異なり、現在のメソッド名が alias されたメ
+ソッドの場合には alias 先のメソッド名を返します。
+
+- **SEE** [m:Kernel?.__method__]
+
+#@since 2.6.0
+### module_function def Complex(r, i = 0, exception: true) -> Complex | nil
+### module_function def Complex(s, exception: true)        -> Complex | nil
+#@else
+### module_function def Complex(r, i = 0) -> Complex
+### module_function def Complex(s)        -> Complex
+#@end
+
+実部が r、虚部が i である [c:Complex] クラスのオブジェクトを生成します。
+
+- **param** `r` -- 生成する複素数の実部。
+
+- **param** `i` -- 生成する複素数の虚部。省略した場合は 0 です。
+
+- **param** `s` -- 生成する複素数を表す文字列。
+
+#@since 2.6.0
+- **param** `exception` -- false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
+
+- **raise** `ArgumentError` -- 変換できないオブジェクトを指定した場合に発生します。
+
+```ruby title="例"
+Complex(1)       # => (1+0i)
+Complex(1, 2)    # => (1+2i)
+Complex('1+1i')  # => (1+1i)
+Complex('1+1j')  # => (1+1i)
+# Complex.polar(10, 10) と同一。
+Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
+Complex('_')     # => ArgumentError
+```
+
+r にも i にも複素数と解釈されるオブジェクトを指定した場合には、
+Complex(a, b) を a+bi として計算した [c:Complex] オブジェクトを返しま
+す。
+
+```ruby title="例"
+Complex('1+1i', '2+3i')                          # => (-2+3i)
+Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
+```
+
+- **SEE** [m:Complex.rect]、[m:Complex.rectangular]
+
+[注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
+
+#@since 2.6.0
+### module_function def Rational(x, y = 1, exception: true) -> Rational | nil
+#@else
+### module_function def Rational(x, y = 1) -> Rational
+#@end
+
+引数を有理数([c:Rational])に変換した結果を返します。
+
+- **param** `x` -- 変換対象のオブジェクトです。
+
+- **param** `y` -- 変換対象のオブジェクトです。省略した場合は x だけを用いて
+         [c:Rational] オブジェクトを作成します。
+
+#@since 2.6.0
+- **param** `exception` -- false を指定すると、変換できなかった場合、
+                 例外を発生する代わりに nil を返します。
+#@end
+
+- **raise** `ArgumentError` -- 変換できないオブジェクトを指定した場合に発生します。
+
+引数 x、y の両方を指定した場合、x/y した [c:Rational] オブジェクトを
+返します。
+
+```ruby title="例"
+Rational("1/3")           # => (1/3)
+Rational(1, 3)            # => (1/3)
+Rational("0.1", "0.3")    # => (1/3)
+Rational(Complex(1,2), 2) # => ((1/2)+(1/1)*i)
+```
+
+ただし、1.8系とは異なり、[c:Rational] オブジェクトは常に既約(それ以上
+約分できない状態)である事に注意してください。
+
+```ruby title="例"
+Rational(2, 6)         # => (1/3)
+Rational(1, 3) * 3     # => (1/1)
+```
+
+引数に文字列を指定する場合、以下のいずれかの形式で指定します。
+
+ - "1/3" のような分数の形式
+ - "0.3" のような10進数の形式
+ - "0.3E0" のような x.xEn の形式
+ - 数字をアンダースコアで繋いだ形式
+
+"1.2/3" のように、分子を実数にする事も可能ですが、分母には指定できませ
+ん。また、[m:Kernel?.Integer] とは違い "0x10" のような進数を表す接頭
+辞を含めた指定は行えません。
+
+```ruby title="例"
+Rational("1/3")        # => (1/3)
+Rational("0.3")        # => (3/10)
+Rational('0.3E0')      # => (3/10)
+Rational('0.1E1/3')    # => (1/3)
+Rational('1.2/3')      # => (2/5)
+Rational('1/3.1')      # => ArgumentError
+Rational('3.0', '3.0') # => (1/1)
+Rational('3/3', '3/3') # => (1/1)
+Rational('1_234_567')  # => (1234567/1)
+Rational(" \n10\t ")   # => (10/1) # 空白類は無視される
+Rational("0x10")       # => ArgumentError
+```
+
+引数に変換できないオブジェクトを指定した場合には [c:ArgumentError] が
+発生します。
+
+```ruby title="例"
+Rational(Object.new)   # => ArgumentError
+Rational("")           # => ArgumentError
+Rational(nil)          # => ArgumentError
+```
+
+また、Rational('0.3') と Rational(0.3) は異なるオブジェクトを返す事に注
+意してください。前者は正確に 3/10 ですが、後者はそうではありません。
+
+```ruby title="例"
+Rational('0.3')        # => (3/10)
+Rational(0.3)          # => (5404319552844595/18014398509481984)
+```
+
+- **SEE** [c:Rational]
+
+### module_function def Hash(arg) -> Hash
+
+引数 arg で指定したオブジェクトを to_hash メソッドを呼び出す事で
+[c:Hash] オブジェクトに変換します。nil か [] を指定した場合は空の
+[c:Hash] オブジェクトを返します。
+
+- **param** `arg` -- 変換対象のオブジェクトを指定します。
+
+```ruby title="例"
+Hash([])          # => {}
+Hash(nil)         # => {}
+Hash(key: :value) # => {:key => :value}
+Hash([1, 2, 3])   # => TypeError
+```
+
+- **raise** `TypeError` -- 変換できないオブジェクトを指定した場合に発生します。
+
+### module_function def __dir__ -> String | nil
+
+現在のソースファイル(`__FILE__`)のあるディレクトリ名を正規化された絶対パ
+スで返します。シンボリックリンクも解決されます。また、`__FILE__` が nil
+の場合は nil を返します。

@@ -1,0 +1,77 @@
+---
+library: drb
+---
+# class DRb::DRbUnknown < Object
+
+リモートプロセスからマーシャリングされて送られてきたオブジェクトで、
+そのクラスがローカルプロセス内では不明であるようなものを
+表すクラス。
+
+このクラスのインスタンス内部ではマーシャリングされたバイト列を
+保持しています。DRB 経由で他のプロセスにこのオブジェクトを渡すと、
+DRbUnknown オブジェクトではなくそのマーシャリングされたデータを
+渡します。
+
+クラス名/定数名は [m:DRb::DRbUnknown#name] で取得できます。
+[m:DRb::DRbUnknown#buf] で保持しているマーシャリングされた
+バイト列を得ることができます。
+
+このクラスのインスタンスの使い道としては、オブジェクトの中継が考えられます。
+A, B, C と3つのプロセスがあって、drb によって A <-> B <-> C と通信している
+とします。ここで A と C では定義されているが B では定義されていない
+クラスがあったとしましょう。A から B にマーシャリングされて
+オブジェクトが渡されると、B ではそのクラスの素性がわからないため
+DRbUnknown オブジェクトとして表現されます。
+それを C に送ると、マーシャリングされたバイト列が C に送られ、
+C ではそれを元のオブジェクトに復元できます。
+このように、中継プロセス B では中継するオブジェクトのクラスについて
+知らなくとも正しく動作します。
+
+
+## Class Methods
+
+#@# このクラスのインスタンスは通常drb内で変換に失敗した場合に作られる
+#@# ものなので、ユーザは new を使わないはず。
+#@# --- new(err, buf)
+#@# #@todo
+#@# 
+#@# Create a new DRbUnknown object.
+#@# 
+#@# buf is a string containing a marshalled object that could not be
+#@# unmarshalled. err is the error message that was raised when the
+#@# unmarshalling failed. It is used to determine the name of the
+#@# unmarshalled object.
+
+## Instance Methods
+
+### def exception -> DRb::DRbUnknownError
+マーシャリングされたオブジェクトが元のオブジェクトに変換できなかった、
+ということを意味する例外オブジェクトを返します。
+
+この例外オブジェクトの [m:DRb::DRbUnknownError#unknown] を
+呼び出すと、 self が返されます。
+
+### def reload -> object
+保持しているマーシャリングされたオブジェクトをRubyのオブジェクトに
+変換しようと試みます。
+
+DRbUnknown オブジェクトを受け取った後に対応するクラスが定義された場合、
+このメソッドでそのクラスのオブジェクトに変換できます。
+変換を試みて失敗した場合は DRbUnknown オブジェクトを返します。
+
+### def name -> String
+保持しているマーシャリングされたオブジェクトのクラスの名前を返します。
+
+### def buf -> String
+保持しているマーシャリングされたバイト列を返します。
+
+# class DRb::DRbUnknownError < DRb::DRbError
+
+[c:DRb::DRbUnknown] をラップする例外クラスです。
+
+- **SEE** [m:DRb::DRbUnknown#exception]
+
+## Instance Methods
+
+### def unknown -> DRb::DRbUnknown
+ラップしているオブジェクトを返します。

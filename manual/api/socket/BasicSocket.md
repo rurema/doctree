@@ -1,0 +1,519 @@
+---
+library: socket
+---
+# class BasicSocket < IO
+
+ソケットを表す抽象クラスです。具体的なソケット操作はサブクラスで
+定義されます。
+
+例えばインターネットドメインストリームソケットの場合は
+[c:TCPSocket] を用います。
+
+## Class Methods
+
+### def do_not_reverse_lookup -> bool
+
+[m:Socket#do_not_reverse_lookup] の Socket オブジェクト生成時の
+デフォルト値を返します。
+
+この設定は大域的に作用します。
+
+デフォルトは true です。
+
+### def do_not_reverse_lookup=(bool)
+
+[m:BasicSocket#do_not_reverse_lookup] の値を変更します。
+
+- **param** `bool` -- この値が真ならアドレスからホスト名への逆引きを行わなくなります。
+
+例:
+
+`````
+require 'socket'
+  
+p TCPSocket.new('localhost', 'telnet').addr
+TCPSocket.do_not_reverse_lookup = true
+p TCPSocket.new('localhost', 'telnet').addr
+  
+=> ["AF_INET", 2253, "localhost", "127.0.0.1"]
+   ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
+`````
+
+### def for_fd(fd) -> BasicSocket
+
+ファイルディスクリプタ fd に対する新しいソケットを生成します。
+
+返り値のクラスはどのクラスの for_fd を呼びだしたかによって決まります。
+`````
+require 'socket'
+  
+BasicSocket.for_fd(fd) # BasicSocket のインスタンスを返す
+TCPSocket.for_fd(fd) # TCPSocket のインスタンスを返す
+`````
+
+- **param**   `fd` -- ファイルディスクリプタ を指定します。
+
+- **return** --  任意のソケットである fd から対応するソケットクラスのインスタンスを作り、それを返します。
+
+## Instance Methods
+
+### def do_not_reverse_lookup -> bool
+
+ソケットごとのアドレスからホスト名への逆引きの設定を返します。
+
+真ならアドレスからホスト名への逆引きを行いません。
+
+初期値はソケットを生成したときの
+[m:BasicSocket.do_not_reverse_lookup] の値になります。
+
+`````
+require 'socket'
+
+BasicSocket.do_not_reverse_lookup = false
+TCPSocket.open("www.ruby-lang.org", 80) {|sock|
+  p sock.do_not_reverse_lookup      # => false
+}
+BasicSocket.do_not_reverse_lookup = true
+TCPSocket.open("www.ruby-lang.org", 80) {|sock|
+  p sock.do_not_reverse_lookup      # => true
+}
+`````
+
+- **SEE** [m:BasicSocket#do_not_reverse_lookup=]
+
+### def do_not_reverse_lookup=(bool)
+アドレスからホスト名への逆引きの設定をソケットごとに設定します。
+
+- **param** `bool` -- この値が真ならアドレスからホスト名への逆引きを行わなくなります。
+- **SEE** [m:BasicSocket#do_not_reverse_lookup]
+
+### def getpeername -> String
+
+接続の相手先のソケットの情報を取得します。sockaddr 構造体をパッ
+クした文字列を返します。[man:getpeername(2)] を参照してください。
+
+例:
+
+`````
+require 'socket'
+
+serv = TCPServer.open("", 0)
+c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
+s = serv.accept
+addr = c.getpeername
+p addr      #=> "\002\000\267\214\177\000\000\001\000\000\000\000\000\000\000\000"
+p Socket.unpack_sockaddr_in(addr)   #=> [46988, "127.0.0.1"]
+p addr == s.getsockname     #=> true
+`````
+
+### def getsockname -> String
+
+ソケットの情報を取得します。sockaddr 構造体をパックした
+文字列を返します。[man:getsockname(2)] を参照してください。
+
+例:
+
+`````
+require 'socket'
+
+serv = TCPServer.open("", 0)
+p serv.getsockname        #=> "\002\000\236C\000\000\000\000\000\000\000\000\000\000\000\000"
+p Socket.unpack_sockaddr_in(serv.getsockname)     #=> [40515, "0.0.0.0"]
+c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
+s = serv.accept
+`````
+
+### def getsockopt(level, optname) -> Socket::Option
+
+ソケットのオプションを取得します。[man:getsockopt(2)]
+を参照してください。
+取得したオプションのデータを [c:Socket::Option] で返します。
+
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
+シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+
+- **param** `level` --    [man:getsockopt(2)] の 第二引数のlevel 
+- **param** `optname` --  [man:getsockopt(2)] の 第三引数のoption_name 
+- **SEE** [m:BasicSocket#setsockopt]
+
+例:
+
+`````
+require 'socket'
+
+serv = Socket.tcp_server_sockets("", 0)[0]
+c = serv.local_address.connect
+s = serv.accept
+opt = c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)
+# c.getsockopt("TCP", "NODELAY"),  なども可能
+p opt #=> #<Socket::Option: INET TCP NODELAY 0>
+p opt.bool #=> false (Nagle アルゴリズム有効)
+p opt.unpack("i")[0] #=> 0 (Socket::Option#unpack が互換性のために存在する)
+# 整数値の場合は Socket::Option#int を用いる
+p c.getsockopt(:IP, :TTL).int #=> 64
+`````
+
+### def recv(maxlen, flags = 0) -> String
+
+ソケットからデータを受け取り、文字列として返します。
+maxlen は受け取る最大の長さを指定します。
+flags については [man:recv(2)] を参照してください。flags の
+デフォルト値は 0 です。flags の指定に必要な定数は
+Socket クラスで定義されています。(例: Socket::MSG_PEEK)
+
+内部で呼び出す [man:recv(2)] が 0 を返した場合、このメソッドは "" を返します。
+この意味はソケットによって異なります。
+たとえば TCP では EOF を意味しますし、
+UDP では空のパケットを読み込んだことを意味します。
+
+- **param** `maxlen` -- 受け取る文字列の最大の長さを指定します。
+
+- **param** `flags` -- [man:recv(2)] を参照してください。
+
+- **raise** `IOError` --
+
+- **raise** `Errno::EXXX` -- [man:recvfrom(2)] がエラーになった場合などに発生します。
+
+例:
+
+`````
+require 'socket'
+
+s1, s2 = UNIXSocket.pair
+s1.write "a"
+s1.close
+p s2.recv(10, Socket::MSG_PEEK)   #=> "a"
+p s2.recv(10)                     #=> "a"
+p s2.recv(10)                     #=> ""
+`````
+
+### def recv_nonblock(maxlen, flags = 0) -> String
+
+ソケットをノンブロッキングモードに設定した後、
+[man:recvfrom(2)] でソケットからデータを受け取ります。
+
+引数、返り値は [m:BasicSocket#recv] と同じです。
+
+[man:recvfrom(2)] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
+
+- **param** `maxlen` -- 受け取る文字列の最大の長さを指定します。
+
+- **param** `flags` -- [man:recv(2)] を参照してください。
+
+- **raise** `IOError` --
+
+- **raise** `Errno::EXXX` -- [man:recvfrom(2)] がエラーになった場合などに発生します。
+
+### def send(mesg, flags, dest_sockaddr = nil) -> Integer
+
+ソケットを介してデータを送ります。flags に関しては
+[man:send(2)] を参照してください。connect していないソケット
+に対しては送り先である dest_sockaddr を指定する必要があります。実際に送っ
+たデータの長さを返します。
+
+dest_sockaddr には[ref:lib:socket#pack_string]
+を指定します。
+
+データの送信に失敗した場合は例外 [c:Errno::EXXX] が発生します。
+
+- **param** `mesg` --       送信するデータを文字列で指定します。
+
+- **param** `flags` --      [man:send(2)] の flags を参照してください。
+
+- **param** `dest_sockaddr` --  [ref:lib:socket#pack_string]を指定します。
+
+- **raise** `Errno::EXXX` -- データの送信に失敗した場合に発生します。
+
+例:
+
+`````
+require 'socket'
+
+s = UDPSocket.new
+sockaddr = Socket.sockaddr_in("discard", "localhost")
+s.send("The king has donkey ears!", 0, sockaddr)
+`````
+
+### def setsockopt(level, optname, optval) -> 0
+### def setsockopt(socketoption) -> 0
+
+ソケットのオプションを設定します。[man:setsockopt(2)]
+を参照してください。
+
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
+シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+
+optval には文字列、整数、真偽値(true or false)を渡すことができます。
+文字列の場合には [man:setsockopt(2)] にはその文字列と
+長さが渡されます。整数の場合はintへのポインタが渡されます。
+true/falseの場合は0/1という整数と解釈され、そのメモリ領域の
+intポインタを渡します。
+
+引数が1つの場合は [c:Socket::Option] で設定値を表現します。
+
+`````
+require 'socket'
+  
+# 真偽値の場合
+#setsockopt could be called like this:
+sock.setsockopt(:SOCKET, :REUSEADDR, true)
+sock.setsockopt(Socket::SOL_SOCKET,Socket::SO_REUSEADDR, true)
+sock.setsockopt(Socket::Option.bool(:INET, :SOCKET, :REUSEADDR, true))
+
+# 整数値の場合
+#setsockopt could be called like this:
+sock.setsockopt(:IP, :TTL, 255)
+sock.setsockopt(Socket::IPPROTO_IP, Socket::IP_TTL, 255)
+sock.setsockopt(Socket::Option.int(:INET, :IP, :TTL, 255))
+
+# より複雑な場合
+optval = IPAddr.new("224.0.0.251").hton +
+         IPAddr.new(Socket::INADDR_ANY, Socket::AF_INET).hton
+sock.setsockopt(Socket::IPPROTO_IP, Socket::IP_ADD_MEMBERSHIP, optval)
+`````
+
+- **param** `level` --    [man:setsockopt(2)] の level を参照してください。
+- **param** `optname` --  [man:setsockopt(2)] の option_name を参照してください。
+- **param** `optval` --   設定値
+- **param** `socketoption` -- 設定値を表す [c:Socket::Option] オブジェクト
+
+- **raise** `Errno::EXXX` --  オプションの設定に失敗した場合発生します。
+- **SEE** [m:BasicSocket#getsockopt]
+
+#@# より高レベルなものとして[[c:RAA:Sockopt]]があります
+
+### def shutdown(how = Socket::SHUT_RDWR) -> 0
+
+ソケットの以降の接続を終了させます。
+
+how の値によって以下のように接続が終了します。
+
+  - Socket::SHUT_RD: それ以降の受信が拒否されます
+  - Socket::SHUT_WR: それ以降の送信が拒否されます
+  - Socket::SHUT_RDWR: それ以降の送信、受信ともに拒否されます
+
+how を省略すると Socket::SHUT_RDWR を指定したことになります。
+[man:shutdown(2)] を参照してください。
+
+- **param** `how` -- 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, Socket::SHUT_RDWR などで指定します。
+
+- **raise** `Errno::EXXX` -- ソケットの以降の接続を終了操作が失敗した場合に発生します。
+- **raise** `ArgumentError` -- how に範囲外の整数を入力した場合に発生します。
+- **raise** `SecurityError` -- セーフレベルが 4 以上で、ソケットに汚染マークがついていない場合発生します。
+
+### def connect_address -> Addrinfo
+
+ローカルマシン内で接続するのに適当なアドレスを [c:Addrinfo]
+オブジェクトで返します。
+
+[m:BasicSocket#local_address] の返り値
+以下の点を除いては同じものを返します。
+  - IPv4 の不定アドレス(0.0.0.0) は IPv4 のループバックアドレス(127.0.0.1)
+    に置換される
+  - IPv6 の不定アドレス(::) は IPv6 のループバックアドレス(::1)
+    に置換される
+
+BasicSocket#local_address が接続先として不適なアドレスを返す場合は
+例外 [c:SocketError] が発生します。
+
+`````
+require 'socket'
+
+Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
+  p serv.connect_address #=> #<Addrinfo: 127.0.0.1:53660 TCP>
+  serv.connect_address.connect {|c|
+    s, _ = serv.accept
+    p [c, s] #=> [#<Socket:fd 4>, #<Socket:fd 6>]
+  }
+}
+`````
+
+
+- **raise** `SocketError` -- アドレスが接続に不適な場合に返します
+- **SEE** [m:BasicSocket#local_address]
+
+### def getpeereid -> [Integer, Integer]
+Unix ドメインソケットにおいて接続相手の euid と egid を
+返します。
+
+配列の最初の要素が euid, 2番目の要素が egid です。
+
+ソケットが Unix ドメインソケットでない場合の返り値は
+不定です。
+
+`````
+require 'socket'
+
+Socket.unix_server_loop("/tmp/sock") {|s|
+  begin
+    euid, egid = s.getpeereid
+      
+    # Check the connected client is myself or not.
+    next if euid != Process.uid
+      
+    # do something about my resource.
+  ensure
+    s.close
+  end
+}
+`````
+  
+
+### def local_address -> Addrinfo
+[man:getsockname(2)] で得られたローカルアドレス情報を
+[c:Addrinfo] オブジェクトとして返します。
+
+返されたオブジェクトの [m:Addrinfo#protocol] は 0 を
+返すことに注意してください。
+
+`````
+require 'socket'
+
+TCPSocket.open("www.ruby-lang.org", 80) {|s|
+  p s.local_address #=> #<Addrinfo: 192.168.0.129:36873 TCP>
+}
+  
+TCPServer.open("127.0.0.1", 1512) {|serv|
+  p serv.local_address #=> #<Addrinfo: 127.0.0.1:1512 TCP>
+}
+`````
+
+- **SEE** [m:BasicSocket#getsockname]
+
+### def recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
+
+[man:recvmsg(2)] を用いてメッセージを受け取ります。
+
+このメソッドはブロックします。ノンブロッキング方式で通信したい
+場合は [m:BasicSocket#recvmsg_nonblock] を用います。
+
+maxmesglen, maxcontrollen で受け取るメッセージおよび補助データ
+([c:Socket::AncillaryData])の最大長をバイト単位で指定します。
+省略した場合は必要なだけ内部バッファを拡大して
+データが切れないようにします。
+
+flags では Socket::MSG_* という名前の定数の biwsise OR を取った
+ものを渡します。
+
+opts にはその他のオプションを渡します。今のところ :scm_right => bool
+というオプションのみ利用できます。このオプションに
+真を渡すと、 SCM_RIGHTS 制御メッセージを受け取ったときに、メッセージに含まれる
+IO オブジェクトを生成します。詳しくは [m:Socket::AncillaryData#unix_rights]
+を参照してください。
+
+返り値は配列で得られます。
+
+返り値の配列の最初の要素は受け取ったメッセージを表す文字列です。
+
+2番目の要素は connection-less socket の場合には送り元の
+アドレスが [c:Addrinfo] オブジェクトとして含まれています。
+TCP のような connection-oriented socket の場合は
+何が含まれているかはプラットフォーム依存です。
+
+3番目の要素は受け取ったメッセージに付加されているフラグで、
+Socket::MSG_* 定数の bitwise OR で表現されています。
+
+残りの要素は補助データ([c:Socket::AncillaryData] オブジェクト)です。
+
+`````
+require 'socket'
+  
+# UnixSocket#recv_io を recvmsg で実装する例
+mesg, sender_sockaddr, rflags, *controls = sock.recvmsg(:scm_rights=>true)
+controls.each {|ancdata|
+  if ancdata.cmsg_is?(:SOCKET, :RIGHTS)
+    return ancdata.unix_rights[0]
+  end
+}
+`````
+
+- **param** `maxmesglen` -- 受け取るメッセージの最大長
+- **param** `flags` -- フラグ
+- **param** `maxcontrollen` -- 受け取る補助データの最大長
+- **param** `opts` -- ハッシュオプション
+
+### def recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
+
+[man:recvmsg(2)] を用いてノンブロッキング方式でメッセージを受け取ります。
+
+ブロッキングの有無以外は [m:BasicSocket#recvmsg] と同じです。
+詳しくはそちらを参照してください。
+
+- **param** `maxmesglen` -- 受け取るメッセージの最大長
+- **param** `flags` -- フラグ
+- **param** `maxcontrollen` -- 受け取る補助データの最大長
+- **param** `opts` -- ハッシュオプション
+
+### def remote_address -> Addrinfo
+[man:getpeername(2)] で得られたリモートアドレス情報を
+[c:Addrinfo] オブジェクトとして返します。
+
+返されたオブジェクトの [m:Addrinfo#protocol] は 0 を
+返すことに注意してください。
+
+`````
+require 'socket'
+
+TCPSocket.open("www.ruby-lang.org", 80) {|s|
+  p s.remote_address #=> #<Addrinfo: 221.186.184.68:80 TCP>
+}
+  
+TCPServer.open("127.0.0.1", 1728) {|serv|
+  c = TCPSocket.new("127.0.0.1", 1728)
+  s = serv.accept
+  p s.remote_address #=> #<Addrinfo: 127.0.0.1:36504 TCP>
+}
+`````
+
+- **SEE** [m:BasicSocket#getpeername]
+
+### def sendmsg(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
+[man:sendmsg(2)] を用いてメッセージを送ります。
+
+このメソッドはブロックします。ノンブロッキング方式で通信したい
+場合は [m:BasicSocket#sendmsg_nonblock] を用います。
+
+ソケットが connection-less の場合は dest_sockaddr で
+通信先のアドレスを指定しなければなりません。[m:Socket.sockaddr_in]
+の返り値や [c:Addrinfo] オブジェクトを引数として渡すことができます。
+
+controls には 補助データ(ancillary data)を渡します。
+[c:Socket::AncillaryData] のインスタンスや
+3要素(cmsg_level, cmsg_type, cmsg_data) の配列を用いることができます。
+
+送ったバイト数を返します。
+
+`````
+# UnixSocket#send_io の実装例
+# use Socket::AncillaryData.
+require 'socket'
+
+ancdata = Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, io.fileno)
+sock.sendmsg("a", 0, nil, ancdata)
+  
+# use 3-element array.
+ancdata = [:SOCKET, :RIGHTS, [io.fileno].pack("i!")]
+sock.sendmsg("\0", 0, nil, ancdata)
+`````
+
+
+- **param** `mesg` -- メッセージ文字列
+- **param** `flags` -- フラグ(Socket::MSG_* という定数の bitwise OR を取ったもの)
+- **param** `dest_sockaddr` -- 通信先のアドレス
+- **param** `controls` -- 補助データの配列
+- **SEE** [m:BasicSocket#sendmsg_nonblock]
+### def sendmsg_nonblock(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
+
+[man:sendmsg(2)] を用いてノンブロッキング方式でメッセージを送ります。
+
+詳しくは [m:BasicSocket#sendmsg] を見てください。
+
+- **return** -- 送ったバイト数
+- **param** `mesg` -- メッセージ文字列
+- **param** `flags` -- フラグ(Socket::MSG_* という定数の bitwise OR を取ったもの)
+- **param** `dest_sockaddr` -- 通信先のアドレス
+- **param** `controls` -- 補助データの配列
+- **SEE** [m:BasicSocket#sendmsg]

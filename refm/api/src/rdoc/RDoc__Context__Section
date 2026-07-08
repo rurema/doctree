@@ -1,5 +1,4 @@
 = class RDoc::Context::Section
-
 #@since 1.9.2
 include RDoc::Text
 #@end

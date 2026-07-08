@@ -1,0 +1,10 @@
+---
+library: rdoc/normal_class
+---
+# class RDoc::NormalClass < RDoc::ClassModule
+
+クラスを表現するためのクラスです。
+
+特異クラスや匿名クラスは含まれません。
+
+ライブラリの内部で使用します。

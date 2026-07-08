@@ -1,0 +1,14 @@
+---
+type: library
+category: Date/Time
+---
+日付をあつかうためのライブラリです。
+
+#@# この文書のオリジナル (の html 版) は、
+#@# [[url:http://www.funaba.org/date2/manual.html]],
+#@# [[url:http://www.funaba.org/en/date2/manual.html]]
+#@# です。
+
+# class Date::Error < ArgumentError
+
+不正な入力に対して発生します。

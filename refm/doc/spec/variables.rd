@@ -42,7 +42,7 @@ foobar
 するまで存在します。同じスコープを参照する手続きオブジェクト
 間ではローカル変数は共有されます。
 
-#@samplecode 
+#@samplecode
 # (A) の部分はスコープに入らない
 2.times {
   p defined?(v)    # (A)

@@ -1,0 +1,164 @@
+---
+library: drb
+---
+# class DRb::DRbServer < Object
+
+dRuby サーバクラス。
+
+dRuby サーバは
+  - リモートからのメソッド呼び出しを受け取る
+  - ローカルオブジェクトをリモートプロセスにリモートオブジェクトとして
+    渡す
+などを実現するために必要です。そのため、このような操作をする前に
+サーバを起動する必要があります。
+他のプロセスのリモートメソッドをマーシャリング可能な
+引数のみで呼び出すならばサーバは必要ありません。
+
+複数のサーバを起動することもできますが、通常は
+[m:DRb?.start_service] でサーバを起動します。
+
+
+## Class Methods
+
+### def default_acl(acl) -> ()
+
+サーバ起動時の :acl オプションのデフォルト値を指定します。
+
+初期値は nil です。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], [c:ACL]
+
+### def default_argc_limit(argc) -> ()
+サーバ起動時の :argc_limit オプションのデフォルト値を指定します。
+
+初期値は 256 です。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+
+### def default_id_conv(idconv) -> ()
+サーバ起動時の :id_conv オプションのデフォルト値を指定します。
+
+初期値は [c:DRb::DRbIdConv] のインスタンスです。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+
+### def default_load_limit(sz) -> ()
+サーバ起動時の :load_limit オプションのデフォルト値を指定します。
+
+初期値は25MBです。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+
+#@until 3.0
+### def default_safe_level(level) -> ()
+サーバ起動時の :safe_level オプションのデフォルト値を指定します。
+
+初期値は0です。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+#@end
+### def new(uri=nil, front=nil, config_or_acl=nil) -> DRb::DRbServer
+
+dRuby サーバを起動し、DRbServerのインスタンスを返します。
+
+#@include(start-service)
+
+プライマリサーバが存在しない場合は、これで起動したサーバがプライマリ
+サーバとなります。
+
+- **SEE** [m:DRb?.start_service]
+
+### def verbose -> bool
+サーバ起動時の :verbose オプションのデフォルト値を返します。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], 
+     [m:DRb::DRbServer.verbose=]
+
+### def verbose=(on)
+サーバ起動時の :verbose オプションのデフォルト値を指定します。
+
+初期値は false です。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+
+## Instance Methods
+
+### def alive? -> bool
+サーバが生存しているならば真を返します。
+
+- **SEE** [m:DRb::DRbServer#stop_service]
+
+#@# --- check_insecure_method(obj, msg_id)
+#@# #@todo
+#@# 
+#@# Check that a method is callable via dRuby.
+#@# obj is the object we want to invoke the method on. msg_id is the method name
+#@# as a Symbol.
+#@# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
+
+### def stop_service -> ()
+サーバを停止します。
+
+- **SEE** [m:DRb::DRbServer#alive?]
+
+#@# --- to_id(obj)
+#@# #@todo
+#@# 
+#@# Convert a local object to a dRuby reference. 
+#@# 
+#@# --- to_obj(ref)
+#@# #@todo
+#@# 
+#@# Convert a dRuby reference to the local object it refers to.
+
+### def verbose -> bool
+サーバが verbose mode ならば真を返します。
+
+- **SEE** [m:DRb::DRbObject#verbose=]
+
+### def verbose=(on) 
+サーバの verbose mode を真偽値で設定します。
+
+verbose mode が on の場合は失敗したメソッド呼出のログが標準出力に出力
+されます。
+
+- **param** `on` -- 真を渡すと verbose mode が on になります
+
+- **SEE** [m:DRb::DRbObject#verbose]
+
+### def config  -> Hash
+サーバの設定を返します。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+
+### def front -> object
+サーバに設定されたフロントオブジェクトを返します。
+
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
+
+#@until 3.0
+### def safe_level -> Integer
+サーバのセーフレベルを返します。
+
+#@end
+### def thread -> Thread
+サーバのメインスレッドを返します。
+
+このスレッドはクライアントからの接続を受け付けるスレッドであって、
+クライアントへの応答をするスレッドではありません。
+
+### def uri -> String|nil
+サーバに紐付けられた URI を返します。
+
+### def here?(uri) -> bool
+uri がサーバに紐付けられたものであれば真を返します。
+
+- **param** `uri` -- URI 文字列
+
+
+## Constants
+
+### const INSECURE_METHOD -> [Symbol]
+セキュアでないメソッドのリスト。
+
+これに含まれるメソッドは dRuby 経由では呼び出せません。

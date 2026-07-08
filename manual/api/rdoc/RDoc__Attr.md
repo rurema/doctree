@@ -1,0 +1,8 @@
+---
+library: rdoc/attr
+---
+# class RDoc::Attr < RDoc::CodeObject
+
+属性を表現するクラスです。
+
+ライブラリの内部で使用します。

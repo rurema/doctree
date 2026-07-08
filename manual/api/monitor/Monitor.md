@@ -1,0 +1,186 @@
+---
+library: monitor
+include:
+#@until 2.7
+  - MonitorMixin
+#@end
+---
+# class Monitor < Object
+
+スレッドの同期機構としてのモニター機能を提供するクラスです。
+また同じスレッドから何度も lock できる Mutex としての機能も提供します。
+
+[c:MonitorMixin] を include し、いくつかの別名を定義したクラスです。
+
+### 例
+
+```ruby title="消費者、生産者問題の例"
+require 'monitor'
+
+buf = []
+mon = Monitor.new
+empty_cond = mon.new_cond
+
+# consumer
+Thread.start do
+  loop do
+    mon.synchronize do
+      empty_cond.wait_while { buf.empty? }
+      print buf.shift
+    end
+  end
+end
+
+# producer
+while line = ARGF.gets
+  mon.synchronize do
+    buf.push(line)
+    empty_cond.signal
+  end
+end
+```
+
+2回ロックしてもデッドロックにならない例です。
+
+```ruby title="デッドロックにならない例"
+require 'monitor'
+mon = Monitor.new
+mon.synchronize {
+  mon.synchronize {
+  }
+}
+```
+
+[c:Thread::Mutex] ではデッドロックになります。
+
+```ruby title="Mutex でデッドロックになる例"
+mx = Mutex.new
+mx.synchronize {
+  mx.synchronize {
+  }
+}
+# => deadlock; recursive locking (ThreadError)
+```
+
+## Class Methods
+
+### def new -> Monitor
+新しい Monitor オブジェクトを生成します。
+
+## Instance Methods
+
+### def enter -> ()
+#@since 2.7.0
+### def mon_enter -> ()
+モニターをロックします。
+
+一度に一つのスレッドだけがモニターをロックできます。
+既にモニターがロックされている場合は、ロックが開放されるまで
+そのスレッドは待ちます。
+#@else
+[m:MonitorMixin#mon_enter] の別名です。
+#@end
+
+[m:Thread::Mutex#lock] に相当します。
+Thread::Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
+何度でもロックできる点です。ロックした回数だけ [m:Monitor#exit] を呼ばなければモニターは
+解放されません。
+
+```ruby title="例"
+require 'monitor'
+mon = Monitor.new
+mon.enter
+mon.enter
+```
+
+Thread::Mutex#lock ではデッドロックが起きます。
+
+```ruby title="Mutex でデッドロックする例"
+m = Mutex.new
+m.lock
+m.lock # => deadlock; recursive locking (ThreadError)
+```
+
+### def exit -> ()
+#@since 2.7.0
+### def mon_exit -> ()
+モニターのロックを解放します。
+#@else
+[m:MonitorMixin#mon_exit] の別名です。
+#@end
+
+enter でロックした回数だけ exit を呼ばなければモニターは解放されません。
+
+モニターが解放されればモニターのロック待ちになっていた
+スレッドが一つ実行を再開します。
+
+- **raise** `ThreadError` -- ロックを持っていないスレッドが呼びだした場合に発生します
+
+```ruby title="例"
+require 'monitor'
+mon = Monitor.new
+mon.enter
+mon.enter
+mon.exit
+mon.exit
+mon.exit # => current thread not owner (ThreadError)
+```
+
+### def try_enter     -> bool
+#@since 2.7.0
+### def try_mon_enter -> bool
+### def mon_try_enter -> bool
+モニターのロックを取得しようと試みます。
+ロックに成功した(ロックが開放状態だった、もしくは
+ロックを取得していたスレッドが自分自身であった)場合には
+真を返します。
+
+ロックができなかった場合は偽を返し、実行を継続します。この場合には
+スレッドはブロックしません。
+#@else
+[m:MonitorMixin#mon_try_enter] の別名です。
+#@end
+#@since 2.7.0
+### def synchronize     { ... } -> object
+### def mon_synchronize { ... } -> object
+
+モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
+
+ブロックの評価値を返り値として返します。
+
+- **SEE** [m:Monitor#enter]
+### def mon_locked? -> bool
+モニターがロックされているときに true を返します。
+### def mon_check_owner -> nil
+[c:MonitorMixin] 用の内部メソッドです。
+
+- **raise** `ThreadError` -- ロックを持っていないスレッドが呼びだした場合に発生します
+### def mon_owned? -> bool
+カレントスレッドがモニターをロックしているときに true を返します。
+#@since 3.1
+### def wait_for_cond(cond, timeout) -> bool
+#@else
+### def wait_for_cond(cond, timeout) -> true
+#@end
+[c:MonitorMixin::ConditionVariable] 用の内部メソッドです。
+
+- **param** `cond` -- [c:Thread::ConditionVariable] を指定します。
+- **param** `timeout` -- タイムアウトまでの秒数。指定しなかった場合はタイムアウトしません。
+
+#@since 3.1
+- **return** -- タイムアウトしたときは false を返します。それ以外は true を返します。
+#@else
+- **return** -- Ruby 1.9 の頃からのバグで常に true を返します。([bug:16608])
+#@end
+
+```ruby title="例"
+require 'monitor'
+m = Monitor.new
+cv = Thread::ConditionVariable.new
+m.enter
+m.wait_for_cond(cv, 1)
+```
+
+### def new_cond -> MonitorMixin::ConditionVariable
+モニターに関連付けられた、新しい [c:MonitorMixin::ConditionVariable] を生成して返します。
+#@end

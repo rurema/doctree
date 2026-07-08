@@ -1,0 +1,36 @@
+YAML 関連の定数のためのサブライブラリです。
+
+# reopen Syck
+
+## Constants
+
+### const VERSION -> String
+
+このライブラリのバージョンを文字列で返します。
+
+### const SUPPORTED_YAML_VERSIONS -> [String]
+
+サポートする YAML のバージョンを文字列の配列で返します。
+
+### const DEFAULTS -> Hash
+
+YAMLのデフォルトの設定のハッシュです。
+Ruby 1.8.3 以降では変更できません。
+
+下記のオプションがあります。
+````
+{
+ :SortKeys=>false,
+ :UseFold=>false,
+ :AnchorFormat=>"id%03d",
+ :Encoding=>:None,
+ :Indent=>2,
+ :ExplicitTypes=>false,
+ :UseHeader=>false,
+ :WidthType=>"absolute",
+ :UseVersion=>false,
+ :BestWidth=>80,
+ :Version=>"1.0",
+ :UseBlock=>false
+}
+````

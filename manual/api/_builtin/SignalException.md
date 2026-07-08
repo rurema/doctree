@@ -1,0 +1,85 @@
+---
+library: _builtin
+---
+# class SignalException < Exception
+
+捕捉していないシグナルを受け取ったときに発生します。
+
+実際に発生したシグナル名は、
+[m:Exception#message] から
+「"SIG" + シグナル名」という形で得られます。
+
+デフォルトの状態では、
+以下のシグナルが SignalException を発生させます。
+
+  - SIGALRM
+  - SIGHUP
+  - SIGINT (※ただし以下参照)
+  - SIGQUIT
+  - SIGUSR1
+  - SIGUSR2
+  - SIGTERM
+
+なお、SIGINT シグナルを受けた場合は SignalException の下位クラスである
+[c:Interrupt] が発生します。
+
+## Singleton Methods
+
+### def new(sig_number)           -> SignalException
+### def new(sig_name)             -> SignalException
+### def new(sig_number, sig_name) -> SignalException
+
+引数で指定したシグナルに関する SignalException オブジェクトを生成して返
+します。
+
+引数は [m:Signal?.list] に含まれるもののいずれかを指定する必要があり
+ます。
+
+- **param** `sig_name` -- シグナル名を [c:Symbol] オブジェクト、文字列のいずれ
+                かで指定します。
+
+- **param** `sig_number` -- シグナル番号を指定します。整数以外のオブジェクトを指
+                  定した場合は to_int メソッドによる暗黙の型変換を試み
+                  ます。
+
+```ruby title="例"
+signal_number = Signal.list["INT"]
+se = SignalException.new(signal_number) # => #<SignalException: SIGINT>
+se.signo # => 2
+```
+
+```ruby title="例"
+se = SignalException.new("INT") # => #<SignalException: SIGINT>
+se.signm # => "SIGINT"
+```
+
+- **SEE** [m:Signal?.list]
+
+## Instance Methods
+
+### def signo -> Integer
+
+self のシグナル番号を返します。
+
+```ruby title="例"
+p Signal.signame(1) # => "HUP"
+begin
+  Process.kill('HUP', Process.pid)
+  sleep
+rescue SignalException => e
+  p e.signo # => 1
+end
+```
+
+### def signm -> String
+
+self.message のエイリアスです。
+
+```ruby title="例"
+begin
+  Process.kill('HUP', Process.pid)
+  sleep
+rescue SignalException => e
+  puts e.signm  # => SIGHUP
+end
+```

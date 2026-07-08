@@ -1,0 +1,8 @@
+---
+library: _builtin
+---
+# module IO::WaitReadable
+例外が読み込み待ちで発生したことを意味します。
+
+例外オブジェクトに extend されます。詳しくは
+[m:IO#read_nonblock] を参照してください。

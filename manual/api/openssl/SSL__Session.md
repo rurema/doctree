@@ -1,0 +1,151 @@
+---
+library: openssl
+---
+# class OpenSSL::SSL::Session
+SSL/TLS セッションを表すクラスです。
+
+セッションとは、SSL/TLS のハンドシェイクで確立される
+仮想的なオブジェクトであり、安全な通信路を
+実現するために必要な、クライアント側とサーバ側で共有される
+情報の集合体です。SSL/TLS ハンドシェイクで必要な計算(特に署名の検証)
+はかなり高コストであり、以前にそのような計算を済ませたという事実を
+利用してハンドシェイクの高速化を図ることができます。
+これがセッションの再利用です。
+
+より具体的には、以下のような手順で再利用が行われます。
+  - まずは普通にクライアントとサーバでハンドシェイクを行う
+  - クライアントとサーバの両側でハンドシェイクによって共有された
+    情報をキャッシュしておく
+  - 再びクライアントから SSL/TLS のハンドシェイク開始を要求する
+    このときにクライアントはキャッシュしておいた
+    セッションのセッション ID を渡す
+  - サーバ側は渡されたセッション ID に対応するセッションキャッシュ
+    を自身が保持しているキャッシュ領域から探しだす
+  - 以降のハンドシェイクは双方でキャッシュされた情報を利用して鍵合意
+    などを行い、コネクションを確立する
+
+セッションキャッシュが利用されるかどうかは
+ハンドシェークで決まった SSL/TLS 暗号スイートに
+依存します。
+
+### クライアント側のセッションキャッシュ
+クライアント側では OpenSSL はキャッシュの保持、管理のための
+機能を提供していません。コネクション確立後に
+[m:OpenSSL::SSL::SSLSocket#session] でセッションを取り出し、
+次の [m:OpenSSL::SSL::SSLSocket#connect] によるハンドシェイク
+前に [m:OpenSSL::SSL::SSLSocket#session=] で再利用するセッションを
+設定してやることでセッションを再利用します。
+
+#@# ここにコード例を書く
+
+
+### サーバ側のセッションキャッシュ
+サーバ側では [c:OpenSSL::SSL::SSLContext] により
+セッションキャッシュの保持および管理が行われます。
+
+[m:OpenSSL::SSL::SSLContext#session_cache_mode=] で
+キャッシュの挙動を設定します。
+デフォルトで [m:OpenSSL::SSL::SSLContext::SESSION_CACHE_SERVER]
+フラグが立っているため、サーバ側のセッションキャッシュ機構は
+デフォルトで有効になっています。
+
+セッションキャッシュ機構が有効化されている場合、
+SSL/TLS ハンドシェイク終了時に [c:OpenSSL::SSL::SSLContext] 内の
+キャッシュ保持領域にキャッシュが保持されます。
+クライアント側からセッション再利用要求に対しては
+キャッシュ保持領域の探索および外部キャッシュへの問合せ
+を行い、再利用するセッションを特定します。
+キャッシュ保持領域の探索はライブラリが自動的にしますが、
+外部キャッシュの探索はアプリケーションプログラマに
+よって実装する必要があります
+([m:OpenSSL::SSL::SSLContext#session_get_cb=] で設定した
+コールバックで対応するセッションを返します)。
+
+これらの挙動は
+[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL_STORE] や
+[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL_LOOKUP] を
+[m:OpenSSL::SSL::SSLContext#session_cache_mode=]に渡すことで
+変更できます。
+
+#@# ここにコード例を書く
+
+
+## Class Methods
+### def new(obj) -> OpenSSL::SSL::Session
+新しいセッションオブジェクトを生成します。
+
+引数に [c:OpenSSL::SSL::SSLSocket] が渡された場合は、
+それに結び付けられたセッションを表すオブジェクトを返します。
+[m:OpenSSL::SSL::SSLSocket#session] と同じ動作をします。
+
+引数が文字列の場合、 PEM 形式もしくは DER 形式で保存された
+セッションデータであるとみなし、セッションオブジェクトを生成します。
+引数が [c:IO] オブジェクトである場合は、データを読みだし
+PEM 形式もしくは DER 形式とみなしてセッションオブジェクトを生成します。
+
+- **param** `obj` -- セッションオブジェクトの生成元オブジェクト
+- **raise** `OpenSSL::SSL::Session::SessionError` -- オブジェクトの生成に
+       失敗した場合に発生します
+
+## Instance Methods
+### def ==(other) -> bool
+otherと自身が同一のセッションであれば真を返します。
+
+### def time -> Time
+セッションが確立された時刻を返します。
+
+- **SEE** [m:OpenSSL::SSL::Session#time=],
+     [m:OpenSSL::SSL::Session#timeout]
+
+### def time=(t)
+セッション確立時刻を [c:Time] オブジェクトで更新します。
+
+これによってタイムアウト時刻が変更されます。
+- **param** `t` -- 更新する時刻
+- **SEE** [m:OpenSSL::SSL::Session#time],
+     [m:OpenSSL::SSL::Session#timeout]
+
+
+### def timeout -> Integer
+セッションタイムアウトの時間(秒数)を整数で返します。
+
+デフォルト値は [m:OpenSSL::SSL::SSLContext#timeout=] 
+で設定されます。
+
+- **SEE** [m:OpenSSL::SSL::Session#time],
+     [m:OpenSSL::SSL::Session#timeout=]
+
+### def timeout=(t)
+セッションタイムアウトの時間(秒数)を整数で設定します。
+
+これによってタイムアウト時刻が変更されます。
+- **param** `t` -- タイムアウト時間
+- **SEE** [m:OpenSSL::SSL::Session#time],
+     [m:OpenSSL::SSL::Session#timeout]
+
+### def id -> String
+セッション ID を返します。
+
+SSL/TLS はこのセッション ID でセッションを識別します。
+
+### def to_der -> String
+自身を DER 形式に変換します。
+
+これによってセッションキャッシュをディスク上に保持できます。
+
+- **raise** `OpenSSL::SSL::Session::SessionError` -- 変換に失敗した場合に発生します
+### def to_pem -> String
+自身を PEM 形式に変換します。
+
+これによってセッションキャッシュをディスク上に保持できます。
+
+- **raise** `OpenSSL::SSL::Session::SessionError` -- 変換に失敗した場合に発生します
+### def to_text -> String
+自身を可読な形式に変換します。
+
+- **raise** `OpenSSL::SSL::Session::SessionError` -- 変換に失敗した場合に発生します
+
+# class OpenSSL::SSL::Session::SessionError < OpenSSL::OpenSSLError
+セッション([c:OpenSSL::SSL::Session])関連のエラーが
+生じた場合に発生する例外です。
+
