@@ -1,5 +1,6 @@
 ---
 type: library
+name: rdoc/rdoc
 require:
 #@since 1.9.1
   - rdoc

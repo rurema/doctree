@@ -69,7 +69,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_indent_in_samplecode, :generate, :check_format]
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :generate, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -160,6 +160,23 @@ task check_format: [:statichtml] do
   end
   if res.size > 0
     raise res.sort.uniq.join("\n")
+  end
+end
+
+desc 'Check file names that differ only in case'
+task :check_filename_case_conflicts do
+  # 大文字小文字のみが異なるファイル名は macOS/Windows の case-insensitive な
+  # ファイルシステムでチェックアウト不能になる（manual/api/rdoc/rdoc.lib.md の
+  # ような .lib 回避と front matter の name: については bitclust の
+  # doc/markdown-samples/MARKUP_SPEC.md §1.3 を参照）
+  errors = Dir.glob('{manual,refm}/**/*')
+              .group_by(&:downcase).values
+              .select { |paths| paths.size > 1 }
+              .map { |paths| "大文字小文字のみが異なるファイル名があります: #{paths.sort.join(' / ')}" }
+
+  unless errors.empty?
+    puts errors
+    fail
   end
 end
 
