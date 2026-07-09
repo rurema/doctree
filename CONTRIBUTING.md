@@ -14,6 +14,36 @@ Ruby の安定版リリースをベースとした、
 * オンライン HTML、静的 HTML、HTML Help、EPUB3、
   ReFe データベースのすべてが用意されている
 
+## ドキュメントの編集
+
+ドキュメント本体は `manual/` 配下の Markdown ファイルです
+（2026年7月に RD ベースの独自記法 RRD から移行しました）。
+
+* `manual/api/` — 組み込みクラス・標準添付ライブラリ（例: `manual/api/_builtin/Array.md`）
+* `manual/doc/` — 言語仕様などの文書
+* `manual/capi/` — C API
+
+https://docs.ruby-lang.org/ja/ の各ページ下部の編集リンクから、
+該当する `manual/` のファイルに直接飛べます。
+
+旧 `refm/` ツリーは凍結されています。編集しても公開サイトには反映されないため、
+編集しないでください（旧バージョン向け情報の回収が終わり次第、削除予定です）。
+
+記法は GitHub Flavored Markdown ベースです。メソッドシグネチャ
+（`### def each {|item| ... } -> self`）やクロスリファレンス（`[m:Array#each]`）
+などの独自拡張の仕様は、bitclust の
+[MARKUP_SPEC.md](https://github.com/rurema/bitclust/blob/master/doc/markdown-samples/MARKUP_SPEC.md)
+を参照してください。バージョン別の記述に使う `#@since` / `#@until` などの
+プリプロセッサ指令は従来どおり使えます。
+
+ローカルでのビルド・確認:
+
+```console
+$ bundle install
+$ bundle exec rake generate:3.4    # BitClust データベース生成
+$ bundle exec rake statichtml:3.4  # 静的 HTML 生成
+```
+
 ## 各バージョンの対応方針
 
 以下の方針で対応します。

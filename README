@@ -1,5 +1,8 @@
 Rubyリファレンスマニュアル刷新計画 README
 =========================================
 
-See: https://github.com/rurema/doctree/wiki
+ドキュメント本体は manual/ 配下の Markdown ファイルです
+(2026年7月に RD ベースの独自記法 RRD から移行しました)。
+編集のしかたは CONTRIBUTING.md を参照してください。
 
+See: https://github.com/rurema/doctree/wiki
