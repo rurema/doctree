@@ -1,0 +1,1 @@
+[CONTRIBUTING.md](https://github.com/rurema/doctree/blob/master/CONTRIBUTING.md)に移動しました。
