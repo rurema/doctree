@@ -1,1 +1,0 @@
-* [people](https://github.com/orgs/rurema/people) 参照
