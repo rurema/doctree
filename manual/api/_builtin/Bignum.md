@@ -1,3 +1,7 @@
+---
+library: _builtin
+until: "2.4.0"
+---
 # class Bignum < Integer
 
 多倍長整数のクラスです。

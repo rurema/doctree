@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "2.3.0"
 ---
 # class ClosedQueueError < StopIteration
 

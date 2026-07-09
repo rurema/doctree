@@ -1,8 +1,10 @@
 ---
+type: library
 include:
   - Shell::Error
 extend:
   - Exception2MessageMapper
+until: "2.7.0"
 category: CUI
 require:
   - shell/error

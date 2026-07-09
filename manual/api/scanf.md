@@ -1,4 +1,6 @@
 ---
+type: library
+until: "2.7.0"
 category: I/O
 ---
 [m:String#scan] のフォーマット指定版といえるメソッド [m:String#scanf]

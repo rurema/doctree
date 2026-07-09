@@ -2152,10 +2152,12 @@ true を返します。
 ログインが拒否された場合や、クライアントが無反応で
 タイムアウトした場合に発生します。
 
+#@since 1.9.1
 # class Net::IMAP::FlagCountError < Net::IMAP::Error
 
 サーバからのレスポンスに含まれるフラグが多すぎるときに発生する例外です。
 
 この上限は [m:Net::IMAP.max_flag_count=] で設定します。
 
+#@end
 

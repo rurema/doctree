@@ -1,5 +1,6 @@
 ---
 type: library
+since: "1.9.0"
 category: Text
 require:
   - ripper/filter

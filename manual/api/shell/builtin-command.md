@@ -1,3 +1,7 @@
+---
+type: library
+until: "2.7.0"
+---
 [c:Shell] で使用するビルトインコマンドを定義しているライブラリです。
 
 # class Shell::BuiltInCommand < Shell::Filter
@@ -100,6 +104,7 @@
 ### def each(rs = nil){|line| ... }
 #@todo
 
+#@since 1.9.1
 
 # class Shell::Void < Shell::BuiltInCommand
 
@@ -115,3 +120,4 @@
 
 何もしません。
 
+#@end

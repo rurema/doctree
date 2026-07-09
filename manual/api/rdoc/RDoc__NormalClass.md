@@ -1,5 +1,9 @@
 ---
-library: rdoc/normal_class
+library:
+  - rdoc/normal_class
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 ---
 # class RDoc::NormalClass < RDoc::ClassModule
 

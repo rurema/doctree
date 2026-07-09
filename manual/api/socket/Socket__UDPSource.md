@@ -1,5 +1,6 @@
 ---
 library: socket
+since: "1.9.1"
 ---
 # class Socket::UDPSource
 [m:Socket.udp_server_loop] で使われるアドレス情報を保持するクラスです。

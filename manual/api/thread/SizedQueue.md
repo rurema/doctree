@@ -1,11 +1,22 @@
 ---
-library: _builtin
-alias:
-  - SizedQueue
+library:
+#@since 2.3.0
+  - _builtin
+#@end
+#@until 2.3.0
+  - thread
+#@end
 ---
+#@since 2.1.0
 # class Thread::SizedQueue < Thread::Queue
+alias SizedQueue
 
 サイズの最大値を指定できる [c:Thread::Queue] です。
+#@else
+# class SizedQueue < Queue
+
+サイズの最大値を指定できる [c:Queue] です。
+#@end
 
 ### 例
 

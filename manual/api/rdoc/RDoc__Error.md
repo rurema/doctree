@@ -1,6 +1,11 @@
 ---
 library: rdoc
+since: "1.9.1"
 ---
+#@since 1.9.1
 # class RDoc::Error < Exception
+#@else
+# class RDoc::RDocError < Exception
+#@end
 
 ドキュメントの処理中にエラーがあった場合に発生します。

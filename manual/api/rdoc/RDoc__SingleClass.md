@@ -1,5 +1,9 @@
 ---
-library: rdoc/single_class
+library:
+  - rdoc/single_class
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 ---
 # class RDoc::SingleClass < RDoc::ClassModule
 

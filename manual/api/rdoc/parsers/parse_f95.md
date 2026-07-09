@@ -164,7 +164,12 @@ contains
 end module hogehoge
 ````````
 
+#@since 1.9.1
 # class RDoc::Parser::F95 < RDoc::Parser
+#@else
+# class RDoc::Fortran95parser
+extend RDoc::ParserFactory
+#@end
 
 Fortran95 のソースコードを解析するためのクラスです。
 

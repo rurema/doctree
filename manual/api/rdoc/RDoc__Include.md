@@ -1,5 +1,9 @@
 ---
-library: rdoc/include
+library:
+  - rdoc/include
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 ---
 # class RDoc::Include < RDoc::CodeObject
 

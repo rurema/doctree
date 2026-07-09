@@ -1,5 +1,6 @@
 ---
 library: socket
+since: "1.9.2"
 ---
 # class Socket::AncillaryData
 

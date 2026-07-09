@@ -1,5 +1,6 @@
 ---
 library: net/http
+since: "2.5.0"
 ---
 # class Net::HTTPMisdirectedRequest < Net::HTTPClientError
 HTTP レスポンス 421 (Misdirected Request) を表現するクラスです。

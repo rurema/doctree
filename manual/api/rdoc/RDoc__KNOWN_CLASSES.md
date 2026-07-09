@@ -1,5 +1,9 @@
 ---
-library: rdoc/known_classes
+library:
+  - rdoc/known_classes
+#@until 1.9.1
+  - rdoc/parser/c
+#@end
 ---
 # reopen RDoc
 

@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "2.5.0"
 ---
 # class FrozenError < RuntimeError
 

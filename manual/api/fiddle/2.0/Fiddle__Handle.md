@@ -1,5 +1,6 @@
 ---
 library: fiddle
+since: "2.0.0"
 ---
 # class Fiddle::Handle < Object
 

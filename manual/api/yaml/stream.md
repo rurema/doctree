@@ -1,6 +1,10 @@
 複数の YAML ドキュメントを一度に扱うためのサブライブラリです。
 
+#@since 1.9.2
 # class Syck::Stream < Object
+#@else
+# class YAML::Stream < Object
+#@end
 
 YAML ドキュメントを複数保持できるストリームクラスです。
 

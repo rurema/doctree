@@ -1,6 +1,9 @@
 ---
+library: minitest/unit
 include:
   - MiniTest::Assertions
+since: "1.9.1"
+until: "2.2.0"
 ---
 # class MiniTest::Unit::TestCase
 

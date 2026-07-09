@@ -1,3 +1,8 @@
+---
+library: minitest/unit
+since: "1.9.1"
+until: "2.2.0"
+---
 # class MiniTest::Unit
 
 ユニットテストで使用する様々なメソッドを定義しているクラスです。

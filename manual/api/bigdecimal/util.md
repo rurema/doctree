@@ -113,6 +113,7 @@ p Rational(1, 3).to_d(10) # => 0.3333333333e0
 
 - **return** -- [c:BigDecimal] に変換したオブジェクト
 
+#@since 2.6.0
 
 # reopen NilClass
 
@@ -130,3 +131,4 @@ require "bigdecimal/util"
 
 p nil.to_d  # => 0.0
 ```
+#@end

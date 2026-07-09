@@ -951,11 +951,14 @@ FTP の応答コード 5yz
 サーバの応答が FTP のプロトコルに沿っていない場合に
 発生する例外のクラスです。
 
+#@since 1.9.2
 # class Net::FTPConnectionError < Net::FTPError
 コネクションを確立する前に通信しようとした場合に
 発生する例外のクラスです。
 
+#@end
 
+#@since 2.3.0
 # class Net::FTP::MLSxEntry
 
 [m:Net::FTP#mlsd]、[m:Net::FTP#mlst] の結果を保持する
@@ -1156,3 +1159,4 @@ STOU, STOR  などのコマンド([m:Net::FTP#putbinaryfile] など)
 
 ファイルに書き込めるなら true を返します。
 
+#@end

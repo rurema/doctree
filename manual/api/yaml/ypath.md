@@ -1,7 +1,11 @@
 YAML ドキュメントから特定のデータを検索する機能を提供するサブライブラリ
 です。
 
+#@since 1.9.2
 # class Syck::YPath
+#@else
+# class YAML::YPath
+#@end
 
 YAML ドキュメントから特定のデータを検索する機能を提供するクラスです。
 

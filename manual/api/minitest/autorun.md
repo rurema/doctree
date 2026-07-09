@@ -1,5 +1,6 @@
 ---
 type: library
+since: "1.9.1"
 require:
   - minitest/unit
 ---

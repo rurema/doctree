@@ -790,6 +790,7 @@ p Errno::EWOULDBLOCK::Errno       # => 11
 
 システムコールのエラーコードを表す例外クラスです。詳細は [c:Errno::EXXX] を参照してください。
 
+#@since 2.2.0
 # class Errno::EHWPOISON < SystemCallError
 
 システムコールのエラーコードを表す例外クラスです。詳細は [c:Errno::EXXX] を参照してください。
@@ -802,3 +803,4 @@ p Errno::EWOULDBLOCK::Errno       # => 11
 
 システムコールのエラーコードを表す例外クラスです。詳細は [c:Errno::EXXX] を参照してください。
 
+#@end

@@ -1,6 +1,7 @@
 ---
 type: library
 require:
+#@since 1.9.1
   - rubygems/defaults
   - rubygems/exceptions
   - rubygems/version
@@ -10,9 +11,13 @@ require:
   - rubygems/source_index
   - rubygems/platform
   - rubygems/builder
+#@end
 sublibrary:
+#@since 1.9.1
   - rubygems/gem_runner
+#@end
 ---
+#@since 1.9.1
 RubyGems を扱うためのクラスやモジュールが定義されているライブラリです。
 
 #@# _builtin/ 以下に移動する予定だったが形式が違いすぎるため保留
@@ -452,3 +457,4 @@ prelude.c で定義されている内部用の定数です。
 
 prelude.c で定義されている内部用の定数です。
 
+#@end

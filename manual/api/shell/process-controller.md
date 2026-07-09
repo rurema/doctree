@@ -1,3 +1,7 @@
+---
+type: library
+until: "2.7.0"
+---
 プロセスを制御するためのクラスを定義したライブラリです。
 
 # class Shell::ProcessController < Object

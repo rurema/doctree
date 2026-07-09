@@ -1,3 +1,7 @@
+---
+library: _builtin
+until: "2.4.0"
+---
 # class Fixnum < Integer
 
 [c:Bignum] 同様、整数のクラスです。

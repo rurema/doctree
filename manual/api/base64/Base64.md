@@ -1,6 +1,8 @@
 ---
 library: base64
 ---
+#@since 1.9.1
+
 # module Base64
 
 Base64 エンコード / デコードするためのメソッドを定義したモジュールです。
@@ -98,6 +100,82 @@ p Base64.urlsafe_encode64('hoge', padding: false)
 # => "aG9nZQ"
 ```
 
+#@else
+# module Base64
+
+Base64 エンコード / デコードするためのメソッドを定義したモジュールです。
+
+## Module Functions
+
+### module_function def decode64(str) -> String
+
+Base64エンコードされた文字列strをデコードします。
+
+- **param** `str` -- デコードしたい文字列です。
+
+### module_function def encode64(str) -> String
+
+文字列strをBase64エンコードします。
+
+- **param** `str` -- エンコードしたい文字列です。
+
+### module_function def decode_b(str) -> String
+
+[RFC:2047] で定義されている encoded-word を含む
+文字列 str をデコードします。
+
+encoded-word は、
+
+`````
+"=?" + charset + "?" + encoding + "?" + encoded-text + "?="
+`````
+
+という形式の文字列で、メールヘッダに使用されます。
+
+この関数は charset として "iso-2022-jp" と "shift_jis" を、
+encoding として "B" encoding (Base64) だけをサポートしています。
+
+バグ:
+
+実際は、内部で [m:Kconv?.toeuc] を呼んでいるため、 [lib:kconv] が内
+部的に利用する [lib:nkf] ライブラリが勝手にデコードを行ってしまいます。
+したがって、この関数はあまり意味がなくなってしまっています(昔の Kconv
+の実装は NKF を使用しなかったためこのようなことになっているのだと思われ
+ます)。
+
+- **param** `str` -- デコードしたい文字列です。
+
+### module_function def b64encode(bin, len = 60) -> ()
+
+文字列 bin をエンコードし、len の長さで折り返し、表示します。
+
+表示までしてしまうのはサンプルだからです。
+
+# reopen Kernel
+
+## Module Functions
+
+### module_function def decode64(str) -> String
+
+[m:Base64?.decode64] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
+
+### module_function def encode64(str) -> String
+
+[m:Base64?.encode64] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
+
+### module_function def decode_b(str) -> String
+
+[m:Base64?.decode_b] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
+
+### module_function def b64encode(bin, len = 60) -> ()
+
+[m:Base64?.b64encode] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
+
+#@end
 
 #@if (version <= "1.8.1")
 # reopen Kernel

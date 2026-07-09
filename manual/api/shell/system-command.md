@@ -1,3 +1,7 @@
+---
+type: library
+until: "2.7.0"
+---
 # class Shell::SystemCommand < Shell::Filter
 
 ## Singleton Methods
