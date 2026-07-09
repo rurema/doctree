@@ -5,4 +5,5 @@ Rubyリファレンスマニュアル刷新計画 README
 (2026年7月に RD ベースの独自記法 RRD から移行しました)。
 編集のしかたは CONTRIBUTING.md を参照してください。
 
-See: https://github.com/rurema/doctree/wiki
+執筆ガイド・参加方法などのプロジェクト文書は docs/ にあります
+(旧 GitHub wiki は docs/ へ移行しました)。
