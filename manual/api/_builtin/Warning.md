@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "2.4.0"
 ---
 # module Warning
 

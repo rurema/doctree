@@ -1,5 +1,6 @@
 ---
 library: win32ole
+since: "1.9.1"
 ---
 # class WIN32OLE_TYPELIB < Object
 

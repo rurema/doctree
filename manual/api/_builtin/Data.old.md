@@ -1,3 +1,7 @@
+---
+library: _builtin
+until: "2.7.0"
+---
 # class Data < Object
 
 このクラスは Ruby 3.0 で削除されました。

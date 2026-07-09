@@ -1,9 +1,18 @@
 ---
-library: _builtin
-alias:
-  - ConditionVariable
+library:
+#@since 2.3.0
+  - _builtin
+#@end
+#@until 2.3.0
+  - thread
+#@end
 ---
+#@since 2.1.0
 # class Thread::ConditionVariable < Object
+alias ConditionVariable
+#@else
+# class ConditionVariable < Object
+#@end
 
 スレッドの同期機構の一つである状態変数を実現するクラスです。
 

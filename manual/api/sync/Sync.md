@@ -1,8 +1,10 @@
 ---
+library: sync
 include:
   - Sync_m
 alias:
   - Synchronizer
+until: "2.7.0"
 ---
 # class Sync
 

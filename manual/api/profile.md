@@ -1,6 +1,8 @@
-#@until 2.7.0
-category Development
-
+---
+type: library
+until: "2.7.0"
+category: Development
+---
 Ruby プログラムのためのプロファイラです。
 プロファイラとは効率改善のための調査に用いられるツールのことです。
 profile ライブラリは各メソッドの実行時間に関する統計を出力します。
@@ -52,4 +54,3 @@ $ ruby -r profile sample/sieve.rb 1000
   5. 1回の呼び出し当たりの平均正味時間(ミリ秒)
   6. 1回の呼び出し当たりの平均全体時間(ミリ秒)
   7. メソッド名
-#@end

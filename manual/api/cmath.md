@@ -1,8 +1,13 @@
 ---
+type: library
 include:
   - Math
+until: "2.7.0"
+#@since 1.9.1
 category: Math
+#@end
 ---
+#@since 1.9.1
 複素数演算をサポートするライブラリです。
 
 # module CMath
@@ -589,3 +594,4 @@ z の逆双曲線正接関数の値を返します。
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
 #@end
 
+#@end

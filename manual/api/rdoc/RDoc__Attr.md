@@ -1,5 +1,9 @@
 ---
-library: rdoc/attr
+library:
+  - rdoc/attr
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 ---
 # class RDoc::Attr < RDoc::CodeObject
 

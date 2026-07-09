@@ -1,3 +1,8 @@
+---
+type: library
+since: "1.9.1"
+until: "2.5.0"
+---
 [lib:rubygems] を [m:Kernel?.require] するだけのライブラリです。
 
 コマンドラインから使用すると以下のようにできます。

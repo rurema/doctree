@@ -1,18 +1,28 @@
 ---
 type: library
-alias:
-#@until 2.2.0
-  - Config
-#@end
 category: Development
 ---
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 
+#@since 1.9.1
 # module RbConfig
+#@until 2.2.0
+alias Config
+#@end
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 RbConfig モジュールを定義します。
 
+#@else
+# module Config
+alias RbConfig
+
+Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
+Config モジュールを定義します。
+
+RbConfig モジュールを Config と同じものとして定義します。
+
+#@end
 
 ## Singleton Methods
 

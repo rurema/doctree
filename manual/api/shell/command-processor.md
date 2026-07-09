@@ -1,4 +1,6 @@
 ---
+type: library
+until: "2.7.0"
 require:
   - shell/error
   - shell/filter

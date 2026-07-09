@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "2.2.0"
 ---
 # class UncaughtThrowError < ArgumentError
 

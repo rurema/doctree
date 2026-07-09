@@ -1,5 +1,6 @@
 ---
 library: socket
+since: "2.1.0"
 ---
 # class Socket::Ifaddr < Data
 

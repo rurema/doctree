@@ -1,4 +1,6 @@
 ---
+type: library
+until: "2.5.0"
 require:
   - mathn
 ---

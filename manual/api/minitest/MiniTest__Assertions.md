@@ -1,3 +1,8 @@
+---
+library: minitest/unit
+since: "1.9.1"
+until: "2.2.0"
+---
 # module MiniTest::Assertions
 
 各種 assert メソッドを提供します。

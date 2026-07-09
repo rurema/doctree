@@ -1,6 +1,8 @@
 ---
+type: library
 include:
   - Enumerable
+until: "2.7.0"
 ---
 [c:Shell::Filter] を定義しているライブラリです。
 

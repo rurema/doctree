@@ -1,5 +1,11 @@
 ---
-library: rdoc
+library:
+#@since 1.9.1
+  - rdoc
+#@end
+#@until 1.9.1
+  - rdoc/rdoc
+#@end
 ---
 # module RDoc
 

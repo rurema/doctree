@@ -385,7 +385,11 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 このライブラリで発生する例外の基底クラスです。
 
+#@until 1.9.1
+# class GetoptLong::AmbigousOption < GetoptLong::Error
+#@else
 # class GetoptLong::AmbiguousOption < GetoptLong::Error
+#@end
 与えられたオプションは名前の後方が省略されていると思われるが、一意に決まらない
 場合に発生する例外です。
 

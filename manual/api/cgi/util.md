@@ -1,11 +1,13 @@
 ---
 type: library
 ---
+#@since 1.9.1
 CGI で利用するユーティリティメソッドを定義したライブラリです。
 
 # reopen CGI
 
 ## Class Methods
+#@end
 ### def escape(string) -> String
 
 与えられた文字列を URL エンコードした文字列を新しく作成し返します。

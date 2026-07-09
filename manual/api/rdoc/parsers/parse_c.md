@@ -100,7 +100,13 @@ rb_define_method(....);  // in ファイル名
  */
 `````
 
+#@since 1.9.1
 # class RDoc::Parser::C < RDoc::Parser
+#@else
+
+# class RDoc::C_Parser
+extend RDoc::ParserFactory
+#@end
 
 C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 トを解析するためのクラスです。

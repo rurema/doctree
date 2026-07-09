@@ -1,5 +1,6 @@
 ---
 library: socket
+since: "1.9.1"
 ---
 # class Addrinfo
 ソケットのアドレス情報を保持するクラスです。

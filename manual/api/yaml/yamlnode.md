@@ -1,6 +1,4 @@
 ---
-include:
-  - Syck::BaseNode
 require:
 #@since 1.9.2
   - syck/basenode
@@ -10,7 +8,13 @@ require:
 ---
 YAML のノードを表現するためのサブライブラリです。
 
+#@since 1.9.2
 # class Syck::YamlNode
+include Syck::BaseNode
+#@else
+# class YAML::YamlNode
+include YAML::BaseNode
+#@end
 
 YAML のノードを表現するためのクラスです。
 

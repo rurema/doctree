@@ -1,6 +1,10 @@
 タグ URI とクラスを関連付けるためのサブライブラリです。
 
+#@since 1.9.2
 # reopen Syck
+#@else
+# reopen YAML
+#@end
 
 ## Class Methods
 

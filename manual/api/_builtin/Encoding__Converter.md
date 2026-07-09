@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "1.9.1"
 ---
 # class Encoding::Converter
 文字エンコーディング(文字符号化方式)の変換器のクラスです。既存の変換器より一段細かな処理が可能となります。

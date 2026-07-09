@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "1.9.1"
 ---
 # class FiberError < StandardError
 Fiber に関するエラーが起きると発生します。

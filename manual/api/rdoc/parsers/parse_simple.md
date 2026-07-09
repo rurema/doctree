@@ -10,7 +10,11 @@ require:
 ファイルの内容すべてを 1 つの大きなコメントとして処理します。ただし、ファ
 イルの先頭が # で始まっていた場合、先頭行は削除されます。
 
+#@since 1.9.1
 # class RDoc::Parser::Simple < RDoc::Parser
+#@else
+# class RDoc::SimpleParser
+#@end
 
 ソースコード以外のファイルを解析するためのクラスです。
 

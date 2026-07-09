@@ -1,4 +1,6 @@
 ---
+type: library
+until: "2.5.0"
 category: Math
 require:
   - matrix
@@ -76,6 +78,7 @@ Math.sqrt(-1)     #=> Complex(0,1)
 クラス [c:Prime] はRuby 1.8までは [lib:mathn] で定義されていました。
 現在はライブラリ [lib:prime] に移動しています。互換性のため mathn を読み込むと自動的に prime も [m:Kernel?.require] されます。
 
+#@since 2.4.0
 # redefine Integer
 
 ## Instance Methods
@@ -93,6 +96,25 @@ require 'mathn'
 10 / 3 # => (10/3)
 `````
 
+#@else
+# redefine Fixnum
+
+## Instance Methods
+
+### def /(other)
+#@todo
+
+Fixnum#quo と同じ働きをします(有理数または整数を返します)。
+
+# redefine Bignum
+
+## Instance Methods
+
+### def /(other)
+#@todo
+
+Bignum#quo と同じ働きをします(有理数または整数を返します)。
+#@end
 
 # redefine Rational
 

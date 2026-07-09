@@ -1,5 +1,9 @@
 ---
-library: rdoc/constant
+library:
+  - rdoc/constant
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 ---
 # class RDoc::Constant < RDoc::CodeObject
 

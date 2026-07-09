@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "1.9.1"
 ---
 # module GC::Profiler
 

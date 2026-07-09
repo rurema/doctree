@@ -1,3 +1,7 @@
+---
+library: scanf
+until: "2.7.0"
+---
 # class Scanf::FormatString < Object
 
 ## Singleton Methods

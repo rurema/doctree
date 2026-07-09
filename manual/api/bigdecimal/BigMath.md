@@ -1,5 +1,6 @@
 ---
 library: bigdecimal
+since: "1.9.3"
 ---
 # module BigMath
 

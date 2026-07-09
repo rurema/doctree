@@ -1,3 +1,7 @@
+---
+library: base64
+until: "1.9.1"
+---
 # module Base64::Deprecated
 
 後方互換性を維持する目的で、 [c:Base64] モジュールに定義された各種の

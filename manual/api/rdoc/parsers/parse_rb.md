@@ -87,19 +87,42 @@ def regular_method() end
 `````
 #@end
 
+#@since 1.9.1
 # module RDoc::RubyToken
+#@else
+# module RubyToken
+#@end
 
 ライブラリの内部で使用します。
 
+#@since 1.9.1
 # class RDoc::RubyLex
+#@else
+# class RubyLex
+#@end
 
 ライブラリの内部で使用します。
 
+#@until 1.9.1
+# reopen RDoc
+
+## Constants
+
+#@include(../RDoc__constants)
+#@end
+
+#@since 1.9.1
 # class RDoc::Parser::Ruby < RDoc::Parser
 include RDoc::RubyToken
 include RDoc::TokenStream
 #@since 1.9.2
 include RDoc::Parser::RubyTools
+#@end
+#@else
+# class RDoc::RubyParser
+extend RDoc::ParserFactory
+include RubyToken
+include TokenStream
 #@end
 
 Ruby のソースコードを解析するためのクラスです。

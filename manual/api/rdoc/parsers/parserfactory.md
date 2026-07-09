@@ -93,11 +93,24 @@ end
 
 #@end
 
+#@since 1.9.1
 # class RDoc::Parser
 
 ソースコードを解析するパーサを生成するための基本クラスです。
 
 新しいパーサを作成する場合には継承して使用します。
+#@else
+# module RDoc::ParserFactory
+
+ソースコードを解析するパーサを生成するためのファクトリクラスです。
+
+新しいパーサを作成する場合には extend して使用します。
+
+[注意] 1.9 系では、require 先やクラス名が以下のように変更になりました。
+
+ - require 先: rdoc/parser
+ - クラス名: RDoc::Parser
+#@end
 
 ## class Methods
 

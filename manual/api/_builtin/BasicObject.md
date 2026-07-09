@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "1.9.1"
 ---
 # class BasicObject
 特殊な用途のために意図的にほとんど何も定義されていないクラスです。

@@ -8,7 +8,11 @@ require:
 ---
 YAML のノードを検索するためのサブライブラリです。
 
+#@since 1.9.2
 # module Syck::BaseNode
+#@else
+# module YAML::BaseNode
+#@end
 
 YAML のノードを検索するのためのモジュールです。
 

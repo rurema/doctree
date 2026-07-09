@@ -1,5 +1,9 @@
 ---
-library: rdoc/class_module
+library:
+  - rdoc/class_module
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 ---
 # class RDoc::ClassModule < RDoc::Context
 

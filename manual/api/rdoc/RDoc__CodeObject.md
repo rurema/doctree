@@ -1,5 +1,9 @@
 ---
-library: rdoc/code_object
+library:
+  - rdoc/code_object
+#@until 1.9.2
+  - rdoc/code_objects
+#@end
 include:
 #@since 1.9.2
   - RDoc::Text

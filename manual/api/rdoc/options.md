@@ -13,7 +13,12 @@ require:
 ---
 rdoc コマンドのオプションを解析するためのサブライブラリです。
 
+#@since 1.9.1
 # class RDoc::Options
+#@else
+# class Options
+include Singleton
+#@end
 
 rdoc コマンドのオプションを解析するためのクラスです。
 

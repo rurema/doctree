@@ -1,5 +1,6 @@
 ---
 library: open-uri
+since: "2.5.0"
 ---
 # reopen URI
 

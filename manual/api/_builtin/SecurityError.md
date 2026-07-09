@@ -1,7 +1,11 @@
 ---
 library: _builtin
 ---
+#@since 1.9.1
 # class SecurityError < Exception
+#@else
+# class SecurityError < StandardError
+#@end
 
 セキュリティ上の問題が起きたときに発生します。
 

@@ -1,9 +1,18 @@
 ---
-library: _builtin
-alias:
-  - Queue
+library:
+#@since 2.3.0
+  - _builtin
+#@end
+#@until 2.3.0
+  - thread
+#@end
 ---
+#@since 2.1.0
 # class Thread::Queue < Object
+alias Queue
+#@else
+# class Queue < Object
+#@end
 
 Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 レッドが空のキューを読み出そうとすると停止します。キューになんら

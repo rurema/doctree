@@ -1,9 +1,16 @@
 ---
-library: _builtin
-alias:
-  - Mutex
+library:
+  - _builtin
+#@until 1.9.1
+  - thread
+#@end
 ---
+#@since 2.3.0
 # class Thread::Mutex < Object
+alias Mutex
+#@else
+# class Mutex < Object
+#@end
 
 Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アクセスから保護する
 ためにあります。Mutex の典型的な使い方は(m を Mutex オブジェクトとします):

@@ -1,5 +1,6 @@
 ---
 library: _builtin
+since: "2.6.0"
 ---
 # class Enumerator::ArithmeticSequence < Enumerator
 
