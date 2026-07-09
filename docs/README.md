@@ -26,6 +26,7 @@
 - [GitRepository](GitRepository.md) — Git リポジトリについて
 - [HowToRelease](HowToRelease.md) — リリース手順（gem）
 - [ReleasedProducts](ReleasedProducts.md) — リリースされたもの
+- [OldVersionArchives](OldVersionArchives.md) — 旧バージョンのドキュメントの復元ガイド
 - [ThirdPartyTools](ThirdPartyTools.md) — 外部の活用事例
 - [License](License.md) — ライセンス
 - [archive/](archive/) — 歴史的記録（凍結）
