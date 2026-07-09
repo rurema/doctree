@@ -192,7 +192,7 @@ ArgumentError, TypeError などは param で引数の条件がちゃんと書い
 [m:Kernel#puts]
 ```
 
-は間違いです。正しくは以下です（モジュール関数は `?` を使います）。
+は間違いです。正しくは以下です（モジュール関数は `?.` を使います）。
 
 ```markdown
 [m:Kernel?.puts]

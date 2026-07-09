@@ -19,7 +19,7 @@
 
 * Git と GitHub アカウント
 * Ruby — サンプルコードの検証やローカルビルドに使います。
-  リポジトリの `mise.toml` が指定するバージョンで十分です
+  最近の安定版が1つあれば十分です（複数バージョンを揃える必要はありません）
 
 ドキュメント処理系の [BitClust](https://github.com/rurema/bitclust) は、
 doctree で `bundle install` すれば入ります。

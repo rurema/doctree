@@ -2,10 +2,15 @@
 
 るりまに関するコミュニケーション、情報共有をする場についてまとめます。
 
+## ruby-jp Slack
+
+[ruby-jp Slack](https://ruby-jp.github.io/) の **#rurema チャンネル**が、
+現在のメインのチャットの場です。雑な相談、Issue にするまでもない質問などはこちらへ。
+
 ## GitHub
 
-議論・相談は基本的に [rurema/doctree](https://github.com/rurema/doctree) の
-Issue / Pull Request で行います。
+議論・相談は [rurema/doctree](https://github.com/rurema/doctree) の
+Issue / Pull Request でも行います。
 ルール、ガイドラインなど内容の固まったものは、この `docs/` ディレクトリに集約します
 （旧 GitHub wiki は 2026年7月に `docs/` へ移行しました）。
 
@@ -23,4 +28,5 @@ https://rurema.esa.io/
 
 https://gitter.im/rurema-dev/Lobby
 
-* 雑な相談をする場。Issue にするまでもない質問など
+* 過去にチャットの場として使われていました。ルームは残っていますが、
+  現在はほとんど使われていません（上記の ruby-jp Slack を使ってください）

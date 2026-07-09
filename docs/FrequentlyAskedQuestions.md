@@ -34,14 +34,14 @@
 ソースコードの、autoload が書いてある場所に require が書いてあるものと
 考えてください。[[ruby-reference-manual:253](http://www.fdiary.net/ml/ruby-reference-manual/msg/253)]
 
-### 「.#」や「?」ってなに?
+### 「.#」や「?.」ってなに?
 
 [[ruby-reference-manual:143](http://www.fdiary.net/ml/ruby-reference-manual/msg/143)]
 
 モジュール関数（クラスメソッドとしてもインスタンスメソッドとしても呼べるメソッド）を
 表す記号です。旧記法（RRD）では「.#」を使って「CLASSNAME.#METHODNAME」と表記して
-いましたが、Markdown 記法では RBS の `self?` に由来する「?」を使って
-`CLASSNAME?.METHODNAME` と表記します。
+いましたが、Markdown 記法では「?.」を使って `CLASSNAME?.METHODNAME` と表記します
+（`?` は RBS の `self?` に由来します）。
 また、BitClust だとモジュール関数は c.singleton_methods と
 c.instance_methods の両方に出てくるので、ri との diff を取ると
 BitClust のほうがエントリがすげー多く見えたりします。
@@ -50,7 +50,7 @@ BitClust のほうがエントリがすげー多く見えたりします。
 
 [[ruby-reference-manual:409](http://www.fdiary.net/ml/ruby-reference-manual/msg/409)]
 
-どちらでもなく「?」を使って下さい。
+どちらでもなく「?.」を使って下さい。
 
 例:
 
