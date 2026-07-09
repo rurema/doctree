@@ -1,6 +1,14 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'refm/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'refm/**'
 
 jobs:
   ruby-versions:
@@ -103,4 +111,4 @@ jobs:
       run: 'curl -L https://git.io/misspell | bash'
     - name: Run misspell
       run: |
-        git ls-files -z | xargs -0 ./bin/misspell -error -i addopt
+        git ls-files -z -- ':(top)' ':(exclude)refm' ':(exclude)docs' | xargs -0 ./bin/misspell -error -i addopt
