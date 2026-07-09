@@ -1,42 +1,43 @@
+# チュートリアル
+
 私もリファレンスを書いてみたいわ！という方のためのチュートリアルです。このエントリは定期的に見直されるべきです。
 
-[[HowToContribute]] も見てください。
+[CONTRIBUTING.md](../CONTRIBUTING.md) も見てください。
 
 ## 1. 前提知識
 
-リファレンスの元になるデータは、doctree/の中に入っているテキストファイルです。ディレクトリ構成は以下のようになっています。
+リファレンスの元になるデータは、doctree/ の中に入っている Markdown ファイルです。ディレクトリ構成は以下のようになっています。
 
 * doctree/
-  * refm/
+  * manual/
     * api/
-      * src/
-        * ここに標準添付ライブラリのリファレンスが含まれます。
-        * _builtin/
-          * 組み込みライブラリのリファレンスが含まれます。
+      * 標準添付ライブラリのリファレンスが含まれます（ライブラリ名のディレクトリ・ファイル）。
+      * _builtin/
+        * 組み込みライブラリのリファレンスが含まれます。
     * capi/
-      * Rubyの拡張ライブラリ用のC APIのリファレンスが含まれます。
+      * Ruby の拡張ライブラリ用の C API のリファレンスが含まれます。
     * doc/
-      * トップページや「Ruby言語仕様」など、その他のリファレンスが含まれます。優先順位は低めです。
-    * old/
-      * 旧リファレンスマニュアルの雑多なコンテンツのコピーです。Webからは見られません。
-  * faq/
-    * 旧リファレンスマニュアルの、Ruby FAQのデータのコピーです。いまのところ、Webからは見られません。
+      * トップページや「Ruby言語仕様」など、その他のリファレンスが含まれます。
+  * refm/
+    * 旧記法（RRD）時代のソースです。2026年7月に凍結されました。**編集しないでください**。
 
-リファレンスはRDに似た書式で書かれています。テキストファイルなので、中身を見れば、なんとなく書き方が分かると思います。正確な書式については[[ReferenceManualFormatDigest]]を参照してください。
+リファレンスは GitHub Flavored Markdown ベースの書式で書かれています。テキストファイルなので、中身を見れば、なんとなく書き方が分かると思います。正確な書式については [ReferenceManualFormatDigest](ReferenceManualFormatDigest.md) を参照してください。
+
+なお、[docs.ruby-lang.org](https://docs.ruby-lang.org/ja/) の各ページ下部の編集リンクから、そのページに対応する `manual/` のファイルへ直接飛べます。
 
 さて、では実際にリファレンスを編集してみましょう。
 
-## 2. GitHubでforkする
+## 2. GitHub で fork する
 
-まだGitHubのアカウントを持っていない方は、[GitHub](https://github.com)から登録をしてください。
+まだ GitHub のアカウントを持っていない方は、[GitHub](https://github.com) から登録をしてください。
 
-自分のアカウントでログインしましたら、以下のページにアクセスし、Forkボタンをクリックしてください。
+自分のアカウントでログインしましたら、以下のページにアクセスし、Fork ボタンをクリックしてください。
 
 https://github.com/rurema/doctree
 
 "自分のアカウント名/doctree" というリポジトリが作られたことを確認してください。
 
-## 3. リポジトリを作業ディレクトリへとcloneする
+## 3. リポジトリを作業ディレクトリへと clone する
 
 以下のコマンドを実行し、現在の開発環境にリポジトリをコピーしてください。
 
@@ -45,35 +46,29 @@ $ git clone https://github.com/自分のアカウント名/doctree.git rubydoc
 $ cd ./rubydoc
 ```
 
-ディレクトリ名は、ここではrubydocとしましたが、好きな名前を付けて構いません。
+ディレクトリ名は、ここでは rubydoc としましたが、好きな名前を付けて構いません。
+指定しなければ doctree というディレクトリ名でコピーされます。
 
-またディレクトリ名を指定しなくても構いません。その場合、doctreeというディレクトリ名でリポジトリがコピーされます。
-
-なお、この時以下のようにしておくとrurema/doctreeからの修正を取り込みやすいですが、必須ではありません。
+なお、この時以下のようにしておくと rurema/doctree からの修正を取り込みやすいですが、必須ではありません。
 
 ```
 $ git remote add upstream https://github.com/rurema/doctree.git
-$ git remote -v
-origin  git@github.com:自分のアカウント名/doctree.git (fetch)
-origin  git@github.com:自分のアカウント名/doctree.git (push)
-upstream        https://github.com/rurema/doctree.git (fetch)
-upstream        https://github.com/rurema/doctree.git (push)
 ```
 
 ## 4. トピックブランチを作る
 
-以下のコマンドを実行し、今回のPull Request用の一時的なブランチを作成します。
+以下のコマンドを実行し、今回の Pull Request 用の一時的なブランチを作成します。
 
 ```
-$ git checkout -b ブランチ名
-Switched to a new branch 'ブランチ名'
+$ git switch -c ブランチ名
 ```
 
-ブランチ名には、Pull Requestの内容を表すものにすると良いと思います。
+ブランチ名には、Pull Request の内容を表すものにすると良いと思います。
 
 ## 5. リファレンスを編集する
 
-リファレンスの体裁は、[[リファレンスマニュアルの書式まとめ|ReferenceManualFormatDigest]]を参考にしてください。
+`manual/` 配下の `.md` ファイルを編集します。
+リファレンスの体裁は、[リファレンスマニュアルの書式まとめ](ReferenceManualFormatDigest.md) を参考にしてください。
 
 以下のコマンドを実行することで、編集内容の確認ができます。
 
@@ -81,73 +76,50 @@ Switched to a new branch 'ブランチ名'
 $ git diff
 ```
 
+ファイルは Markdown なので、エディタのプレビューや GitHub 上の表示でも
+おおまかな見た目を確認できます（リンクの解決などは後述のビルドが必要です）。
+
 ## 6. 編集内容をプレビューする
 
-[BitClust](https://github.com/rurema/doctree/wiki/BitClust) は Ruby リファレンスマニュアルの核となるプログラムです。 ドキュメントデータベースからウェブインターフェイス、 執筆支援ツールまで、いろいろ入ってます。
-BitClust は Gem パッケージがリリースされています。
+ドキュメントの処理には [BitClust](https://github.com/rurema/bitclust) を使います。
+doctree リポジトリで `bundle install` すれば入ります。
 
 ```
-$ gem install refe2
+$ bundle install
 ```
 
-インストール後、セットアップコマンドを実行してください。
+typo の修正のような日本語の修正程度であれば以下を行わずとも pull request を送っていただいて問題ありません。
+[ReferenceManualFormatDigest](ReferenceManualFormatDigest.md) にあるような書式も修正の対象となる場合はプレビューで確認後に pull request を送っていただけるとありがたいです。
+
+もし、環境が整えられなくて困っている場合は上記は諦めて issue/pull request のどちらかを「動作確認がまだ」である事を明記して発行していただければ問題ありません。
+
+まず、対象バージョン（例: 3.4）のデータベースを生成します。数分かかることがあります。
 
 ```
-$ bitclust setup
-``` 
-
-BitClustは、一つのリファレンスファイルから各バージョンごとのリファレンスを自動生成する仕組みになっています。
-6.1か6.2のどちらかの方法でプレビューしてください。
-
-typoの修正のような日本語の修正程度であれば以下のどちらも行わずともpull requestを送っていただいて問題ありません。
-[[ReferenceManualFormatDigest]] にあるような書式も修正の対象となる場合はどちらかの方法で確認後にpull requestを送っていただけるとありがたいです。
-
-もし、環境が整えられなくて困っている場合は上記は諦めてissue/pull requestのどちらかを「動作確認がまだ」である事を明記して発行していただいければ問題ありません。
-
-### 6.1 単一ファイル
-
-`bitclust htmlfile` コマンドで編集したファイルをhtmlファイルとして出力できます。
-
-例えば、Ruby 2.5.0 レファレンスマニュアル、Array クラス pop メソッドをファイル名 Array\_pop.html として/tmp ディレクトリに出力する場合は以下のコマンドとなります。
-
-```
-$ bitclust htmlfile ./refm/api/src/_builtin/Array --target=Array#pop --ruby=2.5.0 > /tmp/Array_pop.html
+$ bundle exec rake generate:3.4
 ```
 
-出力されたhtmlファイルをお使いのブラウザーで確認してみてください。
-zsh なら以下のようにすれば、一時ファイルを作成しません。
+データベースは `/tmp/db-3.4` に作られます。
+
+### 6.1 静的 HTML で確認する場合
 
 ```
-$ firefox =(bitclust htmlfile doctree/refm/api/src/_builtin/Array --target=Array#pop --ruby=2.5.0)
+$ bundle exec rake statichtml:3.4
 ```
 
-### 6.2 全体をプレビューする場合
+`/tmp/html/3.4/` 以下に HTML が生成されるので、ブラウザで開いて確認します。
 
-以下のコマンドでデータベースのディレクトリを作ります。
+### 6.2 サーバを起動して確認する場合
 
-```
-$ bitclust -d ./db-2.5.0 init version=2.5.0 encoding=UTF-8
-```
-
-次に、以下のコマンドでデータベースを更新します。C API以外の全てのデータベースを作成します。これには数分かかることがあります。
+DB の生成後、以下のコマンドでサーバを起動し、 `http://localhost:30080/` にアクセスして確認してください。
 
 ```
-$ bitclust -d ./db-2.5.0 update --stdlibtree=refm/api/src
-```
-
-「singleton object class not implemented yet」と警告が2行程出力されますが無視して問題ありません。
-
-データベースのディレクトリ名は、ここではdb-2.5.0/としましたが、好きな名前を付けて構いません。
-
-2.3.0や2.4.0など、Rubyの他のバージョンのリファレンスをプレビューしたい場合は、versionを変えて上記の手順を繰り返して下さい。
-
-DBの更新後は以下のコマンドでサーバを起動し、 `http://localhost:30080/` にアクセスして確認してください。
-
-```
-$ bitclust server --database=db-2.5.0 --baseurl=""  --port=30080 --debug
+$ bundle exec bitclust server --database=/tmp/db-3.4 --baseurl="" --port=30080 --debug
 ```
 
 動作確認後は Ctrl+C でサーバを終了します。
+
+なお、編集をデータベースに反映するには `rake generate:3.4` を再実行してください。
 
 ## 7. commit する
 
@@ -156,61 +128,35 @@ $ bitclust server --database=db-2.5.0 --baseurl=""  --port=30080 --debug
 例えば、組み込みライブラリ Array のリファレンスを編集後に commit する場合は以下のコマンドとなります。
 
 ```
-$ git add ./refm/api/src/_builtin/Array
+$ git add ./manual/api/_builtin/Array.md
 $ git commit
 ```
 
 commit のコマンド入力後、ログメッセージを記述してください。
-
 ログメッセージは、以下の形式で書くと良いと思います。
 
-一行目 ： 編集内容の要約
-
-二行目 ： 空行（改行します）
-
-三行目以下 ： 編集の具体的内容、理由など
+* 一行目 ： 編集内容の要約
+* 二行目 ： 空行
+* 三行目以下 ： 編集の具体的内容、理由など
 
 ## 8. pull request を送る
 
-以下のコマンドを実行し、編集を加えたブランチを自分のリポジトリに作成してください。
-
-コマンド実行後、user name と password の入力を求められるので、順に入力してください。
-
-ただし、GitHub に SSH Key の登録をしている方は、 user name と password の入力を求められません。 詳しくは、[Generating SSH Keys（英文）](https://help.github.com/articles/generating-ssh-keys)を参照ください。
+以下のコマンドを実行し、編集を加えたブランチを自分のリポジトリに push してください。
 
 ```
 $ git push origin ブランチ名
-Username for 'https://github.com': 自分のアカウント名
-Password for 'https://自分のアカウント名@github.com':　パスワード
-```
-push が成功しましたら、以下のページにアクセスしてください。
-
-```
-https://github.com/自分のアカウント名/doctree
 ```
 
-ページ上で、ブランチを master から編集を加えたブランチへと変更し、Compare & view　より変更を確認してください。 編集内容に問題ないようであれば、pull request ボタンをクリックしてください。
+push が成功しましたら、`https://github.com/自分のアカウント名/doctree` にアクセスしてください。
+push したブランチについて「Compare & pull request」ボタンが表示されるので、
+変更内容を確認して pull request を作成すれば、作業完了です。
 
-次に表示されるページにて、Send pull request ボタンをクリックすれば、作業完了です。
-
-編集を続けて行う場合、以下のコマンドを実行し、ブランチをmasterへと変更してください。
-
-```
-$ git checkout master
-Switched to branch 'master'
-```
-
-「3. リポジトリを作業ディレクトリへとcloneする」の最後の設定がしてある時に以下のコマンドを実行する事でrurema/doctreeの修正を取り込みます。
+編集を続けて行う場合は master に戻り、
+「3.」で upstream を設定してある場合は以下のコマンドで rurema/doctree の修正を取り込みます。
 
 ```
-$ git branch
-(以下のようにmasterを見ている事)
-* master
-
-$ git status
-(修正がない事)
-
-$ git fetch upstream && git merge upstream/master
+$ git switch master
+$ git pull upstream master
 ```
 
 「4. トピックブランチを作る」に戻り、編集を再開してください。
