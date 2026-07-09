@@ -1,66 +1,36 @@
-プロジェクトに参加するには
+# プロジェクトに参加するには
 
 ## 参加資格
 
 参加するために必要な資格はとくにありません。
 強いて言うなら、日本語が普通に使えるほうが助かります。
 
-なお、リファレンスマニュアル刷新計画は
-日本 Ruby の会の活動の一貫として実施されていますが、
-日本 Ruby の会会員でなくともこの計画には参加できます。
-
 ## 参加方法
 
-ruby-reference-manual メーリングリストに参加した時点で
-このプロジェクトに参加したとみなします。
-メーリングリストへの参加方法は [[MailingList]] のページを見てください。
+特別な手続きはありません。GitHub で Issue や Pull Request を送った時点で、
+あなたはもう参加しています。
+
+かつては ruby-reference-manual メーリングリストへの参加をもってプロジェクト参加と
+していましたが、ML は消滅しました（[archive/MailingList.md](archive/MailingList.md)）。
+現在のやりとりは GitHub 上で行っています
+（[Communication-and-knowledge-sharing](Communication-and-knowledge-sharing.md) も参照）。
 
 ## 必要なもの
 
- * Git
-   * 本格的にるりまを書くのに必要
- * Subversion
-   * Rubyの最新版を取得するのに必要だが、Gitで代用可能
- * 開発中の Ruby 本体をビルドできる環境
- * 1.8.x の最新バージョンの Ruby 本体
- * 1.9.x の最新バージョンの Ruby 本体
- * 2.x.y の最新バージョンの Ruby 本体
- * patch level に関しては最大のものを用意するのが望ましい
+* Git と GitHub アカウント
+* Ruby — サンプルコードの検証やローカルビルドに使います。
+  最近の安定版が1つあれば十分です（複数バージョンを揃える必要はありません）
 
-複数のバージョンの ruby をインストールする方法は [[HowToInstallRubys]] を参照して下さい。
+ドキュメント処理系の [BitClust](https://github.com/rurema/bitclust) は、
+doctree で `bundle install` すれば入ります。
 
-## 参加した後の手続き
+## 作業のはじめかた
 
-プロジェクトに参加したら、
-各自必要な手続きを済ませてください。
-以下に手続きとその必要度を示します。
-Git レポジトリについては [[GitRepository]] を参照してください。
-
- * BitClust のチェックアウト
-   * Gem で BitClust を入れれば不要
- * ドキュメントのチェックアウト
-   * まともに活動するなら必須
- * GitHub アカウント
-   * まともに活動するなら必須
- * Gitter の[rurema/Lobby](https://gitter.im/rurema-dev/Lobby)
-   * チャット。Issueを立てるまでもない相談など
-
-## 作業をはじめる
-
-以下のようにして作業を始めます。
-
-1. [[Phase3WorkingScheme]] を読んで手順を覚える。
-1. [[ClassReferenceManualFormat]], [[HowToWriteMethodEntry]] を読んでマニュアルのフォーマットを覚える。
-1. [[BitClust]] を読んでツールの使い方を覚える。
-1. 自分が担当する箇所を ASSIGN ファイル(rubydoc/refm/api/ASSIGN)に書き込んで ASSIGN ファイルをコミットする。
-1. マニュアルを書く。
-1. コミットする。
+1. [CONTRIBUTING.md](../CONTRIBUTING.md) で編集場所（`manual/`）とビルド方法を確認する
+2. [Tutorial](Tutorial.md) に沿って最初の Pull Request を作ってみる
+3. 書式は [ReferenceManualFormatDigest](ReferenceManualFormatDigest.md) を手元に置いて確認する
 
 ## 辞め方
 
 ボランティアベースなのですから、辞めたくなったらいつでも気軽に辞めてください。
-ただし以下を守ってください。
-
- * 黙って辞めない
- * 未完成の場合には ASSIGN ファイルから自分の名前を消す
- * ML でその旨報告する
+作業途中の Issue や Pull Request があれば、一言残しておいてもらえると助かります。

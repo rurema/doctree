@@ -1,34 +1,21 @@
-るりまプロジェクトの Git レポジトリについて
-===========================================
+# るりまプロジェクトの Git レポジトリ
 
-  * [rurema/doctree](https://github.com/rurema/doctree)
-  * [rurema/bitclust](https://github.com/rurema/bitclust)
+* [rurema/doctree](https://github.com/rurema/doctree) — ドキュメント本体
+* [rurema/bitclust](https://github.com/rurema/bitclust) — ドキュメント処理システム
 
 ## コミット
 
-push 権限のない人は Pull Request をしてください。詳しくは [[HowToContribute]] を参照してください。
+push 権限のない人は Pull Request をしてください。詳しくは
+[CONTRIBUTING.md](../CONTRIBUTING.md) を参照してください。
 直接 push する権限が欲しい人は、やる気をアピールしてください。
 
-## コミットメール
+## コミットの通知
 
-レポジトリにコミットがあるたびに、その差分をメールで受信できます。
-このコミットメールを受け取りたい人は、
-ruby-reference-manual-diff ML に参加してください。
-
-ruby-reference-manual-diff ML も QuickML で運営されているので、
-以下のアドレスにメールを送ると参加できます。
-
-```
-To: ruby-reference-manual-diff ＠ ml.fdiary.net
-Cc: null ＠ jp.rubyist.net
-```
-
-※ 「 ＠ 」は空白を削って「＠」を半角の「@」にしてください。
-
-また、null ＠ jp.rubyist.net は ML 登録専用のアドレスで、 誰もメールを受信しません。
-
-※2012/07/24 現在、上記のアドレスにメールを送信するとエラーメールが返ってくる事があります(原因は調査中です)。 お手数ですがその場合は時間を置いて再度送付をお願いします。
+かつてはコミットメールを ruby-reference-manual-diff ML で配信していましたが、
+QuickML の消滅とともに終了しました。現在は GitHub の Watch 機能で
+リポジトリの更新通知を受け取れます。
 
 ## ITS 連携
 
-コミットログにIssueの番号などを書くと対応するIssueに対して参照を残したり、close したりできます。
+コミットログに Issue の番号などを書くと対応する Issue に対して参照を残したり、
+close したりできます。

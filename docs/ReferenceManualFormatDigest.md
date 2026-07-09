@@ -1,357 +1,269 @@
+# リファレンスマニュアルの書式まとめ
 
-リファレンスマニュアルの書式のまとめです。より詳しくは、
+リファレンスマニュアルの書式のまとめです。
+2026年7月に、RD ベースの独自記法（RRD）から **GitHub Flavored Markdown（GFM）ベースの記法**に移行しました。
+ソースは doctree の `manual/` 配下の `.md` ファイルです。
 
-* [[ClassReferenceManualFormat]]
-* [[HowToWriteMethodEntry]]
-* [[FrequentlyAskedQuestions]]
+より詳しくは、以下を参照してください。
 
-を参照してください。
+* [MARKUP_SPEC.md](https://github.com/rurema/bitclust/blob/master/doc/markdown-samples/MARKUP_SPEC.md) — 記法の正式仕様（この文書はその要約です）
+* [ClassReferenceManualFormat](ClassReferenceManualFormat.md) — ファイル全体の構造
+* [HowToWriteMethodEntry](HowToWriteMethodEntry.md) — メソッドエントリの書き方
+* [FrequentlyAskedQuestions](FrequentlyAskedQuestions.md)
 
 ## 文章の書き方
-基本的にはRDベースです。段落は空行で区切り、段落内の改行は取り除かれます。
 
-### ソースコード
+GitHub Flavored Markdown がベースです。段落は空行で区切り、段落内の改行は取り除かれます。
 
-以下のようにプリプロセッサマクロを使用してください。
+GFM に対する独自拡張は次の3つだけです。
 
-メソッドのサンプルコードは以下のように書きます。
+1. クロスリファレンス: `[m:Array#each]` のようなリンク記法
+2. メソッドシグネチャ: `### def method(args) -> Type` の `def`/`const`/`gvar` キーワード
+3. プリプロセッサ指令: `#@since` / `#@until` など（旧記法から変更なし）
 
-```
-#@samplecode 例
+### サンプルコード
+
+Ruby のサンプルコードは fenced code block で書きます。
+
+````markdown
+```ruby
 puts "Hello, World!"
-#@end
 ```
+````
 
-例をより詳しく説明したラベルを付けたいときは以下のように書いてください。
+ラベルを付けたいときは `title="..."` を使います（旧 `#@samplecode ラベル` に相当）。
 
+````markdown
+```ruby title="例"
+puts "Hello, World!"
 ```
-#@samplecode 例の説明
-puts "説明が必要な例"
-#@end
-```
+````
 
-地の文で説明が書かれているときなど、ラベルが不要なときはラベルを省略することができます。
+サンプルコードの書き方の方針は [SampleCodeGuideline](SampleCodeGuideline.md) を参照してください。
 
-```
-#@samplecode
-puts "No label"
-#@end
-```
+### 整形済みテキスト（Ruby コード以外）
 
-より詳しい例は、[Stringのソース](https://github.com/rurema/doctree/blob/master/refm/api/src/_builtin/String)を見てください。
-
-### 整形済みテキスト
-
-行頭に空白を入れる。
-
-ただし特殊な事情で空白を入れられない場合は以下のように書く。
-
-```
-//emlist{
-リスト
-//}
-```
+言語を指定しない fenced code block を使います。
+他言語のコードは `` ```c `` のように言語を指定します（旧 `//emlist[ラベル][lang]{` に相当し、
+`title="..."` でラベルも付けられます）。
 
 ### 箇条書き
-インデント＋「*」
 
-```
-[例]
-  * 説明
-    * ネストした説明
+```markdown
+- 説明
+  - ネストした説明
 ```
 
 ### 番号付きリスト
-インデント＋「(1)」「(2)」…
 
-```
-[例]
-  (1) 説明1
-  (2) 説明2
+```markdown
+1. 説明1
+2. 説明2
 ```
 
 ### 定義リスト
 
-```
-[例]
-  : 項目 1
-    項目 1 の説明。
-  : 項目 2
-    項目 2 の説明。
-  : 項目 3
-    項目 3 の説明。
+GFM には定義リストがないため、ボールド + コロンのリスト形式で書きます。
+
+```markdown
+- **`type`**: Content-Type ヘッダです。デフォルトは "text/html" です。
+- **`charset`**: ボディのキャラクタセットを Content-Type ヘッダに追加します。
 ```
 
-### リンク
+コード的な用語はコードスパン付き `` **`term`** ``、日本語の用語はプレーンな `**用語**` にします。
 
-Rubyのクラスやメソッドなどには以下のようにしてリンクを記述します。
-[[ClassReferenceManualFormat]] のハイパーリンクの項により完全なリストが有ります。
+### リンク（クロスリファレンス）
+
+Ruby のクラスやメソッドなどへは以下のようにリンクを書きます
+（旧記法 `[[c:String]]` から角括弧が1段減りました）。
 
 |名前|説明(例)|
 |-----|-----|
-|クラス|`[[c:String]]`、`[[c:File::Stat]]` など|
-|クラスメソッド|`[[m:String.new]]`|
-|モジュール関数|`[[m:Math.#sin]]` (「.#」なのに注意)|
-|インスタンスメソッド|`[[m:String#dump]]`、`[[m:String#[] ]]`など ([]の場合のみ空白必須なのに注意)|
-|定数|`[[m:File::SEPARATOR]]` など|
-|グローバル変数|`[[m:$~]]` など|
+|クラス|`[c:String]`、`[c:File::Stat]` など|
+|クラスメソッド|`[m:String.new]`|
+|モジュール関数|`[m:Kernel?.open]`（旧記法の「`.#`」は「`?.`」に変わりました）|
+|インスタンスメソッド|`[m:String#dump]` など|
+|`[]` を含むメソッド|`[m:String#\[\]]`（バックスラッシュでエスケープ）|
+|定数|`[m:File::SEPARATOR]` など|
+|グローバル変数|`[m:$~]` など|
 
-上記以外のものには以下のようにしてリンクを記述します。
+上記以外のものには以下のようにリンクを書きます。
 
 |名前|説明(例)|
 |-----|-----|
-|ライブラリ|`[[lib:jcode]]` など|
-|ruby-list|`[[ruby-list:12345]]` など|
-|feature|`[[feature:12345]]`など。https://bugs.ruby-lang.org/issues/12345 へのリンクになる|
-|bug|`[[bug:12345]]`など。https://bugs.ruby-lang.org/issues/12345 へのリンクになる|
-|man|`[[man:tr(1)]]` など|
-|RFC|`[[RFC:2822]]` など|
-|URL|`[[url:http://i.loveruby.net]]` など|
+|ライブラリ|`[lib:json]` など|
+|ドキュメント|`[d:spec/m17n]`、アンカー付きは `[d:spec/m17n#anchor]`|
+|C 関数|`[f:rb_str_new]` など|
+|ruby-list|`[ruby-list:12345]` など|
+|feature|`[feature:12345]` など。https://bugs.ruby-lang.org/issues/12345 へのリンクになる|
+|bug|`[bug:12345]` など。同上|
+|man|`[man:tr(1)]` など|
+|RFC|`[RFC:2822]` など|
+|URL|通常の Markdown リンク（`<https://example.com>` や `[表示名](https://example.com)`）|
+
+ページ内のアンカーへは標準 Markdown のフラグメントリンク `[テキスト](#anchor)` を使います
+（アンカーは見出しに `{#anchor}` を付けて宣言します）。
 
 ## メソッド
+
 メソッドのドキュメントは以下の順序で書きます。「★」が付いているものは必ず書かなければいけません。
 
-1. ★シグネチャ(メソッド名、引数、返り値の型)
-1. ★メソッドの要約。メソッドの概要を一段落で書く。これは各クラスのメソッド一覧にも載る
-1. メソッドの詳しい説明
-1. ★@param 引数の情報
-1. @return 返り値の情報
-1. @raise 発生する例外
-1. その他の注意事項
-1. 使用例
-1. @see 他に参照すべきメソッドなど
+1. ★シグネチャ（メソッド名、引数、返り値の型）
+2. ★メソッドの要約。メソッドの概要を一段落で書く。これは各クラスのメソッド一覧にも載る
+3. メソッドの詳しい説明
+4. ★`- **param**` 引数の情報
+5. `- **return**` 返り値の情報
+6. `- **raise**` 発生する例外
+7. その他の注意事項
+8. 使用例
+9. `- **SEE**` 他に参照すべきメソッドなど
 
-```
-[例]
---- index(pattern, pos = 0)    -> Integer | nil
+````markdown
+### def index(pattern, pos = 0)    -> Integer | nil
 
 文字列のうちインデックス pos 以降の部分から
 パターン pattern を検索し、そのインデックスを返します。
 pattern が見付からなかったときは nil を返します。
 
-必要ならここに詳しい説明。必要ならここに詳しい説明。必要ならここに詳しい説明。
-必要ならここに詳しい説明。必要ならここに詳しい説明。必要ならここに詳しい説明。
+必要ならここに詳しい説明。必要ならここに詳しい説明。
 
-@param pattern   検索するパターンです。
-                 正規表現、文字列、文字コードを示す 0 から 255 の整数のいずれかを指定します。
-@param pos       検索を始めるインデックスです。整数で指定します。
-                 負の数を指定したときは文字列の末尾から数えたインデックスとみなします。
-@return          見付かった場合は要素のインデックスを、見付からなかったときは nil を返します。
-@raise ArgumentError
-                 上記以外の引数を渡し、かつそのオブジェクトが
-                 to_s メソッドを持たないときに発生します。
+- **param** `pattern` -- 検索するパターンです。
+           正規表現、文字列、文字コードを示す 0 から 255 の整数のいずれかを指定します。
+- **param** `pos` -- 検索を始めるインデックスです。整数で指定します。
+           負の数を指定したときは文字列の末尾から数えたインデックスとみなします。
+- **return** -- 見付かった場合は要素のインデックスを、見付からなかったときは nil を返します。
+- **raise** `ArgumentError` -- 上記以外の引数を渡し、かつそのオブジェクトが
+           to_s メソッドを持たないときに発生します。
 
-#@samplecode 例
-p "strstrstr".index(/str/)       # => 0      ← 引数 pattern の例
+```ruby title="例"
+p "strstrstr".index(/str/)       # => 0
 p "strstrstr".index("str")       # => 0
-p "strstrstr".index(?s)          # => 0
 
-p "strstrstr".index(/xxx/)       # => nil   ← 検索が失敗したときの例
-p "strstrstr".index("xxx")       # => nil
-p "strstrstr".index(?x)          # => nil
-
-p "strstrstr".index(/str/, 0)    # => 0    ← pos 引数の例
+p "strstrstr".index(/xxx/)       # => nil
 p "strstrstr".index(/str/, 1)    # => 3
-p "strstrstr".index(/str/, 3)    # => 3
-p "strstrstr".index(/str/, 4)    # => 6
-
-p "strstrstr".index(/str/, -1)   # => nil    ← 負の pos 引数の例
-p "strstrstr".index(/str/, -2)   # => nil
 p "strstrstr".index(/str/, -3)   # => 6
-#@end
-
-@see \[\[m:String#rindex]]
 ```
+
+- **SEE** [m:String#rindex]
+````
 
 ### 引数の書き方
-引数はRubyのメソッド定義(def)と同じ書式で書きます。
 
-旧リファレンスマニュアルでは「self + other」や「self[key] = value」のような書きかたも許容されていましたが、新マニュアルでは必ずdefと同じ書き方に直してください。
+シグネチャは `### def` に続けて、Ruby のメソッド定義（def）と同じ書式で書きます。
 
-省略可能な引数を記述する際は、下記の「pos = 0」のように、デフォルト値を明記してください。
+旧リファレンスマニュアルでは「self + other」や「self[key] = value」のような書きかたも
+許容されていましたが、必ず def と同じ書き方にしてください
+（`### def +(other) -> String`、`### def []=(key, value)`）。
 
-```
-[例]
---- index(pattern, pos = 0)    -> Integer | nil
-```
+省略可能な引数は「pos = 0」のようにデフォルト値を明記してください。
 
-なお、デフォルト値が場合によって変わる場合等で書き方に困った時は、
-メーリングリスト等で相談するとよいでしょう。
-
-また、それぞれの引数について、@param で引数の意味と制約条件(値の範囲や型)を必ず書きます。
+それぞれの引数について `- **param**` で意味と制約条件（値の範囲や型）を必ず書きます。
 2行目以降はインデントする必要があるのに注意してください。
 
-```
-@param pattern   検索するパターンです。
-                 正規表現、文字列、文字コードを示す 0 から 255 の整数のいずれかを指定します。
-```
-
-### 返り値の書き方
-返り値の型は以下のように書きます。
-
-|名前|説明(例)|
-|-----|-----|
-|(代入式の場合)|省略する。|
-|特定の型|-> String|
-|特定の型か、nil|-> String | nil (必ずnilを後に書く)|
-|特定の型の配列|-> \[String\]|
-|インデックスによって型が違う配列|-> \[Integer, String, String\]|
-|ハッシュ|-> {Integer => String}|
-|真偽値(trueまたはfalse)|-> bool (「boolean」ではないので注意)|
-|true, false, nil|-> true, -> false, -> nil|
-|self|-> self|
-|どんな型でも返る可能性がある場合|-> object|
-|返り値が決められていない場合|-> () (例：Thread.exit等)|
-|複数の可能性がある場合|複数のシグネチャに分ける(それで上手くいかない場合は、-> String | \[String\] のように「|」を使って記述)|
+詳しい規則（返り値の型の書き方を含む）は
+[HowToWriteMethodEntry](HowToWriteMethodEntry.md) を参照してください。
 
 ### 特殊なメソッド
-* 既存のクラスにメソッドを追加している場合は、reopenブロックを使います。
-  * 例えば、関数風メソッドなどKernelにメソッドを追加する場合は以下のように書きます。
 
+* 既存のクラスにメソッドを追加している場合は、reopen ブロックを使います。
+  * 例えば、関数風メソッドなど Kernel にメソッドを追加する場合は以下のように書きます。
+
+```markdown
+# reopen Kernel
+
+## Private Instance Methods
+
+### def parseArgs(....) -> ()
 ```
-= reopen Kernel
-== Private Instance Methods
---- parseArgs(....)
-```
 
-* 既存のメソッドを再定義している場合は、redefineブロックを使います。
-* ENVやARGVなど特殊なオブジェクトについては、objectブロックが使われます。
-
-### サンプルコードガイドライン
-使用例のサンプルコードを記載する際のガイドラインは以下になります。  
-[[SampleCodeGuideline]] 参照
+* 既存のメソッドを再定義している場合は、redefine ブロックを使います。
+* ENV や ARGV など特殊なオブジェクトについては、object ブロックが使われます。
 
 ## クラス、モジュール
-クラスやモジュールの説明は以下のように書きます。
 
-クラス名・モジュール名は必ずトップレベルから書いてください(○Net::SMTP、×SMTP)。
+クラスやモジュールは、front matter（メタデータ）と H1（宣言）で書き始めます。
 
-```
-= class クラス名 < スーパークラス名  #モジュールの場合は module モジュール名
-alias クラス名                       #別名(あれば)
-     ：
+```markdown
+---
+library: _builtin
+include:
+  - Enumerable
+---
+# class Array < Object
 
-extend モジュール名                  #extendしているモジュール(あれば)
-     ：                              #  必ずextendの方を先に書く
-include モジュール名                 #includeしているモジュール(あれば)
-     ：
+配列クラスです。
 
-<クラスの説明>                       #省略可能
-<クラスの説明>                       #章を作りたい場合は必ずレベル3(===)以上を使う
+## Class Methods
 
-== Class Methods                     #または Singleton Methods
-<クラスメソッドの説明>
-
-== Private Singleton Methods         #(あれば)
-== Protected Singleton Methods       #(あれば)
-
-== Instance Methods
-<インスタンスメソッドの説明>
-
-== Private Instance Methods          #(あれば)
-== Protected Instance Methods        #(あれば)
-
-== Module Functions
-<モジュール関数の説明>               #(public singleton method + private instance method)
-
-== Constants
-<定数の説明>
-
-== Special Variables
-<特殊定数の説明 (Kernelのみ) >
+### def new(size = 0, val = nil) -> Array
+...
 ```
 
-## ファイル全体
-新リファレンスではライブラリごとにファイルが分割されています。各ファイルは以下のような構造をしています。
+* クラス名・モジュール名は必ずトップレベルから書いてください（○ `Net::SMTP`、× `SMTP`）
+* 所属ライブラリ（`library:`）と mixin（`include:` / `extend:`）、別名（`alias:`）は
+  本文ではなく front matter に書きます
+* 詳しくは [ClassReferenceManualFormat](ClassReferenceManualFormat.md) を参照してください
 
-```
-require ライブラリ名(クオートなし) #クオートは付けない(○require time、×require "time")
-     ：
-<ライブラリの説明>                 #省略可能
+## 特殊な記法（プリプロセッサ指令）
 
-<クラス・モジュールの説明>
-<クラス・モジュールの説明>
-     ：
-```
-
-requireには、「このライブラリを require したとき、同時に使えると期待していいライブラリ」を記述します。詳しくは [[HowToWriteRequire]] を参照。
-
-## 特殊な記法
-BitClustへの命令のために、「#@」から始まるいくつかの記法が定義されています。
+BitClust への命令のために、「#@」から始まるいくつかの記法が定義されています。
+これらは Markdown 移行後も**変更ありません**（`#@` は Markdown の見出しと解釈が
+衝突しないため、安全に共存できます）。
 
 ### #@#
+
 「#@#」の行はコメントです。
 
 ### #@include
-「#@include(ファイルの相対パス名)」で他のファイルをその位置に読み込みます。
+
+「#@include(ファイルの相対パス名)」で共有断片ファイルをその位置に読み込みます
+（`pack-template` など複数箇所で再利用される断片用。拡張子は省略できます）。
 
 ```
-#@include(HTTP)
-#@include(HTTPHeader)
-#@include(HTTPRequest)
-#@include(HTTPResponse)
+#@include(_builtin/pack-template)
 ```
 
 ### #@since
-Rubyの特定のバージョン以降にあてはまる文章を書くのに使います。
+
+Ruby の特定のバージョン以降にあてはまる文章を書くのに使います。
 
 ```
 #@since 3.1
 Ruby 3.1 以降では 〜〜
 #@end
-#@since 1.8.0
-Ruby 1.8 以降では 〜〜
-#@end
 ```
 
-3.1からとしたい場合は `#@since 3.1.0` ではなく `#@since 3.1` と書いてください。
-
-2.7以前では `#@since 2.7.0` のように `.0` をつけても構いませんが、3.0 以降では teeny の `.0` をつけません。
-
-1.9系からとしたい場合は，`#@since 1.9.0` ではなく `#@since 1.9.1` と書いてください。
+* 3.1 からとしたい場合は `#@since 3.1.0` ではなく `#@since 3.1` と書いてください。
+  2.7 以前では `#@since 2.7.0` のように `.0` をつけても構いませんが、
+  3.0 以降では teeny の `.0` をつけません。
+* 1.9 系からとしたい場合は、`#@since 1.9.0` ではなく `#@since 1.9.1` と書いてください。
 
 ### #@until
+
 Ruby の特定バージョンより前にあてはまる文章を書くのに使います。
 
 ```
 #@until 3.2
 Ruby 3.2 にはこの機能が含まれません 〜〜〜
 #@end
-#@until 1.9.1
-Ruby 1.9.1 にはこの機能が含まれません 〜〜〜
-#@end
 ```
 
 ### #@if
-Rubyの特定のバージョンにあてはまる文章を書くのに使います。条件には比較式のみ書けます。
+
+Ruby の特定のバージョンにあてはまる文章を書くのに使います。条件には比較式のみ書けます。
 
 ```
-#@if (version >= "1.8.0")
-Ruby 1.8 以降では 〜〜
-#@end
-
-#@if (version < "1.9.0")
-このメソッドは将来削除されるので 〜〜
-#@end
-```
-
-### #@samplecode
-
-サンプルコードをシンタックスハイライトしたいときに使用します。
-
-```
-#@samplecode 例
-puts "Hello, world!"
-#@end
-
-#@samplecode 例:例の説明
-puts "Hello, world!"
-#@end
-
-#@samplecode
-puts "ラベルは省略可能"
+#@if (version >= "3.1")
+Ruby 3.1 以降では 〜〜
 #@end
 ```
 
 ### #@todo
+
 そのドキュメントが書きかけであるときに使います。
+
+### クラスやライブラリ自体の版分岐
+
+クラス・ライブラリ自体があるバージョンで追加・削除された場合は、本文の `#@since` ではなく
+front matter の `since:` / `until:` を使います。
+[ClassReferenceManualFormat](ClassReferenceManualFormat.md) を参照してください。

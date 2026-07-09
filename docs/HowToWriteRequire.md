@@ -1,9 +1,21 @@
-## リファレンスマニュアルにおける require の書き方
+# リファレンスマニュアルにおける require の書き方
+
+require は、ライブラリ概要ファイルの front matter に `require:` リストとして書きます
+（[ClassReferenceManualFormat](ClassReferenceManualFormat.md) 参照）。
+
+```yaml
+---
+type: library
+require:
+  - webrick/accesslog
+  - webrick/httpserver
+---
+```
 
 ルールは以下のふたつです。
 
-* 同じ名前のライブラリのみを require には書きます。たとえば、kconv ライブラリは nkf ライブラリを require していますが、kconv.rd に「require nkf」と書いてはいけません。もうひとつ例を挙げると、webrick.rd の require に書いて良いライブラリは webrick/* だけです。
-* ライブラリとして使われることのないファイルは、require には書きません。たとえば、optparse ライブラリはoptparse/version を require していますが、これは内部で使われているだけのファイルなので、optparse.rd に書いてはいけません。
+* 同じ名前のライブラリのみを require には書きます。たとえば、kconv ライブラリは nkf ライブラリを require していますが、kconv.md に「nkf」と書いてはいけません。もうひとつ例を挙げると、webrick.md の require に書いて良いライブラリは webrick/* だけです。
+* ライブラリとして使われることのないファイルは、require には書きません。たとえば、optparse ライブラリはoptparse/version を require していますが、これは内部で使われているだけのファイルなので、optparse.md に書いてはいけません。
 
 ## require の目的
 
@@ -11,7 +23,7 @@
 
 ユーザが、あるライブラリを require したときに使えるクラスの一覧を出す
 ためです。例えば require 'tk' と書いたら tk ライブラリの一連のクラス
-はすべて使えるようになるわけですが、src/tk.rd 自体にはその一部しか書
+はすべて使えるようになるわけですが、tk のライブラリ概要ファイル自体にはその一部しか書
 いてありません。つまり、tk 以下のライブラリのページを全部見ないと使える
 クラスがわからないわけです。それでは不便なので、require を書いといて、
 自動的にクラス一覧を計算できるようにしよう、ということです。

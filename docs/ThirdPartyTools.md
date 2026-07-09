@@ -1,3 +1,9 @@
+# るりまプロジェクトの外での活用事例
+
+外部の方が作った、るりまを活用するツールの一覧です。
+古い事例も記録として残しているため、既に稼働していないものも含まれます
+（「るりまサーチ」を利用するツールは、2026年7月のるりまサーチ退役により動作しません）。
+
 |名前|概要|
 |---|---|
 |[prismdoc](https://github.com/yhara/prismdoc)|るりまとRDocを名寄せして、統一されたインターフェイスで見るためのウェブアプリ。翻訳機能もあるけど諸々未完成。|
@@ -8,7 +14,7 @@
 |[ruremai](https://github.com/hibariya/ruremai)|irbからるりまをブラウザで開くライブラリ。|
 |[Rubyリファレンスマニュアル with rubicle.net](http://refm.rubicle.net/)|rubicle.net 支援活動の一環として、クールなデザインのRubyリファレンスマニュアルを公開しています。|
 |[rurema_instant](https://github.com/sorah/rurema_instant)|るりまサーチを検索するためのSafari/Chrome向けのExtensionらしい。|
-|[rurema-search](https://github.com/clear-code/rurema-search)|るりまを全文検索するWebアプリケーション。doc.ruby-lang.org でも動かしてるけどるりまプロジェクトでメンテしているわけでなない。|
+|[rurema-search](https://github.com/clear-code/rurema-search)|るりまを全文検索するWebアプリケーション（るりまサーチ）。docs.ruby-lang.org でも長らく稼働していたが、2026年7月に静的検索ページ（/ja/search/）へ置き換えられ退役。|
 |[ruri](https://github.com/jugyo/ruri)|るりまのシェル。|
 |[rubydoc-ja-docsets](http://labocho.github.io/rubydoc-ja-docsets/)|るりまを [Dash](http://kapeli.com/dash) で簡単にひけるようにするらしい。|
 |[RRSE](http://www.kmc.gr.jp/~ohai/rrse.html)|Emacsのミニバッファにメソッドのシネグチャを表示するツール。|

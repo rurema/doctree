@@ -102,26 +102,28 @@ p str              # => "TXT"
 ```
 
 ## 体裁
-* 各サンプルの先頭に `例:` の文言を記載してください
-* サンプルは半角スペース2個でインデントしてください
+* 各サンプルはフェンスドコードブロック（```` ```ruby ````）で書き、
+  `title="例"` のようにラベルを付けてください
 * `# =>`の`#`と`=>`の間にスペースを一つ入れてください
 * 値を表示するための`p`はあってもなくても構いません
 
 例
 
-```ruby
-例:
-  "text"[1]  # => "e"
+`````markdown
+```ruby title="例"
+"text"[1]  # => "e"
 ```
+`````
 
-* 複数のサンプルを続けて記述する場合は、各サンプルごとに `例:` を記載してください
+* 複数のサンプルを続けて記述する場合は、サンプルごとにコードブロックを分け、
+  それぞれにラベルを記載してください
 
 悪い例
 
 2つの例の区切りがわかりにくい
 
-```
-#@samplecode 例
+`````markdown
+```ruby title="例"
 require 'yaml'
 data = [ "Taro san", "Jiro san", "Saburo san"]
 str_r = YAML.dump(data)
@@ -152,15 +154,15 @@ str_r["Suzuki Suneo"] = {
   "birthday" => Date.new(1992, 12, 21)
 }
 p str_r == YAML.load(str_l) #=> true
-#@end
 ```
+`````
 
 良い例
 
 2つの例の区切りが明確にわかる
 
-```
-#@samplecode 例1: 構造化された配列
+`````markdown
+```ruby title="例1: 構造化された配列"
 require 'yaml'
 data = [ "Taro san", "Jiro san", "Saburo san"]
 str_r = YAML.dump(data)
@@ -171,9 +173,9 @@ str_l =<<EOT
 - Saburo san
 EOT
 p str_r == str_l #=> true
-#@end
+```
 
-#@samplecode 例2: 構造化されたハッシュ
+```ruby title="例2: 構造化されたハッシュ"
 require 'yaml'
 require 'date'
 str_l =<<YAML_EOT
@@ -193,8 +195,8 @@ str_r["Suzuki Suneo"] = {
   "birthday" => Date.new(1992, 12, 21)
 }
 p str_r == YAML.load(str_l) #=> true
-#@end
 ```
+`````
 
 ## Time関連のタイムゾーンはJSTにする
 * 悪い例
@@ -223,20 +225,20 @@ t2 = t + 0.1       # => 2017-11-10 04:42:19 +0900
 
 など、意図的にサンプルを書かない場合は `#@#noexample <サンプルを書かない理由>` を記載してください。
 
-例: https://docs.ruby-lang.org/ja/2.4.0/class/Struct.html#I_EQUAL--3F の例
+例: https://docs.ruby-lang.org/ja/latest/method/Struct/i/equal=3f.html の例
 
-```
---- equal?(other)   -> bool
+```markdown
+### def equal?(other)   -> bool
 
 指定された other が self 自身である場合のみ真を返します。
-これは [[c:Object]] クラスで定義されたデフォルトの動作で
+これは [c:Object] クラスで定義されたデフォルトの動作で
 す。
 
 #@include(Struct.attention)
 
 #@#noexample Object#equal? のデフォルトの動作と変わらないため
 
-@see [[m:Struct#eql?]], [[m:Struct#==]]
+- **SEE** [m:Struct#eql?], [m:Struct#==]
 ```
 
 ## RDocとの関係
