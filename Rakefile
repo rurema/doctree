@@ -5,6 +5,10 @@ OLD_VERSIONS = %w[
 ]
 SUPPORTED_VERSIONS = %w[3.0 3.1 3.2 3.3 3.4 4.0]
 UNRELEASED_VERSIONS = %w[4.1]
+# メンテナンスが継続している最古のバージョン。これより古い版の静的 HTML には
+# bitclust statichtml --eol-warning で警告バナーを表示する。
+# EOL 状況は https://www.ruby-lang.org/ja/downloads/branches/ を参照して更新する
+MINIMUM_SUPPORTED_RUBY_VERSION = Gem::Version.new("3.3")
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 CI_VERSIONS = [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
@@ -60,6 +64,7 @@ def generate_statichtml(version)
     "--fs-casesensitive",
     "--canonical-base-url=https://docs.ruby-lang.org/ja/latest/",
   ]
+  commands << "--eol-warning" if MINIMUM_SUPPORTED_RUBY_VERSION > version
   commands << "--edit-base-url=https://github.com/rurema/doctree/edit/master/" unless ENV['CI']
   # To suppress progress bar
   # because it exceeded Travis CI max log length
