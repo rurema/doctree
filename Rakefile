@@ -9,6 +9,40 @@ UNRELEASED_VERSIONS = %w[4.1]
 # bitclust statichtml --eol-warning で警告バナーを表示する。
 # EOL 状況は https://www.ruby-lang.org/ja/downloads/branches/ を参照して更新する
 MINIMUM_SUPPORTED_RUBY_VERSION = Gem::Version.new("3.3")
+# ruby.wasm の npm パッケージ (@ruby/X.Y-wasm-wasi) が存在するバージョンの
+# 静的 HTML にはサンプルコードの RUN ボタンを有効にする
+# (bitclust statichtml --run-ruby-wasm)。https://github.com/ruby/ruby.wasm 参照
+# npm 上の安定版は「<パッケージ版>-<ruby.wasm版>」形式（latest dist-tag の値）
+RUBY_WASM_NPM_VERSION = "2.9.3-2.9.4"
+RUBY_WASM_VERSIONS = %w[3.2 3.3 3.4 4.0]
+def ruby_wasm_url(version)
+  if RUBY_WASM_VERSIONS.include?(version)
+    return "https://cdn.jsdelivr.net/npm/@ruby/#{version}-wasm-wasi@#{RUBY_WASM_NPM_VERSION}/dist/ruby+stdlib.wasm"
+  end
+  return ruby_head_wasm_url(version) if UNRELEASED_VERSIONS.include?(version)
+  nil
+end
+
+# 未リリース版（/ja/master/ の実体）には head 用スナップショット
+# (@ruby/head-wasm-wasi) を使う。ただしスナップショットの元になる ruby/ruby
+# master のバージョンが version と一致するときだけ（リリース移行期に master
+# が次の開発版に進んでいる場合は自動で無効になる）。URL はその日の next
+# スナップショットに完全固定する。判定・取得に失敗してもビルドは止めず、
+# RUN ボタンなしにフォールバックする。
+def ruby_head_wasm_url(version)
+  require "net/http"
+  require "json"
+  version_h = Net::HTTP.get(URI("https://raw.githubusercontent.com/ruby/ruby/master/include/ruby/version.h"))
+  major = version_h[/RUBY_API_VERSION_MAJOR (\d+)/, 1]
+  minor = version_h[/RUBY_API_VERSION_MINOR (\d+)/, 1]
+  return nil unless version == "#{major}.#{minor}"
+  tags = JSON.parse(Net::HTTP.get(URI("https://data.jsdelivr.com/v1/packages/npm/@ruby/head-wasm-wasi")))["tags"]
+  snapshot = tags["next"] or return nil
+  "https://cdn.jsdelivr.net/npm/@ruby/head-wasm-wasi@#{snapshot}/dist/ruby+stdlib.wasm"
+rescue StandardError => e
+  warn "ruby_head_wasm_url: #{e.class}: #{e.message} (disabling the RUN button for #{version})"
+  nil
+end
 ALL_VERSIONS = [*OLD_VERSIONS, *SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 CI_VERSIONS = [*SUPPORTED_VERSIONS, *UNRELEASED_VERSIONS]
 HTML_DIRECTORY_BASE = ENV.fetch("HTML_DIRECTORY_BASE", "/tmp/html/")
@@ -65,6 +99,9 @@ def generate_statichtml(version)
     "--canonical-base-url=https://docs.ruby-lang.org/ja/latest/",
   ]
   commands << "--eol-warning" if MINIMUM_SUPPORTED_RUBY_VERSION > version
+  if (wasm_url = ruby_wasm_url(version))
+    commands << "--run-ruby-wasm=#{wasm_url}"
+  end
   commands << "--edit-base-url=https://github.com/rurema/doctree/edit/master/" unless ENV['CI']
   # To suppress progress bar
   # because it exceeded Travis CI max log length
