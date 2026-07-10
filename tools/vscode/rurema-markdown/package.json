@@ -1,0 +1,29 @@
+{
+  "name": "rurema-markdown",
+  "displayName": "Rurema Markdown (#@ directives)",
+  "description": "るりま（Ruby リファレンスマニュアル）manual/ の Markdown で使う #@ プリプロセッサ指令（#@since / #@until / #@if / #@else / #@end / #@include / #@samplecode / #@todo / #@#）をハイライトします",
+  "version": "0.1.0",
+  "publisher": "rurema",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rurema/doctree.git",
+    "directory": "tools/vscode/rurema-markdown"
+  },
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "markdown.rurema.injection",
+        "path": "./syntaxes/rurema-directives.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ]
+      }
+    ]
+  }
+}
