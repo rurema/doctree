@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Rurema #@ directives (Markdown injection)",
+  "scopeName": "markdown.rurema.injection",
+  "injectionSelector": "L:text.html.markdown",
+  "patterns": [
+    {
+      "include": "#directives"
+    }
+  ],
+  "repository": {
+    "directives": {
+      "comment": "bitclust の Preprocessor は行頭（カラム0）の #@ 行だけを指令として処理する（インデントされた #@ は本文）。既知の指令以外の行頭 #@ はビルドで parse error になるため invalid として強調する",
+      "patterns": [
+        {
+          "comment": "#@# プリプロセッサコメント（#@#todo 等も含む）",
+          "match": "^(#@#).*$",
+          "name": "comment.line.number-sign.rurema",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.rurema"
+            }
+          }
+        },
+        {
+          "comment": "#@todo（大文字小文字不問。ビルド出力に @todo として残る作業メモ）",
+          "match": "^((?i:#@todo))(.*)$",
+          "name": "meta.directive.todo.rurema",
+          "captures": {
+            "1": {
+              "name": "keyword.codetag.rurema"
+            },
+            "2": {
+              "name": "comment.line.todo.rurema"
+            }
+          }
+        },
+        {
+          "comment": "#@include(path) 共有断片の展開",
+          "match": "^(#@include)[ \\t]*(\\()([^)]*)(\\)).*$",
+          "name": "meta.directive.include.rurema",
+          "captures": {
+            "1": {
+              "name": "keyword.control.import.rurema"
+            },
+            "2": {
+              "name": "punctuation.section.parens.begin.rurema"
+            },
+            "3": {
+              "name": "string.unquoted.path.rurema"
+            },
+            "4": {
+              "name": "punctuation.section.parens.end.rurema"
+            }
+          }
+        },
+        {
+          "comment": "#@since / #@until バージョンゲート（バージョンは 1.9.1 形式、クォートも可）",
+          "match": "^(#@(?:since|until))[ \\t]+(?:(\"[0-9][0-9.]*\")|([0-9][0-9.]*))[ \\t]*$",
+          "name": "meta.directive.version-gate.rurema",
+          "captures": {
+            "1": {
+              "name": "keyword.control.conditional.rurema"
+            },
+            "2": {
+              "name": "string.quoted.double.version.rurema"
+            },
+            "3": {
+              "name": "constant.numeric.version.rurema"
+            }
+          }
+        },
+        {
+          "comment": "#@samplecode [説明] （Ruby サンプルコードブロック。#@end で閉じる。md では版ゲートを含むコード例など fence で表現できない場合に残る）",
+          "match": "^(#@samplecode)\\b[ \\t]*(.*)$",
+          "name": "meta.directive.samplecode.rurema",
+          "captures": {
+            "1": {
+              "name": "keyword.control.samplecode.rurema"
+            },
+            "2": {
+              "name": "string.unquoted.caption.rurema"
+            }
+          }
+        },
+        {
+          "comment": "#@if (条件式) — version 変数と比較・論理演算子",
+          "match": "^(#@if)\\b(.*)$",
+          "name": "meta.directive.conditional.rurema",
+          "captures": {
+            "1": {
+              "name": "keyword.control.conditional.rurema"
+            },
+            "2": {
+              "patterns": [
+                {
+                  "match": "\"[^\"]*\"",
+                  "name": "string.quoted.double.version.rurema"
+                },
+                {
+                  "match": "\\bversion\\b",
+                  "name": "variable.language.version.rurema"
+                },
+                {
+                  "match": "\\b(?:and|or|not)\\b",
+                  "name": "keyword.operator.logical.rurema"
+                },
+                {
+                  "match": "[<>=!]=|[<>]",
+                  "name": "keyword.operator.comparison.rurema"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "comment": "#@else / #@end（後続テキストは許されない）",
+          "match": "^(#@(?:else|end))[ \\t]*$",
+          "name": "keyword.control.conditional.rurema"
+        },
+        {
+          "comment": "上記のいずれでもない行頭 #@ はビルドで parse error（タイポ検出）",
+          "match": "^#@.*$",
+          "name": "invalid.illegal.directive.rurema"
+        }
+      ]
+    }
+  }
+}
