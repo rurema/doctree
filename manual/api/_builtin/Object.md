@@ -298,7 +298,7 @@ p Foo.singleton_methods(true) - Object.singleton_methods(true)
 - **SEE** [m:Object#methods],[m:Object#extend]
 
 ### def to_a -> Array
-#@#nomethod
+{: nomethod}
 
 オブジェクトを配列に変換した結果を返します。
 デフォルトでは定義されていません。
@@ -344,7 +344,7 @@ puts it #=> Class:Foo Number:40
 
 - **SEE** [m:Object#to_str],[m:Kernel?.String]
 ### def to_str -> String
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:String] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。
@@ -371,7 +371,7 @@ p('Second' + it) #=> "SecondEdition"
 
 - **SEE** [m:Object#to_s],[m:Kernel?.String]
 ### def to_ary -> Array
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:Array] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。
@@ -399,7 +399,7 @@ p([1,2] + it) #=> [1, 2, 3, 4]
 - **SEE** [m:Object#to_a],[m:Kernel?.Array]
 
 ### def to_hash -> Hash
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:Hash] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。
@@ -425,7 +425,7 @@ p({:as => 12}.merge(it)) #=> {"as"=>24, :as=>12}
 ```
 
 ### def to_int -> Integer
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:Integer] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。
@@ -452,7 +452,7 @@ p(ary[Foo.new]) # => :b
 
 - **SEE** [m:Kernel?.Integer]
 ### def to_proc -> Proc
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:Proc] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。
@@ -477,7 +477,7 @@ doing(&it) #=> "ok"
 ```
 
 ### def to_io -> IO
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:IO] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。
@@ -495,7 +495,7 @@ doing(&it) #=> "ok"
 #@#例
 
 ### def to_regexp -> Regexp
-#@#nomethod
+{: nomethod}
 
 オブジェクトの [c:Regexp] への暗黙の変換が必要なときに内部で呼ばれます。
 デフォルトでは定義されていません。

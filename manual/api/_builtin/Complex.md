@@ -132,29 +132,23 @@ Complex(2)     <=> 3             #=> -1
 #@end
 
 ### def <(other)    -> bool
-
-@undef
+{: undef}
 
 ### def >(other)    -> bool
-
-@undef
+{: undef}
 
 ### def <=(other)    -> bool
-
-@undef
+{: undef}
 
 ### def >=(other)    -> bool
-
-@undef
+{: undef}
 
 ### def between?(min, max)    -> bool
-
-@undef
+{: undef}
 
 
 ### def clamp(range)     -> object
-
-@undef
+{: undef}
 
 ### def abs       -> Numeric
 ### def magnitude -> Numeric

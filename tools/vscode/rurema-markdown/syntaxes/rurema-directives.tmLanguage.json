@@ -13,6 +13,22 @@
       "comment": "bitclust の Preprocessor は行頭（カラム0）の #@ 行だけを指令として処理する（インデントされた #@ は本文）。既知の指令以外の行頭 #@ はビルドで parse error になるため invalid として強調する",
       "patterns": [
         {
+          "comment": "{: ...} メソッド属性行（シグネチャ見出し直後。nomethod / undef）",
+          "match": "^(\\{:)[ \\t]*((?:(?:nomethod|undef)[ \\t]*)+)(\\})[ \\t]*$",
+          "name": "meta.attribute-list.rurema",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.annotation.rurema"
+            },
+            "2": {
+              "name": "keyword.other.attribute.rurema"
+            },
+            "3": {
+              "name": "punctuation.definition.annotation.rurema"
+            }
+          }
+        },
+        {
           "comment": "#@# プリプロセッサコメント（#@#todo 等も含む）",
           "match": "^(#@#).*$",
           "name": "comment.line.number-sign.rurema",
