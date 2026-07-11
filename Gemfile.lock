@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rurema/bitclust.git
-  revision: 872ccb61e3aadf1c94b9c789bd2fc898e5c809cb
+  revision: 1a107cfeb0b934615874c731a35f31ae12706125
   specs:
     bitclust-core (1.4.0)
       drb
@@ -8,6 +8,7 @@ GIT
       nkf
       progressbar (>= 1.9.0, < 2.0)
       rack
+      rouge
       webrick
     bitclust-dev (1.4.0)
       bitclust-core (= 1.4.0)
@@ -26,6 +27,9 @@ GEM
       rack (>= 3)
       webrick (~> 1.8)
     rake (13.2.1)
+    rouge (5.0.0)
+      strscan (~> 3.1)
+    strscan (3.1.8)
     webrick (1.9.2)
 
 PLATFORMS
