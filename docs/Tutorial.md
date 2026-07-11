@@ -37,6 +37,10 @@ https://github.com/rurema/doctree
 
 "自分のアカウント名/doctree" というリポジトリが作られたことを確認してください。
 
+なお、以前に fork したことがある場合は、自分の fork の master が
+rurema/doctree より古くなっています。fork のページの「Sync fork」ボタンで
+最新に同期してから先へ進んでください。
+
 ## 3. リポジトリを作業ディレクトリへと clone する
 
 以下のコマンドを実行し、現在の開発環境にリポジトリをコピーしてください。
@@ -87,6 +91,14 @@ doctree リポジトリで `bundle install` すれば入ります。
 ```
 $ bundle install
 ```
+
+なお、doctree の `Gemfile` は、隣のディレクトリ（環境変数 `BITCLUST_PATH`、
+既定値 `../bitclust`）に bitclust のチェックアウトが存在すると、そちらを
+優先して使います（bitclust 自体を開発する人向けの仕組みです）。過去に
+clone した古い bitclust が残っていると、`cannot load such file -- drb` や
+`invalid option: --markdowntree` のようなエラーでビルドに失敗します。
+その場合は `../bitclust` を最新にする（`git pull`）か、削除してから
+`bundle install` をやり直してください。
 
 typo の修正のような日本語の修正程度であれば以下を行わずとも pull request を送っていただいて問題ありません。
 [ReferenceManualFormatDigest](ReferenceManualFormatDigest.md) にあるような書式も修正の対象となる場合はプレビューで確認後に pull request を送っていただけるとありがたいです。

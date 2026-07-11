@@ -52,10 +52,39 @@ def system(*commands)
   super(*commands)
 end
 
+# Gemfile は BITCLUST_PATH（既定値 ../bitclust）にディレクトリが存在すると
+# そちらの bitclust を優先する。古いチェックアウトが残っていると
+# `cannot load such file -- drb` や `invalid option: --markdowntree` のような
+# 分かりにくいエラーで失敗するので、ビルド前に検査して案内を出す
+# (https://github.com/rurema/bitclust/issues/230)
+REQUIRED_BITCLUST_VERSION = Gem::Version.new("1.5.0")
+def check_bitclust_version!
+  begin
+    require "bitclust/version"
+  rescue LoadError
+    abort "bitclust を読み込めませんでした。bundle install を実行してください。"
+  end
+  version = Gem::Version.new(BitClust::VERSION)
+  return if version >= REQUIRED_BITCLUST_VERSION
+  location = $LOADED_FEATURES.grep(%r{bitclust/version\.rb\z}).first
+  abort <<~MESSAGE
+    古い bitclust (#{version}) が使われています（#{REQUIRED_BITCLUST_VERSION} 以上が必要です）。
+    使用中の bitclust: #{location}
+    doctree の Gemfile は、環境変数 BITCLUST_PATH（既定値 ../bitclust）の
+    ディレクトリが存在するとそちらの bitclust を優先します。過去に clone した
+    古い bitclust が残っている場合は、次のいずれかで解決してから
+    bundle install をやり直してください:
+      * ../bitclust を最新にする (cd ../bitclust && git pull)
+      * ../bitclust を使わないなら、ディレクトリを削除・改名するか、
+        BITCLUST_PATH=/nonexistent のように存在しないパスを指定する
+  MESSAGE
+end
+
 # ソースは manual/ の Markdown ツリー（manual/doc は manual/api から自動で取り込まれる）。
 # 旧 refm/ は移行ウィンドウ中の凍結ソース。旧経路でビルドしたい場合は
 # BITCLUST_SOURCE=refm を指定する。
 def generate_database(version)
+  check_bitclust_version!
   puts "generate database of #{version}"
   db = "/tmp/db-#{version}"
   succeeded = system("bundle", "exec",
@@ -81,6 +110,7 @@ def generate_database(version)
 end
 
 def generate_statichtml(version)
+  check_bitclust_version!
   db = "/tmp/db-#{version}"
   generate_database(version) unless File.exist?(db)
   puts "generate static html of #{version}"
