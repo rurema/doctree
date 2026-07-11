@@ -106,6 +106,13 @@ generated-documents の Import コミットに記録された生成日と、
   確認済み**です（2026-07、凍結 DB の構築に使用）。それ以外の旧時点が
   ビルドできるとは限りません（例: HEAD の refm は 1.8.7 では `cgi/util.rd` の
   構造破損で失敗する。1.9.1 未満ゲートの欠落が後年の編集で入ったもの）。
+- **旧 `@undef` 記法**: メソッド属性行 `{: ...}` への一本化（2026-07）以降の
+  bitclust では、旧 `@undef` 段落は解釈されません（`[UNKNOWN_META_INFO]` に
+  なります）。frozen タグから DB を**再構築**する場合は、修正ブランチ上で
+  `@undef` を `{: undef}` に変換してください（該当は frozen-2.5.0 / 2.6.0 /
+  2.7.0 の `refm/api/src/_builtin/Complex` 各6箇所のみ。1.8.7〜2.4.0 には
+  ありません）。凍結 DB からの静的 HTML 再生成（generated-documents の
+  `bc-static-frozen.rb`）には kind が焼き込み済みのため影響ありません。
 - 旧時点のソースを Markdown に変換したい場合は、サルベージ対応後の bitclust の
   `bin/rrd2md --graph --scope LO,HI` をスコープを合わせて使えます
   （検証ツールも `--scope` 対応。bitclust の doc/markdown-operations.md 参照）。
