@@ -68,13 +68,14 @@ include:
 
 ```ruby title="例"
 require 'prime'
-Prime::EratosthenesGenerator.new(10).each_with_index do |prime, index|
+Prime::EratosthenesGenerator.new.each_with_index do |prime, index|
+  break if prime > 10
   p [prime, index]
 end
-# [2, 0]
-# [3, 1]
-# [5, 2]
-# [7, 3]
+# => [2, 0]
+#    [3, 1]
+#    [5, 2]
+#    [7, 3]
 ```
 
 - **SEE** [m:Enumerator#with_index]
