@@ -1,5 +1,8 @@
 # オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル
 
+本マニュアルは Ruby の公式日本語リファレンスマニュアル
+(Ruby Reference Manual、通称「るりま」/ rurema)です。
+
  - Ruby オフィシャルサイト [url:https://www.ruby-lang.org/ja/]
 #@since 4.1
  - 開発版対応リファレンス
