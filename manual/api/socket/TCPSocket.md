@@ -29,10 +29,19 @@ s.close
 
 ## Class Methods
 
-#@since 3.0
+#@if("4.0" <= version)
+### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
+### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
+#@end
+#@if("3.4" <= version and version < "4.0")
+### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
+### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
+#@end
+#@if("3.0" <= version and version < "3.4")
 ### def open(host, service, local_host=nil, local_service=nil, connect_timeout: nil) -> TCPSocket
 ### def new(host, service, local_host=nil, local_service=nil, connect_timeout: nil) -> TCPSocket
-#@else
+#@end
+#@if(version < "3.0")
 ### def open(host, service, local_host=nil, local_service=nil) -> TCPSocket
 ### def new(host, service, local_host=nil, local_service=nil) -> TCPSocket
 #@end
@@ -51,12 +60,19 @@ host で指定したホストの service で指定したポートと接続した
 - **param** `service` --        /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
 - **param** `local_host` --     ホスト名、またはインターネットアドレスを示す文字列を指定します。
 - **param** `local_service` --  /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
-#@since 3.0
-#@# getaddrinfo_a(3) が入らなかったので、3.0 では resolv_timeout は指定しても無視される。
-#@# https://github.com/ruby/ruby/commit/c6b37cb169f190bac46c76a643350ee4ffc3dfca
-#@#@param resolv_timeout 名前解決のタイムアウトを秒数で指定します。
-- **param** `connect_timeout` -- タイムアウトを秒数で指定します。
+#@if (version >= "3.4")
+- **param** `resolv_timeout` -- 名前解決のタイムアウトを秒数で指定します。
 #@end
+#@if (version >= "3.0")
+- **param** `connect_timeout` -- 接続確立のタイムアウトを秒数で指定します。
+#@end
+#@if (version >= "4.0")
+- **param** `open_timeout` -- 名前解決から接続確立までのタイムアウトを秒数で指定します。
+#@end
+#@if (version >= "3.4")
+- **param** `fast_fallback` -- Happy Eyeballs Version 2 ([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305)) を有効にします。
+#@end
+
 ### def gethostbyname(host) -> Array
 
 ホスト名または IP アドレス (整数または"127.0.0.1"
