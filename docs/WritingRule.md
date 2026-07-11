@@ -45,4 +45,4 @@
 
 ## 最終奥技
 
-* 悩んだら ML で聞く
+* 悩んだら GitHub Issues や ruby-jp Slack（#rurema チャンネル）で聞く
