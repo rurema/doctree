@@ -80,7 +80,7 @@ p true.^(1 + 1)   #=> false
 常に文字列 "true" を返します。
 
 ```ruby title="例"
-true.to_s      # => "true"
+p true.to_s    # => "true"
 ```
 
 ### def inspect -> String
@@ -88,5 +88,5 @@ true.to_s      # => "true"
 常に文字列 "true" を返します。
 
 ```ruby title="例"
-true.inspect   # => "true"
+p true.inspect # => "true"
 ```

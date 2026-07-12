@@ -85,7 +85,7 @@ self が表すフレームの行番号を返します。
 
 ```ruby
 loc = c(0..1).first
-loc.lineno # => 2
+p loc.lineno # => 2
 ```
 
 ### def label -> String
@@ -97,7 +97,7 @@ self が表すフレームのラベルを返します。通常、メソッド名
 
 ```ruby
 loc = c(0..1).first
-loc.label # => "a"
+p loc.label # => "a"
 ```
 
 - **SEE** [m:Thread::Backtrace::Location#base_label]
@@ -136,7 +136,7 @@ self が表すフレームのファイル名を返します。
 
 ```ruby
 loc = c(0..1).first
-loc.path # => "caller_locations.rb"
+p loc.path # => "caller_locations.rb"
 ```
 
 - **SEE** [m:Thread::Backtrace::Location#absolute_path]

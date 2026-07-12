@@ -317,7 +317,7 @@ Process.groups.uniq.sort
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-Process.groups   #=> [27, 6, 10, 11]
+p Process.groups #=> [27, 6, 10, 11]
 ```
 
 - **SEE** [man:getgroups(2)]
@@ -609,7 +609,7 @@ nil を返します。
 
 ```ruby
 pid = fork { sleep 1 }
-Process.wait2 # => [70024, #<Process::Status: pid 70024 exit 0>]
+p Process.wait2 # => [70024, #<Process::Status: pid 70024 exit 0>]
 ```
 
 - **SEE** [man:wait(2)], [man:waitpid(2)]

@@ -165,7 +165,7 @@ $tp.lineno # => access from outside (RuntimeError)
 trace = TracePoint.trace(:call) { |tp| [tp.lineno, tp.event] }
 # => #<TracePoint:0x007f786a452448>
 
-trace.enabled? # => true
+p trace.enabled? # => true
 ```
 
 - **raise** `ThreadError` -- ブロックを指定しなかった場合に発生します。
@@ -190,13 +190,13 @@ self のトレースを有効にします。
 た場合は true を返します。そうでなければ false を返します)
 
 ```ruby title="例"
-trace.enabled?  # => false
-trace.enable    # => false (実行前の状態)
+p trace.enabled?  # => false
+p trace.enable  # => false (実行前の状態)
 
 # トレースが有効
 
-trace.enabled?  # => true
-trace.enable    # => true (実行前の状態)
+p trace.enabled?  # => true
+p trace.enable  # => true (実行前の状態)
 
 # 引き続きトレースが有効
 ```
@@ -205,13 +205,13 @@ trace.enable    # => true (実行前の状態)
 この場合はブロックの評価結果を返します。
 
 ```ruby title="例"
-trace.enabled?   # => false
+p trace.enabled? # => false
 
 trace.enable do
-  trace.enabled? # => true
+  p trace.enabled? # => true
 end
 
-trace.enabled?   # => false
+p trace.enabled? # => false
 ```
 
 [注意] イベントフックのためのメソッドにブロックの外側で参照した場合は
@@ -233,23 +233,23 @@ self のトレースを無効にします。
 た場合は true を返します。そうでなければ false を返します)
 
 ```ruby title="例"
-trace.enabled? # => true
-trace.disable  # => false (実行前の状態)
-trace.enabled? # => false
-trace.disable  # => false
+p trace.enabled? # => true
+p trace.disable  # => false (実行前の状態)
+p trace.enabled? # => false
+p trace.disable  # => false
 ```
 
 ブロックが与えられた場合、ブロック内でのみトレースが無効になります。
 この場合はブロックの評価結果を返します。
 
 ```ruby title="例"
-trace.enabled?   # => true
+p trace.enabled? # => true
 
 trace.disable do
-  trace.enabled? # => false
+  p trace.enabled? # => false
 end
 
-trace.enabled?   # => true
+p trace.enabled? # => true
 ```
 
 [注意] イベントフックのためのメソッドに、ブロックの外側で参照した場合は

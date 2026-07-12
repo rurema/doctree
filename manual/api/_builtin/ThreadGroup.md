@@ -48,7 +48,7 @@ thread_group = ThreadGroup.new
 thread_group.add Thread.new { sleep 0.1; Thread.new { sleep 1 }; sleep 1 }
 thread_group.add Thread.new { sleep 2 }
 sleep 0.5
-thread_group.list # => [#<Thread:0x007fc6f1842d70 sleep>, #<Thread:0x007fc6f1842c80 sleep>, #<Thread:0x007fc6f080dba8 sleep>]
+p thread_group.list # => [#<Thread:0x007fc6f1842d70 sleep>, #<Thread:0x007fc6f1842c80 sleep>, #<Thread:0x007fc6f080dba8 sleep>]
 ```
 
 ## Instance Methods
@@ -135,7 +135,7 @@ version 1.8 では、aborting 状態であるスレッド
 も要素に含まれます。つまり「生きている」スレッドの配列を返します。
 
 ```ruby title="例"
-ThreadGroup::Default.list   # => [#<Thread:0x00007f8f13867078 run>]
+p ThreadGroup::Default.list # => [#<Thread:0x00007f8f13867078 run>]
 ```
 
 ## Constants

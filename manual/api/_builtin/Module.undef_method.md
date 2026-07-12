@@ -25,7 +25,7 @@ class B < A
   end
 end
 
-B.new.ok   # => B
+p B.new.ok # => B
 
 # undef_method の場合はスーパークラスに同名のメソッドがあっても
 # その呼び出しはエラーになる
@@ -39,7 +39,7 @@ B.new.ok   # => NameError
 class B
   remove_method :ok
 end
-B.new.ok   # => A
+p B.new.ok # => A
 ```
 
 #@#see [ruby-dev:17894]
@@ -54,9 +54,9 @@ module M1
     undef foo
   end
 end
-M1.instance_methods false #=> ["foo"]
+p M1.instance_methods false #=> ["foo"]
 M1.moo
-M1.instance_methods false #=> []
+p M1.instance_methods false #=> []
 module M2
   def foo
   end
@@ -64,7 +64,7 @@ module M2
     undef_method :foo
   end
 end
-M2.instance_methods false #=> ["foo"]
+p M2.instance_methods false #=> ["foo"]
 M2.moo
-M2.instance_methods false #=> []
+p M2.instance_methods false #=> []
 ```

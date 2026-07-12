@@ -248,7 +248,7 @@ $a_global_proc = proc { str = 'a' + 'b' }
 ```ruby title="例"
 iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
 binary = iseq.to_binary
-RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
+p RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
 ```
 
 - **SEE** [m:RubyVM::InstructionSequence#to_binary]
@@ -260,7 +260,7 @@ RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
 ```ruby title="例"
 iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
 binary = iseq.to_binary("extra_data")
-RubyVM::InstructionSequence.load_from_binary_extra_data(binary) # => extra_data
+p RubyVM::InstructionSequence.load_from_binary_extra_data(binary) # => extra_data
 ```
 
 - **SEE** [m:RubyVM::InstructionSequence#to_binary]
@@ -274,7 +274,7 @@ self の情報をラベルとパスを含んだ人間に読みやすい文字列
 
 ```ruby title="例"
 iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
-iseq.inspect # => "<RubyVM::InstructionSequence:<compiled>@<compiled>>"
+p iseq.inspect # => "<RubyVM::InstructionSequence:<compiled>@<compiled>>"
 ```
 
 #@since 2.0.0
