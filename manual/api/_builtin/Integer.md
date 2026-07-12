@@ -1019,7 +1019,7 @@ self を表すのに必要なビット数を返します。
 - **SEE** [m:Integer#size]
 #@since 2.5.0
 ### def allbits?(mask) -> bool
-self & mask の全てのビットが 1 なら true を返します。
+mask で 1 が立っているビットがすべて self でも 1 なら true を返します。
 
 self & mask == mask と等価です。
 
