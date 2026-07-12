@@ -26,7 +26,7 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 require "json/add/core"
 
 Person = Struct.new(:name, :age)
-Person.new("tanaka", 29).to_json # => "{\"json_class\":\"Person\",\"v\":[\"tanaka\",29]}"
+p Person.new("tanaka", 29).to_json # => "{\"json_class\":\"Person\",\"v\":[\"tanaka\",29]}"
 ```
 
 - **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]

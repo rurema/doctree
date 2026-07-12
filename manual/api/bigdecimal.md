@@ -37,9 +37,9 @@ print sum # => 0.1e1
 ```ruby title="例3: 1.2 - 1.0 と 0.2 との比較"
 require "bigdecimal"
 
-(BigDecimal("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
+p (BigDecimal("1.2") - BigDecimal("1.0")) == BigDecimal("0.2") # => true
 
-(1.2 - 1.0) == 0.2 # => false
+p (1.2 - 1.0) == 0.2 # => false
 ```
 
 ### 特別な値
@@ -53,8 +53,8 @@ require "bigdecimal"
 
 ```ruby
 require "bigdecimal"
-BigDecimal("1.0") / BigDecimal("0.0")  #=> Infinity
-BigDecimal("-1.0") / BigDecimal("0.0")  #=> -Infinity
+p BigDecimal("1.0") / BigDecimal("0.0")  #=> Infinity
+p BigDecimal("-1.0") / BigDecimal("0.0")  #=> -Infinity
 ```
 
 無限大を表す [c:BigDecimal] オブジェクトを作成する場合、
@@ -63,9 +63,9 @@ BigDecimal("-1.0") / BigDecimal("0.0")  #=> -Infinity
 
 ```ruby
 require "bigdecimal"
-BigDecimal("Infinity")  # => Infinity
-BigDecimal("+Infinity") # => Infinity
-BigDecimal("-Infinity") # => -Infinity
+p BigDecimal("Infinity")  # => Infinity
+p BigDecimal("+Infinity") # => Infinity
+p BigDecimal("-Infinity") # => -Infinity
 ```
 
 #### 非数(Not a Number)
@@ -75,7 +75,7 @@ BigDecimal("-Infinity") # => -Infinity
 
 ```ruby
 require "bigdecimal"
-BigDecimal("0.0") / BigDecimal("0.0") # => NaN
+p BigDecimal("0.0") / BigDecimal("0.0") # => NaN
 ```
 
 NaN を表す [c:BigDecimal] オブジェクトを作成する場合、
@@ -84,15 +84,15 @@ NaN を表す [c:BigDecimal] オブジェクトを作成する場合、
 
 ```ruby
 require "bigdecimal"
-BigDecimal("NaN")  # => NaN
+p BigDecimal("NaN")  # => NaN
 ```
 
 NaN はどのような値と比較しても一致しません。(NaN 自身を含みます)
 
 ```ruby
 require "bigdecimal"
-BigDecimal("NaN") == 0.0               # => false
-BigDecimal("NaN") == BigDecimal("NaN") # => false
+p BigDecimal("NaN") == 0.0             # => false
+p BigDecimal("NaN") == BigDecimal("NaN") # => false
 ```
 
 #### +ゼロと-ゼロ
@@ -103,14 +103,14 @@ BigDecimal("NaN") == BigDecimal("NaN") # => false
 
 ```ruby
 require "bigdecimal"
-BigDecimal("1.0") / BigDecimal("-Infinity") # => -0.0
+p BigDecimal("1.0") / BigDecimal("-Infinity") # => -0.0
 ```
 
 正の非常に小さな [c:BigDecimal] の値は 0 を表す値になります。
 
 ```ruby
 require "bigdecimal"
-BigDecimal("1.0") / BigDecimal("Infinity") # => 0.0
+p BigDecimal("1.0") / BigDecimal("Infinity") # => 0.0
 ```
 
 精度については [m:BigDecimal.mode] も併せて参照してください。
@@ -121,10 +121,10 @@ BigDecimal("1.0") / BigDecimal("Infinity") # => 0.0
 
 ```ruby
 require "bigdecimal"
-BigDecimal("0.0") == BigDecimal("-0.0") # => true
+p BigDecimal("0.0") == BigDecimal("-0.0") # => true
 
-1 / BigDecimal("0.0")   # =>  Infinity
-1 / BigDecimal("-0.0")  # => -Infinity
+p 1 / BigDecimal("0.0") # =>  Infinity
+p 1 / BigDecimal("-0.0")  # => -Infinity
 ```
 
 

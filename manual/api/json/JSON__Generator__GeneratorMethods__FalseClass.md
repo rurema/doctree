@@ -22,6 +22,6 @@ alias:
 ```ruby title="例"
 require "json"
 
-false.to_json # => "false"
+p false.to_json # => "false"
 ```
 

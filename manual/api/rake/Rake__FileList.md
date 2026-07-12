@@ -68,7 +68,7 @@ task :test_rake_app do
   file_list.exclude("test.rb")
   # DEFAULT_IGNORE_PATTERNS と "test.rb" の双方の除外がクリアされる
   file_list.clear_exclude
-  file_list # => ["test.rb", "test.bak"]
+  p file_list # => ["test.rb", "test.bak"]
 end
 ```
 
@@ -84,7 +84,7 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new('lib/**/*.rb', 'test/test*.rb')
-  file_list == file_list.to_a # => true
+  p file_list == file_list.to_a # => true
 end
 ```
 
@@ -99,7 +99,7 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList['a.c', 'b.c']
-  file_list.to_a # => ["a.c", "b.c"]
+  p file_list.to_a # => ["a.c", "b.c"]
 end
 ```
 
@@ -114,8 +114,8 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.is_a?(Array)  # => true
-  file_list.is_a?(String) # => false
+  p file_list.is_a?(Array)  # => true
+  p file_list.is_a?(String) # => false
 end
 ```
 
@@ -143,7 +143,7 @@ task :test_rake_app do
   file_list  = FileList.new("*.rb")
   file_list.include("*.java")
   file_list.exclude("*.js")
-  file_list.resolve # => ["test.rb", "test.java"]
+  p file_list.resolve # => ["test.rb", "test.java"]
 end
 ```
 
@@ -179,8 +179,8 @@ FileList['lib/test/file', 'x/y'].gsub(/\//, "\\") # => ['lib\\test\\file', 'x\\y
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList['a.c', 'b.c']
-  file_list.sub!(/\.c$/, '.o') # => ['a.o', 'b.o']
-  file_list                    # => ['a.o', 'b.o']
+  p file_list.sub!(/\.c$/, '.o') # => ['a.o', 'b.o']
+  p file_list                  # => ['a.o', 'b.o']
 end
 ```
 
@@ -198,8 +198,8 @@ IO.write("test2.rb", "test")
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.gsub!(/\.rb/, ".erb") # => ["test1.erb", "test2.erb", "test3.erb"]
-  file_list                       # => ["test1.erb", "test2.erb", "test3.erb"]
+  p file_list.gsub!(/\.rb/, ".erb") # => ["test1.erb", "test2.erb", "test3.erb"]
+  p file_list                     # => ["test1.erb", "test2.erb", "test3.erb"]
 end
 ```
 
@@ -213,7 +213,7 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.pathmap("%n") # => ["test1", "test2", "test3"]
+  p file_list.pathmap("%n") # => ["test1", "test2", "test3"]
 end
 ```
 
@@ -232,7 +232,7 @@ IO.write("test2.rb", "test")
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.ext(".erb") # => ["test1.erb", "test2.erb", "test3.erb"]
+  p file_list.ext(".erb") # => ["test1.erb", "test2.erb", "test3.erb"]
 end
 ```
 
@@ -258,7 +258,7 @@ task default: :test_rake_app
 task :test_rake_app do
 
   file_list = FileList.new('sample*')
-  file_list.egrep(/line/) # => 7
+  p file_list.egrep(/line/) # => 7
 
   file_list.egrep(/.*/) do |filename, count, line|
     "filename = #{filename}, count = #{count}, line = #{line}"
@@ -288,7 +288,7 @@ IO.write("test2.rb", "test")
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.existing # => ["test1.rb", "test2.rb"]
+  p file_list.existing # => ["test1.rb", "test2.rb"]
 end
 ```
 
@@ -306,8 +306,8 @@ IO.write("test2.rb", "test")
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.existing! # => ["test1.rb", "test2.rb"]
-  file_list           # => ["test1.rb", "test2.rb"]
+  p file_list.existing! # => ["test1.rb", "test2.rb"]
+  p file_list         # => ["test1.rb", "test2.rb"]
 end
 ```
 
@@ -321,7 +321,7 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList['a.c', 'b.c']
-  file_list.to_s # => "a.c b.c"
+  p file_list.to_s # => "a.c b.c"
 end
 ```
 
@@ -342,8 +342,8 @@ task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb")
   file_list.exclude("test1.rb")
-  file_list.excluded_from_list?("test1.rb") # => true
-  file_list.excluded_from_list?("test2.rb") # => false
+  p file_list.excluded_from_list?("test1.rb") # => true
+  p file_list.excluded_from_list?("test2.rb") # => false
 end
 ```
 
@@ -362,8 +362,8 @@ IO.write("test2.rb", "test")
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList.new("test1.rb", "test2.rb", "test3.rb")
-  file_list.import(["test4.rb", "test5.rb"]) # => ["test4.rb", "test5.rb", "test1.rb", "test2.rb", "test3.rb"]
-  file_list                                  # => ["test4.rb", "test5.rb", "test1.rb", "test2.rb", "test3.rb"]
+  p file_list.import(["test4.rb", "test5.rb"]) # => ["test4.rb", "test5.rb", "test1.rb", "test2.rb", "test3.rb"]
+  p file_list                                # => ["test4.rb", "test5.rb", "test1.rb", "test2.rb", "test3.rb"]
 end
 ```
 
@@ -399,7 +399,7 @@ require 'rake'
 file_list1 = FileList.new('lib/**/*.rb', 'test/test*.rb')
 file_list2 = FileList['lib/**/*.rb', 'test/test*.rb']
 
-file_list1 == file_list2 # => true
+p file_list1 == file_list2 # => true
 ```
 
 ## Constants

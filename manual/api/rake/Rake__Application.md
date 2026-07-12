@@ -43,9 +43,9 @@ EOS
 IO.write("sample.mf", makefile)
 Rake.application.add_loader("mf", Rake::MakefileLoader.new)
 Rake.application.add_import("sample.mf")
-Rake::Task.task_defined?("a") # => false
+p Rake::Task.task_defined?("a") # => false
 Rake.application.load_imports
-Rake::Task.task_defined?("a") # => true
+p Rake::Task.task_defined?("a") # => true
 ```
 
 #@# --- collect_command_line_tasks(argv) -> Array
@@ -109,9 +109,9 @@ Rake::Task.task_defined?("a") # => true
 task default: :test
 task :test
 
-Rake.application.name # => "rake"
-Rake.application.init("MyApp") # => ["default"]
-Rake.application.name # => "MyApp"
+p Rake.application.name # => "rake"
+p Rake.application.init("MyApp") # => ["default"]
+p Rake.application.name # => "MyApp"
 ```
 
 #@# --- invoke_task(task_string)
@@ -145,7 +145,7 @@ Rakefile を探してロードします。
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.name # => "rake"
+  p Rake.application.name # => "rake"
 end
 ```
 
@@ -158,7 +158,7 @@ end
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.options  # => #<OpenStruct always_multitask=false, backtrace=false, build_all=false, dryrun=false, ignore_deprecate=false, ignore_system=false, job_stats=false, load_system=false, nosearch=false, rakelib=["rakelib"], show_all_tasks=false, show_prereqs=false, show_task_pattern=nil, show_tasks=nil, silent=false, suppress_backtrace_pattern=nil, thread_pool_size=8, trace=false, trace_output=#<IO:<STDERR>>, trace_rules=false>
+  p Rake.application.options  # => #<OpenStruct always_multitask=false, backtrace=false, build_all=false, dryrun=false, ignore_deprecate=false, ignore_system=false, job_stats=false, load_system=false, nosearch=false, rakelib=["rakelib"], show_all_tasks=false, show_prereqs=false, show_task_pattern=nil, show_tasks=nil, silent=false, suppress_backtrace_pattern=nil, thread_pool_size=8, trace=false, trace_output=#<IO:<STDERR>>, trace_rules=false>
 end
 ```
 
@@ -171,7 +171,7 @@ rake コマンドを実行したディレクトリを返します。
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.original_dir # => "/path/to/dir"
+  p Rake.application.original_dir # => "/path/to/dir"
 end
 ```
 
@@ -204,7 +204,7 @@ end
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.rakefile # => "Rakefile"
+  p Rake.application.rakefile # => "Rakefile"
 end
 ```
 
@@ -284,7 +284,7 @@ Rake.application.top_level
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.top_level_tasks # => ["default"]
+  p Rake.application.top_level_tasks # => ["default"]
 end
 ```
 
@@ -309,9 +309,9 @@ TTY に対する出力状態を上書きします。
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.tty_output?                 # => false
+  p Rake.application.tty_output?               # => false
   Rake.application.tty_output = "debug output" # => "debug output"
-  Rake.application.tty_output?                 # => "debug output"
+  p Rake.application.tty_output?               # => "debug output"
 end
 ```
 

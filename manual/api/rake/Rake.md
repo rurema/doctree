@@ -96,7 +96,7 @@ Rake アプリケーションを開始したディレクトリを返します。
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.original_dir # => "/path/to/dir"
+  p Rake.original_dir # => "/path/to/dir"
 end
 ```
 

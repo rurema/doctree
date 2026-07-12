@@ -40,7 +40,7 @@ require "csv"
 
 header = CSV::Row.new(["header1", "header2"], [], header_row: true)
 table = CSV::Table.new([header])
-table.to_a # => [["header1", "header2"]]
+p table.to_a # => [["header1", "header2"]]
 ```
 
 ```ruby title="例 header_row = false のケース"
@@ -49,7 +49,7 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+p table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
 ```
 
 - **SEE** [m:CSV::Row#header_row?], [m:CSV::Row#field_row?]
@@ -74,7 +74,7 @@ row = CSV::Row.new([], [], true)
 
 row << ["header1", "row1_1"]
 row << ["header2", "row1_2"]
-row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
+p row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
 ```
 
 ```ruby title="例 Hash を指定"
@@ -84,7 +84,7 @@ row = CSV::Row.new([], [], true)
 
 row << { "header1" => "row1_1" }
 row << { "header2" => "row1_2" }
-row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
+p row.to_a # => [["header1", "row1_1"], ["header2", "row1_2"]]
 ```
 
 ### def ==(other) -> bool
@@ -100,9 +100,9 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 
-row1 == row2 # => true
+p row1 == row2 # => true
 row2 << ["header3", "row1_3"]
-row1 == row2 # => false
+p row1 == row2 # => false
 ```
 
 ### def field(header_or_index, minimum_index = 0) -> object | nil
@@ -120,10 +120,10 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 
-row.field("header1") # => "row1_1"
-row.field("header2") # => "row1_2"
-row["header1"]       # => "row1_1"
-row["header2"]       # => "row1_2"
+p row.field("header1") # => "row1_1"
+p row.field("header2") # => "row1_2"
+p row["header1"]     # => "row1_1"
+p row["header2"]     # => "row1_2"
 ```
 
 ### def []=(header_or_index, value)
@@ -142,9 +142,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 
-row["header1"]  # => "row1_1"
+p row["header1"]  # => "row1_1"
 row["header1"] = "updated"
-row["header1"]  # => "updated"
+p row["header1"]  # => "updated"
 ```
 
 ```ruby title="例 ヘッダの index で指定"
@@ -152,9 +152,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 
-row["header1"]  # => "row1_1"
+p row["header1"]  # => "row1_1"
 row[0] = "updated"
-row["header1"]  # => "updated"
+p row["header1"]  # => "updated"
 ```
 
 ```ruby title="例 ヘッダの名前と offset で指定"
@@ -162,9 +162,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2", "header1"], ["row1_1", "row1_2", "row1_3"])
 
-row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
+p row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
 row["header1", 1] = "updated"
-row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"updated">
+p row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"updated">
 ```
 
 
@@ -199,9 +199,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 
-row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
 row.delete("header1")
-row # => #<CSV::Row "header2":"row1_2">
+p row # => #<CSV::Row "header2":"row1_2">
 ```
 
 ```ruby title="例 ヘッダの index で指定"
@@ -209,9 +209,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 
-row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
 row.delete(0)
-row # => #<CSV::Row "header2":"row1_2">
+p row # => #<CSV::Row "header2":"row1_2">
 ```
 
 ```ruby title="例 ヘッダの名前と offset で指定"
@@ -219,9 +219,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2", "header1"], ["row1_1", "row1_2", "row1_3"])
 
-row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
+p row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"row1_3">
 row.delete("header1", 1)
-row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p row # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
 ```
 
 - **SEE** [m:CSV::Row#field]
@@ -238,9 +238,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2", "header3", "header4"], ["valid1", "valid2", "invalid", "valid4"])
 
-row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header3":"invalid" "header4":"valid4">
+p row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header3":"invalid" "header4":"valid4">
 row.delete_if { |header, field| field == "invalid" }
-row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header4":"valid4">
+p row # => #<CSV::Row "header1":"valid1" "header2":"valid2" "header4":"valid4">
 ```
 
 ### def each{|header, field| ... } -> self
@@ -278,8 +278,8 @@ row.each { |header, field| puts "#{header} - #{field}" }
 require "csv"
 
 row = CSV::Row.new(["header1", "header2", "header3", "header4"], [1, 2, 3, 4])
-row.field?(1) # => true
-row.field?(5) # => false
+p row.field?(1) # => true
+p row.field?(5) # => false
 ```
 
 ### def field_row? -> bool
@@ -290,8 +290,8 @@ require "csv"
 
 header_row = CSV::Row.new(["header1", "header2"], [], true)
 row = CSV::Row.new(["header1", "header2"], [1, 2])
-header_row.field_row? # => false
-row.field_row?        # => true
+p header_row.field_row? # => false
+p row.field_row?      # => true
 ```
 
 ### def fields(*headers_and_or_indices) -> Array
@@ -327,8 +327,8 @@ row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
 require "csv"
 
 row = CSV::Row.new(["header1", "header2"], [1, 2])
-row.header?("header1") # => true
-row.header?("header3") # => false
+p row.header?("header1") # => true
+p row.header?("header3") # => false
 ```
 
 ### def header_row? -> bool
@@ -339,8 +339,8 @@ require "csv"
 
 header_row = CSV::Row.new(["header1", "header2"], [], true)
 row = CSV::Row.new(["header1", "header2"], [1, 2])
-header_row.header_row? # => true
-row.header_row?        # => false
+p header_row.header_row? # => true
+p row.header_row?      # => false
 ```
 
 ### def headers -> Array
@@ -350,7 +350,7 @@ row.header_row?        # => false
 require "csv"
 
 row = CSV::Row.new(["header1", "header2"], [1, 2])
-row.headers # => ["header1", "header2"]
+p row.headers # => ["header1", "header2"]
 ```
 
 ### def index(header, minimum_index = 0) -> Integer
@@ -366,8 +366,8 @@ row.headers # => ["header1", "header2"]
 require "csv"
 
 row = CSV::Row.new(["header1", "header2", "header1"], [1, 2, 3])
-row.index("header1")    # => 0
-row.index("header1", 1) # => 2
+p row.index("header1")  # => 0
+p row.index("header1", 1) # => 2
 ```
 
 - **SEE** [m:CSV::Row#field]
@@ -379,7 +379,7 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を�
 require "csv"
 
 row = CSV::Row.new(["header1", "header2", "header1"], [1, 2, 3])
-row.inspect # => "#<CSV::Row \"header1\":1 \"header2\":2 \"header1\":3>"
+p row.inspect # => "#<CSV::Row \"header1\":1 \"header2\":2 \"header1\":3>"
 ```
 
 ### def length -> Integer
@@ -410,8 +410,8 @@ args.each { |arg| csv_row << arg }
 require "csv"
 
 row = CSV::Row.new(["header1", "header2"], [1, 2])
-row.to_csv                                    # => "1,2\n"
-row.to_csv( {col_sep: "|", row_sep: "<br>"} ) # => "1|2<br>"
+p row.to_csv                                  # => "1,2\n"
+p row.to_csv( {col_sep: "|", row_sep: "<br>"} ) # => "1|2<br>"
 ```
 
 ### def to_hash -> Hash
@@ -425,7 +425,7 @@ row.to_csv( {col_sep: "|", row_sep: "<br>"} ) # => "1|2<br>"
 require "csv"
 
 row = CSV::Row.new(["header2", "header1", "header2"], [1, 2, 3])
-row.to_hash # => {"header2"=>3, "header1"=>2}
+p row.to_hash # => {"header2"=>3, "header1"=>2}
 ```
 
 #@since 3.1

@@ -34,7 +34,7 @@ JSON のオブジェクトから [c:Rational] のオブジェクトを生成し�
 
 ```ruby title="例"
 require 'json/add/rational'
-Rational(1, 3).to_json # => "{\"json_class\":\"Rational\",\"n\":1,\"d\":3}"
+p Rational(1, 3).to_json # => "{\"json_class\":\"Rational\",\"n\":1,\"d\":3}"
 ```
 
 - **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]

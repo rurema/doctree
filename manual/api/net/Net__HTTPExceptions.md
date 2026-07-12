@@ -28,7 +28,7 @@ response = Net::HTTP.get_response(URI.parse(uri))
 begin
   response.value
 rescue => e
-  e.response # => #<Net::HTTPNotFound 404 Not Found readbody=true>
+  p e.response # => #<Net::HTTPNotFound 404 Not Found readbody=true>
 end
 ```
 

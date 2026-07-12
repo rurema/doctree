@@ -53,8 +53,8 @@ resolvers の各要素は each_address と each_name という
 
 ```ruby
 require "resolv"
-Resolv.getaddress("localhost") #=> "127.0.0.1"
-Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
+p Resolv.getaddress("localhost") #=> "127.0.0.1"
+p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 ```
 
 - **param** `name` -- ホスト名を文字列で与えます。
@@ -85,7 +85,7 @@ IP アドレス address のホスト名をルックアップし、
 
 ```ruby
 require "resolv"
-Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
+p Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
 ```
 
 - **param** `address` -- IPアドレスを文字列で与えます。

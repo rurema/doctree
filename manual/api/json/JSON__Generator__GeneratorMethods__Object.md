@@ -33,7 +33,7 @@ end
 
 tanaka = Person.new("tanaka", 29)
 
-tanaka.to_json # => "\"#<Person:0x00007ffdec0167c8>\""
-tanaka.method(:to_json).owner # => JSON::Ext::Generator::GeneratorMethods::Object
+p tanaka.to_json # => "\"#<Person:0x00007ffdec0167c8>\""
+p tanaka.method(:to_json).owner # => JSON::Ext::Generator::GeneratorMethods::Object
 ```
 

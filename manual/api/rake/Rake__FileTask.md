@@ -25,9 +25,9 @@ library: rake
 task default: "test.txt"
 file "test.txt" do |task|
   Rake.application.options.build_all = false
-  task.needed? # => true
+  p task.needed? # => true
   IO.write("test.txt", "test")
-  task.needed? # => false
+  p task.needed? # => false
 end
 ```
 
@@ -41,7 +41,7 @@ end
 task default: "test.txt"
 file "test.txt" do |task|
   Rake.application.options.build_all = false
-  task.timestamp # => #<Rake::LateTime:0x2ba58f0>
+  p task.timestamp # => #<Rake::LateTime:0x2ba58f0>
 end
 ```
 

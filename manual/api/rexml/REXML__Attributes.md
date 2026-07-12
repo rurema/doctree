@@ -54,7 +54,7 @@ p a.attributes["bar:att"] # => "2"
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new("<a x='1' y='2' z='3' />")
-doc.root.attributes.to_a # => [x='1', y='2', z='3']
+p doc.root.attributes.to_a # => [x='1', y='2', z='3']
 ```
 
 
@@ -146,8 +146,8 @@ doc = REXML::Document.new(<<-EOS)
 EOS
 a = doc.get_elements("/root/a").first
 
-a.attributes.get_attribute("att") # => att='&lt;'
-a.attributes.get_attribute("foo:att") # => foo:att='1'
+p a.attributes.get_attribute("att") # => att='&lt;'
+p a.attributes.get_attribute("foo:att") # => foo:att='1'
 ```
 
 
@@ -172,7 +172,7 @@ a = doc.get_elements("/root/a").first
 
 a.attributes["att"] = "9"
 a.attributes["foo:attt"] = "8"
-a # => <a foo:att='1' bar:att='2' att='9' foo:attt='8'/>
+p a # => <a foo:att='1' bar:att='2' att='9' foo:attt='8'/>
 ```
 
 - **SEE** [m:REXML::Attributes#add]
@@ -243,10 +243,10 @@ doc = REXML::Document.new(<<-EOS)
 EOS
 a = doc.get_elements("/root/a").first
 
-a.attributes.delete("att")     # => <a foo:att='1' bar:att='2'/>
-a.attributes.delete("foo:att") # => <a bar:att='2'/>
+p a.attributes.delete("att")   # => <a foo:att='1' bar:att='2'/>
+p a.attributes.delete("foo:att") # => <a bar:att='2'/>
 attr = a.attributes.get_attribute("bar:att")
-a.attributes.delete(attr)      # => <a/>
+p a.attributes.delete(attr)    # => <a/>
 ```
 
 ### def add(attribute) -> ()
@@ -280,8 +280,8 @@ doc = REXML::Document.new(<<-EOS)
 EOS
 a = doc.get_elements("/root/a").first
 
-a.attributes.delete_all("att") # => [att='&lt;']
-a # => <a foo:att='1' bar:att='2'/>
+p a.attributes.delete_all("att") # => [att='&lt;']
+p a # => <a foo:att='1' bar:att='2'/>
 ```
 
 ### def get_attribute_ns(namespace, name) -> REXML::Attribute | nil
@@ -309,8 +309,8 @@ doc = REXML::Document.new(<<-EOS)
 EOS
 a = doc.get_elements("/root/a").first
 
-a.attributes.get_attribute_ns("", "att") # => att='&lt;'
-a.attributes.get_attribute_ns("http://example.org/foo", "att") # => foo:att='1'
-a.attributes.get_attribute_ns("http://example.org/baz", "att") # => nil
-a.attributes.get_attribute_ns("http://example.org/foo", "attt") # => nil
+p a.attributes.get_attribute_ns("", "att") # => att='&lt;'
+p a.attributes.get_attribute_ns("http://example.org/foo", "att") # => foo:att='1'
+p a.attributes.get_attribute_ns("http://example.org/baz", "att") # => nil
+p a.attributes.get_attribute_ns("http://example.org/foo", "attt") # => nil
 ```

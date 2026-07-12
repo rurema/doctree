@@ -37,7 +37,7 @@ JSON のオブジェクトから [c:BigDecimal] のオブジェクトを生成�
 
 ```ruby title="例"
 require 'json/add/bigdecimal'
-BigDecimal('0.123456789123456789').to_json # => "{\"json_class\":\"BigDecimal\",\"b\":\"36:0.123456789123456789e0\"}"
+p BigDecimal('0.123456789123456789').to_json # => "{\"json_class\":\"BigDecimal\",\"b\":\"36:0.123456789123456789e0\"}"
 ```
 
 - **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]

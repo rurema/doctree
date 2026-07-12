@@ -70,8 +70,8 @@ doctype = REXML::Document.new(<<EOS).doctype
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 EOS
-doctype.name # => "html"
-doctype.external_id  # => "PUBLIC"
+p doctype.name # => "html"
+p doctype.external_id  # => "PUBLIC"
 
 doctype = REXML::Document.new(<<EOS).doctype
 <!DOCTYPE books [
@@ -81,8 +81,8 @@ doctype = REXML::Document.new(<<EOS).doctype
   <!ELEMENT author (#PCDATA)>
 ]>
 EOS
-doctype.name # => "books"
-doctype.external_id # => nil
+p doctype.name # => "books"
+p doctype.external_id # => nil
 ```
 
 ### def entities -> { String => REXML::Entity }
@@ -265,14 +265,14 @@ doctype = REXML::Document.new(<<EOS).doctype
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 EOS
-doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
+p doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+p doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
 
 doctype = REXML::Document.new(<<EOS).doctype
 <!DOCTYPE root SYSTEM "foobar">
 EOS
-doctype.system # => "foobar"
-doctype.public  # => nil
+p doctype.system # => "foobar"
+p doctype.public  # => nil
 ```
 
 ### def system -> String | nil
@@ -286,14 +286,14 @@ doctype = REXML::Document.new(<<EOS).doctype
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 EOS
-doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
+p doctype.system # => "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+p doctype.public  # => "-//W3C//DTD XHTML 1.0 Strict//EN"
 
 doctype = REXML::Document.new(<<EOS).doctype
 <!DOCTYPE root SYSTEM "foobar">
 EOS
-doctype.system # => "foobar"
-doctype.public  # => nil
+p doctype.system # => "foobar"
+p doctype.public  # => nil
 ```
 
 ### def notations -> [REXML::NotationDecl]

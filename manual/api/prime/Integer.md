@@ -16,8 +16,8 @@ library: prime
 
 ```ruby title="例"
 require 'prime'
-Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
-Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
+p Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
+p Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 ```
 
 
@@ -49,8 +49,8 @@ Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 
 ```ruby title="例"
 require 'prime'
-12.prime_division #=> [[2,2], [3,1]]
-10.prime_division #=> [[2,1], [5,1]]
+p 12.prime_division #=> [[2,2], [3,1]]
+p 10.prime_division #=> [[2,1], [5,1]]
 ```
 
 ### def prime? -> bool
@@ -60,8 +60,8 @@ require 'prime'
 
 ```ruby title="例"
 require 'prime'
-1.prime? # => false
-2.prime? # => true
+p 1.prime? # => false
+p 2.prime? # => true
 ```
 
 - **SEE** [m:Prime#prime?]

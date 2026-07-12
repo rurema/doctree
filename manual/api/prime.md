@@ -17,8 +17,8 @@ Prime.each(100) do |prime|
   p prime #=> 2, 3, 5, 7, 11, ..., 97
 end
 
-2.prime? #=> true
-4.prime? #=> false
+p 2.prime? #=> true
+p 4.prime? #=> false
 ```
 
 ### 生成器

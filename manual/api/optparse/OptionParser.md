@@ -260,7 +260,7 @@ opts = OptionParser.new do |opts|
   end
 end
 
-opts.banner # => "Usage: example.rb [options]"
+p opts.banner # => "Usage: example.rb [options]"
 ```
 
 ### def summary_width         -> Integer
@@ -278,11 +278,11 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-opts.summary_width     # => 32
+p opts.summary_width   # => 32
 opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_width = 8
-opts.summary_width     # =>8
+p opts.summary_width   # =>8
 opts.summarize
 # => ["    -i\n", "        --init\n", "    -u\n", "        --update\n", "    -h\n", "        --help\n"]
 ```
@@ -302,11 +302,11 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-opts.summary_width     # => 32
+p opts.summary_width   # => 32
 opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_width = 8 # => 8
-opts.summary_width     # => 8
+p opts.summary_width   # => 8
 opts.summarize
 # => ["    -i\n", "        --init\n", "    -u\n", "        --update\n", "    -h\n", "        --help\n"]
 ```
@@ -326,11 +326,11 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-opts.summary_indent         # => "    "
+p opts.summary_indent       # => "    "
 opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_indent = "  "
-opts.summary_indent         # => "  "
+p opts.summary_indent       # => "  "
 opts.summarize
 # => ["  -i, --init\n", "  -u, --update\n", "  -h, --help\n"]
 ```
@@ -350,11 +350,11 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-opts.summary_indent         # => "    "
+p opts.summary_indent       # => "    "
 opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_indent = "  "  # => "  "
-opts.summary_indent         # => "  "
+p opts.summary_indent       # => "  "
 opts.summarize
 # => ["  -i, --init\n", "  -u, --update\n", "  -h, --help\n"]
 ```
@@ -386,10 +386,10 @@ end
 require "optparse"
 
 OptionParser.new do |opts|
-  $0                         # => /path/to/filename.rb
-  opts.program_name          # => filename
+  p $0                       # => /path/to/filename.rb
+  p opts.program_name        # => filename
   opts.program_name = 'test' # => "test"
-  opts.program_name          # => "test"
+  p opts.program_name        # => "test"
 end
 ```
 
@@ -421,9 +421,9 @@ end
 require "optparse"
 
 OptionParser.new do |opts|
-  opts.release # => nil
+  p opts.release # => nil
   opts.release = "2019-05-01"
-  opts.release # => "2019-05-01"
+  p opts.release # => "2019-05-01"
 end
 ```
 
@@ -527,7 +527,7 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-opts.to_a # => ["Usage: test [options]", "    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
+p opts.to_a # => ["Usage: test [options]", "    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 ```
 
 ### def separator(sep)    -> ()
@@ -1058,8 +1058,8 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-ARGV             # => ["-i", "-u", "-h", "test"]
-opts.parse(ARGV) # => ["test"]
+p ARGV           # => ["-i", "-u", "-h", "test"]
+p opts.parse(ARGV) # => ["test"]
 ```
 
 #@since 2.4.0
@@ -1096,11 +1096,11 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-ARGV              # => ["-i", "-u", "-h", "test"]
-opts.parse(ARGV)  # => ["test"]
-ARGV              # => ["-i", "-u", "-h", "test"]
-opts.parse!(ARGV) # => ["test"]
-ARGV              # => ["test"]
+p ARGV            # => ["-i", "-u", "-h", "test"]
+p opts.parse(ARGV)  # => ["test"]
+p ARGV            # => ["-i", "-u", "-h", "test"]
+p opts.parse!(ARGV) # => ["test"]
+p ARGV            # => ["test"]
 ```
 
 ### def load(filename = nil)     -> bool
@@ -1122,8 +1122,8 @@ options = { a: false, b: false }
 OptionParser.new do |opt|
   opt.on('-a') { |v| options[:a] = v }
   opt.on('--b') {|v| options[:b] = v }
-  opt.load("options.txt")   # => true
-  opt.load("not_exist.txt") # => false
+  p opt.load("options.txt") # => true
+  p opt.load("not_exist.txt") # => false
 end
 
 p options # => {:a=>true, :b=>true}
@@ -1165,7 +1165,7 @@ require "optparse"
 opts = OptionParser.new
 
 # --hoo param1 --bar param2 をパラメーターに指定して実行
-opts.default_argv # => ["--foo", "param1", "--bar", "param2"]
+p opts.default_argv # => ["--foo", "param1", "--bar", "param2"]
 ```
 
 ### def default_argv=(argv)
@@ -1184,12 +1184,12 @@ opts = OptionParser.new
 opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
 
 # パラメーター指定なしで実行
-opts.default_argv # => []
+p opts.default_argv # => []
 opts.parse!
 p config          # => {}
 
 opts.default_argv = ["--require", "lib1"] # => ["--require", "lib"]
-opts.default_argv # => ["--require", "param1"]
+p opts.default_argv # => ["--require", "param1"]
 opts.parse!
 p config          # => {:lib=>"lib1"}
 ```

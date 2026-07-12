@@ -80,7 +80,7 @@ size 次元ベクトル空間の index 番目の標準基底を返します。
 
 ```ruby title="例"
 require 'matrix'
-Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
+p Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 ```
 
 - **param** `size` -- ベクトルの次元
@@ -94,7 +94,7 @@ Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 
 ```ruby title="例"
 require 'matrix'
-Vector.zero(3) # => Vector[0, 0, 0]
+p Vector.zero(3) # => Vector[0, 0, 0]
 ```
 
 - **param** `size` -- ベクトルの次元
@@ -272,8 +272,8 @@ self の各要素を数 other で割ったベクトルを返します。
 
 ```ruby title="例"
 require 'matrix'
-Vector[3, 4].norm # => 5.0
-Vector[Complex(0, 1), 0].norm # => 1.0
+p Vector[3, 4].norm # => 5.0
+p Vector[Complex(0, 1), 0].norm # => 1.0
 ```
 
 - **SEE** [m:Vector#normalize]
@@ -287,7 +287,7 @@ Vector[Complex(0, 1), 0].norm # => 1.0
 require 'matrix'
 v = Vector[2, 6, 9].normalize
 # => Vector[0.18181818181818182, 0.5454545454545454, 0.8181818181818182]
-v.norm # => 1.0
+p v.norm # => 1.0
 ```
 
 - **SEE** [m:Vector#norm]
@@ -298,7 +298,7 @@ v と self がなす角度を返します。
 
 ```ruby title="例"
 require 'matrix'
-Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
+p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 ```
 
 - **param** `v` -- このベクトルと self とがなす角度を計算します

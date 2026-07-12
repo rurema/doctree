@@ -20,7 +20,7 @@ library: rake
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application["test_rake_app"] # => <Rake::Task test_rake_app => []>
+  p Rake.application["test_rake_app"] # => <Rake::Task test_rake_app => []>
 end
 ```
 
@@ -33,9 +33,9 @@ end
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.tasks # => [<Rake::Task default => [test_rake_app]>, <Rake::Task test_rake_app => []>]
-  Rake.application.clear # => []
-  Rake.application.tasks # => []
+  p Rake.application.tasks # => [<Rake::Task default => [test_rake_app]>, <Rake::Task test_rake_app => []>]
+  p Rake.application.clear # => []
+  p Rake.application.tasks # => []
 end
 ```
 
@@ -66,7 +66,7 @@ end
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.current_scope # => LL()
+  p Rake.application.current_scope # => LL()
 end
 ```
 
@@ -83,7 +83,7 @@ end
 
 task default: :test_rake_app
 task :test_rake_app do
-  Rake.application.define_task(Rake::Task, :t) # => <Rake::Task t => []>
+  p Rake.application.define_task(Rake::Task, :t) # => <Rake::Task t => []>
 end
 ```
 
@@ -117,7 +117,7 @@ end
 
 task :test_rake_app do
   task.application.in_namespace("sample") do
-    hoge # => "hoge"
+    p hoge # => "hoge"
   end
 end
 ```
@@ -139,8 +139,8 @@ end
 task default: :test_rake_app
 
 task :test_rake_app do |task|
-  task.application.intern(Rake::Task, "test_rake_app") # => <Rake::Task test_rake_app => []>
-  task.application.intern(Rake::Task, "sample_task")   # => <Rake::Task sample_task => []>
+  p task.application.intern(Rake::Task, "test_rake_app") # => <Rake::Task test_rake_app => []>
+  p task.application.intern(Rake::Task, "sample_task") # => <Rake::Task sample_task => []>
 end
 ```
 
@@ -175,9 +175,9 @@ task default: :test_rake_app1
 
 desc "test1"
 task :test_rake_app1 do |task|
-  task.application.last_description # => "test2"
+  p task.application.last_description # => "test2"
   task.application.last_description = "test3"
-  task.application.last_description # => "test3"
+  p task.application.last_description # => "test3"
 end
 
 desc "test2"
@@ -203,7 +203,7 @@ end
 task default: :test_rake_app
 
 task :test_rake_app do |task|
-  task.application.lookup("test_rake_app") # => <Rake::Task test_rake_app => []>
+  p task.application.lookup("test_rake_app") # => <Rake::Task test_rake_app => []>
 end
 ```
 
@@ -232,9 +232,9 @@ end
 task default: :test_rake_app
 
 task :test_rake_app do |task|
-  task.application.synthesize_file_task("sample_file") # => nil
+  p task.application.synthesize_file_task("sample_file") # => nil
   IO.write("sample_file", "")
-  task.application.synthesize_file_task("sample_file") # => <Rake::FileTask sample_file => []>
+  p task.application.synthesize_file_task("sample_file") # => <Rake::FileTask sample_file => []>
 end
 ```
 

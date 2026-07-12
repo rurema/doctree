@@ -22,8 +22,8 @@ namespace :ns do |ns|
   task :ts2 do
   end
 
-  ns[:ts1] # => <Rake::Task ns:ts1 => []>
-  ns[:ts2] # => <Rake::Task ns:ts2 => []>
+  p ns[:ts1] # => <Rake::Task ns:ts1 => []>
+  p ns[:ts2] # => <Rake::Task ns:ts2 => []>
 end
 ```
 
@@ -40,7 +40,7 @@ namespace :ns do |ns|
   task :ts2 do
   end
 
-  ns.tasks # => [<Rake::Task ns:ts1 => []>, <Rake::Task ns:ts2 => []>]
+  p ns.tasks # => [<Rake::Task ns:ts1 => []>, <Rake::Task ns:ts2 => []>]
 end
 ```
 
@@ -60,6 +60,6 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   name_space = Rake::NameSpace.new(Rake.application, Rake::Scope.new("sample"))
-  name_space.scope # => LL("sample")
+  p name_space.scope # => LL("sample")
 end
 ```
