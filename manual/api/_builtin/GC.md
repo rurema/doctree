@@ -241,11 +241,7 @@ GC.enable    # => true
 GC.enable    # => false
 ```
 
-#@since 2.1.0
-### def start(full_mark: true, immediate_sweep: true) -> nil
-#@else
-### def start -> nil
-#@end
+### def start(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
 
 ガーベージコレクトを開始します。
 
@@ -258,9 +254,11 @@ GC.enable    # => false
 
 nil を返します。
 
-#@since 2.1.0
 - **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
                  合は true を指定します。
+
+- **param** `immediate_mark` -- mark を遅らせる(Lazy Mark を行う)場合は false
+                       を、そうでない場合は true を指定します。
 
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。
@@ -268,7 +266,6 @@ nil を返します。
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
 す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
-#@end
 
 ```ruby title="例"
 GC.count  # => 3
@@ -483,7 +480,7 @@ SEGV が起きるでしょう。
 
 ## Instance Methods
 
-### def garbage_collect(full_mark: true, immediate_sweep: true) -> nil
+### def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
 
 ガーベージコレクトを開始します。
 
@@ -498,6 +495,9 @@ nil を返します。
 
 - **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
                  合は true を指定します。
+
+- **param** `immediate_mark` -- mark を遅らせる(Lazy Mark を行う)場合は false
+                       を、そうでない場合は true を指定します。
 
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。
