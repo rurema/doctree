@@ -85,9 +85,10 @@ require "json"
 
 json_state = JSON::State.from_state(indent: "\t")
 # JSON を出力する何らかの処理を実行する
-copy = JSON::State.from_state(json_state)
-copy.class  # => JSON::Ext::Generator::State
-copy.indent # => "\t"
+same = JSON::State.from_state(json_state)
+same.equal?(json_state) # => true
+same.class               # => JSON::Ext::Generator::State
+same.indent              # => "\t"
 ```
 
 ## Public Instance Methods
