@@ -94,7 +94,7 @@ Traceback (most recent call last):
 
 注意: I/O や GC、拡張ライブラリがからむとこのフラグは無視さ
 れることもあります。排他制御を行うにはこのメソッドに頼らず
-[c:Mutex] や [c:Monitor] を使うべきです。
+[c:Thread::Mutex] や [c:Monitor] を使うべきです。
 
 - **param** `newstate` -- スレッドの切替えを許すかどうかを、true か false で指定します。
 #@end
