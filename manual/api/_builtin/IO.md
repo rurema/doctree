@@ -327,11 +327,11 @@ IO.open(IO.sysopen("testfile")) { |io| p io.class } # => IO
 ```
 
 #@since 2.4.0
-### def foreach(path, rs = $/, chomp: false) {|line| ... }    -> nil
-### def foreach(path, rs = $/, chomp: false)                  -> Enumerator
+### def foreach(path, rs = $/, chomp: false, **opts) {|line| ... }    -> nil
+### def foreach(path, rs = $/, chomp: false, **opts)                  -> Enumerator
 #@else
-### def foreach(path, rs = $/) {|line| ... }    -> nil
-### def foreach(path, rs = $/)                  -> Enumerator
+### def foreach(path, rs = $/, **opts) {|line| ... }    -> nil
+### def foreach(path, rs = $/, **opts)                  -> Enumerator
 #@end
 
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
@@ -353,6 +353,11 @@ path が空ファイルの場合、何もせずに nil を返します。
 #@since 2.4.0
 - **param** `chomp` -- true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
 #@end
+
+- **param** `opts` -- ファイル path を open する時に使われるオプションをキーワード引数で指定します。
+          `:encoding` で読み込んだ行のエンコーディングを、
+          `:mode` で [m:IO.open] のモード文字列を指定できます。
+          これらの他、[m:IO.new] のオプション引数(`:external_encoding` など)が指定できます。
 
 - **raise** `Errno::EXXX` -- path のオープンに失敗した場合、発生します。
 
@@ -380,6 +385,14 @@ IO.foreach("testfile", chomp: true) { |x| print "GOT ", x }
 # => GOT line1GOT line2,GOT line3
 ```
 #@end
+
+```ruby title="例: エンコーディングを指定"
+IO.write("testfile", "line1\nline2,\nline3\n")
+IO.foreach("testfile", encoding: "UTF-8") { |x| p x.encoding }
+# => #<Encoding:UTF-8>
+# #<Encoding:UTF-8>
+# #<Encoding:UTF-8>
+```
 
 - **SEE** [m:$/]
 
