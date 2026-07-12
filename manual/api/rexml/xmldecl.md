@@ -17,10 +17,10 @@ doc = REXML::Document.new(<<EOS)
 EOS
 
 xml_decl = doc.xml_decl
-xml_decl.version # => "1.0"
-xml_decl.encoding # => "UTF-8"
-xml_decl.standalone # => "yes"
-xml_decl.writethis # => true
+p xml_decl.version # => "1.0"
+p xml_decl.encoding # => "UTF-8"
+p xml_decl.standalone # => "yes"
+p xml_decl.writethis # => true
 ```
 
 
@@ -31,10 +31,10 @@ doc = REXML::Document.new(<<EOS)
 EOS
 
 xml_decl = doc.xml_decl
-xml_decl.version # => "1.0"
-xml_decl.encoding # => "UTF-8"
-xml_decl.standalone # => nil
-xml_decl.writethis # => false
+p xml_decl.version # => "1.0"
+p xml_decl.encoding # => "UTF-8"
+p xml_decl.standalone # => nil
+p xml_decl.writethis # => false
 ```
 
 ```ruby title="XML 宣言が encoding 属性を持たない場合の例"
@@ -45,10 +45,10 @@ doc = REXML::Document.new(<<EOS)
 EOS
 
 xml_decl = doc.xml_decl
-xml_decl.version # => "1.0"
-xml_decl.encoding # => "UTF-8"
-xml_decl.standalone # => nil
-xml_decl.writethis # => true
+p xml_decl.version # => "1.0"
+p xml_decl.encoding # => "UTF-8"
+p xml_decl.standalone # => nil
+p xml_decl.writethis # => true
 ```
 
 ## Class Methods

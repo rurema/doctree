@@ -206,8 +206,8 @@ p version.version  # => "1.2.3a"
 self がプレリリースと思われる文字を含むバージョンかどうかを返します。
 
 ```ruby title="例"
-Gem::Version.new('1.2.0a').prerelease? # => true
-Gem::Version.new('1.2.0').prerelease?  # => false
+p Gem::Version.new('1.2.0a').prerelease? # => true
+p Gem::Version.new('1.2.0').prerelease?  # => false
 ```
 
 - **SEE** [m:Gem::Version#release]
@@ -219,8 +219,8 @@ self をリリースバージョンにした [c:Gem::Version] オブジェクト
 プレリリースではないバージョンであれば self を返します。
 
 ```ruby title="例"
-Gem::Version.new('1.2.0a').release # => #<Gem::Version "1.2.0">
-Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
+p Gem::Version.new('1.2.0a').release # => #<Gem::Version "1.2.0">
+p Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
 ```
 
 - **SEE** [m:Gem::Version#prerelease?]

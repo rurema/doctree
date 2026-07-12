@@ -242,7 +242,7 @@ doc = REXML::Document.new(<<EOS)
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <e />
 EOS
-doc.version # => "1.0"
+p doc.version # => "1.0"
 ```
 
 ### def encoding -> String
@@ -257,7 +257,7 @@ doc = REXML::Document.new(<<EOS)
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <e />
 EOS
-doc.encoding # => "UTF-8"
+p doc.encoding # => "UTF-8"
 ```
 
 ### def stand_alone? -> String
@@ -269,7 +269,7 @@ doc = REXML::Document.new(<<EOS)
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <e />
 EOS
-doc.stand_alone? # => "yes"
+p doc.stand_alone? # => "yes"
 ```
 
 #@until 2.0.0

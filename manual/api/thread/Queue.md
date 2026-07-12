@@ -92,9 +92,9 @@ q = Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
-q.length # => 4
+p q.length # => 4
 q.clear
-q.length # => 0
+p q.length # => 0
 ```
 
 ### def empty? -> bool
@@ -106,9 +106,9 @@ q.length # => 0
 require 'thread'
 #@end
 q = Queue.new
-q.empty? # => true
+p q.empty? # => true
 q.push(:resource)
-q.empty? # => false
+p q.empty? # => false
 ```
 
 ### def length -> Integer
@@ -124,7 +124,7 @@ q = Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
-q.length # => 4
+p q.length # => 4
 ```
 
 ### def num_waiting -> Integer
@@ -138,7 +138,7 @@ q = SizedQueue.new(1)
 q.push(1)
 t = Thread.new { q.push(2) }
 sleep 0.05 until t.stop?
-q.num_waiting # => 1
+p q.num_waiting # => 1
 
 q.pop
 t.join
@@ -247,9 +247,9 @@ q = Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
-q.closed? # => false
+p q.closed? # => false
 q.close
-q.closed? # => true
+p q.closed? # => true
 ```
 
 #@end

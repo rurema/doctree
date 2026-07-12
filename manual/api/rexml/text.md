@@ -77,8 +77,8 @@ doctype = REXML::Document.new(<<EOS).doctype
 ]>
 <root />
 EOS
-REXML::Text.new("&quzz", false, doc.root, false).to_s # => "&amp;&q;"
-REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
+p REXML::Text.new("&quzz", false, doc.root, false).to_s # => "&amp;&q;"
+p REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
 ```
 
 #@# entity_filter を使う場合
@@ -108,8 +108,8 @@ filter でアンエスケープしない実体の実体名を文字列配列で�
 
 ```ruby
 require 'rexml/text'
-REXML::Text.unnormalize("&amp; &foobar; &lt;") # => "& &foobar; <"
-REXML::Text.unnormalize("&lt; &gt;", nil, ["lt"]) # => "&lt; >"
+p REXML::Text.unnormalize("&amp; &foobar; &lt;") # => "& &foobar; <"
+p REXML::Text.unnormalize("&lt; &gt;", nil, ["lt"]) # => "&lt; >"
 ```
 
 #@# used internally, 不正な文字が含まれていないかチェックして例外を出す
@@ -169,8 +169,8 @@ self を複製します。
 ```ruby
 require 'rexml/document'
 t = REXML::Text.new("< & foobar", false, nil, false)
-t.to_s # => "&lt; &amp; foobar"
-t.value # => "< & foobar"
+p t.to_s # => "&lt; &amp; foobar"
+p t.value # => "< & foobar"
 ```
 
 #@# #@since 1.8.3
@@ -188,8 +188,8 @@ t.value # => "< & foobar"
 ```ruby
 require 'rexml/document'
 t = REXML::Text.new("< & foobar", false, nil, false)
-t.to_s # => "&lt; &amp; foobar"
-t.value # => "< & foobar"
+p t.to_s # => "&lt; &amp; foobar"
+p t.value # => "< & foobar"
 ```
 
 
@@ -208,9 +208,9 @@ require 'rexml/document'
 e = REXML::Element.new("a")
 e.add_text("foo")
 e[0].value = "bar"
-e.to_s # => "<a>bar</a>"
+p e.to_s # => "<a>bar</a>"
 e[0].value = "<a>"
-e.to_s # => "<a>&lt;a&gt;</a>"
+p e.to_s # => "<a>&lt;a&gt;</a>"
 ```
 
 #@# テキストをインデントした文字列を返す。内部用。
