@@ -259,7 +259,7 @@ Ruby起動時の初期値は 0 です。
 
 ```ruby title="例"
 $= = true # => warning: variable $= is no longer effective; ignored
-$=        # => warning: variable $= is no longer effective
+p $=      # => warning: variable $= is no longer effective
           #    false
 ```
 
