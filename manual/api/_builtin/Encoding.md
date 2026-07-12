@@ -149,19 +149,19 @@ default_internal を変更する前に作成した文字列と、default_interna
 ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
 
 ```ruby title="Debian GNU/Linux + LANG=C"
-Encoding.locale_charmap #=> "ANSI_X3.4-1968"
+p Encoding.locale_charmap #=> "ANSI_X3.4-1968"
 ```
 
 ```ruby title="LANG=ja_JP.EUC-JP"
-Encoding.locale_charmap #=> "EUC-JP"
+p Encoding.locale_charmap #=> "EUC-JP"
 ```
 
 ```ruby title="SunOS 5 + LANG=C"
-Encoding.locale_charmap #=> "646"
+p Encoding.locale_charmap #=> "646"
 ```
 
 ```ruby title="SunOS 5 + LANG=ja"
-Encoding.locale_charmap #=> "eucJP"
+p Encoding.locale_charmap #=> "eucJP"
 ```
 
 - **SEE** [man:charmap(5)]
@@ -172,8 +172,8 @@ Encoding.locale_charmap #=> "eucJP"
 プログラマにわかりやすい表現の文字列を返します。
 
 ```ruby title="例"
-Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
-Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+p Encoding::UTF_8.inspect     #=> "#<Encoding:UTF-8>"
+p Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
 ```
 
 ### def name -> String
@@ -181,14 +181,14 @@ Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
 エンコーディングの名前を返します。
 
 ```ruby title="例"
-Encoding::UTF_8.name       #=> "UTF-8"
+p Encoding::UTF_8.name     #=> "UTF-8"
 ```
 
 ### def names -> String
 エンコーディングの名前とエイリアス名の配列を返します。
 
 ```ruby title="例"
-Encoding::UTF_8.names      #=> ["UTF-8", "CP65001"]
+p Encoding::UTF_8.names    #=> ["UTF-8", "CP65001"]
 ```
 
 ### def dummy? -> bool
@@ -202,8 +202,8 @@ Ruby はサポートしていないが拡張ライブラリがサポートして
 用います。
 
 ```ruby title="例"
-Encoding::ISO_2022_JP.dummy?       #=> true
-Encoding::UTF_8.dummy?             #=> false
+p Encoding::ISO_2022_JP.dummy?     #=> true
+p Encoding::UTF_8.dummy?           #=> false
 ```
 
 #@since 1.9.2
@@ -214,8 +214,8 @@ Encoding::UTF_8.dummy?             #=> false
 
 
 ```ruby title="例"
-Encoding::UTF_8.ascii_compatible?     #=> true
-Encoding::UTF_16BE.ascii_compatible?  #=> false
+p Encoding::UTF_8.ascii_compatible?   #=> true
+p Encoding::UTF_16BE.ascii_compatible?  #=> false
 ```
 
 ### def replicate(name) -> Encoding
@@ -228,10 +228,10 @@ Ruby 3.2 から非推奨となり、Ruby 3.3 で削除予定です。
 
 ```ruby
 encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
-encoding.name                                                #=> "REPLICATED_UTF-8"
-"\u3042".force_encoding(Encoding::UTF_8).valid_encoding?     #=> true
-"\u3042".force_encoding(encoding).valid_encoding?            #=> true
-"\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
+p encoding.name                                              #=> "REPLICATED_UTF-8"
+p "\u3042".force_encoding(Encoding::UTF_8).valid_encoding?   #=> true
+p "\u3042".force_encoding(encoding).valid_encoding?          #=> true
+p "\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
 ```
 
 #@end

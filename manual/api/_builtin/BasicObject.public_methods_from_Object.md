@@ -37,8 +37,8 @@ class Foo
 end
 
 some = Foo.new 'XXX'
-some.instance_eval{p @key} #=> "XXX"
-some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
+p some.instance_eval{p @key} #=> "XXX"
+p some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
 
 some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
 messg = 'unknown'
@@ -56,7 +56,7 @@ class Bar < BasicObject
 end
 
 bar = Bar.new
-bar.call1 # => Object
+p bar.call1 # => Object
 bar.call2 # raise NameError
 ```
 
@@ -79,7 +79,7 @@ class KlassWithSecret
 end
 k = KlassWithSecret.new
 # 以下で x には 5 が渡される
-k.instance_exec(5) {|x| @secret + x }   #=> 104
+p k.instance_exec(5) {|x| @secret + x } #=> 104
 ```
 
 #@since 1.9.1

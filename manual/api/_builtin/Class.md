@@ -73,7 +73,7 @@ k = Class.new{|c|
   end
 }
 o = k.new              #=> "in initialize"
-o.hoge                 #=> "hoge hoge hoge"
+p o.hoge               #=> "hoge hoge hoge"
 ```
 
 ## Instance Methods
@@ -94,7 +94,7 @@ klass = Class.new do
   end
 end
 
-klass.allocate.initialized? #=> false
+p klass.allocate.initialized? #=> false
 ```
 
 
@@ -115,7 +115,7 @@ new は [m:Class#allocate] でインスタンスを生成し、
 C = Class.new   # => C
 
 # [[c:Class]] クラスのインスタンス、C クラスのインスタンスを生成
-C.new           # => #<C:0x00005623f8b4e458>
+p C.new         # => #<C:0x00005623f8b4e458>
 ```
 
 #@since 3.1
@@ -130,9 +130,9 @@ class B < A; end
 class C < B; end
 class D < A; end
 
-A.subclasses        # => [D, B]
-B.subclasses        # => [C]
-C.subclasses        # => []
+p A.subclasses      # => [D, B]
+p B.subclasses      # => [C]
+p C.subclasses      # => []
 ```
 
 - **SEE** [m:Class#superclass]
@@ -142,18 +142,18 @@ C.subclasses        # => []
 自身のスーパークラスを返します。
 
 ```ruby title="例"
-File.superclass          #=> IO
-IO.superclass            #=> Object
+p File.superclass        #=> IO
+p IO.superclass          #=> Object
 class Foo; end
 class Bar < Foo; end
-Bar.superclass           #=> Foo
-Object.superclass        #=> BasicObject
+p Bar.superclass         #=> Foo
+p Object.superclass      #=> BasicObject
 ```
 
 ただし [c:BasicObject].superclass は nil を返します。
 
 ```ruby title="例"
-BasicObject.superclass   #=> nil
+p BasicObject.superclass #=> nil
 ```
 
 #@since 3.1

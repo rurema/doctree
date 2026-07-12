@@ -64,8 +64,8 @@ name という名前付きグループにマッチした文字列を返します
 - **raise** `IndexError` -- 指定した名前が正規表現内に含まれていない場合に発生します
 
 ```ruby title="例"
-/\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
-/(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
+p /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
+p /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
 ```
 
 ### def begin(n) -> Integer | nil
@@ -153,12 +153,12 @@ p $~.captures   # => ["foo", "bar", nil]
 
 ```ruby title="例"
 m = /(?<hours>\d{2}):(?<minutes>\d{2}):(?<seconds>\d{2})/.match("18:37:22")
-m.deconstruct_keys([:hours, :minutes]) # => {:hours => "18", :minutes => "37"}
-m.deconstruct_keys(nil) # => {:hours => "18", :minutes => "37", :seconds => "22"}
+p m.deconstruct_keys([:hours, :minutes]) # => {:hours => "18", :minutes => "37"}
+p m.deconstruct_keys(nil) # => {:hours => "18", :minutes => "37", :seconds => "22"}
 
 # 名前付きキャプチャが定義されていなかった場合は空のハッシュを返す
 m = /(\d{2}):(\d{2}):(\d{2})/.match("18:37:22")
-m.deconstruct_keys(nil) # => {}
+p m.deconstruct_keys(nil) # => {}
 ```
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
@@ -302,9 +302,9 @@ p $~.bytebegin(4) # => index 4 out of matches (IndexError)
 
 ```ruby title="シンボルを指定する例"
 /(?<key>\S+):\s*(?<value>\S+)/ =~ "name: ruby"
-$~                   # => #<MatchData "name: ruby" key:"name" value:"ruby">
-$~.bytebegin(:key)   # => 0
-$~.bytebegin(:value) # => 6
+p $~                 # => #<MatchData "name: ruby" key:"name" value:"ruby">
+p $~.bytebegin(:key) # => 0
+p $~.bytebegin(:value) # => 6
 $~.bytebegin(:foo)   # => undefined group name reference: foo (IndexError)
 ```
 
@@ -336,9 +336,9 @@ p $~.byteend(4) # => index 4 out of matches (IndexError)
 
 ```ruby title="シンボルを指定する例"
 /(?<key>\S+):\s*(?<value>\S+)/ =~ "name: ruby"
-$~                 # => #<MatchData "name: ruby" key:"name" value:"ruby">
-$~.byteend(:key)   # => 4
-$~.byteend(:value) # => 10
+p $~               # => #<MatchData "name: ruby" key:"name" value:"ruby">
+p $~.byteend(:key) # => 4
+p $~.byteend(:value) # => 10
 $~.byteend(:foo)   # => undefined group name reference: foo (IndexError)
 ```
 
@@ -374,7 +374,7 @@ p $~.pre_match  # => "foo"
 
 ```ruby title="例"
 m = /(.)(.)(\d+)(\d)/.match("THX1138.")
-m.string   # => "THX1138."
+p m.string # => "THX1138."
 ```
 
 ### def to_a -> [String]
@@ -431,8 +431,8 @@ p m.values_at(0, 1, 2, 3, 4)      # => ["foobarbaz", "foo", "bar", "baz", nil]
 p m.values_at(-1, -2, -3, -4, -5) # => ["baz", "bar", "foo", nil, nil]
 
 m = /(?<a>\d+) *(?<op>[+\-*\/]) *(?<b>\d+)/.match("1 + 2")
-m.to_a                   # => ["1 + 2", "1", "+", "2"]
-m.values_at(:a, :b, :op) # => ["1", "2", "+"]
+p m.to_a                 # => ["1 + 2", "1", "+", "2"]
+p m.values_at(:a, :b, :op) # => ["1", "2", "+"]
 ```
 
 - **SEE** [m:Array#values_at], [m:Array#\[\]]
@@ -448,7 +448,7 @@ self.regexp.names と同じです。
 # => ["foo", "bar", "baz"]
 
 m = /(?<x>.)(?<y>.)?/.match("a") # => #<MatchData "a" x:"a" y:nil>
-m.names                          # => ["x", "y"]
+p m.names                        # => ["x", "y"]
 ```
 
 ### def regexp -> Regexp
@@ -456,7 +456,7 @@ m.names                          # => ["x", "y"]
 
 ```ruby title="例"
 m = /a.*b/.match("abc")
-m.regexp # => /a.*b/
+p m.regexp # => /a.*b/
 ```
 
 ### def hash -> Integer
@@ -477,27 +477,27 @@ false を返します。
 s = "abc"
 m1 = s.match("a")
 m2 = s.match("b")
-m1 == m2  # => false
+p m1 == m2  # => false
 m2 = s.match("a")
-m1 == m2  # => true
+p m1 == m2  # => true
 ```
 
 ```ruby title="正規表現"
 r = /abc/
 m1 = r.match("abc")   # => #<MatchData "abc">
 m2 = r.match("abcde") # => #<MatchData "abc">
-m1 == m2  # => false
+p m1 == m2  # => false
 m2 = r.match("abc")   # => #<MatchData "abc">
-m1 == m2  # => true
+p m1 == m2  # => true
 ```
 
 ```ruby title="正規表現のマッチした位置"
 r = /abc/
 m1 = r.match("abcabc")    # => #<MatchData "abc">
 m2 = r.match("abcabc", 3) # => #<MatchData "abc">
-m1 == m2  # => false
+p m1 == m2  # => false
 m2 = r.match("abcabc", 0) # => #<MatchData "abc">
-m1 == m2  # => true
+p m1 == m2  # => true
 ```
 
 #@since 3.3
@@ -514,20 +514,20 @@ Hashのキーは名前付きキャプチャの名前です。Hashの値はキー
 
 ```ruby title="例"
 m = /(?<a>.)(?<b>.)/.match("01")
-m.named_captures # => {"a" => "0", "b" => "1"}
+p m.named_captures # => {"a" => "0", "b" => "1"}
 
 m = /(?<a>.)(?<b>.)?/.match("0")
-m.named_captures # => {"a" => "0", "b" => nil}
+p m.named_captures # => {"a" => "0", "b" => nil}
 
 m = /(?<a>.)(?<a>.)/.match("01")
-m.named_captures # => {"a" => "1"}
+p m.named_captures # => {"a" => "1"}
 
 m = /(?<a>x)|(?<a>y)/.match("x")
-m.named_captures # => {"a" => "x"}
+p m.named_captures # => {"a" => "x"}
 #@since 3.3
 
 m = /(?<a>.)(?<a>.)/.match("01")
-m.named_captures(symbolize_names: true) #=> {:a => "1"}
+p m.named_captures(symbolize_names: true) #=> {:a => "1"}
 #@end
 ```
 

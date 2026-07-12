@@ -69,9 +69,9 @@ p ec.convpath #=> ["universal_newline",
 引数が ASCII 互換エンコーディングである場合や、エンコーディングでない場合は nil を返します。
 
 ```ruby
-Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-JP>
-Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
-Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
+p Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-JP>
+p Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
+p Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
 ```
 
 ### def search_convpath(source_encoding, destination_encoding, options) -> Array
@@ -123,7 +123,7 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "euc-jp")
-ec.source_encoding #=> #<Encoding:UTF-8>
+p ec.source_encoding #=> #<Encoding:UTF-8>
 ```
 
 ### def destination_encoding -> Encoding
@@ -133,7 +133,7 @@ ec.source_encoding #=> #<Encoding:UTF-8>
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "euc-jp")
-ec.destination_encoding #=> #<Encoding:EUC-JP>
+p ec.destination_encoding #=> #<Encoding:EUC-JP>
 ```
 
 ### def convpath -> Array

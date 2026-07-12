@@ -50,7 +50,7 @@ p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
 ```ruby title="例"
 def foo
   a = 1
-  binding.local_variable_get(:a) # => 1
+  p binding.local_variable_get(:a) # => 1
   binding.local_variable_get(:b) # => NameError
 end
 ```
@@ -104,8 +104,8 @@ binding.eval("#{symbol} = #{obj}")
 ```ruby title="例"
 def foo
   a = 1
-  binding.local_variable_defined?(:a) # => true
-  binding.local_variable_defined?(:b) # => false
+  p binding.local_variable_defined?(:a) # => true
+  p binding.local_variable_defined?(:b) # => false
 end
 ```
 
@@ -127,7 +127,7 @@ binding.eval("defined?(#{symbol}) == 'local-variable'")
 def foo
   a = 1
   2.times do |n|
-    binding.local_variables #=> [:a, :n]
+    p binding.local_variables #=> [:a, :n]
   end
 end
 ```

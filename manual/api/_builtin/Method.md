@@ -105,10 +105,10 @@ class Foo
 end
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
-m.call # => "foo"
+p m.call # => "foo"
 
-m.clone # => #<Method: Foo#foo>
-m.clone.call # => "foo"
+p m.clone # => #<Method: Foo#foo>
+p m.clone.call # => "foo"
 ```
 
 ### def [](*args) -> object
@@ -148,8 +148,8 @@ class Foo
 end
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
-m[1]      # => "foo called with arg 1"
-m.call(2) # => "foo called with arg 2"
+p m[1]    # => "foo called with arg 1"
+p m.call(2) # => "foo called with arg 2"
 ```
 
 #@since 2.6.0
@@ -272,10 +272,10 @@ p c.method(:y).arity     #=> -3
 p c.method(:z).arity     #=> -3
 
 s = "xyz"
-s.method(:size).arity      #=> 0
-s.method(:replace).arity   #=> 1
-s.method(:squeeze).arity   #=> -1
-s.method(:count).arity     #=> -1
+p s.method(:size).arity    #=> 0
+p s.method(:replace).arity #=> 1
+p s.method(:squeeze).arity #=> -1
+p s.method(:count).arity   #=> -1
 ```
 
 ### def inspect -> String
@@ -469,7 +469,7 @@ end
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
 unbound_method = m.unbind # => #<UnboundMethod: Foo#foo>
-unbound_method.bind(Foo.new) # => #<Method: Foo#foo>
+p unbound_method.bind(Foo.new) # => #<Method: Foo#foo>
 ```
 
 ### def ==(other)     -> bool
@@ -530,7 +530,7 @@ class Foo
 end
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
-m.name # => :foo
+p m.name # => :foo
 ```
 
 ### def owner    -> Class | Module
@@ -545,10 +545,10 @@ class Foo
 end
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
-m.owner # => Foo
+p m.owner # => Foo
 
 m = Foo.new.method(:puts) # => #<Method: Foo(Kernel)#puts>
-m.owner # => Kernel
+p m.owner # => Kernel
 ```
 
 ### def receiver    -> object
@@ -563,8 +563,8 @@ class Foo
 end
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
-m.receiver # => #<Foo:0x007fb39203eb78>
-m.receiver.foo(1) # => "foo called with arg 1"
+p m.receiver # => #<Foo:0x007fb39203eb78>
+p m.receiver.foo(1) # => "foo called with arg 1"
 ```
 
 
@@ -587,9 +587,9 @@ end
 require '/tmp/foo'
 
 m = Foo.new.method(:foo) # => #<Method: Foo#foo>
-m.source_location # => ["/tmp/foo.rb", 2]
+p m.source_location # => ["/tmp/foo.rb", 2]
 
-method(:puts).source_location # => nil
+p method(:puts).source_location # => nil
 ```
 
 #@end
@@ -624,17 +624,17 @@ Method オブジェクトが引数を取らなければ空の配列を返しま�
 ```ruby title="例"
 #@since 2.1.0
 m = Class.new{define_method(:m){|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}}.instance_method(:m)
-m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+p m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
 #@else
 #@since 2.0.0
 m = Class.new{define_method(:m){|x, y=42, *other, k_x: 42, **k_other, &b|}}.instance_method(:m)
-m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
+p m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:key, :k_x], [:keyrest, :k_other], [:block, :b]]
 #@else
 m = Class.new{define_method(:m){|x, y=42, *other, &b|}}.instance_method(:m)
-m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
+p m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
 #@end
 #@end
-File.method(:symlink).parameters #=> [[:req], [:req]]
+p File.method(:symlink).parameters #=> [[:req], [:req]]
 ```
 
 - **SEE** [m:Proc#parameters]
@@ -695,9 +695,9 @@ class Sub < Super
 end
 
 m = Sub.new.method(:foo) # => #<Method: Sub#foo>
-m.call # => "subclass method"
-m.super_method # => #<Method: Super#foo>
-m.super_method.call # => "superclass method"
+p m.call # => "subclass method"
+p m.super_method # => #<Method: Super#foo>
+p m.super_method.call # => "superclass method"
 ```
 
 #@end
@@ -712,7 +712,7 @@ class C
   def foo; end
   alias bar foo
 end
-C.new.method(:bar).original_name # => :foo
+p C.new.method(:bar).original_name # => :foo
 ```
 
 - **SEE** [m:UnboundMethod#original_name]
