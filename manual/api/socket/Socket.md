@@ -450,8 +450,22 @@ sockets でサーバソケットを受け取り、接続を待ち受け、
 ### def ip_address_list -> [Addrinfo]
 ローカルの IP アドレスを配列で返します。
 
+#@if("4.0" <= version)
+### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) -> Socket
+### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) {|socket| ... } -> object
+#@end
+#@if("3.4" <= version and version < "4.0")
+### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) -> Socket
+### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) {|socket| ... } -> object
+#@end
+#@if("2.7.0" <= version and version < "3.4")
+### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) -> Socket
+### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) {|socket| ... } -> object
+#@end
+#@if(version < "2.7.0")
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil) -> Socket
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil) {|socket| ... } -> object
+#@end
 TCP/IP で host:port に接続するソケットオブジェクトを作成します。
 
 local_host や local_port を指定した場合、ソケットをそこにバインドします。
@@ -463,7 +477,16 @@ local_host や local_port を指定した場合、ソケットをそこにバイ
 - **param** `port` -- 接続先のポート番号
 - **param** `local_host` -- 接続元のホスト名
 - **param** `local_port` -- 接続元のポート番号
-- **param** `connect_timeout` -- タイムアウトまでの秒数
+- **param** `connect_timeout` -- 接続確立のタイムアウトを秒数で指定します。
+#@if (version >= "2.7.0")
+- **param** `resolv_timeout` -- 名前解決のタイムアウトを秒数で指定します。
+#@end
+#@if (version >= "4.0")
+- **param** `open_timeout` -- 名前解決から接続確立までのタイムアウトを秒数で指定します。
+#@end
+#@if (version >= "3.4")
+- **param** `fast_fallback` -- Happy Eyeballs Version 2 ([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305)) を有効にします。
+#@end
 - **return** -- ブロック付きで呼ばれた場合はブロックが返した値です。
         ブロックなしで呼ばれた場合はソケットオブジェクトを返します。
 
