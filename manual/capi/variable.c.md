@@ -59,9 +59,9 @@
 klass の名前を返します。
 返り値の内容を変更したり free してはいけません。
 
-`````
+```c
 RSTRING(rb_class_path(klass))->ptr
-`````
+```
 
 と同じです。
 
@@ -72,9 +72,9 @@ klass の名前を返します．klassが無名クラス、無名モジュー
 
 [m:Module#to_s] の定義は
 
-`````
+```c
 rb_str_dup(rb_class_path(klass));
-`````
+```
 
 です。
 
@@ -176,11 +176,9 @@ klass のクラス変数 name に val を代入します。
 
 Ruby のグローバル変数の値を取得します。
 
-使用例
-
-```````
+```c title="使用例"
 VALUE v = rb_gv_get("$!")
-```````
+```
 
 ### VALUE rb_gv_set(const char *name, VALUE val)
 #@# [1.5 feature]

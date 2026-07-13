@@ -295,7 +295,7 @@ catch と同等の動作を実行します。
 throw が発生した場合はその値を返します。
 throw が発生しなかったときは proc の返り値を返します。
 
-`````
+```c
 static VALUE
 foo_yield(VALUE a, VALUE b)
 {
@@ -321,7 +321,7 @@ Init_foo(void)
     rb_define_method(Foo, "catch", foo_catch, 0);
     rb_define_method(Foo, "abort", foo_abort, 0);
 }
-`````
+```
 
 #@until 2.2.0
 ### void rb_check_safe_str(VALUE x)
@@ -539,9 +539,9 @@ break の C 用インターフェイスです。
 まず call_proc(data1) を実行します。そしてその関数か
 その直下のメソッドで yield が発生すると以下が実行されます。
 
-```````
+```text
 block_proc(VALUE block_arg, VALUE data2, VALUE self)
-```````
+```
 
 block_arg はブロック引数(複数なら配列に入っている)、
 data2 は rb_iterate() に渡したもの、
@@ -661,13 +661,13 @@ VALUE val;
 
 proc(data) を評価中のあらゆる大域脱出(例外を含む)を捕捉します。
 
-`````
+```c
 val = rb_protect(func, arg, &status);
 if (status != 0) {
     puts("大域脱出が起きた");
     rb_jump_tag(status);
 }
-`````
+```
 
 ### void rb_provide(const char *feature)
 
