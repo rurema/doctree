@@ -287,7 +287,7 @@ ruby の -n オプションの実装。
 そのフラグテーブルを返します。str が予約語でなければ
 NULL を返します。
 
-```````
+```c
 struct kwtable {
     char *name;            /* 予約語の名前 */
     int id[2];             /* 0:  非修飾型シンボル
@@ -295,7 +295,7 @@ struct kwtable {
                                   それを格納する。なければ id[0] と同じ  */
     enum lex_state state;  /* 遷移すべきlex_state */
 };
-```````
+```
 
 ### VALUE rb_sym_all_symbols(void)
 
@@ -374,24 +374,24 @@ node を評価したときに、確実に値が得られない式が
 node の表すプログラムの中に値を使わないと
 意味のない式があれば警告を出す。
 
-```````
+```ruby
 # 警告が出る例
 lvar = 1
 lvar      # 無駄
 p lvar
-```````
+```
 
 ### static void void_stmts(NODE *node)
 
 node の表すプログラムの中に値を使わないと
 意味のない式があれば警告を出す。
 
-```````
+```ruby
 # 警告が出る例
 lvar = 1
 lvar      # 無駄
 p lvar
-```````
+```
 
 ### static void warn_unless_e_option(const char *str)
 
