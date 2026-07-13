@@ -925,12 +925,12 @@ p t.strftime("%Y-%m-%d %H:%M:%S UTC")  # => "2000-01-01 18:04:05 UTC"
 
 戻り値の文字エンコーディングは [m:Encoding::US_ASCII] です。
 
-#@since 2.7.0
 ### def inspect     -> String
 
 時刻を文字列に変換した結果を返します。
 
-[m:Time#to_s] とは異なりナノ秒まで含めて返します。
+[m:Time#to_s] とは異なり、秒未満の端数が 0 でない場合はその値も含めて返します。
+端数が 0 の場合は [m:Time#to_s] と同じ結果になります。
 
 ```ruby
 t = Time.now
@@ -939,10 +939,13 @@ t.strftime "%Y-%m-%d %H:%M:%S.%N %z"  #=> "2012-11-10 18:16:12.261257655 +0100"
 
 t.utc.inspect                          #=> "2012-11-10 17:16:12.261257655 UTC"
 t.strftime "%Y-%m-%d %H:%M:%S.%N UTC"  #=> "2012-11-10 17:16:12.261257655 UTC"
+
+t2 = Time.at(0.1r)
+t2.inspect                                # => "1970-01-01 09:00:00.1 +0900"
+t2.strftime("%Y-%m-%d %H:%M:%S.%N %z")    # => "1970-01-01 09:00:00.100000000 +0900"
 ```
 
 戻り値の文字エンコーディングは [m:Encoding::US_ASCII] です。
-#@end
 
 ### def hash -> Integer
 

@@ -388,11 +388,14 @@ p Foo::Bar
 
 - **SEE** [m:Kernel?.autoload]
 
-### def autoload?(const_name) -> String | nil
+### def autoload?(const_name, inherit = true) -> String | nil
 autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します。
 また、ロード済みなら nil を返します。
 
 - **param** `const_name` -- [c:String] または [c:Symbol] で指定します。
+
+- **param** `inherit` -- false にすると、スーパークラスや include したモジュールで
+       定義された autoload を検索対象にしません。
 
 - **SEE** [m:Kernel?.autoload?]
 
@@ -403,6 +406,18 @@ autoload?(:Date) # => "date"
 Date
 autoload?(:Date) # => nil
 autoload?(:Foo) # => nil
+```
+
+```ruby title="例: inherit引数"
+class Parent
+  autoload :Foo, "foo"
+end
+
+class Child < Parent
+end
+
+Child.autoload?(:Foo)        # => "foo"
+Child.autoload?(:Foo, false) # => nil
 ```
 
 ### def class_variables(inherit = true) -> [Symbol]
