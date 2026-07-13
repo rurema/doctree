@@ -255,26 +255,6 @@ a.join
 
 - **SEE** [m:Thread#run], [m:Thread#wakeup]
 
-#@since 1.9.1
-### def exclusive { ... }  -> object
-#@# 1.8 以前は ../thread.rb にあります。
-VM グローバルの Mutex をロックし、ブロックを実行します。
-
-このクラスメソッドの挙動は 1.8 以前とは違います。
-#@since 2.6.0
-Thread.exclusive は VM グローバルの Mutex の
-#@else
-Thread.exclusive は VM グローバルの [m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE] の
-#@end
-synchronize を呼び出しているだけで、Thread.exclusive していないスレッドは動きます。
-#@since 2.3.0
-[c:Thread::Mutex] や [c:Monitor] などの他の排他制御の方法を検討してください。
-#@else
-[c:Mutex] や [c:Monitor] などの他の排他制御の方法を検討してください。
-#@end
-
-#@#noexample deprecated
-
 ### const DEBUG -> Integer
 
 スレッドのデバッグレベルを返します。
@@ -307,8 +287,6 @@ Thread.DEBUG # => 1
 ```
 
 - **SEE** [m:Thread.DEBUG]
-
-#@end
 
 #@since 2.0.0
 #@# 参考: [[ruby-dev:45341]]
@@ -1266,15 +1244,4 @@ a.inspect   # => "#<Thread:0x00007f85ac8721f0@named@(irb):1 dead>"
 ```
 
 - **SEE** [m:Thread#name]
-#@end
-
-## Constants
-
-#@if("1.9.1" <= version and version < "2.6.0")
-### const MUTEX_FOR_THREAD_EXCLUSIVE -> Mutex
-
-[m:Thread.exclusive]用の[c:Mutex]オブジェクトです。
-#@since 2.4.0
-(private constant です。)
-#@end
 #@end
