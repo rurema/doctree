@@ -45,12 +45,12 @@ library: _builtin
 ```ruby title="例"
 signal_number = Signal.list["INT"]
 se = SignalException.new(signal_number) # => #<SignalException: SIGINT>
-se.signo # => 2
+p se.signo # => 2
 ```
 
 ```ruby title="例"
 se = SignalException.new("INT") # => #<SignalException: SIGINT>
-se.signm # => "SIGINT"
+p se.signm # => "SIGINT"
 ```
 
 - **SEE** [m:Signal?.list]

@@ -242,8 +242,8 @@ obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 変換に成功した場合はそれを返し、失敗時には nil を返します。
 
 ```ruby title="例"
-Regexp.try_convert(/re/)      # => /re/
-Regexp.try_convert("re")      # => nil
+p Regexp.try_convert(/re/)    # => /re/
+p Regexp.try_convert("re")    # => nil
 ```
 
 ## Instance Methods
@@ -308,8 +308,8 @@ else;              puts "Mixed case"
 end
 # => Upper case
 
-/\A[a-z]*\z/ === "HELLO" # => false
-/\A[A-Z]*\z/ === "HELLO" # => true
+p /\A[a-z]*\z/ === "HELLO" # => false
+p /\A[A-Z]*\z/ === "HELLO" # => true
 ```
 
 - **SEE** [m:Enumerable#grep], [m:Object#===]
@@ -375,33 +375,33 @@ p reg.casefold? # => false
 # -*- coding:utf-8 -*-
 
 r = /a/
-r.fixed_encoding?                               # => false
-r.encoding                                      # => #<Encoding:US-ASCII>
-r =~ "\u{6666} a"                               # => 2
-r =~ "\xa1\xa2 a".force_encoding("euc-jp")      # => 2
-r =~ "abc".force_encoding("euc-jp")             # => 0
+p r.fixed_encoding?                             # => false
+p r.encoding                                    # => #<Encoding:US-ASCII>
+p r =~ "\u{6666} a"                             # => 2
+p r =~ "\xa1\xa2 a".force_encoding("euc-jp")    # => 2
+p r =~ "abc".force_encoding("euc-jp")           # => 0
 
 r = /a/u
-r.fixed_encoding?                               # => true
-r.encoding                                      # => #<Encoding:UTF-8>
-r =~ "\u{6666} a"                               # => 2
+p r.fixed_encoding?                             # => true
+p r.encoding                                    # => #<Encoding:UTF-8>
+p r =~ "\u{6666} a"                             # => 2
 begin
   r =~ "\xa1\xa2".force_encoding("euc-jp")
 rescue => e
   e.class                                       # => Encoding::CompatibilityError
 end
-r =~ "abc".force_encoding("euc-jp")             # => 0
+p r =~ "abc".force_encoding("euc-jp")           # => 0
 
 r = /\u{6666}/
-r.fixed_encoding?                               # => true
-r.encoding                                      # => #<Encoding:UTF-8>
-r =~ "\u{6666} a"                               # => 0
+p r.fixed_encoding?                             # => true
+p r.encoding                                    # => #<Encoding:UTF-8>
+p r =~ "\u{6666} a"                             # => 0
 begin
   r =~ "\xa1\xa2".force_encoding("euc-jp")
 rescue => e
   e.class                                       # => Encoding::CompatibilityError
 end
-r =~ "abc".force_encoding("euc-jp")             # => nil
+p r =~ "abc".force_encoding("euc-jp")           # => nil
 ```
 
 ### def match(str, pos = 0) -> MatchData | nil
@@ -437,9 +437,9 @@ re.match(str, pos)
 
 ```ruby title="例"
 results = []
-/((.)\2)/.match("foo") {|m| results << m[0] } # => ["oo"] 
-/((.)\2)/.match("bar") {|m| results << m[0] } # => nil
-results # => ["oo"]
+p /((.)\2)/.match("foo") {|m| results << m[0] } # => ["oo"] 
+p /((.)\2)/.match("bar") {|m| results << m[0] } # => nil
+p results # => ["oo"]
 ```
 
 - **param** `str` -- 文字列を指定します。str との正規表現マッチを行います。
@@ -508,10 +508,10 @@ foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 また、[m:$~] などパターンマッチに関する組み込み変数の値は変更されません。
 
 ```ruby title="例"
-/R.../.match?("Ruby")    # => true
-/R.../.match?("Ruby", 1) # => false
-/P.../.match?("Ruby")    # => false
-$&                       # => nil
+p /R.../.match?("Ruby")  # => true
+p /R.../.match?("Ruby", 1) # => false
+p /P.../.match?("Ruby")  # => false
+p $&                     # => nil
 ```
 
 - **SEE** [m:Regexp#match]

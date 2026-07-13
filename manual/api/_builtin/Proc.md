@@ -146,7 +146,7 @@ fib = lambda{|n|
     fib.(n - 2) + fib.(n - 1)
   end
 }
-fib.(10) # => 55
+p fib.(10) # => 55
 ```
 
 #@else
@@ -263,23 +263,23 @@ Proc オブジェクトが受け付ける引数の数を返します。
 
 ```ruby title="例"
 #@since 1.9.1
-lambda{           }.arity   # => 0
-lambda{||         }.arity   # =>  0
-lambda{|x|        }.arity   # =>  1
-lambda{|*x|       }.arity   # => -1
-lambda{|x, y|     }.arity   # =>  2
-lambda{|x, *y|    }.arity   # => -2
-lambda{|(x, y)|   }.arity   # =>  1
-lambda{|(x, y), z|}.arity   # =>  2
+p lambda{           }.arity # => 0
+p lambda{||         }.arity # =>  0
+p lambda{|x|        }.arity # =>  1
+p lambda{|*x|       }.arity # => -1
+p lambda{|x, y|     }.arity # =>  2
+p lambda{|x, *y|    }.arity # => -2
+p lambda{|(x, y)|   }.arity # =>  1
+p lambda{|(x, y), z|}.arity # =>  2
 #@else
-lambda{           }.arity   # => -1
-lambda{||         }.arity   # =>  0
-lambda{|x|        }.arity   # =>  1
-lambda{|*x|       }.arity   # => -1
-lambda{|x, y|     }.arity   # =>  2
-lambda{|x, *y|    }.arity   # => -2
-lambda{|(x, y)|   }.arity   # =>  2
-lambda{|(x, y), z|}.arity   # =>  2
+p lambda{           }.arity # => -1
+p lambda{||         }.arity # =>  0
+p lambda{|x|        }.arity # =>  1
+p lambda{|*x|       }.arity # => -1
+p lambda{|x, y|     }.arity # =>  2
+p lambda{|x, *y|    }.arity # => -2
+p lambda{|(x, y)|   }.arity # =>  2
+p lambda{|(x, y), z|}.arity # =>  2
 #@end
 ```
 
@@ -294,7 +294,7 @@ def fred(param)
 end
 
 sample_proc = fred(99)
-eval("param", sample_proc.binding)   # => 99
+p eval("param", sample_proc.binding) # => 99
 ```
 
 ### def to_proc -> self
@@ -374,11 +374,11 @@ p b.curry[]                  #=> :foo
 
 ```ruby title="例"
 # lambda で生成した Proc オブジェクトでは true 
-lambda{}.lambda? # => true
+p lambda{}.lambda? # => true
 # proc で生成した Proc オブジェクトでは false
 proc{}.lambda?   # => false
 # Proc.new で生成した Proc オブジェクトでは false
-Proc.new{}.lambda? # => false
+p Proc.new{}.lambda? # => false
 
 # 以下、lambda?が偽である場合
 # 余分な引数を無視する
@@ -391,25 +391,25 @@ proc{|a,b| [a,b]}.call([1,2]) # => [1,2]
  
 # &が付いた仮引数で生成される Proc は lambda? が偽となる
 def n(&b) b.lambda? end
-n {} # => false
+p n {} # => false
 
 # &が付いた実引数によるものは、lambda?が元の Procオブジェクトから
 # 引き継がれる
-lambda(&lambda {}).lambda?   #=> true
+p lambda(&lambda {}).lambda? #=> true
 proc(&lambda {}).lambda?     #=> true
-Proc.new(&lambda {}).lambda? #=> true
+p Proc.new(&lambda {}).lambda? #=> true
 
-lambda(&proc {}).lambda?     #=> false
+p lambda(&proc {}).lambda?   #=> false
 proc(&proc {}).lambda?       #=> false
-Proc.new(&proc {}).lambda?   #=> false
+p Proc.new(&proc {}).lambda? #=> false
 
-n(&lambda {})                #=> true
-n(&proc {})                  #=> false
-n(&Proc.new {})              #=> false
+p n(&lambda {})              #=> true
+p n(&proc {})                #=> false
+p n(&Proc.new {})            #=> false
 
 # Method#to_proc によるものは lambda?が真となる
 def m() end
-method(:m).to_proc.lambda? #=> true
+p method(:m).to_proc.lambda? #=> true
 
 # Module#define_method は特別扱いで、
 # これで定義されたメソッドの引数は常に厳密に取り扱われる
@@ -417,13 +417,13 @@ class C
   define_method(:d) {}
 end
 C.new.d(1,2)       #=> ArgumentError
-C.new.method(:d).to_proc.lambda?   #=> true
+p C.new.method(:d).to_proc.lambda? #=> true
 
 class C
   define_method(:e, &proc {})
 end
 C.new.e(1,2)       #=> ArgumentError
-C.new.method(:e).to_proc.lambda?   #=> true
+p C.new.method(:e).to_proc.lambda? #=> true
 ```
 
 ### def source_location -> [String, Integer] | nil
@@ -442,8 +442,8 @@ C.new.method(:e).to_proc.lambda?   #=> true
 # /path/to/target.rb を実行
 proc {}.source_location            # => ["/path/to/target.rb", 1]
 proc {}.source_location            # => ["/path/to/target.rb", 2]
-(eval "proc {}").source_location   # => ["(eval)", 1]
-method(:p).to_proc.source_location # => nil
+p (eval "proc {}").source_location # => ["(eval)", 1]
+p method(:p).to_proc.source_location # => nil
 ```
 
 - **SEE** [m:Method#source_location]

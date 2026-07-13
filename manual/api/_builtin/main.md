@@ -109,7 +109,7 @@ p public_methods(false) - basic_public_methods
 ```ruby title="例:"
 include Math
 
-hypot(3, 4)  # => 5.0
+p hypot(3, 4)  # => 5.0
 ```
 
 - **SEE** [m:Module#include]
@@ -159,11 +159,11 @@ module Sloth
   end
 end
 
-"ABC".downcase # => "abc"
+p "ABC".downcase # => "abc"
 
 using Sloth
 
-"ABC".downcase # => "ABC"
+p "ABC".downcase # => "ABC"
 ```
 
 #@since 2.1.0

@@ -63,52 +63,52 @@ printf "name:%s age:%d", fred.name, fred.age
 #@since 3.2
 ```ruby title="例"
 Point1 = Struct.new(:x, :y)
-Point1.new(1, 2)             # => #<struct Point1 x=1, y=2>
-Point1.new(x: 1, y: 2)       # => #<struct Point1 x=1, y=2>
-Point1.new(x: 1)             # => #<struct Point1 x=1, y=nil>
-Point1.new(y: 2)             # => #<struct Point1 x=nil, y=2>
+p Point1.new(1, 2)           # => #<struct Point1 x=1, y=2>
+p Point1.new(x: 1, y: 2)     # => #<struct Point1 x=1, y=2>
+p Point1.new(x: 1)           # => #<struct Point1 x=1, y=nil>
+p Point1.new(y: 2)           # => #<struct Point1 x=nil, y=2>
 Point1.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
 
 Point2 = Struct.new(:x, :y, keyword_init: nil)
-Point2.new(1, 2)             # => #<struct Point2 x=1, y=2>
-Point2.new(x: 1, y: 2)       # => #<struct Point2 x=1, y=2>
-Point2.new(x: 1)             # => #<struct Point2 x=1, y=nil>
-Point2.new(y: 2)             # => #<struct Point2 x=nil, y=2>
+p Point2.new(1, 2)           # => #<struct Point2 x=1, y=2>
+p Point2.new(x: 1, y: 2)     # => #<struct Point2 x=1, y=2>
+p Point2.new(x: 1)           # => #<struct Point2 x=1, y=nil>
+p Point2.new(y: 2)           # => #<struct Point2 x=nil, y=2>
 Point2.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
 
 Point3 = Struct.new(:x, :y, keyword_init: true)
 Point3.new(1, 2)             # => wrong number of arguments (given 2, expected 0) (ArgumentError)
-Point3.new(x: 1, y: 2)       # => #<struct Point3 x=1, y=2>
-Point3.new(x: 1)             # => #<struct Point3 x=1, y=nil>
-Point3.new(y: 2)             # => #<struct Point3 x=nil, y=2>
+p Point3.new(x: 1, y: 2)     # => #<struct Point3 x=1, y=2>
+p Point3.new(x: 1)           # => #<struct Point3 x=1, y=nil>
+p Point3.new(y: 2)           # => #<struct Point3 x=nil, y=2>
 Point3.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
 
 Point4 = Struct.new(:x, :y, keyword_init: false)
-Point4.new(1, 2)             # => #<struct Point4 x=1, y=2>
-Point4.new(x: 1, y: 2)       # => #<struct Point4 x={:x=>1, :y=>2}, y=nil>
+p Point4.new(1, 2)           # => #<struct Point4 x=1, y=2>
+p Point4.new(x: 1, y: 2)     # => #<struct Point4 x={:x=>1, :y=>2}, y=nil>
                              # これは Point4.new({x: 1, y: 2}) とみなされていることに注意
-Point4.new(x: 1)             # => #<struct Point4 x={:x=>1}, y=nil>
-Point4.new(y: 2)             # => #<struct Point4 x={:y=>2}, y=nil>
-Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={:x=>1, :y=>2, :z=>3}, y=nil>
+p Point4.new(x: 1)           # => #<struct Point4 x={:x=>1}, y=nil>
+p Point4.new(y: 2)           # => #<struct Point4 x={:y=>2}, y=nil>
+p Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={:x=>1, :y=>2, :z=>3}, y=nil>
 ```
 #@else
 ```ruby title="例"
 Point = Struct.new(:x, :y, keyword_init: true) # => Point(keyword_init: true)
-Point.new(x: 1, y: 2) # => #<struct Point x=1, y=2>
-Point.new(x: 1)       # => #<struct Point x=1, y=nil>
-Point.new(y: 2)       # => #<struct Point x=nil, y=2>
+p Point.new(x: 1, y: 2) # => #<struct Point x=1, y=2>
+p Point.new(x: 1)     # => #<struct Point x=1, y=nil>
+p Point.new(y: 2)     # => #<struct Point x=nil, y=2>
 Point.new(z: 3)       # ArgumentError (unknown keywords: z)
 ```
 
 #@if (version == "3.1")
 ```ruby title="警告が出る例"
 Point = Struct.new(:x, :y)
-Point.new(x: 1, y: 2)   # => #<struct Point x={:x=>1, :y=>2}, y=nil>
+p Point.new(x: 1, y: 2) # => #<struct Point x={:x=>1, :y=>2}, y=nil>
                         # warning: Passing only keyword arguments to Struct#initialize will behave differently from Ruby 3.2. Please use a Hash literal like .new({k: v}) instead of .new(k: v).
 
 # keyword_init: falseを指定すると警告は出ない
 Point2 = Struct.new(:x, :y, keyword_init: false)
-Point2.new(x: 1, y: 2)  # => #<struct Point2 x={:x=>1, :y=>2}, y=nil>
+p Point2.new(x: 1, y: 2)  # => #<struct Point2 x={:x=>1, :y=>2}, y=nil>
 ```
 #@end
 #@end
@@ -154,7 +154,7 @@ Customer = Struct.new(:name, :address) do
     "Hello #{name}!"
   end
 end
-Customer.new("Dave", "123 Main").greeting # => "Hello Dave!"
+p Customer.new("Dave", "123 Main").greeting # => "Hello Dave!"
 ```
 
 Structをカスタマイズする場合はこの方法が推奨されます。無名クラスのサブ
@@ -199,11 +199,11 @@ false を指定されていたら false を返します。
 
 ```ruby title="例"
 Foo = Struct.new(:a)
-Foo.keyword_init? # => nil
+p Foo.keyword_init? # => nil
 Bar = Struct.new(:a, keyword_init: true)
-Bar.keyword_init? # => true
+p Bar.keyword_init? # => true
 Baz = Struct.new(:a, keyword_init: false)
-Baz.keyword_init? # => false
+p Baz.keyword_init? # => false
 ```
 
 #@end
@@ -262,8 +262,8 @@ joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
 joe["name"] = "Luke"
 joe[:zip]   = "90210"
 
-joe.name   #=> "Luke"
-joe.zip    #=> "90210"
+p joe.name #=> "Luke"
+p joe.zip  #=> "90210"
 ```
 
 ### def each {|value| ... } -> self
@@ -312,7 +312,7 @@ Foo.new('FOO', 'BAR').each_pair {|m, v| p [m,v]}
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
 joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-joe.length   #=> 3
+p joe.length #=> 3
 ```
 
 ### def members -> [Symbol]
@@ -355,11 +355,11 @@ self のメンバの名前と値の組を [c:Hash] で返します。
 Customer = Struct.new(:name, :address, :zip)
 joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
 h = joe.deconstruct_keys([:zip, :address])
-h # => {:zip=>12345, :address=>"123 Maple, Anytown NC"}
+p h # => {:zip=>12345, :address=>"123 Maple, Anytown NC"}
 
 # 引数が nil の場合は全てのメンバを返します。
 h = joe.deconstruct_keys(nil)
-h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>12345}
+p h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>12345}
 ```
 
 #@include(Struct.attention)
@@ -377,7 +377,7 @@ self の内容を人間に読みやすい文字列にして返します。
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
 joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, Anytown NC\", zip=12345>"
+p joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, Anytown NC\", zip=12345>"
 ```
 
 ### def select {|i| ... } -> [object]
@@ -398,7 +398,7 @@ joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, Any
 ```ruby title="例"
 Lots = Struct.new(:a, :b, :c, :d, :e, :f)
 l = Lots.new(11, 22, 33, 44, 55, 66)
-l.select {|v| (v % 2).zero? }   #=> [22, 44, 66]
+p l.select {|v| (v % 2).zero? } #=> [22, 44, 66]
 ```
 
 #@include(Struct.attention)
@@ -432,8 +432,8 @@ self 以下のネストしたオブジェクトを dig メソッドで再帰的�
 klass = Struct.new(:a)
 o = klass.new(klass.new({b: [1, 2, 3]}))
 
-o.dig(:a, :a, :b, 0)              # => 1
-o.dig(:b, 0)                      # => nil
+p o.dig(:a, :a, :b, 0)            # => 1
+p o.dig(:b, 0)                    # => nil
 ```
 
 - **SEE** [m:Array#dig], [m:Hash#dig], [m:OpenStruct#dig]
@@ -526,7 +526,7 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 その結果をペアとして使います。
 ```ruby title="ブロック付きの例"
 Customer = Struct.new(:name, :address, :zip)
-Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
+p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
   [member, value*2]
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
 ```

@@ -18,12 +18,12 @@ MT19937に基づく擬似乱数生成器を提供するクラスです。
 
 ```ruby title="例： 種が同じなら同じ乱数列を発生できる。"
 prng = Random.new(1234)                                
-[ prng.rand, prng.rand ]   #=> [0.1915194503788923, 0.6221087710398319]
-[ prng.rand(10), prng.rand(1000) ]  #=> [4, 664] 
+p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
+p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664] 
 # 同じ乱数列を発生する。
 prng = Random.new(1234)                                
-[ prng.rand, prng.rand ]   #=> [0.1915194503788923, 0.6221087710398319]
-[ prng.rand(10), prng.rand(1000) ]  #=> [4, 664] 
+p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
+p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664] 
 ```
 
 ### def new_seed -> Integer
@@ -58,9 +58,9 @@ p Random.new_seed # => 184271600931914695177248627591520900872
 
 ```ruby title="例"
 #@since 2.5.0
-Random.urandom(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
+p Random.urandom(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 #@else
-Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
+p Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 #@end
 ```
 #@end
@@ -87,8 +87,8 @@ Random.raw_seed(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 
 ```ruby title="例"
 srand 1234 # 乱数の種を設定する。
-Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
-rand(10.0)         #=> 6                   (rand(10) と同じ)
+p Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
+p rand(10.0)       #=> 6                   (rand(10) と同じ)
 ```
 
 #@since 3.2
@@ -133,7 +133,7 @@ rand(10.0)         #=> 6                   (rand(10) と同じ)
 - **param** `size` -- 結果の文字列のサイズをバイト数で指定します。
 
 ```ruby
-Random.bytes(10) # => "\xAC\n\x7F\x8C/\xAA\xC4\x97u\xA6"
+p Random.bytes(10) # => "\xAC\n\x7F\x8C/\xAA\xC4\x97u\xA6"
 ```
 
 - **SEE** [m:Random#bytes]
@@ -243,12 +243,12 @@ range.end - range.begin が実数を返す場合も同様です。
 prng = Random.new(1234)
 prng.rand            # => 0.1915194503788923
 srand(1234)
-rand                 # => 0.1915194503788923
+p rand               # => 0.1915194503788923
 
 # max に実数も指定出来る
 prng.rand(6.5)       # => 4.043707011758907
 # (rand(6) と同等)
-rand(6.5)            # => 5
+p rand(6.5)          # => 5
 
 # 引数には Range も指定できる
 # 0 から 10までの整数が得られる
@@ -267,12 +267,12 @@ prng.rand(Date.new(2012, 1, 1) ... Date.new(2013,1,1)) # => #<Date: 2012-01-31 (
 prng = Random.new(1234)
 prng.rand            # => 0.1915194503788923
 srand(1234)
-rand                 # => 0.1915194503788923
+p rand               # => 0.1915194503788923
 
 # max に実数も指定出来る
 prng.rand(6.5)       # => 4.043707011758907
 # (rand(6) と同等)
-rand(6.5)            # => 5
+p rand(6.5)          # => 5
 
 # 引数には Range も指定できる
 # 0 から 10までの整数が得られる
@@ -296,7 +296,7 @@ srand(1234)
 # Kernel.#rand は Array#sample などの影響を受けて値がずれることがある
 [0, 1].sample
 prng.rand            #=> 0.1915194503788923
-rand                 #=> 0.6221087710398319
+p rand               #=> 0.6221087710398319
 ```
 
   
@@ -386,8 +386,8 @@ Ruby 3.0 から非推奨で，3.2で廃止されます。代わりに Random ク
 また、 Random::DEFAULT は Random クラスオブジェクトが返ります。
 
 ```ruby
-Random::DEFAULT == Random # => true
-Random.rand(10) # => 4
+p Random::DEFAULT == Random # => true
+p Random.rand(10) # => 4
 ```
 
 #@else

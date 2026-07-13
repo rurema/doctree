@@ -17,10 +17,10 @@ nil は false オブジェクトとともに偽を表し、
 - **param** `other` -- 論理積を行なう式です
 
 ```ruby title="例"
-nil & true  # => false
-nil & false # => false
-nil & nil   # => false
-nil & "a"   # => false
+p nil & true  # => false
+p nil & false # => false
+p nil & nil # => false
+p nil & "a" # => false
 ```
 
 ### def |(other) -> bool
@@ -30,10 +30,10 @@ other が真なら true を, 偽なら false を返します。
 - **param** `other` -- 論理和を行なう式です
 
 ```ruby title="例"
-nil | true   # => true
-nil | false  # => false
-nil | nil    # => false
-nil | "a"    # => true
+p nil | true # => true
+p nil | false  # => false
+p nil | nil  # => false
+p nil | "a"  # => true
 ```
 
 ### def ^(other) -> bool
@@ -43,10 +43,10 @@ other が真なら true を, 偽なら false を返します。
 - **param** `other` -- 排他的論理和を行なう式です
 
 ```ruby title="例"
-nil ^ true  # => true
-nil ^ false # => false
-nil ^ nil   # => false
-nil ^ "a"   # => true
+p nil ^ true  # => true
+p nil ^ false # => false
+p nil ^ nil # => false
+p nil ^ "a" # => true
 ```
 
 ### def nil? -> bool
@@ -54,7 +54,7 @@ nil ^ "a"   # => true
 常に true を返します。
 
 ```ruby title="例"
-nil.nil?   # => true
+p nil.nil? # => true
 ```
 
 ### def to_a -> Array
@@ -62,7 +62,7 @@ nil.nil?   # => true
 空配列 [] を返します。
 
 ```ruby title="例"
-nil.to_a   #=> []
+p nil.to_a #=> []
 ```
 
 ### def to_f -> Float
@@ -70,7 +70,7 @@ nil.to_a   #=> []
 0.0 を返します。
 
 ```ruby title="例"
-nil.to_f   #=> 0.0
+p nil.to_f #=> 0.0
 ```
 
 ### def to_i -> Integer
@@ -78,7 +78,7 @@ nil.to_f   #=> 0.0
 0 を返します。
 
 ```ruby title="例"
-nil.to_i   #=> 0
+p nil.to_i #=> 0
 ```
 
 ### def to_s -> String
@@ -86,7 +86,7 @@ nil.to_i   #=> 0
 空文字列 "" を返します。
 
 ```ruby title="例"
-nil.to_s   # => ""
+p nil.to_s # => ""
 ```
 
 #@since 1.9.1
@@ -95,7 +95,7 @@ nil.to_s   # => ""
 0+0i を返します。
 
 ```ruby title="例"
-nil.to_c # => (0+0i)
+p nil.to_c # => (0+0i)
 ```
 
 ### def to_r -> Rational
@@ -103,7 +103,7 @@ nil.to_c # => (0+0i)
 0/1 を返します。
 
 ```ruby title="例"
-nil.to_r # => (0/1)
+p nil.to_r # => (0/1)
 ```
 
 #@end
@@ -119,9 +119,9 @@ nil.to_r # => (0/1)
 引数 eps は常に無視されます。
 
 ```ruby title="例"
-nil.rationalize      # => (0/1)
-nil.rationalize(100) # => (0/1)
-nil.rationalize(0.1) # => (0/1)
+p nil.rationalize    # => (0/1)
+p nil.rationalize(100) # => (0/1)
+p nil.rationalize(0.1) # => (0/1)
 ```
 
 #@end
@@ -132,7 +132,7 @@ nil.rationalize(0.1) # => (0/1)
 {} を返します。
 
 ```ruby title="例"
-nil.to_h   #=> {}
+p nil.to_h #=> {}
 ```
 #@end
 #@since 2.6.0

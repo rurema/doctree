@@ -147,10 +147,10 @@ p C.instance_method(:five).arity    #=> -3
 p C.instance_method(:six).arity     #=> -3
 
 
-String.instance_method(:size).arity      #=> 0
-String.instance_method(:replace).arity   #=> 1
-String.instance_method(:squeeze).arity   #=> -1
-String.instance_method(:count).arity     #=> -1
+p String.instance_method(:size).arity    #=> 0
+p String.instance_method(:replace).arity #=> 1
+p String.instance_method(:squeeze).arity #=> -1
+p String.instance_method(:count).arity   #=> -1
 ```
 
 ### def ==(other)     -> bool
@@ -180,7 +180,7 @@ p a == c                            #=> false
 a = String.instance_method(:size)
 b = a.clone
 
-a == b       # => true
+p a == b     # => true
 ```
 
 ### def inspect -> String
@@ -191,7 +191,7 @@ self を読みやすい文字列として返します。
 詳しくは [m:Method#inspect] を参照してください。
 
 ```ruby title="例"
-String.instance_method(:count).inspect   # => "#<UnboundMethod: String#count>"
+p String.instance_method(:count).inspect # => "#<UnboundMethod: String#count>"
 ```
 
 - **SEE** [m:Method#inspect]
@@ -231,7 +231,7 @@ p [a, b].uniq.size  # => 2
 
 ```ruby title="例"
 a = String.instance_method(:size)
-a.name   # => :size
+p a.name # => :size
 ```
 
 ### def owner    -> Class | Module
@@ -239,9 +239,9 @@ a.name   # => :size
 このメソッドが定義されている class か module を返します。
 
 ```ruby title="例"
-Integer.instance_method(:to_s).owner   # => Integer
-Integer.instance_method(:to_c).owner   # => Numeric
-Integer.instance_method(:hash).owner   # => Kernel
+p Integer.instance_method(:to_s).owner # => Integer
+p Integer.instance_method(:to_c).owner # => Numeric
+p Integer.instance_method(:hash).owner # => Kernel
 ```
 
 
@@ -256,8 +256,8 @@ Integer.instance_method(:hash).owner   # => Kernel
 ```ruby title="例"
 require 'time'
 
-Time.instance_method(:zone).source_location       # => nil
-Time.instance_method(:httpdate).source_location   # => ["/Users/user/.rbenv/versions/2.4.3/lib/ruby/2.4.0/time.rb", 654]
+p Time.instance_method(:zone).source_location     # => nil
+p Time.instance_method(:httpdate).source_location # => ["/Users/user/.rbenv/versions/2.4.3/lib/ruby/2.4.0/time.rb", 654]
 ```
 
 - **SEE** [m:Proc#source_location], [m:Method#source_location]
@@ -297,7 +297,7 @@ class C
   def foo; end
   alias bar foo
 end
-C.instance_method(:bar).original_name # => :foo
+p C.instance_method(:bar).original_name # => :foo
 ```
 
 - **SEE** [m:Method#original_name]
