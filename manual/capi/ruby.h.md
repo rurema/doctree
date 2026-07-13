@@ -232,7 +232,8 @@ Fixnum におさまることが自明な整数を Fixnum に変換します。
 
 ### MACRO VALUE INT2NUM(int i)
 
-任意の整数を Fixnum か Bignum に変換します。 
+任意の整数を [c:Integer] に変換します。
+INT2FIX と異なり、Fixnum におさまらない整数も扱えます。
 
 例:
 ``````

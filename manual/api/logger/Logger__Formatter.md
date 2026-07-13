@@ -55,3 +55,7 @@ formatter.datetime_format # => "%Y-%m-%d %H:%M:%S"
 
 フォーマット文字列。
 
+[m:Logger::Formatter#call] はこのフォーマット文字列に対して、ログレベルの頭文字・日時・
+[m:Process.pid]・ログレベル・プログラム名・メッセージの順に値を当てはめます。
+プロセス ID ([m:Process.pid]) が含まれる点に注意してください。
+
