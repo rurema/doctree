@@ -7,27 +7,27 @@ Rubyインタプリタは以下の環境変数を参照します。
 
  指定できないオプションを指定した場合、例外が発生します。
 
-```
+```console
 $ RUBYOPT=-y ruby -e ""
 ruby: invalid switch in RUBYOPT: -y (RuntimeError)
 ```
 
  sh系
 
-```
+```console
       RUBYOPT='-Ke -rkconv'
       export RUBYOPT
 ```
 
  csh系
 
-```
+```console
       setenv RUBYOPT '-Ke -rkconv'
 ```
 
  MS-DOS系
 
-```
+```console
       set RUBYOPT=-Ke -rkconv
 ```
 
@@ -40,20 +40,20 @@ ruby: invalid switch in RUBYOPT: -y (RuntimeError)
 
   sh系
 
-```
+```console
       RUBYPATH=$HOME/ruby:/opt/ruby
       export RUBYPATH
 ```
 
   csh系
 
-```
+```console
       setenv RUBYPATH $HOME/ruby:/opt/ruby
 ```
 
   MS-DOS系
 
-```
+```console
       set RUBYPATH=%HOMEDRIVE%%HOMEPATH%\ruby;\opt\ruby
 ```
 
@@ -64,20 +64,20 @@ ruby: invalid switch in RUBYOPT: -y (RuntimeError)
 
   sh系
 
-```
+```console
       RUBYLIB=$HOME/ruby/lib:/opt/ruby/lib
       export RUBYLIB
 ```
 
   csh系
 
-```
+```console
       setenv RUBYLIB $HOME/ruby/lib:/opt/ruby/lib
 ```
 
   MS-DOS系
 
-```
+```console
       set RUBYLIB=%HOMEDRIVE%%HOMEPATH%\ruby\lib;\opt\ruby\lib
 ```
 

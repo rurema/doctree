@@ -9,15 +9,15 @@ ReFeについては
 Gemsをお使いの方は、以下のコマンドを実行する事でインストールできます。
 ([ruby-list:41478])
 
-`````
+```console
 $ gem install refe2
-`````
+```
   
 以下のコマンドでデータベースを構築します。
 
-`````
+```console
 $ bitclust setup
-`````
+```
 
 ### Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
@@ -25,7 +25,7 @@ $ bitclust setup
 手順で行います。(詳細は ReFe の README を参照してください)
 
 (1) [url:http://i.loveruby.net/ja/prog/refe.html] から ReFe の基本セット
-```````
+```text
 を取って来てインストールします。
 
     tar xvzf refe-x.x.x.tar.gz
@@ -34,16 +34,16 @@ $ bitclust setup
     ruby setup.rb setup
     (必要に応じて root になってください)
     ruby setup.rb install
-```````
+```
 
 (2) [url:http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz]
-```````
+```text
 にあるのが最新のリファレンスマニュアルの tarball です。
 これを取得します。
-```````
+```
 
 (3) 取得した man-rd-ja.tar.gz を展開し、ReFeデータベースを構築します。
-```````
+```text
 /usr/local/share/refe は適宜環境に応じて変更してください(変更した場合は
 refe を実行するのに環境変数 REFE_DATA_DIR を設定する必要があります)
 
@@ -56,11 +56,11 @@ refe を実行するのに環境変数 REFE_DATA_DIR を設定する必要があ
 
     class_document/        method_document/
     class_document_comp    method_document_comp
-```````
+```
 
 (4) 後は使うだけです。
 
-```````````
+```console
 refe IO puts
 IO#puts
 --- puts([obj[, ...]])
@@ -70,20 +70,20 @@ IO#puts
     てください)。
 
     nil を返します。
-```````````
+```
 
 ### ReFe の Emacs インタフェースのインストール方法
 
 (1) refe.el を取って来て
-```````
+```text
 /usr/local/share/emacs/site-lisp などの Emacs Lisp ライブラリの置き場所
 に置きます。
-```````
+```
 
 (2) .emacs に以下を書いておきます。
 
-`````````
+```common_lisp
 (require 'refe)
-`````````
+```
 
 (3) 引きたいメソッド名の位置に合わせて M-x refe を実行します。
