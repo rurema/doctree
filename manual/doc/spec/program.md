@@ -7,23 +7,19 @@
 ン(;)または改行で区切ります。ただし、バックスラッシュに続く改行は文
 の区切りにならず、次の行へ継続します。
 
-例:
-
-``````
+```ruby title="例"
 print "hello world!\n"
-``````
+```
 
 
 ### 式 {#exp}
 
-例:
-
-`````````````
+```ruby title="例"
 true
 (1+2)*3
 foo()
 if test then ok else ng end
-`````````````
+```
 
 Ruby の式には、[d:spec/variables]、さまざまな[d:spec/literal]、それらの
 [d:spec/operator]、if や while などの[d:spec/control]、[d:spec/call]、
