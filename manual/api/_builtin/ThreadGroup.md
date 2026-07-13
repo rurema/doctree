@@ -21,10 +21,11 @@ puts "all threads finished"
 ```
 
 対象の Thread が Thread を起こす可能性がある場合
-([m:Thread.exclusive]参照)
+([c:Thread::Mutex] 参照)
 
 ```````
-Thread.exclusive do
+mutex = Thread::Mutex.new
+mutex.synchronize do
   (ThreadGroup::Default.list - [Thread.current]).each {|th| th.join}
 end
 ```````
